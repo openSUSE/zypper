@@ -11,11 +11,7 @@
 #include <fstream>
 #include <poll.h>
 #include <readline/readline.h>
-//#include <unistd.h>
 #include <termios.h>
-
-
-#include <boost/format.hpp>
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
@@ -26,7 +22,6 @@
 #include "prompt.h"
 
 using namespace std;
-using namespace boost;
 
 // ----------------------------------------------------------------------------
 
@@ -214,16 +209,12 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
         WAR << pid << " Unknown char " << reply << endl;
     }
 
-    string msg = boost::str(
-      format(
-        PL_("Autoselecting '%s' after %u second.",
-            "Autoselecting '%s' after %u seconds.",
-            timeout))
-      % poptions.options()[default_action] % timeout
-    );
+    string msg = str::Format(PL_("Autoselecting '%s' after %u second.",
+				 "Autoselecting '%s' after %u seconds.",
+				 timeout)) % poptions.options()[default_action] % timeout;
 
     if (zypper.out().type() == Out::TYPE_XML)
-      zypper.out().info(msg); // maybe progress??
+      zypper.out().info( msg );	// maybe progress??
     else
     {
       cout << CLEARLN << msg << " ";
@@ -281,11 +272,10 @@ unsigned int get_prompt_reply(Zypper & zypper,
   if (zypper.globalOpts().non_interactive)
   {
     // print the reply for convenience (only for normal output)
-    if (!zypper.globalOpts().machine_readable)
-      zypper.out().info(poptions.options()[poptions.defaultOpt()],
-        Out::QUIET, Out::TYPE_NORMAL);
-    MIL << "running non-interactively, returning "
-        << poptions.options()[poptions.defaultOpt()] << endl;
+    if ( ! zypper.globalOpts().machine_readable )
+      zypper.out().info( poptions.options()[poptions.defaultOpt()],
+			 Out::QUIET, Out::TYPE_NORMAL );
+    MIL << "running non-interactively, returning " << poptions.options()[poptions.defaultOpt()] << endl;
     return poptions.defaultOpt();
   }
 
@@ -333,29 +323,25 @@ unsigned int get_prompt_reply(Zypper & zypper,
       break;
 
     ostringstream s;
-    s << format(_("Invalid answer '%s'.")) % reply;
-
-    if (poptions.isYesNoPrompt())
+    s << str::Format(_("Invalid answer '%s'.")) % reply;
+    if ( poptions.isYesNoPrompt() )
     {
-      s << " " << format(
-      // translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-      _("Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."))
-      % "y" % _("yes") % "n" % _("no");
+      s << " "
+        // translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
+	<< str::Format(_("Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."))
+	   % "y" % _("yes") % "n" % _("no");
     }
-
-    zypper.out().prompt(pid, s.str(), poptions);
+    zypper.out().prompt( pid, s.str(), poptions );
   }
 
   // if we cannot read input or it is at EOF (bnc #436963), exit
   if (!stmgood || stm.eof())
   {
     WAR << "Could not read the answer - bad stream or EOF" << endl;
-    zypper.out().error(
-        "Cannot read input: bad stream or EOF.",
-        zypp::str::form(_(
-"If you run zypper without a terminal, use '%s' global\n"
-"option to make zypper use default answers to prompts."
-        ), "--non-interactive"));
+    zypper.out().error( _("Cannot read input: bad stream or EOF."),
+			str::Format(_("If you run zypper without a terminal, use '%s' global\n"
+			              "option to make zypper use default answers to prompts."))
+			% "--non-interactive" );
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     ZYPP_THROW( ExitRequestException("Cannot read input. Bad stream or EOF.") );
   }

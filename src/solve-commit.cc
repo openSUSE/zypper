@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <sstream>
-#include <boost/format.hpp>
 
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/Logger.h>
@@ -34,8 +33,6 @@ using std::list;
 using std::string;
 using std::ostringstream;
 
-using boost::format;
-
 //! @return true to retry solving now, false to cancel, indeterminate to continue
 static TriBool show_problem (Zypper & zypper,
                              const ResolverProblem & prob,
@@ -57,7 +54,7 @@ static TriBool show_problem (Zypper & zypper,
     ii;
   for (n = 1, ii = bb; ii != ee; ++n, ++ii) {
     // TranslatorExplanation %d is the solution number
-    desc_stm << format (_(" Solution %d: ")) % n << (*ii)->description () << endl;
+    desc_stm << str::Format(_(" Solution %d: ")) % n << (*ii)->description () << endl;
     tmp = (*ii)->details ();
     if (!tmp.empty ())
       desc_stm << indent(tmp, 2) << endl;
@@ -136,7 +133,7 @@ static TriBool show_problem (Zypper & zypper,
   if (problem_count > 1 && reply == solution_count)
     return indeterminate; // continue with next problem
 
-  zypper.out().info(boost::str(format (_("Applying solution %s")) % (reply + 1)), Out::HIGH);
+  zypper.out().info( str::Format(_("Applying solution %s")) % (reply + 1), Out::HIGH );
   ProblemSolutionList::iterator reply_i = solutions.begin ();
   advance (reply_i, reply);
   todo.push_back (*reply_i);
@@ -159,12 +156,11 @@ static bool show_problems(Zypper & zypper)
 
   // display the number of problems
   if (rproblems.size() > 1)
-    zypper.out().info(boost::str(format(
-      PL_("%d Problem:", "%d Problems:", rproblems.size())) % rproblems.size()));
+    zypper.out().info( str::Format(PL_("%d Problem:", "%d Problems:", rproblems.size())) % rproblems.size() );
   else if (rproblems.empty())
   {
     // should not happen! If solve() failed at least one problem must be set!
-    zypper.out().error(_("Specified capability not found"));
+    zypper.out().error( _("Specified capability not found") );
     zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     return false;
   }
@@ -174,8 +170,7 @@ static bool show_problems(Zypper & zypper)
   if (rproblems.size() > 1)
   {
     for (i = b; i != e; ++i)
-      zypper.out().info(boost::str(
-        format(_("Problem: %s")) % (*i)->description()));
+      zypper.out().info( str::Format(_("Problem: %s")) % (*i)->description() );
   }
   // now list all problems with solution proposals
   for (i = b; i != e; ++i)
@@ -409,9 +404,7 @@ static void make_solver_test_case(Zypper & zypper)
 
   zypper.out().info(_("Generating solver test case..."));
   if (God->resolver()->createSolverTestcase(testcase_dir))
-    zypper.out().info(boost::str(
-      format(_("Solver test case generated successfully at %s."))
-        % testcase_dir));
+    zypper.out().info( str::Format(_("Solver test case generated successfully at %s.")) % testcase_dir );
   else
   {
     zypper.out().error(_("Error creating the solver test case."));
@@ -855,41 +848,36 @@ void solve_and_commit (Zypper & zypper)
           catch (const Exception &)
           { DBG << "check if to refresh exception caught, ignoring" << endl; }
 
-          std::string hint = _("Please see the above error message for a hint.");
-          if (refresh_needed)
-          {
-            hint = boost::str(format(
-                // translators: the first %s is 'zypper refresh' and the second
-                // is repo allias
-                _("Repository '%s' is out of date. Running '%s' might help.")) %
-                e.info().alias() % "zypper refresh" );
-          }
-          zypper.out().error(e,
-              _("Problem retrieving the package file from the repository:"),
-              hint);
+          std::string hint;
+          if ( refresh_needed )
+	    // translators: the first %s is 'zypper refresh' and the second is repo alias
+	    hint = str::Format(_("Repository '%s' is out of date. Running '%s' might help.")) % e.info().alias() % "zypper refresh";
+	  else
+	    hint = _("Please see the above error message for a hint.");
+          zypper.out().error( e, _("Problem retrieving the package file from the repository:"), hint );
           zypper.setExitCode(ZYPPER_EXIT_ERR_COMMIT);
           return;
         }
         catch ( const zypp::FileCheckException & e )
         {
           ZYPP_CAUGHT(e);
-          zypper.out().error(e,
+          zypper.out().error( e,
               _("The package integrity check failed. This may be a problem"
               " with the repository or media. Try one of the following:\n"
               "\n"
               "- just retry previous command\n"
               "- refresh the repositories using 'zypper refresh'\n"
               "- use another installation medium (if e.g. damaged)\n"
-              "- use another repository"));
+              "- use another repository") );
           zypper.setExitCode(ZYPPER_EXIT_ERR_COMMIT);
           return;
         }
         catch ( const Exception & e )
         {
           ZYPP_CAUGHT(e);
-          zypper.out().error(e,
+          zypper.out().error( e,
               _("Problem occured during or after installation or removal of packages:"),
-              _("Please see the above error message for a hint."));
+              _("Please see the above error message for a hint.") );
           zypper.setExitCode(ZYPPER_EXIT_ERR_COMMIT);
           return;
         }
@@ -898,7 +886,7 @@ void solve_and_commit (Zypper & zypper)
 	{
 	  zypper.out().error(_("Installation has completed with error.") );
 	  if ( zypper.exitCode() == ZYPPER_EXIT_ERR_COMMIT )
-	    zypper.out().error( boost::format( _("You may run '%1%' to repair any dependency problems.") ) % "zypper verify" );
+	    zypper.out().error( str::Format(_("You may run '%1%' to repair any dependency problems.")) % "zypper verify" );
 	}
 	else
 	{

@@ -133,9 +133,8 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
   virtual void start( const zypp::Package::constPtr & package,
 		      const zypp::Pathname & path_r ) // script path
   {
-    _label = boost::str(
-        // TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-        boost::format(_("Running: %s  (%s, %s)")) % path_r.basename() % package->name() % path_r.dirname());
+    // TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+    _label = str::Format(_("Running: %s  (%s, %s)")) % path_r.basename() % package->name() % path_r.dirname();
     std::cout << _label << std::endl;
   }
 
@@ -194,9 +193,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
     _progress.reset( new Out::ProgressBar( zypper.out(),
 					   "remove-resolvable",
 					   // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-					   boost::format(_("Removing %s-%s"))
-							 % resolvable->name()
-							 % resolvable->edition(),
+					   str::Format(_("Removing %s-%s")) % resolvable->name() % resolvable->edition(),
 					   ++zypper.runtimeData().rpm_pkg_current,
 					   zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );	// progress reports percent
@@ -219,7 +216,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
     }
 
     std::ostringstream s;
-    s << boost::format(_("Removal of %s failed:")) % resolvable << std::endl;
+    s << str::Format(_("Removal of %s failed:")) % resolvable << std::endl;
     s << zcb_error2str(error, description);
     Zypper::instance()->out().error(s.str());
 
@@ -264,9 +261,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     _progress.reset( new Out::ProgressBar( zypper.out(),
 					   "install-resolvable",
 					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-					   boost::format(_("Installing: %s-%s"))
-							 % resolvable->name()
-							 % resolvable->edition(),
+					   str::Format(_("Installing: %s-%s")) % resolvable->name() % resolvable->edition(),
 					   ++zypper.runtimeData().rpm_pkg_current,
 					   zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );	// progress reports percent
@@ -289,7 +284,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     }
 
     std::ostringstream s;
-    s << boost::format(_("Installation of %s-%s failed:")) % resolvable->name() % resolvable->edition() << std::endl;
+    s << str::Format(_("Installation of %s-%s failed:")) % resolvable->name() % resolvable->edition() << std::endl;
     s << zcb_error2str(error, description);
     Zypper::instance()->out().error(s.str());
 
@@ -367,7 +362,7 @@ struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<z
 
       if ( ! noFilelist_r.empty() )	// warning
       {
-	out.warning( boost::formatNAC(
+	out.warning( str::FormatNAC(
 		       // TranslatorExplanation %1%(commandline option)
 		       _("Checking for file conflicts requires not installed packages to be downloaded in advance "
 	                 "in order to access their file lists. See option '%1%' in the zypper manual page for details.")

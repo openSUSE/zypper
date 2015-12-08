@@ -20,7 +20,6 @@
 #include <readline/history.h>
 
 #include <boost/logic/tribool.hpp>
-#include <boost/format.hpp>
 
 #include <zypp/ZYppFactory.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
@@ -66,7 +65,6 @@
 #include "output/OutNormal.h"
 #include "output/OutXML.h"
 
-using boost::format;
 using namespace zypp;
 
 ZYpp::Ptr God = NULL;
@@ -98,11 +96,11 @@ namespace {
 
   inline std::string legacyCLI( const std::string & old_r, const std::string & new_r, bool global_r = false )
   {
-    return boost::str( boost::formatNAC( global_r
-					 ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
-					 : _("Legacy commandline option %1% detected. Please use %2% instead.") )
-		     % old_r
-		     % new_r );
+    return str::FormatNAC( global_r
+			 ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
+			 : _("Legacy commandline option %1% detected. Please use %2% instead.") )
+			 % old_r
+			 % new_r;
   }
 
   inline std::string dashdash( std::string optname_r )
@@ -167,7 +165,6 @@ namespace
      */
     CommandHelpFormater & description( boost::string_ref text_r )
     { _mww.gotoNextPar(); _mww.writePar( text_r ); return *this; }
-
 
     /** Option section title
      * \code
@@ -455,20 +452,20 @@ void print_main_help(Zypper & zypper)
 
 void print_unknown_command_hint(Zypper & zypper)
 {
-  zypper.out().info(boost::str(format(
+  zypper.out().info(
     // translators: %s is "help" or "zypper help" depending on whether
     // zypper shell is running or not
-    _("Type '%s' to get a list of global options and commands."))
-      % (zypper.runningShell() ? "help" : "zypper help")));
+    str::Format(_("Type '%s' to get a list of global options and commands."))
+    % (zypper.runningShell() ? "help" : "zypper help") );
 }
 
 void print_command_help_hint(Zypper & zypper)
 {
-  zypper.out().info(boost::str(format(
+  zypper.out().info(
     // translators: %s is "help" or "zypper help" depending on whether
     // zypper shell is running or not
-    _("Type '%s' to get command-specific help."))
-      % (zypper.runningShell() ? "help <command>" : "zypper help <command>")));
+    str::Format(_("Type '%s' to get command-specific help."))
+    % (zypper.runningShell() ? "help <command>" : "zypper help <command>") );
 }
 
 /// \todo use it in all commands!
@@ -643,7 +640,7 @@ void Zypper::processGlobalOptions()
     _out_ptr = p;
   }
 
-  out().info(boost::str(format(_("Verbosity: %d")) % _gopts.verbosity), Out::HIGH);
+  out().info( str::Format(_("Verbosity: %d")) % _gopts.verbosity , Out::HIGH );
   DBG << "Verbosity " << verbosity << endl;
   DBG << "Output type " << _out_ptr->type() << endl;
 
@@ -657,8 +654,8 @@ void Zypper::processGlobalOptions()
     if (s < TLS_End)
       Table::defaultStyle = (TableLineStyle) s;
     else
-      out().error(str::form(_("Invalid table style %d."), s),
-          str::form(_("Use an integer number from %d to %d"), 0, 8));
+      out().error( str::Format(_("Invalid table style %d.")) % s,
+		   str::Format(_("Use an integer number from %d to %d")) % 0 % 8 );
   }
 
   //  ======== get command ========
@@ -768,11 +765,10 @@ void Zypper::processGlobalOptions()
     {
       if ( optind > 2 )
       {
-	out().error(boost::str(format(
+	out().error(
 	  // translators: %1%  - is the name of a subcommand
-	  _("Subcommand %1% does not support zypper global options."))
-	  % myOpts->_detected._name
-	));
+	  str::Format(_("Subcommand %1% does not support zypper global options."))
+	  % myOpts->_detected._name );
 	print_command_help_hint( *this );
 	setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
 	ZYPP_THROW(ExitRequestException("invalid args"));
@@ -971,10 +967,8 @@ void Zypper::processGlobalOptions()
     case ZypperCommand::REMOVE_LOCK_e:
     case ZypperCommand::LIST_LOCKS_e:
     {
-      out().warning(boost::str(format(
-        // TranslatorExplanation The %s is "--plus-repo"
-        _("The %s option has no effect here, ignoring."))
-        % "--plus-repo"));
+      // TranslatorExplanation The %s is "--plus-repo"
+      out().warning( str::Format(_("The %s option has no effect here, ignoring.")) % "--plus-repo" );
       break;
     }
     default:
@@ -996,7 +990,7 @@ void Zypper::processGlobalOptions()
         repo.addBaseUrl(url);
         repo.setEnabled(true);
         repo.setAutorefresh(true);
-        repo.setAlias(boost::str(format("tmp%d") % count));
+        repo.setAlias(str::Format("tmp%d") % count);
         repo.setName(url.asString());
 
         _rdata.additional_repos.push_back(repo);
@@ -1021,10 +1015,8 @@ void Zypper::processGlobalOptions()
     case ZypperCommand::REMOVE_LOCK_e:
     case ZypperCommand::LIST_LOCKS_e:
     {
-      out().warning(boost::str(format(
-        // TranslatorExplanation The %s is "--option-name"
-        _("The %s option has no effect here, ignoring."))
-        % "--plus-content"));
+      // TranslatorExplanation The %s is "--option-name"
+      out().warning( str::Format(_("The %s option has no effect here, ignoring.")) % "--plus-content" );
       break;
     }
     default:
@@ -1076,7 +1068,7 @@ void Zypper::commandShell()
   while (true) {
     // read a line
     string line = readline_getline ();
-    out().info(boost::str(format("Got: %s") % line), Out::DEBUG);
+    out().info( str::Format("Got: %s") % line, Out::DEBUG );
     // reset optind etc
     optind = 0;
     // split it up and create sh_argc, sh_argv
@@ -1183,9 +1175,8 @@ void Zypper::safeDoCommand()
     // "what-provides" is obsolete, functionality is provided by "search"
     if (command() == ZypperCommand::WHAT_PROVIDES_e)
     {
-      out().info( boost::str(format(_("Command '%s' is replaced by '%s'."))
-                             % "what-provides" % "search --provides --match-exact"));
-      out().info( boost::str(format(_("See '%s' for all available options.")) % "help search"));
+      out().info( str::Format(_("Command '%s' is replaced by '%s'.")) % "what-provides" % "search --provides --match-exact" );
+      out().info( str::Format(_("See '%s' for all available options.")) % "help search" );
       setCommand(ZypperCommand::SEARCH_e);
       _copts["provides"].push_back("");
       _copts["match-exact"].push_back("");
@@ -1448,9 +1439,10 @@ void Zypper::processCommandOptions()
       "    --download-only      Only download the packages, do not install.\n"
     ) )
     .description(
-      boost::str(boost::format(_("The default location where rpm installs source packages to is '%1%', but the value can be changed in your local rpm configuration. In case of doubt try executing '%2%'."))
+      (str::Format(_("The default location where rpm installs source packages to is '%1%', but the value can be changed in your local rpm configuration. In case of doubt try executing '%2%'."))
       % "/usr/src/packages/{SPECS,SOURCES}"
-      % "rpm --eval \"%{_specdir} and %{_sourcedir}\"")
+      % "rpm --eval \"%{_specdir} and %{_sourcedir}\""
+      ).str()
     )
     ;
     break;
@@ -3398,8 +3390,7 @@ void Zypper::doCommand()
       }
       else
       {
-        out().error(
-          boost::str(format(_("Service '%s' not found.")) % _arguments[0]));
+        out().error( str::Format(_("Service '%s' not found.")) % _arguments[0] );
         ERR << "Service " << _arguments[0] << " not found" << endl;
       }
     }
@@ -3614,10 +3605,9 @@ void Zypper::doCommand()
         else
         {
           MIL << "Repository not found by given alias, number or URI." << endl;
-          out().error(boost::str(format(
-            // translators: %s is the supplied command line argument which
-            // for which no repository counterpart was found
-            _("Repository '%s' not found by alias, number or URI.")) % *it));
+	  // translators: %s is the supplied command line argument which
+	  // for which no repository counterpart was found
+          out().error( str::Format(_("Repository '%s' not found by alias, number or URI.")) % *it );
         }
       }
 
@@ -3637,10 +3627,9 @@ void Zypper::doCommand()
         else
         {
           MIL << "Service not found by given alias, number or URI." << endl;
-          out().error(boost::str(format(
-            // translators: %s is the supplied command line argument which
-            // for which no service counterpart was found
-            _("Service '%s' not found by alias, number or URI.")) % *it));
+	  // translators: %s is the supplied command line argument which
+	  // for which no service counterpart was found
+	  out().error( str::Format(_("Service '%s' not found by alias, number or URI.")) % *it );
         }
       }
 
@@ -3697,8 +3686,7 @@ void Zypper::doCommand()
       }
       else
       {
-	 out().error(boost::str(format(
-           _("Repository '%s' not found.")) % _arguments[0]));
+	 out().error( str::Format(_("Repository '%s' not found.")) % _arguments[0] );
          ERR << "Repo " << _arguments[0] << " not found" << endl;
       }
     }
@@ -3767,8 +3755,7 @@ void Zypper::doCommand()
         }
         else
         {
-          out().error(
-            boost::str(format(_("Repository %s not found.")) % *arg));
+          out().error( str::Format(_("Repository %s not found.")) % *arg );
           ERR << "Repo " << *arg << " not found" << endl;
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         }
@@ -3794,8 +3781,7 @@ void Zypper::doCommand()
     }
 
     if (globalOpts().no_refresh)
-      out().warning(boost::str(format(
-        _("The '%s' global option has no effect here.")) % "--no-refresh"));
+      out().warning( str::Format(_("The '%s' global option has no effect here.")) % "--no-refresh" );
 
     // by default refresh only repositories
     initRepoManager();
@@ -3862,8 +3848,7 @@ void Zypper::doCommand()
     // check root user
     if (geteuid() != 0 && !globalOpts().changedRoot)
     {
-      out().error(
-        _("Root privileges are required for installing or uninstalling packages."));
+      out().error(_("Root privileges are required for installing or uninstalling packages."));
       setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
       return;
     }
@@ -3884,8 +3869,9 @@ void Zypper::doCommand()
     // read resolvable type
     string skind = copts.count("type")?  copts["type"].front() : "package";
     kind = string_to_kind (skind);
-    if (kind == ResObject::Kind ()) {
-      out().error(boost::str(format(_("Unknown package type: %s")) % skind));
+    if (kind == ResObject::Kind ())
+    {
+      out().error( str::Format(_("Unknown package type: %s")) % skind );
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
@@ -3895,11 +3881,10 @@ void Zypper::doCommand()
     // can't remove patch
     if (kind == ResKind::patch && !install_not_remove)
     {
-      out().error(
-          _("Cannot uninstall patches."),
-          _("Installed status of a patch is determined solely based on its dependencies.\n"
-            "Patches are not installed in sense of copied files, database records,\n"
-            "or similar."));
+      out().error( _("Cannot uninstall patches."),
+		   _("Installed status of a patch is determined solely based on its dependencies.\n"
+		     "Patches are not installed in sense of copied files, database records,\n"
+		     "or similar.") );
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       ZYPP_THROW( ExitRequestException("not implemented") );
     }
@@ -3907,8 +3892,7 @@ void Zypper::doCommand()
      // can't remove source package
     if (kind == ResKind::srcpackage && !install_not_remove)
     {
-      out().error(
-          _("Uninstallation of a source package not defined and implemented."));
+      out().error(_("Uninstallation of a source package not defined and implemented."));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       ZYPP_THROW( ExitRequestException("not implemented") );
     }
@@ -3928,9 +3912,8 @@ void Zypper::doCommand()
         if (looks_like_rpm_file(*it))
         {
           DBG << *it << " looks like rpm file" << endl;
-          out().info(boost::str(format(
-            _("'%s' looks like an RPM file. Will try to download it.")) % *it),
-            Out::HIGH);
+          out().info( str::Format(_("'%s' looks like an RPM file. Will try to download it.")) % *it,
+		      Out::HIGH );
 
           // download the rpm into the cache
           //! \todo do we want this or a tmp dir? What about the files cached before?
@@ -3941,9 +3924,7 @@ void Zypper::doCommand()
 
           if (rpmpath.empty())
           {
-            out().error(boost::str(format(
-              _("Problem with the RPM file specified as '%s', skipping."))
-              % *it));
+            out().error( str::Format(_("Problem with the RPM file specified as '%s', skipping.")) % *it );
           }
           else
           {
@@ -3966,9 +3947,7 @@ void Zypper::doCommand()
             }
             else
             {
-              out().error(boost::str(format(
-                _("Problem reading the RPM header of %s. Is it an RPM file?"))
-                  % *it));
+              out().error( str::Format(_("Problem reading the RPM header of %s. Is it an RPM file?")) % *it );
             }
           }
 
@@ -4225,8 +4204,7 @@ void Zypper::doCommand()
         kind = string_to_kind( *it );
         if (kind == ResObject::Kind())
         {
-          out().error(boost::str(format(
-            _("Unknown package type '%s'.")) % *it));
+          out().error( str::Format(_("Unknown package type '%s'.")) % *it );
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
@@ -4248,9 +4226,7 @@ void Zypper::doCommand()
         query.addRepo( repo_it->alias());
         if (! repo_it->enabled())
         {
-          out().warning(boost::str(format(
-            _("Specified repository '%s' is disabled."))
-              % repo_it->asUserString() ));
+          out().warning( str::Format(_("Specified repository '%s' is disabled.")) % repo_it->asUserString() );
         }
       }
     }
@@ -4578,8 +4554,7 @@ void Zypper::doCommand()
         kind = string_to_kind( *it );
         if (kind == ResObject::Kind())
         {
-          out().error(boost::str(format(
-            _("Unknown package type '%s'.")) % *it));
+          out().error( str::Format(_("Unknown package type '%s'.")) % *it );
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
@@ -4685,8 +4660,7 @@ void Zypper::doCommand()
         kind = string_to_kind( *it );
         if (kind == ResObject::Kind())
         {
-          out().error(boost::str(format(
-            _("Unknown package type '%s'.")) % *it));
+          out().error( str::Format(_("Unknown package type '%s'.")) % *it );
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
@@ -4891,8 +4865,7 @@ void Zypper::doCommand()
       string skind = copts.count("type")?  copts["type"].front() : "package";
       kind = string_to_kind (skind);
       if (kind == ResObject::Kind ()) {
-        out().error(boost::str(format(
-          _("Unknown package type '%s'.")) % skind));
+        out().error( str::Format(_("Unknown package type '%s'.")) % skind );
         setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         return;
       }
@@ -4944,8 +4917,7 @@ void Zypper::doCommand()
         kind = string_to_kind( *it );
         if (kind == ResObject::Kind())
         {
-          out().error(boost::str(format(
-            _("Unknown package type '%s'.")) % *it));
+          out().error( str::Format(_("Unknown package type '%s'.")) % *it );
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
@@ -4989,8 +4961,7 @@ void Zypper::doCommand()
         kind = string_to_kind( *it );
         if (kind == ResObject::Kind())
         {
-          out().error(boost::str(format(
-            _("Unknown package type '%s'.")) % *it));
+          out().error( str::Format(_("Unknown package type '%s'.")) % *it );
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
@@ -5219,8 +5190,7 @@ void Zypper::doCommand()
 
       if ( ! mayuse )
       {
-	out().error( boost::format(_("Insufficient privileges to use download directory '%s'.") )
-		     % _gopts.rm_options.repoPackagesCachePath );
+	out().error( str::Format(_("Insufficient privileges to use download directory '%s'.")) % _gopts.rm_options.repoPackagesCachePath );
 	setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
 	return;
       }

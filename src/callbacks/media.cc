@@ -6,7 +6,6 @@
 \*---------------------------------------------------------------------------*/
 
 #include <cstdio>
-#include <boost/format.hpp>
 #include <iostream>
 #include <unistd.h> // for getpass
 
@@ -20,7 +19,6 @@
 
 using namespace zypp;
 using namespace std;
-
 
 // ---------[ common ]--------------------------------------------------------
 
@@ -222,13 +220,12 @@ ZmartRecipients::MediaChangeReportReceiver::requestMedia(
   zypper.out().error(description);
   if (is_changeable_media(url))
   {
-    std::string request = boost::str(boost::format(
-        // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
-        // Try to check what answers does zypper accept (it always accepts y/n at least)
-        // You can also have a look at the regular expressions used to check the answer here:
-        // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-        _("Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."))
-        % label % mediumNr);
+    // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
+    // Try to check what answers does zypper accept (it always accepts y/n at least)
+    // You can also have a look at the regular expressions used to check the answer here:
+    // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
+    std::string request = str::Format(_("Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."))
+			  % label % mediumNr;
     if (read_bool_answer(PROMPT_YN_MEDIA_CHANGE, request, false))
     {
       zypper.requestExit(false);

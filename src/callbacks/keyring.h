@@ -10,7 +10,6 @@
 
 #include <stdlib.h>
 #include <iostream>
-#include <boost/format.hpp>
 
 #include <zypp/base/Logger.h>
 #include <zypp/ZYppCallbacks.h>
@@ -40,7 +39,7 @@ namespace zypp
 	<< ( TableRow() << "" << _("Key Fingerprint:") << str::gapify( key.fingerprint(), 8 ) )
 	<< ( TableRow() << "" << _("Key Created:") << key.created() )
 	<< ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() )
-	<< ( TableRow() << "" << _("Rpm Name:") << (boost::format( "gpg-pubkey-%1%-%2%" ) % key.gpgPubkeyVersion() % key.gpgPubkeyRelease()).str() );
+	<< ( TableRow() << "" << _("Rpm Name:") << str::Format( "gpg-pubkey-%1%-%2%" ) % key.gpgPubkeyVersion() % key.gpgPubkeyRelease() );
 
       return str << t;
     }
@@ -66,12 +65,12 @@ namespace zypp
       {
 	if ( keyData_r.expired() )
 	{
-	  Zypper::instance()->out().warning( boost::format(_("The gpg key signing file '%1%' has expired.")) % file_r );
+	  Zypper::instance()->out().warning( str::Format(_("The gpg key signing file '%1%' has expired.")) % file_r );
 	  dumpKeyInfo( (std::ostream&)ColorStream(std::cout,ColorContext::MSG_WARNING), keyData_r, context );
 	}
 	else if ( keyData_r.daysToLive() < 15 )
 	{
-	  Zypper::instance()->out().info( boost::format(
+	  Zypper::instance()->out().info( str::Format(
 	    PL_( "The gpg key signing file '%1%' will expire in %2% day.",
 		 "The gpg key signing file '%1%' will expire in %2% days.",
 		 keyData_r.daysToLive() )) % file_r %  keyData_r.daysToLive() );
@@ -94,13 +93,13 @@ namespace zypp
               << ")" << std::endl;
 
           if (context.empty())
-            Zypper::instance()->out().warning(boost::str(
-              boost::format(_("Accepting an unsigned file '%s'.")) % file),
+            Zypper::instance()->out().warning(
+              str::Format(_("Accepting an unsigned file '%s'.")) % file,
               Out::HIGH);
           else
-            Zypper::instance()->out().warning(boost::str(
-              boost::format(_("Accepting an unsigned file '%s' from repository '%s'."))
-                % file % context.repoInfo().asUserString() ),
+            Zypper::instance()->out().warning(
+	      str::Format(_("Accepting an unsigned file '%s' from repository '%s'."))
+	      % file % context.repoInfo().asUserString(),
               Out::HIGH);
 
           return true;
@@ -108,14 +107,14 @@ namespace zypp
 
         std::string question;
         if (context.empty())
-          question = boost::str(boost::format(
+          question = str::Format(
             // TranslatorExplanation: speaking of a file
-            _("File '%s' is unsigned, continue?")) % file);
+            _("File '%s' is unsigned, continue?")) % file;
         else
-          question = boost::str(boost::format(
+          question = str::Format(
             // TranslatorExplanation: speaking of a file
             _("File '%s' from repository '%s' is unsigned, continue?"))
-            % file % context.repoInfo().asUserString() );
+            % file % context.repoInfo().asUserString();
 
         return read_bool_answer(PROMPT_YN_GPG_UNSIGNED_FILE_ACCEPT, question, false);
       }
@@ -136,27 +135,27 @@ namespace zypp
             << ")" << std::endl;
 
           if (context.empty())
-            Zypper::instance()->out().warning(boost::str(boost::format(
+            Zypper::instance()->out().warning(str::Format(
                 _("Accepting file '%s' signed with an unknown key '%s'."))
-                % file % id));
+                % file % id);
           else
-            Zypper::instance()->out().warning(boost::str(boost::format(
+            Zypper::instance()->out().warning(str::Format(
                 _("Accepting file '%s' from repository '%s' signed with an unknown key '%s'."))
-                % file % context.repoInfo().asUserString() % id));
+                % file % context.repoInfo().asUserString() % id);
 
           return true;
         }
 
         std::string question;
         if (context.empty())
-          question = boost::str(boost::format(
+          question = str::Format(
             // translators: the last %s is gpg key ID
-            _("File '%s' is signed with an unknown key '%s'. Continue?")) % file % id);
+            _("File '%s' is signed with an unknown key '%s'. Continue?")) % file % id;
         else
-          question = boost::str(boost::format(
+          question = str::Format(
             // translators: the last %s is gpg key ID
             _("File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"))
-             % file % context.repoInfo().asUserString() % id);
+             % file % context.repoInfo().asUserString() % id;
 
         return read_bool_answer(PROMPT_YN_GPG_UNKNOWN_KEY_ACCEPT, question, false);
       }
@@ -249,15 +248,15 @@ namespace zypp
       {
         if (_gopts.no_gpg_checks)
         {
-          MIL << boost::format("Ignoring failed signature verification for %s")
+          MIL << str::Format("Ignoring failed signature verification for %s")
               % file << std::endl;
 
           std::ostringstream msg;
           if (context.empty())
-            msg << boost::format(
+            msg << str::Format(
                 _("Ignoring failed signature verification for file '%s'!")) % file;
           else
-            msg << boost::format(
+            msg << str::Format(
                 _("Ignoring failed signature verification for file '%s'"
                   " from repository '%s'!")) % file
                   % context.repoInfo().asUserString();
@@ -273,10 +272,10 @@ namespace zypp
 
         std::ostringstream question;
         if (context.empty())
-          question << boost::format(
+          question << str::Format(
             _("Signature verification failed for file '%s'.")) % file;
         else
-          question << boost::format(
+          question << str::Format(
             _("Signature verification failed for file '%s' from repository '%s'."))
               % file % context.repoInfo().asUserString();
 
@@ -305,8 +304,7 @@ namespace zypp
 
       virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
       {
-	std::string question = boost::str(boost::format(
-	    _("No digest for file %s.")) % file) + " " + _("Continue?");
+	std::string question = (str::Format(_("No digest for file %s.")) % file).str() + " " + _("Continue?");
         return read_bool_answer(PROMPT_GPG_NO_DIGEST_ACCEPT, question, _gopts.no_gpg_checks);
       }
 
@@ -314,9 +312,7 @@ namespace zypp
 
       virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
       {
-        std::string question = boost::str(boost::format(
-            _("Unknown digest %s for file %s.")) %name % file) + " " +
-            _("Continue?");
+        std::string question = (str::Format(_("Unknown digest %s for file %s.")) %name % file).str() + " " + _("Continue?");
         return read_bool_answer(PROMPT_GPG_UNKNOWN_DIGEST_ACCEPT, question, _gopts.no_gpg_checks);
       }
 
@@ -328,11 +324,11 @@ namespace zypp
 	std::string unblock( found.substr( 0, 4 ) );
 
 	zypper.out().gap();
-	// translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurance is OK )
+	// translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurrence is OK )
 	// translators: %1%      - a file name
 	// translators: %2%      - full path name
-	// translators: %3%, %4% - checksum strings (>60 chars), please keep them alligned
-	zypper.out().warning( boost::formatNAC(_(
+	// translators: %3%, %4% - checksum strings (>60 chars), please keep them aligned
+	zypper.out().warning( str::FormatNAC(_(
 		"Digest verification failed for file '%1%'\n"
 		"[%2%]\n"
 		"\n"
@@ -350,9 +346,9 @@ namespace zypp
 	);
 	zypper.out().gap();
 
-	// translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurance is OK )
+	// translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurrence is OK )
 	// translators: %1%      - abbreviated checksum (4 chars)
-	zypper.out().info( boost::formatNAC(_(
+	zypper.out().info( str::FormatNAC(_(
 		"However if you made certain that the file with checksum '%1%..' is secure, correct\n"
 		"and should be used within this operation, enter the first 4 characters of the checksum\n"
 		"to unblock using this file on your own risk. Empty input will discard the file.\n" ) )

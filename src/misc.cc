@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <sstream>
-#include <boost/format.hpp>
 
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/Logger.h>
@@ -35,7 +34,6 @@
 
 using namespace std;
 using namespace zypp;
-using namespace boost;
 
 extern ZYpp::Ptr God;
 
@@ -149,17 +147,14 @@ bool confirm_licenses(Zypper & zypper)
 
       if (license_auto_agree)
       {
-      	zypper.out().info(boost::str(
-            // translators: the first %s is name of the resolvable,
-      	    // the second is its kind (e.g. 'zypper package')
-      	    format(_("Automatically agreeing with %s %s license."))
-            % get_display_name( pi )
-            % kind_to_string_localized(pi.kind(),1)));
+	zypper.out().info(
+	  // translators: the first %s is name of the resolvable,
+	  // the second is its kind (e.g. 'zypper package')
+	  str::Format(_("Automatically agreeing with %s %s license."))
+	  % get_display_name( pi )
+	  % kind_to_string_localized(pi.kind(),1) );
 
-        MIL << format("Automatically agreeing with %s %s license.")
-            % pi.name() % pi.kind().asString()
-            << endl;
-
+        MIL << "Automatically agreeing with " << pi.name() << " " <<  pi.kind() << " license." << endl;
         continue;
       }
 
@@ -178,8 +173,7 @@ bool confirm_licenses(Zypper & zypper)
         s << str::form(
                        // translators: the first %s is the name of the package, the second
                        // is " (package-type)" if other than "package" (patch/product/pattern)
-                       _("In order to install '%s'%s, you must agree"
-                         " to terms of the following license agreement:"),
+                       _("In order to install '%s'%s, you must agree to terms of the following license agreement:"),
                        get_display_name( pi ).c_str(), kindstr.c_str());
         s << endl << endl;
       }
@@ -201,31 +195,23 @@ bool confirm_licenses(Zypper & zypper)
 
           if (zypper.globalOpts().non_interactive)
           {
-            zypper.out().info(
-                              _("Aborting installation due to the need for license confirmation."),
-                              Out::QUIET);
-            zypper.out().info(boost::str(format(
-                                                // translators: %sanslate the '--auto-agree-with-licenses',
-                                                // it is a command line option
-                                                _("Please restart the operation in interactive"
-                                                  " mode and confirm your agreement with required licenses,"
-                                                  " or use the %s option.")) % "--auto-agree-with-licenses"),
-                              Out::QUIET);
+            zypper.out().info(_("Aborting installation due to the need for license confirmation."), Out::QUIET );
+	    zypper.out().info(
+	      // translators: %s is '--auto-agree-with-licenses'
+	      str::Format(_("Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."))
+	      % "--auto-agree-with-licenses", Out::QUIET );
 
             MIL << "License(s) NOT confirmed (non-interactive without auto confirmation)" << endl;
           }
           else
           {
-            zypper.out().info(boost::str(format(
-                                                // translators: e.g. "... with flash package license."
-                                                //! \todo fix this to allow proper translation
-                                                _("Aborting installation due to user disagreement with %s %s license."))
-                                         % get_display_name( pi )
-                                         % kind_to_string_localized(pi.kind(), 1)),
-                              Out::QUIET);
-            MIL << "License(s) NOT confirmed (interactive)" << endl;
-          }
-
+	    zypper.out().info(
+	      // translators: e.g. "... with flash package license."
+	      str::Format(_("Aborting installation due to user disagreement with %s %s license."))
+	      % get_display_name( pi )
+	      % kind_to_string_localized(pi.kind(), 1), Out::QUIET );
+	    MIL << "License(s) NOT confirmed (interactive)" << endl;
+	  }
           break;
         }
       }
@@ -326,16 +312,16 @@ namespace
     {
       std::string name( p->theObj()->asKind<Package>()->sourcePkgName() );
       DBG << "looking for source package of package: " << name << endl;
-      zypper_r.out().info( boost::str( format(_("Package '%s' has source package '%s'.")) % arg_r % name ) );
+      zypper_r.out().info( str::Format(_("Package '%s' has source package '%s'.")) % arg_r % name );
 
       p = zypp::ui::Selectable::get( ResKind::srcpackage, p->theObj()->asKind<Package>()->sourcePkgName() );
       if ( p )
 	return asKind<SrcPackage>( p->theObj().resolvable() );
       else
-	zypper_r.out().error( boost::str( format(_("Source package '%s' for package '%s' not found.")) % name % arg_r ) );
+	zypper_r.out().error( str::Format(_("Source package '%s' for package '%s' not found.")) % name % arg_r );
     }
     else
-      zypper_r.out().error( boost::str( format(_("Source package '%s' not found.")) % arg_r ) );
+      zypper_r.out().error( str::Format(_("Source package '%s' not found.")) % arg_r );
 
 
     DBG << "no source package found for: " << arg_r << endl;
@@ -360,8 +346,7 @@ void build_deps_install(Zypper & zypper)
 
     if (srcpkg)
     {
-      DBG << format("Injecting build requieres for source package %s-%s")
-          % srcpkg->name() % srcpkg->edition() << endl;
+      DBG << "Injecting build requieres for " << srcpkg << endl;
 
       // install build depenendcies only
       if (zypper.cOpts().count("build-deps-only"))
@@ -413,9 +398,7 @@ void install_src_pkgs(Zypper & zypper)
   for_(it, zypper.runtimeData().srcpkgs_to_install.begin(), zypper.runtimeData().srcpkgs_to_install.end())
   {
     SrcPackage::constPtr srcpkg = *it;
-    zypper.out().info(boost::str(format(
-        _("Installing source package %s-%s"))
-        % srcpkg->name() % srcpkg->edition()));
+    zypper.out().info( str::Format(_("Installing source package %s-%s")) % srcpkg->name() % srcpkg->edition() );
     MIL << "Going to install srcpackage: " << srcpkg << endl;
 
     try
@@ -424,26 +407,19 @@ void install_src_pkgs(Zypper & zypper)
       {
         God->provideSrcPackage(srcpkg).resetDispose();
 
-        zypper.out().info(boost::str(format(
-            _("Source package %s-%s successfully retrieved."))
-            % srcpkg->name() % srcpkg->edition()));
+        zypper.out().info( str::Format(_("Source package %s-%s successfully retrieved.")) % srcpkg->name() % srcpkg->edition() );
       }
       else
       {
         God->installSrcPackage(srcpkg);
 
-        zypper.out().info(boost::str(format(
-            _("Source package %s-%s successfully installed."))
-            % srcpkg->name() % srcpkg->edition()));
+        zypper.out().info( str::Format(_("Source package %s-%s successfully installed.")) % srcpkg->name() % srcpkg->edition() );
       }
     }
     catch (const Exception & ex)
     {
       ZYPP_CAUGHT(ex);
-      zypper.out().error(ex,
-          boost::str(format(_("Problem installing source package %s-%s:"))
-          % srcpkg->name() % srcpkg->edition()));
-
+      zypper.out().error( ex, str::Format(_("Problem installing source package %s-%s:")) % srcpkg->name() % srcpkg->edition() );
       zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     }
   }

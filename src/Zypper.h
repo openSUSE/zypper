@@ -31,8 +31,8 @@
 
 // As a matter of fact namespaces std, boost and zypp have overlapping
 // symbols (e.g. shared_ptr). We default to the ones used in namespace zypp.
-// Symbols from other namespaces should be used explicitly (std::set, boost::format)
-// and not by using the whole namespace.
+// Symbols from other namespaces should be used explicitly and not by using
+// the whole namespace.
 using namespace zypp;
 
 // Convenience

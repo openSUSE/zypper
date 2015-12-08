@@ -7,8 +7,6 @@
 
 #include <iostream>
 
-#include <boost/format.hpp>
-
 // #include <zypp/base/LogTools.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/ZYpp.h>
@@ -31,7 +29,6 @@
 
 using namespace std;
 using namespace zypp;
-using boost::format;
 
 extern ZYpp::Ptr God;
 
@@ -141,11 +138,11 @@ namespace {
     { ++count[(*it)->kind()]; }
     for ( const auto & pair : count )
     {
-      cout << boost::format(PL_("There would be %1% match for '%2%'."
-			      ,"There would be %1% matches for '%2%'."
-			      ,pair.second))
-			    % pair.second
-			    % (pair.first.asString()+":"+name_r)
+      cout << str::Format(PL_("There would be %1% match for '%2%'."
+			     ,"There would be %1% matches for '%2%'."
+			     ,pair.second))
+			 % pair.second
+			 % (pair.first.asString()+":"+name_r)
 	   << endl;
     }
   }
@@ -172,7 +169,7 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
     if ( q.empty() )
     {
       // TranslatorExplanation E.g. "package 'zypper' not found."
-      cout << "\n" << format(_("%s '%s' not found.")) % kind_to_string_localized( kn._kind, 1 ) % rawarg << endl;
+      cout << "\n" << str::Format(_("%s '%s' not found.")) % kind_to_string_localized( kn._kind, 1 ) % rawarg << endl;
       {
 	// hint to matches of different kind
 	PoolQuery q;
@@ -194,9 +191,9 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
 
       if ( zypper.out().type() != Out::TYPE_XML )
       {
-	string info = boost::str( format(_("Information for %s %s:"))
-	% kind_to_string_localized( kn._kind, 1 )
-	% (*it)->name() );
+	string info = str::Format(_("Information for %s %s:"))
+				 % kind_to_string_localized( kn._kind, 1 )
+				 % (*it)->name();
 
 	cout << endl << info << endl;
 	cout << string( mbs_width(info), '-' ) << endl;
@@ -210,7 +207,7 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
       else
       {
 	// TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-	zypper.out().info(boost::str(format(_("Info for type '%s' not implemented.")) % kn._kind ));
+	zypper.out().info( str::Format(_("Info for type '%s' not implemented.")) % kn._kind );
       }
     }
   }

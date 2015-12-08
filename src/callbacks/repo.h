@@ -9,7 +9,6 @@
 #define ZMART_SOURCE_CALLBACKS_H
 
 #include <sstream>
-#include <boost/format.hpp>
 
 #include <zypp/base/Logger.h>
 #include <zypp/ZYppCallbacks.h>
@@ -101,7 +100,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     {
       outstr_r.rhs << ", " << pkg_r->downloadSize().asString( 5, 3 ) << " "
 		   // TranslatorExplanation %s is package size like "5.6 M"
-		   << boost::format(_("(%s unpacked)")) % pkg_r->installSize().asString( 5, 3 );
+		   << str::Format(_("(%s unpacked)")) % pkg_r->installSize().asString( 5, 3 );
     }
   }
 
@@ -110,7 +109,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     Zypper & zypper = *Zypper::instance();
 
     TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
-    outstr.lhs << boost::format(_("In cache %1%")) % localfile_r.basename();
+    outstr.lhs << str::Format(_("In cache %1%")) % localfile_r.basename();
     fillsRhs( outstr, zypper, zypp::asKind<zypp::Package>(res_r) );
     zypper.out().infoLine( outstr );
   }
@@ -126,7 +125,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     Zypper & zypper = *Zypper::instance();
 
     TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
-    outstr.lhs << boost::format(_("Retrieving %s %s-%s.%s"))
+    outstr.lhs << str::Format(_("Retrieving %s %s-%s.%s"))
         % kind_to_string_localized(_resolvable_ptr->kind(), 1)
         % _resolvable_ptr->name()
         % _resolvable_ptr->edition() % _resolvable_ptr->arch();

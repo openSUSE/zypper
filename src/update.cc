@@ -1,6 +1,5 @@
 #include <iostream> // for xml and table output
 #include <sstream>
-#include <boost/format.hpp>
 
 #include <zypp/base/LogTools.h>
 #include <zypp/ZYppFactory.h>
@@ -24,8 +23,7 @@ typedef std::set<PoolItem> Candidates;
 
 extern ZYpp::Ptr God;
 
-static void
-find_updates( const ResKindSet & kinds, Candidates & candidates );
+static void find_updates( const ResKindSet & kinds, Candidates & candidates );
 
 ///////////////////////////////////////////////////////////////////
 /// \class Issues
@@ -184,18 +182,18 @@ void patch_check ()
 
   if ( lockedPatches )
   {
-    out.info( ColorString( (boost::format(PL_("%d patch locked", "%d patches locked", lockedPatches )) % lockedPatches).str(), ColorContext::HIGHLIGHT ).str(), Out::QUIET);
+    out.info( ColorString( str::Format(PL_("%d patch locked", "%d patches locked", lockedPatches )) % lockedPatches,
+			   ColorContext::HIGHLIGHT ).str(),
+	      Out::QUIET );
   }
   std::ostringstream s;
   // translators: %d is the number of needed patches
-  s << boost::format(PL_("%d patch needed", "%d patches needed", gData.patches_count))
-      % gData.patches_count
+  s << str::Format(PL_("%d patch needed", "%d patches needed", gData.patches_count)) % gData.patches_count
     << " ("
     // translators: %d is the number of security patches
-    <<  boost::format(PL_("%d security patch", "%d security patches", gData.security_patches_count))
-      % gData.security_patches_count
+    <<  str::Format(PL_("%d security patch", "%d security patches", gData.security_patches_count)) % gData.security_patches_count
     << ")";
-  out.info(s.str(), Out::QUIET);
+  out.info( s.str(), Out::QUIET );
 }
 
 // ----------------------------------------------------------------------------
@@ -543,7 +541,7 @@ string i18n_kind_updates(const ResKind & kind)
   else if (kind == ResKind::product)
     return _("Product updates");
 
-  return boost::str(boost::format("%s updates") % kind);
+  return str::Format("%s updates") % kind;
 }
 
 // ----------------------------------------------------------------------------

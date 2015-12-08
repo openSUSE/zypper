@@ -26,7 +26,7 @@
 ///////////////////////////////////////////////////////////////////
 
 inline std::ostream & operator<<( std::ostream & str, const DownloadOptions & obj )
-{ return str << boost::format( "{%1%}" ) % (obj._dryrun ? "(dry-run)" : "" ); }
+{ return str << str::Format("{%1%}") % (obj._dryrun ? "(dry-run)" : ""); }
 
 ///////////////////////////////////////////////////////////////////
 namespace
@@ -187,7 +187,7 @@ namespace
 	      // TODO: Need class Out::Error support for exceptions
 	      ERR << exp << endl;
 	      _zypper.out().error( exp,
-				   boost::str( boost::format(_("Error downloading package '%s'.") ) % pi.satSolvable().asUserString() ) );
+				   str::Format(_("Error downloading package '%s'.")) % pi.satSolvable().asUserString() );
 	    }
 
 	    //DBG << localfile << endl;
@@ -201,7 +201,7 @@ namespace
 	  else
 	  {
 	    _zypper.out().info( str::Str()
-	                        << boost::str( boost::format(_("Not downloading package '%s'.") ) % pi.satSolvable().asUserString() )
+	                        << str::Format(_("Not downloading package '%s'.")) % pi.satSolvable().asUserString()
 				<< " (--dry-run)" );
 	  }
 	}

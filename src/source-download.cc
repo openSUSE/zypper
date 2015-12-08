@@ -28,7 +28,7 @@ const std::string SourceDownloadOptions::_manifestName( "MANIFEST" );
 
 inline std::ostream & operator<<( std::ostream & str, const SourceDownloadOptions & obj )
 {
-  return str << boost::format( "{%1%|%2%%3%}" )
+  return str << str::Format("{%1%|%2%%3%}")
 	      % obj._directory
 // 	      % (obj._manifest ? 'M' : 'm' )
 	      % (obj._delete ? 'D' : 'd' )
@@ -205,7 +205,7 @@ namespace
     {
       ERR << "Can't create or access download directory" << endl;
       throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
-			 boost::format(_("Can't create or access download directory '%s'.")) % pi.asString(),
+			 str::Format(_("Can't create or access download directory '%s'.")) % pi.asString(),
 			 Errno( pi.error() ).asString() ) );
       return;
     }
@@ -214,13 +214,11 @@ namespace
     {
       ERR << "Download directory is not readable." << endl;
       throw( Out::Error( ZYPPER_EXIT_ERR_PRIVILEGES,
-			 boost::format(_("Insufficient privileges to use download directory '%s'.")) % pi.asString() ) );
+			 str::Format(_("Insufficient privileges to use download directory '%s'.")) % pi.asString() ) );
       return;
     }
 
-    _zypper.out().info(
-      boost::format(_("Using download directory at '%s'.")) % pi.asString()
-    );
+    _zypper.out().info( str::Format(_("Using download directory at '%s'.")) % pi.asString() );
 
     // scan download directory to manifest
     {
@@ -389,8 +387,8 @@ namespace
 	int res = filesystem::unlink( _dnlDir / spkg._localFile );
 	if ( res != 0 )
 	{
-	  throw( Out::Error( boost::format(_("Failed to remove source package '%s'") ) % (_dnlDir / spkg._localFile),
-			    Errno().asString() ) );
+	  throw( Out::Error( str::Format(_("Failed to remove source package '%s'")) % (_dnlDir / spkg._localFile),
+			     Errno().asString() ) );
 	}
 	MIL << spkg << endl;
 	spkg._localFile.clear();
@@ -429,7 +427,7 @@ namespace
 	  {
 	    report.error();
 	    throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
-			       boost::format(_("Source package '%s' is not provided by any repository.") ) % spkg._longname ) );
+			       str::Format(_("Source package '%s' is not provided by any repository.")) % spkg._longname ) );
 	  }
 	  report.print( str::form( "%s (%s)",  spkg._longname.c_str(), spkg._srcPackage->repository().name().c_str() ) );
 	  MIL << spkg._srcPackage << endl;
@@ -448,8 +446,8 @@ namespace
 	    ERR << "Can't hardlink/copy " << localfile << " to " <<  (_dnlDir / spkg._longname) << endl;
 	    report.error();
 	    throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
-			       boost::format(_("Error downloading source package '%s'.") ) % spkg._longname ),
-			       Errno().asString() );
+			       str::Format(_("Error downloading source package '%s'.")) % spkg._longname,
+			       Errno().asString() ) );
 	  }
 	  spkg._localFile = spkg._longname;
 	}
@@ -462,7 +460,7 @@ namespace
 	  // TODO: Need class Out::Error support for exceptions
 	  ERR << exp << endl;
 	  _zypper.out().error( exp,
-			       boost::str( boost::format(_("Error downloading source package '%s'.") ) % spkg._longname ) );
+			       str::Format(_("Error downloading source package '%s'.")) % spkg._longname );
 
 	  //throw( Out::Error( ZYPPER_EXIT_ERR_BUG ) );
 	}

@@ -60,7 +60,7 @@ namespace
 	if ( w > colw ) colw = w;
       }
 
-      boost::format fmter( indent+"%-"+str::numstring(colw)+"s" );
+      str::Format fmter( indent+"%-"+str::numstring(colw)+"s" );
       unsigned maxcols = Zypper::instance()->out().defaultFormatWidth() / ( colw + indent.size() );
       if ( maxcols == 0 ) maxcols = 1;
 
@@ -234,7 +234,7 @@ namespace	// command execution
     /** Quoted \a arg_r if it contains whitespace */
     std::string quotearg( const std::string & arg_r ) const
     {
-      static boost::format fmt("'%1%'");
+      static str::Format fmt("'%1%'");
       return( fmt % arg_r ).str();
     }
 
@@ -273,7 +273,7 @@ namespace	// command execution
 	if ( ! execvp( argv[0], (char**)argv ) )
 	{ _exit (0); }	// does not happen!
       }
-      cerr << ( boost::format(_("cannot exec %1% (%2%)")) % command() % strerror(errno) ) << endl;
+      cerr << ( str::Format(_("cannot exec %1% (%2%)")) % command() % strerror(errno) ) << endl;
       _exit (128);
       // No sense in returning! I am forked away!!
       //////////////////////////////////////////////////////////////////////
@@ -283,8 +283,8 @@ namespace	// command execution
       // translators: %1% - command name or path
       // translators: %2% - system error message
       const char * txt = N_("fork for %1% failed (%2%)");
-      ERR <<       ( boost::format(txt)    % command() % strerror(errno) ) << endl;
-      _execError = ( boost::format(_(txt)) % command() % strerror(errno) ).str();
+      ERR <<     ( str::Format(txt)    % command() % strerror(errno) ) << endl;
+      _execError = str::Format(_(txt)) % command() % strerror(errno);
       _exitStatus = 127;
       return _exitStatus;
     }
@@ -302,8 +302,8 @@ namespace	// command execution
       // translators: %1% - command name or path
       // translators: %2% - system error message
       const char * txt = N_("waitpid for %1% failed (%2%)");
-      ERR <<       ( boost::format(txt)    % command() % strerror(errno) ) << endl;
-      _execError = ( boost::format(_(txt)) % command() % strerror(errno) ).str();
+      ERR <<     ( str::Format(txt)    % command() % strerror(errno) ) << endl;
+      _execError = str::Format(_(txt)) % command() % strerror(errno);
       _exitStatus = -1;
     }
     else if ( code != pid )
@@ -312,8 +312,8 @@ namespace	// command execution
       // translators: %2% - returned PID (number)
       // translators: %3% - expected PID (number)
       const char * txt = N_("waitpid for %1% returns unexpected pid %2% while waiting for %3%");
-      ERR <<       ( boost::format(txt)    % command() % code % pid ) << endl;
-      _execError = ( boost::format(_(txt)) % command() % code % pid ).str();
+      ERR <<     ( str::Format(txt)    % command() % code % pid ) << endl;
+      _execError = str::Format(_(txt)) % command() % code % pid;
       _exitStatus = -1;
     }
     else if ( WIFSIGNALED(status) )
@@ -323,10 +323,10 @@ namespace	// command execution
       // translators: %2% - signal number
       // translators: %3% - signal name
       const char * txt = N_("%1% was killed by signal %2% (%3%)");
-      WAR <<       ( boost::format(txt)    % command() % code % strsignal(code) ) << endl;
-      _execError = ( boost::format(_(txt)) % command() % code % strsignal(code) ).str();
+      WAR <<     ( str::Format(txt)    % command() % code % strsignal(code) ) << endl;
+      _execError = str::Format(_(txt)) % command() % code % strsignal(code);
       if ( WCOREDUMP(status) )
-	_execError += ( boost::format(" (%1)") % _("core dumped") ).str();
+	_execError += str::Format(" (%1)") % _("core dumped");
       _exitStatus = 128 + code;
     }
     else if ( WIFEXITED(status) )
@@ -337,8 +337,8 @@ namespace	// command execution
 	// translators: %1% - command name or path
 	// translators: %2% - exit code (number)
 	const char * txt = N_("%1% exited with status %2%");
-	WAR <<       ( boost::format(txt)    % command() % code ) << endl;
-	_execError = ( boost::format(_(txt)) % command() % code ).str();
+	WAR <<     ( str::Format(txt)    % command() % code ) << endl;
+	_execError = str::Format(_(txt)) % command() % code;
       }
       else
       {
@@ -352,8 +352,8 @@ namespace	// command execution
       // translators: %1% - command name or path
       // translators: %2% - status (number)
       const char * txt = N_("waitpid for %1% returns unexpected exit status %2%");
-      ERR <<       ( boost::format(txt)    % command() % status ) << endl;
-      _execError = ( boost::format(_(txt)) % command() % status ).str();
+      ERR <<     ( str::Format(txt)    % command() % status ) << endl;
+      _execError = str::Format(_(txt)) % command() % status;
       _exitStatus = -1;
     }
     return _exitStatus;
@@ -383,7 +383,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
 
 
       // translators: %1% is a directory name
-      out << boost::format(_(
+      out << str::Format(_(
         "Zypper subcommands are standalone executables that live in the\n"
 	"zypper_execdir ('%1%').\n"
 	"\n"
@@ -398,7 +398,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
       out << endl;
 
       // translators: %1% is a zypper command
-      out << boost::format(_(
+      out << str::Format(_(
 	"Using zypper global-options together with subcommands, as well as\n"
 	"executing subcommands in '%1%' is currently not supported.\n"
       ) ) % "zypper shell";
@@ -416,7 +416,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
 
 
       // translators: headline of an enumeration; %1% is a directory name
-      out << boost::format(_("Available zypper subcommands in '%1%'") ) % _execdir << endl;
+      out << str::Format(_("Available zypper subcommands in '%1%'") ) % _execdir << endl;
       out << endl;
       dumpNameTableOn( out, execdirCommands ) << endl;
 
@@ -426,7 +426,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
       dumpNameTableOn( out, pathCommands ) << endl;
 
       // translators: helptext; %1% is a zypper command
-      out << boost::format(_("Type '%1%' to get subcommand-specific help if available.") ) % "zypper help <subcommand>" << endl;
+      out << str::Format(_("Type '%1%' to get subcommand-specific help if available.") ) % "zypper help <subcommand>" << endl;
     }
     else
     {
@@ -449,7 +449,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
       {
 	_zypper.out().error( cmd.execError() );
 	// translators: %1% - command name
-	_zypper.out().info( boost::format(_("Manual entry for %1% can't be shown")) % _detected._name );
+	_zypper.out().info( str::Format(_("Manual entry for %1% can't be shown")) % _detected._name );
       }
       _zypper.setExitCode( cmd.exitStatus() );
     }

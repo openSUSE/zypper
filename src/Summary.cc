@@ -8,7 +8,6 @@
 #include <string.h>
 #include <iostream>
 #include <sstream>
-#include <boost/format.hpp>
 
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/LogTools.h>
@@ -30,7 +29,6 @@
 
 using namespace std;
 using namespace zypp;
-using boost::format;
 
 // --------------------------------------------------------------------------
 
@@ -422,7 +420,7 @@ bool Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
       relevant_entries -= maxEntires_r;
       // translators: Appended when clipping a long enumeration:
       // "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-      s << ( color << format(PL_(
+      s << ( color << str::Format(PL_(
 	"... and %1% more item.",
 	"... and %1% more items.",
 	relevant_entries) ) % relevant_entries );
@@ -493,7 +491,7 @@ bool Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
     relevant_entries -= maxEntires_r;
     // translators: Appended when clipping a long enumeration:
     // "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-    out << ( color << format(PL_(
+    out << ( color << str::Format(PL_(
       "... and %1% more item.",
       "... and %1% more items.",
       relevant_entries) ) % relevant_entries ) << endl;
@@ -1221,7 +1219,7 @@ void Summary::writeLocked(std::ostream & out)
     }
     if ( !wroteAll )
     {
-      out << " " << format(_("Run '%1%' to see the complete list of locked items.")) % "zypper locks -s" << endl;
+      out << " " << str::Format(_("Run '%1%' to see the complete list of locked items.")) % "zypper locks -s" << endl;
     }
   }
 }
@@ -1249,7 +1247,7 @@ void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
   // download size info
   ostringstream s;
   if (_todownload || _incache )
-    s << format(_("Overall download size: %1%. Already cached: %2%.")) % _todownload % _incache << " ";
+    s << str::Format(_("Overall download size: %1%. Already cached: %2%.")) % _todownload % _incache << " ";
 
   if (_download_only)
     s << _("Download only.");
@@ -1258,8 +1256,7 @@ void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
     // installed size change info
     if (_inst_size_change > 0)
       // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-      s << format(_("After the operation, additional %s will be used."))
-          % _inst_size_change.asString(0,1,1);
+      s << str::Format(_("After the operation, additional %s will be used.")) % _inst_size_change.asString(0,1,1);
     else if (_inst_size_change == 0)
       s << _("No additional space will be used or freed after the operation.");
     else
@@ -1268,7 +1265,7 @@ void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
       ByteCount abs;
       abs = (-_inst_size_change);
       // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-      s << format(_("After the operation, %s will be freed.")) % abs.asString(0,1,1);
+      s << str::Format(_("After the operation, %s will be freed.")) % abs.asString(0,1,1);
     }
   }
 
