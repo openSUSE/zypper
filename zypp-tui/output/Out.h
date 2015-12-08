@@ -425,7 +425,7 @@ public:
   void list( const std::string & nodeName_r, const std::string & title_r, const Container_ & container_r, ListFormater_ && formater_r = ListFormater_() )
   {
     TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::Attr( "size", str::numstring( container_r.size() ) ) ),
-		     (boost::formatNAC( title_r ) % container_r.size()).str() );
+		     str::FormatNAC( title_r ) % container_r.size() );
     list( container_r, std::forward<ListFormater_>(formater_r) );
   }
 
