@@ -83,7 +83,7 @@ namespace zypp
 
 	  Pathname noRootScriptDir( ZConfig::instance().update_scriptsPath() / tmpDir().basename() );
 
-	  for ( auto && script : _scripts )
+	  for ( const auto & script : _scripts )
 	  {
 	    MIL << "EXECUTE posttrans: " << script << endl;
             ExternalProgram prog( (noRootScriptDir/script).asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
@@ -132,7 +132,7 @@ namespace zypp
 
 	  str::Str msg;
 	  msg << "%posttrans scripts skipped while aborting:\n";
-	  for ( auto && script : _scripts )
+	  for ( const auto & script : _scripts )
 	  {
 	    const std::string & pkgident( script.substr( 0, script.size()-6 ) );	// strip tmp file suffix
 	    WAR << "UNEXECUTED posttrans: " << script << endl;

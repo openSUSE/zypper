@@ -120,7 +120,7 @@ namespace zypp {
 	      std::vector<std::string> lines;
 	      str::split( newcomment_r, std::back_inserter(lines), "\r\n" );
 	      o << endl;
-	      for ( auto line : lines )
+	      for ( const std::string & line : lines )
 	      {
 		if ( line[0] != '#' )
 		  o << "# ";

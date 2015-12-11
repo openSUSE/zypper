@@ -73,7 +73,7 @@ namespace zypp
 	}
       };
 
-      for ( auto ch : name_r )
+      for ( char ch : name_r )
       {
 	switch ( ch )
 	{

@@ -770,7 +770,7 @@ namespace zypp
       // Cleanup orphanded service repos:
       if ( ! orphanedRepos.empty() )
       {
-	for ( auto & repoInfo : orphanedRepos )
+	for ( const auto & repoInfo : orphanedRepos )
 	{
 	  MIL << "Delete orphaned service repo " << repoInfo.alias() << endl;
 	  // translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
