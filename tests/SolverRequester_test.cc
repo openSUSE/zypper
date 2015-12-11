@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_CASE(setup)
   //test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates", "upd");
 
   // resolve pool so that the satisfied status of pseudo-installed kinds becomes known
-  zypp::getZYpp()->resolver()->resolvePool();
+  getZYpp()->resolver()->resolvePool();
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -536,7 +536,7 @@ BOOST_AUTO_TEST_CASE(install302)
   vector<string> rawargs;
   rawargs.push_back("patch:libxml2-434");
   SolverRequester sr;
-  //zypp::getZYpp()->resolver()->createSolverTestcase(TESTS_BUILD_DIR "/testcase");
+  //getZYpp()->resolver()->createSolverTestcase(TESTS_BUILD_DIR "/testcase");
 
   sr.install(rawargs);
 

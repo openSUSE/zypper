@@ -11,11 +11,9 @@
 
 using std::cout;
 using std::endl;
-using std::string;
-using std::ostringstream;
-using std::vector;
 
-OutXML::OutXML(Verbosity verbosity_r) : Out(TYPE_XML, verbosity_r)
+OutXML::OutXML( Verbosity verbosity_r )
+: Out( TYPE_XML, verbosity_r)
 {
   cout << "<?xml version='1.0'?>" << endl;
   cout << "<stream>" << endl;
@@ -26,140 +24,104 @@ OutXML::~OutXML()
   cout << "</stream>" << endl;
 }
 
-bool OutXML::mine(Type type)
+bool OutXML::mine( Type type )
 {
   // Type::TYPE_NORMAL is mine
-  if (type & Out::TYPE_XML)
+  if ( type & Out::TYPE_XML )
     return true;
   return false;
 }
 
-bool OutXML::infoWarningFilter(Verbosity verbosity_r, Type mask)
+bool OutXML::infoWarningFilter( Verbosity verbosity_r, Type mask )
 {
-  if (!mine(mask))
+  if ( !mine(mask) )
     return true;
-  if (verbosity() < verbosity_r)
+  if ( verbosity() < verbosity_r )
     return true;
   return false;
 }
 
-/*
-string xmlEncode(const string & s)
+void OutXML::info( const std::string & msg, Verbosity verbosity_r, Type mask )
 {
-  string result;
-  result.reserve(s.size()*2);
-  char buff[7];
-
-  for(string::const_iterator it = s.begin(); it != s.end(); ++it)
-  {
-    switch(*it)
-    {
-    case '&':
-    case '<':
-    case '>':
-    case '"':
-    {
-      snprintf(buff, 7, "&#%d;", (unsigned)*it);
-      result.append(buff);
-      break;
-    }
-    default:
-      result.append(1, *it);
-    }
-  }
-
-  return result;
-}
-*/
-
-void OutXML::info(const string & msg, Verbosity verbosity_r, Type mask)
-{
-  if (infoWarningFilter(verbosity_r, mask))
+  if ( infoWarningFilter( verbosity_r, mask ) )
     return;
 
-  cout << "<message type=\"info\">" << xml::escape(msg)
+  cout << "<message type=\"info\">" << xml::escape( msg )
        << "</message>" << endl;
 }
 
-void OutXML::warning(const string & msg, Verbosity verbosity_r, Type mask)
+void OutXML::warning( const std::string & msg, Verbosity verbosity_r, Type mask )
 {
-  if (infoWarningFilter(verbosity_r, mask))
+  if ( infoWarningFilter( verbosity_r, mask) )
     return;
 
-  cout << "<message type=\"warning\">" << xml::escape(msg)
+  cout << "<message type=\"warning\">" << xml::escape( msg )
        << "</message>" << endl;
 }
 
-void OutXML::error(const string & problem_desc, const string & hint)
+void OutXML::error( const std::string & problem_desc, const std::string & hint )
 {
-  cout << "<message type=\"error\">" << xml::escape(problem_desc)
+  cout << "<message type=\"error\">" << xml::escape( problem_desc )
        << "</message>" << endl;
   //! \todo hint
 }
 
-void OutXML::error(const zypp::Exception & e,
-                      const string & problem_desc,
-                      const string & hint)
+void OutXML::error( const Exception & e, const std::string & problem_desc, const std::string & hint )
 {
-  ostringstream s;
+  std::ostringstream s;
 
   // problem
   s << problem_desc << endl;
   // cause
-  s << zyppExceptionReport(e) << endl;
+  s << zyppExceptionReport( e ) << endl;
   // hint
-  if (!hint.empty())
+  if ( !hint.empty() )
     s << hint << endl;
 
   cout << "<message type=\"error\">" << xml::escape(s.str())
        << "</message>" << endl;
 }
 
-void OutXML::writeProgressTag(const string & id, const string & label,
-                              int value, bool done, bool error)
+void OutXML::writeProgressTag( const std::string & id, const std::string & label, int value, bool done, bool error )
 {
   cout << "<progress";
   cout << " id=\"" << xml::escape(id) << "\"";
   cout << " name=\"" << xml::escape(label) << "\"";
-  if (done)
+  if ( done )
     cout << " done=\"" << error << "\"";
   // print value only if it is known (percentage progress)
   // missing value means 'is-alive' notification
-  else if (value >= 0)
+  else if ( value >= 0 )
     cout << " value=\"" << value << "\"";
   cout << "/>" << endl;
 }
 
-void OutXML::progressStart(const string & id,
-                           const string & label,
-                           bool has_range)
+void OutXML::progressStart( const std::string & id, const std::string & label, bool has_range )
 {
-  if (progressFilter())
+  if ( progressFilter() )
     return;
 
   //! \todo there is a bug in progress data which returns has_range false incorrectly
-  writeProgressTag(id, label, has_range ? 0 : -1, false);
+  writeProgressTag( id, label, has_range ? 0 : -1, false );
 }
 
-void OutXML::progress(const string & id,
-                      const string& label,
-                      int value)
+void OutXML::progress( const std::string & id, const std::string& label, int value )
 {
-  if (progressFilter())
+  if ( progressFilter() )
     return;
 
-  writeProgressTag(id, label, value, false);
+  writeProgressTag( id, label, value, false );
 }
 
-void OutXML::progressEnd(const string & id, const string& label, bool error)
+void OutXML::progressEnd( const std::string & id, const std::string& label, bool error )
 {
-  if (progressFilter())
+  if ( progressFilter() )
     return;
 
-  writeProgressTag(id, label, 100, true, error);
+  writeProgressTag( id, label, 100, true, error );
 }
 
-void OutXML::dwnldProgressStart(const zypp::Url & uri)
+void OutXML::dwnldProgressStart( const Url & uri )
 {
   cout << "<download"
     << " url=\"" << xml::escape(uri.asString()) << "\""
@@ -168,9 +130,7 @@ void OutXML::dwnldProgressStart(const zypp::Url & uri)
     << "/>" << endl;
 }
 
-void OutXML::dwnldProgress(const zypp::Url & uri,
-                           int value,
-                           long rate)
+void OutXML::dwnldProgress( const Url & uri, int value, long rate )
 {
   cout << "<download"
     << " url=\"" << xml::escape(uri.asString()) << "\""
@@ -179,7 +139,7 @@ void OutXML::dwnldProgress(const zypp::Url & uri,
     << "/>" << endl;
 }
 
-void OutXML::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
+void OutXML::dwnldProgressEnd( const Url & uri, long rate, bool error )
 {
   cout << "<download"
     << " url=\"" << xml::escape(uri.asString()) << "\""
@@ -213,7 +173,7 @@ void OutXML::searchResult( const Table & table_r )
 	else if ( *it == "Version" )
 	  header.push_back( "edition" );
 	else
-	  header.push_back( zypp::str::toLower( *it ) );
+	  header.push_back( str::toLower( *it ) );
       }
     }
 
@@ -249,25 +209,21 @@ void OutXML::searchResult( const Table & table_r )
   cout << "</search-result>" << endl;
 }
 
-void OutXML::prompt(PromptId id,
-                    const string & prompt,
-                    const PromptOptions & poptions,
-                    const string & startdesc)
+void OutXML::prompt( PromptId id, const std::string & prompt, const PromptOptions & poptions, const std::string & startdesc )
 {
   cout << "<prompt id=\"" << id << "\">" << endl;
-  if (!startdesc.empty())
+  if ( !startdesc.empty() )
     cout << "<description>" << xml::escape(startdesc) << "</description>" << endl;
   cout << "<text>" << xml::escape(prompt) << "</text>" << endl;
 
-  unsigned int i = 0;
-  for (PromptOptions::StrVector::const_iterator it = poptions.options().begin();
-       it != poptions.options().end(); ++it, ++i)
+  unsigned i = 0;
+  for ( PromptOptions::StrVector::const_iterator it = poptions.options().begin(); it != poptions.options().end(); ++it, ++i )
   {
-    if (poptions.isDisabled(i))
+    if ( poptions.isDisabled(  i) )
       continue;
-    string option = *it;
+    std::string option = *it;
     cout << "<option";
-    if (poptions.defaultOpt() == i)
+    if ( poptions.defaultOpt() == i )
       cout << " default=\"1\"";
     cout << " value=\"" << xml::escape(option) << "\"";
     cout << " desc=\"" << xml::escape(poptions.optionHelp(i)) << "\"";
@@ -276,7 +232,7 @@ void OutXML::prompt(PromptId id,
   cout << "</prompt>" << endl;
 }
 
-void OutXML::promptHelp(const PromptOptions & poptions)
+void OutXML::promptHelp( const PromptOptions & poptions )
 {
   // nothing to do here
 }

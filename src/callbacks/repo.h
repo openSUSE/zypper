@@ -26,22 +26,22 @@ namespace ZmartRecipients
 ///////////////////////////////////////////////////////////////////
 
 // progress for downloading a resolvable
-struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::repo::DownloadResolvableReport>
+struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::DownloadResolvableReport>
 {
-  zypp::Resolvable::constPtr _resolvable_ptr;
-  zypp::Url _url;
-  zypp::Pathname _delta;
-  zypp::ByteCount _delta_size;
+  Resolvable::constPtr _resolvable_ptr;
+  Url _url;
+  Pathname _delta;
+  ByteCount _delta_size;
   std::string _label_apply_delta;
-  zypp::Pathname _patch;
-  zypp::ByteCount _patch_size;
+  Pathname _patch;
+  ByteCount _patch_size;
 
   // Dowmload delta rpm:
   // - path below url reported on start()
   // - expected download size (0 if unknown)
   // - download is interruptable
   // - problems are just informal
-  virtual void startDeltaDownload( const zypp::Pathname & filename, const zypp::ByteCount & downloadsize )
+  virtual void startDeltaDownload( const Pathname & filename, const ByteCount & downloadsize )
   {
     _delta = filename;
     _delta_size = downloadsize;
@@ -66,7 +66,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   // - local path of downloaded delta
   // - aplpy is not interruptable
   // - problems are just informal
-  virtual void startDeltaApply( const zypp::Pathname & filename )
+  virtual void startDeltaApply( const Pathname & filename )
   {
     _delta = filename.basename();
     std::ostringstream s;
@@ -92,7 +92,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     Zypper::instance()->out().progressEnd("apply-delta", _label_apply_delta);
   }
 
-  void fillsRhs( TermLine & outstr_r, Zypper & zypper_r, zypp::Package::constPtr pkg_r )
+  void fillsRhs( TermLine & outstr_r, Zypper & zypper_r, Package::constPtr pkg_r )
   {
     outstr_r.rhs << " (" << ++zypper_r.runtimeData().commit_pkg_current
 		 << "/" << zypper_r.runtimeData().commit_pkgs_total << ")";
@@ -110,7 +110,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 
     TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
     outstr.lhs << str::Format(_("In cache %1%")) % localfile_r.basename();
-    fillsRhs( outstr, zypper, zypp::asKind<zypp::Package>(res_r) );
+    fillsRhs( outstr, zypper, asKind<Package>(res_r) );
     zypper.out().infoLine( outstr );
   }
 
@@ -118,7 +118,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
    * The media backend has only the file URI
    * \todo combine this and the media data progress callbacks in a reasonable manner
    */
-  virtual void start( zypp::Resolvable::constPtr resolvable_ptr, const zypp::Url & url )
+  virtual void start( Resolvable::constPtr resolvable_ptr, const Url & url )
   {
     _resolvable_ptr =  resolvable_ptr;
     _url = url;
@@ -129,7 +129,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
         % kind_to_string_localized(_resolvable_ptr->kind(), 1)
         % _resolvable_ptr->name()
         % _resolvable_ptr->edition() % _resolvable_ptr->arch();
-    fillsRhs( outstr, zypper, zypp::asKind<zypp::Package>(resolvable_ptr) );
+    fillsRhs( outstr, zypper, asKind<Package>(resolvable_ptr) );
 
     // temporary fix for bnc #545295
     if ( zypper.runtimeData().commit_pkg_current == zypper.runtimeData().commit_pkgs_total )
@@ -140,9 +140,9 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   }
 
   // The progress is reported by the media backend
-  // virtual bool progress(int value, zypp::Resolvable::constPtr /*resolvable_ptr*/) { return true; }
+  // virtual bool progress(int value, Resolvable::constPtr /*resolvable_ptr*/) { return true; }
 
-  virtual Action problem( zypp::Resolvable::constPtr resolvable_ptr, Error /*error*/, const std::string & description )
+  virtual Action problem( Resolvable::constPtr resolvable_ptr, Error /*error*/, const std::string & description )
   {
     Zypper::instance()->out().error(description);
     DBG << "error report" << std::endl;
@@ -245,7 +245,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   }
 
   // implementation not needed prehaps - the media backend reports the download progress
-  virtual void finish( zypp::Resolvable::constPtr /*resolvable_ptr**/, Error error, const std::string & reason )
+  virtual void finish( Resolvable::constPtr /*resolvable_ptr**/, Error error, const std::string & reason )
   {
     Zypper::instance()->runtimeData().action_rpm_download = false;
 /*
@@ -255,62 +255,62 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   }
 };
 
-struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::ProgressReport>
+struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
 {
-  virtual void start( const zypp::ProgressData &data )
+  virtual void start( const ProgressData &data )
   {
     Zypper::instance()->out().progressStart(
-        zypp::str::numstring(data.numericId()),
+        str::numstring(data.numericId()),
         data.name(),
         data.reportAlive());
   }
 
-  virtual bool progress( const zypp::ProgressData &data )
+  virtual bool progress( const ProgressData &data )
   {
     if (data.reportAlive())
       Zypper::instance()->out().progress(
-          zypp::str::numstring(data.numericId()),
+          str::numstring(data.numericId()),
           data.name());
     else
       Zypper::instance()->out().progress(
-          zypp::str::numstring(data.numericId()),
+          str::numstring(data.numericId()),
           data.name(), data.val());
     return true;
   }
 
-//   virtual Action problem( zypp::Repository /*repo*/, Error error, const std::string & description )
+//   virtual Action problem( Repository /*repo*/, Error error, const std::string & description )
 //   {
 //     display_done ();
 //     display_error (error, description);
 //     return (Action) read_action_ari ();
 //   }
 
-  virtual void finish( const zypp::ProgressData &data )
+  virtual void finish( const ProgressData &data )
   {
     Zypper::instance()->out().progressEnd(
-        zypp::str::numstring(data.numericId()),
+        str::numstring(data.numericId()),
         data.name());
   }
 };
 
 
-struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::RepoReport>
+struct RepoReportReceiver  : public callback::ReceiveReport<repo::RepoReport>
 {
-  virtual void start(const zypp::ProgressData & pd, const zypp::RepoInfo repo)
+  virtual void start(const ProgressData & pd, const RepoInfo repo)
   {
     _repo = repo;
     Zypper::instance()->out()
       .progressStart("repo", "(" + _repo.name() + ") " + pd.name());
   }
 
-  virtual bool progress(const zypp::ProgressData & pd)
+  virtual bool progress(const ProgressData & pd)
   {
     Zypper::instance()->out()
       .progress("repo", "(" + _repo.name() + ") " + pd.name(), pd.val());
     return true;
   }
 
-  virtual Action problem( zypp::Repository /*repo*/, Error error, const std::string & description )
+  virtual Action problem( Repository /*repo*/, Error error, const std::string & description )
   {
     Zypper::instance()->out()
       .progressEnd("repo", "(" + _repo.name() + ") ");
@@ -318,7 +318,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
     return (Action) read_action_ari (PROMPT_ARI_REPO_PROBLEM, ABORT);
   }
 
-  virtual void finish( zypp::Repository /*repo*/, const std::string & task, Error error, const std::string & reason )
+  virtual void finish( Repository /*repo*/, const std::string & task, Error error, const std::string & reason )
   {
     Zypper::instance()->out()
       .progressEnd("repo", "(" + _repo.name() + ") ");
@@ -332,7 +332,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
 //      display_done ("repo", cout_n);
   }
 
-  zypp::RepoInfo _repo;
+  RepoInfo _repo;
 };
     ///////////////////////////////////////////////////////////////////
 }; // namespace ZmartRecipients

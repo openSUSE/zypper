@@ -24,7 +24,6 @@
 #include "subcommand.h"
 
 #include <boost/utility/string_ref.hpp>
-using boost::string_ref;
 
 ///////////////////////////////////////////////////////////////////
 namespace env

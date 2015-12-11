@@ -53,7 +53,7 @@ namespace zypp
     // KeyRingReceive
     ///////////////////////////////////////////////////////////////////
 
-    struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport>
+    struct KeyRingReceive : public callback::ReceiveReport<KeyRingReport>
     {
       KeyRingReceive()
           : _gopts(Zypper::instance()->globalOpts())
@@ -124,7 +124,7 @@ namespace zypp
       virtual bool askUserToAcceptUnknownKey(
           const std::string & file,
           const std::string & id,
-          const zypp::KeyContext & context)
+          const KeyContext & context)
       {
         if (_gopts.no_gpg_checks)
         {
@@ -163,7 +163,7 @@ namespace zypp
       ////////////////////////////////////////////////////////////////////
 
       virtual KeyRingReport::KeyTrust askUserToAcceptKey(
-          const PublicKey &key, const zypp::KeyContext & context)
+          const PublicKey &key, const KeyContext & context)
       {
         Zypper & zypper = *Zypper::instance();
         std::ostringstream s;
@@ -244,7 +244,7 @@ namespace zypp
       virtual bool askUserToAcceptVerificationFailed(
           const std::string & file,
           const PublicKey & key,
-          const zypp::KeyContext & context )
+          const KeyContext & context )
       {
         if (_gopts.no_gpg_checks)
         {
@@ -296,13 +296,13 @@ namespace zypp
     // DigestReceive
     ///////////////////////////////////////////////////////////////////
 
-    struct DigestReceive : public zypp::callback::ReceiveReport<zypp::DigestReport>
+    struct DigestReceive : public callback::ReceiveReport<DigestReport>
     {
       DigestReceive() : _gopts(Zypper::instance()->globalOpts()) {}
 
       ////////////////////////////////////////////////////////////////////
 
-      virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
+      virtual bool askUserToAcceptNoDigest( const Pathname &file )
       {
 	std::string question = (str::Format(_("No digest for file %s.")) % file).str() + " " + _("Continue?");
         return read_bool_answer(PROMPT_GPG_NO_DIGEST_ACCEPT, question, _gopts.no_gpg_checks);
@@ -381,7 +381,7 @@ namespace zypp
 class KeyRingCallbacks {
 
   private:
-    zypp::KeyRingReceive _keyRingReport;
+    KeyRingReceive _keyRingReport;
 
   public:
     KeyRingCallbacks()
@@ -399,7 +399,7 @@ class KeyRingCallbacks {
 class DigestCallbacks {
 
   private:
-    zypp::DigestReceive _digestReport;
+    DigestReceive _digestReport;
 
   public:
     DigestCallbacks()

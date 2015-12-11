@@ -27,15 +27,12 @@
 
 #include "info.h"
 
-using namespace std;
-using namespace zypp;
-
 extern ZYpp::Ptr God;
 
-void printPkgInfo(Zypper & zypper, const zypp::ui::Selectable & s);
-void printPatchInfo(Zypper & zypper, const zypp::ui::Selectable & s);
-void printPatternInfo(Zypper & zypper, const zypp::ui::Selectable & s);
-void printProductInfo(Zypper & zypper, const zypp::ui::Selectable & s);
+void printPkgInfo( Zypper & zypper, const ui::Selectable & s );
+void printPatchInfo( Zypper & zypper, const ui::Selectable & s );
+void printPatternInfo( Zypper & zypper, const ui::Selectable & s );
+void printProductInfo( Zypper & zypper, const ui::Selectable & s );
 
 ///////////////////////////////////////////////////////////////////
 namespace
@@ -62,7 +59,7 @@ namespace
   inline void printDepList( const PoolItem & pi_r, Dep dep_r )
   {
     cout << asInfoTag( dep_r ) << ':' << endl;
-    for ( auto && cap : pi_r->dep( dep_r ) )
+    for ( const auto & cap : pi_r->dep( dep_r ) )
     { cout << "  " << cap << endl; }
   }
 
@@ -191,12 +188,12 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
 
       if ( zypper.out().type() != Out::TYPE_XML )
       {
-	string info = str::Format(_("Information for %s %s:"))
+	std::string info = str::Format(_("Information for %s %s:"))
 				 % kind_to_string_localized( kn._kind, 1 )
 				 % (*it)->name();
 
 	cout << endl << info << endl;
-	cout << string( mbs_width(info), '-' ) << endl;
+	cout << std::string( mbs_width(info), '-' ) << endl;
       }
 
 
@@ -233,7 +230,7 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
 </pre>
  *
  */
-void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
+void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
 {
   PoolItem installed( s.installedObj() );
   PoolItem updateCand( s.updateCandidateObj() );
@@ -256,17 +253,17 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   if ( runningOnEnterprise() )
   {
     Package::constPtr pkg = asKind<Package>(theone.resolvable());
-    cout << _("Support Level: ") << asUserString(pkg->vendorSupport()) << endl;
+    cout << _("Support Level: ") << asUserString( pkg->vendorSupport() ) << endl;
   }
 
-  cout << _("Installed: ") << (installed ? _("Yes") : _("No")) << endl;
+  cout << _("Installed: ") << asYesNo( (bool)installed ) << endl;
 
   cout << _("Status: ");
   if ( installed )
   {
     if ( updateCand )
     {
-      cout << str::form(_("out-of-date (version %s installed)"), installed.edition().c_str()) << endl;
+      cout << str::form(_("out-of-date (version %s installed)"), installed.edition().c_str() ) << endl;
     }
     else
     {
@@ -281,7 +278,7 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   printSummaryDesc( theone );
 
   // Print dependency lists if CLI requests it
-  for ( auto && dep : cliSupportedDepTypes() )
+  for ( const auto & dep : cliSupportedDepTypes() )
   { if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( theone, dep ); }
 }
 
@@ -309,33 +306,33 @@ atom: xv = 3.10a-1091.2
 </pre>
  *
  */
-void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
+void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
 {
   const PoolItem & pool_item = s.theObj();
   printNVA( pool_item );
 
-  cout << _("Status: ") << string_patch_status(pool_item) << endl;
+  cout << _("Status: ") << string_patch_status( pool_item ) << endl;
 
   Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());
   cout << _("Category: ") << patch->category() << endl;
   cout << _("Severity: ") << patch->severity() << endl;
   cout << _("Created On: ") << patch->timestamp().asString() << endl;
-  cout << _("Reboot Required: ") << (patch->rebootSuggested() ? _("Yes") : _("No")) << endl;
+  cout << _("Reboot Required: ") << asYesNo( patch->rebootSuggested() ) << endl;
   cout << _("Package Manager Restart Required") << ": ";
-  cout << (patch->restartSuggested() ? _("Yes") : _("No")) << endl;
+  cout << asYesNo( patch->restartSuggested() ) << endl;
 
   Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
-  if (zypper.globalOpts().reboot_req_non_interactive)
+  if ( zypper.globalOpts().reboot_req_non_interactive )
     ignoreFlags |= Patch::Reboot;
   if ( zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses") )
     ignoreFlags |= Patch::License;
 
-  cout << _("Interactive: ") << (patch->interactiveWhenIgnoring(ignoreFlags) ? _("Yes") : _("No")) << endl;
+  cout << _("Interactive: ") << asYesNo( patch->interactiveWhenIgnoring( ignoreFlags ) ) << endl;
 
   printSummaryDesc( pool_item );
 
   // Print dependency lists if CLI requests it
-  for ( auto && dep : cliSupportedDepTypes() )
+  for ( const auto & dep : cliSupportedDepTypes() )
   {
     switch ( dep.inSwitch() )
     {
@@ -344,17 +341,18 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
 	printDepList( pool_item, dep );	// These dependency lists are always printed
 	break;
       default:
-	if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( pool_item, dep );
+	if ( zypper.cOpts().count( asCliOption( dep ) ) )
+	  printDepList( pool_item, dep );
 	break;
     }
   }
 }
 
-static string string_weak_status(const ResStatus & rs)
+static std::string string_weak_status( const ResStatus & rs )
 {
-  if (rs.isRecommended())
+  if ( rs.isRecommended() )
     return _("Recommended");
-  if (rs.isSuggested())
+  if ( rs.isSuggested() )
     return _("Suggested");
   return "";
 }
@@ -377,7 +375,7 @@ This pattern provides a graphical application and a command line tool for keepin
 </pre>
  *
  */
-void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
+void printPatternInfo( Zypper & zypper, const ui::Selectable & s )
 {
   const PoolItem & pool_item = s.theObj();
   Pattern::constPtr pattern = asKind<Pattern>(pool_item.resolvable());
@@ -389,13 +387,13 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
 
   printNVA( pool_item );
 
-  cout << _("Installed: ") << (s.hasInstalledObj() ? _("Yes") : _("No")) << endl;
-  cout << _("Visible to User: ") << (pattern->userVisible() ? _("Yes") : _("No")) << endl;
+  cout << _("Installed: ") << asYesNo( s.hasInstalledObj() ) << endl;
+  cout << _("Visible to User: ") << asYesNo( pattern->userVisible() ) << endl;
 
   printSummaryDesc( pool_item );
 
   // Print dependency lists if CLI requests it
-  for ( auto && dep : cliSupportedDepTypes() )
+  for ( const auto & dep : cliSupportedDepTypes() )
   { if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( pool_item, dep ); }
 
   // show contents
@@ -405,7 +403,7 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
   t << th;
 
   Pattern::Contents contents = pattern->contentsNoSuggests();	// (bnc#857671) don't include suggests as we can not deal with them .
-  for_(sit, contents.selectableBegin(), contents.selectableEnd())
+  for_( sit, contents.selectableBegin(), contents.selectableEnd() )
   {
     const ui::Selectable & s = **sit;
     TableRow tr;
@@ -444,15 +442,15 @@ Description:
 </pre>
  *
  */
-void printProductInfo(Zypper & zypper, const ui::Selectable & s)
+void printProductInfo( Zypper & zypper, const ui::Selectable & s )
 {
   const PoolItem & pool_item = s.theObj(); // should be the only one
 
-  if (zypper.out().type() == Out::TYPE_XML)
+  if ( zypper.out().type() == Out::TYPE_XML )
   {
     Product::constPtr pp = asKind<Product>(pool_item.resolvable());
     cout
-      << asXML(*pp, pool_item.status().isInstalled())
+      << asXML( *pp, pool_item.status().isInstalled() )
       << endl;
   }
   else
@@ -462,14 +460,14 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
     printNVA( pool_item );
 
     PoolItem installed;
-    if (!s.installedEmpty())
+    if ( !s.installedEmpty() )
       installed = s.installedObj();
 
     Product::constPtr product;
     if ( installed )
-      product = asKind<Product>(installed);
+      product = asKind<Product>( installed );
     else
-      product = asKind<Product>(pool_item.resolvable());
+      product = asKind<Product>( pool_item.resolvable() );
 
     cout << _("Flavor") << ":";
     appendWord( cout, product->flavor() );
@@ -478,9 +476,9 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
 
     cout << _("Short Name") << ": " << product->shortName() << endl;
 
-    cout << _("Installed")  << ": " << ( installed ? _("Yes") : _("No") )<< endl;
+    cout << _("Installed")  << ": " << asYesNo( (bool)installed ) << endl;
 
-    cout << _("Is Base")   << ": " << (product->isTargetDistribution()  ? _("Yes") : _("No")) << endl;
+    cout << _("Is Base")   << ": " << asYesNo( product->isTargetDistribution() ) << endl;
 
     {
       Date eol( product->endOfLife() );
@@ -529,7 +527,7 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
     printSummaryDesc( pool_item );
 
     // Print dependency lists if CLI requests it
-    for ( auto && dep : cliSupportedDepTypes() )
+    for ( const auto & dep : cliSupportedDepTypes() )
     { if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( pool_item, dep ); }
   }
 }

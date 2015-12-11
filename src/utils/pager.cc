@@ -23,52 +23,48 @@
 
 #include "pager.h"
 
-using namespace std;
-using namespace zypp;
-
 // ---------------------------------------------------------------------------
 
-static string pager_help_exit(const string & pager)
+static std::string pager_help_exit( const std::string & pager )
 {
-  string endfour = pager.substr(pager.size()-4,4);
-  if (endfour == "less")
-  {
-    return str::form(_("Press '%c' to exit the pager."), 'q');
-  }
-  return string();
+  std::string ret;
+  if ( pager.substr( pager.size()-4, 4 ) == "less" )
+    ret = str::form(_("Press '%c' to exit the pager."), 'q' );
+  return ret;
 }
 
 // ---------------------------------------------------------------------------
 
-static string pager_help_navigation(const string & pager)
+static std::string pager_help_navigation( const std::string & pager )
 {
-  if (pager.rfind("less") == pager.size() - 5)
-    return _("Use arrows or pgUp/pgDown keys to scroll the text by lines or pages.");
-  else if (pager.rfind("more") == pager.size() - 5)
-    return _("Use the Enter or Space key to scroll the text by lines or pages.");
-  return string();
+  std::string ret;
+  if ( pager.rfind("less") == pager.size() - 5 )
+    ret = _("Use arrows or pgUp/pgDown keys to scroll the text by lines or pages.");
+  else if ( pager.rfind("more") == pager.size() - 5 )
+    ret = _("Use the Enter or Space key to scroll the text by lines or pages.");
+  return ret;
 }
 
 // ---------------------------------------------------------------------------
 
-static bool show_in_pager(const string & pager, const Pathname & file)
+static bool show_in_pager( const std::string & pager, const Pathname & file )
 {
-  if (Zypper::instance()->globalOpts().non_interactive)
+  if ( Zypper::instance()->globalOpts().non_interactive )
     return true;
 
-  ostringstream cmdline;
+  std::ostringstream cmdline;
   cmdline << "'" << pager << "' '" << file << "'";
 
-  string errmsg;
+  std::string errmsg;
   pid_t pid;
-  switch(pid = fork())
+  switch( pid = fork() )
   {
   case -1:
     WAR << "fork failed" << endl;
     return false;
 
   case 0:
-    execlp("sh","sh","-c",cmdline.str().c_str(),(char *)0);
+    execlp( "sh", "sh", "-c", cmdline.str().c_str(), (char *)0 );
     WAR << "exec failed with " << strerror(errno) << endl;
     // exit, cannot return false here, because this is another process
     //! \todo FIXME different exit code + message
@@ -82,14 +78,14 @@ static bool show_in_pager(const string & pager, const Pathname & file)
     int ret;
     do
     {
-      ret = waitpid(pid, &status, 0);
+      ret = waitpid( pid, &status, 0 );
     }
-    while (ret == -1 && errno == EINTR);
+    while ( ret == -1 && errno == EINTR );
 
-    if (WIFEXITED (status))
+    if ( WIFEXITED (status) )
     {
-      status = WEXITSTATUS (status);
-      if (status)
+      status = WEXITSTATUS( status );
+      if ( status )
       {
         DBG << "Pid " << pid << " exited with status " << status << endl;
         return false;
@@ -97,12 +93,12 @@ static bool show_in_pager(const string & pager, const Pathname & file)
       else
         DBG << "Pid " << pid << " successfully completed" << endl;
     }
-    else if (WIFSIGNALED (status))
+    else if ( WIFSIGNALED (status) )
     {
-      status = WTERMSIG (status);
+      status = WTERMSIG( status );
       WAR << "Pid " << pid << " was killed by signal " << status
           << " (" << strsignal(status);
-      if (WCOREDUMP (status))
+      if ( WCOREDUMP (status) )
         WAR << ", core dumped";
       WAR << ")" << endl;
       return false;
@@ -113,69 +109,66 @@ static bool show_in_pager(const string & pager, const Pathname & file)
       return false;
     }
   }
-
   return true;
 }
 
 // ---------------------------------------------------------------------------
 
-bool show_text_in_pager(const string & text, const string & intro)
+bool show_text_in_pager( const std::string & text, const std::string & intro )
 {
+  std::string pager( "more" );	// basic posix default, must be in PATH
   const char* envpager = ::getenv("PAGER");
-  if (!envpager || ::strlen(envpager) == 0)
-    envpager = "more"; // basic posix default, must be in PATH
-  string pager(envpager);
+  if ( envpager && *envpager )
+    pager = envpager;
 
   filesystem::TmpFile tfile;
-  string tpath = tfile.path().absolutename().asString();
-  ofstream os(tpath.c_str());
+  std::ofstream os( tfile.path().c_str() );
 
   // intro
   if (!intro.empty())
     os << intro << endl;
 
   // navigaion hint
-  string help = pager_help_navigation(pager);
-  if (!help.empty())
+  std::string help( pager_help_navigation( pager ) );
+  if ( !help.empty() )
     os << "(" << help << ")" << endl << endl;
 
   // the text
   os << text;
 
   // exit hint
-  help = pager_help_exit(pager);
-  if (!help.empty())
+  help = pager_help_exit( pager );
+  if ( !help.empty() )
     os << endl << endl << "(" << help << ")";
   os.close();
 
-  return show_in_pager(pager, tfile);
+  return show_in_pager( pager, tfile );
 }
 
 // ---------------------------------------------------------------------------
 
-bool show_file_in_pager(const Pathname & file, const string & intro)
+bool show_file_in_pager( const Pathname & file, const std::string & intro )
 {
+  std::string pager( "more" );	// basic posix default, must be in PATH
   const char* envpager = ::getenv("PAGER");
-  if (!envpager || ::strlen(envpager) == 0)
-    envpager = "more"; // basic posix default, must be in PATH
-  string pager(envpager);
+  if ( envpager && *envpager )
+    pager = envpager;
 
   filesystem::TmpFile tfile;
-  string tpath = tfile.path().absolutename().asString();
-  ofstream os(tpath.c_str());
+  std::ofstream os( tfile.path().c_str() );
 
   // intro
-  if (!intro.empty())
+  if ( !intro.empty() )
     os << intro << endl;
 
   // navigaion hint
-  string help = pager_help_navigation(pager);
-  if (!help.empty())
+  std::string help( pager_help_navigation( pager ) );
+  if ( !help.empty() )
     os << "(" << help << ")" << endl << endl;
 
   // the text
-  ifstream is(file.asString().c_str());
-  if (is.good())
+  std::ifstream is( file.c_str() );
+  if ( is.good() )
     os << is.rdbuf();
   else
   {
@@ -186,12 +179,12 @@ bool show_file_in_pager(const Pathname & file, const string & intro)
   is.close();
 
   // exit hint
-  help = pager_help_exit(pager);
-  if (!help.empty())
+  help = pager_help_exit( pager );
+  if ( !help.empty() )
     os << endl << endl << "(" << help << ")";
   os.close();
 
-  return show_in_pager(pager, tfile);
+  return show_in_pager( pager, tfile );
 }
 
 // vim: set ts=2 sts=2 sw=2 et ai:

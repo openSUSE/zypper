@@ -19,16 +19,16 @@
 #include <zypp/ResPool.h>
 
 
-class Summary : private zypp::base::NonCopyable
+class Summary : private base::NonCopyable
 {
 public:
-  typedef std::pair<zypp::ResObject::constPtr, zypp::ResObject::constPtr> ResPair;
+  typedef std::pair<ResObject::constPtr, ResObject::constPtr> ResPair;
   struct ResPairNameCompare
   {
-    inline bool operator()(const ResPair & p1, const ResPair & p2) const;
+    inline bool operator()( const ResPair & p1, const ResPair & p2 ) const;
   };
   typedef std::set<ResPair, ResPairNameCompare> ResPairSet;
-  typedef std::map<zypp::ResKind, ResPairSet> KindToResPairSet;
+  typedef std::map<ResKind, ResPairSet> KindToResPairSet;
 
   enum _view_options
   {
@@ -52,43 +52,35 @@ public:
   typedef enum _view_options ViewOptions;
 
 public:
-  Summary(const zypp::ResPool & pool, const ViewOptions options = DEFAULT);
+  Summary( const ResPool & pool, const ViewOptions options = DEFAULT );
   ~Summary() {}
 
-  void setViewOptions(const ViewOptions options)
-  { _viewop = options; }
-  ViewOptions viewOptions() const
-  { return _viewop; }
-  void setViewOption(const ViewOptions option)
-  { _viewop = (ViewOptions) (_viewop | option); }
-  void unsetViewOption(const ViewOptions option)
-  { _viewop = (ViewOptions) (_viewop & ~option); }
-  void toggleViewOption(const ViewOptions option)
-  { _viewop & option ? unsetViewOption(option) : setViewOption(option); }
-  void setForceNoColor(bool value = true)
-  { _force_no_color = value; }
-  void setDownloadOnly(bool value = true)
-  { _download_only = value; }
+  void setViewOptions( const ViewOptions options )	{ _viewop = options; }
+  ViewOptions viewOptions() const			{ return _viewop; }
+  void setViewOption( const ViewOptions option )	{ _viewop = (ViewOptions) (_viewop | option); }
+  void unsetViewOption( const ViewOptions option )	{ _viewop = (ViewOptions) (_viewop & ~option); }
+  void toggleViewOption( const ViewOptions option )	{ _viewop & option ? unsetViewOption(option) : setViewOption(option); }
+  void setForceNoColor( bool value = true )		{ _force_no_color = value; }
+  void setDownloadOnly( bool value = true )		{ _download_only = value; }
 
-  void writeNewlyInstalled(std::ostream & out);
-  void writeRemoved(std::ostream & out);
-  void writeUpgraded(std::ostream & out);
-  void writeDowngraded(std::ostream & out);
-  void writeReinstalled(std::ostream & out);
-  void writeRecommended(std::ostream & out);
-  void writeSuggested(std::ostream & out);
-  void writeChangedArch(std::ostream & out);
-  void writeChangedVendor(std::ostream & out);
-  void writeUnsupported(std::ostream & out);
-  void writeNeedACC(std::ostream & out);
-  void writeNotUpdated(std::ostream & out);
-  void writePackageCounts(std::ostream & out);
-  void writeDownloadAndInstalledSizeSummary(std::ostream & out);
-  void writeLocked(std::ostream & out);
+  void writeNewlyInstalled( std::ostream & out );
+  void writeRemoved( std::ostream & out );
+  void writeUpgraded( std::ostream & out );
+  void writeDowngraded( std::ostream & out );
+  void writeReinstalled( std::ostream & out );
+  void writeRecommended( std::ostream & out );
+  void writeSuggested( std::ostream & out );
+  void writeChangedArch( std::ostream & out );
+  void writeChangedVendor( std::ostream & out );
+  void writeUnsupported( std::ostream & out );
+  void writeNeedACC( std::ostream & out );
+  void writeNotUpdated( std::ostream & out );
+  void writePackageCounts( std::ostream & out );
+  void writeDownloadAndInstalledSizeSummary( std::ostream & out );
+  void writeLocked( std::ostream & out );
   void writeRebootNeeded( std::ostream & out );
 
-  unsigned packagesToGetAndInstall() const
-  { return _inst_pkg_total; }
+  unsigned packagesToGetAndInstall() const		{ return _inst_pkg_total; }
 
   unsigned packagesToInstall() const;
   unsigned packagesToUpgrade() const;
@@ -96,33 +88,28 @@ public:
   unsigned packagesToReInstall() const;
   unsigned packagesToRemove() const;
 
-  const zypp::ByteCount & toDownload() const
-  { return _todownload; }
-  const zypp::ByteCount & inCache() const
-  { return _incache; }
-  const zypp::ByteCount & installedSizeChange() const
-  { return _inst_size_change; }
+  const ByteCount & toDownload() const		{ return _todownload; }
+  const ByteCount & inCache() const		{ return _incache; }
+  const ByteCount & installedSizeChange() const	{ return _inst_size_change; }
 
-  bool needMachineReboot() const
-  { return _need_reboot; }
+  bool needMachineReboot() const			{ return _need_reboot; }
 
-  bool needPkgMgrRestart() const
-  { return _need_restart; }
+  bool needPkgMgrRestart() const			{ return _need_restart; }
 
 
-  void dumpTo(std::ostream & out);
-  void dumpAsXmlTo(std::ostream & out);
+  void dumpTo( std::ostream & out );
+  void dumpAsXmlTo( std::ostream & out );
 
 private:
-  void readPool(const zypp::ResPool & pool);
+  void readPool( const ResPool & pool );
 
-  bool writeResolvableList(std::ostream & out, const ResPairSet & resolvables, ansi::Color = ansi::Color::nocolor(), unsigned maxEntries_r = 0U, bool withKind_r = false );
-  bool writeResolvableList(std::ostream & out, const ResPairSet & resolvables, unsigned maxEntries_r, bool withKind_r = false )
+  bool writeResolvableList( std::ostream & out, const ResPairSet & resolvables, ansi::Color = ansi::Color::nocolor(), unsigned maxEntries_r = 0U, bool withKind_r = false );
+  bool writeResolvableList( std::ostream & out, const ResPairSet & resolvables, unsigned maxEntries_r, bool withKind_r = false )
   { return writeResolvableList( out, resolvables, ansi::Color::nocolor(), maxEntries_r, withKind_r ); }
 
-  void writeXmlResolvableList(std::ostream & out, const KindToResPairSet & resolvables);
+  void writeXmlResolvableList( std::ostream & out, const KindToResPairSet & resolvables );
 
-  void collectInstalledRecommends(const zypp::ResObject::constPtr & obj);
+  void collectInstalledRecommends( const ResObject::constPtr & obj );
 
 private:
   ViewOptions _viewop;
@@ -133,9 +120,9 @@ private:
   bool _need_reboot;
   bool _need_restart;
 
-  zypp::ByteCount _todownload;
-  zypp::ByteCount _incache;
-  zypp::ByteCount _inst_size_change;
+  ByteCount _todownload;
+  ByteCount _incache;
+  ByteCount _inst_size_change;
 
   // STATS
 

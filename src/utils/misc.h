@@ -30,25 +30,24 @@ namespace zypp
 }
 using namespace zypp;
 
-typedef std::set<zypp::ResKind> ResKindSet;
+typedef std::set<ResKind> ResKindSet;
 
 /** Whether running on SLE.
  * If so, report e.g. unsupported packages per default.
  */
 bool runningOnEnterprise();
 
-bool is_changeable_media(const zypp::Url & url);
+bool is_changeable_media( const Url & url );
 
-/** Converts user-supplied kind to zypp::ResKind object.
+/** Converts user-supplied kind to ResKind object.
  * Returns an empty one if not recognized. */
-zypp::ResKind string_to_kind(const std::string & skind);
+ResKind string_to_kind( const std::string & skind );
 
-ResKindSet kindset_from(const std::list<std::string> & kindstrings);
+ResKindSet kindset_from( const std::list<std::string> & kindstrings );
 
-std::string kind_to_string_localized(
-    const zypp::ResKind & kind, unsigned long count);
+std::string kind_to_string_localized( const ResKind & kind, unsigned long count );
 
-std::string string_patch_status(const zypp::PoolItem & pi);
+std::string string_patch_status( const PoolItem & pi );
 
 /**
  * Creates a Url out of \a urls_s. If the url_s looks looks_like_url()
@@ -56,29 +55,26 @@ std::string string_patch_status(const zypp::PoolItem & pi);
  * a file or directory, a dir:// Url is returned. Otherwise an empty Url is
  * returned.
  */
-zypp::Url make_url (const std::string & url_s);
+Url make_url( const std::string & url_s );
 
 /**
  * Creates Url out of obs://project/platform URI with given base URL and default
  * platform (used in case the platform is not specified in the URI).
  */
-zypp::Url make_obs_url(
-    const std::string & obsuri,
-    const zypp::Url & base_url,
-    const std::string & default_platform);
+Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::string & default_platform );
 
 /**
  * Returns <code>true</code> if the string \a s contains a substring starting
  * at the beginning and ending before the first colon matches any of registered
  * schemes (Url::isRegisteredScheme()).
  */
-bool looks_like_url (const std::string& s);
+bool looks_like_url( const std::string& s );
 
 /**
  * Returns <code>true</code> if \a s ends with ".rpm" or starts with "/", "./",
  * or "../".
  */
-bool looks_like_rpm_file(const std::string & s);
+bool looks_like_rpm_file( const std::string & s );
 
 /**
  * Download the RPM file specified by \a rpm_uri_str and copy it into
@@ -87,24 +83,22 @@ bool looks_like_rpm_file(const std::string & s);
  * \return The local Pathname of the file in the cache on success, empty
  *      Pathname if a problem occurs.
  */
-zypp::Pathname cache_rpm(const std::string & rpm_uri_str,
-                         const std::string & cache_dir);
+Pathname cache_rpm( const std::string & rpm_uri_str, const std::string & cache_dir );
 
-std::string & indent(std::string & text, int columns);
+std::string & indent( std::string & text, int columns );
 
 // comparator for RepoInfo set
-class RepoInfoAliasComparator
+struct RepoInfoAliasComparator
 {
-  public: bool operator()(const zypp::RepoInfo & a, const zypp::RepoInfo & b)
+  bool operator()( const RepoInfo & a, const RepoInfo & b )
   { return a.alias() < b.alias(); }
 };
 
 
 // comparator for Service set
-class ServiceAliasComparator
+struct ServiceAliasComparator
 {
-  public: bool operator()(const zypp::repo::RepoInfoBase_Ptr & a,
-                          const zypp::repo::RepoInfoBase_Ptr & b)
+  bool operator()( const repo::RepoInfoBase_Ptr & a, const repo::RepoInfoBase_Ptr & b )
   { return a->alias() < b->alias(); }
 };
 
@@ -112,20 +106,18 @@ class ServiceAliasComparator
 /**
  * checks name for .repo string
  */
-inline bool isRepoFile(const std::string& name)
-{
-  return name.find(".repo") != name.npos;
-}
+inline bool isRepoFile( const std::string & name )
+{ return name.find(".repo") != name.npos; }
 
-std::string asXML(const zypp::Product & p, bool is_installed);
+std::string asXML( const Product & p, bool is_installed );
 
-std::string asXML(const zypp::Pattern & p, bool is_installed);
+std::string asXML( const Pattern & p, bool is_installed );
 
 /**
  * Check whether one of --download-* or --download options was given and return
  * the specified mode.
  */
-zypp::DownloadMode get_download_option(Zypper & zypper, bool quiet = false);
+DownloadMode get_download_option( Zypper & zypper, bool quiet = false );
 
 /** Check whether packagekit is running using a DBus call */
 bool packagekit_running();

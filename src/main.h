@@ -11,7 +11,7 @@
 #define ZYPPER_EXIT_ERR_BUG                1 // undetermined error
 #define ZYPPER_EXIT_ERR_SYNTAX             2 // syntax error, e.g. zypper instal, zypper in --unknown option
 #define ZYPPER_EXIT_ERR_INVALID_ARGS       3 // invalid arguments given, e.g. zypper source-add httttps://asdf.net 
-#define ZYPPER_EXIT_ERR_ZYPP               4 // error indicated from within libzypp, e.g. God = zypp::getZYpp() threw an exception
+#define ZYPPER_EXIT_ERR_ZYPP               4 // error indicated from within libzypp, e.g. God = getZYpp() threw an exception
 #define ZYPPER_EXIT_ERR_PRIVILEGES         5 // unsufficient privileges for the operation
 #define ZYPPER_EXIT_NO_REPOS               6 // no repositories defined
 #define ZYPPER_EXIT_ZYPP_LOCKED            7 // libzypp is locked, e.g. packagekit is running 

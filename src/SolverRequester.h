@@ -23,7 +23,6 @@
 #include "PackageArgs.h"
 #include "utils/misc.h" // for ResKindSet; might make sense to move this elsewhere
 
-
 class Out;
 
 ///////////////////////////////////////////////////////////////////
@@ -113,17 +112,17 @@ public:
   struct Options
   {
     Options()
-      : force(false)
-      , oldpackage(false)
-      , force_by_cap(false)
-      , force_by_name(false)
-      , best_effort(false)
-      , skip_interactive(false)
-      , allow_vendor_change(zypp::ZConfig::instance().solver_allowVendorChange())
+      : force( false )
+      , oldpackage( false )
+      , force_by_cap( false )
+      , force_by_name( false )
+      , best_effort( false )
+      , skip_interactive( false )
+      , allow_vendor_change( ZConfig::instance().solver_allowVendorChange() )
     {}
 
-    void setForceByName(bool value = true);
-    void setForceByCap (bool value = true);
+    void setForceByName( bool value = true );
+    void setForceByCap ( bool value = true );
 
     /**
      * If true, the requester will force the operation in some defined cases,
@@ -271,25 +270,24 @@ public:
       ADDED_CONFLICT
     };
 
-    Feedback(
-        const Id id,
-        const PackageSpec & reqpkg,
-        const zypp::PoolItem & selected = zypp::PoolItem(),
-        const zypp::PoolItem & installed = zypp::PoolItem())
-      : _id(id)
-      , _reqpkg(reqpkg)
-      , _objsel(selected)
-      , _objinst(installed)
+    Feedback( const Id id,
+	      const PackageSpec & reqpkg,
+	      const PoolItem & selected = PoolItem(),
+	      const PoolItem & installed = PoolItem() )
+    : _id( id )
+    , _reqpkg( reqpkg )
+    , _objsel( selected )
+    , _objinst( installed )
     {}
 
     Id id() const
     { return _id; }
 
-    const zypp::PoolItem selectedObj() const
+    const PoolItem selectedObj() const
     { return _objsel; }
 
-    std::string asUserString(const SolverRequester::Options & opts) const;
-    void print(Out & out, const SolverRequester::Options & opts) const;
+    std::string asUserString( const SolverRequester::Options & opts ) const;
+    void print( Out & out, const SolverRequester::Options & opts ) const;
 
   private:
     Id _id;
@@ -298,14 +296,15 @@ public:
     PackageSpec _reqpkg;
 
     /** The selected object */
-    zypp::PoolItem _objsel;
+    PoolItem _objsel;
     /** The installed object */
-    zypp::PoolItem _objinst;
+    PoolItem _objinst;
   };
 
 public:
-  SolverRequester(const Options & opts = Options())
-    : _opts(opts), _command(ZypperCommand::NONE)
+  SolverRequester( const Options & opts = Options() )
+  : _opts( opts )
+  , _command( ZypperCommand::NONE )
   {}
 
 public:
@@ -317,23 +316,21 @@ public:
    * \note Passed \a args must be constructed with
    *       PackageArgs::Options::do_by_default = false.
    */
-  void remove(const PackageArgs & args);
+  void remove( const PackageArgs & args );
 
   /**
    * Variant of remove(const PackageArgs&) to avoid implicit conversion
    * from vector<string> to PackageArgs.
    */
-  void remove(
-      const std::vector<std::string> & rawargs,
-      const zypp::ResKind & kind = zypp::ResKind::package)
+  void remove( const std::vector<std::string> & rawargs, const ResKind & kind = ResKind::package )
   {
     PackageArgs::Options opts;
     opts.do_by_default = false;
-    remove(PackageArgs(rawargs, kind, opts));
+    remove( PackageArgs( rawargs, kind, opts ) );
   }
 
   /** Request update of specified objects. */
-  void update(const PackageArgs & args);
+  void update( const PackageArgs & args );
 
   /** Request update of all satisfied patterns.
    * TODO define this */
@@ -352,19 +349,19 @@ public:
    * \param selected  Selected patch
    * \return True if the patch was set for installation, false otherwise.
    */
-  bool installPatch(const zypp::PoolItem & selected);
+  bool installPatch( const PoolItem & selected );
 
-  bool hasFeedback(const Feedback::Id id) const;
-  void printFeedback(Out & out) const
-  { for_(fb, _feedback.begin(), _feedback.end()) fb->print(out, _opts); }
+  bool hasFeedback( const Feedback::Id id ) const;
+  void printFeedback( Out & out ) const
+  { for_( fb, _feedback.begin(), _feedback.end() ) fb->print( out, _opts ); }
 
-  const std::set<zypp::PoolItem> & toInstall() const { return _toinst; }
-  const std::set<zypp::PoolItem> & toRemove() const { return _toremove; }
-  const std::set<zypp::Capability> & requires() const { return _requires; }
-  const std::set<zypp::Capability> & conflicts() const { return _conflicts; }
+  const std::set<PoolItem> & toInstall() const { return _toinst; }
+  const std::set<PoolItem> & toRemove() const { return _toremove; }
+  const std::set<Capability> & requires() const { return _requires; }
+  const std::set<Capability> & conflicts() const { return _conflicts; }
 
 private:
-  void installRemove(const PackageArgs & args);
+  void installRemove( const PackageArgs & args );
 
   /**
    * Requests installation or update to the best of objects available in repos
@@ -384,7 +381,7 @@ private:
    * \note Glob can be used in the capability name for matching by name.
    * \see Options
    */
-  void install(const PackageSpec & pkg);
+  void install( const PackageSpec & pkg );
 
   /**
    * Request removal of all packages matching given \a cap by name/edition/arch,
@@ -395,7 +392,7 @@ private:
    *
    * \see Options
    */
-  void remove(const PackageSpec & pkg);
+  void remove( const PackageSpec & pkg );
 
   /**
    * Update to specified \a selected and report if there's any better
@@ -408,9 +405,7 @@ private:
    * \param pkg       Specification of required package
    * \param selected  Corresponding selected pool item
    */
-  void updateTo(
-      const PackageSpec & pkg,
-      const zypp::PoolItem & selected);
+  void updateTo( const PackageSpec & pkg, const PoolItem & selected );
 
   /**
    * Set specified patch for installation.
@@ -422,27 +417,21 @@ private:
    *                       method will do nothing and return false.
    * \return True if the patch was set for installation, false otherwise.
    */
-  bool installPatch(
-      const PackageSpec & pkg,
-      const zypp::PoolItem & selected,
-      bool ignore_pkgmgmt = true);
+  bool installPatch( const PackageSpec & pkg, const PoolItem & selected, bool ignore_pkgmgmt = true );
 
   // TODO provide also public versions of these, taking optional Options and
   // reporting errors via an output argument.
 
-  void setToInstall(const zypp::PoolItem & pi);
-  void setToRemove(const zypp::PoolItem & pi);
-  void addRequirement(const PackageSpec & pkg);
-  void addConflict(const PackageSpec & pkg);
+  void setToInstall( const PoolItem & pi );
+  void setToRemove( const PoolItem & pi );
+  void addRequirement( const PackageSpec & pkg );
+  void addConflict( const PackageSpec & pkg );
 
-  void addFeedback(
-      const Feedback::Id id,
-      const PackageSpec & reqpkg,
-      const zypp::PoolItem & selected = zypp::PoolItem(),
-      const zypp::PoolItem & installed = zypp::PoolItem())
-  {
-    _feedback.push_back(Feedback(id, reqpkg, selected, installed));
-  }
+  void addFeedback( const Feedback::Id id,
+		    const PackageSpec & reqpkg,
+		    const PoolItem & selected = PoolItem(),
+		    const PoolItem & installed = PoolItem() )
+  { _feedback.push_back( Feedback( id, reqpkg, selected, installed ) ); }
 
 private:
   /** Various options to be applied to each requested package */
@@ -456,10 +445,10 @@ private:
   /** Various feedback from the requester. */
   std::vector<Feedback> _feedback;
 
-  std::set<zypp::PoolItem> _toinst;
-  std::set<zypp::PoolItem> _toremove;
-  std::set<zypp::Capability> _requires;
-  std::set<zypp::Capability> _conflicts;
+  std::set<PoolItem> _toinst;
+  std::set<PoolItem> _toremove;
+  std::set<Capability> _requires;
+  std::set<Capability> _conflicts;
 };
 
 #endif /* SOLVERREQUESTER_H_ */

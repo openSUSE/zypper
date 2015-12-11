@@ -17,6 +17,7 @@
 #include <zypp/Capability.h>
 
 class Zypper;
+using namespace zypp;
 
 /**
  * Loops through resolvables, checking if there is license to confirm. When
@@ -25,18 +26,18 @@ class Zypper;
  *
  * \returns true if all licenses have been confirmed, false otherwise.
  */
-bool confirm_licenses(Zypper & zypper);
+bool confirm_licenses( Zypper & zypper );
 
 /**
  * Prints a report about licenses and EULAs of installed packages to stdout.
  */
-void report_licenses(Zypper & zypper);
+void report_licenses( Zypper & zypper );
 
 /**
  * Reset all selections made by mark_* methods. Needed in the shell to reset
  * selections after the install and remove commands.
  */
-void remove_selections(Zypper & zypper);
+void remove_selections( Zypper & zypper );
 
 
 /**
@@ -47,39 +48,32 @@ void remove_selections(Zypper & zypper);
  * \note we still need to be able to install the source package alone
  *       (without build-deps, which are listed as 'requires' of the srcpackage)
  */
-void mark_src_pkgs(Zypper & zypper);
+void mark_src_pkgs( Zypper & zypper );
 
 /**
  * Install source packages found by \ref mark_src_pkgs.
  * \todo this uses ZYpp->installSrcPackage(srcpkg) - if it is to be gone
  *       during the zypp commit refactoring, we need a replacement
  */
-void install_src_pkgs(Zypper & zypper);
+void install_src_pkgs( Zypper & zypper );
 
 /**
  * Inject requirements of a source package or its build dependencies (depending
  * on command line options) to the pool.
  */
-void build_deps_install(Zypper & zypper);
+void build_deps_install( Zypper & zypper );
 
 
-zypp::PoolQuery
-pkg_spec_to_poolquery(
-    const zypp::Capability & cap,
-    const std::list<std::string> & repos = std::list<std::string>());
+PoolQuery pkg_spec_to_poolquery( const Capability & cap, const std::list<std::string> & repos = std::list<std::string>() );
 
-zypp::PoolQuery
-pkg_spec_to_poolquery(
-    const zypp::Capability & cap,
-    const std::string & repo = std::string());
+PoolQuery pkg_spec_to_poolquery( const Capability & cap, const std::string & repo = std::string());
 
-std::set<zypp::PoolItem>
-get_installed_providers(const zypp::Capability & cap);
+std::set<PoolItem> get_installed_providers( const Capability & cap );
 
 /**
  * Get the highest-version installed pacakge/product or satisfied patch/pattern
  * from the selectable.
  */
-zypp::PoolItem get_installed_obj(zypp::ui::Selectable::Ptr & s);
+PoolItem get_installed_obj( ui::Selectable::Ptr & s );
 
 #endif

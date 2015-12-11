@@ -9,8 +9,6 @@
 #include <boost/utility/string_ref.hpp>
 #include "utils/text.h"
 
-using namespace std;
-
 std::string mbs_substr_by_width( boost::string_ref text_r, std::string::size_type colpos_r, std::string::size_type collen_r )
 {
   std::string ret;

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <zypp/ZYpp.h> // for zypp::ResPool::instance()
+#include <zypp/ZYpp.h> // for ResPool::instance()
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/Algorithm.h>
@@ -18,9 +18,6 @@
 #include "utils/misc.h" // for kind_to_string_localized and string_patch_status
 
 #include "search.h"
-
-using namespace zypp;
-using namespace std;
 
 extern ZYpp::Ptr God;
 
@@ -46,18 +43,17 @@ namespace
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-FillSearchTableSolvable::FillSearchTableSolvable(
-    Table & table, zypp::TriBool inst_notinst)
-  : _table( &table )
-  , _gopts(Zypper::instance()->globalOpts())
-  , _inst_notinst(inst_notinst)
+FillSearchTableSolvable::FillSearchTableSolvable( Table & table, TriBool inst_notinst )
+: _table( &table )
+, _gopts( Zypper::instance()->globalOpts() )
+, _inst_notinst( inst_notinst )
 {
-  Zypper & zypper = *Zypper::instance();
-  if (zypper.cOpts().find("repo") != zypper.cOpts().end())
+  Zypper & zypper( *Zypper::instance() );
+  if ( zypper.cOpts().find("repo") != zypper.cOpts().end() )
   {
-    list<RepoInfo> & repos = zypper.runtimeData().repos;
-    for_(it, repos.begin(), repos.end())
-      _repos.insert(it->alias());
+    std::list<RepoInfo> & repos( zypper.runtimeData().repos );
+    for_( it, repos.begin(), repos.end() )
+      _repos.insert( it->alias() );
   }
 
   //
@@ -139,7 +135,7 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
     << pi->edition().asString()
     << pi->arch().asString()
     << ( pi->isSystem()
-       ? (string("(") + _("System Packages") + ")")
+       ? (std::string("(") + _("System Packages") + ")")
        : pi->repository().asUserString() );
 
   *_table << row;
@@ -149,21 +145,21 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
 //
 // PoolQuery iterator as argument provides information about matches
 //
-bool FillSearchTableSolvable::operator()( const zypp::PoolQuery::const_iterator & it ) const
+bool FillSearchTableSolvable::operator()( const PoolQuery::const_iterator & it ) const
 {
-  // all FillSearchTableSolvable::operator()( const zypp::PoolItem & pi )
+  // all FillSearchTableSolvable::operator()( const PoolItem & pi )
   if ( ! operator()(*it) )
     return false;	// no row was added due to filter
 
   // after addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) is
   // done, add the details about matches to last row
-  TableRow & lastRow = _table->rows().back();
+  TableRow & lastRow( _table->rows().back() );
 
   // don't show details for patterns with user visible flag not set (bnc #538152)
-  if (it->kind() == zypp::ResKind::pattern)
+  if ( it->kind() == ResKind::pattern )
   {
     Pattern::constPtr ptrn = asKind<Pattern>(*it);
-    if (ptrn && !ptrn->userVisible())
+    if ( ptrn && !ptrn->userVisible() )
       return true;
   }
 
@@ -175,8 +171,8 @@ bool FillSearchTableSolvable::operator()( const zypp::PoolQuery::const_iterator 
       if ( str::startsWith( attrib, "solvable:" ) )	// strip 'solvable:' from attribute
 	attrib.erase( 0, 9 );
 
-      if ( match->inSolvAttr() == zypp::sat::SolvAttr::summary ||
-           match->inSolvAttr() == zypp::sat::SolvAttr::description )
+      if ( match->inSolvAttr() == sat::SolvAttr::summary ||
+           match->inSolvAttr() == sat::SolvAttr::description )
       {
 	// multiline matchstring
         lastRow.addDetail( attrib + ":" );
@@ -192,16 +188,16 @@ bool FillSearchTableSolvable::operator()( const zypp::PoolQuery::const_iterator 
   return true;
 }
 
-bool FillSearchTableSolvable::operator()( const zypp::PoolItem & pi ) const
+bool FillSearchTableSolvable::operator()( const PoolItem & pi ) const
 {
   ui::Selectable::constPtr sel( ui::Selectable::get( pi ) );
   return addPicklistItem( sel, pi );
 }
 
-bool FillSearchTableSolvable::operator()( zypp::sat::Solvable solv ) const
+bool FillSearchTableSolvable::operator()( sat::Solvable solv ) const
 { return operator()( PoolItem( solv ) ); }
 
-bool FillSearchTableSolvable::operator()( const zypp::ui::Selectable::constPtr & sel ) const
+bool FillSearchTableSolvable::operator()( const ui::Selectable::constPtr & sel ) const
 {
   bool ret = false;
   // picklist: available items list prepended by those installed items not identicalAvailable
@@ -214,18 +210,17 @@ bool FillSearchTableSolvable::operator()( const zypp::ui::Selectable::constPtr &
 }
 
 
-FillSearchTableSelectable::FillSearchTableSelectable(
-    Table & table, zypp::TriBool installed_only)
-  : _table( &table )
-  , _gopts(Zypper::instance()->globalOpts())
-  , inst_notinst(installed_only)
+FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool installed_only )
+: _table( &table )
+, _gopts( Zypper::instance()->globalOpts() )
+, inst_notinst( installed_only )
 {
-  Zypper & zypper = *Zypper::instance();
-  if (zypper.cOpts().find("repo") != zypper.cOpts().end())
+  Zypper & zypper( *Zypper::instance() );
+  if ( zypper.cOpts().find("repo") != zypper.cOpts().end() )
   {
-    list<RepoInfo> & repos = zypper.runtimeData().repos;
-    for_(it, repos.begin(), repos.end())
-      _repos.insert(it->alias());
+    std::list<RepoInfo> & repos( zypper.runtimeData().repos );
+    for_( it, repos.begin(), repos.end() )
+      _repos.insert( it->alias() );
   }
 
   TableHeader header;
@@ -242,13 +237,13 @@ FillSearchTableSelectable::FillSearchTableSelectable(
   *_table << header;
 }
 
-bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr & s) const
+bool FillSearchTableSelectable::operator()( const ui::Selectable::constPtr & s ) const
 {
   // hide patterns with user visible flag not set (bnc #538152)
-  if (s->kind() == zypp::ResKind::pattern)
+  if ( s->kind() == ResKind::pattern )
   {
     Pattern::constPtr ptrn = s->candidateAsKind<Pattern>();
-    if (ptrn && !ptrn->userVisible())
+    if ( ptrn && !ptrn->userVisible() )
       return true;
   }
 
@@ -257,15 +252,14 @@ bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr 
   // whether to show the solvable as 'installed'
   bool installed = false;
 
-  if (zypp::traits::isPseudoInstalled(s->kind()))
+  if ( traits::isPseudoInstalled( s->kind() ) )
     installed = s->theObj().isSatisfied();
   // check for installed counterpart in one of specified repos (bnc #467106)
   else if (!_repos.empty())
   {
-    for_(ait, s->availableBegin(), s->availableEnd())
-      for_(iit, s->installedBegin(), s->installedEnd())
-        if (identical(*ait, *iit) &&
-            _repos.find(ait->repoInfo().alias()) != _repos.end())
+    for_( ait, s->availableBegin(), s->availableEnd() )
+      for_( iit, s->installedBegin(), s->installedEnd() )
+        if ( identical( *ait, *iit ) && _repos.find( ait->repoInfo().alias() ) != _repos.end() )
         {
           installed = true;
           break;
@@ -277,28 +271,28 @@ bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr 
     installed = !s->installedEmpty();
 
   bool isLocked = s->locked();
-  if (s->kind() != zypp::ResKind::srcpackage)
+  if ( s->kind() != ResKind::srcpackage )
   {
-    if (installed)
+    if ( installed )
     {
       // not-installed only
-      if (inst_notinst == false)
+      if ( inst_notinst == false )
         return true;
       row << lockStatusTag( "i", isLocked );
     }
     // this happens if the solvable has installed objects, but no counterpart
     // of them in specified repos
-    else if (s->hasInstalledObj())
+    else if ( s->hasInstalledObj() )
     {
       // not-installed only
-      if (inst_notinst == true)
+      if ( inst_notinst == true )
         return true;
       row << lockStatusTag( "v", isLocked );
     }
     else
     {
       // installed only
-      if (inst_notinst == true)
+      if ( inst_notinst == true )
         return true;
       row << lockStatusTag( "", isLocked );
     }
@@ -306,23 +300,23 @@ bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr 
   else
   {
     // installed only
-    if (inst_notinst == true)
+    if ( inst_notinst == true )
       return true;
     row << lockStatusTag( "", isLocked );
   }
 
   row << s->name();
   row << s->theObj()->summary();
-  row << kind_to_string_localized(s->kind(), 1);
+  row << kind_to_string_localized( s->kind(), 1 );
   *_table << row;
   return true;
 }
 
 
-FillPatchesTable::FillPatchesTable( Table & table, zypp::TriBool inst_notinst )
-  : _table( &table )
-  , _gopts(Zypper::instance()->globalOpts())
-  , _inst_notinst(inst_notinst)
+FillPatchesTable::FillPatchesTable( Table & table, TriBool inst_notinst )
+: _table( &table )
+, _gopts( Zypper::instance()->globalOpts() )
+, _inst_notinst( inst_notinst )
 {
   TableHeader header;
 
@@ -336,25 +330,25 @@ FillPatchesTable::FillPatchesTable( Table & table, zypp::TriBool inst_notinst )
   *_table << header;
 }
 
-bool FillPatchesTable::operator()(const zypp::PoolItem & pi) const
+bool FillPatchesTable::operator()( const PoolItem & pi ) const
 {
   // only not installed
-  if (pi.isSatisfied() && _inst_notinst == false)
+  if ( pi.isSatisfied() && _inst_notinst == false )
     return true;
   // only installed
-  else if (!pi.isSatisfied() && _inst_notinst == true)
+  else if ( !pi.isSatisfied() && _inst_notinst == true )
     return true;
 
   TableRow row;
 
-  zypp::Patch::constPtr patch = zypp::asKind<zypp::Patch>(pi.resolvable());
+  Patch::constPtr patch = asKind<Patch>(pi.resolvable());
 
   row
     << pi.repository().asUserString()
     << pi.name()
     << patch->category()
     << patch->severity()
-    << string_patch_status(pi);
+    << string_patch_status( pi );
 
   *_table << row;
 
@@ -363,9 +357,9 @@ bool FillPatchesTable::operator()(const zypp::PoolItem & pi) const
 
 
 /*
-string selectable_search_repo_str(const ui::Selectable & s)
+std::string selectable_search_repo_str(const ui::Selectable & s)
 {
-  string repostr;
+  std::string repostr;
 
   // show available objects
   for_(it, s.availableBegin(), s.availableEnd())
@@ -383,40 +377,36 @@ string selectable_search_repo_str(const ui::Selectable & s)
 }
 */
 
-static string string_weak_status(const ResStatus & rs)
+static std::string string_weak_status( const ResStatus & rs )
 {
-  if (rs.isRecommended())
+  if ( rs.isRecommended() )
     return _("Recommended");
-  if (rs.isSuggested())
+  if ( rs.isSuggested() )
     return _("Suggested");
   return "";
 }
 
 
-void list_patches(Zypper & zypper)
+void list_patches( Zypper & zypper )
 {
-  MIL
-    << "Pool contains " << God->pool().size()
-    << " items. Checking whether available patches are needed." << std::endl;
+  MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
 
   Table tbl;
 
-  FillPatchesTable callback(tbl);
-  invokeOnEach(
-    God->pool().byKindBegin(ResKind::patch),
-    God->pool().byKindEnd(ResKind::patch),
-    callback);
+  FillPatchesTable callback( tbl );
+  invokeOnEach( God->pool().byKindBegin(ResKind::patch),
+		God->pool().byKindEnd(ResKind::patch),
+		callback);
+  tbl.sort( 1 );	// Name
 
-  tbl.sort (1);                 // Name
-
-  if (tbl.empty())
-    zypper.out().info(_("No needed patches found."));
+  if ( tbl.empty() )
+    zypper.out().info( _("No needed patches found.") );
   else
     // display the result, even if --quiet specified
     cout << tbl;
 }
 
-static void list_patterns_xml(Zypper & zypper)
+static void list_patterns_xml( Zypper & zypper )
 {
   cout << "<pattern-list>" << endl;
 
@@ -432,13 +422,13 @@ static void list_patterns_xml(Zypper & zypper)
       continue;
 
     Pattern::constPtr pattern = asKind<Pattern>(it->resolvable());
-    cout << asXML(*pattern, isInstalled) << endl;
+    cout << asXML( *pattern, isInstalled ) << endl;
   }
 
   cout << "</pattern-list>" << endl;
 }
 
-static void list_pattern_table(Zypper & zypper)
+static void list_pattern_table( Zypper & zypper)
 {
   MIL << "Going to list patterns." << std::endl;
 
@@ -465,7 +455,7 @@ static void list_pattern_table(Zypper & zypper)
 
     Pattern::constPtr pattern = asKind<Pattern>(pi.resolvable());
     // hide patterns with user visible flag not set (bnc #538152)
-    if (!pattern->userVisible())
+    if ( !pattern->userVisible() )
       continue;
 
     bool isLocked = pi.status().isLocked();
@@ -476,24 +466,24 @@ static void list_pattern_table(Zypper & zypper)
 	<< pi.repoInfo().name()
 	<< string_weak_status(pi.status()) );
   }
-  tbl.sort(1); // Name
+  tbl.sort( 1 ); // Name
 
-  if (tbl.empty())
-    zypper.out().info(_("No patterns found."));
+  if ( tbl.empty() )
+    zypper.out().info(_("No patterns found.") );
   else
     // display the result, even if --quiet specified
     cout << tbl;
 }
 
-void list_patterns(Zypper & zypper)
+void list_patterns( Zypper & zypper )
 {
-  if (zypper.out().type() == Out::TYPE_XML)
-    list_patterns_xml(zypper);
+  if ( zypper.out().type() == Out::TYPE_XML )
+    list_patterns_xml( zypper );
   else
-    list_pattern_table(zypper);
+    list_pattern_table( zypper );
 }
 
-void list_packages(Zypper & zypper)
+void list_packages( Zypper & zypper )
 {
   MIL << "Going to list packages." << std::endl;
   Table tbl;
@@ -538,7 +528,7 @@ void list_packages(Zypper & zypper)
 
     for_( it, s->picklistBegin(), s->picklistEnd() )
     {
-      zypp::PoolItem pi = *it;
+      PoolItem pi = *it;
       if ( check )
       {
 	// if checks are more detailed, show only matches
@@ -575,8 +565,8 @@ void list_packages(Zypper & zypper)
     }
   }
 
-  if (tbl.empty())
-    zypper.out().info(_("No packages found."));
+  if ( tbl.empty() )
+    zypper.out().info(_("No packages found.") );
   else
   {
     // display the result, even if --quiet specified
@@ -588,33 +578,30 @@ void list_packages(Zypper & zypper)
 	<< table::EditionStyleSetter( tbl, _("Version") )
 	<< _("Arch") );
 
-    if (zypper.cOpts().count("sort-by-repo"))
-      tbl.sort(1); // Repo
+    if ( zypper.cOpts().count("sort-by-repo") )
+      tbl.sort( 1 ); // Repo
     else
-      tbl.sort(2); // Name
+      tbl.sort( 2 ); // Name
 
     cout << tbl;
   }
 }
 
-static void list_products_xml(Zypper & zypper)
+static void list_products_xml( Zypper & zypper )
 {
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
   cout << "<product-list>" << endl;
-  ResPool::byKind_iterator
-    it = God->pool().byKindBegin(ResKind::product),
-    e  = God->pool().byKindEnd(ResKind::product);
-  for (; it != e; ++it )
+  for_( it, God->pool().byKindBegin(ResKind::product), God->pool().byKindEnd(ResKind::product) )
   {
-    if (it->status().isInstalled() && notinst_only)
+    if ( it->status().isInstalled() && notinst_only )
       continue;
-    else if (!it->status().isInstalled() && installed_only)
+    else if ( !it->status().isInstalled() && installed_only )
       continue;
 
     Product::constPtr product = asKind<Product>(it->resolvable());
-    cout << asXML(*product, it->status().isInstalled()) << endl;
+    cout << asXML( *product, it->status().isInstalled() ) << endl;
   }
   cout << "</product-list>" << endl;
 }
@@ -633,10 +620,10 @@ static void add_product_table_row( Zypper & zypper, TableRow & tr,  const Produc
   // architecture
   tr << product->arch().asString();
   // is base
-  tr << (product->isTargetDistribution() ? _("Yes") : _("No"));
+  tr << asYesNo( product->isTargetDistribution() );
 }
 
-static void list_product_table(Zypper & zypper)
+static void list_product_table( Zypper & zypper )
 {
   MIL << "Going to list products." << std::endl;
 
@@ -657,38 +644,35 @@ static void list_product_table(Zypper & zypper)
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
-  ResPoolProxy::const_iterator
-      it = God->pool().proxy().byKindBegin(ResKind::product),
-      e  = God->pool().proxy().byKindEnd(ResKind::product);
-  for (; it != e; ++it )
+  for_( it, God->pool().proxy().byKindBegin(ResKind::product), God->pool().proxy().byKindEnd(ResKind::product) )
   {
     ui::Selectable::constPtr s = *it;
 
     // get the first installed object
     PoolItem installed;
-    if (!s->installedEmpty())
+    if ( !s->installedEmpty() )
       installed = s->installedObj();
 
     bool missedInstalled( installed ); // if no available hits, we need to print it
 
     // show available objects
-    for_(it, s->availableBegin(), s->availableEnd())
+    for_( it, s->availableBegin(), s->availableEnd() )
     {
       Product::constPtr product = asKind<Product>(it->resolvable());
       TableRow tr;
-      zypp::PoolItem pi = *it;
+      PoolItem pi = *it;
       bool isLocked = pi.status().isLocked();
 
-      if (installed)
+      if ( installed )
       {
-        if (identical(installed, pi))
+        if ( identical( installed, pi ) )
         {
-          if (notinst_only || !missedInstalled)
+          if ( notinst_only || !missedInstalled )
             continue;
           tr << lockStatusTag( "i", isLocked );
           // this is needed, other isTargetDistribution would not return
           // true for the installed base product
-          product = asKind<Product>(installed);
+          product = asKind<Product>( installed );
           missedInstalled = false;
 	  // bnc#841473: Downside of reporting the installed product (repo: @System)
 	  // instead of the available one (repo the product originated from) is that
@@ -697,14 +681,14 @@ static void list_product_table(Zypper & zypper)
         }
         else
         {
-          if (installed_only)
+          if ( installed_only )
             continue;
           tr << lockStatusTag( "v", isLocked );
         }
       }
       else
       {
-        if (installed_only)
+        if ( installed_only )
           continue;
         tr << lockStatusTag( "", isLocked );
       }
@@ -715,7 +699,7 @@ static void list_product_table(Zypper & zypper)
     if ( missedInstalled ) // no available hit, we need to print it
     {
       // show installed product in absence of an available one:
-      if (notinst_only)
+      if ( notinst_only )
         continue;
 
       TableRow tr;
@@ -727,32 +711,32 @@ static void list_product_table(Zypper & zypper)
   }
   tbl.sort(1); // Name
 
-  if (tbl.empty())
-    zypper.out().info(_("No products found."));
+  if ( tbl.empty() )
+    zypper.out().info(_("No products found.") );
   else
     // display the result, even if --quiet specified
     cout << tbl;
 }
 
-void list_products(Zypper & zypper)
+void list_products( Zypper & zypper )
 {
-  if (zypper.out().type() == Out::TYPE_XML)
-    list_products_xml(zypper);
+  if ( zypper.out().type() == Out::TYPE_XML )
+    list_products_xml( zypper );
   else
-    list_product_table(zypper);
+    list_product_table( zypper );
 }
 
 // list_what_provides() isn't called any longer, ZypperCommand::WHAT_PROVIDES_e is
 // replaced by Zypper::SEARCH_e with appropriate options (see Zypper.cc, line 919)
-void list_what_provides(Zypper & zypper, const string & str)
+void list_what_provides( Zypper & zypper, const std::string & str )
 {
-  Capability cap(Capability::guessPackageSpec(str));
-  sat::WhatProvides q(cap);
+  Capability cap( Capability::guessPackageSpec( str) );
+  sat::WhatProvides q( cap );
 
   // is there a provider for the requested capability?
-  if (q.empty())
+  if ( q.empty() )
   {
-    zypper.out().info(str::form(_("No providers of '%s' found."), str.c_str()));
+    zypper.out().info( str::form(_("No providers of '%s' found."), str.c_str()) );
     return;
   }
 
@@ -790,17 +774,6 @@ void list_what_provides(Zypper & zypper, const string & str)
     }
   }
   cout << t;
-/*
-
-  invokeOnEach(q.selectableBegin(), q.selectableEnd(), FillSearchTableSolvable(t) );
-  cout << t;
-  {
-    zypp::ui::SelectableTraits::AvailableItemSet res( q.poolItemBegin(), q.poolItemEnd() );
-
-    Table t;
-    invokeOnEach(res.begin(), res.end(), FillSearchTableSolvable(t) );
-    cout << t;
-  }*/
 }
 
 // Local Variables:

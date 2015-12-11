@@ -18,7 +18,7 @@
 
 namespace zypp {
 
-  struct LocksSaveReportReceiver : public zypp::callback::ReceiveReport<zypp::SavingLocksReport>
+  struct LocksSaveReportReceiver : public callback::ReceiveReport<SavingLocksReport>
   {
     virtual Action conflict( const PoolQuery& query, ConflictState state )
     {
@@ -37,7 +37,7 @@ namespace zypp {
     }
   };
 
-  struct CleanLocksReportReceiver : public zypp::callback::ReceiveReport<zypp::CleanEmptyLocksReport>
+  struct CleanLocksReportReceiver : public callback::ReceiveReport<CleanEmptyLocksReport>
   {
     virtual Action execute( const PoolQuery& query )
     {
@@ -57,8 +57,8 @@ namespace zypp {
 
 class LocksCallbacks {
   private:
-    zypp::LocksSaveReportReceiver _saveReport;
-    zypp::CleanLocksReportReceiver _cleanReport;
+    LocksSaveReportReceiver _saveReport;
+    CleanLocksReportReceiver _cleanReport;
 
   public:
     LocksCallbacks()

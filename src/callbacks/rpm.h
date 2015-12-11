@@ -107,13 +107,13 @@ namespace ZmartRecipients
 {
 
 // resolvable Message
-struct PatchMessageReportReceiver : public zypp::callback::ReceiveReport<zypp::target::PatchMessageReport>
+struct PatchMessageReportReceiver : public callback::ReceiveReport<target::PatchMessageReport>
 {
 
   /** Display \c patch->message().
    * Return \c true to continue, \c false to abort commit.
    */
-  virtual bool show( zypp::Patch::constPtr & patch )
+  virtual bool show( Patch::constPtr & patch )
   {
     Out & out = Zypper::instance()->out();
     std::ostringstream s;
@@ -126,12 +126,12 @@ struct PatchMessageReportReceiver : public zypp::callback::ReceiveReport<zypp::t
 };
 
 
-struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::target::PatchScriptReport>
+struct PatchScriptReportReceiver : public callback::ReceiveReport<target::PatchScriptReport>
 {
   std::string _label;
 
-  virtual void start( const zypp::Package::constPtr & package,
-		      const zypp::Pathname & path_r ) // script path
+  virtual void start( const Package::constPtr & package,
+		      const Pathname & path_r ) // script path
   {
     // TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
     _label = str::Format(_("Running: %s  (%s, %s)")) % path_r.basename() % package->name() % path_r.dirname();
@@ -171,7 +171,7 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
     zypper.out().error(description);
 
     Action action = (Action) read_action_ari (PROMPT_ARI_PATCH_SCRIPT_PROBLEM, ABORT);
-    if (action == zypp::target::PatchScriptReport::ABORT)
+    if (action == target::PatchScriptReport::ABORT)
       zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return action;
   }
@@ -185,9 +185,9 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
 
 ///////////////////////////////////////////////////////////////////
  // progress for removing a resolvable
-struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::RemoveResolvableReport>
+struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::rpm::RemoveResolvableReport>
 {
-  virtual void start( zypp::Resolvable::constPtr resolvable )
+  virtual void start( Resolvable::constPtr resolvable )
   {
     Zypper & zypper = *Zypper::instance();
     _progress.reset( new Out::ProgressBar( zypper.out(),
@@ -199,14 +199,14 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
     (*_progress)->range( 100 );	// progress reports percent
   }
 
-  virtual bool progress( int value, zypp::Resolvable::constPtr resolvable )
+  virtual bool progress( int value, Resolvable::constPtr resolvable )
   {
     if ( _progress )
       (*_progress)->set( value );
     return true;
   }
 
-  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description )
+  virtual Action problem( Resolvable::constPtr resolvable, Error error, const std::string & description )
   {
     // finsh progress; indicate error
     if ( _progress )
@@ -223,7 +223,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
     return (Action) read_action_ari (PROMPT_ARI_RPM_REMOVE_PROBLEM, ABORT);
   }
 
-  virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
+  virtual void finish( Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
   {
     // finsh progress; indicate error
     if ( _progress )
@@ -253,9 +253,9 @@ private:
 
 ///////////////////////////////////////////////////////////////////
 // progress for installing a resolvable
-struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
+struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::rpm::InstallResolvableReport>
 {
-  virtual void start( zypp::Resolvable::constPtr resolvable )
+  virtual void start( Resolvable::constPtr resolvable )
   {
     Zypper & zypper = *Zypper::instance();
     _progress.reset( new Out::ProgressBar( zypper.out(),
@@ -267,14 +267,14 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     (*_progress)->range( 100 );	// progress reports percent
   }
 
-  virtual bool progress( int value, zypp::Resolvable::constPtr resolvable )
+  virtual bool progress( int value, Resolvable::constPtr resolvable )
   {
     if ( _progress )
       (*_progress)->set( value );
     return true;
   }
 
-  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description, RpmLevel /*unused*/ )
+  virtual Action problem( Resolvable::constPtr resolvable, Error error, const std::string & description, RpmLevel /*unused*/ )
   {
     // finsh progress; indicate error
     if ( _progress )
@@ -291,7 +291,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     return (Action) read_action_ari (PROMPT_ARI_RPM_INSTALL_PROBLEM, ABORT);
   }
 
-  virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel /*unused*/ )
+  virtual void finish( Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel /*unused*/ )
   {
     // finsh progress; indicate error
     if ( _progress )
@@ -323,7 +323,7 @@ private:
 /// \class FindFileConflictstReportReceive
 /// \brief
 ///////////////////////////////////////////////////////////////////
-struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<zypp::target::FindFileConflictstReport>
+struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target::FindFileConflictstReport>
 {
   virtual void reportbegin()
   {

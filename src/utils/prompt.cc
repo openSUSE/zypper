@@ -21,28 +21,24 @@
 
 #include "prompt.h"
 
-using namespace std;
-
 // ----------------------------------------------------------------------------
 
-PromptOptions::PromptOptions(const std::string & option_str, unsigned int default_opt)
-  : _shown_count(-1)
+PromptOptions::PromptOptions( const std::string & option_str, unsigned default_opt )
+: _shown_count(-1)
 {
-  setOptions(option_str, default_opt);
+  setOptions( option_str, default_opt );
 }
 
 // ----------------------------------------------------------------------------
 
 PromptOptions::~PromptOptions()
-{
-
-}
+{}
 
 // ----------------------------------------------------------------------------
 
-void PromptOptions::setOptions(const std::string & option_str, unsigned int default_opt)
+void PromptOptions::setOptions( const std::string & option_str, unsigned default_opt )
 {
-  zypp::str::split(option_str, back_inserter(_options), "/");
+  str::split(option_str, back_inserter(_options), "/");
 
   if (_options.size() <= default_opt)
     INT << "Invalid default option index " << default_opt << endl;
@@ -54,7 +50,7 @@ void PromptOptions::setOptions(const std::string & option_str, unsigned int defa
 
 ColorString PromptOptions::optionString() const
 {
-  ostringstream str;
+  std::ostringstream str;
 
   unsigned shown = 0;
   unsigned maxidx = _shown_count < 0 ? _options.size()
@@ -85,40 +81,38 @@ ColorString PromptOptions::optionString() const
 }
 
 
-void PromptOptions::setOptionHelp(unsigned int opt, const std::string & help_str)
+void PromptOptions::setOptionHelp( unsigned opt, const std::string & help_str )
 {
-  if (help_str.empty())
+  if ( help_str.empty() )
     return;
 
-  if (opt >= _options.size())
+  if ( opt >= _options.size() )
   {
     WAR << "attempt to set option help for non-existing option."
         << " text: " << help_str << endl;
     return;
   }
 
-  if (opt >= _opt_help.capacity())
-    _opt_help.reserve(_options.size());
-  if (opt >= _opt_help.size())
-    _opt_help.resize(_options.size());
+  if ( opt >= _opt_help.capacity() )
+    _opt_help.reserve( _options.size() );
+  if ( opt >= _opt_help.size( ))
+    _opt_help.resize( _options.size() );
 
   _opt_help[opt] = help_str;
 }
 
 
-int PromptOptions::getReplyIndex(const string & reply) const
+int PromptOptions::getReplyIndex( const std::string & reply ) const
 {
-  DBG << " reply: " << reply
-    << " (" << zypp::str::toLower(reply) << " lowercase)" << endl;
+  DBG << " reply: " << reply << " (" << str::toLower(reply) << " lowercase)" << endl;
 
-  unsigned int i = 0;
-  for(StrVector::const_iterator it = _options.begin();
-      it != _options.end(); ++i, ++it)
+  unsigned i = 0;
+  for( StrVector::const_iterator it = _options.begin(); it != _options.end(); ++i, ++it )
   {
     DBG << "index: " << i << " option: " << *it << endl;
-    if (*it == zypp::str::toLower(reply))
+    if ( *it == str::toLower(reply) )
     {
-      if (isDisabled(i))
+      if ( isDisabled(i) )
         break;
       return i;
     }
@@ -128,62 +122,56 @@ int PromptOptions::getReplyIndex(const string & reply) const
 }
 
 bool PromptOptions::isYesNoPrompt() const
-{
-  return _options.size() == 2 &&
-      _options[0] == _("yes") &&
-      _options[1] == _("no");
-}
-
+{ return _options.size() == 2 && _options[0] == _("yes") && _options[1] == _("no"); }
 
 // ----------------------------------------------------------------------------
 
 #define CLEARLN "\x1B[2K\r"
 
 //! \todo The default values seems to be useless - we always want to auto-return 'retry' in case of no user input.
-int
-read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
+int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_action )
 {
-  Zypper & zypper = *Zypper::instance();
+  Zypper & zypper( *Zypper::instance() );
 
-  if (default_action > 2 || default_action < 0)
+  if ( default_action > 2 || default_action < 0 )
   {
     WAR << pid << " bad default action" << endl;
     default_action = 0;
   }
 
   // wait 'timeout' number of seconds and return the default in non-interactive mode
-  if (zypper.globalOpts().non_interactive)
+  if ( zypper.globalOpts().non_interactive )
   {
-    zypper.out().info(zypp::str::form(_("Retrying in %u seconds..."), timeout));
-    sleep(timeout);
+    zypper.out().info( str::form(_("Retrying in %u seconds..."), timeout) );
+    sleep( timeout );
     MIL << pid << " running non-interactively, returning " << default_action << endl;
     return default_action;
   }
 
-  PromptOptions poptions(_("a/r/i"), (unsigned int) default_action);
-  zypper.out().prompt(pid, _("Abort, retry, ignore?"), poptions);
+  PromptOptions poptions(_("a/r/i"), (unsigned) default_action );
+  zypper.out().prompt( pid, _("Abort, retry, ignore?"), poptions );
   cout << endl;
 
-  while (timeout)
+  while ( timeout )
   {
     char reply = 0;
-    unsigned int reply_int = (unsigned int) default_action;
+    unsigned reply_int = (unsigned)default_action;
     pollfd pollfds;
     pollfds.fd = 0; // stdin
     pollfds.events = POLLIN; // wait only for data to read
 
     //! \todo poll() reports the file is ready only after it contains newline
     //!       is there a way to do this without waiting for newline?
-    while (poll(&pollfds, 1, 5)) // some user input, timeout 5msec
+    while ( poll( &pollfds, 1, 5 ) ) // some user input, timeout 5msec
     {
       reply = getchar();
-      char reply_str[2] = {reply, 0};
-      DBG << pid << " reply: " << reply << " (" << zypp::str::toLower(reply_str) << " lowercase)" << endl;
+      char reply_str[2] = { reply, 0 };
+      DBG << pid << " reply: " << reply << " (" << str::toLower(reply_str) << " lowercase)" << endl;
       bool got_valid_reply = false;
-      for (unsigned int i = 0; i < poptions.options().size(); i++)
+      for ( unsigned i = 0; i < poptions.options().size(); i++ )
       {
         DBG << pid << " index: " << i << " option: " << poptions.options()[i] << endl;
-        if (poptions.options()[i] == zypp::str::toLower(reply_str))
+        if ( poptions.options()[i] == str::toLower(reply_str) )
         {
           reply_int = i;
           got_valid_reply = true;
@@ -191,29 +179,29 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
         }
       }
 
-      if (got_valid_reply)
+      if ( got_valid_reply )
       {
         // eat the rest of input
-        do {} while (getchar() != '\n');
+        do {} while ( getchar() != '\n' );
         return reply_int;
       }
-      else if (feof(stdin))
+      else if ( feof(stdin) )
       {
-        zypper.out().info(zypp::str::form(_("Retrying in %u seconds..."), timeout));
+        zypper.out().info( str::form(_("Retrying in %u seconds..."), timeout) );
         WAR << pid << " no good input, returning " << default_action
           << " in " << timeout << " seconds." << endl;
-        sleep(timeout);
+        sleep( timeout );
         return default_action;
       }
       else
         WAR << pid << " Unknown char " << reply << endl;
     }
 
-    string msg = str::Format(PL_("Autoselecting '%s' after %u second.",
-				 "Autoselecting '%s' after %u seconds.",
-				 timeout)) % poptions.options()[default_action] % timeout;
+    std::string msg = str::Format(PL_("Autoselecting '%s' after %u second.",
+				      "Autoselecting '%s' after %u seconds.",
+				      timeout)) % poptions.options()[default_action] % timeout;
 
-    if (zypper.out().type() == Out::TYPE_XML)
+    if ( zypper.out().type() == Out::TYPE_XML )
       zypper.out().info( msg );	// maybe progress??
     else
     {
@@ -221,11 +209,11 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
       cout.flush();
     }
 
-    sleep(1);
+    sleep( 1 );
     --timeout;
   }
 
-  if (zypper.out().type() != Out::TYPE_XML)
+  if ( zypper.out().type() != Out::TYPE_XML )
     cout << CLEARLN << _("Trying again...") << endl;
 
   return default_action;
@@ -235,38 +223,36 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
 // ----------------------------------------------------------------------------
 //template<typename Action>
 //Action ...
-int read_action_ari (PromptId pid, int default_action)
+int read_action_ari( PromptId pid, int default_action )
 {
-  Zypper & zypper = *Zypper::instance();
+  Zypper & zypper( *Zypper::instance() );
   // translators: "a/r/i" are the answers to the
   // "Abort, retry, ignore?" prompt
   // Translate the letters to whatever is suitable for your language.
   // the answers must be separated by slash characters '/' and must
   // correspond to abort/retry/ignore in that order.
   // The answers should be lower case letters.
-  PromptOptions popts(_("a/r/i"), (unsigned int) default_action);
-  if (!zypper.globalOpts().non_interactive)
+  PromptOptions popts(_("a/r/i"), (unsigned) default_action );
+  if ( !zypper.globalOpts().non_interactive )
     clear_keyboard_buffer();
-  zypper.out().prompt(pid, _("Abort, retry, ignore?"), popts);
-  return get_prompt_reply(zypper, pid, popts);
+  zypper.out().prompt( pid, _("Abort, retry, ignore?"), popts );
+  return get_prompt_reply( zypper, pid, popts );
 }
 
 // ----------------------------------------------------------------------------
 
-bool read_bool_answer(PromptId pid, const string & question, bool default_answer)
+bool read_bool_answer( PromptId pid, const std::string & question, bool default_answer )
 {
-  Zypper & zypper = *Zypper::instance();
-  string yn = string(_("yes")) + "/" + _("no");
-  PromptOptions popts(yn, default_answer ? 0 : 1);
-  if (!zypper.globalOpts().non_interactive)
+  Zypper & zypper( *Zypper::instance() );
+  std::string yn( std::string(_("yes")) + "/" + _("no") );
+  PromptOptions popts( yn, default_answer ? 0 : 1 );
+  if ( ! zypper.globalOpts().non_interactive )
     clear_keyboard_buffer();
-  zypper.out().prompt(pid, question, popts);
-  return !get_prompt_reply(zypper, pid, popts);
+  zypper.out().prompt( pid, question, popts );
+  return !get_prompt_reply( zypper, pid, popts );
 }
 
-unsigned int get_prompt_reply(Zypper & zypper,
-                              PromptId pid,
-                              const PromptOptions & poptions)
+unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & poptions )
 {
   // non-interactive mode: return the default reply
   if (zypper.globalOpts().non_interactive)
@@ -282,21 +268,21 @@ unsigned int get_prompt_reply(Zypper & zypper,
   // set runtimeData().waiting_for_input flag while in this function
   struct Bye
   {
-    Bye(bool * flag) : _flag(flag) { *_flag = true; }
-    ~Bye() { *_flag = false; }
-    bool * _flag;
-  } say_goodbye(&zypper.runtimeData().waiting_for_input);
+    Bye( bool & flag ) : _flag( flag ) { _flag = true; }
+    ~Bye() { _flag = false; }
+    bool & _flag;
+  } say_goodbye( zypper.runtimeData().waiting_for_input );
 
   // open a terminal for input (bnc #436963)
-  ifstream stm("/dev/tty", ifstream::in);
+  std::ifstream stm( "/dev/tty" );
   // istream & stm = cin;
 
-  string reply;
+  std::string reply;
   int reply_int = -1;
   bool stmgood;
-  while ((stmgood = stm.good()))
+  while ( (stmgood = stm.good()) )
   {
-    reply = zypp::str::getline (stm, zypp::str::TRIM);
+    reply = str::getline (stm, str::TRIM);
 
     // empty reply is a good reply (on enter)
     if (reply.empty())
@@ -322,7 +308,7 @@ unsigned int get_prompt_reply(Zypper & zypper,
     else if ((reply_int = poptions.getReplyIndex(reply)) >= 0) // got valid reply
       break;
 
-    ostringstream s;
+    std::ostringstream s;
     s << str::Format(_("Invalid answer '%s'.")) % reply;
     if ( poptions.isYesNoPrompt() )
     {
@@ -356,42 +342,34 @@ unsigned int get_prompt_reply(Zypper & zypper,
   return reply_int;
 }
 
-// ---------------------------------------------------------------------------
-
-static const char * prefill = NULL;
-
-static int init_line(void)
+///////////////////////////////////////////////////////////////////
+namespace
 {
-  if (prefill)
-  {
-    rl_replace_line(prefill, 1);
-    rl_end_of_line(1,0);
-    rl_redisplay();
-  }
-  return 1;
-}
+  static const char * prefill = nullptr;
 
-string get_text(const string & prompt, const string & prefilled)
+  int init_line()
+  {
+    if ( prefill )
+    {
+      rl_replace_line( prefill, 1 );
+      rl_end_of_line( 1, 0 );
+      rl_redisplay();
+    }
+    return 1;
+  }
+} // namespace
+///////////////////////////////////////////////////////////////////
+std::string get_text( const std::string & prompt, const std::string & prefilled )
 {
-  // A static variable for holding the line.
-  static char * line_read = NULL;
-
-  prefill = prefilled.c_str();
-
-  /* If the buffer has already been allocated,
-     return the memory to the free pool. */
-  if (line_read)
-  {
-    free (line_read);
-    line_read = NULL;
-  }
-
-  rl_pre_input_hook = init_line;
+  std::string ret;
 
   /* Get a line from the user. */
-  line_read = ::readline (prompt.c_str());
-
-  if (line_read)
-    return line_read;
-  return string();
+  prefill = prefilled.c_str();
+  rl_pre_input_hook = init_line;
+  if ( char * line_read = ::readline( prompt.c_str() ) )
+  {
+    ret = line_read;
+    ::free( line_read );
+  }
+  return ret;
 }

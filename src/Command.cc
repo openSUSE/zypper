@@ -14,6 +14,8 @@
 #include "main.h"
 #include "Command.h"
 
+using namespace zypp;
+
 // redefine _ gettext macro defined by ZYpp
 #ifdef _
 #undef _
@@ -23,9 +25,9 @@
 ///////////////////////////////////////////////////////////////////
 namespace
 {
-  static zypp::NamedValue<ZypperCommand::Command> & table()
+  static NamedValue<ZypperCommand::Command> & table()
   {
-    static zypp::NamedValue<ZypperCommand::Command> _table;
+    static NamedValue<ZypperCommand::Command> _table;
     if ( _table.empty() )
     {
 #define _t(C) _table( ZypperCommand::C )
@@ -196,7 +198,7 @@ ZypperCommand::Command ZypperCommand::parse( const std::string & strval_r ) cons
 
     if ( ! isSubcommand( strval_r ) )
     {
-      ZYPP_THROW( zypp::Exception( zypp::str::form(_("Unknown command '%s'"), strval_r.c_str() ) ) );
+      ZYPP_THROW( Exception( str::form(_("Unknown command '%s'"), strval_r.c_str() ) ) );
     }
   }
   return cmd;

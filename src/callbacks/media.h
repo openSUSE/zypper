@@ -21,19 +21,19 @@
 // auto-repeat counter limit
 #define REPEAT_LIMIT 3
 
-using zypp::media::MediaChangeReport;
-using zypp::media::DownloadProgressReport;
+using media::MediaChangeReport;
+using media::DownloadProgressReport;
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
 {
   class repeat_counter_ {
     private:
-      zypp::Url url;
+      Url url;
       unsigned counter;
     public:
       repeat_counter_():counter(0){}
-      bool counter_overrun(const zypp::Url & u){
+      bool counter_overrun(const Url & u){
         if (u==url)
         {
           if (++counter>=REPEAT_LIMIT)
@@ -51,29 +51,29 @@ namespace ZmartRecipients
       }
   };
 
-  struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
+  struct MediaChangeReportReceiver : public callback::ReceiveReport<MediaChangeReport>
   {
     virtual MediaChangeReport::Action
-    requestMedia(zypp::Url & url,
+    requestMedia(Url & url,
                  unsigned                         mediumNr,
                  const std::string &              label,
                  MediaChangeReport::Error         error,
                  const std::string &              description,
                  const std::vector<std::string> & devices,
-                 unsigned int &                   index);
+                 unsigned &                   index);
     private:
       repeat_counter_ repeat_counter;
   };
 
   // progress for downloading a file
   struct DownloadProgressReportReceiver
-    : public zypp::callback::ReceiveReport<zypp::media::DownloadProgressReport>
+    : public callback::ReceiveReport<media::DownloadProgressReport>
   {
     DownloadProgressReportReceiver()
       : _gopts(Zypper::instance()->globalOpts()), _be_quiet(false)
     {}
 
-    virtual void start( const zypp::Url & uri, zypp::Pathname localfile )
+    virtual void start( const Url & uri, Pathname localfile )
     {
       _last_reported = time(NULL);
       _last_drate_avg = -1;
@@ -85,7 +85,7 @@ namespace ZmartRecipients
              // don't show download info unless show_media_progress_hack is used
              !Zypper::instance()->runtimeData().show_media_progress_hack ||
              // don't report download of the media file (bnc #330614)
-             zypp::Pathname(uri.getPathName()).basename() == "media"
+             Pathname(uri.getPathName()).basename() == "media"
            )
          )
       {
@@ -99,7 +99,7 @@ namespace ZmartRecipients
     }
 
     //! \todo return false on SIGINT
-    virtual bool progress(int value, const zypp::Url & uri, double drate_avg, double drate_now)
+    virtual bool progress(int value, const Url & uri, double drate_avg, double drate_now)
     {
       // don't report more often than 1 second
       time_t now = time(NULL);
@@ -129,7 +129,7 @@ namespace ZmartRecipients
     }
 
     virtual DownloadProgressReport::Action
-    problem( const zypp::Url & uri, DownloadProgressReport::Error error, const std::string & description )
+    problem( const Url & uri, DownloadProgressReport::Error error, const std::string & description )
     {
       DBG << "media problem" << std::endl;
       if (_be_quiet)
@@ -144,7 +144,7 @@ namespace ZmartRecipients
     }
 
     // used only to finish, errors will be reported in media change callback (libzypp 3.20.0)
-    virtual void finish( const zypp::Url & uri, Error error, const std::string & konreason )
+    virtual void finish( const Url & uri, Error error, const std::string & konreason )
     {
       if (_be_quiet)
         return;
@@ -161,15 +161,14 @@ namespace ZmartRecipients
   };
 
 
-  struct AuthenticationReportReceiver : public zypp::callback::ReceiveReport<zypp::media::AuthenticationReport>
+  struct AuthenticationReportReceiver : public callback::ReceiveReport<media::AuthenticationReport>
   {
-    virtual bool prompt(const zypp::Url & url,
+    virtual bool prompt(const Url & url,
                         const std::string & description,
-                        zypp::media::AuthData & auth_data);
+                        media::AuthData & auth_data);
   };
 
-    ///////////////////////////////////////////////////////////////////
-}; // namespace ZmartRecipients
+} // namespace ZmartRecipients
 ///////////////////////////////////////////////////////////////////
 
 class MediaCallbacks {

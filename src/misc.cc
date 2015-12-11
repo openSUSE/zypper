@@ -16,7 +16,6 @@
 #include <zypp/Capabilities.h>
 #include <zypp/ui/Selectable.h>
 
-
 #include <zypp/RepoInfo.h>
 
 #include <zypp/PoolQuery.h>
@@ -32,34 +31,29 @@
 
 #include "misc.h"
 
-using namespace std;
-using namespace zypp;
-
 extern ZYpp::Ptr God;
 
-
-void remove_selections(Zypper & zypper)
+void remove_selections( Zypper & zypper )
 {
   // zypp gets initialized only upon the first successful processing of
   // command options, if the command was not the 'help'. bnc #372696
-  if (!God)
+  if ( !God )
     return;
 
   MIL << "Removing user selections from the solver pool" << endl;
-
   DBG << "Removing user setToBeInstalled()/Removed()" << endl;
 
   // iterate pool, searching for ResStatus::isByUser()
   // TODO optimize: remember user selections and iterate by name
   // TODO optimize: it seems this is actually needed only if the selection was
   //      not committed (user has chosen not to continue)
-  const ResPool & pool = God->pool();
+  const ResPool & pool( God->pool() );
 
-  for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it)
-    if (it->status().isByUser())
+  for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
+    if ( it->status().isByUser() )
     {
       DBG << "Removing user setToBeInstalled()/Removed()" << endl;
-      it->status().resetTransact(zypp::ResStatus::USER);
+      it->status().resetTransact( ResStatus::USER );
     }
 
   DBG << "Removing user addRequire() addConflict()" << endl;
@@ -83,7 +77,8 @@ void remove_selections(Zypper & zypper)
 }
 
 // ----------------------------------------------------------------------------
-namespace {
+namespace
+{
   inline std::string get_display_name( const PoolItem & obj )
   {
     // in most cases we want to display full product name (bnc #589333)
@@ -93,59 +88,43 @@ namespace {
   }
 } // namespace
 
-/* debugging
-static
-ostream& operator << (ostream & stm, ios::iostate state)
-{
-  return stm << (state & ifstream::eofbit ? "Eof ": "")
-	     << (state & ifstream::badbit ? "Bad ": "")
-	     << (state & ifstream::failbit ? "Fail ": "")
-	     << (state == 0 ? "Good ": "");
-}
-*/
-
 // TODO confirm licenses
 // - make this more user-friendly e.g. show only license name and
 //  ask for [y/n/r] with 'r' for read the license text
 //  (opened throu more or less, etc...)
 // - after negative answer, call solve_and_commit() again
-bool confirm_licenses(Zypper & zypper)
+bool confirm_licenses( Zypper & zypper )
 {
   bool confirmed = true;
-  bool license_auto_agree =
-    zypper.cOpts().count("auto-agree-with-licenses")
-    || zypper.cOpts().count("agree-to-third-party-licenses");
+  bool license_auto_agree = zypper.cOpts().count("auto-agree-with-licenses")
+                         || zypper.cOpts().count("agree-to-third-party-licenses");
 
   for ( const PoolItem & pi : God->pool() )
   {
     bool to_accept = true;
 
-    if (pi.status().isToBeInstalled() &&
-        !pi.licenseToConfirm().empty())
+    if ( pi.status().isToBeInstalled() && !pi.licenseToConfirm().empty() )
     {
-      ui::Selectable::Ptr selectable =
-          God->pool().proxy().lookup(pi.kind(), pi.name());
+      ui::Selectable::Ptr selectable = God->pool().proxy().lookup( pi.kind(), pi.name() );
 
       // this is an upgrade, check whether the license changed
       // for now we only do dumb string comparison (bnc #394396)
-      if (selectable->hasInstalledObj())
+      if ( selectable->hasInstalledObj() )
       {
         bool differ = false;
-        for_(inst, selectable->installedBegin(), selectable->installedEnd())
-          if (inst->resolvable()->licenseToConfirm() != pi.licenseToConfirm())
+        for_( inst, selectable->installedBegin(), selectable->installedEnd() )
+	  if ( inst->resolvable()->licenseToConfirm() != pi.licenseToConfirm() )
           { differ = true; break; }
 
-        if (!differ)
+        if ( !differ )
         {
-          DBG << "old and new license does not differ for "
-              << pi.name() << endl;
+          DBG << "old and new license does not differ for " << pi.name() << endl;
           continue;
         }
-        DBG << "new license for " << pi.name()
-            << " is different, needs confirmation " << endl;
+        DBG << "new license for " << pi.name() << " is different, needs confirmation " << endl;
       }
 
-      if (license_auto_agree)
+      if ( license_auto_agree )
       {
 	zypper.out().info(
 	  // translators: the first %s is name of the resolvable,
@@ -158,11 +137,10 @@ bool confirm_licenses(Zypper & zypper)
         continue;
       }
 
-      ostringstream s;
-      string kindstr =
-        pi.kind() != ResKind::package ?
-          " (" + kind_to_string_localized(pi.kind(), 1) + ")" :
-          string();
+      std::ostringstream s;
+      std::string kindstr;
+      if ( pi.kind() != ResKind::package )
+	kindstr = " (" + kind_to_string_localized( pi.kind(), 1 ) + ")";
 
       if ( !pi.needToAcceptLicense() )
         to_accept = false;
@@ -170,30 +148,29 @@ bool confirm_licenses(Zypper & zypper)
       if (to_accept)
       {
         // introduction
-        s << str::form(
-                       // translators: the first %s is the name of the package, the second
-                       // is " (package-type)" if other than "package" (patch/product/pattern)
-                       _("In order to install '%s'%s, you must agree to terms of the following license agreement:"),
-                       get_display_name( pi ).c_str(), kindstr.c_str());
-        s << endl << endl;
+	// translators: the first %s is the name of the package, the second
+	// is " (package-type)" if other than "package" (patch/product/pattern)
+	s << str::form(_("In order to install '%s'%s, you must agree to terms of the following license agreement:"),
+		       get_display_name( pi ).c_str(), kindstr.c_str());
+	s << endl << endl;
       }
       // license text
       printRichText( s, pi.licenseToConfirm() );
 
       // show in pager unless we are read by a machine or the pager fails
-      if (zypper.globalOpts().machine_readable || !show_text_in_pager(s.str()))
-        zypper.out().info(s.str(), Out::QUIET);
+      if ( zypper.globalOpts().machine_readable || !show_text_in_pager( s.str() ) )
+        zypper.out().info( s.str(), Out::QUIET );
 
-      if (to_accept)
+      if ( to_accept )
       {
         // lincense prompt
-        string question = _("Do you agree with the terms of the license?");
+        std::string question( _("Do you agree with the terms of the license?") );
         //! \todo add 'v' option to view the license again, add prompt help
-        if (!read_bool_answer(PROMPT_YN_LICENSE_AGREE, question, license_auto_agree))
+        if ( !read_bool_answer( PROMPT_YN_LICENSE_AGREE, question, license_auto_agree ) )
         {
           confirmed = false;
 
-          if (zypper.globalOpts().non_interactive)
+          if ( zypper.globalOpts().non_interactive )
           {
             zypper.out().info(_("Aborting installation due to the need for license confirmation."), Out::QUIET );
 	    zypper.out().info(
@@ -209,7 +186,7 @@ bool confirm_licenses(Zypper & zypper)
 	      // translators: e.g. "... with flash package license."
 	      str::Format(_("Aborting installation due to user disagreement with %s %s license."))
 	      % get_display_name( pi )
-	      % kind_to_string_localized(pi.kind(), 1), Out::QUIET );
+	      % kind_to_string_localized( pi.kind(), 1 ), Out::QUIET );
 	    MIL << "License(s) NOT confirmed (interactive)" << endl;
 	  }
           break;
@@ -217,20 +194,16 @@ bool confirm_licenses(Zypper & zypper)
       }
     }
   }
-
   return confirmed;
 }
 
 // ----------------------------------------------------------------------------
 
-void report_licenses(Zypper & zypper)
+void report_licenses( Zypper & zypper )
 {
   PoolQuery q;
-
-  PoolItem inst_with_repo;
-
   unsigned count_installed = 0, count_installed_repo = 0, count_installed_eula = 0;
-  set<string> unique_licenses;
+  std::set<std::string> unique_licenses;
 
   for ( ui::Selectable::constPtr s : q.selectable() )
   {
@@ -243,7 +216,7 @@ void report_licenses(Zypper & zypper)
 
       cout
         << s->name() << "-" << inst.edition()
-        << " (" << kind_to_string_localized(s->kind(), 1) << ")"
+        << " (" << kind_to_string_localized( s->kind(), 1 ) << ")"
         << endl;
 
       if ( s->kind() == ResKind::package )
@@ -252,9 +225,10 @@ void report_licenses(Zypper & zypper)
           << _("License") << ": "
           << asKind<Package>(inst)->license()
           << endl;
-        unique_licenses.insert(asKind<Package>(inst)->license());
+        unique_licenses.insert( asKind<Package>(inst)->license() );
       }
 
+      PoolItem inst_with_repo;
       for ( const PoolItem & api : s->available() )
       {
         if ( identical(api, inst) )
@@ -284,15 +258,15 @@ void report_licenses(Zypper & zypper)
   cout << str::form(_("Installed packages with counterparts in repositories: %d"), count_installed_repo) << endl;
   cout << str::form(_("Installed packages with EULAs: %d"), count_installed_eula) << endl;
 
-  cout << str::form("Package licenses (%u):", (unsigned int) unique_licenses.size()) << endl;
-  for_(it, unique_licenses.begin(), unique_licenses.end())
+  cout << str::form("Package licenses (%u):", (unsigned) unique_licenses.size()) << endl;
+  for_( it, unique_licenses.begin(), unique_licenses.end() )
     cout << "* " << *it << endl;
 }
 
 // ----------------------------------------------------------------------------
 namespace
 {
-  SrcPackage::constPtr source_find( Zypper & zypper_r, const string & arg_r )
+  SrcPackage::constPtr source_find( Zypper & zypper_r, const std::string & arg_r )
   {
     /*
      * Workflow:
@@ -307,14 +281,14 @@ namespace
       return asKind<SrcPackage>( p->theObj().resolvable() );
 
     // else: try package and packages sourcepackage
-    p = zypp::ui::Selectable::get( zypp::ResKind::package, arg_r );
+    p = ui::Selectable::get( ResKind::package, arg_r );
     if ( p )
     {
       std::string name( p->theObj()->asKind<Package>()->sourcePkgName() );
       DBG << "looking for source package of package: " << name << endl;
       zypper_r.out().info( str::Format(_("Package '%s' has source package '%s'.")) % arg_r % name );
 
-      p = zypp::ui::Selectable::get( ResKind::srcpackage, p->theObj()->asKind<Package>()->sourcePkgName() );
+      p = ui::Selectable::get( ResKind::srcpackage, p->theObj()->asKind<Package>()->sourcePkgName() );
       if ( p )
 	return asKind<SrcPackage>( p->theObj().resolvable() );
       else
@@ -330,7 +304,7 @@ namespace
 } // namespace
 // ----------------------------------------------------------------------------
 
-void build_deps_install(Zypper & zypper)
+void build_deps_install( Zypper & zypper )
 {
   /*
    * Workflow:
@@ -339,40 +313,39 @@ void build_deps_install(Zypper & zypper)
    * 2. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
    */
 
-  for (vector<string>::const_iterator it = zypper.arguments().begin();
-       it != zypper.arguments().end(); ++it)
+  for ( const std::string & arg : zypper.arguments() )
   {
-    SrcPackage::constPtr srcpkg = source_find(zypper, *it);
+    SrcPackage::constPtr srcpkg = source_find( zypper, arg );
 
-    if (srcpkg)
+    if ( srcpkg )
     {
       DBG << "Injecting build requieres for " << srcpkg << endl;
 
       // install build depenendcies only
-      if (zypper.cOpts().count("build-deps-only"))
-        for_(itc, srcpkg->requires().begin(), srcpkg->requires().end())
+      if ( zypper.cOpts().count("build-deps-only") )
+        for_( itc, srcpkg->requires().begin(), srcpkg->requires().end() )
         {
-          God->resolver()->addRequire(*itc);
+          God->resolver()->addRequire( *itc );
           DBG << "requiring: " << *itc << endl;
         }
       // install the source package with build deps
       else
       {
-        Capability cap(srcpkg->name(), Rel::EQ, srcpkg->edition(), ResKind::srcpackage);
-        God->resolver()->addRequire(cap);
+        Capability cap( srcpkg->name(), Rel::EQ, srcpkg->edition(), ResKind::srcpackage );
+        God->resolver()->addRequire( cap );
         DBG << "requiring: " << cap << endl;
       }
     }
-    else if (!zypper.globalOpts().ignore_unknown)
+    else if ( !zypper.globalOpts().ignore_unknown )
     {
-      zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+      zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
     }
   }
 }
 
 // ----------------------------------------------------------------------------
 
-void mark_src_pkgs(Zypper & zypper)
+void mark_src_pkgs( Zypper & zypper )
 {
   /*
    * Workflow:
@@ -381,21 +354,20 @@ void mark_src_pkgs(Zypper & zypper)
    * 2. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
    */
 
-  for (vector<string>::const_iterator it = zypper.arguments().begin();
-       it != zypper.arguments().end(); ++it)
+  for ( const std::string & arg : zypper.arguments() )
   {
-    SrcPackage::constPtr srcpkg = source_find(zypper, *it);
+    SrcPackage::constPtr srcpkg = source_find( zypper, arg );
 
     if ( srcpkg )
-      zypper.runtimeData().srcpkgs_to_install.insert(srcpkg);
+      zypper.runtimeData().srcpkgs_to_install.insert( srcpkg );
   }
 }
 
 // ----------------------------------------------------------------------------
 
-void install_src_pkgs(Zypper & zypper)
+void install_src_pkgs( Zypper & zypper )
 {
-  for_(it, zypper.runtimeData().srcpkgs_to_install.begin(), zypper.runtimeData().srcpkgs_to_install.end())
+  for_( it, zypper.runtimeData().srcpkgs_to_install.begin(), zypper.runtimeData().srcpkgs_to_install.end() )
   {
     SrcPackage::constPtr srcpkg = *it;
     zypper.out().info( str::Format(_("Installing source package %s-%s")) % srcpkg->name() % srcpkg->edition() );
@@ -403,40 +375,39 @@ void install_src_pkgs(Zypper & zypper)
 
     try
     {
-      if (zypper.cOpts().find("download-only") != zypper.cOpts().end())
+      if ( zypper.cOpts().find("download-only") != zypper.cOpts().end() )
       {
-        God->provideSrcPackage(srcpkg).resetDispose();
+        God->provideSrcPackage( srcpkg ).resetDispose();
 
         zypper.out().info( str::Format(_("Source package %s-%s successfully retrieved.")) % srcpkg->name() % srcpkg->edition() );
       }
       else
       {
-        God->installSrcPackage(srcpkg);
+        God->installSrcPackage( srcpkg );
 
         zypper.out().info( str::Format(_("Source package %s-%s successfully installed.")) % srcpkg->name() % srcpkg->edition() );
       }
     }
-    catch (const Exception & ex)
+    catch ( const Exception & ex )
     {
-      ZYPP_CAUGHT(ex);
+      ZYPP_CAUGHT( ex );
       zypper.out().error( ex, str::Format(_("Problem installing source package %s-%s:")) % srcpkg->name() % srcpkg->edition() );
-      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
     }
   }
 }
 
 // ----------------------------------------------------------------------------
 
-zypp::PoolQuery
-pkg_spec_to_poolquery(const Capability & cap, const list<string> & repos)
+PoolQuery pkg_spec_to_poolquery( const Capability & cap, const std::list<std::string> & repos )
 {
-  sat::Solvable::SplitIdent splid(cap.detail().name());
+  sat::Solvable::SplitIdent splid( cap.detail().name() );
 
   PoolQuery q;
-  q.addKind(splid.kind());
+  q.addKind( splid.kind() );
   q.setMatchGlob();
-  for_(it, repos.begin(), repos.end())
-    q.addRepo(*it);
+  for_( it, repos.begin(), repos.end() )
+    q.addRepo( *it );
   q.addDependency( sat::SolvAttr::name, splid.name().asString(),
 		   // only package names (no provides)
 		   cap.detail().op(), cap.detail().ed(),
@@ -445,28 +416,25 @@ pkg_spec_to_poolquery(const Capability & cap, const list<string> & repos)
 		   // defaults Arch_empty (NOOP) if no arch in cap
 
   DBG << "query: " << q << endl;
-
   return q;
 }
 
-zypp::PoolQuery
-pkg_spec_to_poolquery(const Capability & cap, const string & repo)
+PoolQuery pkg_spec_to_poolquery( const Capability & cap, const std::string & repo )
 {
-  list<string> repos;
-  if (!repo.empty())
-    repos.push_back(repo);
-  return pkg_spec_to_poolquery(cap, repos);
+  std::list<std::string> repos;
+  if ( !repo.empty() )
+    repos.push_back( repo );
+  return pkg_spec_to_poolquery( cap, repos );
 }
 
-set<PoolItem>
-get_installed_providers(const Capability & cap)
+std::set<PoolItem> get_installed_providers( const Capability & cap )
 {
-  set<PoolItem> providers;
+  std::set<PoolItem> providers;
 
-  sat::WhatProvides q(cap);
-  for_(it, q.poolItemBegin(), q.poolItemEnd())
+  sat::WhatProvides q( cap );
+  for_( it, q.poolItemBegin(), q.poolItemEnd() )
   {
-    if (traits::isPseudoInstalled( (*it).satSolvable().kind() ) )
+    if ( traits::isPseudoInstalled( (*it).satSolvable().kind() ) )
     {
       if ( (*it).isSatisfied() )
 	providers.insert( *it );
@@ -474,20 +442,18 @@ get_installed_providers(const Capability & cap)
     else if ( (*it).satSolvable().isSystem() )
       providers.insert( *it );
   }
-
   return providers;
 }
 
-zypp::PoolItem get_installed_obj(zypp::ui::Selectable::Ptr & s)
+PoolItem get_installed_obj( ui::Selectable::Ptr & s )
 {
   PoolItem installed;
-  if (traits::isPseudoInstalled(s->kind()))
+  if ( traits::isPseudoInstalled( s->kind() ) )
   {
-    for_(it, s->availableBegin(), s->availableEnd())
+    for_( it, s->availableBegin(), s->availableEnd() )
       // this is OK also for patches - isSatisfied() excludes !isRelevant()
-      if (it->status().isSatisfied()
-          && (!installed || installed->edition() < (*it)->edition()))
-        installed = *it;
+      if ( it->status().isSatisfied() && ( !installed || installed->edition() < (*it)->edition() ) )
+	installed = *it;
   }
   else
     installed = s->installedObj();

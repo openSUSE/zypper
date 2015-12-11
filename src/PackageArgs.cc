@@ -16,104 +16,95 @@
 #include "Zypper.h"
 #include "repos.h"
 
-using namespace std;
-using namespace zypp;
-
-
-PackageArgs::PackageArgs(const zypp::ResKind & kind, const Options & opts)
-  : zypper(*Zypper::instance()), _opts(opts)
+PackageArgs::PackageArgs( const ResKind & kind, const Options & opts )
+: zypper( *Zypper::instance() )
+, _opts( opts )
 {
-  preprocess(zypper.arguments());
-  argsToCaps(kind);
+  preprocess( zypper.arguments() );
+  argsToCaps( kind );
 }
 
-PackageArgs::PackageArgs(
-    const vector<string> & args,
-    const zypp::ResKind & kind,
-    const Options & opts)
-  : zypper(*Zypper::instance()), _opts(opts)
+PackageArgs::PackageArgs( const std::vector<std::string> & args, const ResKind & kind, const Options & opts )
+: zypper( *Zypper::instance() )
+, _opts( opts )
 {
-  preprocess(args);
-  argsToCaps(kind);
+  preprocess( args );
+  argsToCaps( kind );
 }
 
 // ---------------------------------------------------------------------------
 
-void PackageArgs::preprocess(const vector<string> & args)
+void PackageArgs::preprocess( const std::vector<std::string> & args )
 {
-  vector<string>::size_type argc = args.size();
-
-  string tmp;
-  string arg;
+  std::vector<std::string>::size_type argc = args.size();
+  std::string arg;
   bool op = false;
-  for(unsigned i = 0; i < argc; ++i)
+  for( unsigned i = 0; i < argc; ++i )
   {
-    tmp = args[i];
+    std::string tmp = args[i];
 
-    if (op)
+    if ( op )
     {
       arg += tmp;
       op = false;
       tmp.clear();
     }
     // standalone operator
-    else if (tmp == "=" || tmp == "==" || tmp == "<"
-            || tmp == ">" || tmp == "<=" || tmp == ">=")
+    else if ( tmp == "=" || tmp == "==" || tmp == "<"
+	   || tmp == ">" || tmp == "<=" || tmp == ">=" )
     {
       // not at the start or the end
-      if (i && i < argc - 1)
-        op = true;
+      if ( i && i < argc - 1 )
+	op = true;
     }
     // operator at the end of a random string, e.g. 'zypper='
-    else if (tmp.find_last_of("=<>") == tmp.size() - 1 && i < argc - 1)
+    else if ( tmp.find_last_of( "=<>" ) == tmp.size() - 1 && i < argc - 1 )
     {
-      if (!arg.empty())
-        _args.insert(arg);
+      if ( !arg.empty() )
+        _args.insert( arg );
       arg = tmp;
       op = true;
       continue;
     }
     // operator at the start of a random string e.g. '>=3.2.1'
-    else if (i && tmp.find_first_of("=<>") == 0)
+    else if ( i && tmp.find_first_of( "=<>" ) == 0 )
     {
       arg += tmp;
       tmp.clear();
       op = false;
     }
 
-    if (op)
+    if ( op )
       arg += tmp;
     else
     {
-      if (!arg.empty())
-        _args.insert(arg);
+      if ( !arg.empty() )
+        _args.insert( arg );
       arg = tmp;
     }
   }
 
-  if (!arg.empty())
-    _args.insert(arg);
+  if ( !arg.empty() )
+    _args.insert( arg );
 
   DBG << "args received: ";
-  copy(args.begin(), args.end(), ostream_iterator<string>(DBG, " "));
+  std::copy( args.begin(), args.end(), std::ostream_iterator<std::string>(DBG, " ") );
   DBG << endl;
 
   DBG << "args compiled: ";
-  copy(_args.begin(), _args.end(), ostream_iterator<string>(DBG, " "));
+  std::copy( _args.begin(), _args.end(), std::ostream_iterator<std::string>(DBG, " ") );
   DBG << endl;
 }
 
 // ---------------------------------------------------------------------------
 
-static bool
-remove_duplicate(
-    PackageArgs::PackageSpecSet & set, const PackageSpec & obj)
+static bool remove_duplicate( PackageArgs::PackageSpecSet & set, const PackageSpec & obj )
 {
-  PackageArgs::PackageSpecSet::iterator match = set.find(obj);
-  if (match != set.end())
+  PackageArgs::PackageSpecSet::iterator match = set.find( obj );
+  if ( match != set.end() )
   {
     DBG << "found dupe: '" << match->orig_str << "' : " << obj.orig_str << endl;
-    set.erase(match);
+    set.erase( match );
     return true;
   }
   return false;
@@ -121,11 +112,11 @@ remove_duplicate(
 
 // ---------------------------------------------------------------------------
 
-void PackageArgs::argsToCaps(const zypp::ResKind & kind)
+void PackageArgs::argsToCaps( const ResKind & kind )
 {
   bool dont;
-  string arg, repo;
-  for_(it, _args.begin(), _args.end())
+  std::string arg, repo;
+  for_( it, _args.begin(), _args.end() )
   {
     arg = *it;
     repo.clear();
@@ -167,17 +158,17 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
     // check for and remove the install/remove modifiers
     // sort as do/dont
 
-    if (arg[0] == '+' || arg[0] == '~')
+    if (arg[0] == '+' || arg[0] == '~' )
     {
       dont = false;
-      arg.erase(0, 1);
+      arg.erase( 0, 1 );
     }
-    else if (arg[0] == '-' || arg[0] == '!')
+    else if ( arg[0] == '-' || arg[0] == '!' )
     {
       dont = true;
-      arg.erase(0, 1);
+      arg.erase( 0, 1 );
     }
-    else if (_opts.do_by_default)
+    else if ( _opts.do_by_default )
       dont = false;
     else
       dont = true;
@@ -186,13 +177,13 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
     // ignore colons coming after '(' or '=' (bnc #433679)
     // e.g. 'perl(Digest::MD5)', or 'opera=2:10.00-4102.gcc4.shared.qt3'
 
-    string::size_type pos;
-    if ((pos = arg.find(':')) != string::npos && arg.find_first_of("(=") > pos)
+    std::string::size_type pos = arg.find( ':' );
+    if ( pos != std::string::npos && arg.find_first_of( "(=" ) > pos )
     {
-      repo = arg.substr(0, pos);
-      if (match_repo(zypper, repo))
+      repo = arg.substr( 0, pos );
+      if ( match_repo( zypper, repo ) )
       {
-        arg = arg.substr(pos + 1);
+        arg = arg.substr( pos + 1 );
         DBG << "got repo '" << repo << "' for '" << arg << "'" << endl;
       }
       // not a repo, continue as usual
@@ -202,77 +193,69 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
 
     // parse the rest of the string as standard zypp package specifier
     Capability parsedcap;
-    if (kind == ResKind::package ||
-        ( (pos = arg.find(':')) != string::npos && arg.find_first_of("(=") > pos) )
-      parsedcap = Capability::guessPackageSpec(arg, spec.modified);
+    if ( kind == ResKind::package || ( (pos = arg.find(':')) != std::string::npos && arg.find_first_of( "(=" ) > pos ) )
+      parsedcap = Capability::guessPackageSpec( arg, spec.modified );
     else
       // prepend the kind for non-packages if not already there (bnc #640399)
-      parsedcap = Capability::guessPackageSpec(
-          kind.asString() + ":" + arg, spec.modified);
+      parsedcap = Capability::guessPackageSpec( kind.asString() + ":" + arg, spec.modified );
 
-    if (spec.modified)
+    if ( spec.modified )
     {
-      string msg = str::form(
-          _("'%s' not found in package names. Trying '%s'."),
-          arg.c_str(), parsedcap.asString().c_str());
-      zypper.out().info(msg,Out::HIGH); // TODO this should not be called here
+      std::string msg = str::form(_("'%s' not found in package names. Trying '%s'."),
+				  arg.c_str(),
+				  parsedcap.asString().c_str() );
+      zypper.out().info( msg, Out::HIGH ); // TODO this should not be called here
       DBG << "'" << arg << "' not found, trying '" << parsedcap <<  "'" << endl;
     }
 
     // set the right kind (bnc #580571)
     // prefer those specified in args
     // if not in args, use the one from --type
-    sat::Solvable::SplitIdent splid(parsedcap.detail().name());
-    if (splid.kind() != kind &&
-        zypper.cOpts().find("type") != zypper.cOpts().end())
+    sat::Solvable::SplitIdent splid( parsedcap.detail().name() );
+    if ( splid.kind() != kind && zypper.cOpts().find( "type" ) != zypper.cOpts().end() )
     {
       // kind specified in arg, too - just warn and let it be
-      if (parsedcap.detail().name().asString().find(':') != string::npos)
-        zypper.out().warning(str::form(
-            _("Different package type specified in '%s' option and '%s'"
-              " argument. Will use the latter."),
-            "--type", arg.c_str()));
+      if ( parsedcap.detail().name().asString().find( ':' ) != std::string::npos )
+	zypper.out().warning( str::form(_("Different package type specified in '%s' option and '%s' argument. Will use the latter."),
+					"--type", arg.c_str()) );
       // no kind specified in arg, use --type
       else
-        parsedcap = Capability(
-            Arch(parsedcap.detail().arch()),
-            splid.name().asString(),
-            parsedcap.detail().op(),
-            parsedcap.detail().ed(),
-            kind);
+        parsedcap = Capability( Arch( parsedcap.detail().arch() ),
+				splid.name().asString(),
+				parsedcap.detail().op(),
+				parsedcap.detail().ed(),
+				kind );
     }
 
     // recognize misplaced command line options given as packages (bnc#391644)
-    if (arg[0] == '-')
+    if ( arg[0] == '-' )
     {
-      zypper.out().error(str::form(
-          _("'%s' is not a package name or capability."), arg.c_str()));
-      zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      ZYPP_THROW(ExitRequestException("cli option given after args"));
+      zypper.out().error( str::form(_("'%s' is not a package name or capability."), arg.c_str()) );
+      zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      ZYPP_THROW( ExitRequestException("cli option given after args") );
     }
 
-    MIL << "got " << (dont?"un":"") << "wanted '" << parsedcap << "'";
-    MIL << "; repo '" << repo << "'" << endl;
+    MIL << "got " << (dont?"un":"") << "wanted '" << parsedcap << "'" << "; repo '" << repo << "'" << endl;
 
-    // Store, but avoid duplicates in do and dont sets.
+    // Store, but avoid duplicates in do and don't sets.
     spec.parsed_cap = parsedcap;
     spec.repo_alias = repo;
-    if (dont)
+    if ( dont )
     {
-      if (!remove_duplicate(_dos, spec))
-        _donts.insert(spec);
+      if ( !remove_duplicate( _dos, spec ) )
+        _donts.insert( spec );
     }
-    else if (!remove_duplicate(_donts, spec))
-      _dos.insert(spec);
+    else if ( !remove_duplicate( _donts, spec ) )
+      _dos.insert( spec );
   }
 }
 
-std::ostream & operator<<(std::ostream & out, const PackageSpec & spec)
+std::ostream & operator<<( std::ostream & out, const PackageSpec & spec )
 {
   out << spec.orig_str << " cap:" << spec.parsed_cap;
-  if (spec.modified)
+  if ( spec.modified )
     out << " (mod)";
-  if (!spec.repo_alias.empty())
+  if ( !spec.repo_alias.empty() )
     out << " repo: " << spec.repo_alias;
   return out;
 }

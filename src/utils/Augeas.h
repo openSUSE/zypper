@@ -8,15 +8,13 @@
 #ifndef ZYPPER_UTIL_AUGEAS_H_
 #define ZYPPER_UTIL_AUGEAS_H_
 
-#include <string>
-
 extern "C"
 {
   #include <augeas.h>
 }
+#include <string>
 
 #include <zypp/base/NonCopyable.h>
-#include <zypp/TriBool.h>
 
 /**
  * Zypper's wrapper around Augeas.

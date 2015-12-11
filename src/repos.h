@@ -26,14 +26,12 @@
  * \param container A string container of identifier (alias|#|URI) to init.
   */
 template <typename Container>
-void init_repos(Zypper & zypper, const Container & container = Container());
+void init_repos( Zypper & zypper, const Container & container = Container() );
 
 template<typename T>
-void get_repos(Zypper & zypper,
-               const T & begin, const T & end,
-               std::list<zypp::RepoInfo> & repos, std::list<std::string> & not_found);
+void get_repos( Zypper & zypper, const T & begin, const T & end, std::list<RepoInfo> & repos, std::list<std::string> & not_found );
 
-void report_unknown_repos(Out & out, std::list<std::string> not_found);
+void report_unknown_repos( Out & out, std::list<std::string> not_found );
 
 /**
  * Looks for known repos based on specified arguments and creates a list
@@ -50,11 +48,8 @@ void report_unknown_repos(Out & out, std::list<std::string> not_found);
  *
  * \throws ExitRequestException if one of the repos could not be found.
  */
-unsigned repo_specs_to_aliases(
-    Zypper & zypper,
-    const std::list<std::string> & repos,
-    std::list<std::string> & aliases,
-    bool enabled_only = true);
+unsigned repo_specs_to_aliases( Zypper & zypper, const std::list<std::string> & repos,
+				std::list<std::string> & aliases, bool enabled_only = true );
 
 /**
  * Reads known enabled repositories and stores them in gData.
@@ -64,29 +59,29 @@ unsigned repo_specs_to_aliases(
  *  - ZYPPER_EXIT_ERR_INVALID_ARGS if --repo does not specify a valid repository,
  *  - ZYPPER_EXIT_ERR_ZYPP on error
  */
-void init_repos(Zypper & zypper);
+void init_repos( Zypper & zypper );
 
 /**
  * List defined repositories.
  */
-void list_repos(Zypper & zypper);
+void list_repos( Zypper & zypper );
 
 /**
  * Refresh all enabled repositories.
  */
-void refresh_repos(Zypper & zypper);
+void refresh_repos( Zypper & zypper );
 
 /**
  * Refresh a single repository.
  * \return true on error, false otherwise
  */
-bool refresh_repo(Zypper & zypper, const zypp::RepoInfo & repo);
+bool refresh_repo( Zypper & zypper, const RepoInfo & repo );
 
 
 /**
  * Clean caches for all (specified) repositories.
  */
-void clean_repos(Zypper & zypper);
+void clean_repos( Zypper & zypper );
 
 /**
  * Try match given string with any known repository.
@@ -95,7 +90,7 @@ void clean_repos(Zypper & zypper);
  * \param repo pointer to fill with found repository
  * \return success if respository is found
  */
-bool match_repo(Zypper & zypper, const std::string str, zypp::RepoInfo *repo = 0);
+bool match_repo( Zypper & zypper, const std::string str, RepoInfo *repo = 0 );
 
 
 /**
@@ -107,14 +102,14 @@ bool match_repo(Zypper & zypper, const std::string str, zypp::RepoInfo *repo = 0
  * \param enabled     Whether the repo should be enabled
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
-void add_repo_by_url(Zypper & zypper,
-                     const zypp::Url & url,
-                     const std::string & alias,
-                     const std::string & type = "",
-                     zypp::TriBool enabled = boost::indeterminate,
-                     zypp::TriBool autorefresh = boost::indeterminate,
-                     zypp::TriBool keepPackages = boost::indeterminate,
-                     zypp::TriBool gpgCheck  = boost::indeterminate);
+void add_repo_by_url( Zypper & zypper,
+		      const Url & url,
+		      const std::string & alias,
+		      const std::string & type = "",
+		      TriBool enabled = indeterminate,
+		      TriBool autorefresh = indeterminate,
+		      TriBool keepPackages = indeterminate,
+		      TriBool gpgCheck  = indeterminate );
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -125,42 +120,41 @@ void add_repo_by_url(Zypper & zypper,
  * \param enabled     Whether the repo should be enabled
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
-void add_repo_from_file(Zypper & zypper,
-                        const std::string & repo_file_url,
-                        zypp::TriBool enabled = boost::indeterminate,
-                        zypp::TriBool autorefresh = boost::indeterminate,
-                        zypp::TriBool keepPackages = boost::indeterminate,
-                        zypp::TriBool gpgCheck  = boost::indeterminate);
+void add_repo_from_file( Zypper & zypper,
+			 const std::string & repo_file_url,
+			 TriBool enabled = indeterminate,
+			 TriBool autorefresh = indeterminate,
+			 TriBool keepPackages = indeterminate,
+			 TriBool gpgCheck  = indeterminate );
 
 
 /**
  * Add repository specified by \repo to system repositories.
  */
-void add_repo(Zypper & zypper, zypp::RepoInfo & repo);
+void add_repo( Zypper & zypper, RepoInfo & repo );
 
 /**
  * Remove repository specified by \a alias.
  */
-void remove_repo(Zypper & zypper, const zypp::RepoInfo & repoinfo);
+void remove_repo( Zypper & zypper, const RepoInfo & repoinfo );
 
 /**
  * Rename repository specified by \a alias to \a newalias.
  */
-void rename_repo(Zypper & zypper,
-                 const std::string & alias, const std::string & newalias);
+void rename_repo( Zypper & zypper, const std::string & alias, const std::string & newalias );
 
 /**
  * Modify repository properties.
  *
  * \param alias repository alias
  */
-void modify_repo(Zypper & zypper, const std::string & alias);
+void modify_repo( Zypper & zypper, const std::string & alias );
 
 /**
  * Modify all repositories properties.
  *
  */
-void modify_all_repos(Zypper & zypper);
+void modify_all_repos( Zypper & zypper );
 
 /**
  * Modify repositories which is matching filter options
@@ -169,34 +163,33 @@ void modify_all_repos(Zypper & zypper);
 void modify_repos_by_option( Zypper & zypper );
 
 
-void list_services(Zypper & zypper);
+void list_services( Zypper & zypper );
 
-void add_service(Zypper & zypper, const zypp::ServiceInfo & service);
+void add_service( Zypper & zypper, const ServiceInfo & service );
 
 void add_service_by_url( Zypper & zypper,
-                         const zypp::Url & url, const std::string & alias,
+                         const Url & url,
+			 const std::string & alias,
                          const std::string & type,
-                         boost::tribool enabled = boost::indeterminate);
+                         TriBool enabled = indeterminate );
 
-void remove_service(Zypper & zypper, const zypp::ServiceInfo & service);
+void remove_service( Zypper & zypper, const ServiceInfo & service );
 
-void modify_service(Zypper & zypper, const std::string & alias);
+void modify_service( Zypper & zypper, const std::string & alias );
 
-void refresh_services(Zypper & zypper);
+void refresh_services( Zypper & zypper );
 
 /** If root, refresh any plugin services before lr/ls/ref (bnc#893294) */
 void checkIfToRefreshPluginServices( Zypper & zypper );
 
-bool match_service(Zypper & zypper,
-                   std::string str,
-                   zypp::repo::RepoInfoBase_Ptr & service_ptr);
+bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & service_ptr );
 
 void modify_services_by_option( Zypper & zypper );
 
 /**
  * Initialize rpm database on target, if not already initialized.
  */
-void init_target(Zypper & zypper);
+void init_target( Zypper & zypper );
 
 /**
  * Load both repository and target resolvables.
@@ -204,18 +197,18 @@ void init_target(Zypper & zypper);
  * \see load_repo_resolvables(bool)
  * \see load_target_resolvables(bool)
  */
-void load_resolvables(Zypper & zypper);
+void load_resolvables( Zypper & zypper );
 
 /**
  * Reads resolvables from the RPM database (installed resolvables) into the pool.
  *
  */
-void load_target_resolvables(Zypper & zypper);
+void load_target_resolvables( Zypper & zypper );
 
 /**
  * Reads resolvables from the repository solv cache.
  */
-void load_repo_resolvables(Zypper & zypper);
+void load_repo_resolvables( Zypper & zypper );
 
 #endif
 // Local Variables:

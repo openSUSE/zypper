@@ -406,7 +406,7 @@ class TestSetup
       // set up the Zypper instance
 
       _zypper.globalOptsNoConst().root_dir = _rootdir.asString();
-      _zypper.globalOptsNoConst().rm_options = zypp::RepoManagerOptions(_rootdir.asString());
+      _zypper.globalOptsNoConst().rm_options = RepoManagerOptions(_rootdir.asString());
       _zypper.globalOptsNoConst().rm_options.knownReposPath = _rootdir / "repos.d";
       _zypper.setOutputWriter(new OutNormal(Out::DEBUG));
 

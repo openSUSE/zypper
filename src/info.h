@@ -14,6 +14,6 @@
 
 #include "Zypper.h"
 
-void printInfo(Zypper & zypper, const zypp::ResKind & kind);
+void printInfo( Zypper & zypper, const ResKind & kind );
 
 #endif /*ZYPPERINFO_H_*/

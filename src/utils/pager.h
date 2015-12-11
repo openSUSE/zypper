@@ -33,6 +33,6 @@ bool show_text_in_pager(const std::string & text, const std::string & intro = ""
  * \param intro Explanatory note to show at the start of the text.
  * \return true if there was no problem opening the pager
  */
-bool show_file_in_pager(const zypp::Pathname & file, const std::string & intro = "");
+bool show_file_in_pager(const Pathname & file, const std::string & intro = "");
 
 #endif /*PAGER_H_*/

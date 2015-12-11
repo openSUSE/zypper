@@ -19,6 +19,7 @@
 #include <iosfwd>
 
 #include <zypp/Capability.h>
+using namespace zypp;
 
 class Zypper;
 
@@ -27,7 +28,7 @@ struct PackageSpec
   PackageSpec() : modified(false) {}
 
   std::string orig_str;
-  zypp::Capability parsed_cap;
+  Capability parsed_cap;
   std::string repo_alias;
   bool modified;
 };
@@ -38,10 +39,8 @@ struct PackageSpec
  */
 struct PackageSpecCompare
 {
-  bool operator()(const PackageSpec & lhs, const PackageSpec & rhs) const
-  {
-    return lhs.parsed_cap < rhs.parsed_cap;
-  };
+  bool operator()( const PackageSpec & lhs, const PackageSpec & rhs ) const
+  { return lhs.parsed_cap < rhs.parsed_cap; }
 };
 
 class PackageArgs
@@ -53,7 +52,7 @@ public:
   struct Options
   {
     Options()
-      : do_by_default(true)
+    : do_by_default( true )
     {}
 
     /** Whether to do (install/update) or dont (remove) by default
@@ -63,20 +62,18 @@ public:
 
 public:
   /** Processes current Zypper::arguments() */
-  PackageArgs(
-      const zypp::ResKind & kind = zypp::ResKind::package,
-      const Options & opts = Options());
+  PackageArgs( const ResKind & kind = ResKind::package,
+	       const Options & opts = Options() );
 
   /** Takes arguments as a vector of strings */
-  PackageArgs(
-      const std::vector<std::string> & args,
-      const zypp::ResKind & kind = zypp::ResKind::package,
-      const Options & opts = Options());
+  PackageArgs( const std::vector<std::string> & args,
+	       const ResKind & kind = ResKind::package,
+	       const Options & opts = Options() );
 
   ~PackageArgs() {}
 
   const Options & options() const
-  {return _opts; }
+  { return _opts; }
 
   const StringSet & asStringSet() const
   { return _args; }
@@ -93,8 +90,8 @@ public:
 
 protected:
   /** join arguments at comparison operators ('=', '>=', and the like) */
-  void preprocess(const std::vector<std::string> & args);
-  void argsToCaps(const zypp::ResKind & kind);
+  void preprocess( const std::vector<std::string> & args );
+  void argsToCaps( const ResKind & kind );
 
 private:
   PackageArgs();
@@ -106,7 +103,6 @@ private:
   PackageSpecSet _donts;
 };
 
-
-std::ostream & operator<<(std::ostream & out, const PackageSpec & spec);
+std::ostream & operator<<( std::ostream & out, const PackageSpec & spec );
 
 #endif /* ZYPPER_PACKAGEARGS_H_ */

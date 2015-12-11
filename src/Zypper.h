@@ -54,26 +54,25 @@ struct Options;
 struct GlobalOptions
 {
   GlobalOptions()
-  :
-  verbosity(0),
-  disable_system_sources(false),
-  disable_system_resolvables(false),
-  non_interactive(false),
-  reboot_req_non_interactive(false),
-  no_gpg_checks(false),
-  gpg_auto_import_keys(false),
-  machine_readable(false),
-  no_refresh(false),
-  no_cd(false),
-  no_remote(false),
-  root_dir("/"),
-  no_abbrev(false),
-  terse(false),
-  changedRoot(false),
-  ignore_unknown(false)
+  : verbosity( 0 )
+  , disable_system_sources( false )
+  , disable_system_resolvables( false )
+  , non_interactive( false )
+  , reboot_req_non_interactive( false )
+  , no_gpg_checks( false )
+  , gpg_auto_import_keys( false )
+  , machine_readable( false )
+  , no_refresh( false )
+  , no_cd( false )
+  , no_remote( false )
+  , root_dir( "/" )
+  , no_abbrev( false )
+  , terse( false )
+  , changedRoot( false )
+  , ignore_unknown( false )
   {}
 
-//  std::list<zypp::Url> additional_sources;
+  //  std::list<Url> additional_sources;
 
   /**
    * Level of the amount of output.
@@ -100,7 +99,7 @@ struct GlobalOptions
   /** Whether to ignore remote (http, ...) repos */
   bool no_remote;
   std::string root_dir;
-  zypp::RepoManagerOptions rm_options;
+  RepoManagerOptions rm_options;
   bool no_abbrev;
   bool terse;
   bool changedRoot;
@@ -109,38 +108,39 @@ struct GlobalOptions
 
 /**
  * \bug The RepoInfo lists kept herein may lack housekeeping data added by the
- * zypp::RepoManager. Consider using your own RepoInfos only for those not
- * maintained by zypp::RepoManager. (bnc #544432)
+ * RepoManager. Consider using your own RepoInfos only for those not
+ * maintained by RepoManager. (bnc #544432)
 */
 struct RuntimeData
 {
   RuntimeData()
-    : patches_count(0), security_patches_count(0)
-    , show_media_progress_hack(false)
-    , force_resolution(zypp::indeterminate)
-    , solve_before_commit(true)
-    , commit_pkgs_total(0)
-    , commit_pkg_current(0)
-    , rpm_pkgs_total(0)
-    , rpm_pkg_current(0)
-    , seen_verify_hint(false)
-    , action_rpm_download(false)
-    , waiting_for_input(false)
-    , entered_commit(false)
+  : patches_count( 0 )
+  , security_patches_count( 0 )
+  , show_media_progress_hack( false )
+  , force_resolution( indeterminate )
+  , solve_before_commit( true )
+  , commit_pkgs_total( 0 )
+  , commit_pkg_current( 0 )
+  , rpm_pkgs_total( 0 )
+  , rpm_pkg_current( 0 )
+  , seen_verify_hint( false )
+  , action_rpm_download( false )
+  , waiting_for_input( false )
+  , entered_commit( false )
   {}
 
-  std::list<zypp::RepoInfo> repos;
-  std::list<zypp::RepoInfo> additional_repos;
-  std::set<std::string>     additional_content_repos;
+  std::list<RepoInfo> repos;
+  std::list<RepoInfo> additional_repos;
+  std::set<std::string> additional_content_repos;
   int patches_count;
   int security_patches_count;
   /**
    * Used by requestMedia callback
    * \todo but now it uses label, remove this variable?
    */
-  zypp::RepoInfo current_repo;
+  RepoInfo current_repo;
 
-  std::set<zypp::SrcPackage::constPtr> srcpkgs_to_install;
+  std::set<SrcPackage::constPtr> srcpkgs_to_install;
 
   // hack to enable media progress reporting in the commit phase in normal
   // output level
@@ -156,7 +156,7 @@ struct RuntimeData
   std::string raw_refresh_progress_label;
 
   /** Used to override the command line option */
-  zypp::TriBool force_resolution;
+  TriBool force_resolution;
 
   /**
    * Set to <tt>false</tt> to avoid calling of the solver
@@ -164,10 +164,10 @@ struct RuntimeData
    */
   bool solve_before_commit;
 
-  unsigned int commit_pkgs_total;
-  unsigned int commit_pkg_current;
-  unsigned int rpm_pkgs_total;
-  unsigned int rpm_pkg_current;
+  unsigned commit_pkgs_total;
+  unsigned commit_pkg_current;
+  unsigned rpm_pkgs_total;
+  unsigned rpm_pkg_current;
 
   bool seen_verify_hint;
   bool action_rpm_download;
@@ -177,29 +177,29 @@ struct RuntimeData
   bool entered_commit;	// bsc#946750 - give ZYPPER_EXIT_ERR_COMMIT priority over ZYPPER_EXIT_ON_SIGNAL
 
   //! Temporary directory for any use. Used e.g. as packagesPath of TMP_RPM_REPO_ALIAS repository.
-  zypp::filesystem::TmpDir tmpdir;
+  filesystem::TmpDir tmpdir;
 };
 
-typedef zypp::shared_ptr<zypp::RepoManager> RepoManager_Ptr;
+typedef shared_ptr<RepoManager> RepoManager_Ptr;
 
-class Zypper : private zypp::base::NonCopyable
+class Zypper : private base::NonCopyable
 {
 public:
-  typedef zypp::RW_pointer<Zypper,zypp::rw_pointer::Scoped<Zypper> > Ptr;
+  typedef RW_pointer<Zypper,rw_pointer::Scoped<Zypper> > Ptr;
   typedef std::vector<std::string>  ArgList;
 
   static Ptr & instance();
 
-  int main(int argc, char ** argv);
+  int main( int argc, char ** argv );
 
   // setters & getters
   Out & out();
-  void setOutputWriter(Out * out) { _out_ptr = out; }
-  Config & config() { return _config; }
-  const GlobalOptions & globalOpts() const { return _gopts; }
-  GlobalOptions & globalOptsNoConst() { return _gopts; }
 
-  const parsed_opts & cOpts() const { return _copts; }
+  void setOutputWriter( Out * out )		{ _out_ptr = out; }
+  Config & config()				{ return _config; }
+  const GlobalOptions & globalOpts() const	{ return _gopts; }
+  GlobalOptions & globalOptsNoConst()		{ return _gopts; }
+  const parsed_opts & cOpts() const		{ return _copts; }
 
   /** Leightweight string_ref vector to \a option_r args */
   std::vector<boost::string_ref> cOptValues( const std::string & option_r ) const
@@ -215,26 +215,27 @@ public:
     return ret;
   }
 
-  const ZypperCommand & command() const { return _command; }
-  const std::string & commandHelp() const { return _command_help; }
-  const ArgList & arguments() const { return _arguments; }
-  RuntimeData & runtimeData() { return _rdata; }
-
-  zypp::RepoManager & repoManager()
-  { if (!_rm) _rm.reset(new zypp::RepoManager(_gopts.rm_options)); return *_rm; }
+  const ZypperCommand & command() const		{ return _command; }
+  const std::string & commandHelp() const	{ return _command_help; }
+  const ArgList & arguments() const		{ return _arguments; }
+  RuntimeData & runtimeData()			{ return _rdata; }
 
   void initRepoManager()
-  { _rm.reset(new zypp::RepoManager(_gopts.rm_options)); }
+  { _rm.reset( new RepoManager( _gopts.rm_options ) ); }
 
-  int exitCode() const { return _exit_code; }
-  void setExitCode(int exit) { _exit_code = exit; }
-  bool runningShell() const { return _running_shell; }
-  bool runningHelp() const { return _running_help; }
-  bool exitRequested() const { return _exit_requested; }
-  void requestExit(bool do_exit = true) { _exit_requested = do_exit; }
+  RepoManager & repoManager()
+  { if ( !_rm ) _rm.reset( new RepoManager( _gopts.rm_options ) ); return *_rm; }
 
-  int argc() { return _running_shell ? _sh_argc : _argc; }
-  char ** argv() { return _running_shell ? _sh_argv : _argv; }
+
+  int exitCode() const				{ return _exit_code; }
+  void setExitCode( int exit )			{ _exit_code = exit; }
+  bool runningShell() const			{ return _running_shell; }
+  bool runningHelp() const			{ return _running_help; }
+  bool exitRequested() const			{ return _exit_requested; }
+  void requestExit( bool do_exit = true )	{ _exit_requested = do_exit; }
+
+  int argc()					{ return _running_shell ? _sh_argc : _argc; }
+  char ** argv()				{ return _running_shell ? _sh_argv : _argv; }
 
   void cleanup();
 
@@ -285,6 +286,7 @@ public:
 
 public:
   ~Zypper();
+
 private:
   Zypper();
 
@@ -295,9 +297,9 @@ private:
   void safeDoCommand();
   void doCommand();
 
-  void setCommand(const ZypperCommand & command) { _command = command; }
-  void setRunningShell(bool value = true) { _running_shell = value; }
-  void setRunningHelp(bool value = true) { _running_help = value; }
+  void setCommand( const ZypperCommand & command )	{ _command = command; }
+  void setRunningShell( bool value = true )		{ _running_shell = value; }
+  void setRunningHelp( bool value = true )		{ _running_help = value; }
 
 private:
 
@@ -331,9 +333,9 @@ private:
 /** \relates Zypper::LoadSystemFlags */
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS( Zypper::LoadSystemFlags );
 
-void print_main_help(const Zypper & zypper);
-void print_unknown_command_hint(Zypper & zypper);
-void print_command_help_hint(Zypper & zypper);
+void print_main_help( const Zypper & zypper );
+void print_unknown_command_hint( Zypper & zypper );
+void print_command_help_hint( Zypper & zypper );
 
 ///////////////////////////////////////////////////////////////////
 /// \brief Base class for command specific option classes.
@@ -396,9 +398,8 @@ struct CommandBase
     }
   }
 
-  Options_ & options() { return *_options; }
-
-  const Options_ & options() const { return *_options; }
+  Options_ & options()			{ return *_options; }
+  const Options_ & options() const	{ return *_options; }
 
  /** Command name (optionally suffixed). */
   std::string commandName( const std::string & suffix_r = std::string() ) const
@@ -462,10 +463,10 @@ private:
 };
 ///////////////////////////////////////////////////////////////////
 
-class ExitRequestException : public zypp::Exception
+class ExitRequestException : public Exception
 {
 public:
-  ExitRequestException(const std::string & msg ) : zypp::Exception(msg) {}
+  ExitRequestException(const std::string & msg ) : Exception(msg) {}
 };
 
 #endif /*ZYPPER_H*/

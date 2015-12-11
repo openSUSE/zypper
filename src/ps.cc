@@ -48,13 +48,13 @@ namespace
   };
   ///////////////////////////////////////////////////////////////////
 
-  inline void loadData( zypp::CheckAccessDeleted & checker_r )
+  inline void loadData( CheckAccessDeleted & checker_r )
   {
     try
     {
       checker_r.check();
     }
-    catch ( const zypp::Exception & ex )
+    catch ( const Exception & ex )
     {
       throw( Out::Error( ZYPPER_EXIT_ERR_ZYPP, _("Check failed:"), ex ) );
     }
@@ -62,7 +62,7 @@ namespace
 
   void PsImpl::printServiceNamesOnly()
   {
-    zypp::CheckAccessDeleted checker( false );	// wait for explicit call to check()
+    CheckAccessDeleted checker( false );	// wait for explicit call to check()
     loadData( checker );
 
     std::set<std::string> services;
@@ -102,7 +102,7 @@ namespace
 
     // Here: Table output
     _zypper.out().info(_("Checking for running processes using deleted libraries..."), Out::HIGH );
-    zypp::CheckAccessDeleted checker( false );	// wait for explicit call to check()
+    CheckAccessDeleted checker( false );	// wait for explicit call to check()
     loadData( checker );
 
     Table t;

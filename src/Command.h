@@ -170,9 +170,9 @@ struct ZypperCommand
     RUG_PING_e
   };
 
-  ZypperCommand(Command command) : _command(command) {}
+  ZypperCommand( Command command ) : _command(command) {}
 
-  explicit ZypperCommand(const std::string & strval_r);
+  explicit ZypperCommand( const std::string & strval_r );
 
   Command toEnum() const { return _command; }
 

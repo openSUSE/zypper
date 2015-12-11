@@ -24,7 +24,7 @@
  * popts.setOptionHelp(1, _("Help for option 'n'"));
  * ...
  * zypper.out().prompt(PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts);
- * unsigned int reply =
+ * unsigned reply =
  *   get_prompt_reply(zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts);
  * </code>
  */
@@ -46,39 +46,39 @@ public:
    *                   e.g. "yes/no/?" or "1/s/r/c"
    * \param default_opt index of the default answer within the \a option_str
    */
-  PromptOptions(const std::string & option_str, unsigned int default_opt);
+  PromptOptions(const std::string & option_str, unsigned default_opt);
 
   /** D-tor */
   ~PromptOptions();
 
   const StrVector & options() const { return _options; }
-  void setOptions(const std::string & option_str, unsigned int default_opt);
-  unsigned int defaultOpt() const { return _default; }
+  void setOptions(const std::string & option_str, unsigned default_opt);
+  unsigned defaultOpt() const { return _default; }
   /** Option string (may have embedded color codes) */
   ColorString optionString() const;
   bool empty() const { return _options.empty(); }
   bool isYesNoPrompt() const;
 
-  const std::string & optionHelp(unsigned int opt) const
+  const std::string & optionHelp(unsigned opt) const
   { static std::string empty; return opt < _opt_help.size() ? _opt_help[opt] : empty; }
   //const std::string getOptionHelp(const std::string & opt_str);
-  void setOptionHelp(unsigned int opt, const std::string & help_str);
+  void setOptionHelp(unsigned opt, const std::string & help_str);
   bool helpEmpty() const { return _opt_help.empty(); }
 
-  bool isEnabled(unsigned int opt) const
+  bool isEnabled(unsigned opt) const
   { return _disabled.find(opt) == _disabled.end(); }
-  bool isDisabled(unsigned int opt) const
+  bool isDisabled(unsigned opt) const
   { return _disabled.find(opt) != _disabled.end(); }
-  void disable(unsigned int opt)
+  void disable(unsigned opt)
   { _disabled.insert(opt); }
-  void enable(unsigned int opt)
+  void enable(unsigned opt)
   { _disabled.erase(opt); }
   void enableAll()
   { _disabled.clear(); }
 
-  unsigned int shownCount() const
+  unsigned shownCount() const
   { return _shown_count; }
-  void setShownCount(unsigned int count)
+  void setShownCount(unsigned count)
   { _shown_count = count; }
 
   int getReplyIndex(const std::string & reply) const;
@@ -87,11 +87,11 @@ private:
   /** option strings */
   StrVector _options;
   /** index of the default option */
-  unsigned int _default;
+  unsigned _default;
   /** help strings corresponding to options */
   StrVector _opt_help;
   /** set of options to ignore */
-  std::set<unsigned int> _disabled;
+  std::set<unsigned> _disabled;
   /**
    * Number of options to show (the rest will still be available and visible
    * through '?' help). If negative, all options will be shown. Zero is allowed.
@@ -128,7 +128,7 @@ int read_action_ari (PromptId pid, int default_action = -1);
 bool read_bool_answer(PromptId pid, const std::string & question, bool default_answer);
 
 class Zypper;
-unsigned int get_prompt_reply(Zypper & zypper,
+unsigned get_prompt_reply(Zypper & zypper,
                               PromptId pid,
                               const PromptOptions & poptions);
 

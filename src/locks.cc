@@ -43,9 +43,9 @@ namespace
 
 	int doComapre( const sat::Solvable & lhs, const sat::Solvable & rhs ) const
 	{
-	  // return zypp::sat::compareByNVRA( lhs, rhs );
+	  // return sat::compareByNVRA( lhs, rhs );
 	  // do N(<) A(>) VR(>)
-	  int res = zypp::sat::compareByN( lhs, rhs );		// ascending  l<r
+	  int res = sat::compareByN( lhs, rhs );		// ascending  l<r
 	  if ( res == 0 )
 	    res = rhs.arch().compare( lhs.arch() );		// descending r<l
 	  if ( res == 0 )

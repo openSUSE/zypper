@@ -14,7 +14,7 @@
 #include "Zypper.h"
 #include "Table.h"
 
-//std::string selectable_search_repo_str(const zypp::ui::Selectable & s);
+//std::string selectable_search_repo_str(const ui::Selectable & s);
 
 /**
  * Functor for filling search output table in rug style.
@@ -26,20 +26,20 @@ struct FillSearchTableSolvable
   const GlobalOptions & _gopts;
   /** Aliases of repos specified as --repo */
   std::set<std::string> _repos;
-  zypp::TriBool _inst_notinst;
+  TriBool _inst_notinst;
 
   FillSearchTableSolvable(
       Table & table,
-      zypp::TriBool inst_notinst = zypp::indeterminate );
+      TriBool inst_notinst = indeterminate );
 
   /** Add all items within this Selectable */
-  bool operator()( const zypp::ui::Selectable::constPtr & sel ) const;
+  bool operator()( const ui::Selectable::constPtr & sel ) const;
   /** Add this PoolItem */
-  bool operator()( const zypp::PoolItem & pi ) const;
+  bool operator()( const PoolItem & pi ) const;
   /** Add this Solvable */
-  bool operator()( zypp::sat::Solvable solv ) const;
+  bool operator()( sat::Solvable solv ) const;
   /** PoolQuery iterator provides info about matches*/
-  bool operator()( const zypp::PoolQuery::const_iterator & it ) const;
+  bool operator()( const PoolQuery::const_iterator & it ) const;
 
   /** Helper to add a table row for \a sel's picklist item \c pi
    * \return whether a row was actually added.
@@ -47,7 +47,7 @@ struct FillSearchTableSolvable
    * item in \a sel, if there is an identical available one. The
    * code relies on this.
    */
-  bool addPicklistItem( const zypp::ui::Selectable::constPtr & sel, const zypp::PoolItem & pi ) const;
+  bool addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) const;
 };
 
 struct FillSearchTableSelectable
@@ -57,12 +57,12 @@ struct FillSearchTableSelectable
   const GlobalOptions & _gopts;
   /** Aliases of repos specified as --repo */
   std::set<std::string> _repos;
-  zypp::TriBool inst_notinst;
+  TriBool inst_notinst;
 
   FillSearchTableSelectable(
-      Table & table, zypp::TriBool installed_only = zypp::indeterminate);
+      Table & table, TriBool installed_only = indeterminate);
 
-  bool operator()(const zypp::ui::Selectable::constPtr & s) const;
+  bool operator()(const ui::Selectable::constPtr & s) const;
 };
 
 
@@ -74,12 +74,12 @@ struct FillPatchesTable
   // the table used for output
   Table * _table;
   const GlobalOptions & _gopts;
-  zypp::TriBool _inst_notinst;
+  TriBool _inst_notinst;
 
   FillPatchesTable( Table & table,
-      zypp::TriBool inst_notinst = zypp::indeterminate );
+      TriBool inst_notinst = indeterminate );
 
-  bool operator()(const zypp::PoolItem & pi) const;
+  bool operator()(const PoolItem & pi) const;
 };
 
 

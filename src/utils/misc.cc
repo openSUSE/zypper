@@ -29,10 +29,6 @@
 
 #include "utils/misc.h"
 
-
-using namespace std;
-using namespace zypp;
-
 extern ZYpp::Ptr God;
 
 bool runningOnEnterprise()
@@ -50,7 +46,7 @@ bool runningOnEnterprise()
 
 // ----------------------------------------------------------------------------
 
-bool is_changeable_media(const zypp::Url & url)
+bool is_changeable_media(const Url & url)
 {
   MIL << "Checking if this is a changeable medium" << endl;
   bool is_cd = false;
@@ -72,21 +68,21 @@ bool is_changeable_media(const zypp::Url & url)
 
 // ----------------------------------------------------------------------------
 
-ResKind string_to_kind (const string & skind)
+ResKind string_to_kind( const std::string & skind )
 {
   ResObject::Kind empty;
-  string lskind = str::toLower (skind);
-  if (lskind == "package")
+  std::string lskind = str::toLower( skind );
+  if ( lskind == "package" )
     return ResKind::package;
-  if (lskind == "pattern")
+  if ( lskind == "pattern" )
     return ResKind::pattern;
-  if (lskind == "product")
+  if ( lskind == "product" )
     return ResKind::product;
-  if (lskind == "patch")
+  if ( lskind == "patch" )
     return ResKind::patch;
-  if (lskind == "srcpackage")
+  if ( lskind == "srcpackage" )
     return ResKind::srcpackage;
-  if (lskind == "application")
+  if ( lskind == "application" )
     return ResKind::application;
   // not recognized
   return empty;
@@ -94,35 +90,35 @@ ResKind string_to_kind (const string & skind)
 
 // ----------------------------------------------------------------------------
 
-ResKindSet kindset_from(const std::list<std::string> & kindstrings)
+ResKindSet kindset_from( const std::list<std::string> & kindstrings )
 {
   ResKind kind;
   ResKindSet kinds;
-  for_(it, kindstrings.begin(), kindstrings.end())
+  for_( it, kindstrings.begin(), kindstrings.end() )
   {
     kind = string_to_kind(*it);
-    if (kind == ResKind::nokind)
+    if ( kind == ResKind::nokind )
       continue;
-    kinds.insert(kind);
+    kinds.insert( kind );
   }
   return kinds;
 }
 
 // ----------------------------------------------------------------------------
 
-string kind_to_string_localized(const zypp::ResKind & kind, unsigned long count)
+std::string kind_to_string_localized( const ResKind & kind, unsigned long count )
 {
-  if (kind == ResKind::package)
+  if ( kind == ResKind::package )
     return PL_("package", "packages", count);
-  if (kind == ResKind::pattern)
+  if ( kind == ResKind::pattern )
     return PL_("pattern", "patterns", count);
-  if (kind == ResKind::product)
+  if ( kind == ResKind::product )
     return PL_("product", "product", count);
-  if (kind == ResKind::patch)
+  if ( kind == ResKind::patch )
     return PL_("patch", "patches", count);
-  if (kind == ResKind::srcpackage)
+  if ( kind == ResKind::srcpackage )
     return PL_("srcpackage", "srcpackages", count);
-  if (kind == ResKind::application)
+  if ( kind == ResKind::application )
     return PL_("application", "applications", count);
   // default
   return PL_("resolvable", "resolvables", count);
@@ -130,17 +126,17 @@ string kind_to_string_localized(const zypp::ResKind & kind, unsigned long count)
 
 // ----------------------------------------------------------------------------
 
-string string_patch_status(const PoolItem & pi)
+std::string string_patch_status( const PoolItem & pi )
 {
   // make sure this will not happen
-  if (pi.isUndetermined())
+  if ( pi.isUndetermined() )
     return _("Unknown");
 
-  if (pi.isRelevant())
+  if ( pi.isRelevant() )
   {
-    if (pi.isSatisfied())
+    if ( pi.isSatisfied() )
       return _("Installed"); //! \todo make this "Applied" instead?
-    if (pi.isBroken())
+    if ( pi.isBroken() )
       return _("Needed");
     // can this ever happen?
     return "";
@@ -151,13 +147,13 @@ string string_patch_status(const PoolItem & pi)
 
 // ----------------------------------------------------------------------------
 
-bool looks_like_url (const string& s)
+bool looks_like_url( const std::string& s )
 {
-  string::size_type pos = s.find (':');
-  if (pos != string::npos)
+  std::string::size_type pos = s.find (':');
+  if ( pos != std::string::npos )
   {
-    string scheme (s, 0, pos);
-    if (Url::isRegisteredScheme(scheme) || scheme == "obs")
+    std::string scheme( s, 0, pos );
+    if ( Url::isRegisteredScheme( scheme ) || scheme == "obs" )
       return true;
   }
   return false;
@@ -165,39 +161,38 @@ bool looks_like_url (const string& s)
 
 // ----------------------------------------------------------------------------
 
-Url make_url (const string & url_s)
+Url make_url( const std::string & url_s )
 {
   Url u;
-  string urlstr(zypp::url::encode(url_s, URL_SAFE_CHARS));
+  std::string urlstr( url::encode( url_s, URL_SAFE_CHARS ) );
 
-  if (!url_s.empty() && !looks_like_url(url_s))
+  if ( !url_s.empty() && !looks_like_url(url_s) )
   {
     DBG << "'" << url_s << "' does not look like a URL, trying to treat it like a local path" << endl;
 
     Pathname path;
     // make an url from absolute path
-    if (url_s[0] == '/')
+    if ( url_s[0] == '/' )
       path = url_s;
     // make absolute path url from relative path
     else
     {
       char buf[PATH_MAX];
-      if (::getcwd(buf, PATH_MAX) != NULL)
+      if ( ::getcwd(buf, PATH_MAX) != NULL )
       {
         DBG <<  "current working directory: " << buf << endl;
-        path = string(buf) + "/" + url_s;
+        path = std::string(buf) + "/" + url_s;
       }
     }
 
-    if (PathInfo(path).isExist())
+    if ( PathInfo(path).isExist() )
     {
-      urlstr = "dir:" + url::encode(path.absolutename().asString(),"/");
+      urlstr = "dir:" + url::encode( path.absolutename().asString(), "/" );
       MIL <<  "resulting url: " << urlstr << endl;
     }
     else
     {
-      Zypper::instance()->out().error(
-        _("Specified local path does not exist or is not accessible."));
+      Zypper::instance()->out().error(_("Specified local path does not exist or is not accessible."));
       ERR << "specified local path does not exist or is not accessible" << endl;
       return u;
     }
@@ -206,12 +201,10 @@ Url make_url (const string & url_s)
   try {
     u = Url(urlstr);
   }
-  catch ( const Exception & excpt_r ) {
+  catch ( const Exception & excpt_r )
+  {
     ZYPP_CAUGHT( excpt_r );
-    ostringstream s;
-    s << _("Given URI is invalid") << ": " << urlstr
-      << " (" << excpt_r.asUserString() << ")";
-    Zypper::instance()->out().error(s.str());
+    Zypper::instance()->out().error( str::Str() << _("Given URI is invalid") << ": " << urlstr << " (" << excpt_r.asUserString() << ")" );
   }
   return u;
 }
@@ -227,7 +220,8 @@ Url make_url (const string & url_s)
 #define OBS_PROJECT_NAME_RX "[" ALNUM "][-+" ALNUM "\\.:]+"
 
 ///////////////////////////////////////////////////////////////////
-namespace {
+namespace
+{
   parser::ProductFileData baseproductdata( const Pathname & root_r )
   {
     parser::ProductFileData ret;
@@ -250,10 +244,10 @@ namespace {
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-Url make_obs_url( const string & obsuri, const Url & base_url, const string & default_platform )
+Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::string & default_platform )
 {
   // obs-server ==> < base_url, default_platform >
-  static std::map<std::string, std::pair<zypp::Url,std::string>> wellKnownServers({
+  static std::map<std::string, std::pair<Url,std::string>> wellKnownServers({
     { "build.opensuse.org",	{ Url("http://download.opensuse.org/repositories/"),	std::string() } }
   });
 
@@ -339,15 +333,15 @@ Url make_obs_url( const string & obsuri, const Url & base_url, const string & de
 
 // ----------------------------------------------------------------------------
 
-bool looks_like_rpm_file(const string & s)
+bool looks_like_rpm_file( const std::string & s )
 {
   // don't even bother to check strings shorter than 4 chars.
-  if (s.size() <= 4)
+  if ( s.size() <= 4 )
     return false;
 
-  if (s.rfind(".rpm") == s.size() - 4 || // ends with .rpm
-      s.find("./") == 0 ||               // starts with ./ or ../ indicating
-      s.find("../") == 0)                //  a local path
+  if ( s.rfind(".rpm") == s.size() - 4	// ends with .rpm
+    || s.find("./") == 0 		// starts with ./ or ../ indicating
+    || s.find("../") == 0 )		//  a local path
     return true;
 
   return false;
@@ -355,7 +349,7 @@ bool looks_like_rpm_file(const string & s)
 
 // ----------------------------------------------------------------------------
 
-Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
+Pathname cache_rpm( const std::string & rpm_uri_str, const std::string & cache_dir )
 {
   Url rpmurl = make_url(rpm_uri_str);
   Pathname rpmpath(rpmurl.getPathName());
@@ -378,7 +372,7 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
     mm.release(mid);
     mm.close(mid);
 
-    if (error)
+    if ( error )
     {
       Zypper::instance()->out().error(
         _("Problem copying the specified RPM file to the cache directory."),
@@ -390,19 +384,20 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
   catch (const Exception & e)
   {
     Zypper::instance()->out().error(e,
-        _("Problem retrieving the specified RPM file") + string(":"),
+        _("Problem retrieving the specified RPM file") + std::string(":"),
         _("Please check whether the file is accessible."));
   }
 
   return Pathname();
 }
 
-std::string & indent(std::string & text, int columns)
+std::string & indent( std::string & text, int columns )
 {
-  string indent(columns, ' '); indent.insert(0, 1, '\n');
+  std::string indent( columns, ' ');
+  indent.insert( 0, 1, '\n' );
   DBG << "to: '" << indent << "'" << endl;
-  text = str::gsub(text, "\n", indent);
-  text.insert(0, string(columns, ' '));
+  text = str::gsub( text, "\n", indent );
+  text.insert( 0, std::string( columns, ' ' ) );
   return text;
 }
 
@@ -410,9 +405,9 @@ std::string & indent(std::string & text, int columns)
  * \todo this is an ugly quick-hack code, let's do something reusable and maintainable in libzypp later
  */
 // ----------------------------------------------------------------------------
-string asXML(const Product & p, bool is_installed)
+std::string asXML( const Product & p, bool is_installed )
 {
-  ostringstream str;
+  std::ostringstream str;
   {
     // Legacy: Encoded almost everything as attribute
     // Think about using subnodes for new stuff.
@@ -445,9 +440,9 @@ string asXML(const Product & p, bool is_installed)
   return str.str();
 }
 
-string asXML(const Pattern & p, bool is_installed)
+std::string asXML( const Pattern & p, bool is_installed )
 {
-  ostringstream str;
+  std::ostringstream str;
   {
     // Legacy: Encoded almost everything as attribute
     // Think about using subnodes for new stuff.
@@ -475,7 +470,7 @@ string asXML(const Pattern & p, bool is_installed)
 
 // ----------------------------------------------------------------------------
 
-DownloadMode get_download_option(Zypper & zypper, bool quiet)
+DownloadMode get_download_option( Zypper & zypper, bool quiet )
 {
   DownloadMode mode;
   DownloadMode zconfig = ZConfig::instance().commit_downloadMode();
@@ -494,7 +489,7 @@ DownloadMode get_download_option(Zypper & zypper, bool quiet)
 
   // check --download <mode>
   // this option overrides the above aliases, if used simultaneously
-  string download;
+  std::string download;
   parsed_opts::const_iterator it = zypper.cOpts().find("download");
   if (it != zypper.cOpts().end())
     download = it->second.front();
@@ -561,11 +556,11 @@ bool packagekit_running()
 
   ExternalProgram pkcheck(argv);
 
-  string line;
-  for (line = pkcheck.receiveLine(); !line.empty(); line = pkcheck.receiveLine())
+  std::string line;
+  for ( line = pkcheck.receiveLine(); !line.empty(); line = pkcheck.receiveLine() )
   {
     DBG << "dbus-send: " << line << endl;
-    if (line.find("boolean") != string::npos && line.find("true") != string::npos)
+    if ( line.find("boolean") != std::string::npos && line.find("true") != std::string::npos )
       result = true;
   }
 
@@ -589,6 +584,6 @@ void packagekit_suggest_quit()
     NULL
   };
 
-  ExternalProgram pkcall(argv);
+  ExternalProgram pkcall( argv );
   pkcall.close();
 }

@@ -13,11 +13,6 @@
 #include "update.h"
 #include "main.h"
 
-namespace std
-{
-  // std::container stream output
-  using zypp::operator<<;
-}
 using namespace zypp;
 typedef std::set<PoolItem> Candidates;
 
@@ -201,12 +196,12 @@ inline std::string i18nPatchStatusAsString( const PoolItem & pi_r )
 {
   switch ( pi_r.status().validate() )
   {
-    case zypp::ResStatus::BROKEN:	return pi_r.isUnwanted() ? ColorString( _("unwanted"), ColorContext::HIGHLIGHT ).str()
+    case ResStatus::BROKEN:	return pi_r.isUnwanted() ? ColorString( _("unwanted"), ColorContext::HIGHLIGHT ).str()
 								 : _("needed");	break;
-    case zypp::ResStatus::SATISFIED:	return _("applied");	break;
-    case zypp::ResStatus::NONRELEVANT:	return _("not needed");	break;
+    case ResStatus::SATISFIED:	return _("applied");	break;
+    case ResStatus::NONRELEVANT:	return _("not needed");	break;
 
-    case zypp::ResStatus::UNDETERMINED:	// fall through
+    case ResStatus::UNDETERMINED:	// fall through
     default:
       break;
   }
@@ -217,12 +212,12 @@ inline const char *const xml_patchStatusAsString( const PoolItem & pi_r )
 {
   switch ( pi_r.status().validate() )
   {
-    case zypp::ResStatus::BROKEN:	return pi_r.isUnwanted() ? "unwanted"
+    case ResStatus::BROKEN:	return pi_r.isUnwanted() ? "unwanted"
 								 : "needed";	break;
-    case zypp::ResStatus::SATISFIED:	return "applied";	break;
-    case zypp::ResStatus::NONRELEVANT:	return "not-needed";	break;
+    case ResStatus::SATISFIED:	return "applied";	break;
+    case ResStatus::NONRELEVANT:	return "not-needed";	break;
 
-    case zypp::ResStatus::UNDETERMINED:	// fall through
+    case ResStatus::UNDETERMINED:	// fall through
     default:
       break;
   }
@@ -269,7 +264,7 @@ static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
 // returns true if restartSuggested() patches are availble
 static bool xml_list_patches (Zypper & zypper)
 {
-  const zypp::ResPool& pool = God->pool();
+  const ResPool& pool = God->pool();
 
   // check whether there are packages affecting the update stack
   bool pkg_mgr_available = false;
@@ -393,7 +388,7 @@ static bool list_patch_updates( Zypper & zypper )
   CliMatchPatch cliMatchPatch( zypper );
   bool all = zypper.cOpts().count("all");
 
-  const zypp::ResPool& pool = God->pool();
+  const ResPool& pool = God->pool();
   for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
   {
     Patch::constPtr patch = asKind<Patch>(*it);
@@ -465,7 +460,7 @@ static bool list_patch_updates( Zypper & zypper )
 static void
 find_updates( const ResKind & kind, Candidates & candidates )
 {
-  const zypp::ResPool& pool = God->pool();
+  const ResPool& pool = God->pool();
   DBG << "Looking for update candidates of kind " << kind << endl;
 
   // package updates
@@ -530,7 +525,7 @@ find_updates( const ResKindSet & kinds, Candidates & candidates )
 
 // ----------------------------------------------------------------------------
 
-string i18n_kind_updates(const ResKind & kind)
+std::string i18n_kind_updates(const ResKind & kind)
 {
   if (kind == ResKind::package)
     return _("Package updates");
@@ -613,7 +608,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 
     // header
     TableHeader th;
-    unsigned int name_col;
+    unsigned name_col;
     // TranslatorExplanation S stands for Status
     th << _("S");
     if (!hide_repo)
@@ -631,7 +626,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 
     tbl << th;
 
-    unsigned int cols = th.cols();
+    unsigned cols = th.cols();
 
     ResPoolProxy uipool( ResPool::instance().proxy() );
 

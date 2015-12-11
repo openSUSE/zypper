@@ -15,7 +15,7 @@ inline std::ostream & printRichText( std::ostream & str, std::string text, unsig
   if ( text.find("DT:Rich") != std::string::npos )
     text = processRichText( text );
 
-  return zypp::str::printIndented( str, text, indent_r, width_r );	// even unindented as it also asserts a trailing '/n'
+  return str::printIndented( str, text, indent_r, width_r );	// even unindented as it also asserts a trailing '/n'
 }
 
 #endif
