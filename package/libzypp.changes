@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Dec 11 19:07:09 CET 2015 - ma@suse.de
+
+- ResPoolProxy: make begin/end pairs Iterable
+- String: Format and FormatNAC classes based on boost::format
+- DefaultIntegral: provide initial value
+- More specific exception message if GPG binary is missing (bsc#637791)
+- version 15.20.0 (19)
+
+-------------------------------------------------------------------
 Thu Dec 10 01:14:50 CET 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
