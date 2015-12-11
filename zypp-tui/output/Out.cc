@@ -21,22 +21,22 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
   utf8::string r(rhs);
 
   if ( width_r == out::termwidthUnlimited )
-    return zypp::str::Str() << l << r;	// plain string if zero width
+    return str::Str() << l << r;	// plain string if zero width
 
   unsigned llen = l.size();
   unsigned rlen = r.size();
   int diff = width_r - llen - rlen;
 
-  //zypp::AutoDispose<int> _delay( 1, ::sleep );
+  //AutoDispose<int> _delay( 1, ::sleep );
 
   if ( diff > 0 )
   {
     // expand...
     if ( ! ( flags_r.testFlag( SF_EXPAND ) && ::isatty(STDOUT_FILENO) ) )
-      return zypp::str::Str() << l << r;
+      return str::Str() << l << r;
 
     if ( percentHint < 0 || percentHint > 100 )
-      return zypp::str::Str() << l << std::string( diff, exp_r ) << r;
+      return str::Str() << l << std::string( diff, exp_r ) << r;
 
     // else:  draw % indicator
     // -------
@@ -44,17 +44,17 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
     // .<99%>=
     // .<100%>
     if ( percentHint == 0 )
-      return zypp::str::Str() << l << std::string( diff, '-' ) << r;
+      return str::Str() << l << std::string( diff, '-' ) << r;
 
 
     unsigned pc = diff * percentHint / 100; // diff > 0 && percentHint > 0
     if ( diff < 6 )	// not enough space for fancy stuff
-      return zypp::str::Str() << l <<  std::string( pc, '.' ) << std::string( diff-pc, '=' ) << r;
+      return str::Str() << l <<  std::string( pc, '.' ) << std::string( diff-pc, '=' ) << r;
 
     // else: less boring
-    std::string tag( zypp::str::Str() << '<' << percentHint << "%>" );
+    std::string tag( str::Str() << '<' << percentHint << "%>" );
     pc = ( pc > tag.size() ? pc - tag.size() : 0 );
-    return zypp::str::Str() << l << std::string( pc, '.' ) << tag << std::string( diff-pc-tag.size(), '=' ) << r;
+    return str::Str() << l << std::string( pc, '.' ) << tag << std::string( diff-pc-tag.size(), '=' ) << r;
   }
   else if ( diff < 0 )
   {
@@ -63,19 +63,19 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
     {
       if ( rlen > width_r )
 	return r.substr( 0, width_r ).str();
-      return zypp::str::Str() << l.substr( 0, width_r - rlen ) << r;
+      return str::Str() << l.substr( 0, width_r - rlen ) << r;
     }
     else if ( flags_r.testFlag( SF_SPLIT ) )
     {
-      return zypp::str::Str() << ( llen > width_r ? l.substr( 0, width_r ) : l )
+      return str::Str() << ( llen > width_r ? l.substr( 0, width_r ) : l )
 			      << "\n"
 			      << ( rlen > width_r ? r.substr( 0, width_r ) : std::string( width_r - rlen, ' ' ) + r );
     }
     // else:
-    return zypp::str::Str() << l << r;
+    return str::Str() << l << r;
   }
   // else: fits exactly
-  return zypp::str::Str() << l << r;
+  return str::Str() << l << r;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -95,10 +95,10 @@ bool Out::progressFilter()
   return false;
 }
 
-std::string Out::zyppExceptionReport(const zypp::Exception & e)
+std::string Out::zyppExceptionReport(const Exception & e)
 {
   std::ostringstream s;
-  // The Exception history is a stack! So zypp::Exception::asUserHistory() prints:
+  // The Exception history is a stack! So Exception::asUserHistory() prints:
   //   This is bad!          <- Exception::asUserString()
   //   History:            -+
   //    - top level error   |<- Exception::historyAsString()
@@ -130,7 +130,7 @@ int Out::Error::report( Zypper & zypper_r ) const
   return zypper_r.exitCode();
 }
 
-std::string Out::Error::combine( std::string && msg_r, const zypp::Exception & ex_r )
+std::string Out::Error::combine( std::string && msg_r, const Exception & ex_r )
 {
   if ( msg_r.empty() )
   {
@@ -143,5 +143,5 @@ std::string Out::Error::combine( std::string && msg_r, const zypp::Exception & e
   }
   return std::move(msg_r);
 }
-std::string Out::Error::combine( const zypp::Exception & ex_r )
+std::string Out::Error::combine( const Exception & ex_r )
 { return Zypper::instance()->out().zyppExceptionReport( ex_r ); }

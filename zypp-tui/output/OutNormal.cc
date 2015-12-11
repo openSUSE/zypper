@@ -22,41 +22,39 @@
 
 #include "OutNormal.h"
 
-using namespace std;
+using std::cout;
+using std::cerr;
+using std::endl;
 
-OutNormal::OutNormal(Verbosity verbosity_r)
-  : Out(TYPE_NORMAL, verbosity_r),
-    _use_colors(false), _isatty(isatty(STDOUT_FILENO)), _newline(true), _oneup(false)
+OutNormal::OutNormal( Verbosity verbosity_r )
+: Out( TYPE_NORMAL, verbosity_r )
+, _use_colors( false )
+, _isatty( isatty(STDOUT_FILENO) )
+, _newline( true )
+, _oneup( false )
 {}
 
 OutNormal::~OutNormal()
-{
+{}
 
-}
+bool OutNormal::mine( Type type )
+{ return( type & Out::TYPE_NORMAL ); }
 
-bool OutNormal::mine(Type type)
+bool OutNormal::infoWarningFilter( Verbosity verbosity_r, Type mask )
 {
-  // Type::TYPE_NORMAL is mine
-  if (type & Out::TYPE_NORMAL)
+  if ( !mine( mask ) )
+    return true;
+  if ( verbosity() < verbosity_r )
     return true;
   return false;
 }
 
-bool OutNormal::infoWarningFilter(Verbosity verbosity_r, Type mask)
+void OutNormal::info( const std::string & msg_r, Verbosity verbosity_r, Type mask )
 {
-  if (!mine(mask))
-    return true;
-  if (verbosity() < verbosity_r)
-    return true;
-  return false;
-}
-
-void OutNormal::info(const std::string & msg_r, Verbosity verbosity_r, Type mask)
-{
-  if (infoWarningFilter(verbosity_r, mask))
+  if ( infoWarningFilter( verbosity_r, mask ) )
     return;
 
-  if (!_newline)
+  if ( !_newline )
     cout << endl;
 
   ColorString msg( msg_r, ColorContext::MSG_STATUS );
@@ -72,25 +70,25 @@ void OutNormal::info(const std::string & msg_r, Verbosity verbosity_r, Type mask
 void OutNormal::infoLine( const TermLine & msg, Verbosity verbosity_r, Type mask )
 { info( msg.get( termwidth() ), verbosity_r, mask ); }
 
-void OutNormal::warning(const std::string & msg, Verbosity verbosity_r, Type mask)
+void OutNormal::warning( const std::string & msg, Verbosity verbosity_r, Type mask )
 {
-  if (infoWarningFilter(verbosity_r, mask))
+  if ( infoWarningFilter( verbosity_r, mask ) )
     return;
 
-  if (!_newline)
+  if ( !_newline )
     cout << endl;
 
   cout << ( ColorContext::MSG_WARNING << _("Warning: ") ) << msg << endl;
   _newline = true;
 }
 
-void OutNormal::error(const std::string & problem_desc, const std::string & hint)
+void OutNormal::error( const std::string & problem_desc, const std::string & hint )
 {
-  if (!_newline)
+  if ( !_newline )
     cout << endl;
 
   cerr << ( ColorContext::MSG_ERROR << problem_desc );
-  if (!hint.empty() && verbosity() > Out::QUIET)
+  if ( !hint.empty() && verbosity() > Out::QUIET )
     cerr << endl << hint;
   cerr << endl;
   _newline = true;
@@ -98,18 +96,16 @@ void OutNormal::error(const std::string & problem_desc, const std::string & hint
 
 // ----------------------------------------------------------------------------
 
-void OutNormal::error(const zypp::Exception & e,
-                      const string & problem_desc,
-                      const string & hint)
+void OutNormal::error( const Exception & e, const std::string & problem_desc, const std::string & hint )
 {
-  if (!_newline)
+  if ( !_newline )
     cout << endl;
 
   // problem and cause
   cerr << ( ColorContext::MSG_ERROR << problem_desc << endl << zyppExceptionReport(e) ) << endl;
 
   // hint
-  if (!hint.empty() && verbosity() > Out::QUIET)
+  if ( !hint.empty() && verbosity() > Out::QUIET )
     cerr << hint << endl;
 
   _newline = true;
@@ -117,11 +113,11 @@ void OutNormal::error(const zypp::Exception & e,
 
 // ----------------------------------------------------------------------------
 
-void OutNormal::displayProgress (const string & s, int percent)
+void OutNormal::displayProgress ( const std::string & s, int percent )
 {
   static AliveCursor cursor;
 
-  if (_isatty)
+  if ( _isatty )
   {
     TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '-' );
     outstr.lhs << s << ' ';
@@ -134,7 +130,7 @@ void OutNormal::displayProgress (const string & s, int percent)
     ++cursor;
     outstr.rhs << '[' << cursor.current() << ']';
 
-    if(_oneup)
+    if ( _oneup )
       cout << CLEARLN << CURSORUP(1);
     cout << CLEARLN;
 
@@ -148,18 +144,18 @@ void OutNormal::displayProgress (const string & s, int percent)
 
 // ----------------------------------------------------------------------------
 
-void OutNormal::displayTick (const string & s)
+void OutNormal::displayTick( const std::string & s )
 {
   static AliveCursor cursor;
 
-  if (_isatty)
+  if ( _isatty )
   {
     TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '-' );
     ++cursor;
     outstr.lhs << s << ' ';
     outstr.rhs << '[' << cursor.current() << ']';
 
-    if(_oneup)
+    if( _oneup )
       cout << CLEARLN << CURSORUP(1);
     cout << CLEARLN;
 
@@ -173,25 +169,23 @@ void OutNormal::displayTick (const string & s)
 
 // ----------------------------------------------------------------------------
 
-void OutNormal::progressStart(const std::string & id,
-                              const std::string & label,
-                              bool is_tick)
+void OutNormal::progressStart( const std::string & id, const std::string & label, bool is_tick )
 {
-  if (progressFilter())
+  if ( progressFilter() )
     return;
 
-  if (!_isatty)
+  if ( !_isatty )
     cout << label << " [";
 
-  if (is_tick)
-    displayTick(label);
+  if ( is_tick )
+    displayTick( label );
   else
-    displayProgress(label, 0);
+    displayProgress( label, 0 );
 
   _newline = false;
 }
 
-void OutNormal::progress(const std::string & id, const string & label, int value)
+void OutNormal::progress( const std::string & id, const std::string & label, int value )
 {
   if (progressFilter())
     return;
@@ -204,18 +198,18 @@ void OutNormal::progress(const std::string & id, const string & label, int value
   _newline = false;
 }
 
-void OutNormal::progressEnd(const std::string & id, const string & label, bool error)
+void OutNormal::progressEnd( const std::string & id, const std::string & label, bool error )
 {
-  if (progressFilter())
+  if ( progressFilter() )
     return;
 
-  if (!error && _use_colors)
+  if ( !error && _use_colors )
     cout << ColorContext::MSG_STATUS;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '.' );
-  if (_isatty)
+  if ( _isatty )
   {
-    if(_oneup)
+    if ( _oneup )
     {
       cout << CLEARLN << CURSORUP(1);
       _oneup = false;
@@ -224,7 +218,7 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
 
     outstr.lhs << label << ' ';
     outstr.rhs << '[';
-    if (error)
+    if ( error )
       outstr.rhs << ColorString( _("error"), ColorContext::NEGATIVE );
     else
       outstr.rhs << _("done");
@@ -238,25 +232,25 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
   cout << outline << endl << std::flush;
   _newline = true;
 
-  if (!error && _use_colors)
+  if ( !error && _use_colors )
     cout << ColorContext::DEFAULT;
 }
 
 // progress with download rate
-void OutNormal::dwnldProgressStart(const zypp::Url & uri)
+void OutNormal::dwnldProgressStart( const Url & uri )
 {
-  if (verbosity() < NORMAL)
+  if ( verbosity() < NORMAL )
     return;
 
-  if (_isatty)
+  if ( _isatty )
     cout << CLEARLN;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '-' );
   outstr.lhs << _("Retrieving:") << ' ';
-  if (verbosity() == DEBUG)
+  if ( verbosity() == DEBUG )
     outstr.lhs << uri;
   else
-    outstr.lhs << zypp::Pathname(uri.getPathName()).basename();
+    outstr.lhs << Pathname(uri.getPathName()).basename();
   outstr.lhs << ' ';
   if (_isatty)
     outstr.rhs << '[' << _("starting") << ']';
@@ -270,29 +264,27 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
   _newline = false;
 }
 
-void OutNormal::dwnldProgress(const zypp::Url & uri,
-                              int value,
-                              long rate)
+void OutNormal::dwnldProgress( const Url & uri, int value, long rate )
 {
-  if (verbosity() < NORMAL)
+  if ( verbosity() < NORMAL )
     return;
 
-  if (!isatty(STDOUT_FILENO))
+  if ( !isatty(STDOUT_FILENO) )
   {
     cout << '.' << std::flush;
     return;
   }
 
-  if(_oneup)
+  if( _oneup )
     cout << CLEARLN << CURSORUP(1);
   cout << CLEARLN;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '-' );
   outstr.lhs << _("Retrieving:") << " ";
-  if (verbosity() == DEBUG)
+  if ( verbosity() == DEBUG )
     outstr.lhs << uri;
   else
-    outstr.lhs << zypp::Pathname(uri.getPathName()).basename();
+    outstr.lhs << Pathname(uri.getPathName()).basename();
    outstr.lhs << ' ';
 
   // dont display percents if invalid
@@ -302,8 +294,8 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
   static AliveCursor cursor;
   ++cursor;
   outstr.rhs << '[' << cursor.current();
-  if (rate > 0 )
-    outstr.rhs << " (" << zypp::ByteCount(rate) << "/s)";
+  if ( rate > 0 )
+    outstr.rhs << " (" << ByteCount(rate) << "/s)";
   outstr.rhs << ']';
 
   std::string outline( outstr.get( termwidth() ) );
@@ -312,28 +304,28 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
   _newline = false;
 }
 
-void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
+void OutNormal::dwnldProgressEnd( const Url & uri, long rate, bool error )
 {
-  if (verbosity() < NORMAL)
+  if ( verbosity() < NORMAL )
     return;
 
-  if (!error && _use_colors)
+  if ( !error && _use_colors )
     cout << ColorContext::MSG_STATUS;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '.' );
-  if (_isatty)
+  if ( _isatty )
   {
-    if(_oneup)
+    if( _oneup )
       cout << CLEARLN << CURSORUP(1);
     cout << CLEARLN;
     outstr.lhs << _("Retrieving:") << " ";
-    if (verbosity() == DEBUG)
+    if ( verbosity() == DEBUG )
       outstr.lhs << uri;
     else
-      outstr.lhs << zypp::Pathname(uri.getPathName()).basename();
+      outstr.lhs << Pathname(uri.getPathName()).basename();
     outstr.lhs << ' ';
     outstr.rhs << '[';
-    if (error)
+    if ( error )
       outstr.rhs << ColorString( _("error"), ColorContext::NEGATIVE );
     else
       outstr.rhs << _("done");
@@ -341,29 +333,26 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
   else
     outstr.rhs << (error ? _("error") : _("done"));
 
-  if (rate > 0)
-    outstr.rhs << " (" << zypp::ByteCount(rate) << "/s)";
+  if ( rate > 0 )
+    outstr.rhs << " (" << ByteCount(rate) << "/s)";
   outstr.rhs << ']';
 
   std::string outline( outstr.get( termwidth() ) );
   cout << outline << endl << std::flush;
   _newline = true;
 
-  if (!error && _use_colors)
+  if ( !error && _use_colors )
     cout << ColorContext::DEFAULT;
 }
 
-void OutNormal::prompt(PromptId id,
-                       const string & prompt,
-                       const PromptOptions & poptions,
-                       const std::string & startdesc)
+void OutNormal::prompt( PromptId id, const std::string & prompt, const PromptOptions & poptions, const std::string & startdesc )
 {
-  if (!_newline)
+  if ( !_newline )
     cout << endl;
 
-  if (startdesc.empty())
+  if ( startdesc.empty() )
   {
-    if (_isatty)
+    if ( _isatty )
       cout << CLEARLN;
   }
   else
@@ -372,28 +361,27 @@ void OutNormal::prompt(PromptId id,
   ColorStream cout( std::cout, ColorContext::PROMPT ); // scoped color on std::cout
   cout << prompt;
   if ( ! poptions.empty() )
-    cout << " " << ColorString(poptions.optionString()); 
+    cout << " " << ColorString( poptions.optionString() );
   cout << ": " << std::flush;
   // prompt ends with newline (user hits <enter>) unless exited abnormaly
   _newline = true;
 }
 
-void OutNormal::promptHelp(const PromptOptions & poptions)
+void OutNormal::promptHelp( const PromptOptions & poptions )
 {
   cout << endl;
-  if (poptions.helpEmpty())
+  if ( poptions.helpEmpty() )
     cout << _("No help available for this prompt.") << endl;
   else
   {
-    unsigned int pos = 0;
-    for(PromptOptions::StrVector::const_iterator it = poptions.options().begin();
-        it != poptions.options().end(); ++it, ++pos)
+    unsigned pos = 0;
+    for( PromptOptions::StrVector::const_iterator it = poptions.options().begin(); it != poptions.options().end(); ++it, ++pos )
     {
-      if (poptions.isDisabled(pos))
+      if ( poptions.isDisabled( pos ) )
         continue;
       cout << *it << " - ";
-      const string & hs_r = poptions.optionHelp(pos);
-      if (hs_r.empty())
+      const std::string & hs_r = poptions.optionHelp( pos );
+      if ( hs_r.empty() )
         cout << "(" << _("no help available for this option") << ")";
       else
         cout << hs_r;
@@ -402,7 +390,7 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
   }
 
   ColorStream cout( std::cout, ColorContext::PROMPT ); // scoped color on std::cout
-  cout << endl << ColorString(poptions.optionString()) << ": " << std::flush;
+  cout << endl << ColorString( poptions.optionString() ) << ": " << std::flush;
   // prompt ends with newline (user hits <enter>) unless exited abnormaly
   _newline = true;
 }
@@ -412,7 +400,7 @@ unsigned OutNormal::termwidth() const
   if ( _isatty )
   {
     struct winsize wns;
-    if (!ioctl(1, TIOCGWINSZ, &wns))
+    if ( !ioctl( 1, TIOCGWINSZ, &wns ) )
       return wns.ws_col;
   }
   return Out::termwidth();	// unlimited

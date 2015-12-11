@@ -303,10 +303,10 @@ namespace mbs
 
 
     /** Temporarily increase indent */
-    struct ScopedIndentIncrement : private zypp::DtorReset
+    struct ScopedIndentIncrement : private DtorReset
     {
       ScopedIndentIncrement( MbsWriteWrapped & mww_r, size_t increment_r )
-      : zypp::DtorReset( mww_r._indent )
+      : DtorReset( mww_r._indent )
       { mww_r._indent = mww_r.saneIncrementIndent( increment_r ); }
     };
     /** \relates ScopedIndentIncrement Temporarily increase indent. */

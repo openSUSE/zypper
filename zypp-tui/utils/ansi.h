@@ -18,6 +18,7 @@
 #include <string>
 
 #include <zypp/base/String.h>
+using namespace zypp;
 
 /** If output is done in colors (depends on config) */
 bool do_colors();
@@ -522,7 +523,7 @@ namespace ansi
       std::string ret( plainstr() );
       if ( do_colors() && color_r )
       {
-	using zypp::str::replaceAll;
+	using str::replaceAll;
 	replaceAll( ret, Color::SGRReset(), color_r.str() );
 	ret = color_r.str() + ret + Color::SGRReset();
       }

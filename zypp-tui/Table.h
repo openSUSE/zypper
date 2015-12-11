@@ -24,14 +24,9 @@
 #include "utils/ansi.h"
 #include "utils/colors.h"
 
-using std::string;
-using std::ostream;
-using std::list;
-using std::vector;
-
 //! table drawing style
 enum TableLineStyle {
-  Ascii         = 0,           ///< | - +
+  Ascii		= 0,	///< | - +
   Light,
   Heavy,
   Double,
@@ -43,7 +38,7 @@ enum TableLineStyle {
   DoubleLight,
   Colon,
   none,
-  TLS_End,			       ///< sentinel
+  TLS_End,		///< sentinel
 };
 
 class Table;
@@ -63,14 +58,14 @@ public:
 
   template<class Tp_>
   TableRow & add( const Tp_ & val_r )
-  { return add( zypp::str::asString( val_r ) ); }
+  { return add( str::asString( val_r ) ); }
 
 
   TableRow & addDetail( std::string s );
 
   template<class Tp_>
   TableRow & addDetail( const Tp_ & val_r )
-  { return addDetail( zypp::str::asString( val_r ) ); }
+  { return addDetail( str::asString( val_r ) ); }
 
 
   // return number of columns
@@ -86,13 +81,13 @@ public:
   //! output with \a parent table attributes
   std::ostream & dumpTo( std::ostream & stream, const Table & parent ) const;
 
-  typedef vector<string> container;
+  typedef std::vector<std::string> container;
 
   // BinaryPredicate
   struct Less
   {
     unsigned _by_column;
-    Less (unsigned by_column): _by_column (by_column) {}
+    Less( unsigned by_column ) : _by_column (by_column) {}
 
     bool operator()( const TableRow & a, const TableRow & b ) const
     {
@@ -119,7 +114,7 @@ private:
 /** \relates TableRow Add colummn. */
 template<class Tp_>
 TableRow & operator<<( TableRow & tr, Tp_ && val )
-{ return tr.add( zypp::str::asString( std::forward<Tp_>(val) ) ); }
+{ return tr.add( str::asString( std::forward<Tp_>(val) ) ); }
 /** \overload preserving TableRow rvalue reference. */
 template<class Tp_>
 TableRow && operator<<( TableRow && tr, Tp_ && val )
@@ -143,9 +138,10 @@ TableHeader && operator<<( TableHeader && th, Tp_ && val )
 
 
 /** \todo nice idea but poor interface */
-class Table {
+class Table
+{
 public:
-  typedef list<TableRow> container;
+  typedef std::list<TableRow> container;
 
   static TableLineStyle defaultStyle;
 
@@ -155,13 +151,13 @@ public:
 
 
   std::ostream & dumpTo( std::ostream & stream ) const;
-  bool empty () const { return _rows.empty(); }
-  void sort (unsigned by_column);       // columns start with 0...
+  bool empty() const { return _rows.empty(); }
+  void sort( unsigned by_column );       // columns start with 0...
 
-  void lineStyle (TableLineStyle st);
-  void wrap(int force_break_after = -1);
-  void allowAbbrev(unsigned column);
-  void margin(unsigned margin);
+  void lineStyle( TableLineStyle st );
+  void wrap( int force_break_after = -1 );
+  void allowAbbrev( unsigned column );
+  void margin( unsigned margin );
 
   const TableHeader & header() const
   { return _header; }
@@ -170,15 +166,15 @@ public:
   container & rows()
   { return _rows; }
 
-  Table ();
+  Table();
 
   // poor workaroud missing column styles and table entry objects
   void setEditionStyle( unsigned column )
   { _editionStyle.insert( column ); }
 
 private:
-  void dumpRule (ostream &stream) const;
-  void updateColWidths (const TableRow& tr) const;
+  void dumpRule( std::ostream & stream ) const;
+  void updateColWidths( const TableRow & tr ) const;
 
   bool _has_header;
   TableHeader _header;
@@ -187,7 +183,7 @@ private:
   //! maximum column index seen in this table
   mutable unsigned _max_col;
   //! maximum width of respective columns
-  mutable vector<unsigned> _max_width;
+  mutable std::vector<unsigned> _max_width;
   //! table width (columns)
   mutable int _width;
   //! table line drawing style
@@ -195,7 +191,7 @@ private:
   //! amount of space we have to print this table
   int _screen_width;
   //! whether to abbreviate the respective column if needed
-  vector<bool> _abbrev_col;
+  std::vector<bool> _abbrev_col;
   //! left/right margin in number of spaces
   unsigned _margin;
   //! if _do_wrap is set, first break the table at this column;
@@ -279,7 +275,7 @@ public:
 
   template <class KeyType>
   PropertyTable & add( const KeyType & key_r, bool val_r )
-  { _table << ( TableRow() << key_r << (val_r ? _("Yes") : _("No")) ); return *this; }
+  { _table << ( TableRow() << key_r << asYesNo( val_r ) ); return *this; }
 
   ///////////////////////////////////////////////////////////////////
   // Key / Container<Value>

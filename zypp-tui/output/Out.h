@@ -3,7 +3,6 @@
 
 #include <string>
 #include <sstream>
-#include <boost/smart_ptr.hpp>
 
 #include <zypp/base/Xml.h>
 #include <zypp/base/NonCopyable.h>
@@ -194,11 +193,11 @@ struct TermLine
   TermLine() {}
 
   SplitFlags flagsHint;				//< flags to use if not passed to \ref get
-  zypp::DefaultIntegral<char,' '> expHint;	//< expand char to use if not passed to \ref get
-  zypp::DefaultIntegral<int,-1> percentHint;	//< draw progress indicator in expanded space if in [0,100]
+  DefaultIntegral<char,' '> expHint;	//< expand char to use if not passed to \ref get
+  DefaultIntegral<int,-1> percentHint;	//< draw progress indicator in expanded space if in [0,100]
 
-  zypp::str::Str lhs;				//< left side
-  zypp::str::Str rhs;				//< right side
+  str::Str lhs;				//< left side
+  str::Str rhs;				//< right side
 
 
   /** Return plain line made of lhs + rhs */
@@ -252,14 +251,14 @@ ZYPP_DECLARE_OPERATORS_FOR_FLAGS( TermLine::SplitFlags );
  *     cout << "special result" << endl; // special output must be done
  *                                       // the usual way for now
  * }
- * catch(const zypp::Exception & e)
+ * catch(const Exception & e)
  * {
  *   out->error(e, "Problem doing foo", "Do 'bar' to deal with this");
  * }
  *
  * </code>
  */
-class Out : private zypp::base::NonCopyable
+class Out : private base::NonCopyable
 {
 public:
   /** Verbosity levels. */
@@ -315,14 +314,14 @@ public:
   /// \endcode
   struct XmlNode : protected ParentOut
   {
-    typedef zypp::xmlout::Node::Attr Attr;
+    typedef xmlout::Node::Attr Attr;
 
     /** Ctor taking nodename and attribute list. */
     XmlNode( Out & out_r, const std::string & name_r, const std::initializer_list<Attr> & attrs_r = {} )
     : ParentOut( out_r )
     {
       if ( out().typeXML() && ! name_r.empty() )
-      { _node.reset( new zypp::xmlout::Node( std::cout, name_r, attrs_r ) ); }
+      { _node.reset( new xmlout::Node( std::cout, name_r, attrs_r ) ); }
     }
 
     /** Convenience ctor for one attribute pair */
@@ -334,7 +333,7 @@ public:
     XmlNode( XmlNode && rhs ) : ParentOut( rhs ) { _node.swap( rhs._node ); }
 
   private:
-    scoped_ptr<zypp::xmlout::Node> _node;
+    scoped_ptr<xmlout::Node> _node;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -344,7 +343,7 @@ public:
    * \endcode
    */
   void xmlNode( const std::string & name_r, const std::initializer_list<XmlNode::Attr> & attrs_r = {} )
-  { if ( typeXML() ) { zypp::xmlout::node( std::cout, name_r, attrs_r ); } }
+  { if ( typeXML() ) { xmlout::node( std::cout, name_r, attrs_r ); } }
   /** \overload for one attribute pair */
   void xmlNode( const std::string & name_r, XmlNode::Attr attr_r )
   { xmlNode( name_r, { attr_r } ); }
@@ -520,7 +519,7 @@ public:
    * \param Problem description for the user.
    * \param Hint for the user how to cope with the problem.
    */
-  virtual void error(const zypp::Exception & e,
+  virtual void error(const Exception & e,
                      const std::string & problem_desc,
                      const std::string & hint = "") = 0;
 
@@ -583,7 +582,7 @@ public:
    *
    * \param uri   Uri of the file to download.
    */
-  virtual void dwnldProgressStart(const zypp::Url & uri) = 0;
+  virtual void dwnldProgressStart(const Url & uri) = 0;
 
   /**
    * Reports download progress.
@@ -592,7 +591,7 @@ public:
    * \param value Value of the progress in percents. -1 if unknown.
    * \param rate  Current download rate in B/s. -1 if unknown.
    */
-  virtual void dwnldProgress(const zypp::Url & uri,
+  virtual void dwnldProgress(const Url & uri,
                              int value = -1,
                              long rate = -1) = 0;
   /**
@@ -602,7 +601,7 @@ public:
    * \param rate  Average download rate at the end. -1 if unknown.
    * \param error Error flag - did the download finish with error?
    */
-  virtual void dwnldProgressEnd(const zypp::Url & uri,
+  virtual void dwnldProgressEnd(const Url & uri,
                                 long rate = -1,
                                 bool error = false) = 0;
   //@}
@@ -714,9 +713,9 @@ protected:
   virtual bool progressFilter();
 
   /**
-   * Return a zypp::Exception as a string suitable for output.
+   * Return a Exception as a string suitable for output.
    */
-  virtual std::string zyppExceptionReport(const zypp::Exception & e);
+  virtual std::string zyppExceptionReport(const Exception & e);
 
 private:
   Verbosity _verbosity;
@@ -731,7 +730,7 @@ ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Out::Type);
 ///
 /// Progress start and end messages are provided upon object
 /// construction and deletion. Progress data are sent through a
-/// zypp::ProgressData object accessible via \ref operator->.
+/// ProgressData object accessible via \ref operator->.
 ///
 /// \code
 ///    {
@@ -759,7 +758,7 @@ ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Out::Type);
 /// \todo ProgressData provides NumericId which might be used as
 /// id for_out.progress*().
 ///////////////////////////////////////////////////////////////////
-class Out::ProgressBar : private zypp::base::NonCopyable
+class Out::ProgressBar : private base::NonCopyable
 {
 public:
   /** Indicator type for ctor not drawing an initial start bar. */
@@ -778,9 +777,9 @@ public:
     , _progressId( progressId_r )
   {
     if ( total_r )
-      _labelPrefix = zypp::str::form( "(%*u/%u) ", numDigits( total_r ), current_r, total_r );
+      _labelPrefix = str::form( "(%*u/%u) ", numDigits( total_r ), current_r, total_r );
     else if ( current_r )
-      _labelPrefix = zypp::str::form( "(%u) ", current_r );
+      _labelPrefix = str::form( "(%u) ", current_r );
     _progress.name( label_r );
     _progress.sendTo( Print( *this ) );
   }
@@ -825,7 +824,7 @@ public:
   { _progress.name( label_r ); print(); }
 
   /** Explicitly indicate the error condition for the final progress bar. */
-  void error( tribool error_r = true )
+  void error( TriBool error_r = true )
   { _error = error_r; }
 
   /** \overload to disambiguate. */
@@ -841,22 +840,22 @@ public:
   { _progress.name( label_r ); error( true ); }
 
   /** \overload also change the progress bar label. */
-  void error( tribool error_r, const std::string & label_r )
+  void error( TriBool error_r, const std::string & label_r )
   { _progress.name( label_r ); error( error_r ); }
 
 public:
   /** \name Access the embedded ProgressData object */
   //@{
-  zypp::ProgressData * operator->()
+  ProgressData * operator->()
   { return &_progress; }
 
-  const zypp::ProgressData * operator->() const
+  const ProgressData * operator->() const
   { return &_progress; }
 
-  zypp::ProgressData & operator*()
+  ProgressData & operator*()
   { return _progress; }
 
-  const zypp::ProgressData & operator*() const
+  const ProgressData & operator*() const
   { return _progress; }
   //@}
 
@@ -884,7 +883,7 @@ private:
 
 private:
   Out & _out;
-  tribool _error;
+  TriBool _error;
   ProgressData _progress;
   std::string _progressId;
   std::string _labelPrefix;
@@ -1005,21 +1004,21 @@ struct Out::Error
   : _exitcode( exitcode_r ), _msg( std::move(msg_r) ), _hint( std::move(hint_r) ) {}
 
   // code exception hint
-  Error( int exitcode_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
+  Error( int exitcode_r, const Exception & ex_r, std::string hint_r = std::string() )
   : _exitcode( exitcode_r ), _msg( combine( ex_r ) ), _hint( std::move(hint_r) ) {}
 
   // code (msg exception) hint
-  Error( int exitcode_r, std::string msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
+  Error( int exitcode_r, std::string msg_r, const Exception & ex_r, std::string hint_r = std::string() )
   : _exitcode( exitcode_r ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( std::move(hint_r) ) {}
 
   // as above but without code	ZYPPER_EXIT_OK
   Error( std::string msg_r, std::string hint_r = std::string() )
   : _exitcode( ZYPPER_EXIT_OK ), _msg( std::move(msg_r) ), _hint( std::move(hint_r) ) {}
 
-  Error( const zypp::Exception & ex_r, std::string hint_r = std::string() )
+  Error( const Exception & ex_r, std::string hint_r = std::string() )
   : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( ex_r ) ), _hint( std::move(hint_r) ) {}
 
-  Error( std::string msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
+  Error( std::string msg_r, const Exception & ex_r, std::string hint_r = std::string() )
   : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( std::move(hint_r) ) {}
 
   /** Default way of processing a caught \ref Error exception.
@@ -1034,8 +1033,8 @@ struct Out::Error
   std::string _hint;
 
 private:
-  static std::string combine( std::string && msg_r, const zypp::Exception & ex_r );
-  static std::string combine( const zypp::Exception & ex_r );
+  static std::string combine( std::string && msg_r, const Exception & ex_r );
+  static std::string combine( const Exception & ex_r );
 };
 ///////////////////////////////////////////////////////////////////
 
