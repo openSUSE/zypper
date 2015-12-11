@@ -118,6 +118,15 @@ namespace zypp
     template<class TRes>
       const_iterator byKindEnd() const
       { return byKindEnd( ResTraits<TRes>::kind ); }
+
+
+    Iterable<const_iterator> byKind( const ResKind & kind_r ) const
+      { return makeIterable( byKindBegin( kind_r ), byKindEnd( kind_r ) ); }
+
+    template<class TRes>
+      Iterable<const_iterator> byKind() const
+      { return makeIterable( byKindBegin<TRes>(), byKindEnd<TRes>() ); }
+
     //@}
 
  public:
@@ -129,6 +138,9 @@ namespace zypp
    repository_iterator knownRepositoriesBegin() const;
 
    repository_iterator knownRepositoriesEnd() const;
+
+   Iterable<repository_iterator> knownRepositories() const
+   { return makeIterable( knownRepositoriesBegin(), knownRepositoriesEnd() ); }
    //@}
 
   public:
