@@ -40,6 +40,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "  -o/-O    turn on/off looking for obsoletes   (default off)" << endl;
   cerr << "  -m/-M    turn on/off looking for recommends  (default off)" << endl;
   cerr << "  -s/-S    turn on/off looking for supplements (default off)" << endl;
+  cerr << "  -e/-E    turn on/off looking for enhan./sugg.(default off)" << endl;
   cerr << "  -a       short for -n -p -r" << endl;
   cerr << "  -A       short for -n -P -R" << endl;
   cerr << "  -D <pkg> dump dependencies of <pkg>" << endl;
@@ -197,6 +198,7 @@ int main( int argc, char * argv[] )
   bool obsoletes	( false );
   bool recommends	( false );
   bool supplements	( false );
+  bool enhacements	( false );
 
   for ( ; argc; --argc,++argv )
   {
@@ -231,6 +233,8 @@ int main( int argc, char * argv[] )
         case 'M': recommends =	false;	break;
         case 's': supplements =	true;	break;
         case 'S': supplements =	false;	break;
+        case 'e': enhacements =	true;	break;
+        case 'E': enhacements =	false;	break;
       }
       continue;
     }
@@ -280,10 +284,16 @@ int main( int argc, char * argv[] )
 	q.addDependency( sat::SolvAttr::recommends );
       if ( supplements )
 	q.addDependency( sat::SolvAttr::supplements );
+      if ( enhacements )
+      {
+	q.addDependency( sat::SolvAttr::enhances );
+	q.addDependency( sat::SolvAttr::suggests );
+      }
     }
 
     message << *argv << " [" << (ignorecase?'i':'_') << (names?'n':'_') << (requires?'r':'_') << (provides?'p':'_')
-    << (conflicts?'c':'_') << (obsoletes?'o':'_') << (recommends?'m':'_') << (supplements?'s':'_') << "] {" << endl;
+    << (conflicts?'c':'_') << (obsoletes?'o':'_') << (recommends?'m':'_') << (supplements?'s':'_') << (enhacements?'e':'_')
+    << "] {" << endl;
 
     for_( it, q.begin(), q.end() )
     {
