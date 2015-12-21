@@ -228,7 +228,10 @@ public:
 
 
   int exitCode() const				{ return _exit_code; }
-  void setExitCode( int exit )			{ _exit_code = exit; }
+  void setExitCode( int exit )			{
+    WAR << "setExitCode " << exit << endl;
+    _exit_code = exit;
+  }
   bool runningShell() const			{ return _running_shell; }
   bool runningHelp() const			{ return _running_help; }
   bool exitRequested() const			{ return _exit_requested; }
