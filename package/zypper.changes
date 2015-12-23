@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Dec 23 15:30:54 CET 2015 - ma@suse.de
+
+- man: Explain meaning of 'System Packages' and '@System' shown in
+  search results (bsc#953458)
+- version 1.11.45
+
+-------------------------------------------------------------------
 Thu Dec 17 01:14:49 CET 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
