@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 23 15:36:48 CET 2015 - ma@suse.de
+
+- ref: don't return 0 if repos were skipped (bsc#959564)
+- version 1.11.46
+
+-------------------------------------------------------------------
 Wed Dec 23 15:30:54 CET 2015 - ma@suse.de
 
 - man: Explain meaning of 'System Packages' and '@System' shown in
