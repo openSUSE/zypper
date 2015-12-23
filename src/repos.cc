@@ -253,6 +253,7 @@ static bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool f
   {
     ZYPP_CAUGHT( e );
     // rethrow ABORT exception, stop executing the command
+    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
     ZYPP_RETHROW( e );
   }
   catch ( const SkipRequestException & e )
