@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Wed Dec 23 15:13:34 CET 2015 - ma@suse.de
+
+- ref: don't return 0 if repos were skipped (bsc#959564)
+- Fix '-y' command option as alias for --non-interactive global
+  option (bsc#957862)
+- si: Mention location rpm installs source packages to in command
+  help and man page (bsc#710541)
+- man: explain difference between 'dup' and 'dup --from'
+- man: Explain meaning of 'System Packages' and '@System' shown in
+  search results (bsc#953458)
+- BuildRequires:  libzypp-devel >= 15.19.8
+- version 1.12.28
+
+-------------------------------------------------------------------
 Sun Dec 20 01:14:29 CET 2015 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
