@@ -235,7 +235,8 @@ static bool refresh_raw_metadata(Zypper & zypper,
   {
     ZYPP_CAUGHT(e);
     // rethrow ABORT exception, stop executing the command
-    ZYPP_RETHROW(e);
+    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+    ZYPP_RETHROW( e );
   }
   catch (const SkipRequestException & e)
   {
