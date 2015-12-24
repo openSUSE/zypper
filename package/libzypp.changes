@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Dec 24 01:13:13 CET 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Dec 11 19:07:09 CET 2015 - ma@suse.de
 
 - ResPoolProxy: make begin/end pairs Iterable
