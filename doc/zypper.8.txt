@@ -49,13 +49,9 @@ This default behavior can be tuned by explicitly setting the variables *repo_gpg
 
 Resource Identifiers (URI)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-To specify locations of repositories or other resources (RPM files, .repo files) you can use any type of URIs supported by libzypp. See section *COMMANDS*, subsection *Repository Management* for a complete list and usage examples.
+To specify locations of repositories or other resources (RPM files, .repo files) you can use any type of URI supported by libzypp. In addition Zypper accepts a special URI identifying openSUSE Build Service (OBS) repositories in the *addrepo* command. These URIs have the form of *obs://*'project'*/*['platform'].
 
-Zypper also accepts special URIs identifying openSUSE Build Service (OBS) repositories in the *addrepo* command. These URIs have the form of *obs://*'project'*/*['platform'], where 'project' is the name of the OBS project and 'platform' is the target platform (OS) for which the repository is intended. If 'platform' is omitted, the *obs.platform* value from zypper.conf is used. See also other options in the [obs] section of zypper.conf.
-
-For example: *obs://server:http/openSUSE_11.3*.
-
-In addition to these URIs you can use plain directory and file paths in which case zypper automatically treats them as *dir:/*'path' URI.
+See section *COMMANDS*, subsection *Repository Management* for a complete list and examples of *supported URI formats*.
 
 Refresh
 ~~~~~~~

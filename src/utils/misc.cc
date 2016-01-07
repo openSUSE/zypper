@@ -301,8 +301,16 @@ Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::s
 	}
 
 	platform = pdata.name().asString();
-	if ( platform == "openSUSE" && str::containsCI( pdata.summary(), "Tumbleweed" ) )
-	  platform += "_Tumbleweed";
+	if ( platform == "openSUSE"  )
+	{
+
+	  if ( pdata.productline() == "Leap" )
+	    platform += "_Leap_$releasever";
+	  else if ( str::containsCI( pdata.summary(), "Tumbleweed" ) )
+	    platform += "_Tumbleweed";
+	  else
+	    platform += "_$releasever";
+	}
 	else
 	  platform += "_$releasever";
 

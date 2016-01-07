@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 12/04/2015
+.\"      Date: 01/07/2016
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "12/04/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "01/07/2016" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -59,13 +59,9 @@ This default behavior can be tuned by explicitly setting the variables \fBrepo_g
 \fBDisabling GPG checks is not recommended\&.\fR Signing data enables the recipient to verify that no modifications occurred after the data were signed\&. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise\&.
 .SS "Resource Identifiers (URI)"
 .sp
-To specify locations of repositories or other resources (RPM files, \&.repo files) you can use any type of URIs supported by libzypp\&. See section \fBCOMMANDS\fR, subsection \fBRepository Management\fR for a complete list and usage examples\&.
+To specify locations of repositories or other resources (RPM files, \&.repo files) you can use any type of URI supported by libzypp\&. In addition Zypper accepts a special URI identifying openSUSE Build Service (OBS) repositories in the \fBaddrepo\fR command\&. These URIs have the form of \fBobs://\fR\fIproject\fR\fB/\fR[\fIplatform\fR]\&.
 .sp
-Zypper also accepts special URIs identifying openSUSE Build Service (OBS) repositories in the \fBaddrepo\fR command\&. These URIs have the form of \fBobs://\fR\fIproject\fR\fB/\fR[\fIplatform\fR], where \fIproject\fR is the name of the OBS project and \fIplatform\fR is the target platform (OS) for which the repository is intended\&. If \fIplatform\fR is omitted, the \fBobs\&.platform\fR value from zypper\&.conf is used\&. See also other options in the [obs] section of zypper\&.conf\&.
-.sp
-For example: \fBobs://server:http/openSUSE_11\&.3\fR\&.
-.sp
-In addition to these URIs you can use plain directory and file paths in which case zypper automatically treats them as \fBdir:/\fR\fIpath\fR URI\&.
+See section \fBCOMMANDS\fR, subsection \fBRepository Management\fR for a complete list and examples of \fBsupported URI formats\fR\&.
 .SS "Refresh"
 .sp
 Refreshing a repository means downloading metadata of packages from the medium (if needed), storing it in local cache (typically under \fB/var/cache/zypp/raw/\fR\fIalias\fR directory) and preparsing the metadata into \fI\&.solv\fR files (building the solv cache), typically under \fB/var/cache/zypp/solv/\fR\fIalias\fR\&.
