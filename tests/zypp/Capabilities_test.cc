@@ -6,7 +6,6 @@
 #include <string>
 
 // Boost.Test
-#include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/auto_unit_test.hpp>
 
 #include "TestSetup.h"
@@ -16,7 +15,6 @@
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
-using boost::test_tools::close_at_tolerance;
 
 using namespace std;
 using namespace zypp;
