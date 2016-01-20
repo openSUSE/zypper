@@ -1067,41 +1067,40 @@ static void print_repo_list( Zypper & zypper, const std::list<RepoInfo> & repos 
 
 static void print_repo_details( Zypper & zypper, std::list<RepoInfo> & repos )
 {
-  bool another = false;
+  bool first = true;
   for_( it, repos.begin(), repos.end() )
   {
-    if ( another )
-      cout << endl;
+    const RepoInfo & repo( *it );
 
-    RepoInfo repo = *it;
+    PropertyTable p;
     RepoGpgCheckStrings repoGpgCheck( repo );
 
-    Table t;
-    t.lineStyle( ::Colon );
-    t.allowAbbrev( 1 );
+    p.add( _("Alias"),		repo.alias() );
+    p.add( _("Name"),		repo.name() );
+    p.add( _("URI"),		(repo.baseUrlSet()
+				 ? repo.url().asString()
+				 : (repo.mirrorListUrl().asString().empty()
+				    ? "n/a"
+				    : repo.mirrorListUrl().asString())) );
+    p.add( _("Enabled"),	repoGpgCheck._enabledYN.str() );
+    p.add( _("GPG Check"),	repoGpgCheck._gpgCheckYN.str() );
+    p.add( _("Priority"),	str::form("%d", repo.priority()) );
+    p.add( _("Auto-refresh"),	(repo.autorefresh() ? _("On") : _("Off")) );
+    p.add( _("Keep Packages"),	(repo.keepPackages() ? _("On") : _("Off")) );
+    p.add( _("Type"),		repo.type().asString() );
+    p.add( _("GPG Key URI"),	repo.gpgKeyUrl() );
+    p.add( _("Path Prefix"),	repo.path() );
+    p.add( _("Parent Service"),	repo.service() );
+    p.lst( _("Keywords"),	repo.contentKeywords() );
+    p.add( _("Repo Info Path"),	repo.filepath() );
+    p.add( _("MD Cache Path"),	repo.metadataPath() );
 
-    t << (  TableRow() << _("Alias")		<< repo.alias() )
-      << (  TableRow() << _("Name")		<< repo.name() )
-      << (  TableRow() << _("URI")		<< (repo.baseUrlSet()
-						    ? repo.url().asString()
-						    : (repo.mirrorListUrl().asString().empty()
-						       ? "n/a"
-						       : repo.mirrorListUrl().asString())) )
-      << (  TableRow() << _("Enabled")		<< repoGpgCheck._enabledYN.str() )
-      << (  TableRow() << _("GPG Check")	<< repoGpgCheck._gpgCheckYN.str() )
-      << (  TableRow() << _("Priority")		<< str::form("%d", repo.priority()) )
-      << (  TableRow() << _("Auto-refresh")	<< (repo.autorefresh() ? _("On") : _("Off")) )
-      << (  TableRow() << _("Keep Packages")	<< (repo.keepPackages() ? _("On") : _("Off")) )
-      << (  TableRow() << _("Type")		<< repo.type().asString() )
-      << (  TableRow() << _("GPG Key URI")	<< repo.gpgKeyUrl() )
-      << (  TableRow() << _("Path Prefix")	<< repo.path() )
-      << (  TableRow() << _("Parent Service")	<< repo.service() )
-      << (  TableRow() << _("Repo Info Path")	<< repo.filepath() )
-      << (  TableRow() << _("MD Cache Path")	<< repo.metadataPath() )
-      ;
 
-    cout << t;
-    another = true;
+    if ( first )
+      first = false;
+    else
+      cout << endl;
+    cout << p;
   }
 }
 
