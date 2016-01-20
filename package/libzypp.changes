@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Jan 20 17:12:42 CET 2016 - ma@suse.de
+
+- Filter unwanted btrfs subvolumes (fixes #54, closes #55, bnc#949945)
+- RepoInfo: Provide access to repo content keywords
+- Build with boost-1.60.0
+- version 15.21.0 (19)
+
+-------------------------------------------------------------------
 Thu Jan 14 01:13:17 CET 2016 - ma@suse.de
 
 - Update zypp-po.tar.bz2
