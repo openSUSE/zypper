@@ -296,7 +296,7 @@ public:
 	  ++cnt;
 	  r.addDetail( *(begin_r++) );
 	}
-	r << cnt;		// size as value
+	r << "["+str::numstring(cnt)+"]";		// size as value
       }
       else
 	r << *first;		// only one value
