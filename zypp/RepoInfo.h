@@ -347,6 +347,10 @@ namespace zypp
        */
       void setTargetDistribution(const std::string & targetDistribution);
 
+
+      /** Content keywords defined. */
+      const std::set<std::string> & contentKeywords() const;
+
       /** Add content keywords */
       void addContent( const std::string & keyword_r );
       /** \overload add keywords from container */
@@ -359,11 +363,11 @@ namespace zypp
       { addContentFrom( container_r.begin(), container_r.end() ); }
 
       /** Check for content keywords.
-       * Checking for an empty string returns whether content kewords are
-       * known at all. They may be missing due to missing metadata in disabled
-       * repos.
+       * They may be missing due to missing metadata in disabled repos.
        */
-      bool hasContent( const std::string & keyword_r = std::string() ) const;
+      bool hasContent() const;
+      /** \overload check for a keywords being present */
+      bool hasContent( const std::string & keyword_r ) const;
       /** \overload check for \b all keywords being present */
       template <class TIterator>
       bool hasContentAll( TIterator begin_r, TIterator end_r ) const

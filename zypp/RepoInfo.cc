@@ -94,15 +94,18 @@ namespace zypp
     { return !emptybaseurls && !_baseUrls.empty(); }
 
 
-    void addContent( const std::string & keyword_r )
-    { _keywords.insert( keyword_r ); }
+    const std::set<std::string> & contentKeywords() const
+    { hasContent()/*init if not yet done*/; return _keywords.second; }
 
-    bool hasContent( const std::string & keyword_r ) const
+    void addContent( const std::string & keyword_r )
+    { _keywords.second.insert( keyword_r ); if ( ! hasContent() ) _keywords.first = true; }
+
+    bool hasContent() const
     {
-      if ( _keywords.empty() && ! metadatapath.empty() )
+      if ( !_keywords.first && ! metadatapath.empty() )
       {
 	// HACK directly check master index file until RepoManager offers
-	// some content probing ans zypepr uses it.
+	// some content probing and zypper uses it.
 	/////////////////////////////////////////////////////////////////
 	MIL << "Empty keywords...." << metadatapath << endl;
 	Pathname master;
@@ -112,10 +115,10 @@ namespace zypp
 	  xml::Reader reader( master );
 	  while ( reader.seekToNode( 2, "content" ) )
 	  {
-	    _keywords.insert( reader.nodeText().asString() );
+	    _keywords.second.insert( reader.nodeText().asString() );
 	    reader.seekToEndNode( 2, "content" );
 	  }
-	  _keywords.insert( "" );	// valid content in _keywords even if empty
+	  _keywords.first = true;	// valid content in _keywords even if empty
 	}
 	else if ( PathInfo( (master=metadatapath/"/content") ).isFile() )
 	{
@@ -129,18 +132,21 @@ namespace zypp
 				if ( str::split( line_r, std::back_inserter(words) ) > 1
 				  && words[0].length() == 12 /*"REPOKEYWORDS"*/ )
 				{
-				  this->_keywords.insert( ++words.begin(), words.end() );
+				  this->_keywords.second.insert( ++words.begin(), words.end() );
 				}
 				return true; // mult. occurrances are ok.
 			      }
 			      return( ! str::startsWith( line_r, "META " ) );	// no need to parse into META section.
 			    } );
-	  _keywords.insert( "" );
+	  _keywords.first = true;	// valid content in _keywords even if empty
 	}
 	/////////////////////////////////////////////////////////////////
       }
-      return( _keywords.find( keyword_r ) != _keywords.end() );
+      return _keywords.first;
     }
+
+    bool hasContent( const std::string & keyword_r ) const
+    { return( hasContent() && _keywords.second.find( keyword_r ) != _keywords.second.end() ); }
 
     /** Signature check result needs to be stored/retrieved from _metadatapath.
      * Don't call them from outside validRepoSignature/setValidRepoSignature
@@ -223,7 +229,7 @@ namespace zypp
 
   private:
     mutable RepoVariablesReplacedUrlList _baseUrls;
-    mutable std::set<std::string> _keywords;
+    mutable std::pair<FalseBool, std::set<std::string> > _keywords;
 
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
@@ -423,9 +429,14 @@ namespace zypp
   bool RepoInfo::baseUrlSet() const
   { return _pimpl->baseurl2dump(); }
 
+  const std::set<std::string> & RepoInfo::contentKeywords() const
+  { return _pimpl->contentKeywords(); }
 
   void RepoInfo::addContent( const std::string & keyword_r )
   { _pimpl->addContent( keyword_r ); }
+
+  bool RepoInfo::hasContent() const
+  { return _pimpl->hasContent(); }
 
   bool RepoInfo::hasContent( const std::string & keyword_r ) const
   { return _pimpl->hasContent( keyword_r ); }
