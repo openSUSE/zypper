@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Jan 20 15:05:47 CET 2016 - ma@suse.de
+
+- Enhance guessing of 'obs://' URLs on openSUSE Leap (bnc#959804)
+- Print repository content 'keywords' in repo details
+- BuildRequires:  libzypp-devel >= 15.20.1
+- version 1.12.29
+
+-------------------------------------------------------------------
 Thu Jan 14 01:13:34 CET 2016 - ma@suse.de
 
 - Update zypper-po.tar.bz2
