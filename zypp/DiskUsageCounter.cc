@@ -127,6 +127,9 @@ namespace zypp
   {
     DiskUsageCounter::MountPointSet ret;
 
+    typedef std::map<ulong, MountPoint> Btrfsfilter;
+    Btrfsfilter btrfsfilter;	// see btrfs hack below
+
       std::ifstream procmounts( "/proc/mounts" );
 
       if ( !procmounts ) {
@@ -213,7 +216,7 @@ namespace zypp
 	    //
 	    const char * mpunwanted[] = {
 	      "/mnt", "/media", "/mounts", "/floppy", "/cdrom",
-	      "/suse", "/var/tmp", "/var/adm/mount", "/var/adm/YaST",
+	      "/suse", "/tmp", "/var/tmp", "/var/adm/mount", "/var/adm/YaST",
 	      /*last*/0/*entry*/
 	    };
 
@@ -252,8 +255,10 @@ namespace zypp
 	    //
 	    // check for snapshotting btrfs
 	    //
+	    bool btrfshack = false;
 	    if ( words[2] == "btrfs" )
 	    {
+	      btrfshack = true;
 	      if ( geteuid() != 0 )
 	      {
 		DBG << "Assume snapshots on " << words[1] << ": non-root user can't check" << std::endl;
@@ -292,6 +297,25 @@ namespace zypp
 		DBG << "Filter zero-sized mount point : " << l << std::endl;
 		continue;
 	      }
+	      if ( btrfshack )
+	      {
+		// HACK:
+		// Collect just the top/1st mountpoint of each btrfs volume
+		// (by file system ID). This filters away nested subvolumes
+		// which otherwise break per package disk usage computation.
+		// FIX: Computation must learn to handle multiple mount points
+		// contributing to the same file system.
+		MountPoint & bmp( btrfsfilter[sb.f_fsid] );
+		if ( bmp.fstype.empty() )	// 1st occurance
+		{
+		  bmp = DiskUsageCounter::MountPoint( mp, words[2], sb.f_bsize,
+						      ((long long)sb.f_blocks)*sb.f_bsize/1024,
+						      ((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, hints );
+		}
+		else if ( bmp.dir > mp )
+		  bmp.dir = mp;
+		continue;
+	      }
 	      ret.insert( DiskUsageCounter::MountPoint( mp, words[2], sb.f_bsize,
 		((long long)sb.f_blocks)*sb.f_bsize/1024,
 		((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, hints ) );
@@ -299,6 +323,10 @@ namespace zypp
 	  }
 	}
     }
+
+    // collect filtered btrfs volumes
+    for ( auto && bmp : btrfsfilter )
+      ret.insert( std::move(bmp.second) );
 
     return ret;
   }
