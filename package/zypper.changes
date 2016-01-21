@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan 21 01:16:08 CET 2016 - ma@suse.de
+
+- Update sle-zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Dec 23 15:36:48 CET 2015 - ma@suse.de
 
 - ref: don't return 0 if repos were skipped (bsc#959564)
