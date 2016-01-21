@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan 21 01:14:12 CET 2016 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jan 20 15:05:47 CET 2016 - ma@suse.de
 
 - Enhance guessing of 'obs://' URLs on openSUSE Leap (bnc#959804)
