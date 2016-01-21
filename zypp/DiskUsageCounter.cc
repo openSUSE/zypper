@@ -127,7 +127,7 @@ namespace zypp
   {
     DiskUsageCounter::MountPointSet ret;
 
-    typedef std::map<ulong, MountPoint> Btrfsfilter;
+    typedef std::map<std::string, MountPoint> Btrfsfilter;
     Btrfsfilter btrfsfilter;	// see btrfs hack below
 
       std::ifstream procmounts( "/proc/mounts" );
@@ -301,11 +301,11 @@ namespace zypp
 	      {
 		// HACK:
 		// Collect just the top/1st mountpoint of each btrfs volume
-		// (by file system ID). This filters away nested subvolumes
+		// (by device). This filters away nested subvolumes
 		// which otherwise break per package disk usage computation.
 		// FIX: Computation must learn to handle multiple mount points
 		// contributing to the same file system.
-		MountPoint & bmp( btrfsfilter[sb.f_fsid] );
+		MountPoint & bmp( btrfsfilter[words[0]] );
 		if ( bmp.fstype.empty() )	// 1st occurance
 		{
 		  bmp = DiskUsageCounter::MountPoint( mp, words[2], sb.f_bsize,
