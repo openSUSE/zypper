@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan 21 01:13:29 CET 2016 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jan 20 17:12:42 CET 2016 - ma@suse.de
 
 - Filter unwanted btrfs subvolumes (fixes #54, closes #55, bnc#949945)
