@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jan 22 09:10:22 CET 2016 - ma@suse.de
+
+- download: fixed claiming an error after successful run (bsc#956480)
+- version 1.11.47
+
+-------------------------------------------------------------------
 Thu Jan 21 01:16:08 CET 2016 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
