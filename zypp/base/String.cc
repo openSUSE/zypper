@@ -173,11 +173,15 @@ namespace zypp
      **      FUNCTION TYPE : std::string
     */
     std::string toLower( const std::string & s )
-    {
-      if ( s.empty() )
-        return s;
+    { return toLower( std::string(s) ); }
 
-      std::string ret( s );
+    std::string toLower( std::string && s )
+    {
+      std::string ret( std::move(s) );
+
+      if ( ret.empty() )
+        return ret;
+
       for ( std::string::size_type i = 0; i < ret.length(); ++i )
         {
           if ( isupper( ret[i] ) )
@@ -192,11 +196,15 @@ namespace zypp
      **      FUNCTION TYPE : std::string
     */
     std::string toUpper( const std::string & s )
-    {
-      if ( s.empty() )
-        return s;
+    { return toUpper( std::string(s) ); }
 
-      std::string ret( s );
+    std::string toUpper( std::string && s )
+    {
+      std::string ret( std::move(s) );
+
+      if ( ret.empty() )
+        return ret;
+
       for ( std::string::size_type i = 0; i < ret.length(); ++i )
         {
           if ( islower( ret[i] ) )
@@ -211,29 +219,36 @@ namespace zypp
      **      FUNCTION TYPE : std::string
     */
     std::string trim( const std::string & s, const Trim trim_r )
-    {
-      if ( s.empty() || trim_r == NO_TRIM )
-        return s;
+    { return trim( std::string(s), trim_r ); }
 
-      std::string ret( s );
+    std::string trim( std::string && s, const Trim trim_r )
+    {
+      std::string ret( std::move(s) );
+
+      if ( ret.empty() || trim_r == NO_TRIM )
+        return ret;
 
       if ( trim_r & L_TRIM )
-        {
-          std::string::size_type p = ret.find_first_not_of( " \t\n" );
-          if ( p == std::string::npos )
-            return std::string();
-
-          ret = ret.substr( p );
-        }
+      {
+	std::string::size_type p = ret.find_first_not_of( " \t\n" );
+	if ( p == std::string::npos )
+	{
+	  ret.clear();
+	  return ret;
+	}
+	ret.erase( 0, p );
+      }
 
       if ( trim_r & R_TRIM )
-        {
-          std::string::size_type p = ret.find_last_not_of( " \t\n" );
-          if ( p == std::string::npos )
-            return std::string();
-
-          ret = ret.substr( 0, p+1 );
-        }
+      {
+	std::string::size_type p = ret.find_last_not_of( " \t\n" );
+	if ( p == std::string::npos )
+	{
+	  ret.clear();
+	  return ret;
+	}
+	ret = ret.erase( p+1 );
+      }
 
       return ret;
     }

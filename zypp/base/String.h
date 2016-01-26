@@ -936,6 +936,7 @@ namespace zypp
      * \todo improve
     */
     std::string toLower( const std::string & s );
+    std::string toLower( std::string && s );
     /** \overload */
     inline std::string toLower( const char * s )
     { return( s ? toLower( std::string(s) ) : std::string() ); }
@@ -944,6 +945,7 @@ namespace zypp
      * \todo improve
     */
     std::string toUpper( const std::string & s );
+    std::string toUpper( std::string && s );
     /** \overload */
     inline std::string toUpper( const char * s )
     { return( s ? toUpper( std::string(s) ) : std::string() ); }
@@ -980,12 +982,17 @@ namespace zypp
     };
 
     std::string trim( const std::string & s, const Trim trim_r = TRIM );
+    std::string trim( std::string && s, const Trim trim_r = TRIM );
 
     inline std::string ltrim( const std::string & s )
     { return trim( s, L_TRIM ); }
+    inline std::string ltrim( std::string && s )
+    { return trim( std::move(s), L_TRIM ); }
 
     inline std::string rtrim( const std::string & s )
     { return trim( s, R_TRIM ); }
+    inline std::string rtrim( std::string && s )
+    { return trim( std::move(s), R_TRIM ); }
     //@}
 
     std::string stripFirstWord( std::string & line, const bool ltrim_first = true );
