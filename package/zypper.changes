@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jan 26 19:45:25 CET 2016 - ma@suse.de
+
+- Fix misaligned TAB stops in colored prompts (bsc#948566)
+- version 1.11.48
+
+-------------------------------------------------------------------
 Fri Jan 22 09:10:22 CET 2016 - ma@suse.de
 
 - download: fixed claiming an error after successful run (bsc#956480)
