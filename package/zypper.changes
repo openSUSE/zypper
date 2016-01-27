@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Jan 27 13:34:22 CET 2016 - ma@suse.de
+
+- Propagate repo refresh errors even if main action succeeded
+  (bsc#961719)
+- Fix misaligned TAB stops in colored prompts (bsc#948566)
+- version 1.12.30
+
+-------------------------------------------------------------------
 Sun Jan 24 01:14:09 CET 2016 - ma@suse.de
 
 - Update zypper-po.tar.bz2
