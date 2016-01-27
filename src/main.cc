@@ -107,5 +107,9 @@ int main( int argc, char **argv )
     return ZYPPER_EXIT_ERR_BUG;
   }
 
-  return Zypper::instance()->main( argc, argv );
+  Zypper & zypper( *Zypper::instance() );
+  int exitcode = zypper.main( argc, argv );
+  if ( !exitcode )
+    exitcode = zypper.refreshCode();	// propagate refresh errors even if main action succeeded
+  return exitcode;
 }

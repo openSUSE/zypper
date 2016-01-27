@@ -227,11 +227,18 @@ public:
   { if ( !_rm ) _rm.reset( new RepoManager( _gopts.rm_options ) ); return *_rm; }
 
 
-  int exitCode() const				{ return _exit_code; }
+  int exitCode() const				{ return _exitCode; }
   void setExitCode( int exit )			{
     WAR << "setExitCode " << exit << endl;
-    _exit_code = exit;
+    _exitCode = exit;
   }
+
+  int refreshCode() const			{ return _refreshCode; }
+  void setRefreshCode( int exit )		{
+    WAR << "setRefreshCode " << exit << endl;
+    _refreshCode = exit;
+  }
+
   bool runningShell() const			{ return _running_shell; }
   bool runningHelp() const			{ return _running_help; }
   bool exitRequested() const			{ return _exit_requested; }
@@ -317,7 +324,8 @@ private:
   ArgList _arguments;
   std::string _command_help;
 
-  int   _exit_code;
+  int   _exitCode;
+  int   _refreshCode;	// do_init_repos hack!
   bool  _running_shell;
   bool  _running_help;
   bool  _exit_requested;
