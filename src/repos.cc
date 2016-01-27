@@ -737,8 +737,8 @@ void do_init_repos(Zypper & zypper, const Container & container)
       ++it;
   }
 
-  for (std::list<RepoInfo>::iterator it = gData.repos.begin();
-       it !=  gData.repos.end(); ++it)
+  unsigned skip_count = 0;
+  for ( std::list<RepoInfo>::iterator it = gData.repos.begin(); it !=  gData.repos.end(); ++it )
   {
     RepoInfo repo(*it);
     MIL << "checking if to refresh " << repo.alias() << endl;
@@ -777,7 +777,7 @@ void do_init_repos(Zypper & zypper, const Container & container)
         if (refresh_raw_metadata(zypper, repo, false)
             || build_cache(zypper, repo, false))
         {
-          zypper.out().info(boost::str(format(
+          zypper.out().warning(boost::str(format(
               _("Skipping repository '%s' because of the above error."))
               % repo.asUserString()), Out::QUIET);
           WAR << format("Skipping repository '%s' because of the above error.")
@@ -785,6 +785,7 @@ void do_init_repos(Zypper & zypper, const Container & container)
 
           it->setEnabled(false);
 	  contentcheck = false;
+	  ++skip_count;
         }
       }
       // non-root user
@@ -823,6 +824,7 @@ void do_init_repos(Zypper & zypper, const Container & container)
 
           it->setEnabled(false);
 	  contentcheck = false;
+	  ++skip_count;
         }
       }
       // non-root user
@@ -846,7 +848,8 @@ void do_init_repos(Zypper & zypper, const Container & container)
           WAR << "Disabling repository '" << repo.alias() << "'" << endl;
           it->setEnabled(false);
 	  contentcheck = false;
-        }
+	  ++skip_count;
+	}
       }
     }
 
@@ -868,6 +871,17 @@ void do_init_repos(Zypper & zypper, const Container & container)
 	MIL << "[--plus-content] check says disable " << repo.alias() << endl;
       }
     }
+  }
+
+  if ( skip_count )
+  {
+    zypper.out().error(_("Some of the repositories have not been refreshed because of an error.") );
+    // TODO: A user abort during repo refresh as well as unavailable metadata
+    // should probably lead to ZYPPER_EXIT_ERR_ZYPP right here. Ignored refresh
+    // errors may continue. For now at least remember the refresh error to prevent
+    // a 0 exit code after the action completed. (bsc#961719, bsc#961724, et.al.)
+    // zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+    zypper.setRefreshCode( ZYPPER_EXIT_ERR_ZYPP );
   }
 }
 

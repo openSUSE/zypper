@@ -210,11 +210,17 @@ namespace
 
 
 Zypper::Zypper()
-  : _argc(0), _argv(NULL), _out_ptr(NULL),
-    _command(ZypperCommand::NONE),
-    _exit_code(ZYPPER_EXIT_OK),
-    _running_shell(false), _running_help(false), _exit_requested(false),
-    _sh_argc(0), _sh_argv(NULL)
+: _argc( 0 )
+, _argv( NULL )
+, _out_ptr( NULL )
+, _command( ZypperCommand::NONE )
+, _exitCode( ZYPPER_EXIT_OK )
+, _refreshCode( ZYPPER_EXIT_OK )
+, _running_shell( false )
+, _running_help( false )
+, _exit_requested( false )
+, _sh_argc( 0 )
+, _sh_argv( NULL )
 {
   MIL << "Zypper instance created." << endl;
 }
