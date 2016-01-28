@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan 28 01:13:43 CET 2016 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jan 27 13:34:22 CET 2016 - ma@suse.de
 
 - Propagate repo refresh errors even if main action succeeded
