@@ -626,8 +626,8 @@ void do_init_repos(Zypper & zypper, const Container & container)
       ++it;
   }
 
-  for (std::list<RepoInfo>::iterator it = gData.repos.begin();
-       it !=  gData.repos.end(); ++it)
+  unsigned skip_count = 0;
+  for ( std::list<RepoInfo>::iterator it = gData.repos.begin(); it !=  gData.repos.end(); ++it )
   {
     RepoInfo repo(*it);
     MIL << "checking if to refresh " << repo.alias() << endl;
@@ -654,6 +654,7 @@ void do_init_repos(Zypper & zypper, const Container & container)
               % repo.alias() << endl;
 
           it->setEnabled(false);
+	  ++skip_count;
         }
       }
       // non-root user
@@ -691,6 +692,7 @@ void do_init_repos(Zypper & zypper, const Container & container)
               % repo.alias() << endl;
 
           it->setEnabled(false);
+	  ++skip_count;
         }
       }
       // non-root user
@@ -713,9 +715,21 @@ void do_init_repos(Zypper & zypper, const Container & container)
               % repo.label()));
           WAR << "Disabling repository '" << repo.alias() << "'" << endl;
           it->setEnabled(false);
-        }
+	  ++skip_count;
+	}
       }
     }
+  }
+
+  if ( skip_count )
+  {
+    zypper.out().error(_("Some of the repositories have not been refreshed because of an error.") );
+    // TODO: A user abort during repo refresh as well as unavailable metadata
+    // should probably lead to ZYPPER_EXIT_ERR_ZYPP right here. Ignored refresh
+    // errors may continue. For now at least remember the refresh error to prevent
+    // a 0 exit code after the action completed. (bsc#961719, bsc#961724, et.al.)
+    // zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+    zypper.setRefreshCode( ZYPPER_EXIT_ERR_ZYPP );
   }
 }
 
