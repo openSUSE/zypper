@@ -67,11 +67,17 @@ parsed_opts copts; // command options
 static void rug_list_resolvables(Zypper & zypper);
 
 Zypper::Zypper()
-  : _argc(0), _argv(NULL), _out_ptr(NULL),
-    _command(ZypperCommand::NONE),
-    _exit_code(ZYPPER_EXIT_OK),
-    _running_shell(false), _running_help(false), _exit_requested(false),
-    _sh_argc(0), _sh_argv(NULL)
+: _argc( 0 )
+, _argv( NULL )
+, _out_ptr( NULL )
+, _command( ZypperCommand::NONE )
+, _exitCode( ZYPPER_EXIT_OK )
+, _refreshCode( ZYPPER_EXIT_OK )
+, _running_shell( false )
+, _running_help( false )
+, _exit_requested( false )
+, _sh_argc( 0 )
+, _sh_argv( NULL )
 {
   MIL << "Zypper instance created." << endl;
 }
@@ -481,7 +487,7 @@ void Zypper::processGlobalOptions()
     {
       out().error(
         _("The path specified in the --root option must be absolute."));
-      _exit_code = ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
       return;
     }
 

@@ -183,12 +183,16 @@ public:
   void initRepoManager()
   { _rm.reset(new zypp::RepoManager(_gopts.rm_options)); }
 
-  int exitCode() const { return _exit_code; }
-  void setExitCode(int exit) { _exit_code = exit; }
-  bool runningShell() const { return _running_shell; }
-  bool runningHelp() const { return _running_help; }
-  bool exitRequested() const { return _exit_requested; }
-  void requestExit(bool do_exit = true) { _exit_requested = do_exit; }
+  int exitCode() const				{ return _exitCode; }
+  void setExitCode( int exit )			{ _exitCode = exit; }
+
+  int refreshCode() const			{ return _refreshCode; }
+  void setRefreshCode( int exit )		{ _refreshCode = exit; }
+
+  bool runningShell() const			{ return _running_shell; }
+  bool runningHelp() const			{ return _running_help; }
+  bool exitRequested() const			{ return _exit_requested; }
+  void requestExit( bool do_exit = true )	{ _exit_requested = do_exit; }
 
   int argc() { return _running_shell ? _sh_argc : _argc; }
   char ** argv() { return _running_shell ? _sh_argv : _argv; }
@@ -224,7 +228,8 @@ private:
   ArgList _arguments;
   std::string _command_help;
 
-  int   _exit_code;
+  int   _exitCode;
+  int   _refreshCode;	// do_init_repos hack!
   bool  _running_shell;
   bool  _running_help;
   bool  _exit_requested;
