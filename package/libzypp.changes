@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jan 29 11:40:51 CET 2016 - ma@suse.de
+
+- Don't buildrequire graphviz-gnome (bsc#964150)
+- Unwanted btrfs subvolumes must be filtered by device (not fsid)
+  (fixes #54)
+- version 15.21.1 (19)
+
+-------------------------------------------------------------------
 Thu Jan 21 01:13:29 CET 2016 - ma@suse.de
 
 - Update zypp-po.tar.bz2
