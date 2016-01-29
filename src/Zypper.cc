@@ -3985,17 +3985,21 @@ void Zypper::doCommand()
     //! \todo quit here if the argument list remains empty after founding only invalid rpm args
 
     // prepare repositories
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-
-    if ( _rdata.repos.empty() )
+    // bsc#606220: don't load repos when removing
+    if ( install_not_remove )
     {
-      out().warning(_("No repositories defined. Operating only with the installed resolvables. Nothing can be installed.") );
-      if ( command() == ZypperCommand::INSTALL )
-      {
-	setExitCode( ZYPPER_EXIT_NO_REPOS );
+      init_repos( *this );
+      if ( exitCode() != ZYPPER_EXIT_OK )
 	return;
+
+      if ( _rdata.repos.empty() )
+      {
+	out().warning(_("No repositories defined. Operating only with the installed resolvables. Nothing can be installed.") );
+	if ( command() == ZypperCommand::INSTALL )
+	{
+	  setExitCode( ZYPPER_EXIT_NO_REPOS );
+	  return;
+	}
       }
     }
 
