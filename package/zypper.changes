@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb  2 18:26:07 CET 2016 - ma@suse.de
+
+- Fix misaligned TAB stops in colored prompts (bsc#948566)
+- version 1.6.329
+
+-------------------------------------------------------------------
 Fri Jan 29 09:37:15 CET 2016 - ma@suse.de
 
 - Return non-zero on unexpected exceptions (bsc#961724)
