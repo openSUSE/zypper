@@ -20,6 +20,7 @@
 #include "AliveCursor.h"
 #include "Utf8.h"
 
+#include "Zypper.h"
 #include "OutNormal.h"
 
 using namespace std;
@@ -364,10 +365,52 @@ void OutNormal::prompt(PromptId id,
   }
   else
     cout << startdesc << endl;
+
+  std::ostringstream pstr;
+  std::ostream & cout( pstr );
+
   cout << prompt;
   if (!poptions.empty())
     cout << " " << poptions.optionString();
-  cout << ": " << std::flush;
+  cout << ": ";
+
+  if ( Zypper::instance()->config().do_colors )
+  {
+    // bsc#948566: Terminal is dumb and simply counts the amount of printable
+    // characters. If the number of printable characters within ansi SGR sequences
+    // is not a multiple of 8, tab stops are not computed correctly. We use
+    // superfluous resets ("\033[0m"; 3 printable chars) to fill up.
+    // Better ideas are welcome.
+    size_t invis = 0;
+    bool   insgr = false;
+    const std::string & pstrstr( pstr.str() );
+    for_( chit, pstrstr.begin(), pstrstr.end() )
+    {
+
+      if ( insgr )
+      {
+        ++invis;
+        if ( *chit == 'm' )
+          insgr = false;
+      }
+      else if ( *chit == '\033' )
+        insgr = true;
+    }
+    invis %= 8;
+
+    if ( invis )
+    {
+      // "\033[0m" has 3 printable chars:
+      // ( resets[to fill] * 3 ) % 8 == to fill
+      //                               0 1 2 3 4 5 6 7
+      static const size_t resets[] = { 0,3,6,1,4,7,2,5 };
+      for ( size_t i = resets[8-invis]; i; --i )
+        cout << "\033[0m";
+    }
+  }
+
+  std::cout << pstr.str() << std::flush;
+
   // prompt ends with newline (user hits <enter>) unless exited abnormaly
   _newline = true;
 }
