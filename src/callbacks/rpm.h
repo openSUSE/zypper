@@ -24,6 +24,20 @@
 #include "output/prompt.h"
 
 ///////////////////////////////////////////////////////////////////
+namespace
+{
+  std::string fixupNameEditionToIdent( std::string translatedFormat_r, const std::string & ident_r )
+  {
+
+    // fix: str::Format(_("... %s-%s ...")) % resolvable->name() % resolvable->edition()
+    // to : str::Format(_("... %s ...")) % resolvable->asString()
+    str::replaceAll( translatedFormat_r, "%s-%s", "%s" );
+    return str::Format( translatedFormat_r) % ident_r;
+  }
+} // namespace
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
 namespace out
 {
   ///////////////////////////////////////////////////////////////////
@@ -190,10 +204,11 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
   virtual void start( Resolvable::constPtr resolvable )
   {
     Zypper & zypper = *Zypper::instance();
+    N_("Removing %s");	// what's actually needed here
     _progress.reset( new Out::ProgressBar( zypper.out(),
 					   "remove-resolvable",
 					   // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-					   str::Format(_("Removing %s-%s")) % resolvable->name() % resolvable->edition(),
+					   fixupNameEditionToIdent(_("Removing %s-%s"), resolvable->asString() ),
 					   ++zypper.runtimeData().rpm_pkg_current,
 					   zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );	// progress reports percent
@@ -258,10 +273,11 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
   virtual void start( Resolvable::constPtr resolvable )
   {
     Zypper & zypper = *Zypper::instance();
+    N_("Installing: %s");	// what's actually needed here
     _progress.reset( new Out::ProgressBar( zypper.out(),
 					   "install-resolvable",
 					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-					   str::Format(_("Installing: %s-%s")) % resolvable->name() % resolvable->edition(),
+					   fixupNameEditionToIdent(_("Installing: %s-%s"), resolvable->asString() ),
 					   ++zypper.runtimeData().rpm_pkg_current,
 					   zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );	// progress reports percent
@@ -284,7 +300,8 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
     }
 
     std::ostringstream s;
-    s << str::Format(_("Installation of %s-%s failed:")) % resolvable->name() % resolvable->edition() << std::endl;
+    N_("Installation of %s failed:");	// what's actually needed here
+    s << fixupNameEditionToIdent(_("Installation of %s-%s failed:"), resolvable->asString() ) << std::endl;
     s << zcb_error2str(error, description);
     Zypper::instance()->out().error(s.str());
 
