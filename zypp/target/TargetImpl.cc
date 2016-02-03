@@ -1996,6 +1996,9 @@ namespace zypp
     {
       // provide on local disk
       ManagedFile localfile = provideSrcPackage(srcPackage_r);
+      // create a installation progress report proxy
+      RpmInstallPackageReceiver progress( srcPackage_r );
+      progress.connect(); // disconnected on destruction.
       // install it
       rpm().installPackage ( localfile );
     }
