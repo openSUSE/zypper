@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb  4 16:38:14 CET 2016 - ma@suse.de
+
+- installSrcPackage: trigger progress callback (bsc#580902)
+- version 15.21.2 (19)
+
+-------------------------------------------------------------------
 Thu Feb  4 01:13:31 CET 2016 - ma@suse.de
 
 - Update zypp-po.tar.bz2
