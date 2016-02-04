@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb  4 01:14:17 CET 2016 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Feb  2 11:59:03 CET 2016 - ma@suse.de
 
 - Don't load repos when removing packages (bsc#606220)
