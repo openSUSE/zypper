@@ -298,38 +298,48 @@ unsigned int get_prompt_reply(Zypper & zypper,
   } say_goodbye(&zypper.runtimeData().waiting_for_input);
 
   // open a terminal for input (bnc #436963)
-  ifstream stm("/dev/tty", ifstream::in);
-  // istream & stm = cin;
+  std::ifstream stm( "/dev/tty" );
 
   string reply;
   int reply_int = -1;
-  bool stmgood;
-  while ((stmgood = stm.good()))
+  while ( true )
   {
-    reply = zypp::str::getline (stm, zypp::str::TRIM);
+    reply = str::getline( stm, str::TRIM );
+    // if we cannot read input or it is at EOF (bnc #436963), exit
+    if ( ! stm.good() )
+    {
+      WAR << "Could not read the answer - bad stream or EOF" << endl;
+      zypper.out().error( "Cannot read input: bad stream or EOF.",
+			  zypp::str::form(_(
+			    "If you run zypper without a terminal, use '%s' global\n"
+			    "option to make zypper use default answers to prompts."
+			  ), "--non-interactive") );
+      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      ZYPP_THROW( ExitRequestException("Cannot read input. Bad stream or EOF.") );
+    }
 
     // empty reply is a good reply (on enter)
-    if (reply.empty())
+    if ( reply.empty() )
     {
       reply_int = poptions.defaultOpt();
       break;
     }
 
-    if (reply == "?")
+    if ( reply == "?" )
     {
       zypper.out().promptHelp(poptions);
       continue;
     }
 
-    if (poptions.isYesNoPrompt() && rpmatch(reply.c_str()) >= 0)
+    if ( poptions.isYesNoPrompt() && rpmatch(reply.c_str()) >= 0 )
     {
-      if (rpmatch(reply.c_str()))
+      if ( rpmatch(reply.c_str()) )
         reply_int = 0; // the index of "yes" in the poptions.options()
       else
         reply_int = 1; // the index of "no" in the poptions.options()
       break;
     }
-    else if ((reply_int = poptions.getReplyIndex(reply)) >= 0) // got valid reply
+    else if ( (reply_int = poptions.getReplyIndex(reply)) >= 0 ) // got valid reply
       break;
 
     ostringstream s;
@@ -346,21 +356,7 @@ unsigned int get_prompt_reply(Zypper & zypper,
     zypper.out().prompt(pid, s.str(), poptions);
   }
 
-  // if we cannot read input or it is at EOF (bnc #436963), exit
-  if (!stmgood || stm.eof())
-  {
-    WAR << "Could not read the answer - bad stream or EOF" << endl;
-    zypper.out().error(
-        "Cannot read input: bad stream or EOF.",
-        zypp::str::form(_(
-"If you run zypper without a terminal, use '%s' global\n"
-"option to make zypper use default answers to prompts."
-        ), "--non-interactive"));
-    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    ZYPP_THROW( ExitRequestException("Cannot read input. Bad stream or EOF.") );
-  }
-
-  if (reply.empty())
+  if ( reply.empty() )
     MIL << "reply empty, returning the default: "
         << poptions.options()[poptions.defaultOpt()] << " (" << reply_int << ")"
         << endl;
