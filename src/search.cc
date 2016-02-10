@@ -607,7 +607,7 @@ static void list_products_xml( Zypper & zypper )
 }
 
 // common product_table_row data
-static void add_product_table_row( Zypper & zypper, TableRow & tr,  const Product::constPtr & product )
+static void add_product_table_row( Zypper & zypper, TableRow & tr,  const Product::constPtr & product, bool forceShowAsBaseProduct_r = false )
 {
   // repository
   tr << product->repoInfo().name();
@@ -620,7 +620,7 @@ static void add_product_table_row( Zypper & zypper, TableRow & tr,  const Produc
   // architecture
   tr << product->arch().asString();
   // is base
-  tr << asYesNo( product->isTargetDistribution() );
+  tr << asYesNo( forceShowAsBaseProduct_r || product->isTargetDistribution() );
 }
 
 static void list_product_table( Zypper & zypper )
@@ -662,17 +662,17 @@ static void list_product_table( Zypper & zypper )
       TableRow tr;
       PoolItem pi = *it;
       bool isLocked = pi.status().isLocked();
+      bool forceShowAsBaseProduct = false;
 
       if ( installed )
       {
-        if ( identical( installed, pi ) )
+        if ( missedInstalled && identical( installed, pi ) )
         {
-          if ( notinst_only || !missedInstalled )
+          if ( notinst_only )
             continue;
           tr << lockStatusTag( "i", isLocked );
-          // this is needed, other isTargetDistribution would not return
-          // true for the installed base product
-          product = asKind<Product>( installed );
+          // isTargetDistribution (i.e. is Base Product) needs to be taken from the installed item!
+          forceShowAsBaseProduct = installed->asKind<Product>()->isTargetDistribution();
           missedInstalled = false;
 	  // bnc#841473: Downside of reporting the installed product (repo: @System)
 	  // instead of the available one (repo the product originated from) is that
@@ -692,7 +692,7 @@ static void list_product_table( Zypper & zypper )
           continue;
         tr << lockStatusTag( "", isLocked );
       }
-      add_product_table_row( zypper, tr, product );
+      add_product_table_row( zypper, tr, product, forceShowAsBaseProduct );
       tbl << tr;
     }
 
