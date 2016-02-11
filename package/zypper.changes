@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 11 01:16:01 CET 2016 - ma@suse.de
+
+- Update sle-zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Feb  4 16:03:30 CET 2016 - ma@suse.de
 
 - Fail if tty is bad or at EOF when reading user input (bsc#965027)
