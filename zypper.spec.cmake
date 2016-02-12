@@ -106,8 +106,8 @@ cd build
 # We are moving towards a uniform translation set for SLE and openSUSE.
 # While separate SLE translations are still present, overlay them.
 unset TRANSLATION_SET
-if [ -f ../po/sle-zypp-po.tar.bz2 ]; then
-  export TRANSLATION_SET=sle-zypp
+if [ -f ../po/sle-zypper-po.tar.bz2 ]; then
+  export TRANSLATION_SET=sle-zypper
 fi
 
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
