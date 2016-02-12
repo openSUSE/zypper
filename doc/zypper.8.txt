@@ -78,7 +78,7 @@ Zypper works with several types of resource objects, called 'resolvables'. A res
 *patch*::
 	A released patch conflicts with the affected/vulnerable versions of a collection of packages. As long as any of these affected/vulnerable versions are installed, the conflict triggers and the patch is classified as *needed*, or as *unwanted* if the patch is locked. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix. When updating the packages zypper always aims for the latest available version. Resolved patches are classified as either *applied* or *not needed*, depending on whether they refer to actually installed packages.
 	+
-	Depending on the kind of defect, patches are classified by 'category' and 'severity'. Commonly used values for 'category' are *security*, *recommended*, *optional*, *feature*, *document* or *yast*. Commonly used values for 'severity' are *critical*, *important*, *moderate*, *low* or *unspecified*.	
+	Depending on the kind of defect, patches are classified by 'category' and 'severity'. Commonly used values for 'category' are *security*, *recommended*, *optional*, *feature*, *document* or *yast*. Commonly used values for 'severity' are *critical*, *important*, *moderate*, *low* or *unspecified*.
 *pattern*::
 	A group of packages required or recommended to install some functionality.
 *product*::
@@ -100,7 +100,7 @@ File conflicts happen when two packages attempt to install files with the same n
 
 As checking for file conflicts requires access to the full filelist of each package being installed, zypper will check for file conflict only if all packages are downloaded in advance (see *--download-in-advance*).
 
-As the reason for file conflicts usually is a poor package design or lack of coordination between the the people building the packages, they are not easy to resolve. By using the *--replacefiles* option you can force zypper to replace the conflicting files. Nevertheless this may damage the package whose file gets replaced.
+As the reason for file conflicts usually is a poor package design or lack of coordination between the people building the packages, they are not easy to resolve. By using the *--replacefiles* option you can force zypper to replace the conflicting files. Nevertheless this may damage the package whose file gets replaced.
 
 COMMANDS
 --------
@@ -1460,7 +1460,7 @@ Other Commands
 		Create a short table not showing the deleted files. Given twice, show only processes which are associated with a system service. Given three times, list the associated system service names only.
 
 	*--print* 'format'::
-		For each associated system service print 'format' on the standard output, followed by a newline. Any *%s* directive in 'format' is replaced by the the system service name.
+		For each associated system service print 'format' on the standard output, followed by a newline. Any *%s* directive in 'format' is replaced by the system service name.
 
 	Examples: :: {nop}
 
