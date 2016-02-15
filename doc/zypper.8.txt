@@ -101,7 +101,7 @@ File conflicts happen when two packages attempt to install files with the same n
 
 As checking for file conflicts requires access to the full filelist of each package being installed, zypper will check for file conflict only if all packages are downloaded in advance (see *--download-in-advance*).
 
-As the reason for file conflicts usually is a poor package design or lack of coordination between the the people building the packages, they are not easy to resolve. By using the *--replacefiles* option you can force zypper to replace the conflicting files. Nevertheless this may damage the package whose file gets replaced.
+As the reason for file conflicts usually is a poor package design or lack of coordination between the people building the packages, they are not easy to resolve. By using the *--replacefiles* option you can force zypper to replace the conflicting files. Nevertheless this may damage the package whose file gets replaced.
 
 COMMANDS
 --------

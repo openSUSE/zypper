@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 12/02/2015
+.\"      Date: 02/15/2016
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "12/02/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "02/15/2016" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -130,7 +130,7 @@ File conflicts happen when two packages attempt to install files with the same n
 .sp
 As checking for file conflicts requires access to the full filelist of each package being installed, zypper will check for file conflict only if all packages are downloaded in advance (see \fB\-\-download\-in\-advance\fR)\&.
 .sp
-As the reason for file conflicts usually is a poor package design or lack of coordination between the the people building the packages, they are not easy to resolve\&. By using the \fB\-\-replacefiles\fR option you can force zypper to replace the conflicting files\&. Nevertheless this may damage the package whose file gets replaced\&.
+As the reason for file conflicts usually is a poor package design or lack of coordination between the people building the packages, they are not easy to resolve\&. By using the \fB\-\-replacefiles\fR option you can force zypper to replace the conflicting files\&. Nevertheless this may damage the package whose file gets replaced\&.
 .SH "COMMANDS"
 .sp
 zypper provides a number of \fIcommands\fR\&. Each command accepts the options listed in the \fBGLOBAL OPTIONS\fR section\&. These options must be specified \fIbefore\fR the command name\&. In addition, many commands have specific options, which are listed in this section\&. These command\-specific options must be specified \fIafter\fR the name of the command and \fIbefore\fR any of the command arguments\&.
