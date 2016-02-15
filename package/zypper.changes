@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Feb 15 09:12:12 CET 2016 - ma@suse.de
+
+- products: fix wrong repository shown for installed products
+- Fix spec file to use the correct translation set (bnc#948924)
+- Fix typos in  man page (bsc#953214)
+- version 1.12.33
+
+-------------------------------------------------------------------
 Thu Feb 11 01:15:35 CET 2016 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
