@@ -2485,16 +2485,15 @@ Show the number of resolvables matched by each lock\&. This option requires load
 .RS 4
 List the resolvables matched by each lock\&. This option requires loading the repositories\&.
 .RE
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-Add a package lock\&. Specify packages to lock by exact name or by a glob pattern using *** and \*(Aq*?*\*(Aq wildcard characters\&.
-.fi
-.if n \{\
 .RE
-.\}
+.PP
+\fBaddlock\fR (\fBal\fR) [\fIoptions\fR] \fIpackage\-name\fR\&...
+.RS 4
+Add a package lock\&. Specify packages to lock by exact name or by a glob pattern using
+\fB*\fR
+and
+\fI\fB?\fR\fR
+wildcard characters\&.
 .PP
 \fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
 .RS 4

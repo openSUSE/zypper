@@ -1306,6 +1306,7 @@ Package locks serve the purpose of preventing changes to the set of installed pa
 		 List the resolvables matched by each lock. This option requires loading the repositories.
 --
 
+*addlock* (*al*) ['options'] 'package-name'...::
 	Add a package lock. Specify packages to lock by exact name or by a glob pattern using *** and '*?*' wildcard characters.
 +
 --
