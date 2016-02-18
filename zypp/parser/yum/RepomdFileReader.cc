@@ -60,12 +60,20 @@ namespace zypp
     };
 
   public:
-    /**
-     * CTOR
-     *
-     * \see RepomdFileReader::RepomdFileReader(Pathname,ProcessResource)
-     */
-    Impl(const Pathname &repomd_file, const ProcessResource & callback);
+    /** Ctro taking a ProcessResource2 callback */
+    Impl(const Pathname &repomd_file, const ProcessResource2 & callback )
+    : _tag( tag_NONE )
+    , _type( ResourceType::NONE_e )
+    , _callback( callback )
+    {
+      Reader reader( repomd_file );
+      MIL << "Reading " << repomd_file << endl;
+      reader.foreachNode( bind( &RepomdFileReader::Impl::consumeNode, this, _1 ) );
+    }
+   /** \overload Redirect an old ProcessResource callback */
+    Impl(const Pathname &repomd_file, const ProcessResource & callback)
+    : Impl( repomd_file, ProcessResource2( bind( callback, _1, _2 ) ) )
+    {}
 
     /**
      * Callback provided to the XML parser.
@@ -74,40 +82,22 @@ namespace zypp
 
 
   private:
-    /** Location of metadata file. */
-    OnMediaLocation _location;
+    /** Function for processing collected data. Passed-in through constructor. */
+    ProcessResource2 _callback;
 
     /** Used to remember currently processed tag */
     Tag _tag;
 
-    /** Type of metadata file. */
+    /** Type of metadata file (string) */
+    std::string _typeStr;
+
+    /** Type of metadata file as enum of well known repoinded.xml entries. */
     repo::yum::ResourceType _type;
 
-    /** Function for processing collected data. Passed-in through constructor. */
-    ProcessResource _callback;
-
-    /** Checksum of metadata file */
-    CheckSum _checksum;
-
-    /** Type of checksum of metadata file */
-    std::string _checksum_type;
-
-    /** Metadata file time-stamp. */
-    Date _timestamp;
+    /** Location of metadata file. */
+    OnMediaLocation _location;
   };
   ///////////////////////////////////////////////////////////////////////
-
-  RepomdFileReader::Impl::Impl(
-      const Pathname &repomd_file, const ProcessResource & callback)
-    :
-      _tag(tag_NONE), _type(ResourceType::NONE_e), _callback(callback)
-  {
-    Reader reader( repomd_file );
-    MIL << "Reading " << repomd_file << endl;
-    reader.foreachNode( bind( &RepomdFileReader::Impl::consumeNode, this, _1 ) );
-  }
-
-  // --------------------------------------------------------------------------
 
   /*
    * xpath and multiplicity of processed nodes are included in the code
@@ -135,7 +125,8 @@ namespace zypp
       if ( reader_r->name() == "data" )
       {
         _tag = tag_Data;
-        _type = ResourceType(reader_r->getAttribute("type").asString());
+	_typeStr = reader_r->getAttribute("type").asString();
+        _type = ResourceType(_typeStr);
         return true;
       }
 
@@ -174,7 +165,7 @@ namespace zypp
       if ( reader_r->name() == "data" )
       {
         if (_callback)
-          _callback( _location, _type );
+          _callback( _location, _type, _typeStr );
 
         return true;
       }
@@ -190,10 +181,12 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  RepomdFileReader::RepomdFileReader(
-      const Pathname & repomd_file, const ProcessResource & callback)
-    :
-      _pimpl(new Impl(repomd_file, callback))
+  RepomdFileReader::RepomdFileReader( const Pathname & repomd_file, const ProcessResource & callback )
+  : _pimpl( new Impl(repomd_file, callback) )
+  {}
+
+  RepomdFileReader::RepomdFileReader( const Pathname & repomd_file, const ProcessResource2 & callback )
+  : _pimpl( new Impl(repomd_file, callback) )
   {}
 
   RepomdFileReader::~RepomdFileReader()

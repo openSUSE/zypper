@@ -31,12 +31,12 @@ namespace zypp
    * Reads through a repomd.xml file and collects type, location, checksum and
    * other data about metadata files to be processed.
    *
-   * After each package is read, a \ref OnMediaLocation
-   * and \ref repo::yum::ResourceType is prepared and \ref _callback
-   * is called with these two objects passed in.
+   * After each file entry is read, a \ref OnMediaLocation
+   * and \ref repo::yum::ResourceType are prepared and passed to the \ref _callback.
    *
-   * The \ref _callback is provided on construction.
-   *
+   * Depending on the \ref _callback type provided on construction, ResourceType may
+   * additionally be passed as a plain string. This form allows handling custom
+   * resource types (e.g. ones with embedded locale tag).
    *
    * \code
    * RepomdFileReader reader(repomd_file, 
@@ -46,15 +46,11 @@ namespace zypp
   class RepomdFileReader : private base::NonCopyable
   {
   public:
-   /**
-    * Callback definition.
-    * First parameter is a \ref OnMediaLocation object with the resource
-    * second parameter is the resource type.
-    */
-    typedef function< bool(
-        const OnMediaLocation &,
-        const repo::yum::ResourceType &)>
-      ProcessResource;
+   /** Callbacl taking \ref OnMediaLocation and \ref repo::yum::ResourceType */
+    typedef function< bool( const OnMediaLocation &, const repo::yum::ResourceType & )> ProcessResource;
+
+    /** Alternate callback also receiving the ResourceType as string. */
+    typedef function< bool( const OnMediaLocation &, const repo::yum::ResourceType &, const std::string & )> ProcessResource2;
 
    /**
     * CTOR. Creates also \ref xml::Reader and starts reading.
@@ -64,12 +60,11 @@ namespace zypp
     *
     * \see RepomdFileReader::ProcessResource
     */
-    RepomdFileReader(
-      const Pathname & repomd_file, const ProcessResource & callback);
+    RepomdFileReader( const Pathname & repomd_file, const ProcessResource & callback );
+    /** \overload taking ProcessResource2 callback */
+    RepomdFileReader( const Pathname & repomd_file, const ProcessResource2 & callback );
 
-    /**
-     * DTOR
-     */
+    /** DTOR */
     ~RepomdFileReader();
 
   private:
@@ -78,10 +73,8 @@ namespace zypp
   };
 
 
-    } // ns yum
-  } // ns parser
-} // ns zypp
+    } // namespace yum
+  } // namespace parser
+} // namespace zypp
 
-#endif /*zypp_source_yum_RepomdFileReader_H*/
-
-// vim: set ts=2 sts=2 sw=2 et ai:
+#endif // zypp_source_yum_RepomdFileReader_H
