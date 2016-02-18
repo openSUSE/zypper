@@ -72,6 +72,7 @@ namespace zypp
         bool repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype );
         bool patches_Callback( const OnMediaLocation &loc, const std::string &id );
        private:
+	// TODO: Use pimpl to be extensible; but breaks bincompat :(
         Pathname _dest_dir;
         Pathname _delta_dir;
         std::list<OnMediaLocation> _patches_files;
