@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 18 01:13:24 CET 2016 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Feb 15 09:12:12 CET 2016 - ma@suse.de
 
 - products: fix wrong repository shown for installed products
