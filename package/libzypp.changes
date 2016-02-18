@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb 18 18:38:52 CET 2016 - ma@suse.de
+
+- yum::Downloader: Download only wanted 'susedata.LANG' files
+  (FATE#320518)
+- version 15.21.3 (19)
+
+-------------------------------------------------------------------
 Thu Feb  4 16:38:14 CET 2016 - ma@suse.de
 
 - installSrcPackage: trigger progress callback (bsc#580902)
