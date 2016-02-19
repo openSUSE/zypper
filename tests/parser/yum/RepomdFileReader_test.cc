@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(repomd_read)
       cout << *it << endl;
       
       Collector collect;
-      RepomdFileReader( file, bind( &Collector::callback, &collect, _1, _2 ));
+      RepomdFileReader( file, RepomdFileReader::ProcessResource(bind( &Collector::callback, &collect, _1, _2 )) );
       
       std::ifstream ifs( file.extend(".solution").asString().c_str() );
       
