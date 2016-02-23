@@ -337,7 +337,7 @@ namespace zypp
         , apply_locks_file		( true )
         , pluginsPath			( "/usr/lib/zypp/plugins" )
       {
-        MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
+        MIL << "libzypp: " << VERSION << endl;
         // override_r has higest prio
         // ZYPP_CONF might override /etc/zypp/zypp.conf
         if ( _parsedZyppConf.empty() )
