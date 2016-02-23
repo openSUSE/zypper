@@ -1108,7 +1108,7 @@ namespace zypp
 
   std::ostream & ZConfig::about( std::ostream & str ) const
   {
-    str << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
+    str << "libzypp: " << VERSION << endl;
 
     str << "libsolv: " << solv_version;
     if ( ::strcmp( solv_version, LIBSOLV_VERSION_STRING ) )
