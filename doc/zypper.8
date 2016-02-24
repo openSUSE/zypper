@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 02/16/2016
+.\"      Date: 02/24/2016
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "02/16/2016" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "02/24/2016" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -3347,7 +3347,7 @@ command)\&.
 .RE
 .SH "EXIT CODES"
 .sp
-There are several exit codes defined for zypper built\-in commands for use e\&.g\&. within scripts\&. These codes are defined in header file src/zypper\-main\&.h found in zypper source package\&. Codes from interval (1\-5) denote an error, numbers (100\-105) provide a specific information, 0 represents a normal successful run\&. Following is a list of these codes with descriptions:
+There are several exit codes defined for zypper built\-in commands for use e\&.g\&. within scripts\&. These codes are defined in header file src/zypper\-main\&.h found in zypper source package\&. Codes below 100 denote an error, codes above 100 provide a specific information, 0 represents a normal successful run\&. Following is a list of these codes with descriptions:
 .PP
 \fB0\fR \- \fBZYPPER_EXIT_OK\fR
 .RS 4
@@ -3431,6 +3431,12 @@ command in case any of the arguments does not match any of the available (or ins
 \fB105\fR \- \fBZYPPER_EXIT_ON_SIGNAL\fR
 .RS 4
 Returned upon exiting after receiving a SIGINT or SIGTERM\&.
+.RE
+.PP
+\fB106\fR \- \fBZYPPER_EXIT_INF_REPOS_SKIPPED\fR
+.RS 4
+Some repository had to be disabled temporarily because it failed to refresh\&. You should check your repository configuration (e\&.g\&.
+\fBzypper ref \-f\fR)\&.
 .RE
 .sp
 Zypper subcommands (see section \fBSUBCOMMANDS\fR) may return \fBdifferent codes\fR which should be described in the commands man page\&. Call \fBzypper help \fR\fB\fIsubcommand\fR\fR to see the subcommands man page if one is provided\&.

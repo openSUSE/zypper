@@ -852,7 +852,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
     // errors may continue. For now at least remember the refresh error to prevent
     // a 0 exit code after the action completed. (bsc#961719, bsc#961724, et.al.)
     // zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    zypper.setRefreshCode( ZYPPER_EXIT_ERR_ZYPP );
+    zypper.setRefreshCode( ZYPPER_EXIT_INF_REPOS_SKIPPED );
   }
 }
 
