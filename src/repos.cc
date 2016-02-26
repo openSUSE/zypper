@@ -1934,15 +1934,12 @@ void add_repo_from_file( Zypper & zypper,
       continue;
     }
 
-    MIL << "requested: enabled: " << enabled << " autorefresh: " << autorefresh << endl;
     // enable by default
-    if ( indeterminate(enabled) )
-      enabled = true;
-    repo.setEnabled((enabled == true));
-    // disable autorefresh by default
-    if ( indeterminate(autorefresh) )
-      autorefresh = false;
-    repo.setAutorefresh((autorefresh == true));
+    if ( !indeterminate(enabled) )
+      repo.setEnabled( enabled );
+
+    if ( !indeterminate(autorefresh) )
+      repo.setAutorefresh( autorefresh );
 
     if ( !indeterminate(keepPackages) )
       repo.setKeepPackages(keepPackages);
@@ -1950,9 +1947,7 @@ void add_repo_from_file( Zypper & zypper,
     if ( !indeterminate(gpgCheck) )
       repo.setGpgCheck(gpgCheck);
 
-    MIL << "to-be-added: enabled: " << repo.enabled() << " autorefresh: " << repo.autorefresh() << endl;
-
-    add_repo(zypper, repo);
+    add_repo( zypper, repo );
   }
 
   return;
