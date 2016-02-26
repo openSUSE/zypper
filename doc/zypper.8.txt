@@ -351,6 +351,8 @@ Package Management Commands
 
 	*-y*, *--no-confirm*::
 		Don't require user interaction. Alias for the --non-interactive global option.
+
+	This command also accepts the *Download-and-install mode options* described in the *install* command.:: {nop}
 --
 
 *install-new-recommends* (*inr*) ['options']::
@@ -494,7 +496,7 @@ Update Management Commands
 	*-y*, *--no-confirm*::
 		Don't require user interaction. Alias for the --non-interactive global option.
 
-	This command also accepts the download-and-install mode options described in the *install* command description.:: {nop}
+	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 --
 
 *list-patches* (*lp*) ['options']::
@@ -601,7 +603,7 @@ Update Management Commands
 	*-y*, *--no-confirm*::
 		Don't require user interaction. Alias for the --non-interactive global option.
 
-	This command also accepts the *download-and-install* mode options described in the *install* command description.:: {nop}
+	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 --
 
 *dist-upgrade* (*dup*) ['options']::
@@ -640,7 +642,7 @@ Update Management Commands
 	*--details*::
 		Show the detailed installation summary.
 
-	This command also accepts the download-and-install mode options described in the *install* command description.:: {nop}
+	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 
 	*Expert Options:* :: Don't use them unless you know you need them.
 
