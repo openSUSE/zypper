@@ -1605,7 +1605,7 @@ FILES
 
 EXIT CODES
 ----------
-There are several exit codes defined for zypper built-in commands for use e.g. within scripts. These codes are defined in header file src/zypper-main.h found in zypper source package. Codes from interval (1-5) denote an error, numbers (100-105) provide a specific information, 0 represents a normal successful run. Following is a list of these codes with descriptions:
+There are several exit codes defined for zypper built-in commands for use e.g. within scripts. These codes are defined in header file src/zypper-main.h found in zypper source package. Codes below 100 denote an error, codes above 100 provide a specific information, 0 represents a normal successful run. Following is a list of these codes with descriptions:
 
 *0* - *ZYPPER_EXIT_OK*::
 	Successful run of zypper with no special info.
@@ -1637,6 +1637,8 @@ There are several exit codes defined for zypper built-in commands for use e.g. w
 	Returned by the *install* and the *remove* command in case any of the arguments does not match any of the available (or installed) package names or other capabilities.
 *105* - *ZYPPER_EXIT_ON_SIGNAL*::
 	Returned upon exiting after receiving a SIGINT or SIGTERM.
+*106* - *ZYPPER_EXIT_INF_REPOS_SKIPPED*::
+	Some repository had to be disabled temporarily because it failed to refresh. You should check your repository configuration (e.g. *zypper ref -f*).
 
 Zypper subcommands (see section *SUBCOMMANDS*) may return *different codes* which should be described in the commands man page. Call *zypper help 'subcommand'* to see the subcommands man page if one is provided.
 
