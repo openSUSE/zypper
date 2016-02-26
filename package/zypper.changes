@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Feb 26 13:38:22 CET 2016 - ma@suse.de
+
+- Fix repo import to honor enable and autorefresh flags (bsc#967673)
+- Return 106-ZYPPER_EXIT_INF_REPOS_SKIPPED if repos were skipped
+  due to a failing refresh (bsc#968006)
+- fix addlock man page header (boo#966760)
+- Fix typo in man page (bsc#953214)
+- version 1.11.51
+
+-------------------------------------------------------------------
 Thu Feb 11 01:16:01 CET 2016 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
