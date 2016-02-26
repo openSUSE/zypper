@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb 26 12:57:18 CET 2016 - ma@suse.de
+
+- man: Enhance description of Download-and-install mode options
+  (bsc#968254)
+- version 1.12.35
+
+-------------------------------------------------------------------
 Wed Feb 24 15:22:53 CET 2016 - ma@suse.de
 
 - Return 106-ZYPPER_EXIT_INF_REPOS_SKIPPED if repos were skipped due
