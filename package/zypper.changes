@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Feb 29 10:35:21 CET 2016 - ma@suse.de
+
+- Fix repo import to honor enable and autorefresh flags (bsc#967673)
+- Return 106-ZYPPER_EXIT_INF_REPOS_SKIPPED if repos were skipped
+  due to a failing refresh (bsc#968006)
+- version 1.6.330
+
+-------------------------------------------------------------------
 Tue Feb  2 18:26:07 CET 2016 - ma@suse.de
 
 - Fix misaligned TAB stops in colored prompts (bsc#948566)
