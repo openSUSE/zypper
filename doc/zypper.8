@@ -1708,10 +1708,9 @@ Command history for the shell.
 .LP
 There are several exit codes defined for zypper for use e.g. within
 scripts. These codes are defined in header file src/zypper-main.h
-found in zypper source package. Codes from interval (1-5) denote an
-error, numbers (100-105) provide a specific information, 0
-represents a normal successful run. Following is a list of these
-codes with descriptions.
+found in zypper source package. Codes below 100 denote an error,
+codes above 100 provide a specific information, 0 represents a normal
+successful run. Following is a list of these codes with descriptions.
 .TP
 0 - ZYPPER_EXIT_OK
 Successfull run of zypper with no special info.
@@ -1750,7 +1749,9 @@ or other capabilities.
 .TP
 105 - ZYPPER_EXIT_ON_SIGNAL
 Returned upon exiting after receiving a SIGINT or SIGTERM.
-
+.TP
+106 - ZYPPER_EXIT_INF_REPOS_SKIPPED
+Some repository had to be disabled temporarily because it failed to refresh. You should check your repository configuration (e.g. \fBzypper ref -f\fR).
 
 .SH "COMPATIBILITY WITH RUG"
 .LP
