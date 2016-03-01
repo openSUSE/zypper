@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar  1 12:34:53 CET 2016 - ma@suse.de
+
+- media: Send stats header to download.opensuse.org only (bsc#955801)
+- fix build-compare (#57, #58)
+- version 15.21.4 (19)
+
+-------------------------------------------------------------------
 Thu Feb 18 18:38:52 CET 2016 - ma@suse.de
 
 - yum::Downloader: Download only wanted 'susedata.LANG' files
