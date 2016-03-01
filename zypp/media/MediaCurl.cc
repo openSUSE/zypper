@@ -577,9 +577,12 @@ void MediaCurl::setupEasy()
   // so that we don't add headers twice
   TransferSettings vol_settings(_settings);
 
-  // add custom headers
-  vol_settings.addHeader(anonymousIdHeader());
-  vol_settings.addHeader(distributionFlavorHeader());
+  // add custom headers for download.opensuse.org (bsc#955801)
+  if ( _url.getHost() == "download.opensuse.org" )
+  {
+    vol_settings.addHeader(anonymousIdHeader());
+    vol_settings.addHeader(distributionFlavorHeader());
+  }
   vol_settings.addHeader("Pragma:");
 
   _settings.setTimeout(ZConfig::instance().download_transfer_timeout());
