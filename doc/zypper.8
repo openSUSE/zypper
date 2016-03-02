@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 02/26/2016
+.\"      Date: 03/02/2016
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "02/26/2016" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "03/02/2016" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1044,7 +1044,7 @@ Work only with the repository specified by the alias, name, number, or URI\&. Th
 .PP
 \fB\-\-skip\-interactive\fR
 .RS 4
-Skip interactive patches\&.
+This will skip interactive patches, that is, those that need reboot, contain a message, or update a package whose license needs to be confirmed\&.
 .RE
 .PP
 \fB\-\-with\-interactive\fR
@@ -2992,6 +2992,11 @@ Specifies table style to use\&. Table style is identified by an integer number\&
 Switches to non\-interactive mode\&. In this mode zypper doesn\(cqt ask user to type answers to various prompts, but uses default answers automatically\&. The behavior of this option is somewhat different than that of options like
 \fI\-\-yes\fR, since zypper can answer different answers to different questions\&. The answers also depend on other options like
 \fB\-\-no\-gpg\-checks\fR\&.
+.RE
+.PP
+\fB\-\-non\-interactive\-include\-reboot\-patches\fR
+.RS 4
+In non\-interactive mode do not skip patches which have the rebootSuggested\-flag set\&. Otherwise these patches are considered to be interactive, like patches including a licenses or some message to confirm\&. NOTE: This option does not turn on non\-interactive mode\&.
 .RE
 .PP
 \fB\-x\fR, \fB\-\-xmlout\fR
