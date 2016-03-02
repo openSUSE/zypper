@@ -532,8 +532,7 @@ Update Management Commands
 *patch* ['options']::
 	Install all available needed patches.
 	+
-	If there are patches that affect the package management itself, those will
-	be installed first and you will be asked to run the *patch* command again.
+	If there are patches that affect the package management itself, those will be installed first and you will be asked to run the *patch* command again.
 	+
 	This command is similar to *zypper update -t patch*.
 +
@@ -557,10 +556,10 @@ Update Management Commands
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
 	*--skip-interactive*::
-		Skip interactive patches.
+		This will skip interactive patches, that is, those that need reboot, contain a message, or update a package whose license needs to be confirmed.
 
 	*--with-interactive*::
-		Avoid skipping of  interactive patches when in non-interactive mode.
+		Avoid skipping of interactive patches when in non-interactive mode.
 
 	*-l*, *--auto-agree-with-licenses*::
 		See the *update* command for description of this option.
@@ -1455,6 +1454,9 @@ GLOBAL OPTIONS
 
 *-n*, *--non-interactive*::
 	Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behavior of this option is somewhat different than that of options like *--yes*, since zypper can answer different answers to different questions. The answers also depend on other options like *--no-gpg-checks*.
+
+*--non-interactive-include-reboot-patches*::
+	In non-interactive mode do not skip patches which have the rebootSuggested-flag set. Otherwise these patches are considered to be interactive, like patches including a licenses or some message to confirm. NOTE: This option does not turn on non-interactive mode.
 
 *-x*, *--xmlout*::
 	Switches to XML output. This option is useful for scripts or graphical frontends using zypper.
