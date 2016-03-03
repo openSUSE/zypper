@@ -1520,7 +1520,7 @@ GLOBAL OPTIONS
 	Specifies table style to use. Table style is identified by an integer number. TODO
 
 *-n*, *--non-interactive*::
-	Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behavior of this option is somewhat different than that of options like '--yes', since zypper can answer different answers to different questions. The answers also depend on other options like *--no-gpg-checks*.
+	Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. Those default answers also depend on other options like *--no-gpg-checks*.
 
 *--non-interactive-include-reboot-patches*::
 	In non-interactive mode do not skip patches which have the rebootSuggested-flag set. Otherwise these patches are considered to be interactive, like patches including a licenses or some message to confirm. NOTE: This option does not turn on non-interactive mode.
