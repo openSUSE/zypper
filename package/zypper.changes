@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar  3 11:02:30 CET 2016 - ma@suse.de
+
+- man: Rephrase unclear explanation of --non-interactive (bsc#969186)
+- man: add missing --non-interactive-include-reboot-patches option
+- version 1.11.52
+
+-------------------------------------------------------------------
 Sun Feb 28 01:14:16 CET 2016 - ma@suse.de
 
 - Update zypper-po.tar.bz2
