@@ -54,6 +54,12 @@ namespace zypp
     , _end( std::move(end_r) )
     {}
 
+    /** Ctor taking the iterator pair */
+    Iterable( std::pair<iterator_type,iterator_type> range_r )
+    : _begin( std::move(range_r.first) )
+    , _end( std::move(range_r.second) )
+    {}
+
     iterator_type begin() const
     { return _begin; }
 
@@ -82,6 +88,10 @@ namespace zypp
   Iterable<TIterator> makeIterable( TIterator && begin_r, TIterator && end_r )
   { return Iterable<TIterator>( std::forward<TIterator>(begin_r), std::forward<TIterator>(end_r) ); }
 
+  /** \relates Iterable convenient construction. */
+  template <class TIterator>
+  Iterable<TIterator> makeIterable( std::pair<TIterator,TIterator> && range_r )
+  { return Iterable<TIterator>( std::forward<std::pair<TIterator,TIterator>>(range_r) ); }
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_BASE_ITERABLE_H
