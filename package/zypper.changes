@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Mar  9 16:27:25 CET 2016 - ma@suse.de
+
+- Bump minor version; 1.12 is continued on SuSE-SLE-12-SP1-Branch
+- version 1.13.0
+
+-------------------------------------------------------------------
 Wed Mar  9 15:19:05 CET 2016 - ma@suse.de
 
 - man: Rephrase unclear explanation of --non-interactive (bsc#969186)
