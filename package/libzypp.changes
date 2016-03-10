@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Mar 10 01:13:24 CET 2016 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Mar  1 12:34:53 CET 2016 - ma@suse.de
 
 - media: Send stats header to download.opensuse.org only (bsc#955801)
