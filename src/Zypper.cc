@@ -3128,9 +3128,11 @@ void Zypper::doCommand()
 
 	else if ( command() == ZypperCommand::LIST_REPOS
 	       || command() == ZypperCommand::LIST_SERVICES
+	       || command() == ZypperCommand::VERSION_CMP
 	       || command() == ZypperCommand::TARGET_OS )
 	  zypp_readonly_hack::IWantIt (); // #247001, #302152
-	  God = getZYpp();	// lock again?
+
+	God = getZYpp();	// lock again?
       }
       catch ( ZYppFactoryException & excpt_r )
       {
