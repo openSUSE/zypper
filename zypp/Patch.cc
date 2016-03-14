@@ -44,7 +44,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   std::string Patch::category() const
-  { return lookupStrAttribute( sat::SolvAttr::patchcategory ); }
+  { return str::toLower(lookupStrAttribute( sat::SolvAttr::patchcategory )); }
 
   Patch::Category Patch::categoryEnum() const
   { return categoryEnum( category() ); }
@@ -132,7 +132,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   std::string Patch::severity() const
-  { return lookupStrAttribute( sat::SolvAttr::severity ); }
+  { return str::toLower(lookupStrAttribute( sat::SolvAttr::severity )); }
 
   Patch::SeverityFlag Patch::severityFlag() const
   { return severityFlag( severity() ); }
