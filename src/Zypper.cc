@@ -3113,12 +3113,13 @@ void Zypper::doCommand()
 	if (roh != NULL && roh[0] == '1')
 	  zypp_readonly_hack::IWantIt ();
 
-	else if (   command() == ZypperCommand::LIST_REPOS
-	  || command() == ZypperCommand::LIST_SERVICES
-	  || command() == ZypperCommand::TARGET_OS )
+	else if ( command() == ZypperCommand::LIST_REPOS
+	       || command() == ZypperCommand::LIST_SERVICES
+	       || command() == ZypperCommand::VERSION_CMP
+	       || command() == ZypperCommand::TARGET_OS )
 	  zypp_readonly_hack::IWantIt (); // #247001, #302152
 
-	  God = zypp::getZYpp();
+	God = zypp::getZYpp();
       }
       catch (ZYppFactoryException & excpt_r)
       {
