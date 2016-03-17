@@ -27,7 +27,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   /**
-   * \brief Interface to pluigin scripts using a \c Stomp inspired communication protocol.
+   * \brief Interface to plugin scripts using a \c Stomp inspired communication protocol.
    *
    * \note \ref PluginScript is copyable and assignable, but the connection is shared
    * among multiple copies. It gets automatically closed if the last copy goes out of

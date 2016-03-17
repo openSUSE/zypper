@@ -174,7 +174,7 @@ namespace zypp
       bool keyEmpty( const std::string & key_r ) const
       { return headerList().find( key_r ) == headerEnd(); }
 
-      /** Return number of header entires for \c key_r. */
+      /** Return number of header entries for \c key_r. */
       bool keySize( const std::string & key_r ) const
       { return headerList().count( key_r ); }
 
@@ -201,7 +201,7 @@ namespace zypp
       /** Not throwing version returing one of the matching header values or \c default_r string. */
       const std::string & getHeaderNT( const std::string & key_r, const std::string & default_r = std::string() ) const;
 
-      /** Set header for \c key_r removing all other occurences of \c key_r.
+      /** Set header for \c key_r removing all other occurrences of \c key_r.
        * \throw PluginFrameException If key contains illegal chars (\c NL or \c :)
        * \throw PluginFrameException If value contains illegal chars (\c NL)
        */
