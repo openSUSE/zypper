@@ -100,6 +100,8 @@ The plugins default location is obtained from \ref zypp::ZConfig::pluginsPath()
 
 \subpage plugin-commit Escort installation of packages
 
+\subpage plugin-system Receive notification if system content has changed
+
 \ref plugin-services
 
 \ref plugin-url-resolver
@@ -155,7 +157,7 @@ ZYpp sees a repository whose url has the format:
 plugin:foo?param1=val1&param2=val2
 \endverbatim
 
-ZYpp tries to executa a plugin named foo (in /usr/lib/zypp/plugins/urlresolver) and call it with the following protocol:
+ZYpp tries to execute a plugin named foo (in /usr/lib/zypp/plugins/urlresolver) and call it with the following protocol:
 
 \verbatim
    RESOLVEURL

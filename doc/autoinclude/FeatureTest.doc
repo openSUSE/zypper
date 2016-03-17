@@ -48,6 +48,8 @@ Packages requiring a feature may use the corresponding \c Requires: in their .sp
     <DT>\ref plugin-system </DT>
     <DT>version 0</DT>
     <DD>Plugin executed when system content change is detected (by now SUSE Manager/spacewalk only).</DD>
+    <DT>version 1</DT>
+    <DD>Plugin executed when system content change is detected (all installed plugins).</DD>
   </DL></DD>
 
   <DT>plugin:urlresolver</DT>

@@ -54,7 +54,7 @@
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Transaction.h"
 
-#include "zypp/PluginScript.h"
+#include "zypp/PluginExecutor.h"
 
 using namespace std;
 
@@ -230,149 +230,6 @@ namespace zypp
       }
     } // namespace
     ///////////////////////////////////////////////////////////////////
-
-    /** Helper for commit plugin execution.
-     * \ingroup g_RAII
-     */
-    class CommitPlugins : private base::NonCopyable
-    {
-      public:
-	/** Default ctor: Empty plugin list */
-	CommitPlugins()
-	{}
-
-	/** Dtor: Send PLUGINEND message and close plugins. */
-	~CommitPlugins()
-	{
-	  if ( ! _scripts.empty() )
-	    send( PluginFrame( "PLUGINEND" ) );
-	  // ~PluginScript will disconnect all remaining plugins!
-	}
-
-	/** Whether no plugins are waiting */
-	bool empty() const
-	{ return _scripts.empty(); }
-
-
-	/** Send \ref PluginFrame to all open plugins.
-	 * Failed plugins are removed from the execution list.
-	 */
-	void send( const PluginFrame & frame_r )
-	{
-	  DBG << "+++++++++++++++ send " << frame_r << endl;
-	  for ( auto it = _scripts.begin(); it != _scripts.end(); )
-	  {
-	    doSend( *it, frame_r );
-	    if ( it->isOpen() )
-	      ++it;
-	    else
-	      it = _scripts.erase( it );
-	  }
-	  DBG << "--------------- send " << frame_r << endl;
-	}
-
-	/** Find and launch plugins sending PLUGINSTART message.
-	 *
-	 * If \a path_r is a directory all executable files whithin are
-	 * expected to be plugins. Otherwise \a path_r must point to an
-	 * executable plugin.
-	 */
-	void load( const Pathname & path_r )
-	{
-	  PathInfo pi( path_r );
-	  DBG << "+++++++++++++++ load " << pi << endl;
-	  if ( pi.isDir() )
-	  {
-	    std::list<Pathname> entries;
-	    if ( filesystem::readdir( entries, pi.path(), false ) != 0 )
-	    {
-	      WAR << "Plugin dir is not readable: " << pi << endl;
-	      return;
-	    }
-	    for_( it, entries.begin(), entries.end() )
-	    {
-	      PathInfo pii( *it );
-	      if ( pii.isFile() && pii.userMayRX() )
-		doLoad( pii );
-	    }
-	  }
-	  else if ( pi.isFile() )
-	  {
-	    if ( pi.userMayRX() )
-	      doLoad( pi );
-	    else
-	      WAR << "Plugin file is not executable: " << pi << endl;
-	  }
-	  else
-	  {
-	    WAR << "Plugin path is neither dir nor file: " << pi << endl;
-	  }
-	  DBG << "--------------- load " << pi << endl;
-	}
-
-      private:
-	/** Send \ref PluginFrame and expect valid answer (ACK|_ENOMETHOD).
-	 * Upon invalid answer or error, close the plugin. and remove it from the
-	 * execution list.
-	 * \returns the received \ref PluginFrame (empty Frame upon Exception)
-	 */
-	PluginFrame doSend( PluginScript & script_r, const PluginFrame & frame_r )
-	{
-	  PluginFrame ret;
-
-	  try {
-	    script_r.send( frame_r );
-	    ret = script_r.receive();
-	  }
-	  catch( const zypp::Exception & e )
-	  { ZYPP_CAUGHT(e); }
-
-	  if ( ! ( ret.isAckCommand() || ret.isEnomethodCommand() ) )
-	  {
-	    WAR << "Bad plugin response from " << script_r << endl;
-	    WAR << dump(ret) << endl;
-	    script_r.close();
-	  }
-
-	  return ret;
-	}
-
-	/** Launch a plugin sending PLUGINSTART message. */
-	void doLoad( const PathInfo & pi_r )
-	{
-	  MIL << "Load plugin: " << pi_r << endl;
-	  try {
-	    PluginScript plugin( pi_r.path() );
-	    plugin.open();
-
-	    PluginFrame frame( "PLUGINBEGIN" );
-	    if ( ZConfig::instance().hasUserData() )
-	      frame.setHeader( "userdata", ZConfig::instance().userData() );
-
-	    doSend( plugin, frame );	// closes on error
-	    if ( plugin.isOpen() )
-	      _scripts.push_back( plugin );
-	  }
-	  catch( const zypp::Exception & e )
-	  {
-	     WAR << "Failed to load plugin " << pi_r << endl;
-	  }
-	}
-
-      private:
-	std::list<PluginScript> _scripts;
-    };
-
-    void testCommitPlugins( const Pathname & path_r ) // for testing only
-    {
-      USR << "+++++" << endl;
-      {
-	CommitPlugins pl;
-	pl.load( path_r );
-	USR << "=====" << endl;
-      }
-      USR << "-----" << endl;
-    }
 
     ///////////////////////////////////////////////////////////////////
     namespace
@@ -1097,27 +954,13 @@ namespace zypp
         guard.resetDispose();
 	sat::updateSolvFileIndex( rpmsolv );	// content digest for zypper bash completion
 
-	// Finally send notification to plugins
-	// NOTE: quick hack looking for spacewalk plugin only
+	// system-hook: Finally send notification to plugins
+	if ( root() == "/" )
 	{
-	  Pathname script( Pathname::assertprefix( _root, ZConfig::instance().pluginsPath()/"system/spacewalk" ) );
-	  if ( PathInfo( script ).isX() )
-	    try {
-	      PluginScript spacewalk( script );
-	      spacewalk.open();
-
-	      PluginFrame notify( "PACKAGESETCHANGED" );
-	      spacewalk.send( notify );
-
-	      PluginFrame ret( spacewalk.receive() );
-	      MIL << ret << endl;
-	      if ( ret.command() == "ERROR" )
-		ret.writeTo( WAR ) << endl;
-	    }
-	    catch ( const Exception & excpt )
-	    {
-	      WAR << excpt.asUserHistory() << endl;
-	    }
+	  PluginExecutor plugins;
+	  plugins.load( ZConfig::instance().pluginsPath()/"system" );
+	  if ( plugins )
+	    plugins.send( PluginFrame( "PACKAGESETCHANGED" ) );
 	}
       }
       else
@@ -1298,13 +1141,12 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       // Prepare execution of commit plugins:
       ///////////////////////////////////////////////////////////////////
-      CommitPlugins commitPlugins;
+      PluginExecutor commitPlugins;
       if ( root() == "/" && ! policy_r.dryRun() )
       {
-	Pathname plugindir( Pathname::assertprefix( _root, ZConfig::instance().pluginsPath()/"commit" ) );
-	commitPlugins.load( plugindir );
+	commitPlugins.load( ZConfig::instance().pluginsPath()/"commit" );
       }
-      if ( ! commitPlugins.empty() )
+      if ( commitPlugins )
 	commitPlugins.send( transactionPluginFrame( "COMMITBEGIN", steps ) );
 
       ///////////////////////////////////////////////////////////////////
@@ -1495,7 +1337,7 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       // Send result to commit plugins:
       ///////////////////////////////////////////////////////////////////
-      if ( ! commitPlugins.empty() )
+      if ( commitPlugins )
 	commitPlugins.send( transactionPluginFrame( "COMMITEND", steps ) );
 
       ///////////////////////////////////////////////////////////////////

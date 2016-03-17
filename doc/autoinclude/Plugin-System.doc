@@ -1,0 +1,75 @@
+/**
+
+\page plugin-system System plugin
+
+\author Michael Andres <ma@suse.de>
+
+<HR><!-- ====================================================================== -->
+\section intro Introduction
+
+This is a statefull plugin executed at the end of \ref zypp::ZYpp::commit, if the system content has change, i.e. if packages have actually been installed or deleted.
+
+All plugins found in \c /usr/lib/zypp/plugins/system are launched. Unless otherwise specified, messages received need to be confirmed by sending an \c ACC message. Sending back an unexpected or \c ERROR message, the execution of the plugin will be canceled.
+
+If you have e.g. \c zypp-plugin-python installed a basic system plugin could look like this:
+
+\verbatim
+#!/usr/bin/env python
+#
+# zypp system plugin
+#
+import os
+import sys
+from zypp_plugin import Plugin
+
+class MyPlugin(Plugin):
+
+  def PACKAGESETCHANGED(self, headers, body):
+
+    // Installation has ended. The set of installed packages has changed.
+    // ....
+
+    self.ack()
+  def
+
+plugin = MyPlugin()
+plugin.main()
+\endverbatim
+
+\see \ref plugin-writing
+
+<HR><!-- ====================================================================== -->
+\section pluginbegin PLUGINBEGIN
+\verbatim
+PLUGINBEGIN
+userdata:TIDfoo42
+
+^@
+\endverbatim
+Sent as 1st message after the plugin was launched. Prepare your plugin and send an \c ACC message when you are done.
+
+\li \c userdata:stringval Optional header sent if the application has provided a user data string. \see \ref zypp-userdata
+
+
+<HR><!-- ====================================================================== -->
+\section packagesetchanged PACKAGESETCHANGED
+\verbatim
+PACKAGESETCHANGED
+
+^@
+\endverbatim
+Installation has ended. The set of installed packages has changed.
+
+\see \ref zypp::sat::Transaction::Step
+
+<HR><!-- ====================================================================== -->
+\section pluginend PLUGINEND
+\verbatim
+PLUGINEND
+
+^@
+\endverbatim
+This message is sent at the end before the plugin is closed. You should receive this message even if the action was aborted by some unexpected exception.
+
+
+*/
