@@ -5,7 +5,7 @@
 #include <sstream>
 
 #include "TestSetup.h"
-#include "zypp/PluginScript.h"
+#include "zypp/PluginExecutor.h"
 
 BOOST_AUTO_TEST_CASE(InitialSettings)
 {
@@ -167,4 +167,26 @@ BOOST_AUTO_TEST_CASE(PluginScriptReceive)
 
   ::kill( scr.getPid(), SIGKILL);
   BOOST_CHECK_THROW(  scr.receive(), PluginScriptDiedUnexpectedly );
+}
+
+BOOST_AUTO_TEST_CASE(PluginExecutorTest)
+{
+  PluginExecutor exec;
+  BOOST_CHECK_EQUAL( (bool)exec, !exec.empty() );
+  BOOST_CHECK_EQUAL( exec.empty(), true );
+  BOOST_CHECK_EQUAL( exec.size(), 0 );
+
+  exec.load( "/bin/cat" );
+  BOOST_CHECK_EQUAL( (bool)exec, !exec.empty() );
+  BOOST_CHECK_EQUAL( exec.empty(), false );
+  BOOST_CHECK_EQUAL( exec.size(), 1 );
+
+  exec.load( "/bin/cat" );
+  BOOST_CHECK_EQUAL( exec.size(), 2 );
+
+  exec.send( PluginFrame( "ACK" ) );
+  BOOST_CHECK_EQUAL( exec.size(), 2 );
+
+  exec.send( PluginFrame( "ERROR" ) );
+  BOOST_CHECK_EQUAL( exec.size(), 0 );	// deleted failing scripts
 }
