@@ -15,8 +15,8 @@ BOOST_AUTO_TEST_CASE(InitialSettings)
 BOOST_AUTO_TEST_CASE(PluginFrameDefaultCtor)
 {
   PluginFrame f;
+  BOOST_CHECK_EQUAL( bool(f), !f.empty() );
   BOOST_CHECK_EQUAL( f.empty(), true );
-  BOOST_CHECK_EQUAL( bool(f), f.empty() );
   BOOST_CHECK_EQUAL( f.command().empty(), true );
   BOOST_CHECK_EQUAL( f.body().empty(), true );
   BOOST_CHECK_EQUAL( f.headerEmpty(), true );
@@ -27,8 +27,8 @@ BOOST_AUTO_TEST_CASE(PluginFrameDefaultCtor)
 BOOST_AUTO_TEST_CASE(PluginFrameCtorAssign)
 {
   PluginFrame f( "command" );
+  BOOST_CHECK_EQUAL( bool(f), !f.empty() );
   BOOST_CHECK_EQUAL( f.empty(), false );
-  BOOST_CHECK_EQUAL( bool(f), f.empty() );
   BOOST_CHECK_EQUAL( f.command(), "command" );
   BOOST_CHECK_EQUAL( f.body().empty(), true );
   BOOST_CHECK_EQUAL( f.headerEmpty(), true );
@@ -36,8 +36,8 @@ BOOST_AUTO_TEST_CASE(PluginFrameCtorAssign)
   BOOST_CHECK_EQUAL( (f != f), false );
 
   PluginFrame g( "command", "body" );
+  BOOST_CHECK_EQUAL( bool(g), !g.empty() );
   BOOST_CHECK_EQUAL( g.empty(), false );
-  BOOST_CHECK_EQUAL( bool(g), g.empty() );
   BOOST_CHECK_EQUAL( g.command(), "command" );
   BOOST_CHECK_EQUAL( g.body(), "body");
   BOOST_CHECK_EQUAL( g.headerEmpty(), true );

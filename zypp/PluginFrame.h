@@ -89,9 +89,9 @@ namespace zypp
       /** Whether this is an empty frame. */
       bool empty() const;
 
-      /** Evaluate in a boolean context (empty frame) */
+      /** Evaluate in a boolean context (not an empty frame) */
       explicit operator bool() const
-      { return empty(); }
+      { return !empty(); }
 
     public:
       /** Return the frame command. */
@@ -256,9 +256,9 @@ namespace zypp
   /** \relates PluginFrame Stream output for logging */
   std::ostream & operator<<( std::ostream & str, const PluginFrame & obj );
 
-  /** \relates PluginFrame Stream output sending all data */
+  /** \relates PluginFrame Stream output writing all data for logging (no throw) */
   inline std::ostream & dumpOn( std::ostream & str, const PluginFrame & obj )
-  { return PluginFrame::writeTo( str, obj ); }
+  { if ( str ) try { PluginFrame::writeTo( str, obj ); } catch(...){}; return str; }
 
   /** \relates PluginFrame Construct from stream. */
   inline std::istream & operator>>( std::istream & str, PluginFrame & obj )
