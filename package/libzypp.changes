@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar 18 13:37:22 CET 2016 - ma@suse.de
+
+- Use PluginExecutor for commit- and system-hooks (bnc#971637)
+- BuildRequires:  libsolv-devel >= 0.6.19 (bnc#971018)
+- version 15.21.5 (19)
+
+-------------------------------------------------------------------
 Sun Mar 13 01:13:08 CET 2016 - ma@suse.de
 
 - Update zypp-po.tar.bz2
