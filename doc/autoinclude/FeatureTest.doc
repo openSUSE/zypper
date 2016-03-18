@@ -29,32 +29,39 @@ Packages requiring a feature may use the corresponding \c Requires: in their .sp
 
   <DT>plugin:commit</DT>
   <DD><DL>
+    <DT>\ref plugin-commit </DT>
     <DT>version 0</DT>
-    <DD>\see \ref plugin-commit </DD>
+    <DD>Basic plugin indicating start and end of commit.</DD>
+    <DT>version 1</DT>
+    <DD>Added COMMITBEGIN/COMMITEND.</DD>
   </DL></DD>
 
   <DT>plugin:services</DT>
   <DD><DL>
+    <DT>\ref plugin-services </DT>
     <DT>version 0</DT>
-    <DD>\see \ref plugin-services </DD>
+    <DD>Provide a client a list of repositories.</DD>
   </DL></DD>
 
   <DT>plugin:system</DT>
   <DD><DL>
+    <DT>\ref plugin-system </DT>
     <DT>version 0</DT>
     <DD>Plugin executed when system content change is detected (by now SUSE Manager/spacewalk only).</DD>
   </DL></DD>
 
   <DT>plugin:urlresolver</DT>
   <DD><DL>
+    <DT>\ref plugin-url-resolver </DT>
     <DT>version 0</DT>
-    <DD>\see \ref plugin-url-resolver </DD>
+    <DD>Convert urls of scheme "plugin" into a supported scheme. </DD>
   </DL></DD>
 
   <DT>repovarexpand</DT>
   <DD><DL>
+    <DT>\ref zypp-repovars </DT>
     <DT>version 0</DT>
-    <DD>Also support braced variables, shell like default and alternate values. \see \ref zypp-repovars</DD>
+    <DD>Also support braced variables, shell like default and alternate values.</DD>
   </DL></DD>
 </DL>
 
