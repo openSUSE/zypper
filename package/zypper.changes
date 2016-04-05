@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
-Tue Apr  5 18:20:59 CEST 2016 - ma@suse.de
+Tue Apr  5 18:26:17 CEST 2016 - ma@suse.de
 
-- Update sle-zypper-po.tar.bz2
+- Update sle-zypper-po.tar.bz2 (bsc#972768)
+- version 1.12.38
 
 -------------------------------------------------------------------
 Mon Mar 14 11:13:17 CET 2016 - ma@suse.de
