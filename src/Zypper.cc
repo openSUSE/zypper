@@ -4342,7 +4342,8 @@ void Zypper::doCommand()
 
       if ( t.empty() )
       {
-        out().info(_("No packages found."), Out::QUIET );
+	// translators: empty search result message
+        out().info(_("No matching items found."), Out::QUIET );
         setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
       }
       else
