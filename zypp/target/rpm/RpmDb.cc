@@ -1525,7 +1525,8 @@ RpmDb::CheckPackageResult RpmDb::checkPackage( const Pathname & path_r, CheckPac
 
   if ( res == 0 )
   {
-    detail_r.push_back( CheckPackageDetail::value_type( CHK_OK, std::move(vresult) ) );
+    // remove trailing NL!
+    detail_r.push_back( CheckPackageDetail::value_type( CHK_OK, str::rtrim( std::move(vresult) ) ) );
     return CHK_OK;
   }
 
