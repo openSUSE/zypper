@@ -247,43 +247,67 @@ int Zypper::main( int argc, char ** argv )
   _argc = argc;
   _argv = argv;
 
-  // parse global options and the command
   try {
+    // parse global options and the command
     processGlobalOptions();
+
+    if ( runningHelp() )
+    {
+      safeDoCommand();
+    }
+    else
+    {
+      switch( command().toEnum() )
+      {
+	case ZypperCommand::SHELL_e:
+	  commandShell();
+	  cleanup();
+	  break;
+
+	case ZypperCommand::SUBCOMMAND_e:
+	  subcommand( *this );
+	  break;
+
+	case ZypperCommand::NONE_e:
+	  setExitCode( ZYPPER_EXIT_ERR_SYNTAX  );
+	  break;
+
+	default:
+	  safeDoCommand();
+	  cleanup();
+	  break;
+      }
+    }
   }
-  catch ( const ExitRequestException & e )
+  // Actually safeDoCommand also catches these exceptions.
+  // Here we gather what escapes from other places.
+  // TODO Someday redesign the Exceptions flow.
+  catch ( const AbortRequestException & ex )
   {
-    MIL << "Caught exit request:" << endl << e.msg() << endl;
-    return exitCode();
+    ZYPP_CAUGHT( ex );
+    out().error( ex.asUserString() );
   }
-
-  if ( runningHelp() )
+  catch ( const ExitRequestException & ex )
   {
-    safeDoCommand();
-    return exitCode();
+    ZYPP_CAUGHT( ex );
+    WAR << "Caught exit request: exitCode " << exitCode() << endl;
   }
-
-  switch( command().toEnum() )
+  catch ( const Out::Error & error_r )
   {
-  case ZypperCommand::SHELL_e:
-    commandShell();
-    cleanup();
-    return exitCode();
-
-  case ZypperCommand::SUBCOMMAND_e:
-    subcommand( *this );
-    return exitCode();
-
-  case ZypperCommand::NONE_e:
-    return ZYPPER_EXIT_ERR_SYNTAX;
-
-  default:
-    safeDoCommand();
-    cleanup();
-    return exitCode();
+    error_r.report( *this );
+    report_a_bug( out() );
   }
-
-  WAR << "This line should never be reached." << endl;
+  catch ( const Exception & ex )
+  {
+    ZYPP_CAUGHT( ex );
+    {
+      SCOPED_VERBOSITY( out(), Out::DEBUG );
+      out().error( ex, _("Unexpected exception.") );
+    }
+    report_a_bug( out() );
+    if ( ! exitCode() )
+      setExitCode( ZYPPER_EXIT_ERR_BUG );
+  }
 
   return exitCode();
 }
@@ -1195,16 +1219,17 @@ void Zypper::safeDoCommand()
 
     doCommand();
   }
+  // The same catch block as in zypper::main.
+  // TODO Someday redesign the Exceptions flow.
   catch ( const AbortRequestException & ex )
   {
     ZYPP_CAUGHT( ex );
-    // << _("User requested to abort.") << endl;
     out().error( ex.asUserString() );
   }
-  catch ( const ExitRequestException & e )
+  catch ( const ExitRequestException & ex )
   {
-    ZYPP_CAUGHT( e );
-    MIL << "Caught exit request: exitCode " << exitCode() << endl;
+    ZYPP_CAUGHT( ex );
+    WAR << "Caught exit request: exitCode " << exitCode() << endl;
   }
   catch ( const Out::Error & error_r )
   {
