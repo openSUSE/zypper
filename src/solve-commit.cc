@@ -530,6 +530,7 @@ static void show_update_messages(Zypper & zypper, const UpdateNotifications & me
 void solve_and_commit (Zypper & zypper)
 {
   bool need_another_solver_run = true;
+  bool dryRunEtc = zypper.cOpts().count("dry-run") || ( get_download_option( zypper, true ) == DownloadOnly );
   do
   {
     // CALL SOLVER
@@ -804,7 +805,7 @@ void solve_and_commit (Zypper & zypper)
           gData.show_media_progress_hack = false;
 	  gData.entered_commit = false;
 
-	  if ( !result.allDone() && !( ( copts.count("dry-run") || zypper.cOpts().count("download-only") ) && result.noError() ) )
+	  if ( !result.allDone() && !( dryRunEtc && result.noError() ) )
 	  { zypper.setExitCode( result.attemptToModify() ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ERR_ZYPP ); }	// error message comes later....
 
           MIL << endl << "DONE" << endl;
@@ -929,10 +930,8 @@ void solve_and_commit (Zypper & zypper)
 	}
 
         // check for running services (fate #300763)
-        if ( ! ( zypper.cOpts().count("download-only") || zypper.cOpts().count("dry-run") )
-	  && ( summary.packagesToRemove()
-	    || summary.packagesToUpgrade()
-	    || summary.packagesToDowngrade() ) )
+        if ( !dryRunEtc
+	  && ( summary.packagesToRemove() || summary.packagesToUpgrade() || summary.packagesToDowngrade() ) )
 	{
           notify_processes_using_deleted_files(zypper);
 	}
