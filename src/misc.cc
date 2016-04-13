@@ -375,7 +375,7 @@ void install_src_pkgs( Zypper & zypper )
 
     try
     {
-      if ( zypper.cOpts().find("download-only") != zypper.cOpts().end() )
+      if ( get_download_option( zypper, true ) == DownloadOnly )
       {
         God->provideSrcPackage( srcpkg ).resetDispose();
 
