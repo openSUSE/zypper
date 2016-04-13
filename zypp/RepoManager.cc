@@ -1972,7 +1972,7 @@ namespace zypp
     assert_url( service );
     MIL << "Going to refresh service '" << service.alias() <<  "', url: " << service.url() << ", opts: " << options_r << endl;
 
-    if ( service.ttl() && !options_r.testFlag( RefreshService_forceRefresh ) )
+    if ( service.ttl() && !( options_r.testFlag( RefreshService_forceRefresh) || options_r.testFlag( RefreshService_restoreStatus ) ) )
     {
       // Service defines a TTL; maybe we can re-use existing data without refresh.
       Date lrf = service.lrf();
