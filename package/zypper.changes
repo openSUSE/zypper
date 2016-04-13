@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 13 16:35:48 CEST 2016 - ma@suse.de
+
+- Fix testing for '-- download*' options (bsc#956480)
+- version 1.11.54
+
+-------------------------------------------------------------------
 Mon Mar 14 11:12:35 CET 2016 - ma@suse.de
 
 - versioncmp: don't check for zypp lock (bsc#970575)
