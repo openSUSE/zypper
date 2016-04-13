@@ -311,6 +311,8 @@ private:
   void setRunningShell( bool value = true )		{ _running_shell = value; }
   void setRunningHelp( bool value = true )		{ _running_help = value; }
 
+  void assertZYppPtrGod();
+  
 private:
 
   int     _argc;
