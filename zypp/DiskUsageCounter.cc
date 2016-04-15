@@ -71,10 +71,13 @@ namespace zypp
         unsigned idx = 0;
         for_( it, result.begin(), result.end() )
         {
-          static const ByteCount blockAdjust( 2, ByteCount::K ); // (files * blocksize) / (2 * 1K)
+	  // Limit estimated waste (half block per file) as it does not apply to
+	  // btrfs, which reports up to 64K blocksize (bsc#974275,bsc#965322)
+	  static const ByteCount blockAdjust( 2, ByteCount::K ); // (files * blocksize) / 2 / 1K; result value in K!
+
           it->pkg_size = it->used_size          // current usage
                        + duchanges[idx].kbytes  // package data size
-                       + ( duchanges[idx].files * it->block_size / blockAdjust ); // half block per file
+                       + ( duchanges[idx].files * ( it->fstype == "btrfs" ? 4096 : it->block_size ) / blockAdjust ); // half block per file
           ++idx;
         }
       }
