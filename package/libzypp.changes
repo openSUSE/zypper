@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 15 11:31:08 CEST 2016 - ma@suse.de
+
+- DiskUsageCounter: Limit estimated waste per file (bsc#974275)
+- version 15.21.6 (19)
+
+-------------------------------------------------------------------
 Fri Mar 18 13:37:22 CET 2016 - ma@suse.de
 
 - Use PluginExecutor for commit- and system-hooks (bnc#971637)
