@@ -113,7 +113,7 @@ namespace zypp
      */
     bool consumeNode( Reader & reader_r );
 
-    DefaultIntegral<Date::Duration,2> _ttl;
+    DefaultIntegral<Date::Duration,0> _ttl;
 
   private:
     bool getAttrValue( const std::string & key_r, Reader & reader_r, std::string & value_r )
