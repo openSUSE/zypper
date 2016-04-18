@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 18 15:03:13 CEST 2016 - ma@suse.de
+
+- RepoindexFileReader: fix service metadata TTL default value (bsc#967828)
+- version 15.21.7 (19)
+
+-------------------------------------------------------------------
 Fri Apr 15 11:31:08 CEST 2016 - ma@suse.de
 
 - DiskUsageCounter: Limit estimated waste per file (bsc#974275)
