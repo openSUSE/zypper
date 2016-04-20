@@ -242,6 +242,7 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/services.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/systemCheck.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/vendors.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/multiversion.d
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/credentials.d
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/appdata
@@ -339,6 +340,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir               %{_sysconfdir}/zypp/systemCheck.d
 %dir               %{_sysconfdir}/zypp/vendors.d
 %dir               %{_sysconfdir}/zypp/multiversion.d
+%dir               %{_sysconfdir}/zypp/credentials.d
 %config(noreplace) %{_sysconfdir}/zypp/zypp.conf
 %config(noreplace) %{_sysconfdir}/zypp/systemCheck
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-history.lr
