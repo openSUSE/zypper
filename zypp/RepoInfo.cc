@@ -347,6 +347,9 @@ namespace zypp
     _pimpl->baseUrls().raw().push_back( url_r );
   }
 
+  void RepoInfo::setBaseUrls( url_set urls )
+  { _pimpl->baseUrls().raw().swap( urls ); }
+
   void RepoInfo::setPath( const Pathname &path )
   { _pimpl->path = path; }
 

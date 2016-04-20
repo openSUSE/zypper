@@ -159,6 +159,10 @@ namespace zypp
        * Clears current base URL list and adds \a url.
        */
       void setBaseUrl( const Url &url );
+      /**
+       * Clears current base URL list and adds an \ref url_set.
+       */
+      void setBaseUrls( url_set urls );
 
       /**
        * \short Repository path
