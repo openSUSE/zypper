@@ -1615,7 +1615,7 @@ namespace zypp
           cm.saveInUser(media::AuthData(*urlit));
     }
 
-    HistoryLog().addRepository(tosave);
+    HistoryLog(_options.rootDir).addRepository(tosave);
 
     progress.toMax();
     MIL << "done" << endl;
