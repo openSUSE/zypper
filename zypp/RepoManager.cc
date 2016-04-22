@@ -64,6 +64,76 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace
   {
+    ///////////////////////////////////////////////////////////////////
+    /// \class UrlCredentialExtractor
+    /// \brief Extract credentials in \ref Url authority and store them via \ref CredentialManager.
+    ///
+    /// Lazy init CredentialManager and save collected credentials when
+    /// going out of scope.
+    ///
+    /// Methods return whether a password has been collected/extracted.
+    ///
+    /// \code
+    /// UrlCredentialExtractor( "/rootdir" ).collect( oneUrlOrUrlContainer );
+    /// \endcode
+    /// \code
+    /// {
+    ///   UrlCredentialExtractor extractCredentials;
+    ///   extractCredentials.collect( oneUrlOrUrlContainer );
+    ///   extractCredentials.extract( oneMoreUrlOrUrlContainer );
+    ///   ....
+    /// }
+    /// \endcode
+    ///
+    class UrlCredentialExtractor
+    {
+    public:
+      UrlCredentialExtractor( Pathname & root_r )
+      : _root( root_r )
+      {}
+
+      ~UrlCredentialExtractor()
+      { if ( _cmPtr ) _cmPtr->save(); }
+
+      /** Remember credentials stored in URL authority leaving the password in \a url_r. */
+      bool collect( const Url & url_r )
+      {
+	bool ret = url_r.hasCredentialsInAuthority();
+	if ( ret )
+	{
+	  if ( !_cmPtr ) _cmPtr.reset( new media::CredentialManager( _root ) );
+	  _cmPtr->addUserCred( url_r );
+	}
+	return ret;
+      }
+      /** \overload operating on Url container */
+      template<class TContainer>
+      bool collect( const TContainer & urls_r )
+      {	bool ret = false; for ( const Url & url : urls_r ) { if ( collect( url ) && !ret ) ret = true; } return ret; }
+
+      /** Remember credentials stored in URL authority stripping the passowrd from \a url_r. */
+      bool extract( Url & url_r )
+      {
+	bool ret = collect( url_r );
+	if ( ret )
+	  url_r.setPassword( std::string() );
+	return ret;
+      }
+      /** \overload operating on Url container */
+      template<class TContainer>
+      bool extract( TContainer & urls_r )
+      {	bool ret = false; for ( Url & url : urls_r ) { if ( extract( url ) && !ret ) ret = true; } return ret; }
+
+    private:
+      const Pathname & _root;
+      scoped_ptr<media::CredentialManager> _cmPtr;
+    };
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  {
     /** Simple media mounter to access non-downloading URLs e.g. for non-local plaindir repos.
      * \ingroup g_RAII
      */
@@ -1596,24 +1666,7 @@ namespace zypp
     progress.set(90);
 
     // check for credentials in Urls
-    bool havePasswords = false;
-    for_( urlit, tosave.baseUrlsBegin(), tosave.baseUrlsEnd() )
-      if ( urlit->hasCredentialsInAuthority() )
-      {
-        havePasswords = true;
-        break;
-      }
-    // save the credentials
-    if ( havePasswords )
-    {
-      media::CredentialManager cm(
-          media::CredManagerOptions(_options.rootDir) );
-
-      for_(urlit, tosave.baseUrlsBegin(), tosave.baseUrlsEnd())
-        if (urlit->hasCredentialsInAuthority())
-          //! \todo use a method calling UI callbacks to ask where to save creds?
-          cm.saveInUser(media::AuthData(*urlit));
-    }
+    UrlCredentialExtractor( _options.rootDir ).collect( tosave.baseUrls() );
 
     HistoryLog(_options.rootDir).addRepository(tosave);
 
@@ -1823,6 +1876,8 @@ namespace zypp
       newinfo.setFilepath(toedit.filepath());
       reposManip().erase(toedit);
       reposManip().insert(newinfo);
+      // check for credentials in Urls
+      UrlCredentialExtractor( _options.rootDir ).collect( newinfo.baseUrls() );
       HistoryLog(_options.rootDir).modifyRepository(toedit, newinfo);
       MIL << "repo " << alias << " modified" << endl;
     }
@@ -1876,15 +1931,8 @@ namespace zypp
     saveService( toSave );
     _services.insert( toSave );
 
-    // check for credentials in Url (username:password, not ?credentials param)
-    if ( toSave.url().hasCredentialsInAuthority() )
-    {
-      media::CredentialManager cm(
-          media::CredManagerOptions(_options.rootDir) );
-
-      //! \todo use a method calling UI callbacks to ask where to save creds?
-      cm.saveInUser(media::AuthData(toSave.url()));
-    }
+    // check for credentials in Url
+    UrlCredentialExtractor( _options.rootDir ).collect( toSave.url() );
 
     MIL << "added service " << toSave.alias() << endl;
   }
@@ -2353,6 +2401,9 @@ namespace zypp
 
     _services.erase(oldAlias);
     _services.insert(service);
+    // check for credentials in Urls
+    UrlCredentialExtractor( _options.rootDir ).collect( service.url() );
+
 
     // changed properties affecting also repositories
     if ( oldAlias != service.alias()			// changed alias
