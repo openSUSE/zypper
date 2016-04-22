@@ -41,9 +41,12 @@ bool AuthData::valid() const
 
 std::ostream & AuthData::dumpOn( std::ostream & str ) const
 {
+  if (_url.isValid())
+    str << "[" << _url.asString( url::ViewOptions() - url::ViewOptions::WITH_USERNAME - url::ViewOptions::WITH_PASSWORD ) << "]" << endl;
+  else
+    str << "[<no-url>]" << endl;
   str << "username: '" << _username << "'" << std::endl
-      << "password: " << (_password.empty() ? "<empty>" : "<non-empty>")
-      << std::endl;
+      << "password: " << (_password.empty() ? "<empty>" : "<non-empty>");
   return str;
 }
 
@@ -83,8 +86,8 @@ bool CurlAuthData::valid() const
 
 std::ostream & CurlAuthData::dumpOn( std::ostream & str ) const
 {
-  AuthData::dumpOn(str) << " auth_type: " << _auth_type_str
-    << " (" << _auth_type << ")" << std::endl;
+  AuthData::dumpOn(str) << endl
+  << " auth_type: " << _auth_type_str << " (" << _auth_type << ")";
   return str;
 }
 
