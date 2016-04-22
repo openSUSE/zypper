@@ -2099,34 +2099,41 @@ namespace zypp
     {
       // First of all: Prepend service alias:
       it->setAlias( str::form( "%s:%s", service.alias().c_str(), it->alias().c_str() ) );
-      // set refrence to the parent service
+      // set reference to the parent service
       it->setService( service.alias() );
 
       // remember the new parsed repo state
       newRepoStates[it->alias()] = *it;
 
-      // if the repo url was not set by the repoindex parser, set service's url
-      Url url;
-      if ( it->baseUrlsEmpty() )
-        url = service.rawUrl();
-      else
-      {
-        // service repo can contain only one URL now, so no need to iterate.
-        url = it->rawUrl();	// raw!
-      }
-
-      // libzypp currently has problem with separate url + path handling
-      // so just append the path to the baseurl
+      // - If the repo url was not set by the repoindex parser, set service's url.
+      // - Libzypp currently has problem with separate url + path handling so just
+      //   append a path, if set, to the baseurls
+      // - Credentials in the url authority will be extracted later, either if the
+      //   repository is added or if we check for changed urls.
+      Pathname path;
       if ( !it->path().empty() )
       {
-        Pathname path(url.getPathName());
-        path /= it->path();
-        url.setPathName( path.asString() );
-        it->setPath("");
+	if ( it->path() != "/" )
+	  path = it->path();
+	it->setPath("");
       }
 
-      // save the url
-      it->setBaseUrl( url );
+      if ( it->baseUrlsEmpty() )
+      {
+	Url url( service.rawUrl() );
+	if ( !path.empty() )
+	  url.setPathName( url.getPathName() / path );
+	it->setBaseUrl( std::move(url) );
+      }
+      else if ( !path.empty() )
+      {
+	RepoInfo::url_set urls( it->rawBaseUrls() );
+	for ( Url & url : urls )
+	{
+	  url.setPathName( url.getPathName() / path );
+	}
+	it->setBaseUrls( std::move(urls) );
+      }
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -2162,7 +2169,8 @@ namespace zypp
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // create missing repositories and modify exising ones if needed...
+    // create missing repositories and modify existing ones if needed...
+    UrlCredentialExtractor urlCredentialExtractor( _options.rootDir );	// To collect any credentials stored in repo URLs
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
       // User explicitly requested the repo being enabled?
@@ -2287,13 +2295,16 @@ namespace zypp
 	}
 
         // changed url?
-        // service repo can contain only one URL now, so no need to iterate.
-        if ( oldRepo->rawUrl() != it->rawUrl() )
         {
-          DBG << "Service repo " << it->alias() << " gets new URL " << it->rawUrl() << endl;
-          oldRepo->setBaseUrl( it->rawUrl() );
-          oldRepoModified = true;
-        }
+	  RepoInfo::url_set newUrls( it->rawBaseUrls() );
+	  urlCredentialExtractor.extract( newUrls );	// Extract! to prevent passwds from disturbing the comparison below
+	  if ( oldRepo->rawBaseUrls() != newUrls )
+	  {
+	    DBG << "Service repo " << it->alias() << " gets new URLs " << newUrls << endl;
+	    oldRepo->setBaseUrls( std::move(newUrls) );
+	    oldRepoModified = true;
+	  }
+	}
 
         // changed gpg check settings?
 	// ATM only plugin services can set GPG values.
