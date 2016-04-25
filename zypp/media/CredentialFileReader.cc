@@ -22,79 +22,123 @@ using std::endl;
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser"
 
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////
   namespace media
-  { /////////////////////////////////////////////////////////////////
-
-
-  //////////////////////////////////////////////////////////////////////
-  //
-  // CLASS NAME : CredentialFileReader
-  //
-  //////////////////////////////////////////////////////////////////////
-
-  CredentialFileReader::CredentialFileReader(
-      const Pathname & crfile,
-      const ProcessCredentials & callback)
   {
-    InputStream is(crfile);
-    parser::IniDict dict(is);
-    for (parser::IniDict::section_const_iterator its = dict.sectionsBegin();
-         its != dict.sectionsEnd();
-         ++its)
+    ///////////////////////////////////////////////////////////////////
+    namespace
     {
-      Url storedUrl;
-      if (!its->empty())
+      // Looks like INI but allows multiple sections for the same URL
+      // but different user (in .cat files). So don't use an Ini
+      // Also support a global section without '[URL]' which is used
+      // in credential files.
+      // -------------------------------------
+      // username = emptyUSER
+      // password = emptyPASS
+      // -------------------------------------
+      // [http://server/tmp/sumafake222]
+      // username = USER
+      // password = PASS
+      //
+      // [http://server/tmp/sumafake222]
+      // username = USER2
+      // password = PASS
+      // -------------------------------------
+      struct CredentialFileReaderImpl : public parser::IniParser
       {
-        try { storedUrl = Url(*its); }
-        catch (const url::UrlException &)
-        {
-          ERR << "invalid URL '" << *its << "' in credentials in file: "
-              << crfile << endl;
-          continue;
-        }
-      }
+	typedef CredentialFileReader::ProcessCredentials ProcessCredentials;
 
-      AuthData_Ptr credentials;
-      credentials.reset(new AuthData());
+	struct StopParsing {};
 
-      // set url
-      if (storedUrl.isValid())
-        credentials->setUrl(storedUrl);
+	CredentialFileReaderImpl( const Pathname & input_r, const ProcessCredentials & callback_r )
+	: _input( input_r )
+	, _callback( callback_r )
+	{
+	  try
+	  {
+	    parse( input_r );
+	  }
+	  catch ( StopParsing )
+	  { /* NO error but consumer aborted parsing */ }
+	}
 
-      for (parser::IniDict::entry_const_iterator it = dict.entriesBegin(*its);
-           it != dict.entriesEnd(*its);
-           ++it)
-      {
-        if (it->first == "username")
-          credentials->setUsername(it->second);
-        else if (it->first == "password")
-          credentials->setPassword(it->second);
-        else
-          ERR << "Unknown attribute in [" << crfile << "]: "
-              << it->second << " ignored" << endl;
-      }
+	// NO-OP; new sections are opened in consume()
+	virtual void beginParse()
+	{ /*EMPTY*/ }
 
-      if (credentials->valid())
-        callback(credentials);
-      else
-        ERR << "invalid credentials in file: " << crfile << endl;
-    } // sections
-  }
+	// start a new section [url]
+	virtual void consume( const std::string & section_r )
+	{
+	  endParse();	// close any open section
+	  _secret.reset( new AuthData );
+	  try
+	  {
+	    _secret->setUrl( Url(section_r) );
+	  }
+	  catch ( const url::UrlException & )
+	  {
+	    ERR << "Ignore invalid URL '" << section_r << "' in file " << _input << endl;
+	    _secret.reset();	// ignore this section
+	  }
+	}
 
+	virtual void consume( const std::string & section_r, const std::string & key_r, const std::string & value_r )
+	{
+	  if ( !_secret && section_r.empty() )
+	    _secret.reset( new AuthData );	// a initial global section without [URL]
 
-  CredentialFileReader::~CredentialFileReader()
-  {}
+	  if ( _secret )
+	  {
+	    if ( key_r == "username" )
+	      _secret->setUsername( value_r );
+	    else if ( key_r == "password" )
+	      _secret->setPassword( value_r );
+	    else
+	      WAR << "Ignore unknown attribute '" << key_r << "=" << value_r << "' in file " << _input << endl;
+	  }
+	  // else: ignored section due to wrong URL
+	}
 
+	// send any valid pending section
+	virtual void endParse()
+	{
+	  if ( _secret )
+	  {
+	    if ( _secret->valid() )
+	    {
+	      if ( !_callback( _secret ) )
+		throw( StopParsing() );
+	    }
+	    else
+	      ERR << "Ignore invalid credentials for URL '" << _secret->url() << "' in file " << _input << endl;
+	  }
+	}
 
-    /////////////////////////////////////////////////////////////////
-  } // media
+      private:
+	const Pathname & 		_input;
+	const ProcessCredentials &	_callback;
+	AuthData_Ptr			_secret;
+      };
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
+
+    //////////////////////////////////////////////////////////////////////
+    //
+    // CLASS NAME : CredentialFileReader
+    //
+    //////////////////////////////////////////////////////////////////////
+
+    CredentialFileReader::CredentialFileReader( const Pathname & crfile_r, const ProcessCredentials & callback_r )
+    { CredentialFileReaderImpl( crfile_r, callback_r ); }
+
+    CredentialFileReader::~CredentialFileReader()
+    {}
+
+  } // namespace media
   ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
-} // zypp
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////
 

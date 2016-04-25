@@ -20,43 +20,31 @@
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////
   namespace media
-  { /////////////////////////////////////////////////////////////////
-
-
-  //////////////////////////////////////////////////////////////////////
-  //
-  // CLASS NAME : CredentialFileReader 
-  //
-  class CredentialFileReader
   {
-  public:
-    /**
-      * Callback definition.
-      * First parameter is the \ref Url with which the credentials are
-      * associated, the second are the credentials.
-      *
-      * Return false from the callback to get a \ref AbortRequestException
-      * to be thrown and the processing to be cancelled.
-      */
-    typedef function<bool(AuthData_Ptr &)> ProcessCredentials;
+    //////////////////////////////////////////////////////////////////////
+    /// \class CredentialFileReader
+    /// \brief Parse credentials files and catalogs
+    class CredentialFileReader
+    {
+    public:
+      /** Callback invoked for each entry found in the file.
+       * Return \c false to abort parsing.
+       */
+      typedef function<bool(AuthData_Ptr &)> ProcessCredentials;
 
-    CredentialFileReader(const Pathname & crfile,
-                         const ProcessCredentials & callback);
-    ~CredentialFileReader();
-  private:
-    ProcessCredentials _callback;
-  };
-  //////////////////////////////////////////////////////////////////////
+      CredentialFileReader( const Pathname & crfile_r, const ProcessCredentials & callback_r );
+      ~CredentialFileReader();
+    private:
+      ProcessCredentials _callback;
+    };
+    //////////////////////////////////////////////////////////////////////
 
-
-    /////////////////////////////////////////////////////////////////
-  } // media
+  } // namespace media
   ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
-} // zypp
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
 #endif /* ZYPP_MEDIA_CREDENTIALFILEREADER_H */
