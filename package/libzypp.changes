@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Mon Apr 25 14:59:41 CEST 2016 - ma@suse.de
+
+- Fix credential file parser losing entries with known URL but
+  different user name (bsc#933760)
+- RepoManager: allow extraction of multiple baseurls for service
+  repos (bsc#964932)
+- addRepository: fix to use the correct history file for logging
+- specfile: add /etc/zypp/credentials.d to the file list
+- version 15.22.0 (19)
+
+-------------------------------------------------------------------
 Mon Apr 18 15:03:13 CEST 2016 - ma@suse.de
 
 - RepoindexFileReader: fix service metadata TTL default value (bsc#967828)
