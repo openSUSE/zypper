@@ -41,6 +41,8 @@ Packages requiring a feature may use the corresponding \c Requires: in their .sp
     <DT>\ref plugin-services </DT>
     <DT>version 0</DT>
     <DD>Provide a client a list of repositories.</DD>
+    <DT>version 1</DT>
+    <DD>Support multiple repo baseurls in plugin services.</DD>
   </DL></DD>
 
   <DT>plugin:system</DT>

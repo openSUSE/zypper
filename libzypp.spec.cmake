@@ -35,7 +35,7 @@ Obsoletes:      yast2-packagemanager
 Provides:       libzypp(plugin) = 0
 Provides:       libzypp(plugin:appdata) = 0
 Provides:       libzypp(plugin:commit) = 1
-Provides:       libzypp(plugin:services) = 0
+Provides:       libzypp(plugin:services) = 1
 Provides:       libzypp(plugin:system) = 1
 Provides:       libzypp(plugin:urlresolver) = 0
 Provides:       libzypp(repovarexpand) = 0
