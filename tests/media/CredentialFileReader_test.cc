@@ -34,5 +34,5 @@ BOOST_AUTO_TEST_CASE(read_cred)
   CredentialFileReader reader(credfile,
       bind( &CredCollector::collect, &collector, _1 ));
 
-  BOOST_CHECK(collector.creds.size() == 2);
+  BOOST_CHECK_EQUAL(collector.creds.size(), 3);
 }

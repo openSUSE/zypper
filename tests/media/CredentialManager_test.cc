@@ -13,38 +13,47 @@ using std::endl;
 using namespace zypp;
 using namespace zypp::media;
 
+inline void testGetCreds( CredentialManager & cm_r, const std::string & url_r,
+		      const std::string & user_r = "",
+		      const std::string & pass_r = "" )
+{
+  Url url( url_r );
+  AuthData_Ptr cred = cm_r.getCred( url );
+  //cout << "FOR: " << url << endl;
+  //cout << "GOT: " << cred << endl;
+  if ( user_r.empty() && pass_r.empty() )
+  {
+    BOOST_CHECK_EQUAL( cred, AuthData_Ptr() );
+  }
+  else
+  {
+    BOOST_CHECK_EQUAL( cred->username(), user_r );
+    BOOST_CHECK_EQUAL( cred->password(), pass_r );
+  }
+}
 
 BOOST_AUTO_TEST_CASE(read_cred_for_url)
 {
   CredManagerOptions opts;
   opts.globalCredFilePath = TESTS_SRC_DIR "/media/data/credentials.cat";
   opts.userCredFilePath = Pathname();
+  CredentialManager cm( opts );
 
-  CredentialManager cm(opts);
-  BOOST_CHECK(cm.credsGlobalSize() == 2);
+  BOOST_CHECK_EQUAL( cm.credsGlobalSize(), 3 );
 
-  Url url("https://drink.it/repo/roots");
-  AuthData_Ptr credentials = cm.getCred(url);
-  BOOST_CHECK(credentials.get() != NULL);
-  if (!credentials)
-    return;
-  BOOST_CHECK(credentials->username() == "ginger");
-  BOOST_CHECK(credentials->password() == "ale");
-
-  Url url2("ftp://magda@weprovidesoft.fr/download/opensuse/110");
-  credentials = cm.getCred(url2);
-  BOOST_CHECK(credentials.get() != NULL);
-  if (!credentials)
-    return;
-  BOOST_CHECK(credentials->username() == "magda");
-  BOOST_CHECK(credentials->password() == "richard");
+  testGetCreds( cm, "https://drink.it/repo/roots",				"ginger", "ale" );
+  testGetCreds( cm, "ftp://weprovidesoft.fr/download/opensuse/110",		"agda", "ichard" );
+  testGetCreds( cm, "ftp://magda@weprovidesoft.fr/download/opensuse/110",	"magda", "richard" );
+  testGetCreds( cm, "ftp://agda@weprovidesoft.fr/download/opensuse/110",	"agda", "ichard" );
+  testGetCreds( cm, "ftp://unknown@weprovidesoft.fr/download/opensuse/110" );	// NULL
+  testGetCreds( cm, "http://url.ok/but/not/creds" );				// NULL
 }
 
 struct CredCollector
 {
   bool collect(AuthData_Ptr & cred)
   {
-    cout << "got: " << endl << *cred << endl;
+    //cout << "got: " << endl << *cred << endl;
     creds.insert(cred);
     return true;
   }
@@ -56,13 +65,13 @@ struct CredCollector
 BOOST_AUTO_TEST_CASE(save_creds)
 {
   filesystem::TmpDir tmp;
-
   CredManagerOptions opts;
   opts.globalCredFilePath = tmp / "fooha";
-
   CredentialManager cm1(opts);
+
   AuthData cr1("benson","absolute");
   cr1.setUrl(Url("http://joooha.com"));
+
   AuthData cr2("pat","vymetheny");
   cr2.setUrl(Url("ftp://filesuck.org"));
 
@@ -70,27 +79,19 @@ BOOST_AUTO_TEST_CASE(save_creds)
   cm1.saveInGlobal(cr1);
 
   CredCollector collector;
-  CredentialFileReader reader(opts.globalCredFilePath,
-      bind( &CredCollector::collect, &collector, _1 ));
-  BOOST_CHECK(collector.creds.size() == 1);
+  CredentialFileReader( opts.globalCredFilePath, bind( &CredCollector::collect, &collector, _1 ) );
+  BOOST_CHECK_EQUAL( collector.creds.size(), 1 );
 
-  cout << "----" << endl;
   collector.creds.clear();
-
   cm1.saveInGlobal(cr2);
+  CredentialFileReader( opts.globalCredFilePath, bind( &CredCollector::collect, &collector, _1 ) );
+  BOOST_CHECK_EQUAL(collector.creds.size(), 2 );
   
-  CredentialFileReader reader1(opts.globalCredFilePath,
-      bind( &CredCollector::collect, &collector, _1 ));
-  BOOST_CHECK(collector.creds.size() == 2);
-  
-  cout << "----" << endl;
   collector.creds.clear();
-
   // save the same creds again
   cm1.saveInGlobal(cr2);
-  CredentialFileReader reader2(opts.globalCredFilePath,
-      bind( &CredCollector::collect, &collector, _1 ));
-  BOOST_CHECK(collector.creds.size() == 2);
+  CredentialFileReader( opts.globalCredFilePath, bind( &CredCollector::collect, &collector, _1 ) );
+  BOOST_CHECK_EQUAL(collector.creds.size(), 2 );
 
   // todo check created file permissions
 }
@@ -98,30 +99,15 @@ BOOST_AUTO_TEST_CASE(save_creds)
 BOOST_AUTO_TEST_CASE(service_base_url)
 {
   filesystem::TmpDir tmp;
-
   CredManagerOptions opts;
   opts.globalCredFilePath = tmp / "fooha";
+  CredentialManager cm( opts );
 
-  CredentialManager cm1(opts);
-  AuthData cr1("benson","absolute");
-  cr1.setUrl(Url("http://joooha.com/service/path"));
-  cm1.addGlobalCred(cr1);
+  AuthData cred( "benson","absolute" );
+  cred.setUrl( Url( "http://joooha.com/service/path" ) );
+  cm.addGlobalCred( cred );
 
-  AuthData_Ptr creds;
-  creds = cm1.getCred(Url("http://joooha.com/service/path/repo/repofoo"));
-
-  BOOST_CHECK(creds.get() != NULL);
-  if (!creds)
-    return;
-  BOOST_CHECK(creds->username() == "benson");
-
-  creds = cm1.getCred(Url("http://benson@joooha.com/service/path/repo/repofoo"));
-
-  BOOST_CHECK(creds.get() != NULL);
-  if (!creds)
-    return;
-  BOOST_CHECK(creds->username() == "benson");
-
-  creds = cm1.getCred(Url("http://nobody@joooha.com/service/path/repo/repofoo"));
-  BOOST_CHECK(creds.get() == NULL);
+  testGetCreds( cm, "http://joooha.com/service/path/repo/repofoo",		"benson", "absolute" );
+  testGetCreds( cm, "http://benson@joooha.com/service/path/repo/repofoo",	"benson", "absolute" );
+  testGetCreds( cm, "http://nobody@joooha.com/service/path/repo/repofoo" );	// NULL
 }
