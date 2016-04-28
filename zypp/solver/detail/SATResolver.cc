@@ -1077,8 +1077,10 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	  }
 	  if (providerlistUninstalled.size() > 0) {
 	      if (detail.size() > 0)
+		  // translators: 'uninstallable' == 'not installable'
 		  detail += _("\nuninstallable providers: ");
 	      else
+		  // translators: 'uninstallable' == 'not installable'
 		  detail = _("uninstallable providers: ");
 	      for (ProviderList::const_iterator iter = providerlistUninstalled.begin(); iter != providerlistUninstalled.end(); iter++) {
 		  if (iter == providerlistUninstalled.begin())
