@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Apr 28 14:04:36 CEST 2016 - ma@suse.de
+
+- Update sle-zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Apr 25 14:59:41 CEST 2016 - ma@suse.de
 
 - Fix credential file parser losing entries with known URL but
