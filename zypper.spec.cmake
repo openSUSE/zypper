@@ -103,13 +103,6 @@ Authors:
 mkdir -p build
 cd build
 
-# We are moving towards a uniform translation set for SLE and openSUSE.
-# While separate SLE translations are still present, overlay them.
-unset TRANSLATION_SET
-if [ -f ../po/sle-zypper-po.tar.bz2 ]; then
-  export TRANSLATION_SET=sle-zypper
-fi
-
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DSYSCONFDIR=%{_sysconfdir} \
       -DMANDIR=%{_mandir} \
@@ -117,7 +110,6 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DCMAKE_C_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
       -DCMAKE_CXX_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
       -DCMAKE_BUILD_TYPE=Release \
-      -DUSE_TRANSLATION_SET=${TRANSLATION_SET:-zypper} \
       ..
 
 #gettextize -f

@@ -1,3 +1,7 @@
+# Collect all files that may contain translatable texts
+FILE( GLOB_RECURSE POT_FILE_DEPENDS RELATIVE ${ZYPPER_SOURCE_DIR} "*.h" "*.cc" )
+SET( POT_FILE_DEPENDS ${POT_FILE_DEPENDS} PARENT_SCOPE )
+
 ADD_DEFINITIONS (
   -DPACKAGE="${PACKAGE}"
   -DLOCALEDIR="${INSTALL_PREFIX}/share/locale"
@@ -109,7 +113,6 @@ TARGET_LINK_LIBRARIES( zypper_lib ${ZYPP_LIBRARY} ${READLINE_LIBRARY} -laugeas $
 
 ADD_EXECUTABLE( zypper main.cc )
 TARGET_LINK_LIBRARIES( zypper zypper_lib ${ZYPP_LIBRARY} ${READLINE_LIBRARY} -laugeas ${AUGEAS_LIBRARY} -lrt )
-
 
 INSTALL(
   TARGETS zypper
