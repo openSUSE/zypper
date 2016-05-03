@@ -1,6 +1,7 @@
-####################################################################
-# SOURCES                                                          #
-####################################################################
+# Collect all files that may contain translatable texts
+FILE( GLOB_RECURSE POT_FILE_DEPENDS RELATIVE ${LIBZYPP_SOURCE_DIR} "*.h" "*.cc" )
+SET( POT_FILE_DEPENDS ${POT_FILE_DEPENDS} PARENT_SCOPE )
+
 
 ADD_DEFINITIONS(-DLOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale" -DTEXTDOMAIN="zypp" -DZYPP_DLL )
 

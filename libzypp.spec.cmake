@@ -196,12 +196,6 @@ export CXX=g++-4.6
 export CFLAGS="$RPM_OPT_FLAGS"
 export CXXFLAGS="$RPM_OPT_FLAGS"
 unset EXTRA_CMAKE_OPTIONS
-# We are moving towards a uniform translation set for SLE and openSUSE.
-# While separate SLE translations are still present, overlay them.
-unset TRANSLATION_SET
-if [ -f ../po/sle-zypp-po.tar.bz2 ]; then
-  export TRANSLATION_SET=sle-zypp
-fi
 # No libproxy on SLE11
 %if 0%{?suse_version} == 1110
 export EXTRA_CMAKE_OPTIONS="-DDISABLE_LIBPROXY=ON"
@@ -212,7 +206,6 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DLIB=%{_lib} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
-      -DUSE_TRANSLATION_SET=${TRANSLATION_SET:-zypp} \
       ${EXTRA_CMAKE_OPTIONS} \
       ..
 make %{?_smp_mflags} VERBOSE=1

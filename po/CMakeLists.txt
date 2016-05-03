@@ -1,18 +1,29 @@
-#
-# Creating the .pot file to be translated.
-#
-ADD_CUSTOM_TARGET( zypp.pot
-	COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/createPot ${LIBZYPP_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/zypp.pot
-)
-SET_DIRECTORY_PROPERTIES( PROPERTIES
-	ADDITIONAL_MAKE_CLEAN_FILES zypp.pot
+# Translation set name
+SET( POT_NAME "zypp" )
+
+SET( POT_FILE ${CMAKE_CURRENT_SOURCE_DIR}/${POT_NAME}.pot )
+
+FILE( GLOB PO_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.po" )
+
+# Provides the 'translations' target that
+# creates the .gmo files out of the .po files
+GETTEXT_CREATE_TRANSLATIONS( ${POT_FILE} "ALL" ${PO_FILES} )
+
+# Creating the .pot file and preparing the .po files
+# POT_FILE_DEPENDS was set in ../src
+SET( XGETTEXT_CMD "xgettext" )
+SET( XGETTEXT_OPTIONS -L C++ --boost --no-wrap --add-comments --add-location --foreign-user )
+SET( XGETTEXT_OPTIONS ${XGETTEXT_OPTIONS} --keyword=_ --keyword=_:1,2 --keyword=__ --keyword=N_ --keyword=PL_:1,2 )
+SET( XGETTEXT_OPTIONS ${XGETTEXT_OPTIONS} --copyright-holder=\"SuSE Linux GmbH, Nuernberg\" )
+SET( XGETTEXT_OPTIONS ${XGETTEXT_OPTIONS} --package-name=${POT_NAME} --default-domain=${POT_NAME} )
+
+ADD_CUSTOM_COMMAND( OUTPUT ${POT_FILE}
+  COMMAND ${XGETTEXT_CMD} ${XGETTEXT_OPTIONS} --output=${POT_FILE} ${POT_FILE_DEPENDS}
+  WORKING_DIRECTORY ${LIBZYPP_SOURCE_DIR}
+  COMMENT "Extract translatable messages to ${POT_FILE}"
 )
 
-#
-# Provides the 'translations' target that creates the .gmo files
-# out of the pofiles provided by zypp-po.tar.bz2.
-# Use USE_TRANSLATION_SET to use an alternate set provided by
-# ${USE_TRANSLATION_SET}-po.tar.bz2
-#
-GETTEXT_CREATE_TARBALL_TRANSLATIONS( "zypp" )
-
+ADD_CUSTOM_TARGET( potfile
+  COMMAND rm -f ${POT_FILE}
+  COMMAND make translations
+)
