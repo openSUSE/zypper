@@ -6,13 +6,16 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2015-11-05 16:57\n"
-"Last-Translator: Novell language <language@novell.com>\n"
-"Language-Team: Novell language <language@novell.com>\n"
-"Language: \n"
+"PO-Revision-Date: 2016-05-03 17:05+0000\n"
+"Last-Translator: Benoît Monin <benoit.monin@gmx.fr>\n"
+"Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
+"\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.5\n"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -2107,7 +2110,7 @@ msgstr "Composant %s non valide"
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "Composant '%s' non valide %s "
+msgstr "Composant '%s' non valide %s"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
@@ -2130,7 +2133,7 @@ msgstr "Référence de l'objet d'Url vide non valide"
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr "Composant d'hôte non valide '%s' "
+msgstr "Composant d'hôte non valide '%s'"
 
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
@@ -2149,7 +2152,7 @@ msgstr ""
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
 msgid "Invalid port component '%s'"
-msgstr "Composant de port non valide '%s' "
+msgstr "Composant de port non valide '%s'"
 
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
@@ -4356,7 +4359,7 @@ msgstr "Petites Îles Situées Près Des États-Unis"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr "Pays inconnu :"
+msgstr "Pays inconnu : "
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
@@ -4366,7 +4369,7 @@ msgstr "Erreur inconnue lors de la lecture de '%s'"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
-msgstr "Langue inconnue :"
+msgstr "Langue inconnue : "
 
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
