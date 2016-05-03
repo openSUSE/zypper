@@ -1,0 +1,5288 @@
+# translation of zypp.hi.po to Hindi
+# Sangeeta Kumari <k.sangeeta09@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: zypp.hi\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-03 15:55+0200\n"
+"PO-Revision-Date: 2007-08-24 22:33+0530\n"
+"Last-Translator: Sangeeta Kumari <k.sangeeta09@gmail.com>\n"
+"Language-Team: Hindi <en@li.org>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#. translators: 'uninstallable' == 'not installable'
+#: zypp/solver/detail/SATResolver.cc:1081
+#, fuzzy
+msgid ""
+"\n"
+"uninstallable providers: "
+msgstr "%s का कोई संस्थापनयोग्य प्रदाता नहीं है"
+
+#: zypp/media/MediaException.cc:223
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr ""
+
+#: zypp/target/TargetImpl.cc:310
+#, fuzzy
+msgid " executed"
+msgstr "निष्‍पादन"
+
+#: zypp/target/TargetImpl.cc:332
+#, fuzzy
+msgid " execution failed"
+msgstr "DBI Execution failed: %s"
+
+#: zypp/target/TargetImpl.cc:459
+msgid " execution skipped while aborting"
+msgstr ""
+
+#. translators: We may find the same script content in files with different names.
+#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
+#. message for a log file. Preferably start translation with "%s"
+#: zypp/target/TargetImpl.cc:449
+#, c-format, boost-format
+msgid "%s already executed as %s)"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1022
+#, fuzzy, c-format, boost-format
+msgid "%s conflicts with %s provided by %s"
+msgstr "%s का %s से टकराव है "
+
+#: zypp/solver/detail/SATResolver.cc:975
+#, c-format, boost-format
+msgid "%s does not belong to a distupgrade repository"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:979
+#, fuzzy, c-format, boost-format
+msgid "%s has inferior architecture"
+msgstr "%s ही %s प्रदान करता है, लेकिन इसके पास कोई और स्थापत्य है।"
+
+#: zypp/solver/detail/SATResolver.cc:1007
+#, fuzzy, c-format, boost-format
+msgid "%s is not installable"
+msgstr "इंस्टाल नहीं हुआ"
+
+#: zypp/solver/detail/SATResolver.cc:1003
+#, fuzzy, c-format, boost-format
+msgid "%s is provided by the system and cannot be erased"
+msgstr "%s लॉक हो गया है और इसे असंस्थापित नहीं किया जा सकता।"
+
+#: zypp/solver/detail/SATResolver.cc:1027
+#, fuzzy, c-format, boost-format
+msgid "%s obsoletes %s provided by %s"
+msgstr "%s को %s पुराना कर देता है"
+
+#: zypp/solver/detail/SATResolver.cc:1068
+#, c-format, boost-format
+msgid "%s requires %s, but this requirement cannot be provided"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:125
+msgid "(EXPIRED)"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:116
+#, fuzzy
+msgid "(does not expire)"
+msgstr "'%1' मौजूद नहीं है।"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:133
+#, c-format, boost-format
+msgid "(expires in %d day)"
+msgid_plural "(expires in %d days)"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:129
+msgid "(expires within 24h)"
+msgstr ""
+
+#. language code: abk ab
+#: zypp/LanguageCode.cc:163
+msgid "Abkhazian"
+msgstr "अबखाजिआन"
+
+#. language code: ace
+#: zypp/LanguageCode.cc:165
+msgid "Achinese"
+msgstr "अचाइनीज"
+
+#. language code: ach
+#: zypp/LanguageCode.cc:167
+msgid "Acoli"
+msgstr "अकोली"
+
+#. language code: ada
+#: zypp/LanguageCode.cc:169
+msgid "Adangme"
+msgstr "अदांगमे"
+
+#: zypp/RepoManager.cc:1611
+#, fuzzy, c-format, boost-format
+msgid "Adding repository '%s'"
+msgstr "संसाधन जोड़ रहा"
+
+#: zypp/VendorSupportOptions.cc:29
+msgid "Additional Customer Contract Necessary"
+msgstr ""
+
+#. report additional rpm output in finish
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:2056 zypp/target/rpm/RpmDb.cc:2202
+#, fuzzy
+msgid "Additional rpm output"
+msgstr "अतिरिक्त rpm आउटपुट :"
+
+#. language code: ady
+#: zypp/LanguageCode.cc:171
+msgid "Adyghe"
+msgstr "अदाइघे"
+
+#. language code: aar aa
+#: zypp/LanguageCode.cc:161
+msgid "Afar"
+msgstr "अफार"
+
+#. :ARE:784:
+#: zypp/CountryCode.cc:160
+msgid "Afghanistan"
+msgstr "अफगानिस्तान"
+
+#. language code: afh
+#: zypp/LanguageCode.cc:175
+msgid "Afrihili"
+msgstr "अफ्रिहिली"
+
+#. language code: afr af
+#: zypp/LanguageCode.cc:177
+msgid "Afrikaans"
+msgstr "अफ्रीकांस"
+
+#. language code: afa
+#: zypp/LanguageCode.cc:173
+msgid "Afro-Asiatic (Other)"
+msgstr "अफ्रो-एशियाटिक(अन्य)"
+
+#. language code: ain
+#: zypp/LanguageCode.cc:179
+msgid "Ainu"
+msgstr "ऐनू"
+
+#. language code: aka ak
+#: zypp/LanguageCode.cc:181
+msgid "Akan"
+msgstr "अकान"
+
+#. language code: akk
+#: zypp/LanguageCode.cc:183
+msgid "Akkadian"
+msgstr "अकादियान"
+
+#. :ABW:533:
+#: zypp/CountryCode.cc:173
+msgid "Aland Islands"
+msgstr "अलांड आइलैंड्स"
+
+#. :AIA:660:
+#: zypp/CountryCode.cc:163
+msgid "Albania"
+msgstr "अल्बानिया"
+
+#. language code: alb sqi sq
+#: zypp/LanguageCode.cc:185 zypp/LanguageCode.cc:187
+msgid "Albanian"
+msgstr "अल्बेनियाई "
+
+#. language code: ale
+#: zypp/LanguageCode.cc:189
+msgid "Aleut"
+msgstr "एल्यूत"
+
+#. :DOM:214:
+#: zypp/CountryCode.cc:217
+msgid "Algeria"
+msgstr "अल्ज़ीरिया"
+
+#. language code: alg
+#: zypp/LanguageCode.cc:191
+msgid "Algonquian Languages"
+msgstr "अलगांक्यूएन भाषाएं"
+
+#. language code: tut
+#: zypp/LanguageCode.cc:1073
+msgid "Altaic (Other)"
+msgstr "अल्टाइक (अन्य)"
+
+#. :ARG:032:
+#: zypp/CountryCode.cc:169
+msgid "American Samoa"
+msgstr "अमेरिकी समोआ"
+
+#. language code: amh am
+#: zypp/LanguageCode.cc:195
+msgid "Amharic"
+msgstr "अम्हारिक "
+
+#: zypp/VendorSupportOptions.cc:54
+msgid "An additional customer contract is necessary for getting support."
+msgstr ""
+
+#: zypp/CountryCode.cc:158
+msgid "Andorra"
+msgstr "अंदोर्रा"
+
+#. :ANT:530:
+#: zypp/CountryCode.cc:166
+msgid "Angola"
+msgstr "अंगोला"
+
+#. :ATG:028:
+#: zypp/CountryCode.cc:162
+msgid "Anguilla"
+msgstr "अंग्युला"
+
+#. :AGO:024:
+#: zypp/CountryCode.cc:167
+msgid "Antarctica"
+msgstr "अंटार्कटिक"
+
+#. :AFG:004:
+#: zypp/CountryCode.cc:161
+msgid "Antigua and Barbuda"
+msgstr "एंटीगुआ और बारबूडा"
+
+#. language code: apa
+#: zypp/LanguageCode.cc:199
+msgid "Apache Languages"
+msgstr "अपाची भाषाएं"
+
+#. language code: ara ar
+#: zypp/LanguageCode.cc:201
+msgid "Arabic"
+msgstr "अरबी"
+
+#. language code: arg an
+#: zypp/LanguageCode.cc:205
+msgid "Aragonese"
+msgstr "अरागोनीज़"
+
+#. language code: arc
+#: zypp/LanguageCode.cc:203
+msgid "Aramaic"
+msgstr "अरामाइक"
+
+#. language code: arp
+#: zypp/LanguageCode.cc:213
+msgid "Arapaho"
+msgstr "अरापाहो"
+
+#. language code: arn
+#: zypp/LanguageCode.cc:211
+msgid "Araucanian"
+msgstr "अरॉकेनियाई"
+
+#. language code: arw
+#: zypp/LanguageCode.cc:217
+msgid "Arawak"
+msgstr "अरावक"
+
+#. :ATA:010:
+#: zypp/CountryCode.cc:168
+msgid "Argentina"
+msgstr "अर्जेंटीना"
+
+#. :ALB:008:
+#: zypp/CountryCode.cc:164
+msgid "Armenia"
+msgstr "अर्मेनिया"
+
+#. language code: arm hye hy
+#: zypp/LanguageCode.cc:207 zypp/LanguageCode.cc:209
+msgid "Armenian"
+msgstr "अर्मीनियाई"
+
+#. language code: art
+#: zypp/LanguageCode.cc:215
+msgid "Artificial (Other)"
+msgstr "कृत्रिम (अन्य)"
+
+#. :AUS:036:
+#: zypp/CountryCode.cc:172
+msgid "Aruba"
+msgstr "अरूबा"
+
+#. language code: asm as
+#: zypp/LanguageCode.cc:219
+msgid "Assamese"
+msgstr "असमिया"
+
+#. language code: ast
+#: zypp/LanguageCode.cc:221
+msgid "Asturian"
+msgstr "अस्तूरियन"
+
+#. language code: ath
+#: zypp/LanguageCode.cc:223
+msgid "Athapascan Languages"
+msgstr "अथापास्कन भाषाएं"
+
+#. :AUT:040:
+#: zypp/CountryCode.cc:171
+msgid "Australia"
+msgstr "आस्ट्रेलिया"
+
+#. language code: aus
+#: zypp/LanguageCode.cc:225
+msgid "Australian Languages"
+msgstr "आस्ट्रेलियाई भाषाएं"
+
+#. :ASM:016:
+#: zypp/CountryCode.cc:170
+msgid "Austria"
+msgstr "आस्ट्रिया"
+
+#. language code: map
+#: zypp/LanguageCode.cc:717
+msgid "Austronesian (Other)"
+msgstr "असट्रोनेसियाई (अन्य)"
+
+#. !\todo add comma to the message for the next release
+#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
+#, c-format, boost-format
+msgid "Authentication required for '%s'"
+msgstr ""
+
+#. language code: ava av
+#: zypp/LanguageCode.cc:227
+msgid "Avaric"
+msgstr "अवारिक"
+
+#. language code: ave ae
+#: zypp/LanguageCode.cc:229
+msgid "Avestan"
+msgstr "अवेस्तान"
+
+#. language code: awa
+#: zypp/LanguageCode.cc:231
+msgid "Awadhi"
+msgstr "अवधी"
+
+#. language code: aym ay
+#: zypp/LanguageCode.cc:233
+msgid "Aymara"
+msgstr "ऐमारा"
+
+#. :ALA:248:
+#: zypp/CountryCode.cc:174
+msgid "Azerbaijan"
+msgstr "अज़रबैजान"
+
+#. language code: aze az
+#: zypp/LanguageCode.cc:235
+msgid "Azerbaijani"
+msgstr "अज़रबैजानी"
+
+#: zypp/media/MediaException.cc:47
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr ""
+
+#: zypp/media/MediaException.cc:77
+msgid "Bad media attach point"
+msgstr ""
+
+#. :BRA:076:
+#: zypp/CountryCode.cc:188
+msgid "Bahamas"
+msgstr "बहामस"
+
+#. :BGR:100:
+#: zypp/CountryCode.cc:181
+msgid "Bahrain"
+msgstr "बहरीन"
+
+#. language code: ban
+#: zypp/LanguageCode.cc:247
+msgid "Balinese"
+msgstr "बलिनीज़"
+
+#. language code: bat
+#: zypp/LanguageCode.cc:255
+msgid "Baltic (Other)"
+msgstr "बाल्टिक (अन्य)"
+
+#. language code: bal
+#: zypp/LanguageCode.cc:243
+msgid "Baluchi"
+msgstr "बलूची"
+
+#. language code: bam bm
+#: zypp/LanguageCode.cc:245
+msgid "Bambara"
+msgstr "बंबारा"
+
+#. language code: bai
+#: zypp/LanguageCode.cc:239
+msgid "Bamileke Languages"
+msgstr "बमिलिक भाषाएं"
+
+#. language code: bad
+#: zypp/LanguageCode.cc:237
+msgid "Banda"
+msgstr "बांदा"
+
+#. :BRB:052:
+#: zypp/CountryCode.cc:177
+msgid "Bangladesh"
+msgstr "बांग्लादेश"
+
+#. language code: bnt
+#: zypp/LanguageCode.cc:279
+msgid "Bantu (Other)"
+msgstr "बंतू (अन्य)"
+
+#. :BIH:070:
+#: zypp/CountryCode.cc:176
+msgid "Barbados"
+msgstr "बारबाडोस"
+
+#. language code: bas
+#: zypp/LanguageCode.cc:253
+msgid "Basa"
+msgstr "बासा"
+
+#. language code: bak ba
+#: zypp/LanguageCode.cc:241
+msgid "Bashkir"
+msgstr "बशकीर"
+
+#. language code: baq eus eu
+#: zypp/LanguageCode.cc:249 zypp/LanguageCode.cc:251
+msgid "Basque"
+msgstr "बास्क्यू"
+
+#. language code: btk
+#: zypp/LanguageCode.cc:287
+msgid "Batak (Indonesia)"
+msgstr "बताक (इंडोनेशियाई)"
+
+#. language code: bej
+#: zypp/LanguageCode.cc:257
+msgid "Beja"
+msgstr "बेजा"
+
+#. :BWA:072:
+#: zypp/CountryCode.cc:192
+msgid "Belarus"
+msgstr "बेलारूस"
+
+#. language code: bel be
+#: zypp/LanguageCode.cc:259
+msgid "Belarusian"
+msgstr "बेलारूसी"
+
+#. :BGD:050:
+#: zypp/CountryCode.cc:178
+msgid "Belgium"
+msgstr "बेल्ज़ियम"
+
+#. :BLR:112:
+#: zypp/CountryCode.cc:193
+msgid "Belize"
+msgstr "बेलिजी"
+
+#. language code: bem
+#: zypp/LanguageCode.cc:261
+msgid "Bemba"
+msgstr "बेंबा"
+
+#. language code: ben bn
+#: zypp/LanguageCode.cc:263
+msgid "Bengali"
+msgstr "बंगाली"
+
+#. :BDI:108:
+#: zypp/CountryCode.cc:183
+msgid "Benin"
+msgstr "बेनिन"
+
+#. language code: ber
+#: zypp/LanguageCode.cc:265
+msgid "Berber (Other)"
+msgstr "बेरबेर (अन्य)"
+
+#. :BEN:204:
+#: zypp/CountryCode.cc:184
+msgid "Bermuda"
+msgstr "बरमूडा"
+
+#. language code: bho
+#: zypp/LanguageCode.cc:267
+msgid "Bhojpuri"
+msgstr "भोजपुरी"
+
+#. :BHS:044:
+#: zypp/CountryCode.cc:189
+msgid "Bhutan"
+msgstr "भूटान"
+
+#. language code: bih bh
+#: zypp/LanguageCode.cc:269
+msgid "Bihari"
+msgstr "बिहारी"
+
+#. language code: bik
+#: zypp/LanguageCode.cc:271
+msgid "Bikol"
+msgstr "बिकोल"
+
+#. language code: bin
+#: zypp/LanguageCode.cc:273
+msgid "Bini"
+msgstr "बिनि"
+
+#. language code: bis bi
+#: zypp/LanguageCode.cc:275
+msgid "Bislama"
+msgstr "बिसलामा"
+
+#. language code: byn
+#: zypp/LanguageCode.cc:299
+msgid "Blin"
+msgstr "ब्लिन"
+
+#. :BRN:096:
+#: zypp/CountryCode.cc:186
+msgid "Bolivia"
+msgstr "बोलेविया"
+
+#. :AZE:031:
+#: zypp/CountryCode.cc:175
+msgid "Bosnia and Herzegovina"
+msgstr "बोस्निया और हर्जेगोविना"
+
+#. language code: bos bs
+#: zypp/LanguageCode.cc:281
+msgid "Bosnian"
+msgstr "बोस्नियाई"
+
+#. :BVT:074:
+#: zypp/CountryCode.cc:191
+msgid "Botswana"
+msgstr "बोत्सवाना"
+
+#. :BTN:064:
+#: zypp/CountryCode.cc:190
+msgid "Bouvet Island"
+msgstr "बोउवेत आइसलैंड"
+
+#. language code: bra
+#: zypp/LanguageCode.cc:283
+msgid "Braj"
+msgstr "ब्रज"
+
+#. :BOL:068:
+#: zypp/CountryCode.cc:187
+msgid "Brazil"
+msgstr "ब्राज़ील"
+
+#. language code: bre br
+#: zypp/LanguageCode.cc:285
+msgid "Breton"
+msgstr "ब्रेटोन"
+
+#. :IND:356:
+#: zypp/CountryCode.cc:262
+msgid "British Indian Ocean Territory"
+msgstr "ब्रिटिश भारतीय समुद्री क्षेत्र"
+
+#. :VEN:862:
+#: zypp/CountryCode.cc:393
+msgid "British Virgin Islands"
+msgstr "ब्रिटिश वर्जिन आइलैंड"
+
+#. :BMU:060:
+#: zypp/CountryCode.cc:185
+msgid "Brunei Darussalam"
+msgstr "ब्रुनेई दारूस्सलम"
+
+#. language code: bug
+#: zypp/LanguageCode.cc:291
+msgid "Buginese"
+msgstr "बुगीनीज़"
+
+#: zypp/RepoManager.cc:1282
+#, c-format, boost-format
+msgid "Building repository '%s' cache"
+msgstr ""
+
+#. :BFA:854:
+#: zypp/CountryCode.cc:180
+msgid "Bulgaria"
+msgstr "बुल्गारिया"
+
+#. language code: bul bg
+#: zypp/LanguageCode.cc:293
+msgid "Bulgarian"
+msgstr "बुल्गारियाई"
+
+#. language code: bua
+#: zypp/LanguageCode.cc:289
+msgid "Buriat"
+msgstr "बुरियात"
+
+#. :BEL:056:
+#: zypp/CountryCode.cc:179
+msgid "Burkina Faso"
+msgstr "बुर्किना फासो"
+
+#. language code: bur mya my
+#: zypp/LanguageCode.cc:295 zypp/LanguageCode.cc:297
+msgid "Burmese"
+msgstr "बर्मी"
+
+#. :BHR:048:
+#: zypp/CountryCode.cc:182
+msgid "Burundi"
+msgstr "बुरूंडी"
+
+#. language code: cad
+#: zypp/LanguageCode.cc:301
+msgid "Caddo"
+msgstr "केडो"
+
+#. :KGZ:417:
+#: zypp/CountryCode.cc:273
+msgid "Cambodia"
+msgstr "कंबोडिया"
+
+#. :CHL:152:
+#: zypp/CountryCode.cc:203
+msgid "Cameroon"
+msgstr "कैमरून"
+
+#: zypp/sat/detail/PoolImpl.cc:184
+#, fuzzy
+msgid "Can not create sat-pool."
+msgstr "फाइल को सृजित नहीं कर सकता है।"
+
+#: zypp/thread/Mutex.cc:77
+msgid "Can't acquire the mutex lock"
+msgstr "म्यूटेक्स लॉक को हासिल नहीं कर सकता"
+
+#: zypp/ExternalProgram.cc:361
+#, fuzzy, c-format, boost-format
+msgid "Can't chdir to '%s' (%s)."
+msgstr "%s को नहीं ढूंढ सकता।"
+
+#: zypp/ExternalProgram.cc:360
+#, c-format, boost-format
+msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
+msgstr ""
+
+#: zypp/ExternalProgram.cc:350
+#, c-format, boost-format
+msgid "Can't chroot to '%s' (%s)."
+msgstr ""
+
+#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
+#, fuzzy, c-format, boost-format
+msgid "Can't create %s"
+msgstr "डेस्कटॉप आइटम '%s'"
+
+#: zypp/RepoManager.cc:1302
+#, c-format, boost-format
+msgid "Can't create cache at %s - no writing permissions."
+msgstr ""
+
+#: zypp/RepoManager.cc:1140
+#, fuzzy
+msgid "Can't create metadata cache directory."
+msgstr "डायरेक्टरी को सृजित नहीं कर सकता %1 : %2"
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
+#, fuzzy, c-format, boost-format
+msgid "Can't delete '%s'"
+msgstr "डेस्कटॉप आइटम '%s'"
+
+#. don't want to get here
+#: zypp/ExternalProgram.cc:373
+#, c-format, boost-format
+msgid "Can't exec '%s' (%s)."
+msgstr ""
+
+#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+msgid "Can't figure out where the repo is stored."
+msgstr ""
+
+#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
+msgid "Can't figure out where the service is stored."
+msgstr ""
+
+#: zypp/ExternalProgram.cc:381
+#, fuzzy, c-format, boost-format
+msgid "Can't fork (%s)."
+msgstr "%s को नहीं ढूंढ सकता।"
+
+#: zypp/thread/Mutex.cc:33
+msgid "Can't initialize mutex attributes"
+msgstr "म्यूटेक्स गुण को आरंभ नहीं कर सकता"
+
+#: zypp/thread/Mutex.cc:47
+msgid "Can't initialize recursive mutex"
+msgstr "रिकर्सिव म्यूटेक्स को आरंभ नहीं कर सकता"
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
+#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
+#, fuzzy, c-format, boost-format
+msgid "Can't open file '%s' for writing."
+msgstr "लेखन के लिए फाइल नहीं खोल सकता है।"
+
+#: zypp/base/InterProcessMutex.cc:83
+#, fuzzy, c-format, boost-format
+msgid "Can't open lock file: %s"
+msgstr "फाइल %1 को नहीं खोल सकता है।"
+
+#: zypp/ExternalProgram.cc:269
+#, fuzzy, c-format, boost-format
+msgid "Can't open pipe (%s)."
+msgstr "फाइल %1 को नहीं खोल सकता है।"
+
+#: zypp/ExternalProgram.cc:258
+#, fuzzy, c-format, boost-format
+msgid "Can't open pty (%s)."
+msgstr "Couldn't open file: %s."
+
+#: zypp/repo/RepoProvideFile.cc:259
+#, fuzzy, c-format, boost-format
+msgid "Can't provide file '%s' from repository '%s'"
+msgstr "%s से %s प्रदान नहीं कर सकता"
+
+#: zypp/thread/Mutex.cc:87
+msgid "Can't release the mutex lock"
+msgstr "म्यूटेक्स लॉक को रिलीज़ नहीं कर सकता"
+
+#: zypp/thread/Mutex.cc:40
+msgid "Can't set recursive mutex attribute"
+msgstr "रिकर्सिव म्यूटेक्स गुण को सेट नहीं कर सकता"
+
+#. :BLZ:084:
+#: zypp/CountryCode.cc:194
+msgid "Canada"
+msgstr "कनाडा"
+
+#: zypp/media/MediaException.cc:182
+msgid "Cannot eject any media"
+msgstr ""
+
+#: zypp/media/MediaException.cc:184
+#, fuzzy, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr "डेस्कटॉप आइटम '%s'"
+
+#: zypp/media/MediaException.cc:231
+#, c-format, boost-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr ""
+
+#: zypp/RepoManager.cc:297
+#, boost-format
+msgid "Cannot read repo directory '%1%': Permission denied"
+msgstr ""
+
+#: zypp/RepoManager.cc:315
+#, boost-format
+msgid "Cannot read repo file '%1%': Permission denied"
+msgstr ""
+
+#: zypp/media/MediaException.cc:67
+#, fuzzy, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "फाइल %1 पर नहीं लिख सकता है। "
+
+#. :CUB:192:
+#: zypp/CountryCode.cc:208
+msgid "Cape Verde"
+msgstr "केप वेर्दे"
+
+#. language code: car
+#: zypp/LanguageCode.cc:305
+msgid "Carib"
+msgstr "केरिब"
+
+#. language code: cat ca
+#: zypp/LanguageCode.cc:307
+msgid "Catalan"
+msgstr "केटेलन"
+
+#. language code: cau
+#: zypp/LanguageCode.cc:309
+msgid "Caucasian (Other)"
+msgstr "काकेशियाई (अन्य)"
+
+#. :KWT:414:
+#: zypp/CountryCode.cc:280
+msgid "Cayman Islands"
+msgstr "केमन आइलैंड"
+
+#. language code: ceb
+#: zypp/LanguageCode.cc:311
+msgid "Cebuano"
+msgstr "सेब्यूनो"
+
+#. language code: cel
+#: zypp/LanguageCode.cc:313
+msgid "Celtic (Other)"
+msgstr "सेल्टीक (अन्य)"
+
+#. :COD:180:
+#: zypp/CountryCode.cc:197
+msgid "Central African Republic"
+msgstr "मध्य अफ्रीकी गणराज्य"
+
+#. language code: cai
+#: zypp/LanguageCode.cc:303
+msgid "Central American Indian (Other)"
+msgstr "केंद्रीय अमेरिकी भारतीय (अन्य)"
+
+#. :TCA:796:
+#: zypp/CountryCode.cc:369
+msgid "Chad"
+msgstr "चाड"
+
+#. language code: chg
+#: zypp/LanguageCode.cc:321
+msgid "Chagatai"
+msgstr "छगाताई"
+
+#. language code: cmc
+#: zypp/LanguageCode.cc:345
+msgid "Chamic Languages"
+msgstr "चामिक भाषाएं"
+
+#. language code: cha ch
+#: zypp/LanguageCode.cc:315
+msgid "Chamorro"
+msgstr "चमोरो"
+
+#. Translator: %s = name of an rpm package. A list of diffs follows
+#. this message.
+#: zypp/target/rpm/RpmDb.cc:1848
+#, c-format, boost-format
+msgid "Changed configuration files for %s:"
+msgstr "%s: के लिए परिवर्तित कंफिगरेशन फाइलें"
+
+#. language code: che ce
+#: zypp/LanguageCode.cc:319
+msgid "Chechen"
+msgstr "चेचेन"
+
+#. language code: chr
+#: zypp/LanguageCode.cc:337
+msgid "Cherokee"
+msgstr "चेरोकी"
+
+#. language code: chy
+#: zypp/LanguageCode.cc:343
+msgid "Cheyenne"
+msgstr "चेयेन्ने"
+
+#. language code: chb
+#: zypp/LanguageCode.cc:317
+msgid "Chibcha"
+msgstr "चिबचा"
+
+#. language code: nya ny
+#: zypp/LanguageCode.cc:819
+msgid "Chichewa"
+msgstr "चिचेवा"
+
+#. :COK:184:
+#: zypp/CountryCode.cc:202
+msgid "Chile"
+msgstr "चीले"
+
+#. :CMR:120:
+#: zypp/CountryCode.cc:204
+msgid "China"
+msgstr "चीन"
+
+#. language code: chi zho zh
+#: zypp/LanguageCode.cc:323 zypp/LanguageCode.cc:325
+msgid "Chinese"
+msgstr "चीनी"
+
+#. language code: chn
+#: zypp/LanguageCode.cc:331
+msgid "Chinook Jargon"
+msgstr "चिनूक जार्गन"
+
+#. language code: chp
+#: zypp/LanguageCode.cc:335
+msgid "Chipewyan"
+msgstr "चिप्यूयन"
+
+#. language code: cho
+#: zypp/LanguageCode.cc:333
+msgid "Choctaw"
+msgstr "चोक्टॉ"
+
+#. :CPV:132:
+#: zypp/CountryCode.cc:209
+msgid "Christmas Island"
+msgstr "क्रिसमस आइसलैंड"
+
+#. language code: chu cu
+#: zypp/LanguageCode.cc:339
+msgid "Church Slavic"
+msgstr "चर्च स्लाविक"
+
+#. language code: chk
+#: zypp/LanguageCode.cc:327
+msgid "Chuukese"
+msgstr "चुकीज़"
+
+#. language code: chv cv
+#: zypp/LanguageCode.cc:341
+msgid "Chuvash"
+msgstr "चुवास"
+
+#. language code: nwc
+#: zypp/LanguageCode.cc:817
+msgid "Classical Newari"
+msgstr "क्लासिकी नेवारी"
+
+#. :CAN:124:
+#: zypp/CountryCode.cc:195
+msgid "Cocos (Keeling) Islands"
+msgstr "कोकोस (कीलिंग) आइलैंड्स"
+
+#. :CHN:156:
+#: zypp/CountryCode.cc:205
+msgid "Colombia"
+msgstr "कोलंबिया"
+
+#: zypp/ExternalProgram.cc:507
+#, c-format, boost-format
+msgid "Command exited with status %d."
+msgstr ""
+
+#: zypp/ExternalProgram.cc:532
+#, fuzzy
+msgid "Command exited with unknown error."
+msgstr "जब कनेक्ट हो रहे हों तब चलाया जाने वाला कमांड"
+
+#: zypp/ExternalProgram.cc:527
+#, c-format, boost-format
+msgid "Command was killed by signal %d (%s)."
+msgstr ""
+
+#. :KIR:296:
+#: zypp/CountryCode.cc:275
+msgid "Comoros"
+msgstr "कोमोरोस"
+
+#: zypp/Dep.cc:99
+msgid "Conflicts"
+msgstr ""
+
+#. :CCK:166:
+#. :CAF:140:
+#: zypp/CountryCode.cc:196 zypp/CountryCode.cc:198
+msgid "Congo"
+msgstr "कांगो"
+
+#. :CIV:384:
+#: zypp/CountryCode.cc:201
+msgid "Cook Islands"
+msgstr "कुक आइलैंड्स"
+
+#. language code: cop
+#: zypp/LanguageCode.cc:347
+msgid "Coptic"
+msgstr "कोप्टिक"
+
+#. language code: cor kw
+#: zypp/LanguageCode.cc:349
+msgid "Cornish"
+msgstr "कॉर्निश"
+
+#. language code: cos co
+#: zypp/LanguageCode.cc:351
+msgid "Corsican"
+msgstr "कोर्सिकन"
+
+#. :COL:170:
+#: zypp/CountryCode.cc:206
+msgid "Costa Rica"
+msgstr "कोस्टा रिका"
+
+#. :CHE:756:
+#: zypp/CountryCode.cc:200
+msgid "Cote D'Ivoire"
+msgstr "कोटे डी'आईवोर"
+
+#. language code: cre cr
+#: zypp/LanguageCode.cc:359
+msgid "Cree"
+msgstr "क्री"
+
+#. language code: mus
+#: zypp/LanguageCode.cc:765
+msgid "Creek"
+msgstr "क्रीक"
+
+#. language code: crp
+#: zypp/LanguageCode.cc:363
+msgid "Creoles and Pidgins (Other)"
+msgstr "क्रियोलेस और पिडगिंस (अन्य)"
+
+#. language code: cpe
+#: zypp/LanguageCode.cc:353
+msgid "Creoles and Pidgins, English-Based (Other)"
+msgstr "क्रियोलेस और पिडगिंस, अंग्रेजी-आधारित (अन्य)"
+
+#. language code: cpf
+#: zypp/LanguageCode.cc:355
+msgid "Creoles and Pidgins, French-Based (Other)"
+msgstr "क्रियोलेस और पिडगिंस, फ्रांसीसी-आधारित (अन्य)"
+
+#. language code: cpp
+#: zypp/LanguageCode.cc:357
+msgid "Creoles and Pidgins, Portuguese-Based (Other)"
+msgstr "क्रियोलेस और पिडगिंस, पुर्तगाली-आधारित (अन्य)"
+
+#. language code: crh
+#: zypp/LanguageCode.cc:361
+msgid "Crimean Tatar"
+msgstr "क्रीमियाई तातार"
+
+#. :HND:340:
+#: zypp/CountryCode.cc:254
+msgid "Croatia"
+msgstr "क्रोएशिया"
+
+#. language code: scr hrv hr
+#: zypp/LanguageCode.cc:931 zypp/LanguageCode.cc:933
+msgid "Croatian"
+msgstr "क्रोएशियाई"
+
+#. :CRI:188:
+#: zypp/CountryCode.cc:207
+msgid "Cuba"
+msgstr "क्यूबा"
+
+#. language code: cus
+#: zypp/LanguageCode.cc:367
+msgid "Cushitic (Other)"
+msgstr "क्युशीटिक (अन्य)"
+
+#. :CXR:162:
+#: zypp/CountryCode.cc:210
+msgid "Cyprus"
+msgstr "साइप्रस"
+
+#. language code: cze ces cs
+#: zypp/LanguageCode.cc:369 zypp/LanguageCode.cc:371
+msgid "Czech"
+msgstr "चेक"
+
+#. :CYP:196:
+#: zypp/CountryCode.cc:211
+msgid "Czech Republic"
+msgstr "चेक गणराज्य"
+
+#. language code: dak
+#: zypp/LanguageCode.cc:373
+msgid "Dakota"
+msgstr "डाकोटा"
+
+#. language code: dan da
+#: zypp/LanguageCode.cc:375
+msgid "Danish"
+msgstr "दानिश"
+
+#. language code: dar
+#: zypp/LanguageCode.cc:377
+msgid "Dargwa"
+msgstr "दरग्वा"
+
+#. language code: day
+#: zypp/LanguageCode.cc:379
+msgid "Dayak"
+msgstr "दयाक"
+
+#. language code: del
+#: zypp/LanguageCode.cc:381
+msgid "Delaware"
+msgstr "देलावारे"
+
+#. :DJI:262:
+#: zypp/CountryCode.cc:214
+msgid "Denmark"
+msgstr "डेनमार्क"
+
+#. language code: din
+#: zypp/LanguageCode.cc:387
+msgid "Dinka"
+msgstr "दिन्का"
+
+#. language code: div dv
+#: zypp/LanguageCode.cc:389
+msgid "Divehi"
+msgstr "दिवेही"
+
+#. :DEU:276:
+#: zypp/CountryCode.cc:213
+msgid "Djibouti"
+msgstr "जिबूती"
+
+#. language code: doi
+#: zypp/LanguageCode.cc:391
+msgid "Dogri"
+msgstr "डोगरी"
+
+#. language code: dgr
+#: zypp/LanguageCode.cc:385
+msgid "Dogrib"
+msgstr "डोगरिब"
+
+#. :DNK:208:
+#: zypp/CountryCode.cc:215
+msgid "Dominica"
+msgstr "डोमिनिका"
+
+#. :DMA:212:
+#: zypp/CountryCode.cc:216
+msgid "Dominican Republic"
+msgstr "डोमिनिका गणराज्य"
+
+#: zypp/media/MediaException.cc:152
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:84
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr ""
+
+#. language code: dra
+#: zypp/LanguageCode.cc:393
+msgid "Dravidian (Other)"
+msgstr "द्रविड़ियन (अन्य)"
+
+#. language code: dua
+#: zypp/LanguageCode.cc:397
+msgid "Duala"
+msgstr "ड्यूला"
+
+#. dubious: Throw on malformed known types, otherwise log a warning.
+#: zypp/CheckSum.cc:136
+#, c-format, boost-format
+msgid "Dubious type '%s' for %u byte checksum '%s'"
+msgstr ""
+
+#. language code: dut nld nl
+#: zypp/LanguageCode.cc:401 zypp/LanguageCode.cc:403
+msgid "Dutch"
+msgstr "डच"
+
+#. language code: dum
+#: zypp/LanguageCode.cc:399
+msgid "Dutch, Middle (ca.1050-1350)"
+msgstr "डच, मध्य (सीए. 1050-1350)"
+
+#. language code: dyu
+#: zypp/LanguageCode.cc:405
+msgid "Dyula"
+msgstr "ड्यूला"
+
+#. language code: dzo dz
+#: zypp/LanguageCode.cc:407
+msgid "Dzongkha"
+msgstr "द्जोंगखा"
+
+#. :TON:776:
+#: zypp/CountryCode.cc:378
+msgid "East Timor"
+msgstr "पूर्वी तिमोर"
+
+#. :DZA:012:
+#: zypp/CountryCode.cc:218
+msgid "Ecuador"
+msgstr "इक्वाडोर"
+
+#. language code: efi
+#: zypp/LanguageCode.cc:409
+msgid "Efik"
+msgstr "इफिक"
+
+#. :EST:233:
+#: zypp/CountryCode.cc:220
+msgid "Egypt"
+msgstr "मिश्र"
+
+#. language code: egy
+#: zypp/LanguageCode.cc:411
+msgid "Egyptian (Ancient)"
+msgstr "मिश्री (प्राचीन)"
+
+#. language code: eka
+#: zypp/LanguageCode.cc:413
+msgid "Ekajuk"
+msgstr "इकाजुक"
+
+#. :STP:678:
+#: zypp/CountryCode.cc:365
+msgid "El Salvador"
+msgstr "अलसल्वाडोर"
+
+#. language code: elx
+#: zypp/LanguageCode.cc:415
+msgid "Elamite"
+msgstr "इलामाइट"
+
+#: zypp/media/MediaException.cc:135
+msgid "Empty destination in URI"
+msgstr ""
+
+#: zypp/media/MediaException.cc:130
+msgid "Empty filesystem in URI"
+msgstr ""
+
+#: zypp/media/MediaException.cc:125
+#, fuzzy
+msgid "Empty host name in URI"
+msgstr "रिक्त CA नाम।"
+
+#: zypp/url/UrlUtils.cc:111
+msgid "Encoded string contains a NUL byte"
+msgstr "एनकोडेड स्ट्रिंग में एक NUL बाइट समाविष्ट है"
+
+#. language code: eng en
+#: zypp/LanguageCode.cc:417
+msgid "English"
+msgstr "अंग्रेजी"
+
+#. language code: enm
+#: zypp/LanguageCode.cc:419
+msgid "English, Middle (1100-1500)"
+msgstr "अंग्रेजी, मध्य (1100-1500)"
+
+#. language code: ang
+#: zypp/LanguageCode.cc:197
+msgid "English, Old (ca.450-1100)"
+msgstr "अंग्रेजी, पुरानी (सीए. 450-1100)"
+
+#: zypp/Dep.cc:103
+msgid "Enhances"
+msgstr ""
+
+#. :GLP:312:
+#: zypp/CountryCode.cc:244
+msgid "Equatorial Guinea"
+msgstr "विषुवतरेखीय गिनी"
+
+#. :ESH:732:
+#: zypp/CountryCode.cc:222
+msgid "Eritrea"
+msgstr "इरीट्रिया"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:161
+#, c-format, boost-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr ""
+
+#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
+#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
+#: zypp/target/TargetImpl.cc:607
+#, fuzzy
+msgid "Error sending update message notification."
+msgstr "कुंजी एन्क्रिप्शन के दौरान त्रुटि।"
+
+#. prepare exception to be thrown if the type could not be determined
+#. due to a media exception. We can't throw right away, because of some
+#. problems with proxy servers returning an incorrect error
+#. on ftp file-not-found(bnc #335906). Instead we'll check another types
+#. before throwing.
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
+#, c-format, boost-format
+msgid "Error trying to read from '%s'"
+msgstr ""
+
+#. language code: myv
+#: zypp/LanguageCode.cc:773
+msgid "Erzya"
+msgstr "एर्जया"
+
+#. language code: epo eo
+#: zypp/LanguageCode.cc:421
+msgid "Esperanto"
+msgstr "एस्परांतो"
+
+#. :ECU:218:
+#: zypp/CountryCode.cc:219
+msgid "Estonia"
+msgstr "एस्तोनिया"
+
+#. language code: est et
+#: zypp/LanguageCode.cc:423
+msgid "Estonian"
+msgstr "एस्टोनियाई"
+
+#. :ESP:724:
+#: zypp/CountryCode.cc:224
+msgid "Ethiopia"
+msgstr "इथियोपिया"
+
+#. language code: ewe ee
+#: zypp/LanguageCode.cc:425
+msgid "Ewe"
+msgstr "इवी"
+
+#. language code: ewo
+#: zypp/LanguageCode.cc:427
+msgid "Ewondo"
+msgstr "इवॉन्डो"
+
+#: zypp/RepoManager.cc:1366
+#, fuzzy, c-format, boost-format
+msgid "Failed to cache repo (%d)."
+msgstr "Failed to parse: %s."
+
+#: zypp/KeyRing.cc:566
+#, fuzzy
+msgid "Failed to delete key."
+msgstr "Failed to parse: %s."
+
+#. TranslatorExplanation first %s is file name, second is error message
+#: zypp/target/rpm/RpmDb.cc:1124
+#, c-format, boost-format
+msgid "Failed to import public key from file %s: %s"
+msgstr ""
+
+#: zypp/media/MediaException.cc:31
+#, fuzzy, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr "%s - %s को खोलने में अक्षम\n"
+
+#. TranslatorExplanation %s = name of the package being processed.
+#: zypp/repo/PackageProvider.cc:386
+#, fuzzy, c-format, boost-format
+msgid "Failed to provide Package %s. Do you want to retry retrieval?"
+msgstr ""
+"पैकेज %s ने एकीकरण जांच को नाकाम किया। क्या आप इसकी डाउनलोडिंग का प्रयास फिर से करना "
+"चाहते हैं?"
+
+#. TranslatorExplanation '%s' is a pathname
+#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
+#: zypp/repo/PluginServices.cc:49
+#, fuzzy, c-format, boost-format
+msgid "Failed to read directory '%s'"
+msgstr "Failed to parse: %s."
+
+#. TranslatorExplanation first %s is key name, second is error message
+#: zypp/target/rpm/RpmDb.cc:1195
+#, fuzzy, c-format, boost-format
+msgid "Failed to remove public key %s: %s"
+msgstr "सार्वजनिक कुंजी को प्राप्त करने में अक्षम।"
+
+#: zypp/media/MediaException.cc:41
+#, fuzzy, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "\"%s\" मोड्यूल लोड करने में असफल।"
+
+#. :FJI:242:
+#: zypp/CountryCode.cc:227
+msgid "Falkland Islands (Malvinas)"
+msgstr "फाल्कलैंड आइलैंड्स (माल्विनास)"
+
+#. language code: fan
+#: zypp/LanguageCode.cc:429
+msgid "Fang"
+msgstr "फांग"
+
+#. language code: fat
+#: zypp/LanguageCode.cc:433
+msgid "Fanti"
+msgstr "फांती"
+
+#. :FSM:583:
+#: zypp/CountryCode.cc:229
+msgid "Faroe Islands"
+msgstr "फरोए आइलैंड्स"
+
+#. language code: fao fo
+#: zypp/LanguageCode.cc:431
+msgid "Faroese"
+msgstr "फारोइसी"
+
+#. :FLK:238:
+#: zypp/CountryCode.cc:228
+msgid "Federated States of Micronesia"
+msgstr "माइक्रोनेशिया संघीय गणराज्य"
+
+#. :FIN:246:
+#: zypp/CountryCode.cc:226
+msgid "Fiji"
+msgstr "फिज़ी"
+
+#. language code: fij fj
+#: zypp/LanguageCode.cc:435
+msgid "Fijian"
+msgstr "फिजी"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:93
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:85
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:53
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:47
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:76
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
+#: zypp/sat/FileConflicts.cc:68
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:40
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:34
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+
+#: zypp/media/MediaException.cc:60
+#, fuzzy, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
+msgstr "कोष में फाइल %1 नहीं प्राप्त हुई।"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2375
+msgid "File does not exist or signature can't be checked"
+msgstr ""
+
+#. language code: fil
+#: zypp/LanguageCode.cc:437
+msgid "Filipino"
+msgstr "फिलिपीनो"
+
+#. :ETH:231:
+#: zypp/CountryCode.cc:225
+msgid "Finland"
+msgstr "फिनलैंड"
+
+#. language code: fin fi
+#: zypp/LanguageCode.cc:439
+msgid "Finnish"
+msgstr "फिन्निश"
+
+#. language code: fiu
+#: zypp/LanguageCode.cc:441
+msgid "Finno-Ugrian (Other)"
+msgstr "फिन्नो-उगरियन (अन्य)"
+
+#: zypp/ProblemSolution.cc:114
+msgid "Following actions will be done:"
+msgstr ""
+
+#. language code: fon
+#: zypp/LanguageCode.cc:443
+msgid "Fon"
+msgstr "फॉन"
+
+#. :FRO:234:
+#: zypp/CountryCode.cc:230
+msgid "France"
+msgstr "फ्रांस"
+
+#. language code: fre fra fr
+#: zypp/LanguageCode.cc:445 zypp/LanguageCode.cc:447
+msgid "French"
+msgstr "फ्रेंच"
+
+#. :GEO:268:
+#: zypp/CountryCode.cc:236
+msgid "French Guiana"
+msgstr "फ्रेंच गुआना"
+
+#. :PER:604:
+#: zypp/CountryCode.cc:331
+msgid "French Polynesia"
+msgstr "फ्रेंच पॉलीनेशिया"
+
+#. :TCD:148:
+#: zypp/CountryCode.cc:370
+msgid "French Southern Territories"
+msgstr "फ्रांसीसी दक्षिणी क्षेत्र"
+
+#. language code: frm
+#: zypp/LanguageCode.cc:449
+msgid "French, Middle (ca.1400-1600)"
+msgstr "फ्रेंच, मध्य (सीए. 1400-1600)"
+
+#. language code: fro
+#: zypp/LanguageCode.cc:451
+msgid "French, Old (842-ca.1400)"
+msgstr "फ्रेंच, प्राचीन (842- सीए.1400)"
+
+#. language code: fry fy
+#: zypp/LanguageCode.cc:453
+msgid "Frisian"
+msgstr "फ्रीशियन"
+
+#. language code: fur
+#: zypp/LanguageCode.cc:457
+msgid "Friulian"
+msgstr "फ्रीयूलियन"
+
+#. language code: ful ff
+#: zypp/LanguageCode.cc:455
+msgid "Fulah"
+msgstr "फुलाह"
+
+#. language code: gaa
+#: zypp/LanguageCode.cc:459
+msgid "Ga"
+msgstr "गा"
+
+#. :FXX:249:
+#: zypp/CountryCode.cc:232
+msgid "Gabon"
+msgstr "गाबोन"
+
+#. language code: gla gd
+#: zypp/LanguageCode.cc:479
+msgid "Gaelic"
+msgstr "गैलिक"
+
+#. language code: glg gl
+#: zypp/LanguageCode.cc:483
+msgid "Galician"
+msgstr "गालीसियन"
+
+#. :GRL:304:
+#: zypp/CountryCode.cc:241
+msgid "Gambia"
+msgstr "गाम्बिया"
+
+#. language code: lug lg
+#: zypp/LanguageCode.cc:685
+msgid "Ganda"
+msgstr "गांडा"
+
+#. language code: gay
+#: zypp/LanguageCode.cc:461
+msgid "Gayo"
+msgstr "गायो"
+
+#. language code: gba
+#: zypp/LanguageCode.cc:463
+msgid "Gbaya"
+msgstr "ग्बाया"
+
+#. language code: gez
+#: zypp/LanguageCode.cc:475
+msgid "Geez"
+msgstr "गीज"
+
+#. :GRD:308:
+#: zypp/CountryCode.cc:235
+msgid "Georgia"
+msgstr "जार्जिया"
+
+#. language code: geo kat ka
+#: zypp/LanguageCode.cc:467 zypp/LanguageCode.cc:469
+msgid "Georgian"
+msgstr "जॉर्जियाई"
+
+#. language code: ger deu de
+#: zypp/LanguageCode.cc:471 zypp/LanguageCode.cc:473
+msgid "German"
+msgstr "जर्मन"
+
+#. language code: gmh
+#: zypp/LanguageCode.cc:487
+msgid "German, Middle High (ca.1050-1500)"
+msgstr "जर्मन, मिडिल हाई (सीए. 1050-1500)"
+
+#. language code: goh
+#: zypp/LanguageCode.cc:489
+msgid "German, Old High (ca.750-1050)"
+msgstr "जर्मन, ओल्ड हाई (सीए. 750-1050)"
+
+#. language code: gem
+#: zypp/LanguageCode.cc:465
+msgid "Germanic (Other)"
+msgstr "जर्मेनिक (अन्य)"
+
+#. :CZE:203:
+#: zypp/CountryCode.cc:212
+msgid "Germany"
+msgstr "जर्मनी"
+
+#: zypp/CountryCode.cc:238
+msgid "Ghana"
+msgstr "घाना"
+
+#. :GHA:288:
+#: zypp/CountryCode.cc:239
+msgid "Gibraltar"
+msgstr "जिब्राल्टर"
+
+#. language code: gil
+#: zypp/LanguageCode.cc:477
+msgid "Gilbertese"
+msgstr "जिब्रालटीज़"
+
+#. language code: gon
+#: zypp/LanguageCode.cc:491
+msgid "Gondi"
+msgstr "गोंडी"
+
+#. language code: gor
+#: zypp/LanguageCode.cc:493
+msgid "Gorontalo"
+msgstr "गोरोन्टालो"
+
+#. language code: got
+#: zypp/LanguageCode.cc:495
+msgid "Gothic"
+msgstr "गोथिक"
+
+#. language code: grb
+#: zypp/LanguageCode.cc:497
+msgid "Grebo"
+msgstr "ग्रेबो"
+
+#. :GNQ:226:
+#: zypp/CountryCode.cc:245
+msgid "Greece"
+msgstr "ग्रीस"
+
+#. language code: grc
+#: zypp/LanguageCode.cc:499
+msgid "Greek, Ancient (to 1453)"
+msgstr "ग्रीक, प्राचीन (1453 तक)"
+
+#. language code: gre ell el
+#: zypp/LanguageCode.cc:501 zypp/LanguageCode.cc:503
+msgid "Greek, Modern (1453-)"
+msgstr "ग्रीक, आधुनिक (1453-)"
+
+#. :GIB:292:
+#: zypp/CountryCode.cc:240
+msgid "Greenland"
+msgstr "ग्रीनलैंड"
+
+#. :GBR:826:
+#: zypp/CountryCode.cc:234
+msgid "Grenada"
+msgstr "ग्रेनेडा"
+
+#. :GIN:324:
+#: zypp/CountryCode.cc:243
+msgid "Guadeloupe"
+msgstr "ग्वाडेलोप"
+
+#. :GTM:320:
+#: zypp/CountryCode.cc:248
+msgid "Guam"
+msgstr "गुआम"
+
+#. language code: grn gn
+#: zypp/LanguageCode.cc:505
+msgid "Guarani"
+msgstr "गुआरानी"
+
+#. :SGS:239:
+#: zypp/CountryCode.cc:247
+msgid "Guatemala"
+msgstr "ग्वाटेमाला"
+
+#. :GUF:254:
+#: zypp/CountryCode.cc:237
+#, fuzzy
+msgid "Guernsey"
+msgstr "जर्मनी"
+
+#. :GMB:270:
+#: zypp/CountryCode.cc:242
+msgid "Guinea"
+msgstr "गिनी"
+
+#. :GUM:316:
+#: zypp/CountryCode.cc:249
+msgid "Guinea-Bissau"
+msgstr "गिनी-बिसाउ"
+
+#. language code: guj gu
+#: zypp/LanguageCode.cc:507
+msgid "Gujarati"
+msgstr "गुजराती"
+
+#. :GNB:624:
+#: zypp/CountryCode.cc:250
+msgid "Guyana"
+msgstr "गुआना"
+
+#. language code: gwi
+#: zypp/LanguageCode.cc:509
+msgid "Gwich'in"
+msgstr "ग्विच'इन"
+
+#. language code: hai
+#: zypp/LanguageCode.cc:511
+msgid "Haida"
+msgstr "हैदा"
+
+#. :HRV:191:
+#: zypp/CountryCode.cc:255
+msgid "Haiti"
+msgstr "हाती"
+
+#. language code: hat ht
+#: zypp/LanguageCode.cc:513
+msgid "Haitian"
+msgstr "हैती"
+
+#: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
+#: zypp/target/hal/HalException.h:64
+msgid "Hal Exception"
+msgstr "हाल अपवाद"
+
+#: zypp/target/hal/HalContext.cc:117
+msgid "HalContext not connected"
+msgstr "HalContext कनेक्ट नहीं किया गया"
+
+#: zypp/target/hal/HalContext.cc:127
+msgid "HalDrive not initialized"
+msgstr "HalDrive आरंभ नहीं किया गया "
+
+#: zypp/target/hal/HalContext.cc:137
+msgid "HalVolume not initialized"
+msgstr "HalVolume आरंभ नहीं किया गया"
+
+#. language code: hau ha
+#: zypp/LanguageCode.cc:515
+msgid "Hausa"
+msgstr "हाउसा"
+
+#: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
+msgid "Have you enabled all requested repositories?"
+msgstr ""
+
+#. language code: haw
+#: zypp/LanguageCode.cc:517
+msgid "Hawaiian"
+msgstr "हवाइयन"
+
+#. :HKG:344:
+#: zypp/CountryCode.cc:252
+msgid "Heard Island and McDonald Islands"
+msgstr "हेर्ड आइसलैंड और मैकडोनाल्ड आइलैंड्स"
+
+#. language code: heb he
+#: zypp/LanguageCode.cc:519
+msgid "Hebrew"
+msgstr "हिब्रू"
+
+#. language code: her hz
+#: zypp/LanguageCode.cc:521
+msgid "Herero"
+msgstr "हेरेरो"
+
+#. language code: hil
+#: zypp/LanguageCode.cc:523
+msgid "Hiligaynon"
+msgstr "हिलिगेनोन"
+
+#. language code: him
+#: zypp/LanguageCode.cc:525
+msgid "Himachali"
+msgstr "हिमांचली"
+
+#. language code: hin hi
+#: zypp/LanguageCode.cc:527
+msgid "Hindi"
+msgstr "हिंदी"
+
+#. language code: hmo ho
+#: zypp/LanguageCode.cc:533
+msgid "Hiri Motu"
+msgstr "हिरी मोटू"
+
+#. TranslatorExplanation followed by the list of error messages that lead to this exception
+#: zypp/base/Exception.cc:107
+msgid "History:"
+msgstr "इतिहास:"
+
+#. language code: hit
+#: zypp/LanguageCode.cc:529
+msgid "Hittite"
+msgstr "हिटिटी"
+
+#. language code: hmn
+#: zypp/LanguageCode.cc:531
+msgid "Hmong"
+msgstr "ह्मांग"
+
+#. :UZB:860:
+#: zypp/CountryCode.cc:390
+msgid "Holy See (Vatican City State)"
+msgstr "होली सी (वैटिकन सिटी राज्य)"
+
+#. :HMD:334:
+#: zypp/CountryCode.cc:253
+msgid "Honduras"
+msgstr "होंडुरास"
+
+#. :GUY:328:
+#: zypp/CountryCode.cc:251
+msgid "Hong Kong"
+msgstr "हांग-कांग"
+
+#. language code: hun hu
+#: zypp/LanguageCode.cc:537
+msgid "Hungarian"
+msgstr "हंगेरियाई"
+
+#. :HTI:332:
+#: zypp/CountryCode.cc:256
+msgid "Hungary"
+msgstr "हंगरी"
+
+#. language code: hup
+#: zypp/LanguageCode.cc:539
+msgid "Hupa"
+msgstr "हूपा"
+
+#. language code: iba
+#: zypp/LanguageCode.cc:541
+msgid "Iban"
+msgstr "इबान"
+
+#. :IRN:364:
+#: zypp/CountryCode.cc:265
+msgid "Iceland"
+msgstr "आइसलैंड"
+
+#. language code: ice isl is
+#: zypp/LanguageCode.cc:545 zypp/LanguageCode.cc:547
+msgid "Icelandic"
+msgstr "आइसलैंडी "
+
+#. language code: ido io
+#: zypp/LanguageCode.cc:549
+msgid "Ido"
+msgstr "आइडो"
+
+#. language code: ibo ig
+#: zypp/LanguageCode.cc:543
+msgid "Igbo"
+msgstr "इग्बो"
+
+#. language code: ijo
+#: zypp/LanguageCode.cc:553
+msgid "Ijo"
+msgstr "आइजो"
+
+#. language code: ilo
+#: zypp/LanguageCode.cc:559
+msgid "Iloko"
+msgstr "आईलोको"
+
+#. language code: smn
+#: zypp/LanguageCode.cc:969
+msgid "Inari Sami"
+msgstr "इनारी सामी"
+
+#: zypp/CountryCode.cc:261
+msgid "India"
+msgstr "भारत"
+
+#. language code: inc
+#: zypp/LanguageCode.cc:563
+msgid "Indic (Other)"
+msgstr "इंडिक (अन्य)"
+
+#. language code: ine
+#: zypp/LanguageCode.cc:567
+msgid "Indo-European (Other)"
+msgstr "इंडो-यूरोपीय (अन्य)"
+
+#. :HUN:348:
+#: zypp/CountryCode.cc:257
+msgid "Indonesia"
+msgstr "इंडोनेशिया"
+
+#. language code: ind id
+#: zypp/LanguageCode.cc:565
+msgid "Indonesian"
+msgstr "इंडोनेशियाई"
+
+#. language code: inh
+#: zypp/LanguageCode.cc:569
+msgid "Ingush"
+msgstr "इंगुश"
+
+#: zypp/target/TargetImpl.cc:1219 zypp/target/TargetImpl.cc:1288
+#: zypp/target/TargetImpl.cc:1640
+#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
+msgid "Installation has been aborted as directed."
+msgstr "जैसा निर्देशित था, संस्थापन छोड़ दिया गया।"
+
+#. language code: ina ia
+#: zypp/LanguageCode.cc:561
+msgid "Interlingua (International Auxiliary Language Association)"
+msgstr "इण्टर्लिङ्गुआ "
+
+#. language code: ile ie
+#: zypp/LanguageCode.cc:557
+msgid "Interlingue"
+msgstr "इंटरलिंगुआ"
+
+#. language code: iku iu
+#: zypp/LanguageCode.cc:555
+msgid "Inuktitut"
+msgstr "इनुकटिटुट"
+
+#. language code: ipk ik
+#: zypp/LanguageCode.cc:571
+msgid "Inupiaq"
+msgstr "इन्यूपिआक"
+
+#: zypp/url/UrlBase.cc:180
+#, c-format, boost-format
+msgid "Invalid %s component"
+msgstr "अमान्य %s अवयव"
+
+#: zypp/url/UrlBase.cc:173
+#, c-format, boost-format
+msgid "Invalid %s component '%s'"
+msgstr "अमान्य %s अवयव '%s'"
+
+#: zypp/Url.cc:153
+#, c-format, boost-format
+msgid "Invalid LDAP URL query parameter '%s'"
+msgstr "अमान्य LDAP URL क्वेरी मानक '%s'"
+
+#: zypp/Url.cc:114
+msgid "Invalid LDAP URL query string"
+msgstr "अमान्य LDAP URL क्वेरी स्ट्रिंग"
+
+#: zypp/url/UrlBase.cc:830
+#, c-format, boost-format
+msgid "Invalid Url scheme '%s'"
+msgstr "अमान्य Url स्कीम '%s'"
+
+#: zypp/Url.cc:313
+msgid "Invalid empty Url object reference"
+msgstr "अमान्य रिक्त Url ऑब्जेक्ट संदर्भ"
+
+#: zypp/url/UrlBase.cc:1049
+#, c-format, boost-format
+msgid "Invalid host component '%s'"
+msgstr "अमान्य होस्ट अवयव '%s'"
+
+#: zypp/url/UrlUtils.cc:283
+msgid "Invalid parameter array join separator character"
+msgstr "अमान्य मानक क्रमविन्यास सेपरेटर वर्ण जोड़ें"
+
+#: zypp/url/UrlUtils.cc:173
+msgid "Invalid parameter array split separator character"
+msgstr "अमान्य मानक क्रमविन्यास सेपरेटर वर्ण पृथक करें"
+
+#: zypp/url/UrlUtils.cc:213
+msgid "Invalid parameter map split separator character"
+msgstr "अमान्य मानक मानचित्र सेपरेटर वर्ण पृथक करें"
+
+#: zypp/url/UrlBase.cc:1081
+#, c-format, boost-format
+msgid "Invalid port component '%s'"
+msgstr "अमान्य पोर्ट अवयव '%s'"
+
+#: zypp/base/StrMatcher.cc:158
+#, fuzzy, c-format, boost-format
+msgid "Invalid regular expression '%s'"
+msgstr "अमान्य Url स्कीम '%s'"
+
+#: zypp/base/StrMatcher.cc:157
+#, c-format, boost-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr ""
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1701
+#, fuzzy, c-format, boost-format
+msgid "Invalid repo file name at '%s'"
+msgstr "अमान्य निर्यात फाइलनाम।"
+
+#. :IRQ:368:
+#: zypp/CountryCode.cc:264
+msgid "Iran"
+msgstr "इरान"
+
+#. language code: ira
+#: zypp/LanguageCode.cc:573
+msgid "Iranian (Other)"
+msgstr "इरानी (अन्य)"
+
+#. :IOT:086:
+#: zypp/CountryCode.cc:263
+msgid "Iraq"
+msgstr "इराक"
+
+#. :IDN:360:
+#: zypp/CountryCode.cc:258
+msgid "Ireland"
+msgstr "आयरलैंड"
+
+#. language code: gle ga
+#: zypp/LanguageCode.cc:481
+msgid "Irish"
+msgstr "आयरिश"
+
+#. language code: mga
+#: zypp/LanguageCode.cc:733
+msgid "Irish, Middle (900-1200)"
+msgstr "आइरिश, मध्य (900-1200)"
+
+#. language code: sga
+#: zypp/LanguageCode.cc:939
+msgid "Irish, Old (to 900)"
+msgstr "आइरिश, पुरानी (900 तक)"
+
+#. language code: iro
+#: zypp/LanguageCode.cc:575
+msgid "Iroquoian Languages"
+msgstr "इरोक्योइयाई भाषाएं"
+
+#. :ISR:376:
+#: zypp/CountryCode.cc:260
+msgid "Isle of Man"
+msgstr ""
+
+#. :IRL:372:
+#: zypp/CountryCode.cc:259
+msgid "Israel"
+msgstr "इज़रायल"
+
+#. language code: ita it
+#: zypp/LanguageCode.cc:577
+msgid "Italian"
+msgstr "इतालवी"
+
+#. :ISL:352:
+#: zypp/CountryCode.cc:266
+msgid "Italy"
+msgstr "इटली"
+
+#: zypp/CountryCode.cc:268
+msgid "Jamaica"
+msgstr "जमाइका"
+
+#. :JOR:400:
+#: zypp/CountryCode.cc:270
+msgid "Japan"
+msgstr "जापान"
+
+#. language code: jpn ja
+#: zypp/LanguageCode.cc:583
+msgid "Japanese"
+msgstr "जापानी"
+
+#. language code: jav jv
+#: zypp/LanguageCode.cc:579
+msgid "Javanese"
+msgstr "जावा"
+
+#. :ITA:380:
+#: zypp/CountryCode.cc:267
+msgid "Jersey"
+msgstr ""
+
+#. :JAM:388:
+#: zypp/CountryCode.cc:269
+msgid "Jordan"
+msgstr "जॉर्डन"
+
+#. language code: jrb
+#: zypp/LanguageCode.cc:587
+msgid "Judeo-Arabic"
+msgstr "जूडेओ-अरबी"
+
+#. language code: jpr
+#: zypp/LanguageCode.cc:585
+msgid "Judeo-Persian"
+msgstr "जूडेओ-पर्सियन"
+
+#. language code: kbd
+#: zypp/LanguageCode.cc:611
+msgid "Kabardian"
+msgstr "कबार्डियन"
+
+#. language code: kab
+#: zypp/LanguageCode.cc:591
+msgid "Kabyle"
+msgstr "कबाइली"
+
+#. language code: kac
+#: zypp/LanguageCode.cc:593
+msgid "Kachin"
+msgstr "काचिन"
+
+#. language code: kal kl
+#: zypp/LanguageCode.cc:595
+msgid "Kalaallisut"
+msgstr "कालाल्लीसट"
+
+#. language code: xal
+#: zypp/LanguageCode.cc:1125
+msgid "Kalmyk"
+msgstr "कल्मीक"
+
+#. language code: kam
+#: zypp/LanguageCode.cc:597
+msgid "Kamba"
+msgstr "कांबा"
+
+#. language code: kan kn
+#: zypp/LanguageCode.cc:599
+msgid "Kannada"
+msgstr "कन्नड़"
+
+#. language code: kau kr
+#: zypp/LanguageCode.cc:605
+msgid "Kanuri"
+msgstr "कनुरी"
+
+#. language code: kaa
+#: zypp/LanguageCode.cc:589
+msgid "Kara-Kalpak"
+msgstr "कारा-कालपक"
+
+#. language code: krc
+#: zypp/LanguageCode.cc:641
+msgid "Karachay-Balkar"
+msgstr "काराचय-बलकार"
+
+#. language code: kar
+#: zypp/LanguageCode.cc:601
+msgid "Karen"
+msgstr "केरीन"
+
+#. language code: kas ks
+#: zypp/LanguageCode.cc:603
+msgid "Kashmiri"
+msgstr "कश्मीरी"
+
+#. language code: csb
+#: zypp/LanguageCode.cc:365
+msgid "Kashubian"
+msgstr "कशुबियन"
+
+#. language code: kaw
+#: zypp/LanguageCode.cc:607
+msgid "Kawi"
+msgstr "कावी "
+
+#. language code: kaz kk
+#: zypp/LanguageCode.cc:609
+msgid "Kazakh"
+msgstr "कजाक"
+
+#. :CYM:136:
+#: zypp/CountryCode.cc:281
+msgid "Kazakhstan"
+msgstr "कज़ाकिस्तान"
+
+#. :JPN:392:
+#: zypp/CountryCode.cc:271
+msgid "Kenya"
+msgstr "केन्या"
+
+#. language code: kha
+#: zypp/LanguageCode.cc:613
+msgid "Khasi"
+msgstr "खासी"
+
+#. language code: khm km
+#: zypp/LanguageCode.cc:617
+msgid "Khmer"
+msgstr "खमेर"
+
+#. language code: khi
+#: zypp/LanguageCode.cc:615
+msgid "Khoisan (Other)"
+msgstr "खोईसान (अन्य)"
+
+#. language code: kho
+#: zypp/LanguageCode.cc:619
+msgid "Khotanese"
+msgstr "खोतानीज़"
+
+#. language code: kik ki
+#: zypp/LanguageCode.cc:621
+msgid "Kikuyu"
+msgstr "किकूयू"
+
+#. language code: kmb
+#: zypp/LanguageCode.cc:627
+msgid "Kimbundu"
+msgstr "किंबुंदु"
+
+#. language code: kin rw
+#: zypp/LanguageCode.cc:623
+msgid "Kinyarwanda"
+msgstr "किनयारवांडा"
+
+#. language code: kir ky
+#: zypp/LanguageCode.cc:625
+msgid "Kirghiz"
+msgstr "किर्गिज़"
+
+#. :KHM:116:
+#: zypp/CountryCode.cc:274
+msgid "Kiribati"
+msgstr "किरिबाती"
+
+#. language code: tlh
+#: zypp/LanguageCode.cc:1047
+msgid "Klingon"
+msgstr "क्लिंगों"
+
+#. language code: kom kv
+#: zypp/LanguageCode.cc:631
+msgid "Komi"
+msgstr "कोमी"
+
+#. language code: kon kg
+#: zypp/LanguageCode.cc:633
+msgid "Kongo"
+msgstr "कांगो"
+
+#. language code: kok
+#: zypp/LanguageCode.cc:629
+msgid "Konkani"
+msgstr "कोंकणी"
+
+#. language code: kor ko
+#: zypp/LanguageCode.cc:635
+msgid "Korean"
+msgstr "कोरियाई"
+
+#. language code: kos
+#: zypp/LanguageCode.cc:637
+msgid "Kosraean"
+msgstr "कोस्राइयन"
+
+#. language code: kpe
+#: zypp/LanguageCode.cc:639
+msgid "Kpelle"
+msgstr "क्पेले"
+
+#. language code: kro
+#: zypp/LanguageCode.cc:643
+msgid "Kru"
+msgstr "क्रु"
+
+#. language code: kua kj
+#: zypp/LanguageCode.cc:647
+msgid "Kuanyama"
+msgstr "कुआनयामा"
+
+#. language code: kum
+#: zypp/LanguageCode.cc:649
+msgid "Kumyk"
+msgstr "कुम्यक"
+
+#. language code: kur ku
+#: zypp/LanguageCode.cc:651
+msgid "Kurdish"
+msgstr "कुर्दिश"
+
+#. language code: kru
+#: zypp/LanguageCode.cc:645
+msgid "Kurukh"
+msgstr "कुरुख"
+
+#. language code: kut
+#: zypp/LanguageCode.cc:653
+msgid "Kutenai"
+msgstr "कुतेनाई"
+
+#. :KOR:410:
+#: zypp/CountryCode.cc:279
+msgid "Kuwait"
+msgstr "कुवैत"
+
+#. :KEN:404:
+#: zypp/CountryCode.cc:272
+msgid "Kyrgyzstan"
+msgstr "किर्गिज़तान"
+
+#. language code: lad
+#: zypp/LanguageCode.cc:655
+msgid "Ladino"
+msgstr "लादिनो"
+
+#. language code: lah
+#: zypp/LanguageCode.cc:657
+msgid "Lahnda"
+msgstr "लाहंडा"
+
+#. language code: lam
+#: zypp/LanguageCode.cc:659
+msgid "Lamba"
+msgstr "लांबा"
+
+#. language code: lao lo
+#: zypp/LanguageCode.cc:661
+msgid "Lao"
+msgstr "लाओ"
+
+#. :KAZ:398:
+#: zypp/CountryCode.cc:282
+msgid "Lao People's Democratic Republic"
+msgstr "लाओ लोक जनवादी गणराज्य"
+
+#. language code: lat la
+#: zypp/LanguageCode.cc:663
+msgid "Latin"
+msgstr "लैटिन"
+
+#. :LUX:442:
+#: zypp/CountryCode.cc:291
+msgid "Latvia"
+msgstr "लटाविया"
+
+#. language code: lav lv
+#: zypp/LanguageCode.cc:665
+msgid "Latvian"
+msgstr "लाटवियाई"
+
+#. :LAO:418:
+#: zypp/CountryCode.cc:283
+msgid "Lebanon"
+msgstr "लेबनान"
+
+#. :LBR:430:
+#: zypp/CountryCode.cc:288
+msgid "Lesotho"
+msgstr "लेसोथो"
+
+#: zypp/VendorSupportOptions.cc:20
+msgid "Level 1"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:23
+msgid "Level 2"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:26
+msgid "Level 3"
+msgstr ""
+
+#. language code: lez
+#: zypp/LanguageCode.cc:667
+msgid "Lezghian"
+msgstr "लेझियन"
+
+#. :LKA:144:
+#: zypp/CountryCode.cc:287
+msgid "Liberia"
+msgstr "लिबेरिया"
+
+#. :LVA:428:
+#: zypp/CountryCode.cc:292
+msgid "Libya"
+msgstr "लीबिया"
+
+#. :LCA:662:
+#: zypp/CountryCode.cc:285
+msgid "Liechtenstein"
+msgstr "लिचटेंसटीन"
+
+#. language code: lim li
+#: zypp/LanguageCode.cc:669
+msgid "Limburgan"
+msgstr "लिम्बर्गन"
+
+#. language code: lin ln
+#: zypp/LanguageCode.cc:671
+msgid "Lingala"
+msgstr "लिंगाला"
+
+#. :LSO:426:
+#: zypp/CountryCode.cc:289
+msgid "Lithuania"
+msgstr "लिथुआनिया"
+
+#. language code: lit lt
+#: zypp/LanguageCode.cc:673
+msgid "Lithuanian"
+msgstr "लिथुआनियाई"
+
+#: zypp/media/MediaException.cc:215
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr ""
+
+#. language code: jbo
+#: zypp/LanguageCode.cc:581
+msgid "Lojban"
+msgstr "लोजबान"
+
+#. language code: nds
+#: zypp/LanguageCode.cc:791
+msgid "Low German"
+msgstr "लो जर्मन"
+
+#. language code: dsb
+#: zypp/LanguageCode.cc:395
+msgid "Lower Sorbian"
+msgstr "लोअर सोर्बियन"
+
+#. language code: loz
+#: zypp/LanguageCode.cc:677
+msgid "Lozi"
+msgstr "लोज़ी"
+
+#. language code: lub lu
+#: zypp/LanguageCode.cc:683
+msgid "Luba-Katanga"
+msgstr "ल्यूबा-कातांगा"
+
+#. language code: lua
+#: zypp/LanguageCode.cc:681
+msgid "Luba-Lulua"
+msgstr "ल्यूबा-लुलुआ"
+
+#. language code: lui
+#: zypp/LanguageCode.cc:687
+msgid "Luiseno"
+msgstr "ल्युसेनो"
+
+#. language code: smj
+#: zypp/LanguageCode.cc:967
+msgid "Lule Sami"
+msgstr "लूले सामी"
+
+#. language code: lun
+#: zypp/LanguageCode.cc:689
+msgid "Lunda"
+msgstr "लुंडा"
+
+#. language code: luo
+#: zypp/LanguageCode.cc:691
+msgid "Luo (Kenya and Tanzania)"
+msgstr "लुओ (केन्या और तंजानिया)"
+
+#. language code: lus
+#: zypp/LanguageCode.cc:693
+msgid "Lushai"
+msgstr "लुशाई"
+
+#. :LTU:440:
+#: zypp/CountryCode.cc:290
+msgid "Luxembourg"
+msgstr "लक्ज़मबर्ग"
+
+#. language code: ltz lb
+#: zypp/LanguageCode.cc:679
+msgid "Luxembourgish"
+msgstr "लक्ज़मबर्गिश"
+
+#. :MNG:496:
+#: zypp/CountryCode.cc:304
+msgid "Macao"
+msgstr "मकाउ"
+
+#. :MHL:584:
+#: zypp/CountryCode.cc:300
+msgid "Macedonia"
+msgstr "मकदूनिया"
+
+#. language code: mac mkd mk
+#: zypp/LanguageCode.cc:695 zypp/LanguageCode.cc:697
+msgid "Macedonian"
+msgstr "मकदूनियाई"
+
+#: zypp/CountryCode.cc:298
+msgid "Madagascar"
+msgstr "मेडागास्कर"
+
+#. language code: mad
+#: zypp/LanguageCode.cc:699
+msgid "Madurese"
+msgstr "मदुरीस"
+
+#. language code: mag
+#: zypp/LanguageCode.cc:701
+msgid "Magahi"
+msgstr "मगही"
+
+#. language code: mai
+#: zypp/LanguageCode.cc:705
+msgid "Maithili"
+msgstr "मैथिली"
+
+#. language code: mak
+#: zypp/LanguageCode.cc:707
+msgid "Makasar"
+msgstr "मकासर"
+
+#. language code: mlg mg
+#: zypp/LanguageCode.cc:743
+msgid "Malagasy"
+msgstr "मलागासी"
+
+#. :MDV:462:
+#: zypp/CountryCode.cc:312
+msgid "Malawi"
+msgstr "मलावी"
+
+#. language code: may msa ms
+#: zypp/LanguageCode.cc:723 zypp/LanguageCode.cc:725
+msgid "Malay"
+msgstr "मलय"
+
+#. language code: mal ml
+#: zypp/LanguageCode.cc:709
+msgid "Malayalam"
+msgstr "मलयालम"
+
+#. :MEX:484:
+#: zypp/CountryCode.cc:314
+msgid "Malaysia"
+msgstr "मलेशिया"
+
+#. :MUS:480:
+#: zypp/CountryCode.cc:311
+msgid "Maldives"
+msgstr "मालदीव"
+
+#: zypp/media/MediaException.cc:115
+msgid "Malformed URI"
+msgstr ""
+
+#. :MKD:807:
+#: zypp/CountryCode.cc:301
+msgid "Mali"
+msgstr "माली"
+
+#. :MSR:500:
+#: zypp/CountryCode.cc:309
+msgid "Malta"
+msgstr "माल्टा"
+
+#. language code: mlt mt
+#: zypp/LanguageCode.cc:745
+msgid "Maltese"
+msgstr "माल्टीज़"
+
+#. language code: mnc
+#: zypp/LanguageCode.cc:747
+msgid "Manchu"
+msgstr "मंचू"
+
+#. language code: mdr
+#: zypp/LanguageCode.cc:729
+msgid "Mandar"
+msgstr "मंदार"
+
+#. language code: man
+#: zypp/LanguageCode.cc:711
+msgid "Mandingo"
+msgstr "मंदिनगो"
+
+#. language code: mni
+#: zypp/LanguageCode.cc:749
+msgid "Manipuri"
+msgstr "मणिपुरी"
+
+#. language code: mno
+#: zypp/LanguageCode.cc:751
+msgid "Manobo Languages"
+msgstr "मनोबो भाषाएं"
+
+#. language code: glv gv
+#: zypp/LanguageCode.cc:485
+msgid "Manx"
+msgstr "मैंक्स"
+
+#. language code: mao mri mi
+#: zypp/LanguageCode.cc:713 zypp/LanguageCode.cc:715
+msgid "Maori"
+msgstr "माओरी"
+
+#. language code: mar mr
+#: zypp/LanguageCode.cc:719
+msgid "Marathi"
+msgstr "मराठी"
+
+#. language code: chm
+#: zypp/LanguageCode.cc:329
+msgid "Mari"
+msgstr "मारी"
+
+#. :MDG:450:
+#: zypp/CountryCode.cc:299
+msgid "Marshall Islands"
+msgstr "मार्शल आइलैंड्स"
+
+#. language code: mah mh
+#: zypp/LanguageCode.cc:703
+msgid "Marshallese"
+msgstr "मार्शलीज़"
+
+#. :MNP:580:
+#: zypp/CountryCode.cc:306
+msgid "Martinique"
+msgstr "मारतिनिक"
+
+#. language code: mwr
+#: zypp/LanguageCode.cc:769
+msgid "Marwari"
+msgstr "मारवाड़ी"
+
+#. language code: mas
+#: zypp/LanguageCode.cc:721
+msgid "Masai"
+msgstr "मसाइ"
+
+#. :MTQ:474:
+#: zypp/CountryCode.cc:307
+msgid "Mauritania"
+msgstr "मॉरितानिया"
+
+#. :MLT:470:
+#: zypp/CountryCode.cc:310
+msgid "Mauritius"
+msgstr "मॉरीशस"
+
+#. language code: myn
+#: zypp/LanguageCode.cc:771
+msgid "Mayan Languages"
+msgstr "मयान भाषाएं"
+
+#. :YEM:887:
+#: zypp/CountryCode.cc:400
+msgid "Mayotte"
+msgstr "मयोट्टे"
+
+#: zypp/media/MediaException.cc:169
+#, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr ""
+
+#: zypp/media/MediaException.cc:175
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr ""
+
+#: zypp/media/MediaException.cc:72
+msgid "Medium not attached"
+msgstr ""
+
+#: zypp/media/MediaException.cc:53
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr ""
+
+#. language code: men
+#: zypp/LanguageCode.cc:731
+msgid "Mende"
+msgstr "मेंदे"
+
+#. :FRA:250:
+#: zypp/CountryCode.cc:231
+msgid "Metropolitan France"
+msgstr "मेट्रोपोलिटन फ्रांस"
+
+#. :MWI:454:
+#: zypp/CountryCode.cc:313
+msgid "Mexico"
+msgstr "मेक्सिको"
+
+#. language code: mic
+#: zypp/LanguageCode.cc:735
+msgid "Mi'kmaq"
+msgstr "मि'कमाक"
+
+#. language code: min
+#: zypp/LanguageCode.cc:737
+msgid "Minangkabau"
+msgstr "मिनांग्काबाउ"
+
+#. language code: mwl
+#: zypp/LanguageCode.cc:767
+msgid "Mirandese"
+msgstr "मिरांडीज़"
+
+#. language code: mis
+#: zypp/LanguageCode.cc:739
+msgid "Miscellaneous Languages"
+msgstr "विविध भाषाएं"
+
+#. language code: moh
+#: zypp/LanguageCode.cc:753
+msgid "Mohawk"
+msgstr "मोहॉक"
+
+#. language code: mdf
+#: zypp/LanguageCode.cc:727
+msgid "Moksha"
+msgstr "मोक्स"
+
+#. language code: mol mo
+#: zypp/LanguageCode.cc:755
+msgid "Moldavian"
+msgstr "मोल्देवियाई"
+
+#. :MCO:492:
+#: zypp/CountryCode.cc:295
+msgid "Moldova"
+msgstr "माल्दोवा"
+
+#. language code: mkh
+#: zypp/LanguageCode.cc:741
+msgid "Mon-Khmer (Other)"
+msgstr "मॉन-खमेर (अन्य)"
+
+#. :MAR:504:
+#: zypp/CountryCode.cc:294
+msgid "Monaco"
+msgstr "मोनाका"
+
+#. language code: lol
+#: zypp/LanguageCode.cc:675
+msgid "Mongo"
+msgstr "मोंगो"
+
+#. :MMR:104:
+#: zypp/CountryCode.cc:303
+msgid "Mongolia"
+msgstr "मंगोलिया"
+
+#. language code: mon mn
+#: zypp/LanguageCode.cc:757
+msgid "Mongolian"
+msgstr "मंगोलियाई"
+
+#. :MDA:498:
+#: zypp/CountryCode.cc:296
+#, fuzzy
+msgid "Montenegro"
+msgstr "मोंगो"
+
+#. :MRT:478:
+#: zypp/CountryCode.cc:308
+msgid "Montserrat"
+msgstr "मांतसेरा"
+
+#. :LBY:434:
+#: zypp/CountryCode.cc:293
+msgid "Morocco"
+msgstr "मोरक्को"
+
+#. language code: mos
+#: zypp/LanguageCode.cc:759
+msgid "Mossi"
+msgstr "मोस्सी"
+
+#. :MYS:458:
+#: zypp/CountryCode.cc:315
+msgid "Mozambique"
+msgstr "मोजाम्बिक"
+
+#. language code: mul
+#: zypp/LanguageCode.cc:761
+msgid "Multiple Languages"
+msgstr "अनेकशः भाषाएं"
+
+#. language code: mun
+#: zypp/LanguageCode.cc:763
+msgid "Munda languages"
+msgstr "मुंडा भाषाएं"
+
+#. :MLI:466:
+#: zypp/CountryCode.cc:302
+msgid "Myanmar"
+msgstr "म्यांमार"
+
+#. language code: nah
+#: zypp/LanguageCode.cc:775
+msgid "Nahuatl"
+msgstr "नाहुआट्ल"
+
+#. :MOZ:508:
+#: zypp/CountryCode.cc:316
+msgid "Namibia"
+msgstr "नामीबिया"
+
+#. :NPL:524:
+#. language code: nau na
+#: zypp/CountryCode.cc:325 zypp/LanguageCode.cc:781
+msgid "Nauru"
+msgstr "नाउरू"
+
+#. language code: nav nv
+#: zypp/LanguageCode.cc:783
+msgid "Navajo"
+msgstr "नावाजो"
+
+#. language code: nde nd
+#: zypp/LanguageCode.cc:787
+msgid "Ndebele, North"
+msgstr "न्डेबेले, उत्तरी"
+
+#. language code: nbl nr
+#: zypp/LanguageCode.cc:785
+msgid "Ndebele, South"
+msgstr "न्डेबेले, दक्षिणी"
+
+#. language code: ndo ng
+#: zypp/LanguageCode.cc:789
+msgid "Ndonga"
+msgstr "न्डोंगा"
+
+#. language code: nap
+#: zypp/LanguageCode.cc:779
+msgid "Neapolitan"
+msgstr "नेपोलिटन"
+
+#. :NOR:578:
+#: zypp/CountryCode.cc:324
+msgid "Nepal"
+msgstr "नेपाल"
+
+#. language code: new
+#: zypp/LanguageCode.cc:795
+msgid "Nepal Bhasa"
+msgstr "नेपाल भाषा"
+
+#. language code: nep ne
+#: zypp/LanguageCode.cc:793
+msgid "Nepali"
+msgstr "नेपाली"
+
+#. :NIC:558:
+#: zypp/CountryCode.cc:322
+msgid "Netherlands"
+msgstr "नीदरलैंड्स"
+
+#. :ARM:051:
+#: zypp/CountryCode.cc:165
+msgid "Netherlands Antilles"
+msgstr "नीदरलैंड एंटीलस"
+
+#. :NAM:516:
+#: zypp/CountryCode.cc:317
+msgid "New Caledonia"
+msgstr "न्यू कैलडोनिया"
+
+#. :NIU:570:
+#: zypp/CountryCode.cc:327
+msgid "New Zealand"
+msgstr "न्यूजीलैंड"
+
+#: zypp/target/TargetImpl.cc:658
+msgid "New update message"
+msgstr ""
+
+#. language code: nia
+#: zypp/LanguageCode.cc:797
+msgid "Nias"
+msgstr "नियास"
+
+#. :NGA:566:
+#: zypp/CountryCode.cc:321
+msgid "Nicaragua"
+msgstr "निकारागुआ"
+
+#. :NCL:540:
+#: zypp/CountryCode.cc:318
+msgid "Niger"
+msgstr "नाइज़र"
+
+#. language code: nic
+#: zypp/LanguageCode.cc:799
+msgid "Niger-Kordofanian (Other)"
+msgstr "नाइज़र-कोरदोफानियाई (अन्य)"
+
+#. :NFK:574:
+#: zypp/CountryCode.cc:320
+msgid "Nigeria"
+msgstr "नाइजीरिया"
+
+#. language code: ssa
+#: zypp/LanguageCode.cc:995
+msgid "Nilo-Saharan (Other)"
+msgstr "निलो-सहारन (अन्य)"
+
+#. :NRU:520:
+#: zypp/CountryCode.cc:326
+msgid "Niue"
+msgstr "नियू"
+
+#. language code: niu
+#: zypp/LanguageCode.cc:801
+msgid "Niuean"
+msgstr "नियूएन"
+
+#. Defined CountryCode constants
+#. Defined LanguageCode constants
+#: zypp/CountryCode.cc:149 zypp/LanguageCode.cc:148
+msgid "No Code"
+msgstr "कोई कोड नहीं"
+
+#: zypp/repo/RepoProvideFile.cc:265
+#, fuzzy
+msgid "No url in repository."
+msgstr "कोष में फाइल %1 नहीं प्राप्त हुई।"
+
+#. language code: nog
+#: zypp/LanguageCode.cc:807
+msgid "Nogai"
+msgstr "नोगाइ"
+
+#. :NER:562:
+#: zypp/CountryCode.cc:319
+msgid "Norfolk Island"
+msgstr "नॉरफोक आइसलैंड"
+
+#. language code: non
+#: zypp/LanguageCode.cc:809
+msgid "Norse, Old"
+msgstr "नोर्स, पुरानी"
+
+#. language code: nai
+#: zypp/LanguageCode.cc:777
+msgid "North American Indian"
+msgstr "उत्तरी अमेरिकी भारतीय"
+
+#. :KNA:659:
+#: zypp/CountryCode.cc:277
+msgid "North Korea"
+msgstr "उत्तरी कोरिया"
+
+#. :MAC:446:
+#: zypp/CountryCode.cc:305
+msgid "Northern Mariana Islands"
+msgstr "उत्तरी मारिआना आइलैंड"
+
+#. language code: sme se
+#: zypp/LanguageCode.cc:963
+msgid "Northern Sami"
+msgstr "उत्तरी सामी"
+
+#. language code: nso
+#: zypp/LanguageCode.cc:813
+msgid "Northern Sotho"
+msgstr "उत्तरी सोथो"
+
+#. :NLD:528:
+#: zypp/CountryCode.cc:323
+msgid "Norway"
+msgstr "नॉर्वे"
+
+#. language code: nor no
+#: zypp/LanguageCode.cc:811
+msgid "Norwegian"
+msgstr "नॉर्वेजियाई"
+
+#. language code: nob nb
+#: zypp/LanguageCode.cc:805
+msgid "Norwegian Bokmal"
+msgstr "नॉर्वेजियाई बोकमाल"
+
+#. language code: nno nn
+#: zypp/LanguageCode.cc:803
+msgid "Norwegian Nynorsk"
+msgstr "नॉर्वेजियाई निनॉर्स्क"
+
+#: zypp/target/hal/HalContext.cc:851
+msgid "Not a CDROM drive"
+msgstr "कोई सीडीरोम ड्राइव नहीं"
+
+#. language code: nub
+#: zypp/LanguageCode.cc:815
+msgid "Nubian Languages"
+msgstr "न्यूबिअन भाषाएं"
+
+#. language code: nym
+#: zypp/LanguageCode.cc:821
+msgid "Nyamwezi"
+msgstr "न्यामवेज़ी"
+
+#. language code: nyn
+#: zypp/LanguageCode.cc:823
+msgid "Nyankole"
+msgstr "न्यानकोले"
+
+#. language code: nyo
+#: zypp/LanguageCode.cc:825
+msgid "Nyoro"
+msgstr "न्योरो"
+
+#. language code: nzi
+#: zypp/LanguageCode.cc:827
+msgid "Nzima"
+msgstr "न्ज़ीमा"
+
+#: zypp/Dep.cc:100
+#, fuzzy
+msgid "Obsoletes"
+msgstr "%s पुराना कर देता है : %s"
+
+#. language code: oci oc
+#: zypp/LanguageCode.cc:829
+msgid "Occitan (post 1500)"
+msgstr "ओक्कीटन (1500 पश्चात)"
+
+#. language code: oji oj
+#: zypp/LanguageCode.cc:831
+msgid "Ojibwa"
+msgstr "ओज़िब्वा"
+
+#. :NZL:554:
+#: zypp/CountryCode.cc:328
+msgid "Oman"
+msgstr "ओमान"
+
+#: zypp/parser/RepoindexFileReader.cc:209
+#, c-format, boost-format
+msgid "One or both of '%s' or '%s' attributes is required."
+msgstr ""
+
+#: zypp/media/MediaException.cc:145
+msgid "Operation not supported by medium"
+msgstr ""
+
+#. language code: ori or
+#: zypp/LanguageCode.cc:833
+msgid "Oriya"
+msgstr "उड़िया"
+
+#. language code: orm om
+#: zypp/LanguageCode.cc:835
+msgid "Oromo"
+msgstr "ओरोमो"
+
+#. language code: osa
+#: zypp/LanguageCode.cc:837
+msgid "Osage"
+msgstr "ओसेग"
+
+#. language code: oss os
+#: zypp/LanguageCode.cc:839
+msgid "Ossetian"
+msgstr "ओस्सेटियन"
+
+#. language code: oto
+#: zypp/LanguageCode.cc:843
+msgid "Otomian Languages"
+msgstr "ओटोमियाई भाषाएं"
+
+#. TranslatorExplanation %s = package being checked for integrity
+#: zypp/repo/PackageProvider.cc:157
+#, fuzzy, c-format, boost-format
+msgid ""
+"Package %s seems to be corrupted during transfer. Do you want to retry "
+"retrieval?"
+msgstr ""
+"पैकेज %s ने एकीकरण जांच को नाकाम किया। क्या आप इसकी डाउनलोडिंग का प्रयास फिर से करना "
+"चाहते हैं?"
+
+#. language code: pal
+#: zypp/LanguageCode.cc:849
+msgid "Pahlavi"
+msgstr "पहलावी"
+
+#. :PHL:608:
+#: zypp/CountryCode.cc:334
+msgid "Pakistan"
+msgstr "पाकिस्तान"
+
+#. :PRT:620:
+#: zypp/CountryCode.cc:341
+msgid "Palau"
+msgstr "पलाउ"
+
+#. language code: pau
+#: zypp/LanguageCode.cc:857
+msgid "Palauan"
+msgstr "पालाउन"
+
+#. :PRI:630:
+#: zypp/CountryCode.cc:339
+msgid "Palestinian Territory"
+msgstr "फिलीस्तीनी क्षेत्र"
+
+#. language code: pli pi
+#: zypp/LanguageCode.cc:869
+msgid "Pali"
+msgstr "पाली"
+
+#. language code: pam
+#: zypp/LanguageCode.cc:851
+msgid "Pampanga"
+msgstr "पाम्पांगा"
+
+#. :OMN:512:
+#: zypp/CountryCode.cc:329
+msgid "Panama"
+msgstr "पनामा"
+
+#. language code: pag
+#: zypp/LanguageCode.cc:847
+msgid "Pangasinan"
+msgstr "पनगासिनान"
+
+#. language code: pan pa
+#: zypp/LanguageCode.cc:853
+msgid "Panjabi"
+msgstr "पंजाबी"
+
+#. language code: pap
+#: zypp/LanguageCode.cc:855
+msgid "Papiamento"
+msgstr "पापीमेंटो"
+
+#. :PYF:258:
+#: zypp/CountryCode.cc:332
+msgid "Papua New Guinea"
+msgstr "पापुआ न्यू गिनी"
+
+#. language code: paa
+#: zypp/LanguageCode.cc:845
+msgid "Papuan (Other)"
+msgstr "पापुअन (अन्य)"
+
+#. :PLW:585:
+#: zypp/CountryCode.cc:342
+msgid "Paraguay"
+msgstr "पैरागुआ"
+
+#: zypp/media/MediaException.cc:106
+#, fuzzy, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "%1 एक डायरेक्टरी नहीं है।"
+
+#: zypp/media/MediaException.cc:98
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr ""
+
+#: zypp/media/MediaException.cc:199
+#, fuzzy, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "अनुमति अस्वीकृत"
+
+#. language code: per fas fa
+#: zypp/LanguageCode.cc:861 zypp/LanguageCode.cc:863
+msgid "Persian"
+msgstr "फारसी"
+
+#. language code: peo
+#: zypp/LanguageCode.cc:859
+msgid "Persian, Old (ca.600-400 B.C.)"
+msgstr "फारसी, पुरानी (सीए. 600-400 ई.पू.)"
+
+#. :PAN:591:
+#: zypp/CountryCode.cc:330
+msgid "Peru"
+msgstr "पेरू"
+
+#. language code: phi
+#: zypp/LanguageCode.cc:865
+msgid "Philippine (Other)"
+msgstr "फिलीपीनी (अन्य)"
+
+#. :PNG:598:
+#: zypp/CountryCode.cc:333
+msgid "Philippines"
+msgstr "फिलिपीन्स"
+
+#. language code: phn
+#: zypp/LanguageCode.cc:867
+msgid "Phoenician"
+msgstr "फोएनिसिअन"
+
+#. :SPM:666:
+#: zypp/CountryCode.cc:337
+msgid "Pitcairn"
+msgstr "पिटकैरन"
+
+#: zypp/misc/CheckAccessDeleted.cc:242
+msgid "Please install package 'lsof' first."
+msgstr ""
+
+#. language code: pon
+#: zypp/LanguageCode.cc:873
+msgid "Pohnpeian"
+msgstr "पोहन्पिअन"
+
+#. :PAK:586:
+#: zypp/CountryCode.cc:335
+msgid "Poland"
+msgstr "पोलैंड"
+
+#. language code: pol pl
+#: zypp/LanguageCode.cc:871
+msgid "Polish"
+msgstr "पोलिश"
+
+#. :PSE:275:
+#: zypp/CountryCode.cc:340
+msgid "Portugal"
+msgstr "पुर्तगाल"
+
+#. language code: por pt
+#: zypp/LanguageCode.cc:875
+msgid "Portuguese"
+msgstr "पुर्तगाली"
+
+#. language code: pra
+#: zypp/LanguageCode.cc:877
+msgid "Prakrit Languages"
+msgstr "प्राकृत भाषाएं"
+
+#: zypp/Dep.cc:97
+msgid "Prerequires"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:45
+msgid ""
+"Problem determination, which means technical support designed to provide "
+"compatibility information, installation assistance, usage support, on-going "
+"maintenance and basic troubleshooting. Level 1 Support is not intended to "
+"correct product defect errors."
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:48
+msgid ""
+"Problem isolation, which means technical support designed to duplicate "
+"customer problems, isolate problem area and provide resolution for problems "
+"not resolved by Level 1 Support."
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:51
+msgid ""
+"Problem resolution, which means technical support designed to resolve "
+"complex problems by engaging engineering in resolution of product defects "
+"which have been identified by Level 2 Support."
+msgstr ""
+
+#. language code: pro
+#: zypp/LanguageCode.cc:879
+msgid "Provencal, Old (to 1500)"
+msgstr "प्रोवेंसल, पुरानी (1500 तक)"
+
+#: zypp/Dep.cc:96
+msgid "Provides"
+msgstr ""
+
+#. :PCN:612:
+#: zypp/CountryCode.cc:338
+msgid "Puerto Rico"
+msgstr "प्यूर्टो रिको"
+
+#. language code: pus ps
+#: zypp/LanguageCode.cc:881
+msgid "Pushto"
+msgstr "पश्तो"
+
+#. :PRY:600:
+#: zypp/CountryCode.cc:343
+msgid "Qatar"
+msgstr "कतर"
+
+#. language code: que qu
+#: zypp/LanguageCode.cc:883
+msgid "Quechua"
+msgstr "क्वेचुआ"
+
+#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
+msgid "Query string parsing not supported for this URL"
+msgstr "इस URL के लिए क्वेरी स्ट्रिंग पार्जिंग समर्थित नहीं है"
+
+#. TranslatorExplanation after semicolon is error message
+#. TranslatorExplanation the colon is followed by an error message
+#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
+#: zypp/target/rpm/RpmDb.cc:2189
+#, fuzzy
+msgid "RPM failed: "
+msgstr "विफल"
+
+#. language code: roh rm
+#: zypp/LanguageCode.cc:893
+msgid "Raeto-Romance"
+msgstr "रेइतो-रोमांस"
+
+#. language code: raj
+#: zypp/LanguageCode.cc:885
+msgid "Rajasthani"
+msgstr "राजस्थानी"
+
+#. language code: rap
+#: zypp/LanguageCode.cc:887
+msgid "Rapanui"
+msgstr "रापान्वी"
+
+#. language code: rar
+#: zypp/LanguageCode.cc:889
+msgid "Rarotongan"
+msgstr "रारोतांगन"
+
+#: zypp/Dep.cc:101
+msgid "Recommends"
+msgstr ""
+
+#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
+msgid "Relative path not allowed if authority exists"
+msgstr "यदि प्राधिकरण मौजूद है तो सापेक्ष पथ को अनुमति नहीं है"
+
+#: zypp/RepoManager.cc:1740
+#, fuzzy, c-format, boost-format
+msgid "Removing repository '%s'"
+msgstr "संसाधन जोड़ रहा"
+
+#: zypp/RepoManager.cc:338
+msgid "Repository alias cannot start with dot."
+msgstr ""
+
+#: zypp/parser/RepoindexFileReader.cc:197
+#, c-format, boost-format
+msgid "Required attribute '%s' is missing."
+msgstr ""
+
+#: zypp/Dep.cc:98
+msgid "Requires"
+msgstr ""
+
+#. :QAT:634:
+#: zypp/CountryCode.cc:344
+msgid "Reunion"
+msgstr "रियूनियन"
+
+#. language code: roa
+#: zypp/LanguageCode.cc:891
+msgid "Romance (Other)"
+msgstr "रोमांस (अन्य)"
+
+#. :REU:638:
+#: zypp/CountryCode.cc:345
+msgid "Romania"
+msgstr "रोमानिया"
+
+#. language code: rum ron ro
+#: zypp/LanguageCode.cc:897 zypp/LanguageCode.cc:899
+msgid "Romanian"
+msgstr "रोमानियाई"
+
+#. language code: rom
+#: zypp/LanguageCode.cc:895
+msgid "Romany"
+msgstr "रोमानी"
+
+#. language code: run rn
+#: zypp/LanguageCode.cc:901
+msgid "Rundi"
+msgstr "रूंडी"
+
+#. language code: rus ru
+#: zypp/LanguageCode.cc:903
+msgid "Russian"
+msgstr "रूसी"
+
+#: zypp/CountryCode.cc:347
+msgid "Russian Federation"
+msgstr "रूसी महासंघ"
+
+#. :RUS:643:
+#: zypp/CountryCode.cc:348
+msgid "Rwanda"
+msgstr "रवांडा"
+
+#. :SGP:702:
+#: zypp/CountryCode.cc:355
+msgid "Saint Helena"
+msgstr "सेंट हेलेना"
+
+#. :COM:174:
+#: zypp/CountryCode.cc:276
+msgid "Saint Kitts and Nevis"
+msgstr "सेंट किट्स और नेविस"
+
+#. :LBN:422:
+#: zypp/CountryCode.cc:284
+msgid "Saint Lucia"
+msgstr "सेंट लुसिया"
+
+#: zypp/CountryCode.cc:297
+#, fuzzy
+msgid "Saint Martin"
+msgstr "सैन मारिनो"
+
+#. :POL:616:
+#: zypp/CountryCode.cc:336
+msgid "Saint Pierre and Miquelon"
+msgstr "सेंट पिअरे और मिक्यूलॉन"
+
+#. :VAT:336:
+#: zypp/CountryCode.cc:391
+msgid "Saint Vincent and the Grenadines"
+msgstr "सेंट विनसेंट और द ग्रेनाडिनेस"
+
+#. language code: sal
+#: zypp/LanguageCode.cc:913
+msgid "Salishan Languages"
+msgstr "सलीशान भाषाएं"
+
+#. language code: sam
+#: zypp/LanguageCode.cc:915
+msgid "Samaritan Aramaic"
+msgstr "समारिटन अरामिक"
+
+#. language code: smi
+#: zypp/LanguageCode.cc:965
+msgid "Sami Languages (Other)"
+msgstr "सामी भाषाएं (अन्य)"
+
+#. :WLF:876:
+#: zypp/CountryCode.cc:398
+msgid "Samoa"
+msgstr "समोआ"
+
+#. language code: smo sm
+#: zypp/LanguageCode.cc:971
+msgid "Samoan"
+msgstr "सामोन"
+
+#. :SLE:694:
+#: zypp/CountryCode.cc:360
+msgid "San Marino"
+msgstr "सैन मारिनो"
+
+#. language code: sad
+#: zypp/LanguageCode.cc:905
+msgid "Sandawe"
+msgstr "संदावी"
+
+#. language code: sag sg
+#: zypp/LanguageCode.cc:907
+msgid "Sango"
+msgstr "सांगो"
+
+#. language code: san sa
+#: zypp/LanguageCode.cc:917
+msgid "Sanskrit"
+msgstr "संस्कृत"
+
+#. language code: sat
+#: zypp/LanguageCode.cc:921
+msgid "Santali"
+msgstr "संथाली"
+
+#. :SUR:740:
+#: zypp/CountryCode.cc:364
+msgid "Sao Tome and Principe"
+msgstr "साओ टोम और प्रिंसीप"
+
+#. language code: srd sc
+#: zypp/LanguageCode.cc:991
+msgid "Sardinian"
+msgstr "सार्डीनियाई"
+
+#. language code: sas
+#: zypp/LanguageCode.cc:919
+msgid "Sasak"
+msgstr "ससाक"
+
+#. :RWA:646:
+#: zypp/CountryCode.cc:349
+msgid "Saudi Arabia"
+msgstr "सउदी अरब"
+
+#. language code: sco
+#: zypp/LanguageCode.cc:929
+msgid "Scots"
+msgstr "स्काट्स"
+
+#. language code: sel
+#: zypp/LanguageCode.cc:935
+msgid "Selkup"
+msgstr "सेलकप"
+
+#. language code: sem
+#: zypp/LanguageCode.cc:937
+msgid "Semitic (Other)"
+msgstr "सेमिटिक (अन्य)"
+
+#. :SMR:674:
+#: zypp/CountryCode.cc:361
+msgid "Senegal"
+msgstr "सेनेगल"
+
+#. :ROU:642:
+#: zypp/CountryCode.cc:346
+#, fuzzy
+msgid "Serbia"
+msgstr "सर्बियाई"
+
+#. language code: scc srp sr
+#: zypp/LanguageCode.cc:923 zypp/LanguageCode.cc:925
+msgid "Serbian"
+msgstr "सर्बियाई"
+
+#. language code: srr
+#: zypp/LanguageCode.cc:993
+msgid "Serer"
+msgstr "सेरेर"
+
+#: zypp/RepoManager.cc:349
+msgid "Service alias cannot start with dot."
+msgstr ""
+
+#: zypp/repo/RepoException.cc:129
+#, fuzzy
+msgid "Service plugin does not support changing an attribute."
+msgstr "संसाधन प्रकार वीएआर1 परिवर्तन दर्शाएं विशेषता को सहयोग नहीं करता"
+
+#. :SLB:090:
+#: zypp/CountryCode.cc:351
+msgid "Seychelles"
+msgstr "सेशेल्स"
+
+#. language code: shn
+#: zypp/LanguageCode.cc:943
+msgid "Shan"
+msgstr "शान"
+
+#. language code: sna sn
+#: zypp/LanguageCode.cc:975
+msgid "Shona"
+msgstr "शोना"
+
+#. language code: iii ii
+#: zypp/LanguageCode.cc:551
+msgid "Sichuan Yi"
+msgstr "सिचुआन यी"
+
+#. language code: scn
+#: zypp/LanguageCode.cc:927
+msgid "Sicilian"
+msgstr "सिसिलियाई"
+
+#. language code: sid
+#: zypp/LanguageCode.cc:945
+msgid "Sidamo"
+msgstr "सिडामो"
+
+#. :SVK:703:
+#: zypp/CountryCode.cc:359
+msgid "Sierra Leone"
+msgstr "सिएरा लिओन"
+
+#. language code: sgn
+#: zypp/LanguageCode.cc:941
+msgid "Sign Languages"
+msgstr "संकेत भाषाएं"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2369
+#, fuzzy
+msgid "Signature does not verify"
+msgstr "%s %s नहीं मिला"
+
+#: zypp/KeyRing.cc:575
+#, fuzzy, c-format, boost-format
+msgid "Signature file %s not found"
+msgstr "%s %s नहीं मिला"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2365
+#, fuzzy
+msgid "Signature is OK"
+msgstr "%s %s नहीं मिला"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2371
+#, fuzzy
+msgid "Signature is OK, but key is not trusted"
+msgstr "%s %s नहीं मिला"
+
+#: zypp/repo/PackageProvider.cc:216
+#, fuzzy
+msgid "Signature verification failed"
+msgstr "DBI Execution failed: %s"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2373
+msgid "Signatures public key is not available"
+msgstr ""
+
+#. language code: bla
+#: zypp/LanguageCode.cc:277
+msgid "Siksika"
+msgstr "सिकसिका"
+
+#. language code: snd sd
+#: zypp/LanguageCode.cc:977
+msgid "Sindhi"
+msgstr "सिंधी"
+
+#. :SWE:752:
+#: zypp/CountryCode.cc:354
+msgid "Singapore"
+msgstr "सिंगापुर"
+
+#. language code: sin si
+#: zypp/LanguageCode.cc:947
+msgid "Sinhala"
+msgstr "सिंहल"
+
+#. language code: sit
+#: zypp/LanguageCode.cc:951
+msgid "Sino-Tibetan (Other)"
+msgstr "चीनी-तिब्बती (अन्य)"
+
+#. language code: sio
+#: zypp/LanguageCode.cc:949
+msgid "Siouan Languages"
+msgstr "सिओअन भाषाएं"
+
+#. language code: sms
+#: zypp/LanguageCode.cc:973
+msgid "Skolt Sami"
+msgstr "सकोल्त सामी"
+
+#. language code: den
+#: zypp/LanguageCode.cc:383
+msgid "Slave (Athapascan)"
+msgstr "स्लेव (अथापास्कन)"
+
+#. language code: sla
+#: zypp/LanguageCode.cc:953
+msgid "Slavic (Other)"
+msgstr "स्लाव (अन्य)"
+
+#. language code: slo slk sk
+#: zypp/LanguageCode.cc:955 zypp/LanguageCode.cc:957
+msgid "Slovak"
+msgstr "स्लोवाक"
+
+#. :SJM:744:
+#: zypp/CountryCode.cc:358
+msgid "Slovakia"
+msgstr "स्लोवाकिया"
+
+#. :SHN:654:
+#: zypp/CountryCode.cc:356
+msgid "Slovenia"
+msgstr "स्लोविनिया"
+
+#. language code: slv sl
+#: zypp/LanguageCode.cc:959
+msgid "Slovenian"
+msgstr "स्लोवेनियाई"
+
+#. language code: sog
+#: zypp/LanguageCode.cc:981
+msgid "Sogdian"
+msgstr "सोगदिया"
+
+#. :SAU:682:
+#: zypp/CountryCode.cc:350
+msgid "Solomon Islands"
+msgstr "सोलोमन आइलैंड"
+
+#. language code: som so
+#: zypp/LanguageCode.cc:983
+msgid "Somali"
+msgstr "सोमाली"
+
+#. :SEN:686:
+#: zypp/CountryCode.cc:362
+msgid "Somalia"
+msgstr "सोमालिया"
+
+#. language code: son
+#: zypp/LanguageCode.cc:985
+msgid "Songhai"
+msgstr "सोंघाई"
+
+#. language code: snk
+#: zypp/LanguageCode.cc:979
+msgid "Soninke"
+msgstr "सोनिंकी"
+
+#. language code: wen
+#: zypp/LanguageCode.cc:1119
+msgid "Sorbian Languages"
+msgstr "सोर्बिअन भाषाएं"
+
+#: zypp/target/hal/HalContext.cc:24
+msgid "Sorry, but this version of libzypp was built without HAL support."
+msgstr ""
+
+#. language code: sot st
+#: zypp/LanguageCode.cc:987
+msgid "Sotho, Southern"
+msgstr "सोथो, दक्षिणी"
+
+#. :MYT:175:
+#: zypp/CountryCode.cc:401
+msgid "South Africa"
+msgstr "दक्षिण अफ्रीका"
+
+#. language code: sai
+#: zypp/LanguageCode.cc:911
+msgid "South American Indian (Other)"
+msgstr "दक्षिणी अमेरिकी भारतीय (अन्य)"
+
+#. :GRC:300:
+#: zypp/CountryCode.cc:246
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "दक्षिणी जॉर्जिया और साउथ सैंडविच आइलैंड्स"
+
+#. :PRK:408:
+#: zypp/CountryCode.cc:278
+msgid "South Korea"
+msgstr "दक्षिणी कोरिया"
+
+#. language code: alt
+#: zypp/LanguageCode.cc:193
+msgid "Southern Altai"
+msgstr "दक्षिणी अल्ताई"
+
+#. language code: sma
+#: zypp/LanguageCode.cc:961
+msgid "Southern Sami"
+msgstr "दक्षिणी सामी"
+
+#. :ERI:232:
+#: zypp/CountryCode.cc:223
+msgid "Spain"
+msgstr "स्पेन"
+
+#. language code: spa es
+#: zypp/LanguageCode.cc:989
+msgid "Spanish"
+msgstr "स्पेनी"
+
+#. :LIE:438:
+#: zypp/CountryCode.cc:286
+msgid "Sri Lanka"
+msgstr "श्रीलंका"
+
+#. :SYC:690:
+#: zypp/CountryCode.cc:352
+msgid "Sudan"
+msgstr "सूडान"
+
+#: zypp/Dep.cc:102
+msgid "Suggests"
+msgstr ""
+
+#. language code: suk
+#: zypp/LanguageCode.cc:999
+msgid "Sukuma"
+msgstr "सुकूमा"
+
+#. language code: sux
+#: zypp/LanguageCode.cc:1005
+msgid "Sumerian"
+msgstr "सुमेरियाई"
+
+#. language code: sun su
+#: zypp/LanguageCode.cc:1001
+msgid "Sundanese"
+msgstr "सुंडानी"
+
+#: zypp/Dep.cc:104
+msgid "Supplements"
+msgstr ""
+
+#. :SOM:706:
+#: zypp/CountryCode.cc:363
+msgid "Suriname"
+msgstr "सूरीनाम"
+
+#. language code: sus
+#: zypp/LanguageCode.cc:1003
+msgid "Susu"
+msgstr "सुसु"
+
+#. :SVN:705:
+#: zypp/CountryCode.cc:357
+msgid "Svalbard and Jan Mayen"
+msgstr "स्वालबार्ड और जेन मायेन"
+
+#. language code: swa sw
+#: zypp/LanguageCode.cc:1007
+msgid "Swahili"
+msgstr "स्वाहिली"
+
+#. language code: ssw ss
+#: zypp/LanguageCode.cc:997
+msgid "Swati"
+msgstr "स्वाति"
+
+#. :SYR:760:
+#: zypp/CountryCode.cc:367
+msgid "Swaziland"
+msgstr "स्वाजिलैंड"
+
+#. :SDN:736:
+#: zypp/CountryCode.cc:353
+msgid "Sweden"
+msgstr "स्वीडेन"
+
+#. language code: swe sv
+#: zypp/LanguageCode.cc:1009
+msgid "Swedish"
+msgstr "स्वीडिश"
+
+#. :COG:178:
+#: zypp/CountryCode.cc:199
+msgid "Switzerland"
+msgstr "स्विट्ज़रलैंड"
+
+#. :SLV:222:
+#: zypp/CountryCode.cc:366
+msgid "Syria"
+msgstr "सीरिया"
+
+#. language code: syr
+#: zypp/LanguageCode.cc:1011
+msgid "Syriac"
+msgstr "सीरियाई"
+
+#: zypp/media/MediaException.cc:91
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr ""
+
+#: zypp/ZYppFactory.cc:394
+#, c-format, boost-format
+msgid ""
+"System management is locked by the application with pid %d (%s).\n"
+"Close this application before trying again."
+msgstr ""
+
+#. language code: tgl tl
+#: zypp/LanguageCode.cc:1031
+msgid "Tagalog"
+msgstr "टॅगलॉग"
+
+#. language code: tah ty
+#: zypp/LanguageCode.cc:1013
+msgid "Tahitian"
+msgstr "ताहितियन"
+
+#. language code: tai
+#: zypp/LanguageCode.cc:1015
+msgid "Tai (Other)"
+msgstr "ताई (अन्य)"
+
+#. :TUV:798:
+#: zypp/CountryCode.cc:382
+msgid "Taiwan"
+msgstr "ताइवान"
+
+#. language code: tgk tg
+#: zypp/LanguageCode.cc:1029
+msgid "Tajik"
+msgstr "ताज़िक"
+
+#. :THA:764:
+#: zypp/CountryCode.cc:373
+msgid "Tajikistan"
+msgstr "तजाकिस्तान"
+
+#. language code: tmh
+#: zypp/LanguageCode.cc:1051
+msgid "Tamashek"
+msgstr "तमाशेक"
+
+#. language code: tam ta
+#: zypp/LanguageCode.cc:1017
+msgid "Tamil"
+msgstr "तमिल"
+
+#. :TWN:158:
+#: zypp/CountryCode.cc:383
+msgid "Tanzania"
+msgstr "तंजानिया"
+
+#. language code: tat tt
+#: zypp/LanguageCode.cc:1019
+msgid "Tatar"
+msgstr "तातार"
+
+#. language code: tel te
+#: zypp/LanguageCode.cc:1021
+msgid "Telugu"
+msgstr "तेलगू"
+
+#. language code: ter
+#: zypp/LanguageCode.cc:1025
+msgid "Tereno"
+msgstr "तेरेनो"
+
+#. language code: tet
+#: zypp/LanguageCode.cc:1027
+msgid "Tetum"
+msgstr "तेतम"
+
+#. language code: tha th
+#: zypp/LanguageCode.cc:1033
+msgid "Thai"
+msgstr "थाई"
+
+#. :TGO:768:
+#: zypp/CountryCode.cc:372
+msgid "Thailand"
+msgstr "थाईलैंड"
+
+#: zypp/VendorSupportOptions.cc:39
+msgid "The level of support is unspecified"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:42
+msgid "The vendor does not provide support."
+msgstr ""
+
+#: zypp/base/InterProcessMutex.cc:143
+msgid "This action is being run by another program already."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1217
+#: zypp/solver/detail/SATResolver.cc:1238
+#, fuzzy
+msgid "This request will break your system!"
+msgstr "अनुरोध पहले से ही मौजूद है।"
+
+#. language code: tib bod bo
+#: zypp/LanguageCode.cc:1035 zypp/LanguageCode.cc:1037
+msgid "Tibetan"
+msgstr "तिब्बती"
+
+#. language code: tig
+#: zypp/LanguageCode.cc:1039
+msgid "Tigre"
+msgstr "तिगरे"
+
+#. language code: tir ti
+#: zypp/LanguageCode.cc:1041
+msgid "Tigrinya"
+msgstr "तिग्रिन्या"
+
+#: zypp/media/MediaException.cc:207
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr ""
+
+#. language code: tem
+#: zypp/LanguageCode.cc:1023
+msgid "Timne"
+msgstr "तिम्ने"
+
+#. language code: tiv
+#: zypp/LanguageCode.cc:1043
+msgid "Tiv"
+msgstr "तीव"
+
+#. language code: tli
+#: zypp/LanguageCode.cc:1049
+msgid "Tlingit"
+msgstr "त्लिंगित"
+
+#. :ATF:260:
+#: zypp/CountryCode.cc:371
+msgid "Togo"
+msgstr "टोगो"
+
+#. language code: tpi
+#: zypp/LanguageCode.cc:1057
+msgid "Tok Pisin"
+msgstr "तोक पिसिन"
+
+#. :TJK:762:
+#. language code: tkl
+#: zypp/CountryCode.cc:374 zypp/LanguageCode.cc:1045
+msgid "Tokelau"
+msgstr "तोकेलाउ"
+
+#. :TUN:788:
+#: zypp/CountryCode.cc:377
+msgid "Tonga"
+msgstr "टोंगा"
+
+#. language code: tog
+#: zypp/LanguageCode.cc:1053
+msgid "Tonga (Nyasa)"
+msgstr "तोंगा (न्यासा)"
+
+#. language code: ton to
+#: zypp/LanguageCode.cc:1055
+msgid "Tonga (Tonga Islands)"
+msgstr "तोंगा (तोंगा आइलैंड्स)"
+
+#. TranslatorExplanation first %s is key name, second is keyring name
+#: zypp/KeyRing.cc:522
+#, c-format, boost-format
+msgid "Tried to import not existent key %s into keyring %s"
+msgstr ""
+
+#. :TUR:792:
+#: zypp/CountryCode.cc:380
+msgid "Trinidad and Tobago"
+msgstr "त्रिनिदाद और टोबागो"
+
+#. language code: tsi
+#: zypp/LanguageCode.cc:1059
+msgid "Tsimshian"
+msgstr "त्सीमसियाई"
+
+#. language code: tso ts
+#: zypp/LanguageCode.cc:1063
+msgid "Tsonga"
+msgstr "त्सोंगा"
+
+#. language code: tsn tn
+#: zypp/LanguageCode.cc:1061
+msgid "Tswana"
+msgstr "त्सवाना"
+
+#. language code: tum
+#: zypp/LanguageCode.cc:1067
+msgid "Tumbuka"
+msgstr "तुमबुका"
+
+#. :TKM:795:
+#: zypp/CountryCode.cc:376
+msgid "Tunisia"
+msgstr "ट्यूनेशिया"
+
+#. language code: tup
+#: zypp/LanguageCode.cc:1069
+msgid "Tupi Languages"
+msgstr "तुपी भाषाएं"
+
+#. :TLS:626:
+#: zypp/CountryCode.cc:379
+msgid "Turkey"
+msgstr "टर्की"
+
+#. language code: tur tr
+#: zypp/LanguageCode.cc:1071
+msgid "Turkish"
+msgstr "तुर्कीश"
+
+#. language code: ota
+#: zypp/LanguageCode.cc:841
+msgid "Turkish, Ottoman (1500-1928)"
+msgstr "तुर्कीश, ऑट्टोमन (1500-1928)"
+
+#. language code: tuk tk
+#: zypp/LanguageCode.cc:1065
+msgid "Turkmen"
+msgstr "तुर्कमानी"
+
+#. :TKL:772:
+#: zypp/CountryCode.cc:375
+msgid "Turkmenistan"
+msgstr "तुर्कमेनिस्तान"
+
+#. :SWZ:748:
+#: zypp/CountryCode.cc:368
+msgid "Turks and Caicos Islands"
+msgstr "तुर्क और कैकस आइलैंड"
+
+#. :TTO:780:
+#. language code: tvl
+#: zypp/CountryCode.cc:381 zypp/LanguageCode.cc:1075
+msgid "Tuvalu"
+msgstr "तुवालू"
+
+#. language code: tyv
+#: zypp/LanguageCode.cc:1079
+msgid "Tuvinian"
+msgstr "तुविनियाई"
+
+#. language code: twi tw
+#: zypp/LanguageCode.cc:1077
+msgid "Twi"
+msgstr "त्वी"
+
+#. language code: udm
+#: zypp/LanguageCode.cc:1081
+msgid "Udmurt"
+msgstr "उदमर्त"
+
+#. :UKR:804:
+#: zypp/CountryCode.cc:385
+msgid "Uganda"
+msgstr "उगांडा"
+
+#. language code: uga
+#: zypp/LanguageCode.cc:1083
+msgid "Ugaritic"
+msgstr "उगारिटिक"
+
+#. language code: uig ug
+#: zypp/LanguageCode.cc:1085
+msgid "Uighur"
+msgstr "उइघुर"
+
+#. :TZA:834:
+#: zypp/CountryCode.cc:384
+msgid "Ukraine"
+msgstr "उक्रेन"
+
+#. language code: ukr uk
+#: zypp/LanguageCode.cc:1087
+msgid "Ukrainian"
+msgstr "उक्रेनी"
+
+#. language code: umb
+#: zypp/LanguageCode.cc:1089
+msgid "Umbundu"
+msgstr "उंबुंदु"
+
+#: zypp/Url.cc:300
+msgid "Unable to clone Url object"
+msgstr "Url ऑब्जेक्ट क्लोन करने में अक्षम"
+
+#: zypp/target/hal/HalContext.cc:229
+msgid "Unable to create dbus connection"
+msgstr "dbus कनेक्शन सृजित करने में अक्षम"
+
+#: zypp/target/hal/HalContext.cc:272
+msgid "Unable to initalize HAL context -- hald not running?"
+msgstr "HAL संदर्भ को आरंभ करने में अक्षम -- hald नहीं रन कर रहा?"
+
+#: zypp/Url.cc:326 zypp/Url.cc:340
+msgid "Unable to parse Url components"
+msgstr "Url अवयवों को पार्ज करने में अक्षम"
+
+#. language code: und
+#: zypp/LanguageCode.cc:1091
+msgid "Undetermined"
+msgstr "अनिर्धारित"
+
+#: zypp/RepoManager.cc:1377
+msgid "Unhandled repository type"
+msgstr ""
+
+#. :AND:020:
+#: zypp/CountryCode.cc:159
+msgid "United Arab Emirates"
+msgstr "संयुक्त अरब अमीरात"
+
+#. :GAB:266:
+#: zypp/CountryCode.cc:233
+msgid "United Kingdom"
+msgstr "यूनाइटेड किंगडम"
+
+#. :UMI:581:
+#: zypp/CountryCode.cc:387
+msgid "United States"
+msgstr "संयुक्त राज्य"
+
+#. :UGA:800:
+#: zypp/CountryCode.cc:386
+msgid "United States Minor Outlying Islands"
+msgstr "संयुक्त राज्य के छोटे दूरस्थ द्वीप"
+
+#: zypp/CountryCode.cc:50
+msgid "Unknown country: "
+msgstr "अज्ञात देश :"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
+#, fuzzy, c-format, boost-format
+msgid "Unknown error reading from '%s'"
+msgstr "फ्लोपी डिस्क पढ़ने में त्रुटि।"
+
+#: zypp/LanguageCode.cc:49
+msgid "Unknown language: "
+msgstr "अज्ञात भाषा : "
+
+#: zypp/base/StrMatcher.cc:152
+#, fuzzy, c-format, boost-format
+msgid "Unknown match mode '%s'"
+msgstr "अनंजान"
+
+#: zypp/base/StrMatcher.cc:153
+#, c-format, boost-format
+msgid "Unknown match mode '%s' for pattern '%s'"
+msgstr ""
+
+#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
+#. %1% = service name
+#. %2% = repository name
+#: zypp/RepoManager.cc:849
+#, boost-format
+msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:56
+msgid "Unknown support option. Description not available"
+msgstr ""
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2367
+msgid "Unknown type of signature"
+msgstr ""
+
+#: zypp/media/MediaUserAuth.cc:136
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr ""
+
+#: zypp/media/MediaException.cc:140
+#, fuzzy, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "अमान्य URL स्कीम '%1'"
+
+#. language code: hsb
+#: zypp/LanguageCode.cc:535
+msgid "Upper Sorbian"
+msgstr "ऊपरी सोर्बियाई"
+
+#. language code: urd ur
+#: zypp/LanguageCode.cc:1093
+msgid "Urdu"
+msgstr "उर्दू"
+
+#: zypp/url/UrlBase.cc:154
+#, c-format, boost-format
+msgid "Url scheme does not allow a %s"
+msgstr "Url स्कीम किसी %s को अनुमति नहीं देती है"
+
+#: zypp/url/UrlBase.cc:1022
+msgid "Url scheme does not allow a host component"
+msgstr "Url स्कीम किसी होस्ट अवयव को अनुमति नहीं देती है "
+
+#: zypp/url/UrlBase.cc:983
+msgid "Url scheme does not allow a password"
+msgstr "Url स्कीम किसी पासवर्ड को अनुमति नहीं देती है"
+
+#: zypp/url/UrlBase.cc:1070
+msgid "Url scheme does not allow a port"
+msgstr "Url स्कीम किसी पोर्ट को अनुमति नहीं देती है "
+
+#: zypp/url/UrlBase.cc:949
+msgid "Url scheme does not allow a username"
+msgstr "Url स्कीम किसी उपयोगकर्ता नाम को अनुमति नहीं देती है"
+
+#: zypp/url/UrlBase.cc:824
+msgid "Url scheme is a required component"
+msgstr "Url स्कीम एक आवश्यक अवयव है"
+
+#: zypp/url/UrlBase.cc:1012
+msgid "Url scheme requires a host component"
+msgstr "Url स्कीम को एक होस्ट अवयव की आवश्यकता है"
+
+#: zypp/url/UrlBase.cc:1098
+msgid "Url scheme requires path name"
+msgstr "Url स्कीम को पथ नाम की आवश्यकता है"
+
+#. :USA:840:
+#: zypp/CountryCode.cc:388
+msgid "Uruguay"
+msgstr "उरुग्वे"
+
+#. language code: uzb uz
+#: zypp/LanguageCode.cc:1095
+msgid "Uzbek"
+msgstr "उज़्बेक"
+
+#. :URY:858:
+#: zypp/CountryCode.cc:389
+msgid "Uzbekistan"
+msgstr "उज़बेकिस्तान"
+
+#. language code: vai
+#: zypp/LanguageCode.cc:1097
+msgid "Vai"
+msgstr "वाइ"
+
+#. we will throw this later if no URL checks out fine
+#: zypp/RepoManager.cc:1082
+msgid "Valid metadata not found at specified URL"
+msgid_plural "Valid metadata not found at specified URLs"
+msgstr[0] ""
+msgstr[1] ""
+
+#. :VNM:704:
+#: zypp/CountryCode.cc:396
+msgid "Vanuatu"
+msgstr "वनुआतू"
+
+#. language code: ven ve
+#: zypp/LanguageCode.cc:1099
+msgid "Venda"
+msgstr "वेंदा"
+
+#. :VCT:670:
+#: zypp/CountryCode.cc:392
+msgid "Venezuela"
+msgstr "वेनेजुएला"
+
+#. :VIR:850:
+#: zypp/CountryCode.cc:395
+msgid "Vietnam"
+msgstr "वियतनाम"
+
+#. language code: vie vi
+#: zypp/LanguageCode.cc:1101
+msgid "Vietnamese"
+msgstr "वियतनामी"
+
+#. :VGB:092:
+#: zypp/CountryCode.cc:394
+msgid "Virgin Islands, U.S."
+msgstr "वर्जिन आइलैंड, यू.एस."
+
+#: zypp/media/MediaCurl.cc:1008
+msgid ""
+"Visit the Novell Customer Center to check whether your registration is valid "
+"and has not expired."
+msgstr ""
+
+#. language code: vol vo
+#: zypp/LanguageCode.cc:1103
+msgid "Volapuk"
+msgstr "वोलापुक"
+
+#. language code: vot
+#: zypp/LanguageCode.cc:1105
+msgid "Votic"
+msgstr "वोटिक"
+
+#. language code: wak
+#: zypp/LanguageCode.cc:1107
+msgid "Wakashan Languages"
+msgstr "वाकाशान भाषाएं"
+
+#. language code: wal
+#: zypp/LanguageCode.cc:1109
+msgid "Walamo"
+msgstr "वलामो"
+
+#. :VUT:548:
+#: zypp/CountryCode.cc:397
+msgid "Wallis and Futuna"
+msgstr "वालिस और फ्यूतूना"
+
+#. language code: wln wa
+#: zypp/LanguageCode.cc:1121
+msgid "Walloon"
+msgstr "वलून"
+
+#. language code: war
+#: zypp/LanguageCode.cc:1111
+msgid "Waray"
+msgstr "वरे"
+
+#. language code: was
+#: zypp/LanguageCode.cc:1113
+msgid "Washo"
+msgstr "वाशो"
+
+#. language code: wel cym cy
+#: zypp/LanguageCode.cc:1115 zypp/LanguageCode.cc:1117
+msgid "Welsh"
+msgstr "वेल्श"
+
+#. :EGY:818:
+#: zypp/CountryCode.cc:221
+msgid "Western Sahara"
+msgstr "पश्चिमी सहारा"
+
+#. language code: wol wo
+#: zypp/LanguageCode.cc:1123
+msgid "Wolof"
+msgstr "वोलोफ"
+
+#. language code: xho xh
+#: zypp/LanguageCode.cc:1127
+msgid "Xhosa"
+msgstr "क्होसा"
+
+#. language code: sah
+#: zypp/LanguageCode.cc:909
+msgid "Yakut"
+msgstr "याकूत"
+
+#. language code: yao
+#: zypp/LanguageCode.cc:1129
+msgid "Yao"
+msgstr "याओ"
+
+#. language code: yap
+#: zypp/LanguageCode.cc:1131
+msgid "Yapese"
+msgstr "यापी"
+
+#. :WSM:882:
+#: zypp/CountryCode.cc:399
+msgid "Yemen"
+msgstr "यमन"
+
+#. language code: yid yi
+#: zypp/LanguageCode.cc:1133
+msgid "Yiddish"
+msgstr "यिद्दिश"
+
+#. language code: yor yo
+#: zypp/LanguageCode.cc:1135
+msgid "Yoruba"
+msgstr "योरूबा"
+
+#. language code: ypk
+#: zypp/LanguageCode.cc:1137
+msgid "Yupik Languages"
+msgstr "यूपिक भाषाएं"
+
+#. :ZAF:710:
+#: zypp/CountryCode.cc:402
+msgid "Zambia"
+msgstr "जांबिया"
+
+#. language code: znd
+#: zypp/LanguageCode.cc:1145
+msgid "Zande"
+msgstr "ज़ेंदे"
+
+#. language code: zap
+#: zypp/LanguageCode.cc:1139
+msgid "Zapotec"
+msgstr "ज़ापोटेक"
+
+#. language code: zen
+#: zypp/LanguageCode.cc:1141
+msgid "Zenaga"
+msgstr "ज़ेनागा"
+
+#. language code: zha za
+#: zypp/LanguageCode.cc:1143
+msgid "Zhuang"
+msgstr "झुआंग"
+
+#. :ZMB:894:
+#: zypp/CountryCode.cc:403
+msgid "Zimbabwe"
+msgstr "जिम्बाबवे"
+
+#. language code: zul zu
+#: zypp/LanguageCode.cc:1147
+msgid "Zulu"
+msgstr "जुलु"
+
+#. language code: zun
+#: zypp/LanguageCode.cc:1149
+msgid "Zuni"
+msgstr "ज़ुनी"
+
+#: zypp/repo/PackageProvider.cc:515
+msgid "applydeltarpm check failed."
+msgstr "applydeltarpm जांच नाकाम रही।"
+
+#: zypp/repo/PackageProvider.cc:525
+msgid "applydeltarpm failed."
+msgstr "applydeltarpm नाकाम रहा।"
+
+#: zypp/solver/detail/SATResolver.cc:1325
+#, c-format, boost-format
+msgid "architecture change of %s to %s"
+msgstr ""
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#, fuzzy, c-format, boost-format
+msgid "break %s by ignoring some of its dependencies"
+msgstr "सिर्फ यहां पर इस आवश्यकता की अनदेखी कर दें"
+
+#: zypp/solver/detail/SATResolver.cc:1017
+#, fuzzy, c-format, boost-format
+msgid "cannot install both %s and %s"
+msgstr "%s का संस्थापन नहीं कर सकता"
+
+#: zypp/solver/detail/SATResolver.cc:986
+#, fuzzy
+msgid "conflicting requests"
+msgstr "के लिए कनेक्शन आवेदन : "
+
+#: zypp/target/rpm/RpmDb.cc:2344
+#, c-format, boost-format
+msgid "created backup %s"
+msgstr "बैकअप %s सृजित"
+
+#: zypp/solver/detail/SATResolver.cc:1354
+#, fuzzy, c-format, boost-format
+msgid "deinstallation of %s"
+msgstr "अधिष्ठापन"
+
+#: zypp/solver/detail/SATResolver.cc:1070
+#, fuzzy
+msgid "deleted providers: "
+msgstr "कोई नहीं %s प्रदान करता"
+
+#: zypp/solver/detail/SATResolver.cc:1245
+#, fuzzy, c-format, boost-format
+msgid "do not ask to delete all solvables providing %s"
+msgstr "संबंधित रिजॉल्वेबल को संस्थापित या मिटाएं नहीं"
+
+#: zypp/solver/detail/SATResolver.cc:1223
+#, fuzzy, c-format, boost-format
+msgid "do not ask to install a solvable providing %s"
+msgstr "%s का कोई संस्थापनयोग्य प्रदाता नहीं है"
+
+#: zypp/solver/detail/SATResolver.cc:1146
+#: zypp/solver/detail/SATResolver.cc:1182
+#, c-format, boost-format
+msgid "do not install %s"
+msgstr "%s संस्थापित न करें"
+
+#: zypp/solver/detail/SATResolver.cc:1258
+#, c-format, boost-format
+msgid "do not install most recent version of %s"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1318
+#, fuzzy, c-format, boost-format
+msgid "downgrade of %s to %s"
+msgstr "%s से %s तक अपडेट कर रहा है"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+#, fuzzy
+msgid "generally ignore of some dependencies"
+msgstr "सिर्फ यहां पर इस आवश्यकता की अनदेखी कर दें"
+
+#: zypp/solver/detail/SATResolver.cc:1218
+#: zypp/solver/detail/SATResolver.cc:1239
+msgid "ignore the warning of a broken system"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1334
+#, c-format, boost-format
+msgid ""
+"install %s (with vendor change)\n"
+"  %s  -->  %s"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1284
+#, fuzzy, c-format, boost-format
+msgid "install %s despite the inferior architecture"
+msgstr "%s को संस्थापित करें यद्यपि यह स्थापत्य को बदल देगा"
+
+#: zypp/solver/detail/SATResolver.cc:1298
+#, c-format, boost-format
+msgid "install %s from excluded repository"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1032
+#, fuzzy, c-format, boost-format
+msgid "installed %s obsoletes %s provided by %s"
+msgstr "%s को %s पुराना कर देता है"
+
+#: zypp/VendorSupportOptions.cc:31
+msgid "invalid"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1161
+#: zypp/solver/detail/SATResolver.cc:1203
+#, c-format, boost-format
+msgid "keep %s"
+msgstr "%s रखें"
+
+#: zypp/solver/detail/SATResolver.cc:1279
+#, fuzzy, c-format, boost-format
+msgid "keep %s despite the inferior architecture"
+msgstr "%s ही %s प्रदान करता है, लेकिन इसके पास कोई और स्थापत्य है।"
+
+#: zypp/solver/detail/SATResolver.cc:1293
+#, fuzzy, c-format, boost-format
+msgid "keep obsolete %s"
+msgstr "%s को %s पुराना कर देता है"
+
+#: zypp/target/hal/HalContext.cc:242
+msgid "libhal_ctx_new: Can't create libhal context"
+msgstr "libhal_ctx_new: libhal संदर्भ को सृजित नहीं कर सकता"
+
+#: zypp/target/hal/HalContext.cc:257
+msgid "libhal_set_dbus_connection: Can't set dbus connection"
+msgstr "libhal_set_dbus_connection : dbus कनेक्शन को सेट नहीं कर सकता"
+
+#: zypp/solver/detail/SATResolver.cc:1012
+#, fuzzy, c-format, boost-format
+msgid "nothing provides %s needed by %s"
+msgstr "%s को %s की आवश्यकता है"
+
+#: zypp/solver/detail/SATResolver.cc:992
+#, fuzzy, c-format, boost-format
+msgid "nothing provides requested %s"
+msgstr "कोई नहीं %s प्रदान करता"
+
+#: zypp/solver/detail/SATResolver.cc:996
+#, fuzzy, c-format, boost-format
+msgid "package %s does not exist"
+msgstr "प्रमाण पत्र %1 मौजूद नहीं है।"
+
+#: zypp/solver/detail/SATResolver.cc:983
+#, fuzzy, c-format, boost-format
+msgid "problem with installed package %s"
+msgstr "पैकेजों को असंस्थापित करने का कमांड"
+
+#: zypp/solver/detail/SATResolver.cc:1166
+#, fuzzy, c-format, boost-format
+msgid "remove lock to allow installation of %s"
+msgstr "%s संस्थापित न करें"
+
+#: zypp/solver/detail/SATResolver.cc:1141
+#, c-format, boost-format
+msgid "remove lock to allow removal of %s"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1343
+#, c-format, boost-format
+msgid "replacement of %s with %s"
+msgstr ""
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2029
+#, fuzzy, c-format, boost-format
+msgid "rpm created %s as %s, but it was impossible to determine the difference"
+msgstr "rpm ने %s के  रूप में %s सृजित किया लेकिन अंतर निर्धारित करना असंभव था"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2031
+#, c-format, boost-format
+msgid ""
+"rpm created %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr ""
+"rpm ने %s के  रूप में %s सृजित किया।\n"
+"यहां अंतर की पहली 25 पंक्तियां हैं :\n"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2024
+#, fuzzy, c-format, boost-format
+msgid "rpm saved %s as %s, but it was impossible to determine the difference"
+msgstr "rpm ने %s के  रूप में %s सहेजा लेकिन अंतर निर्धारित करना असंभव था "
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2026
+#, c-format, boost-format
+msgid ""
+"rpm saved %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr ""
+"rpm ने %s के  रूप में %s सहेजा।\n"
+"यहां अंतर की पहली 25 पंक्तियां हैं :\n"
+
+#: zypp/solver/detail/SATResolver.cc:1036
+#, fuzzy, c-format, boost-format
+msgid "solvable %s conflicts with %s provided by itself"
+msgstr "%s का %s से टकराव है "
+
+#: zypp/solver/detail/SATResolver.cc:989
+#, fuzzy
+msgid "some dependency problem"
+msgstr "निर्भरता समस्याओं के कारण %s का संस्थापन नहीं कर सकता"
+
+#. translators: 'uninstallable' == 'not installable'
+#: zypp/solver/detail/SATResolver.cc:1084
+#, fuzzy
+msgid "uninstallable providers: "
+msgstr "%s का कोई संस्थापनयोग्य प्रदाता नहीं है"
+
+#: zypp/VendorSupportOptions.cc:14
+msgid "unknown"
+msgstr "अन्जान"
+
+#: zypp/VendorSupportOptions.cc:17
+msgid "unsupported"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1000
+msgid "unsupported request"
+msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "There is no resource available which supports this requirement."
+#~ msgstr ""
+#~ "\n"
+#~ "कोई स्रोत उपलब्ध नहीं है जो इस आवश्यकता को समर्थन दे।"
+
+#~ msgid ""
+#~ "\n"
+#~ "These resolvables will be deleted from the system."
+#~ msgstr ""
+#~ "\n"
+#~ "ये रिजॉल्वेबल्स सिस्टम से मिटा दिए जाएंगे।"
+
+#~ msgid " Error!"
+#~ msgstr "त्रुटि!"
+
+#~ msgid " Important!"
+#~ msgstr "महत्वपूर्ण!"
+
+#~ msgid "%s cannot be installed due to missing dependencies"
+#~ msgstr "%s को छूटी हुई निर्भरताओं के कारण संस्थापित नहीं किया जा सका"
+
+#~ msgid "%s conflicts with other resolvables"
+#~ msgstr "%s का अन्य रिजॉल्वेबल्स से टकराव है"
+
+#~ msgid ""
+#~ "%s conflicts with:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s का इनसे टकराव है :\n"
+#~ "%s"
+
+#~ msgid "%s depended on %s"
+#~ msgstr "%s निर्भर है %s पर"
+
+#~ msgid "%s depends on %s"
+#~ msgstr "%s पर %s निर्भर करता है "
+
+#~ msgid "%s depends on other resolvables"
+#~ msgstr "%s अन्य रिजॉल्वेबल्स पर निर्भर करता है"
+
+#~ msgid "%s depends on:%s"
+#~ msgstr "%s इन पर निर्भर करता है :%s"
+
+#, fuzzy
+#~ msgid "%s fulfills dependencies of %s but will be kept on your system"
+#~ msgstr "%s की निर्भरताएं %s पूरी करता है लेकिन इसे आपके सिस्टम पर रखा जाएगा"
+
+#, fuzzy
+#~ msgid "%s fulfills dependencies of %s but will be uninstalled"
+#~ msgstr "%s की निर्भरताएं %s पूरी करता है लेकिन इसे असंस्थापित कर दिया जाएगा"
+
+#~ msgid "%s has missing dependencies"
+#~ msgstr "%s की छूटी हुई निर्भरताएं हैं"
+
+#~ msgid "%s has unfulfilled requirements"
+#~ msgstr "%s के पास ऐसी आवश्यकताएं हैं जो संतुष्ट नहीं हुई हैं"
+
+#~ msgid "%s install failed"
+#~ msgstr "%s संस्थापन असफल "
+
+#~ msgid "%s installed ok"
+#~ msgstr "%s संस्थापन ठीक"
+
+#, fuzzy
+#~ msgid "%s is enhanced by %s"
+#~ msgstr "%s से %s को प्रतिस्थापित किया जाता है"
+
+#, fuzzy
+#~ msgid "%s is lacking the requirement %s"
+#~ msgstr "%s में आवश्यकता %s छूटी हुई है"
+
+#~ msgid "%s is needed by other resolvables"
+#~ msgstr "अन्य रिजॉल्वेबल्स को %s की आवश्यकता है"
+
+#~ msgid ""
+#~ "%s is needed by:\n"
+#~ "%s"
+#~ msgstr "%s की इनको आवश्यकता है :%s"
+
+#~ msgid "%s is not installed and has been marked as uninstallable"
+#~ msgstr ""
+#~ "%s संस्थापित नहीं किया गया है और अनइंस्टाल योग्य के रूप में चिह्नित कर दिया गया है"
+
+#, fuzzy
+#~ msgid "%s is recommended by %s"
+#~ msgstr "%s को %s की आवश्यकता है"
+
+#~ msgid "%s is replaced by %s"
+#~ msgstr "%s से %s को प्रतिस्थापित किया जाता है"
+
+#, fuzzy
+#~ msgid ""
+#~ "%s is required by another installed resolvable, so it won't be unlinked."
+#~ msgstr ""
+#~ "संस्थापित हो चुके किसी अन्य रिजॉल्वेबल को %s की आवश्यकता है, अतः यह अनलिंक नहीं किया "
+#~ "जा सकता।"
+
+#, fuzzy
+#~ msgid ""
+#~ "%s is required by another resolvable selected for installation, so it "
+#~ "won't be unlinked."
+#~ msgstr ""
+#~ "संस्थापित हो चुके किसी अन्य रिजॉल्वेबल को %s की आवश्यकता है, अतः यह अनलिंक नहीं किया "
+#~ "जा सकता।"
+
+#, fuzzy
+#~ msgid ""
+#~ "%s is scheduled to be installed, but this is impossible due to dependency "
+#~ "problems."
+#~ msgstr ""
+#~ "%s को संस्थापित किया जाना निर्धारित है, लेकिन निर्भरता समस्याओं के कारण यह संभव नहीं "
+#~ "है।"
+
+#, fuzzy
+#~ msgid "%s is suggested by %s"
+#~ msgstr "%s को %s की आवश्यकता है"
+
+#, fuzzy
+#~ msgid "%s is supplemented by %s"
+#~ msgstr "%s को %s की आवश्यकता है"
+
+#~ msgid "%s is uninstallable due to conflicts with %s"
+#~ msgstr "%s असंस्थापनीय है क्योंकि इसका %s के साथ टकराव है"
+
+#, fuzzy
+#~ msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
+#~ msgstr ""
+#~ "%s पुराना कर देता है %s को। लेकिन %s को मिटाया नहीं जा सकता क्योंकि यह लॉक है।"
+
+#~ msgid "%s obsoletes other resolvables"
+#~ msgstr "%s अन्य रिजॉल्वेबल्स को पुराना कर देता है"
+
+#~ msgid "%s part of %s"
+#~ msgstr "%s का %s भाग"
+
+#~ msgid "%s provides %s,  but is scheduled to be kept."
+#~ msgstr "%s ही %s प्रदान करता है, लेकिन इसे रखा जाना निर्धारित है।"
+
+#~ msgid "%s provides %s, but another version of that %s is already installed."
+#~ msgstr ""
+#~ "%s ही %s प्रदान करता है, लेकिन इस %s का एक अन्य संस्करण पहले ही संस्थापित है। "
+
+#, fuzzy
+#~ msgid "%s provides %s, but has another vendor (%s)."
+#~ msgstr "%s ही %s प्रदान करता है, लेकिन इसके पास कोई और स्थापत्य है।"
+
+#~ msgid "%s provides %s, but is scheduled to be uninstalled."
+#~ msgstr "%s ही %s प्रदान करता है, लेकिन इसे असंस्थापित करना निर्धारित है।"
+
+#~ msgid "%s provides %s, but it is locked."
+#~ msgstr "%s ही %s प्रदान करता है, लेकिन यह लॉक है।"
+
+#~ msgid ""
+#~ "%s provides %s, but it is uninstallable.  Try installing it on its own "
+#~ "for more details."
+#~ msgstr ""
+#~ "%s ही %s प्रदान करता है, लेकिन यह असंस्थापनयोग्य है। अधिक जानकारी के लिए इसे स्वयं "
+#~ "ही संस्थापित करने की कोशिश करें।"
+
+#, fuzzy
+#~ msgid ""
+#~ "%s provides this dependency, but would change the architecture of the "
+#~ "installed item"
+#~ msgstr "यह निर्भरता %s प्रदान करता है लेकिन यह संस्थापित वस्तु केस्थापत्य को बदल देगा"
+
+#, fuzzy
+#~ msgid ""
+#~ "%s provides this dependency, but would change the vendor of the installed "
+#~ "item"
+#~ msgstr "यह निर्भरता %s प्रदान करता है लेकिन यह संस्थापित वस्तु केस्थापत्य को बदल देगा"
+
+#~ msgid "%s remove failed"
+#~ msgstr "%s स्थानांतरण असफल रहा"
+
+#~ msgid "%s remove ok"
+#~ msgstr "%s स्थानांतरण ठीक"
+
+#~ msgid "%s replaced by %s"
+#~ msgstr "%s से %s को प्रतिस्थापित किया गया"
+
+#, fuzzy
+#~ msgid "%s will be deleted by the user.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "ये रिजॉल्वेबल्स सिस्टम से मिटा दिए जाएंगे।"
+
+#, fuzzy
+#~ msgid "%s will be installed by the user.\n"
+#~ msgstr "%s को असंस्थापित नहीं किया जाएगा क्योंकि इसकी आवश्यकता अब भी है"
+
+#, fuzzy
+#~ msgid "%s will not be uninstalled, because it is still required"
+#~ msgstr "%s को असंस्थापित नहीं किया जाएगा क्योंकि इसकी आवश्यकता अब भी है"
+
+#~ msgid ", Action: "
+#~ msgstr ", कार्रवाई :"
+
+#~ msgid ", Trigger: "
+#~ msgstr ", ट्रिगर :"
+
+#, fuzzy
+#~ msgid ""
+#~ "A conflict over %s (%s) requires the removal of %s which is scheduled for "
+#~ "installation"
+#~ msgstr "%s (%s) पर टकराव के लिए संस्थापित होने वाले %s को हटाए जाने की आवश्यकता है"
+
+#, fuzzy
+#~ msgid ""
+#~ "Can't install %s since it is already marked as needed to be uninstalled"
+#~ msgstr ""
+#~ "%s को संस्थापित नहीं किया जा सकता क्योंकि इसे पहले ही असंस्थापित करने की जरूरत के रूप "
+#~ "में चिन्हित किया गया है"
+
+#, fuzzy
+#~ msgid ""
+#~ "Can't install %s, because %s is already marked as needed to for "
+#~ "installation"
+#~ msgstr ""
+#~ "%s को संस्थापित नहीं कर सकता, क्योंकि %s को पहले ही संस्थापित करने की जरूरत के रूप में "
+#~ "चिन्हित किया गया है"
+
+#, fuzzy
+#~ msgid "Can't install %s, because it does not apply to this system."
+#~ msgstr "%s को संस्थापित नहीं कर सकता क्योंकि यह इस सिस्टम पर लागू नहीं होता"
+
+#, fuzzy
+#~ msgid "Can't open solv-file: "
+#~ msgstr "फाइल %1 को नहीं खोल सकता है।"
+
+#~ msgid "Can't satisfy requirement %s for %s"
+#~ msgstr "%s के लिए %s आवाश्यकताएं संतुष्ट नहीं कर सकता"
+
+#~ msgid "Cannot install %s to fulfil the dependencies of %s"
+#~ msgstr "%s की निर्भरताओं को पूरा करने के लिए %s को संस्थापित नहीं कर सकता"
+
+#, fuzzy
+#~ msgid "Cannot install %s to fulfill the dependencies of %s"
+#~ msgstr "%s की निर्भरताओं को पूरा करने के लिए %s को संस्थापित नहीं कर सकता"
+
+#, fuzzy
+#~ msgid "Cannot install %s, because it is conflicting"
+#~ msgstr "%s को संस्थापित नहीं कर सकता क्योंकि यह टकराव पैदा करता है"
+
+#, fuzzy
+#~ msgid "Cannot install %s, because it is conflicting with %s"
+#~ msgstr "%s का संस्थापन नहीं कर सकता क्योंकि इसका %s के साथ टकराव है"
+
+#~ msgid "Child of"
+#~ msgstr "की संतति"
+
+#, fuzzy
+#~ msgid "Do not install or delete the resolvables concerned"
+#~ msgstr "संबंधित रिजॉल्वेबल को संस्थापित या मिटाएं नहीं"
+
+#, fuzzy
+#~ msgid ""
+#~ "Due to the problems described above/below, this resolution will not solve "
+#~ "all dependencies"
+#~ msgstr ""
+#~ "इस रिजॉल्यूशन के ऊपर/नीचे वर्णित शेष समस्याएं सभी निर्भरताओं कासमाधान नहीं करेंगी"
+
+#, fuzzy
+#~ msgid "Error reading solv-file: "
+#~ msgstr "सेक्टर %u पढ़ने में त्रुटि।"
+
+#~ msgid "Establishing %s"
+#~ msgstr "%s को स्थापित कर रहा है"
+
+#, fuzzy
+#~ msgid "Failed to download %s from %s"
+#~ msgstr "%s - %s को खोलने में अक्षम\n"
+
+#~ msgid ""
+#~ "File %s does not have a checksum.\n"
+#~ "Use the file anyway?"
+#~ msgstr ""
+#~ "फाइल %s में कोई चेकसम नहीं है।\n"
+#~ "फिर भी फाइल का प्रयोग करें?"
+
+#~ msgid ""
+#~ "File %s failed integrity check with the folowing key:\n"
+#~ "%s|%s|%s\n"
+#~ "Use the file anyway?"
+#~ msgstr ""
+#~ "फाइल %s निम्नलिखित कुंजी के साथ एकीकरण जांच में नाकाम रही :\n"
+#~ "%s|%s|%s\n"
+#~ "फिर भी फाइल का प्रयोग करें?"
+
+#~ msgid ""
+#~ "File %s has an invalid checksum.\n"
+#~ "Expected %s, found %s\n"
+#~ "Use the file anyway?"
+#~ msgstr ""
+#~ "फाइल %s में एक अमान्य चेकसम है।\n"
+#~ "%s की उम्मीद थी, %s मिला\n"
+#~ "फिर भी फाइल का प्रयोग करें?"
+
+#~ msgid ""
+#~ "File %s has an unknown checksum %s.\n"
+#~ "Use the file anyway?"
+#~ msgstr ""
+#~ "फाइल %s में एक अमान्य चेकसम %s है।\n"
+#~ "फिर भी फाइल का प्रयोग करें?"
+
+#~ msgid ""
+#~ "File %s is not signed.\n"
+#~ "Use it anyway?"
+#~ msgstr ""
+#~ "फाइल %s साइन की हुई नहीं है।\n"
+#~ "फिर भी इसका प्रयोग करें?"
+
+#~ msgid ""
+#~ "File %s is signed with an unknown key:\n"
+#~ "%s|%s|%s\n"
+#~ "Use the file anyway?"
+#~ msgstr ""
+#~ "फाइल %s को एक अज्ञात कुंजी से साइन किया गया है :\n"
+#~ "%s|%s|%s\n"
+#~ "फिर भी फाइल का प्रयोग करें?"
+
+#~ msgid "Ignore that %s is already set to install"
+#~ msgstr "%s संस्थापित होने के तैयार है इसको अनदेखा करें"
+
+#~ msgid "Ignore the obsolete %s in %s"
+#~ msgstr "%s को %s में हटाए जाने को अनदेखा करें"
+
+#~ msgid "Ignore this conflict of %s"
+#~ msgstr "%s के इस टकराव की अनदेखी कर दें"
+
+#~ msgid "Ignore this requirement just here"
+#~ msgstr "सिर्फ यहां पर इस आवश्यकता की अनदेखी कर दें"
+
+#, fuzzy
+#~ msgid "Install %s although it would change the vendor"
+#~ msgstr "%s को संस्थापित करें यद्यपि यह स्थापत्य को बदल देगा"
+
+#~ msgid "Install missing resolvables"
+#~ msgstr "छूटे रिजॉल्वेबल्स को संस्थापित करें"
+
+#~ msgid "Installing %s"
+#~ msgstr "%s को संस्थापित कर रहा है"
+
+#~ msgid "Invalid information"
+#~ msgstr "अमान्य सूचना"
+
+#, fuzzy
+#~ msgid "Invalid user name or password."
+#~ msgstr "कूटशब्द बदलो"
+
+#~ msgid "Keep resolvables"
+#~ msgstr "रिजॉल्वेबल्स रखें"
+
+#~ msgid "Marking %s as uninstallable due to conflicts over %s"
+#~ msgstr "%s पर टकराव होने के कारण %s को असंस्थापनीय के रूप में चिन्हित किया जा रहा है"
+
+#~ msgid "Marking resolvable %s as uninstallable"
+#~ msgstr "रिजॉल्वेबल %s को अनइंस्टॉलेबल के रूप में चिन्हित करना"
+
+#~ msgid "Marking this resolution attempt as invalid."
+#~ msgstr "इस रिजॉल्यूशन प्रयास को अमान्य के रूप में चिन्हित करना"
+
+#~ msgid "No need to install %s"
+#~ msgstr "%s को संस्थापित करने की आवश्यकता नहीं है"
+
+#~ msgid "Path Parameter parsing not supported for this URL"
+#~ msgstr "इस URL के लिए पथ मानक पार्जिंग समर्थित नहीं है"
+
+#~ msgid "Path parameter parsing not supported for this URL"
+#~ msgstr "पथ मानक पार्जिंग इस URL के लिए समर्थित नहीं है"
+
+#~ msgid "Resolvable"
+#~ msgstr "रिजॉल्वेबल"
+
+#~ msgid "Serbia and Montenegro"
+#~ msgstr "सर्बिया और मोंटेनेग्रो"
+
+#~ msgid "Skipping %s: already installed"
+#~ msgstr "%s को छोड़ दें : पहले ही संस्थापित हो गया है"
+
+#~ msgid "Software management is already running."
+#~ msgstr "सॉफ्टवेयर प्रबंधन पहले से ही रन कर रहा है।"
+
+#, fuzzy
+#~ msgid "There are no alternative providers of %s installed"
+#~ msgstr "%s का कोई वैकल्पिक संस्थापित प्रदाता नहीं है"
+
+#~ msgid "This would invalidate %s."
+#~ msgstr "यह %s को अमान्य कर देगा।"
+
+#, fuzzy
+#~ msgid "Unknown Distribution"
+#~ msgstr "अज्ञात सूची विकल्प"
+
+#~ msgid "Unlock these resolvables"
+#~ msgstr "इन रिजॉल्वेबल्स को अनलॉक करें"
+
+#~ msgid ""
+#~ "Untrusted key found:\n"
+#~ "%s|%s|%s\n"
+#~ "Trust key?"
+#~ msgstr ""
+#~ "गैर-भरोसेमंद कुंजी मिली है :\n"
+#~ "%s|%s|%s\n"
+#~ "कुंजी पर भरोसा करें?"
+
+#, fuzzy
+#~ msgid "Upgrading to %s to avoid removing %s is not possible."
+#~ msgstr "%s को हटाने से बचाने के लिए %s को अपग्रेड करना संभव नहीं।"
+
+#~ msgid "atom"
+#~ msgstr "परमाणु"
+
+#~ msgid "delete %s"
+#~ msgstr "%s मिटाएं"
+
+#, fuzzy
+#~ msgid "do not keep %s installed"
+#~ msgstr "इंस्टाल नहीं हुआ"
+
+#~ msgid "for %s"
+#~ msgstr "%s के लिए"
+
+#~ msgid "for requiring %s for %s when upgrading %s"
+#~ msgstr "%s को अपग्रेड करते समय %s हेतु %s की आवश्यकता के लिए"
+
+#~ msgid "from %s"
+#~ msgstr "%s से"
+
+#, fuzzy
+#~ msgid "ignore some dependencies of %s"
+#~ msgstr "निर्भरता हल नहीं की जा सकती"
+
+#~ msgid "install %s"
+#~ msgstr "%s को संस्थापित करें"
+
+#~ msgid "message"
+#~ msgstr "संदेश"
+
+#~ msgid "package"
+#~ msgstr "पैकेज"
+
+#~ msgid "patch"
+#~ msgstr "पैच"
+
+#~ msgid "pattern"
+#~ msgstr "पैटर्न"
+
+#~ msgid "product"
+#~ msgstr "उत्पाद"
+
+#~ msgid "rpm output:"
+#~ msgstr "rpm आउटपुट :"
+
+#~ msgid "script"
+#~ msgstr "स्क्रिप्ट"
+
+#~ msgid "selection"
+#~ msgstr "चयन"
+
+#~ msgid "system"
+#~ msgstr "सिस्टम"
+
+#~ msgid "unlock %s"
+#~ msgstr "%s को अनलॉक करें"
+
+#~ msgid "unlock all resolvables"
+#~ msgstr "समस्त रिजॉल्वेबल्स को अनलॉक करें"
