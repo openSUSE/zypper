@@ -36,7 +36,7 @@ struct CliMatchPatch
   {}
 
   /** Ctor: Filter according to zypper CLI options */
-  CliMatchPatch( const Zypper & zypper )
+  CliMatchPatch( Zypper & zypper )
   {
     for ( const auto & val : zypper.cOptValues( "date" ) )
     {
@@ -49,11 +49,25 @@ struct CliMatchPatch
     }
     for ( const auto & val : zypper.cOptValues( "category" ) )
     {
-      str::split( val, std::back_inserter(_categories), "," );
+      str::split( str::toLower( std::string(val) ), std::inserter(_categories, _categories.end()), "," );
+      for ( const std::string & cat : _categories )
+      {
+	if ( Patch::categoryEnum( cat ) == Patch::CAT_OTHER )
+	{
+	  zypper.out().warning( str::Format(_("Suspicious category filter value '%1%'.")) % cat );
+	}
+      }
     }
     for ( const auto & val : zypper.cOptValues( "severity" ) )
     {
-      str::split( val, std::back_inserter(_severities), "," );
+      str::split( str::toLower( std::string(val) ), std::inserter(_severities, _severities.end()), "," );
+      for ( const std::string & sev : _severities )
+      {
+	if ( Patch::severityFlag( sev ) == Patch::SEV_OTHER )
+	{
+	  zypper.out().warning( str::Format(_("Suspicious severity filter value '%1%'.")) % sev );
+	}
+      }
     }
   }
 
@@ -82,10 +96,11 @@ struct CliMatchPatch
   bool operator()( const Patch::constPtr & patch_r ) const
   { return missmatch( patch_r ) == Missmatch::None; }
 
-public:
+private:
+  friend class SolverRequester;	// SolverRequester::updatePatches uses _dateBefore
   Date _dateBefore;
-  std::vector<std::string> _categories;
-  std::vector<std::string> _severities;
+  std::set<std::string> _categories;
+  std::set<std::string> _severities;
 };
 
 
