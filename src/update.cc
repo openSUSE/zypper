@@ -196,9 +196,9 @@ inline std::string i18nPatchStatusAsString( const PoolItem & pi_r )
 {
   switch ( pi_r.status().validate() )
   {
-    case ResStatus::BROKEN:	return pi_r.isUnwanted() ? ColorString( _("unwanted"), ColorContext::HIGHLIGHT ).str()
+    case ResStatus::BROKEN:		return pi_r.isUnwanted() ? ColorString( _("unwanted"), ColorContext::HIGHLIGHT ).str()
 								 : _("needed");	break;
-    case ResStatus::SATISFIED:	return _("applied");	break;
+    case ResStatus::SATISFIED:		return _("applied");	break;
     case ResStatus::NONRELEVANT:	return _("not needed");	break;
 
     case ResStatus::UNDETERMINED:	// fall through
@@ -212,9 +212,9 @@ inline const char *const xml_patchStatusAsString( const PoolItem & pi_r )
 {
   switch ( pi_r.status().validate() )
   {
-    case ResStatus::BROKEN:	return pi_r.isUnwanted() ? "unwanted"
+    case ResStatus::BROKEN:		return pi_r.isUnwanted() ? "unwanted"
 								 : "needed";	break;
-    case ResStatus::SATISFIED:	return "applied";	break;
+    case ResStatus::SATISFIED:		return "applied";	break;
     case ResStatus::NONRELEVANT:	return "not-needed";	break;
 
     case ResStatus::UNDETERMINED:	// fall through
