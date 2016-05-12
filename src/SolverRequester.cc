@@ -9,7 +9,6 @@
 /** \file SolverRequester.cc
  *
  */
-
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/LogTools.h>
 
@@ -21,13 +20,106 @@
 #include <zypp/Patch.h>
 #include <zypp/ui/Selectable.h>
 
-#include "misc.h"
 #include "Zypper.h"
 #include "SolverRequester.h"
 
 // libzypp logger settings
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypper:req"
+
+/////////////////////////////////////////////////////////////////////////
+namespace
+{
+  void getCiMatchHint( PoolQuery & q_r, std::string & ciMatchHint_r )
+  {
+    q_r.setCaseSensitive( false );
+    if ( ! q_r.empty() )
+    {
+      unsigned cnt = 0;
+      for_( it, q_r.selectableBegin(), q_r.selectableEnd() )
+      {
+	if ( cnt == 3 )
+	{
+	  ciMatchHint_r += ",...";
+	  break;
+	}
+	else
+	{
+	  if ( cnt )
+	    ciMatchHint_r += ", ";
+	  ciMatchHint_r += (*it)->name();
+	}
+	++cnt;
+      }
+    }
+  }
+
+  PoolQuery pkg_spec_to_poolquery( const Capability & cap, const std::list<std::string> & repos )
+  {
+    //
+    sat::Solvable::SplitIdent splid( cap.detail().name() );
+
+    PoolQuery q;
+    q.setMatchGlob();
+    q.setCaseSensitive( true );
+    q.addKind( splid.kind() );
+    for_( it, repos.begin(), repos.end() )
+      q.addRepo( *it );
+    q.addDependency( sat::SolvAttr::name, splid.name().asString(),
+		     // only package names (no provides)
+		     cap.detail().op(), cap.detail().ed(),
+		     // defaults to Rel::ANY (NOOP) if no versioned cap
+		     Arch( cap.detail().arch() ) );
+    // defaults Arch_empty (NOOP) if no arch in cap
+
+    DBG << "query: " << q << endl;
+    return q;
+  }
+
+  PoolQuery pkg_spec_to_poolquery( const Capability & cap, const std::string & repo )
+  {
+    std::list<std::string> repos;
+    if ( !repo.empty() )
+      repos.push_back( repo );
+    return pkg_spec_to_poolquery( cap, repos );
+  }
+
+  std::set<PoolItem> get_installed_providers( const Capability & cap )
+  {
+    std::set<PoolItem> providers;
+
+    sat::WhatProvides q( cap );
+    for_( it, q.poolItemBegin(), q.poolItemEnd() )
+    {
+      if ( traits::isPseudoInstalled( (*it).satSolvable().kind() ) )
+      {
+	if ( (*it).isSatisfied() )
+	  providers.insert( *it );
+      }
+      else if ( (*it).satSolvable().isSystem() )
+	providers.insert( *it );
+    }
+    return providers;
+  }
+
+  PoolItem get_installed_obj( ui::Selectable::Ptr & s )
+  {
+    PoolItem installed;
+    if ( traits::isPseudoInstalled( s->kind() ) )
+    {
+      for_( it, s->availableBegin(), s->availableEnd() )
+	// this is OK also for patches - isSatisfied() excludes !isRelevant()
+	if ( it->status().isSatisfied() && ( !installed || installed->edition() < (*it)->edition() ) )
+	  installed = *it;
+    }
+    else
+      installed = s->installedObj();
+
+    return installed;
+  }
+
+} // namespace
+/////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////
 // SolverRequester::Options
@@ -124,18 +216,22 @@ void SolverRequester::installRemove( const PackageArgs & args )
  */
 void SolverRequester::install( const PackageSpec & pkg )
 {
-  // first try by name
+  std::string ciMatchHint;	// hint on possible typo (case-insensitive matches)
 
+  // first try by name
   if ( !_opts.force_by_cap )
   {
-    PoolQuery q = pkg_spec_to_poolquery( pkg.parsed_cap, _opts.from_repos );
+    PoolQuery q;
     if ( !pkg.repo_alias.empty() )
-      q.addRepo( pkg.repo_alias );
+      q = pkg_spec_to_poolquery( pkg.parsed_cap, pkg.repo_alias );
+    else
+      q = pkg_spec_to_poolquery( pkg.parsed_cap, _opts.from_repos );
 
     // get the best matching items and tag them for installation.
     // FIXME this ignores vendor lock - we need some way to do --from which
     // would respect vendor lock: e.g. a new Selectable::updateCandidateObj(Options&)
     PoolItemBest bestMatches( q.begin(), q.end() );
+
     if ( !bestMatches.empty() )
     {
       unsigned notInstalled = 0;
@@ -207,15 +303,16 @@ void SolverRequester::install( const PackageSpec & pkg )
     }
 
     addFeedback( Feedback::NOT_FOUND_NAME_TRYING_CAPS, pkg );
+    // Quick check whether there would have been matches with different case..
+    getCiMatchHint( q, ciMatchHint );
   }
 
   // try by capability
-
   // is there a provider for the requested capability?
   sat::WhatProvides q( pkg.parsed_cap );
   if ( q.empty() )
   {
-    addFeedback( Feedback::NOT_FOUND_CAP, pkg );
+    addFeedback( Feedback::NOT_FOUND_CAP, pkg, ciMatchHint );
     WAR << pkg << " not found" << endl;
     return;
   }
@@ -244,8 +341,9 @@ void SolverRequester::install( const PackageSpec & pkg )
  */
 void SolverRequester::remove( const PackageSpec & pkg )
 {
-  // first try by name
+  std::string ciMatchHint;	// hint on possible typo (case-insensitive matches)
 
+  // first try by name
   if ( !_opts.force_by_cap )
   {
     PoolQuery q = pkg_spec_to_poolquery( pkg.parsed_cap, "" );
@@ -279,17 +377,18 @@ void SolverRequester::remove( const PackageSpec & pkg )
       WAR << pkg << "' not found" << endl;
       return;
     }
+
+    addFeedback( Feedback::NOT_FOUND_NAME_TRYING_CAPS, pkg );
+    // Quick check whether there would have been matches with different case..
+    getCiMatchHint( q, ciMatchHint );
   }
 
   // try by capability
-
-  addFeedback( Feedback::NOT_FOUND_NAME_TRYING_CAPS, pkg );
-
   // is there a provider for the requested capability?
   sat::WhatProvides q( pkg.parsed_cap );
   if ( q.empty() )
   {
-    addFeedback( Feedback::NOT_FOUND_CAP, pkg );
+    addFeedback( Feedback::NOT_FOUND_CAP, pkg, ciMatchHint );
     WAR << pkg << " not found" << endl;
     return;
   }

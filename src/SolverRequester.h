@@ -280,6 +280,12 @@ public:
     , _objinst( installed )
     {}
 
+    Feedback( const Id id, const PackageSpec & reqpkg, std::string userdata )
+    : _id( id )
+    , _reqpkg( reqpkg )
+    , _userdata( std::move(userdata) )
+    {}
+
     Id id() const
     { return _id; }
 
@@ -299,6 +305,8 @@ public:
     PoolItem _objsel;
     /** The installed object */
     PoolItem _objinst;
+    /** For printing; content depends on _id */
+    std::string _userdata;
   };
 
 public:
@@ -432,6 +440,9 @@ private:
 		    const PoolItem & selected = PoolItem(),
 		    const PoolItem & installed = PoolItem() )
   { _feedback.push_back( Feedback( id, reqpkg, selected, installed ) ); }
+
+  void addFeedback( const Feedback::Id id_r, const PackageSpec & reqpkg_r, std::string userdata_r )
+  { _feedback.push_back( Feedback( id_r, reqpkg_r, std::move(userdata_r) ) ); }
 
 private:
   /** Various options to be applied to each requested package */

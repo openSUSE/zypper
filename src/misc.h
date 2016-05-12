@@ -8,14 +8,6 @@
 #ifndef ZMART_MISC_H
 #define ZMART_MISC_H
 
-#include <string>
-#include <list>
-
-#include <zypp/PoolQuery.h>
-#include <zypp/ResKind.h>
-#include <zypp/RepoInfo.h>
-#include <zypp/Capability.h>
-
 class Zypper;
 using namespace zypp;
 
@@ -62,18 +54,5 @@ void install_src_pkgs( Zypper & zypper );
  * on command line options) to the pool.
  */
 void build_deps_install( Zypper & zypper );
-
-
-PoolQuery pkg_spec_to_poolquery( const Capability & cap, const std::list<std::string> & repos = std::list<std::string>() );
-
-PoolQuery pkg_spec_to_poolquery( const Capability & cap, const std::string & repo = std::string());
-
-std::set<PoolItem> get_installed_providers( const Capability & cap );
-
-/**
- * Get the highest-version installed pacakge/product or satisfied patch/pattern
- * from the selectable.
- */
-PoolItem get_installed_obj( ui::Selectable::Ptr & s );
 
 #endif

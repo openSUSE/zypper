@@ -240,8 +240,17 @@ void SolverRequester::Feedback::print( Out & out, const SolverRequester::Options
   {
     case NOT_FOUND_NAME:
     case NOT_FOUND_CAP:
-      out.error( asUserString(opts) );
+    {
+      std::string detail;
+      if ( !_userdata.empty() )	// matches with different case; typo?
+      {
+	detail = "- ";
+	// translators: %1% expands to a single package name or a ','-separated enumeration of names.
+	detail += str::Format(_("Did you mean %1%?")) % _userdata;
+      }
+      out.error( asUserString(opts), detail );
       break;
+    }
     case NOT_FOUND_NAME_TRYING_CAPS:
     case NOT_INSTALLED:
     case NO_INSTALLED_PROVIDER:
