@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-02 10:10+0200\n"
+"POT-Creation-Date: 2016-05-12 17:01+0200\n"
 "PO-Revision-Date: 2015-11-22 13:19+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
@@ -1006,6 +1006,12 @@ msgstr[2] "Kontrola konfliktov súborov:"
 #: src/callbacks/media.cc:121
 msgid "Detected devices:"
 msgstr "Zistené zariadenia:"
+
+#. translators: %1% expands to a single package name or a ','-separated enumeration of names.
+#: src/RequestFeedback.cc:249
+#, boost-format
+msgid "Did you mean %1%?"
+msgstr ""
 
 #: src/PackageArgs.cc:219
 #, c-format, boost-format

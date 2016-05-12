@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-02 10:10+0200\n"
+"POT-Creation-Date: 2016-05-12 17:01+0200\n"
 "PO-Revision-Date: 2006-01-04 08:58+0100\n"
 "Last-Translator: i18n@suse.de\n"
 "Language-Team: Lao <i18n@suse.de>\n"
@@ -860,6 +860,12 @@ msgstr[1] ""
 
 #: src/callbacks/media.cc:121
 msgid "Detected devices:"
+msgstr ""
+
+#. translators: %1% expands to a single package name or a ','-separated enumeration of names.
+#: src/RequestFeedback.cc:249
+#, boost-format
+msgid "Did you mean %1%?"
 msgstr ""
 
 #: src/PackageArgs.cc:219

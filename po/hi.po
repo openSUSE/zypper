@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-02 10:10+0200\n"
+"POT-Creation-Date: 2016-05-12 17:01+0200\n"
 "PO-Revision-Date: 2007-08-24 22:33+0530\n"
 "Last-Translator: Sangeeta Kumari <k.sangeeta09@gmail.com>\n"
 "Language-Team: Hindi <en@li.org>\n"
@@ -914,6 +914,12 @@ msgstr[1] ""
 #, fuzzy
 msgid "Detected devices:"
 msgstr "निम्नलिखित उपकरणों को निष्क्रिय करें :"
+
+#. translators: %1% expands to a single package name or a ','-separated enumeration of names.
+#: src/RequestFeedback.cc:249
+#, boost-format
+msgid "Did you mean %1%?"
+msgstr ""
 
 #: src/PackageArgs.cc:219
 #, c-format, boost-format

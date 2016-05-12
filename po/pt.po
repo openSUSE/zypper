@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-02 10:10+0200\n"
+"POT-Creation-Date: 2016-05-12 17:01+0200\n"
 "PO-Revision-Date: 2009-10-08 12:36+0100\n"
 "Last-Translator: Hugo Ricardo Gonçalves Martins <rikhard.martins@gmail.com>\n"
 "Language-Team: Portuguese <opensuse-pt@opensuse.org>\n"
@@ -939,6 +939,12 @@ msgstr[1] ""
 #, fuzzy
 msgid "Detected devices:"
 msgstr "Desactivar os seguintes dispositivos:"
+
+#. translators: %1% expands to a single package name or a ','-separated enumeration of names.
+#: src/RequestFeedback.cc:249
+#, boost-format
+msgid "Did you mean %1%?"
+msgstr ""
 
 #: src/PackageArgs.cc:219
 #, c-format, boost-format

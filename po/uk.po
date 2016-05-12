@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-02 10:10+0200\n"
+"POT-Creation-Date: 2016-05-12 17:01+0200\n"
 "PO-Revision-Date: 2016-04-14 16:22+0200\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
 "Language-Team: Ukrainian <>\n"
@@ -1030,6 +1030,12 @@ msgstr[2] "Виявлено %1% конфліктів файлів:"
 #: src/callbacks/media.cc:121
 msgid "Detected devices:"
 msgstr "Виявлені пристрої:"
+
+#. translators: %1% expands to a single package name or a ','-separated enumeration of names.
+#: src/RequestFeedback.cc:249
+#, boost-format
+msgid "Did you mean %1%?"
+msgstr ""
 
 #: src/PackageArgs.cc:219
 #, c-format, boost-format

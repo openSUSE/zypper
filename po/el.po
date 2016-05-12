@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-02 10:10+0200\n"
+"POT-Creation-Date: 2016-05-12 17:01+0200\n"
 "PO-Revision-Date: 2015-07-06 01:22+0300\n"
 "Last-Translator: Danae <danae.asderi@gmail.com>\n"
 "Language-Team: opensuse-translation-el@opensuse.org\n"
@@ -1076,6 +1076,12 @@ msgstr[1] "Εντοπίστηκαν %1% συγκρούσεις αρχείων:"
 #: src/callbacks/media.cc:121
 msgid "Detected devices:"
 msgstr "Συσκευές που ανιχνεύτηκαν:"
+
+#. translators: %1% expands to a single package name or a ','-separated enumeration of names.
+#: src/RequestFeedback.cc:249
+#, boost-format
+msgid "Did you mean %1%?"
+msgstr ""
 
 #: src/PackageArgs.cc:219
 #, c-format, boost-format
