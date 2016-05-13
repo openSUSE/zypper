@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-13 18:30+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-05-13 18:37+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<http://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -369,7 +369,7 @@ msgstr "Falha ao fazer o cache do repositório (%d)."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
-msgstr "Tipo de repositório não gerenciado"
+msgstr "Tipo de repositório não identificado"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -618,8 +618,8 @@ msgid ""
 msgstr ""
 "Determinação do problema, que significa suporte técnico feito para fornecer "
 "informações de compatibilidade, assistência na instalação, suporte ao uso, "
-"manutenção e resolução básica de problemas. O Suporte de Nível 1 não corrige "
-"defeitos do produto."
+"manutenção contínua e solução básica de problemas. O Suporte de Nível 1 não "
+"corrige defeitos do produto."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
@@ -832,7 +832,7 @@ msgstr "Botsuana"
 #. :BWA:072:
 #: zypp/CountryCode.cc:192
 msgid "Belarus"
-msgstr "Bielorrússia"
+msgstr "Belarus"
 
 #. :BLR:112:
 #: zypp/CountryCode.cc:193
