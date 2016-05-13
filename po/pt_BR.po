@@ -14,15 +14,16 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-03-10 08:27-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
-"Language-Team: Portuguese <opensuse-pt@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-13 18:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Language-Team: Portuguese (Brazil) "
+"<http://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.5\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -39,7 +40,7 @@ msgstr "Texto de consulta de URL LDAP inválida"
 #: zypp/Url.cc:153
 #, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Parâmetro de consulta de URL LDAP inválido '%s'"
+msgstr "Parâmetro de consulta de URL de LDAP inválido '%s'"
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
@@ -47,7 +48,7 @@ msgstr "Não foi possível clonar o objeto URL"
 
 #: zypp/Url.cc:313
 msgid "Invalid empty Url object reference"
-msgstr "Referência vazia inválida ao objeto URL"
+msgstr "Referência a objeto Url vazio inválida"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
