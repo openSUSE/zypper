@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-13 18:26+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-05-13 18:29+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<http://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -130,7 +130,7 @@ msgstr " a execução falhou"
 #: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr "%s já está executado como %s)"
+msgstr "%s já executado como %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
@@ -278,7 +278,7 @@ msgstr "A assinatura não verifica"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2371
 msgid "Signature is OK, but key is not trusted"
-msgstr "A assinatura está OK, mas a chave não é confiada"
+msgstr "A assinatura está OK, mas a chave não é confiável"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2373
