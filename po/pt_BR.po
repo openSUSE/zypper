@@ -1,34 +1,119 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# translation of zypp.po to Brazilian Portuguese
+# Portugese (Brasilian) message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 1999-2000, 2001 SuSE GmbH.
 #
+# Karl Eichwalder <ke@suse.de>, 1999.
+# Ralf Lanz <rlanz@genix.com.br>, 1999.
+# Isis Binder <isis.binder@gmail.com>, 2008, 2010.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2008.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2008, 2009, 2012, 2013, 2014, 2015, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2015-11-05 16:58\n"
-"Last-Translator: Novell language <language@novell.com>\n"
-"Language-Team: Novell language <language@novell.com>\n"
-"Language: \n"
+"PO-Revision-Date: 2016-03-10 08:27-0300\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"Language-Team: Portuguese <opensuse-pt@opensuse.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 2.0\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#. translators: 'uninstallable' == 'not installable'
-#: zypp/solver/detail/SATResolver.cc:1081
-msgid ""
-"\n"
-"uninstallable providers: "
-msgstr ""
-"\n"
-"fornecedores de não instaláveis: "
+#: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
+#: zypp/target/hal/HalException.h:64
+msgid "Hal Exception"
+msgstr "Exceção de Hal"
 
-#: zypp/media/MediaException.cc:223
+#: zypp/Url.cc:114
+msgid "Invalid LDAP URL query string"
+msgstr "Texto de consulta de URL LDAP inválida"
+
+#: zypp/Url.cc:153
 #, c-format, boost-format
-msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
-" Problema no certificado SSL. Verifique se o certificado CA está correto "
-"para '%s'."
+msgid "Invalid LDAP URL query parameter '%s'"
+msgstr "Parâmetro de consulta de URL LDAP inválido '%s'"
+
+#: zypp/Url.cc:300
+msgid "Unable to clone Url object"
+msgstr "Não foi possível clonar o objeto URL"
+
+#: zypp/Url.cc:313
+msgid "Invalid empty Url object reference"
+msgstr "Referência vazia inválida ao objeto URL"
+
+#: zypp/Url.cc:326 zypp/Url.cc:340
+msgid "Unable to parse Url components"
+msgstr "Não foi possível analisar os componentes da URL"
+
+#: zypp/thread/Mutex.cc:33
+msgid "Can't initialize mutex attributes"
+msgstr "Não foi possível inicializar os atributos do mutex"
+
+#: zypp/thread/Mutex.cc:40
+msgid "Can't set recursive mutex attribute"
+msgstr "Não foi possível definir o atributo do mutex recursivo"
+
+#: zypp/thread/Mutex.cc:47
+msgid "Can't initialize recursive mutex"
+msgstr "Não foi possível inicializar o mutex recursivo"
+
+#: zypp/thread/Mutex.cc:77
+msgid "Can't acquire the mutex lock"
+msgstr "Não foi possível adquirir o bloqueio mutex"
+
+#: zypp/thread/Mutex.cc:87
+msgid "Can't release the mutex lock"
+msgstr "Não foi possível liberar o bloqueio do mutex"
+
+#: zypp/Dep.cc:96
+msgid "Provides"
+msgstr "Fornece"
+
+#: zypp/Dep.cc:97
+msgid "Prerequires"
+msgstr "Pré-requer"
+
+#: zypp/Dep.cc:98
+msgid "Requires"
+msgstr "Requer"
+
+#: zypp/Dep.cc:99
+msgid "Conflicts"
+msgstr "Conflita"
+
+#: zypp/Dep.cc:100
+msgid "Obsoletes"
+msgstr "Torna obsoleto"
+
+#: zypp/Dep.cc:101
+msgid "Recommends"
+msgstr "Recomenda"
+
+#: zypp/Dep.cc:102
+msgid "Suggests"
+msgstr "Sugere"
+
+#: zypp/Dep.cc:103
+msgid "Enhances"
+msgstr "Aprimora"
+
+#: zypp/Dep.cc:104
+msgid "Supplements"
+msgstr "Complementa"
+
+#. dubious: Throw on malformed known types, otherwise log a warning.
+#: zypp/CheckSum.cc:136
+#, c-format, boost-format
+msgid "Dubious type '%s' for %u byte checksum '%s'"
+msgstr "Tipo duvidoso '%s' para %u byte da soma de verificação '%s'"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
@@ -38,57 +123,431 @@ msgstr " executado"
 msgid " execution failed"
 msgstr " a execução falhou"
 
-#: zypp/target/TargetImpl.cc:459
-msgid " execution skipped while aborting"
-msgstr " execução ignorada durante interrupção"
-
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
 #: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr "%s já executado como %s)"
+msgstr "%s já está executado como %s)"
 
-#: zypp/solver/detail/SATResolver.cc:1022
+#: zypp/target/TargetImpl.cc:459
+msgid " execution skipped while aborting"
+msgstr " execução ignorada durante o cancelamento"
+
+#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
+#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
+#: zypp/target/TargetImpl.cc:607
+msgid "Error sending update message notification."
+msgstr "Erro ao enviar a notificação de mensagem de atualização."
+
+#: zypp/target/TargetImpl.cc:658
+msgid "New update message"
+msgstr "Nova mensagem de atualização"
+
+#: zypp/target/TargetImpl.cc:1219 zypp/target/TargetImpl.cc:1288
+#: zypp/target/TargetImpl.cc:1640
+#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
+msgid "Installation has been aborted as directed."
+msgstr "A instalação foi cancelada conforme instruções."
+
+#: zypp/target/hal/HalContext.cc:24
+msgid "Sorry, but this version of libzypp was built without HAL support."
+msgstr ""
+"Desculpe, mas esta versão do libzypp foi compilada sem o suporte ao HAL."
+
+#: zypp/target/hal/HalContext.cc:117
+msgid "HalContext not connected"
+msgstr "HalContext não conectado"
+
+#: zypp/target/hal/HalContext.cc:127
+msgid "HalDrive not initialized"
+msgstr "HalDrive não inicializado"
+
+#: zypp/target/hal/HalContext.cc:137
+msgid "HalVolume not initialized"
+msgstr "HalVolume não inicializado"
+
+#: zypp/target/hal/HalContext.cc:229
+msgid "Unable to create dbus connection"
+msgstr "Não foi possível criar a conexão com o dbus"
+
+#: zypp/target/hal/HalContext.cc:242
+msgid "libhal_ctx_new: Can't create libhal context"
+msgstr "libhal_ctx_new: Não foi possível criar o contexto libhal"
+
+#: zypp/target/hal/HalContext.cc:257
+msgid "libhal_set_dbus_connection: Can't set dbus connection"
+msgstr ""
+"libhal_set_dbus_connection: Não foi possível definir a conexão com dbus"
+
+#: zypp/target/hal/HalContext.cc:272
+msgid "Unable to initalize HAL context -- hald not running?"
+msgstr ""
+"Não foi possível inicializar o contexto HAL -- o hald não está em execução?"
+
+#: zypp/target/hal/HalContext.cc:851
+msgid "Not a CDROM drive"
+msgstr "Não é uma unidade de CDROM"
+
+#. TranslatorExplanation after semicolon is error message
+#. TranslatorExplanation the colon is followed by an error message
+#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
+#: zypp/target/rpm/RpmDb.cc:2189
+msgid "RPM failed: "
+msgstr "Falha no RPM: "
+
+#. TranslatorExplanation first %s is file name, second is error message
+#: zypp/target/rpm/RpmDb.cc:1124
 #, c-format, boost-format
-msgid "%s conflicts with %s provided by %s"
-msgstr "%s conflita com %s, fornecido por %s"
+msgid "Failed to import public key from file %s: %s"
+msgstr "Falha ao importar chave pública do arquivo %s: %s"
 
-#: zypp/solver/detail/SATResolver.cc:975
+#. TranslatorExplanation first %s is key name, second is error message
+#: zypp/target/rpm/RpmDb.cc:1195
 #, c-format, boost-format
-msgid "%s does not belong to a distupgrade repository"
-msgstr "%s não pertence ao repositório de atualização da distribuição"
+msgid "Failed to remove public key %s: %s"
+msgstr "Falha ao remover chave pública %s: %s"
 
-#: zypp/solver/detail/SATResolver.cc:979
+#. Translator: %s = name of an rpm package. A list of diffs follows
+#. this message.
+#: zypp/target/rpm/RpmDb.cc:1848
 #, c-format, boost-format
-msgid "%s has inferior architecture"
-msgstr "%s tem uma arquitetura inferior"
+msgid "Changed configuration files for %s:"
+msgstr "Arquivos de configuração alterados para %s:"
 
-#: zypp/solver/detail/SATResolver.cc:1007
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2024
 #, c-format, boost-format
-msgid "%s is not installable"
-msgstr "%s não pode ser instalado"
+msgid "rpm saved %s as %s, but it was impossible to determine the difference"
+msgstr "o rpm salvou %s como %s, mas não foi possível determinar a diferença"
 
-#: zypp/solver/detail/SATResolver.cc:1003
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2026
 #, c-format, boost-format
-msgid "%s is provided by the system and cannot be erased"
-msgstr "%s é fornecido pelo sistema e não pode ser apagado"
+msgid ""
+"rpm saved %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr ""
+"o rpm salvou %s como %s.\n"
+"Aqui estão as 25 primeiras linhas de diferença:\n"
 
-#: zypp/solver/detail/SATResolver.cc:1027
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2029
 #, c-format, boost-format
-msgid "%s obsoletes %s provided by %s"
-msgstr "%s torna obsoleto %s, fornecido por %s"
+msgid "rpm created %s as %s, but it was impossible to determine the difference"
+msgstr "o rpm criou %s como %s, mas não foi possível determinar a diferença"
 
-#: zypp/solver/detail/SATResolver.cc:1068
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2031
 #, c-format, boost-format
-msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s requer %s, mas este requisito não pode ser fornecido"
+msgid ""
+"rpm created %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr ""
+"rpm criou %s como %s.\n"
+"Aqui estão as 25 primeiras linhas de diferença:\n"
 
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:125
-msgid "(EXPIRED)"
-msgstr "(EXPIRADO)"
+#. report additional rpm output in finish
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:2056 zypp/target/rpm/RpmDb.cc:2202
+msgid "Additional rpm output"
+msgstr "Saída adicional do rpm"
+
+#: zypp/target/rpm/RpmDb.cc:2344
+#, c-format, boost-format
+msgid "created backup %s"
+msgstr "backup %s criado"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2365
+msgid "Signature is OK"
+msgstr "A assinatura está OK"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2367
+msgid "Unknown type of signature"
+msgstr "Tipo de assinatura desconhecido"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2369
+msgid "Signature does not verify"
+msgstr "A assinatura não verifica"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2371
+msgid "Signature is OK, but key is not trusted"
+msgstr "A assinatura está OK, mas a chave não é confiada"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2373
+msgid "Signatures public key is not available"
+msgstr "A chave de assinatura pública não está disponível"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2375
+msgid "File does not exist or signature can't be checked"
+msgstr "O arquivo não existe ou a assinatura não pôde ser verificada"
+
+#: zypp/ProblemSolution.cc:114
+msgid "Following actions will be done:"
+msgstr "As seguintes ações serão realizadas:"
+
+#: zypp/RepoManager.cc:297
+#, boost-format
+msgid "Cannot read repo directory '%1%': Permission denied"
+msgstr ""
+"Não foi possível ler o diretório de repositório '%1%': Permissão negada"
+
+#. TranslatorExplanation '%s' is a pathname
+#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
+#: zypp/repo/PluginServices.cc:49
+#, c-format, boost-format
+msgid "Failed to read directory '%s'"
+msgstr "Falha ao ler o diretório '%s'"
+
+#: zypp/RepoManager.cc:315
+#, boost-format
+msgid "Cannot read repo file '%1%': Permission denied"
+msgstr "Não foi possível ler o arquivo de repositório '%1%': Permissão negada"
+
+#: zypp/RepoManager.cc:338
+msgid "Repository alias cannot start with dot."
+msgstr "O apelido do repositório não pode começar com um ponto."
+
+#: zypp/RepoManager.cc:349
+msgid "Service alias cannot start with dot."
+msgstr "O apelido do serviço não pode começar com um ponto."
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
+#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
+#, c-format, boost-format
+msgid "Can't open file '%s' for writing."
+msgstr "Não foi possível abrir o arquivo '%s' para gravação."
+
+#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
+#. %1% = service name
+#. %2% = repository name
+#: zypp/RepoManager.cc:849
+#, boost-format
+msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
+msgstr ""
+"Serviço '%1%' desconhecido: removendo o repositório de serviço órfão '%2%'"
+
+#. we will throw this later if no URL checks out fine
+#: zypp/RepoManager.cc:1082
+msgid "Valid metadata not found at specified URL"
+msgid_plural "Valid metadata not found at specified URLs"
+msgstr[0] "Metadados válidos não encontrados na URL especificada"
+msgstr[1] "Metadados válidos não encontrados nas URLs especificadas"
+
+#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
+#, c-format, boost-format
+msgid "Can't create %s"
+msgstr "Não foi possível criar %s"
+
+#: zypp/RepoManager.cc:1140
+msgid "Can't create metadata cache directory."
+msgstr "Não foi possível criar o diretório do cache de metadados."
+
+#: zypp/RepoManager.cc:1282
+#, c-format, boost-format
+msgid "Building repository '%s' cache"
+msgstr "Construindo o cache do repositório '%s'"
+
+#: zypp/RepoManager.cc:1302
+#, c-format, boost-format
+msgid "Can't create cache at %s - no writing permissions."
+msgstr "Não foi possível criar o cache em %s - sem permissão de escrita."
+
+#: zypp/RepoManager.cc:1366
+#, c-format, boost-format
+msgid "Failed to cache repo (%d)."
+msgstr "Falha ao fazer o cache do repositório (%d)."
+
+#: zypp/RepoManager.cc:1377
+msgid "Unhandled repository type"
+msgstr "Tipo de repositório não gerenciado"
+
+#. prepare exception to be thrown if the type could not be determined
+#. due to a media exception. We can't throw right away, because of some
+#. problems with proxy servers returning an incorrect error
+#. on ftp file-not-found(bnc #335906). Instead we'll check another types
+#. before throwing.
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
+#, c-format, boost-format
+msgid "Error trying to read from '%s'"
+msgstr "Ocorreu um erro ao tentar ler a partir de '%s':"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
+#, c-format, boost-format
+msgid "Unknown error reading from '%s'"
+msgstr "Erro desconhecido ao ler de '%s'"
+
+#: zypp/RepoManager.cc:1611
+#, c-format, boost-format
+msgid "Adding repository '%s'"
+msgstr "Adicionando o repositório '%s'"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1701
+#, c-format, boost-format
+msgid "Invalid repo file name at '%s'"
+msgstr "Nome de arquivo de repositório inválido em '%s'"
+
+#: zypp/RepoManager.cc:1740
+#, c-format, boost-format
+msgid "Removing repository '%s'"
+msgstr "Removendo o repositório '%s'"
+
+#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+msgid "Can't figure out where the repo is stored."
+msgstr "Não foi possível descobrir onde o repositório está armazenado."
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
+#, c-format, boost-format
+msgid "Can't delete '%s'"
+msgstr "Não foi possível remover '%s'"
+
+#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
+msgid "Can't figure out where the service is stored."
+msgstr "Não foi possível descobrir onde o serviço está armazenado."
+
+#: zypp/url/UrlBase.cc:154
+#, c-format, boost-format
+msgid "Url scheme does not allow a %s"
+msgstr "O esquema de URL não permite %s"
+
+#: zypp/url/UrlBase.cc:173
+#, c-format, boost-format
+msgid "Invalid %s component '%s'"
+msgstr "Componente '%s' inválido %s"
+
+#: zypp/url/UrlBase.cc:180
+#, c-format, boost-format
+msgid "Invalid %s component"
+msgstr "Componente inválido %s"
+
+#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
+msgid "Query string parsing not supported for this URL"
+msgstr "A análise de texto de consulta não é suportada para esta URL"
+
+#: zypp/url/UrlBase.cc:824
+msgid "Url scheme is a required component"
+msgstr "O esquema de URL é um componente obrigatório"
+
+#: zypp/url/UrlBase.cc:830
+#, c-format, boost-format
+msgid "Invalid Url scheme '%s'"
+msgstr "Esquema de URL '%s' inválido"
+
+#: zypp/url/UrlBase.cc:949
+msgid "Url scheme does not allow a username"
+msgstr "O esquema de URL não permite nome de usuário"
+
+#: zypp/url/UrlBase.cc:983
+msgid "Url scheme does not allow a password"
+msgstr "O esquema de URL não permite senha"
+
+#: zypp/url/UrlBase.cc:1012
+msgid "Url scheme requires a host component"
+msgstr "O esquema de URL requer um componente de host"
+
+#: zypp/url/UrlBase.cc:1022
+msgid "Url scheme does not allow a host component"
+msgstr "O esquema de URL não permite componente de host"
+
+#: zypp/url/UrlBase.cc:1049
+#, c-format, boost-format
+msgid "Invalid host component '%s'"
+msgstr "Componente de host inválido '%s'"
+
+#: zypp/url/UrlBase.cc:1070
+msgid "Url scheme does not allow a port"
+msgstr "O esquema de URL não permite porta"
+
+#: zypp/url/UrlBase.cc:1081
+#, c-format, boost-format
+msgid "Invalid port component '%s'"
+msgstr "Componente de porta inválido '%s'"
+
+#: zypp/url/UrlBase.cc:1098
+msgid "Url scheme requires path name"
+msgstr "O esquema de URL requer nome de caminho"
+
+#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
+msgid "Relative path not allowed if authority exists"
+msgstr "Caminho relativo não permitido se existir autoridade"
+
+#: zypp/url/UrlUtils.cc:111
+msgid "Encoded string contains a NUL byte"
+msgstr "O texto codificado contém um byte NUL"
+
+#: zypp/url/UrlUtils.cc:173
+msgid "Invalid parameter array split separator character"
+msgstr "Caractere separador de divisão de matriz de parâmetros inválido"
+
+#: zypp/url/UrlUtils.cc:213
+msgid "Invalid parameter map split separator character"
+msgstr "Caractere separador de divisão de mapa de parâmetros inválido"
+
+#: zypp/url/UrlUtils.cc:283
+msgid "Invalid parameter array join separator character"
+msgstr "Caractere separador de integração de matriz de parâmetros inválido"
+
+#: zypp/ExternalProgram.cc:258
+#, c-format, boost-format
+msgid "Can't open pty (%s)."
+msgstr "Não foi possível abrir o pty (%s)."
+
+#: zypp/ExternalProgram.cc:269
+#, c-format, boost-format
+msgid "Can't open pipe (%s)."
+msgstr "Não foi possível abrir o pipe (%s)."
+
+#: zypp/ExternalProgram.cc:350
+#, c-format, boost-format
+msgid "Can't chroot to '%s' (%s)."
+msgstr "Não foi possível executar o chroot em '%s' (%s)."
+
+#: zypp/ExternalProgram.cc:360
+#, c-format, boost-format
+msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
+msgstr "Não foi possível executar chdir para '%s' dentro do chroot '%s' (%s)."
+
+#: zypp/ExternalProgram.cc:361
+#, c-format, boost-format
+msgid "Can't chdir to '%s' (%s)."
+msgstr "Não foi possível executar chdir para '%s' (%s)."
+
+#. don't want to get here
+#: zypp/ExternalProgram.cc:373
+#, c-format, boost-format
+msgid "Can't exec '%s' (%s)."
+msgstr "Não foi possível executar '%s' (%s)."
+
+#: zypp/ExternalProgram.cc:381
+#, c-format, boost-format
+msgid "Can't fork (%s)."
+msgstr "Não foi possível dividir (%s)."
+
+#: zypp/ExternalProgram.cc:507
+#, c-format, boost-format
+msgid "Command exited with status %d."
+msgstr "O comando encerrou com status %d."
+
+#: zypp/ExternalProgram.cc:527
+#, c-format, boost-format
+msgid "Command was killed by signal %d (%s)."
+msgstr "Comando foi morto pelo sinal %d (%s)."
+
+#: zypp/ExternalProgram.cc:532
+msgid "Command exited with unknown error."
+msgstr "O comando encerrou com erro desconhecido."
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:116
@@ -96,22 +555,1345 @@ msgid "(does not expire)"
 msgstr "(não expira)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:133
-#, fuzzy, c-format, boost-format
-msgid "(expires in %d day)"
-msgid_plural "(expires in %d days)"
-msgstr[0] "(expira em 24 h)"
-msgstr[1] "(expira em 24 h)"
+#: zypp/PublicKey.cc:125
+msgid "(EXPIRED)"
+msgstr "(EXPIRADO)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:129
 msgid "(expires within 24h)"
-msgstr "(expira em 24 h)"
+msgstr "(expira dentro de 24h)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:133
+#, c-format, boost-format
+msgid "(expires in %d day)"
+msgid_plural "(expires in %d days)"
+msgstr[0] "(expira em %d dia)"
+msgstr[1] "(expira em %d dias)"
+
+#: zypp/VendorSupportOptions.cc:14
+msgid "unknown"
+msgstr "desconhecido"
+
+#: zypp/VendorSupportOptions.cc:17
+msgid "unsupported"
+msgstr "não suportado"
+
+#: zypp/VendorSupportOptions.cc:20
+msgid "Level 1"
+msgstr "Nível 1"
+
+#: zypp/VendorSupportOptions.cc:23
+msgid "Level 2"
+msgstr "Nível 2"
+
+#: zypp/VendorSupportOptions.cc:26
+msgid "Level 3"
+msgstr "Nível 3"
+
+#: zypp/VendorSupportOptions.cc:29
+msgid "Additional Customer Contract Necessary"
+msgstr "Contrato adicional do consumidor necessário"
+
+#: zypp/VendorSupportOptions.cc:31
+msgid "invalid"
+msgstr "inválido"
+
+#: zypp/VendorSupportOptions.cc:39
+msgid "The level of support is unspecified"
+msgstr "O nível de suporte não foi especificado"
+
+#: zypp/VendorSupportOptions.cc:42
+msgid "The vendor does not provide support."
+msgstr "O fornecedor não oferece suporte."
+
+#: zypp/VendorSupportOptions.cc:45
+msgid ""
+"Problem determination, which means technical support designed to provide "
+"compatibility information, installation assistance, usage support, on-going "
+"maintenance and basic troubleshooting. Level 1 Support is not intended to "
+"correct product defect errors."
+msgstr ""
+"Determinação do problema, que significa suporte técnico feito para fornecer "
+"informações de compatibilidade, assistência na instalação, suporte ao uso, "
+"manutenção e resolução básica de problemas. O Suporte de Nível 1 não corrige "
+"defeitos do produto."
+
+#: zypp/VendorSupportOptions.cc:48
+msgid ""
+"Problem isolation, which means technical support designed to duplicate "
+"customer problems, isolate problem area and provide resolution for problems "
+"not resolved by Level 1 Support."
+msgstr ""
+"Isolamento do problema, que significa suporte técnico feito para duplicar os "
+"problemas do cliente, isolar a área do problema e fornecer solução para "
+"problemas não resolvidos pelo Suporte de Nível 1."
+
+#: zypp/VendorSupportOptions.cc:51
+msgid ""
+"Problem resolution, which means technical support designed to resolve "
+"complex problems by engaging engineering in resolution of product defects "
+"which have been identified by Level 2 Support."
+msgstr ""
+"Resolução de problema, que significa suporte técnico feito para resolver "
+"problemas complexos através de engenharia na resolução de defeitos do "
+"produto que foram identificados pelo Suporte de Nível 2."
+
+#: zypp/VendorSupportOptions.cc:54
+msgid "An additional customer contract is necessary for getting support."
+msgstr ""
+"Um contrato adicional com o consumidor é necessário para receber suporte."
+
+#: zypp/VendorSupportOptions.cc:56
+msgid "Unknown support option. Description not available"
+msgstr "Opção de suporte desconhecida. A descrição não está disponível"
+
+#: zypp/CountryCode.cc:50
+msgid "Unknown country: "
+msgstr "País desconhecido: "
+
+#. Defined CountryCode constants
+#. Defined LanguageCode constants
+#: zypp/CountryCode.cc:149 zypp/LanguageCode.cc:148
+msgid "No Code"
+msgstr "Sem código"
+
+#: zypp/CountryCode.cc:158
+msgid "Andorra"
+msgstr "Andorra"
+
+#. :AND:020:
+#: zypp/CountryCode.cc:159
+msgid "United Arab Emirates"
+msgstr "Emirados Árabes Unidos"
+
+#. :ARE:784:
+#: zypp/CountryCode.cc:160
+msgid "Afghanistan"
+msgstr "Afeganistão"
+
+#. :AFG:004:
+#: zypp/CountryCode.cc:161
+msgid "Antigua and Barbuda"
+msgstr "Antígua e Barbuda"
+
+#. :ATG:028:
+#: zypp/CountryCode.cc:162
+msgid "Anguilla"
+msgstr "Anguila"
+
+#. :AIA:660:
+#: zypp/CountryCode.cc:163
+msgid "Albania"
+msgstr "Albânia"
+
+#. :ALB:008:
+#: zypp/CountryCode.cc:164
+msgid "Armenia"
+msgstr "Armênia"
+
+#. :ARM:051:
+#: zypp/CountryCode.cc:165
+msgid "Netherlands Antilles"
+msgstr "Antilhas Holandesas"
+
+#. :ANT:530:
+#: zypp/CountryCode.cc:166
+msgid "Angola"
+msgstr "Angola"
+
+#. :AGO:024:
+#: zypp/CountryCode.cc:167
+msgid "Antarctica"
+msgstr "Antártida"
+
+#. :ATA:010:
+#: zypp/CountryCode.cc:168
+msgid "Argentina"
+msgstr "Argentina"
+
+#. :ARG:032:
+#: zypp/CountryCode.cc:169
+msgid "American Samoa"
+msgstr "Samoa Americana"
+
+#. :ASM:016:
+#: zypp/CountryCode.cc:170
+msgid "Austria"
+msgstr "Áustria"
+
+#. :AUT:040:
+#: zypp/CountryCode.cc:171
+msgid "Australia"
+msgstr "Austrália"
+
+#. :AUS:036:
+#: zypp/CountryCode.cc:172
+msgid "Aruba"
+msgstr "Aruba"
+
+#. :ABW:533:
+#: zypp/CountryCode.cc:173
+msgid "Aland Islands"
+msgstr "Ilhas Åland"
+
+#. :ALA:248:
+#: zypp/CountryCode.cc:174
+msgid "Azerbaijan"
+msgstr "Azerbaijão"
+
+#. :AZE:031:
+#: zypp/CountryCode.cc:175
+msgid "Bosnia and Herzegovina"
+msgstr "Bósnia e Herzegovina"
+
+#. :BIH:070:
+#: zypp/CountryCode.cc:176
+msgid "Barbados"
+msgstr "Barbados"
+
+#. :BRB:052:
+#: zypp/CountryCode.cc:177
+msgid "Bangladesh"
+msgstr "Bangladesh"
+
+#. :BGD:050:
+#: zypp/CountryCode.cc:178
+msgid "Belgium"
+msgstr "Bélgica"
+
+#. :BEL:056:
+#: zypp/CountryCode.cc:179
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+#. :BFA:854:
+#: zypp/CountryCode.cc:180
+msgid "Bulgaria"
+msgstr "Bulgária"
+
+#. :BGR:100:
+#: zypp/CountryCode.cc:181
+msgid "Bahrain"
+msgstr "Barein"
+
+#. :BHR:048:
+#: zypp/CountryCode.cc:182
+msgid "Burundi"
+msgstr "Burundi"
+
+#. :BDI:108:
+#: zypp/CountryCode.cc:183
+msgid "Benin"
+msgstr "Benin"
+
+#. :BEN:204:
+#: zypp/CountryCode.cc:184
+msgid "Bermuda"
+msgstr "Bermudas"
+
+#. :BMU:060:
+#: zypp/CountryCode.cc:185
+msgid "Brunei Darussalam"
+msgstr "Brunei"
+
+#. :BRN:096:
+#: zypp/CountryCode.cc:186
+msgid "Bolivia"
+msgstr "Bolívia"
+
+#. :BOL:068:
+#: zypp/CountryCode.cc:187
+msgid "Brazil"
+msgstr "Brasil"
+
+#. :BRA:076:
+#: zypp/CountryCode.cc:188
+msgid "Bahamas"
+msgstr "Bahamas"
+
+#. :BHS:044:
+#: zypp/CountryCode.cc:189
+msgid "Bhutan"
+msgstr "Butão"
+
+#. :BTN:064:
+#: zypp/CountryCode.cc:190
+msgid "Bouvet Island"
+msgstr "Ilha Bouvet"
+
+#. :BVT:074:
+#: zypp/CountryCode.cc:191
+msgid "Botswana"
+msgstr "Botsuana"
+
+#. :BWA:072:
+#: zypp/CountryCode.cc:192
+msgid "Belarus"
+msgstr "Bielorrússia"
+
+#. :BLR:112:
+#: zypp/CountryCode.cc:193
+msgid "Belize"
+msgstr "Belize"
+
+#. :BLZ:084:
+#: zypp/CountryCode.cc:194
+msgid "Canada"
+msgstr "Canadá"
+
+#. :CAN:124:
+#: zypp/CountryCode.cc:195
+msgid "Cocos (Keeling) Islands"
+msgstr "Ilhas Cocos (Keeling)"
+
+#. :CCK:166:
+#. :CAF:140:
+#: zypp/CountryCode.cc:196 zypp/CountryCode.cc:198
+msgid "Congo"
+msgstr "Congo"
+
+#. :COD:180:
+#: zypp/CountryCode.cc:197
+msgid "Central African Republic"
+msgstr "República Centro-Africana"
+
+#. :COG:178:
+#: zypp/CountryCode.cc:199
+msgid "Switzerland"
+msgstr "Suíça"
+
+#. :CHE:756:
+#: zypp/CountryCode.cc:200
+msgid "Cote D'Ivoire"
+msgstr "Costa do Marfim"
+
+#. :CIV:384:
+#: zypp/CountryCode.cc:201
+msgid "Cook Islands"
+msgstr "Ilhas Cook"
+
+#. :COK:184:
+#: zypp/CountryCode.cc:202
+msgid "Chile"
+msgstr "Chile"
+
+#. :CHL:152:
+#: zypp/CountryCode.cc:203
+msgid "Cameroon"
+msgstr "Camarões"
+
+#. :CMR:120:
+#: zypp/CountryCode.cc:204
+msgid "China"
+msgstr "China"
+
+#. :CHN:156:
+#: zypp/CountryCode.cc:205
+msgid "Colombia"
+msgstr "Colômbia"
+
+#. :COL:170:
+#: zypp/CountryCode.cc:206
+msgid "Costa Rica"
+msgstr "Costa Rica"
+
+#. :CRI:188:
+#: zypp/CountryCode.cc:207
+msgid "Cuba"
+msgstr "Cuba"
+
+#. :CUB:192:
+#: zypp/CountryCode.cc:208
+msgid "Cape Verde"
+msgstr "Cabo Verde"
+
+#. :CPV:132:
+#: zypp/CountryCode.cc:209
+msgid "Christmas Island"
+msgstr "Ilha Christmas"
+
+#. :CXR:162:
+#: zypp/CountryCode.cc:210
+msgid "Cyprus"
+msgstr "Chipre"
+
+#. :CYP:196:
+#: zypp/CountryCode.cc:211
+msgid "Czech Republic"
+msgstr "República Checa"
+
+#. :CZE:203:
+#: zypp/CountryCode.cc:212
+msgid "Germany"
+msgstr "Alemanha"
+
+#. :DEU:276:
+#: zypp/CountryCode.cc:213
+msgid "Djibouti"
+msgstr "Djibuti"
+
+#. :DJI:262:
+#: zypp/CountryCode.cc:214
+msgid "Denmark"
+msgstr "Dinamarca"
+
+#. :DNK:208:
+#: zypp/CountryCode.cc:215
+msgid "Dominica"
+msgstr "Dominica"
+
+#. :DMA:212:
+#: zypp/CountryCode.cc:216
+msgid "Dominican Republic"
+msgstr "República Dominicana"
+
+#. :DOM:214:
+#: zypp/CountryCode.cc:217
+msgid "Algeria"
+msgstr "Argélia"
+
+#. :DZA:012:
+#: zypp/CountryCode.cc:218
+msgid "Ecuador"
+msgstr "Equador"
+
+#. :ECU:218:
+#: zypp/CountryCode.cc:219
+msgid "Estonia"
+msgstr "Estônia"
+
+#. :EST:233:
+#: zypp/CountryCode.cc:220
+msgid "Egypt"
+msgstr "Egito"
+
+#. :EGY:818:
+#: zypp/CountryCode.cc:221
+msgid "Western Sahara"
+msgstr "Saara Ocidental"
+
+#. :ESH:732:
+#: zypp/CountryCode.cc:222
+msgid "Eritrea"
+msgstr "Eritreia"
+
+#. :ERI:232:
+#: zypp/CountryCode.cc:223
+msgid "Spain"
+msgstr "Espanha"
+
+#. :ESP:724:
+#: zypp/CountryCode.cc:224
+msgid "Ethiopia"
+msgstr "Etiópia"
+
+#. :ETH:231:
+#: zypp/CountryCode.cc:225
+msgid "Finland"
+msgstr "Finlândia"
+
+#. :FIN:246:
+#: zypp/CountryCode.cc:226
+msgid "Fiji"
+msgstr "Fiji"
+
+#. :FJI:242:
+#: zypp/CountryCode.cc:227
+msgid "Falkland Islands (Malvinas)"
+msgstr "Ilhas Malvinas (Falkland)"
+
+#. :FLK:238:
+#: zypp/CountryCode.cc:228
+msgid "Federated States of Micronesia"
+msgstr "Estados Federados da Micronésia"
+
+#. :FSM:583:
+#: zypp/CountryCode.cc:229
+msgid "Faroe Islands"
+msgstr "Ilhas Feroe"
+
+#. :FRO:234:
+#: zypp/CountryCode.cc:230
+msgid "France"
+msgstr "França"
+
+#. :FRA:250:
+#: zypp/CountryCode.cc:231
+msgid "Metropolitan France"
+msgstr "França metropolitana"
+
+#. :FXX:249:
+#: zypp/CountryCode.cc:232
+msgid "Gabon"
+msgstr "Gabão"
+
+#. :GAB:266:
+#: zypp/CountryCode.cc:233
+msgid "United Kingdom"
+msgstr "Reino Unido"
+
+#. :GBR:826:
+#: zypp/CountryCode.cc:234
+msgid "Grenada"
+msgstr "Granada"
+
+#. :GRD:308:
+#: zypp/CountryCode.cc:235
+msgid "Georgia"
+msgstr "Geórgia"
+
+#. :GEO:268:
+#: zypp/CountryCode.cc:236
+msgid "French Guiana"
+msgstr "Guiana Francesa"
+
+#. :GUF:254:
+#: zypp/CountryCode.cc:237
+msgid "Guernsey"
+msgstr "Guernsey"
+
+#: zypp/CountryCode.cc:238
+msgid "Ghana"
+msgstr "Gana"
+
+#. :GHA:288:
+#: zypp/CountryCode.cc:239
+msgid "Gibraltar"
+msgstr "Gibraltar"
+
+#. :GIB:292:
+#: zypp/CountryCode.cc:240
+msgid "Greenland"
+msgstr "Groenlândia"
+
+#. :GRL:304:
+#: zypp/CountryCode.cc:241
+msgid "Gambia"
+msgstr "Gâmbia"
+
+#. :GMB:270:
+#: zypp/CountryCode.cc:242
+msgid "Guinea"
+msgstr "Guiné"
+
+#. :GIN:324:
+#: zypp/CountryCode.cc:243
+msgid "Guadeloupe"
+msgstr "Guadalupe"
+
+#. :GLP:312:
+#: zypp/CountryCode.cc:244
+msgid "Equatorial Guinea"
+msgstr "Guiné Equatorial"
+
+#. :GNQ:226:
+#: zypp/CountryCode.cc:245
+msgid "Greece"
+msgstr "Grécia"
+
+#. :GRC:300:
+#: zypp/CountryCode.cc:246
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "Ilhas Geórgia do Sul e Sandwich do Sul"
+
+#. :SGS:239:
+#: zypp/CountryCode.cc:247
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#. :GTM:320:
+#: zypp/CountryCode.cc:248
+msgid "Guam"
+msgstr "Guam"
+
+#. :GUM:316:
+#: zypp/CountryCode.cc:249
+msgid "Guinea-Bissau"
+msgstr "Guiné-Bissau"
+
+#. :GNB:624:
+#: zypp/CountryCode.cc:250
+msgid "Guyana"
+msgstr "Guiana"
+
+#. :GUY:328:
+#: zypp/CountryCode.cc:251
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+#. :HKG:344:
+#: zypp/CountryCode.cc:252
+msgid "Heard Island and McDonald Islands"
+msgstr "Ilha Heard e Ilhas McDonald"
+
+#. :HMD:334:
+#: zypp/CountryCode.cc:253
+msgid "Honduras"
+msgstr "Honduras"
+
+#. :HND:340:
+#: zypp/CountryCode.cc:254
+msgid "Croatia"
+msgstr "Croácia"
+
+#. :HRV:191:
+#: zypp/CountryCode.cc:255
+msgid "Haiti"
+msgstr "Haiti"
+
+#. :HTI:332:
+#: zypp/CountryCode.cc:256
+msgid "Hungary"
+msgstr "Hungria"
+
+#. :HUN:348:
+#: zypp/CountryCode.cc:257
+msgid "Indonesia"
+msgstr "Indonésia"
+
+#. :IDN:360:
+#: zypp/CountryCode.cc:258
+msgid "Ireland"
+msgstr "Irlanda"
+
+#. :IRL:372:
+#: zypp/CountryCode.cc:259
+msgid "Israel"
+msgstr "Israel"
+
+#. :ISR:376:
+#: zypp/CountryCode.cc:260
+msgid "Isle of Man"
+msgstr "Ilha de Man"
+
+#: zypp/CountryCode.cc:261
+msgid "India"
+msgstr "Índia"
+
+#. :IND:356:
+#: zypp/CountryCode.cc:262
+msgid "British Indian Ocean Territory"
+msgstr "Território Britânico do Oceano Índico"
+
+#. :IOT:086:
+#: zypp/CountryCode.cc:263
+msgid "Iraq"
+msgstr "Iraque"
+
+#. :IRQ:368:
+#: zypp/CountryCode.cc:264
+msgid "Iran"
+msgstr "Irã"
+
+#. :IRN:364:
+#: zypp/CountryCode.cc:265
+msgid "Iceland"
+msgstr "Islândia"
+
+#. :ISL:352:
+#: zypp/CountryCode.cc:266
+msgid "Italy"
+msgstr "Itália"
+
+#. :ITA:380:
+#: zypp/CountryCode.cc:267
+msgid "Jersey"
+msgstr "Jersey"
+
+#: zypp/CountryCode.cc:268
+msgid "Jamaica"
+msgstr "Jamaica"
+
+#. :JAM:388:
+#: zypp/CountryCode.cc:269
+msgid "Jordan"
+msgstr "Jordânia"
+
+#. :JOR:400:
+#: zypp/CountryCode.cc:270
+msgid "Japan"
+msgstr "Japão"
+
+#. :JPN:392:
+#: zypp/CountryCode.cc:271
+msgid "Kenya"
+msgstr "Quênia"
+
+#. :KEN:404:
+#: zypp/CountryCode.cc:272
+msgid "Kyrgyzstan"
+msgstr "Quirguistão"
+
+#. :KGZ:417:
+#: zypp/CountryCode.cc:273
+msgid "Cambodia"
+msgstr "Camboja"
+
+#. :KHM:116:
+#: zypp/CountryCode.cc:274
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#. :KIR:296:
+#: zypp/CountryCode.cc:275
+msgid "Comoros"
+msgstr "Comores"
+
+#. :COM:174:
+#: zypp/CountryCode.cc:276
+msgid "Saint Kitts and Nevis"
+msgstr "São Cristóvão e Nevis"
+
+#. :KNA:659:
+#: zypp/CountryCode.cc:277
+msgid "North Korea"
+msgstr "Coreia do Norte"
+
+#. :PRK:408:
+#: zypp/CountryCode.cc:278
+msgid "South Korea"
+msgstr "Coreia do Sul"
+
+#. :KOR:410:
+#: zypp/CountryCode.cc:279
+msgid "Kuwait"
+msgstr "Kuwait"
+
+#. :KWT:414:
+#: zypp/CountryCode.cc:280
+msgid "Cayman Islands"
+msgstr "Ilhas Cayman"
+
+#. :CYM:136:
+#: zypp/CountryCode.cc:281
+msgid "Kazakhstan"
+msgstr "Cazaquistão"
+
+#. :KAZ:398:
+#: zypp/CountryCode.cc:282
+msgid "Lao People's Democratic Republic"
+msgstr "Laos"
+
+#. :LAO:418:
+#: zypp/CountryCode.cc:283
+msgid "Lebanon"
+msgstr "Líbano"
+
+#. :LBN:422:
+#: zypp/CountryCode.cc:284
+msgid "Saint Lucia"
+msgstr "Santa Lúcia"
+
+#. :LCA:662:
+#: zypp/CountryCode.cc:285
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
+
+#. :LIE:438:
+#: zypp/CountryCode.cc:286
+msgid "Sri Lanka"
+msgstr "Sri Lanka"
+
+#. :LKA:144:
+#: zypp/CountryCode.cc:287
+msgid "Liberia"
+msgstr "Libéria"
+
+#. :LBR:430:
+#: zypp/CountryCode.cc:288
+msgid "Lesotho"
+msgstr "Lesoto"
+
+#. :LSO:426:
+#: zypp/CountryCode.cc:289
+msgid "Lithuania"
+msgstr "Lituânia"
+
+#. :LTU:440:
+#: zypp/CountryCode.cc:290
+msgid "Luxembourg"
+msgstr "Luxemburgo"
+
+#. :LUX:442:
+#: zypp/CountryCode.cc:291
+msgid "Latvia"
+msgstr "Letônia"
+
+#. :LVA:428:
+#: zypp/CountryCode.cc:292
+msgid "Libya"
+msgstr "Líbia"
+
+#. :LBY:434:
+#: zypp/CountryCode.cc:293
+msgid "Morocco"
+msgstr "Marrocos"
+
+#. :MAR:504:
+#: zypp/CountryCode.cc:294
+msgid "Monaco"
+msgstr "Mônaco"
+
+#. :MCO:492:
+#: zypp/CountryCode.cc:295
+msgid "Moldova"
+msgstr "Moldávia"
+
+#. :MDA:498:
+#: zypp/CountryCode.cc:296
+msgid "Montenegro"
+msgstr "Montenegro"
+
+#: zypp/CountryCode.cc:297
+msgid "Saint Martin"
+msgstr "São Martinho"
+
+#: zypp/CountryCode.cc:298
+msgid "Madagascar"
+msgstr "Madagascar"
+
+#. :MDG:450:
+#: zypp/CountryCode.cc:299
+msgid "Marshall Islands"
+msgstr "Ilhas Marshall"
+
+#. :MHL:584:
+#: zypp/CountryCode.cc:300
+msgid "Macedonia"
+msgstr "Macedônia"
+
+#. :MKD:807:
+#: zypp/CountryCode.cc:301
+msgid "Mali"
+msgstr "Mali"
+
+#. :MLI:466:
+#: zypp/CountryCode.cc:302
+msgid "Myanmar"
+msgstr "Mianmar"
+
+#. :MMR:104:
+#: zypp/CountryCode.cc:303
+msgid "Mongolia"
+msgstr "Mongólia"
+
+#. :MNG:496:
+#: zypp/CountryCode.cc:304
+msgid "Macao"
+msgstr "Macau"
+
+#. :MAC:446:
+#: zypp/CountryCode.cc:305
+msgid "Northern Mariana Islands"
+msgstr "Ilhas Marianas do Norte"
+
+#. :MNP:580:
+#: zypp/CountryCode.cc:306
+msgid "Martinique"
+msgstr "Martinica"
+
+#. :MTQ:474:
+#: zypp/CountryCode.cc:307
+msgid "Mauritania"
+msgstr "Mauritânia"
+
+#. :MRT:478:
+#: zypp/CountryCode.cc:308
+msgid "Montserrat"
+msgstr "Montserrat"
+
+#. :MSR:500:
+#: zypp/CountryCode.cc:309
+msgid "Malta"
+msgstr "Malta"
+
+#. :MLT:470:
+#: zypp/CountryCode.cc:310
+msgid "Mauritius"
+msgstr "Ilhas Maurício"
+
+#. :MUS:480:
+#: zypp/CountryCode.cc:311
+msgid "Maldives"
+msgstr "Maldivas"
+
+#. :MDV:462:
+#: zypp/CountryCode.cc:312
+msgid "Malawi"
+msgstr "Malawi"
+
+#. :MWI:454:
+#: zypp/CountryCode.cc:313
+msgid "Mexico"
+msgstr "México"
+
+#. :MEX:484:
+#: zypp/CountryCode.cc:314
+msgid "Malaysia"
+msgstr "Malásia"
+
+#. :MYS:458:
+#: zypp/CountryCode.cc:315
+msgid "Mozambique"
+msgstr "Moçambique"
+
+#. :MOZ:508:
+#: zypp/CountryCode.cc:316
+msgid "Namibia"
+msgstr "Namíbia"
+
+#. :NAM:516:
+#: zypp/CountryCode.cc:317
+msgid "New Caledonia"
+msgstr "Nova Caledônia"
+
+#. :NCL:540:
+#: zypp/CountryCode.cc:318
+msgid "Niger"
+msgstr "Níger"
+
+#. :NER:562:
+#: zypp/CountryCode.cc:319
+msgid "Norfolk Island"
+msgstr "Ilha Norfolk"
+
+#. :NFK:574:
+#: zypp/CountryCode.cc:320
+msgid "Nigeria"
+msgstr "Nigéria"
+
+#. :NGA:566:
+#: zypp/CountryCode.cc:321
+msgid "Nicaragua"
+msgstr "Nicarágua"
+
+#. :NIC:558:
+#: zypp/CountryCode.cc:322
+msgid "Netherlands"
+msgstr "Holanda"
+
+#. :NLD:528:
+#: zypp/CountryCode.cc:323
+msgid "Norway"
+msgstr "Noruega"
+
+#. :NOR:578:
+#: zypp/CountryCode.cc:324
+msgid "Nepal"
+msgstr "Nepal"
+
+#. :NPL:524:
+#. language code: nau na
+#: zypp/CountryCode.cc:325 zypp/LanguageCode.cc:781
+msgid "Nauru"
+msgstr "Nauruano"
+
+#. :NRU:520:
+#: zypp/CountryCode.cc:326
+msgid "Niue"
+msgstr "Niue"
+
+#. :NIU:570:
+#: zypp/CountryCode.cc:327
+msgid "New Zealand"
+msgstr "Nova Zelândia"
+
+#. :NZL:554:
+#: zypp/CountryCode.cc:328
+msgid "Oman"
+msgstr "Omã"
+
+#. :OMN:512:
+#: zypp/CountryCode.cc:329
+msgid "Panama"
+msgstr "Panamá"
+
+#. :PAN:591:
+#: zypp/CountryCode.cc:330
+msgid "Peru"
+msgstr "Peru"
+
+#. :PER:604:
+#: zypp/CountryCode.cc:331
+msgid "French Polynesia"
+msgstr "Polinésia Francesa"
+
+#. :PYF:258:
+#: zypp/CountryCode.cc:332
+msgid "Papua New Guinea"
+msgstr "Papua Nova Guiné"
+
+#. :PNG:598:
+#: zypp/CountryCode.cc:333
+msgid "Philippines"
+msgstr "Filipinas"
+
+#. :PHL:608:
+#: zypp/CountryCode.cc:334
+msgid "Pakistan"
+msgstr "Paquistão"
+
+#. :PAK:586:
+#: zypp/CountryCode.cc:335
+msgid "Poland"
+msgstr "Polônia"
+
+#. :POL:616:
+#: zypp/CountryCode.cc:336
+msgid "Saint Pierre and Miquelon"
+msgstr "Saint Pierre e Miquelon"
+
+#. :SPM:666:
+#: zypp/CountryCode.cc:337
+msgid "Pitcairn"
+msgstr "Ilhas Pitcairn"
+
+#. :PCN:612:
+#: zypp/CountryCode.cc:338
+msgid "Puerto Rico"
+msgstr "Porto Rico"
+
+#. :PRI:630:
+#: zypp/CountryCode.cc:339
+msgid "Palestinian Territory"
+msgstr "Território Palestino"
+
+#. :PSE:275:
+#: zypp/CountryCode.cc:340
+msgid "Portugal"
+msgstr "Portugal"
+
+#. :PRT:620:
+#: zypp/CountryCode.cc:341
+msgid "Palau"
+msgstr "Palau"
+
+#. :PLW:585:
+#: zypp/CountryCode.cc:342
+msgid "Paraguay"
+msgstr "Paraguai"
+
+#. :PRY:600:
+#: zypp/CountryCode.cc:343
+msgid "Qatar"
+msgstr "Catar"
+
+#. :QAT:634:
+#: zypp/CountryCode.cc:344
+msgid "Reunion"
+msgstr "Ilha Reunião"
+
+#. :REU:638:
+#: zypp/CountryCode.cc:345
+msgid "Romania"
+msgstr "Romênia"
+
+#. :ROU:642:
+#: zypp/CountryCode.cc:346
+msgid "Serbia"
+msgstr "Sérvia"
+
+#: zypp/CountryCode.cc:347
+msgid "Russian Federation"
+msgstr "Rússia"
+
+#. :RUS:643:
+#: zypp/CountryCode.cc:348
+msgid "Rwanda"
+msgstr "Ruanda"
+
+#. :RWA:646:
+#: zypp/CountryCode.cc:349
+msgid "Saudi Arabia"
+msgstr "Arábia Saudita"
+
+#. :SAU:682:
+#: zypp/CountryCode.cc:350
+msgid "Solomon Islands"
+msgstr "Ilhas Salomão"
+
+#. :SLB:090:
+#: zypp/CountryCode.cc:351
+msgid "Seychelles"
+msgstr "Seicheles"
+
+#. :SYC:690:
+#: zypp/CountryCode.cc:352
+msgid "Sudan"
+msgstr "Sudão"
+
+#. :SDN:736:
+#: zypp/CountryCode.cc:353
+msgid "Sweden"
+msgstr "Suécia"
+
+#. :SWE:752:
+#: zypp/CountryCode.cc:354
+msgid "Singapore"
+msgstr "Cingapura"
+
+#. :SGP:702:
+#: zypp/CountryCode.cc:355
+msgid "Saint Helena"
+msgstr "Santa Helena"
+
+#. :SHN:654:
+#: zypp/CountryCode.cc:356
+msgid "Slovenia"
+msgstr "Eslovênia"
+
+#. :SVN:705:
+#: zypp/CountryCode.cc:357
+msgid "Svalbard and Jan Mayen"
+msgstr "Ilhas Svalbard e Jan Mayen"
+
+#. :SJM:744:
+#: zypp/CountryCode.cc:358
+msgid "Slovakia"
+msgstr "Eslováquia"
+
+#. :SVK:703:
+#: zypp/CountryCode.cc:359
+msgid "Sierra Leone"
+msgstr "Serra Leoa"
+
+#. :SLE:694:
+#: zypp/CountryCode.cc:360
+msgid "San Marino"
+msgstr "San Marino"
+
+#. :SMR:674:
+#: zypp/CountryCode.cc:361
+msgid "Senegal"
+msgstr "Senegal"
+
+#. :SEN:686:
+#: zypp/CountryCode.cc:362
+msgid "Somalia"
+msgstr "Somália"
+
+#. :SOM:706:
+#: zypp/CountryCode.cc:363
+msgid "Suriname"
+msgstr "Suriname"
+
+#. :SUR:740:
+#: zypp/CountryCode.cc:364
+msgid "Sao Tome and Principe"
+msgstr "São Tomé e Príncipe"
+
+#. :STP:678:
+#: zypp/CountryCode.cc:365
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#. :SLV:222:
+#: zypp/CountryCode.cc:366
+msgid "Syria"
+msgstr "Síria"
+
+#. :SYR:760:
+#: zypp/CountryCode.cc:367
+msgid "Swaziland"
+msgstr "Suazilândia"
+
+#. :SWZ:748:
+#: zypp/CountryCode.cc:368
+msgid "Turks and Caicos Islands"
+msgstr "Ilhas Turks e Caicos"
+
+#. :TCA:796:
+#: zypp/CountryCode.cc:369
+msgid "Chad"
+msgstr "Chade"
+
+#. :TCD:148:
+#: zypp/CountryCode.cc:370
+msgid "French Southern Territories"
+msgstr "Terras Austrais e Antárticas Francesas"
+
+#. :ATF:260:
+#: zypp/CountryCode.cc:371
+msgid "Togo"
+msgstr "Togo"
+
+#. :TGO:768:
+#: zypp/CountryCode.cc:372
+msgid "Thailand"
+msgstr "Tailândia"
+
+#. :THA:764:
+#: zypp/CountryCode.cc:373
+msgid "Tajikistan"
+msgstr "Tadjiquistão"
+
+#. :TJK:762:
+#. language code: tkl
+#: zypp/CountryCode.cc:374 zypp/LanguageCode.cc:1045
+msgid "Tokelau"
+msgstr "Toquelauano"
+
+#. :TKL:772:
+#: zypp/CountryCode.cc:375
+msgid "Turkmenistan"
+msgstr "Turcomenistão"
+
+#. :TKM:795:
+#: zypp/CountryCode.cc:376
+msgid "Tunisia"
+msgstr "Tunísia"
+
+#. :TUN:788:
+#: zypp/CountryCode.cc:377
+msgid "Tonga"
+msgstr "Tonga"
+
+#. :TON:776:
+#: zypp/CountryCode.cc:378
+msgid "East Timor"
+msgstr "Timor-Leste"
+
+#. :TLS:626:
+#: zypp/CountryCode.cc:379
+msgid "Turkey"
+msgstr "Turquia"
+
+#. :TUR:792:
+#: zypp/CountryCode.cc:380
+msgid "Trinidad and Tobago"
+msgstr "Trinidad e Tobago"
+
+#. :TTO:780:
+#. language code: tvl
+#: zypp/CountryCode.cc:381 zypp/LanguageCode.cc:1075
+msgid "Tuvalu"
+msgstr "Tuvaluano"
+
+#. :TUV:798:
+#: zypp/CountryCode.cc:382
+msgid "Taiwan"
+msgstr "Taiwan"
+
+#. :TWN:158:
+#: zypp/CountryCode.cc:383
+msgid "Tanzania"
+msgstr "Tanzânia"
+
+#. :TZA:834:
+#: zypp/CountryCode.cc:384
+msgid "Ukraine"
+msgstr "Ucrânia"
+
+#. :UKR:804:
+#: zypp/CountryCode.cc:385
+msgid "Uganda"
+msgstr "Uganda"
+
+#. :UGA:800:
+#: zypp/CountryCode.cc:386
+msgid "United States Minor Outlying Islands"
+msgstr "Ilhas Menores Distantes dos Estados Unidos"
+
+#. :UMI:581:
+#: zypp/CountryCode.cc:387
+msgid "United States"
+msgstr "Estados Unidos"
+
+#. :USA:840:
+#: zypp/CountryCode.cc:388
+msgid "Uruguay"
+msgstr "Uruguai"
+
+#. :URY:858:
+#: zypp/CountryCode.cc:389
+msgid "Uzbekistan"
+msgstr "Uzbequistão"
+
+#. :UZB:860:
+#: zypp/CountryCode.cc:390
+msgid "Holy See (Vatican City State)"
+msgstr "Santa Sé (Estado da Cidade do Vaticano)"
+
+#. :VAT:336:
+#: zypp/CountryCode.cc:391
+msgid "Saint Vincent and the Grenadines"
+msgstr "São Vicente e Granadinas"
+
+#. :VCT:670:
+#: zypp/CountryCode.cc:392
+msgid "Venezuela"
+msgstr "Venezuela"
+
+#. :VEN:862:
+#: zypp/CountryCode.cc:393
+msgid "British Virgin Islands"
+msgstr "Ilhas Virgens Britânicas"
+
+#. :VGB:092:
+#: zypp/CountryCode.cc:394
+msgid "Virgin Islands, U.S."
+msgstr "Ilhas Virgens Americanas"
+
+#. :VIR:850:
+#: zypp/CountryCode.cc:395
+msgid "Vietnam"
+msgstr "Vietnã"
+
+#. :VNM:704:
+#: zypp/CountryCode.cc:396
+msgid "Vanuatu"
+msgstr "Vanuatu"
+
+#. :VUT:548:
+#: zypp/CountryCode.cc:397
+msgid "Wallis and Futuna"
+msgstr "Wallis e Futuna"
+
+#. :WLF:876:
+#: zypp/CountryCode.cc:398
+msgid "Samoa"
+msgstr "Samoa"
+
+#. :WSM:882:
+#: zypp/CountryCode.cc:399
+msgid "Yemen"
+msgstr "Iêmen"
+
+#. :YEM:887:
+#: zypp/CountryCode.cc:400
+msgid "Mayotte"
+msgstr "Mayotte"
+
+#. :MYT:175:
+#: zypp/CountryCode.cc:401
+msgid "South Africa"
+msgstr "África do Sul"
+
+#. :ZAF:710:
+#: zypp/CountryCode.cc:402
+msgid "Zambia"
+msgstr "Zâmbia"
+
+#. :ZMB:894:
+#: zypp/CountryCode.cc:403
+msgid "Zimbabwe"
+msgstr "Zimbábue"
+
+#: zypp/LanguageCode.cc:49
+msgid "Unknown language: "
+msgstr "Idioma desconhecido: "
+
+#. language code: aar aa
+#: zypp/LanguageCode.cc:161
+msgid "Afar"
+msgstr "Afar"
 
 #. language code: abk ab
 #: zypp/LanguageCode.cc:163
 msgid "Abkhazian"
-msgstr "Abkhaz"
+msgstr "Abcásio"
 
 #. language code: ace
 #: zypp/LanguageCode.cc:165
@@ -128,35 +1910,15 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Circassiano"
 
-#: zypp/RepoManager.cc:1611
-#, c-format, boost-format
-msgid "Adding repository '%s'"
-msgstr "Adicionando o repositório '%s'"
-
-#: zypp/VendorSupportOptions.cc:29
-msgid "Additional Customer Contract Necessary"
-msgstr "Contrato Adicional do Consumidor Necessário"
-
-#. report additional rpm output in finish
-#. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2056 zypp/target/rpm/RpmDb.cc:2202
-msgid "Additional rpm output"
-msgstr "Saída de rpm adicional"
-
 #. language code: ady
 #: zypp/LanguageCode.cc:171
 msgid "Adyghe"
 msgstr "Adyghe"
 
-#. language code: aar aa
-#: zypp/LanguageCode.cc:161
-msgid "Afar"
-msgstr "Afar"
-
-#. :ARE:784:
-#: zypp/CountryCode.cc:160
-msgid "Afghanistan"
-msgstr "Afeganistão"
+#. language code: afa
+#: zypp/LanguageCode.cc:173
+msgid "Afro-Asiatic (Other)"
+msgstr "Afro-asiático (outros)"
 
 #. language code: afh
 #: zypp/LanguageCode.cc:175
@@ -166,12 +1928,7 @@ msgstr "Afrihili"
 #. language code: afr af
 #: zypp/LanguageCode.cc:177
 msgid "Afrikaans"
-msgstr "Africânder"
-
-#. language code: afa
-#: zypp/LanguageCode.cc:173
-msgid "Afro-Asiatic (Other)"
-msgstr "Afro-Asiático (Outros)"
+msgstr "Africâner"
 
 #. language code: ain
 #: zypp/LanguageCode.cc:179
@@ -188,16 +1945,6 @@ msgstr "Akan"
 msgid "Akkadian"
 msgstr "Acadiano"
 
-#. :ABW:533:
-#: zypp/CountryCode.cc:173
-msgid "Aland Islands"
-msgstr "Aland Islands"
-
-#. :AIA:660:
-#: zypp/CountryCode.cc:163
-msgid "Albania"
-msgstr "Albânia"
-
 #. language code: alb sqi sq
 #: zypp/LanguageCode.cc:185 zypp/LanguageCode.cc:187
 msgid "Albanian"
@@ -208,119 +1955,70 @@ msgstr "Albanês"
 msgid "Aleut"
 msgstr "Aleúte"
 
-#. :DOM:214:
-#: zypp/CountryCode.cc:217
-msgid "Algeria"
-msgstr "Argélia"
-
 #. language code: alg
 #: zypp/LanguageCode.cc:191
 msgid "Algonquian Languages"
-msgstr "Línguas Algonquinas"
+msgstr "Línguas algonquinas"
 
-#. language code: tut
-#: zypp/LanguageCode.cc:1073
-msgid "Altaic (Other)"
-msgstr "Altaico (Outros)"
-
-#. :ARG:032:
-#: zypp/CountryCode.cc:169
-msgid "American Samoa"
-msgstr "Samoa Americana"
+#. language code: alt
+#: zypp/LanguageCode.cc:193
+msgid "Southern Altai"
+msgstr "Altaico Meridional"
 
 #. language code: amh am
 #: zypp/LanguageCode.cc:195
 msgid "Amharic"
-msgstr "Aramáico"
+msgstr "Amárico"
 
-#: zypp/VendorSupportOptions.cc:54
-msgid "An additional customer contract is necessary for getting support."
-msgstr ""
-"Um contrato adicional com o consumidor é necessário para receber suporte."
-
-#: zypp/CountryCode.cc:158
-msgid "Andorra"
-msgstr "Andorra"
-
-#. :ANT:530:
-#: zypp/CountryCode.cc:166
-msgid "Angola"
-msgstr "Angola"
-
-#. :ATG:028:
-#: zypp/CountryCode.cc:162
-msgid "Anguilla"
-msgstr "Anguilla"
-
-#. :AGO:024:
-#: zypp/CountryCode.cc:167
-msgid "Antarctica"
-msgstr "Antártida"
-
-#. :AFG:004:
-#: zypp/CountryCode.cc:161
-msgid "Antigua and Barbuda"
-msgstr "Antígua e Barbuda"
+#. language code: ang
+#: zypp/LanguageCode.cc:197
+msgid "English, Old (ca.450-1100)"
+msgstr "Inglês antigo (aprox. 450-1100)"
 
 #. language code: apa
 #: zypp/LanguageCode.cc:199
 msgid "Apache Languages"
-msgstr "Línguas Apaches"
+msgstr "Línguas apaches"
 
 #. language code: ara ar
 #: zypp/LanguageCode.cc:201
 msgid "Arabic"
 msgstr "Árabe"
 
-#. language code: arg an
-#: zypp/LanguageCode.cc:205
-msgid "Aragonese"
-msgstr "Aragonês"
-
 #. language code: arc
 #: zypp/LanguageCode.cc:203
 msgid "Aramaic"
 msgstr "Aramaico"
 
-#. language code: arp
-#: zypp/LanguageCode.cc:213
-msgid "Arapaho"
-msgstr "Arapaho"
-
-#. language code: arn
-#: zypp/LanguageCode.cc:211
-msgid "Araucanian"
-msgstr "Araucano"
-
-#. language code: arw
-#: zypp/LanguageCode.cc:217
-msgid "Arawak"
-msgstr "Arawak"
-
-#. :ATA:010:
-#: zypp/CountryCode.cc:168
-msgid "Argentina"
-msgstr "Argentina"
-
-#. :ALB:008:
-#: zypp/CountryCode.cc:164
-msgid "Armenia"
-msgstr "Armênia"
+#. language code: arg an
+#: zypp/LanguageCode.cc:205
+msgid "Aragonese"
+msgstr "Aragonês"
 
 #. language code: arm hye hy
 #: zypp/LanguageCode.cc:207 zypp/LanguageCode.cc:209
 msgid "Armenian"
 msgstr "Armênio"
 
+#. language code: arn
+#: zypp/LanguageCode.cc:211
+msgid "Araucanian"
+msgstr "Araucano"
+
+#. language code: arp
+#: zypp/LanguageCode.cc:213
+msgid "Arapaho"
+msgstr "Arapaho"
+
 #. language code: art
 #: zypp/LanguageCode.cc:215
 msgid "Artificial (Other)"
-msgstr "Artificial (Outros)"
+msgstr "Artificial (outros)"
 
-#. :AUS:036:
-#: zypp/CountryCode.cc:172
-msgid "Aruba"
-msgstr "Aruba"
+#. language code: arw
+#: zypp/LanguageCode.cc:217
+msgid "Arawak"
+msgstr "Arawak"
 
 #. language code: asm as
 #: zypp/LanguageCode.cc:219
@@ -335,33 +2033,12 @@ msgstr "Asturiano"
 #. language code: ath
 #: zypp/LanguageCode.cc:223
 msgid "Athapascan Languages"
-msgstr "Línguas Atapascas"
-
-#. :AUT:040:
-#: zypp/CountryCode.cc:171
-msgid "Australia"
-msgstr "Austrália"
+msgstr "Línguas atapascas"
 
 #. language code: aus
 #: zypp/LanguageCode.cc:225
 msgid "Australian Languages"
-msgstr "Línguas Australianas"
-
-#. :ASM:016:
-#: zypp/CountryCode.cc:170
-msgid "Austria"
-msgstr "Áustria"
-
-#. language code: map
-#: zypp/LanguageCode.cc:717
-msgid "Austronesian (Other)"
-msgstr "Austronésio (Outros)"
-
-#. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
-#, c-format, boost-format
-msgid "Authentication required for '%s'"
-msgstr "Autenticação necessária para '%s'"
+msgstr "Línguas australianas"
 
 #. language code: ava av
 #: zypp/LanguageCode.cc:227
@@ -383,44 +2060,25 @@ msgstr "Awadhi"
 msgid "Aymara"
 msgstr "Aymara"
 
-#. :ALA:248:
-#: zypp/CountryCode.cc:174
-msgid "Azerbaijan"
-msgstr "Azerbaijão"
-
 #. language code: aze az
 #: zypp/LanguageCode.cc:235
 msgid "Azerbaijani"
-msgstr "Azerbaidjano"
+msgstr "Azeri"
 
-#: zypp/media/MediaException.cc:47
-#, c-format, boost-format
-msgid "Bad file name: %s"
-msgstr "Nome de arquivo inválido: %s"
+#. language code: bad
+#: zypp/LanguageCode.cc:237
+msgid "Banda"
+msgstr "Banda"
 
-#: zypp/media/MediaException.cc:77
-msgid "Bad media attach point"
-msgstr "Ponto de anexação de mídia inválido"
+#. language code: bai
+#: zypp/LanguageCode.cc:239
+msgid "Bamileke Languages"
+msgstr "Línguas bamileques"
 
-#. :BRA:076:
-#: zypp/CountryCode.cc:188
-msgid "Bahamas"
-msgstr "Bahamas"
-
-#. :BGR:100:
-#: zypp/CountryCode.cc:181
-msgid "Bahrain"
-msgstr "Bahrein"
-
-#. language code: ban
-#: zypp/LanguageCode.cc:247
-msgid "Balinese"
-msgstr "Balinês"
-
-#. language code: bat
-#: zypp/LanguageCode.cc:255
-msgid "Baltic (Other)"
-msgstr "Báltico (Outros)"
+#. language code: bak ba
+#: zypp/LanguageCode.cc:241
+msgid "Bashkir"
+msgstr "Bashkir"
 
 #. language code: bal
 #: zypp/LanguageCode.cc:243
@@ -432,75 +2090,35 @@ msgstr "Balúchi"
 msgid "Bambara"
 msgstr "Bambara"
 
-#. language code: bai
-#: zypp/LanguageCode.cc:239
-msgid "Bamileke Languages"
-msgstr "Línguas Bamileques"
-
-#. language code: bad
-#: zypp/LanguageCode.cc:237
-msgid "Banda"
-msgstr "Banda"
-
-#. :BRB:052:
-#: zypp/CountryCode.cc:177
-msgid "Bangladesh"
-msgstr "Bangladesh"
-
-#. language code: bnt
-#: zypp/LanguageCode.cc:279
-msgid "Bantu (Other)"
-msgstr "Banto (Outros)"
-
-#. :BIH:070:
-#: zypp/CountryCode.cc:176
-msgid "Barbados"
-msgstr "Barbados"
-
-#. language code: bas
-#: zypp/LanguageCode.cc:253
-msgid "Basa"
-msgstr "Basa"
-
-#. language code: bak ba
-#: zypp/LanguageCode.cc:241
-msgid "Bashkir"
-msgstr "Bashkir"
+#. language code: ban
+#: zypp/LanguageCode.cc:247
+msgid "Balinese"
+msgstr "Balinês"
 
 #. language code: baq eus eu
 #: zypp/LanguageCode.cc:249 zypp/LanguageCode.cc:251
 msgid "Basque"
 msgstr "Basco"
 
-#. language code: btk
-#: zypp/LanguageCode.cc:287
-msgid "Batak (Indonesia)"
-msgstr "Bataque (Indonésia)"
+#. language code: bas
+#: zypp/LanguageCode.cc:253
+msgid "Basa"
+msgstr "Basa"
+
+#. language code: bat
+#: zypp/LanguageCode.cc:255
+msgid "Baltic (Other)"
+msgstr "Báltico (outros)"
 
 #. language code: bej
 #: zypp/LanguageCode.cc:257
 msgid "Beja"
 msgstr "Bejanês"
 
-#. :BWA:072:
-#: zypp/CountryCode.cc:192
-msgid "Belarus"
-msgstr "Belarus"
-
 #. language code: bel be
 #: zypp/LanguageCode.cc:259
 msgid "Belarusian"
-msgstr "Bielo-russo"
-
-#. :BGD:050:
-#: zypp/CountryCode.cc:178
-msgid "Belgium"
-msgstr "Bélgica"
-
-#. :BLR:112:
-#: zypp/CountryCode.cc:193
-msgid "Belize"
-msgstr "Belize"
+msgstr "Bielorusso"
 
 #. language code: bem
 #: zypp/LanguageCode.cc:261
@@ -512,30 +2130,15 @@ msgstr "Bemba"
 msgid "Bengali"
 msgstr "Bengali"
 
-#. :BDI:108:
-#: zypp/CountryCode.cc:183
-msgid "Benin"
-msgstr "Benin"
-
 #. language code: ber
 #: zypp/LanguageCode.cc:265
 msgid "Berber (Other)"
-msgstr "Berbere (Outros)"
-
-#. :BEN:204:
-#: zypp/CountryCode.cc:184
-msgid "Bermuda"
-msgstr "Bermudas"
+msgstr "Berbere (outros)"
 
 #. language code: bho
 #: zypp/LanguageCode.cc:267
 msgid "Bhojpuri"
 msgstr "Bhojpuri"
-
-#. :BHS:044:
-#: zypp/CountryCode.cc:189
-msgid "Bhutan"
-msgstr "Butão"
 
 #. language code: bih bh
 #: zypp/LanguageCode.cc:269
@@ -555,268 +2158,72 @@ msgstr "Bini"
 #. language code: bis bi
 #: zypp/LanguageCode.cc:275
 msgid "Bislama"
-msgstr "Bichlamar"
+msgstr "Bislamá"
 
-#. language code: byn
-#: zypp/LanguageCode.cc:299
-msgid "Blin"
-msgstr "Blin"
+#. language code: bla
+#: zypp/LanguageCode.cc:277
+msgid "Siksika"
+msgstr "Siksika"
 
-#. :BRN:096:
-#: zypp/CountryCode.cc:186
-msgid "Bolivia"
-msgstr "Bolívia"
-
-#. :AZE:031:
-#: zypp/CountryCode.cc:175
-msgid "Bosnia and Herzegovina"
-msgstr "Bósnia-Herzegóvina"
+#. language code: bnt
+#: zypp/LanguageCode.cc:279
+msgid "Bantu (Other)"
+msgstr "Banto (outros)"
 
 #. language code: bos bs
 #: zypp/LanguageCode.cc:281
 msgid "Bosnian"
-msgstr "Sérvio"
-
-#. :BVT:074:
-#: zypp/CountryCode.cc:191
-msgid "Botswana"
-msgstr "Botsuana"
-
-#. :BTN:064:
-#: zypp/CountryCode.cc:190
-msgid "Bouvet Island"
-msgstr "Ilha Bouvet"
+msgstr "Bósnio"
 
 #. language code: bra
 #: zypp/LanguageCode.cc:283
 msgid "Braj"
 msgstr "Brajavali"
 
-#. :BOL:068:
-#: zypp/CountryCode.cc:187
-msgid "Brazil"
-msgstr "Brasil"
-
 #. language code: bre br
 #: zypp/LanguageCode.cc:285
 msgid "Breton"
 msgstr "Bretão"
 
-#. :IND:356:
-#: zypp/CountryCode.cc:262
-msgid "British Indian Ocean Territory"
-msgstr "Território Britânico no Oceano Índico"
-
-#. :VEN:862:
-#: zypp/CountryCode.cc:393
-msgid "British Virgin Islands"
-msgstr "Ilhas Virgens Britânicas"
-
-#. :BMU:060:
-#: zypp/CountryCode.cc:185
-msgid "Brunei Darussalam"
-msgstr "Brunei"
-
-#. language code: bug
-#: zypp/LanguageCode.cc:291
-msgid "Buginese"
-msgstr "Buginês"
-
-#: zypp/RepoManager.cc:1282
-#, c-format, boost-format
-msgid "Building repository '%s' cache"
-msgstr "Construindo o cache do repositório '%s'"
-
-#. :BFA:854:
-#: zypp/CountryCode.cc:180
-msgid "Bulgaria"
-msgstr "Bulgária"
-
-#. language code: bul bg
-#: zypp/LanguageCode.cc:293
-msgid "Bulgarian"
-msgstr "Búlgaro"
+#. language code: btk
+#: zypp/LanguageCode.cc:287
+msgid "Batak (Indonesia)"
+msgstr "Bataque (Indonésia)"
 
 #. language code: bua
 #: zypp/LanguageCode.cc:289
 msgid "Buriat"
 msgstr "Buriátio"
 
-#. :BEL:056:
-#: zypp/CountryCode.cc:179
-msgid "Burkina Faso"
-msgstr "Burkina Fasso"
+#. language code: bug
+#: zypp/LanguageCode.cc:291
+msgid "Buginese"
+msgstr "Buginês"
+
+#. language code: bul bg
+#: zypp/LanguageCode.cc:293
+msgid "Bulgarian"
+msgstr "Búlgaro"
 
 #. language code: bur mya my
 #: zypp/LanguageCode.cc:295 zypp/LanguageCode.cc:297
 msgid "Burmese"
 msgstr "Birmanês"
 
-#. :BHR:048:
-#: zypp/CountryCode.cc:182
-msgid "Burundi"
-msgstr "Burundi"
+#. language code: byn
+#: zypp/LanguageCode.cc:299
+msgid "Blin"
+msgstr "Blin"
 
 #. language code: cad
 #: zypp/LanguageCode.cc:301
 msgid "Caddo"
 msgstr "Cadoano"
 
-#. :KGZ:417:
-#: zypp/CountryCode.cc:273
-msgid "Cambodia"
-msgstr "Camboja"
-
-#. :CHL:152:
-#: zypp/CountryCode.cc:203
-msgid "Cameroon"
-msgstr "Camarões"
-
-#: zypp/sat/detail/PoolImpl.cc:184
-msgid "Can not create sat-pool."
-msgstr "Impossível criar o sat-pool."
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "Impossível adquirir o bloqueio mutex"
-
-#: zypp/ExternalProgram.cc:361
-#, c-format, boost-format
-msgid "Can't chdir to '%s' (%s)."
-msgstr "Impossível executar chdir para '%s' (%s)."
-
-#: zypp/ExternalProgram.cc:360
-#, c-format, boost-format
-msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "Impossível executar chdir para '%s' no chroot '%s' (%s)."
-
-#: zypp/ExternalProgram.cc:350
-#, c-format, boost-format
-msgid "Can't chroot to '%s' (%s)."
-msgstr "Impossível executar o chroot em '%s' (%s)."
-
-#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
-#, c-format, boost-format
-msgid "Can't create %s"
-msgstr "Impossível criar %s"
-
-#: zypp/RepoManager.cc:1302
-#, c-format, boost-format
-msgid "Can't create cache at %s - no writing permissions."
-msgstr "Impossível criar o cache em %s - sem permissão de gravação."
-
-#: zypp/RepoManager.cc:1140
-msgid "Can't create metadata cache directory."
-msgstr "Impossível criar o diretório do cache de metadados."
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
-#, c-format, boost-format
-msgid "Can't delete '%s'"
-msgstr "Impossível apagar '%s'"
-
-#. don't want to get here
-#: zypp/ExternalProgram.cc:373
-#, c-format, boost-format
-msgid "Can't exec '%s' (%s)."
-msgstr "Impossível executar '%s' (%s)."
-
-#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
-msgid "Can't figure out where the repo is stored."
-msgstr "Impossível descobrir onde o .repo está armazenado."
-
-#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
-msgid "Can't figure out where the service is stored."
-msgstr "Impossível descobrir onde o serviço está armazenado."
-
-#: zypp/ExternalProgram.cc:381
-#, c-format, boost-format
-msgid "Can't fork (%s)."
-msgstr "Impossível dividir (%s)."
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "Impossível inicializar atributos de mutex"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "Impossível inicializar mutex recursivo"
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
-#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
-#, c-format, boost-format
-msgid "Can't open file '%s' for writing."
-msgstr "Impossível abrir arquivo '%s' para gravação."
-
-#: zypp/base/InterProcessMutex.cc:83
-#, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "Impossível abrir o arquivo de bloqueio: %s"
-
-#: zypp/ExternalProgram.cc:269
-#, c-format, boost-format
-msgid "Can't open pipe (%s)."
-msgstr "Impossível abrir o pipe (%s)."
-
-#: zypp/ExternalProgram.cc:258
-#, c-format, boost-format
-msgid "Can't open pty (%s)."
-msgstr "Impossível abrir o pty (%s)."
-
-#: zypp/repo/RepoProvideFile.cc:259
-#, c-format, boost-format
-msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Impossível fornecer o arquivo '%s' a partir do repositório '%s'"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "Impossível liberar o bloqueio mutex"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "Impossível definir atributo de mutex recursivo"
-
-#. :BLZ:084:
-#: zypp/CountryCode.cc:194
-msgid "Canada"
-msgstr "Canadá"
-
-#: zypp/media/MediaException.cc:182
-msgid "Cannot eject any media"
-msgstr "Impossível ejetar qualquer mídia"
-
-#: zypp/media/MediaException.cc:184
-#, c-format, boost-format
-msgid "Cannot eject media '%s'"
-msgstr "Impossível ejetar a mídia '%s'"
-
-#: zypp/media/MediaException.cc:231
-#, c-format, boost-format
-msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr ""
-"Impossível encontrar dispositivo de loop disponível para montar o arquivo de "
-"imagem de '%s'"
-
-#: zypp/RepoManager.cc:297
-#, boost-format
-msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "Impossível ler o diretório de repositório '%1%': Permissão negada"
-
-#: zypp/RepoManager.cc:315
-#, boost-format
-msgid "Cannot read repo file '%1%': Permission denied"
-msgstr "Impossível ler o arquivo de repositório '%1%': Permissão negada"
-
-#: zypp/media/MediaException.cc:67
-#, c-format, boost-format
-msgid "Cannot write file '%s'."
-msgstr "Não é possível gravar o arquivo '%s'."
-
-#. :CUB:192:
-#: zypp/CountryCode.cc:208
-msgid "Cape Verde"
-msgstr "Cabo Verde"
+#. language code: cai
+#: zypp/LanguageCode.cc:303
+msgid "Central American Indian (Other)"
+msgstr "Indígena centro-americano (outros)"
 
 #. language code: car
 #: zypp/LanguageCode.cc:305
@@ -831,12 +2238,7 @@ msgstr "Catalão"
 #. language code: cau
 #: zypp/LanguageCode.cc:309
 msgid "Caucasian (Other)"
-msgstr "Caucasiano (Outros)"
-
-#. :KWT:414:
-#: zypp/CountryCode.cc:280
-msgid "Cayman Islands"
-msgstr "Ilhas Cayman"
+msgstr "Caucasiano (outros)"
 
 #. language code: ceb
 #: zypp/LanguageCode.cc:311
@@ -846,168 +2248,82 @@ msgstr "Cebuano"
 #. language code: cel
 #: zypp/LanguageCode.cc:313
 msgid "Celtic (Other)"
-msgstr "Celta (Outros)"
-
-#. :COD:180:
-#: zypp/CountryCode.cc:197
-msgid "Central African Republic"
-msgstr "República Centro-Africana"
-
-#. language code: cai
-#: zypp/LanguageCode.cc:303
-msgid "Central American Indian (Other)"
-msgstr "Indígena Centro-Americano (Outros)"
-
-#. :TCA:796:
-#: zypp/CountryCode.cc:369
-msgid "Chad"
-msgstr "Chade"
-
-#. language code: chg
-#: zypp/LanguageCode.cc:321
-msgid "Chagatai"
-msgstr "Chagatai"
-
-#. language code: cmc
-#: zypp/LanguageCode.cc:345
-msgid "Chamic Languages"
-msgstr "Línguas Tchadianas"
+msgstr "Celta (outros)"
 
 #. language code: cha ch
 #: zypp/LanguageCode.cc:315
 msgid "Chamorro"
 msgstr "Chamorro"
 
-#. Translator: %s = name of an rpm package. A list of diffs follows
-#. this message.
-#: zypp/target/rpm/RpmDb.cc:1848
-#, c-format, boost-format
-msgid "Changed configuration files for %s:"
-msgstr "Arquivos de configuração alterados para %s:"
-
-#. language code: che ce
-#: zypp/LanguageCode.cc:319
-msgid "Chechen"
-msgstr "Tchetcheno"
-
-#. language code: chr
-#: zypp/LanguageCode.cc:337
-msgid "Cherokee"
-msgstr "Cherokee"
-
-#. language code: chy
-#: zypp/LanguageCode.cc:343
-msgid "Cheyenne"
-msgstr "Cheyenne"
-
 #. language code: chb
 #: zypp/LanguageCode.cc:317
 msgid "Chibcha"
 msgstr "Chibcha"
 
-#. language code: nya ny
-#: zypp/LanguageCode.cc:819
-msgid "Chichewa"
-msgstr "Chichewa"
+#. language code: che ce
+#: zypp/LanguageCode.cc:319
+msgid "Chechen"
+msgstr "Checheno"
 
-#. :COK:184:
-#: zypp/CountryCode.cc:202
-msgid "Chile"
-msgstr "Chile"
-
-#. :CMR:120:
-#: zypp/CountryCode.cc:204
-msgid "China"
-msgstr "China"
+#. language code: chg
+#: zypp/LanguageCode.cc:321
+msgid "Chagatai"
+msgstr "Chagatai"
 
 #. language code: chi zho zh
 #: zypp/LanguageCode.cc:323 zypp/LanguageCode.cc:325
 msgid "Chinese"
 msgstr "Chinês"
 
+#. language code: chk
+#: zypp/LanguageCode.cc:327
+msgid "Chuukese"
+msgstr "Chuukese"
+
+#. language code: chm
+#: zypp/LanguageCode.cc:329
+msgid "Mari"
+msgstr "Mari"
+
 #. language code: chn
 #: zypp/LanguageCode.cc:331
 msgid "Chinook Jargon"
-msgstr "Jargão Chinook "
-
-#. language code: chp
-#: zypp/LanguageCode.cc:335
-msgid "Chipewyan"
-msgstr "Chipewyan"
+msgstr "Jargão chinook "
 
 #. language code: cho
 #: zypp/LanguageCode.cc:333
 msgid "Choctaw"
 msgstr "Choctaw"
 
-#. :CPV:132:
-#: zypp/CountryCode.cc:209
-msgid "Christmas Island"
-msgstr "Ilha Natal"
+#. language code: chp
+#: zypp/LanguageCode.cc:335
+msgid "Chipewyan"
+msgstr "Chipewyan"
+
+#. language code: chr
+#: zypp/LanguageCode.cc:337
+msgid "Cherokee"
+msgstr "Cherokee"
 
 #. language code: chu cu
 #: zypp/LanguageCode.cc:339
 msgid "Church Slavic"
-msgstr "Eslavo Eclesiástico"
-
-#. language code: chk
-#: zypp/LanguageCode.cc:327
-msgid "Chuukese"
-msgstr "Chuukese"
+msgstr "Eslavo eclesiástico"
 
 #. language code: chv cv
 #: zypp/LanguageCode.cc:341
 msgid "Chuvash"
 msgstr "Chuvash"
 
-#. language code: nwc
-#: zypp/LanguageCode.cc:817
-msgid "Classical Newari"
-msgstr "Newari Clássico"
+#. language code: chy
+#: zypp/LanguageCode.cc:343
+msgid "Cheyenne"
+msgstr "Cheyenne"
 
-#. :CAN:124:
-#: zypp/CountryCode.cc:195
-msgid "Cocos (Keeling) Islands"
-msgstr "Ilhas Cocos (Keeling)"
-
-#. :CHN:156:
-#: zypp/CountryCode.cc:205
-msgid "Colombia"
-msgstr "Colômbia"
-
-#: zypp/ExternalProgram.cc:507
-#, c-format, boost-format
-msgid "Command exited with status %d."
-msgstr "O comando encerrou com status %d."
-
-#: zypp/ExternalProgram.cc:532
-msgid "Command exited with unknown error."
-msgstr "O comando encerrou com erro desconhecido."
-
-#: zypp/ExternalProgram.cc:527
-#, c-format, boost-format
-msgid "Command was killed by signal %d (%s)."
-msgstr "Comando eliminado pelo sinal %d (%s)."
-
-#. :KIR:296:
-#: zypp/CountryCode.cc:275
-msgid "Comoros"
-msgstr "Ilhas Comores"
-
-#: zypp/Dep.cc:99
-msgid "Conflicts"
-msgstr "Está em conflito"
-
-#. :CCK:166:
-#. :CAF:140:
-#: zypp/CountryCode.cc:196 zypp/CountryCode.cc:198
-msgid "Congo"
-msgstr "Congo"
-
-#. :CIV:384:
-#: zypp/CountryCode.cc:201
-msgid "Cook Islands"
-msgstr "Ilhas Cook"
+#. language code: cmc
+#: zypp/LanguageCode.cc:345
+msgid "Chamic Languages"
+msgstr "Línguas tchadianas"
 
 #. language code: cop
 #: zypp/LanguageCode.cc:347
@@ -1024,85 +2340,50 @@ msgstr "Córnico"
 msgid "Corsican"
 msgstr "Corso"
 
-#. :COL:170:
-#: zypp/CountryCode.cc:206
-msgid "Costa Rica"
-msgstr "Costa Rica"
+#. language code: cpe
+#: zypp/LanguageCode.cc:353
+msgid "Creoles and Pidgins, English-Based (Other)"
+msgstr "Crioulos e pidgins de base inglesa (outros)"
 
-#. :CHE:756:
-#: zypp/CountryCode.cc:200
-msgid "Cote D'Ivoire"
-msgstr "Costa do Marfim"
+#. language code: cpf
+#: zypp/LanguageCode.cc:355
+msgid "Creoles and Pidgins, French-Based (Other)"
+msgstr "Crioulos e pidgins de base francesa (outros)"
+
+#. language code: cpp
+#: zypp/LanguageCode.cc:357
+msgid "Creoles and Pidgins, Portuguese-Based (Other)"
+msgstr "Crioulos e pidgins de base portuguesa (outros)"
 
 #. language code: cre cr
 #: zypp/LanguageCode.cc:359
 msgid "Cree"
 msgstr "Cree"
 
-#. language code: mus
-#: zypp/LanguageCode.cc:765
-msgid "Creek"
-msgstr "Creek"
+#. language code: crh
+#: zypp/LanguageCode.cc:361
+msgid "Crimean Tatar"
+msgstr "Tártaro (Crimeia)"
 
 #. language code: crp
 #: zypp/LanguageCode.cc:363
 msgid "Creoles and Pidgins (Other)"
-msgstr "Crioulos e Pidgins (Outros)"
+msgstr "Crioulos e pidgins (outros)"
 
-#. language code: cpe
-#: zypp/LanguageCode.cc:353
-msgid "Creoles and Pidgins, English-Based (Other)"
-msgstr "Crioulos e Pidgins de Base Inglesa (Outros)"
-
-#. language code: cpf
-#: zypp/LanguageCode.cc:355
-msgid "Creoles and Pidgins, French-Based (Other)"
-msgstr "Crioulos e Pidgins de Base Francesa (Outros)"
-
-#. language code: cpp
-#: zypp/LanguageCode.cc:357
-msgid "Creoles and Pidgins, Portuguese-Based (Other)"
-msgstr "Crioulos e Pidgins de Base Portuguesa (Outros)"
-
-#. language code: crh
-#: zypp/LanguageCode.cc:361
-msgid "Crimean Tatar"
-msgstr "Tártaro (Criméia)"
-
-#. :HND:340:
-#: zypp/CountryCode.cc:254
-msgid "Croatia"
-msgstr "Croácia"
-
-#. language code: scr hrv hr
-#: zypp/LanguageCode.cc:931 zypp/LanguageCode.cc:933
-msgid "Croatian"
-msgstr "Croata"
-
-#. :CRI:188:
-#: zypp/CountryCode.cc:207
-msgid "Cuba"
-msgstr "Cuba"
+#. language code: csb
+#: zypp/LanguageCode.cc:365
+msgid "Kashubian"
+msgstr "Cassúbio"
 
 #. language code: cus
 #: zypp/LanguageCode.cc:367
 msgid "Cushitic (Other)"
-msgstr "Cuchita (Outros)"
-
-#. :CXR:162:
-#: zypp/CountryCode.cc:210
-msgid "Cyprus"
-msgstr "Chipre"
+msgstr "Cuchita (outros)"
 
 #. language code: cze ces cs
 #: zypp/LanguageCode.cc:369 zypp/LanguageCode.cc:371
 msgid "Czech"
-msgstr "Tcheco"
-
-#. :CYP:196:
-#: zypp/CountryCode.cc:211
-msgid "Czech Republic"
-msgstr "República Tcheca"
+msgstr "Checo"
 
 #. language code: dak
 #: zypp/LanguageCode.cc:373
@@ -1129,10 +2410,15 @@ msgstr "Daiaque"
 msgid "Delaware"
 msgstr "Delaware"
 
-#. :DJI:262:
-#: zypp/CountryCode.cc:214
-msgid "Denmark"
-msgstr "Dinamarca"
+#. language code: den
+#: zypp/LanguageCode.cc:383
+msgid "Slave (Athapascan)"
+msgstr "Slave (Atapasca)"
+
+#. language code: dgr
+#: zypp/LanguageCode.cc:385
+msgid "Dogrib"
+msgstr "Dogrib"
 
 #. language code: din
 #: zypp/LanguageCode.cc:387
@@ -1144,103 +2430,50 @@ msgstr "Dinca"
 msgid "Divehi"
 msgstr "Divehi"
 
-#. :DEU:276:
-#: zypp/CountryCode.cc:213
-msgid "Djibouti"
-msgstr "Djibuti"
-
 #. language code: doi
 #: zypp/LanguageCode.cc:391
 msgid "Dogri"
 msgstr "Dogri"
 
-#. language code: dgr
-#: zypp/LanguageCode.cc:385
-msgid "Dogrib"
-msgstr "Dogrib"
-
-#. :DNK:208:
-#: zypp/CountryCode.cc:215
-msgid "Dominica"
-msgstr "Dominica"
-
-#. :DMA:212:
-#: zypp/CountryCode.cc:216
-msgid "Dominican Republic"
-msgstr "República Dominicana"
-
-#: zypp/media/MediaException.cc:152
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-"Error message: %s\n"
-msgstr ""
-"Erro de download (curl) para '%s':\n"
-"Código de erro: %s\n"
-"Mensagem de erro: %s\n"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:84
-#, c-format, boost-format
-msgid "Download (curl) initialization failed for '%s'"
-msgstr "Falha na inicialização do download (curl) para '%s'"
-
 #. language code: dra
 #: zypp/LanguageCode.cc:393
 msgid "Dravidian (Other)"
-msgstr "Dravidiano (Outros)"
+msgstr "Dravidiano (outros)"
+
+#. language code: dsb
+#: zypp/LanguageCode.cc:395
+msgid "Lower Sorbian"
+msgstr "Baixo-sorbiano"
 
 #. language code: dua
 #: zypp/LanguageCode.cc:397
 msgid "Duala"
 msgstr "Duala"
 
-#. dubious: Throw on malformed known types, otherwise log a warning.
-#: zypp/CheckSum.cc:136
-#, c-format, boost-format
-msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Tipo duvidoso '%s' para %u byte da soma de verificação '%s'"
+#. language code: dum
+#: zypp/LanguageCode.cc:399
+msgid "Dutch, Middle (ca.1050-1350)"
+msgstr "Holandês medieval (aprox. 1050-1350)"
 
 #. language code: dut nld nl
 #: zypp/LanguageCode.cc:401 zypp/LanguageCode.cc:403
 msgid "Dutch"
 msgstr "Holandês"
 
-#. language code: dum
-#: zypp/LanguageCode.cc:399
-msgid "Dutch, Middle (ca.1050-1350)"
-msgstr "Holandês Medieval (aprox. 1050-1350)"
-
 #. language code: dyu
 #: zypp/LanguageCode.cc:405
 msgid "Dyula"
-msgstr "Diúla"
+msgstr "Diula"
 
 #. language code: dzo dz
 #: zypp/LanguageCode.cc:407
 msgid "Dzongkha"
 msgstr "Dzongkha"
 
-#. :TON:776:
-#: zypp/CountryCode.cc:378
-msgid "East Timor"
-msgstr "Timor Leste"
-
-#. :DZA:012:
-#: zypp/CountryCode.cc:218
-msgid "Ecuador"
-msgstr "Equador"
-
 #. language code: efi
 #: zypp/LanguageCode.cc:409
 msgid "Efik"
 msgstr "Efique"
-
-#. :EST:233:
-#: zypp/CountryCode.cc:220
-msgid "Egypt"
-msgstr "Egito"
 
 #. language code: egy
 #: zypp/LanguageCode.cc:411
@@ -1252,31 +2485,10 @@ msgstr "Egípcio (Antigo)"
 msgid "Ekajuk"
 msgstr "Ekajuk"
 
-#. :STP:678:
-#: zypp/CountryCode.cc:365
-msgid "El Salvador"
-msgstr "El Salvador"
-
 #. language code: elx
 #: zypp/LanguageCode.cc:415
 msgid "Elamite"
 msgstr "Elamita"
-
-#: zypp/media/MediaException.cc:135
-msgid "Empty destination in URI"
-msgstr "Destino vazio no URI"
-
-#: zypp/media/MediaException.cc:130
-msgid "Empty filesystem in URI"
-msgstr "Sistema de arquivos vazio no URI"
-
-#: zypp/media/MediaException.cc:125
-msgid "Empty host name in URI"
-msgstr "Nome de host vazio no URI"
-
-#: zypp/url/UrlUtils.cc:111
-msgid "Encoded string contains a NUL byte"
-msgstr "A string codificada contém um byte NUL"
 
 #. language code: eng en
 #: zypp/LanguageCode.cc:417
@@ -1286,74 +2498,17 @@ msgstr "Inglês"
 #. language code: enm
 #: zypp/LanguageCode.cc:419
 msgid "English, Middle (1100-1500)"
-msgstr "Inglês Medieval (1100-1500)"
-
-#. language code: ang
-#: zypp/LanguageCode.cc:197
-msgid "English, Old (ca.450-1100)"
-msgstr "Inglês Antigo (aprox. 450-1100)"
-
-#: zypp/Dep.cc:103
-msgid "Enhances"
-msgstr "Aprimora"
-
-#. :GLP:312:
-#: zypp/CountryCode.cc:244
-msgid "Equatorial Guinea"
-msgstr "Guiné Equatorial"
-
-#. :ESH:732:
-#: zypp/CountryCode.cc:222
-msgid "Eritrea"
-msgstr "Eritréia"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:161
-#, c-format, boost-format
-msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "Erro ao definir as opções de download (curl) para '%s':"
-
-#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
-#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
-#: zypp/target/TargetImpl.cc:607
-msgid "Error sending update message notification."
-msgstr "Erro ao enviar a notificação de mensagem de atualização."
-
-#. prepare exception to be thrown if the type could not be determined
-#. due to a media exception. We can't throw right away, because of some
-#. problems with proxy servers returning an incorrect error
-#. on ftp file-not-found(bnc #335906). Instead we'll check another types
-#. before throwing.
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
-#, c-format, boost-format
-msgid "Error trying to read from '%s'"
-msgstr "Erro ao tentar ler de '%s'"
-
-#. language code: myv
-#: zypp/LanguageCode.cc:773
-msgid "Erzya"
-msgstr "Erzya"
+msgstr "Inglês medieval (1100-1500)"
 
 #. language code: epo eo
 #: zypp/LanguageCode.cc:421
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#. :ECU:218:
-#: zypp/CountryCode.cc:219
-msgid "Estonia"
-msgstr "Estônia"
-
 #. language code: est et
 #: zypp/LanguageCode.cc:423
 msgid "Estonian"
 msgstr "Estoniano"
-
-#. :ESP:724:
-#: zypp/CountryCode.cc:224
-msgid "Ethiopia"
-msgstr "Etiópia"
 
 #. language code: ewe ee
 #: zypp/LanguageCode.cc:425
@@ -1365,255 +2520,30 @@ msgstr "Jeje"
 msgid "Ewondo"
 msgstr "Ewondo"
 
-#: zypp/RepoManager.cc:1366
-#, c-format, boost-format
-msgid "Failed to cache repo (%d)."
-msgstr "Falha ao armazenar .repo (%d) em cache."
-
-#: zypp/KeyRing.cc:566
-msgid "Failed to delete key."
-msgstr "Falha ao apagar chave."
-
-#. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1124
-#, c-format, boost-format
-msgid "Failed to import public key from file %s: %s"
-msgstr "Falha ao importar chave pública do arquivo %s: %s"
-
-#: zypp/media/MediaException.cc:31
-#, c-format, boost-format
-msgid "Failed to mount %s on %s"
-msgstr "Falha ao montar %s em %s"
-
-#. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:386
-#, c-format, boost-format
-msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr "Falha ao fornecer o Pacote %s. Deseja tentar a recuperação novamente?"
-
-#. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
-#: zypp/repo/PluginServices.cc:49
-#, c-format, boost-format
-msgid "Failed to read directory '%s'"
-msgstr "Falha ao ler o diretório '%s'"
-
-#. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1195
-#, c-format, boost-format
-msgid "Failed to remove public key %s: %s"
-msgstr "Falha ao remover chave pública %s: %s"
-
-#: zypp/media/MediaException.cc:41
-#, c-format, boost-format
-msgid "Failed to unmount %s"
-msgstr "Falha ao desmontar %s"
-
-#. :FJI:242:
-#: zypp/CountryCode.cc:227
-msgid "Falkland Islands (Malvinas)"
-msgstr "Ilhas Malvinas"
-
 #. language code: fan
 #: zypp/LanguageCode.cc:429
 msgid "Fang"
 msgstr "Fang"
+
+#. language code: fao fo
+#: zypp/LanguageCode.cc:431
+msgid "Faroese"
+msgstr "Feroês"
 
 #. language code: fat
 #: zypp/LanguageCode.cc:433
 msgid "Fanti"
 msgstr "Fanti"
 
-#. :FSM:583:
-#: zypp/CountryCode.cc:229
-msgid "Faroe Islands"
-msgstr "Ilhas Faeroes"
-
-#. language code: fao fo
-#: zypp/LanguageCode.cc:431
-msgid "Faroese"
-msgstr "Faeroês"
-
-#. :FLK:238:
-#: zypp/CountryCode.cc:228
-msgid "Federated States of Micronesia"
-msgstr "Micronésia"
-
-#. :FIN:246:
-#: zypp/CountryCode.cc:226
-msgid "Fiji"
-msgstr "Fiji"
-
 #. language code: fij fj
 #: zypp/LanguageCode.cc:435
 msgid "Fijian"
 msgstr "Fijiano"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:93
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
-msgstr ""
-"Arquivo %1%\n"
-"  da instalação de\n"
-"     %2%\n"
-"  está em conflito com arquivo\n"
-"     %3%\n"
-"  da instalação de\n"
-"     %4%"
-
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:85
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
-"Arquivo %1%\n"
-"  da instalação de\n"
-"     %2%\n"
-"  está em conflito com arquivo\n"
-"     %3%\n"
-"  do pacote\n"
-"     %4%"
-
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:53
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
-"Arquivo %1%\n"
-"  da instalação de\n"
-"     %2%\n"
-"  está em conflito com arquivo da instalação de\n"
-"     %3%"
-
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:47
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
-"Arquivo %1%\n"
-"  da instalação de\n"
-"     %2%\n"
-"  está em conflito com arquivo do pacote\n"
-"     %3%"
-
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:76
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
-msgstr ""
-"Arquivo %1%\n"
-"  do pacote\n"
-"     %2%\n"
-"  está em conflito com arquivo\n"
-"     %3%\n"
-"  da instalação de\n"
-"     %4%"
-
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
-#: zypp/sat/FileConflicts.cc:68
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
-"Arquivo %1%\n"
-"  do pacote\n"
-"     %2%\n"
-"  está em conflito com arquivo\n"
-"     %3%\n"
-"  do pacote\n"
-"     %4%"
-
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:40
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
-"Arquivo %1%\n"
-"  do pacote\n"
-"     %2%\n"
-"  está em conflito com arquivo da instalação de\n"
-"     %3%"
-
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:34
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
-"Arquivo %1%\n"
-"  do pacote\n"
-"     %2%\n"
-"  está em conflito com arquivo do pacote\n"
-"     %3%"
-
-#: zypp/media/MediaException.cc:60
-#, c-format, boost-format
-msgid "File '%s' not found on medium '%s'"
-msgstr "Arquivo '%s' não encontrado no meio '%s'"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2375
-msgid "File does not exist or signature can't be checked"
-msgstr "O arquivo não existe ou a assinatura não pode ser verificada"
-
 #. language code: fil
 #: zypp/LanguageCode.cc:437
 msgid "Filipino"
 msgstr "Filipino"
-
-#. :ETH:231:
-#: zypp/CountryCode.cc:225
-msgid "Finland"
-msgstr "Finlândia"
 
 #. language code: fin fi
 #: zypp/LanguageCode.cc:439
@@ -1623,96 +2553,47 @@ msgstr "Finlandês"
 #. language code: fiu
 #: zypp/LanguageCode.cc:441
 msgid "Finno-Ugrian (Other)"
-msgstr "Fino-Ugriano (Outros)"
-
-#: zypp/ProblemSolution.cc:114
-msgid "Following actions will be done:"
-msgstr "As seguintes ações serão realizadas:"
+msgstr "Fino-ugriano (outros)"
 
 #. language code: fon
 #: zypp/LanguageCode.cc:443
 msgid "Fon"
 msgstr "Fon"
 
-#. :FRO:234:
-#: zypp/CountryCode.cc:230
-msgid "France"
-msgstr "França"
-
 #. language code: fre fra fr
 #: zypp/LanguageCode.cc:445 zypp/LanguageCode.cc:447
 msgid "French"
 msgstr "Francês"
 
-#. :GEO:268:
-#: zypp/CountryCode.cc:236
-msgid "French Guiana"
-msgstr "Guiana Francesa"
-
-#. :PER:604:
-#: zypp/CountryCode.cc:331
-msgid "French Polynesia"
-msgstr "Polinésia Francesa"
-
-#. :TCD:148:
-#: zypp/CountryCode.cc:370
-msgid "French Southern Territories"
-msgstr "Territórios Franceses Meridionais"
-
 #. language code: frm
 #: zypp/LanguageCode.cc:449
 msgid "French, Middle (ca.1400-1600)"
-msgstr "Francês Medieval (aprox. 1400-1600)"
+msgstr "Francês medieval (aprox. 1400-1600)"
 
 #. language code: fro
 #: zypp/LanguageCode.cc:451
 msgid "French, Old (842-ca.1400)"
-msgstr "Francês Antigo (842-aprox. 1400)"
+msgstr "Francês antigo (aprox. 842-1400)"
 
 #. language code: fry fy
 #: zypp/LanguageCode.cc:453
 msgid "Frisian"
 msgstr "Frísio"
 
-#. language code: fur
-#: zypp/LanguageCode.cc:457
-msgid "Friulian"
-msgstr "Friulano"
-
 #. language code: ful ff
 #: zypp/LanguageCode.cc:455
 msgid "Fulah"
 msgstr "Fula"
 
+#. language code: fur
+#: zypp/LanguageCode.cc:457
+msgid "Friulian"
+msgstr "Friulano"
+
 #. language code: gaa
 #: zypp/LanguageCode.cc:459
 msgid "Ga"
 msgstr "Cua"
-
-#. :FXX:249:
-#: zypp/CountryCode.cc:232
-msgid "Gabon"
-msgstr "Gabão"
-
-#. language code: gla gd
-#: zypp/LanguageCode.cc:479
-msgid "Gaelic"
-msgstr "Gaélico"
-
-#. language code: glg gl
-#: zypp/LanguageCode.cc:483
-msgid "Galician"
-msgstr "Galego"
-
-#. :GRL:304:
-#: zypp/CountryCode.cc:241
-msgid "Gambia"
-msgstr "Gâmbia"
-
-#. language code: lug lg
-#: zypp/LanguageCode.cc:685
-msgid "Ganda"
-msgstr "Nganda"
 
 #. language code: gay
 #: zypp/LanguageCode.cc:461
@@ -1724,15 +2605,10 @@ msgstr "Gayo"
 msgid "Gbaya"
 msgstr "Gbaia"
 
-#. language code: gez
-#: zypp/LanguageCode.cc:475
-msgid "Geez"
-msgstr "Ge'ez"
-
-#. :GRD:308:
-#: zypp/CountryCode.cc:235
-msgid "Georgia"
-msgstr "Geórgia"
+#. language code: gem
+#: zypp/LanguageCode.cc:465
+msgid "Germanic (Other)"
+msgstr "Germânico (outros)"
 
 #. language code: geo kat ka
 #: zypp/LanguageCode.cc:467 zypp/LanguageCode.cc:469
@@ -1744,39 +2620,45 @@ msgstr "Georgiano"
 msgid "German"
 msgstr "Alemão"
 
-#. language code: gmh
-#: zypp/LanguageCode.cc:487
-msgid "German, Middle High (ca.1050-1500)"
-msgstr "Alto-Alemão Medieval (aprox. 1050-1500)"
-
-#. language code: goh
-#: zypp/LanguageCode.cc:489
-msgid "German, Old High (ca.750-1050)"
-msgstr "Alto-Alemão Antigo (aprox. 750-1050)"
-
-#. language code: gem
-#: zypp/LanguageCode.cc:465
-msgid "Germanic (Other)"
-msgstr "Germânico (Outros)"
-
-#. :CZE:203:
-#: zypp/CountryCode.cc:212
-msgid "Germany"
-msgstr "Alemanha"
-
-#: zypp/CountryCode.cc:238
-msgid "Ghana"
-msgstr "Gana"
-
-#. :GHA:288:
-#: zypp/CountryCode.cc:239
-msgid "Gibraltar"
-msgstr "Gibraltar"
+#. language code: gez
+#: zypp/LanguageCode.cc:475
+msgid "Geez"
+msgstr "Ge'ez"
 
 #. language code: gil
 #: zypp/LanguageCode.cc:477
 msgid "Gilbertese"
 msgstr "Gilbertês"
+
+#. language code: gla gd
+#: zypp/LanguageCode.cc:479
+msgid "Gaelic"
+msgstr "Gaélico"
+
+#. language code: gle ga
+#: zypp/LanguageCode.cc:481
+msgid "Irish"
+msgstr "Irlandês"
+
+#. language code: glg gl
+#: zypp/LanguageCode.cc:483
+msgid "Galician"
+msgstr "Galego"
+
+#. language code: glv gv
+#: zypp/LanguageCode.cc:485
+msgid "Manx"
+msgstr "Manx"
+
+#. language code: gmh
+#: zypp/LanguageCode.cc:487
+msgid "German, Middle High (ca.1050-1500)"
+msgstr "Alto-alemão medieval (aprox. 1050-1500)"
+
+#. language code: goh
+#: zypp/LanguageCode.cc:489
+msgid "German, Old High (ca.750-1050)"
+msgstr "Alto-alemão antigo (aprox. 750-1050)"
 
 #. language code: gon
 #: zypp/LanguageCode.cc:491
@@ -1798,75 +2680,25 @@ msgstr "Gótico"
 msgid "Grebo"
 msgstr "Grebo"
 
-#. :GNQ:226:
-#: zypp/CountryCode.cc:245
-msgid "Greece"
-msgstr "Grécia"
-
 #. language code: grc
 #: zypp/LanguageCode.cc:499
 msgid "Greek, Ancient (to 1453)"
-msgstr "Grego Antigo (até 1453)"
+msgstr "Grego antigo (até 1453)"
 
 #. language code: gre ell el
 #: zypp/LanguageCode.cc:501 zypp/LanguageCode.cc:503
 msgid "Greek, Modern (1453-)"
-msgstr "Grego Moderno (1453-Presente)"
-
-#. :GIB:292:
-#: zypp/CountryCode.cc:240
-msgid "Greenland"
-msgstr "Groenlândia"
-
-#. :GBR:826:
-#: zypp/CountryCode.cc:234
-msgid "Grenada"
-msgstr "Granada"
-
-#. :GIN:324:
-#: zypp/CountryCode.cc:243
-msgid "Guadeloupe"
-msgstr "Guadalupe"
-
-#. :GTM:320:
-#: zypp/CountryCode.cc:248
-msgid "Guam"
-msgstr "Guam"
+msgstr "Grego moderno (após 1453)"
 
 #. language code: grn gn
 #: zypp/LanguageCode.cc:505
 msgid "Guarani"
 msgstr "Guarani"
 
-#. :SGS:239:
-#: zypp/CountryCode.cc:247
-msgid "Guatemala"
-msgstr "Guatemala"
-
-#. :GUF:254:
-#: zypp/CountryCode.cc:237
-msgid "Guernsey"
-msgstr "Guernsey"
-
-#. :GMB:270:
-#: zypp/CountryCode.cc:242
-msgid "Guinea"
-msgstr "Guiné"
-
-#. :GUM:316:
-#: zypp/CountryCode.cc:249
-msgid "Guinea-Bissau"
-msgstr "Guiné-Bissau"
-
 #. language code: guj gu
 #: zypp/LanguageCode.cc:507
 msgid "Gujarati"
-msgstr "Gujarati"
-
-#. :GNB:624:
-#: zypp/CountryCode.cc:250
-msgid "Guyana"
-msgstr "Guiana"
+msgstr "Guzerate"
 
 #. language code: gwi
 #: zypp/LanguageCode.cc:509
@@ -1878,51 +2710,20 @@ msgstr "Gwich'in"
 msgid "Haida"
 msgstr "Haida"
 
-#. :HRV:191:
-#: zypp/CountryCode.cc:255
-msgid "Haiti"
-msgstr "Haiti"
-
 #. language code: hat ht
 #: zypp/LanguageCode.cc:513
 msgid "Haitian"
 msgstr "Haitiano"
 
-#: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
-#: zypp/target/hal/HalException.h:64
-msgid "Hal Exception"
-msgstr "Exceção de Hal"
-
-#: zypp/target/hal/HalContext.cc:117
-msgid "HalContext not connected"
-msgstr "HalContext não conectado"
-
-#: zypp/target/hal/HalContext.cc:127
-msgid "HalDrive not initialized"
-msgstr "HalDrive não inicializado"
-
-#: zypp/target/hal/HalContext.cc:137
-msgid "HalVolume not initialized"
-msgstr "HalVolume não inicializado"
-
 #. language code: hau ha
 #: zypp/LanguageCode.cc:515
 msgid "Hausa"
-msgstr "Hauçá"
-
-#: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
-msgid "Have you enabled all requested repositories?"
-msgstr "Você habilitou todos os repositórios solicitados?"
+msgstr "Haúça"
 
 #. language code: haw
 #: zypp/LanguageCode.cc:517
 msgid "Hawaiian"
 msgstr "Havaiano"
-
-#. :HKG:344:
-#: zypp/CountryCode.cc:252
-msgid "Heard Island and McDonald Islands"
-msgstr "Ilhas Heard e McDonald"
 
 #. language code: heb he
 #: zypp/LanguageCode.cc:519
@@ -1947,17 +2748,7 @@ msgstr "Himachali"
 #. language code: hin hi
 #: zypp/LanguageCode.cc:527
 msgid "Hindi"
-msgstr "Híndi"
-
-#. language code: hmo ho
-#: zypp/LanguageCode.cc:533
-msgid "Hiri Motu"
-msgstr "Hiri Motu"
-
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp/base/Exception.cc:107
-msgid "History:"
-msgstr "Histórico:"
+msgstr "Hindi"
 
 #. language code: hit
 #: zypp/LanguageCode.cc:529
@@ -1969,30 +2760,20 @@ msgstr "Hitita"
 msgid "Hmong"
 msgstr "Hmong"
 
-#. :UZB:860:
-#: zypp/CountryCode.cc:390
-msgid "Holy See (Vatican City State)"
-msgstr "Cidade do Vaticano"
+#. language code: hmo ho
+#: zypp/LanguageCode.cc:533
+msgid "Hiri Motu"
+msgstr "Hiri Motu"
 
-#. :HMD:334:
-#: zypp/CountryCode.cc:253
-msgid "Honduras"
-msgstr "Honduras"
-
-#. :GUY:328:
-#: zypp/CountryCode.cc:251
-msgid "Hong Kong"
-msgstr "Hong Kong"
+#. language code: hsb
+#: zypp/LanguageCode.cc:535
+msgid "Upper Sorbian"
+msgstr "Alto-Sorbiano"
 
 #. language code: hun hu
 #: zypp/LanguageCode.cc:537
 msgid "Hungarian"
 msgstr "Húngaro"
-
-#. :HTI:332:
-#: zypp/CountryCode.cc:256
-msgid "Hungary"
-msgstr "Hungria"
 
 #. language code: hup
 #: zypp/LanguageCode.cc:539
@@ -2004,10 +2785,10 @@ msgstr "Hupa"
 msgid "Iban"
 msgstr "Iban"
 
-#. :IRN:364:
-#: zypp/CountryCode.cc:265
-msgid "Iceland"
-msgstr "Islândia"
+#. language code: ibo ig
+#: zypp/LanguageCode.cc:543
+msgid "Igbo"
+msgstr "Ibo"
 
 #. language code: ice isl is
 #: zypp/LanguageCode.cc:545 zypp/LanguageCode.cc:547
@@ -2019,60 +2800,30 @@ msgstr "Islandês"
 msgid "Ido"
 msgstr "Ido"
 
-#. language code: ibo ig
-#: zypp/LanguageCode.cc:543
-msgid "Igbo"
-msgstr "Ibo"
+#. language code: iii ii
+#: zypp/LanguageCode.cc:551
+msgid "Sichuan Yi"
+msgstr "Yi (Sechuan)"
 
 #. language code: ijo
 #: zypp/LanguageCode.cc:553
 msgid "Ijo"
 msgstr "Ijo"
 
+#. language code: iku iu
+#: zypp/LanguageCode.cc:555
+msgid "Inuktitut"
+msgstr "Inuktitut"
+
+#. language code: ile ie
+#: zypp/LanguageCode.cc:557
+msgid "Interlingue"
+msgstr "Interlíngua"
+
 #. language code: ilo
 #: zypp/LanguageCode.cc:559
 msgid "Iloko"
 msgstr "Ilocano"
-
-#. language code: smn
-#: zypp/LanguageCode.cc:969
-msgid "Inari Sami"
-msgstr "Lapão (Inari)"
-
-#: zypp/CountryCode.cc:261
-msgid "India"
-msgstr "Índia"
-
-#. language code: inc
-#: zypp/LanguageCode.cc:563
-msgid "Indic (Other)"
-msgstr "Índico (Outros)"
-
-#. language code: ine
-#: zypp/LanguageCode.cc:567
-msgid "Indo-European (Other)"
-msgstr "Indo-Europeu (Outros)"
-
-#. :HUN:348:
-#: zypp/CountryCode.cc:257
-msgid "Indonesia"
-msgstr "Indonésia"
-
-#. language code: ind id
-#: zypp/LanguageCode.cc:565
-msgid "Indonesian"
-msgstr "Indonésio"
-
-#. language code: inh
-#: zypp/LanguageCode.cc:569
-msgid "Ingush"
-msgstr "Ingush"
-
-#: zypp/target/TargetImpl.cc:1219 zypp/target/TargetImpl.cc:1288
-#: zypp/target/TargetImpl.cc:1640
-#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
-msgid "Installation has been aborted as directed."
-msgstr "A instalação foi interrompida conforme instruções."
 
 #. language code: ina ia
 #: zypp/LanguageCode.cc:561
@@ -2081,190 +2832,75 @@ msgstr ""
 "Interlíngua (International Auxiliary Language Association, Associação de "
 "Línguas Internacionais Auxiliares)"
 
-#. language code: ile ie
-#: zypp/LanguageCode.cc:557
-msgid "Interlingue"
-msgstr "Interlínguas"
+#. language code: inc
+#: zypp/LanguageCode.cc:563
+msgid "Indic (Other)"
+msgstr "Índico (outros)"
 
-#. language code: iku iu
-#: zypp/LanguageCode.cc:555
-msgid "Inuktitut"
-msgstr "Inuktitut"
+#. language code: ind id
+#: zypp/LanguageCode.cc:565
+msgid "Indonesian"
+msgstr "Indonésio"
+
+#. language code: ine
+#: zypp/LanguageCode.cc:567
+msgid "Indo-European (Other)"
+msgstr "Indo-europeu (outros)"
+
+#. language code: inh
+#: zypp/LanguageCode.cc:569
+msgid "Ingush"
+msgstr "Ingush"
 
 #. language code: ipk ik
 #: zypp/LanguageCode.cc:571
 msgid "Inupiaq"
 msgstr "Inupiaq"
 
-#: zypp/url/UrlBase.cc:180
-#, c-format, boost-format
-msgid "Invalid %s component"
-msgstr "Componente inválido %s"
-
-#: zypp/url/UrlBase.cc:173
-#, c-format, boost-format
-msgid "Invalid %s component '%s'"
-msgstr "Componente '%s' inválido %s"
-
-#: zypp/Url.cc:153
-#, c-format, boost-format
-msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Parâmetro de consulta de URL de LDAP inválido '%s'"
-
-#: zypp/Url.cc:114
-msgid "Invalid LDAP URL query string"
-msgstr "String de consulta de URL de LDAP inválida"
-
-#: zypp/url/UrlBase.cc:830
-#, c-format, boost-format
-msgid "Invalid Url scheme '%s'"
-msgstr "Esquema de Url '%s' inválido"
-
-#: zypp/Url.cc:313
-msgid "Invalid empty Url object reference"
-msgstr "Referência a objeto Url vazio inválida"
-
-#: zypp/url/UrlBase.cc:1049
-#, c-format, boost-format
-msgid "Invalid host component '%s'"
-msgstr "Componente de host inválido '%s'"
-
-#: zypp/url/UrlUtils.cc:283
-msgid "Invalid parameter array join separator character"
-msgstr "Caractere separador de integração de matriz de parâmetros inválido"
-
-#: zypp/url/UrlUtils.cc:173
-msgid "Invalid parameter array split separator character"
-msgstr "Caractere separador de divisão de matriz de parâmetros inválido"
-
-#: zypp/url/UrlUtils.cc:213
-msgid "Invalid parameter map split separator character"
-msgstr "Caractere separador de divisão de mapa de parâmetros inválido"
-
-#: zypp/url/UrlBase.cc:1081
-#, c-format, boost-format
-msgid "Invalid port component '%s'"
-msgstr "Componente de porta inválido '%s'"
-
-#: zypp/base/StrMatcher.cc:158
-#, c-format, boost-format
-msgid "Invalid regular expression '%s'"
-msgstr "Expressão regular inválida '%s'"
-
-#: zypp/base/StrMatcher.cc:157
-#, c-format, boost-format
-msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "Expressão regular inválida '%s': o regcomp retornou %d"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1701
-#, c-format, boost-format
-msgid "Invalid repo file name at '%s'"
-msgstr "Nome de arquivo .repo inválido em '%s'"
-
-#. :IRQ:368:
-#: zypp/CountryCode.cc:264
-msgid "Iran"
-msgstr "Irã"
-
 #. language code: ira
 #: zypp/LanguageCode.cc:573
 msgid "Iranian (Other)"
-msgstr "Iraniano (Outros)"
-
-#. :IOT:086:
-#: zypp/CountryCode.cc:263
-msgid "Iraq"
-msgstr "Iraque"
-
-#. :IDN:360:
-#: zypp/CountryCode.cc:258
-msgid "Ireland"
-msgstr "Irlanda"
-
-#. language code: gle ga
-#: zypp/LanguageCode.cc:481
-msgid "Irish"
-msgstr "Irlandês"
-
-#. language code: mga
-#: zypp/LanguageCode.cc:733
-msgid "Irish, Middle (900-1200)"
-msgstr "Irlandês Medieval (900-1200)"
-
-#. language code: sga
-#: zypp/LanguageCode.cc:939
-msgid "Irish, Old (to 900)"
-msgstr "Irlandês Antigo (até 900)"
+msgstr "Iraniano (outros)"
 
 #. language code: iro
 #: zypp/LanguageCode.cc:575
 msgid "Iroquoian Languages"
-msgstr "Línguas Iroquesas"
-
-#. :ISR:376:
-#: zypp/CountryCode.cc:260
-msgid "Isle of Man"
-msgstr "Ilha de Man"
-
-#. :IRL:372:
-#: zypp/CountryCode.cc:259
-msgid "Israel"
-msgstr "Israel"
+msgstr "Línguas iroquesas"
 
 #. language code: ita it
 #: zypp/LanguageCode.cc:577
 msgid "Italian"
 msgstr "Italiano"
 
-#. :ISL:352:
-#: zypp/CountryCode.cc:266
-msgid "Italy"
-msgstr "Itália"
+#. language code: jav jv
+#: zypp/LanguageCode.cc:579
+msgid "Javanese"
+msgstr "Javanês"
 
-#: zypp/CountryCode.cc:268
-msgid "Jamaica"
-msgstr "Jamaica"
-
-#. :JOR:400:
-#: zypp/CountryCode.cc:270
-msgid "Japan"
-msgstr "Japão"
+#. language code: jbo
+#: zypp/LanguageCode.cc:581
+msgid "Lojban"
+msgstr "Lojban"
 
 #. language code: jpn ja
 #: zypp/LanguageCode.cc:583
 msgid "Japanese"
 msgstr "Japonês"
 
-#. language code: jav jv
-#: zypp/LanguageCode.cc:579
-msgid "Javanese"
-msgstr "Javanês"
-
-#. :ITA:380:
-#: zypp/CountryCode.cc:267
-msgid "Jersey"
-msgstr "Jersey"
-
-#. :JAM:388:
-#: zypp/CountryCode.cc:269
-msgid "Jordan"
-msgstr "Jordânia"
+#. language code: jpr
+#: zypp/LanguageCode.cc:585
+msgid "Judeo-Persian"
+msgstr "Judeu-persa"
 
 #. language code: jrb
 #: zypp/LanguageCode.cc:587
 msgid "Judeo-Arabic"
-msgstr "Judeo-Arábico"
+msgstr "Judeu-arábico"
 
-#. language code: jpr
-#: zypp/LanguageCode.cc:585
-msgid "Judeo-Persian"
-msgstr "Judeo-Persa"
-
-#. language code: kbd
-#: zypp/LanguageCode.cc:611
-msgid "Kabardian"
-msgstr "Cabardíaco"
+#. language code: kaa
+#: zypp/LanguageCode.cc:589
+msgid "Kara-Kalpak"
+msgstr "Karakalpak"
 
 #. language code: kab
 #: zypp/LanguageCode.cc:591
@@ -2279,12 +2915,7 @@ msgstr "Kachin"
 #. language code: kal kl
 #: zypp/LanguageCode.cc:595
 msgid "Kalaallisut"
-msgstr "Kalaallisut"
-
-#. language code: xal
-#: zypp/LanguageCode.cc:1125
-msgid "Kalmyk"
-msgstr "Kalmyk"
+msgstr "Groenlandês"
 
 #. language code: kam
 #: zypp/LanguageCode.cc:597
@@ -2296,21 +2927,6 @@ msgstr "Camba"
 msgid "Kannada"
 msgstr "Canarês"
 
-#. language code: kau kr
-#: zypp/LanguageCode.cc:605
-msgid "Kanuri"
-msgstr "Canúri"
-
-#. language code: kaa
-#: zypp/LanguageCode.cc:589
-msgid "Kara-Kalpak"
-msgstr "Karakalpak"
-
-#. language code: krc
-#: zypp/LanguageCode.cc:641
-msgid "Karachay-Balkar"
-msgstr "Karachay-Balkar"
-
 #. language code: kar
 #: zypp/LanguageCode.cc:601
 msgid "Karen"
@@ -2321,10 +2937,10 @@ msgstr "Karen"
 msgid "Kashmiri"
 msgstr "Caxemira"
 
-#. language code: csb
-#: zypp/LanguageCode.cc:365
-msgid "Kashubian"
-msgstr "Cassubiano"
+#. language code: kau kr
+#: zypp/LanguageCode.cc:605
+msgid "Kanuri"
+msgstr "Canúri"
 
 #. language code: kaw
 #: zypp/LanguageCode.cc:607
@@ -2336,30 +2952,25 @@ msgstr "Kawi"
 msgid "Kazakh"
 msgstr "Cazaque"
 
-#. :CYM:136:
-#: zypp/CountryCode.cc:281
-msgid "Kazakhstan"
-msgstr "Cazaquistão"
-
-#. :JPN:392:
-#: zypp/CountryCode.cc:271
-msgid "Kenya"
-msgstr "Quênia"
+#. language code: kbd
+#: zypp/LanguageCode.cc:611
+msgid "Kabardian"
+msgstr "Cabardíaco"
 
 #. language code: kha
 #: zypp/LanguageCode.cc:613
 msgid "Khasi"
 msgstr "Khasi"
 
+#. language code: khi
+#: zypp/LanguageCode.cc:615
+msgid "Khoisan (Other)"
+msgstr "Khoisan (outros)"
+
 #. language code: khm km
 #: zypp/LanguageCode.cc:617
 msgid "Khmer"
 msgstr "Khmer"
-
-#. language code: khi
-#: zypp/LanguageCode.cc:615
-msgid "Khoisan (Other)"
-msgstr "Khoisan (Outros)"
 
 #. language code: kho
 #: zypp/LanguageCode.cc:619
@@ -2371,11 +2982,6 @@ msgstr "Cotanês"
 msgid "Kikuyu"
 msgstr "Kikuyu"
 
-#. language code: kmb
-#: zypp/LanguageCode.cc:627
-msgid "Kimbundu"
-msgstr "Quimbundo"
-
 #. language code: kin rw
 #: zypp/LanguageCode.cc:623
 msgid "Kinyarwanda"
@@ -2386,15 +2992,15 @@ msgstr "Kinyarwanda"
 msgid "Kirghiz"
 msgstr "Quirguiz"
 
-#. :KHM:116:
-#: zypp/CountryCode.cc:274
-msgid "Kiribati"
-msgstr "Kiribati"
+#. language code: kmb
+#: zypp/LanguageCode.cc:627
+msgid "Kimbundu"
+msgstr "Quimbundo"
 
-#. language code: tlh
-#: zypp/LanguageCode.cc:1047
-msgid "Klingon"
-msgstr "Klingon"
+#. language code: kok
+#: zypp/LanguageCode.cc:629
+msgid "Konkani"
+msgstr "Concani"
 
 #. language code: kom kv
 #: zypp/LanguageCode.cc:631
@@ -2405,11 +3011,6 @@ msgstr "Komi"
 #: zypp/LanguageCode.cc:633
 msgid "Kongo"
 msgstr "Congo"
-
-#. language code: kok
-#: zypp/LanguageCode.cc:629
-msgid "Konkani"
-msgstr "Concani"
 
 #. language code: kor ko
 #: zypp/LanguageCode.cc:635
@@ -2426,10 +3027,20 @@ msgstr "Cosreano"
 msgid "Kpelle"
 msgstr "Kpelle"
 
+#. language code: krc
+#: zypp/LanguageCode.cc:641
+msgid "Karachay-Balkar"
+msgstr "Karachay-Balkar"
+
 #. language code: kro
 #: zypp/LanguageCode.cc:643
 msgid "Kru"
 msgstr "Kru"
+
+#. language code: kru
+#: zypp/LanguageCode.cc:645
+msgid "Kurukh"
+msgstr "Kurukh"
 
 #. language code: kua kj
 #: zypp/LanguageCode.cc:647
@@ -2446,25 +3057,10 @@ msgstr "Kumyk"
 msgid "Kurdish"
 msgstr "Curdo"
 
-#. language code: kru
-#: zypp/LanguageCode.cc:645
-msgid "Kurukh"
-msgstr "Kurukh"
-
 #. language code: kut
 #: zypp/LanguageCode.cc:653
 msgid "Kutenai"
 msgstr "Kutenai"
-
-#. :KOR:410:
-#: zypp/CountryCode.cc:279
-msgid "Kuwait"
-msgstr "Kuwait"
-
-#. :KEN:404:
-#: zypp/CountryCode.cc:272
-msgid "Kyrgyzstan"
-msgstr "Quirguistão"
 
 #. language code: lad
 #: zypp/LanguageCode.cc:655
@@ -2486,67 +3082,20 @@ msgstr "Lamba"
 msgid "Lao"
 msgstr "Laosiano"
 
-#. :KAZ:398:
-#: zypp/CountryCode.cc:282
-msgid "Lao People's Democratic Republic"
-msgstr "Laos"
-
 #. language code: lat la
 #: zypp/LanguageCode.cc:663
 msgid "Latin"
 msgstr "Latim"
-
-#. :LUX:442:
-#: zypp/CountryCode.cc:291
-msgid "Latvia"
-msgstr "Letônia"
 
 #. language code: lav lv
 #: zypp/LanguageCode.cc:665
 msgid "Latvian"
 msgstr "Letão"
 
-#. :LAO:418:
-#: zypp/CountryCode.cc:283
-msgid "Lebanon"
-msgstr "Líbano"
-
-#. :LBR:430:
-#: zypp/CountryCode.cc:288
-msgid "Lesotho"
-msgstr "Lesoto"
-
-#: zypp/VendorSupportOptions.cc:20
-msgid "Level 1"
-msgstr "Nível 1"
-
-#: zypp/VendorSupportOptions.cc:23
-msgid "Level 2"
-msgstr "Nível 2"
-
-#: zypp/VendorSupportOptions.cc:26
-msgid "Level 3"
-msgstr "Nível 3"
-
 #. language code: lez
 #: zypp/LanguageCode.cc:667
 msgid "Lezghian"
 msgstr "Lezghian"
-
-#. :LKA:144:
-#: zypp/CountryCode.cc:287
-msgid "Liberia"
-msgstr "Libéria"
-
-#. :LVA:428:
-#: zypp/CountryCode.cc:292
-msgid "Libya"
-msgstr "Líbia"
-
-#. :LCA:662:
-#: zypp/CountryCode.cc:285
-msgid "Liechtenstein"
-msgstr "Liechtenstein"
 
 #. language code: lim li
 #: zypp/LanguageCode.cc:669
@@ -2558,60 +3107,45 @@ msgstr "Limburgano"
 msgid "Lingala"
 msgstr "Lingala"
 
-#. :LSO:426:
-#: zypp/CountryCode.cc:289
-msgid "Lithuania"
-msgstr "Lituânia"
-
 #. language code: lit lt
 #: zypp/LanguageCode.cc:673
 msgid "Lithuanian"
 msgstr "Lituano"
 
-#: zypp/media/MediaException.cc:215
-#, c-format, boost-format
-msgid "Location '%s' is temporarily unaccessible."
-msgstr "O local '%s' está temporariamente inacessível."
-
-#. language code: jbo
-#: zypp/LanguageCode.cc:581
-msgid "Lojban"
-msgstr "Lojban"
-
-#. language code: nds
-#: zypp/LanguageCode.cc:791
-msgid "Low German"
-msgstr "Baixo-Alemão"
-
-#. language code: dsb
-#: zypp/LanguageCode.cc:395
-msgid "Lower Sorbian"
-msgstr "Baixo-Sorbiano"
+#. language code: lol
+#: zypp/LanguageCode.cc:675
+msgid "Mongo"
+msgstr "Mongo"
 
 #. language code: loz
 #: zypp/LanguageCode.cc:677
 msgid "Lozi"
 msgstr "Lozi"
 
-#. language code: lub lu
-#: zypp/LanguageCode.cc:683
-msgid "Luba-Katanga"
-msgstr "Luba-Katanga"
+#. language code: ltz lb
+#: zypp/LanguageCode.cc:679
+msgid "Luxembourgish"
+msgstr "Luxemburguês"
 
 #. language code: lua
 #: zypp/LanguageCode.cc:681
 msgid "Luba-Lulua"
 msgstr "Luba-Lulua"
 
+#. language code: lub lu
+#: zypp/LanguageCode.cc:683
+msgid "Luba-Katanga"
+msgstr "Luba-Katanga"
+
+#. language code: lug lg
+#: zypp/LanguageCode.cc:685
+msgid "Ganda"
+msgstr "Nganda"
+
 #. language code: lui
 #: zypp/LanguageCode.cc:687
 msgid "Luiseno"
 msgstr "Luiseno"
-
-#. language code: smj
-#: zypp/LanguageCode.cc:967
-msgid "Lule Sami"
-msgstr "Lapão (Lule)"
 
 #. language code: lun
 #: zypp/LanguageCode.cc:689
@@ -2628,34 +3162,10 @@ msgstr "Luo (Quênia e Tanzânia)"
 msgid "Lushai"
 msgstr "Lushai"
 
-#. :LTU:440:
-#: zypp/CountryCode.cc:290
-msgid "Luxembourg"
-msgstr "Luxemburgo"
-
-#. language code: ltz lb
-#: zypp/LanguageCode.cc:679
-msgid "Luxembourgish"
-msgstr "Luxemburguês"
-
-#. :MNG:496:
-#: zypp/CountryCode.cc:304
-msgid "Macao"
-msgstr "Macau"
-
-#. :MHL:584:
-#: zypp/CountryCode.cc:300
-msgid "Macedonia"
-msgstr "Macedônia"
-
 #. language code: mac mkd mk
 #: zypp/LanguageCode.cc:695 zypp/LanguageCode.cc:697
 msgid "Macedonian"
 msgstr "Macedônio"
-
-#: zypp/CountryCode.cc:298
-msgid "Madagascar"
-msgstr "Madagascar"
 
 #. language code: mad
 #: zypp/LanguageCode.cc:699
@@ -2667,6 +3177,11 @@ msgstr "Madurês"
 msgid "Magahi"
 msgstr "Magahi"
 
+#. language code: mah mh
+#: zypp/LanguageCode.cc:703
+msgid "Marshallese"
+msgstr "Marshallino"
+
 #. language code: mai
 #: zypp/LanguageCode.cc:705
 msgid "Maithili"
@@ -2677,178 +3192,60 @@ msgstr "Maithili"
 msgid "Makasar"
 msgstr "Makasar"
 
-#. language code: mlg mg
-#: zypp/LanguageCode.cc:743
-msgid "Malagasy"
-msgstr "Malgaxe"
-
-#. :MDV:462:
-#: zypp/CountryCode.cc:312
-msgid "Malawi"
-msgstr "Malaui"
-
-#. language code: may msa ms
-#: zypp/LanguageCode.cc:723 zypp/LanguageCode.cc:725
-msgid "Malay"
-msgstr "Malaio"
-
 #. language code: mal ml
 #: zypp/LanguageCode.cc:709
 msgid "Malayalam"
 msgstr "Malaiala"
-
-#. :MEX:484:
-#: zypp/CountryCode.cc:314
-msgid "Malaysia"
-msgstr "Malásia"
-
-#. :MUS:480:
-#: zypp/CountryCode.cc:311
-msgid "Maldives"
-msgstr "Maldivas"
-
-#: zypp/media/MediaException.cc:115
-msgid "Malformed URI"
-msgstr "URI Incorreto"
-
-#. :MKD:807:
-#: zypp/CountryCode.cc:301
-msgid "Mali"
-msgstr "Mali"
-
-#. :MSR:500:
-#: zypp/CountryCode.cc:309
-msgid "Malta"
-msgstr "Malta"
-
-#. language code: mlt mt
-#: zypp/LanguageCode.cc:745
-msgid "Maltese"
-msgstr "Maltês"
-
-#. language code: mnc
-#: zypp/LanguageCode.cc:747
-msgid "Manchu"
-msgstr "Manchu"
-
-#. language code: mdr
-#: zypp/LanguageCode.cc:729
-msgid "Mandar"
-msgstr "Mandar"
 
 #. language code: man
 #: zypp/LanguageCode.cc:711
 msgid "Mandingo"
 msgstr "Mandinga"
 
-#. language code: mni
-#: zypp/LanguageCode.cc:749
-msgid "Manipuri"
-msgstr "Manipuri"
-
-#. language code: mno
-#: zypp/LanguageCode.cc:751
-msgid "Manobo Languages"
-msgstr "Línguas Manobo"
-
-#. language code: glv gv
-#: zypp/LanguageCode.cc:485
-msgid "Manx"
-msgstr "Manx"
-
 #. language code: mao mri mi
 #: zypp/LanguageCode.cc:713 zypp/LanguageCode.cc:715
 msgid "Maori"
 msgstr "Maori"
 
+#. language code: map
+#: zypp/LanguageCode.cc:717
+msgid "Austronesian (Other)"
+msgstr "Austronésio (outros)"
+
 #. language code: mar mr
 #: zypp/LanguageCode.cc:719
 msgid "Marathi"
-msgstr "Marata"
-
-#. language code: chm
-#: zypp/LanguageCode.cc:329
-msgid "Mari"
-msgstr "Mari"
-
-#. :MDG:450:
-#: zypp/CountryCode.cc:299
-msgid "Marshall Islands"
-msgstr "Ilhas Marshall"
-
-#. language code: mah mh
-#: zypp/LanguageCode.cc:703
-msgid "Marshallese"
-msgstr "Marshallino"
-
-#. :MNP:580:
-#: zypp/CountryCode.cc:306
-msgid "Martinique"
-msgstr "Martinica"
-
-#. language code: mwr
-#: zypp/LanguageCode.cc:769
-msgid "Marwari"
-msgstr "Marwari"
+msgstr "Marati"
 
 #. language code: mas
 #: zypp/LanguageCode.cc:721
 msgid "Masai"
 msgstr "Massai"
 
-#. :MTQ:474:
-#: zypp/CountryCode.cc:307
-msgid "Mauritania"
-msgstr "Mauritânia"
+#. language code: may msa ms
+#: zypp/LanguageCode.cc:723 zypp/LanguageCode.cc:725
+msgid "Malay"
+msgstr "Malaio"
 
-#. :MLT:470:
-#: zypp/CountryCode.cc:310
-msgid "Mauritius"
-msgstr "Maurício"
+#. language code: mdf
+#: zypp/LanguageCode.cc:727
+msgid "Moksha"
+msgstr "Moksha"
 
-#. language code: myn
-#: zypp/LanguageCode.cc:771
-msgid "Mayan Languages"
-msgstr "Línguas Maias"
-
-#. :YEM:887:
-#: zypp/CountryCode.cc:400
-msgid "Mayotte"
-msgstr "Mayotte"
-
-#: zypp/media/MediaException.cc:169
-#, c-format, boost-format
-msgid "Media source '%s' does not contain the desired medium"
-msgstr "A origem de mídia '%s' não contém o meio desejado"
-
-#: zypp/media/MediaException.cc:175
-#, c-format, boost-format
-msgid "Medium '%s' is in use by another instance"
-msgstr "O meio '%s' está sendo usado por outra instância"
-
-#: zypp/media/MediaException.cc:72
-msgid "Medium not attached"
-msgstr "Meio não anexado"
-
-#: zypp/media/MediaException.cc:53
-#, c-format, boost-format
-msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Meio não aberto ao tentar executar a ação '%s'."
+#. language code: mdr
+#: zypp/LanguageCode.cc:729
+msgid "Mandar"
+msgstr "Mandar"
 
 #. language code: men
 #: zypp/LanguageCode.cc:731
 msgid "Mende"
 msgstr "Mende"
 
-#. :FRA:250:
-#: zypp/CountryCode.cc:231
-msgid "Metropolitan France"
-msgstr "França Metropolitana"
-
-#. :MWI:454:
-#: zypp/CountryCode.cc:313
-msgid "Mexico"
-msgstr "México"
+#. language code: mga
+#: zypp/LanguageCode.cc:733
+msgid "Irish, Middle (900-1200)"
+msgstr "Irlandês medieval (900-1200)"
 
 #. language code: mic
 #: zypp/LanguageCode.cc:735
@@ -2860,299 +3257,205 @@ msgstr "Mi'kmaq"
 msgid "Minangkabau"
 msgstr "Minangkabau"
 
-#. language code: mwl
-#: zypp/LanguageCode.cc:767
-msgid "Mirandese"
-msgstr "Mirandês"
-
 #. language code: mis
 #: zypp/LanguageCode.cc:739
 msgid "Miscellaneous Languages"
-msgstr "Línguas Diversas"
+msgstr "Línguas diversas"
+
+#. language code: mkh
+#: zypp/LanguageCode.cc:741
+msgid "Mon-Khmer (Other)"
+msgstr "Mon-khmer (outros)"
+
+#. language code: mlg mg
+#: zypp/LanguageCode.cc:743
+msgid "Malagasy"
+msgstr "Malgaxe"
+
+#. language code: mlt mt
+#: zypp/LanguageCode.cc:745
+msgid "Maltese"
+msgstr "Maltês"
+
+#. language code: mnc
+#: zypp/LanguageCode.cc:747
+msgid "Manchu"
+msgstr "Manchu"
+
+#. language code: mni
+#: zypp/LanguageCode.cc:749
+msgid "Manipuri"
+msgstr "Manipuri"
+
+#. language code: mno
+#: zypp/LanguageCode.cc:751
+msgid "Manobo Languages"
+msgstr "Línguas manobo"
 
 #. language code: moh
 #: zypp/LanguageCode.cc:753
 msgid "Mohawk"
 msgstr "Mohawk"
 
-#. language code: mdf
-#: zypp/LanguageCode.cc:727
-msgid "Moksha"
-msgstr "Moksha"
-
 #. language code: mol mo
 #: zypp/LanguageCode.cc:755
 msgid "Moldavian"
 msgstr "Moldávio"
-
-#. :MCO:492:
-#: zypp/CountryCode.cc:295
-msgid "Moldova"
-msgstr "Moldova"
-
-#. language code: mkh
-#: zypp/LanguageCode.cc:741
-msgid "Mon-Khmer (Other)"
-msgstr "Mon-Khmer (Outros)"
-
-#. :MAR:504:
-#: zypp/CountryCode.cc:294
-msgid "Monaco"
-msgstr "Monaco"
-
-#. language code: lol
-#: zypp/LanguageCode.cc:675
-msgid "Mongo"
-msgstr "Mongo"
-
-#. :MMR:104:
-#: zypp/CountryCode.cc:303
-msgid "Mongolia"
-msgstr "Mongólia"
 
 #. language code: mon mn
 #: zypp/LanguageCode.cc:757
 msgid "Mongolian"
 msgstr "Mongol"
 
-#. :MDA:498:
-#: zypp/CountryCode.cc:296
-msgid "Montenegro"
-msgstr "Montenegro"
-
-#. :MRT:478:
-#: zypp/CountryCode.cc:308
-msgid "Montserrat"
-msgstr "Montserrat"
-
-#. :LBY:434:
-#: zypp/CountryCode.cc:293
-msgid "Morocco"
-msgstr "Marrocos"
-
 #. language code: mos
 #: zypp/LanguageCode.cc:759
 msgid "Mossi"
 msgstr "Mossi"
 
-#. :MYS:458:
-#: zypp/CountryCode.cc:315
-msgid "Mozambique"
-msgstr "Moçambique"
-
 #. language code: mul
 #: zypp/LanguageCode.cc:761
 msgid "Multiple Languages"
-msgstr "Vários Idiomas"
+msgstr "Vários idiomas"
 
 #. language code: mun
 #: zypp/LanguageCode.cc:763
 msgid "Munda languages"
-msgstr "Línguas Mundas"
+msgstr "Línguas mundas"
 
-#. :MLI:466:
-#: zypp/CountryCode.cc:302
-msgid "Myanmar"
-msgstr "Myanma"
+#. language code: mus
+#: zypp/LanguageCode.cc:765
+msgid "Creek"
+msgstr "Creek"
+
+#. language code: mwl
+#: zypp/LanguageCode.cc:767
+msgid "Mirandese"
+msgstr "Mirandês"
+
+#. language code: mwr
+#: zypp/LanguageCode.cc:769
+msgid "Marwari"
+msgstr "Marwari"
+
+#. language code: myn
+#: zypp/LanguageCode.cc:771
+msgid "Mayan Languages"
+msgstr "Línguas maias"
+
+#. language code: myv
+#: zypp/LanguageCode.cc:773
+msgid "Erzya"
+msgstr "Erzya"
 
 #. language code: nah
 #: zypp/LanguageCode.cc:775
 msgid "Nahuatl"
 msgstr "Nahuatl"
 
-#. :MOZ:508:
-#: zypp/CountryCode.cc:316
-msgid "Namibia"
-msgstr "Namíbia"
-
-#. :NPL:524:
-#. language code: nau na
-#: zypp/CountryCode.cc:325 zypp/LanguageCode.cc:781
-msgid "Nauru"
-msgstr "Nauruano"
-
-#. language code: nav nv
-#: zypp/LanguageCode.cc:783
-msgid "Navajo"
-msgstr "Navajo"
-
-#. language code: nde nd
-#: zypp/LanguageCode.cc:787
-msgid "Ndebele, North"
-msgstr "Ndebele (Norte)"
-
-#. language code: nbl nr
-#: zypp/LanguageCode.cc:785
-msgid "Ndebele, South"
-msgstr "Ndebele (Sul)"
-
-#. language code: ndo ng
-#: zypp/LanguageCode.cc:789
-msgid "Ndonga"
-msgstr "Ndomba"
+#. language code: nai
+#: zypp/LanguageCode.cc:777
+msgid "North American Indian"
+msgstr "Indígena norte-americano"
 
 #. language code: nap
 #: zypp/LanguageCode.cc:779
 msgid "Neapolitan"
 msgstr "Napolitano"
 
-#. :NOR:578:
-#: zypp/CountryCode.cc:324
-msgid "Nepal"
-msgstr "Nepal"
+#. language code: nav nv
+#: zypp/LanguageCode.cc:783
+msgid "Navajo"
+msgstr "Navajo"
+
+#. language code: nbl nr
+#: zypp/LanguageCode.cc:785
+msgid "Ndebele, South"
+msgstr "Ndebele do sul"
+
+#. language code: nde nd
+#: zypp/LanguageCode.cc:787
+msgid "Ndebele, North"
+msgstr "Ndebele do norte"
+
+#. language code: ndo ng
+#: zypp/LanguageCode.cc:789
+msgid "Ndonga"
+msgstr "Ndonga"
+
+#. language code: nds
+#: zypp/LanguageCode.cc:791
+msgid "Low German"
+msgstr "Baixo-alemão"
+
+#. language code: nep ne
+#: zypp/LanguageCode.cc:793
+msgid "Nepali"
+msgstr "Nepalês"
 
 #. language code: new
 #: zypp/LanguageCode.cc:795
 msgid "Nepal Bhasa"
 msgstr "Bhasa (Nepal)"
 
-#. language code: nep ne
-#: zypp/LanguageCode.cc:793
-msgid "Nepali"
-msgstr "Nepali"
-
-#. :NIC:558:
-#: zypp/CountryCode.cc:322
-msgid "Netherlands"
-msgstr "Países Baixos"
-
-#. :ARM:051:
-#: zypp/CountryCode.cc:165
-msgid "Netherlands Antilles"
-msgstr "Antilhas Holandesas"
-
-#. :NAM:516:
-#: zypp/CountryCode.cc:317
-msgid "New Caledonia"
-msgstr "Nova Caledônia"
-
-#. :NIU:570:
-#: zypp/CountryCode.cc:327
-msgid "New Zealand"
-msgstr "Nova Zelândia"
-
-#: zypp/target/TargetImpl.cc:658
-msgid "New update message"
-msgstr "Nova mensagem de atualização"
-
 #. language code: nia
 #: zypp/LanguageCode.cc:797
 msgid "Nias"
 msgstr "Nias"
 
-#. :NGA:566:
-#: zypp/CountryCode.cc:321
-msgid "Nicaragua"
-msgstr "Nicarágua"
-
-#. :NCL:540:
-#: zypp/CountryCode.cc:318
-msgid "Niger"
-msgstr "Níger"
-
 #. language code: nic
 #: zypp/LanguageCode.cc:799
 msgid "Niger-Kordofanian (Other)"
-msgstr "Nigero-Cordofânio (Outros)"
-
-#. :NFK:574:
-#: zypp/CountryCode.cc:320
-msgid "Nigeria"
-msgstr "Nigéria"
-
-#. language code: ssa
-#: zypp/LanguageCode.cc:995
-msgid "Nilo-Saharan (Other)"
-msgstr "Nilo-Saariano (Outros)"
-
-#. :NRU:520:
-#: zypp/CountryCode.cc:326
-msgid "Niue"
-msgstr "Niue"
+msgstr "Nigero-cordofânio (outros)"
 
 #. language code: niu
 #: zypp/LanguageCode.cc:801
 msgid "Niuean"
 msgstr "Niueano"
 
-#. Defined CountryCode constants
-#. Defined LanguageCode constants
-#: zypp/CountryCode.cc:149 zypp/LanguageCode.cc:148
-msgid "No Code"
-msgstr "Sem Código"
+#. language code: nno nn
+#: zypp/LanguageCode.cc:803
+msgid "Norwegian Nynorsk"
+msgstr "Novo norueguês"
 
-#: zypp/repo/RepoProvideFile.cc:265
-msgid "No url in repository."
-msgstr "Nenhuma url no repositório."
+#. language code: nob nb
+#: zypp/LanguageCode.cc:805
+msgid "Norwegian Bokmal"
+msgstr "Dano-norueguês"
 
 #. language code: nog
 #: zypp/LanguageCode.cc:807
 msgid "Nogai"
 msgstr "Nogai"
 
-#. :NER:562:
-#: zypp/CountryCode.cc:319
-msgid "Norfolk Island"
-msgstr "Ilha Norfolk"
-
 #. language code: non
 #: zypp/LanguageCode.cc:809
 msgid "Norse, Old"
-msgstr "Norueguês Antigo"
-
-#. language code: nai
-#: zypp/LanguageCode.cc:777
-msgid "North American Indian"
-msgstr "Indígena Norte-Americano"
-
-#. :KNA:659:
-#: zypp/CountryCode.cc:277
-msgid "North Korea"
-msgstr "Coréia do Norte"
-
-#. :MAC:446:
-#: zypp/CountryCode.cc:305
-msgid "Northern Mariana Islands"
-msgstr "Ilhas Marianas do Norte"
-
-#. language code: sme se
-#: zypp/LanguageCode.cc:963
-msgid "Northern Sami"
-msgstr "Lapão Setentrional"
-
-#. language code: nso
-#: zypp/LanguageCode.cc:813
-msgid "Northern Sotho"
-msgstr "Sotho (Setentrional)"
-
-#. :NLD:528:
-#: zypp/CountryCode.cc:323
-msgid "Norway"
-msgstr "Noruega"
+msgstr "Nórdico antigo"
 
 #. language code: nor no
 #: zypp/LanguageCode.cc:811
 msgid "Norwegian"
 msgstr "Norueguês"
 
-#. language code: nob nb
-#: zypp/LanguageCode.cc:805
-msgid "Norwegian Bokmal"
-msgstr "Bokmal (Noruega)"
-
-#. language code: nno nn
-#: zypp/LanguageCode.cc:803
-msgid "Norwegian Nynorsk"
-msgstr "Neonorueguês"
-
-#: zypp/target/hal/HalContext.cc:851
-msgid "Not a CDROM drive"
-msgstr "Não é uma unidade de CDROM"
+#. language code: nso
+#: zypp/LanguageCode.cc:813
+msgid "Northern Sotho"
+msgstr "Sotho (setentrional)"
 
 #. language code: nub
 #: zypp/LanguageCode.cc:815
 msgid "Nubian Languages"
-msgstr "Línguas Núbias"
+msgstr "Línguas núbias"
+
+#. language code: nwc
+#: zypp/LanguageCode.cc:817
+msgid "Classical Newari"
+msgstr "Newari clássico"
+
+#. language code: nya ny
+#: zypp/LanguageCode.cc:819
+msgid "Chichewa"
+msgstr "Chichewa"
 
 #. language code: nym
 #: zypp/LanguageCode.cc:821
@@ -3174,10 +3477,6 @@ msgstr "Nyoro"
 msgid "Nzima"
 msgstr "Nzima"
 
-#: zypp/Dep.cc:100
-msgid "Obsoletes"
-msgstr "Obsoletos"
-
 #. language code: oci oc
 #: zypp/LanguageCode.cc:829
 msgid "Occitan (post 1500)"
@@ -3187,20 +3486,6 @@ msgstr "Occitano (após 1500)"
 #: zypp/LanguageCode.cc:831
 msgid "Ojibwa"
 msgstr "Ojíbua"
-
-#. :NZL:554:
-#: zypp/CountryCode.cc:328
-msgid "Oman"
-msgstr "Omã"
-
-#: zypp/parser/RepoindexFileReader.cc:209
-#, c-format, boost-format
-msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "Um ou ambos os atributos '%s' ou '%s' são necessários."
-
-#: zypp/media/MediaException.cc:145
-msgid "Operation not supported by medium"
-msgstr "Operação não suportada pelo meio"
 
 #. language code: ori or
 #: zypp/LanguageCode.cc:833
@@ -3220,67 +3505,37 @@ msgstr "Osage"
 #. language code: oss os
 #: zypp/LanguageCode.cc:839
 msgid "Ossetian"
-msgstr "Osseta"
+msgstr "Osseto"
+
+#. language code: ota
+#: zypp/LanguageCode.cc:841
+msgid "Turkish, Ottoman (1500-1928)"
+msgstr "Turco otomano (1500-1928)"
 
 #. language code: oto
 #: zypp/LanguageCode.cc:843
 msgid "Otomian Languages"
-msgstr "Línguas Otomianas"
+msgstr "Línguas otomianas"
 
-#. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:157
-#, c-format, boost-format
-msgid ""
-"Package %s seems to be corrupted during transfer. Do you want to retry "
-"retrieval?"
-msgstr ""
-"O Pacote %s parece ter sido corrompido durante a transferência. Deseja "
-"tentar a recuperação novamente?"
-
-#. language code: pal
-#: zypp/LanguageCode.cc:849
-msgid "Pahlavi"
-msgstr "Pahlavi"
-
-#. :PHL:608:
-#: zypp/CountryCode.cc:334
-msgid "Pakistan"
-msgstr "Paquistão"
-
-#. :PRT:620:
-#: zypp/CountryCode.cc:341
-msgid "Palau"
-msgstr "Palau"
-
-#. language code: pau
-#: zypp/LanguageCode.cc:857
-msgid "Palauan"
-msgstr "Palauano"
-
-#. :PRI:630:
-#: zypp/CountryCode.cc:339
-msgid "Palestinian Territory"
-msgstr "Território Palestino"
-
-#. language code: pli pi
-#: zypp/LanguageCode.cc:869
-msgid "Pali"
-msgstr "Páli"
-
-#. language code: pam
-#: zypp/LanguageCode.cc:851
-msgid "Pampanga"
-msgstr "Pampanga"
-
-#. :OMN:512:
-#: zypp/CountryCode.cc:329
-msgid "Panama"
-msgstr "Panamá"
+#. language code: paa
+#: zypp/LanguageCode.cc:845
+msgid "Papuan (Other)"
+msgstr "Papua (outros)"
 
 #. language code: pag
 #: zypp/LanguageCode.cc:847
 msgid "Pangasinan"
 msgstr "Pangasinano"
+
+#. language code: pal
+#: zypp/LanguageCode.cc:849
+msgid "Pahlavi"
+msgstr "Pálavi"
+
+#. language code: pam
+#: zypp/LanguageCode.cc:851
+msgid "Pampanga"
+msgstr "Pampanga"
 
 #. language code: pan pa
 #: zypp/LanguageCode.cc:853
@@ -3292,94 +3547,45 @@ msgstr "Panjabi"
 msgid "Papiamento"
 msgstr "Papiamento"
 
-#. :PYF:258:
-#: zypp/CountryCode.cc:332
-msgid "Papua New Guinea"
-msgstr "Papua-Nova Guiné"
+#. language code: pau
+#: zypp/LanguageCode.cc:857
+msgid "Palauan"
+msgstr "Palauano"
 
-#. language code: paa
-#: zypp/LanguageCode.cc:845
-msgid "Papuan (Other)"
-msgstr "Papua (Outros)"
-
-#. :PLW:585:
-#: zypp/CountryCode.cc:342
-msgid "Paraguay"
-msgstr "Paraguai"
-
-#: zypp/media/MediaException.cc:106
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "O caminho '%s' no meio '%s' não é um diretório."
-
-#: zypp/media/MediaException.cc:98
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a file."
-msgstr "O caminho '%s' no meio '%s' não é um arquivo."
-
-#: zypp/media/MediaException.cc:199
-#, c-format, boost-format
-msgid "Permission to access '%s' denied."
-msgstr "Permissão negada para acessar '%s'."
+#. language code: peo
+#: zypp/LanguageCode.cc:859
+msgid "Persian, Old (ca.600-400 B.C.)"
+msgstr "Persa antigo (aprox. 600-400 A.C.)"
 
 #. language code: per fas fa
 #: zypp/LanguageCode.cc:861 zypp/LanguageCode.cc:863
 msgid "Persian"
 msgstr "Persa"
 
-#. language code: peo
-#: zypp/LanguageCode.cc:859
-msgid "Persian, Old (ca.600-400 B.C.)"
-msgstr "Persa Antigo (aprox. 600-400 A.C.)"
-
-#. :PAN:591:
-#: zypp/CountryCode.cc:330
-msgid "Peru"
-msgstr "Peru"
-
 #. language code: phi
 #: zypp/LanguageCode.cc:865
 msgid "Philippine (Other)"
-msgstr "Filipino (Outros)"
-
-#. :PNG:598:
-#: zypp/CountryCode.cc:333
-msgid "Philippines"
-msgstr "Filipinas"
+msgstr "Filipino (outros)"
 
 #. language code: phn
 #: zypp/LanguageCode.cc:867
 msgid "Phoenician"
 msgstr "Fenício"
 
-#. :SPM:666:
-#: zypp/CountryCode.cc:337
-msgid "Pitcairn"
-msgstr "Ilha Pitcairn"
-
-#: zypp/misc/CheckAccessDeleted.cc:242
-msgid "Please install package 'lsof' first."
-msgstr "Instale o pacote ''lsof'' primeiro."
-
-#. language code: pon
-#: zypp/LanguageCode.cc:873
-msgid "Pohnpeian"
-msgstr "Pompeano"
-
-#. :PAK:586:
-#: zypp/CountryCode.cc:335
-msgid "Poland"
-msgstr "Polônia"
+#. language code: pli pi
+#: zypp/LanguageCode.cc:869
+msgid "Pali"
+msgstr "Páli"
 
 #. language code: pol pl
 #: zypp/LanguageCode.cc:871
 msgid "Polish"
 msgstr "Polonês"
 
-#. :PSE:275:
-#: zypp/CountryCode.cc:340
-msgid "Portugal"
-msgstr "Portugal"
+#. language code: pon
+#: zypp/LanguageCode.cc:873
+msgid "Pohnpeian"
+msgstr "Pompeano"
 
 #. language code: por pt
 #: zypp/LanguageCode.cc:875
@@ -3389,88 +3595,22 @@ msgstr "Português"
 #. language code: pra
 #: zypp/LanguageCode.cc:877
 msgid "Prakrit Languages"
-msgstr "Línguas Prácritas"
-
-#: zypp/Dep.cc:97
-msgid "Prerequires"
-msgstr "Pré-requisitos"
-
-#: zypp/VendorSupportOptions.cc:45
-msgid ""
-"Problem determination, which means technical support designed to provide "
-"compatibility information, installation assistance, usage support, on-going "
-"maintenance and basic troubleshooting. Level 1 Support is not intended to "
-"correct product defect errors."
-msgstr ""
-"Determinação do problema, que significa suporte técnico feito para fornecer "
-"informações de compatibilidade, assistência na instalação, suporte ao uso, "
-"manutenção contínua e solução básica de problemas. O Suporte de Nível 1 não "
-"corrige defeitos do produto."
-
-#: zypp/VendorSupportOptions.cc:48
-msgid ""
-"Problem isolation, which means technical support designed to duplicate "
-"customer problems, isolate problem area and provide resolution for problems "
-"not resolved by Level 1 Support."
-msgstr ""
-"Isolamento do problema, que significa suporte técnico feito para duplicar os "
-"problemas do cliente, isolar a área do problema e fornecer solução para "
-"problemas não resolvidos pelo Suporte de Nível 1."
-
-#: zypp/VendorSupportOptions.cc:51
-msgid ""
-"Problem resolution, which means technical support designed to resolve "
-"complex problems by engaging engineering in resolution of product defects "
-"which have been identified by Level 2 Support."
-msgstr ""
-"Resolução de problema, que significa suporte técnico feito para resolver "
-"problemas complexos através de engenharia na resolução de defeitos do "
-"produto que foram identificados pelo Suporte de Nível 2."
+msgstr "Línguas prácritas"
 
 #. language code: pro
 #: zypp/LanguageCode.cc:879
 msgid "Provencal, Old (to 1500)"
-msgstr "Provençal Antigo (até 1500)"
-
-#: zypp/Dep.cc:96
-msgid "Provides"
-msgstr "Fornece"
-
-#. :PCN:612:
-#: zypp/CountryCode.cc:338
-msgid "Puerto Rico"
-msgstr "Porto Rico"
+msgstr "Provençal antigo (até 1500)"
 
 #. language code: pus ps
 #: zypp/LanguageCode.cc:881
 msgid "Pushto"
-msgstr "Pushtu"
-
-#. :PRY:600:
-#: zypp/CountryCode.cc:343
-msgid "Qatar"
-msgstr "Qatar"
+msgstr "Afegão"
 
 #. language code: que qu
 #: zypp/LanguageCode.cc:883
 msgid "Quechua"
 msgstr "Quíchua"
-
-#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
-msgid "Query string parsing not supported for this URL"
-msgstr "A análise de strings de consulta não é suportada para este URL"
-
-#. TranslatorExplanation after semicolon is error message
-#. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
-#: zypp/target/rpm/RpmDb.cc:2189
-msgid "RPM failed: "
-msgstr "Falha no RPM: "
-
-#. language code: roh rm
-#: zypp/LanguageCode.cc:893
-msgid "Raeto-Romance"
-msgstr "Reto-Romano"
 
 #. language code: raj
 #: zypp/LanguageCode.cc:885
@@ -3487,56 +3627,25 @@ msgstr "Rapa Nui"
 msgid "Rarotongan"
 msgstr "Rarotonganês"
 
-#: zypp/Dep.cc:101
-msgid "Recommends"
-msgstr "Recomenda"
-
-#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
-msgid "Relative path not allowed if authority exists"
-msgstr "Caminho relativo não permitido se existir autoridade"
-
-#: zypp/RepoManager.cc:1740
-#, c-format, boost-format
-msgid "Removing repository '%s'"
-msgstr "Removendo o repositório '%s'"
-
-#: zypp/RepoManager.cc:338
-msgid "Repository alias cannot start with dot."
-msgstr "O álias do repositório não pode começar com ponto."
-
-#: zypp/parser/RepoindexFileReader.cc:197
-#, c-format, boost-format
-msgid "Required attribute '%s' is missing."
-msgstr "Atributo necessário '%s' faltando."
-
-#: zypp/Dep.cc:98
-msgid "Requires"
-msgstr "Requer"
-
-#. :QAT:634:
-#: zypp/CountryCode.cc:344
-msgid "Reunion"
-msgstr "Ilha Reunião"
-
 #. language code: roa
 #: zypp/LanguageCode.cc:891
 msgid "Romance (Other)"
-msgstr "Romance (Outros)"
+msgstr "Latim (outros)"
 
-#. :REU:638:
-#: zypp/CountryCode.cc:345
-msgid "Romania"
-msgstr "Romênia"
-
-#. language code: rum ron ro
-#: zypp/LanguageCode.cc:897 zypp/LanguageCode.cc:899
-msgid "Romanian"
-msgstr "Romeno"
+#. language code: roh rm
+#: zypp/LanguageCode.cc:893
+msgid "Raeto-Romance"
+msgstr "Romanche"
 
 #. language code: rom
 #: zypp/LanguageCode.cc:895
 msgid "Romany"
 msgstr "Romani"
+
+#. language code: rum ron ro
+#: zypp/LanguageCode.cc:897 zypp/LanguageCode.cc:899
+msgid "Romanian"
+msgstr "Romeno"
 
 #. language code: run rn
 #: zypp/LanguageCode.cc:901
@@ -3548,74 +3657,6 @@ msgstr "Rundi"
 msgid "Russian"
 msgstr "Russo"
 
-#: zypp/CountryCode.cc:347
-msgid "Russian Federation"
-msgstr "Rússia"
-
-#. :RUS:643:
-#: zypp/CountryCode.cc:348
-msgid "Rwanda"
-msgstr "Ruanda"
-
-#. :SGP:702:
-#: zypp/CountryCode.cc:355
-msgid "Saint Helena"
-msgstr "Santa Helena"
-
-#. :COM:174:
-#: zypp/CountryCode.cc:276
-msgid "Saint Kitts and Nevis"
-msgstr "São Cristóvão e Névis"
-
-#. :LBN:422:
-#: zypp/CountryCode.cc:284
-msgid "Saint Lucia"
-msgstr "Santa Lúcia"
-
-#: zypp/CountryCode.cc:297
-msgid "Saint Martin"
-msgstr "Saint Martin"
-
-#. :POL:616:
-#: zypp/CountryCode.cc:336
-msgid "Saint Pierre and Miquelon"
-msgstr "Saint Pierre e Miquelon"
-
-#. :VAT:336:
-#: zypp/CountryCode.cc:391
-msgid "Saint Vincent and the Grenadines"
-msgstr "São Vicente e Granadinas"
-
-#. language code: sal
-#: zypp/LanguageCode.cc:913
-msgid "Salishan Languages"
-msgstr "Línguas Salichanas"
-
-#. language code: sam
-#: zypp/LanguageCode.cc:915
-msgid "Samaritan Aramaic"
-msgstr "Aramaico Samaritano"
-
-#. language code: smi
-#: zypp/LanguageCode.cc:965
-msgid "Sami Languages (Other)"
-msgstr "Línguas Lapônias (Outros)"
-
-#. :WLF:876:
-#: zypp/CountryCode.cc:398
-msgid "Samoa"
-msgstr "Samoa Ocidental"
-
-#. language code: smo sm
-#: zypp/LanguageCode.cc:971
-msgid "Samoan"
-msgstr "Samoano"
-
-#. :SLE:694:
-#: zypp/CountryCode.cc:360
-msgid "San Marino"
-msgstr "San Marino"
-
 #. language code: sad
 #: zypp/LanguageCode.cc:905
 msgid "Sandawe"
@@ -3626,40 +3667,60 @@ msgstr "Sandawe"
 msgid "Sango"
 msgstr "Sango"
 
+#. language code: sah
+#: zypp/LanguageCode.cc:909
+msgid "Yakut"
+msgstr "Iacuto"
+
+#. language code: sai
+#: zypp/LanguageCode.cc:911
+msgid "South American Indian (Other)"
+msgstr "Indígena sul-americano (outros)"
+
+#. language code: sal
+#: zypp/LanguageCode.cc:913
+msgid "Salishan Languages"
+msgstr "Línguas salichanas"
+
+#. language code: sam
+#: zypp/LanguageCode.cc:915
+msgid "Samaritan Aramaic"
+msgstr "Aramaico samaritano"
+
 #. language code: san sa
 #: zypp/LanguageCode.cc:917
 msgid "Sanskrit"
 msgstr "Sânscrito"
-
-#. language code: sat
-#: zypp/LanguageCode.cc:921
-msgid "Santali"
-msgstr "Santali"
-
-#. :SUR:740:
-#: zypp/CountryCode.cc:364
-msgid "Sao Tome and Principe"
-msgstr "São Tomé e Príncipe"
-
-#. language code: srd sc
-#: zypp/LanguageCode.cc:991
-msgid "Sardinian"
-msgstr "Sardo"
 
 #. language code: sas
 #: zypp/LanguageCode.cc:919
 msgid "Sasak"
 msgstr "Sasak"
 
-#. :RWA:646:
-#: zypp/CountryCode.cc:349
-msgid "Saudi Arabia"
-msgstr "Arábia Saudita"
+#. language code: sat
+#: zypp/LanguageCode.cc:921
+msgid "Santali"
+msgstr "Santali"
+
+#. language code: scc srp sr
+#: zypp/LanguageCode.cc:923 zypp/LanguageCode.cc:925
+msgid "Serbian"
+msgstr "Sérvio"
+
+#. language code: scn
+#: zypp/LanguageCode.cc:927
+msgid "Sicilian"
+msgstr "Siciliano"
 
 #. language code: sco
 #: zypp/LanguageCode.cc:929
 msgid "Scots"
 msgstr "Escocês"
+
+#. language code: scr hrv hr
+#: zypp/LanguageCode.cc:931 zypp/LanguageCode.cc:933
+msgid "Croatian"
+msgstr "Croata"
 
 #. language code: sel
 #: zypp/LanguageCode.cc:935
@@ -3669,361 +3730,187 @@ msgstr "Selkup"
 #. language code: sem
 #: zypp/LanguageCode.cc:937
 msgid "Semitic (Other)"
-msgstr "Semita (Outros)"
+msgstr "Semita (outros)"
 
-#. :SMR:674:
-#: zypp/CountryCode.cc:361
-msgid "Senegal"
-msgstr "Senegal"
+#. language code: sga
+#: zypp/LanguageCode.cc:939
+msgid "Irish, Old (to 900)"
+msgstr "Irlandês antigo (até 900)"
 
-#. :ROU:642:
-#: zypp/CountryCode.cc:346
-msgid "Serbia"
-msgstr "Sérvia"
-
-#. language code: scc srp sr
-#: zypp/LanguageCode.cc:923 zypp/LanguageCode.cc:925
-msgid "Serbian"
-msgstr "Sérvio"
-
-#. language code: srr
-#: zypp/LanguageCode.cc:993
-msgid "Serer"
-msgstr "Serer"
-
-#: zypp/RepoManager.cc:349
-msgid "Service alias cannot start with dot."
-msgstr "O álias do serviço não pode começar com ponto."
-
-#: zypp/repo/RepoException.cc:129
-msgid "Service plugin does not support changing an attribute."
-msgstr "O plug-in de serviço não suporta mudança de atributo."
-
-#. :SLB:090:
-#: zypp/CountryCode.cc:351
-msgid "Seychelles"
-msgstr "Ilhas Seychelles"
+#. language code: sgn
+#: zypp/LanguageCode.cc:941
+msgid "Sign Languages"
+msgstr "Linguagens de sinais"
 
 #. language code: shn
 #: zypp/LanguageCode.cc:943
 msgid "Shan"
 msgstr "Shan"
 
-#. language code: sna sn
-#: zypp/LanguageCode.cc:975
-msgid "Shona"
-msgstr "Chishona"
-
-#. language code: iii ii
-#: zypp/LanguageCode.cc:551
-msgid "Sichuan Yi"
-msgstr "Yi (Sechuan)"
-
-#. language code: scn
-#: zypp/LanguageCode.cc:927
-msgid "Sicilian"
-msgstr "Siciliano"
-
 #. language code: sid
 #: zypp/LanguageCode.cc:945
 msgid "Sidamo"
 msgstr "Sidamo"
-
-#. :SVK:703:
-#: zypp/CountryCode.cc:359
-msgid "Sierra Leone"
-msgstr "Serra Leoa"
-
-#. language code: sgn
-#: zypp/LanguageCode.cc:941
-msgid "Sign Languages"
-msgstr "Linguagens de Sinais"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2369
-msgid "Signature does not verify"
-msgstr "Assinatura não verificada"
-
-#: zypp/KeyRing.cc:575
-#, c-format, boost-format
-msgid "Signature file %s not found"
-msgstr "Arquivo de assinatura %s não encontrado"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2365
-msgid "Signature is OK"
-msgstr "Assinatura OK"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2371
-msgid "Signature is OK, but key is not trusted"
-msgstr "A assinatura está OK, mas a chave não é confiável"
-
-#: zypp/repo/PackageProvider.cc:216
-msgid "Signature verification failed"
-msgstr "Falha na verificação da assinatura"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2373
-msgid "Signatures public key is not available"
-msgstr "A chave de assinatura pública não está disponível"
-
-#. language code: bla
-#: zypp/LanguageCode.cc:277
-msgid "Siksika"
-msgstr "Siksika"
-
-#. language code: snd sd
-#: zypp/LanguageCode.cc:977
-msgid "Sindhi"
-msgstr "Sindi"
-
-#. :SWE:752:
-#: zypp/CountryCode.cc:354
-msgid "Singapore"
-msgstr "Cingapura"
 
 #. language code: sin si
 #: zypp/LanguageCode.cc:947
 msgid "Sinhala"
 msgstr "Sinhala"
 
-#. language code: sit
-#: zypp/LanguageCode.cc:951
-msgid "Sino-Tibetan (Other)"
-msgstr "Sino-Tibetano (Outros)"
-
 #. language code: sio
 #: zypp/LanguageCode.cc:949
 msgid "Siouan Languages"
-msgstr "Línguas Sioux"
+msgstr "Línguas sioux"
 
-#. language code: sms
-#: zypp/LanguageCode.cc:973
-msgid "Skolt Sami"
-msgstr "Lapão (Skolt)"
-
-#. language code: den
-#: zypp/LanguageCode.cc:383
-msgid "Slave (Athapascan)"
-msgstr "Slave (Atapasca)"
+#. language code: sit
+#: zypp/LanguageCode.cc:951
+msgid "Sino-Tibetan (Other)"
+msgstr "Sino-tibetano (outros)"
 
 #. language code: sla
 #: zypp/LanguageCode.cc:953
 msgid "Slavic (Other)"
-msgstr "Eslavo (Outros)"
+msgstr "Eslavo (outros)"
 
 #. language code: slo slk sk
 #: zypp/LanguageCode.cc:955 zypp/LanguageCode.cc:957
 msgid "Slovak"
 msgstr "Eslovaco"
 
-#. :SJM:744:
-#: zypp/CountryCode.cc:358
-msgid "Slovakia"
-msgstr "Eslováquia"
-
-#. :SHN:654:
-#: zypp/CountryCode.cc:356
-msgid "Slovenia"
-msgstr "Eslovênia"
-
 #. language code: slv sl
 #: zypp/LanguageCode.cc:959
 msgid "Slovenian"
 msgstr "Esloveno"
-
-#. language code: sog
-#: zypp/LanguageCode.cc:981
-msgid "Sogdian"
-msgstr "Sogdian"
-
-#. :SAU:682:
-#: zypp/CountryCode.cc:350
-msgid "Solomon Islands"
-msgstr "Ilhas Salomão"
-
-#. language code: som so
-#: zypp/LanguageCode.cc:983
-msgid "Somali"
-msgstr "Somali"
-
-#. :SEN:686:
-#: zypp/CountryCode.cc:362
-msgid "Somalia"
-msgstr "Somália"
-
-#. language code: son
-#: zypp/LanguageCode.cc:985
-msgid "Songhai"
-msgstr "Songhai"
-
-#. language code: snk
-#: zypp/LanguageCode.cc:979
-msgid "Soninke"
-msgstr "Soninquê"
-
-#. language code: wen
-#: zypp/LanguageCode.cc:1119
-msgid "Sorbian Languages"
-msgstr "Línguas Sorbianas"
-
-#: zypp/target/hal/HalContext.cc:24
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr "Esta versão do libzypp foi compilada sem o suporte a HAL."
-
-#. language code: sot st
-#: zypp/LanguageCode.cc:987
-msgid "Sotho, Southern"
-msgstr "Sotho (Meridional)"
-
-#. :MYT:175:
-#: zypp/CountryCode.cc:401
-msgid "South Africa"
-msgstr "África do Sul"
-
-#. language code: sai
-#: zypp/LanguageCode.cc:911
-msgid "South American Indian (Other)"
-msgstr "Indígena Sul-Americano (Outro)"
-
-#. :GRC:300:
-#: zypp/CountryCode.cc:246
-msgid "South Georgia and the South Sandwich Islands"
-msgstr "Ilhas Sandwich e Geórgia do Sul"
-
-#. :PRK:408:
-#: zypp/CountryCode.cc:278
-msgid "South Korea"
-msgstr "Coréia do Sul"
-
-#. language code: alt
-#: zypp/LanguageCode.cc:193
-msgid "Southern Altai"
-msgstr "Altaico Meridional"
 
 #. language code: sma
 #: zypp/LanguageCode.cc:961
 msgid "Southern Sami"
 msgstr "Lapão Meridional"
 
-#. :ERI:232:
-#: zypp/CountryCode.cc:223
-msgid "Spain"
-msgstr "Espanha"
+#. language code: sme se
+#: zypp/LanguageCode.cc:963
+msgid "Northern Sami"
+msgstr "Lapão setentrional"
+
+#. language code: smi
+#: zypp/LanguageCode.cc:965
+msgid "Sami Languages (Other)"
+msgstr "Línguas lapônias (outras)"
+
+#. language code: smj
+#: zypp/LanguageCode.cc:967
+msgid "Lule Sami"
+msgstr "Lapão (Lule)"
+
+#. language code: smn
+#: zypp/LanguageCode.cc:969
+msgid "Inari Sami"
+msgstr "Lapão (Inari)"
+
+#. language code: smo sm
+#: zypp/LanguageCode.cc:971
+msgid "Samoan"
+msgstr "Samoano"
+
+#. language code: sms
+#: zypp/LanguageCode.cc:973
+msgid "Skolt Sami"
+msgstr "Lapão (Skolt)"
+
+#. language code: sna sn
+#: zypp/LanguageCode.cc:975
+msgid "Shona"
+msgstr "Xichonês"
+
+#. language code: snd sd
+#: zypp/LanguageCode.cc:977
+msgid "Sindhi"
+msgstr "Sindi"
+
+#. language code: snk
+#: zypp/LanguageCode.cc:979
+msgid "Soninke"
+msgstr "Soninquê"
+
+#. language code: sog
+#: zypp/LanguageCode.cc:981
+msgid "Sogdian"
+msgstr "Sogdian"
+
+#. language code: som so
+#: zypp/LanguageCode.cc:983
+msgid "Somali"
+msgstr "Somali"
+
+#. language code: son
+#: zypp/LanguageCode.cc:985
+msgid "Songhai"
+msgstr "Songai"
+
+#. language code: sot st
+#: zypp/LanguageCode.cc:987
+msgid "Sotho, Southern"
+msgstr "Sotho (Meridional)"
 
 #. language code: spa es
 #: zypp/LanguageCode.cc:989
 msgid "Spanish"
 msgstr "Espanhol"
 
-#. :LIE:438:
-#: zypp/CountryCode.cc:286
-msgid "Sri Lanka"
-msgstr "Sri Lanka"
+#. language code: srd sc
+#: zypp/LanguageCode.cc:991
+msgid "Sardinian"
+msgstr "Sardo"
 
-#. :SYC:690:
-#: zypp/CountryCode.cc:352
-msgid "Sudan"
-msgstr "Sudão"
+#. language code: srr
+#: zypp/LanguageCode.cc:993
+msgid "Serer"
+msgstr "Serer"
 
-#: zypp/Dep.cc:102
-msgid "Suggests"
-msgstr "Sugere"
+#. language code: ssa
+#: zypp/LanguageCode.cc:995
+msgid "Nilo-Saharan (Other)"
+msgstr "Nilo-saariano (outros)"
+
+#. language code: ssw ss
+#: zypp/LanguageCode.cc:997
+msgid "Swati"
+msgstr "Suázi"
 
 #. language code: suk
 #: zypp/LanguageCode.cc:999
 msgid "Sukuma"
 msgstr "Sukuma"
 
-#. language code: sux
-#: zypp/LanguageCode.cc:1005
-msgid "Sumerian"
-msgstr "Sumério"
-
 #. language code: sun su
 #: zypp/LanguageCode.cc:1001
 msgid "Sundanese"
 msgstr "Sundanês"
-
-#: zypp/Dep.cc:104
-msgid "Supplements"
-msgstr "Suplementos"
-
-#. :SOM:706:
-#: zypp/CountryCode.cc:363
-msgid "Suriname"
-msgstr "Suriname"
 
 #. language code: sus
 #: zypp/LanguageCode.cc:1003
 msgid "Susu"
 msgstr "Susu"
 
-#. :SVN:705:
-#: zypp/CountryCode.cc:357
-msgid "Svalbard and Jan Mayen"
-msgstr "Ilhas Svalbard e Jan Mayen"
+#. language code: sux
+#: zypp/LanguageCode.cc:1005
+msgid "Sumerian"
+msgstr "Sumério"
 
 #. language code: swa sw
 #: zypp/LanguageCode.cc:1007
 msgid "Swahili"
 msgstr "Suaíli"
 
-#. language code: ssw ss
-#: zypp/LanguageCode.cc:997
-msgid "Swati"
-msgstr "Swati"
-
-#. :SYR:760:
-#: zypp/CountryCode.cc:367
-msgid "Swaziland"
-msgstr "Suazilândia"
-
-#. :SDN:736:
-#: zypp/CountryCode.cc:353
-msgid "Sweden"
-msgstr "Suécia"
-
 #. language code: swe sv
 #: zypp/LanguageCode.cc:1009
 msgid "Swedish"
 msgstr "Sueco"
 
-#. :COG:178:
-#: zypp/CountryCode.cc:199
-msgid "Switzerland"
-msgstr "Suíça"
-
-#. :SLV:222:
-#: zypp/CountryCode.cc:366
-msgid "Syria"
-msgstr "Síria"
-
 #. language code: syr
 #: zypp/LanguageCode.cc:1011
 msgid "Syriac"
 msgstr "Siríaco"
-
-#: zypp/media/MediaException.cc:91
-#, c-format, boost-format
-msgid "System exception '%s' on medium '%s'."
-msgstr "Exceção do sistema '%s' no meio '%s'."
-
-#: zypp/ZYppFactory.cc:394
-#, c-format, boost-format
-msgid ""
-"System management is locked by the application with pid %d (%s).\n"
-"Close this application before trying again."
-msgstr ""
-"O gerenciamento do sistema está bloqueado pelo aplicativo com o pid %d "
-"(%s).\n"
-"Feche esse aplicativo antes de tentar novamente."
-
-#. language code: tgl tl
-#: zypp/LanguageCode.cc:1031
-msgid "Tagalog"
-msgstr "Tagalo"
 
 #. language code: tah ty
 #: zypp/LanguageCode.cc:1013
@@ -4033,37 +3920,12 @@ msgstr "Taitiano"
 #. language code: tai
 #: zypp/LanguageCode.cc:1015
 msgid "Tai (Other)"
-msgstr "Tai (Outros)"
-
-#. :TUV:798:
-#: zypp/CountryCode.cc:382
-msgid "Taiwan"
-msgstr "Taiwan"
-
-#. language code: tgk tg
-#: zypp/LanguageCode.cc:1029
-msgid "Tajik"
-msgstr "Tadjique"
-
-#. :THA:764:
-#: zypp/CountryCode.cc:373
-msgid "Tajikistan"
-msgstr "Tadjiquistão"
-
-#. language code: tmh
-#: zypp/LanguageCode.cc:1051
-msgid "Tamashek"
-msgstr "Tuaregue"
+msgstr "Tai (outros)"
 
 #. language code: tam ta
 #: zypp/LanguageCode.cc:1017
 msgid "Tamil"
 msgstr "Tâmil"
-
-#. :TWN:158:
-#: zypp/CountryCode.cc:383
-msgid "Tanzania"
-msgstr "Tanzânia"
 
 #. language code: tat tt
 #: zypp/LanguageCode.cc:1019
@@ -4073,7 +3935,12 @@ msgstr "Tártaro"
 #. language code: tel te
 #: zypp/LanguageCode.cc:1021
 msgid "Telugu"
-msgstr "Télugo"
+msgstr "Telugu"
+
+#. language code: tem
+#: zypp/LanguageCode.cc:1023
+msgid "Timne"
+msgstr "Temne"
 
 #. language code: ter
 #: zypp/LanguageCode.cc:1025
@@ -4085,32 +3952,20 @@ msgstr "Tereno"
 msgid "Tetum"
 msgstr "Tétum"
 
+#. language code: tgk tg
+#: zypp/LanguageCode.cc:1029
+msgid "Tajik"
+msgstr "Tadjique"
+
+#. language code: tgl tl
+#: zypp/LanguageCode.cc:1031
+msgid "Tagalog"
+msgstr "Tagalo"
+
 #. language code: tha th
 #: zypp/LanguageCode.cc:1033
 msgid "Thai"
-msgstr "Tai"
-
-#. :TGO:768:
-#: zypp/CountryCode.cc:372
-msgid "Thailand"
-msgstr "Tailândia"
-
-#: zypp/VendorSupportOptions.cc:39
-msgid "The level of support is unspecified"
-msgstr "O nível de suporte não foi especificado"
-
-#: zypp/VendorSupportOptions.cc:42
-msgid "The vendor does not provide support."
-msgstr "O fornecedor não oferece suporte."
-
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr "Esta ação já está sendo executada por outro programa."
-
-#: zypp/solver/detail/SATResolver.cc:1217
-#: zypp/solver/detail/SATResolver.cc:1238
-msgid "This request will break your system!"
-msgstr "Esta solicitação travará o seu sistema!"
+msgstr "Tailandês"
 
 #. language code: tib bod bo
 #: zypp/LanguageCode.cc:1035 zypp/LanguageCode.cc:1037
@@ -4125,48 +3980,27 @@ msgstr "Tigré"
 #. language code: tir ti
 #: zypp/LanguageCode.cc:1041
 msgid "Tigrinya"
-msgstr "Tigrínia"
-
-#: zypp/media/MediaException.cc:207
-#, c-format, boost-format
-msgid "Timeout exceeded when accessing '%s'."
-msgstr "Tempo de espera excedido ao acessar '%s'."
-
-#. language code: tem
-#: zypp/LanguageCode.cc:1023
-msgid "Timne"
-msgstr "Temne"
+msgstr "Tigrínio"
 
 #. language code: tiv
 #: zypp/LanguageCode.cc:1043
 msgid "Tiv"
 msgstr "Tiv"
 
+#. language code: tlh
+#: zypp/LanguageCode.cc:1047
+msgid "Klingon"
+msgstr "Klingon"
+
 #. language code: tli
 #: zypp/LanguageCode.cc:1049
 msgid "Tlingit"
 msgstr "Tlingit"
 
-#. :ATF:260:
-#: zypp/CountryCode.cc:371
-msgid "Togo"
-msgstr "Togo"
-
-#. language code: tpi
-#: zypp/LanguageCode.cc:1057
-msgid "Tok Pisin"
-msgstr "Tok Pisin"
-
-#. :TJK:762:
-#. language code: tkl
-#: zypp/CountryCode.cc:374 zypp/LanguageCode.cc:1045
-msgid "Tokelau"
-msgstr "Tokelau"
-
-#. :TUN:788:
-#: zypp/CountryCode.cc:377
-msgid "Tonga"
-msgstr "Tonga"
+#. language code: tmh
+#: zypp/LanguageCode.cc:1051
+msgid "Tamashek"
+msgstr "Tuaregue"
 
 #. language code: tog
 #: zypp/LanguageCode.cc:1053
@@ -4178,102 +4012,65 @@ msgstr "Tonganês (Nyasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Tonganês (Ilhas Tonga)"
 
-#. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:522
-#, c-format, boost-format
-msgid "Tried to import not existent key %s into keyring %s"
-msgstr "Tentativa de importar a chave não existente %s para o chaveiro %s"
-
-#. :TUR:792:
-#: zypp/CountryCode.cc:380
-msgid "Trinidad and Tobago"
-msgstr "Trinidad e Tobago"
+#. language code: tpi
+#: zypp/LanguageCode.cc:1057
+msgid "Tok Pisin"
+msgstr "Tok Pisin"
 
 #. language code: tsi
 #: zypp/LanguageCode.cc:1059
 msgid "Tsimshian"
 msgstr "Tsimshian"
 
-#. language code: tso ts
-#: zypp/LanguageCode.cc:1063
-msgid "Tsonga"
-msgstr "Tsonga"
-
 #. language code: tsn tn
 #: zypp/LanguageCode.cc:1061
 msgid "Tswana"
 msgstr "Setswana"
 
-#. language code: tum
-#: zypp/LanguageCode.cc:1067
-msgid "Tumbuka"
-msgstr "Tumbuka"
-
-#. :TKM:795:
-#: zypp/CountryCode.cc:376
-msgid "Tunisia"
-msgstr "Tunísia"
-
-#. language code: tup
-#: zypp/LanguageCode.cc:1069
-msgid "Tupi Languages"
-msgstr "Línguas Tupis"
-
-#. :TLS:626:
-#: zypp/CountryCode.cc:379
-msgid "Turkey"
-msgstr "Turquia"
-
-#. language code: tur tr
-#: zypp/LanguageCode.cc:1071
-msgid "Turkish"
-msgstr "Turco"
-
-#. language code: ota
-#: zypp/LanguageCode.cc:841
-msgid "Turkish, Ottoman (1500-1928)"
-msgstr "Turco Otomano (1500-1928)"
+#. language code: tso ts
+#: zypp/LanguageCode.cc:1063
+msgid "Tsonga"
+msgstr "Tsonga"
 
 #. language code: tuk tk
 #: zypp/LanguageCode.cc:1065
 msgid "Turkmen"
 msgstr "Turcomeno"
 
-#. :TKL:772:
-#: zypp/CountryCode.cc:375
-msgid "Turkmenistan"
-msgstr "Turcomenistão"
+#. language code: tum
+#: zypp/LanguageCode.cc:1067
+msgid "Tumbuka"
+msgstr "Tumbuka"
 
-#. :SWZ:748:
-#: zypp/CountryCode.cc:368
-msgid "Turks and Caicos Islands"
-msgstr "Ilhas Turks e Caicos"
+#. language code: tup
+#: zypp/LanguageCode.cc:1069
+msgid "Tupi Languages"
+msgstr "Línguas tupis"
 
-#. :TTO:780:
-#. language code: tvl
-#: zypp/CountryCode.cc:381 zypp/LanguageCode.cc:1075
-msgid "Tuvalu"
-msgstr "Tuvaluano"
+#. language code: tur tr
+#: zypp/LanguageCode.cc:1071
+msgid "Turkish"
+msgstr "Turco"
 
-#. language code: tyv
-#: zypp/LanguageCode.cc:1079
-msgid "Tuvinian"
-msgstr "Tuviniano"
+#. language code: tut
+#: zypp/LanguageCode.cc:1073
+msgid "Altaic (Other)"
+msgstr "Altaico (outros)"
 
 #. language code: twi tw
 #: zypp/LanguageCode.cc:1077
 msgid "Twi"
 msgstr "Twi"
 
+#. language code: tyv
+#: zypp/LanguageCode.cc:1079
+msgid "Tuvinian"
+msgstr "Tuviniano"
+
 #. language code: udm
 #: zypp/LanguageCode.cc:1081
 msgid "Udmurt"
 msgstr "Udmurt"
-
-#. :UKR:804:
-#: zypp/CountryCode.cc:385
-msgid "Uganda"
-msgstr "Uganda"
 
 #. language code: uga
 #: zypp/LanguageCode.cc:1083
@@ -4285,11 +4082,6 @@ msgstr "Ugarítico"
 msgid "Uighur"
 msgstr "Uigur"
 
-#. :TZA:834:
-#: zypp/CountryCode.cc:384
-msgid "Ukraine"
-msgstr "Ucrânia"
-
 #. language code: ukr uk
 #: zypp/LanguageCode.cc:1087
 msgid "Ukrainian"
@@ -4300,215 +4092,40 @@ msgstr "Ucraniano"
 msgid "Umbundu"
 msgstr "Umbundo"
 
-#: zypp/Url.cc:300
-msgid "Unable to clone Url object"
-msgstr "Impossível clonar objeto Url"
-
-#: zypp/target/hal/HalContext.cc:229
-msgid "Unable to create dbus connection"
-msgstr "Impossível criar conexão com dbus"
-
-#: zypp/target/hal/HalContext.cc:272
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "Impossível inicializar contexto HAL -- hald não está em execução?"
-
-#: zypp/Url.cc:326 zypp/Url.cc:340
-msgid "Unable to parse Url components"
-msgstr "Impossível analisar os componentes do Url"
-
 #. language code: und
 #: zypp/LanguageCode.cc:1091
 msgid "Undetermined"
 msgstr "Indeterminado"
-
-#: zypp/RepoManager.cc:1377
-msgid "Unhandled repository type"
-msgstr "Tipo de repositório não identificado"
-
-#. :AND:020:
-#: zypp/CountryCode.cc:159
-msgid "United Arab Emirates"
-msgstr "Emirados Árabes Unidos"
-
-#. :GAB:266:
-#: zypp/CountryCode.cc:233
-msgid "United Kingdom"
-msgstr "Reino Unido"
-
-#. :UMI:581:
-#: zypp/CountryCode.cc:387
-msgid "United States"
-msgstr "Estados Unidos"
-
-#. :UGA:800:
-#: zypp/CountryCode.cc:386
-msgid "United States Minor Outlying Islands"
-msgstr "Ilhas Menores do Território Externo Norte-Americano"
-
-#: zypp/CountryCode.cc:50
-msgid "Unknown country: "
-msgstr "País desconhecido:"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
-#, c-format, boost-format
-msgid "Unknown error reading from '%s'"
-msgstr "Erro desconhecido ao ler de '%s'"
-
-#: zypp/LanguageCode.cc:49
-msgid "Unknown language: "
-msgstr "Idioma desconhecido:"
-
-#: zypp/base/StrMatcher.cc:152
-#, c-format, boost-format
-msgid "Unknown match mode '%s'"
-msgstr "Modo de correspondência desconhecido '%s'"
-
-#: zypp/base/StrMatcher.cc:153
-#, c-format, boost-format
-msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Modo de correspondência desconhecido '%s' para o padrão '%s'"
-
-#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
-#. %1% = service name
-#. %2% = repository name
-#: zypp/RepoManager.cc:849
-#, boost-format
-msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr ""
-"Serviço '%1%' desconhecido: Removendo o repositório de serviço órfão '%2%'"
-
-#: zypp/VendorSupportOptions.cc:56
-msgid "Unknown support option. Description not available"
-msgstr "Opção de suporte desconhecida. A descrição não está disponível"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2367
-msgid "Unknown type of signature"
-msgstr "Tipo de assinatura desconhecido"
-
-#: zypp/media/MediaUserAuth.cc:136
-#, c-format, boost-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Método de autenticação HTTP '%s' não suportado"
-
-#: zypp/media/MediaException.cc:140
-#, c-format, boost-format
-msgid "Unsupported URI scheme in '%s'."
-msgstr "Esquema de URI não suportado em '%s'."
-
-#. language code: hsb
-#: zypp/LanguageCode.cc:535
-msgid "Upper Sorbian"
-msgstr "Alto-Sorbiano"
 
 #. language code: urd ur
 #: zypp/LanguageCode.cc:1093
 msgid "Urdu"
 msgstr "Urdu"
 
-#: zypp/url/UrlBase.cc:154
-#, c-format, boost-format
-msgid "Url scheme does not allow a %s"
-msgstr "O esquema de Url não permite %s"
-
-#: zypp/url/UrlBase.cc:1022
-msgid "Url scheme does not allow a host component"
-msgstr "O esquema de Url não permite componente de host"
-
-#: zypp/url/UrlBase.cc:983
-msgid "Url scheme does not allow a password"
-msgstr "O esquema de Url não permite senha"
-
-#: zypp/url/UrlBase.cc:1070
-msgid "Url scheme does not allow a port"
-msgstr "O esquema de Url não permite porta"
-
-#: zypp/url/UrlBase.cc:949
-msgid "Url scheme does not allow a username"
-msgstr "O esquema de Url não permite nome de usuário"
-
-#: zypp/url/UrlBase.cc:824
-msgid "Url scheme is a required component"
-msgstr "O esquema de Url é um componente obrigatório"
-
-#: zypp/url/UrlBase.cc:1012
-msgid "Url scheme requires a host component"
-msgstr "O esquema de Url requer um componente de host"
-
-#: zypp/url/UrlBase.cc:1098
-msgid "Url scheme requires path name"
-msgstr "O esquema de Url requer nome de caminho"
-
-#. :USA:840:
-#: zypp/CountryCode.cc:388
-msgid "Uruguay"
-msgstr "Uruguai"
-
 #. language code: uzb uz
 #: zypp/LanguageCode.cc:1095
 msgid "Uzbek"
 msgstr "Uzbeque"
-
-#. :URY:858:
-#: zypp/CountryCode.cc:389
-msgid "Uzbekistan"
-msgstr "Uzbequistão"
 
 #. language code: vai
 #: zypp/LanguageCode.cc:1097
 msgid "Vai"
 msgstr "Vai"
 
-#. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1082
-msgid "Valid metadata not found at specified URL"
-msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] ""
-msgstr[1] ""
-
-#. :VNM:704:
-#: zypp/CountryCode.cc:396
-msgid "Vanuatu"
-msgstr "Vanuatu"
-
 #. language code: ven ve
 #: zypp/LanguageCode.cc:1099
 msgid "Venda"
 msgstr "Venda"
-
-#. :VCT:670:
-#: zypp/CountryCode.cc:392
-msgid "Venezuela"
-msgstr "Venezuela"
-
-#. :VIR:850:
-#: zypp/CountryCode.cc:395
-msgid "Vietnam"
-msgstr "Vietnã"
 
 #. language code: vie vi
 #: zypp/LanguageCode.cc:1101
 msgid "Vietnamese"
 msgstr "Vietnamita"
 
-#. :VGB:092:
-#: zypp/CountryCode.cc:394
-msgid "Virgin Islands, U.S."
-msgstr "Ilhas Virgens Norte-Americanas"
-
-#: zypp/media/MediaCurl.cc:1008
-msgid ""
-"Visit the Novell Customer Center to check whether your registration is valid "
-"and has not expired."
-msgstr ""
-"Visite o Novell Customer Center para verificar se seu registro é válido e "
-"não expirou."
-
 #. language code: vol vo
 #: zypp/LanguageCode.cc:1103
 msgid "Volapuk"
-msgstr "Volapük"
+msgstr "Volapuque"
 
 #. language code: vot
 #: zypp/LanguageCode.cc:1105
@@ -4518,22 +4135,12 @@ msgstr "Vótico"
 #. language code: wak
 #: zypp/LanguageCode.cc:1107
 msgid "Wakashan Languages"
-msgstr "Línguas Wakashan"
+msgstr "Línguas wakashan"
 
 #. language code: wal
 #: zypp/LanguageCode.cc:1109
 msgid "Walamo"
 msgstr "Walamo"
-
-#. :VUT:548:
-#: zypp/CountryCode.cc:397
-msgid "Wallis and Futuna"
-msgstr "Ilhas Wallis e Futuna"
-
-#. language code: wln wa
-#: zypp/LanguageCode.cc:1121
-msgid "Walloon"
-msgstr "Valão"
 
 #. language code: war
 #: zypp/LanguageCode.cc:1111
@@ -4550,25 +4157,30 @@ msgstr "Washo"
 msgid "Welsh"
 msgstr "Galês"
 
-#. :EGY:818:
-#: zypp/CountryCode.cc:221
-msgid "Western Sahara"
-msgstr "Saara Ocidental"
+#. language code: wen
+#: zypp/LanguageCode.cc:1119
+msgid "Sorbian Languages"
+msgstr "Línguas sorbianas"
+
+#. language code: wln wa
+#: zypp/LanguageCode.cc:1121
+msgid "Walloon"
+msgstr "Valão"
 
 #. language code: wol wo
 #: zypp/LanguageCode.cc:1123
 msgid "Wolof"
 msgstr "Wolof"
 
+#. language code: xal
+#: zypp/LanguageCode.cc:1125
+msgid "Kalmyk"
+msgstr "Kalmyk"
+
 #. language code: xho xh
 #: zypp/LanguageCode.cc:1127
 msgid "Xhosa"
-msgstr "Xosa"
-
-#. language code: sah
-#: zypp/LanguageCode.cc:909
-msgid "Yakut"
-msgstr "Iacuto"
+msgstr "Xhosa"
 
 #. language code: yao
 #: zypp/LanguageCode.cc:1129
@@ -4578,12 +4190,7 @@ msgstr "Iao"
 #. language code: yap
 #: zypp/LanguageCode.cc:1131
 msgid "Yapese"
-msgstr "Iapês"
-
-#. :WSM:882:
-#: zypp/CountryCode.cc:399
-msgid "Yemen"
-msgstr "Iêmen"
+msgstr "Yapês"
 
 #. language code: yid yi
 #: zypp/LanguageCode.cc:1133
@@ -4598,17 +4205,7 @@ msgstr "Iorubá"
 #. language code: ypk
 #: zypp/LanguageCode.cc:1137
 msgid "Yupik Languages"
-msgstr "Línguas Yupik"
-
-#. :ZAF:710:
-#: zypp/CountryCode.cc:402
-msgid "Zambia"
-msgstr "Zâmbia"
-
-#. language code: znd
-#: zypp/LanguageCode.cc:1145
-msgid "Zande"
-msgstr "Zande"
+msgstr "Línguas yupik"
 
 #. language code: zap
 #: zypp/LanguageCode.cc:1139
@@ -4625,10 +4222,10 @@ msgstr "Zenaga"
 msgid "Zhuang"
 msgstr "Zhuang"
 
-#. :ZMB:894:
-#: zypp/CountryCode.cc:403
-msgid "Zimbabwe"
-msgstr "Zimbábue"
+#. language code: znd
+#: zypp/LanguageCode.cc:1145
+msgid "Zande"
+msgstr "Zande"
 
 #. language code: zul zu
 #: zypp/LanguageCode.cc:1147
@@ -4640,57 +4237,180 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zunhi"
 
+#. TranslatorExplanation first %s is key name, second is keyring name
+#: zypp/KeyRing.cc:522
+#, c-format, boost-format
+msgid "Tried to import not existent key %s into keyring %s"
+msgstr "Tentou importar a chave não existente %s no chaveiro %s"
+
+#: zypp/KeyRing.cc:566
+msgid "Failed to delete key."
+msgstr "Falha ao remover chave."
+
+#: zypp/KeyRing.cc:575
+#, c-format, boost-format
+msgid "Signature file %s not found"
+msgstr "O arquivo de assinatura %s não foi encontrado"
+
+#: zypp/repo/RepoProvideFile.cc:259
+#, c-format, boost-format
+msgid "Can't provide file '%s' from repository '%s'"
+msgstr "Não foi possível fornecer o arquivo '%s' a partir do repositório '%s'"
+
+#: zypp/repo/RepoProvideFile.cc:265
+msgid "No url in repository."
+msgstr "Nenhuma URL no repositório."
+
+#: zypp/repo/RepoException.cc:129
+msgid "Service plugin does not support changing an attribute."
+msgstr "O plug-in de serviço não suporta alterar um atributo."
+
+#. TranslatorExplanation %s = package being checked for integrity
+#: zypp/repo/PackageProvider.cc:157
+#, c-format, boost-format
+msgid ""
+"Package %s seems to be corrupted during transfer. Do you want to retry "
+"retrieval?"
+msgstr ""
+"O pacote %s parece ter sido corrompido durante a transferência. Deseja "
+"tentar obtê-lo novamente?"
+
+#: zypp/repo/PackageProvider.cc:216
+msgid "Signature verification failed"
+msgstr "Falha na verificação da assinatura"
+
+#. TranslatorExplanation %s = name of the package being processed.
+#: zypp/repo/PackageProvider.cc:386
+#, c-format, boost-format
+msgid "Failed to provide Package %s. Do you want to retry retrieval?"
+msgstr "Falha ao fornecer o pacote %s. Deseja tentar obtê-lo novamente?"
+
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
 msgstr "Falha na verificação de applydeltarpm."
 
 #: zypp/repo/PackageProvider.cc:525
 msgid "applydeltarpm failed."
-msgstr "Falha de applydeltarpm."
+msgstr "Falha no applydeltarpm."
 
-#: zypp/solver/detail/SATResolver.cc:1325
+#: zypp/ZYppFactory.cc:394
 #, c-format, boost-format
-msgid "architecture change of %s to %s"
-msgstr "mudança de arquitetura de %s para %s"
+msgid ""
+"System management is locked by the application with pid %d (%s).\n"
+"Close this application before trying again."
+msgstr ""
+"O gerenciamento do sistema está bloqueado pelo aplicativo com o PID %d "
+"(%s).\n"
+"Feche este aplicativo antes de tentar novamente."
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
-msgid "break %s by ignoring some of its dependencies"
-msgstr "quebrar %s ignorando algumas de suas dependências"
+msgid "%s does not belong to a distupgrade repository"
+msgstr "%s não pertence a um repositório de atualização da distribuição"
+
+#: zypp/solver/detail/SATResolver.cc:979
+#, c-format, boost-format
+msgid "%s has inferior architecture"
+msgstr "%s tem uma arquitetura inferior"
+
+#: zypp/solver/detail/SATResolver.cc:983
+#, c-format, boost-format
+msgid "problem with installed package %s"
+msgstr "problema com o pacote instalado %s"
+
+#: zypp/solver/detail/SATResolver.cc:986
+msgid "conflicting requests"
+msgstr "requisições conflitantes"
+
+#: zypp/solver/detail/SATResolver.cc:989
+msgid "some dependency problem"
+msgstr "algum problema de dependência"
+
+#: zypp/solver/detail/SATResolver.cc:992
+#, c-format, boost-format
+msgid "nothing provides requested %s"
+msgstr "ninguém fornece o pacote requerido %s"
+
+#: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
+msgid "Have you enabled all requested repositories?"
+msgstr "Você habilitou todos os repositórios requeridos?"
+
+#: zypp/solver/detail/SATResolver.cc:996
+#, c-format, boost-format
+msgid "package %s does not exist"
+msgstr "o pacote %s não existe"
+
+#: zypp/solver/detail/SATResolver.cc:1000
+msgid "unsupported request"
+msgstr "requisição não suportada"
+
+#: zypp/solver/detail/SATResolver.cc:1003
+#, c-format, boost-format
+msgid "%s is provided by the system and cannot be erased"
+msgstr "%s é fornecido pelo sistema e não pode ser apagado"
+
+#: zypp/solver/detail/SATResolver.cc:1007
+#, c-format, boost-format
+msgid "%s is not installable"
+msgstr "%s não pode ser instalado"
+
+#: zypp/solver/detail/SATResolver.cc:1012
+#, c-format, boost-format
+msgid "nothing provides %s needed by %s"
+msgstr "ninguém fornece %s, que é necessário para %s"
 
 #: zypp/solver/detail/SATResolver.cc:1017
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
-msgstr "impossível instalar ambos %s e %s"
+msgstr "Não foi possível instalar ambos (%s e %s)"
 
-#: zypp/solver/detail/SATResolver.cc:986
-msgid "conflicting requests"
-msgstr "solicitações conflitantes"
-
-#: zypp/target/rpm/RpmDb.cc:2344
+#: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
-msgid "created backup %s"
-msgstr "backup %s criado"
+msgid "%s conflicts with %s provided by %s"
+msgstr "%s conflita com %s, fornecido por %s"
 
-#: zypp/solver/detail/SATResolver.cc:1354
+#: zypp/solver/detail/SATResolver.cc:1027
 #, c-format, boost-format
-msgid "deinstallation of %s"
-msgstr "desinstalação de %s"
+msgid "%s obsoletes %s provided by %s"
+msgstr "%s torna obsoleto %s, fornecido por %s"
+
+#: zypp/solver/detail/SATResolver.cc:1032
+#, c-format, boost-format
+msgid "installed %s obsoletes %s provided by %s"
+msgstr "%s instalado torna obsoleto %s fornecido por %s"
+
+#: zypp/solver/detail/SATResolver.cc:1036
+#, c-format, boost-format
+msgid "solvable %s conflicts with %s provided by itself"
+msgstr "resolvível %s conflita com %s fornecido por ele mesmo"
+
+#: zypp/solver/detail/SATResolver.cc:1068
+#, c-format, boost-format
+msgid "%s requires %s, but this requirement cannot be provided"
+msgstr "%s requer %s, mas este requisito não pode ser fornecido"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
 msgstr "fornecedores removidos: "
 
-#: zypp/solver/detail/SATResolver.cc:1245
-#, c-format, boost-format
-msgid "do not ask to delete all solvables providing %s"
-msgstr "não perguntar ao apagar todos os resolvíveis que fornecem %s"
+#. translators: 'uninstallable' == 'not installable'
+#: zypp/solver/detail/SATResolver.cc:1081
+msgid ""
+"\n"
+"uninstallable providers: "
+msgstr ""
+"\n"
+"fornecedores não-instaláveis: "
 
-#: zypp/solver/detail/SATResolver.cc:1223
+#. translators: 'uninstallable' == 'not installable'
+#: zypp/solver/detail/SATResolver.cc:1084
+msgid "uninstallable providers: "
+msgstr "fornecedores não-instaláveis: "
+
+#: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
-msgid "do not ask to install a solvable providing %s"
-msgstr "não perguntar ao instalar um resolvível que fornece %s"
+msgid "remove lock to allow removal of %s"
+msgstr "remover bloqueio para permitir a remoção de %s"
 
 #: zypp/solver/detail/SATResolver.cc:1146
 #: zypp/solver/detail/SATResolver.cc:1182
@@ -4698,24 +4418,71 @@ msgstr "não perguntar ao instalar um resolvível que fornece %s"
 msgid "do not install %s"
 msgstr "não instalar %s"
 
+#: zypp/solver/detail/SATResolver.cc:1161
+#: zypp/solver/detail/SATResolver.cc:1203
+#, c-format, boost-format
+msgid "keep %s"
+msgstr "manter %s"
+
+#: zypp/solver/detail/SATResolver.cc:1166
+#, c-format, boost-format
+msgid "remove lock to allow installation of %s"
+msgstr "remover bloqueio para permitir a instalação de %s"
+
+#: zypp/solver/detail/SATResolver.cc:1217
+#: zypp/solver/detail/SATResolver.cc:1238
+msgid "This request will break your system!"
+msgstr "Esta requisição irá deixar seu sistema inconsistente!"
+
+#: zypp/solver/detail/SATResolver.cc:1218
+#: zypp/solver/detail/SATResolver.cc:1239
+msgid "ignore the warning of a broken system"
+msgstr "ignorar o aviso de um sistema inconsistente"
+
+#: zypp/solver/detail/SATResolver.cc:1223
+#, c-format, boost-format
+msgid "do not ask to install a solvable providing %s"
+msgstr "não perguntar ao instalar um resolvível que fornece %s"
+
+#: zypp/solver/detail/SATResolver.cc:1245
+#, c-format, boost-format
+msgid "do not ask to delete all solvables providing %s"
+msgstr "não perguntar ao remover todos os resolvíveis que fornecem %s"
+
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "não instalar a versão mais recente de %s"
+
+#: zypp/solver/detail/SATResolver.cc:1279
+#, c-format, boost-format
+msgid "keep %s despite the inferior architecture"
+msgstr "manter %s apesar da arquitetura inferior"
+
+#: zypp/solver/detail/SATResolver.cc:1284
+#, c-format, boost-format
+msgid "install %s despite the inferior architecture"
+msgstr "instalar %s apesar da arquitetura inferior"
+
+#: zypp/solver/detail/SATResolver.cc:1293
+#, c-format, boost-format
+msgid "keep obsolete %s"
+msgstr "manter o obsoleto %s"
+
+#: zypp/solver/detail/SATResolver.cc:1298
+#, c-format, boost-format
+msgid "install %s from excluded repository"
+msgstr "instalar %s do repositório excluído"
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "desatualização de %s para %s"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
-msgid "generally ignore of some dependencies"
-msgstr "geralmente ignorar algumas dependências"
-
-#: zypp/solver/detail/SATResolver.cc:1218
-#: zypp/solver/detail/SATResolver.cc:1239
-msgid "ignore the warning of a broken system"
-msgstr "igorar o aviso de um sistema travado"
+#: zypp/solver/detail/SATResolver.cc:1325
+#, c-format, boost-format
+msgid "architecture change of %s to %s"
+msgstr "alteração de arquitetura de %s para %s"
 
 #: zypp/solver/detail/SATResolver.cc:1334
 #, c-format, boost-format
@@ -4726,138 +4493,989 @@ msgstr ""
 "instalar %s (com alteração do fornecedor)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1284
-#, c-format, boost-format
-msgid "install %s despite the inferior architecture"
-msgstr "instalar %s apesar da arquitetura inferior"
-
-#: zypp/solver/detail/SATResolver.cc:1298
-#, c-format, boost-format
-msgid "install %s from excluded repository"
-msgstr "instalar %s do repositório excluído"
-
-#: zypp/solver/detail/SATResolver.cc:1032
-#, c-format, boost-format
-msgid "installed %s obsoletes %s provided by %s"
-msgstr "%s instalado torna obsoleto %s fornecido por %s"
-
-#: zypp/VendorSupportOptions.cc:31
-msgid "invalid"
-msgstr "inválido"
-
-#: zypp/solver/detail/SATResolver.cc:1161
-#: zypp/solver/detail/SATResolver.cc:1203
-#, c-format, boost-format
-msgid "keep %s"
-msgstr "manter %s"
-
-#: zypp/solver/detail/SATResolver.cc:1279
-#, c-format, boost-format
-msgid "keep %s despite the inferior architecture"
-msgstr "manter %s apesar da arquitetura inferior"
-
-#: zypp/solver/detail/SATResolver.cc:1293
-#, c-format, boost-format
-msgid "keep obsolete %s"
-msgstr "manter %s obsoleto(a)"
-
-#: zypp/target/hal/HalContext.cc:242
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: Não é possível criar contexto libhal"
-
-#: zypp/target/hal/HalContext.cc:257
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: Não é possível definir conexão com dbus"
-
-#: zypp/solver/detail/SATResolver.cc:1012
-#, c-format, boost-format
-msgid "nothing provides %s needed by %s"
-msgstr "ninguém fornece %s que é necessário a %s"
-
-#: zypp/solver/detail/SATResolver.cc:992
-#, c-format, boost-format
-msgid "nothing provides requested %s"
-msgstr "ninguém fornece o pacote solicitado %s"
-
-#: zypp/solver/detail/SATResolver.cc:996
-#, c-format, boost-format
-msgid "package %s does not exist"
-msgstr "o pacote %s não existe"
-
-#: zypp/solver/detail/SATResolver.cc:983
-#, c-format, boost-format
-msgid "problem with installed package %s"
-msgstr "problema com o pacote instalado %s"
-
-#: zypp/solver/detail/SATResolver.cc:1166
-#, c-format, boost-format
-msgid "remove lock to allow installation of %s"
-msgstr "remover bloqueio para permitir a instalação de %s"
-
-#: zypp/solver/detail/SATResolver.cc:1141
-#, c-format, boost-format
-msgid "remove lock to allow removal of %s"
-msgstr "remover bloqueio para permitir a remoção de %s"
-
 #: zypp/solver/detail/SATResolver.cc:1343
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "substituição de %s por %s"
 
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2029
+#: zypp/solver/detail/SATResolver.cc:1354
 #, c-format, boost-format
-msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr "o rpm criou %s como %s, mas não foi possível determinar a diferença"
+msgid "deinstallation of %s"
+msgstr "desinstalação de %s"
 
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2031
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#, c-format, boost-format
+msgid "break %s by ignoring some of its dependencies"
+msgstr "quebrar %s ao ignorar algumas das dependências"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+msgid "generally ignore of some dependencies"
+msgstr "geralmente ignorar algumas dependencias"
+
+#: zypp/parser/RepoindexFileReader.cc:197
+#, c-format, boost-format
+msgid "Required attribute '%s' is missing."
+msgstr "Atributo necessário '%s' faltando."
+
+#: zypp/parser/RepoindexFileReader.cc:209
+#, c-format, boost-format
+msgid "One or both of '%s' or '%s' attributes is required."
+msgstr "Um ou ambos os atributos '%s' ou '%s' são necessários."
+
+#: zypp/base/InterProcessMutex.cc:83
+#, c-format, boost-format
+msgid "Can't open lock file: %s"
+msgstr "Não foi possível abrir o arquivo de bloqueio: %s"
+
+#: zypp/base/InterProcessMutex.cc:143
+msgid "This action is being run by another program already."
+msgstr "Esta ação já está sendo executada por outro programa."
+
+#. TranslatorExplanation followed by the list of error messages that lead to this exception
+#: zypp/base/Exception.cc:107
+msgid "History:"
+msgstr "Histórico:"
+
+#: zypp/base/StrMatcher.cc:152
+#, c-format, boost-format
+msgid "Unknown match mode '%s'"
+msgstr "Modo de correspondência desconhecido '%s'"
+
+#: zypp/base/StrMatcher.cc:153
+#, c-format, boost-format
+msgid "Unknown match mode '%s' for pattern '%s'"
+msgstr "Modo de correspondência desconhecido '%s' para o padrão '%s'"
+
+#: zypp/base/StrMatcher.cc:157
+#, c-format, boost-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr "Expressão regular inválida '%s': o regcomp retornou %d"
+
+#: zypp/base/StrMatcher.cc:158
+#, c-format, boost-format
+msgid "Invalid regular expression '%s'"
+msgstr "Expressão regular inválida '%s'"
+
+#: zypp/misc/CheckAccessDeleted.cc:242
+msgid "Please install package 'lsof' first."
+msgstr "Por favor, instale o pacote 'lsof' primeiro."
+
+#. !\todo add comma to the message for the next release
+#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
+#, c-format, boost-format
+msgid "Authentication required for '%s'"
+msgstr "Autenticação necessária para '%s'"
+
+#: zypp/media/MediaException.cc:31
+#, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr "Falha ao montar %s em %s"
+
+#: zypp/media/MediaException.cc:41
+#, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "Falha ao desmontar %s"
+
+#: zypp/media/MediaException.cc:47
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr "Nome de arquivo inválido: %s"
+
+#: zypp/media/MediaException.cc:53
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr "Mídia não aberta ao tentar realizar a ação '%s'."
+
+#: zypp/media/MediaException.cc:60
+#, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
+msgstr "Arquivo '%s' não encontrado na mídia '%s'"
+
+#: zypp/media/MediaException.cc:67
+#, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "Não foi possível salvar o arquivo '%s'."
+
+#: zypp/media/MediaException.cc:72
+msgid "Medium not attached"
+msgstr "Mídia não conectada"
+
+#: zypp/media/MediaException.cc:77
+msgid "Bad media attach point"
+msgstr "Ponto de conexão de mídia inválido"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:84
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr "Falha na inicialização do download (curl) para '%s'"
+
+#: zypp/media/MediaException.cc:91
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr "Exceção do sistema '%s' na mídia '%s'."
+
+#: zypp/media/MediaException.cc:98
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr "O caminho '%s' na mídia '%s' não é um arquivo."
+
+#: zypp/media/MediaException.cc:106
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "O caminho '%s' na mídia '%s' não é um diretório."
+
+#: zypp/media/MediaException.cc:115
+msgid "Malformed URI"
+msgstr "URI mal formado"
+
+#: zypp/media/MediaException.cc:125
+msgid "Empty host name in URI"
+msgstr "Nome de host vazio no URI"
+
+#: zypp/media/MediaException.cc:130
+msgid "Empty filesystem in URI"
+msgstr "Sistema de arquivos vazios no URI"
+
+#: zypp/media/MediaException.cc:135
+msgid "Empty destination in URI"
+msgstr "Destino vazio no URI"
+
+#: zypp/media/MediaException.cc:140
+#, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "Esquema de URI não suportado em '%s'."
+
+#: zypp/media/MediaException.cc:145
+msgid "Operation not supported by medium"
+msgstr "Operação não suportada pela mídia"
+
+#: zypp/media/MediaException.cc:152
 #, c-format, boost-format
 msgid ""
-"rpm created %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
 msgstr ""
-"rpm criou %s como %s.\n"
-"Aqui estão as 25 primeiras linhas de diferença:\n"
+"Erro de download (curl) para '%s':\n"
+"Código de erro: %s\n"
+"Mensagem de erro: %s\n"
 
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2024
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:161
 #, c-format, boost-format
-msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "o rpm gravou %s como %s, mas não foi possível determinar a diferença"
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr "Erro ao configurar as opções de download (curl) para '%s':"
 
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2026
+#: zypp/media/MediaException.cc:169
 #, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr "A mídia fonte '%s' não contém a mídia desejada"
+
+#: zypp/media/MediaException.cc:175
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr "A mídia '%s' está sendo usado por outra instância"
+
+#: zypp/media/MediaException.cc:182
+msgid "Cannot eject any media"
+msgstr "Não foi possível ejetar qualquer mídia"
+
+#: zypp/media/MediaException.cc:184
+#, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr "Não foi possível ejetar a mídia '%s'"
+
+#: zypp/media/MediaException.cc:199
+#, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "Permissão para acessar '%s' negada."
+
+#: zypp/media/MediaException.cc:207
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr "Tempo de espera excedido ao acessar '%s'."
+
+#: zypp/media/MediaException.cc:215
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr "O local '%s' está temporariamente inacessível."
+
+#: zypp/media/MediaException.cc:223
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr ""
+" Problema no certificado SSL. Verifique se a certificação CA está correta "
+"para '%s'."
+
+#: zypp/media/MediaException.cc:231
+#, c-format, boost-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr ""
+"Não foi possível encontrar um dispositivo loop disponível para montar o "
+"arquivo de imagem de '%s'"
+
+#: zypp/media/MediaUserAuth.cc:136
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr "Método de autenticação HTTP '%s' não suportado"
+
+#: zypp/media/MediaCurl.cc:1008
 msgid ""
-"rpm saved %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
+"Visit the Novell Customer Center to check whether your registration is valid "
+"and has not expired."
 msgstr ""
-"rpm gravou %s como %s.\n"
-"Aqui estão as 25 primeiras linhas de diferença:\n"
+"Visite o Novell Customer Center para verificar se seu registro é válido e "
+"não expirou."
 
-#: zypp/solver/detail/SATResolver.cc:1036
-#, c-format, boost-format
-msgid "solvable %s conflicts with %s provided by itself"
-msgstr "O resolvível %s conflita com %s fornecido por ele mesmo"
+#: zypp/sat/detail/PoolImpl.cc:184
+msgid "Can not create sat-pool."
+msgstr "Não foi possível criar o sat-pool."
 
-#: zypp/solver/detail/SATResolver.cc:989
-msgid "some dependency problem"
-msgstr "algum problema de dependência"
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:34
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+"O arquivo %1%\n"
+"  do pacote\n"
+"     %2%\n"
+"  conflita com o arquivo do pacote\n"
+"     %3%"
 
-#. translators: 'uninstallable' == 'not installable'
-#: zypp/solver/detail/SATResolver.cc:1084
-msgid "uninstallable providers: "
-msgstr "fornecedores de não instaláveis:"
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:40
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+"O arquivo %1%\n"
+"  do pacote\n"
+"     %2%\n"
+"  conflita com o arquivo da instalação de\n"
+"     %3%"
 
-#: zypp/VendorSupportOptions.cc:14
-msgid "unknown"
-msgstr "desconhecido"
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:47
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+"O arquivo %1%\n"
+"  da instalação de\n"
+"     %2%\n"
+"  conflita com o arquivo do pacote\n"
+"     %3%"
 
-#: zypp/VendorSupportOptions.cc:17
-msgid "unsupported"
-msgstr "não suportado"
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:53
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+"O arquivo %1%\n"
+"  da instalação de\n"
+"     %2%\n"
+"  conflita com o arquivo da instalação de\n"
+"     %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1000
-msgid "unsupported request"
-msgstr "solicitação não suportada"
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
+#: zypp/sat/FileConflicts.cc:68
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+"O arquivo %1%\n"
+"  do pacote\n"
+"     %2%\n"
+"  conflita com o arquivo\n"
+"     %3%\n"
+"  do pacote\n"
+"     %4%"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:76
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+"O arquivo %1%\n"
+"  do pacote\n"
+"     %2%\n"
+"  conflita com o arquivo\n"
+"     %3%\n"
+"  da instalação de\n"
+"     %4%"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:85
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+"O arquivo %1%\n"
+"  da instalação de\n"
+"     %2%\n"
+"  conflita com o arquivo\n"
+"     %3%\n"
+"  do pacote\n"
+"     %4%"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:93
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+"O arquivo %1%\n"
+"  da instalação de\n"
+"     %2%\n"
+"  conflita com o arquivo\n"
+"     %3%\n"
+"  da instalação de\n"
+"     %4%"
+
+#~ msgid "generally ignore of some dependecies"
+#~ msgstr "geralmente ignorar algumas das dependências"
+
+#~ msgid "do not forbid installation of %s"
+#~ msgstr "não proibir a instalação de %s"
+
+#~ msgid "do not keep %s installed"
+#~ msgstr "não manter %s instalado"
+
+#~ msgid ""
+#~ "File %s does not have a checksum.\n"
+#~ "Use the file anyway?"
+#~ msgstr ""
+#~ "لا يحتوي الملف %s على مجموع اختباري.\n"
+#~ "هل تريد استخدام الملف على أي حال؟"
+
+#~ msgid ""
+#~ "File %s failed integrity check with the folowing key:\n"
+#~ "%s|%s|%s\n"
+#~ "Use the file anyway?"
+#~ msgstr ""
+#~ "فشل التحقق من سلامة الملف %s باستخدام المفتاح التالي:\n"
+#~ "%s|%s|%s\n"
+#~ " هل تريد استخدام الملف على أي حال؟"
+
+#~ msgid ""
+#~ "File %s has an invalid checksum.\n"
+#~ "Expected %s, found %s\n"
+#~ "Use the file anyway?"
+#~ msgstr ""
+#~ "يحتوي الملف %s على مجموع اختباري غير صالح.\n"
+#~ "متوقع %s، تم العثور على %s\n"
+#~ " هل تريد استخدام الملف على أي حال؟"
+
+#~ msgid ""
+#~ "File %s has an unknown checksum %s.\n"
+#~ "Use the file anyway?"
+#~ msgstr ""
+#~ "يحتوي الملف %s على مجموع اختباري غير معروف %s.\n"
+#~ "هل تريد استخدام الملف على أي حال؟"
+
+#~ msgid ""
+#~ "File %s is not signed.\n"
+#~ "Use it anyway?"
+#~ msgstr ""
+#~ "لم يتم توقيع الملف %s.\n"
+#~ "هل تريد استخدامه على أي حال؟"
+
+#~ msgid ""
+#~ "File %s is signed with an unknown key:\n"
+#~ "%s|%s|%s\n"
+#~ "Use the file anyway?"
+#~ msgstr ""
+#~ "تم توقيع الملف %s باستخدام مفتاح غير معروف:\n"
+#~ "%s|%s|%s\n"
+#~ " هل تريد استخدام الملف على أي حال؟"
+
+#~ msgid ""
+#~ "Untrusted key found:\n"
+#~ "%s|%s|%s\n"
+#~ "Trust key?"
+#~ msgstr ""
+#~ "تم العثور على مفتاح غير موثوق:\n"
+#~ "%s|%s|%s\n"
+#~ " هل تريد الوثوق بالمفتاح؟"
+
+#~ msgid "%s remove failed"
+#~ msgstr "فشلت إزالة %s"
+
+#, fuzzy
+#~ msgid "Invalid user name or password."
+#~ msgstr "كلمة السر CA غير صالحة."
+
+#~ msgid "rpm output:"
+#~ msgstr "مخرجات rpm:"
+
+#~ msgid "%s install failed"
+#~ msgstr "فشل تثبيت %s"
+
+#~ msgid "%s installed ok"
+#~ msgstr "تم تثبيت %s بنجاح"
+
+#~ msgid "%s remove ok"
+#~ msgstr "تمت إزالة %s بنجاح"
+
+#, fuzzy
+#~ msgid ""
+#~ "%s provides this dependency, but would change the architecture of the "
+#~ "installed item"
+#~ msgstr "يوفر %s هذه التبعية، لكنه سيؤدي إلى تغيير هيكل العنصر المثبَّت"
+
+#, fuzzy
+#~ msgid ""
+#~ "%s provides this dependency, but would change the vendor of the installed "
+#~ "item"
+#~ msgstr "يوفر %s هذه التبعية، لكنه سيؤدي إلى تغيير هيكل العنصر المثبَّت"
+
+#, fuzzy
+#~ msgid "Do not install or delete the resolvables concerned"
+#~ msgstr "عدم تثبيت التبعيات القابلة للتحليل المتعلقة أو حذفها"
+
+#~ msgid "Ignore that %s is already set to install"
+#~ msgstr "تجاهل أنه تم تعيين %s بالفعل لتثبيته"
+
+#~ msgid "Ignore the obsolete %s in %s"
+#~ msgstr "تجاهل %s القديم في %s"
+
+#~ msgid "Ignore this conflict of %s"
+#~ msgstr "تجاهل تعارض %s هذا"
+
+#~ msgid "Ignore this requirement just here"
+#~ msgstr "تجاهل هذا المتطلب هنا فقط"
+
+#, fuzzy
+#~ msgid "Install %s although it would change the vendor"
+#~ msgstr "قم بتثبيت %s بالرغم من أنه قد يؤدي إلى تغيير الهيكل"
+
+#~ msgid "Install missing resolvables"
+#~ msgstr "تثبيت التبعيات القابلة للتحليل المفقودة"
+
+#~ msgid "Keep resolvables"
+#~ msgstr "الاحتفاظ بالتبعيات القابلة للتحليل"
+
+#~ msgid "Unlock these resolvables"
+#~ msgstr "إلغاء قفل التبعيات القابلة للتحليل هذه"
+
+#~ msgid "delete %s"
+#~ msgstr "حذف %s"
+
+#~ msgid "install %s"
+#~ msgstr "تثبيت %s"
+
+#~ msgid "unlock %s"
+#~ msgstr "إلغاء قفل %s"
+
+#~ msgid "unlock all resolvables"
+#~ msgstr "إلغاء قفل كافة التبعيات القابلة للتحليل"
+
+#, fuzzy
+#~ msgid "Can't open solv-file: "
+#~ msgstr "تعذر فتح الملف %1."
+
+#, fuzzy
+#~ msgid "Error reading solv-file: "
+#~ msgstr "تعذرت قراءة القطاع %u."
+
+#~ msgid "Path Parameter parsing not supported for this URL"
+#~ msgstr "تحليل معلمة المسار غير مدعوم لعنوان URL هذا"
+
+#~ msgid "Path parameter parsing not supported for this URL"
+#~ msgstr "تحليل معلمة المسار غير مدعوم لعنوان URL هذا"
+
+#~ msgid "Software management is already running."
+#~ msgstr "إدارة البرامج قيد التشغيل بالفعل."
+
+#~ msgid "%s is replaced by %s"
+#~ msgstr "%s تم استبداله بـ %s"
+
+#~ msgid "%s replaced by %s"
+#~ msgstr "%s تم استبداله بـ %s"
+
+#, fuzzy
+#~ msgid "%s will be deleted by the user.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "سيتم حذف هذه التبعيات القابلة للتحليل من النظام."
+
+#, fuzzy
+#~ msgid "%s will be installed by the user.\n"
+#~ msgstr "لن يتم إلغاء تثبيت %s لأنه لا يزال مطلوبًا"
+
+#~ msgid "Invalid information"
+#~ msgstr "المعلومات غير صالحة"
+
+#~ msgid "%s is needed by other resolvables"
+#~ msgstr "%s مطلوب بواسطة التبعيات القابلة للتحليل الأخرى"
+
+#~ msgid ""
+#~ "%s is needed by:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s مطلوب بواسطة\n"
+#~ "%s"
+
+#~ msgid "%s conflicts with other resolvables"
+#~ msgstr "يتعارض %s مع التبعيات القابلة للتحليل الأخرى"
+
+#~ msgid ""
+#~ "%s conflicts with:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s يتعارض مع:\n"
+#~ "%s"
+
+#~ msgid "%s obsoletes other resolvables"
+#~ msgstr "%s يجعل التبعيات القابلة للتحليل الأخرى قديمة"
+
+#~ msgid "%s obsoletes:%s"
+#~ msgstr "%s يجعل العنصر التالي قديمًا:%s"
+
+#~ msgid ""
+#~ "\n"
+#~ "These resolvables will be deleted from the system."
+#~ msgstr ""
+#~ "\n"
+#~ "سيتم حذف هذه التبعيات القابلة للتحليل من النظام."
+
+#~ msgid "%s depends on other resolvables"
+#~ msgstr "%s يعتمد على التبعيات القابلة للتحليل الأخرى"
+
+#~ msgid "%s depends on %s"
+#~ msgstr "%s يعتمد على %s"
+
+#~ msgid "%s depends on:%s"
+#~ msgstr "%s يعتمد على:%s"
+
+#~ msgid "Child of"
+#~ msgstr "عنصر فرعي لـ"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "There is no resource available which supports this requirement."
+#~ msgstr ""
+#~ "\n"
+#~ "لا يتوفر أي مورد يدعم هذا المتطلب."
+
+#, fuzzy
+#~ msgid ""
+#~ "Due to the problems described above/below, this resolution will not solve "
+#~ "all dependencies"
+#~ msgstr ""
+#~ "نتيجة للمشكلات الموضحة أعلاه/أدناه، لن يقوم هذا التحديد بحل كافة التبعيات"
+
+#, fuzzy
+#~ msgid "Cannot install %s, because it is conflicting with %s"
+#~ msgstr "تعذر تثبيت %s لأنه يتعارض مع %s"
+
+#~ msgid "%s is not installed and has been marked as uninstallable"
+#~ msgstr "لم يتم تثبيت %s وتم وضع علامة عليه كقابل لإلغاء التثبيت"
+
+#~ msgid "%s has unfulfilled requirements"
+#~ msgstr "لم يتم استيفاء متطلبات %s"
+
+#~ msgid "%s has missing dependencies"
+#~ msgstr "تم فقد تبعيات %s"
+
+#~ msgid "%s cannot be installed due to missing dependencies"
+#~ msgstr "تعذر تثبيت %s بسبب عدم وجود التبعيات"
+
+#, fuzzy
+#~ msgid "%s fulfills dependencies of %s but will be uninstalled"
+#~ msgstr "يستوفي %s تبعيات %s، لكن سيتم إلغاء تثبيته"
+
+#, fuzzy
+#~ msgid "%s fulfills dependencies of %s but will be kept on your system"
+#~ msgstr "يستوفي %s تبعيات %s، لكن سيتم الاحتفاظ به في النظام لديك"
+
+#~ msgid "No need to install %s"
+#~ msgstr "لا داعي لتثبيت %s"
+
+#, fuzzy
+#~ msgid "Cannot install %s to fulfill the dependencies of %s"
+#~ msgstr "تعذر تثبيت %s لاستيفاء تبعيات %s"
+
+#~ msgid "Cannot install %s to fulfil the dependencies of %s"
+#~ msgstr "تعذر تثبيت %s لاستيفاء تبعيات %s"
+
+#, fuzzy
+#~ msgid "%s will not be uninstalled, because it is still required"
+#~ msgstr "لن يتم إلغاء تثبيت %s لأنه لا يزال مطلوبًا"
+
+#, fuzzy
+#~ msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
+#~ msgstr "%s يجعل %s قديمًا. لكن يتعذر حذف %s لأنه مقفل."
+
+#, fuzzy
+#~ msgid "Cannot install %s, because it is conflicting"
+#~ msgstr "تعذر تثبيت %s لأنه متعارض"
+
+#~ msgid "%s is uninstallable due to conflicts with %s"
+#~ msgstr "%s يمكن إلغاء تثبيته لأنه يتعارض مع %s"
+
+#~ msgid "for requiring %s for %s when upgrading %s"
+#~ msgstr "لطلب %s لـ %s عند تحديث %s"
+
+#, fuzzy
+#~ msgid "%s is lacking the requirement %s"
+#~ msgstr "%s يفتقد المتطلب %s"
+
+#~ msgid ", Action: "
+#~ msgstr "، الإجراء:"
+
+#~ msgid ", Trigger: "
+#~ msgstr "، تشغيل:"
+
+#~ msgid "package"
+#~ msgstr "الحزمة"
+
+#~ msgid "selection"
+#~ msgstr "التحديد"
+
+#~ msgid "pattern"
+#~ msgstr "النمط"
+
+#~ msgid "product"
+#~ msgstr "المنتج"
+
+#~ msgid "patch"
+#~ msgstr "التصحيح"
+
+#~ msgid "script"
+#~ msgstr "البرنامج النصي"
+
+#~ msgid "message"
+#~ msgstr "الرسالة"
+
+#~ msgid "atom"
+#~ msgstr "الذرة"
+
+#~ msgid "system"
+#~ msgstr "النظام"
+
+#~ msgid "Resolvable"
+#~ msgstr "التبعية القابلة للتحليل"
+
+#~ msgid "Marking this resolution attempt as invalid."
+#~ msgstr "تعليم محاولة التحديد هذه كغير صالحة."
+
+#~ msgid "Marking resolvable %s as uninstallable"
+#~ msgstr "تعليم التبعية القابلة للتحليل %s باعتبارها قابلة لإلغاء التثبيت"
+
+#, fuzzy
+#~ msgid ""
+#~ "%s is scheduled to be installed, but this is impossible due to dependency "
+#~ "problems."
+#~ msgstr ""
+#~ "تمت جدولة %s لتثبيته، لكن لا يمكن القيام بذلك بسبب وجود مشكلات في التبعية."
+
+#, fuzzy
+#~ msgid ""
+#~ "Can't install %s since it is already marked as needed to be uninstalled"
+#~ msgstr "تعذر تثبيت %s لأنه تم تعليمه بالفعل على أنه مطلوب إلغاء تثبيته"
+
+#, fuzzy
+#~ msgid "Can't install %s, because it does not apply to this system."
+#~ msgstr "تعذر تثبيت %s لأنه لا ينطبق على هذا النظام."
+
+#, fuzzy
+#~ msgid ""
+#~ "Can't install %s, because %s is already marked as needed to for "
+#~ "installation"
+#~ msgstr "تعذر تثبيت %s، لأن %s تم تعليمه بالفعل على أنه مطلوب تثبيته"
+
+#~ msgid "This would invalidate %s."
+#~ msgstr "سيؤدي هذا إلى إلغاء صلاحية %s."
+
+#~ msgid "Establishing %s"
+#~ msgstr "تأسيس %s"
+
+#~ msgid "Installing %s"
+#~ msgstr "تثبيت %s"
+
+#~ msgid "Updating %s to %s"
+#~ msgstr "تحديث %s إلى %s"
+
+#~ msgid "Skipping %s: already installed"
+#~ msgstr "تخطي %s: تم التثبيت بالفعل"
+
+#, fuzzy
+#~ msgid "There are no alternative providers of %s installed"
+#~ msgstr "لا يوجد أي موفرين مثبَّتين بدائل لـ %s"
+
+#~ msgid "for %s"
+#~ msgstr "لـ %s"
+
+#, fuzzy
+#~ msgid "Upgrading to %s to avoid removing %s is not possible."
+#~ msgstr "لا يمكن التحديث إلى %s لتجنب إزالة %s."
+
+#~ msgid "%s provides %s, but is scheduled to be uninstalled."
+#~ msgstr "%s يوفر %s، لكن تمت جدولته لإلغاء تثبيته."
+
+#~ msgid "%s provides %s, but another version of that %s is already installed."
+#~ msgstr "%s يوفر %s، لكن تم تثبيت إصدار آخر لـ %s هذا بالفعل."
+
+#~ msgid ""
+#~ "%s provides %s, but it is uninstallable.  Try installing it on its own "
+#~ "for more details."
+#~ msgstr ""
+#~ "%s يوفر %s، لكنه قابل لإلغاء التثبيت.  حاول تثبيته للحصول على مزيد من "
+#~ "التفاصيل."
+
+#~ msgid "%s provides %s, but it is locked."
+#~ msgstr "%s يوفر %s، لكنه مقفل."
+
+#~ msgid "%s provides %s,  but is scheduled to be kept."
+#~ msgstr "%s يوفر %s، لكن تمت جدولته للاحتفاظ به."
+
+#, fuzzy
+#~ msgid "%s provides %s, but has another vendor (%s)."
+#~ msgstr "%s يوفر %s، لكن له هيكل آخر."
+
+#~ msgid "Can't satisfy requirement %s for %s"
+#~ msgstr "تعذر استيفاء متطلب %s لـ %s"
+
+#, fuzzy
+#~ msgid ""
+#~ "%s is required by another resolvable selected for installation, so it "
+#~ "won't be unlinked."
+#~ msgstr ""
+#~ "%s مطلوب بواسطة تبعية قابلة للتحليل مثبَّتة أخرى، لذا لن يتم إلغاء الارتباط."
+
+#, fuzzy
+#~ msgid ""
+#~ "%s is required by another installed resolvable, so it won't be unlinked."
+#~ msgstr ""
+#~ "%s مطلوب بواسطة تبعية قابلة للتحليل مثبَّتة أخرى، لذا لن يتم إلغاء الارتباط."
+
+#~ msgid "%s is locked and cannot be uninstalled."
+#~ msgstr "%s مقفل ويتعذر إلغاء تثبيته."
+
+#, fuzzy
+#~ msgid ""
+#~ "A conflict over %s (%s) requires the removal of %s which is scheduled for "
+#~ "installation"
+#~ msgstr "يتطلب تعارض %s (%s) إزالة %s المطلوب تثبيته"
+
+#~ msgid "Marking %s as uninstallable due to conflicts over %s"
+#~ msgstr "تعليم %s باعتباره قابل لإلغاء التثبيت بسبب وجود تعارضات على %s"
+
+#~ msgid "from %s"
+#~ msgstr "من %s"
+
+#~ msgid " Error!"
+#~ msgstr "خطأ!"
+
+#~ msgid " Important!"
+#~ msgstr "هام!"
+
+#~ msgid "%s depended on %s"
+#~ msgstr "%s اعتمد على %s"
+
+#, fuzzy
+#~ msgid "%s is recommended by %s"
+#~ msgstr "%s مطلوب بواسطة %s"
+
+#, fuzzy
+#~ msgid "%s is suggested by %s"
+#~ msgstr "%s مطلوب بواسطة %s"
+
+#, fuzzy
+#~ msgid "%s is enhanced by %s"
+#~ msgstr "%s تم استبداله بـ %s"
+
+#, fuzzy
+#~ msgid "%s is supplemented by %s"
+#~ msgstr "%s مطلوب بواسطة %s"
+
+#~ msgid "%s part of %s"
+#~ msgstr "%s جزء من %s"
+
+#, fuzzy
+#~ msgid "Double timeout"
+#~ msgstr "موعد الاستحقاق: %1"
+
+#, fuzzy
+#~ msgid "%s is freshened by %s"
+#~ msgstr "%s مطلوب بواسطة %s"
+
+#~ msgid "Unable to parse Url authority"
+#~ msgstr "تعذر تحليل سلطة Url"
+
+#~ msgid "Ignore this requirement generally"
+#~ msgstr "تجاهل هذا المتطلب بصفة عامة"
+
+#~ msgid ""
+#~ "%s is required by other to-be-installed resolvable, so it won't be "
+#~ "unlinked."
+#~ msgstr ""
+#~ "%s مطلوب بواسطة تبعية قابلة للتحليل أخرى مطلوب تثبيتها، لذا لن يتم إلغاء "
+#~ "الارتباط."
+
+#~ msgid "Cannot create a file needed to perform update installation."
+#~ msgstr "تعذر إنشاء الملف المطلوب لتنفيذ عملية تثبيت التحديث."
+
+#~ msgid "Unable to restore all sources."
+#~ msgstr "تعذرت استعادة كافة المصادر."
+
+#~ msgid ""
+#~ "At least one source already registered, stored sources cannot be restored."
+#~ msgstr "تم تسجيل مصدر واحد على الأقل، تعذرت استعادة المصادر المخزَّنة."
+
+#~ msgid "Cannot be install %s to fulfil the dependencies of %s"
+#~ msgstr "تعذر تثبيت %s لاستيفاء تبعيات %s"
+
+#~ msgid "%s dependend on %s"
+#~ msgstr "%s اعتمد على %s"
+
+#~ msgid "Reading index files"
+#~ msgstr "قراءة ملفات الفهرس"
+
+#~ msgid "The signed repomd.xml file failed the signature check."
+#~ msgstr "فشل ملف repomd.xml الموقَّع في التحقق من التوقيع."
+
+#~ msgid "Reading product from %s"
+#~ msgstr "قراءة المنتج من %s"
+
+#~ msgid "Reading filelist from %s"
+#~ msgstr "قراءة قائمة الملفات من %s"
+
+#~ msgid "Reading packages from %s"
+#~ msgstr "قراءة الحزم من %s"
+
+#~ msgid "Reading selection from %s"
+#~ msgstr "قراءة التحديد من %s"
+
+#~ msgid "Reading pattern from %s"
+#~ msgstr "قراءة النمط من %s"
+
+#~ msgid "Reading patches index %s"
+#~ msgstr "قراءة فهرس التصحيحات %s"
+
+#~ msgid "Reading patch %s"
+#~ msgstr "قراءة التصحيح %s"
+
+#~ msgid "The script file failed the checksum test."
+#~ msgstr "فشل ملف البرنامج النصي في اختبار المجموع الاختباري."
+
+#~ msgid "Reading packages file"
+#~ msgstr "قراءة ملف الحزم"
+
+#~ msgid "Reading translation: %s"
+#~ msgstr "قراءة الترجمة: %s"
+
+#, fuzzy
+#~ msgid ""
+#~ "Package %s fails integrity check. Do you want to retry, or abort "
+#~ "installation?"
+#~ msgstr ""
+#~ "فشل التحقق من سلامة الحزمة %s. هل تريد إعادة محاولة إنزالها، أو إيقاف "
+#~ "التثبيت؟"
+
+#~ msgid " miss checksum."
+#~ msgstr "فقد المجموع الاختباري."
+
+#~ msgid " fails checksum verification."
+#~ msgstr "فشل التحقق من المجموع الاختباري."
+
+#~ msgid "Downloading %s"
+#~ msgstr "إنزال %s"
+
+#~ msgid "Cannot create public key %s from %s keyring to file %s"
+#~ msgstr ""
+#~ "Não foi possível criar a chave pública %s do chaveiro %s para o arquivo %s"
+
+#~ msgid "Tried to import not existant key %s into keyring %s"
+#~ msgstr ""
+#~ "Tentativa de importar chave não existente %s no gerenciador de chaves %s"
+
+#~ msgid "Can't chdir to '/' inside chroot (%s)."
+#~ msgstr ""
+#~ "Não foi possível alterar o diretório para '/' dentro do chroot (%s)."
+
+#~ msgid "Download (Metalink curl) initialization failed for '%s'"
+#~ msgstr "Falha na inicialização do download (Metalink curl) para '%s'"
+
+#~ msgid ""
+#~ "Download (metalink curl) error for '%s':\n"
+#~ "Error code: %s\n"
+#~ "Error message: %s\n"
+#~ msgstr ""
+#~ "Erro de download (metalink curl) para '%s':\n"
+#~ "Código de erro: %s\n"
+#~ "Mensagem de erro: %s\n"
+
+#~ msgid "Download interrupted at %d%%"
+#~ msgstr "Download interrompido em %d%%"
+
+#~ msgid "Download interrupted by user"
+#~ msgstr "Download interrompido pelo usuário"
+
+#~ msgid ""
+#~ "Error occurred while setting download (metalink curl) options for '%s':"
+#~ msgstr "Erro ao configurar as opções de download (metalink curl) para '%s':"
+
+#~ msgid "Failed to download %s from %s"
+#~ msgstr "Falha ao baixar %s de %s"
+
+#~ msgid "Serbia and Montenegro"
+#~ msgstr "Sérvia e Montenegro"
+
+#~ msgid "Unknown Distribution"
+#~ msgstr "Distribuição desconhecida"
+
+#~ msgid "ignore some dependencies of %s"
+#~ msgstr "ignorar algumas das dependências de %s"
+
+#~ msgid "Timeout exceeded when access '%s'."
+#~ msgstr "Tempo de espera excedido quando acessando '%s'."
