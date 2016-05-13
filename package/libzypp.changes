@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri May 13 08:45:53 CEST 2016 - ma@suse.de
+
+- Prepare cmake to maintain the .pot and .po files in git. Add
+  initial .po file set derived from tarballs. Translations are now
+  maintained via Weblate.
+- Provide 'libzypp(plugin:services) = 1' after fixing bsc#933760
+- Bump major version for Factory, 15.x is continued on SuSE-SLE-12-SP1-Branch
+- version 16.0.0 (0)
+
+-------------------------------------------------------------------
 Thu Apr 28 14:17:09 CEST 2016 - ma@suse.de
 
 - Update sle-zypp-po.tar.bz2

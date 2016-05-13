@@ -58,11 +58,11 @@
 # - Consider calling ./mkChangelog to assist you.
 #   See './mkChangelog -h' for help.
 #
-SET(LIBZYPP_MAJOR "15")
-SET(LIBZYPP_COMPATMINOR "19")
-SET(LIBZYPP_MINOR "22")
+SET(LIBZYPP_MAJOR "16")
+SET(LIBZYPP_COMPATMINOR "0")
+SET(LIBZYPP_MINOR "0")
 SET(LIBZYPP_PATCH "0")
 #
-# LAST RELEASED: 15.22.0 (19)
+# LAST RELEASED: 16.0.0 (0)
 # (The number in parenthesis is LIBZYPP_COMPATMINOR)
 #=======
