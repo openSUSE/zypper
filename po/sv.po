@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-13 19:22+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-05-13 19:23+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -268,17 +268,17 @@ msgstr "Okänd signaturtyp"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
 msgid "Signature does not verify"
-msgstr "Signaturen går inte att verifiera"
+msgstr "Signaturen kan inte verifieras"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2371
 msgid "Signature is OK, but key is not trusted"
-msgstr "Signaturen är OK, men nyckeln är inte tillförlitlig"
+msgstr "Signaturen är OK, men nyckeln är inte betrodd"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2373
 msgid "Signatures public key is not available"
-msgstr "Signaturens publika nyckel är inte tillgänglig."
+msgstr "Signaturens offentliga nyckel är inte tillgänglig"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2375
