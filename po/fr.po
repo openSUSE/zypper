@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-13 18:58+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-13 19:00+0000\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -4328,7 +4328,7 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr "%s n'appartient à aucun dépôt de mise à niveau de distribution."
+msgstr "%s n'appartient à aucun dépôt de mise à niveau de la distribution."
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
@@ -4407,7 +4407,7 @@ msgstr "Le %s installé rend %s fourni pas %s obsolète"
 #: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
-msgstr "L'élément %s est en conflit avec %s fournit par lui même"
+msgstr "L'élément %s est en conflit avec %s fourni par lui même"
 
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
