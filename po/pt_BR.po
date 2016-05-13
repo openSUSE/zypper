@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-05-13 18:50+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<http://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -4560,7 +4560,7 @@ msgstr "Expressão regular inválida '%s'"
 
 #: zypp/misc/CheckAccessDeleted.cc:242
 msgid "Please install package 'lsof' first."
-msgstr "Por favor, instale o pacote 'lsof' primeiro."
+msgstr "Instale o pacote 'lsof' primeiro."
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
