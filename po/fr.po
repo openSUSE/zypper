@@ -20,15 +20,16 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2015-11-19 23:58+0100\n"
+"PO-Revision-Date: 2016-05-13 18:48+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
-"Language-Team: français <opensuse-fr@opensuse.org>\n"
+"Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.5\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -187,7 +188,7 @@ msgstr "libhal_set_dbus_connection : impossible de définir la connexion dbus"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "Impossible d'initialiser le contexte HAL -- hald fonctionne-t-il?"
+msgstr "Impossible d'initialiser le contexte HAL -- hald fonctionne-t-il ?"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
@@ -198,7 +199,7 @@ msgstr "Pas un lecteur de CDROM"
 #: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
 #: zypp/target/rpm/RpmDb.cc:2189
 msgid "RPM failed: "
-msgstr "Echec RPM:"
+msgstr "Échec RPM : "
 
 #. TranslatorExplanation first %s is file name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1124
@@ -343,7 +344,7 @@ msgstr "Impossible d'ouvrir le fichier '%s' en écriture."
 #: zypp/RepoManager.cc:849
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr "Service '%1%' inconnu : Suppression du dépôt de service orphelin '%2%'"
+msgstr "Service '%1%' inconnu : suppression du dépôt de service orphelin '%2%'"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
