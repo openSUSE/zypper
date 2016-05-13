@@ -17,15 +17,16 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2014-10-04 18:00-0300\n"
-"Last-Translator: Sergio Gabriel Teves <gabriel@opensuse.org>\n"
-"Language-Team: Spanish <opensuse-translation-es@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-13 17:53+0000\n"
+"Last-Translator: jc sl <trcs@gmx.com>\n"
+"Language-Team: Spanish <http://l10n.opensuse.org/projects/libzypp/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.9\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.5\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -348,13 +349,10 @@ msgstr ""
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
-#, fuzzy
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] ""
-"No se han encontrado metadatos válidos en la(s) URL(s) especificada(s)"
-msgstr[1] ""
-"No se han encontrado metadatos válidos en la(s) URL(s) especificada(s)"
+msgstr[0] "No se han encontrado metadatos válidos en la URL especificada"
+msgstr[1] "No se han encontrado metadatos válidos en las URL especificadas"
 
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
 #, c-format, boost-format
@@ -586,11 +584,11 @@ msgstr "(expira en las próximas 24hs)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(expira en las próximas 24hs)"
-msgstr[1] "(expira en las próximas 24hs)"
+msgstr[0] "(expira en %d día)"
+msgstr[1] "(expira en %d días)"
 
 # clients/support_registration.ycp:225 include/support/registration.ycp:77
 # clients/support_askkey.ycp:246 include/support/supportio.ycp:79
