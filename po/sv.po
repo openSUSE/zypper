@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-13 19:21+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-13 19:22+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -263,7 +263,7 @@ msgstr "Signaturen är OK"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2367
 msgid "Unknown type of signature"
-msgstr "Obekant signaturtyp"
+msgstr "Okänd signaturtyp"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
