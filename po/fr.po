@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-13 18:57+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"PO-Revision-Date: 2016-05-13 18:58+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -4321,14 +4321,14 @@ msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
 msgstr ""
-"La gestion du système est verrouillée par l'application avec le pid %d "
-"(%s).\n"
-"Fermer cette application avant de réessayer."
+"La gestion du système est verrouillée par l'application avec le pid %d (%s)."
+"\n"
+"Fermez cette application avant de réessayer."
 
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr "%s n'appartient pas à un dépôt distupgrade"
+msgstr "%s n'appartient à aucun dépôt de mise à niveau de distribution."
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
