@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-13 17:53+0000\n"
+"PO-Revision-Date: 2016-05-13 17:55+0000\n"
 "Last-Translator: jc sl <trcs@gmx.com>\n"
 "Language-Team: Spanish <http://l10n.opensuse.org/projects/libzypp/master/es/>"
 "\n"
@@ -144,7 +144,7 @@ msgstr " ejecución omitida mientras se aborta"
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
 #: zypp/target/TargetImpl.cc:607
 msgid "Error sending update message notification."
-msgstr "Error al enviar la notificación del mensaje de actualización"
+msgstr "Error al enviar la notificación del mensaje de actualización."
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
