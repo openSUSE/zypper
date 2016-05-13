@@ -72,7 +72,7 @@ namespace zypp
     public:
       /** Default ctor. */
       PoolItemBest()
-      {}
+      { _ctor_init(); }
 
       /** Ctor feeding a \ref sat::Solvable. */
       PoolItemBest( sat::Solvable slv_r )
