@@ -7,15 +7,16 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2015-11-17 09:31+0100\n"
+"PO-Revision-Date: 2016-05-14 17:45+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
+"Language-Team: Slovak <http://l10n.opensuse.org/projects/libzypp/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Weblate 2.5\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -171,18 +172,18 @@ msgstr "libhal_set_dbus_connection: Nie je možné nastaviť spojenie s dbus"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "Nie je možné inicializovať HAL context - overte či je spustený hald."
+msgstr "Nie je možné inicializovať HAL kontext -- je spustený hald?"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
-msgstr "Dané zariadenie nie je CDROM mechanika."
+msgstr "Nie je CDROM mechanika"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
 #: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
 #: zypp/target/rpm/RpmDb.cc:2189
 msgid "RPM failed: "
-msgstr "RPM zlyhalo:"
+msgstr "RPM zlyhalo: "
 
 #. TranslatorExplanation first %s is file name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1124
@@ -490,12 +491,12 @@ msgstr "Neplatný oddeľovací znak pre spájanie poľa parametrov"
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
-msgstr "Nemôžem otvoriť pty (%s)"
+msgstr "Nie je možné otvoriť pty (%s)."
 
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
-msgstr "Nemôžem otvoriť rúru (%s)"
+msgstr "Nie je možné otvoriť rúru (%s)."
 
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
@@ -591,7 +592,7 @@ msgstr "chybný"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr "Úroveň podpory nie je určený."
+msgstr "Úroveň podpory nie je určená"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
@@ -635,11 +636,11 @@ msgstr "Pre poskytovanie podpory je potrebná ďalšia zákaznícka zmluva."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "Neznámy typ podpory. Popis nie je k dispozícii."
+msgstr "Neznáma voľba podpory. Popis nie je k dispozícii"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr "Neznáma krajina"
+msgstr "Neznáma krajina: "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
@@ -804,12 +805,12 @@ msgstr "Bahamy"
 #. :BHS:044:
 #: zypp/CountryCode.cc:189
 msgid "Bhutan"
-msgstr "Bhutan"
+msgstr "Bhután"
 
 #. :BTN:064:
 #: zypp/CountryCode.cc:190
 msgid "Bouvet Island"
-msgstr "Bouvet Island"
+msgstr "Bouvetov ostrov"
 
 #. :BVT:074:
 #: zypp/CountryCode.cc:191
@@ -865,7 +866,7 @@ msgstr "Cookove ostrovy"
 #. :COK:184:
 #: zypp/CountryCode.cc:202
 msgid "Chile"
-msgstr "Chile"
+msgstr "Čile"
 
 #. :CHL:152:
 #: zypp/CountryCode.cc:203
@@ -895,7 +896,7 @@ msgstr "Kuba"
 #. :CUB:192:
 #: zypp/CountryCode.cc:208
 msgid "Cape Verde"
-msgstr "Cape Verde"
+msgstr "Kapverdy"
 
 #. :CPV:132:
 #: zypp/CountryCode.cc:209
@@ -1074,7 +1075,7 @@ msgstr "Guadeloupe"
 #. :GLP:312:
 #: zypp/CountryCode.cc:244
 msgid "Equatorial Guinea"
-msgstr "Equatorial Guinea"
+msgstr "Rovníková Guinea"
 
 #. :GNQ:226:
 #: zypp/CountryCode.cc:245
@@ -1212,7 +1213,7 @@ msgstr "Keňa"
 #. :KEN:404:
 #: zypp/CountryCode.cc:272
 msgid "Kyrgyzstan"
-msgstr "Kyrgyzstan"
+msgstr "Kirgizsko"
 
 #. :KGZ:417:
 #: zypp/CountryCode.cc:273
@@ -1871,7 +1872,7 @@ msgstr "Zimbabwe"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
-msgstr "Neznámy jazyk:"
+msgstr "Neznámy jazyk: "
 
 #. language code: aar aa
 #: zypp/LanguageCode.cc:161
@@ -4236,7 +4237,7 @@ msgstr "Nepodarilo zmazať kľúč."
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "Podpis súboru %s nebol nájdený."
+msgstr "Súbor podpisu %s nebol nájdený"
 
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
@@ -4376,7 +4377,7 @@ msgstr "%s vyžaduje %s, ale táto požiadavka nemôže byť splnená"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
-msgstr "zmazaný poskytovatelia:"
+msgstr "zmazaný poskytovatelia: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -4511,7 +4512,7 @@ msgstr "Jeden alebo oba z atribútov '%s' alebo '%s' sú vyžadované."
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
 msgid "Can't open lock file: %s"
-msgstr "Nemôžem otvoriť súbor so zámkom: %s."
+msgstr "Nie je možné otvoriť súbor so zámkom: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
@@ -4555,12 +4556,12 @@ msgstr "'%s' vyžaduje autentifikáciu"
 #: zypp/media/MediaException.cc:31
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
-msgstr "Nepodarilo sa pripojiť %s na %s."
+msgstr "Nepodarilo sa pripojiť %s na %s"
 
 #: zypp/media/MediaException.cc:41
 #, c-format, boost-format
 msgid "Failed to unmount %s"
-msgstr "Nepodarilo sa odpojiť %s."
+msgstr "Nepodarilo sa odpojiť %s"
 
 #: zypp/media/MediaException.cc:47
 #, c-format, boost-format
@@ -4699,7 +4700,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
 msgstr ""
-"Neviem nájsť dostupné loop zariadenie na pripojenie súboru '%s' s obrazom."
+"Nie je možné nájsť dostupné loop zariadenie na pripojenie súboru obrazu z "
+"'%s'"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
