@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-15 10:56+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-05-15 10:57+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -4601,12 +4601,12 @@ msgstr "ignorera varningen om ett skadat system"
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
-msgstr "fråga inte efter att installera en solvable som levererar %s"
+msgstr "fråga inte om att installera en lösbar med %s"
 
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "fråga inte efter att ta bort alla solvables som tillahandahåller %s"
+msgstr "fråga inte om att ta bort alla lösbara med %s"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
@@ -4616,17 +4616,17 @@ msgstr "installera inte den senaste versionen av %s"
 #: zypp/solver/detail/SATResolver.cc:1279
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr "behåll %s trots en lägre arkitektur"
+msgstr "behåll %s trots underordnad arkitektur"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
-msgstr "installera %s trots en lägre arkitektur"
+msgstr "installera %s trots underordnad arkitektur"
 
 #: zypp/solver/detail/SATResolver.cc:1293
 #, c-format, boost-format
 msgid "keep obsolete %s"
-msgstr "behåll inaktuella %s"
+msgstr "behåll föråldrad version av %s"
 
 #: zypp/solver/detail/SATResolver.cc:1298
 #, c-format, boost-format
