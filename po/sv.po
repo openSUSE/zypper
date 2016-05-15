@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-15 10:38+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-05-15 10:42+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -588,7 +588,7 @@ msgstr "Nivå 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr "Ytterligare kundkontrakt nödvändigt"
+msgstr "Ytterligare kundavtal behövs"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
@@ -596,11 +596,11 @@ msgstr "ogiltig"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr "Supportnivå är inte angiven"
+msgstr "Supportnivån har inte angetts"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
-msgstr "Försäljaren ger ingen support"
+msgstr "Leverantören tillhandahåller inte support."
 
 #: zypp/VendorSupportOptions.cc:45
 msgid ""
@@ -609,10 +609,10 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
-"Problembestämning, vilket innebär teknisk support för att tillhandahålla "
-"information om kompatibilitet, installationshjälp, användarhjälp, löpande "
-"underhåll och grundläggande felsökning. Supportnivå 1 är inte avsedd  att "
-"rätta produktfel."
+"Problembestämning – innebär teknisk support som ska kunna ge "
+"kompatibilitetsinformation, installationshjälp, användningssupport, "
+"underhåll och grundläggande felsökning. Support på nivå 1 är inte avsedd att "
+"korrigera produktfel."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
@@ -620,9 +620,9 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
-"Problemisolering, vilket innebär teknisk support för att replikera kunders "
-"problem, isolera problemområde och tillhandahålla lösningar för problem som "
-"inte kan lösas av supportnivå 1."
+"Problemisolering – innebär teknisk support som ska kunna återskapa "
+"kundproblemen, isolera problemområdet och ge lösningar på problem som inte "
+"åtgärdas av supporten på nivå 1."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -630,17 +630,16 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
-"Problemlösning, vilket innebär teknisk support avsedd att lösa komplexa "
-"problem med aktiva ingrepp i produktfel som blivit identifierade av "
-"supportnivå 2."
+"Problemlösning – innebär teknisk support som ska kunna lösa komplexa problem "
+"som har identifierats i supporten på nivå 2 med hjälp av tekniker."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr "Ytterligare ett kundkontrakt behövs för att få support"
+msgstr "Ytterligare ett kundavtal behövs för att kunna ge support."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "Obekant supportval. Ingen beskrivning finns tillgänglig"
+msgstr "Okänt supportalternativ. Beskrivningen är inte tillgänglig"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -2621,7 +2620,7 @@ msgstr "Esperanto"
 #. language code: est et
 #: zypp/LanguageCode.cc:423
 msgid "Estonian"
-msgstr "Estländska"
+msgstr "Estniska"
 
 #. language code: ewe ee
 #: zypp/LanguageCode.cc:425
@@ -4252,7 +4251,7 @@ msgstr "Umbundu"
 #. language code: und
 #: zypp/LanguageCode.cc:1091
 msgid "Undetermined"
-msgstr "Obestämd"
+msgstr "Odefinierat språk"
 
 #. language code: urd ur
 #: zypp/LanguageCode.cc:1093
@@ -4401,7 +4400,7 @@ msgstr "Zuni"
 #: zypp/KeyRing.cc:522
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr "Försöket importera icke existerande  nyckel %s in i nyckelringen %s"
+msgstr "Försökte importera nyckeln %s som inte finns till nyckelringen %s"
 
 #: zypp/KeyRing.cc:566
 msgid "Failed to delete key."
