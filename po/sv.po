@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-15 10:50+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-05-15 10:52+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -4511,7 +4511,7 @@ msgstr "%s tillhandahålls av systemet och kan inte tas bort"
 #: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
 msgid "%s is not installable"
-msgstr "%s är inte installerbar"
+msgstr "%s går inte att installera"
 
 #: zypp/solver/detail/SATResolver.cc:1012
 #, c-format, boost-format
@@ -4526,22 +4526,22 @@ msgstr "kan inte installera både %s och %s"
 #: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%s är i konflikt med %s som tillhandahålls av %s"
+msgstr "%s är i konflikt med %s som kommer från %s"
 
 #: zypp/solver/detail/SATResolver.cc:1027
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s gör %s tillhandahållen av %s inaktuell"
+msgstr "%s gör %s inaktuell som kommer från %s"
 
 #: zypp/solver/detail/SATResolver.cc:1032
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
-msgstr "installationen av %s gör %s tillhandahållen av %s inaktuell"
+msgstr "%s gör %s tillhandahållen av %s inaktuell"
 
 #: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
-msgstr "lösbara %s är i konflikt med %s tillhandahållen av sig själv"
+msgstr "Lösbara %s-konflikter med %s som uppstår automatiskt"
 
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
