@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-15 10:42+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-15 10:43+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -4400,7 +4400,7 @@ msgstr "Zuni"
 #: zypp/KeyRing.cc:522
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr "Försökte importera nyckeln %s som inte finns till nyckelringen %s"
+msgstr "Försökte importera icke existerande nyckel %s till nyckelringen %s"
 
 #: zypp/KeyRing.cc:566
 msgid "Failed to delete key."
@@ -4418,7 +4418,7 @@ msgstr "Kan inte tillhandahålla filen %s från förrådet '%s'"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
-msgstr "Ingen URL i förrådet"
+msgstr "Det finns Ingen URL i förrådet."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
