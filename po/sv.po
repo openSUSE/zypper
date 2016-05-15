@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-15 10:55+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-15 10:56+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -4596,7 +4596,7 @@ msgstr "Denna begäran kommer att skada ditt system!"
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
 msgid "ignore the warning of a broken system"
-msgstr "ignorera varningen för ett skadat system"
+msgstr "ignorera varningen om ett skadat system"
 
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
