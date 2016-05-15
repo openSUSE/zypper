@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-14 17:45+0000\n"
+"PO-Revision-Date: 2016-05-15 17:34+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <http://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
@@ -1228,7 +1228,7 @@ msgstr "Kiribati"
 #. :KIR:296:
 #: zypp/CountryCode.cc:275
 msgid "Comoros"
-msgstr "Comoros"
+msgstr "Komory"
 
 #. :COM:174:
 #: zypp/CountryCode.cc:276
@@ -1283,12 +1283,12 @@ msgstr "Lichtenštajnsko"
 #. :LIE:438:
 #: zypp/CountryCode.cc:286
 msgid "Sri Lanka"
-msgstr "Sri Lanka"
+msgstr "Srí Lanka"
 
 #. :LKA:144:
 #: zypp/CountryCode.cc:287
 msgid "Liberia"
-msgstr "Liberia"
+msgstr "Libéria"
 
 #. :LBR:430:
 #: zypp/CountryCode.cc:288
@@ -1337,7 +1337,7 @@ msgstr "Čierna hora"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
-msgstr "Saint Martin"
+msgstr "Svätý Martin"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
@@ -1361,7 +1361,7 @@ msgstr "Mali"
 #. :MLI:466:
 #: zypp/CountryCode.cc:302
 msgid "Myanmar"
-msgstr "Myanmar"
+msgstr "Mjanmarsko"
 
 #. :MMR:104:
 #: zypp/CountryCode.cc:303
@@ -1386,7 +1386,7 @@ msgstr "Martinik"
 #. :MTQ:474:
 #: zypp/CountryCode.cc:307
 msgid "Mauritania"
-msgstr "Mauritania"
+msgstr "Mauritánia"
 
 #. :MRT:478:
 #: zypp/CountryCode.cc:308
@@ -1471,7 +1471,7 @@ msgstr "Nórsko"
 #. :NOR:578:
 #: zypp/CountryCode.cc:324
 msgid "Nepal"
-msgstr "Nepal"
+msgstr "Nepál"
 
 #. :NPL:524:
 #. language code: nau na
@@ -1537,7 +1537,7 @@ msgstr "Svätý Pierre a Miquelon"
 #. :SPM:666:
 #: zypp/CountryCode.cc:337
 msgid "Pitcairn"
-msgstr "Pitcairn"
+msgstr "Pitcairnove ostrovy"
 
 #. :PCN:612:
 #: zypp/CountryCode.cc:338
@@ -1572,7 +1572,7 @@ msgstr "Katar"
 #. :QAT:634:
 #: zypp/CountryCode.cc:344
 msgid "Reunion"
-msgstr "Reunion"
+msgstr "Réunion"
 
 #. :REU:638:
 #: zypp/CountryCode.cc:345
@@ -1606,7 +1606,7 @@ msgstr "Solomon ostrovy"
 #. :SLB:090:
 #: zypp/CountryCode.cc:351
 msgid "Seychelles"
-msgstr "Seychelles"
+msgstr "Seychely"
 
 #. :SYC:690:
 #: zypp/CountryCode.cc:352
@@ -1651,7 +1651,7 @@ msgstr "Sierra Leone"
 #. :SLE:694:
 #: zypp/CountryCode.cc:360
 msgid "San Marino"
-msgstr "San Marino"
+msgstr "San Maríno"
 
 #. :SMR:674:
 #: zypp/CountryCode.cc:361
@@ -1676,7 +1676,7 @@ msgstr "Sao Tome a Principe"
 #. :STP:678:
 #: zypp/CountryCode.cc:365
 msgid "El Salvador"
-msgstr "El Salvador"
+msgstr "Salvádor"
 
 #. :SLV:222:
 #: zypp/CountryCode.cc:366
@@ -1727,7 +1727,7 @@ msgstr "Tokelau"
 #. :TKL:772:
 #: zypp/CountryCode.cc:375
 msgid "Turkmenistan"
-msgstr "Turkmenistan"
+msgstr "Turkménsko"
 
 #. :TKM:795:
 #: zypp/CountryCode.cc:376
