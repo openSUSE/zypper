@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-15 10:37+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-15 10:38+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -556,7 +556,7 @@ msgstr "(UTGÅNGEN)"
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:129
 msgid "(expires within 24h)"
-msgstr "(går ut inom 24 timmar)"
+msgstr "(upphör inom 24 timmar)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
