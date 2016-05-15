@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-05-15 17:30+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -4402,7 +4402,7 @@ msgstr "%s rend obsolète %s fourni par %s"
 #: zypp/solver/detail/SATResolver.cc:1032
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
-msgstr "%s installé rend obsolète %s fourni par %s."
+msgstr "%s installé rend obsolète %s fourni par %s"
 
 #: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
