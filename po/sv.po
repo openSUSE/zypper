@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-05-15 10:45+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -4437,7 +4437,7 @@ msgstr ""
 # %s is either BOOTP or DHCP
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
-msgstr "Misslyckades att verifiera signaturen"
+msgstr "Signaturen kunde inte verifieras"
 
 #. TranslatorExplanation %s = name of the package being processed.
 #: zypp/repo/PackageProvider.cc:386
