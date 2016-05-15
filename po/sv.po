@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-15 10:49+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-15 10:50+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -4497,7 +4497,7 @@ msgstr "Har du aktiverat alla begärda förråd (repos)?"
 #: zypp/solver/detail/SATResolver.cc:996
 #, c-format, boost-format
 msgid "package %s does not exist"
-msgstr "källpaketet %s finns inte"
+msgstr "paketet %s finns inte"
 
 #: zypp/solver/detail/SATResolver.cc:1000
 msgid "unsupported request"
@@ -4506,7 +4506,7 @@ msgstr "begäran stöds inte"
 #: zypp/solver/detail/SATResolver.cc:1003
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr "%s tillhandahålls av systemet och kan inte tas bort "
+msgstr "%s tillhandahålls av systemet och kan inte tas bort"
 
 #: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
