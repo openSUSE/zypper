@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-13 19:23+0000\n"
+"PO-Revision-Date: 2016-05-15 10:24+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
@@ -292,14 +292,14 @@ msgstr "Följande åtgärder kommer att vidtas:"
 #: zypp/RepoManager.cc:297
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "Kan inte läsa förrådbiblioteket (repo directory) '%1%': Åtkomst nekad"
+msgstr "Kan inte läsa lagringsplatskatalog '%1%': Åtkomst nekad"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "Misslyckades att läsa katalog '%s'"
+msgstr "Det gick inte att läsa katalogen %s"
 
 #: zypp/RepoManager.cc:315
 #, boost-format
