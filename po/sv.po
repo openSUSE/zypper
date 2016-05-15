@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-15 10:34+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-15 10:36+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -496,27 +496,27 @@ msgstr "Ogiltigt avgränsningstecken för koppling av parametermatris"
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
-msgstr "Kan inte öppna PTY (%s)"
+msgstr "Kan inte öppna pty (%s)"
 
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
-msgstr "Det går inte att öppna rörledningen (%s)."
+msgstr "Det går inte att öppna röret (%s)."
 
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr "Kan inte chroot till '%s' (%s)"
+msgstr "Kan inte ändra roten (chroot) till '%s' (%s)"
 
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "Kan inte chdir till '%s' i en chroot '%s' (%s)."
+msgstr "Kan inte ändra katalogen (chdir) till '%s' i en chroot '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:361
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr "Kan inte chdir till '%s' (%s)."
+msgstr "Kan inte ändra katalogen (chdir) till '%s' (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:373
