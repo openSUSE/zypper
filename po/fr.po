@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-16 16:04+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"PO-Revision-Date: 2016-05-16 16:15+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/zypper/master/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -551,7 +551,7 @@ msgstr "à jour"
 # TLABEL partitioning_2002_01_04_0147__180
 #: src/info.cc:274
 msgid "not installed"
-msgstr "non installée"
+msgstr "non installé"
 
 #: src/info.cc:276
 msgid "Installed Size: "
@@ -813,7 +813,7 @@ msgstr "Paquet '%s' introuvable."
 #: src/RequestFeedback.cc:37
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "Patch '%s' introuvable."
+msgstr "Correctif '%s' introuvable."
 
 #: src/RequestFeedback.cc:39
 #, c-format, boost-format
@@ -6305,8 +6305,8 @@ msgstr "Appuyer sur '%c' pour sortir du pager."
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
-"Utilisez les flèches ou les touches pgUp/pgDown pour faire défiler le texte "
-"par lignes ou par pages."
+"Utilisez les flèches ou les touches pg.Préc/pg.Suiv pour faire défiler le "
+"texte par lignes ou par pages."
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
@@ -6325,7 +6325,7 @@ msgstr ""
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
-msgstr "Impossible d'analyser le fichier de configuration."
+msgstr "Impossible d'analyser les fichiers de configuration."
 
 #: src/utils/Augeas.cc:99
 msgid "Error parsing zypper.conf:"
@@ -6393,7 +6393,7 @@ msgstr[1] "Sélection automatique de '%s' après %u secondes."
 # TLABEL linuxrc_2002_03_29_0036__110
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
-msgstr "Nouvel essai...."
+msgstr "Nouvel essai..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
@@ -6405,7 +6405,7 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
-"Si vous exécutez zypper sans un terminal, utiliser l'option globale '%s'\n"
+"Si vous exécutez zypper sans un terminal, utilisez l'option globale '%s'\n"
 "afin que zypper donne des réponses par défaut aux invites."
 
 #: src/utils/prompt.cc:321
