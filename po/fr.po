@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
 "PO-Revision-Date: 2016-05-16 15:37+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/zypper/master/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -5593,7 +5593,7 @@ msgstr "Vérification des dépendances..."
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:378
 msgid "Computing upgrade..."
-msgstr "Calcul de la mise à niveau... "
+msgstr "Calcul de la mise à niveau..."
 
 #: src/solve-commit.cc:392
 msgid "Generating solver test case..."
