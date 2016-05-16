@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-16 09:55+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-16 09:58+0000\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -4618,7 +4618,7 @@ msgstr "Le medium ne s'est pas ouvert lors de l'action '%s'."
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "Fichier '%s' introuvable dans sur le media '%s'"
+msgstr "Fichier '%s' introuvable sur le medium '%s'"
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
