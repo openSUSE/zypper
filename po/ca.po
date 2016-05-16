@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-06 14:02+0200\n"
-"Last-Translator: David Medina <opensusecatala@gmail.com>\n"
-"Language-Team: Catalan\n"
+"PO-Revision-Date: 2016-05-16 19:02+0000\n"
+"Last-Translator: David Medina <medipas@gmail.com>\n"
+"Language-Team: Catalan <http://l10n.opensuse.org/projects/libzypp/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.5\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -109,11 +110,11 @@ msgstr "Tipus dubtós \"%s\" per a %u byte checksum \"%s\""
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
-msgstr "Executat"
+msgstr " executat"
 
 #: zypp/target/TargetImpl.cc:332
 msgid " execution failed"
-msgstr "Ha fallat l'execució"
+msgstr " ha fallat l'execució"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
@@ -125,7 +126,7 @@ msgstr "%s ja s'ha executat com a %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
-msgstr "execució omesa mentre s'avortava"
+msgstr " execució omesa mentre s'avortava"
 
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
