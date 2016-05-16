@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-16 16:26+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"PO-Revision-Date: 2016-05-16 16:35+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/zypper/master/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -5413,8 +5413,8 @@ msgstr ""
 #: src/Zypper.cc:4804
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
-"Les privilèges root sont nécessaires pour effectuer la mise à jour de la "
-"distribution vers la nouvelle version."
+"Les privilèges root sont nécessaires pour effectuer la mise à niveau de la "
+"distribution."
 
 #: src/Zypper.cc:4824
 #, c-format, boost-format
@@ -5908,7 +5908,7 @@ msgstr "Utilisation du répertoire de téléchargement '%s'."
 
 #: src/source-download.cc:231 src/source-download.cc:262
 msgid "Failed to read download directory"
-msgstr "Échec lors de la lecture du répertoire de téléchargement"
+msgstr "Échec de la lecture du répertoire de téléchargement"
 
 #: src/source-download.cc:236
 msgid "Scanning download directory"
