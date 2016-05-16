@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-16 15:51+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"PO-Revision-Date: 2016-05-16 15:57+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/zypper/master/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -142,7 +142,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:211
 msgid "r/t/a/"
-msgstr "r/t/a"
+msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:214
@@ -255,11 +255,11 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"Cependant, si vous êtes certain que le fichier avec la somme de contrôle "
-"'%1%..' est\n"
+"Cependant, si vous êtes certain que le fichier avec la somme de contrôle '%1%"
+"..' est\n"
 "sûr et devrait être utilisé au cours de cette opération, saisissez les 4 "
 "premiers\n"
-"caractères de la somme de contrôle pour débloquer, à vos risques et périls,"
+"caractères de la somme de contrôle pour débloquer, à vos risques et périls, "
 "l'utilisation de ce fichier. Une entrée vide rejettera le fichier.\n"
 
 #. translators: A prompt option
