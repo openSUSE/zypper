@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-16 15:57+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-16 16:04+0000\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/zypper/master/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -314,7 +314,7 @@ msgstr "Installation de : %s"
 #: src/callbacks/rpm.h:280
 #, c-format, boost-format
 msgid "Installing: %s-%s"
-msgstr "Installation : %s - %s"
+msgstr "Installation : %s-%s"
 
 #: src/callbacks/rpm.h:303
 #, c-format, boost-format
@@ -546,7 +546,7 @@ msgstr "pas à jour (version %s installée)"
 
 #: src/info.cc:270
 msgid "up-to-date"
-msgstr "À jour"
+msgstr "à jour"
 
 # TLABEL partitioning_2002_01_04_0147__180
 #: src/info.cc:274
