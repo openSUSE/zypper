@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-16 16:17+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-16 16:20+0000\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/zypper/master/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -6170,7 +6170,7 @@ msgstr "Paquets installés avec homologues dans les dépôts : %d"
 #: src/misc.cc:259
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Paquets installés avec CLUFs : %d"
+msgstr "Paquets installés avec CLUF : %d"
 
 #: src/misc.cc:289
 #, c-format, boost-format
@@ -6185,7 +6185,7 @@ msgstr "Le paquet source '%s' pour le paquet '%s' n'a pas été trouvé."
 #: src/misc.cc:373
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
-msgstr "Installation des paquets source %s-%s"
+msgstr "Installation du paquet source %s-%s"
 
 #: src/misc.cc:382
 #, c-format, boost-format
@@ -6200,7 +6200,7 @@ msgstr "Le paquet source %s-%s a été installé avec succès."
 #: src/misc.cc:394
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
-msgstr "Problème lors de l'installation des paquets sources %s-%s :"
+msgstr "Problème lors de l'installation du paquet source %s-%s :"
 
 #. translators: locks table value
 #: src/locks.cc:24 src/locks.cc:128
