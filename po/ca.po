@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-16 18:59+0000\n"
+"PO-Revision-Date: 2016-05-17 15:56+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <http://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -454,7 +454,7 @@ msgstr "Error"
 
 #: src/info.cc:116
 msgid "Name: "
-msgstr "Nom:"
+msgstr "Nom: "
 
 #: src/info.cc:117
 msgid "Version: "
@@ -466,11 +466,11 @@ msgstr "Arquitectura: "
 
 #: src/info.cc:119
 msgid "Vendor: "
-msgstr "Proveïdor:"
+msgstr "Proveïdor: "
 
 #: src/info.cc:124
 msgid "Summary: "
-msgstr "Resum:"
+msgstr "Resum: "
 
 #: src/info.cc:125
 msgid "Description: "
@@ -487,7 +487,7 @@ msgstr[1] "Hi hauria %1% coincidències per a %2%."
 #: src/info.cc:169
 #, c-format, boost-format
 msgid "%s '%s' not found."
-msgstr "No s'ha trobat %s \"%s\""
+msgstr "No s'ha trobat %s \"%s\"."
 
 #: src/info.cc:191
 #, c-format, boost-format
@@ -502,20 +502,20 @@ msgstr "Informació per al tipus \"%s\" no implementada."
 
 #: src/info.cc:248 src/info.cc:386 src/info.cc:458
 msgid "Repository: "
-msgstr "Repositori:"
+msgstr "Repositori: "
 
 # SR
 #: src/info.cc:256
 msgid "Support Level: "
-msgstr "Nivell de suport:"
+msgstr "Nivell de suport: "
 
 #: src/info.cc:259 src/info.cc:390
 msgid "Installed: "
-msgstr "Instal·lat:"
+msgstr "Instal·lat: "
 
 #: src/info.cc:261 src/info.cc:314
 msgid "Status: "
-msgstr "Estat:"
+msgstr "Estat: "
 
 #: src/info.cc:266
 #, c-format, boost-format
@@ -532,7 +532,7 @@ msgstr "no instal·lat"
 
 #: src/info.cc:276
 msgid "Installed Size: "
-msgstr "Mida instal·lada:"
+msgstr "Mida instal·lada: "
 
 #: src/info.cc:317
 msgid "Category: "
@@ -540,11 +540,11 @@ msgstr "Categoria: "
 
 #: src/info.cc:318
 msgid "Severity: "
-msgstr "Severitat:"
+msgstr "Severitat: "
 
 #: src/info.cc:319
 msgid "Created On: "
-msgstr "Creació:"
+msgstr "Creació: "
 
 #: src/info.cc:320
 msgid "Reboot Required: "
@@ -556,7 +556,7 @@ msgstr "Cal reiniciar el gestor de paquets"
 
 #: src/info.cc:330
 msgid "Interactive: "
-msgstr "Interactiu:"
+msgstr "Interactiu: "
 
 #: src/info.cc:354 src/search.cc:383
 msgid "Recommended"
@@ -568,7 +568,7 @@ msgstr "Suggerit"
 
 #: src/info.cc:391
 msgid "Visible to User: "
-msgstr "Visible per a l'usuari:"
+msgstr "Visible per a l'usuari: "
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -1540,7 +1540,7 @@ msgstr "Només descarregar."
 #: src/Summary.cc:1249
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
-msgstr "Després de l'operació, s'utilitzaran %s d'espai addicional. "
+msgstr "Després de l'operació, s'usaran %s d'espai addicional."
 
 #: src/Summary.cc:1251
 msgid "No additional space will be used or freed after the operation."
@@ -1578,15 +1578,15 @@ msgstr[1] "paquets per desactualitzar"
 #: src/Summary.cc:1306
 msgid "new"
 msgid_plural "new"
-msgstr[0] " de nou"
+msgstr[0] "de nou"
 msgstr[1] "de nous"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1309
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] "nou paquet per instal·lar"
-msgstr[1] "nous paquets per instal·lar."
+msgstr[0] "paquet nou per instal·lar"
+msgstr[1] "paquets nous per instal·lar"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1320
@@ -2132,7 +2132,7 @@ msgstr "S'han exportat correctament els repositoris a %s."
 
 #: src/repos.cc:1248 src/repos.cc:1392
 msgid "Specified repositories: "
-msgstr "Fonts del sistema especificades:"
+msgstr "Repositoris especificats: "
 
 #: src/repos.cc:1283
 #, c-format, boost-format
@@ -2238,7 +2238,7 @@ msgid ""
 "URIs (see below) point to a valid repository:"
 msgstr ""
 "No s'ha pogut determinar el tipus de repositori. Si us plau, comproveu si "
-"els URI definits (vegeu-ne la llista) apunten a un repositori vàlid."
+"els URI definits (vegeu-ne la llista) apunten a un repositori vàlid:"
 
 #: src/repos.cc:1591
 msgid "Can't find a valid repository at given location:"
@@ -2322,7 +2322,8 @@ msgstr ""
 
 #: src/repos.cc:1762
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr "Problema trobat intentant llegir el fitxer a l'adreça especificada. "
+msgstr ""
+"S'ha trobat un problema intentant llegir el fitxer a l'adreça especificada."
 
 #: src/repos.cc:1774
 msgid "Repository with no alias defined found in the file, skipping."
@@ -2556,11 +2557,9 @@ msgstr "El nom del servei %s s'ha establert a \"%s\"."
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] ""
-"El repositori %s ha estat afegit als repositoris habilitats del servei %s."
+msgstr[0] "El repositori %s s'ha afegit als repositoris habilitats del servei %s."
 msgstr[1] ""
-"Els repositoris %s han estat afegits als repositoris habilitats del servei "
-"%s."
+"Els repositoris %s s'han afegit als repositoris habilitats del servei %s."
 
 #: src/repos.cc:2948
 #, c-format, boost-format
@@ -2568,10 +2567,9 @@ msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] ""
-"El repositori %s ha estat afegit als repositoris inhabilitats del servei %s."
+"El repositori %s s'ha afegit als repositoris inhabilitats del servei %s."
 msgstr[1] ""
-"Els repositoris %s han estat afegits als repositoris inhabilitats del servei "
-"%s."
+"Els repositoris %s s'han afegit als repositoris inhabilitats del servei %s."
 
 #: src/repos.cc:2955
 #, c-format, boost-format
@@ -2580,10 +2578,10 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] ""
-"El repositori %s ha estat eliminat dels repositoris habilitats del servei %s."
+"El repositori %s s'ha eliminat dels repositoris habilitats del servei %s."
 msgstr[1] ""
-"Els repositoris \"%s\" han estat eliminats dels repositoris habilitats del "
-"servei \"%s\"."
+"Els repositoris \"%s\" s'han eliminat dels repositoris habilitats del servei "
+"\"%s\"."
 
 #: src/repos.cc:2962
 #, c-format, boost-format
@@ -2593,11 +2591,10 @@ msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
 msgstr[0] ""
-"El repositori %s ha estat eliminat dels repositoris inhabilitats del servei "
-"%s."
+"El repositori %s s'ha eliminat dels repositoris inhabilitats del servei %s."
 msgstr[1] ""
-"Els repositoris \"%s\"  han estat eliminats dels repositoris inhabilitats "
-"del servei \"%s\"."
+"Els repositoris \"%s\" s'han eliminat dels repositoris inhabilitats del "
+"servei \"%s\"."
 
 #: src/repos.cc:2971
 #, c-format, boost-format
@@ -2946,12 +2943,15 @@ msgid ""
 "\t--solv-cache-dir <dir>\tUse alternative solv file cache directory.\n"
 "\t--pkg-cache-dir <dir>\tUse alternative package cache directory.\n"
 msgstr ""
-"\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
-"\t\t\t\tdirectory.\n"
-"\t--cache-dir, -C <dir>\tUse alternative directory for all caches.\n"
-"\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
-"\t--solv-cache-dir <dir>\tUse alternative solv file cache directory.\n"
-"\t--pkg-cache-dir <dir>\tUse alternative package cache directory.\n"
+"\t--reposd-dir, -D <dir>\tUsa el directori de fitxers de definició de "
+"repositoris alternatiu.\n"
+"\t--cache-dir, -C <dir>\t\tUsa el directori alternatiu per a totes les "
+"memòries cau.\n"
+"\t--raw-cache-dir <dir>\tUsa el directori de cau de metadades en cru "
+"alternatiu.\n"
+"\t--solv-cache-dir <dir>\tUsa el directori de cau de fitxers solv alternatiu."
+"\n"
+"\t--pkg-cache-dir <dir>\tUsa el directori de cau de paquets alternatiu.\n"
 
 #: src/Zypper.cc:433
 msgid ""
@@ -3006,9 +3006,9 @@ msgid ""
 "\thelp, ?\t\t\tPrint help.\n"
 "\tshell, sh\t\tAccept multiple commands at once.\n"
 msgstr ""
-" Ordres:\n"
-"\thelp, ?\t\t\tAjuda per a la impressió.\n"
-"\tshell, sh\t\tAccepta ordres múltiples alhora.\n"
+"  Ordres:\n"
+"\thelp, ?\t\t\tImprimeix l'ajuda.\n"
+"\tshell, sh\t\tAccepta ordres múltiple d'un sol cop.\n"
 
 #: src/Zypper.cc:459
 msgid ""
@@ -3222,8 +3222,8 @@ msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
-"Patches having the flag rebootSuggested set will not be treated as "
-"interactive."
+"Els pedaços que tinguin establerta la bandera rebootSuggested no es "
+"tractaran com a interactius."
 
 #: src/Zypper.cc:942
 msgid "Entering 'no-gpg-checks' mode."
@@ -3260,7 +3260,7 @@ msgstr "Refresc automàtic desactivat."
 
 #: src/Zypper.cc:1038
 msgid "CD/DVD repositories disabled."
-msgstr "Repositoris del CD/DVD activats"
+msgstr "Repositoris del CD/DVD inhabilitats."
 
 #: src/Zypper.cc:1045
 msgid "Remote repositories disabled."
@@ -3400,7 +3400,7 @@ msgid ""
 "option."
 msgstr ""
 "No requereixis interacció de l'usuari. Àlies per a l'opció global --non-"
-"interactive"
+"interactive."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -4981,7 +4981,7 @@ msgstr "S'ha produït un error de flux de programa."
 
 #: src/Zypper.cc:3191
 msgid "Non-option program arguments: "
-msgstr "Arguments del programa sense opcions:"
+msgstr "Arguments del programa sense opcions: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: src/Zypper.cc:3251
@@ -5286,7 +5286,7 @@ msgstr ""
 "esteu a punt de fer una actualització de la distribució amb tots els "
 "repositoris habilitats. Assegureu-vos que aquests repositoris són "
 "compatibles abans de continuar. Vegeu \"%s\" per a més informació sobre "
-"aquesta ordre. "
+"aquesta ordre."
 
 #: src/Zypper.cc:4854 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
@@ -5360,22 +5360,22 @@ msgstr "Tipus solucionable"
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:40
 msgid "Problem: "
-msgstr "Problema:"
+msgstr "Problema: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:52
 #, c-format, boost-format
 msgid " Solution %d: "
-msgstr "Solució %d: "
+msgstr " Solució %d: "
 
 #: src/solve-commit.cc:71
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
-"Escolliu la solució marcant \"1\" o salta-ho, reintenta-ho o cancel·la-ho."
+"Escolliu la solució marcant \"1\" o salteu-ho, reintenteu-ho o cancel·leu-ho."
 msgstr[1] ""
-"Escolliu la solució marcant-ne el número corresponent o salta-ho, reintenta-"
-"ho o cancel·la-ho."
+"Escolliu la solució marcant-ne el número corresponent o salteu-ho, "
+"reintenteu-ho o cancel·leu-ho."
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
@@ -5619,7 +5619,7 @@ msgstr "(execució de prova)"
 
 #: src/solve-commit.cc:800 src/solve-commit.cc:833
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Problema obtenint el fitxer de paquet del repositori "
+msgstr "Problema obtenint el fitxer de paquet del repositori:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
 #: src/solve-commit.cc:830
@@ -5650,7 +5650,7 @@ msgstr ""
 msgid "Problem occured during or after installation or removal of packages:"
 msgstr ""
 "S'ha produït un error durant o després de la instal·lació o eliminació de "
-"paquets."
+"paquets:"
 
 #: src/solve-commit.cc:863
 msgid "Installation has completed with error."
@@ -5967,8 +5967,8 @@ msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
 msgstr ""
-"Per poder instal·lar el paquet %s'%s, heu d'acceptar els termes de la "
-"llicència: "
+"Per poder instal·lar el paquet %s%s, heu d'acceptar els termes de la "
+"llicència:"
 
 #. lincense prompt
 #: src/misc.cc:167
@@ -5997,7 +5997,7 @@ msgstr ""
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
 "Avortant la instal·lació a causa del desacord de l'usuari amb la llicència "
-"de %s %s"
+"de %s %s."
 
 #: src/misc.cc:225
 msgid "License"
@@ -6158,7 +6158,7 @@ msgstr "Premeu \"%c\" per sortir del paginador."
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
 "Feu servir les tecles de fletxes o pàgines amunt o avall per examinar el "
-"text per línies o per pàgines. "
+"text per línies o per pàgines."
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
@@ -6192,11 +6192,11 @@ msgstr "S'ha produït un error en analitzar zypper.conf:"
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr "Opció desconeguda"
+msgstr "Opció desconeguda "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
-msgstr "Manca un argument per a"
+msgstr "Manca un argument per a "
 
 #. translators: speaking of two mutually contradicting command line options
 #: src/utils/getopt.cc:123
