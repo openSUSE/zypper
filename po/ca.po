@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-16 19:02+0000\n"
+"PO-Revision-Date: 2016-05-17 15:26+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <http://l10n.opensuse.org/projects/libzypp/master/ca/>"
 "\n"
@@ -176,8 +176,7 @@ msgstr "libhal_set_dbus_connection: No es pot definir la connexió de dbus"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr ""
-"No es pot iniciar el context HAL. Comproveu que s'estigui executant hald."
+msgstr "No es pot iniciar el context HAL. No s'executa hald?"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
@@ -188,7 +187,7 @@ msgstr "No és una unitat de CD-ROM"
 #: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
 #: zypp/target/rpm/RpmDb.cc:2189
 msgid "RPM failed: "
-msgstr "Error RPM:"
+msgstr "Ha fallat l'RPM: "
 
 #. TranslatorExplanation first %s is file name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1124
@@ -624,9 +623,9 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
-"Isolació de problema, la qual cosa significa suport dissenyat per duplicar "
-"problemes de clients, isolar l'àrea del problema i oferir solucions de "
-"problemes no resolts pel suport de nivell 1. "
+"L'aïllament de problemes, que significa el suport tècnic dissenyat per "
+"duplicar els problemes del client, aïlla l'àrea del problema i proporciona "
+"la solució dels problemes no resolts pel nivell 1 de suport."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -648,7 +647,7 @@ msgstr "Opció de suport desconeguda. No n'hi ha descripció disponible."
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr "País desconegut:"
+msgstr "País desconegut: "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
@@ -1263,7 +1262,7 @@ msgstr "Israel"
 #. :ISR:376:
 #: zypp/CountryCode.cc:260
 msgid "Isle of Man"
-msgstr "Isle of Man"
+msgstr "Illa de l'home"
 
 # IN
 #: zypp/CountryCode.cc:261
@@ -2081,7 +2080,7 @@ msgstr "Illes Verges Britàniques"
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr "Illes Verge Americanes"
+msgstr "Illes Verges Americanes"
 
 # VN
 # fuzzy
@@ -3130,7 +3129,7 @@ msgstr "Ilocà"
 #. language code: ina ia
 #: zypp/LanguageCode.cc:561
 msgid "Interlingua (International Auxiliary Language Association)"
-msgstr "Interlingua (International Auxiliary Language Association)"
+msgstr "Interlingua (Associació de la Llengua Auxiliar Internacional)"
 
 #. language code: inc
 #: zypp/LanguageCode.cc:563
@@ -4852,7 +4851,7 @@ msgstr "no instal·lis la versió més recent de %s"
 #: zypp/solver/detail/SATResolver.cc:1279
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr "mantén %s, malgrat l'arquitectura inferior."
+msgstr "mantén %s malgrat l'arquitectura inferior"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #, c-format, boost-format
@@ -4921,7 +4920,7 @@ msgstr "Són necessaris l'atribut \"%s\" o \"%s\", o bé tots dos."
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
 msgid "Can't open lock file: %s"
-msgstr "No es pot obrir el fitxer de blocatge: %s."
+msgstr "No es pot obrir el fitxer de blocatge: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
@@ -5044,7 +5043,7 @@ msgstr "L'esquema d'URL a %s no és vàlid."
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
-msgstr "Operació no suportada pel mitjà."
+msgstr "Operació no admesa pel mitjà"
 
 #: zypp/media/MediaException.cc:152
 #, c-format, boost-format
@@ -5067,16 +5066,16 @@ msgstr ""
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "El suport font %s no conté el mitjà desitjat."
+msgstr "El suport font \"%s\" no conté el mitjà desitjat."
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "El mitjà %s l'està fent servir una altra instància."
+msgstr "El mitjà \"%s\" l'està fent servir una altra instància."
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
-msgstr "No es pot expulsar el mitjà."
+msgstr "No es pot expulsar el mitjà"
 
 #: zypp/media/MediaException.cc:184
 #, c-format, boost-format
@@ -5102,8 +5101,8 @@ msgstr "El lloc \"%s\" és temporalment inaccessible."
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
-"Problema de certificat SSL, verifiqueu que el certificat CA és correcte per "
-"a '%s'."
+" Problema de certificat SSL, verifiqueu que el certificat CA és correcte per "
+"a \"%s\"."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
