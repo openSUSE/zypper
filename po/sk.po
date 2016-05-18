@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2015-11-22 13:19+0100\n"
+"PO-Revision-Date: 2016-05-18 17:44+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
+"Language-Team: Slovak <http://l10n.opensuse.org/projects/zypper/master/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Weblate 2.5\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -464,7 +464,7 @@ msgstr "Stručný popis: "
 
 #: src/info.cc:125
 msgid "Description: "
-msgstr "Popis:"
+msgstr "Popis: "
 
 #: src/info.cc:138
 #, boost-format
@@ -478,12 +478,12 @@ msgstr[2] ""
 #: src/info.cc:169
 #, c-format, boost-format
 msgid "%s '%s' not found."
-msgstr "%s '%s' nebol nájdený(á)"
+msgstr "%s '%s' nenájdené."
 
 #: src/info.cc:191
 #, c-format, boost-format
 msgid "Information for %s %s:"
-msgstr "Informácie pre: %s %s"
+msgstr "Informácie pre %s %s:"
 
 #. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
 #: src/info.cc:207
@@ -530,7 +530,7 @@ msgstr "Kategória: "
 
 #: src/info.cc:318
 msgid "Severity: "
-msgstr "Závažnosť:"
+msgstr "Závažnosť: "
 
 #: src/info.cc:319
 msgid "Created On: "
@@ -1990,7 +1990,7 @@ msgstr "Ignorovanie repozitára '%s' kvôli voľbe '%s'."
 #: src/repos.cc:749
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr "Prehľadávanie obsahu vypnutého repozitára '%s'"
+msgstr "Prehľadávanie obsahu vypnutého repozitára '%s'."
 
 #: src/repos.cc:765 src/repos.cc:798 src/repos.cc:1297
 #, c-format, boost-format
@@ -2004,7 +2004,7 @@ msgid ""
 "update it."
 msgstr ""
 "Repozitár '%s' nie je aktuálny. Môžete ho aktualizovať spustením príkazu "
-"'zypper refresh' ako správca systému (root). "
+"'zypper refresh' ako správca systému (root)."
 
 #: src/repos.cc:816
 #, c-format, boost-format
@@ -2149,7 +2149,7 @@ msgstr "Nemôžem otvoriť súbor %s pre zápis."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
-msgstr "Pravdepodobne nemáte práva na zápis."
+msgstr "Pravdepodobne nemáte práva na zápis?"
 
 #: src/repos.cc:1196
 #, c-format, boost-format
@@ -2251,7 +2251,7 @@ msgstr ""
 #: src/repos.cc:1568
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
-msgstr "Nepovolený alias pre repozitár: '%s'."
+msgstr "Nepovolený alias pre repozitár: '%s'"
 
 #: src/repos.cc:1576 src/repos.cc:1859
 #, c-format, boost-format
@@ -2306,12 +2306,12 @@ msgstr "Automatická obnova"
 #: src/repos.cc:1648
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
-msgstr "Čítam údaje z média '%s'."
+msgstr "Čítanie údajov z média '%s'"
 
 #: src/repos.cc:1654
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
-msgstr "Problém pri čítaní údajov z média '%s'."
+msgstr "Problém pri čítaní údajov z média '%s'"
 
 #: src/repos.cc:1655
 msgid "Please check if your installation media is valid and readable."
@@ -2324,7 +2324,7 @@ msgstr "Čítanie údajov z média '%s' je odložené až do ďalšej obnovy."
 
 #: src/repos.cc:1744
 msgid "Problem accessing the file at the specified URI"
-msgstr "Problém pri prístupe k súboru na zadanej URI adrese."
+msgstr "Problém pri prístupe k súboru na zadanej URI adrese"
 
 #: src/repos.cc:1745
 msgid "Please check if the URI is valid and accessible."
@@ -2332,7 +2332,7 @@ msgstr "Prosím, overte, či je zadaná URI adresa platná a prístupná."
 
 #: src/repos.cc:1752
 msgid "Problem parsing the file at the specified URI"
-msgstr "Problém pri analyzovaní súboru na zadanej URI adrese."
+msgstr "Problém pri analyzovaní súboru na zadanej URI adrese"
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
@@ -2346,7 +2346,7 @@ msgstr ""
 
 #: src/repos.cc:1762
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr "Nastal problém pri pokuse o čítanie súboru na zadanej URI adrese."
+msgstr "Nastal problém pri pokuse o čítanie súboru na zadanej URI adrese"
 
 #: src/repos.cc:1774
 msgid "Repository with no alias defined found in the file, skipping."
@@ -2388,7 +2388,7 @@ msgstr "Ponechávam repozitár '%s' v nezmenenom stave."
 #: src/repos.cc:2002
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "Priorita repozitára '%s' zostáva nezmenená (%d)."
+msgstr "Priorita repozitára '%s' zostáva nezmenená (%d)"
 
 #: src/repos.cc:2040
 #, c-format, boost-format
@@ -2403,12 +2403,12 @@ msgstr "Repozitár '%s' bol úspešne vypnutý."
 #: src/repos.cc:2049
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr " Automatická obnova repozitára '%s' bola zapnutá."
+msgstr "Automatická obnova repozitára '%s' bola zapnutá."
 
 #: src/repos.cc:2051
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr " Automatická obnova repozitára '%s' bola vypnutá."
+msgstr "Automatická obnova repozitára '%s' bola vypnutá."
 
 #: src/repos.cc:2058
 #, c-format, boost-format
@@ -2746,11 +2746,11 @@ msgstr "Kategória"
 
 #: src/update.cc:383 src/update.cc:684 src/update.cc:753 src/search.cc:327
 msgid "Severity"
-msgstr "Závažnosť:"
+msgstr "Závažnosť"
 
 #: src/update.cc:383 src/update.cc:684 src/update.cc:753
 msgid "Interactive"
-msgstr "Interaktívny:"
+msgstr "Interaktívny"
 
 #: src/update.cc:383 src/update.cc:684 src/search.cc:328
 msgid "Status"
@@ -2896,7 +2896,7 @@ msgstr "Tento príkaz nemá žiadne ďalšie voľby."
 
 #: src/Zypper.cc:381 src/Zypper.cc:1320
 msgid "Unexpected exception."
-msgstr "Neočakávaná výnimka. "
+msgstr "Neočakávaná výnimka."
 
 #: src/Zypper.cc:403
 msgid ""
@@ -3173,7 +3173,7 @@ msgid ""
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
 "\tzypper <subcommand> [--command-options] [arguments]\n"
 msgstr ""
-"Použitie:\n"
+"  Použitie:\n"
 "\tzypper [--globálne-voľby] <príkaz> [--voľby-príkazu] [argumenty]\n"
 "\tzypper <podpríkaz> [--voľby-príkazu] [argumenty]\n"
 
@@ -5174,7 +5174,7 @@ msgstr "Neboli nájdené žiadne odpovedajúce problémy."
 
 #: src/Zypper.cc:4416
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Nastal problém pri inicializácii alebo spustení vyhľadávania."
+msgstr "Nastal problém pri inicializácii alebo spustení vyhľadávania"
 
 #: src/Zypper.cc:4417
 msgid "See the above message for a hint."
@@ -5654,7 +5654,7 @@ msgstr "Neboli nájdené žiadne procesy používajúce odstránené súbory."
 
 #: src/ps.cc:164
 msgid "The following running processes use deleted files:"
-msgstr "Nasledujúce spustené procesy používajú odstránené súbory."
+msgstr "Nasledujúce spustené procesy používajú zmazané súbory:"
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
