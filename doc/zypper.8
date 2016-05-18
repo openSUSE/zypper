@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 03/03/2016
+.\"      Date: 05/18/2016
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "03/03/2016" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "05/18/2016" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -2990,7 +2990,9 @@ Specifies table style to use\&. Table style is identified by an integer number\&
 \fB\-n\fR, \fB\-\-non\-interactive\fR
 .RS 4
 Switches to non\-interactive mode\&. In this mode zypper doesn\(cqt ask user to type answers to various prompts, but uses default answers automatically\&. Those default answers also depend on other options like
-\fB\-\-no\-gpg\-checks\fR\&.
+\fB\-\-no\-gpg\-checks\fR
+or
+\fB\-\-ignore\-unknown\fR\&.
 .RE
 .PP
 \fB\-\-non\-interactive\-include\-reboot\-patches\fR
@@ -3005,7 +3007,9 @@ Switches to XML output\&. This option is useful for scripts or graphical fronten
 .PP
 \fB\-i\fR, \fB\-\-ignore\-unknown\fR
 .RS 4
-Ignore unknown packages\&. This option is useful for scripts\&.
+Ignore unknown packages\&. This option is useful for scripts, because when installing in
+\fB\-\-non\-interactive\fR
+mode zypper expects each command line argument to match at least one known package\&. Unknown names or globbing expressions with no match are treated as an error unless this option is used\&.
 .RE
 .PP
 \fB\-D\fR, \fB\-\-reposd\-dir\fR \fIdir\fR
