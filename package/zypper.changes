@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May 18 12:37:18 CEST 2016 - ma@suse.de
+
+- Do not require --ignore-unknown in non interactive remove-command
+ (bsc#980263)
+- version 1.11.55
+
+-------------------------------------------------------------------
 Wed Apr 13 16:35:48 CEST 2016 - ma@suse.de
 
 - Fix testing for '-- download*' options (bsc#956480)
