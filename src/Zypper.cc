@@ -3637,7 +3637,7 @@ void Zypper::doCommand()
         sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP))
     {
       setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
-      if (globalOpts().non_interactive)
+      if ( command() != ZypperCommand::REMOVE && globalOpts().non_interactive )	// bsc#980263: relax if removing packages
         ZYPP_THROW(ExitRequestException());
     }
 
