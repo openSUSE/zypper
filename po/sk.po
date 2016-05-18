@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-15 17:34+0000\n"
+"PO-Revision-Date: 2016-05-18 17:30+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <http://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
@@ -1877,22 +1877,22 @@ msgstr "Neznámy jazyk: "
 #. language code: aar aa
 #: zypp/LanguageCode.cc:161
 msgid "Afar"
-msgstr "Afar"
+msgstr "Afarčina"
 
 #. language code: abk ab
 #: zypp/LanguageCode.cc:163
 msgid "Abkhazian"
-msgstr "Abkhazian"
+msgstr "Abcházčina"
 
 #. language code: ace
 #: zypp/LanguageCode.cc:165
 msgid "Achinese"
-msgstr "Achinese"
+msgstr "Acehčina"
 
 #. language code: ach
 #: zypp/LanguageCode.cc:167
 msgid "Acoli"
-msgstr "Acoli"
+msgstr "Ačoli"
 
 #. language code: ada
 #: zypp/LanguageCode.cc:169
@@ -1902,7 +1902,7 @@ msgstr "Adangme"
 #. language code: ady
 #: zypp/LanguageCode.cc:171
 msgid "Adyghe"
-msgstr "Adyghe"
+msgstr "Adygčina"
 
 #. language code: afa
 #: zypp/LanguageCode.cc:173
@@ -1912,7 +1912,7 @@ msgstr "Afro-Ázijský (ostatné)"
 #. language code: afh
 #: zypp/LanguageCode.cc:175
 msgid "Afrihili"
-msgstr "Afrihili"
+msgstr "Afrihikli"
 
 #. language code: afr af
 #: zypp/LanguageCode.cc:177
@@ -1932,7 +1932,7 @@ msgstr "Akan"
 #. language code: akk
 #: zypp/LanguageCode.cc:183
 msgid "Akkadian"
-msgstr "Akkadian"
+msgstr "Akkadčina"
 
 #. language code: alb sqi sq
 #: zypp/LanguageCode.cc:185 zypp/LanguageCode.cc:187
@@ -1977,7 +1977,7 @@ msgstr "Arabský"
 #. language code: arc
 #: zypp/LanguageCode.cc:203
 msgid "Aramaic"
-msgstr "Aramaic"
+msgstr "Aramejčina"
 
 #. language code: arg an
 #: zypp/LanguageCode.cc:205
@@ -1992,7 +1992,7 @@ msgstr "Arménsky"
 #. language code: arn
 #: zypp/LanguageCode.cc:211
 msgid "Araucanian"
-msgstr "Araucanian"
+msgstr "Araukánčina"
 
 #. language code: arp
 #: zypp/LanguageCode.cc:213
@@ -2007,7 +2007,7 @@ msgstr "Umelý (ostatné)"
 #. language code: arw
 #: zypp/LanguageCode.cc:217
 msgid "Arawak"
-msgstr "Arawak"
+msgstr "Arawačtina"
 
 #. language code: asm as
 #: zypp/LanguageCode.cc:219
@@ -2022,7 +2022,7 @@ msgstr "Rakúsky"
 #. language code: ath
 #: zypp/LanguageCode.cc:223
 msgid "Athapascan Languages"
-msgstr "Athapascan Languages"
+msgstr "Athabaské jazyky"
 
 #. language code: aus
 #: zypp/LanguageCode.cc:225
@@ -2037,7 +2037,7 @@ msgstr "Avarský"
 #. language code: ave ae
 #: zypp/LanguageCode.cc:229
 msgid "Avestan"
-msgstr "Avestan"
+msgstr "Avestský jazyk"
 
 #. language code: awa
 #: zypp/LanguageCode.cc:231
@@ -2047,7 +2047,7 @@ msgstr "Awadhi"
 #. language code: aym ay
 #: zypp/LanguageCode.cc:233
 msgid "Aymara"
-msgstr "Aymara"
+msgstr "Aymarčina"
 
 #. language code: aze az
 #: zypp/LanguageCode.cc:235
@@ -2062,7 +2062,7 @@ msgstr "Banda"
 #. language code: bai
 #: zypp/LanguageCode.cc:239
 msgid "Bamileke Languages"
-msgstr "Bamileke Languages"
+msgstr "Bamileke"
 
 #. language code: bak ba
 #: zypp/LanguageCode.cc:241
@@ -2072,7 +2072,7 @@ msgstr "Bashkir"
 #. language code: bal
 #: zypp/LanguageCode.cc:243
 msgid "Baluchi"
-msgstr "Baluchi"
+msgstr "Balúdžtina"
 
 #. language code: bam bm
 #: zypp/LanguageCode.cc:245
@@ -2082,7 +2082,7 @@ msgstr "Bambara"
 #. language code: ban
 #: zypp/LanguageCode.cc:247
 msgid "Balinese"
-msgstr "Balinese"
+msgstr "Balijčina"
 
 #. language code: baq eus eu
 #: zypp/LanguageCode.cc:249 zypp/LanguageCode.cc:251
@@ -2102,7 +2102,7 @@ msgstr "Baltický (ostatné)"
 #. language code: bej
 #: zypp/LanguageCode.cc:257
 msgid "Beja"
-msgstr "Beja"
+msgstr "Bedža"
 
 #. language code: bel be
 #: zypp/LanguageCode.cc:259
@@ -2127,17 +2127,17 @@ msgstr "Berber (ostatné)"
 #. language code: bho
 #: zypp/LanguageCode.cc:267
 msgid "Bhojpuri"
-msgstr "Bhojpuri"
+msgstr "Bhódžpurčina"
 
 #. language code: bih bh
 #: zypp/LanguageCode.cc:269
 msgid "Bihari"
-msgstr "Bihari"
+msgstr "Biharčina"
 
 #. language code: bik
 #: zypp/LanguageCode.cc:271
 msgid "Bikol"
-msgstr "Bikol"
+msgstr "Bikolčina"
 
 #. language code: bin
 #: zypp/LanguageCode.cc:273
@@ -2167,7 +2167,7 @@ msgstr "Bosniansky"
 #. language code: bra
 #: zypp/LanguageCode.cc:283
 msgid "Braj"
-msgstr "Braj"
+msgstr "Bradžčina"
 
 #. language code: bre br
 #: zypp/LanguageCode.cc:285
@@ -2182,12 +2182,12 @@ msgstr "(Batak) Indonézia"
 #. language code: bua
 #: zypp/LanguageCode.cc:289
 msgid "Buriat"
-msgstr "Buriat"
+msgstr "Buriatčina"
 
 #. language code: bug
 #: zypp/LanguageCode.cc:291
 msgid "Buginese"
-msgstr "Buginese"
+msgstr "Buginčina"
 
 #. language code: bul bg
 #: zypp/LanguageCode.cc:293
@@ -2207,7 +2207,7 @@ msgstr "Blin"
 #. language code: cad
 #: zypp/LanguageCode.cc:301
 msgid "Caddo"
-msgstr "Caddo"
+msgstr "Kaddo"
 
 #. language code: cai
 #: zypp/LanguageCode.cc:303
@@ -2232,7 +2232,7 @@ msgstr "Kaukazský (ostatné)"
 #. language code: ceb
 #: zypp/LanguageCode.cc:311
 msgid "Cebuano"
-msgstr "Cebuano"
+msgstr "Cebuánčina"
 
 #. language code: cel
 #: zypp/LanguageCode.cc:313
@@ -2272,12 +2272,12 @@ msgstr "Čukský"
 #. language code: chm
 #: zypp/LanguageCode.cc:329
 msgid "Mari"
-msgstr "Mari"
+msgstr "Maríjčina"
 
 #. language code: chn
 #: zypp/LanguageCode.cc:331
 msgid "Chinook Jargon"
-msgstr "Chinook Jargon"
+msgstr "Činucký žargón"
 
 #. language code: cho
 #: zypp/LanguageCode.cc:333
