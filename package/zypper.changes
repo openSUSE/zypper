@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May 18 12:48:11 CEST 2016 - ma@suse.de
+
+- Ignore unknown package names in non interactive remove-command
+  (bsc#980263)
+- version 1.6.331
+
+-------------------------------------------------------------------
 Mon Feb 29 10:35:21 CET 2016 - ma@suse.de
 
 - Fix repo import to honor enable and autorefresh flags (bsc#967673)
