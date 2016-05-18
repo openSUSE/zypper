@@ -4114,9 +4114,9 @@ void Zypper::doCommand()
         (sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME) ||
          sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP)))
     {
-      setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
-      if (globalOpts().non_interactive)
-        ZYPP_THROW(ExitRequestException("name or capability not found"));
+      setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+      if ( command () != ZypperCommand::REMOVE && globalOpts().non_interactive )	// bsc#980263: relax if removing packages
+        ZYPP_THROW( ExitRequestException("name or capability not found") );
     }
 
     // give user feedback from package selection

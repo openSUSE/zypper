@@ -1453,7 +1453,7 @@ GLOBAL OPTIONS
 	Specifies table style to use. Table style is identified by an integer number. TODO
 
 *-n*, *--non-interactive*::
-	Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. Those default answers also depend on other options like *--no-gpg-checks*.
+	Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. Those default answers also depend on other options like *--no-gpg-checks* or *--ignore-unknown*.
 
 *--non-interactive-include-reboot-patches*::
 	In non-interactive mode do not skip patches which have the rebootSuggested-flag set. Otherwise these patches are considered to be interactive, like patches including a licenses or some message to confirm. NOTE: This option does not turn on non-interactive mode.
@@ -1462,7 +1462,7 @@ GLOBAL OPTIONS
 	Switches to XML output. This option is useful for scripts or graphical frontends using zypper.
 
 *-i*, *--ignore-unknown*::
-	Ignore unknown packages. This option is useful for scripts.
+	Ignore unknown packages. This option is useful for scripts, because when installing in *--non-interactive* mode zypper expects each command line argument to match at least one known package. Unknown names or globbing expressions with no match are treated as an error unless this option is used.
 
 *-D*, *--reposd-dir* 'dir'::
 	Use the specified directory to look for the repository definition (*.repo*) files. The default value is */etc/zypp/repos.d*.
