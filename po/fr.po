@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-16 09:58+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"PO-Revision-Date: 2016-05-18 09:52+0000\n"
+"Last-Translator: Benoît Monin <benoit.monin@gmx.fr>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -283,7 +283,7 @@ msgstr "Type de signature inconnu"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
 msgid "Signature does not verify"
-msgstr "La signature n'est pas vérifiée."
+msgstr "La signature n'est pas vérifiée"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2371
