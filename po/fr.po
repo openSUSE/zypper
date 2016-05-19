@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-18 20:57+0000\n"
-"Last-Translator: Benoît Monin <benoit.monin@gmx.fr>\n"
+"PO-Revision-Date: 2016-05-19 14:23+0000\n"
+"Last-Translator: Shane Wims <shane.wims@microfocus.com>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -666,7 +666,7 @@ msgstr "Un contrat client additionel est nécessaire pour obtenir du support."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "Option de support inconnue. La description n'est pas disponible."
+msgstr "Option de support inconnue. La description n'est pas disponible"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4571,7 +4571,7 @@ msgstr "Mode de correspondance '%s' inconnu"
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Mode de correspondance '%s' inconnu pour le motif '%s'."
+msgstr "Mode de correspondance '%s' inconnu pour le motif '%s'"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
