@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-19 19:48+0000\n"
+"PO-Revision-Date: 2016-05-19 19:52+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <http://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
@@ -2982,7 +2982,7 @@ msgid ""
 "\t--xmlout, -x\t\tSwitch to XML output.\n"
 "\t--ignore-unknown, -i\tIgnore unknown packages.\n"
 msgstr ""
-"Глобальные параметры:\n"
+"  Глобальные параметры:\n"
 "\t--help, -h\t\tСправка.\n"
 "\t--version, -V\t\tВывести номер версии.\n"
 "\t--promptids\t\tВывести список пользовательских запросов zypper.\n"
@@ -3091,7 +3091,7 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"    Управление репозиториями:\n"
+"     Управление репозиториями:\n"
 "\trepos, lr\t\tВывести список всех определённых репозиториев.\n"
 "\taddrepo, ar\t\tДобавить новый репозиторий.\n"
 "\tremoverepo, rr\t\tУдалить указанный репозиторий.\n"
@@ -3128,7 +3128,7 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
-"    Управление программным обеспечением:\n"
+"     Управление программным обеспечением:\n"
 "\tinstall, in\t\tУстановить пакеты.\n"
 "\tremove, rm\t\tУдалить пакеты.\n"
 "\tverify, ve\t\tПроверить целостность зависимостей пакетов.\n"
@@ -3170,7 +3170,7 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
-"    Выполнение запросов:\n"
+"     Выполнение запросов:\n"
 "\tsearch, se\t\tНайти пакеты, соответствующие шаблону.\n"
 "\tinfo, if\t\tПоказать полную информацию об указанных пакетах.\n"
 "\tpatch-info\t\tПоказать полную информацию об указанных исправлениях.\n"
@@ -3191,7 +3191,7 @@ msgid ""
 "\tlocks, ll\t\tList current package locks.\n"
 "\tcleanlocks, cl\t\tRemove unused locks.\n"
 msgstr ""
-"    Блокировки пакетов:\n"
+"     Блокировки пакетов:\n"
 "\taddlock, al\t\tДобавить блокировку пакета.\n"
 "\tremovelock, rl\t\tУдалить блокировку пакета.\n"
 "\tlocks, ll\t\tВывести список текущих блокировок пакетов.\n"
@@ -5505,7 +5505,7 @@ msgstr[2] "%d проблем:"
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
 msgid "Specified capability not found"
-msgstr "Указанная способность не найдена."
+msgstr "Указанная способность не найдена"
 
 #: src/solve-commit.cc:160
 #, c-format, boost-format
@@ -6403,7 +6403,7 @@ msgstr "Указанный локальный путь не существует
 
 #: src/utils/misc.cc:207
 msgid "Given URI is invalid"
-msgstr "Данный URI-адрес неверен."
+msgstr "Данный URI-адрес неверен"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
@@ -6447,12 +6447,12 @@ msgstr "Проверьте, доступен ли этот файл."
 #: src/utils/misc.cc:514
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
-msgstr "Неизвестный режим загрузки '%s'"
+msgstr "Неизвестный режим загрузки '%s'."
 
 #: src/utils/misc.cc:515
 #, c-format, boost-format
 msgid "Available download modes: %s"
-msgstr "Доступные режимы загрузки: %s."
+msgstr "Доступные режимы загрузки: %s"
 
 #: src/utils/misc.cc:529
 #, c-format, boost-format
