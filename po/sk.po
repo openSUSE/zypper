@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-18 17:30+0000\n"
+"PO-Revision-Date: 2016-05-19 17:32+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <http://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
@@ -2302,7 +2302,7 @@ msgstr "Cirkevný slovanský"
 #. language code: chv cv
 #: zypp/LanguageCode.cc:341
 msgid "Chuvash"
-msgstr "Chuvash"
+msgstr "Čuvaština"
 
 #. language code: chy
 #: zypp/LanguageCode.cc:343
@@ -2312,12 +2312,12 @@ msgstr "Čejenský"
 #. language code: cmc
 #: zypp/LanguageCode.cc:345
 msgid "Chamic Languages"
-msgstr "Chamic Languages"
+msgstr "Čamaské jazyky"
 
 #. language code: cop
 #: zypp/LanguageCode.cc:347
 msgid "Coptic"
-msgstr "Coptic"
+msgstr "Koptčina"
 
 #. language code: cor kw
 #: zypp/LanguageCode.cc:349
@@ -2387,12 +2387,12 @@ msgstr "Dánsky"
 #. language code: dar
 #: zypp/LanguageCode.cc:377
 msgid "Dargwa"
-msgstr "Dargwa"
+msgstr "Darginčina"
 
 #. language code: day
 #: zypp/LanguageCode.cc:379
 msgid "Dayak"
-msgstr "Dayak"
+msgstr "Dajačtina"
 
 #. language code: del
 #: zypp/LanguageCode.cc:381
@@ -2402,7 +2402,7 @@ msgstr "Delaware"
 #. language code: den
 #: zypp/LanguageCode.cc:383
 msgid "Slave (Athapascan)"
-msgstr "Slave (Athapascan)"
+msgstr "Slave"
 
 #. language code: dgr
 #: zypp/LanguageCode.cc:385
@@ -2432,7 +2432,7 @@ msgstr "Dravidian (ostatné)"
 #. language code: dsb
 #: zypp/LanguageCode.cc:395
 msgid "Lower Sorbian"
-msgstr "Lower Sorbian"
+msgstr "Dolná lužická srbčina"
 
 #. language code: dua
 #: zypp/LanguageCode.cc:397
@@ -2452,7 +2452,7 @@ msgstr "Holandský"
 #. language code: dyu
 #: zypp/LanguageCode.cc:405
 msgid "Dyula"
-msgstr "Dyula"
+msgstr "Djula"
 
 #. language code: dzo dz
 #: zypp/LanguageCode.cc:407
@@ -2472,12 +2472,12 @@ msgstr "Egyptský (starobylý)"
 #. language code: eka
 #: zypp/LanguageCode.cc:413
 msgid "Ekajuk"
-msgstr "Ekajuk"
+msgstr "Ekadžuk"
 
 #. language code: elx
 #: zypp/LanguageCode.cc:415
 msgid "Elamite"
-msgstr "Elamite"
+msgstr "Elamčina"
 
 #. language code: eng en
 #: zypp/LanguageCode.cc:417
@@ -2547,7 +2547,7 @@ msgstr "Fínsko-uhorský (ostatné)"
 #. language code: fon
 #: zypp/LanguageCode.cc:443
 msgid "Fon"
-msgstr "Fon"
+msgstr "Fončina"
 
 #. language code: fre fra fr
 #: zypp/LanguageCode.cc:445 zypp/LanguageCode.cc:447
@@ -2592,7 +2592,7 @@ msgstr "Gayo"
 #. language code: gba
 #: zypp/LanguageCode.cc:463
 msgid "Gbaya"
-msgstr "Gbaya"
+msgstr "Gbaja"
 
 #. language code: gem
 #: zypp/LanguageCode.cc:465
@@ -2612,12 +2612,12 @@ msgstr "Nemecký"
 #. language code: gez
 #: zypp/LanguageCode.cc:475
 msgid "Geez"
-msgstr "Geez"
+msgstr "Ge´ez"
 
 #. language code: gil
 #: zypp/LanguageCode.cc:477
 msgid "Gilbertese"
-msgstr "Gilbertese"
+msgstr "Kiribatčina"
 
 #. language code: gla gd
 #: zypp/LanguageCode.cc:479
@@ -2637,7 +2637,7 @@ msgstr "Galícijský"
 #. language code: glv gv
 #: zypp/LanguageCode.cc:485
 msgid "Manx"
-msgstr "Manx"
+msgstr "Mančina"
 
 #. language code: gmh
 #: zypp/LanguageCode.cc:487
@@ -2727,7 +2727,7 @@ msgstr "Herero"
 #. language code: hil
 #: zypp/LanguageCode.cc:523
 msgid "Hiligaynon"
-msgstr "Hiligaynon"
+msgstr "Hiligajnončina"
 
 #. language code: him
 #: zypp/LanguageCode.cc:525
@@ -2742,7 +2742,7 @@ msgstr "Hindi"
 #. language code: hit
 #: zypp/LanguageCode.cc:529
 msgid "Hittite"
-msgstr "Hittite"
+msgstr "Chetitčina"
 
 #. language code: hmn
 #: zypp/LanguageCode.cc:531
@@ -2797,7 +2797,7 @@ msgstr "Sichuan Yi"
 #. language code: ijo
 #: zypp/LanguageCode.cc:553
 msgid "Ijo"
-msgstr "Ijo"
+msgstr "Idžo"
 
 #. language code: iku iu
 #: zypp/LanguageCode.cc:555
@@ -2837,7 +2837,7 @@ msgstr "Indoeurópsky (ostatné)"
 #. language code: inh
 #: zypp/LanguageCode.cc:569
 msgid "Ingush"
-msgstr "Ingush"
+msgstr "Inguština"
 
 #. language code: ipk ik
 #: zypp/LanguageCode.cc:571
