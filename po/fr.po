@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-19 14:23+0000\n"
-"Last-Translator: Shane Wims <shane.wims@microfocus.com>\n"
+"PO-Revision-Date: 2016-05-19 16:05+0000\n"
+"Last-Translator: Benoît Monin <benoit.monin@gmx.fr>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -3238,7 +3238,7 @@ msgstr "Marathe"
 #. language code: mas
 #: zypp/LanguageCode.cc:721
 msgid "Masai"
-msgstr "Masai"
+msgstr "Masaï"
 
 #. language code: may msa ms
 #: zypp/LanguageCode.cc:723 zypp/LanguageCode.cc:725
@@ -3258,7 +3258,7 @@ msgstr "Mandar"
 #. language code: men
 #: zypp/LanguageCode.cc:731
 msgid "Mende"
-msgstr "Mende"
+msgstr "Mendé"
 
 #. language code: mga
 #: zypp/LanguageCode.cc:733
@@ -3413,7 +3413,7 @@ msgstr "Népalais"
 #. language code: new
 #: zypp/LanguageCode.cc:795
 msgid "Nepal Bhasa"
-msgstr "Nepal Bhasa"
+msgstr "Nepalbhasha"
 
 #. language code: nia
 #: zypp/LanguageCode.cc:797
@@ -3428,7 +3428,7 @@ msgstr "Nigéro-congolaises (autres langues)"
 #. language code: niu
 #: zypp/LanguageCode.cc:801
 msgid "Niuean"
-msgstr "Niuean"
+msgstr "Niuéen"
 
 #. language code: nno nn
 #: zypp/LanguageCode.cc:803
@@ -3443,7 +3443,7 @@ msgstr "Norvégien bokmal"
 #. language code: nog
 #: zypp/LanguageCode.cc:807
 msgid "Nogai"
-msgstr "Nogai"
+msgstr "Nogaï"
 
 #. language code: non
 #: zypp/LanguageCode.cc:809
@@ -3483,7 +3483,7 @@ msgstr "Nyamwezi"
 #. language code: nyn
 #: zypp/LanguageCode.cc:823
 msgid "Nyankole"
-msgstr "Nyankole"
+msgstr "Nkore"
 
 #. language code: nyo
 #: zypp/LanguageCode.cc:825
