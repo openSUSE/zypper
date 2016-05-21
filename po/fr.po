@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-19 16:05+0000\n"
+"PO-Revision-Date: 2016-05-21 16:44+0000\n"
 "Last-Translator: Benoît Monin <benoit.monin@gmx.fr>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.5\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -3503,7 +3503,7 @@ msgstr "Occitan (après 1500)"
 #. language code: oji oj
 #: zypp/LanguageCode.cc:831
 msgid "Ojibwa"
-msgstr "Ojibwa"
+msgstr "Ojibwé"
 
 #. language code: ori or
 #: zypp/LanguageCode.cc:833
