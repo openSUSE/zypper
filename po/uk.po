@@ -14,16 +14,17 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-04-14 16:22+0200\n"
+"PO-Revision-Date: 2016-05-22 18:20+0000\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
-"Language-Team: Ukrainian <>\n"
+"Language-Team: Ukrainian "
+"<http://l10n.opensuse.org/projects/zypper/master/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -47,7 +48,7 @@ msgstr "Дата закінчення терміну дії ключа:"
 
 #: src/callbacks/keyring.h:42
 msgid "Rpm Name:"
-msgstr "Назва rpm: "
+msgstr "Назва rpm:"
 
 #: src/callbacks/keyring.h:68
 #, boost-format
@@ -419,7 +420,7 @@ msgstr "Звантаження %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
-msgstr "Перевірка підпису зазнала невдачі."
+msgstr "Перевірка підпису зазнала невдачі"
 
 #: src/callbacks/repo.h:236
 msgid "Accepting package despite the error."
@@ -473,7 +474,7 @@ msgstr "Арх: "
 
 #: src/info.cc:119
 msgid "Vendor: "
-msgstr "Постачальник:"
+msgstr "Постачальник: "
 
 #: src/info.cc:124
 msgid "Summary: "
@@ -889,7 +890,7 @@ msgstr "Немає кандидатів на оновлення '%s'. Найно
 #: src/RequestFeedback.cc:97
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
-msgstr "Не знайдено кандидатури для оновлення «%s»"
+msgstr "Не знайдено кандидатури для оновлення '%s 1'."
 
 #: src/RequestFeedback.cc:103
 #, c-format, boost-format
@@ -1017,7 +1018,7 @@ msgstr "Додавання конфлікту: '%s'."
 #: src/RequestFeedback.cc:249
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Ви мали на увазі %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1033,7 +1034,7 @@ msgstr[2] "... і ще %1% елементів."
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] "Буде встановлено %d НОВИЙ пакунок:"
+msgstr[0] "Буде встановлено НОВИЙ пакунок:"
 msgstr[1] "Буде встановлено %d НОВІ пакунки:"
 msgstr[2] "Буде встановлено %d НОВИХ пакунків:"
 
@@ -1041,7 +1042,7 @@ msgstr[2] "Буде встановлено %d НОВИХ пакунків:"
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] "Буде встановлено %d НОВУ латку:"
+msgstr[0] "Буде встановлено НОВУ латку:"
 msgstr[1] "Буде встановлено %d НОВІ латки:"
 msgstr[2] "Буде встановлено %d НОВИХ латок:"
 
@@ -1049,7 +1050,7 @@ msgstr[2] "Буде встановлено %d НОВИХ латок:"
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] "Буде встановлено %d НОВИЙ шаблон:"
+msgstr[0] "Буде встановлено НОВИЙ шаблон:"
 msgstr[1] "Буде встановлено %d НОВІ шаблони:"
 msgstr[2] "Буде встановлено %d НОВИХ шаблонів:"
 
@@ -1057,7 +1058,7 @@ msgstr[2] "Буде встановлено %d НОВИХ шаблонів:"
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] "Буде встановлено %d НОВИЙ продукт:"
+msgstr[0] "Буде встановлено НОВИЙ продукт:"
 msgstr[1] "Буде встановлено %d НОВІ продукти:"
 msgstr[2] "Буде встановлено %d НОВИХ продуктів:"
 
@@ -1065,7 +1066,7 @@ msgstr[2] "Буде встановлено %d НОВИХ продуктів:"
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] "Буде встановлено %d пакунок з сирцями:"
+msgstr[0] "Буде встановлено пакунок з сирцями:"
 msgstr[1] "Буде встановлено %d пакунки з з сирцями:"
 msgstr[2] "Буде встановлено %d пакунків з з сирцями:"
 
