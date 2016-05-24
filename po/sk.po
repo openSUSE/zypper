@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-24 17:55+0100\n"
+"PO-Revision-Date: 2016-05-24 18:11+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -49,9 +49,9 @@ msgstr "Podpisový súbor gpg kľúča '%1%' vypršal."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Podpisový súbor gpg kľúča '%1%' vyprší za %2% deň."
+msgstr[1] "Podpisový súbor gpg kľúča '%1%' vyprší za %2% dni."
+msgstr[2] "Podpisový súbor gpg kľúča '%1%' vyprší za %2% dní."
 
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
@@ -330,17 +330,23 @@ msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
 msgstr[0] ""
+"Nasledujúci balík musel byť vylúčený z kontroly konfliktov súborov, pretože "
+"ešte nie je stiahnutý:"
 msgstr[1] ""
+"Nasledujúce %1% balíky museli byť vylúčené z kontroly konfliktov súborov, "
+"pretože ešte nie sú stiahnuté:"
 msgstr[2] ""
+"Nasledujúcich %1% balíkov muselo byť vylúčených z kontroly konfliktov "
+"súborov, pretože ešte nie sú stiahnuté:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:402
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Zistený %1% konflikt súborov:"
+msgstr[1] "Zistené %1% konflikty súborov:"
+msgstr[2] "Zistených %1% konfliktov súborov:"
 
 #: src/callbacks/rpm.h:410
 msgid "Conflicting files will be replaced."
@@ -469,9 +475,9 @@ msgstr "Popis: "
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Mala by existovať  %1% zhoda pre '%2%'."
+msgstr[1] "Mali by existovať  %1% zhody pre '%2%'."
+msgstr[2] "Malo by existovať  %1% zhôd pre '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:169
@@ -1018,9 +1024,9 @@ msgstr[2] ""
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci NOVÝ balík bude nainštalovaný:"
+msgstr[1] "Nasledujúce %d NOVÉ balíky budú nainštalované:"
+msgstr[2] "Nasledujúcich %d NOVÝCH balíkov bude nainštalovaných:"
 
 #: src/Summary.cc:510
 #, c-format, boost-format
@@ -3285,7 +3291,7 @@ msgstr "Voľba %s tu nemá žiadny vplyv, bude ignorovaná."
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1209
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "Zypper shell nepodporuje vykonávanie podpríkazov."
 
 #: src/Zypper.cc:1288
 #, c-format, boost-format
@@ -5236,13 +5242,13 @@ msgstr "Pre pridávanie zámkov balíkov sú potrebné práva správcu systému 
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Odstránený %lu zámok."
+msgstr[1] "Odstránené %lu zámky."
+msgstr[2] "Odstránených %lu zámkov."
 
 #: src/Zypper.cc:5049
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "Výstup XML nie je implementovaný pre tento príkaz."
 
 #: src/Zypper.cc:5062
 #, c-format, boost-format
@@ -5355,7 +5361,7 @@ msgstr[2] "%d problémov:"
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
 msgid "Specified capability not found"
-msgstr "Nebola nájdená zadaná vlastnosť."
+msgstr "Nebola nájdená zadaná schopnosť"
 
 #: src/solve-commit.cc:160
 #, c-format, boost-format
@@ -5419,7 +5425,7 @@ msgstr "Overovanie zlyhalo:"
 
 #: src/solve-commit.cc:449
 msgid "Skip check:"
-msgstr ""
+msgstr "Preskočiť kontrolu:"
 
 #: src/solve-commit.cc:457
 #, c-format, boost-format
@@ -5813,7 +5819,7 @@ msgstr "Sťahujem:"
 
 #: src/output/OutNormal.cc:256
 msgid "starting"
-msgstr "..."
+msgstr "štartovanie"
 
 #: src/output/OutNormal.cc:411
 msgid "No help available for this prompt."
@@ -6185,8 +6191,8 @@ msgstr "Zadajte '%s' pre '%s' alebo '%s' pre '%s', ak nič iné nefunguje."
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "balík"
-msgstr[1] ""
-msgstr[2] ""
+msgstr[1] "balíky"
+msgstr[2] "balíkov"
 
 #: src/utils/misc.cc:114
 msgid "pattern"
@@ -6199,8 +6205,8 @@ msgstr[2] "šablón"
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produkt"
-msgstr[1] ""
-msgstr[2] ""
+msgstr[1] "produkty"
+msgstr[2] "produktov"
 
 #: src/utils/misc.cc:118
 msgid "patch"
@@ -6220,8 +6226,8 @@ msgstr[2] "zdrojových balíkov"
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "aplikácia"
-msgstr[1] ""
-msgstr[2] ""
+msgstr[1] "aplikácie"
+msgstr[2] "aplikácií"
 
 #. default
 #: src/utils/misc.cc:124
@@ -6249,7 +6255,7 @@ msgstr "Zadaná miestna cesta neexistuje alebo nie je prístupná."
 
 #: src/utils/misc.cc:207
 msgid "Given URI is invalid"
-msgstr "Chybná zadaná URI adresa."
+msgstr "Zadaná URI adresa je neplatná"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
@@ -6300,7 +6306,7 @@ msgstr "Neznámy mód sťahovania '%s'."
 #: src/utils/misc.cc:515
 #, c-format, boost-format
 msgid "Available download modes: %s"
-msgstr "Ponúkané módy sťahovania: %s."
+msgstr "Dostupné režimy sťahovania: %s"
 
 #: src/utils/misc.cc:529
 #, c-format, boost-format
