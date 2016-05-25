@@ -58,14 +58,14 @@ public:
 
   template<class Tp_>
   TableRow & add( const Tp_ & val_r )
-  { return add( str::asString( val_r ) ); }
+  { return add( asString( val_r ) ); }
 
 
   TableRow & addDetail( std::string s );
 
   template<class Tp_>
   TableRow & addDetail( const Tp_ & val_r )
-  { return addDetail( str::asString( val_r ) ); }
+  { return addDetail( asString( val_r ) ); }
 
 
   // return number of columns
@@ -114,7 +114,7 @@ private:
 /** \relates TableRow Add colummn. */
 template<class Tp_>
 TableRow & operator<<( TableRow & tr, Tp_ && val )
-{ return tr.add( str::asString( std::forward<Tp_>(val) ) ); }
+{ return tr.add( asString( std::forward<Tp_>(val) ) ); }
 /** \overload preserving TableRow rvalue reference. */
 template<class Tp_>
 TableRow && operator<<( TableRow && tr, Tp_ && val )
