@@ -13,15 +13,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-03-10 08:45-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
-"Language-Team: Portuguese <opensuse-pt@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-25 18:42+0000\n"
+"Last-Translator: Ronan Chagas <ronisbr@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) "
+"<http://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.6\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -281,9 +282,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "Executando: %s (%s, %s)"
 
 #: src/callbacks/rpm.h:207
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "Removendo %s-%s"
+msgstr "Removendo %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:211
@@ -297,9 +298,9 @@ msgid "Removal of %s failed:"
 msgstr "Falha na remoção de %s:"
 
 #: src/callbacks/rpm.h:276
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "Instalando: %s-%s"
+msgstr "Instalando: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:280
@@ -308,9 +309,9 @@ msgid "Installing: %s-%s"
 msgstr "Instalando: %s-%s"
 
 #: src/callbacks/rpm.h:303
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "Falha na instalação de %s-%s:"
+msgstr "Falha na instalação de %s:"
 
 #. what's actually needed here
 #: src/callbacks/rpm.h:304
@@ -1024,7 +1025,7 @@ msgstr "Adicionando o conflito: '%s'."
 #: src/RequestFeedback.cc:249
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Você quis dizer %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -3294,7 +3295,7 @@ msgstr "A opção %s não tem efeito aqui. Ignorando."
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1209
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "O shell do zypper não suporta a execução de subcomandos."
 
 #: src/Zypper.cc:1288
 #, c-format, boost-format
@@ -3421,6 +3422,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Não exige interação com o usuário. Apelido para a opção global --non-"
+"interactive."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -3511,6 +3514,9 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"A localização padrão onde o rpm instala os pacotes fontes é '%1%', mas esse "
+"valor pode ser alterado na sua configuração local do rpm. Em caso de dúvida, "
+"tente executar '%2%'."
 
 #: src/Zypper.cc:1588
 #, c-format, boost-format
@@ -5261,9 +5267,8 @@ msgstr "O repositório especificado '%s' está desabilitado."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4381
-#, fuzzy
 msgid "No matching items found."
-msgstr "Nenhum problema correspondente encontrado."
+msgstr "Nenhum item correspondente encontrado."
 
 #: src/Zypper.cc:4416
 msgid "Problem occurred initializing or executing the search query"
@@ -5342,7 +5347,7 @@ msgstr[1] "Bloqueios %lu removidos."
 
 #: src/Zypper.cc:5049
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "A saída XML não foi implementada para esse comando."
 
 #: src/Zypper.cc:5062
 #, c-format, boost-format
@@ -5515,9 +5520,8 @@ msgid "Check failed:"
 msgstr "Falha na verificação:"
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
-msgstr "Verificação GPG"
+msgstr "Pular verificação:"
 
 #: src/solve-commit.cc:457
 #, c-format, boost-format
