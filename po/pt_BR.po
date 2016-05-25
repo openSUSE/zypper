@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-25 18:48+0000\n"
-"Last-Translator: Ronan Chagas <ronisbr@gmail.com>\n"
+"PO-Revision-Date: 2016-05-25 19:08+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<http://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -2291,7 +2291,7 @@ msgstr "Lendo dados da mídia '%s'"
 #: src/repos.cc:1654
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
-msgstr "Problema ao ler dados da mídia '%s' "
+msgstr "Problema ao ler dados da mídia '%s'"
 
 #: src/repos.cc:1655
 msgid "Please check if your installation media is valid and readable."
@@ -2721,7 +2721,7 @@ msgstr "aplicada"
 
 #: src/update.cc:202
 msgid "not needed"
-msgstr "não necessário "
+msgstr "não necessário"
 
 #: src/update.cc:208
 msgid "undetermined"
@@ -5181,7 +5181,7 @@ msgstr "Ignorando os argumentos, marcando o repositório inteiro."
 #: src/Zypper.cc:3907
 #, c-format, boost-format
 msgid "Unknown package type: %s"
-msgstr "Tipo de pacote desconhecido: %s "
+msgstr "Tipo de pacote desconhecido: %s"
 
 #: src/Zypper.cc:3917
 msgid "Cannot uninstall patches."
@@ -6213,11 +6213,11 @@ msgstr "Erro ao analisar zypper.conf:"
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr "Opção desconhecida"
+msgstr "Opção desconhecida "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
-msgstr "Argumento ausente para"
+msgstr "Argumento ausente para "
 
 #. translators: speaking of two mutually contradicting command line options
 #: src/utils/getopt.cc:123
@@ -6369,7 +6369,7 @@ msgstr "Use obs://<project>/<platform>"
 #: src/utils/misc.cc:299 src/utils/misc.cc:336
 #, c-format, boost-format
 msgid "Example: %s"
-msgstr "Example: %s"
+msgstr "Exemplo: %s"
 
 #: src/utils/misc.cc:335
 msgid "Invalid OBS URI."
