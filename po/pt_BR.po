@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-25 18:42+0000\n"
+"PO-Revision-Date: 2016-05-25 18:48+0000\n"
 "Last-Translator: Ronan Chagas <ronisbr@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<http://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
@@ -5939,7 +5939,7 @@ msgstr "O argumento resolve para nenhum pacote"
 
 #: src/download.cc:136
 msgid "No prune to best version."
-msgstr "Não cortar para a melhor versão"
+msgstr "Sem remoção para melhor versão."
 
 #: src/download.cc:142
 msgid "Prune to best version..."
