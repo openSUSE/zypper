@@ -94,12 +94,9 @@ namespace zypp
     template<typename TIntegral>
     using ZeroInit = DefaultIntegral<TIntegral,TIntegral(0)>;
 
-    namespace str
-    {
-      template<class Tp, Tp TInitial>
-      std::string asString( const DefaultIntegral<Tp,TInitial> & obj )
-      { return asString( obj.get() ); }
-    } // namespace str
+    template<class Tp, Tp TInitial>
+    std::string asString( const DefaultIntegral<Tp,TInitial> & obj )
+    { return asString( obj.get() ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
