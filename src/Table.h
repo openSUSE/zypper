@@ -50,9 +50,20 @@ private:
 
 public:
   //! Constructor. Reserve place for c columns.
-  TableRow( unsigned c = 0U )
-  { _columns.reserve (c); }
+  TableRow()
+  {}
 
+  explicit TableRow( unsigned c )
+  : _ctxt( ColorContext::DEFAULT )
+  { _columns.reserve(c); }
+
+  explicit TableRow( ColorContext ctxt_r )
+  : _ctxt( ctxt_r )
+  {}
+
+  TableRow( unsigned c, ColorContext ctxt_r  )
+  : _ctxt( ctxt_r )
+  { _columns.reserve(c); }
 
   TableRow & add( std::string s );
 
@@ -108,6 +119,7 @@ public:
 private:
   container _columns;
   container _details;
+  ColorContext _ctxt;
   friend class Table;
 };
 

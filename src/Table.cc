@@ -91,6 +91,8 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
   container::const_iterator i = _columns.begin (), e = _columns.end ();
   for ( unsigned c = 0; i != e ; ++i, ++c )
   {
+    const std::string & s( *i );
+
     if ( seen_first )
     {
       bool do_wrap = parent._do_wrap				// user requested wrapping
@@ -114,17 +116,15 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
       seen_first = true;
 
     // stream.width (widths[c]); // that does not work with multibyte chars
-    const std::string & s = *i;
     ssize = mbs_width( s );
     if ( ssize > parent._max_width[c] )
     {
       unsigned cutby = parent._max_width[c] - 2;
       std::string cutstr = mbs_substr_by_width( s, 0, cutby );
-      stream << cutstr << std::string(cutby - mbs_width( cutstr ), ' ') << "->";
+      stream << ( _ctxt << cutstr ) << std::string(cutby - mbs_width( cutstr ), ' ') << "->";
     }
     else
     {
-      std::string s( *i );
       if ( !parent._inHeader && parent.editionStyle( c ) && Zypper::instance()->config().do_colors )
       {
 	// Edition column
@@ -143,11 +143,11 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
 	  }
 	  else if ( editionSep == s.size() )
 	  {
-	    stream << s;
+	    stream << ( _ctxt << s );
 	  }
 	  else
 	  {
-	    stream << s.substr( 0, editionSep ) << ( ColorContext::CHANGE << s.substr( editionSep ) );
+	    stream << ( _ctxt << s.substr( 0, editionSep ) ) << ( ColorContext::CHANGE << s.substr( editionSep ) );
 	  }
 	}
 	else
@@ -156,17 +156,17 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
 	  editionSep = s.find( '-' );
 	  if ( editionSep != std::string::npos )
 	  {
-	    stream << s.substr( 0, editionSep ) << ( ColorContext::HIGHLIGHT << "-" ) << s.substr( editionSep+1 );
+	    stream << ( _ctxt << s.substr( 0, editionSep ) << ( ColorContext::HIGHLIGHT << "-" ) << s.substr( editionSep+1 ) );
 	  }
 	  else	// no release part
 	  {
-	    stream << s;
+	    stream << ( _ctxt << s );
 	  }
 	}
       }
       else	// no special style
       {
-	stream << s;
+	stream << ( _ctxt << s );
       }
       stream.width( parent._max_width[c] - ssize );
     }
