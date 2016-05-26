@@ -3204,6 +3204,7 @@ void Zypper::processCommandOptions()
 /// process one command from the OS shell or the zypper shell
 void Zypper::doCommand()
 {
+  // help check is common to all commands
   if ( runningHelp() ) { out().info( _command_help, Out::QUIET ); return; }
 
   // === ZYpp lock ===
@@ -3245,8 +3246,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::MOO_e:
   {
-    if ( runningHelp() ) { out().info(_command_help, Out::QUIET ); return; }
-
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
     break;
@@ -3256,8 +3255,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::LIST_SERVICES_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     initRepoManager();
     if ( copts.count( "with-repos" ) )
       checkIfToRefreshPluginServices( *this );
@@ -3270,8 +3267,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::REFRESH_SERVICES_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -3296,8 +3291,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::ADD_SERVICE_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -3387,8 +3380,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::MODIFY_SERVICE_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -3447,8 +3438,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::LIST_REPOS_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     initRepoManager();
     checkIfToRefreshPluginServices( *this );
     list_repos( *this );
@@ -3461,8 +3450,6 @@ void Zypper::doCommand()
   case ZypperCommand::ADD_REPO_e:
   case ZypperCommand::RUG_MOUNT_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -3607,8 +3594,6 @@ void Zypper::doCommand()
   case ZypperCommand::REMOVE_SERVICE_e:
   case ZypperCommand::REMOVE_REPO_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if (geteuid() != 0 && !globalOpts().changedRoot)
     {
@@ -3690,8 +3675,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::RENAME_REPO_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -3744,8 +3727,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::MODIFY_REPO_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -3806,8 +3787,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::REFRESH_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -3846,8 +3825,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::CLEAN_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -3866,8 +3843,6 @@ void Zypper::doCommand()
   case ZypperCommand::INSTALL_e:
   case ZypperCommand::REMOVE_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     if ( _arguments.size() < 1 && !_copts.count("entire-catalog") )
     {
       out().error(
@@ -4115,8 +4090,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::SRC_INSTALL_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     if ( _arguments.size() < 1 )
     {
       out().error(_("Source package name is a required argument.") );
@@ -4145,8 +4118,6 @@ void Zypper::doCommand()
   case ZypperCommand::VERIFY_e:
   case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // too many arguments
     if ( _arguments.size() > 0 )
     {
@@ -4183,8 +4154,6 @@ void Zypper::doCommand()
   case ZypperCommand::SEARCH_e:
   case ZypperCommand::RUG_PATCH_SEARCH_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     PoolQuery query;
 
     TriBool inst_notinst = indeterminate;
@@ -4427,8 +4396,6 @@ void Zypper::doCommand()
   // TODO: rug summary
   case ZypperCommand::PATCH_CHECK_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // too many arguments
     if ( _arguments.size() > 0 )
     {
@@ -4474,8 +4441,6 @@ void Zypper::doCommand()
   case ZypperCommand::PACKAGES_e:
   case ZypperCommand::PRODUCTS_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     initRepoManager();
 
     init_target( *this);
@@ -4516,9 +4481,6 @@ void Zypper::doCommand()
     // The "what-provides" now is included in "search" command, e.g.
     // zypper what-provides 'zypper>1.6'
     // zypper se --match-exact --provides 'zypper>1.6'
-
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     if ( _arguments.empty() )
     {
       report_required_arg_missing( out(), _command_help );
@@ -4556,8 +4518,6 @@ void Zypper::doCommand()
   case ZypperCommand::LIST_UPDATES_e:
   case ZypperCommand::LIST_PATCHES_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // too many arguments
     if ( _arguments.size() > 0 )
     {
@@ -4619,8 +4579,6 @@ void Zypper::doCommand()
   case ZypperCommand::UPDATE_e:
   case ZypperCommand::PATCH_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -4796,8 +4754,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::DIST_UPGRADE_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -4844,8 +4800,6 @@ void Zypper::doCommand()
   case ZypperCommand::RUG_PATTERN_INFO_e:
   case ZypperCommand::RUG_PRODUCT_INFO_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     if ( _arguments.size() < 1 )
     {
       out().error(_("Required argument missing.") );
@@ -4900,8 +4854,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::ADD_LOCK_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -4943,8 +4895,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::REMOVE_LOCK_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
     {
@@ -4985,8 +4935,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::LIST_LOCKS_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     shared_ptr<ListLocksOptions> listLocksOptions = commandOptionsAs<ListLocksOptions>();
     if ( !listLocksOptions )
       throw( Out::Error( ZYPPER_EXIT_ERR_BUG, "Wrong or missing options struct." ) );
@@ -5014,8 +4962,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::CLEAN_LOCKS_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     initRepoManager();
     init_target( *this );
     init_repos( *this );
@@ -5042,8 +4988,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::TARGET_OS_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     if (out().type() == Out::TYPE_XML)
     {
       out().error(_("XML output not implemented for this command.") );
@@ -5071,8 +5015,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::VERSION_CMP_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     if ( _arguments.size() < 2 )
     {
       report_required_arg_missing( out(), _command_help );
@@ -5114,8 +5056,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::LICENSES_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     if ( !_arguments.empty() )
     {
       report_too_many_arguments( _command_help );
@@ -5141,8 +5081,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::PS_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     if ( !_arguments.empty() )
     {
       report_too_many_arguments( _command_help );
@@ -5169,8 +5107,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::DOWNLOAD_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     if ( _arguments.empty() )
     {
       report_required_arg_missing( out(), _command_help );
@@ -5218,8 +5154,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::SOURCE_DOWNLOAD_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     if ( !_arguments.empty() )
     {
       report_too_many_arguments( _command_help );
@@ -5244,9 +5178,7 @@ void Zypper::doCommand()
 
   case ZypperCommand::SHELL_QUIT_e:
   {
-    if ( runningHelp() )
-      out().info( _command_help, Out::QUIET );
-    else if ( !runningShell() )
+    if ( !runningShell() )
       out().warning(_("This command only makes sense in the zypper shell."), Out::QUIET );
     else
       out().error( "oops, you wanted to quit, didn't you?" ); // should not happen
@@ -5256,9 +5188,7 @@ void Zypper::doCommand()
 
   case ZypperCommand::SHELL_e:
   {
-    if ( runningHelp() )
-      out().info( _command_help, Out::QUIET );
-    else if ( runningShell() )
+    if ( runningShell() )
       out().info(_("You already are running zypper's shell.") );
     else
     {
@@ -5271,8 +5201,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::RUG_SERVICE_TYPES_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
     Table t;
     t << ( TableHeader() << _("Alias") << _("Name") << _("Description") );
 
@@ -5290,7 +5218,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::RUG_LIST_RESOLVABLES_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
     rug_list_resolvables( *this );
     break;
   }
