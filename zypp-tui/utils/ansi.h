@@ -516,6 +516,9 @@ namespace ansi
     /** Return the colored string if \ref do_colors */
     std::string str() const
     { return str( _color ); }
+    /** \overload */
+    std::string asString() const
+    { return str(); }
 
     /** Return the string rendered in a differernt color if \ref do_colors */
     std::string str( Color color_r ) const
