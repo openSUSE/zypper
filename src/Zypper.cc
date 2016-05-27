@@ -2323,7 +2323,7 @@ void Zypper::processCommandOptions()
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
-      .optionSection(_("Expert options:") )
+      .optionSectionExpertOptions()
       .option( "--[no-]allow-downgrade",	_("Whether to allow downgrading installed resolvables.") )
       .option( "--[no-]allow-name-change",	_("Whether to allow changing the names of installed resolvables.") )
       .option( "--[no-]allow-arch-change",	_("Whether to allow changing the architecture of installed resolvables.") )
