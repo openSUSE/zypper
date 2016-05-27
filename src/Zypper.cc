@@ -268,6 +268,16 @@ namespace
      */
     CommandHelpFormater & option( boost::string_ref option_r, boost::string_ref text_r )
     { _mww.writeDefinition( option_r , text_r, (option_r.starts_with( "--" )?4:0), 28 ); return *this; }
+    /** \overload "option\ntext_r" */
+    CommandHelpFormater & option( boost::string_ref allinone_r )
+    {
+      std::string::size_type sep = allinone_r.find( '\n' );
+      if ( sep != std::string::npos )
+	_mww.writeDefinition( allinone_r.substr( 0, sep ), allinone_r.substr( sep+1 ), (allinone_r.starts_with( "--" )?4:0), 28 );
+      else
+	_mww.writeDefinition( allinone_r , "", (allinone_r.starts_with( "--" )?4:0), 28 );
+      return *this;
+    }
 
     /** \todo eliminate legacy indentation */
     CommandHelpFormater & option26( boost::string_ref option_r, boost::string_ref text_r )
