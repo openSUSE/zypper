@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
 "PO-Revision-Date: 2016-05-28 15:41+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/zypper/master/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -2054,7 +2054,7 @@ msgstr "Activation temporaire du dépôt '%s'."
 #: src/repos.cc:841
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
-msgstr "Le dépôt '%s' est désactivé."
+msgstr "Le dépôt '%s' reste désactivé."
 
 #: src/repos.cc:849 src/repos.cc:1324
 msgid "Some of the repositories have not been refreshed because of an error."
