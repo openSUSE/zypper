@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-28 15:21+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-28 15:30+0000\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/zypper/master/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -330,7 +330,7 @@ msgstr "Échec de l'installation de %s-%s :"
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:350
 msgid "Checking for file conflicts:"
-msgstr "Recherche de conflits de fichiers :"
+msgstr "Recherche de conflits de fichiers :"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:384
@@ -992,8 +992,8 @@ msgstr "Le correctif '%s' n'est pas nécessaire."
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"Le correctif '%s' est verrouillé. Utiliser '%s' pour l'installer ou le "
-"déverrouiller en utilisant '%s'."
+"Le correctif '%s' est verrouillé. Utilisez '%s' pour l'installer ou "
+"déverrouillez-le en utilisant '%s'."
 
 #: src/RequestFeedback.cc:183
 #, c-format, boost-format
@@ -1008,7 +1008,7 @@ msgstr "Le correctif '%s' n'a pas de sévérité spécifiée."
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "Le correctif '%s' est sorti après la date spécifié."
+msgstr "Le correctif '%s' est sorti après la date spécifiée."
 
 #: src/RequestFeedback.cc:204
 #, c-format, boost-format
