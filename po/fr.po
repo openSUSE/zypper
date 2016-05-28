@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-28 15:30+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"PO-Revision-Date: 2016-05-28 15:37+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <http://l10n.opensuse.org/projects/zypper/master/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -1028,7 +1028,7 @@ msgstr "'%s' sélectionné pour suppression."
 #: src/RequestFeedback.cc:219
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr "'%s' est verrouillé. Utiliser '%s' pour le déverrouiller."
+msgstr "'%s' est verrouillé. Utilisez '%s' pour le déverrouiller."
 
 #: src/RequestFeedback.cc:224
 #, c-format, boost-format
@@ -1878,7 +1878,7 @@ msgstr ""
 #: src/repos.cc:176
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "Vérification du rafraichissement des meta-données pour %s"
+msgstr "Vérification du rafraîchissement des métadonnées pour %s"
 
 # TLABEL linuxrc_2002_03_29_0036__117
 #: src/repos.cc:202
@@ -1893,7 +1893,7 @@ msgstr "La vérification de l'état du dépôt '%s' a été reportée."
 
 #: src/repos.cc:230
 msgid "Forcing raw metadata refresh"
-msgstr "Force la mise à jour des méta-données de base"
+msgstr "Forçage de la mise à jour des métadonnées brutes"
 
 #: src/repos.cc:236
 #, c-format, boost-format
