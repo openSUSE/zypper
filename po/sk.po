@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-19 17:32+0000\n"
+"PO-Revision-Date: 2016-05-29 10:45+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <http://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.5\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -2852,7 +2852,7 @@ msgstr "Iránsky (ostatné)"
 #. language code: iro
 #: zypp/LanguageCode.cc:575
 msgid "Iroquoian Languages"
-msgstr "Iroquoian Languages"
+msgstr "Irokézske jazyky"
 
 #. language code: ita it
 #: zypp/LanguageCode.cc:577
@@ -2887,22 +2887,22 @@ msgstr "Židovsko-Arabský"
 #. language code: kaa
 #: zypp/LanguageCode.cc:589
 msgid "Kara-Kalpak"
-msgstr "Kara-Kalpak"
+msgstr "Karakalpačtina"
 
 #. language code: kab
 #: zypp/LanguageCode.cc:591
 msgid "Kabyle"
-msgstr "Kabyle"
+msgstr "Kabylčina"
 
 #. language code: kac
 #: zypp/LanguageCode.cc:593
 msgid "Kachin"
-msgstr "Kachin"
+msgstr "Kačjinčina"
 
 #. language code: kal kl
 #: zypp/LanguageCode.cc:595
 msgid "Kalaallisut"
-msgstr "Kalaallisut"
+msgstr "Grónčina"
 
 #. language code: kam
 #: zypp/LanguageCode.cc:597
@@ -2917,7 +2917,7 @@ msgstr "Kannada"
 #. language code: kar
 #: zypp/LanguageCode.cc:601
 msgid "Karen"
-msgstr "Karen"
+msgstr "Karenčina"
 
 #. language code: kas ks
 #: zypp/LanguageCode.cc:603
@@ -2942,17 +2942,17 @@ msgstr "Kazašský"
 #. language code: kbd
 #: zypp/LanguageCode.cc:611
 msgid "Kabardian"
-msgstr "Kabardian"
+msgstr "Kabardčina"
 
 #. language code: kha
 #: zypp/LanguageCode.cc:613
 msgid "Khasi"
-msgstr "Khasi"
+msgstr "Khasijčina"
 
 #. language code: khi
 #: zypp/LanguageCode.cc:615
 msgid "Khoisan (Other)"
-msgstr "Khoisan (Other)"
+msgstr "Khojsánske jazyky (iné)"
 
 #. language code: khm km
 #: zypp/LanguageCode.cc:617
@@ -2962,12 +2962,12 @@ msgstr "Khmer"
 #. language code: kho
 #: zypp/LanguageCode.cc:619
 msgid "Khotanese"
-msgstr "Khotanese"
+msgstr "Kotčina"
 
 #. language code: kik ki
 #: zypp/LanguageCode.cc:621
 msgid "Kikuyu"
-msgstr "Kikuyu"
+msgstr "Kikuju"
 
 #. language code: kin rw
 #: zypp/LanguageCode.cc:623
@@ -2987,12 +2987,12 @@ msgstr "Kimbundu"
 #. language code: kok
 #: zypp/LanguageCode.cc:629
 msgid "Konkani"
-msgstr "Konkani"
+msgstr "Konkánčina"
 
 #. language code: kom kv
 #: zypp/LanguageCode.cc:631
 msgid "Komi"
-msgstr "Komi"
+msgstr "Komijčina"
 
 #. language code: kon kg
 #: zypp/LanguageCode.cc:633
@@ -3007,7 +3007,7 @@ msgstr "Kórejský"
 #. language code: kos
 #: zypp/LanguageCode.cc:637
 msgid "Kosraean"
-msgstr "Kosraean"
+msgstr "Kusaie"
 
 #. language code: kpe
 #: zypp/LanguageCode.cc:639
@@ -3027,17 +3027,17 @@ msgstr "Kru"
 #. language code: kru
 #: zypp/LanguageCode.cc:645
 msgid "Kurukh"
-msgstr "Kurukh"
+msgstr "Kurukhčina"
 
 #. language code: kua kj
 #: zypp/LanguageCode.cc:647
 msgid "Kuanyama"
-msgstr "Kuanyama"
+msgstr "Kuaňama"
 
 #. language code: kum
 #: zypp/LanguageCode.cc:649
 msgid "Kumyk"
-msgstr "Kumyk"
+msgstr "Kumytčina"
 
 #. language code: kur ku
 #: zypp/LanguageCode.cc:651
@@ -3052,12 +3052,12 @@ msgstr "Kutenai"
 #. language code: lad
 #: zypp/LanguageCode.cc:655
 msgid "Ladino"
-msgstr "Ladino"
+msgstr "Ladinčina"
 
 #. language code: lah
 #: zypp/LanguageCode.cc:657
 msgid "Lahnda"
-msgstr "Lahnda"
+msgstr "Lahandčina"
 
 #. language code: lam
 #: zypp/LanguageCode.cc:659
@@ -3082,7 +3082,7 @@ msgstr "Lotyšský"
 #. language code: lez
 #: zypp/LanguageCode.cc:667
 msgid "Lezghian"
-msgstr "Lezghian"
+msgstr "Lezginčina"
 
 #. language code: lim li
 #: zypp/LanguageCode.cc:669
@@ -3117,7 +3117,7 @@ msgstr "Luxemburský"
 #. language code: lua
 #: zypp/LanguageCode.cc:681
 msgid "Luba-Lulua"
-msgstr "Luba-Lulua"
+msgstr "Luba-luluánčina"
 
 #. language code: lub lu
 #: zypp/LanguageCode.cc:683
@@ -3132,7 +3132,7 @@ msgstr "Ganda"
 #. language code: lui
 #: zypp/LanguageCode.cc:687
 msgid "Luiseno"
-msgstr "Luiseno"
+msgstr "Luiseňo"
 
 #. language code: lun
 #: zypp/LanguageCode.cc:689
@@ -3147,7 +3147,7 @@ msgstr "Luo (Keňa a Tanzánia)"
 #. language code: lus
 #: zypp/LanguageCode.cc:693
 msgid "Lushai"
-msgstr "Lushai"
+msgstr "Lušáí"
 
 #. language code: mac mkd mk
 #: zypp/LanguageCode.cc:695 zypp/LanguageCode.cc:697
@@ -3157,12 +3157,12 @@ msgstr "Macedónsky"
 #. language code: mad
 #: zypp/LanguageCode.cc:699
 msgid "Madurese"
-msgstr "Madurese"
+msgstr "Madurčina"
 
 #. language code: mag
 #: zypp/LanguageCode.cc:701
 msgid "Magahi"
-msgstr "Magahi"
+msgstr "Magahí"
 
 #. language code: mah mh
 #: zypp/LanguageCode.cc:703
@@ -3177,7 +3177,7 @@ msgstr "Maithili"
 #. language code: mak
 #: zypp/LanguageCode.cc:707
 msgid "Makasar"
-msgstr "Makasar"
+msgstr "Makasarčina"
 
 #. language code: mal ml
 #: zypp/LanguageCode.cc:709
@@ -3222,7 +3222,7 @@ msgstr "Moksha"
 #. language code: mdr
 #: zypp/LanguageCode.cc:729
 msgid "Mandar"
-msgstr "Mandar"
+msgstr "Mandarčina"
 
 #. language code: men
 #: zypp/LanguageCode.cc:731
@@ -3237,12 +3237,12 @@ msgstr "Írsky stredný (r. 900-1200)"
 #. language code: mic
 #: zypp/LanguageCode.cc:735
 msgid "Mi'kmaq"
-msgstr "Mi'kmaq"
+msgstr "Mikman"
 
 #. language code: min
 #: zypp/LanguageCode.cc:737
 msgid "Minangkabau"
-msgstr "Minangkabau"
+msgstr "Minangkabaučina"
 
 #. language code: mis
 #: zypp/LanguageCode.cc:739
@@ -3267,7 +3267,7 @@ msgstr "Maltézsky"
 #. language code: mnc
 #: zypp/LanguageCode.cc:747
 msgid "Manchu"
-msgstr "Manchu"
+msgstr "Mandžuština"
 
 #. language code: mni
 #: zypp/LanguageCode.cc:749
@@ -3277,7 +3277,7 @@ msgstr "Manipuri"
 #. language code: mno
 #: zypp/LanguageCode.cc:751
 msgid "Manobo Languages"
-msgstr "Manobo Languages"
+msgstr "Manobo jazyky"
 
 #. language code: moh
 #: zypp/LanguageCode.cc:753
@@ -3297,7 +3297,7 @@ msgstr "Mongolský"
 #. language code: mos
 #: zypp/LanguageCode.cc:759
 msgid "Mossi"
-msgstr "Mossi"
+msgstr "Mosi"
 
 #. language code: mul
 #: zypp/LanguageCode.cc:761
@@ -3307,12 +3307,12 @@ msgstr "Viaceré jazyky"
 #. language code: mun
 #: zypp/LanguageCode.cc:763
 msgid "Munda languages"
-msgstr "Munda languages"
+msgstr "Mundské jazyky"
 
 #. language code: mus
 #: zypp/LanguageCode.cc:765
 msgid "Creek"
-msgstr "Creek"
+msgstr "Muskogi"
 
 #. language code: mwl
 #: zypp/LanguageCode.cc:767
@@ -3352,17 +3352,17 @@ msgstr "Neapolitan"
 #. language code: nav nv
 #: zypp/LanguageCode.cc:783
 msgid "Navajo"
-msgstr "Navajo"
+msgstr "Navaho"
 
 #. language code: nbl nr
 #: zypp/LanguageCode.cc:785
 msgid "Ndebele, South"
-msgstr "Ndebele, South"
+msgstr "Ndebele (Južná Afrika)"
 
 #. language code: nde nd
 #: zypp/LanguageCode.cc:787
 msgid "Ndebele, North"
-msgstr "Ndebele, North"
+msgstr "Ndebele (Zimbabwe)"
 
 #. language code: ndo ng
 #: zypp/LanguageCode.cc:789
@@ -3397,7 +3397,7 @@ msgstr "Nigérisjko-Kordofanský (ostatné)"
 #. language code: niu
 #: zypp/LanguageCode.cc:801
 msgid "Niuean"
-msgstr "Niuean"
+msgstr "Niueština"
 
 #. language code: nno nn
 #: zypp/LanguageCode.cc:803
@@ -3412,7 +3412,7 @@ msgstr "Nórsky Bokmal"
 #. language code: nog
 #: zypp/LanguageCode.cc:807
 msgid "Nogai"
-msgstr "Nogai"
+msgstr "Nogidalčina"
 
 #. language code: non
 #: zypp/LanguageCode.cc:809
@@ -3432,7 +3432,7 @@ msgstr "Severné Sotho"
 #. language code: nub
 #: zypp/LanguageCode.cc:815
 msgid "Nubian Languages"
-msgstr "Nubian Languages"
+msgstr "Nubijiské jazyky"
 
 #. language code: nwc
 #: zypp/LanguageCode.cc:817
@@ -3442,22 +3442,22 @@ msgstr "Classical Newari"
 #. language code: nya ny
 #: zypp/LanguageCode.cc:819
 msgid "Chichewa"
-msgstr "Chichewa"
+msgstr "Ňandža"
 
 #. language code: nym
 #: zypp/LanguageCode.cc:821
 msgid "Nyamwezi"
-msgstr "Nyamwezi"
+msgstr "Ňamwezi"
 
 #. language code: nyn
 #: zypp/LanguageCode.cc:823
 msgid "Nyankole"
-msgstr "Nyankole"
+msgstr "Ňankole"
 
 #. language code: nyo
 #: zypp/LanguageCode.cc:825
 msgid "Nyoro"
-msgstr "Nyoro"
+msgstr "Ňoro"
 
 #. language code: nzi
 #: zypp/LanguageCode.cc:827
@@ -3472,7 +3472,7 @@ msgstr "Occitan (post 1500)"
 #. language code: oji oj
 #: zypp/LanguageCode.cc:831
 msgid "Ojibwa"
-msgstr "Ojibwa"
+msgstr "Odžibwa"
 
 #. language code: ori or
 #: zypp/LanguageCode.cc:833
@@ -3482,7 +3482,7 @@ msgstr "Oriya"
 #. language code: orm om
 #: zypp/LanguageCode.cc:835
 msgid "Oromo"
-msgstr "Oromo"
+msgstr "Oromčina"
 
 #. language code: osa
 #: zypp/LanguageCode.cc:837
@@ -3502,7 +3502,7 @@ msgstr "Turecký, Ottoman (1500-1928)"
 #. language code: oto
 #: zypp/LanguageCode.cc:843
 msgid "Otomian Languages"
-msgstr "Otomian Languages"
+msgstr "Oto-pameské jazyky"
 
 #. language code: paa
 #: zypp/LanguageCode.cc:845
@@ -3517,17 +3517,17 @@ msgstr "Pangasinan"
 #. language code: pal
 #: zypp/LanguageCode.cc:849
 msgid "Pahlavi"
-msgstr "Pahlavi"
+msgstr "Pahlaví"
 
 #. language code: pam
 #: zypp/LanguageCode.cc:851
 msgid "Pampanga"
-msgstr "Pampanga"
+msgstr "Pampangan"
 
 #. language code: pan pa
 #: zypp/LanguageCode.cc:853
 msgid "Panjabi"
-msgstr "Panjabi"
+msgstr "Pandžábčina"
 
 #. language code: pap
 #: zypp/LanguageCode.cc:855
@@ -3537,7 +3537,7 @@ msgstr "Papiamento"
 #. language code: pau
 #: zypp/LanguageCode.cc:857
 msgid "Palauan"
-msgstr "Palauan"
+msgstr "Palaučina"
 
 #. language code: peo
 #: zypp/LanguageCode.cc:859
@@ -3557,12 +3557,12 @@ msgstr "Filipíny (ostatné)"
 #. language code: phn
 #: zypp/LanguageCode.cc:867
 msgid "Phoenician"
-msgstr "Phoenician"
+msgstr "Péničtina"
 
 #. language code: pli pi
 #: zypp/LanguageCode.cc:869
 msgid "Pali"
-msgstr "Pali"
+msgstr "Pálí"
 
 #. language code: pol pl
 #: zypp/LanguageCode.cc:871
@@ -3572,7 +3572,7 @@ msgstr "Poľský"
 #. language code: pon
 #: zypp/LanguageCode.cc:873
 msgid "Pohnpeian"
-msgstr "Pohnpeian"
+msgstr "Pohnpeičina"
 
 #. language code: por pt
 #: zypp/LanguageCode.cc:875
@@ -3582,7 +3582,7 @@ msgstr "Portugalský"
 #. language code: pra
 #: zypp/LanguageCode.cc:877
 msgid "Prakrit Languages"
-msgstr "Prakrit Languages"
+msgstr "Prakritské jazyky"
 
 #. language code: pro
 #: zypp/LanguageCode.cc:879
@@ -3597,7 +3597,7 @@ msgstr "Pushto"
 #. language code: que qu
 #: zypp/LanguageCode.cc:883
 msgid "Quechua"
-msgstr "Quechua"
+msgstr "Kečuánčina"
 
 #. language code: raj
 #: zypp/LanguageCode.cc:885
@@ -3607,12 +3607,12 @@ msgstr "Radžastanský"
 #. language code: rap
 #: zypp/LanguageCode.cc:887
 msgid "Rapanui"
-msgstr "Rapanui"
+msgstr "Rapanujčina"
 
 #. language code: rar
 #: zypp/LanguageCode.cc:889
 msgid "Rarotongan"
-msgstr "Rarotongan"
+msgstr "Rarotongčina"
 
 #. language code: roa
 #: zypp/LanguageCode.cc:891
@@ -3622,12 +3622,12 @@ msgstr "Romance (ostatné)"
 #. language code: roh rm
 #: zypp/LanguageCode.cc:893
 msgid "Raeto-Romance"
-msgstr "Raeto-Romance"
+msgstr "Rétorománčina"
 
 #. language code: rom
 #: zypp/LanguageCode.cc:895
 msgid "Romany"
-msgstr "Romany"
+msgstr "Rómčina"
 
 #. language code: rum ron ro
 #: zypp/LanguageCode.cc:897 zypp/LanguageCode.cc:899
@@ -3667,12 +3667,12 @@ msgstr "Juhoamerický Indiánsky (ostatné)"
 #. language code: sal
 #: zypp/LanguageCode.cc:913
 msgid "Salishan Languages"
-msgstr "Salishan Languages"
+msgstr "Sališské jazyky"
 
 #. language code: sam
 #: zypp/LanguageCode.cc:915
 msgid "Samaritan Aramaic"
-msgstr "Samaritan Aramaic"
+msgstr "Samaritánska aramejčina"
 
 #. language code: san sa
 #: zypp/LanguageCode.cc:917
@@ -3682,7 +3682,7 @@ msgstr "Sanskrt"
 #. language code: sas
 #: zypp/LanguageCode.cc:919
 msgid "Sasak"
-msgstr "Sasak"
+msgstr "Sasačtina"
 
 #. language code: sat
 #: zypp/LanguageCode.cc:921
@@ -3712,7 +3712,7 @@ msgstr "Chorvátsky"
 #. language code: sel
 #: zypp/LanguageCode.cc:935
 msgid "Selkup"
-msgstr "Selkup"
+msgstr "Selkupčina"
 
 #. language code: sem
 #: zypp/LanguageCode.cc:937
@@ -3727,12 +3727,12 @@ msgstr "Írsky starý (do r. 900)"
 #. language code: sgn
 #: zypp/LanguageCode.cc:941
 msgid "Sign Languages"
-msgstr "Sign Languages"
+msgstr "Znakové jazyky"
 
 #. language code: shn
 #: zypp/LanguageCode.cc:943
 msgid "Shan"
-msgstr "Shan"
+msgstr "Šančina"
 
 #. language code: sid
 #: zypp/LanguageCode.cc:945
@@ -3747,7 +3747,7 @@ msgstr "Sinhala"
 #. language code: sio
 #: zypp/LanguageCode.cc:949
 msgid "Siouan Languages"
-msgstr "Siouan Languages"
+msgstr "Siouské jazyky"
 
 #. language code: sit
 #: zypp/LanguageCode.cc:951
