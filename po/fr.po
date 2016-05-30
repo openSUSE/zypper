@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
 "PO-Revision-Date: 2016-05-30 19:17+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -2819,7 +2819,7 @@ msgstr "Mises à jour de paquets"
 
 #: src/update.cc:533
 msgid "Patches"
-msgstr "Patchs"
+msgstr "Correctifs"
 
 # TLABEL security_2002_08_07_0216__32
 #: src/update.cc:535
@@ -2851,7 +2851,7 @@ msgstr "Problème"
 
 #: src/update.cc:684
 msgid "No."
-msgstr "Non."
+msgstr "N°"
 
 #: src/update.cc:684
 msgid "Patch"
