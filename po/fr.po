@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
 "PO-Revision-Date: 2016-05-30 18:52+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -6495,7 +6495,7 @@ msgstr "Impossible de deviner une valeur pour <platform>."
 
 #: src/utils/misc.cc:298
 msgid "Please use obs://<project>/<platform>"
-msgstr "Veuillez utiliser obs://<projet>/<plate-forme>."
+msgstr "Veuillez utiliser obs://<project>/<platform>"
 
 # TLABEL linuxrc_2002_03_29_0036__85
 #: src/utils/misc.cc:299 src/utils/misc.cc:336
