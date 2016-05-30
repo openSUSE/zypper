@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-30 19:17+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-30 19:24+0000\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -1925,7 +1925,7 @@ msgstr "Veuillez consulter le message d'erreur ci-dessus pour une indication."
 #: src/repos.cc:308
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
-msgstr "Aucun URI définie pour '%s'."
+msgstr "Aucune URI définie pour '%s'."
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: src/repos.cc:313
@@ -1934,7 +1934,7 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
-"Veuillez ajouter une ou plusieurs URI (baseurl=URI)  à %s pour le dépôt '%s'."
+"Veuillez ajouter une ou plusieurs URI (baseurl=URI) à %s pour le dépôt '%s'."
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
