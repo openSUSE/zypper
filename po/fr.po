@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-30 18:53+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-05-30 18:58+0000\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5926,17 +5926,16 @@ msgstr "Paquets installés :"
 
 #: src/source-download.cc:288
 msgid "Required source packages:"
-msgstr "Paquets sources obligatoires :"
+msgstr "Paquets sources requis :"
 
 #: src/source-download.cc:297
 msgid "Required source packages available in download directory:"
 msgstr ""
-"Paquets sources obligatoires disponibles dans le répertoire de "
-"téléchargement :"
+"Paquets sources requis disponibles dans le répertoire de téléchargement :"
 
 #: src/source-download.cc:301
 msgid "Required source packages to be downloaded:"
-msgstr "Paquets sources obligatoires à télécharger :"
+msgstr "Paquets sources requis à télécharger :"
 
 #: src/source-download.cc:305
 msgid "Superfluous source packages in download directory:"
@@ -5955,7 +5954,7 @@ msgstr "Paquet installé"
 msgid "Use '--verbose' option for a full list of required source packages."
 msgstr ""
 "Utiliser l'option '--verbose' pour obtenir une liste complète des paquets "
-"sources obligatoires."
+"sources requis."
 
 #: src/source-download.cc:379
 msgid "Deleting superfluous source packages"
@@ -5972,7 +5971,7 @@ msgstr "Aucun paquet source superflu à supprimer."
 
 #: src/source-download.cc:411
 msgid "Downloading required source packages..."
-msgstr "Téléchargement des paquets sources obligatoires..."
+msgstr "Téléchargement des paquets sources requis..."
 
 #: src/source-download.cc:430
 #, c-format, boost-format
