@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-05-30 18:52+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"PO-Revision-Date: 2016-05-30 18:53+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -6318,7 +6318,7 @@ msgstr ""
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
-msgstr "Impossible d'initialiser l'analyseur de fichier de configuration."
+msgstr "Impossible d'initialiser l'analyseur de fichiers de configuration."
 
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
