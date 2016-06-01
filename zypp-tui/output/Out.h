@@ -483,6 +483,26 @@ public:
 
   Info info() { return Info( *this ); }
 
+
+  /** Info message, 2 strings L/R-adjusted. */
+  void infoLR( const std::string & lmsg, const std::string & rmsg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
+  {
+    TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
+    outstr.lhs << lmsg;
+    outstr.rhs << ' ' << rmsg;
+    infoLine( outstr, verbosity, mask );
+  }
+
+  /** Info message with R-adjusted "(hint)". */
+  void infoLRHint( const std::string & lmsg, const std::string & hint, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
+  {
+    TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
+    outstr.lhs << lmsg;
+    outstr.rhs << " (" << hint << ')';
+    infoLine( outstr, verbosity, mask );
+  }
+
+
   /**
    * Show a warning.
    *
