@@ -17,6 +17,17 @@
 #include "SolverRequester.h"
 
 /////////////////////////////////////////////////////////////////////////
+namespace
+{
+  inline std::string pIdent( const PoolItem & pi_r )
+  {
+    static str::Format _fmter( "%1%-%2%" );
+    return _fmter % pi_r.name() % pi_r.edition();
+  }
+} // namespace
+/////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////
 // SolverRequester::Feedback
 /////////////////////////////////////////////////////////////////////////
 
@@ -154,50 +165,45 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
 
     case PATCH_INTERACTIVE_SKIPPED:
     {
-      std::ostringstream pname;
-      pname << _objsel->name() << "-" << _objsel->edition();
-      return str::form(_("Patch '%s' is interactive, skipping."), pname.str().c_str() );
+      const std::string & pname( pIdent( _objsel ) );
+      return str::form(_("Patch '%s' is interactive, skipping."), pname.c_str() );
     }
 
     case PATCH_NOT_NEEDED:
     {
-      std::ostringstream pname;
-      pname << _objsel->name() << "-" << _objsel->edition();
-      return str::form(_("Patch '%s' is not needed."), pname.str().c_str() );
+      const std::string & pname( pIdent( _objsel ) );
+      return str::form(_("Patch '%s' is not needed."), pname.c_str() );
+    }
     }
 
     case PATCH_UNWANTED:
     {
-      std::ostringstream pname;
-      pname << _objsel->name() << "-" << _objsel->edition();
+      const std::string & pname( pIdent( _objsel ) );
       std::string cmd1 = "zypper in --force patch:" + _objsel->name();
       std::string cmd2 = "zypper rl patch:" + _objsel->name();
       return str::form(_("Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."),
-		       pname.str().c_str(), cmd1.c_str(), cmd2.c_str() );
+		       pname.c_str(), cmd1.c_str(), cmd2.c_str() );
     }
 
     case PATCH_WRONG_CAT:
     {
-      std::ostringstream pname;
-      pname << _objsel->name() << "-" << _objsel->edition();
+      const std::string & pname( pIdent( _objsel ) );
       return str::form(_("Patch '%s' is not in the specified category."),
-		       pname.str().c_str() );
+		       pname.c_str() );
     }
 
     case PATCH_WRONG_SEV:
     {
-      std::ostringstream pname;
-      pname << _objsel->name() << "-" << _objsel->edition();
+      const std::string & pname( pIdent( _objsel ) );
       return str::form(_("Patch '%s' has not the specified severity."),
-		       pname.str().c_str() );
+		       pname.c_str() );
     }
 
     case PATCH_TOO_NEW:
     {
-      std::ostringstream pname;
-      pname << _objsel->name() << "-" << _objsel->edition();
+      const std::string & pname( pIdent( _objsel ) );
       return str::form(_("Patch '%s' was issued after the specified date."),
-		       pname.str().c_str() );
+		       pname.c_str() );
     }
 
     case SET_TO_INSTALL:
