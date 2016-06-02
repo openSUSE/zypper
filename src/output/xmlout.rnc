@@ -104,7 +104,7 @@ patch-update =
   element update {
     update-commons,
     attribute kind { "patch" },
-    attribute status { "needed" | "unwanted" | "applied" | "not-needed" | "undetermined" }?, #
+    attribute status { "needed" | "optional" | "unwanted" | "applied" | "not-needed" | "undetermined" }?, #
     attribute category { xsd:string }?,   # patch category (security, recommended, ...)
     attribute pkgmanager { xsd:boolean }, # affect package management?
     attribute restart { xsd:boolean },    # needs restart of the machine?

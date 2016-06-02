@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 05/18/2016
+.\"      Date: 06/02/2016
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "05/18/2016" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "06/02/2016" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -88,9 +88,13 @@ An ordinary RPM package\&.
 \fBpatch\fR
 .RS 4
 A released patch conflicts with the affected/vulnerable versions of a collection of packages\&. As long as any of these affected/vulnerable versions are installed, the conflict triggers and the patch is classified as
-\fBneeded\fR, or as
+\fBneeded\fR,
+\fBoptional\fR
+or as
 \fBunwanted\fR
-if the patch is locked\&. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix\&. When updating the packages zypper always aims for the latest available version\&. Resolved patches are classified as either
+if the patch is locked\&.
+
+Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix\&. When updating the packages zypper always aims for the latest available version\&. Resolved patches are classified as either
 \fBapplied\fR
 or
 \fBnot needed\fR, depending on whether they refer to actually installed packages\&.
@@ -116,6 +120,19 @@ are
 \fBlow\fR
 or
 \fBunspecified\fR\&.
+
+Note that the
+\fBpatch\fR
+command does
+\fInot apply optional patches\fR
+(category
+\fBoptional\fR
+or
+\fBfeature\fR) by default\&. If you actually want to consider all optional patches as being needed, say
+\fBpatch \-\-with\-optional\fR\&. Specific patches can be applied using the
+\fBinstall\fR
+command (e\&.g\&.
+\fBzypper install patch:openSUSE\-2014\-7\fR)\&.
 .RE
 .PP
 \fBpattern\fR
@@ -384,9 +401,7 @@ If
 \fIpatch\fR
 is specified, zypper will install and/or remove packages to satisfy specified patch\&. This is a way to ensure that specific bug fix is installed\&. Use
 \fBzypper list\-patches\fR
-to look for available
-\fIneeded\fR
-patches\&.
+to look for applicable patches\&.
 
 If
 \fIproduct\fR
@@ -892,7 +907,7 @@ This command also accepts the \fBDownload\-and\-install mode options\fR describe
 .PP
 \fBlist\-patches\fR (\fBlp\fR) [\fIoptions\fR]
 .RS 4
-List all available needed patches\&.
+List all applicable patches\&.
 
 This command is similar to
 \fBzypper list\-updates \-t patch\fR\&.
@@ -905,12 +920,12 @@ instead of a space\&.
 .PP
 \fB\-b\fR, \fB\-\-bugzilla\fR[\fB=\fR\fI#\fR[,\fI\&...\fR]]
 .RS 4
-List available needed patches for all Bugzilla issues, or issues whose number matches the given string\&.
+List applicable patches for all Bugzilla issues, or issues whose number matches the given string\&.
 .RE
 .PP
 \fB\-\-cve\fR[\fB=\fR\fI#\fR[,\fI\&...\fR]]
 .RS 4
-List available needed patches for all CVE issues, or issues whose number matches the given string\&.
+List applicable patches for all CVE issues, or issues whose number matches the given string\&.
 .RE
 .PP
 \fB\-\-date\fR \fIYYYY\-MM\-DD\fR[,\fI\&...\fR]
@@ -946,9 +961,14 @@ to get information about issues the patch fixes\&.
 .PP
 \fB\-a\fR, *\-\-all
 .RS 4
-By default, only patches that are relevant and needed on your system are listed\&. This option causes all available released patches to be listed\&. This option can be combined with all the rest of the
+By default, only patches that are applicable on your system are listed\&. This option causes all available released patches to be listed\&. This option can be combined with all the rest of the
 \fBlist\-updates\fR
 command options\&.
+.RE
+.PP
+\fB\-\-with\fR[\fBout\fR]\fB\-optional\fR
+.RS 4
+Whether applicable optional patches should be treated as needed or be excluded\&. The default is to exclude optional patches\&.
 .RE
 .PP
 \fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
@@ -974,6 +994,11 @@ returned by this command\&.
 Check only for patches which affect the package management itself\&.
 .RE
 .PP
+\fB\-\-with\fR[\fBout\fR]\fB\-optional\fR
+.RS 4
+Whether applicable optional patches should be treated as needed or be excluded\&. The default is to exclude optional patches\&.
+.RE
+.PP
 \fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
 .RS 4
 Check for patches only in the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
@@ -996,18 +1021,23 @@ This command is similar to
 Install only patches which affect the package management itself and exit\&.
 .RE
 .PP
+\fB\-\-with\fR[\fBout\fR]\fB\-optional\fR
+.RS 4
+Whether applicable optional patches should be treated as needed or be excluded\&. The default is to exclude optional patches\&.
+.RE
+.PP
 \fB\-b\fR, \fB\-\-bugzilla\fR \fI#\fR[,\fI\&...\fR]
 .RS 4
 Install patch fixing a Bugzilla issue specified by number\&. Use
 \fBlist\-patches \-\-bugzilla\fR
-command to get a list of available needed patches for specific issues\&.
+command to get a list of applicable patches for specific issues\&.
 .RE
 .PP
 \fB\-\-cve\fR \fI#\fR[,\fI\&...\fR]
 .RS 4
 Install patch fixing a MITRE\(cqs CVE issue specified by number\&. Use
 \fBlist\-patches \-\-cve\fR
-command to get a list of available needed patches for specific issues\&.
+command to get a list of applicable patches for specific issues\&.
 .RE
 .PP
 \fB\-\-date\fR \fIYYYY\-MM\-DD\fR[,\fI\&...\fR]
@@ -1489,8 +1519,8 @@ Show packages which are unneeded\&.
 .PP
 \fBpatches\fR (\fBpch\fR) [\fIoptions\fR] [\fIrepository\fR]\&...
 .RS 4
-List all available patches from specified repositories, including those not needed\&. Similar to
-\fBzypper search \-s \-t patch\fR\&.
+List all available patches from specified repositories, including those not needed\&. Short for
+\fBzypper lp \-a\fR\&.
 .PP
 \fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|name\*(Aq|\fI#\fR|\fIURI\fR
 .RS 4

@@ -133,6 +133,7 @@ public:
       , force_by_name( false )
       , best_effort( false )
       , skip_interactive( false )
+      , skip_optional_patches( false )
       , allow_vendor_change( ZConfig::instance().solver_allowVendorChange() )
     {}
 
@@ -176,6 +177,11 @@ public:
      * Whether to skip installs/updates that need user interaction.
      */
     bool skip_interactive;
+
+    /**
+     * Whether to skip optional patches (might be requested by PATCH commands).
+     */
+    bool skip_optional_patches;
 
     /** Patch specific CLI option filter */
     CliMatchPatch cliMatchPatch;
@@ -253,6 +259,9 @@ public:
        */
       PATCH_INTERACTIVE_SKIPPED,
 
+      /** Patch is optional and skip_optional_patches is requested. */
+      PATCH_OPTIONAL,
+
       /**
        * Patch was requested (install/update command), but it's locked
        * (set to ignore). Its installation can be forced with --force.
@@ -307,8 +316,10 @@ public:
     const PoolItem selectedObj() const
     { return _objsel; }
 
-    std::string asUserString( const SolverRequester::Options & opts ) const;
     void print( Out & out, const SolverRequester::Options & opts ) const;
+
+  private:
+    std::string asUserString( const SolverRequester::Options & opts ) const;
 
   private:
     Id _id;

@@ -76,9 +76,13 @@ Zypper works with several types of resource objects, called 'resolvables'. A res
 *package*::
 	An ordinary RPM package.
 *patch*::
-	A released patch conflicts with the affected/vulnerable versions of a collection of packages. As long as any of these affected/vulnerable versions are installed, the conflict triggers and the patch is classified as *needed*, or as *unwanted* if the patch is locked. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix. When updating the packages zypper always aims for the latest available version. Resolved patches are classified as either *applied* or *not needed*, depending on whether they refer to actually installed packages.
+	A released patch conflicts with the affected/vulnerable versions of a collection of packages. As long as any of these affected/vulnerable versions are installed, the conflict triggers and the patch is classified as *needed*, *optional* or as *unwanted* if the patch is locked.
+	+
+	Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix. When updating the packages zypper always aims for the latest available version. Resolved patches are classified as either *applied* or *not needed*, depending on whether they refer to actually installed packages.
 	+
 	Depending on the kind of defect, patches are classified by 'category' and 'severity'. Commonly used values for 'category' are *security*, *recommended*, *optional*, *feature*, *document* or *yast*. Commonly used values for 'severity' are *critical*, *important*, *moderate*, *low* or *unspecified*.
+	+
+	Note that the *patch* command does 'not apply optional patches' (category *optional* or *feature*) by default. If you actually want to consider all optional patches as being needed, say *patch --with-optional*. Specific patches can be applied using the *install* command (e.g. *zypper install patch:openSUSE-2014-7*).
 *pattern*::
 	A group of packages required or recommended to install some functionality.
 *product*::
@@ -212,7 +216,7 @@ Package Management Commands
 	*-t*, *--type* 'type'::
 		Type of package to install (default: package). See section *Package Types* for list of available package types. Use '*zypper se -t* type' ['name'] to look for available items of this type and '*zypper info -t* type name' to display more detailed information about the item.
 		+
-		If 'patch' is specified, zypper will install and/or remove packages to satisfy specified patch. This is a way to ensure that specific bug fix is installed. Use *zypper list-patches* to look for available 'needed' patches.
+		If 'patch' is specified, zypper will install and/or remove packages to satisfy specified patch. This is a way to ensure that specific bug fix is installed. Use *zypper list-patches* to look for applicable patches.
 		+
 		If 'product' or 'pattern' are specified, zypper ensures that all required (and optionally recommended) packages are installed.
 
@@ -500,7 +504,7 @@ Update Management Commands
 --
 
 *list-patches* (*lp*) ['options']::
-	List all available needed patches.
+	List all applicable patches.
 	+
 	This command is similar to *zypper list-updates -t patch*.
 	+
@@ -508,10 +512,10 @@ Update Management Commands
 +
 --
 	*-b*, *--bugzilla*[*=*'#'[,'...']]::
-		List available needed patches for all Bugzilla issues, or issues whose number matches the given string.
+		List applicable patches for all Bugzilla issues, or issues whose number matches the given string.
 
 	*--cve*[*=*'#'[,'...']]::
-		List available needed patches for all CVE issues, or issues whose number matches the given string.
+		List applicable patches for all CVE issues, or issues whose number matches the given string.
 
 	*--date* 'YYYY-MM-DD'[,'...']::
 		List only patches issued up to, but not including, the specified date.
@@ -526,7 +530,10 @@ Update Management Commands
 		Look for issues whose number, summary, or description matches the specified 'string'. Issues found by number are displayed separately from those found by descriptions. In the latter case, use '*zypper patch-info* patchname' to get information about issues the patch fixes.
 
 	*-a*, *--all::
-		By default, only patches that are relevant and needed on your system are listed. This option causes all available released patches to be listed. This option can be combined with all the rest of the *list-updates* command options.
+		By default, only patches that are applicable on your system are listed. This option causes all available released patches to be listed. This option can be combined with all the rest of the *list-updates* command options.
+
+	*--with*[*out*]*-optional*::
+		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
 
 	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
@@ -540,6 +547,9 @@ Update Management Commands
 --
 	*--updatestack-only*::
 		Check only for patches which affect the package management itself.
+
+	*--with*[*out*]*-optional*::
+		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
 
 	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
 		Check for patches only in the repository specified by the alias, name, number, or URI. This option can be used multiple times.
@@ -556,11 +566,14 @@ Update Management Commands
 	*--updatestack-only*::
 		Install only patches which affect the package management itself and exit.
 
+	*--with*[*out*]*-optional*::
+		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
+
 	*-b*, *--bugzilla* '#'[,'...']::
-		Install patch fixing a Bugzilla issue specified by number. Use *list-patches --bugzilla* command to get a list of available needed patches for specific issues.
+		Install patch fixing a Bugzilla issue specified by number. Use *list-patches --bugzilla* command to get a list of applicable patches for specific issues.
 
 	*--cve* '#'[,'...']::
-		Install patch fixing a MITRE's CVE issue specified by number. Use *list-patches --cve* command to get a list of available needed patches for specific issues.
+		Install patch fixing a MITRE's CVE issue specified by number. Use *list-patches --cve* command to get a list of applicable patches for specific issues.
 
 	*--date* 'YYYY-MM-DD'[,'...']::
 		Install only patches issued up to, but not including, the specified date.
@@ -793,7 +806,7 @@ Query Commands
 --
 
 *patches* (*pch*) ['options'] ['repository']...::
-	List all available patches from specified repositories, including those not needed. Similar to *zypper search -s -t patch*.
+	List all available patches from specified repositories, including those not needed. Short for *zypper lp -a*.
 +
 --
 	*-r*, *--repo* 'alias'|name'|'#'|'URI'::

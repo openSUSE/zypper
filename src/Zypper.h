@@ -70,6 +70,8 @@ struct GlobalOptions
   , terse( false )
   , changedRoot( false )
   , ignore_unknown( false )
+  , exclude_optional_patches_default( true )
+  , exclude_optional_patches( exclude_optional_patches_default )
   {}
 
   //  std::list<Url> additional_sources;
@@ -104,6 +106,8 @@ struct GlobalOptions
   bool terse;
   bool changedRoot;
   bool ignore_unknown;
+  const int	exclude_optional_patches_default;	// global default
+  int		exclude_optional_patches;		// effective value (--with[out]-optional)
 };
 
 /**
@@ -114,9 +118,7 @@ struct GlobalOptions
 struct RuntimeData
 {
   RuntimeData()
-  : patches_count( 0 )
-  , security_patches_count( 0 )
-  , show_media_progress_hack( false )
+  : show_media_progress_hack( false )
   , force_resolution( indeterminate )
   , solve_before_commit( true )
   , commit_pkgs_total( 0 )
@@ -132,8 +134,6 @@ struct RuntimeData
   std::list<RepoInfo> repos;
   std::list<RepoInfo> additional_repos;
   std::set<std::string> additional_content_repos;
-  int patches_count;
-  int security_patches_count;
   /**
    * Used by requestMedia callback
    * \todo but now it uses label, remove this variable?

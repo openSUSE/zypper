@@ -174,6 +174,14 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
       const std::string & pname( pIdent( _objsel ) );
       return str::form(_("Patch '%s' is not needed."), pname.c_str() );
     }
+
+    case PATCH_OPTIONAL:
+    {
+      const std::string & pname( pIdent( _objsel ) );
+      return( str::Format(_("Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all optional patches."))
+	      % pname
+	      % ( "zypper in " + pname )
+	      % "--with-optional" ).str();
     }
 
     case PATCH_UNWANTED:
@@ -269,6 +277,7 @@ void SolverRequester::Feedback::print( Out & out, const SolverRequester::Options
     case NOT_IN_REPOS:
     case SELECTED_IS_OLDER:
     case PATCH_NOT_NEEDED:
+    case PATCH_OPTIONAL:
     case PATCH_UNWANTED:
     case PATCH_WRONG_CAT:
     case PATCH_WRONG_SEV:

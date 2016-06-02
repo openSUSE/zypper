@@ -4,6 +4,7 @@
 #include <zypp/base/LogTools.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/Algorithm.h>
+#include <zypp/base/Iterable.h>
 #include <zypp/PoolQuery.h>
 
 #include <zypp/Patch.h>
@@ -90,15 +91,33 @@ private:
 };
 
 
-std::string patchHighlight( std::string && val_r )
+std::string patchHighlightCategory( const Patch & patch_r )
 {
-  static std::vector<std::string> _high = { asString(Patch::CAT_SECURITY), asString(Patch::SEV_CRITICAL) };
-  for ( const std::string & high : _high )
+  std::string ret;
+  switch ( patch_r.categoryEnum() )	// switch by enum as it matches multiple strings (optional==feature==enhancement)
   {
-    if ( high == val_r )
-      return ColorString( std::move(val_r), ColorContext::HIGHLIGHT ).str();
+    case Patch::CAT_SECURITY:
+      ret = ColorString( patch_r.category(), ColorContext::HIGHLIGHT ).str();
+      break;
+    case Patch::CAT_OPTIONAL:
+      ret = ColorString( patch_r.category(), ColorContext::LOWLIGHT ).str();
+      break;
+      // else: fallthrough
+    default:
+      ret = patch_r.category();
+      break;
   }
-  return std::move(val_r);
+  return ret;
+}
+
+std::string patchHighlightSeverity( const Patch & patch_r )
+{
+  std::string ret;
+  if ( patch_r.isSeverity( Patch::SEV_CRITICAL ) )
+    ret = ColorString( patch_r.severity(), ColorContext::HIGHLIGHT ).str();
+  else
+    ret = patch_r.severity();
+  return ret;
 }
 
 
@@ -123,8 +142,17 @@ std::string interactiveFlags( const Patch & patch_r )
 ///////////////////////////////////////////////////////////////////
 namespace
 {
-  inline bool patchIsApplicable( const PoolItem & pi )	///< Default content for all patch lists: needed and not locked
-  { return( pi.isBroken() && ! pi.isUnwanted() ); }
+  inline bool patchIsApplicable( const PoolItem & pi )	///< Default content for all patch lists: applicable (needed, optional, unwanted)
+  { return pi.isBroken(); }
+
+  inline bool patchIsNeededRestartSuggested( const PoolItem & pi )	///< Needed update stack pack; installed first!
+  {
+    return pi.isBroken()
+    && ! pi.isUnwanted()
+    && ! ( Zypper::instance()->globalOpts().exclude_optional_patches && pi->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+    && pi->asKind<Patch>()->restartSuggested();
+  }
+
 } //namespace
 ///////////////////////////////////////////////////////////////////
 
@@ -146,49 +174,293 @@ namespace
 // update summary must correspond to list-updates and patch-check
 // ----------------------------------------------------------------------------
 
-void patch_check ()
+///////////////////////////////////////////////////////////////////
+namespace
 {
-  Out & out = Zypper::instance()->out();
-  RuntimeData & gData = Zypper::instance()->runtimeData();
-  DBG << "patch check" << endl;
-  gData.patches_count = gData.security_patches_count = 0;
-  unsigned lockedPatches = 0;
-  bool updatestackOnly = Zypper::instance()->cOpts().count("updatestack-only");
-
-  for_( it, God->pool().byKindBegin(ResKind::patch), God->pool().byKindEnd(ResKind::patch) )
+  /// Count patches per category and class ()
+  ///
+  ///  Category    | Updatestack | Patches | locked
+  ///  --------------------------------------------
+  ///  security    | N S         | N S     | L
+  ///  recommended | N           | N       | L
+  ///  other       | N           | N       | L
+  ///  optional    | O(N)        | O(N)    | L
+  ///
+  ///  N = needed
+  ///  S = needed security
+  ///  O = optional (if excludeOptionalPatches, otherwise N)
+  ///  L = locked
+  ///
+  ///  N + O + L == collected
+  ///
+  ///
+  ///
+  struct PatchCheckStats
   {
-    const PoolItem & pi( *it );
-    if ( pi.isBroken() )
+
+    explicit PatchCheckStats( bool excludeOptionalPatches_r )
+    : _excludeOptionalPatches( excludeOptionalPatches_r )
+    {}
+
+    /** Optionally track total amount of applicable patches */
+    bool visit( const PoolItem & pi_r )
+    { bool ret = pi_r.isBroken(); if ( ret ) ++_visited; return ret; }
+
+    /** Optionally track total amount of applicable patches */
+    void visit()
+    { ++_visited; }
+
+    /** Contributing to the stats */
+    void collect( const PoolItem & pi_r )
     {
-      if ( pi.isUnwanted() )
-      { ++lockedPatches; }
+      Patch::constPtr patch( pi_r->asKind<Patch>() );
+      if ( patch )
+      { collect( pi_r, patch ); }
+    }
+
+    unsigned visited() const	{ return _visited; }
+    unsigned collected() const	{ return _collected; }
+
+    unsigned needed() const	{ return _needed; }
+    unsigned security() const	{ return _security; }
+    unsigned optional() const	{ return _optional; }
+    unsigned locked() const	{ return _locked; }
+
+  public:
+    void render( Out & out, bool withDetails_r ) const;
+    void renderDetails( Out & out ) const;
+
+  private:
+    typedef ZeroInit<unsigned> Counter;
+
+    enum Level
+    {
+      kUSTACK,
+      kNEEDED,
+      kLOCKED,
+      kTOTAL,	// LAST ENTRY!
+    };
+
+    struct Stats : public std::vector<Counter>
+    {
+      Stats() : std::vector<Counter>( kTOTAL ) {}
+      std::set<std::string> _aka;
+    };
+
+    struct CategorySort
+    {
+      bool operator()( const Patch::Category & lhs, const Patch::Category & rhs )
+      {
+	if ( lhs == rhs )
+	  return false;
+
+	// top
+	if ( lhs == Patch::CAT_SECURITY )
+	  return true;
+	if ( rhs == Patch::CAT_SECURITY )
+	  return false;
+
+	if ( lhs == Patch::CAT_RECOMMENDED )
+	  return true;
+	if ( rhs == Patch::CAT_RECOMMENDED )
+	  return false;
+
+	// bottom
+	if ( lhs == Patch::CAT_OPTIONAL )
+	  return false;
+	if ( rhs == Patch::CAT_OPTIONAL )
+	  return true;
+
+	// the remaining ones in between
+	return lhs > rhs;
+      }
+    };
+
+    typedef std::map<Patch::Category, Stats, CategorySort> StatsMap;
+
+  private:
+    void collect( const PoolItem & pi_r, const Patch::constPtr & patch_r )
+    {
+      ++_collected;
+      Level level = pi_r.isUnwanted() ? PatchCheckStats::kLOCKED
+				      : ( patch_r->restartSuggested() ? PatchCheckStats::kUSTACK
+								      : PatchCheckStats::kNEEDED );
+
+      Patch::Category cat = patch_r->categoryEnum();
+      if ( level == kLOCKED )
+	++_locked;
+      else if ( _excludeOptionalPatches && cat == Patch::CAT_OPTIONAL )
+	++_optional;
       else
       {
-	Patch::constPtr patch( pi->asKind<Patch>() );
-	if ( !updatestackOnly || patch->restartSuggested() )
-	{
-	  ++gData.patches_count;
-	  if ( patch->categoryEnum() == Patch::CAT_SECURITY )
-	    ++gData.security_patches_count;
-	}
+	++_needed;
+	if ( cat == Patch::CAT_SECURITY )
+	  ++_security;
       }
+
+      // detailed stats:
+      Stats & detail( _stats[cat] );
+      ++detail[level];
+      const std::string & ctgry( patch_r->category() );	// on the fly remember aliases, e.g. 'feature' == 'optional'
+      if ( asString( cat ) != ctgry )
+	detail._aka.insert( ctgry );
+    }
+
+    std::string renderCounter( const Counter & counter_r ) const
+    { return counter_r ? asString(counter_r) : "-"; }
+
+  private:
+    bool	_excludeOptionalPatches;	/// if true, optional patches are counted separately
+    Counter	_visited;	///< if >_collected: "only _collected out of _visited have been considered"
+    Counter	_collected;	///< count contributed to the stats
+    Counter	_needed;
+    Counter	_security;
+    Counter	_optional;
+    Counter	_locked;
+    StatsMap	_stats;		///< counter table
+  };
+
+  void PatchCheckStats::render( Out & out, bool withDetails_r ) const
+  {
+    if ( visited() )
+    {
+      if ( visited() && visited() > collected() )
+	// translator: stats table header (plural number is %2%)
+	out.info( str::Format(PL_("Considering %1% out of %2% applicable patches:",
+				  "Considering %1% out of %2% applicable patches:", visited())) % collected() % visited() );
+	else
+	  // translator: stats table header
+	  out.info( str::Format(PL_("Found %1% applicable patch:", "Found %1% applicable patches:", collected())) % collected() );
+
+	if ( collected() )
+	{
+	  if ( withDetails_r )
+	    renderDetails( out );
+
+	  if ( locked() )
+	  {
+	    // translator: stats summary
+	    out.info( ColorString( str::Format(PL_("%d patch locked", "%d patches locked", locked())) % locked(),
+				   ColorContext::HIGHLIGHT ).str(),
+		      Out::QUIET );
+	  }
+
+	  if ( optional() )	// only if exclude_optional_patches
+	  {
+	    // translator: stats summary
+	    out.infoLRHint( ColorString( str::Format(PL_("%d patch optional", "%d patches optional", optional())) % optional(),
+					 ColorContext::LOWLIGHT ).str(),
+			    // translator: Hint displayed right adjusted; %1% is a CLI option
+			    // "42 patches optional                  (use --with-optional to include optional patches)"
+			    str::Format(_("use '%1%' to include optional patches")) % "--with-optional",
+			    Out::QUIET );
+	  }
+	}
+    }
+    // always:
+    {
+      std::ostringstream s;
+      // translator: stats summary
+      s << str::Format(PL_("%d patch needed", "%d patches needed", needed())) % needed()
+      << " ("
+      // translator: stats summary
+      <<  str::Format(PL_("%d security patch", "%d security patches", security())) % security()
+      << ")";
+      out.info( s.str(), Out::QUIET );
     }
   }
 
-  if ( lockedPatches )
+  void PatchCheckStats::renderDetails( Out & out ) const
   {
-    out.info( ColorString( str::Format(PL_("%d patch locked", "%d patches locked", lockedPatches )) % lockedPatches,
-			   ColorContext::HIGHLIGHT ).str(),
-	      Out::QUIET );
+    if ( out.typeNORMAL() )
+    {
+      ColorContext ctxtOptional = ( _excludeOptionalPatches ? ColorContext::LOWLIGHT : ColorContext::DEFAULT );
+      ColorContext ctxtLocked   = ColorContext::HIGHLIGHT;
+
+      bool haveUPD = false;
+      bool havePAT = false;
+      bool haveLCK = false;
+      bool haveAKA = false;
+      // 1st pass
+      for ( const auto & p : _stats )
+      {
+	const Stats & stats( p.second );
+	if ( !haveUPD && stats[kUSTACK] )	haveUPD = true;
+	if ( !havePAT && stats[kNEEDED])	havePAT = true;
+	if ( !haveLCK && stats[kLOCKED])	haveLCK = true;
+	if ( !haveAKA && !stats._aka.empty() )	haveAKA = true;
+      }
+
+      // 2nd pass
+      Table tbl;
+      {
+	TableHeader hdr;
+	// translator: Table column header.
+	hdr << _("Category");
+	// translator: Table column header.
+	if ( haveUPD )	hdr << _("Updatestack");
+	// translator: Table column header.
+	if ( havePAT )	hdr << _("Patches");
+	// translator: Table column header.
+	if ( haveLCK )	hdr << ColorString( ctxtLocked, _("Locked") );
+	// translator: Table column header
+	// Used if stats collect data for more than one category name.
+	// Category    | Updatestack | Patches | Locked | Included categories
+	// ------------+-------------+---------+--------+---------------------
+	//  optional   | ...                      ..... | enhancement, feature
+	if ( haveAKA )	hdr << _("Included categories");
+	tbl << std::move(hdr);
+      }
+
+      for ( const auto & p : _stats )
+      {
+	const Patch::Category & category( p.first );
+	const Stats & stats( p.second );
+
+	TableRow row( category == Patch::CAT_OPTIONAL ? ctxtOptional : ColorContext::DEFAULT );
+	row << category;
+	if ( haveUPD )	row << renderCounter(stats[kUSTACK]);
+	if ( havePAT )	row << renderCounter(stats[kNEEDED]);
+	if ( haveLCK )	row << ColorString( ctxtLocked, renderCounter(stats[kLOCKED]) );
+	if ( haveAKA )	row << ( stats._aka.empty() ? "" : str::join( stats._aka, ", " ) );
+	tbl << std::move(row);
+      }
+      cout << tbl;
+      out.gap();
+    }
   }
-  std::ostringstream s;
-  // translators: %d is the number of needed patches
-  s << str::Format(PL_("%d patch needed", "%d patches needed", gData.patches_count)) % gData.patches_count
-    << " ("
-    // translators: %d is the number of security patches
-    <<  str::Format(PL_("%d security patch", "%d security patches", gData.security_patches_count)) % gData.security_patches_count
-    << ")";
-  out.info( s.str(), Out::QUIET );
+} // namespace
+///////////////////////////////////////////////////////////////////
+
+void patch_check()
+{
+  Zypper & zypper( *Zypper::instance() );
+  Out & out( zypper.out() );
+  DBG << "patch check" << endl;
+
+  PatchCheckStats stats( zypper.globalOpts().exclude_optional_patches );
+  bool updatestackOnly = Zypper::instance()->cOpts().count("updatestack-only");
+  for_( it, God->pool().byKindBegin(ResKind::patch), God->pool().byKindEnd(ResKind::patch) )
+  {
+    const PoolItem & pi( *it );
+    if ( ! stats.visit( pi ) )	// count total applicable patches
+      continue;
+
+    // filter out by cli options
+    if ( updatestackOnly && !pi->asKind<Patch>()->restartSuggested() )
+      continue;
+
+    // remaining: collect stats
+    stats.collect( pi );
+  }
+
+  // render output
+  out.gap();
+  stats.render( out, /*withDetails*/true );
+
+  // compute exit code
+  if ( stats.needed() )
+  { zypper.setExitCode( stats.security() ? ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED : ZYPPER_EXIT_INF_UPDATE_NEEDED ); }
 }
 
 // ----------------------------------------------------------------------------
@@ -196,10 +468,16 @@ inline std::string i18nPatchStatusAsString( const PoolItem & pi_r )
 {
   switch ( pi_r.status().validate() )
   {
-    case ResStatus::BROKEN:		return pi_r.isUnwanted() ? ColorString( _("unwanted"), ColorContext::HIGHLIGHT ).str()
-								 : _("needed");	break;
-    case ResStatus::SATISFIED:		return _("applied");	break;
-    case ResStatus::NONRELEVANT:	return _("not needed");	break;
+    case ResStatus::BROKEN:
+      if ( pi_r.isUnwanted() )
+	// Translator: Patch status: needed, optional, unwanted, applied, not needed
+	return ColorString( _("unwanted"), ColorContext::HIGHLIGHT ).str();
+      if ( Zypper::instance()->globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+	return ColorString( _("optional"), ColorContext::LOWLIGHT ).str();
+      return _("needed");
+      break;
+    case ResStatus::SATISFIED:		return ColorString( _("applied"), ColorContext::POSITIVE ).str();	break;
+    case ResStatus::NONRELEVANT:	return ColorString( _("not needed"), ColorContext::POSITIVE ).str();	break;
 
     case ResStatus::UNDETERMINED:	// fall through
     default:
@@ -212,8 +490,13 @@ inline const char *const xml_patchStatusAsString( const PoolItem & pi_r )
 {
   switch ( pi_r.status().validate() )
   {
-    case ResStatus::BROKEN:		return pi_r.isUnwanted() ? "unwanted"
-								 : "needed";	break;
+    case ResStatus::BROKEN:
+      if ( pi_r.isUnwanted() )
+	return "unwanted";
+      if ( Zypper::instance()->globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+	return "optional";
+      return "needed";
+      break;
     case ResStatus::SATISFIED:		return "applied";	break;
     case ResStatus::NONRELEVANT:	return "not-needed";	break;
 
@@ -261,7 +544,7 @@ static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
 }
 
 
-// returns true if restartSuggested() patches are availble
+// returns true if NEEDED! restartSuggested() patches are available
 static bool xml_list_patches (Zypper & zypper)
 {
   const ResPool& pool = God->pool();
@@ -270,9 +553,7 @@ static bool xml_list_patches (Zypper & zypper)
   bool pkg_mgr_available = false;
   for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
   {
-    const PoolItem & pi( *it );
-
-    if ( patchIsApplicable( pi ) && pi->asKind<Patch>()->restartSuggested() )
+    if ( patchIsNeededRestartSuggested( *it ) )
     {
       pkg_mgr_available = true;
       break;
@@ -289,7 +570,7 @@ static bool xml_list_patches (Zypper & zypper)
       Patch::constPtr patch = pi->asKind<Patch>();
 
       // if updates stack patches are available, show only those
-      if ( all || !pkg_mgr_available || patch->restartSuggested() )
+      if ( all || !pkg_mgr_available || patchIsNeededRestartSuggested( pi ) )
       {
 	xml_print_patch( zypper, pi );
       }
@@ -315,7 +596,7 @@ static bool xml_list_patches (Zypper & zypper)
       {
 	const PoolItem & pi( *it );
 	Patch::constPtr patch = pi->asKind<Patch>();
-	if ( ! patch->restartSuggested() )
+	if ( ! patchIsNeededRestartSuggested( pi ) )
 	  xml_print_patch( zypper, pi );
       }
     }
@@ -368,13 +649,14 @@ static void xml_list_updates(const ResKindSet & kinds)
 
 // ----------------------------------------------------------------------------
 
+// returns true if NEEDED! restartSuggested() patches are available
 static bool list_patch_updates( Zypper & zypper )
 {
   Table tbl;
   if (!Zypper::instance()->globalOpts().no_abbrev)
     tbl.allowAbbrev(5);
 
-  Table pm_tbl; // only those that affect packagemanager (restartSuggested()), they have priority
+  Table pm_tbl; // only NEEDED! that affect packagemanager (restartSuggested()), they have priority
   if (!Zypper::instance()->globalOpts().no_abbrev)
     pm_tbl.allowAbbrev(5);
 
@@ -385,50 +667,57 @@ static bool list_patch_updates( Zypper & zypper )
   pm_tbl << th;
   unsigned cols = th.cols();
 
+  PatchCheckStats stats( zypper.globalOpts().exclude_optional_patches );
   CliMatchPatch cliMatchPatch( zypper );
   bool all = zypper.cOpts().count("all");
 
   const ResPool& pool = God->pool();
   for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
   {
-    Patch::constPtr patch = asKind<Patch>(*it);
+    const PoolItem & pi( *it );
+    Patch::constPtr patch = asKind<Patch>(pi);
 
-    // show only needed and wanted/unlocked (bnc #420606) patches unless --all
-    if ( all || patchIsApplicable( *it ) )
+    bool tostat = stats.visit( pi );	// count total applicable patches
+
+    if ( ! cliMatchPatch( patch ) )
+      continue;
+
+    if ( tostat )	// exclude cliMatchPatch filtered but include undisplayed ones
+      stats.collect( pi );
+
+    if ( all || patchIsApplicable( pi ) )
     {
-      if ( ! cliMatchPatch( patch ) )
-      {
-	DBG << patch->ident() << " skipped. (not matching CLI filter)" << endl;
-	continue;
-      }
       // table
       {
         TableRow tr (cols);
         tr << patch->repoInfo().asUserString();
         tr << patch->name ();
-        tr << patchHighlight(patch->category());
-        tr << patchHighlight(patch->severity());
+        tr << patchHighlightCategory(*patch);
+        tr << patchHighlightSeverity(*patch);
 	tr << interactiveFlags(*patch);
-        tr << i18nPatchStatusAsString( *it );
+        tr << i18nPatchStatusAsString( pi );
         tr << patch->summary();
 
-        if (!all && patch->restartSuggested ())
-          pm_tbl << tr;
+        if ( ! all && patchIsNeededRestartSuggested( pi ) )
+          pm_tbl << std::move(tr);
         else
-          tbl << tr;
+          tbl << std::move(tr);
       }
     }
   }
 
   // those that affect the package manager go first
-  // (TODO: user option for this?)
-  bool affectpm = false;
-  if (!pm_tbl.empty())
+  bool affectpm = !pm_tbl.empty();
+  if ( affectpm )
   {
-    affectpm = true;
+    zypper.out().gap();
     if (!tbl.empty())
     {
-      zypper.out().info(_("The following software management updates will be installed first:"));
+#if 0
+      N_("The following software management updates will be installed first:"); // keep old text for a while...
+#endif
+      // translator: Table headline; 'Needed' refers to patches with status 'needed'
+      zypper.out().info(_("Needed software management updates will be installed first:"));
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
     }
     pm_tbl.sort(1); // Name
@@ -443,10 +732,18 @@ static bool list_patch_updates( Zypper & zypper )
     if (affectpm)
     {
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
+      // translator: Table headline
       zypper.out().info(_("The following updates are also available:"));
     }
     zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL);
     cout << tbl;
+  }
+
+  zypper.out().gap();
+  if ( stats.visited() )
+  {
+    stats.render( zypper.out(), /*withDetails*/false );
+    zypper.out().gap();
   }
 
   return affectpm;
@@ -739,8 +1036,8 @@ void list_patches_by_issue( Zypper & zypper )
 	  << itype
 	  << d->subFind( sat::SolvAttr::updateReferenceId ).asString()
 	  << patch->name()
-	  << patchHighlight(patch->category())
-	  << patchHighlight(patch->severity())
+	  << patchHighlightCategory(*patch)
+	  << patchHighlightSeverity(*patch)
 	  << interactiveFlags(*patch)
 	  << i18nPatchStatusAsString( pi ) );
       }
@@ -775,8 +1072,8 @@ void list_patches_by_issue( Zypper & zypper )
 
       t1 << ( TableRow()
          << patch->name()
-	 << patchHighlight(patch->category())
-	 << patchHighlight(patch->severity())
+	 << patchHighlightCategory(*patch)
+	 << patchHighlightSeverity(*patch)
 	 << interactiveFlags(*patch)
 	 << patch->summary() );
       //! \todo could show a highlighted match with a portion of surrounding
@@ -829,6 +1126,7 @@ void mark_updates_by_issue( Zypper & zypper )
   SolverRequester::Options srOpts;
   srOpts.force = zypper.cOpts().count("force");
   srOpts.skip_interactive = zypper.cOpts().count("skip-interactive");
+  srOpts.skip_optional_patches = zypper.globalOpts().exclude_optional_patches;
   srOpts.cliMatchPatch = CliMatchPatch( zypper );
 
   for ( const Issue & issue : issues )

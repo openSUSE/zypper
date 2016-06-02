@@ -510,17 +510,24 @@ bool SolverRequester::installPatch( const PackageSpec & patchspec, const PoolIte
 	|| Zypper::instance()->cOpts().count("agree-to-third-party-licenses") )
 	ignoreFlags |= Patch::License;
 
-      // bnc #221476
-      if ( _opts.skip_interactive && patch->interactiveWhenIgnoring( ignoreFlags ) )
-      {
-        addFeedback( Feedback::PATCH_INTERACTIVE_SKIPPED, patchspec, selected );
-        return false;
-      }
-
       if ( selected.isUnwanted() )
       {
         DBG << "candidate patch " << patch << " is locked" << endl;
         addFeedback( Feedback::PATCH_UNWANTED, patchspec, selected, selected );
+        return false;
+      }
+
+      if ( _opts.skip_optional_patches && patch->categoryEnum() == Patch::CAT_OPTIONAL )
+      {
+        DBG << "candidate patch " << patch << " is optional" << endl;
+        addFeedback( Feedback::PATCH_OPTIONAL, patchspec, selected, selected );
+	return false;
+      }
+
+      // bnc #221476
+      if ( _opts.skip_interactive && patch->interactiveWhenIgnoring( ignoreFlags ) )
+      {
+        addFeedback( Feedback::PATCH_INTERACTIVE_SKIPPED, patchspec, selected );
         return false;
       }
 

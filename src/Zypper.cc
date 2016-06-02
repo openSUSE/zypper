@@ -66,6 +66,21 @@
 using namespace zypp;
 
 ///////////////////////////////////////////////////////////////////
+// for now use some defines to have consistent definition of args
+// used across multiple commands
+
+#define ARG_WITHout_OPTIONAL	\
+    {"with-optional",			no_argument,		&_gopts.exclude_optional_patches, 0 },	\
+    {"without-optional",		no_argument,		&_gopts.exclude_optional_patches, 1 }
+
+#define option_WITHout_OPTIONAL	\
+    option(_("--with[out]-optional"	"\n"	"Whether applicable optional patches should be treated as needed or be excluded.")	\
+    + std::string(" ")					\
+    + ( _gopts.exclude_optional_patches_default		\
+    ? _("The default is to exclude optional patches.")	\
+    : _("The default is to include optional patches.") ))
+
+///////////////////////////////////////////////////////////////////
 ZYpp::Ptr God = NULL;
 void Zypper::assertZYppPtrGod()
 {
@@ -2193,6 +2208,7 @@ void Zypper::processCommandOptions()
       {"category",                  required_argument, 0, 'g'},
       {"severity",                  required_argument, 0,  0 },
       {"date",                      required_argument, 0,  0 },
+      ARG_WITHout_OPTIONAL,
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2231,6 +2247,7 @@ void Zypper::processCommandOptions()
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
       .option("--updatestack-only",	_("Install only patches which affect the package management itself.") )
+      .option_WITHout_OPTIONAL
       .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
       ;
     break;
@@ -2248,11 +2265,15 @@ void Zypper::processCommandOptions()
       {"date",        required_argument, 0,  0 },
       {"issues",      optional_argument, 0,  0 },
       {"all",         no_argument,       0, 'a'},
+      ARG_WITHout_OPTIONAL,
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = list_updates_options;
-    _command_help = _(
+#if 0
+    _command_help = ( CommandHelpFormater()
+      // legacy help text
+      << _(
       "list-patches (lp) [options]\n"
       "\n"
       "List all available needed patches.\n"
@@ -2266,7 +2287,28 @@ void Zypper::processCommandOptions()
       "    --severity <severity>  List only patches with this severity.\n"
       "-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
       "    --date <YYYY-MM-DD>    List only patches issued up to, but not including, the specified date\n"
-    );
+      ) )
+      .option_WITHout_OPTIONAL
+      ;
+#endif
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("list-patches (lp) [OPTIONS]")
+    )
+    .description(// translators: command description
+    _("List all applicable patches.")
+    )
+    .optionSectionCommandOptions()
+    .option(_("-b, --bugzilla[=#]"		"\n"	"List applicable patches for Bugzilla issues."))
+    .option(_(    "--cve[=#]"			"\n"	"List applicable patches for CVE issues."))
+    .option(_(    "--issues[=STRING]"		"\n"	"Look for issues matching the specified string."))
+    .option(_(    "--date <YYYY-MM-DD>"		"\n"	"List only patches issued up to, but not including, the specified date."))
+    .option(_("-g, --category <CATEGORY>"	"\n"	"List only patches with this category."))
+    .option(_(    "--severity <SEVERITY>"	"\n"	"List only patches with this severity."))
+    .option(_("-a, --all"			"\n"	"List all patches, not only applicable ones."))
+    .option_WITHout_OPTIONAL
+    .option(_("-r, --repo <ALIAS|#|URI>"	"\n"	"List only patches from the specified repository."))
+    ;
     break;
   }
 
@@ -2414,26 +2456,27 @@ void Zypper::processCommandOptions()
   case ZypperCommand::PATCH_CHECK_e:
   {
     static struct option patch_check_options[] = {
-      {"repo", required_argument, 0, 'r'},
+      {"repo",				required_argument,	0, 'r'},
       // rug compatibility option, we have --repo
-      {"catalog", required_argument, 0, 'c'},
-      {"updatestack-only",         no_argument,       0,  0 },
+      {"catalog",			required_argument,	0, 'c'},
+      {"updatestack-only",		no_argument,		0,  0 },
+      ARG_WITHout_OPTIONAL,
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = patch_check_options;
-    _command_help = ( CommandHelpFormater()
-      << _(
-      "patch-check (pchk) [options]\n"
-      "\n"
-      "Check for available patches.\n"
-      "\n"
-      "  Command options:\n"
-      "\n"
-      "-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
-      ) )
-      .option26("--updatestack-only",	_("Check only for patches which affect the package management itself.") )
-      ;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("patch-check (pchk) [OPTIONS]")
+    )
+    .description(// translators: command description
+    _("Display stats about applicable patches. The command returns 100 if needed patches were found, 101 if there is at least one needed security patch.")
+    )
+    .optionSectionCommandOptions()
+    .option(_("-r, --repo <ALIAS|#|URI>"	"\n"	"Check for patches only in the specified repository."))
+    .option(_("--updatestack-only"		"\n"	"Check only for patches which affect the package management itself."))
+    .option_WITHout_OPTIONAL
+    ;
     break;
   }
 
@@ -4427,20 +4470,7 @@ void Zypper::doCommand()
     load_resolvables( *this );
     // needed to compute status of PPP
     resolve( *this );
-
     patch_check();
-
-    if ( _rdata.security_patches_count > 0 )
-    {
-      setExitCode( ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED );
-      return;
-    }
-    if ( _rdata.patches_count > 0 )
-    {
-      setExitCode( ZYPPER_EXIT_INF_UPDATE_NEEDED );
-      return;
-    }
-
     break;
   }
 
@@ -4707,6 +4737,7 @@ void Zypper::doCommand()
         sropts.force = true;
       sropts.best_effort = best_effort;
       sropts.skip_interactive = skip_interactive; // bcn #647214
+      sropts.skip_optional_patches = arguments().empty() && globalOpts().exclude_optional_patches;	// without args follow --with[out]-optional
       sropts.cliMatchPatch = CliMatchPatch( *this );
 
       SolverRequester sr(sropts);
