@@ -12,15 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-01-17 00:28+0100\n"
-"Last-Translator: Jonas Svensson <jks@ekhorva.se>\n"
-"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2016-06-04 13:19+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -55,8 +56,8 @@ msgstr "Gpg-nyckelsigneringsfilen %1% har upphört att gälla."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Gpg-nyckeln som signerar filen  '%1%' löper ut om  %2% dag."
+msgstr[1] "Gpg-nyckeln som signerar filen  '%1%' löper ut om  %2% dagar."
 
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
@@ -273,9 +274,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "Kör: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:207
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "Tar bort %s-%s"
+msgstr "Tar bort %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:211
@@ -289,9 +290,9 @@ msgid "Removal of %s failed:"
 msgstr "Det gick inte att ta bort %s:"
 
 #: src/callbacks/rpm.h:276
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "Installerar: %s-%s"
+msgstr "Installerar: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:280
@@ -300,9 +301,9 @@ msgid "Installing: %s-%s"
 msgstr "Installerar: %s-%s"
 
 #: src/callbacks/rpm.h:303
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "Installationen av %s-%s misslyckades:"
+msgstr "Installationen av %s misslyckades:"
 
 #. what's actually needed here
 #: src/callbacks/rpm.h:304
@@ -344,8 +345,8 @@ msgstr[1] ""
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Upptäckte konflikt mellan %1% fil:"
+msgstr[1] "Upptäckte konflikt mellan %1% filer:"
 
 #: src/callbacks/rpm.h:410
 msgid "Conflicting files will be replaced."
