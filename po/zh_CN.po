@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-06-05 17:04+0000\n"
+"PO-Revision-Date: 2016-06-05 17:08+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
@@ -78,7 +78,7 @@ msgstr "文件 '%s' 未签名，继续吗？"
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "文件 '%s'，来自软件源 '%s'，未签名，继续吗？ "
+msgstr "文件 '%s' 来自软件源 '%s' 未签名，继续吗？"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
@@ -436,27 +436,27 @@ msgstr "错误"
 
 #: src/info.cc:116
 msgid "Name: "
-msgstr "名称："
+msgstr "名称： "
 
 #: src/info.cc:117
 msgid "Version: "
-msgstr "版本："
+msgstr "版本： "
 
 #: src/info.cc:118
 msgid "Arch: "
-msgstr "架构："
+msgstr "架构： "
 
 #: src/info.cc:119
 msgid "Vendor: "
-msgstr "厂商："
+msgstr "厂商： "
 
 #: src/info.cc:124
 msgid "Summary: "
-msgstr "摘要："
+msgstr "摘要： "
 
 #: src/info.cc:125
 msgid "Description: "
-msgstr "描述："
+msgstr "描述： "
 
 #: src/info.cc:138
 #, boost-format
@@ -483,7 +483,7 @@ msgstr "类型为 '%s' 的信息尚未实现。"
 
 #: src/info.cc:248 src/info.cc:386 src/info.cc:458
 msgid "Repository: "
-msgstr "软件源："
+msgstr "软件源： "
 
 #: src/info.cc:256
 msgid "Support Level: "
@@ -512,7 +512,7 @@ msgstr "未安装"
 
 #: src/info.cc:276
 msgid "Installed Size: "
-msgstr "已安装大小："
+msgstr "已安装大小： "
 
 #: src/info.cc:317
 msgid "Category: "
@@ -520,7 +520,7 @@ msgstr "分类： "
 
 #: src/info.cc:318
 msgid "Severity: "
-msgstr "严重性："
+msgstr "严重性： "
 
 #: src/info.cc:319
 msgid "Created On: "
@@ -536,7 +536,7 @@ msgstr "需要重启软件包管理器"
 
 #: src/info.cc:330
 msgid "Interactive: "
-msgstr "交互的："
+msgstr "交互的： "
 
 #: src/info.cc:354 src/search.cc:383
 msgid "Recommended"
@@ -548,7 +548,7 @@ msgstr "建议"
 
 #: src/info.cc:391
 msgid "Visible to User: "
-msgstr "对用户可见："
+msgstr "对用户可见： "
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -599,7 +599,7 @@ msgstr "短名称"
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/info.cc:479 src/Summary.cc:1207 src/utils/misc.cc:138
 msgid "Installed"
-msgstr "已安装 "
+msgstr "已安装"
 
 #: src/info.cc:481 src/search.cc:642
 msgid "Is Base"
@@ -1765,9 +1765,8 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"这可能是由源中无效的元数据或者元数据解析器的故障导致的。若是后一种情况，或者"
-"存疑，请参考 http://zh.opensuse.org/SDB:Zypper_疑难解答 的指南填写一份故障报"
-"告。"
+"这可能是由源中无效的元数据或者元数据解析器的故障导致的。若是后一种情况，或者存疑，请参考 http://zh.opensuse.org/SDB:"
+"Zypper_疑难解答 的指南填写一份故障报告"
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -1963,7 +1962,7 @@ msgstr "已成功导出软件源到 %s。"
 
 #: src/repos.cc:1248 src/repos.cc:1392
 msgid "Specified repositories: "
-msgstr "指定的软件源："
+msgstr "指定的软件源： "
 
 #: src/repos.cc:1283
 #, c-format, boost-format
@@ -2093,7 +2092,7 @@ msgstr "软件源 '%1%' 的配置中禁用了 GPG 检查。无法校验完整性
 #: src/repos.cc:1622
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
-msgstr "成功添加了软件源 '%s' "
+msgstr "成功添加了软件源 '%s'"
 
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:1630
