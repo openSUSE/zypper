@@ -7,9 +7,9 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-29 10:45+0000\n"
+"PO-Revision-Date: 2016-06-05 18:55+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <http://l10n.opensuse.org/projects/libzypp/master/sk/>"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -3797,7 +3797,7 @@ msgstr "Inari Sami"
 #. language code: smo sm
 #: zypp/LanguageCode.cc:971
 msgid "Samoan"
-msgstr "Samoan"
+msgstr "Samojčina"
 
 #. language code: sms
 #: zypp/LanguageCode.cc:973
@@ -3807,7 +3807,7 @@ msgstr "Skolt Sami"
 #. language code: sna sn
 #: zypp/LanguageCode.cc:975
 msgid "Shona"
-msgstr "Shona"
+msgstr "Šona"
 
 #. language code: snd sd
 #: zypp/LanguageCode.cc:977
@@ -3822,7 +3822,7 @@ msgstr "Soninke"
 #. language code: sog
 #: zypp/LanguageCode.cc:981
 msgid "Sogdian"
-msgstr "Sogdian"
+msgstr "Sogdčina"
 
 #. language code: som so
 #: zypp/LanguageCode.cc:983
@@ -3837,7 +3837,7 @@ msgstr "Songhai"
 #. language code: sot st
 #: zypp/LanguageCode.cc:987
 msgid "Sotho, Southern"
-msgstr "Sotho, Southern"
+msgstr "Soto"
 
 #. language code: spa es
 #: zypp/LanguageCode.cc:989
@@ -3897,7 +3897,7 @@ msgstr "Švédsky"
 #. language code: syr
 #: zypp/LanguageCode.cc:1011
 msgid "Syriac"
-msgstr "Syriac"
+msgstr "Sýrčina"
 
 #. language code: tah ty
 #: zypp/LanguageCode.cc:1013
@@ -3987,12 +3987,12 @@ msgstr "Tlingit"
 #. language code: tmh
 #: zypp/LanguageCode.cc:1051
 msgid "Tamashek"
-msgstr "Tamashek"
+msgstr "Tamašek"
 
 #. language code: tog
 #: zypp/LanguageCode.cc:1053
 msgid "Tonga (Nyasa)"
-msgstr "Tonga (Nyasa)"
+msgstr "Tongčina (Nyasa)"
 
 #. language code: ton to
 #: zypp/LanguageCode.cc:1055
@@ -4007,12 +4007,12 @@ msgstr "Tok Pisin"
 #. language code: tsi
 #: zypp/LanguageCode.cc:1059
 msgid "Tsimshian"
-msgstr "Tsimshian"
+msgstr "Tsimshijské jazyky"
 
 #. language code: tsn tn
 #: zypp/LanguageCode.cc:1061
 msgid "Tswana"
-msgstr "Tswana"
+msgstr "Čwančina"
 
 #. language code: tso ts
 #: zypp/LanguageCode.cc:1063
@@ -4032,7 +4032,7 @@ msgstr "Tumbuka"
 #. language code: tup
 #: zypp/LanguageCode.cc:1069
 msgid "Tupi Languages"
-msgstr "Tupi Languages"
+msgstr "Jazyky tupi"
 
 #. language code: tur tr
 #: zypp/LanguageCode.cc:1071
@@ -4042,7 +4042,7 @@ msgstr "Turecký"
 #. language code: tut
 #: zypp/LanguageCode.cc:1073
 msgid "Altaic (Other)"
-msgstr "Altaic (Other)"
+msgstr "Altajské jazyky"
 
 #. language code: twi tw
 #: zypp/LanguageCode.cc:1077
@@ -4052,17 +4052,17 @@ msgstr "Twi"
 #. language code: tyv
 #: zypp/LanguageCode.cc:1079
 msgid "Tuvinian"
-msgstr "Tuvinian"
+msgstr "Tuviančina"
 
 #. language code: udm
 #: zypp/LanguageCode.cc:1081
 msgid "Udmurt"
-msgstr "Udmurt"
+msgstr "Udmurtčina"
 
 #. language code: uga
 #: zypp/LanguageCode.cc:1083
 msgid "Ugaritic"
-msgstr "Ugaritic"
+msgstr "Ugaritčina"
 
 #. language code: uig ug
 #: zypp/LanguageCode.cc:1085
@@ -4112,22 +4112,22 @@ msgstr "Vietnamský"
 #. language code: vol vo
 #: zypp/LanguageCode.cc:1103
 msgid "Volapuk"
-msgstr "Volapuk"
+msgstr "Volapük"
 
 #. language code: vot
 #: zypp/LanguageCode.cc:1105
 msgid "Votic"
-msgstr "Votic"
+msgstr "Vodčina"
 
 #. language code: wak
 #: zypp/LanguageCode.cc:1107
 msgid "Wakashan Languages"
-msgstr "Wakashan Languages"
+msgstr "Wakašské jazyky"
 
 #. language code: wal
 #: zypp/LanguageCode.cc:1109
 msgid "Walamo"
-msgstr "Walamo"
+msgstr "Walamčina"
 
 #. language code: war
 #: zypp/LanguageCode.cc:1111
@@ -4147,7 +4147,7 @@ msgstr "Welšský"
 #. language code: wen
 #: zypp/LanguageCode.cc:1119
 msgid "Sorbian Languages"
-msgstr "Sorbian Languages"
+msgstr "Srbské jazyky"
 
 #. language code: wln wa
 #: zypp/LanguageCode.cc:1121
@@ -4162,7 +4162,7 @@ msgstr "Wolof"
 #. language code: xal
 #: zypp/LanguageCode.cc:1125
 msgid "Kalmyk"
-msgstr "Kalmyk"
+msgstr "Kalmyčtina"
 
 #. language code: xho xh
 #: zypp/LanguageCode.cc:1127
@@ -4177,7 +4177,7 @@ msgstr "Yao"
 #. language code: yap
 #: zypp/LanguageCode.cc:1131
 msgid "Yapese"
-msgstr "Yapese"
+msgstr "Japčina"
 
 #. language code: yid yi
 #: zypp/LanguageCode.cc:1133
@@ -4192,12 +4192,12 @@ msgstr "Yoruba"
 #. language code: ypk
 #: zypp/LanguageCode.cc:1137
 msgid "Yupik Languages"
-msgstr "Yupik Languages"
+msgstr "Yupické jazyky"
 
 #. language code: zap
 #: zypp/LanguageCode.cc:1139
 msgid "Zapotec"
-msgstr "Zapotec"
+msgstr "Zapotéčtina"
 
 #. language code: zen
 #: zypp/LanguageCode.cc:1141
@@ -4207,7 +4207,7 @@ msgstr "Zenaga"
 #. language code: zha za
 #: zypp/LanguageCode.cc:1143
 msgid "Zhuang"
-msgstr "Zhuang"
+msgstr "Čuangčina"
 
 #. language code: znd
 #: zypp/LanguageCode.cc:1145
