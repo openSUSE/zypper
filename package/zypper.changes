@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Sun Jun  5 16:16:31 CEST 2016 - ma@suse.de
+
+- pchk,lp,patch: Do not install optional patches by default
+  (FATE#320447)
+- BuildRequires:  libzypp-devel >= 16.0.1
+- Notify user if unknown category/severity strings are used on the
+  CLI
+- Do not require --ignore-unknown in non interactive remove-command
+  (bsc#980263)
+- version 1.13.2
+
+-------------------------------------------------------------------
 Fri May 13 09:54:50 CEST 2016 - ma@suse.de
 
 - Prepare cmake to maintain the .pot and .po files in git. Add
