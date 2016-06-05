@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-12 17:01+0200\n"
+"POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-01-17 00:28+0100\n"
 "Last-Translator: Jonas Svensson <jks@ekhorva.se>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -412,6 +412,16 @@ msgstr "Signaturen kunde inte verifieras"
 msgid "Accepting package despite the error."
 msgstr "Paketet godkänns trots felet."
 
+#: src/SolverRequester.h:57
+#, boost-format
+msgid "Suspicious category filter value '%1%'."
+msgstr ""
+
+#: src/SolverRequester.h:68
+#, boost-format
+msgid "Suspicious severity filter value '%1%'."
+msgstr ""
+
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
 msgstr "Ja"
@@ -570,14 +580,14 @@ msgstr "Synlig för användare:"
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:613 src/search.cc:65 src/search.cc:232
+#: src/info.cc:402 src/update.cc:910 src/search.cc:65 src/search.cc:232
 #: src/search.cc:439 src/search.cc:575 src/search.cc:634
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
 #: src/info.cc:402 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:383 src/update.cc:618 src/update.cc:753 src/Zypper.cc:5277
+#: src/update.cc:665 src/update.cc:915 src/update.cc:1050 src/Zypper.cc:5246
 #: src/search.cc:67 src/search.cc:233 src/search.cc:325 src/search.cc:440
 #: src/search.cc:577 src/search.cc:639 src/locks.cc:104
 msgid "Name"
@@ -766,108 +776,108 @@ msgstr "Skriv %1% så visas underkommandospecifik hjälp om sådan finns."
 msgid "Manual entry for %1% can't be shown"
 msgstr "Manuell inmatning för %1% kan inte visas"
 
-#: src/RequestFeedback.cc:29
+#: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
 msgstr "'%s' ej funnet i källpaketsnamnen. Försök med stora bokstäver."
 
-#: src/RequestFeedback.cc:35
+#: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
 msgstr "Paketet '%s' hittades inte."
 
-#: src/RequestFeedback.cc:37
+#: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
 msgstr "Patch '%s' hittades inte."
 
-#: src/RequestFeedback.cc:39
+#: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
 msgstr "Produkten '%s' hittades inte."
 
-#: src/RequestFeedback.cc:41
+#: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
 msgstr "Mönstret '%s' hittades inte."
 
-#: src/RequestFeedback.cc:43 src/misc.cc:298
+#: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
 msgid "Source package '%s' not found."
 msgstr "Det gick inte att hitta källpaketet \"%s\"."
 
 #. just in case
-#: src/RequestFeedback.cc:45
+#: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
 msgstr "Objektet '%s' hittades inte."
 
-#: src/RequestFeedback.cc:50
+#: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
 msgstr "Paketet '%s' hittades inte i angivet förråd (repo)."
 
-#: src/RequestFeedback.cc:52
+#: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
 msgstr "Patchen '%s' hittades inte i angivet förråd (repo)."
 
-#: src/RequestFeedback.cc:54
+#: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
 msgstr "Produkten '%s' hittades inte i angivet förråd (repo)."
 
-#: src/RequestFeedback.cc:56
+#: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
 msgstr "Mönstret '%s' hittades inte i angivet förråd (repo)."
 
-#: src/RequestFeedback.cc:58
+#: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
 msgstr "Källpaketet '%s' hittades inte angivet förråd (repo)."
 
 #. just in case
-#: src/RequestFeedback.cc:60
+#: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
 msgstr "Objektet '%s' hittades inte i angivet förråd (repo)."
 
 #. translators: meaning a package %s or provider of capability %s
-#: src/RequestFeedback.cc:65
+#: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
 msgstr "Ingen som kan tillhandahålla '%s' funnen."
 
 #. wildcards used
-#: src/RequestFeedback.cc:73
+#: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
 msgstr "Inget paket som matchar '%s' är installerat."
 
-#: src/RequestFeedback.cc:75
+#: src/RequestFeedback.cc:86
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
 msgstr "Paketet '%s' är inte installerat."
 
 #. translators: meaning provider of capability %s
-#: src/RequestFeedback.cc:79
+#: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
 msgstr "Inget som tillhandahåller '%s' är installerat."
 
-#: src/RequestFeedback.cc:84
+#: src/RequestFeedback.cc:95
 #, c-format, boost-format
 msgid "'%s' is already installed."
 msgstr "'%s' är redan installerad."
 
 #. translators: %s are package names
-#: src/RequestFeedback.cc:87
+#: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "'%s' som tillhandahåller '%s' är redan installerad."
 
-#: src/RequestFeedback.cc:94
+#: src/RequestFeedback.cc:105
 #, c-format, boost-format
 msgid ""
 "No update candidate for '%s'. The highest available version is already "
@@ -876,12 +886,12 @@ msgstr ""
 "Ingen uppdateringskandidat för \"%s\". Den högsta tillgängliga versionen är "
 "redan installerad."
 
-#: src/RequestFeedback.cc:97
+#: src/RequestFeedback.cc:108
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
 msgstr "Det finns ingen uppdatering för %s."
 
-#: src/RequestFeedback.cc:103
+#: src/RequestFeedback.cc:114
 #, c-format, boost-format
 msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
@@ -890,7 +900,7 @@ msgstr ""
 "Det finns en uppdateringskandidat %s för %s, men den matchar inte angiven "
 "version, arkitektur eller lagringsplats."
 
-#: src/RequestFeedback.cc:112
+#: src/RequestFeedback.cc:123
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
@@ -899,7 +909,7 @@ msgstr ""
 "Det finns en uppdateringskandidat för %s, men den kommer från en annan "
 "leverantör. Använd %s för att installera kandidaten."
 
-#: src/RequestFeedback.cc:121
+#: src/RequestFeedback.cc:132
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
@@ -908,7 +918,7 @@ msgstr ""
 "Det finns en uppdateringskandidat för %s, men den kommer från en "
 "lagringsplats med lägre prioritet. Använd %s för att installera kandidaten."
 
-#: src/RequestFeedback.cc:131
+#: src/RequestFeedback.cc:142
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
@@ -917,7 +927,7 @@ msgstr ""
 "Det finns en uppdateringskandidat för %s, men den är låst. Lås upp den med "
 "%s."
 
-#: src/RequestFeedback.cc:137
+#: src/RequestFeedback.cc:148
 #, c-format, boost-format
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
@@ -926,7 +936,7 @@ msgstr ""
 "Paketet \"%s\" är inte tillgängligt i dina lagringsplatser. Det går inte att "
 "installera om, uppgradera eller nedgradera."
 
-#: src/RequestFeedback.cc:147
+#: src/RequestFeedback.cc:158
 #, c-format, boost-format
 msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
@@ -936,75 +946,84 @@ msgstr ""
 "den installerade."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
-#: src/RequestFeedback.cc:151
+#: src/RequestFeedback.cc:162
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
 msgstr "Använd \"%s\" för att tvinga installation av paketet?"
 
-#: src/RequestFeedback.cc:159
+#: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
 msgstr "Programfixen \"%s\" är interaktiv, åsidosätts."
 
-#: src/RequestFeedback.cc:166
+#: src/RequestFeedback.cc:175
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
 msgstr "Programfixen \"%s\" behövs inte."
 
-#: src/RequestFeedback.cc:175
+#: src/RequestFeedback.cc:181
+#, fuzzy, boost-format
+msgid ""
+"Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
+"optional patches."
+msgstr ""
+"Korrigeringen \"%s\" är låst. Installera den med \"%s\" eller lås upp den "
+"med \"%s\"."
+
+#: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
 "Korrigeringen \"%s\" är låst. Installera den med \"%s\" eller lås upp den "
 "med \"%s\"."
 
-#: src/RequestFeedback.cc:183
+#: src/RequestFeedback.cc:199
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
 msgstr "Korrigeringen \"%s\" finns inte i den angivna kategorin."
 
-#: src/RequestFeedback.cc:191
+#: src/RequestFeedback.cc:206
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
 msgstr "Korrigeringsfilen %s har inte angiven allvarlighetsgrad."
 
-#: src/RequestFeedback.cc:199
+#: src/RequestFeedback.cc:213
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
 msgstr "Korrigeringen \"%s\" utgavs efter det angivna datumet."
 
-#: src/RequestFeedback.cc:204
+#: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
 msgstr "Väljer \"%s\" från lagringsplatsen \"%s\" för installation."
 
-#: src/RequestFeedback.cc:208
+#: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
 msgstr "Tvingar installation av \"%s\" från lagringsplatsen \"%s\"."
 
-#: src/RequestFeedback.cc:212
+#: src/RequestFeedback.cc:226
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
 msgstr "Väljer \"%s\" för borttagning."
 
-#: src/RequestFeedback.cc:219
+#: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
 msgstr "%s är låst. Använd %s om du vill låsa upp det."
 
-#: src/RequestFeedback.cc:224
+#: src/RequestFeedback.cc:238
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
 msgstr "Lägger till krav: \"%s\"."
 
-#: src/RequestFeedback.cc:227
+#: src/RequestFeedback.cc:241
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
 msgstr "Lägger till konflikt: \"%s\"."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
-#: src/RequestFeedback.cc:249
+#: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
 msgstr ""
@@ -1981,12 +2000,12 @@ msgstr "Målet initieras"
 msgid "Target initialization failed:"
 msgstr "Det gick inte att initiera mål:"
 
-#: src/repos.cc:898 src/Zypper.cc:4418
+#: src/repos.cc:898 src/Zypper.cc:4440
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Problemet kan eventuellt lösas genom att köra \"zypper refresh\" som root."
 
-#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5277
+#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5246
 msgid "Alias"
 msgstr "Alias"
 
@@ -2622,7 +2641,7 @@ msgstr "Läser installerade paket..."
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Ett problem uppstod vid läsning av de installerade paketen:"
 
-#: src/update.cc:83
+#: src/update.cc:84
 #, c-format, boost-format
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
@@ -2631,154 +2650,221 @@ msgstr ""
 "%s saknar argument och ignoreras eftersom ett angivet alternativ innehåller "
 "argument."
 
-#: src/update.cc:180
+#. translator: stats table header (plural number is %2%)
+#: src/update.cc:329
+#, boost-format
+msgid "Considering %1% out of %2% applicable patches:"
+msgid_plural "Considering %1% out of %2% applicable patches:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translator: stats table header
+#: src/update.cc:333
+#, boost-format
+msgid "Found %1% applicable patch:"
+msgid_plural "Found %1% applicable patches:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translator: stats summary
+#: src/update.cc:343
 #, fuzzy, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
 msgstr[0] "Inte behövd"
 msgstr[1] "Inte behövd"
 
-#. translators: %d is the number of needed patches
-#: src/update.cc:186
+#. translator: stats summary
+#: src/update.cc:351
+#, fuzzy, c-format, boost-format
+msgid "%d patch optional"
+msgid_plural "%d patches optional"
+msgstr[0] "Inte behövd"
+msgstr[1] "Inte behövd"
+
+#. translator: Hint displayed right adjusted; %1% is a CLI option
+#. "42 patches optional                  (use --with-optional to include optional patches)"
+#: src/update.cc:355
+#, boost-format
+msgid "use '%1%' to include optional patches"
+msgstr ""
+
+#. translator: stats summary
+#: src/update.cc:364
 #, fuzzy, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
 msgstr[0] "Inte behövd"
 msgstr[1] "Inte behövd"
 
-#. translators: %d is the number of security patches
-#: src/update.cc:189
+#. translator: stats summary
+#: src/update.cc:367
 #, fuzzy, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
 msgstr[0] "Säkerhetsuppdateringar"
 msgstr[1] "Säkerhetsuppdateringar"
 
-#: src/update.cc:199
+#. translator: Table column header.
+#: src/update.cc:399 src/update.cc:665 src/update.cc:981 src/update.cc:1050
+#: src/search.cc:326
+msgid "Category"
+msgstr "Kategori"
+
+#. translator: Table column header.
+#: src/update.cc:401
+msgid "Updatestack"
+msgstr ""
+
+#. translator: Table column header.
+#: src/update.cc:403 src/update.cc:830
+msgid "Patches"
+msgstr "Programfixar"
+
+#. translator: Table column header.
+#: src/update.cc:405
+msgid "Locked"
+msgstr ""
+
+#. translator: Table column header
+#. Used if stats collect data for more than one category name.
+#. Category    | Updatestack | Patches | Locked | Included categories
+#. ------------+-------------+---------+--------+---------------------
+#. optional   | ...                      ..... | enhancement, feature
+#: src/update.cc:411
+msgid "Included categories"
+msgstr ""
+
+#. Translator: Patch status: needed, optional, unwanted, applied, not needed
+#: src/update.cc:474
 msgid "unwanted"
 msgstr ""
 
-#: src/update.cc:200
+#: src/update.cc:476
+#, fuzzy
+msgid "optional"
+msgstr "ps [alternativ]"
+
+#: src/update.cc:477
 msgid "needed"
 msgstr "Behövd"
 
-#: src/update.cc:201
+#: src/update.cc:479
 msgid "applied"
 msgstr ""
 
-#: src/update.cc:202
+#: src/update.cc:480
 msgid "not needed"
 msgstr "behövs inte"
 
-#: src/update.cc:208
+#: src/update.cc:486
 msgid "undetermined"
 msgstr ""
 
 #. translators: package's repository (header)
-#: src/update.cc:382 src/update.cc:615 src/search.cc:75 src/search.cc:324
+#: src/update.cc:664 src/update.cc:912 src/search.cc:75 src/search.cc:324
 #: src/search.cc:442 src/search.cc:576 src/search.cc:635 src/locks.cc:107
 msgid "Repository"
 msgstr "Förråd"
 
-#: src/update.cc:383 src/update.cc:684 src/update.cc:753 src/search.cc:326
-msgid "Category"
-msgstr "Kategori"
-
-#: src/update.cc:383 src/update.cc:684 src/update.cc:753 src/search.cc:327
+#: src/update.cc:665 src/update.cc:981 src/update.cc:1050 src/search.cc:327
 msgid "Severity"
 msgstr "Allvarlighetsgrad"
 
-#: src/update.cc:383 src/update.cc:684 src/update.cc:753
+#: src/update.cc:665 src/update.cc:981 src/update.cc:1050
 msgid "Interactive"
 msgstr "Interaktivt"
 
-#: src/update.cc:383 src/update.cc:684 src/search.cc:328
+#: src/update.cc:665 src/update.cc:981 src/search.cc:328
 msgid "Status"
 msgstr "Status"
 
 #. translators: package summary (header)
-#: src/update.cc:383 src/update.cc:753 src/search.cc:235
+#: src/update.cc:665 src/update.cc:1050 src/search.cc:235
 msgid "Summary"
 msgstr "Sammanfattning"
 
-#: src/update.cc:431
+#: src/update.cc:717
 msgid "The following software management updates will be installed first:"
 msgstr "Följande programhanteringsuppdateringar installeras först:"
 
-#: src/update.cc:440 src/update.cc:671
+#. translator: Table headline; 'Needed' refers to patches with status 'needed'
+#: src/update.cc:720
+#, fuzzy
+msgid "Needed software management updates will be installed first:"
+msgstr "Följande programhanteringsuppdateringar installeras först:"
+
+#: src/update.cc:729 src/update.cc:968
 msgid "No updates found."
 msgstr "Inga uppdateringar hittades."
 
-#: src/update.cc:446
+#. translator: Table headline
+#: src/update.cc:736
 msgid "The following updates are also available:"
 msgstr "Följande uppdateringar är också tillgängliga:"
 
-#: src/update.cc:531
+#: src/update.cc:828
 msgid "Package updates"
 msgstr "Paketuppdateringar"
 
-#: src/update.cc:533
-msgid "Patches"
-msgstr "Programfixar"
-
-#: src/update.cc:535
+#: src/update.cc:832
 msgid "Pattern updates"
 msgstr "Mönsteruppdateringar"
 
-#: src/update.cc:537
+#: src/update.cc:834
 msgid "Product updates"
 msgstr "Produktuppdateringar"
 
-#: src/update.cc:623
+#: src/update.cc:920
 msgid "Current Version"
 msgstr "Aktuell version"
 
-#: src/update.cc:624
+#: src/update.cc:921
 msgid "Available Version"
 msgstr "Tillgänglig version"
 
 #. translators: package architecture (header)
-#: src/update.cc:624 src/search.cc:73 src/search.cc:579 src/search.cc:641
+#: src/update.cc:921 src/search.cc:73 src/search.cc:579 src/search.cc:641
 msgid "Arch"
 msgstr "Ark"
 
-#: src/update.cc:684
+#: src/update.cc:981
 msgid "Issue"
 msgstr "Utgåva"
 
-#: src/update.cc:684
+#: src/update.cc:981
 msgid "No."
 msgstr "Nr."
 
-#: src/update.cc:684
+#: src/update.cc:981
 msgid "Patch"
 msgstr "Programfix"
 
-#: src/update.cc:794
+#: src/update.cc:1091
 msgid "No matching issues found."
 msgstr "Inga matchande utgåvor hittades."
 
-#: src/update.cc:802
+#: src/update.cc:1099
 msgid "The following matches in issue numbers have been found:"
 msgstr "Följande matchande utgåvenummer har hittats:"
 
-#: src/update.cc:811
+#: src/update.cc:1108
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "I följande programfixar har matchande programfixbeskrivningar hittats:"
 
-#: src/update.cc:879
+#: src/update.cc:1177
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Programfix för bugzilla, utgåva nummer %s, hittades inte eller behövs inte."
 
-#: src/update.cc:881
+#: src/update.cc:1179
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "Programfix för CVE, utgåva nummer %s, hittades inte eller behövs inte."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:884
+#: src/update.cc:1182
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -2790,7 +2876,22 @@ msgstr ""
 msgid "OK OK! Exiting immediately..."
 msgstr "OK! Avslutar genast..."
 
-#: src/Zypper.cc:89
+#: src/Zypper.cc:77
+msgid ""
+"--with[out]-optional\n"
+"Whether applicable optional patches should be treated as needed or be "
+"excluded."
+msgstr ""
+
+#: src/Zypper.cc:80
+msgid "The default is to exclude optional patches."
+msgstr ""
+
+#: src/Zypper.cc:81
+msgid "The default is to include optional patches."
+msgstr ""
+
+#: src/Zypper.cc:104
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -2798,19 +2899,19 @@ msgstr ""
 "PackageKit blockerar zypper. Det händer om en uppdateringsapplet eller något "
 "annat program för programvaruhantering som använder PackageKit körs."
 
-#: src/Zypper.cc:94
+#: src/Zypper.cc:109
 msgid "Tell PackageKit to quit?"
 msgstr "Avsluta PackageKit?"
 
-#: src/Zypper.cc:103
+#: src/Zypper.cc:118
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKit körs fortfarande (troligen upptaget)."
 
-#: src/Zypper.cc:104
+#: src/Zypper.cc:119
 msgid "Try again?"
 msgstr "Vill du försöka igen?"
 
-#: src/Zypper.cc:174
+#: src/Zypper.cc:189
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
@@ -2818,28 +2919,28 @@ msgstr ""
 "Äldre kommandoradsalternativ %1% funnet. Använd det globala alternativet %2% "
 "i stället."
 
-#: src/Zypper.cc:175
+#: src/Zypper.cc:190
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr "Äldre kommandoradsalternativ %1% funnet. Använd %2% i stället."
 
-#: src/Zypper.cc:254
+#: src/Zypper.cc:269
 msgid "Command options:"
 msgstr "Kommandoalternativ:"
 
-#: src/Zypper.cc:257 src/Zypper.cc:2326
+#: src/Zypper.cc:272
 msgid "Expert options:"
 msgstr "Expertalternativ:"
 
-#: src/Zypper.cc:260
+#: src/Zypper.cc:275
 msgid "This command has no additional options."
 msgstr "Det här kommandot har inga ytterligare alternativ."
 
-#: src/Zypper.cc:381 src/Zypper.cc:1320
+#: src/Zypper.cc:406 src/Zypper.cc:1345
 msgid "Unexpected exception."
 msgstr "Oväntat undantag."
 
-#: src/Zypper.cc:403
+#: src/Zypper.cc:428
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2885,7 +2986,7 @@ msgstr ""
 "\t--xmlout, -x\t\tVäxla till XML-utskrift.\n"
 "\t--ignore-unknown, -i\tIgnorera okända paket.\n"
 
-#: src/Zypper.cc:425
+#: src/Zypper.cc:450
 msgid ""
 "\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
 "\t\t\t\tdirectory.\n"
@@ -2902,7 +3003,7 @@ msgstr ""
 "\t--solv-cache-dir <katalog>\tAnvänd alternativ katalog för solvfilcache.\n"
 "\t--pkg-cache-dir <katalog>\tAnvänd alternativ paketcachekatalog.\n"
 
-#: src/Zypper.cc:433
+#: src/Zypper.cc:458
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -2936,7 +3037,7 @@ msgstr ""
 "\t--releasever\t\tAnge värdet för $releasever i allal .repo-filer "
 "(standardvärde: distributionsversion).\n"
 
-#: src/Zypper.cc:447
+#: src/Zypper.cc:472
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -2948,7 +3049,7 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tLäs inte installerade namnöversättningar.\n"
 
-#: src/Zypper.cc:454
+#: src/Zypper.cc:479
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -2958,7 +3059,7 @@ msgstr ""
 "\thelp, ?\t\t\tSkriv ut hjälpen.\n"
 "\tshell, sh\t\tGodkänn flera kommandon samtidigt.\n"
 
-#: src/Zypper.cc:459
+#: src/Zypper.cc:484
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -2978,7 +3079,7 @@ msgstr ""
 "\trefresh, ref\t\tUppdatera alla arkiv.\n"
 "\tclean\t\t\tRensa lokala cacheminnen.\n"
 
-#: src/Zypper.cc:469
+#: src/Zypper.cc:494
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -2994,7 +3095,7 @@ msgstr ""
 "\tremoveservice, rs\tTa bort den angivna tjänsten.\n"
 "\trefresh-services, refs\tUppdatera alla tjänster.\n"
 
-#: src/Zypper.cc:477
+#: src/Zypper.cc:502
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -3016,7 +3117,7 @@ msgstr ""
 "\t\t\t\tInstallera nyligen tillagda paket som rekommenderas av\n"
 "\t\t\t\tinstallerade paket.\n"
 
-#: src/Zypper.cc:488
+#: src/Zypper.cc:513
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -3034,7 +3135,7 @@ msgstr ""
 "\tdist-upgrade, dup\tGör en distributionsuppgradering.\n"
 "\tpatch-check, pchk\tSök efter programfixar.\n"
 
-#: src/Zypper.cc:497
+#: src/Zypper.cc:522
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -3060,7 +3161,7 @@ msgstr ""
 "\tproducts, pd\t\tVisa alla tillgängliga produkter.\n"
 "\twhat-provides, wp\tVisa paket med den angivna kapaciteten.\n"
 
-#: src/Zypper.cc:512
+#: src/Zypper.cc:537
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -3074,7 +3175,7 @@ msgstr ""
 "\tlocks, ll\t\tVisa aktuella paketlås.\n"
 "\tcleanlocks, cl\t\tTa bort oanvända lås.\n"
 
-#: src/Zypper.cc:519
+#: src/Zypper.cc:544
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -3095,7 +3196,7 @@ msgstr ""
 "\tsource-download\t\tHämta käll-rpm för alla installerade paket\n"
 "\t\t\t\ttill en lokal katalog.\n"
 
-#: src/Zypper.cc:529
+#: src/Zypper.cc:554
 msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
@@ -3103,7 +3204,7 @@ msgstr ""
 "     Underkommandon:\n"
 "\tsubcommand\t\tVisar tillgängliga underkommandon.\n"
 
-#: src/Zypper.cc:534
+#: src/Zypper.cc:559
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -3115,7 +3216,7 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:562
+#: src/Zypper.cc:587
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr ""
@@ -3123,47 +3224,47 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:571
+#: src/Zypper.cc:596
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Skriv %s när du vill ha kommandospecifik hjälp."
 
-#: src/Zypper.cc:746
+#: src/Zypper.cc:771
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Utförlighet: %d"
 
-#: src/Zypper.cc:760
+#: src/Zypper.cc:785
 #, c-format, boost-format
 msgid "Invalid table style %d."
 msgstr "Ogiltigt tabellformat %d."
 
-#: src/Zypper.cc:761
+#: src/Zypper.cc:786
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
 msgstr "Använd ett heltal mellan %d och %d"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:873
+#: src/Zypper.cc:898
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Underkommandot %1% kan inte användas med globala  zypper-alternativ."
 
-#: src/Zypper.cc:894
+#: src/Zypper.cc:919
 msgid "Enforced setting"
 msgstr "Tvingande inställning"
 
-#: src/Zypper.cc:904
+#: src/Zypper.cc:929
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "Strängen med användardata får inte innehålla tecken som inte kan skrivas ut "
 "eller tecken för nya rader."
 
-#: src/Zypper.cc:928 src/Zypper.cc:3174
+#: src/Zypper.cc:953 src/Zypper.cc:3227
 msgid "Entering non-interactive mode."
 msgstr "Ej interaktivt läge tillämpas."
 
-#: src/Zypper.cc:935
+#: src/Zypper.cc:960
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
@@ -3171,21 +3272,21 @@ msgstr ""
 "Korrigeringar där flaggan rebootSuggested är satt behandlas inte som "
 "interaktiva."
 
-#: src/Zypper.cc:942
+#: src/Zypper.cc:967
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Läget no-gpg-checks tillämpas."
 
-#: src/Zypper.cc:950
+#: src/Zypper.cc:975
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr "Startar %s. Nya arkivsigneringsnycklar importeras automatiskt."
 
-#: src/Zypper.cc:963
+#: src/Zypper.cc:988
 msgid "The path specified in the --root option must be absolute."
 msgstr "Sökvägen i alternativet --root måste vara absolut."
 
-#: src/Zypper.cc:979
+#: src/Zypper.cc:1004
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -3195,45 +3296,45 @@ msgstr ""
 "Länken måste referera till din .prod-fil för kärnprodukter i /etc/products."
 "d.\n"
 
-#: src/Zypper.cc:1019
+#: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Arkiven är inaktiverade. Använder bara databasen för installerade paket."
 
-#: src/Zypper.cc:1031
+#: src/Zypper.cc:1056
 msgid "Autorefresh disabled."
 msgstr "Den automatiska uppdateringen är inaktiv."
 
-#: src/Zypper.cc:1038
+#: src/Zypper.cc:1063
 msgid "CD/DVD repositories disabled."
 msgstr "Inaktiverade CD-/DVD-arkiv."
 
-#: src/Zypper.cc:1045
+#: src/Zypper.cc:1070
 msgid "Remote repositories disabled."
 msgstr "Inaktiverade fjärrarkiv."
 
-#: src/Zypper.cc:1052
+#: src/Zypper.cc:1077
 msgid "Ignoring installed resolvables."
 msgstr "Installerade namnöversättningar ignoreras."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:1079 src/Zypper.cc:1126
+#: src/Zypper.cc:1104 src/Zypper.cc:1151
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Alternativet %s har ingen effekt här och kommer att ignoreras."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:1209
+#: src/Zypper.cc:1234
 msgid "Zypper shell does not support execution of subcommands."
 msgstr ""
 
-#: src/Zypper.cc:1288
+#: src/Zypper.cc:1313
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "Kommandot %s ersätts av %s."
 
-#: src/Zypper.cc:1289
+#: src/Zypper.cc:1314
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "Se %s för alla tillgängliga alternativ."
@@ -3241,7 +3342,7 @@ msgstr "Se %s för alla tillgängliga alternativ."
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
 #. and the third %s = "only, in-advance, in-heaps, as-needed"
-#: src/Zypper.cc:1429
+#: src/Zypper.cc:1454
 #, c-format, boost-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -3341,8 +3442,8 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Hämta endast paket. Installera inte.\n"
 
-#: src/Zypper.cc:1470 src/Zypper.cc:1525 src/Zypper.cc:1606 src/Zypper.cc:2153
-#: src/Zypper.cc:2224
+#: src/Zypper.cc:1495 src/Zypper.cc:1550 src/Zypper.cc:1631 src/Zypper.cc:2178
+#: src/Zypper.cc:2251
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -3350,7 +3451,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: src/Zypper.cc:1503
+#: src/Zypper.cc:1528
 #, c-format, boost-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -3402,7 +3503,7 @@ msgstr ""
 "    --details               Visa detaljerad installationsöversikt.\n"
 "\n"
 
-#: src/Zypper.cc:1543
+#: src/Zypper.cc:1568
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -3427,7 +3528,7 @@ msgstr ""
 "lagringsplatser.\n"
 "    --download-only      Hämta endast paketen, men installera dem inte.\n"
 
-#: src/Zypper.cc:1554
+#: src/Zypper.cc:1579
 #, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
@@ -3435,7 +3536,7 @@ msgid ""
 "executing '%2%'."
 msgstr ""
 
-#: src/Zypper.cc:1588
+#: src/Zypper.cc:1613
 #, c-format, boost-format
 msgid ""
 "verify (ve) [options]\n"
@@ -3477,7 +3578,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Hämta endast paket. Installera inte.\n"
 
-#: src/Zypper.cc:1630
+#: src/Zypper.cc:1655
 #, c-format, boost-format
 msgid ""
 "install-new-recommends (inr) [options]\n"
@@ -3513,7 +3614,7 @@ msgstr ""
 "    --debug-solver          Skapa ett testfall för felsökning.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: src/Zypper.cc:1660
+#: src/Zypper.cc:1685
 #, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -3535,7 +3636,7 @@ msgstr ""
 "-n, --name <alias>      Ange ett namn för tjänsten.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1683
+#: src/Zypper.cc:1708
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -3554,7 +3655,7 @@ msgstr ""
 "    --loose-query  Ignorera frågesträng i URI.\n"
 
 #. translators: %s is "--all" and "--all"
-#: src/Zypper.cc:1719
+#: src/Zypper.cc:1744
 #, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -3616,7 +3717,7 @@ msgstr ""
 "-t, --remote              Använd ändringarna för alla fjärrtjänster.\n"
 "-m, --medium-type <typ>  Använd ändringarna för tjänster av en viss typ.\n"
 
-#: src/Zypper.cc:1767
+#: src/Zypper.cc:1792
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -3647,7 +3748,7 @@ msgstr ""
 "-U, --sort-by-uri         Ordna listan efter URI.\n"
 "-N, --sort-by-name        Ordna listan efter namn.\n"
 
-#: src/Zypper.cc:1795
+#: src/Zypper.cc:1820
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -3670,7 +3771,7 @@ msgstr ""
 "tjänstarkiven.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1828
+#: src/Zypper.cc:1853
 #, c-format, boost-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -3716,7 +3817,7 @@ msgstr ""
 "-f, --refresh             Aktivera automatisk uppdatering för  "
 "lagringsplatsen.\n"
 
-#: src/Zypper.cc:1874
+#: src/Zypper.cc:1899
 msgid ""
 "repos (lr) [options] [repo] ...\n"
 "\n"
@@ -3758,7 +3859,7 @@ msgstr ""
 "-A, --sort-by-alias       Ordna listan efter alias.\n"
 "-N, --sort-by-name        Ordna listan efter namn.\n"
 
-#: src/Zypper.cc:1906
+#: src/Zypper.cc:1931
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -3776,7 +3877,7 @@ msgstr ""
 "    --loose-auth   Ignorera användarautentiseringsdata i URI:n.\n"
 "    --loose-query  Ignorera frågesträngar i URI:n.\n"
 
-#: src/Zypper.cc:1925
+#: src/Zypper.cc:1950
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -3791,7 +3892,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:1958
+#: src/Zypper.cc:1983
 #, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -3845,7 +3946,7 @@ msgstr ""
 "-m, --medium-type <typ>  Använd ändringarna i alla lagringsplatser av den "
 "angivna typen.\n"
 
-#: src/Zypper.cc:2000
+#: src/Zypper.cc:2025
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3876,7 +3977,7 @@ msgstr ""
 "-r, --repo <alias|#|URI> Uppdatera bara de angivna arkiven.\n"
 "-s, --services           Uppdatera tjänster innan arkiven uppdateras.\n"
 
-#: src/Zypper.cc:2029
+#: src/Zypper.cc:2054
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3900,7 +4001,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2058
+#: src/Zypper.cc:2083
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -3941,7 +4042,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2116
+#: src/Zypper.cc:2141
 #, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -4029,7 +4130,7 @@ msgstr ""
 "-d, --download-only         Hämta endast paket. Installera inte.\n"
 "\n"
 
-#: src/Zypper.cc:2192
+#: src/Zypper.cc:2218
 #, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -4111,11 +4212,11 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Hämta paketen men installera dem inte.\n"
 
-#: src/Zypper.cc:2223
+#: src/Zypper.cc:2249
 msgid "Install only patches which affect the package management itself."
 msgstr "Installera bara korrigeringar som påverkar själva pakethanteringen."
 
-#: src/Zypper.cc:2246
+#: src/Zypper.cc:2277
 msgid ""
 "list-patches (lp) [options]\n"
 "\n"
@@ -4154,7 +4255,65 @@ msgstr ""
 "    --date <ÅÅÅÅ-MM-DD>    Visa endast korrigeringsfiler före, men inte "
 "inklusive, det angivna datumet.\n"
 
-#: src/Zypper.cc:2301
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:2296
+msgid "list-patches (lp) [OPTIONS]"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:2299
+msgid "List all applicable patches."
+msgstr ""
+
+#: src/Zypper.cc:2302
+msgid ""
+"-b, --bugzilla[=#]\n"
+"List applicable patches for Bugzilla issues."
+msgstr ""
+
+#: src/Zypper.cc:2303
+msgid ""
+"--cve[=#]\n"
+"List applicable patches for CVE issues."
+msgstr ""
+
+#: src/Zypper.cc:2304
+msgid ""
+"--issues[=STRING]\n"
+"Look for issues matching the specified string."
+msgstr ""
+
+#: src/Zypper.cc:2305
+msgid ""
+"--date <YYYY-MM-DD>\n"
+"List only patches issued up to, but not including, the specified date."
+msgstr ""
+
+#: src/Zypper.cc:2306
+msgid ""
+"-g, --category <CATEGORY>\n"
+"List only patches with this category."
+msgstr ""
+
+#: src/Zypper.cc:2307
+msgid ""
+"--severity <SEVERITY>\n"
+"List only patches with this severity."
+msgstr ""
+
+#: src/Zypper.cc:2308
+msgid ""
+"-a, --all\n"
+"List all patches, not only applicable ones."
+msgstr ""
+
+#: src/Zypper.cc:2310
+msgid ""
+"-r, --repo <ALIAS|#|URI>\n"
+"List only patches from the specified repository."
+msgstr ""
+
+#: src/Zypper.cc:2353
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -4218,25 +4377,25 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Hämta endast paket. Installera inte.\n"
 
-#: src/Zypper.cc:2327
+#: src/Zypper.cc:2379
 msgid "Whether to allow downgrading installed resolvables."
 msgstr "Om det ska vara tillåtet att hämta installerade resurser."
 
-#: src/Zypper.cc:2328
+#: src/Zypper.cc:2380
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr "Om det ska vara tillåtet att byta namn på installerade resurser."
 
-#: src/Zypper.cc:2329
+#: src/Zypper.cc:2381
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
 "Om det ska vara tillåtet att ändra arkitekturen för installerade resurser."
 
-#: src/Zypper.cc:2330
+#: src/Zypper.cc:2382
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr ""
 "Om det ska vara tillåtet att ändra leverantör av installerade resurser."
 
-#: src/Zypper.cc:2368
+#: src/Zypper.cc:2420
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -4325,31 +4484,32 @@ msgstr ""
 "Om en söksträng omsluts av snedstreck (/) tolkas den som ett reguljärt "
 "uttryck.\n"
 
-#: src/Zypper.cc:2417
-msgid ""
-"patch-check (pchk) [options]\n"
-"\n"
-"Check for available patches.\n"
-"\n"
-"  Command options:\n"
-"\n"
-"-r, --repo <alias|#|URI>  Check for patches only in the specified "
-"repository.\n"
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:2470
+msgid "patch-check (pchk) [OPTIONS]"
 msgstr ""
-"patch-check (pchk) [alternativ]\n"
-"\n"
-"Sök efter tillgängliga programfixar.\n"
-"\n"
-"  Kommandoalternativ:\n"
-"\n"
-"-r, --repo <alias|#|URI>  Sök bara efter programfixar i det angivna "
-"arkivet.\n"
 
-#: src/Zypper.cc:2425
-msgid "Check only for patches which affect the package management itself."
+#. translators: command description
+#: src/Zypper.cc:2473
+msgid ""
+"Display stats about applicable patches. The command returns 100 if needed "
+"patches were found, 101 if there is at least one needed security patch."
+msgstr ""
+
+#: src/Zypper.cc:2476
+msgid ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Check for patches only in the specified repository."
+msgstr ""
+
+#: src/Zypper.cc:2477
+#, fuzzy
+msgid ""
+"--updatestack-only\n"
+"Check only for patches which affect the package management itself."
 msgstr "Sök endast efter korrigeringar som påverkar själva pakethanteringen."
 
-#: src/Zypper.cc:2441
+#: src/Zypper.cc:2494
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -4367,7 +4527,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI>  Ett annat sätt att ange ett arkiv på.\n"
 
-#: src/Zypper.cc:2472
+#: src/Zypper.cc:2525
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -4402,7 +4562,7 @@ msgstr ""
 "-N, --sort-by-name        Sortera listan efter paketnamn.\n"
 "-R, --sort-by-repo        Sortera listan efter arkiv.\n"
 
-#: src/Zypper.cc:2504
+#: src/Zypper.cc:2557
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -4424,7 +4584,7 @@ msgstr ""
 "-i, --installed-only      Visa bara installerade mönster.\n"
 "-u, --uninstalled-only    Visa bara mönster som inte har installerats.\n"
 
-#: src/Zypper.cc:2530
+#: src/Zypper.cc:2583
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -4446,7 +4606,7 @@ msgstr ""
 "-i, --installed-only      Visa bara installerade produkter.\n"
 "-u, --uninstalled-only    Visa bara produkter som inte har installerats.\n"
 
-#: src/Zypper.cc:2562
+#: src/Zypper.cc:2615
 #, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -4490,7 +4650,7 @@ msgstr ""
 "    --recommends          Visa rekommenderar.\n"
 "    --suggests            Visa föreslår.\n"
 
-#: src/Zypper.cc:2595
+#: src/Zypper.cc:2648
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -4505,7 +4665,7 @@ msgstr ""
 "\n"
 "Detgz är ett alias för %s.\n"
 
-#: src/Zypper.cc:2614
+#: src/Zypper.cc:2667
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -4520,7 +4680,7 @@ msgstr ""
 "\n"
 "Detta är ett alias för %s.\n"
 
-#: src/Zypper.cc:2633
+#: src/Zypper.cc:2686
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -4535,7 +4695,7 @@ msgstr ""
 "\n"
 "Detta är ett alias för %s.\n"
 
-#: src/Zypper.cc:2650
+#: src/Zypper.cc:2703
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -4549,7 +4709,7 @@ msgstr ""
 "\n"
 "Kommandot har inga alternativ.\n"
 
-#: src/Zypper.cc:2701
+#: src/Zypper.cc:2754
 msgid ""
 "moo\n"
 "\n"
@@ -4563,7 +4723,7 @@ msgstr ""
 "\n"
 "Kommandot har inga alternativ.\n"
 
-#: src/Zypper.cc:2723
+#: src/Zypper.cc:2776
 #, c-format, boost-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -4586,7 +4746,7 @@ msgstr ""
 "-t, --type <typ>         Typ av paket (%s).\n"
 "                          Standard: %s.\n"
 
-#: src/Zypper.cc:2750
+#: src/Zypper.cc:2803
 #, c-format, boost-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -4610,26 +4770,26 @@ msgstr ""
 "                          Standard: %s.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2777
+#: src/Zypper.cc:2830
 msgid "locks (ll) [options]"
 msgstr "locks (ll) [alternativ]"
 
 #. translators: command description
-#: src/Zypper.cc:2780
+#: src/Zypper.cc:2833
 msgid "List current package locks."
 msgstr "Visa lista över aktuella paketlås."
 
 #. translators: -m, --matches
-#: src/Zypper.cc:2784
+#: src/Zypper.cc:2837
 msgid "Show the number of resolvables matched by each lock."
 msgstr "Visa antalet resurser som matchas av varje lås."
 
 #. translators: -s, --solvables
-#: src/Zypper.cc:2786
+#: src/Zypper.cc:2839
 msgid "List the resolvables matched by each lock."
 msgstr "Visa lista över resurser som matchas av varje lås."
 
-#: src/Zypper.cc:2802
+#: src/Zypper.cc:2855
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -4648,7 +4808,7 @@ msgstr ""
 "-e, --only-empty          Ta endast bort lås som inte används för att låsa "
 "någonting.\n"
 
-#: src/Zypper.cc:2823
+#: src/Zypper.cc:2876
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -4666,7 +4826,7 @@ msgstr ""
 "  Kommandoalternativ:\n"
 "-l, --label                 Visa operativsystemsetiketten.\n"
 
-#: src/Zypper.cc:2844
+#: src/Zypper.cc:2897
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4682,7 +4842,7 @@ msgstr ""
 "  Kommandoalternativ:\n"
 "-m, --match  Tolkar ett saknat versionsnummer som vilken version som helst.\n"
 
-#: src/Zypper.cc:2863
+#: src/Zypper.cc:2916
 msgid ""
 "licenses\n"
 "\n"
@@ -4698,12 +4858,12 @@ msgstr ""
 "Kommandot har inte några ytterligare alternativ.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2887
+#: src/Zypper.cc:2940
 msgid "ps [options]"
 msgstr "ps [alternativ]"
 
 #. translators: command description
-#: src/Zypper.cc:2890
+#: src/Zypper.cc:2943
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -4712,7 +4872,7 @@ msgstr ""
 "som tagits bort vid de senaste uppgraderingarna."
 
 #. translators: -s, --short
-#: src/Zypper.cc:2894
+#: src/Zypper.cc:2947
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4723,7 +4883,7 @@ msgstr ""
 "visas endast en lista över de associerade systemtjänsternas namn."
 
 #. translators: --print <format>
-#: src/Zypper.cc:2896
+#: src/Zypper.cc:2949
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4734,7 +4894,7 @@ msgstr ""
 "följt av en ny rad. Varje '%s'-direktiv i <format> ersätts av "
 "systemtjänstens namn."
 
-#: src/Zypper.cc:2915
+#: src/Zypper.cc:2968
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4775,7 +4935,7 @@ msgstr ""
 "--dry-run            Hämta inget paket men rapportera vad som\n"
 "                     skulle ske.\n"
 
-#: src/Zypper.cc:2954
+#: src/Zypper.cc:3007
 msgid ""
 "source-download\n"
 "\n"
@@ -4804,7 +4964,7 @@ msgstr ""
 "                     men visa vilka käll-RPM-filer som saknas eller är "
 "onödiga.\n"
 
-#: src/Zypper.cc:2981
+#: src/Zypper.cc:3034
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4818,7 +4978,7 @@ msgstr ""
 "\n"
 "Kommandot har inga alternativ.\n"
 
-#: src/Zypper.cc:2998
+#: src/Zypper.cc:3051
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4833,7 +4993,7 @@ msgstr ""
 "Kommandot har inga alternativ.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3016
+#: src/Zypper.cc:3069
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4844,7 +5004,7 @@ msgstr ""
 "Visa tillgängliga tjänsttyper.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3032
+#: src/Zypper.cc:3085
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4857,7 +5017,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3054
+#: src/Zypper.cc:3107
 msgid ""
 "mount\n"
 "\n"
@@ -4877,7 +5037,7 @@ msgstr ""
 "-n, --name <namn>    Använd en given sträng som tjänstnamn.\n"
 "-r, --recurse        Dyk i underkataloger.\n"
 
-#: src/Zypper.cc:3083
+#: src/Zypper.cc:3136
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4891,7 +5051,7 @@ msgstr ""
 "alias för %s.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3100
+#: src/Zypper.cc:3153
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4902,16 +5062,16 @@ msgstr ""
 "Det här kommandot är implementerat som en testmodul och returnerar alltid "
 "0.\n"
 
-#: src/Zypper.cc:3143 src/Zypper.cc:5265
+#: src/Zypper.cc:3196 src/Zypper.cc:5236
 msgid "Unexpected program flow."
 msgstr "Oväntat programflöde."
 
-#: src/Zypper.cc:3191
+#: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
 msgstr "Programargument som inte är alternativ: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3251
+#: src/Zypper.cc:3303
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4921,20 +5081,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3278
+#: src/Zypper.cc:3326
 msgid "Root privileges are required for refreshing services."
 msgstr "Det behövs root-behörighet för att kunna uppdatera tjänster."
 
-#: src/Zypper.cc:3304 src/Zypper.cc:3395 src/Zypper.cc:3618
+#: src/Zypper.cc:3350 src/Zypper.cc:3439 src/Zypper.cc:3656
 msgid "Root privileges are required for modifying system services."
 msgstr "Det behövs root-behörighet för att kunna ändra systemtjänster."
 
-#: src/Zypper.cc:3377
+#: src/Zypper.cc:3423
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "%s är inte en giltig tjänsttyp."
 
-#: src/Zypper.cc:3379
+#: src/Zypper.cc:3425
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "En lista över kända tjänsttyper finns i %s och %s."
@@ -4943,119 +5103,119 @@ msgstr "En lista över kända tjänsttyper finns i %s och %s."
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3406 src/Zypper.cc:3763
+#: src/Zypper.cc:3450 src/Zypper.cc:3797
 msgid "Alias or an aggregate option is required."
 msgstr "Ett alias eller ett mängdalternativ behövs."
 
-#: src/Zypper.cc:3438
+#: src/Zypper.cc:3482
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Tjänsten %s hittades inte."
 
-#: src/Zypper.cc:3469 src/Zypper.cc:3617 src/Zypper.cc:3698 src/Zypper.cc:3752
+#: src/Zypper.cc:3509 src/Zypper.cc:3655 src/Zypper.cc:3734 src/Zypper.cc:3786
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Root-behörigheter krävs för att ändra systemarkiv."
 
-#: src/Zypper.cc:3524 src/Zypper.cc:3874
+#: src/Zypper.cc:3564 src/Zypper.cc:3902
 msgid "Too few arguments."
 msgstr "För få argument."
 
-#: src/Zypper.cc:3547
+#: src/Zypper.cc:3587
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Om bara ett argument används måste det vara en URI som pekar på en REPO-fil."
 
-#: src/Zypper.cc:3577
+#: src/Zypper.cc:3617
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 "Det går inte att använda %s tillsammans med %s. Inställningen %s används."
 
-#: src/Zypper.cc:3596
+#: src/Zypper.cc:3636
 msgid "Specified type is not a valid repository type:"
 msgstr "Den angivna typen är inte en giltig förrådstyp:"
 
-#: src/Zypper.cc:3597
+#: src/Zypper.cc:3637
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "Se '%s' eller '%s' för att få en lista över kända förrådstyper."
 
-#: src/Zypper.cc:3625 src/Zypper.cc:4851 src/utils/messages.cc:45
+#: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
 msgstr "Argument som krävs saknas."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:3650
+#: src/Zypper.cc:3688
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Förrådet '%s' hittades inte med hjälp av alias, nummer eller URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:3672
+#: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr ""
 "Det gick inte att hitta tjänsten %s med hjälp av alias, nummer eller URI."
 
-#: src/Zypper.cc:3705
+#: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "För få argument. Ange minst URI och alias."
 
-#: src/Zypper.cc:3729
+#: src/Zypper.cc:3765
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Förrådet %s hittades inte."
 
-#: src/Zypper.cc:3795
+#: src/Zypper.cc:3829
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Förrådet %s hittades inte."
 
-#: src/Zypper.cc:3814
+#: src/Zypper.cc:3846
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Root-behörigheter krävs för att uppdatera systemarkiv."
 
-#: src/Zypper.cc:3820
+#: src/Zypper.cc:3852
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Det globala alternativet %s har ingen effekt här."
 
-#: src/Zypper.cc:3828
+#: src/Zypper.cc:3860
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Det går inte att använda argument om %s används."
 
-#: src/Zypper.cc:3854
+#: src/Zypper.cc:3884
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Det behövs root-behörighet för att kunna rensa lokala cacheminnen."
 
-#: src/Zypper.cc:3875
+#: src/Zypper.cc:3903
 msgid "At least one package name is required."
 msgstr "Minst ett paketnamn måste anges."
 
-#: src/Zypper.cc:3884
+#: src/Zypper.cc:3912
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Root-behörigheter krävs för att installera eller avinstallera paket."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:3896
+#: src/Zypper.cc:3924
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Ignorerar argument, markerar hela arkivet."
 
-#: src/Zypper.cc:3907
+#: src/Zypper.cc:3935
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Okänd pakettyp: %s"
 
-#: src/Zypper.cc:3917
+#: src/Zypper.cc:3945
 msgid "Cannot uninstall patches."
 msgstr "Det går inte att avinstallera programfixar."
 
-#: src/Zypper.cc:3918
+#: src/Zypper.cc:3946
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -5066,34 +5226,34 @@ msgstr ""
 "Programfixar installeras inte baserat på kopierade filer, databasposter\n"
 "eller liknande."
 
-#: src/Zypper.cc:3928
+#: src/Zypper.cc:3956
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Avinstallation av ett källpaket ej definierat och implementerat."
 
-#: src/Zypper.cc:3947
+#: src/Zypper.cc:3975
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "%s ser ut som en RPM-fil. Ett försök att hämta den görs."
 
-#: src/Zypper.cc:3956
+#: src/Zypper.cc:3984
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Det uppstod ett problem med RPM-filen %s. Den hoppas över."
 
-#: src/Zypper.cc:3978
+#: src/Zypper.cc:4006
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Det går inte att läsa RPM-huvudet i %s. Är det en RPM-fil?"
 
-#: src/Zypper.cc:4000
+#: src/Zypper.cc:4028
 msgid "Plain RPM files cache"
 msgstr "Enkel RPM-filcache"
 
-#: src/Zypper.cc:4017
+#: src/Zypper.cc:4045
 msgid "No valid arguments specified."
 msgstr "Inget giltigt argument har angetts."
 
-#: src/Zypper.cc:4034 src/Zypper.cc:4169
+#: src/Zypper.cc:4062 src/Zypper.cc:4193
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -5102,69 +5262,69 @@ msgstr ""
 "installeras."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4071 src/Zypper.cc:4660
+#: src/Zypper.cc:4099 src/Zypper.cc:4658
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s står i strid med %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4079
+#: src/Zypper.cc:4107
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "Det går för närvarande inte att använda %s med %s"
 
-#: src/Zypper.cc:4122
+#: src/Zypper.cc:4148
 msgid "Source package name is a required argument."
 msgstr "Källpaketnamn är ett argument som krävs."
 
-#: src/Zypper.cc:4209
+#: src/Zypper.cc:4231
 msgid "Mode is set to 'match-exact'"
 msgstr "Läget är inställt till match-exact"
 
-#: src/Zypper.cc:4229 src/Zypper.cc:4577 src/Zypper.cc:4679 src/Zypper.cc:4879
-#: src/Zypper.cc:4929 src/Zypper.cc:4971
+#: src/Zypper.cc:4251 src/Zypper.cc:4577 src/Zypper.cc:4677 src/Zypper.cc:4874
+#: src/Zypper.cc:4922 src/Zypper.cc:4962
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Okänd pakettyp: %s."
 
-#: src/Zypper.cc:4251
+#: src/Zypper.cc:4273
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Den angivna lagringsplatsen \"%s\" är inaktiverad."
 
 #. translators: empty search result message
-#: src/Zypper.cc:4381
+#: src/Zypper.cc:4403
 #, fuzzy
 msgid "No matching items found."
 msgstr "Inga matchande utgåvor hittades."
 
-#: src/Zypper.cc:4416
+#: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Ett problem uppstod när sökfrågan initierades eller kördes"
 
-#: src/Zypper.cc:4417
+#: src/Zypper.cc:4439
 msgid "See the above message for a hint."
 msgstr "Mer information finns i meddelandet ovan."
 
-#: src/Zypper.cc:4596 src/Zypper.cc:4646
+#: src/Zypper.cc:4596 src/Zypper.cc:4644
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Det går inte att använda %s tillsammans med %s."
 
-#: src/Zypper.cc:4627
+#: src/Zypper.cc:4625
 msgid "Root privileges are required for updating packages."
 msgstr "Root-behörigheter krävs för att uppdatera paket."
 
-#: src/Zypper.cc:4686 src/Zypper.cc:4694 src/Zypper.cc:4766
+#: src/Zypper.cc:4684 src/Zypper.cc:4692 src/Zypper.cc:4765
 msgid "Operation not supported."
 msgstr "Det finns inte stöd för åtgärden."
 
-#: src/Zypper.cc:4687
+#: src/Zypper.cc:4685
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Uppdatera installerade produkter med \"%s\"."
 
-#: src/Zypper.cc:4695
+#: src/Zypper.cc:4693
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -5173,18 +5333,18 @@ msgstr ""
 "Zypper spårar inte installerade källpaket. Om du vill installera det senaste "
 "källpaketet och dess byggberoenden använder du \"%s\"."
 
-#: src/Zypper.cc:4711
+#: src/Zypper.cc:4709
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Det går inte att använda flera typer när specifika paket anges som argument."
 
-#: src/Zypper.cc:4804
+#: src/Zypper.cc:4801
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
 "Det behövs root-behörighet för att kunna göra en distributionsuppgradering."
 
-#: src/Zypper.cc:4824
+#: src/Zypper.cc:4821
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -5195,69 +5355,69 @@ msgstr ""
 "Kontrollera att arkiven är kompatibla innan du fortsätter. Mer information "
 "om kommandot finns i %s."
 
-#: src/Zypper.cc:4854 src/utils/messages.cc:37 src/utils/messages.cc:47
+#: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
 msgstr "Användning"
 
-#: src/Zypper.cc:4908 src/Zypper.cc:4951
+#: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
 msgstr "Det behövs root-behörighet för att kunna lägga till paketlås."
 
-#: src/Zypper.cc:5036
+#: src/Zypper.cc:5023
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Zypper.cc:5049
+#: src/Zypper.cc:5034
 msgid "XML output not implemented for this command."
 msgstr ""
 
-#: src/Zypper.cc:5062
+#: src/Zypper.cc:5047
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Distributionsetikett: %s"
 
-#: src/Zypper.cc:5063
+#: src/Zypper.cc:5048
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Kort etikett: %s"
 
-#: src/Zypper.cc:5106
+#: src/Zypper.cc:5089
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s matchar %s"
 
-#: src/Zypper.cc:5108
+#: src/Zypper.cc:5091
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s är nyare än %s"
 
-#: src/Zypper.cc:5110
+#: src/Zypper.cc:5093
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s är äldre %s"
 
-#: src/Zypper.cc:5194 src/source-download.cc:217
+#: src/Zypper.cc:5171 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Du har inte behörighet att använda hämtningskatalogen %s."
 
-#: src/Zypper.cc:5250
+#: src/Zypper.cc:5223
 msgid "This command only makes sense in the zypper shell."
 msgstr "Kommandot har bara effekt i zypper-skalet."
 
-#: src/Zypper.cc:5262
+#: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
 msgstr "Du kör redan zypper-skalet."
 
-#: src/Zypper.cc:5277
+#: src/Zypper.cc:5246
 msgid "Description"
 msgstr "Beskrivning"
 
-#: src/Zypper.cc:5342
+#: src/Zypper.cc:5310
 msgid "Resolvable Type"
 msgstr "Resurstyp"
 
@@ -6278,6 +6438,25 @@ msgstr "Tillgängliga hämtningslägen: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Alternativet %s åsidosätter %s."
+
+#~ msgid ""
+#~ "patch-check (pchk) [options]\n"
+#~ "\n"
+#~ "Check for available patches.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "\n"
+#~ "-r, --repo <alias|#|URI>  Check for patches only in the specified "
+#~ "repository.\n"
+#~ msgstr ""
+#~ "patch-check (pchk) [alternativ]\n"
+#~ "\n"
+#~ "Sök efter tillgängliga programfixar.\n"
+#~ "\n"
+#~ "  Kommandoalternativ:\n"
+#~ "\n"
+#~ "-r, --repo <alias|#|URI>  Sök bara efter programfixar i det angivna "
+#~ "arkivet.\n"
 
 #~ msgid "Catalog: "
 #~ msgstr "Katalog: "

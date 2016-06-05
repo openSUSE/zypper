@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-12 17:01+0200\n"
+"POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-05-17 15:56+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <http://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <http://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -419,6 +419,16 @@ msgstr "Ha fallat la verificació de la signatura."
 msgid "Accepting package despite the error."
 msgstr "S'accepta el paquet malgrat l'error."
 
+#: src/SolverRequester.h:57
+#, boost-format
+msgid "Suspicious category filter value '%1%'."
+msgstr ""
+
+#: src/SolverRequester.h:68
+#, boost-format
+msgid "Suspicious severity filter value '%1%'."
+msgstr ""
+
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
 msgstr "Sí"
@@ -577,14 +587,14 @@ msgstr "Visible per a l'usuari: "
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:613 src/search.cc:65 src/search.cc:232
+#: src/info.cc:402 src/update.cc:910 src/search.cc:65 src/search.cc:232
 #: src/search.cc:439 src/search.cc:575 src/search.cc:634
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
 #: src/info.cc:402 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:383 src/update.cc:618 src/update.cc:753 src/Zypper.cc:5277
+#: src/update.cc:665 src/update.cc:915 src/update.cc:1050 src/Zypper.cc:5246
 #: src/search.cc:67 src/search.cc:233 src/search.cc:325 src/search.cc:440
 #: src/search.cc:577 src/search.cc:639 src/locks.cc:104
 msgid "Name"
@@ -777,109 +787,109 @@ msgstr ""
 msgid "Manual entry for %1% can't be shown"
 msgstr "No es pot mostrar l'entrada manual per a %1%"
 
-#: src/RequestFeedback.cc:29
+#: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
 msgstr ""
 "\"%s\" no s'ha trobat entre els noms de paquets. Provant potencialitats."
 
-#: src/RequestFeedback.cc:35
+#: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
 msgstr "No s'ha trobat el paquet %s."
 
-#: src/RequestFeedback.cc:37
+#: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
 msgstr "No s'ha trobat el pedaç %s."
 
-#: src/RequestFeedback.cc:39
+#: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
 msgstr "No s'ha trobat el producte %s."
 
-#: src/RequestFeedback.cc:41
+#: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
 msgstr "No s'ha trobat el patró %s."
 
-#: src/RequestFeedback.cc:43 src/misc.cc:298
+#: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
 msgid "Source package '%s' not found."
 msgstr "No s'ha trobat el paquet de codi font %s."
 
 #. just in case
-#: src/RequestFeedback.cc:45
+#: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
 msgstr "No s'ha trobat l'objecte %s."
 
-#: src/RequestFeedback.cc:50
+#: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
 msgstr "No s'ha trobat el paquet %s al repositori especificat."
 
-#: src/RequestFeedback.cc:52
+#: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
 msgstr "No s'ha trobat el pedaç %s als repositoris especificats."
 
-#: src/RequestFeedback.cc:54
+#: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
 msgstr "No s'ha trobat el producte %s als repositoris especificats."
 
-#: src/RequestFeedback.cc:56
+#: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
 msgstr "No s'ha trobat el patró %s als repositoris especificats."
 
-#: src/RequestFeedback.cc:58
+#: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
 msgstr "No s'ha trobat el paquet de codi font %s als repositoris especificats."
 
 #. just in case
-#: src/RequestFeedback.cc:60
+#: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
 msgstr "No s'ha trobat l'objecte %s als repositoris especificats."
 
 #. translators: meaning a package %s or provider of capability %s
-#: src/RequestFeedback.cc:65
+#: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
 msgstr "No s'ha trobat cap proveïdor de %s."
 
 #. wildcards used
-#: src/RequestFeedback.cc:73
+#: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
 msgstr "No hi ha cap paquet instal·lat que coincideixi amb \"%s\"."
 
-#: src/RequestFeedback.cc:75
+#: src/RequestFeedback.cc:86
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
 msgstr "El paquet %s no està instal·lat."
 
 #. translators: meaning provider of capability %s
-#: src/RequestFeedback.cc:79
+#: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
 msgstr "No hi ha proveïdor instal·lat per a %s."
 
-#: src/RequestFeedback.cc:84
+#: src/RequestFeedback.cc:95
 #, c-format, boost-format
 msgid "'%s' is already installed."
 msgstr "%s ja està instal·lat."
 
 #. translators: %s are package names
-#: src/RequestFeedback.cc:87
+#: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "L'element %s que proporciona %s ja està insta·lat."
 
-#: src/RequestFeedback.cc:94
+#: src/RequestFeedback.cc:105
 #, c-format, boost-format
 msgid ""
 "No update candidate for '%s'. The highest available version is already "
@@ -888,12 +898,12 @@ msgstr ""
 "No hi ha candidat d'actualització per a %s. La versió més nova ja està "
 "instal·lada."
 
-#: src/RequestFeedback.cc:97
+#: src/RequestFeedback.cc:108
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
 msgstr "Cap actualització candidata per a %s."
 
-#: src/RequestFeedback.cc:103
+#: src/RequestFeedback.cc:114
 #, c-format, boost-format
 msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
@@ -902,7 +912,7 @@ msgstr ""
 "Hi ha una actualització canditata %s per a %s, però no coincideix pel que fa "
 "a la versió, arquitectura o repositori."
 
-#: src/RequestFeedback.cc:112
+#: src/RequestFeedback.cc:123
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
@@ -911,7 +921,7 @@ msgstr ""
 "Hi ha una actualització canditata per a %s, però és d'un proveïdor diferent. "
 "Utilitzeu \"%s\" per instal·lar aquest candidat."
 
-#: src/RequestFeedback.cc:121
+#: src/RequestFeedback.cc:132
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
@@ -920,7 +930,7 @@ msgstr ""
 "Hi ha una actualització canditata per a %s, però és d'un repositori amb una "
 "prioritat més baixa. Utilitzeu \"%s\" per instal·lar aquest candidat."
 
-#: src/RequestFeedback.cc:131
+#: src/RequestFeedback.cc:142
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
@@ -929,7 +939,7 @@ msgstr ""
 "Hi ha una actualització canditata per a %s, però té un blocatge. Utilitzeu "
 "\"%s\" per desbloquejar-la."
 
-#: src/RequestFeedback.cc:137
+#: src/RequestFeedback.cc:148
 #, c-format, boost-format
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
@@ -938,7 +948,7 @@ msgstr ""
 "El paquet %s no està disponible als repositoris. No es pot reinstal·lar, "
 "actualitzar o desactualitzar."
 
-#: src/RequestFeedback.cc:147
+#: src/RequestFeedback.cc:158
 #, c-format, boost-format
 msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
@@ -948,75 +958,84 @@ msgstr ""
 "hi ha instal·lat."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
-#: src/RequestFeedback.cc:151
+#: src/RequestFeedback.cc:162
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
 msgstr "Feu servir \"%s\" per forçar la instal·lació del paquet."
 
-#: src/RequestFeedback.cc:159
+#: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
 msgstr "El pedaç %s és interactiu, s'omet."
 
-#: src/RequestFeedback.cc:166
+#: src/RequestFeedback.cc:175
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
 msgstr "El pedaç %s no és necessari."
 
-#: src/RequestFeedback.cc:175
+#: src/RequestFeedback.cc:181
+#, fuzzy, boost-format
+msgid ""
+"Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
+"optional patches."
+msgstr ""
+"El pedaç %s està bloquejat. Feu servir \"%s\" per instal·lar-lo, o "
+"desbloquegeu-lo fent servir \"%s\"."
+
+#: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
 "El pedaç %s està bloquejat. Feu servir \"%s\" per instal·lar-lo, o "
 "desbloquegeu-lo fent servir \"%s\"."
 
-#: src/RequestFeedback.cc:183
+#: src/RequestFeedback.cc:199
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
 msgstr "El pedaç %s no és dins la categoria especificada."
 
-#: src/RequestFeedback.cc:191
+#: src/RequestFeedback.cc:206
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
 msgstr "El pedaç %s no té la severitat especificada."
 
-#: src/RequestFeedback.cc:199
+#: src/RequestFeedback.cc:213
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
 msgstr "El pedaç %s es va publicar després de la data especificada."
 
-#: src/RequestFeedback.cc:204
+#: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
 msgstr "Seleccionant %s del repositori %s per instal·lar."
 
-#: src/RequestFeedback.cc:208
+#: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
 msgstr "Forçant la instal·lació de %s del repositori %s."
 
-#: src/RequestFeedback.cc:212
+#: src/RequestFeedback.cc:226
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
 msgstr "Seleccionant %s per eliminar."
 
-#: src/RequestFeedback.cc:219
+#: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
 msgstr "%s està bloquejat. Feu servir \"%s\" per desbloquejar-lo."
 
-#: src/RequestFeedback.cc:224
+#: src/RequestFeedback.cc:238
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
 msgstr "Afegint el requeriment \"%s\"."
 
-#: src/RequestFeedback.cc:227
+#: src/RequestFeedback.cc:241
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
 msgstr "Afegint el conflicte \"%s\"."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
-#: src/RequestFeedback.cc:249
+#: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
 msgstr "Volíeu dir %1%?"
@@ -2016,14 +2035,14 @@ msgstr "Iniciant la destinació"
 msgid "Target initialization failed:"
 msgstr "Objectiu d'inici fallat:"
 
-#: src/repos.cc:898 src/Zypper.cc:4418
+#: src/repos.cc:898 src/Zypper.cc:4440
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Amb l'ordre \"zypper refresh\" com a administrador es podria resoldre el "
 "problema."
 
 # DZ
-#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5277
+#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5246
 msgid "Alias"
 msgstr "Àlies"
 
@@ -2557,7 +2576,8 @@ msgstr "El nom del servei %s s'ha establert a \"%s\"."
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "El repositori %s s'ha afegit als repositoris habilitats del servei %s."
+msgstr[0] ""
+"El repositori %s s'ha afegit als repositoris habilitats del servei %s."
 msgstr[1] ""
 "Els repositoris %s s'han afegit als repositoris habilitats del servei %s."
 
@@ -2663,7 +2683,7 @@ msgstr "Llegint els paquets instal·lats..."
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Hi ha hagut un problema mentre es llegien els paquets instal·lats:"
 
-#: src/update.cc:83
+#: src/update.cc:84
 #, c-format, boost-format
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
@@ -2672,151 +2692,219 @@ msgstr ""
 "Ignorant %s sense argument perquè s'ha especificat una opció semblant amb un "
 "argument."
 
-#: src/update.cc:180
+#. translator: stats table header (plural number is %2%)
+#: src/update.cc:329
+#, boost-format
+msgid "Considering %1% out of %2% applicable patches:"
+msgid_plural "Considering %1% out of %2% applicable patches:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translator: stats table header
+#: src/update.cc:333
+#, boost-format
+msgid "Found %1% applicable patch:"
+msgid_plural "Found %1% applicable patches:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translator: stats summary
+#: src/update.cc:343
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
 msgstr[0] "%d pedaç bloquejat"
 msgstr[1] "%d pedaços bloquejats"
 
-#. translators: %d is the number of needed patches
-#: src/update.cc:186
+#. translator: stats summary
+#: src/update.cc:351
+#, fuzzy, c-format, boost-format
+msgid "%d patch optional"
+msgid_plural "%d patches optional"
+msgstr[0] "%d pedaç bloquejat"
+msgstr[1] "%d pedaços bloquejats"
+
+#. translator: Hint displayed right adjusted; %1% is a CLI option
+#. "42 patches optional                  (use --with-optional to include optional patches)"
+#: src/update.cc:355
+#, boost-format
+msgid "use '%1%' to include optional patches"
+msgstr ""
+
+#. translator: stats summary
+#: src/update.cc:364
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
 msgstr[0] "%d pedaç necessaris"
 msgstr[1] "%d pedaços necessaris"
 
-#. translators: %d is the number of security patches
-#: src/update.cc:189
+#. translator: stats summary
+#: src/update.cc:367
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
 msgstr[0] "%d pedaç de seguretat"
 msgstr[1] "%d pedaços de seguretat"
 
-#: src/update.cc:199
+#. translator: Table column header.
+#: src/update.cc:399 src/update.cc:665 src/update.cc:981 src/update.cc:1050
+#: src/search.cc:326
+msgid "Category"
+msgstr "Categoria"
+
+#. translator: Table column header.
+#: src/update.cc:401
+msgid "Updatestack"
+msgstr ""
+
+#. translator: Table column header.
+#: src/update.cc:403 src/update.cc:830
+msgid "Patches"
+msgstr "Pedaços"
+
+#. translator: Table column header.
+#: src/update.cc:405
+msgid "Locked"
+msgstr ""
+
+#. translator: Table column header
+#. Used if stats collect data for more than one category name.
+#. Category    | Updatestack | Patches | Locked | Included categories
+#. ------------+-------------+---------+--------+---------------------
+#. optional   | ...                      ..... | enhancement, feature
+#: src/update.cc:411
+msgid "Included categories"
+msgstr ""
+
+#. Translator: Patch status: needed, optional, unwanted, applied, not needed
+#: src/update.cc:474
 msgid "unwanted"
 msgstr "no volgut"
 
-#: src/update.cc:200
+#: src/update.cc:476
+#, fuzzy
+msgid "optional"
+msgstr "ps [opcions]"
+
+#: src/update.cc:477
 msgid "needed"
 msgstr "necessari"
 
-#: src/update.cc:201
+#: src/update.cc:479
 msgid "applied"
 msgstr "aplicat"
 
-#: src/update.cc:202
+#: src/update.cc:480
 msgid "not needed"
 msgstr "no és necessari"
 
-#: src/update.cc:208
+#: src/update.cc:486
 msgid "undetermined"
 msgstr "sense determinar"
 
 #. translators: package's repository (header)
-#: src/update.cc:382 src/update.cc:615 src/search.cc:75 src/search.cc:324
+#: src/update.cc:664 src/update.cc:912 src/search.cc:75 src/search.cc:324
 #: src/search.cc:442 src/search.cc:576 src/search.cc:635 src/locks.cc:107
 msgid "Repository"
 msgstr "Repositori"
 
-#: src/update.cc:383 src/update.cc:684 src/update.cc:753 src/search.cc:326
-msgid "Category"
-msgstr "Categoria"
-
-#: src/update.cc:383 src/update.cc:684 src/update.cc:753 src/search.cc:327
+#: src/update.cc:665 src/update.cc:981 src/update.cc:1050 src/search.cc:327
 msgid "Severity"
 msgstr "Gravetat"
 
-#: src/update.cc:383 src/update.cc:684 src/update.cc:753
+#: src/update.cc:665 src/update.cc:981 src/update.cc:1050
 msgid "Interactive"
 msgstr "Interactiu"
 
-#: src/update.cc:383 src/update.cc:684 src/search.cc:328
+#: src/update.cc:665 src/update.cc:981 src/search.cc:328
 msgid "Status"
 msgstr "Estat"
 
 #. translators: package summary (header)
-#: src/update.cc:383 src/update.cc:753 src/search.cc:235
+#: src/update.cc:665 src/update.cc:1050 src/search.cc:235
 msgid "Summary"
 msgstr "Resum"
 
-#: src/update.cc:431
+#: src/update.cc:717
 msgid "The following software management updates will be installed first:"
 msgstr ""
 "S'instal·laran primer les actualitzacions de gestió de programari següents:"
 
-#: src/update.cc:440 src/update.cc:671
+#. translator: Table headline; 'Needed' refers to patches with status 'needed'
+#: src/update.cc:720
+#, fuzzy
+msgid "Needed software management updates will be installed first:"
+msgstr ""
+"S'instal·laran primer les actualitzacions de gestió de programari següents:"
+
+#: src/update.cc:729 src/update.cc:968
 msgid "No updates found."
 msgstr "No s'ha trobat cap actualització."
 
-#: src/update.cc:446
+#. translator: Table headline
+#: src/update.cc:736
 msgid "The following updates are also available:"
 msgstr "Les següents actualitzacions també estan disponibles:"
 
-#: src/update.cc:531
+#: src/update.cc:828
 msgid "Package updates"
 msgstr "Actualitzacions de paquets"
 
-#: src/update.cc:533
-msgid "Patches"
-msgstr "Pedaços"
-
-#: src/update.cc:535
+#: src/update.cc:832
 msgid "Pattern updates"
 msgstr "Actualitzacions de patrons"
 
-#: src/update.cc:537
+#: src/update.cc:834
 msgid "Product updates"
 msgstr "Actualitzacions de productes"
 
-#: src/update.cc:623
+#: src/update.cc:920
 msgid "Current Version"
 msgstr "Versió actual"
 
-#: src/update.cc:624
+#: src/update.cc:921
 msgid "Available Version"
 msgstr "Versió disponible"
 
 #. translators: package architecture (header)
-#: src/update.cc:624 src/search.cc:73 src/search.cc:579 src/search.cc:641
+#: src/update.cc:921 src/search.cc:73 src/search.cc:579 src/search.cc:641
 msgid "Arch"
 msgstr "Arquitectura"
 
-#: src/update.cc:684
+#: src/update.cc:981
 msgid "Issue"
 msgstr "Problema"
 
-#: src/update.cc:684
+#: src/update.cc:981
 msgid "No."
 msgstr "No."
 
-#: src/update.cc:684
+#: src/update.cc:981
 msgid "Patch"
 msgstr "Pedaç"
 
-#: src/update.cc:794
+#: src/update.cc:1091
 msgid "No matching issues found."
 msgstr "No s'ha trobat cap assumpte que coincideixi."
 
-#: src/update.cc:802
+#: src/update.cc:1099
 msgid "The following matches in issue numbers have been found:"
 msgstr "S'han trobat les següents coincidències d'aspecte numèric:"
 
-#: src/update.cc:811
+#: src/update.cc:1108
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 "S'han trobat coincidències en descripcions de pedaços dels pedaços següents:"
 
-#: src/update.cc:879
+#: src/update.cc:1177
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "La reparació de l'assumpte de Bugzilla amb el número %s no s'ha trobat o no "
 "es necessita."
 
-#: src/update.cc:881
+#: src/update.cc:1179
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
@@ -2824,7 +2912,7 @@ msgstr ""
 "necessita."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:884
+#: src/update.cc:1182
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -2836,7 +2924,22 @@ msgstr ""
 msgid "OK OK! Exiting immediately..."
 msgstr "D'acord, d'acord! Sortint immediatament..."
 
-#: src/Zypper.cc:89
+#: src/Zypper.cc:77
+msgid ""
+"--with[out]-optional\n"
+"Whether applicable optional patches should be treated as needed or be "
+"excluded."
+msgstr ""
+
+#: src/Zypper.cc:80
+msgid "The default is to exclude optional patches."
+msgstr ""
+
+#: src/Zypper.cc:81
+msgid "The default is to include optional patches."
+msgstr ""
+
+#: src/Zypper.cc:104
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -2845,19 +2948,19 @@ msgstr ""
 "aplicació d'actualització o de gestió de paquets que està utilitzant el "
 "PackageKit en funcionament."
 
-#: src/Zypper.cc:94
+#: src/Zypper.cc:109
 msgid "Tell PackageKit to quit?"
 msgstr "Demano al PackageKit que ho deixi estar?"
 
-#: src/Zypper.cc:103
+#: src/Zypper.cc:118
 msgid "PackageKit is still running (probably busy)."
 msgstr "El PackageKit encara està actiu (probablement ocupat)."
 
-#: src/Zypper.cc:104
+#: src/Zypper.cc:119
 msgid "Try again?"
 msgstr "Ho torno a intentar?"
 
-#: src/Zypper.cc:174
+#: src/Zypper.cc:189
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
@@ -2865,30 +2968,30 @@ msgstr ""
 "S'ha detectat una opció de línia d'ordres de llegat, antiga: %1%. Si us "
 "plau, en comptes d'això, feu servir l'opció global %2%."
 
-#: src/Zypper.cc:175
+#: src/Zypper.cc:190
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
 "S'ha detectat una opció de línia d'ordres de llegat, antiga: %1%. Si us "
 "plau, en comptes d'això, feu servir %2%."
 
-#: src/Zypper.cc:254
+#: src/Zypper.cc:269
 msgid "Command options:"
 msgstr "Opcions de l'ordre:"
 
-#: src/Zypper.cc:257 src/Zypper.cc:2326
+#: src/Zypper.cc:272
 msgid "Expert options:"
 msgstr "Opcions avançades:"
 
-#: src/Zypper.cc:260
+#: src/Zypper.cc:275
 msgid "This command has no additional options."
 msgstr "Aquesta ordre no té opcions addicionals."
 
-#: src/Zypper.cc:381 src/Zypper.cc:1320
+#: src/Zypper.cc:406 src/Zypper.cc:1345
 msgid "Unexpected exception."
 msgstr "Excepció inesperada."
 
-#: src/Zypper.cc:403
+#: src/Zypper.cc:428
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2934,7 +3037,7 @@ msgstr ""
 "\t--xmlout, -x\t\tCommuta a una sortida XML.\n"
 "\t--ignore-unknown, -i\tIgnora els paquets desconeguts.\n"
 
-#: src/Zypper.cc:425
+#: src/Zypper.cc:450
 msgid ""
 "\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
 "\t\t\t\tdirectory.\n"
@@ -2949,11 +3052,11 @@ msgstr ""
 "memòries cau.\n"
 "\t--raw-cache-dir <dir>\tUsa el directori de cau de metadades en cru "
 "alternatiu.\n"
-"\t--solv-cache-dir <dir>\tUsa el directori de cau de fitxers solv alternatiu."
-"\n"
+"\t--solv-cache-dir <dir>\tUsa el directori de cau de fitxers solv "
+"alternatiu.\n"
 "\t--pkg-cache-dir <dir>\tUsa el directori de cau de paquets alternatiu.\n"
 
-#: src/Zypper.cc:433
+#: src/Zypper.cc:458
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -2988,7 +3091,7 @@ msgstr ""
 "\t--releasever\t\tEstableix el valor de $releasever en tots els fitxers ."
 "repo (per defecte: versió de la distribució)\n"
 
-#: src/Zypper.cc:447
+#: src/Zypper.cc:472
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -3000,7 +3103,7 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tNo llegeixis els paquets instal·lats.\n"
 
-#: src/Zypper.cc:454
+#: src/Zypper.cc:479
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -3010,7 +3113,7 @@ msgstr ""
 "\thelp, ?\t\t\tImprimeix l'ajuda.\n"
 "\tshell, sh\t\tAccepta ordres múltiple d'un sol cop.\n"
 
-#: src/Zypper.cc:459
+#: src/Zypper.cc:484
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -3030,7 +3133,7 @@ msgstr ""
 "\trefresh, ref\t\tRefresca tots els repositoris.\n"
 "\tclean\t\t\tNeteja la memòria cau local.\n"
 
-#: src/Zypper.cc:469
+#: src/Zypper.cc:494
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -3046,7 +3149,7 @@ msgstr ""
 "\tremoveservice, rs\tElimina un servei especificat.\n"
 "\trefresh-services, refs\tRefreca tots els serveis.\n"
 
-#: src/Zypper.cc:477
+#: src/Zypper.cc:502
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -3068,7 +3171,7 @@ msgstr ""
 "\t\t\t\tInstal·la paquets recomanats afegits recentment\n"
 "\t\t\t\tper paquets instal·lats.\n"
 
-#: src/Zypper.cc:488
+#: src/Zypper.cc:513
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -3086,7 +3189,7 @@ msgstr ""
 "\tdist-upgrade, dup\tFes una actualització de la distribució.\n"
 "\tpatch-check, pchk\tComprova si hi ha pedaços disponibles.\n"
 
-#: src/Zypper.cc:497
+#: src/Zypper.cc:522
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -3114,7 +3217,7 @@ msgstr ""
 "\twhat-provides, wp\tLista els paquets que proveeixin una capacitat "
 "especificada.\n"
 
-#: src/Zypper.cc:512
+#: src/Zypper.cc:537
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -3128,7 +3231,7 @@ msgstr ""
 "\tlocks, ll\t\tLlista els blocatges de paquets vigents.\n"
 "\tcleanlocks, cl\t\tTreu blocatges de paquet no usats.\n"
 
-#: src/Zypper.cc:519
+#: src/Zypper.cc:544
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -3150,7 +3253,7 @@ msgstr ""
 "\tsource-download\t\tDownload source rpms for all installed packages\n"
 "\t\t\t\tto a local directory.\n"
 
-#: src/Zypper.cc:529
+#: src/Zypper.cc:554
 msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
@@ -3158,7 +3261,7 @@ msgstr ""
 "     Subordres:\n"
 "\tsubcommand\t\tLlista les subordres disponibles.\n"
 
-#: src/Zypper.cc:534
+#: src/Zypper.cc:559
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -3170,54 +3273,54 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:562
+#: src/Zypper.cc:587
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr "Escriviu \"%s\" per obtenir una llista global d'opcions i ordres."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:571
+#: src/Zypper.cc:596
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Escriviu \"%s\" per obtenir ajuda sobre una ordre concreta."
 
-#: src/Zypper.cc:746
+#: src/Zypper.cc:771
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Verbositat: %d"
 
-#: src/Zypper.cc:760
+#: src/Zypper.cc:785
 #, c-format, boost-format
 msgid "Invalid table style %d."
 msgstr "Estil de taula no vàlid %d."
 
-#: src/Zypper.cc:761
+#: src/Zypper.cc:786
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
 msgstr "Feu servir un número enter entre %d i %d"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:873
+#: src/Zypper.cc:898
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "La subordre %1% no té suport per a opcions globals del zypper."
 
-#: src/Zypper.cc:894
+#: src/Zypper.cc:919
 msgid "Enforced setting"
 msgstr "Configuració forçada"
 
-#: src/Zypper.cc:904
+#: src/Zypper.cc:929
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "La línia de dades de l'usuari no ha de contenir caràcters no imprimibles o "
 "de nova línia!"
 
-#: src/Zypper.cc:928 src/Zypper.cc:3174
+#: src/Zypper.cc:953 src/Zypper.cc:3227
 msgid "Entering non-interactive mode."
 msgstr "Entrant en mode no interactiu."
 
-#: src/Zypper.cc:935
+#: src/Zypper.cc:960
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
@@ -3225,22 +3328,22 @@ msgstr ""
 "Els pedaços que tinguin establerta la bandera rebootSuggested no es "
 "tractaran com a interactius."
 
-#: src/Zypper.cc:942
+#: src/Zypper.cc:967
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Entrant en mode \"no-gpg-checks\"."
 
-#: src/Zypper.cc:950
+#: src/Zypper.cc:975
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
 "Engegant \"%s\". Les noves claus del repositori s'importaran automàticament!"
 
-#: src/Zypper.cc:963
+#: src/Zypper.cc:988
 msgid "The path specified in the --root option must be absolute."
 msgstr "La ruta especificatda a l'opció --root ha de ser absoluta."
 
-#: src/Zypper.cc:979
+#: src/Zypper.cc:1004
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -3248,46 +3351,46 @@ msgstr ""
 "El /etc/products.d/baseproduct symlink està danyat o desaparegut!\n"
 "L'enllaç ha d'apuntar als core products .prod file dins /etc/products.d.\n"
 
-#: src/Zypper.cc:1019
+#: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Repositoris inhabilitats, fent servir només la base de dades de paquets "
 "instal·lats."
 
-#: src/Zypper.cc:1031
+#: src/Zypper.cc:1056
 msgid "Autorefresh disabled."
 msgstr "Refresc automàtic desactivat."
 
-#: src/Zypper.cc:1038
+#: src/Zypper.cc:1063
 msgid "CD/DVD repositories disabled."
 msgstr "Repositoris del CD/DVD inhabilitats."
 
-#: src/Zypper.cc:1045
+#: src/Zypper.cc:1070
 msgid "Remote repositories disabled."
 msgstr "Repositoris remots inhabilitats."
 
-#: src/Zypper.cc:1052
+#: src/Zypper.cc:1077
 msgid "Ignoring installed resolvables."
 msgstr "Ignorant els resolubles instal·lats."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:1079 src/Zypper.cc:1126
+#: src/Zypper.cc:1104 src/Zypper.cc:1151
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "L'opció %s no té cap efecte aquí, ignorant-la."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:1209
+#: src/Zypper.cc:1234
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "L'intèrpret d'ordres Zypper no té suport per executar subordres."
 
-#: src/Zypper.cc:1288
+#: src/Zypper.cc:1313
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "L'ordre \"%s\" se substitueix per \"%s\"."
 
-#: src/Zypper.cc:1289
+#: src/Zypper.cc:1314
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "Vegeu \"%s\" per a totes les solucions disponibles."
@@ -3295,7 +3398,7 @@ msgstr "Vegeu \"%s\" per a totes les solucions disponibles."
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
 #. and the third %s = "only, in-advance, in-heaps, as-needed"
-#: src/Zypper.cc:1429
+#: src/Zypper.cc:1454
 #, c-format, boost-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -3393,8 +3496,8 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 
-#: src/Zypper.cc:1470 src/Zypper.cc:1525 src/Zypper.cc:1606 src/Zypper.cc:2153
-#: src/Zypper.cc:2224
+#: src/Zypper.cc:1495 src/Zypper.cc:1550 src/Zypper.cc:1631 src/Zypper.cc:2178
+#: src/Zypper.cc:2251
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -3404,7 +3507,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: src/Zypper.cc:1503
+#: src/Zypper.cc:1528
 #, c-format, boost-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -3453,7 +3556,7 @@ msgstr ""
 "-D, --dry-run               Test the removal, do not actually remove.\n"
 "    --details               Show the detailed installation summary.\n"
 
-#: src/Zypper.cc:1543
+#: src/Zypper.cc:1568
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -3479,7 +3582,7 @@ msgstr ""
 "especificats.\n"
 "    --download-only      Només baixa els paquets, no els instal·lis.\n"
 
-#: src/Zypper.cc:1554
+#: src/Zypper.cc:1579
 #, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
@@ -3490,7 +3593,7 @@ msgstr ""
 "valor es pot canviar a la configuració local de l'rpm. En cas de dubte, "
 "proveu d'executar \"%2%\"."
 
-#: src/Zypper.cc:1588
+#: src/Zypper.cc:1613
 #, c-format, boost-format
 msgid ""
 "verify (ve) [options]\n"
@@ -3533,7 +3636,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Només baixa els paquets, no els instal·lis.\n"
 
-#: src/Zypper.cc:1630
+#: src/Zypper.cc:1655
 #, c-format, boost-format
 msgid ""
 "install-new-recommends (inr) [options]\n"
@@ -3569,7 +3672,7 @@ msgstr ""
 "    --debug-solver          Crea un cas de prova per fer-ne depuració.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: src/Zypper.cc:1660
+#: src/Zypper.cc:1685
 #, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -3591,7 +3694,7 @@ msgstr ""
 "-n, --name <alias>      Especifica el nom descriptiu per al servei.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1683
+#: src/Zypper.cc:1708
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -3610,7 +3713,7 @@ msgstr ""
 "    --loose-query  Ignora la línia de consulta a l'URI.\n"
 
 #. translators: %s is "--all" and "--all"
-#: src/Zypper.cc:1719
+#: src/Zypper.cc:1744
 #, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -3673,7 +3776,7 @@ msgstr ""
 "-m, --medium-type <type>       Aplica els canvis a tots els serveis d'un "
 "tipus concret.\n"
 
-#: src/Zypper.cc:1767
+#: src/Zypper.cc:1792
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -3705,7 +3808,7 @@ msgstr ""
 "-U, --sort-by-uri         Classifica per URI.\n"
 "-N, --sort-by-name        Classifica per nom.\n"
 
-#: src/Zypper.cc:1795
+#: src/Zypper.cc:1820
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -3728,7 +3831,7 @@ msgstr ""
 "respositoris de servei.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1828
+#: src/Zypper.cc:1853
 #, c-format, boost-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -3775,7 +3878,7 @@ msgstr ""
 "repositori..\n"
 "-f, --refresh           Activa l'autorefresc per a aquest repositori.\n"
 
-#: src/Zypper.cc:1874
+#: src/Zypper.cc:1899
 msgid ""
 "repos (lr) [options] [repo] ...\n"
 "\n"
@@ -3818,7 +3921,7 @@ msgstr ""
 "-A, --sort-by-alias       Classifica per àlies.\n"
 "-N, --sort-by-name        Classifica per nom.\n"
 
-#: src/Zypper.cc:1906
+#: src/Zypper.cc:1931
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -3836,7 +3939,7 @@ msgstr ""
 "    --loose-auth   Ignora l'autenticació d'usuari a l'URI.\n"
 "    --loose-query  Ignora la línia de consulta a l'URI.\n"
 
-#: src/Zypper.cc:1925
+#: src/Zypper.cc:1950
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -3853,7 +3956,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:1958
+#: src/Zypper.cc:1983
 #, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -3907,7 +4010,7 @@ msgstr ""
 "-m, --medium-type <type>  Aplica els canvis a tots els repositoris d'un "
 "tipus especificat.\n"
 
-#: src/Zypper.cc:2000
+#: src/Zypper.cc:2025
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3941,7 +4044,7 @@ msgstr ""
 "-s, --services           Refresca també els serveis abans de refrescar els "
 "repositoris.\n"
 
-#: src/Zypper.cc:2029
+#: src/Zypper.cc:2054
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3966,7 +4069,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2058
+#: src/Zypper.cc:2083
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -4008,7 +4111,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2116
+#: src/Zypper.cc:2141
 #, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -4094,7 +4197,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Només baixa els paquets, no els instal·lis.\n"
 
-#: src/Zypper.cc:2192
+#: src/Zypper.cc:2218
 #, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -4175,11 +4278,11 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Només baixa els paquets, no els instal·lis.\n"
 
-#: src/Zypper.cc:2223
+#: src/Zypper.cc:2249
 msgid "Install only patches which affect the package management itself."
 msgstr "Instal·la només pedaços que afectin la gestió de paquets mateixa."
 
-#: src/Zypper.cc:2246
+#: src/Zypper.cc:2277
 msgid ""
 "list-patches (lp) [options]\n"
 "\n"
@@ -4216,7 +4319,68 @@ msgstr ""
 "    --date <YYYY-MM-DD>    Llista només els pedaços publicats fins a la data "
 "especificada, però no inclosa\n"
 
-#: src/Zypper.cc:2301
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:2296
+msgid "list-patches (lp) [OPTIONS]"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:2299
+msgid "List all applicable patches."
+msgstr ""
+
+#: src/Zypper.cc:2302
+msgid ""
+"-b, --bugzilla[=#]\n"
+"List applicable patches for Bugzilla issues."
+msgstr ""
+
+#: src/Zypper.cc:2303
+msgid ""
+"--cve[=#]\n"
+"List applicable patches for CVE issues."
+msgstr ""
+
+#: src/Zypper.cc:2304
+msgid ""
+"--issues[=STRING]\n"
+"Look for issues matching the specified string."
+msgstr ""
+
+#: src/Zypper.cc:2305
+msgid ""
+"--date <YYYY-MM-DD>\n"
+"List only patches issued up to, but not including, the specified date."
+msgstr ""
+
+#: src/Zypper.cc:2306
+msgid ""
+"-g, --category <CATEGORY>\n"
+"List only patches with this category."
+msgstr ""
+
+#: src/Zypper.cc:2307
+msgid ""
+"--severity <SEVERITY>\n"
+"List only patches with this severity."
+msgstr ""
+
+#: src/Zypper.cc:2308
+msgid ""
+"-a, --all\n"
+"List all patches, not only applicable ones."
+msgstr ""
+
+#: src/Zypper.cc:2310
+#, fuzzy
+msgid ""
+"-r, --repo <ALIAS|#|URI>\n"
+"List only patches from the specified repository."
+msgstr ""
+"    --from <alias|#|URI>        Paquetes seleccionados sólo del repositorio "
+"indicado.\n"
+
+#: src/Zypper.cc:2353
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -4280,24 +4444,24 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Només baixa els paquets, no els instal·lis.\n"
 
-#: src/Zypper.cc:2327
+#: src/Zypper.cc:2379
 msgid "Whether to allow downgrading installed resolvables."
 msgstr "Si s'ha de permetre desactualitzar els resolubles instal·lats."
 
-#: src/Zypper.cc:2328
+#: src/Zypper.cc:2380
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr "Si s'ha de permetre canviar els noms dels resolubles instal·lats."
 
-#: src/Zypper.cc:2329
+#: src/Zypper.cc:2381
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
 "Si s'ha de permetre canviar l'arquitectura dels resolubles instal·lats."
 
-#: src/Zypper.cc:2330
+#: src/Zypper.cc:2382
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr "Si s'ha de permetre canviar el proveïdor dels resolubles instal·lats."
 
-#: src/Zypper.cc:2368
+#: src/Zypper.cc:2420
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -4393,31 +4557,36 @@ msgstr ""
 "Si la línia de cerca s'emmarca amb '/', s'interpretarà com a expressió "
 "regular.\n"
 
-#: src/Zypper.cc:2417
-msgid ""
-"patch-check (pchk) [options]\n"
-"\n"
-"Check for available patches.\n"
-"\n"
-"  Command options:\n"
-"\n"
-"-r, --repo <alias|#|URI>  Check for patches only in the specified "
-"repository.\n"
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:2470
+msgid "patch-check (pchk) [OPTIONS]"
 msgstr ""
-"patch-check (pchk) [options]\n"
-"\n"
-"Comprova els pedaços disponibles.\n"
-"\n"
-"  Opcions de l'ordre:\n"
-"\n"
-"-r, --repo <alias|#|URI>  Comprova els pedaços només al repositori "
-"especificat.\n"
 
-#: src/Zypper.cc:2425
-msgid "Check only for patches which affect the package management itself."
+#. translators: command description
+#: src/Zypper.cc:2473
+msgid ""
+"Display stats about applicable patches. The command returns 100 if needed "
+"patches were found, 101 if there is at least one needed security patch."
+msgstr ""
+
+#: src/Zypper.cc:2476
+#, fuzzy
+msgid ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Check for patches only in the specified repository."
+msgstr ""
+"zypper [opcions-globals] info [nom...]\n"
+"\n"
+"'info' -- Mostra informació completa sobre els paquets\n"
+
+#: src/Zypper.cc:2477
+#, fuzzy
+msgid ""
+"--updatestack-only\n"
+"Check only for patches which affect the package management itself."
 msgstr "Comprova només els pedaços que afectin la gestió de paquets mateixa."
 
-#: src/Zypper.cc:2441
+#: src/Zypper.cc:2494
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -4436,7 +4605,7 @@ msgstr ""
 "-r, --repo <alias|#|URI>  És només una altra manera d'especificar el "
 "repositori.\n"
 
-#: src/Zypper.cc:2472
+#: src/Zypper.cc:2525
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -4472,7 +4641,7 @@ msgstr ""
 "-N, --sort-by-name        Classifica per nom.\n"
 "-R, --sort-by-repo        Classifica per repositori.\n"
 
-#: src/Zypper.cc:2504
+#: src/Zypper.cc:2557
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -4494,7 +4663,7 @@ msgstr ""
 "-i, --installed-only      Mostra només els patrons instal·lats .\n"
 "-u, --uninstalled-only    Mostra només els patrons no instal·lats.\n"
 
-#: src/Zypper.cc:2530
+#: src/Zypper.cc:2583
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -4516,7 +4685,7 @@ msgstr ""
 "-i, --installed-only      Mostra només els productes instal·lats.\n"
 "-u, --uninstalled-only    Mostra només els productes no instal·lats.\n"
 
-#: src/Zypper.cc:2562
+#: src/Zypper.cc:2615
 #, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -4561,7 +4730,7 @@ msgstr ""
 "    --recommends          Mostra els recomanats.\n"
 "    --suggests            Mostra els suggerits.\n"
 
-#: src/Zypper.cc:2595
+#: src/Zypper.cc:2648
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -4576,7 +4745,7 @@ msgstr ""
 "\n"
 "És un àlies per a '%s'.\n"
 
-#: src/Zypper.cc:2614
+#: src/Zypper.cc:2667
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -4591,7 +4760,7 @@ msgstr ""
 "\n"
 "És un àlies per a '%s'.\n"
 
-#: src/Zypper.cc:2633
+#: src/Zypper.cc:2686
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -4606,7 +4775,7 @@ msgstr ""
 "\n"
 "És un àlies per a '%s'.\n"
 
-#: src/Zypper.cc:2650
+#: src/Zypper.cc:2703
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -4620,7 +4789,7 @@ msgstr ""
 "\n"
 "Aquesta ordre no té opcions.\n"
 
-#: src/Zypper.cc:2701
+#: src/Zypper.cc:2754
 msgid ""
 "moo\n"
 "\n"
@@ -4634,7 +4803,7 @@ msgstr ""
 "\n"
 "Aquesta ordre no disposa d'opcions.\n"
 
-#: src/Zypper.cc:2723
+#: src/Zypper.cc:2776
 #, c-format, boost-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -4658,7 +4827,7 @@ msgstr ""
 "-t, --type <type>         Tipus de paquet (%s).\n"
 "                         Per defecte: %s.\n"
 
-#: src/Zypper.cc:2750
+#: src/Zypper.cc:2803
 #, c-format, boost-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -4682,26 +4851,26 @@ msgstr ""
 "                          Per defecte: %s.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2777
+#: src/Zypper.cc:2830
 msgid "locks (ll) [options]"
 msgstr "bloqueigs (ll) [opcions]"
 
 #. translators: command description
-#: src/Zypper.cc:2780
+#: src/Zypper.cc:2833
 msgid "List current package locks."
 msgstr "Llista els bloqueigs de paquets actuals."
 
 #. translators: -m, --matches
-#: src/Zypper.cc:2784
+#: src/Zypper.cc:2837
 msgid "Show the number of resolvables matched by each lock."
 msgstr "Mostra el nombre de resolubles coincidents amb cada bloqueig."
 
 #. translators: -s, --solvables
-#: src/Zypper.cc:2786
+#: src/Zypper.cc:2839
 msgid "List the resolvables matched by each lock."
 msgstr "Llista els resolubles coincidents amb cada bloqueig."
 
-#: src/Zypper.cc:2802
+#: src/Zypper.cc:2855
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -4719,7 +4888,7 @@ msgstr ""
 "-d, --only-duplicates     Neteja només els blocatges duplicats.\n"
 "-e, --only-empty          Neteja només els que no bloquegin res.\n"
 
-#: src/Zypper.cc:2823
+#: src/Zypper.cc:2876
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -4737,7 +4906,7 @@ msgstr ""
 "  Opcions de l'ordre:\n"
 "-l, --label                 Mostra l'etiqueta del sistema operatiu.\n"
 
-#: src/Zypper.cc:2844
+#: src/Zypper.cc:2897
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4754,7 +4923,7 @@ msgstr ""
 "-m, --match  Interpreta la manca de número de versió com a qualsevol "
 "versió.\n"
 
-#: src/Zypper.cc:2863
+#: src/Zypper.cc:2916
 msgid ""
 "licenses\n"
 "\n"
@@ -4769,12 +4938,12 @@ msgstr ""
 "Aquesta ordre no disposa d'opcions.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2887
+#: src/Zypper.cc:2940
 msgid "ps [options]"
 msgstr "ps [opcions]"
 
 #. translators: command description
-#: src/Zypper.cc:2890
+#: src/Zypper.cc:2943
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -4783,7 +4952,7 @@ msgstr ""
 "biblioteques eliminats per actualitzacions recents."
 
 #. translators: -s, --short
-#: src/Zypper.cc:2894
+#: src/Zypper.cc:2947
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4795,7 +4964,7 @@ msgstr ""
 "associats."
 
 #. translators: --print <format>
-#: src/Zypper.cc:2896
+#: src/Zypper.cc:2949
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4806,7 +4975,7 @@ msgstr ""
 "estàndard, seguit per una línia nova. Qualsevol directiva \"%s\" en <format> "
 "se substitueix pel nom de servei del sistema."
 
-#: src/Zypper.cc:2915
+#: src/Zypper.cc:2968
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4847,7 +5016,7 @@ msgstr ""
 "--dry-run            No descarreguis cap paquet, només informa del que\n"
 "                     es faria.\n"
 
-#: src/Zypper.cc:2954
+#: src/Zypper.cc:3007
 msgid ""
 "source-download\n"
 "\n"
@@ -4879,7 +5048,7 @@ msgstr ""
 "                    però mostra quins paquets de codi font rpm falten o són "
 "superflus.\n"
 
-#: src/Zypper.cc:2981
+#: src/Zypper.cc:3034
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4893,7 +5062,7 @@ msgstr ""
 "\n"
 "Aquesta ordre no té opcions addicionals.\n"
 
-#: src/Zypper.cc:2998
+#: src/Zypper.cc:3051
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4908,7 +5077,7 @@ msgstr ""
 "Aquesta ordre no disposa d'opcions.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3016
+#: src/Zypper.cc:3069
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4919,7 +5088,7 @@ msgstr ""
 "Llista els tipus de serveis disponibles.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3032
+#: src/Zypper.cc:3085
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4932,7 +5101,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3054
+#: src/Zypper.cc:3107
 msgid ""
 "mount\n"
 "\n"
@@ -4952,7 +5121,7 @@ msgstr ""
 "-n, --name <name>    Fer servir una línia donada com a nom de servei.\n"
 "-r, --recurse        Submergeix-te pels subdirectoris.\n"
 
-#: src/Zypper.cc:3083
+#: src/Zypper.cc:3136
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4965,7 +5134,7 @@ msgstr ""
 "Cerca paquets que coincideixin amb línies de cerca. És un àlies per a '%s'.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3100
+#: src/Zypper.cc:3153
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4975,16 +5144,16 @@ msgstr ""
 "\n"
 "Aquesta ordre té una implementació buida que sempre retorna 0.\n"
 
-#: src/Zypper.cc:3143 src/Zypper.cc:5265
+#: src/Zypper.cc:3196 src/Zypper.cc:5236
 msgid "Unexpected program flow."
 msgstr "S'ha produït un error de flux de programa."
 
-#: src/Zypper.cc:3191
+#: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
 msgstr "Arguments del programa sense opcions: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3251
+#: src/Zypper.cc:3303
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4994,24 +5163,24 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3278
+#: src/Zypper.cc:3326
 msgid "Root privileges are required for refreshing services."
 msgstr ""
 "Es necessiten privilegis d'usuari primari per poder refrescar els serveis "
 "del sistema."
 
-#: src/Zypper.cc:3304 src/Zypper.cc:3395 src/Zypper.cc:3618
+#: src/Zypper.cc:3350 src/Zypper.cc:3439 src/Zypper.cc:3656
 msgid "Root privileges are required for modifying system services."
 msgstr ""
 "Es necessiten privilegis d'usuari primari per poder modificar els serveis "
 "del sistema."
 
-#: src/Zypper.cc:3377
+#: src/Zypper.cc:3423
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "\"%s\" no és un tipus de servei vàlid."
 
-#: src/Zypper.cc:3379
+#: src/Zypper.cc:3425
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -5021,108 +5190,108 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3406 src/Zypper.cc:3763
+#: src/Zypper.cc:3450 src/Zypper.cc:3797
 msgid "Alias or an aggregate option is required."
 msgstr "Es necessita un àlies o una opció d'agregació."
 
-#: src/Zypper.cc:3438
+#: src/Zypper.cc:3482
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "No s'ha trobat el servei \"%s\"."
 
-#: src/Zypper.cc:3469 src/Zypper.cc:3617 src/Zypper.cc:3698 src/Zypper.cc:3752
+#: src/Zypper.cc:3509 src/Zypper.cc:3655 src/Zypper.cc:3734 src/Zypper.cc:3786
 msgid "Root privileges are required for modifying system repositories."
 msgstr ""
 "Es necessiten privilegis d'usuari primari per poder modificar els "
 "repositoris del sistema."
 
-#: src/Zypper.cc:3524 src/Zypper.cc:3874
+#: src/Zypper.cc:3564 src/Zypper.cc:3902
 msgid "Too few arguments."
 msgstr "Hi ha massa pocs arguments."
 
-#: src/Zypper.cc:3547
+#: src/Zypper.cc:3587
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Si només es fa servir un argument, ha de ser un URI que apunti a un fitxer ."
 "repo."
 
-#: src/Zypper.cc:3577
+#: src/Zypper.cc:3617
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 "No es pot fer servir %s conjuntament amb %s. Utilitzant el paràmetre %s."
 
-#: src/Zypper.cc:3596
+#: src/Zypper.cc:3636
 msgid "Specified type is not a valid repository type:"
 msgstr "El tipus especificat no és un tipus de repositori vàlid:"
 
-#: src/Zypper.cc:3597
+#: src/Zypper.cc:3637
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
 "Vegeu \"%s\" o \"%s\" per obtenir una llista dels tipus de repositoris "
 "coneguts."
 
-#: src/Zypper.cc:3625 src/Zypper.cc:4851 src/utils/messages.cc:45
+#: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
 msgstr "Falta l'argument obligatori."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:3650
+#: src/Zypper.cc:3688
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "El repositori %s no s'ha trobat per l'àlies, número o URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:3672
+#: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "El servei %s no s'ha trobat per l'àlies, número o URI."
 
-#: src/Zypper.cc:3705
+#: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Massa pocs arguments. Com a mínim es necessita un URI i un àlies."
 
-#: src/Zypper.cc:3729
+#: src/Zypper.cc:3765
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "No s'ha trobat el repositori \"%s\"."
 
-#: src/Zypper.cc:3795
+#: src/Zypper.cc:3829
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "No s'ha trobat el repositori %s."
 
-#: src/Zypper.cc:3814
+#: src/Zypper.cc:3846
 msgid "Root privileges are required for refreshing system repositories."
 msgstr ""
 "Es necessiten privilegis d'usuari primari per poder refrescar les fonts del "
 "sistema."
 
-#: src/Zypper.cc:3820
+#: src/Zypper.cc:3852
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "L'opció global \"%s\" no té cap efecte aquí."
 
-#: src/Zypper.cc:3828
+#: src/Zypper.cc:3860
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "No es permeten arguments si no es fa servir \"%s\" ."
 
-#: src/Zypper.cc:3854
+#: src/Zypper.cc:3884
 msgid "Root privileges are required for cleaning local caches."
 msgstr ""
 "Es necessiten privilegis d'usuari primari per poder netejar la memòria cau "
 "local."
 
-#: src/Zypper.cc:3875
+#: src/Zypper.cc:3903
 msgid "At least one package name is required."
 msgstr "Com a mínim es necessita el nom d'un paquet."
 
-#: src/Zypper.cc:3884
+#: src/Zypper.cc:3912
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
 "Es necessiten privilegis d'usuari primari per instal·lar o desinstal·lar "
@@ -5130,20 +5299,20 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:3896
+#: src/Zypper.cc:3924
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Ignorant els arguments, marcant tot el repositori."
 
-#: src/Zypper.cc:3907
+#: src/Zypper.cc:3935
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Tipus de paquet desconegut: %s"
 
-#: src/Zypper.cc:3917
+#: src/Zypper.cc:3945
 msgid "Cannot uninstall patches."
 msgstr "No es poden desinstal·lar els pedaços."
 
-#: src/Zypper.cc:3918
+#: src/Zypper.cc:3946
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -5155,34 +5324,34 @@ msgstr ""
 "dades,\n"
 "o semblants."
 
-#: src/Zypper.cc:3928
+#: src/Zypper.cc:3956
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Desinstal·lació d'un paquet de codi font no definit ni implementat."
 
-#: src/Zypper.cc:3947
+#: src/Zypper.cc:3975
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' sembla un fitxer RPM. Es provarà de baixar-lo."
 
-#: src/Zypper.cc:3956
+#: src/Zypper.cc:3984
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Problema amb el fitxer RPM especificat com a '%s', se salta."
 
-#: src/Zypper.cc:3978
+#: src/Zypper.cc:4006
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Problema llegint la capçalera RPM de %s. És un fitxer RPM?"
 
-#: src/Zypper.cc:4000
+#: src/Zypper.cc:4028
 msgid "Plain RPM files cache"
 msgstr "Memòria cau de fitxers RPM simple"
 
-#: src/Zypper.cc:4017
+#: src/Zypper.cc:4045
 msgid "No valid arguments specified."
 msgstr "No s'ha especificat cap argument vàlid."
 
-#: src/Zypper.cc:4034 src/Zypper.cc:4169
+#: src/Zypper.cc:4062 src/Zypper.cc:4193
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -5191,69 +5360,69 @@ msgstr ""
 "No hi ha res per instal·lar."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4071 src/Zypper.cc:4660
+#: src/Zypper.cc:4099 src/Zypper.cc:4658
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s entra en conflicte amb %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4079
+#: src/Zypper.cc:4107
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s no es pot utilitzar ara amb %s"
 
-#: src/Zypper.cc:4122
+#: src/Zypper.cc:4148
 msgid "Source package name is a required argument."
 msgstr "El nom del paquet de codi font és necessari com a argument."
 
-#: src/Zypper.cc:4209
+#: src/Zypper.cc:4231
 msgid "Mode is set to 'match-exact'"
 msgstr "Mode establert en \"match-exact\""
 
-#: src/Zypper.cc:4229 src/Zypper.cc:4577 src/Zypper.cc:4679 src/Zypper.cc:4879
-#: src/Zypper.cc:4929 src/Zypper.cc:4971
+#: src/Zypper.cc:4251 src/Zypper.cc:4577 src/Zypper.cc:4677 src/Zypper.cc:4874
+#: src/Zypper.cc:4922 src/Zypper.cc:4962
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Tipus de paquet desconegut \"%s\"."
 
-#: src/Zypper.cc:4251
+#: src/Zypper.cc:4273
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "El repositori especificat '%s' està inhabilitat."
 
 #. translators: empty search result message
-#: src/Zypper.cc:4381
+#: src/Zypper.cc:4403
 msgid "No matching items found."
 msgstr "No s'ha trobat cap element que coincideixi."
 
-#: src/Zypper.cc:4416
+#: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Problema a l'hora d'iniciar o executar l'ordre de cerca"
 
-#: src/Zypper.cc:4417
+#: src/Zypper.cc:4439
 msgid "See the above message for a hint."
 msgstr "Llegiu l'error anterior per tenir-ne una pista."
 
-#: src/Zypper.cc:4596 src/Zypper.cc:4646
+#: src/Zypper.cc:4596 src/Zypper.cc:4644
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "No es pot fer servir %s juntament amb %s."
 
-#: src/Zypper.cc:4627
+#: src/Zypper.cc:4625
 msgid "Root privileges are required for updating packages."
 msgstr ""
 "Es necessiten privilegis d'usuari primari per poder actualitzar paquets."
 
-#: src/Zypper.cc:4686 src/Zypper.cc:4694 src/Zypper.cc:4766
+#: src/Zypper.cc:4684 src/Zypper.cc:4692 src/Zypper.cc:4765
 msgid "Operation not supported."
 msgstr "Operació no suportada."
 
-#: src/Zypper.cc:4687
+#: src/Zypper.cc:4685
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Per actualitzar els productes instal·lats feu servir \"%s\"."
 
-#: src/Zypper.cc:4695
+#: src/Zypper.cc:4693
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -5263,20 +5432,20 @@ msgstr ""
 "instal·lar l'últim paquet de codi font i les seves dependències construïdes, "
 "feu servir '%s'."
 
-#: src/Zypper.cc:4711
+#: src/Zypper.cc:4709
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "No es poden fer servir tipus múltiples quan es donen com a arguments paquets "
 "específics."
 
-#: src/Zypper.cc:4804
+#: src/Zypper.cc:4801
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
 "Es necessiten privilegis d'usuari primari per poder fer una actualització de "
 "la distribució."
 
-#: src/Zypper.cc:4824
+#: src/Zypper.cc:4821
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -5288,72 +5457,72 @@ msgstr ""
 "compatibles abans de continuar. Vegeu \"%s\" per a més informació sobre "
 "aquesta ordre."
 
-#: src/Zypper.cc:4854 src/utils/messages.cc:37 src/utils/messages.cc:47
+#: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
 msgstr "Ús"
 
-#: src/Zypper.cc:4908 src/Zypper.cc:4951
+#: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
 msgstr ""
 "Es necessiten privilegis d'usuari primari per poder afegir blocatges de "
 "paquets."
 
-#: src/Zypper.cc:5036
+#: src/Zypper.cc:5023
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "Tret %lu blocatge."
 msgstr[1] "Trets %lu blocatges."
 
-#: src/Zypper.cc:5049
+#: src/Zypper.cc:5034
 msgid "XML output not implemented for this command."
 msgstr "La sortida XML no està implementada per a aquesta ordre."
 
-#: src/Zypper.cc:5062
+#: src/Zypper.cc:5047
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Etiqueta de la distribució: %s"
 
 # SR
-#: src/Zypper.cc:5063
+#: src/Zypper.cc:5048
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Etiqueta curta: %s"
 
-#: src/Zypper.cc:5106
+#: src/Zypper.cc:5089
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s coincideix amb %s"
 
-#: src/Zypper.cc:5108
+#: src/Zypper.cc:5091
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s és més nou que %s"
 
-#: src/Zypper.cc:5110
+#: src/Zypper.cc:5093
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s és més antic que %s"
 
-#: src/Zypper.cc:5194 src/source-download.cc:217
+#: src/Zypper.cc:5171 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Privilegis insuficients per fer servir el directori de baixada %s."
 
-#: src/Zypper.cc:5250
+#: src/Zypper.cc:5223
 msgid "This command only makes sense in the zypper shell."
 msgstr "Aquesta ordre només té sentit en un terminal zypper."
 
-#: src/Zypper.cc:5262
+#: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
 msgstr "Ja esteu executant un terminal zypper."
 
-#: src/Zypper.cc:5277
+#: src/Zypper.cc:5246
 msgid "Description"
 msgstr "Descripció"
 
-#: src/Zypper.cc:5342
+#: src/Zypper.cc:5310
 msgid "Resolvable Type"
 msgstr "Tipus solucionable"
 
@@ -6389,6 +6558,25 @@ msgstr "Modes disponibles de descàrrega: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "L'opció \"%s\" passa per sobre de \"%s\"."
+
+#~ msgid ""
+#~ "patch-check (pchk) [options]\n"
+#~ "\n"
+#~ "Check for available patches.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "\n"
+#~ "-r, --repo <alias|#|URI>  Check for patches only in the specified "
+#~ "repository.\n"
+#~ msgstr ""
+#~ "patch-check (pchk) [options]\n"
+#~ "\n"
+#~ "Comprova els pedaços disponibles.\n"
+#~ "\n"
+#~ "  Opcions de l'ordre:\n"
+#~ "\n"
+#~ "-r, --repo <alias|#|URI>  Comprova els pedaços només al repositori "
+#~ "especificat.\n"
 
 #~ msgid ""
 #~ "For each associated system service print <format> on the standard output, "
@@ -8053,12 +8241,6 @@ msgstr "L'opció \"%s\" passa per sobre de \"%s\"."
 #~ "nada\n"
 #~ "-d, --download-only         Descargar sin instalar.\n"
 
-#~ msgid ""
-#~ "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
-#~ msgstr ""
-#~ "    --from <alias|#|URI>        Paquetes seleccionados sólo del "
-#~ "repositorio indicado.\n"
-
 #~ msgid "y/n/p"
 #~ msgstr "s/n/p"
 
@@ -8430,15 +8612,6 @@ msgstr "L'opció \"%s\" passa per sobre de \"%s\"."
 #~ "info <name> ...\n"
 #~ "\n"
 #~ "Show full information for packages"
-#~ msgstr ""
-#~ "zypper [opcions-globals] info [nom...]\n"
-#~ "\n"
-#~ "'info' -- Mostra informació completa sobre els paquets\n"
-
-#, fuzzy
-#~ msgid ""
-#~ "-r, --repo <alias|#|URI>  Work only with the repository specified by the "
-#~ "alias."
 #~ msgstr ""
 #~ "zypper [opcions-globals] info [nom...]\n"
 #~ "\n"
