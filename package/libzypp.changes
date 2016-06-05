@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sun Jun  5 16:12:42 CEST 2016 - ma@suse.de
+
+- po: upadte makefiles
+- DefaultIntegral: provide asString (for FATE#320447)
+- version 16.0.1 (0)
+
+-------------------------------------------------------------------
 Fri May 13 08:45:53 CEST 2016 - ma@suse.de
 
 - Prepare cmake to maintain the .pot and .po files in git. Add
