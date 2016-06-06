@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2016-06-04 13:19+0000\n"
+"PO-Revision-Date: 2016-06-06 13:26+0000\n"
 "Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
-msgstr "Arkiv: "
+msgstr "Arkiv:"
 
 #: src/callbacks/keyring.h:38
 msgid "Key Name:"
@@ -118,7 +118,7 @@ msgstr "Har automatiskt förtroende för följande nyckel:"
 
 #: src/callbacks/keyring.h:177
 msgid "New repository or package signing key received:"
-msgstr "Tog emot ny förråds- eller paketsigneringsnyckel: "
+msgstr "Tog emot ny förråds- eller paketsigneringsnyckel:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
@@ -169,8 +169,7 @@ msgstr "Ignorerar felaktig signatur för filen '%s' från förrådet '%s'!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-"Kontrollera att det inte beror på att filen har ändrats med ont uppsåt."
+msgstr "Kontrollera att det inte beror på att filen har ändrats med ont uppsåt!"
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
@@ -461,7 +460,7 @@ msgstr "Ark: "
 
 #: src/info.cc:119
 msgid "Vendor: "
-msgstr "Leverantör:"
+msgstr "Leverantör: "
 
 #: src/info.cc:124
 msgid "Summary: "
@@ -475,8 +474,8 @@ msgstr "Beskrivning: "
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Det finns %1% matchning för  '%2%'."
+msgstr[1] "Det finns %1% matchningar för  '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:169
@@ -501,7 +500,7 @@ msgstr "Förråd: "
 
 #: src/info.cc:256
 msgid "Support Level: "
-msgstr "Supportnivå:"
+msgstr "Supportnivå: "
 
 #: src/info.cc:259 src/info.cc:390
 msgid "Installed: "
@@ -522,7 +521,7 @@ msgstr "uppdaterad"
 
 #: src/info.cc:274
 msgid "not installed"
-msgstr "inte installerad."
+msgstr "inte installerad"
 
 #: src/info.cc:276
 msgid "Installed Size: "
@@ -562,7 +561,7 @@ msgstr "Föreslagen"
 
 #: src/info.cc:391
 msgid "Visible to User: "
-msgstr "Synlig för användare:"
+msgstr "Synlig för användare: "
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -618,7 +617,7 @@ msgstr "Installerad"
 
 #: src/info.cc:481 src/search.cc:642
 msgid "Is Base"
-msgstr "Is Base"
+msgstr "Är baserad"
 
 #: src/info.cc:485
 msgid "End of Support"
@@ -940,7 +939,7 @@ msgstr ""
 #: src/RequestFeedback.cc:151
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr "Använd \"%s\" för att tvinga installation av paketet?"
+msgstr "Använd \"%s\" för att tvinga installation av paketet."
 
 #: src/RequestFeedback.cc:159
 #, c-format, boost-format
@@ -1008,7 +1007,7 @@ msgstr "Lägger till konflikt: \"%s\"."
 #: src/RequestFeedback.cc:249
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Menade du %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1016,260 +1015,268 @@ msgstr ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... och ytterligare %1% objekt."
+msgstr[1] "... och ytterligare %1% objekt."
 
 #: src/Summary.cc:505
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande NYA paket kommer att installeras:"
+msgstr[1] "Följande %d NYA paket kommer att installeras:"
 
 #: src/Summary.cc:510
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande NYA programfixar kommer att installeras:"
+msgstr[1] "Följande %d NYA programfixar kommer att installeras:"
 
 #: src/Summary.cc:515
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande NYA mönster kommer att installeras:"
+msgstr[1] "Följande %2 NYA mönster kommer att installeras:"
 
 #: src/Summary.cc:520
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande NYA produkter kommer att installeras:"
+msgstr[1] "Följande %d NYA produkter kommer att installeras:"
 
 #: src/Summary.cc:525
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande källpaket kommer installeras:"
+msgstr[1] "Följande %d källpaket kommer installeras:"
 
 #: src/Summary.cc:530
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande program kommer att installeras:"
+msgstr[1] "Följande %d program kommer att installeras:"
 
 #: src/Summary.cc:552
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande paket kommer att plockas bort:"
+msgstr[1] "Följande %d paket kommer att plockas bort:"
 
 #: src/Summary.cc:557
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande programfix kommer att PLOCKAS BORT:"
+msgstr[1] "Följande %d programfixar kommer att PLOCKAS BORT:"
 
 #: src/Summary.cc:562
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande mönster kommer att PLOCKAS BORT:"
+msgstr[1] "Följande %d mönster kommer att PLOCKAS BORT:"
 
 #: src/Summary.cc:567
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande produkt kommer att PLOCKAS BORT:"
+msgstr[1] "Följande %d produkter kommer att PLOCKAS BORT:"
 
 #: src/Summary.cc:572
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande program kommer att PLOCKAS BORT:"
+msgstr[1] "Följande %d program kommer att PLOCKAS BORT:"
 
 #: src/Summary.cc:591
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande paket kommer att uppgraderas:"
+msgstr[1] "Följande %d paket kommer att uppgraderas:"
 
 #: src/Summary.cc:596
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande programfix kommer att uppgraderas:"
+msgstr[1] "Följande %d programfixar kommer att uppgraderas:"
 
 #: src/Summary.cc:601
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande mönster kommer att uppgraderas:"
+msgstr[1] "Följande %d mönster kommer att uppgraderas:"
 
 #: src/Summary.cc:606
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande produkter kommer att uppgraderas:"
+msgstr[1] "Följande %d produkter kommer att uppgraderas:"
 
 #: src/Summary.cc:611
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande program kommer att uppgraderas:"
+msgstr[1] "Följande %d program kommer att uppgraderas:"
 
 #: src/Summary.cc:630
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "Följande paket hämtas:"
-msgstr[1] "Följande paket hämtas:"
+msgstr[0] "Följande paket kommer att nedgraderas:"
+msgstr[1] "Följande %d paket kommer att nedgraderas:"
 
 #: src/Summary.cc:635
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "Följande paket hämtas:"
-msgstr[1] "Följande paket hämtas:"
+msgstr[0] "Följande programfix kommer att nedgraderas:"
+msgstr[1] "Följande %d programfixar kommer att nedgraderas:"
 
 #: src/Summary.cc:640
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] "Följande paket hämtas:"
-msgstr[1] "Följande paket hämtas:"
+msgstr[0] "Följande mönster kommer att nedgraderas:"
+msgstr[1] "Följande %d mönster kommer att nedgraderas:"
 
 #: src/Summary.cc:645
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] "Följande paket hämtas:"
-msgstr[1] "Följande paket hämtas:"
+msgstr[0] "Följande produkt kommer att nedgraderas:"
+msgstr[1] "Följande %d produkter kommer att nedgraderas:"
 
 #: src/Summary.cc:650
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] "Följande paket hämtas:"
-msgstr[1] "Följande paket hämtas:"
+msgstr[0] "Följande program kommer att nedgraderas:"
+msgstr[1] "Följande %d program kommer att nedgraderas:"
 
 #: src/Summary.cc:669
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande paket kommer att installeras om:"
+msgstr[1] "Följande %d paket kommer att installeras om:"
 
 #: src/Summary.cc:674
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande programfix kommer att installeras om:"
+msgstr[1] "Följande %d programfixar kommer att installeras om:"
 
 #: src/Summary.cc:679
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande mönster kommer att installeras om:"
+msgstr[1] "Följande %d mönster kommer att installeras om:"
 
 #: src/Summary.cc:684
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande produkt kommer att installeras om:"
+msgstr[1] "Följande %d produkter kommer att installeras om:"
 
 #: src/Summary.cc:696
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande program kommer att installeras om:"
+msgstr[1] "Följande %d program kommer att installeras om:"
 
 #: src/Summary.cc:830
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande rekommenderade paket valdes automatiskt:"
+msgstr[1] "Följande %d rekommenderade paket valdes automatiskt:"
 
 #: src/Summary.cc:835
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Följande rekommenderade programfix valdes automatiskt:"
+msgstr[1] "Följande %d rekommenderade programfixar valdes automatiskt:"
 
 #: src/Summary.cc:840
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande rekommenderade mönster valdes automatiskt:"
+msgstr[1] "Följande %d rekommenderade mönster valdes automatiskt:"
 
 #: src/Summary.cc:845
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande rekommenderade produkt valdes automatiskt:"
+msgstr[1] "Följande %d rekommenderade produkter valdes automatiskt:"
 
 #: src/Summary.cc:850
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande rekommenderade källpaket valdes automatiskt:"
+msgstr[1] "Följande %d rekommenderade källpaket valdes automatiskt:"
 
 #: src/Summary.cc:855
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande rekommenderade program valdes automatiskt:"
+msgstr[1] "Följande %d rekommenderade program valdes automatiskt:"
 
 #: src/Summary.cc:899
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
 "required packages will be installed):"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] ""
+"Följande paket rekommenderas, men kommer inte att installeras (bara "
+"nödvändiga paket kommer att installeras):"
+msgstr[1] ""
+"Följande %d paket rekommenderas, men kommer inte att installeras (bara "
+"nödvändiga paket kommer att installeras):"
 
 #: src/Summary.cc:911
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
 "unwanted (was manually removed before):"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] ""
+"Följande paket rekommenderas, men kommer inte att installeras eftersom det "
+"inte är önskat (manuellt borttaget sedan tidigare):"
+msgstr[1] ""
+"Följande %d paket rekommenderas, men kommer inte att installeras eftersom de "
+"inte är önskade (manuellt borttagna sedan tidigare):"
 
 #: src/Summary.cc:921
 #, fuzzy, c-format, boost-format
@@ -1524,15 +1531,15 @@ msgstr[1] "Visa paketuppdateringar."
 #: src/Summary.cc:1292
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "att nedgradera"
+msgstr[1] "att nedgradera"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1295
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "paket att nedgradera"
+msgstr[1] "paket att nedgradera"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1306
@@ -1586,8 +1593,8 @@ msgstr[1] "Det går inte att ta bort ^%s\n"
 #: src/Summary.cc:1348
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "för byte av leverantör"
+msgstr[1] "för byte av leverantör"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1351
@@ -1601,15 +1608,15 @@ msgstr[1] "Följande paket uppgraderas:"
 #: src/Summary.cc:1362
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "för byte av arkiv"
+msgstr[1] "för byte av arkiv"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1365
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "paket kommer att byta arkiv"
+msgstr[1] "paket kommer att byta arkiv"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1376
@@ -2066,7 +2073,7 @@ msgstr "Överordnad tjänst"
 
 #: src/repos.cc:1109
 msgid "Keywords"
-msgstr ""
+msgstr "Nyckelord"
 
 #: src/repos.cc:1110
 msgid "Repo Info Path"
@@ -2096,7 +2103,7 @@ msgstr "Arkiven har exporterats till %s."
 
 #: src/repos.cc:1248 src/repos.cc:1392
 msgid "Specified repositories: "
-msgstr "Angivna arkiv:"
+msgstr "Angivna arkiv: "
 
 #: src/repos.cc:1283
 #, c-format, boost-format
@@ -2202,11 +2209,11 @@ msgid ""
 "URIs (see below) point to a valid repository:"
 msgstr ""
 "Kunde inte avgöra förrådets typ, vänligen kontrollera att den angivna URI:en "
-"(se nedanför) pekar på ett giltigt förråd."
+"(se nedanför) pekar på ett giltigt förråd:"
 
 #: src/repos.cc:1591
 msgid "Can't find a valid repository at given location:"
-msgstr "Kan inte hitta ett giltigt förråd på angiven plats."
+msgstr "Kan inte hitta ett giltigt förråd på angiven plats:"
 
 #: src/repos.cc:1599
 msgid "Problem transferring repository data from specified URI:"
@@ -2312,7 +2319,7 @@ msgstr ""
 #: src/repos.cc:1855
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Förrådet %s har bytt namn till %s"
+msgstr "Förrådet '%s' har bytt namn till '%s'."
 
 #: src/repos.cc:1864 src/repos.cc:2098
 msgid "Error while modifying the repository:"
@@ -2326,7 +2333,7 @@ msgstr "Lämnar förrådet '%s' orört."
 #: src/repos.cc:2002
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "Prioriteten för förrådet '%s' lämnades orörd (%d)."
+msgstr "Prioriteten för förrådet '%s' lämnades oförändrad (%d)"
 
 #: src/repos.cc:2040
 #, c-format, boost-format
@@ -2563,7 +2570,7 @@ msgstr "Det finns inget att ändra för tjänsten %s."
 
 #: src/repos.cc:2977
 msgid "Error while modifying the service:"
-msgstr "Ett fel uppstod när tjänsten uppdaterades."
+msgstr "Ett fel uppstod när tjänsten uppdaterades:"
 
 #: src/repos.cc:2978
 #, c-format, boost-format
@@ -2657,7 +2664,7 @@ msgstr[1] "Säkerhetsuppdateringar"
 
 #: src/update.cc:199
 msgid "unwanted"
-msgstr ""
+msgstr "oönskad"
 
 #: src/update.cc:200
 msgid "needed"
@@ -2665,7 +2672,7 @@ msgstr "Behövd"
 
 #: src/update.cc:201
 msgid "applied"
-msgstr ""
+msgstr "tillämpad"
 
 #: src/update.cc:202
 msgid "not needed"
@@ -2673,7 +2680,7 @@ msgstr "behövs inte"
 
 #: src/update.cc:208
 msgid "undetermined"
-msgstr ""
+msgstr "obestämbar"
 
 #. translators: package's repository (header)
 #: src/update.cc:382 src/update.cc:615 src/search.cc:75 src/search.cc:324
@@ -3158,7 +3165,7 @@ msgstr "Tvingande inställning"
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "Strängen med användardata får inte innehålla tecken som inte kan skrivas ut "
-"eller tecken för nya rader."
+"eller tecken för nya rader!"
 
 #: src/Zypper.cc:928 src/Zypper.cc:3174
 msgid "Entering non-interactive mode."
@@ -3180,7 +3187,7 @@ msgstr "Läget no-gpg-checks tillämpas."
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
-msgstr "Startar %s. Nya arkivsigneringsnycklar importeras automatiskt."
+msgstr "Startar '%s'. Nya arkivsigneringsnycklar importeras automatiskt!"
 
 #: src/Zypper.cc:963
 msgid "The path specified in the --root option must be absolute."
@@ -3227,7 +3234,7 @@ msgstr "Alternativet %s har ingen effekt här och kommer att ignoreras."
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1209
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "Zypperskalet stödjer inte körning av underkommando."
 
 #: src/Zypper.cc:1288
 #, c-format, boost-format
@@ -3348,6 +3355,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Kräver inte användarinteraktion. Är alias för den globala --non-interactive "
+"växeln."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -5517,7 +5526,7 @@ msgstr "(torrkörning)"
 
 #: src/solve-commit.cc:800 src/solve-commit.cc:833
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Ett problem uppstod vid nedladdning av paketfilen från förrådet."
+msgstr "Ett problem uppstod vid nedladdning av paketfilen från förrådet:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
 #: src/solve-commit.cc:830
@@ -5747,7 +5756,7 @@ msgstr "Inga mönster har hittats."
 
 #: src/search.cc:569
 msgid "No packages found."
-msgstr "Det gick inte att hitta några paket"
+msgstr "Det gick inte att hitta några paket."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
@@ -5766,7 +5775,7 @@ msgstr "Det gick inte att hitta leverantörer av %s."
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr "Varning:"
+msgstr "Varning: "
 
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
@@ -5973,7 +5982,7 @@ msgstr "Inget paketlås har definierats."
 
 #: src/locks.cc:166
 msgid "Error reading the locks file:"
-msgstr "Ett fel uppstod vid läsning av låsfilen."
+msgstr "Ett fel uppstod vid läsning av låsfilen:"
 
 #: src/locks.cc:226
 #, fuzzy
