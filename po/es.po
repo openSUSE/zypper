@@ -18,15 +18,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-12 17:01+0200\n"
-"PO-Revision-Date: 2015-01-27 21:34+0100\n"
-"Last-Translator: jcsl <trcs@gmx.com>\n"
-"Language-Team: Spanish <opensuse-translation-es@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-06 17:10+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -55,7 +56,7 @@ msgstr "Nombre rpm:"
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "La clave de firma gpg '%1%' ya expiró. "
+msgstr "La clave de firma gpg '%1%' ya expiró."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
@@ -283,9 +284,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "Ejecutando: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:207
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "Eliminando %s-%s"
+msgstr "Eliminando %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:211
