@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-07 18:27+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -1899,7 +1899,7 @@ msgstr "Error al inhabilitar el repositorio %s."
 #: src/repos.cc:295
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
-msgstr "Se ha producido un problema al recuperar los archivos desde %s."
+msgstr "Error al recuperar los archivos desde %s."
 
 #: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
