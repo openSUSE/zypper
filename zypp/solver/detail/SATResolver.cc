@@ -412,7 +412,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     HACKENV( SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,_dup_allowvendorchange );
 #undef HACKENV
 #endif
-    sat::Pool::instance().prepareForSolving();
+    sat::Pool::instance().prepare();
 
     // Solve !
     MIL << "Starting solving...." << endl;
@@ -838,7 +838,7 @@ void SATResolver::doUpdate()
     solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
     solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
 
-    sat::Pool::instance().prepareForSolving();
+    sat::Pool::instance().prepare();
 
     // Solve !
     MIL << "Starting solving for update...." << endl;

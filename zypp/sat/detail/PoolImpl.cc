@@ -258,9 +258,15 @@ namespace zypp
         ::pool_freewhatprovides( _pool );
       }
 
-
       void PoolImpl::prepare() const
       {
+	// additional /etc/sysconfig/storage check:
+	static WatchFile sysconfigFile( sysconfigStoragePath(), WatchFile::NO_INIT );
+	if ( sysconfigFile.hasChanged() )
+	{
+	  _requiredFilesystemsPtr.reset(); // recreated on demand
+	  const_cast<PoolImpl*>(this)->depSetDirty( "/etc/sysconfig/storage change" );
+	}
 	if ( _watcher.remember( _serial ) )
         {
           // After repo/solvable add/remove:
@@ -279,19 +285,6 @@ namespace zypp
 	  // initial seting
 	  const_cast<PoolImpl*>(this)->setTextLocale( ZConfig::instance().textLocale() );
         }
-      }
-
-      void PoolImpl::prepareForSolving() const
-      {
-	// additional /etc/sysconfig/storage check:
-	static WatchFile sysconfigFile( sysconfigStoragePath(), WatchFile::NO_INIT );
-	if ( sysconfigFile.hasChanged() )
-	{
-	  _requiredFilesystemsPtr.reset(); // recreated on demand
-	  const_cast<PoolImpl*>(this)->depSetDirty( "/etc/sysconfig/storage change" );
-	}
-	// finally prepare as usual:
-	prepare();
       }
 
       ///////////////////////////////////////////////////////////////////
