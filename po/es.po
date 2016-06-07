@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 17:55+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 17:58+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -913,7 +913,7 @@ msgstr ""
 #: src/RequestFeedback.cc:108
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
-msgstr "No hay candidatos para actualizar '%s'."
+msgstr "No hay candidatos de actualización para %s."
 
 #: src/RequestFeedback.cc:114
 #, c-format, boost-format
@@ -921,8 +921,8 @@ msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
 msgstr ""
-"Hay un candidato de actualización \"%s\" para \"%s\", pero no coincide con "
-"la versión indicada, repositorio o arquitectura."
+"Hay un candidato de actualización %s para %s, pero no coincide con la "
+"versión, el repositorio o la arquitectura especificados."
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -930,8 +930,8 @@ msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
 "Use '%s' to install this candidate."
 msgstr ""
-"Hay un candidato de actualización para \"%s\", pero es de un proveedor "
-"diferente. Use \"%s\" para instalar este candidato."
+"Hay un candidato de actualización para %s, pero es de un proveedor "
+"diferente. Use %s para instalar este candidato."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -939,8 +939,8 @@ msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
 "lower priority. Use '%s' to install this candidate."
 msgstr ""
-"Hay un candidato de actualización para \"%s\", pero proviene de un "
-"repositorio con una prioridad menor. Use \"%s\" para instalar este candidato."
+"Hay un candidato de actualización para %s, pero proviene de un repositorio "
+"con una prioridad menor. Use %s para instalar este candidato."
 
 #: src/RequestFeedback.cc:142
 #, c-format, boost-format
@@ -948,8 +948,8 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Hay una actualización para '%s', pero se encuentra bloqueado. Utilice '%s' "
-"para desbloquearlo."
+"Hay un candidato de actualización para %s, pero está bloqueado. Use %s para "
+"desbloquearlo."
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -957,8 +957,8 @@ msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"El paquete '%s' no se encuentra en los repositorios. No se puede reinstalar, "
-"actualizar, o desactualizar."
+"El paquete %s no está disponible en sus repositorios. No es posible "
+"reinstalarlo, actualizarlo ni volver a una versión anterior."
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
