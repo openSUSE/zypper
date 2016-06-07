@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 18:28+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 18:31+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -1918,8 +1918,7 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
-"Por favor, añada una o más entradas del tipo URI base (baseurl=URI) a %s "
-"para el repositorio '%s'."
+"Añada una o más entradas URI base (baseurl=URI) a %s para el repositorio %s."
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
@@ -1928,20 +1927,20 @@ msgstr "No hay ningún alias definido para este repositorio."
 #: src/repos.cc:339
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
-msgstr "El repositorio '%s' no es válido."
+msgstr "El repositorio %s no es válido."
 
 #: src/repos.cc:340
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
-"Por favor, compruebe si las direcciones URis definidas para este repositorio "
-"apuntan a un repositorio válido."
+"Compruebe si los URI definidos para este repositorio apuntan a un "
+"repositorio válido."
 
 #: src/repos.cc:352
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Se ha producido un error al descargar los metadatos para '%s':"
+msgstr "Error al obtener los metadatos para %s:"
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
@@ -1950,7 +1949,7 @@ msgstr "Se está forzando la construcción del caché del repositorio"
 #: src/repos.cc:390
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
-msgstr "Se ha producido un error al analizar los metadatos para '%s':"
+msgstr "Error al analizar los metadatos para %s:"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: src/repos.cc:392
@@ -1960,17 +1959,16 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"Ésto ha podido ser causado por metadatos no válidos en el repositorio, o por "
-"un error en el analizador de metadatos. En este último caso, o si tiene "
-"alguna duda, por favor, abra un infome de errores siguiendo las "
-"instrucciones en http://en.opensuse.org/Zypper/Troubleshooting"
+"Puede deberse a que existen metadatos no válidos en el repositorio o a un "
+"error en el analizador de metadatos. En este último caso, o si tiene alguna "
+"duda, abra un informe de errores siguiendo las instrucciones de "
+"http://en.opensuse.org/Zypper/Troubleshooting."
 
 #: src/repos.cc:401
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr ""
-"No se han encontrado en el caché local los metadatos del repositorio para "
-"'%s'."
+"No se han encontrado los metadatos del repositorio para %s en el caché local."
 
 #: src/repos.cc:409
 msgid "Error building the cache:"
