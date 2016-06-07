@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-07 17:53+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -858,7 +858,9 @@ msgstr "No se encuentra el patrón %s en los repositorios especificados."
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "No se encuentra el paquete fuente '%s' en los repositorios indicados."
+msgstr ""
+"No se ha encontrado el paquete de origen %s en los repositorios "
+"especificados."
 
 #. just in case
 #: src/RequestFeedback.cc:71
