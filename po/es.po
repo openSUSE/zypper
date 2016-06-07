@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 17:46+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 17:48+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -520,7 +520,7 @@ msgstr "Información para %s %s:"
 #: src/info.cc:207
 #, c-format, boost-format
 msgid "Info for type '%s' not implemented."
-msgstr "Información para el tipo '%s' no implementada."
+msgstr "Información para el tipo %s no implementada."
 
 #: src/info.cc:248 src/info.cc:386 src/info.cc:458
 msgid "Repository: "
@@ -528,7 +528,7 @@ msgstr "Repositorio: "
 
 #: src/info.cc:256
 msgid "Support Level: "
-msgstr "Nivel de soporte: "
+msgstr "Nivel de asistencia: "
 
 #: src/info.cc:259 src/info.cc:390
 msgid "Installed: "
@@ -553,7 +553,7 @@ msgstr "no se ha instalado"
 
 #: src/info.cc:276
 msgid "Installed Size: "
-msgstr "Tamaño instalado: "
+msgstr "Tamaño de instalación: "
 
 #: src/info.cc:317
 msgid "Category: "
@@ -561,7 +561,7 @@ msgstr "Categoría: "
 
 #: src/info.cc:318
 msgid "Severity: "
-msgstr "Severidad: "
+msgstr "Gravedad: "
 
 #: src/info.cc:319
 msgid "Created On: "
@@ -569,7 +569,7 @@ msgstr "Fecha de creación: "
 
 #: src/info.cc:320
 msgid "Reboot Required: "
-msgstr "Reinicio necesario: "
+msgstr "Rearranque necesario: "
 
 #: src/info.cc:321
 msgid "Package Manager Restart Required"
@@ -585,7 +585,7 @@ msgstr "Recomendado"
 
 #: src/info.cc:356 src/search.cc:385
 msgid "Suggested"
-msgstr "Sugerencias"
+msgstr "Sugerido"
 
 #: src/info.cc:391
 msgid "Visible to User: "
@@ -619,11 +619,11 @@ msgstr "Tipo"
 
 #: src/info.cc:402 src/search.cc:443
 msgid "Dependency"
-msgstr "Dependencias"
+msgstr "Dependencia"
 
 #: src/info.cc:417
 msgid "Contents"
-msgstr "Contenidos"
+msgstr "Contenido"
 
 #: src/info.cc:419
 msgid "(empty)"
@@ -635,7 +635,7 @@ msgstr "Versión"
 
 #: src/info.cc:477
 msgid "Short Name"
-msgstr "Nombres abreviado"
+msgstr "Nombre abreviado"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/info.cc:479 src/Summary.cc:1207 src/utils/misc.cc:138
@@ -644,7 +644,7 @@ msgstr "Instalado"
 
 #: src/info.cc:481 src/search.cc:642
 msgid "Is Base"
-msgstr "Es base"
+msgstr "Está la base"
 
 #: src/info.cc:485
 msgid "End of Support"
