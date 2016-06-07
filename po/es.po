@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 18:23+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 18:24+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -1747,11 +1747,11 @@ msgstr "¿Abortar, reintentar o ignorar?"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
-msgstr "Verificación de certificado SSL desactivada."
+msgstr "La comprobación de la autoridad certificadora SSL está inhabilitada."
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
-msgstr "No hay dispotivos detectados, no se puede expulsar."
+msgstr "No se ha detectado ningún dispositivo, no se puede expulsar nada."
 
 #: src/callbacks/media.cc:110
 msgid "Try to eject the device manually."
@@ -1768,11 +1768,11 @@ msgstr "Cancelar"
 
 #: src/callbacks/media.cc:139
 msgid "Select device to eject."
-msgstr "Seleccione dispositivo a expulsar."
+msgstr "Seleccione el dispositivo que desea extraer."
 
 #: src/callbacks/media.cc:154
 msgid "Insert the CD/DVD and press ENTER to continue."
-msgstr "Introduzca el CD/DVD y pulse INTRO para continuar."
+msgstr "Inserte el CD/DVD y pulse INTRO para continuar."
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:157
@@ -1787,7 +1787,7 @@ msgstr "Reintentando..."
 #. 'e' stands for Eject medium
 #: src/callbacks/media.cc:172
 msgid "a/r/i/u/e"
-msgstr "c/r/i/u/e"
+msgstr "a/r/i/u/e"
 
 #: src/callbacks/media.cc:174
 msgid "Eject medium."
@@ -1803,8 +1803,8 @@ msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
 "operation."
 msgstr ""
-"Por favor, introduzca el medio [%s] # %d, luego escriba 'y' para continuar o "
-"'n' para cancelar la operación."
+"Introduzca el medio [%s] #%d y teclee s para continuar o n para cancelar la "
+"operación."
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
