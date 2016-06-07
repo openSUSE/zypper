@@ -282,14 +282,35 @@ namespace zypp
 
   };
 
+  ///////////////////////////////////////////////////////////////////
   namespace
   {
-    static ZYppGlobalLock & globalLock()
+    static weak_ptr<ZYpp>		_theZYppInstance;
+    static scoped_ptr<ZYppGlobalLock>	_theGlobalLock;		// on/off in sync with _theZYppInstance
+
+    ZYppGlobalLock & globalLock()
     {
-      static ZYppGlobalLock lock;
-      return lock;
+      if ( !_theGlobalLock )
+	_theGlobalLock.reset( new ZYppGlobalLock );
+      return *_theGlobalLock;
     }
-    bool           _haveZYpp = false;
+  } //namespace
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : ZYpp
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  ZYpp::ZYpp( const Impl_Ptr & impl_r )
+  : _pimpl( impl_r )
+  {
+  }
+
+  ZYpp::~ZYpp()
+  {
+    _theGlobalLock.reset();
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -313,31 +334,12 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : ZYppFactory::instance
-  //	METHOD TYPE : ZYppFactory
-  //
   ZYppFactory ZYppFactory::instance()
-  {
-    return ZYppFactory();
-  }
+  { return ZYppFactory(); }
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : ZYppFactory::ZYppFactory
-  //	METHOD TYPE : Ctor
-  //
   ZYppFactory::ZYppFactory()
-  {
+  {}
 
-  }
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : ZYppFactory::~ZYppFactory
-  //	METHOD TYPE : Dtor
-  //
   ZYppFactory::~ZYppFactory()
   {}
 
@@ -345,8 +347,7 @@ namespace zypp
   //
   ZYpp::Ptr ZYppFactory::getZYpp() const
   {
-    static ZYpp::Ptr _instance;
-
+    ZYpp::Ptr _instance = _theZYppInstance.lock();
     if ( ! _instance )
     {
       if ( geteuid() != 0 )
@@ -387,7 +388,6 @@ namespace zypp
 	      }
 	    }
 	  }
-
 	}
 	if ( failed )
 	{
@@ -400,9 +400,11 @@ namespace zypp
 	}
       }
       // Here we go...
-      _instance.reset( new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) ) );
-      if ( _instance )
-        _haveZYpp = true;
+      static ZYpp::Impl_Ptr _theImplInstance;	// for now created once
+      if ( !_theImplInstance )
+	_theImplInstance.reset( new ZYpp::Impl );
+      _instance.reset( new ZYpp( _theImplInstance ) );
+      _theZYppInstance = _instance;
     }
 
     return _instance;
@@ -411,7 +413,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   //
   bool ZYppFactory::haveZYpp() const
-  { return _haveZYpp; }
+  { return !_theZYppInstance.expired(); }
 
   /******************************************************************
   **

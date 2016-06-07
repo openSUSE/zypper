@@ -67,9 +67,6 @@ namespace zypp
         /** Update housekeeping data if necessary (e.g. whatprovides). */
         void prepare() const;
 
-	/** \ref prepare plus some expensive checks done before solving only. */
-	void prepareForSolving() const;
-
 	/** Get rootdir (for file conflicts check) */
 	Pathname rootDir() const;
 

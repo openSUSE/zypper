@@ -70,8 +70,6 @@ namespace zypp
            * \todo actually requires a watcher.
            */
           void prepare() const;
-	  /** \ref prepare plus some expensive checks done before solving only. */
-	  void prepareForSolving() const;
 
         private:
           /** Invalidate housekeeping data (e.g. whatprovides) if the

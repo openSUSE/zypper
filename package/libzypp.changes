@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jun  7 18:43:31 CEST 2016 - ma@suse.de
+
+- Allow PackageKit to drop the zypp lock (bnc#899755)
+- Avoid superfluous rebuilding of indices when solving
+- version 16.0.2 (0)
+
+-------------------------------------------------------------------
 Sun Jun  5 16:12:42 CEST 2016 - ma@suse.de
 
 - po: upadte makefiles
