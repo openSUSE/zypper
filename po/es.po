@@ -550,7 +550,7 @@ msgstr "Categoría: "
 
 #: src/info.cc:318
 msgid "Severity: "
-msgstr "Severidad:"
+msgstr "Severidad: "
 
 #: src/info.cc:319
 msgid "Created On: "
@@ -578,7 +578,7 @@ msgstr "Sugerencias"
 
 #: src/info.cc:391
 msgid "Visible to User: "
-msgstr "Visible al usuario:"
+msgstr "Visible al usuario: "
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
