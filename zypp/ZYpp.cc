@@ -23,12 +23,8 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ZYpp::ZYpp( const Impl_Ptr & impl_r )
-  : _pimpl( impl_r )
-  {}
-
-  ZYpp::~ZYpp()
-  {}
+  // class ZYpp:
+  // ctor and dtor implemented in  ZYppFactory.cc
 
   std::ostream & operator<<( std::ostream & str, const ZYpp & obj )
   { return str << *obj._pimpl; }
