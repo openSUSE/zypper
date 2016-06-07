@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-05-30 19:24+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"PO-Revision-Date: 2016-06-06 19:42+0000\n"
+"Last-Translator: Guillaume GARDET <guillaume.gardet@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
 ">\n"
 "Language: fr\n"
@@ -5524,7 +5524,6 @@ msgstr "Le dépôt '%s' spécifié est désactivé."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
 msgstr "Aucun élément correspondant n'a été trouvé."
 
@@ -5792,7 +5791,6 @@ msgid "Check failed:"
 msgstr "Échec de la vérification :"
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
 msgstr "Passer la vérification :"
 

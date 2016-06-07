@@ -18,15 +18,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2015-01-27 21:34+0100\n"
-"Last-Translator: jcsl <trcs@gmx.com>\n"
-"Language-Team: Spanish <opensuse-translation-es@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-07 11:29+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -55,7 +56,7 @@ msgstr "Nombre rpm:"
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "La clave de firma gpg '%1%' ya expiró. "
+msgstr "La clave de firma gpg '%1%' ya expiró."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
@@ -283,9 +284,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "Ejecutando: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:207
-#, fuzzy, c-format, boost-format
+#, c-format, boost-format
 msgid "Removing %s"
-msgstr "Eliminando %s-%s"
+msgstr "Eliminando %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:211
@@ -299,9 +300,9 @@ msgid "Removal of %s failed:"
 msgstr "Se ha producido un error al eliminar %s:"
 
 #: src/callbacks/rpm.h:276
-#, fuzzy, c-format, boost-format
+#, c-format, boost-format
 msgid "Installing: %s"
-msgstr "Instalando %s-%s"
+msgstr "Instalando: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:280
@@ -310,9 +311,9 @@ msgid "Installing: %s-%s"
 msgstr "Instalando %s-%s"
 
 #: src/callbacks/rpm.h:303
-#, fuzzy, c-format, boost-format
+#, c-format, boost-format
 msgid "Installation of %s failed:"
-msgstr "La instalación de %s-%s ha fallado:"
+msgstr "La instalación de %s ha fallado:"
 
 #. what's actually needed here
 #: src/callbacks/rpm.h:304
@@ -500,8 +501,8 @@ msgstr "Descripción: "
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se producirá %1% coincidencia para %2%."
+msgstr[1] "Se producirán %1% coincidencias para %2%."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:169
@@ -559,7 +560,7 @@ msgstr "Categoría: "
 
 #: src/info.cc:318
 msgid "Severity: "
-msgstr "Severidad:"
+msgstr "Severidad: "
 
 #: src/info.cc:319
 msgid "Created On: "
@@ -587,7 +588,7 @@ msgstr "Sugerencias"
 
 #: src/info.cc:391
 msgid "Visible to User: "
-msgstr "Visible al usuario:"
+msgstr "Visible al usuario: "
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -1045,7 +1046,7 @@ msgstr "Agregando conflicto: '%s'."
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "¿Quizás quiso decir %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1053,8 +1054,8 @@ msgstr ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... y %1% elemento más."
+msgstr[1] "... y %1% elementos más."
 
 #: src/Summary.cc:505
 #, c-format, boost-format
@@ -1529,13 +1530,15 @@ msgstr[1] ""
 "Las siguientes %d actualizaciones de aplicación NO serán instaladas:"
 
 #: src/Summary.cc:1188
-#, fuzzy, c-format, boost-format
+#, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "El siguiente patrón es recomendado, pero no será instalado:"
+msgstr[0] ""
+"El elemento siguiente está bloqueado y no cambiará con ninguna acción:"
 msgstr[1] ""
-"Se recomiendan los siguientes %d patrones, pero no serán instalados:"
+"Los %d elementos siguientes están bloqueados y no cambiarán con ninguna "
+"acción:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1549,11 +1552,11 @@ msgid "Run '%1%' to see the complete list of locked items."
 msgstr "Ejecute %1% para ver la lista completa de elementos bloqueados."
 
 #: src/Summary.cc:1222
-#, fuzzy, c-format, boost-format
+#, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "El siguiente parche va a ser actualizado:"
-msgstr[1] "Los siguientes %d parches van a ser actualizados:"
+msgstr[0] "El parche siguiente requiere que se reinicie el sistema:"
+msgstr[1] "Los %d parches siguientes requieren que se reinicie el sistema:"
 
 #: src/Summary.cc:1240
 #, boost-format
@@ -2128,7 +2131,7 @@ msgstr "Servicio principal"
 
 #: src/repos.cc:1109
 msgid "Keywords"
-msgstr ""
+msgstr "Palabras clave"
 
 #: src/repos.cc:1110
 msgid "Repo Info Path"
@@ -2735,19 +2738,19 @@ msgstr[1] ""
 
 #. translator: stats summary
 #: src/update.cc:343
-#, fuzzy, c-format, boost-format
+#, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "%d parche necesario"
-msgstr[1] "%d parches necesarios"
+msgstr[0] "%d parche bloqueado"
+msgstr[1] "%d parches bloqueados"
 
 #. translator: stats summary
 #: src/update.cc:351
 #, fuzzy, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d parche necesario"
-msgstr[1] "%d parches necesarios"
+msgstr[0] "%d parche bloqueado"
+msgstr[1] "%d parches bloqueados"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -2806,7 +2809,7 @@ msgstr ""
 #. Translator: Patch status: needed, optional, unwanted, applied, not needed
 #: src/update.cc:474
 msgid "unwanted"
-msgstr ""
+msgstr "no deseado"
 
 #: src/update.cc:476
 #, fuzzy
@@ -2819,16 +2822,15 @@ msgstr "necesario"
 
 #: src/update.cc:479
 msgid "applied"
-msgstr ""
+msgstr "aplicado"
 
 #: src/update.cc:480
 msgid "not needed"
 msgstr "no necesario"
 
 #: src/update.cc:486
-#, fuzzy
 msgid "undetermined"
-msgstr "sin definir"
+msgstr "sin determinar"
 
 #. translators: package's repository (header)
 #: src/update.cc:664 src/update.cc:912 src/search.cc:75 src/search.cc:324
@@ -3172,11 +3174,11 @@ msgid ""
 "\tremoveservice, rs\tRemove specified service.\n"
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
-"\tManejo de Servicios:\n"
-"\tservices, ls\t\tLista los servicios definidos.\n"
-"\taddservice, as\t\tAgregar un nuevo servicios.\n"
-"\tmodifyservice, ms\tModificar el servicio indicado.\n"
-"\tremoveservice, rs\tEliminar el servicio indicado.\n"
+"     Gestión de servicios:\n"
+"\tservices, ls\t\tMostrar todos los servicios definidos.\n"
+"\taddservice, as\t\tAñadir un nuevo servicio.\n"
+"\tmodifyservice, ms\tModificar el servicio especificado.\n"
+"\tremoveservice, rs\tEliminar el servicio especificado.\n"
 "\trefresh-services, refs\tActualizar todos los servicios.\n"
 
 #: src/Zypper.cc:502
@@ -3191,16 +3193,16 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
-"\tGestión de software:\n"
-"\tinstall, in\t\tInstala paquetes.\n"
-"\tremove, rm\t\tElimina paquetes.\n"
-"\tverify, ve\t\tVerificar la integridad de las dependencias del paquete.\n"
-"\tupdate, up\t\tActualiza los paquetes con nuevas versiones.\n"
-"\tdist-upgrade, dup\tRealiza una actualización de la distribución.\n"
-"\tsource-install, si\tInstala los paquetes fuente y sus dependencias de "
-"construcción.\n"
-"\tinstall-new-recommends, inr  Instala nuevos paquetes recomendados por los "
-"ya instalados.\n"
+"     Gestión de software:\n"
+"\tinstall, in\t\tInstalar paquetes.\n"
+"\tremove, rm\t\tEliminar paquetes.\n"
+"\tverify, ve\t\tVerificar la integridad de las dependencias de los "
+"paquetes.\n"
+"\tsource-install, si\tInstalar los paquetes de origen y las dependencias \n"
+"\t\t\t\tde prototipos correspondientes.\n"
+"\tinstall-new-recommends, inr  \n"
+"\t\t\t\tInstalar los nuevos paquetes recomendados\n"
+"\t\t\t\t por los paquetes instalados.\n"
 
 #: src/Zypper.cc:513
 msgid ""
@@ -3372,7 +3374,7 @@ msgstr "Entrando en modo 'sin-comprobación-gpg'."
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
-"Activando '%s'. Las nuevas firmas de este repositorio serán importadas "
+"Se va a activar %s. Las nuevas claves de firma del repositorio se importarán "
 "automáticamente."
 
 #: src/Zypper.cc:988
@@ -3420,7 +3422,7 @@ msgstr "La opción %s carece de efecto aquí, se ignorará."
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "La shell de Zypper no admite la ejecución de subcomandos."
 
 #: src/Zypper.cc:1313
 #, c-format, boost-format
@@ -3540,6 +3542,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"No se requiere intervención por parte del usuario. Alias de la opción global "
+"--non-interactive."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -3630,6 +3634,9 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"La ubicación por defecto en la que el rpm instala los paquetes de origen es "
+"%1%, pero es posible cambiar el valor en la configuración del rpm local. En "
+"caso de duda, pruebe a ejecutar %2%."
 
 #: src/Zypper.cc:1613
 #, c-format, boost-format
@@ -5226,19 +5233,9 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
-"       __ \\/_\n"
-"      (' \\`\\\n"
-"   _\\, \\ \\/ \n"
-"    /`\\/\\ \\\n"
-"         \\ \\\\    \n"
-"          \\ \\\\/\\/_\n"
-"          /\\ \\\\'\\\n"
-"        __\\ `\\\\\\\n"
-"         /|`  `\\\\\n"
-"                \\\\\n"
-"                 \\\\\n"
-"                  \\\\    ,\n"
-"                   `---'"
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
 
 #: src/Zypper.cc:3326
 msgid "Root privileges are required for refreshing services."
@@ -5470,9 +5467,8 @@ msgstr "El repositorio '%s' se encuentra deshabilitado."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
-msgstr "No se han encontrado coincidencias."
+msgstr "No se encuentran elementos que coincidan."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
@@ -5554,7 +5550,7 @@ msgstr[1] "Eliminados %lu bloqueos."
 
 #: src/Zypper.cc:5034
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "No se ha implementado el resultado XML para este comando."
 
 #: src/Zypper.cc:5047
 #, c-format, boost-format
@@ -5731,9 +5727,8 @@ msgid "Check failed:"
 msgstr "Error en comprobación:"
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
-msgstr "Comprobación GPG"
+msgstr "Omitir comprobación:"
 
 #: src/solve-commit.cc:457
 #, c-format, boost-format
@@ -5975,7 +5970,8 @@ msgstr "Es probable que quiera reiniciar estos procesos."
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
 msgstr ""
-"Vea '%s' para información relacionada a los valores en la tabla superior"
+"Consulte '%s' para obtener información sobre el significado de los valores "
+"de la tabla anterior."
 
 #: src/ps.cc:175
 msgid ""
@@ -6065,7 +6061,7 @@ msgstr "Descargando paquetes de fuentes requeridos..."
 #: src/source-download.cc:430
 #, c-format, boost-format
 msgid "Source package '%s' is not provided by any repository."
-msgstr "El paquete de fuentes '%s' no es proporcionado por ningún repositorio"
+msgstr "Ningún repositorio proporciona el paquete de fuentes %s."
 
 #: src/source-download.cc:449 src/source-download.cc:463
 #, c-format, boost-format
@@ -6114,7 +6110,7 @@ msgstr "No se han encontrado proveedores de '%s'."
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr "Advertencia"
+msgstr "Advertencia: "
 
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
@@ -6346,11 +6342,11 @@ msgid "No lock has been removed."
 msgstr "No se eliminó ningún bloqueo."
 
 #: src/locks.cc:306
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "%zu bloqueo fue eliminado satisfactoriamente."
-msgstr[1] "%zu bloqueos fueron eliminados satisfactoriamente."
+msgstr[0] "%z bloqueo se ha eliminado correctamente."
+msgstr[1] "%z bloqueos se han eliminado correctamente."
 
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
@@ -6430,7 +6426,7 @@ msgstr "Error al analizar zypper.conf:"
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr "Opción desconocida"
+msgstr "Opción desconocida "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
@@ -6478,8 +6474,8 @@ msgstr "c/r/i"
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] "Autoseleccionando '%s' después de %u segundo. "
-msgstr[1] "Autoseleccionando '%s' después de %u segundos. "
+msgstr[0] "Autoseleccionando '%s' después de %u segundo."
+msgstr[1] "Autoseleccionando '%s' después de %u segundos."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
@@ -6487,7 +6483,7 @@ msgstr "Reintentando..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "No es posible leer la entrada: flujo erróneo o fin del archivo."
 
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
@@ -6512,7 +6508,7 @@ msgstr "Introduzca '%s' para '%s' o '%s' para '%s' si nada más funciona."
 #: src/utils/misc.cc:112
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "paquete "
+msgstr[0] "paquete"
 msgstr[1] "paquetes"
 
 #: src/utils/misc.cc:114
