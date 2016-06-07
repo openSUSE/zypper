@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 18:11+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 18:18+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -1019,32 +1019,32 @@ msgstr "El parche %s se publicó después de la fecha especificada."
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "Seleccionando para instalar '%s' del repositorio '%s'."
+msgstr "Seleccionando %s en el repositorio %s para su instalación."
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "Forzando la instalación de '%s' del repositorio '%s'."
+msgstr "Forzando la instalación de %s desde el repositorio %s."
 
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
-msgstr "Seleccionando para eliminar '%s'."
+msgstr "Seleccionando %s para su eliminación."
 
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr "'%s' esta bloqueado. Utilice '%s' para desbloquearlo."
+msgstr "%s esta bloqueado. Utilice %s para desbloquearlo."
 
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
-msgstr "Agregando requerimiento: '%s'."
+msgstr "Requisito para añadir: %s."
 
 #: src/RequestFeedback.cc:241
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
-msgstr "Agregando conflicto: '%s'."
+msgstr "Conflicto al añadir: %s."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:263
@@ -1569,7 +1569,7 @@ msgstr "Tamaño total de descarga: %1%. Ya en caché: %2%."
 
 #: src/Summary.cc:1243
 msgid "Download only."
-msgstr "Sólo descargar."
+msgstr "Sólo descarga."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1249
