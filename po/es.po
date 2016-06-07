@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-07 18:21+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -1712,7 +1712,8 @@ msgstr "Intentar recuperar el archivo de nuevo."
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
-msgstr "Omitir descarga del archivo y continuar la operación sin el mismo."
+msgstr ""
+"Omitir recuperación del archivo e intentar continuar la operación sin él"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
