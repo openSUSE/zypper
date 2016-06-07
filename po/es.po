@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 18:25+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 18:27+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -1811,7 +1811,7 @@ msgstr ""
 #. the 'u' reply means 'Change URI'.
 #: src/callbacks/media.cc:255
 msgid "a/r/i/u"
-msgstr "c/r/i/u"
+msgstr "a/r/i/u"
 
 #: src/callbacks/media.cc:299
 #, c-format, boost-format
@@ -1819,8 +1819,8 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
-"Se requiere autenticación para acceder a %s. Necesita ser superusuario a fin "
-"de leer las credenciales desde %s."
+"Se requiere autenticación para acceder a %s. Debe ser el usuario root para "
+"poder leer las credenciales desde %s."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -1834,7 +1834,7 @@ msgstr "Contraseña"
 #: src/Command.cc:201
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr "Comando desconocido '%s'"
+msgstr "Comando desconocido %s"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -1857,8 +1857,8 @@ msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
 "number, the lower the priority."
 msgstr ""
-"Prioridad no válida '%s'. Utilice un número entero. Cuando mayor el número, "
-"más baja la prioridad."
+"Prioridad no válida %s. Utilice un número entero positivo. Cuanto mayor sea "
+"el número, más baja será la prioridad."
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -1870,12 +1870,12 @@ msgstr "Comprobando si es necesario actualizar los metadatos para %s"
 #: src/repos.cc:202
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
-msgstr "El repositorio '%s' está actualizado."
+msgstr "El repositorio %s está actualizado."
 
 #: src/repos.cc:208
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "La comprobación del estado del repositorio '%s' se ha pospuesto."
+msgstr "La comprobación de actualización del repositorio %s se ha pospuesto."
 
 #: src/repos.cc:230
 msgid "Forcing raw metadata refresh"
@@ -1884,22 +1884,22 @@ msgstr "Forzando actualización de metadatos en bruto"
 #: src/repos.cc:236
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Obteniendo los metadatos del repositorio '%s'"
+msgstr "Recuperando los metadatos del repositorio %s."
 
 #: src/repos.cc:263
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
-msgstr "¿Desea desabilitar el repositorio %s permanentemente?"
+msgstr "¿Desea inhabilitar el repositorio %s permanentemente?"
 
 #: src/repos.cc:279
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
-msgstr "Error al deshabilitar el repositorio \"%s\"."
+msgstr "Error al inhabilitar el repositorio %s."
 
 #: src/repos.cc:295
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
-msgstr "Se ha producido un problema al descargar los archivos desde '%s'."
+msgstr "Se ha producido un problema al recuperar los archivos desde %s."
 
 #: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
