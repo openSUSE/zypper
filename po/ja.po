@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-05-17 00:41+0000\n"
+"PO-Revision-Date: 2016-06-07 22:55+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <http://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.5\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -425,12 +425,12 @@ msgstr "エラーが発生していますが、パッケージを受け入れて
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "カテゴリフィルタの値 '%1%' が解釈できません。"
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "重要度フィルタの値 '%1%' が解釈できません。"
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -973,13 +973,12 @@ msgid "Patch '%s' is not needed."
 msgstr "修正 '%s' は必要ありません。"
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"修正 '%s' はロック (施錠) されています。インストールを行なうには '%s' を、"
-"ロックを解除するには '%s' をお使いください。"
+"修正 '%1%' は任意指定です。これらをインストールするには '%2%' を、全ての任意指定の修正を含めるには '%3%' をそれぞれお使いください。"
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -2598,14 +2597,14 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
+msgstr[0] "適用可能な %2% 個の修正のうち、 %1% 個の修正を考慮しています:"
 
 #. translator: stats table header
 #: src/update.cc:333
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
+msgstr[0] "%1% 個の適用可能な修正が見つかりました:"
 
 #. translator: stats summary
 #: src/update.cc:343
@@ -2616,17 +2615,17 @@ msgstr[0] "%d 個の修正がロックされています"
 
 #. translator: stats summary
 #: src/update.cc:351
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d 個の修正がロックされています"
+msgstr[0] "%d 個の任意指定の修正"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:355
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "任意指定の修正を含めるには、 '%1%' をお使いください"
 
 #. translator: stats summary
 #: src/update.cc:364
@@ -2651,7 +2650,7 @@ msgstr "カテゴリ"
 #. translator: Table column header.
 #: src/update.cc:401
 msgid "Updatestack"
-msgstr ""
+msgstr "更新スタック"
 
 #. translator: Table column header.
 #: src/update.cc:403 src/update.cc:830
@@ -2661,7 +2660,7 @@ msgstr "修正"
 #. translator: Table column header.
 #: src/update.cc:405
 msgid "Locked"
-msgstr ""
+msgstr "ロック (施錠)"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2670,7 +2669,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:411
 msgid "Included categories"
-msgstr ""
+msgstr "補助カテゴリ"
 
 #. Translator: Patch status: needed, optional, unwanted, applied, not needed
 #: src/update.cc:474
@@ -2678,9 +2677,8 @@ msgid "unwanted"
 msgstr "不要"
 
 #: src/update.cc:476
-#, fuzzy
 msgid "optional"
-msgstr "ps [オプション]"
+msgstr "任意指定"
 
 #: src/update.cc:477
 msgid "needed"
@@ -2727,9 +2725,8 @@ msgstr "以下のソフトウエア管理の更新を先にインストールし
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:720
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "以下のソフトウエア管理の更新を先にインストールします:"
+msgstr "必要なソフトウエア管理の更新を先にインストールします:"
 
 #: src/update.cc:729 src/update.cc:968
 msgid "No updates found."
@@ -2820,14 +2817,16 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"任意指定の修正を必要な修正として含めるかどうか。"
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "既定では、任意指定の修正は除外されます。"
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "既定では、任意指定の修正を含みます。"
 
 #: src/Zypper.cc:104
 msgid ""
@@ -4199,60 +4198,76 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [オプション]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "適用可能な修正を一覧で表示します。"
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Bugzilla の発行番号をもとに、適用可能な修正を一覧で表示します。"
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"CVE の発行番号をもとに、適用可能な修正を一覧で表示します。"
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=STRING]\n"
+"指定した文字列に該当するものを検索します。"
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <YYYY-MM-DD>\n"
+"指定した日付まで　(指定した日は含まず) に発行された修正を一覧で表示します。"
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <カテゴリ>\n"
+"指定したカテゴリの修正のみを一覧で表示します。"
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <重要度>\n"
+"指定した重要度の修正のみを一覧で表示します。"
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"適用可能なものだけでなく、すべての修正を一覧で表示します。"
 
 #: src/Zypper.cc:2310
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"指定したリポジトリから提供されている修正のみを一覧で表示します。"
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4425,7 +4440,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [オプション]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4433,19 +4448,24 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"適用可能な修正に関する統計情報を表示します。このコマンドは、必要な修正が見つかった場合には 100 を、少なくとも 1 "
+"つ以上の必要なセキュリティ修正が見つかった場合は 101 を返します。"
 
 #: src/Zypper.cc:2476
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"指定したリポジトリ内の修正のみを確認します。"
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "パッケージ管理システム自身に影響する修正のみを確認します。"
+msgstr ""
+"--updatestack-only\n"
+"パッケージ管理システム自身に影響する修正のみを確認します。"
 
 #: src/Zypper.cc:2494
 msgid ""
