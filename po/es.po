@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 17:54+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 17:55+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -877,29 +877,29 @@ msgstr "No se encuentran proveedores de %s."
 #: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr "No se ha encontrado un paquete instalado que coincida con \"%s\"."
+msgstr "No hay instalado ningún paquete que coincida con %s."
 
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr "El paquete '%s' no esta instalado."
+msgstr "El paquete %s no está instalado."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr "No se han encontrado proveedores instalados de '%s'."
+msgstr "No hay ningún proveedor de %s instalado."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr "'%s' ya está instalado."
+msgstr "%s ya está instalado."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "El paquete '%s' que proporciona '%s' ya está instalado."
+msgstr "El paquete %s que proporciona %s ya está instalado."
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
@@ -907,8 +907,8 @@ msgid ""
 "No update candidate for '%s'. The highest available version is already "
 "installed."
 msgstr ""
-"No hay actualización para '%s'. La última versión disponible ya se encuentra "
-"instalada."
+"No hay ninguna posible actualización para %s. La última versión disponible "
+"ya está instalada."
 
 #: src/RequestFeedback.cc:108
 #, c-format, boost-format
