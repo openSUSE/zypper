@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 17:16+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 17:44+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -47,16 +47,16 @@ msgstr "Clave creada:"
 
 #: src/callbacks/keyring.h:41
 msgid "Key Expires:"
-msgstr "La Clave expira:"
+msgstr "La clave caduca:"
 
 #: src/callbacks/keyring.h:42
 msgid "Rpm Name:"
-msgstr "Nombre rpm:"
+msgstr "Nombre de rpm:"
 
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "La clave de firma gpg '%1%' ya expiró."
+msgstr "El archivo de firma de clave gpg %1% ha caducado."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
@@ -68,44 +68,44 @@ msgstr[1] "La clave de firma gpg '%1%' expirará en %2% días."
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Aceptando archivo '%s' sin firmar."
+msgstr "Aceptando un archivo sin firma %s."
 
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Aceptando archivo '%s' sin firmar del repositorio '%s'."
+msgstr "Aceptando un archivo sin firma %s del repositorio %s."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:112
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "El archivo %s no está firmado, ¿desea continuar?"
+msgstr "El archivo %s no está firmado. ¿Desea continuar?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "El archivo %s del repositorio '%s' no esta firmado, ¿desea continuar?"
+msgstr "El archivo %s del repositorio %s no está firmado. ¿Desea continuar?"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Aceptando el archivo '%s' firmado con una clave desconocida '%s'."
+msgstr "Aceptando el archivo %s firmado con una clave desconocida %s."
 
 #: src/callbacks/keyring.h:143
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Aceptando el archivo '%s' del repositorio '%s' firmado con una clave "
-"desconocida '%s'."
+"Aceptando el archivo %s del repositorio %s firmado con una clave desconocida "
+"%s."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"El archivo '%s' está firmado con una clave desconocida '%s'. ¿Continuar?"
+"El archivo %s está firmado con una clave desconocida %s. ¿Desea continuar?"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:157
@@ -113,12 +113,12 @@ msgstr ""
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"El archivo '%s' del repositorio '%s' está firmado con una clave desconocida "
-"'%s'. ¿Continuar?"
+"El archivo %s del repositorio %s está firmado con una clave desconocida %s. ¿"
+"Desea continuar?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
-msgstr "Importando automáticamente la siguiente clave:"
+msgstr "Importación automática de la siguiente clave:"
 
 #: src/callbacks/keyring.h:175
 msgid "Automatically trusting the following key:"
@@ -132,7 +132,8 @@ msgstr "Se ha recibido una nueva clave de firma para el repositorio o paquete:"
 #: src/callbacks/keyring.h:199
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
-"¿Desea (r)echazar la clave, confiar (t)emporalmente o confiar (s)iempre?"
+"¿Desea rechazar la clave, confiar en ella temporalmente o confiar en ella "
+"siempre?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -141,7 +142,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:211
 msgid "r/t/a/"
-msgstr "r/t/s"
+msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:214
@@ -161,48 +162,47 @@ msgstr "Confiar en la clave temporalmente."
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:221
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Confiar en la clave e importar en el anillo de claves de confianza."
+msgstr "Confiar en la clave e importarla en el anillo de claves de confianza."
 
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "¡Ignorando fallo en la verificación de la firma para el archivo '%s'!"
+msgstr "Ignorando el error de verificación de la firma del archivo %s"
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
-"¡Ignorando fallo en la verificación de la firma para el archivo '%s' del "
-"repositorio '%s'!"
+"Ignorando el error de verificación de la firma del archivo %s del "
+"repositorio %s"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "¡Verifique que esto no sea causa de cambios maliciosos al archivo!"
+msgstr "Compruebe que no se debe a cambios malintencionados en el archivo"
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s'."
-msgstr "Fallo en la verificación de la firma del archivo '%s'."
+msgstr "Error de verificación de la firma del archivo %s."
 
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr ""
-"Fallo en la verificación de la firma del archivo '%s' del repositorio '%s'."
+msgstr "Error de verificación de la firma del archivo %s del repositorio %s."
 
 #: src/callbacks/keyring.h:284
 msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
 msgstr ""
-"Advertencia: esto puede ser por un cambio malicioso del archivo.\n"
-"Continuar puede conllevar riesgos. ¿Continuar?"
+"Advertencia: esto puede deberse a un cambio malintencionado en el archivo.\n"
+"Puede ser peligroso continuar. ¿Desea continuar?"
 
 #: src/callbacks/keyring.h:307
 #, c-format, boost-format
 msgid "No digest for file %s."
-msgstr "No hay un resumen (digest) para el archivo %s."
+msgstr "No hay resumen para el archivo %s."
 
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
@@ -214,7 +214,7 @@ msgstr "¿Desea continuar?"
 #: src/callbacks/keyring.h:315
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
-msgstr "Resumen (digest) %s desconocido para el archivo %s."
+msgstr "Resumen desconocido %s para el archivo %s."
 
 #: src/callbacks/keyring.h:332
 #, boost-format
@@ -225,10 +225,10 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
-"Valor de verificación incorrecto para el archivo '%1%'\n"
+"Valor de verificación incorrecto para el archivo %1%\n"
 "[%2%]\n"
 "\n"
-"  se esperaba %3%\n"
+"  Se esperaba %3%\n"
 "  pero se ha obtenido %4%\n"
 
 #: src/callbacks/keyring.h:344
@@ -236,8 +236,8 @@ msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
-"Aceptar paquetes con sumas de verificación incorrectas puede provocar la "
-"corrupción del sistema y, en casos extremos, incluso que el sistema se vea "
+"Aceptar paquetes con sumas de verificación incorrectas puede provocar daños "
+"en el sistema y, en casos extremos, incluso que el sistema se vea "
 "comprometido."
 
 #: src/callbacks/keyring.h:352
@@ -250,12 +250,12 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"Sin embargo, si se ha asegurado de que el archivo con la suma de "
-"verificación '%1%..' es seguro, correcto\n"
-"y debería usarse en esta operación, introduzca los 4 primeros caracteres de "
-"la suma de verificación\n"
-"para desbloquearlo y usar el archivo a riesgo propio. Una entrada vacía "
-"descarta el archivo.\n"
+"Sin embargo, si ha comprobado que el archivo con la suma de verificación %1%"
+".. es seguro, correcto\n"
+"y debe usarse en esta operación, introduzca los 4 primeros caracteres de la "
+"suma de verificación\n"
+"para desbloquearlo y usar el archivo bajo su propia responsabilidad. Si deja "
+"la entrada vacía, el archivo se descartará.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:359
@@ -265,7 +265,7 @@ msgstr "descartar"
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:361
 msgid "Unblock using this file on your own risk."
-msgstr "Desbloquear el uso de este archivo a riesgo propio."
+msgstr "Desbloquear el uso de este archivo bajo su propia responsabilidad."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:363
@@ -281,7 +281,7 @@ msgstr "¿Desbloquear o descartar?"
 #: src/callbacks/rpm.h:151
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
-msgstr "Ejecutando: %s  (%s, %s)"
+msgstr "Ejecutando: %s (%s, %s)"
 
 #: src/callbacks/rpm.h:207
 #, c-format, boost-format
@@ -297,7 +297,7 @@ msgstr "Eliminando %s-%s"
 #: src/callbacks/rpm.h:234
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr "Se ha producido un error al eliminar %s:"
+msgstr "Error al eliminar %s:"
 
 #: src/callbacks/rpm.h:276
 #, c-format, boost-format
@@ -308,7 +308,7 @@ msgstr "Instalando: %s"
 #: src/callbacks/rpm.h:280
 #, c-format, boost-format
 msgid "Installing: %s-%s"
-msgstr "Instalando %s-%s"
+msgstr "Instalando: %s-%s"
 
 #: src/callbacks/rpm.h:303
 #, c-format, boost-format
@@ -319,12 +319,12 @@ msgstr "La instalación de %s ha fallado:"
 #: src/callbacks/rpm.h:304
 #, c-format, boost-format
 msgid "Installation of %s-%s failed:"
-msgstr "La instalación de %s-%s ha fallado:"
+msgstr "Error al instalar %s-%s:"
 
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:350
 msgid "Checking for file conflicts:"
-msgstr "Buscando conflictos:"
+msgstr "Buscando conflictos de archivos:"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:384
@@ -334,8 +334,9 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
-"La búsqueda de conficltos requiere descargar paquetes no instalados para "
-"acceder a su lista de archivos. Consulta '%1%' en el manual de zypper para "
+"Para comprobar si hay conflictos de archivos hace falta descargar "
+"previamente paquetes que no están instalados a fin de acceder a sus listas "
+"de archivos. Consulte la opción %1% en la página man de zypper para obtener "
 "más detalles."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
