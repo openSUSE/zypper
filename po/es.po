@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 18:18+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 18:19+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -1579,13 +1579,13 @@ msgstr "Después de la operación, se utilizarán %s adicionales."
 
 #: src/Summary.cc:1251
 msgid "No additional space will be used or freed after the operation."
-msgstr "No se utilizará ni liberará espacio adicional luego de la operación."
+msgstr "No se usará ni liberará espacio adicional después de la operación."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1258
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
-msgstr "Luego de la operación, se liberarán %s."
+msgstr "Después de la operación, se liberarán %s."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1281
@@ -1700,12 +1700,12 @@ msgstr "Es necesario reiniciar el sistema."
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "Omitir descarga del archivo y cancelar operación actual."
+msgstr "Omitir recuperación del archivo y abortar la operación actual"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
-msgstr "Intentar obtener el archivo nuevamente."
+msgstr "Intentar recuperar el archivo de nuevo"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:32
