@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 17:49+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 17:51+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -656,15 +656,15 @@ msgstr "sin definir"
 
 #: src/info.cc:488
 msgid "CPE Name"
-msgstr "Nombre CPE"
+msgstr "Nombre de CPE"
 
 #: src/info.cc:495
 msgid "invalid CPE Name"
-msgstr "Nombre CPE no válido"
+msgstr "nombre de CPE no válido"
 
 #: src/info.cc:498
 msgid "Update Repositories"
-msgstr "Actualizar repositorios"
+msgstr "Repositorios de actualización"
 
 #: src/info.cc:506
 msgid "Content Id"
@@ -676,7 +676,7 @@ msgstr "Proporcionado por repositorio habilitado"
 
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
-msgstr "No proporcionado por ningún repositorio habilitado"
+msgstr "No se proporciona mediante ningún repositorio habilitado"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -800,32 +800,34 @@ msgstr "No es posible mostrar la entrada manual de %1%"
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "%s no se encontró como nombre de paquete, probando en prestaciones."
+msgstr ""
+"%s no se ha encontrado en los nombres de paquetes. Se realizará la búsqueda "
+"en las características."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr "Paquete '%s' no encontrado."
+msgstr "Paquete %s no encontrado."
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "Parche '%s' no encontrado."
+msgstr "Parche %s no encontrado."
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr "Producto '%s' no encontrado."
+msgstr "Producto %s no encontrado."
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "Patrón '%s' no encontrado."
+msgstr "Patrón %s no encontrado."
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "No se ha encontrado el paquete fuente '%s'."
+msgstr "No se ha encontrado el paquete de origen %s."
 
 #. just in case
 #: src/RequestFeedback.cc:56
