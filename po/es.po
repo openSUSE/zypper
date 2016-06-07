@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-07 17:58+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-07 18:11+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -966,24 +966,24 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"El paquete seleccionado '%s', del repositorio '%s' es de una versión menor a "
-"la que se encuentra instalada."
+"El paquete seleccionado %s, del repositorio %s, es una versión anterior a la "
+"instalada."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr "Utilice '%s' para forzar la instalación del paquete."
+msgstr "Utilice %s para forzar la instalación del paquete."
 
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "El parche '%s' es interactivo, excluyendo."
+msgstr "El parche %s es interactivo. Se omitirá."
 
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
-msgstr "El parche '%s' no es necesario."
+msgstr "El parche %s no es necesario."
 
 #: src/RequestFeedback.cc:181
 #, fuzzy, boost-format
@@ -998,13 +998,13 @@ msgstr ""
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"El parche '%s' se encuentra bloqueado. Utilice '%s' para instalarlo, o "
-"desbloqueelo usando '%s'."
+"El parche %s está bloqueado. Utilice %s para instalarlo o desbloquéelo "
+"mediante %s."
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "No se encuentra el parche '%s' en la categoría indicada."
+msgstr "El parche %s no se encuentra en la categoría especificada."
 
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
@@ -1014,7 +1014,7 @@ msgstr "El parche %s no tiene la gravedad especificada."
 #: src/RequestFeedback.cc:213
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "El parche '%s' fue publicado luego de la fecha indicada."
+msgstr "El parche %s fue publicado después de la fecha especificada."
 
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
