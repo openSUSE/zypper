@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 16:44+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 16:45+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6295,12 +6295,12 @@ msgstr "No se encuentra el paquete de origen %s para el paquete %s."
 #: src/misc.cc:373
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
-msgstr "Instalando el paquete fuente %s-%s"
+msgstr "Instalando el paquete de origen %s-%s"
 
 #: src/misc.cc:382
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr "Paquete fuente %s-%s obtenido con éxito."
+msgstr "Paquete de origen %s-%s obtenido correctamente."
 
 #: src/misc.cc:388
 #, c-format, boost-format
