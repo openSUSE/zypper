@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 11:06+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2334,8 +2334,7 @@ msgstr "Compruebe si el URI es válido y se puede acceder a él."
 
 #: src/repos.cc:1752
 msgid "Problem parsing the file at the specified URI"
-msgstr ""
-"Se ha producido un problema al analizar el archivo en el URI especificado"
+msgstr "Problema al analizar el archivo en el URI especificado"
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
