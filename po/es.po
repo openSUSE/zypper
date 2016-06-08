@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 11:02+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 11:03+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2252,31 +2252,30 @@ msgstr ""
 #: src/repos.cc:1568
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
-msgstr "Alias de repositorio no válido: '%s'"
+msgstr "Alias de repositorio no válido: %s"
 
 #: src/repos.cc:1576 src/repos.cc:1859
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "Ya existe un repositorio llamado '%s'. Por favor, utilice otro alias."
+msgstr "Ya existe un repositorio con el nombre %s. Utilice otro alias."
 
 #: src/repos.cc:1585
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
-"No es posible determinar el tipo de repositorio. Por favor, compruebe si las "
-"direcciones URIs definidas (ver más abajo) apuntan a un repositorio válido:"
+"No es posible determinar el tipo de repositorio. Compruebe si los URI "
+"definidos (ver más abajo) apuntan a un repositorio válido:"
 
 #: src/repos.cc:1591
 msgid "Can't find a valid repository at given location:"
-msgstr ""
-"No es posible encontrar un repositorio válido en la ubicación proporcionada:"
+msgstr "No se encuentra un repositorio válido en la ubicación proporcionada:"
 
 #: src/repos.cc:1599
 msgid "Problem transferring repository data from specified URI:"
 msgstr ""
-"Se ha producido un problema al transferir datos del repositorio desde la "
-"dirección URI especificada:"
+"Se ha producido un problema al transferir datos del repositorio desde el URI "
+"especificado:"
 
 #: src/repos.cc:1600
 msgid "Please check whether the specified URI is accessible."
