@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 11:16+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2659,12 +2659,12 @@ msgstr "Recuperando los datos del repositorio %s..."
 #: src/repos.cc:3108
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "Repositorio '%s' sin almacenar en caché. Almacenando en caché..."
+msgstr "Repositorio %s sin almacenar en caché. Almacenando en caché..."
 
 #: src/repos.cc:3114 src/repos.cc:3148
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
-msgstr "Se ha producido un problema al cargar los datos desde '%s'"
+msgstr "Se ha producido un problema al cargar los datos desde %s"
 
 #: src/repos.cc:3118
 #, c-format, boost-format
