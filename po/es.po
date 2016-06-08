@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 12:13+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 12:14+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5271,13 +5271,13 @@ msgstr ""
 
 #: src/Zypper.cc:3564 src/Zypper.cc:3902
 msgid "Too few arguments."
-msgstr "Insuficientes argumentos."
+msgstr "Argumentos insuficientes."
 
 #: src/Zypper.cc:3587
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Si sólo se utiliza un argumento éste debe ser una URI que apunte a un "
+"Si sólo se utiliza un argumento, éste debe ser una URI que apunte a un "
 "archivo .repo."
 
 #: src/Zypper.cc:3617
