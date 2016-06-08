@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 10:57+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 10:58+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2143,12 +2143,12 @@ msgstr "Vía de caché MD"
 
 #: src/repos.cc:1163 src/repos.cc:1231 src/repos.cc:1375
 msgid "Error reading repositories:"
-msgstr "Se ha producido un error al leer los repositorios:"
+msgstr "Error al leer los repositorios:"
 
 #: src/repos.cc:1189
 #, c-format, boost-format
 msgid "Can't open %s for writing."
-msgstr "No es posible escribir en %s."
+msgstr "No es posible abrir %s para escritura."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
