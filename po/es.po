@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 11:09+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2364,7 +2364,7 @@ msgstr "El repositorio %s no tiene ningún URI definido. Se va a omitir."
 #: src/repos.cc:1822
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
-msgstr "Se ha eliminado el repositorio '%s'."
+msgstr "Se ha eliminado el repositorio %s."
 
 #: src/repos.cc:1844
 #, c-format, boost-format
@@ -2372,13 +2372,13 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"Imposible cambiar el alias del repositorio '%s'. El repositorio pertenece al "
-"servicio '%s' el cual es responsable de establecer su alias."
+"No es posible cambiar el alias del repositorio %s. El repositorio pertenece "
+"al servicio %s, que es responsable de definir su alias."
 
 #: src/repos.cc:1855
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "El repositorio '%s' ha sido renombrado a '%s'."
+msgstr "Se ha cambiado el nombre del repositorio %s a %s."
 
 #: src/repos.cc:1864 src/repos.cc:2098
 msgid "Error while modifying the repository:"
