@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 10:56+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 10:57+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2099,7 +2099,7 @@ msgstr "No hay repositorios definidos."
 
 #: src/repos.cc:1070
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "Utilice 'zypper addrepo' para añadir uno o más repositorios."
+msgstr "Use el comando zypper addrepo para añadir uno o varios repositorios."
 
 #: src/repos.cc:1103
 msgid "Auto-refresh"
@@ -2107,27 +2107,27 @@ msgstr "Actualización automática"
 
 #: src/repos.cc:1103 src/repos.cc:1104
 msgid "On"
-msgstr "Encendido"
+msgstr "Activado"
 
 #: src/repos.cc:1103 src/repos.cc:1104
 msgid "Off"
-msgstr "Apagado"
+msgstr "Desactivado"
 
 #: src/repos.cc:1104
 msgid "Keep Packages"
-msgstr "Mantener paquetes"
+msgstr "Conservar paquetes"
 
 #: src/repos.cc:1106
 msgid "GPG Key URI"
-msgstr "URI de la clave GPG"
+msgstr "URI de clave GPG"
 
 #: src/repos.cc:1107
 msgid "Path Prefix"
-msgstr "Prefijo del directorio"
+msgstr "Prefijo de la vía"
 
 #: src/repos.cc:1108
 msgid "Parent Service"
-msgstr "Servicio principal"
+msgstr "Servicio padre"
 
 #: src/repos.cc:1109
 msgid "Keywords"
@@ -2135,11 +2135,11 @@ msgstr "Palabras clave"
 
 #: src/repos.cc:1110
 msgid "Repo Info Path"
-msgstr "Ruta de información del repositorio"
+msgstr "Vía de información del repositorio"
 
 #: src/repos.cc:1111
 msgid "MD Cache Path"
-msgstr "Ubicación de la cache MD"
+msgstr "Vía del caché MD"
 
 #: src/repos.cc:1163 src/repos.cc:1231 src/repos.cc:1375
 msgid "Error reading repositories:"
