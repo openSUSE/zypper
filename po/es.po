@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:34+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5975,7 +5975,7 @@ msgstr "Archivos"
 
 #: src/ps.cc:160
 msgid "No processes using deleted files found."
-msgstr "No se han encontrado procesos que utilicen archivos suprimidos."
+msgstr "No se encuentran procesos que utilicen archivos suprimidos."
 
 #: src/ps.cc:164
 msgid "The following running processes use deleted files:"
