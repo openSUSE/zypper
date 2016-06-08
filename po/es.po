@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:31+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5875,11 +5875,11 @@ msgstr "asignando"
 
 #: src/solve-commit.cc:776
 msgid "(dry run)"
-msgstr "(ejecución de pruebas)"
+msgstr "(ejecución de prueba)"
 
 #: src/solve-commit.cc:800 src/solve-commit.cc:833
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Ha ocurrido un problema al descargar el paquete desde el repositorio:"
+msgstr "Ha ocurrido un problema al obtener el paquete desde el repositorio:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
 #: src/solve-commit.cc:830
