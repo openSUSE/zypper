@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 11:10+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 11:11+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2382,17 +2382,17 @@ msgstr "Se ha renombrado el repositorio %s a %s."
 
 #: src/repos.cc:1864 src/repos.cc:2098
 msgid "Error while modifying the repository:"
-msgstr "Se ha producido un error al modificar el repositorio:"
+msgstr "Error al modificar el repositorio:"
 
 #: src/repos.cc:1865
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "El repositorio '%s' se deja sin cambios."
+msgstr "El repositorio %s se va a dejar sin cambios."
 
 #: src/repos.cc:2002
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "La prioridad del repositorio '%s' se ha dejado sin cambios (%d)"
+msgstr "La prioridad del repositorio %s se ha dejado sin cambios (%d)"
 
 #: src/repos.cc:2040
 #, c-format, boost-format
@@ -2402,66 +2402,65 @@ msgstr "Se ha habilitado correctamente el repositorio '%s'."
 #: src/repos.cc:2042
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
-msgstr "Se ha deshabilitado correctamente el repositorio '%s'."
+msgstr "Se ha inhabilitado correctamente el repositorio '%s'."
 
 #: src/repos.cc:2049
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "La actualización automática se ha habilitado para el repositorio '%s'."
+msgstr "La actualización automática se ha habilitado para el repositorio %s."
 
 #: src/repos.cc:2051
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr ""
-"La actualización automática se ha deshabilitado para el repositorio '%s'."
+msgstr "La actualización automática se ha inhabilitado para el repositorio %s."
 
 #: src/repos.cc:2058
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr ""
-"Se ha activado el almacenamiento en caché de los archivos RPM para el "
-"repositorio '%s'."
+"Se ha habilitado el almacenamiento en caché de los archivos RPM para el "
+"repositorio %s."
 
 #: src/repos.cc:2060
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr ""
-"Se ha desactivado el almacenamiento en caché de los archivos RPM para el "
-"repositorio '%s'."
+"Se ha inhabilitado el almacenamiento en caché de los archivos RPM para el "
+"repositorio %s."
 
 #: src/repos.cc:2067
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
-msgstr "La verificación GPG ha sido activada para el repositorio '%s'."
+msgstr "Se ha habilitado la comprobación GPG para el repositorio %s."
 
 #: src/repos.cc:2069
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
-msgstr "La verificación GPG ha sido desactivada para el repositorio '%s'."
+msgstr "Se ha inhabilitado la comprobación GPG para el repositorio %s."
 
 #: src/repos.cc:2075
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "La prioridad del repositorio '%s' se ha establecido en %d."
+msgstr "La prioridad del repositorio %s se ha definido como %d."
 
 #: src/repos.cc:2081
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "El nombre del repositorio '%s' se ha definido a '%s'."
+msgstr "El nombre del repositorio %s se ha definido como %s."
 
 #: src/repos.cc:2092
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
-msgstr "No hay cambios que realizar en el repositorio '%s'."
+msgstr "No hay cambios que realizar en el repositorio %s."
 
 #: src/repos.cc:2099
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
-msgstr "Mantener sin cambios el repositorio %s."
+msgstr "El repositorio %s se va a mantener sin cambios."
 
 #: src/repos.cc:2131
 msgid "Error reading services:"
-msgstr "Error leyendo servicios:"
+msgstr "Error al leer servicios:"
 
 #: src/repos.cc:2220
 #, c-format, boost-format
