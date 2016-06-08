@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 16:42+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 16:44+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6206,14 +6206,14 @@ msgstr ""
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "%s no es un nombre de paquete o característica."
+msgstr "%s no es un nombre de paquete ni de característica."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
 #: src/misc.cc:132
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Aceptando automáticamente la licencia %s %s."
+msgstr "Se está aceptando automáticamente la licencia %s %s."
 
 #. introduction
 #. translators: the first %s is the name of the package, the second
@@ -6224,19 +6224,18 @@ msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
 msgstr ""
-"A fin de instalar '%s'%s, debe estar de acuerdo con los términos de la "
-"siguiente licencia:"
+"Para poder instalar %s%s, debe aceptar los términos del siguiente acuerdo de "
+"licencia:"
 
 #. lincense prompt
 #: src/misc.cc:167
 msgid "Do you agree with the terms of the license?"
-msgstr "¿Esta de acuerdo con los términos de la licencia?"
+msgstr "¿Acepta los términos de la licencia?"
 
 #: src/misc.cc:175
 msgid "Aborting installation due to the need for license confirmation."
 msgstr ""
-"Cancelando la instalación debido a la necesidad de que confirme la(s) "
-"licencia(s)."
+"Abortando la instalación debido a la necesidad de que confirme la licencia."
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:178
@@ -6245,16 +6244,16 @@ msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
 msgstr ""
-"Por favor, reinicie la operación en modo interactivo y confirme la "
-"aceptación de la(s) licencia(s) requerida(s), o utilice la opción %s."
+"Reinicie la operación en modo interactivo y confirme que acepta las "
+"licencias necesarias, o utilice la opción %s."
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:187
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
-"Cancelando la instalación debido a que el usuario no acepta la licencia %s "
-"%s."
+"Abortando la instalación debido a que el usuario no ha aceptado la licencia %"
+"s %s."
 
 #: src/misc.cc:225
 msgid "License"
@@ -6262,7 +6261,7 @@ msgstr "Licencia"
 
 #: src/misc.cc:244
 msgid "EULA"
-msgstr "CLUF"
+msgstr "Acuerdo de licencia del usuario final"
 
 #: src/misc.cc:256
 msgid "SUMMARY"
@@ -6276,17 +6275,17 @@ msgstr "Paquetes instalados: %d"
 #: src/misc.cc:258
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "Paquetes instalados con contra partes en repositorios: %d"
+msgstr "Paquetes instalados con elementos correspondientes en repositorios: %d"
 
 #: src/misc.cc:259
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Paquetes instalados con CLUF: %d"
+msgstr "Paquetes instalados con acuerdos de licencia del usuario final: %d"
 
 #: src/misc.cc:289
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
-msgstr "El paquete '%s' tiene el paquete de fuentes '%s'."
+msgstr "El paquete %s tiene el paquete de fuentes %s."
 
 #: src/misc.cc:295
 #, c-format, boost-format
