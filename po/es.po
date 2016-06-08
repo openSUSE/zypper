@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:50+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6491,7 +6491,7 @@ msgstr "Se va a reintentar en %u segundos..."
 #. The answers should be lower case letters.
 #: src/utils/prompt.cc:151 src/utils/prompt.cc:235
 msgid "a/r/i"
-msgstr "c/r/i"
+msgstr "a/r/i"
 
 #: src/utils/prompt.cc:200
 #, c-format, boost-format
@@ -6502,7 +6502,7 @@ msgstr[1] "Autoseleccionando '%s' después de %u segundos."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
-msgstr "Reintentando..."
+msgstr "Volver a intentarlo..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
@@ -6514,19 +6514,21 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
-"Si ejecuta zypper sin un terminal, utilice la opción global '%s'\n"
-"para hacer que zypper responda las solicitudes con respuestas por defecto."
+"Si ejecuta zypper sin un terminal, utilice la opción global %s\n"
+"para hacer que zypper responda a las solicitudes con las respuestas por "
+"defecto."
 
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
-msgstr "Respuesta '%s' no válida."
+msgstr "La respuesta %s no es válida."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:326
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr "Introduzca '%s' para '%s' o '%s' para '%s' si nada más funciona."
+msgstr ""
+"Introduzca '%s' para '%s' o '%s' para '%s' si no funciona ninguna otra cosa."
 
 #: src/utils/misc.cc:112
 msgid "package"
