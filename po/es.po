@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:35+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5983,7 +5983,7 @@ msgstr "Los siguientes procesos en ejecución utilizan archivos suprimidos:"
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
-msgstr "Puede que desee reiniciar estos procesos."
+msgstr "Puede ser conveniente reiniciar estos procesos."
 
 #: src/ps.cc:168
 #, c-format, boost-format
