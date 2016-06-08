@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 11:28+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 11:29+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -3265,15 +3265,17 @@ msgid ""
 "\t\t\t\tto a local directory.\n"
 msgstr ""
 "     Otros comandos:\n"
-"\tversioncmp, vcmp\tComparar dos versiones.\n"
-"\ttargetos, tos\t\tImprimir el ID del sistema destino.\n"
-"\tlicenses\t\tImprimir informa de licencias y CLUF (EULA)\n"
-"\t\t\t\tde los paquetes instalados.\n"
-"\tdownload\t\tDescargar los rpm indicados en la línea de comandos a un "
+"\tversioncmp, vcmp\tCompara dos cadenas de versiones.\n"
+"\ttargetos, tos\t\tImprime la cadena de ID del sistema operativo de destino."
+"\n"
+"\tlicenses\t\tImprime un informe sobre las licencias y los acuerdos de "
+"licencia del usuario final de los\n"
+"\t\t\t\tpaquetes instalados.\n"
+"\tdownload\t\tDescarga los rpms especificados en la línea de comandos en un "
 "directorio local.\n"
-"\tsource-download\t\tDescargar los rpm fuente de todos los paquetes "
+"\tsource-download\t\tDescarga los rpms de origen de todos los paquetes "
 "instalados\n"
-"\t\t\t\ta un directorio local.\n"
+"\t\t\t\ten un directorio local.\n"
 
 #: src/Zypper.cc:554
 msgid ""
@@ -3299,19 +3301,19 @@ msgstr ""
 #: src/Zypper.cc:587
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "Teclee '%s' para obtener una lista de comandos y opciones globales."
+msgstr "Escriba %s para obtener una lista de comandos y opciones globales."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: src/Zypper.cc:596
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Teclee '%s' para obtener ayuda de un comando concreto."
+msgstr "Escriba %s para obtener ayuda de un comando concreto."
 
 #: src/Zypper.cc:771
 #, c-format, boost-format
 msgid "Verbosity: %d"
-msgstr "Nivel de detalle (verboso): %d"
+msgstr "Nivel de detalle: %d"
 
 #: src/Zypper.cc:785
 #, c-format, boost-format
@@ -3337,24 +3339,23 @@ msgstr "Ajuste forzado"
 #: src/Zypper.cc:929
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
-"Cadenas de datos de usuario no deben contener caracteres no imprimibles o "
-"saldos de línea!"
+"La cadena de datos del usuario no debe contener caracteres no imprimibles ni "
+"saltos de línea."
 
 #: src/Zypper.cc:953 src/Zypper.cc:3227
 msgid "Entering non-interactive mode."
-msgstr "Entrando en modo no-interactivo."
+msgstr "Se está accediendo al modo no interactivo."
 
 #: src/Zypper.cc:960
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
-"Parches marcados con rebootSuggested (reinicio sugerido) no serán tratados "
-"como interactivos."
+"Los parches marcados como rebootSuggested no se tratarán como interactivos."
 
 #: src/Zypper.cc:967
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Entrando en modo 'sin-comprobación-gpg'."
+msgstr "Accediendo al modo no-gpg-checks."
 
 #: src/Zypper.cc:975
 #, c-format, boost-format
@@ -3366,7 +3367,7 @@ msgstr ""
 
 #: src/Zypper.cc:988
 msgid "The path specified in the --root option must be absolute."
-msgstr "La ruta especificada en la opción --root debe ser absoluta."
+msgstr "La vía especificada en la opción --root debe ser absoluta."
 
 #: src/Zypper.cc:1004
 msgid ""
