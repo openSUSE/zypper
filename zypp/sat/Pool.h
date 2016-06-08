@@ -97,7 +97,7 @@ namespace zypp
         Repository reposInsert( const std::string & alias_r );
 
         /** Find a \ref Repository named \c alias_r.
-         * Returns \ref norepository if there is no such \ref Repository.
+         * Returns \ref noRepository if there is no such \ref Repository.
          */
         Repository reposFind( const std::string & alias_r ) const;
 
