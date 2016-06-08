@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-03 14:54+0000\n"
+"PO-Revision-Date: 2016-06-08 15:23+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -422,12 +422,12 @@ msgstr "S'accepta el paquet malgrat l'error."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Valor de filtre de categoria sospitós: \"%1%\"."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Valor de filtre de severitat sospitós: \"%1%\"."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -974,13 +974,13 @@ msgid "Patch '%s' is not needed."
 msgstr "El pedaç %s no és necessari."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"El pedaç %s està bloquejat. Feu servir \"%s\" per instal·lar-lo, o "
-"desbloquegeu-lo fent servir \"%s\"."
+"El pedaç %1% és opcional. Feu servir \"%2\" per instal·lar-lo o \"%3\" per "
+"incloure-hi tots els pedaços opcionals."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -2697,16 +2697,16 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Es té en compte %1% de %2% pedaç aplicable:"
+msgstr[1] "Es tenen en compte %1% de %2% pedaços aplicables:"
 
 #. translator: stats table header
 #: src/update.cc:333
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha trobat %1% pedaç aplicable:"
+msgstr[1] "S'han trobat %1% pedaços aplicables:"
 
 #. translator: stats summary
 #: src/update.cc:343
@@ -2718,18 +2718,18 @@ msgstr[1] "%d pedaços bloquejats"
 
 #. translator: stats summary
 #: src/update.cc:351
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d pedaç bloquejat"
-msgstr[1] "%d pedaços bloquejats"
+msgstr[0] "%d pedaç opcional"
+msgstr[1] "%d pedaços opcionals"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:355
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "useu \"%1%\" per incloure-hi els pedaços opcionals"
 
 #. translator: stats summary
 #: src/update.cc:364
@@ -2756,7 +2756,7 @@ msgstr "Categoria"
 #. translator: Table column header.
 #: src/update.cc:401
 msgid "Updatestack"
-msgstr ""
+msgstr "Actualització de la pila"
 
 #. translator: Table column header.
 #: src/update.cc:403 src/update.cc:830
@@ -2766,7 +2766,7 @@ msgstr "Pedaços"
 #. translator: Table column header.
 #: src/update.cc:405
 msgid "Locked"
-msgstr ""
+msgstr "Bloquejat"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2775,7 +2775,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:411
 msgid "Included categories"
-msgstr ""
+msgstr "Categories incloses"
 
 #. Translator: Patch status: needed, optional, unwanted, applied, not needed
 #: src/update.cc:474
@@ -2783,9 +2783,8 @@ msgid "unwanted"
 msgstr "no volgut"
 
 #: src/update.cc:476
-#, fuzzy
 msgid "optional"
-msgstr "ps [opcions]"
+msgstr "opcional"
 
 #: src/update.cc:477
 msgid "needed"
@@ -2833,10 +2832,10 @@ msgstr ""
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:720
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr ""
-"S'instal·laran primer les actualitzacions de gestió de programari següents:"
+"Primer s'instal·laran les actualitzacions de gestió de programari "
+"necessàries:"
 
 #: src/update.cc:729 src/update.cc:968
 msgid "No updates found."
@@ -2930,14 +2929,17 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"Si els pedaços opcionals aplicables han de ser tractats com a necessaris o "
+"s'han d'excloure."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "El valor per defecte és excloure els pedaços opcionals."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "El valor per defecte és incloure els pedaços opcionals."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -4322,63 +4324,77 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [OPCIONS]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Llista tots els pedaços aplicables."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Llista els pedaços aplicables per a problemes del Bugzilla."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Llista els pedaços aplicables per a problemes de CVE."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=CADENA]\n"
+"Cerca problemes que coincideixin amb la cadena especificada."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <AAAA-MM-DD>\n"
+"Llista només pedaços emesos fins a la data especificada, però sense incloure-"
+"la-hi."
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <CATEGORIA>\n"
+"Llista només pedaços amb aquesta categoria."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <SEVERITAT>\n"
+"Llista només pedaços amb aquesta severitat."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Llista tots els pedaços, no només els aplicables."
 
 #: src/Zypper.cc:2310
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
-"    --from <alias|#|URI>        Paquetes seleccionados sólo del repositorio "
-"indicado.\n"
+"-r, --repo <ALIES|#|URI>\n"
+"Llista només els pedaços del repositori especificat."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4560,7 +4576,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [OPCIONS]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4568,23 +4584,25 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Mostra estadístiques sobre els pedaços aplicables. L'ordre retorna 100 si "
+"s'han trobat pedaços necessaris; 101, si hi ha almenys un pedaç de seguretat "
+"necessari."
 
 #: src/Zypper.cc:2476
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
-"zypper [opcions-globals] info [nom...]\n"
-"\n"
-"'info' -- Mostra informació completa sobre els paquets\n"
+"-r, --repo <ALIES|#|URI>\n"
+"Comprova si hi ha pedaços només al repositori especificat."
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "Comprova només els pedaços que afectin la gestió de paquets mateixa."
+msgstr ""
+"--updatestack-only\n"
+"Comprova només si hi ha pedaços que afectin la gestió de paquets mateixa."
 
 #: src/Zypper.cc:2494
 msgid ""
