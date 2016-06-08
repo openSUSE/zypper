@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 16:51+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 16:52+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6591,7 +6591,7 @@ msgstr "La vía local especificada no existe o no es posible acceder a ella."
 
 #: src/utils/misc.cc:207
 msgid "Given URI is invalid"
-msgstr "La dirección URI proporcionada no es válida"
+msgstr "El URI proporcionado no es válido"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
@@ -6610,17 +6610,17 @@ msgstr "Ejemplo: %s"
 
 #: src/utils/misc.cc:335
 msgid "Invalid OBS URI."
-msgstr "OBS URI no válida."
+msgstr "URI OBS no válido."
 
 #: src/utils/misc.cc:335
 msgid "Correct form is obs://<project>/[platform]"
-msgstr "El formato correcto es obs://<projecto>/[plataforma]"
+msgstr "El formato correcto es obs://<proyecto>/[plataforma]"
 
 #: src/utils/misc.cc:386
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
-"Ha ocurrido un problema al copiar el archivo RPM especificado al directorio "
-"caché."
+"Ha ocurrido un problema al copiar el archivo RPM especificado en el "
+"directorio caché."
 
 #: src/utils/misc.cc:387
 msgid "Perhaps you are running out of disk space."
