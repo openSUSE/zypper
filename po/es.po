@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 11:16+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 11:17+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2670,12 +2670,12 @@ msgstr "Problema al cargar los datos desde %s"
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
-"El repositorio '%s' no se puede actualizar. Utilizando cache existente."
+"No es posible actualizar el repositorio %s. Se utilizará el caché existente."
 
 #: src/repos.cc:3122 src/repos.cc:3151
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr "No han sido cargados los elementos de '%s' debido a un error."
+msgstr "No se han cargado las resoluciones de %s debido a un error."
 
 #: src/repos.cc:3139
 #, c-format, boost-format
@@ -2683,14 +2683,14 @@ msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
 msgstr ""
-"El repositorio \"%s\" parece estar desactualizado. Evalúe utilizar una "
-"réplica o servidor diferente."
+"Parece que el repositorio %s no está actualizado. Se recomienda usar una "
+"réplica o servidor distintos."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:3150
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "Intente '%s', o incluso '%s' antes de hacerlo."
+msgstr "Pruebe con %s, o incluso con %s, antes de hacerlo."
 
 #: src/repos.cc:3161
 msgid "Reading installed packages..."
@@ -2706,8 +2706,8 @@ msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr ""
-"Ignorando %s sin argumentos ya que se indicó una opción similar con "
-"argumentos."
+"Ignorando %s sin argumento, ya que se ha indicado una opción similar con un "
+"argumento."
 
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:329
