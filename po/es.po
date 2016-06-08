@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:52+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6618,9 +6618,7 @@ msgstr "El formato correcto es obs://<proyecto>/[plataforma]"
 
 #: src/utils/misc.cc:386
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr ""
-"Ha ocurrido un problema al copiar el archivo RPM especificado en el "
-"directorio caché."
+msgstr "Problema al copiar el archivo RPM especificado en el directorio caché."
 
 #: src/utils/misc.cc:387
 msgid "Perhaps you are running out of disk space."
