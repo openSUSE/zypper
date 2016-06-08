@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 12:14+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 12:15+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5283,7 +5283,8 @@ msgstr ""
 #: src/Zypper.cc:3617
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "No se puede usar %s junto a %s. Utilizando la configuración %s."
+msgstr ""
+"No se puede usar %s con %s. Se va a utilizar el valor de configuración %s."
 
 #: src/Zypper.cc:3636
 msgid "Specified type is not a valid repository type:"
@@ -5293,7 +5294,8 @@ msgstr "El tipo especificado no es un tipo de repositorio válido:"
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
-"Vea '%s' o '%s' para obtener una lista de los tipos de repositorio conocidos."
+"Consulte %s o %s para obtener una lista de los tipos de repositorio "
+"conocidos."
 
 #: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
@@ -5304,7 +5306,7 @@ msgstr "Falta un argumento requerido."
 #: src/Zypper.cc:3688
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "No se ha encontrado el repositorio '%s' por su alias, número o URI."
+msgstr "No se ha encontrado el repositorio %s por su alias, número o URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
