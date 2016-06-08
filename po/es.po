@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 16:52+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-08 16:53+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6626,16 +6626,16 @@ msgstr "Puede que se esté quedando sin espacio en el disco."
 
 #: src/utils/misc.cc:395
 msgid "Problem retrieving the specified RPM file"
-msgstr "Se ha producido un problema al recuperar el archivo RPM especificado"
+msgstr "Problema al recuperar el archivo RPM especificado"
 
 #: src/utils/misc.cc:396
 msgid "Please check whether the file is accessible."
-msgstr "Por favor, compruebe si el archivo es accesible."
+msgstr "Compruebe si es posible acceder al archivo."
 
 #: src/utils/misc.cc:514
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
-msgstr "Modo de descarga \"%s\" desconocido."
+msgstr "Modo de descarga %s desconocido."
 
 #: src/utils/misc.cc:515
 #, c-format, boost-format
