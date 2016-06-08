@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:22+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5219,10 +5219,10 @@ msgid ""
 "Search for patches matching given search strings. This is an alias for "
 "'%s'.\n"
 msgstr ""
-"patch-search [opciones] [búsqueda...]\n"
+"patch-search [opciones] [cadena_de_búsqueda...]\n"
 "\n"
-"Buscar por parches que coincidan con el texto buscado. Search for patches "
-"matching given search strings. Alias de '%s'.\n"
+"Busca los parches que coinciden con las cadenas de búsqueda proporcionadas. "
+"Se trata de un alias para %s.\n"
 
 #. translators: this is just a legacy command
 #: src/Zypper.cc:3153
@@ -5233,7 +5233,7 @@ msgid ""
 msgstr ""
 "ping [opciones]\n"
 "\n"
-"Implementación de prueba que siempre retorna 0.\n"
+"Este comando tiene una implementación falsa que siempre devuelve 0.\n"
 
 #: src/Zypper.cc:3196 src/Zypper.cc:5236
 msgid "Unexpected program flow."
@@ -5374,8 +5374,7 @@ msgstr "No se permiten argumentos cuando se utiliza %s."
 
 #: src/Zypper.cc:3884
 msgid "Root privileges are required for cleaning local caches."
-msgstr ""
-"Se requirene privilegios de superusuario para limpiar los cachés locales."
+msgstr "Se requieren privilegios de Root para borrar los cachés locales."
 
 # 50168 AttribValues/delnotify
 #: src/Zypper.cc:3903
