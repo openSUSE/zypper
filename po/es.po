@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 11:00+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2212,12 +2212,12 @@ msgstr "Conservando el caché de metadatos en bruto para %s %s."
 #: src/repos.cc:1460
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
-msgstr "Limpiando paquetes de '%s'."
+msgstr "Borrando paquetes de %s."
 
 #: src/repos.cc:1468
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "No se puede limpiar el repositorio '%s' debido a un error."
+msgstr "No se puede borrar el repositorio %s debido a un error."
 
 #: src/repos.cc:1479
 msgid "Cleaning installed packages cache."
