@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 12:12+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5230,7 +5230,7 @@ msgstr ""
 
 #: src/Zypper.cc:3326
 msgid "Root privileges are required for refreshing services."
-msgstr "Se requieren privilegios de Root para actualizar los servicios."
+msgstr "Se requieren privilegios de usuario Root para actualizar los servicios."
 
 #: src/Zypper.cc:3350 src/Zypper.cc:3439 src/Zypper.cc:3656
 msgid "Root privileges are required for modifying system services."
