@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 16:36+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 16:37+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6006,12 +6006,12 @@ msgstr ""
 #: src/source-download.cc:208
 #, c-format, boost-format
 msgid "Can't create or access download directory '%s'."
-msgstr "No es posible crear o acceder el directorio de descargas '%s'."
+msgstr "No es posible crear o acceder el directorio de descargas %s."
 
 #: src/source-download.cc:221
 #, c-format, boost-format
 msgid "Using download directory at '%s'."
-msgstr "Utilizando directorio de descargas '%s'."
+msgstr "Utilizando directorio de descargas de %s."
 
 #: src/source-download.cc:231 src/source-download.cc:262
 msgid "Failed to read download directory"
@@ -6019,11 +6019,11 @@ msgstr "Error al leer el directorio de descargas"
 
 #: src/source-download.cc:236
 msgid "Scanning download directory"
-msgstr "Explorando directorio de descargas"
+msgstr "Explorando el directorio de descargas"
 
 #: src/source-download.cc:266
 msgid "Scanning installed packages"
-msgstr "Explorando paquetes instalados"
+msgstr "Explorando los paquetes instalados"
 
 #: src/source-download.cc:285
 msgid "Installed packages:"
@@ -6036,11 +6036,11 @@ msgstr "Paquetes de fuentes requeridos:"
 #: src/source-download.cc:297
 msgid "Required source packages available in download directory:"
 msgstr ""
-"Paquetes de fuentes requeridos disponibles en el directorio de descarga:"
+"Paquetes de fuentes requeridos disponibles en el directorio de descargas:"
 
 #: src/source-download.cc:301
 msgid "Required source packages to be downloaded:"
-msgstr "Paquetes de fuentes requeridos a ser descargados:"
+msgstr "Paquetes de fuentes cuya descarga se requiere:"
 
 #: src/source-download.cc:305
 msgid "Superfluous source packages in download directory:"
