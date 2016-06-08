@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 12:20+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5313,7 +5313,7 @@ msgstr "No se encuentra el repositorio %s por su alias, número o URI."
 #: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "No se ha encontrado el servicio %s por su alias, número o URI."
+msgstr "No se encuentra el servicio %s por su alias, número o URI."
 
 #: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
