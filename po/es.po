@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 14:47+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-08 15:03+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -434,12 +434,12 @@ msgstr "Aceptando el paquete a pesar del error."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Valor de filtro de categorías sospechoso %1%."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Valor de filtro de gravedad sospechoso %1%."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -986,13 +986,13 @@ msgid "Patch '%s' is not needed."
 msgstr "El parche %s no es necesario."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"El parche '%s' se encuentra bloqueado. Utilice '%s' para instalarlo, o "
-"desbloqueelo usando '%s'."
+"El parche %s es opcional. Utilice %2% para instalarlo o %3% para incluir "
+"todos los parches opcionales."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -2714,16 +2714,16 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se van a tener en cuenta %1% de los %2% parches aplicables:"
+msgstr[1] "Se van a tener en cuenta %1% de los %2% parches aplicables:"
 
 #. translator: stats table header
 #: src/update.cc:333
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se ha encontrado %1% parche aplicable:"
+msgstr[1] "Se han encontrado %1% parches aplicables:"
 
 #. translator: stats summary
 #: src/update.cc:343
@@ -2735,18 +2735,18 @@ msgstr[1] "%d parches bloqueados"
 
 #. translator: stats summary
 #: src/update.cc:351
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d parche bloqueado"
-msgstr[1] "%d parches bloqueados"
+msgstr[0] "%d parche opcional"
+msgstr[1] "%d parches opcionales"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:355
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "utilice %1% para incluir parches opcionales"
 
 #. translator: stats summary
 #: src/update.cc:364
@@ -2774,7 +2774,7 @@ msgstr "Categoría"
 #. translator: Table column header.
 #: src/update.cc:401
 msgid "Updatestack"
-msgstr ""
+msgstr "Pila de actualización"
 
 #. translator: Table column header.
 #: src/update.cc:403 src/update.cc:830
@@ -2784,7 +2784,7 @@ msgstr "Parches"
 #. translator: Table column header.
 #: src/update.cc:405
 msgid "Locked"
-msgstr ""
+msgstr "Bloqueadas"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2793,7 +2793,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:411
 msgid "Included categories"
-msgstr ""
+msgstr "Categorías incluidas"
 
 #. Translator: Patch status: needed, optional, unwanted, applied, not needed
 #: src/update.cc:474
@@ -2801,9 +2801,8 @@ msgid "unwanted"
 msgstr "no deseado"
 
 #: src/update.cc:476
-#, fuzzy
 msgid "optional"
-msgstr "ps [opciones]"
+msgstr "opcional"
 
 #: src/update.cc:477
 msgid "needed"
@@ -2852,11 +2851,9 @@ msgstr ""
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:720
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr ""
-"Primero se instalarán las siguientes actualizaciones del adminsitrador de "
-"software:"
+"Primero se instalarán las actualizaciones de gestión de software necesarias:"
 
 #: src/update.cc:729 src/update.cc:968
 msgid "No updates found."
@@ -2952,14 +2949,17 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"Indica si los parches opcionales aplicables se deben tratar como necesarios "
+"o si de deben excluir."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "La opción por defecto es excluir los parches opcionales."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "La opción por defecto es incluir los parches opcionales."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -4382,60 +4382,77 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [opciones]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Muestra todos los parches aplicables."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Muestra los parches aplicables para los problemas de bugzilla."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Muestra los parches aplicables para los problemas de CVE."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=STRING]\n"
+"Permite buscar problemas que coincidan con la cadena especificada."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <AAAA-MM-DD>\n"
+"Muestra solo los parches publicados hasta la fecha especificada, sin "
+"incluirla."
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <categoría>\n"
+"Muestra solo los parches de esta categoría."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <gravedad>\n"
+"Muestra solo los parches con esta gravedad."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Muestra todos los parches, no solo los aplicables."
 
 #: src/Zypper.cc:2310
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
+"-r, --repo <alias|n.º|URI>\n"
+"Muestra solo los parches del repositorio especificado."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4628,7 +4645,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [opciones]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4636,20 +4653,25 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Muestra estadísticas sobre los parches aplicables. El comando devuelve el "
+"valor 100 si se encuentran parches necesarios o el valor 101 si hay al menos "
+"un parche de seguridad necesario."
 
 #: src/Zypper.cc:2476
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Comprueba si hay parches solo en el repositorio especificado."
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr ""
-"Comprobar solo los parches que afectan a la propia gestión del paquete."
+"--updatestack-only\n"
+"Comprueba solo los parches que afectan a la propia gestión del paquete."
 
 #: src/Zypper.cc:2494
 msgid ""
