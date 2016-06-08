@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:33+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5907,9 +5907,7 @@ msgstr ""
 
 #: src/solve-commit.cc:855
 msgid "Problem occured during or after installation or removal of packages:"
-msgstr ""
-"Se ha producido un problema durante la instalación o la eliminación de "
-"paquetes:"
+msgstr "Problema durante la instalación o la eliminación de paquetes:"
 
 #: src/solve-commit.cc:863
 msgid "Installation has completed with error."
