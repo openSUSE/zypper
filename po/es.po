@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 15:03+0000\n"
+"PO-Revision-Date: 2016-06-08 15:06+0000\n"
 "Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
@@ -167,7 +167,7 @@ msgstr "Confiar en la clave e importarla en el anillo de claves de confianza."
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignorando el error de verificación de la firma del archivo %s"
+msgstr "Ignorando el error de verificación de la firma del archivo %s."
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
@@ -175,11 +175,11 @@ msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
 "Ignorando el error de verificación de la firma del archivo %s del "
-"repositorio %s"
+"repositorio %s."
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "Compruebe que no se debe a cambios malintencionados en el archivo"
+msgstr "Compruebe que no se debe a cambios malintencionados en el archivo."
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
@@ -5236,7 +5236,7 @@ msgstr "Flujo de programa inesperado."
 
 #: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
-msgstr "Argumentos de programa que no son opciones:"
+msgstr "Argumentos de programa que no son opciones: "
 
 # se supone que es un geeko, las barras estan escapeadas :P
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
@@ -6312,7 +6312,7 @@ msgstr "(cualquiera)"
 #. translators: locks table value
 #: src/locks.cc:26 src/locks.cc:125
 msgid "(multiple)"
-msgstr "(multiple)"
+msgstr "(múltiple)"
 
 #. translators: property name; short; used like "Name: value"
 #: src/locks.cc:72
