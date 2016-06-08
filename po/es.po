@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 16:38+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-08 16:39+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6086,7 +6086,7 @@ msgstr "Ningún repositorio proporciona el paquete de fuentes %s."
 #: src/source-download.cc:449 src/source-download.cc:463
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
-msgstr "Error al descargar el paquete de fuentes %s."
+msgstr "Error al descargar el paquete de origen %s."
 
 #: src/source-download.cc:474
 msgid "No source packages to download."
