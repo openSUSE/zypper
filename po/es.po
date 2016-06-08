@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:47+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6371,7 +6371,7 @@ msgstr[1] "%z bloqueos se han eliminado correctamente."
 
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
-msgstr "Se ha producido un problema al eliminar el bloqueo del paquete:"
+msgstr "Problema al eliminar el bloqueo del paquete:"
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
