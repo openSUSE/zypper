@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:51+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6583,11 +6583,11 @@ msgstr "Necesario"
 
 #: src/utils/misc.cc:145
 msgid "Not Needed"
-msgstr "Innecesario"
+msgstr "No es necesario"
 
 #: src/utils/misc.cc:195
 msgid "Specified local path does not exist or is not accessible."
-msgstr "La ruta local que ha especificado no existe o no es accesible."
+msgstr "La vía local especificada no existe o no es accesible."
 
 #: src/utils/misc.cc:207
 msgid "Given URI is invalid"
