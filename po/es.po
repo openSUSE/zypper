@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 11:13+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2517,7 +2517,7 @@ msgstr "Problema al recuperar el índice del repositorio para el servicio %s:"
 #: src/repos.cc:2633 src/repos.cc:2741 src/repos.cc:2799
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Omitiendo el servicio %s debido al error anterior."
+msgstr "Se va a omitir el servicio %s debido al error anterior."
 
 #: src/repos.cc:2643
 msgid "Check if the URI is valid and accessible."
