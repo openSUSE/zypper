@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:37+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6044,7 +6044,7 @@ msgstr "Paquetes de origen cuya descarga se requiere:"
 
 #: src/source-download.cc:305
 msgid "Superfluous source packages in download directory:"
-msgstr "Paquetes de fuentes sobrantes en el directorio de descarga:"
+msgstr "Paquetes de fuentes sobrantes en el directorio de descargas:"
 
 #. translators: table headers
 #: src/source-download.cc:319
