@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 10:58+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 10:59+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2170,7 +2170,7 @@ msgstr "Se va a omitir el repositorio inhabilitado %s"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
-msgstr "Los repositorios especificados no están habilitados o definidos."
+msgstr "Los repositorios especificados no están habilitados ni definidos."
 
 #: src/repos.cc:1312
 msgid "There are no enabled repositories defined."
@@ -2179,8 +2179,7 @@ msgstr "No hay repositorios habilitados definidos."
 #: src/repos.cc:1313
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr ""
-"Utilice los comandos '%s' o '%s' para agregar o habilitar repositorios."
+msgstr "Utilice los comandos %s o %s para añadir o habilitar repositorios."
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
@@ -2197,17 +2196,17 @@ msgstr "Todos los repositorios han sido actualizados."
 #: src/repos.cc:1438
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "Limpiando el caché de metadatos para '%s'."
+msgstr "Borrando el caché de metadatos para %s."
 
 #: src/repos.cc:1447
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "Limpiando el caché de metadatos en bruto para '%s'."
+msgstr "Borrando el caché de metadatos en bruto para %s."
 
 #: src/repos.cc:1453
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr "Limpiando el caché de metadatos en bruto para %s '%s'."
+msgstr "Conservando el caché de metadatos en bruto para %s '%s'"
 
 #. translators: meaning the cached rpm files
 #: src/repos.cc:1460
