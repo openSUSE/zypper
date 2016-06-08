@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 16:26+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 16:27+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5781,25 +5781,25 @@ msgstr "¿Desea ver las notificaciones ahora?"
 
 #: src/solve-commit.cc:532
 msgid "Computing distribution upgrade..."
-msgstr "Calculando actualización..."
+msgstr "Calculando actualización de distribución..."
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
-msgstr "Resolviendo dependencias..."
+msgstr "Resolviendo dependencias de paquete..."
 
 #: src/solve-commit.cc:614
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
-"Algunas dependencias de paquetes instalados son erroneas. Para corregir "
-"dichas dependencias, es necesario realizar las siguientes acciones:"
+"Algunas de las dependencias de los paquetes instalados son incorrectas. Para "
+"corregir las dependencias, se deben realizar las siguientes acciones:"
 
 #: src/solve-commit.cc:621
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
-"Se requieren privilegios de superusuario para corregir las dependencias de "
-"paquetes incorrectas."
+"Se requieren privilegios de Root para corregir las dependencias de paquetes "
+"incorrectas."
 
 #. translators: These are the "Continue?" prompt options corresponding to
 #. "Yes / No / show Problems / Versions / Arch / Repository /
