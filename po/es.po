@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:44+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6290,7 +6290,7 @@ msgstr "El paquete %s tiene el paquete de origen %s."
 #: src/misc.cc:295
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "No se ha encontrado el paquete de fuentes %s, para el paquete %s."
+msgstr "No se encuentra el paquete de origen %s para el paquete %s."
 
 #: src/misc.cc:373
 #, c-format, boost-format
