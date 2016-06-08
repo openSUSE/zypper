@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 11:03+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2277,7 +2277,7 @@ msgstr "Problema al transferir datos del repositorio desde el URI especificado:"
 
 #: src/repos.cc:1600
 msgid "Please check whether the specified URI is accessible."
-msgstr "Por favor, compruebe si la dirección URI especificada es accesible."
+msgstr "Compruebe si se puede acceder al URI especificado."
 
 #: src/repos.cc:1607
 msgid "Unknown problem when adding repository:"
