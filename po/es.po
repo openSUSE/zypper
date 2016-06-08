@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 11:18+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 11:19+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2830,7 +2830,7 @@ msgstr "Repositorio"
 # clients/printconf_write.ycp:121
 #: src/update.cc:665 src/update.cc:981 src/update.cc:1050 src/search.cc:327
 msgid "Severity"
-msgstr "Severidad"
+msgstr "Gravedad"
 
 #: src/update.cc:665 src/update.cc:981 src/update.cc:1050
 msgid "Interactive"
@@ -2848,8 +2848,7 @@ msgstr "Resumen"
 #: src/update.cc:717
 msgid "The following software management updates will be installed first:"
 msgstr ""
-"Primero se instalarán las siguientes actualizaciones del adminsitrador de "
-"software:"
+"Primero se instalarán las siguientes actualizaciones de gestión de software:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:720
@@ -2866,7 +2865,7 @@ msgstr "No se ha encontrado ninguna actualización."
 #. translator: Table headline
 #: src/update.cc:736
 msgid "The following updates are also available:"
-msgstr "También se encuentran disponibles las siguientes actualizaciones:"
+msgstr "Las siguientes actualizaciones también están disponibles:"
 
 #: src/update.cc:828
 msgid "Package updates"
@@ -2879,7 +2878,7 @@ msgstr "Actualizaciones de patrones"
 
 #: src/update.cc:834
 msgid "Product updates"
-msgstr "Actualizaciones del producto"
+msgstr "Actualizaciones de productos"
 
 #: src/update.cc:920
 msgid "Current Version"
