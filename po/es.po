@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 12:10+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 12:12+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5214,7 +5214,7 @@ msgstr "Flujo de programa inesperado."
 
 #: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
-msgstr "Argumentos del programa sin opciones: "
+msgstr "Argumentos de programa que no son opciones:"
 
 # se supone que es un geeko, las barras estan escapeadas :P
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
@@ -5230,8 +5230,7 @@ msgstr ""
 
 #: src/Zypper.cc:3326
 msgid "Root privileges are required for refreshing services."
-msgstr ""
-"Se requieren privilegios de superusuario para actualizar los servicios."
+msgstr "Se requieren privilegios de Root para actualizar los servicios."
 
 #: src/Zypper.cc:3350 src/Zypper.cc:3439 src/Zypper.cc:3656
 msgid "Root privileges are required for modifying system services."
