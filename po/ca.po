@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 15:23+0000\n"
+"PO-Revision-Date: 2016-06-08 15:58+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -452,7 +452,7 @@ msgstr "No s'ha trobat"
 
 #: src/utils/prompt.h:160
 msgid "I/O error"
-msgstr "Error I/O "
+msgstr "Error I/O"
 
 #: src/utils/prompt.h:160
 msgid "Invalid object"
@@ -1639,8 +1639,8 @@ msgstr[1] "paquets per eliminiar"
 #: src/Summary.cc:1348
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "paquet per canviar de proveïdor"
-msgstr[1] "paquets per canviar de proveïdor"
+msgstr[0] "per canviar de proveïdor"
+msgstr[1] "per canviar de proveïdor"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1351
@@ -2327,7 +2327,7 @@ msgstr "Si us plau, comproveu si l'URI especificat és vàlid i accessible."
 
 #: src/repos.cc:1752
 msgid "Problem parsing the file at the specified URI"
-msgstr "Problema analitzant el fitxer a l'adreça especificada."
+msgstr "Problema analitzant el fitxer a l'URI especificat."
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
@@ -2341,8 +2341,7 @@ msgstr ""
 
 #: src/repos.cc:1762
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr ""
-"S'ha trobat un problema intentant llegir el fitxer a l'adreça especificada."
+msgstr "S'ha trobat un problema intentant llegir el fitxer a l'URI especificat."
 
 #: src/repos.cc:1774
 msgid "Repository with no alias defined found in the file, skipping."
@@ -2600,8 +2599,7 @@ msgid_plural ""
 msgstr[0] ""
 "El repositori %s s'ha eliminat dels repositoris habilitats del servei %s."
 msgstr[1] ""
-"Els repositoris \"%s\" s'han eliminat dels repositoris habilitats del servei "
-"\"%s\"."
+"Els repositoris %s s'han eliminat dels repositoris habilitats del servei %s."
 
 #: src/repos.cc:2962
 #, c-format, boost-format
@@ -2613,8 +2611,8 @@ msgid_plural ""
 msgstr[0] ""
 "El repositori %s s'ha eliminat dels repositoris inhabilitats del servei %s."
 msgstr[1] ""
-"Els repositoris \"%s\" s'han eliminat dels repositoris inhabilitats del "
-"servei \"%s\"."
+"Els repositoris %s s'han eliminat dels repositoris inhabilitats del servei "
+"%s."
 
 #: src/repos.cc:2971
 #, c-format, boost-format
@@ -2756,7 +2754,7 @@ msgstr "Categoria"
 #. translator: Table column header.
 #: src/update.cc:401
 msgid "Updatestack"
-msgstr "Actualització de la pila"
+msgstr "Pila d'actualització"
 
 #. translator: Table column header.
 #: src/update.cc:403 src/update.cc:830
@@ -5559,7 +5557,8 @@ msgstr " Solució %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
-"Escolliu la solució marcant \"1\" o salteu-ho, reintenteu-ho o cancel·leu-ho."
+"Escolliu la solució anterior marcant \"1\" o salteu-ho, reintenteu-ho o "
+"cancel·leu-ho."
 msgstr[1] ""
 "Escolliu la solució marcant-ne el número corresponent o salteu-ho, "
 "reintenteu-ho o cancel·leu-ho."
@@ -5569,7 +5568,7 @@ msgstr[1] ""
 #: src/solve-commit.cc:78
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Escolliu la solució amb \"1\" o cancel·leu-ho amb \"c\"."
+msgstr[0] "Escolliu la solució anterior amb \"1\" o cancel·leu-ho amb \"c\"."
 msgstr[1] "Escolliu la solució amb el número corresponent o cancel·leu-ho."
 
 #. translators: answers for dependency problem solution input prompt:
