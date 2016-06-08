@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 10:54+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2047,12 +2047,11 @@ msgstr "Inicializando destino"
 
 #: src/repos.cc:897
 msgid "Target initialization failed:"
-msgstr "La inicialización del destino ha fallado:"
+msgstr "Error al inicializar el destino:"
 
 #: src/repos.cc:898 src/Zypper.cc:4440
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr ""
-"Ejecutando 'zypper refresh' como superusuario puede solucionar el problema."
+msgstr "Ejecutar zypper refresh como Root puede solucionar el problema."
 
 #: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5246
 msgid "Alias"
