@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 16:47+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 16:50+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6392,7 +6392,7 @@ msgstr "Hay demasiados argumentos."
 #: src/utils/messages.cc:56
 #, c-format, boost-format
 msgid "The '--%s' option has currently no effect."
-msgstr "La opción '%s' no tiene efecto aquí."
+msgstr "La opción --%s no tiene efecto en estos momentos."
 
 #: src/utils/messages.cc:74
 #, c-format, boost-format
@@ -6401,35 +6401,37 @@ msgid ""
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
 msgstr ""
-"Ha elegido ignorar un problema con la descarga o instalación de un paquete "
-"que puede conllevar a dependencias incompletas de otros paquetes. Se "
-"recomienda ejecutar '%s' luego de finalizar la operación."
+"Ha elegido ignorar un problema relacionado con la descarga o la instalación "
+"de un paquete que puede llevar a dependencias con otros paquetes "
+"incompletas. Se recomienda ejecutar %s después de finalizar la operación."
 
 #: src/utils/pager.cc:32
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
-msgstr "Pulse '%c' para salir del paginador."
+msgstr "Pulse %c para salir del paginador."
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
-"Utilice las teclas de dirección o Pág Arriba/Pag Abajo para desplazarse por "
-"líneas o por páginas."
+"Utilice las teclas de dirección o Av Pág/Re Pág para desplazarse por el "
+"texto línea a línea o página a página."
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
-"Utilice la tecla Enter o Espacio para recorrer el texto por líneas o páginas."
+"Utilice la tecla Intro o la barra espaciadora para recorrer el texto por "
+"líneas o páginas."
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
-msgstr "No es posible inicializar el archivo de configuración del analizador."
+msgstr "No es posible inicializar el analizador del archivo de configuración."
 
 # se supone que Augeas es un programa ¿? http://freshmeat.net/projects/augeas
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
 msgstr ""
-"Error de Augeas: fallo al establecer archivo de configuración a cargar."
+"Error de Augeas: error al establecer archivo de configuración que se debe "
+"cargar"
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
@@ -6460,8 +6462,8 @@ msgid ""
 "%s used together with %s, which contradict each other. This property will be "
 "left unchanged."
 msgstr ""
-"%s utilizado junto con %s, los cuales se contradicen mutuamente. Esta "
-"propiedad se quedará inalterada."
+"%s se utiliza con %s, los cuales se contradicen mutuamente. Esta propiedad "
+"se mantendrá sin cambios."
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:72
@@ -6479,7 +6481,7 @@ msgstr "no"
 #: src/utils/prompt.cc:145 src/utils/prompt.cc:190
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
-msgstr "Reintentando en %u segundos..."
+msgstr "Reintentar transcurridos %u segundos..."
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
