@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 11:07+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2348,9 +2348,7 @@ msgstr ""
 
 #: src/repos.cc:1762
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr ""
-"Se ha encontrado un problema al intentar leer el archivo en el URI "
-"especificado"
+msgstr "Problema al intentar leer el archivo en el URI especificado"
 
 #: src/repos.cc:1774
 msgid "Repository with no alias defined found in the file, skipping."
