@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-08 16:34+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-08 16:35+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5979,11 +5979,11 @@ msgstr "No se encuentran procesos que utilicen archivos suprimidos."
 
 #: src/ps.cc:164
 msgid "The following running processes use deleted files:"
-msgstr "Los siguientes procesos en ejecución utilizan archivos eliminados:"
+msgstr "Los siguientes procesos en ejecución utilizan archivos suprimidos:"
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
-msgstr "Es probable que quiera reiniciar estos procesos."
+msgstr "Puede que desee reiniciar estos procesos."
 
 #: src/ps.cc:168
 #, c-format, boost-format
