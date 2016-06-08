@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 16:24+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5435,7 +5435,9 @@ msgstr "Problema con el archivo RPM especificado como %s. Se va a omitir."
 #: src/Zypper.cc:4006
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
-msgstr "Hay un problema leyendo la cabecera RPM de %s. ¿Es un archivo RPM?"
+msgstr ""
+"Se ha producido un problema al leer la cabecera RPM de %s. Compruebe si de "
+"verdad se trata de un archivo RPM."
 
 #: src/Zypper.cc:4028
 msgid "Plain RPM files cache"
