@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-08 11:01+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2225,7 +2225,7 @@ msgstr "Borrando el caché de paquetes instalados."
 
 #: src/repos.cc:1488
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "No se puede borrar el caché de paquetes instalados debido a un error."
+msgstr "No es posible borrar el caché de paquetes instalados debido a un error."
 
 #: src/repos.cc:1507
 msgid "Could not clean the repositories because of errors."
