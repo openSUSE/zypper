@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-05 17:08+0000\n"
+"PO-Revision-Date: 2016-06-09 08:47+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
-"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_CN/>\n"
+"Language-Team: Chinese (China) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -403,12 +403,12 @@ msgstr "尽管有错误仍接受了该软件包。"
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "可疑的分类过滤器值 '%1%'。"
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "可疑的严重性过滤器值 '%1%'。"
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -934,11 +934,11 @@ msgid "Patch '%s' is not needed."
 msgstr "不需要补丁 '%s'。"
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
-msgstr "补丁 '%s' 已锁定。可使用 '%s' 安装，或用 '%s' 解锁。"
+msgstr "补丁 '%s' 是可选的。可使用 '%2%' 安装，或用 '%3%' 包含全部可选补丁。"
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -2492,14 +2492,14 @@ msgstr "忽略没有参数的 %s 因为已经指定过了类似的有参数的�
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
+msgstr[0] "正在考量第 %1% 个共 %2% 个可应用的补丁："
 
 #. translator: stats table header
 #: src/update.cc:333
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
+msgstr[0] "找到了 %1% 个可应用的补丁："
 
 #. translator: stats summary
 #: src/update.cc:343
@@ -2510,17 +2510,17 @@ msgstr[0] "锁定了 %d 个补丁"
 
 #. translator: stats summary
 #: src/update.cc:351
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "锁定了 %d 个补丁"
+msgstr[0] "%d 个可选补丁"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:355
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "使用 '%1%' 来包含可选的补丁"
 
 #. translator: stats summary
 #: src/update.cc:364
@@ -2545,7 +2545,7 @@ msgstr "分类"
 #. translator: Table column header.
 #: src/update.cc:401
 msgid "Updatestack"
-msgstr ""
+msgstr "更新堆栈"
 
 #. translator: Table column header.
 #: src/update.cc:403 src/update.cc:830
@@ -2555,7 +2555,7 @@ msgstr "补丁"
 #. translator: Table column header.
 #: src/update.cc:405
 msgid "Locked"
-msgstr ""
+msgstr "已锁定"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2564,7 +2564,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:411
 msgid "Included categories"
-msgstr ""
+msgstr "包含的分类"
 
 #. Translator: Patch status: needed, optional, unwanted, applied, not needed
 #: src/update.cc:474
@@ -2572,9 +2572,8 @@ msgid "unwanted"
 msgstr "不需要"
 
 #: src/update.cc:476
-#, fuzzy
 msgid "optional"
-msgstr "ps [选项]"
+msgstr "可选"
 
 #: src/update.cc:477
 msgid "needed"
@@ -2621,9 +2620,8 @@ msgstr "将首先安装以下软件管理更新："
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:720
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "将首先安装以下软件管理更新："
+msgstr "将首先安装所需软件管理更新："
 
 #: src/update.cc:729 src/update.cc:968
 msgid "No updates found."
@@ -2710,14 +2708,16 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"可应用的可选补丁应被视为需要的补丁还是要排除的补丁。"
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "默认是排除可选补丁。"
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "默认是包含可选补丁。"
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3974,61 +3974,76 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [选项]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "列出全部可应用的补丁。"
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"列出针对指定故障专区问题的可应用补丁。"
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"列出针对指定 CVE 问题的可应用补丁。"
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=字符串]\n"
+"查找匹配指定字符串的问题。"
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <YYYY-MM-DD>\n"
+"仅列出截止至但不包括指定日期的补丁。"
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <分类>\n"
+"仅列出此分类中的补丁。"
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <严重性>\n"
+"仅列出具有此严重性的补丁。"
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"列出全部补丁而不仅是可应用补丁。"
 
 #: src/Zypper.cc:2310
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
-msgstr "    --from <alias|#|URI>        从指定的安装源中选择软件包。\n"
+msgstr ""
+"-r, --repo <别名|#|URI>\n"
+"仅从指定软件源列出补丁。"
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4182,28 +4197,30 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [选项]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
-msgstr ""
+msgstr "显示可应用补丁统计。该命令若找到了所需补丁则会返回 100，若有至少一个所需的安全补丁则会返回 101。"
 
 #: src/Zypper.cc:2476
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
-msgstr "    --from <alias|#|URI>        从指定的安装源中选择软件包。\n"
+msgstr ""
+"-r, --repo <别名|#|URI>\n"
+"仅检查指定软件源中的补丁。"
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "仅检查影响软件管理器自身的补丁。"
+msgstr ""
+"--updatestack-only\n"
+"仅检查影响软件管理器自身的补丁。"
 
 #: src/Zypper.cc:2494
 msgid ""
