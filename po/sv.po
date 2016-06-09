@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 21:28+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-06-09 21:30+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -576,7 +576,7 @@ msgstr "Föreslagen"
 
 #: src/info.cc:391
 msgid "Visible to User: "
-msgstr "Synlig för användare: "
+msgstr "Visas för användare: "
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -623,7 +623,7 @@ msgstr "Variant"
 
 #: src/info.cc:477
 msgid "Short Name"
-msgstr "Kort namn"
+msgstr "Kortnamn"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/info.cc:479 src/Summary.cc:1207 src/utils/misc.cc:138
@@ -632,11 +632,11 @@ msgstr "Installerad"
 
 #: src/info.cc:481 src/search.cc:642
 msgid "Is Base"
-msgstr "Är baserad"
+msgstr "Är bas"
 
 #: src/info.cc:485
 msgid "End of Support"
-msgstr "Supportslut"
+msgstr "Slut på support"
 
 #: src/info.cc:485 src/info.cc:493 src/info.cc:524
 msgid "undefined"
