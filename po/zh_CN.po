@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 08:47+0000\n"
+"PO-Revision-Date: 2016-06-09 09:01+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
@@ -2390,14 +2390,14 @@ msgstr "服务 '%s' 的名称已设为 '%s'。"
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "已将软件源 '%s' 加入服务 '%s' 的已启用软件源中。"
+msgstr[0] "已将软件源 '%s' 加入服务 '%s' 的已启用软件源中"
 
 #: src/repos.cc:2948
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "已将软件源 '%s' 加入服务 '%s' 的已禁用软件源中。"
+msgstr[0] "已将软件源 '%s' 加入服务 '%s' 的已禁用软件源中"
 
 #: src/repos.cc:2955
 #, c-format, boost-format
@@ -2405,7 +2405,7 @@ msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "已将软件源 '%s' 从服务 '%s' 的已启用软件源中移除。"
+msgstr[0] "已将软件源 '%s' 从服务 '%s' 的已启用软件源中移除"
 
 #: src/repos.cc:2962
 #, c-format, boost-format
@@ -2414,7 +2414,7 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
-msgstr[0] "已将软件源 '%s' 从服务 '%s' 的已禁用软件源中移除。"
+msgstr[0] "已将软件源 '%s' 从服务 '%s' 的已禁用软件源中移除"
 
 #: src/repos.cc:2971
 #, c-format, boost-format
