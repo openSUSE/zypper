@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-06 13:26+0000\n"
+"PO-Revision-Date: 2016-06-09 18:41+0000\n"
 "Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -338,7 +338,11 @@ msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
 msgstr[0] ""
+"Följande paket har uteslutits från kontroll av filkonflikter eftersom det "
+"ännu inte är nedladdat:"
 msgstr[1] ""
+"Följande paket har uteslutits från kontroll av filkonflikter eftersom de "
+"ännu inte är nedladdade:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:402
@@ -416,7 +420,7 @@ msgstr "Paketet godkänns trots felet."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Misstänkt värde för kategorifilter '%1%'."
 
 #: src/SolverRequester.h:68
 #, boost-format
@@ -963,13 +967,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Programfixen \"%s\" behövs inte."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Korrigeringen \"%s\" är låst. Installera den med \"%s\" eller lås upp den "
-"med \"%s\"."
+"Programfixen '%1%' är inte obligatorisk. Använd '%2%' för att installera den "
+"eller '%3%' för att inkludera alla programfixar."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1299,157 +1303,164 @@ msgstr[1] ""
 "inte är önskade (manuellt borttagna sedan tidigare):"
 
 #: src/Summary.cc:921
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] ""
+"Följande paket rekommenderas, men kommer inte att installeras på grund av "
+"konflikter eller problem med beroende:"
+msgstr[1] ""
+"Följande %d paket rekommenderas, men kommer inte att installeras på grund av "
+"konflikter eller problem med beroende:"
 
 #: src/Summary.cc:934
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande programfix rekommenderas, men kommer inte att installeras:"
+msgstr[1] ""
+"Följande %d programfixar rekommenderas, men kommer inte att installeras:"
 
 #: src/Summary.cc:938
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande mönster rekommenderas, men kommer inte att installeras:"
+msgstr[1] "Följande %d mönster rekommenderas, men kommer inte att installeras:"
 
 #: src/Summary.cc:942
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande produkt är rekommenderad, men kommer inte att installeras:"
+msgstr[1] ""
+"Följande %d produkter är rekommenderade, men kommer inte att installeras:"
 
 #: src/Summary.cc:946
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande program är rekommenderat, men kommer inte att installeras:"
+msgstr[1] "Följande %d program rekommenderas, men kommer inte att installeras:"
 
 #: src/Summary.cc:986
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande paket är föreslaget, men kommer inte att installeras:"
+msgstr[1] "Följande %d paket är föreslagna, men kommer inte att installeras:"
 
 #: src/Summary.cc:991
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande programfix är föreslagen, men kommer inte att installeras:"
+msgstr[1] ""
+"Följande %d programfixar är föreslagna, men kommer inte att installeras:"
 
 #: src/Summary.cc:996
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande mönster är föreslaget, men kommer inte att installeras:"
+msgstr[1] "Följande %d mönster är föreslagna, men kommer inte att installeras:"
 
 #: src/Summary.cc:1001
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande produkt är föreslagen, men kommer inte att installeras:"
+msgstr[1] "Följande %d produkter är föreslagna, men kommer inte att installeras:"
 
 #: src/Summary.cc:1006
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande program är föreslaget, men kommer inte att installeras:"
+msgstr[1] "Följande %d program är föreslagna, men kommer inte att installeras:"
 
 #: src/Summary.cc:1028
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande paket kommer att byta arkitektur:"
+msgstr[1] "Följande %d paket kommer att byta arkitektur:"
 
 #: src/Summary.cc:1033
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande programfix kommer att byta arkitektur:"
+msgstr[1] "Följande %d programfixar kommer att byta arkitektur:"
 
 #: src/Summary.cc:1038
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande mönster kommer att byta arkitektur:"
+msgstr[1] "Följande %d mönster kommer att byta arkitektur:"
 
 #: src/Summary.cc:1043
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande produkt kommer att byta arkitektur:"
+msgstr[1] "Följande %d produkter kommer att byta arkitektur:"
 
 #: src/Summary.cc:1048
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande program kommer att byta arkitektur:"
+msgstr[1] "Följande %d program kommer att byta arkitektur:"
 
 #: src/Summary.cc:1070
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande paket kommer att byta leverantör:"
+msgstr[1] "Följande %d paket kommer att byta leverantör:"
 
 #: src/Summary.cc:1075
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande programfix kommer att byta leverantör:"
+msgstr[1] "Följande %d programfixar kommer att byta leverantör:"
 
 #: src/Summary.cc:1080
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande mönster kommer att byta leverantör:"
+msgstr[1] "Följande %d mönster kommer att byta leverantör:"
 
 #: src/Summary.cc:1085
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande produkter kommer att byta leverantör:"
+msgstr[1] "Följande %d produkter kommer att byta leverantör:"
 
 #: src/Summary.cc:1090
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande program kommer att byta leverantör:"
+msgstr[1] "Följande %d program kommer att byta leverantör:"
 
 #: src/Summary.cc:1110
 #, fuzzy, c-format, boost-format
