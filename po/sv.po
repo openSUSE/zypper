@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 22:18+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-06-09 22:19+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -529,7 +529,7 @@ msgstr "Status: "
 #: src/info.cc:266
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
-msgstr "föråldrad (version %s är installerad)"
+msgstr "för gammal (version %s är installerad)"
 
 #: src/info.cc:270
 msgid "up-to-date"
@@ -620,7 +620,7 @@ msgstr "(tom)"
 
 #: src/info.cc:472
 msgid "Flavor"
-msgstr "Variant"
+msgstr "Smak"
 
 #: src/info.cc:477
 msgid "Short Name"
@@ -641,7 +641,7 @@ msgstr "Slut på support"
 
 #: src/info.cc:485 src/info.cc:493 src/info.cc:524
 msgid "undefined"
-msgstr "odefinerad"
+msgstr "odefinierat"
 
 #: src/info.cc:488
 msgid "CPE Name"
