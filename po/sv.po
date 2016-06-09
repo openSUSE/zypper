@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-09 21:42+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -870,7 +870,7 @@ msgstr "Paketet \"%s\" är inte installerat."
 #: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr "Inget som tillhandahåller '%s' är installerat."
+msgstr "Ingen leverantör av \"%s\" är installerad."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
