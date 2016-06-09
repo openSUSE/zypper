@@ -107,7 +107,7 @@ function sameVersion() {
 }
 
 function getchanges() {
-  git log --no-merges --pretty=format:'- %s' "$LAST_RELEASE"..HEAD | grep -v 'po.tar.bz2'
+  git log --no-merges --pretty=format:'- %s' "$LAST_RELEASE"..HEAD | grep -v 'po.tar.bz2\|Translated using Weblate'
 }
 
 function newchangesentry() {
