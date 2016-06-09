@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 21:27+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-06-09 21:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -206,7 +206,7 @@ msgstr "Fortsätt?"
 #: src/callbacks/keyring.h:315
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
-msgstr "Okänt sammandrag %s för fil %s."
+msgstr "Sammandraget %s för filen %s är okänt."
 
 #: src/callbacks/keyring.h:332
 #, boost-format
@@ -397,7 +397,7 @@ msgstr "Verkställer delta"
 #: src/callbacks/repo.h:103
 #, c-format, boost-format
 msgid "(%s unpacked)"
-msgstr "(%s ej uppackat)"
+msgstr "(%s uppackat)"
 
 #: src/callbacks/repo.h:112
 #, boost-format
@@ -446,7 +446,7 @@ msgstr "Klar."
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
 msgid "Not found"
-msgstr "Inte hittad"
+msgstr "hittades inte"
 
 # error box title
 #: src/utils/prompt.h:160
