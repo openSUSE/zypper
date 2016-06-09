@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 21:57+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-09 22:05+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -2289,7 +2289,7 @@ msgstr "Läser data från \"%s\"-media"
 #: src/repos.cc:1654
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
-msgstr "Ett fel uppstod när data skulle läsas in från %s-media"
+msgstr "Ett fel uppstod när data skulle läsas in från \"%s\"-media"
 
 #: src/repos.cc:1655
 msgid "Please check if your installation media is valid and readable."
@@ -2328,17 +2328,17 @@ msgstr "Det gick inte att läsa filen på den angivna URI:n"
 
 #: src/repos.cc:1774
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "Ett förråd utan definerat alias hittades i filen. Hoppar över."
+msgstr "Ett förråd utan alias hittades i filen. Det hoppas över."
 
 #: src/repos.cc:1780
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "Förrådet '%s' har ingen URI angiven, hoppar över."
+msgstr "Förrådet \"%s\" har ingen URI. Det hoppas över."
 
 #: src/repos.cc:1822
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
-msgstr "Förrådet '%s' har tagits bort."
+msgstr "Förrådet \"%s\" har tagits bort."
 
 #: src/repos.cc:1844
 #, c-format, boost-format
@@ -2346,13 +2346,13 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"Kan inte ändra alias för förrådet '%s'. Förrådet tillhör tjänsten '%s' som "
-"inte kan sätta alias."
+"Kan inte ändra alias för förrådet \"%s\". Förrådet tillhör tjänsten \"%s\" "
+"som inte kan sätta alias."
 
 #: src/repos.cc:1855
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Förrådet '%s' har bytt namn till '%s'."
+msgstr "Förrådet \"%s\" har bytt namn till \"%s\"."
 
 #: src/repos.cc:1864 src/repos.cc:2098
 msgid "Error while modifying the repository:"
@@ -2361,12 +2361,12 @@ msgstr "Ett fel uppstod när förrådet skulle ändras:"
 #: src/repos.cc:1865
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "Lämnar förrådet '%s' orört."
+msgstr "Lämnar förrådet \"%s\" oförändrat."
 
 #: src/repos.cc:2002
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "Prioriteten för förrådet '%s' lämnades oförändrad (%d)"
+msgstr "Prioritet för förrådet \"%s\" är oförändrad (%d)"
 
 #: src/repos.cc:2040
 #, c-format, boost-format
@@ -2381,22 +2381,22 @@ msgstr "Arkivet %s har inaktiverats."
 #: src/repos.cc:2049
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "Autorefresh aktiverades för förrådet '%s'."
+msgstr "Automatisk uppdatering har aktiverats för förrådet \"%s\"."
 
 #: src/repos.cc:2051
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "Autorefresh inaktiverades för förrådet '%s'."
+msgstr "Den automatiska uppdateringen har inaktiverats för förrådet \"%s\"."
 
 #: src/repos.cc:2058
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "Cache för RPM-filer har aktiverats för förrådet '%s'."
+msgstr "Cachelagring av RPM-filer har aktiverats för förrådet \"%s\"."
 
 #: src/repos.cc:2060
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "Cache för RPM-filer har inaktiverats för förrådet '%s'."
+msgstr "Cachelagring av RPM-filer har inaktiverats för förrådet \"%s\"."
 
 #: src/repos.cc:2067
 #, c-format, boost-format
@@ -2411,22 +2411,22 @@ msgstr "GPG-kontroll har inaktiverats för lagringsplatsen \"%s\"."
 #: src/repos.cc:2075
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "Förrådet '%s' fick en ny prioritet (%d)."
+msgstr "Prioriteten för förrådet \"%s\" har satts till %d."
 
 #: src/repos.cc:2081
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "Namnet på förrådet '%s' har ändrats till '%s'."
+msgstr "Namnet på förrådet \"%s\" har ändrats till \"%s\"."
 
 #: src/repos.cc:2092
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
-msgstr "Inget att ändra för förrådet '%s'."
+msgstr "Det finns inget att ändra för förrådet \"%s\"."
 
 #: src/repos.cc:2099
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
-msgstr "Lämnar förrådet '%s' orört."
+msgstr "Förrådet \"%s\" lämnas orört."
 
 #: src/repos.cc:2131
 msgid "Error reading services:"
@@ -2483,7 +2483,7 @@ msgstr "Uppdaterar tjänsten %s."
 #: src/repos.cc:2631 src/repos.cc:2641
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Ett problem uppstod vid hämtning av indexfilen för tjänsten '%s':"
+msgstr "Det gick inte att hämta förrådsindexfilen för tjänsten \"%s\":"
 
 #: src/repos.cc:2633 src/repos.cc:2741 src/repos.cc:2799
 #, c-format, boost-format
@@ -2612,22 +2612,22 @@ msgstr "Lämnar tjänsten %s oförändrad."
 
 #: src/repos.cc:3082
 msgid "Loading repository data..."
-msgstr "Laddar förrådsdata..."
+msgstr "Läser in förrådsdata..."
 
 #: src/repos.cc:3102
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Hämtar data för förrådet '%s'..."
+msgstr "Hämtar data för förrådet \"%s\"..."
 
 #: src/repos.cc:3108
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "Förrådet '%s' är inte cachat. Cachar..."
+msgstr "Förrådet \"%s\" är inte cachat. Cachar..."
 
 #: src/repos.cc:3114 src/repos.cc:3148
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
-msgstr "Problem att ladda data från \"%s\""
+msgstr "Ett problem uppstod när data skulle läsas in från \"%s\""
 
 #: src/repos.cc:3118
 #, c-format, boost-format
