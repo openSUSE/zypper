@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 21:26+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-09 21:27+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -201,7 +201,7 @@ msgstr "Det finns inget sammandrag för filen %s."
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
 #: src/callbacks/rpm.h:138 src/callbacks/rpm.h:418 src/solve-commit.cc:668
 msgid "Continue?"
-msgstr "vill du fortsätta?"
+msgstr "Fortsätt?"
 
 #: src/callbacks/keyring.h:315
 #, c-format, boost-format
