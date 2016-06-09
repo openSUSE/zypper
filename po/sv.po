@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 22:12+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-09 22:18+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -160,7 +160,7 @@ msgstr "Ha förtroende för nyckeln och importera den till betrodd nyckelring."
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignorerar felaktig signatur för filen %s!"
+msgstr "Ignorerar felaktig signatur för filen \"%s\"!"
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
@@ -176,7 +176,7 @@ msgstr ""
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s'."
-msgstr "Signaturverifiering misslyckades för filen %s."
+msgstr "Signaturverifiering misslyckades för filen \"%s\"."
 
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
@@ -1062,7 +1062,7 @@ msgstr[1] "Följande %d NYA programfixar kommer att installeras:"
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "Följande NYA mönster kommer att installeras:"
-msgstr[1] "Följande %2 NYA mönster kommer att installeras:"
+msgstr[1] "Följande %d NYA mönster kommer att installeras:"
 
 #: src/Summary.cc:520
 #, c-format, boost-format
@@ -1625,8 +1625,8 @@ msgstr[1] "Det går inte att ta bort ^%s\n"
 #: src/Summary.cc:1348
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "för byte av leverantör"
-msgstr[1] "för byte av leverantör"
+msgstr[0] "för att byta leverantör"
+msgstr[1] "för att byta leverantör"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1351
