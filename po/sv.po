@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 21:33+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-09 21:40+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -67,7 +67,7 @@ msgstr "Accepterar den osignerade filen %s."
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Accepterar den osignerade filen '%s' från förrådet '%s'."
+msgstr "Accepterar den osignerade filen \"%s\" från förrådet \"%s\"."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:112
@@ -79,7 +79,7 @@ msgstr "Filen %s är inte signerad. Vill du fortsätta?"
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Filen '%s' från förrådet '%s' är osignerad, vill du fortsätta?"
+msgstr "Filen \"%s\" från förrådet \"%s\" är osignerad, vill du fortsätta?"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
@@ -91,7 +91,8 @@ msgstr "Accepterar filen %s som är signerad med en okänd nyckel: %s."
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Accepterar filen '%s' från förrådet '%s' signerad med en okänd nyckel '%s'."
+"Accepterar filen \"%s\" från förrådet \"%s\" signerad med en okänd nyckel \"%"
+"s\"."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -105,8 +106,8 @@ msgstr "Filen %s är signerad med en okänd nyckel: %s. Vill du fortsätta?"
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"Filen '%s' från förrådet '%s' är signerad med en okänd nyckel '%s'. Vill du "
-"fortsätta?"
+"Filen \"%s\" från förrådet \"%s\" är signerad med en okänd nyckel \"%s\". "
+"Vill du fortsätta?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
@@ -165,7 +166,7 @@ msgstr "Ignorerar felaktig signatur för filen %s!"
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ignorerar felaktig signatur för filen '%s' från förrådet '%s'!"
+msgstr "Ignorerar felaktig signatur för filen \"%s\" från förrådet \"%s\"!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -180,7 +181,7 @@ msgstr "Signaturverifiering misslyckades för filen %s."
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Signaturverifiering misslyckades för filen '%s' från förrådet '%s'."
+msgstr "Signaturverifiering misslyckades för filen \"%s\" från förrådet \"%s\"."
 
 #: src/callbacks/keyring.h:284
 msgid ""
@@ -496,7 +497,7 @@ msgstr[1] "Det finns %1% matchningar för  '%2%'."
 #: src/info.cc:169
 #, c-format, boost-format
 msgid "%s '%s' not found."
-msgstr "%s '%s' hittades inte."
+msgstr "%s \"%s\" hittades inte."
 
 #: src/info.cc:191
 #, c-format, boost-format
@@ -528,7 +529,7 @@ msgstr "Status: "
 #: src/info.cc:266
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
-msgstr "föråldrad (version '%s' är installerad)"
+msgstr "föråldrad (version %s är installerad)"
 
 #: src/info.cc:270
 msgid "up-to-date"
@@ -794,7 +795,7 @@ msgstr "Paketet \"%s\" hittades inte."
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "Programfixen '%s' hittades inte."
+msgstr "Programfixen \"%s\" hittades inte."
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
@@ -804,7 +805,7 @@ msgstr "Produkten \"%s\" hittades inte."
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "Mönstret '%s' hittades inte."
+msgstr "Mönstret \"%s\" hittades inte."
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
@@ -815,38 +816,38 @@ msgstr "Det gick inte att hitta källpaketet \"%s\"."
 #: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr "Objektet '%s' hittades inte."
+msgstr "Objektet \"%s\" hittades inte."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "Paketet '%s' hittades inte i angivet förråd (repo)."
+msgstr "Paketet \"%s\" hittades inte i angivna förråd."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Patchen '%s' hittades inte i angivet förråd (repo)."
+msgstr "Patchen \"%s\" hittades inte i angivna förråd."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Produkten '%s' hittades inte i angivet förråd (repo)."
+msgstr "Produkten \"%s\" hittades inte i angivna förråd."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "Mönstret '%s' hittades inte i angivet förråd (repo)."
+msgstr "Mönstret \"%s\" hittades inte i angivna förråd."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Källpaketet '%s' hittades inte angivet förråd (repo)."
+msgstr "Källpaketet \"%s\" hittades inte angivna förråd."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "Objektet '%s' hittades inte i angivet förråd (repo)."
+msgstr "Objektet \"%s\" hittades inte i angivna förråd."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
