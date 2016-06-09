@@ -48,7 +48,7 @@ Recommends:     lsof
 BuildRequires:  cmake
 BuildRequires:  openssl-devel
 %if 0%{?suse_version} >= 1130 || 0%{?fedora_version} >= 16
-BuildRequires:  libudev-devel
+BuildRequires:  pkgconfig(libudev)
 %else
 BuildRequires:  hal-devel
 %endif
