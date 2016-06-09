@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 22:28+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-09 22:30+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -1464,11 +1464,11 @@ msgstr[0] "Följande program kommer att byta leverantör:"
 msgstr[1] "Följande %d program kommer att byta leverantör:"
 
 #: src/Summary.cc:1110
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande paket stöds inte av dess leverantör:"
+msgstr[1] "Följande %d paket stöds inte av dess leverantör:"
 
 #: src/Summary.cc:1130
 #, fuzzy, c-format, boost-format
@@ -1975,7 +1975,7 @@ msgstr "Hoppar över inaktiverat arkiv '%s'."
 #: src/repos.cc:765 src/repos.cc:798 src/repos.cc:1297
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Arkivet %s ignoreras på grund av felet ovan."
+msgstr "Förrådet %s ignoreras på grund av felet ovan."
 
 #: src/repos.cc:784
 #, c-format, boost-format
