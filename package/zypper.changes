@@ -253,7 +253,8 @@ Thu Dec  3 01:13:23 CET 2015 - ma@suse.de
 -------------------------------------------------------------------
 Fri Nov 27 17:03:29 CET 2015 - ma@suse.de
 
-- lu/lp: fix different data returned in xml and text output (bsc#793424)
+- lu/lp: fix different data returned in xml and text output
+  (bsc#793424, bsc#893833)
 - lp: Indicate patches requiring a restart of the package manager itself.
   Enhance 'lp -a' Status column.
 - pchk: also report needed but locked patches
