@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-09 21:57+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -2289,7 +2289,7 @@ msgstr "Läser data från \"%s\"-media"
 #: src/repos.cc:1654
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
-msgstr "Problem att läsa data från \"%s\"-media"
+msgstr "Ett fel uppstod när data skulle läsas in från %s-media"
 
 #: src/repos.cc:1655
 msgid "Please check if your installation media is valid and readable."
