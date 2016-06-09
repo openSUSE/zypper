@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 22:19+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-09 22:26+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -826,7 +826,7 @@ msgstr "Paketet \"%s\" hittades inte i angivna förråd."
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Patchen \"%s\" hittades inte i angivna förråd."
+msgstr "Programfixen \"%s\" hittades inte i angivna förråd."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
@@ -1895,7 +1895,7 @@ msgstr ""
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
-msgstr "Inget alias har definierats för detta förråd."
+msgstr "Inget alias har definierats för förrådet."
 
 #: src/repos.cc:339
 #, c-format, boost-format
