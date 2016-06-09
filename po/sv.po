@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-09 21:28+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -446,7 +446,7 @@ msgstr "Klar."
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
 msgid "Not found"
-msgstr "hittades inte"
+msgstr "Hittades inte"
 
 # error box title
 #: src/utils/prompt.h:160
