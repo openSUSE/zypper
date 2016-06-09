@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 21:49+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-09 21:57+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -1940,7 +1940,8 @@ msgstr ""
 #: src/repos.cc:401
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Det gick inte att hitta arkivmetadata för %s i det lokala cacheminnet."
+msgstr ""
+"Det gick inte att hitta förrådsmetadata för %s i det lokala cacheminnet."
 
 #: src/repos.cc:409
 msgid "Error building the cache:"
@@ -1949,7 +1950,7 @@ msgstr "Det uppstod ett fel när cachen skapades:"
 #: src/repos.cc:609
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "Kunde inte hitta förrådet '%s' med dess alias, nummer eller URI."
+msgstr "Kunde inte hitta förrådet \"%s\" med hjälp av alias, nummer eller URI."
 
 #: src/repos.cc:612
 #, c-format, boost-format
@@ -1964,7 +1965,7 @@ msgstr "Hoppar över inaktiverad lagringsplats \"%s\""
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Ignorerar förrådet '%s' på grund av valet '%s'."
+msgstr "Ignorerar förrådet \"%s\" på grund av alternativet \"%s\"."
 
 #: src/repos.cc:749
 #, c-format, boost-format
@@ -1974,7 +1975,7 @@ msgstr "Hoppar över inaktiverat arkiv '%s'."
 #: src/repos.cc:765 src/repos.cc:798 src/repos.cc:1297
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Hoppar över förrådet \"%s\" på grund av ovanstående fel."
+msgstr "Hoppar över förrådet \"%s\" på grund av felet ovan."
 
 #: src/repos.cc:784
 #, c-format, boost-format
@@ -1982,8 +1983,8 @@ msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
-"Förrådet '%s' är föråldrat. Du kan köra 'zypper refresh' som root för att "
-"uppdatera det."
+"Förrådet \"%s\" är inaktuellt. Du kan uppdatera det genom att köra \"zypper "
+"refresh\" som root."
 
 #: src/repos.cc:816
 #, c-format, boost-format
@@ -1991,13 +1992,13 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
-"Metadata-cachen för förrådet '%s' måste skapas. Du kan köra 'zypper refresh' "
-"som root för att göra detta."
+"Cacheminnet för metadata måste skapas för förrådet \"%s\". Gör det genom att "
+"köra \"zypper refresh\" som root."
 
 #: src/repos.cc:820
 #, c-format, boost-format
 msgid "Disabling repository '%s'."
-msgstr "Inaktiverar förrådet '%s'."
+msgstr "Inaktiverar förrådet \"%s\"."
 
 #: src/repos.cc:834
 #, c-format, boost-format
@@ -2117,7 +2118,7 @@ msgstr "Sökväg för MD-cache"
 
 #: src/repos.cc:1163 src/repos.cc:1231 src/repos.cc:1375
 msgid "Error reading repositories:"
-msgstr "Fel vid läsning av arkiv:"
+msgstr "Fel vid läsning av förråd:"
 
 #: src/repos.cc:1189
 #, c-format, boost-format
@@ -2157,11 +2158,11 @@ msgstr "Lägg till eller aktivera arkiv med hjälp av kommandona %s eller %s."
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
-msgstr "Kunde inte uppdatera arkiv på grund av fel."
+msgstr "Det gick inte att uppdatera förrådet på grund av fel."
 
 #: src/repos.cc:1329
 msgid "Specified repositories have been refreshed."
-msgstr "Specificerade arkiv har uppdaterats."
+msgstr "De angivna förråden har uppdaterats."
 
 #: src/repos.cc:1331
 msgid "All repositories have been refreshed."
@@ -2191,7 +2192,7 @@ msgstr "Rensar paket för %s."
 #: src/repos.cc:1468
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "Kan inte rensa förrådet '%s' på grund av ett fel."
+msgstr "Kan inte rensa förrådet \"%s\" på grund av ett fel."
 
 #: src/repos.cc:1479
 msgid "Cleaning installed packages cache."
@@ -2233,15 +2234,15 @@ msgstr "Ogiltigt arkivalias: %s"
 #: src/repos.cc:1576 src/repos.cc:1859
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "Ett förråd med namnet '%s' finns redan. Välj ett annat namn."
+msgstr "Förrådet \"%s\" finns redan. Använd ett annat alias."
 
 #: src/repos.cc:1585
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
-"Kunde inte avgöra förrådets typ, vänligen kontrollera att den angivna URI:en "
-"(se nedanför) pekar på ett giltigt förråd:"
+"Kunde inte avgöra förrådets typ. Vänligen kontrollera att den angivna URI:en "
+"(se nedan) pekar på ett giltigt förråd:"
 
 #: src/repos.cc:1591
 msgid "Can't find a valid repository at given location:"
@@ -2249,7 +2250,7 @@ msgstr "Kan inte hitta ett giltigt förråd på angiven plats:"
 
 #: src/repos.cc:1599
 msgid "Problem transferring repository data from specified URI:"
-msgstr "Problem med att hämta förrådsdata från:"
+msgstr "Det gick inte att överföra förråddata från den angivna URI:n:"
 
 #: src/repos.cc:1600
 msgid "Please check whether the specified URI is accessible."
@@ -2257,7 +2258,7 @@ msgstr "Kontrollera att den angivna URI:n går att nå."
 
 #: src/repos.cc:1607
 msgid "Unknown problem when adding repository:"
-msgstr "Ett okänt problem uppstod när förrådet skulle läggas till:"
+msgstr "Ett okänt problem uppstod när förrådet lades till:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
