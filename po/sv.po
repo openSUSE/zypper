@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-09 22:09+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -5700,13 +5700,13 @@ msgstr "(torrkörning)"
 
 #: src/solve-commit.cc:800 src/solve-commit.cc:833
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Det gick inte att hämta paketfilen från arkivet."
+msgstr "Det gick inte att hämta paketfilen från förrådet:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
 #: src/solve-commit.cc:830
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "Förrådet '%s' är föråldrat. Kör '%s' och se om det hjälper."
+msgstr "Förrådet \"%s\" är för gammalt. Det kan hjälpa att köra \"%s\"."
 
 #: src/solve-commit.cc:841
 msgid ""
