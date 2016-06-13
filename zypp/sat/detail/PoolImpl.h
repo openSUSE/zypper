@@ -123,7 +123,7 @@ namespace zypp
           /** Creating a new repo named \a name_r. */
           CRepo * _createRepo( const std::string & name_r );
 
-          /** Creating a new repo named \a name_r. */
+          /** Delete repo \a repo_r from pool. */
           void _deleteRepo( CRepo * repo_r );
 
           /** Adding solv file to a repo.

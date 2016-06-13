@@ -91,6 +91,8 @@ namespace zypp
 
       /////////////////////////////////////////////////////////////////
 
+      const bool resusePoolIDs = true;
+
       const std::string & PoolImpl::systemRepoAlias()
       {
         static const std::string _val( "@System" );
@@ -102,7 +104,6 @@ namespace zypp
 	static const Pathname _val( "/etc/sysconfig/storage" );
 	return _val;
       }
-
 
       /////////////////////////////////////////////////////////////////
 
@@ -304,7 +305,9 @@ namespace zypp
 	if ( isSystemRepo( repo_r ) )
 	  _autoinstalled.clear();
         eraseRepoInfo( repo_r );
-        ::repo_free( repo_r, /*reuseids*/false );
+        ::repo_free( repo_r, resusePoolIDs );
+	if ( resusePoolIDs && !_pool->urepos )	// If the last repo is removed clear the pool to actually reuse all IDs.
+	  ::pool_freeallrepos( _pool, resusePoolIDs );
       }
 
       int PoolImpl::_addSolv( CRepo * repo_r, FILE * file_r )
@@ -356,14 +359,14 @@ namespace zypp
               else if ( blockSize )
               {
                 // Free remembered entries
-                  ::repo_free_solvable_block( repo_r, blockBegin, blockSize, /*reuseids*/false );
+                  ::repo_free_solvable_block( repo_r, blockBegin, blockSize, resusePoolIDs );
                   blockBegin = blockSize = 0;
               }
           }
           if ( blockSize )
           {
               // Free remembered entries
-              ::repo_free_solvable_block( repo_r, blockBegin, blockSize, /*reuseids*/false );
+              ::repo_free_solvable_block( repo_r, blockBegin, blockSize, resusePoolIDs );
               blockBegin = blockSize = 0;
           }
         }

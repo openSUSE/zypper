@@ -107,6 +107,13 @@ namespace zypp
         void reposErase( const std::string & alias_r )
         { reposFind( alias_r ).eraseFromPool(); }
 
+        /** Remove all repos from the pool.
+	 * This also shrinks a pool which may have become large
+	 * after having added and removed repos lots of times.
+	 */
+        void reposEraseAll()
+	{ while ( ! reposEmpty() ) reposErase( reposBegin()->alias() ); }
+
       public:
         /** Reserved system repository alias \c @System. */
         static const std::string & systemRepoAlias();
