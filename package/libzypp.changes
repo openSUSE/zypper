@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jun 13 12:53:03 CEST 2016 - ma@suse.de
+
+- Shrink pool if all repos are removed (bnc#899755)
+- Avoid direct BuildRequire on libudev-devel (#60)
+- version 16.0.3 (0)
+
+-------------------------------------------------------------------
 Tue Jun  7 18:43:31 CEST 2016 - ma@suse.de
 
 - Allow PackageKit to drop the zypp lock (bnc#899755)
