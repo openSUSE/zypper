@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-13 16:01+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-13 16:12+0000\n"
+"Last-Translator: Sarah O'Farrell <sarah.ofarrell@vistatec.com>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -286,7 +286,7 @@ msgid "Running: %s  (%s, %s)"
 msgstr "Spouští se: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:207
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
 msgstr "Odstraňuje se %s-%s"
 
