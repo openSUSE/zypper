@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jun 15 12:36:27 CEST 2016 - ma@suse.de
+
+- Fix bug in removeRepository which may keep an empty .repo file
+  rather than deleting it (bsc#984494)
+- version 16.0.4 (0)
+
+-------------------------------------------------------------------
 Mon Jun 13 12:53:03 CEST 2016 - ma@suse.de
 
 - Shrink pool if all repos are removed (bnc#899755)
