@@ -1762,10 +1762,12 @@ namespace zypp
       {
         // figure how many repos are there in the file:
         std::list<RepoInfo> filerepos = repositories_in_file(todelete.filepath());
-        if ( (filerepos.size() == 1) && ( filerepos.front().alias() == todelete.alias() ) )
+        if ( filerepos.size() == 0	// bsc#984494: file may have already been deleted
+	  ||(filerepos.size() == 1 && filerepos.front().alias() == todelete.alias() ) )
         {
-          // easy, only this one, just delete the file
-          if ( filesystem::unlink(todelete.filepath()) != 0 )
+          // easy: file does not exist, contains no or only the repo to delete: delete the file
+	  int ret = filesystem::unlink( todelete.filepath() );
+          if ( ! ( ret == 0 || ret == ENOENT ) )
           {
             // TranslatorExplanation '%s' is a filename
             ZYPP_THROW(RepoException( todelete, str::form( _("Can't delete '%s'"), todelete.filepath().c_str() )));
