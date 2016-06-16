@@ -1,9 +1,7 @@
 # translation of zypper.po to Brazilian Portuguese
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-#
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
-#
 # Gilberto Medeiros Nakamura <gilberto.nakamura@gmail.com>, 2007.
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2008.
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2008, 2009, 2010, 2012, 2013, 2014, 2015, 2016.
@@ -13,16 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-05-25 19:08+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) <http://l10n.opensuse.org/projects/zypper/"
-"master/pt_BR/>\n"
+"PO-Revision-Date: 2016-06-16 16:57-0300\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"Language-Team: Portuguese (Brazil) "
+"<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Poedit 1.8.8\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -110,8 +108,8 @@ msgstr "O arquivo '%s' é assinado com uma chave desconhecida '%s'. Continuar?"
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"O arquivo '%s' do repositório '%s' é assinado com uma chave desconhecida "
-"'%s'. Continuar?"
+"O arquivo '%s' do repositório '%s' é assinado com uma chave desconhecida '%"
+"s'. Continuar?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
@@ -186,8 +184,7 @@ msgstr "Falha na verificação da assinatura do arquivo '%s'."
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr ""
-"Falha na verificação da assinatura do arquivo '%s' do repositório '%s'."
+msgstr "Falha na verificação da assinatura do arquivo '%s' do repositório '%s'."
 
 #: src/callbacks/keyring.h:284
 msgid ""
@@ -248,8 +245,8 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"No entanto se você tem certeza que o arquivo com a soma de verificação "
-"'%1%..' é seguro,\n"
+"No entanto se você tem certeza que o arquivo com a soma de verificação '%1%"
+"..' é seguro,\n"
 "correto e deve ser usado nesta operação, digite os 4 primeiros caracteres da "
 "soma de verificação\n"
 "para desbloquear o uso deste arquivo por sua conta e risco. Uma entrada "
@@ -430,12 +427,12 @@ msgstr "Aceitando pacotes apesar do erro."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Valor de filtro de categoria suspeito '%1%'."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Valor do filtro de severidade suspeito '%1%'."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -942,8 +939,8 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Existe um candidato a atualização para '%s', mas ele está bloqueado. Use "
-"'%s' para desbloqueá-lo."
+"Existe um candidato a atualização para '%s', mas ele está bloqueado. Use '%"
+"s' para desbloqueá-lo."
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -980,13 +977,13 @@ msgid "Patch '%s' is not needed."
 msgstr "A correção '%s' não é necessária."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"A correção '%s' está bloqueada. Use '%s' para instalá-la ou desbloqueie-a "
-"utilizando '%s'."
+"A correção '%1%' é opcional. Use '%2%' para instalá-la ou '%3%' para incluir "
+"todas as correções opcionais."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1278,8 +1275,7 @@ msgstr[1] ""
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
-"O seguinte pacote fonte recomendado foi selecionado automaticamente:"
+msgstr[0] "O seguinte pacote fonte recomendado foi selecionado automaticamente:"
 msgstr[1] ""
 "Os seguintes %d pacotes fontes recomendados foram selecionados "
 "automaticamente:"
@@ -1344,8 +1340,7 @@ msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
 msgstr[0] "A seguinte correção é recomendada, mas não será instalada:"
-msgstr[1] ""
-"As seguintes %d correções são recomendadas, mas não serão instaladas:"
+msgstr[1] "As seguintes %d correções são recomendadas, mas não serão instaladas:"
 
 #: src/Summary.cc:938
 #, c-format, boost-format
@@ -1361,8 +1356,7 @@ msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "O seguinte produto é recomendado, mas não será instalado:"
-msgstr[1] ""
-"Os seguintes %d produtos são recomendados, mas não serão instalados:"
+msgstr[1] "Os seguintes %d produtos são recomendados, mas não serão instalados:"
 
 #: src/Summary.cc:946
 #, c-format, boost-format
@@ -1370,8 +1364,7 @@ msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "O seguinte aplicativo é recomendado, mas não será instalado:"
-msgstr[1] ""
-"Os seguintes %d aplicativos são recomendados, mas não serão instalados:"
+msgstr[1] "Os seguintes %d aplicativos são recomendados, mas não serão instalados:"
 
 #: src/Summary.cc:986
 #, c-format, boost-format
@@ -1411,8 +1404,7 @@ msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "O seguinte aplicativo é sugerido, mas não será instalado:"
-msgstr[1] ""
-"Os seguintes %d aplicativos são sugeridos, mas não serão instalados:"
+msgstr[1] "Os seguintes %d aplicativos são sugeridos, mas não serão instalados:"
 
 #: src/Summary.cc:1028
 #, c-format, boost-format
@@ -1530,8 +1522,7 @@ msgstr[1] "As seguintes %d atualizações de aplicativo NÃO serão instaladas:"
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] ""
-"O seguinte item está bloqueado e não será alterado por nenhuma ação:"
+msgstr[0] "O seguinte item está bloqueado e não será alterado por nenhuma ação:"
 msgstr[1] ""
 "Os seguintes %d itens estão bloqueados e não serão alterados por nenhuma "
 "ação:"
@@ -1729,8 +1720,7 @@ msgstr "c/r/i/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr ""
-"Desabilitar a verificação da autoridade do certificado SSL e continuar."
+msgstr "Desabilitar a verificação da autoridade do certificado SSL e continuar."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
@@ -1956,8 +1946,8 @@ msgid ""
 msgstr ""
 "Isto pode ter sido causado por metadados inválidos no repositório ou por um "
 "bug no interpretador de metadados. No último caso, ou em caso de dúvida, por "
-"favor, preencha um relatório de bug seguindo as instruções em http://en."
-"opensuse.org/Zypper/Troubleshooting"
+"favor, preencha um relatório de bug seguindo as instruções em "
+"http://en.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -2221,8 +2211,7 @@ msgstr "Limpando o cache de pacotes instalados."
 
 #: src/repos.cc:1488
 msgid "Cannot clean installed packages cache because of an error."
-msgstr ""
-"Não foi possível limpar o cache de pacotes instalados devido a um erro."
+msgstr "Não foi possível limpar o cache de pacotes instalados devido a um erro."
 
 #: src/repos.cc:1507
 msgid "Could not clean the repositories because of errors."
@@ -2708,16 +2697,16 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Considerando %1% de %2% correção aplicável:"
+msgstr[1] "Considerando %1% de %2% correções aplicáveis:"
 
 #. translator: stats table header
 #: src/update.cc:333
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Encontrada %1% correção aplicável:"
+msgstr[1] "Encontradas %1% correções aplicáveis:"
 
 #. translator: stats summary
 #: src/update.cc:343
@@ -2729,18 +2718,19 @@ msgstr[1] "%d correções bloqueadas"
 
 #. translator: stats summary
 #: src/update.cc:351
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d correção bloqueada"
-msgstr[1] "%d correções bloqueadas"
+msgstr[0] "%d correção opcional"
+msgstr[1] "%d correções opcionais"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:355
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "use '%1%' para incluir as correções opcionais"
 
 #. translator: stats summary
 #: src/update.cc:364
@@ -2777,7 +2767,7 @@ msgstr "Correções"
 #. translator: Table column header.
 #: src/update.cc:405
 msgid "Locked"
-msgstr ""
+msgstr "Bloqueado"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2786,7 +2776,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:411
 msgid "Included categories"
-msgstr ""
+msgstr "Categorias incluídas"
 
 #. Translator: Patch status: needed, optional, unwanted, applied, not needed
 #: src/update.cc:474
@@ -2794,9 +2784,8 @@ msgid "unwanted"
 msgstr "indesejada"
 
 #: src/update.cc:476
-#, fuzzy
 msgid "optional"
-msgstr "ps [opções]"
+msgstr "opcional"
 
 #: src/update.cc:477
 msgid "needed"
@@ -2845,10 +2834,9 @@ msgstr ""
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:720
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr ""
-"As seguintes atualizações no gerenciamento de softwares serão instaladas "
+"As atualizações no gerenciamento de softwares necessárias serão instaladas "
 "primeiro:"
 
 #: src/update.cc:729 src/update.cc:968
@@ -2945,14 +2933,17 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"Quando aplicável, correções opcionais deverão ser tratadas como necessárias "
+"ou excluídas."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "O padrão é excluir as correções opcionais."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "O padrão é incluir as correções opcionais."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3032,18 +3023,18 @@ msgstr ""
 "\t--help, -h\t\tAjuda.\n"
 "\t--version, -V\t\tExibe o número da versão.\n"
 "\t--promptids\t\tExibe uma lista das entradas do usuário no zypper.\n"
-"\t--config, -c <arquivo>\tUtiliza o arquivo de configuração especificado "
-"\"ao invés do padrão.\n"
-"\t--userdata <string>\tID da transação definida pela usuário usada no "
-"\"histórico e plug-ins.\n"
+"\t--config, -c <arquivo>\tUtiliza o arquivo de configuração especificado \""
+"ao invés do padrão.\n"
+"\t--userdata <string>\tID da transação definida pela usuário usada no \""
+"histórico e plug-ins.\n"
 "\t--quiet, -q\t\tOculta a saída normal, imprimindo apenas mensagens\n"
 "\t\t\t\tde erro.\n"
 "\t--verbose, -v\t\tAumenta a quantidade de detalhes.\n"
 "\t--[no-]color\t\tQuando usar cores na saída se o tty suportar.\n"
 "\t--no-abbrev, -A\t\tNão abrevia textos nas tabelas.\n"
 "\t--table-style, -s\tEstilo de tabela (inteiro).\n"
-"\t--non-interactive, -n\tNão perguntar nada e utilizar as respostas "
-"\"padrões\n"
+"\t--non-interactive, -n\tNão perguntar nada e utilizar as respostas \""
+"padrões\n"
 "\t\t\t\tautomaticamente.\n"
 "\t--non-interactive-include-reboot-patches\n"
 "\t\t\t\tNão tratar correções como interativas, que possuem\n"
@@ -3062,8 +3053,8 @@ msgid ""
 msgstr ""
 "\t--reposd-dir, -D <dir>\tUsar um diretório com um arquivo de definição\n"
 "\t\t\t\tde repositório alternativo.\n"
-"\t--cache-dir, -C <dir>\tUsar um diretório alternativo para todos os "
-"caches.\n"
+"\t--cache-dir, -C <dir>\tUsar um diretório alternativo para todos os caches."
+"\n"
 "\t--raw-cache-dir <dir>\tUsar um diretório alternativo para o cache de "
 "metadados brutos.\n"
 "\t--solv-cache-dir <dir>\tUsar um diretório alternativo para o cache de "
@@ -3363,8 +3354,8 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "O link simbólico /etc/products.d/baseproduct está errado ou faltando!\n"
-"O link deve apontar para o arquivo .prod do produto central em /etc/products."
-"d.\n"
+"O link deve apontar para o arquivo .prod do produto central em "
+"/etc/products.d.\n"
 
 #: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
@@ -3509,8 +3500,8 @@ msgstr ""
 "-R, --no-force-resolution   Não forçar o solucionador a encontrar uma "
 "solução, deixar\n"
 "                            ele perguntar.\n"
-"    --force-resolution      Forçar o solucionador a encontrar a solução "
-"(mesmo que\n"
+"    --force-resolution      Forçar o solucionador a encontrar a solução ("
+"mesmo que\n"
 "                            agressiva).\n"
 "-D, --dry-run           Testar a instalação, não instalar realmente.\n"
 "    --details               Exibir o resumo de instalação detalhado.\n"
@@ -3563,8 +3554,8 @@ msgstr ""
 "um dos operadores <, <=, =, >=, >.\n"
 "\n"
 "  Opções do comando:\n"
-"-r, --repo <apelido|#|URI>        Carregar apenas o repositório "
-"especificado.\n"
+"-r, --repo <apelido|#|URI>        Carregar apenas o repositório especificado."
+"\n"
 "-t, --type <tipo>               Tipo de pacote (%s).\n"
 "                                Padrão: %s.\n"
 "-n, --name                      Selecionar os pacotes pelo nome, não pelo "
@@ -3575,8 +3566,8 @@ msgstr ""
 "-R, --no-force-resolution   Não forçar o solucionador a encontrar uma "
 "solução,\n"
 "                            deixar ele perguntar.\n"
-"    --force-resolution      Forçar o solucionador a encontrar a solução "
-"(mesmo que\n"
+"    --force-resolution      Forçar o solucionador a encontrar a solução ("
+"mesmo que\n"
 "                            agressiva).\n"
 "-u, --clean-deps            Remover automaticamente as dependências não "
 "necessárias.\n"
@@ -3645,23 +3636,23 @@ msgid ""
 msgstr ""
 "verify (ve) [opções]\n"
 "\n"
-"Verifica se as dependências dos pacotes instalados estão satisfeitas e "
-"\"repara os eventuais problemas com dependências.\n"
+"Verifica se as dependências dos pacotes instalados estão satisfeitas e \""
+"repara os eventuais problemas com dependências.\n"
 "\n"
 "  Opções do comando:\n"
 "-r, --repo <apelido|#|URI>    Carregar apenas o repositório \"especificado.\n"
-"    --no-recommends      Não instalar os pacotes recomendados, somente os "
-"\"necessários.\n"
-"    --recommends            Instalar também os pacotes recomendados, "
-"\"adicionalmente\n"
+"    --no-recommends      Não instalar os pacotes recomendados, somente os \""
+"necessários.\n"
+"    --recommends            Instalar também os pacotes recomendados, \""
+"adicionalmente\n"
 "                            aos necessários.\n"
 "-D, --dry-run            Testar a reparação, não reparar realmente.\n"
 "    --details               Exibir o resumo de instalação detalhado.\n"
-"    --download              Definir o modo de download e instalação. Os "
-"\"modos disponíveis são:\n"
+"    --download              Definir o modo de download e instalação. Os \""
+"modos disponíveis são:\n"
 "                            %s\n"
-"-d, --download-only         Apenas baixar os pacotes necessários, não "
-"\"instalar.\n"
+"-d, --download-only         Apenas baixar os pacotes necessários, não \""
+"instalar.\n"
 
 #: src/Zypper.cc:1655
 #, c-format, boost-format
@@ -3688,8 +3679,8 @@ msgstr ""
 "drivers para um novo hardware adicionado.\n"
 "\n"
 "  Opções do comando:\n"
-"-r, --repo <apelido|#|URI>    Carregar somente os repositórios "
-"especificados.\n"
+"-r, --repo <apelido|#|URI>    Carregar somente os repositórios especificados."
+"\n"
 "-D, --dry-run               Testar a instalação, não instalar realmente.\n"
 "    --details               Exibir o resumo de instalação detalhado.\n"
 "    --download              Definir o modo de download e instalação. Os "
@@ -3701,7 +3692,8 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3717,7 +3709,7 @@ msgstr ""
 "Adiciona um serviço de índice do repositório no sistema.\n"
 "\n"
 "  Opções de comando:\n"
-"-t,--type <tipo>    Tipo de serviço  (%s).\n"
+"-t,--type <tipo>    Tipo de serviço (%s).\n"
 "-d,--disable       Adicionar o serviço como desabilitado.\n"
 "-n, --name <apelido>     Especificar um nome descritivo para o serviço.\n"
 
@@ -3742,7 +3734,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3783,7 +3775,7 @@ msgstr ""
 "-e, --enable              Habilitar um serviço desabilitado.\n"
 "-r, --refresh             Habilitar a atualização automática do serviço.\n"
 "-R, --no-refresh          Desabilitar a atualização automática do serviço.\n"
-"-n, --name                Definir um nome descritivo para o serviço.\n"
+"-n, --name <nome>              Definir um nome descritivo para o serviço.\n"
 "\n"
 "-i, --ar-to-enable <apelido>     Adicionar um repositório de serviço RIS "
 "para habilitar.\n"
@@ -3800,8 +3792,8 @@ msgstr ""
 "\n"
 "-a, --all                 Aplicar as alterações a todos os serviços.\n"
 "-l, --local               Aplicar as alterações a todos os serviços locais.\n"
-"-t, --remote              Aplicar as alterações a todos os serviços "
-"remotos.\n"
+"-t, --remote              Aplicar as alterações a todos os serviços remotos."
+"\n"
 "-m, --medium-type <tipo>  Aplicar as alterações aos serviços do tipo "
 "especificado.\n"
 
@@ -3891,8 +3883,8 @@ msgstr ""
 "pelo seu URI ou lê-lo do arquivo .repo especificado (mesmo remoto).\n"
 "\n"
 "  Opções de comando:\n"
-"-r, --repo <arquivo.repo>    Apenas outro modo de especificar um arquivo ."
-"repo para leitura.\n"
+"-r, --repo <arquivo.repo>    Apenas outro modo de especificar um arquivo "
+".repo para leitura.\n"
 "-t, --type <tipo>         Tipo do repositório (%s).\n"
 "-d, --disable             Adicionar o repositório como desabilitado.\n"
 "-c, --check               Investigar URI.\n"
@@ -3985,7 +3977,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4022,15 +4014,15 @@ msgstr ""
 "-d, --disable             Desabilita o repositório (mas não o remove).\n"
 "-e, --enable              Habilita um repositório desabilitado.\n"
 "-r, --refresh             Habilita a atualização automática do repositório.\n"
-"-R, --no-refresh          Desabilita a atualização automática do "
-"repositório.\n"
-"-n, --name                Define um nome descritivo para o repositório.\n"
+"-R, --no-refresh          Desabilita a atualização automática do repositório."
+"\n"
+"-n, --name <nome>         Define um nome descritivo para o repositório.\n"
 "-p, --priority <inteiro>  Define a prioridade do repositório.\n"
 "-k, --keep-packages       Habilita o cache de arquivos RPM.\n"
 "-K, --no-keep-packages    Desabilita o cache de arquivos RPM.\n"
 "-g, --gpgcheck            Habilita a verificação GPG para este repositório.\n"
-"-G, --no-gpgcheck         Desabilita a verificação GPG para este "
-"repositório.\n"
+"-G, --no-gpgcheck         Desabilita a verificação GPG para este repositório."
+"\n"
 "\n"
 "-a, --all                 Aplica alterações para todos os repositórios.\n"
 "-l, --local               Aplica alterações para todos os repositórios "
@@ -4221,8 +4213,8 @@ msgstr ""
 "-R, --no-force-resolution   Não forçar o solucionador a encontrar uma "
 "solução,\n"
 "                            deixar ele perguntar.\n"
-"    --force-resolution      Forçar o solucionador a encontrar a solução "
-"(mesmo que\n"
+"    --force-resolution      Forçar o solucionador a encontrar a solução ("
+"mesmo que\n"
 "                            agressiva).\n"
 "-D, --dry-run                   Testar a atualização, não atualizar "
 "realmente.\n"
@@ -4307,8 +4299,8 @@ msgstr ""
 "                            como um erro. --download-as-needed desabilita a "
 "verificação de conflitos de arquivos.\n"
 "-r, --repo <álias|Nº|URI>    Carregar apenas o repositório especificado.\n"
-"-D, --dry-run               Testar a atualização, mas não a executar de "
-"fato.\n"
+"-D, --dry-run               Testar a atualização, mas não a executar de fato."
+"\n"
 "    --details               Mostrar o resumo detalhado da instalação.\n"
 "    --download              Definir o modo de download e instalação. Modos "
 "disponíveis:\n"
@@ -4361,63 +4353,77 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [opções]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Lista todas as correções aplicáveis."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Lista todas as correções aplicáveis para problemas Bugzilla."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Lista todas as correções aplicáveis para problemas CVE."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=texto]\n"
+"Pesquisa por problemas correspondentes ao texto especificado."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <aaaa-mm-dd>\n"
+"Lista apenas as correções liberadas até, mas não incluindo, a data "
+"especificada."
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <categoria>\n"
+"Lista apenas as correções desta categoria."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <severidade>\n"
+"Lista apenas as correções desta severidade."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Lista todas as correções, não apenas as aplicáveis."
 
 #: src/Zypper.cc:2310
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
-"    --from <apelido|#|URI>    Restringir a atualização ao repositório "
-"especificado.\n"
+"-r, --repo <apelido|#|URI>\n"
+"Lista apenas as correções do repositório especificado."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4478,8 +4484,8 @@ msgstr ""
 "conflitos de arquivos\n"
 "                            como um erro. --download-as-needed desabilita a "
 "verificação de conflito de arquivo.\n"
-"-D, --dry-run                 Testar a atualização, não atualizar "
-"realmente.\n"
+"-D, --dry-run                 Testar a atualização, não atualizar realmente."
+"\n"
 "    --details               Exibir o resumo de instalação detalhado.\n"
 "    --download              Definir o modo de download e instalação. Os "
 "modos disponíveis são:\n"
@@ -4582,8 +4588,8 @@ msgstr ""
 "dos arquivos.\n"
 "-d, --search-descriptions  Pesquisar também nos resumos e descrições do "
 "pacote.\n"
-"-C, --case-sensitive       Diferenciar maiúsculas de minúsculas na "
-"pesquisa.\n"
+"-C, --case-sensitive       Diferenciar maiúsculas de minúsculas na pesquisa."
+"\n"
 "-i, --installed-only       Mostrar apenas os pacotes já instalados.\n"
 "-u, --uninstalled-only     Mostrar apenas os pacotes não instalados.\n"
 "-t, --type <tipo>          Procurar apenas pacotes de determinado tipo.\n"
@@ -4598,15 +4604,15 @@ msgstr ""
 "                           da correspondência (útil para pesquisar "
 "dependências).\n"
 "\n"
-"Os caracteres curinga * e ? também podem ser usados nas strings de "
-"pesquisa.\n"
+"Os caracteres curinga * e ? também podem ser usados nas strings de pesquisa."
+"\n"
 "Se uma string de pesquisa estiver entre ''/'', ela será interpretada como "
 "uma expressão regular.\n"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [opções]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4614,23 +4620,25 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Exibe status sobre as correções aplicáveis. O comando retorna 100 se "
+"correções necessárias forem encontradas, 101 se existir ao menos uma "
+"correção de segurança."
 
 #: src/Zypper.cc:2476
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
-"    --from <apelido|#|URI>    Restringir a atualização ao repositório "
-"especificado.\n"
+"-r, --repo <apelido|#|URI>\n"
+"Verifica por correções apenas no repositório especificado."
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr ""
-"Marque apenas para os pacotes que afetam o próprio gerenciamento de pacotes."
+"--updatestack-only\n"
+"Verifica por correções que afetam apenas o próprio gerenciamento de pacotes."
 
 #: src/Zypper.cc:2494
 msgid ""
@@ -4704,8 +4712,8 @@ msgstr ""
 "\n"
 "-r, --repo <apelido|#|URI>  Uma outra forma de especificar o repositório.\n"
 "-i, --installed-only      Exibir apenas os padrões instalados.\n"
-"-u, --uninstalled-only    Exibir apenas os padrões que não estão "
-"instalados.\n"
+"-u, --uninstalled-only    Exibir apenas os padrões que não estão instalados."
+"\n"
 
 #: src/Zypper.cc:2583
 msgid ""
@@ -4727,8 +4735,8 @@ msgstr ""
 "\n"
 "-r, --repo <apelido|#|URI>  Uma outra forma de especificar o repositório.\n"
 "-i, --installed-only      Exibir apenas os produtos instalados.\n"
-"-u, --uninstalled-only    Exibir apenas os produtos que não estão "
-"instalados.\n"
+"-u, --uninstalled-only    Exibir apenas os produtos que não estão instalados."
+"\n"
 
 #: src/Zypper.cc:2615
 #, c-format, boost-format
@@ -4765,8 +4773,8 @@ msgstr ""
 "  Opções do comando:\n"
 "-s, --match-substrings    Exibir informação para pacotes que correspondem "
 "parcialmente o nome.\n"
-"-r, --repo <apelido|#|URI>  Trabalhar somente com o repositório "
-"especificado.\n"
+"-r, --repo <apelido|#|URI>  Trabalhar somente com o repositório especificado."
+"\n"
 "-t, --type <tipo>         Tipo de pacote (%s).\n"
 "                          Padrão: %s.\n"
 "    --provides            Exibir os fornecedores.\n"
@@ -4933,8 +4941,8 @@ msgstr ""
 "\n"
 "  Opções do comando:\n"
 "-d, --only-duplicates     Limpar apenas os bloqueios duplicados.\n"
-"-e, --only-empty          Limpar apenas os bloqueios que não bloqueiam "
-"nada.\n"
+"-e, --only-empty          Limpar apenas os bloqueios que não bloqueiam nada."
+"\n"
 
 #: src/Zypper.cc:2876
 msgid ""
@@ -5047,8 +5055,8 @@ msgstr ""
 "\n"
 "Baixa os RPMs especificados na linha de comando para um diretório local.\n"
 "Por padrão os pacotes são baixados no cache de pacotes do libzypp\n"
-"(/var/cache/zypp/packages; para usuários não root $XDG_CACHE_HOME/zypp/"
-"packages),\n"
+"(/var/cache/zypp/packages; para usuários não root "
+"$XDG_CACHE_HOME/zypp/packages),\n"
 "mas isto pode ser alterado usando a opção global --pkg-cache-dir.\n"
 "\n"
 "Na saída XML um nó <download-result> é escrito para cada pacote que o\n"
@@ -5082,8 +5090,8 @@ msgid ""
 msgstr ""
 "source-download\n"
 "\n"
-"Baixar os RPMs fontes para todos os pacotes instalados em um diretório "
-"local.\n"
+"Baixar os RPMs fontes para todos os pacotes instalados em um diretório local."
+"\n"
 "\n"
 "  Opções do comando:\n"
 "-d, --directory <dir>\n"
@@ -5578,8 +5586,7 @@ msgstr " Solução %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] "Escolha a solução acima usando '1' ou ignore, repita ou cancele"
-msgstr[1] ""
-"Escolha uma das opções acima pelo número ou ignore, repita ou cancele"
+msgstr[1] "Escolha uma das opções acima pelo número ou ignore, repita ou cancele"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
@@ -6172,8 +6179,7 @@ msgstr "Você concorda com os termos da licença?"
 
 #: src/misc.cc:175
 msgid "Aborting installation due to the need for license confirmation."
-msgstr ""
-"Cancelando a instalação devido à necessidade da confirmação da licença."
+msgstr "Cancelando a instalação devido à necessidade da confirmação da licença."
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:178
