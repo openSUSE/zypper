@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 09:01+0000\n"
+"PO-Revision-Date: 2016-06-11 07:40+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
-"Language-Team: Chinese (China) "
-"<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
+"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
+"master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2510,7 +2510,7 @@ msgstr[0] "锁定了 %d 个补丁"
 
 #. translator: stats summary
 #: src/update.cc:351
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
 msgstr[0] "%d 个可选补丁"
@@ -2839,9 +2839,9 @@ msgid ""
 "\t--releasever\t\tSet the value of $releasever in all .repo files (default: "
 "distribution version)\n"
 msgstr ""
-"    软件源选项：\n"
+"     软件源选项：\n"
 "\t--no-gpg-checks\t\t忽略失败的 GPG 检查并继续。\n"
-"\t--gpg-auto-import-keys\t自动信任并导入新软件源的签名密钥。\n"
+"\t--gpg-auto-import-keys\t自动信任并导入新软件源签名密钥。\n"
 "\t--plus-repo, -p <URI>\t使用一个附加软件源。\n"
 "\t--plus-content <标签>\t额外使用提供了某个特定关键字的已禁用软件源。\n"
 "\t\t\t\t尝试 '--plus-content debug' 可启用标明其提供了调试软件包的源。\n"
@@ -2859,7 +2859,7 @@ msgid ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tDo not read installed packages.\n"
 msgstr ""
-"    目标选项：\n"
+"     目标选项：\n"
 "\t--root, -R <目录>\t在一个不同的根目录下操作。\n"
 "\t--disable-system-resolvables\n"
 "\t\t\t\t不读取已安装软件包。\n"
@@ -2885,9 +2885,9 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"    软件源管理：\n"
+"     软件源管理：\n"
 "\trepos, lr\t\t列出全部已定义的软件源。\n"
-"\taddrepo, ar\t\t添加一个新的软件源。\n"
+"\taddrepo, ar\t\t添加一个新软件源。\n"
 "\tremoverepo, rr\t\t移除指定软件源。\n"
 "\trenamerepo, nr\t\t重命名指定软件源。\n"
 "\tmodifyrepo, mr\t\t修改指定软件源。\n"
@@ -2903,8 +2903,8 @@ msgid ""
 "\tremoveservice, rs\tRemove specified service.\n"
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
-"    服务管理：\n"
-"\tservices, ls\t\t列出全部已定义的服务。\n"
+"     服务管理：\n"
+"\tservices, ls\t\t列出全部已定义服务。\n"
 "\taddservice, as\t\t添加一个新服务。\n"
 "\tmodifyservice, ms\t修改指定服务。\n"
 "\tremoveservice, rs\t移除指定服务。\n"
@@ -2922,13 +2922,13 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
-"    软件管理：\n"
+"     软件管理：\n"
 "\tinstall, in\t\t安装软件包。\n"
 "\tremove, rm\t\t移除软件包。\n"
 "\tverify, ve\t\t校验软件包的依赖关系完整性。\n"
 "\tsource-install, si\t安装源代码包及其编译依赖。\n"
 "\tinstall-new-recommends, inr\n"
-"\t\t\t\t安装已安装软件包推荐的新增加软件包。\n"
+"\t\t\t\t安装已安装软件包推荐的新增软件包。\n"
 
 #: src/Zypper.cc:513
 msgid ""
@@ -2940,7 +2940,7 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
-"    更新管理：\n"
+"     更新管理：\n"
 "\tupdate, up\t\t用新版本更新已安装软件包。\n"
 "\tlist-updates, lu\t列出可用更新。\n"
 "\tpatch\t\t\t安装所需补丁。\n"
@@ -2962,7 +2962,7 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
-"    查询：\n"
+"     查询：\n"
 "\tsearch, se\t\t搜索匹配一个模式的软件包。\n"
 "\tinfo, if\t\t显示指定软件包的完整信息。\n"
 "\tpatch-info\t\t显示指定补丁的完整信息。\n"
@@ -2982,7 +2982,7 @@ msgid ""
 "\tlocks, ll\t\tList current package locks.\n"
 "\tcleanlocks, cl\t\tRemove unused locks.\n"
 msgstr ""
-"    软件包锁定：\n"
+"     软件包锁定：\n"
 "\taddlock, al\t\t添加一个软件包锁定。\n"
 "\tremovelock, rl\t\t移除一个软件包锁定。\n"
 "\tlocks, ll\t\t列出当前的软件包锁定。\n"
@@ -3012,7 +3012,7 @@ msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
 msgstr ""
-"    子命令：\n"
+"     子命令：\n"
 "\tsubcommand\t\t列出可用子命令。\n"
 
 #: src/Zypper.cc:559
@@ -3388,7 +3388,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3429,7 +3429,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3655,7 +3655,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4204,7 +4204,9 @@ msgstr "patch-check (pchk) [选项]"
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
-msgstr "显示可应用补丁统计。该命令若找到了所需补丁则会返回 100，若有至少一个所需的安全补丁则会返回 101。"
+msgstr ""
+"显示可应用补丁统计。该命令若找到了所需补丁则会返回 100，若有至少一个所需的安"
+"全补丁则会返回 101。"
 
 #: src/Zypper.cc:2476
 msgid ""
@@ -4763,7 +4765,7 @@ msgstr "意外程序流。"
 
 #: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
-msgstr "无选项程序参数："
+msgstr "无选项程序参数： "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: src/Zypper.cc:3303
@@ -5107,13 +5109,13 @@ msgstr "可解析项类型"
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:40
 msgid "Problem: "
-msgstr "问题："
+msgstr "问题： "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:52
 #, c-format, boost-format
 msgid " Solution %d: "
-msgstr "解决方案 %d："
+msgstr " 解决方案 %d： "
 
 #: src/solve-commit.cc:71
 msgid "Choose the above solution using '1' or skip, retry or cancel"
@@ -5163,7 +5165,7 @@ msgstr[0] "%d 个问题："
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
 msgid "Specified capability not found"
-msgstr "未找到指定的功能。"
+msgstr "未找到指定的功能"
 
 #: src/solve-commit.cc:160
 #, c-format, boost-format
@@ -5383,7 +5385,7 @@ msgstr "安装已完成但有错误。"
 #: src/solve-commit.cc:865
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr "您可以运行 '%1%' 来修复依赖问题。 "
+msgstr "您可以运行 '%1%' 来修复任何依赖问题。"
 
 #: src/solve-commit.cc:879
 msgid ""
@@ -5589,7 +5591,7 @@ msgstr "未找到提供了 '%s' 的软件包。"
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr "警告:"
+msgstr "警告: "
 
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
@@ -5701,7 +5703,7 @@ msgstr "请以交互模式重启操作并确认您同意所需许可，或使用
 #: src/misc.cc:187
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr "由于用户不同意 %s %s 许可，正在中止安装"
+msgstr "由于用户不同意 %s %s 许可，正在中止安装。"
 
 #: src/misc.cc:225
 msgid "License"
@@ -5887,7 +5889,7 @@ msgstr "解析 zypper.conf 出错："
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr "未知选项"
+msgstr "未知选项 "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "

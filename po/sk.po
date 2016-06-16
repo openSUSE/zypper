@@ -6,15 +6,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-05-24 18:11+0100\n"
+"PO-Revision-Date: 2016-06-15 13:44+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -648,7 +649,7 @@ msgstr "Neplatný názov CPE"
 
 #: src/info.cc:498
 msgid "Update Repositories"
-msgstr "Aktualizovať repozitáre"
+msgstr "Aktualizačné repozitáre"
 
 #: src/info.cc:506
 msgid "Content Id"
@@ -3682,7 +3683,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3723,7 +3724,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3952,7 +3953,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"

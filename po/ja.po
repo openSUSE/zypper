@@ -13,8 +13,8 @@ msgstr ""
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-07 22:55+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese "
-"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
+"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
+">\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -978,7 +978,8 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"修正 '%1%' は任意指定です。これらをインストールするには '%2%' を、全ての任意指定の修正を含めるには '%3%' をそれぞれお使いください。"
+"修正 '%1%' は任意指定です。これらをインストールするには '%2%' を、全ての任意"
+"指定の修正を含めるには '%3%' をそれぞれお使いください。"
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -2615,7 +2616,7 @@ msgstr[0] "%d 個の修正がロックされています"
 
 #. translator: stats summary
 #: src/update.cc:351
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
 msgstr[0] "%d 個の任意指定の修正"
@@ -3567,7 +3568,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3585,7 +3586,7 @@ msgstr ""
 "  コマンドオプション:\n"
 "-t, --type <type>       サービスの種類を指定する (%s)\n"
 "-d, --disable           サービスを追加する際、無効状態としてマークする\n"
-"-n, --name <name>       サービスに対して詳細名を指定する\n"
+"-n, --name <alias>      サービスに対して詳細名を指定する\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3608,7 +3609,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3840,7 +3841,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4448,8 +4449,9 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
-"適用可能な修正に関する統計情報を表示します。このコマンドは、必要な修正が見つかった場合には 100 を、少なくとも 1 "
-"つ以上の必要なセキュリティ修正が見つかった場合は 101 を返します。"
+"適用可能な修正に関する統計情報を表示します。このコマンドは、必要な修正が見つ"
+"かった場合には 100 を、少なくとも 1 つ以上の必要なセキュリティ修正が見つかっ"
+"た場合は 101 を返します。"
 
 #: src/Zypper.cc:2476
 msgid ""

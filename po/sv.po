@@ -14,8 +14,8 @@ msgstr ""
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-09 22:30+0000\n"
 "Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
-"\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
+">\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,8 +91,8 @@ msgstr "Accepterar filen %s som är signerad med en okänd nyckel: %s."
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Accepterar filen \"%s\" från förrådet \"%s\" signerad med en okänd nyckel \"%"
-"s\"."
+"Accepterar filen \"%s\" från förrådet \"%s\" signerad med en okänd nyckel "
+"\"%s\"."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -181,7 +181,8 @@ msgstr "Signaturverifiering misslyckades för filen \"%s\"."
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Signaturverifiering misslyckades för filen \"%s\" från förrådet \"%s\"."
+msgstr ""
+"Signaturverifiering misslyckades för filen \"%s\" från förrådet \"%s\"."
 
 #: src/callbacks/keyring.h:284
 msgid ""
@@ -1304,7 +1305,7 @@ msgstr[1] ""
 "inte är önskade (manuellt borttagna sedan tidigare):"
 
 #: src/Summary.cc:921
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
 "conflicts or dependency issues:"
@@ -1319,7 +1320,7 @@ msgstr[1] ""
 "konflikter eller problem med beroende:"
 
 #: src/Summary.cc:934
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
@@ -1328,7 +1329,7 @@ msgstr[1] ""
 "Följande %d programfixar rekommenderas, men kommer inte att installeras:"
 
 #: src/Summary.cc:938
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
@@ -1336,7 +1337,7 @@ msgstr[0] "Följande mönster rekommenderas, men kommer inte att installeras:"
 msgstr[1] "Följande %d mönster rekommenderas, men kommer inte att installeras:"
 
 #: src/Summary.cc:942
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
@@ -1345,7 +1346,7 @@ msgstr[1] ""
 "Följande %d produkter är rekommenderade, men kommer inte att installeras:"
 
 #: src/Summary.cc:946
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
@@ -1353,7 +1354,7 @@ msgstr[0] "Följande program är rekommenderat, men kommer inte att installeras:
 msgstr[1] "Följande %d program rekommenderas, men kommer inte att installeras:"
 
 #: src/Summary.cc:986
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
@@ -1361,7 +1362,7 @@ msgstr[0] "Följande paket är föreslaget, men kommer inte att installeras:"
 msgstr[1] "Följande %d paket är föreslagna, men kommer inte att installeras:"
 
 #: src/Summary.cc:991
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
@@ -1370,7 +1371,7 @@ msgstr[1] ""
 "Följande %d programfixar är föreslagna, men kommer inte att installeras:"
 
 #: src/Summary.cc:996
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
@@ -1378,15 +1379,16 @@ msgstr[0] "Följande mönster är föreslaget, men kommer inte att installeras:"
 msgstr[1] "Följande %d mönster är föreslagna, men kommer inte att installeras:"
 
 #: src/Summary.cc:1001
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "Följande produkt är föreslagen, men kommer inte att installeras:"
-msgstr[1] "Följande %d produkter är föreslagna, men kommer inte att installeras:"
+msgstr[1] ""
+"Följande %d produkter är föreslagna, men kommer inte att installeras:"
 
 #: src/Summary.cc:1006
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
@@ -1394,77 +1396,77 @@ msgstr[0] "Följande program är föreslaget, men kommer inte att installeras:"
 msgstr[1] "Följande %d program är föreslagna, men kommer inte att installeras:"
 
 #: src/Summary.cc:1028
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "Följande paket kommer att byta arkitektur:"
 msgstr[1] "Följande %d paket kommer att byta arkitektur:"
 
 #: src/Summary.cc:1033
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "Följande programfix kommer att byta arkitektur:"
 msgstr[1] "Följande %d programfixar kommer att byta arkitektur:"
 
 #: src/Summary.cc:1038
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "Följande mönster kommer att byta arkitektur:"
 msgstr[1] "Följande %d mönster kommer att byta arkitektur:"
 
 #: src/Summary.cc:1043
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "Följande produkt kommer att byta arkitektur:"
 msgstr[1] "Följande %d produkter kommer att byta arkitektur:"
 
 #: src/Summary.cc:1048
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "Följande program kommer att byta arkitektur:"
 msgstr[1] "Följande %d program kommer att byta arkitektur:"
 
 #: src/Summary.cc:1070
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "Följande paket kommer att byta leverantör:"
 msgstr[1] "Följande %d paket kommer att byta leverantör:"
 
 #: src/Summary.cc:1075
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "Följande programfix kommer att byta leverantör:"
 msgstr[1] "Följande %d programfixar kommer att byta leverantör:"
 
 #: src/Summary.cc:1080
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "Följande mönster kommer att byta leverantör:"
 msgstr[1] "Följande %d mönster kommer att byta leverantör:"
 
 #: src/Summary.cc:1085
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "Följande produkter kommer att byta leverantör:"
 msgstr[1] "Följande %d produkter kommer att byta leverantör:"
 
 #: src/Summary.cc:1090
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "Följande program kommer att byta leverantör:"
 msgstr[1] "Följande %d program kommer att byta leverantör:"
 
 #: src/Summary.cc:1110
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Följande paket stöds inte av dess leverantör:"
@@ -1890,8 +1892,8 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
-"Lägg till en eller flera bas-URI-poster (basurl=URI) i %s för förrådet \"%s\""
-"."
+"Lägg till en eller flera bas-URI-poster (basurl=URI) i %s för förrådet \"%s"
+"\"."
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
@@ -3639,7 +3641,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3657,7 +3659,7 @@ msgstr ""
 "  Kommandoalternativ:\n"
 "-t, --type <typ>       Typ av tjänst (%s).\n"
 "-d, --disable           Lägg till tjänsten som inaktiv.\n"
-"-n, --name <name>       Ange ett namn för tjänsten.\n"
+"-n, --name <alias>      Ange ett namn för tjänsten.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3680,7 +3682,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3917,7 +3919,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"

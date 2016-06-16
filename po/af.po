@@ -3545,7 +3545,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3571,6 +3571,15 @@ msgid ""
 "-t, --remote              Apply changes to all remote repositories.\n"
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
+"diens-voeg by [opsies] URI [alias]\n"
+"\n"
+" Voeg ’n diens (installasiebron) by die stelsel.\n"
+"   Opdragopsies:\n"
+" \t--repo,-r <LÊER.repo>\tLees die URL en alias vanuit ’n lêer\n"
+" \t\t\t\t(selfs afgeleë)\n"
+" \t--soort,-t <SOORT>\tSoort bewaarplek (YaST, YUM of Plaindir)\n"
+" \t--versper,-d\t\tVoeg die diens as versperd by\n"
+" \t--geen-vernuwe,-n\t\tVernuwe die metadata nie outomaties nie.\n"
 
 #: src/Zypper.cc:2025
 msgid ""

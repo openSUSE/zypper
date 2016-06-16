@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-05-24 13:51+0000\n"
+"PO-Revision-Date: 2016-06-14 19:28+0000\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
-"Language-Team: Ukrainian <http://l10n.opensuse.org/projects/zypper/master/uk/"
-">\n"
+"Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
+"uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -429,12 +429,12 @@ msgstr "Приймається пакунок, незважаючи на пом�
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Підозріле значення фільтру категорії'%1%'."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Підозріле значення фільтру важливості '%1%'."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -973,13 +973,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Латка «%s» не потрібна."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Латку '%s' заблоковано. Використовуйте '%s' для установки або '%s' для "
-"розблокування."
+"Латка '%1%' — необов'язкова. Використовуйте '%2%' для установки або '%3%' "
+"для включення усіх необов'язкових латок."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -2762,18 +2762,18 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Враховується %1% із %2% застосовної латки:"
+msgstr[1] "Враховуються %1% із %2% застосовних латок:"
+msgstr[2] "Враховуються %1% із %2% застосовних латок:"
 
 #. translator: stats table header
 #: src/update.cc:333
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Знайдено %1% застосовну латку:"
+msgstr[1] "Знайдено %1% застосовні латки:"
+msgstr[2] "Знайдено %1% застосовних латок:"
 
 #. translator: stats summary
 #: src/update.cc:343
@@ -2786,19 +2786,19 @@ msgstr[2] "заблоковано %d латок"
 
 #. translator: stats summary
 #: src/update.cc:351
-#, fuzzy, c-format, boost-format
+#, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "заблокована %d латка"
-msgstr[1] "заблоковані %d латки"
-msgstr[2] "заблоковано %d латок"
+msgstr[0] "%d необов'язкова латка"
+msgstr[1] "%d необов'язкові латки"
+msgstr[2] "%d необов'язкових латок"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:355
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "використовуйте '%1%', щоби включити необов'язкові латки"
 
 #. translator: stats summary
 #: src/update.cc:364
@@ -2837,7 +2837,7 @@ msgstr "Латки"
 #. translator: Table column header.
 #: src/update.cc:405
 msgid "Locked"
-msgstr ""
+msgstr "Заблоковано"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2846,7 +2846,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:411
 msgid "Included categories"
-msgstr ""
+msgstr "Включені категорії"
 
 #. Translator: Patch status: needed, optional, unwanted, applied, not needed
 #: src/update.cc:474
@@ -2854,9 +2854,8 @@ msgid "unwanted"
 msgstr "небажано"
 
 #: src/update.cc:476
-#, fuzzy
 msgid "optional"
-msgstr "ps [параметри]"
+msgstr "необов'язково"
 
 #: src/update.cc:477
 msgid "needed"
@@ -2903,9 +2902,8 @@ msgstr "Спочатку буде встановлено наступні оно
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:720
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "Спочатку буде встановлено наступні оновлення керування ПЗ:"
+msgstr "Спочатку будуть встановлені оновлення керування ПЗ:"
 
 #: src/update.cc:729 src/update.cc:968
 msgid "No updates found."
@@ -2995,14 +2993,17 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"чи застосовні необов'язкові латки слід розглядати як необхідні або їх варто "
+"виключити."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Усталене значення - виключити необов'язкові латки."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Усталене значення - включити необов'язкові латки."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3744,7 +3745,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3785,7 +3786,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -4015,7 +4016,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4373,60 +4374,76 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [ПАРАМЕТРИ]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Список усіх застосовних латок."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Список застосовних латок для проблем Bugzilla."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Список застосовних латок для проблем CVE."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=РЯДОК]\n"
+"Пошук проблем, які відповідають зазначеному рядку."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <YYYY-MM-DD>\n"
+"Список лише латок, випущених до зазначеної дати, але не включаючи її."
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <КАТЕГОРІЯ>\n"
+"Список латок зі вказаної категорії."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <SEVERITY>\n"
+"Список лише латок зі вказаним рівнем важливості."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Список усіх латок, не тільки застосовних."
 
 #: src/Zypper.cc:2310
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
+"-r, --repo <НАЗВА|#|URI>\n"
+"Список латок лише зі вказаного сховища."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4601,7 +4618,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [ПАРАМЕТРИ]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4609,19 +4626,23 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Відображає статистику про застосовні латки. Повертає значення 100, коли "
+"потрібні латки знайдені, або 101, коли наявна принаймні одна потрібна латка "
+"безпеки."
 
 #: src/Zypper.cc:2476
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
+"-r, --repo <НАЗВА|#|URI>\n"
+"Перевірка наявності латок лише у вказаному сховищі."
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "Позначте лише для латок, які стосуються менеджера пакунків."
+msgstr "Перевірка лише латок, які впливають на менеджер пакунків."
 
 #: src/Zypper.cc:2494
 msgid ""

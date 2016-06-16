@@ -3545,7 +3545,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3571,6 +3571,16 @@ msgid ""
 "-t, --remote              Apply changes to all remote repositories.\n"
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
+"faka-inkonzo [izikhethwa] URI [alias]\n"
+"\n"
+" Faka inkonzo (umthombo wokuhlohla) kwisixokelelwano.\n"
+"l   Izikhethwa-zomyalelo:\n"
+" \t--repo,-r <FILE.repo>\tFunda i-URL ne-alias ukusuka kwifayili\n"
+" \t\t\t\t(nomgama)\n"
+" \t--uhlobo,-t <TYPE>\tUhlobo lwendawo ekugcinwa kuyo into (YaST, YUM, "
+"okanye Plaindir)\n"
+" \t—yenziwe ayasebenza,-d\t\tFaka inkonzo njengeyenzwe ayasebenza\n"
+" \t--akukho-hlaziyo,-n\t\tMusa ukuhlaziya i-metedata ngokuzenzekelayo\n"
 
 #: src/Zypper.cc:2025
 msgid ""

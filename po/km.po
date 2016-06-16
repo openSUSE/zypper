@@ -3397,7 +3397,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3415,7 +3415,7 @@ msgstr ""
 "  ជម្រើស​ពាក្យ​បញ្ជាក់ ៖\n"
 "-t, --type <TYPE>       ប្រភេទ​សេវា (%s) ។\n"
 "-d, --disable           បន្ថែម​សេវា​ដូច​ដែល​បា​ន​បិទ ។\n"
-"-n, --name <name>               បញ្ជាក់​ឈ្មោះ​ពិពណ៌នា​សម្រាប់​សេវា ។\n"
+"-n, --name <alias>              បញ្ជាក់​ឈ្មោះ​ពិពណ៌នា​សម្រាប់​សេវា ។\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3439,7 +3439,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3664,7 +3664,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
