@@ -1105,7 +1105,7 @@ Supported URI formats:
 	*-R*, *--no-refresh*::
 		Disable auto-refresh for the repository.
 
-	*-n*, *--name*::
+	*-n*, *--name* 'name'::
 		Set a descriptive name for the repository.
 
 	*-p*, *--priority* 'positive-integer'::
@@ -1208,7 +1208,7 @@ Standalone repositories (not belonging to any service) are treated like services
 	*-d*, *--disable*::
 		Add the service as disabled.
 
-	*-n*, *--name*::
+	*-n*, *--name* 'name'::
 		Specify descriptive name for the service.
 --
 
@@ -1243,7 +1243,7 @@ Standalone repositories (not belonging to any service) are treated like services
 	*-R*, *--no-refresh*::
 		Disable auto-refresh of the service.
 
-	*-n*, *--name*::
+	*-n*, *--name* 'name'::
 		Set a descriptive name for the service.
 
 	*-a*, *--all*::
