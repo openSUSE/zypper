@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jun 16 11:22:31 CEST 2016 - ma@suse.de
+
+- doc: Mention that "zypper mr -n" needs an argument (bsc#984901)
+- version 1.12.42
+
+-------------------------------------------------------------------
 Wed May 18 12:32:06 CEST 2016 - ma@suse.de
 
 - Do not require --ignore-unknown in non interactive remove-command
