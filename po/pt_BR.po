@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-17 20:01+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -856,7 +856,7 @@ msgstr "Pacote fonte '%s' não encontrado nos repositórios especificados."
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "O objeto '%s' não foi encontrado nos repositórios especificados."
+msgstr "Objeto '%s' não encontrado nos repositórios especificados."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
