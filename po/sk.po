@@ -6,16 +6,15 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-15 13:44+0000\n"
+"PO-Revision-Date: 2016-06-17 12:34+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -964,13 +963,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Oprava '%s' nie je potrebná."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Oprava '%s' je zamknutá. Použiť '%s' pre jej inštaláciu, alebo je odomknúť "
-"pomocou '%s'."
+"Oprava '%1%' je voliteľná. Použiť '%2%' pre jej inštaláciu, alebo '%3%' pre "
+"zahrnutie všetkých voliteľných opráv."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1052,17 +1051,17 @@ msgstr[2] "Nasledujúcich %d NOVÝCH balíkov bude nainštalovaných:"
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca NOVÁ oprava bude nainštalovaná:"
+msgstr[1] "Nasledujúce %d NOVÉ opravy budú nainštalované:"
+msgstr[2] "Nasledujúcich %d NOVÝCH opráv bude nainštalovaných:"
 
 #: src/Summary.cc:515
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca NOVÁ šablóna bude nainštalovaná:"
+msgstr[1] "Nasledujúce %d NOVÉ šablóny budú nainštalované:"
+msgstr[2] "Nasledujúcich %d NOVÝCH šablón bude nainštalovaných:"
 
 #: src/Summary.cc:520
 #, c-format, boost-format
@@ -1108,9 +1107,9 @@ msgstr[2] ""
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca šablóna bude ODSTRÁNENÁ:"
+msgstr[1] "Nasledujúce %d šablóny budú ODSTRÁNENÉ:"
+msgstr[2] "Nasledujúcich %d šablón bude ODSTRÁNENÝCH:"
 
 #: src/Summary.cc:567
 #, c-format, boost-format
@@ -1148,9 +1147,9 @@ msgstr[2] ""
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Verzia nasledujúcej šablóny bude zvýšená:"
+msgstr[1] "Verzia nasledujúcich %d šablón bude zvýšená:"
+msgstr[2] "Verzia nasledujúcich %d šablón bude zvýšená:"
 
 #: src/Summary.cc:606
 #, c-format, boost-format
@@ -1188,9 +1187,9 @@ msgstr[2] ""
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Verzia nasledujúcej šablóny bude znížená:"
+msgstr[1] "Verzia nasledujúcich %d šablón bude znížená:"
+msgstr[2] "Verzia nasledujúcich %d šablón bude znížená:"
 
 #: src/Summary.cc:645
 #, c-format, boost-format
@@ -1837,8 +1836,8 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
-"Autentifikácia požadovaná pre prístup k %s. Musíte byť správca systému "
-"(root), aby ste boli schopní čítať prihlasovacie údaje z %s."
+"Autentifikácia požadovaná pre prístup k %s. Musíte byť správca systému (root)"
+", aby ste boli schopní čítať prihlasovacie údaje z %s."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -1980,8 +1979,8 @@ msgid ""
 msgstr ""
 "Chyba môže byť spôsobená nesprávnymi metadátami v repozitári alebo chybou v "
 "analyzátore metadát. V tom druhom prípade alebo ak si nie ste istí, nahláste "
-"prosím chybu podľa inštrukcií na adrese http://en.opensuse.org/Zypper/"
-"Troubleshooting"
+"prosím chybu podľa inštrukcií na adrese "
+"http://en.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -2201,8 +2200,7 @@ msgstr "Nie sú definované žiadne zapnuté repozitáre."
 #: src/repos.cc:1313
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr ""
-"Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie repozitárov."
+msgstr "Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie repozitárov."
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
@@ -2393,8 +2391,8 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"Zmeniť alias repozitára '%s' nie je možné. Tento repozitár patrí službe "
-"'%s', ktorá je zodpovedná za nastavenie jeho aliasu."
+"Zmeniť alias repozitára '%s' nie je možné. Tento repozitár patrí službe '%"
+"s', ktorá je zodpovedná za nastavenie jeho aliasu."
 
 #: src/repos.cc:1855
 #, c-format, boost-format
@@ -2809,9 +2807,8 @@ msgid "unwanted"
 msgstr ""
 
 #: src/update.cc:476
-#, fuzzy
 msgid "optional"
-msgstr "ps [voľby]"
+msgstr "voliteľné"
 
 #: src/update.cc:477
 msgid "needed"
@@ -2858,9 +2855,8 @@ msgstr "Nasledujúce aktualizácie správcu softvéru sa nainštalujú prednostn
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:720
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "Nasledujúce aktualizácie správcu softvéru sa nainštalujú prednostne:"
+msgstr "Potrebné aktualizácie správcu softvéru sa nainštalujú prednostne:"
 
 #: src/update.cc:729 src/update.cc:968
 msgid "No updates found."
@@ -2923,8 +2919,7 @@ msgstr "Našli sa zhody v popisoch týchto opráv:"
 #: src/update.cc:1177
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
-msgstr ""
-"Oprava bugzilla problému číslo %s nebola nájdená alebo nie je potrebná."
+msgstr "Oprava bugzilla problému číslo %s nebola nájdená alebo nie je potrebná."
 
 #: src/update.cc:1179
 #, c-format, boost-format
@@ -3104,8 +3099,8 @@ msgstr ""
 "\t--no-refresh\t\tNeobnovovať repozitáre.\n"
 "\t--no-cd\t\t\tIgnorovať repozitáre CD/DVD.\n"
 "\t--no-remote\t\tIgnorovať vzdialené repozitáre.\n"
-"\t--releasever\t\tNastaviť hodnotu $releasever vo všetkých súboroch .repo "
-"(predvolená hodnota: distribution version)\n"
+"\t--releasever\t\tNastaviť hodnotu $releasever vo všetkých súboroch .repo ("
+"predvolená hodnota: distribution version)\n"
 
 #: src/Zypper.cc:472
 msgid ""
@@ -3365,8 +3360,8 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "Symbolický odkaz /etc/products.d/baseproduct je voľne visiaci alebo chýba!\n"
-"Odkaz musí smerovať do .prod súboru vašich kľúčových produktov v /etc/"
-"products.d.\n"
+"Odkaz musí smerovať do .prod súboru vašich kľúčových produktov v "
+"/etc/products.d.\n"
 
 #: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
@@ -3558,11 +3553,11 @@ msgstr ""
 "-r, --repo <alias|#|URI>    Načítať iba zadaný repozitár.\n"
 "-t, --type <typ>            Typ balíka (%s)\n"
 "                            Predvolený typ: %s.\n"
-"-n, --name                  Vybrať balíky podľa názvu, nie podľa "
-"schopnosti.\n"
+"-n, --name                  Vybrať balíky podľa názvu, nie podľa schopnosti."
+"\n"
 "-C, --capability            Vybrať balíky podľa schopnosti.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
-"ladenie.\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
+"\n"
 "-R, --no-force-resolution   Nenútiť riešiteľa nájsť riešenie,\n"
 "                            umožniť mu spýtať sa.\n"
 "    --force-resolution      Prinútiť riešiteľa nájsť riešenie (aj keby\n"
@@ -3678,12 +3673,12 @@ msgstr ""
 "režimy:\n"
 "                            %s\n"
 "-d, --download-only         Len stiahnuť balíky, neinštalovať.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
-"ladenie.\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
+"\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3696,12 +3691,12 @@ msgid ""
 msgstr ""
 "addservice (as) [voľby] <URI> <alias>\n"
 "\n"
-"Pridaj do systému službu poskytujúcu index repozitárov.\n"
+"Pridá do systému službu pre index repozitárov.\n"
 "\n"
 "  Voľby príkazu:\n"
 "-t, --type <typ>        Typ služby (%s).\n"
-"-d, --disable           Pridaj službu ako vypnutú.\n"
-"-n, --name <názov>      Použi zadaný popisný názov pre vytváranú službu.\n"
+"-d, --disable           Pridať službu ako vypnutú.\n"
+"-n, --name <názov>      Určiť popisný názov pre vytváranú službu.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3724,7 +3719,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3764,7 +3759,7 @@ msgstr ""
 "-e, --enable                   Zapnúť vypnutú službu.\n"
 "-r, --refresh                  Zapnúť automatickú obnovu služby.\n"
 "-R, --no-refresh               Vypnúť automatickú obnovu služby.\n"
-"-n, --name                     Nastav popisný názov služby.\n"
+"-n, --name <názov>               Nastaviť popisný názov služby.\n"
 "\n"
 "-i, --ar-to-enable <alias>     Pridať repozitár RIS služby na zapnutie.\n"
 "-I, --ar-to-disable <alias>    Pridať repozitár RIS služby na vypnutie.\n"
@@ -3953,7 +3948,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3990,7 +3985,7 @@ msgstr ""
 "-e, --enable              Zapnúť vypnutý repozitár.\n"
 "-r, --refresh             Zapnúť automatickú obnovu repozitára.\n"
 "-R, --no-refresh          Vypnúť automatickú obnovu repozitára.\n"
-"-n, --name                Nastaviť popisný názov repozitára.\n"
+"-n, --name <názov>               Nastaviť popisný názov repozitára.\n"
 "-p, --priority <celé_číslo>    Nastaviť prioritu repozitára.\n"
 "-k, --keep-packages       Zapnúť ponechávanie RPM súborov.\n"
 "-K, --no-keep-packages    Vypnúť ponechávanie RPM súborov.\n"
@@ -4053,8 +4048,8 @@ msgstr ""
 "-r, --repo <alias|#|URI> Vyčistiť len zadané repozitáre.\n"
 "-m, --metadata           Vyčistiť vyrovnávaciu pamäť metadát.\n"
 "-M, --raw-metadata       Vyčistiť vyrovnávaciu pamäť surových metadát.\n"
-"-a, --all                Vyčistiť vyrovnávacie pamäte pre metadáta aj "
-"balíky.\n"
+"-a, --all                Vyčistiť vyrovnávacie pamäte pre metadáta aj balíky."
+"\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -4158,8 +4153,8 @@ msgstr ""
 "                            Aktualizácia na nižšiu verziu, aj keď existuje "
 "vyššia\n"
 "                            je tiež prijateľná.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
-"ladenie.\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
+"\n"
 "    --no-recommends         Neinštalovať odporúčané balíky, len vyžadované.\n"
 "    --recommends            Nainštalovať aj odporúčané balíky naviac\n"
 "                            k vyžadovaným.\n"
@@ -4176,8 +4171,8 @@ msgstr ""
 "-D, --dry-run               Otestovať aktualizáciu, nič v skutočnosti "
 "neaktualizovať.\n"
 "    --details               Zobraziť podrobný súhrn inštalácie.\n"
-"    --download              Nastaviť režim download-install. Dostupné "
-"režimy:\n"
+"    --download              Nastaviť režim download-install. Dostupné režimy:"
+"\n"
 "                            %s\n"
 "-d, --download-only             Len stiahnuť balíky, neinštalovať.\n"
 
@@ -4233,15 +4228,15 @@ msgstr ""
 "                            Automaticky odpovedať 'áno' na výzvu\n"
 "                            na potvrdenie licencie tretej strany.\n"
 "                            Pre ďalšie podrobnosti pozrieť 'man zypper'.\n"
-"-b, --bugzilla #            Nainštalovať opravu pre zadaný bugzilla "
-"problém.\n"
+"-b, --bugzilla #            Nainštalovať opravu pre zadaný bugzilla problém."
+"\n"
 "    --cve #                 Nainštalovať opravu pre zadaný CVE problém.\n"
 "-g  --category <kategória>   Nainštalovať opravy iba s touto kategóriou.\n"
 "    --severity <závažnosť>   Nainštalovať opravy iba s touto závažnosťou.\n"
 "    --date <YYYY-MM-DD>     Nainštalovať iba opravy vydané po zadanom "
 "dátume, ale nie vrátane neho\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
-"ladenie.\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
+"\n"
 "    --no-recommends         Neinštalovať odporúčané balíky, len vyžadované.\n"
 "    --recommends            Nainštalovať aj odporúčané balíky naviac\n"
 "                            k vyžadovaným.\n"
@@ -4255,8 +4250,8 @@ msgstr ""
 "-D, --dry-run               Otestovať aktualizáciu, nič v skutočnosti "
 "neaktualizovať.\n"
 "    --details               Zobraziť podrobný súhrn inštalácie.\n"
-"    --download              Nastaviť režim download-install. Dostupné "
-"režimy:\n"
+"    --download              Nastaviť režim download-install. Dostupné režimy:"
+"\n"
 "                            %s\n"
 "-d, --download-only         Len stiahnuť balíky, neinštalovať.\n"
 
@@ -4398,8 +4393,8 @@ msgstr ""
 "                            Automaticky odpovedať 'áno' na výzvu\n"
 "                            na potvrdenie licencie tretej strany.\n"
 "                            Pre ďalšie podrobnosti pozrieť 'man zypper'.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
-"ladenie.\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
+"\n"
 "    --no-recommends         Neinštalovať odporúčané balíky, len vyžadované.\n"
 "    --recommends            Nainštalovať aj odporúčané balíky naviac\n"
 "                            k vyžadovaným.\n"
@@ -4412,8 +4407,8 @@ msgstr ""
 "-D, --dry-run               Otestovať aktualizáciu, nič v skutočnosti "
 "neaktualizovať.\n"
 "    --details               Zobraziť podrobný súhrn inštalácie.\n"
-"    --download              Nastaviť režim download-install. Dostupné "
-"režimy:\n"
+"    --download              Nastaviť režim download-install. Dostupné režimy:"
+"\n"
 "                            %s\n"
 "-d, --download-only         Len stiahnuť balíky, neinštalovať.\n"
 
@@ -4494,8 +4489,8 @@ msgstr ""
 "    --suggests             Hľadať balíky, ktoré navrhujú hľadané reťazce.\n"
 "    --conflicts            Hľadať balíky, ktoré sú v konflikte s hľadanými "
 "reťazcami.\n"
-"    --obsoletes            Hľadať balíky, ktoré zastarávajú hľadané "
-"reťazce.\n"
+"    --obsoletes            Hľadať balíky, ktoré zastarávajú hľadané reťazce."
+"\n"
 "-n, --name                 Užitočné spolu s voľbami závislosti, inak \n"
 "                           je predvolené vyhľadávanie v názve balíčka.\n"
 "-f, --file-list            Hľadať zhodu v súborovom zozname balíkov.\n"
@@ -4538,11 +4533,12 @@ msgid ""
 msgstr ""
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "Preveriť iba opravy, ktoré majú vplyv samotného správcu balíčkov."
+msgstr ""
+"--updatestack-only\n"
+"Preverí iba opravy, ktoré majú ovplyvňujú samotného správcu balíčkov."
 
 #: src/Zypper.cc:2494
 msgid ""
@@ -5196,8 +5192,7 @@ msgstr ""
 #: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr ""
-"Služba '%s' nebola nájdená podľa zadaného aliasu, čísla ani URI adresy."
+msgstr "Služba '%s' nebola nájdená podľa zadaného aliasu, čísla ani URI adresy."
 
 #: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
@@ -5404,8 +5399,7 @@ msgstr "Použitie"
 
 #: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
-msgstr ""
-"Pre pridávanie zámkov balíkov sú potrebné práva správcu systému (root)."
+msgstr "Pre pridávanie zámkov balíkov sú potrebné práva správcu systému (root)."
 
 #: src/Zypper.cc:5023
 #, c-format, boost-format
