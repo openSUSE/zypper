@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 20:47+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-17 20:50+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -1888,7 +1888,7 @@ msgstr "Problema ao obter os arquivos de '%s'."
 #: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 msgid "Please see the above error message for a hint."
-msgstr "Por favor, veja a mensagem de erro acima para uma dica."
+msgstr "Veja a mensagem de erro acima para obter uma dica."
 
 #: src/repos.cc:308
 #, c-format, boost-format
@@ -1902,7 +1902,7 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
-"Por favor, adicione um ou mais URIs base (baseurl=URI) ao %s para o "
+"Adicione uma ou mais entradas de URI base (baseurl=URL) ao %s para o "
 "repositório '%s'."
 
 #: src/repos.cc:327
@@ -1919,8 +1919,8 @@ msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
-"Por favor, verifique se os URIs definidos para este repositório apontam para "
-"um repositório válido."
+"Verifique se os URIs definidos para este repositório apontam para um "
+"repositório válido."
 
 #: src/repos.cc:352
 #, c-format, boost-format
@@ -1945,8 +1945,8 @@ msgid ""
 "Troubleshooting"
 msgstr ""
 "Isto pode ter sido causado por metadados inválidos no repositório ou por um "
-"bug no interpretador de metadados. No último caso, ou em caso de dúvida, por "
-"favor, preencha um relatório de bug seguindo as instruções em "
+"bug no analisador de metadados. Neste último caso, ou em caso de dúvida, "
+"preencha um relatório de bug seguindo as instruções em "
 "http://en.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:401
