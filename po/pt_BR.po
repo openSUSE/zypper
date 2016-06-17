@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 20:53+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-17 21:14+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -6189,8 +6189,8 @@ msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
 msgstr ""
-"Por favor, reinicie a operação em modo interativo e confirme sua "
-"concordância com as licenças requeridas ou use a opção %s."
+"Reinicie a operação em modo interativo e confirme sua concordância com a "
+"licença exigida ou use a opção %s."
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:187
@@ -6320,7 +6320,7 @@ msgstr "Problema ao remover o bloqueio de pacote:"
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
-msgstr "Por favor, registre um relatório de bug sobre isto."
+msgstr "Registre um relatório de bugs sobre isto."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
@@ -6569,7 +6569,7 @@ msgstr "Problema ao obter o arquivo RPM especificado"
 
 #: src/utils/misc.cc:396
 msgid "Please check whether the file is accessible."
-msgstr "Por favor, verifique se o arquivo está acessível."
+msgstr "Verifique se o arquivo é acessível."
 
 #: src/utils/misc.cc:514
 #, c-format, boost-format
