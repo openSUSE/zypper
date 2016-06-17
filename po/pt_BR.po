@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 19:55+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-17 20:01+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -819,7 +819,7 @@ msgstr "Padrão '%s' não encontrado."
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "O pacote fonte '%s' não foi encontrado."
+msgstr "Pacote fonte '%s' não encontrado."
 
 #. just in case
 #: src/RequestFeedback.cc:56
@@ -830,27 +830,27 @@ msgstr "Objeto '%s' não encontrado."
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "O pacote '%s' não foi encontrado nos repositórios especificados."
+msgstr "Pacote '%s' não encontrado nos repositórios especificados."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "A correção '%s' não foi encontrada nos repositórios especificados."
+msgstr "Correção '%s' não encontrada nos repositórios especificados."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "O produto '%s' não foi encontrado nos repositórios especificados."
+msgstr "Produto '%s' não encontrado nos repositórios especificados."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "O padrão '%s' não foi encontrado nos repositórios especificados."
+msgstr "Padrão '%s' não encontrado nos repositórios especificados."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "O pacote fonte '%s' não foi encontrado nos repositórios especificados."
+msgstr "Pacote fonte '%s' não encontrado nos repositórios especificados."
 
 #. just in case
 #: src/RequestFeedback.cc:71
