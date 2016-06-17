@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 19:33+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-17 19:34+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -639,7 +639,7 @@ msgstr "Instalado"
 
 #: src/info.cc:481 src/search.cc:642
 msgid "Is Base"
-msgstr "É base"
+msgstr "Base"
 
 #: src/info.cc:485
 msgid "End of Support"
@@ -647,7 +647,7 @@ msgstr "Fim do suporte"
 
 #: src/info.cc:485 src/info.cc:493 src/info.cc:524
 msgid "undefined"
-msgstr "não definido"
+msgstr "indefinido"
 
 #: src/info.cc:488
 msgid "CPE Name"
