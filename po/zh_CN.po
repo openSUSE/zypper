@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-17 01:26+0000\n"
-"Last-Translator: Marguerite Su <i@marguerite.su>\n"
+"PO-Revision-Date: 2016-06-17 01:30+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -265,7 +265,7 @@ msgstr "未知签名类型"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
 msgid "Signature does not verify"
-msgstr "无法核实签名"
+msgstr "无法校验签名"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2371
