@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 18:17+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-17 18:20+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -211,7 +211,7 @@ msgstr "Continuar?"
 #: src/callbacks/keyring.h:315
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
-msgstr "Digest desconhecido %s para o arquivo %s."
+msgstr "Síntese desconhecida %s para o arquivo %s."
 
 #: src/callbacks/keyring.h:332
 #, boost-format
