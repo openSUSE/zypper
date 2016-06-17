@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 19:49+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-17 19:54+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -687,14 +687,14 @@ msgstr "não foi possível executar %1% (%2%)"
 #: src/subcommand.cc:284
 #, boost-format
 msgid "fork for %1% failed (%2%)"
-msgstr "fork para %1% falhou (%2%)"
+msgstr "falha na bifurcação de %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
 #: src/subcommand.cc:303
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
-msgstr "waitpid para %1% falhou (%2%)"
+msgstr "falha no waitpid de %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
@@ -711,7 +711,7 @@ msgstr ""
 #: src/subcommand.cc:324
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% foi morto pelo sinal %2% (%3%)"
+msgstr "%1% foi eliminado pelo sinal %2% (%3%)"
 
 #: src/subcommand.cc:328
 msgid "core dumped"
@@ -722,7 +722,7 @@ msgstr "dump de memória efetuado"
 #: src/subcommand.cc:338
 #, boost-format
 msgid "%1% exited with status %2%"
-msgstr "%1% saiu com o status %2%"
+msgstr "%1% saiu com status %2%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
@@ -771,12 +771,12 @@ msgstr ""
 #: src/subcommand.cc:418
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr "Subcomandos zypper disponíveis em '%1%'"
+msgstr "Subcomandos do zypper disponíveis em '%1%'"
 
 #. translators: headline of an enumeration
 #: src/subcommand.cc:423
 msgid "Zypper subcommands available from elsewhere on your $PATH"
-msgstr "Subcomandos zypper disponíveis de qualquer lugar do seu $PATH"
+msgstr "Subcomandos do zypper disponíveis de qualquer lugar em seu $PATH"
 
 #. translators: helptext; %1% is a zypper command
 #: src/subcommand.cc:428
