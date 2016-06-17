@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 14:39+0000\n"
+"PO-Revision-Date: 2016-06-17 18:17+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
@@ -198,7 +198,7 @@ msgstr ""
 #: src/callbacks/keyring.h:307
 #, c-format, boost-format
 msgid "No digest for file %s."
-msgstr "Nenhum digest para o arquivo %s."
+msgstr "Nenhuma síntese para o arquivo %s."
 
 # internal key used: Ok
 #. translators: help text for 'x' option in the 'Continue?' prompt
