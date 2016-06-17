@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 20:10+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-17 20:12+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -969,7 +969,7 @@ msgstr "Use '%s' para forçar a instalação do pacote."
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "A correção '%s' é interativa, ignorando."
+msgstr "A correção '%s' é interativa. Ignorando."
 
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
@@ -995,7 +995,7 @@ msgstr ""
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "A correção '%s' não se encontra na categoria especificada."
+msgstr "A correção '%s' não está na categoria especificada."
 
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
