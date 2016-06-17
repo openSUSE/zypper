@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-11 07:40+0000\n"
+"PO-Revision-Date: 2016-06-17 01:24+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
-"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_CN/>\n"
+"Language-Team: Chinese (China) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3388,7 +3388,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3406,7 +3406,7 @@ msgstr ""
 "  命令选项：\n"
 "-t, --type <类型>      服务类型 (%s)。\n"
 "-d, --disable            添加服务后禁用。\n"
-"-n, --name <别名>   为服务指定描述性名称。\n"
+"-n, --name <名称>   为服务指定描述性名称。\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3429,7 +3429,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3468,7 +3468,7 @@ msgstr ""
 "-e, --enable              启用已禁用的服务。\n"
 "-r, --refresh              启用服务的自动刷新。\n"
 "-R, --no-refresh         禁用服务的自动刷新。\n"
-"-n, --name               为服务设置一个描述性名称。\n"
+"-n, --name  <名称>             为服务设置一个描述性名称。\n"
 "\n"
 "-i, --ar-to-enable <别名>   添加一个要启用的 RIS 服务软件源。\n"
 "-I, --ar-to-disable <别名>   添加一个要禁用的 RIS 服务软件源。\n"
@@ -3655,7 +3655,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
