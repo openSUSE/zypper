@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 20:52+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-17 20:53+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -2465,7 +2465,7 @@ msgstr ""
 #: src/repos.cc:2548
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "Um serviço chamado '%s' já existe. Por favor, escolha outro apelido."
+msgstr "Um serviço chamado '%s' já existe. Escolha outro apelido."
 
 #: src/repos.cc:2555
 #, c-format, boost-format
@@ -5872,8 +5872,8 @@ msgid ""
 "One of installed patches requires reboot of your machine. Reboot as soon as "
 "possible."
 msgstr ""
-"Uma das correções instaladas requer a reinicialização da sua máquina. Por "
-"favor, faça isso assim que possível."
+"Uma das correções instaladas requer a reinicialização da sua máquina. Faça "
+"isso assim que possível."
 
 #: src/solve-commit.cc:887
 msgid ""
