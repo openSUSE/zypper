@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 20:34+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-17 20:46+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -1760,7 +1760,7 @@ msgstr "Insira o CD ou DVD e pressione ENTER para continuar."
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:157
 msgid "Retrying..."
-msgstr "Tentando novamente..."
+msgstr "Repetindo..."
 
 #. cd/dvd options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -1786,8 +1786,8 @@ msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
 "operation."
 msgstr ""
-"Por favor, insira a mídia [%s] #%d e digite 's' para continuar ou 'n' para "
-"cancelar a operação."
+"Insira a mídia [%s] #%d e digite 's' para continuar ou 'n' para cancelar a "
+"operação."
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
@@ -1802,7 +1802,7 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
-"É necessário autenticar-se para acessar %s. Você precisa ser root para ler "
+"Autenticação obrigatória para acessar %s. É preciso ser root para poder ler "
 "as credenciais de %s."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
