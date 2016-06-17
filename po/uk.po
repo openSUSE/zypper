@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-14 19:28+0000\n"
+"PO-Revision-Date: 2016-06-17 18:32+0000\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
-"Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
-"uk/>\n"
+"Language-Team: Ukrainian "
+"<https://l10n.opensuse.org/projects/zypper/master/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
@@ -3745,7 +3745,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3761,8 +3761,8 @@ msgstr ""
 "Додати до системи службу індексу сховища.\n"
 "\n"
 "  Параметри команди:\n"
-"-t, --type <тип>        Тип служби (%s)\n"
-"-d, --disable               Додати сховище як вимкнене\n"
+"-t, --type <тип>        Тип служби (%s).\n"
+"-d, --disable               Додати сховище як вимкнене.\n"
 "-n, --name <псевдонім>   Вказати описову назву служби.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
@@ -3786,7 +3786,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3826,7 +3826,7 @@ msgstr ""
 "-e, --enable              Увімкнути вимкнену службу\n"
 "-r, --refresh               Увімкнути автооновлення служби.\n"
 "-R, --no-refresh               Вимкнути автооновлення служби.\n"
-"-n, --name                     Вказати описову назву служби.\n"
+"-n, --name <назва>                    Вказати описову назву служби.\n"
 "\n"
 "-i, --ar-to-enable <alias>     Додати RIS служби сховища, щоб увімкнути.\n"
 "-I, --ar-to-disable <alias>    Додати RIS служби сховища, щоб вимкнути.\n"
@@ -4016,7 +4016,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4053,7 +4053,7 @@ msgstr ""
 "-e, --enable              Увімкнути вимкнене сховище\n"
 "-r, --refresh               Увімкнути автоосвіження сховища\n"
 "-n, --no-refresh          Вимкнути автоосвіження сховища\n"
-"-n, --name                Вказати описову назву сховища.\n"
+"-n, --name <назва>               Вказати описову назву сховища.\n"
 "-p, --priority <ціле число>     Встановити пріоритет сховища.\n"
 "-k, --keep-packages       Увімкнути кешування файлів RPM.\n"
 "-K, --no-keep-packages    Вимкнути кешування файлів RPM.\n"
