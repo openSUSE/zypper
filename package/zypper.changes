@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jun 17 15:04:21 CEST 2016 - ma@suse.de
+
+- man: Mention known limitations when searching with --file-list
+  (bsc#982379)
+- version 1.11.56
+
+-------------------------------------------------------------------
 Wed May 18 12:37:18 CEST 2016 - ma@suse.de
 
 - Do not require --ignore-unknown in non interactive remove-command
