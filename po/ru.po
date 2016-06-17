@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-17 21:05+0000\n"
-"Last-Translator: Alex Minton <alex239@gmail.com>\n"
+"PO-Revision-Date: 2016-06-17 21:06+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
 "Language: ru\n"
@@ -33,12 +33,12 @@ msgstr "Исключение Hal"
 
 #: zypp/Url.cc:114
 msgid "Invalid LDAP URL query string"
-msgstr "Неверная строка запроса LDAP в URL-адресе"
+msgstr "Недопустимая строка запроса LDAP в URL-адресе"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Неверный параметр запроса LDAP в URL-адресе: '%s'"
+msgstr "Недопустимый параметр запроса LDAP в URL-адресе: '%s'"
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
@@ -46,7 +46,7 @@ msgstr "Не удалось создать клон объекта URL"
 
 #: zypp/Url.cc:313
 msgid "Invalid empty Url object reference"
-msgstr "Неверная ссылка на пустой объект URL"
+msgstr "Недопустимая ссылка на пустой объект URL"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
