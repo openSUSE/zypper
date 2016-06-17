@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-17 01:30+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-17 01:38+0000\n"
+"Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -188,7 +188,7 @@ msgstr "不是 CDROM 驱动器"
 #: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
 #: zypp/target/rpm/RpmDb.cc:2189
 msgid "RPM failed: "
-msgstr "RPM 失败："
+msgstr "RPM 失败： "
 
 #. TranslatorExplanation first %s is file name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1124
@@ -316,7 +316,7 @@ msgstr "服务别名不能以点开头。"
 #: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
-msgstr "无法打开并写入 '%s' 文件。"
+msgstr "无法打开 '%s' 文件进行写入。"
 
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
@@ -635,7 +635,7 @@ msgstr "未知支持选项。描述不可用"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr "未知国家或地区："
+msgstr "未知国家或地区： "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
@@ -1867,7 +1867,7 @@ msgstr "津巴布韦"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
-msgstr "未知语言："
+msgstr "未知语言： "
 
 #. language code: aar aa
 #: zypp/LanguageCode.cc:161
@@ -4370,7 +4370,7 @@ msgstr "%s 依赖 %s，但无法提供此依赖"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
-msgstr "删除的提供者："
+msgstr "已删除提供者： "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -4379,12 +4379,12 @@ msgid ""
 "uninstallable providers: "
 msgstr ""
 "\n"
-"不可安装的提供者："
+"无法安装的提供者： "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1084
 msgid "uninstallable providers: "
-msgstr "不可安装的提供者："
+msgstr "无法安装的提供者： "
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
@@ -4486,7 +4486,7 @@ msgstr "卸载 %s"
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
 #, c-format, boost-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr "通过忽略一些依赖关系来破坏 %s "
+msgstr "通过忽略一些依赖关系来断开 %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
@@ -4569,7 +4569,7 @@ msgstr "当试图执行动作 '%s' 时，介质没有打开。"
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "文件 '%s' 未在介质 '%s' 上找到。"
+msgstr "文件 '%s' 未在介质 '%s' 上找到"
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
