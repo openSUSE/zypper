@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 20:30+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-17 20:34+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -1682,12 +1682,12 @@ msgstr "Reinicialização do sistema necessária."
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "Ignorar a obtenção do arquivo e cancelar a operação atual."
+msgstr "Ignorar o download do arquivo e cancelar a operação atual."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
-msgstr "Tentar obter o arquivo novamente."
+msgstr "Tente baixar o arquivo novamente."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:32
@@ -1695,13 +1695,13 @@ msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr ""
-"Ignorar a obtenção do arquivo e tentar continuar com a operação sem o "
+"Ignorar o download do arquivo e tentar continuar com a operação sem o "
 "arquivo."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr "Alterar o URI base atual e tentar obter o arquivo novamente."
+msgstr "Alterar o URI base atual e tentar baixar o arquivo novamente."
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
