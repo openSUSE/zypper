@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 20:08+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-17 20:10+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -939,7 +939,7 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Existe um candidato a atualização para '%s', mas ele está bloqueado. Use '%"
+"Existe um candidato à atualização para '%s', mas ele está bloqueado. Use '%"
 "s' para desbloqueá-lo."
 
 #: src/RequestFeedback.cc:148
@@ -949,7 +949,7 @@ msgid ""
 "upgrade, or downgrade."
 msgstr ""
 "O pacote '%s' não está disponível em seus repositórios. Não é possível "
-"reinstalar, atualizar ou realizar o downgrade."
+"reinstalar, atualizar ou fazer o downgrade."
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
