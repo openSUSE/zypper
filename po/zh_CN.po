@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-07 09:12+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-17 01:26+0000\n"
+"Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -207,7 +207,7 @@ msgstr "移除公钥 %s 失败：%s"
 #: zypp/target/rpm/RpmDb.cc:1848
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr "%s 的有改动的配置文件："
+msgstr "%s 配置文件有变化："
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2024
