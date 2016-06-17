@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 20:46+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-17 20:47+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -1807,7 +1807,7 @@ msgstr ""
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
-msgstr "Nome de usuário"
+msgstr "Nome do usuário"
 
 # password dialog title
 #. password
@@ -1832,8 +1832,8 @@ msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr ""
-"O repositório '%1%' é gerenciado pelo serviço '%2%'. Alterações voláteis são "
-"redefinidas na próxima atualização do serviço!"
+"O repositório '%1%' é gerenciado pelo serviço '%2%'. Alterações voláteis "
+"serão redefinidas na próxima atualização do serviço!"
 
 #: src/repos.cc:84
 #, c-format, boost-format
