@@ -698,7 +698,7 @@ Query Commands
 		Useful together with dependency options, otherwise searching in package name is default.
 
 	*-f*, *--file-list*::
-		Search in file list of packages.
+		Search in the file list of packages. Note that the full file list is available for installed packages only. For remote packages only an abstract of their file list is available within the metadata (files containing /etc/, /bin/, or /sbin/).
 
 	*-d*, *--search-descriptions*::
 		Search also in summaries and descriptions.
