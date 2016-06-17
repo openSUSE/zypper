@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 18:32+0000\n"
+"PO-Revision-Date: 2016-06-21 19:13+0000\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
 "Language-Team: Ukrainian "
 "<https://l10n.opensuse.org/projects/zypper/master/uk/>\n"
@@ -2827,7 +2827,7 @@ msgstr "Категорія"
 #. translator: Table column header.
 #: src/update.cc:401
 msgid "Updatestack"
-msgstr ""
+msgstr "Стек оновлень"
 
 #. translator: Table column header.
 #: src/update.cc:403 src/update.cc:830
