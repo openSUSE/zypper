@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-18 09:49+0000\n"
-"Last-Translator: Alex Minton <alex239@gmail.com>\n"
+"PO-Revision-Date: 2016-06-18 09:51+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -179,13 +179,12 @@ msgstr ""
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s'."
-msgstr "Проверка подписи для файла '%s' завершилась неудачей."
+msgstr "Сбой проверки подписи файла \"%s\"."
 
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr ""
-"Проверка подписи для файла '%s' из репозитория '%s' завершилась неудачей."
+msgstr "Сбой проверки подписи файла \"%s\" из репозитария \"%s\"."
 
 #: src/callbacks/keyring.h:284
 msgid ""
