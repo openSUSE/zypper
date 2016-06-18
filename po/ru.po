@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-05-19 19:52+0000\n"
+"PO-Revision-Date: 2016-06-18 09:43+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
-"Language-Team: Russian <http://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
@@ -77,13 +77,13 @@ msgstr "Приём неподписанного файла '%s' из репоз�
 #: src/callbacks/keyring.h:112
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "Файл '%s' не подписан, продолжить?"
+msgstr "Файл \"%s\" не подписан, продолжить?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Файл '%s' из репозитория '%s' не подписан, продолжить?"
+msgstr "Файл \"%s\" из репозитория \"%s\" не подписан, продолжить?"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
@@ -979,13 +979,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Исправление '%s' не нужно."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Исправление '%s' заблокировано. Используйте '%s' для установки или '%s' для "
-"разблокирования."
+"Исправление '%1%' является необязательным. Используйте '%2%' для установки "
+"или '%3%', чтобы включть все необязательные исправления."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -2797,12 +2797,12 @@ msgstr[2] "Заблокировано %d исправлений"
 
 #. translator: stats summary
 #: src/update.cc:351
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "Заблокировано %d исправление"
-msgstr[1] "Заблокировано %d исправления"
-msgstr[2] "Заблокировано %d исправлений"
+msgstr[0] "%d необязательное исправление"
+msgstr[1] "%d необязательных исправления"
+msgstr[2] "%d необязательных исправлений"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -2865,9 +2865,8 @@ msgid "unwanted"
 msgstr "нежелательно"
 
 #: src/update.cc:476
-#, fuzzy
 msgid "optional"
-msgstr "ps [параметры]"
+msgstr "необязательно"
 
 #: src/update.cc:477
 msgid "needed"
@@ -2914,9 +2913,9 @@ msgstr "Следующие обновления управления ПО буд
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:720
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "Следующие обновления управления ПО будут установлены в первую очередь:"
+msgstr ""
+"Необходимые обновления управления ПО будут установлены в первую очередь:"
 
 #: src/update.cc:729 src/update.cc:968
 msgid "No updates found."
@@ -3756,7 +3755,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3798,7 +3797,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3840,25 +3839,23 @@ msgstr ""
 "-R, --no-refresh          Отключить автоматическое обновление службы.\n"
 "-n, --name                Задать описательное имя службы.\n"
 "\n"
-"-i, --ar-to-enable <alias>     Добавить репозиторий службы RIS для "
-"включения.\n"
+"-i, --ar-to-enable <alias>     Добавить репозиторий службы RIS для включения."
+"\n"
 "-I, --ar-to-disable <alias>    Добавить репозиторий службы RIS для "
 "отключения.\n"
-"-j, --rr-to-enable <alias>     Удалить репозиторий службы RIS для "
-"включения.\n"
-"-J, --rr-to-disable <alias>    Удалить репозиторий службы RIS для "
-"отключения.\n"
+"-j, --rr-to-enable <alias>     Удалить репозиторий службы RIS для включения."
+"\n"
+"-J, --rr-to-disable <alias>    Удалить репозиторий службы RIS для отключения."
+"\n"
 "-k, --cl-to-enable             Очистить список репозиториев RIS для "
 "включения.\n"
 "-K, --cl-to-disable            Очистить список репозиториев RIS для "
 "отключения.\n"
 "\n"
-"-a, --all                 Применить изменения ко всем репозиториям.\n"
-"-l, --local               Применить изменения ко всем локальным "
-"репозиториям.\n"
-"-t, --remote              Применить изменения ко всем сетевым репозиториям.\n"
-"-m, --medium-type <type>  Применить изменения к репозиториям указанного "
-"типа.\n"
+"-a, --all                 Применить изменения ко всем службам.\n"
+"-l, --local               Применить изменения ко всем локальным службам.\n"
+"-t, --remote              Применить изменения ко всем сетевым службам.\n"
+"-m, --medium-type <type>  Применить изменения к службам указанного типа.\n"
 
 #: src/Zypper.cc:1792
 msgid ""
@@ -4039,7 +4036,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4084,11 +4081,11 @@ msgstr ""
 "-G, --no-gpgcheck         Отключить проверку GPG для этого репозитория.\n"
 "\n"
 "-a, --all                 Применить изменения ко всем репозиториям.\n"
-"-l, --local               Применить изменения ко всем локальным "
-"репозиториям.\n"
+"-l, --local               Применить изменения ко всем локальным репозиториям."
+"\n"
 "-t, --remote              Применить изменения ко всем сетевым репозиториям.\n"
-"-m, --medium-type <тип>   Применить изменения к репозиториям указанного "
-"типа.\n"
+"-m, --medium-type <тип>   Применить изменения к репозиториям указанного типа."
+"\n"
 
 #: src/Zypper.cc:2025
 msgid ""
@@ -4668,11 +4665,11 @@ msgid ""
 msgstr ""
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr ""
+"--updatestack-only\n"
 "Проверить только исправления, относящиеся к самому управлению пакетами."
 
 #: src/Zypper.cc:2494
