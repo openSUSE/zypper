@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-18 09:46+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -123,7 +123,7 @@ msgstr "Автоматически доверять следующему клю�
 
 #: src/callbacks/keyring.h:177
 msgid "New repository or package signing key received:"
-msgstr "Получен ключ подписи нового репозитария или пакета:"
+msgstr "Получен ключ подписи нового репозитория или пакета:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
