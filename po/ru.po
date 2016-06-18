@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-18 09:52+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -192,7 +192,7 @@ msgid ""
 "Continuing might be risky. Continue anyway?"
 msgstr ""
 "Внимание: это может быть вызвано злоумышленным изменением файла!\n"
-"Продолжать рискованно. Продолжить в любом случае?"
+"Продолжать рискованно. Всё равно продолжить?"
 
 #: src/callbacks/keyring.h:307
 #, c-format, boost-format
