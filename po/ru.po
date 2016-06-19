@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 16:53+0000\n"
-"Last-Translator: Alex Minton <alex239@gmail.com>\n"
+"PO-Revision-Date: 2016-06-19 16:55+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -1010,32 +1010,34 @@ msgstr "Для исправления \"%s\" указана другая важ�
 #: src/RequestFeedback.cc:213
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "Исправление '%s' выпущено после указанной даты."
+msgstr "Исправление \"%s\" выпущено после указанной даты."
 
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "Выбор '%s' из репозитория '%s' для установки."
+msgstr "Выбор \"%s\" из репозитория \"%s\" для установки."
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "Принудительная установка '%s' из репозитория '%s'."
+msgstr "Принудительная установка \"%s\" из репозитория \"%s\"."
 
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
-msgstr "Выбор '%s' для удаления."
+msgstr "Выбор \"%s\" для удаления."
 
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr "'%s' заблокирован. Используйте '%s' для разблокирования."
+msgstr ""
+"Исправление \"%s\" заблокировано. Используйте команду \"%s\", чтобы "
+"разблокировать его."
 
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
-msgstr "Добавление требования: '%s'."
+msgstr "Добавление требования: \"%s\"."
 
 #: src/RequestFeedback.cc:241
 #, c-format, boost-format
