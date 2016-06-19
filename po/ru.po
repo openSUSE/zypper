@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-19 15:02+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -664,7 +664,7 @@ msgstr "неверное имя CPE"
 
 #: src/info.cc:498
 msgid "Update Repositories"
-msgstr "Репозитории обновления"
+msgstr "Репозитории обновлений"
 
 #: src/info.cc:506
 msgid "Content Id"
