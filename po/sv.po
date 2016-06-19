@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-19 20:16+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -353,12 +353,12 @@ msgstr "Cache för förrådet %s byggs"
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "Det går inte att skapa cache på %s - ingen skrivrättighet."
+msgstr "Kan inte att skapa cache på %s - ingen skrivrättighet."
 
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "Misslyckades att cachlagra förråd (repo) %d."
+msgstr "Misslyckades att cachlagra förråd %d."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
