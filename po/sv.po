@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-23 07:52+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
-"Language-Team: Swedish <http://l10n.opensuse.org/projects/libzypp/master/sv/>"
-"\n"
+"PO-Revision-Date: 2016-06-19 20:10+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Language-Team: Swedish "
+"<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -283,11 +283,11 @@ msgstr "Signaturens offentliga nyckel är inte tillgänglig"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2375
 msgid "File does not exist or signature can't be checked"
-msgstr "Filen existerar inte eller dess signatur kan inte kontrolleras"
+msgstr "Filen finns inte eller signaturen kan inte kontrolleras"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
-msgstr "Följande åtgärder kommer att vidtas:"
+msgstr "Följande åtgärder utförs:"
 
 #: zypp/RepoManager.cc:297
 #, boost-format
@@ -304,11 +304,11 @@ msgstr "Det gick inte att läsa katalogen '%s'"
 #: zypp/RepoManager.cc:315
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr "Kan inte läsa förrådsfilen (repo file) '%1%': Åtkomst nekad"
+msgstr "Kan inte läsa lagringsplatsfil '%1%': Åtkomst nekad"
 
 #: zypp/RepoManager.cc:338
 msgid "Repository alias cannot start with dot."
-msgstr "Förrådets (repots) alias får inte inledas med en punkt."
+msgstr "Ett arkivalias kan inte inledas med en punkt."
 
 #: zypp/RepoManager.cc:349
 msgid "Service alias cannot start with dot."
