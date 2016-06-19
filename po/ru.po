@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 16:15+0000\n"
-"Last-Translator: Alex Minton <alex239@gmail.com>\n"
+"PO-Revision-Date: 2016-06-19 16:29+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -800,12 +800,12 @@ msgstr "Невозможно отобразить руководство по %1
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "'%s' не найдено в именах пакетов. Поиск возможностей."
+msgstr "Строка \"%s\" не найдена в именах пакетов. Пробуем возможности."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr "Пакет '%s' не найден."
+msgstr "Пакет \"%s\" не найден."
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
@@ -815,12 +815,12 @@ msgstr "Исправление '%s' не найдено."
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr "Продукт '%s' не найден."
+msgstr "Продукт \"%s\" не найден."
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "Шаблон '%s' не найден."
+msgstr "Шаблон \"%s\" не найден."
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
@@ -831,44 +831,44 @@ msgstr "Пакет с исходным кодом '%s' не найден."
 #: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr "Объект '%s' не найден."
+msgstr "Объект \"%s\" не найден."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "Пакет '%s' не найден в указанных репозиториях."
+msgstr "В указанных репозиториях пакет \"%s\" не найден."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Исправление '%s' не найдено в указанных репозиториях."
+msgstr "В указанных репозиториях исправление \"%s\" не найдено."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Продукт '%s' не найден в указанных репозиториях."
+msgstr "В указанных репозиториях продукт \"%s\" не найден."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "Шаблон '%s' не найден в указанных репозиториях."
+msgstr "В указанных репозиториях шаблон \"%s\" не найден."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Пакет с исходным кодом '%s' не найден в указанных репозиториях."
+msgstr "В указанных репозиториях пакет с исходным кодом \"%s\" не найден."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "Объект '%s' не найден в указанных репозиториях."
+msgstr "В указанных репозиториях объект \"%s\" не найден."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
-msgstr "Не найдено поставщиков '%s'."
+msgstr "Поставщик \"%s\" не найден."
 
 #. wildcards used
 #: src/RequestFeedback.cc:84
@@ -885,7 +885,7 @@ msgstr "Пакет '%s' не установлен."
 #: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr "Не установлено поставщиков '%s'."
+msgstr "Нет установленных поставщиков \"%s\"."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
@@ -903,7 +903,8 @@ msgstr "'%s', предоставляющий '%s', уже установлен."
 msgid ""
 "No update candidate for '%s'. The highest available version is already "
 "installed."
-msgstr "Нет кандидатов на обновление '%s'. Новейшая версия уже установлена."
+msgstr ""
+"Нет кандидатов на обновление \"%s\". Самая последняя версия уже установлена."
 
 #: src/RequestFeedback.cc:108
 #, c-format, boost-format
