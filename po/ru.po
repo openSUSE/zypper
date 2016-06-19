@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 18:27+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-19 18:28+0000\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -2034,7 +2034,7 @@ msgid ""
 msgstr ""
 "Это может быть вызвано недопустимыми метаданными в репозитории или ошибкой в "
 "анализаторе метаданных. В последнем случае (или если возникают сомнения) "
-"отправьте отчет об ошибке, выполнив указания на странице "
+"отправьте отчёт об ошибке, выполнив указания на странице "
 "http://en.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:401
@@ -2050,7 +2050,7 @@ msgstr "Ошибка при построении кэша:"
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr ""
-"Репозиторий '%s' не найден по своему псевдониму, номеру или URI-адресу."
+"Репозиторий \"%s\" не найден по своему псевдониму, номеру или URI-адресу."
 
 #: src/repos.cc:612
 #, c-format, boost-format
