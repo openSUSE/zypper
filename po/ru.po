@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-18 09:52+0000\n"
+"PO-Revision-Date: 2016-06-19 15:00+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
@@ -433,12 +433,12 @@ msgstr "Принимаю пакет, несмотря на ошибку."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Подозрительное значение фильтра категорий \"%1%\"."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Подозрительное значение фильтра важности \"%1%\"."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -2772,18 +2772,18 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Оценка %1% из %2% применимого исправления:"
+msgstr[1] "Оценка %1% из %2% применимых исправлений:"
+msgstr[2] "Оценка %1% из %2% применимых исправлений:"
 
 #. translator: stats table header
 #: src/update.cc:333
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Найдено %1% применимое исправление:"
+msgstr[1] "Найдено %1% применимых исправления:"
+msgstr[2] "Найдено %1% применимых исправлений:"
 
 #. translator: stats summary
 #: src/update.cc:343
@@ -2808,7 +2808,7 @@ msgstr[2] "%d необязательных исправлений"
 #: src/update.cc:355
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "используйте \"%1%\", чтобы включить необязательные исправления"
 
 #. translator: stats summary
 #: src/update.cc:364
@@ -2837,7 +2837,7 @@ msgstr "Категория"
 #. translator: Table column header.
 #: src/update.cc:401
 msgid "Updatestack"
-msgstr ""
+msgstr "Стек обновлений"
 
 #. translator: Table column header.
 #: src/update.cc:403 src/update.cc:830
@@ -2847,7 +2847,7 @@ msgstr "Исправления"
 #. translator: Table column header.
 #: src/update.cc:405
 msgid "Locked"
-msgstr ""
+msgstr "Заблокировано"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2856,7 +2856,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:411
 msgid "Included categories"
-msgstr ""
+msgstr "Состав категорий"
 
 #. Translator: Patch status: needed, optional, unwanted, applied, not needed
 #: src/update.cc:474
@@ -3001,14 +3001,17 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"Рассматривать применимые необязательные исправления как необходимые либо "
+"исключить."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "По умолчанию необязательные исправления исключаются."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "По умолчанию необязательные исправления включаются."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -4410,60 +4413,76 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [ПАРАМЕТРЫ]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Вывести список всех применимых исправлений."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Вывести список применимых исправлений для отчётов Bugzilla."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Вывести список применимых исправлений для отчётов CVE."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=СТРОКА]\n"
+"Искать отчёты, соответствующие указанной строке."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <ГГГГ-ММ-ДД>\n"
+"Вывести список исправлений, выпущенных до указанной даты."
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <КАТЕГОРИЯ>\n"
+"Вывести список исправлений только из указанной категории."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <ВАЖНОСТЬ>\n"
+"Вывести список исправлений только указанной важности."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Вывести список всех исправлений, не только применимых."
 
 #: src/Zypper.cc:2310
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
+"-r, --repo <ПСЕВДОНИМ|#|URI>\n"
+"Вывести список исправлений только из указанного репозитория."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4648,7 +4667,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [ПАРАМЕТРЫ]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4656,12 +4675,17 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Отобразить статистику о применимых исправлений. Команда возвращает 100, если "
+"найдены необходимые исправления, 101 при наличии хотя бы одного необходимого "
+"исправления безопасности."
 
 #: src/Zypper.cc:2476
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
+"-r, --repo <ПСЕВДОНИМ|#|URI>\n"
+"Проверить исправления только в указанном репозитории."
 
 #: src/Zypper.cc:2477
 msgid ""
