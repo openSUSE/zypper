@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 16:31+0000\n"
-"Last-Translator: Alex Minton <alex239@gmail.com>\n"
+"PO-Revision-Date: 2016-06-19 16:46+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -962,14 +962,14 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"Выбранный пакет '%s' из репозитория '%s' имеет версию ниже, чем "
+"Выбранный пакет \"%s\" из репозитория \"%s\" имеет версию ниже, чем "
 "установленный пакет."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr "Используйте '%s' для принудительной установки пакета."
+msgstr "Используйте \"%s\" для принудительной установки пакета."
 
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
