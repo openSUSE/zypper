@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 18:29+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-19 18:31+0000\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -2060,12 +2060,12 @@ msgstr "Используйте '%s' для получения списка оп�
 #: src/repos.cc:633
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
-msgstr "Отключенный репозиторий \"%s\" игнорируется"
+msgstr "Отключённый репозиторий \"%s\" игнорируется"
 
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Игнорирую репозиторий '%s' из-за параметра '%s'."
+msgstr "Игнорирую репозиторий \"%s\" из-за параметра '%s'."
 
 #: src/repos.cc:749
 #, c-format, boost-format
