@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
 "PO-Revision-Date: 2016-06-19 15:51+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -685,7 +685,7 @@ msgstr "нет"
 #: src/subcommand.cc:275
 #, boost-format
 msgid "cannot exec %1% (%2%)"
-msgstr "не удается выполнить %1% (%2%)"
+msgstr "не удаётся выполнить %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
