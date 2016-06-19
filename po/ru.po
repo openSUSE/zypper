@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 15:41+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-19 15:47+0000\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -581,7 +581,7 @@ msgstr "Интерактивный: "
 
 #: src/info.cc:354 src/search.cc:383
 msgid "Recommended"
-msgstr "Рекомендовано"
+msgstr "Рекомендованный"
 
 #: src/info.cc:356 src/search.cc:385
 msgid "Suggested"
@@ -644,7 +644,7 @@ msgstr "Установлено"
 
 #: src/info.cc:481 src/search.cc:642
 msgid "Is Base"
-msgstr "Является базовым"
+msgstr "Базовый"
 
 #: src/info.cc:485
 msgid "End of Support"
