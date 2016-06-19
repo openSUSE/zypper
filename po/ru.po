@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 18:20+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-19 18:26+0000\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -1971,7 +1971,7 @@ msgstr "Ошибка при отключении репозитория \"%s\"."
 #: src/repos.cc:295
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
-msgstr "Проблемы при получении файлов из '%s'."
+msgstr "Проблемы при получении файлов из \"%s\"."
 
 #: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
@@ -1981,7 +1981,7 @@ msgstr "Рекомендация имеется в выданном ранее �
 #: src/repos.cc:308
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
-msgstr "Не определён URI для '%s'."
+msgstr "Не определён URI для \"%s\"."
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: src/repos.cc:313
@@ -1991,16 +1991,16 @@ msgid ""
 "'%s'."
 msgstr ""
 "Добавьте одну или более записей основных URI-адресов (baseurl=URI) в %s для "
-"репозитория '%s'."
+"репозитория \"%s\"."
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
-msgstr "Для этого репозитория не определён псевдоним."
+msgstr "Псевдоним для этого репозитория не определён."
 
 #: src/repos.cc:339
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
-msgstr "Репозиторий '%s' неверен."
+msgstr "Репозиторий \"%s\" недействителен."
 
 #: src/repos.cc:340
 msgid ""
@@ -2017,7 +2017,7 @@ msgstr "Ошибка при получении метаданных для '%s':
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
-msgstr "Принудительное построение кэша репозитория"
+msgstr "Принудительная сборка кэша репозитория"
 
 #: src/repos.cc:390
 #, c-format, boost-format
