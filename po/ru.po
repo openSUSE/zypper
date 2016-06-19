@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 15:04+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-19 15:29+0000\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -248,8 +248,8 @@ msgstr ""
 "безопасен, правилен\n"
 "и должен быть использован в этой операции, введите первые 4 символа "
 "контрольной суммы,\n"
-"чтобы разблокировать его использование на собственный риск. Если их не "
-"ввести, файл будет отклонен.\n"
+"чтобы разблокировать его использование на собственный риск. При отсутствии "
+"ввода файл будет отклонен.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:359
@@ -329,8 +329,8 @@ msgid ""
 "zypper manual page for details."
 msgstr ""
 "Для проверки на конфликты файлов необходимо загрузить неустановленные пакеты "
-"заранее, чтобы получить доступ к их спискам файлов. Подробнее см. в описании "
-"опции «%1%» в руководстве zypper."
+"заранее, чтобы получить доступ к их спискам файлов. Дополнительные сведения "
+"см. в описании параметра \"%1%\" на странице руководства zypper."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:391
