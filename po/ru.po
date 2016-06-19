@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 17:00+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-19 17:01+0000\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -1639,9 +1639,7 @@ msgstr "После этой операции будет использовано
 
 #: src/Summary.cc:1251
 msgid "No additional space will be used or freed after the operation."
-msgstr ""
-"После этой операции дополнительное дисковое пространство не будет "
-"использовано или освобождено."
+msgstr "Эта операция никак не отразится на используемом дисковом пространстве."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1258
