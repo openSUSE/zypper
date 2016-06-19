@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 17:01+0000\n"
-"Last-Translator: Alex Minton <alex239@gmail.com>\n"
+"PO-Revision-Date: 2016-06-19 17:08+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -1769,12 +1769,12 @@ msgstr[2] "пакетов с исходным кодом для установк
 
 #: src/Summary.cc:1430
 msgid "System reboot required."
-msgstr "Требуется перезагрузка."
+msgstr "Требуется перезагрузка системы."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "Пропустить получение файла и отменить текущую операцию."
+msgstr "Пропустить получение файла и прервать текущую операцию."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
@@ -1892,7 +1892,7 @@ msgid ""
 "the credentials from %s."
 msgstr ""
 "Для доступа к %s нужна аутентификация. Для чтения параметров учётных записей "
-"из %s вам нужно войти как root."
+"из %s нужны права пользователя root."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -1929,8 +1929,8 @@ msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
 "number, the lower the priority."
 msgstr ""
-"Неверный приоритет '%s'. Используйте положительное целое число. Чем больше "
-"число, тем ниже приоритет."
+"Недопустимый приоритет '%s'. Используйте положительное целое число. Чем "
+"больше значение числа, тем меньше приоритет."
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
