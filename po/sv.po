@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-20 21:01+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4875,7 +4875,7 @@ msgstr " SSL-certifikatsproblem, verifiera att CA-certifikatet för '%s' är OK.
 msgid "Cannot find available loop device to mount the image file from '%s'"
 msgstr ""
 "Det gick inte att hitta en tillgänglig loop-enhet för montering av bildfilen "
-"från %s"
+"från '%s'"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
