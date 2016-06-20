@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-20 17:15+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-20 21:03+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -1957,7 +1957,7 @@ msgstr ""
 
 #: src/repos.cc:409
 msgid "Error building the cache:"
-msgstr "Ocorreu um erro ao construir o cache:"
+msgstr "Erro ao construir o cache:"
 
 #: src/repos.cc:609
 #, c-format, boost-format
@@ -2092,11 +2092,11 @@ msgstr "Atualizar automaticamente"
 
 #: src/repos.cc:1103 src/repos.cc:1104
 msgid "On"
-msgstr "Ligado"
+msgstr "Ativado"
 
 #: src/repos.cc:1103 src/repos.cc:1104
 msgid "Off"
-msgstr "Desligado"
+msgstr "Desativado"
 
 #: src/repos.cc:1104
 msgid "Keep Packages"
@@ -2128,7 +2128,7 @@ msgstr "Caminho do cache MD"
 
 #: src/repos.cc:1163 src/repos.cc:1231 src/repos.cc:1375
 msgid "Error reading repositories:"
-msgstr "Ocorreu um erro ao ler os repositórios:"
+msgstr "Erro ao ler os repositórios:"
 
 #: src/repos.cc:1189
 #, c-format, boost-format
@@ -2164,8 +2164,7 @@ msgstr "Não há repositórios habilitados definidos."
 #: src/repos.cc:1313
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr ""
-"Use os comandos '%s' ou '%s' para adicionar ou habilitar os repositórios."
+msgstr "Use o comando '%s' ou '%s' para adicionar ou habilitar os repositórios."
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
@@ -2232,7 +2231,7 @@ msgstr "Todos os repositórios foram limpos."
 #: src/repos.cc:1547
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
-"Isto é uma mídia removível de leitura apenas (CD/DVD). Desabilitando a "
+"Esta é uma mídia removível apenas leitura (CD/DVD), desabilitando a "
 "atualização automática."
 
 #: src/repos.cc:1568
@@ -2307,8 +2306,7 @@ msgstr "Verifique se sua mídia de instalação é válida e legível."
 #: src/repos.cc:1662
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
-msgstr ""
-"A leitura dos dados da mídia '%s' está adiada até a próxima atualização."
+msgstr "A leitura dos dados da mídia '%s' foi adiada até a próxima atualização."
 
 #: src/repos.cc:1744
 msgid "Problem accessing the file at the specified URI"
@@ -2329,14 +2327,12 @@ msgid ""
 "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for "
 "details."
 msgstr ""
-"Isto é um arquivo .repo? Veja http://en.opensuse.org/Standards/RepoInfo para "
-"detalhes."
+"Isto é um arquivo .repo? Consulte http://en.opensuse.org/Standards/RepoInfo "
+"para obter detalhes."
 
 #: src/repos.cc:1762
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr ""
-"Problema encontrado durante a tentativa de leitura do arquivo no URI "
-"especificado"
+msgstr "Problema encontrado ao tentar ler o arquivo no URI especificado"
 
 #: src/repos.cc:1774
 msgid "Repository with no alias defined found in the file, skipping."
