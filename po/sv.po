@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-20 20:59+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-20 21:00+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4858,18 +4858,17 @@ msgstr "Behörighet för åtkomst till %s nekad."
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "Tidsgränsen överskreds vid försök att nå %s."
+msgstr "Tidsgränsen överskreds vid försök att nå '%s'."
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
-msgstr "Platsen '%s' är tillfälligt oåtkomlig."
+msgstr "Platsen '%s' är för tillfället oåtkomlig."
 
 #: zypp/media/MediaException.cc:223
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
-"SSL-certifikatsproblem, kontrollera att CA-certifikatet för '%s' är OK."
+msgstr " SSL-certifikatsproblem, verifiera att CA-certifikatet för '%s' är OK."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
