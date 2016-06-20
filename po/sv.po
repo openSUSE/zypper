@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-20 20:53+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-06-20 20:54+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4789,19 +4789,19 @@ msgstr "Sökvägen '%s' på mediet '%s' är inte en katalog."
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr "Felaktigt utformad URI"
+msgstr "Felaktigt format för URI"
 
 #: zypp/media/MediaException.cc:125
 msgid "Empty host name in URI"
-msgstr "Inget värdnamn angivet i URI"
+msgstr "Tomt värdnamn i URI"
 
 #: zypp/media/MediaException.cc:130
 msgid "Empty filesystem in URI"
-msgstr "Inget filsystem angivet i URI"
+msgstr "Tomt filsystem i URI"
 
 #: zypp/media/MediaException.cc:135
 msgid "Empty destination in URI"
-msgstr "Inget mål angiven i URI"
+msgstr "Tomt mål i URI"
 
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
