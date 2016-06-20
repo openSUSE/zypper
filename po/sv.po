@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-20 20:45+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-20 20:47+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4668,21 +4668,21 @@ msgstr "avinstallation av %s"
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
 #, c-format, boost-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr "bryt %s genom att ignorera vissa beroenden"
+msgstr "bryt '%s' genom att ignorera vissa beroenden"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
-msgstr "ignorera generellt vissa beroende"
+msgstr "ignorera generellt några beroende"
 
 #: zypp/parser/RepoindexFileReader.cc:197
 #, c-format, boost-format
 msgid "Required attribute '%s' is missing."
-msgstr "Det obligatoriska attributet '%s' saknas."
+msgstr "Det nödvändiga attributet '%s' saknas."
 
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "Ett eller båda av attributen '%s' och/eller '%s' är obligatoriska."
+msgstr "Ett av eller båda attributen '%s' och '%s' krävs."
 
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
