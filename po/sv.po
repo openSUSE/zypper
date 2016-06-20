@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-20 20:57+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4834,7 +4834,7 @@ msgstr ""
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "Mediakällan '%s' innehåller inte det önskade mediet"
+msgstr "Mediekällan %s innehåller inte önskat medium"
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
