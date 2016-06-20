@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-20 20:34+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-20 20:35+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -390,7 +390,7 @@ msgstr "Lägger till förrådet '%s'"
 #: zypp/RepoManager.cc:1701
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Ogiltigt namn på förråd (repo) '%s'"
+msgstr "Ogiltigt namn på förråd '%s'"
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
