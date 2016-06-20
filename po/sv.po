@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-09 22:30+0000\n"
+"PO-Revision-Date: 2016-06-20 22:04+0000\n"
 "Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
-msgstr "Arkiv:"
+msgstr "Förråd:"
 
 #: src/callbacks/keyring.h:38
 msgid "Key Name:"
@@ -67,7 +67,7 @@ msgstr "Accepterar den osignerade filen %s."
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Accepterar den osignerade filen \"%s\" från förrådet \"%s\"."
+msgstr "Accepterar den osignerade filen '%s' från förrådet '%s'."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:112
@@ -79,7 +79,7 @@ msgstr "Filen %s är inte signerad. Vill du fortsätta?"
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Filen \"%s\" från förrådet \"%s\" är osignerad, vill du fortsätta?"
+msgstr "Filen '%s' från förrådet '%s' är osignerad, vill du fortsätta?"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
@@ -91,8 +91,7 @@ msgstr "Accepterar filen %s som är signerad med en okänd nyckel: %s."
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Accepterar filen \"%s\" från förrådet \"%s\" signerad med en okänd nyckel "
-"\"%s\"."
+"Accepterar filen '%s' från förrådet '%s' signerad med en okänd nyckel '%s'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -106,8 +105,8 @@ msgstr "Filen %s är signerad med en okänd nyckel: %s. Vill du fortsätta?"
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"Filen \"%s\" från förrådet \"%s\" är signerad med en okänd nyckel \"%s\". "
-"Vill du fortsätta?"
+"Filen '%s' från förrådet '%s' är signerad med en okänd nyckel '%s'. Vill du "
+"fortsätta?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
@@ -160,13 +159,13 @@ msgstr "Ha förtroende för nyckeln och importera den till betrodd nyckelring."
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignorerar felaktig signatur för filen \"%s\"!"
+msgstr "Ignorerar felaktig signatur för filen '%s'!"
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ignorerar felaktig signatur för filen \"%s\" från förrådet \"%s\"!"
+msgstr "Ignorerar felaktig signatur för filen '%s' från förrådet '%s'!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -176,13 +175,12 @@ msgstr ""
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s'."
-msgstr "Signaturverifiering misslyckades för filen \"%s\"."
+msgstr "Signaturverifiering misslyckades för filen '%s'."
 
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr ""
-"Signaturverifiering misslyckades för filen \"%s\" från förrådet \"%s\"."
+msgstr "Signaturverifiering misslyckades för filen '%s' från förrådet '%s'."
 
 #: src/callbacks/keyring.h:284
 msgid ""
@@ -243,11 +241,11 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"Men om du är säker på att filen med checksumman \"%1%..\" är säker, korrekt\n"
+"Men om du är säker på att filen med checksumman '%1%..' är säker, korrekt\n"
 "och ska användas för den här åtgärden, kan du på egen risk ange de fyra "
 "första tecknen\n"
 "i checksumman så att filen avblockeras och kan användas. Om du gör en blank "
-"imnatning kastas filen.\n"
+"inmatning kastas filen.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:359
@@ -498,7 +496,7 @@ msgstr[1] "Det finns %1% matchningar för  '%2%'."
 #: src/info.cc:169
 #, c-format, boost-format
 msgid "%s '%s' not found."
-msgstr "%s \"%s\" hittades inte."
+msgstr "%s '%s' hittades inte."
 
 #: src/info.cc:191
 #, c-format, boost-format
@@ -786,103 +784,103 @@ msgstr "Manuell inmatning för %1% kan inte visas"
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "\"%s\" hittades inte i paketnamn. Provar möjligheter."
+msgstr "'%s' hittades inte i paketnamn. Provar möjligheter."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr "Paketet \"%s\" hittades inte."
+msgstr "Paketet '%s' hittades inte."
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "Programfixen \"%s\" hittades inte."
+msgstr "Programfixen '%s' hittades inte."
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr "Produkten \"%s\" hittades inte."
+msgstr "Produkten '%s' hittades inte."
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "Mönstret \"%s\" hittades inte."
+msgstr "Mönstret '%s' hittades inte."
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "Det gick inte att hitta källpaketet \"%s\"."
+msgstr "Källpaketet '%s' hittades inte."
 
 #. just in case
 #: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr "Objektet \"%s\" hittades inte."
+msgstr "Objektet '%s' hittades inte."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "Paketet \"%s\" hittades inte i angivna förråd."
+msgstr "Paketet '%s' hittades inte i angivna förråd."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Programfixen \"%s\" hittades inte i angivna förråd."
+msgstr "Programfixen '%s' hittades inte i angivna förråd."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Produkten \"%s\" hittades inte i angivna förråd."
+msgstr "Produkten '%s' hittades inte i angivna förråd."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "Mönstret \"%s\" hittades inte i angivna förråd."
+msgstr "Mönstret '%s' hittades inte i angivna förråd."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Källpaketet \"%s\" hittades inte angivna förråd."
+msgstr "Källpaketet '%s' hittades inte angivna förråd."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "Objektet \"%s\" hittades inte i angivna förråd."
+msgstr "Objektet '%s' hittades inte i angivna förråd."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
-msgstr "Det gick inte att hitta någon leverantör av \"%s\"."
+msgstr "Ingen leverantör av '%s' hittades."
 
 #. wildcards used
 #: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr "Inget paket som matchar \"%s\" är installerat."
+msgstr "Inget paket som matchar '%s' är installerat."
 
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr "Paketet \"%s\" är inte installerat."
+msgstr "Paketet '%s' är inte installerat."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr "Ingen leverantör av \"%s\" är installerad."
+msgstr "Ingen leverantör av '%s' är installerad."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr "\"%s\" har redan installerats."
+msgstr "'%s' har redan installerats."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "\"%s\" som innehåller \"%s\" har redan installerats."
+msgstr "'%s' som innehåller '%s' har redan installerats."
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
@@ -890,13 +888,13 @@ msgid ""
 "No update candidate for '%s'. The highest available version is already "
 "installed."
 msgstr ""
-"Ingen uppdateringskandidat för \"%s\". Den högsta tillgängliga versionen är "
+"Ingen uppdateringskandidat för '%s'. Den högsta tillgängliga versionen är "
 "redan installerad."
 
 #: src/RequestFeedback.cc:108
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
-msgstr "Det finns ingen uppdatering för %s."
+msgstr "Det finns ingen uppdatering för '%s'."
 
 #: src/RequestFeedback.cc:114
 #, c-format, boost-format
@@ -904,8 +902,8 @@ msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
 msgstr ""
-"Det finns en uppdateringskandidat %s för %s, men den matchar inte angiven "
-"version, arkitektur eller lagringsplats."
+"Det finns en uppdateringskandidat '%s' för '%s', men den matchar inte "
+"angiven version, arkitektur eller lagringsplats."
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -913,8 +911,8 @@ msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
 "Use '%s' to install this candidate."
 msgstr ""
-"Det finns en uppdateringskandidat för %s, men den kommer från en annan "
-"leverantör. Använd %s för att installera kandidaten."
+"Det finns en uppdateringskandidat för '%s', men den kommer från en annan "
+"leverantör. Använd '%s' för att installera kandidaten."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -922,8 +920,8 @@ msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
 "lower priority. Use '%s' to install this candidate."
 msgstr ""
-"Det finns en uppdateringskandidat för %s, men den kommer från en "
-"lagringsplats med lägre prioritet. Använd %s för att installera kandidaten."
+"Det finns en uppdateringskandidat för '%s', men den kommer från en "
+"lagringsplats med lägre prioritet. Använd '%s' för att installera kandidaten."
 
 #: src/RequestFeedback.cc:142
 #, c-format, boost-format
@@ -931,8 +929,8 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Det finns en uppdateringskandidat för %s, men den är låst. Lås upp den med "
-"%s."
+"Det finns en uppdateringskandidat för '%s', men den är låst. Lås upp med "
+"'%s'."
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -940,7 +938,7 @@ msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"Paketet \"%s\" är inte tillgängligt i dina lagringsplatser. Det går inte att "
+"Paketet '%s' är inte tillgängligt i dina lagringsplatser. Det går inte att "
 "installera om, uppgradera eller nedgradera."
 
 #: src/RequestFeedback.cc:158
@@ -949,24 +947,24 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"Det valda paketet \"%s\" från lagringsplatsen \"%s\" har en lägre version än "
-"den installerade."
+"Det valda paketet '%s' från lagringsplatsen '%s' har en lägre version än den "
+"installerade."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr "Använd \"%s\" för att tvinga installation av paketet."
+msgstr "Använd '%s' för att tvinga installation av paketet."
 
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "Programfixen \"%s\" är interaktiv, åsidosätts."
+msgstr "Programfixen '%s' är interaktiv, åsidosätts."
 
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
-msgstr "Programfixen \"%s\" behövs inte."
+msgstr "Programfixen '%s' behövs inte."
 
 #: src/RequestFeedback.cc:181
 #, boost-format
@@ -980,54 +978,52 @@ msgstr ""
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
-msgstr ""
-"Korrigeringen \"%s\" är låst. Installera den med \"%s\" eller lås upp den "
-"med \"%s\"."
+msgstr "Programfixen '%s' är låst. Installera med '%s' eller lås upp med '%s'."
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "Korrigeringen \"%s\" finns inte i den angivna kategorin."
+msgstr "Programfixen '%s' finns inte i den angivna kategorin."
 
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
-msgstr "Korrigeringsfilen %s har inte angiven allvarlighetsgrad."
+msgstr "Programfixen '%s' har inte angiven allvarlighetsgrad."
 
 #: src/RequestFeedback.cc:213
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "Korrigeringen \"%s\" utgavs efter det angivna datumet."
+msgstr "Programfixen '%s' utgavs efter det angivna datumet."
 
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "Väljer \"%s\" från lagringsplatsen \"%s\" för installation."
+msgstr "Väljer '%s' från lagringsplatsen '%s' för installation."
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "Tvingar installation av \"%s\" från lagringsplatsen \"%s\"."
+msgstr "Tvingar installation av '%s' från förrådet '%s'."
 
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
-msgstr "Väljer \"%s\" för borttagning."
+msgstr "Väljer '%s' för borttagning."
 
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr "%s är låst. Använd %s om du vill låsa upp det."
+msgstr "'%s' är låst. Använd '%s' om du vill låsa upp det."
 
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
-msgstr "Lägger till krav: \"%s\"."
+msgstr "Lägger till krav: '%s'."
 
 #: src/RequestFeedback.cc:241
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
-msgstr "Lägger till konflikt: \"%s\"."
+msgstr "Lägger till konflikt: '%s'."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:263
@@ -1076,8 +1072,8 @@ msgstr[1] "Följande %d NYA produkter kommer att installeras:"
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] "Följande källpaket kommer installeras:"
-msgstr[1] "Följande %d källpaket kommer installeras:"
+msgstr[0] "Följande paket kommer installeras:"
+msgstr[1] "Följande %d paket kommer installeras:"
 
 #: src/Summary.cc:530
 #, c-format, boost-format
@@ -2000,7 +1996,7 @@ msgstr ""
 #: src/repos.cc:820
 #, c-format, boost-format
 msgid "Disabling repository '%s'."
-msgstr "Inaktiverar förrådet \"%s\"."
+msgstr "Inaktiverar förrådet '%s'."
 
 #: src/repos.cc:834
 #, c-format, boost-format
@@ -2134,16 +2130,16 @@ msgstr "Du kanske inte har skrivbehörighet?"
 #: src/repos.cc:1196
 #, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "Arkiven har exporterats till %s."
+msgstr "Förråden har exporterats till %s."
 
 #: src/repos.cc:1248 src/repos.cc:1392
 msgid "Specified repositories: "
-msgstr "Angivna arkiv: "
+msgstr "Angivna förråd: "
 
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Hoppar över inaktiverat förråd \"%s\""
+msgstr "Hoppar över inaktiverat förråd '%s'"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
@@ -2194,7 +2190,7 @@ msgstr "Rensar paket för %s."
 #: src/repos.cc:1468
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "Kan inte rensa förrådet \"%s\" på grund av ett fel."
+msgstr "Kan inte rensa förrådet '%s' på grund av ett fel."
 
 #: src/repos.cc:1479
 msgid "Cleaning installed packages cache."
@@ -2236,7 +2232,7 @@ msgstr "Ogiltigt arkivalias: %s"
 #: src/repos.cc:1576 src/repos.cc:1859
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "Förrådet \"%s\" finns redan. Använd ett annat alias."
+msgstr "Förrådet '%s' finns redan. Använd ett annat alias."
 
 #: src/repos.cc:1585
 msgid ""
@@ -2276,7 +2272,7 @@ msgstr ""
 #: src/repos.cc:1622
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
-msgstr "Förrådet \"%s\" har lagts till"
+msgstr "Förrådet '%s' har lagts till"
 
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:1630
@@ -2286,7 +2282,7 @@ msgstr "Automatisk uppdatering"
 #: src/repos.cc:1648
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
-msgstr "Läser data från \"%s\"-media"
+msgstr "Läser data från '%s'-media"
 
 #: src/repos.cc:1654
 #, c-format, boost-format
@@ -2335,12 +2331,12 @@ msgstr "Ett förråd utan alias hittades i filen. Det hoppas över."
 #: src/repos.cc:1780
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "Förrådet \"%s\" har ingen URI. Det hoppas över."
+msgstr "Förrådet '%s' har ingen URI. Det hoppas över."
 
 #: src/repos.cc:1822
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
-msgstr "Förrådet \"%s\" har tagits bort."
+msgstr "Förrådet '%s' har tagits bort."
 
 #: src/repos.cc:1844
 #, c-format, boost-format
@@ -2348,13 +2344,13 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"Kan inte ändra alias för förrådet \"%s\". Förrådet tillhör tjänsten \"%s\" "
-"som inte kan sätta alias."
+"Kan inte ändra alias för förrådet '%s'. Förrådet tillhör tjänsten '%s' som "
+"inte kan sätta alias."
 
 #: src/repos.cc:1855
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Förrådet \"%s\" har bytt namn till \"%s\"."
+msgstr "Förrådet '%s' har bytt namn till '%s'."
 
 #: src/repos.cc:1864 src/repos.cc:2098
 msgid "Error while modifying the repository:"
@@ -2363,12 +2359,12 @@ msgstr "Ett fel uppstod när förrådet skulle ändras:"
 #: src/repos.cc:1865
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "Lämnar förrådet \"%s\" oförändrat."
+msgstr "Lämnar förrådet '%s' oförändrat."
 
 #: src/repos.cc:2002
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "Prioritet för förrådet \"%s\" är oförändrad (%d)"
+msgstr "Prioriteten för förrådet '%s' är oförändrad (%d)"
 
 #: src/repos.cc:2040
 #, c-format, boost-format
@@ -2383,22 +2379,22 @@ msgstr "Arkivet %s har inaktiverats."
 #: src/repos.cc:2049
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "Automatisk uppdatering har aktiverats för förrådet \"%s\"."
+msgstr "Automatisk uppdatering har aktiverats för förrådet '%s'."
 
 #: src/repos.cc:2051
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "Den automatiska uppdateringen har inaktiverats för förrådet \"%s\"."
+msgstr "Den automatiska uppdateringen har inaktiverats för förrådet '%s'."
 
 #: src/repos.cc:2058
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "Cachelagring av RPM-filer har aktiverats för förrådet \"%s\"."
+msgstr "Cachelagring av RPM-filer har aktiverats för förrådet '%s'."
 
 #: src/repos.cc:2060
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "Cachelagring av RPM-filer har inaktiverats för förrådet \"%s\"."
+msgstr "Cachelagring av RPM-filer har inaktiverats för förrådet '%s'."
 
 #: src/repos.cc:2067
 #, c-format, boost-format
@@ -2413,22 +2409,22 @@ msgstr "GPG-kontroll har inaktiverats för lagringsplatsen \"%s\"."
 #: src/repos.cc:2075
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "Prioriteten för förrådet \"%s\" har satts till %d."
+msgstr "Prioriteten för förrådet '%s' har satts till %d."
 
 #: src/repos.cc:2081
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "Namnet på förrådet \"%s\" har ändrats till \"%s\"."
+msgstr "Förrådet '%s' har fått namnet '%s'."
 
 #: src/repos.cc:2092
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
-msgstr "Det finns inget att ändra för förrådet \"%s\"."
+msgstr "Det finns inget att ändra för förrådet '%s'."
 
 #: src/repos.cc:2099
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
-msgstr "Förrådet \"%s\" lämnas orört."
+msgstr "Förrådet '%s' lämnas oförändrat."
 
 #: src/repos.cc:2131
 msgid "Error reading services:"
@@ -2485,7 +2481,7 @@ msgstr "Uppdaterar tjänsten %s."
 #: src/repos.cc:2631 src/repos.cc:2641
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Det gick inte att hämta förrådsindexfilen för tjänsten \"%s\":"
+msgstr "Det gick inte att hämta förrådsindexfilen för tjänsten '%s':"
 
 #: src/repos.cc:2633 src/repos.cc:2741 src/repos.cc:2799
 #, c-format, boost-format
@@ -2619,17 +2615,17 @@ msgstr "Läser in förrådsdata..."
 #: src/repos.cc:3102
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Hämtar data för förrådet \"%s\"..."
+msgstr "Hämtar data för förrådet '%s'..."
 
 #: src/repos.cc:3108
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "Förrådet \"%s\" är inte cachat. Cachar..."
+msgstr "Förrådet '%s' är inte cachat. Cachar..."
 
 #: src/repos.cc:3114 src/repos.cc:3148
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
-msgstr "Ett problem uppstod när data skulle läsas in från \"%s\""
+msgstr "Ett problem uppstod när data skulle läsas in från '%s'"
 
 #: src/repos.cc:3118
 #, c-format, boost-format
@@ -5176,7 +5172,7 @@ msgstr "Obligatoriska argument saknas."
 #: src/Zypper.cc:3688
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "Förrådet \"%s\" hittades inte med hjälp av alias, nummer eller URI."
+msgstr "Förrådet '%s' hittades inte med hjälp av alias, nummer eller URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
@@ -5193,7 +5189,7 @@ msgstr "För få argument. Ange minst URI och alias."
 #: src/Zypper.cc:3765
 #, c-format, boost-format
 msgid "Repository '%s' not found."
-msgstr "Förrådet \"%s\" hittades inte."
+msgstr "Förrådet '%s' hittades inte."
 
 #: src/Zypper.cc:3829
 #, c-format, boost-format
@@ -5708,7 +5704,7 @@ msgstr "Det gick inte att hämta paketfilen från förrådet:"
 #: src/solve-commit.cc:830
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "Förrådet \"%s\" är för gammalt. Det kan hjälpa att köra \"%s\"."
+msgstr "Förrådet '%s' är för gammalt. Det kan hjälpa att köra '%s'."
 
 #: src/solve-commit.cc:841
 msgid ""
@@ -5724,7 +5720,7 @@ msgstr ""
 "förrådet eller installationsmediet. Pröva något av följande alternativ:\n"
 " \n"
 " - pröva föregående kommando igen\n"
-" - uppdatera förrådet genom att ange \"zypper refresh\"\n"
+" - uppdatera förrådet genom att ange 'zypper refresh'\n"
 " - använd ett annat installationsmedium (t.ex. vid skada)\n"
 " - använd ett annat förråd"
 
