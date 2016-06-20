@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-20 20:35+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-20 20:38+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -395,11 +395,11 @@ msgstr "Ogiltigt namn på förråd '%s'"
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Arkivet %s tas bort"
+msgstr "Förrådet %s tas bort"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
-msgstr "Kan inte identifiera var förrådet (repo) är sparat."
+msgstr "Kan inte identifiera var förrådet är sparat."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
@@ -511,7 +511,7 @@ msgstr "Kan inte ändra roten (chroot) till '%s' (%s)."
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "Kan inte ändra katalogen (chdir) till '%s' i en chroot '%s' (%s)."
+msgstr "Kan inte ändra katalogen (chdir) till '%s' i chroot '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:361
 #, c-format, boost-format
