@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-20 20:57+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-20 20:58+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4834,7 +4834,7 @@ msgstr ""
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "Mediekällan %s innehåller inte önskat medium"
+msgstr "Mediekällan '%s' innehåller inte önskat medium"
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
@@ -4843,12 +4843,12 @@ msgstr "Mediet '%s' används av en annan instans"
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
-msgstr "Kan inte mata ut media"
+msgstr "Kan inte mata ut något medium"
 
 #: zypp/media/MediaException.cc:184
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
-msgstr "Kan inte mata ut media '%s'"
+msgstr "Kan inte mata ut mediet '%s'"
 
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
