@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-20 21:05+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-20 21:07+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -2356,7 +2356,7 @@ msgid ""
 "'%s' which is responsible for setting its alias."
 msgstr ""
 "Não foi possível alterar o apelido do repositório '%s'. O repositório "
-"pertence ao serviço '%s', que é responsável por definir seu apelido."
+"pertence ao serviço '%s', que é responsável por definir o apelido."
 
 #: src/repos.cc:1855
 #, c-format, boost-format
@@ -2365,7 +2365,7 @@ msgstr "O repositório '%s' foi renomeado para '%s'."
 
 #: src/repos.cc:1864 src/repos.cc:2098
 msgid "Error while modifying the repository:"
-msgstr "Ocorreu um erro na alteração do repositório:"
+msgstr "Erro ao alterar o repositório:"
 
 #: src/repos.cc:1865
 #, c-format, boost-format
