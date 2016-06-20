@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-20 20:59+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4853,7 +4853,7 @@ msgstr "Kan inte mata ut mediet '%s'"
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr "Behörigheten för åtkomst till %s nekades."
+msgstr "Behörighet för åtkomst till %s nekad."
 
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
