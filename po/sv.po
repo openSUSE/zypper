@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-20 20:54+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-20 20:56+0000\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4809,6 +4809,7 @@ msgid "Unsupported URI scheme in '%s'."
 msgstr "URI-schemat i '%s' stöds inte."
 
 #: zypp/media/MediaException.cc:145
+#, fuzzy
 msgid "Operation not supported by medium"
 msgstr "Operationen stöds inte av mediet"
 
