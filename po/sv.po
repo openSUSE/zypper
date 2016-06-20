@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-20 20:41+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4414,11 +4414,11 @@ msgstr "Signaturfilen %s hittas inte"
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Det går inte att hämta filen %s från arkivet %s"
+msgstr "Det går inte att hämta filen %s från förrådet %s"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
-msgstr "Det finns Ingen URL i förrådet."
+msgstr "Det finns ingen URL i förrådet."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
