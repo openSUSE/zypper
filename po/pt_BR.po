@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-17 21:14+0000\n"
+"PO-Revision-Date: 2016-06-20 14:45+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
@@ -1859,7 +1859,7 @@ msgstr "O repositório '%s' está atualizado."
 #: src/repos.cc:208
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "A verificação atual de '%s' foi atrasada."
+msgstr "A verificação atualizada de '%s' foi atrasada."
 
 #: src/repos.cc:230
 msgid "Forcing raw metadata refresh"
