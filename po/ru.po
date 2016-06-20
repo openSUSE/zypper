@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-19 18:33+0000\n"
+"PO-Revision-Date: 2016-06-20 09:12+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
@@ -2092,13 +2092,13 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
-"Необходимо построить кэш для репозитория '%s'. Для этого можно запустить "
+"Необходимо собрать кэш для репозитория \"%s\". Для этого можно запустить "
 "'zypper refresh' от имени администратора."
 
 #: src/repos.cc:820
 #, c-format, boost-format
 msgid "Disabling repository '%s'."
-msgstr "Отключение репозитория '%s'."
+msgstr "Отключение репозитория \"%s\"."
 
 #: src/repos.cc:834
 #, c-format, boost-format
