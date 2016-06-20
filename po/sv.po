@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-20 20:43+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-06-20 20:44+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4518,7 +4518,7 @@ msgstr "%s går inte att installera"
 #: zypp/solver/detail/SATResolver.cc:1012
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr "inget tillhandahåller %s som behövs av %s"
+msgstr "inget tillhandahåller %s som behövs i %s"
 
 #: zypp/solver/detail/SATResolver.cc:1017
 #, c-format, boost-format
@@ -4593,7 +4593,7 @@ msgstr "ta bort lås så att %s kan installeras"
 #: zypp/solver/detail/SATResolver.cc:1217
 #: zypp/solver/detail/SATResolver.cc:1238
 msgid "This request will break your system!"
-msgstr "Denna begäran kommer att skada ditt system!"
+msgstr "Begäran kommer att knäcka systemet!"
 
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
