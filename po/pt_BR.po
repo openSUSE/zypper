@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-20 14:55+0000\n"
+"PO-Revision-Date: 2016-06-20 17:12+0000\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
@@ -1907,7 +1907,7 @@ msgstr ""
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
-msgstr "Nenhum apelido definido para esse repositório."
+msgstr "Nenhum apelido definido para este repositório."
 
 #: src/repos.cc:339
 #, c-format, boost-format
@@ -1925,7 +1925,7 @@ msgstr ""
 #: src/repos.cc:352
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Ocorreu um erro ao obter os metadados de '%s':"
+msgstr "Ocorreu um erro ao baixar os metadados de '%s':"
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
