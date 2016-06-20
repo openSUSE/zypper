@@ -14,6 +14,7 @@
 #include <fstream>
 #include <sstream>
 
+#include "zypp/ZConfig.h"
 #include "zypp/TmpPath.h"
 #include "zypp/Date.h"
 #include "zypp/base/LogTools.h"
@@ -340,34 +341,34 @@ MediaHandler::setAttachPrefix(const Pathname &attach_prefix)
 Pathname
 MediaHandler::createAttachPoint() const
 {
-  /////////////////////////////////////////////////////////////////
-  // provide a default (temporary) attachpoint
-  /////////////////////////////////////////////////////////////////
-  const char * defmounts[] = {
-      "/var/adm/mount", filesystem::TmpPath::defaultLocation().c_str(), /**/NULL/**/
-  };
-
+  Pathname aroot;
   Pathname apoint;
-  Pathname aroot( MediaHandler::_attachPrefix);
-
-  if( !aroot.empty())
   {
-    apoint = createAttachPoint(aroot);
-  }
-  for ( const char ** def = defmounts; *def && apoint.empty(); ++def ) {
-    aroot = *def;
-    if( aroot.empty())
-      continue;
-
-    apoint = createAttachPoint(aroot);
+    aroot = MediaHandler::_attachPrefix;	// explicit request
+    if ( ! aroot.empty() )
+      apoint = createAttachPoint( aroot );
   }
 
-  if ( aroot.empty() ) {
+  if ( apoint.empty() )				// fallback to config value
+  {
+    aroot = ZConfig::instance().download_mediaMountdir();
+    if ( ! aroot.empty() )
+      apoint = createAttachPoint( aroot );
+  }
+
+  if ( apoint.empty() )				// fall back to temp space
+  {
+    aroot = filesystem::TmpPath::defaultLocation();
+    if ( ! aroot.empty() )
+      apoint = createAttachPoint( aroot );
+  }
+
+  if ( apoint.empty() )
+  {
     ERR << "Create attach point: Can't find a writable directory to create an attach point" << std::endl;
-    return aroot;
   }
-
-  if ( !apoint.empty() ) {
+  else
+  {
     MIL << "Created default attach point " << apoint << std::endl;
   }
   return apoint;

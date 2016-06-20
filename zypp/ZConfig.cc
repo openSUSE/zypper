@@ -316,6 +316,7 @@ namespace zypp
         , download_use_deltarpm   	( true )
         , download_use_deltarpm_always  ( false )
         , download_media_prefer_download( true )
+	, download_mediaMountdir	( "/var/adm/mount" )
         , download_max_concurrent_connections( 5 )
         , download_min_download_speed	( 0 )
         , download_max_download_speed	( 0 )
@@ -437,6 +438,12 @@ namespace zypp
                 {
 		  download_media_prefer_download.restoreToDefault( str::compareCI( value, "volatile" ) != 0 );
                 }
+
+		else if ( entry == "download.media_mountdir" )
+                {
+		  download_mediaMountdir.restoreToDefault( Pathname(value) );
+                }
+
                 else if ( entry == "download.max_concurrent_connections" )
                 {
                   str::strtonum(value, download_max_concurrent_connections);
@@ -634,6 +641,7 @@ namespace zypp
     bool download_use_deltarpm;
     bool download_use_deltarpm_always;
     DefaultOption<bool> download_media_prefer_download;
+    DefaultOption<Pathname> download_mediaMountdir;
 
     int download_max_concurrent_connections;
     int download_min_download_speed;
@@ -984,6 +992,10 @@ namespace zypp
 
   long ZConfig::download_transfer_timeout() const
   { return _pimpl->download_transfer_timeout; }
+
+  Pathname ZConfig::download_mediaMountdir() const		{ return _pimpl->download_mediaMountdir; }
+  void ZConfig::set_download_mediaMountdir( Pathname newval_r )	{ _pimpl->download_mediaMountdir.set( std::move(newval_r) ); }
+  void ZConfig::set_default_download_mediaMountdir()		{ _pimpl->download_mediaMountdir.restoreToDefault(); }
 
   DownloadMode ZConfig::commit_downloadMode() const
   { return _pimpl->commit_downloadMode; }

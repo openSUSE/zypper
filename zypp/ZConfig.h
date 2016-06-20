@@ -258,6 +258,16 @@ namespace zypp
        */
       void set_default_download_media_prefer_download();
 
+      /** Path where media are preferably mounted or downloaded.
+       * Config option <tt>download.media_mountdir (/var/adm/mount)</tt>
+       * Needs to be a (writable) directory, otherwise /var/tmp is fallback.
+       */
+      Pathname download_mediaMountdir() const;
+      /** Set alternate value. */
+      void set_download_mediaMountdir( Pathname newval_r );
+      /** Reset to zypp.cong default. */
+      void set_default_download_mediaMountdir();
+
       /**
        * Commit download policy to use as default.
        */
