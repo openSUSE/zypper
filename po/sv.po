@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-20 20:35+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -395,7 +395,7 @@ msgstr "Ogiltigt namn på förråd '%s'"
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Tar bort förrådet '%s'"
+msgstr "Arkivet %s tas bort"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
