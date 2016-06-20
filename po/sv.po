@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-20 20:50+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4746,7 +4746,7 @@ msgstr "Ogiltigt filnamn: %s"
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Mediet inte öppet vid försök att utföra åtgärden %s."
+msgstr "Mediet öppnades inte när åtgärden %s skulle utföras."
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
