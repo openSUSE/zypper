@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-20 20:38+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-06-20 20:41+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -532,12 +532,12 @@ msgstr "Kan inte dela upp (%s)."
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
 msgid "Command exited with status %d."
-msgstr "Kommandot avslutades med status %d."
+msgstr "Kommandot avslutades med statusen %d."
 
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "Kommandot dödades med signal %d (%s)."
+msgstr "Kommandot avbröts av signalen %d (%s)."
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
@@ -4404,7 +4404,7 @@ msgstr "Försökte importera icke existerande nyckel %s till nyckelringen %s"
 
 #: zypp/KeyRing.cc:566
 msgid "Failed to delete key."
-msgstr "Misslyckades att radera nyckel."
+msgstr "Det gick inte att ta bort nyckeln."
 
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
@@ -4414,7 +4414,7 @@ msgstr "Signaturfilen %s hittas inte"
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Kan inte tillhandahålla filen %s från förrådet '%s'"
+msgstr "Det går inte att hämta filen %s från arkivet %s"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
