@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-20 20:53+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -4780,7 +4780,7 @@ msgstr "Systemundantaget '%s' uppstod för mediet '%s'."
 #: zypp/media/MediaException.cc:98
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr "Sökvägen '%s' på mediet '%s' leder inte till en fil."
+msgstr "Sökvägen %s på mediet %s är inte en fil."
 
 #: zypp/media/MediaException.cc:106
 #, c-format, boost-format
