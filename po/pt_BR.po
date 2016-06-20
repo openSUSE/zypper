@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-20 21:04+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-20 21:05+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -2342,7 +2342,7 @@ msgstr ""
 #: src/repos.cc:1780
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "O repositório '%s' não tem um URI definido. Ignorando."
+msgstr "O repositório '%s' não tem um URI definido, ignorando."
 
 #: src/repos.cc:1822
 #, c-format, boost-format
