@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-21 13:10+0000\n"
+"PO-Revision-Date: 2016-06-21 17:50+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
@@ -2875,7 +2875,7 @@ msgstr "Problema"
 
 #: src/update.cc:981
 msgid "No."
-msgstr "Nº"
+msgstr "Não."
 
 #: src/update.cc:981
 msgid "Patch"
@@ -2887,7 +2887,8 @@ msgstr "Nenhum problema correspondente encontrado."
 
 #: src/update.cc:1099
 msgid "The following matches in issue numbers have been found:"
-msgstr "As seguintes ocorrências nos números de problemas foram encontradas:"
+msgstr ""
+"As seguintes correspondências nos números de problemas foram encontradas:"
 
 #: src/update.cc:1108
 msgid "Matches in patch descriptions of the following patches have been found:"
