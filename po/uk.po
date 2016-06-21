@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-21 19:13+0000\n"
+"PO-Revision-Date: 2016-06-21 19:14+0000\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
 "Language-Team: Ukrainian "
 "<https://l10n.opensuse.org/projects/zypper/master/uk/>\n"
@@ -661,7 +661,7 @@ msgstr "нечинна назва CPE"
 
 #: src/info.cc:498
 msgid "Update Repositories"
-msgstr "Оновити сховища"
+msgstr "Сховища оновлень"
 
 #: src/info.cc:506
 msgid "Content Id"
