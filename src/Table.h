@@ -49,8 +49,8 @@ private:
   std::ostream & dumpDetails( std::ostream & stream, const Table & parent ) const;
 
 public:
-  //! Constructor. Reserve place for c columns.
   TableRow()
+  : _ctxt( ColorContext::DEFAULT )
   {}
 
   explicit TableRow( unsigned c )
