@@ -217,6 +217,7 @@ namespace zypp
       { _str << iomanip; return *this; }
 
       operator std::string() const		{ return _str.str(); }
+      std::string asString() const		{ return _str.str(); }
       std::string str() const			{ return _str.str(); }
 
       const std::ostream & stream() const	{ return _str; }
