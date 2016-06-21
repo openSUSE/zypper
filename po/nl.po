@@ -16,15 +16,16 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2015-11-16 22:02+0100\n"
+"PO-Revision-Date: 2016-06-21 10:13+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
-"Language-Team: Dutch <opensuse-nl@opensuse.org>\n"
+"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
+"\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural= n != 1;\n"
-"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -422,7 +423,7 @@ msgstr "Kan er niet achter komen waar de service is opgeslagen."
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
 msgid "Url scheme does not allow a %s"
-msgstr "%s is niet toegestaan in URL-schema "
+msgstr "%s is niet toegestaan in URL-schema"
 
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
@@ -449,11 +450,11 @@ msgstr "Ongeldig URL-schema '%s'"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
-msgstr "Gebruikersnaam is niet toegestaan in URL-schema "
+msgstr "Gebruikersnaam is niet toegestaan in URL-schema"
 
 #: zypp/url/UrlBase.cc:983
 msgid "Url scheme does not allow a password"
-msgstr "Wachtwoord is niet toegestaan in URL-schema "
+msgstr "Wachtwoord is niet toegestaan in URL-schema"
 
 #: zypp/url/UrlBase.cc:1012
 msgid "Url scheme requires a host component"
@@ -461,7 +462,7 @@ msgstr "URL-schema vereist hostcomponent"
 
 #: zypp/url/UrlBase.cc:1022
 msgid "Url scheme does not allow a host component"
-msgstr "Hostcomponent is niet toegestaan in URL-schema "
+msgstr "Hostcomponent is niet toegestaan in URL-schema"
 
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
@@ -470,7 +471,7 @@ msgstr "Ongeldige hostcomponent '%s'"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
-msgstr "Poort is niet toegestaan in URL-schema "
+msgstr "Poort is niet toegestaan in URL-schema"
 
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
@@ -604,7 +605,7 @@ msgstr "ongeldig"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr "Het ondersteuningsniveau is niet gedefiniëerd."
+msgstr "Het ondersteuningsniveau is niet gedefinieerd"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
@@ -740,7 +741,7 @@ msgstr "Aruba"
 #. :ABW:533:
 #: zypp/CountryCode.cc:173
 msgid "Aland Islands"
-msgstr "Aland Islands"
+msgstr "Aland-eilanden"
 
 #. :ALA:248:
 #: zypp/CountryCode.cc:174
@@ -825,7 +826,7 @@ msgstr "Bhutan"
 #. :BTN:064:
 #: zypp/CountryCode.cc:190
 msgid "Bouvet Island"
-msgstr "Bouvet Island"
+msgstr "Bouvet-eiland"
 
 #. :BVT:074:
 #: zypp/CountryCode.cc:191
@@ -871,12 +872,12 @@ msgstr "Zwitserland"
 #. :CHE:756:
 #: zypp/CountryCode.cc:200
 msgid "Cote D'Ivoire"
-msgstr "Cote D'Ivoire"
+msgstr "Ivoorkust"
 
 #. :CIV:384:
 #: zypp/CountryCode.cc:201
 msgid "Cook Islands"
-msgstr "Cook Islands"
+msgstr "Cookeilanden"
 
 #. :COK:184:
 #: zypp/CountryCode.cc:202
@@ -1278,7 +1279,7 @@ msgstr "Kazachstan"
 #. :KAZ:398:
 #: zypp/CountryCode.cc:282
 msgid "Lao People's Democratic Republic"
-msgstr "Lao People's Democratic Republic"
+msgstr "Democratische volksrepubliek Laos"
 
 #. :LAO:418:
 #: zypp/CountryCode.cc:283
@@ -1357,7 +1358,7 @@ msgstr "Saint Martin"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
-msgstr "Madagascar"
+msgstr "Madagaskar"
 
 #. :MDG:450:
 #: zypp/CountryCode.cc:299
@@ -1387,7 +1388,7 @@ msgstr "Mongolië"
 #. :MNG:496:
 #: zypp/CountryCode.cc:304
 msgid "Macao"
-msgstr "Macao"
+msgstr "Macau"
 
 #. :MAC:446:
 #: zypp/CountryCode.cc:305
@@ -1462,7 +1463,7 @@ msgstr "Niger"
 #. :NER:562:
 #: zypp/CountryCode.cc:319
 msgid "Norfolk Island"
-msgstr "Norfolk Island"
+msgstr "Norfolk eiland"
 
 #. :NFK:574:
 #: zypp/CountryCode.cc:320
@@ -1588,7 +1589,7 @@ msgstr "Qatar"
 #. :QAT:634:
 #: zypp/CountryCode.cc:344
 msgid "Reunion"
-msgstr "Reunion"
+msgstr "Réunion"
 
 #. :REU:638:
 #: zypp/CountryCode.cc:345
