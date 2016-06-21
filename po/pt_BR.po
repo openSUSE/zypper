@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-20 21:11+0000\n"
+"PO-Revision-Date: 2016-06-21 12:05+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
@@ -2137,7 +2137,7 @@ msgstr "Não foi possível abrir %s para escrita."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
-msgstr "Talvez você não tenha permissão de escrita?"
+msgstr "Talvez você não tenha permissão de gravação?"
 
 #: src/repos.cc:1196
 #, c-format, boost-format
