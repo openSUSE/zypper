@@ -11,15 +11,15 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-04-14 16:00+0200\n"
+"PO-Revision-Date: 2016-06-21 11:47+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
-"Language-Team: Dutch <opensuse-nl@opensuse.org>\n"
+"Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
-"Plural-Forms: nplurals=2; plural= n != 1;\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -270,7 +270,7 @@ msgstr "Blokkering om dit bestand te gebruiken op eigen risico verwijderen."
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:363
 msgid "Discard the file."
-msgstr "Dit bestand verwerpen"
+msgstr "Dit bestand verwerpen."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:368
@@ -365,7 +365,7 @@ msgstr[1] "Gedetecteerd %1% conflicten tussen bestanden:"
 
 #: src/callbacks/rpm.h:410
 msgid "Conflicting files will be replaced."
-msgstr "Bestanden met conflicten zullen vervangen worden"
+msgstr "Bestanden met conflicten zullen vervangen worden."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
 #: src/callbacks/rpm.h:416
@@ -437,12 +437,12 @@ msgstr "Pakket wordt geaccepteerd ondanks de fout."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Verdachte waarde van categoriefilter '%1%'."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Verdachte waarde van ernst-filter '%1%'."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -951,7 +951,7 @@ msgid ""
 "it."
 msgstr ""
 "Er is een kandidaat voor het bijwerken van '%s', maar het is geblokkeerd. "
-"Gebruik '%s' om dit op te heffen "
+"Gebruik '%s' om dit op te heffen."
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -988,13 +988,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Patch '%s' is niet nodig."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Patch '%s' is vergrendeld. Gebruik '%s' om het te installeren of ontgrendel "
-"het met '%s'."
+"Patch '%1%' is optioneel. Gebruik '%2%' om het te installeren of '%3%' om "
+"alle optionele patches mee te nemen."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1052,7 +1052,7 @@ msgstr "Conflict toevoegen: '%s'."
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Bedoelde u %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1684,8 +1684,8 @@ msgstr[1] "te verwijderen pakketten"
 #: src/Summary.cc:1348
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "te wijzigen van leverancier"
-msgstr[1] "te wijzigen van leverancier"
+msgstr[0] "wijziging van leverancier"
+msgstr[1] "wijziging van leverancier"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1351
@@ -1974,7 +1974,7 @@ msgstr ""
 #: src/repos.cc:352
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Fout bij ophalen van metadata voor '%s'."
+msgstr "Fout bij ophalen van metadata voor '%s':"
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
@@ -1983,7 +1983,7 @@ msgstr "Bouwen van broncache forceren"
 #: src/repos.cc:390
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
-msgstr "Fout bij analyseren van metadata voor '%s'."
+msgstr "Fout bij analyseren van metadata voor '%s':"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: src/repos.cc:392
@@ -2323,7 +2323,7 @@ msgstr "Controleer of de opgegeven URI toegankelijk is."
 
 #: src/repos.cc:1607
 msgid "Unknown problem when adding repository:"
-msgstr "Onbekend probleem bij toevoegen van installatiebron."
+msgstr "Onbekend probleem bij toevoegen van installatiebron:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
@@ -2339,7 +2339,7 @@ msgstr ""
 #: src/repos.cc:1622
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
-msgstr "Installatiebron '%s' is met succes toegevoegd:"
+msgstr "Installatiebron '%s' is met succes toegevoegd"
 
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:1630
@@ -2757,16 +2757,16 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Overwegen van %1% uit %2% toepasbare patch:"
+msgstr[1] "Overwegen van %1% uit %2% toepasbare patches:"
 
 #. translator: stats table header
 #: src/update.cc:333
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% toepasbare patch gevonden:"
+msgstr[1] "%1% toepasbare patches gevonden:"
 
 #. translator: stats summary
 #: src/update.cc:343
@@ -2778,18 +2778,18 @@ msgstr[1] "%d patches geblokkeerd"
 
 #. translator: stats summary
 #: src/update.cc:351
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d patch geblokkeerd"
-msgstr[1] "%d patches geblokkeerd"
+msgstr[0] "%d patch optioneel"
+msgstr[1] "%d patches optioneel"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:355
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "gebruik '%1%' om optionele patches mee te nemen"
 
 #. translator: stats summary
 #: src/update.cc:364
@@ -2817,7 +2817,7 @@ msgstr "Categorie"
 #. translator: Table column header.
 #: src/update.cc:401
 msgid "Updatestack"
-msgstr ""
+msgstr "Bijwerkstapel"
 
 #. translator: Table column header.
 #: src/update.cc:403 src/update.cc:830
@@ -2827,7 +2827,7 @@ msgstr "Patches"
 #. translator: Table column header.
 #: src/update.cc:405
 msgid "Locked"
-msgstr ""
+msgstr "Geblokkeerd"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2836,7 +2836,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:411
 msgid "Included categories"
-msgstr ""
+msgstr "Meegenomen categorieën"
 
 #. Translator: Patch status: needed, optional, unwanted, applied, not needed
 #: src/update.cc:474
@@ -2844,9 +2844,8 @@ msgid "unwanted"
 msgstr "ongewenst"
 
 #: src/update.cc:476
-#, fuzzy
 msgid "optional"
-msgstr "ps [opties]"
+msgstr "optioneel"
 
 #: src/update.cc:477
 msgid "needed"
@@ -2897,11 +2896,9 @@ msgstr ""
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:720
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr ""
-"De volgende bijwerkingen van softwarebeheer zullen eerst worden "
-"geïnstalleerd:"
+"Benodigde elementen voor softwarebeheer zullen eerst worden geïnstalleerd:"
 
 #: src/update.cc:729 src/update.cc:968
 msgid "No updates found."
@@ -2940,7 +2937,7 @@ msgstr "Arch"
 
 #: src/update.cc:981
 msgid "Issue"
-msgstr "Issue"
+msgstr "Probleem"
 
 #: src/update.cc:981
 msgid "No."
@@ -2992,14 +2989,17 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"Of van toepassing zijnde optionele patches behandeld moeten worden als "
+"benodigd of worden uitgesloten."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "De standaard is om optionele patches uit te sluiten."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "De standaard is om optionele patches mee te nemen."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3370,8 +3370,8 @@ msgstr "Afgedwongen instelling"
 #: src/Zypper.cc:929
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
-"Tekenreeks met gebruikergegevens mag geen niet-afdrukbare of nieuwe-regel "
-"tekens bevatten."
+"Tekenreeks met gebruikersgegevens mag geen niet-afdrukbare of nieuwe-regel "
+"tekens bevatten!"
 
 #: src/Zypper.cc:953 src/Zypper.cc:3227
 msgid "Entering non-interactive mode."
@@ -3735,7 +3735,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3753,7 +3753,7 @@ msgstr ""
 "  Opdrachtopties:\n"
 "-t, --type <type>       type service (%s).\n"
 "-d, --disable           voeg de service toe als uitgeschakeld.\n"
-"-n, --name <alias>      specificeer een beschrijvende naam voor de service.\n"
+"-n, --name <naam>      specificeer een beschrijvende naam voor de service.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3777,7 +3777,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3821,7 +3821,7 @@ msgstr ""
 "service\n"
 "-R, --no-refresh               schakel het automatisch vernieuwen van de "
 "service uit\n"
-"-n, --name                     geef een beschrijvende naam voor de service.\n"
+"-n, --name <naam>              geef een beschrijvende naam voor de service.\n"
 "\n"
 "-i, --ar-to-enable <alias>     voeg een RIS-service installatiebron toe om "
 "te activeren.\n"
@@ -3831,10 +3831,10 @@ msgstr ""
 "te activeren.\n"
 "-J, --rr-to-disable <alias>    verwijder een RIS-service installatiebron om "
 "te deactiveren.\n"
-"-k, --keep-packages            leeg de lijst van RIS-installatiebronnen om "
-"te activeren.\n"
-"-K, --no-keep-packages         leeg de lijst van RIS-installatiebronnen om "
-"te deactiveren.\n"
+"-k, --cl-to-enable            leeg de lijst van RIS-installatiebronnen om te "
+"activeren.\n"
+"-K, --cl-to-disable         leeg de lijst van RIS-installatiebronnen om te "
+"deactiveren.\n"
 "\n"
 "-a, --all                      doe wijzigingen op alle services\n"
 "-l, --local                    doe wijzigingen op alle lokale services\n"
@@ -4026,7 +4026,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4064,15 +4064,15 @@ msgstr ""
 "-r, --refresh             activeer het automatisch vernieuwen van de bron\n"
 "-R, --no-refresh          schakel het automatisch vernieuwen van de bron "
 "uit\n"
-"-n, --name                stel een beschrijvende naam in voor de "
+"-n, --name <naam>         stel een beschrijvende naam in voor de "
 "installatiebron\n"
 "-p, --priority <geheel getal> zet de prioriteit van de bron\n"
 "-k, --keep-packages       schakel het cachen van RPM-bestanden in\n"
 "-K, --no-keep-packages    schakel het cachen van RPM-bestanden uit\n"
-"-g, --gpgcheck            schakel GPG-ccontrole in voor deze "
-"installatiebron.\n"
-"-G, --no-gpgcheck         schakel GPG-controle uit voor deze "
-"installatiebron.\n"
+"-g, --gpgcheck            schakel GPG-ccontrole in voor deze installatiebron."
+"\n"
+"-G, --no-gpgcheck         schakel GPG-controle uit voor deze installatiebron."
+"\n"
 "\n"
 "-a, --all                 doe wijzigingen op alle installatiebronnen\n"
 "-l, --local               doe wijzigingen op alle lokale installatiebronnen\n"
@@ -4392,63 +4392,77 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [OPTIES]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Toon alle van toepassing zijnde patches."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Toon van toepassing zijnde patches voor Bugzilla issues."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Toon van toepassing zijnde patches voor CVE issues."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=STRING]\n"
+"Zoek naar issues overeenkomend met de gespecificeerde tekenreeks."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <YYYY-MM-DD>\n"
+"Toon alleen patches aangemeld tot op, maar niet inclusief, de "
+"gespecificeerde datum."
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <CATEGORY>\n"
+"Toon alleen patches met deze categorie."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <ERNST>\n"
+"Toon alleen patches met deze ernst."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Toon alle patches, niet alleen van toepassing zijnden."
 
 #: src/Zypper.cc:2310
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
-"    --from <alias|#|URI>        beperk bijwerken tot de gespecificeerde "
-"installatiebron.\n"
+"-r, --repo <ALIAS|#|URI>\n"
+"Toon alleen patches uit de gespecificeerde installatiebron."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4632,7 +4646,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [OPTIES]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4640,22 +4654,25 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Toon statistiek over van toepassing zijnde patches. Het commando geeft 100 "
+"terug als benodigde patches zijn gevonden, 101 als er minstens één benodigde "
+"patch voor beveiliging is."
 
 #: src/Zypper.cc:2476
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
-"    --from <alias|#|URI>        beperk bijwerken tot de gespecificeerde "
-"installatiebron.\n"
+"-r, --repo <ALIAS|#|URI>\n"
+"Controleer op patches alleen in de gespecificeerde installatoebron."
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "Op patches controleren die het pakketbeheer zelf beïnvloeden."
+msgstr ""
+"--updatestack-only\n"
+"Op patches controleren die het pakketbeheer zelf beïnvloeden."
 
 #: src/Zypper.cc:2494
 msgid ""
