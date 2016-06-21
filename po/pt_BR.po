@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-21 12:59+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-21 13:10+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -2661,8 +2661,8 @@ msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
 msgstr ""
-"O repositório '%s' parece estar desatualizado. Considere utilizar um "
-"servidor ou mirror diferente."
+"O repositório '%s' parece estar desatualizado. Convém utilizar um servidor "
+"ou espelho diferente."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:3150
@@ -2676,7 +2676,7 @@ msgstr "Lendo os pacotes instalados..."
 
 #: src/repos.cc:3170
 msgid "Problem occurred while reading the installed packages:"
-msgstr "Ocorreu um problema ao ler os pacotes instalados:"
+msgstr "Problema ao ler os pacotes instalados:"
 
 #: src/update.cc:84
 #, c-format, boost-format
@@ -2684,7 +2684,7 @@ msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr ""
-"Ignorando %s sem argumento porque uma opção similar com um argumento foi "
+"Ignorando %s sem argumento, pois uma opção similar com um argumento foi "
 "especificada."
 
 #. translator: stats table header (plural number is %2%)
@@ -2792,7 +2792,7 @@ msgstr "aplicada"
 
 #: src/update.cc:480
 msgid "not needed"
-msgstr "não necessário"
+msgstr "desnecessário"
 
 #: src/update.cc:486
 msgid "undetermined"
