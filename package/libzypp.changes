@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Jun 21 11:11:03 CEST 2016 - ma@suse.de
+
+- Filter duplicate resolver solutions (bsc#985674)
+- zypp.conf: Add download.media_mountdir: Path where media are
+  preferably mounted or downloaded (FATE#319462)
+- version 16.0.5 (0)
+
+-------------------------------------------------------------------
 Wed Jun 15 12:36:27 CEST 2016 - ma@suse.de
 
 - Fix bug in removeRepository which may keep an empty .repo file
