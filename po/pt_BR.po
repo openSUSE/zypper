@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-21 19:19+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-21 19:21+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -6518,7 +6518,7 @@ msgstr "Necessário"
 
 #: src/utils/misc.cc:145
 msgid "Not Needed"
-msgstr "Não necessário"
+msgstr "Desnecessário"
 
 #: src/utils/misc.cc:195
 msgid "Specified local path does not exist or is not accessible."
