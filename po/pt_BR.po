@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-21 20:25+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-21 20:40+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -3166,7 +3166,7 @@ msgstr ""
 "\tsource-install, si\tInstalar pacotes fonte e suas dependências\n"
 "\t\t\t\tde compilação.\n"
 "\tinstall-new-recommends, inr\n"
-"\t\t\t\tInstalar novos pacotes adicionados\n"
+"\t\t\t\tInstalar pacotes recém adicionados\n"
 "\t\t\t\trecomendados pelos pacotes instalados.\n"
 
 #: src/Zypper.cc:513
@@ -3225,7 +3225,7 @@ msgstr ""
 "\taddlock, al\t\tAdicionar um bloqueio de pacote.\n"
 "\tremovelock, rl\t\tRemover um bloqueio de pacote.\n"
 "\tlocks, ll\t\tListar os bloqueios de pacotes atuais.\n"
-"\tcleanlocks, cl\t\tRemover os bloqueios não usados.\n"
+"\tcleanlocks, cl\t\tRemover bloqueios não usados.\n"
 
 #: src/Zypper.cc:544
 msgid ""
@@ -4998,8 +4998,8 @@ msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
-"Liste os processos em execução que ainda podem usar arquivos e bibliotecas "
-"apagados por upgrades recentes."
+"Lista os processos em execução que ainda podem usar arquivos e bibliotecas "
+"apagados por atualizações recentes."
 
 #. translators: -s, --short
 #: src/Zypper.cc:2947
@@ -5495,9 +5495,8 @@ msgid ""
 "for more information about this command."
 msgstr ""
 "Você está prestes a fazer uma atualização da distribuição com todos os "
-"repositórios habilitados. Tenha certeza que estes repositórios são "
-"compatíveis antes de continuar. Veja '%s' para mais informações sobre este "
-"comando."
+"repositórios habilitados. Verifique se esses repositórios são compatíveis "
+"antes de continuar. Consulte '%s' para mais informações sobre este comando."
 
 #: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
@@ -5656,7 +5655,7 @@ msgstr "Verificando as dependências..."
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:378
 msgid "Computing upgrade..."
-msgstr "Computando a atualização..."
+msgstr "Calculando a atualização..."
 
 #: src/solve-commit.cc:392
 msgid "Generating solver test case..."
@@ -5700,9 +5699,9 @@ msgid ""
 "upgrade. You may wish to check and restart some of them. Run '%s' to list "
 "these programs."
 msgstr ""
-"Existem alguns programas em execução que podem usar arquivos removidos pela "
-"atualização recente. Você pode querer verificar e reiniciar alguns deles. "
-"Execute '%s' para listar estes programas."
+"Existem alguns programas em execução que podem utilizar arquivos apagados "
+"pela atualização recente. Convém verificar e reiniciar alguns deles. Execute "
+"'%s' para listá-los."
 
 #: src/solve-commit.cc:468
 msgid "Update notifications were received from the following packages:"
@@ -5723,7 +5722,7 @@ msgstr "Visualizar as notificações agora?"
 
 #: src/solve-commit.cc:532
 msgid "Computing distribution upgrade..."
-msgstr "Computando a atualização da distribuição..."
+msgstr "Calculando a atualização da distribuição..."
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
