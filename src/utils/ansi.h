@@ -26,6 +26,12 @@ bool do_colors();
 namespace ansi
 {
 #define ZYPPER_TRACE_SGR 0
+#undef ESC
+#if ( ZYPPER_TRACE_SGR < 2 )
+#define ESC "\033"
+#else
+#define ESC "@"
+#endif
   ///////////////////////////////////////////////////////////////////
   /// \class ColorTraits<_Tp>
   /// \brief Traits class to enable custom \ref Color construction
@@ -206,9 +212,9 @@ namespace ansi
     static const std::string & SGRReset()
     {
 #if ( ZYPPER_TRACE_SGR )
-      static const std::string _reset( "\033[0m[!]" );
+      static const std::string _reset( ESC"[0m[!]" );
 #else
-      static const std::string _reset( "\033[0m" );
+      static const std::string _reset( ESC"[0m" );
 #endif
       static const std::string _noreset( "" );
       if(!do_colors()) return _noreset;
@@ -312,7 +318,7 @@ namespace ansi
       std::string & ret( _def[color_r._comp.uid] );
       if ( ret.empty() )
       {
-	ret += "\033[";
+	ret += ESC"[";
 	switch ( color_r._comp.attr )
 	{
 	  case Attr::Normal:	ret += "22;27;";	break;
