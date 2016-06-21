@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-21 10:13+0000\n"
+"PO-Revision-Date: 2016-06-21 13:40+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
@@ -34,7 +34,7 @@ msgstr "Hal-uitzondering"
 
 #: zypp/Url.cc:114
 msgid "Invalid LDAP URL query string"
-msgstr "Ongeldige LDAP-URL-queryreeks"
+msgstr "Ongeldige LDAP-URL-querytekenreeks"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
@@ -107,7 +107,7 @@ msgstr "Verbetert"
 
 #: zypp/Dep.cc:104
 msgid "Supplements"
-msgstr "Maakt vollediger"
+msgstr "Voegt toe"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -143,7 +143,7 @@ msgstr "Fout bij het zenden van een melding over een bijwerkbericht."
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
-msgstr "Bericht over een nieuwe opwaardering"
+msgstr "Bericht over een nieuw element voor bijwerken"
 
 #: zypp/target/TargetImpl.cc:1219 zypp/target/TargetImpl.cc:1288
 #: zypp/target/TargetImpl.cc:1640
@@ -269,7 +269,7 @@ msgstr "Ondertekening is OK"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2367
 msgid "Unknown type of signature"
-msgstr "Onbekende type ondertekening"
+msgstr "Onbekend type ondertekening"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
@@ -357,7 +357,7 @@ msgstr "Kan map voor metadata-cache niet aanmaken."
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "Cache van bron '%s' bouwen"
+msgstr "Cache van installatiebron '%s' wordt gebouwd"
 
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
@@ -371,7 +371,7 @@ msgstr "Kan installatiebron (%d) niet opslaan in de cache."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
-msgstr "Niet behandeld installatiebrontype"
+msgstr "Niet behandeld type installatiebron"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -393,7 +393,7 @@ msgstr "Onbekend fout bij lezen van '%s'"
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "Bron '%s' toevoegen"
+msgstr "Bron '%s' wordt toegevoegd"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
@@ -404,7 +404,7 @@ msgstr "Ongeldige naam van installatiebronbestand bij '%s'"
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Bron '%s' verwijderen"
+msgstr "Bron '%s' wordt verwijderd"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
@@ -536,7 +536,7 @@ msgstr "Kan '%s' niet uitvoeren (%s)."
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr "Kan geen fork  doen (%s)."
+msgstr "Kan geen fork  (%s) uitvoeren."
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
@@ -851,7 +851,7 @@ msgstr "Canada"
 #. :CAN:124:
 #: zypp/CountryCode.cc:195
 msgid "Cocos (Keeling) Islands"
-msgstr "Cocos (Keeling) eilanden"
+msgstr "Cocos(Keeling)eilanden"
 
 #. :CCK:166:
 #. :CAF:140:
@@ -917,7 +917,7 @@ msgstr "Kaapverdië"
 #. :CPV:132:
 #: zypp/CountryCode.cc:209
 msgid "Christmas Island"
-msgstr "Christmas Eiland"
+msgstr "Christmas-eiland"
 
 #. :CXR:162:
 #: zypp/CountryCode.cc:210
@@ -1081,7 +1081,7 @@ msgstr "Gambia"
 #. :GMB:270:
 #: zypp/CountryCode.cc:242
 msgid "Guinea"
-msgstr "Guinea"
+msgstr "Guinee"
 
 #. :GIN:324:
 #: zypp/CountryCode.cc:243
@@ -1091,7 +1091,7 @@ msgstr "Guadeloupe"
 #. :GLP:312:
 #: zypp/CountryCode.cc:244
 msgid "Equatorial Guinea"
-msgstr "Equatoriaal Guinea"
+msgstr "Equatoriaal-Guinea"
 
 #. :GNQ:226:
 #: zypp/CountryCode.cc:245
@@ -1354,7 +1354,7 @@ msgstr "Montenegro"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
-msgstr "Saint Martin"
+msgstr "Sint-Maarten"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
@@ -1820,7 +1820,7 @@ msgstr "Oezbekistan"
 #. :UZB:860:
 #: zypp/CountryCode.cc:390
 msgid "Holy See (Vatican City State)"
-msgstr "Holy See (Vatican City State)"
+msgstr "Staat Vaticaanstad"
 
 #. :VAT:336:
 #: zypp/CountryCode.cc:391
@@ -1840,7 +1840,7 @@ msgstr "Britse Maagdeneilanden"
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr "Maagdeneilanden, VS"
+msgstr "Maagdeneilanden, V.S."
 
 #. :VIR:850:
 #: zypp/CountryCode.cc:395
@@ -1920,7 +1920,7 @@ msgstr "Adangme"
 #. language code: ady
 #: zypp/LanguageCode.cc:171
 msgid "Adyghe"
-msgstr "Adyghe"
+msgstr "Adygees"
 
 #. language code: afa
 #: zypp/LanguageCode.cc:173
@@ -1940,7 +1940,7 @@ msgstr "Afrikaans"
 #. language code: ain
 #: zypp/LanguageCode.cc:179
 msgid "Ainu"
-msgstr "Ainu"
+msgstr "Aino"
 
 #. language code: aka ak
 #: zypp/LanguageCode.cc:181
@@ -2110,7 +2110,7 @@ msgstr "Baskisch"
 #. language code: bas
 #: zypp/LanguageCode.cc:253
 msgid "Basa"
-msgstr "Basa"
+msgstr "Balinees"
 
 #. language code: bat
 #: zypp/LanguageCode.cc:255
