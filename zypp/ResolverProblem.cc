@@ -33,6 +33,25 @@ namespace zypp
 {
   IMPL_PTR_TYPE(ResolverProblem);
 
+  /////////////////////////////////////////////////////////////////////////
+  namespace
+  {
+    // HACK for bsc#985674: filter duplicate solutions
+    //
+    inline bool solutionInList( const ProblemSolutionList & solutions_r, const ProblemSolution_Ptr & solution_r )
+    {
+      for ( const ProblemSolution_Ptr & solution : solutions_r )
+      {
+	if ( solution->description()	== solution_r->description()
+	  && solution->details()	== solution_r->details()
+	  && solution->actions().size()	== solution_r->actions().size() )
+	  return true;
+      }
+      return false;
+    }
+  } // namespace
+  /////////////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
   /// \class ResolverProblem::Impl
   /// \brief ResolverProblem implementation.
@@ -97,10 +116,13 @@ namespace zypp
 
   void ResolverProblem::addSolution( ProblemSolution_Ptr solution, bool inFront )
   {
-    if (inFront)
-    { _pimpl->_solutions.push_front( solution ); }
-    else
-    { _pimpl->_solutions.push_back( solution ); }
+    if ( ! solutionInList( _pimpl->_solutions, solution ) )	// bsc#985674: filter duplicate solutions
+    {
+      if (inFront)
+      { _pimpl->_solutions.push_front( solution ); }
+      else
+      { _pimpl->_solutions.push_back( solution ); }
+    }
   }
 
 
