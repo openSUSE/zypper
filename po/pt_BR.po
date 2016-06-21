@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2016-06-21 19:57+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-21 20:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -2987,7 +2987,7 @@ msgstr "Este comando não tem opções adicionais."
 
 #: src/Zypper.cc:406 src/Zypper.cc:1345
 msgid "Unexpected exception."
-msgstr "Exceção não esperada."
+msgstr "Exceção inesperada."
 
 #: src/Zypper.cc:428
 msgid ""
@@ -3109,7 +3109,7 @@ msgid ""
 msgstr ""
 "  Comandos:\n"
 "\thelp, ?\t\t\tExibir a ajuda.\n"
-"\tshell, sh\t\tAceitar múltiplos comandos de uma vez.\n"
+"\tshell, sh\t\tAceitar vários comandos por vez.\n"
 
 #: src/Zypper.cc:484
 msgid ""
