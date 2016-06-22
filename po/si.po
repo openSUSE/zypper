@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 11:28+0200\n"
+"POT-Creation-Date: 2016-06-22 12:06+0200\n"
 "PO-Revision-Date: 2005-07-29 15:37+0530\n"
 "Last-Translator: i18n@suse.de\n"
 "Language-Team: Sinhala <i18n@suse.de>\n"
@@ -421,7 +421,7 @@ msgid "Error"
 msgstr ""
 
 #. translators: name (general header)
-#: src/info.cc:116 src/info.cc:403 src/repos.cc:961 src/repos.cc:1094
+#: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
 #: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
@@ -429,32 +429,32 @@ msgid "Name"
 msgstr ""
 
 #. translators: package version (header)
-#: src/info.cc:117 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/info.cc:74 src/search.cc:70 src/search.cc:377 src/search.cc:514
 #: src/search.cc:576
 msgid "Version"
 msgstr ""
 
 #. translators: package architecture (header)
-#: src/info.cc:118 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
 msgstr ""
 
-#: src/info.cc:119
+#: src/info.cc:76
 msgid "Vendor"
 msgstr ""
 
 #. translators: package summary (header)
-#: src/info.cc:124 src/search.cc:233 src/utils/misc.cc:255
+#: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
 #: src/utils/misc.cc:296
 msgid "Summary"
 msgstr ""
 
-#: src/info.cc:125 src/Zypper.cc:5246
+#: src/info.cc:82 src/Zypper.cc:5246
 msgid "Description"
 msgstr ""
 
-#: src/info.cc:138
+#: src/info.cc:136
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
@@ -462,77 +462,89 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:169
+#: src/info.cc:168
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr ""
 
-#: src/info.cc:191
+#: src/info.cc:190
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr ""
 
 #. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-#: src/info.cc:207
+#: src/info.cc:206
 #, c-format, boost-format
 msgid "Info for type '%s' not implemented."
 msgstr ""
 
 #. translators: package's repository (header)
-#: src/info.cc:248 src/info.cc:387 src/info.cc:459 src/update.cc:798
+#: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
 #: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
 #: src/locks.cc:107 src/utils/misc.cc:249
 msgid "Repository"
 msgstr ""
 
+#: src/info.cc:255
+msgid "Support Level"
+msgstr ""
+
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:259 src/info.cc:391 src/info.cc:480 src/Summary.cc:1207
+#: src/info.cc:258 src/info.cc:390 src/info.cc:479 src/Summary.cc:1207
 msgid "Installed"
 msgstr ""
 
-#: src/info.cc:261 src/info.cc:312 src/utils/misc.cc:254 src/utils/misc.cc:295
+#: src/info.cc:260 src/info.cc:311 src/utils/misc.cc:254 src/utils/misc.cc:295
 msgid "Status"
 msgstr ""
 
-#: src/info.cc:266
+#: src/info.cc:265
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr ""
 
-#: src/info.cc:270
+#: src/info.cc:269
 msgid "up-to-date"
 msgstr ""
 
-#: src/info.cc:274
+#: src/info.cc:273
 msgid "not installed"
+msgstr ""
+
+#: src/info.cc:275
+msgid "Installed Size"
 msgstr ""
 
 #. translator: Table column header.
 #. Name
-#: src/info.cc:315 src/update.cc:350 src/utils/misc.cc:251
+#: src/info.cc:314 src/update.cc:350 src/utils/misc.cc:251
 #: src/utils/misc.cc:292
 msgid "Category"
 msgstr ""
 
-#: src/info.cc:316 src/utils/misc.cc:252 src/utils/misc.cc:293
+#: src/info.cc:315 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
 msgstr ""
 
-#: src/info.cc:320
+#: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr ""
 
 #. print interactive flags the same style as list-patches
-#: src/info.cc:328 src/info.cc:331 src/utils/misc.cc:253 src/utils/misc.cc:294
+#: src/info.cc:327 src/info.cc:330 src/utils/misc.cc:253 src/utils/misc.cc:294
 msgid "Interactive"
 msgstr ""
 
-#: src/info.cc:355 src/search.cc:318
+#: src/info.cc:354 src/search.cc:318
 msgid "Recommended"
 msgstr ""
 
-#: src/info.cc:357 src/search.cc:320
+#: src/info.cc:356 src/search.cc:320
 msgid "Suggested"
+msgstr ""
+
+#: src/info.cc:391
+msgid "Visible to User"
 msgstr ""
 
 #. TranslatorExplanation S stands for Status
@@ -542,91 +554,79 @@ msgstr ""
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:403 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:402 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr ""
 
 #. translators: type (general header)
-#: src/info.cc:403 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr ""
 
-#: src/info.cc:403 src/search.cc:379
+#: src/info.cc:402 src/search.cc:379
 msgid "Dependency"
 msgstr ""
 
-#: src/info.cc:418
+#: src/info.cc:417
 msgid "Contents"
 msgstr ""
 
-#: src/info.cc:420
+#: src/info.cc:419
 msgid "(empty)"
 msgstr ""
 
-#: src/info.cc:473
+#: src/info.cc:472
 msgid "Flavor"
 msgstr ""
 
-#: src/info.cc:478
+#: src/info.cc:477
 msgid "Short Name"
 msgstr ""
 
-#: src/info.cc:482 src/search.cc:578
+#: src/info.cc:481 src/search.cc:578
 msgid "Is Base"
 msgstr ""
 
-#: src/info.cc:486
+#: src/info.cc:485
 msgid "End of Support"
 msgstr ""
 
-#: src/info.cc:486 src/info.cc:494 src/info.cc:525
+#: src/info.cc:485 src/info.cc:493 src/info.cc:524
 msgid "undefined"
 msgstr ""
 
-#: src/info.cc:489
+#: src/info.cc:488
 msgid "CPE Name"
 msgstr ""
 
-#: src/info.cc:496
+#: src/info.cc:495
 msgid "invalid CPE Name"
 msgstr ""
 
-#: src/info.cc:499
+#: src/info.cc:498
 msgid "Update Repositories"
 msgstr ""
 
-#: src/info.cc:507
+#: src/info.cc:506
 msgid "Content Id"
 msgstr ""
 
-#: src/info.cc:514
+#: src/info.cc:513
 msgid "Provided by enabled repository"
 msgstr ""
 
-#: src/info.cc:520
+#: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr ""
 
-#: src/info.cc:392
-msgid "Visible to User"
-msgstr ""
-
-#: src/info.cc:319
+#: src/info.cc:318
 msgid "Reboot Required"
 msgstr ""
 
-#: src/info.cc:317
+#: src/info.cc:316
 msgid "Created On"
-msgstr ""
-
-#: src/info.cc:276
-msgid "Installed Size"
-msgstr ""
-
-#: src/info.cc:256
-msgid "Support Level"
 msgstr ""
 
 #: src/subcommand.cc:51
