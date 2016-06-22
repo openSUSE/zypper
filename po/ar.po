@@ -12,16 +12,17 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-05 16:15+0200\n"
-"PO-Revision-Date: 2015-06-04 08:39+0300\n"
+"PO-Revision-Date: 2016-06-22 00:32+0000\n"
 "Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
-"Language-Team: سوزي\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -271,9 +272,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "تشغيل: %s  (%s، %s)"
 
 #: src/callbacks/rpm.h:207
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "إزالة %s-%s"
+msgstr "تتم إزالة %s-%s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:211
@@ -287,9 +288,9 @@ msgid "Removal of %s failed:"
 msgstr "إزالة %s فشلت:"
 
 #: src/callbacks/rpm.h:276
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "تثبيت: %s-%s"
+msgstr "يتم تثبيت: %s-%s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:280
@@ -298,9 +299,9 @@ msgid "Installing: %s-%s"
 msgstr "تثبيت: %s-%s"
 
 #: src/callbacks/rpm.h:303
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "تثبيت %s-%s فشل:"
+msgstr "فشل تثبيت %s-%s :"
 
 #. what's actually needed here
 #: src/callbacks/rpm.h:304
@@ -433,12 +434,12 @@ msgstr "قبول الحزمة على الرغم من وجود الخطأ."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "تصفية قيمة فئات الخطورة '%1%'."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "تصفية قيمة شدة الخطورة '%1%'."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
