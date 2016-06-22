@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-05 16:15+0200\n"
+"POT-Creation-Date: 2016-06-22 09:48+0200\n"
 "PO-Revision-Date: 2015-07-12 17:04+0900\n"
 "Last-Translator: Yunseok Choi <xein@naver.com>\n"
 "Language-Team: Korean <xein@naver.com>\n"
@@ -187,7 +187,7 @@ msgstr "%s 파일에 대한 요약이 없습니다."
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
-#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:418 src/solve-commit.cc:668
+#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:424 src/solve-commit.cc:668
 msgid "Continue?"
 msgstr "계속하시겠습니까?"
 
@@ -260,51 +260,50 @@ msgstr "차단을 해제하시겠습니까? 아니면 폐기하시겠습니까?"
 msgid "Running: %s  (%s, %s)"
 msgstr "실행 중: %s  (%s, %s)"
 
-#: src/callbacks/rpm.h:207
+#: src/callbacks/rpm.h:208
 #, fuzzy, c-format, boost-format
 msgid "Removing %s"
 msgstr "%s-%s 제거 중"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:211
+#: src/callbacks/rpm.h:213
 #, c-format, boost-format
 msgid "Removing %s-%s"
 msgstr "%s-%s 제거 중"
 
-#: src/callbacks/rpm.h:234
+#: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "%s 의 제거에 실패:"
 
-#: src/callbacks/rpm.h:276
+#: src/callbacks/rpm.h:279
 #, fuzzy, c-format, boost-format
 msgid "Installing: %s"
 msgstr "설치 중: %s-%s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:280
+#: src/callbacks/rpm.h:284
 #, c-format, boost-format
 msgid "Installing: %s-%s"
 msgstr "설치 중: %s-%s"
 
-#: src/callbacks/rpm.h:303
+#: src/callbacks/rpm.h:308
 #, fuzzy, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "%s-%s 의 설치에 실패:"
 
-#. what's actually needed here
-#: src/callbacks/rpm.h:304
+#: src/callbacks/rpm.h:310
 #, c-format, boost-format
 msgid "Installation of %s-%s failed:"
 msgstr "%s-%s 의 설치에 실패:"
 
 #. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:350
+#: src/callbacks/rpm.h:356
 msgid "Checking for file conflicts:"
 msgstr "파일 충돌 확인:"
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:384
+#: src/callbacks/rpm.h:390
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -316,7 +315,7 @@ msgstr ""
 "조하십시오."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:391
+#: src/callbacks/rpm.h:397
 #, boost-format
 msgid ""
 "The following package had to be excluded from file conflicts check because "
@@ -327,18 +326,18 @@ msgid_plural ""
 msgstr[0] ""
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:402
+#: src/callbacks/rpm.h:408
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] ""
 
-#: src/callbacks/rpm.h:410
+#: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
 msgstr "충돌하는 파일이 바뀝니다."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:416
+#: src/callbacks/rpm.h:422
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -490,7 +489,7 @@ msgstr "%s %s에 대한 정보:"
 msgid "Info for type '%s' not implemented."
 msgstr "'%s' 형식에 대한 정보는 아직 제공되지 않습니다."
 
-#: src/info.cc:248 src/info.cc:386 src/info.cc:458
+#: src/info.cc:248 src/info.cc:390 src/info.cc:462
 msgid "Repository: "
 msgstr "저장소:"
 
@@ -498,7 +497,7 @@ msgstr "저장소:"
 msgid "Support Level: "
 msgstr "지원 수준: "
 
-#: src/info.cc:259 src/info.cc:390
+#: src/info.cc:259 src/info.cc:394
 msgid "Installed: "
 msgstr "설치됨: "
 
@@ -535,27 +534,28 @@ msgstr "심각도: "
 msgid "Created On: "
 msgstr "제작됨: "
 
-#: src/info.cc:320
+#: src/info.cc:321
 msgid "Reboot Required: "
 msgstr "시스템 다시 시작 필요: "
 
-#: src/info.cc:321
+#: src/info.cc:322
 msgid "Package Manager Restart Required"
 msgstr "꾸러미 관리자 재시작 필요"
 
-#: src/info.cc:330
+#. print interactive flags the same style as list-patches
+#: src/info.cc:331 src/info.cc:334
 msgid "Interactive: "
 msgstr "대화형: "
 
-#: src/info.cc:354 src/search.cc:383
+#: src/info.cc:358 src/search.cc:318
 msgid "Recommended"
 msgstr "권장사항"
 
-#: src/info.cc:356 src/search.cc:385
+#: src/info.cc:360 src/search.cc:320
 msgid "Suggested"
 msgstr "제안"
 
-#: src/info.cc:391
+#: src/info.cc:395
 msgid "Visible to User: "
 msgstr "사용자에게 표시: "
 
@@ -566,87 +566,87 @@ msgstr "사용자에게 표시: "
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:910 src/search.cc:65 src/search.cc:232
-#: src/search.cc:439 src/search.cc:575 src/search.cc:634
+#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
 # src/isdn/complex.ycp:266 src/modem/complex.ycp:207
 # src/provider/complex.ycp:186
 #. translators: name (general header)
-#: src/info.cc:402 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:665 src/update.cc:915 src/update.cc:1050 src/Zypper.cc:5246
-#: src/search.cc:67 src/search.cc:233 src/search.cc:325 src/search.cc:440
-#: src/search.cc:577 src/search.cc:639 src/locks.cc:104
+#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
+#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
+#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
+#: src/utils/misc.cc:250
 msgid "Name"
 msgstr "이름"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
-#: src/search.cc:69 src/search.cc:236 src/locks.cc:107
+#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "형식"
 
-#: src/info.cc:402 src/search.cc:443
+#: src/info.cc:406 src/search.cc:379
 msgid "Dependency"
 msgstr "의존성"
 
-#: src/info.cc:417
+#: src/info.cc:421
 msgid "Contents"
 msgstr "내용"
 
-#: src/info.cc:419
+#: src/info.cc:423
 msgid "(empty)"
 msgstr "(비어있음)"
 
-#: src/info.cc:472
+#: src/info.cc:476
 msgid "Flavor"
 msgstr "Flavor"
 
 # src/isdn/complex.ycp:266 src/modem/complex.ycp:207
 # src/provider/complex.ycp:186
-#: src/info.cc:477
+#: src/info.cc:481
 msgid "Short Name"
 msgstr "짧은 이름"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:479 src/Summary.cc:1207 src/utils/misc.cc:138
+#: src/info.cc:483 src/Summary.cc:1207
 msgid "Installed"
 msgstr "설치됨"
 
-#: src/info.cc:481 src/search.cc:642
+#: src/info.cc:485 src/search.cc:578
 msgid "Is Base"
 msgstr "기본"
 
-#: src/info.cc:485
+#: src/info.cc:489
 msgid "End of Support"
 msgstr "지원 종료"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
+#: src/info.cc:489 src/info.cc:497 src/info.cc:528
 msgid "undefined"
 msgstr "정의되지 않음"
 
-#: src/info.cc:488
+#: src/info.cc:492
 msgid "CPE Name"
 msgstr "CPE 이름"
 
-#: src/info.cc:495
+#: src/info.cc:499
 msgid "invalid CPE Name"
 msgstr "CPE 이름이 잘못되었습니다."
 
-#: src/info.cc:498
+#: src/info.cc:502
 msgid "Update Repositories"
 msgstr "리포지토리 업데이트"
 
-#: src/info.cc:506
+#: src/info.cc:510
 msgid "Content Id"
 msgstr "컨텐트 ID"
 
-#: src/info.cc:513
+#: src/info.cc:517
 msgid "Provided by enabled repository"
 msgstr "활성화된 리포지토리에서 제공함"
 
-#: src/info.cc:519
+#: src/info.cc:523
 msgid "Not provided by any enabled repository"
 msgstr "활성화된 리포지토리에서 제공하지 않음"
 
@@ -2532,28 +2532,28 @@ msgid ""
 msgstr "인수에 같은 옵션이 지정되고 있기 때문에 인수가 없는 %s는 무시됩니다."
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:329
+#: src/update.cc:280
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
 msgstr[0] ""
 
 #. translator: stats table header
-#: src/update.cc:333
+#: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
 msgstr[0] ""
 
 #. translator: stats summary
-#: src/update.cc:343
+#: src/update.cc:294
 #, fuzzy, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
 msgstr[0] "%d 개의 패치가 필요함"
 
 #. translator: stats summary
-#: src/update.cc:351
+#: src/update.cc:302
 #, fuzzy, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -2561,43 +2561,43 @@ msgstr[0] "%d 개의 패치가 필요함"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:355
+#: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr ""
 
 #. translator: stats summary
-#: src/update.cc:364
+#: src/update.cc:315
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
 msgstr[0] "%d 개의 패치가 필요함"
 
 #. translator: stats summary
-#: src/update.cc:367
+#: src/update.cc:318
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
 msgstr[0] "%d 개의 보안 패치"
 
 #. translator: Table column header.
-#: src/update.cc:399 src/update.cc:665 src/update.cc:981 src/update.cc:1050
-#: src/search.cc:326
+#. Name
+#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
 msgid "Category"
 msgstr "범주"
 
 #. translator: Table column header.
-#: src/update.cc:401
+#: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
 
 #. translator: Table column header.
-#: src/update.cc:403 src/update.cc:830
+#: src/update.cc:354 src/update.cc:716
 msgid "Patches"
 msgstr "패치"
 
 #. translator: Table column header.
-#: src/update.cc:405
+#: src/update.cc:356
 msgid "Locked"
 msgstr ""
 
@@ -2606,141 +2606,86 @@ msgstr ""
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:411
+#: src/update.cc:362
 msgid "Included categories"
 msgstr ""
 
-#. Translator: Patch status: needed, optional, unwanted, applied, not needed
-#: src/update.cc:474
-msgid "unwanted"
-msgstr ""
-
-#: src/update.cc:476
-#, fuzzy
-msgid "optional"
-msgstr "ps [옵션]"
-
-#: src/update.cc:477
-msgid "needed"
-msgstr "필요함"
-
-#: src/update.cc:479
-msgid "applied"
-msgstr ""
-
-#: src/update.cc:480
-msgid "not needed"
-msgstr "필요하지 않음"
-
-#: src/update.cc:486
-msgid "undetermined"
-msgstr ""
-
-#. translators: package's repository (header)
-#: src/update.cc:664 src/update.cc:912 src/search.cc:75 src/search.cc:324
-#: src/search.cc:442 src/search.cc:576 src/search.cc:635 src/locks.cc:107
-msgid "Repository"
-msgstr "저장소"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050 src/search.cc:327
-msgid "Severity"
-msgstr "긴급"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050
-msgid "Interactive"
-msgstr "대화형"
-
-#: src/update.cc:665 src/update.cc:981 src/search.cc:328
-msgid "Status"
-msgstr "상태"
-
-#. translators: package summary (header)
-#: src/update.cc:665 src/update.cc:1050 src/search.cc:235
-msgid "Summary"
-msgstr "요약"
-
-#: src/update.cc:717
+#: src/update.cc:603
 msgid "The following software management updates will be installed first:"
 msgstr "다음의 소프트웨어 관리 업데이트를 먼저 설치합니다:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:720
+#: src/update.cc:606
 #, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr "다음의 소프트웨어 관리 업데이트를 먼저 설치합니다:"
 
-#: src/update.cc:729 src/update.cc:968
+#: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
 msgstr "업데이트 없음."
 
 #. translator: Table headline
-#: src/update.cc:736
+#: src/update.cc:621
 msgid "The following updates are also available:"
 msgstr "다음의 업데이트도 사용할 수 있습니다:"
 
-#: src/update.cc:828
+#: src/update.cc:714
 msgid "Package updates"
 msgstr "꾸러미 업데이트"
 
-#: src/update.cc:832
+#: src/update.cc:718
 msgid "Pattern updates"
 msgstr "패턴 업데이트"
 
-#: src/update.cc:834
+#: src/update.cc:720
 msgid "Product updates"
 msgstr "제품 업데이트"
 
-#: src/update.cc:920
+#. translators: package's repository (header)
+#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
+#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "저장소"
+
+#: src/update.cc:806
 msgid "Current Version"
 msgstr "현재 버전"
 
-#: src/update.cc:921
+#: src/update.cc:807
 msgid "Available Version"
 msgstr "사용 가능한 버전"
 
 #. translators: package architecture (header)
-#: src/update.cc:921 src/search.cc:73 src/search.cc:579 src/search.cc:641
+#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
 msgid "Arch"
 msgstr "Arch"
 
-#: src/update.cc:981
-msgid "Issue"
-msgstr "이슈"
-
-#: src/update.cc:981
-msgid "No."
-msgstr "번호."
-
-#: src/update.cc:981
-msgid "Patch"
-msgstr "패치"
-
-#: src/update.cc:1091
+#: src/update.cc:969
 msgid "No matching issues found."
 msgstr "일치하는 이슈가 없습니다."
 
-#: src/update.cc:1099
+#: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
 msgstr "이슈 번호와 관련된것이 발견되었습니다:"
 
-#: src/update.cc:1108
+#: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "다음의 패치에 패치에 관한 설명에 해당하는것이 있습니다:"
 
-#: src/update.cc:1177
+#: src/update.cc:1057
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "버그질라 이슈 번호 %s에 대한 수정은 발견되지 않았거나 필요하지 않은것입니다."
 
-#: src/update.cc:1179
+#: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
 "CVE 이슈 번호 %s에 대한 수정은 발견되지 않았거나 필요하지 않은것입니다."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1182
+#: src/update.cc:1062
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "%s 문제 번호 %s에 대한 수정 사항이 없거나 필요하지 않습니다."
@@ -5698,37 +5643,42 @@ msgid "No source packages to download."
 msgstr "다운로드할 소스 패키지가 없습니다."
 
 #. translators: package version (header)
-#: src/search.cc:71 src/search.cc:441 src/search.cc:578 src/search.cc:640
+#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
 msgid "Version"
 msgstr "버전"
 
-#: src/search.cc:138
+#: src/search.cc:137
 msgid "System Packages"
 msgstr "시스템 꾸러미"
 
-#: src/search.cc:403
+#. translators: package summary (header)
+#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
+msgid "Summary"
+msgstr "요약"
+
+#: src/search.cc:336
 msgid "No needed patches found."
 msgstr "필요한 패치 없음."
 
-#: src/search.cc:472
+#: src/search.cc:408
 msgid "No patterns found."
 msgstr "찾은 패턴이 없습니다."
 
-#: src/search.cc:569
+#: src/search.cc:505
 msgid "No packages found."
 msgstr "찾은 꾸러미가 없습니다."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:638
+#: src/search.cc:574
 msgid "Internal Name"
 msgstr "내부 이름"
 
-#: src/search.cc:715
+#: src/search.cc:651
 msgid "No products found."
 msgstr "찾은 제품이 없습니다."
 
-#: src/search.cc:739
+#: src/search.cc:675
 #, c-format, boost-format
 msgid "No providers of '%s' found."
 msgstr "찾은 '%s' 제공자가 없습니다."
@@ -6115,115 +6065,169 @@ msgstr "'%s' 는 잘못된 대답입니다."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "잘 동작하지 않는 경우, '%s' 에는 '%s' 를 '%s' 에는 '%s' 을 입력하세요."
 
-#: src/utils/misc.cc:112
+#: src/utils/misc.cc:113
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "꾸러미"
 
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "패턴"
 
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "product"
 msgid_plural "product"
 msgstr[0] "제품"
 
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:119
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "패치"
 
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:121
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "src꾸러미"
 
-#: src/utils/misc.cc:122
+#: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
 msgstr[0] ""
 
 #. default
-#: src/utils/misc.cc:124
+#: src/utils/misc.cc:125
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "해결 방법"
 
-#: src/utils/misc.cc:133
-msgid "Unknown"
-msgstr "알 수 없음"
+#. Patch status: i18n + color
+#. translator: patch status
+#: src/utils/misc.cc:134
+msgid "unwanted"
+msgstr ""
 
-#: src/utils/misc.cc:140
-msgid "Needed"
+#. translator: patch status
+#: src/utils/misc.cc:135
+#, fuzzy
+msgid "optional"
+msgstr "ps [옵션]"
+
+#. translator: patch status
+#: src/utils/misc.cc:136
+msgid "needed"
 msgstr "필요함"
 
-#: src/utils/misc.cc:145
-msgid "Not Needed"
+#. translator: patch status
+#: src/utils/misc.cc:137
+msgid "applied"
+msgstr ""
+
+#. translator: patch status
+#: src/utils/misc.cc:138
+msgid "not needed"
 msgstr "필요하지 않음"
 
-#: src/utils/misc.cc:195
+#. translator: patch status
+#: src/utils/misc.cc:139
+msgid "undetermined"
+msgstr ""
+
+#: src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
+msgstr "긴급"
+
+#: src/utils/misc.cc:253 src/utils/misc.cc:294
+msgid "Interactive"
+msgstr "대화형"
+
+#: src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "상태"
+
+#. << _("Repository")
+#: src/utils/misc.cc:289
+msgid "Issue"
+msgstr "이슈"
+
+#: src/utils/misc.cc:290
+msgid "No."
+msgstr "번호."
+
+#: src/utils/misc.cc:291
+msgid "Patch"
+msgstr "패치"
+
+#: src/utils/misc.cc:367
 msgid "Specified local path does not exist or is not accessible."
 msgstr "지정한 내부 경로는 존재하지 않거나 접근할 수 없습니다."
 
-#: src/utils/misc.cc:207
+#: src/utils/misc.cc:379
 msgid "Given URI is invalid"
 msgstr "주어진 URI는 잘못되었음"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:297
+#: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
 msgstr "<플랫폼>에 대한 값을 추측할 수 없습니다."
 
-#: src/utils/misc.cc:298
+#: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
 msgstr "obs://<프로젝트>/<플랫폼>를 사용하십시오."
 
-#: src/utils/misc.cc:299 src/utils/misc.cc:336
+#: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "예: %s"
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
 msgstr "OBS URI가 잘못되었습니다."
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "올바른 형식은 obs://<project>/[platform]입니다."
 
-#: src/utils/misc.cc:386
+#: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "지정한 RPM 파일에서 캐시 디렉터리로 복사하는 도중 문제가 발생했습니다."
 
-#: src/utils/misc.cc:387
+#: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
 msgstr "실행하기엔 디스크의 용량이 부족한것 같습니다."
 
-#: src/utils/misc.cc:395
+#: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
 msgstr "지정한 RPM 파일의 회수 중 문제"
 
-#: src/utils/misc.cc:396
+#: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
 msgstr "파일에 접근이 가능한지 확인해주세요."
 
-#: src/utils/misc.cc:514
+#: src/utils/misc.cc:686
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "알 수 없는 다운로드 모드 '%s'입니다."
 
-#: src/utils/misc.cc:515
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "사용 가능한 다운로드 모드: %s"
 
-#: src/utils/misc.cc:529
+#: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "옵션 '%s'이(가) '%s'을(를) 무효화합니다."
+
+#~ msgid "Unknown"
+#~ msgstr "알 수 없음"
+
+#~ msgid "Needed"
+#~ msgstr "필요함"
+
+#~ msgid "Not Needed"
+#~ msgstr "필요하지 않음"
 
 #~ msgid ""
 #~ "patch-check (pchk) [options]\n"

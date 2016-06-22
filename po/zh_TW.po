@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-05 16:15+0200\n"
+"POT-Creation-Date: 2016-06-22 09:48+0200\n"
 "PO-Revision-Date: 2016-02-17 11:40+0800\n"
 "Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese Traditional <kde-i18n-doc@kde.org>\n"
@@ -191,7 +191,7 @@ msgstr "檔案 %s 無摘要。"
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
-#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:418 src/solve-commit.cc:668
+#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:424 src/solve-commit.cc:668
 msgid "Continue?"
 msgstr "要繼續嗎？"
 
@@ -262,51 +262,50 @@ msgstr "取消阻擋或放棄？"
 msgid "Running: %s  (%s, %s)"
 msgstr "正在執行： %s  (%s,%s)"
 
-#: src/callbacks/rpm.h:207
+#: src/callbacks/rpm.h:208
 #, c-format, boost-format
 msgid "Removing %s"
 msgstr "正在移除 %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:211
+#: src/callbacks/rpm.h:213
 #, c-format, boost-format
 msgid "Removing %s-%s"
 msgstr "正在移除 %s-%s"
 
-#: src/callbacks/rpm.h:234
+#: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "移除 %s 失敗："
 
-#: src/callbacks/rpm.h:276
+#: src/callbacks/rpm.h:279
 #, c-format, boost-format
 msgid "Installing: %s"
 msgstr "正在安裝： %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:280
+#: src/callbacks/rpm.h:284
 #, c-format, boost-format
 msgid "Installing: %s-%s"
 msgstr "正在安裝： %s-%s"
 
-#: src/callbacks/rpm.h:303
+#: src/callbacks/rpm.h:308
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "安裝 %s 失敗："
 
-#. what's actually needed here
-#: src/callbacks/rpm.h:304
+#: src/callbacks/rpm.h:310
 #, c-format, boost-format
 msgid "Installation of %s-%s failed:"
 msgstr "安裝 %s-%s 失敗："
 
 #. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:350
+#: src/callbacks/rpm.h:356
 msgid "Checking for file conflicts:"
 msgstr "正在檢查檔案衝突："
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:384
+#: src/callbacks/rpm.h:390
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -317,7 +316,7 @@ msgstr ""
 "說明文件中關於選項 '%1%' 的說明。"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:391
+#: src/callbacks/rpm.h:397
 #, boost-format
 msgid ""
 "The following package had to be excluded from file conflicts check because "
@@ -328,18 +327,18 @@ msgid_plural ""
 msgstr[0] "下列 %1% 個套件因為尚未下載，故必須在檔案衝突檢查時被排除："
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:402
+#: src/callbacks/rpm.h:408
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] "偵測到 %1% 個檔案衝突："
 
-#: src/callbacks/rpm.h:410
+#: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
 msgstr "衝突檔案將會被取代。"
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:416
+#: src/callbacks/rpm.h:422
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -489,7 +488,7 @@ msgstr "%s %s 的資訊："
 msgid "Info for type '%s' not implemented."
 msgstr "'%s' 類型的詳細資訊功能尚未完成。"
 
-#: src/info.cc:248 src/info.cc:386 src/info.cc:458
+#: src/info.cc:248 src/info.cc:390 src/info.cc:462
 msgid "Repository: "
 msgstr "套件庫： "
 
@@ -497,7 +496,7 @@ msgstr "套件庫： "
 msgid "Support Level: "
 msgstr "支援層級： "
 
-#: src/info.cc:259 src/info.cc:390
+#: src/info.cc:259 src/info.cc:394
 msgid "Installed: "
 msgstr "已安裝："
 
@@ -534,27 +533,28 @@ msgstr "嚴重性："
 msgid "Created On: "
 msgstr "建立時間："
 
-#: src/info.cc:320
+#: src/info.cc:321
 msgid "Reboot Required: "
 msgstr "需要重新開機："
 
-#: src/info.cc:321
+#: src/info.cc:322
 msgid "Package Manager Restart Required"
 msgstr "需要重新啟動套件管理員"
 
-#: src/info.cc:330
+#. print interactive flags the same style as list-patches
+#: src/info.cc:331 src/info.cc:334
 msgid "Interactive: "
 msgstr "互動式："
 
-#: src/info.cc:354 src/search.cc:383
+#: src/info.cc:358 src/search.cc:318
 msgid "Recommended"
 msgstr "推薦"
 
-#: src/info.cc:356 src/search.cc:385
+#: src/info.cc:360 src/search.cc:320
 msgid "Suggested"
 msgstr "建議"
 
-#: src/info.cc:391
+#: src/info.cc:395
 msgid "Visible to User: "
 msgstr "對使用者可見："
 
@@ -565,83 +565,83 @@ msgstr "對使用者可見："
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:910 src/search.cc:65 src/search.cc:232
-#: src/search.cc:439 src/search.cc:575 src/search.cc:634
+#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
-#: src/info.cc:402 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:665 src/update.cc:915 src/update.cc:1050 src/Zypper.cc:5246
-#: src/search.cc:67 src/search.cc:233 src/search.cc:325 src/search.cc:440
-#: src/search.cc:577 src/search.cc:639 src/locks.cc:104
+#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
+#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
+#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
+#: src/utils/misc.cc:250
 msgid "Name"
 msgstr "名稱"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
-#: src/search.cc:69 src/search.cc:236 src/locks.cc:107
+#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "類型"
 
-#: src/info.cc:402 src/search.cc:443
+#: src/info.cc:406 src/search.cc:379
 msgid "Dependency"
 msgstr "相依性"
 
-#: src/info.cc:417
+#: src/info.cc:421
 msgid "Contents"
 msgstr "內容"
 
-#: src/info.cc:419
+#: src/info.cc:423
 msgid "(empty)"
 msgstr "(空)"
 
-#: src/info.cc:472
+#: src/info.cc:476
 msgid "Flavor"
 msgstr "偏好"
 
-#: src/info.cc:477
+#: src/info.cc:481
 msgid "Short Name"
 msgstr "簡稱"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:479 src/Summary.cc:1207 src/utils/misc.cc:138
+#: src/info.cc:483 src/Summary.cc:1207
 msgid "Installed"
 msgstr "已安裝"
 
-#: src/info.cc:481 src/search.cc:642
+#: src/info.cc:485 src/search.cc:578
 msgid "Is Base"
 msgstr "基礎系統"
 
-#: src/info.cc:485
+#: src/info.cc:489
 msgid "End of Support"
 msgstr "終止支援"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
+#: src/info.cc:489 src/info.cc:497 src/info.cc:528
 msgid "undefined"
 msgstr "未定義"
 
-#: src/info.cc:488
+#: src/info.cc:492
 msgid "CPE Name"
 msgstr "CPE 名稱"
 
-#: src/info.cc:495
+#: src/info.cc:499
 msgid "invalid CPE Name"
 msgstr "無效的 CPE 名稱"
 
-#: src/info.cc:498
+#: src/info.cc:502
 msgid "Update Repositories"
 msgstr "更新套件庫： "
 
-#: src/info.cc:506
+#: src/info.cc:510
 msgid "Content Id"
 msgstr "內容 ID"
 
-#: src/info.cc:513
+#: src/info.cc:517
 msgid "Provided by enabled repository"
 msgstr "由啟用的套件庫提供"
 
-#: src/info.cc:519
+#: src/info.cc:523
 msgid "Not provided by any enabled repository"
 msgstr "非由任何啟用的套件庫提供"
 
@@ -2488,28 +2488,28 @@ msgid ""
 msgstr "忽略沒有參數的 %s，因為已指定了帶有參數的類似選項。"
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:329
+#: src/update.cc:280
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
 msgstr[0] ""
 
 #. translator: stats table header
-#: src/update.cc:333
+#: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
 msgstr[0] ""
 
 #. translator: stats summary
-#: src/update.cc:343
+#: src/update.cc:294
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
 msgstr[0] "%d 個修補程式被鎖定"
 
 #. translator: stats summary
-#: src/update.cc:351
+#: src/update.cc:302
 #, fuzzy, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -2517,43 +2517,43 @@ msgstr[0] "%d 個修補程式被鎖定"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:355
+#: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr ""
 
 #. translator: stats summary
-#: src/update.cc:364
+#: src/update.cc:315
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
 msgstr[0] "需要 %d 個修補程式"
 
 #. translator: stats summary
-#: src/update.cc:367
+#: src/update.cc:318
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
 msgstr[0] "%d 個安全性更新"
 
 #. translator: Table column header.
-#: src/update.cc:399 src/update.cc:665 src/update.cc:981 src/update.cc:1050
-#: src/search.cc:326
+#. Name
+#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
 msgid "Category"
 msgstr "分類"
 
 #. translator: Table column header.
-#: src/update.cc:401
+#: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
 
 #. translator: Table column header.
-#: src/update.cc:403 src/update.cc:830
+#: src/update.cc:354 src/update.cc:716
 msgid "Patches"
 msgstr "修補程式"
 
 #. translator: Table column header.
-#: src/update.cc:405
+#: src/update.cc:356
 msgid "Locked"
 msgstr ""
 
@@ -2562,139 +2562,84 @@ msgstr ""
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:411
+#: src/update.cc:362
 msgid "Included categories"
 msgstr ""
 
-#. Translator: Patch status: needed, optional, unwanted, applied, not needed
-#: src/update.cc:474
-msgid "unwanted"
-msgstr ""
-
-#: src/update.cc:476
-#, fuzzy
-msgid "optional"
-msgstr "ps [選項]"
-
-#: src/update.cc:477
-msgid "needed"
-msgstr "需要"
-
-#: src/update.cc:479
-msgid "applied"
-msgstr ""
-
-#: src/update.cc:480
-msgid "not needed"
-msgstr "不需要"
-
-#: src/update.cc:486
-msgid "undetermined"
-msgstr "未確定"
-
-#. translators: package's repository (header)
-#: src/update.cc:664 src/update.cc:912 src/search.cc:75 src/search.cc:324
-#: src/search.cc:442 src/search.cc:576 src/search.cc:635 src/locks.cc:107
-msgid "Repository"
-msgstr "套件庫"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050 src/search.cc:327
-msgid "Severity"
-msgstr "保安"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050
-msgid "Interactive"
-msgstr "互動式"
-
-#: src/update.cc:665 src/update.cc:981 src/search.cc:328
-msgid "Status"
-msgstr "狀態"
-
-#. translators: package summary (header)
-#: src/update.cc:665 src/update.cc:1050 src/search.cc:235
-msgid "Summary"
-msgstr "摘要"
-
-#: src/update.cc:717
+#: src/update.cc:603
 msgid "The following software management updates will be installed first:"
 msgstr "下列軟體更新將會先被安裝："
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:720
+#: src/update.cc:606
 #, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr "下列軟體更新將會先被安裝："
 
-#: src/update.cc:729 src/update.cc:968
+#: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
 msgstr "沒有發現更新。"
 
 #. translator: Table headline
-#: src/update.cc:736
+#: src/update.cc:621
 msgid "The following updates are also available:"
 msgstr "有下列更新可用："
 
-#: src/update.cc:828
+#: src/update.cc:714
 msgid "Package updates"
 msgstr "套件更新"
 
-#: src/update.cc:832
+#: src/update.cc:718
 msgid "Pattern updates"
 msgstr "樣式更新"
 
-#: src/update.cc:834
+#: src/update.cc:720
 msgid "Product updates"
 msgstr "產品更新"
 
-#: src/update.cc:920
+#. translators: package's repository (header)
+#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
+#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "套件庫"
+
+#: src/update.cc:806
 msgid "Current Version"
 msgstr "目前版本"
 
-#: src/update.cc:921
+#: src/update.cc:807
 msgid "Available Version"
 msgstr "可用版本"
 
 #. translators: package architecture (header)
-#: src/update.cc:921 src/search.cc:73 src/search.cc:579 src/search.cc:641
+#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
 msgid "Arch"
 msgstr "結構"
 
-#: src/update.cc:981
-msgid "Issue"
-msgstr "問題"
-
-#: src/update.cc:981
-msgid "No."
-msgstr "編號"
-
-#: src/update.cc:981
-msgid "Patch"
-msgstr "修補程式"
-
-#: src/update.cc:1091
+#: src/update.cc:969
 msgid "No matching issues found."
 msgstr "找不到符合項目"
 
-#: src/update.cc:1099
+#: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
 msgstr "已找到下列符合問題編號的項目："
 
-#: src/update.cc:1108
+#: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "已找到下列符合描述的修補程式："
 
-#: src/update.cc:1177
+#: src/update.cc:1057
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr "Bugzilla 問題編號 %s 的修正未發現或不需要。"
 
-#: src/update.cc:1179
+#: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "CVS 問題編號 %s 的修正未發現或不需要。"
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1182
+#: src/update.cc:1062
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "%s 問題編號 %s 的修正未發現或不需要。"
@@ -5576,37 +5521,42 @@ msgid "No source packages to download."
 msgstr "沒有原始碼套件將被下載。"
 
 #. translators: package version (header)
-#: src/search.cc:71 src/search.cc:441 src/search.cc:578 src/search.cc:640
+#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
 msgid "Version"
 msgstr "版本"
 
-#: src/search.cc:138
+#: src/search.cc:137
 msgid "System Packages"
 msgstr "系統套件"
 
-#: src/search.cc:403
+#. translators: package summary (header)
+#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
+msgid "Summary"
+msgstr "摘要"
+
+#: src/search.cc:336
 msgid "No needed patches found."
 msgstr "沒有需要的修補程式。"
 
-#: src/search.cc:472
+#: src/search.cc:408
 msgid "No patterns found."
 msgstr "沒有發現樣式。"
 
-#: src/search.cc:569
+#: src/search.cc:505
 msgid "No packages found."
 msgstr "沒有發現套件。"
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:638
+#: src/search.cc:574
 msgid "Internal Name"
 msgstr "內部名稱"
 
-#: src/search.cc:715
+#: src/search.cc:651
 msgid "No products found."
 msgstr "沒有發現產品。"
 
-#: src/search.cc:739
+#: src/search.cc:675
 #, c-format, boost-format
 msgid "No providers of '%s' found."
 msgstr "找不到 '%s' 的提供者。"
@@ -5985,115 +5935,169 @@ msgstr "無效的答案 '%s'。"
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%s' 。"
 
-#: src/utils/misc.cc:112
+#: src/utils/misc.cc:113
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "套件"
 
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "模式"
 
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "product"
 msgid_plural "product"
 msgstr[0] "產品"
 
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:119
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "修補程式"
 
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:121
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "src 套件"
 
-#: src/utils/misc.cc:122
+#: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "應用程式"
 
 #. default
-#: src/utils/misc.cc:124
+#: src/utils/misc.cc:125
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "解決方案"
 
-#: src/utils/misc.cc:133
-msgid "Unknown"
-msgstr "未知的"
+#. Patch status: i18n + color
+#. translator: patch status
+#: src/utils/misc.cc:134
+msgid "unwanted"
+msgstr ""
 
-#: src/utils/misc.cc:140
-msgid "Needed"
+#. translator: patch status
+#: src/utils/misc.cc:135
+#, fuzzy
+msgid "optional"
+msgstr "ps [選項]"
+
+#. translator: patch status
+#: src/utils/misc.cc:136
+msgid "needed"
 msgstr "需要"
 
-#: src/utils/misc.cc:145
-msgid "Not Needed"
+#. translator: patch status
+#: src/utils/misc.cc:137
+msgid "applied"
+msgstr ""
+
+#. translator: patch status
+#: src/utils/misc.cc:138
+msgid "not needed"
 msgstr "不需要"
 
-#: src/utils/misc.cc:195
+#. translator: patch status
+#: src/utils/misc.cc:139
+msgid "undetermined"
+msgstr "未確定"
+
+#: src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
+msgstr "保安"
+
+#: src/utils/misc.cc:253 src/utils/misc.cc:294
+msgid "Interactive"
+msgstr "互動式"
+
+#: src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "狀態"
+
+#. << _("Repository")
+#: src/utils/misc.cc:289
+msgid "Issue"
+msgstr "問題"
+
+#: src/utils/misc.cc:290
+msgid "No."
+msgstr "編號"
+
+#: src/utils/misc.cc:291
+msgid "Patch"
+msgstr "修補程式"
+
+#: src/utils/misc.cc:367
 msgid "Specified local path does not exist or is not accessible."
 msgstr "指定的本地路徑不存在或不可存取。"
 
-#: src/utils/misc.cc:207
+#: src/utils/misc.cc:379
 msgid "Given URI is invalid"
 msgstr "指定的位址無效"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:297
+#: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
 msgstr "無法猜測 <platform> 的值。"
 
-#: src/utils/misc.cc:298
+#: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
 msgstr "請使用 obs://<project>/<platform>"
 
-#: src/utils/misc.cc:299 src/utils/misc.cc:336
+#: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "範例：%s"
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
 msgstr "無效的 OBS 位址。"
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "正確格式為 obs://<project>/[platform]"
 
-#: src/utils/misc.cc:386
+#: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "複製指定的 RPM 檔到快取目錄時出現問題。"
 
-#: src/utils/misc.cc:387
+#: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
 msgstr "可能您的磁碟空間已用罄。"
 
-#: src/utils/misc.cc:395
+#: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
 msgstr "取出指定的 RPM 檔出現問題"
 
-#: src/utils/misc.cc:396
+#: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
 msgstr "請檢查此檔案是否可存取。"
 
-#: src/utils/misc.cc:514
+#: src/utils/misc.cc:686
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "未知的下載模式 '%s'。"
 
-#: src/utils/misc.cc:515
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "可用的下載模式： %s"
 
-#: src/utils/misc.cc:529
+#: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "選項 '%s' 覆蓋了 '%s'。"
+
+#~ msgid "Unknown"
+#~ msgstr "未知的"
+
+#~ msgid "Needed"
+#~ msgstr "需要"
+
+#~ msgid "Not Needed"
+#~ msgstr "不需要"
 
 #~ msgid ""
 #~ "patch-check (pchk) [options]\n"

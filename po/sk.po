@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-05 16:15+0200\n"
+"POT-Creation-Date: 2016-06-22 09:48+0200\n"
 "PO-Revision-Date: 2016-06-17 12:48+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
@@ -189,7 +189,7 @@ msgstr "Žiadny prehľad pre súbor %s."
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
-#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:418 src/solve-commit.cc:668
+#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:424 src/solve-commit.cc:668
 msgid "Continue?"
 msgstr "Pokračovať?"
 
@@ -264,51 +264,50 @@ msgstr "Odblokovať alebo vyradiť?"
 msgid "Running: %s  (%s, %s)"
 msgstr "Spúšťam: %s  (%s, %s)"
 
-#: src/callbacks/rpm.h:207
+#: src/callbacks/rpm.h:208
 #, c-format, boost-format
 msgid "Removing %s"
 msgstr "Odstraňovanie %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:211
+#: src/callbacks/rpm.h:213
 #, c-format, boost-format
 msgid "Removing %s-%s"
 msgstr "Odstraňujem %s-%s"
 
-#: src/callbacks/rpm.h:234
+#: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "Zlyhalo odstránenie %s:"
 
-#: src/callbacks/rpm.h:276
+#: src/callbacks/rpm.h:279
 #, c-format, boost-format
 msgid "Installing: %s"
 msgstr "Inštalovanie: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:280
+#: src/callbacks/rpm.h:284
 #, c-format, boost-format
 msgid "Installing: %s-%s"
 msgstr "Inštalovanie: %s-%s"
 
-#: src/callbacks/rpm.h:303
+#: src/callbacks/rpm.h:308
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "Inštalácia %s zlyhala:"
 
-#. what's actually needed here
-#: src/callbacks/rpm.h:304
+#: src/callbacks/rpm.h:310
 #, c-format, boost-format
 msgid "Installation of %s-%s failed:"
 msgstr "Inštalácia %s-%s zlyhala:"
 
 #. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:350
+#: src/callbacks/rpm.h:356
 msgid "Checking for file conflicts:"
 msgstr "Kontrola konfliktov súborov:"
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:384
+#: src/callbacks/rpm.h:390
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -321,7 +320,7 @@ msgstr ""
 "zypper."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:391
+#: src/callbacks/rpm.h:397
 #, boost-format
 msgid ""
 "The following package had to be excluded from file conflicts check because "
@@ -340,7 +339,7 @@ msgstr[2] ""
 "súborov, pretože ešte nie sú stiahnuté:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:402
+#: src/callbacks/rpm.h:408
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
@@ -348,12 +347,12 @@ msgstr[0] "Zistený %1% konflikt súborov:"
 msgstr[1] "Zistené %1% konflikty súborov:"
 msgstr[2] "Zistených %1% konfliktov súborov:"
 
-#: src/callbacks/rpm.h:410
+#: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
 msgstr "Konfliktné súbory budú nahradené."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:416
+#: src/callbacks/rpm.h:422
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -506,7 +505,7 @@ msgstr "Informácie pre %s %s:"
 msgid "Info for type '%s' not implemented."
 msgstr "Informácia pre typ '%s' nie je implementovaná."
 
-#: src/info.cc:248 src/info.cc:386 src/info.cc:458
+#: src/info.cc:248 src/info.cc:390 src/info.cc:462
 msgid "Repository: "
 msgstr "Repozitár: "
 
@@ -514,7 +513,7 @@ msgstr "Repozitár: "
 msgid "Support Level: "
 msgstr "Úroveň podpory: "
 
-#: src/info.cc:259 src/info.cc:390
+#: src/info.cc:259 src/info.cc:394
 msgid "Installed: "
 msgstr "Nainštalovaný: "
 
@@ -551,27 +550,28 @@ msgstr "Závažnosť: "
 msgid "Created On: "
 msgstr "Dátum vytvorenia: "
 
-#: src/info.cc:320
+#: src/info.cc:321
 msgid "Reboot Required: "
 msgstr "Požadovaný reštart: "
 
-#: src/info.cc:321
+#: src/info.cc:322
 msgid "Package Manager Restart Required"
 msgstr "Požadovaný reštart správcu balíkov"
 
-#: src/info.cc:330
+#. print interactive flags the same style as list-patches
+#: src/info.cc:331 src/info.cc:334
 msgid "Interactive: "
 msgstr "Interaktívny: "
 
-#: src/info.cc:354 src/search.cc:383
+#: src/info.cc:358 src/search.cc:318
 msgid "Recommended"
 msgstr "Odporúčaný"
 
-#: src/info.cc:356 src/search.cc:385
+#: src/info.cc:360 src/search.cc:320
 msgid "Suggested"
 msgstr "Navrhovaný"
 
-#: src/info.cc:391
+#: src/info.cc:395
 msgid "Visible to User: "
 msgstr "Viditeľný pre používateľa: "
 
@@ -582,83 +582,83 @@ msgstr "Viditeľný pre používateľa: "
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:910 src/search.cc:65 src/search.cc:232
-#: src/search.cc:439 src/search.cc:575 src/search.cc:634
+#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
-#: src/info.cc:402 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:665 src/update.cc:915 src/update.cc:1050 src/Zypper.cc:5246
-#: src/search.cc:67 src/search.cc:233 src/search.cc:325 src/search.cc:440
-#: src/search.cc:577 src/search.cc:639 src/locks.cc:104
+#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
+#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
+#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
+#: src/utils/misc.cc:250
 msgid "Name"
 msgstr "Názov"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
-#: src/search.cc:69 src/search.cc:236 src/locks.cc:107
+#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Typ"
 
-#: src/info.cc:402 src/search.cc:443
+#: src/info.cc:406 src/search.cc:379
 msgid "Dependency"
 msgstr "Závislosť"
 
-#: src/info.cc:417
+#: src/info.cc:421
 msgid "Contents"
 msgstr "Obsah"
 
-#: src/info.cc:419
+#: src/info.cc:423
 msgid "(empty)"
 msgstr "(prázdny)"
 
-#: src/info.cc:472
+#: src/info.cc:476
 msgid "Flavor"
 msgstr "Druh"
 
-#: src/info.cc:477
+#: src/info.cc:481
 msgid "Short Name"
 msgstr "Krátky názov"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:479 src/Summary.cc:1207 src/utils/misc.cc:138
+#: src/info.cc:483 src/Summary.cc:1207
 msgid "Installed"
 msgstr "Nainštalovaný"
 
-#: src/info.cc:481 src/search.cc:642
+#: src/info.cc:485 src/search.cc:578
 msgid "Is Base"
 msgstr "Základný"
 
-#: src/info.cc:485
+#: src/info.cc:489
 msgid "End of Support"
 msgstr "Koniec podpory"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
+#: src/info.cc:489 src/info.cc:497 src/info.cc:528
 msgid "undefined"
 msgstr "nedefinované"
 
-#: src/info.cc:488
+#: src/info.cc:492
 msgid "CPE Name"
 msgstr "Názov CPE"
 
-#: src/info.cc:495
+#: src/info.cc:499
 msgid "invalid CPE Name"
 msgstr "Neplatný názov CPE"
 
-#: src/info.cc:498
+#: src/info.cc:502
 msgid "Update Repositories"
 msgstr "Aktualizačné repozitáre"
 
-#: src/info.cc:506
+#: src/info.cc:510
 msgid "Content Id"
 msgstr "Id obsahu"
 
-#: src/info.cc:513
+#: src/info.cc:517
 msgid "Provided by enabled repository"
 msgstr "Poskytované zapnutým repozitárom"
 
-#: src/info.cc:519
+#: src/info.cc:523
 msgid "Not provided by any enabled repository"
 msgstr "Neposkytované žiadnym zapnutým repozitárom"
 
@@ -963,7 +963,6 @@ msgid "Patch '%s' is not needed."
 msgstr "Oprava '%s' nie je potrebná."
 
 #: src/RequestFeedback.cc:181
-#, boost-format, boost-format
 #, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
@@ -1838,8 +1837,8 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
-"Autentifikácia požadovaná pre prístup k %s. Musíte byť správca systému (root)"
-", aby ste boli schopní čítať prihlasovacie údaje z %s."
+"Autentifikácia požadovaná pre prístup k %s. Musíte byť správca systému "
+"(root), aby ste boli schopní čítať prihlasovacie údaje z %s."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -1981,8 +1980,8 @@ msgid ""
 msgstr ""
 "Chyba môže byť spôsobená nesprávnymi metadátami v repozitári alebo chybou v "
 "analyzátore metadát. V tom druhom prípade alebo ak si nie ste istí, nahláste "
-"prosím chybu podľa inštrukcií na adrese "
-"http://en.opensuse.org/Zypper/Troubleshooting"
+"prosím chybu podľa inštrukcií na adrese http://en.opensuse.org/Zypper/"
+"Troubleshooting"
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -2202,7 +2201,8 @@ msgstr "Nie sú definované žiadne zapnuté repozitáre."
 #: src/repos.cc:1313
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie repozitárov."
+msgstr ""
+"Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie repozitárov."
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
@@ -2393,8 +2393,8 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"Zmeniť alias repozitára '%s' nie je možné. Tento repozitár patrí službe '%"
-"s', ktorá je zodpovedná za nastavenie jeho aliasu."
+"Zmeniť alias repozitára '%s' nie je možné. Tento repozitár patrí službe "
+"'%s', ktorá je zodpovedná za nastavenie jeho aliasu."
 
 #: src/repos.cc:1855
 #, c-format, boost-format
@@ -2713,7 +2713,7 @@ msgid ""
 msgstr "Ignorujem '%s' pretože bola zadaná podobná voľba s argumentom."
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:329
+#: src/update.cc:280
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
@@ -2722,7 +2722,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. translator: stats table header
-#: src/update.cc:333
+#: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
@@ -2731,7 +2731,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. translator: stats summary
-#: src/update.cc:343
+#: src/update.cc:294
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
@@ -2740,7 +2740,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. translator: stats summary
-#: src/update.cc:351
+#: src/update.cc:302
 #, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -2750,13 +2750,13 @@ msgstr[2] ""
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:355
+#: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr ""
 
 #. translator: stats summary
-#: src/update.cc:364
+#: src/update.cc:315
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -2765,7 +2765,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. translator: stats summary
-#: src/update.cc:367
+#: src/update.cc:318
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -2774,23 +2774,23 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. translator: Table column header.
-#: src/update.cc:399 src/update.cc:665 src/update.cc:981 src/update.cc:1050
-#: src/search.cc:326
+#. Name
+#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
 msgid "Category"
 msgstr "Kategória"
 
 #. translator: Table column header.
-#: src/update.cc:401
+#: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
 
 #. translator: Table column header.
-#: src/update.cc:403 src/update.cc:830
+#: src/update.cc:354 src/update.cc:716
 msgid "Patches"
 msgstr "Opravy"
 
 #. translator: Table column header.
-#: src/update.cc:405
+#: src/update.cc:356
 msgid "Locked"
 msgstr ""
 
@@ -2799,137 +2799,84 @@ msgstr ""
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:411
+#: src/update.cc:362
 msgid "Included categories"
 msgstr ""
 
-#. Translator: Patch status: needed, optional, unwanted, applied, not needed
-#: src/update.cc:474
-msgid "unwanted"
-msgstr ""
-
-#: src/update.cc:476
-msgid "optional"
-msgstr "voliteľné"
-
-#: src/update.cc:477
-msgid "needed"
-msgstr "potrebná"
-
-#: src/update.cc:479
-msgid "applied"
-msgstr ""
-
-#: src/update.cc:480
-msgid "not needed"
-msgstr "nepotrebná"
-
-#: src/update.cc:486
-msgid "undetermined"
-msgstr "neurčené"
-
-#. translators: package's repository (header)
-#: src/update.cc:664 src/update.cc:912 src/search.cc:75 src/search.cc:324
-#: src/search.cc:442 src/search.cc:576 src/search.cc:635 src/locks.cc:107
-msgid "Repository"
-msgstr "Repozitár"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050 src/search.cc:327
-msgid "Severity"
-msgstr "Závažnosť"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050
-msgid "Interactive"
-msgstr "Interaktívny"
-
-#: src/update.cc:665 src/update.cc:981 src/search.cc:328
-msgid "Status"
-msgstr "Stav"
-
-#. translators: package summary (header)
-#: src/update.cc:665 src/update.cc:1050 src/search.cc:235
-msgid "Summary"
-msgstr "Súhrn"
-
-#: src/update.cc:717
+#: src/update.cc:603
 msgid "The following software management updates will be installed first:"
 msgstr "Nasledujúce aktualizácie správcu softvéru sa nainštalujú prednostne:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:720
+#: src/update.cc:606
 msgid "Needed software management updates will be installed first:"
 msgstr "Potrebné aktualizácie správcu softvéru sa nainštalujú prednostne:"
 
-#: src/update.cc:729 src/update.cc:968
+#: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
 msgstr "Neboli nájdené žiadne aktualizácie."
 
 #. translator: Table headline
-#: src/update.cc:736
+#: src/update.cc:621
 msgid "The following updates are also available:"
 msgstr "Nasledujúce aktualizácie sú taktiež dostupné:"
 
-#: src/update.cc:828
+#: src/update.cc:714
 msgid "Package updates"
 msgstr "Aktualizácie balíkov"
 
-#: src/update.cc:832
+#: src/update.cc:718
 msgid "Pattern updates"
 msgstr "Aktualizácie šablón"
 
-#: src/update.cc:834
+#: src/update.cc:720
 msgid "Product updates"
 msgstr "Aktualizácie produktov"
 
-#: src/update.cc:920
+#. translators: package's repository (header)
+#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
+#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Repozitár"
+
+#: src/update.cc:806
 msgid "Current Version"
 msgstr "Súčasná verzia"
 
-#: src/update.cc:921
+#: src/update.cc:807
 msgid "Available Version"
 msgstr "Dostupná verzia"
 
 #. translators: package architecture (header)
-#: src/update.cc:921 src/search.cc:73 src/search.cc:579 src/search.cc:641
+#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
 msgid "Arch"
 msgstr "Arch"
 
-#: src/update.cc:981
-msgid "Issue"
-msgstr "Problém"
-
-#: src/update.cc:981
-msgid "No."
-msgstr "Číslo"
-
-#: src/update.cc:981
-msgid "Patch"
-msgstr "Oprava"
-
-#: src/update.cc:1091
+#: src/update.cc:969
 msgid "No matching issues found."
 msgstr "Neboli nájdené žiadne odpovedajúce problémy."
 
-#: src/update.cc:1099
+#: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
 msgstr "Našli sa nasledujúce zhody v číslach problémov:"
 
-#: src/update.cc:1108
+#: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "Našli sa zhody v popisoch týchto opráv:"
 
-#: src/update.cc:1177
+#: src/update.cc:1057
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
-msgstr "Oprava bugzilla problému číslo %s nebola nájdená alebo nie je potrebná."
+msgstr ""
+"Oprava bugzilla problému číslo %s nebola nájdená alebo nie je potrebná."
 
-#: src/update.cc:1179
+#: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "Oprava CVE problému číslo %s nebola nájdená alebo nie je potrebná."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1182
+#: src/update.cc:1062
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "Oprava %s problému číslo %s nebola nájdená alebo nie je potrebná."
@@ -3101,8 +3048,8 @@ msgstr ""
 "\t--no-refresh\t\tNeobnovovať repozitáre.\n"
 "\t--no-cd\t\t\tIgnorovať repozitáre CD/DVD.\n"
 "\t--no-remote\t\tIgnorovať vzdialené repozitáre.\n"
-"\t--releasever\t\tNastaviť hodnotu $releasever vo všetkých súboroch .repo ("
-"predvolená hodnota: distribution version)\n"
+"\t--releasever\t\tNastaviť hodnotu $releasever vo všetkých súboroch .repo "
+"(predvolená hodnota: distribution version)\n"
 
 #: src/Zypper.cc:472
 msgid ""
@@ -3362,8 +3309,8 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "Symbolický odkaz /etc/products.d/baseproduct je voľne visiaci alebo chýba!\n"
-"Odkaz musí smerovať do .prod súboru vašich kľúčových produktov v "
-"/etc/products.d.\n"
+"Odkaz musí smerovať do .prod súboru vašich kľúčových produktov v /etc/"
+"products.d.\n"
 
 #: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
@@ -3555,11 +3502,11 @@ msgstr ""
 "-r, --repo <alias|#|URI>    Načítať iba zadaný repozitár.\n"
 "-t, --type <typ>            Typ balíka (%s)\n"
 "                            Predvolený typ: %s.\n"
-"-n, --name                  Vybrať balíky podľa názvu, nie podľa schopnosti."
-"\n"
+"-n, --name                  Vybrať balíky podľa názvu, nie podľa "
+"schopnosti.\n"
 "-C, --capability            Vybrať balíky podľa schopnosti.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
-"\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
+"ladenie.\n"
 "-R, --no-force-resolution   Nenútiť riešiteľa nájsť riešenie,\n"
 "                            umožniť mu spýtať sa.\n"
 "    --force-resolution      Prinútiť riešiteľa nájsť riešenie (aj keby\n"
@@ -3675,12 +3622,11 @@ msgstr ""
 "režimy:\n"
 "                            %s\n"
 "-d, --download-only         Len stiahnuť balíky, neinštalovať.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
-"\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
+"ladenie.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, boost-format, boost-format, c-format, c-format
 #, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -3722,7 +3668,6 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, boost-format, boost-format, c-format, c-format
 #, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -3952,7 +3897,6 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, boost-format, boost-format, c-format, c-format
 #, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -4053,8 +3997,8 @@ msgstr ""
 "-r, --repo <alias|#|URI> Vyčistiť len zadané repozitáre.\n"
 "-m, --metadata           Vyčistiť vyrovnávaciu pamäť metadát.\n"
 "-M, --raw-metadata       Vyčistiť vyrovnávaciu pamäť surových metadát.\n"
-"-a, --all                Vyčistiť vyrovnávacie pamäte pre metadáta aj balíky."
-"\n"
+"-a, --all                Vyčistiť vyrovnávacie pamäte pre metadáta aj "
+"balíky.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -4158,8 +4102,8 @@ msgstr ""
 "                            Aktualizácia na nižšiu verziu, aj keď existuje "
 "vyššia\n"
 "                            je tiež prijateľná.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
-"\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
+"ladenie.\n"
 "    --no-recommends         Neinštalovať odporúčané balíky, len vyžadované.\n"
 "    --recommends            Nainštalovať aj odporúčané balíky naviac\n"
 "                            k vyžadovaným.\n"
@@ -4176,8 +4120,8 @@ msgstr ""
 "-D, --dry-run               Otestovať aktualizáciu, nič v skutočnosti "
 "neaktualizovať.\n"
 "    --details               Zobraziť podrobný súhrn inštalácie.\n"
-"    --download              Nastaviť režim download-install. Dostupné režimy:"
-"\n"
+"    --download              Nastaviť režim download-install. Dostupné "
+"režimy:\n"
 "                            %s\n"
 "-d, --download-only             Len stiahnuť balíky, neinštalovať.\n"
 
@@ -4233,15 +4177,15 @@ msgstr ""
 "                            Automaticky odpovedať 'áno' na výzvu\n"
 "                            na potvrdenie licencie tretej strany.\n"
 "                            Pre ďalšie podrobnosti pozrieť 'man zypper'.\n"
-"-b, --bugzilla #            Nainštalovať opravu pre zadaný bugzilla problém."
-"\n"
+"-b, --bugzilla #            Nainštalovať opravu pre zadaný bugzilla "
+"problém.\n"
 "    --cve #                 Nainštalovať opravu pre zadaný CVE problém.\n"
 "-g  --category <kategória>   Nainštalovať opravy iba s touto kategóriou.\n"
 "    --severity <závažnosť>   Nainštalovať opravy iba s touto závažnosťou.\n"
 "    --date <YYYY-MM-DD>     Nainštalovať iba opravy vydané po zadanom "
 "dátume, ale nie vrátane neho\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
-"\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
+"ladenie.\n"
 "    --no-recommends         Neinštalovať odporúčané balíky, len vyžadované.\n"
 "    --recommends            Nainštalovať aj odporúčané balíky naviac\n"
 "                            k vyžadovaným.\n"
@@ -4255,8 +4199,8 @@ msgstr ""
 "-D, --dry-run               Otestovať aktualizáciu, nič v skutočnosti "
 "neaktualizovať.\n"
 "    --details               Zobraziť podrobný súhrn inštalácie.\n"
-"    --download              Nastaviť režim download-install. Dostupné režimy:"
-"\n"
+"    --download              Nastaviť režim download-install. Dostupné "
+"režimy:\n"
 "                            %s\n"
 "-d, --download-only         Len stiahnuť balíky, neinštalovať.\n"
 
@@ -4398,8 +4342,8 @@ msgstr ""
 "                            Automaticky odpovedať 'áno' na výzvu\n"
 "                            na potvrdenie licencie tretej strany.\n"
 "                            Pre ďalšie podrobnosti pozrieť 'man zypper'.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
-"\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
+"ladenie.\n"
 "    --no-recommends         Neinštalovať odporúčané balíky, len vyžadované.\n"
 "    --recommends            Nainštalovať aj odporúčané balíky naviac\n"
 "                            k vyžadovaným.\n"
@@ -4412,8 +4356,8 @@ msgstr ""
 "-D, --dry-run               Otestovať aktualizáciu, nič v skutočnosti "
 "neaktualizovať.\n"
 "    --details               Zobraziť podrobný súhrn inštalácie.\n"
-"    --download              Nastaviť režim download-install. Dostupné režimy:"
-"\n"
+"    --download              Nastaviť režim download-install. Dostupné "
+"režimy:\n"
 "                            %s\n"
 "-d, --download-only         Len stiahnuť balíky, neinštalovať.\n"
 
@@ -4494,8 +4438,8 @@ msgstr ""
 "    --suggests             Hľadať balíky, ktoré navrhujú hľadané reťazce.\n"
 "    --conflicts            Hľadať balíky, ktoré sú v konflikte s hľadanými "
 "reťazcami.\n"
-"    --obsoletes            Hľadať balíky, ktoré zastarávajú hľadané reťazce."
-"\n"
+"    --obsoletes            Hľadať balíky, ktoré zastarávajú hľadané "
+"reťazce.\n"
 "-n, --name                 Užitočné spolu s voľbami závislosti, inak \n"
 "                           je predvolené vyhľadávanie v názve balíčka.\n"
 "-f, --file-list            Hľadať zhodu v súborovom zozname balíkov.\n"
@@ -5197,7 +5141,8 @@ msgstr ""
 #: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "Služba '%s' nebola nájdená podľa zadaného aliasu, čísla ani URI adresy."
+msgstr ""
+"Služba '%s' nebola nájdená podľa zadaného aliasu, čísla ani URI adresy."
 
 #: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
@@ -5404,7 +5349,8 @@ msgstr "Použitie"
 
 #: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
-msgstr "Pre pridávanie zámkov balíkov sú potrebné práva správcu systému (root)."
+msgstr ""
+"Pre pridávanie zámkov balíkov sú potrebné práva správcu systému (root)."
 
 #: src/Zypper.cc:5023
 #, c-format, boost-format
@@ -5931,37 +5877,42 @@ msgid "No source packages to download."
 msgstr "Žiadny zdrojový balík na stiahnutie."
 
 #. translators: package version (header)
-#: src/search.cc:71 src/search.cc:441 src/search.cc:578 src/search.cc:640
+#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
 msgid "Version"
 msgstr "Verzia"
 
-#: src/search.cc:138
+#: src/search.cc:137
 msgid "System Packages"
 msgstr "Balíky v systéme"
 
-#: src/search.cc:403
+#. translators: package summary (header)
+#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
+msgid "Summary"
+msgstr "Súhrn"
+
+#: src/search.cc:336
 msgid "No needed patches found."
 msgstr "Neboli nájdené žiadne potrebné opravy."
 
-#: src/search.cc:472
+#: src/search.cc:408
 msgid "No patterns found."
 msgstr "Neboli nájdené žiadne šablóny."
 
-#: src/search.cc:569
+#: src/search.cc:505
 msgid "No packages found."
 msgstr "Neboli nájdené žiadne balíky."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:638
+#: src/search.cc:574
 msgid "Internal Name"
 msgstr "Interný názov"
 
-#: src/search.cc:715
+#: src/search.cc:651
 msgid "No products found."
 msgstr "Neboli nájdené žiadne produkty."
 
-#: src/search.cc:739
+#: src/search.cc:675
 #, c-format, boost-format
 msgid "No providers of '%s' found."
 msgstr "Žiadni poskytovatelia '%s' neboli nájdení."
@@ -6355,42 +6306,42 @@ msgstr "Neplatná odpoveď '%s'."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Zadajte '%s' pre '%s' alebo '%s' pre '%s', ak nič iné nefunguje."
 
-#: src/utils/misc.cc:112
+#: src/utils/misc.cc:113
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "balík"
 msgstr[1] "balíky"
 msgstr[2] "balíkov"
 
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "šablóna"
 msgstr[1] "šablóny"
 msgstr[2] "šablón"
 
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produkt"
 msgstr[1] "produkty"
 msgstr[2] "produktov"
 
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:119
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "oprava"
 msgstr[1] "opravy"
 msgstr[2] "opráv"
 
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:121
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "zdrojový balík"
 msgstr[1] "zdrojové balíky"
 msgstr[2] "zdrojových balíkov"
 
-#: src/utils/misc.cc:122
+#: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "aplikácia"
@@ -6398,88 +6349,141 @@ msgstr[1] "aplikácie"
 msgstr[2] "aplikácií"
 
 #. default
-#: src/utils/misc.cc:124
+#: src/utils/misc.cc:125
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "riešenie"
 msgstr[1] "riešenia"
 msgstr[2] "riešení"
 
-#: src/utils/misc.cc:133
-msgid "Unknown"
-msgstr "Neznámy"
+#. Patch status: i18n + color
+#. translator: patch status
+#: src/utils/misc.cc:134
+msgid "unwanted"
+msgstr ""
 
-#: src/utils/misc.cc:140
-msgid "Needed"
-msgstr "Potrebný"
+#. translator: patch status
+#: src/utils/misc.cc:135
+msgid "optional"
+msgstr "voliteľné"
 
-#: src/utils/misc.cc:145
-msgid "Not Needed"
-msgstr "Nepotrebný"
+#. translator: patch status
+#: src/utils/misc.cc:136
+msgid "needed"
+msgstr "potrebná"
 
-#: src/utils/misc.cc:195
+#. translator: patch status
+#: src/utils/misc.cc:137
+msgid "applied"
+msgstr ""
+
+#. translator: patch status
+#: src/utils/misc.cc:138
+msgid "not needed"
+msgstr "nepotrebná"
+
+#. translator: patch status
+#: src/utils/misc.cc:139
+msgid "undetermined"
+msgstr "neurčené"
+
+#: src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
+msgstr "Závažnosť"
+
+#: src/utils/misc.cc:253 src/utils/misc.cc:294
+msgid "Interactive"
+msgstr "Interaktívny"
+
+#: src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "Stav"
+
+#. << _("Repository")
+#: src/utils/misc.cc:289
+msgid "Issue"
+msgstr "Problém"
+
+#: src/utils/misc.cc:290
+msgid "No."
+msgstr "Číslo"
+
+#: src/utils/misc.cc:291
+msgid "Patch"
+msgstr "Oprava"
+
+#: src/utils/misc.cc:367
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Zadaná miestna cesta neexistuje alebo nie je prístupná."
 
-#: src/utils/misc.cc:207
+#: src/utils/misc.cc:379
 msgid "Given URI is invalid"
 msgstr "Zadaná URI adresa je neplatná"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:297
+#: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
 msgstr "Nemožno odhadnúť hodnotu pre <platform>."
 
-#: src/utils/misc.cc:298
+#: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
 msgstr "Prosím, použite obs://<project>/<platform>"
 
-#: src/utils/misc.cc:299 src/utils/misc.cc:336
+#: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Príklad: %s"
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
 msgstr "Neplatná adresa URI OBS."
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Správny tvar je obs://<projekt>/[platforma]"
 
-#: src/utils/misc.cc:386
+#: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 "Nastal problém pri kopírovaní zadaného RPM súboru do adresára vyrovnávacej "
 "pamäte."
 
-#: src/utils/misc.cc:387
+#: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
 msgstr "Možno nemáte dostatok miesta na disku."
 
-#: src/utils/misc.cc:395
+#: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
 msgstr "Problém pri sťahovaní zadaného RPM súboru"
 
-#: src/utils/misc.cc:396
+#: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
 msgstr "Prosím overte, či je súbor dostupný."
 
-#: src/utils/misc.cc:514
+#: src/utils/misc.cc:686
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Neznámy mód sťahovania '%s'."
 
-#: src/utils/misc.cc:515
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Dostupné režimy sťahovania: %s"
 
-#: src/utils/misc.cc:529
+#: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Voľba '%s' prepisuje '%s'."
+
+#~ msgid "Unknown"
+#~ msgstr "Neznámy"
+
+#~ msgid "Needed"
+#~ msgstr "Potrebný"
+
+#~ msgid "Not Needed"
+#~ msgstr "Nepotrebný"
 
 #~ msgid ""
 #~ "patch-check (pchk) [options]\n"

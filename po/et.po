@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-05 16:15+0200\n"
+"POT-Creation-Date: 2016-06-22 09:48+0200\n"
 "PO-Revision-Date: 2007-07-20 10:34+0300\n"
 "Last-Translator: Ain Vagula <avagula@gmail.com>\n"
 "Language-Team: Estonian <linux-ee@lists.eenet.ee>\n"
@@ -199,7 +199,7 @@ msgstr "Ei saanud avada faili: %s."
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
-#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:418 src/solve-commit.cc:668
+#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:424 src/solve-commit.cc:668
 msgid "Continue?"
 msgstr "Kas jätkata?"
 
@@ -261,51 +261,50 @@ msgstr ""
 msgid "Running: %s  (%s, %s)"
 msgstr ""
 
-#: src/callbacks/rpm.h:207
+#: src/callbacks/rpm.h:208
 #, fuzzy, c-format, boost-format
 msgid "Removing %s"
 msgstr "Eemaldamine: %s-%s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:211
+#: src/callbacks/rpm.h:213
 #, fuzzy, c-format, boost-format
 msgid "Removing %s-%s"
 msgstr "Eemaldamine: %s-%s"
 
-#: src/callbacks/rpm.h:234
+#: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr ""
 
-#: src/callbacks/rpm.h:276
+#: src/callbacks/rpm.h:279
 #, fuzzy, c-format, boost-format
 msgid "Installing: %s"
 msgstr "Paigaldamine"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:280
+#: src/callbacks/rpm.h:284
 #, fuzzy, c-format, boost-format
 msgid "Installing: %s-%s"
 msgstr "Paigaldamine"
 
-#: src/callbacks/rpm.h:303
+#: src/callbacks/rpm.h:308
 #, fuzzy, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "Initsialiseerimine nurjus"
 
-#. what's actually needed here
-#: src/callbacks/rpm.h:304
+#: src/callbacks/rpm.h:310
 #, fuzzy, c-format, boost-format
 msgid "Installation of %s-%s failed:"
 msgstr "Initsialiseerimine nurjus"
 
 #. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:350
+#: src/callbacks/rpm.h:356
 msgid "Checking for file conflicts:"
 msgstr ""
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:384
+#: src/callbacks/rpm.h:390
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -314,7 +313,7 @@ msgid ""
 msgstr ""
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:391
+#: src/callbacks/rpm.h:397
 #, boost-format
 msgid ""
 "The following package had to be excluded from file conflicts check because "
@@ -326,19 +325,19 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:402
+#: src/callbacks/rpm.h:408
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/callbacks/rpm.h:410
+#: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
 msgstr ""
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:416
+#: src/callbacks/rpm.h:422
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -491,7 +490,7 @@ msgstr "%s %s teave:"
 msgid "Info for type '%s' not implemented."
 msgstr ""
 
-#: src/info.cc:248 src/info.cc:386 src/info.cc:458
+#: src/info.cc:248 src/info.cc:390 src/info.cc:462
 msgid "Repository: "
 msgstr "Hoidla: "
 
@@ -500,7 +499,7 @@ msgstr "Hoidla: "
 msgid "Support Level: "
 msgstr "Turvatase: "
 
-#: src/info.cc:259 src/info.cc:390
+#: src/info.cc:259 src/info.cc:394
 msgid "Installed: "
 msgstr "Paigaldatud: "
 
@@ -538,28 +537,29 @@ msgstr "Tõsidus"
 msgid "Created On: "
 msgstr "Loodud: "
 
-#: src/info.cc:320
+#: src/info.cc:321
 msgid "Reboot Required: "
 msgstr "Vajalik on taaskäivitamine: "
 
-#: src/info.cc:321
+#: src/info.cc:322
 msgid "Package Manager Restart Required"
 msgstr "Vajalik on paketihalduri taaskäivitamine"
 
-#: src/info.cc:330
+#. print interactive flags the same style as list-patches
+#: src/info.cc:331 src/info.cc:334
 msgid "Interactive: "
 msgstr "Interaktiivne: "
 
-#: src/info.cc:354 src/search.cc:383
+#: src/info.cc:358 src/search.cc:318
 #, fuzzy
 msgid "Recommended"
 msgstr "Soovitab"
 
-#: src/info.cc:356 src/search.cc:385
+#: src/info.cc:360 src/search.cc:320
 msgid "Suggested"
 msgstr ""
 
-#: src/info.cc:391
+#: src/info.cc:395
 msgid "Visible to User: "
 msgstr ""
 
@@ -570,90 +570,90 @@ msgstr ""
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:910 src/search.cc:65 src/search.cc:232
-#: src/search.cc:439 src/search.cc:575 src/search.cc:634
+#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
-#: src/info.cc:402 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:665 src/update.cc:915 src/update.cc:1050 src/Zypper.cc:5246
-#: src/search.cc:67 src/search.cc:233 src/search.cc:325 src/search.cc:440
-#: src/search.cc:577 src/search.cc:639 src/locks.cc:104
+#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
+#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
+#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
+#: src/utils/misc.cc:250
 msgid "Name"
 msgstr "Nimi"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
-#: src/search.cc:69 src/search.cc:236 src/locks.cc:107
+#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Tüüp"
 
-#: src/info.cc:402 src/search.cc:443
+#: src/info.cc:406 src/search.cc:379
 #, fuzzy
 msgid "Dependency"
 msgstr "Sõltuvused"
 
-#: src/info.cc:417
+#: src/info.cc:421
 msgid "Contents"
 msgstr "Sisu"
 
-#: src/info.cc:419
+#: src/info.cc:423
 msgid "(empty)"
 msgstr ""
 
-#: src/info.cc:472
+#: src/info.cc:476
 msgid "Flavor"
 msgstr ""
 
-#: src/info.cc:477
+#: src/info.cc:481
 #, fuzzy
 msgid "Short Name"
 msgstr "Lühinimed:"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:479 src/Summary.cc:1207 src/utils/misc.cc:138
+#: src/info.cc:483 src/Summary.cc:1207
 msgid "Installed"
 msgstr "Paigaldatud"
 
-#: src/info.cc:481 src/search.cc:642
+#: src/info.cc:485 src/search.cc:578
 msgid "Is Base"
 msgstr ""
 
-#: src/info.cc:485
+#: src/info.cc:489
 msgid "End of Support"
 msgstr ""
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
+#: src/info.cc:489 src/info.cc:497 src/info.cc:528
 msgid "undefined"
 msgstr ""
 
-#: src/info.cc:488
+#: src/info.cc:492
 #, fuzzy
 msgid "CPE Name"
 msgstr "Nimi"
 
-#: src/info.cc:495
+#: src/info.cc:499
 #, fuzzy
 msgid "invalid CPE Name"
 msgstr "Vigane caName: %1."
 
-#: src/info.cc:498
+#: src/info.cc:502
 #, fuzzy
 msgid "Update Repositories"
 msgstr "Kõiki hoidlaid värskendati."
 
-#: src/info.cc:506
+#: src/info.cc:510
 #, fuzzy
 msgid "Content Id"
 msgstr "Sisu"
 
-#: src/info.cc:513
+#: src/info.cc:517
 #, fuzzy
 msgid "Provided by enabled repository"
 msgstr "Keelatud hoidla '%s' jäetakse vahele"
 
-#: src/info.cc:519
+#: src/info.cc:523
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "Ühtki paketti ei leitud."
@@ -2621,7 +2621,7 @@ msgid ""
 msgstr ""
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:329
+#: src/update.cc:280
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
@@ -2629,7 +2629,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translator: stats table header
-#: src/update.cc:333
+#: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
@@ -2637,7 +2637,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translator: stats summary
-#: src/update.cc:343
+#: src/update.cc:294
 #, fuzzy, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
@@ -2645,7 +2645,7 @@ msgstr[0] "Vajalik on taaskäivitamine"
 msgstr[1] "Vajalik on taaskäivitamine"
 
 #. translator: stats summary
-#: src/update.cc:351
+#: src/update.cc:302
 #, fuzzy, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -2654,13 +2654,13 @@ msgstr[1] "Vajalik on taaskäivitamine"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:355
+#: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr ""
 
 #. translator: stats summary
-#: src/update.cc:364
+#: src/update.cc:315
 #, fuzzy, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -2668,7 +2668,7 @@ msgstr[0] "Vajalik on taaskäivitamine"
 msgstr[1] "Vajalik on taaskäivitamine"
 
 #. translator: stats summary
-#: src/update.cc:367
+#: src/update.cc:318
 #, fuzzy, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -2676,23 +2676,23 @@ msgstr[0] "Vaja on %d paika (%d turvapaika)"
 msgstr[1] "Vaja on %d paika (%d turvapaika)"
 
 #. translator: Table column header.
-#: src/update.cc:399 src/update.cc:665 src/update.cc:981 src/update.cc:1050
-#: src/search.cc:326
+#. Name
+#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
 msgid "Category"
 msgstr "Kategooria"
 
 #. translator: Table column header.
-#: src/update.cc:401
+#: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
 
 #. translator: Table column header.
-#: src/update.cc:403 src/update.cc:830
+#: src/update.cc:354 src/update.cc:716
 msgid "Patches"
 msgstr "Paigad"
 
 #. translator: Table column header.
-#: src/update.cc:405
+#: src/update.cc:356
 msgid "Locked"
 msgstr ""
 
@@ -2701,151 +2701,92 @@ msgstr ""
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:411
+#: src/update.cc:362
 msgid "Included categories"
 msgstr ""
 
-#. Translator: Patch status: needed, optional, unwanted, applied, not needed
-#: src/update.cc:474
-msgid "unwanted"
-msgstr ""
-
-#: src/update.cc:476
-msgid "optional"
-msgstr ""
-
-#: src/update.cc:477
-#, fuzzy
-msgid "needed"
-msgstr "Vajalik"
-
-#: src/update.cc:479
-#, fuzzy
-msgid "applied"
-msgstr "Rakendatud"
-
-#: src/update.cc:480
-#, fuzzy
-msgid "not needed"
-msgstr "Pole vajalik"
-
-#: src/update.cc:486
-msgid "undetermined"
-msgstr ""
-
-#. translators: package's repository (header)
-#: src/update.cc:664 src/update.cc:912 src/search.cc:75 src/search.cc:324
-#: src/search.cc:442 src/search.cc:576 src/search.cc:635 src/locks.cc:107
-msgid "Repository"
-msgstr "Hoidla"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050 src/search.cc:327
-msgid "Severity"
-msgstr "Tõsidus"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050
-#, fuzzy
-msgid "Interactive"
-msgstr "Interaktiivne: "
-
-#: src/update.cc:665 src/update.cc:981 src/search.cc:328
-msgid "Status"
-msgstr "Olek"
-
-#. translators: package summary (header)
-#: src/update.cc:665 src/update.cc:1050 src/search.cc:235
-msgid "Summary"
-msgstr "Kokkuvõte"
-
-#: src/update.cc:717
+#: src/update.cc:603
 #, fuzzy
 msgid "The following software management updates will be installed first:"
 msgstr "Paigaldatakse järgnevad paketid:\n"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:720
+#: src/update.cc:606
 #, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr "Paigaldatakse järgnevad paketid:\n"
 
-#: src/update.cc:729 src/update.cc:968
+#: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
 msgstr "Ühtki uuendust ei leitud."
 
 #. translator: Table headline
-#: src/update.cc:736
+#: src/update.cc:621
 #, fuzzy
 msgid "The following updates are also available:"
 msgstr "Paigaldatakse järgnevad paketid:\n"
 
-#: src/update.cc:828
+#: src/update.cc:714
 #, fuzzy
 msgid "Package updates"
 msgstr "Uuenduste kontrollimine:"
 
-#: src/update.cc:832
+#: src/update.cc:718
 #, fuzzy
 msgid "Pattern updates"
 msgstr "Aku olek"
 
-#: src/update.cc:834
+#: src/update.cc:720
 msgid "Product updates"
 msgstr ""
 
-#: src/update.cc:920
+#. translators: package's repository (header)
+#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
+#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Hoidla"
+
+#: src/update.cc:806
 #, fuzzy
 msgid "Current Version"
 msgstr "Praegune ühendus"
 
-#: src/update.cc:921
+#: src/update.cc:807
 #, fuzzy
 msgid "Available Version"
 msgstr "Saadaolevad uuendused"
 
 #. translators: package architecture (header)
-#: src/update.cc:921 src/search.cc:73 src/search.cc:579 src/search.cc:641
+#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
 msgid "Arch"
 msgstr "Arh."
 
-#: src/update.cc:981
-msgid "Issue"
-msgstr ""
-
-#: src/update.cc:981
-#, fuzzy
-msgid "No."
-msgstr "Ei"
-
-#: src/update.cc:981
-msgid "Patch"
-msgstr "Paik"
-
-#: src/update.cc:1091
+#: src/update.cc:969
 #, fuzzy
 msgid "No matching issues found."
 msgstr "Vasteid ei leitud"
 
-#: src/update.cc:1099
+#: src/update.cc:977
 #, fuzzy
 msgid "The following matches in issue numbers have been found:"
 msgstr "Alla laaditakse järgnevad paketid:"
 
-#: src/update.cc:1108
+#: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 
-#: src/update.cc:1177
+#: src/update.cc:1057
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 
-#: src/update.cc:1179
+#: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1182
+#: src/update.cc:1062
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -5120,42 +5061,47 @@ msgid "No source packages to download."
 msgstr "võrgupõhine paigaldamine"
 
 #. translators: package version (header)
-#: src/search.cc:71 src/search.cc:441 src/search.cc:578 src/search.cc:640
+#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
 msgid "Version"
 msgstr "Versioon"
 
-#: src/search.cc:138
+#: src/search.cc:137
 #, fuzzy
 msgid "System Packages"
 msgstr "Süsteemi ala elemendid"
 
-#: src/search.cc:403
+#. translators: package summary (header)
+#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
+msgid "Summary"
+msgstr "Kokkuvõte"
+
+#: src/search.cc:336
 msgid "No needed patches found."
 msgstr "Ühtki vajalikku paika ei leitud."
 
-#: src/search.cc:472
+#: src/search.cc:408
 #, fuzzy
 msgid "No patterns found."
 msgstr "Ühtki uuendust ei leitud."
 
-#: src/search.cc:569
+#: src/search.cc:505
 #, fuzzy
 msgid "No packages found."
 msgstr "Ühtki uuendust ei leitud."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:638
+#: src/search.cc:574
 #, fuzzy
 msgid "Internal Name"
 msgstr "Sisemine viga"
 
-#: src/search.cc:715
+#: src/search.cc:651
 #, fuzzy
 msgid "No products found."
 msgstr "Ühtki uuendust ei leitud."
 
-#: src/search.cc:739
+#: src/search.cc:675
 #, fuzzy, c-format, boost-format
 msgid "No providers of '%s' found."
 msgstr "Vasteid ei leitud"
@@ -5557,42 +5503,42 @@ msgstr "Vigane seerianumber %1"
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 
-#: src/utils/misc.cc:112
+#: src/utils/misc.cc:113
 #, fuzzy
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "pakett"
 msgstr[1] "pakett"
 
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 #, fuzzy
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "muster"
 msgstr[1] "muster"
 
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 #, fuzzy
 msgid "product"
 msgid_plural "product"
 msgstr[0] "toode"
 msgstr[1] "toode"
 
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:119
 #, fuzzy
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "paik"
 msgstr[1] "paik"
 
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:121
 #, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "pakett"
 msgstr[1] "pakett"
 
-#: src/utils/misc.cc:122
+#: src/utils/misc.cc:123
 #, fuzzy
 msgid "application"
 msgid_plural "applications"
@@ -5600,45 +5546,94 @@ msgstr[0] "valik"
 msgstr[1] "valik"
 
 #. default
-#: src/utils/misc.cc:124
+#: src/utils/misc.cc:125
 #, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "Ühtki lahendajat ei leitud."
 msgstr[1] "Ühtki lahendajat ei leitud."
 
-#: src/utils/misc.cc:133
-msgid "Unknown"
-msgstr "Tundmatu"
+#. Patch status: i18n + color
+#. translator: patch status
+#: src/utils/misc.cc:134
+msgid "unwanted"
+msgstr ""
 
-#: src/utils/misc.cc:140
-msgid "Needed"
+#. translator: patch status
+#: src/utils/misc.cc:135
+msgid "optional"
+msgstr ""
+
+#. translator: patch status
+#: src/utils/misc.cc:136
+#, fuzzy
+msgid "needed"
 msgstr "Vajalik"
 
-#: src/utils/misc.cc:145
-msgid "Not Needed"
+#. translator: patch status
+#: src/utils/misc.cc:137
+#, fuzzy
+msgid "applied"
+msgstr "Rakendatud"
+
+#. translator: patch status
+#: src/utils/misc.cc:138
+#, fuzzy
+msgid "not needed"
 msgstr "Pole vajalik"
 
-#: src/utils/misc.cc:195
+#. translator: patch status
+#: src/utils/misc.cc:139
+msgid "undetermined"
+msgstr ""
+
+#: src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
+msgstr "Tõsidus"
+
+#: src/utils/misc.cc:253 src/utils/misc.cc:294
+#, fuzzy
+msgid "Interactive"
+msgstr "Interaktiivne: "
+
+#: src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "Olek"
+
+#. << _("Repository")
+#: src/utils/misc.cc:289
+msgid "Issue"
+msgstr ""
+
+#: src/utils/misc.cc:290
+#, fuzzy
+msgid "No."
+msgstr "Ei"
+
+#: src/utils/misc.cc:291
+msgid "Patch"
+msgstr "Paik"
+
+#: src/utils/misc.cc:367
 msgid "Specified local path does not exist or is not accessible."
 msgstr ""
 
-#: src/utils/misc.cc:207
+#: src/utils/misc.cc:379
 #, fuzzy
 msgid "Given URI is invalid"
 msgstr "Antud URL on vigane."
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:297
+#: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
 msgstr ""
 
-#: src/utils/misc.cc:298
+#: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
 msgstr ""
 
-#: src/utils/misc.cc:299 src/utils/misc.cc:336
+#: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, fuzzy, c-format, boost-format
 msgid "Example: %s"
 msgstr ""
@@ -5646,47 +5641,56 @@ msgstr ""
 "\n"
 "Näide: "
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 #, fuzzy
 msgid "Invalid OBS URI."
 msgstr "Vigane KeyID."
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
 msgstr ""
 
-#: src/utils/misc.cc:386
+#: src/utils/misc.cc:558
 #, fuzzy
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Probleem andmete laadimisel asukohast '%s'"
 
-#: src/utils/misc.cc:387
+#: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
 msgstr ""
 
-#: src/utils/misc.cc:395
+#: src/utils/misc.cc:567
 #, fuzzy
 msgid "Problem retrieving the specified RPM file"
 msgstr "Probleem andmete laadimisel asukohast '%s'"
 
-#: src/utils/misc.cc:396
+#: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
 msgstr ""
 
-#: src/utils/misc.cc:514
+#: src/utils/misc.cc:686
 #, fuzzy, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Tundmatu käsk '%s'"
 
-#: src/utils/misc.cc:515
+#: src/utils/misc.cc:687
 #, fuzzy, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Mooduli \"%s\" laadimine ebaõnnestus."
 
-#: src/utils/misc.cc:529
+#: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr ""
+
+#~ msgid "Unknown"
+#~ msgstr "Tundmatu"
+
+#~ msgid "Needed"
+#~ msgstr "Vajalik"
+
+#~ msgid "Not Needed"
+#~ msgstr "Pole vajalik"
 
 #~ msgid "Catalog: "
 #~ msgstr "Kataloog: "

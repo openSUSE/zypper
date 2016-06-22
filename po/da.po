@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-05 16:15+0200\n"
+"POT-Creation-Date: 2016-06-22 09:48+0200\n"
 "PO-Revision-Date: 2015-10-06 21:56+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <opensuse-translation@opensuse.org>\n"
@@ -193,7 +193,7 @@ msgstr "Ingen digest for filen %s."
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
-#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:418 src/solve-commit.cc:668
+#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:424 src/solve-commit.cc:668
 msgid "Continue?"
 msgstr "Vil du fortsætte?"
 
@@ -255,51 +255,50 @@ msgstr ""
 msgid "Running: %s  (%s, %s)"
 msgstr "Kører: %s  (%s,%s)"
 
-#: src/callbacks/rpm.h:207
+#: src/callbacks/rpm.h:208
 #, fuzzy, c-format, boost-format
 msgid "Removing %s"
 msgstr "Fjerner %s-%s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:211
+#: src/callbacks/rpm.h:213
 #, c-format, boost-format
 msgid "Removing %s-%s"
 msgstr "Fjerner %s-%s"
 
-#: src/callbacks/rpm.h:234
+#: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "Fjernelse af %s fejlede"
 
-#: src/callbacks/rpm.h:276
+#: src/callbacks/rpm.h:279
 #, fuzzy, c-format, boost-format
 msgid "Installing: %s"
 msgstr "Installerer: %s-%s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:280
+#: src/callbacks/rpm.h:284
 #, c-format, boost-format
 msgid "Installing: %s-%s"
 msgstr "Installerer: %s-%s"
 
-#: src/callbacks/rpm.h:303
+#: src/callbacks/rpm.h:308
 #, fuzzy, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "Installation af %s-%s fejlede:"
 
-#. what's actually needed here
-#: src/callbacks/rpm.h:304
+#: src/callbacks/rpm.h:310
 #, c-format, boost-format
 msgid "Installation of %s-%s failed:"
 msgstr "Installation af %s-%s fejlede:"
 
 #. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:350
+#: src/callbacks/rpm.h:356
 msgid "Checking for file conflicts:"
 msgstr "Tjekker for filkonflikter:"
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:384
+#: src/callbacks/rpm.h:390
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -311,7 +310,7 @@ msgstr ""
 "side for detaljer."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:391
+#: src/callbacks/rpm.h:397
 #, boost-format
 msgid ""
 "The following package had to be excluded from file conflicts check because "
@@ -323,19 +322,19 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:402
+#: src/callbacks/rpm.h:408
 #, fuzzy, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] "Tjekker for filkonflikter:"
 msgstr[1] "Tjekker for filkonflikter:"
 
-#: src/callbacks/rpm.h:410
+#: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
 msgstr "Filer i konflikt vil blive erstattet."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:416
+#: src/callbacks/rpm.h:422
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -486,7 +485,7 @@ msgstr "Information for %s %s:"
 msgid "Info for type '%s' not implemented."
 msgstr "Information for typen '%s' er ikke implementeret."
 
-#: src/info.cc:248 src/info.cc:386 src/info.cc:458
+#: src/info.cc:248 src/info.cc:390 src/info.cc:462
 msgid "Repository: "
 msgstr "Softwarekilde: "
 
@@ -494,7 +493,7 @@ msgstr "Softwarekilde: "
 msgid "Support Level: "
 msgstr "Supportniveau: "
 
-#: src/info.cc:259 src/info.cc:390
+#: src/info.cc:259 src/info.cc:394
 msgid "Installed: "
 msgstr "Installeret: "
 
@@ -531,27 +530,28 @@ msgstr "Alvor: "
 msgid "Created On: "
 msgstr "Oprettet den: "
 
-#: src/info.cc:320
+#: src/info.cc:321
 msgid "Reboot Required: "
 msgstr "Kræver genopstart: "
 
-#: src/info.cc:321
+#: src/info.cc:322
 msgid "Package Manager Restart Required"
 msgstr "Kræver genstart af pakkehåndtering"
 
-#: src/info.cc:330
+#. print interactive flags the same style as list-patches
+#: src/info.cc:331 src/info.cc:334
 msgid "Interactive: "
 msgstr "Interaktiv: "
 
-#: src/info.cc:354 src/search.cc:383
+#: src/info.cc:358 src/search.cc:318
 msgid "Recommended"
 msgstr "Anbefalet"
 
-#: src/info.cc:356 src/search.cc:385
+#: src/info.cc:360 src/search.cc:320
 msgid "Suggested"
 msgstr "Foreslået"
 
-#: src/info.cc:391
+#: src/info.cc:395
 msgid "Visible to User: "
 msgstr "Synligt for brugeren: "
 
@@ -562,83 +562,83 @@ msgstr "Synligt for brugeren: "
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:910 src/search.cc:65 src/search.cc:232
-#: src/search.cc:439 src/search.cc:575 src/search.cc:634
+#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
-#: src/info.cc:402 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:665 src/update.cc:915 src/update.cc:1050 src/Zypper.cc:5246
-#: src/search.cc:67 src/search.cc:233 src/search.cc:325 src/search.cc:440
-#: src/search.cc:577 src/search.cc:639 src/locks.cc:104
+#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
+#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
+#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
+#: src/utils/misc.cc:250
 msgid "Name"
 msgstr "Navn"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
-#: src/search.cc:69 src/search.cc:236 src/locks.cc:107
+#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Type"
 
-#: src/info.cc:402 src/search.cc:443
+#: src/info.cc:406 src/search.cc:379
 msgid "Dependency"
 msgstr "Afhængighed"
 
-#: src/info.cc:417
+#: src/info.cc:421
 msgid "Contents"
 msgstr "Indhold"
 
-#: src/info.cc:419
+#: src/info.cc:423
 msgid "(empty)"
 msgstr "(tom)"
 
-#: src/info.cc:472
+#: src/info.cc:476
 msgid "Flavor"
 msgstr "Flavor"
 
-#: src/info.cc:477
+#: src/info.cc:481
 msgid "Short Name"
 msgstr "Kort navn"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:479 src/Summary.cc:1207 src/utils/misc.cc:138
+#: src/info.cc:483 src/Summary.cc:1207
 msgid "Installed"
 msgstr "Installeret"
 
-#: src/info.cc:481 src/search.cc:642
+#: src/info.cc:485 src/search.cc:578
 msgid "Is Base"
 msgstr "Er basis"
 
-#: src/info.cc:485
+#: src/info.cc:489
 msgid "End of Support"
 msgstr "Ikke understøttet længere"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
+#: src/info.cc:489 src/info.cc:497 src/info.cc:528
 msgid "undefined"
 msgstr "udefineret"
 
-#: src/info.cc:488
+#: src/info.cc:492
 msgid "CPE Name"
 msgstr "CPE-navn"
 
-#: src/info.cc:495
+#: src/info.cc:499
 msgid "invalid CPE Name"
 msgstr "Ugyldigt CPE-navn"
 
-#: src/info.cc:498
+#: src/info.cc:502
 msgid "Update Repositories"
 msgstr "Opdateringskilder"
 
-#: src/info.cc:506
+#: src/info.cc:510
 msgid "Content Id"
 msgstr "Indholds-id"
 
-#: src/info.cc:513
+#: src/info.cc:517
 msgid "Provided by enabled repository"
 msgstr "Leveret af aktiveret softwarekilde"
 
-#: src/info.cc:519
+#: src/info.cc:523
 msgid "Not provided by any enabled repository"
 msgstr "Ikke leveret af en aktiv softwarekilde"
 
@@ -2641,7 +2641,7 @@ msgstr ""
 "blevet angivet."
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:329
+#: src/update.cc:280
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
@@ -2649,7 +2649,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translator: stats table header
-#: src/update.cc:333
+#: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
@@ -2657,7 +2657,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translator: stats summary
-#: src/update.cc:343
+#: src/update.cc:294
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
@@ -2665,7 +2665,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translator: stats summary
-#: src/update.cc:351
+#: src/update.cc:302
 #, fuzzy, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -2674,13 +2674,13 @@ msgstr[1] "ikke nødvendig"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:355
+#: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr ""
 
 #. translator: stats summary
-#: src/update.cc:364
+#: src/update.cc:315
 #, fuzzy, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -2688,7 +2688,7 @@ msgstr[0] "ikke nødvendig"
 msgstr[1] "ikke nødvendig"
 
 #. translator: stats summary
-#: src/update.cc:367
+#: src/update.cc:318
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -2696,23 +2696,23 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translator: Table column header.
-#: src/update.cc:399 src/update.cc:665 src/update.cc:981 src/update.cc:1050
-#: src/search.cc:326
+#. Name
+#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
 msgid "Category"
 msgstr "Kategori"
 
 #. translator: Table column header.
-#: src/update.cc:401
+#: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
 
 #. translator: Table column header.
-#: src/update.cc:403 src/update.cc:830
+#: src/update.cc:354 src/update.cc:716
 msgid "Patches"
 msgstr "Rettelser"
 
 #. translator: Table column header.
-#: src/update.cc:405
+#: src/update.cc:356
 msgid "Locked"
 msgstr ""
 
@@ -2721,138 +2721,83 @@ msgstr ""
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:411
+#: src/update.cc:362
 msgid "Included categories"
 msgstr ""
 
-#. Translator: Patch status: needed, optional, unwanted, applied, not needed
-#: src/update.cc:474
-msgid "unwanted"
-msgstr ""
-
-#: src/update.cc:476
-msgid "optional"
-msgstr ""
-
-#: src/update.cc:477
-msgid "needed"
-msgstr "nødvendig"
-
-#: src/update.cc:479
-msgid "applied"
-msgstr ""
-
-#: src/update.cc:480
-msgid "not needed"
-msgstr "ikke nødvendig"
-
-#: src/update.cc:486
-#, fuzzy
-msgid "undetermined"
-msgstr "udefineret"
-
-#. translators: package's repository (header)
-#: src/update.cc:664 src/update.cc:912 src/search.cc:75 src/search.cc:324
-#: src/search.cc:442 src/search.cc:576 src/search.cc:635 src/locks.cc:107
-msgid "Repository"
-msgstr "Softwarekilde"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050 src/search.cc:327
-msgid "Severity"
-msgstr "Alvor"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050
-msgid "Interactive"
-msgstr ""
-
-#: src/update.cc:665 src/update.cc:981 src/search.cc:328
-msgid "Status"
-msgstr "Status"
-
-#. translators: package summary (header)
-#: src/update.cc:665 src/update.cc:1050 src/search.cc:235
-msgid "Summary"
-msgstr "Resumé"
-
-#: src/update.cc:717
+#: src/update.cc:603
 msgid "The following software management updates will be installed first:"
 msgstr ""
 "Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:720
+#: src/update.cc:606
 #, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr ""
 "Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
 
-#: src/update.cc:729 src/update.cc:968
+#: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
 msgstr "Ingen opdateringer fundet."
 
 #. translator: Table headline
-#: src/update.cc:736
+#: src/update.cc:621
 msgid "The following updates are also available:"
 msgstr "De følgende opdateringer er også tilgængelige:"
 
-#: src/update.cc:828
+#: src/update.cc:714
 msgid "Package updates"
 msgstr "Pakkeopdateringer"
 
-#: src/update.cc:832
+#: src/update.cc:718
 msgid "Pattern updates"
 msgstr "Mønsteropdateringer"
 
-#: src/update.cc:834
+#: src/update.cc:720
 msgid "Product updates"
 msgstr "Produktopdateringer"
 
-#: src/update.cc:920
+#. translators: package's repository (header)
+#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
+#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Softwarekilde"
+
+#: src/update.cc:806
 msgid "Current Version"
 msgstr "Nuværende version"
 
-#: src/update.cc:921
+#: src/update.cc:807
 msgid "Available Version"
 msgstr "Tilgængelig version"
 
 #. translators: package architecture (header)
-#: src/update.cc:921 src/search.cc:73 src/search.cc:579 src/search.cc:641
+#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
 msgid "Arch"
 msgstr "Arkitektur"
 
-#: src/update.cc:981
-msgid "Issue"
-msgstr "Problemstilling"
-
-#: src/update.cc:981
-msgid "No."
-msgstr "Nr."
-
-#: src/update.cc:981
-msgid "Patch"
-msgstr "Rettelse"
-
-#: src/update.cc:1091
+#: src/update.cc:969
 msgid "No matching issues found."
 msgstr "Ingen matchende problemstillinger fundet."
 
-#: src/update.cc:1099
+#: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
 msgstr "Følgende matchende problemstillingsnumre er blevet fundet:"
 
-#: src/update.cc:1108
+#: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 "Der er blevet fundet matchende rettelsesbeskrivelser i følgende rettelser:"
 
-#: src/update.cc:1177
+#: src/update.cc:1057
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Løsning af Bugzilla problemstillingsnummer %s blev ikke fundet eller er ikke "
 "nødvendig."
 
-#: src/update.cc:1179
+#: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
@@ -2860,7 +2805,7 @@ msgstr ""
 "nødvendig."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1182
+#: src/update.cc:1062
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -5761,37 +5706,42 @@ msgid "No source packages to download."
 msgstr "Ingen kildepakker der skal downloades."
 
 #. translators: package version (header)
-#: src/search.cc:71 src/search.cc:441 src/search.cc:578 src/search.cc:640
+#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
 msgid "Version"
 msgstr "Version"
 
-#: src/search.cc:138
+#: src/search.cc:137
 msgid "System Packages"
 msgstr "Systempakker"
 
-#: src/search.cc:403
+#. translators: package summary (header)
+#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
+msgid "Summary"
+msgstr "Resumé"
+
+#: src/search.cc:336
 msgid "No needed patches found."
 msgstr "Ingen nødvendige rettelser fundet."
 
-#: src/search.cc:472
+#: src/search.cc:408
 msgid "No patterns found."
 msgstr "Ingen mønstre fundet."
 
-#: src/search.cc:569
+#: src/search.cc:505
 msgid "No packages found."
 msgstr "Ingen pakker fundet."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:638
+#: src/search.cc:574
 msgid "Internal Name"
 msgstr "Internt navn"
 
-#: src/search.cc:715
+#: src/search.cc:651
 msgid "No products found."
 msgstr "Ingen produkter fundet."
 
-#: src/search.cc:739
+#: src/search.cc:675
 #, c-format, boost-format
 msgid "No providers of '%s' found."
 msgstr "Ingen, der leverer \"%s\", fundet."
@@ -6193,126 +6143,180 @@ msgstr ""
 "Angiv \"%s\" for \"%s\" eller \"%s\" for \"%s\" hvis intet andet fungerer "
 "for dig."
 
-#: src/utils/misc.cc:112
+#: src/utils/misc.cc:113
 #, fuzzy
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "Behold pakker"
 msgstr[1] "Behold pakker"
 
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "product"
 msgid_plural "product"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:119
 #, fuzzy
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "Rettelse"
 msgstr[1] "Rettelse"
 
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:121
 #, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "Kildepakke"
 msgstr[1] "Kildepakke"
 
-#: src/utils/misc.cc:122
+#: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
 msgstr[0] ""
 msgstr[1] ""
 
 #. default
-#: src/utils/misc.cc:124
+#: src/utils/misc.cc:125
 #, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "Type af resolvable"
 msgstr[1] "Type af resolvable"
 
-#: src/utils/misc.cc:133
-msgid "Unknown"
-msgstr "Ukendt"
+#. Patch status: i18n + color
+#. translator: patch status
+#: src/utils/misc.cc:134
+msgid "unwanted"
+msgstr ""
 
-#: src/utils/misc.cc:140
-msgid "Needed"
-msgstr "Nødvendig"
+#. translator: patch status
+#: src/utils/misc.cc:135
+msgid "optional"
+msgstr ""
 
-#: src/utils/misc.cc:145
-msgid "Not Needed"
-msgstr "Ikke nødvendig"
+#. translator: patch status
+#: src/utils/misc.cc:136
+msgid "needed"
+msgstr "nødvendig"
 
-#: src/utils/misc.cc:195
+#. translator: patch status
+#: src/utils/misc.cc:137
+msgid "applied"
+msgstr ""
+
+#. translator: patch status
+#: src/utils/misc.cc:138
+msgid "not needed"
+msgstr "ikke nødvendig"
+
+#. translator: patch status
+#: src/utils/misc.cc:139
+#, fuzzy
+msgid "undetermined"
+msgstr "udefineret"
+
+#: src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
+msgstr "Alvor"
+
+#: src/utils/misc.cc:253 src/utils/misc.cc:294
+msgid "Interactive"
+msgstr ""
+
+#: src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "Status"
+
+#. << _("Repository")
+#: src/utils/misc.cc:289
+msgid "Issue"
+msgstr "Problemstilling"
+
+#: src/utils/misc.cc:290
+msgid "No."
+msgstr "Nr."
+
+#: src/utils/misc.cc:291
+msgid "Patch"
+msgstr "Rettelse"
+
+#: src/utils/misc.cc:367
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Den angivne lokale søgesti eksisterer ikke, eller er ikke tilgængelig."
 
-#: src/utils/misc.cc:207
+#: src/utils/misc.cc:379
 msgid "Given URI is invalid"
 msgstr "Den givne URI er ugyldig"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:297
+#: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
 msgstr ""
 
-#: src/utils/misc.cc:298
+#: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
 msgstr ""
 
-#: src/utils/misc.cc:299 src/utils/misc.cc:336
+#: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Eksempel: %s"
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
 msgstr "Ugyldig OBS-URI."
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Korrekt format er obs://<projekt>/[platform]"
 
-#: src/utils/misc.cc:386
+#: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Problem med kopiering af den angivne RPM-fil til cache-mappen."
 
-#: src/utils/misc.cc:387
+#: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
 msgstr "Måske er du ved at løbe tør for diskplads."
 
-#: src/utils/misc.cc:395
+#: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
 msgstr "Problem med at hente den angivne RPM-fil"
 
-#: src/utils/misc.cc:396
+#: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
 msgstr "Tjek om filen er tilgængelig."
 
-#: src/utils/misc.cc:514
+#: src/utils/misc.cc:686
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Ukendt downloadtilstand \"%s\"."
 
-#: src/utils/misc.cc:515
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Tilgængelige downloadtilstande: %s"
 
-#: src/utils/misc.cc:529
+#: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Tilvalget \"%s\" tilsidesætter \"%s\"."
+
+#~ msgid "Unknown"
+#~ msgstr "Ukendt"
+
+#~ msgid "Needed"
+#~ msgstr "Nødvendig"
+
+#~ msgid "Not Needed"
+#~ msgstr "Ikke nødvendig"
 
 #~ msgid ""
 #~ "patch-check (pchk) [options]\n"

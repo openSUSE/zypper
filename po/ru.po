@@ -10,17 +10,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-05 16:15+0200\n"
+"POT-Creation-Date: 2016-06-22 09:48+0200\n"
 "PO-Revision-Date: 2016-06-20 09:31+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
-"\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
@@ -95,8 +95,8 @@ msgstr "Приём файла \"%s\", подписанного неизвест�
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Приём файла \"%s\" из репозитория \"%s\", подписанного неизвестным ключом \"%"
-"s\"."
+"Приём файла \"%s\" из репозитория \"%s\", подписанного неизвестным ключом "
+"\"%s\"."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -202,7 +202,7 @@ msgstr "Нет дайджеста для файла %s."
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
-#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:418 src/solve-commit.cc:668
+#: src/callbacks/rpm.h:138 src/callbacks/rpm.h:424 src/solve-commit.cc:668
 msgid "Continue?"
 msgstr "Продолжить?"
 
@@ -277,51 +277,50 @@ msgstr "Разблокировать или отклонить?"
 msgid "Running: %s  (%s, %s)"
 msgstr "Выполнение: %s  (%s, %s)"
 
-#: src/callbacks/rpm.h:207
+#: src/callbacks/rpm.h:208
 #, c-format, boost-format
 msgid "Removing %s"
 msgstr "Удаление %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:211
+#: src/callbacks/rpm.h:213
 #, c-format, boost-format
 msgid "Removing %s-%s"
 msgstr "Удаление %s-%s"
 
-#: src/callbacks/rpm.h:234
+#: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "Сбой при удалении %s:"
 
-#: src/callbacks/rpm.h:276
+#: src/callbacks/rpm.h:279
 #, c-format, boost-format
 msgid "Installing: %s"
 msgstr "Установка: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:280
+#: src/callbacks/rpm.h:284
 #, c-format, boost-format
 msgid "Installing: %s-%s"
 msgstr "Установка: %s-%s"
 
-#: src/callbacks/rpm.h:303
+#: src/callbacks/rpm.h:308
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "Сбой при установке %s:"
 
-#. what's actually needed here
-#: src/callbacks/rpm.h:304
+#: src/callbacks/rpm.h:310
 #, c-format, boost-format
 msgid "Installation of %s-%s failed:"
 msgstr "Сбой при установке %s-%s:"
 
 #. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:350
+#: src/callbacks/rpm.h:356
 msgid "Checking for file conflicts:"
 msgstr "Проверка на конфликты файлов:"
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:384
+#: src/callbacks/rpm.h:390
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -333,7 +332,7 @@ msgstr ""
 "см. в описании параметра \"%1%\" на странице руководства zypper."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:391
+#: src/callbacks/rpm.h:397
 #, boost-format
 msgid ""
 "The following package had to be excluded from file conflicts check because "
@@ -352,7 +351,7 @@ msgstr[2] ""
 "ещё не загружены:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:402
+#: src/callbacks/rpm.h:408
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
@@ -360,12 +359,12 @@ msgstr[0] "Обнаружен %1% конфликт файлов:"
 msgstr[1] "Обнаружены %1% конфликта файлов:"
 msgstr[2] "Обнаружены %1% конфликтов файлов:"
 
-#: src/callbacks/rpm.h:410
+#: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
 msgstr "Конфликтующие файлы будут заменены."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:416
+#: src/callbacks/rpm.h:422
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -522,7 +521,7 @@ msgstr "Сведения — %s %s:"
 msgid "Info for type '%s' not implemented."
 msgstr "Сведения о типе '%s' не реализованы."
 
-#: src/info.cc:248 src/info.cc:386 src/info.cc:458
+#: src/info.cc:248 src/info.cc:390 src/info.cc:462
 msgid "Repository: "
 msgstr "Репозиторий: "
 
@@ -530,7 +529,7 @@ msgstr "Репозиторий: "
 msgid "Support Level: "
 msgstr "Уровень поддержки: "
 
-#: src/info.cc:259 src/info.cc:390
+#: src/info.cc:259 src/info.cc:394
 msgid "Installed: "
 msgstr "Установлен: "
 
@@ -567,27 +566,28 @@ msgstr "Важность: "
 msgid "Created On: "
 msgstr "Создан: "
 
-#: src/info.cc:320
+#: src/info.cc:321
 msgid "Reboot Required: "
 msgstr "Требуется перезагрузка: "
 
-#: src/info.cc:321
+#: src/info.cc:322
 msgid "Package Manager Restart Required"
 msgstr "Требуется перезапуск менеджера пакетов"
 
-#: src/info.cc:330
+#. print interactive flags the same style as list-patches
+#: src/info.cc:331 src/info.cc:334
 msgid "Interactive: "
 msgstr "Интерактивный: "
 
-#: src/info.cc:354 src/search.cc:383
+#: src/info.cc:358 src/search.cc:318
 msgid "Recommended"
 msgstr "Рекомендованный"
 
-#: src/info.cc:356 src/search.cc:385
+#: src/info.cc:360 src/search.cc:320
 msgid "Suggested"
 msgstr "Предложено"
 
-#: src/info.cc:391
+#: src/info.cc:395
 msgid "Visible to User: "
 msgstr "Видимость для пользователя: "
 
@@ -598,83 +598,83 @@ msgstr "Видимость для пользователя: "
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:910 src/search.cc:65 src/search.cc:232
-#: src/search.cc:439 src/search.cc:575 src/search.cc:634
+#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "С"
 
 #. translators: name (general header)
-#: src/info.cc:402 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:665 src/update.cc:915 src/update.cc:1050 src/Zypper.cc:5246
-#: src/search.cc:67 src/search.cc:233 src/search.cc:325 src/search.cc:440
-#: src/search.cc:577 src/search.cc:639 src/locks.cc:104
+#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
+#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
+#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
+#: src/utils/misc.cc:250
 msgid "Name"
 msgstr "Имя"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
-#: src/search.cc:69 src/search.cc:236 src/locks.cc:107
+#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Тип"
 
-#: src/info.cc:402 src/search.cc:443
+#: src/info.cc:406 src/search.cc:379
 msgid "Dependency"
 msgstr "Зависимость"
 
-#: src/info.cc:417
+#: src/info.cc:421
 msgid "Contents"
 msgstr "Содержание"
 
-#: src/info.cc:419
+#: src/info.cc:423
 msgid "(empty)"
 msgstr "(пусто)"
 
-#: src/info.cc:472
+#: src/info.cc:476
 msgid "Flavor"
 msgstr "Особенность"
 
-#: src/info.cc:477
+#: src/info.cc:481
 msgid "Short Name"
 msgstr "Короткое имя"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:479 src/Summary.cc:1207 src/utils/misc.cc:138
+#: src/info.cc:483 src/Summary.cc:1207
 msgid "Installed"
 msgstr "Установлено"
 
-#: src/info.cc:481 src/search.cc:642
+#: src/info.cc:485 src/search.cc:578
 msgid "Is Base"
 msgstr "Базовый"
 
-#: src/info.cc:485
+#: src/info.cc:489
 msgid "End of Support"
 msgstr "Окончание поддержки"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
+#: src/info.cc:489 src/info.cc:497 src/info.cc:528
 msgid "undefined"
 msgstr "неопределено"
 
-#: src/info.cc:488
+#: src/info.cc:492
 msgid "CPE Name"
 msgstr "Имя CPE"
 
-#: src/info.cc:495
+#: src/info.cc:499
 msgid "invalid CPE Name"
 msgstr "недопустимое имя CPE"
 
-#: src/info.cc:498
+#: src/info.cc:502
 msgid "Update Repositories"
 msgstr "Репозитории обновлений"
 
-#: src/info.cc:506
+#: src/info.cc:510
 msgid "Content Id"
 msgstr "ID содержимого"
 
-#: src/info.cc:513
+#: src/info.cc:517
 msgid "Provided by enabled repository"
 msgstr "Предоставлен включённым репозиторием"
 
-#: src/info.cc:519
+#: src/info.cc:523
 msgid "Not provided by any enabled repository"
 msgstr "Отсутствует во включённых репозиториях"
 
@@ -994,8 +994,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"Исправление \"%s\" заблокировано. Используйте \"%s\" для установки или \"%s\""
-" для разблокирования."
+"Исправление \"%s\" заблокировано. Используйте \"%s\" для установки или \"%s"
+"\" для разблокирования."
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
@@ -2034,8 +2034,8 @@ msgid ""
 msgstr ""
 "Это может быть вызвано недопустимыми метаданными в репозитории или ошибкой в "
 "анализаторе метаданных. В последнем случае (или если возникают сомнения) "
-"отправьте отчёт об ошибке, выполнив указания на странице "
-"http://en.opensuse.org/Zypper/Troubleshooting"
+"отправьте отчёт об ошибке, выполнив указания на странице http://en.opensuse."
+"org/Zypper/Troubleshooting"
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -2775,7 +2775,7 @@ msgstr ""
 "Игнорирую %s без аргумента, так как был указан похожий параметр с аргументом."
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:329
+#: src/update.cc:280
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
@@ -2784,7 +2784,7 @@ msgstr[1] "Оценка %1% из %2% применимых исправлений
 msgstr[2] "Оценка %1% из %2% применимых исправлений:"
 
 #. translator: stats table header
-#: src/update.cc:333
+#: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
@@ -2793,7 +2793,7 @@ msgstr[1] "Найдено %1% применимых исправления:"
 msgstr[2] "Найдено %1% применимых исправлений:"
 
 #. translator: stats summary
-#: src/update.cc:343
+#: src/update.cc:294
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
@@ -2802,8 +2802,8 @@ msgstr[1] "Заблокировано %d исправления"
 msgstr[2] "Заблокировано %d исправлений"
 
 #. translator: stats summary
-#: src/update.cc:351
-#, boost-format, c-format
+#: src/update.cc:302
+#, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
 msgstr[0] "%d необязательное исправление"
@@ -2812,13 +2812,13 @@ msgstr[2] "%d необязательных исправлений"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:355
+#: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr "используйте \"%1%\", чтобы включить необязательные исправления"
 
 #. translator: stats summary
-#: src/update.cc:364
+#: src/update.cc:315
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -2827,7 +2827,7 @@ msgstr[1] "Необходимо %d исправления"
 msgstr[2] "Необходимо %d исправлений"
 
 #. translator: stats summary
-#: src/update.cc:367
+#: src/update.cc:318
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -2836,23 +2836,23 @@ msgstr[1] "%d обновления безопасности"
 msgstr[2] "%d обновлений безопасности"
 
 #. translator: Table column header.
-#: src/update.cc:399 src/update.cc:665 src/update.cc:981 src/update.cc:1050
-#: src/search.cc:326
+#. Name
+#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
 msgid "Category"
 msgstr "Категория"
 
 #. translator: Table column header.
-#: src/update.cc:401
+#: src/update.cc:352
 msgid "Updatestack"
 msgstr "Стек обновлений"
 
 #. translator: Table column header.
-#: src/update.cc:403 src/update.cc:830
+#: src/update.cc:354 src/update.cc:716
 msgid "Patches"
 msgstr "Исправления"
 
 #. translator: Table column header.
-#: src/update.cc:405
+#: src/update.cc:356
 msgid "Locked"
 msgstr "Заблокировано"
 
@@ -2861,138 +2861,84 @@ msgstr "Заблокировано"
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:411
+#: src/update.cc:362
 msgid "Included categories"
 msgstr "Состав категорий"
 
-#. Translator: Patch status: needed, optional, unwanted, applied, not needed
-#: src/update.cc:474
-msgid "unwanted"
-msgstr "нежелательно"
-
-#: src/update.cc:476
-msgid "optional"
-msgstr "необязательно"
-
-#: src/update.cc:477
-msgid "needed"
-msgstr "нужно"
-
-#: src/update.cc:479
-msgid "applied"
-msgstr "применено"
-
-#: src/update.cc:480
-msgid "not needed"
-msgstr "не нужно"
-
-#: src/update.cc:486
-msgid "undetermined"
-msgstr "неопределено"
-
-#. translators: package's repository (header)
-#: src/update.cc:664 src/update.cc:912 src/search.cc:75 src/search.cc:324
-#: src/search.cc:442 src/search.cc:576 src/search.cc:635 src/locks.cc:107
-msgid "Repository"
-msgstr "Репозиторий"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050 src/search.cc:327
-msgid "Severity"
-msgstr "Важность"
-
-#: src/update.cc:665 src/update.cc:981 src/update.cc:1050
-msgid "Interactive"
-msgstr "Интерактивный"
-
-#: src/update.cc:665 src/update.cc:981 src/search.cc:328
-msgid "Status"
-msgstr "Состояние"
-
-#. translators: package summary (header)
-#: src/update.cc:665 src/update.cc:1050 src/search.cc:235
-msgid "Summary"
-msgstr "Заключение"
-
-#: src/update.cc:717
+#: src/update.cc:603
 msgid "The following software management updates will be installed first:"
 msgstr "Следующие обновления управления ПО будут установлены в первую очередь:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:720
+#: src/update.cc:606
 msgid "Needed software management updates will be installed first:"
 msgstr ""
 "Необходимые обновления управления ПО будут установлены в первую очередь:"
 
-#: src/update.cc:729 src/update.cc:968
+#: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
 msgstr "Обновлений не найдено."
 
 #. translator: Table headline
-#: src/update.cc:736
+#: src/update.cc:621
 msgid "The following updates are also available:"
 msgstr "Также доступны следующие обновления:"
 
-#: src/update.cc:828
+#: src/update.cc:714
 msgid "Package updates"
 msgstr "Обновления пакетов"
 
-#: src/update.cc:832
+#: src/update.cc:718
 msgid "Pattern updates"
 msgstr "Обновления шаблонов"
 
-#: src/update.cc:834
+#: src/update.cc:720
 msgid "Product updates"
 msgstr "Обновления продуктов"
 
-#: src/update.cc:920
+#. translators: package's repository (header)
+#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
+#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Репозиторий"
+
+#: src/update.cc:806
 msgid "Current Version"
 msgstr "Текущая версия"
 
-#: src/update.cc:921
+#: src/update.cc:807
 msgid "Available Version"
 msgstr "Доступная версия"
 
 #. translators: package architecture (header)
-#: src/update.cc:921 src/search.cc:73 src/search.cc:579 src/search.cc:641
+#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
 msgid "Arch"
 msgstr "Архитектура"
 
-#: src/update.cc:981
-msgid "Issue"
-msgstr "Выпуск"
-
-#: src/update.cc:981
-msgid "No."
-msgstr "№"
-
-#: src/update.cc:981
-msgid "Patch"
-msgstr "Исправление"
-
-#: src/update.cc:1091
+#: src/update.cc:969
 msgid "No matching issues found."
 msgstr "Соответствий не найдено."
 
-#: src/update.cc:1099
+#: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
 msgstr "Были найдены следующие совпадения в номерах выпусков:"
 
-#: src/update.cc:1108
+#: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "Были найдены совпадения в описания следующих исправлений:"
 
-#: src/update.cc:1177
+#: src/update.cc:1057
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr "Исправление для выпуска bugzilla номер %s не найдено или не нужно."
 
-#: src/update.cc:1179
+#: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "Исправление для выпуска CVE номер %s не найдено или не нужно."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1182
+#: src/update.cc:1062
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "Исправление для выпуска %s номер %s не найдено или не нужно."
@@ -3764,7 +3710,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3806,7 +3752,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3848,14 +3794,14 @@ msgstr ""
 "-R, --no-refresh          Отключить автоматическое обновление службы.\n"
 "-n, --name                Задать описательное имя службы.\n"
 "\n"
-"-i, --ar-to-enable <alias>     Добавить репозиторий службы RIS для включения."
-"\n"
+"-i, --ar-to-enable <alias>     Добавить репозиторий службы RIS для "
+"включения.\n"
 "-I, --ar-to-disable <alias>    Добавить репозиторий службы RIS для "
 "отключения.\n"
-"-j, --rr-to-enable <alias>     Удалить репозиторий службы RIS для включения."
-"\n"
-"-J, --rr-to-disable <alias>    Удалить репозиторий службы RIS для отключения."
-"\n"
+"-j, --rr-to-enable <alias>     Удалить репозиторий службы RIS для "
+"включения.\n"
+"-J, --rr-to-disable <alias>    Удалить репозиторий службы RIS для "
+"отключения.\n"
 "-k, --cl-to-enable             Очистить список репозиториев RIS для "
 "включения.\n"
 "-K, --cl-to-disable            Очистить список репозиториев RIS для "
@@ -4045,7 +3991,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4090,11 +4036,11 @@ msgstr ""
 "-G, --no-gpgcheck         Отключить проверку GPG для этого репозитория.\n"
 "\n"
 "-a, --all                 Применить изменения ко всем репозиториям.\n"
-"-l, --local               Применить изменения ко всем локальным репозиториям."
-"\n"
+"-l, --local               Применить изменения ко всем локальным "
+"репозиториям.\n"
 "-t, --remote              Применить изменения ко всем сетевым репозиториям.\n"
-"-m, --medium-type <тип>   Применить изменения к репозиториям указанного типа."
-"\n"
+"-m, --medium-type <тип>   Применить изменения к репозиториям указанного "
+"типа.\n"
 
 #: src/Zypper.cc:2025
 msgid ""
@@ -6098,37 +6044,42 @@ msgid "No source packages to download."
 msgstr "Нет пакетов с исходным кодом для загрузки."
 
 #. translators: package version (header)
-#: src/search.cc:71 src/search.cc:441 src/search.cc:578 src/search.cc:640
+#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
 msgid "Version"
 msgstr "Версия"
 
-#: src/search.cc:138
+#: src/search.cc:137
 msgid "System Packages"
 msgstr "Системные пакеты"
 
-#: src/search.cc:403
+#. translators: package summary (header)
+#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
+msgid "Summary"
+msgstr "Заключение"
+
+#: src/search.cc:336
 msgid "No needed patches found."
 msgstr "Не найдено необходимых исправлений."
 
-#: src/search.cc:472
+#: src/search.cc:408
 msgid "No patterns found."
 msgstr "Не найдено шаблонов."
 
-#: src/search.cc:569
+#: src/search.cc:505
 msgid "No packages found."
 msgstr "Не найдено пакетов."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:638
+#: src/search.cc:574
 msgid "Internal Name"
 msgstr "Внутреннее имя"
 
-#: src/search.cc:715
+#: src/search.cc:651
 msgid "No products found."
 msgstr "Не найдено продуктов."
 
-#: src/search.cc:739
+#: src/search.cc:675
 #, c-format, boost-format
 msgid "No providers of '%s' found."
 msgstr "Не найдено поставщиков '%s'."
@@ -6525,42 +6476,42 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Введите '%s' для '%s' или '%s' для '%s', если больше ничего не работает."
 
-#: src/utils/misc.cc:112
+#: src/utils/misc.cc:113
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "пакет"
 msgstr[1] "пакета"
 msgstr[2] "пакетов"
 
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "шаблон"
 msgstr[1] "шаблона"
 msgstr[2] "шаблонов"
 
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "product"
 msgid_plural "product"
 msgstr[0] "продукт"
 msgstr[1] "продукта"
 msgstr[2] "продуктов"
 
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:119
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "исправление"
 msgstr[1] "исправления"
 msgstr[2] "исправлений"
 
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:121
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "пакет с исходным кодом"
 msgstr[1] "пакета с исходным кодом"
 msgstr[2] "пакетов с исходным кодом"
 
-#: src/utils/misc.cc:122
+#: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "приложение"
@@ -6568,86 +6519,139 @@ msgstr[1] "приложения"
 msgstr[2] "приложения"
 
 #. default
-#: src/utils/misc.cc:124
+#: src/utils/misc.cc:125
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "объект разрешения зависимостей"
 msgstr[1] "объекта разрешения зависимостей"
 msgstr[2] "объектов разрешения зависимостей"
 
-#: src/utils/misc.cc:133
-msgid "Unknown"
-msgstr "Неизвестно"
+#. Patch status: i18n + color
+#. translator: patch status
+#: src/utils/misc.cc:134
+msgid "unwanted"
+msgstr "нежелательно"
 
-#: src/utils/misc.cc:140
-msgid "Needed"
-msgstr "Необходимо"
+#. translator: patch status
+#: src/utils/misc.cc:135
+msgid "optional"
+msgstr "необязательно"
 
-#: src/utils/misc.cc:145
-msgid "Not Needed"
-msgstr "Не нужно"
+#. translator: patch status
+#: src/utils/misc.cc:136
+msgid "needed"
+msgstr "нужно"
 
-#: src/utils/misc.cc:195
+#. translator: patch status
+#: src/utils/misc.cc:137
+msgid "applied"
+msgstr "применено"
+
+#. translator: patch status
+#: src/utils/misc.cc:138
+msgid "not needed"
+msgstr "не нужно"
+
+#. translator: patch status
+#: src/utils/misc.cc:139
+msgid "undetermined"
+msgstr "неопределено"
+
+#: src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
+msgstr "Важность"
+
+#: src/utils/misc.cc:253 src/utils/misc.cc:294
+msgid "Interactive"
+msgstr "Интерактивный"
+
+#: src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "Состояние"
+
+#. << _("Repository")
+#: src/utils/misc.cc:289
+msgid "Issue"
+msgstr "Выпуск"
+
+#: src/utils/misc.cc:290
+msgid "No."
+msgstr "№"
+
+#: src/utils/misc.cc:291
+msgid "Patch"
+msgstr "Исправление"
+
+#: src/utils/misc.cc:367
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Указанный локальный путь не существует или недоступен."
 
-#: src/utils/misc.cc:207
+#: src/utils/misc.cc:379
 msgid "Given URI is invalid"
 msgstr "Данный URI-адрес неверен"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:297
+#: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
 msgstr "Невозможно угадать значение для <platform>."
 
-#: src/utils/misc.cc:298
+#: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
 msgstr "Используйте obs://<проект>/<платформа>"
 
-#: src/utils/misc.cc:299 src/utils/misc.cc:336
+#: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Пример: %s"
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
 msgstr "Неверный OBS URI."
 
-#: src/utils/misc.cc:335
+#: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Корректная форма — obs://<проект>/[платформа]"
 
-#: src/utils/misc.cc:386
+#: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Проблема при копировании указанного файла RPM в каталог кэша."
 
-#: src/utils/misc.cc:387
+#: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
 msgstr "Возможно, у вас на диске закончилось место."
 
-#: src/utils/misc.cc:395
+#: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
 msgstr "Проблема при получении указанного файла RPM"
 
-#: src/utils/misc.cc:396
+#: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
 msgstr "Проверьте, доступен ли этот файл."
 
-#: src/utils/misc.cc:514
+#: src/utils/misc.cc:686
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Неизвестный режим загрузки '%s'."
 
-#: src/utils/misc.cc:515
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Доступные режимы загрузки: %s"
 
-#: src/utils/misc.cc:529
+#: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Параметр '%s' отменяет действие параметра '%s'."
+
+#~ msgid "Unknown"
+#~ msgstr "Неизвестно"
+
+#~ msgid "Needed"
+#~ msgstr "Необходимо"
+
+#~ msgid "Not Needed"
+#~ msgstr "Не нужно"
 
 #~ msgid ""
 #~ "patch-check (pchk) [options]\n"
