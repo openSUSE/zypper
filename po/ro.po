@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 09:48+0200\n"
+"POT-Creation-Date: 2016-06-22 11:28+0200\n"
 "PO-Revision-Date: 2012-11-19 14:59+0200\n"
 "Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
 "Language-Team: Romanian <LL@li.org>\n"
@@ -480,29 +480,39 @@ msgstr "Obiect invalid"
 msgid "Error"
 msgstr "Eroare"
 
-#: src/info.cc:116
-msgid "Name: "
-msgstr "Nume:"
+#. translators: name (general header)
+#: src/info.cc:116 src/info.cc:403 src/repos.cc:961 src/repos.cc:1094
+#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
+#: src/locks.cc:104 src/utils/misc.cc:250
+msgid "Name"
+msgstr "Nume"
 
-#: src/info.cc:117
-msgid "Version: "
-msgstr "Versiune:"
+#. translators: package version (header)
+#: src/info.cc:117 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/search.cc:576
+msgid "Version"
+msgstr "Versiune"
 
-#: src/info.cc:118
-msgid "Arch: "
-msgstr "Arhitectură:"
+#. translators: package architecture (header)
+#: src/info.cc:118 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/search.cc:577
+msgid "Arch"
+msgstr "Arh."
 
 #: src/info.cc:119
-msgid "Vendor: "
-msgstr "Vânzător:"
+msgid "Vendor"
+msgstr "Vânzător"
 
-#: src/info.cc:124
-msgid "Summary: "
-msgstr "Sumar:"
+#. translators: package summary (header)
+#: src/info.cc:124 src/search.cc:233 src/utils/misc.cc:255
+#: src/utils/misc.cc:296
+msgid "Summary"
+msgstr "Rezumat"
 
-#: src/info.cc:125
-msgid "Description: "
-msgstr "Descriere:"
+#: src/info.cc:125 src/Zypper.cc:5246
+msgid "Description"
+msgstr "Descriere"
 
 #: src/info.cc:138
 #, boost-format
@@ -529,21 +539,21 @@ msgstr "Informații pentru %s %s:"
 msgid "Info for type '%s' not implemented."
 msgstr "Informațiile pentru tipul '%s' nu sunt implementate."
 
-#: src/info.cc:248 src/info.cc:390 src/info.cc:462
-msgid "Repository: "
-msgstr "Depozit:"
+#. translators: package's repository (header)
+#: src/info.cc:248 src/info.cc:387 src/info.cc:459 src/update.cc:798
+#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
+#: src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Sursă de instalare"
 
-#: src/info.cc:256
-msgid "Support Level: "
-msgstr "Nivel de suport: "
+#. translators: used as 'tag:' (i.e. followed by ':')
+#: src/info.cc:259 src/info.cc:391 src/info.cc:480 src/Summary.cc:1207
+msgid "Installed"
+msgstr "Instalat"
 
-#: src/info.cc:259 src/info.cc:394
-msgid "Installed: "
-msgstr "Instalat:"
-
-#: src/info.cc:261 src/info.cc:314
-msgid "Status: "
-msgstr "Stare:"
+#: src/info.cc:261 src/info.cc:312 src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "Stare"
 
 #: src/info.cc:266
 #, c-format, boost-format
@@ -558,47 +568,34 @@ msgstr "la zi"
 msgid "not installed"
 msgstr "neinstalată"
 
-#: src/info.cc:276
-msgid "Installed Size: "
-msgstr "Volum instalat:"
+#. translator: Table column header.
+#. Name
+#: src/info.cc:315 src/update.cc:350 src/utils/misc.cc:251
+#: src/utils/misc.cc:292
+msgid "Category"
+msgstr "Categorie"
 
-#: src/info.cc:317
-msgid "Category: "
-msgstr "Categorie:"
-
-#: src/info.cc:318
-#, fuzzy
-msgid "Severity: "
+#: src/info.cc:316 src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
 msgstr "Severitate"
 
-#: src/info.cc:319
-msgid "Created On: "
-msgstr "Creat pe:"
-
-#: src/info.cc:321
-msgid "Reboot Required: "
-msgstr "Reboot necesar:"
-
-#: src/info.cc:322
+#: src/info.cc:320
 msgid "Package Manager Restart Required"
 msgstr "Este necesară repornirea managerului de pachete"
 
 #. print interactive flags the same style as list-patches
-#: src/info.cc:331 src/info.cc:334
-msgid "Interactive: "
+#: src/info.cc:328 src/info.cc:331 src/utils/misc.cc:253 src/utils/misc.cc:294
+#, fuzzy
+msgid "Interactive"
 msgstr "Interactiv:"
 
-#: src/info.cc:358 src/search.cc:318
+#: src/info.cc:355 src/search.cc:318
 msgid "Recommended"
 msgstr "Recomandate"
 
-#: src/info.cc:360 src/search.cc:320
+#: src/info.cc:357 src/search.cc:320
 msgid "Suggested"
 msgstr "Sugerat"
-
-#: src/info.cc:395
-msgid "Visible to User: "
-msgstr ""
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -607,94 +604,101 @@ msgstr ""
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:403 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
-#. translators: name (general header)
-#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
-#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
-#: src/utils/misc.cc:250
-msgid "Name"
-msgstr "Nume"
-
 #. translators: type (general header)
-#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:403 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Tip"
 
-#: src/info.cc:406 src/search.cc:379
+#: src/info.cc:403 src/search.cc:379
 msgid "Dependency"
 msgstr "Dependență"
 
 # continue button label
-#: src/info.cc:421
+#: src/info.cc:418
 msgid "Contents"
 msgstr "Conținut"
 
-#: src/info.cc:423
+#: src/info.cc:420
 msgid "(empty)"
 msgstr "(gol)"
 
-#: src/info.cc:476
+#: src/info.cc:473
 msgid "Flavor"
 msgstr "Variantă"
 
-#: src/info.cc:481
+#: src/info.cc:478
 msgid "Short Name"
 msgstr "Nume scurt"
 
-#. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:483 src/Summary.cc:1207
-msgid "Installed"
-msgstr "Instalat"
-
-#: src/info.cc:485 src/search.cc:578
+#: src/info.cc:482 src/search.cc:578
 msgid "Is Base"
 msgstr "Este Baza"
 
-#: src/info.cc:489
+#: src/info.cc:486
 msgid "End of Support"
 msgstr ""
 
-#: src/info.cc:489 src/info.cc:497 src/info.cc:528
+#: src/info.cc:486 src/info.cc:494 src/info.cc:525
 msgid "undefined"
 msgstr ""
 
-#: src/info.cc:492
+#: src/info.cc:489
 #, fuzzy
 msgid "CPE Name"
 msgstr "Nume"
 
-#: src/info.cc:499
+#: src/info.cc:496
 #, fuzzy
 msgid "invalid CPE Name"
 msgstr "caName invalid: %1."
 
-#: src/info.cc:502
+#: src/info.cc:499
 #, fuzzy
 msgid "Update Repositories"
 msgstr "Surse de instalare specificate:"
 
 # continue button label
-#: src/info.cc:510
+#: src/info.cc:507
 #, fuzzy
 msgid "Content Id"
 msgstr "Conținut"
 
-#: src/info.cc:517
+#: src/info.cc:514
 #, fuzzy
 msgid "Provided by enabled repository"
 msgstr "Am încărcat %s pe sursă."
 
-#: src/info.cc:523
+#: src/info.cc:520
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr ""
 "Pachetul sursă '%s' nu a fost găsit în sursele de instalare specificate."
+
+#: src/info.cc:392
+msgid "Visible to User"
+msgstr ""
+
+#: src/info.cc:319
+msgid "Reboot Required"
+msgstr "Reboot necesar"
+
+#: src/info.cc:317
+msgid "Created On"
+msgstr "Creat pe"
+
+#: src/info.cc:276
+msgid "Installed Size"
+msgstr "Volum instalat"
+
+#: src/info.cc:256
+msgid "Support Level"
+msgstr "Nivel de suport"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -2843,12 +2847,6 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. translator: Table column header.
-#. Name
-#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
-msgid "Category"
-msgstr "Categorie"
-
-#. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
@@ -2907,12 +2905,6 @@ msgstr "Actualizări modele"
 msgid "Product updates"
 msgstr "Actualizări produse"
 
-#. translators: package's repository (header)
-#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
-#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "Sursă de instalare"
-
 #: src/update.cc:806
 msgid "Current Version"
 msgstr "Versiunea curentă"
@@ -2920,11 +2912,6 @@ msgstr "Versiunea curentă"
 #: src/update.cc:807
 msgid "Available Version"
 msgstr "Versiune disponibilă"
-
-#. translators: package architecture (header)
-#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
-msgid "Arch"
-msgstr "Arh."
 
 #: src/update.cc:969
 msgid "No matching issues found."
@@ -5362,10 +5349,6 @@ msgstr "Această comandă are sens doar în shell-ul zypper."
 msgid "You already are running zypper's shell."
 msgstr "Shell-ul zypper rulează deja."
 
-#: src/Zypper.cc:5246
-msgid "Description"
-msgstr "Descriere"
-
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
 msgstr "Tip dependență"
@@ -5849,19 +5832,9 @@ msgstr "Instalez pachetul sursă %s-%s"
 msgid "No source packages to download."
 msgstr "Pachetul sursă '%s' nu a fost găsit."
 
-#. translators: package version (header)
-#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
-msgid "Version"
-msgstr "Versiune"
-
 #: src/search.cc:137
 msgid "System Packages"
 msgstr "Pachete sistem"
-
-#. translators: package summary (header)
-#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
-msgid "Summary"
-msgstr "Rezumat"
 
 #: src/search.cc:336
 msgid "No needed patches found."
@@ -6373,19 +6346,6 @@ msgstr "nu este necesar"
 msgid "undetermined"
 msgstr ""
 
-#: src/utils/misc.cc:252 src/utils/misc.cc:293
-msgid "Severity"
-msgstr "Severitate"
-
-#: src/utils/misc.cc:253 src/utils/misc.cc:294
-#, fuzzy
-msgid "Interactive"
-msgstr "Interactiv:"
-
-#: src/utils/misc.cc:254 src/utils/misc.cc:295
-msgid "Status"
-msgstr "Stare"
-
 #. << _("Repository")
 #: src/utils/misc.cc:289
 msgid "Issue"
@@ -6461,6 +6421,40 @@ msgstr "Moduri disponibile de descărcare: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Opțiunea '%s' suprascrie '%s'."
+
+#~ msgid "Name: "
+#~ msgstr "Nume:"
+
+#~ msgid "Version: "
+#~ msgstr "Versiune:"
+
+#~ msgid "Arch: "
+#~ msgstr "Arhitectură:"
+
+#~ msgid "Summary: "
+#~ msgstr "Sumar:"
+
+#~ msgid "Description: "
+#~ msgstr "Descriere:"
+
+#~ msgid "Repository: "
+#~ msgstr "Depozit:"
+
+#~ msgid "Installed: "
+#~ msgstr "Instalat:"
+
+#~ msgid "Status: "
+#~ msgstr "Stare:"
+
+#~ msgid "Category: "
+#~ msgstr "Categorie:"
+
+#, fuzzy
+#~ msgid "Severity: "
+#~ msgstr "Severitate"
+
+#~ msgid "Interactive: "
+#~ msgstr "Interactiv:"
 
 #~ msgid "Unknown"
 #~ msgstr "Necunoscut"

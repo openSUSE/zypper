@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 09:48+0200\n"
+"POT-Creation-Date: 2016-06-22 11:28+0200\n"
 "PO-Revision-Date: 2015-10-06 21:56+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <opensuse-translation@opensuse.org>\n"
@@ -437,29 +437,39 @@ msgstr "Ugyldigt objekt"
 msgid "Error"
 msgstr "Fejl"
 
-#: src/info.cc:116
-msgid "Name: "
-msgstr "Navn: "
+#. translators: name (general header)
+#: src/info.cc:116 src/info.cc:403 src/repos.cc:961 src/repos.cc:1094
+#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
+#: src/locks.cc:104 src/utils/misc.cc:250
+msgid "Name"
+msgstr "Navn"
 
-#: src/info.cc:117
-msgid "Version: "
-msgstr "Version: "
+#. translators: package version (header)
+#: src/info.cc:117 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/search.cc:576
+msgid "Version"
+msgstr "Version"
 
-#: src/info.cc:118
-msgid "Arch: "
-msgstr "Ark: "
+#. translators: package architecture (header)
+#: src/info.cc:118 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/search.cc:577
+msgid "Arch"
+msgstr "Arkitektur"
 
 #: src/info.cc:119
-msgid "Vendor: "
-msgstr "Leverandør: "
+msgid "Vendor"
+msgstr "Leverandør"
 
-#: src/info.cc:124
-msgid "Summary: "
-msgstr "Oversigt: "
+#. translators: package summary (header)
+#: src/info.cc:124 src/search.cc:233 src/utils/misc.cc:255
+#: src/utils/misc.cc:296
+msgid "Summary"
+msgstr "Resumé"
 
-#: src/info.cc:125
-msgid "Description: "
-msgstr "Beskrivelse: "
+#: src/info.cc:125 src/Zypper.cc:5246
+msgid "Description"
+msgstr "Beskrivelse"
 
 #: src/info.cc:138
 #, boost-format
@@ -485,21 +495,21 @@ msgstr "Information for %s %s:"
 msgid "Info for type '%s' not implemented."
 msgstr "Information for typen '%s' er ikke implementeret."
 
-#: src/info.cc:248 src/info.cc:390 src/info.cc:462
-msgid "Repository: "
-msgstr "Softwarekilde: "
+#. translators: package's repository (header)
+#: src/info.cc:248 src/info.cc:387 src/info.cc:459 src/update.cc:798
+#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
+#: src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Softwarekilde"
 
-#: src/info.cc:256
-msgid "Support Level: "
-msgstr "Supportniveau: "
+#. translators: used as 'tag:' (i.e. followed by ':')
+#: src/info.cc:259 src/info.cc:391 src/info.cc:480 src/Summary.cc:1207
+msgid "Installed"
+msgstr "Installeret"
 
-#: src/info.cc:259 src/info.cc:394
-msgid "Installed: "
-msgstr "Installeret: "
-
-#: src/info.cc:261 src/info.cc:314
-msgid "Status: "
-msgstr "Status: "
+#: src/info.cc:261 src/info.cc:312 src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "Status"
 
 #: src/info.cc:266
 #, c-format, boost-format
@@ -514,46 +524,33 @@ msgstr "ajourført"
 msgid "not installed"
 msgstr "ikke installeret"
 
-#: src/info.cc:276
-msgid "Installed Size: "
-msgstr "Størrelse installeret: "
+#. translator: Table column header.
+#. Name
+#: src/info.cc:315 src/update.cc:350 src/utils/misc.cc:251
+#: src/utils/misc.cc:292
+msgid "Category"
+msgstr "Kategori"
 
-#: src/info.cc:317
-msgid "Category: "
-msgstr "Kategori: "
+#: src/info.cc:316 src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
+msgstr "Alvor"
 
-#: src/info.cc:318
-msgid "Severity: "
-msgstr "Alvor: "
-
-#: src/info.cc:319
-msgid "Created On: "
-msgstr "Oprettet den: "
-
-#: src/info.cc:321
-msgid "Reboot Required: "
-msgstr "Kræver genopstart: "
-
-#: src/info.cc:322
+#: src/info.cc:320
 msgid "Package Manager Restart Required"
 msgstr "Kræver genstart af pakkehåndtering"
 
 #. print interactive flags the same style as list-patches
-#: src/info.cc:331 src/info.cc:334
-msgid "Interactive: "
-msgstr "Interaktiv: "
+#: src/info.cc:328 src/info.cc:331 src/utils/misc.cc:253 src/utils/misc.cc:294
+msgid "Interactive"
+msgstr ""
 
-#: src/info.cc:358 src/search.cc:318
+#: src/info.cc:355 src/search.cc:318
 msgid "Recommended"
 msgstr "Anbefalet"
 
-#: src/info.cc:360 src/search.cc:320
+#: src/info.cc:357 src/search.cc:320
 msgid "Suggested"
 msgstr "Foreslået"
-
-#: src/info.cc:395
-msgid "Visible to User: "
-msgstr "Synligt for brugeren: "
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -562,85 +559,92 @@ msgstr "Synligt for brugeren: "
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:403 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
-#. translators: name (general header)
-#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
-#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
-#: src/utils/misc.cc:250
-msgid "Name"
-msgstr "Navn"
-
 #. translators: type (general header)
-#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:403 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Type"
 
-#: src/info.cc:406 src/search.cc:379
+#: src/info.cc:403 src/search.cc:379
 msgid "Dependency"
 msgstr "Afhængighed"
 
-#: src/info.cc:421
+#: src/info.cc:418
 msgid "Contents"
 msgstr "Indhold"
 
-#: src/info.cc:423
+#: src/info.cc:420
 msgid "(empty)"
 msgstr "(tom)"
 
-#: src/info.cc:476
+#: src/info.cc:473
 msgid "Flavor"
 msgstr "Flavor"
 
-#: src/info.cc:481
+#: src/info.cc:478
 msgid "Short Name"
 msgstr "Kort navn"
 
-#. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:483 src/Summary.cc:1207
-msgid "Installed"
-msgstr "Installeret"
-
-#: src/info.cc:485 src/search.cc:578
+#: src/info.cc:482 src/search.cc:578
 msgid "Is Base"
 msgstr "Er basis"
 
-#: src/info.cc:489
+#: src/info.cc:486
 msgid "End of Support"
 msgstr "Ikke understøttet længere"
 
-#: src/info.cc:489 src/info.cc:497 src/info.cc:528
+#: src/info.cc:486 src/info.cc:494 src/info.cc:525
 msgid "undefined"
 msgstr "udefineret"
 
-#: src/info.cc:492
+#: src/info.cc:489
 msgid "CPE Name"
 msgstr "CPE-navn"
 
-#: src/info.cc:499
+#: src/info.cc:496
 msgid "invalid CPE Name"
 msgstr "Ugyldigt CPE-navn"
 
-#: src/info.cc:502
+#: src/info.cc:499
 msgid "Update Repositories"
 msgstr "Opdateringskilder"
 
-#: src/info.cc:510
+#: src/info.cc:507
 msgid "Content Id"
 msgstr "Indholds-id"
 
-#: src/info.cc:517
+#: src/info.cc:514
 msgid "Provided by enabled repository"
 msgstr "Leveret af aktiveret softwarekilde"
 
-#: src/info.cc:523
+#: src/info.cc:520
 msgid "Not provided by any enabled repository"
 msgstr "Ikke leveret af en aktiv softwarekilde"
+
+#: src/info.cc:392
+msgid "Visible to User"
+msgstr "Synligt for brugeren"
+
+#: src/info.cc:319
+msgid "Reboot Required"
+msgstr "Kræver genopstart"
+
+#: src/info.cc:317
+msgid "Created On"
+msgstr "Oprettet den"
+
+#: src/info.cc:276
+msgid "Installed Size"
+msgstr "Størrelse installeret"
+
+#: src/info.cc:256
+msgid "Support Level"
+msgstr "Supportniveau"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -2696,12 +2700,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translator: Table column header.
-#. Name
-#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
-msgid "Category"
-msgstr "Kategori"
-
-#. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
@@ -2758,12 +2756,6 @@ msgstr "Mønsteropdateringer"
 msgid "Product updates"
 msgstr "Produktopdateringer"
 
-#. translators: package's repository (header)
-#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
-#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "Softwarekilde"
-
 #: src/update.cc:806
 msgid "Current Version"
 msgstr "Nuværende version"
@@ -2771,11 +2763,6 @@ msgstr "Nuværende version"
 #: src/update.cc:807
 msgid "Available Version"
 msgstr "Tilgængelig version"
-
-#. translators: package architecture (header)
-#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
-msgid "Arch"
-msgstr "Arkitektur"
 
 #: src/update.cc:969
 msgid "No matching issues found."
@@ -5235,10 +5222,6 @@ msgstr "Denne kommando giver kun mening i zyppers skal."
 msgid "You already are running zypper's shell."
 msgstr "Du kører allerede zyppers skal."
 
-#: src/Zypper.cc:5246
-msgid "Description"
-msgstr "Beskrivelse"
-
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
 msgstr "Type af resolvable"
@@ -5705,19 +5688,9 @@ msgstr "Fejl ved download af kildepakken \"%s\"."
 msgid "No source packages to download."
 msgstr "Ingen kildepakker der skal downloades."
 
-#. translators: package version (header)
-#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
-msgid "Version"
-msgstr "Version"
-
 #: src/search.cc:137
 msgid "System Packages"
 msgstr "Systempakker"
-
-#. translators: package summary (header)
-#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
-msgid "Summary"
-msgstr "Resumé"
 
 #: src/search.cc:336
 msgid "No needed patches found."
@@ -6222,18 +6195,6 @@ msgstr "ikke nødvendig"
 msgid "undetermined"
 msgstr "udefineret"
 
-#: src/utils/misc.cc:252 src/utils/misc.cc:293
-msgid "Severity"
-msgstr "Alvor"
-
-#: src/utils/misc.cc:253 src/utils/misc.cc:294
-msgid "Interactive"
-msgstr ""
-
-#: src/utils/misc.cc:254 src/utils/misc.cc:295
-msgid "Status"
-msgstr "Status"
-
 #. << _("Repository")
 #: src/utils/misc.cc:289
 msgid "Issue"
@@ -6308,6 +6269,39 @@ msgstr "Tilgængelige downloadtilstande: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Tilvalget \"%s\" tilsidesætter \"%s\"."
+
+#~ msgid "Name: "
+#~ msgstr "Navn: "
+
+#~ msgid "Version: "
+#~ msgstr "Version: "
+
+#~ msgid "Arch: "
+#~ msgstr "Ark: "
+
+#~ msgid "Summary: "
+#~ msgstr "Oversigt: "
+
+#~ msgid "Description: "
+#~ msgstr "Beskrivelse: "
+
+#~ msgid "Repository: "
+#~ msgstr "Softwarekilde: "
+
+#~ msgid "Installed: "
+#~ msgstr "Installeret: "
+
+#~ msgid "Status: "
+#~ msgstr "Status: "
+
+#~ msgid "Category: "
+#~ msgstr "Kategori: "
+
+#~ msgid "Severity: "
+#~ msgstr "Alvor: "
+
+#~ msgid "Interactive: "
+#~ msgstr "Interaktiv: "
 
 #~ msgid "Unknown"
 #~ msgstr "Ukendt"

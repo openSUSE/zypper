@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 09:48+0200\n"
+"POT-Creation-Date: 2016-06-22 11:28+0200\n"
 "PO-Revision-Date: 2015-07-06 01:22+0300\n"
 "Last-Translator: Danae <danae.asderi@gmail.com>\n"
 "Language-Team: opensuse-translation-el@opensuse.org\n"
@@ -480,29 +480,39 @@ msgstr "Μη έγκυρο αντικείμενο"
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: src/info.cc:116
-msgid "Name: "
-msgstr "Όνομα: "
+#. translators: name (general header)
+#: src/info.cc:116 src/info.cc:403 src/repos.cc:961 src/repos.cc:1094
+#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
+#: src/locks.cc:104 src/utils/misc.cc:250
+msgid "Name"
+msgstr "Όνομα"
 
-#: src/info.cc:117
-msgid "Version: "
-msgstr "Έκδοση: "
+#. translators: package version (header)
+#: src/info.cc:117 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/search.cc:576
+msgid "Version"
+msgstr "Έκδοση"
 
-#: src/info.cc:118
-msgid "Arch: "
-msgstr "Αρχιτεκτονική:"
+#. translators: package architecture (header)
+#: src/info.cc:118 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/search.cc:577
+msgid "Arch"
+msgstr "Αρχιτεκτονική"
 
 #: src/info.cc:119
-msgid "Vendor: "
-msgstr "Προμηθευτής:"
+msgid "Vendor"
+msgstr "Προμηθευτής"
 
-#: src/info.cc:124
-msgid "Summary: "
-msgstr "Περίληψη: "
+#. translators: package summary (header)
+#: src/info.cc:124 src/search.cc:233 src/utils/misc.cc:255
+#: src/utils/misc.cc:296
+msgid "Summary"
+msgstr "Περίληψη"
 
-#: src/info.cc:125
-msgid "Description: "
-msgstr "Περιγραφή: "
+#: src/info.cc:125 src/Zypper.cc:5246
+msgid "Description"
+msgstr "Περιγραφή"
 
 #: src/info.cc:138
 #, boost-format
@@ -528,21 +538,21 @@ msgstr "Πληροφορίες για το %s %s:"
 msgid "Info for type '%s' not implemented."
 msgstr "Πληροφορίες για τον τύπο '%s' δεν έχουν υλοποιηθεί."
 
-#: src/info.cc:248 src/info.cc:390 src/info.cc:462
-msgid "Repository: "
-msgstr "Αποθετήριο:"
+#. translators: package's repository (header)
+#: src/info.cc:248 src/info.cc:387 src/info.cc:459 src/update.cc:798
+#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
+#: src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Αποθετήριο"
 
-#: src/info.cc:256
-msgid "Support Level: "
-msgstr "Επίπεδο υποστήριξης:"
+#. translators: used as 'tag:' (i.e. followed by ':')
+#: src/info.cc:259 src/info.cc:391 src/info.cc:480 src/Summary.cc:1207
+msgid "Installed"
+msgstr "Εγκατεστημένο"
 
-#: src/info.cc:259 src/info.cc:394
-msgid "Installed: "
-msgstr "Εγκατεστημένο: "
-
-#: src/info.cc:261 src/info.cc:314
-msgid "Status: "
-msgstr "Κατάσταση: "
+#: src/info.cc:261 src/info.cc:312 src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "Κατάσταση"
 
 #: src/info.cc:266
 #, c-format, boost-format
@@ -557,46 +567,33 @@ msgstr "ενημερωμένο"
 msgid "not installed"
 msgstr "μη εγκατεστημένο"
 
-#: src/info.cc:276
-msgid "Installed Size: "
-msgstr "Μέγεθος Εγκατεστημένου: "
+#. translator: Table column header.
+#. Name
+#: src/info.cc:315 src/update.cc:350 src/utils/misc.cc:251
+#: src/utils/misc.cc:292
+msgid "Category"
+msgstr "Κατηγορία"
 
-#: src/info.cc:317
-msgid "Category: "
-msgstr "Κατηγορία: "
+#: src/info.cc:316 src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
+msgstr "Σοβαρότητα"
 
-#: src/info.cc:318
-msgid "Severity: "
-msgstr "Σοβαρότητα:"
-
-#: src/info.cc:319
-msgid "Created On: "
-msgstr "Δημιουργήθηκε: "
-
-#: src/info.cc:321
-msgid "Reboot Required: "
-msgstr "Απαιτείται Επανεκκίνηση: "
-
-#: src/info.cc:322
+#: src/info.cc:320
 msgid "Package Manager Restart Required"
 msgstr "Απαιτείται Επανεκκίνηση του Διαχειριστή Πακέτων"
 
 #. print interactive flags the same style as list-patches
-#: src/info.cc:331 src/info.cc:334
-msgid "Interactive: "
-msgstr "Διαδραστικό: "
+#: src/info.cc:328 src/info.cc:331 src/utils/misc.cc:253 src/utils/misc.cc:294
+msgid "Interactive"
+msgstr ""
 
-#: src/info.cc:358 src/search.cc:318
+#: src/info.cc:355 src/search.cc:318
 msgid "Recommended"
 msgstr "Συνιστώμενα"
 
-#: src/info.cc:360 src/search.cc:320
+#: src/info.cc:357 src/search.cc:320
 msgid "Suggested"
 msgstr "Προτεινόμενα"
-
-#: src/info.cc:395
-msgid "Visible to User: "
-msgstr "Ορατό στον Χρήστη: "
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -605,85 +602,92 @@ msgstr "Ορατό στον Χρήστη: "
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:403 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "Κ"
 
-#. translators: name (general header)
-#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
-#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
-#: src/utils/misc.cc:250
-msgid "Name"
-msgstr "Όνομα"
-
 #. translators: type (general header)
-#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:403 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Τύπος"
 
-#: src/info.cc:406 src/search.cc:379
+#: src/info.cc:403 src/search.cc:379
 msgid "Dependency"
 msgstr "Εξάρτηση"
 
-#: src/info.cc:421
+#: src/info.cc:418
 msgid "Contents"
 msgstr "Περιεχόμενα"
 
-#: src/info.cc:423
+#: src/info.cc:420
 msgid "(empty)"
 msgstr "(άδειο)"
 
-#: src/info.cc:476
+#: src/info.cc:473
 msgid "Flavor"
 msgstr "Γεύση"
 
-#: src/info.cc:481
+#: src/info.cc:478
 msgid "Short Name"
 msgstr "Σύντομη Ονομασία:"
 
-#. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:483 src/Summary.cc:1207
-msgid "Installed"
-msgstr "Εγκατεστημένο"
-
-#: src/info.cc:485 src/search.cc:578
+#: src/info.cc:482 src/search.cc:578
 msgid "Is Base"
 msgstr "Είναι Βάση"
 
-#: src/info.cc:489
+#: src/info.cc:486
 msgid "End of Support"
 msgstr "Λήξη της Υποστήριξης"
 
-#: src/info.cc:489 src/info.cc:497 src/info.cc:528
+#: src/info.cc:486 src/info.cc:494 src/info.cc:525
 msgid "undefined"
 msgstr "μη ορισμένο"
 
-#: src/info.cc:492
+#: src/info.cc:489
 msgid "CPE Name"
 msgstr "Όνομα CPE"
 
-#: src/info.cc:499
+#: src/info.cc:496
 msgid "invalid CPE Name"
 msgstr "μη έγκυρο όνομα CPE"
 
-#: src/info.cc:502
+#: src/info.cc:499
 msgid "Update Repositories"
 msgstr "Ενημέρωση Αποθετηρίων"
 
-#: src/info.cc:510
+#: src/info.cc:507
 msgid "Content Id"
 msgstr "Id περιεχομένου"
 
-#: src/info.cc:517
+#: src/info.cc:514
 msgid "Provided by enabled repository"
 msgstr "Παρέχεται από ενεργοποιημένο αποθετήριο"
 
-#: src/info.cc:523
+#: src/info.cc:520
 msgid "Not provided by any enabled repository"
 msgstr "Δεν παρέχεται από κανένα ενεργοποιημένο αποθετήριο"
+
+#: src/info.cc:392
+msgid "Visible to User"
+msgstr "Ορατό στον Χρήστη"
+
+#: src/info.cc:319
+msgid "Reboot Required"
+msgstr "Απαιτείται Επανεκκίνηση"
+
+#: src/info.cc:317
+msgid "Created On"
+msgstr "Δημιουργήθηκε"
+
+#: src/info.cc:276
+msgid "Installed Size"
+msgstr "Μέγεθος Εγκατεστημένου"
+
+#: src/info.cc:256
+msgid "Support Level"
+msgstr "Επίπεδο υποστήριξης"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -2768,12 +2772,6 @@ msgstr[0] "%d διόρθωση ασφαλείας"
 msgstr[1] "%d διορθώσεις ασφαλείας"
 
 #. translator: Table column header.
-#. Name
-#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
-msgid "Category"
-msgstr "Κατηγορία"
-
-#. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
@@ -2830,12 +2828,6 @@ msgstr "Ενημερώσεις pattern"
 msgid "Product updates"
 msgstr "Ενημερώσεις προϊόντος"
 
-#. translators: package's repository (header)
-#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
-#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "Αποθετήριο"
-
 #: src/update.cc:806
 msgid "Current Version"
 msgstr "Τρέχουσα Έκδοση"
@@ -2843,11 +2835,6 @@ msgstr "Τρέχουσα Έκδοση"
 #: src/update.cc:807
 msgid "Available Version"
 msgstr "Διαθέσιμη Έκδοση"
-
-#. translators: package architecture (header)
-#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
-msgid "Arch"
-msgstr "Αρχιτεκτονική"
 
 #: src/update.cc:969
 msgid "No matching issues found."
@@ -5283,10 +5270,6 @@ msgstr "Αυτή η εντολή έχει νόημα στο κέλυφος zyppe
 msgid "You already are running zypper's shell."
 msgstr "Ήδη εκτελείτε το κέλυφος zypper."
 
-#: src/Zypper.cc:5246
-msgid "Description"
-msgstr "Περιγραφή"
-
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
 msgstr "Επιλύσιμος Τύπος"
@@ -5774,19 +5757,9 @@ msgstr "Σφάλμα λήψης πηγαίου πακέτου '%s'."
 msgid "No source packages to download."
 msgstr "Δεν υπάρχει πηγαίο πακέτο προς λήψη."
 
-#. translators: package version (header)
-#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
-msgid "Version"
-msgstr "Έκδοση"
-
 #: src/search.cc:137
 msgid "System Packages"
 msgstr "Πακέτα Συστήματος"
-
-#. translators: package summary (header)
-#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
-msgid "Summary"
-msgstr "Περίληψη"
 
 #: src/search.cc:336
 msgid "No needed patches found."
@@ -6288,18 +6261,6 @@ msgstr "δε χρειάζεται"
 msgid "undetermined"
 msgstr "μη ορισμένο"
 
-#: src/utils/misc.cc:252 src/utils/misc.cc:293
-msgid "Severity"
-msgstr "Σοβαρότητα"
-
-#: src/utils/misc.cc:253 src/utils/misc.cc:294
-msgid "Interactive"
-msgstr ""
-
-#: src/utils/misc.cc:254 src/utils/misc.cc:295
-msgid "Status"
-msgstr "Κατάσταση"
-
 #. << _("Repository")
 #: src/utils/misc.cc:289
 msgid "Issue"
@@ -6376,6 +6337,39 @@ msgstr "Διαθέσιμες λειτουργίες λήψης: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Η επιλογή '%s' επικαλύπτει την '%s'."
+
+#~ msgid "Name: "
+#~ msgstr "Όνομα: "
+
+#~ msgid "Version: "
+#~ msgstr "Έκδοση: "
+
+#~ msgid "Arch: "
+#~ msgstr "Αρχιτεκτονική:"
+
+#~ msgid "Summary: "
+#~ msgstr "Περίληψη: "
+
+#~ msgid "Description: "
+#~ msgstr "Περιγραφή: "
+
+#~ msgid "Repository: "
+#~ msgstr "Αποθετήριο:"
+
+#~ msgid "Installed: "
+#~ msgstr "Εγκατεστημένο: "
+
+#~ msgid "Status: "
+#~ msgstr "Κατάσταση: "
+
+#~ msgid "Category: "
+#~ msgstr "Κατηγορία: "
+
+#~ msgid "Severity: "
+#~ msgstr "Σοβαρότητα:"
+
+#~ msgid "Interactive: "
+#~ msgstr "Διαδραστικό: "
 
 #~ msgid "Unknown"
 #~ msgstr "Άγνωστο"

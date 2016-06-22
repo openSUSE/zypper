@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 09:48+0200\n"
+"POT-Creation-Date: 2016-06-22 11:28+0200\n"
 "PO-Revision-Date: 2005-08-18 21:16+0300\n"
 "Last-Translator: Borislav Mitev <morbid_viper@tkzs.org>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -438,33 +438,40 @@ msgstr "Невалидно маршрутизиране по подразбир�
 msgid "Error"
 msgstr "Грешка"
 
-#: src/info.cc:116
-#, fuzzy
-msgid "Name: "
+#. translators: name (general header)
+#: src/info.cc:116 src/info.cc:403 src/repos.cc:961 src/repos.cc:1094
+#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
+#: src/locks.cc:104 src/utils/misc.cc:250
+msgid "Name"
 msgstr "Име"
 
-#: src/info.cc:117
-#, fuzzy
-msgid "Version: "
+#. translators: package version (header)
+#: src/info.cc:117 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/search.cc:576
+msgid "Version"
 msgstr "Версия"
 
-#: src/info.cc:118
-msgid "Arch: "
-msgstr ""
+#. translators: package architecture (header)
+#: src/info.cc:118 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/search.cc:577
+msgid "Arch"
+msgstr "Архитектура"
 
 #: src/info.cc:119
 #, fuzzy
-msgid "Vendor: "
-msgstr "Доставчик:"
+msgid "Vendor"
+msgstr "Доставчик"
 
-#: src/info.cc:124
-#, fuzzy
-msgid "Summary: "
+#. translators: package summary (header)
+#: src/info.cc:124 src/search.cc:233 src/utils/misc.cc:255
+#: src/utils/misc.cc:296
+msgid "Summary"
 msgstr "Сводка"
 
-#: src/info.cc:125
-msgid "Description: "
-msgstr "Описание: "
+#: src/info.cc:125 src/Zypper.cc:5246
+msgid "Description"
+msgstr "Описание"
 
 #: src/info.cc:138
 #, boost-format
@@ -490,24 +497,21 @@ msgstr "Информация"
 msgid "Info for type '%s' not implemented."
 msgstr "Все още не е реализирано."
 
-#: src/info.cc:248 src/info.cc:390 src/info.cc:462
-msgid "Repository: "
+#. translators: package's repository (header)
+#: src/info.cc:248 src/info.cc:387 src/info.cc:459 src/update.cc:798
+#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
+#: src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
 msgstr ""
 
-#: src/info.cc:256
-#, fuzzy
-msgid "Support Level: "
-msgstr "Име"
-
-#: src/info.cc:259 src/info.cc:394
-#, fuzzy
-msgid "Installed: "
+#. translators: used as 'tag:' (i.e. followed by ':')
+#: src/info.cc:259 src/info.cc:391 src/info.cc:480 src/Summary.cc:1207
+msgid "Installed"
 msgstr "Инсталиран"
 
-#: src/info.cc:261 src/info.cc:314
-#, fuzzy
-msgid "Status: "
-msgstr "Статус:"
+#: src/info.cc:261 src/info.cc:312 src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "Статус"
 
 #: src/info.cc:266
 #, c-format, boost-format
@@ -524,52 +528,35 @@ msgstr "Подновяване"
 msgid "not installed"
 msgstr "%s не може да бъде инсталиран"
 
-#: src/info.cc:276
-#, fuzzy
-msgid "Installed Size: "
-msgstr "Инсталирани кръпки: "
+#. translator: Table column header.
+#. Name
+#: src/info.cc:315 src/update.cc:350 src/utils/misc.cc:251
+#: src/utils/misc.cc:292
+msgid "Category"
+msgstr ""
 
-#: src/info.cc:317
+#: src/info.cc:316 src/utils/misc.cc:252 src/utils/misc.cc:293
 #, fuzzy
-msgid "Category: "
-msgstr "Каталог:"
+msgid "Severity"
+msgstr "Сигурност"
 
-#: src/info.cc:318
-#, fuzzy
-msgid "Severity: "
-msgstr "Сигурност:"
-
-#: src/info.cc:319
-#, fuzzy
-msgid "Created On: "
-msgstr "Създаване на %s"
-
-#: src/info.cc:321
-#, fuzzy
-msgid "Reboot Required: "
-msgstr "Изисква:"
-
-#: src/info.cc:322
+#: src/info.cc:320
 #, fuzzy
 msgid "Package Manager Restart Required"
 msgstr "Управление на пакетите"
 
 #. print interactive flags the same style as list-patches
-#: src/info.cc:331 src/info.cc:334
+#: src/info.cc:328 src/info.cc:331 src/utils/misc.cc:253 src/utils/misc.cc:294
 #, fuzzy
-msgid "Interactive: "
+msgid "Interactive"
 msgstr "Интерфейс"
 
-#: src/info.cc:358 src/search.cc:318
+#: src/info.cc:355 src/search.cc:318
 msgid "Recommended"
 msgstr ""
 
-#: src/info.cc:360 src/search.cc:320
+#: src/info.cc:357 src/search.cc:320
 msgid "Suggested"
-msgstr ""
-
-#: src/info.cc:395
-msgid "Visible to User: "
 msgstr ""
 
 #. TranslatorExplanation S stands for Status
@@ -579,94 +566,105 @@ msgstr ""
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:403 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr ""
 
-#. translators: name (general header)
-#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
-#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
-#: src/utils/misc.cc:250
-msgid "Name"
-msgstr "Име"
-
 #. translators: type (general header)
-#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:403 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Тип"
 
-#: src/info.cc:406 src/search.cc:379
+#: src/info.cc:403 src/search.cc:379
 #, fuzzy
 msgid "Dependency"
 msgstr "Зависимости"
 
-#: src/info.cc:421
+#: src/info.cc:418
 #, fuzzy
 msgid "Contents"
 msgstr "Продължаване"
 
-#: src/info.cc:423
+#: src/info.cc:420
 msgid "(empty)"
 msgstr ""
 
-#: src/info.cc:476
+#: src/info.cc:473
 msgid "Flavor"
 msgstr ""
 
-#: src/info.cc:481
+#: src/info.cc:478
 #, fuzzy
 msgid "Short Name"
 msgstr "Име"
 
-#. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:483 src/Summary.cc:1207
-msgid "Installed"
-msgstr "Инсталиран"
-
-#: src/info.cc:485 src/search.cc:578
+#: src/info.cc:482 src/search.cc:578
 msgid "Is Base"
 msgstr ""
 
-#: src/info.cc:489
+#: src/info.cc:486
 msgid "End of Support"
 msgstr ""
 
-#: src/info.cc:489 src/info.cc:497 src/info.cc:528
+#: src/info.cc:486 src/info.cc:494 src/info.cc:525
 msgid "undefined"
 msgstr ""
 
-#: src/info.cc:492
+#: src/info.cc:489
 #, fuzzy
 msgid "CPE Name"
 msgstr "Име"
 
-#: src/info.cc:499
+#: src/info.cc:496
 #, fuzzy
 msgid "invalid CPE Name"
 msgstr "Невалидно име на устройство."
 
-#: src/info.cc:502
+#: src/info.cc:499
 #, fuzzy
 msgid "Update Repositories"
 msgstr "Грешка при четенето на сектор %u."
 
-#: src/info.cc:510
+#: src/info.cc:507
 #, fuzzy
 msgid "Content Id"
 msgstr "Продължаване"
 
-#: src/info.cc:517
+#: src/info.cc:514
 #, fuzzy
 msgid "Provided by enabled repository"
 msgstr "Грешка при четенето на сектор %u."
 
-#: src/info.cc:523
+#: src/info.cc:520
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "Хостът %s не бе открит."
+
+#: src/info.cc:392
+msgid "Visible to User"
+msgstr ""
+
+#: src/info.cc:319
+#, fuzzy
+msgid "Reboot Required"
+msgstr "Изисква"
+
+#: src/info.cc:317
+#, fuzzy
+msgid "Created On"
+msgstr "Създаване на %s"
+
+#: src/info.cc:276
+#, fuzzy
+msgid "Installed Size"
+msgstr "Инсталирани кръпки"
+
+#: src/info.cc:256
+#, fuzzy
+msgid "Support Level"
+msgstr "Име"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -2700,12 +2698,6 @@ msgstr[0] "Обезопасителни кръпки"
 msgstr[1] "Обезопасителни кръпки"
 
 #. translator: Table column header.
-#. Name
-#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
-msgid "Category"
-msgstr ""
-
-#. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
@@ -2766,12 +2758,6 @@ msgstr "Скрити кръпки"
 msgid "Product updates"
 msgstr ""
 
-#. translators: package's repository (header)
-#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
-#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr ""
-
 #: src/update.cc:806
 #, fuzzy
 msgid "Current Version"
@@ -2781,11 +2767,6 @@ msgstr "Текуща връзка"
 #, fuzzy
 msgid "Available Version"
 msgstr "Налични кръпки"
-
-#. translators: package architecture (header)
-#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
-msgid "Arch"
-msgstr "Архитектура"
 
 #: src/update.cc:969
 #, fuzzy
@@ -4541,10 +4522,6 @@ msgstr ""
 msgid "You already are running zypper's shell."
 msgstr ""
 
-#: src/Zypper.cc:5246
-msgid "Description"
-msgstr "Описание"
-
 #: src/Zypper.cc:5310
 #, fuzzy
 msgid "Resolvable Type"
@@ -5008,19 +4985,9 @@ msgstr "Грешка при четенето на сектор %u."
 msgid "No source packages to download."
 msgstr "Няма нужда от инсталиране на %s"
 
-#. translators: package version (header)
-#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
-msgid "Version"
-msgstr "Версия"
-
 #: src/search.cc:137
 msgid "System Packages"
 msgstr ""
-
-#. translators: package summary (header)
-#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
-msgid "Summary"
-msgstr "Сводка"
 
 #: src/search.cc:336
 #, fuzzy
@@ -5531,20 +5498,6 @@ msgstr "не е свързан"
 msgid "undetermined"
 msgstr ""
 
-#: src/utils/misc.cc:252 src/utils/misc.cc:293
-#, fuzzy
-msgid "Severity"
-msgstr "Сигурност"
-
-#: src/utils/misc.cc:253 src/utils/misc.cc:294
-#, fuzzy
-msgid "Interactive"
-msgstr "Интерфейс"
-
-#: src/utils/misc.cc:254 src/utils/misc.cc:295
-msgid "Status"
-msgstr "Статус"
-
 #. << _("Repository")
 #: src/utils/misc.cc:289
 msgid "Issue"
@@ -5626,6 +5579,41 @@ msgstr "Неуспешно зареждане на модула \"%s\"."
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Name: "
+#~ msgstr "Име"
+
+#, fuzzy
+#~ msgid "Version: "
+#~ msgstr "Версия"
+
+#, fuzzy
+#~ msgid "Summary: "
+#~ msgstr "Сводка"
+
+#~ msgid "Description: "
+#~ msgstr "Описание: "
+
+#, fuzzy
+#~ msgid "Installed: "
+#~ msgstr "Инсталиран"
+
+#, fuzzy
+#~ msgid "Status: "
+#~ msgstr "Статус:"
+
+#, fuzzy
+#~ msgid "Category: "
+#~ msgstr "Каталог:"
+
+#, fuzzy
+#~ msgid "Severity: "
+#~ msgstr "Сигурност:"
+
+#, fuzzy
+#~ msgid "Interactive: "
+#~ msgstr "Интерфейс"
 
 #~ msgid "Unknown"
 #~ msgstr "Неизвестно"

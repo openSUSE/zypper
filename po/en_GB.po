@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 09:48+0200\n"
+"POT-Creation-Date: 2016-06-22 11:28+0200\n"
 "PO-Revision-Date: 2016-05-23 12:39+0000\n"
 "Last-Translator: Sarah O'Farrell <sarah.ofarrell@vistatec.com>\n"
 "Language-Team: English (United Kingdom) <http://l10n.opensuse.org/projects/"
@@ -448,30 +448,40 @@ msgstr "Invalid object"
 msgid "Error"
 msgstr "Error"
 
-#: src/info.cc:116
-msgid "Name: "
-msgstr "Name: "
+#. translators: name (general header)
+#: src/info.cc:116 src/info.cc:403 src/repos.cc:961 src/repos.cc:1094
+#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
+#: src/locks.cc:104 src/utils/misc.cc:250
+msgid "Name"
+msgstr "Name"
 
-#: src/info.cc:117
-msgid "Version: "
-msgstr "Version: "
+#. translators: package version (header)
+#: src/info.cc:117 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/search.cc:576
+msgid "Version"
+msgstr "Version"
 
-#: src/info.cc:118
-msgid "Arch: "
-msgstr "Arch: "
+#. translators: package architecture (header)
+#: src/info.cc:118 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/search.cc:577
+msgid "Arch"
+msgstr "Arch"
 
 #: src/info.cc:119
 #, fuzzy
-msgid "Vendor: "
-msgstr "Vendor:"
+msgid "Vendor"
+msgstr "Vendor"
 
-#: src/info.cc:124
-msgid "Summary: "
-msgstr "Summary: "
+#. translators: package summary (header)
+#: src/info.cc:124 src/search.cc:233 src/utils/misc.cc:255
+#: src/utils/misc.cc:296
+msgid "Summary"
+msgstr "Summary"
 
-#: src/info.cc:125
-msgid "Description: "
-msgstr "Description: "
+#: src/info.cc:125 src/Zypper.cc:5246
+msgid "Description"
+msgstr "Description"
 
 #: src/info.cc:138
 #, boost-format
@@ -497,22 +507,21 @@ msgstr "Information for %s %s:"
 msgid "Info for type '%s' not implemented."
 msgstr "not yet implemented"
 
-#: src/info.cc:248 src/info.cc:390 src/info.cc:462
-msgid "Repository: "
-msgstr "Repository: "
+#. translators: package's repository (header)
+#: src/info.cc:248 src/info.cc:387 src/info.cc:459 src/update.cc:798
+#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
+#: src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Repository"
 
-#: src/info.cc:256
-#, fuzzy
-msgid "Support Level: "
-msgstr "Security Level: "
+#. translators: used as 'tag:' (i.e. followed by ':')
+#: src/info.cc:259 src/info.cc:391 src/info.cc:480 src/Summary.cc:1207
+msgid "Installed"
+msgstr "Installed"
 
-#: src/info.cc:259 src/info.cc:394
-msgid "Installed: "
-msgstr "Installed: "
-
-#: src/info.cc:261 src/info.cc:314
-msgid "Status: "
-msgstr "Status: "
+#: src/info.cc:261 src/info.cc:312 src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "Status"
 
 #: src/info.cc:266
 #, fuzzy, c-format, boost-format
@@ -527,49 +536,36 @@ msgstr "up-to-date"
 msgid "not installed"
 msgstr "not installed"
 
-#: src/info.cc:276
-msgid "Installed Size: "
-msgstr "Installed Size: "
+#. translator: Table column header.
+#. Name
+#: src/info.cc:315 src/update.cc:350 src/utils/misc.cc:251
+#: src/utils/misc.cc:292
+msgid "Category"
+msgstr "Category"
 
-#: src/info.cc:317
-msgid "Category: "
-msgstr "Category: "
-
-#: src/info.cc:318
-#, fuzzy
-msgid "Severity: "
+#: src/info.cc:316 src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
 msgstr "Severity"
 
-#: src/info.cc:319
-msgid "Created On: "
-msgstr "Created On: "
-
-#: src/info.cc:321
-msgid "Reboot Required: "
-msgstr "Reboot Required: "
-
-#: src/info.cc:322
+#: src/info.cc:320
 msgid "Package Manager Restart Required"
 msgstr "Package Manager Restart Required"
 
 #. print interactive flags the same style as list-patches
-#: src/info.cc:331 src/info.cc:334
-msgid "Interactive: "
+#: src/info.cc:328 src/info.cc:331 src/utils/misc.cc:253 src/utils/misc.cc:294
+#, fuzzy
+msgid "Interactive"
 msgstr "Interactive: "
 
-#: src/info.cc:358 src/search.cc:318
+#: src/info.cc:355 src/search.cc:318
 #, fuzzy
 msgid "Recommended"
 msgstr "Recommends"
 
-#: src/info.cc:360 src/search.cc:320
+#: src/info.cc:357 src/search.cc:320
 #, fuzzy
 msgid "Suggested"
 msgstr "Suggests"
-
-#: src/info.cc:395
-msgid "Visible to User: "
-msgstr ""
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -578,93 +574,101 @@ msgstr ""
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:403 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
-#. translators: name (general header)
-#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
-#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
-#: src/utils/misc.cc:250
-msgid "Name"
-msgstr "Name"
-
 #. translators: type (general header)
-#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:403 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Type"
 
-#: src/info.cc:406 src/search.cc:379
+#: src/info.cc:403 src/search.cc:379
 #, fuzzy
 msgid "Dependency"
 msgstr "Dependencies"
 
-#: src/info.cc:421
+#: src/info.cc:418
 msgid "Contents"
 msgstr "Contents"
 
-#: src/info.cc:423
+#: src/info.cc:420
 msgid "(empty)"
 msgstr ""
 
-#: src/info.cc:476
+#: src/info.cc:473
 msgid "Flavor"
 msgstr ""
 
-#: src/info.cc:481
+#: src/info.cc:478
 #, fuzzy
 msgid "Short Name"
 msgstr "Short names:"
 
-#. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:483 src/Summary.cc:1207
-msgid "Installed"
-msgstr "Installed"
-
-#: src/info.cc:485 src/search.cc:578
+#: src/info.cc:482 src/search.cc:578
 msgid "Is Base"
 msgstr ""
 
-#: src/info.cc:489
+#: src/info.cc:486
 msgid "End of Support"
 msgstr ""
 
-#: src/info.cc:489 src/info.cc:497 src/info.cc:528
+#: src/info.cc:486 src/info.cc:494 src/info.cc:525
 msgid "undefined"
 msgstr ""
 
-#: src/info.cc:492
+#: src/info.cc:489
 #, fuzzy
 msgid "CPE Name"
 msgstr "Name"
 
-#: src/info.cc:499
+#: src/info.cc:496
 #, fuzzy
 msgid "invalid CPE Name"
 msgstr "Invalid caName: %1."
 
-#: src/info.cc:502
+#: src/info.cc:499
 #, fuzzy
 msgid "Update Repositories"
 msgstr "Specified repositories have been refreshed."
 
-#: src/info.cc:510
+#: src/info.cc:507
 #, fuzzy
 msgid "Content Id"
 msgstr "Contents"
 
-#: src/info.cc:517
+#: src/info.cc:514
 #, fuzzy
 msgid "Provided by enabled repository"
 msgstr "Uploaded %s to repository."
 
-#: src/info.cc:523
+#: src/info.cc:520
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "Source package '%s' not found."
+
+#: src/info.cc:392
+msgid "Visible to User"
+msgstr ""
+
+#: src/info.cc:319
+msgid "Reboot Required"
+msgstr "Reboot Required"
+
+#: src/info.cc:317
+msgid "Created On"
+msgstr "Created On"
+
+#: src/info.cc:276
+msgid "Installed Size"
+msgstr "Installed Size"
+
+#: src/info.cc:256
+#, fuzzy
+msgid "Support Level"
+msgstr "Security Level"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -2707,12 +2711,6 @@ msgstr[0] "%d patches needed (%d security patches)"
 msgstr[1] "%d patches needed (%d security patches)"
 
 #. translator: Table column header.
-#. Name
-#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
-msgid "Category"
-msgstr "Category"
-
-#. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
@@ -2770,12 +2768,6 @@ msgstr "Battery Status"
 msgid "Product updates"
 msgstr ""
 
-#. translators: package's repository (header)
-#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
-#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "Repository"
-
 #: src/update.cc:806
 #, fuzzy
 msgid "Current Version"
@@ -2785,11 +2777,6 @@ msgstr "Current Connection"
 #, fuzzy
 msgid "Available Version"
 msgstr "Available Memory"
-
-#. translators: package architecture (header)
-#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
-msgid "Arch"
-msgstr "Arch"
 
 #: src/update.cc:969
 #, fuzzy
@@ -4914,10 +4901,6 @@ msgstr ""
 msgid "You already are running zypper's shell."
 msgstr "You already are running zypper's shell."
 
-#: src/Zypper.cc:5246
-msgid "Description"
-msgstr "Description"
-
 #: src/Zypper.cc:5310
 #, fuzzy
 msgid "Resolvable Type"
@@ -5396,20 +5379,10 @@ msgstr "Error downloading metadata for '%s':"
 msgid "No source packages to download."
 msgstr "No need to install %s"
 
-#. translators: package version (header)
-#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
-msgid "Version"
-msgstr "Version"
-
 #: src/search.cc:137
 #, fuzzy
 msgid "System Packages"
 msgstr "System area items"
-
-#. translators: package summary (header)
-#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
-msgid "Summary"
-msgstr "Summary"
 
 #: src/search.cc:336
 msgid "No needed patches found."
@@ -5924,19 +5897,6 @@ msgstr "Not Needed"
 msgid "undetermined"
 msgstr ""
 
-#: src/utils/misc.cc:252 src/utils/misc.cc:293
-msgid "Severity"
-msgstr "Severity"
-
-#: src/utils/misc.cc:253 src/utils/misc.cc:294
-#, fuzzy
-msgid "Interactive"
-msgstr "Interactive: "
-
-#: src/utils/misc.cc:254 src/utils/misc.cc:295
-msgid "Status"
-msgstr "Status"
-
 #. << _("Repository")
 #: src/utils/misc.cc:289
 msgid "Issue"
@@ -6020,6 +5980,40 @@ msgstr "Overall download size: %s."
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr ""
+
+#~ msgid "Name: "
+#~ msgstr "Name: "
+
+#~ msgid "Version: "
+#~ msgstr "Version: "
+
+#~ msgid "Arch: "
+#~ msgstr "Arch: "
+
+#~ msgid "Summary: "
+#~ msgstr "Summary: "
+
+#~ msgid "Description: "
+#~ msgstr "Description: "
+
+#~ msgid "Repository: "
+#~ msgstr "Repository: "
+
+#~ msgid "Installed: "
+#~ msgstr "Installed: "
+
+#~ msgid "Status: "
+#~ msgstr "Status: "
+
+#~ msgid "Category: "
+#~ msgstr "Category: "
+
+#, fuzzy
+#~ msgid "Severity: "
+#~ msgstr "Severity"
+
+#~ msgid "Interactive: "
+#~ msgstr "Interactive: "
 
 #~ msgid "Unknown"
 #~ msgstr "Unknown"

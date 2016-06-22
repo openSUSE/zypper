@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 09:48+0200\n"
+"POT-Creation-Date: 2016-06-22 11:28+0200\n"
 "PO-Revision-Date: 2015-07-12 17:04+0900\n"
 "Last-Translator: Yunseok Choi <xein@naver.com>\n"
 "Language-Team: Korean <xein@naver.com>\n"
@@ -441,30 +441,39 @@ msgstr "오류"
 
 # src/isdn/complex.ycp:266 src/modem/complex.ycp:207
 # src/provider/complex.ycp:186
-#: src/info.cc:116
-msgid "Name: "
-msgstr "이름: "
+#. translators: name (general header)
+#: src/info.cc:116 src/info.cc:403 src/repos.cc:961 src/repos.cc:1094
+#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
+#: src/locks.cc:104 src/utils/misc.cc:250
+msgid "Name"
+msgstr "이름"
 
-#: src/info.cc:117
-msgid "Version: "
-msgstr "버전: "
+#. translators: package version (header)
+#: src/info.cc:117 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/search.cc:576
+msgid "Version"
+msgstr "버전"
 
-#: src/info.cc:118
-msgid "Arch: "
-msgstr "아키텍쳐:"
+#. translators: package architecture (header)
+#: src/info.cc:118 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/search.cc:577
+msgid "Arch"
+msgstr "Arch"
 
 #: src/info.cc:119
-msgid "Vendor: "
-msgstr "제조사: "
+msgid "Vendor"
+msgstr "제조사"
 
-#: src/info.cc:124
-msgid "Summary: "
-msgstr "요약: "
+#. translators: package summary (header)
+#: src/info.cc:124 src/search.cc:233 src/utils/misc.cc:255
+#: src/utils/misc.cc:296
+msgid "Summary"
+msgstr "요약"
 
-#  rich text value
-#: src/info.cc:125
-msgid "Description: "
-msgstr "설명: "
+#: src/info.cc:125 src/Zypper.cc:5246
+msgid "Description"
+msgstr "설명"
 
 #: src/info.cc:138
 #, boost-format
@@ -489,21 +498,21 @@ msgstr "%s %s에 대한 정보:"
 msgid "Info for type '%s' not implemented."
 msgstr "'%s' 형식에 대한 정보는 아직 제공되지 않습니다."
 
-#: src/info.cc:248 src/info.cc:390 src/info.cc:462
-msgid "Repository: "
-msgstr "저장소:"
+#. translators: package's repository (header)
+#: src/info.cc:248 src/info.cc:387 src/info.cc:459 src/update.cc:798
+#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
+#: src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "저장소"
 
-#: src/info.cc:256
-msgid "Support Level: "
-msgstr "지원 수준: "
+#. translators: used as 'tag:' (i.e. followed by ':')
+#: src/info.cc:259 src/info.cc:391 src/info.cc:480 src/Summary.cc:1207
+msgid "Installed"
+msgstr "설치됨"
 
-#: src/info.cc:259 src/info.cc:394
-msgid "Installed: "
-msgstr "설치됨: "
-
-#: src/info.cc:261 src/info.cc:314
-msgid "Status: "
-msgstr "상태: "
+#: src/info.cc:261 src/info.cc:312 src/utils/misc.cc:254 src/utils/misc.cc:295
+msgid "Status"
+msgstr "상태"
 
 #: src/info.cc:266
 #, c-format, boost-format
@@ -518,46 +527,33 @@ msgstr "최신"
 msgid "not installed"
 msgstr "설치되지 않음"
 
-#: src/info.cc:276
-msgid "Installed Size: "
-msgstr "설치후 크기: "
+#. translator: Table column header.
+#. Name
+#: src/info.cc:315 src/update.cc:350 src/utils/misc.cc:251
+#: src/utils/misc.cc:292
+msgid "Category"
+msgstr "범주"
 
-#: src/info.cc:317
-msgid "Category: "
-msgstr "분류: "
+#: src/info.cc:316 src/utils/misc.cc:252 src/utils/misc.cc:293
+msgid "Severity"
+msgstr "긴급"
 
-#: src/info.cc:318
-msgid "Severity: "
-msgstr "심각도: "
-
-#: src/info.cc:319
-msgid "Created On: "
-msgstr "제작됨: "
-
-#: src/info.cc:321
-msgid "Reboot Required: "
-msgstr "시스템 다시 시작 필요: "
-
-#: src/info.cc:322
+#: src/info.cc:320
 msgid "Package Manager Restart Required"
 msgstr "꾸러미 관리자 재시작 필요"
 
 #. print interactive flags the same style as list-patches
-#: src/info.cc:331 src/info.cc:334
-msgid "Interactive: "
-msgstr "대화형: "
+#: src/info.cc:328 src/info.cc:331 src/utils/misc.cc:253 src/utils/misc.cc:294
+msgid "Interactive"
+msgstr "대화형"
 
-#: src/info.cc:358 src/search.cc:318
+#: src/info.cc:355 src/search.cc:318
 msgid "Recommended"
 msgstr "권장사항"
 
-#: src/info.cc:360 src/search.cc:320
+#: src/info.cc:357 src/search.cc:320
 msgid "Suggested"
 msgstr "제안"
-
-#: src/info.cc:395
-msgid "Visible to User: "
-msgstr "사용자에게 표시: "
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -566,89 +562,94 @@ msgstr "사용자에게 표시: "
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:406 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:403 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
-# src/isdn/complex.ycp:266 src/modem/complex.ycp:207
-# src/provider/complex.ycp:186
-#. translators: name (general header)
-#: src/info.cc:406 src/repos.cc:961 src/repos.cc:1094 src/repos.cc:2403
-#: src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66 src/search.cc:231
-#: src/search.cc:376 src/search.cc:513 src/search.cc:575 src/locks.cc:104
-#: src/utils/misc.cc:250
-msgid "Name"
-msgstr "이름"
-
 #. translators: type (general header)
-#: src/info.cc:406 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:403 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "형식"
 
-#: src/info.cc:406 src/search.cc:379
+#: src/info.cc:403 src/search.cc:379
 msgid "Dependency"
 msgstr "의존성"
 
-#: src/info.cc:421
+#: src/info.cc:418
 msgid "Contents"
 msgstr "내용"
 
-#: src/info.cc:423
+#: src/info.cc:420
 msgid "(empty)"
 msgstr "(비어있음)"
 
-#: src/info.cc:476
+#: src/info.cc:473
 msgid "Flavor"
 msgstr "Flavor"
 
 # src/isdn/complex.ycp:266 src/modem/complex.ycp:207
 # src/provider/complex.ycp:186
-#: src/info.cc:481
+#: src/info.cc:478
 msgid "Short Name"
 msgstr "짧은 이름"
 
-#. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:483 src/Summary.cc:1207
-msgid "Installed"
-msgstr "설치됨"
-
-#: src/info.cc:485 src/search.cc:578
+#: src/info.cc:482 src/search.cc:578
 msgid "Is Base"
 msgstr "기본"
 
-#: src/info.cc:489
+#: src/info.cc:486
 msgid "End of Support"
 msgstr "지원 종료"
 
-#: src/info.cc:489 src/info.cc:497 src/info.cc:528
+#: src/info.cc:486 src/info.cc:494 src/info.cc:525
 msgid "undefined"
 msgstr "정의되지 않음"
 
-#: src/info.cc:492
+#: src/info.cc:489
 msgid "CPE Name"
 msgstr "CPE 이름"
 
-#: src/info.cc:499
+#: src/info.cc:496
 msgid "invalid CPE Name"
 msgstr "CPE 이름이 잘못되었습니다."
 
-#: src/info.cc:502
+#: src/info.cc:499
 msgid "Update Repositories"
 msgstr "리포지토리 업데이트"
 
-#: src/info.cc:510
+#: src/info.cc:507
 msgid "Content Id"
 msgstr "컨텐트 ID"
 
-#: src/info.cc:517
+#: src/info.cc:514
 msgid "Provided by enabled repository"
 msgstr "활성화된 리포지토리에서 제공함"
 
-#: src/info.cc:523
+#: src/info.cc:520
 msgid "Not provided by any enabled repository"
 msgstr "활성화된 리포지토리에서 제공하지 않음"
+
+#: src/info.cc:392
+msgid "Visible to User"
+msgstr "사용자에게 표시"
+
+#: src/info.cc:319
+msgid "Reboot Required"
+msgstr "시스템 다시 시작 필요"
+
+#: src/info.cc:317
+msgid "Created On"
+msgstr "제작됨"
+
+#: src/info.cc:276
+msgid "Installed Size"
+msgstr "설치후 크기"
+
+#: src/info.cc:256
+msgid "Support Level"
+msgstr "지원 수준"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -2581,12 +2582,6 @@ msgid_plural "%d security patches"
 msgstr[0] "%d 개의 보안 패치"
 
 #. translator: Table column header.
-#. Name
-#: src/update.cc:350 src/utils/misc.cc:251 src/utils/misc.cc:292
-msgid "Category"
-msgstr "범주"
-
-#. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
 msgstr ""
@@ -2641,12 +2636,6 @@ msgstr "패턴 업데이트"
 msgid "Product updates"
 msgstr "제품 업데이트"
 
-#. translators: package's repository (header)
-#: src/update.cc:798 src/search.cc:74 src/search.cc:378 src/search.cc:512
-#: src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "저장소"
-
 #: src/update.cc:806
 msgid "Current Version"
 msgstr "현재 버전"
@@ -2654,11 +2643,6 @@ msgstr "현재 버전"
 #: src/update.cc:807
 msgid "Available Version"
 msgstr "사용 가능한 버전"
-
-#. translators: package architecture (header)
-#: src/update.cc:807 src/search.cc:72 src/search.cc:515 src/search.cc:577
-msgid "Arch"
-msgstr "Arch"
 
 #: src/update.cc:969
 msgid "No matching issues found."
@@ -5181,10 +5165,6 @@ msgstr "이 명령은 Zypper 쉘 안에서만 의미가 있습니다."
 msgid "You already are running zypper's shell."
 msgstr "이미 Zypper 쉘에 진입해 있습니다."
 
-#: src/Zypper.cc:5246
-msgid "Description"
-msgstr "설명"
-
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
 msgstr "해결방법 종류"
@@ -5642,19 +5622,9 @@ msgstr "소스 패키지 '%s'을(를) 다운로드하는 중 오류가 발생했
 msgid "No source packages to download."
 msgstr "다운로드할 소스 패키지가 없습니다."
 
-#. translators: package version (header)
-#: src/search.cc:70 src/search.cc:377 src/search.cc:514 src/search.cc:576
-msgid "Version"
-msgstr "버전"
-
 #: src/search.cc:137
 msgid "System Packages"
 msgstr "시스템 꾸러미"
-
-#. translators: package summary (header)
-#: src/search.cc:233 src/utils/misc.cc:255 src/utils/misc.cc:296
-msgid "Summary"
-msgstr "요약"
 
 #: src/search.cc:336
 msgid "No needed patches found."
@@ -6133,18 +6103,6 @@ msgstr "필요하지 않음"
 msgid "undetermined"
 msgstr ""
 
-#: src/utils/misc.cc:252 src/utils/misc.cc:293
-msgid "Severity"
-msgstr "긴급"
-
-#: src/utils/misc.cc:253 src/utils/misc.cc:294
-msgid "Interactive"
-msgstr "대화형"
-
-#: src/utils/misc.cc:254 src/utils/misc.cc:295
-msgid "Status"
-msgstr "상태"
-
 #. << _("Repository")
 #: src/utils/misc.cc:289
 msgid "Issue"
@@ -6219,6 +6177,42 @@ msgstr "사용 가능한 다운로드 모드: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "옵션 '%s'이(가) '%s'을(를) 무효화합니다."
+
+# src/isdn/complex.ycp:266 src/modem/complex.ycp:207
+# src/provider/complex.ycp:186
+#~ msgid "Name: "
+#~ msgstr "이름: "
+
+#~ msgid "Version: "
+#~ msgstr "버전: "
+
+#~ msgid "Arch: "
+#~ msgstr "아키텍쳐:"
+
+#~ msgid "Summary: "
+#~ msgstr "요약: "
+
+#  rich text value
+#~ msgid "Description: "
+#~ msgstr "설명: "
+
+#~ msgid "Repository: "
+#~ msgstr "저장소:"
+
+#~ msgid "Installed: "
+#~ msgstr "설치됨: "
+
+#~ msgid "Status: "
+#~ msgstr "상태: "
+
+#~ msgid "Category: "
+#~ msgstr "분류: "
+
+#~ msgid "Severity: "
+#~ msgstr "심각도: "
+
+#~ msgid "Interactive: "
+#~ msgstr "대화형: "
 
 #~ msgid "Unknown"
 #~ msgstr "알 수 없음"
