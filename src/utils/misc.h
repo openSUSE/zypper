@@ -20,6 +20,7 @@
 #include <zypp/ZYppCommitPolicy.h>
 
 class Zypper;
+class Table;
 
 namespace zypp
 {
@@ -47,8 +48,36 @@ ResKindSet kindset_from( const std::list<std::string> & kindstrings );
 
 std::string kind_to_string_localized( const ResKind & kind, unsigned long count );
 
-std::string string_patch_status( const PoolItem & pi );
 
+// ----------------------------------------------------------------------------
+// PATCH related strings for various purposes
+// ----------------------------------------------------------------------------
+const char* textPatchStatus( const PoolItem & pi_r );		///< Patch status: plain text noWS (forXML)
+std::string i18nPatchStatus( const PoolItem & pi_r );		///< Patch status: i18n + color
+std::string patchHighlightCategory( const Patch & patch_r );	///< Patch Category + color
+std::string patchHighlightSeverity( const Patch & patch_r );	///< Patch Severity + color
+std::string patchInteractiveFlags( const Patch & patch_r );	///< Patch interactive properties (reboot|message|license|restart or ---) + color
+
+/** Patches table default format */
+struct FillPatchesTable
+{
+  FillPatchesTable( Table & table_r, TriBool inst_notinst_r = indeterminate );
+  bool operator()( const PoolItem & pi_r ) const;
+private:
+  Table * _table;	///< table used for output
+  TriBool _inst_notinst;///< LEGACY: internally filter [not]installed
+};
+
+/** Patches table when searching for issues */
+struct FillPatchesTableForIssue
+{
+  FillPatchesTableForIssue( Table & table_r );
+  bool operator()( const PoolItem & pi_r, std::string issue_r, std::string issueNo_r ) const;
+private:
+  Table * _table;	///< table used for output
+};
+
+// ----------------------------------------------------------------------------
 /**
  * Creates a Url out of \a urls_s. If the url_s looks looks_like_url()
  * Url(url_s) is returned. Otherwise if \a url_s represends a valid path to

@@ -15,7 +15,7 @@
 #include <zypp/ui/SelectableTraits.h>
 
 #include "main.h"
-#include "utils/misc.h" // for kind_to_string_localized and string_patch_status
+#include "utils/misc.h"
 
 #include "search.h"
 
@@ -310,48 +310,6 @@ bool FillSearchTableSelectable::operator()( const ui::Selectable::constPtr & s )
   return true;
 }
 
-
-FillPatchesTable::FillPatchesTable( Table & table, TriBool inst_notinst )
-: _table( &table )
-, _inst_notinst( inst_notinst )
-{
-  TableHeader header;
-
-  header
-    << _("Repository")
-    << _("Name")
-    << _("Category")
-    << _("Severity")
-    << _("Status");
-
-  *_table << header;
-}
-
-bool FillPatchesTable::operator()( const PoolItem & pi ) const
-{
-  // only not installed
-  if ( pi.isSatisfied() && _inst_notinst == false )
-    return true;
-  // only installed
-  else if ( !pi.isSatisfied() && _inst_notinst == true )
-    return true;
-
-  TableRow row;
-
-  Patch::constPtr patch = asKind<Patch>(pi.resolvable());
-
-  row
-    << pi.repository().asUserString()
-    << pi.name()
-    << patch->category()
-    << patch->severity()
-    << string_patch_status( pi );
-
-  *_table << row;
-
-  return true;
-}
-
 ///////////////////////////////////////////////////////////////////
 
 static std::string string_weak_status( const ResStatus & rs )
@@ -369,18 +327,19 @@ void list_patches( Zypper & zypper )
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
 
   Table tbl;
-
   FillPatchesTable callback( tbl );
   invokeOnEach( God->pool().byKindBegin(ResKind::patch),
 		God->pool().byKindEnd(ResKind::patch),
 		callback);
-  tbl.sort( 1 );	// Name
 
   if ( tbl.empty() )
     zypper.out().info( _("No needed patches found.") );
   else
+  {
     // display the result, even if --quiet specified
+    tbl.sort();	// use default sort
     cout << tbl;
+  }
 }
 
 static void list_patterns_xml( Zypper & zypper )

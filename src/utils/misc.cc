@@ -25,6 +25,7 @@
 
 #include "main.h"
 #include "Zypper.h"
+#include "Table.h"
 #include "repos.h"
 
 #include "utils/misc.h"
@@ -125,24 +126,195 @@ std::string kind_to_string_localized( const ResKind & kind, unsigned long count 
 }
 
 // ----------------------------------------------------------------------------
-
-std::string string_patch_status( const PoolItem & pi )
+// PATCH related strings for various purposes
+// ----------------------------------------------------------------------------
+std::string i18nPatchStatus( const PoolItem & pi_r )
 {
-  // make sure this will not happen
-  if ( pi.isUndetermined() )
-    return _("Unknown");
-
-  if ( pi.isRelevant() )
+  // Patch status: i18n + color
+  static const char * tUnwanted		= /* translator: patch status */ _("unwanted");
+  static const char * tOptional		= /* translator: patch status */ _("optional");
+  static const char * tNeeded		= /* translator: patch status */ _("needed");
+  static const char * tApplied		= /* translator: patch status */ _("applied");
+  static const char * tNotneeded	= /* translator: patch status */ _("not needed");
+  static const char * tUndetermined	= /* translator: patch status */ _("undetermined");	// pi_r is no patch!
+  switch ( pi_r.status().validate() )
   {
-    if ( pi.isSatisfied() )
-      return _("Installed"); //! \todo make this "Applied" instead?
-    if ( pi.isBroken() )
-      return _("Needed");
-    // can this ever happen?
-    return "";
-  }
+    case ResStatus::BROKEN:
+      if ( pi_r.isUnwanted() )
+	// Translator: Patch status: needed, optional, unwanted, applied, not needed
+	return ColorString( tUnwanted, ColorContext::HIGHLIGHT ).str();
+      if ( Zypper::instance()->globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+	return ColorString( tOptional, ColorContext::LOWLIGHT ).str();
+      return tNeeded;
+      break;
+    case ResStatus::SATISFIED:		return ColorString( tApplied, ColorContext::POSITIVE ).str();	break;
+    case ResStatus::NONRELEVANT:	return ColorString( tNotneeded, ColorContext::POSITIVE ).str();	break;
 
-  return _("Not Needed");
+    case ResStatus::UNDETERMINED:	// fall through
+    default:
+      break;
+  }
+  return ColorString( tUndetermined, ColorContext::NEGATIVE ).str();
+}
+
+const char * textPatchStatus( const PoolItem & pi_r )
+{
+  // Patch status: plain text noWS
+  static const char * tUnwanted		= "unwanted";
+  static const char * tOptional		= "optional";
+  static const char * tNeeded		= "needed";
+  static const char * tApplied		= "applied";
+  static const char * tNotneeded	= "not-needed";
+  static const char * tUndetermined	= "undetermined";	// pi_r is no patch!
+
+  switch ( pi_r.status().validate() )
+  {
+    case ResStatus::BROKEN:
+      if ( pi_r.isUnwanted() )
+	return tUnwanted;
+      if ( Zypper::instance()->globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+	return tOptional;
+      return tNeeded;
+      break;
+    case ResStatus::SATISFIED:		return tApplied;	break;
+    case ResStatus::NONRELEVANT:	return tNotneeded;	break;
+
+    case ResStatus::UNDETERMINED:	// fall through
+    default:
+      break;
+  }
+  return tUndetermined;
+}
+
+std::string patchHighlightCategory( const Patch & patch_r )
+{
+  std::string ret;
+  switch ( patch_r.categoryEnum() )	// switch by enum as it matches multiple strings (optional==feature==enhancement)
+  {
+    case Patch::CAT_SECURITY:
+      ret = ColorString( patch_r.category(), ColorContext::HIGHLIGHT ).str();
+      break;
+    case Patch::CAT_OPTIONAL:
+      ret = ColorString( patch_r.category(), ColorContext::LOWLIGHT ).str();
+      break;
+      // else: fallthrough
+    default:
+      ret = patch_r.category();
+      break;
+  }
+  return ret;
+}
+
+std::string patchHighlightSeverity( const Patch & patch_r )
+{
+  std::string ret;
+  if ( patch_r.isSeverity( Patch::SEV_CRITICAL ) )
+    ret = ColorString( patch_r.severity(), ColorContext::HIGHLIGHT ).str();
+  else
+    ret = patch_r.severity();
+  return ret;
+}
+
+std::string patchInteractiveFlags( const Patch & patch_r )
+{
+  static const Patch::InteractiveFlags kRestart( 0x1000 ); // an artificial flag to indicate update stack patches in 'Interactive'
+  std::string ret;
+
+  Patch::InteractiveFlags flags = patch_r.interactiveFlags();
+  if ( patch_r.restartSuggested() )
+    flags |= kRestart;
+
+  if ( flags )
+  {
+    ret = stringify( flags, {
+      { Patch::Reboot,	"reboot" },
+      { Patch::Message,	"message" },
+      { Patch::License,	"licence" },
+      { kRestart,	ColorString( "restart", ColorContext::HIGHLIGHT ).str() }
+    }, "", ",", "" );
+  }
+  else
+  {
+    ret = "---";
+  }
+  return ret;
+}
+
+/** Default format patches table */
+FillPatchesTable::FillPatchesTable( Table & table_r, TriBool inst_notinst_r )
+: _table( &table_r )
+, _inst_notinst( inst_notinst_r )
+{
+  table_r << ( TableHeader()
+  << _("Repository")
+  << _("Name")
+  << _("Category")
+  << _("Severity")
+  << _("Interactive")
+  << _("Status")
+  << _("Summary")
+  );
+  table_r.defaultSortColumn( 1 );	// by Name
+  // if ( ! Zypper::instance()->globalOpts().no_abbrev ) table.allowAbbrev( 6 );	// Summary
+};
+
+bool FillPatchesTable::operator()( const PoolItem & pi_r ) const
+{
+  if ( pi_r.isSatisfied() && _inst_notinst == false )
+  { return true; }	// print only not installed
+  if ( !pi_r.isSatisfied() && _inst_notinst == true )
+  { return true; }	// print only installed
+
+  Patch::constPtr patch = asKind<Patch>(pi_r);
+
+  *_table << ( TableRow()
+  /* Repository		*/ << patch->repoInfo().asUserString()
+  /* Name		*/ << patch->name()
+  /* Category		*/ << patchHighlightCategory( *patch )
+  /* Severity		*/ << patchHighlightSeverity( *patch )
+  /* Interactive	*/ << patchInteractiveFlags( *patch )
+  /* Status		*/ << i18nPatchStatus( pi_r )
+  /* Summary		*/ << patch->summary()
+  );
+  return true;
+}
+
+
+/** Patches table when searching for issues */
+FillPatchesTableForIssue::FillPatchesTableForIssue( Table & table_r )
+: _table( &table_r )
+{
+  table_r << ( TableHeader()
+  //<< _("Repository")
+  << _("Issue")
+  << _("No.")
+  << _("Patch")	// Name
+  << _("Category")
+  << _("Severity")
+  << _("Interactive")
+  << _("Status")
+  << _("Summary")
+  );
+  table_r.defaultSortColumn( 2 );	// by Name
+}
+bool FillPatchesTableForIssue::operator()( const PoolItem & pi_r, std::string issue_r, std::string issueNo_r ) const
+{
+  Patch::constPtr patch = asKind<Patch>(pi_r);
+
+  *_table << ( TableRow()
+  ///* Repository	*/ << patch->repoInfo().asUserString()
+  /* Issue		*/ << std::move(issue_r)
+  /* No.		*/ << std::move(issueNo_r)
+  /* Patch/Name		*/ << patch->name()
+  /* Category		*/ << patchHighlightCategory( *patch )
+  /* Severity		*/ << patchHighlightSeverity( *patch )
+  /* Interactive	*/ << patchInteractiveFlags( *patch )
+  /* Status		*/ << i18nPatchStatus( pi_r )
+  /* Summary		*/ << patch->summary()
+  );
+
+
+  return true;
 }
 
 // ----------------------------------------------------------------------------

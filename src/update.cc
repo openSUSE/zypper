@@ -90,55 +90,6 @@ private:
   }
 };
 
-
-std::string patchHighlightCategory( const Patch & patch_r )
-{
-  std::string ret;
-  switch ( patch_r.categoryEnum() )	// switch by enum as it matches multiple strings (optional==feature==enhancement)
-  {
-    case Patch::CAT_SECURITY:
-      ret = ColorString( patch_r.category(), ColorContext::HIGHLIGHT ).str();
-      break;
-    case Patch::CAT_OPTIONAL:
-      ret = ColorString( patch_r.category(), ColorContext::LOWLIGHT ).str();
-      break;
-      // else: fallthrough
-    default:
-      ret = patch_r.category();
-      break;
-  }
-  return ret;
-}
-
-std::string patchHighlightSeverity( const Patch & patch_r )
-{
-  std::string ret;
-  if ( patch_r.isSeverity( Patch::SEV_CRITICAL ) )
-    ret = ColorString( patch_r.severity(), ColorContext::HIGHLIGHT ).str();
-  else
-    ret = patch_r.severity();
-  return ret;
-}
-
-
-std::string interactiveFlags( const Patch & patch_r )
-{
-  static const Patch::InteractiveFlags kRestart( 0x1000 ); // artifical flag to indicate update stack patches in 'Interactive'
-  std::string ret;
-  Patch::InteractiveFlags flags = patch_r.interactiveFlags();
-  if ( patch_r.restartSuggested() )
-    flags |= kRestart;
-  if ( flags )
-  {
-    ret = stringify( flags, { { Patch::Reboot, "reboot" }, { Patch::Message, "message" }, { Patch::License, "licence" }, { kRestart, ColorString( "restart", ColorContext::HIGHLIGHT ).str() } }, "", ",", "" );
-  }
-  else
-  {
-    ret = "---";
-  }
-  return ret;
-}
-
 ///////////////////////////////////////////////////////////////////
 namespace
 {
@@ -463,50 +414,6 @@ void patch_check()
   { zypper.setExitCode( stats.security() ? ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED : ZYPPER_EXIT_INF_UPDATE_NEEDED ); }
 }
 
-// ----------------------------------------------------------------------------
-inline std::string i18nPatchStatusAsString( const PoolItem & pi_r )
-{
-  switch ( pi_r.status().validate() )
-  {
-    case ResStatus::BROKEN:
-      if ( pi_r.isUnwanted() )
-	// Translator: Patch status: needed, optional, unwanted, applied, not needed
-	return ColorString( _("unwanted"), ColorContext::HIGHLIGHT ).str();
-      if ( Zypper::instance()->globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
-	return ColorString( _("optional"), ColorContext::LOWLIGHT ).str();
-      return _("needed");
-      break;
-    case ResStatus::SATISFIED:		return ColorString( _("applied"), ColorContext::POSITIVE ).str();	break;
-    case ResStatus::NONRELEVANT:	return ColorString( _("not needed"), ColorContext::POSITIVE ).str();	break;
-
-    case ResStatus::UNDETERMINED:	// fall through
-    default:
-      break;
-  }
-  return _("undetermined");
-}
-
-inline const char *const xml_patchStatusAsString( const PoolItem & pi_r )
-{
-  switch ( pi_r.status().validate() )
-  {
-    case ResStatus::BROKEN:
-      if ( pi_r.isUnwanted() )
-	return "unwanted";
-      if ( Zypper::instance()->globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
-	return "optional";
-      return "needed";
-      break;
-    case ResStatus::SATISFIED:		return "applied";	break;
-    case ResStatus::NONRELEVANT:	return "not-needed";	break;
-
-    case ResStatus::UNDETERMINED:	// fall through
-    default:
-      break;
-  }
-  return "undetermined";
-}
-
 static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
 {
   Patch::constPtr patch = pi->asKind<Patch>();
@@ -515,7 +422,7 @@ static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
   cout << "name=\"" << patch->name () << "\" ";
   cout << "edition=\""  << patch->edition() << "\" ";
   cout << "arch=\""  << patch->arch() << "\" ";
-  cout << "status=\""  << xml_patchStatusAsString( pi ) << "\" ";
+  cout << "status=\""  << textPatchStatus( pi ) << "\" ";
   cout << "category=\"" <<  patch->category() << "\" ";
   cout << "severity=\"" <<  patch->severity() << "\" ";
   cout << "pkgmanager=\"" << (patch->restartSuggested() ? "true" : "false") << "\" ";
@@ -653,19 +560,10 @@ static void xml_list_updates(const ResKindSet & kinds)
 static bool list_patch_updates( Zypper & zypper )
 {
   Table tbl;
-  if (!Zypper::instance()->globalOpts().no_abbrev)
-    tbl.allowAbbrev(5);
+  FillPatchesTable intoTbl( tbl );
 
-  Table pm_tbl; // only NEEDED! that affect packagemanager (restartSuggested()), they have priority
-  if (!Zypper::instance()->globalOpts().no_abbrev)
-    pm_tbl.allowAbbrev(5);
-
-  TableHeader th;
-  th << _("Repository")
-     << _("Name") << _("Category") << _("Severity") << _("Interactive") << _("Status") << _("Summary");
-  tbl << th;
-  pm_tbl << th;
-  unsigned cols = th.cols();
+  Table pmTbl; // only NEEDED! that affect packagemanager (restartSuggested()), they have priority
+  FillPatchesTable intoPMTbl( pmTbl );
 
   PatchCheckStats stats( zypper.globalOpts().exclude_optional_patches );
   CliMatchPatch cliMatchPatch( zypper );
@@ -687,27 +585,15 @@ static bool list_patch_updates( Zypper & zypper )
 
     if ( all || patchIsApplicable( pi ) )
     {
-      // table
-      {
-        TableRow tr (cols);
-        tr << patch->repoInfo().asUserString();
-        tr << patch->name ();
-        tr << patchHighlightCategory(*patch);
-        tr << patchHighlightSeverity(*patch);
-	tr << interactiveFlags(*patch);
-        tr << i18nPatchStatusAsString( pi );
-        tr << patch->summary();
-
-        if ( ! all && patchIsNeededRestartSuggested( pi ) )
-          pm_tbl << std::move(tr);
-        else
-          tbl << std::move(tr);
-      }
+      if ( ! all && patchIsNeededRestartSuggested( pi ) )
+	intoPMTbl( pi );
+      else
+	intoTbl( pi );
     }
   }
 
   // those that affect the package manager go first
-  bool affectpm = !pm_tbl.empty();
+  bool affectpm = !pmTbl.empty();
   if ( affectpm )
   {
     zypper.out().gap();
@@ -720,11 +606,10 @@ static bool list_patch_updates( Zypper & zypper )
       zypper.out().info(_("Needed software management updates will be installed first:"));
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
     }
-    pm_tbl.sort(1); // Name
-    cout << pm_tbl;
+    pmTbl.sort();	// use default sort
+    cout << pmTbl;
   }
 
-  tbl.sort(1); // Name
   if (tbl.empty() && !affectpm)
     zypper.out().info(_("No updates found."));
   else if (!tbl.empty())
@@ -736,6 +621,7 @@ static bool list_patch_updates( Zypper & zypper )
       zypper.out().info(_("The following updates are also available:"));
     }
     zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL);
+    tbl.sort();	// use default sort
     cout << tbl;
   }
 
@@ -977,8 +863,8 @@ void list_patches_by_issue( Zypper & zypper )
 {
   // --bz, --cve can't be used together with --issue; this case is ruled out
   // in the initial arguments validation in Zypper.cc
-  Table t;
-  t << ( TableHeader() << _("Issue") << _("No.") << _("Patch") << _("Category") << _("Severity") << _("Interactive") << _("Status") );
+  Table issueMatchesTbl;
+  FillPatchesTableForIssue intoIssueMatchesTbl( issueMatchesTbl );
 
   CliScanIssues issues;
   CliMatchPatch cliMatchPatch( zypper );
@@ -994,7 +880,6 @@ void list_patches_by_issue( Zypper & zypper )
 
   for ( const Issue & issue : issues )
   {
-    DBG << "querying: " << issue.type() << " = " << issue.id() << endl;
     PoolQuery q( basicQ );
     // PoolQuery ORs attributes but we need AND.
     // Post processing the match must assert correct type of specific IDs!
@@ -1025,29 +910,31 @@ void list_patches_by_issue( Zypper & zypper )
       }
 
       // Print details about each match in that solvable:
+      // NOTE: If searching in BOTH updateReferenceId AND updateReferenceType,
+      // we may find matches in both but want to report the issue just once!
+      std::set<std::pair<std::string,std::string>> unifiedResults;
       for_( d, it.matchesBegin(), it.matchesEnd() )
       {
-        const std::string & itype = d->subFind( sat::SolvAttr::updateReferenceType ).asString();
+        std::string itype = d->subFind( sat::SolvAttr::updateReferenceType ).asString();
 
 	if ( issue.specificType() && itype != issue.type() )
 	  continue;	// assert correct type of specific IDs
 
-	t << ( TableRow()
-	  << itype
-	  << d->subFind( sat::SolvAttr::updateReferenceId ).asString()
-	  << patch->name()
-	  << patchHighlightCategory(*patch)
-	  << patchHighlightSeverity(*patch)
-	  << interactiveFlags(*patch)
-	  << i18nPatchStatusAsString( pi ) );
+	// remember....
+	unifiedResults.insert( std::make_pair( std::move(itype), d->subFind( sat::SolvAttr::updateReferenceId ).asString() ) );
+      }
+      // print remembered...
+      for ( auto & p : unifiedResults )
+      {
+	intoIssueMatchesTbl( pi, std::move(p.first), std::move(p.second) );
       }
     }
   }
 
   // pass2: look for matches in patch summary/description
   //
-  Table t1;
-  t1 << ( TableHeader() << _("Name") << _("Category") << _("Severity") << _("Interactive") << _("Summary") );
+  Table summaryMatchesTbl;
+  FillPatchesTable intoSummaryMatchesTbl( summaryMatchesTbl );
 
   for ( const Issue* _issue : pass2 )
   {
@@ -1070,43 +957,36 @@ void list_patches_by_issue( Zypper & zypper )
 	continue;
       }
 
-      t1 << ( TableRow()
-         << patch->name()
-	 << patchHighlightCategory(*patch)
-	 << patchHighlightSeverity(*patch)
-	 << interactiveFlags(*patch)
-	 << patch->summary() );
+      intoSummaryMatchesTbl( pi );
+//	issueMatchesTbl.rows().back().addDetail( str::Str() << "    " << attr.inSolvAttr() << "\t\"" << attr.asString() << "\"" );
       //! \todo could show a highlighted match with a portion of surrounding
       //! text. Needs case-insensitive find.
     }
   }
 
   // print result
-  if ( !zypper.globalOpts().no_abbrev )
-    t1.allowAbbrev(3);
-  t.sort(3);
-  t1.sort(0);
-
-  if ( t.empty() && t1.empty() )
+  if ( issueMatchesTbl.empty() && summaryMatchesTbl.empty() )
   {  zypper.out().info(_("No matching issues found.")); }
   else
   {
-    if ( !t.empty() )
+    if ( !issueMatchesTbl.empty() )
     {
       if ( !pass2.empty() )
       {
         cout << endl;
         zypper.out().info(_("The following matches in issue numbers have been found:"));
       }
-      cout << endl << t;
+      issueMatchesTbl.sort(); // use default sort
+      cout << endl << issueMatchesTbl;
     }
 
-    if ( !t1.empty() )
+    if ( !summaryMatchesTbl.empty() )
     {
-      if ( !t.empty() )
+      if ( !issueMatchesTbl.empty() )
       { cout << endl; }
       zypper.out().info(_( "Matches in patch descriptions of the following patches have been found:"));
-      cout << endl << t1;
+      summaryMatchesTbl.sort(); // use default sort
+      cout << endl << summaryMatchesTbl;
     }
   }
 }

@@ -61,21 +61,8 @@ struct FillSearchTableSelectable
   bool operator()(const ui::Selectable::constPtr & s) const;
 };
 
-
-/**
- * Functor for filling search output table in rug style.
- */
-struct FillPatchesTable
-{
-  // the table used for output
-  Table * _table;
-  TriBool _inst_notinst;
-
-  FillPatchesTable( Table & table,
-      TriBool inst_notinst = indeterminate );
-
-  bool operator()(const PoolItem & pi) const;
-};
+// struct FillPatchesTable		in src/utils/misc.h
+// struct FillPatchesTableForIssue	in src/utils/misc.h
 
 
 /** List all patches with specific info in specified repos */
