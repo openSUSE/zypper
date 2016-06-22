@@ -45,7 +45,6 @@ namespace
 
 FillSearchTableSolvable::FillSearchTableSolvable( Table & table, TriBool inst_notinst )
 : _table( &table )
-, _gopts( Zypper::instance()->globalOpts() )
 , _inst_notinst( inst_notinst )
 {
   Zypper & zypper( *Zypper::instance() );
@@ -212,7 +211,6 @@ bool FillSearchTableSolvable::operator()( const ui::Selectable::constPtr & sel )
 
 FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool installed_only )
 : _table( &table )
-, _gopts( Zypper::instance()->globalOpts() )
 , inst_notinst( installed_only )
 {
   Zypper & zypper( *Zypper::instance() );
@@ -315,7 +313,6 @@ bool FillSearchTableSelectable::operator()( const ui::Selectable::constPtr & s )
 
 FillPatchesTable::FillPatchesTable( Table & table, TriBool inst_notinst )
 : _table( &table )
-, _gopts( Zypper::instance()->globalOpts() )
 , _inst_notinst( inst_notinst )
 {
   TableHeader header;
@@ -355,27 +352,7 @@ bool FillPatchesTable::operator()( const PoolItem & pi ) const
   return true;
 }
 
-
-/*
-std::string selectable_search_repo_str(const ui::Selectable & s)
-{
-  std::string repostr;
-
-  // show available objects
-  for_(it, s.availableBegin(), s.availableEnd())
-  {
-    if (repostr.empty())
-      repostr = (*it)->repository().info().name();
-    else if (repostr != (*it)->repository().info().name())
-    {
-      repostr = _("(multiple)");
-      return repostr;
-    }
-  }
-
-  return repostr;
-}
-*/
+///////////////////////////////////////////////////////////////////
 
 static std::string string_weak_status( const ResStatus & rs )
 {
