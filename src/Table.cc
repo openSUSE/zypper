@@ -329,12 +329,6 @@ void Table::margin( unsigned margin )
     ERR << "margin of " << margin << " is greater than half of the screen" << endl;
 }
 
-void Table::sort( unsigned by_column )
-{
-  TableRow::Less comp( by_column );
-  _rows.sort( comp );
-}
-
 // Local Variables:
 // c-basic-offset: 2
 // End:
