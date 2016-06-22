@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-22 12:12+0200\n"
-"PO-Revision-Date: 2016-06-22 17:24+0000\n"
+"PO-Revision-Date: 2016-06-22 20:38+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
@@ -5135,11 +5135,11 @@ msgid ""
 msgstr ""
 "ping [opções]\n"
 "\n"
-"Este comando tem implementação fictícia e sempre retorna 0.\n"
+"Este comando tem implementação simulada que sempre retorna 0.\n"
 
 #: src/Zypper.cc:3196 src/Zypper.cc:5236
 msgid "Unexpected program flow."
-msgstr "Fluxo inesperado no programa."
+msgstr "Fluxo de programa inesperado."
 
 #: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
@@ -5178,7 +5178,8 @@ msgstr "'%s' não é um tipo de serviço válido."
 #: src/Zypper.cc:3425
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr "Veja '%s' ou '%s' para obter uma lista de tipos de serviço conhecidos."
+msgstr ""
+"Consulte '%s' ou '%s' para obter uma lista de tipos de serviço conhecidos."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
