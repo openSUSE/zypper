@@ -7,7 +7,6 @@
 
 #include <iostream>
 
-// #include <zypp/base/LogTools.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/ZYpp.h>
 #include <zypp/Package.h>
@@ -18,7 +17,6 @@
 
 #include "Zypper.h"
 #include "main.h"
-//#include "misc.h"
 #include "Table.h"
 #include "utils/misc.h"
 #include "utils/text.h"
@@ -70,6 +68,21 @@ namespace
     return str << " " << word_r;
   }
 
+  inline void printNVA( const PoolItem & pi_r )
+  {
+    cout << _("Name") << ": " << pi_r.name() << endl;
+    cout << _("Version") << ": " << pi_r.edition().asString() << endl;
+    cout << _("Arch") << ": " << pi_r.arch().asString() << endl;
+    cout << _("Vendor") << ": " << pi_r.vendor() << endl;
+  }
+
+  inline void printSummaryDesc( const PoolItem & pi_r )
+  {
+    cout << _("Summary") << ": " << pi_r.summary() << endl;
+    cout << _("Description") << ": " << endl;
+    Zypper::instance()->out().printRichText( pi_r.description(), 2/*indented*/ );
+  }
+
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
@@ -111,21 +124,6 @@ namespace
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-void printNVA( const PoolItem & pi_r )
-{
-  cout << _("Name") << ": " << pi_r.name() << endl;
-  cout << _("Version") << ": " << pi_r.edition().asString() << endl;
-  cout << _("Arch") << ": " << pi_r.arch().asString() << endl;
-  cout << _("Vendor") << ": " << pi_r.vendor() << endl;
-}
-
-void printSummaryDesc( const PoolItem & pi_r )
-{
-  cout << _("Summary") << ": " << pi_r.summary() << endl;
-  cout << _("Description") << ": " << endl;
-  Zypper::instance()->out().printRichText( pi_r.description(), 2/*indented*/ );
-}
-
 ///////////////////////////////////////////////////////////////////
 namespace {
   void logOtherKindMatches( const PoolQuery & q_r, const std::string & name_r )
@@ -145,6 +143,7 @@ namespace {
   }
 } // namespace
 ///////////////////////////////////////////////////////////////////
+
 void printInfo( Zypper & zypper, const ResKind & kind_r )
 {
   zypper.out().gap();
@@ -253,7 +252,7 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
   if ( runningOnEnterprise() )
   {
     Package::constPtr pkg = asKind<Package>(theone.resolvable());
-    cout << _("Support Level" << ": " << asUserString( pkg->vendorSupport() ) << endl;
+    cout << _("Support Level") << ": " << asUserString( pkg->vendorSupport() ) << endl;
   }
 
   cout << _("Installed") << ": " << asYesNo( (bool)installed ) << endl;
@@ -273,7 +272,7 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
   else
     cout << _("not installed") << endl;
 
-  cout << _("Installed Size" << ": " << theone.installSize() << endl;
+  cout << _("Installed Size") << ": " << theone.installSize() << endl;
 
   printSummaryDesc( theone );
 
@@ -389,7 +388,7 @@ void printPatternInfo( Zypper & zypper, const ui::Selectable & s )
   printNVA( pool_item );
 
   cout << _("Installed") << ": " << asYesNo( s.hasInstalledObj() ) << endl;
-  cout << _("Visible to User" << ": " << asYesNo( pattern->userVisible() ) << endl;
+  cout << _("Visible to User") << ": " << asYesNo( pattern->userVisible() ) << endl;
 
   printSummaryDesc( pool_item );
 
