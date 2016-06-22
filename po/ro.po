@@ -3075,7 +3075,8 @@ msgstr ""
 "\t--raw-cache-dir <dir>\tFolosește directorul alternativ pentru cacheul de "
 "meta-date brute.\n"
 "\t--solv-cache-dir <dir>\tFolosește directorul alternativ pentru cache de "
-"fișiere solv.\b\t--pkg-cache-dir <dir>\tFolosește directorul alternativ "
+"fișiere solv.\n"
+"\t--pkg-cache-dir <dir>\tFolosește directorul alternativ "
 "pentru cacheul de pachete.\n"
 
 #: src/Zypper.cc:458
