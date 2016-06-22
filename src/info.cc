@@ -20,7 +20,7 @@
 #include "main.h"
 //#include "misc.h"
 #include "Table.h"
-#include "utils/misc.h" // for kind_to_string_localized and string_patch_status
+#include "utils/misc.h"
 #include "utils/text.h"
 #include "search.h"
 #include "update.h"
@@ -311,12 +311,13 @@ void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
   const PoolItem & pool_item = s.theObj();
   printNVA( pool_item );
 
-  cout << _("Status: ") << string_patch_status( pool_item ) << endl;
+  cout << _("Status: ") << i18nPatchStatus( pool_item ) << endl;
 
   Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());
-  cout << _("Category: ") << patch->category() << endl;
-  cout << _("Severity: ") << patch->severity() << endl;
+  cout << _("Category: ") << patchHighlightCategory( *patch ) << endl;
+  cout << _("Severity: ") << patchHighlightSeverity( *patch ) << endl;
   cout << _("Created On: ") << patch->timestamp().asString() << endl;
+#if 0
   cout << _("Reboot Required: ") << asYesNo( patch->rebootSuggested() ) << endl;
   cout << _("Package Manager Restart Required") << ": ";
   cout << asYesNo( patch->restartSuggested() ) << endl;
@@ -328,7 +329,10 @@ void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
     ignoreFlags |= Patch::License;
 
   cout << _("Interactive: ") << asYesNo( patch->interactiveWhenIgnoring( ignoreFlags ) ) << endl;
-
+#else
+  // print interactive flags the same style as list-patches
+  cout << _("Interactive: ") << patchInteractiveFlags( *patch )  << endl;
+#endif
   printSummaryDesc( pool_item );
 
   // Print dependency lists if CLI requests it
