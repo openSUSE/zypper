@@ -113,16 +113,16 @@ namespace
 
 void printNVA( const PoolItem & pi_r )
 {
-  cout << _("Name: ") << pi_r.name() << endl;
-  cout << _("Version: ") << pi_r.edition().asString() << endl;
-  cout << _("Arch: ") << pi_r.arch().asString() << endl;
-  cout << _("Vendor: ") << pi_r.vendor() << endl;
+  cout << _("Name") << ": " << pi_r.name() << endl;
+  cout << _("Version") << ": " << pi_r.edition().asString() << endl;
+  cout << _("Arch") << ": " << pi_r.arch().asString() << endl;
+  cout << _("Vendor") << ": " << pi_r.vendor() << endl;
 }
 
 void printSummaryDesc( const PoolItem & pi_r )
 {
-  cout << _("Summary: ") << pi_r.summary() << endl;
-  cout << _("Description: ") << endl;
+  cout << _("Summary") << ": " << pi_r.summary() << endl;
+  cout << _("Description") << ": " << endl;
   Zypper::instance()->out().printRichText( pi_r.description(), 2/*indented*/ );
 }
 
@@ -216,17 +216,17 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
  * <p>
  * Generates output like this:
 <pre>
-Repository: system
-Name: gvim
-Version: 6.4.6-19
-Arch: x86_64
-Installed: Yes
-Status: up-to-date
-Installed Size: 2881221
-Summary: A GUI for Vi
-Description: Start: /usr/X11R6/bin/gvim
-
-Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
+Repository     : @System
+Name           : gvim
+Version        : 6.4.6-19
+Arch           : x86_64
+Installed      : Yes
+Status         : up-to-date
+Installed Size : 2881221
+Summary        : A GUI for Vi
+Description    :
+  Start /usr/X11R6/bin/gvim
+  Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
 </pre>
  *
  */
@@ -245,7 +245,7 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
       theone = installed;
   }
 
-  cout << _("Repository: ") << theone.repository().asUserString() << endl;
+  cout << _("Repository") << ": " << theone.repository().asUserString() << endl;
 
   printNVA( theone );
 
@@ -253,12 +253,12 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
   if ( runningOnEnterprise() )
   {
     Package::constPtr pkg = asKind<Package>(theone.resolvable());
-    cout << _("Support Level: ") << asUserString( pkg->vendorSupport() ) << endl;
+    cout << _("Support Level" << ": " << asUserString( pkg->vendorSupport() ) << endl;
   }
 
-  cout << _("Installed: ") << asYesNo( (bool)installed ) << endl;
+  cout << _("Installed") << ": " << asYesNo( (bool)installed ) << endl;
 
-  cout << _("Status: ");
+  cout << _("Status") << ": ";
   if ( installed )
   {
     if ( updateCand )
@@ -273,7 +273,7 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
   else
     cout << _("not installed") << endl;
 
-  cout << _("Installed Size: ") << theone.installSize() << endl;
+  cout << _("Installed Size" << ": " << theone.installSize() << endl;
 
   printSummaryDesc( theone );
 
@@ -287,22 +287,20 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
  * <p>
  * Generates output like this:
  * <pre>
-Name: xv
-Version: 1448-0
-Arch: noarch
-Status: Satisfied
-Category: recommended
-Created On: 5/31/2006 2:34:37 AM
-Reboot Required: No
-Package Manager Restart Required: No
-Interactive: No
-Summary: XV can not grab in KDE
-Description: XV can not grab in KDE
-Provides:
-patch: xv = 1448-0
-
+Name        : xv
+Version     : 1448-0
+Arch        : noarch
+Status      : applied
+Category    : recommended
+Severity    : critical
+Created On  : 5/31/2006 2:34:37 AM
+Interactive : reboot | message | licence | restart
+Summary     : XV can not grab in KDE
+Description : XV can not grab in KDE
+Provides    :
+  xv = 1448-0
 Requires:
-atom: xv = 3.10a-1091.2
+  xv = 3.10a-1091.2
 </pre>
  *
  */
@@ -311,16 +309,15 @@ void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
   const PoolItem & pool_item = s.theObj();
   printNVA( pool_item );
 
-  cout << _("Status: ") << i18nPatchStatus( pool_item ) << endl;
+  cout << _("Status") << ": " << i18nPatchStatus( pool_item ) << endl;
 
   Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());
-  cout << _("Category: ") << patchHighlightCategory( *patch ) << endl;
-  cout << _("Severity: ") << patchHighlightSeverity( *patch ) << endl;
-  cout << _("Created On: ") << patch->timestamp().asString() << endl;
+  cout << _("Category") << ": " << patchHighlightCategory( *patch ) << endl;
+  cout << _("Severity") << ": " << patchHighlightSeverity( *patch ) << endl;
+  cout << _("Created On" << ": " << patch->timestamp().asString() << endl;
 #if 0
-  cout << _("Reboot Required: ") << asYesNo( patch->rebootSuggested() ) << endl;
-  cout << _("Package Manager Restart Required") << ": ";
-  cout << asYesNo( patch->restartSuggested() ) << endl;
+  cout << _("Reboot Required" << ": " << asYesNo( patch->rebootSuggested() ) << endl;
+  cout << _("Package Manager Restart Required") << ": " << asYesNo( patch->restartSuggested() ) << endl;
 
   Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
   if ( zypper.globalOpts().reboot_req_non_interactive )
@@ -328,10 +325,10 @@ void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
   if ( zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses") )
     ignoreFlags |= Patch::License;
 
-  cout << _("Interactive: ") << asYesNo( patch->interactiveWhenIgnoring( ignoreFlags ) ) << endl;
+  cout << _("Interactive") << ": " << asYesNo( patch->interactiveWhenIgnoring( ignoreFlags ) ) << endl;
 #else
   // print interactive flags the same style as list-patches
-  cout << _("Interactive: ") << patchInteractiveFlags( *patch )  << endl;
+  cout << _("Interactive") << ": " << patchInteractiveFlags( *patch )  << endl;
 #endif
   printSummaryDesc( pool_item );
 
@@ -387,12 +384,12 @@ void printPatternInfo( Zypper & zypper, const ui::Selectable & s )
   if ( !pattern )
     return;
 
-  cout << _("Repository: ") << pool_item.repository().asUserString() << endl;
+  cout << _("Repository") << ": " << pool_item.repository().asUserString() << endl;
 
   printNVA( pool_item );
 
-  cout << _("Installed: ") << asYesNo( s.hasInstalledObj() ) << endl;
-  cout << _("Visible to User: ") << asYesNo( pattern->userVisible() ) << endl;
+  cout << _("Installed") << ": " << asYesNo( s.hasInstalledObj() ) << endl;
+  cout << _("Visible to User" << ": " << asYesNo( pattern->userVisible() ) << endl;
 
   printSummaryDesc( pool_item );
 
@@ -459,7 +456,7 @@ void printProductInfo( Zypper & zypper, const ui::Selectable & s )
   }
   else
   {
-    cout << _("Repository: ") << pool_item.repository().asUserString() << endl;
+    cout << _("Repository") << ": " << pool_item.repository().asUserString() << endl;
 
     printNVA( pool_item );
 
