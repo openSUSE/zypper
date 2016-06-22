@@ -204,7 +204,9 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
   virtual void start( Resolvable::constPtr resolvable )
   {
     Zypper & zypper = *Zypper::instance();
+#if 0
     N_("Removing %s");	// what's actually needed here
+#endif
     _progress.reset( new Out::ProgressBar( zypper.out(),
 					   "remove-resolvable",
 					   // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
@@ -273,7 +275,9 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
   virtual void start( Resolvable::constPtr resolvable )
   {
     Zypper & zypper = *Zypper::instance();
+#if 0
     N_("Installing: %s");	// what's actually needed here
+#endif
     _progress.reset( new Out::ProgressBar( zypper.out(),
 					   "install-resolvable",
 					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
@@ -300,7 +304,9 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
     }
 
     std::ostringstream s;
+#if 0
     N_("Installation of %s failed:");	// what's actually needed here
+#endif
     s << fixupNameEditionToIdent(_("Installation of %s-%s failed:"), resolvable->asString() ) << std::endl;
     s << zcb_error2str(error, description);
     Zypper::instance()->out().error(s.str());
