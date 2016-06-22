@@ -313,9 +313,9 @@ void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
   Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());
   cout << _("Category") << ": " << patchHighlightCategory( *patch ) << endl;
   cout << _("Severity") << ": " << patchHighlightSeverity( *patch ) << endl;
-  cout << _("Created On" << ": " << patch->timestamp().asString() << endl;
+  cout << _("Created On") << ": " << patch->timestamp().asString() << endl;
 #if 0
-  cout << _("Reboot Required" << ": " << asYesNo( patch->rebootSuggested() ) << endl;
+  cout << _("Reboot Required") << ": " << asYesNo( patch->rebootSuggested() ) << endl;
   cout << _("Package Manager Restart Required") << ": " << asYesNo( patch->restartSuggested() ) << endl;
 
   Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
