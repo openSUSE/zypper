@@ -164,7 +164,23 @@ public:
 
   std::ostream & dumpTo( std::ostream & stream ) const;
   bool empty() const { return _rows.empty(); }
-  void sort( unsigned by_column );       // columns start with 0...
+
+
+  /** Unsorted - pseudo sort column indicating not to sort. */
+  static constexpr unsigned Unsorted		= unsigned(-1);
+
+  /** Get the default sort column or \ref Unsorted (default) */
+  unsigned defaultSortColumn() const		{ return _defaultSortColumn; }
+
+  /** Set a \ref defaultSortColumn */
+  void defaultSortColumn( unsigned byColumn_r )	{ _defaultSortColumn = byColumn_r; }
+
+  /** Sort by \ref defaultSortColumn */
+  void sort()					{ sort( _defaultSortColumn ); }
+
+  /** Sort by \a byColumn_r */
+  void sort( unsigned byColumn_r )		{ if ( byColumn_r != Unsorted ) _rows.sort( TableRow::Less( byColumn_r ) ); }
+
 
   void lineStyle( TableLineStyle st );
   void wrap( int force_break_after = -1 );
@@ -211,6 +227,8 @@ private:
   int _force_break_after;
   //! Whether to wrap the table if it exceeds _screen_width
   bool _do_wrap;
+
+  DefaultIntegral<unsigned,Unsorted> _defaultSortColumn;
 
   mutable bool _inHeader;
   std::set<unsigned> _editionStyle;
