@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-22 12:12+0200\n"
-"PO-Revision-Date: 2016-06-20 22:04+0000\n"
+"PO-Revision-Date: 2016-06-22 21:25+0000\n"
 "Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1473,42 +1473,43 @@ msgstr[0] "Följande paket stöds inte av dess leverantör:"
 msgstr[1] "Följande %d paket stöds inte av dess leverantör:"
 
 #: src/Summary.cc:1130
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande paket behöver ytterligare kundavtal för att få support:"
+msgstr[1] "Följande %d paket behöver ytterligare kundavtal för att få support:"
 
 #: src/Summary.cc:1148
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] "Följande paket kommer att installeras:\n"
-msgstr[1] "Följande paket kommer att installeras:\n"
+msgstr[0] "Följande paket kommer INTE att installeras:"
+msgstr[1] "Följande %d paket kommer INTE att installeras:"
 
 #: src/Summary.cc:1153
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande produktuppdatering kommer INTE att installeras:"
+msgstr[1] "Följande %d produktuppdateringar kommer INTE att installeras:"
 
 #: src/Summary.cc:1158
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
-msgstr[0] "Följande paket kommer att installeras:\n"
-msgstr[1] "Följande paket kommer att installeras:\n"
+msgstr[0] "Följande programuppdatering kommer INTE att installeras:"
+msgstr[1] "Följande %d programuppdateringar kommer INTE att installeras:"
 
 #: src/Summary.cc:1188
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "Följande samlingar installeras:"
-msgstr[1] "Följande samlingar installeras:"
+msgstr[0] "Följande objekt är låst och kommer inte att påverkas av någon åtgärd:"
+msgstr[1] ""
+"Följande %d objekt är låsta och kommer inte att påverkas av någon åtgärd:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1519,14 +1520,14 @@ msgstr "Tillgänglig"
 #: src/Summary.cc:1212
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
-msgstr "Kör \"%1%\" för att se hela listan över låsta objekt."
+msgstr "Kör '%1%' för att se hela listan över låsta objekt."
 
 #: src/Summary.cc:1222
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "Följande programfix kräver en omstart av systemet:"
+msgstr[1] "Följande %d programfixar kräver en omstart av systemet:"
 
 #: src/Summary.cc:1240
 #, boost-format
@@ -1555,11 +1556,10 @@ msgstr "Efter operationen frigörs %s."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1281
-#, fuzzy
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] "Visa paketuppdateringar."
-msgstr[1] "Visa paketuppdateringar."
+msgstr[0] "paket att uppdatera"
+msgstr[1] "paket att uppdatera"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1292
@@ -1577,51 +1577,45 @@ msgstr[1] "paket att nedgradera"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1306
-#, fuzzy
 msgid "new"
 msgid_plural "new"
-msgstr[0] "Ny"
-msgstr[1] "Ny"
+msgstr[0] "ny"
+msgstr[1] "nya"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1309
-#, fuzzy
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] "%s behöver inte installeras"
-msgstr[1] "%s behöver inte installeras"
+msgstr[0] "nytt paket att installera"
+msgstr[1] "nya paket att installera"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1320
-#, fuzzy
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] "installera"
-msgstr[1] "installera"
+msgstr[0] "att ominstallera"
+msgstr[1] "att ominstallera"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1323
-#, fuzzy
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] "Paketinstallation"
-msgstr[1] "Paketinstallation"
+msgstr[0] "paket att ominstallera"
+msgstr[1] "paket att ominstallera"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1334
-#, fuzzy
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "%s borttagen OK"
-msgstr[1] "%s borttagen OK"
+msgstr[0] "att ta bort"
+msgstr[1] "att ta bort"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1337
-#, fuzzy
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] "Det går inte att ta bort ^%s\n"
-msgstr[1] "Det går inte att ta bort ^%s\n"
+msgstr[0] "paket att ta bort"
+msgstr[1] "paket att ta bort"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1348
@@ -1632,11 +1626,10 @@ msgstr[1] "för att byta leverantör"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1351
-#, fuzzy
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] "Följande paket uppgraderas:"
-msgstr[1] "Följande paket uppgraderas:"
+msgstr[0] "paket kommer att byta leverantör"
+msgstr[1] "paket kommer att byta leverantör"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1362
@@ -1654,19 +1647,17 @@ msgstr[1] "paket kommer att byta arkiv"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1376
-#, fuzzy
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] "paket"
-msgstr[1] "paket"
+msgstr[0] "källpaket"
+msgstr[1] "källpaket"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1379
-#, fuzzy
 msgid "source package to install"
 msgid_plural "source packages to install"
-msgstr[0] "%s behöver inte installeras"
-msgstr[1] "%s behöver inte installeras"
+msgstr[0] "källpaket att installera"
+msgstr[1] "källpaket att installeras"
 
 #: src/Summary.cc:1430
 msgid "System reboot required."
@@ -2635,7 +2626,7 @@ msgstr "Ett problem uppstod när data skulle läsas in från '%s'"
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
-"Det gick inte att uppdatera lagringsplatsen \"%s\". Använder gammal cache."
+"Det gick inte att uppdatera lagringsplatsen '%s'. Använder gammal cache."
 
 #: src/repos.cc:3122 src/repos.cc:3151
 #, c-format, boost-format
@@ -2655,7 +2646,7 @@ msgstr ""
 #: src/repos.cc:3150
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "Prova %s, eller till och med %s, innan du gör så här."
+msgstr "Prova '%s', eller till och med '%s', innan du gör så här."
 
 #: src/repos.cc:3161
 msgid "Reading installed packages..."
@@ -2679,24 +2670,24 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Överväger %1% av %2% tillämpliga programfixar:"
+msgstr[1] "Överväger %1% av %2% tillämpliga programfixar:"
 
 #. translator: stats table header
 #: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hittade %1% tillämplig programfix:"
+msgstr[1] "Hittade %1% tillämpliga programfixar:"
 
 #. translator: stats summary
 #: src/update.cc:294
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "Inte behövd"
-msgstr[1] "Inte behövd"
+msgstr[0] "%d programfix låst"
+msgstr[1] "%d programfixar låsta"
 
 #. translator: stats summary
 #: src/update.cc:302
