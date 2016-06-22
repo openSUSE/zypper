@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-06-16 18:18+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
@@ -594,6 +594,14 @@ msgstr "Catégorie"
 msgid "Severity"
 msgstr "Sévérité"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Créé le "
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Redémarrage requis "
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Redémarrage du gestionnaire de paquets requis"
@@ -689,14 +697,6 @@ msgstr "Fourni par un dépôt activé"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Fourni par aucun des dépôts activés"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Redémarrage requis "
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Créé le "
 
 #: src/subcommand.cc:51
 msgid "none"

@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-06-16 15:37+0000\n"
 "Last-Translator: Stanislav Brabec <sbrabec@suse.com>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
@@ -585,6 +585,14 @@ msgstr "Kategorie"
 msgid "Severity"
 msgstr "Závažnost"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Vytvořeno"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Vyžadován restart počítače"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Vyžadován restart správce balíků"
@@ -679,14 +687,6 @@ msgstr "Poskytnuto z povoleného repozitáře"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Není poskytováno žádným z povolených repozitářů"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Vyžadován restart počítače"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Vytvořeno"
 
 #: src/subcommand.cc:51
 msgid "none"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2005-07-29 15:37+0530\n"
 "Last-Translator: Priyavert Sharma<priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions <linux_team@agreeya.com>\n"
@@ -554,6 +554,16 @@ msgstr "শ্রেণী"
 msgid "Severity"
 msgstr "কঠোরতা"
 
+#: src/info.cc:316
+#, fuzzy
+msgid "Created On"
+msgstr "%s তৈরী করা হচ্ছে"
+
+#: src/info.cc:318
+#, fuzzy
+msgid "Reboot Required"
+msgstr "প্রয়োজন"
+
 #: src/info.cc:319
 #, fuzzy
 msgid "Package Manager Restart Required"
@@ -658,16 +668,6 @@ msgstr "%s প্যাচ পড়ছে"
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "নির্দিষ্ট করা AC প্রণালীটি পাওয়া যায় নি।"
-
-#: src/info.cc:318
-#, fuzzy
-msgid "Reboot Required"
-msgstr "প্রয়োজন"
-
-#: src/info.cc:316
-#, fuzzy
-msgid "Created On"
-msgstr "%s তৈরী করা হচ্ছে"
 
 #: src/subcommand.cc:51
 msgid "none"

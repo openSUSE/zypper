@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-06-21 11:47+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
@@ -584,6 +584,14 @@ msgstr "Categorie"
 msgid "Severity"
 msgstr "Ernst"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Aangemaakt op"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Systeemherstart vereist"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Herstart van pakketbeheerder vereist"
@@ -679,14 +687,6 @@ msgstr "Geleverd door ingeschakelde installatiebron"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Niet geleverd door ingeschakelde installatiebron"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Systeemherstart vereist"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Aangemaakt op"
 
 #: src/subcommand.cc:51
 msgid "none"

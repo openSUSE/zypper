@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-05-23 12:39+0000\n"
 "Last-Translator: Sarah O'Farrell <sarah.ofarrell@vistatec.com>\n"
 "Language-Team: English (United Kingdom) <http://l10n.opensuse.org/projects/"
@@ -556,6 +556,14 @@ msgstr "Category"
 msgid "Severity"
 msgstr "Severity"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Created On"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Reboot Required"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Package Manager Restart Required"
@@ -661,14 +669,6 @@ msgstr "Uploaded %s to repository."
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "Source package '%s' not found."
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Reboot Required"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Created On"
 
 #: src/subcommand.cc:51
 msgid "none"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2015-10-06 21:56+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <opensuse-translation@opensuse.org>\n"
@@ -543,6 +543,14 @@ msgstr "Kategori"
 msgid "Severity"
 msgstr "Alvor"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Oprettet den"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Kræver genopstart"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Kræver genstart af pakkehåndtering"
@@ -637,14 +645,6 @@ msgstr "Leveret af aktiveret softwarekilde"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Ikke leveret af en aktiv softwarekilde"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Kræver genopstart"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Oprettet den"
 
 #: src/subcommand.cc:51
 msgid "none"

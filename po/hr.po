@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2011-04-03 15:48+0200\n"
 "Last-Translator: Krešimir Jozić <kjozic@gmail.com>\n"
 "Language-Team: Croatian <kde-i18n-doc@kde.org>\n"
@@ -545,6 +545,14 @@ msgstr "Kategorija"
 msgid "Severity"
 msgstr "Ozbiljnost"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Stvoreno"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Ponovno pokretanje računala je potrebno"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Potrebno je ponovno pokretanje upravitelja paketima"
@@ -644,14 +652,6 @@ msgstr "Preskačem onemogućeni direktorij '%s'"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr ""
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Ponovno pokretanje računala je potrebno"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Stvoreno"
 
 #: src/subcommand.cc:51
 msgid "none"

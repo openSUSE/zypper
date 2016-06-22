@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2007-08-24 22:33+0530\n"
 "Last-Translator: Sangeeta Kumari <k.sangeeta09@gmail.com>\n"
 "Language-Team: Hindi <en@li.org>\n"
@@ -554,6 +554,14 @@ msgstr "श्रेणी"
 msgid "Severity"
 msgstr "सेक्युरुटी"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "इसपर बना"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "रीबूट जरुरत "
+
 #: src/info.cc:319
 #, fuzzy
 msgid "Package Manager Restart Required"
@@ -658,14 +666,6 @@ msgstr "संसाधन जोड़ रहा"
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "निर्दिष्ट स्कीम AC नहीं मिली."
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "रीबूट जरुरत "
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "इसपर बना"
 
 #: src/subcommand.cc:51
 msgid "none"

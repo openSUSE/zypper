@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-06-22 00:32+0000\n"
 "Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
@@ -584,6 +584,14 @@ msgstr "الفئة"
 msgid "Severity"
 msgstr "الخطورة"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "تاريخ الإنشاء"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "مطلوب إعادة التشغيل"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "مطلوب إعادة تشغيل مدير الحزم"
@@ -678,14 +686,6 @@ msgstr "متوفرة في مستودع ممكن"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "لا يوفرها أي مستودع ممكن"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "مطلوب إعادة التشغيل"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "تاريخ الإنشاء"
 
 #: src/subcommand.cc:51
 msgid "none"

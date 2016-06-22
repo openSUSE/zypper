@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2014-12-11 23:24+0100\n"
 "Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
 "Language-Team: Polish <opensuse-pl@opensuse.org>\n"
@@ -567,6 +567,14 @@ msgstr "Kategoria"
 msgid "Severity"
 msgstr "Poziom"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Utworzono w"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Wymagane ponowne uruchomienie"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Wymagane ponowne uruchomienie menedżera pakietów"
@@ -661,14 +669,6 @@ msgstr "Dostarczony z włączonego repozytorium"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Nie dostarczony z żadnego włączonego repozytorium"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Wymagane ponowne uruchomienie"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Utworzono w"
 
 #: src/subcommand.cc:51
 msgid "none"

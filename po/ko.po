@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2015-07-12 17:04+0900\n"
 "Last-Translator: Yunseok Choi <xein@naver.com>\n"
 "Language-Team: Korean <xein@naver.com>\n"
@@ -546,6 +546,14 @@ msgstr "범주"
 msgid "Severity"
 msgstr "긴급"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "제작됨"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "시스템 다시 시작 필요"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "꾸러미 관리자 재시작 필요"
@@ -642,14 +650,6 @@ msgstr "활성화된 리포지토리에서 제공함"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "활성화된 리포지토리에서 제공하지 않음"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "시스템 다시 시작 필요"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "제작됨"
 
 #: src/subcommand.cc:51
 msgid "none"

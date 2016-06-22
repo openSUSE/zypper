@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-01-11 12:42+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <opensuse-translation@opensuse.org>\n"
@@ -568,6 +568,14 @@ msgstr "Kategorija"
 msgid "Severity"
 msgstr "Reikšmingumas"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Sukurta"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Reikia iš naujo paleisti"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Reikia iš naujo paleisti paketų tvarkytuvę"
@@ -662,14 +670,6 @@ msgstr "Pateikia įgalinta saugykla"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Nė viena įgalinta saugyklos nepateikia"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Reikia iš naujo paleisti"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Sukurta"
 
 #: src/subcommand.cc:51
 msgid "none"

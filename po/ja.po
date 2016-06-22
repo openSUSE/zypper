@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-06-18 07:41+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -570,6 +570,14 @@ msgstr "カテゴリ"
 msgid "Severity"
 msgstr "重要度"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "作成日"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "システム再起動"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "パッケージ管理ツールの再起動が必要です"
@@ -664,14 +672,6 @@ msgstr "有効化されたリポジトリから提供されています"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "有効化されたリポジトリの中からは提供されていません"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "システム再起動"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "作成日"
 
 #: src/subcommand.cc:51
 msgid "none"

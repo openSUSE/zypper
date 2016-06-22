@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2002-07-23 18:27+0200\n"
 "Last-Translator: Damir Bjelobradic <Nagual@lugbih.org>\n"
 "Language-Team: Bosnian <i18n@suse.de>\n"
@@ -542,6 +542,14 @@ msgstr ""
 msgid "Severity"
 msgstr ""
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr ""
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr ""
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr ""
@@ -642,14 +650,6 @@ msgstr ""
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "Novi moduli nisu pronađeni."
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr ""
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr ""
 
 #: src/subcommand.cc:51
 msgid "none"

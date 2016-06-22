@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2011-11-24 16:28+0200\n"
 "Last-Translator: Mert çetin <alirizanazli95@gmail.com>\n"
 "Language-Team: turkish <i18n@suse.de>\n"
@@ -558,6 +558,16 @@ msgstr "Kategori"
 msgid "Severity"
 msgstr ""
 
+# clients/inst_custom_part.ycp:2940
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Oluşturulma tarihi"
+
+# clients/inst_sw_single.ycp:1542 clients/inst_sw_single.ycp:1573 clients/inst_sw_single.ycp:1695 clients/inst_sw_single.ycp:1883
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Yeniden başlatma gerekiyor"
+
 # clients/lan_inetd_custom.ycp:156
 #: src/info.cc:319
 #, fuzzy
@@ -659,16 +669,6 @@ msgstr ""
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr ""
-
-# clients/inst_sw_single.ycp:1542 clients/inst_sw_single.ycp:1573 clients/inst_sw_single.ycp:1695 clients/inst_sw_single.ycp:1883
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Yeniden başlatma gerekiyor"
-
-# clients/inst_custom_part.ycp:2940
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Oluşturulma tarihi"
 
 #: src/subcommand.cc:51
 msgid "none"

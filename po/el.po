@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2015-07-06 01:22+0300\n"
 "Last-Translator: Danae <danae.asderi@gmail.com>\n"
 "Language-Team: opensuse-translation-el@opensuse.org\n"
@@ -586,6 +586,14 @@ msgstr "Κατηγορία"
 msgid "Severity"
 msgstr "Σοβαρότητα"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Δημιουργήθηκε"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Απαιτείται Επανεκκίνηση"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Απαιτείται Επανεκκίνηση του Διαχειριστή Πακέτων"
@@ -680,14 +688,6 @@ msgstr "Παρέχεται από ενεργοποιημένο αποθετήρ�
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Δεν παρέχεται από κανένα ενεργοποιημένο αποθετήριο"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Απαιτείται Επανεκκίνηση"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Δημιουργήθηκε"
 
 #: src/subcommand.cc:51
 msgid "none"

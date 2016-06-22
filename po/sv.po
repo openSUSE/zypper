@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-06-20 22:04+0000\n"
 "Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
@@ -566,6 +566,14 @@ msgstr "Kategori"
 msgid "Severity"
 msgstr "Allvarlighetsgrad"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Skapad den"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Omstart krävs"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Omstart av pakethanterare krävs"
@@ -662,14 +670,6 @@ msgstr "Tillhandahålls av aktiverat förråd"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Tillhandahålls inte av något aktiverat förråd"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Omstart krävs"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Skapad den"
 
 #: src/subcommand.cc:51
 msgid "none"

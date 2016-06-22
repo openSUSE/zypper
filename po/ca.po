@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-06-17 12:34+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
@@ -568,6 +568,14 @@ msgstr "Categoria"
 msgid "Severity"
 msgstr "Gravetat"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Creació"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Cal tornar a arrecar"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Cal reiniciar el gestor de paquets"
@@ -663,14 +671,6 @@ msgstr "Proveït pel repositori habilitat"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "No proveït per cap repositori habilitat"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Cal tornar a arrecar"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Creació"
 
 #: src/subcommand.cc:51
 msgid "none"

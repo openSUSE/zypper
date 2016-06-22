@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2006-11-03 12:03\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -543,6 +543,15 @@ msgstr "Kategorie"
 msgid "Severity"
 msgstr "Ernstigheid"
 
+#: src/info.cc:316
+#, fuzzy
+msgid "Created On"
+msgstr "Sk&ep"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr ""
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr ""
@@ -645,15 +654,6 @@ msgstr "Fout in die skryf van lêer '%1'"
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "Diens is nie aan die loop nie"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr ""
-
-#: src/info.cc:316
-#, fuzzy
-msgid "Created On"
-msgstr "Sk&ep"
 
 #: src/subcommand.cc:51
 msgid "none"

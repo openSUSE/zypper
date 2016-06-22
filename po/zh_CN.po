@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-06-17 01:24+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -548,6 +548,14 @@ msgstr "分类"
 msgid "Severity"
 msgstr "严重性"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "创建于： "
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "需要重启： "
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "需要重启软件包管理器"
@@ -642,14 +650,6 @@ msgstr "由已启用的软件源提供"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "任何已启用的软件源均未提供"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "需要重启： "
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "创建于： "
 
 #: src/subcommand.cc:51
 msgid "none"

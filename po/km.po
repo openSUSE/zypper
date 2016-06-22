@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2012-05-24 15:15+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -540,6 +540,14 @@ msgstr "ប្រភេទ"
 msgid "Severity"
 msgstr "ភាព​ត្រឹមត្រូវ"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "បាន​បង្កើត​នៅ ៖"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​ឡើង​វិញ ៖ "
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​កម្មវិធី​គ្រប់គ្រង​កញ្ចប់​ឡើង​វិញ"
@@ -641,14 +649,6 @@ msgstr "បាន​បើក​ឃ្លាំង"
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "រក​មិនឃើញ​កញ្ចប់​ប្រភព '%s' នៅ​ក្នុង​ឃ្លាំង​ដែលបានបញ្ជាក់​ទេ ។"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​ឡើង​វិញ ៖ "
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "បាន​បង្កើត​នៅ ៖"
 
 #: src/subcommand.cc:51
 msgid "none"

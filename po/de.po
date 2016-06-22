@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2015-07-15 18:58+0200\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -593,6 +593,14 @@ msgstr "Kategorie"
 msgid "Severity"
 msgstr "Schweregrad"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Erstellt am"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Neustart erforderlich"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Neustart des Paketverwalters erforderlich"
@@ -687,14 +695,6 @@ msgstr "Von einem aktivierten Repository angeboten"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Nicht von irgendeinem aktivierten Repository angeboten"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Neustart erforderlich"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Erstellt am"
 
 #: src/subcommand.cc:51
 msgid "none"

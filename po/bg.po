@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2005-08-18 21:16+0300\n"
 "Last-Translator: Borislav Mitev <morbid_viper@tkzs.org>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -550,6 +550,16 @@ msgstr ""
 msgid "Severity"
 msgstr "Сигурност"
 
+#: src/info.cc:316
+#, fuzzy
+msgid "Created On"
+msgstr "Създаване на %s"
+
+#: src/info.cc:318
+#, fuzzy
+msgid "Reboot Required"
+msgstr "Изисква"
+
 #: src/info.cc:319
 #, fuzzy
 msgid "Package Manager Restart Required"
@@ -655,16 +665,6 @@ msgstr "Грешка при четенето на сектор %u."
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "Хостът %s не бе открит."
-
-#: src/info.cc:318
-#, fuzzy
-msgid "Reboot Required"
-msgstr "Изисква"
-
-#: src/info.cc:316
-#, fuzzy
-msgid "Created On"
-msgstr "Създаване на %s"
 
 #: src/subcommand.cc:51
 msgid "none"

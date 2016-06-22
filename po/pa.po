@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2008-11-23 08:36+0530\n"
 "Last-Translator: KDB <brar.kd@gmail.com>\n"
 "Language-Team: Panjabi <punjabi-l10n@list.sf.net>\n"
@@ -543,6 +543,14 @@ msgstr "ਕੈਟਾਗਰੀ"
 msgid "Severity"
 msgstr ""
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "ਬਣਾਇਆ ਗਿਆ"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਪਵੇਗਾ"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "ਪੈਕੇਜ ਮੈਨੇਜਰ ਲਈ ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਪਵੇਗਾ"
@@ -638,14 +646,6 @@ msgstr ""
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr ""
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਪਵੇਗਾ"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "ਬਣਾਇਆ ਗਿਆ"
 
 #: src/subcommand.cc:51
 msgid "none"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2008-11-17 23:32+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -538,6 +538,14 @@ msgstr "หมวดหมู่"
 msgid "Severity"
 msgstr "ความปลอดภัย"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "สร้างเมื่อ"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "ต้องการเริ่มระบบใหม่"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "ต้องการเริ่มตัวจัดการแพกเกจใหม่อีกครั้ง"
@@ -639,14 +647,6 @@ msgstr "ทำการข้ามคลังแพกเกจ '%s' ซึ่
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "ไม่พบผลิตภัณฑ์บนคลังแพกเกจ"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "ต้องการเริ่มระบบใหม่"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "สร้างเมื่อ"
 
 #: src/subcommand.cc:51
 msgid "none"

@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2014-10-12 20:49+0300\n"
 "Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -573,6 +573,14 @@ msgstr "Luokka"
 msgid "Severity"
 msgstr "Vakavuus"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Luotu"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Vaatii järjestelmän uudelleenkäynnistyksen"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Vaatii pakettienhallinnan uudelleenkäynnistyksen"
@@ -668,14 +676,6 @@ msgstr "Käytössä oleva asennuslähde tarjoaa"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Mikään käytössä oleva asennuslähde ei tarjoa"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Vaatii järjestelmän uudelleenkäynnistyksen"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Luotu"
 
 #: src/subcommand.cc:51
 msgid "none"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:06+0200\n"
+"POT-Creation-Date: 2016-06-22 12:12+0200\n"
 "PO-Revision-Date: 2016-06-20 09:31+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
@@ -579,6 +579,14 @@ msgstr "Категория"
 msgid "Severity"
 msgstr "Важность"
 
+#: src/info.cc:316
+msgid "Created On"
+msgstr "Создан"
+
+#: src/info.cc:318
+msgid "Reboot Required"
+msgstr "Требуется перезагрузка"
+
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
 msgstr "Требуется перезапуск менеджера пакетов"
@@ -673,14 +681,6 @@ msgstr "Предоставлен включённым репозиторием"
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
 msgstr "Отсутствует во включённых репозиториях"
-
-#: src/info.cc:318
-msgid "Reboot Required"
-msgstr "Требуется перезагрузка"
-
-#: src/info.cc:316
-msgid "Created On"
-msgstr "Создан"
 
 #: src/subcommand.cc:51
 msgid "none"
