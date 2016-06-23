@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-06-23 19:33+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -6060,7 +6060,7 @@ msgstr "Não baixando o pacote '%s'."
 #: src/PackageArgs.cc:204
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "'%s' não foi encontrado nos nomes de pacotes. Tentando '%s'."
+msgstr "'%s' não encontrado nos nomes de pacotes. Tentando '%s'."
 
 #: src/PackageArgs.cc:219
 #, c-format, boost-format
@@ -6068,8 +6068,8 @@ msgid ""
 "Different package type specified in '%s' option and '%s' argument. Will use "
 "the latter."
 msgstr ""
-"Tipo de pacote diferente especificado na opção '%s' e argumento '%s'. Será "
-"usado o último."
+"Tipo de pacote diferente especificado na opção '%s' e no argumento '%s'. "
+"Será usado o último."
 
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
