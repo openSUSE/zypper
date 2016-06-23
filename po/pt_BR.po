@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-06-23 18:53+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -5794,7 +5794,7 @@ msgstr "Instalação concluída com erro."
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
-"Você deve executar '%1%' para reparar qualquer problema de dependências."
+"É possível executar '%1%' para consertar qualquer problema de dependência."
 
 #: src/solve-commit.cc:879
 msgid ""
