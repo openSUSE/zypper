@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-23 19:16+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-23 19:31+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -5977,11 +5977,11 @@ msgstr "Nenhuma correção necessária encontrada."
 
 #: src/search.cc:408
 msgid "No patterns found."
-msgstr "Nenhum padrão foi encontrado."
+msgstr "Nenhum padrão encontrado."
 
 #: src/search.cc:505
 msgid "No packages found."
-msgstr "Nenhum pacote foi encontrado."
+msgstr "Nenhum pacote encontrado."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
@@ -5991,7 +5991,7 @@ msgstr "Nome interno"
 
 #: src/search.cc:651
 msgid "No products found."
-msgstr "Nenhum produto foi encontrado."
+msgstr "Nenhum produto encontrado."
 
 #: src/search.cc:675
 #, c-format, boost-format
@@ -6033,7 +6033,7 @@ msgstr "nenhuma ajuda disponível para esta opção"
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/download.cc:114
 msgid "Argument resolves to no package"
-msgstr "O argumento resolve para nenhum pacote"
+msgstr "O argumento não resolve para nenhum pacote"
 
 #: src/download.cc:136
 msgid "No prune to best version."
@@ -6041,7 +6041,7 @@ msgstr "Sem remoção para melhor versão."
 
 #: src/download.cc:142
 msgid "Prune to best version..."
-msgstr "Cortar para a melhor versão..."
+msgstr "Remover para melhor versão..."
 
 #: src/download.cc:148
 msgid "Not downloading anything..."
