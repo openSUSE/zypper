@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-23 17:26+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-23 18:42+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -5594,16 +5594,16 @@ msgstr "Calculando a atualização..."
 
 #: src/solve-commit.cc:392
 msgid "Generating solver test case..."
-msgstr "Gerando o caso de teste para o solucionador..."
+msgstr "Gerando o caso teste para o solucionador..."
 
 #: src/solve-commit.cc:394
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr "O caso de teste para o solucionador foi gerado com sucesso em %s."
+msgstr "O caso teste para o solucionador foi gerado com sucesso em %s."
 
 #: src/solve-commit.cc:397
 msgid "Error creating the solver test case."
-msgstr "Ocorreu um erro ao criar o caso de teste para o solucionador."
+msgstr "Erro ao criar o caso teste para o solucionador."
 
 #: src/solve-commit.cc:431
 #, c-format, boost-format
@@ -5617,7 +5617,7 @@ msgstr ""
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
 msgid "Checking for running processes using deleted libraries..."
-msgstr "Verificando por processos em execução usando bibliotecas removidas..."
+msgstr "Verificando processos em execução que usam bibliotecas apagadas..."
 
 #: src/solve-commit.cc:447 src/ps.cc:59
 msgid "Check failed:"
@@ -5653,7 +5653,7 @@ msgstr "s/n"
 
 #: src/solve-commit.cc:486
 msgid "View the notifications now?"
-msgstr "Visualizar as notificações agora?"
+msgstr "Ver as notificações agora?"
 
 #: src/solve-commit.cc:532
 msgid "Computing distribution upgrade..."
@@ -5661,20 +5661,21 @@ msgstr "Calculando a atualização da distribuição..."
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
-msgstr "Resolvendo as dependências de pacote..."
+msgstr "Resolvendo dependências de pacote..."
 
 #: src/solve-commit.cc:614
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
-"Algumas das dependências dos pacotes instalados estão quebradas. Para "
-"resolver estas dependências, as seguintes ações precisam ser realizadas:"
+"Algumas das dependências dos pacotes instalados estão rompidas. Para "
+"resolver essas dependências, as seguintes ações precisam ser executadas:"
 
 #: src/solve-commit.cc:621
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
-"São necessários privilégios de root para resolver problemas de dependências."
+"São necessários privilégios de root para resolver dependências rompidas em "
+"pacotes."
 
 #. translators: These are the "Continue?" prompt options corresponding to
 #. "Yes / No / show Problems / Versions / Arch / Repository /
