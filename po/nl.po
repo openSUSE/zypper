@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:12+0200\n"
+"POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-06-21 11:47+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
@@ -479,7 +479,7 @@ msgstr "Fout"
 
 #. translators: name (general header)
 #: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
-#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
@@ -627,7 +627,7 @@ msgid "S"
 msgstr "S"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Type"
@@ -1938,7 +1938,7 @@ msgstr "Fout bij het het uitschakelen van installatiebron '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Probleem bij ophalen van bestanden van '%s'."
 
-#: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
+#: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 msgid "Please see the above error message for a hint."
 msgstr "Zie bovenstaande foutmelding voor een hint."
@@ -2094,38 +2094,38 @@ msgstr ""
 "Het draaien van 'zypper refresh' als root zou het probleem op kunnen lossen."
 
 # ../../db/printers.ycp.noloc:1270
-#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5246
+#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
 msgstr "Alias"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2404
+#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2403
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2405
+#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2404
 msgid "GPG Check"
 msgstr "GPG-controle"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:980 src/repos.cc:2407
+#: src/repos.cc:980 src/repos.cc:2406
 msgid "Refresh"
 msgstr "Vernieuwen"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2411
+#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2410
 msgid "Priority"
 msgstr "Prioriteit"
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2414
+#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2413
 msgid "URI"
 msgstr "URI"
 
@@ -2298,7 +2298,7 @@ msgstr ""
 msgid "Invalid repository alias: '%s'"
 msgstr "Ongeldige alias van installatiebron: '%s'"
 
-#: src/repos.cc:1576 src/repos.cc:1859
+#: src/repos.cc:1576 src/repos.cc:1858
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
@@ -2382,36 +2382,31 @@ msgstr "Controleer of de opgegeven URI juist en toegankelijk is."
 msgid "Problem parsing the file at the specified URI"
 msgstr "Probleem bij het analyseren van het bestand op de opgegeven URI"
 
-#. TranslatorExplanation don't translate the URI if the URI itself is not translated.
-#. Also don't translate the '.repo' string.
-#: src/repos.cc:1755
-msgid ""
-"Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for "
-"details."
-msgstr ""
-"Is het een .repo-bestand? zie http://nl.opensuse.org/Standards/RepoInfo voor "
-"details."
+#. TranslatorExplanation Don't translate the '.repo' string.
+#: src/repos.cc:1754
+msgid "Is it a .repo file?"
+msgstr "Is het een .repo-bestand?"
 
-#: src/repos.cc:1762
+#: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Probleem bij het lezen van het bestand op de opgegeven URI"
 
-#: src/repos.cc:1774
+#: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr ""
 "Er is een installatiebron zonder een gedefinieerde alias gevonden, overslaan."
 
-#: src/repos.cc:1780
+#: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Bij installatiebron '%s' is geen URI gedefinieerd, overslaan."
 
-#: src/repos.cc:1822
+#: src/repos.cc:1821
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Installatiebron '%s' is verwijderd."
 
-#: src/repos.cc:1844
+#: src/repos.cc:1843
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
@@ -2421,215 +2416,215 @@ msgstr ""
 "behoort bij service '%s' die verantwoordelijk is voor het instellen van zijn "
 "alias."
 
-#: src/repos.cc:1855
+#: src/repos.cc:1854
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Installatiebron '%s' is hernoemd naar '%s'."
 
-#: src/repos.cc:1864 src/repos.cc:2098
+#: src/repos.cc:1863 src/repos.cc:2097
 msgid "Error while modifying the repository:"
 msgstr "Fout bij het wijzigen van de installatiebron:"
 
-#: src/repos.cc:1865
+#: src/repos.cc:1864
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Installatiebron '%s' wordt ongewijzigd gelaten."
 
-#: src/repos.cc:2002
+#: src/repos.cc:2001
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Prioriteit van installatiebron '%s' is ongewijzigd (%d)"
 
-#: src/repos.cc:2040
+#: src/repos.cc:2039
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Installatiebron '%s' is met succes geactiveerd."
 
-#: src/repos.cc:2042
+#: src/repos.cc:2041
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Installatiebron '%s' is met succes gedeactiveerd."
 
-#: src/repos.cc:2049
+#: src/repos.cc:2048
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Autoverversing is geactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2051
+#: src/repos.cc:2050
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Autoverversing is gedeactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2058
+#: src/repos.cc:2057
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "RPM-bestanden cachen is geactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2060
+#: src/repos.cc:2059
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "RPM-bestanden cachen is gedeactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2067
+#: src/repos.cc:2066
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "GPG-controle is geactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2069
+#: src/repos.cc:2068
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "GPG-controle is gedeactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2075
+#: src/repos.cc:2074
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "De prioriteit van installatiebron '%s' is op %d gezet."
 
-#: src/repos.cc:2081
+#: src/repos.cc:2080
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "De naam van installatiebron '%s' is op '%s' gezet."
 
-#: src/repos.cc:2092
+#: src/repos.cc:2091
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Niets te wijzigen voor installatiebron '%s'."
 
-#: src/repos.cc:2099
+#: src/repos.cc:2098
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Installatiebron %s wordt ongewijzigd gelaten."
 
-#: src/repos.cc:2131
+#: src/repos.cc:2130
 msgid "Error reading services:"
 msgstr "Fout bij lezen van services:"
 
-#: src/repos.cc:2220
+#: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr ""
 "Service '%s' is niet gevonden aan de hand van zijn alias, nummer of URI."
 
-#: src/repos.cc:2223
+#: src/repos.cc:2222
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "Gebruik '%s' voor een lijst met gedefinieerde services."
 
-#: src/repos.cc:2465
+#: src/repos.cc:2464
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 "Geen services gedefinieerd. Gebruik het commando '%s' om één of meer "
 "services toe te voegen."
 
-#: src/repos.cc:2548
+#: src/repos.cc:2547
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
 "Service met de alias '%s' bestaat al. Gaarne een andere alias gebruiken."
 
-#: src/repos.cc:2555
+#: src/repos.cc:2554
 #, c-format, boost-format
 msgid "Error occured while adding service '%s'."
 msgstr "Fout opgetreden tijdens het toevoegen van de service '%s'."
 
-#: src/repos.cc:2561
+#: src/repos.cc:2560
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "Service '%s' is met succes toegevoegd."
 
-#: src/repos.cc:2599
+#: src/repos.cc:2598
 #, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "Verwijderen van service '%s':"
 
-#: src/repos.cc:2602
+#: src/repos.cc:2601
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "Service '%s' is verwijderd."
 
-#: src/repos.cc:2616
+#: src/repos.cc:2615
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "Verversen van service '%s'."
 
-#: src/repos.cc:2631 src/repos.cc:2641
+#: src/repos.cc:2630 src/repos.cc:2640
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr ""
 "Probleem bij het ophalen van het indexbestand van de installatiebron voor de "
 "service '%s':"
 
-#: src/repos.cc:2633 src/repos.cc:2741 src/repos.cc:2799
+#: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Overslaan van service '%s' vanwege bovengenoemde fout."
 
-#: src/repos.cc:2643
+#: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
 msgstr "Controleer of de URI geldig en toegankelijk is."
 
-#: src/repos.cc:2700
+#: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "Overslaan van uitgeschakelde service '%s'"
 
-#: src/repos.cc:2752
+#: src/repos.cc:2751
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
 "Gebruik het commando '%s' of '%s'  om services toe te voegen of te activeren."
 
-#: src/repos.cc:2755
+#: src/repos.cc:2754
 msgid "Specified services are not enabled or defined."
 msgstr "Opgegeven services zijn niet geactiveerd of niet gedefinieerd."
 
-#: src/repos.cc:2757
+#: src/repos.cc:2756
 msgid "There are no enabled services defined."
 msgstr "Er zijn geen geactiveerde services gedefinieerd."
 
-#: src/repos.cc:2761
+#: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
 msgstr "Kon vanwege fouten de services niet verversen."
 
-#: src/repos.cc:2767
+#: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Enkele van de services zijn vanwege fouten niet ververst."
 
-#: src/repos.cc:2772
+#: src/repos.cc:2771
 msgid "Specified services have been refreshed."
 msgstr "De opgegeven services zijn ververst."
 
-#: src/repos.cc:2774
+#: src/repos.cc:2773
 msgid "All services have been refreshed."
 msgstr "Alle services zijn ververst."
 
-#: src/repos.cc:2921
+#: src/repos.cc:2920
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "Service '%s' is met succes geactiveerd."
 
-#: src/repos.cc:2923
+#: src/repos.cc:2922
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "Service '%s' is met succes gedeactiveerd."
 
-#: src/repos.cc:2929
+#: src/repos.cc:2928
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "Autoverversing is geactiveerd voor service '%s'."
 
-#: src/repos.cc:2931
+#: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "Autoverversing is gedeactiveerd voor service '%s'."
 
-#: src/repos.cc:2936
+#: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "De naam van service '%s' is op '%s' gezet."
 
-#: src/repos.cc:2941
+#: src/repos.cc:2940
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
@@ -2641,7 +2636,7 @@ msgstr[1] ""
 "Installatiebronnen '%s' zijn toegevoegd aan de geactiveerde "
 "installatiebronnen van service '%s'"
 
-#: src/repos.cc:2948
+#: src/repos.cc:2947
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
@@ -2653,7 +2648,7 @@ msgstr[1] ""
 "Installatiebronnen '%s' zijn toegevoegd aan de gedeactiveerde "
 "installatiebronnen van service '%s'"
 
-#: src/repos.cc:2955
+#: src/repos.cc:2954
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -2666,7 +2661,7 @@ msgstr[1] ""
 "Installatiebronnen '%s' zijn toegevoegd aan de geactiveerde "
 "installatiebronnen van service '%s'"
 
-#: src/repos.cc:2962
+#: src/repos.cc:2961
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -2680,51 +2675,51 @@ msgstr[1] ""
 "Installatiebron '%s' is verwijderd uit de gedeactiveerde installatiebronnen "
 "van service '%s'"
 
-#: src/repos.cc:2971
+#: src/repos.cc:2970
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "Niets te wijzigen voor service '%s'."
 
-#: src/repos.cc:2977
+#: src/repos.cc:2976
 msgid "Error while modifying the service:"
 msgstr "Fout bij het wijzigen van de servicve:"
 
-#: src/repos.cc:2978
+#: src/repos.cc:2977
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "Service %s wordt ongewijzigd gelaten."
 
-#: src/repos.cc:3082
+#: src/repos.cc:3081
 msgid "Loading repository data..."
 msgstr "Gegevens van installatiebron laden..."
 
-#: src/repos.cc:3102
+#: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Gegevens van installatiebron '%s' wordt opgehaald..."
 
-#: src/repos.cc:3108
+#: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Bron '%s' bevindt zich niet in de cache. Deze wordt nu toegevoegd..."
 
-#: src/repos.cc:3114 src/repos.cc:3148
+#: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Probleem bij laden van gegevens van '%s'"
 
-#: src/repos.cc:3118
+#: src/repos.cc:3117
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Installatiebron '%s' kon niet ververst worden. De oude cache wordt gebruikt."
 
-#: src/repos.cc:3122 src/repos.cc:3151
+#: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Oplosbare pakketten van '%s' zijn niet geladen vanwege een fout."
 
-#: src/repos.cc:3139
+#: src/repos.cc:3138
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -2734,16 +2729,16 @@ msgstr ""
 "of server moet gebruiken."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3150
+#: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Probeer '%s', of zelfs '%s' alvorens dit te doen."
 
-#: src/repos.cc:3161
+#: src/repos.cc:3160
 msgid "Reading installed packages..."
 msgstr "Lezen van geïnstalleerde pakketten..."
 
-#: src/repos.cc:3170
+#: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Er is een fout opgetreden bij het lezen van geïnstalleerde pakketten:"
 

@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:12+0200\n"
+"POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-06-16 18:18+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
@@ -486,7 +486,7 @@ msgstr "Erreur"
 
 #. translators: name (general header)
 #: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
-#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
@@ -636,7 +636,7 @@ msgid "S"
 msgstr "S"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Type"
@@ -1942,7 +1942,7 @@ msgstr "Erreur lors de la désactivation du dépôt '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problème de récupération de fichiers depuis '%s'."
 
-#: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
+#: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 msgid "Please see the above error message for a hint."
 msgstr "Veuillez consulter le message d'erreur ci-dessus pour une indication."
@@ -2098,38 +2098,38 @@ msgstr "Échec de l'initialisation de la cible :"
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "Lancer 'zypper refresh' en tant que root peut résoudre le problème."
 
-#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5246
+#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
 msgstr "Alias"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2404
+#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2403
 msgid "Enabled"
 msgstr "Activé"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2405
+#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2404
 msgid "GPG Check"
 msgstr "Vérification GPG"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:980 src/repos.cc:2407
+#: src/repos.cc:980 src/repos.cc:2406
 msgid "Refresh"
 msgstr "Rafraichir"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2411
+#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2410
 msgid "Priority"
 msgstr "Priorité"
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2414
+#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2413
 msgid "URI"
 msgstr "URI"
 
@@ -2304,7 +2304,7 @@ msgstr ""
 msgid "Invalid repository alias: '%s'"
 msgstr "Alias de dépôt invalide : '%s'"
 
-#: src/repos.cc:1576 src/repos.cc:1859
+#: src/repos.cc:1576 src/repos.cc:1858
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Un dépôt nommé '%s' existe déjà. Veuillez utiliser un autre alias."
@@ -2392,36 +2392,31 @@ msgstr "Veuillez vérifier que l'URI est valide et accessible."
 msgid "Problem parsing the file at the specified URI"
 msgstr "Problème d'analyse du fichier à l'URI spécifié"
 
-#. TranslatorExplanation don't translate the URI if the URI itself is not translated.
-#. Also don't translate the '.repo' string.
-#: src/repos.cc:1755
-msgid ""
-"Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for "
-"details."
-msgstr ""
-"Est-ce un fichier .repo ? Consultez http://en.opensuse.org/Standards/"
-"RepoInfo pour plus de détails."
+#. TranslatorExplanation Don't translate the '.repo' string.
+#: src/repos.cc:1754
+msgid "Is it a .repo file?"
+msgstr "Est-ce un fichier .repo ?"
 
-#: src/repos.cc:1762
+#: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Problème rencontré à la lecture du fichier à l'URI spécifié"
 
-#: src/repos.cc:1774
+#: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Un dépôt sans alias défini a été trouvé dans le fichier, ignoré."
 
 # TLABEL linuxrc_2002_03_29_0036__117
-#: src/repos.cc:1780
+#: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Le dépôt '%s' n'a pas d'URI défini, sauté."
 
-#: src/repos.cc:1822
+#: src/repos.cc:1821
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Le dépôt '%s' a été supprimé."
 
-#: src/repos.cc:1844
+#: src/repos.cc:1843
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
@@ -2430,213 +2425,213 @@ msgstr ""
 "Ne peut pas changer l'alias du dépôt '%s'. Le dépôt appartient au service "
 "'%s' qui est responsable de la mise en place de son alias."
 
-#: src/repos.cc:1855
+#: src/repos.cc:1854
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Le dépôt '%s' a été renommé en '%s'."
 
-#: src/repos.cc:1864 src/repos.cc:2098
+#: src/repos.cc:1863 src/repos.cc:2097
 msgid "Error while modifying the repository:"
 msgstr "Erreur lors de la modification du dépôt :"
 
-#: src/repos.cc:1865
+#: src/repos.cc:1864
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Dépôt '%s' inchangé."
 
-#: src/repos.cc:2002
+#: src/repos.cc:2001
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "La priorité du dépôt '%s' a été laissée inchangée (%d)"
 
-#: src/repos.cc:2040
+#: src/repos.cc:2039
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Le dépôt '%s' a été activé avec succès."
 
-#: src/repos.cc:2042
+#: src/repos.cc:2041
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Le dépôt '%s' a été désactivé avec succès."
 
-#: src/repos.cc:2049
+#: src/repos.cc:2048
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Le rafraichissement automatique a été activé pour le dépôt '%s'."
 
-#: src/repos.cc:2051
+#: src/repos.cc:2050
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Le rafraichissement automatique a été désactivé pour le dépôt '%s'."
 
-#: src/repos.cc:2058
+#: src/repos.cc:2057
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Le cache des fichiers RPM a été activé pour le dépôt '%s'."
 
-#: src/repos.cc:2060
+#: src/repos.cc:2059
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Le cache des fichiers RPM a été désactivé pour le dépôt '%s'."
 
-#: src/repos.cc:2067
+#: src/repos.cc:2066
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "La vérification GPG a été activée pour le dépôt '%s'."
 
-#: src/repos.cc:2069
+#: src/repos.cc:2068
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "La vérification GPG a été désactivée pour le dépôt '%s'."
 
-#: src/repos.cc:2075
+#: src/repos.cc:2074
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "La priorité du dépôt '%s' a été réglée à %d."
 
-#: src/repos.cc:2081
+#: src/repos.cc:2080
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Le nom du dépôt '%s' a été défini à '%s'."
 
-#: src/repos.cc:2092
+#: src/repos.cc:2091
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Rien à changer pour le dépôt '%s'."
 
-#: src/repos.cc:2099
+#: src/repos.cc:2098
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Le dépôt %s est laissé inchangé."
 
-#: src/repos.cc:2131
+#: src/repos.cc:2130
 msgid "Error reading services:"
 msgstr "Erreur lors de la lecture des services :"
 
 # TLABEL linuxrc_2002_03_29_0036__117
-#: src/repos.cc:2220
+#: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "Le service '%s' n'a pas été trouvé par son alias, numéro, ou URI."
 
-#: src/repos.cc:2223
+#: src/repos.cc:2222
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "Utilisez '%s' pour obtenir la liste des services définis."
 
-#: src/repos.cc:2465
+#: src/repos.cc:2464
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 "Pas de services définis. Utilisez la commande '%s' pour ajouter un ou "
 "plusieurs services."
 
-#: src/repos.cc:2548
+#: src/repos.cc:2547
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr "Un service nommé '%s' existe déjà. Veuillez utiliser un autre alias."
 
-#: src/repos.cc:2555
+#: src/repos.cc:2554
 #, c-format, boost-format
 msgid "Error occured while adding service '%s'."
 msgstr "Erreur lors de l'ajout du service '%s'."
 
-#: src/repos.cc:2561
+#: src/repos.cc:2560
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "Le service '%s' a été ajouté avec succès."
 
-#: src/repos.cc:2599
+#: src/repos.cc:2598
 #, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "Suppression du service '%s' :"
 
-#: src/repos.cc:2602
+#: src/repos.cc:2601
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "Le service '%s' a été supprimé."
 
-#: src/repos.cc:2616
+#: src/repos.cc:2615
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "Rafraichissement du service '%s'."
 
-#: src/repos.cc:2631 src/repos.cc:2641
+#: src/repos.cc:2630 src/repos.cc:2640
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr ""
 "Problème de récupération du fichier d'index du dépôt pour le service '%s' :"
 
-#: src/repos.cc:2633 src/repos.cc:2741 src/repos.cc:2799
+#: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Saut du service '%s' à cause de l'erreur ci-dessus."
 
-#: src/repos.cc:2643
+#: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
 msgstr "Vérifiez que l'URI soit valide et accessible."
 
-#: src/repos.cc:2700
+#: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "Saut du service désactivé '%s'"
 
-#: src/repos.cc:2752
+#: src/repos.cc:2751
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
 "Utilisez les commandes '%s' ou '%s' pour ajouter ou activer des services."
 
-#: src/repos.cc:2755
+#: src/repos.cc:2754
 msgid "Specified services are not enabled or defined."
 msgstr "Les services spécifiés ne sont pas activés ou définis."
 
-#: src/repos.cc:2757
+#: src/repos.cc:2756
 msgid "There are no enabled services defined."
 msgstr "Il n'y a pas de services activés définis."
 
-#: src/repos.cc:2761
+#: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
 msgstr "Impossible de rafraichir les services à cause d'erreurs."
 
-#: src/repos.cc:2767
+#: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Plusieurs services n'ont pas été rafraichis à cause d'une erreur."
 
-#: src/repos.cc:2772
+#: src/repos.cc:2771
 msgid "Specified services have been refreshed."
 msgstr "Les services spécifiés ont été rafraichis."
 
-#: src/repos.cc:2774
+#: src/repos.cc:2773
 msgid "All services have been refreshed."
 msgstr "Tous les services ont été rafraichis."
 
-#: src/repos.cc:2921
+#: src/repos.cc:2920
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "Le service '%s' a été activé avec succès."
 
-#: src/repos.cc:2923
+#: src/repos.cc:2922
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "Le service '%s' a été désactivé avec succès."
 
-#: src/repos.cc:2929
+#: src/repos.cc:2928
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "Le rafraichissement automatique a été activé pour le service '%s'."
 
-#: src/repos.cc:2931
+#: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "Le rafraichissement automatique a été désactivé pour le service '%s'."
 
-#: src/repos.cc:2936
+#: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "Le nom du service '%s' a été défini à '%s'."
 
-#: src/repos.cc:2941
+#: src/repos.cc:2940
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
@@ -2644,7 +2639,7 @@ msgid_plural ""
 msgstr[0] "Le dépôt '%s' a été ajouté aux dépôts activés du service '%s'"
 msgstr[1] "Les dépôts '%s' ont été ajoutés aux dépôts activés du service '%s'"
 
-#: src/repos.cc:2948
+#: src/repos.cc:2947
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
@@ -2653,7 +2648,7 @@ msgstr[0] "Le dépôt '%s' a été ajouté aux dépôts désactivés du service 
 msgstr[1] ""
 "Les dépôts '%s' ont été ajoutés aux dépôts désactivés du service '%s'"
 
-#: src/repos.cc:2955
+#: src/repos.cc:2954
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -2663,7 +2658,7 @@ msgstr[0] "Le dépôt '%s' a été supprimé des dépôts activés du service '%
 msgstr[1] ""
 "Les dépôts '%s' ont été supprimés des dépôts activés du service '%s'"
 
-#: src/repos.cc:2962
+#: src/repos.cc:2961
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -2674,53 +2669,53 @@ msgstr[0] "Le dépôt '%s' a été supprimé des dépôts désactivés du servic
 msgstr[1] ""
 "Les dépôts '%s' ont été supprimés des dépôts désactivés du service '%s'"
 
-#: src/repos.cc:2971
+#: src/repos.cc:2970
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "Rien à changer pour le service '%s'."
 
-#: src/repos.cc:2977
+#: src/repos.cc:2976
 msgid "Error while modifying the service:"
 msgstr "Erreur lors de la modification du service :"
 
-#: src/repos.cc:2978
+#: src/repos.cc:2977
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "Le service %s est laissé inchangé."
 
-#: src/repos.cc:3082
+#: src/repos.cc:3081
 msgid "Loading repository data..."
 msgstr "Chargement des données du dépôt..."
 
-#: src/repos.cc:3102
+#: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Récupération de données du dépôt '%s'..."
 
-#: src/repos.cc:3108
+#: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Le dépôt '%s' n'a pas été mis en cache. Mise en cache..."
 
 # TLABEL restore_2002_08_07_0216__60
-#: src/repos.cc:3114 src/repos.cc:3148
+#: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Problème lors du chargement des données depuis '%s'"
 
 # TLABEL linuxrc_2002_03_29_0036__117
-#: src/repos.cc:3118
+#: src/repos.cc:3117
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Le dépôt '%s' n'a pas pu être rafraichi. Utilisation de l'ancien cache."
 
-#: src/repos.cc:3122 src/repos.cc:3151
+#: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Les éléments de '%s' n'ont pas pu être chargés en raison d'une erreur."
 
-#: src/repos.cc:3139
+#: src/repos.cc:3138
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -2730,16 +2725,16 @@ msgstr ""
 "un autre serveur."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3150
+#: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Essayez '%s', ou même '%s' avant de faire ceci."
 
-#: src/repos.cc:3161
+#: src/repos.cc:3160
 msgid "Reading installed packages..."
 msgstr "Lecture des paquets installés..."
 
-#: src/repos.cc:3170
+#: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Un problème est survenu lors de la lecture des paquets installés :"
 

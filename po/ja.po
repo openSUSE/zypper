@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:12+0200\n"
+"POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-06-18 07:41+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -467,7 +467,7 @@ msgstr "エラー"
 
 #. translators: name (general header)
 #: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
-#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
@@ -612,7 +612,7 @@ msgid "S"
 msgstr "S"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "種類"
@@ -1797,7 +1797,7 @@ msgstr "リポジトリ '%s' を無効にする際にエラーが発生しまし
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' からのファイル取得中に問題が発生しました。"
 
-#: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
+#: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 msgid "Please see the above error message for a hint."
 msgstr "解決へのヒントとして上記のエラーメッセージをお読みください。"
@@ -1952,38 +1952,38 @@ msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "root ユーザで 'zypper refresh' を実行すると問題を解決できるかもしれません。"
 
-#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5246
+#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
 msgstr "別名"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2404
+#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2403
 msgid "Enabled"
 msgstr "有効"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2405
+#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2404
 msgid "GPG Check"
 msgstr "GPG チェック"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:980 src/repos.cc:2407
+#: src/repos.cc:980 src/repos.cc:2406
 msgid "Refresh"
 msgstr "更新"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2411
+#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2410
 msgid "Priority"
 msgstr "優先順位"
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2414
+#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2413
 msgid "URI"
 msgstr "URI"
 
@@ -2163,7 +2163,7 @@ msgstr ""
 msgid "Invalid repository alias: '%s'"
 msgstr "リポジトリの別名が正しくありません: '%s'"
 
-#: src/repos.cc:1576 src/repos.cc:1859
+#: src/repos.cc:1576 src/repos.cc:1858
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
@@ -2245,38 +2245,35 @@ msgstr "指定した URI が有効でアクセス可能であることを確認�
 msgid "Problem parsing the file at the specified URI"
 msgstr "指定した URI のファイルを処理する際に問題"
 
-#. TranslatorExplanation don't translate the URI if the URI itself is not translated.
-#. Also don't translate the '.repo' string.
-#: src/repos.cc:1755
-msgid ""
-"Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for "
-"details."
+#. TranslatorExplanation Don't translate the '.repo' string.
+#: src/repos.cc:1754
+msgid "Is it a .repo file?"
 msgstr ""
 "指定のものは本当に .repo ファイルですか？詳しくは https://ja.opensuse.org/"
 "openSUSE:標準_RepoInfo をご覧ください。"
 
-#: src/repos.cc:1762
+#: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "指定した URI にあるファイルを読む際に問題が発生しました"
 
-#: src/repos.cc:1774
+#: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr ""
 "ファイル内に別名定義のないリポジトリが見つかりました。このリポジトリを飛ばし"
 "ます。"
 
-#: src/repos.cc:1780
+#: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr ""
 "リポジトリ '%s' には URI が設定されていません。このリポジトリを飛ばします。"
 
-#: src/repos.cc:1822
+#: src/repos.cc:1821
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "リポジトリ %s を削除しました。"
 
-#: src/repos.cc:1844
+#: src/repos.cc:1843
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
@@ -2285,227 +2282,227 @@ msgstr ""
 "リポジトリ '%s' の別名を変更できません。このリポジトリは、別名を設定する責任"
 "のあるサービス '%s' に属しています。"
 
-#: src/repos.cc:1855
+#: src/repos.cc:1854
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "リポジトリ '%s' は '%s' に名前を変更しました。"
 
-#: src/repos.cc:1864 src/repos.cc:2098
+#: src/repos.cc:1863 src/repos.cc:2097
 msgid "Error while modifying the repository:"
 msgstr "リポジトリを修正する際にエラー:"
 
-#: src/repos.cc:1865
+#: src/repos.cc:1864
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "リポジトリ '%s' を修正せずそのままにします。"
 
-#: src/repos.cc:2002
+#: src/repos.cc:2001
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "リポジトリ '%s' の優先順位を変更しませんでした (%d)"
 
-#: src/repos.cc:2040
+#: src/repos.cc:2039
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "リポジトリ '%s' を有効に設定しました。"
 
-#: src/repos.cc:2042
+#: src/repos.cc:2041
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "リポジトリ '%s' を無効に設定しました。"
 
-#: src/repos.cc:2049
+#: src/repos.cc:2048
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "リポジトリ '%s' の自動更新を有効に設定しました。"
 
-#: src/repos.cc:2051
+#: src/repos.cc:2050
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "リポジトリ '%s' の自動更新を無効に設定しました。"
 
-#: src/repos.cc:2058
+#: src/repos.cc:2057
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "リポジトリ '%s' の RPM ファイルキャッシュ設定を有効にしました。"
 
-#: src/repos.cc:2060
+#: src/repos.cc:2059
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "リポジトリ '%s' の RPM ファイルキャッシュ設定を無効にしました。"
 
-#: src/repos.cc:2067
+#: src/repos.cc:2066
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "リポジトリ '%s' に対して GPG チェックを有効にしました。"
 
-#: src/repos.cc:2069
+#: src/repos.cc:2068
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "リポジトリ '%s' に対して GPG チェックを無効にしました。"
 
-#: src/repos.cc:2075
+#: src/repos.cc:2074
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "リポジトリ '%s' の優先順位を %d に設定しました。"
 
-#: src/repos.cc:2081
+#: src/repos.cc:2080
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "リポジトリ '%s' の名前を '%s' に設定しました。"
 
-#: src/repos.cc:2092
+#: src/repos.cc:2091
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "リポジトリ '%s' に対して変更することは何もありません。"
 
-#: src/repos.cc:2099
+#: src/repos.cc:2098
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "リポジトリ %s を修正せずそのままにします。"
 
-#: src/repos.cc:2131
+#: src/repos.cc:2130
 msgid "Error reading services:"
 msgstr "サービスの読み込み時にエラー:"
 
-#: src/repos.cc:2220
+#: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "サービス '%s' は別名／番号／URI のいずれでも見つかりません。"
 
-#: src/repos.cc:2223
+#: src/repos.cc:2222
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "設定したサービスの一覧を取得するには '%s' コマンドを使用してください。"
 
-#: src/repos.cc:2465
+#: src/repos.cc:2464
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 "サービスが見つかりません。 '%s' コマンドでサービスを追加することができます。"
 
-#: src/repos.cc:2548
+#: src/repos.cc:2547
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
 "'%s' という名前のサービスは既に存在します。他の別名を設定してください。"
 
-#: src/repos.cc:2555
+#: src/repos.cc:2554
 #, c-format, boost-format
 msgid "Error occured while adding service '%s'."
 msgstr "サービス '%s' を追加する際にエラーが発生しました。"
 
-#: src/repos.cc:2561
+#: src/repos.cc:2560
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "サービス '%s' は正常に追加されました。"
 
-#: src/repos.cc:2599
+#: src/repos.cc:2598
 #, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "サービス '%s' を削除しています:"
 
-#: src/repos.cc:2602
+#: src/repos.cc:2601
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "サービス '%s' を削除しました。"
 
-#: src/repos.cc:2616
+#: src/repos.cc:2615
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "サービス '%s' を更新しています。"
 
-#: src/repos.cc:2631 src/repos.cc:2641
+#: src/repos.cc:2630 src/repos.cc:2640
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr ""
 "サービス '%s' からリポジトリのインデックスファイルを取得する際にエラー:"
 
-#: src/repos.cc:2633 src/repos.cc:2741 src/repos.cc:2799
+#: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "上記のエラーにより、サービス '%s' を飛ばしています。"
 
-#: src/repos.cc:2643
+#: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
 msgstr "URI が有効でアクセス可能であることを確認してください。"
 
-#: src/repos.cc:2700
+#: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "無効化されたサービス '%s' を飛ばしています。"
 
-#: src/repos.cc:2752
+#: src/repos.cc:2751
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
 "サービスを追加したり有効化したりするには、それぞれ '%s' コマンドや '%s' コマ"
 "ンドをご利用ください。"
 
-#: src/repos.cc:2755
+#: src/repos.cc:2754
 msgid "Specified services are not enabled or defined."
 msgstr "指定したサービスは有効化されていないか設定されていません。"
 
-#: src/repos.cc:2757
+#: src/repos.cc:2756
 msgid "There are no enabled services defined."
 msgstr "有効化されているサービスが設定されていません。"
 
-#: src/repos.cc:2761
+#: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
 msgstr "エラーによりサービスの更新ができませんでした。"
 
-#: src/repos.cc:2767
+#: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "エラーにより、いくつかのサービスを更新することができませんでした。"
 
-#: src/repos.cc:2772
+#: src/repos.cc:2771
 msgid "Specified services have been refreshed."
 msgstr "指定したサービスを更新しました。"
 
-#: src/repos.cc:2774
+#: src/repos.cc:2773
 msgid "All services have been refreshed."
 msgstr "全てのサービスを更新しました。"
 
-#: src/repos.cc:2921
+#: src/repos.cc:2920
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "サービス '%s' を有効に設定しました。"
 
-#: src/repos.cc:2923
+#: src/repos.cc:2922
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "サービス '%s' を無効に設定しました。"
 
-#: src/repos.cc:2929
+#: src/repos.cc:2928
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "サービス '%s' の自動更新を有効に設定しました。"
 
-#: src/repos.cc:2931
+#: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "サービス '%s' の自動更新を無効に設定しました。"
 
-#: src/repos.cc:2936
+#: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "サービス '%s' の名前を '%s' に設定しました。"
 
-#: src/repos.cc:2941
+#: src/repos.cc:2940
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
 msgstr[0] "リポジトリ '%s' を有効化してサービス '%s' に追加しました。"
 
-#: src/repos.cc:2948
+#: src/repos.cc:2947
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] "リポジトリ '%s' を無効化してサービス '%s' に追加しました。"
 
-#: src/repos.cc:2955
+#: src/repos.cc:2954
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -2513,7 +2510,7 @@ msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] "リポジトリ '%s' を有効化されているサービス '%s' から削除しました。"
 
-#: src/repos.cc:2962
+#: src/repos.cc:2961
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -2522,50 +2519,50 @@ msgid_plural ""
 "'%s'"
 msgstr[0] "リポジトリ '%s' を無効化されているサービス '%s' から削除しました。"
 
-#: src/repos.cc:2971
+#: src/repos.cc:2970
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "サービス '%s' に対して変更することは何もありません。"
 
-#: src/repos.cc:2977
+#: src/repos.cc:2976
 msgid "Error while modifying the service:"
 msgstr "サービスを修正する際にエラー:"
 
-#: src/repos.cc:2978
+#: src/repos.cc:2977
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "サービス %s を修正せずそのままにします。"
 
-#: src/repos.cc:3082
+#: src/repos.cc:3081
 msgid "Loading repository data..."
 msgstr "リポジトリのデータを読み込んでいます..."
 
-#: src/repos.cc:3102
+#: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "リポジトリ '%s' のデータを取り出しています..."
 
-#: src/repos.cc:3108
+#: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "リポジトリ '%s' はキャッシュされていません。キャッシュしています..."
 
-#: src/repos.cc:3114 src/repos.cc:3148
+#: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "'%s' からのデータ読み込みの際に問題"
 
-#: src/repos.cc:3118
+#: src/repos.cc:3117
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "リポジトリ '%s' を更新できませんでした。古いキャッシュを使用します。"
 
-#: src/repos.cc:3122 src/repos.cc:3151
+#: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "エラーにより '%s' からの解決方法が読み取れませんでした。"
 
-#: src/repos.cc:3139
+#: src/repos.cc:3138
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -2575,16 +2572,16 @@ msgstr ""
 "お使いになることをお勧めします。"
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3150
+#: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "それを行なう前に '%s' または '%s' を試してみてください。"
 
-#: src/repos.cc:3161
+#: src/repos.cc:3160
 msgid "Reading installed packages..."
 msgstr "インストール済みのパッケージを読み込んでいます..."
 
-#: src/repos.cc:3170
+#: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
 msgstr "インストール済みのパッケージを読み込む際にエラー:"
 

@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:12+0200\n"
+"POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2015-07-06 01:22+0300\n"
 "Last-Translator: Danae <danae.asderi@gmail.com>\n"
 "Language-Team: opensuse-translation-el@opensuse.org\n"
@@ -482,7 +482,7 @@ msgstr "Σφάλμα"
 
 #. translators: name (general header)
 #: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
-#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
@@ -628,7 +628,7 @@ msgid "S"
 msgstr "Κ"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Τύπος"
@@ -1882,7 +1882,7 @@ msgstr "Σφάλμα απενεργοποίησης του αποθετηρίο�
 msgid "Problem retrieving files from '%s'."
 msgstr "Πρόβλημα κατά τη λήψη αρχείων από το %s."
 
-#: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
+#: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 msgid "Please see the above error message for a hint."
 msgstr "Παρακαλώ δείτε το παραπάνω μήνυμα σφάλματος για κάποια υπόδειξη."
@@ -2040,38 +2040,38 @@ msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Η εκτέλεση του 'zypper refresh' ως root μπορεί να επιλύσει το πρόβλημα."
 
-#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5246
+#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
 msgstr "Ψευδώνυμο"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2404
+#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2403
 msgid "Enabled"
 msgstr "Ενεργοποιημένο"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2405
+#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2404
 msgid "GPG Check"
 msgstr "Έλεγχος GPG"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:980 src/repos.cc:2407
+#: src/repos.cc:980 src/repos.cc:2406
 msgid "Refresh"
 msgstr "Ανανέωση"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2411
+#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2410
 msgid "Priority"
 msgstr "Προτεραιότητα"
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2414
+#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2413
 msgid "URI"
 msgstr "URI"
 
@@ -2249,7 +2249,7 @@ msgstr ""
 msgid "Invalid repository alias: '%s'"
 msgstr "Μη έγκυρο ψευδώνυμο αποθετηρίου: '%s'"
 
-#: src/repos.cc:1576 src/repos.cc:1859
+#: src/repos.cc:1576 src/repos.cc:1858
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
@@ -2336,37 +2336,34 @@ msgstr "Παρακαλώ ελέγξτε αν το URI είναι έγκυρο κ
 msgid "Problem parsing the file at the specified URI"
 msgstr "Πρόβλημα κατά την ανάλυση του αρχείου στο ορισμένο URI"
 
-#. TranslatorExplanation don't translate the URI if the URI itself is not translated.
-#. Also don't translate the '.repo' string.
-#: src/repos.cc:1755
-msgid ""
-"Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for "
-"details."
+#. TranslatorExplanation Don't translate the '.repo' string.
+#: src/repos.cc:1754
+msgid "Is it a .repo file?"
 msgstr ""
 "Είναι ένα αρχείο .repo; Για λεπτομέρειες δείτε την http://en.opensuse.org/"
 "Standards/RepoInfo ."
 
-#: src/repos.cc:1762
+#: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr ""
 "Εμφανίστηκε πρόβλημα κατά την προσπάθεια ανάγνωσης του αρχείου στο "
 "καθορισμένο URI"
 
-#: src/repos.cc:1774
+#: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Βρέθηκε αποθετήριο στο αρχείο χωρίς ορισμένο ψευδώνυμο, παράβλεψη."
 
-#: src/repos.cc:1780
+#: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Το αποθετήριο '%s' δεν έχει ορισμένο URI, παράβλεψη."
 
-#: src/repos.cc:1822
+#: src/repos.cc:1821
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Το αποθετήριο '%s' έχει αφαιρεθεί."
 
-#: src/repos.cc:1844
+#: src/repos.cc:1843
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
@@ -2375,219 +2372,219 @@ msgstr ""
 "Αδυναμία αλλαγής ψευδωνύμου για το αποθετήριο '%s'. Το αποθετήριο ανήκει "
 "στην υπηρεσία '%s' που είναι υπεύθυνη για τη ρύθμιση του ψευδωνύμου του."
 
-#: src/repos.cc:1855
+#: src/repos.cc:1854
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Το αποθετήριο '%s' μετονομάστηκε σε '%s'."
 
-#: src/repos.cc:1864 src/repos.cc:2098
+#: src/repos.cc:1863 src/repos.cc:2097
 msgid "Error while modifying the repository:"
 msgstr "Σφάλμα κατά την τροποποίηση του αποθετηρίου:"
 
-#: src/repos.cc:1865
+#: src/repos.cc:1864
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Το αποθετήριο '%s' μένει αμετάβλητο."
 
-#: src/repos.cc:2002
+#: src/repos.cc:2001
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Η προτεραιότητα του αποθετηρίου '%s' έχει μείνει αμετάβλητη (%d)"
 
-#: src/repos.cc:2040
+#: src/repos.cc:2039
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Το αποθετήριο '%s' ενεργοποιήθηκε επιτυχώς."
 
-#: src/repos.cc:2042
+#: src/repos.cc:2041
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Το αποθετήριο '%s' απενεργοποιήθηκε επιτυχώς."
 
-#: src/repos.cc:2049
+#: src/repos.cc:2048
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Η αυτόματη ανανέωση έχει ενεργοποιηθεί για το αποθετήριο '%s'."
 
-#: src/repos.cc:2051
+#: src/repos.cc:2050
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Η αυτόματη ανανέωση έχει απενεργοποιηθεί για το αποθετήριο '%s'."
 
-#: src/repos.cc:2058
+#: src/repos.cc:2057
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr ""
 "Η τοπική αποθήκευση αρχείων RPM έχει ενεργοποιηθεί για το αποθετήριο '%s'."
 
-#: src/repos.cc:2060
+#: src/repos.cc:2059
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr ""
 "Η τοπική αποθήκευση αρχείων RPM έχει απενεργοποιηθεί για το αποθετήριο '%s'."
 
-#: src/repos.cc:2067
+#: src/repos.cc:2066
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Ο έλεγχος GPG έχει ενεργοποιηθεί για το αποθετήριο'%s'."
 
-#: src/repos.cc:2069
+#: src/repos.cc:2068
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Ο έλεγχος GPG έχει απενεργοποιηθεί για το αποθετήριο '%s'."
 
-#: src/repos.cc:2075
+#: src/repos.cc:2074
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Η προτεραιότητα του αποθετηρίου '%s' έχει οριστεί στο %d."
 
-#: src/repos.cc:2081
+#: src/repos.cc:2080
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Η ονομασία του αποθετηρίου '%s' έχει οριστεί στο '%s'."
 
-#: src/repos.cc:2092
+#: src/repos.cc:2091
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Τίποτα προς αλλαγή στο αποθετήριο '%s'."
 
-#: src/repos.cc:2099
+#: src/repos.cc:2098
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Το αποθετήριο %s μένει αμετάβλητο."
 
-#: src/repos.cc:2131
+#: src/repos.cc:2130
 msgid "Error reading services:"
 msgstr "Σφάλμα κατά την ανάγνωση των υπηρεσιών:"
 
-#: src/repos.cc:2220
+#: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "Η υπηρεσία '%s' δεν βρέθηκε από το ψευδώνυμό της, τον αριθμό ή το URI."
 
-#: src/repos.cc:2223
+#: src/repos.cc:2222
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr ""
 "Χρησιμοποιήστε το '%s' για να λάβετε τη λίστα με τις ορισμένες υπηρεσίες."
 
-#: src/repos.cc:2465
+#: src/repos.cc:2464
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 "Δεν έχουν οριστεί υπηρεσίες. Χρησιμοποιήστε την εντολή '%s' για να "
 "προσθέσετε μια ή περισσότερες υπηρεσίες."
 
-#: src/repos.cc:2548
+#: src/repos.cc:2547
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
 "Η υπηρεσία με την ονομασία '%s' υπάρχει ήδη. Παρακαλώ χρησιμοποιήστε ένα "
 "άλλο ψευδώνυμο."
 
-#: src/repos.cc:2555
+#: src/repos.cc:2554
 #, c-format, boost-format
 msgid "Error occured while adding service '%s'."
 msgstr "Σφάλμα κατά την προσθήκη της υπηρεσίας '%s'."
 
-#: src/repos.cc:2561
+#: src/repos.cc:2560
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "Η υπηρεσία '%s' προστέθηκε επιτυχώς."
 
-#: src/repos.cc:2599
+#: src/repos.cc:2598
 #, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "Αφαίρεση της υπηρεσίας '%s':"
 
-#: src/repos.cc:2602
+#: src/repos.cc:2601
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "Η υπηρεσία '%s' έχει αφαιρεθεί."
 
-#: src/repos.cc:2616
+#: src/repos.cc:2615
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "Ανανέωση της υπηρεσίας '%s'."
 
-#: src/repos.cc:2631 src/repos.cc:2641
+#: src/repos.cc:2630 src/repos.cc:2640
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr ""
 "Πρόβλημα κατά τη λήψη του αρχείου ευρετηρίου του αποθετηρίου για την "
 "υπηρεσία '%s':"
 
-#: src/repos.cc:2633 src/repos.cc:2741 src/repos.cc:2799
+#: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Παράβλεψη της υπηρεσίας '%s' λόγω του παραπάνω σφάλματος."
 
-#: src/repos.cc:2643
+#: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
 msgstr "Ελέγξτε αν το URI είναι έγκυρο και προσβάσιμο."
 
-#: src/repos.cc:2700
+#: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "Παράβλεψη απενεργοποιημένης υπηρεσίας '%s'"
 
-#: src/repos.cc:2752
+#: src/repos.cc:2751
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
 "Χρησιμοποιήστε τις εντολές '%s' ή '%s' για να προσθέσετε ή να ενεργοποιήσετε "
 "υπηρεσίες."
 
-#: src/repos.cc:2755
+#: src/repos.cc:2754
 msgid "Specified services are not enabled or defined."
 msgstr "Οι επιλεγμένες υπηρεσίες δεν είναι ενεργοποιημένες ή ορισμένες."
 
-#: src/repos.cc:2757
+#: src/repos.cc:2756
 msgid "There are no enabled services defined."
 msgstr "Δεν έχουν οριστεί ενεργοποιημένες υπηρεσίες."
 
-#: src/repos.cc:2761
+#: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
 msgstr "Αδυναμία ανανέωσης υπηρεσιών λόγω σφαλμάτων."
 
-#: src/repos.cc:2767
+#: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Κάποιες από τις υπηρεσίες δεν ανανεώθηκαν λόγω ενός σφάλματος."
 
-#: src/repos.cc:2772
+#: src/repos.cc:2771
 msgid "Specified services have been refreshed."
 msgstr "Οι καθορισμένες υπηρεσίες έχουν ανανεωθεί."
 
-#: src/repos.cc:2774
+#: src/repos.cc:2773
 msgid "All services have been refreshed."
 msgstr "Όλες οι υπηρεσίες έχουν ανανεωθεί."
 
-#: src/repos.cc:2921
+#: src/repos.cc:2920
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "Η υπηρεσία '%s' έχει ενεργοποιηθεί επιτυχώς."
 
-#: src/repos.cc:2923
+#: src/repos.cc:2922
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "Η υπηρεσία '%s' έχει απενεργοποιηθεί επιτυχώς."
 
-#: src/repos.cc:2929
+#: src/repos.cc:2928
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "Η αυτόματη ανανέωση έχει ενεργοποιηθεί για την υπηρεσία '%s'."
 
-#: src/repos.cc:2931
+#: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "Η αυτόματη ανανέωση έχει απενεργοποιηθεί για την υπηρεσία '%s'."
 
-#: src/repos.cc:2936
+#: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "Η ονομασία της υπηρεσίας '%s' έχει οριστεί σε '%s'."
 
-#: src/repos.cc:2941
+#: src/repos.cc:2940
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
@@ -2599,7 +2596,7 @@ msgstr[1] ""
 "Τα αποθετήρια '%s' προστέθηκαν στα ενεργοποιημένα αποθετήρια της υπηρεσίας "
 "'%s'"
 
-#: src/repos.cc:2948
+#: src/repos.cc:2947
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
@@ -2611,7 +2608,7 @@ msgstr[1] ""
 "Τα αποθετήρια '%s' προστέθηκαν στα απενεργοποιημένα αποθετήρια της υπηρεσίας "
 "'%s'"
 
-#: src/repos.cc:2955
+#: src/repos.cc:2954
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -2624,7 +2621,7 @@ msgstr[1] ""
 "Τα αποθετήρια '%s' αφαιρέθηκαν από τα ενεργοποιημένα αποθετήρια της "
 "υπηρεσίας '%s'"
 
-#: src/repos.cc:2962
+#: src/repos.cc:2961
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -2638,52 +2635,52 @@ msgstr[1] ""
 "Τα αποθετήρια '%s' αφαιρέθηκαν από τα απενεργοποιημένα αποθετήρια της "
 "υπηρεσίας '%s'"
 
-#: src/repos.cc:2971
+#: src/repos.cc:2970
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "Δεν υπάρχει αλλαγή για την υπηρεσία '%s'."
 
-#: src/repos.cc:2977
+#: src/repos.cc:2976
 msgid "Error while modifying the service:"
 msgstr "Σφάλμα κατά την τροποποίηση της υπηρεσίας:"
 
-#: src/repos.cc:2978
+#: src/repos.cc:2977
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "Η υπηρεσία %s μένει αμετάβλητη."
 
-#: src/repos.cc:3082
+#: src/repos.cc:3081
 msgid "Loading repository data..."
 msgstr "Φόρτωση δεδομένων αποθετηρίου..."
 
-#: src/repos.cc:3102
+#: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Λήψη δεδομένων αποθετηρίου '%s'..."
 
-#: src/repos.cc:3108
+#: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Το αποθετήριο '%s' δεν είναι στην λανθάνουσα μνήμη. Αποθήκευση..."
 
-#: src/repos.cc:3114 src/repos.cc:3148
+#: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Πρόβλημα φόρτωσης δεδομένων από '%s'"
 
-#: src/repos.cc:3118
+#: src/repos.cc:3117
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Το αποθετήριο '%s' δεν μπόρεσε να ενημερωθεί. Θα χρησιμοποιήσει την παλιά "
 "λανθάνουσα μνήμη."
 
-#: src/repos.cc:3122 src/repos.cc:3151
+#: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Επιλύσεις από '%s' δεν φορτώνονται λόγω σφάλματος."
 
-#: src/repos.cc:3139
+#: src/repos.cc:3138
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -2693,17 +2690,17 @@ msgstr ""
 "χρησιμοποιήσετε διαφορετικό mirror ή διακομιστή."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3150
+#: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Δοκιμάστε '%s', ή καλύτερα '%s' πριν συνεχίσετε."
 
 #  progress stages
-#: src/repos.cc:3161
+#: src/repos.cc:3160
 msgid "Reading installed packages..."
 msgstr "Ανάγνωση εγκατεστημένων πακέτων..."
 
-#: src/repos.cc:3170
+#: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Παρουσιάστηκε πρόβλημα κατά την ανάγνωση των εγκατεστημένων πακέτων:"
 

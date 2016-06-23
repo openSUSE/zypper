@@ -11,11 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:12+0200\n"
+"POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-06-22 21:25+0000\n"
 "Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
-"\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
+">\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -462,7 +462,7 @@ msgstr "Fel"
 
 #. translators: name (general header)
 #: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
-#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
@@ -608,7 +608,7 @@ msgid "S"
 msgstr "S"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Typ"
@@ -1473,7 +1473,7 @@ msgstr[0] "Följande paket stöds inte av dess leverantör:"
 msgstr[1] "Följande %d paket stöds inte av dess leverantör:"
 
 #: src/Summary.cc:1130
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
@@ -1482,32 +1482,33 @@ msgstr[0] "Följande paket behöver ytterligare kundavtal för att få support:"
 msgstr[1] "Följande %d paket behöver ytterligare kundavtal för att få support:"
 
 #: src/Summary.cc:1148
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "Följande paket kommer INTE att installeras:"
 msgstr[1] "Följande %d paket kommer INTE att installeras:"
 
 #: src/Summary.cc:1153
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "Följande produktuppdatering kommer INTE att installeras:"
 msgstr[1] "Följande %d produktuppdateringar kommer INTE att installeras:"
 
 #: src/Summary.cc:1158
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "Följande programuppdatering kommer INTE att installeras:"
 msgstr[1] "Följande %d programuppdateringar kommer INTE att installeras:"
 
 #: src/Summary.cc:1188
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "Följande objekt är låst och kommer inte att påverkas av någon åtgärd:"
+msgstr[0] ""
+"Följande objekt är låst och kommer inte att påverkas av någon åtgärd:"
 msgstr[1] ""
 "Följande %d objekt är låsta och kommer inte att påverkas av någon åtgärd:"
 
@@ -1523,7 +1524,7 @@ msgid "Run '%1%' to see the complete list of locked items."
 msgstr "Kör '%1%' för att se hela listan över låsta objekt."
 
 #: src/Summary.cc:1222
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "Följande programfix kräver en omstart av systemet:"
@@ -1866,7 +1867,7 @@ msgstr "Fel när lagringsplatsen %s inaktiverades."
 msgid "Problem retrieving files from '%s'."
 msgstr "Det gick inte att hämta filer från %s."
 
-#: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
+#: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 msgid "Please see the above error message for a hint."
 msgstr "Mer information visas i felmeddelandet ovan."
@@ -2020,38 +2021,38 @@ msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Problemet kan eventuellt lösas genom att köra \"zypper refresh\" som root."
 
-#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5246
+#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
 msgstr "Alias"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2404
+#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2403
 msgid "Enabled"
 msgstr "Aktiverad"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2405
+#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2404
 msgid "GPG Check"
 msgstr "GPG-kontroll"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:980 src/repos.cc:2407
+#: src/repos.cc:980 src/repos.cc:2406
 msgid "Refresh"
 msgstr "Uppdatera"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2411
+#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2410
 msgid "Priority"
 msgstr "Prioritet"
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2414
+#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2413
 msgid "URI"
 msgstr "uri"
 
@@ -2224,7 +2225,7 @@ msgstr ""
 msgid "Invalid repository alias: '%s'"
 msgstr "Ogiltigt arkivalias: %s"
 
-#: src/repos.cc:1576 src/repos.cc:1859
+#: src/repos.cc:1576 src/repos.cc:1858
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Förrådet '%s' finns redan. Använd ett annat alias."
@@ -2305,35 +2306,30 @@ msgstr "Kontrollera att URI:n är giltig och går att öppna."
 msgid "Problem parsing the file at the specified URI"
 msgstr "Det gick inte att tolka filen på den angivna URI:n"
 
-#. TranslatorExplanation don't translate the URI if the URI itself is not translated.
-#. Also don't translate the '.repo' string.
-#: src/repos.cc:1755
-msgid ""
-"Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for "
-"details."
-msgstr ""
-"Är det en REPO-fil? Information finns på http://en.opensuse.org/Standards/"
-"RepoInfo."
+#. TranslatorExplanation Don't translate the '.repo' string.
+#: src/repos.cc:1754
+msgid "Is it a .repo file?"
+msgstr "Är det en REPO-fil?"
 
-#: src/repos.cc:1762
+#: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Det gick inte att läsa filen på den angivna URI:n"
 
-#: src/repos.cc:1774
+#: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Ett förråd utan alias hittades i filen. Det hoppas över."
 
-#: src/repos.cc:1780
+#: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Förrådet '%s' har ingen URI. Det hoppas över."
 
-#: src/repos.cc:1822
+#: src/repos.cc:1821
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Förrådet '%s' har tagits bort."
 
-#: src/repos.cc:1844
+#: src/repos.cc:1843
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
@@ -2342,211 +2338,211 @@ msgstr ""
 "Kan inte ändra alias för förrådet '%s'. Förrådet tillhör tjänsten '%s' som "
 "inte kan sätta alias."
 
-#: src/repos.cc:1855
+#: src/repos.cc:1854
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Förrådet '%s' har bytt namn till '%s'."
 
-#: src/repos.cc:1864 src/repos.cc:2098
+#: src/repos.cc:1863 src/repos.cc:2097
 msgid "Error while modifying the repository:"
 msgstr "Ett fel uppstod när förrådet skulle ändras:"
 
-#: src/repos.cc:1865
+#: src/repos.cc:1864
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Lämnar förrådet '%s' oförändrat."
 
-#: src/repos.cc:2002
+#: src/repos.cc:2001
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Prioriteten för förrådet '%s' är oförändrad (%d)"
 
-#: src/repos.cc:2040
+#: src/repos.cc:2039
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Arkivet %s har aktiverats."
 
-#: src/repos.cc:2042
+#: src/repos.cc:2041
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Arkivet %s har inaktiverats."
 
-#: src/repos.cc:2049
+#: src/repos.cc:2048
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Automatisk uppdatering har aktiverats för förrådet '%s'."
 
-#: src/repos.cc:2051
+#: src/repos.cc:2050
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Den automatiska uppdateringen har inaktiverats för förrådet '%s'."
 
-#: src/repos.cc:2058
+#: src/repos.cc:2057
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Cachelagring av RPM-filer har aktiverats för förrådet '%s'."
 
-#: src/repos.cc:2060
+#: src/repos.cc:2059
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Cachelagring av RPM-filer har inaktiverats för förrådet '%s'."
 
-#: src/repos.cc:2067
+#: src/repos.cc:2066
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "GPG-kontroll har aktiverats för lagringsplatsen \"%s\"."
 
-#: src/repos.cc:2069
+#: src/repos.cc:2068
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "GPG-kontroll har inaktiverats för lagringsplatsen \"%s\"."
 
-#: src/repos.cc:2075
+#: src/repos.cc:2074
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Prioriteten för förrådet '%s' har satts till %d."
 
-#: src/repos.cc:2081
+#: src/repos.cc:2080
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Förrådet '%s' har fått namnet '%s'."
 
-#: src/repos.cc:2092
+#: src/repos.cc:2091
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Det finns inget att ändra för förrådet '%s'."
 
-#: src/repos.cc:2099
+#: src/repos.cc:2098
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Förrådet '%s' lämnas oförändrat."
 
-#: src/repos.cc:2131
+#: src/repos.cc:2130
 msgid "Error reading services:"
 msgstr "Ett fel uppstod när tjänsterna lästes:"
 
-#: src/repos.cc:2220
+#: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr ""
 "Det gick inte att hitta tjänsten %s med hjälp av alias, nummer eller URI."
 
-#: src/repos.cc:2223
+#: src/repos.cc:2222
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "Hämta listan över definierade tjänster med hjälp av %s."
 
-#: src/repos.cc:2465
+#: src/repos.cc:2464
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 "Inga tjänster har definierats. Lägg till en eller flera tjänster med hjälp "
 "av kommandot %s."
 
-#: src/repos.cc:2548
+#: src/repos.cc:2547
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr "Tjänsten med alias %s finns redan. Använd ett annat alias."
 
-#: src/repos.cc:2555
+#: src/repos.cc:2554
 #, c-format, boost-format
 msgid "Error occured while adding service '%s'."
 msgstr "Ett fel uppstod när tjänsten %s lades till."
 
-#: src/repos.cc:2561
+#: src/repos.cc:2560
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "Tjänsten %s har lagts till."
 
-#: src/repos.cc:2599
+#: src/repos.cc:2598
 #, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "Tjänsten %s tas bort:"
 
-#: src/repos.cc:2602
+#: src/repos.cc:2601
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "Tjänsten %s har tagits bort."
 
-#: src/repos.cc:2616
+#: src/repos.cc:2615
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "Uppdaterar tjänsten %s."
 
-#: src/repos.cc:2631 src/repos.cc:2641
+#: src/repos.cc:2630 src/repos.cc:2640
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Det gick inte att hämta förrådsindexfilen för tjänsten '%s':"
 
-#: src/repos.cc:2633 src/repos.cc:2741 src/repos.cc:2799
+#: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Hoppar över tjänsten %s på grund av felet ovan."
 
-#: src/repos.cc:2643
+#: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
 msgstr "Kontrollera att URI:n är giltig och går att öppna."
 
-#: src/repos.cc:2700
+#: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "Hoppar över den inaktiverade tjänsten %s"
 
-#: src/repos.cc:2752
+#: src/repos.cc:2751
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr "Lägg till och aktivera tjänster med hjälp av kommandot %s eller %s."
 
-#: src/repos.cc:2755
+#: src/repos.cc:2754
 msgid "Specified services are not enabled or defined."
 msgstr "De angivna tjänsterna är inte aktiva eller definierade."
 
-#: src/repos.cc:2757
+#: src/repos.cc:2756
 msgid "There are no enabled services defined."
 msgstr "Ingen aktiv tjänst har definierats."
 
-#: src/repos.cc:2761
+#: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
 msgstr "Det gick inte att uppdatera tjänsterna på grund av fel."
 
-#: src/repos.cc:2767
+#: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Vissa av tjänsterna har inte uppdaterats på grund av ett fel."
 
-#: src/repos.cc:2772
+#: src/repos.cc:2771
 msgid "Specified services have been refreshed."
 msgstr "De angivna tjänsterna har uppdaterats."
 
-#: src/repos.cc:2774
+#: src/repos.cc:2773
 msgid "All services have been refreshed."
 msgstr "Alla tjänster har uppdaterats."
 
-#: src/repos.cc:2921
+#: src/repos.cc:2920
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "Tjänsten %s har aktiverats."
 
-#: src/repos.cc:2923
+#: src/repos.cc:2922
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "Tjänsten %s har inaktiverats."
 
-#: src/repos.cc:2929
+#: src/repos.cc:2928
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "Den automatiska uppdateringen har aktiverats för tjänsten %s."
 
-#: src/repos.cc:2931
+#: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "Den automatiska uppdateringen har inaktiverats för tjänsten %s."
 
-#: src/repos.cc:2936
+#: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "Tjänsten %s har fått namnet %s."
 
-#: src/repos.cc:2941
+#: src/repos.cc:2940
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
@@ -2556,7 +2552,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Förråden '%s' har lagts till de aktiverade förråden för tjänsten '%s'"
 
-#: src/repos.cc:2948
+#: src/repos.cc:2947
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
@@ -2566,7 +2562,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Förråden '%s' har lagts till de inaktiverade förråden för tjänsten '%s'"
 
-#: src/repos.cc:2955
+#: src/repos.cc:2954
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -2577,7 +2573,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Förråden '%s' har tagits bort från de aktiverade förråden för tjänsten '%s'"
 
-#: src/repos.cc:2962
+#: src/repos.cc:2961
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -2589,51 +2585,51 @@ msgstr[0] ""
 msgstr[1] ""
 "Förråden '%s' har tagits bort från de inaktiverade förråden för tjänsten '%s'"
 
-#: src/repos.cc:2971
+#: src/repos.cc:2970
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "Det finns inget att ändra för tjänsten %s."
 
-#: src/repos.cc:2977
+#: src/repos.cc:2976
 msgid "Error while modifying the service:"
 msgstr "Ett fel uppstod när tjänsten uppdaterades:"
 
-#: src/repos.cc:2978
+#: src/repos.cc:2977
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "Lämnar tjänsten %s oförändrad."
 
-#: src/repos.cc:3082
+#: src/repos.cc:3081
 msgid "Loading repository data..."
 msgstr "Läser in förrådsdata..."
 
-#: src/repos.cc:3102
+#: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Hämtar data för förrådet '%s'..."
 
-#: src/repos.cc:3108
+#: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Förrådet '%s' är inte cachat. Cachar..."
 
-#: src/repos.cc:3114 src/repos.cc:3148
+#: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Ett problem uppstod när data skulle läsas in från '%s'"
 
-#: src/repos.cc:3118
+#: src/repos.cc:3117
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Det gick inte att uppdatera lagringsplatsen '%s'. Använder gammal cache."
 
-#: src/repos.cc:3122 src/repos.cc:3151
+#: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Resurser från \"%s\" har inte lästs in eftersom ett fel uppstod."
 
-#: src/repos.cc:3139
+#: src/repos.cc:3138
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -2643,16 +2639,16 @@ msgstr ""
 "server."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3150
+#: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Prova '%s', eller till och med '%s', innan du gör så här."
 
-#: src/repos.cc:3161
+#: src/repos.cc:3160
 msgid "Reading installed packages..."
 msgstr "Läser installerade paket..."
 
-#: src/repos.cc:3170
+#: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Ett problem uppstod vid läsning av de installerade paketen:"
 
@@ -2683,7 +2679,7 @@ msgstr[1] "Hittade %1% tillämpliga programfixar:"
 
 #. translator: stats summary
 #: src/update.cc:294
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
 msgstr[0] "%d programfix låst"

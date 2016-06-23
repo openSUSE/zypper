@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:12+0200\n"
+"POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2008-11-23 08:36+0530\n"
 "Last-Translator: KDB <brar.kd@gmail.com>\n"
 "Language-Team: Panjabi <punjabi-l10n@list.sf.net>\n"
@@ -438,7 +438,7 @@ msgstr "ਗਲਤੀ"
 
 #. translators: name (general header)
 #: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
-#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
@@ -585,7 +585,7 @@ msgid "S"
 msgstr "S"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "ਕਿਸਮ"
@@ -1809,7 +1809,7 @@ msgstr ""
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' ਤੋਂ ਫਾਇਲਾਂ ਡਾਊਨਲੋਡ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ।"
 
-#: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
+#: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 #, fuzzy
 msgid "Please see the above error message for a hint."
@@ -1958,19 +1958,19 @@ msgstr "ਸ਼ੁਰੂਆਤ ਫੇਲ੍ਹ ਹੋਈ"
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 
-#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5246
+#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
 msgstr "ਉਪ-ਨਾਂ"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2404
+#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2403
 msgid "Enabled"
 msgstr "ਯੋਗ ਕੀਤੀ"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2405
+#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2404
 #, fuzzy
 msgid "GPG Check"
 msgstr "DNS ਚੈੱਕ"
@@ -1978,19 +1978,19 @@ msgstr "DNS ਚੈੱਕ"
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:980 src/repos.cc:2407
+#: src/repos.cc:980 src/repos.cc:2406
 msgid "Refresh"
 msgstr "ਤਾਜ਼ਾ ਕਰੋ"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2411
+#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2410
 msgid "Priority"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2414
+#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2413
 msgid "URI"
 msgstr ""
 
@@ -2172,7 +2172,7 @@ msgstr "ਇਹ ਬਦਲਣਯੋਗ ਕੇਵਲ ਪੜ੍ਹਨ ਵਾਸਤ�
 msgid "Invalid repository alias: '%s'"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਸ਼ਾਮਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ।"
 
-#: src/repos.cc:1576 src/repos.cc:1859
+#: src/repos.cc:1576 src/repos.cc:1858
 #, fuzzy, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨਾਂ '%s' ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਹੋਰ ਏਲੀਆਸ ਵਰਤੋਂ ਜੀ।"
@@ -2255,254 +2255,251 @@ msgstr "ਚੈੱਕ ਕਰੋ ਕਿ ਕੀ URL ਅਸੈੱਸਬਲ ਹੈ।
 msgid "Problem parsing the file at the specified URI"
 msgstr "ਦਿੱਤੇ URL ਤੋਂ ਰਿਪੋਜ਼ਟਰੀ ਡਾਟਾ ਟਰਾਂਸਫਰ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ।"
 
-#. TranslatorExplanation don't translate the URI if the URI itself is not translated.
-#. Also don't translate the '.repo' string.
-#: src/repos.cc:1755
-msgid ""
-"Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for "
-"details."
+#. TranslatorExplanation Don't translate the '.repo' string.
+#: src/repos.cc:1754
+msgid "Is it a .repo file?"
 msgstr ""
 
-#: src/repos.cc:1762
+#: src/repos.cc:1761
 #, fuzzy
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "ਦਿੱਤੇ URL ਤੋਂ ਰਿਪੋਜ਼ਟਰੀ ਡਾਟਾ ਟਰਾਂਸਫਰ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ।"
 
-#: src/repos.cc:1774
+#: src/repos.cc:1773
 #, fuzzy
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਨਹੀਂ ਲੱਭੀ।"
 
-#: src/repos.cc:1780
+#: src/repos.cc:1779
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਨਹੀਂ ਲੱਭੀ।"
 
-#: src/repos.cc:1822
+#: src/repos.cc:1821
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਨੂੰ ਹਟਾਇਆ।"
 
-#: src/repos.cc:1844
+#: src/repos.cc:1843
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
 
-#: src/repos.cc:1855
+#: src/repos.cc:1854
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਦਾ ਨਾਂ %s ਬਦਲਿਆ"
 
-#: src/repos.cc:1864 src/repos.cc:2098
+#: src/repos.cc:1863 src/repos.cc:2097
 msgid "Error while modifying the repository:"
 msgstr "ਰਿਪੋਜ਼ਟਰੀਆਂ ਨੂੰ ਸੋਧਣ ਦੌਰਾਨ ਗਲਤੀ:"
 
-#: src/repos.cc:1865
+#: src/repos.cc:1864
 #, fuzzy, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਅਣ-ਬਦਲੀ ਹੀ ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2002
+#: src/repos.cc:2001
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਨੂੰ ਹਟਾਇਆ।"
 
-#: src/repos.cc:2040
+#: src/repos.cc:2039
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਠੀਕ ਤਰ੍ਹਾਂ ਸੋਧੀ ਗਈ ਹੈ।"
 
-#: src/repos.cc:2042
+#: src/repos.cc:2041
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਠੀਕ ਤਰ੍ਹਾਂ ਸੋਧੀ ਗਈ ਹੈ।"
 
-#: src/repos.cc:2049
+#: src/repos.cc:2048
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:2051
+#: src/repos.cc:2050
 #, fuzzy, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2058
+#: src/repos.cc:2057
 #, fuzzy, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2060
+#: src/repos.cc:2059
 #, fuzzy, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2067
+#: src/repos.cc:2066
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2069
+#: src/repos.cc:2068
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2075
+#: src/repos.cc:2074
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਨੂੰ ਹਟਾਇਆ।"
 
-#: src/repos.cc:2081
+#: src/repos.cc:2080
 #, fuzzy, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਨੂੰ ਹਟਾਇਆ।"
 
-#: src/repos.cc:2092
+#: src/repos.cc:2091
 #, fuzzy, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਸ਼ਾਮਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ।"
 
-#: src/repos.cc:2099
+#: src/repos.cc:2098
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਅਣ-ਬਦਲੀ ਹੀ ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2131
+#: src/repos.cc:2130
 #, fuzzy
 msgid "Error reading services:"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ ਤੋਂ ਪੜ੍ਹਨ ਦੌਰਾਨ ਗਲਤੀ:"
 
-#: src/repos.cc:2220
+#: src/repos.cc:2219
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਇਸ ਦੇ ਏਲੀਆਸ ਜਾਂ ਨੰਬਰ ਨਾਲ ਨਹੀਂ ਲੱਭੀ ਹੈ।"
 
-#: src/repos.cc:2223
+#: src/repos.cc:2222
 #, fuzzy, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "ਦਿੱਤੀਆਂ ਰਿਪੋਜ਼ਟਰੀਆਂ ਦੀ ਲਿਸਟ ਵੇਖਣ ਲਈ 'zypper repos' ਵਰਤੋਂ।"
 
-#: src/repos.cc:2465
+#: src/repos.cc:2464
 #, fuzzy, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 "ਕੋਈ ਰਿਪੋਜ਼ਟਰੀ ਨਹੀਂ ਦਿੱਤੀ ਗਈ ਹੈ। ਇੱਕ ਜਾਂ ਹੋਰ ਰਿਪੋਜ਼ਟਰੀਆਂ ਸ਼ਾਮਲ ਕਰਨ ਲਈ 'zypper addrepo' ਵਰਤੋਂ।"
 
-#: src/repos.cc:2548
+#: src/repos.cc:2547
 #, fuzzy, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨਾਂ '%s' ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਹੋਰ ਏਲੀਆਸ ਵਰਤੋਂ ਜੀ।"
 
-#: src/repos.cc:2555
+#: src/repos.cc:2554
 #, fuzzy, c-format, boost-format
 msgid "Error occured while adding service '%s'."
 msgstr "ਸੈਕਟਰ %u ਪੜ੍ਹਨ ਦੌਰਾਨ ਗਲਤੀ ਹੈ।"
 
-#: src/repos.cc:2561
+#: src/repos.cc:2560
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਠੀਕ ਤਰ੍ਹਾਂ ਸੋਧੀ ਗਈ ਹੈ।"
 
-#: src/repos.cc:2599
+#: src/repos.cc:2598
 #, fuzzy, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਹਟਾਈ ਜਾ ਰਹੀ ਹੈ।"
 
-#: src/repos.cc:2602
+#: src/repos.cc:2601
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਨੂੰ ਹਟਾਇਆ।"
 
-#: src/repos.cc:2616
+#: src/repos.cc:2615
 #, fuzzy, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "'%s' ਤਾਜ਼ਾ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।"
 
-#: src/repos.cc:2631 src/repos.cc:2641
+#: src/repos.cc:2630 src/repos.cc:2640
 #, fuzzy, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "ਦਿੱਤੇ URL ਤੋਂ ਰਿਪੋਜ਼ਟਰੀ ਡਾਟਾ ਟਰਾਂਸਫਰ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ:"
 
-#: src/repos.cc:2633 src/repos.cc:2741 src/repos.cc:2799
+#: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, fuzzy, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਉੱਤੇ ਦਿੱਤੀ ਗਲਤੀ ਕਰਕੇ ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ।"
 
-#: src/repos.cc:2643
+#: src/repos.cc:2642
 #, fuzzy
 msgid "Check if the URI is valid and accessible."
 msgstr "ਚੈੱਕ ਕਰੋ ਕਿ ਕੀ URL ਅਸੈੱਸਬਲ ਹੈ।"
 
-#: src/repos.cc:2700
+#: src/repos.cc:2699
 #, fuzzy, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2752
+#: src/repos.cc:2751
 #, fuzzy, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
 "ਰਿਪੋਜ਼ਟਰੀ ਸ਼ਾਮਲ ਕਰਨ ਜਾਂ ਯੋਗ ਕਰਨ ਲਈ 'zypper addrepo' ਜਾਂ 'zypper modifyrepo' ਕਮਾਂਡਾਂ "
 "ਵਰਤੋਂ।"
 
-#: src/repos.cc:2755
+#: src/repos.cc:2754
 #, fuzzy
 msgid "Specified services are not enabled or defined."
 msgstr "ਦਿੱਤੀਆਂ ਰਿਪੋਜ਼ਟਰੀਆਂ ਯੋਗ ਨਹੀਂ ਜਾਂ ਦਿੱਤੀਆਂ ਹੀ ਨਹੀਂ।"
 
-#: src/repos.cc:2757
+#: src/repos.cc:2756
 #, fuzzy
 msgid "There are no enabled services defined."
 msgstr "ਕੋਈ ਵੀ ਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ।"
 
-#: src/repos.cc:2761
+#: src/repos.cc:2760
 #, fuzzy
 msgid "Could not refresh the services because of errors."
 msgstr "ਗਲਤੀਆਂ ਕਰਕੇ ਰਿਪੋਜ਼ਟਰੀਆਂ ਤਾਜ਼ਾ ਨਹੀਂ ਕੀਤੀਆਂ ਜਾ ਸਕੀਆਂ।"
 
-#: src/repos.cc:2767
+#: src/repos.cc:2766
 #, fuzzy
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "ਕੁਝ ਰਿਪੋਜ਼ਟਰੀਆਂ ਤਾਜ਼ਾ ਨਹੀਂ ਕੀਤੀਆਂ ਜਾ ਸਕੀਆਂ, ਕਿਉਂਕਿ ਇੱਕ ਗਲਤੀ ਸੀ।"
 
-#: src/repos.cc:2772
+#: src/repos.cc:2771
 #, fuzzy
 msgid "Specified services have been refreshed."
 msgstr "ਦਿੱਤੀਆਂ ਰਿਪੋਜ਼ਟਰੀਆਂ ਤਾਜ਼ਾ ਕੀਤੀਆਂ ਗਈਆਂ।"
 
-#: src/repos.cc:2774
+#: src/repos.cc:2773
 #, fuzzy
 msgid "All services have been refreshed."
 msgstr "ਸਭ ਰਿਪੋਜ਼ਟਰੀਆਂ ਤਾਜ਼ਾ ਕੀਤੀਆਂ ਗਈਆਂ।"
 
-#: src/repos.cc:2921
+#: src/repos.cc:2920
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr ""
 
-#: src/repos.cc:2923
+#: src/repos.cc:2922
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr ""
 
-#: src/repos.cc:2929
+#: src/repos.cc:2928
 #, fuzzy, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2931
+#: src/repos.cc:2930
 #, fuzzy, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2936
+#: src/repos.cc:2935
 #, fuzzy, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਨੂੰ ਹਟਾਇਆ।"
 
-#: src/repos.cc:2941
+#: src/repos.cc:2940
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
@@ -2510,7 +2507,7 @@ msgid_plural ""
 msgstr[0] "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 msgstr[1] "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2948
+#: src/repos.cc:2947
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
@@ -2518,7 +2515,7 @@ msgid_plural ""
 msgstr[0] "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 msgstr[1] "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2955
+#: src/repos.cc:2954
 #, fuzzy, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -2527,7 +2524,7 @@ msgid_plural ""
 msgstr[0] "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 msgstr[1] "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2962
+#: src/repos.cc:2961
 #, fuzzy, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -2537,52 +2534,52 @@ msgid_plural ""
 msgstr[0] "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 msgstr[1] "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:2971
+#: src/repos.cc:2970
 #, fuzzy, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਸ਼ਾਮਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ।"
 
-#: src/repos.cc:2977
+#: src/repos.cc:2976
 #, fuzzy
 msgid "Error while modifying the service:"
 msgstr "ਰਿਪੋਜ਼ਟਰੀਆਂ ਨੂੰ ਸੋਧਣ ਦੌਰਾਨ ਗਲਤੀ:"
 
-#: src/repos.cc:2978
+#: src/repos.cc:2977
 #, fuzzy, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਅਣ-ਬਦਲੀ ਹੀ ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: src/repos.cc:3082
+#: src/repos.cc:3081
 #, fuzzy
 msgid "Loading repository data..."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਡਾਟਾ ਲਿਆ ਜਾ ਰਿਹਾ ਹੈ..."
 
-#: src/repos.cc:3102
+#: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਡਾਟਾ ਲਿਆ ਜਾ ਰਿਹਾ ਹੈ..."
 
-#: src/repos.cc:3108
+#: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਕੈਚੇ ਨਹੀਂ ਹੈ। ਕੈਚੇ ਕੀਤਾ ਜਾ ਰਹੀ ਹੈ..."
 
-#: src/repos.cc:3114 src/repos.cc:3148
+#: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "'%s' ਤੋਂ ਡਾਟਾ ਲੋਡ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ"
 
-#: src/repos.cc:3118
+#: src/repos.cc:3117
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "'%s' ਲਈ ਰਿਪੋਜ਼ਟਰੀ ਮੇਟਾਡਾਟਾ ਲੋਕਲ ਕੈਚੇ ਵਿੱਚ ਨਹੀਂ ਹੈ।"
 
-#: src/repos.cc:3122 src/repos.cc:3151
+#: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "'%s' ਤੋਂ ਹੱਲ-ਕਰਤਾ ਗਲਤੀ ਕਰਕੇ ਲੋਡ ਨਹੀਂ ਕੀਤੇ ਜਾ ਸਕੇ।"
 
-#: src/repos.cc:3139
+#: src/repos.cc:3138
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -2590,17 +2587,17 @@ msgid ""
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3150
+#: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr ""
 
-#: src/repos.cc:3161
+#: src/repos.cc:3160
 #, fuzzy
 msgid "Reading installed packages..."
 msgstr "ਇੰਸਟਾਲ ਪੈਕੇਜ ਪੜ੍ਹੇ ਜਾ ਰਹੇ ਹਨ"
 
-#: src/repos.cc:3170
+#: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
 msgstr ""
 

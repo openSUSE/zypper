@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 12:12+0200\n"
+"POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2012-05-24 15:15+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -437,7 +437,7 @@ msgstr "កំហុស"
 
 #. translators: name (general header)
 #: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
-#: src/repos.cc:2403 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
+#: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
@@ -583,7 +583,7 @@ msgid "S"
 msgstr "ស"
 
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2412
+#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "ប្រភេទ"
@@ -1731,7 +1731,7 @@ msgstr "បិទ​ឃ្លាំង '%s' ។"
 msgid "Problem retrieving files from '%s'."
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​ពី '%s' ។"
 
-#: src/repos.cc:296 src/repos.cc:3171 src/solve-commit.cc:801
+#: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 msgid "Please see the above error message for a hint."
 msgstr "សូម​មើល​សារ​កំហុស​ខាងលើ សម្រាប់​ព័ត៌មាន​ជំនួយ ។"
@@ -1877,38 +1877,38 @@ msgstr "ការ​ចាប់ផ្ដើម​គោលដៅ​បាន​
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "ការ​រត់ 'zypper refresh' ជា root គឺ​អាច​ដោះស្រាយ​បញ្ហា​បាន ។"
 
-#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2402 src/Zypper.cc:5246
+#: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
 msgstr "ឈ្មោះ​ក្លែងក្លាយ"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2404
+#: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2403
 msgid "Enabled"
 msgstr "អនុញ្ញាត"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2405
+#: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2404
 msgid "GPG Check"
 msgstr "ពិនិត្យ​មើល GPG"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:980 src/repos.cc:2407
+#: src/repos.cc:980 src/repos.cc:2406
 msgid "Refresh"
 msgstr "ធ្វើ​ឲ្យ​ស្រស់"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2411
+#: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2410
 msgid "Priority"
 msgstr "អទិភាព"
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2414
+#: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2413
 msgid "URI"
 msgstr "URI"
 
@@ -2078,7 +2078,7 @@ msgstr "នេះ​ជា​មេឌៀ​ដែល​បានតែ​អា
 msgid "Invalid repository alias: '%s'"
 msgstr "ឈ្មោះក្លែងក្លាយ​ឃ្លាំង​មិន​ត្រឹមត្រូវ ៖ '%s'"
 
-#: src/repos.cc:1576 src/repos.cc:1859
+#: src/repos.cc:1576 src/repos.cc:1858
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "មាន​ឃ្លាំង​ដែល​មាន​ឈ្មោះ '%s' រួចហើយ ។ សូម​ប្រើ​ឈ្មោះ​ផ្សេងទៀត ។"
@@ -2157,35 +2157,30 @@ msgstr "សូម​ពិនិត្យ​មើល ថាតើ URI ត្រ
 msgid "Problem parsing the file at the specified URI"
 msgstr "មាន​បញ្ហា​ក្នុងការ​ញែក​​ឯកសារ​នៅ URI ដែលបាន​បញ្ជាក់"
 
-#. TranslatorExplanation don't translate the URI if the URI itself is not translated.
-#. Also don't translate the '.repo' string.
-#: src/repos.cc:1755
-msgid ""
-"Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for "
-"details."
-msgstr ""
-"តើ​វា​ជា​ឯកសារ .repo ? ចំពោះ​សេចក្ដី​លម្អិត សូម​មើល http://en.opensuse.org/Standards/"
-"RepoInfo ។"
+#. TranslatorExplanation Don't translate the '.repo' string.
+#: src/repos.cc:1754
+msgid "Is it a .repo file?"
+msgstr "តើ​វា​ជា​ឯកសារ .repo ? ចំពោះ?"
 
-#: src/repos.cc:1762
+#: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "ជួប​បញ្ហា​នៅពេល​អាន​ឯកសារ​នៅ URI ដែល​បាន​បញ្ជាក់"
 
-#: src/repos.cc:1774
+#: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "បាន​រកឃើញ​ឃ្លាំង​ដែល​មិន​មាន​ឈ្មោះ​ក្លែងក្លាយ​ត្រូវបាន​កំណត់​នៅ​ក្នុង​ឯកសារ ដូច្នេះ​រំលង ។"
 
-#: src/repos.cc:1780
+#: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "ឃ្លាំង '%s' មិនមាន URI ដែល​បាន​កំណត់​ទេ ដូច្នេះ​រំលង​។"
 
-#: src/repos.cc:1822
+#: src/repos.cc:1821
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "ឃ្លាំង '%s' ត្រូវបាន​យកចេញ ។"
 
-#: src/repos.cc:1844
+#: src/repos.cc:1843
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
@@ -2194,222 +2189,222 @@ msgstr ""
 "មិនអាច​ផ្លាស់ប្ដូរ​ឈ្មោះ​ក្លែងក្លាយ​របស់​ឃ្លាំង '%s' បាន​ទេ ។ ឃ្លាំង​ជា​កម្មសិទ្ធិ​របស់​សេវា '%s' ដែល​ទទួល​"
 "ខុសត្រូវ​ចំពោះ​ការ​កំណត់​ឈ្មោះ​ក្លែងក្លាយ​​របស់​វា ។"
 
-#: src/repos.cc:1855
+#: src/repos.cc:1854
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "ឃ្លាំង '%s' បាន​ប្ដូរ​ឈ្មោះ​ទៅ '%s' ។"
 
-#: src/repos.cc:1864 src/repos.cc:2098
+#: src/repos.cc:1863 src/repos.cc:2097
 msgid "Error while modifying the repository:"
 msgstr "កំហុស​ខណៈពេល​កែប្រែ​ឃ្លាំង ៖"
 
-#: src/repos.cc:1865
+#: src/repos.cc:1864
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "ទុក​ឲ្យ​ឃ្លាំង '%s' នៅ​ដដែល ។"
 
-#: src/repos.cc:2002
+#: src/repos.cc:2001
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "អាទិភាព​ឃ្លាំង '%s' ត្រូវ​បាន​ទុក​ឲ្យ​នៅ​ដដែល (%d)"
 
-#: src/repos.cc:2040
+#: src/repos.cc:2039
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "បាន​បើក​ឃ្លាំង '%s' ដោយ​ជោគជ័យ ។"
 
-#: src/repos.cc:2042
+#: src/repos.cc:2041
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "បាន​បិទ​ឃ្លាំង '%s' ដោយ​ជោគជ័យ ។"
 
-#: src/repos.cc:2049
+#: src/repos.cc:2048
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "បាន​បើក​ការ​ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យប្រវត្តិ សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:2051
+#: src/repos.cc:2050
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "បាន​បិទ​ការ​ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យប្រវត្តិ​សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:2058
+#: src/repos.cc:2057
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "ឃ្លាំង​សម្ងាត់​ឯកសារ RPM ត្រូវ​បាន​បើក​សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:2060
+#: src/repos.cc:2059
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "ឃ្លាំង​ឯកសារ RPM ត្រូវ​បានបិទ​សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:2067
+#: src/repos.cc:2066
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "ការ​ពិនិត្យ​មើល GPG ត្រូវ​បាន​បើក​សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:2069
+#: src/repos.cc:2068
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "ការ​ពិនិត្យ​មើល GPG ត្រូវ​បាន​បិទ​សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:2075
+#: src/repos.cc:2074
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "អាទិភាព​ឃ្លាំង '%s' ត្រូវបាន​កំណត់​ទៅ %d ។"
 
-#: src/repos.cc:2081
+#: src/repos.cc:2080
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "ឈ្មោះ​របស់​ឃ្លាំង '%s' ត្រូវ​បានកំណត់​ទៅ '%s' ។"
 
-#: src/repos.cc:2092
+#: src/repos.cc:2091
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "គ្មាន​អ្វី​ត្រូវប្ដូរ​សម្រាប់​ឃ្លាំង '%s' ទេ ។"
 
-#: src/repos.cc:2099
+#: src/repos.cc:2098
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "មិន​ប៉ះពាល់​ឃ្លាំង %s ។"
 
-#: src/repos.cc:2131
+#: src/repos.cc:2130
 msgid "Error reading services:"
 msgstr "កំហុស​ក្នុងការ​អាន​សេវា ៖"
 
-#: src/repos.cc:2220
+#: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "រក​មិនឃើញ​​​សេវា '%s' ដោយ​ឈ្មោះ​ក្លែងក្លាយ​ លេខ ឬ URI របស់​វា ។"
 
-#: src/repos.cc:2223
+#: src/repos.cc:2222
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "ប្រើ '%s' ដើម្បី​ទទួល​បញ្ជី​របស់​សេវា​ដែល​បានកំណត់ ។"
 
-#: src/repos.cc:2465
+#: src/repos.cc:2464
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr "គ្មាន​សេវា​បាន​កំណត់ ។ ប្រើ​ពាក្យ​បញ្ជា '%s' ដើម្បី​បន្ថែម​សេវា​មួយ ឬ​ច្រើន ។"
 
-#: src/repos.cc:2548
+#: src/repos.cc:2547
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr "មាន​សេវា​ដែល​​មាន​ឈ្មោះ​ក្លែងក្លាយ '%s' រួច​ហើយ ។ សូម​ប្រើ​ឈ្មោះ​ក្លែង​ក្លាយ​ផ្សេង ។"
 
-#: src/repos.cc:2555
+#: src/repos.cc:2554
 #, c-format, boost-format
 msgid "Error occured while adding service '%s'."
 msgstr "កំហុស​បានកើត​ឡើង​ខណៈពេល​បន្ថែម​សេវា '%s' ។"
 
-#: src/repos.cc:2561
+#: src/repos.cc:2560
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "សេវា '%s' ត្រូវ​បាន​បន្ថែម​ដោយ​ជោគជ័យ ។"
 
-#: src/repos.cc:2599
+#: src/repos.cc:2598
 #, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "យក​សេវា '%s' ចេញ ៖"
 
-#: src/repos.cc:2602
+#: src/repos.cc:2601
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "សេវា '%s' ត្រូវ​បាន​យក​ចេញ ។"
 
-#: src/repos.cc:2616
+#: src/repos.cc:2615
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "ធ្វើ​ឲ្យសេវា '%s' ស្រស់ ​។"
 
-#: src/repos.cc:2631 src/repos.cc:2641
+#: src/repos.cc:2630 src/repos.cc:2640
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​លិបិក្រម​ឃ្លាំង​សម្រាប់​សេវា '%s' ៖"
 
-#: src/repos.cc:2633 src/repos.cc:2741 src/repos.cc:2799
+#: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "រំលង​សេវា '%s' ដោយ​សារ​តែ​កំហុស​ខាង​លើ ។"
 
-#: src/repos.cc:2643
+#: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
 msgstr "ពិនិត្យមើលថាតើ​ URI ត្រឹមត្រូវ​ និង​​អាច​ចូល​ដំណើរការ ។"
 
-#: src/repos.cc:2700
+#: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "រំលង​សេវា​ដែល​បាន​បិទ '%s'"
 
-#: src/repos.cc:2752
+#: src/repos.cc:2751
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr "ប្រើ​ពាក្យ​បញ្ជា '%s' ឬ '%s' ដើម្បី​បន្ថែម ឬ​បើក​សេវា ។"
 
-#: src/repos.cc:2755
+#: src/repos.cc:2754
 msgid "Specified services are not enabled or defined."
 msgstr "សេវា​ដែល​បាន​បញ្ជាក់​មិន​ត្រូវ​បាន​បើក ឬ​កំណត់​ទេ ។"
 
-#: src/repos.cc:2757
+#: src/repos.cc:2756
 msgid "There are no enabled services defined."
 msgstr "មិនមាន​សេវា​​ដែល​បានបើក​ត្រូវ​បាន​កំណត់​ទេ ។"
 
-#: src/repos.cc:2761
+#: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
 msgstr "មិន​អាច​ធ្វើ​ឲ្យ​សេវា​ស្រស់​បាន​ទេ ដោយ​សារ​តែ​មានកំហុស ។"
 
-#: src/repos.cc:2767
+#: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "សេវា​មួយ​ចំនួន​មិន​ត្រូវ​បាន​ធ្វើ​ឲ្យស្រស់​​ទេ ដោយ​សារ​តែ​មានកំហុស ។"
 
-#: src/repos.cc:2772
+#: src/repos.cc:2771
 msgid "Specified services have been refreshed."
 msgstr "សេវា​ដែល​បាន​បញ្ជាក់​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ស្រស់ ។"
 
-#: src/repos.cc:2774
+#: src/repos.cc:2773
 msgid "All services have been refreshed."
 msgstr "សេវា​ទាំងអស់​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ស្រស់ ។"
 
-#: src/repos.cc:2921
+#: src/repos.cc:2920
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "សេវា '%s' ត្រូវ​បាន​​បើក​ដោយ​ជោគជ័យ ។"
 
-#: src/repos.cc:2923
+#: src/repos.cc:2922
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "សេវា '%s' ត្រូវ​បានបិទ​ដោយជោគជ័យ ។"
 
-#: src/repos.cc:2929
+#: src/repos.cc:2928
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "ការ​ធ្វើ​​ឲ្យ​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ​ត្រូវ​បាន​បើក​សម្រាប់សេវា '%s' ។"
 
-#: src/repos.cc:2931
+#: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "ការ​ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ​ត្រូវ​បានបិទ​សម្រាប់​សេវា '%s' ។"
 
-#: src/repos.cc:2936
+#: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "ឈ្មោះ​សេវា '%s' ត្រូវ​បាន​កំណត់​ទៅ '%s' ។"
 
-#: src/repos.cc:2941
+#: src/repos.cc:2940
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
 msgstr[0] "ឃ្លាំង '%s' ត្រូវ​បាន​បន្ថែម​ដើម្បី​​ទៅឃ្លាំង​ដែល​បានបើក​​របស់​សេវា '%s'"
 
-#: src/repos.cc:2948
+#: src/repos.cc:2947
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] "ឃ្លាំង '%s' ត្រូវ​បាន​បន្ថែម​ទៅ​ឃ្លាំង​ដែល​បានបិទ​របស់សេវា '%s'"
 
-#: src/repos.cc:2955
+#: src/repos.cc:2954
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -2417,7 +2412,7 @@ msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] "ឃ្លាំង '%s' ត្រូវ​បាន​យក​ចេញ​ពី​ឃ្លាំង​ដែល​បាន​បើក​របស់​សេវា '%s'"
 
-#: src/repos.cc:2962
+#: src/repos.cc:2961
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -2426,50 +2421,50 @@ msgid_plural ""
 "'%s'"
 msgstr[0] "ឃ្លាំង '%s' ត្រូវ​បានយកចេញ​ពី​ឃ្លាំង​ដែល​បានបិទ​របស់​សេវា '%s'"
 
-#: src/repos.cc:2971
+#: src/repos.cc:2970
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "គ្មាន​អ្វី​ត្រូវ​ផ្លាស់ប្ដូរ​សម្រាប់សេវា '%s' ទេ ។"
 
-#: src/repos.cc:2977
+#: src/repos.cc:2976
 msgid "Error while modifying the service:"
 msgstr "កំហុស​ខណៈពេល​កែប្រែ​សេវា ៖"
 
-#: src/repos.cc:2978
+#: src/repos.cc:2977
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "មិន​ផ្លាស់ប្ដូរ​​សេវា %s ។"
 
-#: src/repos.cc:3082
+#: src/repos.cc:3081
 msgid "Loading repository data..."
 msgstr "កំពុង​ទុក​ទិន្នន័យ​ឃ្លាំង..."
 
-#: src/repos.cc:3102
+#: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "កំពុង​ទៅ​យក​ទិន្នន័យ​ឃ្លាំង '%s'..."
 
-#: src/repos.cc:3108
+#: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "ឃ្លាំង '%s' មិនបាន​ដាក់​ជា​ឃ្លាំង​សម្ងាត់ ។ កំពុង​ដាក់​ជា​ឃ្លាំង​សម្ងាត់..."
 
-#: src/repos.cc:3114 src/repos.cc:3148
+#: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "បញ្ហា​ក្នុង​កា​រផ្ទុក​ទិន្នន័យ​ពី '%s'"
 
-#: src/repos.cc:3118
+#: src/repos.cc:3117
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "ឃ្លាំង​ '%s' មិន​អាច​ត្រូវ​ធ្វើ​ឲ្យ​ស្រស់​បានទេ ។ ប្រើ​ឃ្លាំង​សម្ងាត់​ចាស់ៗ ។"
 
-#: src/repos.cc:3122 src/repos.cc:3151
+#: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "អ្វី​ដែលអាច​ដោះស្រាយ​ពី '%s' មិន​ត្រូវ​បាន​ផ្ទុក​ ដោយ​សារ​តែ​កំហុស ។"
 
-#: src/repos.cc:3139
+#: src/repos.cc:3138
 #, fuzzy, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -2477,16 +2472,16 @@ msgid ""
 msgstr "ឃ្លាំង '%s' គឺ​ហួស​សម័យ ។ គិត​ប្រើ​ម៉ាស៊ីន​បម្រើ​ផ្សេង​ទៅ ។"
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3150
+#: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "សាកល្បង '%s' ឬ '%s' មុនពេល​ធ្វើ​ដូច្នេះ ។"
 
-#: src/repos.cc:3161
+#: src/repos.cc:3160
 msgid "Reading installed packages..."
 msgstr "កំពុង​អាច​កញ្ចប់​ដែល​បាន​ដំឡើង..."
 
-#: src/repos.cc:3170
+#: src/repos.cc:3169
 #, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "មាន​បញ្ហា​នៅពេល​អាន​កញ្ចប់​ដែល​បាន​ដំឡើង ៖"
