@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-23 19:33+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-23 19:34+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -6081,7 +6081,7 @@ msgstr "'%s' não é um nome ou recurso de pacote."
 #: src/misc.cc:132
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Aceitando automaticamente as licenças de %s (%s)."
+msgstr "Aceitando automaticamente a licença de %s (%s)."
 
 #. introduction
 #. translators: the first %s is the name of the package, the second
