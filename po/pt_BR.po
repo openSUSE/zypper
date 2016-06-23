@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-23 19:39+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-23 20:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -6239,7 +6239,7 @@ msgstr[1] "%zu bloqueios foram removidos com sucesso."
 
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
-msgstr "Problema ao remover o bloqueio de pacote:"
+msgstr "Problema ao remover o bloqueio do pacote:"
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
@@ -6268,8 +6268,8 @@ msgid ""
 "recommended to run '%s' after the operation has finished."
 msgstr ""
 "Você escolheu ignorar um problema com o download ou a instalação de um "
-"pacote que pode levar a uma quebra de dependências de outros pacotes. É "
-"recomendado executar '%s' após a operação ser concluída."
+"pacote que pode levar ao rompimento de dependências de outros pacotes. É "
+"recomendado executar '%s' após o término da operação."
 
 #: src/utils/pager.cc:32
 #, c-format, boost-format
@@ -6284,7 +6284,8 @@ msgstr ""
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr "Use a tecla enter ou espaço para rolar o texto por linhas ou páginas."
+msgstr ""
+"Use a tecla Enter ou de espaço para rolar o texto por linhas ou páginas."
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
@@ -6292,7 +6293,8 @@ msgstr "Não é possível inicializar o analisador de arquivo de configuração.
 
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
-msgstr "Erro do Augeas: falha ao ler o arquivo de configuração."
+msgstr ""
+"Erro do Augeas: falha ao especificar arquivo de configuração para carregar."
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
@@ -6323,8 +6325,8 @@ msgid ""
 "%s used together with %s, which contradict each other. This property will be "
 "left unchanged."
 msgstr ""
-"%s utilizado juntamente com %s, que conflita com o outro. Esta propriedade "
-"será mantida inalterada."
+"%s utilizado juntamente com %s, que conflita um com o outro. Esta "
+"propriedade será mantida inalterada."
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:72
@@ -6342,7 +6344,7 @@ msgstr "não"
 #: src/utils/prompt.cc:145 src/utils/prompt.cc:190
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
-msgstr "Tentando novamente em %u segundos..."
+msgstr "Repetindo em %u segundos..."
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -6363,7 +6365,7 @@ msgstr[1] "Selecionar automaticamente '%s' após %u segundos."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
-msgstr "Tentando novamente..."
+msgstr "Repetindo..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
@@ -6376,7 +6378,7 @@ msgid ""
 "option to make zypper use default answers to prompts."
 msgstr ""
 "Se você executar o zypper sem um terminal, use a opção global\n"
-"'%s' para fazer o zypper usar as respostas padrões nos prompts."
+"'%s' para fazer o zypper usar as respostas padrão nos prompts."
 
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
@@ -6479,7 +6481,7 @@ msgstr "Correção"
 
 #: src/utils/misc.cc:367
 msgid "Specified local path does not exist or is not accessible."
-msgstr "O caminho local especificado não existe ou não está acessível."
+msgstr "O caminho local especificado não existe ou não é acessível."
 
 #: src/utils/misc.cc:379
 msgid "Given URI is invalid"
@@ -6538,7 +6540,7 @@ msgstr "Modos de download disponíveis: %s"
 #: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
-msgstr "A opção '%s' substitui '%s'."
+msgstr "A opção '%s' anula '%s'."
 
 #~ msgid "Name: "
 #~ msgstr "Nome: "
