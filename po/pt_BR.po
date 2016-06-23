@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-23 19:31+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-23 19:33+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -6055,7 +6055,7 @@ msgstr "Erro ao baixar o pacote '%s'."
 #: src/download.cc:204
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
-msgstr "Pacote não baixado '%s'."
+msgstr "Não baixando o pacote '%s'."
 
 #: src/PackageArgs.cc:204
 #, c-format, boost-format
