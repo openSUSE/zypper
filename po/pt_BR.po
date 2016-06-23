@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-23 15:50+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-23 15:55+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -5330,7 +5330,7 @@ msgstr "Problema ao ler o cabeçalho RPM do %s. É um arquivo RPM?"
 
 #: src/Zypper.cc:4028
 msgid "Plain RPM files cache"
-msgstr "Cache de arquivos RPM planos"
+msgstr "Cache de arquivos RPM simples"
 
 #: src/Zypper.cc:4045
 msgid "No valid arguments specified."
@@ -5341,8 +5341,8 @@ msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr ""
-"Nenhum repositório foi definido. Operando somente com os resolvíveis "
-"instalados. Nada pode ser instalado."
+"Nenhum repositório definido. Operando somente com os resolvíveis instalados. "
+"Nada pode ser instalado."
 
 #. translators: meaning --capability contradicts --force/--name
 #: src/Zypper.cc:4099 src/Zypper.cc:4658
@@ -5368,7 +5368,7 @@ msgstr "O modo está definido para 'match-exact' (correspondência exata)"
 #: src/Zypper.cc:4922 src/Zypper.cc:4962
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
-msgstr "Tipo de pacote desconhecido '%s'."
+msgstr "Tipo de pacote '%s' desconhecido."
 
 #: src/Zypper.cc:4273
 #, c-format, boost-format
@@ -5386,7 +5386,7 @@ msgstr "Ocorreu um problema ao inicializar ou executar a pesquisa"
 
 #: src/Zypper.cc:4439
 msgid "See the above message for a hint."
-msgstr "Veja a mensagem acima para uma dica."
+msgstr "Veja a mensagem acima para obter uma dica."
 
 #: src/Zypper.cc:4596 src/Zypper.cc:4644
 #, c-format, boost-format
