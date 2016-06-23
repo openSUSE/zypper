@@ -1750,9 +1750,8 @@ void add_repo_from_file( Zypper & zypper,
   {
     ZYPP_CAUGHT( e );
     zypper.out().error( e, _("Problem parsing the file at the specified URI") + std::string(":"),
-			// TranslatorExplanation don't translate the URI if the URI itself is not translated.
-			// Also don't translate the '.repo' string.
-			_("Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details.") );
+			// TranslatorExplanation Don't translate the '.repo' string.
+			_("Is it a .repo file?") );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
     return;
   }
