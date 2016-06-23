@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-23 18:57+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-23 19:10+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -787,7 +787,7 @@ msgstr "Subcomandos do zypper disponíveis de qualquer lugar em seu $PATH"
 #: src/subcommand.cc:428
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
-msgstr "Digite '%1%' para obter ajuda específica do subcomando, se disponível."
+msgstr "Digite '%1%' para ajuda específica do subcomando, se disponível."
 
 #. translators: %1% - command name
 #: src/subcommand.cc:451
@@ -1900,7 +1900,7 @@ msgstr "Problema ao baixar os arquivos de '%s'."
 #: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 msgid "Please see the above error message for a hint."
-msgstr "Veja a mensagem de erro acima para obter uma dica."
+msgstr "Veja a mensagem de erro acima para uma dica."
 
 #: src/repos.cc:308
 #, c-format, boost-format
@@ -1979,7 +1979,7 @@ msgstr "O repositório '%s' não foi encontrado pelo apelido, número ou URI."
 #: src/repos.cc:612
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr "Use '%s' para obter a lista dos repositórios definidos."
+msgstr "Use '%s' para a lista dos repositórios definidos."
 
 #: src/repos.cc:633
 #, c-format, boost-format
@@ -2459,7 +2459,7 @@ msgstr "O serviço '%s' não foi encontrado pelo apelido, número ou URI."
 #: src/repos.cc:2222
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
-msgstr "Use '%s' para obter a lista dos serviços definidos."
+msgstr "Use '%s' para a lista dos serviços definidos."
 
 #: src/repos.cc:2464
 #, c-format, boost-format
@@ -2476,7 +2476,7 @@ msgstr "Um serviço chamado '%s' já existe. Escolha outro apelido."
 #: src/repos.cc:2554
 #, c-format, boost-format
 msgid "Error occured while adding service '%s'."
-msgstr "Ocorreu um erro ao adicionar o serviço '%s'."
+msgstr "Erro ao adicionar o serviço '%s'."
 
 #: src/repos.cc:2560
 #, c-format, boost-format
@@ -3218,7 +3218,7 @@ msgstr "Digite '%s' para exibir uma lista com as opções e comandos globais."
 #: src/Zypper.cc:596
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Digite '%s' para obter ajuda específica sobre o comando."
+msgstr "Digite '%s' para ajuda específica sobre o comando."
 
 #: src/Zypper.cc:771
 #, c-format, boost-format
@@ -3330,7 +3330,7 @@ msgstr "O comando '%s' foi substituído por '%s'."
 #: src/Zypper.cc:1314
 #, c-format, boost-format
 msgid "See '%s' for all available options."
-msgstr "Veja '%s' para todas as opções disponíveis."
+msgstr "Consulte '%s' para todas as opções disponíveis."
 
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
@@ -5173,8 +5173,7 @@ msgstr "'%s' não é um tipo de serviço válido."
 #: src/Zypper.cc:3425
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr ""
-"Consulte '%s' ou '%s' para obter uma lista de tipos de serviço conhecidos."
+msgstr "Consulte '%s' ou '%s' para uma lista de tipos de serviço conhecidos."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -5218,8 +5217,7 @@ msgstr "O tipo especificado não é um tipo de repositório válido:"
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
-"Consulte '%s' ou '%s' para obter uma lista de tipos de repositórios "
-"conhecidos."
+"Consulte '%s' ou '%s' para uma lista de tipos de repositórios conhecidos."
 
 #: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
@@ -5382,11 +5380,11 @@ msgstr "Nenhum item correspondente encontrado."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Ocorreu um problema ao inicializar ou executar a pesquisa"
+msgstr "Problema ao inicializar ou executar a pesquisa"
 
 #: src/Zypper.cc:4439
 msgid "See the above message for a hint."
-msgstr "Veja a mensagem acima para obter uma dica."
+msgstr "Veja a mensagem acima para uma dica."
 
 #: src/Zypper.cc:4596 src/Zypper.cc:4644
 #, c-format, boost-format
@@ -5909,15 +5907,15 @@ msgstr "Pacotes instalados:"
 
 #: src/source-download.cc:288
 msgid "Required source packages:"
-msgstr "Pacotes fonte requeridos:"
+msgstr "Pacotes fonte necessários:"
 
 #: src/source-download.cc:297
 msgid "Required source packages available in download directory:"
-msgstr "Pacotes fonte requeridos disponíveis no diretório de download:"
+msgstr "Pacotes fonte necessários disponíveis no diretório de download:"
 
 #: src/source-download.cc:301
 msgid "Required source packages to be downloaded:"
-msgstr "Pacotes fonte requeridos a serem baixados:"
+msgstr "Pacotes fonte necessários a serem baixados:"
 
 #: src/source-download.cc:305
 msgid "Superfluous source packages in download directory:"
@@ -5936,7 +5934,7 @@ msgstr "Pacote instalado"
 msgid "Use '--verbose' option for a full list of required source packages."
 msgstr ""
 "Use a opção '--verbose' para uma lista completa dos pacotes fontes "
-"requeridos."
+"necessários."
 
 #: src/source-download.cc:379
 msgid "Deleting superfluous source packages"
@@ -5953,7 +5951,7 @@ msgstr "Nenhum pacote fonte supérfluo a remover."
 
 #: src/source-download.cc:411
 msgid "Downloading required source packages..."
-msgstr "Baixando os pacotes fontes requeridos..."
+msgstr "Baixando os pacotes fontes necessários..."
 
 #: src/source-download.cc:430
 #, c-format, boost-format
@@ -6017,7 +6015,7 @@ msgstr "concluído"
 #: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
 #: src/output/OutNormal.cc:321
 msgid "Retrieving:"
-msgstr "Obtendo:"
+msgstr "Baixando:"
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/output/OutNormal.cc:256
@@ -6212,7 +6210,7 @@ msgstr "Não há bloqueios de pacote definidos."
 
 #: src/locks.cc:166
 msgid "Error reading the locks file:"
-msgstr "Ocorreu um erro ao ler o arquivo de bloqueios:"
+msgstr "Erro ao ler o arquivo de bloqueios:"
 
 #: src/locks.cc:226
 msgid "Specified lock has been successfully added."
@@ -6251,8 +6249,7 @@ msgstr "Registre um relatório de bugs sobre isto."
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr ""
-"Veja http://en.opensuse.org/Zypper/Troubleshooting para obter instruções."
+msgstr "Consulte http://en.opensuse.org/Zypper/Troubleshooting para instruções."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
@@ -6522,7 +6519,7 @@ msgstr "Talvez você esteja ficando sem espaço no disco."
 
 #: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
-msgstr "Problema ao obter o arquivo RPM especificado"
+msgstr "Problema ao baixar o arquivo RPM especificado"
 
 #: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
