@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-23 18:43+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-06-23 18:46+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -5714,25 +5714,25 @@ msgstr ""
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:654
 msgid "Toggle display of package versions."
-msgstr "Alternar a exibição de versões de pacotes."
+msgstr "Alternar exibição de versões de pacotes."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:656
 msgid "Toggle display of package architectures."
-msgstr "Alternar a exibição de arquiteturas de pacotes."
+msgstr "Alternar exibição de arquiteturas de pacotes."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: src/solve-commit.cc:658
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
-"Alternar a exibição dos repositórios a partir dos quais os pacotes serão "
+"Alternar exibição dos repositórios a partir dos quais os pacotes serão "
 "instalados."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:660
 msgid "Toggle display of package vendor names."
-msgstr "Alternar a exibição do nome do distribuidor do pacote."
+msgstr "Alternar exibição dos nomes dos fornecedores de pacotes."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:662
