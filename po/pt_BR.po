@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-22 22:52+0000\n"
+"PO-Revision-Date: 2016-06-23 12:46+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
-"Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
-"zypper/master/pt_BR/>\n"
+"Language-Team: Portuguese (Brazil) "
+"<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5202,7 +5202,7 @@ msgstr "Poucos argumentos."
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Se somente um argumento for usado ele deve ser um URI apontando para um "
+"Se apenas um argumento for usado, ele deverá ser um URI apontando para um "
 "arquivo .repo."
 
 #: src/Zypper.cc:3617
@@ -5218,7 +5218,8 @@ msgstr "O tipo especificado não é um tipo de repositório válido:"
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
-"Veja '%s' ou '%s' para obter uma lista de tipos de repositórios conhecidos."
+"Consulte '%s' ou '%s' para obter uma lista de tipos de repositórios "
+"conhecidos."
 
 #: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
@@ -5261,12 +5262,12 @@ msgstr ""
 #: src/Zypper.cc:3852
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
-msgstr "A opção global %s não tem efeito aqui."
+msgstr "A opção global '%s' não tem efeito aqui."
 
 #: src/Zypper.cc:3860
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr "Os argumentos não são permitidos se '%s' for utilizado."
+msgstr "Argumentos não serão permitidos se '%s' for utilizado."
 
 #: src/Zypper.cc:3884
 msgid "Root privileges are required for cleaning local caches."
@@ -5285,7 +5286,7 @@ msgstr ""
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/Zypper.cc:3924
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "Ignorando os argumentos, marcando o repositório inteiro."
+msgstr "Ignorando argumentos, marcando o repositório inteiro."
 
 #: src/Zypper.cc:3935
 #, c-format, boost-format
