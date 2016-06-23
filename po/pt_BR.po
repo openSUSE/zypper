@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-23 18:46+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-23 18:53+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -5743,7 +5743,7 @@ msgstr ""
 #. translators: help text for 'g' option in the 'Continue?' prompt
 #: src/solve-commit.cc:664
 msgid "View the summary in pager."
-msgstr "Visualizar o resumo no paginador."
+msgstr "Ver o resumo no paginador."
 
 #: src/solve-commit.cc:774
 msgid "committing"
@@ -5755,7 +5755,7 @@ msgstr "(simulação)"
 
 #: src/solve-commit.cc:800 src/solve-commit.cc:833
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Problema ao obter o pacote do repositório:"
+msgstr "Problema ao baixar o pacote do repositório:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
 #: src/solve-commit.cc:830
@@ -5784,11 +5784,11 @@ msgstr ""
 
 #: src/solve-commit.cc:855
 msgid "Problem occured during or after installation or removal of packages:"
-msgstr "Ocorreu um erro durante ou após a instalação ou remoção de pacotes:"
+msgstr "Problema durante ou após a instalação ou remoção de pacotes:"
 
 #: src/solve-commit.cc:863
 msgid "Installation has completed with error."
-msgstr "A instalação foi concluída com erro."
+msgstr "Instalação concluída com erro."
 
 #: src/solve-commit.cc:865
 #, boost-format
