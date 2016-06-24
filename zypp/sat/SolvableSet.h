@@ -30,7 +30,7 @@ namespace zypp
     //
     //	CLASS NAME : SolvableSet
     //
-    /** Solvable set wrapper to allow adding additioanal convenience iterators.
+    /** Solvable set wrapper to allow adding additional convenience iterators.
      */
     class SolvableSet : public SolvIterMixin<SolvableSet,std::unordered_set<Solvable>::const_iterator>
     {
@@ -77,13 +77,21 @@ namespace zypp
         { return _pimpl->end(); }
 
       public:
+	/** Clear the container */
+	void clear()
+	{ get().clear(); }
 
 	/** Insert a Solvable.
 	 * \return \c true if it was actually inserted, or \c false if already present.
-	*/
+	 */
 	template<class TSolv>
 	bool insert( const TSolv & solv_r )
 	{ return get().insert( asSolvable()( solv_r ) ).second; }
+
+	/** Insert a range of Solvables. */
+	template<class TIterator>
+	void insert( TIterator begin_r, TIterator end_r )
+	{ for_( it, begin_r, end_r ) insert( *it ); }
 
       public:
         /** The set. */
