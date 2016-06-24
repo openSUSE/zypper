@@ -299,9 +299,15 @@ public:
   PropertyTable()
   { _table.lineStyle( ::Colon ); }
 
+  static const char * emptyListTag() { return "---"; }
+
 public:
   ///////////////////////////////////////////////////////////////////
   // Key / Value
+  template <class KeyType>
+  PropertyTable & add( const KeyType & key_r )
+  { _table << ( TableRow() << key_r << "" ); return *this; }
+
   template <class KeyType, class ValueType>
   PropertyTable & add( const KeyType & key_r, const ValueType & val_r )
   { _table << ( TableRow() << key_r << val_r ); return *this; }
@@ -311,48 +317,58 @@ public:
   { _table << ( TableRow() << key_r << asYesNo( val_r ) ); return *this; }
 
   ///////////////////////////////////////////////////////////////////
+  // Key / Value in details (e.g. Description:)
+  template <class ValueType>
+  PropertyTable & addDetail( const ValueType & val_r )
+  { last().addDetail( val_r ); return *this; }
+
+  template <class KeyType, class ValueType>
+  PropertyTable & addDetail( const KeyType & key_r, const ValueType & val_r )
+  { _table << ( TableRow() << key_r << "" ).addDetail( val_r ); return *this; }
+
+  ///////////////////////////////////////////////////////////////////
   // Key / Container<Value>
   template <class KeyType, class Iterator_ >
-  PropertyTable & add( const KeyType & key_r, Iterator_ begin_r, Iterator_ end_r )
+  PropertyTable & add( const KeyType & key_r, Iterator_ begin_r, Iterator_ end_r, bool forceDetails_r = false  )
   {
     TableRow r;
     r << key_r;
     if ( begin_r != end_r )
     {
+      unsigned cnt = 1;
       Iterator_ first = begin_r++;
-      if ( begin_r != end_r )
+      if ( begin_r == end_r && ! forceDetails_r )
+	r << *first;				// only one value
+      else
       {
-	unsigned cnt = 1;
-	r.addDetail( *first );	// list in details
+	r.addDetail( *first );			// list all in details
 	while ( begin_r != end_r )
 	{
 	  ++cnt;
 	  r.addDetail( *(begin_r++) );
 	}
-	r << "["+str::numstring(cnt)+"]";		// size as value
+	r << "["+str::numstring(cnt)+"]";	// size as value
       }
-      else
-	r << *first;		// only one value
    }
     else
-      r << "";			// dummy to get the ":"
+    { r << emptyListTag(); }				// dummy to get the ":" if empty
     _table << r;
     return *this;
   }
 
   template <class KeyType, class ContainerType>
-  PropertyTable & lst( const KeyType & key_r, const ContainerType & lst_r )
-  { return add( key_r, lst_r.begin(), lst_r.end() ); }
+  PropertyTable & lst( const KeyType & key_r, const ContainerType & lst_r, bool forceDetails_r = false )
+  { return add( key_r, lst_r.begin(), lst_r.end(), forceDetails_r ); }
 
   template <class KeyType, class ValueType>
-  PropertyTable & add( const KeyType & key_r, const std::set<ValueType> & lst_r )
-  { return lst( key_r, lst_r );  }
+  PropertyTable & add( const KeyType & key_r, const std::set<ValueType> & lst_r, bool forceDetails_r = false  )
+  { return lst( key_r, lst_r, forceDetails_r );  }
   template <class KeyType, class ValueType>
-  PropertyTable & add( const KeyType & key_r, const std::list<ValueType> & lst_r )
-  { return lst( key_r, lst_r );  }
+  PropertyTable & add( const KeyType & key_r, const std::list<ValueType> & lst_r, bool forceDetails_r = false  )
+  { return lst( key_r, lst_r, forceDetails_r );  }
   template <class KeyType, class ValueType>
-  PropertyTable & add( const KeyType & key_r, const std::vector<ValueType> & lst_r )
-  { return lst( key_r, lst_r ); }
+  PropertyTable & add( const KeyType & key_r, const std::vector<ValueType> & lst_r, bool forceDetails_r = false  )
+  { return lst( key_r, lst_r, forceDetails_r ); }
 
   ///////////////////////////////////////////////////////////////////
   // misc
@@ -366,6 +382,15 @@ public:
     }
     return *this;
   }
+
+  TableRow & last()
+  { return _table.rows().back(); }
+
+  std::string & lastKey()
+  { return last().columns()[0]; }
+
+  std::string & lastValue()
+  { return last().columns()[1]; }
 
 public:
   friend std::ostream & operator << ( std::ostream & str, const PropertyTable & obj )
