@@ -191,6 +191,9 @@ namespace zypp
     bool isUnneeded() const
     { return _bitfield.test( UNNEEDED ); }
 
+    bool hasWeak() const
+    { return ! fieldValueIs<WeakField>( NO_WEAK ); }
+
     void resetWeak()
     { return fieldValueAssign<WeakField>( NO_WEAK ); }
 
