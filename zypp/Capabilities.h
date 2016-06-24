@@ -74,6 +74,10 @@ namespace zypp
       /** Iterator pointing behind the last \ref Capability. */
       const_iterator end() const;
 
+  public:
+    /** Return whether \a lhs matches at least one capability in set. */
+    bool matches( const Capability & lhs ) const;
+
     private:
       const sat::detail::IdType * _begin;
   };
@@ -165,6 +169,13 @@ namespace zypp
   inline Capabilities::const_iterator Capabilities::end() const
   { return const_iterator( 0 ); }
 
+  inline bool Capabilities::matches( const Capability & lhs ) const
+  {
+    for ( const Capability & rhs : *this )
+      if ( lhs.matches( rhs ) == CapMatch::yes )
+	return true;
+      return false;
+  }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
