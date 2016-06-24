@@ -176,11 +176,14 @@ public:
   void defaultSortColumn( unsigned byColumn_r )	{ _defaultSortColumn = byColumn_r; }
 
   /** Sort by \ref defaultSortColumn */
-  void sort()					{ sort( _defaultSortColumn ); }
+  void sort()					{ sort( unsigned(_defaultSortColumn ) ); }
 
   /** Sort by \a byColumn_r */
   void sort( unsigned byColumn_r )		{ if ( byColumn_r != Unsorted ) _rows.sort( TableRow::Less( byColumn_r ) ); }
 
+  /** Custom sort */
+  template<class TCompare, typename std::enable_if<!std::is_integral<TCompare>::value>::type* = nullptr>
+  void sort( TCompare && less_r )		{ _rows.sort( std::forward<TCompare>(less_r) ); }
 
   void lineStyle( TableLineStyle st );
   void wrap( int force_break_after = -1 );
