@@ -96,6 +96,22 @@ namespace zypp
       Contents contentsNoSuggests() const
       { return contents( false ); }
 
+    public:
+      struct ContentsSet
+      {
+	Contents req;	///< required content set
+	Contents rec;	///< recommended content set
+	Contents sug;	///< suggested content set
+      };
+      /** Dependency based content set (does not evaluate includes/extends relation).
+       * If \a recursively_r, required and recommended
+       * patterns are recursively expanded.
+       */
+      void contentsSet( ContentsSet & collect_r, bool recursively_r = false ) const;
+      /** \overload Convenience for recursively expanded contentsSet */
+      void fullContentsSet( ContentsSet & collect_r ) const
+      { return contentsSet( collect_r, /*recursively_r*/true ); }
+
     protected:
       friend Ptr make<Self>( const sat::Solvable & solvable_r );
       /** Ctor */

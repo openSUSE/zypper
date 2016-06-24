@@ -296,6 +296,117 @@ namespace zypp
     return result;
   }
 
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  {
+    // Get packages referenced by depKeeper dependency.
+    inline void dependsSetDoCollect( sat::Solvable depKeeper_r, Dep dep_r, Pattern::Contents & set_r )
+    {
+      CapabilitySet caps;
+      addCaps( caps, depKeeper_r, dep_r );
+      sat::WhatProvides prv( caps );
+      for ( ui::Selectable::Ptr sel : prv.selectable() )
+      {
+	const PoolItem & pi( sel->theObj() );
+	if ( pi.isKind<Package>() )
+	  set_r.insert( pi );
+      }
+    }
+
+    // Get packages referenced by depKeeper.
+    inline void dependsSet( sat::Solvable depKeeper_r, Pattern::ContentsSet & collect_r )
+    {
+      dependsSetDoCollect( depKeeper_r, Dep::REQUIRES,	 collect_r.req );
+      dependsSetDoCollect( depKeeper_r, Dep::RECOMMENDS, collect_r.rec ),
+      dependsSetDoCollect( depKeeper_r, Dep::SUGGESTS,	 collect_r.sug );
+    }
+
+    // Whether this is a patterns depkeeper.
+    inline bool isPatternsPackage( sat::Solvable depKeeper_r )
+    {
+      static const Capability indicator( "pattern()" );
+      return depKeeper_r.provides().matches( indicator );
+    }
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
+  void Pattern::contentsSet( ContentsSet & collect_r, bool recursively_r ) const
+  {
+    sat::Solvable depKeeper( autoPackage() );	// (my required) patterns-package
+    if ( ! depKeeper )
+      return;
+
+    // step 2 data
+    std::set<sat::Solvable> recTodo;	// recommended patterns-packages to process
+    std::set<sat::Solvable> allDone;	// patterns-packages already expanded
+    {
+      // step 1: Expand requirements, remember recommends....
+      // step 1 data (scoped to step1)
+      std::set<sat::Solvable> reqTodo;	// required patterns-packages to process
+
+      collect_r.req.insert( depKeeper );// collect the depKeeper
+      reqTodo.insert( depKeeper );	// and expand it...
+
+      while ( ! reqTodo.empty() )
+      {
+	// pop one patterns-package from todo
+	depKeeper = ( *reqTodo.begin() );
+	reqTodo.erase( reqTodo.begin() );
+	allDone.insert( depKeeper );
+
+	// collects stats
+	ContentsSet result;
+	dependsSet( depKeeper, result );
+
+	// evaluate result....
+	for ( sat::Solvable solv : result.req )	// remember unprocessed required patterns-packages...
+	{
+	  if ( collect_r.req.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
+	    reqTodo.insert( solv );
+	}
+	for ( sat::Solvable solv : result.rec )	// remember unprocessed recommended patterns-packages...
+	{
+	  if ( collect_r.rec.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
+	    recTodo.insert( solv );
+	}
+	for ( sat::Solvable solv : result.sug )	// NOTE: We don't expand suggested patterns!
+	{
+	  collect_r.sug.insert( solv );
+	}
+      }
+    }
+    // step 2: All requirements are expanded, now check remaining recommends....
+    while ( ! recTodo.empty() )
+    {
+      // pop one patterns-package from todo
+      depKeeper = ( *recTodo.begin() );
+      recTodo.erase( recTodo.begin() );
+      if ( ! allDone.insert( depKeeper ).second )
+	continue;	// allready expanded (in requires)
+
+      // collects stats
+      ContentsSet result;
+      dependsSet( depKeeper, result );
+
+      // evaluate result....
+      for ( sat::Solvable solv : result.req )	// remember unprocessed required patterns-packages...
+      {
+	// NOTE: Requirements of recommended patterns count as 'recommended'
+	if ( collect_r.rec.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
+	  recTodo.insert( solv );
+      }
+      for ( sat::Solvable solv : result.rec )	// remember unprocessed recommended patterns-packages...
+      {
+	if ( collect_r.rec.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
+	  recTodo.insert( solv );
+      }
+	for ( sat::Solvable solv : result.sug )	// NOTE: We don't expand suggested patterns!
+	{
+	  collect_r.sug.insert( solv );
+	}
+    }
+  }
+
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
