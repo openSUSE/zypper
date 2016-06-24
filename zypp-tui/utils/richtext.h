@@ -18,5 +18,12 @@ inline std::ostream & printRichText( std::ostream & str, std::string text, unsig
   return str::printIndented( str, text, indent_r, width_r );	// even unindented as it also asserts a trailing '/n'
 }
 
+/** Return [Rich]Text optionally indented as string. */
+inline std::string printRichText( std::string text, unsigned indent_r = 0U, unsigned width_r = 0U )
+{
+  str::Str s;
+  printRichText( s.stream(), std::move(text), indent_r, width_r );
+  return s.str();
+}
 #endif
 
