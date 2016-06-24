@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jun 24 12:33:29 CEST 2016 - ma@suse.de
+
+- API enahncements for zypper (FATE#320447)
+- version 16.1.0 (0)
+
+-------------------------------------------------------------------
 Tue Jun 21 11:11:03 CEST 2016 - ma@suse.de
 
 - Filter duplicate resolver solutions (bsc#985674)
