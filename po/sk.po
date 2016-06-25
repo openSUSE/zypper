@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-25 21:26+0100\n"
+"PO-Revision-Date: 2016-06-25 21:32+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -1283,27 +1283,28 @@ msgstr[2] "Nasledujúcich %d odporúčaných šablón bolo automaticky vybranýc
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci odporúčaný produkt bol automaticky vybraný:"
+msgstr[1] "Nasledujúce %d odporúčané produkty boli automaticky vybrané:"
+msgstr[2] "Nasledujúcich %d odporúčaných produktov bolo automaticky vybraných:"
 
 #: src/Summary.cc:850
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nasledujúci odporúčaný zdrojový balík bol automaticky vybraný:"
+msgstr[1] "Nasledujúce %d odporúčané zdrojové balíky boli automaticky vybrané:"
 msgstr[2] ""
+"Nasledujúcich %d odporúčaných zdrojových balíkov bolo automaticky vybraných:"
 
 #: src/Summary.cc:855
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca odporúčaná aplikácia bola automaticky vybraná:"
+msgstr[1] "Nasledujúce %d odporúčané aplikácie boli automaticky vybrané:"
+msgstr[2] "Nasledujúcich %d odporúčaných aplikácií bolo automaticky vybraných:"
 
 #: src/Summary.cc:899
 #, c-format, boost-format
@@ -1314,8 +1315,14 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
 msgstr[0] ""
+"Nasledujúci balík je odporúčaný, ale nebude sa inštalovať (len požadované "
+"balíky budú inštalované):"
 msgstr[1] ""
+"Nasledujúce %d balíky sú odporúčané, ale nebudú sa inštalovať (len "
+"požadované balíky budú inštalované):"
 msgstr[2] ""
+"Nasledujúcich %d balíkov je odporúčaných, ale nebudú sa inštalovať (len "
+"požadované balíky budú inštalované):"
 
 #: src/Summary.cc:911
 #, c-format, boost-format
@@ -1326,8 +1333,14 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
 msgstr[0] ""
+"Nasledujúci balík je odporúčaný, ale nebude sa inštalovať, pretože je "
+"nežiaduci (predtým bol ručne odstránený):"
 msgstr[1] ""
+"Nasledujúce %d balíky sú odporúčané, ale nebudú sa inštalovať, pretože sú "
+"nežiaduce (predtým boli ručne odstránené):"
 msgstr[2] ""
+"Nasledujúcich %d balíkov je odporúčaných, ale nebudú sa inštalovať, pretože "
+"sú nežiaduce (predtým boli ručne odstránené):"
 
 #: src/Summary.cc:921
 #, c-format, boost-format
@@ -1338,44 +1351,50 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgstr[0] ""
+"Nasledujúci balík je odporúčaný, ale nebude sa inštalovať kvôli konfliktom "
+"alebo problémom so závislosťami:"
 msgstr[1] ""
+"Nasledujúce %d balíky sú odporúčané, ale nebudú sa inštalovať kvôli "
+"konfliktom alebo problémom so závislosťami:"
 msgstr[2] ""
+"Nasledujúcich %d balíkov je odporúčaných, ale nebudú sa inštalovať kvôli "
+"konfliktom alebo problémom so závislosťami:"
 
 #: src/Summary.cc:934
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca oprava je odporúčaná, ale nebude sa inštalovať:"
+msgstr[1] "Nasledujúce %d opravy sú odporúčané, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d opráv je odporúčaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:938
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca šablóna je odporúčaná, ale nebude sa inštalovať:"
+msgstr[1] "Nasledujúce %d šablóny sú odporúčané, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d šablón je odporúčaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:942
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci produkt je odporúčaný, ale nebude sa inštalovať:"
+msgstr[1] "Nasledujúce %d produkty sú odporúčané, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d produktov je odporúčaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:946
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca aplikácia je odporúčaná, ale nebude sa inštalovať:"
+msgstr[1] "Nasledujúce %d aplikácie sú odporúčané, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d aplikácií je odporúčaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:986
 #, c-format, boost-format
