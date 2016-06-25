@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-25 21:22+0100\n"
+"PO-Revision-Date: 2016-06-25 21:26+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -1199,84 +1199,84 @@ msgstr[2] "Verzia nasledujúcich %d šablón bude znížená:"
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Verzia nasledujúceho produktu bude znížená:"
+msgstr[1] "Verzia nasledujúcich %d produktov bude znížená:"
+msgstr[2] "Verzia nasledujúcich %d produktov bude znížená:"
 
 #: src/Summary.cc:650
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Verzia nasledujúcej aplikácie bude znížená:"
+msgstr[1] "Verzia nasledujúcich %d aplikácií bude znížená:"
+msgstr[2] "Verzia nasledujúcich %d aplikácií bude znížená:"
 
 #: src/Summary.cc:669
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci balík bude preinštalovaný:"
+msgstr[1] "Nasledujúce %d balíky budú preinštalované:"
+msgstr[2] "Nasledujúcich %d balíkov bude preinštalovaných:"
 
 #: src/Summary.cc:674
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca oprava bude preinštalovaná:"
+msgstr[1] "Nasledujúce %d opravy budú preinštalované:"
+msgstr[2] "Nasledujúcich %d opráv bude preinštalovaných:"
 
 #: src/Summary.cc:679
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca šablóna bude preinštalovaná:"
+msgstr[1] "Nasledujúce %d šablóny budú preinštalované:"
+msgstr[2] "Nasledujúcich %d šablón bude preinštalovaných:"
 
 #: src/Summary.cc:684
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci produkt bude preinštalovaný:"
+msgstr[1] "Nasledujúce %d produkty budú preinštalované:"
+msgstr[2] "Nasledujúcich %d produktov bude preinštalovaných:"
 
 #: src/Summary.cc:696
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca aplikácia bude preinštalovaná:"
+msgstr[1] "Nasledujúce %d aplikácie budú preinštalované:"
+msgstr[2] "Nasledujúcich %d aplikácií bude preinštalovaných:"
 
 #: src/Summary.cc:830
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci odporúčaný balík bol automaticky vybraný:"
+msgstr[1] "Nasledujúce %d odporúčané balíky boli automaticky vybrané:"
+msgstr[2] "Nasledujúcich %d odporúčaných balíkov bolo automaticky vybraných:"
 
 #: src/Summary.cc:835
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca odporúčaná oprava bola automaticky vybraná:"
+msgstr[1] "Nasledujúce %d odporúčané opravy boli automaticky vybrané:"
+msgstr[2] "Nasledujúcich %d odporúčaných opráv bolo automaticky vybraných:"
 
 #: src/Summary.cc:840
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca odporúčaná šablóna bola automaticky vybraná:"
+msgstr[1] "Nasledujúce %d odporúčané šablóny boli automaticky vybrané:"
+msgstr[2] "Nasledujúcich %d odporúčaných šablón bolo automaticky vybraných:"
 
 #: src/Summary.cc:845
 #, c-format, boost-format
