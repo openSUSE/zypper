@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-25 21:32+0100\n"
+"PO-Revision-Date: 2016-06-25 21:35+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -1401,85 +1401,85 @@ msgstr[2] "Nasledujúcich %d aplikácií je odporúčaných, ale nebudú sa inš
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci balík je navrhovaný, ale nebude sa inštalovať:"
+msgstr[1] "Nasledujúce %d balíky sú navrhované, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d balíkov je navrhovaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:991
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca oprava je navrhovaná, ale nebude sa inštalovať:"
+msgstr[1] "Nasledujúce %d opravy sú tiež navrhované, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d opráv je navrhovaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:996
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca šablóna je navrhovaná, ale nebude sa inštalovať:"
+msgstr[1] "Nasledujúce %d šablóny sú navrhované, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d šablón je navrhovaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:1001
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci produkt je navrhovaný, ale nebude sa inštalovať:"
+msgstr[1] "Nasledujúce %d produkty sú navrhované, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d produktov je navrhovaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:1006
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca aplikácia je navrhovaná, ale nebude sa inštalovať:"
+msgstr[1] "Nasledujúce %d aplikácie sú navrhované, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d aplikácií je navrhovaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:1028
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci balík zmení architektúru:"
+msgstr[1] "Nasledujúce %d balíky zmenia architektúru:"
+msgstr[2] "Nasledujúcich %d balíkov zmení architektúru:"
 
 #: src/Summary.cc:1033
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca oprava zmení architektúru:"
+msgstr[1] "Nasledujúce %d opravy zmenia architektúru:"
+msgstr[2] "Nasledujúcich %d opráv zmení architektúru:"
 
 #: src/Summary.cc:1038
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca šablóna zmení architektúru:"
+msgstr[1] "Nasledujúce %d šablóny zmenia architektúru:"
+msgstr[2] "Nasledujúcich %d šablón zmení architektúru:"
 
 #: src/Summary.cc:1043
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci produkt zmení architektúru:"
+msgstr[1] "Nasledujúce %d produkty zmenia architektúru:"
+msgstr[2] "Nasledujúcich %d produktov zmení architektúru:"
 
 #: src/Summary.cc:1048
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca aplikácia zmení architektúru:"
+msgstr[1] "Nasledujúce %d aplikácie zmenia architektúru:"
+msgstr[2] "Nasledujúcich %d aplikácií zmení architektúru:"
 
 #: src/Summary.cc:1070
 #, c-format, boost-format
