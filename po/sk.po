@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-25 21:35+0100\n"
+"PO-Revision-Date: 2016-06-25 21:40+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -1485,49 +1485,49 @@ msgstr[2] "Nasledujúcich %d aplikácií zmení architektúru:"
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci balík zmení dodávateľa:"
+msgstr[1] "Nasledujúce %d balíky zmenia dodávateľa:"
+msgstr[2] "Nasledujúcich %d balíkov zmení dodávateľa:"
 
 #: src/Summary.cc:1075
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca oprava zmení dodávateľa:"
+msgstr[1] "Nasledujúce %d opravy zmenia dodávateľa:"
+msgstr[2] "Nasledujúcich %d opráv zmení dodávateľa:"
 
 #: src/Summary.cc:1080
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca šablóna zmení dodávateľa:"
+msgstr[1] "Nasledujúce %d šablóny zmenia dodávateľa:"
+msgstr[2] "Nasledujúcich %d šablón zmenia dodávateľa:"
 
 #: src/Summary.cc:1085
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci produkt zmení dodávateľa:"
+msgstr[1] "Nasledujúce %d produkty zmenia dodávateľa:"
+msgstr[2] "Nasledujúcich %d produktov zmení dodávateľa:"
 
 #: src/Summary.cc:1090
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca aplikácia zmení dodávateľa:"
+msgstr[1] "Nasledujúce %d aplikácie zmenia dodávateľa:"
+msgstr[2] "Nasledujúcich %d aplikácií zmení dodávateľa:"
 
 #: src/Summary.cc:1110
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci balík nie je podporovaný jeho dodávateľom:"
+msgstr[1] "Nasledujúce %d balíky nie sú podporované ich dodávateľom:"
+msgstr[2] "Nasledujúcich %d balíkov nie je podporovaných ich dodávateľom:"
 
 #: src/Summary.cc:1130
 #, c-format, boost-format
@@ -1536,32 +1536,37 @@ msgid ""
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
 msgstr[0] ""
+"Nasledujúci balík potrebuje pre získanie podpory dodatočnú zákaznícku zmluvu:"
 msgstr[1] ""
+"Nasledujúce %d balíky potrebujú pre získanie podpory dodatočnú zákaznícku "
+"zmluvu:"
 msgstr[2] ""
+"Nasledujúcich %d balíkov potrebuje pre získanie podpory dodatočnú zákaznícku "
+"zmluvu:"
 
 #: src/Summary.cc:1148
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca aktualizácia balíka sa NEBUDE inštalovať:"
+msgstr[1] "Nasledujúce %d aktualizácie balíkov sa NEBUDÚ inštalovať:"
+msgstr[2] "Nasledujúcich %d aktualizácií balíkov sa NEBUDE inštalovať:"
 
 #: src/Summary.cc:1153
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca aktualizácia produktu sa NEBUDE inštalovať:"
+msgstr[1] "Nasledujúce %d aktualizácie produktov sa NEBUDÚ inštalovať:"
+msgstr[2] "Nasledujúcich %d aktualizácií produktov sa NEBUDE inštalovať:"
 
 #: src/Summary.cc:1158
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúca aktualizácia aplikácie sa NEBUDE inštalovať:"
+msgstr[1] "Nasledujúce %d aktualizácie aplikácií sa NEBUDÚ inštalovať:"
+msgstr[2] "Nasledujúcich %d aktualizácií aplikácií sa NEBUDE inštalovať:"
 
 #: src/Summary.cc:1188
 #, c-format, boost-format
