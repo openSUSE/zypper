@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-25 21:45+0100\n"
+"PO-Revision-Date: 2016-06-25 21:56+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -1722,25 +1722,25 @@ msgstr[2] "zmení architektúru"
 #: src/Summary.cc:1365
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "balík zmení architektúru"
+msgstr[1] "balíky zmenia architektúru"
+msgstr[2] "balíkov zmení architektúru"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1376
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "zdrojový balík"
+msgstr[1] "zdrojové balíky"
+msgstr[2] "zdrojových balíkov"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1379
 msgid "source package to install"
 msgid_plural "source packages to install"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "zdrojový balík pre nainštalovanie"
+msgstr[1] "zdrojové balíky pre nainštalovanie"
+msgstr[2] "zdrojových balíkov pre nainštalovanie"
 
 #: src/Summary.cc:1430
 msgid "System reboot required."
@@ -2626,18 +2626,18 @@ msgstr "Názov služby '%s' bol nastavený na '%s'."
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Repozitár '%s' bol pridaný medzi zapnuté repozitáre služby '%s'"
+msgstr[1] "Repozitáre '%s' boli pridané medzi zapnuté repozitáre služby '%s'"
+msgstr[2] "Repozitáre '%s' boli pridané medzi zapnuté repozitáre služby '%s'"
 
 #: src/repos.cc:2947
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Repozitár '%s' bol pridaný medzi vypnuté repozitáre služby '%s'"
+msgstr[1] "Repozitáre '%s' boli pridané medzi vypnuté repozitáre služby '%s'"
+msgstr[2] "Repozitáre '%s' boli pridané medzi vypnuté repozitáre služby '%s'"
 
 #: src/repos.cc:2954
 #, c-format, boost-format
@@ -2646,8 +2646,11 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] ""
+"Repozitár '%s' bol odstránený z množiny zapnutých repozitárov služby '%s'"
 msgstr[1] ""
+"Repozitáre '%s' boli odstránené z množiny zapnutých repozitárov služby '%s'"
 msgstr[2] ""
+"Repozitáre '%s' boli odstránené z množiny zapnutých repozitárov služby '%s'"
 
 #: src/repos.cc:2961
 #, c-format, boost-format
@@ -2657,8 +2660,11 @@ msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
 msgstr[0] ""
+"Repozitár '%s' bol odstránený z množiny vypnutých repozitárov služby '%s'"
 msgstr[1] ""
+"Repozitáre '%s' boli odstránené z množiny vypnutých repozitárov služby '%s'"
 msgstr[2] ""
+"Repozitáre '%s' boli odstránené z množiny vypnutých repozitárov služby '%s'"
 
 #: src/repos.cc:2970
 #, c-format, boost-format
@@ -2808,7 +2814,7 @@ msgstr "Opravy"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "Zamknuté"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -5423,8 +5429,12 @@ msgstr " Riešenie %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
+"Zvoľte horeuvedené riešenie pomocou '1' alebo zvoľte preskočiť, znova alebo "
+"ukončiť"
 msgstr[1] ""
+"Zvoľte riešenie pomocou čísla, alebo zvoľte preskočiť, znova alebo ukončiť"
 msgstr[2] ""
+"Zvoľte riešenie pomocou čísla, alebo zvoľte preskočiť, znova alebo ukončiť"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
@@ -5432,8 +5442,9 @@ msgstr[2] ""
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+"Zvoľte horeuvedené riešenie pomocou '1' alebo zvoľte ukončiť pomocou 'k'"
+msgstr[1] "Zvoľte riešenie pomocou čísla, alebo zvoľte ukončiť"
+msgstr[2] "Zvoľte riešenie pomocou čísla, alebo zvoľte ukončiť"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
