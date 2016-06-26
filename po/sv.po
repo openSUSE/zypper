@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-22 21:25+0000\n"
+"PO-Revision-Date: 2016-06-26 09:40+0000\n"
 "Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1622,8 +1622,8 @@ msgstr[1] "paket att ta bort"
 #: src/Summary.cc:1348
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "för att byta leverantör"
-msgstr[1] "för att byta leverantör"
+msgstr[0] "byter leverantör"
+msgstr[1] "byter leverantör"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1351
@@ -2687,39 +2687,39 @@ msgstr[1] "%d programfixar låsta"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "Inte behövd"
-msgstr[1] "Inte behövd"
+msgstr[0] "%d valfri progamfix"
+msgstr[1] "%d valfria programfixar"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "använd '%1%' för att inkludera med valfria programfixar"
 
 #. translator: stats summary
 #: src/update.cc:315
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] "Inte behövd"
-msgstr[1] "Inte behövd"
+msgstr[0] "%d nödvändig programfix"
+msgstr[1] "%d nödvändiga programfixar"
 
 #. translator: stats summary
 #: src/update.cc:318
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
-msgstr[0] "Säkerhetsuppdateringar"
-msgstr[1] "Säkerhetsuppdateringar"
+msgstr[0] "%d säkerhetsuppdatering"
+msgstr[1] "%d säkerhetsuppdateringar"
 
 #. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
-msgstr ""
+msgstr "Uppdateringsstack"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -2729,7 +2729,7 @@ msgstr "Programfixar"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "Låst"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2738,7 +2738,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "Inkluderade kategorier"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -2746,7 +2746,6 @@ msgstr "Följande programhanteringsuppdateringar installeras först:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr "Följande programhanteringsuppdateringar installeras först:"
 
@@ -2821,10 +2820,15 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"Whether applicable optional patches should be treated as needed or be "
+"excluded.\n"
+"Anger om tillgängliga frivilliga programfixar skall flaggas som nödvändiga "
+"eller uteslutas."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Som standard utesluts frivilliga programfixar."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
@@ -4204,13 +4208,15 @@ msgstr ""
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Lista alla tillgängliga programfixar."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Lista alla tillgängliga programfixar för Bugzilla-frågor."
 
 #: src/Zypper.cc:2303
 msgid ""
@@ -5411,11 +5417,11 @@ msgid "Applying solution %s"
 msgstr "Lösningen %s tillämpas"
 
 #: src/solve-commit.cc:146
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
-msgstr[0] "%s problem:"
-msgstr[1] "%s problem:"
+msgstr[0] "%d problem:"
+msgstr[1] "%d problem:"
 
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
@@ -6248,32 +6254,28 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Ange %s för %s, eller %s för %s om inget annat fungerar."
 
 #: src/utils/misc.cc:113
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "paket"
 msgstr[1] "paket"
 
 #: src/utils/misc.cc:115
-#, fuzzy
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "mönster"
 msgstr[1] "mönster"
 
 #: src/utils/misc.cc:117
-#, fuzzy
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produkt"
-msgstr[1] "produkt"
+msgstr[1] "produkter"
 
 #: src/utils/misc.cc:119
-#, fuzzy
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "programfix"
-msgstr[1] "programfix"
+msgstr[1] "programfixar"
 
 #: src/utils/misc.cc:121
 #, fuzzy
@@ -6285,8 +6287,8 @@ msgstr[1] "paket"
 #: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "applikation"
+msgstr[1] "applikationer"
 
 #. default
 #: src/utils/misc.cc:125
@@ -6304,9 +6306,8 @@ msgstr "oönskad"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
-#, fuzzy
 msgid "optional"
-msgstr "ps [alternativ]"
+msgstr "frivillig"
 
 #. translator: patch status
 #: src/utils/misc.cc:136
