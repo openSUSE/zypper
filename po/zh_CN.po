@@ -603,27 +603,21 @@ msgid ""
 "compatibility information, installation assistance, usage support, on-going "
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
-msgstr ""
-"问题判定，该技术支持设计用于提供兼容性信息、安装辅助、使用帮助、持续维护和基"
-"础甄错。一级支持并不意在修正产品缺陷错误。"
+msgstr "问题判定，该技术支持设计用于提供兼容性信息、安装辅助、使用帮助、持续维护和基础甄错。一级支持并不意在修正产品缺陷错误。"
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
 "Problem isolation, which means technical support designed to duplicate "
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
-msgstr ""
-"问题隔离，该技术支持设计用于重现客户问题、孤立问题领域并提供一级支持不能解决"
-"的问题的解决方案。"
+msgstr "问题隔离，该技术支持设计用于重现客户问题、孤立问题领域并提供一级支持不能解决的问题的解决方案。"
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
 "Problem resolution, which means technical support designed to resolve "
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
-msgstr ""
-"问题解决，该技术支持设计用来解决复杂的问题，通过工程解决二级支持中确认的产品"
-"缺陷。"
+msgstr "问题解决，该技术支持设计用来解决复杂的问题，通过工程解决二级支持中确认的产品缺陷。"
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
