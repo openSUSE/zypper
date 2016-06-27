@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Mon Jun 27 09:34:09 CEST 2016 - ma@suse.de
+
+- info: Take care data are in sync with those printed in patch
+  related tables. (FATE#320447)
+- BuildRequires:  libzypp-devel >= 16.1.0
+- Remove dangling wiki link (bsc#986095)
+- Patch info: render data the same style as other patch related
+  commands do (FATE#320447)
+- man: Mention known limitations when searching with --file-list
+  (bsc#982379)
+- doc: Mention that "zypper mr -n" needs an argument (bsc#984901)
+- changes: add reference to bsc#893833
+- version 1.13.3
+
+-------------------------------------------------------------------
 Sun Jun  5 16:16:31 CEST 2016 - ma@suse.de
 
 - pchk,lp,patch: Do not install optional patches by default
