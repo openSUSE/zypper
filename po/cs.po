@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-31 11:55+0000\n"
+"PO-Revision-Date: 2016-06-27 08:03+0000\n"
 "Last-Translator: Sarah O'Farrell <sarah.ofarrell@vistatec.com>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
@@ -55,7 +55,7 @@ msgstr "Neplatný odkaz na objekt prázdného URL"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
-msgstr "Nelze analyzovat součásti URL."
+msgstr "Nelze analyzovat součásti URL"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
