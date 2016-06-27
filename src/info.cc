@@ -31,16 +31,11 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s );
 void printPatchInfo( Zypper & zypper, const ui::Selectable & s );
 void printPatternInfo( Zypper & zypper, const ui::Selectable & s );
 void printProductInfo( Zypper & zypper, const ui::Selectable & s );
+void printDefaultInfo( Zypper & zypper, const ui::Selectable & s );
 
 ///////////////////////////////////////////////////////////////////
 namespace
 {
-  inline std::string asCliOption( Dep dep_r )
-  { return dep_r.asString(); }
-
-  inline std::string asInfoTag( Dep dep_r )
-  { return dep_r.asUserString(); }
-
   inline const std::vector<Dep> & cliSupportedDepTypes()
   {
     static const std::vector<Dep> _deps = {
@@ -54,35 +49,56 @@ namespace
     return _deps;
   }
 
-  inline void printDepList( const PoolItem & pi_r, Dep dep_r )
+  std::string joinWords( std::string lhs, const std::string & rhs )
   {
-    cout << asInfoTag( dep_r ) << ':' << endl;
-    for ( const auto & cap : pi_r->dep( dep_r ) )
-    { cout << "  " << cap << endl; }
+    if ( ! rhs.empty() )
+    {
+      if ( ! lhs.empty() )
+	lhs += " ";
+      lhs += rhs;
+    }
+    return lhs;
   }
 
-  inline std::ostream & appendWord( std::ostream & str, const std::string & word_r )
+  inline void printCommonData( const PoolItem & pi_r, PropertyTable & tab_r )
   {
-    if ( word_r.empty() )
-      return str;
-    return str << " " << word_r;
+    // translators: property name; short; used like "Name: value"
+    tab_r.add( _("Repository"),		pi_r.repository().asUserString() );
+    // translators: property name; short; used like "Name: value"
+    tab_r.add( _("Name"),		pi_r.name() );
+    // translators: property name; short; used like "Name: value"
+    tab_r.add( _("Version"),		pi_r.edition().asString() );
+    // translators: property name; short; used like "Name: value"
+    tab_r.add( _("Arch"),		pi_r.arch().asString() );
+    // translators: property name; short; used like "Name: value"
+    tab_r.add( _("Vendor"),		pi_r.vendor() );
   }
 
-  inline void printNVA( const PoolItem & pi_r )
+  inline void printSummaryDescDeps( const PoolItem & pi_r, PropertyTable & tab_r )
   {
-    cout << _("Name") << ": " << pi_r.name() << endl;
-    cout << _("Version") << ": " << pi_r.edition().asString() << endl;
-    cout << _("Arch") << ": " << pi_r.arch().asString() << endl;
-    cout << _("Vendor") << ": " << pi_r.vendor() << endl;
-  }
+    // translators: property name; short; used like "Name: value"
+    tab_r.add( _("Summary"),		pi_r.summary() );
+    // translators: property name; short; used like "Name: value"
+    tab_r.addDetail( _("Description"),	::printRichText( pi_r.description() ) );
 
-  inline void printSummaryDesc( const PoolItem & pi_r )
-  {
-    cout << _("Summary") << ": " << pi_r.summary() << endl;
-    cout << _("Description") << ": " << endl;
-    Zypper::instance()->out().printRichText( pi_r.description(), 2/*indented*/ );
-  }
+    // dependencies according to cli options and kind
+    const auto & cOpts( Zypper::instance()->cOpts() );
+    bool isPatch = pi_r.isKind<Patch>();
 
+    for ( const auto & dep : {
+      Dep::PROVIDES,
+      Dep::REQUIRES,
+      Dep::CONFLICTS,
+      Dep::OBSOLETES,
+      Dep::RECOMMENDS,
+      Dep::SUGGESTS
+    } )
+    {
+      if ( ( isPatch && ( dep == Dep::PROVIDES || dep == Dep::CONFLICTS ) )
+	|| ( cOpts.count( dep.asString() ) ) )			// dep.asString - CLI option name
+	tab_r.lst( dep.asUserString(), pi_r.dep( dep ) );	// dep.asUserString - i18n translation
+    }
+  }
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
@@ -182,11 +198,9 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
 
     for_( it, q.selectableBegin(), q.selectableEnd() )
     {
-      // print info
-      // TranslatorExplanation E.g. "Information for package zypper:"
-
       if ( zypper.out().type() != Out::TYPE_XML )
       {
+	// TranslatorExplanation E.g. "Information for package zypper:"
 	std::string info = str::Format(_("Information for %s %s:"))
 				 % kind_to_string_localized( kn._kind, 1 )
 				 % (*it)->name();
@@ -195,20 +209,37 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
 	cout << std::string( mbs_width(info), '-' ) << endl;
       }
 
-
       if ( kn._kind == ResKind::package )	{ printPkgInfo( zypper, *(*it) ); }
       else if ( kn._kind == ResKind::patch )	{ printPatchInfo( zypper, *(*it) ); }
       else if ( kn._kind == ResKind::pattern )	{ printPatternInfo( zypper, *(*it) ); }
       else if ( kn._kind == ResKind::product )	{ printProductInfo( zypper, *(*it) ); }
-      else
-      {
-	// TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-	zypper.out().info( str::Format(_("Info for type '%s' not implemented.")) % kn._kind );
-      }
+      else 					{ printDefaultInfo( zypper, *(*it) ); }
     }
   }
 }
 
+/** Information for kinds which don't have a extra needs... */
+void printDefaultInfo( Zypper & zypper, const ui::Selectable & s )
+{
+  PoolItem installed( s.installedObj() );
+  PoolItem updateCand( s.updateCandidateObj() );
+  // An updateCandidate is always better than any installed object.
+  // If the best version is already installed try to look it up in
+  // the repo it came from, otherwise use the installed one.
+  PoolItem theone( updateCand );
+  if ( !theone )
+  {
+    theone = s.identicalAvailableObj( installed );
+    if ( !theone )
+      theone = installed;
+  }
+
+  PropertyTable p;
+  printCommonData( theone, p );
+
+  printSummaryDescDeps( theone, p );
+  zypper.out().info( str::Str() << p );
+}
 
 /**
  * Print package information.
@@ -244,41 +275,31 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
       theone = installed;
   }
 
-  cout << _("Repository") << ": " << theone.repository().asUserString() << endl;
-
-  printNVA( theone );
+  PropertyTable p;
+  printCommonData( theone, p );
 
   // if running on SUSE Linux Enterprise, report unsupported packages
   if ( runningOnEnterprise() )
-  {
-    Package::constPtr pkg = asKind<Package>(theone.resolvable());
-    cout << _("Support Level") << ": " << asUserString( pkg->vendorSupport() ) << endl;
-  }
+    p.add( _("Support Level"),	asUserString( theone->asKind<Package>()->vendorSupport() ) );
 
-  cout << _("Installed") << ": " << asYesNo( (bool)installed ) << endl;
-
-  cout << _("Status") << ": ";
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Installed Size"),	theone.installSize() );
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Installed"),	bool(installed) );
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Status") );
   if ( installed )
   {
     if ( updateCand )
-    {
-      cout << str::form(_("out-of-date (version %s installed)"), installed.edition().c_str() ) << endl;
-    }
+       p.lastValue() = str::form(_("out-of-date (version %s installed)"), installed.edition().c_str() );
     else
-    {
-      cout << _("up-to-date") << endl;
-    }
+      p.lastValue() = _("up-to-date");
   }
   else
-    cout << _("not installed") << endl;
+      p.lastValue() = _("not installed");
 
-  cout << _("Installed Size") << ": " << theone.installSize() << endl;
-
-  printSummaryDesc( theone );
-
-  // Print dependency lists if CLI requests it
-  for ( const auto & dep : cliSupportedDepTypes() )
-  { if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( theone, dep ); }
+  printSummaryDescDeps( theone, p );
+  zypper.out().info( str::Str() << p );
 }
 
 /**
@@ -305,56 +326,38 @@ Requires:
  */
 void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
 {
-  const PoolItem & pool_item = s.theObj();
-  printNVA( pool_item );
+  PoolItem theone( s.theObj() );
+  Patch::constPtr patch = theone->asKind<Patch>();
 
-  cout << _("Status") << ": " << i18nPatchStatus( pool_item ) << endl;
+  PropertyTable p;
+  printCommonData( theone, p );
 
-  Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());
-  cout << _("Category") << ": " << patchHighlightCategory( *patch ) << endl;
-  cout << _("Severity") << ": " << patchHighlightSeverity( *patch ) << endl;
-  cout << _("Created On") << ": " << patch->timestamp().asString() << endl;
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Status"),		i18nPatchStatus( theone )  );
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Category"),		patchHighlightCategory( *patch ) );
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Severity"),		patchHighlightSeverity( *patch ) );
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Created On"),	patch->timestamp().asString() );
+
 #if 0
-  cout << _("Reboot Required") << ": " << asYesNo( patch->rebootSuggested() ) << endl;
-  cout << _("Package Manager Restart Required") << ": " << asYesNo( patch->restartSuggested() ) << endl;
+  p.add( _("Reboot Required"),	patch->rebootSuggested() );
+  p.add( _("Package Manager Restart Required"),	patch->restartSuggested() );
 
   Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
   if ( zypper.globalOpts().reboot_req_non_interactive )
     ignoreFlags |= Patch::Reboot;
   if ( zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses") )
     ignoreFlags |= Patch::License;
-
-  cout << _("Interactive") << ": " << asYesNo( patch->interactiveWhenIgnoring( ignoreFlags ) ) << endl;
+  p.add( _("Interactive"),	patch->interactiveWhenIgnoring( ignoreFlags ) );
 #else
-  // print interactive flags the same style as list-patches
-  cout << _("Interactive") << ": " << patchInteractiveFlags( *patch )  << endl;
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Interactive"),	patchInteractiveFlags( *patch ) );	// print interactive flags the same style as list-patches
 #endif
-  printSummaryDesc( pool_item );
 
-  // Print dependency lists if CLI requests it
-  for ( const auto & dep : cliSupportedDepTypes() )
-  {
-    switch ( dep.inSwitch() )
-    {
-      case Dep::PROVIDES_e:
-      case Dep::CONFLICTS_e:
-	printDepList( pool_item, dep );	// These dependency lists are always printed
-	break;
-      default:
-	if ( zypper.cOpts().count( asCliOption( dep ) ) )
-	  printDepList( pool_item, dep );
-	break;
-    }
-  }
-}
-
-static std::string string_weak_status( const ResStatus & rs )
-{
-  if ( rs.isRecommended() )
-    return _("Recommended");
-  if ( rs.isSuggested() )
-    return _("Suggested");
-  return "";
+  printSummaryDescDeps( theone, p );
+  zypper.out().info( str::Str() << p );
 }
 
 /**
@@ -377,51 +380,69 @@ This pattern provides a graphical application and a command line tool for keepin
  */
 void printPatternInfo( Zypper & zypper, const ui::Selectable & s )
 {
-  const PoolItem & pool_item = s.theObj();
-  Pattern::constPtr pattern = asKind<Pattern>(pool_item.resolvable());
+  PoolItem theone( s.theObj() );
+  Pattern::constPtr pattern = theone->asKind<Pattern>();
 
-  if ( !pattern )
-    return;
+  PropertyTable p;
+  printCommonData( theone, p );
 
-  cout << _("Repository") << ": " << pool_item.repository().asUserString() << endl;
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Installed"),		s.hasInstalledObj() );
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Visible to User"),		pattern->userVisible() );
 
-  printNVA( pool_item );
+  printSummaryDescDeps( theone, p );
 
-  cout << _("Installed") << ": " << asYesNo( s.hasInstalledObj() ) << endl;
-  cout << _("Visible to User") << ": " << asYesNo( pattern->userVisible() ) << endl;
+  {	// show contents
+    Pattern::ContentsSet collect;
+    pattern->contentsSet( collect );
 
-  printSummaryDesc( pool_item );
+    bool showSuggests = zypper.cOpts().count( "suggests" );
+    if ( collect.req.empty()
+      && collect.rec.empty()
+      && ( !showSuggests || collect.sug.empty() ) )
+    {
+      // translators: property name; short; used like "Name: value"
+      p.addDetail( _("Contents"),	_("(empty)") );
+    }
+    else
+    {
+      Table t;
+      t << ( TableHeader()
+	  /* translators: Table coumn header */	<< _("S")
+	  /* translators: Table coumn header */	<< _("Name")
+	  /* translators: Table coumn header */	<< _("Type")
+	  /* translators: Table coumn header */	<< _("Dependency") );
 
-  // Print dependency lists if CLI requests it
-  for ( const auto & dep : cliSupportedDepTypes() )
-  { if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( pool_item, dep ); }
+      for ( ui::Selectable::Ptr sel : collect.req.selectable() )
+      {
+	const ui::Selectable & s = *sel;
+	t << ( TableRow() << (s.installedEmpty() ? "" : "i") << s.name() << s.kind().asString() << _("Required") );
+      }
+      for ( ui::Selectable::Ptr sel : collect.rec.selectable() )
+      {
+	const ui::Selectable & s = *sel;
+	t << ( TableRow() << (s.installedEmpty() ? "" : "i") << s.name() << s.kind().asString() << _("Recommended") );
+      }
+      if ( showSuggests )
+	for ( ui::Selectable::Ptr sel : collect.sug.selectable() )
+	{
+	  const ui::Selectable & s = *sel;
+	  t << ( TableRow() << (s.installedEmpty() ? "" : "i") << s.name() << s.kind().asString() << _("Suggested") );
+	}
 
-  // show contents
-  Table t;
-  TableHeader th;
-  th << _("S") << _("Name") << _("Type") << _("Dependency");
-  t << th;
+      std::map<std::string, unsigned> depPrio({{_("Required"),0}, {_("Recommended"),1}, {_("Suggested"),2}});
+      t.sort( [&depPrio]( const TableRow & lhs, const TableRow & rhs ) -> bool {
+	if ( lhs.columns()[3] != rhs.columns()[3] )
+	  return depPrio[lhs.columns()[3]] < depPrio[rhs.columns()[3]];
+	return  lhs.columns()[1] < rhs.columns()[1];
+      } );
 
-  Pattern::Contents contents = pattern->contentsNoSuggests();	// (bnc#857671) don't include suggests as we can not deal with them .
-  for_( sit, contents.selectableBegin(), contents.selectableEnd() )
-  {
-    const ui::Selectable & s = **sit;
-    TableRow tr;
-
-    tr << (s.installedEmpty() ? "" : "i");
-    tr << s.name() << s.kind().asString() << string_weak_status(s.theObj().status());
-
-    t << tr;
+      // translators: property name; short; used like "Name: value"
+      p.addDetail( _("Contents"),	str::Str() << t );
+    }
   }
-
-  cout << _("Contents") << ":";
-  if (t.empty())
-    cout << " " << _("(empty)") << endl;
-  else
-  {
-    t.sort( 1 );
-    cout << endl << endl << t;
-  }
+  zypper.out().info( str::Str() << p );
 }
 
 /**
@@ -444,94 +465,107 @@ Description:
  */
 void printProductInfo( Zypper & zypper, const ui::Selectable & s )
 {
-  const PoolItem & pool_item = s.theObj(); // should be the only one
-
   if ( zypper.out().type() == Out::TYPE_XML )
   {
-    Product::constPtr pp = asKind<Product>(pool_item.resolvable());
-    cout
-      << asXML( *pp, pool_item.status().isInstalled() )
-      << endl;
+    PoolItem theone( s.theObj() );
+    Product::constPtr product = theone->asKind<Product>();
+    cout << asXML( *product, theone.status().isInstalled() ) << endl;
+    return;
   }
-  else
+
+  PoolItem installed( s.installedObj() );
+  PoolItem updateCand( s.updateCandidateObj() );
+  // An updateCandidate is always better than any installed object.
+  // If the best version is already installed try to look it up in
+  // the repo it came from, otherwise use the installed one.
+  PoolItem theone( updateCand );
+  if ( !theone )
   {
-    cout << _("Repository") << ": " << pool_item.repository().asUserString() << endl;
+    theone = s.identicalAvailableObj( installed );
+    if ( !theone )
+      theone = installed;
+  }
 
-    printNVA( pool_item );
+  PropertyTable p;
+  printCommonData( theone, p );
 
-    PoolItem installed;
-    if ( !s.installedEmpty() )
-      installed = s.installedObj();
+  // Seems to be a feature:
+  // commit#b40f49ae: printProductInfo: if installed, get info from installedObj
+  Product::constPtr product = ( installed ? installed : theone )->asKind<Product>();
 
-    Product::constPtr product;
+  {
+    Date eol( product->endOfLife() );
+    // translators: property name; short; used like "Name: value"
+    p.add( _("End of Support"),		( eol ? eol.printDate() : _("undefined") ) );
+  }
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Flavor"),			joinWords( product->flavor(), product->registerFlavor() ) );
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Is Base"),			bool(product->isTargetDistribution()) );
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Installed"),		bool(installed) );
+  {
+    // translators: property name; short; used like "Name: value"
+    p.add( _("Status") );
     if ( installed )
-      product = asKind<Product>( installed );
-    else
-      product = asKind<Product>( pool_item.resolvable() );
-
-    cout << _("Flavor") << ":";
-    appendWord( cout, product->flavor() );
-    appendWord( cout, product->registerFlavor() );
-    cout << endl;
-
-    cout << _("Short Name") << ": " << product->shortName() << endl;
-
-    cout << _("Installed")  << ": " << asYesNo( (bool)installed ) << endl;
-
-    cout << _("Is Base")   << ": " << asYesNo( product->isTargetDistribution() ) << endl;
-
     {
-      Date eol( product->endOfLife() );
-      cout << _("End of Support") << ": " << ( eol ? eol.printDate() : _("undefined") ) << endl;
-    }
-    {
-      cout << _("CPE Name") << ": ";
-      const CpeId & cpe( product->cpeId() );
-      if ( cpe )
-	cout << cpe << endl;
-      else if ( CpeId::NoThrowType::lastMalformed.empty() )
-	cout <<  _("undefined") << endl;
+      if ( updateCand )
+	p.lastValue() = str::form(_("out-of-date (version %s installed)"), installed.edition().c_str() );
       else
-	cout << ( ColorContext::MSG_ERROR <<  _("invalid CPE Name") << ": " << CpeId::NoThrowType::lastMalformed ) << endl;
+	p.lastValue() = _("up-to-date");
     }
+    else
+      p.lastValue() = _("not installed");
+  }
+  {
+    const std::vector<Repository::ContentIdentifier> & cis( product->updateContentIdentifier() );
+    if ( cis.empty() )
     {
-      cout << _("Update Repositories");
-      const std::vector<Repository::ContentIdentifier> & l( product->updateContentIdentifier() );
-      if ( ! l.empty() )
+      // translators: property name; short; used like "Name: value"
+      p.add( _("Update Repositories"),	PropertyTable::emptyListTag() );
+    }
+    else
+    {
+      std::vector<std::string> lines;
+      std::string prefix( _("Content Id") ); prefix += ": ";
+      std::string indent( prefix.size(), ' ' );
+      for ( const auto & el : cis )
       {
-	cout << ": " << l.size() << endl;
-	unsigned n = 0;
-	for ( const auto & el : l )
+	str::Str str;
+	str << prefix << el;
+	bool found = false;
+	for_( it, sat::Pool::instance().reposBegin(), sat::Pool::instance().reposEnd() )
 	{
-	  cout << "[" << ++n << "] " << _("Content Id")   << ": " << el << endl;
-	  bool found = false;
-	  for_( it, sat::Pool::instance().reposBegin(), sat::Pool::instance().reposEnd() )
+	  if ( (*it).hasContentIdentifier( el ) )
 	  {
-	    if ( (*it).hasContentIdentifier( el ) )
-	    {
-	      found = true;
-	      cout << "    " << _("Provided by enabled repository")   << ": " << (*it).name() << endl;
-
-	    }
-	  }
-	  if ( ! found )
-	  {
-	    cout << ( ColorContext::MSG_WARNING << "    " << _("Not provided by any enabled repository") ) << endl;
+	    found = true;
+	    str << endl << indent << _("Provided by enabled repository")   << ": " << (*it).name();
 	  }
 	}
+	if ( ! found )
+	{
+	  str << endl << indent << ( ColorContext::MSG_WARNING << _("Not provided by any enabled repository") );
+	}
+	lines.push_back( str );
       }
-      else
-	cout << ": " << _("undefined") << endl;
+      // translators: property name; short; used like "Name: value"
+      p.lst( _("Update Repositories"),	lines, /*forceDetails_r*/true );
     }
-
-    printSummaryDesc( pool_item );
-
-    // Print dependency lists if CLI requests it
-    for ( const auto & dep : cliSupportedDepTypes() )
-    { if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( pool_item, dep ); }
   }
-}
+  {
+    // translators: property name; short; used like "Name: value"
+    p.add( _("CPE Name") );
+    const CpeId & cpe( product->cpeId() );
+    if ( cpe )
+      p.lastValue() = cpe.asString();
+    else if ( CpeId::NoThrowType::lastMalformed.empty() )
+      p.lastValue() = _("undefined");
+    else
+      p.lastValue() = ( ColorContext::MSG_ERROR <<  _("invalid CPE Name") << ": " << CpeId::NoThrowType::lastMalformed ).str();
+  }
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Short Name"),		product->shortName() );
 
-// Local Variables:
-// c-basic-offset: 2
-// End:
+  printSummaryDescDeps( theone, p );
+  zypper.out().info( str::Str() << p );
+}
