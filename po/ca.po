@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-03 14:25+0000\n"
+"PO-Revision-Date: 2016-06-29 07:45+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan "
 "<https://l10n.opensuse.org/projects/libzypp/master/ca/>\n"
@@ -84,7 +84,7 @@ msgstr "Té conflicte"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
-msgstr "Obsolets"
+msgstr "Fa obsolet"
 
 #: zypp/Dep.cc:101
 msgid "Recommends"
@@ -100,7 +100,7 @@ msgstr "Millora"
 
 #: zypp/Dep.cc:104
 msgid "Supplements"
-msgstr "Suplements"
+msgstr "Complementa"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -148,7 +148,8 @@ msgstr "La instal·lació s'ha avortat tal com heu indicat."
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
 msgstr ""
-"Perdoneu, però aquesta versió de libzypp va ser construïda sense suport HAL."
+"Perdoneu, però aquesta versió de libzypp va ser construïda sense suport de "
+"HAL."
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
@@ -287,7 +288,7 @@ msgstr "El fitxer no existeix o la signatura no es pot comprovar"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
-msgstr "Es duran a terme aquestes accions:"
+msgstr "Es faran les accions següents:"
 
 #: zypp/RepoManager.cc:297
 #, boost-format
@@ -4979,7 +4980,7 @@ msgstr "Mal nom de fitxer: %s"
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Mitjà no obert quan s'intentava portar a terme l'acció \"%s\"."
+msgstr "Mitjà no obert quan s'intentava fer l'acció \"%s\"."
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
