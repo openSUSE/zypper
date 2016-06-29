@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-06-29 15:42+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgstr[1] ""
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "U accepteert een niet-ondertekend bestand '%s'."
+msgstr "Niet-ondertekend bestand '%s' accepteren."
 
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
