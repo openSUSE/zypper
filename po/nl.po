@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-21 13:40+0000\n"
+"PO-Revision-Date: 2016-06-29 15:24+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
@@ -319,7 +319,7 @@ msgstr ""
 
 #: zypp/RepoManager.cc:349
 msgid "Service alias cannot start with dot."
-msgstr "De alias van een service mag niet beginnen met een punt (.)."
+msgstr "De alias van een service mag niet met een punt (.) beginnen."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
@@ -393,7 +393,7 @@ msgstr "Onbekend fout bij lezen van '%s'"
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "Bron '%s' wordt toegevoegd"
+msgstr "Installatiebron '%s' wordt toegevoegd"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
@@ -404,7 +404,7 @@ msgstr "Ongeldige naam van installatiebronbestand bij '%s'"
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Bron '%s' wordt verwijderd"
+msgstr "Installatiebron '%s' wordt verwijderd"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
@@ -620,8 +620,8 @@ msgid ""
 msgstr ""
 "Probleem bepaling, wat technische ondersteuning betekent dat ontworpen is "
 "voor het leveren van informatie over compatibiliteit, hulp bij installatie, "
-"ondersteuning bij gebruik, voortdurend onderhoud en basis foutzoeken. Niveau "
-"1 ondersteuning is niet bedoeld om fouten in producten te verbeteren."
+"ondersteuning bij gebruik, voortdurend onderhoud en basis van foutzoeken. "
+"Niveau 1 ondersteuning is niet bedoeld om fouten in producten te verbeteren."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
