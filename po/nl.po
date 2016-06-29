@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-29 15:24+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-29 15:33+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -79,7 +79,7 @@ msgstr "Levert"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
-msgstr "Vereist vooraf"
+msgstr "Vereisten"
 
 #: zypp/Dep.cc:98
 msgid "Requires"
@@ -91,11 +91,11 @@ msgstr "In conflict met"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
-msgstr "Maakt verouderd"
+msgstr "Verouderde onderdelen"
 
 #: zypp/Dep.cc:101
 msgid "Recommends"
-msgstr "Adviseert"
+msgstr "Beveelt aan"
 
 #: zypp/Dep.cc:102
 msgid "Suggests"
@@ -107,7 +107,7 @@ msgstr "Verbetert"
 
 #: zypp/Dep.cc:104
 msgid "Supplements"
-msgstr "Voegt toe"
+msgstr "Vult aan"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -218,8 +218,8 @@ msgstr "Configuratiebestanden gewijzigd voor %s:"
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
-"rpm sloeg %s op als %s, maar het was niet mogelijk om het verschil te "
-"achterhalen"
+"rpm heeft %s opgeslagen als %s, maar het was niet mogelijk om het verschil "
+"te bepalen"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2026
