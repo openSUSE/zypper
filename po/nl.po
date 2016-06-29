@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-21 11:47+0000\n"
+"PO-Revision-Date: 2016-06-29 15:42+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -48,7 +48,7 @@ msgstr "Rpm-naam:"
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "Het bestand met de gpg ondertekeningssleutel '%1%' is verlopen."
+msgstr "Het bestand met de GPG-ondertekeningssleutel '%1%' is verlopen."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
