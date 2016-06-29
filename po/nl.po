@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-29 15:33+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-29 15:36+0000\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -335,8 +335,7 @@ msgstr "Kan bestand '%s' niet openen voor schrijven."
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
-"Onbekende service '%1%': Verweesde installatiebronservice '%2%' aan het "
-"verwijderen"
+"Onbekende service '%1%': Verweesde installatiebron '%2%' aan het verwijderen"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
