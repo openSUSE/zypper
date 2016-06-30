@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 06:43+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 07:25+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -430,28 +430,28 @@ msgstr "このURLに対して、クエリ文字列解析はサポートされて
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
-msgstr "Urlスキームは必須のコンポーネントです"
+msgstr "URLスキームは必須のコンポーネントです"
 
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr "無効な URL スキーム '%s'"
+msgstr "無効なURLスキーム '%s'"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
-msgstr "URL スキームではユーザ名を指定することは許されていません"
+msgstr "URLスキームではユーザ名を指定することは許されていません"
 
 #: zypp/url/UrlBase.cc:983
 msgid "Url scheme does not allow a password"
-msgstr "URL スキームではパスワードを指定することは許されていません"
+msgstr "URLスキームではパスワードを指定することは許されていません"
 
 #: zypp/url/UrlBase.cc:1012
 msgid "Url scheme requires a host component"
-msgstr "URL スキームにはホスト部分が必要です"
+msgstr "URLスキームにはホスト部分が必要です"
 
 #: zypp/url/UrlBase.cc:1022
 msgid "Url scheme does not allow a host component"
-msgstr "URL スキームではホスト部分を指定することは許されていません"
+msgstr "URLスキームではホスト部分を指定することは許されていません"
 
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
@@ -460,7 +460,7 @@ msgstr "無効なホスト部分 '%s'"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
-msgstr "URL スキームではポートの指定は許されていません"
+msgstr "URLスキームではポートの指定は許されていません"
 
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
@@ -469,11 +469,11 @@ msgstr "無効なポート部分 '%s'"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
-msgstr "URL スキームにはパス名が必要です"
+msgstr "URLスキームにはパス名が必要です"
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
-msgstr "権限部分が存在する場合相対パスは許可されません。 "
+msgstr "権限部分が存在する場合相対パスは許可されません。"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
