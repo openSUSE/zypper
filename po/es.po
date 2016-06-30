@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 18:32+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 18:37+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -4631,32 +4631,32 @@ msgstr "No es posible escribir el archivo %s."
 
 #: zypp/media/MediaException.cc:72
 msgid "Medium not attached"
-msgstr "Medio no insertado"
+msgstr "Medio no conectado"
 
 #: zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr "Punto de inserción de medio incorrecto"
+msgstr "Punto de conexión de medio incorrecto"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "La inicialización de la descarga (curl) ha fallado para '%s'"
+msgstr "Error de inicio de descarga (curl) para %s"
 
 #: zypp/media/MediaException.cc:91
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr "Excepción del sistema '%s' en el medio '%s'."
+msgstr "Excepción de sistema %s en el medio %s."
 
 #: zypp/media/MediaException.cc:98
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr "La ruta '%s' en el medio '%s' no es un archivo."
+msgstr "La vía %s del medio %s no es un archivo."
 
 #: zypp/media/MediaException.cc:106
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "La ruta '%s' en el medio '%s' no es un directorio."
+msgstr "La vía %s del medio %s no es un directorio."
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
@@ -4677,11 +4677,11 @@ msgstr "Destino vacío en URI"
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "Esquema de URL no soportado en '%s'."
+msgstr "Esquema de URI no admitido en %s."
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
-msgstr "Operación no admitida por el medio"
+msgstr "El medio no admite la operación"
 
 #: zypp/media/MediaException.cc:152
 #, c-format, boost-format
@@ -4690,7 +4690,7 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"Error en la descarga (curl) de '%s':\n"
+"Error de descarga (curl) para %s:\n"
 "Código de error: %s\n"
 "Mensaje de error: %s\n"
 
@@ -4698,19 +4698,17 @@ msgstr ""
 #: zypp/media/MediaException.cc:161
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
-"Se ha producido un error al establecer las opciones de descarga (curl) para "
-"'%s':"
+msgstr "Error al definir las opciones de descarga (curl) para %s:"
 
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "El medio fuente '%s' no contiene el medio deseado"
+msgstr "El origen de medios %s no incluye el medio deseado"
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "El medio '%s' está en uso por otra instancia"
+msgstr "El medio %s está en uso en otra instancia"
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
@@ -4724,7 +4722,7 @@ msgstr "No es posible expulsar el medio '%s'"
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr "Permiso de acceso a '%s' denegado."
+msgstr "Se ha denegado el permiso para acceder a %s."
 
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
@@ -4740,20 +4738,20 @@ msgstr "La ubicación '%s' está momentaneamente inaccesible."
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
-" Hay un problema con el certificado SSL, compruebe que la autoridad de "
-"certificación (CA) es correcta para '%s'."
+" Hay un problema con el certificado SSL. Compruebe que la autoridad de "
+"certificación (CA) es correcta para %s."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
 msgstr ""
-"No es posible encontrar un dispositivo loop disponible para montar la imagen "
-"desde '%s'"
+"No se encuentra ningún dispositivo de bucle disponible para montar el "
+"archivo de imagen desde %s"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Método de autenticación HTTP no soportado '%s'"
+msgstr "Método de autenticación HTTP no compatible %s."
 
 #: zypp/media/MediaCurl.cc:1008
 msgid ""
@@ -4765,7 +4763,7 @@ msgstr ""
 
 #: zypp/sat/detail/PoolImpl.cc:184
 msgid "Can not create sat-pool."
-msgstr "No es posible crear el 'sat-pool'."
+msgstr "No es posible crear sat-pool."
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4781,7 +4779,7 @@ msgstr ""
 "El archivo %1%\n"
 "  del paquete\n"
 "     %2%\n"
-"  se encuentra en conflicto con el proporcionado por\n"
+"  tiene un conflicto con un archivo del paquete\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4797,7 +4795,7 @@ msgstr ""
 "El archivo %1%\n"
 "  del paquete\n"
 "     %2%\n"
-"  se encuentra en conflicto con el proporcionado por\n"
+"  tiene un conflicto con el archivo de la instalación de\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4811,9 +4809,9 @@ msgid ""
 "     %3%"
 msgstr ""
 "El archivo %1%\n"
-"  a instalar de\n"
+"  de la instalación de\n"
 "     %2%\n"
-"  se encuentra en conflicto con el proporcionado por\n"
+"  tiene un conflicto con un archivo del paquete\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4827,9 +4825,9 @@ msgid ""
 "     %3%"
 msgstr ""
 "El archivo %1%\n"
-"  a instalar de\n"
+"  de la instalación de\n"
 "     %2%\n"
-"  se encuentra en conflicto con el proporcionado por\n"
+"  tiene un conflicto con un archivo de la instalación de\n"
 "     %3%"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
@@ -4848,9 +4846,9 @@ msgstr ""
 "El archivo %1%\n"
 "  del paquete\n"
 "     %2%\n"
-"  se encuentra en conflicto con\n"
+"  tiene un conflicto con el archivo\n"
 "     %3%\n"
-"  proporcionado por\n"
+"  del paquete\n"
 "     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
@@ -4868,9 +4866,9 @@ msgstr ""
 "El archivo %1%\n"
 "  del paquete\n"
 "     %2%\n"
-"  se encuentra en conflicto con\n"
+"  tiene un conflicto con el archivo\n"
 "     %3%\n"
-"  proporcionado por\n"
+"  de la instalación de\n"
 "     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
@@ -4886,11 +4884,11 @@ msgid ""
 "     %4%"
 msgstr ""
 "El archivo %1%\n"
-"  a instalar de\n"
+"  de la instalación de\n"
 "     %2%\n"
-"  se encuentra en conflicto con\n"
+"  tiene un conflicto con el archivo\n"
 "     %3%\n"
-"  proporcionado por\n"
+"  del paquete\n"
 "     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
@@ -4906,11 +4904,11 @@ msgid ""
 "     %4%"
 msgstr ""
 "El archivo %1%\n"
-"  a instalar de\n"
+"  de la instalación de\n"
 "     %2%\n"
-"  se encuentra en conflicto con\n"
+"  tiene un conflicto con el archivo\n"
 "     %3%\n"
-"  proporcionado por\n"
+"  de la instalación de\n"
 "     %4%"
 
 #~ msgid "generally ignore of some dependecies"
