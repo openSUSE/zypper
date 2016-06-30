@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 17:05+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 17:06+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -134,7 +134,7 @@ msgstr " error de ejecución"
 #: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr "%s ya ejecutado como %s)"
+msgstr "%s ya se ha ejecutado como %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
@@ -159,7 +159,8 @@ msgstr "La instalación se ha cancelado siguiendo las indicaciones."
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
 msgstr ""
-"Lamentablemente esta versión de libzypp fue construida sin soporte para HAL."
+"Lamentablemente esta versión de libzypp se ha construido sin compatibilidad "
+"con HAL."
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
