@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-29 15:44+0000\n"
+"PO-Revision-Date: 2016-06-30 12:17+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -87,7 +87,7 @@ msgstr "Bestand '%s' uit installatiebron '%s' is niet ondertekend, doorgaan?"
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr ""
-"Bestand '%s' geaccepteerd dat is ondertekend met een onbekende sleutel '%s'."
+"Bestand '%s' dat is ondertekend met een onbekende sleutel '%s' accepteren."
 
 #: src/callbacks/keyring.h:143
 #, c-format, boost-format
