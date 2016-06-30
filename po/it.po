@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:46+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-06-30 12:47+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -4254,7 +4254,7 @@ msgstr "Impossibile eliminare la chiave."
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "File delle firme %s non trovato"
+msgstr "La firma del file %s non è stata trovata"
 
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
@@ -4267,7 +4267,7 @@ msgstr "Nessun URL nel repository."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr "Il plugin dei servizi non supporta il cambio di un attributo."
+msgstr "Il plug-in del servizio non supporta la modifica di un attributo."
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
@@ -4276,8 +4276,8 @@ msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
 msgstr ""
-"Il pacchetto %s sembra essersi corrotto durante il trasferimento. Si vuole "
-"provare a recuperarlo di nuovo?"
+"Possibile corruzione del pacchetto %s durante il trasferimento. Ritentare il "
+"recupero?"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
