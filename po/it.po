@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:36+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 12:40+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -2773,7 +2773,7 @@ msgstr "Hiri Motu"
 #. language code: hsb
 #: zypp/LanguageCode.cc:535
 msgid "Upper Sorbian"
-msgstr "Lusaziano superiore"
+msgstr "Sorabo superiore"
 
 #. language code: hun hu
 #: zypp/LanguageCode.cc:537
@@ -3099,7 +3099,7 @@ msgstr "Lettone"
 #. language code: lez
 #: zypp/LanguageCode.cc:667
 msgid "Lezghian"
-msgstr "Lezgi"
+msgstr "Lezgiano"
 
 #. language code: lim li
 #: zypp/LanguageCode.cc:669
@@ -3349,7 +3349,7 @@ msgstr "Lingue maya"
 #. language code: myv
 #: zypp/LanguageCode.cc:773
 msgid "Erzya"
-msgstr "Ersiano"
+msgstr "Lingua Erza"
 
 #. language code: nah
 #: zypp/LanguageCode.cc:775
