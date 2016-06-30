@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:11+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 12:14+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -293,7 +293,7 @@ msgstr "Il file non esiste o la firma non può essere verificata"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
-msgstr "Verranno eseguite le seguenti operazioni:"
+msgstr "Verranno eseguite le azioni indicate:"
 
 #: zypp/RepoManager.cc:297
 #, boost-format
@@ -365,7 +365,7 @@ msgstr "Impossibile creare la cache in %s - permessi di scrittura mancanti."
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "Creazione della cache del repo (%d) fallita."
+msgstr "Impossibile creare la cache del repo (%d)."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
