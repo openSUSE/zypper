@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 12:57+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -4714,8 +4714,8 @@ msgstr "L'ubicazione '%s' è temporaneamente inaccessibile."
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
-"Problemi con il certificato SSL, verificare che il certificato CA sia valido "
-"per '%s'."
+" Problemi con il certificato SSL, verificare che il certificato CA sia "
+"valido per '%s'."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
