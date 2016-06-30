@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 18:27+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -4400,7 +4400,7 @@ msgstr "%s está en conflicto con %s proporcionado por %s"
 #: zypp/solver/detail/SATResolver.cc:1027
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s deja obsoleto %s proporcionado por %s"
+msgstr "%s deja obsoleto %s, proporcionado por %s"
 
 #: zypp/solver/detail/SATResolver.cc:1032
 #, c-format, boost-format
