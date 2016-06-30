@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 18:28+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 18:31+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -4468,17 +4468,18 @@ msgstr "Esta petición dañará su sistema."
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
 msgid "ignore the warning of a broken system"
-msgstr "ignorar la advertencia de sistema averiado"
+msgstr "ignorar la advertencia de daño del sistema"
 
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
-msgstr "no preguntar si se instala algún elemento que proporciona %s"
+msgstr "no preguntar si se debe instalar una solución que proporciona %s"
 
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "no preguntar si se eliminan todos los elementos que proporcionan %s"
+msgstr ""
+"no preguntar si se deben suprimir todas las soluciones que proporcionan %s"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
@@ -4488,12 +4489,12 @@ msgstr "no instalar la versión mas reciente de %s"
 #: zypp/solver/detail/SATResolver.cc:1279
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr "mantener %s sin importar que sea de una arquitectura inferior"
+msgstr "mantener %s a pesar de la arquitectura inferior"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
-msgstr "instalar %s aunque cambie la arquitectura"
+msgstr "instalar %s a pesar de la arquitectura inferior"
 
 #: zypp/solver/detail/SATResolver.cc:1293
 #, c-format, boost-format
@@ -4503,12 +4504,12 @@ msgstr "mantener el antiguo %s"
 #: zypp/solver/detail/SATResolver.cc:1298
 #, c-format, boost-format
 msgid "install %s from excluded repository"
-msgstr "instalar %s desde los directorios excluidos"
+msgstr "instalar %s desde el repositorio excluido"
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr "desactualización de %s a %s"
+msgstr "restablecer versión anterior de %s a %s"
 
 #: zypp/solver/detail/SATResolver.cc:1325
 #, c-format, boost-format
@@ -4522,7 +4523,7 @@ msgid ""
 "  %s  -->  %s"
 msgstr ""
 "instalar %s (con cambio de proveedor)\n"
-"  %s -->  %s"
+"  %s  -->  %s"
 
 #: zypp/solver/detail/SATResolver.cc:1343
 #, c-format, boost-format
@@ -4547,21 +4548,21 @@ msgstr "generalmente se ignoran algunas dependencias"
 #: zypp/parser/RepoindexFileReader.cc:197
 #, c-format, boost-format
 msgid "Required attribute '%s' is missing."
-msgstr "Falta el atributo requerido '%s'."
+msgstr "Falta el atributo requerido %s."
 
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "Son requeridos uno o ambos de los atributos \"%s\" o \"%s\"."
+msgstr "Se requieren uno o ambos de los atributos %s o %s."
 
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
 msgid "Can't open lock file: %s"
-msgstr "No se puede abrir el archivo de bloqueo: %s"
+msgstr "No es posible abrir el archivo de bloqueo: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
-msgstr "Esta acción está siendo ejecutada por otro programa."
+msgstr "Esta acción ya está siendo ejecutada por otro programa."
 
 #. TranslatorExplanation followed by the list of error messages that lead to this exception
 #: zypp/base/Exception.cc:107
