@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 18:23+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -4274,7 +4274,7 @@ msgstr "Error al suprimir la clave."
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "No se ha encontrado el archivo de firma %s"
+msgstr "No se encuentra el archivo de firma %s"
 
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
