@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 18:04+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 18:23+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -627,7 +627,7 @@ msgstr "El nivel de asistencia no se ha especificado"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
-msgstr "El fabricante no provee soporte."
+msgstr "El proveedor no proporciona asistencia."
 
 #: zypp/VendorSupportOptions.cc:45
 msgid ""
@@ -636,10 +636,11 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
-"Determinación del problema, lo que significa soporte técnico designado para "
-"proveer información de compatibilidad, asistencia de instalación, soporte de "
-"uso, mantenimiento sobre la marcha y soluciones básicas. Nivel 1 de soporte "
-"esta pensado para corregir errores por defectos del producto."
+"Determinación de problemas, lo que significa asistencia técnica diseñada "
+"para proporcionar información de compatibilidad, asistencia para la "
+"instalación, compatibilidad de uso, mantenimiento continuo y resolución "
+"básica de problemas. La asistencia de nivel 1 está pensada para corregir "
+"errores por defectos del producto."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
@@ -647,9 +648,10 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
-"Aislamiento del problema, lo que significa soporte técnico designado para "
-"duplicar los problemas del cliente, aislar el área problemática y proveer "
-"una solución por problemas no resueltos por el Nivel 1 de soporte."
+"Aislamiento de problemas, lo que significa asistencia técnica diseñada para "
+"reproducir los problemas del cliente, aislar el área problemática y "
+"proporcionar soluciones para los problemas que no se resuelven mediante la "
+"asistencia de nivel 1."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -657,17 +659,17 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
-"Resolución de problemas, significa soporte técnico designado para resolver "
-"problemas complejos al utilizar ingeniería en la resolución de defectos "
-"identificados por el Nivel 2 de soporte."
+"Resolución de problemas, lo que significa asistencia técnica diseñada para "
+"resolver problemas complejos utilizando la ingeniería en la resolución de "
+"los defectos de los productos identificados en la asistencia de nivel 2."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr "Para obtener soporte se necesita de un contrato adicional."
+msgstr "Para obtener asistencia se necesita un contrato de cliente adicional."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "Opción de soporte desconocida. Descripción no disponible"
+msgstr "Opción de asistencia desconocida. Descripción no disponible."
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -716,7 +718,7 @@ msgstr "Armenia"
 #. :ARM:051:
 #: zypp/CountryCode.cc:165
 msgid "Netherlands Antilles"
-msgstr "Antillas Holandesas"
+msgstr "Antillas Neerlandesas"
 
 #. :ANT:530:
 #: zypp/CountryCode.cc:166
@@ -766,7 +768,7 @@ msgstr "Azerbaiyán"
 #. :AZE:031:
 #: zypp/CountryCode.cc:175
 msgid "Bosnia and Herzegovina"
-msgstr "Bosnia-Herzegovina"
+msgstr "Bosnia y Herzegovina"
 
 #. :BIH:070:
 #: zypp/CountryCode.cc:176
@@ -776,7 +778,7 @@ msgstr "Barbados"
 #. :BRB:052:
 #: zypp/CountryCode.cc:177
 msgid "Bangladesh"
-msgstr "Bangladésh"
+msgstr "Bangladés"
 
 #. :BGD:050:
 #: zypp/CountryCode.cc:178
@@ -846,7 +848,7 @@ msgstr "Isla Bouvet"
 #. :BVT:074:
 #: zypp/CountryCode.cc:191
 msgid "Botswana"
-msgstr "Botswana"
+msgstr "Botsuana"
 
 #. :BWA:072:
 #: zypp/CountryCode.cc:192
@@ -1136,7 +1138,7 @@ msgstr "Guinea-Bissau"
 #. :GNB:624:
 #: zypp/CountryCode.cc:250
 msgid "Guyana"
-msgstr "Guayana"
+msgstr "Guyana"
 
 #. :GUY:328:
 #: zypp/CountryCode.cc:251
@@ -1186,7 +1188,7 @@ msgstr "Israel"
 #. :ISR:376:
 #: zypp/CountryCode.cc:260
 msgid "Isle of Man"
-msgstr "Isla del Hombre"
+msgstr "Isla de Man"
 
 #: zypp/CountryCode.cc:261
 msgid "India"
@@ -1314,7 +1316,7 @@ msgstr "Liechtenstein"
 #. :LIE:438:
 #: zypp/CountryCode.cc:286
 msgid "Sri Lanka"
-msgstr "Sri Lanka (Ceilán)"
+msgstr "Sri Lanka"
 
 #. :LKA:144:
 #: zypp/CountryCode.cc:287
@@ -1368,7 +1370,7 @@ msgstr "Montenegro"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
-msgstr "Saint Martin"
+msgstr "San Martín"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
@@ -1814,12 +1816,12 @@ msgstr "Uganda"
 #. :UGA:800:
 #: zypp/CountryCode.cc:386
 msgid "United States Minor Outlying Islands"
-msgstr "Islas menores alejadas de los Estados Unidos de América"
+msgstr "Islas menores alejadas de los Estados Unidos"
 
 #. :UMI:581:
 #: zypp/CountryCode.cc:387
 msgid "United States"
-msgstr "Estados Unidos de América"
+msgstr "Estados Unidos"
 
 #. :USA:840:
 #: zypp/CountryCode.cc:388
@@ -1899,7 +1901,7 @@ msgstr "Zambia"
 #. :ZMB:894:
 #: zypp/CountryCode.cc:403
 msgid "Zimbabwe"
-msgstr "Zimbabwe"
+msgstr "Zimbabue"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -2048,7 +2050,7 @@ msgstr "Asamés"
 #. language code: ast
 #: zypp/LanguageCode.cc:221
 msgid "Asturian"
-msgstr "Asturiano (bable)"
+msgstr "Asturiano"
 
 #. language code: ath
 #: zypp/LanguageCode.cc:223
@@ -2118,7 +2120,7 @@ msgstr "Balinés"
 #. language code: baq eus eu
 #: zypp/LanguageCode.cc:249 zypp/LanguageCode.cc:251
 msgid "Basque"
-msgstr "Vasco (euskera)"
+msgstr "Vasco"
 
 #. language code: bas
 #: zypp/LanguageCode.cc:253
@@ -2478,7 +2480,7 @@ msgstr "Danés medieval (1050 - 1350)"
 #. language code: dut nld nl
 #: zypp/LanguageCode.cc:401 zypp/LanguageCode.cc:403
 msgid "Dutch"
-msgstr "Holandés"
+msgstr "Neerlandés"
 
 #. language code: dyu
 #: zypp/LanguageCode.cc:405
@@ -3011,7 +3013,7 @@ msgstr "Kinyarruandés"
 #. language code: kir ky
 #: zypp/LanguageCode.cc:625
 msgid "Kirghiz"
-msgstr "Kirguizo"
+msgstr "Kirguiso"
 
 #. language code: kmb
 #: zypp/LanguageCode.cc:627
@@ -3086,7 +3088,7 @@ msgstr "Kutenai"
 #. language code: lad
 #: zypp/LanguageCode.cc:655
 msgid "Ladino"
-msgstr "Ladino (sefardí)"
+msgstr "Ladino"
 
 #. language code: lah
 #: zypp/LanguageCode.cc:657
@@ -3376,7 +3378,7 @@ msgstr "Nahuatl"
 #. language code: nai
 #: zypp/LanguageCode.cc:777
 msgid "North American Indian"
-msgstr "Lenguas amerindias"
+msgstr "Lenguas amerindias de Norteamérica"
 
 #. language code: nap
 #: zypp/LanguageCode.cc:779
@@ -3751,7 +3753,7 @@ msgstr "Selkup"
 #. language code: sem
 #: zypp/LanguageCode.cc:937
 msgid "Semitic (Other)"
-msgstr "Judaicos (otros)"
+msgstr "Semítico (otros)"
 
 #. language code: sga
 #: zypp/LanguageCode.cc:939
@@ -3876,7 +3878,7 @@ msgstr "Sotho meridional"
 #. language code: spa es
 #: zypp/LanguageCode.cc:989
 msgid "Spanish"
-msgstr "Español (castellano)"
+msgstr "Español"
 
 #. language code: srd sc
 #: zypp/LanguageCode.cc:991
@@ -4262,11 +4264,12 @@ msgstr "Zuñi"
 #: zypp/KeyRing.cc:522
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr "Intentó importar clave no existente %s en el anillo de claves %s"
+msgstr ""
+"Se intentó importar una clave que no existe (%s) al almacén de claves %s"
 
 #: zypp/KeyRing.cc:566
 msgid "Failed to delete key."
-msgstr "Error al borrar clave."
+msgstr "Error al suprimir la clave."
 
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
