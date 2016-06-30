@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 09:59+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 12:08+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -3582,7 +3582,7 @@ msgstr "プラークリット諸語"
 #. language code: pro
 #: zypp/LanguageCode.cc:879
 msgid "Provencal, Old (to 1500)"
-msgstr "古期プロヴァンス語(-1500)"
+msgstr "古期プロヴァンス語"
 
 #. language code: pus ps
 #: zypp/LanguageCode.cc:881
@@ -3987,12 +3987,12 @@ msgstr "タマシェク語"
 #. language code: tog
 #: zypp/LanguageCode.cc:1053
 msgid "Tonga (Nyasa)"
-msgstr "トンガ語 (ニアサ)"
+msgstr "トンガ語(ニアサ)"
 
 #. language code: ton to
 #: zypp/LanguageCode.cc:1055
 msgid "Tonga (Tonga Islands)"
-msgstr "トンガ語 (トンガ諸島)"
+msgstr "トンガ語(トンガ諸島)"
 
 #. language code: tpi
 #: zypp/LanguageCode.cc:1057
