@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 06:33+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-06-30 06:43+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -422,15 +422,15 @@ msgstr "無効な %s コンポーネント '%s'"
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
 msgid "Invalid %s component"
-msgstr "無効な %s 部分です"
+msgstr "無効な %s コンポーネント"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
-msgstr "この URL に対するクエリ文字列解釈はサポートされていません"
+msgstr "このURLに対して、クエリ文字列解析はサポートされていません"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
-msgstr "URL のスキーム部分は必須項目です"
+msgstr "Urlスキームは必須のコンポーネントです"
 
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
