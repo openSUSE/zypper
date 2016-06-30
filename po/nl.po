@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-30 12:18+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 12:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -283,7 +283,7 @@ msgstr "Blokkering verwijderen of verwerpen?"
 #: src/callbacks/rpm.h:151
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
-msgstr "Draait: %s  (%s, %s)"
+msgstr "Wordt uitgevoerd: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:208
 #, c-format, boost-format
@@ -384,19 +384,19 @@ msgstr ""
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
 msgstr ""
-"De volgende zoekopdracht blokkeert hetzelfde object als die u wilt "
-"verwijderen:"
+"De volgende zoekopdracht vergrendelt dezelfde objecten als het object dat u "
+"wilt verwijderen:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
 msgstr ""
-"De volgende zoekopdracht blokkeert enige van de objecten die u wilt "
+"De volgende zoekopdracht blokkeert een aantal van de objecten die u wilt "
 "vrijgeven:"
 
 # power-off message
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
 msgid "Do you want to remove this lock?"
-msgstr "Wilt u deze blokkering verwijderen?"
+msgstr "Wilt u deze vergrendeling verwijderen?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
@@ -664,7 +664,7 @@ msgstr "Einde van ondersteuning"
 
 #: src/info.cc:485 src/info.cc:493 src/info.cc:524
 msgid "undefined"
-msgstr "ongedefinieerd"
+msgstr "niet gedefinieerd"
 
 #: src/info.cc:488
 msgid "CPE Name"
