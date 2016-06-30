@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 11:12+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -63,7 +63,7 @@ msgstr "Impossibile impostare l'attributo mutex ricorsivo"
 
 #: zypp/thread/Mutex.cc:47
 msgid "Can't initialize recursive mutex"
-msgstr "Impossibile inizializzare il mutex ricorsivo"
+msgstr "Impossibile inizializzare mutex ricorsivo"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
