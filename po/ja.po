@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 07:45+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-06-30 08:16+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -520,12 +520,12 @@ msgstr "ディレクトリを '%s' (%s)に変更できません。"
 #: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
-msgstr "'%s' (%s) を実行することができません。"
+msgstr "'%s' (%s)を実行することができません。"
 
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr "fork (%s) することができません。"
+msgstr "fork (%s)することができません。"
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
@@ -535,7 +535,7 @@ msgstr "コマンドは状態 %d で終了しました。"
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "コマンドはシグナル %d (%s) で終了しました。"
+msgstr "コマンドはシグナル %d (%s)で終了しました。"
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
@@ -606,9 +606,8 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
-"問題の決定、それは互換性に関する情報やインストール支援、使用方法の対応や進行"
-"中の保守、基本的なトラブルシューティングなどの技術サポートを指します。 Level "
-"1 サポートは、製品の欠陥によるエラーを修正しようとするものではありません。"
+"問題の決定、それは互換性に関する情報やインストール支援、使用方法の対応や進行中の保守、基本的なトラブルシューティングなどの技術サポートを指します。"
+"Level 1サポートは、製品の欠陥によるエラーを修正しようとするものではありません。"
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
@@ -616,17 +615,15 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
-"問題の切り分け、それは顧客内での問題を共有し領域を切り分け、 Level 1 サポート"
-"では解決されていない問題について解決方法を提供する技術サポートを指します。"
+"問題の切り分け、それは顧客内での問題を共有し領域を切り分け、Level "
+"1サポートでは解決されていない問題について解決方法を提供する技術サポートを指します。"
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
 "Problem resolution, which means technical support designed to resolve "
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
-msgstr ""
-"問題の解決、それは複雑な問題に対して技術者を従事させ、 Level 2 サポートで認識"
-"されていない製品の欠陥を解決する技術サポートを指します。"
+msgstr "問題の解決、それは複雑な問題に対して技術者を従事させ、Level 2サポートで認識されていない製品の欠陥を解決する技術サポートを指します。"
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
@@ -833,7 +830,7 @@ msgstr "カナダ"
 #. :CAN:124:
 #: zypp/CountryCode.cc:195
 msgid "Cocos (Keeling) Islands"
-msgstr "ココス (キーリング) 諸島"
+msgstr "ココス(キーリング)諸島"
 
 #. :CCK:166:
 #. :CAF:140:
@@ -989,7 +986,7 @@ msgstr "フィジー"
 #. :FJI:242:
 #: zypp/CountryCode.cc:227
 msgid "Falkland Islands (Malvinas)"
-msgstr "フォークランド諸島 (マルビナス)"
+msgstr "フォークランド諸島(マルビナス)"
 
 #. :FLK:238:
 #: zypp/CountryCode.cc:228
@@ -1039,7 +1036,7 @@ msgstr "フランス領ギアナ"
 #. :GUF:254:
 #: zypp/CountryCode.cc:237
 msgid "Guernsey"
-msgstr "ガーンジー"
+msgstr "ガーンジー島"
 
 #: zypp/CountryCode.cc:238
 msgid "Ghana"
@@ -1153,7 +1150,7 @@ msgstr "イスラエル"
 #. :ISR:376:
 #: zypp/CountryCode.cc:260
 msgid "Isle of Man"
-msgstr "マン諸島"
+msgstr "マン島"
 
 #: zypp/CountryCode.cc:261
 msgid "India"
@@ -1335,7 +1332,7 @@ msgstr "モンテネグロ"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
-msgstr "セントマーティン"
+msgstr "サンマルタン"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
