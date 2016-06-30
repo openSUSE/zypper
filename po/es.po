@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 17:03+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 17:05+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -117,7 +117,7 @@ msgstr "Complementa"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Tipo dudoso '%s' para el byte %u suma de comprobación '%s'"
+msgstr "Tipo dudoso %s para el byte %u de la suma de comprobación %s"
 
 # include/nis_server/io.ycp:567
 #: zypp/target/TargetImpl.cc:310
@@ -126,7 +126,7 @@ msgstr " ejecutado"
 
 #: zypp/target/TargetImpl.cc:332
 msgid " execution failed"
-msgstr " ejecución fallida"
+msgstr " error de ejecución"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
