@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 18:32+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -4622,7 +4622,7 @@ msgstr "No se ha abierto el medio al intentar realizar la acción %s."
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "No se ha encontrado el archivo %s en el medio %s."
+msgstr "No se encuentra el archivo %s en el medio %s."
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
