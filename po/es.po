@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 17:59+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 18:01+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -439,7 +439,7 @@ msgstr "El esquema de URL no permite un elemento %s"
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "Componente %s no válido '%s'"
+msgstr "Componente %s no válido %s"
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
@@ -458,7 +458,7 @@ msgstr "El esquema de URL es un componente obligatorio"
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr "Esquema '%s' de URL no válido"
+msgstr "Esquema %s de URL no válido"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
@@ -479,7 +479,7 @@ msgstr "El esquema de URL no permite un componente host"
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr "Componente de host no válido '%s'"
+msgstr "Componente de host no válido %s"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
@@ -488,7 +488,7 @@ msgstr "El esquema de URL no permite un puerto"
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
 msgid "Invalid port component '%s'"
-msgstr "Componente de puerto no válido '%s'"
+msgstr "Componente de puerto no válido %s"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
