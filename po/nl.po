@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:57+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 13:01+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -504,7 +504,7 @@ msgstr "Ongeldig scheidingsteken voor samenvoegen parametermatrix"
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
-msgstr "Kon pty (%s) niet openen."
+msgstr "Kan pty (%s) niet openen."
 
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
@@ -535,7 +535,7 @@ msgstr "Kan '%s' niet uitvoeren (%s)."
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr "Kan geen fork  (%s) uitvoeren."
+msgstr "Kan geen fork (%s) uitvoeren."
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
@@ -617,10 +617,11 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
-"Probleem bepaling, wat technische ondersteuning betekent dat ontworpen is "
+"Probleembepaling, wat technische ondersteuning betekent die is ontworpen "
 "voor het leveren van informatie over compatibiliteit, hulp bij installatie, "
-"ondersteuning bij gebruik, voortdurend onderhoud en basis van foutzoeken. "
-"Niveau 1 ondersteuning is niet bedoeld om fouten in producten te verbeteren."
+"ondersteuning bij gebruik, constant onderhoud en algemene "
+"probleemoplossing.. Niveau 1 ondersteuning is niet bedoeld om fouten in "
+"producten te verbeteren."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
