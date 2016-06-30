@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 12:27+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -1353,7 +1353,7 @@ msgstr "Montenegro"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
-msgstr "San Martino"
+msgstr "Saint Martin"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
@@ -1437,7 +1437,7 @@ msgstr "Messico"
 #. :MEX:484:
 #: zypp/CountryCode.cc:314
 msgid "Malaysia"
-msgstr "Malesia"
+msgstr "Malaysia"
 
 #. :MYS:458:
 #: zypp/CountryCode.cc:315
@@ -1617,7 +1617,7 @@ msgstr "Arabia Saudita"
 #. :SAU:682:
 #: zypp/CountryCode.cc:350
 msgid "Solomon Islands"
-msgstr "Isole Salomone"
+msgstr "Isole Solomon"
 
 #. :SLB:090:
 #: zypp/CountryCode.cc:351
@@ -1712,7 +1712,7 @@ msgstr "Isole Turks e Caicos"
 #. :TCA:796:
 #: zypp/CountryCode.cc:369
 msgid "Chad"
-msgstr "Ciad"
+msgstr "Chad"
 
 #. :TCD:148:
 #: zypp/CountryCode.cc:370
