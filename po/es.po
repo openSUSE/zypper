@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 17:02+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 17:03+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -52,7 +52,7 @@ msgstr "Referencia de objeto de URL vacío no válida"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
-msgstr "No se pueden analizar los componentes de URL"
+msgstr "No es posible analizar los componentes de URL"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
@@ -68,7 +68,7 @@ msgstr "No es posible iniciar mutex recursivo"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr "No se puede adquirir el bloqueo de mutex"
+msgstr "No es posible adquirir el bloqueo de mutex"
 
 #: zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
@@ -80,7 +80,7 @@ msgstr "Proporciona"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
-msgstr "Pre requisitos"
+msgstr "Requisitos previos"
 
 # clients/hwinfo.ycp:73
 # clients/hwinfo.ycp:73
@@ -99,19 +99,19 @@ msgstr "Obsoletos"
 
 #: zypp/Dep.cc:101
 msgid "Recommends"
-msgstr "Recomendado"
+msgstr "Recomienda"
 
 #: zypp/Dep.cc:102
 msgid "Suggests"
-msgstr "Sugerencias"
+msgstr "Sugiere"
 
 #: zypp/Dep.cc:103
 msgid "Enhances"
-msgstr "Mejoras"
+msgstr "Mejora"
 
 #: zypp/Dep.cc:104
 msgid "Supplements"
-msgstr "Suplementos"
+msgstr "Complementa"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
