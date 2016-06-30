@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:16+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-06-30 12:22+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -491,16 +491,15 @@ msgstr "La stringa codificata contiene un byte NULL"
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
 msgstr ""
-"Parametro del carattere separatore per la divisione del vettore non valido"
+"Carattere di separazione di divisione della matrice di parametri non valido"
 
 #: zypp/url/UrlUtils.cc:213
 msgid "Invalid parameter map split separator character"
-msgstr ""
-"Parametro del carattere separatore per la divisione della mappa non valido"
+msgstr "Carattere di separazione di divisione mappa di parametri non valido"
 
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
-msgstr "Parametro del carattere separatore per l'unione del vettore non valido"
+msgstr "Carattere di separazione unione della matrice di parametri non valido"
 
 # TLABEL modules/sound/sound.ycp:620
 #: zypp/ExternalProgram.cc:258
@@ -511,22 +510,22 @@ msgstr "Impossibile aprire pty (%s)."
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
-msgstr "Impossibile aprire la pipe (%s)."
+msgstr "Impossibile aprire pipe (%s)."
 
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr "Impossibile fare chroot verso '%s' (%s)."
+msgstr "Impossibile eseguire il comando chroot in '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "Impossibile fare chdir verso '%s' dentro la chroot '%s' (%s)."
+msgstr "Impossibile eseguire chdir verso '%s' dentro la chroot '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:361
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr "Impossibile fare chdir verso '%s' (%s)."
+msgstr "Impossibile eseguire chdir verso '%s' (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:373
@@ -538,7 +537,7 @@ msgstr "Impossibile eseguire '%s' (%s)."
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr "Impossibile fare il fork (%s)."
+msgstr "Impossibile eseguire il comando fork (%s)."
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
@@ -548,7 +547,7 @@ msgstr "Il comando è terminato con stato %d."
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "Il comando è stato terminato con il segnale %d (%s)."
+msgstr "Il comando è stato terminato dal segnale %d (%s)."
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
@@ -562,7 +561,7 @@ msgstr "(non scade)"
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:125
 msgid "(EXPIRED)"
-msgstr "(SCADUTA)"
+msgstr "(SCADUTO)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:129
@@ -621,11 +620,11 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
-"Determinazione dei problemi, che significa supporto tecnico pensato per "
-"fornire informazioni di compatibilità, assistenza nell'installazione, "
-"supporto nell'utilizzo, manutenzione ordinaria e risoluzione dei problemi "
-"basilare. Il supporto di Livello 1 non è inteso per corregge errori e "
-"difetti del prodotto."
+"Identificazione dei problemi, ovvero supporto tecnico indirizzato a fornire "
+"informazioni sulla compatibilità, assistenza per l'installazione, supporto "
+"per l'utilizzo, manutenzione ordinaria e risoluzione dei problemi di base. "
+"L'obiettivo del supporto di Livello 1 non è correggere errori e difetti del "
+"prodotto."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
