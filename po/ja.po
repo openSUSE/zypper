@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 08:37+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 08:45+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -2327,17 +2327,17 @@ msgstr "コルシカ語"
 #. language code: cpe
 #: zypp/LanguageCode.cc:353
 msgid "Creoles and Pidgins, English-Based (Other)"
-msgstr "英語が基盤のクレオール語・ピジン語 (その他)"
+msgstr "英語が基盤のクレオール語・ピジン語(その他)"
 
 #. language code: cpf
 #: zypp/LanguageCode.cc:355
 msgid "Creoles and Pidgins, French-Based (Other)"
-msgstr "フランス語が基盤のクレオール語・ピジン語 (その他)"
+msgstr "フランス語が基盤のクレオール語・ピジン語(その他)"
 
 #. language code: cpp
 #: zypp/LanguageCode.cc:357
 msgid "Creoles and Pidgins, Portuguese-Based (Other)"
-msgstr "ポルトガル語が基盤のクレオール語・ピジン語 (その他)"
+msgstr "ポルトガル語が基盤のクレオール語・ピジン語(その他)"
 
 #. language code: cre cr
 #: zypp/LanguageCode.cc:359
@@ -2352,7 +2352,7 @@ msgstr "クリミアタタール語"
 #. language code: crp
 #: zypp/LanguageCode.cc:363
 msgid "Creoles and Pidgins (Other)"
-msgstr "クレオール語・ピジン語 (その他)"
+msgstr "クレオール語・ピジン語(その他)"
 
 #. language code: csb
 #: zypp/LanguageCode.cc:365
