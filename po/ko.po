@@ -9,16 +9,17 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2015-07-09 13:07+0900\n"
-"Last-Translator: Yunseok Choi <xein@naver.com>\n"
-"Language-Team: Korean <xein@naver.com>\n"
+"PO-Revision-Date: 2016-06-30 07:33+0000\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.2\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -328,10 +329,9 @@ msgstr "알 수 없는 서비스 '%1%': 독립 서비스 리포지토리 '%2%' �
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
-#, fuzzy
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "지정한 URL 에는 유효한 메타데이터가 없음"
+msgstr[0] "지정한 URL에는 유효한 메타데이터가 없음"
 
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
 #, c-format, boost-format
@@ -558,10 +558,10 @@ msgstr "(24시간 내 만료)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(24시간 내 만료)"
+msgstr[0] "%d(24시간 내 만료)"
 
 #  translators: fallback name for a module at command line
 #: zypp/VendorSupportOptions.cc:14
