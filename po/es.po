@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 18:27+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 18:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -4410,16 +4410,16 @@ msgstr "%s instalado, deja obsoleto a %s proporcionado por %s"
 #: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
-msgstr "la solución %s tiene conflictos con %s proveida por esta misma"
+msgstr "La solución %s está en conflicto con %s, proporcionada por ella misma"
 
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s requiere %s, pero este requisito no puede cumplirse"
+msgstr "%s requiere %s, pero este requisito no se puede cumplir"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
-msgstr "proveedores eliminados: "
+msgstr "proveedores suprimidos: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -4463,7 +4463,7 @@ msgstr "eliminar bloqueo para permitir la instalación de %s"
 #: zypp/solver/detail/SATResolver.cc:1217
 #: zypp/solver/detail/SATResolver.cc:1238
 msgid "This request will break your system!"
-msgstr "¡Esta solicitud averiará su sistema!"
+msgstr "Esta petición dañará su sistema."
 
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
