@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 11:54+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 12:07+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -201,13 +201,13 @@ msgstr "RPM non riuscito: "
 #: zypp/target/rpm/RpmDb.cc:1124
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
-msgstr "Importazione della chiave pubblica dal file %s fallita: %s"
+msgstr "Errore importazione della chiave pubblica dal file %s: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1195
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
-msgstr "Rimozione della chiave pubblica %s fallita: %s"
+msgstr "Errore rimozione della chiave pubblica %s: %s"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -261,7 +261,7 @@ msgstr "Output aggiuntivo di rpm"
 #: zypp/target/rpm/RpmDb.cc:2344
 #, c-format, boost-format
 msgid "created backup %s"
-msgstr "creata copia di ripristino di %s"
+msgstr "creata copia di backup di %s"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2365
@@ -340,11 +340,10 @@ msgstr ""
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
-#, fuzzy
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "Non sono stati trovati metadati validi all'URL specificato"
-msgstr[1] "Non sono stati trovati metadati validi all'URL specificato"
+msgstr[1] "Non sono stati trovati metadati validi agli URL specificati"
 
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
 #, c-format, boost-format
@@ -389,7 +388,7 @@ msgstr "Errore nel tentativo di leggere da '%s'"
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
-msgstr "Errore sconosciuto leggendo da '%s'"
+msgstr "Errore sconosciuto in lettura da '%s'"
 
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
@@ -415,7 +414,7 @@ msgstr "Impossibile trovare dove è memorizzato il repository."
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
 #, c-format, boost-format
 msgid "Can't delete '%s'"
-msgstr "Impossibile cancellare '%s'"
+msgstr "Impossibile eliminare '%s'"
 
 #: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
 msgid "Can't figure out where the service is stored."
@@ -574,11 +573,11 @@ msgstr "(scade entro 24 ore)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(scade entro 24 ore)"
-msgstr[1] "(scade entro 24 ore)"
+msgstr[0] "(scade entro %d giorno)"
+msgstr[1] "(scade entro %d giorni)"
 
 # TLABEL modules/inst_user.ycp:71
 #: zypp/VendorSupportOptions.cc:14
