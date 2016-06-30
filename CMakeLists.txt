@@ -52,10 +52,12 @@ include(CheckCXXCompilerFlag)
 CHECK_C_COMPILER_FLAG("-Werror=format-security" CC_FORMAT_SECURITY)
 CHECK_CXX_COMPILER_FLAG("-Werror=format-security" CXX_FORMAT_SECURITY)
 
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility-inlines-hidden -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Woverloaded-virtual -Wnon-virtual-dtor -Wl,-as-needed -std=c++11" )
-SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed" )
+SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed" )
 
-set( CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} -O3 -DZYPP_NDEBUG" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fvisibility-inlines-hidden -Woverloaded-virtual -Wnon-virtual-dtor" )
+
+set( CMAKE_C_FLAGS_RELEASE     "${CMAKE_C_FLAGS} -O3 -DZYPP_NDEBUG" )
 set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O3 -DZYPP_NDEBUG" )
 
 IF(${CC_FORMAT_SECURITY})
