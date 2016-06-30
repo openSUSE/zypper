@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 08:48+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 08:58+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -2382,7 +2382,7 @@ msgstr "デンマーク語"
 #. language code: dar
 #: zypp/LanguageCode.cc:377
 msgid "Dargwa"
-msgstr "Dargwa"
+msgstr "ダルギン語"
 
 #. language code: day
 #: zypp/LanguageCode.cc:379
@@ -2397,7 +2397,7 @@ msgstr "デラウェア語"
 #. language code: den
 #: zypp/LanguageCode.cc:383
 msgid "Slave (Athapascan)"
-msgstr "スレーブ語 (アタパスカ語)"
+msgstr "スレーブ語(アタパスカ語)"
 
 #. language code: dgr
 #: zypp/LanguageCode.cc:385
