@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 18:23+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 18:24+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -4279,15 +4279,15 @@ msgstr "No se encuentra el archivo de firma %s"
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "No es posible proporcionar el archivo '%s' desde el repositorio '%s'"
+msgstr "No es posible proporcionar el archivo %s desde el repositorio %s."
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
-msgstr "No hay ninguna dirección url en el repositorio."
+msgstr "No hay ninguna URL en el repositorio."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr "El complemento de servicio no admite cambios en un atributo."
+msgstr "El complemento del servicio no admite el cambio de un atributo."
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
@@ -4296,8 +4296,8 @@ msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
 msgstr ""
-"El paquete %s parece haberse dañado durante la transferencia. ¿Desea volver "
-"a intentar obtenerlo?"
+"Parece que el paquete %s se ha dañado durante la transferencia. ¿Desea "
+"volver a intentar la recuperación?"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4308,12 +4308,12 @@ msgstr "Error de verificación de firma"
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr ""
-"No se ha podido proporcionar el paquete %s. ¿Desea volver a intentar "
-"obtenerlo?"
+"Error al proporcionar el paquete %s. ¿Desea volver a intentar la "
+"recuperación?"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
-msgstr "Ha fallado la comprobación de applydeltarpm."
+msgstr "Comprobación de applydeltarpm incorrecta."
 
 #: zypp/repo/PackageProvider.cc:525
 msgid "applydeltarpm failed."
