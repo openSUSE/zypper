@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 09:02+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-06-30 09:11+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -2462,7 +2462,7 @@ msgstr "エフィク語"
 #. language code: egy
 #: zypp/LanguageCode.cc:411
 msgid "Egyptian (Ancient)"
-msgstr "エジプト語 (古代)"
+msgstr "エジプト語(古代)"
 
 #. language code: eka
 #: zypp/LanguageCode.cc:413
@@ -2482,7 +2482,7 @@ msgstr "英語"
 #. language code: enm
 #: zypp/LanguageCode.cc:419
 msgid "English, Middle (1100-1500)"
-msgstr "中英語 (1100-1500)"
+msgstr "中英語(1100-1500)"
 
 #. language code: epo eo
 #: zypp/LanguageCode.cc:421
@@ -2537,7 +2537,7 @@ msgstr "フィンランド語"
 #. language code: fiu
 #: zypp/LanguageCode.cc:441
 msgid "Finno-Ugrian (Other)"
-msgstr "フィン-ウゴル語 (その他)"
+msgstr "フィン-ウゴル語(その他)"
 
 #. language code: fon
 #: zypp/LanguageCode.cc:443
@@ -2552,12 +2552,12 @@ msgstr "フランス語"
 #. language code: frm
 #: zypp/LanguageCode.cc:449
 msgid "French, Middle (ca.1400-1600)"
-msgstr "中世フランス語 (ca.1400-1600)"
+msgstr "中世フランス語(ca.1400-1600)"
 
 #. language code: fro
 #: zypp/LanguageCode.cc:451
 msgid "French, Old (842-ca.1400)"
-msgstr "古フランス語 (842-ca.1400)"
+msgstr "古フランス語(842-ca.1400)"
 
 #. language code: fry fy
 #: zypp/LanguageCode.cc:453
