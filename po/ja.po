@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 23:32+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 23:42+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -176,7 +176,7 @@ msgstr "libhal_set_dbus_connection: dbus接続を設定できません"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "HALコンテキストを初期化できません -- haldが動作していない可能性があります。"
+msgstr "HALコンテキストを初期化できません。haldが動作していない可能性があります。"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
@@ -473,7 +473,7 @@ msgstr "URLスキームにはパス名が必要です"
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
-msgstr "権限部分が存在する場合相対パスは許可されません。"
+msgstr "権限部分が存在する場合相対パスは許可されません"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
@@ -593,7 +593,7 @@ msgstr "無効"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr "サポートのレベルが指定されていません。"
+msgstr "サポートのレベルが指定されていません"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
@@ -4232,7 +4232,7 @@ msgstr "キーの削除に失敗しました。"
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "署名ファイル %s が見つかりません。"
+msgstr "署名ファイル %s が見つかりません"
 
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
@@ -4564,7 +4564,7 @@ msgstr "不正なファイル名: %s"
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "アクション「%s」を実行しようとした際にメディアが開きませんでした"
+msgstr "アクション「%s」を実行しようとした際にメディアが開きませんでした。"
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
@@ -4619,16 +4619,16 @@ msgstr "URIのファイルシステムが空です"
 
 #: zypp/media/MediaException.cc:135
 msgid "Empty destination in URI"
-msgstr "URI に宛先が指定されていません"
+msgstr "URIの宛先が空です"
 
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "未対応の URI スキーマが '%s' にあります。"
+msgstr "「%s」のURIスキーマがサポートされていません。"
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
-msgstr "操作は指定したメディアには対応していません"
+msgstr "メディアでサポートされていない操作です"
 
 #: zypp/media/MediaException.cc:152
 #, c-format, boost-format
@@ -4637,7 +4637,7 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"'%s' のダウンロード (curl) がエラー終了しました:\n"
+"「%s」のダウンロード(curl)エラー:\n"
 "エラーコード: %s\n"
 "エラーメッセージ: %s\n"
 
@@ -4645,42 +4645,41 @@ msgstr ""
 #: zypp/media/MediaException.cc:161
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
-"'%s' のダウンロード (curl) オプションを設定する際にエラーが発生しました:"
+msgstr "「%s」のダウンロード(curl)オプションの設定中にエラーが発生しました:"
 
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "メディアソース '%s' には必要なメディアがありません"
+msgstr "メディアソース「%s」に目的のメディアが含まれていません"
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "メディア '%s' は他のプログラムによって使用されています"
+msgstr "メディア「%s」は別のインスタンスによって使用されています"
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
-msgstr "メディアを取り出すことができません"
+msgstr "メディアを取り出せません"
 
 #: zypp/media/MediaException.cc:184
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
-msgstr "メディア '%s' を取り出すことができません"
+msgstr "メディア「%s」を取り出せません"
 
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr "'%s' へのアクセス許可がありません。"
+msgstr "「%s」にアクセスするパーミッションが拒否されました。"
 
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "'%s' にアクセスする際に時間切れになりました。"
+msgstr "「%s」にアクセスする際にタイムアウトになりました。"
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
-msgstr "場所 '%s' は一時的にアクセスできなくなっています。"
+msgstr "場所「%s」は一時的にアクセスできなくなっています。"
 
 #: zypp/media/MediaException.cc:223
 #, c-format, boost-format
@@ -4692,26 +4691,22 @@ msgstr ""
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr ""
-"'%s' のイメージファイルをマウントするのに必要なループデバイスの空きが見つかり"
-"ません"
+msgstr "「%s」からイメージファイルをマウントする使用可能なループデバイスが見つかりません"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr "未対応の HTTP 認証方式です '%s'"
+msgstr "サポートされていないHTTP認証方式「%s」"
 
 #: zypp/media/MediaCurl.cc:1008
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
-msgstr ""
-"Novell カスタマーセンターをお尋ねいただき、登録が有効であるかどうか、期限が切"
-"れていないかどうかをご確認ください。"
+msgstr "Novellカスタマーセンターへアクセスし、登録が有効であるか、有効期限切れになっていないかを確認してください。"
 
 #: zypp/sat/detail/PoolImpl.cc:184
 msgid "Can not create sat-pool."
-msgstr "sat-pool を作成できません。"
+msgstr "sat-poolを作成できません。"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4724,10 +4719,11 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
-"パッケージ %2% の提供する\n"
-"  ファイル %1% と、\n"
-"  パッケージ %3% の提供する\n"
-"  ファイルが衝突しています。"
+"パッケージ %2% からの\n"
+"  ファイル %1% が、\n"
+"  パッケージ %3% からの\n"
+" ファイルと\n"
+" 競合しています"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:40
@@ -4739,10 +4735,11 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
-"パッケージ %2% の提供する\n"
-"  ファイル %1% と、\n"
-"  %3% の提供する\n"
-"  ファイルが衝突しています。"
+"パッケージ %2% からの\n"
+" ファイル %1% が、\n"
+" %3% のインストールによる\n"
+" ファイルと\n"
+" 競合しています"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:47
@@ -4754,10 +4751,11 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
-"%2% の提供する\n"
-"  ファイル %1% と、\n"
-"%3% の提供する\n"
-"  ファイルが衝突しています。"
+"%2% の\n"
+" インストールによる\n"
+" ファイル %1% が、パッケージ\n"
+" %3% からのファイルと\n"
+" 競合しています"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:53
@@ -4769,10 +4767,11 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
-"%2% の提供する\n"
-"  ファイル %1% と、\n"
-"  %3% の提供する\n"
-"  ファイルが衝突しています。"
+"%2% の\n"
+" インストールによる\n"
+" ファイル %1% が、\n"
+" %3% のインストールによる\n"
+" ファイルと競合しています"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
@@ -4787,10 +4786,13 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
-"パッケージ %2% の提供する\n"
-"  ファイル %1% と、\n"
-"  パッケージ %4% の提供する\n"
-"  ファイル %3% が衝突しています。"
+"パッケージ %2% \n"
+" からの\n"
+" ファイル %1% が、\n"
+"パッケージ %4% \n"
+" からの\n"
+"ファイル %3% と\n"
+"競合しています"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:76
@@ -4804,10 +4806,13 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
-"パッケージ %2% の提供する\n"
-"  ファイル %1% と、\n"
-"  %4% の提供する\n"
-"  ファイル %3% が衝突しています。"
+"パッケージ %2% \n"
+" からの\n"
+" ファイル %1% が、\n"
+"  %4% のインストールによる\n"
+" ファイル %3% と\n"
+" 競合\n"
+"  しています"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:85
@@ -4821,10 +4826,13 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
-"%2% の提供する\n"
-"  ファイル %1% と、\n"
-"  パッケージ %4% の提供する\n"
-"  ファイル %3% が衝突しています。"
+"%2% の\n"
+" インストールによる\n"
+" ファイル %1% が、\n"
+" パッケージ %4% \n"
+" からのファイル %3%\n"
+"  と競合\n"
+" しています"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:93
@@ -4838,7 +4846,10 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
-"%2% の提供する\n"
-"  ファイル %1% と、\n"
-"  %4% の提供する\n"
-"  ファイル %3% が衝突しています。"
+"%2% の\n"
+" インストールによる\n"
+" ファイル %1% が、\n"
+" %4% のインストール\n"
+" による\n"
+" ファイル %3%\n"
+"  と競合しています"
