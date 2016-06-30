@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 23:24+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -4426,7 +4426,7 @@ msgstr "%s を提供する解決方法のインストールについて問い合
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "%s を提供する解決方法の削除について問い合わせない"
+msgstr "%s を提供するすべての解決方法の削除について問い合わせない"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
@@ -4469,7 +4469,7 @@ msgid ""
 "install %s (with vendor change)\n"
 "  %s  -->  %s"
 msgstr ""
-"%s をインストールする (製造元を変更する)\n"
+"%s をインストールする (ベンダーを変更する)\n"
 "  %s  -->  %s"
 
 #: zypp/solver/detail/SATResolver.cc:1343
