@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 17:02+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -48,7 +48,7 @@ msgstr "No es posible clonar el objeto URL"
 
 #: zypp/Url.cc:313
 msgid "Invalid empty Url object reference"
-msgstr "Referencia de objeto de URL vacío no válido"
+msgstr "Referencia de objeto de URL vacío no válida"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
