@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 18:27+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -4390,7 +4390,7 @@ msgstr "no hay nada que proporcione %s, necesario para %s"
 #: zypp/solver/detail/SATResolver.cc:1017
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
-msgstr "no se puede instalar ambos elementos: %s y %s"
+msgstr "no es posible instalar ambos elementos: %s y %s"
 
 #: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
