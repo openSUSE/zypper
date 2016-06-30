@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:51+0000\n"
+"PO-Revision-Date: 2016-06-30 12:52+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
@@ -4027,7 +4027,7 @@ msgstr "トゥンブカ語"
 #. language code: tup
 #: zypp/LanguageCode.cc:1069
 msgid "Tupi Languages"
-msgstr "トゥピー語"
+msgstr "トゥピー語族"
 
 #. language code: tur tr
 #: zypp/LanguageCode.cc:1071
