@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 13:01+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 13:10+0000\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -917,7 +917,7 @@ msgstr "Kaapverdië"
 #. :CPV:132:
 #: zypp/CountryCode.cc:209
 msgid "Christmas Island"
-msgstr "Christmas-eiland"
+msgstr "Christmaseiland"
 
 #. :CXR:162:
 #: zypp/CountryCode.cc:210
