@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:23+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-06-30 12:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -632,9 +632,9 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
-"Isolamento dei problemi, che significa supporto tecnico indirizzato a "
-"riprodurre i problemi dei clienti, isolare l'area del problema e fornire una "
-"soluzione ai problemi non risolti dal Supporto di Livello 1."
+"Isolamento del problema, ovvero supporto tecnico indirizzato a riprodurre i "
+"problemi del cliente, isolare l'area del problema e fornire una soluzione ai "
+"problemi non risolti dal Supporto di Livello 1"
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -642,10 +642,9 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
-"Risoluzione dei problemi, che significa supporto tecnico indirizzato a "
-"risolvere problemi complessi con l'ausilio dell'ingegneria nella risoluzione "
-"dei difetti di prodotto che sono stati identificati dal Supporto di Livello "
-"2."
+"Risoluzione del problema, ovvero supporto tecnico indirizzato a risolvere "
+"problemi complessi attraverso la programmazione nella correzione dei difetti "
+"di prodotto che sono stati identificati dal Supporto di Livello 2."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
@@ -782,7 +781,7 @@ msgstr "Bulgaria"
 #. :BGR:100:
 #: zypp/CountryCode.cc:181
 msgid "Bahrain"
-msgstr "Bahrein"
+msgstr "Bahrain"
 
 #. :BHR:048:
 #: zypp/CountryCode.cc:182
@@ -878,7 +877,7 @@ msgstr "Costa d'Avorio"
 #. :CIV:384:
 #: zypp/CountryCode.cc:201
 msgid "Cook Islands"
-msgstr "Isole di Cook"
+msgstr "Isole Cook"
 
 #. :COK:184:
 #: zypp/CountryCode.cc:202
@@ -918,7 +917,7 @@ msgstr "Capo Verde"
 #. :CPV:132:
 #: zypp/CountryCode.cc:209
 msgid "Christmas Island"
-msgstr "Isola di Natale"
+msgstr "Isola Christmas"
 
 #. :CXR:162:
 #: zypp/CountryCode.cc:210
@@ -1003,7 +1002,7 @@ msgstr "Finlandia"
 #. :FIN:246:
 #: zypp/CountryCode.cc:226
 msgid "Fiji"
-msgstr "Figi"
+msgstr "Fiji"
 
 #. :FJI:242:
 #: zypp/CountryCode.cc:227
@@ -1102,7 +1101,7 @@ msgstr "Grecia"
 #. :GRC:300:
 #: zypp/CountryCode.cc:246
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Georgia del Sud e isole Sandwich meridionali"
+msgstr "Georgia meridionale e Isole Sandwich meridionali"
 
 #. :SGS:239:
 #: zypp/CountryCode.cc:247
