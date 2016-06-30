@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 18:01+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -492,20 +492,19 @@ msgstr "Componente de puerto no válido %s"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
-msgstr "El esquema URL requiere un nombre de ruta"
+msgstr "El esquema URL requiere un nombre de vía"
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
-msgstr "No se permiten rutas relativas si existe una autoridad"
+msgstr "No se permiten vías relativas si existe una autoridad"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
-msgstr "La cadena codificada incluye un byte NULO"
+msgstr "La cadena cifrada incluye un byte nulo"
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
-msgstr ""
-"Parámetro de carácter de separación para la división de matrices no válido"
+msgstr "Carácter separador de división de conjunto de parámetros incorrecto"
 
 #: zypp/url/UrlUtils.cc:213
 msgid "Invalid parameter map split separator character"
