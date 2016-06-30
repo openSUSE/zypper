@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 18:31+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 18:32+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -4582,7 +4582,7 @@ msgstr "Modo de coincidencias %s desconocido para el patrón %s"
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "Expresión regular '%s' no válida: regcomp ha devuelto %d"
+msgstr "Expresión regular %s no válida: regcomp ha devuelto %d"
 
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
@@ -4591,13 +4591,13 @@ msgstr "Expresión regular '%s' no válida"
 
 #: zypp/misc/CheckAccessDeleted.cc:242
 msgid "Please install package 'lsof' first."
-msgstr "Instale primero el paquete 'lsof'."
+msgstr "Instale primero el paquete lsof."
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
-msgstr "Se requiere autenticación para '%s'"
+msgstr "Se requiere autenticación para %s"
 
 #: zypp/media/MediaException.cc:31
 #, c-format, boost-format
@@ -4617,12 +4617,12 @@ msgstr "Nombre de archivo incorrecto: %s"
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "El medio no se ha abierto cuando se intentaba realizar la acción '%s'."
+msgstr "No se ha abierto el medio al intentar realizar la acción %s."
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "No se encuentra el archivo '%s' en el medio '%s'"
+msgstr "No se ha encontrado el archivo %s en el medio %s."
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
