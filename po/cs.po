@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-30 22:16+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 22:22+0000\n"
+"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -496,7 +496,7 @@ msgstr "Verze"
 #: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
-msgstr "Arch"
+msgstr "Architektura"
 
 #: src/info.cc:76
 msgid "Vendor"
@@ -895,7 +895,7 @@ msgstr "Není nainstalován žádný poskytovatel '%s'."
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr "závislost '%s' je již nainstalována"
+msgstr "závislost '%s' je již nainstalována."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:98
@@ -1630,7 +1630,7 @@ msgstr "Po operaci bude dodatečně využito %s."
 
 #: src/Summary.cc:1251
 msgid "No additional space will be used or freed after the operation."
-msgstr "Po operaci nebude použito ani uvolněno žádné další místo"
+msgstr "Po operaci nebude použito ani uvolněno žádné další místo."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1258
@@ -2027,7 +2027,7 @@ msgid ""
 msgstr ""
 "Příčinou mohou být neplatná metadata v repozitáři nebo chyba v analyzátoru "
 "metadat. Ve druhém případě a v případě pochybností odešlete zprávu o chybě "
-"podle pokynů na stránce http://en.opensuse.org/Zypper/Troubleshooting."
+"podle pokynů na stránce http://en.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -2089,7 +2089,7 @@ msgstr ""
 #: src/repos.cc:820
 #, c-format, boost-format
 msgid "Disabling repository '%s'."
-msgstr "Zakazuji repozitář '%s'"
+msgstr "Zakazuji repozitář '%s'."
 
 #: src/repos.cc:834
 #, c-format, boost-format
@@ -2221,7 +2221,7 @@ msgstr "Nelze otevřít soubor '%s' pro zápis."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
-msgstr "Pravděpodobně nemáte oprávnění k zápisu."
+msgstr "Pravděpodobně nemáte oprávnění k zápisu?"
 
 #: src/repos.cc:1196
 #, c-format, boost-format
@@ -2376,12 +2376,12 @@ msgstr "Automatické obnovení"
 #: src/repos.cc:1648
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
-msgstr "Načítání dat z média '%s'."
+msgstr "Načítání dat z média '%s'"
 
 #: src/repos.cc:1654
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
-msgstr "Problém při načítání dat z média '%s'."
+msgstr "Problém při načítání dat z média '%s'"
 
 #: src/repos.cc:1655
 msgid "Please check if your installation media is valid and readable."
@@ -2681,7 +2681,7 @@ msgstr[2] "Repozitáře '%s' byly vyjmut ze zakázaných repozitářů služby '
 #: src/repos.cc:2970
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
-msgstr "Pro službu '%s' není nic ke změně"
+msgstr "Pro službu '%s' není nic ke změně."
 
 #: src/repos.cc:2976
 msgid "Error while modifying the service:"
@@ -5139,7 +5139,7 @@ msgstr "Je požadován alias nebo hromadná volba."
 #: src/Zypper.cc:3482
 #, c-format, boost-format
 msgid "Service '%s' not found."
-msgstr "Služba '%s' nebyla nalezena"
+msgstr "Služba '%s' nebyla nalezena."
 
 #: src/Zypper.cc:3509 src/Zypper.cc:3655 src/Zypper.cc:3734 src/Zypper.cc:3786
 msgid "Root privileges are required for modifying system repositories."
@@ -5147,7 +5147,7 @@ msgstr "Ke změně systémových repozitářů je třeba mít oprávnění uživ
 
 #: src/Zypper.cc:3564 src/Zypper.cc:3902
 msgid "Too few arguments."
-msgstr "Příliš málo argumentů"
+msgstr "Příliš málo argumentů."
 
 #: src/Zypper.cc:3587
 msgid ""
@@ -5238,7 +5238,7 @@ msgstr ""
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/Zypper.cc:3924
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "Ignoruji argumenty, označuji celý repozitář"
+msgstr "Ignoruji argumenty, označuji celý repozitář."
 
 #: src/Zypper.cc:3935
 #, c-format, boost-format
@@ -5318,7 +5318,7 @@ msgstr "Režim je nastaven na 'match-exact'"
 #: src/Zypper.cc:4922 src/Zypper.cc:4962
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
-msgstr "Neznámý typ balíčků: '%s'"
+msgstr "Neznámý typ balíčků: '%s'."
 
 #: src/Zypper.cc:4273
 #, c-format, boost-format
@@ -6210,7 +6210,7 @@ msgstr ""
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
-msgstr "Příliš mnoho argumentů"
+msgstr "Příliš mnoho argumentů."
 
 #: src/utils/messages.cc:56
 #, c-format, boost-format
@@ -6375,7 +6375,7 @@ msgid "patch"
 msgid_plural "patches"
 msgstr[0] "patch"
 msgstr[1] "patche"
-msgstr[2] "patche"
+msgstr[2] "patchů"
 
 #: src/utils/misc.cc:121
 msgid "srcpackage"
@@ -6486,7 +6486,7 @@ msgstr "Možná vám dochází místo."
 
 #: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
-msgstr "Problém při stahování zadaného souboru RPM."
+msgstr "Problém při stahování zadaného souboru RPM"
 
 #: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
