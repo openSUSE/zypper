@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 22:59+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 23:24+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -4253,7 +4253,7 @@ msgstr "サービスプラグインは属性の変更をサポートしていま
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
-msgstr "パッケージ %sは転送中に破損したようです。"
+msgstr "パッケージ %s は転送中に破れてしまったようです。もう一度取得しますか?"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4267,11 +4267,11 @@ msgstr "パッケージ %s の提供に失敗しました。もう一度取得�
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
-msgstr "applydeltarpm のチェックに失敗しました。"
+msgstr "applydeltarpmのチェックに失敗しました。"
 
 #: zypp/repo/PackageProvider.cc:525
 msgid "applydeltarpm failed."
-msgstr "applydeltarpm が失敗しました。"
+msgstr "applydeltarpmが失敗しました。"
 
 #: zypp/ZYppFactory.cc:394
 #, c-format, boost-format
@@ -4279,13 +4279,13 @@ msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
 msgstr ""
-"システム管理はプロセス ID %d (%s) によってロックされています。\n"
+"システム管理はpid %d (%s)のアプリケーションによってロックされています。\n"
 "再試行する前にこのアプリケーションを終了してください。"
 
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr "%s は distupgrade のリポジトリには属していません"
+msgstr "%s はdistupgradeのリポジトリに属していません"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
@@ -4295,7 +4295,7 @@ msgstr "%s は下位のアーキテクチャです"
 #: zypp/solver/detail/SATResolver.cc:983
 #, c-format, boost-format
 msgid "problem with installed package %s"
-msgstr "インストール済みのパッケージ %s に問題が発生しました。"
+msgstr "インストール済みのパッケージ %s に問題が発生しました"
 
 #: zypp/solver/detail/SATResolver.cc:986
 msgid "conflicting requests"
@@ -4321,12 +4321,12 @@ msgstr "パッケージ %s は存在しません"
 
 #: zypp/solver/detail/SATResolver.cc:1000
 msgid "unsupported request"
-msgstr "未対応の要求"
+msgstr "サポートされていない要求"
 
 #: zypp/solver/detail/SATResolver.cc:1003
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr "%s はシステムが提供するもので、削除することはできません"
+msgstr "%s はシステムが提供するもので、削除できません"
 
 #: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
@@ -4336,7 +4336,7 @@ msgstr "%s はインストールできません"
 #: zypp/solver/detail/SATResolver.cc:1012
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr "%2$s で必要としている %1$s はどこからも提供されていません"
+msgstr "%s (%s で必要)はどこからも提供されていません"
 
 #: zypp/solver/detail/SATResolver.cc:1017
 #, c-format, boost-format
@@ -4346,19 +4346,17 @@ msgstr "%s と %s の両方をインストールすることはできません"
 #: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%1$s は %3$s から提供されている %2$s と競合します"
+msgstr "%s は %s (%s から提供されている)と競合します"
 
 #: zypp/solver/detail/SATResolver.cc:1027
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%1$s は %3$s から提供されている %2$s を古いものとして廃棄します"
+msgstr "%s は %s (%s から提供されている)を古いものとして廃棄します"
 
 #: zypp/solver/detail/SATResolver.cc:1032
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
-msgstr ""
-"インストール済みの %1$s は、 %3$s から提供されている %2$s を古いものとして廃"
-"棄します"
+msgstr "インストール済みの %s は、%s (%s から提供されている)を古いものとして廃棄します"
 
 #: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
