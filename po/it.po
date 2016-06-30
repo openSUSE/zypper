@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 12:29+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -1874,7 +1874,7 @@ msgstr "Mayotte"
 #. :MYT:175:
 #: zypp/CountryCode.cc:401
 msgid "South Africa"
-msgstr "Sudafrica"
+msgstr "Sud Africa"
 
 #. :ZAF:710:
 #: zypp/CountryCode.cc:402
