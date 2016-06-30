@@ -15,16 +15,17 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2015-07-23 10:36+0800\n"
-"Last-Translator: Andrea Turrini <andrea.turrini@gmail.com>\n"
-"Language-Team: Italian <opensuse-translation@opensuse.org>\n"
-"Language: it_IT\n"
+"PO-Revision-Date: 2016-06-30 11:12+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Language-Team: Italian "
+"<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 "X-Poedit-Bookmarks: 370,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
-"X-Generator: Lokalize 1.5\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -54,11 +55,11 @@ msgstr "Impossibile analizzare i componenti dell'url"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
-msgstr "Impossibile inizializzare gli attributi del mutex"
+msgstr "Impossibile inizializzare gli attributi mutex"
 
 #: zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
-msgstr "Impossibile impostare l'attributo del mutex ricorsivo"
+msgstr "Impossibile impostare l'attributo mutex ricorsivo"
 
 #: zypp/thread/Mutex.cc:47
 msgid "Can't initialize recursive mutex"
