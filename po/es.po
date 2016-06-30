@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 17:02+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -44,7 +44,7 @@ msgstr "Parámetro de consulta URL LDAP %s no válido"
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
-msgstr "No se puede clonar el objeto URL"
+msgstr "No es posible clonar el objeto URL"
 
 #: zypp/Url.cc:313
 msgid "Invalid empty Url object reference"
