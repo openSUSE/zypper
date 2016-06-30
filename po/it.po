@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:54+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-06-30 12:57+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -4533,7 +4533,7 @@ msgstr "Uno o entrambi gli attributi '%s' e '%s' sono richiesti."
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
 msgid "Can't open lock file: %s"
-msgstr "Impossibile aprire il file lock: %s"
+msgstr "Impossibile aprire file bloccato: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
@@ -4577,28 +4577,27 @@ msgstr "È richiesta l'autenticazione per '%s'"
 #: zypp/media/MediaException.cc:31
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
-msgstr "Montaggio di %s su %s fallito"
+msgstr "Impossibile montare %s su %s."
 
 #: zypp/media/MediaException.cc:41
 #, c-format, boost-format
 msgid "Failed to unmount %s"
-msgstr "Smontaggio di %s fallito"
+msgstr "Impossibile smontare %s"
 
 #: zypp/media/MediaException.cc:47
 #, c-format, boost-format
 msgid "Bad file name: %s"
-msgstr "Nome del file sbagliato: %s"
+msgstr "Nome file errato: %s"
 
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr ""
-"Supporto non aperto quando durante il tentativo di eseguire l'azione '%s'."
+msgstr "Supporto non aperto durante il tentativo di esecuzione di '%s'."
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "File '%s' non trovato nel supporto '%s'"
+msgstr "File '%s' non trovato sul supporto '%s'."
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
@@ -4611,13 +4610,13 @@ msgstr "Supporto non collegato"
 
 #: zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr "Punto di collegamento del dispositivo sbagliato"
+msgstr "Punto di collegamento supporto errato"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "Inizializzazione dello scaricamento (curl) fallita per '%s'"
+msgstr "Inizializzazione download (curl) non riuscita per '%s'."
 
 #: zypp/media/MediaException.cc:91
 #, c-format, boost-format
@@ -4636,7 +4635,7 @@ msgstr "Il percorso '%s' sul supporto '%s' non è una directory."
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr "URI mal formato"
+msgstr "Formato URI errato"
 
 #: zypp/media/MediaException.cc:125
 msgid "Empty host name in URI"
@@ -4653,7 +4652,7 @@ msgstr "Destinazione vuota nell'URI"
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "Schema URI  non supportato in '%s'."
+msgstr "Schema URI non supportato in '%s'."
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
@@ -4666,7 +4665,7 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"Errore di scaricamento (curl) per '%s':\n"
+"Errore di download (curl) per '%s':\n"
 "Codice di errore: %s\n"
 "Messaggio di errore: %s\n"
 
@@ -4675,42 +4674,41 @@ msgstr ""
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
-"Si è verificato un errore durante l'impostazione delle opzioni di "
-"scaricamento (curl) per '%s':"
+"Errore durante l'impostazione delle opzioni di download (curl) per '%s':"
 
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "Il supporto della sorgente '%s' non contiene il supporto desiderato"
+msgstr "L'origine del supporto '%s' non contiene il supporto desiderato."
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "Il supporto '%s' è usato da un'altra istanza"
+msgstr "Supporto '%s' già utilizzato da un'altra istanza."
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
-msgstr "Non è possibile espellere alcun dispositivo"
+msgstr "Impossibile espellere supporti."
 
 #: zypp/media/MediaException.cc:184
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
-msgstr "Non è possibile espellere il dispositivo '%s'"
+msgstr "Impossibile espellere il supporto '%s'."
 
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr "Permesso di accesso a '%s' negato."
+msgstr "Autorizzazione per accedere a '%s' rifiutata."
 
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "Timeout superato mentre si accedeva a '%s'"
+msgstr "Timeout superato durante l'accesso a '%s'."
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
-msgstr "La posizione '%s' non è momentaneamente accessibile."
+msgstr "L'ubicazione '%s' è temporaneamente inaccessibile."
 
 #: zypp/media/MediaException.cc:223
 #, c-format, boost-format
