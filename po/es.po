@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 18:37+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 18:48+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -1019,7 +1019,7 @@ msgstr "Finlandia"
 #. :FIN:246:
 #: zypp/CountryCode.cc:226
 msgid "Fiji"
-msgstr "Fiji"
+msgstr "Fiyi"
 
 #. :FJI:242:
 #: zypp/CountryCode.cc:227
@@ -1202,7 +1202,7 @@ msgstr "Territorios británicos del Océano Índico"
 #. :IOT:086:
 #: zypp/CountryCode.cc:263
 msgid "Iraq"
-msgstr "Iraq"
+msgstr "Irak"
 
 #. :IRQ:368:
 #: zypp/CountryCode.cc:264
@@ -1600,7 +1600,7 @@ msgstr "Paraguay"
 #. :PRY:600:
 #: zypp/CountryCode.cc:343
 msgid "Qatar"
-msgstr "Qatar"
+msgstr "Catar"
 
 #. :QAT:634:
 #: zypp/CountryCode.cc:344
@@ -2080,7 +2080,7 @@ msgstr "Awetí"
 #. language code: aym ay
 #: zypp/LanguageCode.cc:233
 msgid "Aymara"
-msgstr "Aymara"
+msgstr "Aimara"
 
 #. language code: aze az
 #: zypp/LanguageCode.cc:235
@@ -2850,7 +2850,7 @@ msgstr "Ilocano"
 #. language code: ina ia
 #: zypp/LanguageCode.cc:561
 msgid "Interlingua (International Auxiliary Language Association)"
-msgstr "Interlingua (International Auxiliary Language Association)"
+msgstr "Interlingua (Asociación de la Lengua Auxiliar Internacional)"
 
 #. language code: inc
 #: zypp/LanguageCode.cc:563
@@ -3563,7 +3563,7 @@ msgstr "Pampanga"
 #. language code: pan pa
 #: zypp/LanguageCode.cc:853
 msgid "Panjabi"
-msgstr "Panjabi"
+msgstr "Panyabí"
 
 #. language code: pap
 #: zypp/LanguageCode.cc:855
@@ -4622,7 +4622,7 @@ msgstr "No se ha abierto el medio al intentar realizar la acción %s."
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "No se encuentra el archivo %s en el medio %s."
+msgstr "No se encuentra el archivo %s en el medio %s"
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
@@ -4751,7 +4751,7 @@ msgstr ""
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Método de autenticación HTTP no compatible %s."
+msgstr "Método de autenticación HTTP no compatible %s"
 
 #: zypp/media/MediaCurl.cc:1008
 msgid ""
