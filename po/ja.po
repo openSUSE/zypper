@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 08:28+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-06-30 08:37+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -1798,7 +1798,7 @@ msgstr "ウズベキスタン"
 #. :UZB:860:
 #: zypp/CountryCode.cc:390
 msgid "Holy See (Vatican City State)"
-msgstr "教皇庁 (ヴァティカン市国)"
+msgstr "教皇庁(ヴァティカン市国)"
 
 #. :VAT:336:
 #: zypp/CountryCode.cc:391
@@ -1902,7 +1902,7 @@ msgstr "アディゲ語"
 #. language code: afa
 #: zypp/LanguageCode.cc:173
 msgid "Afro-Asiatic (Other)"
-msgstr "アフリカ-アジア語 (その他)"
+msgstr "アフリカ-アジア語(その他)"
 
 #. language code: afh
 #: zypp/LanguageCode.cc:175
@@ -1957,7 +1957,7 @@ msgstr "アムハラ語"
 #. language code: ang
 #: zypp/LanguageCode.cc:197
 msgid "English, Old (ca.450-1100)"
-msgstr "古英語 (ca.450-1100)"
+msgstr "古英語(ca.450-1100)"
 
 #. language code: apa
 #: zypp/LanguageCode.cc:199
@@ -1997,7 +1997,7 @@ msgstr "アラパホー語"
 #. language code: art
 #: zypp/LanguageCode.cc:215
 msgid "Artificial (Other)"
-msgstr "人工語 (その他)"
+msgstr "人工語(その他)"
 
 #. language code: arw
 #: zypp/LanguageCode.cc:217
@@ -2092,7 +2092,7 @@ msgstr "バサ語"
 #. language code: bat
 #: zypp/LanguageCode.cc:255
 msgid "Baltic (Other)"
-msgstr "バルト語 (その他)"
+msgstr "バルト語(その他)"
 
 #. language code: bej
 #: zypp/LanguageCode.cc:257
@@ -2117,7 +2117,7 @@ msgstr "ベンガル語"
 #. language code: ber
 #: zypp/LanguageCode.cc:265
 msgid "Berber (Other)"
-msgstr "ベルベル語 (その他)"
+msgstr "ベルベル語(その他)"
 
 #. language code: bho
 #: zypp/LanguageCode.cc:267
@@ -2152,7 +2152,7 @@ msgstr "シクシカ語"
 #. language code: bnt
 #: zypp/LanguageCode.cc:279
 msgid "Bantu (Other)"
-msgstr "バントゥー語 (その他)"
+msgstr "バントゥー語(その他)"
 
 #. language code: bos bs
 #: zypp/LanguageCode.cc:281
@@ -2172,7 +2172,7 @@ msgstr "ブルトン語"
 #. language code: btk
 #: zypp/LanguageCode.cc:287
 msgid "Batak (Indonesia)"
-msgstr "バタク語 (インドネシア)"
+msgstr "バタク語(インドネシア)"
 
 #. language code: bua
 #: zypp/LanguageCode.cc:289
@@ -2207,7 +2207,7 @@ msgstr "カドー語"
 #. language code: cai
 #: zypp/LanguageCode.cc:303
 msgid "Central American Indian (Other)"
-msgstr "中央アメリカインディアン語 (その他)"
+msgstr "中央アメリカインディアン語(その他)"
 
 #. language code: car
 #: zypp/LanguageCode.cc:305
@@ -2222,7 +2222,7 @@ msgstr "カタロニア語"
 #. language code: cau
 #: zypp/LanguageCode.cc:309
 msgid "Caucasian (Other)"
-msgstr "カフカス語 (その他)"
+msgstr "カフカス語(その他)"
 
 #. language code: ceb
 #: zypp/LanguageCode.cc:311
@@ -2232,7 +2232,7 @@ msgstr "セブアノ語"
 #. language code: cel
 #: zypp/LanguageCode.cc:313
 msgid "Celtic (Other)"
-msgstr "ケルト語 (その他)"
+msgstr "ケルト語(その他)"
 
 #. language code: cha ch
 #: zypp/LanguageCode.cc:315
@@ -2272,7 +2272,7 @@ msgstr "マリ語"
 #. language code: chn
 #: zypp/LanguageCode.cc:331
 msgid "Chinook Jargon"
-msgstr "混合チヌーク語"
+msgstr "チヌークジャーゴン語"
 
 #. language code: cho
 #: zypp/LanguageCode.cc:333
