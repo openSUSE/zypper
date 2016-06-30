@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 06:19+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 06:33+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -412,12 +412,12 @@ msgstr "サービスの保管場所がわかりません。"
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
 msgid "Url scheme does not allow a %s"
-msgstr "URL 方式では %s を許可していません"
+msgstr "URLスキームでは %s を許可していません"
 
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "無効な %s 部分です '%s'"
+msgstr "無効な %s コンポーネント '%s'"
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
