@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 12:48+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -4281,7 +4281,7 @@ msgstr ""
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
-msgstr "Verifica della firma fallita"
+msgstr "Verifica della firma non riuscita"
 
 #. TranslatorExplanation %s = name of the package being processed.
 #: zypp/repo/PackageProvider.cc:386
