@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 18:26+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 18:27+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -4367,12 +4367,12 @@ msgstr "el paquete %s no existe"
 
 #: zypp/solver/detail/SATResolver.cc:1000
 msgid "unsupported request"
-msgstr "petición no soportada"
+msgstr "petición no admitida"
 
 #: zypp/solver/detail/SATResolver.cc:1003
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr "%s no puede removerse por es proporcionado por el sistema"
+msgstr "%s proviene del sistema y no se puede eliminar"
 
 #: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
@@ -4382,7 +4382,7 @@ msgstr "%s no es instalable"
 #: zypp/solver/detail/SATResolver.cc:1012
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr "no hay nada que proporcione %s y que lo necesita %s"
+msgstr "no hay nada que proporcione %s, necesario para %s"
 
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
@@ -4390,7 +4390,7 @@ msgstr "no hay nada que proporcione %s y que lo necesita %s"
 #: zypp/solver/detail/SATResolver.cc:1017
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
-msgstr "no se puede instalar ambos %s y %s"
+msgstr "no se puede instalar ambos elementos: %s y %s"
 
 #: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
