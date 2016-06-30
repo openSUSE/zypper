@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 23:24+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 23:31+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -4469,7 +4469,7 @@ msgid ""
 "install %s (with vendor change)\n"
 "  %s  -->  %s"
 msgstr ""
-"%s をインストールする (ベンダーを変更する)\n"
+"%s をインストールする(ベンダーを変更する)\n"
 "  %s  -->  %s"
 
 #: zypp/solver/detail/SATResolver.cc:1343
@@ -4500,7 +4500,7 @@ msgstr "必要な属性 '%s' がありません。"
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "'%s' または '%s' (もしくはその両方) の属性が必要です。"
+msgstr "'%s' または '%s' (もしくはその両方)の属性が必要です。"
 
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
@@ -4509,7 +4509,7 @@ msgstr "ロックファイルを開けません: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
-msgstr "この作業は既に他のプログラムで実行されています。"
+msgstr "この作業はすでに他のプログラムで実行されています。"
 
 #. TranslatorExplanation followed by the list of error messages that lead to this exception
 #: zypp/base/Exception.cc:107
@@ -4519,26 +4519,26 @@ msgstr "履歴:"
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
 msgid "Unknown match mode '%s'"
-msgstr "不明な該当モード '%s'"
+msgstr "不明な該当モード「%s」"
 
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "パターン '%2$s' に対する不明な該当モード '%1$s' です"
+msgstr "該当モード「%s」がパターン「%s」に対して不明です"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "正規表現 '%s' が正しくありません。 regcomp は %d を返しました"
+msgstr "正規表現「%s」が正しくありません。regcompは %d を返しました"
 
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
 msgid "Invalid regular expression '%s'"
-msgstr "正規表現 '%s' が正しくありません"
+msgstr "正規表現「%s」が正しくありません"
 
 #: zypp/misc/CheckAccessDeleted.cc:242
 msgid "Please install package 'lsof' first."
-msgstr "'lsof' パッケージを先にインストールしてください。"
+msgstr "最初にパッケージ「lsof」をインストールしてください。"
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
@@ -4549,69 +4549,69 @@ msgstr "'%s' にアクセスするにはユーザ認証が必要です"
 #: zypp/media/MediaException.cc:31
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
-msgstr "%s を %s にマウントすることができませんでした"
+msgstr "%s を %s にマウントできませんでした"
 
 #: zypp/media/MediaException.cc:41
 #, c-format, boost-format
 msgid "Failed to unmount %s"
-msgstr "%s のマウントを解除することができませんでした"
+msgstr "%s をアンマウントできませんでした"
 
 #: zypp/media/MediaException.cc:47
 #, c-format, boost-format
 msgid "Bad file name: %s"
-msgstr "正しくないファイル名です: %s"
+msgstr "不正なファイル名: %s"
 
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "'%s' の動作を実行する際にメディアを開きません。"
+msgstr "アクション「%s」を実行しようとした際にメディアが開きませんでした"
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "ファイル '%s' はメディア '%s' 内に見つかりませんでした。"
+msgstr "ファイル「%s」がメディア「%s」に見つかりません"
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
 msgid "Cannot write file '%s'."
-msgstr "ファイル '%s' に書き込めません。"
+msgstr "ファイル「%s」を書き込めません。"
 
 #: zypp/media/MediaException.cc:72
 msgid "Medium not attached"
-msgstr "メディアが挿入されていません"
+msgstr "メディアが接続されていません"
 
 #: zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr "正しくないメディアの結合ポイントです"
+msgstr "不正なメディアの接続点"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "'%s' のダウンロード (curl) の初期化に失敗しました"
+msgstr "「%s」のダウンロード(curl)初期化が失敗しました"
 
 #: zypp/media/MediaException.cc:91
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr "システム例外 '%s' がメディア '%s' 上で発生しました。"
+msgstr "システム例外「%s」がメディア「%s」で発生しました。"
 
 #: zypp/media/MediaException.cc:98
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr "メディア '%2$s' 上のパス '%1$s' はファイルではありません。"
+msgstr "パス「%s」(メディア「%s」上)がファイルではありません。"
 
 #: zypp/media/MediaException.cc:106
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "メディア '%2$s' 上のパス '%1$s' はディレクトリではありません。"
+msgstr "パス「%s」(メディア「%s」上)はディレクトリではありません。"
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr "不正な URI"
+msgstr "不正な形式のURI"
 
 #: zypp/media/MediaException.cc:125
 msgid "Empty host name in URI"
-msgstr "URI にホスト名が含まれていません"
+msgstr "URIのホスト名が空です"
 
 #: zypp/media/MediaException.cc:130
 msgid "Empty filesystem in URI"
