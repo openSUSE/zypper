@@ -17,16 +17,16 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-13 17:55+0000\n"
-"Last-Translator: jc sl <trcs@gmx.com>\n"
-"Language-Team: Spanish <http://l10n.opensuse.org/projects/libzypp/master/es/>"
-"\n"
+"PO-Revision-Date: 2016-06-30 17:02+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Language-Team: Spanish "
+"<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.5\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -40,7 +40,7 @@ msgstr "Cadena de consulta URL LDAP no válida"
 #: zypp/Url.cc:153
 #, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Parámetro de consulta URL LDAP '%s' no válido"
+msgstr "Parámetro de consulta URL LDAP %s no válido"
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
@@ -275,7 +275,7 @@ msgstr "creada copia de seguridad %s"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2365
 msgid "Signature is OK"
-msgstr "La firma es correcta."
+msgstr "La firma es correcta"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2367
@@ -285,22 +285,22 @@ msgstr "Tipo de firma desconocido"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
 msgid "Signature does not verify"
-msgstr "La firma no satisface la verificación."
+msgstr "La firma no cumple la verificación"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2371
 msgid "Signature is OK, but key is not trusted"
-msgstr "La firma es correcta, pero la clave no es de confianza."
+msgstr "La firma es correcta, pero la clave no es de confianza"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2373
 msgid "Signatures public key is not available"
-msgstr "La clave pública de firma no está disponible."
+msgstr "La clave pública de firma no está disponible"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2375
 msgid "File does not exist or signature can't be checked"
-msgstr "El archivo no existe o no es posible comprobar la firma."
+msgstr "El archivo no existe o no es posible comprobar la firma"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
@@ -4285,7 +4285,7 @@ msgstr "No hay ninguna dirección url en el repositorio."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr "El agregado de servicio no soporta cambios en sus atributos"
+msgstr "El complemento de servicio no admite cambios en un atributo."
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
@@ -4574,7 +4574,7 @@ msgstr "Modo de coincidencias '%s' desconocido"
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Modo de coincidencias '%s' desconocidos para el patrón '%s'."
+msgstr "Modo de coincidencias %s desconocido para el patrón %s"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
@@ -4726,7 +4726,7 @@ msgstr "Permiso de acceso a '%s' denegado."
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "Se excedió el tiempo de espera mientras se accedía a '%s'"
+msgstr "Se ha superado el tiempo de espera al acceder a %s."
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
@@ -4757,8 +4757,8 @@ msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
-"Visite el Centro de atención al cliente de Novell para verificar si su "
-"registración es válida y no expiró"
+"Visite el Centro de servicios al cliente de Novell para comprobar si el "
+"registro es válido y no ha caducado."
 
 #: zypp/sat/detail/PoolImpl.cc:184
 msgid "Can not create sat-pool."
