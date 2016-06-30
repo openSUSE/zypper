@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 12:48+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -4287,8 +4287,7 @@ msgstr "Verifica della firma non riuscita"
 #: zypp/repo/PackageProvider.cc:386
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr ""
-"Impossibile fornire il pacchetto %s. Si vuole provare a recuperarlo di nuovo?"
+msgstr "Impossibile fornire il pacchetto %s. Ritentare il recupero?"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
