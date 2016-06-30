@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:25+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 12:27+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -1279,7 +1279,7 @@ msgstr "Kazakistan"
 #. :KAZ:398:
 #: zypp/CountryCode.cc:282
 msgid "Lao People's Democratic Republic"
-msgstr "Repubblica democratica popolare del Lao"
+msgstr "Repubblica democratica popolare del Laos"
 
 #. :LAO:418:
 #: zypp/CountryCode.cc:283
