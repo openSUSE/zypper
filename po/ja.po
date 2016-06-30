@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:54+0000\n"
+"PO-Revision-Date: 2016-06-30 22:59+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
@@ -4237,15 +4237,15 @@ msgstr "署名ファイル %s が見つかりません。"
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "リポジトリ '%2$s' からファイル '%1$s' を提供することができません"
+msgstr "ファイル '%s' をリポジトリ '%s' から提供することができません"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
-msgstr "リポジトリに URL が設定されていません。"
+msgstr "リポジトリにURLが設定されていません。"
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr "サービスプラグインは、属性を変更する機能に対応していません。"
+msgstr "サービスプラグインは属性の変更をサポートしていません。"
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
@@ -4253,8 +4253,7 @@ msgstr "サービスプラグインは、属性を変更する機能に対応し
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
-msgstr ""
-"パッケージ %s は転送時に壊れてしまったようです。もう一度ダウンロードしますか?"
+msgstr "パッケージ %sは転送中に破損したようです。"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
