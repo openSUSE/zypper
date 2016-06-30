@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 17:07+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 17:58+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -264,7 +264,7 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #: zypp/target/rpm/RpmDb.cc:2056 zypp/target/rpm/RpmDb.cc:2202
 msgid "Additional rpm output"
-msgstr "Salida adicional del rpm"
+msgstr "Salida de rpm adicional"
 
 # include/nis_server/io.ycp:582
 # include/backup/ui.ycp:1286
@@ -310,34 +310,34 @@ msgstr "Se realizarán las siguientes acciones:"
 #: zypp/RepoManager.cc:297
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "No es posible leer el repositorio '%1%': Permiso denegado"
+msgstr "No es posible leer el repositorio %1%: permiso denegado"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "Error al leer el directorio '%s'"
+msgstr "Error al leer el directorio %s"
 
 #: zypp/RepoManager.cc:315
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr "No es posible leer el archivo de repositorio '%1%': Permiso denegado"
+msgstr "No es posible leer el archivo de repositorio %1%: permiso denegado"
 
 #: zypp/RepoManager.cc:338
 msgid "Repository alias cannot start with dot."
-msgstr "Alias de repositorio no puede comenzar con punto."
+msgstr "El alias del repositorio no puede comenzar con un punto."
 
 #: zypp/RepoManager.cc:349
 msgid "Service alias cannot start with dot."
-msgstr "El alias de servicio no puede comenzar con punto."
+msgstr "El alias del servicio no puede comenzar con un punto."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
 #: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
-msgstr "No es posible abrir '%s' para escritura."
+msgstr "No es posible abrir el archivo %s para escribir en él."
 
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
@@ -346,7 +346,8 @@ msgstr "No es posible abrir '%s' para escritura."
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
-"Servicio '%1%' desconocido: Eliminando repositorio de servicio huérfano '%2%'"
+"Servicio desconocido %1%: se va a eliminar el repositorio de servicios "
+"huérfano %2%"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
@@ -358,30 +359,30 @@ msgstr[1] "No se han encontrado metadatos válidos en las URL especificadas"
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
 #, c-format, boost-format
 msgid "Can't create %s"
-msgstr "No se puede crear %s"
+msgstr "No es posible crear %s"
 
 #: zypp/RepoManager.cc:1140
 msgid "Can't create metadata cache directory."
-msgstr "No se puede crear el directorio para la cache de metadata."
+msgstr "No es posible crear el directorio para el caché de metadatos."
 
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "Construyendo el caché del repositorio '%s'"
+msgstr "Construyendo el caché del repositorio %s"
 
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "No se puede crear la cache en %s - no se poseen permisos de escritura."
+msgstr "No es posible crear el caché en %s, no posee permisos de escritura."
 
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "Error al cachear el repositorio (%d)."
+msgstr "Error al añadir a caché el repositorio (%d)."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
-msgstr "Tipo de repositorio desconocido"
+msgstr "Tipo de repositorio no gestionado"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -392,18 +393,18 @@ msgstr "Tipo de repositorio desconocido"
 #: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
-msgstr "Se ha producido un error leer desde '%s'"
+msgstr "Error al intentar leer de %s"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
-msgstr "Error desconocido leyendo desde '%s'"
+msgstr "Error desconocido al leer de %s"
 
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "Añadiendo el repositorio '%s'"
+msgstr "Añadiendo el repositorio %s"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
