@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-06-30 12:53+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
@@ -4484,12 +4484,12 @@ msgstr "installa %s da repository escluso"
 #: zypp/solver/detail/SATResolver.cc:1318
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr "ritorna %s alla versione %s"
+msgstr "downgrade di %s a %s"
 
 #: zypp/solver/detail/SATResolver.cc:1325
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
-msgstr "cambio di architettura da %s a %s"
+msgstr "modifica dell'architettura di %s in %s"
 
 #: zypp/solver/detail/SATResolver.cc:1334
 #, c-format, boost-format
