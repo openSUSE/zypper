@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 13:14+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 13:35+0000\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -2922,7 +2922,7 @@ msgstr "Katsjin"
 #. language code: kal kl
 #: zypp/LanguageCode.cc:595
 msgid "Kalaallisut"
-msgstr "Kalaallisut"
+msgstr "Groenlands"
 
 #. language code: kam
 #: zypp/LanguageCode.cc:597
@@ -2942,7 +2942,7 @@ msgstr "Karen"
 #. language code: kas ks
 #: zypp/LanguageCode.cc:603
 msgid "Kashmiri"
-msgstr "Kashmiri"
+msgstr "Kasjmiri"
 
 #. language code: kau kr
 #: zypp/LanguageCode.cc:605
@@ -2987,7 +2987,7 @@ msgstr "Khotanees"
 #. language code: kik ki
 #: zypp/LanguageCode.cc:621
 msgid "Kikuyu"
-msgstr "Kikuyu"
+msgstr "Gikuyu"
 
 #. language code: kin rw
 #: zypp/LanguageCode.cc:623
