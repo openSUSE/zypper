@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 21:28+0000\n"
+"PO-Revision-Date: 2016-06-30 21:46+0000\n"
 "Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
@@ -47,7 +47,7 @@ msgstr "Neplatný parametr dotazu LDAP URL %s"
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
-msgstr "Nelze zkopírovat objekt URL."
+msgstr "Nelze zkopírovat objekt URL"
 
 #: zypp/Url.cc:313
 msgid "Invalid empty Url object reference"
@@ -59,7 +59,7 @@ msgstr "Nelze analyzovat součásti URL"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
-msgstr "Nelze inicializovat atributy mutex."
+msgstr "Nelze inicializovat atributy mutex"
 
 #: zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -67,11 +67,11 @@ msgstr "Nelze nastavit rekurzivní atribut mutex"
 
 #: zypp/thread/Mutex.cc:47
 msgid "Can't initialize recursive mutex"
-msgstr "Nelze inicializovat rekurzivní mutex."
+msgstr "Nelze inicializovat rekurzivní mutex"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr "Nelze získat zámek mutex."
+msgstr "Nelze získat zámek mutex"
 
 #: zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
@@ -173,15 +173,15 @@ msgstr "Svazek HAL není inicializován"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
-msgstr "Nelze vytvořit připojení dbus."
+msgstr "Nelze vytvořit připojení dbus"
 
 #: zypp/target/hal/HalContext.cc:242
 msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: Nelze vytvořit kontext libhal."
+msgstr "libhal_ctx_new: Nelze vytvořit kontext libhal"
 
 #: zypp/target/hal/HalContext.cc:257
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: Nelze nastavit připojení dbus."
+msgstr "libhal_set_dbus_connection: Nelze nastavit připojení dbus"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
@@ -396,7 +396,7 @@ msgstr "Přidává se repozitář '%s'"
 #: zypp/RepoManager.cc:1701
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Neplatné jméno repozitáře na '%s'."
+msgstr "Neplatné jméno repozitáře na '%s'"
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
@@ -434,7 +434,7 @@ msgstr "Neplatná %s součást"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
-msgstr "Pro toto URL není podporována analýza řetězce dotazu."
+msgstr "Pro toto URL není podporována analýza řetězce dotazu"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
@@ -447,19 +447,19 @@ msgstr "Neplatné schéma URL %s"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
-msgstr "Schéma URL nepovoluje uživatelské jméno."
+msgstr "Schéma URL nepovoluje uživatelské jméno"
 
 #: zypp/url/UrlBase.cc:983
 msgid "Url scheme does not allow a password"
-msgstr "Schéma URL nepovoluje heslo."
+msgstr "Schéma URL nepovoluje heslo"
 
 #: zypp/url/UrlBase.cc:1012
 msgid "Url scheme requires a host component"
-msgstr "Schéma URL vyžaduje součást hostitele."
+msgstr "Schéma URL vyžaduje součást hostitele"
 
 #: zypp/url/UrlBase.cc:1022
 msgid "Url scheme does not allow a host component"
-msgstr "Schéma URL nepovoluje součást hostitele."
+msgstr "Schéma URL nepovoluje součást hostitele"
 
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
@@ -468,7 +468,7 @@ msgstr "Neplatná součást hostitele %s"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
-msgstr "Schéma URL nepovoluje port."
+msgstr "Schéma URL nepovoluje port"
 
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
@@ -477,7 +477,7 @@ msgstr "Neplatná součást portu %s"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
-msgstr "Schéma URL vyžaduje název cesty."
+msgstr "Schéma URL vyžaduje název cesty"
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
@@ -485,7 +485,7 @@ msgstr "Relativní cesta není povolena, pokud existuje autorita"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
-msgstr "Zakódovaný řetězec obsahuje bajt NUL."
+msgstr "Zakódovaný řetězec obsahuje bajt NUL"
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
@@ -605,7 +605,7 @@ msgstr "neplatné"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr "Tato úroveň podpory není specifikována."
+msgstr "Tato úroveň podpory není specifikována"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
@@ -644,7 +644,7 @@ msgstr ""
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr "Další zákaznický kontakt je nezbytný pro získání podpory-"
+msgstr "Další zákaznický kontakt je nezbytný pro získání podpory."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
@@ -3010,7 +3010,7 @@ msgstr "Indoevropské (jiné)"
 #. language code: inh
 #: zypp/LanguageCode.cc:569
 msgid "Ingush"
-msgstr "Ingush"
+msgstr "Inguština"
 
 #. language code: ipk ik
 #: zypp/LanguageCode.cc:571
@@ -4664,7 +4664,7 @@ msgstr "neinstalovat nejnovější verzi %s"
 #: zypp/solver/detail/SATResolver.cc:1279
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr "ponechat %s i přes podřadnou architekturu."
+msgstr "ponechat %s i přes podřadnou architekturu"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #, c-format, boost-format
