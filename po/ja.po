@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 12:52+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-06-30 12:53+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -4037,7 +4037,7 @@ msgstr "トルコ語"
 #. language code: tut
 #: zypp/LanguageCode.cc:1073
 msgid "Altaic (Other)"
-msgstr "アルタイ語 (その他)"
+msgstr "アルタイ語(その他)"
 
 #. language code: twi tw
 #: zypp/LanguageCode.cc:1077
@@ -4117,7 +4117,7 @@ msgstr "ヴォート語"
 #. language code: wak
 #: zypp/LanguageCode.cc:1107
 msgid "Wakashan Languages"
-msgstr "ワカシ語"
+msgstr "ワカシ語族"
 
 #. language code: wal
 #: zypp/LanguageCode.cc:1109
