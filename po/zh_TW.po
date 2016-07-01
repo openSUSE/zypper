@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-01 07:55+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 07:58+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -194,7 +194,7 @@ msgstr "RPM 失敗： "
 #: zypp/target/rpm/RpmDb.cc:1124
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
-msgstr "從檔案 %s 匯入公開金鑰失敗： %s"
+msgstr "從檔案 %s 匯入公開金鑰失敗：%s"
 
 #. TranslatorExplanation first %s is key name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1195
