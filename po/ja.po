@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 06:44+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 06:46+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5946,7 +5946,7 @@ msgstr "パッケージ '%s' には、ソースパッケージ '%s' がありま
 #: src/misc.cc:295
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "ソースパッケージ '%s' ('%s' パッケージ向け) が見つかりません。"
+msgstr "ソースパッケージ「%s」(「%s」パッケージ向け) が見つかりません。"
 
 #: src/misc.cc:373
 #, c-format, boost-format
@@ -6142,7 +6142,7 @@ msgstr "a/r/i"
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] "%2$u 秒経過すると、自動的に '%1$s' を選択します。"
+msgstr[0] "%u 秒経過すると、自動的に「%s」を選択します。"
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
