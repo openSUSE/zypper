@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2015-09-28 21:54+0200\n"
-"Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
-"Language-Team: Polish <opensuse-pl@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 07:23+0000\n"
+"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
+"Language-Team: Polish <https://l10n.opensuse.org/projects/libzypp/master/pl/>"
+"\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -325,12 +326,11 @@ msgstr "Nieznana usługa '%1%': Usuwanie zbędnego repozytorium usługi '%2%'"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
-#, fuzzy
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "Pod podanymi adresami URL nie znaleziono prawidłowych metadanych."
-msgstr[1] "Pod podanymi adresami URL nie znaleziono prawidłowych metadanych."
-msgstr[2] "Pod podanymi adresami URL nie znaleziono prawidłowych metadanych."
+msgstr[0] "Pod podanym adresem URL nie znaleziono prawidłowych metadanych"
+msgstr[1] "Pod podanymi adresami URL nie znaleziono prawidłowych metadanych"
+msgstr[2] "Pod podanymi adresami URL nie znaleziono prawidłowych metadanych"
 
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
 #, c-format, boost-format
@@ -558,12 +558,12 @@ msgstr "(wygasa w ciągu 24 godzin)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(wygasa w ciągu 24 godzin)"
-msgstr[1] "(wygasa w ciągu 24 godzin)"
-msgstr[2] "(wygasa w ciągu 24 godzin)"
+msgstr[0] "(wygasa w ciągu %d dnia)"
+msgstr[1] "(wygasa w ciągu %d dni)"
+msgstr[2] "(wygasa w ciągu %d dni)"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
