@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-01 11:58+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 14:40+0000\n"
+"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/libzypp/master/pl/>"
 "\n"
 "Language: pl\n"
@@ -40,7 +40,7 @@ msgstr "Nie można sklonować obiektu URL"
 
 #: zypp/Url.cc:313
 msgid "Invalid empty Url object reference"
-msgstr "Nieprawidłowe odwołanie pustego adresu URL"
+msgstr "Nieprawidłowe odwołanie do pustego adresu URL"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
@@ -60,11 +60,11 @@ msgstr "Nie można zainicjować rekursyjnego muteksu"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr "Nie można pobrać blokady muteksu."
+msgstr "Nie można pobrać blokady muteksu"
 
 #: zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
-msgstr "Nie można zwolnic blokacy muteksu."
+msgstr "Nie można zwolnic blokady muteksu"
 
 #: zypp/Dep.cc:96
 msgid "Provides"
@@ -150,15 +150,15 @@ msgstr "Niestety w tej wersji libzypp nie zawarto obsługi HAL."
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
-msgstr "HalContext nie połączony"
+msgstr "HalContext niepołączony"
 
 #: zypp/target/hal/HalContext.cc:127
 msgid "HalDrive not initialized"
-msgstr "HalDrive: niezainicjowany."
+msgstr "HalDrive: niezainicjowany"
 
 #: zypp/target/hal/HalContext.cc:137
 msgid "HalVolume not initialized"
-msgstr "HalVolume:  niezainicjowany."
+msgstr "HalVolume: niezainicjowany"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
@@ -174,8 +174,7 @@ msgstr "libhal_set_dbus_connection: nie można ustanowić połączenia dbus"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr ""
-"Nie można zainicjować kontekstu HAL -- demon hald nie jest uruchomiony?"
+msgstr "Nie można zainicjować kontekstu HAL — demon hald nie jest uruchomiony?"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
@@ -349,12 +348,12 @@ msgstr "Budowanie pamięci podręcznej repozytorium '%s'"
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "Nie można utworzyć pamięci podręcznej w %s - brak uprawnień do zapisu."
+msgstr "Nie można utworzyć pamięci podręcznej w %s — brak uprawnień do zapisu."
 
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "Tworzenie pamięci podręcznej repozytorium nie powiodło się (%d)"
+msgstr "Tworzenie pamięci podręcznej repozytorium nie powiodło się (%d)."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
@@ -405,7 +404,7 @@ msgstr "Nie można usunąć '%s'"
 
 #: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
 msgid "Can't figure out where the service is stored."
-msgstr "Nie można określić, gdzie przechowywana jest usługa."
+msgstr "Nie można określić, gdzie jest przechowywana usługa."
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
@@ -467,7 +466,7 @@ msgstr "Nieprawidłowy komponent portu '%s'"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
-msgstr "Schemat URL wymaga ścieżki"
+msgstr "Schemat URL wymaga nazwy ścieżki"
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
@@ -492,7 +491,7 @@ msgstr "Nieprawidłowy znak parametru połączenia tablicy"
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
-msgstr "Nie można otworzyć pty  (%s)."
+msgstr "Nie można otworzyć pty (%s)."
 
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
@@ -502,7 +501,7 @@ msgstr "Nie można otworzyć potoku (%s)."
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr "Nie można wykonać chroot dla \"%s\" (%s)."
+msgstr "Nie można wykonać polecenia chroot dla '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
@@ -609,7 +608,7 @@ msgid ""
 "correct product defect errors."
 msgstr ""
 "Określenie problemu oznacza, że pomoc techniczna obejmuje informację "
-"związaną z kompatybilnością, pomocą przy instalacji,  użytkowaniem, bieżącym "
+"związaną z kompatybilnością, pomocą przy instalacji, użytkowaniem, bieżącym "
 "utrzymaniem oraz podstawowym rozwiązywaniem problemów. Pomoc techniczna na "
 "poziomie 1 nie obejmuje naprawy błędów produktu."
 
@@ -629,9 +628,10 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
-"Rozwiązywanie problemu oznacza, że pomoc techniczna obejmuje rozwiązywanie "
-"złożonych problemów, które zidentyfikowane w ramach wsparcia technicznego na "
-"poziomie 2 wymagają zaangażowania rozwiązań inżynieryjnych."
+"Rozwiązywanie problemu: specjalna pomoc techniczna w celu rozwiązywania "
+"złożonych problemów z użyciem rozwiązań inżynieryjnych do naprawiania "
+"defektów produktów zidentyfikowanych w ramach wsparcia technicznego na "
+"poziomie 2."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
@@ -640,7 +640,7 @@ msgstr ""
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "Nieznana opcja wsparcia. Brak opisu."
+msgstr "Nieznana opcja wsparcia. Brak opisu"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -1341,7 +1341,7 @@ msgstr "Czarnogóra"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
-msgstr "Saint Martin"
+msgstr "Saint-Martin"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
@@ -1762,7 +1762,7 @@ msgstr "Trynidad i Tobago"
 #. language code: tvl
 #: zypp/CountryCode.cc:381 zypp/LanguageCode.cc:1075
 msgid "Tuvalu"
-msgstr "tuvalu"
+msgstr "Tuvalu"
 
 #. :TUV:798:
 #: zypp/CountryCode.cc:382
@@ -1966,7 +1966,7 @@ msgstr "amharski"
 #. language code: ang
 #: zypp/LanguageCode.cc:197
 msgid "English, Old (ca.450-1100)"
-msgstr "staroangielski (ok. 450 - 1100)"
+msgstr "staroangielski (ok. 450–1100)"
 
 #. language code: apa
 #: zypp/LanguageCode.cc:199
@@ -2101,7 +2101,7 @@ msgstr "basa"
 #. language code: bat
 #: zypp/LanguageCode.cc:255
 msgid "Baltic (Other)"
-msgstr "bałtyckie"
+msgstr "bałtyckie (inne)"
 
 #. language code: bej
 #: zypp/LanguageCode.cc:257
@@ -2361,7 +2361,7 @@ msgstr "tatarski (krymski)"
 #. language code: crp
 #: zypp/LanguageCode.cc:363
 msgid "Creoles and Pidgins (Other)"
-msgstr "Kreolskie i pidżyny różne"
+msgstr "Kreolskie i pidżyny różne (inne)"
 
 #. language code: csb
 #: zypp/LanguageCode.cc:365
@@ -2406,7 +2406,7 @@ msgstr "delaware"
 #. language code: den
 #: zypp/LanguageCode.cc:383
 msgid "Slave (Athapascan)"
-msgstr "niewolnicze (athapaskańskie)"
+msgstr "niewolnicze (atapaskańskie)"
 
 #. language code: dgr
 #: zypp/LanguageCode.cc:385
@@ -2446,7 +2446,7 @@ msgstr "duala"
 #. language code: dum
 #: zypp/LanguageCode.cc:399
 msgid "Dutch, Middle (ca.1050-1350)"
-msgstr "średnioholenderski (ok. 1050 - 1350)"
+msgstr "średnioholenderski (ok. 1050–1350)"
 
 #. language code: dut nld nl
 #: zypp/LanguageCode.cc:401 zypp/LanguageCode.cc:403
@@ -2491,7 +2491,7 @@ msgstr "angielski"
 #. language code: enm
 #: zypp/LanguageCode.cc:419
 msgid "English, Middle (1100-1500)"
-msgstr "średnioangielski (1100 - 1500)"
+msgstr "średnioangielski (1100–1500)"
 
 #. language code: epo eo
 #: zypp/LanguageCode.cc:421
@@ -2561,12 +2561,12 @@ msgstr "francuski"
 #. language code: frm
 #: zypp/LanguageCode.cc:449
 msgid "French, Middle (ca.1400-1600)"
-msgstr "średniofrancuski (ok. 1400 - 1600)"
+msgstr "średniofrancuski (ok. 1400–1600)"
 
 #. language code: fro
 #: zypp/LanguageCode.cc:451
 msgid "French, Old (842-ca.1400)"
-msgstr "starofrancuski (842 - ok. 1400)"
+msgstr "starofrancuski (842–ok. 1400)"
 
 #. language code: fry fy
 #: zypp/LanguageCode.cc:453
@@ -2646,12 +2646,12 @@ msgstr "mański"
 #. language code: gmh
 #: zypp/LanguageCode.cc:487
 msgid "German, Middle High (ca.1050-1500)"
-msgstr "średniowysokoniemiecki (ok. 1050 - 1500)"
+msgstr "średniowysokoniemiecki (ok. 1050–1500)"
 
 #. language code: goh
 #: zypp/LanguageCode.cc:489
 msgid "German, Old High (ca.750-1050)"
-msgstr "starowysokoniemiecki (ok. 750 - 1050)"
+msgstr "starowysokoniemiecki (ok. 750–1050)"
 
 #. language code: gon
 #: zypp/LanguageCode.cc:491
@@ -2681,7 +2681,7 @@ msgstr "grecki, starożytny (do 1453)"
 #. language code: gre ell el
 #: zypp/LanguageCode.cc:501 zypp/LanguageCode.cc:503
 msgid "Greek, Modern (1453-)"
-msgstr "grecki, współczesny (1453 -)"
+msgstr "grecki, współczesny (1453–)"
 
 #. language code: grn gn
 #: zypp/LanguageCode.cc:505
@@ -2821,12 +2821,12 @@ msgstr "ilokano"
 #. language code: ina ia
 #: zypp/LanguageCode.cc:561
 msgid "Interlingua (International Auxiliary Language Association)"
-msgstr "interlingwa (międzynarodowy język pomocniczy)"
+msgstr "interlingua (Międzynarodowe Stowarzyszenie Języka Pomocniczego)"
 
 #. language code: inc
 #: zypp/LanguageCode.cc:563
 msgid "Indic (Other)"
-msgstr "indyjskie, inne"
+msgstr "indyjskie (inne)"
 
 #. language code: ind id
 #: zypp/LanguageCode.cc:565
@@ -2836,7 +2836,7 @@ msgstr "indonezyjski"
 #. language code: ine
 #: zypp/LanguageCode.cc:567
 msgid "Indo-European (Other)"
-msgstr "indo-europejskie, inne"
+msgstr "indoeuropejskie (inne)"
 
 #. language code: inh
 #: zypp/LanguageCode.cc:569
@@ -3201,7 +3201,7 @@ msgstr "maoryjski"
 #. language code: map
 #: zypp/LanguageCode.cc:717
 msgid "Austronesian (Other)"
-msgstr "języki malajo-polinezyjskie"
+msgstr "języki malajo-polinezyjskie (inne)"
 
 #. language code: mar mr
 #: zypp/LanguageCode.cc:719
@@ -3406,7 +3406,7 @@ msgstr "niueński"
 #. language code: nno nn
 #: zypp/LanguageCode.cc:803
 msgid "Norwegian Nynorsk"
-msgstr "norweski (Nynorsk)"
+msgstr "norweski (nynorsk)"
 
 #. language code: nob nb
 #: zypp/LanguageCode.cc:805
@@ -3501,7 +3501,7 @@ msgstr "osetyński"
 #. language code: ota
 #: zypp/LanguageCode.cc:841
 msgid "Turkish, Ottoman (1500-1928)"
-msgstr "turecki, osmańskie (1500 - 1928)"
+msgstr "turecki, osmańskie (1500–1928)"
 
 #. language code: oto
 #: zypp/LanguageCode.cc:843
@@ -3546,7 +3546,7 @@ msgstr "palauański"
 #. language code: peo
 #: zypp/LanguageCode.cc:859
 msgid "Persian, Old (ca.600-400 B.C.)"
-msgstr "staroperski (ok. 600 - 400 p.n.e.)"
+msgstr "staroperski (ok. 600–400 p.n.e.)"
 
 #. language code: per fas fa
 #: zypp/LanguageCode.cc:861 zypp/LanguageCode.cc:863
@@ -3556,7 +3556,7 @@ msgstr "perski"
 #. language code: phi
 #: zypp/LanguageCode.cc:865
 msgid "Philippine (Other)"
-msgstr "filipińskie, inne"
+msgstr "filipińskie (inne)"
 
 #. language code: phn
 #: zypp/LanguageCode.cc:867
@@ -4246,7 +4246,7 @@ msgstr "Nie znaleziono pliku sygnatury %s"
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Nie można dostarczyć pliku %s z repozytorium %s."
+msgstr "Nie można dostarczyć pliku '%s' z repozytorium '%s'"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
@@ -4380,7 +4380,7 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s wymaga %s, lecz to wymaganie nie może być spełnione"
+msgstr "%s wymaga %s, lecz nie można spełnić tego wymagania"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
@@ -4538,7 +4538,7 @@ msgstr "Historia:"
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
 msgid "Unknown match mode '%s'"
-msgstr "Nieznany tryb dopasowania '%s'."
+msgstr "Nieznany tryb dopasowania '%s'"
 
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
@@ -4643,7 +4643,7 @@ msgstr "Pusty element docelowy w adresie URI"
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "Nieobsługiwany schemat adresu URI w '%s'"
+msgstr "Nieobsługiwany schemat adresu URI w '%s'."
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
@@ -4729,7 +4729,7 @@ msgstr ""
 
 #: zypp/sat/detail/PoolImpl.cc:184
 msgid "Can not create sat-pool."
-msgstr "Nie można utworzyć \"sat-pool\""
+msgstr "Nie można utworzyć sat-pool."
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
