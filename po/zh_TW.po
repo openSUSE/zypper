@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-01 09:24+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -636,7 +636,7 @@ msgstr "無效的 CPE 名稱"
 
 #: src/info.cc:498
 msgid "Update Repositories"
-msgstr "更新儲存庫"
+msgstr "更新套件庫"
 
 #: src/info.cc:506
 msgid "Content Id"
