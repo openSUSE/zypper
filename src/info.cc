@@ -134,7 +134,7 @@ namespace
   };
 
   /** \relates KNSplit Stream output */
-  std::ostream & operator<<( std::ostream & str, const KNSplit & obj )
+  inline std::ostream & operator<<( std::ostream & str, const KNSplit & obj )
   { return str << "[{" << obj._kind << "}{" << obj._name << "}]"; }
 
 } // namespace
