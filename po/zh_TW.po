@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-01 08:58+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 09:00+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -109,7 +109,7 @@ msgstr "補充"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "可疑的類型 %s (%u 位元組檢查總數 %s)"
+msgstr "可疑的類型 '%s' (%u 位元組檢查總數 '%s')"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
@@ -354,7 +354,7 @@ msgstr "無法在 %s 建立快取 - 無寫入權限。"
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "快取儲存庫 (%d) 失敗。"
+msgstr "快取套件庫失敗 (%d)。"
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
