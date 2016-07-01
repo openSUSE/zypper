@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 05:34+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-07-01 05:35+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -4656,12 +4656,12 @@ msgstr "現在設定されているパッケージロック (施錠) の一覧�
 #. translators: -m, --matches
 #: src/Zypper.cc:2837
 msgid "Show the number of resolvables matched by each lock."
-msgstr "それぞれのロックに該当する解決方法の数を表示する"
+msgstr "各ロックによってマッチされたresolvableの数を示します。"
 
 #. translators: -s, --solvables
 #: src/Zypper.cc:2839
 msgid "List the resolvables matched by each lock."
-msgstr "それぞれのロックに該当する解決方法を表示する"
+msgstr "各ロックによってマッチされたresolvableを一覧表示します。"
 
 #: src/Zypper.cc:2855
 msgid ""
@@ -4953,7 +4953,7 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
-"　 ∧＿∧\n"
+"   ∧＿∧\n"
 "　( ´∀`)\n"
 "　(　∪ ∪\n"
 "　と＿)＿)"
