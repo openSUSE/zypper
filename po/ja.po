@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 02:09+0000\n"
+"PO-Revision-Date: 2016-07-01 05:13+0000\n"
 "Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
@@ -2051,7 +2051,7 @@ msgstr "指定したリポジトリ: "
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "無効化されたリポジトリ「%s」をスキップします"
+msgstr "無効化されたリポジトリ「%s」をスキップしています"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
@@ -2414,7 +2414,7 @@ msgstr "URI が有効でアクセス可能であることを確認してくだ�
 #: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "無効化されたサービス '%s' を飛ばしています。"
+msgstr "無効化されたサービス「%s」をスキップしています"
 
 #: src/repos.cc:2751
 #, c-format, boost-format
@@ -2477,14 +2477,14 @@ msgstr "サービス '%s' の名前を '%s' に設定しました。"
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "リポジトリ '%s' を有効化してサービス '%s' に追加しました。"
+msgstr[0] "リポジトリ「%s」を有効化されているサービスのリポジトリ「%s」に追加しました"
 
 #: src/repos.cc:2947
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "リポジトリ '%s' を無効化してサービス '%s' に追加しました。"
+msgstr[0] "リポジトリ「%s」を無効化されているサービスのリポジトリ「%s」に追加しました"
 
 #: src/repos.cc:2954
 #, c-format, boost-format
@@ -2492,7 +2492,7 @@ msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "リポジトリ '%s' を有効化されているサービス '%s' から削除しました。"
+msgstr[0] "リポジトリ「%s」を有効化されているサービスのリポジトリ「%s」から削除しました"
 
 #: src/repos.cc:2961
 #, c-format, boost-format
@@ -2501,7 +2501,7 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
-msgstr[0] "リポジトリ '%s' を無効化されているサービス '%s' から削除しました。"
+msgstr[0] "リポジトリ「%s」を無効化されているサービスのリポジトリ「%s」から削除しました"
 
 #: src/repos.cc:2970
 #, c-format, boost-format
