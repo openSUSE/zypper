@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 09:45+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 09:49+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -2156,9 +2156,7 @@ msgstr "由指定的 URI 解析檔案時發生錯誤"
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1754
 msgid "Is it a .repo file?"
-msgstr ""
-"這確定是一個 .repo 檔案嗎？請參閱 http://en.opensuse.org/Standards/RepoInfo "
-"獲取詳細資訊。"
+msgstr "這確定是一個 .repo 檔案嗎？"
 
 #: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
