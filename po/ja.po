@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 05:35+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 06:40+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -4988,7 +4988,7 @@ msgstr "別名または統合オプションを指定する必要があります
 #: src/Zypper.cc:3482
 #, c-format, boost-format
 msgid "Service '%s' not found."
-msgstr "サービス '%s' が見つかりません"
+msgstr "サービス「%s」が見つかりません。"
 
 #: src/Zypper.cc:3509 src/Zypper.cc:3655 src/Zypper.cc:3734 src/Zypper.cc:3786
 msgid "Root privileges are required for modifying system repositories."
@@ -5124,9 +5124,7 @@ msgstr ""
 #: src/Zypper.cc:4006
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
-msgstr ""
-"%s の RPM ヘッダを読み込む際に問題が発生しました。 RPM ファイルでない可能性が"
-"あります。"
+msgstr "%s のRPMヘッダを読み込む際に問題が発生しました。 RPMファイルでない可能性があります。"
 
 #: src/Zypper.cc:4028
 msgid "Plain RPM files cache"
@@ -5314,18 +5312,14 @@ msgstr " 解決方法 %d: "
 #: src/solve-commit.cc:71
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] ""
-"'1' を選択して上記の解決策を受け入れるか、スキップ (s) ／再試行 (r) ／キャン"
-"セル (c) のいずれかを選択してください。"
+msgstr[0] "「1」を使用して上記の解決策を受け入れるか、スキップ、再試行、またはキャンセルのいずれかを選択してください"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:78
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] ""
-"'1' を選択して上記の解決策を受け入れるか、キャンセル (c) を選択してキャンセル"
-"してください。"
+msgstr[0] "「1」を選択して上記の解決策を選択するか、「c」 を使用してキャンセルしてください"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
