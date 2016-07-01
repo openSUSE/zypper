@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 09:57+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 09:58+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -5818,7 +5818,7 @@ msgstr "使用箭頭或 pgUp/pgDown 按鍵以一行一行或一頁一頁捲動�
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr "請使用 Enter 鍵或空白鍵按行或按頁捲動文字。"
+msgstr "使用 Enter 或空白鍵來一行一行或一頁一頁捲動文字。"
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
@@ -5844,11 +5844,11 @@ msgstr "剖析 zypper.conf 時發生錯誤："
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr "未知選項"
+msgstr "未知選項 "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
-msgstr "遺失引數"
+msgstr "遺失引數 "
 
 #. translators: speaking of two mutually contradicting command line options
 #: src/utils/getopt.cc:123
