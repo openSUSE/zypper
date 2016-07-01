@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-01 04:04+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 05:14+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -3236,7 +3236,7 @@ msgstr "米南卡保语"
 #. language code: mis
 #: zypp/LanguageCode.cc:739
 msgid "Miscellaneous Languages"
-msgstr "混杂语诸语言"
+msgstr "杂语"
 
 #. language code: mkh
 #: zypp/LanguageCode.cc:741
@@ -3456,7 +3456,7 @@ msgstr "恩济马语"
 #. language code: oci oc
 #: zypp/LanguageCode.cc:829
 msgid "Occitan (post 1500)"
-msgstr "欧西坦语 (1500 前)"
+msgstr "欧西坦语 (1500 后)"
 
 #. language code: oji oj
 #: zypp/LanguageCode.cc:831
