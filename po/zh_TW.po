@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-01 08:43+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 08:46+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -289,7 +289,7 @@ msgstr "下列行動將被執行："
 #: zypp/RepoManager.cc:297
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "無法讀取儲存庫目錄「%1%」︰許可權遭拒"
+msgstr "無法讀取套件庫目錄 '%1%'︰許可權遭拒"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
