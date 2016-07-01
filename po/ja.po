@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-01 06:44+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5946,7 +5946,7 @@ msgstr "パッケージ '%s' には、ソースパッケージ '%s' がありま
 #: src/misc.cc:295
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "'%2$s' パッケージ向けのソースパッケージ '%1$s' が見つかりません。"
+msgstr "ソースパッケージ '%s' ('%s' パッケージ向け) が見つかりません。"
 
 #: src/misc.cc:373
 #, c-format, boost-format
