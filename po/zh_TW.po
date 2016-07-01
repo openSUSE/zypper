@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-01 09:55+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -42,7 +42,7 @@ msgstr "金鑰建立日期："
 
 #: src/callbacks/keyring.h:41
 msgid "Key Expires:"
-msgstr "金鑰期限："
+msgstr "金鑰過期日期："
 
 #: src/callbacks/keyring.h:42
 msgid "Rpm Name:"
