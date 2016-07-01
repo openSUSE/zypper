@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-01 07:55+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -177,7 +177,7 @@ msgstr "libhal_set_dbus_connection： 無法設定 dbus 連接"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "無法啟始化 HAL context -- hald 尚未執行嗎？"
+msgstr "無法啟始化 HAL 網路位置 -- hald 尚未執行嗎？"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
