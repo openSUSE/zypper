@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 09:24+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-01 09:26+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -691,7 +691,7 @@ msgstr "%1% 被信號 %2% 強制結束 (%3%)"
 
 #: src/subcommand.cc:328
 msgid "core dumped"
-msgstr "core dumped"
+msgstr "已執行磁心傾印"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
