@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-01 07:39+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-01 07:51+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -109,15 +109,15 @@ msgstr "補充"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "可疑的類型 '%s' (%u 位元組檢查總數 '%s')"
+msgstr "可疑的類型 %s (%u 位元組檢查總數 %s)"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
-msgstr "執行"
+msgstr " 已執行"
 
 #: zypp/target/TargetImpl.cc:332
 msgid " execution failed"
-msgstr "執行失敗"
+msgstr " 執行失敗"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
@@ -125,11 +125,11 @@ msgstr "執行失敗"
 #: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr "%s 已被作為 %s 執行)"
+msgstr "%s 已執行為 %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
-msgstr "當跳出時跳過執行"
+msgstr " 中止時跳過執行"
 
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
@@ -149,7 +149,7 @@ msgstr "安裝已如指示中止。"
 
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr "抱歉，此版本的 libzypp 沒有支援 HAL。"
+msgstr "抱歉，此版本的 libzypp 不支援 HAL。"
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
