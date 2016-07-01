@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 06:48+0000\n"
+"PO-Revision-Date: 2016-07-01 22:34+0000\n"
 "Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
@@ -883,7 +883,7 @@ msgstr "'%s' は既にインストール済みです。"
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "「%s」(「%s」を提供)はすでにインストール済みです。"
+msgstr "'%s' ('%s' を提供)はすでにインストール済みです。"
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
@@ -897,14 +897,14 @@ msgstr ""
 #: src/RequestFeedback.cc:108
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
-msgstr "「%s」に対する更新候補がありません。"
+msgstr "「%s」に対するアップデート候補がありません。"
 
 #: src/RequestFeedback.cc:114
 #, c-format, boost-format
 msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
-msgstr "更新候補「%s」が「%s」に対して存在しますが、指定したバージョン、アーキテクチャ、またはリポジトリに一致しません。"
+msgstr "アップデート候補「%s」が「%s」に対して存在しますが、指定したバージョン、アーキテクチャ、またはリポジトリに一致しません。"
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -999,7 +999,7 @@ msgstr "修正 '%s' は指定した日時以降に発行されていません。
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "インストール用に「%s」をリポジトリ「%s」から選択します。"
+msgstr "インストール用に「%s」(リポジトリ「%s」から選択)を選択します。"
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
@@ -1802,7 +1802,7 @@ msgstr "'%s' に対して何も URI が設定されていません。"
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr "%s (リポジトリ「%s」)に(baseurl=URI)の形式で1つ以上のベースURIエントリを設定してください。"
+msgstr "%s (リポジトリ '%s')に(baseurl=URI) の形式で 1 つ以上のベース URI エントリを設定してください。"
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
@@ -2051,7 +2051,7 @@ msgstr "指定したリポジトリ: "
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "無効化されたリポジトリ「%s」をスキップしています"
+msgstr "無効化されたリポジトリ '%s' をスキップします"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
@@ -2414,7 +2414,7 @@ msgstr "URI が有効でアクセス可能であることを確認してくだ�
 #: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "無効化されたサービス「%s」をスキップしています"
+msgstr "無効化されたサービス '%s' をスキップします"
 
 #: src/repos.cc:2751
 #, c-format, boost-format
@@ -2967,7 +2967,9 @@ msgstr ""
 "\tremove, rm\t\tパッケージを削除する\n"
 "\tverify, ve\t\tパッケージの依存関係を検証する\n"
 "\tsource-install, si\t構築の際に依存するものを含めてソースパッケージをインストールする\n"
-"\tinstall-new-recommends, inrインストール済みのパッケージから判断される新規推奨パッケージをインストールする\n"
+"\tinstall-new-recommends, inr\n"
+"\t\t\t\tインストール済みのパッケージから判断される\n"
+"\t\t\t\t新規推奨パッケージをインストールする\n"
 
 #: src/Zypper.cc:513
 msgid ""
