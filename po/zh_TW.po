@@ -13,15 +13,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-02-17 11:40+0800\n"
-"Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
-"Language-Team: Chinese Traditional <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2016-07-01 09:02+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"Language-Team: Chinese (Taiwan) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -400,12 +401,12 @@ msgstr "即使遇到錯誤，仍然接受套件。"
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "類別過濾值 '%1%' 可疑。"
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "安全性過濾值 '%1%' 可疑。"
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -936,11 +937,11 @@ msgid "Patch '%s' is not needed."
 msgstr "修補程式 '%s' 不需要。"
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
-msgstr "修補程式 '%s' 已被鎖定。請用 '%s' 來安裝它，或使用 '%s' 解除鎖定。"
+msgstr "'%s' 為選擇性修補程式。請用 '%s' 來安裝它，或使用 '%s' 包括所有選擇性修補程式。"
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -996,7 +997,7 @@ msgstr "新增衝突： '%s'。"
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "您是指 %1% 嗎？"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -2493,14 +2494,14 @@ msgstr "忽略沒有參數的 %s，因為已指定了帶有參數的類似選項
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
+msgstr[0] "考慮安裝 %1% 個 (共 %2% 個) 適用修補程式︰"
 
 #. translator: stats table header
 #: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
+msgstr[0] "發現 %1% 個適用修補程式︰"
 
 #. translator: stats summary
 #: src/update.cc:294
@@ -2511,17 +2512,17 @@ msgstr[0] "%d 個修補程式被鎖定"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d 個修補程式被鎖定"
+msgstr[0] "%d 個選擇性修補程式"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "使用 '%1%' 以包括選擇性修補程式"
 
 #. translator: stats summary
 #: src/update.cc:315
@@ -2540,7 +2541,7 @@ msgstr[0] "%d 個安全性更新"
 #. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
-msgstr ""
+msgstr "Updatestack"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -2550,7 +2551,7 @@ msgstr "修補程式"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "已鎖定"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2559,7 +2560,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "包括的類別"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -2567,9 +2568,8 @@ msgstr "下列軟體更新將會先被安裝："
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "下列軟體更新將會先被安裝："
+msgstr "將先安裝需要的軟體管理更新："
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
@@ -2639,14 +2639,16 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"是否應將適用選擇性修補程式視為需要或將其排除。"
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "預設設定為排除選擇性修補程式。"
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "預設設定為包括選擇性修補程式。"
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3334,7 +3336,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3345,7 +3347,7 @@ msgid ""
 "-d, --disable           Add the service as disabled.\n"
 "-n, --name <name>       Specify descriptive name for the service.\n"
 msgstr ""
-"addservice (as) [選項] <位址> <別名>\n"
+"addservice (as) [選項] <URI> <別名>\n"
 "\n"
 "加入一個套件庫索引服務到系統。\n"
 "\n"
@@ -3375,7 +3377,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3404,30 +3406,30 @@ msgid ""
 "-t, --remote                   Apply changes to all remote services.\n"
 "-m, --medium-type <type>       Apply changes to services of specified type.\n"
 msgstr ""
-"modifyservice (ms) <選項> <別名|編號|位址>\n"
+"modifyservice (ms) <選項> <別名|編號|URI>\n"
 "modifyservice (ms) <選項> <%s>\n"
 "\n"
-"修改藉由別名、編號、某位址或\n"
+"修改藉由別名、編號、URI 或\n"
 "'%s' 統合選項所指定的服務的屬性。\n"
 "\n"
 "  指令選項：\n"
-"-d, --disable                 停用服務(但不移除它)。\n"
+"-d, --disable                 停用服務 (但不移除它)。\n"
 "-e, --enable                  啟用一個已停用的服務。\n"
 "-r, --refresh                 啟用服務的自動重新整理。\n"
 "-R, --no-refresh              停用服務的自動重新整理。\n"
 "-n, --name                    設定此服務的描述姓名稱。\n"
 "\n"
-"-i, --ar-to-enable <別名>     加入一個 RIS 服務套件庫到啟用。\n"
-"-I, --ar-to-disable <別名>    加入一個 RIS 服務套件庫到停用。\n"
-"-j, --rr-to-enable <別名>     移除一個 RIS 服務套件庫到啟用。\n"
-"-J, --rr-to-disable <別名>    移除一個 RIS 服務套件庫到停用。\n"
-"-k, --cl-to-enable            清除 RIS 套件庫到啟用的清單。\n"
-"-K, --cl-to-disable           清除 RIS 套件庫到停用的清單。\n"
+"-i, --ar-to-enable <別名>     新增一個要啟用的 RIS 服務套件庫。\n"
+"-I, --ar-to-disable <別名>    新增一個要停用的 RIS 服務套件庫。\n"
+"-j, --rr-to-enable <別名>     移除一個要啟用的 RIS 服務套件庫。\n"
+"-J, --rr-to-disable <別名>    移除一個要停用的 RIS 服務套件庫。\n"
+"-k, --cl-to-enable            清除要啟用的 RIS 套件庫清單。\n"
+"-K, --cl-to-disable           清除要停用的 RIS 套件庫清單。\n"
 "\n"
 "-a, --all                     套用變更到所有服務。\n"
 "-l, --local                   套用變更到所有本地服務。\n"
 "-t, --remote                  套用變更到所有遠端服務。\n"
-"-m, --medium-type <類型>      套用變更到所有指定類型的服務。\n"
+"-m, --medium-type <類型>      套用變更到指定類型的服務。\n"
 
 #: src/Zypper.cc:1792
 msgid ""
@@ -3601,7 +3603,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3627,14 +3629,14 @@ msgid ""
 "-t, --remote              Apply changes to all remote repositories.\n"
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
-"modifyrepo (mr) <選項> <別名|編號|位址> ...\n"
+"modifyrepo (mr) <選項> <別名|編號|URI> ...\n"
 "modifyrepo (mr) <選項> <%s>\n"
 "\n"
-"修改藉由別名、編號、位址，\n"
+"修改藉由別名、編號、URI，\n"
 "或使用 '%s' 聚集選項所指定的套件庫的屬性。\n"
 "\n"
 "  指令選項:\n"
-"-d, --disable             停用套件庫(但未移除它)。\n"
+"-d, --disable             停用套件庫 (但未移除它)。\n"
 "-e, --enable              啟用一個已停用的套件庫。\n"
 "-r, --refresh             啟用套件庫的自動重新整理。\n"
 "-R, --no-refresh          停用該套件庫的自動重新整理。\n"
@@ -3935,61 +3937,76 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [選項]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "列出所有適用修補程式。"
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"列出適用於解決 Bugzilla 問題的修補程式。"
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"列出適用於解決 CVE 問題的修補程式。"
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=STRING]\n"
+"尋找符合指定字串的問題。"
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <YYYY-MM-DD>\n"
+"僅列出截至 (但不含) 指定日期發行的修補程式。"
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <類別>\n"
+"僅列出此類別的修補程式。"
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <嚴重性>\n"
+"僅列出此嚴重性的修補程式。"
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"列出所有修補程式，不僅僅是適用的那些。"
 
 #: src/Zypper.cc:2310
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
-msgstr "    --from <別名|編號|位址>    強迫用指定套件庫升級。\n"
+msgstr ""
+"-r, --repo <別名|編號|位址>\n"
+"僅列出來自指定套件庫的修補程式。"
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4149,28 +4166,30 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [選項]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
-msgstr ""
+msgstr "顯示適用修補程式的統計資料。如果找到需要的修補程式，該指令會傳回 100；如果至少存在一個需要的安全性修補程式，則傳回 101。"
 
 #: src/Zypper.cc:2476
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
-msgstr "    --from <別名|編號|位址>    強迫用指定套件庫升級。\n"
+msgstr ""
+"-r, --repo <別名|編號|位址>\n"
+"僅在指定的套件庫中檢查修補程式。"
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "只檢查會影響套件管理本身的修補程式。"
+msgstr ""
+"--updatestack-only\n"
+"只檢查會影響套件管理本身的修補程式。"
 
 #: src/Zypper.cc:2494
 msgid ""
@@ -4934,9 +4953,8 @@ msgstr "指定套件庫 '%s' 已停用。"
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
-msgstr "找不到符合項目"
+msgstr "找不到符合項目。"
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
@@ -5175,9 +5193,8 @@ msgid "Check failed:"
 msgstr "檢查失敗的："
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
-msgstr "GPG 檢查"
+msgstr "跳過檢查︰"
 
 #: src/solve-commit.cc:457
 #, c-format, boost-format
@@ -5945,13 +5962,12 @@ msgstr[0] "解決方案"
 #. translator: patch status
 #: src/utils/misc.cc:134
 msgid "unwanted"
-msgstr ""
+msgstr "不必要"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
-#, fuzzy
 msgid "optional"
-msgstr "ps [選項]"
+msgstr "選擇性"
 
 #. translator: patch status
 #: src/utils/misc.cc:136
@@ -5961,7 +5977,7 @@ msgstr "需要"
 #. translator: patch status
 #: src/utils/misc.cc:137
 msgid "applied"
-msgstr ""
+msgstr "已套用"
 
 #. translator: patch status
 #: src/utils/misc.cc:138
