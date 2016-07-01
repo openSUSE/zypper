@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-01 06:40+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5488,14 +5488,12 @@ msgstr "y/n/p/v/a/r/m/d/g"
 #: src/solve-commit.cc:648
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
-msgstr ""
-"はい、概要に表示されている内容を受け入れ、パッケージのインストール／削除を行"
-"なう"
+msgstr "はい、概要に表示されている内容を受け入れ、パッケージのインストール/削除を行います。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: src/solve-commit.cc:650
 msgid "No, cancel the operation."
-msgstr "いいえ、操作をキャンセルする"
+msgstr "いいえ、操作をキャンセルします。"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
 #: src/solve-commit.cc:652
