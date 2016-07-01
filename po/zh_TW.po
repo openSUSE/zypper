@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 09:11+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 09:14+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -392,7 +392,7 @@ msgstr "正在取出 %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
-msgstr "簽名驗證失敗"
+msgstr "簽章驗證失敗"
 
 #: src/callbacks/repo.h:236
 msgid "Accepting package despite the error."
@@ -464,7 +464,7 @@ msgstr "結構"
 
 #: src/info.cc:76
 msgid "Vendor"
-msgstr "供應商： "
+msgstr "供應商"
 
 #. translators: package summary (header)
 #: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
