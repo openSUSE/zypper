@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 09:34+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 09:39+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -966,7 +966,7 @@ msgstr "修補程式 '%s' 已在指定日期後發行。"
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "正在選取「%s」(來自儲存庫「%s」) 以進行安裝。"
+msgstr "正在選擇安裝 '%s' (來自套件庫 '%s')。"
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
@@ -1445,91 +1445,91 @@ msgstr "完成操作後，將釋出 %s。"
 #: src/Summary.cc:1281
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] " 套件將升級"
+msgstr[0] "要升級的套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1292
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] " 將降級"
+msgstr[0] "將降級"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1295
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] " 套件將降級"
+msgstr[0] "要降級的套件"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1306
 msgid "new"
 msgid_plural "new"
-msgstr[0] " 新的"
+msgstr[0] "新"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1309
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] " 新套件將被安裝"
+msgstr[0] "要安裝的新套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1320
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] " 將重新安裝"
+msgstr[0] "將重新安裝"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1323
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] " 套件將重新安裝"
+msgstr[0] "要重新安裝的套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1334
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] " 將移除"
+msgstr[0] "將移除"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1337
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] " 套件將移除"
+msgstr[0] "要移除的套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1348
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] " 將變更供應商"
+msgstr[0] "將變更供應商"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1351
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] " 套件將會變更供應商"
+msgstr[0] "套件將會變更供應商"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1362
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] " 將變更架構"
+msgstr[0] "將變更架構"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1365
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] " 套件將變更架構"
+msgstr[0] "套件將變更架構"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1376
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] " 原始碼套件"
+msgstr[0] "原始碼套件"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1379
 msgid "source package to install"
 msgid_plural "source packages to install"
-msgstr[0] " 原始碼套件將被安裝"
+msgstr[0] "要安裝的原始碼套件"
 
 #: src/Summary.cc:1430
 msgid "System reboot required."
