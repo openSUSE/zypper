@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-01 09:55+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -5078,7 +5078,7 @@ msgstr "問題： "
 #: src/solve-commit.cc:52
 #, c-format, boost-format
 msgid " Solution %d: "
-msgstr "解決方案 %d："
+msgstr " 解決方案 %d︰ "
 
 #: src/solve-commit.cc:71
 msgid "Choose the above solution using '1' or skip, retry or cancel"
@@ -5548,7 +5548,7 @@ msgstr "找不到 '%s' 的提供者。"
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr "警告："
+msgstr "警告︰ "
 
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
