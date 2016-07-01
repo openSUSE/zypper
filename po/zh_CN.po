@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-01 05:32+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -4360,7 +4360,7 @@ msgstr "可解析项 %s 与自身提供的 %s 冲突"
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s 需要 %s，但是不能提供此需求"
+msgstr "%s 需要 %s，但无法满足此需求"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
