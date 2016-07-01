@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 06:43+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 06:44+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5730,7 +5730,7 @@ msgstr "不要なソースパッケージを削除しています"
 #: src/source-download.cc:390
 #, c-format, boost-format
 msgid "Failed to remove source package '%s'"
-msgstr "ソースパッケージ '%s' の削除に失敗しました。"
+msgstr "ソースパッケージ「%s」の削除に失敗しました"
 
 #: src/source-download.cc:401
 msgid "No superfluous source packages to delete."
@@ -5815,7 +5815,7 @@ msgstr "このプロンプトに対するヘルプは用意されていません
 
 #: src/output/OutNormal.cc:422
 msgid "no help available for this option"
-msgstr "このオプションに対するヘルプは用意されていません。"
+msgstr "このオプションに対するヘルプは用意されていません"
 
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/download.cc:114
