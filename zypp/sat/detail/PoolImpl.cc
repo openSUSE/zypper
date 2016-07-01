@@ -91,8 +91,6 @@ namespace zypp
 
       /////////////////////////////////////////////////////////////////
 
-      const bool resusePoolIDs = true;
-
       const std::string & PoolImpl::systemRepoAlias()
       {
         static const std::string _val( "@System" );
@@ -305,9 +303,11 @@ namespace zypp
 	if ( isSystemRepo( repo_r ) )
 	  _autoinstalled.clear();
         eraseRepoInfo( repo_r );
-        ::repo_free( repo_r, resusePoolIDs );
-	if ( resusePoolIDs && !_pool->urepos )	// If the last repo is removed clear the pool to actually reuse all IDs.
-	  ::pool_freeallrepos( _pool, resusePoolIDs );
+        ::repo_free( repo_r, /*resusePoolIDs*/false );
+	// If the last repo is removed clear the pool to actually reuse all IDs.
+	// NOTE: the explicit ::repo_free above asserts all solvables are memset(0)!
+	if ( !_pool->urepos )
+	  ::pool_freeallrepos( _pool, /*resusePoolIDs*/true );
       }
 
       int PoolImpl::_addSolv( CRepo * repo_r, FILE * file_r )
@@ -359,14 +359,14 @@ namespace zypp
               else if ( blockSize )
               {
                 // Free remembered entries
-                  ::repo_free_solvable_block( repo_r, blockBegin, blockSize, resusePoolIDs );
+                  ::repo_free_solvable_block( repo_r, blockBegin, blockSize, /*resusePoolIDs*/false );
                   blockBegin = blockSize = 0;
               }
           }
           if ( blockSize )
           {
               // Free remembered entries
-              ::repo_free_solvable_block( repo_r, blockBegin, blockSize, resusePoolIDs );
+              ::repo_free_solvable_block( repo_r, blockBegin, blockSize, /*resusePoolIDs*/false );
               blockBegin = blockSize = 0;
           }
         }
