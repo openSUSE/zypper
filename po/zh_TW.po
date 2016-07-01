@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 09:15+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 09:22+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -486,7 +486,7 @@ msgstr[0] "有 %1% 筆符合 '%2%'。"
 #: src/info.cc:168
 #, c-format, boost-format
 msgid "%s '%s' not found."
-msgstr "%s「%s」找不到。"
+msgstr "%s '%s' 找不到。"
 
 #: src/info.cc:190
 #, c-format, boost-format
@@ -508,7 +508,7 @@ msgstr "套件庫"
 
 #: src/info.cc:255
 msgid "Support Level"
-msgstr "支援層級： "
+msgstr "支援層級"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/info.cc:258 src/info.cc:390 src/info.cc:479 src/Summary.cc:1207
@@ -534,7 +534,7 @@ msgstr "未安裝"
 
 #: src/info.cc:275
 msgid "Installed Size"
-msgstr "安裝的大小："
+msgstr "安裝的大小"
 
 #. translator: Table column header.
 #. Name
@@ -549,11 +549,11 @@ msgstr "保安"
 
 #: src/info.cc:316
 msgid "Created On"
-msgstr "建立時間："
+msgstr "建立時間"
 
 #: src/info.cc:318
 msgid "Reboot Required"
-msgstr "需要重新開機："
+msgstr "需要重新開機"
 
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
@@ -574,7 +574,7 @@ msgstr "建議"
 
 #: src/info.cc:391
 msgid "Visible to User"
-msgstr "對使用者可見："
+msgstr "對使用者可見"
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
