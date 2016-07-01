@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-17 01:24+0000\n"
-"Last-Translator: Marguerite Su <i@marguerite.su>\n"
-"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_CN/>\n"
+"PO-Revision-Date: 2016-07-01 06:32+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"Language-Team: Chinese (China) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,7 +89,7 @@ msgstr "正在接受文件 '%s'，该文件以未知密钥 '%s' 签署。"
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "正在接受文件 '%s'，来自软件源 '%s'，该文件以未知密钥 '%s' 签署。"
+msgstr "正在接受文件 '%s' (来自软件源 '%s')，该文件以未知密钥 '%s' 签署。"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -102,7 +102,7 @@ msgstr "文件 '%s' 以未知密钥 '%s' 签署。继续吗？"
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "文件 '%s'，来自软件源 '%s'，以未知密钥 '%s' 签署。继续吗？"
+msgstr "文件 '%s' (来自软件源 '%s') 以未知密钥 '%s' 签署。继续吗？"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
@@ -159,7 +159,7 @@ msgstr "正在忽略文件 '%s' 失败的签名校验！"
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "正在忽略文件 '%s' 来自软件源 '%s' 的版本的失败的签名校验！"
+msgstr "正在忽略文件 '%s' (来自软件源 '%s') 的失败签名校验！"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -173,7 +173,7 @@ msgstr "文件 '%s' 签名校验失败。"
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "文件 '%s'，来自软件源 '%s'，签名校验失败。"
+msgstr "文件 '%s' (来自软件源 '%s') 的签名校验失败。"
 
 #: src/callbacks/keyring.h:284
 msgid ""
@@ -245,7 +245,7 @@ msgstr "丢弃"
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:361
 msgid "Unblock using this file on your own risk."
-msgstr "取消阻止使用此文件但风险自负。"
+msgstr "开放对此文件的使用，但风险自负。"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:363
@@ -465,7 +465,7 @@ msgstr "架构"
 
 #: src/info.cc:76
 msgid "Vendor"
-msgstr "厂商： "
+msgstr "厂商"
 
 #. translators: package summary (header)
 #: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
@@ -509,7 +509,7 @@ msgstr "软件源"
 
 #: src/info.cc:255
 msgid "Support Level"
-msgstr "支持级别： "
+msgstr "支持级别"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/info.cc:258 src/info.cc:390 src/info.cc:479 src/Summary.cc:1207
@@ -535,7 +535,7 @@ msgstr "未安装"
 
 #: src/info.cc:275
 msgid "Installed Size"
-msgstr "已安装大小： "
+msgstr "已安装大小"
 
 #. translator: Table column header.
 #. Name
@@ -550,11 +550,11 @@ msgstr "严重性"
 
 #: src/info.cc:316
 msgid "Created On"
-msgstr "创建于： "
+msgstr "创建于"
 
 #: src/info.cc:318
 msgid "Reboot Required"
-msgstr "需要重启： "
+msgstr "需要重启"
 
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
@@ -575,7 +575,7 @@ msgstr "建议"
 
 #: src/info.cc:391
 msgid "Visible to User"
-msgstr "对用户可见： "
+msgstr "对用户可见"
 
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
@@ -919,7 +919,7 @@ msgstr "在您的软件源中未找到软件包 '%s'。无法重装、升级或�
 msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
-msgstr "所选软件包 '%s'，来自软件源 '%s'，的版本比当前安装的版本低。"
+msgstr "所选软件包 '%s' (来自软件源 '%s') 的版本比当前安装的版本低。"
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
@@ -1747,7 +1747,7 @@ msgstr "没有为 '%s' 定义 URI。"
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr "请添加一个或者更多的基础 URI 项 (baseurl=URI) 至 %s，为了软件源 '%s'。"
+msgstr "请添加一个或者更多的基础 URI 项 (baseurl=URI) 至 %s (针对软件源 '%s'）。"
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
@@ -2155,9 +2155,7 @@ msgstr "解析指定 URI 处文件时出现问题"
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1754
 msgid "Is it a .repo file?"
-msgstr ""
-"它是一个 .repo 文件吗？ 细节请参考 http://en.opensuse.org/Standards/"
-"RepoInfo。"
+msgstr "它是一个 .repo 文件吗？"
 
 #: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
