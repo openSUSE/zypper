@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-01 06:46+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -6173,9 +6173,7 @@ msgstr "回答 '%s' が正しくありません。"
 #: src/utils/prompt.cc:326
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr ""
-"うまく動作しない場合、 '%2$s' に対しては '%1$s' を、 '%4$s' に対しては "
-"'%3$s' を入力してください。"
+msgstr "うまく動作しない場合、 「%s」(「%s」の場合)、 「%s」(「%s」の場合)を入力してください。"
 
 #: src/utils/misc.cc:113
 msgid "package"
