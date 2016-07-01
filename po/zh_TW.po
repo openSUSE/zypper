@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 09:54+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 09:55+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4448,7 +4448,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:2830
 msgid "locks (ll) [options]"
-msgstr "鎖定 (ll) [選項]"
+msgstr "locks (ll) [選項]"
 
 #. translators: command description
 #: src/Zypper.cc:2833
@@ -4730,7 +4730,7 @@ msgstr "非預期的程式流程。"
 
 #: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
-msgstr "非選項程式引數："
+msgstr "非選項程式引數︰ "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: src/Zypper.cc:3303
