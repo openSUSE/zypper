@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 09:56+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-01 09:57+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -5814,7 +5814,7 @@ msgstr "按 '%c' 以退出呼叫器。"
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
-msgstr "請使用箭頭鍵或 PgUp/PgDown 鍵按行或按頁捲動文字。"
+msgstr "使用箭頭或 pgUp/pgDown 按鍵以一行一行或一頁一頁捲動文字。"
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
