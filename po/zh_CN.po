@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-01 05:14+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-01 05:32+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -3491,7 +3491,7 @@ msgstr "土耳其语，古奥斯曼 (1500-1928)"
 #. language code: oto
 #: zypp/LanguageCode.cc:843
 msgid "Otomian Languages"
-msgstr "古奥斯曼诸语言"
+msgstr "奥托米诸语言"
 
 #. language code: paa
 #: zypp/LanguageCode.cc:845
@@ -4261,11 +4261,11 @@ msgstr "未能提供软件包 %s。您想要重试撷取吗？"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
-msgstr "应用差异 RPM 检查失败。"
+msgstr "Applydeltarpm 检查已失败。"
 
 #: zypp/repo/PackageProvider.cc:525
 msgid "applydeltarpm failed."
-msgstr "应用差异 RPM 失败。"
+msgstr "Applydeltarpm 已失败。"
 
 #: zypp/ZYppFactory.cc:394
 #, c-format, boost-format
@@ -4360,7 +4360,7 @@ msgstr "可解析项 %s 与自身提供的 %s 冲突"
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s 依赖 %s，但无法提供此依赖"
+msgstr "%s 需要 %s，但是不能提供此需求"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
