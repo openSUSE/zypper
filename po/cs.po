@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-02 17:13+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-02 17:14+0000\n"
+"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -2200,7 +2200,7 @@ msgstr "Rodičovská služba"
 
 #: src/repos.cc:1109
 msgid "Keywords"
-msgstr ""
+msgstr "Klíčová slova"
 
 #: src/repos.cc:1110
 msgid "Repo Info Path"
@@ -6416,7 +6416,7 @@ msgstr "potřebné"
 #. translator: patch status
 #: src/utils/misc.cc:137
 msgid "applied"
-msgstr ""
+msgstr "aplikováno"
 
 #. translator: patch status
 #: src/utils/misc.cc:138
