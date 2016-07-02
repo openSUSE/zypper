@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-02 13:53+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-02 13:59+0000\n"
+"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -100,7 +100,7 @@ msgstr "Je přijímán soubor \"%s\", který je podepsaný neznámým klíčem \
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Je přijímán soubor \"%s\" z repositáře \"%s\", který je podepsaný neznámým "
+"Je přijímán soubor \"%s\" z repozitáře \"%s\", který je podepsaný neznámým "
 "klíčem \"%s\"."
 
 #. translators: the last %s is gpg key ID
@@ -442,7 +442,7 @@ msgstr "Podezřelá hodnota filtru kategorie '%1%'."
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Podezřelá hodnota filtru závažnosti '%1%'."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -516,9 +516,9 @@ msgstr "Popis"
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Bude %1% shoda pro '%2%'."
+msgstr[1] "Budou %1% shody pro '%2%'."
+msgstr[2] "Bude %1% shod pro '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:168
@@ -1051,7 +1051,7 @@ msgstr "Přidává se konflikt: '%s'."
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Měli jste na mysli %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1059,9 +1059,9 @@ msgstr ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "... a %1% další položka."
+msgstr[1] "... a %1% další položky."
+msgstr[2] "... a %1% dalších položek."
 
 #: src/Summary.cc:505
 #, c-format, boost-format
