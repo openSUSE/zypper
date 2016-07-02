@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 22:12+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-02 10:42+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -202,7 +202,7 @@ msgstr "RPM selhalo: "
 #: zypp/target/rpm/RpmDb.cc:1124
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
-msgstr "Nepodařilo se importovat klíč ze souboru %s: %s"
+msgstr "Nepodařilo se importovat veřejný klíč ze souboru %s: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1195
@@ -313,7 +313,7 @@ msgstr "Nelze přečíst soubor repozitáře '%1%': Přístup odepřen"
 
 #: zypp/RepoManager.cc:338
 msgid "Repository alias cannot start with dot."
-msgstr "Název repozitáře nemůže začínat tečkou."
+msgstr "Alias úložiště nemůže začínat tečkou."
 
 #: zypp/RepoManager.cc:349
 msgid "Service alias cannot start with dot."
@@ -396,7 +396,7 @@ msgstr "Přidává se repozitář '%s'"
 #: zypp/RepoManager.cc:1701
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Neplatné jméno repozitáře na '%s'"
+msgstr "Název souboru úložiště na adrese URL „%s“ je neplatný."
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
@@ -540,7 +540,7 @@ msgstr "Nelze forknout (%s)."
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
 msgid "Command exited with status %d."
-msgstr "Příkaz byl ukončen s kódem %d."
+msgstr "Příkaz skončil se stavem %d."
 
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
@@ -554,7 +554,7 @@ msgstr "Příkaz byl ukončen s neznámou chybou."
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:116
 msgid "(does not expire)"
-msgstr "(nevypršelo)"
+msgstr "(nevyprší nikdy)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:125
@@ -597,7 +597,7 @@ msgstr "Úroveň 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr "Je nezbytný další zákaznický kontakt"
+msgstr "Je nutné uzavřít se zákazníkem další smlouvu."
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
