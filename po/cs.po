@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-02 12:12+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-02 12:20+0000\n"
+"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -396,7 +396,7 @@ msgstr "Přidává se repozitář '%s'"
 #: zypp/RepoManager.cc:1701
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Název souboru úložiště na adrese URL „%s“ je neplatný."
+msgstr "Název souboru úložiště na adrese URL „%s“ je neplatný"
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
