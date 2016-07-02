@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-02 13:17+0000\n"
-"Last-Translator: Nela Moudrá <nmoudra@suse.com>\n"
+"PO-Revision-Date: 2016-07-02 13:44+0000\n"
+"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -313,9 +313,9 @@ msgid "Installing: %s-%s"
 msgstr "Instaluje se: %s-%s"
 
 #: src/callbacks/rpm.h:308
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "Instalace %s-%s selhala:"
+msgstr "Instalace %s selhala:"
 
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
@@ -987,13 +987,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Oprava '%s' není potřeba."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Oprava '%s' je uzamčena. Použijte '%s' k její instalaci nebo ji uvolněte "
-"použitím '%s'."
+"Oprava  '%1%' je nepovinná. Použijte '%2%' k její instalaci nebo '%3%' k "
+"zahrnutí všech nepovinných oprav."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1606,12 +1606,12 @@ msgid "Run '%1%' to see the complete list of locked items."
 msgstr "Použijte '%1%' k získání kompletního seznamu uzamčených položek."
 
 #: src/Summary.cc:1222
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "Bude povýšena oprava:"
-msgstr[1] "Budou povýšeny %d opravy:"
-msgstr[2] "Bude povýšeno %d oprav:"
+msgstr[0] "Následující oprava vyžaduje restart systému:"
+msgstr[1] "Následující %d opravy vyžadují restart systému:"
+msgstr[2] "Následujících %d oprav vyžaduje restart systému:"
 
 #: src/Summary.cc:1240
 #, boost-format
@@ -1658,9 +1658,9 @@ msgstr[2] "k downgradování"
 #: src/Summary.cc:1295
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] "balíček k downgrade:"
-msgstr[1] "balíčky k downgrade:"
-msgstr[2] "balíčky k downgrade:"
+msgstr[0] "balíček k downgradu"
+msgstr[1] "balíčky k downgradu"
+msgstr[2] "balíčků k downgradu"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1306
@@ -2772,21 +2772,21 @@ msgstr[2] ""
 
 #. translator: stats summary
 #: src/update.cc:294
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "je zapotřebí %d oprava"
-msgstr[1] "jsou zapotřebí %d opravy"
-msgstr[2] "je zapotřebí %d oprav"
+msgstr[0] "%d oprava uzamčena"
+msgstr[1] "%d opravy uzamčeny"
+msgstr[2] "%d oprav uzamčeno"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "je zapotřebí %d oprava"
-msgstr[1] "jsou zapotřebí %d opravy"
-msgstr[2] "je zapotřebí %d oprav"
+msgstr[0] "%d oprava je nepovinná"
+msgstr[1] "%d opravy jsou nepovinné"
+msgstr[2] "%d oprav je nepovinných"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -2843,9 +2843,8 @@ msgstr "Nejdříve bude nainstalována následující aktualizace správce balí
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "Nejdříve bude nainstalována následující aktualizace správce balíčků:"
+msgstr "Nejdříve budou nainstalovány aktualizace správce softwaru:"
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
@@ -3656,7 +3655,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3672,9 +3671,9 @@ msgstr ""
 "Přidá do systému službu indexu repozitářů.\n"
 "\n"
 "  Volby příkazu:\n"
-"-t, --type <TYPE>       Typ služby (%s).\n"
+"-t, --type <typ>       Typ služby (%s).\n"
 "-d, --disable           Přidá službu jako zakázanou (neaktivní).\n"
-"-n, --name              Určují službě popisné jméno.\n"
+"-n, --name <název>              Určují službě popisný název.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3697,7 +3696,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3737,7 +3736,7 @@ msgstr ""
 "-e, --enable             Povolí zakázanou službu.\n"
 "-r, --refresh            Povolí automatické obnovování služby.\n"
 "-R, --no-refresh         Zakáže automatické obnovování služby.\n"
-"-n, --name               Nastaví popisný název služby.\n"
+"-n, --name <název>              Nastaví popisný název služby.\n"
 "\n"
 "-i, --ar-to-enable <alias>    Přidá službu repozitáře RIS k povolení.\n"
 "-I, --ar-to-disable <alias>   Přidá službu repozitáře RIS k zakázání .\n"
@@ -3926,7 +3925,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3955,20 +3954,20 @@ msgstr ""
 "modifyrepo (mr) <volby> <alias|#|URI>\n"
 "modifyrepo (mr) <volby> <%s>\n"
 "\n"
-"Změní vlastnosti repozitářů zadaných aliasem, číslem, adresou URI nebo "
-"hromadnými volbami '%s'.\n"
+"Změní vlastnosti repozitářů zadaných aliasem, číslem, URI nebo hromadnými "
+"volbami '%s'.\n"
 "\n"
 "  Volby příkazu:\n"
 "-d, --disable             Zakáže repozitář (ale neodstraní ho).\n"
 "-e, --enable              Povolí zakázaný repozitář.\n"
 "-r, --refresh             Povolí automatické obnovování repozitáře.\n"
 "-R --no-refresh           Zakáže automatické obnovování repozitáře.\n"
-"-n, --name                Nastaví popisný název repozitáře.\n"
-"-p, --priority <1-99>     Nastaví prioritu repozitáře.\n"
-"-k, --keep-packages       Povolí ukládání souborů RPM do vyrovnávací "
-"paměti.\n"
-"-K, --no-keep-packages    Zakáže ukládání souborů RPM do vyrovnávací "
-"paměti.\n"
+"-n, --name <name>              Nastaví popisný název repozitáře.\n"
+"-p, --priority <celé číslo>     Nastaví prioritu repozitáře.\n"
+"-k, --keep-packages       Povolí ukládání souborů RPM do vyrovnávací paměti."
+"\n"
+"-K, --no-keep-packages    Zakáže ukládání souborů RPM do vyrovnávací paměti."
+"\n"
 "-g, --gpgcheck            Povolí kontrolu GPG pro tento repozitář.\n"
 "-G, --no-gpgcheck         Zakáže kontrolu GPG pro tento repozitář.\n"
 "\n"
@@ -4532,7 +4531,9 @@ msgstr ""
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "Pouze zkontrolovat záplaty, které ovlivňují samotnou správu balíčků."
+msgstr ""
+"--updatestack-only\n"
+"Pouze zkontrolovat záplaty, které ovlivňují samotnou správu balíčků."
 
 #: src/Zypper.cc:2494
 msgid ""
@@ -5327,9 +5328,8 @@ msgstr "Zadaný repozitář '%s' je zakázán."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
-msgstr "Nebyly nalezeny odpovídající problematiky."
+msgstr "Nebyly nalezeny žádné odpovídající položky."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
@@ -5582,9 +5582,8 @@ msgid "Check failed:"
 msgstr "Kontrolovat selhala:"
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
-msgstr "Kontrola GPG"
+msgstr "Přeskočit kontrolu:"
 
 #: src/solve-commit.cc:457
 #, c-format, boost-format
@@ -6185,12 +6184,12 @@ msgid "No lock has been removed."
 msgstr "Žádný zámek nebyl odstraněn."
 
 #: src/locks.cc:306
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "Zámek %zu byl úspěšně odstraněn."
-msgstr[1] "Zámky %zu byly úspěšně odstraněny."
-msgstr[2] "Zámky %zu byly úspěšně odstraněny."
+msgstr[0] "%zu zámek byl úspěšně odstraněn."
+msgstr[1] "%zu zámky byly úspěšně odstraněny."
+msgstr[2] "%zu zámků bylo úspěšně odstraněno."
 
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
@@ -6407,9 +6406,8 @@ msgstr ""
 
 #. translator: patch status
 #: src/utils/misc.cc:135
-#, fuzzy
 msgid "optional"
-msgstr "ps [volby]"
+msgstr "nepovinné"
 
 #. translator: patch status
 #: src/utils/misc.cc:136
@@ -6428,9 +6426,8 @@ msgstr "nepotřebné"
 
 #. translator: patch status
 #: src/utils/misc.cc:139
-#, fuzzy
 msgid "undetermined"
-msgstr "nedefinováno"
+msgstr "neurčené"
 
 #. << _("Repository")
 #: src/utils/misc.cc:289
