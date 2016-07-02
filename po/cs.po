@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-02 10:55+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -906,7 +906,7 @@ msgstr "Cookovy ostrovy"
 #. :COK:184:
 #: zypp/CountryCode.cc:202
 msgid "Chile"
-msgstr "Čile"
+msgstr "Chile"
 
 # CM
 #. :CHL:152:
