@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-02 12:41+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -4367,7 +4367,7 @@ msgstr "Velština"
 #. language code: wen
 #: zypp/LanguageCode.cc:1119
 msgid "Sorbian Languages"
-msgstr "Srbské jazyky"
+msgstr "Lužická srbština"
 
 #. language code: wln wa
 #: zypp/LanguageCode.cc:1121
