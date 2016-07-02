@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-25 21:56+0100\n"
+"PO-Revision-Date: 2016-07-02 22:21+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -84,7 +84,7 @@ msgstr "Prijímam súbor '%s' podpísaný neznámym kľúčom '%s'."
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Prijímam súbor '%s' z repozitára '%s' podpísaný neznámym kľúčom '%s'."
+msgstr "Prijatie súboru '%s' z repozitára '%s' podpísaný neznámym kľúčom '%s'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -139,7 +139,7 @@ msgstr "Odmietnuť nedôveryhodný kľúč."
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:218
 msgid "Trust the key temporarily."
-msgstr "Dôverovať kľúču dočasne, len počas súčasného sedenia."
+msgstr "Dôverovať kľúču dočasne."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:221
@@ -155,7 +155,7 @@ msgstr "Ignorujem zlyhanie overenia podpisu pre súbor '%s'!"
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ignorujem zlyhanie overenia podpisu pre súbor '%s' z repozitára '%s'!"
+msgstr "Ignorovanie zlyhania overenia podpisu pre súbor '%s' z repozitára '%s'!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -207,7 +207,7 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
-"Zlyhalo overenie prehľad pre súbor '%1%'\n"
+"Zlyhalo overenie prehľadu pre súbor '%1%'\n"
 "[%2%]\n"
 "\n"
 "  očakávané %3%\n"
@@ -799,7 +799,7 @@ msgstr "Oprava '%s' nebola nájdená."
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr "Produkt '%s' nebol nájdená."
+msgstr "Produkt '%s' nebol nájdený."
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
@@ -1930,7 +1930,7 @@ msgstr "Vynútenie obnovy surových metadát"
 #: src/repos.cc:236
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Načítavam údaje repozitára '%s'"
+msgstr "Načítavanie metadát repozitára '%s'"
 
 #: src/repos.cc:263
 #, c-format, boost-format
@@ -2216,7 +2216,7 @@ msgstr "Zadané repozitáre: "
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Vynechávam vypnutý repozitár '%s'"
+msgstr "Vynechanie vypnutého repozitára '%s'"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
@@ -2565,7 +2565,7 @@ msgstr "Prosím, overte, či je zadaná URI adresa platná a prístupná."
 #: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "Vynechávam vypnutú službu '%s'"
+msgstr "Vynechanie vypnutej služby '%s'"
 
 #: src/repos.cc:2751
 #, c-format, boost-format
@@ -2745,43 +2745,43 @@ msgstr "Ignorujem '%s' pretože bola zadaná podobná voľba s argumentom."
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Zvažovanie %1% z %2% použiteľných opráv:"
+msgstr[1] "Zvažovanie %1% z %2% použiteľných opráv:"
+msgstr[2] "Zvažovanie %1% z %2% použiteľných opráv:"
 
 #. translator: stats table header
 #: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nájdená %1% použiteľná oprava:"
+msgstr[1] "Nájdené %1% použiteľné opravy:"
+msgstr[2] "Nájdených %1% použiteľných opráv:"
 
 #. translator: stats summary
 #: src/update.cc:294
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d oprava zamknutá"
+msgstr[1] "%d opravy zamknuté"
+msgstr[2] "%d opráv zamknutých"
 
 #. translator: stats summary
 #: src/update.cc:302
 #, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d oprava voliteľná"
+msgstr[1] "%d opravy voliteľné"
+msgstr[2] "%d opráv voliteľných"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "použiť '%1%' pre zahrnutie voliteľných opráv"
 
 #. translator: stats summary
 #: src/update.cc:315
@@ -2823,7 +2823,7 @@ msgstr "Zamknuté"
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "Zahrnuté kategórie"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -2902,14 +2902,17 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"Či by sa mali použiteľné voliteľné opravy považovať za potrebné alebo "
+"vylúčené."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Predvolené nastavenie je vylúčiť voliteľné opravy."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Predvolené nastavenie je zahrnúť voliteľné opravy."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3138,8 +3141,7 @@ msgstr ""
 "\tsource-install, si\tInštalovať zdrojové balíky a ich závislosti pre "
 "zostavenie.\n"
 "\tinstall-new-recommends, inr\n"
-"\t\t\t\tInštalovať novo pridané balíky odporúčané \t\t\t\ttými "
-"nainštalovanými.\n"
+"\t\t\t\tInštalovať novopridané balíky odporúčané nainštalovanými.\n"
 
 #: src/Zypper.cc:513
 msgid ""
@@ -3559,6 +3561,9 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"Predvolené umiestnenie, kam rpm nainštaluje zdrojové balíčky je '%1%', ale "
+"hodnota môže byť zmenená v lokálnej konfigurácii rpm. V prípade pochybností "
+"skúste spustiť '%2%'."
 
 #: src/Zypper.cc:1613
 #, c-format, boost-format
