@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-02 12:58+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-02 13:01+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -4707,7 +4707,7 @@ msgstr "nahrazení %s položkou %s"
 #: zypp/solver/detail/SATResolver.cc:1354
 #, c-format, boost-format
 msgid "deinstallation of %s"
-msgstr "odstraňování %s"
+msgstr "odinstalace %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
@@ -4727,7 +4727,7 @@ msgstr "Chybí vyžadovaný atribut '%s'."
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "Jeden nebo oba atributy '%s' nebo '%s' jsou vyžadovány."
+msgstr "Je požadován alespoň jeden z atributů „%s“ a „%s“."
 
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
@@ -4761,7 +4761,7 @@ msgstr "Chybný regulární výraz '%s': regcomp vrátil %d"
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
 msgid "Invalid regular expression '%s'"
-msgstr "Chybný regulární výraz '%s'"
+msgstr "Neplatný regulární výraz: „%s“"
 
 #: zypp/misc/CheckAccessDeleted.cc:242
 msgid "Please install package 'lsof' first."
