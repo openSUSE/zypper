@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 23:42+0000\n"
+"PO-Revision-Date: 2016-07-02 00:30+0000\n"
 "Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
@@ -4529,12 +4529,12 @@ msgstr "該当モード「%s」がパターン「%s」に対して不明です"
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "正規表現「%s」が正しくありません。regcompは %d を返しました"
+msgstr "正規表現 '%s' が正しくありません。regcompは %d を返しました"
 
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
 msgid "Invalid regular expression '%s'"
-msgstr "正規表現「%s」が正しくありません"
+msgstr "正規表現 '%s' が正しくありません"
 
 #: zypp/misc/CheckAccessDeleted.cc:242
 msgid "Please install package 'lsof' first."
@@ -4696,7 +4696,7 @@ msgstr "「%s」からイメージファイルをマウントする使用可能�
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr "サポートされていないHTTP認証方式「%s」"
+msgstr "未対応のHTTP認証方式 '%s'"
 
 #: zypp/media/MediaCurl.cc:1008
 msgid ""
