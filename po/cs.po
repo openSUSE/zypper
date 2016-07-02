@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-02 10:55+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-02 11:57+0000\n"
+"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -939,7 +939,7 @@ msgstr "Kuba"
 #. :CUB:192:
 #: zypp/CountryCode.cc:208
 msgid "Cape Verde"
-msgstr "Zelený mys"
+msgstr "Kapverdy"
 
 # CX
 #. :CPV:132:
@@ -1143,7 +1143,7 @@ msgstr "Řecko"
 #. :GRC:300:
 #: zypp/CountryCode.cc:246
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Jazyky Jižní Georgie a Jižních Sandwichových ostrovů"
+msgstr "Jižní Georgie a Jižní Sandwichovy ostrovy"
 
 #. :SGS:239:
 #: zypp/CountryCode.cc:247
@@ -1288,7 +1288,7 @@ msgstr "Kyrgyzstán"
 #. :KGZ:417:
 #: zypp/CountryCode.cc:273
 msgid "Cambodia"
-msgstr "Kambodže"
+msgstr "Kambodža"
 
 # KI
 #. :KHM:116:
@@ -1724,7 +1724,7 @@ msgstr "Šalamounovy ostrovy"
 #. :SLB:090:
 #: zypp/CountryCode.cc:351
 msgid "Seychelles"
-msgstr "Sejšely"
+msgstr "Seychely"
 
 #. :SYC:690:
 #: zypp/CountryCode.cc:352
