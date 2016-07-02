@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-02 13:59+0000\n"
+"PO-Revision-Date: 2016-07-02 16:51+0000\n"
 "Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -115,7 +115,7 @@ msgstr "Soubor \"%s\" je podepsaný neznámým klíčem \"%s\". Chcete pokračov
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"Soubor \"%s\" z repositáře \"%s\" je podepsaný neznámým klíčem \"%s\". "
+"Soubor \"%s\" z repozitáře \"%s\" je podepsaný neznámým klíčem \"%s\". "
 "Chcete pokračovat?"
 
 #: src/callbacks/keyring.h:173
