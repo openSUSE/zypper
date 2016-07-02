@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-02 16:51+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-02 16:57+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -133,9 +133,7 @@ msgstr "Obdržen nový klíč podepisující balíček nebo repozitář:"
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
-"Chcete odmítnou klíč (r), důvěřovat mu dočasně (t), anebo mu důvěřovat na "
-"trvalo (a)?"
+msgstr "Chcete klíč odmítnou, důvěřovat mu dočasně nebo mu důvěřovat natrvalo?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -164,7 +162,7 @@ msgstr "Dočasně důvěřovat klíči."
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:221
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Důvěřovat klíči a importovat jej do klíčenky."
+msgstr "Důvěřovat klíči a importovat jej do svazku důvěryhodných klíčů."
 
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
@@ -228,19 +226,19 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
-"U souboru '%1%' selhalo ověření součtu\n"
+"U souboru %1% se nezdařilo ověření součtu\n"
 "[%2%]\n"
 "\n"
-"  očekáván     %3%\n"
-"  ale obdržen  %4%\n"
+"  Očekávaná hodnota byla     %3%,\n"
+"  avšak získaná hodnota je %4%.\n"
 
 #: src/callbacks/keyring.h:344
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
-"Přijímání balíčků se špatným kontrolním součtem může vést k poškozenému "
-"systému a v extrémních případech dokonce k ohrožení bezpečnosti serveru."
+"Přijímání balíčků s nesprávným kontrolním součtem může vést k poškození "
+"systému a ve výjimečných případech dokonce k ohrožení zabezpečení systému."
 
 #: src/callbacks/keyring.h:352
 #, boost-format
