@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-02 12:41+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-02 12:51+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -4439,7 +4439,7 @@ msgstr "Zandština"
 #. language code: zul zu
 #: zypp/LanguageCode.cc:1147
 msgid "Zulu"
-msgstr "Zulu"
+msgstr "Zuluština"
 
 #. language code: zun
 #: zypp/LanguageCode.cc:1149
@@ -4490,7 +4490,7 @@ msgstr "Ověření podpisu selhalo"
 #: zypp/repo/PackageProvider.cc:386
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr "Není možné získat balíček %s. Chcete pokus opakovat?"
+msgstr "Nepodařilo se poskytnout balíček %s. Chcete jej stáhnout znovu?"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
@@ -4506,9 +4506,8 @@ msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
 msgstr ""
-"Systémová správa je zamknut aplikací, která má pid %d (%s).\n"
-"Prosím uzavřete tuto aplikaci, než se budete znovu pokoušet o práci se "
-"systémovou správou."
+"Správa systému je uzamčena aplikací s identifikátorem PID %d (%s). \n"
+"Ukončete tuto aplikaci a opakujte akci."
 
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
@@ -4574,17 +4573,17 @@ msgstr "Nelze nainstalovat %s a zároveň %s"
 #: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%s koliduje s %s z balíčku %s"
+msgstr "%s koliduje s %s, poskytovatel: %s"
 
 #: zypp/solver/detail/SATResolver.cc:1027
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s nahrazuje zastaralý %s z balíčku %s"
+msgstr "%s nahrazuje %s, poskytovatel: %s"
 
 #: zypp/solver/detail/SATResolver.cc:1032
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
-msgstr "nainstalovaný zastaralý %s je poskytovaný %s z balíčku %s"
+msgstr "nainstalováno: %s, zastaralé: %s, poskytovatel: %s"
 
 #: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
