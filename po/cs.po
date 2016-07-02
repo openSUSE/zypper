@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-02 13:01+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-02 13:09+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -4791,7 +4791,7 @@ msgstr "Špatný název souboru: %s"
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Medium nebylo otevřeno během pokusu o spuštění akcí '%s'."
+msgstr "Při pokusu o provedení akce '%s' nebylo otevřeno médium."
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
@@ -4834,7 +4834,7 @@ msgstr "Cesta '%s' na médiu '%s' není adresářem."
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr "Zdeformované URI"
+msgstr "Chybné URI"
 
 #: zypp/media/MediaException.cc:125
 msgid "Empty host name in URI"
@@ -4851,7 +4851,7 @@ msgstr "Chybí cíl v URI"
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "Nepodporované URI ve schématu '%s'."
+msgstr "Nepodporované schéma URI v '%s'."
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
@@ -4864,15 +4864,15 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"Stažení (curl) '%s' selhalo:\n"
-"Chybový kód: %s\n"
+"Chyba stahování (curl) pro '%s':\n"
+"Kód chyby: %s\n"
 "Chybová zpráva: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:161
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "Během stahování nastavení pro  '%s' došlo chybě:"
+msgstr "Při nastavení možností stahování (curl) pro '%s' došlo k chybě:"
 
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
@@ -4930,8 +4930,8 @@ msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
-"Navštivte zákaznické centrum Novell abyste se ujistili, že je vaše "
-"registrace platná a nevypršela."
+"Obraťte se na zákaznické centrum společnosti Novell a zkontrolujte, zda je "
+"vaše registrace platná a zda nevypršela."
 
 #: zypp/sat/detail/PoolImpl.cc:184
 msgid "Can not create sat-pool."
