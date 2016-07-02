@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-02 13:47+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-02 13:48+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -6193,7 +6193,7 @@ msgstr[2] "%zu zámků bylo úspěšně odstraněno."
 
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
-msgstr "Problém při odebírání "
+msgstr "Problém při odebírání zámku balíčku"
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
