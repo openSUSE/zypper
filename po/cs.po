@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-02 10:43+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-02 10:52+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -605,7 +605,7 @@ msgstr "neplatné"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr "Tato úroveň podpory není specifikována"
+msgstr "Není určena úroveň podpory"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
@@ -638,13 +638,13 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
-"Vyřešení problému, tedy technická podpora pro vyřešení složitého problému "
-"zajištěním prostředků pro vyřešení problému zjištěného v podpoře druhé "
-"úrovně."
+"Řešení problémů, tj. technická podpora, která řeší složité problémy "
+"zajištěním technických pracovníků, kteří vyřeší vady produktů zjištěné na "
+"úrovni 2."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr "Další zákaznický kontakt je nezbytný pro získání podpory."
+msgstr "Získání podpory vyžaduje další smlouvu se zákazníkem."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
