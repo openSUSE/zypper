@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-02 17:02+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-02 17:13+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -416,7 +416,7 @@ msgstr "(%s rozbaleno)"
 #: src/callbacks/repo.h:112
 #, boost-format
 msgid "In cache %1%"
-msgstr "V keši %1%"
+msgstr "Uloženo v mezipaměti: %1%"
 
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
@@ -714,7 +714,9 @@ msgstr "waitpid pro %1% selhal (%2%)"
 #: src/subcommand.cc:313
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr "waitpid pro %1% vrací neočekávaný pid %2% zatímco čeká na %3%"
+msgstr ""
+"Funkce waitpid pro %1% vrátila neočekávaný identifikátor procesu %2% během "
+"čekání na %3%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
@@ -756,15 +758,17 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
-"Podpříkazy zypperu jsou samostatné spustitelné soubory, které žijí\n"
-"v zypper_execdir ('%1%').\n"
+"Podpříkazy programu zypper jsou samostatné spustitelné soubory\n"
+"v adresáři zypper_execdir (%1%).\n"
 "\n"
-"Pro podpříkazy zypper poskytuje wrapper, který ví, kde podpříkazy\n"
-"jsou a spustí je s předáním parametrů příkazového řádku.\n"
+"Pro podpříkazy disponuje program zypper obálkou,\n"
+"která zná umístění podpříkazů a spouští je prostřednictvím argumentů\n"
+"příkazového řádku.\n"
 "\n"
-"Pokud není podpříkaz nalezen v zypper_execdir, wrapper vyhledává ve zbytku\n"
-"jeho $PATH. Takto je možné psát lokální rozšíření zypperu, která nejsou\n"
-"v systémovém prostoru.\n"
+"Pokud podpříkaz není nalezen v adresáři zypper_execdir, bude jej\n"
+"obálka hledat v ostatních adresářích v proměnné $PATH.\n"
+"Lze proto vytvářet\n"
+"místní rozšíření programu, která nejsou uložena v systémovém prostoru.\n"
 
 #: src/subcommand.cc:401
 #, boost-format
@@ -772,8 +776,8 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
-"Používání globálních voleb zypperu společně s podpříkazy, stejně tak\n"
-"vykonávání podpříkazů v '%1%' není v současnosti podporováno.\n"
+"Použití programu zypper s globálními možnostmi společně s podpříkazy a také\n"
+"provádění podpříkazů v umístění %1% není aktuálně podporováno.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/subcommand.cc:418
@@ -790,14 +794,13 @@ msgstr "Podpříkazy zypperu dostupné odjinud ve vaší $PATH"
 #: src/subcommand.cc:428
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
-msgstr ""
-"Zadejte '%1%', abyste získali podpříkazovou nápovědu, pokud je dostupná."
+msgstr "Chcete-li zobrazit případnou nápovědu k podpříkazu, zadejte příkaz %1%."
 
 #. translators: %1% - command name
 #: src/subcommand.cc:451
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
-msgstr "Ruční položka pro %1% nemůže být zobrazena"
+msgstr "Ručně zadaný vstup pro %1% nelze zobrazit"
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
