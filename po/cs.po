@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-02 11:57+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-02 12:12+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -1904,7 +1904,7 @@ msgstr "Tuvalu"
 #. :TUV:798:
 #: zypp/CountryCode.cc:382
 msgid "Taiwan"
-msgstr "Taiwan"
+msgstr "Tchaj-wan"
 
 #. :TWN:158:
 #: zypp/CountryCode.cc:383
@@ -2613,7 +2613,7 @@ msgstr "Nizozemština, střední (cca 1050-1350)"
 #. language code: dut nld nl
 #: zypp/LanguageCode.cc:401 zypp/LanguageCode.cc:403
 msgid "Dutch"
-msgstr "Nizozemské"
+msgstr "Nizozemština"
 
 #. language code: dyu
 #: zypp/LanguageCode.cc:405
