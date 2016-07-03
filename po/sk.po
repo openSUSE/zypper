@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-02 22:21+0100\n"
+"PO-Revision-Date: 2016-07-03 12:07+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -2788,23 +2788,23 @@ msgstr "použiť '%1%' pre zahrnutie voliteľných opráv"
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d oprava potrebná"
+msgstr[1] "%d opravy potrebné"
+msgstr[2] "%d opráv potrebných"
 
 #. translator: stats summary
 #: src/update.cc:318
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d bezpečnostná oprava"
+msgstr[1] "%d bezpečnostné opravy"
+msgstr[2] "%d bezpečnostných opráv"
 
 #. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
-msgstr ""
+msgstr "Updatestack"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -3475,6 +3475,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Nevyžaduje interakciu s používateľom. Alias pre globálnu voľbu --non-"
+"interactive."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -4258,24 +4260,28 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [VOĽBY]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Zoznam všetkých použiteľných opráv."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Zoznam použiteľných opráv pre problémy Bugzilla."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Zoznam použiteľných opráv pre problémy CVE."
 
 #: src/Zypper.cc:2304
 msgid ""
@@ -4288,6 +4294,8 @@ msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <RRRR-MM-DD>\n"
+"Zoznam opráv vydávaných iba do, ale nie vrátane, zadaného dátum."
 
 #: src/Zypper.cc:2306
 msgid ""
@@ -4481,7 +4489,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [VOĽBY]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
