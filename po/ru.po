@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-03 14:48+0000\n"
+"PO-Revision-Date: 2016-07-03 22:34+0000\n"
 "Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
@@ -461,7 +461,7 @@ msgstr "Схема URL-адреса не позволяет использова
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr "Неверный компонент узла '%s'"
+msgstr "Неверный компонент узла \"%s\""
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
@@ -510,23 +510,23 @@ msgstr "Невозможно открыть канал (%s)."
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr "Невозможно выполнить chroot в '%s' (%s)."
+msgstr "Невозможно выполнить chroot в \"%s\" (%s)."
 
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "Невозможно сменить каталог на '%s' внутри среды chroot '%s' (%s)."
+msgstr "Невозможно сменить каталог на \"%s\" внутри среды chroot \"%s\" (%s)."
 
 #: zypp/ExternalProgram.cc:361
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr "Невозможно сменить каталог на '%s' (%s)."
+msgstr "Невозможно сменить каталог на \"%s\" (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
-msgstr "Невозможно выполнить exec '%s' (%s)."
+msgstr "Невозможно выполнить exec \"%s\" (%s)."
 
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
