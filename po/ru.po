@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-03 22:42+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-03 22:43+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
 "Language: ru\n"
@@ -1557,7 +1557,7 @@ msgstr "Пуэрто-Рико"
 #. :PRI:630:
 #: zypp/CountryCode.cc:339
 msgid "Palestinian Territory"
-msgstr "Палестинские Территории"
+msgstr "Паллестина"
 
 #. :PSE:275:
 #: zypp/CountryCode.cc:340
