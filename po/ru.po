@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-03 14:45+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-03 14:46+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
 "Language: ru\n"
@@ -408,11 +408,11 @@ msgstr "Невозможно выяснить, где хранится репо�
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
 #, c-format, boost-format
 msgid "Can't delete '%s'"
-msgstr "Невозможно удалить '%s'"
+msgstr "Не удается удалить \"%s\""
 
 #: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
 msgid "Can't figure out where the service is stored."
-msgstr "Невозможно выяснить, где хранится служба."
+msgstr "Невозможно определить, где хранится сервис."
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
@@ -422,7 +422,7 @@ msgstr "Схема URL-адреса не позволяет использова
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "Неверный компонент %s: '%s'"
+msgstr "Недопустимый компонент %s: '%s'"
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
