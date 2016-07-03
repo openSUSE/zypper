@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-03 14:47+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
 "Language: ru\n"
@@ -427,7 +427,7 @@ msgstr "Недопустимый компонент %s: \"%s\""
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
 msgid "Invalid %s component"
-msgstr "Неверный компонент: %s"
+msgstr "Недопустимый компонент %s"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
