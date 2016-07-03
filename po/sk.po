@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-03 12:07+0100\n"
+"PO-Revision-Date: 2016-07-03 12:43+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -1334,13 +1334,13 @@ msgid_plural ""
 "they are unwanted (were manually removed before):"
 msgstr[0] ""
 "Nasledujúci balík je odporúčaný, ale nebude sa inštalovať, pretože je "
-"nežiaduci (predtým bol ručne odstránený):"
+"nežiadúci (predtým bol ručne odstránený):"
 msgstr[1] ""
 "Nasledujúce %d balíky sú odporúčané, ale nebudú sa inštalovať, pretože sú "
-"nežiaduce (predtým boli ručne odstránené):"
+"nežiadúce (predtým boli ručne odstránené):"
 msgstr[2] ""
 "Nasledujúcich %d balíkov je odporúčaných, ale nebudú sa inštalovať, pretože "
-"sú nežiaduce (predtým boli ručne odstránené):"
+"sú nežiadúce (predtým boli ručne odstránené):"
 
 #: src/Summary.cc:921
 #, c-format, boost-format
@@ -4199,7 +4199,7 @@ msgstr ""
 "    --cve #                 Nainštalovať opravu pre zadaný CVE problém.\n"
 "-g  --category <kategória>   Nainštalovať opravy iba s touto kategóriou.\n"
 "    --severity <závažnosť>   Nainštalovať opravy iba s touto závažnosťou.\n"
-"    --date <YYYY-MM-DD>     Nainštalovať iba opravy vydané po zadanom "
+"    --date <RRRR-MM-DD>     Nainštalovať iba opravy vydané po zadanom "
 "dátume, ale nie vrátane neho\n"
 "    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
 "\n"
@@ -4251,10 +4251,10 @@ msgstr ""
 "    --cve[=#]              Zoznam potrebných opráv pre CVE problémy.\n"
 "    --issues[=string]      Hľadať problémy zodpovedajúce zadanému reťazcu.\n"
 "-a, --all                  Zoznam všetkých opráv, nielen potrebných.\n"
-"-g  --category <kategória>  List only patches with this category.\n"
-"    --severity <severity>  Zoznam opráv iba s touto závažnosťou.\n"
-"-r, --repo <alias|#|URI>   Zoznam opráv len z určeného repozitára.\n"
-"    --date <YYYY-MM-DD>    Zoznam iba opráv vydaných až zadanom dátume, ale "
+"-g  --category <kategória>  Zoznam opráv iba s touto kategóriou.\n"
+"    --severity <závažnosť>  Zoznam opráv iba s touto závažnosťou.\n"
+"-r, --repo <alias|#|URI>   Zoznam opráv len zo zadaného repozitára.\n"
+"    --date <RRRR-MM-DD>    Zoznam opráv vydaných iba do zadaného dátumu, ale "
 "nie vrátane neho\n"
 
 #. translators: command synopsis; do not translate lowercase words
@@ -4288,6 +4288,8 @@ msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=REŤAZEC]\n"
+"Hľadať problémy zodpovedajúce zadanému reťazcu."
 
 #: src/Zypper.cc:2305
 msgid ""
@@ -4302,24 +4304,32 @@ msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <KATEGÓRIA>\n"
+"Zoznam opráv iba s touto kategóriou."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <ZÁVAŽNOSŤ>\n"
+"Zoznam opráv iba s touto závažnosťou."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Zoznam všetkých opráv, nielen použiteľných."
 
 #: src/Zypper.cc:2310
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Zoznam opráv len zo zadaného repozitára."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4497,12 +4507,17 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Zobraziť štatistické údaje o použiteľných opravách. Príkaz vráti 100, ak "
+"boli zistené potrebné opravy, 101, ak existuje aspoň jedna potrebná "
+"bezpečnostná oprava."
 
 #: src/Zypper.cc:2476
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Zisťovať opravy len v zadanom repozitári."
 
 #: src/Zypper.cc:2477
 msgid ""
@@ -6296,7 +6311,7 @@ msgstr "Opätovné skúšanie..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "Nie je možné čítať vstup: zlý stream alebo EOF."
 
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
@@ -6372,7 +6387,7 @@ msgstr[2] "riešení"
 #. translator: patch status
 #: src/utils/misc.cc:134
 msgid "unwanted"
-msgstr ""
+msgstr "nežiadúce"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
@@ -6387,7 +6402,7 @@ msgstr "potrebná"
 #. translator: patch status
 #: src/utils/misc.cc:137
 msgid "applied"
-msgstr ""
+msgstr "použité"
 
 #. translator: patch status
 #: src/utils/misc.cc:138
