@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-03 22:34+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
 "Language: ru\n"
@@ -541,7 +541,7 @@ msgstr "Команда завершилась с кодом %d."
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "Команда была убита сигналом %d (%s)."
+msgstr "Команда была прекращена сигналом %d (%s)."
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
@@ -555,7 +555,7 @@ msgstr "(не истекает)"
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:125
 msgid "(EXPIRED)"
-msgstr "(Истекший)"
+msgstr "(ИСТЕК)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:129
