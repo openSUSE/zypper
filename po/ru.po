@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-03 23:21+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-03 23:22+0000\n"
+"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -2310,15 +2310,15 @@ msgstr "Не удалось очистить репозитории из-за о
 
 #: src/repos.cc:1513
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "Некоторые репозитарии не очищены из-за ошибки."
+msgstr "Некоторые репозитории не очищены из-за ошибки."
 
 #: src/repos.cc:1518
 msgid "Specified repositories have been cleaned up."
-msgstr "Указанные репозитарии очищены."
+msgstr "Указанные репозитории очищены."
 
 #: src/repos.cc:1520
 msgid "All repositories have been cleaned up."
-msgstr "Все репозитории были очищены."
+msgstr "Все репозитории очищены."
 
 #: src/repos.cc:1547
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
