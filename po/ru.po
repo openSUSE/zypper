@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-17 21:06+0000\n"
+"PO-Revision-Date: 2016-07-03 11:11+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
@@ -62,15 +62,15 @@ msgstr "Невозможно установить атрибут рекурси�
 
 #: zypp/thread/Mutex.cc:47
 msgid "Can't initialize recursive mutex"
-msgstr "Невозможно инициализировать рекурсивное взаимное исключение"
+msgstr "Не удается инициализировать рекурсивное взаимоисключение"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr "Невозможно получить блокировку взаимного исключения"
+msgstr "Не удается получить блокировку взаимоисключения"
 
 #: zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
-msgstr "Невозможно освободить блокировку взаимного исключения"
+msgstr "Не удается освободить блокировку взаимоисключения"
 
 #: zypp/Dep.cc:96
 msgid "Provides"
@@ -168,7 +168,7 @@ msgstr "HalVolume не инициализирован"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
-msgstr "Не удалось создать подключение dbus"
+msgstr "Не удалось создать подключение к dbus"
 
 #: zypp/target/hal/HalContext.cc:242
 msgid "libhal_ctx_new: Can't create libhal context"
@@ -210,7 +210,7 @@ msgstr "Не удалось удалить публичный ключ %s: %s"
 #: zypp/target/rpm/RpmDb.cc:1848
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr "Изменённые файлы настройки для %s:"
+msgstr "Измененные файлы конфигурации для %s:"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2024
@@ -278,12 +278,12 @@ msgstr "Подпись в порядке, но ключ не является д
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2373
 msgid "Signatures public key is not available"
-msgstr "Публичный ключ подписей недоступен"
+msgstr "Открытый ключ подписей недоступен"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2375
 msgid "File does not exist or signature can't be checked"
-msgstr "Файл не существует или невозможно проверить подпись"
+msgstr "Файл не существует, или невозможно проверить подпись"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
@@ -292,19 +292,19 @@ msgstr "Будут выполнены следующие действия:"
 #: zypp/RepoManager.cc:297
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "Невозможно прочитать каталог репозитория '%1%': Доступ запрещён"
+msgstr "Невозможно прочитать каталог репозитория \"%1%\": доступ запрещен"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "Не удалось прочесть каталог '%s'"
+msgstr "Не удалось прочитать каталог \"%s\""
 
 #: zypp/RepoManager.cc:315
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr "Невозможно прочитать файл репозитория '%1%': Доступ запрещён"
+msgstr "Невозможно прочитать файл репозитория \"%1%\": доступ запрещен"
 
 #: zypp/RepoManager.cc:338
 msgid "Repository alias cannot start with dot."
@@ -319,7 +319,7 @@ msgstr "Псевдоним службы не может начинаться с 
 #: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
-msgstr "Невозможно открыть файл '%s' для записи."
+msgstr "Невозможно открыть файл \"%s\" для записи."
 
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
@@ -327,7 +327,9 @@ msgstr "Невозможно открыть файл '%s' для записи."
 #: zypp/RepoManager.cc:849
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr "Неизвестная служба '%1%': удаление репозитория службы '%2%'"
+msgstr ""
+"Неизвестный сервис \"%1%\": удаление служебного репозитория \"%2%\" с "
+"нарушенными ассоциациями"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
