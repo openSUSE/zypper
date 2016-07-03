@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-20 09:31+0000\n"
-"Last-Translator: Alex Minton <alex239@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"PO-Revision-Date: 2016-07-03 23:18+0000\n"
+"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
@@ -1068,230 +1068,227 @@ msgstr[2] "…и ещё %1% пунктов."
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] "Будет установлен следующий %d НОВЫЙ пакет:"
-msgstr[1] "Будут установлены следующие %d НОВЫХ пакета:"
-msgstr[2] "Будут установлены следующие %d НОВЫХ пакетов:"
+msgstr[0] "Будет установлен %d НОВЫЙ пакет:"
+msgstr[1] "Будут установлены %d НОВЫХ пакета:"
+msgstr[2] "Будут установлены %d НОВЫХ пакетов:"
 
 #: src/Summary.cc:510
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] "Будет установлено следующее %d НОВОЕ исправление:"
-msgstr[1] "Будут установлены следующие %d НОВЫХ исправления:"
-msgstr[2] "Будут установлены следующие %d НОВЫХ исправлений:"
+msgstr[0] "Будет установлено %d НОВОЕ исправление:"
+msgstr[1] "Будут установлены %d НОВЫХ исправления:"
+msgstr[2] "Будут установлены %d НОВЫХ исправлений:"
 
 #: src/Summary.cc:515
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] "Будет установлен следующий %d НОВЫЙ шаблон:"
-msgstr[1] "Будут установлены следующие %d НОВЫХ шаблона:"
-msgstr[2] "Будут установлены следующие %d НОВЫХ шаблонов:"
+msgstr[0] "Будет установлен %d НОВЫЙ шаблон:"
+msgstr[1] "Будут установлены %d НОВЫХ шаблона:"
+msgstr[2] "Будут установлены %d НОВЫХ шаблонов:"
 
 #: src/Summary.cc:520
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] "Будет установлен следующий %d НОВЫЙ продукт:"
-msgstr[1] "Будут установлены следующие %d НОВЫХ продукта:"
-msgstr[2] "Будут установлены следующие %d НОВЫХ продуктов:"
+msgstr[0] "Будет установлен %d НОВЫЙ продукт:"
+msgstr[1] "Будут установлены %d НОВЫХ продукта:"
+msgstr[2] "Будут установлены %d НОВЫХ продуктов:"
 
 #: src/Summary.cc:525
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] "Будет установлен следующий %d пакет с исходным кодом:"
-msgstr[1] "Будут установлены следующие %d пакета с исходным кодом:"
-msgstr[2] "Будут установлены следующие %d пакетов с исходным кодом:"
+msgstr[0] "Будет установлен %d пакет с исходным кодом:"
+msgstr[1] "Будут установлены %d пакета с исходным кодом:"
+msgstr[2] "Будут установлены %d пакетов с исходным кодом:"
 
 #: src/Summary.cc:530
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] "Будет установлено следующее %d приложение:"
-msgstr[1] "Будут установлены следующие %d приложения:"
-msgstr[2] "Будут установлены следующие %d приложений:"
+msgstr[0] "Будет установлено %d приложение:"
+msgstr[1] "Будут установлены %d приложения:"
+msgstr[2] "Будут установлены %d приложений:"
 
 #: src/Summary.cc:552
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] "Будет УДАЛЁН следующий %d пакет:"
-msgstr[1] "Будут УДАЛЕНЫ следующие %d пакета:"
-msgstr[2] "Будут УДАЛЕНЫ следующие %d пакетов:"
+msgstr[0] "Будет УДАЛЕН %d пакет:"
+msgstr[1] "Будут УДАЛЕНЫ %d пакета:"
+msgstr[2] "Будут УДАЛЕНЫ %d пакетов:"
 
 #: src/Summary.cc:557
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] "Будет УДАЛЕНО следующее %d исправление:"
-msgstr[1] "Будут УДАЛЕНЫ следующие %d исправления:"
-msgstr[2] "Будут УДАЛЕНЫ следующие %d исправлений:"
+msgstr[0] "Будет УДАЛЕНО %d исправление:"
+msgstr[1] "Будут УДАЛЕНЫ %d исправления:"
+msgstr[2] "Будут УДАЛЕНЫ %d исправлений:"
 
 #: src/Summary.cc:562
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] "Будет УДАЛЁН следующий %d шаблон:"
-msgstr[1] "Будут УДАЛЕНЫ следующие %d шаблона:"
-msgstr[2] "Будут УДАЛЕНЫ следующие %d шаблонов:"
+msgstr[0] "Будет УДАЛЕН %d шаблон:"
+msgstr[1] "Будут УДАЛЕНЫ %d шаблона:"
+msgstr[2] "Будут УДАЛЕНЫ %d шаблонов:"
 
 #: src/Summary.cc:567
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
-msgstr[0] "Будет УДАЛЁН следующий %d продукт:"
-msgstr[1] "Будут УДАЛЕНЫ следующие %d продукта:"
-msgstr[2] "Будут УДАЛЕНЫ следующие %d продуктов:"
+msgstr[0] "Будет УДАЛЕН %d продукт:"
+msgstr[1] "Будут УДАЛЕНЫ %d продукта:"
+msgstr[2] "Будут УДАЛЕНЫ %d продуктов:"
 
 #: src/Summary.cc:572
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] "Будет УДАЛЕНО следующее %d приложение:"
-msgstr[1] "Будут УДАЛЕНЫ следующие %d приложения:"
-msgstr[2] "Будут УДАЛЕНЫ следующие %d приложений:"
+msgstr[0] "Будет УДАЛЕНО %d приложение:"
+msgstr[1] "Будут УДАЛЕНЫ %d приложения:"
+msgstr[2] "Будут УДАЛЕНЫ %d приложений:"
 
 #: src/Summary.cc:591
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "Будет обновлён следующий %d пакет:"
-msgstr[1] "Будут обновлены следующие %d пакета:"
-msgstr[2] "Будут обновлены следующие %d пакетов:"
+msgstr[0] "Будет обновлен %d пакет:"
+msgstr[1] "Будут обновлены %d пакета:"
+msgstr[2] "Будут обновлены %d пакетов:"
 
 #: src/Summary.cc:596
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "Будет обновлено следующее %d исправление:"
-msgstr[1] "Будут обновлены следующие %d исправления:"
-msgstr[2] "Будут обновлены следующие %d исправлений:"
+msgstr[0] "Будет обновлено %d исправление:"
+msgstr[1] "Будут обновлены %d исправления:"
+msgstr[2] "Будут обновлены %d исправлений:"
 
 #: src/Summary.cc:601
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] "Будет обновлён следующий %d шаблон:"
-msgstr[1] "Будут обновлены следующие %d шаблона:"
-msgstr[2] "Будут обновлены следующие %d шаблонов:"
+msgstr[0] "Будет обновлен %d шаблон:"
+msgstr[1] "Будут обновлены %d шаблона:"
+msgstr[2] "Будут обновлены %d шаблонов:"
 
 #: src/Summary.cc:606
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
-msgstr[0] "Будет обновлён следующий %d продукт:"
-msgstr[1] "Будут обновлены следующие %d продукта:"
-msgstr[2] "Будут обновлены следующие %d продуктов:"
+msgstr[0] "Будет обновлен %d продукт:"
+msgstr[1] "Будут обновлены %d продукта:"
+msgstr[2] "Будут обновлены %d продуктов:"
 
 #: src/Summary.cc:611
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "Будет обновлено следующее %d приложение:"
-msgstr[1] "Будут обновлены следующие %d приложения:"
-msgstr[2] "Будут обновлены следующие %d приложений:"
+msgstr[0] "Будет обновлено %d приложение:"
+msgstr[1] "Будут обновлены %d приложения:"
+msgstr[2] "Будут обновлены %d приложений:"
 
 #: src/Summary.cc:630
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "Будет обновлён до более старой версии следующий %d пакет:"
-msgstr[1] "Будут обновлены до более старой версии следующие %d пакета:"
-msgstr[2] "Будут обновлены до более старой версии следующие %d пакетов:"
+msgstr[0] "Будет возвращен к более старой версии %d пакет:"
+msgstr[1] "Будут возвращены к более старой версии %d пакета:"
+msgstr[2] "Будут возвращены к более старой версии %d пакетов:"
 
 #: src/Summary.cc:635
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "Будет обновлено до более старой версии следующее %d исправление:"
-msgstr[1] "Будут обновлены до более старой версии следующие %d исправления:"
-msgstr[2] "Будут обновлены до более старой версии следующие %d исправлений:"
+msgstr[0] "Будет возвращено к более старой версии %d исправление:"
+msgstr[1] "Будут возвращены к более старой версии %d исправления:"
+msgstr[2] "Будут возвращены к более старой версии %d исправлений:"
 
 #: src/Summary.cc:640
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] "Будет обновлён до более старой версии следующий %d шаблон:"
-msgstr[1] "Будут обновлены до более старой версии следующие %d шаблона:"
-msgstr[2] "Будут обновлены до более старой версии следующие %d шаблонов:"
+msgstr[0] "Будет возвращен к более старой версии %d шаблон:"
+msgstr[1] "Будут возвращены к более старой версии %d шаблона:"
+msgstr[2] "Будут возвращены к более старой версии %d шаблонов:"
 
 #: src/Summary.cc:645
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] "Будет обновлён до более старой версии следующий %d продукт:"
-msgstr[1] "Будут обновлены до более старой версии следующие %d продукта:"
-msgstr[2] "Будут обновлены до более старой версии следующие %d продуктов:"
+msgstr[0] "Будет возвращен к более старой версии %d продукт:"
+msgstr[1] "Будут возвращены к более старой версии %d продукта:"
+msgstr[2] "Будут возвращены к более старой версии %d продуктов:"
 
 #: src/Summary.cc:650
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] "Будет обновлено до более старой версии следующее %d приложение:"
-msgstr[1] "Будут обновлены до более старой версии следующие %d приложения:"
-msgstr[2] "Будут обновлены до более старой версии следующие %d приложений:"
+msgstr[0] "Будет возвращено к более старой версии %d приложение:"
+msgstr[1] "Будут возвращены к более старой версии %d приложения:"
+msgstr[2] "Будут возвращены к более старой версии %d приложений:"
 
 #: src/Summary.cc:669
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] "Будет переустановлен следующий %d пакет:"
-msgstr[1] "Будут переустановлены следующие %d пакета:"
-msgstr[2] "Будут переустановлены следующие %d пакетов:"
+msgstr[0] "Будет переустановлен %d пакет:"
+msgstr[1] "Будут переустановлены %d пакета:"
+msgstr[2] "Будут переустановлены %d пакетов:"
 
 #: src/Summary.cc:674
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "Будет переустановлено следующее %d исправление:"
-msgstr[1] "Будут переустановлены следующие %d исправления:"
-msgstr[2] "Будут переустановлены следующие %d исправлений:"
+msgstr[0] "Будет переустановлено %d исправление:"
+msgstr[1] "Будут переустановлены %d исправления:"
+msgstr[2] "Будут переустановлены %d исправлений:"
 
 #: src/Summary.cc:679
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] "Будет переустановлен следующий %d шаблон:"
-msgstr[1] "Будут переустановлены следующие %d шаблона:"
-msgstr[2] "Будут переустановлены следующие %d шаблонов:"
+msgstr[0] "Будет переустановлен %d шаблон:"
+msgstr[1] "Будут переустановлены %d шаблона:"
+msgstr[2] "Будут переустановлены %d шаблонов:"
 
 #: src/Summary.cc:684
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] "Будет переустановлен следующий %d продукт:"
-msgstr[1] "Будут переустановлены следующие %d продукта:"
-msgstr[2] "Будут переустановлены следующие %d продуктов:"
+msgstr[0] "Будет переустановлен %d продукт:"
+msgstr[1] "Будут переустановлены %d продукта:"
+msgstr[2] "Будут переустановлены %d продуктов:"
 
 #: src/Summary.cc:696
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] "Будет переустановлено следующее %d приложение:"
-msgstr[1] "Будут переустановлены следующие %d приложения:"
-msgstr[2] "Будут переустановлены следующие %d приложений:"
+msgstr[0] "Будет переустановлено %d приложение:"
+msgstr[1] "Будут переустановлены %d приложения:"
+msgstr[2] "Будут переустановлены %d приложений:"
 
 #: src/Summary.cc:830
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] "Следующий %d рекомендованный пакет был выбран автоматически:"
-msgstr[1] "Следующие %d рекомендованных пакета были выбраны автоматически:"
-msgstr[2] "Следующие %d рекомендованных пакетов были выбраны автоматически:"
+msgstr[0] "%d рекомендованный пакет был выбран автоматически:"
+msgstr[1] "%d рекомендованных пакета были выбраны автоматически:"
+msgstr[2] "%d рекомендованных пакетов были выбраны автоматически:"
 
 #: src/Summary.cc:835
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] ""
-"Следующее %d рекомендованное исправление было выбрано автоматически:"
-msgstr[1] ""
-"Следующие %d рекомендованных исправления были выбраны автоматически:"
-msgstr[2] ""
-"Следующие %d рекомендованных исправлений были выбраны автоматически:"
+msgstr[0] "%d рекомендованное исправление было выбрано автоматически:"
+msgstr[1] "%d рекомендованных исправления были выбраны автоматически:"
+msgstr[2] "%d рекомендованных исправлений были выбраны автоматически:"
 
 #: src/Summary.cc:840
 #, c-format, boost-format
