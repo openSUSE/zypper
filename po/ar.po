@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-22 00:32+0000\n"
-"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
-">\n"
+"PO-Revision-Date: 2016-07-03 11:03+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -509,15 +509,15 @@ msgid "Description"
 msgstr "الوصف"
 
 #: src/info.cc:136
-#, boost-format
+#, boost-format, fuzzy
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "سيكون هناك عدد %1% من التطابقات لـ '%2%'."
+msgstr[1] "سيكون هناك عدد %1% من التطابقات لـ '%2%'."
+msgstr[2] "سيكون هناك عدد %1% من التطابقات لـ '%2%'."
+msgstr[3] "سيكون هناك عدد %1% من التطابقات لـ '%2%'."
+msgstr[4] "سيكون هناك عدد %1% من التطابقات لـ '%2%'."
+msgstr[5] "سيكون هناك عدد %1% من التطابقات لـ '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:168
@@ -1039,9 +1039,9 @@ msgstr "يشير إلى تعارض: '%s'."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:263
-#, boost-format
+#, boost-format, fuzzy
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "هل تعني %1%؟"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
