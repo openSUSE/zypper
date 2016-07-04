@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 14:10+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 14:15+0000\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
 "\n"
 "Language: de\n"
@@ -4359,7 +4359,7 @@ msgstr "nicht unterstützte Anforderung"
 #: zypp/solver/detail/SATResolver.cc:1003
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr "%s wird vom System bereitgestellt und kann nicht gelöscht werden."
+msgstr "%s wird vom System bereitgestellt und kann nicht gelöscht werden"
 
 #: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
@@ -4395,8 +4395,8 @@ msgstr "installiertes %s macht %s, welches durch %s angeboten wird, obsolet"
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr ""
-"Das auflösbare Objekt %s steht in Konflikt mit %s, welches es selbst "
-"anbietet."
+"Das auflösbare Element %s steht in Konflikt mit %s, das es selbst zur "
+"Verfügung gestellt hat"
 
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
@@ -4457,14 +4457,12 @@ msgstr "Warnung vor einem beschädigten System ignorieren"
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr ""
-"Nicht nach der Installation eines auflösbaren Objekts, das %s anbietet, "
-"fragen."
+"Installation eines auflösbaren Elements mit %s darf nicht angefordert werden"
 
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr ""
-"Nicht nach der Löschung aller auflösbaren Objekte, die %s anbieten, fragen."
+msgstr "Löschen aller auflösbaren Elemente mit %s darf nicht angefordert werden"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
@@ -4562,7 +4560,7 @@ msgstr "Unbekannter Übereinstimmungsmodus '%s'"
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Unbekannter Übereinstimmungsmodus %s für Muster %s."
+msgstr "Unbekannter Übereinstimmungsmodus %s für Schema %s"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
@@ -4607,7 +4605,7 @@ msgstr "Medium nicht geöffnet beim Versuch die Aktion '%s' durchzuführen."
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "Datei '%s' nicht auf dem Medium '%s' gefunden."
+msgstr "Datei '%s' auf Medium '%s' nicht gefunden"
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
@@ -4713,7 +4711,7 @@ msgstr "Zugriffserlaubnis auf '%s' verweigert."
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "Zeitablauf beim Zugriff auf '%s'"
+msgstr "Zeitüberschreitung beim Zugriff auf '%s'."
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
