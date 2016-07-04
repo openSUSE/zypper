@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:39+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 10:51+0000\n"
+"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
 "Language: pl\n"
@@ -276,9 +276,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "Uruchomiono: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:208
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "Usuwanie %s-%s"
+msgstr "Usuwanie %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:213
@@ -292,9 +292,9 @@ msgid "Removal of %s failed:"
 msgstr "Błąd podczas usuwania %s:"
 
 #: src/callbacks/rpm.h:279
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "Instalowanie: %s-%s"
+msgstr "Instalowanie: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:284
@@ -303,9 +303,9 @@ msgid "Installing: %s-%s"
 msgstr "Instalowanie: %s-%s"
 
 #: src/callbacks/rpm.h:308
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "Instalacja %s-%s nie powiodła się:"
+msgstr "Instalacja %s nie powiodła się:"
 
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
@@ -339,15 +339,21 @@ msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
 msgstr[0] ""
+"Następujący pakiet musiał zostać wykluczony ze sprawdzenia konfliktów, "
+"ponieważ nie został jeszcze pobrany:"
 msgstr[1] ""
+"Następujące %1% pakiety musiały zostać wykluczone ze sprawdzenia konfliktów, "
+"ponieważ nie zostały jeszcze pobrane:"
 msgstr[2] ""
+"Następujących %1% pakietów musiało zostać wykluczonych ze sprawdzenia "
+"konfliktów, ponieważ nie zostały jeszcze pobrane:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:408
-#, fuzzy, boost-format
+#, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
-msgstr[0] "Sprawdzanie konfliktów pomiędzy plikami:"
+msgstr[0] "Sprawdzanie konfliktu pomiędzy plikami:"
 msgstr[1] "Sprawdzanie konfliktów pomiędzy plikami:"
 msgstr[2] "Sprawdzanie konfliktów pomiędzy plikami:"
 
@@ -421,12 +427,12 @@ msgstr "Akceptowanie pakietu pomimo błędu."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Podejrzana wartość filtra kategorii '%1%'."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Podejrzana wartość filtra ważności: '%1%'."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -499,9 +505,9 @@ msgstr "Opis"
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Zapytanie '%2%' zwróci %1% dopasowanie."
+msgstr[1] "Zapytanie '%2%' zwróci %1% dopasowania."
+msgstr[2] "Zapytanie '%2%' zwróci %1% dopasowań."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:168
@@ -977,13 +983,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Łatka '%s' nie jest potrzebna."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Pakiet '%s' jest zablokowany. Użyj '%s' aby zainstalować lub odblokować "
-"pomocą '%s'."
+"Poprawka '%1%' jest opcjonalna. Użyj '%2%', aby ją zainstalować, lub '%3%', "
+"aby uwzględnić wszystkie poprawki opcjonalne."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1041,7 +1047,7 @@ msgstr "Konflikt dodawania:'%s'."
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Czy chodzi o %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1049,9 +1055,9 @@ msgstr ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "...i jeszcze %1% element."
+msgstr[1] "...i jeszcze %1% elementy."
+msgstr[2] "...i jeszcze %1% elementów."
 
 #: src/Summary.cc:505
 #, c-format, boost-format
@@ -1062,261 +1068,273 @@ msgstr[1] "Następujące %d NOWE pakiety zostaną zainstalowane:"
 msgstr[2] "Następujące %d NOWE pakiety zostaną zainstalowane:"
 
 #: src/Summary.cc:510
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] "Następująca nowa poprawka zostanie zainstalowana:"
-msgstr[1] "Następujące nowe poprawki zostaną zainstalowane:"
-msgstr[2] "Następujące nowe poprawki zostaną zainstalowane:"
+msgstr[0] "Następująca NOWA poprawka zostanie zainstalowana:"
+msgstr[1] "Następujące %d NOWE poprawki zostaną zainstalowane:"
+msgstr[2] "Następujących %d NOWYCH poprawek zostanie zainstalowanych:"
 
 #: src/Summary.cc:515
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] "Następujący nowy wzorzec zostanie zainstalowany:"
-msgstr[1] "Następujące nowe wzorce zostaną zainstalowane:"
-msgstr[2] "Następujące nowe wzorce zostaną zainstalowane:"
+msgstr[0] "Następujący NOWY wzorzec zostanie zainstalowany:"
+msgstr[1] "Następujące %d NOWE wzorce zostaną zainstalowane:"
+msgstr[2] "Następujących %d NOWYCH wzorców zostanie zainstalowanych:"
 
 #: src/Summary.cc:520
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] "Następujący nowy produkt zostanie zainstalowany:"
-msgstr[1] "Następujące nowe produkty zostaną zainstalowane:"
-msgstr[2] "Następujące nowe produkty zostaną zainstalowane:"
+msgstr[0] "Następujący NOWY produkt zostanie zainstalowany:"
+msgstr[1] "Następujące %d NOWE produkty zostaną zainstalowane:"
+msgstr[2] "Następujących %d NOWYCH produktów zostanie zainstalowanych:"
 
 #: src/Summary.cc:525
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "Następujący pakiet źródłowy zostanie zainstalowany:"
-msgstr[1] "Następujące pakiety źródłowe zostaną zainstalowane:"
-msgstr[2] "Następujące pakiety źródłowe zostaną zainstalowane:"
+msgstr[1] "Następujące %d pakiety źródłowe zostaną zainstalowane:"
+msgstr[2] "Następujących %d pakietów źródłowych zostanie zainstalowanych:"
 
 #: src/Summary.cc:530
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] "Następujący wzorzec zostanie zainstalowany ponownie:"
-msgstr[1] "Następujące wzorce zostaną zainstalowane ponownie:"
-msgstr[2] "Następujące wzorce zostaną zainstalowane ponownie:"
+msgstr[0] "Następująca aplikacja zostanie zainstalowana:"
+msgstr[1] "Następujące %d aplikacje zostaną zainstalowane:"
+msgstr[2] "Następujących %d aplikacji zostanie zainstalowanych:"
 
 #: src/Summary.cc:552
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] "Usunięty zostanie następujący pakiet:"
-msgstr[1] "Usunięte zostaną następujące pakiety:"
-msgstr[2] "Usunięte zostaną następujące pakiety:"
+msgstr[0] "Następujący pakiet zostanie USUNIĘTY:"
+msgstr[1] "Następujące %d pakiety zostaną USUNIĘTE:"
+msgstr[2] "Następujących %d pakietów zostanie USUNIĘTYCH:"
 
 #: src/Summary.cc:557
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] "Usunięta zostanie następująca poprawka:"
-msgstr[1] "Usunięte zostaną następujące poprawki:"
-msgstr[2] "Usunięte zostaną następujące poprawki:"
+msgstr[0] "Następująca poprawka zostanie USUNIĘTA:"
+msgstr[1] "Następujące %d poprawki zostaną USUNIĘTE:"
+msgstr[2] "Następujących %d poprawek zostanie USUNIĘTYCH:"
 
 #: src/Summary.cc:562
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] "Usunięty zostanie następujący wzorzec:"
-msgstr[1] "Usunięte zostaną następujące wzorce:"
-msgstr[2] "Usunięte zostaną następujące wzorce:"
+msgstr[0] "Następujący wzorzec zostanie USUNIĘTY:"
+msgstr[1] "Następujące %d wzorce zostaną USUNIĘTE:"
+msgstr[2] "Następujących %d wzorców zostanie USUNIĘTYCH:"
 
 #: src/Summary.cc:567
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
-msgstr[0] "Następujący produkt zostanie usunięty:"
-msgstr[1] "Następujące produkty zostaną usunięte:"
-msgstr[2] "Następujące produkty zostaną usunięte:"
+msgstr[0] "Następujący produkt zostanie USUNIĘTY:"
+msgstr[1] "Następujące %d produkty zostaną USUNIĘTE:"
+msgstr[2] "Następujących %d produktów zostanie USUNIĘTYCH:"
 
 #: src/Summary.cc:572
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] "Usunięty zostanie następujący wzorzec:"
-msgstr[1] "Usunięte zostaną następujące wzorce:"
-msgstr[2] "Usunięte zostaną następujące wzorce:"
+msgstr[0] "Następująca aplikacja zostanie USUNIĘTA:"
+msgstr[1] "Następujące %d aplikacje zostaną USUNIĘTE:"
+msgstr[2] "Następujących %d aplikacji zostanie USUNIĘTYCH:"
 
 #: src/Summary.cc:591
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "Uaktualniony zostanie następujący pakiet:"
-msgstr[1] "Uaktualnione zostaną następujące pakiety:"
-msgstr[2] "Uaktualnione zostaną następujące pakiety:"
+msgstr[0] "Następujący pakiet zostanie uaktualniony:"
+msgstr[1] "Następujące %d pakiety zostaną uaktualnione:"
+msgstr[2] "Następujących %d pakietów zostanie uaktualnionych:"
 
 #: src/Summary.cc:596
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "Uaktualniona zostanie następująca poprawka:"
-msgstr[1] "Uaktualnione zostaną następujące poprawki:"
-msgstr[2] "Uaktualnione zostaną następujące poprawki:"
+msgstr[0] "Następująca poprawka zostanie uaktualniona:"
+msgstr[1] "Następujące %d poprawki zostaną uaktualnione:"
+msgstr[2] "Następujących %d poprawek zostanie uaktualnionych:"
 
 #: src/Summary.cc:601
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] "Zaktualizowany zostanie następujący wzorzec:"
-msgstr[1] "Uaktualnione zostaną następujące wzorce:"
-msgstr[2] "Uaktualnione zostaną następujące wzorce:"
+msgstr[0] "Następujący wzorzec zostanie zaktualizowany:"
+msgstr[1] "Następujące %d wzorce zostaną zaktualizowane:"
+msgstr[2] "Następujących %d wzorców zostanie zaktualizowanych:"
 
 #: src/Summary.cc:606
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "Następujący produkt zostanie uaktualniony:"
-msgstr[1] "Uaktualnione zostaną następujące produkty::"
-msgstr[2] "Uaktualnione zostaną następujące produkty::"
+msgstr[1] "Następujące %d produkty zostaną uaktualnione:"
+msgstr[2] "Następujących %d produktów zostanie uaktualnionych:"
 
 #: src/Summary.cc:611
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "Zaktualizowany zostanie następujący wzorzec:"
-msgstr[1] "Uaktualnione zostaną następujące wzorce:"
-msgstr[2] "Uaktualnione zostaną następujące wzorce:"
+msgstr[0] "Następująca aplikacja zostanie uaktualniona:"
+msgstr[1] "Następujące %d aplikacje zostaną uaktualnione:"
+msgstr[2] "Następujących %d aplikacji zostanie uaktualnionych:"
 
 #: src/Summary.cc:630
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Następujący pakiet zostanie przywrócony do wcześniejszej wersji:"
-msgstr[1] "Następujące pakiety zostaną przywrócone do wcześniejszych wersji:"
-msgstr[2] "Następujące pakiety zostaną przywrócone do wcześniejszych wersji:"
+msgstr[1] "Następujące %d pakiety zostaną przywrócone do wcześniejszych wersji:"
+msgstr[2] ""
+"Następujących %d pakietów zostanie przywróconych do wcześniejszych wersji:"
 
 #: src/Summary.cc:635
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Następująca poprawka zostanie przywrócona do wcześniejszej wersji:"
-msgstr[1] "Następujące poprawki zostaną przywrócone do wcześniejszych wersji:"
-msgstr[2] "Następujące poprawki zostaną przywrócone do wcześniejszych wersji:"
+msgstr[1] "Następujące %d poprawki zostaną przywrócone do wcześniejszych wersji:"
+msgstr[2] ""
+"Następujących %d poprawek zostanie przywróconych do wcześniejszych wersji:"
 
 #: src/Summary.cc:640
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "Następujący wzorzec zostanie przywrócony do wcześniejszej wersji:"
-msgstr[1] "Następujące wzorce zostaną przywrócone do wcześniejszych wersji:"
-msgstr[2] "Następujące wzorce zostaną przywrócone do wcześniejszych wersji:"
+msgstr[1] "Następujące %d wzorce zostaną przywrócone do wcześniejszych wersji:"
+msgstr[2] ""
+"Następujących %d wzorców zostanie przywróconych do wcześniejszych wersji:"
 
 #: src/Summary.cc:645
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "Następujący produkt zostanie przywrócony do wcześniejszej wersji:"
-msgstr[1] "Następujące produkty zostaną przywrócone do wcześniejszych wersji:"
-msgstr[2] "Następujące produkty zostaną przywrócone do wcześniejszych wersji:"
+msgstr[1] "Następujące %d produkty zostaną przywrócone do wcześniejszych wersji:"
+msgstr[2] ""
+"Następujących %d produktów zostanie przywróconych do wcześniejszych wersji:"
 
 #: src/Summary.cc:650
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] "Następujący wzorzec zostanie przywrócony do wcześniejszej wersji:"
-msgstr[1] "Następujące wzorce zostaną przywrócone do wcześniejszych wersji:"
-msgstr[2] "Następujące wzorce zostaną przywrócone do wcześniejszych wersji:"
+msgstr[0] "Następująca aplikacja zostanie przywrócona do wcześniejszej wersji:"
+msgstr[1] "Następujące %d aplikacje zostaną przywrócone do wcześniejszych wersji:"
+msgstr[2] ""
+"Następujących %d aplikacji zostanie przywróconych do wcześniejszych wersji:"
 
 #: src/Summary.cc:669
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "Następujący pakiet zostanie zainstalowany ponownie:"
-msgstr[1] "Następujące pakiety zostaną zainstalowane ponownie:"
-msgstr[2] "Następujące pakiety zostaną zainstalowane ponownie:"
+msgstr[1] "Następujące %d pakiety zostaną zainstalowane ponownie:"
+msgstr[2] "Następujących %d pakietów zostanie zainstalowanych ponownie:"
 
 #: src/Summary.cc:674
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "Następująca poprawka zostanie zainstalowana ponownie:"
-msgstr[1] "Następujące poprawki zostaną zainstalowane ponownie:"
-msgstr[2] "Następujące poprawki zostaną zainstalowane ponownie:"
+msgstr[1] "Następujące %d poprawki zostaną zainstalowane ponownie:"
+msgstr[2] "Następujących %d poprawek zostanie zainstalowanych ponownie:"
 
 #: src/Summary.cc:679
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "Następujący wzorzec zostanie zainstalowany ponownie:"
-msgstr[1] "Następujące wzorce zostaną zainstalowane ponownie:"
-msgstr[2] "Następujące wzorce zostaną zainstalowane ponownie:"
+msgstr[1] "Następujące %d wzorce zostaną zainstalowane ponownie:"
+msgstr[2] "Następujących %d wzorców zostanie zainstalowanych ponownie:"
 
 #: src/Summary.cc:684
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "Następujący produkt zostanie zainstalowany ponownie:"
-msgstr[1] "Następujące produkty zostaną zainstalowane ponownie:"
-msgstr[2] "Następujące produkty zostaną zainstalowane ponownie:"
+msgstr[1] "Następujące %d produkty zostaną zainstalowane ponownie:"
+msgstr[2] "Następujących %d produktów zostanie zainstalowanych ponownie:"
 
 #: src/Summary.cc:696
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] "Następujący wzorzec zostanie zainstalowany ponownie:"
-msgstr[1] "Następujące wzorce zostaną zainstalowane ponownie:"
-msgstr[2] "Następujące wzorce zostaną zainstalowane ponownie:"
+msgstr[0] "Następująca aplikacja zostanie zainstalowana ponownie:"
+msgstr[1] "Następujące %d aplikacje zostaną zainstalowane ponownie:"
+msgstr[2] "Następujących %d aplikacji zostanie zainstalowanych ponownie:"
 
 #: src/Summary.cc:830
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
 msgstr[0] "Następujący zalecany pakiet został automatycznie zaznaczony:"
-msgstr[1] "Następujące zalecane pakiety zostały automatycznie zaznaczone:"
-msgstr[2] "Następujące zalecane pakiety zostały automatycznie zaznaczone:"
+msgstr[1] "Następujące %d zalecane pakiety zostały automatycznie zaznaczone:"
+msgstr[2] ""
+"Następujących %d zalecanych pakietów zostało automatycznie zaznaczonych:"
 
 #: src/Summary.cc:835
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
 msgstr[0] "Następująca zalecana poprawka została automatycznie zaznaczona:"
-msgstr[1] "Następujące zalecane poprawki zostały automatycznie zaznaczone:"
-msgstr[2] "Następujące zalecane poprawki zostały automatycznie zaznaczone:"
+msgstr[1] "Następujące %d zalecane poprawki zostały automatycznie zaznaczone:"
+msgstr[2] ""
+"Następujących %d zalecanych poprawek zostało automatycznie zaznaczonych:"
 
 #: src/Summary.cc:840
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
 msgstr[0] "Następujący zalecany wzorzec został automatycznie zaznaczony:"
-msgstr[1] "Następujące zalecane wzorce zostały automatycznie zaznaczone:"
-msgstr[2] "Następujące zalecane wzorce zostały automatycznie zaznaczone:"
+msgstr[1] "Następujące %d zalecane wzorce zostały automatycznie zaznaczone:"
+msgstr[2] "Następujących %d zalecanych wzorców zostało automatycznie zaznaczonych:"
 
 #: src/Summary.cc:845
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
 msgstr[0] "Następujący zalecany produkt został automatycznie zaznaczony:"
-msgstr[1] "Następujące zalecane produkty zostały automatycznie zaznaczone:"
-msgstr[2] "Następujące zalecane produkty zostały automatycznie zaznaczone:"
+msgstr[1] "Następujące %d zalecane produkty zostały automatycznie zaznaczone:"
+msgstr[2] ""
+"Następujących %d zalecanych produktów zostało automatycznie zaznaczonych:"
 
 #: src/Summary.cc:850
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] "Następujący zalecany pakiet został automatycznie zaznaczony:"
-msgstr[1] "Następujące zalecane pakiety zostały automatycznie zaznaczone:"
-msgstr[2] "Następujące zalecane pakiety zostały automatycznie zaznaczone:"
+msgstr[0] "Następujący zalecany pakiet źródłowy został automatycznie zaznaczony:"
+msgstr[1] ""
+"Następujące %d zalecane pakiety źródłowe zostały automatycznie zaznaczone:"
+msgstr[2] ""
+"Następujących %d zalecanych pakietów źródłowych zostało automatycznie "
+"zaznaczonych:"
 
 #: src/Summary.cc:855
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] "Następujący zalecany wzorzec został automatycznie zaznaczony:"
-msgstr[1] "Następujące zalecane wzorce zostały automatycznie zaznaczone:"
-msgstr[2] "Następujące zalecane wzorce zostały automatycznie zaznaczone:"
+msgstr[0] "Następująca zalecana aplikacja została automatycznie zaznaczona:"
+msgstr[1] "Następujące %d zalecane aplikacje zostały automatycznie zaznaczone:"
+msgstr[2] ""
+"Następujących %d zalecanych aplikacji zostało automatycznie zaznaczonych:"
 
 #: src/Summary.cc:899
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
 "required packages will be installed):"
@@ -1327,15 +1345,15 @@ msgstr[0] ""
 "Następujący pakiet jest zalecany, ale nie zostanie zainstalowany (zostaną "
 "zainstalowane wyłącznie wymagane pakiety):"
 msgstr[1] ""
-"Następujące pakiety są zalecane, ale nie zostaną zainstalowane (zostaną "
+"Następujące %d pakiety są zalecane, ale nie zostaną zainstalowane (zostaną "
 "zainstalowane wyłącznie wymagane pakiety):"
 msgstr[2] ""
-"Następujące pakiety są zalecane, ale nie zostaną zainstalowane (zostaną "
-"zainstalowane wyłącznie wymagane pakiety):"
+"Następujących %d pakietów jest zalecanych, ale nie zostanie zainstalowanych ("
+"zostaną zainstalowane wyłącznie wymagane pakiety):"
 
 # Do rozważenia: "niechciany", "niepożądany".
 #: src/Summary.cc:911
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
 "unwanted (was manually removed before):"
@@ -1344,16 +1362,16 @@ msgid_plural ""
 "they are unwanted (were manually removed before):"
 msgstr[0] ""
 "Następujący pakiet jest zalecany, ale nie zostanie zainstalowany, ponieważ "
-"został wcześniej ręcznie usunięty:"
+"jest niechciany (został wcześniej ręcznie usunięty):"
 msgstr[1] ""
-"Następujące pakiety są zalecane, ale nie zostaną zainstalowane, ponieważ "
-"zostały wcześniej ręcznie usunięte:"
+"Następujące %d pakiety są zalecane, ale nie zostaną zainstalowane, ponieważ "
+"są niechciane (zostały wcześniej ręcznie usunięte):"
 msgstr[2] ""
-"Następujące pakiety są zalecane, ale nie zostaną zainstalowane, ponieważ "
-"zostały wcześniej ręcznie usunięte:"
+"Następujących %d pakietów jest zalecanych, ale nie zostanie zainstalowanych, "
+"ponieważ są niechciane (zostały wcześniej ręcznie usunięte):"
 
 #: src/Summary.cc:921
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
 "conflicts or dependency issues:"
@@ -1364,228 +1382,248 @@ msgstr[0] ""
 "Następujący pakiet jest zalecany, ale nie zostanie zainstalowany z powodu "
 "konfliktów lub problemów z zależnościami:"
 msgstr[1] ""
-"Następujące pakiety są zalecane, ale nie zostaną zainstalowane z powodu "
+"Następujące %d pakiety są zalecane, ale nie zostaną zainstalowane z powodu "
 "konfliktów lub problemów z zależnościami:"
 msgstr[2] ""
-"Następujące pakiety są zalecane, ale nie zostaną zainstalowane z powodu "
-"konfliktów lub problemów z zależnościami:"
+"Następujących %d pakietów jest zalecanych, ale nie zostanie zainstalowanych "
+"z powodu konfliktów lub problemów z zależnościami:"
 
 #: src/Summary.cc:934
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
 msgstr[0] "Następująca poprawka jest zalecana, ale nie zostanie zainstalowana:"
-msgstr[1] "Następujące poprawki są zalecane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące poprawki są zalecane, ale nie zostaną zainstalowane:"
+msgstr[1] "Następujące %d poprawki są zalecane, ale nie zostaną zainstalowane:"
+msgstr[2] ""
+"Następujących %d poprawek jest zalecanych, ale nie zostanie zainstalowanych:"
 
 #: src/Summary.cc:938
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
 msgstr[0] "Następujący wzorzec jest zalecany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące wzorce są zalecane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące wzorce są zalecane, ale nie zostaną zainstalowane:"
+msgstr[1] "Następujące %d wzorce są zalecane, ale nie zostaną zainstalowane:"
+msgstr[2] ""
+"Następujących %d wzorców jest zalecanych, ale nie zostanie zainstalowanych:"
 
 #: src/Summary.cc:942
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "Następujący produkt jest zalecany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące produkty są zalecane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące produkty są zalecane, ale nie zostaną zainstalowane:"
+msgstr[1] "Następujące %d produkty są zalecane, ale nie zostaną zainstalowane:"
+msgstr[2] ""
+"Następujących %d produktów jest zalecanych, ale nie zostanie zainstalowanych:"
 
 #: src/Summary.cc:946
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] "Następujący wzorzec jest zalecany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące wzorce są zalecane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące wzorce są zalecane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następująca aplikacja jest zalecana, ale nie zostanie zainstalowana:"
+msgstr[1] "Następujące %d aplikacje są zalecane, ale nie zostaną zainstalowane:"
+msgstr[2] ""
+"Następujących %d aplikacji jest zalecanych, ale nie zostanie zainstalowanych:"
 
 #: src/Summary.cc:986
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
 msgstr[0] "Następujący pakiet jest sugerowany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące pakiety są sugerowane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące pakiety są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[1] "Następujące %d pakiety są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[2] ""
+"Następujących %d pakietów jest sugerowanych, ale nie zostanie "
+"zainstalowanych:"
 
 #: src/Summary.cc:991
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] ""
-"Następująca poprawka jest sugerowana, ale nie zostanie zainstalowana:"
-msgstr[1] "Następujące poprawki są sugerowane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące poprawki są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następująca poprawka jest sugerowana, ale nie zostanie zainstalowana:"
+msgstr[1] "Następujące %d poprawki są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[2] ""
+"Następujących %d poprawek jest sugerowanych, ale nie zostanie "
+"zainstalowanych:"
 
 #: src/Summary.cc:996
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] ""
-"Następujący wzorzec jest sugerowany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące wzorce są sugerowane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące wzorce są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następujący wzorzec jest sugerowany, ale nie zostanie zainstalowany:"
+msgstr[1] "Następujące %d wzorce są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[2] ""
+"Następujących %d wzorców jest sugerowanych, ale nie zostanie zainstalowanych:"
 
 #: src/Summary.cc:1001
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] ""
-"Następujący produkt jest sugerowany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące produkty są sugerowane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące produkty są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następujący produkt jest sugerowany, ale nie zostanie zainstalowany:"
+msgstr[1] "Następujące %d produkty są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[2] ""
+"Następujących %d produktów jest sugerowanych, ale nie zostanie "
+"zainstalowanych:"
 
 #: src/Summary.cc:1006
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] ""
-"Następujący wzorzec jest sugerowany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące wzorce są sugerowane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące wzorce są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następująca aplikacja jest sugerowana, ale nie zostanie zainstalowana:"
+msgstr[1] "Następujące %d aplikacje są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[2] ""
+"Następujących %d aplikacji jest sugerowanych, ale nie zostanie "
+"zainstalowanych:"
 
 #: src/Summary.cc:1028
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "Zostanie zmieniona architektura następującego pakietu:"
-msgstr[1] "Zostanie zmieniona architektura następujących pakietów:"
-msgstr[2] "Zostanie zmieniona architektura następujących pakietów:"
+msgstr[1] "Zostanie zmieniona architektura następujących %d pakietów:"
+msgstr[2] "Zostanie zmieniona architektura następujących %d pakietów:"
 
 #: src/Summary.cc:1033
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "Zostanie zmieniona architektura następującej poprawki:"
-msgstr[1] "Zostanie zmieniona architektura następujących poprawek:"
-msgstr[2] "Zostanie zmieniona architektura następujących poprawek:"
+msgstr[1] "Zostanie zmieniona architektura następujących %d poprawek:"
+msgstr[2] "Zostanie zmieniona architektura następujących %d poprawek:"
 
 #: src/Summary.cc:1038
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "Zostanie zmieniona architektura następującego wzorca:"
-msgstr[1] "Zmieniona zostanie architektura następujących wzorców:"
-msgstr[2] "Zmieniona zostanie architektura następujących wzorców:"
+msgstr[1] "Zostanie zmieniona architektura następujących %d wzorców:"
+msgstr[2] "Zostanie zmieniona architektura następujących %d wzorców:"
 
 #: src/Summary.cc:1043
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "Zostanie zmieniona architektura następującego produktu:"
-msgstr[1] "Zostanie zmieniona architektura następujących produktów:"
-msgstr[2] "Zostanie zmieniona architektura następujących produktów:"
+msgstr[1] "Zostanie zmieniona architektura następujących %d produktów:"
+msgstr[2] "Zostanie zmieniona architektura następujących %d produktów:"
 
 #: src/Summary.cc:1048
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
-msgstr[0] "Zostanie zmieniona architektura następującego wzorca:"
-msgstr[1] "Zmieniona zostanie architektura następujących wzorców:"
-msgstr[2] "Zmieniona zostanie architektura następujących wzorców:"
+msgstr[0] "Zostanie zmieniona architektura następującej aplikacji:"
+msgstr[1] "Zostanie zmieniona architektura następujących %d aplikacji:"
+msgstr[2] "Zostanie zmieniona architektura następujących %d aplikacji:"
 
 #: src/Summary.cc:1070
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "Zostanie zmieniony dostawca następującego pakietu:"
-msgstr[1] "Zostanie zmieniony dostawca następujących pakietów:"
-msgstr[2] "Zostanie zmieniony dostawca następujących pakietów:"
+msgstr[1] "Zostanie zmieniony dostawca następujących %d pakietów:"
+msgstr[2] "Zostanie zmieniony dostawca następujących %d pakietów:"
 
 #: src/Summary.cc:1075
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "Zostanie zmieniony dostawca następującej poprawki:"
-msgstr[1] "Zostanie zmieniony dostawca następujących poprawek:"
-msgstr[2] "Zostanie zmieniony dostawca następujących poprawek:"
+msgstr[1] "Zostanie zmieniony dostawca następujących %d poprawek:"
+msgstr[2] "Zostanie zmieniony dostawca następujących %d poprawek:"
 
 #: src/Summary.cc:1080
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "Zostanie zmieniony dostawca następującego wzorca:"
-msgstr[1] "Zmieniony zostanie dostawca następujących wzorców:"
-msgstr[2] "Zmieniony zostanie dostawca następujących wzorców:"
+msgstr[1] "Zostanie zmieniony dostawca następujących %d wzorców:"
+msgstr[2] "Zostanie zmieniony dostawca następujących %d wzorców:"
 
 #: src/Summary.cc:1085
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "Zostanie zmieniony dostawca następującego produktu:"
-msgstr[1] "Zostanie zmieniony dostawca następujących produktów:"
-msgstr[2] "Zostanie zmieniony dostawca następujących produktów:"
+msgstr[1] "Zostanie zmieniony dostawca następujących %d produktów:"
+msgstr[2] "Zostanie zmieniony dostawca następujących %d produktów:"
 
 #: src/Summary.cc:1090
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] "Zostanie zmieniony dostawca następującego wzorca:"
-msgstr[1] "Zmieniony zostanie dostawca następujących wzorców:"
-msgstr[2] "Zmieniony zostanie dostawca następujących wzorców:"
+msgstr[0] "Zostanie zmieniony dostawca następującej aplikacji:"
+msgstr[1] "Zostanie zmieniony dostawca następujących %d aplikacji:"
+msgstr[2] "Zostanie zmieniony dostawca następujących %d aplikacji:"
 
 #: src/Summary.cc:1110
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Ten pakiet nie jest wspierany przez jego dostawcę:"
-msgstr[1] "Te pakiety nie są wspierane przez ich dostawcę:"
-msgstr[2] "Te pakiety nie są wspierane przez ich dostawcę:"
+msgstr[1] "Te %d pakiety nie są wspierane przez ich dostawcę:"
+msgstr[2] "Tych %d pakietów nie jest wspieranych przez ich dostawcę:"
 
 #: src/Summary.cc:1130
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] "Pomoc dla następującego pakietu wymaga dodatkowej umowy klienta:"
-msgstr[1] "Pomoc dla następujących pakietów wymaga dodatkowej umowy klienta:"
-msgstr[2] "Pomoc dla następujących pakietów wymaga dodatkowej umowy klienta:"
+msgstr[0] ""
+"Pomoc dla następującego pakietu wymaga podpisania dodatkowej umowy przez "
+"klienta:"
+msgstr[1] ""
+"Pomoc dla następujących %d pakietów wymaga podpisania dodatkowej umowy przez "
+"klienta:"
+msgstr[2] ""
+"Pomoc dla następujących %d pakietów wymaga podpisania dodatkowej umowy przez "
+"klienta:"
 
 #: src/Summary.cc:1148
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] "Następujący pakiet jest sugerowany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące pakiety są sugerowane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące pakiety są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następująca aktualizacja pakietu NIE zostanie zainstalowana:"
+msgstr[1] "Następujące %d aktualizacje pakietów NIE zostaną zainstalowane:"
+msgstr[2] "Następujących %d aktualizacji pakietów NIE zostanie zainstalowanych:"
 
 #: src/Summary.cc:1153
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] ""
-"Następujący produkt jest sugerowany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące produkty są sugerowane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące produkty są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następująca aktualizacja produktu NIE zostanie zainstalowana:"
+msgstr[1] "Następujące %d aktualizacje produktów NIE zostaną zainstalowane:"
+msgstr[2] "Następujących %d aktualizacji produktów NIE zostanie zainstalowanych:"
 
 #: src/Summary.cc:1158
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
-msgstr[0] "Następujący pakiet jest sugerowany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące pakiety są sugerowane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące pakiety są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następująca aktualizacja aplikacji NIE zostanie zainstalowana:"
+msgstr[1] "Następujące %d aktualizacje aplikacji NIE zostaną zainstalowane:"
+msgstr[2] "Następujących %d aktualizacji aplikacji NIE zostanie zainstalowanych:"
 
 #: src/Summary.cc:1188
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "Następujący wzorzec jest zalecany, ale nie zostanie zainstalowany:"
-msgstr[1] "Następujące wzorce są zalecane, ale nie zostaną zainstalowane:"
-msgstr[2] "Następujące wzorce są zalecane, ale nie zostaną zainstalowane:"
+msgstr[0] ""
+"Następujący element jest zablokowany i nie zostanie zmieniony przez żadną "
+"akcję:"
+msgstr[1] ""
+"Następujące %d elementy są zablokowane i nie zostaną zmienione przez żadną "
+"akcję:"
+msgstr[2] ""
+"Następujących %d elementów jest zablokowanych i nie zostanie zmienionych "
+"przez żadną akcję:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1600,12 +1638,12 @@ msgstr ""
 "Uruchom polecenie '%1%', aby wyświetlić pełną listę zablokowanych pozycji."
 
 #: src/Summary.cc:1222
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "Uaktualniona zostanie następująca poprawka:"
-msgstr[1] "Uaktualnione zostaną następujące poprawki:"
-msgstr[2] "Uaktualnione zostaną następujące poprawki:"
+msgstr[0] "Następująca poprawka wymaga ponownego uruchomienia systemu:"
+msgstr[1] "Następujące %d poprawki wymagają ponownego uruchomienia systemu:"
+msgstr[2] "Następujących %d poprawek wymaga ponownego uruchomienia systemu:"
 
 #: src/Summary.cc:1240
 #, boost-format
@@ -2193,7 +2231,7 @@ msgstr "Usługa nadrzędna"
 
 #: src/repos.cc:1109
 msgid "Keywords"
-msgstr ""
+msgstr "Słowa kluczowe"
 
 #: src/repos.cc:1110
 msgid "Repo Info Path"
@@ -2771,43 +2809,43 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Uwzględnianie %1% z %2% odpowiednich poprawek:"
+msgstr[1] "Uwzględnianie %1% z %2% odpowiednich poprawek:"
+msgstr[2] "Uwzględnianie %1% z %2% odpowiednich poprawek:"
 
 #. translator: stats table header
 #: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Znaleziono %1% odpowiednią poprawkę:"
+msgstr[1] "Znaleziono %1% odpowiednie poprawki:"
+msgstr[2] "Znaleziono %1% odpowiednich poprawek:"
 
 #. translator: stats summary
 #: src/update.cc:294
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "%d wymagana poprawka"
-msgstr[1] "%d wymagane poprawki"
-msgstr[2] "%d wymaganych poprawek"
+msgstr[0] "%d zablokowana poprawka"
+msgstr[1] "%d zablokowane poprawki"
+msgstr[2] "%d zablokowanych poprawek"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d wymagana poprawka"
-msgstr[1] "%d wymagane poprawki"
-msgstr[2] "%d wymaganych poprawek"
+msgstr[0] "%d opcjonalna poprawka"
+msgstr[1] "%d opcjonalne poprawki"
+msgstr[2] "%d opcjonalnych poprawek"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "użyj opcji '%1%', aby dołączyć pakiety opcjonalne"
 
 #. translator: stats summary
 #: src/update.cc:315
@@ -2830,7 +2868,7 @@ msgstr[2] "%d poprawek dotyczących bezpieczeństwa"
 #. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
-msgstr ""
+msgstr "Aktualizacja stosu"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -2840,7 +2878,7 @@ msgstr "Poprawki"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "Zablokowane"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2849,7 +2887,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "Uwzględnione kategorie"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -2859,10 +2897,9 @@ msgstr ""
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr ""
-"Następujące aktualizacje systemu zarządzania oprogramowaniem zostaną "
+"Potrzebne aktualizacje systemu zarządzania oprogramowaniem zostaną "
 "zainstalowane w pierwszej kolejności:"
 
 #: src/update.cc:614 src/update.cc:854
@@ -2938,14 +2975,17 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"Czy odpowiednie poprawki opcjonalne należy traktować jako przeznaczone do "
+"wykluczenia."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Domyślnie poprawki opcjonalne są wykluczane."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Domyślnie poprawki opcjonalne są uwzględniane."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3401,7 +3441,7 @@ msgstr "Opcja %s nie dotyczy tego polecenia, została zignorowana."
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "Powłoka interfejsu Zypper nie obsługuje uruchamiania podpoleceń."
 
 #: src/Zypper.cc:1313
 #, c-format, boost-format
@@ -3526,6 +3566,7 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Nie wymaga działania użytkownika. Alias opcji globalnej --non-interactive."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -3618,6 +3659,9 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"Lokalizacja domyślna, w której rpm instaluje pakiety źródłowe, to '%1%', ale "
+"tę wartość można zmienić w lokalnej konfiguracji rpm. W razie wątpliwości "
+"wykonaj '%2%'."
 
 #: src/Zypper.cc:1613
 #, c-format, boost-format
@@ -3702,7 +3746,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3719,8 +3763,8 @@ msgstr ""
 "\n"
 "  Opcje polecenia:\n"
 "-t, --type <typ>\tTyp usługi (%s).\n"
-"-d, --disable\t\tDodaje usługę jako wyłączoną.\n"
-"-n, --name  <alias>\tOkreślenie opisowej nazwy dla usługi.\n"
+"-d, --disable Dodaje usługę jako wyłączoną.\n"
+"-n, --name <alias> Określa opisową nazwę usługi.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3743,7 +3787,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3772,24 +3816,24 @@ msgid ""
 "-t, --remote                   Apply changes to all remote services.\n"
 "-m, --medium-type <type>       Apply changes to services of specified type.\n"
 msgstr ""
-"modifyservice (ms) <options> <alias|#|URI>\n"
-"modifyservice (ms) <options> <%s>\n"
+"modifyservice (ms) <opcje> <alias|#|URI>\n"
+"modifyservice (ms) <opcje> <%s>\n"
 "\n"
 "Modyfikowanie właściwości usług określonych aliasem, numerem, adresem URI "
 "lub za pomocą \n"
 "połączonych opcji '%s'.\n"
 "\n"
 "  Opcje polecenia:\n"
-"-d, --disable             Wyłączenie usługi, ale bez usunięcia.\n"
+"-d, --disable             Wyłączenie usługi bez jej usunięcia.\n"
 "-e, --enable              Włączenie wyłączonej usługi.\n"
 "-r, --refresh             Włączenie automatycznego odświeżania usługi.\n"
 "-R, --no-refresh          Wyłączenie automatycznego odświeżania usługi.\n"
-"-n, --name                Ustawienie opisowej nazwy dla usługi.\n"
+"-n, --name                Ustawienie nazwy opisowej usługi.\n"
 "\n"
-"-i, --ar-to-enable <alias>     Dodanie repozytorium usługi RIS do "
-"włączenia.\n"
-"-I, --ar-to-disable <alias>    Dodanie repozytorium usługi RIS do "
-"wyłączenia.\n"
+"-i, --ar-to-enable <alias>     Dodanie repozytorium usługi RIS do włączenia."
+"\n"
+"-I, --ar-to-disable <alias>    Dodanie repozytorium usługi RIS do wyłączenia."
+"\n"
 "-j, --rr-to-enable <alias>     Usunięcie repozytorium usługi RIS do "
 "włączenia.\n"
 "-J, --rr-to-disable <alias>    Usunięcie repozytorium usługi RIS do "
@@ -3801,7 +3845,8 @@ msgstr ""
 "\n"
 "-a, --all                      Zastosowanie zmian do wszystkich usług.\n"
 "-l, --local                    Zastosowanie zmian do usług lokalnych.\n"
-"-t, --remote                   Zastosowanie zmian do usług zdalnych.\n"
+"-t, --remote                   Zastosowanie zmian do wszystkich usług "
+"zdalnych.\n"
 "-m, --medium-type <typ>       Zastosowanie zmian do usług określonego typu.\n"
 
 #: src/Zypper.cc:1792
@@ -3986,7 +4031,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4012,31 +4057,29 @@ msgid ""
 "-t, --remote              Apply changes to all remote repositories.\n"
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
-"modifyrepo (mr) <options> <alias|#|URI> ...\n"
-"modifyrepo (mr) <options> <%s>\n"
+"modifyrepo (mr) <opcje> <alias|#|URI> ...\n"
+"modifyrepo (mr) <opcje> <%s>\n"
 "\n"
 "Modyfikuje właściwości repozytoriów określonych aliasem, numerem, adresem "
-"URI lub za pomocą opcji zbiorczej \"%s\".\n"
+"URI lub za pomocą opcji zbiorczej '%s'.\n"
 "\n"
 "  Opcje polecenia:\n"
-"-d, --disable\t\t\tWyłącza repozytorium (ale nie usuwa go).\n"
+"-d, --disable\t\t\tWyłącza repozytorium bez usuwania go.\n"
 "-e, --enable\t\t\tWłącza repozytorium.\n"
 "-r, --refresh\t\t\tWłącza automatyczne odświeżanie repozytorium.\n"
 "-R, --no-refresh\t\tWyłącza automatyczne odświeżanie repozytorium.\n"
-"-n, --name\t\t\tUstawia opisową nazwę dla repozytorium.\n"
-"-p, --priority <liczba>\t\tUstawia priorytet repozytorium.\n"
-"-k, --keep-packages\t\tUstawia przechowywanie plików RPM w lokalnym "
-"buforze.\n"
+"-n, --name\t\t\tUstawia nazwę opisową repozytorium.\n"
+"-p, --priority <liczba całkowita>\t\tUstawia priorytet repozytorium.\n"
+"-k, --keep-packages\t\tWłącza przechowywanie plików RPM w lokalnym buforze.\n"
 "-K, --no-keep-packages\t\tWyłącza przechowywanie pakietów RPM w lokalnym "
 "buforze.\n"
-"-g, --gpgcheck            Włącz GPG do sprawdzania tego repozytorium.\n"
-"-G, --no-gpgcheck         Wyłącz GPG do sprawdzania tego repozytorium.\n"
+"-g, --gpgcheck            Włącza sprawdzanie GPG tego repozytorium.\n"
+"-G, --no-gpgcheck         Wyłącza sprawdzanie GPG tego repozytorium.\n"
 "\n"
-"-a, --all\t\t\tZastosowanie zmian do wszystkich repozytoriów.\n"
-"-l, --local\t\t\tZastosowanie zmian do repozytoriów lokalnych.\n"
-"-t, --remote\t\t\tZastosowanie zmian do repozytoriów zdalnych.\n"
-"-m, --medium-type <typ>\tZastosowanie zmian do repozytoriów określonego "
-"typu.\n"
+"-a, --all\t\t\tStosuje zmiany do wszystkich repozytoriów.\n"
+"-l, --local\t\t\tStosuje zmiany do wszystkich repozytoriów lokalnych.\n"
+"-t, --remote\t\t\tStosuje zmiany do wszystkich repozytoriów zdalnych.\n"
+"-m, --medium-type <typ>\tStosuje zmiany do repozytoriów określonego typu.\n"
 
 #: src/Zypper.cc:2025
 msgid ""
@@ -4359,63 +4402,77 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [OPCJE]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Wyświetla listę wszystkich odpowiednich poprawek."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Wyświetla listę odpowiednich poprawek dotyczących problemów zgłoszonych w "
+"Bugzilli."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Wyświetla listę odpowiednich poprawek problemów z CVE."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=CIĄG]\n"
+"Wyszukuje problemy zawierające podany ciąg."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <RRRR-MM-DD>\n"
+"Wyświetla listę poprawek wydanych przed określoną datą."
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <KATEGORIA>\n"
+"Wyświetla listę poprawek określonej kategorii."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <WAŻNOŚĆ>\n"
+"Wyświetla listę poprawek określonej ważności."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Wyświetla listę wszystkich poprawek, nie tylko odpowiednich."
 
 #: src/Zypper.cc:2310
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
-"    --from <alias|#|URI>\tOgranicza aktualizację do określonego "
-"repozytorium.\n"
+"-r, --repo <ALIAS|#|URI>\n"
+"Wyświetla listę poprawek tylko z określonego repozytorium."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4604,7 +4661,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [OPCJE]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4612,23 +4669,25 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Wyświetla statystyki odpowiednich poprawek. Polecenie zwraca wartość 100 po "
+"znalezieniu potrzebnych poprawek; 101, jeśli istnieje co najmniej jedna "
+"potrzebna poprawka zabezpieczeń."
 
 #: src/Zypper.cc:2476
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
-"    --from <alias|#|URI>\tOgranicza aktualizację do określonego "
-"repozytorium.\n"
+"-r, --repo <ALIAS|#|URI>\n"
+"Szuka poprawek tylko w określonym repozytorium."
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr ""
-"Sprawdza tylko dostępność poprawek mających wpływ na zarządzanie pakietami."
+"--updatestack-only\n"
+"Szuka tylko poprawek mających wpływ na zarządzanie pakietami."
 
 #: src/Zypper.cc:2494
 msgid ""
@@ -5433,9 +5492,8 @@ msgstr "Określone repozytorium '%s' jest wyłączone."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
-msgstr "Nie znaleziono pasujących zgłoszeń."
+msgstr "Nie znaleziono pasujących elementów."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
@@ -5516,7 +5574,7 @@ msgstr[2] "Usunięto %lu blokad."
 
 #: src/Zypper.cc:5034
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "Nie zaimplementowano danych wyjściowych XML dla tego polecenia."
 
 #: src/Zypper.cc:5047
 #, c-format, boost-format
@@ -5702,9 +5760,8 @@ msgid "Check failed:"
 msgstr "Sprawdzanie nie powiodło się:"
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
-msgstr "Sprawdź GPG"
+msgstr "Pomiń sprawdzenie:"
 
 #: src/solve-commit.cc:457
 #, c-format, boost-format
@@ -6139,7 +6196,7 @@ msgstr "Pakiet '%s' nie jest pobierany."
 #: src/PackageArgs.cc:204
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "\"%s\" nie znaleziono wśród nazw pakietów. Próba wyszukania \"%s\"."
+msgstr "Nie znaleziono '%s' wśród nazw pakietów. Próba wyszukania '%s'."
 
 #: src/PackageArgs.cc:219
 #, c-format, boost-format
@@ -6160,7 +6217,7 @@ msgstr "'%s' nie jest prawidłowym nazwą pakietu lub możliwością."
 #: src/misc.cc:132
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Automatycznie zaakceptowano licencję obiektu '%s' typu '%s'"
+msgstr "Automatycznie zaakceptowano licencję obiektu '%s' typu '%s'."
 
 #. introduction
 #. translators: the first %s is the name of the package, the second
@@ -6253,7 +6310,7 @@ msgstr "Pakiet źródłowy %s-%s został zainstalowany pomyślnie."
 #: src/misc.cc:394
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
-msgstr "Problem podczas instalacji pakietu źródłowego %s-%s"
+msgstr "Problem podczas instalacji pakietu źródłowego %s-%s:"
 
 #. translators: locks table value
 #: src/locks.cc:24 src/locks.cc:128
@@ -6307,7 +6364,7 @@ msgid "No lock has been removed."
 msgstr "Nie usunięto żadnych blokad."
 
 #: src/locks.cc:306
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
 msgstr[0] "Usunięto pomyślnie %zu blokadę."
@@ -6448,7 +6505,7 @@ msgstr "Ponowna próba..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "Nie można odczytać złego strumienia lub znaku końca pliku."
 
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
@@ -6526,13 +6583,12 @@ msgstr[2] "obiekty rozstrzygalne"
 #. translator: patch status
 #: src/utils/misc.cc:134
 msgid "unwanted"
-msgstr ""
+msgstr "niechciana"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
-#, fuzzy
 msgid "optional"
-msgstr "ps [opcje]"
+msgstr "opcjonalna"
 
 #. translator: patch status
 #: src/utils/misc.cc:136
@@ -6542,7 +6598,7 @@ msgstr "Potrzebna"
 #. translator: patch status
 #: src/utils/misc.cc:137
 msgid "applied"
-msgstr ""
+msgstr "zastosowana"
 
 #. translator: patch status
 #: src/utils/misc.cc:138
@@ -6551,9 +6607,8 @@ msgstr "niewymagana"
 
 #. translator: patch status
 #: src/utils/misc.cc:139
-#, fuzzy
 msgid "undetermined"
-msgstr "niezdefiniowany"
+msgstr "niezdefiniowana"
 
 #. << _("Repository")
 #: src/utils/misc.cc:289
