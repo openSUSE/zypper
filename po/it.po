@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 08:14+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2712,7 +2712,7 @@ msgstr ""
 #: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr "Risolvibili da '%s' non letti a causa di un errore."
+msgstr "Risolvibili da '%s' non caricati a causa di un errore."
 
 #: src/repos.cc:3138
 #, c-format, boost-format
