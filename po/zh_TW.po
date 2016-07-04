@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:23+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 05:26+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -839,7 +839,7 @@ msgstr "找不到提供 '%s' 的提供者。"
 #: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr "沒有發現符合 '%s' 的已安裝套件。"
+msgstr "未安裝與「%s」相符的套件。"
 
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
@@ -5417,7 +5417,7 @@ msgstr "您可能會想要重新啟動這些程序。"
 #, c-format, boost-format
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
-msgstr "參閱 '%s' 察看關於上表中的數值意義的資訊。"
+msgstr "參閱「%s」瞭解關於上表中的數值意義的資訊。"
 
 #: src/ps.cc:175
 msgid ""
