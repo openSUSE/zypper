@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 09:15+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 09:17+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4618,7 +4618,7 @@ msgstr "位址中的目標為空"
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "不支援的位址規畫在 '%s'。"
+msgstr "「%s」中存在不受支援的 URI 綱要。"
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
