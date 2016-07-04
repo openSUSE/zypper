@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 09:48+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 09:49+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6468,7 +6468,7 @@ msgstr[1] "Selezione automatica di '%s' dopo %u secondi."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
-msgstr "Nuova tentativo in corso..."
+msgstr "Nuovo tentativo in corso..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
@@ -6480,8 +6480,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
-"Se si esegue zypper senza un terminale, usare l'opzione globale\n"
-"'%s' per far usare a zypper le risposte predefinite alle richieste."
+"Se si esegue zypper senza un terminale, utilizzare l'opzione globale '%s'\n"
+"affinché zypper utilizzi le risposte di default per i prompt."
 
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
