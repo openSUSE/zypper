@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 08:13+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2694,8 +2694,8 @@ msgstr "Recupero dei dati del repository '%s' in corso..."
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr ""
-"L'archivio '%s' non è memorizzato nella cache. Memorizzazione nella cache in "
-"corso..."
+"Il repository '%s' non è memorizzato nella cache. Memorizzazione nella cache "
+"in corso..."
 
 # TLABEL modules/inst_config_x11.ycp:578
 #: src/repos.cc:3113 src/repos.cc:3147
