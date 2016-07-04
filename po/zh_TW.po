@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 07:03+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 07:11+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4297,7 +4297,7 @@ msgstr "衝突的要求"
 
 #: zypp/solver/detail/SATResolver.cc:989
 msgid "some dependency problem"
-msgstr "有些相依性問題"
+msgstr "一些相依性問題"
 
 #: zypp/solver/detail/SATResolver.cc:992
 #, c-format, boost-format
@@ -4306,7 +4306,7 @@ msgstr "無法提供所需的 %s"
 
 #: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
 msgid "Have you enabled all requested repositories?"
-msgstr "請問您已啟用所需的套件庫了嗎？"
+msgstr "是否已啟用所有要求的儲存庫？"
 
 #: zypp/solver/detail/SATResolver.cc:996
 #, c-format, boost-format
