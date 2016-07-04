@@ -18,15 +18,16 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2014-10-12 14:20+0200\n"
-"Last-Translator: Hermann J. Beckers <hj.beckers@onlinehome.de>\n"
-"Language-Team: German <kde-i18n-de@kde.org>\n"
+"PO-Revision-Date: 2016-07-04 13:59+0000\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -343,11 +344,10 @@ msgstr ""
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
-#, fuzzy
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "Keine gültigen Metadaten bei de(m|n) festgelegten URL(s) gefunden"
-msgstr[1] "Keine gültigen Metadaten bei de(m|n) festgelegten URL(s) gefunden"
+msgstr[0] "Keine gültigen Metadaten bei dem festgelegten URL gefunden"
+msgstr[1] "Keine gültigen Metadaten bei den festgelegten URLs gefunden"
 
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
 #, c-format, boost-format
@@ -576,11 +576,11 @@ msgstr "(läuft innerhalb 24 Stunden ab)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(läuft innerhalb 24 Stunden ab)"
-msgstr[1] "(läuft innerhalb 24 Stunden ab)"
+msgstr[0] "(läuft innerhalb von %d Tag ab)"
+msgstr[1] "(läuft innerhalb von %d Tagen ab)"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
