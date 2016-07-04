@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 02:58+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 03:16+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -616,7 +616,7 @@ msgstr "簡稱"
 
 #: src/info.cc:481 src/search.cc:578
 msgid "Is Base"
-msgstr "基礎系統"
+msgstr "是基礎"
 
 #: src/info.cc:485
 msgid "End of Support"
@@ -664,7 +664,7 @@ msgstr "無法執行 %1% (%2%)"
 #: src/subcommand.cc:284
 #, boost-format
 msgid "fork for %1% failed (%2%)"
-msgstr "%1% fork 失敗 (%2%)"
+msgstr "%1% 衍生失敗 (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
@@ -5681,7 +5681,7 @@ msgstr "已安裝的套件： %d"
 #: src/misc.cc:258
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "安裝套件及其相依在套件庫： %d"
+msgstr "儲存庫中存在對應部分的已安裝套件︰%d"
 
 #: src/misc.cc:259
 #, c-format, boost-format
@@ -6028,7 +6028,7 @@ msgstr "無效的 OBS 位址。"
 
 #: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
-msgstr "正確格式為 obs://<project>/[platform]"
+msgstr "正確的格式是 obs://<專案>/[平台]"
 
 #: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
@@ -6040,7 +6040,7 @@ msgstr "可能您的磁碟空間已用罄。"
 
 #: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
-msgstr "取出指定的 RPM 檔出現問題"
+msgstr "取回指定的 RPM 檔案時出現問題"
 
 #: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
