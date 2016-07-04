@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:47+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 05:50+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -934,7 +934,7 @@ msgstr "修補程式 '%s' 是互動式的，跳過。"
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
-msgstr "修補程式 '%s' 不需要。"
+msgstr "不需要修補程式「%s」。"
 
 #: src/RequestFeedback.cc:181
 #, boost-format
@@ -971,7 +971,7 @@ msgstr "正在選擇安裝 '%s' (來自套件庫 '%s')。"
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "強迫安裝 '%s' 從套件庫 '%s'。"
+msgstr "正在強制安裝「%s」(來自儲存庫「%s」)。"
 
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
