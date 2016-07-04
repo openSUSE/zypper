@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:57+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 06:11+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -1584,7 +1584,7 @@ msgstr "中止(a)、重試(r)、忽略(i)？"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
-msgstr "停用 SSL 憑證授權檢查。"
+msgstr "SSL 憑證授權檢查已停用。"
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
@@ -5165,7 +5165,7 @@ msgstr "正在產生解決測試方案..."
 #: src/solve-commit.cc:394
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr "產生解決測試方案成功於 /%s。"
+msgstr "產生解決測試方案成功於 %s。"
 
 #: src/solve-commit.cc:397
 msgid "Error creating the solver test case."
@@ -5176,14 +5176,12 @@ msgstr "建立解決測試方案時發生錯誤。"
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
-msgstr ""
-"檢查使用已刪除函式庫運作程序的功能在 zypper.conf 中已被關閉。請手動執行 '%s' "
-"來做檢查。"
+msgstr "檢查使用已刪除函式庫之執行中程序的功能在 zypper.conf 中已被關閉。請手動執行 '%s' 來做檢查。"
 
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
 msgid "Checking for running processes using deleted libraries..."
-msgstr "正在檢查使用已刪除函式庫的正在運作程序..."
+msgstr "正在檢查使用已刪除函式庫的執行中程序..."
 
 #: src/solve-commit.cc:447 src/ps.cc:59
 msgid "Check failed:"
@@ -5199,18 +5197,16 @@ msgid ""
 "There are some running programs that might use files deleted by recent "
 "upgrade. You may wish to check and restart some of them. Run '%s' to list "
 "these programs."
-msgstr ""
-"有些正在運作的程序使用了已被最近更新刪除的檔案。 您可能會想要檢查並重新啟動這"
-"些程序。執行 '%s' 來列出這些程式。"
+msgstr "有些正在執行的程式使用了已被最近更新刪除的檔案。 您可能會想要檢查並重新啟動這些程式。請執行 '%s' 來列出這些程式。"
 
 #: src/solve-commit.cc:468
 msgid "Update notifications were received from the following packages:"
-msgstr "由下列套件收到了更新提醒："
+msgstr "從下列套件收到了更新提醒："
 
 #: src/solve-commit.cc:477
 #, c-format, boost-format
 msgid "Message from package %s:"
-msgstr "由套件 %s 收到的訊息："
+msgstr "從套件 %s 收到的訊息："
 
 #: src/solve-commit.cc:485
 msgid "y/n"
