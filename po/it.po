@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 07:28+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -1999,7 +1999,7 @@ msgstr "Errore durante la creazione della cache:"
 #: src/repos.cc:609
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "Impossibile trovare l'archivio '%s' tramite alias, numero o URI."
+msgstr "Impossibile trovare il repository  '%s' tramite alias, numero o URI."
 
 #: src/repos.cc:612
 #, c-format, boost-format
