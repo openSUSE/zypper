@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 08:51+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 08:57+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -5419,21 +5419,21 @@ msgstr ""
 #: src/Zypper.cc:4099 src/Zypper.cc:4658
 #, c-format, boost-format
 msgid "%s contradicts %s"
-msgstr "%s contraddice %s"
+msgstr "%s è in conflitto con %s"
 
 #. translators: meaning --force with --capability
 #: src/Zypper.cc:4107
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
-msgstr "%s non può essere attualmente usato con %s"
+msgstr "Impossibile utilizzare %s con %s"
 
 #: src/Zypper.cc:4148
 msgid "Source package name is a required argument."
-msgstr "Il nome del pacchetto sorgente è un argomento richiesto."
+msgstr "Il nome del pacchetto di origine è un argomento obbligatorio."
 
 #: src/Zypper.cc:4231
 msgid "Mode is set to 'match-exact'"
-msgstr "La modalità è impostata come 'match-exact'."
+msgstr "Modalità impostata come 'match-exact'."
 
 #: src/Zypper.cc:4251 src/Zypper.cc:4577 src/Zypper.cc:4677 src/Zypper.cc:4874
 #: src/Zypper.cc:4922 src/Zypper.cc:4962
@@ -5454,21 +5454,23 @@ msgstr "Nessun elemento corrispondente trovato."
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
-"Un problema è occorso inizializzando o eseguendo l'interrogazione di ricerca"
+"Si è verificato un problema durante l'inizializzazione o l'esecuzione di "
+"un'interrogazione di ricerca."
 
 #: src/Zypper.cc:4439
 msgid "See the above message for a hint."
-msgstr "Si veda il messaggio precedente per un suggerimento."
+msgstr "Leggere il messaggio visualizzato sopra."
 
 #: src/Zypper.cc:4596 src/Zypper.cc:4644
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
-msgstr "Impossibile usare %s insieme con %s."
+msgstr "Impossibile usare %s insieme a %s."
 
 #: src/Zypper.cc:4625
 msgid "Root privileges are required for updating packages."
 msgstr ""
-"Per aggiornare i pacchetti sono necessari i privilegi dell'utente root."
+"Per aggiornare i pacchetti è necessario disporre dei privilegi di utente "
+"root."
 
 #: src/Zypper.cc:4684 src/Zypper.cc:4692 src/Zypper.cc:4765
 msgid "Operation not supported."
@@ -5485,22 +5487,22 @@ msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
-"Zypper non tiene traccia dei pacchetti sorgenti installati. Per installare "
-"il più recente pacchetto sorgente con le sue dipendenze di compilazione, "
-"usare '%s'."
+"Zypper non tiene traccia dei pacchetti di origine installati. Per installare "
+"il pacchetto di origine più recente con le rispettive dipendenze della "
+"build, usare '%s'."
 
 #: src/Zypper.cc:4709
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
-"Impossibile usare tipi multipli quando pacchetti specifici sono passati come "
+"Impossibile usare più tipi quando vengono forniti pacchetti specifici come "
 "argomenti."
 
 #: src/Zypper.cc:4801
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
-"Per aggiornare l'intera distribuzione sono necessari i privilegi dell'utente "
-"root."
+"Per effettuare l'upgrade di una distribuzione è necessario disporre dei "
+"privilegi di utente root."
 
 #: src/Zypper.cc:4821
 #, c-format, boost-format
@@ -5517,13 +5519,13 @@ msgstr ""
 #: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
-msgstr "Uso"
+msgstr "Utilizzo"
 
 #: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
 msgstr ""
-"Per aggiungere i blocchi ai pacchetti sono necessari i privilegi dell'utente "
-"root."
+"Per aggiungere blocchi ai pacchetti è necessario disporre dei privilegi di "
+"utente root."
 
 #: src/Zypper.cc:5023
 #, c-format, boost-format
@@ -5559,21 +5561,20 @@ msgstr "%s è più recente di %s"
 #: src/Zypper.cc:5093
 #, c-format, boost-format
 msgid "%s is older than %s"
-msgstr "%s è più vecchio di %s"
+msgstr "%s è meno recente di %s"
 
 #: src/Zypper.cc:5171 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
-msgstr ""
-"Privilegi insufficienti per usare la directory degli scaricamenti '%s'."
+msgstr "Privilegi insufficienti per usare la directory di download '%s'."
 
 #: src/Zypper.cc:5223
 msgid "This command only makes sense in the zypper shell."
-msgstr "Questo comando ha senso solamente nella shell di zypper."
+msgstr "Questo comando è utilizzabile solamente nella shell di zypper."
 
 #: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
-msgstr "Si sta già eseguendo la shell di zypper."
+msgstr "Zypper è già in esecuzione in una shell."
 
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
@@ -5644,7 +5645,7 @@ msgstr[1] "%d Problemi:"
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
 msgid "Specified capability not found"
-msgstr "Capacità specificata non trovata"
+msgstr "La funzionalità specificata non è stata trovata"
 
 #: src/solve-commit.cc:160
 #, c-format, boost-format
@@ -5659,7 +5660,7 @@ msgstr "Risoluzione delle dipendenze in corso…"
 #: src/solve-commit.cc:220
 #, c-format, boost-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
-msgstr "%s è in conflitto con '%s', si userà il meno aggressivo %s"
+msgstr "%s è in conflitto con '%s'; verrà utilizzato %s, meno aggressivo"
 
 #: src/solve-commit.cc:248
 msgid "Force resolution:"
@@ -5667,25 +5668,25 @@ msgstr "Forza risoluzione:"
 
 #: src/solve-commit.cc:330
 msgid "Verifying dependencies..."
-msgstr "Verifica delle dipendenze in corso…"
+msgstr "Verifica delle dipendenze in corso..."
 
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:378
 msgid "Computing upgrade..."
-msgstr "Calcolo dell'aggiornamento in corso..."
+msgstr "Elaborazione dell'aggiornamento in corso..."
 
 #: src/solve-commit.cc:392
 msgid "Generating solver test case..."
-msgstr "Generazione del test per il risolutore in corso..."
+msgstr "Generazione del caso di prova del solver in corso..."
 
 #: src/solve-commit.cc:394
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr "Test per il risolutore generato con successo su %s."
+msgstr "Generazione del caso di prova del solver completata con successo su %s."
 
 #: src/solve-commit.cc:397
 msgid "Error creating the solver test case."
-msgstr "Errore durante la creazione del test per il risolutore."
+msgstr "Errore durante la creazione del caso di prova per il solver."
 
 #: src/solve-commit.cc:431
 #, c-format, boost-format
@@ -5693,19 +5694,18 @@ msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
-"La ricerca dei processi in esecuzione che usano le librerie cancellate è "
-"disabilitata in zypper.conf. Eseguire '%s' per controllare manualmente."
+"Verifica di processi in esecuzione che utilizzano librerie eliminate "
+"disattivata in zypper.conf. Per verificare manualmente eseguire '%s'."
 
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
-"Ricerca dei processi in esecuzione che usano le librerie cancellate in "
-"corso..."
+"Verifica dei processi avviati che usano le librerie eliminate in corso..."
 
 #: src/solve-commit.cc:447 src/ps.cc:59
 msgid "Check failed:"
-msgstr "Verifica fallita:"
+msgstr "Verifica non riuscita:"
 
 #: src/solve-commit.cc:449
 msgid "Skip check:"
@@ -5718,13 +5718,13 @@ msgid ""
 "upgrade. You may wish to check and restart some of them. Run '%s' to list "
 "these programs."
 msgstr ""
-"Ci sono alcuni programmi in esecuzione che potrebbero aver in uso dei file "
-"che sono stati eliminati da un recente aggiornamento. Si potrebbe desiderare "
-"di controllarne e riavviarne alcuni. Si usi '%s' per elencare tali programmi."
+"Alcuni programmi in esecuzione potrebbero utilizzare file eliminati da un "
+"upgrade recente. Può essere necessario verificare e riavviare alcuni di "
+"questi programmi. Eseguire '%s' per visualizzare un elenco dei programmi."
 
 #: src/solve-commit.cc:468
 msgid "Update notifications were received from the following packages:"
-msgstr "Notifiche di aggiornamento sono state ricevute dai seguenti pacchetti:"
+msgstr "Sono state ricevute notifiche di aggiornamento dai seguenti pacchetti:"
 
 #: src/solve-commit.cc:477
 #, c-format, boost-format
@@ -5737,22 +5737,22 @@ msgstr "s/n"
 
 #: src/solve-commit.cc:486
 msgid "View the notifications now?"
-msgstr "Vedere le notifiche ora?"
+msgstr "Visualizzare le notifiche adesso?"
 
 #: src/solve-commit.cc:532
 msgid "Computing distribution upgrade..."
-msgstr "Calcolo dell'aggiornamento della distribuzione in corso..."
+msgstr "Calcolo upgrade di distribuzione in corso..."
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
-msgstr "Risoluzione delle dipendenze dei pacchetti in corso…"
+msgstr "Risoluzione dipendenze dei pacchetti in corso..."
 
 #: src/solve-commit.cc:614
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
-"Alcune delle dipendenze dei pacchetti installati non sono soddisfatte. Per "
+"Alcune delle dipendenze dei pacchetti installati sono mancanti. Per "
 "correggerle sono necessarie le seguenti azioni:"
 
 #: src/solve-commit.cc:621
@@ -5780,7 +5780,7 @@ msgstr "s/n/p/v/a/r/f/d/g"
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
-"Sì, accetta il sommario e procedi con l'installazione/rimozione dei "
+"Si, accetta il riepilogo e procedi con l'installazione/rimozione dei "
 "pacchetti."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
@@ -5794,25 +5794,25 @@ msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
-"Riavvia il risolutore nella modalità no-force-resolution al fine di mostrare "
-"i problemi delle dipendenze."
+"Riavvia il solver nella modalità no-force-resolution per evidenziare i "
+"problemi di dipendenze."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:654
 msgid "Toggle display of package versions."
-msgstr "Abilita la visualizzazione delle versioni dei pacchetti."
+msgstr "Alternare la visualizzazione delle versioni dei pacchetti."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:656
 msgid "Toggle display of package architectures."
-msgstr "Abilita la visualizzazione delle architetture dei pacchetti."
+msgstr "Alternare la visualizzazione delle architetture dei pacchetti."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: src/solve-commit.cc:658
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
-"Abilita la visualizzazione dei repository dai quali saranno installati i "
+"Alternare la visualizzazione degli archivi dai quali saranno installati i "
 "pacchetti."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
