@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 06:01+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -6296,7 +6296,7 @@ msgstr "Сообщите об этом в отчете об ошибке."
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
 msgstr ""
-"Указания приведены на странице http://en.opensuse.org/Zypper/Troubleshooting."
+"Инструкции см. на странице http://en.opensuse.org/Zypper/Troubleshooting."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
