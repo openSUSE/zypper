@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 09:12+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 09:13+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4605,7 +4605,7 @@ msgstr "格式錯誤的位址"
 
 #: zypp/media/MediaException.cc:125
 msgid "Empty host name in URI"
-msgstr "URI 中的主機名稱為空"
+msgstr "位址中的主機名稱為空"
 
 #: zypp/media/MediaException.cc:130
 msgid "Empty filesystem in URI"
