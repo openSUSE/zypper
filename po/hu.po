@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 09:13+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 09:41+0000\n"
+"Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian "
 "<https://l10n.opensuse.org/projects/libzypp/master/hu/>\n"
 "Language: hu\n"
@@ -312,7 +312,7 @@ msgstr ""
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "Nem sikerült a ' %s' könyvtár beolvasása."
+msgstr "Nem sikerült a '%s' könyvtár beolvasása."
 
 #: zypp/RepoManager.cc:315
 #, boost-format
@@ -389,7 +389,7 @@ msgstr "Ismeretlen típusú tároló"
 #: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
-msgstr "Hiba történt a(z) '%s' beolvasása közben:"
+msgstr "Hiba történt a(z) '%s' beolvasása közben."
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
@@ -1698,7 +1698,7 @@ msgstr "Katar"
 #. :QAT:634:
 #: zypp/CountryCode.cc:344
 msgid "Reunion"
-msgstr "Reunion"
+msgstr "Réunion"
 
 #. :REU:638:
 #: zypp/CountryCode.cc:345
@@ -2563,7 +2563,7 @@ msgstr "kreol és pidgin (egyéb)"
 #. language code: csb
 #: zypp/LanguageCode.cc:365
 msgid "Kashubian"
-msgstr "kasúbi"
+msgstr "kasub"
 
 #. language code: cus
 #: zypp/LanguageCode.cc:367
@@ -4053,7 +4053,7 @@ msgstr "déli számi"
 #. language code: sme se
 #: zypp/LanguageCode.cc:963
 msgid "Northern Sami"
-msgstr "északi lapp"
+msgstr "északi számi"
 
 #. language code: smi
 #: zypp/LanguageCode.cc:965
@@ -4142,7 +4142,7 @@ msgstr "nílus-szaharai (egyéb)"
 #. language code: ssw ss
 #: zypp/LanguageCode.cc:997
 msgid "Swati"
-msgstr "swati"
+msgstr "szvázi"
 
 #. language code: suk
 #: zypp/LanguageCode.cc:999
