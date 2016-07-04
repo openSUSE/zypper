@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 09:52+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6636,17 +6636,17 @@ msgstr "Verificare che il file sia accessibile."
 #: src/utils/misc.cc:686
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
-msgstr "Modalità di scaricamento '%s' sconosciuta."
+msgstr "Modalità di download '%s' sconosciuta."
 
 #: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Available download modes: %s"
-msgstr "Modalità di scaricamento disponibili: %s."
+msgstr "Modalità di download disponibile: %s"
 
 #: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
-msgstr "L'opzione '%s' sovrascrive '%s'."
+msgstr "L'opzione '%s' ignora '%s'."
 
 #~ msgid "Name: "
 #~ msgstr "Nome: "
