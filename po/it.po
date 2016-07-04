@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 08:23+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 08:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -3169,12 +3169,12 @@ msgid ""
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
 "     Gestione aggiornamenti:\n"
-"\tupdate, up\t\tAggiorna i pacchetti installati con le nuove versioni.\n"
+"\tupdate, up\t\tAggiorna i pacchetti installati con versioni più recenti.\n"
 "\tlist-updates, lu\tElenca gli aggiornamenti disponibili.\n"
 "\tpatch\t\t\tInstalla le patch necessarie.\n"
 "\tlist-patches, lp\tElenca le patch necessarie.\n"
-"\tdist-upgrade, dup\tEsegue un aggiornamento della distribuzione.\n"
-"\tpatch-check, pchk\tControlla la disponibilità di patch.\n"
+"\tdist-upgrade, dup\tEsegue un upgrade della distribuzione.\n"
+"\tpatch-check, pchk\tVerifica la disponibilità di patch.\n"
 
 #: src/Zypper.cc:522
 msgid ""
@@ -3197,10 +3197,10 @@ msgstr ""
 "\tpattern-info\t\tMostra tutte le informazioni per i modelli specificati.\n"
 "\tproduct-info\t\tMostra tutte le informazioni per i prodotti specificati.\n"
 "\tpatches, pch\t\tElenca tutte le patch disponibili.\n"
-"\tpackages, pa\t\tMostra tutti i pacchetti disponibili.\n"
-"\tpatterns, pt\t\tMostra tutti i modelli disponibili.\n"
-"\tproducts, pd\t\tMostra tutti i prodotti disponibili.\n"
-"\twhat-provides, wp\tMostra i pacchetti che forniscono la capacità "
+"\tpackages, pa\t\tElenca tutti i pacchetti disponibili.\n"
+"\tpatterns, pt\t\tElenca tutti i modelli disponibili.\n"
+"\tproducts, pd\t\tElenca tutti i prodotti disponibili.\n"
+"\twhat-provides, wp\tElenca i pacchetti che forniscono una funzionalità "
 "specificata.\n"
 
 #: src/Zypper.cc:537
@@ -3211,11 +3211,11 @@ msgid ""
 "\tlocks, ll\t\tList current package locks.\n"
 "\tcleanlocks, cl\t\tRemove unused locks.\n"
 msgstr ""
-"     Blocco dei pacchetti:\n"
-"\taddlock, al\t\tAggiungi il blocco al pacchetto.\n"
-"\tremovelock, rl\t\tRimuovi il blocco al pacchetto.\n"
-"\tlocks, ll\t\tMostra tutti i blocchi attuali dei pacchetti.\n"
-"\tcleanlocks, cl\t\tRimuovi i blocchi inutilizzati.\n"
+"     Blocchi ai pacchetti:\n"
+"\taddlock, al\t\tAggiunge il blocco a un pacchetto.\n"
+"\tremovelock, rl\t\tRimuove il blocco a un pacchetto.\n"
+"\tlocks, ll\t\tElenca i blocchi attuali al pacchetto.\n"
+"\tcleanlocks, cl\t\tRimuove i blocchi inutilizzati.\n"
 
 #: src/Zypper.cc:544
 msgid ""
@@ -3230,14 +3230,14 @@ msgid ""
 "\t\t\t\tto a local directory.\n"
 msgstr ""
 "     Altri comandi:\n"
-"\tversioncmp, vcmp\tCompara due stringhe di versione.\n"
-"\ttargetos, tos\t\tStampa la stringa ID del sistema operativo di "
+"\tversioncmp, vcmp\tConfronta due stringhe di versione.\n"
+"\ttargetos, tos\t\tStampa la stringa dell'ID del sistema operativo di "
 "destinazione.\n"
-"\tlicenses\t\tStampa un rapporto con le licenze e le EULA dei\n"
+"\tlicenses\t\tStampa il report su licenze ed EULA dei\n"
 "\t\t\t\tpacchetti installati.\n"
 "\tdownload\t\tScarica gli rpm specificati nella riga di comando in una "
 "directory locale.\n"
-"\tsource-download\t\tScarica gli rpm sorgenti di tutti i pacchetti "
+"\tsource-download\t\tScarica gli rpm sorgente per tutti i pacchetti "
 "installati\n"
 "\t\t\t\tin una directory locale.\n"
 
@@ -3246,7 +3246,7 @@ msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
 msgstr ""
-"    Sottocomandi:\n"
+"     Sottocomandi:\n"
 "\tsubcommand\t\tElenca i sottocomandi disponibili.\n"
 
 #: src/Zypper.cc:559
@@ -3257,8 +3257,7 @@ msgid ""
 msgstr ""
 "  Uso:\n"
 "\tzypper [--opzioni-globali] <comando> [--opzioni-del-comando] [argomenti]\n"
-"\n"
-"zypper <sottocomando> [--opzioni-del-comando] [argomenti]\n"
+"\tzypper <sottocomando> [--opzioni-del-comando] [argomenti]\n"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -3273,7 +3272,7 @@ msgstr ""
 #: src/Zypper.cc:596
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Digitare '%s' per riceve aiuto specifico sul comando."
+msgstr "Digitare '%s' per ricevere aiuto specifico sul comando."
 
 #: src/Zypper.cc:771
 #, c-format, boost-format
@@ -3283,7 +3282,7 @@ msgstr "Livello di dettaglio: %d"
 #: src/Zypper.cc:785
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr "Stile di tabella %d non valido."
+msgstr "Stile tabella %d non valido."
 
 #: src/Zypper.cc:786
 #, c-format, boost-format
@@ -3304,7 +3303,7 @@ msgstr "Impostazione forzata"
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "La stringa di dati utente non deve contenere caratteri di nuova riga o non "
-"stampabili!"
+"stampabili."
 
 #: src/Zypper.cc:953 src/Zypper.cc:3227
 msgid "Entering non-interactive mode."
@@ -3315,20 +3314,20 @@ msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
-"Le patch con il marcatore 'rebootSuggested' impostato non verranno trattate "
-"come interattive."
+"Le patch impostate con il flag rebootSuggested non verranno trattate come "
+"interattive."
 
 #: src/Zypper.cc:967
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Attivazione modalità senza verifica GPG."
+msgstr "Attivazione modalità 'no-gpg-checks'."
 
 #: src/Zypper.cc:975
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
-"Abilitazione di '%s'. Le nuove chiavi di firma dei repository saranno "
-"importate automaticamente!"
+"Attivazione di '%s'. Le nuove chiavi di firma dell'archivio saranno "
+"importate automaticamente."
 
 #: src/Zypper.cc:988
 msgid "The path specified in the --root option must be absolute."
