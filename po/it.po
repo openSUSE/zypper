@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:27+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 07:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -1962,7 +1962,7 @@ msgstr ""
 #: src/repos.cc:352
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Si è verificato un errore recuperando i meta-dati per '%s':"
+msgstr "Errore durante il recupero dei metadati per '%s':"
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
@@ -1971,7 +1971,7 @@ msgstr "Costruzione forzata della cache del repository"
 #: src/repos.cc:390
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
-msgstr "Errore nell'analisi dei meta-dati per '%s':"
+msgstr "Errore durante l'analisi sintattica dei metadati per '%s':"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: src/repos.cc:392
@@ -1989,7 +1989,8 @@ msgstr ""
 #: src/repos.cc:401
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Metadati del repository per '%s' non trovati nella cache locale."
+msgstr ""
+"Impossibile trovare nella cache locale i metadati dell'archivio per '%s'."
 
 #: src/repos.cc:409
 msgid "Error building the cache:"
