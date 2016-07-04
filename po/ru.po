@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:58+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-04 05:59+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -6192,7 +6192,7 @@ msgstr "Установлено пакетов с дубликатами в ре�
 #: src/misc.cc:259
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Установлено пакетов с EULA: %d"
+msgstr "Установленные пакеты с файлами лицензий: %d"
 
 #: src/misc.cc:289
 #, c-format, boost-format
