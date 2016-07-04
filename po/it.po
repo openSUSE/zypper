@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:02+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 07:09+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -192,9 +192,8 @@ msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
 msgstr ""
-"Attenzione: questo potrebbe essere causato da una modifica maligna del "
-"file!\n"
-"Procedere potrebbe essere rischioso. Continuare comunque?"
+"Avviso: questo potrebbe essere dovuto a una modifica dannosa nel file.\n"
+"Potrebbe essere rischioso procedere. Continuare comunque?"
 
 #: src/callbacks/keyring.h:307
 #, c-format, boost-format
@@ -224,19 +223,19 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
-"Verifica del sommario per il file '%1%' fallita\n"
+"Verifica del sommario per il file '%1%' non riuscita\n"
 "[%2%]\n"
 "\n"
-"  atteso  %3%\n"
-"  trovato %4%\n"
+"  previsto  %3%\n"
+"  ma trovato %4%\n"
 
 #: src/callbacks/keyring.h:344
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
-"Accettare i pacchetti con somma di controllo errata può portare ad un "
-"sistema corrotto e in casi estremi anche a compromettere il sistema."
+"L'accettazione di pacchetti con checksum errate può comportare la corruzione "
+"del sistema e in casi estremi può anche comprometterlo."
 
 #: src/callbacks/keyring.h:352
 #, boost-format
@@ -248,17 +247,17 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"Comunque, se si è certi che il file con somma di controllo '%1%..' è sicuro, "
+"Se tuttavia si è certi che il file contenente la checksum '%1%..' è sicuro, "
 "corretto\n"
-"e dovrebbe essere usato in questa operazione, inserire i primi 4 caratteri "
-"della somma di controllo\n"
+"e dovrebbe essere usato in questa operazione, immettere i primi 4 caratteri "
+"della checksum\n"
 "per sbloccare l'uso di questo file a proprio rischio e pericolo. Non "
-"inserire nulla per scartare il file.\n"
+"immettere dati per ignorare il file.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:359
 msgid "discard"
-msgstr "scarta"
+msgstr "ignora"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:361
@@ -268,18 +267,18 @@ msgstr "Sbloccare usando questo file a proprio rischio."
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:363
 msgid "Discard the file."
-msgstr "Scarta il file."
+msgstr "Ignorare il file."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:368
 msgid "Unblock or discard?"
-msgstr "Sboccare o scartare?"
+msgstr "Sbloccare o ignorare?"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:151
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
-msgstr "Esecuzione di: %s  (%s, %s)"
+msgstr "In esecuzione: %s (%s, %s)"
 
 #: src/callbacks/rpm.h:208
 #, boost-format, c-format
@@ -290,12 +289,12 @@ msgstr "Rimozione di %s"
 #: src/callbacks/rpm.h:213
 #, c-format, boost-format
 msgid "Removing %s-%s"
-msgstr "Rimozione di %s-%s"
+msgstr "Rimozione in corso di %s-%s"
 
 #: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr "Rimozione di %s fallita:"
+msgstr "Rimozione di %s non riuscita:"
 
 # TLABEL modules/inst_target_part.ycp:680
 #: src/callbacks/rpm.h:279
@@ -318,7 +317,7 @@ msgstr "Installazione di %s fallita:"
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
 msgid "Installation of %s-%s failed:"
-msgstr "Installazione di %s-%s fallita:"
+msgstr "Installazione di %s-%s non riuscita:"
 
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:356
@@ -333,9 +332,10 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
-"Il controllo dei conflitti tra file richiede che i pacchetti non installati "
-"siano prima scaricati al fine di accedere ai relativi elenchi dei file. Si "
-"veda l'opzione '%1%' nella pagina di manuale di zypper per maggiori dettagli."
+"Per verificare i conflitti tra i file è necessario eseguire anticipatamente "
+"il download dei pacchetti non installati in modo da poter accedere ai "
+"rispettivi elenchi dei file. Vedere l'opzione '%1%' nella pagina del manuale "
+"zypper per i dettagli."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
