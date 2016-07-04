@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 09:15+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 09:48+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6318,15 +6318,15 @@ msgstr[1] "I blocchi specificati sono stati aggiunti con successo."
 
 #: src/locks.cc:233
 msgid "Problem adding the package lock:"
-msgstr "Si è verificato un problema aggiungendo il blocco al pacchetto:"
+msgstr "Si è verificato un problema durante l'aggiunta del blocco al pacchetto:"
 
 #: src/locks.cc:257
 msgid "Specified lock has been successfully removed."
-msgstr "Il blocco specificato è stato rimosso con successo."
+msgstr "Il blocco specificato è stato rimosso correttamente."
 
 #: src/locks.cc:302
 msgid "No lock has been removed."
-msgstr "Nessun blocco è stato rimosso."
+msgstr "Non è stato rimosso alcun blocco."
 
 #: src/locks.cc:306
 #, c-format
@@ -6337,7 +6337,8 @@ msgstr[1] "%zu blocchi sono stati rimossi con successo."
 
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
-msgstr "Si è verificato un problema rimuovendo il blocco dal pacchetto:"
+msgstr ""
+"Si è verificato un problema durante la rimozione del blocco al pacchetto:"
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
@@ -6348,8 +6349,8 @@ msgstr "Inoltrare una segnalazione su questo bug."
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
 msgstr ""
-"Per ulteriori istruzioni, si veda http://en.opensuse.org/Zypper/"
-"Troubleshooting."
+"Per ulteriori istruzioni, vedere "
+"http://en.opensuse.org/Zypper/Troubleshooting."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
@@ -6358,7 +6359,7 @@ msgstr "Troppi argomenti."
 #: src/utils/messages.cc:56
 #, c-format, boost-format
 msgid "The '--%s' option has currently no effect."
-msgstr "L'opzione '--%s' non ha effetto al momento."
+msgstr "L'opzione '--%s' attualmente non ha alcun effetto."
 
 #: src/utils/messages.cc:74
 #, c-format, boost-format
@@ -6367,34 +6368,36 @@ msgid ""
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
 msgstr ""
-"Si è scelto di ignorare un problema con lo scaricamento o l'installazione di "
-"un pacchetto che potrebbe portare a non soddisfare le dipendenze di altri "
-"pacchetti. Si raccomanda di lanciare '%s' dopo che l'operazione è terminata."
+"Si è scelto di ignorare un problema riguardante il download o "
+"l'installazione di un pacchetto che potrebbe danneggiare le dipendenze di "
+"altri pacchetti. Al termine dell'operazione, si consiglia di avviare '%s'."
 
 #: src/utils/pager.cc:32
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
-msgstr "Premere '%c' per uscire dall'impaginatore."
+msgstr "Premere '%c' per uscire dal pager."
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
-"Usare le frecce oppure i tasti PagSu/PagGiù per scorrere il testo per righe "
-"o per pagine."
+"Utilizzare le frecce oppure i tasti pagSu/pagGiù per scorrere il testo per "
+"righe o per pagine."
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
-"Usare il tasto Invio o Spazio per scorrere il testo per righe o pagine."
+"Utilizzare il tasto Invio o Spazio per scorrere il testo per righe o per "
+"pagine."
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
-msgstr "Impossibile inizializzare l'analizzatore dei file di configurazione."
+msgstr "Impossibile inizializzare il parser del file di configurazione."
 
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
 msgstr ""
-"Errore Augeas: impostazione del file di configurazione da leggere fallita."
+"Errore Augeas: caricamento del file di configurazione delle impostazioni non "
+"riuscito."
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
@@ -6424,9 +6427,7 @@ msgstr "Argomento mancante per "
 msgid ""
 "%s used together with %s, which contradict each other. This property will be "
 "left unchanged."
-msgstr ""
-"%s è usato assieme a %s, che si contraddicono a vicenda. Questa proprietà "
-"sarà lasciata immutata."
+msgstr "%s e %s sono in conflitto. Questa proprietà non sarà modificata."
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:72
