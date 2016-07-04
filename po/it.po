@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 09:14+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6262,12 +6262,12 @@ msgstr "Installazione dei pacchetti di origine %s-%s"
 #: src/misc.cc:382
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr "Pacchetto sorgente %s-%s recuperato."
+msgstr "Pacchetto di origine %s-%s recuperato."
 
 #: src/misc.cc:388
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
-msgstr "Pacchetto sorgente %s-%s installato con successo."
+msgstr "Pacchetto di origine %s-%s installato."
 
 #: src/misc.cc:394
 #, c-format, boost-format
