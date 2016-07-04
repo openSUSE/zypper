@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-30 11:05+0000\n"
+"PO-Revision-Date: 2016-07-04 14:31+0000\n"
 "Last-Translator: Maribel Florido <mflorido@jensen-localization.com>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
@@ -424,7 +424,7 @@ msgstr "Misstänkt värde för kategorifilter '%1%'."
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Misstänkt värde för allvarlighetsgradsfilter '%1%'."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -2832,7 +2832,7 @@ msgstr "Som standard utesluts frivilliga programfixar."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Som standard inkluderas frivilliga programfixar."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3480,6 +3480,8 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"RPM installerar som standard källpaket i '%1%', men värdet går att ändra i "
+"din lokala RPM-konfiguration. Om du är tveksam kan du försöka köra '%2%'."
 
 #: src/Zypper.cc:1613
 #, c-format, boost-format
@@ -3560,7 +3562,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3578,7 +3580,7 @@ msgstr ""
 "  Kommandoalternativ:\n"
 "-t, --type <typ>       Typ av tjänst (%s).\n"
 "-d, --disable           Lägg till tjänsten som inaktiv.\n"
-"-n, --name <alias>      Ange ett namn för tjänsten.\n"
+"-n, --name <namn>      Ange ett namn för tjänsten.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3601,7 +3603,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3630,26 +3632,26 @@ msgid ""
 "-t, --remote                   Apply changes to all remote services.\n"
 "-m, --medium-type <type>       Apply changes to services of specified type.\n"
 msgstr ""
-"modifyrepo (mr) <alternativ> <alias|#|URI>\n"
-"modifyrepo (mr) <alternativ> <%s>\n"
+"modifyservice (ms) <alternativ> <alias|#|URI>\n"
+"modifyservice (ms) <alternativ> <%s>\n"
 "\n"
 "Ändra egenskaperna i tjänster som anges av alias, nummer eller URI, eller "
 "av\n"
-"mängdalternativen %s.\n"
+"mängdalternativen '%s'.\n"
 "\n"
 "  Kommandoalternativ:\n"
 "-d, --disable             Inaktivera tjänsten (men ta inte bort den).\n"
 "-e, --enable              Aktivera en inaktiverad tjänst.\n"
-"-r, --refresh             Aktivera automatisk uppdateringen av tjänsten.\n"
-"-R, --no-refresh          Inaktivera automatisk uppdateringen av tjänsten.\n"
-"-n, --name                Ange ett namn för tjänsten.\n"
+"-r, --refresh             Aktivera automatisk uppdatering av tjänsten.\n"
+"-R, --no-refresh          Inaktivera automatisk uppdatering av tjänsten.\n"
+"-n, --name <namn>               Ange ett namn för tjänsten.\n"
 "\n"
 "-i, --ar-to-enable <alias>     Lägg till ett RIS-tjänstarkiv som ska "
 "aktiveras.\n"
 "-I, --ar-to-disable <alias>    Lägg till ett RIS-tjänstarkiv som ska "
 "inaktiveras.\n"
-"-j, --rr-to-enable <alias>     Ta bort ett RIS-tjänstarkiv som ska "
-"aktiveras.\n"
+"-j, --rr-to-enable <alias>     Ta bort ett RIS-tjänstarkiv som ska aktiveras."
+"\n"
 "-J, --rr-to-disable <alias>    Ta bort ett RIS-tjänstarkiv som ska "
 "inaktiveras.\n"
 "-k, --cl-to-enable             Rensa listan med RIS-tjänstarkiv som ska "
@@ -3660,7 +3662,8 @@ msgstr ""
 "-a, --all                 Använd ändringarna för alla tjänster.\n"
 "-l, --local               Använd ändringarna för alla lokala tjänster.\n"
 "-t, --remote              Använd ändringarna för alla fjärrtjänster.\n"
-"-m, --medium-type <typ>  Använd ändringarna för tjänster av en viss typ.\n"
+"-m, --medium-type <typ>  Använd ändringarna för tjänster av en den angivna "
+"typen.\n"
 
 #: src/Zypper.cc:1792
 msgid ""
@@ -3838,7 +3841,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3869,16 +3872,16 @@ msgstr ""
 "\n"
 "Ändra egenskaperna för lagringsplatserna som anges med alias, nummer, URI "
 "eller\n"
-"med mängdalternativen %s.\n"
+"med mängdalternativen '%s'.\n"
 "\n"
 "  Kommandoalternativ:\n"
 "-d, --disable             Inaktivera lagringsplatsen (ta inte bort den).\n"
-"-e, --enable              Aktivera ett inaktiverad lagringsplats.\n"
-"-r, --refresh             Aktivera automatisk uppdatering av "
-"lagringsplatsen.\n"
+"-e, --enable              Aktivera en inaktiverad lagringsplats.\n"
+"-r, --refresh             Aktivera automatisk uppdatering av lagringsplatsen."
+"\n"
 "-R, --no-refresh          Inaktivera automatisk uppdatering av "
 "lagringsplatsen.\n"
-"-n, --name                Ange ett namn för lagringsplatsen.\n"
+"-n, --name <namn>           Ange ett namn för lagringsplatsen.\n"
 "-p, --priority <heltal>  Ange lagringsplatsens prioritet.\n"
 "-k, --keep-packages       Spara RPM-filer i cacheminnet.\n"
 "-K, --no-keep-packages    Spara inte RPM-filer i cacheminnet.\n"
@@ -4203,7 +4206,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [ALTERNATIV]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
@@ -4223,18 +4226,25 @@ msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Lista tillgängliga programfixar för CVE-frågor."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=STRÄNG]\n"
+"Leta efter frågor som matchar den angivna strängen."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <ÅÅÅÅ-MM-DD>\n"
+"Lista endast programfixar som har släppts fram till, men inte på, det "
+"angivna datumet."
 
 #: src/Zypper.cc:2306
 msgid ""
