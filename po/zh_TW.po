@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 06:13+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 06:20+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -1651,7 +1651,7 @@ msgstr "a/r/i/u"
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
-msgstr "授權需要存取 %s。您必須是 root 才可以從 %s 讀取憑證。"
+msgstr "存取 %s 需要授權。您必須是 root 才可以從 %s 讀取憑證。"
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -5029,7 +5029,7 @@ msgstr "該命令未實作 XML 輸出。"
 #: src/Zypper.cc:5047
 #, c-format, boost-format
 msgid "Distribution Label: %s"
-msgstr "發行版本標籤： %s"
+msgstr "發行版本標籤：%s"
 
 #: src/Zypper.cc:5048
 #, c-format, boost-format
@@ -5058,11 +5058,11 @@ msgstr "權限不足以使用下載目錄 '%s'。"
 
 #: src/Zypper.cc:5223
 msgid "This command only makes sense in the zypper shell."
-msgstr "這個指令只在 zypper shell 才有意義。"
+msgstr "這個指令只在 zypper shell 中有意義。"
 
 #: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
-msgstr "您已經正在執行 zypper's shell。"
+msgstr "您已經在執行 zypper shell。"
 
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
