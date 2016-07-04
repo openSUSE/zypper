@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 09:31+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 09:34+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4683,7 +4683,7 @@ msgstr " SSL 憑證問題，驗證 '%s' 的 CA 憑證是否正確。"
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr "無法找到可用的 loop 裝置來掛載從 '%s' 的影像檔"
+msgstr "找不到要裝上「%s」中之影像檔的可用迴路裝置"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
