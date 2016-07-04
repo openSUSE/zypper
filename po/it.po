@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 09:14+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 09:15+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6273,7 +6273,7 @@ msgstr "Pacchetto di origine %s-%s installato."
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr ""
-"Si è verificato un problema durante l'installazione del pacchetto sorgente "
+"Si è verificato un problema durante l'installazione del pacchetto di origine "
 "%s-%s:"
 
 #. translators: locks table value
@@ -6290,7 +6290,7 @@ msgstr "(multipli)"
 #. translators: property name; short; used like "Name: value"
 #: src/locks.cc:72
 msgid "Keep installed"
-msgstr "Tieni installato"
+msgstr "Mantieni installato"
 
 # TLABEL modules/inst_target_part.ycp:680
 #. translators: property name; short; used like "Name: value"
@@ -6300,11 +6300,11 @@ msgstr "Non installare"
 
 #: src/locks.cc:106
 msgid "Matches"
-msgstr "Corrisponde"
+msgstr "Corrispondenze"
 
 #: src/locks.cc:159
 msgid "There are no package locks defined."
-msgstr "Non sono definiti blocchi sui pacchetti."
+msgstr "Non è stato definito nessun blocco ai pacchetti."
 
 #: src/locks.cc:166
 msgid "Error reading the locks file:"
