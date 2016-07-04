@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:43+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-04 05:44+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -5461,8 +5461,8 @@ msgstr ""
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
-"Невозможно использовать несколько типов при указании конкретных пакетов в "
-"качестве аргументов."
+"При указании конкретных пакетов в качестве аргументов нельзя использовать "
+"несколько типов."
 
 #: src/Zypper.cc:4801
 msgid "Root privileges are required for performing a distribution upgrade."
@@ -5475,9 +5475,9 @@ msgid ""
 "Make sure these repositories are compatible before you continue. See '%s' "
 "for more information about this command."
 msgstr ""
-"Вы собираетесь обновить дистрибутив со всех включённых репозиториев. Перед "
-"тем, как продолжить, убедитесь, что эти репозитории совместимы. Больше "
-"информации об этой команде можно найти в '%s'."
+"Вы собираетесь обновить дистрибутив со всех включенных репозиториев. Перед "
+"тем как продолжить, убедитесь, что эти репозитории совместимы. "
+"Дополнительную информацию об этой команде можно найти в \"%s\"."
 
 #: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
@@ -5528,7 +5528,7 @@ msgstr "%s старее, чем %s"
 #: src/Zypper.cc:5171 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
-msgstr "Недостаточно привилегий для использования загрузочного каталога '%s'."
+msgstr "Недостаточно привилегий для использования загрузочного каталога \"%s\"."
 
 #: src/Zypper.cc:5223
 msgid "This command only makes sense in the zypper shell."
