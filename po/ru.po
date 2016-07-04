@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 04:27+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-04 04:29+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -3242,12 +3242,15 @@ msgid ""
 "\t\t\t\tto a local directory.\n"
 msgstr ""
 "     Другие команды:\n"
-"\tversioncmp, vcmp\tСравнить две строки с версиями.\n"
-"\ttargetos, tos\t\tВывести строковый ID целевой операционной системы.\n"
-"\tlicenses\t\tВывести отчёт о лицензиях и EULA установленных пакетов.\n"
-"\tdownload\t\tЗагрузить указанные пакеты rpm в локальный каталог.\n"
-"\tsource-download\t\tЗагрузить rpm с исходным кодом для всех\n"
-"\t\t\t\tустановленных пакетов в локальный каталог.\n"
+"\tversioncmp, vcmp\tСравнить строки двух версий.\n"
+"\ttargetos, tos\t\tРаспечатать строку идентификатора целевой операционной "
+"системы.\n"
+"\tlicenses\t\tРаспечатать отчет о лицензиях и лицензионных соглашениях\n"
+"\t\t\t\tустановленных пакетов.\n"
+"\tdownload\t\tЗагрузить rpms, указанный в командной строке, в локальный "
+"каталог.\n"
+"\tsource-download\t\tЗагрузить исходный rpms для всех установленных пакетов\n"
+"\t\t\t\tв локальный каталог.\n"
 
 #: src/Zypper.cc:554
 msgid ""
@@ -3285,7 +3288,7 @@ msgstr "Введите '%s' для получения справки по ком
 #: src/Zypper.cc:771
 #, c-format, boost-format
 msgid "Verbosity: %d"
-msgstr "Уровень подробностей: %d"
+msgstr "Уровень детализации: %d"
 
 #: src/Zypper.cc:785
 #, c-format, boost-format
