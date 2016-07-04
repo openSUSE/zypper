@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-04 08:38+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4543,7 +4543,7 @@ msgstr "%s 需要驗證"
 #: zypp/media/MediaException.cc:31
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
-msgstr "無法掛接 %s (在 %s 上)"
+msgstr "無法將 %s 載掛到 %s"
 
 #: zypp/media/MediaException.cc:41
 #, c-format, boost-format
