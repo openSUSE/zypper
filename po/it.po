@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 09:49+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6481,7 +6481,7 @@ msgid ""
 "option to make zypper use default answers to prompts."
 msgstr ""
 "Se si esegue zypper senza un terminale, utilizzare l'opzione globale '%s'\n"
-"affinché zypper utilizzi le risposte di default per i prompt."
+"affinché zypper utilizzi le risposte predefinite alle richieste."
 
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
