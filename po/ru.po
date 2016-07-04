@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 06:05+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-04 06:06+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -6437,7 +6437,8 @@ msgstr "Неверный ответ '%s'."
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
-"Введите '%s' для '%s' или '%s' для '%s', если больше ничего не работает."
+"Введите \"%s\" для \"%s\" или \"%s\" для \"%s\", если больше ничего не "
+"работает."
 
 #: src/utils/misc.cc:113
 msgid "package"
@@ -6545,7 +6546,7 @@ msgstr "Данный URI-адрес неверен"
 #. translators: don't translate '<platform>'
 #: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
-msgstr "Невозможно угадать значение для <platform>."
+msgstr "Не удается подобрать значение для параметра <платформа>."
 
 #: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
@@ -6562,7 +6563,7 @@ msgstr "Неверный OBS URI."
 
 #: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
-msgstr "Корректная форма — obs://<проект>/[платформа]"
+msgstr "Правильный формат - obs://<проект>/[платформа]"
 
 #: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
@@ -6583,7 +6584,7 @@ msgstr "Проверьте, доступен ли этот файл."
 #: src/utils/misc.cc:686
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
-msgstr "Неизвестный режим загрузки '%s'."
+msgstr "Неизвестный режим загрузки \"%s\""
 
 #: src/utils/misc.cc:687
 #, c-format, boost-format
@@ -6593,7 +6594,7 @@ msgstr "Доступные режимы загрузки: %s"
 #: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
-msgstr "Параметр '%s' отменяет действие параметра '%s'."
+msgstr "Параметр \"%s\" переопределяет \"%s\"."
 
 #~ msgid "Name: "
 #~ msgstr "Название:"
