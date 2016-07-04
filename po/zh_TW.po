@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 02:00+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 02:04+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -90,7 +90,7 @@ msgstr "接受檔案 '%s'，此檔案使用未知的金鑰 '%s' 簽章。"
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "接受檔案 '%s'來自套件庫 '%s'，此檔案使用未知的金鑰 '%s' 簽章。"
+msgstr "接受檔案 %s (來自儲存庫 %s)，此檔案使用未知的金鑰 %s 簽署。"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -6059,7 +6059,7 @@ msgstr "可用的下載模式： %s"
 #: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
-msgstr "選項 '%s' 覆蓋了 '%s'。"
+msgstr "選項「%s」會覆寫「%s」。"
 
 #~ msgid "Name: "
 #~ msgstr "名稱: "
