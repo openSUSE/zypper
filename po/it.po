@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 09:03+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 09:04+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -5948,8 +5948,7 @@ msgstr "Nessun processo trovato che utilizza i file eliminati."
 
 #: src/ps.cc:164
 msgid "The following running processes use deleted files:"
-msgstr ""
-"I seguenti processi in esecuzione stanno utilizzando dei file eliminati:"
+msgstr "I seguenti processi in esecuzione utilizzano file eliminati:"
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
