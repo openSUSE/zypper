@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 06:03+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 06:05+0000\n"
+"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -6344,7 +6344,7 @@ msgstr "Ошибка Augeas: сбой задания загрузки файла
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
-msgstr "Невозможно обработать файлы конфигурации."
+msgstr "Невозможно проанализировать файлы конфигурации."
 
 #: src/utils/Augeas.cc:99
 msgid "Error parsing zypper.conf:"
@@ -6425,7 +6425,7 @@ msgid ""
 "option to make zypper use default answers to prompts."
 msgstr ""
 "Если вы запускаете zypper без терминала, используйте глобальный параметр\n"
-"'%s', чтобы zypper использовал ответы на запросы по умолчанию."
+"\"%s\", чтобы zypper использовал ответы на запросы по умолчанию."
 
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
