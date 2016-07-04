@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:29+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 07:31+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2014,7 +2014,7 @@ msgstr "Il repository disabilitato '%s' viene ignorato"
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "L'archivio '%s' viene ignorato a causa dell'opzione '%s'."
+msgstr "Il repository '%s' viene ignorato a causa dell'opzione '%s'."
 
 #: src/repos.cc:749
 #, c-format, boost-format
@@ -2041,8 +2041,8 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
-"La cache dei metadati del repository '%s' deve essere costruita. È possibile "
-"eseguire 'zypper refresh' per farlo."
+"La cache dei metadati del repository '%s' deve essere creata. Per questo "
+"scopo, è possibile eseguire 'zypper refresh'."
 
 #: src/repos.cc:820
 #, c-format, boost-format
