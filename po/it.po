@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 09:05+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6008,7 +6008,7 @@ msgstr "Pacchetti di origine richiesti disponibili nella directory di download:"
 
 #: src/source-download.cc:301
 msgid "Required source packages to be downloaded:"
-msgstr "Pacchetti sorgente richiesti da scaricare:"
+msgstr "Pacchetti sorgente richiesti di cui effettuare il download:"
 
 #: src/source-download.cc:305
 msgid "Superfluous source packages in download directory:"
