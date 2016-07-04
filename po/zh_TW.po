@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 07:29+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 08:01+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4364,7 +4364,7 @@ msgstr "%s 需要 %s，但無法提供此需求"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
-msgstr "刪除提供者： "
+msgstr "已刪除的提供者： "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -4405,12 +4405,12 @@ msgstr "解除鎖定以允許安裝 %s"
 #: zypp/solver/detail/SATResolver.cc:1217
 #: zypp/solver/detail/SATResolver.cc:1238
 msgid "This request will break your system!"
-msgstr "此要求將破壞您的系統！"
+msgstr "此要求將會破壞您的系統！"
 
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
 msgid "ignore the warning of a broken system"
-msgstr "忽略破壞系統警告"
+msgstr "忽略損毀系統的警告"
 
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
@@ -4430,7 +4430,7 @@ msgstr "請勿安裝最新版本的 %s"
 #: zypp/solver/detail/SATResolver.cc:1279
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr "保存 %s 忽略次要架構"
+msgstr "保留 %s，忽略次要架構"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #, c-format, boost-format
@@ -4440,12 +4440,12 @@ msgstr "安裝 %s，忽略次要架構"
 #: zypp/solver/detail/SATResolver.cc:1293
 #, c-format, boost-format
 msgid "keep obsolete %s"
-msgstr "保留過期的 %s"
+msgstr "保留過時的 %s"
 
 #: zypp/solver/detail/SATResolver.cc:1298
 #, c-format, boost-format
 msgid "install %s from excluded repository"
-msgstr "由排除的套件庫中安裝 %s"
+msgstr "自排除的儲存庫中安裝 %s"
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, c-format, boost-format
