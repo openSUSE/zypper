@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 06:12+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 06:39+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4001,7 +4001,7 @@ msgstr "欽西安語"
 #. language code: tsn tn
 #: zypp/LanguageCode.cc:1061
 msgid "Tswana"
-msgstr "南非班圖族語"
+msgstr "班圖語"
 
 #. language code: tso ts
 #: zypp/LanguageCode.cc:1063
@@ -4217,7 +4217,7 @@ msgstr "祖尼語"
 #: zypp/KeyRing.cc:522
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr "嘗試匯入不存在的金鑰 %s 到鑰匙圈 %s"
+msgstr "嘗試將不存在的金鑰 %s 輸入金鑰圈 %s"
 
 #: zypp/KeyRing.cc:566
 msgid "Failed to delete key."
