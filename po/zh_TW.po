@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 03:25+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 03:33+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -721,13 +721,15 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
-"zypper 個別指令是獨立的執行檔，存放於 zypper_execdir ('%1%')。\n"
+"Zypper 子指令是獨立的可執行檔，\n"
+"存放於 zypper_execdir (%1%) 中。\n"
 "\n"
-"對於個別指令，zypper 提供一包裹器，能夠知道在那裡找到這個指令，\n"
-"並透過傳遞命令列參數來執行它們。\n"
+"對於子指令，zypper 提供一個包裝程式，\n"
+"能夠知道在哪裡找到這些子指令，\n"
+"並透過傳遞指令行參數來執行它們。\n"
 "\n"
-"若某個個別指令無法在 zypper_execdir 下找到，包裏器會到您的 $PATH\n"
-"下尋找。是故寫一個非存放在系統空間，僅供局部使用的 zypper 擴充是\n"
+"若某個子指令無法在 zypper_execdir 下找到，包裝程式會到您的 $PATH\n"
+"下尋找。是故寫一個不存放在系統空間，僅供局部使用的 zypper 擴充是\n"
 "可以做到的。\n"
 
 #: src/subcommand.cc:401
@@ -5635,7 +5637,7 @@ msgstr "自動同意 %s %s 授權。"
 msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
-msgstr "要安裝 '%s'%s，您必須接受下述授權條款:"
+msgstr "若要安裝「%s」%s，必須同意以下授權合約的條款︰"
 
 #. lincense prompt
 #: src/misc.cc:167
@@ -5644,7 +5646,7 @@ msgstr "您同意接受以上的授權條款嗎？"
 
 #: src/misc.cc:175
 msgid "Aborting installation due to the need for license confirmation."
-msgstr "中止安裝，因為必須確認授權條款。"
+msgstr "正在中止安裝，因為必須確認授權條款。"
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:178
