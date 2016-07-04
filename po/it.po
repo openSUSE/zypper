@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 08:59+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 09:03+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -5880,29 +5880,28 @@ msgstr ""
 
 #: src/solve-commit.cc:863
 msgid "Installation has completed with error."
-msgstr "L'installazione è stata completata con errori."
+msgstr "Installazione completata con errori."
 
 #: src/solve-commit.cc:865
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr "Conviene eseguire '%1%' per risolvere i problemi delle dipendenze."
+msgstr "Per risolvere problemi di dipendenza è possibile eseguire '%1%'."
 
 #: src/solve-commit.cc:879
 msgid ""
 "One of installed patches requires reboot of your machine. Reboot as soon as "
 "possible."
 msgstr ""
-"Una delle patch installate richiede di riavviare il computer. Riavviarlo "
-"appena possibile."
+"Una delle patch installate richiede di riavviare il computer. Riavviarlo il "
+"più presto possibile."
 
 #: src/solve-commit.cc:887
 msgid ""
 "One of installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
 msgstr ""
-"Una delle patch installate riguarda il gestore stesso dei pacchetti. "
-"Eseguire questo comando un'altra volta per installare ogni altra patch "
-"necessaria."
+"Una delle patch installate influisce sulla gestione dei pacchetti. Eseguire "
+"il comando ancora una volta per installare tutte le altre patch necessarie."
 
 #: src/solve-commit.cc:905
 msgid "Dependencies of all installed packages are satisfied."
@@ -5925,7 +5924,7 @@ msgstr "PPID"
 #. process user ID
 #: src/ps.cc:119
 msgid "UID"
-msgstr "UID"
+msgstr "ID utente"
 
 #. process login name
 #: src/ps.cc:121
@@ -5945,7 +5944,7 @@ msgstr "File"
 
 #: src/ps.cc:160
 msgid "No processes using deleted files found."
-msgstr "Non è stato trovato alcun processo che stia usando i file eliminati."
+msgstr "Nessun processo utilizza i file eliminati."
 
 #: src/ps.cc:164
 msgid "The following running processes use deleted files:"
