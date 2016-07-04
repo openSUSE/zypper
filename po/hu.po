@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 12:25+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 13:21+0000\n"
+"Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian "
 "<https://l10n.opensuse.org/projects/zypper/master/hu/>\n"
 "Language: hu\n"
@@ -1360,175 +1360,180 @@ msgstr[0] "A következő minta javasolt, de nem fog települni:"
 msgstr[1] "A következő %d minta javasolt, de nem fog települni:"
 
 #: src/Summary.cc:942
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] "A következő termék javasolt, de nincs telepítve:"
-msgstr[1] "A következő termékek javasoltak, de nincsenek telepítve:"
+msgstr[0] "A következő termék javasolt, de nem fog települni:"
+msgstr[1] "A következő %d termék javasolt, de nem fog települni:"
 
 #: src/Summary.cc:946
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] "A következő minta javasolt, de nincs telepítve:"
-msgstr[1] "A következő minták javasoltak, de nincsenek telepítve:"
+msgstr[0] "A következő alkalmazás javasolt, de nem fog települni:"
+msgstr[1] "A következő %d alkalmazás javasolt, de nem fog települni:"
 
 #: src/Summary.cc:986
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] "A következő csomag javasolt, de nincs telepítve:"
-msgstr[1] "A következő csomagok javasoltak, de nincsenek telepítve:"
+msgstr[0] "A következő csomag javasolt, de nem fog települni:"
+msgstr[1] "A következő %d csomag javasolt, de nem fog települni:"
 
 #: src/Summary.cc:991
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "A következő javítás ajánlott, de nincs telepítve:"
-msgstr[1] "A következő javítások ajánlottak, de nincsenek telepítve:"
+msgstr[0] "A következő javítás javasolt, de nem fog települni:"
+msgstr[1] "A következő %d javítás javasolt, de nem fog települni:"
 
 #: src/Summary.cc:996
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] "A következő minta ajánlott, de nincs telepítve:"
-msgstr[1] "A következő minták ajánlottak, de nincsenek telepítve:"
+msgstr[0] "A következő minta javasolt, de nem fog települni:"
+msgstr[1] "A következő %d minta javasolt, de nem fog települni:"
 
 #: src/Summary.cc:1001
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] "A következő termék ajánlott, de nincs telepítve:"
-msgstr[1] "A következő termékek ajánlottak, de nincsenek telepítve:"
+msgstr[0] "A következő termék javasolt, de nem fog települni:"
+msgstr[1] "A következő %d termék javasolt, de nem fog települni:"
 
 #: src/Summary.cc:1006
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] "A következő minta ajánlott, de nincs telepítve:"
-msgstr[1] "A következő minták ajánlottak, de nincsenek telepítve:"
+msgstr[0] "A következő alkalmazás javasolt, de nem fog települni:"
+msgstr[1] "A következő %d alkalmazás javasolt, de nem fog települni:"
 
 #: src/Summary.cc:1028
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "Az alábbi csomag módosítja az architektúrát:"
-msgstr[1] "Az alábbi csomagok módosítják az architektúrát:"
+msgstr[1] "Az alábbi %d csomag módosítja az architektúrát:"
 
 #: src/Summary.cc:1033
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "Az alábbi javítás módosítja az architektúrát:"
-msgstr[1] "Az alábbi javítások módosítják az architektúrát:"
+msgstr[1] "Az alábbi %d javítás módosítja az architektúrát:"
 
 #: src/Summary.cc:1038
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "Az alábbi minta módosítja az architektúrát:"
-msgstr[1] "Az alábbi minták módosítják az architektúrát:"
+msgstr[1] "Az alábbi %d minta módosítja az architektúrát:"
 
 #: src/Summary.cc:1043
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "Az alábbi termék módosítja az architektúrát:"
-msgstr[1] "Az alábbi termékek módosítják meg az architektúrát:"
+msgstr[1] "Az alábbi %d termék módosítja az architektúrát:"
 
 #: src/Summary.cc:1048
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
-msgstr[0] "Az alábbi minta módosítja az architektúrát:"
-msgstr[1] "Az alábbi minták módosítják az architektúrát:"
+msgstr[0] "Az alábbi alkalmazás módosítja az architektúrát:"
+msgstr[1] "Az alábbi %d alkalmazás módosítja az architektúrát:"
 
 #: src/Summary.cc:1070
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "Az alábbi csomag módosítja a gyártót:"
-msgstr[1] "Az alábbi csomagok módosítja a gyártót:"
+msgstr[1] "Az alábbi %d csomag módosítja a gyártót:"
 
 #: src/Summary.cc:1075
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "Az alábbi javítás módosítja a gyártót:"
-msgstr[1] "Az alábbi javítások módosítják a gyártót:"
+msgstr[1] "Az alábbi %d javítás módosítja a gyártót:"
 
 #: src/Summary.cc:1080
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
-msgstr[0] "Az alábbi minta módosítja a gyártót:"
-msgstr[1] "Az alábbi minták módosítják a gyártót:"
+msgstr[0] "A következő minta módosítja a gyártót:"
+msgstr[1] "A következő %d minta módosítja a gyártót:"
 
 #: src/Summary.cc:1085
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
-msgstr[0] "Az alábbi termék módosítja a gyártót:"
-msgstr[1] "Az alábbi termékek módosítják a gyártót:"
+msgstr[0] "A következő termék módosítja a gyártót:"
+msgstr[1] "A következő %d termék módosítja a gyártót:"
 
 #: src/Summary.cc:1090
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] "Az alábbi minta módosítja a gyártót:"
-msgstr[1] "Az alábbi minták módosítják a gyártót:"
+msgstr[0] "A következő alkalmazás módosítja a gyártót:"
+msgstr[1] "A következő %d alkalmazás módosítja a gyártót:"
 
 #: src/Summary.cc:1110
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "Az alábbi csomag nem támogatott a gyártója által:"
-msgstr[1] "Az alábbi csomagok nem támogatott a gyártóik által:"
+msgstr[0] "A következő csomagot nem támogatja a gyártója:"
+msgstr[1] "A következő %d csomagot nem támogatja a gyártója:"
 
 #: src/Summary.cc:1130
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] "Az alábbi csomag támogatásához tovább szerződések szükséges:"
-msgstr[1] "További ügyfélszerződés szükséges a támogatáshoz."
+msgstr[0] ""
+"A következő csomag támogatásához az ügyfélnek további szerződést kell kötnie:"
+msgstr[1] ""
+"A következő %d csomag támogatásához az ügyfélnek további szerződést kell "
+"kötnie:"
 
 #: src/Summary.cc:1148
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] "A következő csomagfrissítés NEM lesz telepítve:"
-msgstr[1] "A következő csomagfrissítések NEM lesznek telepítve:"
+msgstr[0] "A következő csomagfrissítés NEM fog települni:"
+msgstr[1] "A következő %d csomagfrissítés NEM fog települni:"
 
 #: src/Summary.cc:1153
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] "A következő termékfrissítés NEM lesz telepítve:"
-msgstr[1] "A következő termékfrissítések NEM lesznek telepítve:"
+msgstr[0] "A következő termékfrissítés NEM fog települni:"
+msgstr[1] "A következő %d termékfrissítés NEM fog települni:"
 
 #: src/Summary.cc:1158
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
-msgstr[0] "A következő csomagfrissítés NEM lesz telepítve:"
-msgstr[1] "A következő csomagfrissítések NEM lesznek telepítve:"
+msgstr[0] "A következő alkalmazásfrissítés NEM fog települni:"
+msgstr[1] "A következő %d alkalmazásfrissítés NEM fog települni:"
 
 #: src/Summary.cc:1188
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "A következő minta javasolt, de nincs telepítve:"
-msgstr[1] "A következő minták javasoltak, de nincsenek telepítve:"
+msgstr[0] ""
+"A következő elem zárolva van, és semmilyen művelet nem fogja módosítani:"
+msgstr[1] ""
+"A következő %d elem zárolva van, és semmilyen művelet nem fogja módosítani:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1542,11 +1547,11 @@ msgid "Run '%1%' to see the complete list of locked items."
 msgstr "A zárolt elemek listáját a(z) '%1%' futtatásával jelenítheti meg."
 
 #: src/Summary.cc:1222
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "Az alábbi javítás kerül frissítésre:"
-msgstr[1] "Az alábbi javítások kerülnek frissítésre:"
+msgstr[0] "A következő javítás megköveteli a rendszer újraindítását:"
+msgstr[1] "A következő %d javítás megköveteli a rendszer újraindítását:"
 
 #: src/Summary.cc:1240
 #, boost-format
@@ -2728,19 +2733,19 @@ msgstr[1] ""
 
 #. translator: stats summary
 #: src/update.cc:294
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "%d javítás szükséges"
-msgstr[1] "%d javítás szükséges"
+msgstr[0] "%d javítás zárolva"
+msgstr[1] "%d javítás zárolva"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d javítás szükséges"
-msgstr[1] "%d javítás szükséges"
+msgstr[0] "%d javítás nem kötelező"
+msgstr[1] "%d javítás nem kötelező"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -2797,9 +2802,8 @@ msgstr "Az alábbi szoftverkezelő frissítések kerülnek először telepítés
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "Az alábbi szoftverkezelő frissítések kerülnek először telepítésre:"
+msgstr "Először az alábbi szoftverkezelő frissítések települnek:"
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
@@ -3631,7 +3635,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3644,12 +3648,12 @@ msgid ""
 msgstr ""
 "addservice (as) [paraméterek] <URI> <álnév>\n"
 "\n"
-"Telepítési forrás index szolgáltatás hozzáadása a rendszerhez.\n"
+"Telepítési forrás indexszolgáltatás hozzáadása a rendszerhez.\n"
 "\n"
 "  Parancs kapcsolói:\n"
 "-t, --type <típus>       A szolgáltatás típusa (%s).\n"
 "-d, --disable           Szolgáltatás hozzáadása letiltott állapotban.\n"
-"-n, --name <álnév>      Leíró név megadása a szolgáltatáshoz.\n"
+"-n, --name <név>      Leíró név megadása a szolgáltatáshoz.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3675,7 +3679,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3715,24 +3719,25 @@ msgstr ""
 "-e, --enable               Egy letiltott szolgáltatás engedélyezése.\n"
 "-r, --refresh                A szolgáltatás automatikus frissítésének "
 "engedélyezése.\n"
-"-R, --no-refresh         A szolgáltatás automatikus frissítésének "
-"letiltása.\n"
+"-R, --no-refresh         A szolgáltatás automatikus frissítésének letiltása."
+"\n"
 "-n, --name                 Beszédes leírás beállítása a szolgáltatáshoz.\n"
-"-i, --ar-to-enable <álnév>     Engedélyezendő RIS szolgáltatás tároló "
+"\n"
+"-i, --ar-to-enable <álnév>     Engedélyezendő RIS szolgáltatástároló "
 "hozzáadása.\n"
-"-I, --ar-to-disable <álnév>    Letiltandó RIS szolgáltatás tároló "
-"hozzáadása.\n"
-"-j, --rr-to-enable <álnév>     Engedélyezendő RIS szolgáltatás tároló "
+"-I, --ar-to-disable <álnév>    Letiltandó RIS szolgáltatástároló hozzáadása."
+"\n"
+"-j, --rr-to-enable <álnév>     Engedélyezendő RIS szolgáltatástároló "
 "eltávolítása.\n"
-"-J, --rr-to-disable <álnév>    Letiltandó RIS szolgáltatás tároló "
+"-J, --rr-to-disable <álnév>    Letiltandó RIS szolgáltatástároló "
 "eltávolítása.\n"
 "-k, --cl-to-enable             Az engedélyezendő RIS tárolók listájának "
 "kiürítése.\n"
-"-K, --cl-to-disable            A letiltandó RIS tárolók listájának "
-"kiürítése.\n"
+"-K, --cl-to-disable            A letiltandó RIS tárolók listájának kiürítése."
 "\n"
-"-a, --all            A változtatások életbe léptetése minden "
-"szolgáltatásra.\n"
+"\n"
+"-a, --all            A változtatások életbe léptetése minden szolgáltatásra."
+"\n"
 "-l, --local           A változtatások életbe léptetése minden helyi "
 "szolgáltatásra.\n"
 "-t, --remote            A változtatások életbe léptetése minden távoli "
