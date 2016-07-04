@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 09:14+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 09:15+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4613,7 +4613,7 @@ msgstr "位址中的檔案系統為空"
 
 #: zypp/media/MediaException.cc:135
 msgid "Empty destination in URI"
-msgstr "空白的目標在位址中"
+msgstr "URI 中的目的地為空"
 
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
