@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 09:07+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6044,12 +6044,12 @@ msgstr "Nessun pacchetto sorgente superfluo da cancellare."
 
 #: src/source-download.cc:411
 msgid "Downloading required source packages..."
-msgstr "Download dei pacchetti sorgente richiesti in corso..."
+msgstr "Download dei pacchetti di origine richiesti in corso..."
 
 #: src/source-download.cc:430
 #, c-format, boost-format
 msgid "Source package '%s' is not provided by any repository."
-msgstr "Il pacchetto sorgente '%s' non è fornito da alcun repository."
+msgstr "Il pacchetto di origine '%s' non è fornito da alcun repository."
 
 #: src/source-download.cc:449 src/source-download.cc:463
 #, c-format, boost-format
