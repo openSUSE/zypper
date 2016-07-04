@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 00:58+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 01:24+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -4263,7 +4263,7 @@ msgstr "署名の検証に失敗しました"
 #: zypp/repo/PackageProvider.cc:386
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr "パッケージ%sの提供に失敗しました。検索を再試行しますか?"
+msgstr "パッケージ %s の提供に失敗しました。検索を再試行しますか?"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
@@ -4564,7 +4564,7 @@ msgstr "不正なファイル名: %s"
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "アクション「%s」を実行しようとした際にメディアが開きませんでした。"
+msgstr "アクション '%s' を実行しようとした際にメディアが開きませんでした。"
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
@@ -4593,7 +4593,7 @@ msgstr "「%s」のダウンロード(curl)初期化が失敗しました"
 #: zypp/media/MediaException.cc:91
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr "システム例外「%s」がメディア「%s」で発生しました。"
+msgstr "システム例外 '%s' がメディア '%s' で発生しました。"
 
 #: zypp/media/MediaException.cc:98
 #, c-format, boost-format
@@ -4674,7 +4674,7 @@ msgstr "「%s」にアクセスするパーミッションが拒否されまし�
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "「%s」にアクセスする際にタイムアウトになりました。"
+msgstr "'%s' にアクセスする際にタイムアウトになりました。"
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
