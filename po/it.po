@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 09:08+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6066,15 +6066,15 @@ msgstr "Pacchetti di sistema"
 
 #: src/search.cc:336
 msgid "No needed patches found."
-msgstr "Nessuna patch necessaria trovata."
+msgstr "Non è stata trovata alcuna patch necessaria."
 
 #: src/search.cc:408
 msgid "No patterns found."
-msgstr "Nessun modello trovato."
+msgstr "Non è stato trovato alcun modello."
 
 #: src/search.cc:505
 msgid "No packages found."
-msgstr "Nessun pacchetto trovato."
+msgstr "Non è stato trovato alcun pacchetto."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
@@ -6084,7 +6084,7 @@ msgstr "Nome interno"
 
 #: src/search.cc:651
 msgid "No products found."
-msgstr "Nessun prodotto trovato."
+msgstr "non è stato trovato alcun prodotto."
 
 #: src/search.cc:675
 #, c-format, boost-format
