@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 08:38+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 08:55+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4553,12 +4553,12 @@ msgstr "卸載 %s 失敗"
 #: zypp/media/MediaException.cc:47
 #, c-format, boost-format
 msgid "Bad file name: %s"
-msgstr "錯的檔案名稱： %s"
+msgstr "無效的檔案名稱︰%s"
 
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "當嘗試進行 '%s' 時媒體未開啟。"
+msgstr "嘗試執行動作「%s」時未開啟媒體。"
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
