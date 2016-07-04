@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:57+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-04 05:58+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -6115,13 +6115,13 @@ msgid ""
 "Different package type specified in '%s' option and '%s' argument. Will use "
 "the latter."
 msgstr ""
-"Разные типы пакета указаны в параметре '%s' и аргументе '%s'. Будет "
-"использован последний."
+"Различные типы пакета указаны в параметре \"%s\" и в аргументе \"%s\". Будет "
+"использоваться последний."
 
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "`%s' не является именем пакета или возможности."
+msgstr "\"%s\" не является именем пакета или возможности."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -6139,7 +6139,8 @@ msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
 msgstr ""
-"Чтобы установить '%s'%s, вы должны согласиться с условиями этой лицензии:"
+"Чтобы установить '%s'%s, необходимо принять условия следующего лицензионного "
+"соглашения:"
 
 #. lincense prompt
 #: src/misc.cc:167
