@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:14+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 07:17+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -740,7 +740,7 @@ msgstr "%1% è terminato con stato %2%"
 #: src/subcommand.cc:353
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "waitpid per %1% è ritornato con uno stato di uscita %2% inatteso"
+msgstr "waitpid per %1% ha restituito uno stato di uscita %2% imprevisto"
 
 #: src/subcommand.cc:386
 #, boost-format
@@ -756,17 +756,17 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
-"I sottocomandi di zypper sono eseguibili indipendenti che si trovano\n"
+"I sottocomandi di zypper sono eseguibili autonomi che si trovano\n"
 "in zypper_execdir ('%1%').\n"
 "\n"
 "Per i sottocomandi zypper fornisce un wrapper che sa dove si trovano\n"
-"i sottocomandi e li esegue passando loro gli argomenti a riga di\n"
+"i sottocomandi e li esegue passando loro gli argomenti della riga di\n"
 "comando.\n"
 "\n"
-"Se un sottocomando non viene trovato in zypper_execdir, il wrapper\n"
+"Se è impossibile trovare un sottocomando in zypper_execdir, il wrapper\n"
 "lo cercherà nella parte rimanente di $PATH. È pertanto possibile\n"
-"scrivere estensioni zypper locali che non si trovano nello spazio di "
-"sistema.\n"
+"scrivere estensioni zypper locali che non si trovano nello spazio di sistema."
+"\n"
 
 #: src/subcommand.cc:401
 #, boost-format
@@ -786,31 +786,33 @@ msgstr "Sottocomandi zypper disponibili in '%1%'"
 #. translators: headline of an enumeration
 #: src/subcommand.cc:423
 msgid "Zypper subcommands available from elsewhere on your $PATH"
-msgstr "Sottocomandi zypper disponibili nel resto di $PATH"
+msgstr "Sottocomandi zypper disponibili altrove in $PATH"
 
 #. translators: helptext; %1% is a zypper command
 #: src/subcommand.cc:428
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
-"Digitare '%s' per riceve l'aiuto specifico sul sottocomando, se disponibile."
+"Digitare '%1%' per ottenere l'aiuto specifico per il sottocomando, se "
+"disponibile."
 
 #. translators: %1% - command name
 #: src/subcommand.cc:451
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
-msgstr "La voce di manuale per %1% non può essere mostrata "
+msgstr "Impossibile mostrare l'immissione manuale per %1%"
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
 msgstr ""
-"'%s' non è stato trovato nei nomi dei pacchetti. Si prova per capacità."
+"'%s' non è stato trovato nei nomi dei pacchetti. Viene eseguito il tentativo "
+"di ricerca per funzionalità."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr "Pacchetto '%s' non trovato."
+msgstr "Il pacchetto '%s' non è stato trovato."
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
@@ -820,23 +822,23 @@ msgstr "Patch '%s' non trovata."
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr "Prodotto '%s' non trovato."
+msgstr "Il prodotto '%s' non è stato trovato."
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "Modello '%s' non trovato."
+msgstr "Il modello '%s' non è stato trovato."
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "Pacchetto sorgente '%s' non trovato."
+msgstr "Impossibile trovare pacchetto di origine '%s'."
 
 #. just in case
 #: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr "Oggetto '%s' non trovato."
+msgstr "L'oggetto '%s' non è stato trovato."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
@@ -874,13 +876,13 @@ msgstr "L'oggetto '%s' non è stato trovato nei repository specificati."
 #: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
-msgstr "Non è stato trovato alcun fornitore per '%s'."
+msgstr "Non è stato trovato alcun provider per '%s'."
 
 #. wildcards used
 #: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr "Non è installato alcun pacchetto corrispondente a '%s'."
+msgstr "Nessun pacchetto corrispondente a '%s' installato."
 
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
