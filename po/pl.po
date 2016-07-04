@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 07:16+0000\n"
-"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
 "Language: pl\n"
@@ -1035,7 +1035,7 @@ msgstr "Dodawanie warunku: '%s'."
 #: src/RequestFeedback.cc:241
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
-msgstr "Dodawanie konflikt: '%s'."
+msgstr "Konflikt dodawania: \"%s\""
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:263
