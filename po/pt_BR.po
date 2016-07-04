@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 17:34+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 17:36+0000\n"
+"Last-Translator: Samanta Magalhaes <samanta@texttrans.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -4358,7 +4358,7 @@ msgstr "%s não pode ser instalado"
 #: zypp/solver/detail/SATResolver.cc:1012
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr "ninguém fornece %s que é necessário a %s"
+msgstr "nada fornece %s que é necessário a %s"
 
 #: zypp/solver/detail/SATResolver.cc:1017
 #, c-format, boost-format
