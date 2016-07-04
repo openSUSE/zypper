@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 22:08+0000\n"
-"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
+"PO-Revision-Date: 2016-07-04 23:19+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
 "Language: pl\n"
@@ -3006,7 +3006,7 @@ msgstr "PackageKit aktualnie działa w tle (prawdopodobnie uległo zawieszeniu).
 
 #: src/Zypper.cc:119
 msgid "Try again?"
-msgstr "Próbować ponownie?"
+msgstr "Spróbować ponownie?"
 
 #: src/Zypper.cc:189
 #, boost-format
