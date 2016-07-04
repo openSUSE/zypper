@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-04 17:31+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Samanta Magalhaes <samanta@texttrans.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -4330,7 +4330,7 @@ msgstr "algum problema de dependência"
 #: zypp/solver/detail/SATResolver.cc:992
 #, c-format, boost-format
 msgid "nothing provides requested %s"
-msgstr "ninguém fornece o pacote solicitado %s"
+msgstr "nada fornece o pacote solicitado %s"
 
 #: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
 msgid "Have you enabled all requested repositories?"
