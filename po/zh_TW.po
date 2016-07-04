@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 03:56+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 03:58+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -796,7 +796,7 @@ msgstr "找不到原始碼套件 '%s'。"
 #: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr "物件 '%s' 找不到。"
+msgstr "找不到物件「%s」。"
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
@@ -5468,7 +5468,7 @@ msgstr "需要下載的原始碼套件："
 
 #: src/source-download.cc:305
 msgid "Superfluous source packages in download directory:"
-msgstr "在下載目錄下有多餘的原始碼套件："
+msgstr "下載目錄中的非必要來源套件︰"
 
 #. translators: table headers
 #: src/source-download.cc:319
