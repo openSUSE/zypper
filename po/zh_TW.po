@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 02:45+0000\n"
+"PO-Revision-Date: 2016-07-04 05:40+0000\n"
 "Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
@@ -1585,7 +1585,7 @@ msgstr "盧安達"
 #. :RWA:646:
 #: zypp/CountryCode.cc:349
 msgid "Saudi Arabia"
-msgstr "阿烏地阿拉伯"
+msgstr "沙烏地阿拉伯"
 
 #. :SAU:682:
 #: zypp/CountryCode.cc:350
@@ -1711,7 +1711,7 @@ msgstr "塔吉克"
 #. language code: tkl
 #: zypp/CountryCode.cc:374 zypp/LanguageCode.cc:1045
 msgid "Tokelau"
-msgstr "托克勞語"
+msgstr "托克勞群島"
 
 #. :TKL:772:
 #: zypp/CountryCode.cc:375
@@ -1747,7 +1747,7 @@ msgstr "千里達托貝哥"
 #. language code: tvl
 #: zypp/CountryCode.cc:381 zypp/LanguageCode.cc:1075
 msgid "Tuvalu"
-msgstr "吐瓦魯語"
+msgstr "吐瓦魯"
 
 #. :TUV:798:
 #: zypp/CountryCode.cc:382
@@ -1946,7 +1946,7 @@ msgstr "南方阿爾泰語"
 #. language code: amh am
 #: zypp/LanguageCode.cc:195
 msgid "Amharic"
-msgstr "衣索比亞官方語言"
+msgstr "阿姆哈拉語"
 
 #. language code: ang
 #: zypp/LanguageCode.cc:197
@@ -2506,7 +2506,7 @@ msgstr "芳族語"
 #. language code: fao fo
 #: zypp/LanguageCode.cc:431
 msgid "Faroese"
-msgstr "法羅群島語"
+msgstr "法羅語"
 
 #. language code: fat
 #: zypp/LanguageCode.cc:433
