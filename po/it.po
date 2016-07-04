@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 08:15+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 08:19+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2744,7 +2744,7 @@ msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr ""
-"Si ignora %s senza un argomento in quanto è stata specificata un'opzione "
+"%s viene ignorata senza argomento perché è stata specificata un'opzione "
 "simile con un argomento."
 
 #. translator: stats table header (plural number is %2%)
@@ -2830,8 +2830,8 @@ msgstr "Categorie incluse"
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
 msgstr ""
-"Verranno installati prima i seguenti aggiornamenti per la gestione dei "
-"programmi:"
+"Verranno installati prima i seguenti aggiornamenti per la gestione del "
+"software:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
@@ -2851,16 +2851,16 @@ msgstr "Sono disponibili anche i seguenti aggiornamenti:"
 
 #: src/update.cc:714
 msgid "Package updates"
-msgstr "Aggiornamenti dei pacchetti"
+msgstr "Aggiornamenti pacchetto."
 
 # TLABEL modules/inst_config_x11.ycp:578
 #: src/update.cc:718
 msgid "Pattern updates"
-msgstr "Aggiornamenti dei modelli"
+msgstr "Aggiornamenti del modello"
 
 #: src/update.cc:720
 msgid "Product updates"
-msgstr "Aggiornamenti dei prodotti"
+msgstr "Aggiornamenti prodotto"
 
 #: src/update.cc:806
 msgid "Current Version"
@@ -2872,17 +2872,16 @@ msgstr "Versione disponibile"
 
 #: src/update.cc:969
 msgid "No matching issues found."
-msgstr "Nessun difetto corrispondente trovato."
+msgstr "Nessun problema corrispondente trovato."
 
 #: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
-msgstr "Sono stati trovati i seguenti numeri di difetti con un riscontro:"
+msgstr "Sono state trovate le seguenti corrispondenze nei numeri dei problemi:"
 
 #: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
-"Sono stati trovati i riscontri nelle descrizioni delle patch per le seguenti "
-"patch:"
+"Sono state trovate corrispondenze nelle descrizioni delle seguenti patch:"
 
 #: src/update.cc:1057
 #, c-format, boost-format
@@ -2909,7 +2908,7 @@ msgstr ""
 #. translators: this will show up if you press ctrl+c twice (but outside of zypper shell)
 #: src/main.cc:38
 msgid "OK OK! Exiting immediately..."
-msgstr "OK OK! Uscita immediata..."
+msgstr "OK. Chiusura immediata."
 
 #: src/Zypper.cc:77
 msgid ""
@@ -2933,36 +2932,35 @@ msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
-"PackageKit sta bloccando zypper. Questo succede se si ha in esecuzione "
-"l'applet dell'aggiornatore o un'altra applicazione per la gestione dei "
-"programmi che usa PackageKit."
+"PackageKit sta bloccando zypper. Questo succede se è in esecuzione l'applet "
+"del programma di aggiornamento o un'altra applicazione per la gestione "
+"software che usa PackageKit."
 
 #: src/Zypper.cc:109
 msgid "Tell PackageKit to quit?"
-msgstr "Dire a PackageKit di uscire?"
+msgstr "Chiudere PackageKit?"
 
 #: src/Zypper.cc:118
 msgid "PackageKit is still running (probably busy)."
-msgstr "PackageKit è ancora in esecuzione (probabilmente occupato)."
+msgstr "PackageKit è ancora in esecuzione (probabilmente è occupato)."
 
 #: src/Zypper.cc:119
 msgid "Try again?"
-msgstr "Provare di nuovo?"
+msgstr "Riprovare?"
 
 #: src/Zypper.cc:189
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
-"Rilevata l'opzione da riga di comando %1% che è obsoleta. Usare l'opzione "
-"globale %2% al suo posto."
+"Rilevata l'opzione da riga di comando %1% esistente. Usare l'opzione globale "
+"%2% al suo posto."
 
 #: src/Zypper.cc:190
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
-"Rilevata l'opzione da riga di comando %1% che è obsoleta. Usare %2% al suo "
-"posto."
+"Rilevata l'opzione da riga di comando %1% esistente. Usare %2% al suo posto."
 
 #: src/Zypper.cc:269
 msgid "Command options:"
@@ -2974,11 +2972,11 @@ msgstr "Opzioni avanzate:"
 
 #: src/Zypper.cc:275
 msgid "This command has no additional options."
-msgstr "Questo comando non ha opzioni aggiuntive."
+msgstr "Il comando non dispone di opzioni aggiuntive."
 
 #: src/Zypper.cc:406 src/Zypper.cc:1345
 msgid "Unexpected exception."
-msgstr "Eccezione inattesa."
+msgstr "Eccezione imprevista."
 
 #: src/Zypper.cc:428
 msgid ""
@@ -3004,25 +3002,26 @@ msgid ""
 "\t--ignore-unknown, -i\tIgnore unknown packages.\n"
 msgstr ""
 "  Opzioni globali:\n"
-"\t--help, -h\t\tStampa l'aiuto.\n"
+"\t--help, -h\t\tGuida.\n"
 "\t--version, -V\t\tMostra il numero di versione.\n"
 "\t--promptids\t\tMostra un elenco dei prompt utente di zypper.\n"
-"\t--config, -c <file>\tUsa il file di configurazione specificato invece del "
-"predefinito.\n"
+"\t--config, -c <file>\tUsa il file di configurazione specificato invece di "
+"quello di default.\n"
 "\t--userdata <string>\tId della transazione definita dall'utente usato nella "
 "cronologia e nei plugin.\n"
-"\t--quiet, -q\t\tSopprime l'output ordinario, stampa solo i messaggi di "
-"errore.\n"
+"\t--quiet, -q\t\tSopprime l'output ordinario, stampa solo i messaggi \n"
+"\t\t\t\tdi errore.\n"
 "\t--verbose, -v\t\tIncrementa la verbosità.\n"
-"\t--[no-]color\t\tSe usare l'output colorato nel caso sia supportato da "
-"tty.\n"
+"\t--[no-]color\t\tSe usare l'output a colori nel caso sia supportato da tty."
+"\n"
 "\t--no-abbrev, -A\t\tNon abbreviare il testo nelle tabelle.\n"
 "\t--table-style, -s\tStile delle tabelle (intero).\n"
-"\t--non-interactive, -n\tNon chiedere nulla, usa automaticamente le risposte "
-"predefinite.\n"
+"\t--non-interactive, -n\tNon chiedere nulla, usa automaticamente le "
+"risposte\n"
+"\t\t\t\tdi default.\n"
 "\t--non-interactive-include-reboot-patches\n"
-"\t\t\t\tNon trattare le patch come interattive, che hanno il marcatore "
-"rebootSuggested impostato.\n"
+"\t\t\t\tNon trattare le patch come interattive, che hanno\n"
+"\t\t\t\til flag rebootSuggested impostato.\n"
 "\t--xmlout, -x\t\tPassa all'output XML.\n"
 "\t--ignore-unknown, -i\tIgnora i pacchetti sconosciuti.\n"
 
@@ -3063,21 +3062,21 @@ msgid ""
 "\t--releasever\t\tSet the value of $releasever in all .repo files (default: "
 "distribution version)\n"
 msgstr ""
-"     Opzioni repository:\n"
-"\t--no-gpg-checks\t\tIgnora fallimenti della verifica GPG e continua.\n"
-"\t--gpg-auto-import-keys\tFidarsi automaticamente ed importare tutte\n"
-"\t\t\t\tle nuove chiavi di firma dei repositori.\n"
-"\t--plus-repo, -p <URI>\tUsa un repository aggiuntivo.\n"
-"\t--plus-content <tag>\tUsa in aggiunta i repository disabilitati che "
-"forniscono una parola chiave specifica..\n"
-"\t\t\t\tProvare '--plus-content debug' per abilitare i repository che "
-"dichiarano di fornire i pacchetti debug.\n"
-"\t--disable-repositories\tNon leggere i meta-dati dai repository.\n"
-"\t--no-refresh\t\tNon aggiornare i repository.\n"
-"\t--no-cd\t\t\tIgnora i repository su CD/DVD.\n"
-"\t--no-remote\t\tIgnora i repository remoti.\n"
+"     Opzioni dell'archivio:\n"
+"\t--no-gpg-checks\t\tIgnora errori di verifica GPG e continua.\n"
+"\t--gpg-auto-import-keys\tConsidera automaticamente attendibili e importare\n"
+"\t\t\t\tle nuove chiavi di firma dell'archivio.\n"
+"\t--plus-repo, -p <URI>\tUsa un archivio aggiuntivo.\n"
+"\t--plus-content <tag>\tUsa in aggiunta gli archivi disabilitati che "
+"forniscono una parola chiave specifica.\n"
+"\t\t\t\tProvare '--plus-content debug' per abilitare gli archivi che "
+"dichiarano di fornire i pacchetti di debug.\n"
+"\t--disable-repositories\tNon leggere i meta-dati dagli archivi.\n"
+"\t--no-refresh\t\tNon aggiornare gli archivi.\n"
+"\t--no-cd\t\t\tIgnora gli archivi su CD/DVD.\n"
+"\t--no-remote\t\tIgnora gli archivi remoti.\n"
 "\t--releasever\t\tImposta il valore di $releasever in tutti i file .repo "
-"(predefinito: versione della distribuzione)\n"
+"(default: versione di distribuzione)\n"
 
 #: src/Zypper.cc:472
 msgid ""
