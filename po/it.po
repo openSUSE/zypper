@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:09+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 07:12+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -372,45 +372,45 @@ msgid ""
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
 msgstr ""
-"I conflitti tra file avvengono quando due pacchetti cercano di installare "
-"dei file con lo stesso nome ma contenuto diverso. Se si continua, i file in "
-"conflitto verranno sostituiti perdendo il contenuto precedente."
+"I conflitti tra file si verificano quando due pacchetti tentano di "
+"installare file con lo stesso nome, ma con contenuti diversi. Se si "
+"continua, i file in conflitto saranno sostituiti e i rispettivi contenuti "
+"precedenti andranno persi."
 
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
-msgstr ""
-"La seguente richiesta blocca gli stessi oggetti come quello si vuole "
-"rimuovere:"
+msgstr "La seguente interrogazione blocca oggetti uguali a quello da rimuovere:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
 msgstr ""
-"La seguente richiesta blocca alcuni degli oggetti che si vuole sbloccare:"
+"La seguente interrogazione blocca alcuni degli oggetti che si desidera "
+"sbloccare:"
 
 # power-off message
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
 msgid "Do you want to remove this lock?"
-msgstr "Si vuole rimuovere questo blocco?"
+msgstr "Rimuovere il blocco?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr "La seguente richiesta non blocca nulla:"
+msgstr "La seguente interrogazione non blocca nessun oggetto:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Recupero del delta"
+msgstr "Recupero delta in corso"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
 msgid "Applying delta"
-msgstr "Applicazione del delta"
+msgstr "Applicazione delta in corso"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: src/callbacks/repo.h:103
 #, c-format, boost-format
 msgid "(%s unpacked)"
-msgstr "(estratto %s)"
+msgstr "(%s estratto)"
 
 #: src/callbacks/repo.h:112
 #, boost-format
@@ -424,11 +424,11 @@ msgstr "Recupero di %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
-msgstr "Verifica della firma fallita"
+msgstr "Verifica della firma non riuscita"
 
 #: src/callbacks/repo.h:236
 msgid "Accepting package despite the error."
-msgstr "Accettazione del pacchetto malgrado l'errore."
+msgstr "Il pacchetto viene accettato malgrado l'errore."
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -454,7 +454,7 @@ msgstr "Terminato con errori."
 
 #: src/Zypper.h:465
 msgid "Done."
-msgstr "Fatto."
+msgstr "Fine."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -464,7 +464,7 @@ msgstr "Non trovato"
 # error box title
 #: src/utils/prompt.h:160
 msgid "I/O error"
-msgstr "Errore I/O"
+msgstr "Errore di I/O"
 
 #: src/utils/prompt.h:160
 msgid "Invalid object"
@@ -492,7 +492,7 @@ msgstr "Versione"
 #: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
-msgstr "Arch"
+msgstr "Arch."
 
 #: src/info.cc:76
 msgid "Vendor"
@@ -530,7 +530,7 @@ msgstr "Informazioni per %s %s:"
 #: src/info.cc:206
 #, c-format, boost-format
 msgid "Info for type '%s' not implemented."
-msgstr "Info per il tipo '%s' non ancora implementate."
+msgstr "Informazioni per il tipo '%s' non ancora implementate."
 
 #. translators: package's repository (header)
 #: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
@@ -555,7 +555,7 @@ msgstr "Stato"
 #: src/info.cc:265
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
-msgstr "obsoleto (versione %s installata)"
+msgstr "obsoleto (versione installata: %s)"
 
 #: src/info.cc:269
 msgid "up-to-date"
@@ -600,11 +600,11 @@ msgstr "Interattivo"
 
 #: src/info.cc:354 src/search.cc:318
 msgid "Recommended"
-msgstr "Raccomandato"
+msgstr "Consigliato"
 
 #: src/info.cc:356 src/search.cc:320
 msgid "Suggested"
-msgstr "Suggerito"
+msgstr "Consigliato"
 
 #: src/info.cc:391
 msgid "Visible to User"
@@ -642,7 +642,7 @@ msgstr "(vuoto)"
 
 #: src/info.cc:472
 msgid "Flavor"
-msgstr "Tipo"
+msgstr "Flavor"
 
 #: src/info.cc:477
 msgid "Short Name"
