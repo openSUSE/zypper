@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 08:47+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 08:49+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -5219,13 +5219,14 @@ msgstr ""
 
 #: src/Zypper.cc:3326
 msgid "Root privileges are required for refreshing services."
-msgstr "Per aggiornare i servizi sono necessari i privilegi dell'utente root."
+msgstr ""
+"Per aggiornare i servizi è necessario disporre dei privilegi di utente root."
 
 #: src/Zypper.cc:3350 src/Zypper.cc:3439 src/Zypper.cc:3656
 msgid "Root privileges are required for modifying system services."
 msgstr ""
-"Per modificare i servizi di sistema sono necessari i privilegi dell'utente "
-"root."
+"Per modificare i servizi del sistema è necessario disporre dei privilegi di "
+"utente root."
 
 #: src/Zypper.cc:3423
 #, c-format, boost-format
@@ -5235,8 +5236,7 @@ msgstr "'%s' non è un tipo di servizio valido."
 #: src/Zypper.cc:3425
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr ""
-"Si veda '%s' o '%s' per ottenere un elenco dei tipi di servizio conosciuti."
+msgstr "Per un elenco di tipi di servizio conosciuti, vedere '%s' o '%s'."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -5244,7 +5244,7 @@ msgstr ""
 #. followed by mr command help text which will explain it
 #: src/Zypper.cc:3450 src/Zypper.cc:3797
 msgid "Alias or an aggregate option is required."
-msgstr "È necessario un alias o un'opzione aggregata."
+msgstr "È necessario un alias o un'opzione di aggregazione."
 
 #: src/Zypper.cc:3482
 #, c-format, boost-format
@@ -5259,19 +5259,21 @@ msgstr ""
 
 #: src/Zypper.cc:3564 src/Zypper.cc:3902
 msgid "Too few arguments."
-msgstr "Troppo pochi argomenti."
+msgstr "Argomenti insufficienti."
 
 #: src/Zypper.cc:3587
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Se viene usato un solo argomento, questo deve essere un URI che punta a un "
-"file .repo."
+"Se viene utilizzato un solo un argomento, questo deve essere un URI che "
+"punta a un file .repo."
 
 #: src/Zypper.cc:3617
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "Impossibile usare %s insieme con %s. Viene usata l'impostazione %s."
+msgstr ""
+"Impossibile utilizzare %s insieme con %s. Verranno utilizzate le "
+"impostazioni di %s."
 
 #: src/Zypper.cc:3636
 msgid "Specified type is not a valid repository type:"
@@ -5280,8 +5282,7 @@ msgstr "Il tipo specificato non è un tipo di repository valido:"
 #: src/Zypper.cc:3637
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr ""
-"Si veda '%s' o '%s' per ottenere una lista dei tipi di repository conosciuti."
+msgstr "Per un elenco dei tipi di archivio conosciuti, vedere '%s' o '%s'."
 
 #: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
