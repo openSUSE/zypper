@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 07:38+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2298,7 +2298,7 @@ msgstr "Impossibile trovare un repository valido nella posizione specificata:"
 #: src/repos.cc:1599
 msgid "Problem transferring repository data from specified URI:"
 msgstr ""
-"Si è verificato un problema durante il trasferimento dei dati dell'archivio "
+"Si è verificato un problema durante il trasferimento dei dati del repository "
 "dall'URI specificato:"
 
 #: src/repos.cc:1600
