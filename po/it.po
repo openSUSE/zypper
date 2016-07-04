@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:00+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 07:01+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -147,30 +147,31 @@ msgstr "r/t"
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:216
 msgid "Don't trust the key."
-msgstr "Non fidarsi della chiave."
+msgstr "Non considerare la chiave attendibile."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:218
 msgid "Trust the key temporarily."
-msgstr "Fidarsi della chiave temporaneamente."
+msgstr "Considerare la chiave temporaneamente attendibile."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:221
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Fidarsi della chiave ed importarla nel portachiavi fidato."
+msgstr ""
+"Considerare la chiave attendibile e importarla nel portachiavi attendibile."
 
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Si ignora il fallimento della verifica della firma per il file '%s'!"
+msgstr "Verrà ignorata la verifica della firma errata per il file '%s'."
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
-"Si ignora il fallimento della verifica della firma per il file '%s' dal "
-"repository '%s'!"
+"Verrà ignorata la verifica della firma errata per il file '%s' dall'archivio "
+"'%s'."
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
