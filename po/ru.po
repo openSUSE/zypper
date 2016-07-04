@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 06:00+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 06:01+0000\n"
+"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -6289,7 +6289,7 @@ msgstr "Проблема при удалении блокировки пакет
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
-msgstr "Сообщите об этом в отчёте об ошибке."
+msgstr "Сообщите об этом в отчете об ошибке."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
