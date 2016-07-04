@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 04:12+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 04:14+0000\n"
+"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -2622,12 +2622,12 @@ msgstr "Все службы обновлены."
 #: src/repos.cc:2920
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
-msgstr "Служба '%s' успешно включена."
+msgstr "Служба \"%s\" успешно включена."
 
 #: src/repos.cc:2922
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
-msgstr "Служба '%s' успешно отключена."
+msgstr "Служба \"%s\" успешно отключена."
 
 #: src/repos.cc:2928
 #, c-format, boost-format
@@ -2637,7 +2637,7 @@ msgstr "Включено автоматическое обновление сл�
 #: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "Отключено автоматическое обновление службы '%s'."
+msgstr "Отключено автоматическое обновление службы \"%s\"."
 
 #: src/repos.cc:2935
 #, c-format, boost-format
@@ -2704,7 +2704,7 @@ msgstr "Ошибка при изменении службы:"
 #: src/repos.cc:2977
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
-msgstr "Служба %s не изменена."
+msgstr "Служба \"%s\" не изменена."
 
 #: src/repos.cc:3081
 msgid "Loading repository data..."
@@ -2713,12 +2713,12 @@ msgstr "Загрузка данных о репозиториях..."
 #: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Получение данных о репозитории '%s'..."
+msgstr "Получение данных о репозитории \"%s\"..."
 
 #: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "Репозиторий '%s' не кэширован. Кэширование..."
+msgstr "Репозиторий \"%s\" не кэширован. Кэширование..."
 
 #: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
@@ -2728,7 +2728,7 @@ msgstr "Проблема загрузки данных из '%s'"
 #: src/repos.cc:3117
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr "Невозможно обновить репозиторий '%s'. Используется старый кэш."
+msgstr "Невозможно обновить репозиторий \"%s\". Используется старый кэш."
 
 #: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
