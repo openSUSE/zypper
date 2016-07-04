@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 09:11+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 09:12+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6167,7 +6167,7 @@ msgstr ""
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "'%s' non è un nome di pacchetto o di capacità."
+msgstr "'%s' non è un nome di pacchetto o una funzionalità."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -6185,8 +6185,8 @@ msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
 msgstr ""
-"Al fine di installare '%s'%s, è necessario accettare i seguenti termini "
-"dell'accordo di licenza:"
+"Per poter installare '%s'%s, è necessario accettare i seguenti termini del "
+"contratto di licenza:"
 
 #. lincense prompt
 #: src/misc.cc:167
