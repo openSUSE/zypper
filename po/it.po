@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:01+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 07:02+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -175,19 +175,17 @@ msgstr ""
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-"Controllare accuratamente che ciò non sia causato da alcuni cambiamenti "
-"maligni nel file!"
+msgstr "Accertarsi che questo non sia dovuto a modifiche dannose nel file."
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s'."
-msgstr "Verifica della firma per il file '%s' fallita."
+msgstr "Verifica della firma errata per il file '%s'."
 
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Verifica della firma per il file '%s' dal repository '%s' fallita."
+msgstr "Verifica della firma errata per il file '%s' dall'archivio '%s'."
 
 #: src/callbacks/keyring.h:284
 msgid ""
