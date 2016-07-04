@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 07:14+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -726,7 +726,7 @@ msgstr "%1% è stato terminato con il segnale %2% (%3%)"
 
 #: src/subcommand.cc:328
 msgid "core dumped"
-msgstr "dump della memoria eseguito"
+msgstr "dump core eseguito"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
