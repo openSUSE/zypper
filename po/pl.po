@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 10:51+0000\n"
+"PO-Revision-Date: 2016-07-04 10:53+0000\n"
 "Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
@@ -6608,7 +6608,7 @@ msgstr "niewymagana"
 #. translator: patch status
 #: src/utils/misc.cc:139
 msgid "undetermined"
-msgstr "niezdefiniowana"
+msgstr "nieokreślona"
 
 #. << _("Repository")
 #: src/utils/misc.cc:289
