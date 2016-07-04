@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 09:01+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 10:09+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -312,9 +312,7 @@ msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
-msgstr ""
-"檢查檔案衝突需要事先下載尚未安裝的套件，才能存取其檔案列表。詳情請見 zypper "
-"說明文件中關於選項 '%1%' 的說明。"
+msgstr "檢查檔案衝突需要事先下載尚未安裝的套件，才能存取其檔案清單。詳情請見 zypper 說明文件中關於選項 '%1%' 的說明。"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
@@ -785,7 +783,7 @@ msgstr "找不到產品 '%s'。"
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "找不到模式 '%s'。"
+msgstr "找不到樣式 '%s'。"
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
@@ -811,7 +809,7 @@ msgstr "在指定套件庫中找不到修補程式 '%s' 。"
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "在指定套件庫中找不到產品 '%s' 。"
+msgstr "在指定套件庫中找不到產品 '%s'。"
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
@@ -1703,16 +1701,16 @@ msgstr "套件庫 '%s' 已是最新狀態。"
 #: src/repos.cc:208
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "'%s' 的更新檢查已被延遲。"
+msgstr "'%s' 的最新狀態檢查已被延遲。"
 
 #: src/repos.cc:230
 msgid "Forcing raw metadata refresh"
-msgstr "強迫原始中繼資料重新整理"
+msgstr "正在強迫原始中繼資料重新整理"
 
 #: src/repos.cc:236
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "正在取出套件庫 '%s' 中介資訊"
+msgstr "正在取出套件庫 '%s' 中繼資料"
 
 #: src/repos.cc:263
 #, c-format, boost-format
@@ -1737,7 +1735,7 @@ msgstr "請檢視上面的錯誤訊息以獲得提示。"
 #: src/repos.cc:308
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
-msgstr "'%s' 沒有定義 URI。"
+msgstr "'%s' 沒有定義位址。"
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: src/repos.cc:313
@@ -1745,8 +1743,7 @@ msgstr "'%s' 沒有定義 URI。"
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr ""
-"請加入一個或數個基礎位址 (baseurl=位址) 內容到 %s 提供套件庫 '%s' 使用。"
+msgstr "請加入一個或數個基礎位址 (baseurl=位址) 項目到 %s，以供套件庫 '%s' 使用。"
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
@@ -1770,7 +1767,7 @@ msgstr "取出 '%s' 的中繼資料發生錯誤："
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
-msgstr "強迫建立套件庫快取"
+msgstr "正在強迫建立套件庫快取"
 
 #: src/repos.cc:390
 #, c-format, boost-format
@@ -1791,7 +1788,7 @@ msgstr ""
 #: src/repos.cc:401
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "在本機快取中找不到套件庫 '%s' 的中繼資訊。"
+msgstr "在本機快取中找不到 '%s' 的套件庫中繼資料。"
 
 #: src/repos.cc:409
 msgid "Error building the cache:"
@@ -1810,7 +1807,7 @@ msgstr "請用 '%s' 取得已定義的套件庫清單。"
 #: src/repos.cc:633
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
-msgstr "正在跳過已停用的套件庫 '%s'"
+msgstr "正在忽略已停用的套件庫 '%s'"
 
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
@@ -3727,17 +3724,17 @@ msgid ""
 msgstr ""
 "list-updates (lu) [選項]\n"
 "\n"
-"列出所有可用的更新\n"
+"列出所有可用的更新。\n"
 "\n"
 "  指令選項：\n"
-"-t, --type <類型>            套件的類型 (%s)\n"
-"                             預設為： %s\n"
+"-t, --type <類型>            套件的類型 (%s)。\n"
+"                             預設為：%s。\n"
 "-r, --repo <別名|編號|位址>  僅列出指定套件庫中的更新。\n"
 "    --best-effort            盡最大努力來趨近最新狀態，\n"
 "                             更新到比最新版本還低些的也\n"
 "                             可以接受。\n"
 "-a, --all                    列出所有有較新版本可用的\n"
-"                             套件，不論他們是否\n"
+"                             套件，不論它們是否\n"
 "                             可以安裝。\n"
 
 #. translators: the first %s = "package, patch, pattern, product",
@@ -3788,18 +3785,18 @@ msgid ""
 msgstr ""
 "update (up) [選項] [套件名稱] ...\n"
 "\n"
-"儘可能更新所有或指定的已安裝套件到可用的較新版本。\n"
+"儘可能以較新版本更新所有或指定的已安裝套件。\n"
 "\n"
 "  指令選項：\n"
 "\n"
 "-t, --type <類型>            套件的類型 (%s)。\n"
-"                             預設為： %s。\n"
+"                             預設為：%s。\n"
 "-r, --repo <別名|編號|位址>  僅載入指定的套件庫。\n"
-"    --skip-interactive       跳過互動式更新\n"
-"    --with-interactive       不要跳過互動式更新\n"
+"    --skip-interactive       跳過互動式更新。\n"
+"    --with-interactive       不要跳過互動式更新。\n"
 "-l, --auto-agree-with-licenses\n"
-"                             自動對第三方授權確認提示\n"
-"                             說 'yes'。\n"
+"                             對第三方授權確認提示自動\n"
+"                             選取「是」。\n"
 "                             請參閱 man zypper 以獲得更進一步的細節。\n"
 "    --best-effort            盡最大努力來進行更新，更新\n"
 "                             到比最新版本還低些的\n"
@@ -3808,14 +3805,12 @@ msgstr ""
 "    --no-recommends          不要安裝推薦套件，只安裝必需的。\n"
 "    --recommends             除了必需的套件外，也安裝\n"
 "                             推薦的套件。\n"
-"    --replacefiles           安裝套件，即使它會取代來自其他已安裝套件的檔"
-"案。\n"
-"                             預設會將此檔案衝突視為錯誤來處理。\n"
-"                             使用 --download-as-needed 選項來停用檔案衝突檢"
-"查。\n"
+"    --replacefiles           安裝套件，即使它會取代來自其他已安裝套件的檔案。\n"
+"                             預設將檔案衝突視為錯誤來處理。\n"
+"                             使用 --download-as-needed 選項來停用檔案衝突檢查。\n"
 "-R, --no-force-resolution    不要強迫找尋解決方案，\n"
 "                             要先詢問。\n"
-"    --force-resolution       強迫找尋一個解決方案(即使\n"
+"    --force-resolution       強迫找尋一個解決方案 (即使\n"
 "                             是很激進的方案)。\n"
 "-D, --dry-run                測試更新，不要真的更新。\n"
 "    --details                顯示詳細的安裝摘要。\n"
@@ -3872,23 +3867,21 @@ msgstr ""
 "    --skip-interactive      跳過互動式修補程式。\n"
 "    --with-interactive      不要跳過互動式修補程式。\n"
 "-l, --auto-agree-with-licenses\n"
-"                            自動對第三方授權確認提示說\n"
-"                            'yes'。\n"
+"                            對第三方授權確認提示自動\n"
+"                            選取「是」。\n"
 "                            參閱 man zypper 獲得更多資訊。\n"
-"-b, --bugzilla #            安裝指定 bugzilla 問題的修正。\n"
-"    --cve #                 安裝指定 CVE 問題的修正。\n"
-"-g  --category <category>   安裝此分類的所有修正。\n"
-"    --severity <severity>   安裝此嚴重度的所有修正。\n"
-"    --date <YYYY-MM-DD>     安裝到指定日期前的所有修正(不包括該日期)。\n"
+"-b, --bugzilla #            安裝用於修復指定 bugzilla 問題的修補程式。\n"
+"    --cve #                 安裝用於修復指定 CVE 問題的修補程式。\n"
+"-g  --category <類別>   安裝此類別的所有修補程式。\n"
+"    --severity <嚴重度>   安裝此嚴重度的所有修補程式。\n"
+"    --date <YYYY-MM-DD>     安裝到指定日期前的修補程式 (不包括該日期)。\n"
 "    --debug-solver          建立解決測試方案來偵錯。\n"
 "    --no-recommends         不要安裝推薦的套件，僅安裝必需的。\n"
 "    --recommends            除了必需的套件外，也安裝\n"
 "                            推薦的套件。\n"
-"    --replacefiles          安裝套件，即使它會取代來自其他已安裝套件的檔"
-"案。\n"
-"                            預設會將此檔案衝突視為錯誤來處理。\n"
-"                            使用 --download-as-needed 選項來停用檔案衝突檢"
-"查。\n"
+"    --replacefiles          安裝套件，即使它會取代來自其他已安裝套件的檔案。\n"
+"                            預設將檔案衝突視為錯誤來處理。\n"
+"                            使用 --download-as-needed 選項來停用檔案衝突檢查。\n"
 "-r, --repo <別名|編號|位址> 僅載入指定的套件庫。\n"
 "-D, --dry-run               測試更新，而不要真正更新。\n"
 "    --details               顯示詳細的安裝摘要。\n"
@@ -3927,8 +3920,8 @@ msgstr ""
 "    --issues[=字串]       搜尋符合指定字串的問題。\n"
 "-a、--all                   列出所有的修補程式，不限於所需要的。\n"
 "-g  --category <類別>  僅列出此類別的修補程式。\n"
-"    --severity <嚴重性>  僅列出此嚴重性的修補程式。\n"
-"-r、--repo <別名|編號|URI> 僅列出指定儲存庫中的修補程式。\n"
+"    --severity <嚴重度>  僅列出此嚴重度的修補程式。\n"
+"-r、--repo <別名|編號|位址> 僅列出指定套件庫中的修補程式。\n"
 "    --date <YYYY-MM-DD>    列出到指定日期為止的修補程式 (不包括該日期)。\n"
 
 #. translators: command synopsis; do not translate lowercase words
