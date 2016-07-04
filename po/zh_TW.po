@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 08:06+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 08:59+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -721,12 +721,12 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
-"Zypper 子指令是獨立的可執行檔，存放於 zypper_execdir (%1%) 中。\n"
+"Zypper 個別指令是獨立的可執行檔，存放於 zypper_execdir (%1%) 中。\n"
 "\n"
-"對於子指令，zypper 提供一個包裝程式，能夠知道在哪裡找到這些子指令，\n"
+"對於個別指令，zypper 提供一個包裝程式，能夠知道在哪裡找到這些個別指令，\n"
 "並透過傳遞指令行參數來執行它們。\n"
 "\n"
-"若某個子指令無法在 zypper_execdir 下找到，包裝程式會到您的 $PATH\n"
+"若某個個別指令無法在 zypper_execdir 下找到，包裝程式會到您的 $PATH\n"
 "下尋找。是故寫一個不存放在系統空間，僅供局部使用的 zypper 擴充是\n"
 "可以做到的。\n"
 
@@ -736,25 +736,25 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
-"目前不支援將 zypper 全域選項與子指令一同使用，也不支援\n"
-"執行「%1%」中的子指令。\n"
+"目前不支援將 zypper 全域選項與個別指令一同使用，也不支援\n"
+"執行「%1%」中的個別指令。\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/subcommand.cc:418
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr "%1% 中可用的 zypper 子指令"
+msgstr "'%1%' 中可用的 zypper 個別指令"
 
 #. translators: headline of an enumeration
 #: src/subcommand.cc:423
 msgid "Zypper subcommands available from elsewhere on your $PATH"
-msgstr "您的 $PATH 中可用的 zypper 子指令"
+msgstr "您的 $PATH 中可用的 zypper 個別指令"
 
 #. translators: helptext; %1% is a zypper command
 #: src/subcommand.cc:428
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
-msgstr "輸入「%1%」可獲取子指令的說明 (若有)。"
+msgstr "輸入 '%1%' 可獲取個別指令的說明 (若有)。"
 
 #. translators: %1% - command name
 #: src/subcommand.cc:451
@@ -765,27 +765,27 @@ msgstr "%1% 的手動輸入無法顯示"
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "套件名稱中找不到「%s」。正在嘗試其他功能。"
+msgstr "套件名稱中找不到 '%s'。正在嘗試其他功能。"
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr "找不到套件「%s」。"
+msgstr "找不到套件 '%s'。"
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "找不到修補程式「%s」。"
+msgstr "找不到修補程式 '%s'。"
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr "找不到產品「%s」。"
+msgstr "找不到產品 '%s'。"
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "找不到模式「%s」。"
+msgstr "找不到模式 '%s'。"
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
@@ -796,7 +796,7 @@ msgstr "找不到原始碼套件 '%s'。"
 #: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr "找不到物件「%s」。"
+msgstr "找不到物件 '%s'。"
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
@@ -839,7 +839,7 @@ msgstr "找不到提供 '%s' 的提供者。"
 #: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr "未安裝與「%s」相符的套件。"
+msgstr "未安裝與 '%s' 相符的套件。"
 
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
@@ -861,7 +861,7 @@ msgstr "'%s' 已經安裝。"
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "「%s」(提供「%s」) 已經安裝。"
+msgstr "'%s' (提供 '%s') 已經安裝。"
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
@@ -934,7 +934,7 @@ msgstr "修補程式 '%s' 是互動式的，跳過。"
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
-msgstr "不需要修補程式「%s」。"
+msgstr "不需要修補程式 '%s'。"
 
 #: src/RequestFeedback.cc:181
 #, boost-format
@@ -966,7 +966,7 @@ msgstr "修補程式 '%s' 已在指定日期後發行。"
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "正在選擇安裝 '%s' (來自套件庫 '%s')。"
+msgstr "正在選取 '%s' (來自套件庫 '%s') 以安裝。"
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
@@ -986,12 +986,12 @@ msgstr "'%s' 已被鎖定。請用 '%s' 解除鎖定。"
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
-msgstr "新增需求： '%s'。"
+msgstr "正在新增需求：'%s'。"
 
 #: src/RequestFeedback.cc:241
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
-msgstr "新增衝突： '%s'。"
+msgstr "正在新增衝突：'%s'。"
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:263
@@ -1555,12 +1555,12 @@ msgstr "跳過取得檔案並嘗試沒有此檔案而繼續操作。"
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr "變更目前基礎 URI 並嘗試重新取得檔案。"
+msgstr "變更目前基礎位址並嘗試重新取得檔案。"
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
 msgid "New URI"
-msgstr "新的 URI"
+msgstr "新位址"
 
 #. https options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -1580,7 +1580,7 @@ msgstr "停用 SSL 憑證授權檢查並繼續。"
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
 #: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
-msgstr "中止(a)、重試(r)、忽略(i)？"
+msgstr "中止、重試、忽略？"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
@@ -1693,7 +1693,7 @@ msgstr "無效的優先權 '%s'。 請使用正整數。數字越大優先權越
 #: src/repos.cc:176
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "檢查是否需要重新整理 %s 的中繼資訊"
+msgstr "檢查是否需要重新整理 %s 的中繼資料"
 
 #: src/repos.cc:202
 #, c-format, boost-format
@@ -4046,18 +4046,16 @@ msgstr ""
 "    --from <別名|編號|位址>    限制升級到指定的套件庫。\n"
 "-r, --repo <別名|編號|位址>    僅載入指定的套件庫。\n"
 "-l, --auto-agree-with-licenses\n"
-"                               自動對第三方授權確認提示\n"
-"                               說 'yes'。\n"
+"                               對第三方授權確認提示\n"
+"                               自動選取「是」。\n"
 "                               請參閱 man zypper 以獲得更進一步的細節。\n"
 "    --debug-solver             建立解決測試案例來偵錯。\n"
 "    --no-recommends            不要安裝推薦套件，僅安裝必需的。\n"
 "    --recommends               除了必需的套件，也安裝\n"
 "                               推薦的套件。\n"
-"    --replacefiles             安裝套件，即使它會取代來自其他已安裝套件的檔"
-"案。\n"
-"                               預設會將此檔案衝突視為錯誤來處理。\n"
-"                               使用 --download-as-needed 選項來停用檔案衝突檢"
-"查。\n"
+"    --replacefiles             安裝套件，即使它會取代來自其他已安裝套件的檔案。\n"
+"                               預設將檔案衝突視為錯誤來處理。\n"
+"                               使用 --download-as-needed 選項來停用檔案衝突檢查。\n"
 "-D, --dry-run                  測試升級，不要真的升級\n"
 "    --details                  顯示詳細的安裝摘要。\n"
 "    --download                 設定下載-安裝模式。可用的模式：\n"
@@ -4132,9 +4130,9 @@ msgstr ""
 "搜尋符合指定搜尋字串的套件\n"
 " \n"
 "  指令選項：\n"
-"    --match-substrings      搜尋字串符合結果可以是詞語的一部分 (預設值)\n"
-"    --match-words           搜尋字串符合結果只能是完整的詞語\n"
-"-x, --match-exact           搜尋完全相符的套件名稱\n"
+"    --match-substrings      搜尋字串符合結果可以是詞語的一部分 (預設值)。\n"
+"    --match-words           搜尋字串符合結果只能是完整的詞語。\n"
+"-x, --match-exact           搜尋完全相符的套件名稱。\n"
 "    --provides              搜尋提供搜尋字串的套件。\n"
 "    --recommends            搜尋推薦搜尋字串的套件。\n"
 "    --requires              搜尋需要搜尋字串的套件。\n"
@@ -4150,12 +4148,12 @@ msgstr ""
 "-u, --uninstalled-only      僅顯示目前尚未安裝的套件。\n"
 "-t, --type <類型>           僅搜尋指定類型的套件。\n"
 "-r, --repo <別名|編號|位址> 僅搜尋指定的套件庫。\n"
-"    --sort-by-name          根據名稱排序套件 (預設值)。\n"
-"    --sort-by-repo          根據套件庫排序套件。\n"
-"-s, --details               顯示每個套件庫所提供的可用版本\n"
-"                            在不同的輸出行。\n"
-"-v, --verbose               如同 --details，另外還顯示在那裡\n"
-"                            比對成功 (對搜尋相依套件很有用)。\n"
+"    --sort-by-name          依名稱對套件排序 (預設值)。\n"
+"    --sort-by-repo          依套件庫對套件排序。\n"
+"-s, --details               每個套件庫中每個可用的版本\n"
+"                            單獨顯示在一行。\n"
+"-v, --verbose               與 --details 相似，不過會額外顯示相符項的\n"
+"                            位置資訊 (對搜尋相依套件很有用)。\n"
 "\n"
 "* 和 ? 萬用字元也可以用在搜尋字串中。\n"
 "如果搜尋字串被 '/' 包圍，它會被解讀為正規表示式。\n"
@@ -4231,7 +4229,7 @@ msgstr ""
 "\n"
 "  指令選項：\n"
 "\n"
-"-r, --repo <別名|編號|URI>  這是指定套件庫的另一種方法。\n"
+"-r, --repo <別名|編號|位址>  這是指定套件庫的另一種方法。\n"
 "-i, --installed-only        僅顯示已安裝的套件。\n"
 "-u, --uninstalled-only      僅顯示未安裝的套件。\n"
 "-o, --orphaned              顯示孤兒套件 (沒有套件庫)。\n"
@@ -4259,7 +4257,7 @@ msgstr ""
 "\n"
 "  指令選項：\n"
 "\n"
-"-r, --repo <別名|編號|URI>  這是指定套件庫的另一種方法。\n"
+"-r, --repo <別名|編號|位址>  這是指定套件庫的另一種方法。\n"
 "-i, --installed-only        僅顯示已安裝的樣式。\n"
 "-u, --uninstalled-only      僅顯示未安裝的樣式。\n"
 
@@ -4281,7 +4279,7 @@ msgstr ""
 "\n"
 "  指令選項：\n"
 "\n"
-"-r, --repo <別名|編號|URI>  這是指定套件庫的另一種方法。\n"
+"-r, --repo <別名|編號|位址>  這是指定套件庫的另一種方法。\n"
 "-i, --installed-only        僅顯示已安裝的產品。\n"
 "-u, --uninstalled-only      僅顯示未安裝的產品。\n"
 
@@ -4317,14 +4315,15 @@ msgstr ""
 "\n"
 "  指令選項：\n"
 "-s, --match-substrings      印出部份名稱符合的套件資訊。\n"
-"-r, --repo <別名|編號|URI>  只有在指定套件庫時使用。\n"
-"-t, --type <type>           套件的類型 (%s)。\n"
-"                            預設： %s。\n"
-"    --requires              同時顯示必需和預先需要的套件。\n"
-"    --conflicts             同時顯示衝突套件。\n"
-"    --obsoletes             同時顯示汰換套件。\n"
-"    --recommends            同時顯示推薦套件。\n"
-"    --suggests              同時顯示建議套件。\n"
+"-r, --repo <別名|編號|位址>  只對指定套件庫起作用。\n"
+"-t, --type <類型>           套件的類型 (%s)。\n"
+"                            預設值：%s。\n"
+"    --provides              顯示提供的套件。\n"
+"    --requires              顯示必需和預先需要的套件。\n"
+"    --conflicts             顯示衝突套件。\n"
+"    --obsoletes            顯示汰換套件。\n"
+"    --recommends           顯示推薦套件。\n"
+"    --suggests              顯示建議套件。\n"
 
 #: src/Zypper.cc:2648
 #, c-format, boost-format
@@ -4337,7 +4336,7 @@ msgid ""
 msgstr ""
 "patch-info <修補程式名稱> ...\n"
 "\n"
-"顯示修補程式的詳細資料\n"
+"顯示修補程式的詳細資料。\n"
 "\n"
 "這是 '%s' 的別名。\n"
 
@@ -4352,7 +4351,7 @@ msgid ""
 msgstr ""
 "pattern-info <樣式名稱> ...\n"
 "\n"
-"顯示該樣式的詳細資料\n"
+"顯示樣式的詳細資料。\n"
 "\n"
 "這是 '%s' 的別名。\n"
 
@@ -4367,7 +4366,7 @@ msgid ""
 msgstr ""
 "product-info <產品名稱> ...\n"
 "\n"
-"顯示產品的詳細資料\n"
+"顯示產品的詳細資料。\n"
 "\n"
 "這是 '%s' 的別名。\n"
 
