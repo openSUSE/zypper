@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 06:56+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 06:57+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -37,11 +37,11 @@ msgstr "Impronta digitale della chiave:"
 
 #: src/callbacks/keyring.h:40
 msgid "Key Created:"
-msgstr "Chiave creata il:"
+msgstr "Chiave creata:"
 
 #: src/callbacks/keyring.h:41
 msgid "Key Expires:"
-msgstr "La chiave scade il:"
+msgstr "Scadenza chiave:"
 
 #: src/callbacks/keyring.h:42
 msgid "Rpm Name:"
@@ -50,7 +50,7 @@ msgstr "Nome rpm: "
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "La chiave gpg usata per firmare il file '%1%' è scaduta."
+msgstr "La chiave gpg di firma del file '%1%' è scaduta."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
@@ -64,7 +64,7 @@ msgstr[1] ""
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Accettazione di un file non firmato '%s'."
+msgstr "Accettazione di un file senza firma '%s'."
 
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
