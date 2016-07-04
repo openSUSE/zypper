@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 07:39+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2318,13 +2318,13 @@ msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
-"Il controllo GPG è disabilitato nella configurazione dell'archivio '%1%'. "
+"Il controllo GPG è disabilitato nella configurazione del repository '%1%'. "
 "Impossibile verificare l'integrità e l'origine dei pacchetti."
 
 #: src/repos.cc:1622
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
-msgstr "Il repository '%s' è stato aggiunto con successo"
+msgstr "Il repository '%s' è stato aggiunto"
 
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:1630
