@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 09:04+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 09:05+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -5952,15 +5952,15 @@ msgstr "I seguenti processi in esecuzione utilizzano file eliminati:"
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
-msgstr "Si potrebbe voler riavviare questi processi."
+msgstr "Potrebbe essere necessario riavviare questi processi."
 
 #: src/ps.cc:168
 #, c-format, boost-format
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
 msgstr ""
-"Si veda '%s' per informazioni riguardo il significato dei valori nella "
-"tabella soprastante."
+"Controllare '%s' per informazioni riguardo al significato dei valori nella "
+"tabella sopra."
 
 #: src/ps.cc:175
 msgid ""
@@ -5968,31 +5968,31 @@ msgid ""
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
 msgstr ""
-"Nota: se non si esegue come root la ricerca dei file è limitata ai soli file "
-"per cui si ha il permesso di accedere tramite la funzione di sistema "
+"Nota: se non si esegue come root, la ricerca dei file è limitata ai soli "
+"file per cui si ha il permesso di accedere tramite la funzione di sistema "
 "stat(2). Il risultato potrebbe essere incompleto."
 
 #: src/source-download.cc:208
 #, c-format, boost-format
 msgid "Can't create or access download directory '%s'."
-msgstr "Impossibile creare o accedere alla directory degli scaricamenti '%s'."
+msgstr "Impossibile creare o accedere alla directory di download '%s'."
 
 #: src/source-download.cc:221
 #, c-format, boost-format
 msgid "Using download directory at '%s'."
-msgstr "Si sta usando la directory degli scaricamenti '%s'."
+msgstr "Directory di download in uso: '%s'."
 
 #: src/source-download.cc:231 src/source-download.cc:262
 msgid "Failed to read download directory"
-msgstr "Impossibile leggere la directory degli scaricamenti"
+msgstr "Impossibile leggere la directory di download"
 
 #: src/source-download.cc:236
 msgid "Scanning download directory"
-msgstr "Scansione della directory degli scaricamenti"
+msgstr "Scansione della directory di download in corso"
 
 #: src/source-download.cc:266
 msgid "Scanning installed packages"
-msgstr "Scansione dei pacchetti installati"
+msgstr "Scansione pacchetti installati in corso"
 
 #: src/source-download.cc:285
 msgid "Installed packages:"
