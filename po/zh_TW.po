@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 09:28+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 09:30+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4678,7 +4678,7 @@ msgstr "位置 '%s' 暫時無法存取。"
 #: zypp/media/MediaException.cc:223
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr " SSL 驗證問題，確認 '%s' 的 CA 憑證是正確的。"
+msgstr " SSL 證書問題，驗證 %s 的 CA 證書是否正確。"
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
