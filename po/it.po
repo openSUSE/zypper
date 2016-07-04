@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 07:29+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2014,7 +2014,7 @@ msgstr "Il repository disabilitato '%s' viene ignorato"
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Si ignora il repository '%s' a causa dell'opzione '%s'."
+msgstr "L'archivio '%s' viene ignorato a causa dell'opzione '%s'."
 
 #: src/repos.cc:749
 #, c-format, boost-format
