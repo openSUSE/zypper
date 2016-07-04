@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 04:14+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -2763,7 +2763,8 @@ msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr ""
-"Игнорирую %s без аргумента, так как был указан похожий параметр с аргументом."
+"Игнорируется параметр %s без аргумента, так как был указан похожий параметр "
+"с аргументом."
 
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:280
@@ -2862,7 +2863,7 @@ msgstr ""
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
-msgstr "Обновлений не найдено."
+msgstr "Не найдено обновлений."
 
 #. translator: Table headline
 #: src/update.cc:621
@@ -2891,7 +2892,7 @@ msgstr "Доступная версия"
 
 #: src/update.cc:969
 msgid "No matching issues found."
-msgstr "Соответствий не найдено."
+msgstr "Соответствия не найдены."
 
 #: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
