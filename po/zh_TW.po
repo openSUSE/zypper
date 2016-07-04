@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 01:53+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 02:43+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -1074,7 +1074,7 @@ msgstr "希臘"
 #. :GRC:300:
 #: zypp/CountryCode.cc:246
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "南喬治亞語南三明治群島"
+msgstr "南喬治亞及南三明治群島"
 
 #. :SGS:239:
 #: zypp/CountryCode.cc:247
@@ -1158,7 +1158,7 @@ msgstr "英屬印度洋領土"
 #. :IOT:086:
 #: zypp/CountryCode.cc:263
 msgid "Iraq"
-msgstr "伊拉客"
+msgstr "伊拉克"
 
 #. :IRQ:368:
 #: zypp/CountryCode.cc:264
@@ -1350,7 +1350,7 @@ msgstr "馬利"
 #. :MLI:466:
 #: zypp/CountryCode.cc:302
 msgid "Myanmar"
-msgstr "緬甸文"
+msgstr "緬甸語"
 
 #. :MMR:104:
 #: zypp/CountryCode.cc:303
