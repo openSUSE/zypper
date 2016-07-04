@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 07:42+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2384,8 +2384,8 @@ msgstr ""
 #: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr ""
-"È stato trovato un archivio senza un alias definito nel file; l'archivio "
-"verrà ignorato."
+"È stato trovato un repository senza un alias definito nel file; il "
+"repository verrà ignorato."
 
 #: src/repos.cc:1779
 #, c-format, boost-format
