@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 09:11+0000\n"
-"Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
+"PO-Revision-Date: 2016-07-04 09:13+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Hungarian "
 "<https://l10n.opensuse.org/projects/libzypp/master/hu/>\n"
 "Language: hu\n"
@@ -1836,7 +1836,7 @@ msgstr "Szváziföld"
 #. :SWZ:748:
 #: zypp/CountryCode.cc:368
 msgid "Turks and Caicos Islands"
-msgstr "Turks és Caicos-szigetek"
+msgstr "Turks- és Caicos-szigetek"
 
 # TD
 #. :TCA:796:
@@ -2009,7 +2009,7 @@ msgstr "Vanuatu"
 #. :VUT:548:
 #: zypp/CountryCode.cc:397
 msgid "Wallis and Futuna"
-msgstr "Wallis és Futuna-szigetek"
+msgstr "Wallis és Futuna"
 
 #. :WLF:876:
 #: zypp/CountryCode.cc:398
