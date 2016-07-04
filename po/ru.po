@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:39+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-04 05:40+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -5327,7 +5327,7 @@ msgstr "Для установки или удаления пакетов нео�
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/Zypper.cc:3924
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "Игнорирую аргументы, отмечаю весь репозиторий."
+msgstr "Игнорирование аргументов, являющихся метками всего репозитария."
 
 #: src/Zypper.cc:3935
 #, c-format, boost-format
