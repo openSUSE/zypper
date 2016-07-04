@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:44+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 05:47+0000\n"
+"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -5641,7 +5641,7 @@ msgstr "Проверка зависимостей..."
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:378
 msgid "Computing upgrade..."
-msgstr "Просчёт обновления..."
+msgstr "Просчет обновления..."
 
 #: src/solve-commit.cc:392
 msgid "Generating solver test case..."
@@ -5662,8 +5662,8 @@ msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
-"Проверка запущенных процессов, использующих удалённые библиотеки, отключена "
-"в zypper.conf. Для ручной проверки запустите '%s'."
+"Проверка запущенных процессов, использующих удаленные библиотеки, отключена "
+"в zypper.conf. Для ручной проверки запустите \"%s\"."
 
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
