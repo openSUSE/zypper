@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-13 18:54+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-07-04 17:31+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
-"<http://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
+"<https://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.5\n"
+"X-Generator: Weblate 2.6\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -35,7 +35,7 @@ msgstr "Exceção de Hal"
 
 #: zypp/Url.cc:114
 msgid "Invalid LDAP URL query string"
-msgstr "Texto de consulta de URL LDAP inválida"
+msgstr "String de consulta de URL de LDAP inválida"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
@@ -80,7 +80,7 @@ msgstr "Fornece"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
-msgstr "Pré-requer"
+msgstr "Pré-requisitos"
 
 #: zypp/Dep.cc:98
 msgid "Requires"
@@ -88,7 +88,7 @@ msgstr "Requer"
 
 #: zypp/Dep.cc:99
 msgid "Conflicts"
-msgstr "Conflita"
+msgstr "Está em conflito"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
@@ -273,7 +273,7 @@ msgstr "Tipo de assinatura desconhecido"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
 msgid "Signature does not verify"
-msgstr "A assinatura não verifica"
+msgstr "Assinatura não verificada"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2371
@@ -360,12 +360,12 @@ msgstr "Construindo o cache do repositório '%s'"
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "Não foi possível criar o cache em %s - sem permissão de escrita."
+msgstr "Impossível criar o cache em %s - sem permissão de gravação."
 
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "Falha ao fazer o cache do repositório (%d)."
+msgstr "Falha ao armazenar .repo (%d) em cache."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
@@ -380,7 +380,7 @@ msgstr "Tipo de repositório não identificado"
 #: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
-msgstr "Ocorreu um erro ao tentar ler a partir de '%s'"
+msgstr "Erro ao tentar ler de '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
@@ -435,7 +435,7 @@ msgstr "Componente inválido %s"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
-msgstr "A análise de texto de consulta não é suportada para esta URL"
+msgstr "A análise de strings de consulta não é suportada para este URL"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
@@ -486,7 +486,7 @@ msgstr "Caminho relativo não permitido se existir autoridade"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
-msgstr "O texto codificado contém um byte NUL"
+msgstr "A string codificada contém um byte NUL"
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
@@ -544,7 +544,7 @@ msgstr "O comando encerrou com status %d."
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "Comando foi morto pelo sinal %d (%s)."
+msgstr "Comando eliminado pelo sinal %d (%s)."
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
@@ -1734,7 +1734,7 @@ msgstr "Tadjiquistão"
 #. language code: tkl
 #: zypp/CountryCode.cc:374 zypp/LanguageCode.cc:1045
 msgid "Tokelau"
-msgstr "Toquelauano"
+msgstr "Tokelau"
 
 #. :TKL:772:
 #: zypp/CountryCode.cc:375
@@ -2064,7 +2064,7 @@ msgstr "Aymara"
 #. language code: aze az
 #: zypp/LanguageCode.cc:235
 msgid "Azerbaijani"
-msgstr "Azeri"
+msgstr "Azerbaidjano"
 
 #. language code: bad
 #: zypp/LanguageCode.cc:237
@@ -4242,7 +4242,7 @@ msgstr "Zunhi"
 #: zypp/KeyRing.cc:522
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr "Tentou importar a chave não existente %s no chaveiro %s"
+msgstr "Tentativa de importar a chave não existente %s para o chaveiro %s"
 
 #: zypp/KeyRing.cc:566
 msgid "Failed to delete key."
@@ -4300,9 +4300,9 @@ msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
 msgstr ""
-"O gerenciamento do sistema está bloqueado pelo aplicativo com o PID %d "
-"(%s).\n"
-"Feche este aplicativo antes de tentar novamente."
+"O gerenciamento do sistema está bloqueado pelo aplicativo com o pid %d (%s)."
+"\n"
+"Feche esse aplicativo antes de tentar novamente."
 
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
@@ -4321,7 +4321,7 @@ msgstr "problema com o pacote instalado %s"
 
 #: zypp/solver/detail/SATResolver.cc:986
 msgid "conflicting requests"
-msgstr "requisições conflitantes"
+msgstr "solicitações conflitantes"
 
 #: zypp/solver/detail/SATResolver.cc:989
 msgid "some dependency problem"
@@ -4330,7 +4330,7 @@ msgstr "algum problema de dependência"
 #: zypp/solver/detail/SATResolver.cc:992
 #, c-format, boost-format
 msgid "nothing provides requested %s"
-msgstr "ninguém fornece o pacote requerido %s"
+msgstr "ninguém fornece o pacote solicitado %s"
 
 #: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
 msgid "Have you enabled all requested repositories?"
