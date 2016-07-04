@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 06:02+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-04 06:03+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -6336,15 +6336,15 @@ msgstr ""
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
-msgstr "Невозможно инициализировать обработчик файла конфигурации."
+msgstr "Невозможно инициализировать анализатор файла конфигурации."
 
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
-msgstr "Ошибка Augeas: сбой задания загрузки конфигурационного файла."
+msgstr "Ошибка Augeas: сбой задания загрузки файла конфигурации."
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
-msgstr "Невозможно обработать конфигурационные файлы."
+msgstr "Невозможно обработать файлы конфигурации."
 
 #: src/utils/Augeas.cc:99
 msgid "Error parsing zypper.conf:"
