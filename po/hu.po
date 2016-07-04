@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 12:16+0000\n"
-"Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
+"PO-Revision-Date: 2016-07-04 12:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Hungarian "
 "<https://l10n.opensuse.org/projects/zypper/master/hu/>\n"
 "Language: hu\n"
@@ -599,7 +599,7 @@ msgstr "Interaktív"
 
 #: src/info.cc:354 src/search.cc:318
 msgid "Recommended"
-msgstr "Ajánlott"
+msgstr "Javasolt"
 
 #: src/info.cc:356 src/search.cc:320
 msgid "Suggested"
@@ -807,8 +807,7 @@ msgstr "A(z) %1% manuális bejegyzése nem jeleníthető meg"
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr ""
-"A(z) '%s' nem található a csomagnévben. Próbálja meg képességben keresni."
+msgstr "a(z) '%s' nem található a nevek között. Keresés a képességek között."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
@@ -818,7 +817,7 @@ msgstr "A(z) '%s' csomag nem található."
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "'%s' nem található."
+msgstr "A(z) '%s' javítás nem található."
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
@@ -844,12 +843,12 @@ msgstr "A(z) '%s' objektum nem található."
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "A(z) '%s' fájl nem található a megadott telepítési forrásban."
+msgstr "A(z) '%s' csomag nem található a megadott telepítési forrásokban."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "A(z) '%s' javítás nem található a megadott telepítési forrásban."
+msgstr "A(z) '%s' javítás nem található a megadott telepítési forrásokban."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
@@ -2106,7 +2105,7 @@ msgstr "Be"
 
 #: src/repos.cc:1103 src/repos.cc:1104
 msgid "Off"
-msgstr "Ki"
+msgstr "Kikapcsolva"
 
 #: src/repos.cc:1104
 msgid "Keep Packages"
@@ -3242,7 +3241,7 @@ msgstr "Részletesség: %d"
 #: src/Zypper.cc:785
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr "Érvénytelen táblázatstílus %d."
+msgstr "Érvénytelen táblázatstílus: %d."
 
 #: src/Zypper.cc:786
 #, c-format, boost-format
@@ -5902,9 +5901,9 @@ msgid ""
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
 msgstr ""
-"Megjegyzés: Nem root felhasználóként való futtatáskor a fájlkeresés azokra "
-"korlátozódik, amelyekhez hozzáférése van a a rendszer stat(2) függvényének. "
-"Az eredmény lehet, hogy nem lesz teljes. "
+"Megjegyzés: Nem root felhasználóként való futtatáskor a fájlkeresés azokra a "
+"fájlokra korlátozódik, amelyekhez hozzáférése van a a rendszer stat(2) "
+"függvényének. Az eredmény lehet, hogy nem lesz teljes."
 
 #: src/source-download.cc:208
 #, c-format, boost-format
