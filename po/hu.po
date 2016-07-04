@@ -19,15 +19,16 @@ msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2013-03-02 05:43+0100\n"
-"Last-Translator: Kalman Kemenczy <kkemenczy@opensuse.org>\n"
-"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"PO-Revision-Date: 2016-07-04 08:44+0000\n"
+"Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
+"Language-Team: Hungarian "
+"<https://l10n.opensuse.org/projects/libzypp/master/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -346,11 +347,10 @@ msgstr ""
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
-#, fuzzy
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "A megadott URL nem tartalmaz érvényes metaadatot"
-msgstr[1] "A megadott URL nem tartalmaz érvényes metaadatot"
+msgstr[0] "A megadott URL-címen nem találhatók érvényes metaadatok"
+msgstr[1] "A megadott URL-címeken nem találhatók érvényes metaadatok"
 
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
 #, c-format, boost-format
@@ -580,11 +580,11 @@ msgstr "(24 órán belül lejár)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(24 órán belül lejár)"
-msgstr[1] "(24 órán belül lejár)"
+msgstr[0] "(%d napon belül lejár)"
+msgstr[1] "(%d napon belül lejár)"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
