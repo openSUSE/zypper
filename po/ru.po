@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:56+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-04 05:57+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -6102,7 +6102,7 @@ msgstr "Ошибка при загрузке пакета \"%s\"."
 #: src/download.cc:204
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
-msgstr "Не загружаю пакет '%s'."
+msgstr "Пакет '%s' не загружается."
 
 #: src/PackageArgs.cc:204
 #, c-format, boost-format
