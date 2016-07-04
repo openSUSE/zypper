@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 09:12+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 09:13+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6196,8 +6196,7 @@ msgstr "Accettare i termini della licenza?"
 #: src/misc.cc:175
 msgid "Aborting installation due to the need for license confirmation."
 msgstr ""
-"Interruzione dell'installazione a causa della necessità di confermare una "
-"licenza."
+"Installazione interrotta a causa della necessità di confermare una licenza."
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:178
@@ -6206,16 +6205,17 @@ msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
 msgstr ""
-"Riavviare l'operazione in modalità interattiva e confermare la propria "
-"accettazione delle licenze richieste, oppure usare l'opzione %s."
+"Avviare nuovamente l'operazione in modalità interattiva e confermare "
+"l'accettazione dei termini di licenza obbligatori, oppure utilizzare "
+"l'opzione %s."
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:187
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
-"Interruzione dell'installazione a causa della non accettazione della licenza "
-"%s %s."
+"Interruzione dell’installazione a causa di un disaccordo dell’utente con la "
+"licenza %s %s."
 
 #: src/misc.cc:225
 msgid "License"
@@ -6237,7 +6237,7 @@ msgstr "Pacchetti installati: %d"
 #: src/misc.cc:258
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "Pacchetti installati che hanno una controparte nei repository: %d"
+msgstr "Pacchetti installati con controparti negli archivi : %d"
 
 #: src/misc.cc:259
 #, c-format, boost-format
