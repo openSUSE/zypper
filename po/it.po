@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 08:07+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 08:08+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2459,8 +2459,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr ""
-"È stata disabilitata la memorizzazione nella cache dei file RPM per "
-"l'archivio '%s'."
+"È stata disabilitata la memorizzazione nella cache dei file RPM per il "
+"repository '%s'."
 
 #: src/repos.cc:2066
 #, c-format, boost-format
@@ -2480,7 +2480,7 @@ msgstr "La priorità del repository '%s' è stata impostata a %d."
 #: src/repos.cc:2080
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "Il nome del repository '%s' è stata impostato a '%s'."
+msgstr "Il nome del repository '%s' è stato impostato a '%s'."
 
 #: src/repos.cc:2091
 #, c-format, boost-format
