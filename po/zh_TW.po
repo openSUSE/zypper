@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:26+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 05:36+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -861,7 +861,7 @@ msgstr "'%s' 已經安裝。"
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "'%s' 提供 '%s' 已經安裝。"
+msgstr "「%s」(提供「%s」) 已經安裝。"
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
@@ -880,7 +880,7 @@ msgstr "'%s' 無更新候選。"
 msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
-msgstr "有更新候選 '%s' 針對 '%s' 進行更新，但它不符合特定版本，架構或套件庫。"
+msgstr "有更新候選「%s」(適用於「%s」)，但它不符合特定版本、架構或儲存庫。"
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -904,7 +904,7 @@ msgstr ""
 msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
-msgstr "有更新候選為 '%s'，但他已被鎖定。使用 '%s' 來解除鎖定。"
+msgstr "有一個「%s」的更新候選，但被鎖定。請使用「%s」解除鎖定。"
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -5329,16 +5329,16 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"套件完整性檢查失敗。 安裝來源或媒體可能有問題。請嘗試下列其中一個動作：\n"
-" \n"
-" – 在重試一次之前的指令\n"
-" – 使用 'zypper refresh' 重新整理套件庫\n"
-" – 使用另一個安裝媒體 (例如媒體損壞時)\n"
-" – 使用另一個套件庫"
+"套件完整性檢查失敗。儲存庫或媒體可能有問題。請嘗試下列其中一個動作：\n"
+"\n"
+"- 重試之前的指令\n"
+"- 使用 zypper refresh 重新整理儲存庫\n"
+"- 使用另一個安裝媒體 (例如媒體損壞時)\n"
+"- 使用另一個儲存庫"
 
 #: src/solve-commit.cc:855
 msgid "Problem occured during or after installation or removal of packages:"
-msgstr "安裝或移除套件時(或之後)發生錯誤："
+msgstr "安裝或移除套件時 (或之後) 發生問題："
 
 #: src/solve-commit.cc:863
 msgid "Installation has completed with error."
