@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:31+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 07:33+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2069,11 +2069,11 @@ msgstr "Inizializzazione della destinazione"
 
 #: src/repos.cc:897
 msgid "Target initialization failed:"
-msgstr "Inizializzazione della destinazione fallita:"
+msgstr "Inizializzazione destinazione non riuscita:"
 
 #: src/repos.cc:898 src/Zypper.cc:4440
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr "Eseguire 'zypper refresh' come root potrebbe risolvere il problema."
+msgstr "È possibile risolvere il problema avviando 'zypper refresh' come root."
 
 #: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
@@ -2149,7 +2149,7 @@ msgstr "Prefisso del percorso"
 
 #: src/repos.cc:1108
 msgid "Parent Service"
-msgstr "Servizio genitore"
+msgstr "Servizio principale"
 
 #: src/repos.cc:1109
 msgid "Keywords"
@@ -2174,12 +2174,12 @@ msgstr "Impossibile aprire %s in scrittura."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
-msgstr "Forse non si dispone dei permessi di scrittura?"
+msgstr "Verificare di disporre dei Autorizzazioni di scrittura."
 
 #: src/repos.cc:1196
 #, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "I repository sono stati esportati con successo in %s."
+msgstr "Archivi esportati correttamente in %s."
 
 #: src/repos.cc:1248 src/repos.cc:1392
 msgid "Specified repositories: "
