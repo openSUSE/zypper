@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 03:34+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 03:35+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -736,8 +736,8 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
-"將 zypper 全域選項與個別指令一起使用，以及在 '%1%' 執行個別指令\n"
-"目前並不支援。\n"
+"目前不支援將 zypper 全域選項與子指令一同使用，也不支援\n"
+"執行「%1%」中的子指令。\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/subcommand.cc:418
@@ -5618,7 +5618,7 @@ msgstr "不同的套件種類在 '%s' 選項和 '%s' 參數中被指定。我們
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "'%s' 不是一個套件名稱或相容性。"
+msgstr "「%s」不是有效的套件或功能名稱。"
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
