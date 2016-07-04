@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-04 08:20+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4518,7 +4518,7 @@ msgstr "未知的符合模式 '%s'"
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "未知的相符模式「%s」(針對樣式「%s」)"
+msgstr "未知的符合模式 '%s' (針對樣式 '%s')"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
