@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 08:13+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 08:14+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2706,7 +2706,8 @@ msgstr "Si è verificato un problema durante il caricamento dei dati da '%s'"
 #: src/repos.cc:3117
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr "Impossibile aggiornare l'archivio '%s'. Viene usata la vecchia cache."
+msgstr ""
+"Impossibile aggiornare il repository '%s'. Viene usata la vecchia cache."
 
 #: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
