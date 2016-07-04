@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 07:17+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -893,7 +893,7 @@ msgstr "Il pacchetto '%s' non è installato."
 #: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr "Non è installato alcun fornitore per '%s'."
+msgstr "Non è installato alcun provider di '%s'."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
