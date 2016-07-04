@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:53+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-04 05:55+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -5909,13 +5909,13 @@ msgstr "Следующие запущенные процессы использ�
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
-msgstr "Возможно, вам понадобится перезапустить их."
+msgstr "Возможно, понадобится перезапустить эти процессы."
 
 #: src/ps.cc:168
 #, c-format, boost-format
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
-msgstr "См. '%s' для сведений о значениях в приведённой таблице."
+msgstr "Сведения о значениях в приведенной таблице см. в \"%s\"."
 
 #: src/ps.cc:175
 msgid ""
@@ -5930,12 +5930,12 @@ msgstr ""
 #: src/source-download.cc:208
 #, c-format, boost-format
 msgid "Can't create or access download directory '%s'."
-msgstr "Невозможно создать или получить доступ к каталогу загрузки '%s'."
+msgstr "Невозможно создать каталог загрузки %s или получить к нему доступ."
 
 #: src/source-download.cc:221
 #, c-format, boost-format
 msgid "Using download directory at '%s'."
-msgstr "Используется загрузочный каталог '%s'."
+msgstr "Используется загрузочный каталог \"%s\"."
 
 #: src/source-download.cc:231 src/source-download.cc:262
 msgid "Failed to read download directory"
@@ -5982,7 +5982,7 @@ msgstr "Установленный пакет"
 msgid "Use '--verbose' option for a full list of required source packages."
 msgstr ""
 "Полный список требуемых пакетов с исходным кодом доступен при использовании "
-"параметра '--verbose'."
+"параметра \"--verbose\"."
 
 #: src/source-download.cc:379
 msgid "Deleting superfluous source packages"
@@ -5991,7 +5991,7 @@ msgstr "Удаление лишних пакетов с исходным код�
 #: src/source-download.cc:390
 #, c-format, boost-format
 msgid "Failed to remove source package '%s'"
-msgstr "Не удалось удалить пакет с исходным кодом '%s'"
+msgstr "Не удалось удалить пакет с исходным кодом \"%s\""
 
 #: src/source-download.cc:401
 msgid "No superfluous source packages to delete."
@@ -6004,12 +6004,12 @@ msgstr "Загрузка требуемых пакетов с исходным �
 #: src/source-download.cc:430
 #, c-format, boost-format
 msgid "Source package '%s' is not provided by any repository."
-msgstr "Пакет с исходным кодом '%s' отсутствует в репозиториях."
+msgstr "Пакет с исходным кодом \"%s\" отсутствует в репозиториях."
 
 #: src/source-download.cc:449 src/source-download.cc:463
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
-msgstr "Ошибка при загрузке пакета с исходным кодом '%s'."
+msgstr "Ошибка при загрузке пакета с исходным кодом \"%s\"."
 
 #: src/source-download.cc:474
 msgid "No source packages to download."
