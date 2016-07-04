@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 08:44+0000\n"
+"PO-Revision-Date: 2016-07-04 08:45+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian "
 "<https://l10n.opensuse.org/projects/libzypp/master/hu/>\n"
@@ -566,7 +566,7 @@ msgstr "A parancs végrehajtása ismeretlen hibával leállt."
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:116
 msgid "(does not expire)"
-msgstr "(nem járt le)"
+msgstr "(nem jár le)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:125
