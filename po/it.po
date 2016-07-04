@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:42+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 07:43+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2391,7 +2391,7 @@ msgstr ""
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr ""
-"Non è stato definito alcun URI per l'archivio '%s'; l'archivio verrà "
+"Non è stato definito alcun URI per il repository '%s'; il repository verrà "
 "ignorato."
 
 #: src/repos.cc:1821
@@ -2405,8 +2405,8 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"Impossibile cambiare l'alias del repository '%s'. Il repository appartiene "
-"al servizio '%s' che è responsabile per le impostazioni dell'alias."
+"Impossibile modificare l'alias del repository '%s'. Il repository appartiene "
+"al servizio '%s', responsabile per le impostazioni dell'alias."
 
 #: src/repos.cc:1854
 #, c-format, boost-format
