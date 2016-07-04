@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 17:40+0000\n"
-"Last-Translator: Samanta Magalhaes <samanta@texttrans.com>\n"
+"PO-Revision-Date: 2016-07-04 17:52+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -4433,12 +4433,12 @@ msgstr "remover bloqueio para permitir a instalação de %s"
 #: zypp/solver/detail/SATResolver.cc:1217
 #: zypp/solver/detail/SATResolver.cc:1238
 msgid "This request will break your system!"
-msgstr "Esta requisição irá deixar seu sistema inconsistente!"
+msgstr "Esta solicitação travará o seu sistema!"
 
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
 msgid "ignore the warning of a broken system"
-msgstr "ignorar o aviso de um sistema inconsistente"
+msgstr "igorar o aviso de um sistema travado"
 
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
@@ -4560,7 +4560,7 @@ msgstr "Expressão regular inválida '%s'"
 
 #: zypp/misc/CheckAccessDeleted.cc:242
 msgid "Please install package 'lsof' first."
-msgstr "Instale o pacote 'lsof' primeiro."
+msgstr "Instale o pacote ''lsof'' primeiro."
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
@@ -4596,7 +4596,7 @@ msgstr "Arquivo '%s' não encontrado na mídia '%s'"
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
 msgid "Cannot write file '%s'."
-msgstr "Não foi possível salvar o arquivo '%s'."
+msgstr "Não é possível gravar o arquivo '%s'."
 
 #: zypp/media/MediaException.cc:72
 msgid "Medium not attached"
@@ -4637,7 +4637,7 @@ msgstr "Nome de host vazio no URI"
 
 #: zypp/media/MediaException.cc:130
 msgid "Empty filesystem in URI"
-msgstr "Sistema de arquivos vazios no URI"
+msgstr "Sistema de arquivos vazio no URI"
 
 #: zypp/media/MediaException.cc:135
 msgid "Empty destination in URI"
@@ -4677,7 +4677,7 @@ msgstr "A mídia fonte '%s' não contém a mídia desejada"
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "A mídia '%s' está sendo usado por outra instância"
+msgstr "O meio '%s' está sendo usado por outra instância"
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
