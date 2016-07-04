@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 07:13+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 07:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4320,7 +4320,7 @@ msgstr "不支援的要求"
 #: zypp/solver/detail/SATResolver.cc:1003
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr "%s 是由系統提供，且無法被清除。"
+msgstr "%s 由系統提供，無法清除"
 
 #: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
@@ -4330,7 +4330,7 @@ msgstr "%s 無法安裝"
 #: zypp/solver/detail/SATResolver.cc:1012
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr "無法提供 %s 這是被 %s 所需要的"
+msgstr "無法提供 %s (%s 需要此項目)"
 
 #: zypp/solver/detail/SATResolver.cc:1017
 #, c-format, boost-format
@@ -4340,7 +4340,7 @@ msgstr "無法同時安裝 %s 和 %s"
 #: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%s 與 %s 衝突(由 %s 提供)"
+msgstr "%s 與 %s 衝突 (由 %s 提供)"
 
 #: zypp/solver/detail/SATResolver.cc:1027
 #, c-format, boost-format
@@ -4350,12 +4350,12 @@ msgstr "%s 汰換 %s (由 %s 提供)"
 #: zypp/solver/detail/SATResolver.cc:1032
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
-msgstr "安裝 %s 汰換 %s (由 %s 提供)"
+msgstr "安裝的 %s 會汰換 %s (由 %s 提供)"
 
 #: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
-msgstr "解決方案 %s 與 %s 衝突(由自己提供)"
+msgstr "解決 %s 與 %s 之間的衝突 (由自己提供)"
 
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
