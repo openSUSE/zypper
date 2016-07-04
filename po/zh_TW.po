@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 03:55+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 03:56+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -5485,7 +5485,7 @@ msgstr "使用 '--verbose' 選項來顯示必需的原始碼套件完整列表�
 
 #: src/source-download.cc:379
 msgid "Deleting superfluous source packages"
-msgstr "正在刪除非必要的來源套件"
+msgstr "正在移除多餘的原始碼套件"
 
 #: src/source-download.cc:390
 #, c-format, boost-format
