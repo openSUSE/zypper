@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 09:49+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 09:51+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6492,7 +6492,8 @@ msgstr "'%s', risposta non valida."
 #: src/utils/prompt.cc:326
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr "Inserire '%s' per '%s' o '%s' per '%s' se null'altro funziona."
+msgstr ""
+"Se non si trovano altre soluzioni, immettere '%s' per '%s' o '%s' per '%s'."
 
 #: src/utils/misc.cc:113
 msgid "package"
@@ -6597,7 +6598,7 @@ msgstr "Impossibile stabilire un valore per <platform>."
 
 #: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
-msgstr "Si usi obs://<progetto>/<piattaforma>"
+msgstr "Usare obs://<progetto>/<piattaforma>"
 
 #: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
@@ -6616,8 +6617,7 @@ msgstr "La forma corretta è obs://<progetto>/[piattaforma]"
 #: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
-"Si è verificato un problema copiando l'RPM specificato nella directory della "
-"cache."
+"Si è verificato un problema durante la copia del RPM specificato nell'indice."
 
 #: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
@@ -6626,7 +6626,7 @@ msgstr "Forse lo spazio su disco si sta esaurendo."
 # TLABEL modules/inst_config_x11.ycp:578
 #: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
-msgstr "Si è verificato un problema recuperando il file RPM specificato"
+msgstr "Si è verificato un problema durante il recupero del RPM specificato"
 
 #: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
