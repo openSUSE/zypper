@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:41+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
+"PO-Revision-Date: 2016-07-04 05:43+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -5344,11 +5344,11 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
-"Статус установки исправления определяется исключительно на основе его "
+"Состояние установленного исправления определяется только на основе "
 "зависимостей.\n"
-"Исправления не устанавливаются в смысле копируемых файлов, записей баз "
+"Исправления не устанавливаются в смысле копирования файлов, записей баз "
 "данных\n"
-"или чего-либо похожего."
+"и т. п."
 
 #: src/Zypper.cc:3956
 msgid "Uninstallation of a source package not defined and implemented."
@@ -5409,12 +5409,12 @@ msgstr "Указан режим точного совпадения (match-exact
 #: src/Zypper.cc:4922 src/Zypper.cc:4962
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
-msgstr "Неизвестный тип пакета '%s'."
+msgstr "Неизвестный тип пакета \"%s\"."
 
 #: src/Zypper.cc:4273
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
-msgstr "Указанный репозиторий '%s' отключён."
+msgstr "Указанный репозиторий \"%s\" отключен."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
@@ -5445,7 +5445,7 @@ msgstr "Операция не поддерживается."
 #: src/Zypper.cc:4685
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
-msgstr "Для обновления установленных продуктов используйте '%s'."
+msgstr "Для обновления установленных продуктов используйте \"%s\"."
 
 #: src/Zypper.cc:4693
 #, c-format, boost-format
