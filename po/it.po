@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 07:34+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2196,7 +2196,7 @@ msgstr "I repository specificati non sono abilitati o definiti."
 
 #: src/repos.cc:1312
 msgid "There are no enabled repositories defined."
-msgstr "Non esistono repository abilitati definiti."
+msgstr "Non è stato definito alcun archivio abilitato."
 
 #: src/repos.cc:1313
 #, c-format, boost-format
