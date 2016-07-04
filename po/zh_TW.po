@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 03:36+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 03:39+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -743,12 +743,12 @@ msgstr ""
 #: src/subcommand.cc:418
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr "可用的 zypper 個別指令 (在 %1%)"
+msgstr "%1% 中可用的 zypper 子指令"
 
 #. translators: headline of an enumeration
 #: src/subcommand.cc:423
 msgid "Zypper subcommands available from elsewhere on your $PATH"
-msgstr "可用的 zypper 個別指令 (在您的 $PATH)"
+msgstr "您的 $PATH 中可用的 zypper 子指令"
 
 #. translators: helptext; %1% is a zypper command
 #: src/subcommand.cc:428
@@ -5613,7 +5613,7 @@ msgstr "'%s' 套件名稱找不到。請試試 '%s'。"
 msgid ""
 "Different package type specified in '%s' option and '%s' argument. Will use "
 "the latter."
-msgstr "不同的套件種類在 '%s' 選項和 '%s' 參數中被指定。我們將 使用後者。"
+msgstr "「%s」選項和「%s」參數中指定了不同的套件類型，將使用後者中的套件。"
 
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
