@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 05:46+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -5278,7 +5278,7 @@ msgstr "切換顯示套件版本(v)。"
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:656
 msgid "Toggle display of package architectures."
-msgstr "切換顯示套件架構(a)。"
+msgstr "切換顯示套件架構。"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: src/solve-commit.cc:658
