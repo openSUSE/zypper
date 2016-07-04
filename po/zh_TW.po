@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 03:44+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 03:51+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -765,17 +765,17 @@ msgstr "%1% 的手動輸入無法顯示"
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "'%s' 在套件名稱中找不到。請嘗試用相容性。"
+msgstr "套件名稱中找不到「%s」。正在嘗試其他功能。"
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr "套件 '%s' 找不到。"
+msgstr "找不到套件「%s」。"
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "修補程式 '%s' 找不到。"
+msgstr "修補程式「%s」找不到。"
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
@@ -5562,7 +5562,7 @@ msgstr "完成"
 #: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
 #: src/output/OutNormal.cc:321
 msgid "Retrieving:"
-msgstr "正在取出："
+msgstr "取回︰"
 
 #: src/output/OutNormal.cc:256
 msgid "starting"
@@ -5570,7 +5570,7 @@ msgstr "正在啟動"
 
 #: src/output/OutNormal.cc:411
 msgid "No help available for this prompt."
-msgstr "此提示沒有說明幫助。"
+msgstr "此提示沒有可用說明。"
 
 #: src/output/OutNormal.cc:422
 msgid "no help available for this option"
