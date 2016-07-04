@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 05:47+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -5708,7 +5708,7 @@ msgstr "Просмотреть уведомления сейчас?"
 
 #: src/solve-commit.cc:532
 msgid "Computing distribution upgrade..."
-msgstr "Просчёт обновления дистрибутива..."
+msgstr "Просчет обновления дистрибутива..."
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
