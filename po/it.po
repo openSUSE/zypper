@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 07:23+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2016-07-04 07:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -1756,7 +1756,7 @@ msgstr "a/r/i/c/d"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr "Disabilita il controllo sull'autorità del certificato SSL e continua."
+msgstr "Disabilita il controllo sull'autorità di certificazione SSL e continua."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
@@ -1766,7 +1766,7 @@ msgstr "Annullare, riprovare, ignorare?"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
-msgstr "Controllo sull'autorità del certificato SSL disabilitato."
+msgstr "Controllo sull'autorità di certificazione SSL disabilitato."
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
@@ -1774,7 +1774,7 @@ msgstr "Nessun dispositivo rilevato, impossibile espellerlo."
 
 #: src/callbacks/media.cc:110
 msgid "Try to eject the device manually."
-msgstr "Provare ad espellere il dispositivo manualmente."
+msgstr "Provare a espellere manualmente il dispositivo."
 
 #: src/callbacks/media.cc:121
 msgid "Detected devices:"
@@ -1791,7 +1791,7 @@ msgstr "Selezionare il dispositivo da espellere."
 
 #: src/callbacks/media.cc:154
 msgid "Insert the CD/DVD and press ENTER to continue."
-msgstr "Inserite il CD/DVD e premete INVIO per continuare."
+msgstr "Inserire il CD/DVD e premere INVIO per continuare."
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:157
@@ -1838,8 +1838,8 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
-"Autenticazione richiesta per accedere a %s. Si deve essere root per essere "
-"in grado di leggere le credenziali da %s."
+"Autenticazione richiesta per accedere a %s. L'utente deve essere radice per "
+"leggere le credenziali da %s."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -1885,7 +1885,7 @@ msgstr ""
 #: src/repos.cc:176
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "Verifica se è necessario aggiornare i meta-dati per %s"
+msgstr "Verifica della necessità di aggiornare i metadati per %s in corso"
 
 #: src/repos.cc:202
 #, c-format, boost-format
@@ -1895,7 +1895,7 @@ msgstr "Il repository '%s' è aggiornato."
 #: src/repos.cc:208
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "Il controllo dell'aggiornamento di '%s' è stato rinviato."
+msgstr "La verifica dell'aggiornamento di '%s' è stato rinviata."
 
 #: src/repos.cc:230
 msgid "Forcing raw metadata refresh"
