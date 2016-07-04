@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 08:05+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 08:06+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2425,17 +2425,17 @@ msgstr "Repository '%s' non modificato."
 #: src/repos.cc:2001
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "La priorità dell'archivio '%s' è rimasta invariata (%d)"
+msgstr "La priorità del repository '%s' è rimasta invariata (%d)"
 
 #: src/repos.cc:2039
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
-msgstr "Il repository '%s' è stato abilitato con successo."
+msgstr "Il repository '%s' è stato abilitato."
 
 #: src/repos.cc:2041
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
-msgstr "Il repository '%s' è stato disabilitato con successo."
+msgstr "Il repository '%s' è stato disabilitato."
 
 #: src/repos.cc:2048
 #, c-format, boost-format
