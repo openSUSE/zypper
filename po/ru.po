@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 05:31+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-04 05:39+0000\n"
+"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
 "Language: ru\n"
@@ -2078,8 +2078,8 @@ msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
-"Репозиторий \"%s\" устарел. Чтобы обновить его, запустите 'zypper refresh' "
-"от имени администратора."
+"Репозиторий \"%s\" устарел. Чтобы обновить его, запустите \"zypper refresh\" "
+"от имени пользователя root."
 
 #: src/repos.cc:816
 #, c-format, boost-format
@@ -2087,8 +2087,8 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
-"Необходимо собрать кэш для репозитория \"%s\". Для этого можно запустить "
-"'zypper refresh' от имени администратора."
+"Необходимо собрать кэш для репозитория \"%s\". Для этого можно запустить \""
+"zypper refresh\" от имени пользователя root."
 
 #: src/repos.cc:820
 #, c-format, boost-format
@@ -2119,7 +2119,8 @@ msgstr "Сбой инициализации цели:"
 
 #: src/repos.cc:898 src/Zypper.cc:4440
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr "Запуск 'zypper refresh' от имени администратора может решить проблему."
+msgstr ""
+"Запуск \"zypper refresh\" от имени пользователя root может решить проблему."
 
 #: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
@@ -5203,19 +5204,19 @@ msgstr "Для обновления служб необходимы права �
 
 #: src/Zypper.cc:3350 src/Zypper.cc:3439 src/Zypper.cc:3656
 msgid "Root privileges are required for modifying system services."
-msgstr "Для изменения системных служб необходимы привилегии пользователя root."
+msgstr "Для изменения системных служб необходимы права пользователя root."
 
 #: src/Zypper.cc:3423
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
-msgstr "`%s' не является верным типом службы."
+msgstr "\"%s\" не является верным типом службы."
 
 #: src/Zypper.cc:3425
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
-"Для получения списка известных типов служб воспользуйтесь командами '%s' или "
-"'%s'."
+"Для получения списка известных типов служб воспользуйтесь командой \"%s\" "
+"или \"%s\"."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -5232,7 +5233,8 @@ msgstr "Служба '%s' не найдена."
 
 #: src/Zypper.cc:3509 src/Zypper.cc:3655 src/Zypper.cc:3734 src/Zypper.cc:3786
 msgid "Root privileges are required for modifying system repositories."
-msgstr "Для изменения системных репозиториев требуются права администратора."
+msgstr ""
+"Для изменения системных репозиториев необходимы права пользователя root."
 
 #: src/Zypper.cc:3564 src/Zypper.cc:3902
 msgid "Too few arguments."
@@ -5259,8 +5261,8 @@ msgstr "Указанный тип не является допустимым т�
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
-"Для получения списка известных типов репозиториев воспользуйтесь командами "
-"'%s' или '%s'."
+"Для получения списка известных типов репозиториев воспользуйтесь командой \"%"
+"s\" или \"%s\"."
 
 #: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
@@ -5271,7 +5273,7 @@ msgstr "Требуемый аргумент отсутствует."
 #: src/Zypper.cc:3688
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "Репозиторий '%s' не найден по псевдониму, номеру или URI-адресу."
+msgstr "Репозиторий \"%s\" не найден по псевдониму, номеру или URI-адресу."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
@@ -5287,7 +5289,7 @@ msgstr "Слишком мало аргументов. Требуются хот�
 #: src/Zypper.cc:3765
 #, c-format, boost-format
 msgid "Repository '%s' not found."
-msgstr "Репозиторий '%s' не найден."
+msgstr "Репозиторий \"%s\" не найден."
 
 #: src/Zypper.cc:3829
 #, c-format, boost-format
@@ -5296,7 +5298,8 @@ msgstr "Репозиторий %s не найден."
 
 #: src/Zypper.cc:3846
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "Для обновления системных репозиториев требуются права администратора."
+msgstr ""
+"Для обновления системных репозиториев необходимы права пользователя root."
 
 #: src/Zypper.cc:3852
 #, c-format, boost-format
@@ -5306,11 +5309,11 @@ msgstr "Общий параметр '%s' здесь не действует."
 #: src/Zypper.cc:3860
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr "При использовании '%s' аргументы не разрешены."
+msgstr "При использовании \"%s\" аргументы не разрешены."
 
 #: src/Zypper.cc:3884
 msgid "Root privileges are required for cleaning local caches."
-msgstr "Для очистки локальных кэшей требуются права администратора."
+msgstr "Для очистки локальных кэшей необходимы права пользователя root."
 
 #: src/Zypper.cc:3903
 msgid "At least one package name is required."
@@ -5318,7 +5321,7 @@ msgstr "Требуется хотя бы одно имя пакета."
 
 #: src/Zypper.cc:3912
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr "Для установки или удаления пакетов требуются права администратора."
+msgstr "Для установки или удаления пакетов необходимы права пользователя root."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
@@ -5433,7 +5436,7 @@ msgstr "Невозможно использовать %s вместе с %s."
 
 #: src/Zypper.cc:4625
 msgid "Root privileges are required for updating packages."
-msgstr "Для обновления пакетов требуются права администратора."
+msgstr "Для обновления пакетов необходимы права пользователя root."
 
 #: src/Zypper.cc:4684 src/Zypper.cc:4692 src/Zypper.cc:4765
 msgid "Operation not supported."
@@ -5463,7 +5466,7 @@ msgstr ""
 
 #: src/Zypper.cc:4801
 msgid "Root privileges are required for performing a distribution upgrade."
-msgstr "Для обновления дистрибутива требуются права администратора."
+msgstr "Для обновления дистрибутива необходимы права пользователя root."
 
 #: src/Zypper.cc:4821
 #, c-format, boost-format
@@ -5483,7 +5486,7 @@ msgstr "Использование"
 
 #: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
-msgstr "Для добавления блокировок пакетов требуются права администратора."
+msgstr "Для добавления блокировок пакетов необходимы права пользователя root."
 
 #: src/Zypper.cc:5023
 #, c-format, boost-format
@@ -5722,8 +5725,8 @@ msgstr ""
 #: src/solve-commit.cc:621
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
-"Для исправления нарушенных зависимостей пакетов требуются права "
-"администратора."
+"Для исправления нарушенных зависимостей пакетов необходимы права "
+"пользователя root."
 
 #. translators: These are the "Continue?" prompt options corresponding to
 #. "Yes / No / show Problems / Versions / Arch / Repository /
