@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 13:59+0000\n"
+"PO-Revision-Date: 2016-07-04 14:07+0000\n"
 "Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
 "\n"
@@ -141,7 +141,7 @@ msgstr " Ausführung während des Abbrechens übersprungen"
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
 #: zypp/target/TargetImpl.cc:607
 msgid "Error sending update message notification."
-msgstr "Fehler beim Senden der Aktualisierungs-Benachrichtigung"
+msgstr "Fehler beim Senden der Aktualisierungsbenachrichtigung."
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
@@ -527,7 +527,7 @@ msgstr "Das Wurzelverzeichnis kann nicht auf '%s' geändert werden (%s)."
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "Wechsel zu '%s' innerhalb chroot '%s' nicht möglich (%s)"
+msgstr "Wechsel zu '%s' innerhalb chroot '%s' nicht möglich (%s)."
 
 #: zypp/ExternalProgram.cc:361
 #, c-format, boost-format
@@ -1596,7 +1596,7 @@ msgstr "Katar"
 #. :QAT:634:
 #: zypp/CountryCode.cc:344
 msgid "Reunion"
-msgstr "Reunion"
+msgstr "Réunion"
 
 #. :REU:638:
 #: zypp/CountryCode.cc:345
