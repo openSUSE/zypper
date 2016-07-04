@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 09:06+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6012,7 +6012,7 @@ msgstr "Pacchetti di origine richiesti da scaricare:"
 
 #: src/source-download.cc:305
 msgid "Superfluous source packages in download directory:"
-msgstr "Pacchetti sorgente superflui nella directory di download:"
+msgstr "Pacchetti di origine superflui nella directory di download:"
 
 #. translators: table headers
 #: src/source-download.cc:319
@@ -6031,7 +6031,7 @@ msgstr ""
 
 #: src/source-download.cc:379
 msgid "Deleting superfluous source packages"
-msgstr "Eliminazione dei pacchetti sorgente superflui"
+msgstr "Eliminazione dei pacchetti di origine superflui"
 
 #: src/source-download.cc:390
 #, c-format, boost-format
