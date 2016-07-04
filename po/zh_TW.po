@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 08:02+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-04 08:04+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4469,7 +4469,7 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1343
 #, c-format, boost-format
 msgid "replacement of %s with %s"
-msgstr "取代 %s 以 %s"
+msgstr "取代 %s  (以 %s)"
 
 #: zypp/solver/detail/SATResolver.cc:1354
 #, c-format, boost-format
