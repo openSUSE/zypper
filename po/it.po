@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 08:36+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -4489,21 +4489,19 @@ msgstr ""
 
 #: src/Zypper.cc:2379
 msgid "Whether to allow downgrading installed resolvables."
-msgstr ""
-"Se permettere l'installazione di versioni precedenti dei risolvibili "
-"installati."
+msgstr "Se consentire il downgrade dei risolvibili installati."
 
 #: src/Zypper.cc:2380
 msgid "Whether to allow changing the names of installed resolvables."
-msgstr "Se permettere il cambio dei nomi dei risolvibili installati."
+msgstr "Se consentire il cambio dei nomi dei risolvibili installati."
 
 #: src/Zypper.cc:2381
 msgid "Whether to allow changing the architecture of installed resolvables."
-msgstr "Se permettere il cambio dell'architettura dei risolvibili installati."
+msgstr "Se consentire il cambio dell'architettura dei risolvibili installati."
 
 #: src/Zypper.cc:2382
 msgid "Whether to allow changing the vendor of installed resolvables."
-msgstr "Se permettere il cambio del fornitore dei risolvibili installati."
+msgstr "Se consentire il cambio del fornitore dei risolvibili installati."
 
 #: src/Zypper.cc:2420
 msgid ""
@@ -4643,14 +4641,13 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
 msgstr ""
-"patches (pch) [repository] ...\n"
+"patches (pch) [archivio]\n"
 "\n"
-"Elenca le patch disponibili nei repository specificati.\n"
+"Elenca gli aggiornamenti disponibili negli archivi specificati.\n"
 "\n"
-"  Opzioni del comando:\n"
+" Opzioni del comando:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Giusto un altro modo per specificare il "
-"repository.\n"
+"-r, --repo <alias|#|URI> Un altro metodo per specificare un archivio.\n"
 
 #: src/Zypper.cc:2525
 msgid ""
