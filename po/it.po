@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 08:49+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -5282,7 +5282,7 @@ msgstr "Il tipo specificato non è un tipo di repository valido:"
 #: src/Zypper.cc:3637
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Per un elenco dei tipi di archivio conosciuti, vedere '%s' o '%s'."
+msgstr "Per un elenco dei tipi di repository conosciuti, vedere '%s' o '%s'."
 
 #: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
