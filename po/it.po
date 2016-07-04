@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 09:53+0000\n"
+"PO-Revision-Date: 2016-07-04 10:24+0000\n"
 "Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -45,7 +45,7 @@ msgstr "Scadenza chiave:"
 
 #: src/callbacks/keyring.h:42
 msgid "Rpm Name:"
-msgstr "Nome rpm: "
+msgstr "Nome rpm:"
 
 #: src/callbacks/keyring.h:68
 #, boost-format
@@ -682,7 +682,7 @@ msgstr "Fornito da repository abilitato"
 
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
-msgstr "Non fornito da alcun repository abilitato."
+msgstr "Non fornito da alcun repository abilitato"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -904,7 +904,7 @@ msgstr "'%s' è già installato."
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "Il pacchetto '%s', che fornice '%s', è già installato."
+msgstr "Il pacchetto '%s', che fornisce '%s', è già installato."
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
@@ -2174,7 +2174,7 @@ msgstr "Impossibile aprire %s in scrittura."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
-msgstr "Verificare di disporre dei Autorizzazioni di scrittura."
+msgstr "Verificare di disporre delle autorizzazioni di scrittura."
 
 #: src/repos.cc:1196
 #, c-format, boost-format
@@ -2851,7 +2851,7 @@ msgstr "Sono disponibili anche i seguenti aggiornamenti:"
 
 #: src/update.cc:714
 msgid "Package updates"
-msgstr "Aggiornamenti pacchetto."
+msgstr "Aggiornamenti pacchetto"
 
 # TLABEL modules/inst_config_x11.ycp:578
 #: src/update.cc:718
@@ -3148,7 +3148,7 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
-"     Gestione programmi:\n"
+"     Gestione software:\n"
 "\tinstall, in\t\tInstalla pacchetti.\n"
 "\tremove, rm\t\tRimuove i pacchetti.\n"
 "\tverify, ve\t\tVerifica l'integrità delle dipendenze dei pacchetti.\n"
@@ -4198,11 +4198,11 @@ msgstr ""
 "necessari.\n"
 "    --recommends            Installa anche i pacchetti consigliati oltre a "
 "quelli\n"
-"                            necessari.\\n"
+"                            necessari.\n"
 "    --replacefiles          Installa i pacchetti anche se sostituiscono i  "
 "file di altri\n"
-"                            pacchetti già installati. Per default, i "
-"conflitti tra file vengono\n"
+"                            pacchetti già installati. Per impostazione "
+"predefinita, i conflitti tra file vengono\n"
 "                            considerati errori. --download-as-needed "
 "disabilita la verifica di conflitti tra file.\n"
 "-R, --no-force-resolution   Non forza il risolutore a trovare una soluzione,"
@@ -4473,13 +4473,13 @@ msgstr ""
 "                            necessari\n"
 "    --replacefiles          Installa i pacchetti anche se sostituiscono i "
 "file di altri\n"
-"                            pacchetti già installati. Per default, i "
-"conflitti tra file vengono\n"
+"                            pacchetti già installati. Per impostazione "
+"predefinita, i conflitti tra file vengono\n"
 "                            considerati errori. --download-as-needed "
 "disabilita la verifica di conflitti tra file.\n"
 "-D, --dry-run               Verifica l'upgrade senza eseguirlo "
-"effettivamente.\\n"
-"    --details               Mostra il riepilogo dettagliato "
+"effettivamente.\n"
+"     --details               Mostra il riepilogo dettagliato "
 "dell'installazione.\n"
 "    --download              Imposta la modalità di installazione del "
 "download. Modalità disponibili:\n"
@@ -5432,7 +5432,7 @@ msgstr "Il nome del pacchetto di origine è un argomento obbligatorio."
 
 #: src/Zypper.cc:4231
 msgid "Mode is set to 'match-exact'"
-msgstr "Modalità impostata come 'match-exact'."
+msgstr "Modalità impostata come 'match-exact'"
 
 #: src/Zypper.cc:4251 src/Zypper.cc:4577 src/Zypper.cc:4677 src/Zypper.cc:4874
 #: src/Zypper.cc:4922 src/Zypper.cc:4962
@@ -5454,7 +5454,7 @@ msgstr "Nessun elemento corrispondente trovato."
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 "Si è verificato un problema durante l'inizializzazione o l'esecuzione di "
-"un'interrogazione di ricerca."
+"un'interrogazione di ricerca"
 
 #: src/Zypper.cc:4439
 msgid "See the above message for a hint."
@@ -6251,7 +6251,7 @@ msgstr "Il pacchetto sorgente per il pacchetto '%s' è '%s'."
 #: src/misc.cc:295
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "Pacchetto sorgente '%s' per il pacchetto '%s' non trovato."
+msgstr "Pacchetto di origine '%s' per il pacchetto '%s' non trovato."
 
 #: src/misc.cc:373
 #, c-format, boost-format
