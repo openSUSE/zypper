@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 09:15+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -6308,7 +6308,7 @@ msgstr "Non è stato definito alcun blocco ai pacchetti."
 
 #: src/locks.cc:166
 msgid "Error reading the locks file:"
-msgstr "Errore durante la lettura del file dei blocchi:"
+msgstr "Errore durante la lettura del file di blocco:"
 
 #: src/locks.cc:226
 msgid "Specified lock has been successfully added."
