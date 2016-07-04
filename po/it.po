@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-04 07:42+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -2390,7 +2390,9 @@ msgstr ""
 #: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "Il repository '%s' non ha un URI definito, escluso."
+msgstr ""
+"Non è stato definito alcun URI per l'archivio '%s'; l'archivio verrà "
+"ignorato."
 
 #: src/repos.cc:1821
 #, c-format, boost-format
