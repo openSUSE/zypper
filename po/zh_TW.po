@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-04 09:05+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -4587,7 +4587,7 @@ msgstr "'%s' 下載 (curl) 初始化失敗"
 #: zypp/media/MediaException.cc:91
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr "發生系統例外「%s」(媒體「%s」上)。"
+msgstr "發生系統例外 '%s' (在媒體 '%s' 上)。"
 
 #: zypp/media/MediaException.cc:98
 #, c-format, boost-format
