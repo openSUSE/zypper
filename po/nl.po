@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 07:10+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 07:11+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -1192,8 +1192,8 @@ msgstr[1] "De volgende %d pakketten worden gedowngraded:"
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "De volgende patch zal worden afgewaardeerd:"
-msgstr[1] "De volgende %d patches zullen worden afgewaardeerd:"
+msgstr[0] "De volgende patch wordt gedowngraded:"
+msgstr[1] "De volgende %d patches worden gedowngraded:"
 
 #: src/Summary.cc:640
 #, c-format, boost-format
