@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 15:57+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 16:03+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -5169,7 +5169,7 @@ msgstr ""
 
 #: src/Zypper.cc:3196 src/Zypper.cc:5236
 msgid "Unexpected program flow."
-msgstr "Onverwachte gang door het programma."
+msgstr "Onverwacht programmaverloop."
 
 #: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
@@ -5210,7 +5210,7 @@ msgstr "Zie '%s' of '%s' voor een lijst met bekende servicetypen."
 #. followed by mr command help text which will explain it
 #: src/Zypper.cc:3450 src/Zypper.cc:3797
 msgid "Alias or an aggregate option is required."
-msgstr "Een alias of geagregeerde optie is vereist."
+msgstr "Een alias of aggregate-optie is vereist."
 
 #: src/Zypper.cc:3482
 #, c-format, boost-format
@@ -5230,7 +5230,7 @@ msgstr "Te weinig argumenten."
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Als er één argument wordt gebruikt, dan moet dat een URI zijn die wijst naar "
+"Als er één argument wordt gebruikt, moet dat een URI zijn die verwijst naar "
 "een repo-bestand."
 
 #: src/Zypper.cc:3617
@@ -5292,7 +5292,7 @@ msgstr ""
 #: src/Zypper.cc:3852
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
-msgstr "De globale optie '%s' heeft hier geen effect."
+msgstr "De algemene optie '%s' heeft hier geen effect."
 
 #: src/Zypper.cc:3860
 #, c-format, boost-format
@@ -5310,7 +5310,7 @@ msgstr "Minstens één naam van een pakket is vereist."
 #: src/Zypper.cc:3912
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
-"Er zijn root-privileges vereist voor het installeren en deïnstalleren van "
+"Er zijn root-privileges vereist voor het installeren en verwijderen van "
 "pakketten."
 
 #. translators: rug related message, shown if
@@ -5349,8 +5349,7 @@ msgstr ""
 #: src/Zypper.cc:3975
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr ""
-"'%s' lijkt op een RPM-bestand. Er wordt een poging gedaan het downloaden."
+msgstr "'%s' lijkt op een RPM-bestand. Er wordt geprobeerd het te downloaden."
 
 #: src/Zypper.cc:3984
 #, c-format, boost-format
