@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 15:51+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 15:52+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -4886,7 +4886,8 @@ msgstr "Toon het aantal oplosbare overeenkomsten door elke vergrendeling."
 #. translators: -s, --solvables
 #: src/Zypper.cc:2839
 msgid "List the resolvables matched by each lock."
-msgstr "Maak een lijst met oplosbare overeenkomsten door elke vergrendeling."
+msgstr ""
+"De oplosbaren weergeven die op basis van elke vergrendeling worden afgestemd."
 
 #: src/Zypper.cc:2855
 msgid ""
