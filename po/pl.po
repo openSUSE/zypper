@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-05 07:41+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
 "Language: pl\n"
@@ -980,7 +980,7 @@ msgstr "Poprawka '%s' jest interaktywna, pominięto."
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
-msgstr "Poprawka \"%s\" nie jest potrzebna."
+msgstr "Poprawka '%s' nie jest potrzebna."
 
 #: src/RequestFeedback.cc:181
 #, boost-format
