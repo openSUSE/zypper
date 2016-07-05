@@ -20,9 +20,9 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-05-21 16:44+0000\n"
-"Last-Translator: Benoît Monin <benoit.monin@gmx.fr>\n"
-"Language-Team: French <http://l10n.opensuse.org/projects/libzypp/master/fr/>"
+"PO-Revision-Date: 2016-07-05 08:39+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -408,7 +408,7 @@ msgstr "Ajout du dépôt '%s'"
 #: zypp/RepoManager.cc:1701
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Nom de fichier de dépôt invalide sur '%s'"
+msgstr "Nom du fichier dépôt non valide sur '%s'"
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
