@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-05 09:52+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 09:53+0000\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -4718,7 +4718,7 @@ msgstr "Impossible d'éjecter un support"
 #: zypp/media/MediaException.cc:184
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
-msgstr "Impossible d'éjecter le media '%s'"
+msgstr "Impossible d'éjecter le support '%s'"
 
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
