@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-30 12:37+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 07:08+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -846,39 +846,39 @@ msgstr "Object '%s' niet gevonden."
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "Pakket '%s' niet gevonden in gespecificeerde installatiebronnen."
+msgstr "Pakket '%s' is niet gevonden in gespecificeerde opslagruimten."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Patch '%s' niet gevonden in gespecificeerde installatiebronnen."
+msgstr "Patch '%s' is niet gevonden in gespecificeerde opslagruimten."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Product '%s' niet gevonden in gespecificeerde installatiebronnen."
+msgstr "Product '%s' is niet gevonden in gespecificeerde opslagruimten."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "Patroon '%s' niet gevonden in gespecificeerde installatiebronnen."
+msgstr "Patroon '%s' is niet gevonden in gespecificeerde opslagruimten."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Bronpakket '%s' niet gevonden in gespecificeerde installatiebronnen."
+msgstr "Bronpakket '%s' is niet gevonden in gespecificeerde opslagruimten."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "Object '%s' niet gevonden in gespecificeerde installatiebronnen."
+msgstr "Object '%s' is niet gevonden in gespecificeerde opslagruimten."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
-msgstr "Geen leverancier van '%s' gevonden."
+msgstr "Geen provider van '%s' gevonden."
 
 #. wildcards used
 #: src/RequestFeedback.cc:84
@@ -895,12 +895,12 @@ msgstr "Pakket '%s' is niet geïnstalleerd."
 #: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr "Geen leverancier van '%s' is geïnstalleerd."
+msgstr "Geen provider van '%s' is geïnstalleerd."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr "'%s' is al geïnstaleerd."
+msgstr "'%s' is al geïnstalleerd."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:98
@@ -929,7 +929,7 @@ msgid ""
 "specified version, architecture, or repository."
 msgstr ""
 "Er is een kandidaat '%s' voor het bijwerken van '%s', maar het komt niet "
-"overeen met de gespecificeerde versie, architectuur of installatiebron."
+"overeen met de gespecificeerde versie, architectuur of opslagruimte."
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -937,8 +937,8 @@ msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
 "Use '%s' to install this candidate."
 msgstr ""
-"Er is een kandidaat voor het bijwerken van '%s', maar het heeft een andere "
-"leverancier. Gebruik '%s' om deze kandidaat te installeren."
+"Er is een updatekandidaat voor het bijwerken van '%s', maar het heeft een "
+"andere leverancier. Gebruik '%s' om deze kandidaat te installeren."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -947,7 +947,7 @@ msgid ""
 "lower priority. Use '%s' to install this candidate."
 msgstr ""
 "Er is een kandidaat voor het bijwerken van '%s', maar het komt van een "
-"installatiebron met een lagere prioriteit. Gebruik '%s' om deze kandidaat te "
+"opslagruimte met een lagere prioriteit. Gebruik '%s' om deze kandidaat te "
 "installeren."
 
 #: src/RequestFeedback.cc:142
@@ -956,8 +956,8 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Er is een kandidaat voor het bijwerken van '%s', maar het is geblokkeerd. "
-"Gebruik '%s' om dit op te heffen."
+"Er is een updatekandidaat voor '%s', maar deze is vergrendeld. Gebruik '%s' "
+"om te ontgrendelen."
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -965,8 +965,8 @@ msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"Pakket '%s' is niet beschikbaar in uw installatiebronnen. Opnieuw "
-"installeren, opwaarderen of afwaarderen kan niet."
+"Pakket '%s' is niet beschikbaar in uw opslagruimten. Opnieuw installeren, "
+"upgraden of downgraden kan niet."
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
@@ -974,8 +974,8 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"Het geselecteerde pakket '%s' uit installatiebron '%s' heeft een lager "
-"versienummer dan de geïnstalleerde."
+"Het geselecteerde pakket '%s' uit opslagruimte '%s' heeft een lager "
+"versienummer dan het geïnstalleerde pakket."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
@@ -1017,7 +1017,7 @@ msgstr "Patch '%s' is niet gevonden in de gespecificeerde categorie."
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
-msgstr "Patch '%s' heeft niet het gespecificeerde belang."
+msgstr "Patch '%s' heeft niet de gespecificeerde ernst."
 
 #: src/RequestFeedback.cc:213
 #, c-format, boost-format
@@ -1027,12 +1027,12 @@ msgstr "Patch '%s' is uitgegeven na de gespecificeerde datum."
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "Selecteren van '%s' uit installatiebron '%s' voor installatie."
+msgstr "Selecteren van '%s' uit opslagruimte '%s' voor installatie."
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "Installatie forceren van '%s' uit installatiebron '%s'."
+msgstr "Installatie forceren van '%s' uit opslagruimte '%s'."
 
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
@@ -1042,7 +1042,7 @@ msgstr "Selecteren van '%s' voor verwijderen."
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr "'%s' is vergrendeld. Gebruik '%s' om het ontgrendelen."
+msgstr "'%s' is vergrendeld. Gebruik '%s' om het te ontgrendelen."
 
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
@@ -1108,15 +1108,15 @@ msgstr[1] "De volgende %d broncodepakketten zullen worden geïnstalleerd:"
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] "De volgende toepassing zal opnieuw worden geïnstalleerd:"
-msgstr[1] "De volgende %d toepassingen zullen opnieuw worden geïnstalleerd:"
+msgstr[0] "De volgende toepassing wordt geïnstalleerd:"
+msgstr[1] "De volgende %d toepassingen worden geïnstalleerd:"
 
 #: src/Summary.cc:552
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "Het volgende pakket zal worden VERWIJDERD:"
-msgstr[1] "De volgende %d producten zullen worden VERWIJDERD:"
+msgstr[1] "De volgende %d pakketten zullen worden VERWIJDERD:"
 
 #: src/Summary.cc:557
 #, c-format, boost-format
@@ -1178,7 +1178,7 @@ msgstr[1] "De volgende %d producten zullen worden opgewaardeerd:"
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "De volgende toepassing zal opnieuw worden opgewaardeerd:"
+msgstr[0] "De volgende toepassing zal worden opgewaardeerd:"
 msgstr[1] "De volgende %d toepassingen zullen worden opgewaardeerd:"
 
 #: src/Summary.cc:630
@@ -1186,7 +1186,7 @@ msgstr[1] "De volgende %d toepassingen zullen worden opgewaardeerd:"
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Het volgende pakket zal worden afgewaardeerd:"
-msgstr[1] "De volgende %d pakketten zullen neerwaarts worden opgewaardeerd:"
+msgstr[1] "De volgende %d pakketten zullen worden afgewaardeerd:"
 
 #: src/Summary.cc:635
 #, c-format, boost-format
