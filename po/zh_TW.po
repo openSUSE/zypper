@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 10:06+0000\n"
+"PO-Revision-Date: 2016-07-05 01:50+0000\n"
 "Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
@@ -125,7 +125,7 @@ msgstr " 執行失敗"
 #: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr "%s 已執行為 %s)"
+msgstr "%s 已作為 %s 執行)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
@@ -547,7 +547,7 @@ msgstr "(未過期)"
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:125
 msgid "(EXPIRED)"
-msgstr "(過期)"
+msgstr "(已過期)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:129
@@ -2556,7 +2556,7 @@ msgstr "法語，舊 (842-大約1400)"
 #. language code: fry fy
 #: zypp/LanguageCode.cc:453
 msgid "Frisian"
-msgstr "弗列然語"
+msgstr "弗利然語"
 
 #. language code: ful ff
 #: zypp/LanguageCode.cc:455
@@ -3456,7 +3456,7 @@ msgstr "恩濟馬語"
 #. language code: oci oc
 #: zypp/LanguageCode.cc:829
 msgid "Occitan (post 1500)"
-msgstr "奧克騰語 (中世記法國南部語言)"
+msgstr "奧克騰語 (1500 之後)"
 
 #. language code: oji oj
 #: zypp/LanguageCode.cc:831
@@ -4779,12 +4779,12 @@ msgid ""
 "     %4%"
 msgstr ""
 "檔案 %1%\n"
-"  來自以下套件\n"
-"     %2%\n"
+"  (來自以下套件\n"
+"     %2%)\n"
 "  與下列檔案相衝突\n"
 "     %3%\n"
-"  來自以下套件\n"
-"     %4%"
+"  (來自以下套件\n"
+"     %4%)"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:76
@@ -4799,12 +4799,12 @@ msgid ""
 "     %4%"
 msgstr ""
 "檔案 %1%\n"
-"  來自以下套件\n"
-"     %2%\n"
+"  (來自以下套件\n"
+"     %2%)\n"
 "  與下列檔案相衝突\n"
 "     %3%\n"
-"  來自以下安裝\n"
-"     %4%"
+"  (來自以下安裝\n"
+"     %4%)"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:85
@@ -4819,12 +4819,12 @@ msgid ""
 "     %4%"
 msgstr ""
 "檔案 %1%\n"
-"  來自以下的安裝\n"
-"     %2%\n"
+"  (來自以下安裝\n"
+"     %2%)\n"
 "  與下列檔案發生衝突\n"
 "     %3%\n"
-"  來自以下套件\n"
-"     %4%"
+"  (來自以下套件\n"
+"     %4%)"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:93
@@ -4839,12 +4839,12 @@ msgid ""
 "     %4%"
 msgstr ""
 "檔案 %1%\n"
-"  來自以下的安裝\n"
-"     %2%\n"
+"  (來自以下的安裝\n"
+"     %2%)\n"
 "  與下列檔案發生衝突\n"
 "     %3%\n"
-"  來自以下的安裝\n"
-"     %4%"
+"  (來自以下的安裝\n"
+"     %4%)"
 
 #~ msgid "Cannot create public key %s from %s keyring to file %s"
 #~ msgstr "無法建立公開金鑰 %s 從 %s 鑰匙圈到檔案 %s"
