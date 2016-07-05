@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 15:39+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-05 15:42+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -1791,11 +1791,11 @@ msgstr ""
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
-msgstr "Aucun media détecté, impossible d'éjecter."
+msgstr "Aucun périphérique n'a été détecté. Éjection impossible."
 
 #: src/callbacks/media.cc:110
 msgid "Try to eject the device manually."
-msgstr "Essayer d'éjecter le media manuellement."
+msgstr "Essayez d'éjecter le périphérique manuellement."
 
 #: src/callbacks/media.cc:121
 msgid "Detected devices:"
