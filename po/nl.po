@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 09:59+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 10:12+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -929,7 +929,7 @@ msgid ""
 "specified version, architecture, or repository."
 msgstr ""
 "Er is een kandidaat '%s' voor het bijwerken van '%s', maar het komt niet "
-"overeen met de gespecificeerde versie, architectuur of opslagruimte."
+"overeen met de gespecificeerde versie, architectuur of installatiebron."
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -974,7 +974,7 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"Het geselecteerde pakket '%s' uit opslagruimte '%s' heeft een lager "
+"Het geselecteerde pakket '%s' uit installatiebron '%s' heeft een lager "
 "versienummer dan het geïnstalleerde pakket."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
@@ -1027,7 +1027,7 @@ msgstr "Patch '%s' is uitgegeven na de gespecificeerde datum."
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "Selecteren van '%s' uit opslagruimte '%s' voor installatie."
+msgstr "Selecteren van '%s' uit installatiebron '%s' voor installatie."
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
@@ -1924,7 +1924,7 @@ msgstr "Vernieuwen onbewerkte metagegevens forceren"
 #: src/repos.cc:236
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Ophalen van metagegevens uit opslagruimte '%s'"
+msgstr "Ophalen van metagegevens uit installatiebron '%s'"
 
 #: src/repos.cc:263
 #, c-format, boost-format
@@ -1981,7 +1981,7 @@ msgstr ""
 #: src/repos.cc:352
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Fout bij ophalen van metagegevens voor '%s'."
+msgstr "Fout bij ophalen van metagegevens voor '%s':"
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
@@ -1990,7 +1990,7 @@ msgstr "Bouwen van opslagruimtecache forceren"
 #: src/repos.cc:390
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
-msgstr "Fout bij analyseren van metagegevens voor '%s'."
+msgstr "Fout bij analyseren van metagegevens voor '%s':"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: src/repos.cc:392
@@ -2034,7 +2034,7 @@ msgstr "Negeren van uitgeschakelde opslagruimte '%s'"
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Opslagruimte '%s' wordt genegeerd vanwege de optie '%s'."
+msgstr "Installatiebron '%s' wordt genegeerd vanwege de optie '%s'."
 
 #: src/repos.cc:749
 #, c-format, boost-format
