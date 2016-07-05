@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 08:08+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 08:09+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -2713,7 +2713,7 @@ msgstr "Probleem bij laden van gegevens van '%s'"
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
-"Installatiebron '%s' kon niet ververst worden. De oude cache wordt gebruikt."
+"Opslagruimte '%s' kan niet worden ververst. De oude cache wordt gebruikt."
 
 #: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
