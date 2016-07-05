@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 07:17+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 07:18+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -1595,8 +1595,8 @@ msgstr "Voer '%1%' uit om een lijst te zien met vergrendelde items."
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "De volgende patch vereist een systeemherstart:"
-msgstr[1] "De volgende %d patches vereisen een systeemherstart:"
+msgstr[0] "De volgende patch vereist een herstart van het systeem:"
+msgstr[1] "De volgende %d patches vereisen een herstart van het systeem:"
 
 #: src/Summary.cc:1240
 #, boost-format
@@ -1611,11 +1611,11 @@ msgstr "Alleen downloaden."
 #: src/Summary.cc:1249
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
-msgstr "Na de operatie zal aanvullend %s worden gebruikt."
+msgstr "Na de bewerking zal aanvullend %s worden gebruikt."
 
 #: src/Summary.cc:1251
 msgid "No additional space will be used or freed after the operation."
-msgstr "Na de operatie zal er geen extra ruimte in gebruik zijn of vrij komen."
+msgstr "Na de bewerking zal er geen extra ruimte in gebruik zijn of vrij komen."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1258
