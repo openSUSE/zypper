@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 07:56+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 08:04+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -2440,12 +2440,12 @@ msgstr "Prioriteit van installatiebron '%s' is ongewijzigd (%d)"
 #: src/repos.cc:2039
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
-msgstr "Installatiebron '%s' is met succes geactiveerd."
+msgstr "Installatiebron '%s' is geactiveerd."
 
 #: src/repos.cc:2041
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
-msgstr "Installatiebron '%s' is met succes gedeactiveerd."
+msgstr "Installatiebron '%s' is gedeactiveerd."
 
 #: src/repos.cc:2048
 #, c-format, boost-format
@@ -2455,7 +2455,7 @@ msgstr "Autoverversing is geactiveerd voor installatiebron '%s'."
 #: src/repos.cc:2050
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "Autoverversing is gedeactiveerd voor installatiebron '%s'."
+msgstr "Automatisch vernieuwen is gedeactiveerd voor installatiebron '%s'."
 
 #: src/repos.cc:2057
 #, c-format, boost-format
