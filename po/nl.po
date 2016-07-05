@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 07:15+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 07:17+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -1520,8 +1520,8 @@ msgstr[1] "De volgende %d toepassingen zullen de leverancier wijzigen:"
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "Het volgende pakket wordt niet ondersteund door de verkoper:"
-msgstr[1] "De volgende %d pakketten worden niet ondersteund door de verkoper:"
+msgstr[0] "Het volgende pakket wordt niet ondersteund door de leverancier:"
+msgstr[1] "De volgende %d pakketten worden niet ondersteund door de leverancier:"
 
 #: src/Summary.cc:1130
 #, c-format, boost-format
@@ -1544,8 +1544,7 @@ msgstr[0] ""
 "Het volgende item voor bijwerken van een pakket zal NIET worden "
 "geïnstalleerd:"
 msgstr[1] ""
-"De volgende %d pakketten zijn gesuggereerd, maar zullen niet worden "
-"geïnstalleerd:"
+"De volgende %d items voor bijwerken van een pakket worden NIET geïnstalleerd:"
 
 #: src/Summary.cc:1153
 #, c-format, boost-format
@@ -1555,7 +1554,7 @@ msgstr[0] ""
 "Het volgende item voor het opwaarderen van een product zal NIET worden "
 "geïnstalleerd:"
 msgstr[1] ""
-"De volgende %d producten worden gesuggereerd, maar zullen niet worden "
+"De volgende %d items voor bijwerken van een product zullen NIET worden "
 "geïnstalleerd:"
 
 #: src/Summary.cc:1158
