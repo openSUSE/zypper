@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 01:39+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 05:53+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -1752,13 +1752,13 @@ msgstr "這個套件庫未定義別名。"
 #: src/repos.cc:339
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
-msgstr "套件庫 '%s' 不適用。"
+msgstr "套件庫 '%s' 無效。"
 
 #: src/repos.cc:340
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
-msgstr "請檢查此套件庫定義的位址是否指向可用的套件庫。"
+msgstr "請檢查為此套件庫定義的位址是否指向有效的套件庫。"
 
 #: src/repos.cc:352
 #, c-format, boost-format
@@ -1812,7 +1812,7 @@ msgstr "正在忽略已停用的套件庫 '%s'"
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "忽略套件庫 '%s' 因為使用了 '%s' 參數。"
+msgstr "正在忽略套件庫 '%s'，因為使用了 '%s' 選項。"
 
 #: src/repos.cc:749
 #, c-format, boost-format
@@ -1822,7 +1822,7 @@ msgstr "正在掃描已停用的套件庫 '%s' 的內容。"
 #: src/repos.cc:765 src/repos.cc:798 src/repos.cc:1297
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "因以上的錯誤跳過套件庫 '%s'。"
+msgstr "由於上述錯誤，正在跳過套件庫 '%s'。"
 
 #: src/repos.cc:784
 #, c-format, boost-format
@@ -1843,12 +1843,12 @@ msgstr ""
 #: src/repos.cc:820
 #, c-format, boost-format
 msgid "Disabling repository '%s'."
-msgstr "停用套件庫 '%s'。"
+msgstr "正在停用套件庫 '%s'。"
 
 #: src/repos.cc:834
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
-msgstr "暫時啟用套件庫 '%s'。"
+msgstr "正在暫時啟用套件庫 '%s'。"
 
 #: src/repos.cc:841
 #, c-format, boost-format
@@ -1917,7 +1917,7 @@ msgstr "尚未定義套件庫。"
 
 #: src/repos.cc:1070
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "請用 'zypper addrepo' 命令來加入一或多個套件庫。"
+msgstr "請用 'zypper addrepo' 指令來加入一或多個套件庫。"
 
 #: src/repos.cc:1103
 msgid "Auto-refresh"
@@ -1984,7 +1984,7 @@ msgstr "指定的套件庫： "
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "跳過已停用的套件庫 '%s'"
+msgstr "正在跳過已停用的套件庫 '%s'"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
@@ -1997,7 +1997,7 @@ msgstr "尚未定義已啟用的套件庫。"
 #: src/repos.cc:1313
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "請用 '%s' 或 '%s' 命令來加入或啟用套件庫。"
+msgstr "請用 '%s' 或 '%s' 指令來加入或啟用套件庫。"
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
@@ -2024,18 +2024,18 @@ msgstr "正在清除 '%s' 的原始中繼資料快取。"
 #: src/repos.cc:1453
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr "保留 %s 的原始中繼資料快取 '%s'。"
+msgstr "正在保留 %s 的原始中繼資料快取 '%s'。"
 
 #. translators: meaning the cached rpm files
 #: src/repos.cc:1460
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
-msgstr "正在清理 '%s' 的套件。"
+msgstr "正在清除 '%s' 的套件。"
 
 #: src/repos.cc:1468
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "因錯誤無法清理套件庫 '%s'。"
+msgstr "因錯誤無法清除套件庫 '%s'。"
 
 #: src/repos.cc:1479
 msgid "Cleaning installed packages cache."
@@ -2047,7 +2047,7 @@ msgstr "因錯誤無法清除已安裝套件的快取。"
 
 #: src/repos.cc:1507
 msgid "Could not clean the repositories because of errors."
-msgstr "因發生錯誤，無法清理套件庫。"
+msgstr "因發生錯誤，無法清除套件庫。"
 
 #: src/repos.cc:1513
 msgid "Some of the repositories have not been cleaned up because of an error."
@@ -2063,12 +2063,12 @@ msgstr "所有套件庫已清理完成。"
 
 #: src/repos.cc:1547
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr "這是一個可抽換的唯讀媒體 (CD/DVD)，停用自動重新整理。"
+msgstr "這是一個可抽換的唯讀媒體 (CD/DVD)，正在停用自動重新整理。"
 
 #: src/repos.cc:1568
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
-msgstr "不適用的套件庫別名： '%s'"
+msgstr "無效的套件庫別名：'%s'"
 
 #: src/repos.cc:1576 src/repos.cc:1858
 #, c-format, boost-format
@@ -2079,17 +2079,15 @@ msgstr "套件庫名稱 '%s' 已存在。請使用其他的別名。"
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
-msgstr ""
-"無法決定套件庫的類型。請檢查是否定義的位址 (參看下方) 真的指向一個可用的套件"
-"庫："
+msgstr "無法決定套件庫的類型。請檢查是否定義的位址 (參看下方) 真的指向一個有效的套件庫："
 
 #: src/repos.cc:1591
 msgid "Can't find a valid repository at given location:"
-msgstr "在指定的位置找不到適用的套件庫："
+msgstr "在指定的位置找不到有效的套件庫："
 
 #: src/repos.cc:1599
 msgid "Problem transferring repository data from specified URI:"
-msgstr "由指定的 URI 傳輸套件庫資料時發生錯誤："
+msgstr "由指定的位址傳輸套件庫資料時發生錯誤："
 
 #: src/repos.cc:1600
 msgid "Please check whether the specified URI is accessible."
@@ -2106,7 +2104,7 @@ msgstr "新增套件庫時發生未知的問題："
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
-msgstr "'%1%' 套件庫設定中已關閉 GPG 檢查。將無法確認套件完整性及來源。"
+msgstr "'%1%' 套件庫設定中已停用 GPG 檢查。將無法驗證套件完整性及來源。"
 
 #: src/repos.cc:1622
 #, c-format, boost-format
@@ -2130,7 +2128,7 @@ msgstr "從媒體 '%s' 讀取資料時發生問題"
 
 #: src/repos.cc:1655
 msgid "Please check if your installation media is valid and readable."
-msgstr "請檢查您的安裝媒體是否適用與可存取。"
+msgstr "請檢查您的安裝媒體是否有效與可讀取。"
 
 #: src/repos.cc:1662
 #, c-format, boost-format
@@ -2139,15 +2137,15 @@ msgstr "延遲從媒體 '%s' 讀取資料到下一次的重新整理。"
 
 #: src/repos.cc:1744
 msgid "Problem accessing the file at the specified URI"
-msgstr "在指定的 URI 存取檔案時發生問題"
+msgstr "在指定的位址存取檔案時發生問題"
 
 #: src/repos.cc:1745
 msgid "Please check if the URI is valid and accessible."
-msgstr "請檢查指定的 URI 是否可存取。"
+msgstr "請檢查位址是否有效且可存取。"
 
 #: src/repos.cc:1752
 msgid "Problem parsing the file at the specified URI"
-msgstr "由指定的 URI 解析檔案時發生錯誤"
+msgstr "在指定的位址解析檔案時發生問題"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1754
@@ -2160,12 +2158,12 @@ msgstr "在指定的 URI 嘗試讀取檔案時發生問題"
 
 #: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "檔案中有未指定別名的套件庫，跳過。"
+msgstr "檔案中有未定義別名的套件庫，正在跳過。"
 
 #: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "套件庫 '%s' 未定義位址，跳過。"
+msgstr "套件庫 '%s' 未定義位址，正在跳過。"
 
 #: src/repos.cc:1821
 #, c-format, boost-format
@@ -2266,7 +2264,7 @@ msgstr "讀取服務發生錯誤："
 #: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "無法由它的別名、編號或位址找到服務 '%s'。"
+msgstr "無法根據服務別名、編號或位址找到服務 '%s'。"
 
 #: src/repos.cc:2222
 #, c-format, boost-format
@@ -2276,7 +2274,7 @@ msgstr "請用 '%s' 取得已定義的服務清單。"
 #: src/repos.cc:2464
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
-msgstr "尚未定義服務。請用 '%s' 命令來加入服務。"
+msgstr "尚未定義服務。請用 '%s' 指令來加入一或多項服務。"
 
 #: src/repos.cc:2547
 #, c-format, boost-format
@@ -2316,21 +2314,21 @@ msgstr "為服務 '%s' 取得套件庫索引檔案時發生問題："
 #: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "因以上的錯誤跳過服務 '%s'。"
+msgstr "由於上述錯誤，正在跳過服務 '%s'。"
 
 #: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
-msgstr "請檢查指定的 URI 是否可存取。"
+msgstr "請檢查位址是否有效且可存取。"
 
 #: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "跳過已停用的服務 '%s'"
+msgstr "正在跳過已停用的服務 '%s'"
 
 #: src/repos.cc:2751
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
-msgstr "請用 '%s' 或 '%s' 命令來加入或啟用套件庫。"
+msgstr "請用 '%s' 或 '%s' 指令來加入或啟用服務。"
 
 #: src/repos.cc:2754
 msgid "Specified services are not enabled or defined."
@@ -2433,7 +2431,7 @@ msgstr "正在載入套件庫資料..."
 #: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "正在讀取套件庫 %s..."
+msgstr "正在取回套件庫 '%s' 資料..."
 
 #: src/repos.cc:3107
 #, c-format, boost-format
@@ -2448,7 +2446,7 @@ msgstr "從 '%s' 載入資料有問題"
 #: src/repos.cc:3117
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr "套件庫 '%s' 無法重新整理，使用舊的快取。"
+msgstr "無法重新整理套件庫 '%s'。正在使用舊快取。"
 
 #: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
@@ -2460,7 +2458,7 @@ msgstr "因為錯誤，由 '%s' 提供的解決方案無法載入。"
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
-msgstr "套件庫 '%s' 顯然已過期。請考慮使用其他鏡像或伺服器。"
+msgstr "套件庫 '%s' 似乎已過期。請考慮使用其他鏡像或伺服器。"
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:3149
@@ -2929,13 +2927,13 @@ msgid ""
 "\tsource-download\t\tDownload source rpms for all installed packages\n"
 "\t\t\t\tto a local directory.\n"
 msgstr ""
-"     其他命令：\n"
+"     其他指令：\n"
 "\tversioncmp, vcmp\t比較兩個版本字串。\n"
 "\ttargetos, tos\t\t印出目標作業系統 ID 字串。\n"
 "\tlicenses\t\t印出關於已安裝套件的授權\n"
 "\t\t\t\t與終端使用者協議 (EULA) 的報告。\n"
-"\tdownload\t\t下載命令列指定的 rpm 套件到本地目錄。\n"
-"\tsource-download\t\t下載所有已安裝套件的原始碼 rpm 套件\n"
+"\tdownload\t\t下載指令行上指定的 rpm 到本地目錄。\n"
+"\tsource-download\t\t下載所有已安裝套件的原始碼 rpm\n"
 "\t\t\t\t到本地目錄。\n"
 
 #: src/Zypper.cc:554
@@ -2973,7 +2971,7 @@ msgstr "輸入 '%s' 以獲取個別指令的說明。"
 #: src/Zypper.cc:771
 #, c-format, boost-format
 msgid "Verbosity: %d"
-msgstr "詳細： %d"
+msgstr "詳細：%d"
 
 #: src/Zypper.cc:785
 #, c-format, boost-format
@@ -3011,13 +3009,13 @@ msgstr "對於有建議重開機旗標的修補程式將不會被視為可互動
 
 #: src/Zypper.cc:967
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "進入忽略 GPG 檢查模式。"
+msgstr "正在進入忽略 GPG 檢查模式。"
 
 #: src/Zypper.cc:975
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
-msgstr "開啟 '%s'。新套件庫簽名金鑰將自動被匯入！"
+msgstr "正在開啟 '%s'。新套件庫簽名金鑰將自動被匯入！"
 
 #: src/Zypper.cc:988
 msgid "The path specified in the --root option must be absolute."
@@ -3056,7 +3054,7 @@ msgstr "忽略已安裝的解決方案。"
 #: src/Zypper.cc:1104 src/Zypper.cc:1151
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
-msgstr "%s 選項在此無效，忽略。"
+msgstr "%s 選項在此無效，將忽略。"
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
@@ -3071,7 +3069,7 @@ msgstr "指令 '%s' 已由 '%s' 取代。"
 #: src/Zypper.cc:1314
 #, c-format, boost-format
 msgid "See '%s' for all available options."
-msgstr "參閱 '%s' 察看所有可用的選項。"
+msgstr "參閱 '%s' 查看所有可用的選項。"
 
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
@@ -3126,41 +3124,38 @@ msgid ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
-"install (in) [選項] <相容性|rpm_檔案_位址> ...\n"
+"install (in) [選項] <功能|rpm_檔案_位址> ...\n"
 "\n"
-"使用指定的相容性或指定位置的 RPM 檔來\n"
-"安裝套件。相容性是 名稱[.ARCH][OP<版本>]，其中 OP 為以下運算之一：\n"
-"<, <=, =, >=, >。\n"
+"安裝具有指定功能的套件或指定位置\n"
+"的 RPM 檔案。功能是指名稱[.ARCH][OP<版本>]，其中 OP 為以下運算子之一：\n"
+"<、<=、=、>=、>。\n"
 "\n"
 "  指令選項：\n"
-"    --from <別名|編號|位址>    由指定的套件庫選擇套件。\n"
+"    --from <別名|編號|位址>    從指定的套件庫選取套件。\n"
 "-r, --repo <別名|編號|位址>    僅載入指定的套件庫。\n"
 "-t, --type <類型>              套件的類型 (%s)。\n"
-"                               預設： %s。\n"
-"-n, --name                     單用名稱來選取套件，而不依照相容性。 \n"
-"-C, --capability               依照相容性來選取套件。\n"
+"                               預設：%s。\n"
+"-n, --name                     單純依照名稱而不是功能來選取套件。 \n"
+"-C, --capability               依照功能來選取套件。\n"
 "-f, --force                    安裝套件，即使該套件已安裝 (重新安裝)、\n"
 "                               已降級、或已變更供應商或架構。\n"
 "    --oldpackage               允許使用舊版本取代新版本。\n"
-"                               如果您要回復到舊版本，該選項是個方便的功能。不"
-"像 --force，\n"
+"                               如果您要回復到舊版本，該選項是個方便的功能。不像 --force，\n"
 "                               它不會強迫重新安裝。\n"
-"    --replacefiles             安裝套件，即使它會取代來自其他已安裝套件的檔"
-"案。\n"
-"                               預設會將此檔案衝突視為錯誤來處理。\n"
-"                               使用 --download-as-needed 選項來停用檔案衝突檢"
-"查。\n"
+"    --replacefiles             安裝套件，即使它會取代來自其他已安裝套件的檔案。\n"
+"                               預設將檔案衝突視為錯誤來處理。\n"
+"                               使用 --download-as-needed 選項來停用檔案衝突檢查。\n"
 "-l, --auto-agree-with-licenses\n"
-"                               自動對第三方授權確認提示\n"
-"                               說 'yes'。\n"
-"                               請參閱 'man zypper' 以獲得多資訊。\n"
+"                               對第三方授權確認提示自動\n"
+"                               選取「是」。\n"
+"                               請參閱 'man zypper' 以獲得更多資訊。\n"
 "    --debug-solver             建立解決測試案例來偵錯\n"
 "    --no-recommends            不要安裝推薦的套件，只安裝必需的。\n"
 "    --recommends               除了必需的套件外，\n"
 "                               也安裝推薦的。\n"
 "-R, --no-force-resolution      不要強迫找尋解決方案，\n"
 "                               要先詢問。\n"
-"    --force-resolution         強迫找尋一個解決方案(即使\n"
+"    --force-resolution         強迫找尋一個解決方案 (即使\n"
 "                               是很激進的方案)。\n"
 "-D, --dry-run                  測試安裝，不要實際安裝。\n"
 "    --details                  顯示詳細的安裝摘要。\n"
@@ -3203,22 +3198,22 @@ msgid ""
 "-D, --dry-run               Test the removal, do not actually remove.\n"
 "    --details               Show the detailed installation summary.\n"
 msgstr ""
-"remove (rm) [選項] <相容性> ...\n"
+"remove (rm) [選項] <功能> ...\n"
 "\n"
-"使用指定的相容性移除套件。\n"
-"相容性是 名稱[.ARCH][OP<版本>]，其中 OP 為以下運算之一：\n"
-"<, <=, =, >=, >。\n"
+"移除具有指定功能的套件。\n"
+"功能是名稱[.ARCH][OP<版本>]，其中 OP 為以下運算子之一：\n"
+"<、<=、=、>=、>。\n"
 "\n"
 "  指令選項：\n"
-"-r, --repo <別名|編號|位址>   僅由指定的套件庫中操作套件。\n"
+"-r, --repo <別名|編號|位址>   僅載入指定的套件庫。\n"
 "-t, --type <類型>             套件的類型 (%s)\n"
-"                              預設： %s\n"
-"-n, --name                    單用名稱來選取套件，而不依照相容性。 \n"
-"-C, --capability              由相容性選取套件。\n"
+"                              預設：%s\n"
+"-n, --name                    單純依照名稱而不是功能來選取套件。 \n"
+"-C, --capability              依照功能來選取套件。\n"
 "    --debug-solver            建立解決測試案例來偵錯。\n"
 "-R, --no-force-resolution     不要強迫找尋解決方案，\n"
 "                              要先詢問。\n"
-"    --force-resolution        強迫找尋一個解決方案(即使\n"
+"    --force-resolution        強迫找尋一個解決方案 (即使\n"
 "                              是很激進的方案)。\n"
 "-u, --clean-deps              自動移除不需要的相依性。\n"
 "-U, --no-clean-deps           不要自動移除不需要的相依性。\n"
@@ -3240,7 +3235,7 @@ msgid ""
 msgstr ""
 "source-install (si) [選項] <名稱> ...\n"
 "\n"
-"安裝指定的源碼套件和建構的相依性套件。\n"
+"安裝指定的原始碼套件和建構的相依性套件。\n"
 "\n"
 "  指令選項：\n"
 "-d, --build-deps-only       只安裝指定套件的建構相依性。\n"
@@ -3316,11 +3311,10 @@ msgid ""
 msgstr ""
 "install-new-recommends (inr) [選項]\n"
 "\n"
-"安裝已安裝套件所建議的新增加套件。這通常會在安裝新語言套件或新增硬體驅動程式"
-"時使用。\n"
+"安裝已安裝套件所建議的新增套件。為新增硬體安裝新語言套件或驅動程式時，通常可以使用此指令。\n"
 "\n"
-"  命令選項：\n"
-"-r, --repo <別名|編號|位址> 僅使用指定的套件庫來安裝套件。\n"
+"  指令選項：\n"
+"-r, --repo <別名|編號|位址> 僅載入指定的套件庫。\n"
 "-D, --dry-run               測試安裝，不要真的安裝任何東西。\n"
 "    --details               顯示詳細的安裝摘要。\n"
 "    --download              設定下載-安裝模式。可用的模式：\n"
@@ -3365,9 +3359,9 @@ msgstr ""
 "\n"
 "從系統中移除指定的套件庫索引服務..\n"
 "\n"
-"  命令選項：\n"
-"    --loose-auth   忽略 URI 中的使用者授權資料。\n"
-"    --loose-query  忽略 URI 中的查詢字串。\n"
+"  指令選項：\n"
+"    --loose-auth   忽略位址中的使用者認證資料。\n"
+"    --loose-query  忽略位址中的查詢字串。\n"
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
@@ -3448,12 +3442,12 @@ msgstr ""
 "  指令選項：\n"
 "-u, --uri                 同時顯示套件庫的基礎位址。\n"
 "-p, --priority            同時顯示套件庫的優先權。\n"
-"-d, --details             顯示更多資訊，像是位址、優先權、類型。\n"
-"-r, --with-repos          同時顯示套件庫所屬的服務。\n"
+"-d, --details             顯示更多資訊，如位址、優先權、類型。\n"
+"-r, --with-repos          同時顯示屬於服務的套件庫。\n"
 "-E, --show-enabled-only   僅顯示啟用的套件庫。\n"
-"-P, --sort-by-priority    以套件庫優先權排序清單。\n"
-"-U, --sort-by-uri         以位址排序清單。\n"
-"-N, --sort-by-name        以名稱排序清單。\n"
+"-P, --sort-by-priority    依套件庫優先權排序清單。\n"
+"-U, --sort-by-uri         依位址排序清單。\n"
+"-N, --sort-by-name        依名稱排序清單。\n"
 
 #: src/Zypper.cc:1820
 msgid ""
@@ -3469,7 +3463,7 @@ msgid ""
 msgstr ""
 "refresh-services (refs) [選項]\n"
 "\n"
-"重新整理指定套件庫索引服務。\n"
+"重新整理定義的套件庫索引服務。\n"
 "\n"
 "  指令選項：\n"
 "-f, --force           強制完整的重新整理。\n"
@@ -3543,24 +3537,24 @@ msgid ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"repos (lr) [選項]\n"
+"repos (lr) [選項] [套件庫] ...\n"
 "\n"
 "列出所有已定義的套件庫。\n"
 "\n"
 "  指令選項：\n"
-"-e, --export <FILE.repo>  匯出所有已定義的套件庫成為單一的本機 .repo 檔。\n"
+"-e, --export <檔案.repo>  將所有已定義的套件庫匯出為單一的本機 .repo 檔。\n"
 "-a, --alias               同時顯示套件庫別名。\n"
 "-n, --name                同時顯示套件庫名稱。\n"
-"-u, --uri                 同時顯示套件庫的基礎 URI。\n"
-"-p, --priority            同時顯示套件庫的優先等級。\n"
+"-u, --uri                 同時顯示套件庫的基礎位址。\n"
+"-p, --priority            同時顯示套件庫的優先權。\n"
 "-r, --refresh             同時顯示自動重新整理旗標。\n"
-"-d, --details             顯示更多資訊像是 URI、優先等級和類型。\n"
+"-d, --details             顯示更多資訊，如位址、優先權和類型。\n"
 "-s, --service             同時顯示上一層服務的別名。\n"
 "-E, --show-enabled-only   僅顯示啟用的套件庫。\n"
-"-U, --sort-by-uri         用 URI 排列清單。\n"
-"-P, --sort-by-priority    用套件優先等級排列清單。\n"
-"-A, --sort-by-alias       用別名排列清單。\n"
-"-N, --sort-by-name        用名稱排列清單。\n"
+"-U, --sort-by-uri         依位址排列清單。\n"
+"-P, --sort-by-priority    依套件優先權排列清單。\n"
+"-A, --sort-by-alias       依別名排列清單。\n"
+"-N, --sort-by-name        依名稱排列清單。\n"
 
 #: src/Zypper.cc:1931
 msgid ""
@@ -3574,7 +3568,7 @@ msgid ""
 msgstr ""
 "removerepo (rr) [選項] <別名|編號|位址>\n"
 "\n"
-"使用別名、編號或位址移除指定的套件庫。\n"
+"移除透過別名、編號或位址指定的套件庫。\n"
 "\n"
 "  指令選項：\n"
 "    --loose-auth   忽略位址中的使用者認證資料\n"
@@ -3590,7 +3584,7 @@ msgid ""
 msgstr ""
 "renamerepo (nr) [選項] <別名|編號|位址> <新別名>\n"
 "\n"
-"使用別名、編號或位址將指定的套件庫改名為新別名。\n"
+"將由別名、編號或位址指定的套件庫改名為新別名。\n"
 "\n"
 "本指令沒有其他選項。\n"
 
@@ -3663,9 +3657,9 @@ msgid ""
 "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
 "-s, --services           Refresh also services before refreshing repos.\n"
 msgstr ""
-"refresh (ref) [別名|編號|URI] ...\n"
+"refresh (ref) [別名|編號|位址]...\n"
 "\n"
-"重新整理由別名、編號或 URI 指定的儲存庫。若未指定任何儲存庫，將會重新整理所有啟用的儲存庫。\n"
+"重新整理由別名、編號或位址指定的套件庫。若未指定任何套件庫，將會重新整理所有啟用的套件庫。\n"
 "\n"
 "  指令選項︰\n"
 "-f、--force              強制執行完整的重新整理。\n"
@@ -3673,8 +3667,8 @@ msgstr ""
 "-d、--force-download     強制下載 RAW 中繼資料。\n"
 "-B、--build-only         僅建立資料庫，不下載中繼資料。\n"
 "-D、--download-only      僅下載 RAW 中繼資料，不建立資料庫。\n"
-"-r、--repo <別名|編號|URI> 僅重新整理指定的儲存庫。\n"
-"-s、--services           重新整理儲存庫之前也重新整理服務。\n"
+"-r、--repo <別名|編號|URI> 僅重新整理指定的套件庫。\n"
+"-s、--services           重新整理套件庫之前也重新整理服務。\n"
 
 #: src/Zypper.cc:2054
 msgid ""
@@ -5316,7 +5310,7 @@ msgid ""
 msgstr ""
 "套件完整性檢查失敗。 套件庫或媒體可能有問題。請嘗試下列其中一個動作：\n"
 " \n"
-" – 重試之前的命令\n"
+" – 重試之前的指令\n"
 " – 使用 'zypper refresh' 重新整理套件庫\n"
 " – 使用另一個安裝媒體 (例如媒體損壞時)\n"
 " – 使用另一個套件庫"
