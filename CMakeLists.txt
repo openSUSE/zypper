@@ -7,10 +7,10 @@ cmake_minimum_required(VERSION 2.6)
 OPTION (ENABLE_BUILD_DOCS "Build documentation by default?" OFF)
 OPTION (ENABLE_BUILD_TRANS "Build translation files by default?" OFF)
 OPTION (ENABLE_BUILD_TESTS "Build and run test suite by default?" OFF)
+OPTION (ENABLE_USE_THREADS "Enable using threads (NOT being used by threads!)?" OFF)
 
 OPTION (DISABLE_LIBPROXY "Build without libproxy support even if package is installed?" OFF)
 OPTION (DISABLE_AUTODOCS "Do not require doxygen being installed (required to build autodocs)?" OFF)
-
 #--------------------------------------------------------------------------------
 SET (have_system x)
 
@@ -52,10 +52,12 @@ include(CheckCXXCompilerFlag)
 CHECK_C_COMPILER_FLAG("-Werror=format-security" CC_FORMAT_SECURITY)
 CHECK_CXX_COMPILER_FLAG("-Werror=format-security" CXX_FORMAT_SECURITY)
 
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility-inlines-hidden -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Woverloaded-virtual -Wnon-virtual-dtor -Wl,-as-needed -std=c++11" )
-SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed" )
+SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed" )
 
-set( CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} -O3 -DZYPP_NDEBUG" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fvisibility-inlines-hidden -Woverloaded-virtual -Wnon-virtual-dtor" )
+
+set( CMAKE_C_FLAGS_RELEASE     "${CMAKE_C_FLAGS} -O3 -DZYPP_NDEBUG" )
 set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O3 -DZYPP_NDEBUG" )
 
 IF(${CC_FORMAT_SECURITY})
@@ -94,6 +96,16 @@ ENDMACRO(ADD_TESTS)
 # prefer packages using the same install prefix as we do
 SET(CMAKE_PREFIX_PATH ${CMAKE_INSTALL_PREFIX} usr/localX /usr/local /usr)
 
+IF ( ENABLE_USE_THREADS )
+  SET( CMAKE_THREAD_PREFER_PTHREAD TRUE )
+  FIND_PACKAGE( Threads REQUIRED )
+  IF ( CMAKE_USE_PTHREADS_INIT )
+    MESSAGE( STATUS "May use threads." )
+    SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -pthread -DZYPP_USE_THREADS" )
+    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -DZYPP_USE_THREADS" )
+  ENDIF ( CMAKE_USE_PTHREADS_INIT )
+ENDIF ( ENABLE_USE_THREADS )
+
 FIND_PACKAGE(Rpm REQUIRED)
 IF ( NOT RPM_FOUND)
   MESSAGE( FATAL_ERROR " rpm-devel not found" )
@@ -113,7 +125,7 @@ ELSE ( NOT RPM_FOUND)
   endif ( RPM_SUSPECT_VERSION STREQUAL "5.x" )
 ENDIF( NOT RPM_FOUND)
 
-FIND_PACKAGE(Boost REQUIRED COMPONENTS program_options thread unit_test_framework)
+FIND_PACKAGE(Boost REQUIRED COMPONENTS program_options unit_test_framework)
 IF (Boost_FOUND)
   MESSAGE( STATUS "boost found: includes in ${Boost_INCLUDE_DIRS}, library in ${Boost_LIBRARY_DIRS}")
   INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})

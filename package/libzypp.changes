@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul  5 11:39:11 CEST 2016 - ma@suse.de
+
+- Fix Shrink pool if all repos are removed (bsc#899755, bsc#987573)
+- version 16.1.1 (0)
+
+-------------------------------------------------------------------
 Fri Jun 24 12:33:29 CEST 2016 - ma@suse.de
 
 - API enahncements for zypper (FATE#320447)
