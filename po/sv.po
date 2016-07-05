@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-20 21:36+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
+"PO-Revision-Date: 2016-07-05 08:22+0000\n"
+"Last-Translator: Maribel Florido <mflorido@jensen-localization.com>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
@@ -2807,7 +2807,7 @@ msgstr "Nygrekiska (1453-)"
 #. language code: grn gn
 #: zypp/LanguageCode.cc:505
 msgid "Guarani"
-msgstr "Guarani"
+msgstr "Guaraní"
 
 #. language code: guj gu
 #: zypp/LanguageCode.cc:507
