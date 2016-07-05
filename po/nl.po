@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-05 16:18+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -5785,7 +5785,7 @@ msgstr "Schakel weergave van de leverancier van de pakketten in of uit."
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:662
 msgid "Toggle between showing all details and as few details as possible."
-msgstr "Schakelen tussen alle details en zo min mogelijk details weergeven."
+msgstr "Schakel tussen alle details en zo min mogelijk details weergeven."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
 #: src/solve-commit.cc:664
