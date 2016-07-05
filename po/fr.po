@@ -21,10 +21,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-16 18:18+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"PO-Revision-Date: 2016-07-05 11:04+0000\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -443,12 +443,12 @@ msgstr "Acceptation du paquet malgré l'erreur."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "La valeur de filtre de catégorie '%1%' est suspecte."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "La valeur de filtre de gravité '%1%' est suspecte."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -2752,8 +2752,8 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Prise en compte de %1% correctif applicable sur %2% :"
+msgstr[1] "Prise en compte de %1% correctifs applicables sur %2% :"
 
 #. translator: stats table header
 #: src/update.cc:284
@@ -2805,7 +2805,7 @@ msgstr[1] "%d mises à jour de sécurité"
 #. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
-msgstr ""
+msgstr "Pile de mise à jour"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -2834,10 +2834,9 @@ msgstr ""
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr ""
-"Les mises à jour suivantes du gestionnaire de logiciels seront installées en "
+"Les mises à jour de gestion des logiciels requises seront installées en "
 "premier :"
 
 #: src/update.cc:614 src/update.cc:854
@@ -3701,7 +3700,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3743,7 +3742,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3775,8 +3774,8 @@ msgstr ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <option> <%s>\n"
 "\n"
-"Modifie les propriétés du service spécifié par l'alias, le numéro, l'URI ou "
-"les\n"
+"Modifie les propriétés des services spécifiés par l'alias, le numéro, l'URI "
+"ou les\n"
 "options globales '%s'.\n"
 "\n"
 "  Options de la commande :\n"
@@ -3787,18 +3786,19 @@ msgstr ""
 "                               service.\n"
 "-R, --no-refresh               Désactive le rafraichissement automatique du\n"
 "                               service.\n"
-"-n, --name                     Spécifie un nom descriptif pour le service.\n"
+"-n, --name <nom>                    Spécifie un nom descriptif pour le "
+"service.\n"
 "\n"
 "-i, --ar-to-enable <alias>     Ajoute un dépôt de service RIS à activer.\n"
 "-I, --ar-to-disable <alias>    Ajoute un dépôt de service RIS à désactiver.\n"
 "-j, --rr-to-enable <alias>     Supprime un dépôt de service RIS à activer.\n"
-"-J, --rr-to-disable <alias>    Supprime un dépôt de service RIS à "
-"désactiver.\n"
+"-J, --rr-to-disable <alias>    Supprime un dépôt de service RIS à désactiver."
+"\n"
 "-k, --cl-to-enable             Efface la liste des dépôts RIS à activer.\n"
 "-K, --cl-to-disable            Efface la liste des dépôts RIS à désactiver.\n"
 "\n"
-"-a, --all                      Applique les changements à tous les "
-"services.\n"
+"-a, --all                      Applique les changements à tous les services."
+"\n"
 "-l, --local                    Applique les changements à tous les services\n"
 "                               locaux.\n"
 "-t, --remote                   Applique les changements à tous les services\n"
@@ -3989,7 +3989,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4026,18 +4026,18 @@ msgstr ""
 "-d, --disable             Désactive le dépôt (mais ne le supprime pas).\n"
 "-e, --enable              Active un dépôt préalablement désactivé.\n"
 "-r, --refresh             Active le rafraichissement automatique du dépôt.\n"
-"-R, --no-refresh          Désactive le rafraichissement automatique du "
-"dépôt.\n"
-"-n, --name                Spécifie un nom descriptif pour le dépôt.\n"
-"-p, --priority <entier>   Fixe une priorité au dépôt.\n"
-"-k, --keep-packages       Active le cache des fichiers RPM.\n"
-"-K, --no-keep-packages    Désactive le cache des fichiers RPM.\n"
+"-R, --no-refresh          Désactive le rafraichissement automatique du dépôt."
+"\n"
+"-n, --name <nom>               Spécifie un nom descriptif pour le dépôt.\n"
+"-p, --priority <entier>   Définit la priorité du dépôt.\n"
+"-k, --keep-packages       Active la mise en cache des fichiers RPM.\n"
+"-K, --no-keep-packages    Désactive la mise en cache des fichiers RPM.\n"
 "-g, --gpgcheck            Active la vérification GPG pour ce dépôt.\n"
 "-G, --no-gpgcheck         Désactive la vérification GPG pour ce dépôt.\n"
 "\n"
 "-a, --all                 Applique les changements à tous les dépôts.\n"
-"-l, --local               Applique les changements à tous les dépôts "
-"locaux.\n"
+"-l, --local               Applique les changements à tous les dépôts locaux."
+"\n"
 "-t, --remote              Applique les changements à tous les dépôts "
 "distants.\n"
 "-m, --medium-type <type>  Applique les changements à tous les dépôts du "
@@ -4409,6 +4409,8 @@ msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <AAAA-MM-JJ>\n"
+"Répertorie tous les correctifs émis avant la date spécifiée."
 
 #: src/Zypper.cc:2306
 msgid ""
