@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 07:18+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 07:20+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -1621,7 +1621,7 @@ msgstr "Na de bewerking zal er geen extra ruimte in gebruik zijn of vrijkomen."
 #: src/Summary.cc:1258
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
-msgstr "Na de operatie zal %s worden vrijgemaakt."
+msgstr "Na de bewerking zal %s worden vrijgemaakt."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1281
@@ -1648,7 +1648,7 @@ msgstr[1] "af te waarderen pakketten"
 #: src/Summary.cc:1306
 msgid "new"
 msgid_plural "new"
-msgstr[0] "nieuwe"
+msgstr[0] "nieuw"
 msgstr[1] "nieuwe"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
@@ -1656,7 +1656,7 @@ msgstr[1] "nieuwe"
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "nieuw te installeren pakket"
-msgstr[1] "nieuw te installeren pakketten"
+msgstr[1] "nieuwe te installeren pakketten"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1320
@@ -1719,7 +1719,7 @@ msgstr[1] "pakketten zullen van architectuur wijzigen"
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "broncodepakket"
-msgstr[1] "broncodepakketten"
+msgstr[1] "Broncodepakket"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1379
@@ -1735,7 +1735,7 @@ msgstr "Systeemherstart vereist."
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "Sla het ophalen van het bestand over en beëindig de huidige operatie."
+msgstr "Ophalen van het bestand overslaan en de huidige bewerking beëindigen."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
@@ -1748,8 +1748,8 @@ msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr ""
-"Sla het ophalen van het bestand over en probeer verder te gaan met de "
-"operatie zonder het bestand."
+"Ophalen van het bestand overslaan en proberen verder te gaan met de "
+"bewerking zonder het bestand."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
