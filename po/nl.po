@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 16:32+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 16:35+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -846,33 +846,33 @@ msgstr "Object '%s' niet gevonden."
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "Pakket '%s' is niet gevonden in gespecificeerde opslagruimten."
+msgstr "Pakket '%s' is niet gevonden in gespecificeerde installatiebronnen."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Patch '%s' is niet gevonden in gespecificeerde opslagruimten."
+msgstr "Patch '%s' is niet gevonden in gespecificeerde installatiebronnen."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Product '%s' is niet gevonden in gespecificeerde opslagruimten."
+msgstr "Product '%s' is niet gevonden in gespecificeerde installatiebronnen."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "Patroon '%s' is niet gevonden in gespecificeerde opslagruimten."
+msgstr "Patroon '%s' is niet gevonden in gespecificeerde installatiebronnen."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Bronpakket '%s' is niet gevonden in gespecificeerde opslagruimten."
+msgstr "Bronpakket '%s' is niet gevonden in gespecificeerde installatiebronnen."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "Object '%s' is niet gevonden in gespecificeerde opslagruimten."
+msgstr "Object '%s' is niet gevonden in gespecificeerde installatiebronnen."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
@@ -6167,7 +6167,7 @@ msgid ""
 "with required licenses, or use the %s option."
 msgstr ""
 "Start de bewerking opnieuw in de interactieve modus en ga akkoord met de "
-"vereiste licentie of gebruik de optie %s"
+"vereiste licentie of gebruik de optie %s."
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:187
