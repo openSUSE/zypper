@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 07:27+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 07:49+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -1214,7 +1214,7 @@ msgstr[1] "De volgende %d producten zullen worden afgewaardeerd:"
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "De volgende toepassing zal worden afgewaardeerd:"
-msgstr[1] "De volgende %d patronen zullen worden afgewaardeerd:"
+msgstr[1] "De volgende %d toepassingen zullen worden afgewaardeerd:"
 
 #: src/Summary.cc:669
 #, c-format, boost-format
@@ -1589,7 +1589,8 @@ msgstr "Beschikbaar"
 #: src/Summary.cc:1212
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
-msgstr "Voer '%1%' uit om een lijst te zien met vergrendelde items."
+msgstr ""
+"Voer '%1%' uit om de volledige lijst met vergrendelde items te bekijken."
 
 #: src/Summary.cc:1222
 #, c-format, boost-format
@@ -1962,34 +1963,34 @@ msgstr ""
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
-msgstr "Geen alias gedefinieert voor deze installatiebron."
+msgstr "Geen alias gedefinieerd voor deze opslagruimte."
 
 #: src/repos.cc:339
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
-msgstr "Installatiebron %s is ongeldig."
+msgstr "Opslagruimte %s is ongeldig."
 
 #: src/repos.cc:340
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
-"Gaarne controleren of de gedefinieerde URI's voor deze bron wijzen naar een "
-"geldige installatiebron."
+"Controleer of de gedefinieerde URI's voor deze opslagruimte verwijzen naar "
+"een geldige opslagruimte."
 
 #: src/repos.cc:352
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Fout bij ophalen van metadata voor '%s':"
+msgstr "Fout bij ophalen van metagegevens voor '%s'."
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
-msgstr "Bouwen van broncache forceren"
+msgstr "Bouwen van opslagruimtecache forceren"
 
 #: src/repos.cc:390
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
-msgstr "Fout bij analyseren van metadata voor '%s':"
+msgstr "Fout bij analyseren van metagegevens voor '%s'."
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: src/repos.cc:392
@@ -1999,15 +2000,16 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"Dit kan worden veroorzaakt door ongeldige metadata in de installatiebron of "
-"door een fout in de metadata-parser. In het laatste geval of als u twijfelt, "
-"rapporteer de fout door de instructies op webpagina http://nl.opensuse.org/"
-"SDB:Zypper_problemen_oplossen op te volgen"
+"Dit kan worden veroorzaakt door ongeldige metagegevens in de opslagruimte of "
+"door een fout in de parser van de metagegevens. In het laatste geval of als "
+"u twijfelt, geeft u de fout door aan de hand van de instructies op "
+"http://nl.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:401
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Bron-metadata voor '%s' niet gevonden in de lokale cache."
+msgstr ""
+"Metagegevens in opslagruimte voor '%s' niet gevonden in de lokale cache."
 
 #: src/repos.cc:409
 msgid "Error building the cache:"
@@ -2017,33 +2019,32 @@ msgstr "Fout bij opbouwen van de cache:"
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr ""
-"Installatiebron '%s' is niet gevonden aan de hand van zijn alias, nummer of "
-"URI."
+"Opslagruimte '%s' is niet gevonden aan de hand van de alias, nummer of URI."
 
 #: src/repos.cc:612
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr "Gebruik '%s' voor een lijst met gedefinieerde installatiebronnen."
+msgstr "Gebruik '%s' voor een lijst met gedefinieerde opslagruimten."
 
 #: src/repos.cc:633
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
-msgstr "Negeren van uitgeschakelde installatiebron '%s'"
+msgstr "Negeren van uitgeschakelde opslagruimte '%s'"
 
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Installatiebron '%s' wordt genegeerd vanwege de optie '%s'."
+msgstr "Opslagruimte '%s' wordt genegeerd vanwege de optie '%s'."
 
 #: src/repos.cc:749
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr "Scannen van inhoud van uitgeschakelde installatiebron '%s'."
+msgstr "Inhoud scannen van uitgeschakelde opslagruimte '%s'."
 
 #: src/repos.cc:765 src/repos.cc:798 src/repos.cc:1297
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Slaat installatiebron '%s' over vanwege bovengenoemde fout."
+msgstr "Slaat opslagruimte '%s' over vanwege bovengenoemde fout."
 
 #: src/repos.cc:784
 #, c-format, boost-format
@@ -2051,8 +2052,8 @@ msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
-"Bron '%s' is niet actueel. U kunt als root  'zypper refresh' draaien om deze "
-"bij te werken."
+"Opslagruimte '%s' is niet actueel. U kunt als root 'zypper refresh' "
+"uitvoeren om deze bij te werken."
 
 #: src/repos.cc:816
 #, c-format, boost-format
@@ -2060,13 +2061,13 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
-"De metagegevenscache moet gebouwd worden voor installatiebron '%s'. U kunt "
-"als root 'zypper refresh' draaien om dat te doen."
+"De metagegevenscache moet gebouwd worden voor opslagruimte '%s'. U kunt als "
+"root 'zypper refresh' uitvoeren om dat te doen."
 
 #: src/repos.cc:820
 #, c-format, boost-format
 msgid "Disabling repository '%s'."
-msgstr "Deactiveren van installatiebron '%s'."
+msgstr "Deactiveren van opslagruimte '%s'."
 
 #: src/repos.cc:834
 #, c-format, boost-format
@@ -2147,7 +2148,7 @@ msgstr ""
 
 #: src/repos.cc:1103
 msgid "Auto-refresh"
-msgstr "Autovernieuwen"
+msgstr "Automatisch vernieuwen"
 
 #: src/repos.cc:1103 src/repos.cc:1104
 msgid "On"
@@ -2171,7 +2172,7 @@ msgstr "Padvoorvoegsel"
 
 #: src/repos.cc:1108
 msgid "Parent Service"
-msgstr "Ouderservice"
+msgstr "Hoofdservice"
 
 #: src/repos.cc:1109
 msgid "Keywords"
@@ -2210,7 +2211,7 @@ msgstr "Gespecificeerde installatiebronnen: "
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Slaat uitgeschakelde installatiebron '%s' over"
+msgstr "Uitgeschakelde opslagruimte '%s' overslaan"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
