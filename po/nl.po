@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 16:19+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 16:32+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -5565,9 +5565,9 @@ msgstr[1] ""
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] ""
-"Kies de bovenstaande oplossing door '1' te gebruiken of annuleren door 'a' "
-"te gebruiken"
-msgstr[1] "Kies uit de bovenstaande oplossingen door een nummer of annuleren"
+"Kies de bovenstaande oplossing door '1' te gebruiken of kies (a)nnuleren"
+msgstr[1] ""
+"Kies uit de bovenstaande oplossingen door een nummer of kies (a)nnuleren"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -5798,7 +5798,7 @@ msgstr "goedkeuren"
 
 #: src/solve-commit.cc:776
 msgid "(dry run)"
-msgstr "(testdraai)"
+msgstr "(test)"
 
 #: src/solve-commit.cc:800 src/solve-commit.cc:833
 msgid "Problem retrieving the package file from the repository:"
@@ -5808,7 +5808,7 @@ msgstr "Probleem bij ophalen van pakketbestand van de installatiebron:"
 #: src/solve-commit.cc:830
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "Installatiebron '%s' is verouderd. Draaien van '%s' kan helpen."
+msgstr "Opslagruimte '%s' is verouderd. Als u '%s' uitvoert, kan dit helpen."
 
 #: src/solve-commit.cc:841
 msgid ""
@@ -5868,7 +5868,7 @@ msgstr "Aan afhankelijkheden van alle pakketten is voldaan."
 
 #: src/solve-commit.cc:907 src/download.cc:129
 msgid "Nothing to do."
-msgstr "Niets te doen."
+msgstr "Geen activiteit."
 
 #. process ID
 #: src/ps.cc:115
@@ -5929,8 +5929,8 @@ msgid ""
 "incomplete."
 msgstr ""
 "Opmerking: Werkt niet als root, u bent beperkt tot het zoeken naar bestanden "
-"die u mag bekijken met de systeemfunctie stat(2). Het resultaat kan niet "
-"volledig zijn."
+"die u mag bekijken met de systeemfunctie stat(2). Het resultaat kan "
+"onvolledig zijn."
 
 #: src/source-download.cc:208
 #, c-format, boost-format
@@ -6050,7 +6050,7 @@ msgstr "Geen producten gevonden."
 #: src/search.cc:675
 #, c-format, boost-format
 msgid "No providers of '%s' found."
-msgstr "Geen leveranciers van '%s' gevonden."
+msgstr "Geen providers van '%s' gevonden."
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
@@ -6087,15 +6087,15 @@ msgstr "geen hulp beschikbaar voor deze optie"
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/download.cc:114
 msgid "Argument resolves to no package"
-msgstr "Het argument levert geen pakket"
+msgstr "Argument is geen oplossing voor een pakket"
 
 #: src/download.cc:136
 msgid "No prune to best version."
-msgstr "Heeft niet geleid tot de beste versie."
+msgstr "Geen prune voor beste versie."
 
 #: src/download.cc:142
 msgid "Prune to best version..."
-msgstr "Laat het leiden tot de beste versie..."
+msgstr "Prune naar beste versie..."
 
 #: src/download.cc:148
 msgid "Not downloading anything..."
@@ -6109,7 +6109,7 @@ msgstr "Fout bij downloaden van pakket '%s'."
 #: src/download.cc:204
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
-msgstr "Niet downloaden van pakket '%s'."
+msgstr "Pakket '%s' wordt niet gedownload."
 
 #: src/PackageArgs.cc:204
 #, c-format, boost-format
@@ -6122,8 +6122,8 @@ msgid ""
 "Different package type specified in '%s' option and '%s' argument. Will use "
 "the latter."
 msgstr ""
-"Verschillend pakkettype gespecificeerd in '%s' optie en '%s' argument. Zal "
-"de laatste gebruiken."
+"Verschillende pakkettypen opgegeven in de optie '%s' en het argument '%s'. "
+"Laatstgenoemde wordt gebruikt."
 
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
@@ -6166,16 +6166,16 @@ msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
 msgstr ""
-"Gaarne de bewerking opnieuw starten in de interactieve modus en ga akkoord "
-"met de vereiste licentie(s) of gebruik de optie %s."
+"Start de bewerking opnieuw in de interactieve modus en ga akkoord met de "
+"vereiste licentie of gebruik de optie %s"
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:187
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
-"Installatie wordt afgebroken omdat gebruiker niet akkoord gaat met %s %s "
-"licentie."
+"Installatie wordt afgebroken omdat gebruiker niet akkoord gaat met de "
+"licentie %s %s."
 
 #: src/misc.cc:225
 msgid "License"
@@ -6237,7 +6237,7 @@ msgstr "Probleem bij installeren van bronpakket %s-%s:"
 #. translators: locks table value
 #: src/locks.cc:24 src/locks.cc:128
 msgid "(any)"
-msgstr "(welke ook)"
+msgstr "(elk)"
 
 #. translators: locks table value
 #: src/locks.cc:26 src/locks.cc:125
@@ -6270,7 +6270,7 @@ msgstr "Fout bij lezen van het blokkeringsbestand:"
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "De gespecificeerde blokkering is met succes toegevoegd."
-msgstr[1] "De gespecificeerde blokkering is met succes toegevoegd."
+msgstr[1] "De gespecificeerde blokkeringen zijn met succes toegevoegd."
 
 #: src/locks.cc:233
 msgid "Problem adding the package lock:"
@@ -6278,7 +6278,7 @@ msgstr "Probleem bij toevoegen van pakketblokkering:"
 
 #: src/locks.cc:257
 msgid "Specified lock has been successfully removed."
-msgstr "De gespecificeerde blokkering is met succes verwijderd."
+msgstr "De gespecificeerde blokkering is verwijderd."
 
 #: src/locks.cc:302
 msgid "No lock has been removed."
@@ -6293,7 +6293,7 @@ msgstr[1] "%zu blokkeringen zijn met succes verwijderd."
 
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
-msgstr "Probleem bij het verwijderen de pakketblokkering:"
+msgstr "Probleem bij het verwijderen van de pakketblokkering:"
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
@@ -6322,10 +6322,10 @@ msgid ""
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
 msgstr ""
-"U hebt er voor gekozen om aan een probleem met het downloaden  or "
-"installatie van een pakket geen aandacht te geven dat kan leiden tot "
-"gebroken afhankelijkheden van andere pakketten. Het is aanbevolen om '%s' te "
-"draaien nadat de operatie is beëindigd."
+"U hebt ervoor gekozen om aan een probleem met het downloaden of installeren "
+"van een pakket geen aandacht te geven. Dit kan leiden tot gebroken "
+"afhankelijkheden van andere pakketten. U kunt het beste '%s' uitvoeren nadat "
+"de bewerking is beëindigd."
 
 #: src/utils/pager.cc:32
 #, c-format, boost-format
@@ -6346,7 +6346,7 @@ msgstr ""
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
-msgstr "Kan de configuratiebestandsontleder niet initialiseren."
+msgstr "Kan de configuratiebestandsparser niet initialiseren."
 
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
@@ -6354,7 +6354,7 @@ msgstr "Augeas-fout: instellen van te laden configuratiebestand is mislukt."
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
-msgstr "Kan de configuratiebestanden niet ontleden."
+msgstr "Kan de configuratiebestanden niet parseren."
 
 #: src/utils/Augeas.cc:99
 msgid "Error parsing zypper.conf:"
@@ -6381,8 +6381,8 @@ msgid ""
 "%s used together with %s, which contradict each other. This property will be "
 "left unchanged."
 msgstr ""
-"%s is samen met %s gebruikt, terwijl ze elkaar tegenspreken. Deze bron zal "
-"niet worden gewijzigd."
+"%s is samen met %s gebruikt, terwijl ze elkaar tegenspreken. Deze eigenschap "
+"zal niet worden gewijzigd."
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:72
@@ -6416,8 +6416,8 @@ msgstr "a/o/n"
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] "Autoselecteren '%s' na %u seconde."
-msgstr[1] "Autoselecteren '%s' na %u seconden."
+msgstr[0] "'%s' automatisch selecteren  na %u seconde."
+msgstr[1] "'%s' automatisch selecteren na %u seconden."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
@@ -6433,8 +6433,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
-"Als u zypper draait zonder een terminal gebruik dan de globale\n"
-"optie '%s' zodat zypper de standaard antwoorden gebruikt op vragen."
+"Als u zypper uitvoert zonder een terminal gebruik dan de algemene\n"
+"optie '%s' zodat zypper de standaardantwoorden gebruikt op vragen."
 
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
@@ -6445,8 +6445,7 @@ msgstr "Ongeldig antwoord '%s'."
 #: src/utils/prompt.cc:326
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr ""
-"Voer '%s' in voor '%s' of '%s' voor '%s' als niets anders voor u werkt."
+msgstr "Voer '%s' in voor '%s' of '%s' voor '%s' als er niets anders werkt."
 
 #: src/utils/misc.cc:113
 msgid "package"
@@ -6488,8 +6487,8 @@ msgstr[1] "toepassingen"
 #: src/utils/misc.cc:125
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "oplosbare"
-msgstr[1] "oplosbaren"
+msgstr[0] "oplosbaar item"
+msgstr[1] "oplosbare items"
 
 #. Patch status: i18n + color
 #. translator: patch status
@@ -6592,12 +6591,12 @@ msgstr "Onbekende downloadmodus '%s'."
 #: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Available download modes: %s"
-msgstr "Beschikbare downloadmodussen: %s"
+msgstr "Beschikbare downloadmodi: %s"
 
 #: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
-msgstr "Optie '%s' gaat over '%s' heen."
+msgstr "Optie '%s' gaat voor op '%s'."
 
 #~ msgid "Name: "
 #~ msgstr "Naam: "
