@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-05 05:53+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -2468,7 +2468,7 @@ msgstr "在您這樣做之前，嘗試 '%s'，或甚至 '%s' 。"
 
 #: src/repos.cc:3160
 msgid "Reading installed packages..."
-msgstr "讀取已安裝的套件..."
+msgstr "正在讀取已安裝的套件..."
 
 #: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
