@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 11:04+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-05 11:14+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -59,7 +59,7 @@ msgstr "Nom RPM :"
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "La clé d'authentification GPG '%1%' a expiré."
+msgstr "Le fichier de signature de clé GPG '%1%' est arrivé à expiration."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
@@ -232,11 +232,11 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
-"La vérification de la somme de contrôle a échoué pour le fichier '%1%'\n"
+"La vérification du digest a échoué pour le fichier '%1%'\n"
 "[%2%]\n"
 "\n"
-"  attendait %3%\n"
-"  mais reçut  %4%\n"
+"  Valeur attendue : %3%\n"
+"  Valeur reçue: %4%\n"
 
 #: src/callbacks/keyring.h:344
 msgid ""
