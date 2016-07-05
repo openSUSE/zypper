@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 15:48+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 15:51+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -4839,8 +4839,8 @@ msgstr ""
 "door de exacte naam of door een zoekpatroon met de jokertekens '*' en '?'.\n"
 "\n"
 "  Opdrachtopties:\n"
-"-r, --repo <alias|#|URI>  Beperk de vergrendeling tot de opgegeven "
-"opslagruimte.\n"
+"-r, --repo <alias|#|URI>  Beperk de vergrendeling tot de gespecificeerde "
+"bron.\n"
 "-t, --type <type>         Type pakket (%s).\n"
 "                          Standaard: %s.\n"
 
@@ -4871,12 +4871,12 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:2830
 msgid "locks (ll) [options]"
-msgstr "locks (ll) [opties]"
+msgstr "vergrendelingen (ll) [opties]"
 
 #. translators: command description
 #: src/Zypper.cc:2833
 msgid "List current package locks."
-msgstr "Maak een lijst met de huidige pakketblokkeringen."
+msgstr "Maak een lijst met de huidige pakketvergrendelingen."
 
 #. translators: -m, --matches
 #: src/Zypper.cc:2837
