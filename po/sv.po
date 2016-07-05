@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 14:31+0000\n"
+"PO-Revision-Date: 2016-07-05 09:12+0000\n"
 "Last-Translator: Maribel Florido <mflorido@jensen-localization.com>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
@@ -4251,24 +4251,32 @@ msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <KATEGORI>\n"
+"Lista endast programfixar som har den här kategorin."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <ALLVARLIGHETSGRAD>\n"
+"Lista endast programfixar med den här allvarlighetsgraden."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Lista alla programfixar, inte bara de som är tillgängliga."
 
 #: src/Zypper.cc:2310
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Lista endast programfixar från det angivna arkivet."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4444,7 +4452,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [ALTERNATIV]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4452,19 +4460,25 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Visa statistik om tillgängliga programfixar. Kommandot returnerar 100 om "
+"nödvändiga programfixar hittas, och 101 om det finns minst en nödvändig "
+"säkerhetsuppdatering."
 
 #: src/Zypper.cc:2476
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Sök efter programfixar endast i det angivna arkivet."
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "Sök endast efter korrigeringar som påverkar själva pakethanteringen."
+msgstr ""
+"--updatestack-only\n"
+"Sök endast efter programfixar som påverkar själva pakethanteringen."
 
 #: src/Zypper.cc:2494
 msgid ""
@@ -5251,9 +5265,8 @@ msgstr "Den angivna lagringsplatsen \"%s\" är inaktiverad."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
-msgstr "Inga matchande utgåvor hittades."
+msgstr "Inga matchande objekt hittades."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
@@ -5325,12 +5338,12 @@ msgstr "Det behövs root-behörighet för att kunna lägga till paketlås."
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tog bort %lu lås."
+msgstr[1] "Tog bort %lu lås."
 
 #: src/Zypper.cc:5034
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "XML-utdata har inte implementerats för det här kommandot."
 
 #: src/Zypper.cc:5047
 #, c-format, boost-format
@@ -5389,15 +5402,19 @@ msgstr " Lösning: %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
+"Välj lösningen ovan genom att använda '1', eller hoppa över, försök igen "
+"eller avbryt"
 msgstr[1] ""
+"Välj numret för någon av lösningarna ovan, eller hoppa över, försök igen "
+"eller avbryt"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:78
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Välj lösningen ovan genom att använda '1', eller avbryt med 'c'"
+msgstr[1] "Välj numret för någon av lösningarna ovan eller avbryt"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -5498,9 +5515,8 @@ msgid "Check failed:"
 msgstr "Kontrollen misslyckades:"
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
-msgstr "DNS-kontroll"
+msgstr "Hoppa över kontrollen:"
 
 #: src/solve-commit.cc:457
 #, c-format, boost-format
@@ -6083,11 +6099,10 @@ msgid "Error reading the locks file:"
 msgstr "Ett fel uppstod vid läsning av låsfilen:"
 
 #: src/locks.cc:226
-#, fuzzy
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] "Arkivet %s har ändrats."
-msgstr[1] "Arkivet %s har ändrats."
+msgstr[0] "Det angivna låset har lagts till."
+msgstr[1] "De angivna låsen har lagts till."
 
 #: src/locks.cc:233
 msgid "Problem adding the package lock:"
@@ -6102,11 +6117,11 @@ msgid "No lock has been removed."
 msgstr "Inget lås har tagits bort."
 
 #: src/locks.cc:306
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "Arkivet %s har ändrats."
-msgstr[1] "Arkivet %s har ändrats."
+msgstr[0] "%zu lås har tagits bort."
+msgstr[1] "%zu lås har tagits bort."
 
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
@@ -6232,8 +6247,8 @@ msgstr "a/f/i"
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Väljer '%s' automatiskt efter %u sekund."
+msgstr[1] "Väljer '%s' automatiskt efter %u sekunder."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
@@ -6241,7 +6256,7 @@ msgstr "Försöker igen..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "Det går inte att läsa inmatningen: dålig ström eller EOF."
 
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
@@ -6302,11 +6317,10 @@ msgstr[1] "applikationer"
 
 #. default
 #: src/utils/misc.cc:125
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "Resurs"
-msgstr[1] "Resurs"
+msgstr[0] "resurs"
+msgstr[1] "resurser"
 
 #. Patch status: i18n + color
 #. translator: patch status
