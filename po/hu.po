@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-04 13:21+0000\n"
+"PO-Revision-Date: 2016-07-05 11:48+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian "
 "<https://l10n.opensuse.org/projects/zypper/master/hu/>\n"
@@ -60,8 +60,8 @@ msgstr "A gpg kulcs '%1%' aláíró fájljának érvényessége lejárt."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A(z) '%1%' kulcsaláíró fájl érvényessége %2% nap múlva lejár."
+msgstr[1] "A(z) '%1%' kulcsaláíró fájl érvényessége %2% nap múlva lejár."
 
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
@@ -349,15 +349,19 @@ msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
 msgstr[0] ""
+"A következő csomagot ki kellett zárni a fájlütközések ellenőrzéséből, mert "
+"még nincs letöltve:"
 msgstr[1] ""
+"A következő %1% csomagot ki kellett zárni a fájlütközések ellenőrzéséből, "
+"mert még nincs letöltve:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:408
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% fájlütközés észlelhető:"
+msgstr[1] "%1% fájlütközés észlelhető:"
 
 #: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
@@ -430,12 +434,12 @@ msgstr "A csomag elfogadása a hiba ellenére."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Gyanús kategóriaszűrő-érték: '%1%'."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Gyanús súlyossági szűrőérték: '%1%'."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -509,8 +513,8 @@ msgstr "Leírás"
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% találat lenne a következőhöz: '%2%'."
+msgstr[1] "%1% találat lenne a következőhöz: '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:168
@@ -1057,7 +1061,7 @@ msgstr "Ütközés hozzáadása: '%s'."
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Ezt akarta írni: %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1065,8 +1069,8 @@ msgstr ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... és további %1% elem."
+msgstr[1] "... és további %1% elem."
 
 #: src/Summary.cc:505
 #, boost-format, c-format
@@ -2130,7 +2134,7 @@ msgstr "Szűlő szolgáltatás"
 
 #: src/repos.cc:1109
 msgid "Keywords"
-msgstr ""
+msgstr "Kulcsszavak"
 
 #: src/repos.cc:1110
 msgid "Repo Info Path"
@@ -2720,16 +2724,16 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Döntéshozatal a(z) %1%. javításról a(z) %2% alkalmazható javítás közül:"
+msgstr[1] "Döntéshozatal a(z) %1%. javításról a(z) %2% alkalmazható javítás közül:"
 
 #. translator: stats table header
 #: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% alkalmazható javítás található:"
+msgstr[1] "%1% alkalmazható javítás található:"
 
 #. translator: stats summary
 #: src/update.cc:294
@@ -2752,7 +2756,7 @@ msgstr[1] "%d javítás nem kötelező"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "a nem kötelező javítások belefoglalásához használja a következőt: '%1%'"
 
 #. translator: stats summary
 #: src/update.cc:315
@@ -2775,7 +2779,7 @@ msgstr[1] "%d biztonsági javítás"
 #. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
-msgstr ""
+msgstr "Frissítési köteg"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -2785,7 +2789,7 @@ msgstr "Javítások"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "Zárolva"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2794,7 +2798,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "Benne foglalt kategóriák"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -2877,14 +2881,17 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"Azt jelzi, hogy szükségesként kezelendők vagy kizárandók-e a nem kötelező "
+"javítások."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Az alapértelmezés a nem kötelező javítások kihagyása."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Az alapértelmezés a nem kötelező javítások belefoglalása."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3337,7 +3344,7 @@ msgstr "Az %s kapcsolónak itt nincs szerepe, ezért figyelmen kívül marad."
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "A Zypper shell nem támogatja az alparancsok végrehajtását."
 
 #: src/Zypper.cc:1313
 #, c-format, boost-format
@@ -3463,6 +3470,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Nincs szükség felhasználói beavatkozásra. A  --non-interactive globális "
+"beállítás álneve."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -3551,6 +3560,9 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"Az RPM alapértelmezés szerint a következő helyre telepíti a csomagokat: '%1%"
+"'. Ez az érték módosítható az RPM helyi konfigurációjában. Kétség esetén "
+"próbálkozzon a következő végrehajtásával: '%2%'."
 
 #: src/Zypper.cc:1613
 #, c-format, boost-format
@@ -3936,7 +3948,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3969,21 +3981,22 @@ msgstr ""
 "megadott telepítési forrás tulajdonságainak módosítása.\n"
 "\n"
 "  Parancs kapcsolói:\n"
-"-d, --disable              A telepítési forrás letiltása(eltávolítás "
-"nélkül).\n"
+"-d, --disable              A telepítési forrás letiltása(eltávolítás nélkül)."
+"\n"
 "-e, --enable               Egy letiltott telepítési forrás engedélyezése.\n"
 "-r, --refresh                A telepítési forrás automatikus frissítésének "
 "engedélyezése.\n"
 "-R, --no-refresh         A telepítési forrás automatikus frissítésének "
 "letiltása.\n"
-"-n, --name                Leírónév adása a telepítési forrásnak.\n"
-"-p, --priority <1-99>     A telepítési forrás prioritásnak beállítása. "
-"További információ a man oldalakon található.\n"
+"-n, --name <név>         Leírónév adása a telepítési forrásnak.\n"
+"-p, --priority <egész szám>     A telepítési forrás prioritásnak beállítása."
+"\n"
 "-k --keep-packages     Az RPM-fájlok gyorsítótárazásának engedélyezése.\n"
 "-K --no-keep-packages     Az RPM-fájlok gyorsítótárazásának kikapcsolása.\n"
 "-g, --gpgcheck          GPG-ellenőrzés engedélyezése ehhez a telepítési "
 "forráshoz.\n"
 "-G, --no-gpgcheck       GPG-ellenőrzés letiltása ehhez a forráshoz.\n"
+"\n"
 "-a, --all            A változtatások életbe léptetése minden telepítési "
 "forrásra.\n"
 "-l, --local           A változtatások életbe léptetése minden helyi "
@@ -4315,63 +4328,77 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [BEÁLLÍTÁSOK]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Minden alkalmazható csomag listázása."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"A Bugzilla-problémákra alkalmazható javítások listázása."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"A CVE-problémákra alkalmazható javítások listázása."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=KARAKTERLÁNC]\n"
+"A megadott karakterláncnak megfelelő problémák megkeresése."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <ÉÉÉÉ-HH-NN>\n"
+"A megadott dátumnál korábban kiadott javítások felsorolása (a megadott dátum "
+"nem számít bele)."
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <CATEGORY>\n"
+"Az ilyen kategóriájú javítások felsorolása."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <SEVERITY>\n"
+"Az ilyen súlyosságú javítások felsorolása."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Minden javítás felsorolása (nem csak az alkalmazható javításoké)."
 
 #: src/Zypper.cc:2310
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
-"    --from <alias|#|URI>        Paquetes seleccionados sólo del repositorio "
-"indicado.\n"
+"-r, --repo <ALIAS|#|URI>\n"
+"Csak a megadott telepítés forrásban található javítások listázása."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4556,7 +4583,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [BEÁLLÍTÁSOK]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4564,22 +4591,25 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Az alkalmazható javításokra vonatkozó statisztika megjelenítése. Ha "
+"találhatók szükséges javítások, a parancs 100-at ad eredményül, ha legalább "
+"egy szükséges biztonsági javítás található, akkor 101-et."
 
 #: src/Zypper.cc:2476
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
-"    --from <alias|#|URI>        Paquetes seleccionados sólo del repositorio "
-"indicado.\n"
+"-r, --repo <ALIAS|#|URI>\n"
+"Csak a megadott telepítés forrásban található csomagok keresése."
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "Csak a magát a csomagkezelést befolyásoló javítások keresése."
+msgstr ""
+"--updatestack-only\n"
+"Csak a magát a csomagkezelést befolyásoló javítások keresése."
 
 #: src/Zypper.cc:2494
 msgid ""
@@ -5392,9 +5422,8 @@ msgstr "A megadott '%s' telepítési forrás le van tiltva."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
-msgstr "Nem található ehhez illeszkedő hibabejelentés."
+msgstr "Nem találhatók megfelelő elemek."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
@@ -5471,7 +5500,7 @@ msgstr[1] "%lu zárolás eltávolítva."
 
 #: src/Zypper.cc:5034
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "Ennél a parancsnál nincs megvalósítva az XML-kimenet."
 
 #: src/Zypper.cc:5047
 #, c-format, boost-format
@@ -5649,9 +5678,8 @@ msgid "Check failed:"
 msgstr "Sikertelen ellenőrzés:"
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
-msgstr "GPG-ellenőrzés"
+msgstr "Ellenőrzés kihagyása:"
 
 #: src/solve-commit.cc:457
 #, c-format, boost-format
@@ -6264,11 +6292,11 @@ msgid "No lock has been removed."
 msgstr "Nem lett zárolás feloldva."
 
 #: src/locks.cc:306
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "%zu zárolás sikeresen feloldva."
-msgstr[1] "%zu zárolás sikeresen feloldva."
+msgstr[0] "%z zárolás sikeresen feloldva."
+msgstr[1] "%z zárolás sikeresen feloldva."
 
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
@@ -6403,7 +6431,7 @@ msgstr "Újrapróbálkozás..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "A bemenet nem olvasható: rossz adatfolyam vagy véget ért a fájl (EOF)."
 
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
@@ -6461,8 +6489,8 @@ msgstr[1] "forráscsomag"
 #: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "alkalmazás"
+msgstr[1] "alkalmazások"
 
 #. default
 #: src/utils/misc.cc:125
@@ -6475,13 +6503,12 @@ msgstr[1] "feloldható"
 #. translator: patch status
 #: src/utils/misc.cc:134
 msgid "unwanted"
-msgstr ""
+msgstr "nem kért"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
-#, fuzzy
 msgid "optional"
-msgstr "ps [beállítások]"
+msgstr "nem kötelező"
 
 #. translator: patch status
 #: src/utils/misc.cc:136
@@ -6491,7 +6518,7 @@ msgstr "szükséges"
 #. translator: patch status
 #: src/utils/misc.cc:137
 msgid "applied"
-msgstr ""
+msgstr "alkalmazott"
 
 #. translator: patch status
 #: src/utils/misc.cc:138
@@ -6501,7 +6528,7 @@ msgstr "nem szükséges"
 #. translator: patch status
 #: src/utils/misc.cc:139
 msgid "undetermined"
-msgstr ""
+msgstr "meghatározatlan"
 
 #. << _("Repository")
 #: src/utils/misc.cc:289
