@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 06:22+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-05 06:26+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -2655,7 +2655,7 @@ msgstr "要求 PackageKit 退出嗎？"
 
 #: src/Zypper.cc:118
 msgid "PackageKit is still running (probably busy)."
-msgstr "PackageKit 仍在運作(可能忙碌中)。"
+msgstr "PackageKit 仍在執行中 (可能正忙)。"
 
 #: src/Zypper.cc:119
 msgid "Try again?"
