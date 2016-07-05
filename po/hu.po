@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 11:48+0000\n"
+"PO-Revision-Date: 2016-07-05 11:51+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian "
 "<https://l10n.opensuse.org/projects/zypper/master/hu/>\n"
@@ -29,7 +29,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
-msgstr "Telepítési forrás: "
+msgstr "Telepítési forrás:"
 
 #: src/callbacks/keyring.h:38
 msgid "Key Name:"
@@ -2860,7 +2860,7 @@ msgstr "Nem található hibajavítás a megadott bugzillabejegyzéshez: %s."
 #: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
-msgstr "Nem található hibajavítás a megadott CVE-bejegyzéshez: %s"
+msgstr "Nem található hibajavítás a megadott CVE-bejegyzéshez: %s."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
 #: src/update.cc:1062
@@ -4892,7 +4892,7 @@ msgstr "Az aktuális csomagzárolások felsorolása."
 #. translators: -m, --matches
 #: src/Zypper.cc:2837
 msgid "Show the number of resolvables matched by each lock."
-msgstr "Az egyes zárolásoknak megfelelő feloldhatók számának megjelenítése"
+msgstr "Az egyes zárolásoknak megfelelő feloldhatók számának megjelenítése."
 
 #. translators: -s, --solvables
 #: src/Zypper.cc:2839
@@ -5560,10 +5560,10 @@ msgstr " %d. megoldás: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
-"A fenti megoldás kiválasztásához, nyomja meg az 1-es gombot, vagy "
+"A fenti megoldás kiválasztásához nyomja meg az 1-es gombot, vagy "
 "kihagyhatja, újrapróbálhatja, esetleg elvetheti."
 msgstr[1] ""
-"A fenti megoldás kiválasztásához, nyomja meg a megadott számú gombot, vagy "
+"A fenti megoldás kiválasztásához nyomja meg a megadott számú gombot, vagy "
 "kihagyhatja, újrapróbálhatja, esetleg elvetheti."
 
 #. translators: translate 'c' to whatever you translated the 'c' in
@@ -6093,7 +6093,7 @@ msgstr "ehhez a paraméterhez nem tartozik súgó"
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/download.cc:114
 msgid "Argument resolves to no package"
-msgstr "Az argumentum feloldása nem eredményez csomagot."
+msgstr "Az argumentum feloldása nem eredményez csomagot"
 
 #: src/download.cc:136
 msgid "No prune to best version."
@@ -6599,7 +6599,7 @@ msgstr "Ismeretlen letöltési mód: '%s'"
 #: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Available download modes: %s"
-msgstr "Elérhető telepítési módok: %s."
+msgstr "Elérhető telepítési módok: %s"
 
 #: src/utils/misc.cc:701
 #, c-format, boost-format
