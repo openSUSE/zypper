@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 09:41+0000\n"
+"PO-Revision-Date: 2016-07-05 11:57+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian "
 "<https://l10n.opensuse.org/projects/libzypp/master/hu/>\n"
@@ -312,7 +312,7 @@ msgstr ""
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "Nem sikerült a '%s' könyvtár beolvasása."
+msgstr "Nem sikerült a(z) '%s' könyvtár beolvasása."
 
 #: zypp/RepoManager.cc:315
 #, boost-format
