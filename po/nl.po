@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 08:04+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 08:08+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -2522,8 +2522,7 @@ msgstr ""
 #: src/repos.cc:2547
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr ""
-"Service met de alias '%s' bestaat al. Gaarne een andere alias gebruiken."
+msgstr "Service met de alias '%s' bestaat al. Gebruik een andere alias."
 
 #: src/repos.cc:2554
 #, c-format, boost-format
@@ -2533,7 +2532,7 @@ msgstr "Fout opgetreden tijdens het toevoegen van de service '%s'."
 #: src/repos.cc:2560
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
-msgstr "Service '%s' is met succes toegevoegd."
+msgstr "Service '%s' is toegevoegd."
 
 #: src/repos.cc:2598
 #, c-format, boost-format
@@ -2548,7 +2547,7 @@ msgstr "Service '%s' is verwijderd."
 #: src/repos.cc:2615
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
-msgstr "Verversen van service '%s'."
+msgstr "Vernieuwen van service '%s'."
 
 #: src/repos.cc:2630 src/repos.cc:2640
 #, c-format, boost-format
@@ -2587,19 +2586,19 @@ msgstr "Er zijn geen geactiveerde services gedefinieerd."
 
 #: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
-msgstr "Kon vanwege fouten de services niet verversen."
+msgstr "Kan vanwege fouten de services niet vernieuwen."
 
 #: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "Enkele van de services zijn vanwege fouten niet ververst."
+msgstr "Enkele van de services zijn vanwege fouten niet vernieuwd."
 
 #: src/repos.cc:2771
 msgid "Specified services have been refreshed."
-msgstr "De opgegeven services zijn ververst."
+msgstr "De opgegeven services zijn vernieuwd."
 
 #: src/repos.cc:2773
 msgid "All services have been refreshed."
-msgstr "Alle services zijn ververst."
+msgstr "Alle services zijn vernieuwd."
 
 #: src/repos.cc:2920
 #, c-format, boost-format
@@ -2614,12 +2613,12 @@ msgstr "Service '%s' is met succes gedeactiveerd."
 #: src/repos.cc:2928
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "Autoverversing is geactiveerd voor service '%s'."
+msgstr "Automatisch vernieuwen is geactiveerd voor service '%s'."
 
 #: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "Autoverversing is gedeactiveerd voor service '%s'."
+msgstr "Automatisch vernieuwen is gedeactiveerd voor service '%s'."
 
 #: src/repos.cc:2935
 #, c-format, boost-format
@@ -2684,7 +2683,7 @@ msgstr "Niets te wijzigen voor service '%s'."
 
 #: src/repos.cc:2976
 msgid "Error while modifying the service:"
-msgstr "Fout bij het wijzigen van de servicve:"
+msgstr "Fout bij het wijzigen van de service:"
 
 #: src/repos.cc:2977
 #, c-format, boost-format
