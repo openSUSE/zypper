@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-05 07:18+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -1615,7 +1615,7 @@ msgstr "Na de bewerking zal aanvullend %s worden gebruikt."
 
 #: src/Summary.cc:1251
 msgid "No additional space will be used or freed after the operation."
-msgstr "Na de bewerking zal er geen extra ruimte in gebruik zijn of vrij komen."
+msgstr "Na de bewerking zal er geen extra ruimte in gebruik zijn of vrijkomen."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1258
