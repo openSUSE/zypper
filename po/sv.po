@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 09:12+0000\n"
-"Last-Translator: Maribel Florido <mflorido@jensen-localization.com>\n"
+"PO-Revision-Date: 2016-07-11 15:17+0000\n"
+"Last-Translator: Asa Karlsson <asa.karlsson@lqs-lionbridge.com>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -6303,11 +6303,10 @@ msgstr[0] "programfix"
 msgstr[1] "programfixar"
 
 #: src/utils/misc.cc:121
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "paket"
-msgstr[1] "paket"
+msgstr[0] "src-paket"
+msgstr[1] "src-paket"
 
 #: src/utils/misc.cc:123
 msgid "application"
