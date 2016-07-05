@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-05 07:49+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -2211,7 +2211,7 @@ msgstr "Gespecificeerde installatiebronnen: "
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Uitgeschakelde opslagruimte '%s' overslaan"
+msgstr "Uitgeschakelde installatiebron '%s' overslaan"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
@@ -2229,7 +2229,7 @@ msgstr ""
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
-msgstr "Kon vanwege fouten de installatiebronnen niet vernieuwen."
+msgstr "Kan vanwege fouten de installatiebronnen niet vernieuwen."
 
 #: src/repos.cc:1329
 msgid "Specified repositories have been refreshed."
