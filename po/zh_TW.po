@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 06:02+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-05 06:08+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -2602,7 +2602,7 @@ msgstr "已找到下列符合問題編號的項目："
 
 #: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
-msgstr "已找到下列符合描述的修補程式："
+msgstr "已找到以下修補程式之修補程式描述中的相符項："
 
 #: src/update.cc:1057
 #, c-format, boost-format
