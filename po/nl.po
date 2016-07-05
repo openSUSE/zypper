@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 16:07+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 16:11+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -5532,11 +5532,11 @@ msgstr "Dit commando is alleen zinvol binnen de zypper-shell."
 
 #: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
-msgstr "U draait al een shell van zypper."
+msgstr "U voert al een shell van zypper uit."
 
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
-msgstr "Oplosbaartype"
+msgstr "Oplosbaar type"
 
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:40
@@ -5553,11 +5553,11 @@ msgstr " Oplossing %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
-"Kies de bovenstaande oplossingen door '1' te gebruiken of overslaan, "
-"op(n)ieuw of annuleren"
+"Kies de bovenstaande oplossing door '1' te gebruiken of kies (o)verslaan, "
+"op(n)ieuw of (a)nnuleren"
 msgstr[1] ""
-"Kies uit de bovenstaande oplossingen door een nummer of overslaan, op(n)ieuw "
-"of annuleren"
+"Kies uit de bovenstaande oplossingen door een nummer of kies (o)verslaan, "
+"op(n)ieuw of (a)annuleren"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
