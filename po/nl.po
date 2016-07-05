@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 16:12+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 16:15+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -5679,13 +5679,14 @@ msgid ""
 "upgrade. You may wish to check and restart some of them. Run '%s' to list "
 "these programs."
 msgstr ""
-"Er zijn enige actieve programma's die bestanden kunnen gebruiken die recent "
-"zijn opgewaardeerd. U zou deze mogelijk willen controleren en enige ervan "
-"herstarten. Voer '%s' uit om een lijst te verkrijgen van deze programma's."
+"Er zijn enkele programma's actief waarvoor mogelijk bestanden worden "
+"gebruikt die zijn verwijderd tijdens een recente upgrade. U kunt deze "
+"controleren en opnieuw starten. Voer %s uit om deze programma's weer te "
+"geven."
 
 #: src/solve-commit.cc:468
 msgid "Update notifications were received from the following packages:"
-msgstr "Van de volgende pakketten zijn bijwerkmeldingen ontvagen:"
+msgstr "Van de volgende pakketten zijn updatemeldingen ontvangen:"
 
 #: src/solve-commit.cc:477
 #, c-format, boost-format
@@ -5702,11 +5703,11 @@ msgstr "Meldingen nu weergeven?"
 
 #: src/solve-commit.cc:532
 msgid "Computing distribution upgrade..."
-msgstr "Berekenen van distributie-opwaardering..."
+msgstr "Distributie-upgrades berekenen..."
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
-msgstr "Afhankelijkheden tussen pakketten oplossen..."
+msgstr "Pakketafhankelijkheden oplossen..."
 
 #: src/solve-commit.cc:614
 msgid ""
@@ -5714,7 +5715,7 @@ msgid ""
 "these dependencies, the following actions need to be taken:"
 msgstr ""
 "Sommige afhankelijkheden van geïnstalleerde pakketten kloppen niet. Om deze "
-"afhankelijkheden te verhelpen moeten de volgende acties genomen worden:"
+"afhankelijkheden te verhelpen moeten de volgende acties uitgevoerd worden:"
 
 #: src/solve-commit.cc:621
 msgid "Root privileges are required to fix broken package dependencies."
@@ -5741,13 +5742,13 @@ msgstr "j/n/p/v/a/i/l/d/g"
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
-"Ja ,accepteer de samenvatting en vervolg met de installatie of verwijdering "
-"van pakketten."
+"Ja ,accepteer de samenvatting en ga verder met de installatie of "
+"verwijdering van pakketten."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: src/solve-commit.cc:650
 msgid "No, cancel the operation."
-msgstr "Nee, annuleer de operatie."
+msgstr "Nee, annuleer de bewerking."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
 #: src/solve-commit.cc:652
@@ -5755,13 +5756,13 @@ msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
-"P, herstart de oplosser in de modus niet-forceren om de "
-"afhankelijkheidsproblemen te tonen."
+"Herstart de oplosser in de modus niet-forceren om de "
+"afhankelijkheidsproblemen weer te geven."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:654
 msgid "Toggle display of package versions."
-msgstr "V, schakel het tonen van pakketversies om."
+msgstr "Weergave van pakketversies in-/uitschakelen."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:656
