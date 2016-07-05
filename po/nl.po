@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 09:57+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 09:58+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -3290,7 +3290,7 @@ msgstr "Gebruik een geheel getal van %d tot %d"
 #: src/Zypper.cc:898
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
-msgstr "Subcommando %1% ondersteunt globale opties van zypper niet."
+msgstr "Subcommando %1% ondersteunt algemene opties van zypper niet."
 
 #: src/Zypper.cc:919
 msgid "Enforced setting"
