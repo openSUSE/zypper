@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-05 08:45+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
 "Language: pl\n"
@@ -6019,8 +6019,7 @@ msgstr ""
 #, c-format, boost-format
 msgid "Can't create or access download directory '%s'."
 msgstr ""
-"Nie można utworzyć katalogu pobierania %s lub nie można uzyskać do niego "
-"dostępu."
+"Nie można utworzyć katalogu pobierania '%s' lub uzyskać do niego dostępu."
 
 #: src/source-download.cc:221
 #, c-format, boost-format
