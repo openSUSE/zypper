@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 15:52+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 15:55+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -4881,7 +4881,8 @@ msgstr "Maak een lijst met de huidige pakketvergrendelingen."
 #. translators: -m, --matches
 #: src/Zypper.cc:2837
 msgid "Show the number of resolvables matched by each lock."
-msgstr "Toon het aantal oplosbare overeenkomsten door elke vergrendeling."
+msgstr ""
+"De oplosbaren weergeven die op basis van elke vergrendeling worden afgestemd."
 
 #. translators: -s, --solvables
 #: src/Zypper.cc:2839
@@ -4920,7 +4921,7 @@ msgid ""
 msgstr ""
 "targetos (tos) [opties]\n"
 "\n"
-"Toon allerlei informatie over het doel-besturingssysteem\n"
+"Toon allerlei informatie over het doelbesturingssysteem\n"
 "Standaard wordt een ID-tekenreeks getoond.\n"
 "\n"
 "  Opdrachtopties:\n"
@@ -4969,7 +4970,7 @@ msgid ""
 "recent upgrades."
 msgstr ""
 "Toon de actieve processen die nog steeds bestanden en bibliotheken gebruiken "
-"die verwijderd zijn door recente opwaarderingen."
+"die verwijderd zijn door recente upgrades."
 
 #. translators: -s, --short
 #: src/Zypper.cc:2947
