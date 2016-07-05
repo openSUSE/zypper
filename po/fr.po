@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-05 09:27+0000\n"
+"PO-Revision-Date: 2016-07-05 09:42+0000\n"
 "Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
@@ -4474,7 +4474,8 @@ msgstr "Ne pas demander d'installer un élément fournissant %s"
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "Ne pas demander de supprimer tous les élements fournissant %s"
+msgstr ""
+"ne pas demander de supprimer tous les éléments résolvables fournissant %s"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
