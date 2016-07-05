@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 12:18+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-05 12:26+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -2213,7 +2213,7 @@ msgstr "Dépôts spécifiés : "
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Saut du dépôt désactivé '%s'"
+msgstr "Dépôt désactivé '%s' ignoré"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
@@ -2574,7 +2574,7 @@ msgstr "Vérifiez que l'URI soit valide et accessible."
 #: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "Saut du service désactivé '%s'"
+msgstr "Service désactivé '%s' ignoré"
 
 #: src/repos.cc:2751
 #, c-format, boost-format
