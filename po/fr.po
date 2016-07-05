@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-05 09:15+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 09:27+0000\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -552,7 +552,7 @@ msgstr "Impossible d'exécuter '%s' (%s)."
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr "Impossible de forker (%s)."
+msgstr "Impossible d'exécuter une commande fork (%s)."
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
@@ -4260,7 +4260,7 @@ msgstr "Zuni"
 #: zypp/KeyRing.cc:522
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr "Essayé d'importer la clé non existante %s dans le porte-clé %s"
+msgstr "Tentative d'importation de la clé inexistante %s dans le porte-clé %s"
 
 # TLABEL restore_2002_08_07_0216__88
 #: zypp/KeyRing.cc:566
