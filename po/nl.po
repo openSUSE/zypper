@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 16:04+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-05 16:05+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -5438,7 +5438,7 @@ msgstr "Handeling wordt niet ondersteund."
 #: src/Zypper.cc:4685
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
-msgstr "Om geïnstalleerde producten bij te werken gebruik '%s'."
+msgstr "Als u geïnstalleerde producten wilt bijwerken, gebruikt u '%s'."
 
 #: src/Zypper.cc:4693
 #, c-format, boost-format
@@ -5446,8 +5446,8 @@ msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
-"Zypper houdt de geïnstalleerde bronpakketten niet bij. Om het laatste "
-"bronpakket te installeren en zijn afhankelijkheden bij het bouwen, gebruik "
+"Zypper houdt de geïnstalleerde bronpakketten niet bij. Als u het laatste "
+"bronpakket en de buildafhankelijkheden ervan wilt installeren, gebruikt u "
 "'%s'."
 
 #: src/Zypper.cc:4709
