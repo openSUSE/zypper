@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 07:20+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-05 07:22+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -1748,7 +1748,7 @@ msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr ""
-"Ophalen van het bestand overslaan en proberen verder te gaan met de "
+"Sla het ophalen van het bestand over en probeer verder te gaan met de "
 "bewerking zonder het bestand."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
@@ -1774,7 +1774,7 @@ msgstr "a/o/n/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr "Schakel de SSL-certificaatautoriteit uit en ga door."
+msgstr "Schakel de controle van de SSL-certificaatautoriteit uit en ga door."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
@@ -1784,7 +1784,7 @@ msgstr "Afbreken, opnieuw, negeren?"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
-msgstr "SSL-certificaatautoriteit controle uitgeschakeld."
+msgstr "Controle SSL-certificaatautoriteit uitgeschakeld."
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
