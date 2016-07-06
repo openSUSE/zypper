@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-06 13:11+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -6173,7 +6173,7 @@ msgstr "Aucune aide disponible pour cette option"
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/download.cc:114
 msgid "Argument resolves to no package"
-msgstr "L'argument ne retourne aucun paquetage."
+msgstr "L'argument ne retourne aucun paquet."
 
 # Dans le cas d'un "zypper download --all-matches $paquet", on télécharge toutes les versions disponibles de $paquet, contrairement à un simple "zypper download $paquet" où on ne télécharge que la meilleure version.
 #: src/download.cc:136
