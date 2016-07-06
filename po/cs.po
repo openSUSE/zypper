@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 17:26+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-06 17:47+0000\n"
+"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -2743,7 +2743,7 @@ msgstr "Načítají se nainstalované balíčky..."
 
 #: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
-msgstr "Během načítání instalovaných balíčků nastal problém:"
+msgstr "Během čtení instalovaných balíčků nastal problém:"
 
 #: src/update.cc:84
 #, c-format, boost-format
@@ -2751,7 +2751,7 @@ msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr ""
-"Ignoruji %s bez argumentu protože byla zadána podobná volba s argumentem."
+"Ignoruji %s bez argumentu, protože byla zadána podobná volba s argumentem."
 
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:280
@@ -2840,7 +2840,7 @@ msgstr ""
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
-msgstr "Nejdříve bude nainstalována následující aktualizace správce balíčků:"
+msgstr "Nejdříve budou nainstalovány následující aktualizace správce balíčků:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
@@ -2878,7 +2878,7 @@ msgstr "Dostupná verze"
 
 #: src/update.cc:969
 msgid "No matching issues found."
-msgstr "Nebyly nalezeny odpovídající problematiky."
+msgstr "Nebyly nalezeny odpovídající problémy."
 
 #: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
