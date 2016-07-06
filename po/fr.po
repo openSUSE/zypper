@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 08:15+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 08:19+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -2470,12 +2470,12 @@ msgstr "Le rafraichissement automatique a été désactivé pour le dépôt '%s'
 #: src/repos.cc:2057
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "Le cache des fichiers RPM a été activé pour le dépôt '%s'."
+msgstr "La mise en cache des fichiers RPM a été activée pour le dépôt '%s'."
 
 #: src/repos.cc:2059
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "Le cache des fichiers RPM a été désactivé pour le dépôt '%s'."
+msgstr "La mise en cache des fichiers RPM a été désactivée pour le dépôt '%s'."
 
 #: src/repos.cc:2066
 #, c-format, boost-format
@@ -2568,7 +2568,7 @@ msgstr ""
 #: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Saut du service '%s' à cause de l'erreur ci-dessus."
+msgstr "Service '%s' ignoré à cause de l'erreur au dessus."
 
 #: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
