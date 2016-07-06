@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 15:53+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 07:54+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -1832,7 +1832,7 @@ msgstr "a/r/i/u/e"
 
 #: src/callbacks/media.cc:174
 msgid "Eject medium."
-msgstr "Éjecter le support."
+msgstr "Éjectez le support."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -1860,8 +1860,8 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
-"Authentification requise pour accéder à %s. Vous devez être root pour "
-"pouvoir lire les permissions depuis %s."
+"Une autorisation est requise pour accéder à %s. Vous devez être un "
+"utilisateur root pour pouvoir lire les références à partir de %s."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
