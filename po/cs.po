@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-02 17:14+0000\n"
+"PO-Revision-Date: 2016-07-06 15:59+0000\n"
 "Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -805,7 +805,7 @@ msgstr "Ručně zadaný vstup pro %1% nelze zobrazit"
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr " '%s' nenalezeno ve jménech balíčků. Zkouším způsobilosti."
+msgstr "'%s' nenalezeno v názvech balíčků. Zkouším způsobilosti."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
@@ -825,7 +825,7 @@ msgstr "Produkt '%s' nebyl nalezen."
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "profil '%s' nebyl nalezen."
+msgstr "Profil '%s' nebyl nalezen."
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
@@ -856,7 +856,7 @@ msgstr "Produkt '%s' nebyl v zadaných repozitářích nalezen."
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "profil '%s' nebyl v zadaných repozitářích nalezen."
+msgstr "Profil '%s' nebyl v zadaných repozitářích nalezen."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
@@ -909,7 +909,7 @@ msgid ""
 "No update candidate for '%s'. The highest available version is already "
 "installed."
 msgstr ""
-"Není žádný kandidát na aktualizaci '%s'. Je již nainstalována nejvyšší "
+"Není žádný kandidát k aktualizaci '%s'. Je již nainstalována nejvyšší "
 "dostupná verze."
 
 #: src/RequestFeedback.cc:108
@@ -950,7 +950,7 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Existuje kandidát aktualizace na '%s', ale je zamknut. Použít '%s' na jeho "
+"Existuje kandidát k aktualizaci na '%s', ale je zamknut. Použít '%s' na jeho "
 "odemčení."
 
 #: src/RequestFeedback.cc:148
@@ -1010,7 +1010,7 @@ msgstr "Oprava '%s' není v zadané kategorii."
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
-msgstr "Záplata '%s' nemá zadanou závažnost."
+msgstr "Oprava '%s' nemá zadanou závažnost."
 
 #: src/RequestFeedback.cc:213
 #, c-format, boost-format
@@ -1765,12 +1765,12 @@ msgstr "Vyžadován restart systému."
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "Přeskočit stahování a zrušit současnou operaci."
+msgstr "Přeskočit stahování souboru a zrušit současnou operaci."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
-msgstr "Stáhnout soubor znovu ."
+msgstr "Stáhnout soubor znovu."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:32
