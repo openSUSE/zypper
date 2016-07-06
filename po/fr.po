@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 13:11+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 13:12+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -6187,12 +6187,12 @@ msgstr "Se limiter à la meilleure version..."
 
 #: src/download.cc:148
 msgid "Not downloading anything..."
-msgstr "Rien à télécharger..."
+msgstr "Aucun téléchargement en cours..."
 
 #: src/download.cc:190
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
-msgstr "Impossible de télécharger le paquet '%s'."
+msgstr "Erreur de téléchargement du paquetage  '%s'."
 
 #: src/download.cc:204
 #, c-format, boost-format
