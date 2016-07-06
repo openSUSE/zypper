@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 08:13+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-06 08:15+0000\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -2412,7 +2412,7 @@ msgstr "Un dépôt sans alias défini a été trouvé dans le fichier, ignoré."
 #: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "Le dépôt '%s' n'a pas d'URI défini, ignoré."
+msgstr "Le dépôt '%s' n'a pas d'URI défini. Il va être ignoré."
 
 #: src/repos.cc:1821
 #, c-format, boost-format
