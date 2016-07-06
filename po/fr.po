@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 08:01+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 08:02+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -2051,7 +2051,7 @@ msgstr "Analyse du contenu du dépôt désactivé '%s'."
 #: src/repos.cc:765 src/repos.cc:798 src/repos.cc:1297
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Saut du dépôt '%s' à cause de l'erreur du dessus."
+msgstr "Dépôt '%s' ignoré à cause de l'erreur du dessus."
 
 #: src/repos.cc:784
 #, c-format, boost-format
