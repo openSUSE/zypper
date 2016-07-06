@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-06 13:04+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5856,7 +5856,8 @@ msgstr "Activer/Désactiver l'affichage des architectures des paquets."
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
-"Basculer l'affichage des dépôts depuis lesquels les paquets seront installés."
+"Activez/Désactivez l'affichage des dépôts à partir desquels les paquetages "
+"seront installés."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:660
