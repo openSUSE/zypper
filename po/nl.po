@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-06 11:32+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-06 11:35+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -4636,7 +4636,7 @@ msgstr "Pad '%s' op medium '%s' is geen map."
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr "Verkeerd gevormde URI"
+msgstr "Onjuiste URI"
 
 #: zypp/media/MediaException.cc:125
 msgid "Empty host name in URI"
@@ -4653,11 +4653,11 @@ msgstr "Lege bestemming in URI"
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "Niet ondersteund URI-schema in '%s'."
+msgstr "Niet-ondersteund URI-schema in '%s'."
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
-msgstr "Operatie niet ondersteund door medium"
+msgstr "Bewerking niet ondersteund door medium"
 
 #: zypp/media/MediaException.cc:152
 #, c-format, boost-format
@@ -4666,9 +4666,9 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"Download (curl) fout voor '%s':\n"
+"Fout bij downloaden (curl) '%s':\n"
 "Foutcode: %s\n"
-"Foutboodschap: %s\n"
+"Foutbericht: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:161
@@ -4684,11 +4684,11 @@ msgstr "Mediumbron '%s' bevat niet het gewenste medium"
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "Medium '%s' is in gebruik door iets anders"
+msgstr "Medium '%s' wordt door een andere instantie gebruikt"
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
-msgstr "Kan geen medium uitwerpen"
+msgstr "Kan geen media uitwerpen"
 
 #: zypp/media/MediaException.cc:184
 #, c-format, boost-format
@@ -4703,7 +4703,7 @@ msgstr "Toegang tot '%s' geweigerd."
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "Tijdslimiet overschreden bij toegang tot '%s'."
+msgstr "Time-out overschreden bij toegang tot '%s'."
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
@@ -4719,8 +4719,9 @@ msgstr " SSL-certificaatprobleem, controleer of de CA-cert OK is voor '%s'."
 #, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
 msgstr ""
-"Kan geen beschikbaar loop-apparaat vinden om het image-bestand van '%s'op te "
-"koppelen"
+"Kan geen beschikbaar lusapparaat vinden voor het koppelen van het "
+"imagebestand van '%s'\n"
+" "
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
@@ -4732,12 +4733,12 @@ msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
-"Bezoek het Novell Customer Center om te controleren of uw registratie nog "
-"geldig is en nog niet is verlopen."
+"Ga naar het Novell Customer Center om te controleren of uw registratie "
+"geldig is en niet is verlopen."
 
 #: zypp/sat/detail/PoolImpl.cc:184
 msgid "Can not create sat-pool."
-msgstr "Kan sat-pool niet aanmaken."
+msgstr "Kan sat-pool niet maken."
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4751,9 +4752,9 @@ msgid ""
 "     %3%"
 msgstr ""
 "Bestand %1%\n"
-"  uit het pakket\n"
+"  van pakket\n"
 "     %2%\n"
-"  conflicteert met bestand uit het pakket\n"
+"  conflicteert met een bestand van pakket\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4767,9 +4768,9 @@ msgid ""
 "     %3%"
 msgstr ""
 "Bestand %1%\n"
-"  uit het pakket\n"
+"  van pakket\n"
 "     %2%\n"
-"  conflicteert met bestand uit de installatie van\n"
+"  conflicteert met een bestand van de installatie van\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4783,9 +4784,9 @@ msgid ""
 "     %3%"
 msgstr ""
 "Bestand %1%\n"
-"  uit de installatie van\n"
+"  van de installatie van\n"
 "     %2%\n"
-"  conflicteert met bestand uit het pakket\n"
+"  conflicteert met een bestand van pakket\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4799,9 +4800,9 @@ msgid ""
 "     %3%"
 msgstr ""
 "Bestand %1%\n"
-"  uit de installatie van\n"
+"  van de installatie van\n"
 "     %2%\n"
-"  conflicteert met bestand uit de installatie van\n"
+"  conflicteert met een bestand van de installatie van\n"
 "     %3%"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
@@ -4818,11 +4819,11 @@ msgid ""
 "     %4%"
 msgstr ""
 "Bestand %1%\n"
-"  uit het pakket\n"
+"  van pakket\n"
 "     %2%\n"
-"  conflicteert met bestand\n"
+"  conflicteert met een bestand\n"
 "     %3%\n"
-"  uit het pakket\n"
+"  van pakket\n"
 "     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
@@ -4838,11 +4839,11 @@ msgid ""
 "     %4%"
 msgstr ""
 "Bestand %1%\n"
-"  uit het pakket\n"
+"  van pakket\n"
 "     %2%\n"
-"  conflicteert met bestand\n"
+"  conflicteert met een bestand\n"
 "     %3%\n"
-"  uit de installatie van\n"
+"  van de installatie van\n"
 "     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
@@ -4858,11 +4859,11 @@ msgid ""
 "     %4%"
 msgstr ""
 "Bestand %1%\n"
-"  uit de installatie van\n"
+"  van de installatie van\n"
 "     %2%\n"
-"  conflicteert met bestand\n"
+"  conflicteert met een bestand\n"
 "     %3%\n"
-"  uit het pakket\n"
+"  van pakket\n"
 "     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
@@ -4878,11 +4879,11 @@ msgid ""
 "     %4%"
 msgstr ""
 "Bestand %1%\n"
-"  uit de installatie van\n"
+"  van de installatie van\n"
 "     %2%\n"
-"  conflicteert met bestand\n"
+"  conflicteert met een bestand\n"
 "     %3%\n"
-"  uit de installatie van\n"
+"  van de installatie van\n"
 "     %4%"
 
 #~ msgid "do not keep %s installed"
