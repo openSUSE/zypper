@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 12:42+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 12:46+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5548,9 +5548,10 @@ msgid ""
 "Make sure these repositories are compatible before you continue. See '%s' "
 "for more information about this command."
 msgstr ""
-"Vous êtes sur le point de mettre à jour la distribution avec tous les dépôts "
-"activés. Assurez-vous que tous ces dépôts sont compatibles avant de "
-"continuer. Voir '%s' pour plus d'informations au sujet de cette commande."
+"Vous êtes sur le point d'exécuter une mise à niveau de distribution avec "
+"tous les dépôts activés. Assurez-vous que ces dépôts sont compatibles avant "
+"de continuer. Reportez-vous à '%s' pour obtenir plus d'informations sur "
+"cette commande."
 
 #: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
@@ -5577,12 +5578,12 @@ msgstr "La sortie en XML n'est pas implémentée pour cette commande."
 #: src/Zypper.cc:5047
 #, c-format, boost-format
 msgid "Distribution Label: %s"
-msgstr "Nom de distribution : %s"
+msgstr "Étiquette de distribution : %s"
 
 #: src/Zypper.cc:5048
 #, c-format, boost-format
 msgid "Short Label: %s"
-msgstr "Nom court : %s"
+msgstr "Étiquette courte : %s"
 
 #: src/Zypper.cc:5089
 #, c-format, boost-format
