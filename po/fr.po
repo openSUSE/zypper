@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 07:57+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 08:00+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -2025,7 +2025,7 @@ msgstr "Erreur lors de la reconstruction du cache :"
 #: src/repos.cc:609
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "Le dépôt '%s' n'a pas été trouvé par son alias, numéro, ou URL."
+msgstr "Le dépôt '%s' n'a pas été trouvé par son alias, numéro, ou URI."
 
 #: src/repos.cc:612
 #, c-format, boost-format
