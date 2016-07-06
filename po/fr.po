@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-06 08:19+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -2568,7 +2568,7 @@ msgstr ""
 #: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Service '%s' ignoré à cause de l'erreur au dessus."
+msgstr "Service '%s' ignoré à cause de l'erreur susmentionnée."
 
 #: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
