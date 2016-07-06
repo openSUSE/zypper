@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 12:46+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-06 12:49+0000\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5612,11 +5612,11 @@ msgstr "Cette commande n'a de sens que dans le shell zypper."
 
 #: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
-msgstr "Vous exécutez déjà une session zypper."
+msgstr "Vous exécutez déjà un shell de zypper."
 
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
-msgstr "Type d'élément"
+msgstr "Type de résolvable"
 
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:40
