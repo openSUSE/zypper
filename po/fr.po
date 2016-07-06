@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-06 12:57+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5728,7 +5728,7 @@ msgstr "Le cas de test du résolveur a été généré avec succès dans %s."
 
 #: src/solve-commit.cc:397
 msgid "Error creating the solver test case."
-msgstr "Erreur en générant le cas d'utilisation du résolveur."
+msgstr "Erreur lors de la création du cas de test du résolveur."
 
 #: src/solve-commit.cc:431
 #, c-format, boost-format
