@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 12:59+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 13:03+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5761,9 +5761,10 @@ msgid ""
 "upgrade. You may wish to check and restart some of them. Run '%s' to list "
 "these programs."
 msgstr ""
-"Certains programmes actifs pourraient utiliser des fichiers supprimés par la "
-"mise à niveau. Vous pourriez souhaiter redémarrer certains d'entre eux. "
-"Exécutez '%s' pour voir la liste de ces programmes."
+"Certains programmes en cours d'exécution sont susceptibles d'utiliser des "
+"fichiers supprimés lors de la dernière mise à niveau. Peut-être souhaitez-"
+"vous vérifier et redémarrer certains d'entre eux. Exécutez '%s' pour obtenir "
+"une liste de ces programmes."
 
 #: src/solve-commit.cc:468
 msgid "Update notifications were received from the following packages:"
@@ -5837,13 +5838,13 @@ msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
-"Redémarre le solveur en mode no-force afin d'afficher les problèmes de "
-"dépendances."
+"Redémarrer le résolveur en mode no-force-resolution afin de révéler les "
+"problèmes de dépendances."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:654
 msgid "Toggle display of package versions."
-msgstr "Basculer l'affichage des versions des paquets."
+msgstr "Activez/Désactivez l'affichage des versions des paquetages."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:656
