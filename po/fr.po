@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 12:49+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 12:50+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5702,7 +5702,7 @@ msgstr "Résolution des dépendances..."
 #: src/solve-commit.cc:220
 #, c-format, boost-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
-msgstr "%s est en conflit avec %s, utilisation du moins agressif %s"
+msgstr "%s est en conflit avec %s, le %s le moins agressif sera utilisé"
 
 #: src/solve-commit.cc:248
 msgid "Force resolution:"
