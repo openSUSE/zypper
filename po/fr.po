@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-06 13:03+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5844,7 +5844,7 @@ msgstr ""
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:654
 msgid "Toggle display of package versions."
-msgstr "Activez/Désactivez l'affichage des versions des paquetages."
+msgstr "Activer/Désactiver l'affichage des versions des paquets."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:656
