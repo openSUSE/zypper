@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-06 11:09+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-06 11:21+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -1800,7 +1800,7 @@ msgstr "Oeganda"
 #. :UGA:800:
 #: zypp/CountryCode.cc:386
 msgid "United States Minor Outlying Islands"
-msgstr "Verenigde Staten Kleine Afgelegen Eilanden"
+msgstr "Kleine afgelegen eilanden van de Verenigde Staten"
 
 #. :UMI:581:
 #: zypp/CountryCode.cc:387
@@ -1840,7 +1840,7 @@ msgstr "Britse Maagdeneilanden"
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr "Maagdeneilanden, V.S."
+msgstr "Amerikaanse Maagdeneilanden"
 
 #. :VIR:850:
 #: zypp/CountryCode.cc:395
@@ -2315,7 +2315,7 @@ msgstr "Cherokee"
 #. language code: chu cu
 #: zypp/LanguageCode.cc:339
 msgid "Church Slavic"
-msgstr "Kerk Slavisch"
+msgstr "Kerkslavisch"
 
 #. language code: chv cv
 #: zypp/LanguageCode.cc:341
@@ -3277,7 +3277,7 @@ msgstr "Mon-Khmer (Overige)"
 #. language code: mlg mg
 #: zypp/LanguageCode.cc:743
 msgid "Malagasy"
-msgstr "Madagaskar"
+msgstr "Plateaumalagasi"
 
 #. language code: mlt mt
 #: zypp/LanguageCode.cc:745
