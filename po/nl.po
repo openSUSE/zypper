@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-06 11:21+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-06 11:27+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -4249,7 +4249,7 @@ msgstr "Zuni"
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr ""
-"Er is een poging gedaan om een niet bestaande sleutel %s te importeren in "
+"Er is een poging gedaan om een niet-bestaande sleutel %s te importeren in "
 "sleutelring %s"
 
 #: zypp/KeyRing.cc:566
@@ -4259,7 +4259,7 @@ msgstr "Verwijderen van sleutel is mislukt."
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "Ondertekeningsbestand %s niet gevonden"
+msgstr "Handtekeningbestand %s niet gevonden"
 
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
@@ -4281,8 +4281,8 @@ msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
 msgstr ""
-"Pakket %s lijkt te zijn verminkt bij de overdracht. Wilt u het ophalen "
-"opnieuw proberen?"
+"Pakket %s lijkt beschadigd te zijn tijdens de overdracht. Wilt u het opnieuw "
+"ophalen?"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4292,7 +4292,7 @@ msgstr "Verificatie van de ondertekening is mislukt"
 #: zypp/repo/PackageProvider.cc:386
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr "Leveren van pakket %s is mislukt. Wilt u het ophalen opnieuw proberen?"
+msgstr "Pakket %s niet gevonden. Wilt u dit opnieuw ophalen?"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
@@ -4308,8 +4308,8 @@ msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
 msgstr ""
-"Systeembeheer is geblokkeerd door de applicatie met pid %d (%s).\n"
-"Deze applicatie afsluiten alvorens opnieuw te proberen."
+"Systeembeheer is geblokkeerd door de toepassing met pid %d (%s).\n"
+"Sluit deze toepassing voordat u het opnieuw probeert."
 
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
@@ -4332,7 +4332,7 @@ msgstr "conflicterende verzoeken"
 
 #: zypp/solver/detail/SATResolver.cc:989
 msgid "some dependency problem"
-msgstr "enige afhankelijkheidsproblemen"
+msgstr "een afhankelijkheidsprobleem"
 
 #: zypp/solver/detail/SATResolver.cc:992
 #, c-format, boost-format
@@ -4350,7 +4350,7 @@ msgstr "pakket %s bestaat niet"
 
 #: zypp/solver/detail/SATResolver.cc:1000
 msgid "unsupported request"
-msgstr "niet ondersteund verzoek"
+msgstr "niet-ondersteund verzoek"
 
 #: zypp/solver/detail/SATResolver.cc:1003
 #, c-format, boost-format
@@ -4365,7 +4365,7 @@ msgstr "%s is niet geïnstalleerd"
 #: zypp/solver/detail/SATResolver.cc:1012
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr "niets levert %s nodig voor %s"
+msgstr "niets levert %s nodig door %s"
 
 #: zypp/solver/detail/SATResolver.cc:1017
 #, c-format, boost-format
@@ -4399,7 +4399,7 @@ msgstr "%s vereist %s, Maar aan deze eis kan niet voldaan worden"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
-msgstr "verwijderde leveranciers: "
+msgstr "verwijderde providers: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -4408,7 +4408,7 @@ msgid ""
 "uninstallable providers: "
 msgstr ""
 "\n"
-"niet te installeren aanbieders: "
+"geen installeerbare aanbieders: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1084
