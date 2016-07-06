@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 13:04+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 13:05+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5862,7 +5862,8 @@ msgstr ""
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:660
 msgid "Toggle display of package vendor names."
-msgstr "Basculer l'affichage des noms des fournisseurs des paquets."
+msgstr ""
+"Activez/Désactivez l'affichage des noms des fournisseurs des paquetages."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:662
