@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 12:26+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 12:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5242,11 +5242,11 @@ msgstr ""
 
 #: src/Zypper.cc:3196 src/Zypper.cc:5236
 msgid "Unexpected program flow."
-msgstr "Flot de programme inattendu."
+msgstr "Flux de programme inattendu."
 
 #: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
-msgstr "Arguments non-optionnels du programme : "
+msgstr "Arguments de programme non-option :"
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: src/Zypper.cc:3303
