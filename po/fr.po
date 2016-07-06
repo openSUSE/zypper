@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 08:03+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 08:13+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -2203,7 +2203,7 @@ msgstr "Impossible d'ouvrir le fichier %s en écriture."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
-msgstr "Peut-être que vous n'avez pas les permissions d'écriture ?"
+msgstr "Peut-être ne possédez-vous pas les autorisations d'écriture ?"
 
 #: src/repos.cc:1196
 #, c-format, boost-format
@@ -2363,26 +2363,25 @@ msgstr "Rafraichissement automatique"
 #: src/repos.cc:1648
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
-msgstr "Lecture des données depuis le media '%s'"
+msgstr "Lecture des données depuis le support '%s'"
 
 # TLABEL restore_2002_08_07_0216__60
 #: src/repos.cc:1654
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
-msgstr "Problème de lecture des données depuis le media %s"
+msgstr "Problème de lecture des données depuis le support %s"
 
 #: src/repos.cc:1655
 msgid "Please check if your installation media is valid and readable."
 msgstr ""
-"Veuillez vérifier si votre média d'installation est valide et accessible en "
-"lecture."
+"Vérifiez si votre support d'installation est valide et accessible en lecture."
 
 #: src/repos.cc:1662
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr ""
-"La lecture des données du media '%s' est repoussée au prochain "
-"rafraichissement."
+"La lecture des données depuis le support '%s' est reportée jusqu'au prochain "
+"rafraîchissement."
 
 #: src/repos.cc:1744
 msgid "Problem accessing the file at the specified URI"
@@ -2413,7 +2412,7 @@ msgstr "Un dépôt sans alias défini a été trouvé dans le fichier, ignoré."
 #: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "Le dépôt '%s' n'a pas d'URI défini, sauté."
+msgstr "Le dépôt '%s' n'a pas d'URI défini, ignoré."
 
 #: src/repos.cc:1821
 #, c-format, boost-format
