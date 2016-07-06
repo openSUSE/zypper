@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 16:35+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-06 16:37+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -2544,7 +2544,7 @@ msgstr "Služba s názvem '%s' již existuje. Použijte jiný alias."
 #: src/repos.cc:2554
 #, c-format, boost-format
 msgid "Error occured while adding service '%s'."
-msgstr "Chyba při čtení služby '%s'."
+msgstr "Při přidávání služby došlo k chybě %s."
 
 #: src/repos.cc:2560
 #, c-format, boost-format
