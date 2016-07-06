@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 12:50+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 12:56+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5719,12 +5719,12 @@ msgstr "Calcul de la mise à niveau..."
 
 #: src/solve-commit.cc:392
 msgid "Generating solver test case..."
-msgstr "Génère le cas d'utilisation du solveur..."
+msgstr "Génèration du cas d'utilisation du résolveur..."
 
 #: src/solve-commit.cc:394
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr "Le cas d'utilisation du solveur a été généré avec succès dans %s."
+msgstr "Le cas d'utilisation du résolveur a été généré avec succès dans %s."
 
 #: src/solve-commit.cc:397
 msgid "Error creating the solver test case."
