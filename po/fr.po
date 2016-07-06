@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 12:28+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"PO-Revision-Date: 2016-07-06 12:31+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -5276,7 +5276,7 @@ msgstr "'%s' n'est pas un type de service valide."
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
-"Regardez '%s' ou '%s' pour avoir une liste des types de services connus."
+"Consultez '%s' ou '%s' pour obtenir une liste des types de services connus."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -5319,7 +5319,8 @@ msgstr "Le type de dépôt spécifié n'est pas valide :"
 #: src/Zypper.cc:3637
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Regardez '%s' ou '%s' pour avoir une liste des types de dépôts connus."
+msgstr ""
+"Consultez '%s' ou '%s' pour obtenir une liste des types de dépôts connus."
 
 #: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
@@ -5428,7 +5429,7 @@ msgstr "'%s' semble être un fichier RPM. Essaiera de le télécharger."
 #: src/Zypper.cc:3984
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr "Problème avec le fichier RPM spécifié '%s', sauté."
+msgstr "Problème avec le fichier RPM spécifié '%s', ignoré."
 
 #: src/Zypper.cc:4006
 #, c-format, boost-format
