@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-06 13:13+0000\n"
-"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -6197,7 +6197,7 @@ msgstr "Erreur de téléchargement du paquet '%s'."
 #: src/download.cc:204
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
-msgstr "Ne pas télécharger le paquet '%s'."
+msgstr "Le paquetage '%s' n'est pas téléchargé."
 
 #: src/PackageArgs.cc:204
 #, c-format, boost-format
