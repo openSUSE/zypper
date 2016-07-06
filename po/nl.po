@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-06 11:32+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -4632,7 +4632,7 @@ msgstr "Pad '%s' op medium '%s' is geen bestand."
 #: zypp/media/MediaException.cc:106
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "Pad '%s' op medium '%s' is geen directory."
+msgstr "Pad '%s' op medium '%s' is geen map."
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
