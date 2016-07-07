@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 13:15+0000\n"
+"PO-Revision-Date: 2016-07-07 14:45+0000\n"
 "Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian "
 "<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
@@ -634,7 +634,7 @@ msgid ""
 msgstr ""
 "Isolamento del problema, ovvero supporto tecnico indirizzato a riprodurre i "
 "problemi del cliente, isolare l'area del problema e fornire una soluzione ai "
-"problemi non risolti dal Supporto di Livello 1"
+"problemi non risolti dal Supporto di Livello 1."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -1437,7 +1437,7 @@ msgstr "Messico"
 #. :MEX:484:
 #: zypp/CountryCode.cc:314
 msgid "Malaysia"
-msgstr "Malaysia"
+msgstr "Malesia"
 
 #. :MYS:458:
 #: zypp/CountryCode.cc:315
@@ -4597,7 +4597,7 @@ msgstr "Supporto non aperto durante il tentativo di esecuzione di '%s'."
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "File '%s' non trovato sul supporto '%s'."
+msgstr "File '%s' non trovato sul supporto '%s'"
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
@@ -4616,7 +4616,7 @@ msgstr "Punto di collegamento supporto errato"
 #: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "Inizializzazione download (curl) non riuscita per '%s'."
+msgstr "Inizializzazione download (curl) non riuscita per '%s'"
 
 #: zypp/media/MediaException.cc:91
 #, c-format, boost-format
@@ -4679,12 +4679,12 @@ msgstr ""
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "L'origine del supporto '%s' non contiene il supporto desiderato."
+msgstr "L'origine del supporto '%s' non contiene il supporto desiderato"
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "Supporto '%s' già utilizzato da un'altra istanza."
+msgstr "Supporto '%s' già utilizzato da un'altra istanza"
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
@@ -4693,7 +4693,7 @@ msgstr "Impossibile espellere supporti"
 #: zypp/media/MediaException.cc:184
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
-msgstr "Impossibile espellere il supporto '%s'."
+msgstr "Impossibile espellere il supporto '%s'"
 
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
