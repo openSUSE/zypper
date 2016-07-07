@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 08:11+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 08:15+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5614,9 +5614,7 @@ msgstr "インストール済みパッケージ"
 
 #: src/source-download.cc:370
 msgid "Use '--verbose' option for a full list of required source packages."
-msgstr ""
-"必要なソースパッケージを全て表示するには、 '--verbose' オプションをご利用くだ"
-"さい。"
+msgstr "必要なソースパッケージをすべて表示するには、 '--verbose' オプションをご利用ください。"
 
 #: src/source-download.cc:379
 msgid "Deleting superfluous source packages"
