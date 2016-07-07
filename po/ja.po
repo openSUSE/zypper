@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 05:13+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-07-07 05:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -2683,8 +2683,7 @@ msgstr "Bugzilla発信番号 %s に対する修正は見つからなかったか
 #: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
-msgstr ""
-"CVE 発信番号 %s に対する修正は見つからなかったか、もしくは不要なものです。"
+msgstr "CVE発信番号 %s に対する修正は見つからなかったか、または不要です。"
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
 #: src/update.cc:1062
@@ -2720,17 +2719,16 @@ msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
-"PackageKit が zypper をブロックしています。更新アプレットやその他の "
-"PackageKit を使用するソフトウエア管理アプリケーションが動作しているものと思わ"
-"れます。"
+"PackageKitがzypperをブロックしています。更新アプレットやその他のPackageKitを使用するソフトウエア管理アプリケーションが動作してい"
+"るものと思われます。"
 
 #: src/Zypper.cc:109
 msgid "Tell PackageKit to quit?"
-msgstr "PackageKit に対して終了を知らせますか？"
+msgstr "PackageKitに対して終了を知らせますか?"
 
 #: src/Zypper.cc:118
 msgid "PackageKit is still running (probably busy)."
-msgstr "PackageKit が稼働中です (おそらく処理中です) 。"
+msgstr "PackageKitが稼働中です(おそらくビジーです)。"
 
 #: src/Zypper.cc:119
 msgid "Try again?"
@@ -2747,9 +2745,7 @@ msgstr ""
 #: src/Zypper.cc:190
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
-msgstr ""
-"古い形式のコマンドラインオプション %1% が指定されています。 %2% をお使いくだ"
-"さい。"
+msgstr "古い形式のコマンドラインオプション %1% が指定されています。%2% をお使いください。"
 
 #: src/Zypper.cc:269
 msgid "Command options:"
