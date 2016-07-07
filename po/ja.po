@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 05:51+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-07-07 05:58+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -3077,11 +3077,11 @@ msgstr "対話処理を行なわない設定にします。"
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
-msgstr "rebootSuggested フラグの設定された修正を、対話型として扱いません。"
+msgstr "rebootSuggestedフラグの設定されたパッチを、対話型として扱いません。"
 
 #: src/Zypper.cc:967
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "'GPG 署名確認を行なわない' 設定にします。"
+msgstr "「no-gpg-checks」モードに移行します。"
 
 #: src/Zypper.cc:975
 #, c-format, boost-format
@@ -3099,15 +3099,12 @@ msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
-"/etc/products.d/baseproduct のシンボリックリンクが不正確か、存在しません！\n"
-"上記のシンボリックリンクは、 /etc/products.d 内の中枢製品を正しく示していなけ"
-"ればなりません。\n"
+"/etc/products.d/baseproductのSymlinkに参照先がないか、見つかりません。\n"
+"このリンクは、/etc/products.d内にあるコア製品の.prodファイルを指定する必要があります。\n"
 
 #: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr ""
-"リポジトリは無効化されています。インストール済みのパッケージデータベースを使"
-"用します。"
+msgstr "リポジトリは無効化されています。インストール済みのパッケージデータベースのみを使用します。"
 
 #: src/Zypper.cc:1056
 msgid "Autorefresh disabled."
@@ -3115,7 +3112,7 @@ msgstr "自動更新が無効になっています。"
 
 #: src/Zypper.cc:1063
 msgid "CD/DVD repositories disabled."
-msgstr "CD/DVD リポジトリが無効になっています。"
+msgstr "CD/DVDリポジトリが無効になっています。"
 
 #: src/Zypper.cc:1070
 msgid "Remote repositories disabled."
