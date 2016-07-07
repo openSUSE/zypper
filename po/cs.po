@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 00:07+0000\n"
+"PO-Revision-Date: 2016-07-07 07:23+0000\n"
 "Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -2758,18 +2758,18 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Zvažována %1% z %2% použitelných oprav:"
+msgstr[1] "Zvažovány %1% z %2% použitelných oprav:"
+msgstr[2] "Zvažováno %1% z %2% použitelných oprav:"
 
 #. translator: stats table header
 #: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nalezena %1% použitelná oprava:"
+msgstr[1] "Nalezeny %1% použitelné opravy:"
+msgstr[2] "Nalezeno %1% použitelných oprav:"
 
 #. translator: stats summary
 #: src/update.cc:294
@@ -2794,7 +2794,7 @@ msgstr[2] "%d oprav je nepovinných"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "použít '%1%' k zahrnutí volitelných oprav"
 
 #. translator: stats summary
 #: src/update.cc:315
@@ -2817,7 +2817,7 @@ msgstr[2] "%d bezpečnostních oprav"
 #. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
-msgstr ""
+msgstr "Zásobník aktualizací"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -2827,7 +2827,7 @@ msgstr "Opravy"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "Uzamčeno"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2836,7 +2836,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "Zahrnuté kategorie"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -2916,14 +2916,17 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"Zda mají být použitelné volitelné opravy zpracovány pdle potřeby nebo "
+"vyloučeny."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Výchozí nastavení je vyloučit volitelné opravy."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Výchozí nastavení je zahrnout volitelné opravy."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3367,7 +3370,7 @@ msgstr "Volba %s zde nemá žádný efekt, ignoruji ji."
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "Příkazový řádek zypperu nepodporuje spouštění podpříkazů."
 
 #: src/Zypper.cc:1313
 #, c-format, boost-format
@@ -3488,6 +3491,7 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Nevyžadovat interakci uživatele. Alias pro globální volbu --non-interactive."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -3577,6 +3581,9 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"Výchozí umístění, kam balíček rpm instaluje zdrojové balíčky, je '%1%', ale "
+"tuto hodnotu lze změnit ve vaší místní konfiguraci rpm. V případě "
+"pochybností zkuste spustit '%2%'."
 
 #: src/Zypper.cc:1613
 #, c-format, boost-format
@@ -4281,60 +4288,76 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [VOLBY]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Vypsat všechny použitelné opravy."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Vypsat použitelné opravy pro problémy Bugzilly."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Vypsat použitelné opravy pro problémy CVE."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=ŘETĚZEC]\n"
+"Vyhledat problémy odpovídající zadanému řetězci."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <RRRR-MM-DD>\n"
+"Vypsat pouze opravy vydané do, ale ne včetně, zadaného data."
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <KATEGORIE>\n"
+"Vypsat pouze opravy s touto kategorií."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <ZÁVAŽNOST>\n"
+"Vypsat pouze opravy s touto závažností."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Vypsat všechny opravy, ne pouze ty použitelné."
 
 #: src/Zypper.cc:2310
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Vypsat pouze opravy ze zadaného repozitáře."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4512,7 +4535,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [VOLBY]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4520,12 +4543,17 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Zobrazit statistiky o použitelných opravách. Příkaz vrátí 100, pokud byly "
+"nalezeny vyžadované opravy, 101, pokud existuje nejméně jedna vyžadovaná "
+"bezpečnostní oprava."
 
 #: src/Zypper.cc:2476
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Zkontrolovat pouze opravy v zadaném repozitáři."
 
 #: src/Zypper.cc:2477
 msgid ""
@@ -5407,7 +5435,7 @@ msgstr[2] "Odstraněny %lu zámky."
 
 #: src/Zypper.cc:5034
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "XML výstup nebyl pro tento příkaz implementován."
 
 #: src/Zypper.cc:5047
 #, c-format, boost-format
@@ -5831,9 +5859,9 @@ msgid ""
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
 msgstr ""
-"Poznámka: Spuštění bez superuživatelských oprávnění je omezené na "
-"vyhledávání souborů, ke kterým máte oprávnění vyhledávat funkcí system "
-"stat(2). Výsledek nemusí být kompletní."
+"Poznámka: Spuštění bez oprávnění uživatele root je omezené na vyhledávání "
+"souborů, ke kterým máte oprávnění vyhledávat funkcí system stat(2). Výsledek "
+"nemusí být kompletní."
 
 #: src/source-download.cc:208
 #, c-format, boost-format
@@ -5989,7 +6017,7 @@ msgstr "k této volbě není k dispozici žádná nápověda"
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/download.cc:114
 msgid "Argument resolves to no package"
-msgstr "Parametr vedoucí k žádnému balíčku"
+msgstr "Parametr nevedoucí k žádnému balíčku"
 
 #: src/download.cc:136
 msgid "No prune to best version."
@@ -6016,7 +6044,7 @@ msgstr "Nestahuje se balíček '%s'."
 #: src/PackageArgs.cc:204
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr " '%s' nenalezeno ve jménech balíčků. Zkouším '%s'."
+msgstr "'%s' nenalezeno ve jménech balíčků. Zkouším '%s'."
 
 #: src/PackageArgs.cc:219
 #, c-format, boost-format
@@ -6030,7 +6058,7 @@ msgstr ""
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr " '%s' není platné jméno balíčku nebo způsobilost."
+msgstr "'%s' není platné jméno balíčku nebo způsobilost."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -6126,7 +6154,7 @@ msgstr "Zdrojový balíček %s-%s byl úspěšně získán."
 #: src/misc.cc:388
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
-msgstr "Zdrojový balík %s-%s byl nainstalován úspěšně."
+msgstr "Zdrojový balíček %s-%s byl nainstalován úspěšně."
 
 #: src/misc.cc:394
 #, c-format, boost-format
@@ -6236,13 +6264,13 @@ msgstr "Stiskněte \"%c\" pro opuštění pageru."
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
-"Použijte šipky, nebo klávesy pgUp/pgDown k posouvání textu po řádcích, nebo "
+"Použijte šipky nebo klávesy pgUp/pgDown k posouvání textu po řádcích nebo "
 "stránkách."
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
-"Použijte klávesu Enter, nebo mezerník k posouvání textu po řádcích, nebo "
+"Použijte klávesu Enter nebo mezerník k posouvání textu po řádcích nebo "
 "stránkách."
 
 #: src/utils/Augeas.cc:26
@@ -6259,7 +6287,7 @@ msgstr "Nelze parsovat konfigurační soubor."
 
 #: src/utils/Augeas.cc:99
 msgid "Error parsing zypper.conf:"
-msgstr "Chyba načítání zypper.conf:"
+msgstr "Chyba parsování zypper.conf:"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -6327,7 +6355,7 @@ msgstr "Zkouším znovu..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "Nelze číst vstup: špatný stream nebo EOF."
 
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
@@ -6347,7 +6375,7 @@ msgstr "Neplatná odpověď '%s'."
 #: src/utils/prompt.cc:326
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr "Zadejte '%s' pro '%s' nebo '%s' pro '%s' pokud nic jiného nepomůže."
+msgstr "Zadejte '%s' pro '%s' nebo '%s' pro '%s', pokud nic jiného nepomůže."
 
 #: src/utils/misc.cc:113
 msgid "package"
@@ -6403,7 +6431,7 @@ msgstr[2] "závislostí"
 #. translator: patch status
 #: src/utils/misc.cc:134
 msgid "unwanted"
-msgstr ""
+msgstr "nechtěné"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
@@ -6480,7 +6508,7 @@ msgstr "Problém při kopírování zadaného RPM souboru do cache adresáře."
 
 #: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
-msgstr "Možná vám dochází místo."
+msgstr "Možná vám dochází místo na disku."
 
 #: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
