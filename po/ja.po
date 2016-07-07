@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 07:33+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 07:35+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5024,7 +5024,7 @@ msgstr "'%s' は RPM ファイルのようです。ダウンロードを行な�
 #: src/Zypper.cc:3984
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr "'%s' で指定した RPM ファイルで問題が発生しました。スキップしています。"
+msgstr "'%s' で指定したRPMファイルで問題が発生しました。スキップしています。"
 
 #: src/Zypper.cc:4006
 #, c-format, boost-format
@@ -5043,9 +5043,7 @@ msgstr "正しいパラメータが指定されていません。"
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
-msgstr ""
-"リポジトリが設定されていません。操作はインストール済みの解決方法についてのみ"
-"行なわれます。"
+msgstr "リポジトリが定義されていません。操作はインストール済みの解決方法についてのみ行なわれます。何もインストールできません。"
 
 #. translators: meaning --capability contradicts --force/--name
 #: src/Zypper.cc:4099 src/Zypper.cc:4658
