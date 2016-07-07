@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 08:15+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 08:44+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5747,9 +5747,7 @@ msgstr "'%s' というパッケージ名は見つかりません。 '%s' とし�
 msgid ""
 "Different package type specified in '%s' option and '%s' argument. Will use "
 "the latter."
-msgstr ""
-"'%s' オプションで指定したものと '%s' パラメータで指定したもののパッケージ種類"
-"が異なります。後者を使用します。"
+msgstr "'%s' オプションで指定したものと '%s' 引数で指定したもののパッケージ種類が異なります。後者を使用します。"
 
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
@@ -5824,7 +5822,7 @@ msgstr "インストール済みパッケージ: %d"
 #: src/misc.cc:258
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "リポジトリ内に副本があるインストール済みパッケージ: %d"
+msgstr "リポジトリ内にカウンターパーツがあるインストール済みパッケージ: %d"
 
 #: src/misc.cc:259
 #, c-format, boost-format
