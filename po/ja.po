@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 06:59+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-07-07 07:03+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -4508,7 +4508,7 @@ msgid ""
 msgstr ""
 "moo\n"
 "\n"
-"アスキーアートを表示します。\n"
+"動物を表示します。\n"
 "\n"
 "このコマンドにはオプションはありません。\n"
 
@@ -4527,13 +4527,12 @@ msgid ""
 msgstr ""
 "addlock (al) [options] <packagename> ...\n"
 "\n"
-"パッケージロック (施錠) を設定します。パッケージは名前で指定できるほか、ワイ"
-"ルドカード指定 ('*' '?') による一括指定を行なうこともできます。\n"
+"パッケージロック (施錠) を設定します。パッケージは名前で指定できるほか、ワイルドカード指定(「*」「?」)による一括指定を行なうこともできます。\n"
 "\n"
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI>  指定したリポジトリからのもののみをロックする\n"
-"-t, --type <type>         パッケージの種類を指定する (%s) \n"
-"                          既定: %s\n"
+"-t, --type <type>         パッケージの種類を指定する(%s) \n"
+"                          デフォルト: %s\n"
 
 #: src/Zypper.cc:2803
 #, c-format, boost-format
@@ -4566,7 +4565,7 @@ msgstr "locks (ll) [オプション]"
 #. translators: command description
 #: src/Zypper.cc:2833
 msgid "List current package locks."
-msgstr "現在設定されているパッケージロック (施錠) の一覧を表示します。"
+msgstr "現在のパッケージロックを一覧表示します。"
 
 #. translators: -m, --matches
 #: src/Zypper.cc:2837
