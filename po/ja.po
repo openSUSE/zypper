@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 07:39+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 07:41+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5134,7 +5134,7 @@ msgid ""
 "for more information about this command."
 msgstr ""
 "すべての有効なリポジトリを利用して、ディストリビューションのアップグレードを行おうとしています。続行する前に、これらのリポジトリに互換性があることをご確認"
-"ください。このコマンドについての詳しい情報は「%s」をご覧ください。"
+"ください。このコマンドについての詳しい情報は '%s' をご覧ください。"
 
 #: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
@@ -5191,7 +5191,7 @@ msgstr "このコマンドは zypper シェル内でのみ意味を持ちます�
 
 #: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
-msgstr "既に zypper のシェルにいます。"
+msgstr "既にzypperのシェルにいます。"
 
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
