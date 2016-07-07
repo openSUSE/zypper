@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 04:50+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-07-07 04:52+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -2075,7 +2075,7 @@ msgstr "'%s' のメタデータのキャッシュを削除しています。"
 #: src/repos.cc:1447
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "'%s' に対する未加工のメタデータのキャッシュを削除しています。"
+msgstr "'%s' の未加工のメタデータのキャッシュを削除しています。"
 
 #: src/repos.cc:1453
 #, c-format, boost-format
