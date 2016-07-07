@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 04:26+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 04:39+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -2294,12 +2294,12 @@ msgstr "リポジトリ '%s' の RPM ファイルキャッシュ設定を無効�
 #: src/repos.cc:2066
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
-msgstr "リポジトリ '%s' に対して GPG チェックを有効にしました。"
+msgstr "リポジトリ '%s' に対してGPGチェックを有効にしました。"
 
 #: src/repos.cc:2068
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
-msgstr "リポジトリ '%s' に対して GPG チェックを無効にしました。"
+msgstr "リポジトリ '%s' に対してGPGチェックを無効にしました。"
 
 #: src/repos.cc:2074
 #, c-format, boost-format
@@ -2328,7 +2328,7 @@ msgstr "サービスの読み込み時にエラー:"
 #: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "サービス '%s' は別名／番号／URI のいずれでも見つかりません。"
+msgstr "サービス '%s' は別名／番号／URIのいずれでも見つかりません。"
 
 #: src/repos.cc:2222
 #, c-format, boost-format
@@ -2381,7 +2381,7 @@ msgstr ""
 #: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "上記のエラーにより、サービス '%s' を飛ばしています。"
+msgstr "上記のエラーにより、サービス '%s' をスキップしています。"
 
 #: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
@@ -2390,7 +2390,7 @@ msgstr "URI が有効でアクセス可能であることを確認してくだ�
 #: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "無効化されたサービス '%s' をスキップします"
+msgstr "無効化されたサービス '%s' をスキップしています"
 
 #: src/repos.cc:2751
 #, c-format, boost-format
