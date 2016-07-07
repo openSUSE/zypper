@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 04:17+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 04:25+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -2167,9 +2167,7 @@ msgstr "リポジトリを追加する際に未知の問題:"
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
-msgstr ""
-"リポジトリ '%1%' は、 GPG の検証を無効化するように設定されています。パッケー"
-"ジの正当性と作成元は検証されません。"
+msgstr "リポジトリ '%1%' は、 GPGの検証を無効化するように設定されています。パッケージの正当性と作成元は検証されません。"
 
 #: src/repos.cc:1622
 #, c-format, boost-format
@@ -2223,9 +2221,7 @@ msgstr "指定した URI にあるファイルを読む際に問題が発生し�
 
 #: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr ""
-"ファイル内に別名定義のないリポジトリが見つかりました。このリポジトリを飛ばし"
-"ます。"
+msgstr "ファイル内に別名定義のないリポジトリが見つかりました。スキップしています。"
 
 #: src/repos.cc:1779
 #, c-format, boost-format
