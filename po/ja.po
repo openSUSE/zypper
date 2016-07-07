@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 07:25+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-07-07 07:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -4842,9 +4842,9 @@ msgid ""
 "\n"
 "This command has dummy implementation which always returns 0.\n"
 msgstr ""
-"ping [オプション]\n"
+"ping [options]\n"
 "\n"
-"このコマンドは常に0を返すダミー実装です。\n"
+"このコマンドには常に0を返すダミー実装があります。\n"
 
 #: src/Zypper.cc:3196 src/Zypper.cc:5236
 msgid "Unexpected program flow."
@@ -4920,7 +4920,7 @@ msgstr "%s と %s を同時に指定することはできません。 %s の設�
 
 #: src/Zypper.cc:3636
 msgid "Specified type is not a valid repository type:"
-msgstr "指定した種類は無効です:"
+msgstr "指定した種類は無効なリポジトリタイプです:"
 
 #: src/Zypper.cc:3637
 #, c-format, boost-format
