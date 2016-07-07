@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 08:47+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 08:51+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5957,11 +5957,11 @@ msgstr "'%c' を押すとページャを終了します。"
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
-msgstr "矢印キーで行単位、 pgUp/pgDown キーでページ単位に移動します。"
+msgstr "矢印キーで行単位、 pgUp/pgDownキーでページ単位に移動します。"
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr "Enter キーで行単位、スペースキーでページ単位に移動します。"
+msgstr "Enterキーで行単位、スペースキーでページ単位に移動します。"
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
