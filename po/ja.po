@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 09:00+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 09:01+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -6157,11 +6157,11 @@ msgstr "指定した URI が無効です"
 #. translators: don't translate '<platform>'
 #: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
-msgstr "<プラットフォーム> の値を推測することができません。"
+msgstr "<プラットフォーム>の値を推測することができません。"
 
 #: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
-msgstr "obs://<プロジェクト名>/<プラットフォーム> の形式で指定してください"
+msgstr "obs://<プロジェクト名>/<プラットフォーム>の形式で指定してください"
 
 #: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
