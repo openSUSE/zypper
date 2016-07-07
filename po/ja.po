@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 09:30+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 10:20+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -89,7 +89,7 @@ msgstr ""
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "受け入れようとしているファイル「%s」(リポジトリ「%s」)は不明な鍵「%s」で署名されています。"
+msgstr "受け入れようとしているファイル '%s' (リポジトリ '%s') は不明な鍵 '%s' で署名されています。"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -102,7 +102,7 @@ msgstr "ファイル '%s' は不明なキー '%s' で署名されています。
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "ファイル '%s' (リポジトリ '%s')は不明な鍵 '%s' で署名されています。続行しますか?"
+msgstr "ファイル '%s' (リポジトリ '%s') は不明な鍵 '%s' で署名されています。続行しますか?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
@@ -889,14 +889,14 @@ msgstr ""
 #: src/RequestFeedback.cc:108
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
-msgstr "「%s」に対するアップデート候補がありません。"
+msgstr "'%s' に対するアップデート候補がありません。"
 
 #: src/RequestFeedback.cc:114
 #, c-format, boost-format
 msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
-msgstr "アップデート候補「%s」が「%s」に対して存在しますが、指定したバージョン、アーキテクチャ、またはリポジトリに一致しません。"
+msgstr "アップデート候補 '%s' が '%s' に対して存在しますが、指定したバージョン、アーキテクチャ、またはリポジトリに一致しません。"
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -939,7 +939,7 @@ msgstr ""
 msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
-msgstr "選択したパッケージ「%s」(リポジトリ「%s」から選択)は、インストール済みのバージョンよりも古いものになっています。"
+msgstr "選択したパッケージ '%s' (リポジトリ '%s' から選択) は、インストール済みのバージョンよりも古いものになっています。"
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
@@ -1756,7 +1756,7 @@ msgstr "未加工のメタデータの更新を強制しています"
 #: src/repos.cc:236
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "リポジトリ「%s」のメタデータを取り出しています"
+msgstr "リポジトリ '%s' のメタデータを取り出しています"
 
 #: src/repos.cc:263
 #, c-format, boost-format
@@ -1789,7 +1789,7 @@ msgstr "'%s' に対して何も URI が設定されていません。"
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr "%s (リポジトリ '%s')に(baseurl=URI) の形式で 1 つ以上のベース URI エントリを設定してください。"
+msgstr "%s (リポジトリ '%s')に (baseurl=URI) の形式で1つ以上のベースURIエントリを設定してください。"
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
@@ -2906,7 +2906,7 @@ msgstr ""
 "\taddservice, as\t\t新しいサービスを追加する。\n"
 "\tmodifyservice, ms\t指定したサービスを修正する。\n"
 "\tremoveservice, rs\t指定したサービスを削除する。\n"
-"\trefresh-services, refs\t全てのサービスを更新する。\n"
+"\trefresh-services, refs\tすべてのサービスを更新する。\n"
 
 #: src/Zypper.cc:502
 msgid ""
@@ -2921,11 +2921,11 @@ msgid ""
 "\t\t\t\tby installed packages.\n"
 msgstr ""
 "     ソフトウエア管理:\n"
-"\tinstall, in\t\tパッケージをインストールする。\n"
-"\tremove, rm\t\tパッケージを削除する。\n"
-"\tverify, ve\t\tパッケージの依存関係を検証する。\n"
-"\tsource-install, si\t構築の際に依存するものを含めてソースパッケージをインストールする。\n"
-"\tinstall-new-recommends, inr インストール済みのパッケージから判断される新規推奨パッケージをインストールする。\n"
+"\tinstall, in\t\tパッケージをインストールします。\n"
+"\tremove, rm\t\tパッケージを削除します。\n"
+"\tverify, ve\t\tパッケージの依存関係を検証します。\n"
+"\tsource-install, si\t構築の際に依存するものを含めてソースパッケージをインストールします。\n"
+"\tinstall-new-recommends, inr インストール済みのパッケージから判断される新規推奨パッケージをインストールします。\n"
 
 #: src/Zypper.cc:513
 msgid ""
@@ -2960,16 +2960,16 @@ msgid ""
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
 "     問い合わせ:\n"
-"\tsearch, se\t\tパターンに適合するパッケージを検索する。\n"
-"\tinfo, if\t\t指定したパッケージの完全な情報を表示する。\n"
-"\tpatch-info\t\t指定したパッチの完全な情報を表示する。\n"
-"\tpattern-info\t\t指定したパターンの完全な情報を表示する。\n"
-"\tproduct-info\t\t指定した製品の完全な情報を表示する。\n"
-"\tpatches, pch\t\t利用可能なパッチをすべてリストする。\n"
-"\tpackages, pa\t\t利用可能なパッケージをすべてリストする。\n"
-"\tpatterns, pt\t\t利用可能なパターンをすべてリストする。\n"
-"\tproducts, pd\t\t利用可能な製品をすべてリストする。\n"
-"\twhat-provides, wp\t指定した能力設定が提供するパッケージをすべてリストする。\n"
+"\tsearch, se\t\tパターンに適合するパッケージを検索します。\n"
+"\tinfo, if\t\t指定したパッケージの完全な情報を表示します。\n"
+"\tpatch-info\t\t指定したパッチの完全な情報を表示します。\n"
+"\tpattern-info\t\t指定したパターンの完全な情報を表示します。\n"
+"\tproduct-info\t\t指定した製品の完全な情報を表示します。\n"
+"\tpatches, pch\t\t利用可能なパッチをすべてリストします。\n"
+"\tpackages, pa\t\t利用可能なパッケージをすべてリストします。\n"
+"\tpatterns, pt\t\t利用可能なパターンをすべてリストします。\n"
+"\tproducts, pd\t\t利用可能な製品をすべてリストします。\n"
+"\twhat-provides, wp\t指定した能力設定が提供するパッケージをすべてリストします。\n"
 
 #: src/Zypper.cc:537
 msgid ""
@@ -2998,12 +2998,12 @@ msgid ""
 "\t\t\t\tto a local directory.\n"
 msgstr ""
 "     その他のコマンド:\n"
-"\tversioncmp, vcmp\t2 つのバージョン文字列を比較する。\n"
-"\ttargetos, tos\t\tターゲットのオペレーティングシステムの ID 文字列を表示する。\n"
-"\tlicenses\t\tインストール済みのパッケージに対し、ライセンスと使用許諾契約を\t\t\t\t表示する。\n"
-"\tdownload\t\tコマンドラインで指定した RPM を、ローカルのディレクトリにダウンロードする。\n"
-"\tsource-download\t\t全てのインストール済みパッケージに対し、ソース RPM を\t\t\t\t"
-"ローカルのディレクトリにダウンロードする。\n"
+"\tversioncmp, vcmp\t2つのバージョン文字列を比較します。\n"
+"\ttargetos, tos\t\tターゲットのオペレーティングシステムのID文字列を表示します。\n"
+"\tlicenses\t\tインストール済みのパッケージに対し、ライセンスと使用許諾契約を\t\t\t\t表示します。\n"
+"\tdownload\t\tコマンドラインで指定したRPMを、ローカルのディレクトリにダウンロードします。\n"
+"\tsource-download\t\tすべてのインストール済みパッケージに対し、ソースRPMを\t\t\t\t"
+"ローカルのディレクトリにダウンロードします。\n"
 
 #: src/Zypper.cc:554
 msgid ""
@@ -4359,9 +4359,9 @@ msgstr ""
 "\n"
 "  コマンドオプション:\n"
 "\n"
-"-r, --repo <alias|#|URI>  リポジトリを指定するもう一つの方法\n"
-"-i, --installed-only      インストール済みのパターンのみを表示する\n"
-"-u, --uninstalled-only    インストールされていないパターンのみを表示する\n"
+"-r, --repo <alias|#|URI>  リポジトリを指定するもう一つの方法。\n"
+"-i, --installed-only      インストール済みの製品のみを表示します。\n"
+"-u, --uninstalled-only    インストールされていない製品のみを表示します。\n"
 
 #: src/Zypper.cc:2615
 #, c-format, boost-format
@@ -4496,8 +4496,8 @@ msgstr ""
 "パッケージロック (施錠) を設定します。パッケージは名前で指定できるほか、ワイルドカード指定(「*」「?」)による一括指定を行なうこともできます。\n"
 "\n"
 "  コマンドオプション:\n"
-"-r, --repo <alias|#|URI>  指定したリポジトリからのもののみをロックする\n"
-"-t, --type <type>         パッケージの種類を指定する(%s) \n"
+"-r, --repo <alias|#|URI>  指定したリポジトリからのもののみをロックします。\n"
+"-t, --type <type>         パッケージの種類を指定します (%s)。 \n"
 "                          デフォルト: %s\n"
 
 #: src/Zypper.cc:2803
@@ -5803,7 +5803,7 @@ msgstr "パッケージ '%s' には、ソースパッケージ '%s' がありま
 #: src/misc.cc:295
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "ソースパッケージ「%s」(「%s」パッケージ向け) が見つかりません。"
+msgstr "ソースパッケージ '%s ' ( '%s ' パッケージ向け) が見つかりません。"
 
 #: src/misc.cc:373
 #, c-format, boost-format
