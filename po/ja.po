@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 07:28+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 07:30+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -4937,19 +4937,18 @@ msgstr "必要なパラメータが指定されていません。"
 #: src/Zypper.cc:3688
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "リポジトリ '%s' は別名／番号／URI のいずれでも見つかりません。"
+msgstr "リポジトリ '%s' は別名／番号／URIのいずれでも見つかりません。"
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "サービス '%s' は別名／番号／URI のいずれでも見つかりません。"
+msgstr "サービス '%s' は別名／番号／URIのいずれでも見つかりません。"
 
 #: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
-msgstr ""
-"パラメータが少なすぎます。少なくとも URI と別名を指定する必要があります。"
+msgstr "パラメータが少なすぎます。少なくともURIと別名を指定する必要があります。"
 
 #: src/Zypper.cc:3765
 #, c-format, boost-format
