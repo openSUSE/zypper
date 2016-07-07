@@ -6,15 +6,16 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2015-07-12 17:04+0900\n"
-"Last-Translator: Yunseok Choi <xein@naver.com>\n"
-"Language-Team: Korean <xein@naver.com>\n"
+"PO-Revision-Date: 2016-07-07 01:56+0000\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2.6\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: src/callbacks/keyring.h:36
@@ -50,7 +51,7 @@ msgstr "GPG 키 서명 파일 '%1%'이(가) 만료되었습니다."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
+msgstr[0] "GPG 키 서명 파일 '%1%'이(가) %2%일 후에 만료됩니다."
 
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
@@ -323,14 +324,14 @@ msgid ""
 msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
-msgstr[0] ""
+msgstr[0] "다음 패키지는 아직 다운로드되지 않았으므로 파일 충돌 확인에서 제외해야 했습니다."
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:408
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
-msgstr[0] ""
+msgstr[0] "%1%개의 파일 충돌이 검색되었습니다."
 
 #: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
@@ -399,12 +400,12 @@ msgstr "오류를 무시하고 패키지를 승인합니다."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "불확실한 범주 필터 값 '%1%'."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "불확실한 심각도 필터 값 '%1%'."
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
@@ -479,7 +480,7 @@ msgstr "설명"
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
+msgstr[0] "'%2%'에 대해 %1%개가 일치할 것입니다."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:168
@@ -1016,7 +1017,7 @@ msgstr "'%s' 충돌을 추가하는 중입니다."
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "%1%을(를) 의도하셨습니까?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1024,7 +1025,7 @@ msgstr ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
+msgstr[0] "... 및 %1%개의 추가 항목."
 
 #: src/Summary.cc:505
 #, fuzzy, c-format, boost-format
@@ -1194,7 +1195,7 @@ msgstr[0] "다음의 소스 꾸러미가 설치됩니다:"
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] ""
+msgstr[0] "다음 권장 패치가 자동으로 선택되었습니다."
 
 #: src/Summary.cc:840
 #, fuzzy, c-format, boost-format
@@ -1982,7 +1983,7 @@ msgstr "부모 서비스"
 
 #: src/repos.cc:1109
 msgid "Keywords"
-msgstr ""
+msgstr "키워드"
 
 #: src/repos.cc:1110
 msgid "Repo Info Path"
@@ -2532,14 +2533,14 @@ msgstr "인수에 같은 옵션이 지정되고 있기 때문에 인수가 없�
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
+msgstr[0] "해당하는 패치 %2%개 중에서 %1%개를 고려합니다."
 
 #. translator: stats table header
 #: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
+msgstr[0] "해당하는 패치 %1%개를 찾았습니다."
 
 #. translator: stats summary
 #: src/update.cc:294
@@ -2560,7 +2561,7 @@ msgstr[0] "%d 개의 패치가 필요함"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "'%1%'을(를) 사용하면 옵션 패치를 포함합니다."
 
 #. translator: stats summary
 #: src/update.cc:315
@@ -2579,7 +2580,7 @@ msgstr[0] "%d 개의 보안 패치"
 #. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
-msgstr ""
+msgstr "업데이트 스택"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -2589,7 +2590,7 @@ msgstr "패치"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "잠김"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2598,7 +2599,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "포함된 범주"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -2680,14 +2681,16 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--with[out]-optional\n"
+"해당하는 옵션 패치를 필수 또는 제외로 처리할지를 결정합니다."
 
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "기본값은 옵션 패치를 제외하는 것입니다."
 
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "기본값은 옵션 패치를 포함하는 것입니다."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3120,7 +3123,7 @@ msgstr "%s 옵션은 여기에서는 아무작용 안합니다. 무시 중입니
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "Zypper 셸은 하위 명령의 실행을 지원하지 않습니다."
 
 #: src/Zypper.cc:1313
 #, c-format, boost-format
@@ -3237,7 +3240,7 @@ msgstr ""
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
-msgstr ""
+msgstr "사용자의 작업을 요청하지 마십시오. --non-interactive 전역 옵션의 별칭입니다."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -3321,6 +3324,8 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"RPM에서 소스 패키지를 설치하는 기본 위치는 '%1%'입니다. 하지만 이 값은 로컬 RPM 구성에 변경할 수 있습니다. 확실하지 않은 "
+"경우에는 '%2%'을(를) 실행해 보십시오."
 
 #: src/Zypper.cc:1613
 #, c-format, boost-format
@@ -4022,54 +4027,68 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [옵션]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "해당하는 모든 패치를 나열합니다."
 
 #: src/Zypper.cc:2302
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Bugzilla 문제에 대해 해당하는 패치를 나열합니다."
 
 #: src/Zypper.cc:2303
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"CVE 문제에 대해 해당하는 패치를 나열합니다."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=STRING]\n"
+"특정 스트링에 일치하는 문제를 찾습니다."
 
 #: src/Zypper.cc:2305
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <YYYY-MM-DD>\n"
+"지정된 날짜(포함하지 않음)까지 발급된 패치만 나열합니다."
 
 #: src/Zypper.cc:2306
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <CATEGORY>\n"
+"이 범주에 속한 패치만 나열합니다."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <심각도>\n"
+"이 심각도에 속한 패치만 나열합니다."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"해당하는 패치뿐 아니라 모든 패치를 나열합니다."
 
 #: src/Zypper.cc:2310
 #, fuzzy
@@ -4244,7 +4263,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [옵션]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -4252,6 +4271,8 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"해당하는 패치에 대한 통계를 표시합니다. 이 명령을 실행하여 필요한 패치를 찾으면 100을 반환하고, 최소 한 개의 필요한 보안 패치를 "
+"찾으면 101을 반환합니다."
 
 #: src/Zypper.cc:2476
 #, fuzzy
@@ -5120,7 +5141,7 @@ msgstr[0] "꾸러미 제거됨"
 
 #: src/Zypper.cc:5034
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "이 명령에 대해 구현되지 않은 XML 출력입니다."
 
 #: src/Zypper.cc:5047
 #, c-format, boost-format
@@ -6008,7 +6029,7 @@ msgstr "재시도 중..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "입력을 읽을 수 없습니다. 잘못된 스트림이거나 EOF입니다."
 
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
@@ -6058,7 +6079,7 @@ msgstr[0] "src꾸러미"
 #: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
-msgstr[0] ""
+msgstr[0] "응용 프로그램"
 
 #. default
 #: src/utils/misc.cc:125
@@ -6070,7 +6091,7 @@ msgstr[0] "해결 방법"
 #. translator: patch status
 #: src/utils/misc.cc:134
 msgid "unwanted"
-msgstr ""
+msgstr "원하지 않음"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
@@ -6086,7 +6107,7 @@ msgstr "필요함"
 #. translator: patch status
 #: src/utils/misc.cc:137
 msgid "applied"
-msgstr ""
+msgstr "적용함"
 
 #. translator: patch status
 #: src/utils/misc.cc:138
@@ -6096,7 +6117,7 @@ msgstr "필요하지 않음"
 #. translator: patch status
 #: src/utils/misc.cc:139
 msgid "undetermined"
-msgstr ""
+msgstr "결정되지 않음"
 
 #. << _("Repository")
 #: src/utils/misc.cc:289
