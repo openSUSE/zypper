@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 04:00+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 04:05+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -1906,7 +1906,7 @@ msgstr "リポジトリ '%s' を一時的に有効化しています。"
 #: src/repos.cc:841
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
-msgstr "リポジトリ「%s」は無効なままです。"
+msgstr "リポジトリ '%s' は無効なままです。"
 
 #: src/repos.cc:849 src/repos.cc:1324
 msgid "Some of the repositories have not been refreshed because of an error."
@@ -1939,7 +1939,7 @@ msgstr "有効"
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:972 src/repos.cc:1101 src/repos.cc:1632 src/repos.cc:2404
 msgid "GPG Check"
-msgstr "GPG チェック"
+msgstr "GPGチェック"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
