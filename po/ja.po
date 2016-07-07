@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 01:12+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-07-07 01:35+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -341,7 +341,7 @@ msgstr[0] "%1% 個のファイル競合を検出しました:"
 
 #: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
-msgstr "競合するファイルは置き換えられます。"
+msgstr "競合しているファイルは置き換えられます。"
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
 #: src/callbacks/rpm.h:422
@@ -350,17 +350,13 @@ msgid ""
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
 msgstr ""
-"ファイルの競合は、 2 つのパッケージが同じ名前でファイルをインストールしようと"
-"していて、それらの内容が異なる場合に発生します。このままこれらのパッケージの"
-"インストールを続行してしまうと、衝突しているファイルは新しくインストールされ"
-"るほうのパッケージの内容で上書きされます。"
+"ファイルの競合は、2つのパッケージが、同じ名前を持つ異なる内容の複数のファイルをインストールしようとすると発生します。続行すると、競合するファイルは置き換"
+"えられ、以前の内容は失われます。"
 
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
-msgstr ""
-"下記の問い合わせは、削除を行なおうとしているものと同じオブジェクトをロック "
-"(施錠) してしまいます:"
+msgstr "下記の問い合わせは、削除しようとしているオブジェクトをロックしてしまいます:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
@@ -390,12 +386,12 @@ msgstr "差分を適用しています"
 #: src/callbacks/repo.h:103
 #, c-format, boost-format
 msgid "(%s unpacked)"
-msgstr "(展開後 %s)"
+msgstr "(%s を解凍しました)"
 
 #: src/callbacks/repo.h:112
 #, boost-format
 msgid "In cache %1%"
-msgstr "キャッシュ内 %1%"
+msgstr "キャッシュ %1% 内にあります"
 
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
@@ -422,11 +418,11 @@ msgstr "重要度フィルタの値 '%1%' が解釈できません。"
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
-msgstr "はい (Y)"
+msgstr "はい"
 
 #: src/output/Out.h:33 src/repos.cc:117 src/repos.cc:145
 msgid "No"
-msgstr "いいえ (N)"
+msgstr "いいえ"
 
 #: src/Zypper.h:463
 msgid "Finished with error."
@@ -542,7 +538,7 @@ msgstr "最新"
 
 #: src/info.cc:273
 msgid "not installed"
-msgstr "未インストール"
+msgstr "インストールされていません"
 
 #: src/info.cc:275
 msgid "Installed Size"
@@ -640,7 +636,7 @@ msgstr "未定義"
 
 #: src/info.cc:488
 msgid "CPE Name"
-msgstr "CPE 名"
+msgstr "CPE名"
 
 #: src/info.cc:495
 msgid "invalid CPE Name"
