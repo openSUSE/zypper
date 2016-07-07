@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 02:28+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 02:31+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -950,12 +950,12 @@ msgstr "パッケージを強制インストールするには、 '%s' をご利
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "パッチ「%s」には対話操作が必要です。スキップしています。"
+msgstr "パッチ '%s' には対話操作が必要です。スキップしています。"
 
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
-msgstr "修正 '%s' は必要ありません。"
+msgstr "パッチ '%s' は必要ありません。"
 
 #: src/RequestFeedback.cc:181
 #, boost-format
@@ -970,8 +970,7 @@ msgstr ""
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"修正 '%s' はロック (施錠) されています。インストールを行なうには '%s' を、"
-"ロックを解除するには '%s' をお使いください。"
+"パッチ '%s' はロック (施錠) されています。インストールを行なうには '%s' を、ロックを解除するには '%s' を使用してください。"
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
