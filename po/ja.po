@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 07:42+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-07 08:06+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5304,7 +5304,8 @@ msgstr "解決処理のテスト出力中にエラーが発生しました。"
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
-msgstr "削除されたライブラリを使用している実行中プロセスの確認は、zypper.confでは無効です。「%s」を実行して手動で確認してください。"
+msgstr ""
+"削除されたライブラリを使用している実行中プロセスの確認は、zypper.confで無効にされています。'%s' を実行して手動で確認してください。"
 
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
@@ -5484,9 +5485,7 @@ msgstr "'%1%' を実行することで、依存関係の問題を修復するこ
 msgid ""
 "One of installed patches requires reboot of your machine. Reboot as soon as "
 "possible."
-msgstr ""
-"インストールされた修正の中にはコンピュータの再起動を必要とするものがありま"
-"す。できるだけ早めに再起動してください。"
+msgstr "インストールされたパッチの中にはコンピュータの再起動を必要とするものがあります。できるだけ早めに再起動してください。"
 
 #: src/solve-commit.cc:887
 msgid ""
