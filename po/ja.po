@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 02:50+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-07-07 02:55+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -1610,17 +1610,17 @@ msgstr "a/r/i/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr "SSL の証明機関チェックを無効にして続行する。"
+msgstr "SSL証明局の確認を無効にして続行します。"
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
 #: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
-msgstr "中止(A), 再試行(R), 無視(I)？"
+msgstr "中止、再試行、無視？"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
-msgstr "SSL の証明機関チェックを無効にします。"
+msgstr "SSL認証局の確認が無効です。"
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
@@ -1645,7 +1645,7 @@ msgstr "取り出すデバイスを選択してください。"
 
 #: src/callbacks/media.cc:154
 msgid "Insert the CD/DVD and press ENTER to continue."
-msgstr "CD/DVD を挿入し、 Enter キーを押してください。"
+msgstr "CD/DVDを挿入し、 Enterキーを押して続行してください。"
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:157
@@ -1691,9 +1691,7 @@ msgstr "a/r/i/u"
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
-msgstr ""
-"%s にアクセスするには認証が必要です。 %s からの証明書を読むには、 root である"
-"必要があります。"
+msgstr "%s にアクセスするには認証が必要です。%s からの証明書を読むには、rootである必要があります。"
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -1763,7 +1761,7 @@ msgstr "リポジトリ「%s」のメタデータを取り出しています"
 #: src/repos.cc:263
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
-msgstr "リポジトリ '%s' を恒久的に無効化しますか？"
+msgstr "リポジトリ「%s」を完全に無効にしますか?"
 
 #: src/repos.cc:279
 #, c-format, boost-format
