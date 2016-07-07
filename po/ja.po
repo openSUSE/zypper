@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 08:51+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-07-07 08:54+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -5965,7 +5965,7 @@ msgstr "Enterキーで行単位、スペースキーでページ単位に移動�
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
-msgstr "設定ファイル処理システムを準備することができません。"
+msgstr "環境設定ファイルパーサを初期化できません。"
 
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
@@ -5973,11 +5973,11 @@ msgstr "Augeas エラー: 読み込むべき設定ファイルの設定に失敗
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
-msgstr "設定ファイルを処理することができませんでした。"
+msgstr "環境設定ファイルを解析できませんでした。"
 
 #: src/utils/Augeas.cc:99
 msgid "Error parsing zypper.conf:"
-msgstr "zypper.conf の処理時にエラー:"
+msgstr "zypper.confの解析中にエラーが発生しました:"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
