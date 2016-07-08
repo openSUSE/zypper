@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 08:52+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 08:53+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -4836,7 +4836,7 @@ msgstr ""
 
 #: src/Zypper.cc:3326
 msgid "Root privileges are required for refreshing services."
-msgstr "시스템 서비스를 새로 고치려면 루트 권한이 필요합니다."
+msgstr "시스템을 새로 고치려면 루트 권한이 필요합니다."
 
 #: src/Zypper.cc:3350 src/Zypper.cc:3439 src/Zypper.cc:3656
 msgid "Root privileges are required for modifying system services."
