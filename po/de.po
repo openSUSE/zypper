@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 10:24+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 10:43+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -2579,19 +2579,19 @@ msgstr ""
 
 #: src/repos.cc:2754
 msgid "Specified services are not enabled or defined."
-msgstr "Die angegebenen Dienste sind nicht aktiviert oder definiert."
+msgstr "Die angegebenen Dienste wurden nicht aktiviert oder definiert."
 
 #: src/repos.cc:2756
 msgid "There are no enabled services defined."
-msgstr "Es sind keine aktivierten Dienste festgelegt."
+msgstr "Es wurden keine aktivierten Dienste definiert."
 
 #: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
-msgstr "Die Dienste konnten aufgrund von Fehlern nicht aktualisiert werden."
+msgstr "Aufgrund von Fehlern konnten die Dienste nicht aktualisiert werden."
 
 #: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "Einige der Dienste wurden aufgrund von Fehlern nicht aktualisiert."
+msgstr "Aufgrund eines Fehlers wurden einige der Dienste nicht aktualisiert."
 
 #: src/repos.cc:2771
 msgid "Specified services have been refreshed."
@@ -2614,17 +2614,17 @@ msgstr "Der Dienst '%s' wurde erfolgreich deaktiviert."
 #: src/repos.cc:2928
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "Autoaktualisierung wurde für Dienst '%s' aktiviert."
+msgstr "Für Dienst '%s' wurde die automatische Aktualisierung aktiviert."
 
 #: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "Autoaktualisierung wurde für Dienst '%s' deaktiviert."
+msgstr "Für Dienst '%s' wurde die automatische Aktualisierung deaktiviert."
 
 #: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr "Name von Dienst '%s' wurde auf '%s' gesetzt."
+msgstr "Name von Dienst '%s' wurde auf '%s' festgelegt."
 
 #: src/repos.cc:2940
 #, c-format, boost-format
@@ -2680,30 +2680,32 @@ msgstr[1] ""
 #: src/repos.cc:2970
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
-msgstr "Nichts zu ändern für Dienst '%s'."
+msgstr "Für Dienst '%s' müssen keine Änderungen vorgenommen werden."
 
 #: src/repos.cc:2976
 msgid "Error while modifying the service:"
-msgstr "Fehler beim Modifizieren des Dienstes:"
+msgstr "Fehler beim Bearbeiten des Dienstes:"
 
 #: src/repos.cc:2977
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
-msgstr "Dienst %s wird nicht verändert."
+msgstr "Dienst %s bleibt unverändert."
 
 #: src/repos.cc:3081
 msgid "Loading repository data..."
-msgstr "Daten des Repositories laden ..."
+msgstr "Repository-Daten werden geladen..."
 
 #: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Daten des Repositories '%s' abrufen ..."
+msgstr "Daten des Repositorys '%s' werden abgerufen..."
 
 #: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "Repository '%s' nicht zwischengespeichert. Zwischenspeichern ..."
+msgstr ""
+"Repository '%s' nicht im Cache gespeichert. Speichern im Cache wird "
+"ausgeführt..."
 
 #: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
@@ -2714,14 +2716,14 @@ msgstr "Problem beim Laden der Daten von '%s'"
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
-"Repository '%s' konnte nicht aktualisiert werden. Verwende alten "
-"Zwischenspeicher."
+"Repository '%s' konnte nicht aktualisiert werden. Der alte Cache wird "
+"verwendet."
 
 #: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr ""
-"Auflösbare Abhängigkeiten von '%s' wurden aufgrund eines Fehlers nicht "
+"Aufgrund eines Fehlers wurden die auflösbaren Elemente aus '%s' nicht "
 "geladen."
 
 #: src/repos.cc:3138
@@ -2737,7 +2739,7 @@ msgstr ""
 #: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "Versuchen Sie '%s' oder selbst '%s', bevor Sie dies tun."
+msgstr "Versuchen Sie es vorher jedoch mit  '%s' oder sogar mit '%s'."
 
 #: src/repos.cc:3160
 msgid "Reading installed packages..."
