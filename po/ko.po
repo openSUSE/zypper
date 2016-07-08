@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 06:47+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2232,7 +2232,7 @@ msgstr "'%s' 리포지토리가 활성화되었습니다."
 #: src/repos.cc:2041
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
-msgstr "'%s' 리포지토리가 성공적으로 비활성화되었습니다."
+msgstr "'%s' 리포지토리가 비활성화되었습니다."
 
 #: src/repos.cc:2048
 #, c-format, boost-format
