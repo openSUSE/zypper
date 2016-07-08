@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:11+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 06:13+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -590,23 +590,23 @@ msgstr "S"
 #: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
-msgstr "형식"
+msgstr "유형"
 
 #: src/info.cc:402 src/search.cc:379
 msgid "Dependency"
-msgstr "의존성"
+msgstr "종속성"
 
 #: src/info.cc:417
 msgid "Contents"
-msgstr "내용"
+msgstr "컨텐트"
 
 #: src/info.cc:419
 msgid "(empty)"
-msgstr "(비어있음)"
+msgstr "(비어 있음)"
 
 #: src/info.cc:472
 msgid "Flavor"
-msgstr "Flavor"
+msgstr "특징"
 
 # src/isdn/complex.ycp:266 src/modem/complex.ycp:207
 # src/provider/complex.ycp:186
@@ -793,7 +793,7 @@ msgstr "'%s' 패턴을 찾을 수 없습니다."
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "소스 꾸러미 '%s' 찾을 수 없음."
+msgstr "소스 패키지 '%s'을(를) 찾을 수 없습니다."
 
 #. just in case
 #: src/RequestFeedback.cc:56
@@ -847,7 +847,7 @@ msgstr "'%s'와(과) 일치하는 패키지가 설치되어 있지 않습니다.
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr "'%s' 꾸러미는 설치되지 않았습니다."
+msgstr "'%s' 패키지가 설치되지 않았습니다."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
@@ -858,13 +858,13 @@ msgstr "'%s' 공급자가 설치되지 않았습니다."
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr "'%s'는 이미 설치되어 있습니다."
+msgstr "'%s'이(가) 이미 설치되어 있습니다."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "'%s'를 제공하는 '%s'는 이미 설치되어 있습니다."
+msgstr "'%s'('%s' 제공)이(가) 이미 설치되어 있습니다."
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
