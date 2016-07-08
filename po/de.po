@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 11:17+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 11:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -5576,11 +5576,11 @@ msgstr "Dieses Kommando ist nur in der Zypper-Shell sinnvoll."
 
 #: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
-msgstr "Sie haben schon eine Zypper-Shell geöffnet."
+msgstr "Es wird bereits eine Zypper-Shell ausgeführt."
 
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
-msgstr "Typ der auflösbaren Abhängigkeit"
+msgstr "Typ des auflösbaren Elements"
 
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:40
@@ -5619,7 +5619,7 @@ msgstr[1] "Wählen Sie aus den obigen Lösungen mittels Nummer oder brechen Sie 
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:97
 msgid "s/r/c"
-msgstr "u/w/b"
+msgstr "s/r/c"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
