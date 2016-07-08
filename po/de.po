@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 10:15+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 10:23+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -2467,32 +2467,32 @@ msgstr "Für Repository '%s' wurde das Caching von RPM-Dateien deaktiviert."
 #: src/repos.cc:2066
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
-msgstr "GPG-Überprüfung wurde für Repository '%s' aktiviert."
+msgstr "Für Repository '%s' wurde die GPG-Prüfung aktiviert."
 
 #: src/repos.cc:2068
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
-msgstr "GPG-Überprüfung wurde für Repository '%s' deaktiviert."
+msgstr "Für Repository '%s' wurde die GPG-Prüfung deaktiviert."
 
 #: src/repos.cc:2074
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "Die Priorität von Repository '%s' wurde auf %d gesetzt."
+msgstr "Die Priorität von Repository '%s' wurde auf %d festgelegt."
 
 #: src/repos.cc:2080
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "Der Name von Repository '%s' wurde auf '%s' gesetzt."
+msgstr "Name von Repository '%s' wurde auf '%s' festgelegt."
 
 #: src/repos.cc:2091
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
-msgstr "Nichts zu ändern für Repository '%s'."
+msgstr "Für Repository '%s' müssen keine Änderungen vorgenommen werden."
 
 #: src/repos.cc:2098
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
-msgstr "Repository %s wird nicht verändert."
+msgstr "Repository %s bleibt unverändert."
 
 #: src/repos.cc:2130
 msgid "Error reading services:"
@@ -2501,26 +2501,28 @@ msgstr "Fehler beim Lesen der Dienste:"
 #: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "Dienst '%s' wurde nicht durch Alias, Nummer oder URI gefunden."
+msgstr ""
+"Dienst '%s' konnte nicht anhand des Alias, der Nummer oder des URI gefunden "
+"werden."
 
 #: src/repos.cc:2222
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
-msgstr "Verwenden Sie '%s', um die Liste der definierten Dienste zu erhalten."
+msgstr "Verwenden Sie '%s', um die Liste der definierten Dienste abzurufen."
 
 #: src/repos.cc:2464
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
-"Keine Dienste definiert. Verwenden Sie das Kommando '%s', um einen oder "
-"mehrere Dienst/e hinzuzufügen."
+"Keine Dienste definiert. Verwenden Sie das Kommando '%s', um mindestens "
+"einen Dienst hinzuzufügen."
 
 #: src/repos.cc:2547
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
-"Ein mit '%s' benannter Dienst existiert bereits. Bitte verwenden Sie einen "
-"anderen Alias."
+"Ein Dienst mit Alias '%s' ist bereits vorhanden. Verwenden Sie einen anderen "
+"Alias."
 
 #: src/repos.cc:2554
 #, c-format, boost-format
@@ -2559,12 +2561,14 @@ msgstr "Dienst '%s' wird aufgrund des obigen Fehlers übersprungen."
 
 #: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
-msgstr "Bitte überprüfen Sie, ob der URI gültig und zugänglich ist."
+msgstr ""
+"Bitte überprüfen Sie, ob der URI gültig ist und auf ihn zugegriffen werden "
+"kann."
 
 #: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "Deaktivierter Dienst '%s' wird übersprungen"
+msgstr "Deaktivierter Dienst '%s' wird übersprungen."
 
 #: src/repos.cc:2751
 #, c-format, boost-format
