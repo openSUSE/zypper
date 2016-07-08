@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 10:05+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -2447,7 +2447,7 @@ msgstr "Repository '%s' wurde erfolgreich deaktiviert."
 #: src/repos.cc:2048
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "Für Repository '%s'  wurde die automatische Aktualisierung aktiviert."
+msgstr "Für Repository '%s' wurde die automatische Aktualisierung aktiviert."
 
 #: src/repos.cc:2050
 #, c-format, boost-format
