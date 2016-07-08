@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 09:40+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 09:46+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -880,7 +880,7 @@ msgstr "Quellpaket '%s' wurde in den angegebenen Repositorys nicht gefunden."
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "Objekt '%s' wurde in den angegebenen Repositories nicht gefunden."
+msgstr "Objekt '%s' wurde in den angegebenen Repositorys nicht gefunden."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
@@ -903,7 +903,7 @@ msgstr "Paket '%s' ist nicht installiert."
 #: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr "Keine Anbieter von '%s' sind installiert."
+msgstr "Es ist kein Anbieter von '%s' installiert."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
@@ -914,7 +914,7 @@ msgstr "'%s' ist bereits installiert."
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "'%s', welches '%s' anbietet, ist bereits installiert."
+msgstr "'%s', welches '%s' bietet, ist bereits installiert."
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
@@ -964,8 +964,8 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Es gibt einen Aktualisierungskandidaten  für '%s', dieser ist aber gesperrt. "
-"Verwenden Sie '%s', um die Sperre aufzuheben."
+"Aktualisierungskandidat für '%s' gefunden, dieser ist aber gesperrt. "
+"Verwenden Sie '%s' zum Entsperren."
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -973,8 +973,8 @@ msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"Paket '%s' wurde nicht in den Repositories gefunden. Neuinstallation, "
-"Upgrade oder Downgrade sind nicht möglich."
+"Paket '%s' ist in Ihren Repositorys nicht vorhanden. Erneute Installation, "
+"Upgrade oder Downgrade nicht möglich."
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
@@ -982,14 +982,14 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"Das gewählte Paket '%s' aus Repository '%s' hat eine niedrigere Version als "
-"das installierte."
+"Das ausgewählte Paket '%s' aus Repository '%s' hat eine niedrigere Version "
+"als das installierte."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr "Verwenden Sie '%s' um die Installation des Pakets zu erzwingen."
+msgstr "Verwenden Sie '%s', um die Installation des Pakets zu erzwingen."
 
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
@@ -1020,7 +1020,7 @@ msgstr ""
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "Patch '%s' is nicht in der angegebenen Kategorie."
+msgstr "Patch '%s' gehört nicht zur angegebenen Kategorie."
 
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
@@ -1035,7 +1035,7 @@ msgstr "Patch '%s' wurde nach dem angegebenen Datum herausgegeben."
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "'%s' aus Repository '%s' für die Installation wählen."
+msgstr "'%s' aus Repository '%s' wird für die Installation ausgewählt."
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
@@ -1045,7 +1045,7 @@ msgstr "Installation von '%s' aus Repository '%s' wird erzwungen."
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
-msgstr "%s wird zum Entfernen gewählt."
+msgstr "'%s' wird zum Entfernen ausgewählt."
 
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
@@ -1055,7 +1055,7 @@ msgstr "'%s' ist gesperrt. Verwenden Sie '%s', um es zu entsperren."
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
-msgstr "Erfordernis '%s' wird hinzugefügt."
+msgstr "Voraussetzung '%s' wird hinzugefügt."
 
 #: src/RequestFeedback.cc:241
 #, c-format, boost-format
@@ -1603,7 +1603,7 @@ msgstr "Nach der Operation werden zusätzlich %s belegt."
 #: src/Summary.cc:1251
 msgid "No additional space will be used or freed after the operation."
 msgstr ""
-"Kein zusätzlicher Speicherplatz wird nach dieser Operation belegt oder "
+"Nach diesem Vorgang wird kein zusätzlicher Speicherplatz belegt oder "
 "freigegeben."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
@@ -1724,19 +1724,19 @@ msgstr "Systemneustart erforderlich."
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "Abruf der Datei überspringen und aktuelle Operation abbrechen."
+msgstr "Dateiabruf überspringen und aktuellen Vorgang abbrechen."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
-msgstr "Erneuter Dateiabruf."
+msgstr "Dateiabruf erneut versuchen."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:32
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
-msgstr "Dateiabruf überspringen und die Operation ohne die Datei fortsetzen."
+msgstr "Dateiabruf überspringen und den Vorgang ohne die Datei fortsetzen."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
@@ -1760,7 +1760,7 @@ msgstr "a/w/i/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr "SSL-Zertifikats-Authoritätsprüfung deaktivieren und fortfahren."
+msgstr "Überprüfung der SSL-Zertifizierungsstelle deaktivieren und fortfahren."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
@@ -1770,15 +1770,15 @@ msgstr "Abbrechen, wiederholen, ignorieren?"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
-msgstr "SSL-Zertifikats-Authoritätsprüfung deaktiviert."
+msgstr "Überprüfung der SSL-Zertifizierungsstelle deaktiviert."
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
-msgstr "Keine Geräte erkannt, Auswurf nicht möglich."
+msgstr "Keine Geräte erkannt, Entfernen nicht möglich."
 
 #: src/callbacks/media.cc:110
 msgid "Try to eject the device manually."
-msgstr "Versuchen Sie, das Gerät manuell auszuwerfen."
+msgstr "Versuchen, das Gerät manuell zu entfernen."
 
 #: src/callbacks/media.cc:121
 msgid "Detected devices:"
@@ -1787,20 +1787,20 @@ msgstr "Erkannte Geräte:"
 # cancel button label
 #: src/callbacks/media.cc:136
 msgid "Cancel"
-msgstr "Verwerfen"
+msgstr "Abbrechen"
 
 #: src/callbacks/media.cc:139
 msgid "Select device to eject."
-msgstr "Auszuwerfendes Gerät wählen."
+msgstr "Zu entfernendes Gerät auswählen."
 
 #: src/callbacks/media.cc:154
 msgid "Insert the CD/DVD and press ENTER to continue."
-msgstr "Legen Sie die CD/DVD ein und drücken Sie ENTER um fortzufahren."
+msgstr "CD/DVD einlegen und zum Fortfahren die Eingabetaste drücken."
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:157
 msgid "Retrying..."
-msgstr "Erneut versuchen ..."
+msgstr "Neuversuch…"
 
 #. cd/dvd options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -1814,7 +1814,7 @@ msgstr "a/w/i/u/m"
 
 #: src/callbacks/media.cc:174
 msgid "Eject medium."
-msgstr "Medium auswerfen."
+msgstr "Datenträger auswerfen."
 
 # y/n dialog is i18n'ed; translating as j/n is possible
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
@@ -1827,8 +1827,8 @@ msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
 "operation."
 msgstr ""
-"Bitte legen Sie Medium [%s] #%d ein und geben 'j' ein, um fortzufahren oder "
-"'n', um die Operation abzubrechen."
+"Legen Sie Medium [%s] #%d ein und geben 'j' ein, um fortzufahren oder 'n', "
+"um die Operation abzubrechen."
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
