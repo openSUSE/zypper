@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:25+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 06:26+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -1769,23 +1769,23 @@ msgstr "'%s' 리포지토리에 대한 %s에 기본 URI(baseurl=URI) 항목을 �
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
-msgstr "이 저장소에 대한 별칭이 없습니다."
+msgstr "이 리포지토리에 정의된 별칭이 없습니다."
 
 #: src/repos.cc:339
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
-msgstr "'%s' 저장소는 잘못되었습니다."
+msgstr "'%s' 리포지토리가 잘못되었습니다."
 
 #: src/repos.cc:340
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
-msgstr "이 저장소에 정의된 URI 가 올바른 위치를 가르키고 있는지 확인해주세요."
+msgstr "이 리포지토리에 정의된 URI가 올바른 리포지토리를 가리키고 있는지 확인하십시오."
 
 #: src/repos.cc:352
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "'%s' 용 메타데이터 회수 중 오류:"
+msgstr "'%s'에 대한 메타데이터 검색 오류:"
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
