@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:34+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 06:38+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -1903,7 +1903,7 @@ msgstr "별칭"
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2403
 msgid "Enabled"
-msgstr "활성화"
+msgstr "활성화됨"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
@@ -1957,7 +1957,7 @@ msgstr "끄기"
 
 #: src/repos.cc:1104
 msgid "Keep Packages"
-msgstr "꾸러미 유지"
+msgstr "패키지 유지"
 
 #: src/repos.cc:1106
 msgid "GPG Key URI"
@@ -1965,11 +1965,11 @@ msgstr "GPG 키 URI"
 
 #: src/repos.cc:1107
 msgid "Path Prefix"
-msgstr "경로 머릿말"
+msgstr "경로 접두어"
 
 #: src/repos.cc:1108
 msgid "Parent Service"
-msgstr "부모 서비스"
+msgstr "상위 서비스"
 
 #: src/repos.cc:1109
 msgid "Keywords"
@@ -1985,70 +1985,70 @@ msgstr "MD 캐시 경로"
 
 #: src/repos.cc:1163 src/repos.cc:1231 src/repos.cc:1375
 msgid "Error reading repositories:"
-msgstr "저장소 읽는 중 오류:"
+msgstr "리포지토리를 읽는 중 오류 발생:"
 
 #: src/repos.cc:1189
 #, c-format, boost-format
 msgid "Can't open %s for writing."
-msgstr "기록하기 위해 %s 를(을) 열 수 없습니다."
+msgstr "%s을(를) 열어 쓸 수 없습니다."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
-msgstr "아마도 쓰기 권한이 없는 것 같습니다?"
+msgstr "쓰기 권한이 없는 것 같습니다."
 
 #: src/repos.cc:1196
 #, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "%s 로 저장소가 성공적으로 출력되었습니다."
+msgstr "리포지토리가 %s(으)로 엑스포트되었습니다."
 
 #: src/repos.cc:1248 src/repos.cc:1392
 msgid "Specified repositories: "
-msgstr "지정된 저장소: "
+msgstr "지정된 리포지토리: "
 
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "비활성화 저장소 '%s' 를 생략 중"
+msgstr "비활성화된 리포지토리 '%s'을(를) 건너뛰는 중"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
-msgstr "지정한 저장소는 정의되지 않았거나 활성화 되어 있지 않습니다."
+msgstr "지정된 리포지토리가 활성화되지 않았거나 정의되지 않았습니다."
 
 #: src/repos.cc:1312
 msgid "There are no enabled repositories defined."
-msgstr "활성화 되어 있는 저장소가 정의되어 있지 않습니다."
+msgstr "활성화된 리포지토리가 정의되지 않았습니다."
 
 #: src/repos.cc:1313
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "'%s' 나 '%s' 명령을 사용하여 저장소를 추가 또는 활성화 시킵니다."
+msgstr "'%s' 또는 '%s' 명령을 사용하여 리포지토리를 추가하거나 활성화합니다."
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
-msgstr "오류로 인해 저장소를 새로 고칠 수 없습니다."
+msgstr "오류로 인해 리포지토리를 새로 고칠 수 없습니다."
 
 #: src/repos.cc:1329
 msgid "Specified repositories have been refreshed."
-msgstr "지정한 저장소가 새로 고쳐졌습니다."
+msgstr "지정된 리포지토리가 새로 고쳐졌습니다."
 
 #: src/repos.cc:1331
 msgid "All repositories have been refreshed."
-msgstr "모든 저장소가 새로 고쳐졌습니다."
+msgstr "모든 리포지토리를 새로 고쳤습니다."
 
 #: src/repos.cc:1438
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "'%s' 의 메타데이터의 캐시를 지우는 중입니다."
+msgstr "'%s'에 대한 메타 데이터 캐시를 정리하는 중입니다."
 
 #: src/repos.cc:1447
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "'%s' 의 가공되지 않는 메타데이터 캐시를 지우는 중입니다."
+msgstr "'%s'에 대한 원시 메타 데이터 캐시를 정리하는 중입니다."
 
 #: src/repos.cc:1453
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr "%s '%s' 의 raw 메타데이터 캐시를 유지하고 있습니다."
+msgstr "%s '%s'의 원시 메타 데이터 캐시를 유지하고 있습니다."
 
 #. translators: meaning the cached rpm files
 #: src/repos.cc:1460
