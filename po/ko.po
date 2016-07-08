@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 06:10+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -564,7 +564,7 @@ msgstr "대화형"
 
 #: src/info.cc:354 src/search.cc:318
 msgid "Recommended"
-msgstr "추천"
+msgstr "권장"
 
 #: src/info.cc:356 src/search.cc:320
 msgid "Suggested"
