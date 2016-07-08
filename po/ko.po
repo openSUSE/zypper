@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 05:57+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-08 05:58+0000\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -97,7 +97,7 @@ msgstr "'%s' 파일이 알 수 없는 키 '%s'(으)로 서명되었습니다. �
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "'%s' 파일(리포지토리 '%s')이 알 수 없는 키 '%s'(으)로 서명되었습니다. 계속하시겠습니까?"
+msgstr "리포지토리 '%s'의 '%s' 파일이 알 수 없는 키 '%s'(으)로 서명되었습니다. 계속하시겠습니까?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
