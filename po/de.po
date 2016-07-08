@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 10:48+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -3315,7 +3315,7 @@ msgstr ""
 
 #: src/Zypper.cc:953 src/Zypper.cc:3227
 msgid "Entering non-interactive mode."
-msgstr "Automatischer Modus wird aktiviert."
+msgstr "Nicht interaktiver Modus wird aktiviert."
 
 #: src/Zypper.cc:960
 msgid ""
