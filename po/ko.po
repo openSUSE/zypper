@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 06:58+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2633,7 +2633,7 @@ msgstr "문제 번호에서 다음 일치 항목이 발견되었습니다."
 
 #: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
-msgstr "다음 패치에서 패치 설명과 일치하는 항목이 발견되었습니다."
+msgstr "다음 패치의 패치 설명과 일치하는 항목이 발견되었습니다."
 
 #: src/update.cc:1057
 #, c-format, boost-format
