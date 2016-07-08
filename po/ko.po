@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 06:05+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -193,7 +193,7 @@ msgstr "계속하시겠습니까?"
 #: src/callbacks/keyring.h:315
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
-msgstr "요약 %s(%s 파일)을(를) 알 수 없습니다."
+msgstr "%s 파일에 대한 요약 %s을(를) 알 수 없습니다."
 
 #: src/callbacks/keyring.h:332
 #, boost-format
