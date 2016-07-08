@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 06:23+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -1732,7 +1732,7 @@ msgstr "원시 메타 데이터를 강제로 새로 고침 중"
 #: src/repos.cc:236
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "'%s' 리포지토리 메타데이터를 검색하는 중"
+msgstr "'%s' 리포지토리 메타 데이터를 검색하는 중"
 
 #: src/repos.cc:263
 #, c-format, boost-format
