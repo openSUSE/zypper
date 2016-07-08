@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 09:28+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-08 10:01+0000\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -458,7 +458,7 @@ msgstr "버전"
 #: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
-msgstr "Arch"
+msgstr "아키텍처"
 
 #: src/info.cc:76
 msgid "Vendor"
@@ -1697,9 +1697,7 @@ msgstr "임시"
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
-msgstr ""
-"%1%' 리포지토리는 '%2%' 서비스에서 관리됩니다. 다음에 서비스를 새로 고치면 임"
-"시 변경 사항이 재설정됩니다."
+msgstr "'%1%' 리포지토리는 '%2%' 서비스에서 관리됩니다. 다음에 서비스를 새로 고치면 임시 변경 사항이 재설정됩니다."
 
 #: src/repos.cc:84
 #, c-format, boost-format
@@ -1804,9 +1802,8 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"이것은 리포지토리의 잘못된 메타 데이터나 또는 메타 데이터 구문 분석기의 버그로 인해 발생했을 수 있습니다. 후자 또는 확실하지 않은 "
-"경우 http://en.opensuse.org/Zypper/Troubleshooting에 있는 지침에 따라 버그 보고서를 파일로 "
-"작성하십시오."
+"이것은 리포지토리의 잘못된 메타 데이터나 메타 데이터 구문 분석기의 버그로 인해 발생했을 수 있습니다. 후자 또는 확실하지 않은 경우 "
+"http://en.opensuse.org/Zypper/Troubleshooting에 있는 지침에 따라 버그 보고서를 파일로 작성하십시오."
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -2104,7 +2101,7 @@ msgstr "이름이 '%s'인 리포지토리가 이미 있습니다. 다른 별칭�
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
-msgstr "리포지토리 유형을 결정할 수 없습니다. 정의한 URI(아래 확인)가 올바른 리포지토리를 가리키고 있는지 확인하십시오."
+msgstr "리포지토리 유형을 결정할 수 없습니다. 정의한 URI(아래 참조)가 올바른 리포지토리를 가리키고 있는지 확인하십시오."
 
 #: src/repos.cc:1591
 msgid "Can't find a valid repository at given location:"
@@ -2751,8 +2748,7 @@ msgstr ""
 "\t--version, -V\t\t버전 번호를 출력합니다.\n"
 "\t--promptids\t\tzypper 사용자 프롬프트 목록을 출력합니다.\n"
 "\t--config, -c <file>\t기본 파일 대신 지정된 구성 파일을 사용합니다.\n"
-"\t--userdata <string>\t이력과 플러그인에서 사용되는 사용자 정의 트랜잭션 "
-"ID.\n"
+"\t--userdata <string>\t이력과 플러그인에서 사용되는 사용자 정의 트랜잭션 ID.\n"
 "\t--quiet, -q\t\t일반 출력을 생략하고 오류 메시지만\n"
 "\t\t\t\t출력합니다.\n"
 "\t--verbose, -v\t\t표시 수준을 높입니다.\n"
@@ -2762,10 +2758,7 @@ msgstr ""
 "\t--non-interactive, -n\t아무것도 묻지 않고 자동으로 기본 답변을\n"
 "\t\t\t\t사용합니다.\n"
 "\t--non-interactive-include-reboot-patches\n"
-"\t\t\t\t\n"
-"\t\t\t\trebootSuggested-flag가 설정된 패치를 대화형으로 취급하지 않습니다.\n"
-"\t--xmlout, -x\t\tXML 출력으로 전환합니다.\n"
-"\t--ignore-unknown, -i\t알 수 없는 패키지를 무시합니다.\n"
+"\t\t\t\t\trebootSuggested-flag가 설정된 패치를 대화형으로 취급하지 않습니다.\n"
 "\t--xmlout, -x\t\tXML 출력으로 전환합니다.\n"
 "\t--ignore-unknown, -i\t알 수 없는 패키지를 무시합니다.\n"
 
@@ -5640,7 +5633,7 @@ msgstr "'%s' 공급자가 없습니다."
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr "경고:"
+msgstr "경고: "
 
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
@@ -5988,7 +5981,7 @@ msgstr "a/r/i"
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] "'%s' 를 자동 선택합니다.(%u 초 후)"
+msgstr[0] "'%s'을(를) %u초 후에 자동으로 선택합니다."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
@@ -6114,7 +6107,7 @@ msgstr "<플랫폼>에 대한 값을 추측할 수 없습니다."
 
 #: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
-msgstr "obs://<프로젝트>/<플랫폼>를 사용하십시오."
+msgstr "obs://<project>/<platform>을 사용하십시오."
 
 #: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
