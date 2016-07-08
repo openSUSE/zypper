@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-08 11:54+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 12:08+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
 "\n"
 "Language: de\n"
@@ -69,15 +69,15 @@ msgstr "Rekursiver Mutex kann nicht initialisiert werden"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr "Es kann keine Mutex-Sperre erlangt werden"
+msgstr "Mutex-Sperre kann nicht abgerufen werden"
 
 #: zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
-msgstr "Die Mutex-Sperre kann nicht aufgehoben werden"
+msgstr "Mutex-Sperre kann nicht aufgehoben werden"
 
 #: zypp/Dep.cc:96
 msgid "Provides"
-msgstr "Bietet"
+msgstr "Bereitstellungen"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
@@ -85,15 +85,15 @@ msgstr "setzt voraus"
 
 #: zypp/Dep.cc:98
 msgid "Requires"
-msgstr "Benötigt"
+msgstr "Anforderungen"
 
 #: zypp/Dep.cc:99
 msgid "Conflicts"
-msgstr "Steht in Konflikt"
+msgstr "Konflikte"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
-msgstr "Veraltet"
+msgstr "Veraltetete Pakete"
 
 #: zypp/Dep.cc:101
 msgid "Recommends"
@@ -115,7 +115,7 @@ msgstr "Zusätze"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Zweifelhafter Typ '%s' für %u-Byte-Prüfsumme '%s'"
+msgstr "Typ '%s' für %u-Byte-Prüfsumme '%s' fragwürdig"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
@@ -131,11 +131,11 @@ msgstr " Ausführung fehlgeschlagen"
 #: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr "%s wurde bereits als %s ausgeführt)"
+msgstr "%s bereits als %s ausgeführt)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
-msgstr " Ausführung während des Abbrechens übersprungen"
+msgstr " Ausführung beim Abbrechen übersprungen"
 
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
@@ -145,19 +145,17 @@ msgstr "Fehler beim Senden der Aktualisierungsbenachrichtigung."
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
-msgstr "Neue Aktualisierungs-Nachricht"
+msgstr "Neue Aktualisierungsnachricht"
 
 #: zypp/target/TargetImpl.cc:1219 zypp/target/TargetImpl.cc:1288
 #: zypp/target/TargetImpl.cc:1640
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."
-msgstr "Die Installation wurde wie gefordert abgebrochen."
+msgstr "Die Installation wurde gemäß Anweisung abgebrochen."
 
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr ""
-"Entschuldigung, aber diese Version von libzypp wurde ohne HAL-Unterstützung "
-"erstellt."
+msgstr "Diese Version von libzypp wurde ohne HAL-Unterstützung erstellt."
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
@@ -173,7 +171,7 @@ msgstr "HalVolume nicht initialisiert"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
-msgstr "D-Bus-Verbindung kann nicht hergestellt werden"
+msgstr "Dbus-Verbindung kann nicht hergestellt werden"
 
 #: zypp/target/hal/HalContext.cc:242
 msgid "libhal_ctx_new: Can't create libhal context"
@@ -191,7 +189,7 @@ msgstr ""
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
-msgstr "Kein CD-ROM-Laufwerk"
+msgstr "Kein CDROM-Laufwerk"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -304,34 +302,34 @@ msgstr "Folgende Aktionen werden ausgeführt:"
 #: zypp/RepoManager.cc:297
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "Repo-Verzeichnis %1% kann nicht gelesen werden: Zugriff verweigert"
+msgstr "Repo-Verzeichnis '%1%' kann nicht gelesen werden: Zugriff verweigert"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "Lesen von Verzeichnis '%s' fehlgeschlagen"
+msgstr "Verzeichnis '%s' konnte nicht gelesen werden"
 
 #: zypp/RepoManager.cc:315
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr "Repo-Datei %1% kann nicht gelesen werden: Zugriff verweigert"
+msgstr "Repo-Datei '%1%' kann nicht gelesen werden: Zugriff verweigert"
 
 #: zypp/RepoManager.cc:338
 msgid "Repository alias cannot start with dot."
-msgstr "Repository-Alias kann nicht mit einem Punkt beginnen."
+msgstr "Ein Repository-Alias darf nicht mit einem Punkt beginnen."
 
 #: zypp/RepoManager.cc:349
 msgid "Service alias cannot start with dot."
-msgstr "Dienst-Alias kann nicht mit einem Punkt beginnen."
+msgstr "Ein Dienst-Alias darf nicht mit einem Punkt beginnen."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
 #: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
-msgstr "'%s' kann nicht zum Schreiben geöffnet werden."
+msgstr "Datei '%s' konnte nicht zum Schreiben geöffnet werden."
 
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
@@ -340,7 +338,7 @@ msgstr "'%s' kann nicht zum Schreiben geöffnet werden."
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
-"Unbekannter Dienst %1%': Verwaistes Dienst-Repository %2%' wird entfernt"
+"Unbekannter Dienst '%1%': Verwaistes Dienst-Repository '%2%' wird entfernt"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
@@ -352,32 +350,31 @@ msgstr[1] "Keine gültigen Metadaten bei den festgelegten URLs gefunden"
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
 #, c-format, boost-format
 msgid "Can't create %s"
-msgstr "%s kann nicht erstellt werden"
+msgstr "%s konnte nicht erstellt werden"
 
 #: zypp/RepoManager.cc:1140
 msgid "Can't create metadata cache directory."
-msgstr ""
-"Verzeichnis für das zwischenspeichern der Metadaten kann nicht erstellt "
-"werden."
+msgstr "Metadaten-Cache-Verzeichnis konnte nicht erstellt werden."
 
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "Zwischenspeicher für Repository '%s' wird erzeugt"
+msgstr "Cache für Repository '%s' erzeugen"
 
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "Cache kann nicht in %s erstellt werden - keine Schreibberechtigung."
+msgstr ""
+"Cache konnte auf %s nicht erstellt werden - keine Schreibberechtigungen."
 
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "Zwischenspeichern des Repos (%d) fehlgeschlagen."
+msgstr "Repo (%d) konnte nicht im Cache gespeichert werden."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
-msgstr "Unbehandelter Repository-Typ"
+msgstr "Unverarbeiteter Repository-Typ"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -388,33 +385,33 @@ msgstr "Unbehandelter Repository-Typ"
 #: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
-msgstr "Fehler beim Versuch von '%s' zu lesen"
+msgstr "Fehler beim Versuch, aus '%s' zu lesen"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
-msgstr "Unbekannter Fehler beim Lesen von '%s'"
+msgstr "Unbekannter Fehler beim Lesen aus '%s'"
 
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "Repository '%s' wird hinzugefügt"
+msgstr "Repository '%s' hinzufügen"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Ungültiger Repo-Dateiname bei '%s'"
+msgstr "Repo-Dateiname bei '%s' ungültig"
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Repository '%s' wird entfernt"
+msgstr "Repository '%s' entfernen"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
-msgstr "Speicherort des Repos nicht auffindbar."
+msgstr "Speicherort des Repos kann nicht gefunden werden."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
@@ -424,7 +421,7 @@ msgstr "'%s' kann nicht gelöscht werden"
 
 #: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
 msgid "Can't figure out where the service is stored."
-msgstr "Speicherort des Dienstes nicht auffindbar."
+msgstr "Speicherort des Dienstes kann nicht gefunden werden."
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
@@ -434,17 +431,17 @@ msgstr "%s laut URL-Schema nicht zulässig"
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "Ungültige %s-Komponente '%s'"
+msgstr "Unzulässige %s-Komponente: '%s'"
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
 msgid "Invalid %s component"
-msgstr "Ungültige Komponente %s"
+msgstr "Unzulässige %s-Komponente"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
 msgstr ""
-"Die Analyse von Anfragezeichenketten wird für diese URL nicht unterstützt"
+"Die Analyse von Abfragezeichenketten wird für diese URL nicht unterstützt"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
@@ -453,7 +450,7 @@ msgstr "Das URL-Schema ist eine erforderliche Komponente"
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr "Ungültiges URL-Schema '%s'"
+msgstr "'%s' ist ein unzulässiges URL-Schema"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
@@ -474,7 +471,7 @@ msgstr "Host-Komponente laut URL-Schema nicht zulässig"
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr "Ungültige Host-Komponente '%s'"
+msgstr "Unzulässige Host-Komponente: '%s'"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
@@ -483,7 +480,7 @@ msgstr "Port laut URL-Schema nicht zulässig"
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
 msgid "Invalid port component '%s'"
-msgstr "Ungültige Portkomponente '%s'"
+msgstr "Unzulässige Portkomponente: '%s'"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
@@ -491,11 +488,13 @@ msgstr "Für das URL-Schema ist ein Pfadname erforderlich"
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
-msgstr "Relativer Pfad nicht erlaubt, wenn Zertifizierungsstelle vorhanden ist"
+msgstr ""
+"Die Angabe des relativen Pfads ist nicht erlaubt, wenn die "
+"Zertifizierungsstelle vorhanden ist"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
-msgstr "Die verschlüsselte Zeichenkette enthält ein NULL-Byte"
+msgstr "Verschlüsselte Zeichenfolge enthält ein NULL-Byte"
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
@@ -512,17 +511,17 @@ msgstr "Ungültiges Trennzeichen für Parameter-Array-Zusammenführung"
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
-msgstr "PTY kann nicht geöffnet werden (%s)."
+msgstr "PTY (%s) kann nicht geöffnet werden."
 
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
-msgstr "Die Pipe kann nicht geöffnet werden (%s)."
+msgstr "Pipe (%s) kann nicht geöffnet werden."
 
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr "Das Wurzelverzeichnis kann nicht auf '%s' geändert werden (%s)."
+msgstr "chroot zu '%s' (%s) nicht möglich."
 
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
@@ -532,18 +531,18 @@ msgstr "Wechsel zu '%s' innerhalb chroot '%s' nicht möglich (%s)."
 #: zypp/ExternalProgram.cc:361
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr "Nach '%s' kann nicht gewechselt werden (%s)."
+msgstr "Wechsel zu '%s' nicht möglich (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
-msgstr "'%s' kann nicht ausgeführt werden (%s)."
+msgstr "exec '%s' (%s) nicht möglich."
 
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr "Fork fehlgeschlagen (%s)."
+msgstr "(%s) abzweigen nicht möglich."
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
@@ -592,19 +591,19 @@ msgstr "nicht unterstützt"
 
 #: zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr "Level 1"
+msgstr "Stufe 1"
 
 #: zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr "Level 2"
+msgstr "Stufe 2"
 
 #: zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr "Level 3"
+msgstr "Stufe 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr "Zusätzlicher Kundenvertrag notwendig"
+msgstr "Zusätzlicher Kundenvertrag erforderlich"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
@@ -612,11 +611,11 @@ msgstr "ungültig"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr "Das Level der Unterstützung ist nicht festgelegt"
+msgstr "Die Support-Stufe wurde nicht angegeben"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
-msgstr "Der Hersteller bietet keine Unterstützung an."
+msgstr "Der Anbieter bietet keinen Support an."
 
 #: zypp/VendorSupportOptions.cc:45
 msgid ""
@@ -625,11 +624,11 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
-"Problembestimmung bedeutet, technische Unterstützung, die entworfen wurde,um "
-"Kompatibilitätsinformationen, Installationsassistenz, "
-"Anwendungsunterstützung, fortlaufende Aufrechterhaltung und grundlegende "
-"Hilfe bei Fehlersuche anzubieten. Level-1-Unterstützung beabsichtigt nicht, "
-"Produktdefektfehler zu beheben."
+"Problembestimmung bezeichnet den technischen Support, der "
+"Kompatibilitätsinformationen, Hilfe bei der Installation, "
+"Anwendungsunterstützung, fortlaufende Wartung und grundlegende Hilfe bei der "
+"Fehlersuche bieten soll. Support der Stufe 1 ist nicht dazu gedacht, "
+"Produktfehler zu beheben."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
@@ -637,10 +636,9 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
-"Problemisolation bedeutet, technische Unterstützung, die entworfen wurde, um "
-"Kundenprobleme nachzuvollziehen, Problembereiche zu isolieren und Lösungen "
-"für Probleme anzubieten, die nicht von der Level-1-Unterstützung gelöst "
-"wurden."
+"Problemisolierung bezeichnet den technischen Support, der Kundenprobleme "
+"nachbilden, Problembereiche isolieren und Lösungen für Probleme bieten soll, "
+"die nicht durch den Support der Stufe 1 behoben werden konnten."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -648,19 +646,19 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
-"Problemlösung bedeutet, technische Unterstützung, die entworfen wurde, um "
-"komplexe Probleme zu lösen, durch Einschaltung der Entwicklung bei der "
-"Lösung von Produktdefekten, die von der Level-2-Unterstützung identifiziert "
-"wurden."
+"Problemlösung bezeichnet den technischen Support, der komplexe Probleme "
+"lösen soll, wobei das Engineering zur Beseitigung von Produktfehlern, die im "
+"Support der Stufe 2 erkannt wurden, einbezogen wird."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
 msgstr ""
-"Ein zusätzlicher Kundenvertrag ist notwendig, um Unterstützung zu erhalten."
+"Ein zusätzlicher Kundenvertrag ist erforderlich, um Unterstützung zu "
+"erhalten."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "Unbekannte Unterstützungsoption. Beschreibung nicht verfügbar"
+msgstr "Unbekannte Support-Option. Keine Beschreibung vorhanden"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -1109,7 +1107,7 @@ msgstr "Griechenland"
 #. :GRC:300:
 #: zypp/CountryCode.cc:246
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Süd-Georgia und die südlichen Sandwichinseln"
+msgstr "Südgeorgien und die südlichen Sandwichinseln"
 
 #. :SGS:239:
 #: zypp/CountryCode.cc:247
@@ -2491,7 +2489,7 @@ msgstr "Efik"
 #. language code: egy
 #: zypp/LanguageCode.cc:411
 msgid "Egyptian (Ancient)"
-msgstr "Ägyptisch (altertümlich)"
+msgstr "Ägyptisch"
 
 #. language code: eka
 #: zypp/LanguageCode.cc:413
