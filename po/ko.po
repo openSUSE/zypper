@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:29+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 06:32+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -1811,7 +1811,7 @@ msgstr ""
 #: src/repos.cc:401
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "내부 캐시 내에서 '%s' 에 대한 저장소 메타데이터를 찾을 수 없습니다."
+msgstr "로컬 캐시에서 '%s'에 대한 리포지토리 메타 데이터를 찾을 수 없습니다."
 
 #: src/repos.cc:409
 msgid "Error building the cache:"
@@ -1820,12 +1820,12 @@ msgstr "캐시 빌드 중 오류:"
 #: src/repos.cc:609
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "별칭, 번호 또는 URI로 '%s' 저장소를 찾을 수 없습니다."
+msgstr "별칭, 번호 또는 URI별로 '%s' 리포지토리를 찾을 수 없습니다."
 
 #: src/repos.cc:612
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr "'%s' 를 이용하여 정의된 저장소의 목록을 출력할 수 있습니다."
+msgstr "'%s'을(를) 사용하여 정의된 리포지토리 목록을 가져옵니다."
 
 #: src/repos.cc:633
 #, c-format, boost-format
@@ -1835,7 +1835,7 @@ msgstr "비활성화된 리포지토리 '%s'을(를) 무시하는 중"
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "저장소 '%s' 를 무시합니다('%s' 옵션 때문에)."
+msgstr "'%s' 리포지토리를 '%s' 옵션으로 인해 무시합니다."
 
 #: src/repos.cc:749
 #, c-format, boost-format
@@ -1845,16 +1845,14 @@ msgstr "비활성화된 '%s' 리포지토리의 컨텐트를 스캔 중입니다
 #: src/repos.cc:765 src/repos.cc:798 src/repos.cc:1297
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "앞의 오류로 인해 '%s' 저장소를 생략 합니다."
+msgstr "위의 오류로 인해 '%s' 리포지토리를 건너뛰고 있습니다."
 
 #: src/repos.cc:784
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
-msgstr ""
-"'%s' 저장소는 너무 오래 되었습니다. root 권한으로 'zypper refresh' 를 사용하"
-"여 업데이트할 수 있습니다."
+msgstr "'%s' 리포지토리가 오래되었습니다. 루트 권한으로 'zypper refresh'를 실행하면 업데이트할 수 있습니다."
 
 #: src/repos.cc:816
 #, c-format, boost-format
@@ -1862,13 +1860,13 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
-"'%s' 저장소 에 대한 메타데이터 캐시 빌드가 필요합니다. root 권한으로 'zypper "
-"refresh' 를 실행하세요."
+"'%s' 리포지토리에 대한 메타 데이터 캐시를 빌드해야 합니다. 루트 권한으로 'zypper refresh'를 실행하면 이 작업을 수행할 "
+"수 있습니다."
 
 #: src/repos.cc:820
 #, c-format, boost-format
 msgid "Disabling repository '%s'."
-msgstr "'%s' 저장소를 비활성화 합니다."
+msgstr "'%s' 리포지토리를 비활성화하는 중입니다."
 
 #: src/repos.cc:834
 #, c-format, boost-format
@@ -1882,7 +1880,7 @@ msgstr "'%s' 리포지토리가 비활성화 상태입니다."
 
 #: src/repos.cc:849 src/repos.cc:1324
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "오류로 인해 몇몇 저장소는 새로 고쳐지지 않았습니다."
+msgstr "오류로 인해 일부 리포지토리가 새로 고쳐지지 않았습니다."
 
 #: src/repos.cc:889
 msgid "Initializing Target"
@@ -1890,7 +1888,7 @@ msgstr "대상 초기화 중"
 
 #: src/repos.cc:897
 msgid "Target initialization failed:"
-msgstr "대상 초기화에 실패:"
+msgstr "대상 초기화 실패:"
 
 #: src/repos.cc:898 src/Zypper.cc:4440
 msgid "Running 'zypper refresh' as root might resolve the problem."
