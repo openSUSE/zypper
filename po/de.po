@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 09:47+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 09:59+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -1843,8 +1843,8 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
-"Authentifizierung zum Zugriff auf %s benötigt. Sie müssen root sein um die "
-"Zugangsdaten von %s lesen zu können."
+"Für den Zugriff auf %s ist eine Authentifizierung erforderlich. Zum Lesen "
+"der Berechtigungsnachweise aus %s müssen Sie Root-Benutzer sein."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -1872,7 +1872,7 @@ msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr ""
-"Repo '%1%' wird vom Dienst '%2%' organisiert. Instabile Änderungen werden "
+"Repo '%1%' wird vom Dienst '%2%' verwaltet. Instabile Änderungen werden "
 "durch die nächste Dienstaktualisierung zurückgesetzt!"
 
 #: src/repos.cc:84
@@ -1899,16 +1899,16 @@ msgstr "Repository '%s' ist aktuell."
 #: src/repos.cc:208
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "Die Aktualitätsüberprüfung von '%s' wurde aufgeschoben."
+msgstr "Die Aktualitätsüberprüfung von '%s' wurde verzögert."
 
 #: src/repos.cc:230
 msgid "Forcing raw metadata refresh"
-msgstr "Aktualisierung der Rohmetadaten wird erzwungen"
+msgstr "Aktualisieren der Rohmetadaten erzwingen"
 
 #: src/repos.cc:236
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Metadaten von Repository '%s' werden abgerufen"
+msgstr "Metadaten von Repository '%s' abrufen"
 
 #: src/repos.cc:263
 #, c-format, boost-format
@@ -1928,14 +1928,12 @@ msgstr "Problem beim Abrufen der Dateien von '%s'."
 #: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 msgid "Please see the above error message for a hint."
-msgstr ""
-"Sehen Sie sich bitte die obige Fehlermeldung an, um einen Hinweis zu "
-"bekommen."
+msgstr "In der Fehlermeldung oben finden Sie einen entsprechenden Hinweis."
 
 #: src/repos.cc:308
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
-msgstr "Keine URIs für '%s' bestimmt."
+msgstr "Keine URIs für '%s' definiert."
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: src/repos.cc:313
@@ -1944,12 +1942,12 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
-"Bitte fügen Sie eine oder mehrere Basis-URI(baseurl=URI)-Einträge zu %s für "
+"Fügen Sie eine oder mehrere Basis-URI(baseurl=URI)-Einträge zu %s für "
 "Repository '%s' hinzu."
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
-msgstr "Kein Alias für dieses Repository bestimmt."
+msgstr "Kein Alias für dieses Repository definiert."
 
 #: src/repos.cc:339
 #, c-format, boost-format
@@ -1961,7 +1959,7 @@ msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
-"Bitte überprüfen Sie, ob die für dieses Repository bestimmten URIs auf ein "
+"Überprüfen Sie, ob die für dieses Repository bestimmten URIs auf ein "
 "gültiges Repository verweisen."
 
 #: src/repos.cc:352
@@ -1971,7 +1969,7 @@ msgstr "Fehler beim Abrufen der Metadaten für '%s':"
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
-msgstr "Erzwinge Erstellung des Repository-Zwischenspeichers"
+msgstr "Erstellen des Repository-Cache erzwingen"
 
 #: src/repos.cc:390
 #, c-format, boost-format
@@ -1988,35 +1986,34 @@ msgid ""
 msgstr ""
 "Dies könnte durch ungültige Metadaten im Repository oder durch einen Bug im "
 "Metadatenanalysierer verursacht worden sein. Im letzteren Fall oder wenn Sie "
-"im Zweifel sind, erstellen anhand der folgenden Anweisungen einen "
-"Fehlerbericht:  http://de.opensuse.org/SDB:Zypper_Problemlösungen"
+"im Zweifel sind, erstellen Sie anhand der folgenden Anweisungen einen "
+"Fehlerbericht:  http://de.opensuse.org/Zypper/Fehlersuche."
 
 #: src/repos.cc:401
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr ""
-"Repository-Metadaten für '%s' wurden nicht im lokalen Zwischenspeicher "
-"gefunden."
+msgstr "Im lokalen Cache wurden keine Repository-Metadaten für '%s' gefunden."
 
 #: src/repos.cc:409
 msgid "Error building the cache:"
-msgstr "Fehler beim Erstellen des Zwischenspeichers:"
+msgstr "Fehler bei der Erstellung des Cache:"
 
 #: src/repos.cc:609
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "Repository '%s' wurde nicht durch Alias, Nummer oder URI gefunden."
+msgstr ""
+"Repository '%s' konnte anhand seines Alias, seiner Nummer oder URI nicht "
+"gefunden werden."
 
 #: src/repos.cc:612
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr ""
-"Verwenden Sie '%s', um die Liste der definierten Repositories zu erhalten."
+msgstr "Verwenden Sie '%s', um die Liste der definierten Repositorys abzurufen."
 
 #: src/repos.cc:633
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
-msgstr "Deaktiviertes Repository '%s' wird übersprungen"
+msgstr "Deaktiviertes Repository '%s' wird ignoriert"
 
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
@@ -2026,7 +2023,7 @@ msgstr "Repository '%s' wird aufgrund der Option '%s' ignoriert."
 #: src/repos.cc:749
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr "Inhalte von deaktiviertem Repository '%s' werden gelesen."
+msgstr "Inhalt des deaktivierten Repositorys '%s' wird durchsucht"
 
 #: src/repos.cc:765 src/repos.cc:798 src/repos.cc:1297
 #, c-format, boost-format
@@ -2048,8 +2045,8 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
-"Der Metadatenzwischenspeicher muss für das Repository '%s' erstellt werden. "
-"Sie können 'zypper refresh' als root ausführen, um dies zu erledigen."
+"Der Metadaten-Cache muss für das Repository '%s' erstellt werden. Sie können "
+"dazu 'zypper refresh' als Root ausführen."
 
 #: src/repos.cc:820
 #, c-format, boost-format
@@ -2059,17 +2056,17 @@ msgstr "Repository '%s' wird deaktiviert."
 #: src/repos.cc:834
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
-msgstr "Das Repository '%s' wird temporär aktiviert."
+msgstr "Repository '%s' wird vorübergehend deaktiviert."
 
 #: src/repos.cc:841
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
-msgstr "Repository '%s' bleibt deaktiviert."
+msgstr "Repository '%s' bleibt weiterhin ungültig."
 
 #: src/repos.cc:849 src/repos.cc:1324
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr ""
-"Einige der Repositories konnten aufgrund eines Fehlers nicht aktualisiert "
+"Einige der Repositorys konnten aufgrund eines Fehlers nicht aktualisiert "
 "werden."
 
 #: src/repos.cc:889
@@ -2082,7 +2079,9 @@ msgstr "Zielinitialisierung fehlgeschlagen:"
 
 #: src/repos.cc:898 src/Zypper.cc:4440
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr "Ein als root ausgeführtes 'zypper refresh' könnte das Problem lösen."
+msgstr ""
+"Das Problem kann möglicherweise durch Ausführen von 'zypper refresh' als "
+"Root behoben werden."
 
 #: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
@@ -2105,7 +2104,7 @@ msgstr "GPG-Überprüfung"
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
 #: src/repos.cc:980 src/repos.cc:2406
 msgid "Refresh"
-msgstr "Aktualisieren"
+msgstr "Aktualisierung"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
@@ -2126,21 +2125,21 @@ msgstr "Dienst"
 
 #: src/repos.cc:1069
 msgid "No repositories defined."
-msgstr "Es sind keine Repositories festgelegt."
+msgstr "Keine Repositorys definiert."
 
 #: src/repos.cc:1070
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr ""
-"Verwenden Sie das Kommando 'zypper addrepo' um eines oder mehrere "
-"Repositories hinzuzufügen."
+"Mit dem Kommando 'zypper addrepo' können Sie ein oder mehrere Repositorys "
+"hinzufügen."
 
 #: src/repos.cc:1103
 msgid "Auto-refresh"
-msgstr "Autoaktualisierung"
+msgstr "Automatische Aktualisierung"
 
 #: src/repos.cc:1103 src/repos.cc:1104
 msgid "On"
-msgstr "Ein"
+msgstr "Am"
 
 #: src/repos.cc:1103 src/repos.cc:1104
 msgid "Off"
@@ -2148,7 +2147,7 @@ msgstr "Aus"
 
 #: src/repos.cc:1104
 msgid "Keep Packages"
-msgstr "Pakete behalten"
+msgstr "Pakete beibehalten"
 
 #: src/repos.cc:1106
 msgid "GPG Key URI"
@@ -2172,11 +2171,11 @@ msgstr "Repo-Info-Pfad"
 
 #: src/repos.cc:1111
 msgid "MD Cache Path"
-msgstr "MD-Zwischenspeicher-Pfad"
+msgstr "MD-Cache-Pfad"
 
 #: src/repos.cc:1163 src/repos.cc:1231 src/repos.cc:1375
 msgid "Error reading repositories:"
-msgstr "Fehler beim Lesen der Repositories:"
+msgstr "Fehler beim Lesen von Repositorys:"
 
 #: src/repos.cc:1189
 #, c-format, boost-format
@@ -2185,16 +2184,16 @@ msgstr "%s kann nicht zum Schreiben geöffnet werden."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
-msgstr "Vielleicht haben Sie keine Schreiberlaubnis?"
+msgstr "Haben Sie eventuell keine Schreibberechtigung?"
 
 #: src/repos.cc:1196
 #, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "Repositories wurden erfolgreich zu %s exportiert."
+msgstr "Repositorys wurden erfolgreich nach %s exportiert."
 
 #: src/repos.cc:1248 src/repos.cc:1392
 msgid "Specified repositories: "
-msgstr "Festgelegte Repositories: "
+msgstr "Angegebene Repositorys: "
 
 #: src/repos.cc:1283
 #, c-format, boost-format
@@ -2203,46 +2202,45 @@ msgstr "Deaktiviertes Repository '%s' wird übersprungen"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
-msgstr "Die festgelegten Repositories sind nicht aktiviert oder definiert."
+msgstr "Die angegebenen Repositorys wurden nicht aktiviert oder definiert."
 
 #: src/repos.cc:1312
 msgid "There are no enabled repositories defined."
-msgstr "Es sind keine aktivierten Repositories bestimmt."
+msgstr "Es wurden keine aktivierten Repositorys definiert."
 
 #: src/repos.cc:1313
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr ""
-"Verwenden Sie die Kommandos '%s' oder '%s', um Repositories hinzuzufügen "
-"oder zu aktivieren."
+"Verwenden Sie die Kommandos '%s' oder '%s', um Repositorys hinzuzufügen oder "
+"zu aktivieren."
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
-msgstr ""
-"Die Repositories konnten aufgrund von Fehlern nicht aktualisiert werden."
+msgstr "Die Repositorys konnten aufgrund von Fehlern nicht aktualisiert werden."
 
 #: src/repos.cc:1329
 msgid "Specified repositories have been refreshed."
-msgstr "Die festgelegten Repositories wurden aktualisiert."
+msgstr "Die angegebenen Repositorys wurden aktualisiert."
 
 #: src/repos.cc:1331
 msgid "All repositories have been refreshed."
-msgstr "Alle Repositories wurden aktualisiert."
+msgstr "Alle Repositorys wurden aktualisiert."
 
 #: src/repos.cc:1438
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "Metadatenzwischenspeicher für '%s' wird bereinigt."
+msgstr "Metadaten-Cache für '%s' wird bereinigt."
 
 #: src/repos.cc:1447
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "Rohmetadatenzwischenspeicher für '%s' wird bereinigt."
+msgstr "Rohmetadaten-Cache für '%s' wird bereinigt."
 
 #: src/repos.cc:1453
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr "Rohmetadaten-Zwischenspeicher für %s '%s' wird beibehalten."
+msgstr "Rohmetadaten-Cache für %s '%s' wird beibehalten."
 
 #. translators: meaning the cached rpm files
 #: src/repos.cc:1460
@@ -2257,35 +2255,35 @@ msgstr "Repository '%s' kann aufgrund eines Fehlers nicht bereinigt werden."
 
 #: src/repos.cc:1479
 msgid "Cleaning installed packages cache."
-msgstr "Der Zwischenspeicher der installierten Pakete wird bereinigt."
+msgstr "Cache der installierten Pakete wird bereinigt."
 
 #: src/repos.cc:1488
 msgid "Cannot clean installed packages cache because of an error."
 msgstr ""
-"Der Zwischenspeicher der installierten Pakete kann aufgrund eines Fehlers "
-"nicht bereinigt werden."
+"Der Cache der installierten Pakete kann aufgrund eines Fehlers nicht "
+"bereinigt werden."
 
 #: src/repos.cc:1507
 msgid "Could not clean the repositories because of errors."
-msgstr "Die Repositories konnten aufgrund von Fehlern nicht bereinigt werden."
+msgstr "Die Repositorys konnten aufgrund von Fehlern nicht bereinigt werden."
 
 #: src/repos.cc:1513
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "Einige der Repositories wurden aufgrund eines Fehlers nicht bereinigt."
+msgstr "Einige der Repositorys wurden aufgrund eines Fehlers nicht bereinigt."
 
 #: src/repos.cc:1518
 msgid "Specified repositories have been cleaned up."
-msgstr "Die festgelegten Repositories wurden bereinigt."
+msgstr "Angegebene Repositorys wurden bereinigt."
 
 #: src/repos.cc:1520
 msgid "All repositories have been cleaned up."
-msgstr "Alle Repositories wurden bereinigt."
+msgstr "Alle Repositorys wurden bereinigt."
 
 #: src/repos.cc:1547
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
-"Dies ist ein nicht-beschreibbares Wechselmedium (CD/DVD), Autoaktualisierung "
-"wird deaktiviert."
+"Dies ist ein nicht-beschreibbares Wechselmedium (CD/DVD). Automatische "
+"Aktualisierung wird deaktiviert."
 
 #: src/repos.cc:1568
 #, c-format, boost-format
