@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 09:00+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 09:15+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -5048,20 +5048,20 @@ msgstr "일치하는 항목이 없습니다."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
-msgstr "초기화 또는 검색어를 검색 중에 문제가 발생 했습니다."
+msgstr "검색 쿼리를 초기화하거나 실행하는 중 문제가 발생했습니다."
 
 #: src/Zypper.cc:4439
 msgid "See the above message for a hint."
-msgstr "위의 메시지에 대한 힌트를 봅니다."
+msgstr "자세한 내용은 위의 메시지를 참조하십시오."
 
 #: src/Zypper.cc:4596 src/Zypper.cc:4644
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
-msgstr "%s와 %s를 함께 사용할 수 없습니다."
+msgstr "%s을(를) %s과(와) 함께 사용할 수 없습니다."
 
 #: src/Zypper.cc:4625
 msgid "Root privileges are required for updating packages."
-msgstr "꾸러미 업데이트에는 root 권한이 필요합니다."
+msgstr "패키지를 업데이트하려면 루트 권한이 필요합니다."
 
 #: src/Zypper.cc:4684 src/Zypper.cc:4692 src/Zypper.cc:4765
 msgid "Operation not supported."
@@ -5088,7 +5088,7 @@ msgstr "특정 패키지가 인수로 제공될 때 여러 유형을 사용할 �
 
 #: src/Zypper.cc:4801
 msgid "Root privileges are required for performing a distribution upgrade."
-msgstr "배포판 업그레이드 처리를 하려면 root 권한이 필요합니다."
+msgstr "배포판 업그레이드를 수행하려면 루트 권한이 필요합니다."
 
 #: src/Zypper.cc:4821
 #, c-format, boost-format
@@ -5108,7 +5108,7 @@ msgstr "사용법"
 
 #: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
-msgstr "꾸러미 잠금 추가에는 root 권한이 필요합니다."
+msgstr "패키지 잠금을 추가하려면 루트 권한이 필요합니다."
 
 #: src/Zypper.cc:5023
 #, boost-format, c-format
@@ -5133,17 +5133,17 @@ msgstr "짧은 레이블: %s"
 #: src/Zypper.cc:5089
 #, c-format, boost-format
 msgid "%s matches %s"
-msgstr "%s는 %s와 일치"
+msgstr "%s이(가) %s과(와) 일치합니다."
 
 #: src/Zypper.cc:5091
 #, c-format, boost-format
 msgid "%s is newer than %s"
-msgstr "%s는 %s 보다 최신"
+msgstr "%s이(가) %s보다 최신입니다."
 
 #: src/Zypper.cc:5093
 #, c-format, boost-format
 msgid "%s is older than %s"
-msgstr "%s는 %s 보다 구버전"
+msgstr "%s이(가) %s보다 이전입니다."
 
 #: src/Zypper.cc:5171 src/source-download.cc:217
 #, c-format, boost-format
@@ -5152,15 +5152,15 @@ msgstr "'%s' 다운로드 디렉토리를 사용하기 위한 권한이 부족�
 
 #: src/Zypper.cc:5223
 msgid "This command only makes sense in the zypper shell."
-msgstr "이 명령은 Zypper 쉘 안에서만 의미가 있습니다."
+msgstr "이 명령은 Zypper 셸에서만 유효합니다."
 
 #: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
-msgstr "이미 Zypper 쉘에 진입해 있습니다."
+msgstr "이미 Zypper 셸을 실행 중입니다."
 
 #: src/Zypper.cc:5310
 msgid "Resolvable Type"
-msgstr "해결방법 종류"
+msgstr "Resolvable 유형"
 
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:40
@@ -5171,7 +5171,7 @@ msgstr "문제: "
 #: src/solve-commit.cc:52
 #, c-format, boost-format
 msgid " Solution %d: "
-msgstr " 제안 %d: "
+msgstr " 솔루션 %d: "
 
 #: src/solve-commit.cc:71
 msgid "Choose the above solution using '1' or skip, retry or cancel"
@@ -5210,7 +5210,7 @@ msgstr "c"
 #: src/solve-commit.cc:130
 #, c-format, boost-format
 msgid "Applying solution %s"
-msgstr "제안 %s 를 적용하는 중"
+msgstr "해결책 %s 적용 중"
 
 #: src/solve-commit.cc:146
 #, c-format, boost-format
@@ -5221,7 +5221,7 @@ msgstr[0] "%d 문제:"
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
 msgid "Specified capability not found"
-msgstr "지정한 기능을 찾을 수 없음"
+msgstr "지정된 기능을 찾을 수 없습니다."
 
 #: src/solve-commit.cc:160
 #, c-format, boost-format
@@ -5230,39 +5230,39 @@ msgstr "문제: %s"
 
 #: src/solve-commit.cc:179
 msgid "Resolving dependencies..."
-msgstr "의존성 해결 중..."
+msgstr "종속성을 확인하는 중..."
 
 #. translators: meaning --force-resolution and --no-force-resolution
 #: src/solve-commit.cc:220
 #, c-format, boost-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
-msgstr "%s 는 %s 와 모순되고 있음, 소극적인 %s 를 사용"
+msgstr "%s이(가) %s과(와) 충돌하여 소극적인 %s을(를) 사용합니다."
 
 #: src/solve-commit.cc:248
 msgid "Force resolution:"
-msgstr "강제 해결:"
+msgstr "강제 확인:"
 
 #: src/solve-commit.cc:330
 msgid "Verifying dependencies..."
-msgstr "의존성 검사 중..."
+msgstr "종속성 검사 중..."
 
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:378
 msgid "Computing upgrade..."
-msgstr "업그레이드 처리 중..."
+msgstr "업그레이드 계산 중..."
 
 #: src/solve-commit.cc:392
 msgid "Generating solver test case..."
-msgstr "해결 방법의 시험 출력을 작성합니다..."
+msgstr "Solver 테스트 사례 생성 중..."
 
 #: src/solve-commit.cc:394
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr "%s 에 해결 검사 방법을 성공적으로 작성하였습니다."
+msgstr "%s에서 Solver 테스트 사례를 생성했습니다."
 
 #: src/solve-commit.cc:397
 msgid "Error creating the solver test case."
-msgstr "해결 방법의 시험 출력 만드는 중 오류."
+msgstr "Solver 테스트 사례를 생성하는 중 오류가 발생했습니다."
 
 #: src/solve-commit.cc:431
 #, c-format, boost-format
@@ -5276,11 +5276,11 @@ msgstr ""
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
 msgid "Checking for running processes using deleted libraries..."
-msgstr "삭제된 라이브러리를 사용하고 있는 실행 중인 프로세스를 점검하는 중..."
+msgstr "삭제된 라이브러리를 사용하고 있는 실행 중인 프로세스를 확인하는 중..."
 
 #: src/solve-commit.cc:447 src/ps.cc:59
 msgid "Check failed:"
-msgstr "점검 실패:"
+msgstr "확인 실패:"
 
 #: src/solve-commit.cc:449
 msgid "Skip check:"
@@ -5304,11 +5304,11 @@ msgstr "다음 패키지에서 업데이트 알림을 수신했습니다."
 #: src/solve-commit.cc:477
 #, c-format, boost-format
 msgid "Message from package %s:"
-msgstr "%s 꾸러미로부터 메시지:"
+msgstr "패키지 %s의 메시지:"
 
 #: src/solve-commit.cc:485
 msgid "y/n"
-msgstr "y/n"
+msgstr "예/아니요"
 
 #: src/solve-commit.cc:486
 msgid "View the notifications now?"
@@ -5316,23 +5316,21 @@ msgstr "지금 알림을 보시겠습니까?"
 
 #: src/solve-commit.cc:532
 msgid "Computing distribution upgrade..."
-msgstr "배포판 업그레이드 처리 중..."
+msgstr "배포판 업그레이드 계산 중..."
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
-msgstr "꾸러미 의존성 해결 중..."
+msgstr "패키지 종속성 확인 중..."
 
 #: src/solve-commit.cc:614
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
-msgstr ""
-"설치된 꾸러미의 의존성 몇개는 깨져있습니다. 의존성을 수복하려면 다음의 작업"
-"을 실행할 필요가 있습니다:"
+msgstr "설치된 패키지 중 일부 종속성이 손상되었습니다. 이 종속성을 복구하려면 다음 작업을 수행해야 합니다."
 
 #: src/solve-commit.cc:621
 msgid "Root privileges are required to fix broken package dependencies."
-msgstr "깨진 꾸러미의 의존성을 수복하려면 root 권한이 필요합니다."
+msgstr "손상된 패키지 종속성을 복구하려면 루트 권한이 필요합니다."
 
 #. translators: These are the "Continue?" prompt options corresponding to
 #. "Yes / No / show Problems / Versions / Arch / Repository /
@@ -5346,52 +5344,51 @@ msgstr "깨진 꾸러미의 의존성을 수복하려면 root 권한이 필요�
 #. ! \todo add c for changelog and x for explain (show the dep tree)
 #: src/solve-commit.cc:643
 msgid "y/n/p/v/a/r/m/d/g"
-msgstr "y/n/p/v/a/r/m/d/g"
+msgstr "예/아니오/문제 표시/버전/아키텍처/리포지토리/벤더/세부 사항/페이저 요약"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: src/solve-commit.cc:648
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
-msgstr "예, 개요에 표시되고 있는 내용에 따라 꾸러미를 설치/제거 합니다."
+msgstr "예. 요약 내용에 동의하고 패키지를 계속 설치/제거합니다."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: src/solve-commit.cc:650
 msgid "No, cancel the operation."
-msgstr "아니요, 작업을 취소합니다."
+msgstr "아니요. 작업을 취소합니다."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
 #: src/solve-commit.cc:652
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
-msgstr ""
-"의존성 문제를 표시하기 위해 강제력을 설정하지 않고 해결기를 재실행합니다."
+msgstr "종속성 문제를 표시하기 위해 no-force-resolution 모드에서 solver를 다시 시작합니다."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:654
 msgid "Toggle display of package versions."
-msgstr "꾸러미 버전 표시로 전환합니다."
+msgstr "패키지 버전 표시를 전환합니다."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:656
 msgid "Toggle display of package architectures."
-msgstr "꾸러미 아키텍처 표시로 전환합니다."
+msgstr "패키지 아키텍처 표시를 전환합니다."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: src/solve-commit.cc:658
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
-msgstr "설치될 꾸러미로부터 저장소의 표시로 전환합니다."
+msgstr "설치할 패키지에서 리포지토리 표시를 전환합니다."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:660
 msgid "Toggle display of package vendor names."
-msgstr "꾸러미 제조사 이름 표시로 전환합니다."
+msgstr "패키지 벤더 이름 표시를 전환합니다."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:662
 msgid "Toggle between showing all details and as few details as possible."
-msgstr "전부 자세히 표시하던가 가능한한 최소 표시로 전환합니다."
+msgstr "모든 정보를 표시하거나 최소로 표시합니다."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
 #: src/solve-commit.cc:664
@@ -5400,21 +5397,21 @@ msgstr "페이저의 요약을 봅니다."
 
 #: src/solve-commit.cc:774
 msgid "committing"
-msgstr "확정하는 중"
+msgstr "커밋 중"
 
 #: src/solve-commit.cc:776
 msgid "(dry run)"
-msgstr "(테스트)"
+msgstr "(모의 연습)"
 
 #: src/solve-commit.cc:800 src/solve-commit.cc:833
 msgid "Problem retrieving the package file from the repository:"
-msgstr "저장소로부터 꾸러미 파일 회수 중 문제:"
+msgstr "리포지토리에서 패키지 파일을 검색하는 중 문제 발생:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
 #: src/solve-commit.cc:830
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "저장소 '%s' 는 유효기한이 지났습니다. '%s' 를 실행하세요."
+msgstr "'%s' 리포지토리가 오래되었습니다. '%s'을(를) 실행하면 도움이 될 수 있습니다."
 
 #: src/solve-commit.cc:841
 msgid ""
@@ -5426,17 +5423,16 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"꾸러미 무결성 확인에 실패했습니다. 저장소나 미디어에 문제가 있는것 같습니다. "
-"다음중 하나를 시도해보세요:\n"
+"패키지 무결성 확인에 실패했습니다. 리포지토리나 미디어에 문제가 있는 것 같습니다. 다음 중 하나를 시도하십시오.\n"
 "\n"
-"- 명령을 재실행\n"
-"- 'zypper refresh'를 입력하여 저장소를 새로 고침\n"
-"- 다른 설치 미디어를 사용(손상된 경우)\n"
-"- 다른 저장소를 사용"
+"- 이전 명령 재시도\n"
+"- 'zypper refresh'를 사용하여 리포지토리 새로 고침\n"
+"- 다른 설치 미디어 사용(손상된 경우)\n"
+"- 다른 리포지토리 사용"
 
 #: src/solve-commit.cc:855
 msgid "Problem occured during or after installation or removal of packages:"
-msgstr "꾸러미 설치 후 또는 제거할때 문제가 발생:"
+msgstr "패키지 설치 중이나 패키지 설치 또는 제거 후 문제 발생:"
 
 #: src/solve-commit.cc:863
 msgid "Installation has completed with error."
@@ -5451,24 +5447,21 @@ msgstr "'%1%'을(를) 실행하여 종속성 문제를 복구할 수 있습니�
 msgid ""
 "One of installed patches requires reboot of your machine. Reboot as soon as "
 "possible."
-msgstr ""
-"설치된 패치는 시스템을 다시 시작이 필요 합니다. 가능한 빨리 다시 시작하세요."
+msgstr "설치된 패치 중 하나를 사용하려면 컴퓨터 재부팅이 필요합니다. 최대한 빨리 재부팅하십시오."
 
 #: src/solve-commit.cc:887
 msgid ""
 "One of installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
-msgstr ""
-"설치된 패치에는 꾸러미 관리 시스템에 대한 변경사항이 포함되어 있습니다. 이 명"
-"령을 실행하여 나머지 필요한 패치를 설치하세요."
+msgstr "설치된 패치 중 하나가 패키지 관리자 자체에 영향을 줍니다. 이 명령을 다시 실행하여 다른 필요한 패치를 설치하십시오."
 
 #: src/solve-commit.cc:905
 msgid "Dependencies of all installed packages are satisfied."
-msgstr "설치된 모든 꾸러미의 의존성에 문제는 없습니다."
+msgstr "설치된 모든 패키지의 종속성이 충족되었습니다."
 
 #: src/solve-commit.cc:907 src/download.cc:129
 msgid "Nothing to do."
-msgstr "할 일 없음."
+msgstr "수행할 작업 없음."
 
 #. process ID
 #: src/ps.cc:115
@@ -5507,17 +5500,17 @@ msgstr "삭제된 파일을 사용하고 있는 프로세스가 없습니다."
 
 #: src/ps.cc:164
 msgid "The following running processes use deleted files:"
-msgstr "다음의 실행 중인 프로세스가 삭제된 파일을 사용하고 있습니다:"
+msgstr "실행 중인 다음 프로세스는 삭제된 파일을 사용합니다."
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
-msgstr "이 프로세스를 다시 시작할 필요가 있습니다."
+msgstr "이 프로세스를 다시 시작하고자 할 수 있습니다."
 
 #: src/ps.cc:168
 #, c-format, boost-format
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
-msgstr "앞의 표에 있는 값에 대한 상세한 설명은 '%s'를 참조하세요."
+msgstr "위의 표에서 값 의미에 대한 정보는 '%s'을(를) 참조하십시오."
 
 #: src/ps.cc:175
 msgid ""
@@ -5616,19 +5609,19 @@ msgstr "다운로드할 소스 패키지가 없습니다."
 
 #: src/search.cc:137
 msgid "System Packages"
-msgstr "시스템 꾸러미"
+msgstr "시스템 패키지"
 
 #: src/search.cc:336
 msgid "No needed patches found."
-msgstr "필요한 패치 없음."
+msgstr "필요한 패치가 없습니다."
 
 #: src/search.cc:408
 msgid "No patterns found."
-msgstr "찾은 패턴이 없습니다."
+msgstr "패턴이 없습니다."
 
 #: src/search.cc:505
 msgid "No packages found."
-msgstr "찾은 꾸러미가 없습니다."
+msgstr "패키지가 없습니다."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
@@ -5638,16 +5631,16 @@ msgstr "내부 이름"
 
 #: src/search.cc:651
 msgid "No products found."
-msgstr "찾은 제품이 없습니다."
+msgstr "제품이 없습니다."
 
 #: src/search.cc:675
 #, c-format, boost-format
 msgid "No providers of '%s' found."
-msgstr "찾은 '%s' 제공자가 없습니다."
+msgstr "'%s' 공급자가 없습니다."
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr "주의: "
+msgstr "경고:"
 
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
@@ -5662,7 +5655,7 @@ msgstr "완료"
 #: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
 #: src/output/OutNormal.cc:321
 msgid "Retrieving:"
-msgstr "회수하는 중:"
+msgstr "검색: "
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/output/OutNormal.cc:256
