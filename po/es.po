@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-30 18:48+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"PO-Revision-Date: 2016-07-08 16:23+0000\n"
+"Last-Translator: José Ramón Piedra <jrpiedra@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
@@ -310,7 +310,7 @@ msgstr "Se realizarán las siguientes acciones:"
 #: zypp/RepoManager.cc:297
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "No es posible leer el repositorio %1%: permiso denegado"
+msgstr "No es posible leer el directorio de repositorio %1%: permiso denegado"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
@@ -415,7 +415,7 @@ msgstr "Nombre de archivo del repositorio no válido en %s"
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Eliminado el repositorio %s"
+msgstr "Eliminando el repositorio %s"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
@@ -639,7 +639,7 @@ msgstr ""
 "Determinación de problemas, lo que significa asistencia técnica diseñada "
 "para proporcionar información de compatibilidad, asistencia para la "
 "instalación, compatibilidad de uso, mantenimiento continuo y resolución "
-"básica de problemas. La asistencia de nivel 1 está pensada para corregir "
+"básica de problemas. La asistencia de nivel 1 no está pensada para corregir "
 "errores por defectos del producto."
 
 #: zypp/VendorSupportOptions.cc:48
@@ -665,7 +665,7 @@ msgstr ""
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr "Para obtener asistencia se necesita un contrato de cliente adicional."
+msgstr "Para obtener asistencia se necesita un contrato adicional de cliente."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
