@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 01:56+0000\n"
+"PO-Revision-Date: 2016-07-08 02:26+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
@@ -262,9 +262,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "실행 중: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:208
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "%s-%s 제거 중"
+msgstr "%s 제거 중"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:213
@@ -278,9 +278,9 @@ msgid "Removal of %s failed:"
 msgstr "%s 의 제거에 실패:"
 
 #: src/callbacks/rpm.h:279
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "설치 중: %s-%s"
+msgstr "설치 중: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:284
@@ -289,9 +289,9 @@ msgid "Installing: %s-%s"
 msgstr "설치 중: %s-%s"
 
 #: src/callbacks/rpm.h:308
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "%s-%s 의 설치에 실패:"
+msgstr "%s의 설치에 실패:"
 
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
@@ -953,13 +953,13 @@ msgid "Patch '%s' is not needed."
 msgstr "'%s' 패치는 필요 없습니다."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"'%s' 패치가 잠겼습니다. '%s'을(를) 사용하여 설치하거나 '%s'을(를) 사용하여 잠"
-"금 해제하십시오."
+"'%1%' 패치는 선택 사항입니다. '%2%'을(를) 사용하여 설치하거나 '%3%'을(를) 사용하여 선택할 수 있는 모든 패치를 "
+"포함합니다."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1028,167 +1028,167 @@ msgid_plural "... and %1% more items."
 msgstr[0] "... 및 %1%개의 추가 항목."
 
 #: src/Summary.cc:505
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] "다음의 새 꾸러미가 설치됩니다:"
+msgstr[0] "다음 새 패키지가 설치됩니다."
 
 #: src/Summary.cc:510
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] "다음의 새 패치가 설치됩니다:"
+msgstr[0] "다음 새 패치가 설치됩니다."
 
 #: src/Summary.cc:515
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] "다음의 새 패턴이 설치됩니다:"
+msgstr[0] "다음 새 패턴이 설치됩니다."
 
 #: src/Summary.cc:520
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] "다음의 새 제품이 설치됩니다:"
+msgstr[0] "다음 새 제품이 설치됩니다."
 
 #: src/Summary.cc:525
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] "다음의 소스 꾸러미가 설치됩니다:"
+msgstr[0] "다음 소스 패키지가 설치됩니다."
 
 #: src/Summary.cc:530
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] "다음의 패턴이 재설치 됩니다:"
+msgstr[0] "다음 응용 프로그램이 설치됩니다."
 
 #: src/Summary.cc:552
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] "다음의 꾸러미가 제거됩니다:"
+msgstr[0] "다음 패키지가 제거됩니다."
 
 #: src/Summary.cc:557
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] "다음의 패치가 제거됩니다:"
+msgstr[0] "다음 패치가 제거됩니다."
 
 #: src/Summary.cc:562
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] "다음의 패턴이 제거됩니다:"
+msgstr[0] "다음 패턴이 제거됩니다."
 
 #: src/Summary.cc:567
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
-msgstr[0] "다음의 제품이 제거됩니다:"
+msgstr[0] "다음 제품이 제거됩니다."
 
 #: src/Summary.cc:572
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] "다음의 패턴이 제거됩니다:"
+msgstr[0] "다음 응용 프로그램이 제거됩니다."
 
 #: src/Summary.cc:591
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "다음의 꾸러미가 업그레이드 됩니다:"
+msgstr[0] "다음 패키지가 업그레이드됩니다."
 
 #: src/Summary.cc:596
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "다음의 패치가 업그레이드 됩니다:"
+msgstr[0] "다음 패치가 업그레이드됩니다."
 
 #: src/Summary.cc:601
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] "다음의 패턴이 업그레이드 됩니다:"
+msgstr[0] "다음 패턴이 업그레이드됩니다."
 
 #: src/Summary.cc:606
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
-msgstr[0] "다음의 제품이 업그레이드 됩니다:"
+msgstr[0] "다음 제품이 업그레이드됩니다."
 
 #: src/Summary.cc:611
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "다음의 패턴이 업그레이드 됩니다:"
+msgstr[0] "다음 응용 프로그램이 업그레이드됩니다."
 
 #: src/Summary.cc:630
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "다음의 꾸러미가 다운그레이드 됩니다:"
+msgstr[0] "다음 패키지가 다운그레이드됩니다."
 
 #: src/Summary.cc:635
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "다음의 패치가 다운그레이드 됩니다:"
+msgstr[0] "다음 패치가 다운그레이드됩니다."
 
 #: src/Summary.cc:640
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] "다음의 패턴이 다운그레이드 됩니다"
+msgstr[0] "다음 패턴이 다운그레이드됩니다."
 
 #: src/Summary.cc:645
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] "다음의 제품이 다운그레이드 됩니다:"
+msgstr[0] "다음 제품이 다운그레이드됩니다."
 
 #: src/Summary.cc:650
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] "다음의 패턴이 다운그레이드 됩니다"
+msgstr[0] "다음 응용 프로그램이 다운그레이드됩니다."
 
 #: src/Summary.cc:669
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] "다음의 꾸러미가 재설치 됩니다:"
+msgstr[0] "다음 패키지가 다시 설치됩니다."
 
 #: src/Summary.cc:674
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "다음의 패치가 재설치 됩니다:"
+msgstr[0] "다음 패치가 다시 설치됩니다."
 
 #: src/Summary.cc:679
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] "다음의 패턴이 재설치 됩니다:"
+msgstr[0] "다음 패턴이 다시 설치됩니다."
 
 #: src/Summary.cc:684
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] "다음의 제품이 재설치 됩니다:"
+msgstr[0] "다음 제품이 다시 설치됩니다."
 
 #: src/Summary.cc:696
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] "다음의 패턴이 재설치 됩니다:"
+msgstr[0] "다음 응용 프로그램이 다시 설치됩니다."
 
 #: src/Summary.cc:830
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] "다음의 소스 꾸러미가 설치됩니다:"
+msgstr[0] "다음 권장 패키지가 자동으로 선택되었습니다."
 
 #: src/Summary.cc:835
 #, c-format, boost-format
@@ -1198,224 +1198,224 @@ msgid_plural ""
 msgstr[0] "다음 권장 패치가 자동으로 선택되었습니다."
 
 #: src/Summary.cc:840
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] "다음의 새 패턴이 설치됩니다:"
+msgstr[0] "다음 권장 패턴이 자동으로 선택되었습니다."
 
 #: src/Summary.cc:845
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] "다음의 새 제품이 설치됩니다:"
+msgstr[0] "다음 권장 제품이 자동으로 선택되었습니다."
 
 #: src/Summary.cc:850
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] "다음의 소스 꾸러미가 설치됩니다:"
+msgstr[0] "다음 권장 소스 패키지가 자동으로 선택되었습니다."
 
 #: src/Summary.cc:855
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] "다음의 새 패턴이 설치됩니다:"
+msgstr[0] "다음 권장 응용 프로그램이 자동으로 선택되었습니다."
 
 #: src/Summary.cc:899
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
 "required packages will be installed):"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
-msgstr[0] "다음의 꾸러미가 재설치 됩니다:"
+msgstr[0] "다음 패키지는 권장되지만 설치되지 않습니다(필수 패키지만 설치됨)."
 
 #: src/Summary.cc:911
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
 "unwanted (was manually removed before):"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] "다음의 꾸러미가 재설치 됩니다:"
+msgstr[0] "다음 패키지는 권장되지만 불필요하므로 설치되지 않습니다(이전에 수동으로 제거됨)."
 
 #: src/Summary.cc:921
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
-msgstr[0] "다음의 꾸러미가 재설치 됩니다:"
+msgstr[0] "다음 패키지는 권장되지만 충돌 또는 종속성 문제 때문에 설치되지 않습니다."
 
 #: src/Summary.cc:934
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] "다음의 패치가 재설치 됩니다:"
+msgstr[0] "다음 패치는 권장되지만 설치되지 않습니다."
 
 #: src/Summary.cc:938
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] "다음의 패턴이 재설치 됩니다:"
+msgstr[0] "다음 패턴은 권장되지만 설치되지 않습니다."
 
 #: src/Summary.cc:942
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] "다음의 제품이 재설치 됩니다:"
+msgstr[0] "다음 제품은 권장되지만 설치되지 않습니다."
 
 #: src/Summary.cc:946
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] "다음의 패턴이 재설치 됩니다:"
+msgstr[0] "다음 응용 프로그램은 권장되지만 설치되지 않습니다."
 
 #: src/Summary.cc:986
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] "다음의 꾸러미가 재설치 됩니다:"
+msgstr[0] "다음 패키지가 제안되지만 설치되지 않습니다."
 
 #: src/Summary.cc:991
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "다음의 패치가 재설치 됩니다:"
+msgstr[0] "다음 패치가 제안되지만 설치되지 않습니다."
 
 #: src/Summary.cc:996
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] "다음의 패턴이 재설치 됩니다:"
+msgstr[0] "다음 패턴이 제안되지만 설치되지 않습니다."
 
 #: src/Summary.cc:1001
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] "다음의 제품이 재설치 됩니다:"
+msgstr[0] "다음 제품이 제안되지만 설치되지 않습니다."
 
 #: src/Summary.cc:1006
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] "다음의 패턴이 재설치 됩니다:"
+msgstr[0] "다음 응용 프로그램이 제안되지만 설치되지 않습니다."
 
 #: src/Summary.cc:1028
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
-msgstr[0] "다음의 꾸러미 아키텍쳐가 변경됩니다:"
+msgstr[0] "다음 패키지의 아키텍처가 변경됩니다."
 
 #: src/Summary.cc:1033
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
-msgstr[0] "다음의 패치 아키텍쳐가 변경됩니다:"
+msgstr[0] "다음 패치의 아키텍처가 변경됩니다."
 
 #: src/Summary.cc:1038
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
-msgstr[0] "다음의 패턴 아키텍쳐가 변경됩니다:"
+msgstr[0] "다음 패턴의 아키텍처가 변경됩니다."
 
 #: src/Summary.cc:1043
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
-msgstr[0] "다음의 제품 아키텍쳐가 변경됩니다:"
+msgstr[0] "다음 제품의 아키텍처가 변경됩니다."
 
 #: src/Summary.cc:1048
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
-msgstr[0] "다음의 패턴 아키텍쳐가 변경됩니다:"
+msgstr[0] "다음 응용 프로그램의 아키텍처가 변경됩니다."
 
 #: src/Summary.cc:1070
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
-msgstr[0] "다음의 꾸러미의 제조사가 변경됩니다:"
+msgstr[0] "다음 패키지의 제조업체가 변경됩니다."
 
 #: src/Summary.cc:1075
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] "다음의 패치의 제조사가 변경됩니다:"
+msgstr[0] "다음 패치의 제조업체가 변경됩니다."
 
 #: src/Summary.cc:1080
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
-msgstr[0] "다음의 패턴의 제조사가 변경됩니다:"
+msgstr[0] "다음 패턴의 제조업체가 변경됩니다."
 
 #: src/Summary.cc:1085
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
-msgstr[0] "다음의 제품의 제조사가 변경됩니다:"
+msgstr[0] "다음 제품의 제조업체가 변경됩니다."
 
 #: src/Summary.cc:1090
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] "다음의 패턴의 제조사가 변경됩니다:"
+msgstr[0] "다음 응용 프로그램의 제조업체가 변경됩니다."
 
 #: src/Summary.cc:1110
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "다음의 꾸러미는 제조사에서 지원하지 않습니다:"
+msgstr[0] "다음 패키지는 제조업체에서 지원하지 않습니다."
 
 #: src/Summary.cc:1130
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] "지원 받으려면 추가 고객 계약이 필요합니다."
+msgstr[0] "다음 패키지의 지원을 받으려면 추가 고객 계약이 필요합니다."
 
 #: src/Summary.cc:1148
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] "다음의 꾸러미가 재설치 됩니다:"
+msgstr[0] "다음 패키지 업데이트가 설치되지 않습니다."
 
 #: src/Summary.cc:1153
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] "다음의 제품이 재설치 됩니다:"
+msgstr[0] "다음 제품 업데이트가 설치되지 않습니다."
 
 #: src/Summary.cc:1158
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
-msgstr[0] "다음의 꾸러미가 재설치 됩니다:"
+msgstr[0] "다음 응용 프로그램 업데이트가 설치되지 않습니다."
 
 #: src/Summary.cc:1188
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "다음의 패턴이 재설치 됩니다:"
+msgstr[0] "다음 항목은 잠겨 있으며 어떤 동작으로도 변경될 수 없습니다."
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1429,10 +1429,10 @@ msgid "Run '%1%' to see the complete list of locked items."
 msgstr "잠긴 항목 전체 목록을 보려면 '%1%'을(를) 실행합니다."
 
 #: src/Summary.cc:1222
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "다음의 패치가 업그레이드 됩니다:"
+msgstr[0] "다음 패치를 위해서는 시스템을 재부팅해야 합니다."
 
 #: src/Summary.cc:1240
 #, boost-format
@@ -1539,17 +1539,15 @@ msgstr[0] "개의 아키텍쳐로 변경할 꾸러미"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1376
-#, fuzzy
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] "src꾸러미"
+msgstr[0] "소스 패키지"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1379
-#, fuzzy
 msgid "source package to install"
 msgid_plural "source packages to install"
-msgstr[0] "새로운 꾸러미로 설치"
+msgstr[0] "설치할 소스 패키지"
 
 #: src/Summary.cc:1430
 msgid "System reboot required."
@@ -2544,17 +2542,17 @@ msgstr[0] "해당하는 패치 %1%개를 찾았습니다."
 
 #. translator: stats summary
 #: src/update.cc:294
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "%d 개의 패치가 필요함"
+msgstr[0] "%d개의 패치가 잠겨 있음"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d 개의 패치가 필요함"
+msgstr[0] "%d개의 선택 사항 패치"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -2607,9 +2605,8 @@ msgstr "다음의 소프트웨어 관리 업데이트를 먼저 설치합니다:
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "다음의 소프트웨어 관리 업데이트를 먼저 설치합니다:"
+msgstr "필요한 소프트웨어 관리 업데이트가 먼저 설치됩니다."
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
@@ -3405,7 +3402,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3418,12 +3415,12 @@ msgid ""
 msgstr ""
 "addservice (as) [옵션] <URI> <별칭>\n"
 "\n"
-"시스템에 저장소 색인 서비스를 추가합니다.\n"
+"시스템에 리포지토리 인덱스 서비스를 추가합니다.\n"
 "\n"
 "  명령 옵션:\n"
-"-t, --type <형식>       서비스의 형식 (%s)을 지정합니다.\n"
-"-d, --disable           비활성화된채로 서비스를 추가합니다.\n"
-"-n, --name <별칭>      서비스의 이름을 지정합니다.\n"
+"-t, --type <형식>       서비스 유형(%s)입니다.\n"
+"-d, --disable           서비스를 비활성 상태로 추가합니다.\n"
+"-n, --name <별칭>      서비스를 설명하는 이름을 지정합니다.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1708
@@ -3446,7 +3443,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3478,27 +3475,27 @@ msgstr ""
 "modifyservice (ms) <옵션> <별칭|#|URI>\n"
 "modifyservice (ms) <옵션> <%s>\n"
 "\n"
-"별칭, 이름 또는 URI, '%s' 종합 옵션에 의해 지정된 서비스의 \n"
-"속성을 수정합니다.\n"
+"별칭, 번호 또는 URI로 지정된 서비스의 속성을 수정하거나\n"
+"통합 옵션 '%s'(으)로 지정된 서비스의 속성을 수정합니다.\n"
 "\n"
 "  명령 옵션:\n"
-"-d, --disable                  서비스를 사용하지 않습니다. (삭제하지 않음).\n"
+"-d, --disable                  서비스를 비활성화지만 제거하지 않습니다.\n"
 "-e, --enable                   비활성화된 서비스를 활성화합니다.\n"
-"-r, --refresh                  서비스의 자동 새로 고침을 활성화 합니다.\n"
-"-R, --no-refresh               서비스의 자동 새로 고침을 비활성화 합니다.\n"
+"-r, --refresh                  서비스의 자동 새로 고침 기능을 활성화합니다.\n"
+"-R, --no-refresh               서비스의 자동 새로 고침 기능을 비활성화합니다.\n"
 "-n, --name                     서비스를 설명하는 이름을 설정합니다.\n"
 "\n"
-"-i, --ar-to-enable <별칭>     활성화할 RIS 서비스 저장소를 추가합니다.\n"
-"-I, --ar-to-disable <별칭>    비활성화할 RIS 서비스 저장소를 추가합니다.\n"
-"-j, --rr-to-enable <별칭>     활성화할 RIS 서비스 저장소를 제거합니다.\n"
-"-J, --rr-to-disable <별칭>    비활성화할 RIS 서비스 저장소를 제거합니다.\n"
-"-k, --cl-to-enable             활성화할 RIS 저장소의 목록을 소거합니다.\n"
-"-K, --cl-to-disable            비활성화할 RIS 저장소의 목록을 소거합니다.\n"
+"-i, --ar-to-enable <별칭>     활성화할 RIS 서비스 리포지토리를 추가합니다.\n"
+"-I, --ar-to-disable <별칭>    비활성화할 RIS 서비스 리포지토리를 추가합니다.\n"
+"-j, --rr-to-enable <별칭>     활성화할 RIS 서비스 리포지토리를 제거합니다.\n"
+"-J, --rr-to-disable <별칭>    비활성화할 RIS 서비스 리포지토리를 제거합니다.\n"
+"-k, --cl-to-enable             활성화할 RIS 리포지토리의 목록을 지웁니다.\n"
+"-K, --cl-to-disable            비활성화할 RIS 리포지토리의 목록을 지웁니다.\n"
 "\n"
-"-a, --all                      모든 서비스 변경사항을 적용합니다.\n"
-"-l, --local                    모든 내부 서비스 변경사항을 적용합니다.\n"
-"-t, --remote                   모든 원격 서비스 변경사항을 적용합니다.\n"
-"-m, --medium-type <유형>       지정된 유형의 서비스 변경사항을 적용합니다.\n"
+"-a, --all                      변경사항을 모든 서비스에 적용합니다.\n"
+"-l, --local                    변경사항을 모든 로컬 서비스에 적용합니다.\n"
+"-t, --remote                   변경사항을 모든 원격 서비스에 적용합니다.\n"
+"-m, --medium-type <유형>       변경사항을 지정된 유형의 서비스에 적용합니다.\n"
 
 #: src/Zypper.cc:1792
 msgid ""
@@ -3677,7 +3674,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3706,15 +3703,14 @@ msgstr ""
 "modifyrepo (mr) <옵션> <별칭|#|URI> ...\n"
 "modifyrepo (mr) <옵션> <%s>\n"
 "\n"
-"별칭, 번호, URI 또는 '%s' 취합 옵션으로 지정한 리포지토리의\n"
-"속성을 수정합니다.\n"
+"별칭, 번호 또는 URI로 지정된 서비스의 속성을 수정하거나\n"
+"통합 옵션 '%s'(으)로 지정된 서비스의 속성을 수정합니다.\n"
 "\n"
 "  명령 옵션:\n"
 "-d, --disable             리포지토리를 비활성화하지만 제거하지는 않습니다.\n"
 "-e, --enable              비활성화된 리포지토리를 활성화합니다.\n"
 "-r, --refresh             리포지토리의 자동 새로 고침 기능을 활성화합니다.\n"
-"-R, --no-refresh          리포지토리의 자동 새로 고침 기능을 비활성화합니"
-"다.\n"
+"-R, --no-refresh          리포지토리의 자동 새로 고침 기능을 비활성화합니다.\n"
 "-n, --name                리포지토리를 설명하는 이름을 설정합니다.\n"
 "-p, --priority <정수>     리포지토리의 우선순위를 설정합니다.\n"
 "-k, --keep-packages       RPM 파일 캐싱을 활성화합니다.\n"
@@ -3722,11 +3718,10 @@ msgstr ""
 "-g, --gpgcheck            이 리포지토리에 대해 GPG 확인을 활성화합니다.\n"
 "-G, --no-gpgcheck         이 리포지토리에 대해 GPG 확인을 비활성화합니다.\n"
 "\n"
-"-a, --all                 변경 사항을 모든 리포지토리에 적용합니다.\n"
-"-l, --local               변경 사항을 모든 로컬 리포지토리에 적용합니다.\n"
-"-t, --remote              변경 사항을 모든 원격 리포지토리에 적용합니다.\n"
-"-m, --medium-type <유형>  변경 사항을 지정된 유형의 리포지토리에 적용합니"
-"다.\n"
+"-a, --all                 변경사항을 모든 리포지토리에 적용합니다.\n"
+"-l, --local               변경사항을 모든 로컬 리포지토리에 적용합니다.\n"
+"-t, --remote              변경사항을 모든 원격 리포지토리에 적용합니다.\n"
+"-m, --medium-type <유형>  변경사항을 지정된 유형의 리포지토리에 적용합니다.\n"
 
 #: src/Zypper.cc:2025
 msgid ""
@@ -4091,12 +4086,12 @@ msgstr ""
 "해당하는 패치뿐 아니라 모든 패치를 나열합니다."
 
 #: src/Zypper.cc:2310
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
-"    --from <별칭|#|URI>        저장소를 지정하여 업그레이드 제한합니다.\n"
+"-r, --repo <별칭|#|URI>\n"
+"지정된 리포지토리의 패치만 나열합니다."
 
 #: src/Zypper.cc:2353
 #, c-format, boost-format
@@ -4275,19 +4270,20 @@ msgstr ""
 "찾으면 101을 반환합니다."
 
 #: src/Zypper.cc:2476
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
-"    --from <별칭|#|URI>        저장소를 지정하여 업그레이드 제한합니다.\n"
+"-r, --repo <별칭|#|URI>\n"
+"지정된 리포지토리의 패치만 확인합니다."
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "패키지 관리 자체에 영향을 주는 패치만 확인합니다."
+msgstr ""
+"--updatestack-only\n"
+"패키지 관리 자체에 영향을 주는 패치만 확인합니다."
 
 #: src/Zypper.cc:2494
 msgid ""
@@ -5065,9 +5061,8 @@ msgstr "지정된 리포지토리 '%s'이(가) 비활성화되었습니다."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
-msgstr "일치하는 이슈가 없습니다."
+msgstr "일치하는 항목이 없습니다."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
@@ -5134,10 +5129,10 @@ msgid "Root privileges are required for adding of package locks."
 msgstr "꾸러미 잠금 추가에는 root 권한이 필요합니다."
 
 #: src/Zypper.cc:5023
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
-msgstr[0] "꾸러미 제거됨"
+msgstr[0] "%lu 잠금이 제거되었습니다."
 
 #: src/Zypper.cc:5034
 msgid "XML output not implemented for this command."
@@ -5306,9 +5301,8 @@ msgid "Check failed:"
 msgstr "점검 실패:"
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
-msgstr "GPG 확인"
+msgstr "확인 생략:"
 
 #: src/solve-commit.cc:457
 #, c-format, boost-format
@@ -5899,10 +5893,10 @@ msgid "No lock has been removed."
 msgstr "잠금 제거된것이 없습니다."
 
 #: src/locks.cc:306
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "%zu 잠금이 성공적으로 제거 되었습니다."
+msgstr[0] "%zu 잠금이 성공적으로 제거되었습니다."
 
 #  progress stages
 #: src/locks.cc:313
@@ -6095,9 +6089,8 @@ msgstr "원하지 않음"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
-#, fuzzy
 msgid "optional"
-msgstr "ps [옵션]"
+msgstr "선택 사항"
 
 #. translator: patch status
 #: src/utils/misc.cc:136
