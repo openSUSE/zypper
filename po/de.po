@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-06 14:46+0000\n"
+"PO-Revision-Date: 2016-07-08 09:21+0000\n"
 "Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -450,7 +450,7 @@ msgid "Suspicious category filter value '%1%'."
 msgstr "Verdächtiger Kategoriefilterwert '%1%'."
 
 #: src/SolverRequester.h:68
-#, boost-format, fuzzy
+#, boost-format
 msgid "Suspicious severity filter value '%1%'."
 msgstr "Verdächtiger Schweregradfilterwert '%1%'."
 
@@ -523,7 +523,7 @@ msgid "Description"
 msgstr "Beschreibung"
 
 #: src/info.cc:136
-#, boost-format, fuzzy
+#, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] "Es gäbe %1% Übereinstimmung für '%2%'."
@@ -1004,7 +1004,7 @@ msgid "Patch '%s' is not needed."
 msgstr "Patch '%s' wird nicht benötigt."
 
 #: src/RequestFeedback.cc:181
-#, boost-format, fuzzy
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
@@ -1066,18 +1066,18 @@ msgstr "Konflikt '%s' wird hinzugefügt."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:263
-#, boost-format, fuzzy
+#, boost-format
 msgid "Did you mean %1%?"
 msgstr "Meinten Sie %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
 #: src/Summary.cc:414 src/Summary.cc:486
-#, boost-format, fuzzy
+#, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] "... und %1% weiteres Objekt."
-msgstr[1] "... und %1% weitere Objekt."
+msgstr[1] "... und %1% weitere Objekte."
 
 #: src/Summary.cc:505
 #, c-format, boost-format
@@ -1581,7 +1581,7 @@ msgid "Run '%1%' to see the complete list of locked items."
 msgstr "Mit '%1%' rufen Sie die vollständige Liste der gesperrten Elemente ab."
 
 #: src/Summary.cc:1222
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "Der folgende Patch benötigt einen Systemneustart:"
@@ -2165,7 +2165,6 @@ msgid "Parent Service"
 msgstr "übergeordneter Dienst"
 
 #: src/repos.cc:1109
-#, fuzzy
 msgid "Keywords"
 msgstr "Schlüsselwörter"
 
@@ -2760,15 +2759,15 @@ msgstr ""
 
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:280
-#, boost-format, fuzzy
+#, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
 msgstr[0] "%1% von %2% anwendbaren Patches wird berücksichtigt:"
-msgstr[1] "%1% von %2% anwendabren Patches werden berücksichtigt:"
+msgstr[1] "%1% von %2% anwendbaren Patches werden berücksichtigt:"
 
 #. translator: stats table header
 #: src/update.cc:284
-#, boost-format, fuzzy
+#, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
 msgstr[0] "%1% anwendbarer Patch gefunden:"
@@ -2776,7 +2775,7 @@ msgstr[1] "%1% anwendbare Patches gefunden:"
 
 #. translator: stats summary
 #: src/update.cc:294
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
 msgstr[0] "%d Patch gesperrt"
@@ -2784,7 +2783,7 @@ msgstr[1] "%d Patches gesperrt"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
 msgstr[0] "%d Patch optional"
@@ -2793,7 +2792,7 @@ msgstr[1] "%d Patches optional"
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:306
-#, boost-format, fuzzy
+#, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr "'%1%' verwenden, um optionale Patches einzubeziehen"
 
@@ -2815,7 +2814,6 @@ msgstr[1] "%d Sicherheits-Patches"
 
 #. translator: Table column header.
 #: src/update.cc:352
-#, fuzzy
 msgid "Updatestack"
 msgstr "Stapel-Update"
 
@@ -2921,7 +2919,6 @@ msgid "OK OK! Exiting immediately..."
 msgstr "Haben Sie etwas Geduld, der Vorgang wird unverzüglich beendet..."
 
 #: src/Zypper.cc:77
-#, fuzzy
 msgid ""
 "--with[out]-optional\n"
 "Whether applicable optional patches should be treated as needed or be "
@@ -2932,12 +2929,10 @@ msgstr ""
 "ausgeschlossen werden sollen."
 
 #: src/Zypper.cc:80
-#, fuzzy
 msgid "The default is to exclude optional patches."
 msgstr "Die Standardeinstellung sieht den Ausschluss optionaler Patches vor."
 
 #: src/Zypper.cc:81
-#, fuzzy
 msgid "The default is to include optional patches."
 msgstr "Die Standardeinstellung sieht die Einbeziehung optionaler Patches vor."
 
@@ -3392,7 +3387,6 @@ msgstr "Die Option %s hat hier keinen Effekt und wird ignoriert."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
-#, fuzzy
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Die zypper-Shell unterstützt nicht die Ausführung von Unterbefehlen."
 
@@ -3515,7 +3509,6 @@ msgstr ""
 
 #: src/Zypper.cc:1495 src/Zypper.cc:1550 src/Zypper.cc:1631 src/Zypper.cc:2178
 #: src/Zypper.cc:2251
-#, fuzzy
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -3608,7 +3601,7 @@ msgstr ""
 "installieren.\n"
 
 #: src/Zypper.cc:1579
-#, boost-format, fuzzy
+#, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
 "value can be changed in your local rpm configuration. In case of doubt try "
@@ -3991,7 +3984,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4017,7 +4010,7 @@ msgid ""
 "-t, --remote              Apply changes to all remote repositories.\n"
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
-"modifyrepo (mr) <Optionen> <Alias|#|URI> %s …\n"
+"modifyrepo (mr) <Optionen> <Alias|#|URI> …\n"
 "modifyrepo (mr) <Optionen> <%s>\n"
 "\n"
 "Eigenschaften der Repositories, die durch Alias, Nummer, URI oder durch die "
@@ -4030,7 +4023,7 @@ msgstr ""
 "-e, --enable              Ein deaktiviertes Repository aktivieren.\n"
 "-r, --refresh             Autoaktualisierung des Repositories aktivieren.\n"
 "-R, --no-refresh          Autoaktualisierung des Repositories deaktivieren.\n"
-"-n, --name                Einen beschreibenden Namen für das Repository "
+"-n, --name <Name>             Einen beschreibenden Namen für das Repository "
 "setzen.\n"
 "-p, --priority <Ganzzahl>     Priorität des Repositories setzen.\n"
 "-k, --keep-packages       Zwischenspeichern von RPM-Dateien aktivieren.\n"
@@ -4365,18 +4358,15 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
-#, fuzzy
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [OPTIONEN]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
-#, fuzzy
 msgid "List all applicable patches."
 msgstr "Alle anwendbaren Patches auflisten."
 
 #: src/Zypper.cc:2302
-#, fuzzy
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
@@ -4385,7 +4375,6 @@ msgstr ""
 "Anwendbare Patches für Bugzilla-Einträge auflisten."
 
 #: src/Zypper.cc:2303
-#, fuzzy
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
@@ -4394,7 +4383,6 @@ msgstr ""
 "Anwendbare Patches für CVE-Einträge auflisten."
 
 #: src/Zypper.cc:2304
-#, fuzzy
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
@@ -4403,7 +4391,6 @@ msgstr ""
 "Einträge suchen, die mit der angegebenen Zeichenkette übereinstimmen."
 
 #: src/Zypper.cc:2305
-#, fuzzy
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
@@ -4412,7 +4399,6 @@ msgstr ""
 "Nut Patches auflisten, die vor dem angegebenen Datum herausgegeben wurden."
 
 #: src/Zypper.cc:2306
-#, fuzzy
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
@@ -4421,7 +4407,6 @@ msgstr ""
 "Nur Patches mit dieser Kategorie auflisten."
 
 #: src/Zypper.cc:2307
-#, fuzzy
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
@@ -4430,7 +4415,6 @@ msgstr ""
 "Nur Patches mit diesem Schweregrad auflisten."
 
 #: src/Zypper.cc:2308
-#, fuzzy
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
@@ -4439,7 +4423,6 @@ msgstr ""
 "Alle Patches auflisten, nicht nur die anwendbaren."
 
 #: src/Zypper.cc:2310
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
@@ -4636,13 +4619,11 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
-#, fuzzy
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr "patch-check (pchk) [OPTIONEN]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
-#, fuzzy
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
@@ -4652,7 +4633,6 @@ msgstr ""
 "erforderlicher Sicherheits-Patch gefunden wurde."
 
 #: src/Zypper.cc:2476
-#, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
@@ -4661,7 +4641,6 @@ msgstr ""
 "Nur das angegebene Repository auf Patches überprüfen."
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
@@ -5472,7 +5451,6 @@ msgstr "Das angegebene Repository '%s' wurde deaktiviert."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
 msgstr "Keine passenden Objekte gefunden."
 
@@ -5554,7 +5532,6 @@ msgstr[0] "%lu Sperre entfernt."
 msgstr[1] "%lu Sperren entfernt."
 
 #: src/Zypper.cc:5034
-#, fuzzy
 msgid "XML output not implemented for this command."
 msgstr "XML-Ausgabe für diesen Befehl nicht umgesetzt."
 
@@ -5728,7 +5705,6 @@ msgid "Check failed:"
 msgstr "Prüfung fehlerhaft:"
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
 msgstr "Überprüfung überspringen:"
 
@@ -6489,7 +6465,6 @@ msgid "Trying again..."
 msgstr "Erneuter Versuch ..."
 
 #: src/utils/prompt.cc:288
-#, fuzzy
 msgid "Cannot read input: bad stream or EOF."
 msgstr "Eingabe kann nicht gelesen werden: fehlerhafter Stream oder EOF."
 
@@ -6562,13 +6537,11 @@ msgstr[1] "auflösbare Abhängigkeiten"
 #. Patch status: i18n + color
 #. translator: patch status
 #: src/utils/misc.cc:134
-#, fuzzy
 msgid "unwanted"
 msgstr "unerwünscht"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
-#, fuzzy
 msgid "optional"
 msgstr "optional"
 
@@ -6579,7 +6552,6 @@ msgstr "erforderlich"
 
 #. translator: patch status
 #: src/utils/misc.cc:137
-#, fuzzy
 msgid "applied"
 msgstr "angewendet"
 
@@ -6590,7 +6562,6 @@ msgstr "nicht erforderlich"
 
 #. translator: patch status
 #: src/utils/misc.cc:139
-#, fuzzy
 msgid "undetermined"
 msgstr "unbestimmt"
 
