@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:58+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 08:42+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2638,14 +2638,12 @@ msgstr "다음 패치의 패치 설명과 일치하는 항목이 발견되었습
 #: src/update.cc:1057
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
-msgstr ""
-"버그질라 이슈 번호 %s에 대한 수정은 발견되지 않았거나 필요하지 않은것입니다."
+msgstr "bugzilla 문제 번호 %s에 대한 수정사항이 없거나 수정할 필요가 없습니다."
 
 #: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
-msgstr ""
-"CVE 이슈 번호 %s에 대한 수정은 발견되지 않았거나 필요하지 않은것입니다."
+msgstr "CVE 문제 번호 %s에 대한 수정사항이 없거나 수정할 필요가 없습니다."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
 #: src/update.cc:1062
@@ -2656,7 +2654,7 @@ msgstr "%s 문제 번호 %s에 대한 수정 사항이 없거나 필요하지 �
 #. translators: this will show up if you press ctrl+c twice (but outside of zypper shell)
 #: src/main.cc:38
 msgid "OK OK! Exiting immediately..."
-msgstr "네~ 네~ 지금 종료하는 중입니다..."
+msgstr "예, 즉시 종료하는 중입니다..."
 
 #: src/Zypper.cc:77
 msgid ""
@@ -2693,7 +2691,7 @@ msgstr "PackageKit가 여전히 실행 중입니다(사용 중일 수 있음)."
 
 #: src/Zypper.cc:119
 msgid "Try again?"
-msgstr "재시도 하시겠습니까?"
+msgstr "다시 해보시겠습니까?"
 
 #: src/Zypper.cc:189
 #, boost-format
@@ -2723,7 +2721,7 @@ msgstr "이 명령에는 추가 옵션이 없습니다."
 
 #: src/Zypper.cc:406 src/Zypper.cc:1345
 msgid "Unexpected exception."
-msgstr "예기치않은 예외가 발생했습니다."
+msgstr "예상치 못한 예외가 발생했습니다."
 
 #: src/Zypper.cc:428
 msgid ""
@@ -2829,9 +2827,9 @@ msgid ""
 "\t\t\t\tDo not read installed packages.\n"
 msgstr ""
 "     대상 옵션:\n"
-"\t--root, -R <dir>\t지정한 디렉터리를 별개의 루트 디렉터리로 처리합니다.\n"
+"\t--root, -R <dir>\t다른 루트 디렉토리에서 작동합니다.\n"
 "\t--disable-system-resolvables\n"
-"\t\t\t\t시스템에 설치된 꾸러미를 읽지 않습니다.\n"
+"\t\t\t\t설치된 패키지를 읽지 않습니다.\n"
 
 #: src/Zypper.cc:479
 msgid ""
@@ -2840,8 +2838,8 @@ msgid ""
 "\tshell, sh\t\tAccept multiple commands at once.\n"
 msgstr ""
 "  명령:\n"
-"\thelp, ?\t\t\t도움말 출력.\n"
-"\tshell, sh\t\t한번만 다중 명령 적용.\n"
+"\thelp, ?\t\t\t도움말을 인쇄합니다.\n"
+"\tshell, sh\t\t여러 명령을 동시에 승인합니다.\n"
 
 #: src/Zypper.cc:484
 msgid ""
@@ -2854,14 +2852,14 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"     저장소 관리:\n"
-"\trepos, lr\t\t정의된 모든 저장소를 표시합니다.\n"
-"\taddrepo, ar\t\t새 저장소를 추가합니다.\n"
-"\tremoverepo, rr\t\t지정한 저장소를 제거합니다.\n"
-"\trenamerepo, nr\t\t지정한 저장소의 이름을 바꿉니다.\n"
-"\tmodifyrepo, mr\t\t지정한 저장소를 수정합니다.\n"
-"\trefresh, ref\t\t모든 저장소를 새로 고칩니다.\n"
-"\tclean\t\t\t내부 캐시를 청소합니다.\n"
+"     리포지토리 관리:\n"
+"\trepos, lr\t\t정의된 모든 리포지토리를 나열합니다.\n"
+"\taddrepo, ar\t\t새 리포지토리를 추가합니다.\n"
+"\tremoverepo, rr\t\t지정된 리포지토리를 제거합니다.\n"
+"\trenamerepo, nr\t\t지정된 리포지토리의 이름을 바꿉니다.\n"
+"\tmodifyrepo, mr\t\t지정된 리포지토리를 수정합니다.\n"
+"\trefresh, ref\t\t모든 리포지토리를 새로 고칩니다.\n"
+"\tclean\t\t\t로컬 캐시를 지웁니다.\n"
 
 #: src/Zypper.cc:494
 msgid ""
@@ -2873,10 +2871,10 @@ msgid ""
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
 "     서비스 관리:\n"
-"\tservices, ls\t\t정의된 모든 서비스를 표시합니다.\n"
+"\tservices, ls\t\t정의된 모든 서비스를 나열합니다.\n"
 "\taddservice, as\t\t새 서비스를 추가합니다.\n"
-"\tmodifyservice, ms\t지정한 서비스를 수정합니다.\n"
-"\tremoveservice, rs\t지정한 서비스를 제거합니다.\n"
+"\tmodifyservice, ms\t지정된 서비스를 수정합니다.\n"
+"\tremoveservice, rs\t지정된 서비스를 제거합니다.\n"
 "\trefresh-services, refs\t모든 서비스를 새로 고칩니다.\n"
 
 #: src/Zypper.cc:502
@@ -2892,12 +2890,13 @@ msgid ""
 "\t\t\t\tby installed packages.\n"
 msgstr ""
 "     소프트웨어 관리:\n"
-"\tinstall, in\t\t꾸러미를 설치합니다.\n"
-"\tremove, rm\t\t꾸러미를 제거합니다.\n"
-"\tverify, ve\t\t꾸러미 의존성의 무결성을 검사합니다.\n"
-"\tsource-install, si\t소스 꾸러미를 설치하고 의존성을 빌드합니다.\n"
+"\tinstall, in\t\t패키지를 설치합니다.\n"
+"\tremove, rm\t\t패키지를 제거합니다.\n"
+"\tverify, ve\t\t패키지 종속성의 무결성을 확인합니다.\n"
+"\tsource-install, si\t소스 패키지를 설치하고 종속성을\n"
+"\t\t\t\t빌드합니다.\n"
 "\tinstall-new-recommends, inr\n"
-"\t\t\t\t새로 추가된 설치된 꾸러미의 권장 꾸러미를 \n"
+"\t\t\t\t설치된 패키지에서 권장된 새로 추가된 패키지를 \n"
 "\t\t\t\t설치합니다.\n"
 
 #: src/Zypper.cc:513
@@ -2911,11 +2910,11 @@ msgid ""
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
 "     업데이트 관리:\n"
-"\tupdate, up\t\t설치된 꾸러미를 새버전으로 업데이트 합니다.\n"
-"\tlist-updates, lu\t사용가능한 업데이트 목록을 불러옵니다.\n"
+"\tupdate, up\t\t설치된 패키지를 새 버전으로 업데이트합니다.\n"
+"\tlist-updates, lu\t사용 가능한 업데이트를 나열합니다.\n"
 "\tpatch\t\t\t필요한 패치를 설치합니다.\n"
-"\tlist-patches, lp\t필요한 패치 목록을 불러옵니다.\n"
-"\tdist-upgrade, dup\t배포판 업그레이드를 진행합니다.\n"
+"\tlist-patches, lp\t필요한 패치를 나열합니다.\n"
+"\tdist-upgrade, dup\t배포판 업그레이드를 수행합니다.\n"
 "\tpatch-check, pchk\t패치를 확인합니다.\n"
 
 #: src/Zypper.cc:522
@@ -2933,16 +2932,16 @@ msgid ""
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
 "     쿼리:\n"
-"\tsearch, se\t\t패턴에 맞는 꾸러미를 검색합니다.\n"
-"\tinfo, if\t\t지정한 꾸러미의 모든 정보를 봅니다.\n"
-"\tpatch-info\t\t지정한 패치의 모든 정보를 봅니다.\n"
-"\tpattern-info\t\t지정한 패턴의 모든 정보를 봅니다.\n"
-"\tproduct-info\t\t지정한 제품의 모든 정보를 봅니다.\n"
-"\tpatches, pch\t\t사용가능한 패치 목록입니다.\n"
-"\tpackages, pa\t\t사용가능한 꾸러미 목록입니다.\n"
-"\tpatterns, pt\t\t사용가능한 패턴 목록입니다.\n"
-"\tproducts, pd\t\t사용가능한 제품 목록입니다.\n"
-"\twhat-provides, wp\t지정한 설정 조건의 꾸러미 목록입니다.\n"
+"\tsearch, se\t\t패턴과 일치하는 패키지를 검색합니다.\n"
+"\tinfo, if\t\t지정된 패키지의 전체 정보를 표시합니다.\n"
+"\tpatch-info\t\t지정된 패치에 대한 전체 정보를 표시합니다.\n"
+"\tpattern-info\t\t지정된 패턴에 대한 전체 정보를 표시합니다.\n"
+"\tproduct-info\t\t지정된 제품에 대한 전체 정보를 표시합니다.\n"
+"\tpatches, pch\t\t사용 가능한 모든 패치를 나열합니다.\n"
+"\tpackages, pa\t\t사용 가능한 모든 패키지를 나열합니다.\n"
+"\tpatterns, pt\t\t사용 가능한 모든 패턴을 나열합니다.\n"
+"\tproducts, pd\t\t사용 가능한 모든 제품을 나열합니다.\n"
+"\twhat-provides, wp\t지정된 기능을 제공하는 패키지를 나열합니다.\n"
 
 #: src/Zypper.cc:537
 msgid ""
@@ -2952,10 +2951,10 @@ msgid ""
 "\tlocks, ll\t\tList current package locks.\n"
 "\tcleanlocks, cl\t\tRemove unused locks.\n"
 msgstr ""
-"     꾸러미 잠금:\n"
-"\taddlock, al\t\t꾸러미 잠금을 추가합니다.\n"
-"\tremovelock, rl\t\t꾸러미 잠금을 제거합니다.\n"
-"\tlocks, ll\t\t현재 잠겨있는 꾸러미 목록입니다.\n"
+"     패키지 잠금:\n"
+"\taddlock, al\t\t패키지 잠금을 추가합니다.\n"
+"\tremovelock, rl\t\t패키지 잠금을 제거합니다.\n"
+"\tlocks, ll\t\t현재 패키지 잠금을 나열합니다.\n"
 "\tcleanlocks, cl\t\t사용하지 않는 잠금을 제거합니다.\n"
 
 #: src/Zypper.cc:544
@@ -3002,29 +3001,29 @@ msgstr ""
 #: src/Zypper.cc:587
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "'%s'를 입력하면 전체 옵션 및 명령의 목록을 가져옵니다."
+msgstr "전체 옵션 및 명령 목록을 가져오려면 '%s'을(를) 입력합니다."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: src/Zypper.cc:596
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
-msgstr "'%s'를 입력하면 좀더 구체적인 명령어 도움말을 가져옵니다."
+msgstr "명령 관련 도움말을 가져오려면 '%s'을(를) 입력합니다."
 
 #: src/Zypper.cc:771
 #, c-format, boost-format
 msgid "Verbosity: %d"
-msgstr "출력방식: %d"
+msgstr "표시 수준: %d"
 
 #: src/Zypper.cc:785
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr "잘못된 테이블 모양 %d 입니다."
+msgstr "잘못된 테이블 스타일 %d입니다."
 
 #: src/Zypper.cc:786
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
-msgstr "%d 부터 %d 까지 정수를 사용"
+msgstr "%d에서 %d까지 정수 사용"
 
 #. translators: %1%  - is the name of a subcommand
 #: src/Zypper.cc:898
@@ -3044,7 +3043,7 @@ msgstr ""
 
 #: src/Zypper.cc:953 src/Zypper.cc:3227
 msgid "Entering non-interactive mode."
-msgstr "비대화형 모드로 진입하는 중입니다."
+msgstr "비대화형 모드로 들어가는 중입니다."
 
 #: src/Zypper.cc:960
 msgid ""
@@ -3054,7 +3053,7 @@ msgstr "rebootSuggested 플래그를 설정한 패치는 대화식으로 처리�
 
 #: src/Zypper.cc:967
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "'GPG 확인 안함' 모드로 진입하는 중입니다."
+msgstr "'no-gpg-checks' 모드로 들어가는 중입니다."
 
 #: src/Zypper.cc:975
 #, c-format, boost-format
@@ -3065,7 +3064,7 @@ msgstr ""
 
 #: src/Zypper.cc:988
 msgid "The path specified in the --root option must be absolute."
-msgstr "--root 옵션으로 지정한 경로는 절대 경로이어야 합니다."
+msgstr "--root 옵션에서 지정한 경로는 절대 경로여야 합니다."
 
 #: src/Zypper.cc:1004
 msgid ""
@@ -3077,31 +3076,30 @@ msgstr ""
 
 #: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr ""
-"저장소가 비활성화 상태입니다. 설치된 꾸러미의 데이터베이스만 사용합니다."
+msgstr "리포지토리가 비활성화되었습니다. 설치된 패키지의 데이터베이스만 사용합니다."
 
 #: src/Zypper.cc:1056
 msgid "Autorefresh disabled."
-msgstr "자동 새로고침 사용안함."
+msgstr "자동 새로 고침이 비활성화되었습니다."
 
 #: src/Zypper.cc:1063
 msgid "CD/DVD repositories disabled."
-msgstr "CD/DVD 저장소가 비활성화 되었습니다."
+msgstr "CD/DVD 리포지토리가 비활성화되었습니다."
 
 #: src/Zypper.cc:1070
 msgid "Remote repositories disabled."
-msgstr "원격 저장소가 비활성화 되었습니다."
+msgstr "원격 리포지토리가 비활성화되었습니다."
 
 #: src/Zypper.cc:1077
 msgid "Ignoring installed resolvables."
-msgstr "설치된 해결방법을 무시하는 중입니다."
+msgstr "설치된 resolvable을 무시하는 중입니다."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
 #: src/Zypper.cc:1104 src/Zypper.cc:1151
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
-msgstr "%s 옵션은 여기에서는 아무작용 안합니다. 무시 중입니다."
+msgstr "%s 옵션은 여기서 아무런 의미가 없습니다. 무시 중입니다."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
@@ -3635,13 +3633,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
-"removerepo (rr) [옵션] <별칭|#|URI>\n"
+"removerepo (rr) [options] <별칭|#|URI>\n"
 "\n"
-"지정한 저장소의 별칭이나, 순번 또는 URI 로 제거합니다.\n"
+"별칭, 번호 또는 URI별로 지정된 리포지토리를 제거합니다.\n"
 "\n"
 "  명령 옵션:\n"
-"    --loose-auth   URI의 사용자 인증 데이터는 무시합니다.\n"
-"    --loose-query  URI의 쿼리 문자열을 무시합니다.\n"
+"    --loose-auth   URI에서 사용자 인증 데이터를 무시합니다.\n"
+"    --loose-query  URI에서 쿼리 스트링을 무시합니다.\n"
 
 #: src/Zypper.cc:1950
 msgid ""
@@ -3651,11 +3649,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"renamerepo (nr) [옵션] <별칭|#|URI> <새별칭>\n"
+"renamerepo (nr) [options] <별칭|#|URI> <새 별칭>\n"
 "\n"
-"새 별칭을 지정한 저장소에 부여합니다..\n"
+"별칭, 번호 또는 URI별로 지정된 리포지토리에 새 별칭을 지정합니다.\n"
 "\n"
-"이 명령은 추가 옵션이 없습니다.\n"
+"이 명령에는 추가 옵션이 없습니다.\n"
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
@@ -3726,21 +3724,19 @@ msgid ""
 "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
 "-s, --services           Refresh also services before refreshing repos.\n"
 msgstr ""
-"refresh (ref) [별칭|#|URI] ...\n"
+"refresh (ref) [alias|#|URI] ...\n"
 "\n"
-"별칭, 번호 또는 URI로 지정한 저장소를 새로 고칩니다. 아무것도 지정하지 않을 "
-"경우 활성화된 것만 새로 고칩니다.\n"
+"별칭, 번호 또는 URI별로 지정한 리포지토리를 새로 고칩니다. 아무 것도 지정하지 않은 경우 활성화된 모든 리포지토리가 새로 고쳐집니다."
+"\n"
 "\n"
 "  명령 옵션:\n"
-"-f, --force              강제로 새로 고침을 완료합니다.\n"
-"-b, --force-build        데이터베이스의 재빌드를 강제로 합니다.\n"
-"-d, --force-download     RAW 메타데이터를 강제로 다운로드 합니다.\n"
-"-B, --build-only         데이터베이스를 빌드만 하고 메타데이터를 다운로드 하"
-"지 않습니다.\n"
-"-D, --download-only      RAW 메타데이터를 다운로드만 하고 데이터베이스를 빌드"
-"하지 않습니다.\n"
-"-r, --repo <별칭|#|URI> 지정한 저장소만 새로 고칩니다.\n"
-"-s, --services           저장소를 새로 고치기전에 서비스를 새로 고칩니다.\n"
+"-f, --force              전체 새로 고침을 강제 수행합니다.\n"
+"-b, --force-build        데이터베이스를 다시 강제 빌드합니다.\n"
+"-d, --force-download     원시 메타 데이터를 강제 다운로드합니다.\n"
+"-B, --build-only         데이터베이스는 빌드만 하고 메타 데이터는 다운로드하지 않습니다.\n"
+"-D, --download-only      원시 메타 데이터는 다운로드만 하고 데이터베이스는 빌드하지 않습니다.\n"
+"-r, --repo <별칭|#|URI> 지정한 리포지토리만 새로 고칩니다.\n"
+"-s, --services           리포지토리를 새로 고치기 전에 서비스도 새로 고칩니다.\n"
 
 #: src/Zypper.cc:2054
 msgid ""
@@ -3756,13 +3752,13 @@ msgid ""
 msgstr ""
 "clean (cc) [별칭|#|URI] ...\n"
 "\n"
-"내부 캐시를 청소합니다.\n"
+"로컬 캐시를 정리합니다.\n"
 "\n"
 "  명령 옵션:\n"
-"-r, --repo <별칭|#|URI> 지정한 저장소만 청소합니다.\n"
-"-m, --metadata           메타데이터 캐시만 청소합니다.\n"
-"-M, --raw-metadata       RAW 메타데이터 캐시만 청소합니다.\n"
-"-a, --all                메타데이터와 꾸러미 캐시를 함께 청소합니다.\n"
+"-r, --repo <별칭|#|URI> 지정된 리포지토리만 정리합니다.\n"
+"-m, --metadata           메타 데이터 캐시만 정리합니다.\n"
+"-M, --raw-metadata       원시 메타 데이터 캐시를 정리합니다.\n"
+"-a, --all                메타 데이터와 패키지 캐시를 모두 정리합니다.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
