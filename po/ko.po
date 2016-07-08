@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:14+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 06:19+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -878,7 +878,7 @@ msgstr ""
 #: src/RequestFeedback.cc:108
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
-msgstr "'%s' 에 대한 업데이트 후보가 없습니다."
+msgstr "'%s'에 대한 업데이트 후보가 없습니다."
 
 #: src/RequestFeedback.cc:114
 #, c-format, boost-format
@@ -1445,17 +1445,17 @@ msgstr "다운로드만."
 #: src/Summary.cc:1249
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
-msgstr "작업 후에 추가로 %s 의 용량이 필요합니다."
+msgstr "작업 후에 %s이(가) 추가로 사용됩니다."
 
 #: src/Summary.cc:1251
 msgid "No additional space will be used or freed after the operation."
-msgstr "작업 후에는 추가 공간이나 여유 공간 변화가 없습니다."
+msgstr "작업 후에는 추가 공간이 사용되거나 여유 공간이 생기지 않습니다."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1258
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
-msgstr "작업 후에는 %s 의 여유 공간이 생깁니다."
+msgstr "작업 후에 %s의 여유 공간이 생깁니다."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1281
@@ -1554,24 +1554,24 @@ msgstr "시스템 재부팅이 필요합니다."
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "파일의 회수를 생략하고 현재 작업을 중단합니다."
+msgstr "파일 불러오기를 생략하고 현재 작업을 중단합니다."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
-msgstr "파일을 다시 회수합니다."
+msgstr "파일을 다시 불러오십시오."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:32
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
-msgstr "파일의 회수를 생락하고 파일 없이 작업을 계속합니다."
+msgstr "파일 불러오기를 생략하고 파일 없이 작업을 계속합니다."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr "현재 기본 URI 를 변경하고 파일을 다시 회수합니다."
+msgstr "현재 기본 URI를 변경하고 파일을 다시 불러옵니다."
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
@@ -1586,7 +1586,7 @@ msgstr "새 URI"
 #. 's' stands for Disable SSL certificate authority check
 #: src/callbacks/media.cc:77
 msgid "a/r/i/u/s"
-msgstr "a/r/i/u/s"
+msgstr "중단/재시도/무시/URI 변경/SSL 인증 기관 비활성화"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
@@ -1596,7 +1596,7 @@ msgstr "SSL 인증 기관 확인을 비활성화하고 계속하십시오."
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
 #: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
-msgstr "중단, 재시도, 무시?"
+msgstr "중단, 재시도 또는 무시하시겠습니까?"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
@@ -1604,11 +1604,11 @@ msgstr "SSL 인증 기관 확인이 비활성화되었습니다."
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
-msgstr "감지된 장치가 없어서 꺼낼 수 없습니다."
+msgstr "장치가 감지되지 않았으므로 꺼낼 수 없습니다."
 
 #: src/callbacks/media.cc:110
 msgid "Try to eject the device manually."
-msgstr "수동으로 장치를 제거하세요."
+msgstr "장치를 직접 꺼내십시오."
 
 #: src/callbacks/media.cc:121
 msgid "Detected devices:"
@@ -1620,11 +1620,11 @@ msgstr "취소"
 
 #: src/callbacks/media.cc:139
 msgid "Select device to eject."
-msgstr "꺼낼 장치를 선택하세요."
+msgstr "꺼낼 장치를 선택하십시오."
 
 #: src/callbacks/media.cc:154
 msgid "Insert the CD/DVD and press ENTER to continue."
-msgstr "CD/DVD를 넣고 ENTER 키를 누르세요."
+msgstr "계속하려면 CD/DVD를 넣고 ENTER 키를 누르십시오."
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:157
