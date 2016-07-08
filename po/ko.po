@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 09:15+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 09:22+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -5664,11 +5664,11 @@ msgstr "시작 중"
 
 #: src/output/OutNormal.cc:411
 msgid "No help available for this prompt."
-msgstr "이 프롬프트에 사용할 수 있는 도움말이 없습니다."
+msgstr "이 프롬프트에 사용 가능한 도움말이 없습니다."
 
 #: src/output/OutNormal.cc:422
 msgid "no help available for this option"
-msgstr "이 옵션에 사용가능한 도움말 없음"
+msgstr "이 옵션에 사용 가능한 도움말이 없습니다."
 
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/download.cc:114
@@ -5721,7 +5721,7 @@ msgstr "'%s'이(가) 패키지 이름 또는 기능이 아닙니다."
 #: src/misc.cc:132
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "자동으로 %s %s 사용권에 동의 합니다."
+msgstr "자동으로 %s %s 라이센스에 동의합니다."
 
 #. introduction
 #. translators: the first %s is the name of the package, the second
@@ -5731,16 +5731,16 @@ msgstr "자동으로 %s %s 사용권에 동의 합니다."
 msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
-msgstr " '%s'%s 를 설치하려면 다음의 사용권 조항에 동의 할 필요가 있음:"
+msgstr "'%s'%s을(를) 설치하려면 다음 사용권 계약 조건에 동의해야 합니다."
 
 #. lincense prompt
 #: src/misc.cc:167
 msgid "Do you agree with the terms of the license?"
-msgstr "사용권 조건에 동의하십니까?"
+msgstr "라이센스 조건에 동의하십니까?"
 
 #: src/misc.cc:175
 msgid "Aborting installation due to the need for license confirmation."
-msgstr "사용권 계약에 동의할 필요가 있기 때문에 설치를 중단 중입니다."
+msgstr "라이센스를 확인할 필요가 있어서 설치를 중단하고 있습니다."
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:178
@@ -5748,19 +5748,17 @@ msgstr "사용권 계약에 동의할 필요가 있기 때문에 설치를 중�
 msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
-msgstr ""
-"대화모드(사용권 계약에 대한 사용자의 동의 여부)로 작업을 다시 시작하던지 혹"
-"은 명령에 %s 옵션을 사용하세요."
+msgstr "대화형 모드에서 작업을 다시 시작하고 필요한 라이센스에 동의하는지 여부를 확인하거나 %s 옵션을 사용하십시오."
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:187
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr "%s %s 의 사용권 계약에 동의하지 않았기 때문에 설치를 중단했습니다."
+msgstr "사용자가 %s %s 라이센스에 동의하지 않아서 설치를 중단하고 있습니다."
 
 #: src/misc.cc:225
 msgid "License"
-msgstr "사용권"
+msgstr "라이센스"
 
 #: src/misc.cc:244
 msgid "EULA"
@@ -5768,23 +5766,23 @@ msgstr "EULA"
 
 #: src/misc.cc:256
 msgid "SUMMARY"
-msgstr "SUMMARY"
+msgstr "요약"
 
 #  progress stages
 #: src/misc.cc:257
 #, c-format, boost-format
 msgid "Installed packages: %d"
-msgstr "설치된 꾸러미: %d"
+msgstr "설치된 패키지: %d"
 
 #: src/misc.cc:258
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "저장소에 사본이 있는 설치된 꾸러미: %d"
+msgstr "리포지토리에 상대 프로그램과 함께 설치된 패키지: %d"
 
 #: src/misc.cc:259
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
-msgstr "EULA 와 함께 꾸러미를 설치함: %d"
+msgstr "EULA와 함께 설치된 패키지: %d"
 
 #: src/misc.cc:289
 #, c-format, boost-format
@@ -5800,7 +5798,7 @@ msgstr "소스 패키지 '%s'(패키지: '%s')을(를) 찾을 수 없습니다."
 #: src/misc.cc:373
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
-msgstr "소스 꾸러미 %s-%s 를 설치 중"
+msgstr "소스 패키지 %s-%s 설치 중"
 
 #: src/misc.cc:382
 #, c-format, boost-format
@@ -5810,22 +5808,22 @@ msgstr "소스 패키지 %s-%s이(가) 성공적으로 검색되었습니다."
 #: src/misc.cc:388
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
-msgstr "소스 꾸러미 %s-%s 성공적으로 설치됨."
+msgstr "소스 패키지 %s-%s이(가) 설치되었습니다."
 
 #: src/misc.cc:394
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
-msgstr "소스 꾸러미 %s-%s 를 설치 중에 문제:"
+msgstr "소스 패키지 %s-%s을(를) 설치하는 중 문제 발생:"
 
 #. translators: locks table value
 #: src/locks.cc:24 src/locks.cc:128
 msgid "(any)"
-msgstr "(아무거나)"
+msgstr "(모두)"
 
 #. translators: locks table value
 #: src/locks.cc:26 src/locks.cc:125
 msgid "(multiple)"
-msgstr "(다수)"
+msgstr "(다중)"
 
 #. translators: property name; short; used like "Name: value"
 #: src/locks.cc:72
@@ -5843,11 +5841,11 @@ msgstr "일치 항목"
 
 #: src/locks.cc:159
 msgid "There are no package locks defined."
-msgstr "꾸러미 잠금은 정의되지 않았습니다."
+msgstr "패키지 잠금이 정의되지 않았습니다."
 
 #: src/locks.cc:166
 msgid "Error reading the locks file:"
-msgstr "잠긴 파일 읽는 중 오류:"
+msgstr "잠금 파일을 읽는 중 오류 발생:"
 
 #: src/locks.cc:226
 msgid "Specified lock has been successfully added."
@@ -5857,15 +5855,15 @@ msgstr[0] "지정한 잠금이 성공적으로 추가 되었습니다."
 #  progress stages
 #: src/locks.cc:233
 msgid "Problem adding the package lock:"
-msgstr "꾸러미 잠금 추가 중 문제가 발생:"
+msgstr "패키지 잠금 추가 중 문제 발생:"
 
 #: src/locks.cc:257
 msgid "Specified lock has been successfully removed."
-msgstr "지정한 잠금이 성공적으로 제거 되었습니다."
+msgstr "지정된 잠금이 제거되었습니다."
 
 #: src/locks.cc:302
 msgid "No lock has been removed."
-msgstr "잠금 제거된것이 없습니다."
+msgstr "잠금이 제거되지 않았습니다."
 
 #: src/locks.cc:306
 #, c-format
@@ -5876,17 +5874,17 @@ msgstr[0] "%zu 잠금이 성공적으로 제거되었습니다."
 #  progress stages
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
-msgstr "꾸러미 잠금 제거 중 문제 발생:"
+msgstr "패키지 잠금 제거 중 문제 발생:"
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
-msgstr "부탁드립니다. 이것에 대한 버그 보고서 파일을 제출 해주세요."
+msgstr "해당 버그 보고서를 파일로 작성하십시오."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr "http://en.opensuse.org/Zypper/Troubleshooting 을 참조해 주세요."
+msgstr "자세한 내용은 http://en.opensuse.org/Zypper/Troubleshooting을 참조하십시오."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
@@ -5895,7 +5893,7 @@ msgstr "인수가 너무 많습니다."
 #: src/utils/messages.cc:56
 #, c-format, boost-format
 msgid "The '--%s' option has currently no effect."
-msgstr "'--%s' 옵션은 현재로서는 의미가 없습니다."
+msgstr "'--%s' 옵션은 현재 아무런 의미가 없습니다."
 
 #: src/utils/messages.cc:74
 #, c-format, boost-format
@@ -5904,17 +5902,17 @@ msgid ""
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
 msgstr ""
-"선택한것이 다른 꾸러미의 깨진 의존성을 불러와 꾸러미를 다운로드 하거나 설치하"
-"는 문제점을 무시하고 있습니다. '%s' 를 실행하여 작업을 완료하시길 권장합니다."
+"기타 패키지의 종속성이 손실될 수 있는 패키지의 설치 또는 다운로드 문제를 무시하도록 선택했습니다. 작업이 종료된 후에는 '%s'을(를) "
+"실행하는 것이 좋습니다."
 
 #: src/utils/pager.cc:32
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
-msgstr "'%c' 를 누르면 페이저를 종료합니다."
+msgstr "호출기를 종료하려면 '%c'을(를) 누르십시오."
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
-msgstr "화살표 또는 페이지업/다운 키로 문장이나 쪽을 아래위로 움직입니다."
+msgstr "화살표 또는 pgUp/pgDown 키를 사용하여 텍스트를 행이나 페이지별로 스크롤합니다."
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
