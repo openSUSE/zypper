@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 10:14+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-08 10:15+0000\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -2462,7 +2462,7 @@ msgstr "Für Repository '%s' wurde das Caching von RPM-Dateien aktiviert."
 #: src/repos.cc:2059
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "Für Repository '%s' wurde das Cashing von RPM-Dateien deaktiviert."
+msgstr "Für Repository '%s' wurde das Caching von RPM-Dateien deaktiviert."
 
 #: src/repos.cc:2066
 #, c-format, boost-format
