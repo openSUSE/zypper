@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:51+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 06:58+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2342,29 +2342,29 @@ msgstr "'%s' 서비스에 대한 리포지토리 색인 파일을 검색하는 �
 #: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "앞의 오류로 인해 '%s' 서비스를 생략 합니다."
+msgstr "위의 오류로 인해 '%s' 서비스를 건너뛰고 있습니다."
 
 #: src/repos.cc:2642
 msgid "Check if the URI is valid and accessible."
-msgstr "URI 가 올바른지, 접근이 가능한지 확인하세요."
+msgstr "URI가 유효하고 액세스 가능한지 확인하십시오."
 
 #: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "비활성화 '%s' 서비스를 생략 중"
+msgstr "비활성화된 서비스 '%s'을(를) 건너뛰는 중"
 
 #: src/repos.cc:2751
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
-msgstr "'%s' 나 '%s' 명령을 사용하여 서비스를 추가 또는 활성화 시킵니다."
+msgstr "'%s' 또는 '%s' 명령을 사용하여 서비스를 추가하거나 활성화합니다."
 
 #: src/repos.cc:2754
 msgid "Specified services are not enabled or defined."
-msgstr "지정한 서비스는 정의되지 않았거나 활성화 되어 있지 않습니다."
+msgstr "지정된 서비스가 활성화되지 않았거나 정의되지 않았습니다."
 
 #: src/repos.cc:2756
 msgid "There are no enabled services defined."
-msgstr "활성화되어 있는 정의된 서비스가 없습니다."
+msgstr "활성화된 서비스가 정의되지 않았습니다."
 
 #: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
@@ -2372,15 +2372,15 @@ msgstr "오류로 인해 서비스를 새로 고칠 수 없습니다."
 
 #: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "오류로 인해 몇몇 서비스는 새로 고쳐지지 않았습니다."
+msgstr "오류로 인해 일부 서비스가 새로 고쳐지지 않았습니다."
 
 #: src/repos.cc:2771
 msgid "Specified services have been refreshed."
-msgstr "지정한 서비스가 새로 고쳐졌습니다."
+msgstr "지정된 서비스가 새로 고쳐졌습니다."
 
 #: src/repos.cc:2773
 msgid "All services have been refreshed."
-msgstr "모든 서비스가 새로 고쳐졌습니다."
+msgstr "모든 서비스를 새로 고쳤습니다."
 
 #: src/repos.cc:2920
 #, c-format, boost-format
@@ -2395,17 +2395,17 @@ msgstr "'%s' 서비스를 성공적으로 비활성화했습니다."
 #: src/repos.cc:2928
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "'%s' 서비스의 자동 새로 고침을 활성화 시켰습니다."
+msgstr "'%s' 서비스의 자동 새로 고침이 활성화되었습니다."
 
 #: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "'%s' 서비스의 자동 새로 고침을 비활성화 시켰습니다."
+msgstr "'%s' 서비스의 자동 새로 고침이 비활성화되었습니다."
 
 #: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr "'%s' 서비스의 이름이 '%s' 로 지정 되었습니다."
+msgstr "'%s' 서비스 이름이 '%s'(으)로 설정되었습니다."
 
 #: src/repos.cc:2940
 #, c-format, boost-format
@@ -2441,35 +2441,35 @@ msgstr[0] "'%s' 저장소가 비활성화된 '%s' 서비스의 저장소에서 �
 #: src/repos.cc:2970
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
-msgstr "'%s' 서비스에 대해 변경된 부분이 없습니다."
+msgstr "'%s' 서비스에 변경할 항목이 없습니다."
 
 #: src/repos.cc:2976
 msgid "Error while modifying the service:"
-msgstr "서비스 수정하는 동안 오류:"
+msgstr "서비스를 수정하는 중 오류 발생:"
 
 #: src/repos.cc:2977
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
-msgstr "%s 서비스를 바꾸지 않은 채로 놔둡니다."
+msgstr "%s 서비스를 변경하지 않은 채로 둡니다."
 
 #: src/repos.cc:3081
 msgid "Loading repository data..."
-msgstr "저장소 데이터를 불러오는 중..."
+msgstr "리포지토리 데이터 로드 중..."
 
 #: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "'%s' 저장소 데이터를 갱신하는 중..."
+msgstr "리포지토리 '%s' 데이터 검색 중..."
 
 #: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "'%s' 저장소가 캐시되지 않았습니다. 캐시 중..."
+msgstr "'%s' 리포지토리가 캐싱되지 않았습니다. 캐싱 중..."
 
 #: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
-msgstr "'%s' 로 부터 데이터를 불러오기에 문제"
+msgstr "'%s'에서 데이터를 로드하는 중 문제가 발생했습니다."
 
 #: src/repos.cc:3117
 #, c-format, boost-format
@@ -2479,7 +2479,7 @@ msgstr "'%s' 리포지토리를 새로 고칠 수 없습니다. 이전 캐시를
 #: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr "오류로 인해 '%s' 로 부터의 해결방법을 불러 올 수 없습니다."
+msgstr "오류로 인해 '%s'에서 Resolvable이 로드되지 않았습니다."
 
 #: src/repos.cc:3138
 #, c-format, boost-format
@@ -2494,12 +2494,12 @@ msgstr ""
 #: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "시행하기 전에 '%s' 나 '%s' 를 시험해보세요."
+msgstr "작업을 실행하기 전에 '%s' 또는 '%s'을(를) 시도하십시오."
 
 #  progress stages
 #: src/repos.cc:3160
 msgid "Reading installed packages..."
-msgstr "설치된 꾸러미를 읽는 중..."
+msgstr "설치된 패키지를 읽는 중..."
 
 #: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
@@ -2510,7 +2510,7 @@ msgstr "설치된 패키지를 읽는 동안 문제 발생:"
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
-msgstr "인수에 같은 옵션이 지정되고 있기 때문에 인수가 없는 %s는 무시됩니다."
+msgstr "인수와 유사한 옵션이 지정되었기 때문에 인수가 없는 %s은(는) 무시됩니다."
 
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:280
@@ -2587,7 +2587,7 @@ msgstr "포함된 범주"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
-msgstr "다음의 소프트웨어 관리 업데이트를 먼저 설치합니다:"
+msgstr "다음 소프트웨어 관리 업데이트가 먼저 설치됩니다."
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
@@ -2596,16 +2596,16 @@ msgstr "필요한 소프트웨어 관리 업데이트가 먼저 설치됩니다.
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
-msgstr "업데이트 없음."
+msgstr "업데이트가 없습니다."
 
 #. translator: Table headline
 #: src/update.cc:621
 msgid "The following updates are also available:"
-msgstr "다음의 업데이트도 사용할 수 있습니다:"
+msgstr "다음 업데이트도 사용할 수 있습니다."
 
 #: src/update.cc:714
 msgid "Package updates"
-msgstr "꾸러미 업데이트"
+msgstr "패키지 업데이트"
 
 #: src/update.cc:718
 msgid "Pattern updates"
@@ -2625,15 +2625,15 @@ msgstr "사용 가능한 버전"
 
 #: src/update.cc:969
 msgid "No matching issues found."
-msgstr "일치하는 이슈가 없습니다."
+msgstr "일치하는 문제가 없습니다."
 
 #: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
-msgstr "이슈 번호와 관련된것이 발견되었습니다:"
+msgstr "문제 번호에서 다음 일치 항목이 발견되었습니다."
 
 #: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
-msgstr "다음의 패치에 패치에 관한 설명에 해당하는것이 있습니다:"
+msgstr "다음 패치에서 패치 설명과 일치하는 항목이 발견되었습니다."
 
 #: src/update.cc:1057
 #, c-format, boost-format
