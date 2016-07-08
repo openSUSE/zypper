@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:38+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 06:47+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2054,77 +2054,73 @@ msgstr "%s '%s'에 대한 원시 메타 데이터 캐시를 유지하고 있습�
 #: src/repos.cc:1460
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
-msgstr "Cleaning packages for '%s' 에 대한 꾸러미를 청소 중입니다."
+msgstr "'%s'에 대한 패키지를 정리하는 중입니다."
 
 #: src/repos.cc:1468
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "오류로 인해 '%s' 저장소를 청소할 수 없습니다."
+msgstr "오류로 인해 '%s' 리포지토리를 정리할 수 없습니다."
 
 #  progress stages
 #: src/repos.cc:1479
 msgid "Cleaning installed packages cache."
-msgstr "설치된 꾸러미 캐시를 지우는 중입니다."
+msgstr "설치된 패키지 캐시를 정리하는 중입니다."
 
 #: src/repos.cc:1488
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "오류로 인해 설치된 꾸러미 캐시를 청소할 수 없습니다."
+msgstr "오류로 인해 설치된 패키지 캐시를 정리할 수 없습니다."
 
 #: src/repos.cc:1507
 msgid "Could not clean the repositories because of errors."
-msgstr "오류로 인해 저장소를 청소할 수 없습니다."
+msgstr "오류로 인해 리포지토리를 정리할 수 없습니다."
 
 #: src/repos.cc:1513
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "오류로 인해 몇몇 저장소를 청소할 수 없었습니다."
+msgstr "오류로 인해 일부 리포지토리가 정리되지 않았습니다."
 
 #: src/repos.cc:1518
 msgid "Specified repositories have been cleaned up."
-msgstr "지정한 저장소의 캐시를 지웠습니다."
+msgstr "지정된 리포지토리가 정리되었습니다."
 
 #: src/repos.cc:1520
 msgid "All repositories have been cleaned up."
-msgstr "모든 저장소가 청소 되었습니다."
+msgstr "모든 리포지토리가 정리되었습니다."
 
 #: src/repos.cc:1547
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr ""
-"이것은 교환 가능한 읽기 전용 미디어(CD/DVD)입니다. 자동 새로고침을 비활성화 "
-"합니다."
+msgstr "변경 가능한 읽기 전용 미디어(CD/DVD)입니다. 자동 새로 고침을 비활성화하고 있습니다."
 
 #: src/repos.cc:1568
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
-msgstr "잘못된 저장소 별칭: '%s'"
+msgstr "잘못된 리포지토리 별칭: '%s'"
 
 #: src/repos.cc:1576 src/repos.cc:1858
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "'%s' 이름의 저장소는 이미 있습니다. 다른 별병을 사용해주세요."
+msgstr "이름이 '%s'인 리포지토리가 이미 있습니다. 다른 별칭을 사용하십시오."
 
 #: src/repos.cc:1585
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
-msgstr ""
-"저장소의 형식을 구분할 수 없습니다. 정의한 URI 가 저장소의 올바른 위치를 가르"
-"키고 있는지 확인해주세요:"
+msgstr "리포지토리 유형을 결정할 수 없습니다. 정의한 URI(아래 확인)가 올바른 리포지토리를 가리키고 있는지 확인하십시오."
 
 #: src/repos.cc:1591
 msgid "Can't find a valid repository at given location:"
-msgstr "주어진 위치에서 올바른 저장소를 찾을 수 없습니다:"
+msgstr "지정된 위치에서 올바른 리포지토리를 찾을 수 없습니다."
 
 #: src/repos.cc:1599
 msgid "Problem transferring repository data from specified URI:"
-msgstr "지정한 URI로 부터 저장소 데이터 전송에 문제:"
+msgstr "지정된 URI에서 리포지토리 데이터를 전송하는 중 문제 발생:"
 
 #: src/repos.cc:1600
 msgid "Please check whether the specified URI is accessible."
-msgstr "지정한 URI 에 접근이 가능한지 확인해주세요."
+msgstr "지정한 URI가 액세스 가능한지 확인하십시오."
 
 #: src/repos.cc:1607
 msgid "Unknown problem when adding repository:"
-msgstr "저장소 추가 중 알 수 없는 문제:"
+msgstr "리포지토리 추가 중 알 수 없는 문제 발생:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
@@ -2140,7 +2136,7 @@ msgstr ""
 #: src/repos.cc:1622
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
-msgstr "'%s' 저장소를 성공적으로 추가"
+msgstr "'%s' 리포지토리가 추가되었습니다."
 
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:1630
@@ -2150,16 +2146,16 @@ msgstr "자동 새로 고침"
 #: src/repos.cc:1648
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
-msgstr "'%s' 미디어로부터 데이터를 읽는 중"
+msgstr "'%s' 미디어에서 데이터를 읽는 중"
 
 #: src/repos.cc:1654
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
-msgstr "'%s' 미디어로부터 데이터를 읽는 중 문제"
+msgstr "'%s' 미디어에서 데이터를 읽는 중 문제가 발생했습니다."
 
 #: src/repos.cc:1655
 msgid "Please check if your installation media is valid and readable."
-msgstr "설치 미디어가 올바른지 그리고 읽기가 가능한지 확인해주세요."
+msgstr "설치 미디어가 유효하고 판독 가능한지 확인하십시오."
 
 #: src/repos.cc:1662
 #, c-format, boost-format
@@ -2168,15 +2164,15 @@ msgstr "다음 새로 고침까지 '%s' 미디어에서 데이터 읽기가 지�
 
 #: src/repos.cc:1744
 msgid "Problem accessing the file at the specified URI"
-msgstr "지정한 URI 의 파일 접근에 문제"
+msgstr "지정한 URI에서 파일에 액세스하는 중 문제가 발생했습니다."
 
 #: src/repos.cc:1745
 msgid "Please check if the URI is valid and accessible."
-msgstr "URI 가 올바른지 접근이 가능한지 확인해주세요."
+msgstr "URI가 유효하고 액세스 가능한지 확인하십시오."
 
 #: src/repos.cc:1752
 msgid "Problem parsing the file at the specified URI"
-msgstr "지정한 URI의 파일 구문 분석에 문제"
+msgstr "지정한 URI에서 파일 구문을 분석하는 중 문제가 발생했습니다."
 
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1754
@@ -2185,21 +2181,21 @@ msgstr "그것은 .repo 파일입니까?"
 
 #: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr "지정한 URI 에 있는 파일을 읽을 때 문제 발생"
+msgstr "지정한 URI에서 파일을 읽으려는 중 문제가 발생했습니다."
 
 #: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "파일안에 지정된 별칭이 없는 저장소가 발견되었습니다. 생략 중입니다."
+msgstr "정의된 별칭이 없는 리포지토리가 파일에 있습니다. 건너뛰는 중입니다."
 
 #: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "'%s' 저장소에는 URI가 설정되어 있지 않음, 생략합니다."
+msgstr "'%s' 리포지토리에 URI가 정의되어 있지 않습니다. 건너뛰는 중입니다."
 
 #: src/repos.cc:1821
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
-msgstr "'%s' 저장소가 제거되었습니다."
+msgstr "'%s' 리포지토리가 제거되었습니다."
 
 #: src/repos.cc:1843
 #, c-format, boost-format
@@ -2207,32 +2203,31 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"'%s' 저장소의 별칭을 변경할 수 없습니다. 저장소는 '%s' 서비스의 별칭 설정에 "
-"따릅니다."
+"'%s' 리포지토리의 별칭을 변경할 수 없습니다. 리포지토리가 해당 별칭을 설정할 수 있는 권한이 있는 '%s' 서비스에 속해 있습니다."
 
 #: src/repos.cc:1854
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "'%s' 저장소가 '%s' 로 이름이 변경되었습니다."
+msgstr "'%s' 리포지토리의 이름이 '%s'(으)로 변경되었습니다."
 
 #: src/repos.cc:1863 src/repos.cc:2097
 msgid "Error while modifying the repository:"
-msgstr "저장소 수정하는 동안 오류:"
+msgstr "리포지토리를 수정하는 중 오류 발생:"
 
 #: src/repos.cc:1864
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "'%s' 저장소를 바꾸지 않은 채로 놔둡니다."
+msgstr "'%s' 리포지토리를 변경하지 않은 채로 둡니다."
 
 #: src/repos.cc:2001
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "'%s' 저장소의 우선순위를 변경하지 않았음 (%d)"
+msgstr "'%s' 리포지토리의 우선순위가 변경되지 않았습니다(%d)."
 
 #: src/repos.cc:2039
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
-msgstr "'%s' 저장소가 성공적으로 활성화 되었습니다."
+msgstr "'%s' 리포지토리가 성공적으로 활성화되었습니다."
 
 #: src/repos.cc:2041
 #, c-format, boost-format
