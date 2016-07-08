@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-06-17 10:47+0000\n"
-"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2016-07-08 17:47+0000\n"
+"Last-Translator: José Ramón Piedra <jrpiedra@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -313,7 +313,7 @@ msgstr "Instalando: %s-%s"
 #: src/callbacks/rpm.h:308
 #, c-format, boost-format
 msgid "Installation of %s failed:"
-msgstr "La instalación de %s ha fallado:"
+msgstr "Error al instalar %s:"
 
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
@@ -1175,7 +1175,7 @@ msgstr[1] "Los siguientes %d productos van a ser actualizados:"
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "La siguiente aplicación serán actualizada:"
+msgstr[0] "La siguiente aplicación será actualizada:"
 msgstr[1] "Las siguientes %d aplicaciones serán actualizadas:"
 
 #: src/Summary.cc:630
@@ -1362,18 +1362,16 @@ msgstr[1] "Se recomiendan los siguientes %d parches, pero no serán instalados:"
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] "El siguiente patrón es recomendado, pero no será instalado:"
-msgstr[1] ""
-"Se recomiendan los siguientes %d patrones, pero no serán instalados:"
+msgstr[0] "Se recomienda el siguiente patrón, pero no será instalado:"
+msgstr[1] "Se recomiendan los siguientes %d patrones, pero no serán instalados:"
 
 #: src/Summary.cc:942
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] "El siguiente producto es recomendado, pero no será instalado:"
-msgstr[1] ""
-"Se recomiendan los siguientes %d productos, pero no serán instalados:"
+msgstr[0] "Se recomienda el siguiente producto, pero no será instalado:"
+msgstr[1] "Se recomiendan los siguientes %d productos, pero no serán instalados:"
 
 #: src/Summary.cc:946
 #, c-format, boost-format
@@ -1397,9 +1395,8 @@ msgstr[1] "Los siguientes %d paquetes son sugeridos, pero no serán instalados:"
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "El siguiente parche es sugerido, sin embargo no será instalado:"
-msgstr[1] ""
-"Se sugieren los siguientes %d parches, los cuales no serán instalados:"
+msgstr[0] "Se sugiere el siguiente parche, sin embargo no será instalado:"
+msgstr[1] "Se sugieren los siguientes %d parches, los cuales no serán instalados:"
 
 #: src/Summary.cc:996
 #, c-format, boost-format
@@ -1414,9 +1411,8 @@ msgstr[1] "Los siguientes %d paquetes son sugeridos, pero no serán instalados:"
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] "El siguiente producto es recomendado, pero no será instalado:"
-msgstr[1] ""
-"Se recomiendan los siguientes %d productos, pero no serán instalados:"
+msgstr[0] "Se sugiere el siguiente producto, pero no será instalado:"
+msgstr[1] "Se sugieren los siguientes %d productos, pero no serán instalados:"
 
 #: src/Summary.cc:1006
 #, c-format, boost-format
