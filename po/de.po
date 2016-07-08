@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 11:02+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 11:17+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -4762,25 +4762,25 @@ msgid ""
 msgstr ""
 "info (if) [Optionen] <Name> ...\n"
 "\n"
-"Zeigt ausführliche Informationen für die angegebenen Pakete.\n"
-"Standardmäßig werden die Pakete angezeigt, die exakt mit den angegebenen "
-"Name übereinstimmen.\n"
-"Um auch Pakete angezeigt zu bekommen, die nur in Teilen übereinstimmen, "
-"benutzen Sie die Option '--match-substrings'\n"
-"oder benutzen Sie Platzhalter (*?) im Namen.\n"
+"Detaillierte Informationen zu angegebenen Paketen anzeigen.\n"
+"Standardmäßig werden die Pakete angezeigt, deren Name exakt dem angegebenen "
+"Namen entspricht.\n"
+"Sollen auch Pakete mit teilweiser Namensübereinstimmugn angezeigt werden, "
+"die Option '--match-substrings'\n"
+"verwenden oder Platzhalter (*?) im Namen angeben.\n"
 "\n"
-"  Befehlsoptionen:\n"
-"-s, --match-substrings    Zeigt Informationen für Pakete, die in Teilen mit "
-"dem Namen übereinstimmen.\n"
-"-r, --repo <Alias|#|URI>  Nur das angegebene Repository benutzen.\n"
-"-t, --type <Typ>         Pakettyp (%s).\n"
+"  Kommandooptionen:\n"
+"-s, --match-substrings    Informationen für Pakete anzeigen, deren Name "
+"teilweise mit dem angegebenen Namen übereinstimmt.\n"
+"-r, --repo <alias|#|URI>  Nur mit dem angegebenen Repository arbeiten.\n"
+"-t, --type <type>         Pakettyp (%s).\n"
 "                          Standard: %s.\n"
-"    --requires            Zeigt auch Voraussetzungen und deren "
-"Voraussetzungen.\n"
-"    --conflicts           Zeigt Konflikte an.\n"
-"    --obsoletes           Zeigt Veraltetes an.\n"
-"    --recommends          Zeigt auch empfohlene Pakete.\n"
-"    --suggests            Zeigt auch vorgeschlagene Pakete.\n"
+"    --provides            'Bietet' wird angezeigt.\n"
+"    --requires            'Erfordert' und 'Setzt voraus' wird angezeigt.\n"
+"    --conflicts           'Konflikte' wird angezeigt.\n"
+"    --obsoletes           'Veraltet' wird angezeigt.\n"
+"    --recommends          'Empfohlen' wird angezeigt.\n"
+"    --suggests            'Vorschläge' wird angezeigt.\n"
 
 #: src/Zypper.cc:2648
 #, c-format, boost-format
@@ -4793,7 +4793,7 @@ msgid ""
 msgstr ""
 "patch-info <Patch-Name> ...\n"
 "\n"
-"Detaillierte Informationen zu Patches anzeigen.\n"
+"Detaillierte Patch-Informationen anzeigen.\n"
 "\n"
 "Dies ist ein Alias für '%s'.\n"
 
@@ -4806,9 +4806,9 @@ msgid ""
 "\n"
 "This is an alias for '%s'.\n"
 msgstr ""
-"pattern-info <Schemataname> ...\n"
+"pattern-info <Schemaname> ...\n"
 "\n"
-"Detaillierte Informationen für Schemata anzeigen.\n"
+"Detaillierte Schemainformationen anzeigen.\n"
 "\n"
 "Dies ist ein Alias für '%s'.\n"
 
@@ -4835,9 +4835,9 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"what-provides (wp) <Fähigkeit>\n"
+"what-provides (wp) <Funktion>\n"
 "\n"
-"Alle Pakete, die die festgelegte Fähigkeit anbieten, anzeigen.\n"
+"Alle Pakete auflisten, die die angegebene Funktion bieten.\n"
 "\n"
 "Dieses Kommando hat keine zusätzlichen Optionen.\n"
 
@@ -4851,7 +4851,7 @@ msgid ""
 msgstr ""
 "moo\n"
 "\n"
-"Zeige ein Tier.\n"
+"Tier anzeigen.\n"
 "\n"
 "Dieses Kommando hat keine zusätzlichen Optionen.\n"
 
@@ -4871,13 +4871,13 @@ msgstr ""
 "addlock (al) [Optionen] <Paketname> ...\n"
 "\n"
 "Eine Paketsperre hinzufügen. Zu sperrende Pakete durch exakten Namen oder "
-"globales Schema festlegen, Verwendung der Wildcard-Zeichen '*' und '?' "
-"möglich.\n"
+"globales Schema festlegen und dazu die Platzhalterzeichen '*' und '?' "
+"verwenden.\n"
 "\n"
-"  Befehlsoptionen:\n"
-"-r, --repo <Alias|#|URI>  Die Sperre auf das festgelegte Repository "
+"  Kommandooptionen:\n"
+"-r, --repo <Alias|#|URI>  Die Sperre auf das angegebene Repository "
 "beschränken.\n"
-"-t, --type <Typ>          Pakettyp (%s).\n"
+"-t, --type <Typ>         Pakettyp (%s).\n"
 "                          Standard: %s.\n"
 
 #: src/Zypper.cc:2803
@@ -4895,11 +4895,11 @@ msgid ""
 msgstr ""
 "removelock (rl) [Optionen] <Sperr-Nummer|Paketname> ...\n"
 "\n"
-"Entfernt die Sperre von einem Paket. Geben Sie an welche Sperre entfernt "
-"werden soll, entweder mit der Nummer die Sie durch '%s' enthalten, oder "
-"durch den Paketnamen.\n"
+"Sperre von einem Paket entfernen. Geben Sie an welche Sperre entfernt werden "
+"soll, entweder mit der Nummer die Sie durch '%s' enthalten, oder durch den "
+"Paketnamen.\n"
 "\n"
-"  Befehlsoptionen:\n"
+"  Kommandooptionen:\n"
 "-r, --repo <Alias|#|URI>  Nur die Sperren in einem bestimmten Repository "
 "entfernen.\n"
 "-t, --type <Typ>         Typ des Pakets (%s).\n"
@@ -4939,7 +4939,7 @@ msgstr ""
 "\n"
 "Nutzlose Sperren entfernen.\n"
 "\n"
-"  Befehlsoptionen:\n"
+"  Kommandooptionen:\n"
 "-d, --only-duplicates     Nur doppelte Sperren entfernen.\n"
 "-e, --only-empty          Nur Sperren entfernen, die nichts sperren.\n"
 
@@ -4955,11 +4955,11 @@ msgid ""
 msgstr ""
 "targetos (tos) [Optionen]\n"
 "\n"
-"Zeige verschiedene Informationen über das Zielbetriebssystem.\n"
-"Zeigt standardmäßig eine ID-Zeichenkette an.\n"
+"Verschiedene Informationen zum Zielbetriebssystem anzeigen.\n"
+"Standardmäßig wird eine ID-Zeichenkette angezeigt.\n"
 "\n"
-"  Befehlsoptionen:\n"
-"-l, --label                 Zeige die Bezeichnung des Betriebssystems.\n"
+"  Kommandooptionen:\n"
+"-l, --label                 Betriebssystembezeichnung anzeigen.\n"
 
 #: src/Zypper.cc:2897
 msgid ""
@@ -4972,10 +4972,11 @@ msgid ""
 msgstr ""
 "versioncmp (vcmp) <Version1> <Version2>\n"
 "\n"
-"Die als Argumente gelieferten Versionen vergleichen.\n"
+"Die als Argumente zur Verfügung gestellten Versionen vergleichen.\n"
 "\n"
-"  Befehlsoptionen:\n"
-"-m, --match  Nimmt die fehlende Release-Nummer als jedes Release.\n"
+"  Kommandooptionen:\n"
+"-m, --match  Versteht eine fehlende Versionsnummer als jede beliebige "
+"Version.\n"
 
 #: src/Zypper.cc:2916
 msgid ""
@@ -4987,7 +4988,7 @@ msgid ""
 msgstr ""
 "Lizenzen\n"
 "\n"
-"Bericht über Lizenzen und EULAs der momentan installierten Softwarepakete.\n"
+"Bericht über Lizenzen und EULAs der aktuell installierten Softwarepakete.\n"
 "\n"
 "Dieses Kommando hat keine zusätzlichen Optionen.\n"
 
@@ -5052,14 +5053,13 @@ msgid ""
 msgstr ""
 "download [Optionen] <Pakete>...\n"
 "\n"
-"Herunterladen von rpms legt auf der Kommandozeile ein lokales Verzeichnis "
-"fest.\n"
+"In der Kommandozeile angegebene rpms in ein lokales Verzeichnis "
+"herunterladen.\n"
 "Standardmäßig werden Pakete in den libzypp-Paket-Zwischenspeicher "
 "heruntergeladen\n"
-"(/var/cache/zypp/packages; für nicht-root-Benutzer $XDG_CACHE_HOME/zypp/"
-"packages),\n"
-"aber das kann geändert werden, indem die globale Option --pkg-cache-dir "
-"verwendet wird.\n"
+"(/var/cache/zypp/packages; für Nicht-root-Benutzer "
+"$XDG_CACHE_HOME/zypp/packages),\n"
+"kann dies jedoch mit der globalen Option --pkg-cache-dir geändert werden.\n"
 "\n"
 "In die XML-Ausgabe wird ein Knoten <Download-Resultat> für jedes\n"
 "Paket geschrieben, das zypper versuchte herunterzuladen. Bei Erfolg ist der "
@@ -5067,13 +5067,12 @@ msgstr ""
 "unter 'download-result/localpath@path' zu finden.\n"
 "\n"
 "  Befehlsoptionen:\n"
-"--all-matches        Alle Versionen herunterladen, die zu den "
-"Kommandozeilen-\n"
-"                     argumenten passen. Sonst wird nur die beste Version "
+"--all-matches        Alle Versionen herunterladen, die zu den Kommandozeilen-"
+"\n"
+"                     argumenten passen. Ansonsten wird nur die beste Version "
 "des\n"
 "                     jeweils passenden Pakets heruntergeladen.\n"
-"--dry-run            Nicht irgendwelche Pakete herunterladen, zuerst "
-"berichten,\n"
+"--dry-run            Keine Pakete herunterladen, nur berichten,\n"
 "                     was gemacht werden würde.\n"
 
 #: src/Zypper.cc:3007
@@ -5093,8 +5092,8 @@ msgid ""
 msgstr ""
 "source-download\n"
 "\n"
-"Herunterladen von Quell-RPMs für alle installierten Pakete in ein lokales "
-"Verzeichnis.\n"
+"Quell-RPMs für alle installierten Pakete in ein lokales Verzeichnis "
+"herunterladen.\n"
 "\n"
 "  Kommandooptionen:\n"
 "-d, --directory <dir>\n"
@@ -5116,7 +5115,7 @@ msgid ""
 msgstr ""
 "quit (exit, ^D)\n"
 "\n"
-"Die laufende Zypper-Shell beenden.\n"
+"Die aktuelle Zypper-Shell beenden.\n"
 "\n"
 "Dieses Kommando hat keine zusätzlichen Optionen.\n"
 
@@ -5130,7 +5129,7 @@ msgid ""
 msgstr ""
 "shell (sh)\n"
 "\n"
-"Die Kommando-Shell von Zypper betreten.\n"
+"Die Kommando-Shell von Zypper eingeben.\n"
 "\n"
 "Dieses Kommando hat keine zusätzlichen Optionen.\n"
 
@@ -5154,7 +5153,7 @@ msgid ""
 msgstr ""
 "list-resolvables (lr)\n"
 "\n"
-"Verfügbare Typen der auflösbaren Abhängigkeiten auflisten.\n"
+"Verfügbare Typen der auflösbaren Elemente auflisten.\n"
 
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
@@ -5172,9 +5171,9 @@ msgid ""
 msgstr ""
 "mount\n"
 "\n"
-"Verzeichnis mit RPMs als Repository einhängen.\n"
+"Verzeichnis mit RPMs als Kanal einhängen.\n"
 "\n"
-"  Befehlsoptionen:\n"
+"  Kommandooptionen:\n"
 "-a, --alias <Alias>  Die angegebene Zeichenkette als Dienstalias verwenden.\n"
 "-n, --name <Name>    Die angegebene Zeichenkette als Dienstname verwenden.\n"
 "-r, --recurse        Unterverzeichnisse berücksichtigen.\n"
@@ -5201,7 +5200,8 @@ msgid ""
 msgstr ""
 "ping [Optionen]\n"
 "\n"
-"Dieses Kommando hat eine Dummy-Implementation, die immer 0 wiedergibt.\n"
+"Dieses Kommando umfasst eine ''leere Implementierung'', die stets den Wert 0 "
+"zurückgibt.\n"
 
 #: src/Zypper.cc:3196 src/Zypper.cc:5236
 msgid "Unexpected program flow."
@@ -5209,7 +5209,7 @@ msgstr "Unerwarteter Programmverlauf."
 
 #: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
-msgstr "Programmargumente, die keine Optionen sind: "
+msgstr "Andere Programmargumente (keine Optionen):"
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: src/Zypper.cc:3303
@@ -5224,11 +5224,12 @@ msgstr ""
 
 #: src/Zypper.cc:3326
 msgid "Root privileges are required for refreshing services."
-msgstr "Zum Aktualisieren der Dienste werden root-Rechte benötigt."
+msgstr "Zum Aktualisieren der Dienste sind Root-Berechtigungen erforderlich."
 
 #: src/Zypper.cc:3350 src/Zypper.cc:3439 src/Zypper.cc:3656
 msgid "Root privileges are required for modifying system services."
-msgstr "Zum Modifizieren der Systemdienste werden root-Rechte benötigt."
+msgstr ""
+"Zum Bearbeiten von Systemdiensten sind Root-Berechtigungen erforderlich."
 
 #: src/Zypper.cc:3423
 #, c-format, boost-format
@@ -5238,7 +5239,7 @@ msgstr "'%s' ist kein gültiger Diensttyp."
 #: src/Zypper.cc:3425
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr "Siehe '%s' oder '%s', um eine Liste bekannter Diensttypen zu erhalten."
+msgstr "Eine Liste der bekannten Diensttypen finden Sie unter '%s' oder '%s'."
 
 # 50168 AttribValues/delnotify
 #. translators: aggregate option is e.g. "--all". This message will be
@@ -5247,7 +5248,7 @@ msgstr "Siehe '%s' oder '%s', um eine Liste bekannter Diensttypen zu erhalten."
 #. followed by mr command help text which will explain it
 #: src/Zypper.cc:3450 src/Zypper.cc:3797
 msgid "Alias or an aggregate option is required."
-msgstr "Alias oder eine Sammeloption wird benötigt."
+msgstr "Alias oder Sammeloption erforderlich."
 
 #: src/Zypper.cc:3482
 #, c-format, boost-format
@@ -5256,7 +5257,8 @@ msgstr "Dienst '%s' nicht gefunden."
 
 #: src/Zypper.cc:3509 src/Zypper.cc:3655 src/Zypper.cc:3734 src/Zypper.cc:3786
 msgid "Root privileges are required for modifying system repositories."
-msgstr "Zum Modifizieren der System-Repositories werden root-Rechte benötigt."
+msgstr ""
+"Zum Bearbeiten von System-Repositorys sind Root-Berechtigungen erforderlich."
 
 #: src/Zypper.cc:3564 src/Zypper.cc:3902
 msgid "Too few arguments."
@@ -5266,14 +5268,15 @@ msgstr "Zu wenig Argumente."
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Wenn nur ein Argument verwendet wird, dann muss es ein auf eine .repo-Datei "
-"verweisender URI sein."
+"Wenn nur ein Argument verwendet wird, dann muss es sich um einen auf eine "
+".repo-Datei verweisenden URI handeln."
 
 #: src/Zypper.cc:3617
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
-"Kann %s nicht zusammen mit %s verwenden. Die Einstellung %s wird verwendet."
+"%s kann nicht zusammen mit %s verwendet werden. Die Einstellung %s wird "
+"verwendet."
 
 #: src/Zypper.cc:3636
 msgid "Specified type is not a valid repository type:"
@@ -5283,29 +5286,33 @@ msgstr "Der angegebene Typ ist kein gültiger Repository-Typ:"
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
-"Siehe '%s' oder '%s', um eine Liste bekannter Repository-Typen zu erhalten."
+"Eine Liste der bekannten Repository-Typen finden Sie unter '%s' oder '%s'."
 
 #: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
-msgstr "Benötigtes Argument fehlt."
+msgstr "Erforderliches Argument fehlt."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: src/Zypper.cc:3688
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "Repository '%s' wurde nicht durch Alias, Nummer oder URI gefunden."
+msgstr ""
+"Repository '%s' konnte anhand des Alias, der Nummer oder des URI nicht "
+"gefunden werden."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "Dienst '%s' wurde nicht durch Alias, Nummer oder URI gefunden."
+msgstr ""
+"Dienst '%s' konnte nicht anhand des Alias, der Nummer oder des URI gefunden "
+"werden."
 
 #: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
-msgstr "Zu wenig Argumente. Wenigstens URI und Alias werden benötigt."
+msgstr "Zu wenig Argumente. Es sind mindestens URI und Alias erforderlich."
 
 #: src/Zypper.cc:3765
 #, c-format, boost-format
@@ -5319,37 +5326,42 @@ msgstr "Repository %s nicht gefunden."
 
 #: src/Zypper.cc:3846
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "Zum Aktualisieren der System-Repositories werden root-Rechte benötigt."
+msgstr ""
+"Zum Aktualisieren der System-Repositorys sind Root-Berechtigungen "
+"erforderlich."
 
 #: src/Zypper.cc:3852
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
-msgstr "Die globale Option '%s' hat hier keinen Effekt."
+msgstr "Die globale Option '%s' hat hier keine Auswirkung."
 
 #: src/Zypper.cc:3860
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr "Argumente sind nicht erlaubt, wenn '%s' verwendet wird."
+msgstr "Bei Verwendung von '%s' sind keine Argumente zulässig."
 
 #: src/Zypper.cc:3884
 msgid "Root privileges are required for cleaning local caches."
-msgstr "Root-Rechte werden benötigt, um lokale Zwischenspeicher zu bereinigen."
+msgstr ""
+"Zum Bereinigen der lokalen Zwischenspeicher sind Root-Berechtigungen "
+"erforderlich."
 
 # 50168 AttribValues/delnotify
 #: src/Zypper.cc:3903
 msgid "At least one package name is required."
-msgstr "Wenigstens ein Paketname wird benötigt."
+msgstr "Es ist mindestens ein Paketname erforderlich."
 
 #: src/Zypper.cc:3912
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
-"Zum Installieren oder Deinstallieren von Paketen werden root-Rechte benötigt."
+"Zum Installieren oder Deinstallieren von Paketen sind Root-Berechtigungen "
+"erforderlich."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/Zypper.cc:3924
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "Argumente werden ignoriert, markiere das gesamte Repository."
+msgstr "Argumente ignorieren, gesamtes Repository markieren."
 
 #: src/Zypper.cc:3935
 #, c-format, boost-format
@@ -5380,21 +5392,23 @@ msgstr ""
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr ""
-"'%s' sieht wie eine RPM-Datei aus. Werde versuchen sie herunterzuladen."
+"'%s' sieht wie eine RPM-Datei aus. Es wird versucht, sie herunterzuladen."
 
 #: src/Zypper.cc:3984
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr "Problem mit der als '%s' festgelegten RPM-Datei, übersprungen."
+msgstr ""
+"Problem mit der als '%s' angegebenen RPM-Datei. Die Datei wird übersprungen."
 
 #: src/Zypper.cc:4006
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
-msgstr "Problem beim Lesen des RPM-Headers von %s. Ist es eine RPM-Datei?"
+msgstr ""
+"Problem beim Lesen des RPM-Headers von %s. Handelt es sich um eine RPM-Datei?"
 
 #: src/Zypper.cc:4028
 msgid "Plain RPM files cache"
-msgstr "Einfacher RPM-Dateien-Zwischenspeicher"
+msgstr "Einfacher Cache für RPM-Dateien"
 
 #: src/Zypper.cc:4045
 msgid "No valid arguments specified."
@@ -5405,8 +5419,8 @@ msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr ""
-"Es sind keine Repositories angegeben. Betrieb nur mit den installierten "
-"auflösbaren Objekten. Nichts kann installiert werden."
+"Keine Repositorys definiert. Es werden nur die installierten auflösbaren "
+"Elemente verwendet. Keine Installation möglich."
 
 #. translators: meaning --capability contradicts --force/--name
 #: src/Zypper.cc:4099 src/Zypper.cc:4658
@@ -5437,7 +5451,7 @@ msgstr "Unbekannter Pakettyp '%s'."
 #: src/Zypper.cc:4273
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
-msgstr "Das angegebene Repository '%s' wurde deaktiviert."
+msgstr "Das angegebene Repository '%s' ist deaktiviert."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
@@ -5448,24 +5462,24 @@ msgstr "Keine passenden Objekte gefunden."
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 "Bei der Initialisierung oder Ausführung der Suchanfrage ist ein Problem "
-"aufgetreten"
+"aufgetreten."
 
 #: src/Zypper.cc:4439
 msgid "See the above message for a hint."
-msgstr "Siehe die obige Nachricht für einen Hinweis."
+msgstr "In der Meldung oben finden Sie einen entsprechenden Hinweis."
 
 #: src/Zypper.cc:4596 src/Zypper.cc:4644
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
-msgstr "Kann %s nicht zusammen mit %s verwenden."
+msgstr "%s kann nicht zusammen mit %s verwendet werden."
 
 #: src/Zypper.cc:4625
 msgid "Root privileges are required for updating packages."
-msgstr "Um Pakete zu aktualisieren, sind root-Rechte erforderlich."
+msgstr "Zum Aktualisieren der Pakete sind Root-Berechtigungen erforderlich."
 
 #: src/Zypper.cc:4684 src/Zypper.cc:4692 src/Zypper.cc:4765
 msgid "Operation not supported."
-msgstr "Operation ist nicht unterstützt."
+msgstr "Operation wird nicht unterstützt."
 
 #: src/Zypper.cc:4685
 #, c-format, boost-format
@@ -5478,20 +5492,21 @@ msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
-"Zypper kümmert sich nicht um installierte Quellcodepakete. Um das neueste "
-"Quellcodepaket und seine Compilierungsabhängigkeiten zu installieren "
-"benutzen Sie '%s'."
+"Zypper zeichnet die installierten Quellpakete nicht auf. Verwenden Sie '%s' "
+"zur Installation des neuesten Quellpakets und seiner Build-Abhängigkeiten."
 
 #: src/Zypper.cc:4709
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
-"Es können nicht mehrere Typen verwendet werden, wenn spezifische Pakete als "
-"Argumente angegeben sind."
+"Wenn bestimmte Pakete als Argumente angegeben sind, können nicht mehrere "
+"Typen verwendet werden."
 
 #: src/Zypper.cc:4801
 msgid "Root privileges are required for performing a distribution upgrade."
-msgstr "Root-Rechte werden für eine Distributionsaktualisierung benötigt."
+msgstr ""
+"Zur Durchführung einer Distributionsaktualisierung sind Root-Berechtigungen "
+"erforderlich."
 
 #: src/Zypper.cc:4821
 #, c-format, boost-format
@@ -5500,19 +5515,19 @@ msgid ""
 "Make sure these repositories are compatible before you continue. See '%s' "
 "for more information about this command."
 msgstr ""
-"Sie wollen eine Distributionsaktualisierung mit allen aktivierten "
-"Repositories durchführen. Bevor Sie weitermachen, sollten Sie sicherstellen, "
-"das diese Repositories kompatibel sind. Siehe '%s' zu weiteren Informationen "
-"zu diesem Befehl."
+"Sie sind im Begriff, eine Distributionsaktualisierung mit allen aktivierten "
+"Repositorys durchzuführen. Vergewissern Sie sich, dass diese Repositorys "
+"kompatibel sind, bevor Sie fortfahren. Weitere Informationen zu diesem "
+"Kommando finden Sie unter '%s'."
 
 #: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
-msgstr "Aufruf"
+msgstr "Belegung"
 
 #: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
-msgstr "Root-Rechte werden für das Hinzufügen von Paketsperren benötigt."
+msgstr "Zum Hinzufügen von Paketsperren sind Root-Berechtigungen erforderlich."
 
 #: src/Zypper.cc:5023
 #, c-format, boost-format
@@ -5538,7 +5553,7 @@ msgstr "Kurzname: %s"
 #: src/Zypper.cc:5089
 #, c-format, boost-format
 msgid "%s matches %s"
-msgstr "%s entspricht %s"
+msgstr "%s stimmt mit %s überein"
 
 #: src/Zypper.cc:5091
 #, c-format, boost-format
@@ -5553,11 +5568,11 @@ msgstr "%s ist älter als %s"
 #: src/Zypper.cc:5171 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
-msgstr "Ungenügende Rechte, um das Download-Verzeichnis '%s' zu benutzen."
+msgstr "Ungenügende Rechte zur Verwendung des Download-Verzeichnisses '%s'."
 
 #: src/Zypper.cc:5223
 msgid "This command only makes sense in the zypper shell."
-msgstr "Dieses Kommando macht nur in der Zypper-Shell Sinn."
+msgstr "Dieses Kommando ist nur in der Zypper-Shell  sinnvoll."
 
 #: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
