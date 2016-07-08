@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 09:24+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 09:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -5954,7 +5954,7 @@ msgstr "인수 누락: "
 msgid ""
 "%s used together with %s, which contradict each other. This property will be "
 "left unchanged."
-msgstr "%s 와 %s 는 서로 모순된 구성입니다. 설정을 변경할 수 없었습니다."
+msgstr "%s이(가) 서로 모순된 %s과(와) 함께 사용되었습니다. 이 속성은 변경되지 않습니다."
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:72
@@ -5972,7 +5972,7 @@ msgstr "아니요"
 #: src/utils/prompt.cc:145 src/utils/prompt.cc:190
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
-msgstr "%u 초 내에 다시 시도합니다..."
+msgstr "%u초 후 재시도 중..."
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -6004,8 +6004,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
-"zypper 를 터미널없이 실행시키는 경우 '%s' 전체 옵션\n"
-"으로 zypper 의 기본 응답 프롬프트를 대신할 수 있습니다."
+"zypper를 터미널 없이 실행할 경우 \n"
+"zypper가 프롬프트에 대해 기본 응답을 사용하도록 하려면 '%s' 전역 옵션을 사용하십시오."
 
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
