@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 10:48+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -3326,7 +3326,7 @@ msgstr ""
 
 #: src/Zypper.cc:967
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "'no-gpg-checks'-Modus betreten."
+msgstr "Modus \"Keine GPG-Schlüsselprüfungen\" wird eingegeben."
 
 #: src/Zypper.cc:975
 #, c-format, boost-format
