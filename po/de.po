@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 10:43+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -2739,7 +2739,7 @@ msgstr ""
 #: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "Versuchen Sie es vorher jedoch mit  '%s' oder sogar mit '%s'."
+msgstr "Versuchen Sie es vorher jedoch mit '%s' oder sogar mit '%s'."
 
 #: src/repos.cc:3160
 msgid "Reading installed packages..."
