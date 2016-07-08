@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-08 12:16+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
 "\n"
 "Language: de\n"
@@ -4559,7 +4559,7 @@ msgstr "Unbekannter Übereinstimmungsmodus '%s'"
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Unbekannter Übereinstimmungsmodus %s für Schema %s."
+msgstr "Unbekannter Übereinstimmungsmodus %s für Schema %s"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
