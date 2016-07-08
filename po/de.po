@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 11:34+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 11:37+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -5875,8 +5875,8 @@ msgstr ""
 #: src/solve-commit.cc:855
 msgid "Problem occured during or after installation or removal of packages:"
 msgstr ""
-"Ein Problem trat während oder nach der Installation/Entfernung von Paketen "
-"auf:"
+"Während oder nach der Installation/dem Entfernung von Paketen ist ein "
+"Problem aufgetreten:"
 
 #: src/solve-commit.cc:863
 msgid "Installation has completed with error."
@@ -5892,21 +5892,20 @@ msgid ""
 "One of installed patches requires reboot of your machine. Reboot as soon as "
 "possible."
 msgstr ""
-"Einer der installierten Patches benötigt einen Neustart der Maschine. "
-"Starten Sie so schnell wie möglich neu."
+"Einer der installierten Patches erfordert einen Neustart des Computers. "
+"Führen Sie den Neustart so bald als möglich aus."
 
 #: src/solve-commit.cc:887
 msgid ""
 "One of installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
 msgstr ""
-"Einer der installierten Patches betrifft den Paketverwalter selbst. Führen "
-"Sie den Befehl nochmal aus, um alle anderen benötigten Patches zu "
-"installieren."
+"Einer der installierten Patches betrifft den Paketmanager selbst. Führen Sie "
+"das Kommando erneut aus, um weitere erforderliche Patches zu installieren."
 
 #: src/solve-commit.cc:905
 msgid "Dependencies of all installed packages are satisfied."
-msgstr "Abhängigkeiten aller installierten Pakete sind erfüllt."
+msgstr "Die Abhängigkeiten aller installierten Pakete sind berücksichtigt."
 
 #: src/solve-commit.cc:907 src/download.cc:129
 msgid "Nothing to do."
@@ -5935,7 +5934,7 @@ msgstr "Benutzer"
 #. process command name
 #: src/ps.cc:123
 msgid "Command"
-msgstr "Befehl"
+msgstr "Kommando"
 
 # menu item for selecting a file
 #. "list of deleted files or libraries accessed"
@@ -5953,15 +5952,15 @@ msgstr "Die folgenden aktiven Prozesse verwenden gelöschte Dateien:"
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
-msgstr "Sie möchten evtl. einige dieser Prozesse neu starten."
+msgstr "Diese Prozesse sollten neu gestartet werden."
 
 #: src/ps.cc:168
 #, c-format, boost-format
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
 msgstr ""
-"Siehe '%s' zu Informationen über die Bedeutung der Werte in der obigen "
-"Tabelle."
+"Informationen über die Bedeutung der Werte in der obigen Tabelle finden Sie "
+"unter '%s'."
 
 #: src/ps.cc:175
 msgid ""
@@ -5982,19 +5981,19 @@ msgstr ""
 #: src/source-download.cc:221
 #, c-format, boost-format
 msgid "Using download directory at '%s'."
-msgstr "Benutze das Download-Verzeichnis in '%s'."
+msgstr "Verwenden des Download-Verzeichnisses in '%s'."
 
 #: src/source-download.cc:231 src/source-download.cc:262
 msgid "Failed to read download directory"
-msgstr "Das Lesen des Download-Verzeichnisses ist fehlgeschlagen"
+msgstr "Fehler beim Lesen des Download-Verzeichnisses"
 
 #: src/source-download.cc:236
 msgid "Scanning download directory"
-msgstr "Durchsuche das Download-Verzeichnis"
+msgstr "Durchsuchen des Download-Verzeichnisses"
 
 #: src/source-download.cc:266
 msgid "Scanning installed packages"
-msgstr "Durchsuche installierte Pakete"
+msgstr "Absuchen der installierten Pakete"
 
 #: src/source-download.cc:285
 msgid "Installed packages:"
@@ -6028,8 +6027,8 @@ msgstr "Installiertes Paket"
 #: src/source-download.cc:370
 msgid "Use '--verbose' option for a full list of required source packages."
 msgstr ""
-"Benutzen Sie '--verbose' für eine vollständige Liste der erforderlichen "
-"Quellpakete."
+"Verwenden Sie die Option '--verbose', um eine vollständige Liste der "
+"erforderlichen Quellpakete zu erhalten."
 
 #: src/source-download.cc:379
 msgid "Deleting superfluous source packages"
@@ -6038,29 +6037,29 @@ msgstr "Löschen von überflüssigen Quellpaketen"
 #: src/source-download.cc:390
 #, c-format, boost-format
 msgid "Failed to remove source package '%s'"
-msgstr "Entfernen des Quellpaketes '%s' fehlgeschlagen"
+msgstr "Fehler beim Entfernen des Quellpaketes '%s'"
 
 #: src/source-download.cc:401
 msgid "No superfluous source packages to delete."
-msgstr "Es sind keine überflüssigen Quellpakete zu löschen."
+msgstr "Es sind keine überflüssigen Quellpakete zum Löschen vorhanden."
 
 #: src/source-download.cc:411
 msgid "Downloading required source packages..."
-msgstr "Herunterladen der erforderlichen Quellpakete..."
+msgstr "Erforderliche Quellpakete werden heruntergeladen..."
 
 #: src/source-download.cc:430
 #, c-format, boost-format
 msgid "Source package '%s' is not provided by any repository."
-msgstr "Das Quellpaket '%s' wird von keinem Repository angeboten."
+msgstr "Das Quellpaket '%s' wird von keinem Repository bereitgestellt."
 
 #: src/source-download.cc:449 src/source-download.cc:463
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
-msgstr "Fehler beim Herunterladen des Quellpaketes '%s'."
+msgstr "Fehler beim Herunterladen von Quellpaket '%s'."
 
 #: src/source-download.cc:474
 msgid "No source packages to download."
-msgstr "Es sind keine Quellpakete herunterzuladen."
+msgstr "Es sind keine Quellpakete für den Download verfügbar."
 
 #: src/search.cc:137
 msgid "System Packages"
@@ -6095,7 +6094,7 @@ msgstr "Keine Anbieter von '%s' gefunden."
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr "Achtung: "
+msgstr "Warnung:"
 
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
@@ -6110,12 +6109,12 @@ msgstr "fertig"
 #: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
 #: src/output/OutNormal.cc:321
 msgid "Retrieving:"
-msgstr "Abruf:"
+msgstr "Abrufen:"
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/output/OutNormal.cc:256
 msgid "starting"
-msgstr "starte"
+msgstr "Starten"
 
 #: src/output/OutNormal.cc:411
 msgid "No help available for this prompt."
@@ -6128,15 +6127,15 @@ msgstr "Keine Hilfe für diese Option verfügbar"
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/download.cc:114
 msgid "Argument resolves to no package"
-msgstr "Das Argument löst zu keinem Paket auf"
+msgstr "Argument löst sich nicht zu einem Paket auf"
 
 #: src/download.cc:136
 msgid "No prune to best version."
-msgstr "Keine Reduzierung zur besten Version."
+msgstr "Keine Bereinigung zur besten Version."
 
 #: src/download.cc:142
 msgid "Prune to best version..."
-msgstr "Reduzierung zur besten Version..."
+msgstr "Zur besten Version bereinigen..."
 
 #: src/download.cc:148
 msgid "Not downloading anything..."
@@ -6145,7 +6144,7 @@ msgstr "Es wird nichts heruntergeladen..."
 #: src/download.cc:190
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
-msgstr "Fehler beim Herunterladen von Paket '%s'."
+msgstr "Fehler beim Herunterladen des Pakets '%s'."
 
 #: src/download.cc:204
 #, c-format, boost-format
@@ -6155,7 +6154,7 @@ msgstr "Paket '%s' wird nicht heruntergeladen."
 #: src/PackageArgs.cc:204
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "'%s' wurde in den Paketnamen nicht gefunden. Es wird '%s' versucht."
+msgstr "'%s' wurde in den Paketnamen nicht gefunden. Versuch mit '%s'."
 
 #: src/PackageArgs.cc:219
 #, c-format, boost-format
@@ -6163,20 +6162,20 @@ msgid ""
 "Different package type specified in '%s' option and '%s' argument. Will use "
 "the latter."
 msgstr ""
-"Unterschiedlicher Pakettyp in der Option '%s' und im Argument '%s' "
-"angegeben. Letzteres wird verwendet."
+"Unterschiedliche Pakettypen in der Option '%s' und im Argument '%s' "
+"angegeben. Letzterer wird verwendet."
 
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "'%s' ist kein gültiger Paket- oder Fähigkeitsname."
+msgstr "'%s' ist weder ein Paketname noch eine Fähigkeit."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
 #: src/misc.cc:132
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Lizenz %s %s automatisch zustimmen."
+msgstr "Zustimmung zur Lizenz %s für %s wird automatisch gegeben."
 
 #. introduction
 #. translators: the first %s is the name of the package, the second
@@ -6198,8 +6197,8 @@ msgstr "Stimmen Sie den Bedingungen der Lizenz zu?"
 #: src/misc.cc:175
 msgid "Aborting installation due to the need for license confirmation."
 msgstr ""
-"Die Installation wird aufgrund der Notwendigkeit der Zustimmung zur Lizenz "
-"abgebrochen."
+"Die Installation wird abgebrochen, da dieser Vorgang eine Lizenzbestätigung "
+"erfordert."
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:178
@@ -6208,9 +6207,9 @@ msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
 msgstr ""
-"Bitte starten Sie die Operation im interaktiven Modus erneut und bestätigen "
-"Ihr Einverständnis mit den benötigten Lizenzen oder verwenden Sie die Option "
-"%s."
+"Starten Sie die Operation im interaktiven Modus erneut und bestätigen Sie "
+"Ihr Einverständnis mit den erforderlichen Lizenzen, oder verwenden Sie die "
+"Option %s."
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:187
