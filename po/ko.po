@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:23+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 06:24+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -1747,17 +1747,17 @@ msgstr "'%s' 리포지토리를 비활성화하는 중 오류가 발생했습니
 #: src/repos.cc:295
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
-msgstr "'%s' 로 부터 파일 회수 중 문제가 있습니다."
+msgstr "'%s'에서 파일을 검색하는 중 문제가 발생했습니다."
 
 #: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
 msgid "Please see the above error message for a hint."
-msgstr "오류에 대한 자세한 내용은 앞의 오류 메시지를 참고하세요."
+msgstr "자세한 내용은 위의 오류 메시지를 확인하십시오."
 
 #: src/repos.cc:308
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
-msgstr "'%s'에 대한 URI가 설정되어 있지 않습니다."
+msgstr "'%s'에 정의된 URI가 없습니다."
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: src/repos.cc:313
@@ -1765,9 +1765,7 @@ msgstr "'%s'에 대한 URI가 설정되어 있지 않습니다."
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr ""
-"%s('%s' 저장소에 대한) 로 한개 이상의 기본 URI (baseurl=URI) 항목을 설정해주"
-"세요."
+msgstr "%s('%s' 리포지토리)에 대한 기본 URI(baseurl=URI) 항목을 한 개 이상 추가하십시오."
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
