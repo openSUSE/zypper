@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-08 12:08+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 12:10+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
 "\n"
 "Language: de\n"
@@ -4251,11 +4251,11 @@ msgstr "Zuni-Sprache"
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr ""
-"Versuch, nicht existierenden Schlüssel %s in Schlüsselring %s zu importieren"
+"Versuch, nicht existierenden Schlüssel %s in Schlüsselbund %s zu importieren"
 
 #: zypp/KeyRing.cc:566
 msgid "Failed to delete key."
-msgstr "Löschen des Schlüssels fehlgeschlagen."
+msgstr "Fehler beim Löschen des Schlüssels."
 
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
@@ -4265,7 +4265,7 @@ msgstr "Signaturdatei %s nicht gefunden"
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Die Datei '%s' aus dem Repository '%s' kann nicht angeboten werden"
+msgstr "Datei '%s' aus Repository '%s' kann nicht zur Verfügung gestellt werden"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
@@ -4273,7 +4273,7 @@ msgstr "Das Repository enthält keine URL."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr "Dienst-Erweiterung unterstützt keine Attributänderung."
+msgstr "Das Dienst-Plugin unterstützt keine Änderung von Attributen."
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
@@ -4282,8 +4282,8 @@ msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
 msgstr ""
-"Paket %s wurde anscheinend während des Transfers beschädigt. Wollen Sie es "
-"erneut abrufen?"
+"Paket %s wurde anscheinend bei der Übertragung beschädigt. Möchten Sie "
+"erneut versuchen, es abzurufen?"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4294,15 +4294,16 @@ msgstr "Fehler beim Überprüfen der Signatur"
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr ""
-"Bereitstellen von Paket %s fehlgeschlagen. Wollen Sie es erneut abrufen?"
+"Paket %s konnte nicht bereitgestellt werden. Möchten Sie erneut versuchen, "
+"es abzurufen?"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
-msgstr "applydeltarpm-Prüfung fehlgeschlagen."
+msgstr "Applydeltarpm-Prüfung nicht bestanden."
 
 #: zypp/repo/PackageProvider.cc:525
 msgid "applydeltarpm failed."
-msgstr "applydeltarpm fehlgeschlagen."
+msgstr "Fehler bei applydeltarpm"
 
 #: zypp/ZYppFactory.cc:394
 #, c-format, boost-format
