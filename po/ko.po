@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 09:22+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -5912,7 +5912,7 @@ msgstr "호출기를 종료하려면 '%c'을(를) 누르십시오."
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
-msgstr "화살표 또는 pgUp/pgDown 키를 사용하여 텍스트를 행이나 페이지별로 스크롤합니다."
+msgstr "화살표 또는 <pgUp>/<pgDown> 키를 사용하여 텍스트를 행이나 페이지별로 스크롤합니다."
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
