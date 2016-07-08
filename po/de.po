@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 11:28+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 11:34+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -5648,7 +5648,7 @@ msgstr[1] "%d Probleme:"
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
 msgid "Specified capability not found"
-msgstr "Angegebene Fähigkeit nicht gefunden"
+msgstr "Angegebene Funktion nicht gefunden"
 
 #: src/solve-commit.cc:160
 #, c-format, boost-format
@@ -5657,7 +5657,7 @@ msgstr "Problem: %s"
 
 #: src/solve-commit.cc:179
 msgid "Resolving dependencies..."
-msgstr "Abhängigkeiten auflösen ..."
+msgstr "Abhängigkeiten werden aufgelöst..."
 
 #. translators: meaning --force-resolution and --no-force-resolution
 #: src/solve-commit.cc:220
@@ -5671,25 +5671,25 @@ msgstr "Auflösung erzwingen:"
 
 #: src/solve-commit.cc:330
 msgid "Verifying dependencies..."
-msgstr "Abhängigkeiten überprüfen ..."
+msgstr "Abhängigkeiten werden überprüft..."
 
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:378
 msgid "Computing upgrade..."
-msgstr "Aktualisierung berechnen ..."
+msgstr "Aktualisierung wird berechnet..."
 
 #: src/solve-commit.cc:392
 msgid "Generating solver test case..."
-msgstr "Auflöser-Testfall erzeugen ..."
+msgstr "Testfall für Auflösung wird erzeugt..."
 
 #: src/solve-commit.cc:394
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr "Auflöser-Testfall erfolgreich bei %s erzeugt."
+msgstr "Testfall für Auflösung erfolgreich unter %s erzeugt."
 
 #: src/solve-commit.cc:397
 msgid "Error creating the solver test case."
-msgstr "Fehler beim Erstellen des Auflöser-Testfalls."
+msgstr "Fehler beim Erstellen des Testfalls für Auflösung."
 
 #: src/solve-commit.cc:431
 #, c-format, boost-format
@@ -5703,7 +5703,7 @@ msgstr ""
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
 msgid "Checking for running processes using deleted libraries..."
-msgstr "Prüfung auf aktive Prozesse, die gelöschten Bibliotheken verwenden ..."
+msgstr "Prüfung auf aktive Prozesse mithilfe von gelöschten Bibliotheken..."
 
 #: src/solve-commit.cc:447 src/ps.cc:59
 msgid "Check failed:"
@@ -5720,13 +5720,14 @@ msgid ""
 "upgrade. You may wish to check and restart some of them. Run '%s' to list "
 "these programs."
 msgstr ""
-"Es gibt einige aktive Programme, die Dateien verwenden, die durch die letzte "
-"Aktualisierung gelöscht wurden. Sie können einige davon testen und neu "
-"starten wollen. Zum Auflisten dieser Programme starten Sie '%s'."
+"Einige laufende Programme verwenden Dateien, die durch eine kürzliche "
+"Aktualisierung gelöscht wurden. Überprüfen Sie die Programme, und starten "
+"Sie sie ggf. neu. Mit '%s' rufen Sie eine Liste der Programme auf."
 
 #: src/solve-commit.cc:468
 msgid "Update notifications were received from the following packages:"
-msgstr "Aktualisierungshinweise wurden von folgenden Paketen erhalten:"
+msgstr ""
+"Aktualisierungsbenachrichtigungen wurden von den folgenden Paketen empfangen:"
 
 #: src/solve-commit.cc:477
 #, c-format, boost-format
@@ -5739,15 +5740,15 @@ msgstr "j/n"
 
 #: src/solve-commit.cc:486
 msgid "View the notifications now?"
-msgstr "Hinweise jetzt anzeigen?"
+msgstr "Benachrichtigungen jetzt anzeigen?"
 
 #: src/solve-commit.cc:532
 msgid "Computing distribution upgrade..."
-msgstr "Distributionsaktualisierung berechnen ..."
+msgstr "Distributions-Aktualisierungen werden verarbeitet..."
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
-msgstr "Paketabhängigkeiten auflösen ..."
+msgstr "Paketabhängigkeiten werden aufgelöst..."
 
 #: src/solve-commit.cc:614
 msgid ""
@@ -5761,8 +5762,8 @@ msgstr ""
 #: src/solve-commit.cc:621
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
-"Root-Rechte werden benötigt, um beschädigte Paketabhängigkeiten zu "
-"reparieren."
+"Zur Reparatur beschädigter Paketabhängigkeiten sind Root-Berechtigungen "
+"erforderlich."
 
 #. translators: These are the "Continue?" prompt options corresponding to
 #. "Yes / No / show Problems / Versions / Arch / Repository /
@@ -5776,20 +5777,20 @@ msgstr ""
 #. ! \todo add c for changelog and x for explain (show the dep tree)
 #: src/solve-commit.cc:643
 msgid "y/n/p/v/a/r/m/d/g"
-msgstr "j/n/p/v/a/r/m/d/g"
+msgstr "j/n/p/v/a/r/h/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: src/solve-commit.cc:648
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
-"Ja, akzeptieren Sie die Zusammenfassung und fahren mit der Installation/"
-"Entfernung der Pakete fort."
+"Ja, die Zusammenfassung akzeptieren und mit der Installation/Entfernung der "
+"Pakete fortfahren."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: src/solve-commit.cc:650
 msgid "No, cancel the operation."
-msgstr "Nein, die Operation abbrechen."
+msgstr "Nein, den Vorgang abbrechen."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
 #: src/solve-commit.cc:652
@@ -5797,8 +5798,8 @@ msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
-"Auflöser ohne Zwangslösungs-Modus neu starten, um Abhängigkeitsprobleme "
-"anzuzeigen."
+"Auflöser im nicht erzwungenen Auflösungsmodus neu starten, um "
+"Abhängigkeitsprobleme anzuzeigen."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:654
@@ -5815,23 +5816,24 @@ msgstr "Anzeige der Paketarchitekturen ein-/ausschalten."
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
-"Anzeige der Repositories, aus denen die Pakete installiert werden, ein-/"
-"ausschalten."
+"Anzeige der Repositorys, aus denen die Pakete installiert werden, "
+"ein-/ausschalten."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:660
 msgid "Toggle display of package vendor names."
-msgstr "Anzeige der Paket-Anbieternamen ein-/ausschalten."
+msgstr "Anzeige der Namen der Paketanbieter ein-/ausschalten."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:662
 msgid "Toggle between showing all details and as few details as possible."
-msgstr "Anzeige zwischen allen Details/möglichst wenig Details umschalten."
+msgstr ""
+"Anzeige zwischen 'Alle Details' und 'Möglichst wenig Details' umschalten."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
 #: src/solve-commit.cc:664
 msgid "View the summary in pager."
-msgstr "Zusammenfassung im Anzeigeprogramm betrachten."
+msgstr "Zusammenfassung im Pager anzeigen."
 
 #: src/solve-commit.cc:774
 msgid "committing"
@@ -5865,10 +5867,10 @@ msgstr ""
 "Problem mit dem Repository oder dem Medium handeln. Versuchen Sie es mit "
 "einer der folgenden Maßnahmen:\n"
 "\n"
-" – Das letzte Kommando erneut ausführen\n"
-" – Die Repositories mit 'zypper refresh' aktualisieren\n"
-" – Ein anderes Installationsmedium (z. B. bei Beschädigung) verwenden\n"
-" – Ein anderes Repository verwenden"
+" – Das letzte Kommando erneut ausführen.\n"
+" – Das Repository mit 'zypper refresh' aktualisieren.\n"
+" – Ein anderes Installationsmedium (z.B. bei Beschädigung) verwenden.\n"
+" – Ein anderes Repository verwenden."
 
 #: src/solve-commit.cc:855
 msgid "Problem occured during or after installation or removal of packages:"
