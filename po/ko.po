@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:05+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 06:10+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -273,7 +273,7 @@ msgstr "%s-%s 제거 중"
 #: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr "%s 의 제거에 실패:"
+msgstr "%s 제거 실패:"
 
 #: src/callbacks/rpm.h:279
 #, boost-format, c-format
@@ -294,7 +294,7 @@ msgstr "%s의 설치에 실패:"
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
 msgid "Installation of %s-%s failed:"
-msgstr "%s-%s 의 설치에 실패:"
+msgstr "%s-%s 설치 실패:"
 
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:356
@@ -348,11 +348,11 @@ msgstr ""
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
-msgstr "다음의 쿼리는 일부 개체만 잠그고 원하는 것은 제거합니다:"
+msgstr "다음 쿼리는 제거할 객체와 동일한 객체를 잠급니다."
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr "다음의 쿼리는 개체 일부만 잠그고 일부는 잠금해제합니다:"
+msgstr "다음 쿼리는 잠금 해제할 객체의 일부를 잠급니다."
 
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
 msgid "Do you want to remove this lock?"
@@ -360,11 +360,11 @@ msgstr "이 잠금을 제거하시겠습니까?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr "다음의 쿼리는 어느것도 잠그지 않습니다:"
+msgstr "다음 쿼리는 모든 항목을 잠그지 않습니다."
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "델타 회수 중"
+msgstr "델타 검색 중"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
@@ -375,7 +375,7 @@ msgstr "델타 적용 중"
 #: src/callbacks/repo.h:103
 #, c-format, boost-format
 msgid "(%s unpacked)"
-msgstr "(%s 를 꾸러미 해제)"
+msgstr "(%s 압축 풀기)"
 
 #: src/callbacks/repo.h:112
 #, boost-format
@@ -385,7 +385,7 @@ msgstr "%1% 캐시에 있음"
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "%s %s-%s.%s 회수 중"
+msgstr "%s %s-%s.%s 검색 중"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
@@ -432,7 +432,7 @@ msgstr "I/O 오류"
 
 #: src/utils/prompt.h:160
 msgid "Invalid object"
-msgstr "잘못된 개체"
+msgstr "잘못된 객체"
 
 #: src/utils/prompt.h:167
 msgid "Error"
@@ -484,7 +484,7 @@ msgstr[0] "'%2%'에 대해 %1%개가 일치할 것입니다."
 #: src/info.cc:168
 #, c-format, boost-format
 msgid "%s '%s' not found."
-msgstr "%s '%s'를 찾을 수 없습니다."
+msgstr "%s '%s'을(를) 찾을 수 없습니다."
 
 #: src/info.cc:190
 #, c-format, boost-format
@@ -495,14 +495,14 @@ msgstr "%s %s에 대한 정보:"
 #: src/info.cc:206
 #, c-format, boost-format
 msgid "Info for type '%s' not implemented."
-msgstr "'%s' 형식에 대한 정보는 아직 제공되지 않습니다."
+msgstr "'%s' 유형의 정보가 구현되지 않았습니다."
 
 #. translators: package's repository (header)
 #: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
 #: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
 #: src/locks.cc:107 src/utils/misc.cc:249
 msgid "Repository"
-msgstr "저장소"
+msgstr "리포지토리"
 
 #: src/info.cc:255
 msgid "Support Level"
@@ -520,7 +520,7 @@ msgstr "상태"
 #: src/info.cc:265
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
-msgstr "기한 마감 (%s 버전이 설치되었음)"
+msgstr "만료(버전 %s 설치됨)"
 
 #: src/info.cc:269
 msgid "up-to-date"
@@ -543,7 +543,7 @@ msgstr "범주"
 
 #: src/info.cc:315 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
-msgstr "긴급"
+msgstr "심각도"
 
 #: src/info.cc:316
 msgid "Created On"
@@ -555,7 +555,7 @@ msgstr "시스템 다시 시작 필요"
 
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
-msgstr "꾸러미 관리자 재시작 필요"
+msgstr "패키지 관리자 재시작 필요"
 
 #. print interactive flags the same style as list-patches
 #: src/info.cc:327 src/info.cc:330 src/utils/misc.cc:253 src/utils/misc.cc:294
@@ -564,7 +564,7 @@ msgstr "대화형"
 
 #: src/info.cc:354 src/search.cc:318
 msgid "Recommended"
-msgstr "권장사항"
+msgstr "추천"
 
 #: src/info.cc:356 src/search.cc:320
 msgid "Suggested"
