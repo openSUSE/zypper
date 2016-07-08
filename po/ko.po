@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 06:38+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2048,7 +2048,7 @@ msgstr "'%s'에 대한 원시 메타 데이터 캐시를 정리하는 중입니�
 #: src/repos.cc:1453
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr "%s '%s'의 원시 메타 데이터 캐시를 유지하고 있습니다."
+msgstr "%s '%s'에 대한 원시 메타 데이터 캐시를 유지하고 있습니다."
 
 #. translators: meaning the cached rpm files
 #: src/repos.cc:1460
