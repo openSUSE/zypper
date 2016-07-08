@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 06:47+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 06:51+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2237,22 +2237,22 @@ msgstr "'%s' 리포지토리가 비활성화되었습니다."
 #: src/repos.cc:2048
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "'%s' 저장소의 자동 새로 고침을 활성화 시켰습니다."
+msgstr "'%s' 리포지토리의 자동 새로 고침이 활성화되었습니다."
 
 #: src/repos.cc:2050
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "'%s' 저장소의 자동 새로 고침을 비활성화 시켰습니다."
+msgstr "'%s' 리포지토리의 자동 새로 고침이 비활성화되었습니다."
 
 #: src/repos.cc:2057
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "'%s' 저장소의 RPM 파일 캐시 설정을 활성화 시켰습니다."
+msgstr "'%s' 리포지토리의 RPM 파일 캐싱이 활성화되었습니다."
 
 #: src/repos.cc:2059
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "'%s' 저장소의 RPM 파일 캐시 설정을 비활성화 시켰습니다."
+msgstr "'%s' 리포지토리의 RPM 파일 캐싱이 비활성화되었습니다."
 
 #: src/repos.cc:2066
 #, c-format, boost-format
@@ -2267,58 +2267,57 @@ msgstr "'%s' 리포지토리에 대해 GPG 확인이 비활성화되었습니다
 #: src/repos.cc:2074
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "'%s' 저장소의 우선순위가 %d로 지정 되었습니다."
+msgstr "'%s' 리포지토리의 우선순위가 %d(으)로 설정되었습니다."
 
 #: src/repos.cc:2080
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "'%s' 저장소의 이름이 '%s'로 지정 되었습니다."
+msgstr "'%s' 리포지토리의 이름이 '%s'(으)로 설정되었습니다."
 
 #: src/repos.cc:2091
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
-msgstr "'%s' 저장소 변경된 부분이 없습니다."
+msgstr "'%s' 리포지토리에 변경할 항목이 없습니다."
 
 #: src/repos.cc:2098
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
-msgstr "%s 저장소를 바꾸지 않은 채로 놔둡니다."
+msgstr "%s 리포지토리를 변경하지 않은 채로 둡니다."
 
 #: src/repos.cc:2130
 msgid "Error reading services:"
-msgstr "서비스 읽는 중 오류:"
+msgstr "서비스를 읽는 중 오류 발생:"
 
 #: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "별칭, 번호 또는 URI 로 '%s' 서비스를 찾을 수 없습니다."
+msgstr "별칭, 번호 또는 URI별로 '%s' 서비스를 찾을 수 없습니다."
 
 #: src/repos.cc:2222
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
-msgstr "'%s' 를 이용하여 정의된 서비스의 목록을 출력할 수 있습니다."
+msgstr "'%s'을(를) 사용하여 정의된 서비스 목록을 가져옵니다."
 
 #: src/repos.cc:2464
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
-msgstr ""
-"정의된 서비스가 없습니다. '%s' 를 사용하여 저장소를 한개이상 추가하세요."
+msgstr "정의된 서비스가 없습니다. '%s' 명령을 사용하여 서비스를 한 개 이상 추가하십시오."
 
 #: src/repos.cc:2547
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "서비스 '%s' 별칭은 이미 있습니다. 다른 별칭을 사용해주세요."
+msgstr "별칭이 '%s'인 서비스가 이미 있습니다. 다른 별칭을 사용하십시오."
 
 #  progress stages
 #: src/repos.cc:2554
 #, c-format, boost-format
 msgid "Error occured while adding service '%s'."
-msgstr "'%s' 서비스를 추가하는 도중 오류가 발생했습니다."
+msgstr "'%s' 서비스를 추가하는 중 오류가 발생했습니다."
 
 #: src/repos.cc:2560
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
-msgstr "'%s' 서비스가 성공적으로 추가 되었습니다."
+msgstr "'%s' 서비스가 추가되었습니다."
 
 #: src/repos.cc:2598
 #, c-format, boost-format
@@ -2338,7 +2337,7 @@ msgstr "'%s' 서비스를 새로 고치는 중입니다."
 #: src/repos.cc:2630 src/repos.cc:2640
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "서비스 '%s' 에 대한 저장소 색인 파일 회수중 문제:"
+msgstr "'%s' 서비스를 위해 리포지토리 색인 파일을 검색하는 중 문제 발생:"
 
 #: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
