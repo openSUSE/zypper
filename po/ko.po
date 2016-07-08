@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-08 08:59+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -5024,7 +5024,7 @@ msgstr "%s은(는) 현재 %s과(와) 함께 사용할 수 없습니다."
 
 #: src/Zypper.cc:4148
 msgid "Source package name is a required argument."
-msgstr "소스 패키지 이름이 필수 인수입니다."
+msgstr "소스 패키지 이름은 필수 인수입니다."
 
 #: src/Zypper.cc:4231
 msgid "Mode is set to 'match-exact'"
