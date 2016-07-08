@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-08 12:08+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
 "\n"
 "Language: de\n"
@@ -2489,7 +2489,7 @@ msgstr "Efik"
 #. language code: egy
 #: zypp/LanguageCode.cc:411
 msgid "Egyptian (Ancient)"
-msgstr "Ägyptisch"
+msgstr "Altägyptisch"
 
 #. language code: eka
 #: zypp/LanguageCode.cc:413
