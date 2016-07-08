@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 09:30+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 09:40+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -283,7 +283,7 @@ msgstr "Die Verwendung dieser Datei auf eigene Gefahr entsperren."
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:363
 msgid "Discard the file."
-msgstr "Verwerfe die Datei."
+msgstr "Datei verwerfen."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:368
@@ -294,7 +294,7 @@ msgstr "Entsperren oder verwerfen?"
 #: src/callbacks/rpm.h:151
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
-msgstr "Aktuell: %s  (%s, %s)"
+msgstr "Wird ausgeführt: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:208
 #, boost-format, c-format
@@ -305,12 +305,12 @@ msgstr "%s 1 wird entfernt"
 #: src/callbacks/rpm.h:213
 #, c-format, boost-format
 msgid "Removing %s-%s"
-msgstr "%s-%s wird entfernt"
+msgstr "%s-%s entfernen"
 
 #: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr "Entfernung von %s fehlgeschlagen:"
+msgstr "Entfernen von %s fehlgeschlagen:"
 
 #: src/callbacks/rpm.h:279
 #, boost-format, c-format
@@ -321,7 +321,7 @@ msgstr "%s wird installiert"
 #: src/callbacks/rpm.h:284
 #, c-format, boost-format
 msgid "Installing: %s-%s"
-msgstr "Installation von: %s-%s"
+msgstr "Installieren: %s-%s"
 
 #: src/callbacks/rpm.h:308
 #, boost-format, c-format
@@ -336,7 +336,7 @@ msgstr "Installation von %s-%s fehlgeschlagen:"
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:356
 msgid "Checking for file conflicts:"
-msgstr "Test auf Dateikonflikte:"
+msgstr "Überprüfung auf Dateikonflikte läuft:"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:390
@@ -346,9 +346,9 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
-"Das Testen auf Dateikonflikten macht es notwendig nicht installierte Pakete "
-"im Voraus herunterzuladen, um auf deren Dateiliste zugreifen zu können.Für "
-"Details sehen Sie nach der Option '%1%' in der Manpage von zypper."
+"Für die Überprüfung auf Dateikonflikte müssen zunächst nicht installierte "
+"Pakete heruntergeladen werden, damit der Zugriff auf die Dateilisten möglich "
+"ist. Weitere Informationen siehe Option '%1%' auf der Zypper-man-Seite."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
@@ -376,7 +376,7 @@ msgstr[1] "%1% Dateikonflikte festgestellt:"
 
 #: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
-msgstr "Im Konflikt stehende Dateien werden ersetzt."
+msgstr "Die im Konflikt stehenden Dateien werden ersetzt."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
 #: src/callbacks/rpm.h:422
@@ -385,10 +385,10 @@ msgid ""
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
 msgstr ""
-"Dateikonflikte passieren, wenn zwei Pakete versuchen Dateien mit dem "
-"gleichen Namen, aber unterschiedlichen Inhalten, zu installieren. Wenn Sie "
-"fortfahren, werden die im Konflikt stehenden Dateien ersetzt und verlieren "
-"ihren vorherigen Inhalt."
+"Dateikonflikte treten auf, wenn zwei Pakete versuchen, Dateien mit demselben "
+"Namen, jedoch anderen Inhalten zu installieren. Wenn Sie den Vorgang "
+"fortsetzen, werden die im Konflikt stehenden Dateien ersetzt, wobei der "
+"bisherige Inhalt verloren geht."
 
 #: src/callbacks/locks.h:27
 msgid ""
@@ -399,11 +399,11 @@ msgstr ""
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
 msgstr ""
-"Die folgende Anfrage sperrt einige der Objekte, die Sie entsperren wollen:"
+"Die folgende Anfrage sperrt einige der Objekte, die entsperrt werden sollen:"
 
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
 msgid "Do you want to remove this lock?"
-msgstr "Wollen Sie diese Sperre entfernen?"
+msgstr "Soll diese Sperre aufgehoben werden?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
@@ -411,12 +411,12 @@ msgstr "Die folgende Anfrage sperrt nichts:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Delta wird abgerufen"
+msgstr "Delta abrufen"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
 msgid "Applying delta"
-msgstr "Delta wird angewendet"
+msgstr "Delta anwenden"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: src/callbacks/repo.h:103
@@ -427,20 +427,20 @@ msgstr "(%s entpackt)"
 #: src/callbacks/repo.h:112
 #, boost-format
 msgid "In cache %1%"
-msgstr "Im Zwischenspeicher %1%"
+msgstr "Im Cache %1%"
 
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "%s %s-%s.%s wird abgerufen"
+msgstr "%s %s-%s.%s abrufen"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
-msgstr "Überprüfung der Signatur schlug fehl"
+msgstr "Fehler beim Überprüfen der Signatur"
 
 #: src/callbacks/repo.h:236
 msgid "Accepting package despite the error."
-msgstr "Trotz eines Fehlers das Paket akzeptieren."
+msgstr "Das Paket trotz des Fehlers akzeptieren."
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -476,11 +476,11 @@ msgstr "Nicht gefunden"
 # error box title
 #: src/utils/prompt.h:160
 msgid "I/O error"
-msgstr "E/A-Fehler"
+msgstr "Ein-/Ausgabefehler"
 
 #: src/utils/prompt.h:160
 msgid "Invalid object"
-msgstr "Ungültiges Objekt"
+msgstr "Objekt ungültig"
 
 #: src/utils/prompt.h:167
 msgid "Error"
@@ -536,7 +536,7 @@ msgstr "%s '%s' nicht gefunden."
 #: src/info.cc:190
 #, c-format, boost-format
 msgid "Information for %s %s:"
-msgstr "Informationen für %s %s:"
+msgstr "Informationen zu %s %s:"
 
 #. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
 #: src/info.cc:206
@@ -602,7 +602,7 @@ msgstr "Neustart erforderlich"
 
 #: src/info.cc:319
 msgid "Package Manager Restart Required"
-msgstr "Neustart des Paketverwalters erforderlich"
+msgstr "Neustart des Paketmanagers erforderlich"
 
 #. print interactive flags the same style as list-patches
 #: src/info.cc:327 src/info.cc:330 src/utils/misc.cc:253 src/utils/misc.cc:294
@@ -665,7 +665,7 @@ msgstr "Ist Basis"
 
 #: src/info.cc:485
 msgid "End of Support"
-msgstr "Ende der Unterstützung"
+msgstr "Ende des Supports"
 
 #: src/info.cc:485 src/info.cc:493 src/info.cc:524
 msgid "undefined"
@@ -681,19 +681,19 @@ msgstr "ungültiger CPE-Name"
 
 #: src/info.cc:498
 msgid "Update Repositories"
-msgstr "Repositories aktualisieren"
+msgstr "Repositorys aktualisieren"
 
 #: src/info.cc:506
 msgid "Content Id"
-msgstr "Inhalt-ID"
+msgstr "Inhalts-ID"
 
 #: src/info.cc:513
 msgid "Provided by enabled repository"
-msgstr "Von einem aktivierten Repository angeboten"
+msgstr "Durch aktiviertes Repository bereitgestellt"
 
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
-msgstr "Nicht von irgendeinem aktivierten Repository angeboten"
+msgstr "Nicht durch ein aktiviertes Repository bereitgestellt"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -838,7 +838,7 @@ msgstr "Produkt '%s' nicht gefunden."
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "Schema '%s' nicht gefunden."
+msgstr "Muster '%s' nicht gefunden."
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
@@ -854,27 +854,27 @@ msgstr "Objekt '%s' nicht gefunden."
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "Paket '%s' wurde in den angegebenen Repositories nicht gefunden."
+msgstr "Paket '%s' wurde in den angegebenen Repositorys nicht gefunden."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Patch '%s' wurde in den angegebenen Repositories nicht gefunden."
+msgstr "Patch '%s' wurde in den angegebenen Repositorys nicht gefunden."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Produkt '%s' wurde in den angegebenen Repositories nicht gefunden."
+msgstr "Produkt '%s' wurde in den angegebenen Repositorys nicht gefunden."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "Schema '%s' wurde in den angegebenen Repositories nicht gefunden."
+msgstr "Muster '%s' wurde in den angegebenen Repositorys nicht gefunden."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Quellpaket '%s' wurde in den angegebenen Repositories nicht gefunden."
+msgstr "Quellpaket '%s' wurde in den angegebenen Repositoris nicht gefunden."
 
 #. just in case
 #: src/RequestFeedback.cc:71
