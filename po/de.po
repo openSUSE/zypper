@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 11:39+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2016-07-08 11:43+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -3322,7 +3322,8 @@ msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
-"Patches, die einen Reboot verlangen, werden nicht als interaktiv behandelt."
+"Patches mit der Markierung 'rebootSuggested' werden als nicht interaktiv "
+"behandelt."
 
 #: src/Zypper.cc:967
 msgid "Entering 'no-gpg-checks' mode."
@@ -6239,7 +6240,7 @@ msgstr "Installierte Pakete: %d"
 #: src/misc.cc:258
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "Installierte Pakete mit Gegenstücken in Repositories: %d"
+msgstr "Installierte Pakete mit Pendants in Repositorys: %d"
 
 #: src/misc.cc:259
 #, c-format, boost-format
@@ -6249,12 +6250,12 @@ msgstr "Installierte Pakete mit EULAs: %d"
 #: src/misc.cc:289
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
-msgstr "Das Paket '%s' hat das Quellpaket '%s'."
+msgstr "Das Paket '%s' enthält das Quellpaket '%s'."
 
 #: src/misc.cc:295
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "Das Quellpaket '%s' für das Paket '%s' wurde nicht gefunden."
+msgstr "Das Quellpaket '%s' für Paket '%s' wurde nicht gefunden."
 
 #: src/misc.cc:373
 #, c-format, boost-format
@@ -6279,7 +6280,7 @@ msgstr "Problem beim Installieren des Quellpakets %s-%s:"
 #. translators: locks table value
 #: src/locks.cc:24 src/locks.cc:128
 msgid "(any)"
-msgstr "(jedes)"
+msgstr "(beliebig)"
 
 #. translators: locks table value
 #: src/locks.cc:26 src/locks.cc:125
@@ -6320,7 +6321,7 @@ msgstr "Problem beim Hinzufügen der Paketsperre:"
 
 #: src/locks.cc:257
 msgid "Specified lock has been successfully removed."
-msgstr "Die angegebene Sperre wurde erfolgreich entfernt."
+msgstr "Festgelegte Sperre wurde erfolgreich entfernt."
 
 #: src/locks.cc:302
 msgid "No lock has been removed."
@@ -6339,15 +6340,13 @@ msgstr "Problem beim Entfernen der Paketsperre:"
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
-msgstr "Erstellen Sie bitte darüber einen Bug-Report."
+msgstr "Senden Sie einen Fehlerbericht zu diesem Problem."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr ""
-"Anweisungen finden Sie unter http://de.opensuse.org/SDB:"
-"Zypper_Problemlösungen."
+msgstr "Anweisungen finden Sie unter http://de.opensuse.org/Zypper/Fehlersuche."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
@@ -6356,7 +6355,7 @@ msgstr "Zu viele Argumente."
 #: src/utils/messages.cc:56
 #, c-format, boost-format
 msgid "The '--%s' option has currently no effect."
-msgstr "Die Option '--%s' hat momentan keinen Effekt."
+msgstr "Die Option '--%s' hat zurzeit keinen Effekt."
 
 #: src/utils/messages.cc:74
 #, c-format, boost-format
@@ -6365,10 +6364,10 @@ msgid ""
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
 msgstr ""
-"Sie haben sich dafür entschieden ein Problem mit dem Herunterladen oder der "
-"Installation eines Pakets zu ignorieren, was möglicherweise zu beschädigten "
-"Abhängigkeiten anderer Pakete führen kann. Es wird empfohlen '%s' zu "
-"starten, nachdem die Operation beendet wurde."
+"Ihre Wahl, ein Problem mit dem Herunterladen oder der Installation eines "
+"Pakets zu ignorieren, führt möglicherweise zu beschädigten Abhängigkeiten "
+"anderer Pakete. Es wird empfohlen, nach Beenden des Vorgangs '%s' "
+"auszuführen."
 
 #: src/utils/pager.cc:32
 #, c-format, boost-format
@@ -6378,24 +6377,23 @@ msgstr "Drücken Sie '%c', um den Pager zu beenden."
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
-"Verwenden Sie die Pfeiltasten oder die Tasten BildAuf/BildAb, um den Text "
-"zeilen- oder seitenweise zu blättern."
+"Verwenden Sie die Tasten BildAuf/BildAb, um den Text zeilen- oder "
+"seitenweise zu blättern."
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
-"Verwenden Sie die Enter- oder Leerzeichen-Taste, um den Text zeilen- oder "
+"Verwenden Sie die Eingabe- oder Leertaste, um den Text zeilen- oder "
 "seitenweise zu blättern."
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
-msgstr "Konfigurationsdatei-Analyse konnte nicht initialisiert werden."
+msgstr "Konfigurationsdatei-Analyseprogramm konnte nicht initialisiert werden."
 
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
 msgstr ""
-"Augeas-Fehler: Das Einstellen der zu ladenden Konfigurationsdatei ist "
-"fehlgeschlagen."
+"Augeas-Fehler: Fehler beim Festlegen der zu ladenden Konfigurationsdatei."
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
@@ -6403,7 +6401,7 @@ msgstr "Die Konfigurationsdateien konnten nicht analysiert werden."
 
 #: src/utils/Augeas.cc:99
 msgid "Error parsing zypper.conf:"
-msgstr "Fehler bei der Analyse der zypper.conf:"
+msgstr "Fehler bei der Analyse von zypper.conf:"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -6426,8 +6424,8 @@ msgid ""
 "%s used together with %s, which contradict each other. This property will be "
 "left unchanged."
 msgstr ""
-"%s wurde zusammen mit %s verwendet, die sich gegenseitig aufheben. Diese "
-"Einstellung wird unverändert bleiben."
+"%s wurde zusammen mit %s verwendet, welche sich gegenseitig aufheben. Diese "
+"Einstellung wird nicht geändert."
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:72
@@ -6447,7 +6445,7 @@ msgstr "nein"
 #: src/utils/prompt.cc:145 src/utils/prompt.cc:190
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
-msgstr "neuer Versuch in %u Sekunden ..."
+msgstr "Neuversuch in %u Sekunden..."
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -6468,7 +6466,7 @@ msgstr[1] "'%s' nach %u Sekunden automatisch wählen."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
-msgstr "Erneuter Versuch ..."
+msgstr "Neuversuch..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
@@ -6482,7 +6480,7 @@ msgid ""
 msgstr ""
 "Wenn Sie Zypper ohne ein Terminal ausführen, verwenden Sie die globale "
 "Option '%s',\n"
-"damit Zypper die Standardantworten bei Fragen verwendet."
+"damit Zypper die Standardantworten bei Eingabeaufforderungen verwendet."
 
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
@@ -6494,7 +6492,7 @@ msgstr "Ungültige Antwort '%s'."
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
-"Geben Sie '%s' für '%s' oder %s' für '%s' ein, wenn nichts anderes bei Ihnen "
+"Geben Sie '%s' für '%s' oder '%s' für '%s' ein, wenn nichts anderes "
 "funktioniert."
 
 #: src/utils/misc.cc:113
@@ -6574,7 +6572,7 @@ msgstr "unbestimmt"
 #. << _("Repository")
 #: src/utils/misc.cc:289
 msgid "Issue"
-msgstr "Thema"
+msgstr "Eintrag"
 
 #: src/utils/misc.cc:290
 msgid "No."
@@ -6582,11 +6580,13 @@ msgstr "Nr."
 
 #: src/utils/misc.cc:291
 msgid "Patch"
-msgstr "Aktualisierung"
+msgstr "Patch"
 
 #: src/utils/misc.cc:367
 msgid "Specified local path does not exist or is not accessible."
-msgstr "Der angegebene lokale Pfad existiert nicht oder ist nicht zugänglich."
+msgstr ""
+"Der angegebene lokale Pfad existiert nicht oder es kann nicht auf ihn "
+"zugegriffen werden."
 
 #: src/utils/misc.cc:379
 msgid "Given URI is invalid"
@@ -6596,16 +6596,16 @@ msgstr "Angegebener URI ist ungültig"
 #. translators: don't translate '<platform>'
 #: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
-msgstr "Nicht in der Lage einen Wert für <Plattform> zu schätzen."
+msgstr "Wert für <Plattform> kann nicht geschätzt werden."
 
 #: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
-msgstr "Bitte verwenden Sie obs://<Projekt>/<Plattform>"
+msgstr "obs://<Projekt>/<Plattform> verwenden"
 
 #: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
 msgid "Example: %s"
-msgstr "Beispiel:  %s"
+msgstr "Beispiel: %s"
 
 #: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
@@ -6613,17 +6613,16 @@ msgstr "Ungültiger OBS-URI."
 
 #: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
-msgstr "Korrektes Format ist obs://<projekt>/[platform]"
+msgstr "Das korrekte Format ist: obs://<Projekt>/[Plattform]"
 
 #: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
-"Problem beim Kopieren der angegebenen RPM-Datei ins "
-"Zwischenspeicherverzeichnis."
+"Problem beim Kopieren der angegebenen RPM-Datei zum Cache-Ververzeichnis."
 
 #: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
-msgstr "Vielleicht ist die Festplatte voll."
+msgstr "Möglicherweise reicht Ihr Speicherplatz nicht aus."
 
 #: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
@@ -6631,22 +6630,22 @@ msgstr "Problem beim Abrufen der angegebenen RPM-Datei"
 
 #: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
-msgstr "Bitte überprüfen Sie, ob die Datei zugänglich ist."
+msgstr "Überprüfen Sie, ob auf die Datei zugegriffen werden kann."
 
 #: src/utils/misc.cc:686
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
-msgstr "Unbekannter Abrufmodus '%s'."
+msgstr "Unbekannter Download-Modus '%s'"
 
 #: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Available download modes: %s"
-msgstr "Verfügbare Abrufmodi: %s"
+msgstr "Verfügbare Download-Modi: %s"
 
 #: src/utils/misc.cc:701
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
-msgstr "Option '%s' überschreibt '%s'."
+msgstr "Option '%s' setzt '%s' außer Kraft."
 
 #~ msgid "Name: "
 #~ msgstr "Name: "
