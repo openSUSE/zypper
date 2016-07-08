@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-08 09:26+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-08 09:27+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -6010,13 +6010,13 @@ msgstr ""
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
-msgstr "'%s' 는 잘못된 대답입니다."
+msgstr "잘못된 대답 '%s'입니다."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:326
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr "잘 동작하지 않는 경우, '%s' 에는 '%s' 를 '%s' 에는 '%s' 을 입력하세요."
+msgstr "아무것도 실행되지 않는 경우 '%s'('%s'의 경우) 또는 '%s'('%s'의 경우)을(를) 입력하십시오."
 
 #: src/utils/misc.cc:113
 msgid "package"
@@ -6088,11 +6088,11 @@ msgstr "결정되지 않음"
 #. << _("Repository")
 #: src/utils/misc.cc:289
 msgid "Issue"
-msgstr "이슈"
+msgstr "문제"
 
 #: src/utils/misc.cc:290
 msgid "No."
-msgstr "번호."
+msgstr "번호"
 
 #: src/utils/misc.cc:291
 msgid "Patch"
@@ -6100,11 +6100,11 @@ msgstr "패치"
 
 #: src/utils/misc.cc:367
 msgid "Specified local path does not exist or is not accessible."
-msgstr "지정한 내부 경로는 존재하지 않거나 접근할 수 없습니다."
+msgstr "지정된 로컬 경로가 없거나, 액세스할 수 없습니다."
 
 #: src/utils/misc.cc:379
 msgid "Given URI is invalid"
-msgstr "주어진 URI는 잘못되었음"
+msgstr "지정된 URI가 잘못되었습니다."
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
@@ -6131,15 +6131,15 @@ msgstr "올바른 형식은 obs://<project>/[platform]입니다."
 
 #: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "지정한 RPM 파일에서 캐시 디렉터리로 복사하는 도중 문제가 발생했습니다."
+msgstr "지정된 RPM 파일을 캐시 디렉토리에 복사하는 중 문제가 발생했습니다."
 
 #: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
-msgstr "실행하기엔 디스크의 용량이 부족한것 같습니다."
+msgstr "디스크 용량이 부족한 것 같습니다."
 
 #: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
-msgstr "지정한 RPM 파일의 회수 중 문제"
+msgstr "지정한 RPM 파일 검색 문제"
 
 #: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
