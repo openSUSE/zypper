@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-09 08:48+0000\n"
+"PO-Revision-Date: 2016-07-09 08:50+0000\n"
 "Last-Translator: Egor Vakhnitsky <Egor.Vakhnitsky@lqs-lionbridge.com>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
@@ -180,7 +180,7 @@ msgstr "libhal_set_dbus_connection: не удалось установить п�
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "Не удалось инициализировать контекст HAL -- не запущен hald?"
+msgstr "Не удалось инициализировать контекст HAL – не запущен hald?"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
