@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-09 09:30+0000\n"
+"PO-Revision-Date: 2016-07-09 09:34+0000\n"
 "Last-Translator: Egor Vakhnitsky <Egor.Vakhnitsky@lqs-lionbridge.com>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
@@ -1721,7 +1721,7 @@ msgstr "Того"
 #. :TGO:768:
 #: zypp/CountryCode.cc:372
 msgid "Thailand"
-msgstr "Тайланд"
+msgstr "Таиланд"
 
 #. :THA:764:
 #: zypp/CountryCode.cc:373
@@ -1793,7 +1793,7 @@ msgstr "Уганда"
 #. :UGA:800:
 #: zypp/CountryCode.cc:386
 msgid "United States Minor Outlying Islands"
-msgstr "Малые Тихоокеанские Отдаленные Острова США"
+msgstr "Внешние малые острова США"
 
 #. :UMI:581:
 #: zypp/CountryCode.cc:387
@@ -1823,7 +1823,7 @@ msgstr "Сент-Винсент и Гренадины"
 #. :VCT:670:
 #: zypp/CountryCode.cc:392
 msgid "Venezuela"
-msgstr "Венесуэлла"
+msgstr "Венесуэла"
 
 #. :VEN:862:
 #: zypp/CountryCode.cc:393
