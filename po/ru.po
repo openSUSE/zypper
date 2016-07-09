@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-09 09:18+0000\n"
+"PO-Revision-Date: 2016-07-09 09:26+0000\n"
 "Last-Translator: Egor Vakhnitsky <Egor.Vakhnitsky@lqs-lionbridge.com>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
@@ -1328,7 +1328,7 @@ msgstr "Ливия"
 #. :LBY:434:
 #: zypp/CountryCode.cc:293
 msgid "Morocco"
-msgstr "Морокко"
+msgstr "Марокко"
 
 #. :MAR:504:
 #: zypp/CountryCode.cc:294
@@ -1522,7 +1522,7 @@ msgstr "Французская Полинезия"
 #. :PYF:258:
 #: zypp/CountryCode.cc:332
 msgid "Papua New Guinea"
-msgstr "Папуа Новая Гвинея"
+msgstr "Папуа – Новая Гвинея"
 
 #. :PNG:598:
 #: zypp/CountryCode.cc:333
@@ -1557,7 +1557,7 @@ msgstr "Пуэрто-Рико"
 #. :PRI:630:
 #: zypp/CountryCode.cc:339
 msgid "Palestinian Territory"
-msgstr "Паллестина"
+msgstr "Палестина"
 
 #. :PSE:275:
 #: zypp/CountryCode.cc:340
@@ -1616,7 +1616,7 @@ msgstr "Соломоновы острова"
 #. :SLB:090:
 #: zypp/CountryCode.cc:351
 msgid "Seychelles"
-msgstr "Сейшеллы"
+msgstr "Сейшелы"
 
 #. :SYC:690:
 #: zypp/CountryCode.cc:352
