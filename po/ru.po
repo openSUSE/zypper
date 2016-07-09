@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-09 09:26+0000\n"
+"PO-Revision-Date: 2016-07-09 09:27+0000\n"
 "Last-Translator: Egor Vakhnitsky <Egor.Vakhnitsky@lqs-lionbridge.com>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
@@ -1646,7 +1646,7 @@ msgstr "Словения"
 #. :SVN:705:
 #: zypp/CountryCode.cc:357
 msgid "Svalbard and Jan Mayen"
-msgstr "Свальбард и Ян Майен"
+msgstr "Шпицберген и Ян-Майен"
 
 #. :SJM:744:
 #: zypp/CountryCode.cc:358
