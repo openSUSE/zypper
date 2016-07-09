@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-04 01:24+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"PO-Revision-Date: 2016-07-09 08:08+0000\n"
+"Last-Translator: Koichi Miyashiro <Koichi.Miyashiro@lqs-lionbridge.com>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
 "Language: ja\n"
@@ -50,11 +50,11 @@ msgstr "URLコンポーネントを解析できません"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
-msgstr "相互排他機能の属性を初期化できません"
+msgstr "相互排他属性を初期化できません"
 
 #: zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
-msgstr "再帰相互排他機能の属性を設定できません"
+msgstr "再帰相互排他的属性を設定できません"
 
 #: zypp/thread/Mutex.cc:47
 msgid "Can't initialize recursive mutex"
@@ -62,7 +62,7 @@ msgstr "再帰相互排他機能を初期化できません"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr "相互排他機能の権利を取得できません"
+msgstr "mutexロックを取得できません"
 
 #: zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
@@ -168,7 +168,7 @@ msgstr "dbus接続を作成できません"
 
 #: zypp/target/hal/HalContext.cc:242
 msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: libhalコンテキストを作成できません"
+msgstr "libhal_ctx_new:libhalコンテキストを作成できません"
 
 #: zypp/target/hal/HalContext.cc:257
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
