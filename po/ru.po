@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-09 09:08+0000\n"
+"PO-Revision-Date: 2016-07-09 09:18+0000\n"
 "Last-Translator: Egor Vakhnitsky <Egor.Vakhnitsky@lqs-lionbridge.com>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
@@ -946,7 +946,7 @@ msgstr "Доминика"
 #. :DMA:212:
 #: zypp/CountryCode.cc:216
 msgid "Dominican Republic"
-msgstr "Доминиканская республика"
+msgstr "Доминиканская Республика"
 
 #. :DOM:214:
 #: zypp/CountryCode.cc:217
@@ -1011,7 +1011,7 @@ msgstr "Федеративные Штаты Микронезии"
 #. :FSM:583:
 #: zypp/CountryCode.cc:229
 msgid "Faroe Islands"
-msgstr "Фарерские Острова"
+msgstr "Фарерские острова"
 
 #. :FRO:234:
 #: zypp/CountryCode.cc:230
@@ -1263,7 +1263,7 @@ msgstr "Кувейт"
 #. :KWT:414:
 #: zypp/CountryCode.cc:280
 msgid "Cayman Islands"
-msgstr "Каймановы Острова"
+msgstr "Каймановы острова"
 
 #. :CYM:136:
 #: zypp/CountryCode.cc:281
@@ -1273,7 +1273,7 @@ msgstr "Казахстан"
 #. :KAZ:398:
 #: zypp/CountryCode.cc:282
 msgid "Lao People's Democratic Republic"
-msgstr "Лаосская Народная Демократическая республика"
+msgstr "Лаосская Народно-Демократическая Республика"
 
 #. :LAO:418:
 #: zypp/CountryCode.cc:283
