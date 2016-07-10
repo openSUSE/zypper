@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 23:20+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 23:27+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -138,60 +138,60 @@ msgstr "هل تريد رفض المفتاح أو الوثوق مؤقتًا أو 
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:211
 msgid "r/t/a/"
-msgstr "r/t/a/"
+msgstr "رفض/وثوق مؤقت/وثوق دائم"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:214
 msgid "r/t"
-msgstr "r/t"
+msgstr "رفض/وثوق مؤقت"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:216
 msgid "Don't trust the key."
-msgstr "لا تثق في المفتاح."
+msgstr "عدم الوثوق بالمفتاح."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:218
 msgid "Trust the key temporarily."
-msgstr "الثقة في المفتاح مؤقتاً."
+msgstr "الوثوق مؤقتًا بالمفتاح."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:221
 msgid "Trust the key and import it into trusted keyring."
-msgstr "ثق في المفتاح واستورده إلى حلقة المفاتيح الموثوق بها."
+msgstr "الوثوق بالمفتاح واستيراده إلى سلسلة مفاتيح موثوق بها."
 
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "تجاهل التحقق من صحة التوقيع الفاشلة للملف '%s'!"
+msgstr "تجاهل التحقق من فشل التوقيع الخاص بالملف '%s'!"
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "تجاهل فشل التحقق من صحة التوقيع للملفات '%s' من المستودع '%s'!"
+msgstr "تجاهل التحقق من فشل التوقيع الخاص بالملف '%s' من المخزن '%s'!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "التحديد المزدوج لم يسبب يحدوث تغييرات ضارة في الملف!"
+msgstr "تأكد أن هذا لم يحدث بسبب بعض التغييرات الضارة في الملف!"
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s'."
-msgstr "فشل التحقق من صحة توقيع الملف '%s'."
+msgstr "فشل التحقق من توقيع الملف '%s'."
 
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "فشل التحقق من صحة توقيع الملف '%s' من المستودع '%s'."
+msgstr "فشل التحقق من توقيع الملف '%s' من المخزن '%s'."
 
 #: src/callbacks/keyring.h:284
 msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
 msgstr ""
-"تحذير: قد يكون هذا بسبب تغيير ضار في الملف!\n"
-"وقد يكون الاستمرار محفوف بالمخاطر. هل تريد المتابعة على أية حال؟"
+"تحذير: قد يتسبب ذلك في حدوث تغيير ضار في الملف!\n"
+"وربما تؤدي المتابعة إلى وجود مخاطرة. هل تريد المتابعة على أي حال؟"
 
 #: src/callbacks/keyring.h:307
 #, c-format, boost-format
