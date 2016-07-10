@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-09 08:08+0000\n"
+"PO-Revision-Date: 2016-07-10 01:05+0000\n"
 "Last-Translator: Koichi Miyashiro <Koichi.Miyashiro@lqs-lionbridge.com>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
@@ -199,7 +199,7 @@ msgstr "公開鍵をファイル %s からインポートすることができ�
 #: zypp/target/rpm/RpmDb.cc:1195
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
-msgstr "公開鍵 %s を削除することができませんでした: %s"
+msgstr "公開鍵 %s を削除することができませんでした:%s"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
