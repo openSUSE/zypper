@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 23:00+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 23:13+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
-msgstr "المستودع:"
+msgstr "المخزن: "
 
 #: src/callbacks/keyring.h:38
 msgid "Key Name:"
@@ -38,7 +38,7 @@ msgstr "بصمة المفتاح:"
 
 #: src/callbacks/keyring.h:40
 msgid "Key Created:"
-msgstr "إنشاء مفتاح:"
+msgstr "إنشاء المفتاح:"
 
 #: src/callbacks/keyring.h:41
 msgid "Key Expires:"
@@ -51,7 +51,7 @@ msgstr "اسم Rpm:"
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "توقيع ملف مفاتح gpg '%1%' إنتهت صلاحيته."
+msgstr "انتهت صلاحية ملف توقيع مفتاح gpg بالاسم '%1%'."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
@@ -67,41 +67,41 @@ msgstr[5] "توقيع ملف مفاتح gpg '%1%' تنتهي صلاحيته بع
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "قبول الملفات غير الموقعة '%s'."
+msgstr "قبول الملف '%s' غير الموقع."
 
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "قبول ملف غير موقع '%s' من المستودع '%s'."
+msgstr "قبول ملف غير موقع '%s' من المخزن '%s'."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:112
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "الملف '%s' غير موقع، استمرار؟"
+msgstr "الملف '%s' غير مُوقَع، هل تريد المتابعة؟"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "الملف '%s' من المستودع '%s' غير موقع، استمرار؟"
+msgstr "لم يتم توقيع الملف '%s' من المخزن '%s'، هل تريد المتابعة؟"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "قبول الملف '%s' موقع بمفتاح غير معروف '%s'."
+msgstr "قبول الملف '%s' الموقَّع باستخدام المفتاح '%s' غير المعروف."
 
 #: src/callbacks/keyring.h:143
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "قبول الملف '%s' من المستودع '%s' الموقع بمفتاح غير معروف '%s'."
+msgstr "قبول ملف '%s'من المخزن '%s' تم توقيعه بمفتاح غير معروف '%s'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "تم توقيع الملف '%s' بمفتاح غير معروف '%s'. هل تريد المتابعة؟"
+msgstr "الملف '%s' مُوقع بمفتاح '%s' غير معروف. هل تريد المتابعة؟"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:157
@@ -109,7 +109,7 @@ msgstr "تم توقيع الملف '%s' بمفتاح غير معروف '%s'. ه�
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"تم توقيع الملف '%s' من المستودع '%s' بمفتاح غير معروف '%s'. هل تريد المتابعة؟"
+"تم توقيع الملف '%s' من المخزن '%s' بمفتاح غير معروف '%s'. هل تريد المتابعة؟"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
