@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 13:39+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 13:42+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -427,7 +427,7 @@ msgstr "لا يمكن معرفة مكان تخزين الخدمة."
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
 msgid "Url scheme does not allow a %s"
-msgstr "لا يسمح مخطط المسار بـ %s"
+msgstr "لا يسمح مخطط Url بـ %s"
 
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
@@ -441,32 +441,32 @@ msgstr "مكون %s غير صالح"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
-msgstr "تحليل سلسلة الاستعلام غير مدعوم لعنوان المسار هذا"
+msgstr "تحليل سلسلة الاستعلام غير مدعوم لعنوان URL هذا"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
-msgstr "يعتبر مخطط المسار مكونًا مطلوبًا"
+msgstr "يعتبر مخطط Url مكونًا مطلوبًا"
 
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr "مخطط المسار غير صالح '%s'"
+msgstr "مخطط Url غير صالح '%s'"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
-msgstr "لا يسمح مخطط المسار بإدخال اسم مستخدم"
+msgstr "لا يسمح مخطط Url بإدخال اسم مستخدم"
 
 #: zypp/url/UrlBase.cc:983
 msgid "Url scheme does not allow a password"
-msgstr "لا يسمح مخطط المسار بإدخال كلمة مرور"
+msgstr "لا يسمح مخطط Url بإدخال كلمة سر"
 
 #: zypp/url/UrlBase.cc:1012
 msgid "Url scheme requires a host component"
-msgstr "يتطلب مخطط المسار وجود مكون مضيف"
+msgstr "يتطلب مخطط Url وجود مكون مضيف"
 
 #: zypp/url/UrlBase.cc:1022
 msgid "Url scheme does not allow a host component"
-msgstr "لا يسمح مخطط المسار بوجود مكون مضيف"
+msgstr "لا يسمح مخطط Url بوجود مكون مضيف"
 
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
@@ -475,7 +475,7 @@ msgstr "مكون المضيف '%s' غير صالح"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
-msgstr "لا يسمح مخطط المسار بإدخال منفذ"
+msgstr "لا يسمح مخطط Url بإدخال منفذ"
 
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
@@ -484,11 +484,11 @@ msgstr "مكون المنفذ '%s' غير صالح"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
-msgstr "يتطلب مخطط المسار وجود مسار اسم"
+msgstr "يتطلب مخطط Url وجود مسار اسم"
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
-msgstr "غير مسموح بالمسار النسبي عند وجود سلطة"
+msgstr "غير مسموح بالمسار النسبي في حالة وجود سلطة"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
