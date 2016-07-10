@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:47+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-10 14:49+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -141,8 +141,9 @@ msgstr " تم تخطي التنفيذ أثناء الإيقاف"
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
 #: zypp/target/TargetImpl.cc:607
+#, fuzzy
 msgid "Error sending update message notification."
-msgstr "حدث خطأ أثناء إرسال إعلامات رسائل التحديث"
+msgstr "حدث خطأ أثناء إرسال إعلامات رسائل التحديث."
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
@@ -1845,6 +1846,7 @@ msgstr "جزر فيرجن البريطانية"
 
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
+#, fuzzy
 msgid "Virgin Islands, U.S."
 msgstr "جزر فيرجن الأمريكية"
 
@@ -4279,12 +4281,12 @@ msgstr "لا تدعم الأداة الإضافية للخدمة تغيير إح
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
 msgstr ""
-"يبدو أنه قد تم إتلاف الحزمة %s أثناء النقل. هل تريد إعادة محاولة الاسترداد؟ "
+"يبدو أنه قد تم إتلاف الحزمة %s أثناء النقل. هل تريد إعادة محاولة الاسترداد؟"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4400,8 +4402,9 @@ msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s يتطلب %s، ولكن لا يمكن توفير هذا المتطلب"
 
 #: zypp/solver/detail/SATResolver.cc:1070
+#, fuzzy
 msgid "deleted providers: "
-msgstr "الموفرون المحذوفون:"
+msgstr "الموفرون المحذوفون: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
