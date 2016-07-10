@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 23:50+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 23:59+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -526,25 +526,25 @@ msgstr[5] "سيكون هناك عدد %1% من التطابقات لـ '%2%'."
 #: src/info.cc:168
 #, c-format, boost-format
 msgid "%s '%s' not found."
-msgstr "%s '%s' غير موجود."
+msgstr "لم يتم العثور على %s '%s'."
 
 #: src/info.cc:190
 #, c-format, boost-format
 msgid "Information for %s %s:"
-msgstr "معلومات عن %s %s:"
+msgstr "معلومات %s %s:"
 
 #. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
 #: src/info.cc:206
 #, c-format, boost-format
 msgid "Info for type '%s' not implemented."
-msgstr "جلب مزيد من المعلومات عن نوع '%s' لم تنفذ."
+msgstr "لم يتم تنفيذ معلومات النوع '%s'."
 
 #. translators: package's repository (header)
 #: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
 #: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
 #: src/locks.cc:107 src/utils/misc.cc:249
 msgid "Repository"
-msgstr "المتسودع"
+msgstr "المخزن"
 
 #: src/info.cc:255
 msgid "Support Level"
@@ -562,11 +562,11 @@ msgstr "الحالة"
 #: src/info.cc:265
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
-msgstr "قديمة (الإصدار%s مثبت)"
+msgstr "قديم (تم تثبيت الإصدار %s)"
 
 #: src/info.cc:269
 msgid "up-to-date"
-msgstr "حديثة"
+msgstr "حديث"
 
 #: src/info.cc:273
 msgid "not installed"
@@ -610,7 +610,7 @@ msgstr "مستحسن"
 
 #: src/info.cc:356 src/search.cc:320
 msgid "Suggested"
-msgstr "اقتراح"
+msgstr "مقترح"
 
 #: src/info.cc:391
 msgid "Visible to User"
@@ -652,11 +652,11 @@ msgstr "صفة"
 
 #: src/info.cc:477
 msgid "Short Name"
-msgstr "الاسم المختصر"
+msgstr "الاسم القصير"
 
 #: src/info.cc:481 src/search.cc:578
 msgid "Is Base"
-msgstr "هي قاعدة"
+msgstr "هل الأساس"
 
 #: src/info.cc:485
 msgid "End of Support"
