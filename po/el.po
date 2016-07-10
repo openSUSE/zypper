@@ -19,15 +19,16 @@ msgstr ""
 "Project-Id-Version: zypp.el\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2015-11-18 20:19+0200\n"
-"Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
-"Language-Team: Ελληνικά <opensuse-translation-el@opensuse.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2016-07-10 23:49+0000\n"
+"Last-Translator: Michail Vourlakos <mvourlakos@gmail.com>\n"
+"Language-Team: Greek <https://l10n.opensuse.org/projects/libzypp/master/el/>"
+"\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -136,7 +137,7 @@ msgstr "%s έχουν ήδη εκτελεστεί ως %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
-msgstr " η εκτέλεση σταμάτησε κατά την  ακύρωση  "
+msgstr " η εκτέλεση σταμάτησε κατά την  ακύρωση"
 
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
@@ -197,7 +198,7 @@ msgstr "Όχι οδηγός CDROM"
 #: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
 #: zypp/target/rpm/RpmDb.cc:2189
 msgid "RPM failed: "
-msgstr "Το RPM απέτυχε:"
+msgstr "Το RPM απέτυχε: "
 
 #. TranslatorExplanation first %s is file name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1124
@@ -364,7 +365,7 @@ msgstr "Δημιουργία λανθάνουσας μνήμης αποθετη�
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
-"Αδυναμία δημιουργίας λανθάνουσας μνήμης στο %s - όχι δικαιώματα εγγραφής. "
+"Αδυναμία δημιουργίας λανθάνουσας μνήμης στο %s - όχι δικαιώματα εγγραφής."
 
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
@@ -395,7 +396,7 @@ msgstr "Άγνωστο σφάλμα διαβάζετε από '%s'"
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "Προσθήκη αποθετηρίου '%s'."
+msgstr "Προσθήκη αποθετηρίου '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
@@ -593,7 +594,7 @@ msgstr "Επίπεδο 1"
 
 #: zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr "Επίπεδο 2 "
+msgstr "Επίπεδο 2"
 
 #: zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
@@ -601,7 +602,7 @@ msgstr "Επίπεδο 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr "Συμπληρωματική σύμβαση πελάτη είναι απαραίτητη "
+msgstr "Συμπληρωματική Σύμβαση Πελάτη είναι Απαραίτητη"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
@@ -634,10 +635,10 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
-"Απόμονωση προβλήματος, που σημαίνει πως η τεχνική υποστήριξη είναι "
+"Απομόνωση προβλήματος, που σημαίνει πως η τεχνική υποστήριξη είναι "
 "σχεδιασμένη για να αναπαράγει τα προβλήματα των πελατών, να απομονώνει την "
 "περιοχή του προβλήματος και να παρέχει λύση για προβλήματα που δεν λύνονται "
-"με την υποστήριξη Επιπέδου 1. "
+"με την υποστήριξη Επιπέδου 1."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -1130,7 +1131,7 @@ msgstr "Γουιάνα"
 #. :GUY:328:
 #: zypp/CountryCode.cc:251
 msgid "Hong Kong"
-msgstr "Χονγκ Κονγκ "
+msgstr "Χονγκ Κονγκ"
 
 #. :HKG:344:
 #: zypp/CountryCode.cc:252
@@ -1353,7 +1354,7 @@ msgstr "Μολδαβία"
 #. :MDA:498:
 #: zypp/CountryCode.cc:296
 msgid "Montenegro"
-msgstr "Montenegro "
+msgstr "Montenegro"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
@@ -4311,12 +4312,12 @@ msgid ""
 "Close this application before trying again."
 msgstr ""
 "Η διαχείριση συστήματος έχει κλειδωθεί από την εφαρμογή με pid %d (%s).\n"
-"Κλείστε την εφαρμογή πριν ξαναπροσπαθήσετε"
+"Κλείστε την εφαρμογή πριν ξαναπροσπαθήσετε."
 
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr "%s δεν ανήκει σε αποθετήριο αναβάθμισης της διανομής  "
+msgstr "%s δεν ανήκει σε αποθετήριο αναβάθμισης της διανομής"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
@@ -4410,12 +4411,12 @@ msgid ""
 "uninstallable providers: "
 msgstr ""
 "\n"
-"μη εγκαταστήσιμοι πάροχοι:"
+"μη εγκαταστήσιμοι πάροχοι: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1084
 msgid "uninstallable providers: "
-msgstr "Μη εγκαταστήσιμοι πάροχοι:"
+msgstr "Μη εγκαταστήσιμοι πάροχοι: "
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
@@ -4511,13 +4512,13 @@ msgstr "αντικατάσταση του %s με το %s"
 #: zypp/solver/detail/SATResolver.cc:1354
 #, c-format, boost-format
 msgid "deinstallation of %s"
-msgstr "Επανεγκατάσταση του %s"
+msgstr "απεγκατάσταση του %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
 #, c-format, boost-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr "σπάσιμο %s λόγω αγνόησης μερικών εξαρτήσεων του."
+msgstr "σπάσιμο %s λόγω αγνόησης μερικών εξαρτήσεων του"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
@@ -4683,7 +4684,7 @@ msgstr ""
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "Η πηγή του πολυμέσου '%s' δεν περιέχει το επιθυμητό μέσο."
+msgstr "Η πηγή του πολυμέσου '%s' δεν περιέχει το επιθυμητό μέσο"
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
@@ -4719,7 +4720,7 @@ msgstr "Η τοποθεσία '%s' δεν είναι προσωρινά προσ
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 " πρόβλημα πιστοποιητικού SSL, επιβεβαιώστε ότι το πιστοποιητικό της CA  "
-"είναι εντάξει για '%s'. "
+"είναι εντάξει για '%s'."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
