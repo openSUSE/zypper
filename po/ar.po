@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 23:29+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 23:35+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -272,7 +272,7 @@ msgstr "إلغاء أو تجاهل؟"
 #: src/callbacks/rpm.h:151
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
-msgstr "تشغيل: %s  (%s، %s)"
+msgstr "تشغيل: %s (%s و%s)"
 
 #: src/callbacks/rpm.h:208
 #, c-format, boost-format
@@ -288,7 +288,7 @@ msgstr "إزالة %s-%s"
 #: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr "إزالة %s فشلت:"
+msgstr "فشلت إزالة %s:"
 
 #: src/callbacks/rpm.h:279
 #, c-format, boost-format
@@ -309,7 +309,7 @@ msgstr "فشل تثبيت %s-%s :"
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
 msgid "Installation of %s-%s failed:"
-msgstr "تثبيت %s-%s فشل:"
+msgstr "فشل تثبيت %s-%s:"
 
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:356
@@ -324,9 +324,9 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
-"التحقق من وجود تعارضت الملفات يتطلب تثبيت حزم لا ليتم تحميلها مسبقاً من أجل "
-"الوصول إلى قوائم الملفات. راجع الخيار '%1%' في صفحة تعليمات zypper للحصول "
-"على التفاصيل."
+"يتطلب التحقق من وجود تعارضات الملفات إنزال الحزم التي لم يتم تثبيتها مقدمًا "
+"من أجل الوصول إلى قوائم الملفات الخاصة بها. راجع الخيار '%1%' في صفحة zypper "
+"اليدوية للتعرف على مزيد من التفاصيل."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
