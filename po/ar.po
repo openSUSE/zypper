@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 13:42+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-10 13:44+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -495,14 +495,17 @@ msgid "Encoded string contains a NUL byte"
 msgstr "تحتوي السلسلة المُرمَّزة على وحدة بايت NUL"
 
 #: zypp/url/UrlUtils.cc:173
+#, fuzzy
 msgid "Invalid parameter array split separator character"
 msgstr "حرف تقسيم مصفوفة المعلمات الفاصل غير صالح"
 
 #: zypp/url/UrlUtils.cc:213
+#, fuzzy
 msgid "Invalid parameter map split separator character"
 msgstr "حرف تقسيم مخطط المعلمات الفاصل غير صالح"
 
 #: zypp/url/UrlUtils.cc:283
+#, fuzzy
 msgid "Invalid parameter array join separator character"
 msgstr "حرف ربط مصفوفة المعلمات الفاصل غير صالح"
 
