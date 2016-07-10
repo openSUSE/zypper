@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 23:35+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-10 23:36+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -318,7 +318,7 @@ msgstr "التحقق من وجود تعارض في الملفات:"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:390
-#, boost-format
+#, boost-format, fuzzy
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
 "in advance in order to access their file lists. See option '%1%' in the "
@@ -326,7 +326,7 @@ msgid ""
 msgstr ""
 "يتطلب التحقق من وجود تعارضات الملفات إنزال الحزم التي لم يتم تثبيتها مقدمًا "
 "من أجل الوصول إلى قوائم الملفات الخاصة بها. راجع الخيار '%1%' في صفحة zypper "
-"اليدوية للتعرف على مزيد من التفاصيل."
+"اليدوية للحصول على مزيد من التفاصيل."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
