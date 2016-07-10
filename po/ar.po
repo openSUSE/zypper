@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-10 14:18+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4395,9 +4395,9 @@ msgid "solvable %s conflicts with %s provided by itself"
 msgstr "المشكلة القابلة للحل %s تتعارض مع %s المتوفرة من نفسها"
 
 #: zypp/solver/detail/SATResolver.cc:1068
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s يتطلب %s، ولكن يتعذر توفير هذا المتطلب"
+msgstr "%s يتطلب %s، ولكن لا يمكن توفير هذا المتطلب"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
