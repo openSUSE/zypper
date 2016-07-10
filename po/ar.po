@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 13:32+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 13:34+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -373,7 +373,7 @@ msgstr "فشل التخزين المؤقت للمخزن (%d)."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
-msgstr "نوع المستودع غير معالج"
+msgstr "نوع مخزن غير معالج"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -384,24 +384,24 @@ msgstr "نوع المستودع غير معالج"
 #: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
-msgstr "خطأ أثناء محاولة القراءة من '%s'"
+msgstr "حدث خطأ أثناء محاولة القراءة من '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
-msgstr "خطأ غير معروف عند القراءة من '%s'"
+msgstr "حدث خطأ غير معروف أثناء القراءة من '%s'"
 
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "إضافة مستودع '%s'"
+msgstr "إضافة المخزن '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "اسم ملف غير صالح المستودع في '%s'"
+msgstr "اسم ملف repo غير صالح على '%s'"
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
