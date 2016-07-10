@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:26+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 14:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4444,42 +4444,42 @@ msgstr "إزالة القفل للسماح بالتثبيت %s"
 #: zypp/solver/detail/SATResolver.cc:1217
 #: zypp/solver/detail/SATResolver.cc:1238
 msgid "This request will break your system!"
-msgstr "هذا الطلب سيحطم النظام!"
+msgstr "سيؤدي هذا الطلب إلى تعطل النظام!"
 
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
 msgid "ignore the warning of a broken system"
-msgstr "تجاهل التحذير من كسر النظام"
+msgstr "تجاهل تحذير النظام المعطل"
 
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
-msgstr "لا تسأل لتثبيت المتوفرات القابلة للحل %s"
+msgstr "عدم طلب تثبيت كل المشاكل القابلة للحل التي توفر %s"
 
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "لا تسأل لحذف جميع الموفرين القابلين للحل %s"
+msgstr "عدم طلب حذف كل المشاكل القابلة للحل التي توفر %s"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
-msgstr "لا تقم بتثبيت أحدث إصدار من %s"
+msgstr "عدم تثبيت أحدث إصدار من %s"
 
 #: zypp/solver/detail/SATResolver.cc:1279
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr "إبقاء%s برغم بنيته الدنيا"
+msgstr "الحفاظ على %s بغض النظر عن الهيكل غير الملائم"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
-msgstr "ثبت %s برغم بنيته الدنيا"
+msgstr "تثبيت %s بغض النظر عن الهيكل غير الملائم"
 
 #: zypp/solver/detail/SATResolver.cc:1293
 #, c-format, boost-format
 msgid "keep obsolete %s"
-msgstr "إبقاء%s القديمة"
+msgstr "الحفاظ على %s الملغية"
 
 #: zypp/solver/detail/SATResolver.cc:1298
 #, c-format, boost-format
