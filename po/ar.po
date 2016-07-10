@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 13:10+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 13:16+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -109,21 +109,22 @@ msgstr "يحسن"
 
 #: zypp/Dep.cc:104
 msgid "Supplements"
-msgstr "ملحقات"
+msgstr "يُضيف"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "نوع '%s' مشبو %u بايت للمجموع الاختباري '%s'"
+msgstr ""
+"النوع المشكوك فيه '%s' للمجموع الاختباري لوحدات البايت %u الذي يبلغ '%s'"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
-msgstr " نفِّذ"
+msgstr " مُنفَّذ"
 
 #: zypp/target/TargetImpl.cc:332
 msgid " execution failed"
-msgstr " فشل تنفيذ"
+msgstr " فشل التنفيذ"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
@@ -131,17 +132,17 @@ msgstr " فشل تنفيذ"
 #: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr "%s منفذ مسبقاً ك %s)"
+msgstr "تم تنفيذ %s بالفعل كـ %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
-msgstr " تم تخطي التنفيذ أثناء الإحباط"
+msgstr " تم تخطي التنفيذ أثناء الإيقاف"
 
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
 #: zypp/target/TargetImpl.cc:607
 msgid "Error sending update message notification."
-msgstr "خطأ إرسال رسالة تنبيه بالتحديث."
+msgstr "حدث خطأ أثناء إرسال إعلامات رسائل التحديث"
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
@@ -155,7 +156,7 @@ msgstr "تم إيقاف التثبيت وفقًا للتعليمات."
 
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr "عذراً، ولكن هذا الإصدار من libzypp مبني بدون دعم HAL."
+msgstr "عذرًا، تم إنشاء هذا الإصدار من libzypp بدون دعم HAL."
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
@@ -183,7 +184,7 @@ msgstr "libhal_set_dbus_connection: تعذر تعيين اتصال dbus"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "تعذرت تهيئة سياق HAL -- hald ليس قيد التشغيل؟"
+msgstr "تعذرت تهيئة سياق HAL--هل hald ليس قيد التشغيل?"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
