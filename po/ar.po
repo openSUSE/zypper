@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 13:27+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 13:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -359,12 +359,12 @@ msgstr "لا يمكن إنشاء دليل لذاكرة التخزين المؤق
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "بناء ذاكرة مستودع '%s' المؤقت"
+msgstr "بناء الذاكرة المؤقتة لمخزن '%s'"
 
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "لا يمكن إنشاء ذاكرة التخزين المؤقت في %s- لا توجد أذونات للكتابة."
+msgstr "يتعذر إنشاء ذاكرة التخزين المؤقت على %s - لا توجد أذونات كتابية."
 
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
