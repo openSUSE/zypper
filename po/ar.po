@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-10 14:49+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -38,7 +38,7 @@ msgid "Invalid LDAP URL query string"
 msgstr "سلسلة استعلام URL لبروتوكول LDAP غير صالحة"
 
 #: zypp/Url.cc:153
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Invalid LDAP URL query parameter '%s'"
 msgstr "معلمة استعلام URL لبروتوكول LDAP غير صالحة '%s'"
 
@@ -542,9 +542,9 @@ msgid "Can't exec '%s' (%s)."
 msgstr "لا يمكن تنفيذ '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:381
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Can't fork (%s)."
-msgstr "لا يمكن تقسيم (%s)."
+msgstr "تعذر تشعيب (%s)."
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
