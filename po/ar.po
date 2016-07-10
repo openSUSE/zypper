@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:19+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-10 14:26+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4405,17 +4405,19 @@ msgstr "الموفرون المحذوفون:"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
+#, fuzzy
 msgid ""
 "\n"
 "uninstallable providers: "
 msgstr ""
 "\n"
-"موفرون غير قابلين لإزالة التثبيت:"
+"موفرون غير قابلين للتثبيت: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1084
+#, fuzzy
 msgid "uninstallable providers: "
-msgstr "الموفرون القابلون لإلغاء التثبيت:"
+msgstr "الموفرون غير القابلين للتثبيت: "
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
