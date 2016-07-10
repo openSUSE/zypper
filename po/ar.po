@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-10 14:16+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4370,9 +4370,9 @@ msgid "nothing provides %s needed by %s"
 msgstr "لا يوجد مصدر لتوفير %s المطلوب من قبل %s"
 
 #: zypp/solver/detail/SATResolver.cc:1017
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "cannot install both %s and %s"
-msgstr "تعذر تثبيت كل من %s و%s"
+msgstr "لا يمكن تثبيت كل من %s و%s"
 
 #: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
