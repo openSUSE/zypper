@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:18+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 14:19+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4401,7 +4401,7 @@ msgstr "%s يتطلب %s، ولكن لا يمكن توفير هذا المتطل
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
-msgstr "حذف مقدمي الخدمات: "
+msgstr "الموفرون المحذوفون:"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -4410,12 +4410,12 @@ msgid ""
 "uninstallable providers: "
 msgstr ""
 "\n"
-"موفر قابل لإلغاء التثبيت: "
+"موفرون غير قابلين لإزالة التثبيت:"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1084
 msgid "uninstallable providers: "
-msgstr "موفر قابل لإلغاء التثبيت: "
+msgstr "الموفرون القابلون لإلغاء التثبيت:"
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
