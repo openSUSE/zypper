@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 13:51+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 13:56+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -548,31 +548,31 @@ msgstr "لا يمكن تقسيم (%s)."
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
 msgid "Command exited with status %d."
-msgstr "خرج الامر بالحالة %d."
+msgstr "تم إنهاء الأمر بالحالة %d."
 
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "قتل الأمر بإشارة %d (%s)."
+msgstr "تم إنهاء الأمر بواسطة الإشارة %d (%s)."
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
-msgstr "خرج الأمر بخطأ غير معروف."
+msgstr "تم إنهاء الأمر بخطأ غير معروف."
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:116
 msgid "(does not expire)"
-msgstr "(لا تنتهي)"
+msgstr "(الصلاحية غير منتهية)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:125
 msgid "(EXPIRED)"
-msgstr "(انتهت)"
+msgstr "(انتهت الصلاحية)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:129
 msgid "(expires within 24h)"
-msgstr "(تنتهي في غضون 24 ساعة)"
+msgstr "(ستنتهي الصلاحية خلال 24 ساعة)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
@@ -608,7 +608,7 @@ msgstr "المستوى 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr "يلزم عقود إضافية للعميل"
+msgstr "مطلوب عقد عميل إضافي"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
@@ -629,9 +629,9 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
-"تحديد المشكلة، وهو يعني الدعم الفني بهدف توفير معلومات التوافق، والمساعدة في "
-"التثبيت، ودعم الاستخدام والصيانة واستكشاف الأخطاء والإصلاحات الأساسية. الدعم "
-"من المستوى 1 لا يهدف إلى تصحيح أخطاء وعيوب في المنتج."
+"تحديد المشكلة والذي يعني دعمًا فنيًا مصممًا لتوفير معلومات التوافق والمساعدة "
+"في التثبيت ودعم الاستخدام والصيانة المستمرة والمستوى الأساسي من حل المشاكل. "
+"والدعم من المستوى 1 ليس مخصصًا لتصحيح أخطاء عيوب المنتجات."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
