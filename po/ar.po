@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:03+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-10 14:04+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2489,6 +2489,7 @@ msgstr "الافيك"
 
 #. language code: egy
 #: zypp/LanguageCode.cc:411
+#, fuzzy
 msgid "Egyptian (Ancient)"
 msgstr "المصرية (القديمة)"
 
@@ -3589,6 +3590,7 @@ msgstr "البالية"
 
 #. language code: pol pl
 #: zypp/LanguageCode.cc:871
+#, fuzzy
 msgid "Polish"
 msgstr "البولندية"
 
