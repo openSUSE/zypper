@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-10 13:38+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -409,12 +409,13 @@ msgid "Removing repository '%s'"
 msgstr "إزالة المخزن '%s'"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+#, fuzzy
 msgid "Can't figure out where the repo is stored."
-msgstr "تعذرت معرفة مكان تخزين repo."
+msgstr "لا يمكن معرفة مكان تخزين المخزن."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't delete '%s'"
 msgstr "لا يمكن حذف '%s'"
 
