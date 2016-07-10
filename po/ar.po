@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:34+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 14:36+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4542,27 +4542,27 @@ msgstr "لا يمكن فتح ملف القفل: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
-msgstr "تم تشغيل هذا الإجراء ببرنامج آخر مسبقاً."
+msgstr "يتم الآن تشغيل هذا الإجراء بالفعل من قبل برنامج آخر."
 
 #. TranslatorExplanation followed by the list of error messages that lead to this exception
 #: zypp/base/Exception.cc:107
 msgid "History:"
-msgstr "التاريخ:"
+msgstr "المحفوظات:"
 
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
 msgid "Unknown match mode '%s'"
-msgstr "وضع التطابق غير معروف '%s'"
+msgstr "وضع التطابق '%s' غير معروف"
 
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "وضع التطابق غير معروف '%s' للنمط '%s'"
+msgstr "وضع التطابق '%s' غير معروف للنمط '%s'"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "التعبير العادي غير صالح '%s': رجع regcomp د%d"
+msgstr "تعبير عادي غير صالح '%s': regcomp أعاد %d"
 
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
