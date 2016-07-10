@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 23:27+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-10 23:29+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -196,7 +196,7 @@ msgstr ""
 #: src/callbacks/keyring.h:307
 #, c-format, boost-format
 msgid "No digest for file %s."
-msgstr "لا ملخص للملف %s."
+msgstr "لا يوجد ملخص للملف %s."
 
 # continue button label
 #. translators: help text for 'x' option in the 'Continue?' prompt
