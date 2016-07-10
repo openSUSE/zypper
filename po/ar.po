@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:40+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 14:42+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4661,7 +4661,7 @@ msgstr "مخطط URI غير مدعوم في '%s'."
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
-msgstr "العملية غير معتمدة من الوسيط"
+msgstr "لا يدعم الوسيط العملية"
 
 #: zypp/media/MediaException.cc:152
 #, c-format, boost-format
@@ -4670,7 +4670,7 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"تحميل (curl) خطأ '%s':\n"
+"خطأ في إنزال (curl) لـ '%s':\n"
 "رمز الخطأ: %s\n"
 "رسالة الخطأ: %s\n"
 
@@ -4678,21 +4678,21 @@ msgstr ""
 #: zypp/media/MediaException.cc:161
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "حدث خطأ أثناء إعداد خيارات التحميل (curl) ل '%s':"
+msgstr "حدث خطأ أثناء تعيين خيارات إنزال (curl) لـ '%s':"
 
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "لم يحتو مصدر الوسائط '%s' على الوسائط المتوقعة"
+msgstr "لا يحتوي مصدر الوسائط '%s' على الوسيط المطلوب"
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "الوسيط '%s' قيد الاستخدام بواسطة برنامج آخر"
+msgstr "الوسيط '%s' مستخدَم بواسطة مثيل آخر"
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
-msgstr "لا يمكن إخراج أي وسيط"
+msgstr "تعذر إخراج أية وسائط"
 
 #: zypp/media/MediaException.cc:184
 #, c-format, boost-format
