@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 23:37+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-10 23:38+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -398,7 +398,7 @@ msgstr "هل تريد إزالة هذا القفل؟"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr "لا يقوم الاستعلام التالي بقفل أي شيء:"
+msgstr "الاستعلام التالي لا يقوم بقفل أي شيء:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
