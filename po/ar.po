@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 13:17+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 13:25+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -202,26 +202,26 @@ msgstr "فشل RPM: "
 #: zypp/target/rpm/RpmDb.cc:1124
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
-msgstr "فشل استيراد المفتاح العمومي من الملف %s: %s"
+msgstr "فشل استيراد المفتاح العام من الملف %s: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1195
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
-msgstr "فشل في إزالة المفتاع العمومي %s: %s"
+msgstr "فشلت إزالة المفتاح العام %s: %s"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
 #: zypp/target/rpm/RpmDb.cc:1848
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr "ملفات إعداد %s التي تم تغييرها:"
+msgstr "ملفات تكوين %s التي تم تغييرها:"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2024
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "تم حفظ rpm %s ; %s، ولكن كان من المستحيل تحديد الفرق"
+msgstr "قامت rpm بحفظ %s باعتبارها %s، ولكن تعذر تحديد الفرق"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2026
@@ -237,7 +237,7 @@ msgstr ""
 #: zypp/target/rpm/RpmDb.cc:2029
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr "تم إنشاء rpm %s ك %s، ولكن كان من المستحيل تحديد الفرق"
+msgstr "قامت rpm بإنشاء %s باعتبارها %s، ولكن تعذر تحديد الفرق"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2031
@@ -253,7 +253,7 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #: zypp/target/rpm/RpmDb.cc:2056 zypp/target/rpm/RpmDb.cc:2202
 msgid "Additional rpm output"
-msgstr "مخرجات rpm الإضافية"
+msgstr "مخرجات rpm إضافية"
 
 #: zypp/target/rpm/RpmDb.cc:2344
 #, c-format, boost-format
@@ -292,7 +292,7 @@ msgstr "الملف غير موجود أو لا يمكن التحقق من توق
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
-msgstr "سيتم اتباع الإجراءات التالية:"
+msgstr "سيتم تنفيذ الإجراءات التالية:"
 
 #: zypp/RepoManager.cc:297
 #, boost-format
@@ -304,7 +304,7 @@ msgstr "لا يمكن قراءة مجلد المستودعات '%1%': تم رف�
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "فشل في قراءة المجلد '%s'"
+msgstr "فشلت قراءة الدليل '%s'"
 
 #: zypp/RepoManager.cc:315
 #, boost-format
@@ -313,18 +313,18 @@ msgstr "لا يمكن قراءة ملف المستودعات '%1%': تم رفض 
 
 #: zypp/RepoManager.cc:338
 msgid "Repository alias cannot start with dot."
-msgstr "لا يمكن تشغيل مستودع يبدء اسمه المستعار بنقطه."
+msgstr "لا يمكن أن يبدأ الاسم المستعار للمخزن بنقطة."
 
 #: zypp/RepoManager.cc:349
 msgid "Service alias cannot start with dot."
-msgstr "اسم الخدمة المستعار لا يمكن أن يبدء بنقطه."
+msgstr "لا يمكن أن يبدأ الاسم المستعار للخدمة بنقطة."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
 #: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
-msgstr "تعذّر فتح الملف '%s' للكتابة."
+msgstr "تعذر فتح الملف '%s' للكتابة."
 
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
@@ -332,7 +332,7 @@ msgstr "تعذّر فتح الملف '%s' للكتابة."
 #: zypp/RepoManager.cc:849
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr "خدمة غير معروف '%1%': إزالة مستودع الخدمة اليتيم '%2%'"
+msgstr "خدمة غير معروفة '%1%': إزالة مخزن الخدمة الوحيد '%2%'"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
