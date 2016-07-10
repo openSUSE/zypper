@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-10 13:26+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -353,7 +353,7 @@ msgstr "لا يمكن إنشاء %s"
 
 #: zypp/RepoManager.cc:1140
 msgid "Can't create metadata cache directory."
-msgstr "لا يمكن إنشاء مجلد التخزين المؤقت للبيانات الفوقية."
+msgstr "يتعذر إنشاء دليل لذاكرة التخزين المؤقت لبيانات التعريف."
 
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
