@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 23:38+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 23:50+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -402,28 +402,28 @@ msgstr "الاستعلام التالي لا يقوم بقفل أي شيء:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "استرداد delta"
+msgstr "استرداد دلتا"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
 msgid "Applying delta"
-msgstr "تطبيق delta"
+msgstr "تطبيق دلتا"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: src/callbacks/repo.h:103
 #, c-format, boost-format
 msgid "(%s unpacked)"
-msgstr "(%s فك حزمة )"
+msgstr "(%s غير مجمع في حزم)"
 
 #: src/callbacks/repo.h:112
 #, boost-format
 msgid "In cache %1%"
-msgstr "في الكاش %1%"
+msgstr "في الذاكرة المؤقتة %1%"
 
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "استرداد %s %s-%s.%s"
+msgstr "يتم الآن استرداد %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
@@ -453,11 +453,11 @@ msgstr "لا"
 
 #: src/Zypper.h:463
 msgid "Finished with error."
-msgstr "انتهى مع وجود أخطأ."
+msgstr "انتهى مع وجود أخطاء."
 
 #: src/Zypper.h:465
 msgid "Done."
-msgstr "انتهى."
+msgstr "تم."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -467,15 +467,15 @@ msgstr "غير موجود"
 # error box title
 #: src/utils/prompt.h:160
 msgid "I/O error"
-msgstr "خطأ ادخال/اخراج"
+msgstr "خطأ في المدخلات/المخرجات"
 
 #: src/utils/prompt.h:160
 msgid "Invalid object"
-msgstr "كائن خاطئ"
+msgstr "كائن غير صالح"
 
 #: src/utils/prompt.h:167
 msgid "Error"
-msgstr "خطأ"
+msgstr "الخطأ"
 
 #. translators: name (general header)
 #: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
@@ -505,11 +505,11 @@ msgstr "المُنتِج"
 #: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
 #: src/utils/misc.cc:296
 msgid "Summary"
-msgstr "ملخّص"
+msgstr "الملخص"
 
 #: src/info.cc:82 src/Zypper.cc:5246
 msgid "Description"
-msgstr "الوصف"
+msgstr "وصف"
 
 #: src/info.cc:136
 #, boost-format, fuzzy
