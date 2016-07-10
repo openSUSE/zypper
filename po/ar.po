@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-10 14:43+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4696,9 +4696,9 @@ msgid "Cannot eject any media"
 msgstr "لا يمكن إخراج أية وسائط"
 
 #: zypp/media/MediaException.cc:184
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Cannot eject media '%s'"
-msgstr "تعذر إخراج الوسائط '%s'"
+msgstr "لا يمكن إخراج الوسائط '%s'"
 
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
