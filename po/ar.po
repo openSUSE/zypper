@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-10 13:45+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -515,9 +515,9 @@ msgid "Can't open pty (%s)."
 msgstr "تعذر فتح pty (%s)."
 
 #: zypp/ExternalProgram.cc:269
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't open pipe (%s)."
-msgstr "تعذر فتح المسار (%s)."
+msgstr "لا يمكن فتح المسار (%s)."
 
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
