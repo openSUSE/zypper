@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-03 11:03+0000\n"
+"PO-Revision-Date: 2016-07-10 15:56+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
@@ -981,11 +981,13 @@ msgid "Patch '%s' is not needed."
 msgstr "الرقعة '%s' ليس هناك حاجة لها."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
-msgstr "الرقعة '%s' مقفلة. استخدم '%s' لتثبيتها، أو الغ القفل لتستخدمها '%s'."
+msgstr ""
+"التصحيح '%1%' اختياري. استخدم '%2%' لتثبيته أو '%3%' لتضمين كل التصحيحات "
+"الاختيارية."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1046,15 +1048,15 @@ msgstr "هل تعني %1%؟"
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
 #: src/Summary.cc:414 src/Summary.cc:486
-#, boost-format
+#, boost-format, fuzzy
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "... و%1% من العناصر الإضافية."
+msgstr[1] "... و%1% من العناصر الإضافية."
+msgstr[2] "... و%1% من العناصر الإضافية."
+msgstr[3] "... و%1% من العناصر الإضافية."
+msgstr[4] "... و%1% من العناصر الإضافية."
+msgstr[5] "... و%1% من العناصر الإضافية."
 
 #: src/Summary.cc:505
 #, c-format, boost-format
@@ -2406,8 +2408,9 @@ msgid "Parent Service"
 msgstr "أًصل الخدمة"
 
 #: src/repos.cc:1109
+#, fuzzy
 msgid "Keywords"
-msgstr ""
+msgstr "الكلمات الأساسية"
 
 #: src/repos.cc:1110
 msgid "Repo Info Path"
@@ -2969,27 +2972,27 @@ msgstr "تجاهل %s بدون الوسائط لأنه تم تحديد خيار 
 
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:280
-#, boost-format
+#, boost-format, fuzzy
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "مراعاة %1% من %2% من التصحيحات القابلة للتطبيق:"
+msgstr[1] "مراعاة %1% من %2% من التصحيحات القابلة للتطبيق:"
+msgstr[2] "مراعاة %1% من %2% من التصحيحات القابلة للتطبيق:"
+msgstr[3] "مراعاة %1% من %2% من التصحيحات القابلة للتطبيق:"
+msgstr[4] "مراعاة %1% من %2% من التصحيحات القابلة للتطبيق:"
+msgstr[5] "مراعاة %1% من %2% من التصحيحات القابلة للتطبيق:"
 
 #. translator: stats table header
 #: src/update.cc:284
-#, boost-format
+#, boost-format, fuzzy
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "%1% من التصحيحات القابلة للتطبيق تم العثور عليها:"
+msgstr[1] "%1% من التصحيحات القابلة للتطبيق تم العثور عليها:"
+msgstr[2] "%1% من التصحيحات القابلة للتطبيق تم العثور عليها:"
+msgstr[3] "%1% من التصحيحات القابلة للتطبيق تم العثور عليها:"
+msgstr[4] "%1% من التصحيحات القابلة للتطبيق تم العثور عليها:"
+msgstr[5] "%1% من التصحيحات القابلة للتطبيق تم العثور عليها:"
 
 #. translator: stats summary
 #: src/update.cc:294
@@ -3020,7 +3023,7 @@ msgstr[5] "%d رقع لازمة"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "استخدام  '%1%' لتضمين التصحيحات الاختيارية"
 
 #. translator: stats summary
 #: src/update.cc:315
@@ -3059,7 +3062,7 @@ msgstr "التصحيحات"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "مقفل"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -3068,7 +3071,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "الفئات المضمنة"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -3143,19 +3146,25 @@ msgid "OK OK! Exiting immediately..."
 msgstr "حسناً حسناً! تغادر فورا..."
 
 #: src/Zypper.cc:77
+#, fuzzy
 msgid ""
 "--with[out]-optional\n"
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"--مع [أو بدون] - اختياري\n"
+"ما إذا كان يجب التعامل مع التصحيحات الاختيارية القابلة للتطبيق حسب الحاجة أو "
+"استبعادها."
 
 #: src/Zypper.cc:80
+#, fuzzy
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "يعد استبعاد التصحيحات الاختيارية افتراضيًا."
 
 #: src/Zypper.cc:81
+#, fuzzy
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "يعد تضمين التصحيحات الاختيارية افتراضيًا."
 
 #: src/Zypper.cc:104
 msgid ""
@@ -3585,8 +3594,9 @@ msgstr "الخيار %s ليس له أي تأثير, تجاهل."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
+#, fuzzy
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "لا يدعم برنامج الواجهة شل في zypper تنفيذ الأوامر الفرعية."
 
 #: src/Zypper.cc:1313
 #, c-format, boost-format
