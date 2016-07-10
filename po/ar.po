@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 12:59+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-10 13:00+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -33,13 +33,14 @@ msgid "Hal Exception"
 msgstr "استثناء في Hal"
 
 #: zypp/Url.cc:114
+#, fuzzy
 msgid "Invalid LDAP URL query string"
 msgstr "سلسلة استعلام URL لبروتوكول LDAP غير صالحة"
 
 #: zypp/Url.cc:153
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "معلمة استعلام المسار لبروتوكول LDAP غير صالحة '%s'"
+msgstr "معلمة استعلام URL لبروتوكول LDAP غير صالحة '%s'"
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
