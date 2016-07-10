@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-10 14:34+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4536,9 +4536,9 @@ msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "إحدى السمتين '%s' أو '%s' أو كلتيهما مطلوبة."
 
 #: zypp/base/InterProcessMutex.cc:83
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't open lock file: %s"
-msgstr "تعذر فتح ملف القفل: %s"
+msgstr "لا يمكن فتح ملف القفل: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
