@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 23:36+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 23:37+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -378,18 +378,18 @@ msgid ""
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
 msgstr ""
-"يحدث تعارض الملفات عند محاولة تطبيقين تثبيت الملفات بنفس الاسم ولكن بمحتويات "
-"مختلفة. إذا قمت بالمتابعة، سيتم استبدال الملفات المتعارضة وفقدان المحتويات "
-"السابقة."
+"حدثت تعارضات في الملفات عند محاولة حزمتين بتثبيت ملفات بنفس الاسم ولكن "
+"بمحتويات مختلفة. في حالة المتابعة، سيتم استبدال الملفات المتعارضة مع فقدان "
+"المحتوى السابق."
 
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
-msgstr "يقوم الاستعلام التالي بقفل العناصر كالتي تريد إزالتها:"
+msgstr "يقوم الاستعلام التالي بقفل نفس الكائنات كالكائن الذي تريد إزالته:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr "الاستعلام التالي يقوم بقفل بعض العناصر التي تريد إلغاء قفلها:"
+msgstr "يقوم الاستعلام التالي بإقفال بعض الكائنات التي تريد إلغاء قفلها:"
 
 # power-off message
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
@@ -398,7 +398,7 @@ msgstr "هل تريد إزالة هذا القفل؟"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr "الاستعلام التالي لا يقفل أي شيء:"
+msgstr "لا يقوم الاستعلام التالي بقفل أي شيء:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
