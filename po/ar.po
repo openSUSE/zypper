@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:28+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 14:34+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4484,17 +4484,17 @@ msgstr "الحفاظ على %s القديمة"
 #: zypp/solver/detail/SATResolver.cc:1298
 #, c-format, boost-format
 msgid "install %s from excluded repository"
-msgstr "تثبيت %s من المستودع المستبعد"
+msgstr "تثبيت %s من المخزن المستبعد"
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr "الإرجاع من %s إلى %s"
+msgstr "تخفيض إصدار %s إلى %s"
 
 #: zypp/solver/detail/SATResolver.cc:1325
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
-msgstr "تغيير البنية من %s إلى %s"
+msgstr "تغيير الهيكل الخاص بـ %s إلى %s"
 
 #: zypp/solver/detail/SATResolver.cc:1334
 #, c-format, boost-format
@@ -4502,13 +4502,13 @@ msgid ""
 "install %s (with vendor change)\n"
 "  %s  -->  %s"
 msgstr ""
-"ثبت %s (مع تغيير البائع)\n"
+"تثبيت %s (مع تغيير البائع)\n"
 "  %s  -->  %s"
 
 #: zypp/solver/detail/SATResolver.cc:1343
 #, c-format, boost-format
 msgid "replacement of %s with %s"
-msgstr "استبدال %s ب %s"
+msgstr "استبدال %s بـ %s"
 
 #: zypp/solver/detail/SATResolver.cc:1354
 #, c-format, boost-format
@@ -4519,7 +4519,7 @@ msgstr "إلغاء تثبيت %s"
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
 #, c-format, boost-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr "كسر%s بتجاهل بعض التبعيات الخاصة به"
+msgstr "توقيف %s عن طريق تجاهل بعض تبعياتها"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
@@ -4528,17 +4528,17 @@ msgstr "تجاهل بشكل عام لبعض التبعيات"
 #: zypp/parser/RepoindexFileReader.cc:197
 #, c-format, boost-format
 msgid "Required attribute '%s' is missing."
-msgstr "الخاصية المطلوبة '%s' مفقودة."
+msgstr "السمة المطلوبة '%s' مفقودة."
 
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "مطلوب واحد من '%s' أو '%s' سمات أو كليهما."
+msgstr "إحدى السمتين '%s' أو '%s' أو كلتيهما مطلوبة."
 
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
 msgid "Can't open lock file: %s"
-msgstr "لا يمكن فتح ملف مؤمن: %s"
+msgstr "تعذر فتح ملف القفل: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
