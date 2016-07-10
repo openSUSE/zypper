@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 13:50+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-10 13:51+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -525,9 +525,9 @@ msgid "Can't chroot to '%s' (%s)."
 msgstr "لا يمكن تغيير الدليل الجذر إلى '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:360
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "لا يمكن إجراء chdir إلى '%s' داخل chroot '%s' (%s)."
+msgstr "لا يمكن إجراء chdir إلى '%s' داخل تغيير الدليل الجذر '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:361
 #, c-format, boost-format
@@ -536,14 +536,14 @@ msgstr "لا يمكن إجراء chdir إلى '%s' (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:373
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't exec '%s' (%s)."
 msgstr "لا يمكن تنفيذ '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:381
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't fork (%s)."
-msgstr "لا يمكن تفريق (%s)."
+msgstr "لا يمكن تقسيم (%s)."
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
