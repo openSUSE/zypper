@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-10 14:44+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4721,9 +4721,9 @@ msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " مشكلة في شهادة SSL، تحقق من أن شهادة CA صالحة لـ '%s'."
 
 #: zypp/media/MediaException.cc:231
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr "تعذر العثور على جهاز التسلسل المتاح لتوصيل ملف الصور من '%s'"
+msgstr "لا يمكن العثور على جهاز التسلسل المتاح لتوصيل ملف الصور من '%s'"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
