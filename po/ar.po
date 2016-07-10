@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-10 14:06+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4265,9 +4265,9 @@ msgid "Signature file %s not found"
 msgstr "ملف التوقيع  %s غير موجود"
 
 #: zypp/repo/RepoProvideFile.cc:259
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "تعذر توفير الملف '%s' من المخزن '%s'"
+msgstr "لا يمكن توفير الملف '%s' من المخزن '%s'"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
