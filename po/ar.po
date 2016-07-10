@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 13:57+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 13:59+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -640,8 +640,8 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
-"عزل المشكلة ، ويقصد به الدعم الفني المصمم لمشاكل العملاء المتكررة، وتقديم حل "
-"للمشاكل التي لم تحل بدعم المستوى 1."
+"عزل المشكلة، والذي يعني دعمًا فنيًا مصممًا لعمل نسخ مطابقة من مشاكل العملاء "
+"وعزل منطقة المشكلة وتوفير حل للمشاكل التي لم يتم حلها من خلال دعم المستوى 1."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -649,16 +649,16 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
-"قرار مشكلة، ويقصد به الدعم الفني لحل المشاكل المعقدة بإشراك المهندسين في "
-"قرارات تصحيح عيوب المنتج التي تم تحديدها بدعم المستوى 2."
+"حل المشكلة، والذي يعني دعمًا فنيًا مصممًا لحل المشاكل المعقدة من خلال إشراك "
+"الهندسة في حل عيوب المنتج التي تم تحديدها في دعم المستوى 2."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr "يجب الحصول على عقد عميل إضافي للحصول على الدعم."
+msgstr "مطلوب عقد عميل إضافي للحصول على الدعم."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "خيار الدعم غير معروف. الوصف غير متوفر"
+msgstr "خيار دعم غير معروف. الوصف غير متاح"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -1063,7 +1063,7 @@ msgstr "جيانا الفرنسية"
 #. :GUF:254:
 #: zypp/CountryCode.cc:237
 msgid "Guernsey"
-msgstr "جيرنسي"
+msgstr "غويرنسي"
 
 #: zypp/CountryCode.cc:238
 msgid "Ghana"
