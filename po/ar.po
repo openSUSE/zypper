@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:06+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 14:15+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4271,11 +4271,11 @@ msgstr "لا يمكن توفير الملف '%s' من المخزن '%s'"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
-msgstr "لا يوجد مسار في المستودع."
+msgstr "لا يوجد عنوان url في المخزن."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr "لا يدعم البرنامج المساعد خدمة تغيير السمة."
+msgstr "لا تدعم الأداة الإضافية للخدمة تغيير إحدى السمات."
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
@@ -4283,7 +4283,8 @@ msgstr "لا يدعم البرنامج المساعد خدمة تغيير الس
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
-msgstr "يبدو أن الحزمة %s تلفت أثناء النقل. هل تريد محاولة استرجاعها؟"
+msgstr ""
+"يبدو أنه قد تم إتلاف الحزمة %s أثناء النقل. هل تريد إعادة محاولة الاسترداد؟ "
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4293,7 +4294,7 @@ msgstr "فشل التحقق من التوقيع"
 #: zypp/repo/PackageProvider.cc:386
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr "فشل في تقديم حزمة %s. هل تريد محاولة إعادة استرجاعها؟"
+msgstr "فشل تقديم الحزمة %s. هل تريد إعادة محاولة الاسترداد؟"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
@@ -4309,40 +4310,40 @@ msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
 msgstr ""
-"إدارة النظام مؤمنة من قبل التطبيق مع pid %d (%s).\n"
-"أغلق هذا التطبيق قبل أن تحاول مرة أخرى."
+"يتم قفل إدارة النظام بواسطة التطبيق الذي يتضمن معرف العملية %d (%s).\n"
+"الرجاء إغلاق هذا التطبيق قبل المحاولة مرة أخرى."
 
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr "%s لا ينتمي إلى مستودع الترقية المباشرة"
+msgstr "لا ينتمي %s إلى مخزن ترقية التوزيع"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
 msgid "%s has inferior architecture"
-msgstr "%s لديه الحد الأدنى من المعمارية"
+msgstr "هيكل %s غير ملائم"
 
 #: zypp/solver/detail/SATResolver.cc:983
 #, c-format, boost-format
 msgid "problem with installed package %s"
-msgstr "مشكلة في تثبيت الحزمة %s"
+msgstr "توجد مشكلة بالحزمة المثبتة %s"
 
 #: zypp/solver/detail/SATResolver.cc:986
 msgid "conflicting requests"
-msgstr "الطلبات المتعارضة"
+msgstr "طلبات متعارضة"
 
 #: zypp/solver/detail/SATResolver.cc:989
 msgid "some dependency problem"
-msgstr "بعض مشاكل التبعية"
+msgstr "بعض مشكلات التبعية"
 
 #: zypp/solver/detail/SATResolver.cc:992
 #, c-format, boost-format
 msgid "nothing provides requested %s"
-msgstr "لاأحد يوفر %s"
+msgstr "لا يوجد مصدر لتوفير %s المطلوب"
 
 #: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
 msgid "Have you enabled all requested repositories?"
-msgstr "هل قمت بتمكين كل المستودعات المطلوبة؟"
+msgstr "هل قمت بتمكين كل المخازن المطلوبة؟"
 
 #: zypp/solver/detail/SATResolver.cc:996
 #, c-format, boost-format
@@ -4351,12 +4352,12 @@ msgstr "الحزمة %s غير موجود"
 
 #: zypp/solver/detail/SATResolver.cc:1000
 msgid "unsupported request"
-msgstr "الطلب غير معتمد"
+msgstr "الطلب غير مدعوم"
 
 #: zypp/solver/detail/SATResolver.cc:1003
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr "%s يتم توفيرها من قبل النظام ولا يمكن حذفها"
+msgstr "يتم توفير %s من خلال النظام ولا يمكن حذفها"
 
 #: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
