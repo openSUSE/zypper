@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:36+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 14:40+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4567,27 +4567,27 @@ msgstr "تعبير عادي غير صالح '%s': regcomp أعاد %d"
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
 msgid "Invalid regular expression '%s'"
-msgstr "التعبير العادية غير صالح '%s'"
+msgstr "التعبير العادي '%s' غير صالح"
 
 #: zypp/misc/CheckAccessDeleted.cc:242
 msgid "Please install package 'lsof' first."
-msgstr "الرجاء تثبيت حزمة 'lsof' أولاً."
+msgstr "الرجاء تثبيت حزمة 'lsof' أولًا."
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
-msgstr "المصادقة المطلوبة '%s'"
+msgstr "التصديق مطلوب لـ '%s'"
 
 #: zypp/media/MediaException.cc:31
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
-msgstr "فشل في تحميل %s على %s"
+msgstr "فشل توصيل %s بـ %s"
 
 #: zypp/media/MediaException.cc:41
 #, c-format, boost-format
 msgid "Failed to unmount %s"
-msgstr "فشل فصل %s"
+msgstr "فشل إلغاء توصيل %s"
 
 #: zypp/media/MediaException.cc:47
 #, c-format, boost-format
@@ -4597,12 +4597,12 @@ msgstr "اسم ملف غير صالح: %s"
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "لم يفتح الوسيط عند محاولة تنفيذ الإجراء '%s'."
+msgstr "لم يتم فتح الوسيط أثناء محاولة تنفيذ الإجراء '%s'."
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "الملف '%s' غير موجود على الوسيط '%s'"
+msgstr "لم يتم العثور على الملف '%s' في الوسيط '%s'"
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
@@ -4611,53 +4611,53 @@ msgstr "لا يمكن كتابة الملف '%s'."
 
 #: zypp/media/MediaException.cc:72
 msgid "Medium not attached"
-msgstr "لم يتم توصيل الوسيط"
+msgstr "لم يتم إرفاق الوسيط"
 
 #: zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr "نقطة إرفاق وسائط تالفة"
+msgstr "نقطة إرفاق وسائط غير صالحة"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "فشلت تهيئة التحميل (curl) '%s'"
+msgstr "فشلت تهيئة إنزال (curl) لـ '%s'"
 
 #: zypp/media/MediaException.cc:91
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr "استثناء النظام '%s' على الوسيط '%s'."
+msgstr "استثناء النظام '%s' في الوسيط '%s'."
 
 #: zypp/media/MediaException.cc:98
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr "المسار '%s' على الوسيط '%s' ليس ملف."
+msgstr "المسار '%s' في الوسيط '%s' ليس ملفًا."
 
 #: zypp/media/MediaException.cc:106
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "المسار '%s' على الوسيط '%s' ليس مجلد."
+msgstr "المسار '%s' في الوسيط '%s' ليس دليلاً."
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr "مسار مشوَّه"
+msgstr "URI غير صالح"
 
 #: zypp/media/MediaException.cc:125
 msgid "Empty host name in URI"
-msgstr "اسم مضيف فارغ في المسار"
+msgstr "اسم مضيف فارغ في URI"
 
 #: zypp/media/MediaException.cc:130
 msgid "Empty filesystem in URI"
-msgstr "نظام الملفات فارغ في المسار"
+msgstr "نظام ملفات فارغ في URI"
 
 #: zypp/media/MediaException.cc:135
 msgid "Empty destination in URI"
-msgstr "الوجهة فارغة في المسار"
+msgstr "وجهة فارغة في URI"
 
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "نظام مسار غير معتمد في '%s'."
+msgstr "مخطط URI غير مدعم في '%s'."
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
