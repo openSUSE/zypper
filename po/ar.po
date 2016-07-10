@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 15:56+0000\n"
+"PO-Revision-Date: 2016-07-10 23:00+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
@@ -3051,8 +3051,9 @@ msgstr[5] "%d رقع أمنية"
 
 #. translator: Table column header.
 #: src/update.cc:352
+#, fuzzy
 msgid "Updatestack"
-msgstr ""
+msgstr "مكدس التحديث"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -3708,10 +3709,11 @@ msgstr ""
 
 #: src/Zypper.cc:1495 src/Zypper.cc:1550 src/Zypper.cc:1631 src/Zypper.cc:2178
 #: src/Zypper.cc:2251
+#, fuzzy
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
-msgstr ""
+msgstr "لا يتطلب تفاعل المستخدم. الاسم المستعار لخيار --عدم التفاعل العام."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -3788,12 +3790,14 @@ msgstr ""
 "    --download-only      قم بإنزال الحزم فقط ولا تقم بتثبيتها.\n"
 
 #: src/Zypper.cc:1579
-#, boost-format
+#, boost-format, fuzzy
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"يعد  '%1%' الموقع الافتراضي الذي يقوم rpm فيه بتثبيت الحزم المصدر، ولكن يمكن "
+"تغيير القيمة في تكوين rpm المحلي. في حالة الشك حاول تنفيذ '%2%'."
 
 #: src/Zypper.cc:1613
 #, c-format, boost-format
@@ -4479,55 +4483,77 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
+#, fuzzy
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "قائمة-التصحيحات (lp) [خيارات]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
+#, fuzzy
 msgid "List all applicable patches."
-msgstr ""
+msgstr "سرد كل التصحيحات القابلة للتطبيق."
 
 #: src/Zypper.cc:2302
+#, fuzzy
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b، bugzilla[=#]\n"
+"سرد كل التصحيحات القابلة للتطبيق لمشكلات Bugzilla."
 
 #: src/Zypper.cc:2303
+#, fuzzy
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"سرد التصحيحات القابلة للتطبيق لمشكلات CVE."
 
 #: src/Zypper.cc:2304
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=STRING]\n"
+"   البحث عن المشكلات التي تطابق السلسلة المحددة."
 
 #: src/Zypper.cc:2305
+#, fuzzy
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <ي‏ ي-ش‏ ش-س‏ س‏ س‏ س>\n"
+"سرد التصحيحات التي تم إصدارها حتى التاريخ المحدد."
 
 #: src/Zypper.cc:2306
+#, fuzzy
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g، --category <CATEGORY>\n"
+"سرد التصحيحات بهذه الفئة فقط."
 
 #: src/Zypper.cc:2307
+#, fuzzy
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <SEVERITY>\n"
+"سرد التصحيحات بهذه الخطورة فقط."
 
 #: src/Zypper.cc:2308
+#, fuzzy
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a، --all\n"
+"سرد كل التصحيحات، وليست التصحيحات القابلة للتطبيق فقط."
 
 #: src/Zypper.cc:2310
 #, fuzzy
@@ -4697,15 +4723,20 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
+#, fuzzy
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [OPTIONS]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
+#, fuzzy
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"عرض إحصائيات حول التصحيحات القابلة للتطبيق. يقوم الأمر بإرجاع 100 إذا تم "
+"العثور على التصحيحات المطلوبة وإرجاع 101 إذا كان هناك تصحيح أمان مطلوب واحد "
+"على الأقل."
 
 #: src/Zypper.cc:2476
 #, fuzzy
@@ -5578,8 +5609,9 @@ msgstr[4] "إزالة %lu أقفال."
 msgstr[5] "إزالة %lu أقفال."
 
 #: src/Zypper.cc:5034
+#, fuzzy
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "لم يتم تنفيذ مخرجات XML لهذا الأمر."
 
 #: src/Zypper.cc:5047
 #, c-format, boost-format
@@ -6505,8 +6537,9 @@ msgid "Trying again..."
 msgstr "حاول مرة أخرى..."
 
 #: src/utils/prompt.cc:288
+#, fuzzy
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "لا يمكن قراءة المدخلات: EOF أو تدفق غير صالح."
 
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
@@ -6602,8 +6635,9 @@ msgstr[5] "قابلة للتحقق"
 #. Patch status: i18n + color
 #. translator: patch status
 #: src/utils/misc.cc:134
+#, fuzzy
 msgid "unwanted"
-msgstr ""
+msgstr "غير مرغوب"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
