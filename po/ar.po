@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 14:43+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-10 14:44+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -4703,27 +4703,27 @@ msgstr "لا يمكن إخراج الوسائط '%s'"
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr "إذن الوصول إلى '%s' رُفض."
+msgstr "تم رفض إذن الوصول إلى '%s'."
 
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "تجاوز المهلة عند وصول '%s'."
+msgstr "تم تجاوز المهلة عند الوصول إلى '%s'."
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
-msgstr "موقع '%s' غير متاح مؤقتاً."
+msgstr "يتعذر الوصول إلى الموقع '%s' مؤقتًا."
 
 #: zypp/media/MediaException.cc:223
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr " مشكلة شهادة SSL، تحقق من تثبيت شهادة CA ل '%s'."
+msgstr " مشكلة في شهادة SSL، تحقق من أن شهادة CA صالحة لـ '%s'."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr "لا يمكن العثور على الجهاز المتكرر المتاح لضم صورة الملف من '%s'"
+msgstr "تعذر العثور على جهاز التسلسل المتاح لتوصيل ملف الصور من '%s'"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
