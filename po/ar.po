@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 07:18+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3534,7 +3534,7 @@ msgstr "نمط الجدول غير الصالح %d."
 #: src/Zypper.cc:786
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
-msgstr "استخدم عدد صحيح من %d إلى %d"
+msgstr "استخدام عدد صحيح من %d إلى %d"
 
 #. translators: %1%  - is the name of a subcommand
 #: src/Zypper.cc:898
