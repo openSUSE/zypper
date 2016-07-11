@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 01:25+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 01:26+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2636,12 +2636,12 @@ msgstr "حدثت مشكلة أثناء محاولة قراءة الملف في U
 
 #: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "مستودع بدون اسم تعريفي في الملف، تخطي."
+msgstr "تم العثور على مخزن بدون أي اسم مستعار تم تعريفه، تخطي."
 
 #: src/repos.cc:1779
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "المستودع '%s' بدون مسار معرف، تخطي."
+msgstr "لا يحتوي المخزن '%s' على أي معرف URI معرَّف، تخطي."
 
 #: src/repos.cc:1821
 #, c-format, boost-format
