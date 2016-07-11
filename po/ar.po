@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:54+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 07:55+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5452,7 +5452,7 @@ msgstr "غير مسموح بالوسيطات في حالة استخدام '%s'."
 
 #: src/Zypper.cc:3884
 msgid "Root privileges are required for cleaning local caches."
-msgstr "امتيازات المسؤول مطلوبة لتنظيف الذاكرات المؤقتة المحلية."
+msgstr "امتيازات المسؤول مطلوبة لتنظيف ذاكرات التخزين المؤقت المحلية."
 
 #: src/Zypper.cc:3903
 msgid "At least one package name is required."
