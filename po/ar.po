@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:16+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 07:18+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3462,11 +3462,11 @@ msgid ""
 "\tlocks, ll\t\tList current package locks.\n"
 "\tcleanlocks, cl\t\tRemove unused locks.\n"
 msgstr ""
-"     قفل الحزم:\n"
-"\taddlock، al\t\tإضافة قفل حزمة.\n"
-"\tremovelock، rl\t\tإزالة قفل حزمة.\n"
-"\tlocks، ll\t\tعرض أقفال الحزمة الحالية.\n"
-"\tcleanlocks، cl\t\tإزالة الأقفال غير المستخدمة.\n"
+"     أقفال الحزم:\n"
+"\taddlock, al\t\tإضافة قفل حزمة.\n"
+"\tremovelock, rl\t\tإزالة قفل حزمة.\n"
+"\tlocks, ll\t\tسرد أقفال الحزم الحالية.\n"
+"\tcleanlocks, cl\t\tإزالة الأقفال غير المستخدمة.\n"
 
 #: src/Zypper.cc:544
 msgid ""
@@ -3512,29 +3512,29 @@ msgstr ""
 #: src/Zypper.cc:587
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "اكتب '%s' للحصول على قائمة بالأوامر والخيارات العالمية."
+msgstr "اكتب '%s' للحصول على قائمة بالأوامر والخيارات العامة."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: src/Zypper.cc:596
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
-msgstr "اكتب '%s' للحصول على التعليمات الخاصة بالأمر."
+msgstr "اكتب '%s' للحصول على تعليمات خاصة بالأمر."
 
 #: src/Zypper.cc:771
 #, c-format, boost-format
 msgid "Verbosity: %d"
-msgstr "إسهاب: %d"
+msgstr "الإسهاب: %d"
 
 #: src/Zypper.cc:785
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr "نمط الجدول غير صالح %d."
+msgstr "نمط الجدول غير الصالح %d."
 
 #: src/Zypper.cc:786
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
-msgstr "استخدام رقم صحيح من %d إلى %d"
+msgstr "استخدم عدد صحيح من %d إلى %d"
 
 #. translators: %1%  - is the name of a subcommand
 #: src/Zypper.cc:898
