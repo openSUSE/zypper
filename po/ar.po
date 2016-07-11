@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:28+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 08:29+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6321,7 +6321,7 @@ msgstr "الترخيص"
 
 #: src/misc.cc:244
 msgid "EULA"
-msgstr "اتفاقية ترخيص المستخدم"
+msgstr "اتفاقية ترخيص المستخدم النهائي (EULA)"
 
 #: src/misc.cc:256
 msgid "SUMMARY"
