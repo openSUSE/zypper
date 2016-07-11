@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 15:17+0000\n"
+"PO-Revision-Date: 2016-07-11 15:45+0000\n"
 "Last-Translator: Asa Karlsson <asa.karlsson@lqs-lionbridge.com>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
@@ -56,8 +56,8 @@ msgstr "Gpg-nyckelsigneringsfilen %1% har upphört att gälla."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "Gpg-nyckeln som signerar filen  '%1%' löper ut om  %2% dag."
-msgstr[1] "Gpg-nyckeln som signerar filen  '%1%' löper ut om  %2% dagar."
+msgstr[0] "Gpg-nyckelsigneringsfilen '%1%' löper ut om %2% dag."
+msgstr[1] "Gpg-nyckelsigneringsfilen '%1%' löper ut om %2% dagar."
 
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
@@ -91,7 +91,8 @@ msgstr "Accepterar filen %s som är signerad med en okänd nyckel: %s."
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Accepterar filen '%s' från förrådet '%s' signerad med en okänd nyckel '%s'."
+"Accepterar filen '%s' från lagringsplatsen '%s' signerad med en okänd nyckel "
+"'%s'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -105,8 +106,8 @@ msgstr "Filen %s är signerad med en okänd nyckel: %s. Vill du fortsätta?"
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"Filen '%s' från förrådet '%s' är signerad med en okänd nyckel '%s'. Vill du "
-"fortsätta?"
+"Filen '%s' från lagringsplatsen '%s' är signerad med en okänd nyckel '%s'. "
+"Vill du fortsätta?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
@@ -165,7 +166,7 @@ msgstr "Ignorerar felaktig signatur för filen '%s'!"
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ignorerar felaktig signatur för filen '%s' från förrådet '%s'!"
+msgstr "Ignorerar felaktig signatur för filen '%s' från lagringsplatsen '%s'!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
