@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 00:11+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -916,7 +916,7 @@ msgstr "لا يتوفر أي تحديث مرشح لـ '%s'. تم تثبيت أح
 #: src/RequestFeedback.cc:108
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
-msgstr "لا يتوفر أي تحديث لـ '%s'."
+msgstr "لا يتوفر أي تحديث مرشح لـ '%s'."
 
 #: src/RequestFeedback.cc:114
 #, c-format, boost-format
