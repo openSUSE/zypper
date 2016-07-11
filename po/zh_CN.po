@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-01 06:32+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-11 12:33+0000\n"
+"Last-Translator: Raymond Wang <raymond.wang@lqs-lionbridge.com>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -78,7 +78,7 @@ msgstr "文件 '%s' 未签名，继续吗？"
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "文件 '%s' 来自软件源 '%s' 未签名，继续吗？"
+msgstr "文件 '%s'（来自软件源 '%s'）未签名，继续吗？"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
@@ -89,7 +89,7 @@ msgstr "正在接受文件 '%s'，该文件以未知密钥 '%s' 签署。"
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "正在接受文件 '%s' (来自软件源 '%s')，该文件以未知密钥 '%s' 签署。"
+msgstr "正在接受文件 '%s'（来自软件源 '%s'），该文件以未知密钥 '%s' 签署。"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -102,7 +102,7 @@ msgstr "文件 '%s' 以未知密钥 '%s' 签署。继续吗？"
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "文件 '%s' (来自软件源 '%s') 以未知密钥 '%s' 签署。继续吗？"
+msgstr "文件 '%s'（来自软件源 '%s'）以未知密钥 '%s' 签署。继续吗？"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
@@ -5862,7 +5862,7 @@ msgstr "正在重试..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
-msgstr "无法读取输出：错误的串流或文件结尾 (EOF)。"
+msgstr "无法读取输入：错误的流或文件结尾 (EOF)。"
 
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
@@ -6004,7 +6004,7 @@ msgstr "可能您的磁盘空间不足了。"
 
 #: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
-msgstr "撷取指定 RPM 文件出现问题"
+msgstr "检索指定的 RPM 文件时出现问题"
 
 #: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
