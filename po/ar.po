@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:29+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 08:30+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6340,7 +6340,7 @@ msgstr "الحزم المثبَّتة بنظراء في المخازن: %d"
 #: src/misc.cc:259
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
-msgstr "الحزم المثبتة باستخدام EULAs: %d"
+msgstr "الحزم المثبتة باستخدام اتفاقيات EULA: %d"
 
 #: src/misc.cc:289
 #, c-format, boost-format
