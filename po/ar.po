@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:46+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 08:47+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6748,7 +6748,7 @@ msgstr "التنسيق الصحيح هو obs://<project>/[platform]"
 
 #: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "حدثت مشكلة أثناء نسخ ملف RPM المحدد في دليل الذاكرة المؤقتة."
+msgstr "حدثت مشكلة أثناء نسخ ملف RPM المحدد في دليل ذاكرة التخزين المؤقت."
 
 #: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
