@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:13+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 08:16+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6021,22 +6021,22 @@ msgstr "لا يوجد ما يمكن إجراؤه."
 #. process ID
 #: src/ps.cc:115
 msgid "PID"
-msgstr "PID"
+msgstr "معرف العملية"
 
 #. parent process ID
 #: src/ps.cc:117
 msgid "PPID"
-msgstr "PPID"
+msgstr "معرف العملية الرئيسية"
 
 #. process user ID
 #: src/ps.cc:119
 msgid "UID"
-msgstr "مُعرِّف المُستخدِم"
+msgstr "معرف المستخدم"
 
 #. process login name
 #: src/ps.cc:121
 msgid "User"
-msgstr "مستخدم"
+msgstr "المستخدم"
 
 #. process command name
 #: src/ps.cc:123
@@ -6046,15 +6046,15 @@ msgstr "الأمر"
 #. "list of deleted files or libraries accessed"
 #: src/ps.cc:129
 msgid "Files"
-msgstr "ملفات"
+msgstr "الملفات"
 
 #: src/ps.cc:160
 msgid "No processes using deleted files found."
-msgstr "لم يتم العثور على عمليات تستخدم الملفات المحذوفة."
+msgstr "لم يتم العثور على عمليات تستخدم ملفات محذوفة."
 
 #: src/ps.cc:164
 msgid "The following running processes use deleted files:"
-msgstr "العمليات قيد التشغيل التالية تستخدم الملفات المحذوفة:"
+msgstr "تستخدم العمليات التالية قيد التشغيل الآن ملفات محذوفة:"
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
@@ -6064,7 +6064,9 @@ msgstr "قد ترغب في إعادة تشغيل هذه العمليات."
 #, c-format, boost-format
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
-msgstr "انظر '%s' للحصول على معلومات حول معني القيم في الجدول أعلاه."
+msgstr ""
+"راجع '%s' للحصول على مزيد من المعلومات حول معنى القيم المذكورة في الجدول "
+"السابق."
 
 #: src/ps.cc:175
 msgid ""
@@ -6072,34 +6074,34 @@ msgid ""
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
 msgstr ""
-"ملاحظة: لا تعمل كجذر بحثك محدود بالملفات التي لديك إذن بفحصها مع دالة النظام "
-"stat(2) . قد تكون النتيجة ناقصة."
+"ملاحظة: لا تعمل كجذر، بحثك محدود بالملفات التي لديك إذن بفحصها باستخدام دالة "
+"النظام stat(2) . قد تكون النتيجة غير مكتملة."
 
 #: src/source-download.cc:208
 #, c-format, boost-format
 msgid "Can't create or access download directory '%s'."
-msgstr "لا يمكن إنشاء أو الوصول لتحميل المجلد '%s'."
+msgstr "لا يمكن إنشاء دليل التنزيل '%s' أو الوصول إليه."
 
 #: src/source-download.cc:221
 #, c-format, boost-format
 msgid "Using download directory at '%s'."
-msgstr "استخدام مجلد التحميل في '%s'."
+msgstr "استخدام دليل التنزيل في '%s'."
 
 #: src/source-download.cc:231 src/source-download.cc:262
 msgid "Failed to read download directory"
-msgstr "فشل في قراءة مجلد التحميل"
+msgstr "فشلت قراءة دليل التنزيل"
 
 #: src/source-download.cc:236
 msgid "Scanning download directory"
-msgstr "مسح مجلد التحميل"
+msgstr "مسح دليل التنزيل"
 
 #: src/source-download.cc:266
 msgid "Scanning installed packages"
-msgstr "قراءة الحزم المثبتة"
+msgstr "مسح الحزم المثبتة"
 
 #: src/source-download.cc:285
 msgid "Installed packages:"
-msgstr "الحزم المثبتة:"
+msgstr "الحزم المُثبتة:"
 
 #: src/source-download.cc:288
 msgid "Required source packages:"
@@ -6107,20 +6109,20 @@ msgstr "حزم المصدر المطلوبة:"
 
 #: src/source-download.cc:297
 msgid "Required source packages available in download directory:"
-msgstr "حزم المصدر المطلوبة متوفرة في مجلد التحميل:"
+msgstr "حزم المصدر المطلوبة متوفرة في دليل التنزيل:"
 
 #: src/source-download.cc:301
 msgid "Required source packages to be downloaded:"
-msgstr "حزم المصدر المطلوب ليتم تحميلها:"
+msgstr "حزم المصدر المطلوبة المراد تنزيلها:"
 
 #: src/source-download.cc:305
 msgid "Superfluous source packages in download directory:"
-msgstr "تم تحميل حزم مصدر زائدة في المجلد:"
+msgstr "الحزم المصدر غير الضرورية في دليل التنزيل:"
 
 #. translators: table headers
 #: src/source-download.cc:319
 msgid "Source package"
-msgstr "مصدر الحزمة"
+msgstr "حزمة المصدر"
 
 #: src/source-download.cc:319
 msgid "Installed package"
