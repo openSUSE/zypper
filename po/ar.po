@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 01:17+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2513,7 +2513,7 @@ msgstr "تعذر تنظيف المخزن '%s' بسبب حدوث خطأ."
 
 #: src/repos.cc:1479
 msgid "Cleaning installed packages cache."
-msgstr "يتم الآن تنظيف الحزم المثبَّتة."
+msgstr "تنظيف ذاكرة التخزين المؤقت للحزم المثبَّتة."
 
 #: src/repos.cc:1488
 msgid "Cannot clean installed packages cache because of an error."
