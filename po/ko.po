@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-11 02:01+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -3774,7 +3774,7 @@ msgstr "라자스탄어"
 #. language code: rap
 #: zypp/LanguageCode.cc:887
 msgid "Rapanui"
-msgstr "라파뉴이"
+msgstr "라파누이어"
 
 # src/config/routing.y2cc:11
 #. language code: rar
