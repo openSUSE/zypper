@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:55+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 07:56+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5456,26 +5456,26 @@ msgstr "امتيازات المسؤول مطلوبة لتنظيف ذاكرات �
 
 #: src/Zypper.cc:3903
 msgid "At least one package name is required."
-msgstr "مطلوب اسم حزمة واحدة على الأقل."
+msgstr "مطلوب اسم حزمة واحد على الأقل."
 
 #: src/Zypper.cc:3912
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr "امتيازات الجذر مطلوبة لتثبيت أو إلغاء تثبيت الحزم."
+msgstr "امتيازات المسؤول مطلوبة لتثبيت الحزم أو إلغاء تثبيتها."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/Zypper.cc:3924
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "تجاهل الوسائط، ضع العلامات على المستودع بأكمله."
+msgstr "تجاهل الوسيطات، ووضع علامة على المخزن الكامل."
 
 #: src/Zypper.cc:3935
 #, c-format, boost-format
 msgid "Unknown package type: %s"
-msgstr "نوع حزمة غير معروف: %s"
+msgstr "نوع الحزمة غير معروف: '%s'"
 
 #: src/Zypper.cc:3945
 msgid "Cannot uninstall patches."
-msgstr "لا يمكن إلغاء تثبيت التصحيح."
+msgstr "تعذر إلغاء تثبيت الدفعات."
 
 #: src/Zypper.cc:3946
 msgid ""
