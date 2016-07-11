@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 12:07+0000\n"
+"PO-Revision-Date: 2016-07-11 13:32+0000\n"
 "Last-Translator: Stanislav Kneifl <Stanislav.Kneifl@lqs-lionbridge.com>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
@@ -47,7 +47,7 @@ msgstr "Neplatný parametr dotazu LDAP URL %s"
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
-msgstr "Nelze zkopírovat objekt URL"
+msgstr "Nelze klonovat objekt URL"
 
 #: zypp/Url.cc:313
 msgid "Invalid empty Url object reference"
@@ -111,13 +111,13 @@ msgstr "Vylepšuje"
 
 #: zypp/Dep.cc:104
 msgid "Supplements"
-msgstr "Doplňky"
+msgstr "Doplňuje"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Pochybný typ '%s' pro %u kontrolní součet bytů'%s'"
+msgstr "Pochybný typ %s pro %u-bajtový kontrolní součet %s"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
@@ -147,7 +147,7 @@ msgstr "Chyba při odesílání oznámení o aktualizaci."
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
-msgstr "Nový aktualizační vzkaz"
+msgstr "Nová zpráva o aktualizaci"
 
 #: zypp/target/TargetImpl.cc:1219 zypp/target/TargetImpl.cc:1288
 #: zypp/target/TargetImpl.cc:1640
@@ -161,15 +161,15 @@ msgstr "Bohužel, tato verze libzypp byla sestavena bez podpory HAL."
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
-msgstr "Kontext HAL není připojen"
+msgstr "HALContext není připojen"
 
 #: zypp/target/hal/HalContext.cc:127
 msgid "HalDrive not initialized"
-msgstr "Jednotka HAL není inicializována"
+msgstr "HALDrive není inicializovaný"
 
 #: zypp/target/hal/HalContext.cc:137
 msgid "HalVolume not initialized"
-msgstr "Svazek HAL není inicializován"
+msgstr "HALVolume není inicializovaný"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
@@ -247,7 +247,7 @@ msgid ""
 "Here are the first 25 lines of difference:\n"
 msgstr ""
 "Program rpm vytvořil %s jako %s.\n"
-"Prvních odlišných 25 řádek:\n"
+"Prvních 25 řádek rozdílů:\n"
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
@@ -273,7 +273,7 @@ msgstr "Neznámý typ podpisu"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
 msgid "Signature does not verify"
-msgstr "Podpis neověřuje"
+msgstr "Podpis nelze ověřit"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2371
@@ -297,19 +297,19 @@ msgstr "Budou provedeny následující akce:"
 #: zypp/RepoManager.cc:297
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "Nelze přečíst adresář repozitáře '%1%': Přístup odepřen"
+msgstr "Nelze číst z adresáře úložiště %1%: Přístup odepřen"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "Chyba čtení adresáře '%s'"
+msgstr "Chyba při čtení z adresáře %s"
 
 #: zypp/RepoManager.cc:315
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr "Nelze přečíst soubor repozitáře '%1%': Přístup odepřen"
+msgstr "Nelze přečíst soubor úložiště %1%: Přístup odepřen"
 
 #: zypp/RepoManager.cc:338
 msgid "Repository alias cannot start with dot."
@@ -332,7 +332,7 @@ msgstr "Nelze otevřít soubor '%s' pro zápis."
 #: zypp/RepoManager.cc:849
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr "Neznámá služba '%1%': Odstraňuje se osiřelý repozitář služby '%2%'"
+msgstr "Neznámá služba '%1%': Odstraňuje se osiřelé úložiště služby '%2%'"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
@@ -354,21 +354,21 @@ msgstr "Nelze vytvořit adresář s mezipamětí metadat."
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "Vytváří se vyrovnávací paměť repozitáře '%s'"
+msgstr "Vytváří se vyrovnávací paměť úložiště '%s'"
 
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "Nelze vytvořit cache v %s - chybí oprávnění k zápisu."
+msgstr "Nelze vytvořit mezipaměť v adresáři %s - chybí oprávnění k zápisu."
 
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "Chyba při načtení repozitáře do cache (%d)."
+msgstr "Chyba při načítání úložiště do mezipaměti (%d)."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
-msgstr "Nepodporovaný typ repozitáře"
+msgstr "Nepodporovaný typ úložiště"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -390,7 +390,7 @@ msgstr "Neznámá chyba při čtení z '%s'"
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "Přidává se repozitář '%s'"
+msgstr "Přidává se úložiště %s"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
@@ -401,11 +401,11 @@ msgstr "Název souboru úložiště na adrese URL „%s“ je neplatný"
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Odebírá se repozitář '%s'"
+msgstr "Odebírá se úložiště %s"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
-msgstr "Nelze zjistit umístění repozitáře."
+msgstr "Nelze zjistit umístění úložiště."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
@@ -545,11 +545,11 @@ msgstr "Příkaz skončil se stavem %d."
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "Příkaz byl zabit signálem %d (%s)."
+msgstr "Příkaz byl ukončen signálem %d (%s)."
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
-msgstr "Příkaz byl ukončen s neznámou chybou."
+msgstr "Příkaz skončil s neznámou chybou."
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:116
@@ -571,13 +571,13 @@ msgstr "(vyprší během 24 hodin)"
 #, boost-format, c-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(vyprší během %d 1 dne)"
-msgstr[1] "(vyprší během %d 2 dnů)"
-msgstr[2] "(vyprší během %d 2 dní)"
+msgstr[0] "(vyprší během %d dne)"
+msgstr[1] "(vyprší během %d dnů)"
+msgstr[2] "(vyprší během %d dnů)"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
-msgstr "neznámý"
+msgstr "neznámé"
 
 #: zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
