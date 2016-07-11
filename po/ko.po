@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 01:58+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-11 02:01+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -3475,28 +3475,28 @@ msgstr "미란다어"
 #. language code: mwr
 #: zypp/LanguageCode.cc:769
 msgid "Marwari"
-msgstr "마르와르어"
+msgstr "마르와리어"
 
 #. language code: myn
 #: zypp/LanguageCode.cc:771
 msgid "Mayan Languages"
-msgstr "마야어족"
+msgstr "마야어"
 
 #. language code: myv
 #: zypp/LanguageCode.cc:773
 msgid "Erzya"
-msgstr "에르지아어"
+msgstr "엘즈야어"
 
 # src/isdn/interface.ycp:258 src/isdn/lowlevel.ycp:52
 #. language code: nah
 #: zypp/LanguageCode.cc:775
 msgid "Nahuatl"
-msgstr "나와어"
+msgstr "나우아틀어"
 
 #. language code: nai
 #: zypp/LanguageCode.cc:777
 msgid "North American Indian"
-msgstr "북아메리카 인디언 제어"
+msgstr "북아메리카 인디언어"
 
 #. language code: nap
 #: zypp/LanguageCode.cc:779
@@ -3511,23 +3511,23 @@ msgstr "나바조"
 #. language code: nbl nr
 #: zypp/LanguageCode.cc:785
 msgid "Ndebele, South"
-msgstr "은데벨레어 (남)"
+msgstr "은데벨레어, 남부"
 
 #. language code: nde nd
 #: zypp/LanguageCode.cc:787
 msgid "Ndebele, North"
-msgstr "은데벨레어 (북)"
+msgstr "은데벨레어, 북부"
 
 # TO
 #. language code: ndo ng
 #: zypp/LanguageCode.cc:789
 msgid "Ndonga"
-msgstr "은동가어"
+msgstr "느동가어"
 
 #. language code: nds
 #: zypp/LanguageCode.cc:791
 msgid "Low German"
-msgstr "저지 색슨어"
+msgstr "저지 독일어"
 
 # NP
 #. language code: nep ne
@@ -3550,23 +3550,23 @@ msgstr "니아스어"
 #. language code: nic
 #: zypp/LanguageCode.cc:799
 msgid "Niger-Kordofanian (Other)"
-msgstr "니제르코르도판어족 (기타)"
+msgstr "니제르-코르도파니아어(기타)"
 
 #  Tv frequency table
 #. language code: niu
 #: zypp/LanguageCode.cc:801
 msgid "Niuean"
-msgstr "니우에어"
+msgstr "니웨언어"
 
 #. language code: nno nn
 #: zypp/LanguageCode.cc:803
 msgid "Norwegian Nynorsk"
-msgstr "노르웨이어 (뉘노르스크)"
+msgstr "뉘노르스크 노르웨이어"
 
 #. language code: nob nb
 #: zypp/LanguageCode.cc:805
 msgid "Norwegian Bokmal"
-msgstr "노르웨이어 (보크몰)"
+msgstr "보크말 노르웨이어"
 
 # TO
 #. language code: nog
@@ -3577,7 +3577,7 @@ msgstr "노가이어"
 #. language code: non
 #: zypp/LanguageCode.cc:809
 msgid "Norse, Old"
-msgstr "노르드어 (고대)"
+msgstr "노르웨이어, 고대"
 
 #. language code: nor no
 #: zypp/LanguageCode.cc:811
@@ -3587,12 +3587,12 @@ msgstr "노르웨이어"
 #. language code: nso
 #: zypp/LanguageCode.cc:813
 msgid "Northern Sotho"
-msgstr "소토어 (북)"
+msgstr "소토어, 북부"
 
 #. language code: nub
 #: zypp/LanguageCode.cc:815
 msgid "Nubian Languages"
-msgstr "누비아어군"
+msgstr "누비안어"
 
 #. language code: nwc
 #: zypp/LanguageCode.cc:817
@@ -3602,7 +3602,7 @@ msgstr "네와르어(고전)"
 #. language code: nya ny
 #: zypp/LanguageCode.cc:819
 msgid "Chichewa"
-msgstr "니안자어"
+msgstr "치츄어"
 
 # src/isdn/complex.ycp:266 src/modem/complex.ycp:207
 # src/provider/complex.ycp:186
@@ -3614,27 +3614,27 @@ msgstr "니암웨지어"
 #. language code: nyn
 #: zypp/LanguageCode.cc:823
 msgid "Nyankole"
-msgstr "은콜레어"
+msgstr "니안콜어"
 
 #. language code: nyo
 #: zypp/LanguageCode.cc:825
 msgid "Nyoro"
-msgstr "니오로어"
+msgstr "뉴로어"
 
 #. language code: nzi
 #: zypp/LanguageCode.cc:827
 msgid "Nzima"
-msgstr "은제마어"
+msgstr "느지마어"
 
 #. language code: oci oc
 #: zypp/LanguageCode.cc:829
 msgid "Occitan (post 1500)"
-msgstr "프로방스어 (1500년 이후)"
+msgstr "옥시트어(1500년 이후)"
 
 #. language code: oji oj
 #: zypp/LanguageCode.cc:831
 msgid "Ojibwa"
-msgstr "오지브와어"
+msgstr "오지브웨이어"
 
 # SY
 # fuzzy
@@ -3657,27 +3657,27 @@ msgstr "오세이지어"
 #. language code: oss os
 #: zypp/LanguageCode.cc:839
 msgid "Ossetian"
-msgstr "오세트어"
+msgstr "오세티아어"
 
 #. language code: ota
 #: zypp/LanguageCode.cc:841
 msgid "Turkish, Ottoman (1500-1928)"
-msgstr "튀르크어 (오스만); 오스만 투르크어 (1500년경-1928년)"
+msgstr "터키어, 오스만(1500-1928)"
 
 #. language code: oto
 #: zypp/LanguageCode.cc:843
 msgid "Otomian Languages"
-msgstr "오토미어군"
+msgstr "오토미안어"
 
 #. language code: paa
 #: zypp/LanguageCode.cc:845
 msgid "Papuan (Other)"
-msgstr "파푸아 제어 (기타)"
+msgstr "파푸아어(기타)"
 
 #. language code: pag
 #: zypp/LanguageCode.cc:847
 msgid "Pangasinan"
-msgstr "팡가시난어"
+msgstr "판가시난어"
 
 #. language code: pal
 #: zypp/LanguageCode.cc:849
@@ -3692,22 +3692,22 @@ msgstr "팜팡가어"
 #. language code: pan pa
 #: zypp/LanguageCode.cc:853
 msgid "Panjabi"
-msgstr "펀자브어"
+msgstr "펀잡어"
 
 #. language code: pap
 #: zypp/LanguageCode.cc:855
 msgid "Papiamento"
-msgstr "파피아멘토어"
+msgstr "파피아먼토어"
 
 #. language code: pau
 #: zypp/LanguageCode.cc:857
 msgid "Palauan"
-msgstr "팔라우어"
+msgstr "파라우안어"
 
 #. language code: peo
 #: zypp/LanguageCode.cc:859
 msgid "Persian, Old (ca.600-400 B.C.)"
-msgstr "페르시아어 (고대) (BC 600년-BC 400년경)"
+msgstr "페르시안 고대어(ca.600-400 B.C.)"
 
 #. language code: per fas fa
 #: zypp/LanguageCode.cc:861 zypp/LanguageCode.cc:863
@@ -3717,7 +3717,7 @@ msgstr "페르시아어"
 #. language code: phi
 #: zypp/LanguageCode.cc:865
 msgid "Philippine (Other)"
-msgstr "필리핀 제어 (기타)"
+msgstr "필리핀어(기타)"
 
 #. language code: phn
 #: zypp/LanguageCode.cc:867
@@ -3737,27 +3737,27 @@ msgstr "폴란드어"
 #. language code: pon
 #: zypp/LanguageCode.cc:873
 msgid "Pohnpeian"
-msgstr "폰페이어"
+msgstr "폼페이어"
 
 #. language code: por pt
 #: zypp/LanguageCode.cc:875
 msgid "Portuguese"
-msgstr "포르투칼어"
+msgstr "포르투갈어"
 
 #. language code: pra
 #: zypp/LanguageCode.cc:877
 msgid "Prakrit Languages"
-msgstr "프라크리트 제어"
+msgstr "프라크리트어"
 
 #. language code: pro
 #: zypp/LanguageCode.cc:879
 msgid "Provencal, Old (to 1500)"
-msgstr "프로방스어 (고대) (1500년 이전)"
+msgstr "프로벤칼어, 고대(1500년까지)"
 
 #. language code: pus ps
 #: zypp/LanguageCode.cc:881
 msgid "Pushto"
-msgstr "파슈토어"
+msgstr "푸시토어"
 
 #. language code: que qu
 #: zypp/LanguageCode.cc:883
@@ -3774,7 +3774,7 @@ msgstr "라자스탄어"
 #. language code: rap
 #: zypp/LanguageCode.cc:887
 msgid "Rapanui"
-msgstr "라파누이어"
+msgstr "라파뉴이"
 
 # src/config/routing.y2cc:11
 #. language code: rar
