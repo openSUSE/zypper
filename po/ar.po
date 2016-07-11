@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 01:14+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2493,7 +2493,7 @@ msgstr "تنظيف ذاكرة التخزين المؤقت لبيانات الت�
 #: src/repos.cc:1447
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "تنظيف بيانات التعريف الخام من ذاكرة التخزين المؤقتة '%s'."
+msgstr "تنظيف الذاكرة المؤقتة لبيانات التعريف الأولية لـ '%s'."
 
 #: src/repos.cc:1453
 #, c-format, boost-format
