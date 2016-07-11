@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 01:36+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2714,7 +2714,7 @@ msgstr "تم تمكين التحقق من GPG للمخزن '%s'."
 #: src/repos.cc:2068
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
-msgstr "تم تعطيل فحص GPG للمستودع '%s'."
+msgstr "تم تعطيل تدقيق GPG للمخزن '%s'."
 
 #: src/repos.cc:2074
 #, c-format, boost-format
