@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:04+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 08:07+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5767,7 +5767,7 @@ msgstr[5] "%d مشاكل:"
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
 msgid "Specified capability not found"
-msgstr "القدرة المحددة غير موجودة"
+msgstr "لم يتم العثور على الإمكانية المحددة"
 
 #: src/solve-commit.cc:160
 #, c-format, boost-format
@@ -5782,33 +5782,33 @@ msgstr "تحليل التبعيات..."
 #: src/solve-commit.cc:220
 #, c-format, boost-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
-msgstr "%sالمتعارض مع %s سيستخدم الأقل ضرر%s"
+msgstr "هناك تعارض بين %s و%s، وسيعمل ذلك على استخدام %s الأقل شدة"
 
 #: src/solve-commit.cc:248
 msgid "Force resolution:"
-msgstr "فرض بالقوة:"
+msgstr "فرض الدقة:"
 
 #: src/solve-commit.cc:330
 msgid "Verifying dependencies..."
-msgstr "التحقق من التبعيات..."
+msgstr "يتم الآن التحقق من التبعيات..."
 
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:378
 msgid "Computing upgrade..."
-msgstr "الترقية الحوسبية..."
+msgstr "يتم الآن احتساب الترقية..."
 
 #: src/solve-commit.cc:392
 msgid "Generating solver test case..."
-msgstr "توليد اختبار حالة الحل..."
+msgstr "يتم الآن إنشاء حالة اختبار المحلل..."
 
 #: src/solve-commit.cc:394
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr "تم إنشاء اختبار حالة الحل بنجاح %s."
+msgstr "تم إنشاء حالة اختبار المحلل بنجاح في %s."
 
 #: src/solve-commit.cc:397
 msgid "Error creating the solver test case."
-msgstr "حدث خطأ أثناء إنشاء حالة اختبار الحل."
+msgstr "حدث خطأ أثناء إنشاء حالة اختبار المحلل."
 
 #: src/solve-commit.cc:431
 #, c-format, boost-format
@@ -5822,7 +5822,7 @@ msgstr ""
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
 msgid "Checking for running processes using deleted libraries..."
-msgstr "التحقق من تشغيل العمليات التي تستخدم حذف المكتبات..."
+msgstr "التحقق من العملية قيد التشغيل الآن باستخدام المكتبات المحذوفة..."
 
 #: src/solve-commit.cc:447 src/ps.cc:59
 msgid "Check failed:"
@@ -5840,41 +5840,42 @@ msgid ""
 "upgrade. You may wish to check and restart some of them. Run '%s' to list "
 "these programs."
 msgstr ""
-"هناك برامج تعمل قد تستخدم ملفات حذفت في الترقية الأخيرة. قد ترغب في إعادة "
-"فحص وتشغيل بعض منهم. شغل '%s' للحصول على قائمة بهذه البرامج."
+"توجد بعض البرامج قيد التشغيل، والتي قد تستخدم ملفات تم حذفها بواسطة الترقية "
+"الحديثة. قد تريد التحقق من بعض هذه البرامج وإعادة تشغيل بعض منها. قم بتشغيل "
+"'%s' لإدراج هذه البرامج."
 
 #: src/solve-commit.cc:468
 msgid "Update notifications were received from the following packages:"
-msgstr "وردت إخطارات تحديث من الحزم التالية:"
+msgstr "تم استلام إعلامات التحديث من الحزم التالية:"
 
 #: src/solve-commit.cc:477
 #, c-format, boost-format
 msgid "Message from package %s:"
-msgstr "رسالة من حزمة %s:"
+msgstr "رسالة من الحزمة %s:"
 
 #: src/solve-commit.cc:485
 msgid "y/n"
-msgstr "ن/ﻻ"
+msgstr "نعم/لا"
 
 #: src/solve-commit.cc:486
 msgid "View the notifications now?"
-msgstr "عرض الإشعارات الآن؟"
+msgstr "هل تريد عرض الإعلامات الآن؟"
 
 #: src/solve-commit.cc:532
 msgid "Computing distribution upgrade..."
-msgstr "حساب ترقية التوزيعة..."
+msgstr "يتم احتساب ترقية التوزيع..."
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
-msgstr "التحقق من تبعيات الحزمة..."
+msgstr "يتم الآن تحليل تبعيات الحزمة..."
 
 #: src/solve-commit.cc:614
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
-"بعض من تبعيات الحزم المثبتة مكسورة. من أجل إصلاح هذه التبعيات، يتعين اتخاذ "
-"الإجراءات التالية:"
+"تم قطع اتصال بعض تبعيات الحزم المثبَّتة. لإصلاح هذه التبعيات، يجب القيام "
+"بالإجراءات التالية:"
 
 #: src/solve-commit.cc:621
 msgid "Root privileges are required to fix broken package dependencies."
