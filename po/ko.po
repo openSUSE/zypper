@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 02:01+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-11 02:05+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -3785,17 +3785,17 @@ msgstr "라로통가어"
 #. language code: roa
 #: zypp/LanguageCode.cc:891
 msgid "Romance (Other)"
-msgstr "로망스어군 (기타)"
+msgstr "로망스어(기타)"
 
 #. language code: roh rm
 #: zypp/LanguageCode.cc:893
 msgid "Raeto-Romance"
-msgstr "레토로망어"
+msgstr "레토로만어"
 
 #. language code: rom
 #: zypp/LanguageCode.cc:895
 msgid "Romany"
-msgstr "롬어"
+msgstr "집시어"
 
 #. language code: rum ron ro
 #: zypp/LanguageCode.cc:897 zypp/LanguageCode.cc:899
@@ -3821,27 +3821,27 @@ msgstr "산다웨어"
 #. language code: sag sg
 #: zypp/LanguageCode.cc:907
 msgid "Sango"
-msgstr "상고어"
+msgstr "산고어"
 
 #. language code: sah
 #: zypp/LanguageCode.cc:909
 msgid "Yakut"
-msgstr "야쿠트어"
+msgstr "야큐트어"
 
 #. language code: sai
 #: zypp/LanguageCode.cc:911
 msgid "South American Indian (Other)"
-msgstr "남아메리카 인디언 제어 (기타)"
+msgstr "남아메리카 인디언어(기타)"
 
 #. language code: sal
 #: zypp/LanguageCode.cc:913
 msgid "Salishan Languages"
-msgstr "살리시어족"
+msgstr "샐리시어어"
 
 #. language code: sam
 #: zypp/LanguageCode.cc:915
 msgid "Samaritan Aramaic"
-msgstr "사마리아 아람어"
+msgstr "사마리아 아랍어"
 
 #. language code: san sa
 #: zypp/LanguageCode.cc:917
@@ -3856,7 +3856,7 @@ msgstr "사사크어"
 #. language code: sat
 #: zypp/LanguageCode.cc:921
 msgid "Santali"
-msgstr "산탈어"
+msgstr "산탈리어"
 
 #. language code: scc srp sr
 #: zypp/LanguageCode.cc:923 zypp/LanguageCode.cc:925
@@ -3871,7 +3871,7 @@ msgstr "시칠리아어"
 #. language code: sco
 #: zypp/LanguageCode.cc:929
 msgid "Scots"
-msgstr "스코트어"
+msgstr "스코틀랜드어"
 
 #. language code: scr hrv hr
 #: zypp/LanguageCode.cc:931 zypp/LanguageCode.cc:933
@@ -3886,17 +3886,17 @@ msgstr "셀쿠프어"
 #. language code: sem
 #: zypp/LanguageCode.cc:937
 msgid "Semitic (Other)"
-msgstr "셈어파 (기타)"
+msgstr "셈어(기타)"
 
 #. language code: sga
 #: zypp/LanguageCode.cc:939
 msgid "Irish, Old (to 900)"
-msgstr "아일랜드어 (고대) (900년 이전)"
+msgstr "아일랜드어, 고대(900년까지)"
 
 #. language code: sgn
 #: zypp/LanguageCode.cc:941
 msgid "Sign Languages"
-msgstr "수화(手話)"
+msgstr "수화"
 
 # GH
 #. language code: shn
@@ -3913,22 +3913,22 @@ msgstr "시다모어"
 #. language code: sin si
 #: zypp/LanguageCode.cc:947
 msgid "Sinhala"
-msgstr "싱할라어"
+msgstr "신할라어"
 
 #. language code: sio
 #: zypp/LanguageCode.cc:949
 msgid "Siouan Languages"
-msgstr "수어족"
+msgstr "수족어"
 
 #. language code: sit
 #: zypp/LanguageCode.cc:951
 msgid "Sino-Tibetan (Other)"
-msgstr "시노티베트어족 (기타)"
+msgstr "시노티베트어(기타)"
 
 #. language code: sla
 #: zypp/LanguageCode.cc:953
 msgid "Slavic (Other)"
-msgstr "슬라브어파 (기타)"
+msgstr "슬라브어(기타)"
 
 #. language code: slo slk sk
 #: zypp/LanguageCode.cc:955 zypp/LanguageCode.cc:957
@@ -3943,27 +3943,27 @@ msgstr "슬로베니아어"
 #. language code: sma
 #: zypp/LanguageCode.cc:961
 msgid "Southern Sami"
-msgstr "사미어 (남)"
+msgstr "남부 사미어"
 
 #. language code: sme se
 #: zypp/LanguageCode.cc:963
 msgid "Northern Sami"
-msgstr "사미어 (북)"
+msgstr "북부 사미어"
 
 #. language code: smi
 #: zypp/LanguageCode.cc:965
 msgid "Sami Languages (Other)"
-msgstr "사미어계 (기타)"
+msgstr "사미어(기타)"
 
 #. language code: smj
 #: zypp/LanguageCode.cc:967
 msgid "Lule Sami"
-msgstr "사미어 (룰레)"
+msgstr "룰레 사미어"
 
 #. language code: smn
 #: zypp/LanguageCode.cc:969
 msgid "Inari Sami"
-msgstr "사미어(이나리)"
+msgstr "이나리 사미어"
 
 #. language code: smo sm
 #: zypp/LanguageCode.cc:971
@@ -3973,7 +3973,7 @@ msgstr "사모아어"
 #. language code: sms
 #: zypp/LanguageCode.cc:973
 msgid "Skolt Sami"
-msgstr "사미어 (스콜트)"
+msgstr "스콜트 사미어"
 
 #. language code: sna sn
 #: zypp/LanguageCode.cc:975
@@ -3983,7 +3983,7 @@ msgstr "쇼나어"
 #. language code: snd sd
 #: zypp/LanguageCode.cc:977
 msgid "Sindhi"
-msgstr "신드어"
+msgstr "신디어"
 
 #. language code: snk
 #: zypp/LanguageCode.cc:979
@@ -3993,23 +3993,23 @@ msgstr "소닌케어"
 #. language code: sog
 #: zypp/LanguageCode.cc:981
 msgid "Sogdian"
-msgstr "소그드어"
+msgstr "소그디엔어"
 
 # SO
 #. language code: som so
 #: zypp/LanguageCode.cc:983
 msgid "Somali"
-msgstr "소말리어"
+msgstr "소말리아어"
 
 #. language code: son
 #: zypp/LanguageCode.cc:985
 msgid "Songhai"
-msgstr "송가이어"
+msgstr "송가이족어"
 
 #. language code: sot st
 #: zypp/LanguageCode.cc:987
 msgid "Sotho, Southern"
-msgstr "소토어 (남)"
+msgstr "소토어, 남부"
 
 #. language code: spa es
 #: zypp/LanguageCode.cc:989
@@ -4019,17 +4019,17 @@ msgstr "스페인어"
 #. language code: srd sc
 #: zypp/LanguageCode.cc:991
 msgid "Sardinian"
-msgstr "사르데냐어"
+msgstr "사르디니아어"
 
 #. language code: srr
 #: zypp/LanguageCode.cc:993
 msgid "Serer"
-msgstr "세레르어"
+msgstr "세셀어"
 
 #. language code: ssa
 #: zypp/LanguageCode.cc:995
 msgid "Nilo-Saharan (Other)"
-msgstr "나일사하라어족 (기타)"
+msgstr "니로-사하람어(기타)"
 
 # HT
 #. language code: ssw ss
@@ -4040,12 +4040,12 @@ msgstr "스와티어"
 #. language code: suk
 #: zypp/LanguageCode.cc:999
 msgid "Sukuma"
-msgstr "수쿠마어"
+msgstr "수쿠마족어"
 
 #. language code: sun su
 #: zypp/LanguageCode.cc:1001
 msgid "Sundanese"
-msgstr "순다어"
+msgstr "순단어"
 
 #. language code: sus
 #: zypp/LanguageCode.cc:1003
@@ -4082,7 +4082,7 @@ msgstr "타히티어"
 #. language code: tai
 #: zypp/LanguageCode.cc:1015
 msgid "Tai (Other)"
-msgstr "타이어군 (기타)"
+msgstr "태국어(기타)"
 
 #  tree node string - CPU information
 #. language code: tam ta
@@ -4103,12 +4103,12 @@ msgstr "텔루구어"
 #. language code: tem
 #: zypp/LanguageCode.cc:1023
 msgid "Timne"
-msgstr "템네어"
+msgstr "팀니어"
 
 #. language code: ter
 #: zypp/LanguageCode.cc:1025
 msgid "Tereno"
-msgstr "테레나어"
+msgstr "테레노어"
 
 #. language code: tet
 #: zypp/LanguageCode.cc:1027
@@ -4151,43 +4151,43 @@ msgstr "티그리냐어"
 #. language code: tiv
 #: zypp/LanguageCode.cc:1043
 msgid "Tiv"
-msgstr "티브어"
+msgstr "티비어"
 
 #. language code: tlh
 #: zypp/LanguageCode.cc:1047
 msgid "Klingon"
-msgstr "클링온어"
+msgstr "클링곤어"
 
 #. language code: tli
 #: zypp/LanguageCode.cc:1049
 msgid "Tlingit"
-msgstr "틀링깃어"
+msgstr "틀링기트어"
 
 #. language code: tmh
 #: zypp/LanguageCode.cc:1051
 msgid "Tamashek"
-msgstr "타마셰크어"
+msgstr "타마섹어"
 
 #. language code: tog
 #: zypp/LanguageCode.cc:1053
 msgid "Tonga (Nyasa)"
-msgstr "통가어 (니아사)"
+msgstr "통가어(니아사)"
 
 #. language code: ton to
 #: zypp/LanguageCode.cc:1055
 msgid "Tonga (Tonga Islands)"
-msgstr "통가어 (통가 제도)"
+msgstr "통가어(통가섬)"
 
 #  combo box entry, networking technology name
 #. language code: tpi
 #: zypp/LanguageCode.cc:1057
 msgid "Tok Pisin"
-msgstr "톡 피신어"
+msgstr "토크 피신어"
 
 #. language code: tsi
 #: zypp/LanguageCode.cc:1059
 msgid "Tsimshian"
-msgstr "침시아어"
+msgstr "트심시안어"
 
 #. language code: tsn tn
 #: zypp/LanguageCode.cc:1061
@@ -4203,7 +4203,7 @@ msgstr "총가어"
 #. language code: tuk tk
 #: zypp/LanguageCode.cc:1065
 msgid "Turkmen"
-msgstr "터키어"
+msgstr "투르크멘어"
 
 #. language code: tum
 #: zypp/LanguageCode.cc:1067
@@ -4213,7 +4213,7 @@ msgstr "툼부카어"
 #. language code: tup
 #: zypp/LanguageCode.cc:1069
 msgid "Tupi Languages"
-msgstr "투피어족"
+msgstr "투피어"
 
 #. language code: tur tr
 #: zypp/LanguageCode.cc:1071
@@ -4223,7 +4223,7 @@ msgstr "터어키어"
 #. language code: tut
 #: zypp/LanguageCode.cc:1073
 msgid "Altaic (Other)"
-msgstr "알타이어족 (기타)"
+msgstr "알타이어(기타)"
 
 #. language code: twi tw
 #: zypp/LanguageCode.cc:1077
@@ -4233,7 +4233,7 @@ msgstr "트위어"
 #. language code: tyv
 #: zypp/LanguageCode.cc:1079
 msgid "Tuvinian"
-msgstr "투바어"
+msgstr "투비니안어"
 
 #. language code: udm
 #: zypp/LanguageCode.cc:1081
@@ -4244,7 +4244,7 @@ msgstr "우드무르트어"
 #. language code: uga
 #: zypp/LanguageCode.cc:1083
 msgid "Ugaritic"
-msgstr "우가리트어"
+msgstr "유가리틱어"
 
 #. language code: uig ug
 #: zypp/LanguageCode.cc:1085
@@ -4265,7 +4265,7 @@ msgstr "움분두어"
 #. language code: und
 #: zypp/LanguageCode.cc:1091
 msgid "Undetermined"
-msgstr "미확인 언어"
+msgstr "결정되지 않음"
 
 #. language code: urd ur
 #: zypp/LanguageCode.cc:1093
@@ -4275,7 +4275,7 @@ msgstr "우르두어"
 #. language code: uzb uz
 #: zypp/LanguageCode.cc:1095
 msgid "Uzbek"
-msgstr "우즈베크어"
+msgstr "우즈벡어"
 
 #. language code: vai
 #: zypp/LanguageCode.cc:1097
@@ -4295,7 +4295,7 @@ msgstr "베트남어"
 #. language code: vol vo
 #: zypp/LanguageCode.cc:1103
 msgid "Volapuk"
-msgstr "볼라퓌크"
+msgstr "볼라퓌크어"
 
 #. language code: vot
 #: zypp/LanguageCode.cc:1105
