@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-11 00:41+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -28,7 +28,7 @@ msgstr "Hal 예외"
 
 #: zypp/Url.cc:114
 msgid "Invalid LDAP URL query string"
-msgstr "LDAP URL 쿼리 스트링이 잘못되었습니다."
+msgstr "잘못된 LDAP URL 쿼리 스트링"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
