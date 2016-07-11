@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 01:56+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-11 01:58+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -3397,7 +3397,7 @@ msgstr "기타 언어"
 #. language code: mkh
 #: zypp/LanguageCode.cc:741
 msgid "Mon-Khmer (Other)"
-msgstr "몬크메르어파 (기타)"
+msgstr "몬크메르어(기타)"
 
 # MG
 #. language code: mlg mg
@@ -3420,12 +3420,12 @@ msgstr "만주어"
 #. language code: mni
 #: zypp/LanguageCode.cc:749
 msgid "Manipuri"
-msgstr "마니푸르어"
+msgstr "마니푸리어"
 
 #. language code: mno
 #: zypp/LanguageCode.cc:751
 msgid "Manobo Languages"
-msgstr "마노보어군"
+msgstr "마노보어"
 
 #. language code: moh
 #: zypp/LanguageCode.cc:753
@@ -3435,7 +3435,7 @@ msgstr "모호크어"
 #. language code: mol mo
 #: zypp/LanguageCode.cc:755
 msgid "Moldavian"
-msgstr "몰도바어"
+msgstr "몰다비아어"
 
 # MN
 #. language code: mon mn
@@ -3452,17 +3452,17 @@ msgstr "모시어"
 #. language code: mul
 #: zypp/LanguageCode.cc:761
 msgid "Multiple Languages"
-msgstr "다중 언어"
+msgstr "다국어"
 
 #. language code: mun
 #: zypp/LanguageCode.cc:763
 msgid "Munda languages"
-msgstr "문다어파"
+msgstr "문다어"
 
 #. language code: mus
 #: zypp/LanguageCode.cc:765
 msgid "Creek"
-msgstr "무스코지어"
+msgstr "크리크어"
 
 # FM
 # fuzzy
