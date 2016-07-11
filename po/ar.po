@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:58+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 08:00+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5512,31 +5512,31 @@ msgstr "ذاكرة التخزين المؤقت لملفات RPM العادية"
 
 #: src/Zypper.cc:4045
 msgid "No valid arguments specified."
-msgstr "لم يتم تحديد أية وسائط صالح."
+msgstr "لم يتم تحديد أية وسيطات صالحة."
 
 #: src/Zypper.cc:4062 src/Zypper.cc:4193
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr ""
-"لا توجد مستودعات معرفة. التعامل فقط مع المثبتة والمُتحقق منها. لا يمكن تثبيت "
-"أي شئ."
+"لم يتم تحديد أي مخازن. يتم التشغيل بالتبعيات القابلة للتحليل المثبتة فقط. "
+"ولا يمكن تثبيت أي شيء آخر."
 
 #. translators: meaning --capability contradicts --force/--name
 #: src/Zypper.cc:4099 src/Zypper.cc:4658
 #, c-format, boost-format
 msgid "%s contradicts %s"
-msgstr "%s يتعارض مع %s"
+msgstr "هناك تعارض بين %s و%s"
 
 #. translators: meaning --force with --capability
 #: src/Zypper.cc:4107
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
-msgstr "%sلا يمكن حاليا استخدام%s"
+msgstr "يتعذر حاليًا استخدام %s مع %s"
 
 #: src/Zypper.cc:4148
 msgid "Source package name is a required argument."
-msgstr "مطلوب اسم وسيط مصدر الحزمة."
+msgstr "اسم الحزمة المصدر وسيطة مطلوبة."
 
 #: src/Zypper.cc:4231
 msgid "Mode is set to 'match-exact'"
@@ -5546,12 +5546,12 @@ msgstr "تم تعيين الوضع إلى 'التطابق الدقيق'"
 #: src/Zypper.cc:4922 src/Zypper.cc:4962
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
-msgstr "نوع حزمة غير معروف: '%s'."
+msgstr "نوع الحزمة '%s' غير معروف."
 
 #: src/Zypper.cc:4273
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
-msgstr "المستودع المحدد '%s' تم تعطيله."
+msgstr "تم تعطيل المخزن المحدد '%s'."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
@@ -5561,29 +5561,29 @@ msgstr "لم يتم العثور على إصدار مطابق."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
-msgstr "حدثت مشكلة أثناء تهيئة أو تنفيذ استعلام البحث"
+msgstr "حدثت مشكلة أثناء تهيئة استعلام البحث أو تنفيذه"
 
 #: src/Zypper.cc:4439
 msgid "See the above message for a hint."
-msgstr "انظر رسالة التلميح أعلاه."
+msgstr "راجع الرسالة أعلاه للحصول على تلميح."
 
 #: src/Zypper.cc:4596 src/Zypper.cc:4644
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
-msgstr "لا يمكن استخدام%s مع %s."
+msgstr "تعذر استخدام %s مع %s."
 
 #: src/Zypper.cc:4625
 msgid "Root privileges are required for updating packages."
-msgstr "امتيازات الجذر مطلوبة لتحديث حزم."
+msgstr "امتيازات المسؤول مطلوبة لتحديث الحزم."
 
 #: src/Zypper.cc:4684 src/Zypper.cc:4692 src/Zypper.cc:4765
 msgid "Operation not supported."
-msgstr "عمليّة غير مدعومة."
+msgstr "العملية غير مدعومة."
 
 #: src/Zypper.cc:4685
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
-msgstr "لتحديث المنتجات المثبتة استخدم '%s'."
+msgstr "لتحديث المنتجات المثبتة، استخدم '%s'."
 
 #: src/Zypper.cc:4693
 #, c-format, boost-format
@@ -5591,8 +5591,8 @@ msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
-"Zypper لا يبقي مسار التعقب للحزم المثبتة. لتثبيت أحدث حزمة المصدر وبناء "
-"تبعيتها، استخدم '%s'."
+"لا يتتبع Zypper الحزم المصدر المثبتة. لتثبيت أحدث حزمة مصدر وتبعيات الإصدارة "
+"الخاصة بها، استخدم '%s'."
 
 #: src/Zypper.cc:4709
 msgid ""
