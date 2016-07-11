@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:00+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 08:01+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5597,11 +5597,11 @@ msgstr ""
 #: src/Zypper.cc:4709
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
-msgstr "لا يمكن استخدام أنواع متعددة عندما يتم إعطاء مجموعات محددة من الوسائط."
+msgstr "يتعذر استخدام أنواع متعددة عند منح حزم محددة على أنها وسيطات."
 
 #: src/Zypper.cc:4801
 msgid "Root privileges are required for performing a distribution upgrade."
-msgstr "امتيازات الجذر مطلوبة للقيام بترقية التوزيعة."
+msgstr "امتيازات المسؤول مطلوبة لتنفيذ ترقية توزيع."
 
 #: src/Zypper.cc:4821
 #, c-format, boost-format
@@ -5610,8 +5610,9 @@ msgid ""
 "Make sure these repositories are compatible before you continue. See '%s' "
 "for more information about this command."
 msgstr ""
-"أنت على وشك القيام بترقية التوزيعة بكل المستودعات الممكنة. تأكد من توافق هذه "
-"المستودعات قبل المتابعة. انظر '%s' لمزيد من المعلومات حول هذا الأمر."
+"أنت على وشك القيام بترقية التوزيع من خلال كافة المخازن الممكّنة. فتأكد أن "
+"هذه المخازن متوافقة مع بعضها قبل المتابعة. راجع '%s' للحصول على مزيد من "
+"المعلومات حول هذا الأمر."
 
 #: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
