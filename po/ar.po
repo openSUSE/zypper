@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 09:57+0000\n"
+"PO-Revision-Date: 2016-07-11 16:40+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
@@ -112,12 +112,10 @@ msgstr ""
 "تم توقيع الملف '%s' من المخزن '%s' بمفتاح غير معروف '%s'. هل تريد المتابعة؟"
 
 #: src/callbacks/keyring.h:173
-#, fuzzy
 msgid "Automatically importing the following key:"
 msgstr "استيراد المفتاح التالي تلقائياً:"
 
 #: src/callbacks/keyring.h:175
-#, fuzzy
 msgid "Automatically trusting the following key:"
 msgstr "الوثوق بالمفتاح التالي تلقائياً:"
 
@@ -127,7 +125,6 @@ msgstr "تم استلام مفتاح توقيع مخزن أو حزمة جديد�
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
-#, fuzzy
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr "هل تريد رفض المفتاح أو الوثوق مؤقتًا أو الوثوق دائمًا؟"
 
@@ -227,13 +224,12 @@ msgstr ""
 "    ولكن الناتج %4%\n"
 
 #: src/callbacks/keyring.h:344
-#, fuzzy
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
-"قبول الحزم مع مجموع عمليات التحقق الخاطئة قد يؤدي إلى تعطيل النظام، أو في "
-"الحالات القصوى، قد يؤدي إلى نظام غير مستقر."
+"قد يؤدي قبول الحزم ذات المجموعات الاختيارية الخاطئة إلى تعطيل النظام، أو في "
+"الحالات القصوى، قد يؤدي إلى نظام غير آمن."
 
 #: src/callbacks/keyring.h:352
 #, boost-format
@@ -277,9 +273,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "تشغيل: %s (%s و%s)"
 
 #: src/callbacks/rpm.h:208
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "إزالة %s"
+msgstr "إزالة  %s 1"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:213
@@ -293,9 +289,9 @@ msgid "Removal of %s failed:"
 msgstr "فشلت إزالة %s:"
 
 #: src/callbacks/rpm.h:279
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "يتم تثبيت: %s"
+msgstr "التثبيت: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:284
@@ -304,7 +300,7 @@ msgid "Installing: %s-%s"
 msgstr "تثبيت: %s-%s"
 
 #: src/callbacks/rpm.h:308
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Installation of %s failed:"
 msgstr "فشل تثبيت %s:"
 
@@ -320,15 +316,15 @@ msgstr "التحقق من وجود تعارض في الملفات:"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:390
-#, boost-format, fuzzy
+#, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
 "يتطلب التحقق من وجود تعارضات الملفات إنزال الحزم التي لم يتم تثبيتها مقدمًا "
-"من أجل الوصول إلى قوائم الملفات الخاصة بها. راجع الخيار '%1%' في صفحة zypper "
-"اليدوية للحصول على مزيد من التفاصيل."
+"من أجل الوصول إلى قوائم الملفات الخاصة بها. راجع الخيار '%1%' في صفحة دليل "
+"zypper لمزيد من التفاصيل."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
@@ -955,7 +951,7 @@ msgid ""
 msgstr "يتوفر تحديث مرشح لـ '%s'، ولكنه مقفل. استخدم '%s' لإلغاء القفل."
 
 #: src/RequestFeedback.cc:148
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
@@ -1048,7 +1044,7 @@ msgstr "إضافة تعارض: '%s'."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:263
-#, boost-format, fuzzy
+#, boost-format
 msgid "Did you mean %1%?"
 msgstr "هل تعني %1%؟"
 
@@ -1502,27 +1498,27 @@ msgstr[4] "يوصى بالرقع التالية %d لكن لن يتم تثبيت
 msgstr[5] "يوصى بالرقع التالية %d لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:938
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] "يوصى بالنمط التالي لكن لن يتم تثبيته:"
-msgstr[1] "يوصى بـ %d من الأنماط التالية لكن لن يتم تثبيتها:"
-msgstr[2] "يوصى بالنمطان التاليان %d لكن لن يتم تثبيتهما:"
-msgstr[3] "يوصى بـ %d من الأنماط التالية لكن لن يتم تثبيتها:"
-msgstr[4] "يوصى بـ %d من الأنماط التالية لكن لن يتم تثبيتها:"
-msgstr[5] "يوصى بـ %d من الأنماط التالية لكن لن يتم تثبيتها:"
+msgstr[0] "لا يوصى بأي من الأنماط التالية، ولن يتم تثبيته:"
+msgstr[1] "يوصى بنمط واحد مما يلي، لكن لن يتم تثبيته:"
+msgstr[2] "يوصى بـنمطين مما يلي، لكن لن يتم تثبيتهما:"
+msgstr[3] "يوصى ببعض الأنماط مما يلي، لكن لن يتم تثبيتها:"
+msgstr[4] "يوصى بأنماط كثيرة مما يلي، لكن لن يتم تثبيتها:"
+msgstr[5] "يوصى بـ %d من الأنماط التالية، لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:942
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] "يوصى بالمنتج التالي، لكن لن يتم تثبيته:"
-msgstr[1] "يوصى بالمنتج التالي %d لكن لن يتم تثبيته:"
-msgstr[2] "يوصى بالمنتجين التاليين %d لكن لن يتم تثبيتهما:"
-msgstr[3] "يوصى بـ %d من المنتجات التالية لكن لن يتم تثبيتها:"
-msgstr[4] "يوصى بـ %d من المنتجات التالية لكن لن يتم تثبيتها:"
+msgstr[0] "لا يوصى بأي منتج مما يلي، ولن يتم تثبيته:"
+msgstr[1] "يوصى بمنتج واحد مما يلي، لكن لن يتم تثبيته:"
+msgstr[2] "يوصى بمنتجين مما يلي، لكن لن يتم تثبيتهما:"
+msgstr[3] "يوصى ببعض المنتجات مما يلي، لكن لن يتم تثبيتها:"
+msgstr[4] "يوصى بمنتجات كثيرة مما يلي، لكن لن يتم تثبيتها:"
 msgstr[5] "يوصى بـ %d من المنتجات التالية لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:946
@@ -1550,16 +1546,16 @@ msgstr[4] "الحزم التالية مقترحة %d لكن لن يتم تثبي
 msgstr[5] "الحزم التالية مقترحة %d لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:991
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "التصحيح التالي مقترح لكن لن يتم تثبيته:"
-msgstr[1] "التصحيح التالي %d مقترح لكن لن يتم تثبيته:"
-msgstr[2] "التصحيحان التاليان %d مقترحان لكن لن يتم تثبيتهما:"
-msgstr[3] "%d من التصحيحات التالية مقترحة لكن لن يتم تثبيتها:"
-msgstr[4] "%d من التصحيحات التالية مقترحة لكن لن يتم تثبيتها:"
-msgstr[5] "%d من التصحيحات التالية مقترحة لكن لن يتم تثبيتها:"
+msgstr[0] "لم يتم اقتراح تصحيح مما يلي، ولن يتم تثبيته:"
+msgstr[1] "التصحيح التالي مقترح، لكن لن يتم تثبيته:"
+msgstr[2] "التصحيحان التاليان مقترحان، لكن لن يتم تثبيتهما:"
+msgstr[3] "%d من التصحيحات التالية مقترحة، لكن لن يتم تثبيتها:"
+msgstr[4] "%d من التصحيحات التالية مقترحة، لكن لن يتم تثبيتها:"
+msgstr[5] "%d من التصحيحات التالية مقترحة، لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:996
 #, c-format, boost-format
@@ -1574,16 +1570,16 @@ msgstr[4] "الأنماط التالية %d مقترحة، لكن لن يتم ت
 msgstr[5] "الأنماط التالية %d مقترحة، لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:1001
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] "المنتج التالي مقترح لكن لن يتم تثبيته:"
-msgstr[1] "المنتج التالي %d مقترح لكن لن يتم تثبيته:"
-msgstr[2] "المنتجان التاليان %d مقترحان، لكن لن يتم تثبيتهما:"
-msgstr[3] "%d من المنتجات التالية مقترح، لكن لن يتم تثبيته:"
-msgstr[4] "%d من المنتجات التالية مقترح، لكن لن يتم تثبيته:"
-msgstr[5] "%d من المنتجات التالية مقترح، لكن لن يتم تثبيته:"
+msgstr[0] "لم يتم اقتراح أي منتج مما يلي، ولن يتم تثبيته:"
+msgstr[1] "المنتج التالي مقترح، لكن لن يتم تثبيته:"
+msgstr[2] "المنتجان التاليان مقترحان، لكن لن يتم تثبيتهما:"
+msgstr[3] "%d من المنتجات التالية مقترحة، لكن لن يتم تثبيتها:"
+msgstr[4] "%d من المنتجات التالية مقترحة، لكن لن يتم تثبيتها:"
+msgstr[5] "%d من المنتجات التالية مقترحة، لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:1006
 #, c-format, boost-format
@@ -2423,7 +2419,6 @@ msgid "Parent Service"
 msgstr "الخدمة الرئيسية"
 
 #: src/repos.cc:1109
-#, fuzzy
 msgid "Keywords"
 msgstr "الكلمات الأساسية"
 
@@ -3067,9 +3062,8 @@ msgstr[5] "%d رقع أمنية"
 
 #. translator: Table column header.
 #: src/update.cc:352
-#, fuzzy
 msgid "Updatestack"
-msgstr "مكدس التحديث"
+msgstr "Updatestack"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -3096,9 +3090,8 @@ msgstr "سيتم تثبيت تحديثات إدارة البرامج التال�
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "سيتم تثبيت تحديث إدارة البرامج التالية أولاً:"
+msgstr "سيتم تثبيت تحديثات إدارة البرامج المطلوبة أولاً:"
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
@@ -3173,12 +3166,10 @@ msgstr ""
 "استبعادها."
 
 #: src/Zypper.cc:80
-#, fuzzy
 msgid "The default is to exclude optional patches."
 msgstr "يعد استبعاد التصحيحات الاختيارية افتراضيًا."
 
 #: src/Zypper.cc:81
-#, fuzzy
 msgid "The default is to include optional patches."
 msgstr "يعد تضمين التصحيحات الاختيارية افتراضيًا."
 
@@ -3617,7 +3608,6 @@ msgstr "لا يُحدث الخيار %s أي تأثير هنا، تجاهل."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
-#, fuzzy
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "لا يدعم برنامج الواجهة شل في zypper تنفيذ الأوامر الفرعية."
 
@@ -3811,7 +3801,7 @@ msgstr ""
 "    --download-only      قم بإنزال الحزم فقط ولا تقم بتثبيتها.\n"
 
 #: src/Zypper.cc:1579
-#, boost-format, fuzzy
+#, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
 "value can be changed in your local rpm configuration. In case of doubt try "
@@ -4509,21 +4499,18 @@ msgstr "list-patches (lp) [خيارات]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
-#, fuzzy
 msgid "List all applicable patches."
 msgstr "سرد كل التصحيحات القابلة للتطبيق."
 
 #: src/Zypper.cc:2302
-#, fuzzy
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
 "-b، bugzilla[=#]\n"
-"سرد كل التصحيحات القابلة للتطبيق لمشكلات Bugzilla."
+"سرد التصحيحات القابلة للتطبيق لمشكلات Bugzilla."
 
 #: src/Zypper.cc:2303
-#, fuzzy
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
@@ -4540,16 +4527,15 @@ msgstr ""
 "   البحث عن المشكلات التي تطابق السلسلة المحددة."
 
 #: src/Zypper.cc:2305
-#, fuzzy
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
 "--date <ي‏ ي-ش‏ ش-س‏ س‏ س‏ س>\n"
-"سرد التصحيحات التي تم إصدارها حتى التاريخ المحدد."
+"سرد التصحيحات التي تم إصدارها حتى التاريخ المحدد فقط، ولا يشمل ذلك هذا "
+"التاريخ."
 
 #: src/Zypper.cc:2306
-#, fuzzy
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
@@ -4558,7 +4544,6 @@ msgstr ""
 "سرد التصحيحات بهذه الفئة فقط."
 
 #: src/Zypper.cc:2307
-#, fuzzy
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
@@ -4567,7 +4552,6 @@ msgstr ""
 "سرد التصحيحات بهذه الخطورة فقط."
 
 #: src/Zypper.cc:2308
-#, fuzzy
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
@@ -4747,7 +4731,6 @@ msgstr "patch-check (pchk) [خيارات]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
-#, fuzzy
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
@@ -5632,7 +5615,6 @@ msgstr[4] "إزالة %lu أقفال."
 msgstr[5] "إزالة %lu أقفال."
 
 #: src/Zypper.cc:5034
-#, fuzzy
 msgid "XML output not implemented for this command."
 msgstr "لم يتم تنفيذ مخرجات XML لهذا الأمر."
 
@@ -6423,15 +6405,15 @@ msgid "No lock has been removed."
 msgstr "لم تتم إزالة أي قفل."
 
 #: src/locks.cc:306
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "%z 1u من الأقفال تمت إزالتها بنجاح."
-msgstr[1] "%z 1u من الأقفال تمت إزالتها بنجاح."
-msgstr[2] "قفلان %z 2u من الأقفال تمت إزالتهما بنجاح."
-msgstr[3] "%z 2u من الأقفال تمت إزالتها بنجاح."
-msgstr[4] "%z 2u من الأقفال تمت إزالتها بنجاح."
-msgstr[5] "%z 2u من الأقفال تمت إزالتها بنجاح."
+msgstr[0] "لم تتم إزالة أي من الأقفال بنجاح."
+msgstr[1] "تمت إزالة قفل واحد بنجاح."
+msgstr[2] "تمت إزالة قفلين بنجاح."
+msgstr[3] "تمت إزالة %z 2u من الأقفال بنجاح."
+msgstr[4] "تمت إزالة %z 2u من الأقفال بنجاح."
+msgstr[5] "تمت إزالة %z 2u من الأقفال بنجاح."
 
 #: src/locks.cc:313
 msgid "Problem removing the package lock:"
@@ -6568,7 +6550,6 @@ msgid "Trying again..."
 msgstr "تتم الآن المحاولة مرة أخرى..."
 
 #: src/utils/prompt.cc:288
-#, fuzzy
 msgid "Cannot read input: bad stream or EOF."
 msgstr "لا يمكن قراءة المدخلات: EOF أو تدفق غير صالح."
 
@@ -6666,7 +6647,6 @@ msgstr[5] "قابلة للتحقق"
 #. Patch status: i18n + color
 #. translator: patch status
 #: src/utils/misc.cc:134
-#, fuzzy
 msgid "unwanted"
 msgstr "غير مرغوب"
 
@@ -6682,7 +6662,6 @@ msgstr "مطلوب"
 
 #. translator: patch status
 #: src/utils/misc.cc:137
-#, fuzzy
 msgid "applied"
 msgstr "تم تطبيقه"
 
