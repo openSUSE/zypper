@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 06:54+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 07:01+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3195,11 +3195,11 @@ msgstr "هل ترغب في إنهاء PackageKit؟"
 
 #: src/Zypper.cc:118
 msgid "PackageKit is still running (probably busy)."
-msgstr "لا يزال عدة الحزم قيد التشغيل (ربما مشغول)."
+msgstr "PackageKit قيد التشغيل بالفعل (من المحتمل أن يكون مشغولاً)."
 
 #: src/Zypper.cc:119
 msgid "Try again?"
-msgstr "محاولة مرة أخرى؟"
+msgstr "حاول مرة أخرى؟"
 
 #: src/Zypper.cc:189
 #, boost-format
