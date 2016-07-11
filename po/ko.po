@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-11 02:15+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -4842,7 +4842,7 @@ msgstr ""
 #: zypp/media/MediaException.cc:161
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "'%s'에 대한 다운로드(curl) 옵션을 설정하는 동안 오류가 발생했습니다:"
+msgstr "'%s'에 대한 다운로드(curl) 옵션을 설정하는 동안 오류가 발생했습니다."
 
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
