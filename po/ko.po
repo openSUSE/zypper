@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 00:58+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-11 01:31+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -45,27 +45,27 @@ msgstr "빈 URL 객체 참조는 잘못되었습니다."
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
-msgstr "URL 부분을 해석 할 수 없음"
+msgstr "URL 구성요소를 구문 분석할 수 없습니다."
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
-msgstr "상호 배타 기능의 속성을 초기화 할 수 없음"
+msgstr "mutex 특성을 초기화할 수 없습니다."
 
 #: zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
-msgstr "재귀 상호 배타 기능의 속성을 설정 할 수 없음"
+msgstr "순환 mutex 특성을 설정할 수 없습니다."
 
 #: zypp/thread/Mutex.cc:47
 msgid "Can't initialize recursive mutex"
-msgstr "재귀 상호 배타 기능을 초기화 할 수 없음"
+msgstr "순환 mutex를 초기화할 수 없습니다."
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr "상호 배타 기능의 권리를 취득 할 수 없음"
+msgstr "mutex 잠금을 획득할 수 없습니다."
 
 #: zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
-msgstr "상호 배타 기능의 권리를 개방 할 수 없음"
+msgstr "mutex 잠금을 해제할 수 없습니다."
 
 #: zypp/Dep.cc:96
 msgid "Provides"
@@ -78,15 +78,15 @@ msgstr "전제조건"
 #  tree node string
 #: zypp/Dep.cc:98
 msgid "Requires"
-msgstr "필요"
+msgstr "필수"
 
 #: zypp/Dep.cc:99
 msgid "Conflicts"
-msgstr "경합"
+msgstr "충돌"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
-msgstr "오래된것"
+msgstr "폐기사항"
 
 #: zypp/Dep.cc:101
 msgid "Recommends"
@@ -98,7 +98,7 @@ msgstr "제안"
 
 #: zypp/Dep.cc:103
 msgid "Enhances"
-msgstr "기능강화"
+msgstr "기능 향상"
 
 #: zypp/Dep.cc:104
 msgid "Supplements"
@@ -108,15 +108,15 @@ msgstr "보충"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "의심스러운 형식 '%s'(%u 바이트 체크섬 '%s'에 대한)"
+msgstr "모호한 유형 '%s'(%u바이트 체크섬 '%s'에 대해)"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
-msgstr "실행 되어 있음"
+msgstr " 실행됨"
 
 #: zypp/target/TargetImpl.cc:332
 msgid " execution failed"
-msgstr "실행에 실패"
+msgstr " 실행 실패됨"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
@@ -128,13 +128,13 @@ msgstr "%s이(가) 이미 %s(으)로 실행되었습니다."
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
-msgstr "중단 중에 실행을 생략"
+msgstr " 중단하는 중 실행 건너뜀"
 
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
 #: zypp/target/TargetImpl.cc:607
 msgid "Error sending update message notification."
-msgstr "업데이트 메시지 알림 전달 중 오류."
+msgstr "업데이트 메시지 알림을 보내는 중에 오류가 발생했습니다."
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
@@ -144,39 +144,39 @@ msgstr "새 업데이트 메시지"
 #: zypp/target/TargetImpl.cc:1640
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."
-msgstr "지시대로 설치가 중단되었습니다."
+msgstr "설치가 지시된 대로 중단되었습니다."
 
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr "죄송합니다. 이 libzypp의 버전은 HAL 지원 없이 빌드되었습니다."
+msgstr "이 버전의 libzypp는 HAL 지원 없이 작성되었습니다."
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
-msgstr "HalContext 가 연결되지 않음"
+msgstr "HalContext가 연결되지 않았음"
 
 #: zypp/target/hal/HalContext.cc:127
 msgid "HalDrive not initialized"
-msgstr "HalDrive 는 초기화되지 않음"
+msgstr "HalDrive가 초기화되지 않았음"
 
 #: zypp/target/hal/HalContext.cc:137
 msgid "HalVolume not initialized"
-msgstr "HalVolume 은 초기화되지 않음"
+msgstr "HalVolume이 초기화되지 않았음"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
-msgstr "dbus 연결을 만들 수 없음"
+msgstr "dbus 연결을 생성할 수 없음"
 
 #: zypp/target/hal/HalContext.cc:242
 msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: libhal 문맥을 만들수 없음"
+msgstr "libhal_ctx_new: libhal 컨텍스트를 생성할 수 없음"
 
 #: zypp/target/hal/HalContext.cc:257
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: dbus 연결 설정을 할 수 없음"
+msgstr "libhal_set_dbus_connection: dbus 연결을 설정할 수 없음"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "HAL 문맥을 초기화 할 수 없음 -- hald 가 동작하지 않습니까?"
+msgstr "HAL 컨텍스트를 초기화할 수 없습니다. hald가 실행되고 있지 않습니까?"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
@@ -187,19 +187,19 @@ msgstr "CD-ROM 드라이브가 아님"
 #: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
 #: zypp/target/rpm/RpmDb.cc:2189
 msgid "RPM failed: "
-msgstr "RPM 실패함: "
+msgstr "RPM 실패: "
 
 #. TranslatorExplanation first %s is file name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1124
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
-msgstr "%s 파일로 부터 공개 키 가져오기 실패: %s"
+msgstr "%s 파일에서 공개 키를 임포트하지 못했습니다. %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1195
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
-msgstr "%s 공개 키 제거에 실패: %s"
+msgstr "%s 공개 키를 제거하지 못했습니다. %s"
 
 #  progress stage
 #. Translator: %s = name of an rpm package. A list of diffs follows
@@ -207,13 +207,13 @@ msgstr "%s 공개 키 제거에 실패: %s"
 #: zypp/target/rpm/RpmDb.cc:1848
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr "%s 의 설정 파일 변경됨:"
+msgstr "%s에 대한 구성 파일을 변경함:"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2024
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "RPM은 %s 를 %s 로 저장했지만, 차이점을 구분 할 수 없음"
+msgstr "RPM은 %s을(를) %s(으)로 저장했지만, 차이점을 구분할 수 없습니다."
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2026
@@ -222,14 +222,14 @@ msgid ""
 "rpm saved %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
-"RPM은 %s 를 %s 로 저장했습니다.\n"
-"다음은 최초 25 행의 다른점입니다:\n"
+"RPM이 %s을(를) %s(으)로 저장했습니다.\n"
+"다음은 차이에 대한 처음 25개 행입니다.\n"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2029
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr "RPM은 %s 를 %s 로 만들었지만, 차이점을 구분 할 수 없음"
+msgstr "RPM은 %s을(를) %s(으)로 생성했지만, 차이점을 구분할 수 없습니다."
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2031
@@ -238,8 +238,8 @@ msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
-"RPM은 %s 를 %s 로 만들었습니다.\n"
-"다음은 최초 25 행의 다른점입니다:\n"
+"RPM이 %s을(를) %s(으)로 만들었습니다.\n"
+"다음은 차이에 대한 처음 25개 행입니다.\n"
 
 #  dialog caption
 #. report additional rpm output in finish
@@ -251,7 +251,7 @@ msgstr "추가 RPM 출력"
 #: zypp/target/rpm/RpmDb.cc:2344
 #, c-format, boost-format
 msgid "created backup %s"
-msgstr "%s 백업을 만듬"
+msgstr "백업 %s을(를) 만들었음"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2365
@@ -285,7 +285,7 @@ msgstr "파일이 존재하지 않거나 서명을 확인할 수 없음"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
-msgstr "다음의 동작을 실행함:"
+msgstr "다음 작업이 수행됨:"
 
 #: zypp/RepoManager.cc:297
 #, boost-format
@@ -297,7 +297,7 @@ msgstr "리포지토리 디렉토리 '%1%'을(를) 읽을 수 없음: 사용 권
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "'%s' 디렉터리 읽기에 실패"
+msgstr "디렉토리 '%s'을(를) 읽지 못했습니다."
 
 #: zypp/RepoManager.cc:315
 #, boost-format
@@ -306,18 +306,18 @@ msgstr "리포지토리 파일 '%1%'을(를) 읽을 수 없음: 사용 권한 �
 
 #: zypp/RepoManager.cc:338
 msgid "Repository alias cannot start with dot."
-msgstr "허용할 저장소는 첫문자로 점을 쓸 수 없습니다."
+msgstr "리포지토리 별칭은 점(.)으로 시작할 수 없습니다."
 
 #: zypp/RepoManager.cc:349
 msgid "Service alias cannot start with dot."
-msgstr "허용할 서비스는 첫문자로 점을 쓸 수 없습니다."
+msgstr "서비스 별칭은 점(.)으로 시작할 수 없습니다."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
 #: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
-msgstr "기록하기 위한 '%s' 파일을 열 수 없습니다."
+msgstr "쓰기 위한 파일 '%s'을(를) 열 수 없습니다."
 
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
@@ -345,21 +345,21 @@ msgstr "메타 데이터 캐시 디렉토리를 생성할 수 없습니다."
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "'%s' 저장소 캐시 빌드 중"
+msgstr "리포지토리 '%s' 캐시 빌드 중"
 
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "%s 에 캐시를 생성할 수 없음 - 쓰기 권한이 없습니다."
+msgstr "%s에서 캐시를 생성할 수 없음 - 쓰기 권한이 없습니다."
 
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "저장소(%d) 캐시에 실패했습니다."
+msgstr "리포지토리(%d)를 캐시하지 못했습니다."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
-msgstr "알려지지 않은 저장소 형식"
+msgstr "리포지토리 유형이 처리되지 않았습니다."
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -370,141 +370,141 @@ msgstr "알려지지 않은 저장소 형식"
 #: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
-msgstr "'%s'로 부터 읽기 시도 오류"
+msgstr "'%s'에서 읽기를 시도하는 중에 오류가 발생했습니다."
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
-msgstr "알 수 없는 읽기 오류 '%s'"
+msgstr "'%s'에서 읽는 중에 알 수 없는 오류가 발생했습니다."
 
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "'%s' 저장소 추가 중"
+msgstr "'%s' 리포지토리 추가 중"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "잘못된 '%s' 의 저장소 파일 이름"
+msgstr "'%s'에서 리포지토리 파일 이름이 잘못되었습니다."
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "'%s' 저장소 제거 중"
+msgstr "'%s' 리포지토리 제거 중"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
-msgstr "저장소가 저장된 위치를 구분 할 수 없습니다."
+msgstr "리포지토리가 저장된 위치를 알 수 없습니다."
 
 #  Frame title for installation target hard disk / partition(s)
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
 #, c-format, boost-format
 msgid "Can't delete '%s'"
-msgstr "'%s' 를 삭제할 수 없음"
+msgstr "'%s'을(를) 삭제할 수 없습니다."
 
 #: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
 msgid "Can't figure out where the service is stored."
-msgstr "서비스가 저장된 위치를 구분 할 수 없습니다."
+msgstr "서비스가 저장된 위치를 알 수 없습니다."
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
 msgid "Url scheme does not allow a %s"
-msgstr "URL 스키마는 %s 를 허용하지 않음"
+msgstr "URL 구성표는 %s을(를) 허용하지 않습니다."
 
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "잘못된 %s 부분 '%s'"
+msgstr "%s 구성요소 '%s'이(가) 잘못되었습니다."
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
 msgid "Invalid %s component"
-msgstr "잘못된 %s 부분"
+msgstr "%s 구성요소가 잘못되었습니다."
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
-msgstr "이 URL에 대한 쿼리 문자 해석은 지원되지 않음"
+msgstr "이 URL에 대해 쿼리 스트링 구문 분석이 지원되지 않습니다."
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
-msgstr "URL 스키마는 필수 항목"
+msgstr "URL 구성표는 필수 구성요소입니다."
 
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr "잘못된 URL 스키마 '%s'"
+msgstr "URL 구성표 '%s'이(가) 잘못되었습니다."
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
-msgstr "URL 스키마는 사용자이름을 허용하지 않음"
+msgstr "URL 구성표가 사용자 이름을 허용하지 않습니다."
 
 #: zypp/url/UrlBase.cc:983
 msgid "Url scheme does not allow a password"
-msgstr "URL 스키마는 열쇠글을 허용하지 않음"
+msgstr "URL 구성표가 비밀번호를 허용하지 않습니다."
 
 #: zypp/url/UrlBase.cc:1012
 msgid "Url scheme requires a host component"
-msgstr "URL 스키마는 호스트 부분이 필요"
+msgstr "URL 구성표에 호스트 구성요소가 필요합니다."
 
 #: zypp/url/UrlBase.cc:1022
 msgid "Url scheme does not allow a host component"
-msgstr "URL 스키마는 호스트 부분 지정을 허용하지 않음"
+msgstr "URL 구성표가 호스트 구성요소를 허용하지 않습니다."
 
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr "잘못된 호스트 부분 '%s'"
+msgstr "호스트 구성요소 '%s'이(가) 잘못되었습니다."
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
-msgstr "URL 스키마는 포트를 허용하지 않음"
+msgstr "URL 구성표가 포트를 허용하지 않습니다."
 
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
 msgid "Invalid port component '%s'"
-msgstr "잘못된 포트 부분 '%s'"
+msgstr "포트 구성요소 '%s'이(가) 잘못되었습니다."
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
-msgstr "URL 스키마는 경로 이름이 필요"
+msgstr "URL 구성표에 경로 이름이 필요합니다."
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
-msgstr "권한 부분이 존재하는 경우 상대 경로는 허용되지 않음"
+msgstr "기관이 있는 경우 상대 경로는 허용되지 않습니다."
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
-msgstr "출력된 문자열애 NUL 바이트가 포함"
+msgstr "인코드 스트링에 NUL 바이트가 포함되어 있습니다."
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
-msgstr "잘못된 매개변수 배열 단락 문자"
+msgstr "파라미터 배열 분할 구분 문자가 잘못되었습니다."
 
 #: zypp/url/UrlUtils.cc:213
 msgid "Invalid parameter map split separator character"
-msgstr "잘못된 매개변수 맵 단락 문자"
+msgstr "파라미터 맵 분할 구분 문자가 잘못되었습니다."
 
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
-msgstr "잘못된 매개변수 배열 결합 문자"
+msgstr "파라미터 배열 조인 구분 문자가 잘못되었습니다."
 
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
-msgstr "pty (%s)를 열 수 없습니다."
+msgstr "pty(%s)를 열 수 없습니다."
 
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
-msgstr "pipe (%s)를 열 수 없습니다."
+msgstr "파이프(%s)를 열 수 없습니다."
 
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr "'%s' (%s)에 chroot 할 수 없습니다."
+msgstr "'%s'(%s)에 대해 chroot할 수 없습니다."
 
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
@@ -514,28 +514,28 @@ msgstr "'%s'(chroot '%s' 내부)(%s)(으)로 chdir할 수 없습니다."
 #: zypp/ExternalProgram.cc:361
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr "'%s' (%s)에 chdir 할 수 없습니다."
+msgstr "'%s'(%s)(으)로 chdir할 수 없습니다."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
-msgstr "'%s' (%s)를 실행 할 수 없습니다."
+msgstr "'%s'(%s)을(를) 실행할 수 없습니다."
 
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr "fork (%s) 할 수 없습니다."
+msgstr "fork(%s)할 수 없습니다."
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
 msgid "Command exited with status %d."
-msgstr "상태 %d와 함께 명령이 종료되었습니다."
+msgstr "상태 %d(으)로 명령이 종료되었습니다."
 
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "명령이 신호 %d (%s)에 의해 죽었습니다."
+msgstr "명령이 신호 %d(%s)에 의해 종료되었습니다."
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
@@ -586,7 +586,7 @@ msgstr "단계 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr "추가 고객 계약이 필요"
+msgstr "추가 고객 계약 필수"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
@@ -594,11 +594,11 @@ msgstr "잘못됨"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr "지원 레벨이 지정되어 있지 않음"
+msgstr "지원 레벨이 지정되지 않았습니다."
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
-msgstr "제조사가 지원을 제공하지 않습니다."
+msgstr "제조업체에서 지원을 제공하지 않습니다."
 
 #: zypp/VendorSupportOptions.cc:45
 msgid ""
@@ -1260,7 +1260,7 @@ msgstr "코모로"
 #. :COM:174:
 #: zypp/CountryCode.cc:276
 msgid "Saint Kitts and Nevis"
-msgstr "세인트키츠 네비스"
+msgstr "세인트 크리스토퍼 니비스"
 
 #. :KNA:659:
 #: zypp/CountryCode.cc:277
