@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:12+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 00:16+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -933,7 +933,8 @@ msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
 "Use '%s' to install this candidate."
 msgstr ""
-"هناك مرشح تحديث ل '%s'، لكن من منتجين مختلفين. استخدم '%s' لتثبيت هذا المرشح."
+"يوجد مرشح تحديث لـ '%s'، لكن من موردين مختلفين. استخدم '%s' لتثبيت هذا "
+"المرشح."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -941,7 +942,7 @@ msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
 "lower priority. Use '%s' to install this candidate."
 msgstr ""
-"هناك مرشح تحديث ل '%s'، لكنه من مستودع ذو أولوية أقل. استخدم '%s' لتثبيت هذا "
+"يوجد مرشح تحديث لـ '%s'، لكنه من مخزن ذي أولوية أقل. استخدم '%s' لتثبيت هذا "
 "المرشح."
 
 #: src/RequestFeedback.cc:142
@@ -949,7 +950,7 @@ msgstr ""
 msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
-msgstr "هناك مرشح تحديث ل '%s'، ولكن تم قفله. استخدام '%s' لإلغاء القفل."
+msgstr "يتوفر تحديث مرشح لـ '%s'، ولكنه مقفل. استخدم '%s' لإلغاء القفل."
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -957,8 +958,8 @@ msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"لا تتوفر حزمة '%s' في المستودعات. لا يمكن إعادة تثبيت أو الترقية، أو تقليل "
-"الإصدار."
+"لا تتوفر الحزمة '%s' في المخازن لديك. تتعذر إعادة التثبيت أو الترقية أو "
+"الإرجاع إلى إصدار أقدم."
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
