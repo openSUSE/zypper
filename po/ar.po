@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:57+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 07:58+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5489,26 +5489,26 @@ msgstr ""
 
 #: src/Zypper.cc:3956
 msgid "Uninstallation of a source package not defined and implemented."
-msgstr "إلغاء تثبيت حزمة المصدر غير منفذه ومعرفة."
+msgstr "إلغاء تثبيت حزمة لم يتم تحديدها وتنفيذها."
 
 #: src/Zypper.cc:3975
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' يبدو وكأنه ملف RPM. سيتم تحميله."
+msgstr "'%s' يبدو كملف RPM. سنحاول إنزاله."
 
 #: src/Zypper.cc:3984
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr "مشكلة مع ملف RPM المحدد ك '%s'، تخطي."
+msgstr "حدثت مشكلة في ملف RPM المحدد كـ '%s'، تخطي."
 
 #: src/Zypper.cc:4006
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
-msgstr "مشكلة في قراءة عنوان %s RPM . هل هو ملف RPM؟"
+msgstr "حدثت مشكلة أثناء قراءة رأس RPM الخاص بـ %s. هل هذا ملف RPM؟"
 
 #: src/Zypper.cc:4028
 msgid "Plain RPM files cache"
-msgstr "ذاكرة التخزين المؤقت لملفات RPM"
+msgstr "الذاكرة المؤقتة لملفات RPM العادية"
 
 #: src/Zypper.cc:4045
 msgid "No valid arguments specified."
