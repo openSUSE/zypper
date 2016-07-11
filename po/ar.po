@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 08:29+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6325,22 +6325,22 @@ msgstr "اتفاقية ترخيص المستخدم النهائي (EULA)"
 
 #: src/misc.cc:256
 msgid "SUMMARY"
-msgstr "موجز"
+msgstr "الملخص"
 
 #: src/misc.cc:257
 #, c-format, boost-format
 msgid "Installed packages: %d"
-msgstr "الحزم المثبتة: %d"
+msgstr "الحزم المثبَّتة: %d"
 
 #: src/misc.cc:258
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "الحزم المثبتة مع نظرائهم في مستودعات: %d"
+msgstr "الحزم المثبَّتة بنظراء في المخازن: %d"
 
 #: src/misc.cc:259
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
-msgstr "الحزم المثبتة ب EULAs: %d"
+msgstr "الحزم المثبتة باستخدام EULAs: %d"
 
 #: src/misc.cc:289
 #, c-format, boost-format
