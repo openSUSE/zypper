@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 01:28+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 01:32+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
-msgstr "المخزن: "
+msgstr "المخزن:"
 
 #: src/callbacks/keyring.h:38
 msgid "Key Name:"
@@ -275,9 +275,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "تشغيل: %s (%s و%s)"
 
 #: src/callbacks/rpm.h:208
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Removing %s"
-msgstr "تتم إزالة %s-%s"
+msgstr "تتم إزالة %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:213
@@ -291,9 +291,9 @@ msgid "Removal of %s failed:"
 msgstr "فشلت إزالة %s:"
 
 #: src/callbacks/rpm.h:279
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Installing: %s"
-msgstr "يتم تثبيت: %s-%s"
+msgstr "يتم تثبيت: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:284
@@ -302,9 +302,9 @@ msgid "Installing: %s-%s"
 msgstr "تثبيت: %s-%s"
 
 #: src/callbacks/rpm.h:308
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Installation of %s failed:"
-msgstr "فشل تثبيت %s-%s :"
+msgstr "فشل تثبيت %s:"
 
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
@@ -5122,7 +5122,7 @@ msgid ""
 "recent upgrades."
 msgstr ""
 "إدراج العمليات قيد التشغيل التي لازالت تستخدم ملفات ومكتبات محذوفة بواسطة "
-"عمليات الترقية الحديثة"
+"عمليات الترقية الحديثة."
 
 #. translators: -s, --short
 #: src/Zypper.cc:2947
