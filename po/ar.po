@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:19+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 00:20+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -997,8 +997,7 @@ msgstr ""
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
-msgstr ""
-"تم تأمين التصحيح '%s'. استخدم '%s' لتثبيته أو إلغاء تأمينه باستخدام '%s'."
+msgstr "تم قفل التصحيح '%s'. استخدم '%s' لتثبيته أو إلغاء قفله باستخدام '%s'."
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
