@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 01:46+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2860,7 +2860,7 @@ msgstr "تم تعطيل التجديد التلقائي للخدمة '%s'."
 #: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr "تم تعيين اسم الخدمة '%s' على '%s'."
+msgstr "تم تعيين اسم الخدمة '%s' إلى '%s'."
 
 #: src/repos.cc:2940
 #, c-format, boost-format
