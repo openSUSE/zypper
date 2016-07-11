@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:37+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 07:38+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3605,14 +3605,14 @@ msgstr "المخازن البعيدة معطلة."
 
 #: src/Zypper.cc:1077
 msgid "Ignoring installed resolvables."
-msgstr "تجاهل المثبتة القابلة للتحقق."
+msgstr "يتم الآن تجاهل التبعيات القابلة للتحليل المثبَّتة."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
 #: src/Zypper.cc:1104 src/Zypper.cc:1151
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
-msgstr "الخيار %s ليس له أي تأثير, تجاهل."
+msgstr "لا يُحدث الخيار %s أي تأثير هنا، تجاهل."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
@@ -3623,7 +3623,7 @@ msgstr "لا يدعم برنامج الواجهة شل في zypper تنفيذ ا
 #: src/Zypper.cc:1313
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
-msgstr "تم استبدال الأمر '%s' من '%s'."
+msgstr "تم استبدال الأمر '%s' بـ '%s'."
 
 #: src/Zypper.cc:1314
 #, c-format, boost-format
@@ -4786,13 +4786,13 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
 msgstr ""
-"رقع (pch) [repository] ...\n"
+"patches (pch) [repository] ...\n"
 "\n"
-"عرض كافة الرقع المتاحة من المستودعات المحددة.\n"
+"سرد كافة التصحيحات المتاحة في المخازن المحددة.\n"
 "\n"
-"  خيارات الأمر:\n"
+"  خيارات الأوامر:\n"
 "\n"
-"-r، --repo <alias|#|URI>  فقط وسيلة أخرى لتحديد مستودع.\n"
+"-r, --repo <alias|#|URI>  وسيلة أخرى لتحديد المخزن.\n"
 
 #: src/Zypper.cc:2525
 msgid ""
