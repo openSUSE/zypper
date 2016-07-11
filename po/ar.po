@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:51+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 07:53+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5389,38 +5389,42 @@ msgstr "في حالة استخدام وسيطة واحدة فقط، يجب أن 
 #: src/Zypper.cc:3617
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "لا يمكن استخدام%s مع %s. استخدام الإعدادت %s."
+msgstr "تعذر استخدام %s مع %s. استخدام إعداد %s."
 
 #: src/Zypper.cc:3636
 msgid "Specified type is not a valid repository type:"
-msgstr "النوع المحدد ليس نوع مستودع صالحة:"
+msgstr "النوع المحدد ليس نوع مخزن صالحًا:"
 
 #: src/Zypper.cc:3637
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "انظر '%s' أو '%s' للحصول على قائمة بأنواع معروفة من المستودع."
+msgstr "راجع '%s' أو '%s' للحصول على قائمة بأنواع المخازن المعروفة."
 
 #: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
-msgstr "هناك وسيط مطلوب مفقود."
+msgstr "الوسيطة المطلوبة غير موجودة."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: src/Zypper.cc:3688
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "لم يتم العثور على الاسم المستعار للمستودع '%s' أو رقم أو مسار."
+msgstr ""
+"لم يتم العثور على المخزن '%s' بواسطة اسمه المستعار أو رقمه أو معرف URI الخاص "
+"به."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "خدمة '%s' لم يتم العثور على الاسم المستعار أو رقم أو مسار."
+msgstr ""
+"لم يتم العثور على الخدمة '%s' بواسطة اسمها المستعار أو رقمه أو معرف URI "
+"الخاص به."
 
 #: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
-msgstr "وسائط قليلة جداً. يُطلب على الأقل المسار والاسم المستعار."
+msgstr "الوسيطات قليلة للغاية. على الأقل مطلوب معرف URI واسم مستعار."
 
 #: src/Zypper.cc:3765
 #, c-format, boost-format
