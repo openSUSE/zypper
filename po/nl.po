@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-06 11:38+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2016-07-11 12:50+0000\n"
+"Last-Translator: Paul Kanters <v-Paul.Kanters@lqs-lionbridge.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -4395,7 +4395,7 @@ msgstr "oplosser %s is in conflict met %s die geleverd is door zichzelf"
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s vereist %s, Maar aan deze eis kan niet voldaan worden"
+msgstr "%s vereist %s, maar aan deze eis kan niet voldaan worden"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
@@ -4529,7 +4529,7 @@ msgstr "Vereist attribuut '%s' ontbreekt."
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "Een of beide van '%s' of '%s' attributen zijn vereist."
+msgstr "Een of beide kenmerken van '%s' of '%s' zijn vereist."
 
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
