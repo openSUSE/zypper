@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 08:10+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5938,7 +5938,7 @@ msgstr "تبديل عرض أسماء بائعي الحزم."
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:662
 msgid "Toggle between showing all details and as few details as possible."
-msgstr "التبديل بين إظهار كافة التفاصيل وإظهار أقل تفاصيل ممكنة."
+msgstr "التبديل بين إظهار كل التفاصيل وإظهار أقل تفاصيل ممكنة."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
 #: src/solve-commit.cc:664
