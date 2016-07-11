@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:27+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 08:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6313,7 +6313,7 @@ msgstr ""
 #: src/misc.cc:187
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr "إحباط التثبيت لخلاف المستخدم مع ترخيص%s %s."
+msgstr "إيقاف التثبيت بسبب عدم موافقة المستخدم على ترخيص %s %s."
 
 #: src/misc.cc:225
 msgid "License"
@@ -6321,7 +6321,7 @@ msgstr "الترخيص"
 
 #: src/misc.cc:244
 msgid "EULA"
-msgstr "اتفاقية الترخيص"
+msgstr "اتفاقية ترخيص المستخدم"
 
 #: src/misc.cc:256
 msgid "SUMMARY"
