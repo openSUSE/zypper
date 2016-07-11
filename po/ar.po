@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 14:58+0000\n"
+"PO-Revision-Date: 2016-07-11 15:29+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
@@ -39,7 +39,7 @@ msgstr "سلسلة استعلام URL لبروتوكول LDAP غير صالحة"
 #: zypp/Url.cc:153
 #, boost-format, c-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "معلمة استعلام URL لبروتوكول LDAP غير صالحة '%s'"
+msgstr "معلمة استعلام URL لبروتوكول LDAP ‏'%s' غير صالحة"
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
@@ -199,20 +199,20 @@ msgstr "فشل RPM: "
 #: zypp/target/rpm/RpmDb.cc:1124
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
-msgstr "فشل استيراد المفتاح العام من الملف %s: %s"
+msgstr "فشل استيراد المفتاح العام من الملف %s‏: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1195
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
-msgstr "فشلت إزالة المفتاح العام %s: %s"
+msgstr "فشلت إزالة المفتاح العام %s‏: %s"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
 #: zypp/target/rpm/RpmDb.cc:1848
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr "ملفات تكوين %s التي تم تغييرها:"
+msgstr "ملفات التكوين التي تم تغييرها لـ  %s 1:"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2024
@@ -243,7 +243,7 @@ msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
-"تم إنشاء rpm %s باعتبارها %s.\n"
+"تم إنشاء %s من خلال rpm باعتبارها %s.\n"
 "فيما يلي أول 25 سطرًا من سطور الفرق:\n"
 
 #. report additional rpm output in finish
@@ -477,7 +477,7 @@ msgstr "مكون المنفذ '%s' غير صالح"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
-msgstr "يتطلب مخطط Url وجود مسار اسم"
+msgstr "يتطلب مخطط Url وجود اسم مسار"
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
