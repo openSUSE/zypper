@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 01:44+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-11 01:45+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2286,12 +2286,12 @@ msgstr "불가리아어"
 #. language code: bur mya my
 #: zypp/LanguageCode.cc:295 zypp/LanguageCode.cc:297
 msgid "Burmese"
-msgstr "브루나이"
+msgstr "버마어"
 
 #. language code: byn
 #: zypp/LanguageCode.cc:299
 msgid "Blin"
-msgstr "블린어"
+msgstr "브린어"
 
 #. language code: cad
 #: zypp/LanguageCode.cc:301
@@ -2301,7 +2301,7 @@ msgstr "카도어"
 #. language code: cai
 #: zypp/LanguageCode.cc:303
 msgid "Central American Indian (Other)"
-msgstr "중앙아메리카 인디언 제어 (기타)"
+msgstr "중앙아메리카 인디안어(기타)"
 
 #. language code: car
 #: zypp/LanguageCode.cc:305
@@ -2316,7 +2316,7 @@ msgstr "카탈로니아어"
 #. language code: cau
 #: zypp/LanguageCode.cc:309
 msgid "Caucasian (Other)"
-msgstr "카프카스 제어 (기타)"
+msgstr "카프카스어(기타)"
 
 #. language code: ceb
 #: zypp/LanguageCode.cc:311
@@ -2326,7 +2326,7 @@ msgstr "세부아노어"
 #. language code: cel
 #: zypp/LanguageCode.cc:313
 msgid "Celtic (Other)"
-msgstr "켈트어파 (기타)"
+msgstr "켈트어(기타)"
 
 # CM
 #. language code: cha ch
@@ -2359,7 +2359,7 @@ msgstr "중국어"
 #. language code: chk
 #: zypp/LanguageCode.cc:327
 msgid "Chuukese"
-msgstr "추크어"
+msgstr "츄케스어"
 
 # ML
 #. language code: chm
@@ -2370,7 +2370,7 @@ msgstr "마리어"
 #. language code: chn
 #: zypp/LanguageCode.cc:331
 msgid "Chinook Jargon"
-msgstr "치누크 통상어"
+msgstr "치누크 혼합어"
 
 #. language code: cho
 #: zypp/LanguageCode.cc:333
@@ -2380,7 +2380,7 @@ msgstr "촉토어"
 #. language code: chp
 #: zypp/LanguageCode.cc:335
 msgid "Chipewyan"
-msgstr "치페위안어"
+msgstr "치페우얀"
 
 #. language code: chr
 #: zypp/LanguageCode.cc:337
