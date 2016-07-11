@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:44+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 00:45+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2120,7 +2120,7 @@ msgstr "اسم المستخدم"
 #. password
 #: src/callbacks/media.cc:336
 msgid "Password"
-msgstr "كلمة المرور"
+msgstr "كلمة السر"
 
 #: src/Command.cc:201
 #, c-format, boost-format
@@ -2148,7 +2148,7 @@ msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
 "number, the lower the priority."
 msgstr ""
-"أولوية غير صالح '%s'. استخدم رقماً موجباً. كلما زاد عدد، انخفضت الأولوية."
+"الأولوية '%s' غير صالحة. استخدم عدد صحيح موجب. وكلما زاد الرقم، قلت الأولوية."
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
