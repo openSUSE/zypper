@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:16+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 00:17+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -953,12 +953,12 @@ msgid ""
 msgstr "يتوفر تحديث مرشح لـ '%s'، ولكنه مقفل. استخدم '%s' لإلغاء القفل."
 
 #: src/RequestFeedback.cc:148
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"لا تتوفر الحزمة '%s' في المخازن لديك. تتعذر إعادة التثبيت أو الترقية أو "
+"لا تتوفر الحزمة '%s' في المخازن لديك. لا يمكن إعادة التثبيت أو الترقية أو "
 "الإرجاع إلى إصدار أقدم."
 
 #: src/RequestFeedback.cc:158
