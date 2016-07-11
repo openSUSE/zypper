@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 01:48+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2949,7 +2949,7 @@ msgstr "حدثت مشكلة أثناء تحميل البيانات من '%s'"
 #: src/repos.cc:3117
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr "تعذر تحديث المخزن '%s'. استخدام ذاكرة التخزين المؤقت."
+msgstr "تعذر تجديد المخزن '%s'. استخدام ذاكرة التخزين المؤقت القديمة."
 
 #: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
