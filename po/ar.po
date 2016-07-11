@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:37+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 00:38+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2044,7 +2044,7 @@ msgstr "تم تعطيل التحقق من جهة إصدار شهادات SSL."
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
-msgstr "لم يتم اكتشاف أية أجهزة، تعذر الخروج."
+msgstr "لم يتم اكتشاف أية أجهزة، تعذر الإخراج."
 
 #: src/callbacks/media.cc:110
 msgid "Try to eject the device manually."
