@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:38+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 00:39+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2048,23 +2048,24 @@ msgstr "لم يتم اكتشاف أية أجهزة، تعذر الإخراج."
 
 #: src/callbacks/media.cc:110
 msgid "Try to eject the device manually."
-msgstr "حاول إخراج الجهاز يدوياً."
+msgstr "حاول إخراج الجهاز يدويًا."
 
 #: src/callbacks/media.cc:121
 msgid "Detected devices:"
-msgstr "الأجهزة المُكتشفة:"
+msgstr "الأجهزة التي تم اكتشافها:"
 
 #: src/callbacks/media.cc:136
 msgid "Cancel"
-msgstr "الغاء"
+msgstr "إلغاء"
 
 #: src/callbacks/media.cc:139
 msgid "Select device to eject."
-msgstr "حدد جهاز لإخراجه."
+msgstr "حدد جهازًا لإخراجه."
 
 #: src/callbacks/media.cc:154
 msgid "Insert the CD/DVD and press ENTER to continue."
-msgstr "إدراج CD/DVD، واضغط ادخل للمتابعة."
+msgstr ""
+"قم بإدراج القرص المضغوط/قرص الفيديو الرقمي ثم اضغط على \"إدخال\" للمتابعة."
 
 #: src/callbacks/media.cc:157
 msgid "Retrying..."
