@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:12+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 08:13+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6012,7 +6012,7 @@ msgstr ""
 
 #: src/solve-commit.cc:905
 msgid "Dependencies of all installed packages are satisfied."
-msgstr "تبعيات كافة الحزم المثبتة جيدة."
+msgstr "تم استيفاء تبعيات كافة الحزم المثبَّتة."
 
 #: src/solve-commit.cc:907 src/download.cc:129
 msgid "Nothing to do."
