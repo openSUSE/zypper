@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 06:54+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3191,7 +3191,7 @@ msgstr ""
 
 #: src/Zypper.cc:109
 msgid "Tell PackageKit to quit?"
-msgstr "إنهاء PackageKit؟"
+msgstr "هل ترغب في إنهاء PackageKit؟"
 
 #: src/Zypper.cc:118
 msgid "PackageKit is still running (probably busy)."
