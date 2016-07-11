@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:49+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 07:51+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5348,17 +5348,17 @@ msgstr "امتيازات المسؤول مطلوبة لتجديد الخدمات
 
 #: src/Zypper.cc:3350 src/Zypper.cc:3439 src/Zypper.cc:3656
 msgid "Root privileges are required for modifying system services."
-msgstr "امتيازات الجذر مطلوبة لتعديل خدمات النظام."
+msgstr "امتيازات المسؤول مطلوبة لتعديل خدمات النظام."
 
 #: src/Zypper.cc:3423
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
-msgstr "'%s' ليس نوع خدمة متاح."
+msgstr "'%s' ليس نوع خدمة صالحًا."
 
 #: src/Zypper.cc:3425
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr "انظر '%s' أو '%s' للحصول على قائمة بأنواع الخدمة المعروفة."
+msgstr "راجع '%s' أو '%s' للحصول على قائمة بأنواع الخدمات المعروفة."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -5366,26 +5366,25 @@ msgstr "انظر '%s' أو '%s' للحصول على قائمة بأنواع ال
 #. followed by mr command help text which will explain it
 #: src/Zypper.cc:3450 src/Zypper.cc:3797
 msgid "Alias or an aggregate option is required."
-msgstr "مطلوب اسم مستعار أو خياراً مُجمَل."
+msgstr "مطلوب اسم مستعار أو خيار تجميع."
 
 #: src/Zypper.cc:3482
 #, c-format, boost-format
 msgid "Service '%s' not found."
-msgstr "الخدمة '%s' لم يُعثر عليها."
+msgstr "لم يتم العثور على الخدمة '%s'."
 
 #: src/Zypper.cc:3509 src/Zypper.cc:3655 src/Zypper.cc:3734 src/Zypper.cc:3786
 msgid "Root privileges are required for modifying system repositories."
-msgstr "امتيازات الجذر مطلوبة لتعديل نظام المستودعات."
+msgstr "امتيازات المسؤول مطلوبة لتعديل مخازن النظام."
 
 #: src/Zypper.cc:3564 src/Zypper.cc:3902
 msgid "Too few arguments."
-msgstr "وسائط قليلة جداً."
+msgstr "الوسيطات قليلة للغاية"
 
 #: src/Zypper.cc:3587
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
-msgstr ""
-"إذا تم استخدام وسيطة واحدة فقط فإنه يجب أن يكون المسار يشير إلى ملف.repo."
+msgstr "في حالة استخدام وسيطة واحدة فقط، يجب أن يشير معرف URI إلى ملف .repo."
 
 #: src/Zypper.cc:3617
 #, c-format, boost-format
