@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-08 15:48+0000\n"
+"PO-Revision-Date: 2016-07-11 14:07+0000\n"
 "Last-Translator: Asa Karlsson <asa.karlsson@lqs-lionbridge.com>\n"
 "Language-Team: Swedish "
 "<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
@@ -216,7 +216,7 @@ msgstr "Konfigurationsfiler har ändrats för %s:"
 #: zypp/target/rpm/RpmDb.cc:2024
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "rpm sparade %s som %s, men det gick inte att avgöra skillnaden"
+msgstr "RPM sparade %s som %s, men det gick inte att avgöra skillnaden"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2026
@@ -241,7 +241,7 @@ msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
-"rpm skapade %s som %s.\n"
+"RPM skapade %s som %s.\n"
 "Här visas de första 25 raderna med skillnader:\n"
 
 #. report additional rpm output in finish
@@ -348,7 +348,7 @@ msgstr "Kan inte att skapa cachekatalog för metadata."
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "Cache för förrådet '%s' byggs"
+msgstr "Cache för lagringsplatsen '%s' byggs"
 
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
@@ -358,11 +358,11 @@ msgstr "Kan inte att skapa cache på %s - ingen skrivrättighet."
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "Misslyckades att cachlagra förråd (%d)."
+msgstr "Misslyckades att cachelagra lagringsplats (%d)."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
-msgstr "Kan inte hantera förrådstypen"
+msgstr "Kan inte hantera lagringsplatstypen"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -390,16 +390,16 @@ msgstr "Lägger till förrådet '%s'"
 #: zypp/RepoManager.cc:1701
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Ogiltigt namn på förråd '%s'"
+msgstr "Ogiltigt namn på lagringsplats '%s'"
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Förrådet '%s' tas bort"
+msgstr "Lagringsplatsen '%s' tas bort"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
-msgstr "Kan inte identifiera var förrådet är lagrat."
+msgstr "Kan inte identifiera var lagringsplatsen finns."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
@@ -501,7 +501,7 @@ msgstr "Kan inte öppna pty (%s)."
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
-msgstr "Det går inte att öppna röret (%s)."
+msgstr "Det går inte att öppna programkopplingen (%s)."
 
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
@@ -739,7 +739,7 @@ msgstr "Aruba"
 #. :ABW:533:
 #: zypp/CountryCode.cc:173
 msgid "Aland Islands"
-msgstr "Alandöarna"
+msgstr "Åland"
 
 # AZ
 #. :ALA:248:
@@ -1859,7 +1859,7 @@ msgstr "Trinidad och Tobago"
 #. language code: tvl
 #: zypp/CountryCode.cc:381 zypp/LanguageCode.cc:1075
 msgid "Tuvalu"
-msgstr "Tuvaluan"
+msgstr "Tuvaluanska"
 
 #. :TUV:798:
 #: zypp/CountryCode.cc:382
@@ -2017,7 +2017,7 @@ msgstr "Adygeiska"
 #. language code: afa
 #: zypp/LanguageCode.cc:173
 msgid "Afro-Asiatic (Other)"
-msgstr "Afro-asiatiska språk (övriga)"
+msgstr "Afroasiatiska språk (övriga)"
 
 #. language code: afh
 #: zypp/LanguageCode.cc:175
@@ -2483,12 +2483,12 @@ msgstr "Kreol- och pidginspråk (övriga)"
 #. language code: csb
 #: zypp/LanguageCode.cc:365
 msgid "Kashubian"
-msgstr "Kasjubianska"
+msgstr "Kasjubiska"
 
 #. language code: cus
 #: zypp/LanguageCode.cc:367
 msgid "Cushitic (Other)"
-msgstr "Kusjitiska språk (övriga)"
+msgstr "Kushitiska språk (övriga)"
 
 #. language code: cze ces cs
 #: zypp/LanguageCode.cc:369 zypp/LanguageCode.cc:371
@@ -2953,7 +2953,7 @@ msgstr "Interlingua (International Auxiliary Language Association)"
 #. language code: inc
 #: zypp/LanguageCode.cc:563
 msgid "Indic (Other)"
-msgstr "Indo-ariska språk (övriga)"
+msgstr "Indoariska språk (övriga)"
 
 #. language code: ind id
 #: zypp/LanguageCode.cc:565
@@ -3664,7 +3664,7 @@ msgstr "Ottomanska (1500-1928)"
 #. language code: oto
 #: zypp/LanguageCode.cc:843
 msgid "Otomian Languages"
-msgstr "Otomispråk"
+msgstr "Oto-manguespråk"
 
 #. language code: paa
 #: zypp/LanguageCode.cc:845
@@ -3917,7 +3917,7 @@ msgstr "Siouxspråk"
 #. language code: sit
 #: zypp/LanguageCode.cc:951
 msgid "Sino-Tibetan (Other)"
-msgstr "Sino-tibetanska språk (övriga)"
+msgstr "Sinotibetanska språk (övriga)"
 
 #. language code: sla
 #: zypp/LanguageCode.cc:953
@@ -4494,7 +4494,7 @@ msgstr "inget tillhandahåller begärda %s"
 
 #: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
 msgid "Have you enabled all requested repositories?"
-msgstr "Har du aktiverat alla begärda förråd?"
+msgstr "Har du aktiverat alla begärda lagringsplatser?"
 
 #: zypp/solver/detail/SATResolver.cc:996
 #, c-format, boost-format
