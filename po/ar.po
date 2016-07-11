@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 01:21+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 01:23+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2559,19 +2559,19 @@ msgstr ""
 
 #: src/repos.cc:1591
 msgid "Can't find a valid repository at given location:"
-msgstr "لا يمكن العثور على مستودع صالحة في الموقع:"
+msgstr "تعذر العثور على مخزن صالح في الموقع المحدد:"
 
 #: src/repos.cc:1599
 msgid "Problem transferring repository data from specified URI:"
-msgstr "مشكلة في نقل بيانات المستودعات من المسار المحدد:"
+msgstr "حدثت مشكلة أثناء نقل بيانات المخزن من URI المحدد:"
 
 #: src/repos.cc:1600
 msgid "Please check whether the specified URI is accessible."
-msgstr "الرجاء التحقق ما إذا كان المسار المحدد قابل للوصول."
+msgstr "الرجاء التحقق من إمكانية الوصول إلى URI المحدد."
 
 #: src/repos.cc:1607
 msgid "Unknown problem when adding repository:"
-msgstr "مشكلة غير معروف عند إضافة مستودع:"
+msgstr "حدثت مشكلة غير معروفة أثناء إضافة المخزن:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
@@ -2587,7 +2587,7 @@ msgstr ""
 #: src/repos.cc:1622
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
-msgstr "أضيف المستودع '%s' بنجاح"
+msgstr "تمت إضافة المخزن '%s' بنجاح"
 
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:1630
@@ -2597,25 +2597,25 @@ msgstr "تجديد تلقائي"
 #: src/repos.cc:1648
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
-msgstr "قراءة البيانات من الوسائط '%s'"
+msgstr "قراءة البيانات من وسائط '%s'"
 
 #: src/repos.cc:1654
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
-msgstr "مشكلة في قراءة البيانات من الوسائط '%s'"
+msgstr "حدثت مشكلة أثناء قراءة البيانات من وسائط '%s'"
 
 #: src/repos.cc:1655
 msgid "Please check if your installation media is valid and readable."
-msgstr "الرجاء تحقق إذا كانت وسائط التثبيت صالحة وقابلة للقراءة."
+msgstr "الرجاء التحقق من صلاحية وسائط التثبيت وقابليتها للقراءة."
 
 #: src/repos.cc:1662
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
-msgstr "قراءة البيانات من الوسيط '%s' سيتأخر حتى التجديد التالي."
+msgstr "تم تأخير قراءة البيانات من وسائط '%s' حتى التجديد التالي."
 
 #: src/repos.cc:1744
 msgid "Problem accessing the file at the specified URI"
-msgstr "مشكلة في الوصول إلى الملف في المسار المحدد"
+msgstr "حدثت مشكلة أثناء الوصول إلى الملف في معرف URI المحدد"
 
 #: src/repos.cc:1745
 msgid "Please check if the URI is valid and accessible."
