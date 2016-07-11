@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 01:48+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 01:54+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2954,24 +2954,24 @@ msgstr "تعذر تجديد المخزن '%s'. استخدام ذاكرة الت�
 #: src/repos.cc:3121 src/repos.cc:3150
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr "القابلة للتحليل من '%s' لم تحمل لوجود خطأ."
+msgstr "لم يتم تحميل التبعيات القابلة للتحليل من '%s' بسبب حدوث خطأ."
 
 #: src/repos.cc:3138
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
-msgstr "يبدو أن المستودع '%s' قديم. استخدم خادم أو مرآة مختلفة."
+msgstr "يبدو أن المخزن '%s' قديم. استخدم خادم أو نسخة مختلفة."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:3149
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "حاول '%s',أو حتى '%s' قبل القيام بذلك."
+msgstr "جرب '%s'، أو حتى '%s' قبل القيام بذلك."
 
 #: src/repos.cc:3160
 msgid "Reading installed packages..."
-msgstr "قراءة الحزم المثبتة..."
+msgstr "تتم الآن قراءة الحزم المثبَّتة..."
 
 #: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
@@ -2982,7 +2982,7 @@ msgstr "حدثت مشكلة أثناء قراءة الحزم المثبتة:"
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
-msgstr "تجاهل %s بدون الوسائط لأنه تم تحديد خيار مماثل."
+msgstr "تجاهل %s بدون وسيطة نظرًا لتحديد خيار مشابه به وسيطة."
 
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:280
@@ -3090,7 +3090,7 @@ msgstr "الفئات المضمنة"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
-msgstr "سيتم تثبيت تحديث إدارة البرامج التالية أولاً:"
+msgstr "سيتم تثبيت تحديثات إدارة البرامج التالية أولاً:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
@@ -3100,12 +3100,12 @@ msgstr "سيتم تثبيت تحديث إدارة البرامج التالية 
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
-msgstr "لم يُعثر على تحديثات."
+msgstr "لم يتم العثور على أية تحديثات."
 
 #. translator: Table headline
 #: src/update.cc:621
 msgid "The following updates are also available:"
-msgstr "كما تتوفر التحديثات التالية:"
+msgstr "التحديثات التالية متوفرة أيضًا:"
 
 #: src/update.cc:714
 msgid "Package updates"
@@ -3113,11 +3113,11 @@ msgstr "تحديثات الحزم"
 
 #: src/update.cc:718
 msgid "Pattern updates"
-msgstr "تحديثات النمط"
+msgstr "تحديثات الأنماط"
 
 #: src/update.cc:720
 msgid "Product updates"
-msgstr "تحديثات المنتج"
+msgstr "تحديثات المنتجات"
 
 #: src/update.cc:806
 msgid "Current Version"
@@ -3129,25 +3129,25 @@ msgstr "الإصدار المتوفر"
 
 #: src/update.cc:969
 msgid "No matching issues found."
-msgstr "لم يتم العثور على إصدار مطابق."
+msgstr "لم يتم العثور على مشكلات مطابقة."
 
 #: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
-msgstr "تم العثور على تطابق رقم الإصدارات التالية:"
+msgstr "تم العثور على المطابقات التالية في أرقام المشكلات:"
 
 #: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
-msgstr "تم العثور على تطابق في وصف الرقع التالية:"
+msgstr "تم العثور على المطابقات في أوصاف التصحيح الخاصة بالتصحيحات التالية:"
 
 #: src/update.cc:1057
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
-msgstr "لم يتم العثور على إصلاح بقزيلا الإصدار رقم %s أو أنه غير مطلوبة."
+msgstr "لم يتم العثور على إصلاح لرقم مشكلة bugzilla %s أو أنه غير مطلوب."
 
 #: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
-msgstr "لم يتم العثور على إصلاح CVE الإصدار رقم %s أو أنه غير مطلوبة."
+msgstr "لم يتم العثور على إصلاح لرقم مشكلة CVE %s أو أنه غير مطلوب."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
 #: src/update.cc:1062
@@ -3158,7 +3158,7 @@ msgstr "لم يتم العثور على إصلاح لرقم مشكلة %s %s أ�
 #. translators: this will show up if you press ctrl+c twice (but outside of zypper shell)
 #: src/main.cc:38
 msgid "OK OK! Exiting immediately..."
-msgstr "حسناً حسناً! تغادر فورا..."
+msgstr "حسنًا! يتم الآن الإنهاء على الفور..."
 
 #: src/Zypper.cc:77
 #, fuzzy
