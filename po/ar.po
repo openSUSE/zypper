@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:01+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 07:02+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3199,7 +3199,7 @@ msgstr "PackageKit قيد التشغيل بالفعل (من المحتمل أن 
 
 #: src/Zypper.cc:119
 msgid "Try again?"
-msgstr "حاول مرة أخرى؟"
+msgstr "هل تريد المحاولة مرة أخرى؟"
 
 #: src/Zypper.cc:189
 #, boost-format
