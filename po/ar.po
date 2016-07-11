@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 07:58+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5508,7 +5508,7 @@ msgstr "حدثت مشكلة أثناء قراءة رأس RPM الخاص بـ %s.
 
 #: src/Zypper.cc:4028
 msgid "Plain RPM files cache"
-msgstr "الذاكرة المؤقتة لملفات RPM العادية"
+msgstr "ذاكرة التخزين المؤقت لملفات RPM العادية"
 
 #: src/Zypper.cc:4045
 msgid "No valid arguments specified."
