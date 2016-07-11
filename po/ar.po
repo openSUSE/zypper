@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 08:25+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6271,14 +6271,14 @@ msgstr ""
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "'%s' ليس اسم حزمة أو قدرة."
+msgstr "لا يعد '%s' اسم حزمة أو إمكانية."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
 #: src/misc.cc:132
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "الموافقة على ترخيص %s %sتلقائياً."
+msgstr "متوافق تلقائيًا مع ترخيص %s %s."
 
 #. introduction
 #. translators: the first %s is the name of the package, the second
@@ -6288,12 +6288,12 @@ msgstr "الموافقة على ترخيص %s %sتلقائياً."
 msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
-msgstr "لتثبيت '%s'%s, يجب الموافقة على شروط اتفاقية الترخيص التالية:"
+msgstr "لتثبيت '%s'%s، يجب الموافقة على شروط اتفاقية الترخيص التالية:"
 
 #. lincense prompt
 #: src/misc.cc:167
 msgid "Do you agree with the terms of the license?"
-msgstr "هل توافق على شروط الترخيص؟"
+msgstr "هل توافق على شروط الاتفاقية؟"
 
 #: src/misc.cc:175
 msgid "Aborting installation due to the need for license confirmation."
