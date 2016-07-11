@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:57+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 00:59+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2240,7 +2240,7 @@ msgstr "فرض بناء ذاكرة التخزين المؤقت للمخزن"
 #: src/repos.cc:390
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
-msgstr "حدث خطأ أثناء تحليل بيانات تعريف '%s':"
+msgstr "حدث خطأ أثناء تحليل بيانات التعريف لـ '%s':"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: src/repos.cc:392
@@ -2250,14 +2250,16 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"قد يكون سبب ذلك بيانات تعريف غير صالحة في المستودع، أو عله في محلل بيانات "
-"التعريف. في الحالة الأخيرة، أو إذا لم تكن متأكد، الرجاء، بلغ عن العلة باتباع "
-"الإرشادات في http://en.opensuse.org/Zypper/Troubleshooting"
+"ربما نتج هذا الخطأ بسبب وجود بيانات تعريف غير صالحة في المخزن أو خطأ في محلل "
+"بيانات التعريف. وفي الحالة الأخيرة، أو في حالة وجود شك، الرجاء تقديم تقرير "
+"خطأ وذلك باتباع الإرشادات الموجودة على "
+"http://en.opensuse.org/Zypper#Troubleshooting"
 
 #: src/repos.cc:401
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "مستودع بيانات تعريف '%s' غير موجود في ذاكرة التخزين المؤقت المحلية."
+msgstr ""
+"لم يتم العثور على بيانات تعريف المخزن لـ '%s' في الذاكرة المؤقتة المحلية."
 
 #: src/repos.cc:409
 msgid "Error building the cache:"
