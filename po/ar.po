@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 00:36+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2040,7 +2040,7 @@ msgstr "هل تريد الإيقاف أو إعادة المحاولة أو ال�
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
-msgstr "تم تعطيل التحقق من جهة إصدار الشهادات SSL."
+msgstr "تم تعطيل التحقق من جهة إصدار شهادات SSL."
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
