@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 01:23+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2619,7 +2619,7 @@ msgstr "حدثت مشكلة أثناء الوصول إلى الملف في URI �
 
 #: src/repos.cc:1745
 msgid "Please check if the URI is valid and accessible."
-msgstr "الرجاء تحقق من صلاحية المسار وأنه يمكن الوصول إليها."
+msgstr "الرجاء التحقق من صلاحية معرف URI وإمكانية الوصول إليه."
 
 #: src/repos.cc:1752
 msgid "Problem parsing the file at the specified URI"
