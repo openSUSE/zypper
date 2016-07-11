@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 01:55+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-11 01:56+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -3343,7 +3343,7 @@ msgstr "오스트로네시아어(기타)"
 #. language code: mar mr
 #: zypp/LanguageCode.cc:719
 msgid "Marathi"
-msgstr "마라타어"
+msgstr "마라티어"
 
 # ML
 #. language code: mas
@@ -3377,7 +3377,7 @@ msgstr "멘데어"
 #. language code: mga
 #: zypp/LanguageCode.cc:733
 msgid "Irish, Middle (900-1200)"
-msgstr "아일랜드어 (중세) (900년-1200년경)"
+msgstr "아일랜드어, 중세(900-1200)"
 
 #. language code: mic
 #: zypp/LanguageCode.cc:735
@@ -3387,7 +3387,7 @@ msgstr "미크맥어"
 #. language code: min
 #: zypp/LanguageCode.cc:737
 msgid "Minangkabau"
-msgstr "미낭카바우어"
+msgstr "미낭카바우"
 
 #. language code: mis
 #: zypp/LanguageCode.cc:739
