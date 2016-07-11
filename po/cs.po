@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-07 08:27+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-07-11 14:49+0000\n"
+"Last-Translator: Stanislav Kneifl <Stanislav.Kneifl@lqs-lionbridge.com>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
-msgstr "Repozitář:"
+msgstr "Úložiště:"
 
 #: src/callbacks/keyring.h:38
 msgid "Key Name:"
@@ -71,43 +71,42 @@ msgstr[2] "Gpg klíč z podpisového souboru '%1%' vyprší za %2% dní."
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Je přijímán nepodepsaný soubor \"%s\"."
+msgstr "Je přijímán nepodepsaný soubor %s."
 
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Je přijímán nepodepsaný soubor \"%s\" z repozitáře \"%s\".."
+msgstr "Je přijímán nepodepsaný soubor %s z úložiště %s."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:112
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "Soubor \"%s\" není podepsán, chcete pokračovat?"
+msgstr "Soubor %s není podepsán, chcete pokračovat?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Soubor \"%s\" z repozitáře \"%s\" není podepsán, chcete pokračovat?"
+msgstr "Soubor %s z úložiště %s není podepsán, chcete pokračovat?"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Je přijímán soubor \"%s\", který je podepsaný neznámým klíčem \"%s\"."
+msgstr "Je přijímán soubor %s, který je podepsaný neznámým klíčem %s."
 
 #: src/callbacks/keyring.h:143
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Je přijímán soubor \"%s\" z repozitáře \"%s\", který je podepsaný neznámým "
-"klíčem \"%s\"."
+"Je přijímán soubor %s z úložiště %s, který je podepsaný neznámým klíčem %s."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Soubor \"%s\" je podepsaný neznámým klíčem \"%s\". Chcete pokračovat?"
+msgstr "Soubor %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:157
@@ -115,8 +114,7 @@ msgstr "Soubor \"%s\" je podepsaný neznámým klíčem \"%s\". Chcete pokračov
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"Soubor \"%s\" z repozitáře \"%s\" je podepsaný neznámým klíčem \"%s\". "
-"Chcete pokračovat?"
+"Soubor %s z úložiště %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
@@ -124,7 +122,7 @@ msgstr "Automaticky importovat následující klíč:"
 
 #: src/callbacks/keyring.h:175
 msgid "Automatically trusting the following key:"
-msgstr "Automaticky důvěřovat následujícímu klíči:"
+msgstr "Automaticky se důvěřuje následujícímu klíči:"
 
 #: src/callbacks/keyring.h:177
 msgid "New repository or package signing key received:"
@@ -133,7 +131,7 @@ msgstr "Obdržen nový klíč podepisující balíček nebo repozitář:"
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr "Chcete klíč odmítnou, důvěřovat mu dočasně nebo mu důvěřovat natrvalo?"
+msgstr "Chcete klíč odmítnout, důvěřovat mu dočasně nebo mu důvěřovat natrvalo?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -142,12 +140,12 @@ msgstr "Chcete klíč odmítnou, důvěřovat mu dočasně nebo mu důvěřovat 
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:211
 msgid "r/t/a/"
-msgstr "r/t/a/"
+msgstr "o/d/v/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:214
 msgid "r/t"
-msgstr "r/t"
+msgstr "o/d"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:216
@@ -167,29 +165,27 @@ msgstr "Důvěřovat klíči a importovat jej do svazku důvěryhodných klíč�
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignoruji selhání ověření podpisu souboru \"%s\"!"
+msgstr "Ignoruji selhání ověření podpisu souboru %s!"
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ignoruje se nezdařené ověření souboru %s z repozitáře %s!"
+msgstr "Ignoruje se nezdařené ověření souboru %s z úložiště %s!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-"Dvakrát zkontrolujte, že toto není způsobeno nějakou škodlivou změnou v "
-"souboru!"
+msgstr "Pečlivě ověřte, že příčinou není nějaká škodlivá změna v souboru!"
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s'."
-msgstr "Ověření podpisu pro soubor '%s' selhalo."
+msgstr "Ověření podpisu pro soubor %s selhalo."
 
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Selhalo ověření podpisu pro soubor '%s' z repozitáře '%s'."
+msgstr "Selhalo ověření podpisu pro soubor %s z úložiště %s."
 
 #: src/callbacks/keyring.h:284
 msgid ""
@@ -229,7 +225,7 @@ msgstr ""
 "U souboru %1% se nezdařilo ověření součtu\n"
 "[%2%]\n"
 "\n"
-"  Očekávaná hodnota byla     %3%,\n"
+"  Očekávaná hodnota byla %3%,\n"
 "  avšak získaná hodnota je %4%.\n"
 
 #: src/callbacks/keyring.h:344
@@ -265,7 +261,7 @@ msgstr "zrušit"
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:361
 msgid "Unblock using this file on your own risk."
-msgstr "Odblokování použití tohoto souboru na vaše riziko."
+msgstr "Odblokování použití tohoto souboru je na vaše riziko."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:363
@@ -333,9 +329,9 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
-"Kontrola konfliktu souborů vyžaduje aby balíčky, které nejsou nainstalované, "
-"byly předem staženy a aby se mohlo přistupovat k jejich seznamům souborů. "
-"Pro více informací viz volbu '%1%' v manuálové stránce zypperu."
+"Kontrola konfliktu souborů vyžaduje, aby dosud nenainstalované balíčky byly "
+"předem staženy a byly přístupné jejich seznamy souborů. Pro více informací "
+"viz volbu %1% v manuálové stránce zypperu."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
@@ -429,7 +425,7 @@ msgstr "Selhalo ověřování podpisu"
 
 #: src/callbacks/repo.h:236
 msgid "Accepting package despite the error."
-msgstr "Navzdory chybě přijímám balíček."
+msgstr "Navzdory chybě se přijímá balíček."
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -481,7 +477,7 @@ msgstr "Chyba"
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
-msgstr "Jméno"
+msgstr "Název"
 
 #. translators: package version (header)
 #: src/info.cc:74 src/search.cc:70 src/search.cc:377 src/search.cc:514
@@ -539,7 +535,7 @@ msgstr "Informace pro typ '%s' nejsou implementovány."
 #: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
 #: src/locks.cc:107 src/utils/misc.cc:249
 msgid "Repository"
-msgstr "Repozitář"
+msgstr "Úložiště"
 
 #: src/info.cc:255
 msgid "Support Level"
@@ -671,7 +667,7 @@ msgstr "neplatný název CPE"
 
 #: src/info.cc:498
 msgid "Update Repositories"
-msgstr "Aktualizační repozitáře"
+msgstr "Aktualizovat úložiště"
 
 #: src/info.cc:506
 msgid "Content Id"
@@ -679,11 +675,11 @@ msgstr "Id obsahu"
 
 #: src/info.cc:513
 msgid "Provided by enabled repository"
-msgstr "Poskytnuto z povoleného repozitáře"
+msgstr "Poskytnuto z povoleného úložiště"
 
 #: src/info.cc:519
 msgid "Not provided by any enabled repository"
-msgstr "Není poskytováno žádným z povolených repozitářů"
+msgstr "Není poskytováno žádným z povolených úložišť"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -724,7 +720,7 @@ msgstr ""
 #: src/subcommand.cc:324
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% byl zabit signálem %2% (%3%)"
+msgstr "%1% byl ukončen signálem %2% (%3%)"
 
 #: src/subcommand.cc:328
 msgid "core dumped"
