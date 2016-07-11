@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 01:38+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2724,7 +2724,7 @@ msgstr "تم تعيين أولوية المخزن '%s' إلى %d."
 #: src/repos.cc:2080
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "تم تعيين اسم المستودع '%s' إلى '%s'."
+msgstr "تم تعيين اسم المخزن '%s' على '%s'."
 
 #: src/repos.cc:2091
 #, c-format, boost-format
