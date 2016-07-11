@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 01:27+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 01:28+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2660,11 +2660,11 @@ msgstr ""
 #: src/repos.cc:1854
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "المستودع '%s' اعيدت تسميتة إلى '%s'."
+msgstr "تمت إعادة تسمية المخزن '%s' إلى '%s'."
 
 #: src/repos.cc:1863 src/repos.cc:2097
 msgid "Error while modifying the repository:"
-msgstr "خطأ أثناء تعديل المستودع:"
+msgstr "حدث خطأ أثناء تعديل المخزن:"
 
 #: src/repos.cc:1864
 #, c-format, boost-format
