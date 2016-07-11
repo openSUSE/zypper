@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:01+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 08:02+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5617,11 +5617,11 @@ msgstr ""
 #: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
-msgstr "الإستخدام"
+msgstr "الاستخدام"
 
 #: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
-msgstr "امتيازات الجذر مطلوبة لإضافة حزمة مقفلة."
+msgstr "امتيازات المسؤول مطلوبة لإضافة أقفال الحزم."
 
 #: src/Zypper.cc:5023
 #, c-format, boost-format
@@ -5642,7 +5642,7 @@ msgstr "لم يتم تنفيذ مخرجات XML لهذا الأمر."
 #: src/Zypper.cc:5047
 #, c-format, boost-format
 msgid "Distribution Label: %s"
-msgstr "تسمية التوزيعة: %s"
+msgstr "تسمية التوزيع: %s"
 
 #: src/Zypper.cc:5048
 #, c-format, boost-format
@@ -5652,7 +5652,7 @@ msgstr "تسمية قصيرة: %s"
 #: src/Zypper.cc:5089
 #, c-format, boost-format
 msgid "%s matches %s"
-msgstr "%s يطابق %s"
+msgstr "يتطابق %s مع %s"
 
 #: src/Zypper.cc:5091
 #, c-format, boost-format
@@ -5667,7 +5667,7 @@ msgstr "%s أقدم من %s"
 #: src/Zypper.cc:5171 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
-msgstr "صلاحيات غير كافية لتحميل المجلد '%s'."
+msgstr "امتيازات غير صالحة لاستخدام دليل التنزيل '%s'."
 
 #: src/Zypper.cc:5223
 msgid "This command only makes sense in the zypper shell."
