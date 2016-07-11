@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:33+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 08:39+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6459,7 +6459,7 @@ msgstr "وسيطات كثيرة للغاية."
 #: src/utils/messages.cc:56
 #, c-format, boost-format
 msgid "The '--%s' option has currently no effect."
-msgstr "الاختيار '--%s' ليس له حاليا أي تأثير."
+msgstr "لا يُحدث الخيار '--%s' أي تأثير في الوقت الحالي."
 
 #: src/utils/messages.cc:74
 #, c-format, boost-format
@@ -6468,37 +6468,41 @@ msgid ""
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
 msgstr ""
-"لقد اخترت تجاهل التحميل أو التثبيت لوجود مشكلة في الحزم قد تؤدي إلى كسر "
-"تبعيات حزم أخرى. من المستحسن تشغيل '%s' بعد انتهاء العملية."
+"لقد اخترت تجاهل مشكلة في إنزال حزمة أو تثبيتها والذي قد يؤدي إلى تعطيل "
+"تبعيات في الحزم الأخرى. يوصى بتشغيل '%s' بعد إنهاء العملية."
 
 #: src/utils/pager.cc:32
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
-msgstr "اضغط '%c' لإنهاء النداء."
+msgstr "اضغط '%c' لإنهاء المتصفح."
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
-msgstr "استخدم الأسهم أو مفاتيح pgUp/pgDown لتمرير النص أسطر أو صفحات."
+msgstr ""
+"استخدم الأسهم أو المفتاحين pgUp/pgDown للتمرير خلال النص حسب السطور أو "
+"الصفحات."
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr "استخدام مفتاح دخول أو المسافة لتمرير النص أسطر أو صفحات."
+msgstr ""
+"استخدم مفتاح \"الإدخال\" أو \"المسافة\" للتمرير خلال النص حسب السطور أو "
+"الصفحات."
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
-msgstr "لا يمكن تهيئة محلل إعداد الملف."
+msgstr "تعذرت تهيئة محلل ملف التكوين."
 
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
-msgstr "خطأ Augeas: فشل إعداد ملف تهيئة التحميل."
+msgstr "خطأ Augeas: فشل إعداد ملف التكوين للتحميل."
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
-msgstr "تعذر تحليل ملفات التهيئة."
+msgstr "تعذر تحليل ملفات التكوين."
 
 #: src/utils/Augeas.cc:99
 msgid "Error parsing zypper.conf:"
-msgstr "حدث خطأ أثناء تحليل zypper.conf:"
+msgstr "خطأ تحليل تكوين zypper:"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
