@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-11 01:44+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2271,7 +2271,7 @@ msgstr "바타크어(인도네시아)"
 #. language code: bua
 #: zypp/LanguageCode.cc:289
 msgid "Buriat"
-msgstr "부리아타"
+msgstr "부랴트어"
 
 #. language code: bug
 #: zypp/LanguageCode.cc:291
