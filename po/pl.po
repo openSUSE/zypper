@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-08 15:54+0000\n"
+"PO-Revision-Date: 2016-07-11 09:27+0000\n"
 "Last-Translator: Piotr Domański <Piotr.Domanski@lionbridge.com>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/libzypp/master/pl/>"
 "\n"
@@ -40,7 +40,7 @@ msgstr "Nie można sklonować obiektu URL"
 
 #: zypp/Url.cc:313
 msgid "Invalid empty Url object reference"
-msgstr "Nieprawidłowe odwołanie do pustego adresu URL"
+msgstr "Nieprawidłowe odwołanie do pustego obiektu adresu URL"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
@@ -64,7 +64,7 @@ msgstr "Nie można pobrać blokady muteksu"
 
 #: zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
-msgstr "Nie można zwolnic blokady muteksu"
+msgstr "Nie można zwolnić blokady muteksu"
 
 #: zypp/Dep.cc:96
 msgid "Provides"
@@ -394,7 +394,7 @@ msgstr "Usuwanie repozytorium '%s'"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
-msgstr "Nie można określić, gdzie przechowywane jest repozytorium."
+msgstr "Nie można określić miejsca przechowywania repozytorium."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
@@ -414,12 +414,12 @@ msgstr "Schemat URL nie zezwala na %s"
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "Nieprawidłowe %s komponentu '%s'"
+msgstr "Nieprawidłowe: %s, komponent: '%s'"
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
 msgid "Invalid %s component"
-msgstr "Nieprawidłowe %s komponentu"
+msgstr "Komponent — nieprawidłowe: %s"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
@@ -491,7 +491,7 @@ msgstr "Nieprawidłowy znak parametru połączenia tablicy"
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
-msgstr "Nie można otworzyć pty (%s)."
+msgstr "Nie można otworzyć pseudoterminala (%s)."
 
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
@@ -607,9 +607,9 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
-"Określenie problemu oznacza, że pomoc techniczna obejmuje informację "
-"związaną z kompatybilnością, pomocą przy instalacji, użytkowaniem, bieżącym "
-"utrzymaniem oraz podstawowym rozwiązywaniem problemów. Pomoc techniczna na "
+"Określenie problemu oznacza, że pomoc techniczna obejmuje informacje na "
+"temat kompatybilności, pomoc w zakresie instalacji, użytkowania i bieżącej "
+"konserwacji oraz podstawowego rozwiązywania problemów. Pomoc techniczna na "
 "poziomie 1 nie obejmuje naprawy błędów produktu."
 
 #: zypp/VendorSupportOptions.cc:48
@@ -628,10 +628,9 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
-"Rozwiązywanie problemu: specjalna pomoc techniczna w celu rozwiązywania "
-"złożonych problemów z użyciem rozwiązań inżynieryjnych do naprawiania "
-"defektów produktów zidentyfikowanych w ramach wsparcia technicznego na "
-"poziomie 2."
+"Rozwiązywanie problemu: pomoc techniczna obejmuje rozwiązywanie złożonych "
+"problemów przy użyciu metod inżynieryjnych w celu naprawy defektów produktów "
+"zidentyfikowanych w ramach wsparcia technicznego na poziomie 2."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
