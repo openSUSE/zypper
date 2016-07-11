@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-11 01:51+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -3165,7 +3165,7 @@ msgstr "쿠르드어"
 #. language code: kut
 #: zypp/LanguageCode.cc:653
 msgid "Kutenai"
-msgstr "쿠테나이어"
+msgstr "쿠터네이어"
 
 #. language code: lad
 #: zypp/LanguageCode.cc:655
@@ -3176,7 +3176,7 @@ msgstr "라디노어"
 #. language code: lah
 #: zypp/LanguageCode.cc:657
 msgid "Lahnda"
-msgstr "란다어"
+msgstr "라한다어"
 
 #. language code: lam
 #: zypp/LanguageCode.cc:659
@@ -3201,12 +3201,12 @@ msgstr "라트비아어"
 #. language code: lez
 #: zypp/LanguageCode.cc:667
 msgid "Lezghian"
-msgstr "레즈긴어"
+msgstr "레즈기안어"
 
 #. language code: lim li
 #: zypp/LanguageCode.cc:669
 msgid "Limburgan"
-msgstr "림뷔르흐어"
+msgstr "림버거어"
 
 # AO
 #. language code: lin ln
@@ -3238,12 +3238,12 @@ msgstr "룩셈부르크어"
 #. language code: lua
 #: zypp/LanguageCode.cc:681
 msgid "Luba-Lulua"
-msgstr "루바룰루아어"
+msgstr "루바-룰루아어"
 
 #. language code: lub lu
 #: zypp/LanguageCode.cc:683
 msgid "Luba-Katanga"
-msgstr "루바카탕가어"
+msgstr "루바-카탄가어"
 
 # GH
 #. language code: lug lg
@@ -3255,7 +3255,7 @@ msgstr "간다어"
 #. language code: lui
 #: zypp/LanguageCode.cc:687
 msgid "Luiseno"
-msgstr "루이세뇨어"
+msgstr "루이세노어"
 
 #. language code: lun
 #: zypp/LanguageCode.cc:689
@@ -3265,7 +3265,7 @@ msgstr "룬다어"
 #. language code: luo
 #: zypp/LanguageCode.cc:691
 msgid "Luo (Kenya and Tanzania)"
-msgstr "루오어 (케냐와 탄자니아)"
+msgstr "루오어(케냐 및 탄자니아)"
 
 #. language code: lus
 #: zypp/LanguageCode.cc:693
@@ -3280,7 +3280,7 @@ msgstr "마케도니아어"
 #. language code: mad
 #: zypp/LanguageCode.cc:699
 msgid "Madurese"
-msgstr "마두라어"
+msgstr "마두레세"
 
 # src/isdn/interface.ycp:258 src/isdn/lowlevel.ycp:52
 #. language code: mag
