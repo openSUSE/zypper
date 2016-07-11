@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 01:26+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 01:27+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2646,7 +2646,7 @@ msgstr "لا يحتوي المخزن '%s' على أي محدد URI معرَّف�
 #: src/repos.cc:1821
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
-msgstr "المستودع '%s' تمت إزالته."
+msgstr "تمت إزالة المخزن '%s'."
 
 #: src/repos.cc:1843
 #, c-format, boost-format
@@ -2654,8 +2654,8 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"لا يمكن تغيير الاسم المستعار للمستودع '%s' . المستودع ينتمي إلى خدمة '%s' "
-"وهو المسؤول عن تحديد الاسم المستعار لها."
+"تعذر تغيير الاسم المستعار للمخزن '%s'. لأن المخزن قيد استخدام خدمة '%s' "
+"المسؤولة عن تعيين الاسم المستعار الخاص به."
 
 #: src/repos.cc:1854
 #, c-format, boost-format
