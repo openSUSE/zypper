@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 08:40+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 08:43+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6525,13 +6525,13 @@ msgid ""
 "%s used together with %s, which contradict each other. This property will be "
 "left unchanged."
 msgstr ""
-"%s استخدامها جنبا إلى جنب مع%s، التي تتعارض مع بعض. ستترك هذه الخاصية دون "
-"تغيير."
+"تم استخدام %s مع %s، اللذين يتعارضان مع بعضهما البعض. لن يتم تغيير هذه "
+"الخاصية."
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:72
 msgid "shows all options"
-msgstr "أظهر كلّ الخيارات"
+msgstr "إظهار كلّ الخيارات"
 
 #: src/utils/prompt.cc:125 src/utils/prompt.cc:247 src/utils/prompt.cc:327
 msgid "yes"
@@ -6544,7 +6544,7 @@ msgstr "لا"
 #: src/utils/prompt.cc:145 src/utils/prompt.cc:190
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
-msgstr "إعادة المحاولة في %u ثانية..."
+msgstr "إعادة المحاولة في %u ثانية (ثوانٍ)..."
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -6554,7 +6554,7 @@ msgstr "إعادة المحاولة في %u ثانية..."
 #. The answers should be lower case letters.
 #: src/utils/prompt.cc:151 src/utils/prompt.cc:235
 msgid "a/r/i"
-msgstr "a/r/i"
+msgstr "إيقاف/إعادة محاولة/تجاهل"
 
 #: src/utils/prompt.cc:200
 #, c-format, boost-format
@@ -6569,7 +6569,7 @@ msgstr[5] "اختيار آلي '%s' بعد%u ثوان."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
-msgstr "حاول مرة أخرى..."
+msgstr "تتم الآن المحاولة مرة أخرى..."
 
 #: src/utils/prompt.cc:288
 #, fuzzy
@@ -6582,19 +6582,19 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
-"إذا قمت بتشغيل zypper بدون الطرفية، استخدم '%s' الخيارات العالمية\n"
-" ليستخدم zypper الإجابات الإفتراضية للتوجيهات."
+"في حالة تشغيل zipper بدون جهاز طرفي، قم باستخدام الخيار\n"
+"العام '%s' لكي يَستخدم zipper إجابات افتراضية للمطالبات."
 
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
-msgstr "الإجابة غير صالح '%s'."
+msgstr "الإجابة '%s' غير صالحة."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:326
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr "دخول '%s' ل '%s' أو '%s' ل '%s' إذا لم يناسبك شيئ آخر."
+msgstr "أدخل '%s' لـ '%s' أو '%s' لـ '%s' إذا لم يعمل أي شيء آخر معك."
 
 #: src/utils/misc.cc:113
 msgid "package"
@@ -6705,11 +6705,11 @@ msgstr "غير معرّف"
 #. << _("Repository")
 #: src/utils/misc.cc:289
 msgid "Issue"
-msgstr "إصدار"
+msgstr "المشكلة"
 
 #: src/utils/misc.cc:290
 msgid "No."
-msgstr "لا."
+msgstr "رقم"
 
 #: src/utils/misc.cc:291
 msgid "Patch"
@@ -6721,7 +6721,7 @@ msgstr "المسار المحلي المحدد غير موجود أو لا يم�
 
 #: src/utils/misc.cc:379
 msgid "Given URI is invalid"
-msgstr "عنوان المسار المعطى غير صالح"
+msgstr "معرف URI المحدد غير صالح"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
@@ -6736,11 +6736,11 @@ msgstr "الرجاء استخدام obs://<project>/<platform>"
 #: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
 msgid "Example: %s"
-msgstr "مثال : %s"
+msgstr "مثال: %s"
 
 #: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
-msgstr "مسار OBS غير صحيح."
+msgstr "عنوان URI غير صالح لـ OBS."
 
 #: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
