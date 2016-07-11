@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 01:39+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2744,7 +2744,7 @@ msgstr "حدث خطأ أثناء قراءة الخدمات:"
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr ""
-"لم يتم العثور على الخدمة '%s' حسب الاسم المستعار أو الرقم أو معرف URI الخاص "
+"لم يتم العثور على الخدمة '%s' حسب الاسم المستعار أو الرقم أو محدد URI الخاص "
 "بها."
 
 #: src/repos.cc:2222
