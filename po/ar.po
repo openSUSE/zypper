@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:18+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 07:34+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3549,52 +3549,55 @@ msgstr "الإعداد القسري"
 #: src/Zypper.cc:929
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
-"سلسلة بيانات المستخدم لا يجب أن تحتوي على أحرف أو أسطر جديدة غير القابلة "
+"يجب ألا تحتوي سلسلة بيانات المستخدم على أحرف أو أسطر جديدة غير القابلة "
 "للطباعة!"
 
 #: src/Zypper.cc:953 src/Zypper.cc:3227
 msgid "Entering non-interactive mode."
-msgstr "دخول نمط غير تفاعلي."
+msgstr "الدخول في وضع غير تفاعلي."
 
 #: src/Zypper.cc:960
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
-msgstr "الرقع التي لها علامة اقتراح إعادة تشغيل لن تعامل كتفاعلية."
+msgstr ""
+"لن يتم التعامل مع التصحيحات التي تحتوي على مجموعة العلامات rebootSuggested "
+"على أنها تفاعلية."
 
 #: src/Zypper.cc:967
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "الدخول في وضع ' بدون-gpg-فحص'ء."
+msgstr "الدخول في وضع 'no-gpg-checks'."
 
 #: src/Zypper.cc:975
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
-msgstr "تشغيل '%s'. سيتم استيراد توقيع المستودع الجديد آلياً!"
+msgstr "تشغيل '%s'. سيتم استيراد مفاتيح توقيع جديدة للمخزن تلقائيًا!"
 
 #: src/Zypper.cc:988
 msgid "The path specified in the --root option must be absolute."
-msgstr "المسار المحدد في --root يجب أن يكون خيار مطلقا."
+msgstr "يجب أن يكون المسار المحدد في الخيار --root مطلقًا."
 
 #: src/Zypper.cc:1004
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
-"الارتباط الرمزي/etc/products.d/baseproduct معلق أو مفقود!\n"
-"يجب أن يشير الارتباط إلى ملف.prod الأساسي الخاصة بك في/etc/products.d.\n"
+"الارتباط الرمزي /etc/products.d/baseproduct غير سليم أو مفقود!\n"
+"يجب أن يشير الارتباط إلى ملف ‎.prod الخاص بمنتجاتك الأساسية في "
+"/etc/products.d.\n"
 
 #: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr "مستودعات معطلة، استخدام قاعدة البيانات الحزم المثبتة فقط."
+msgstr "تم تعطيل المخازن، باستخدام قاعدة بيانات الحزم المثبتة فقط."
 
 #: src/Zypper.cc:1056
 msgid "Autorefresh disabled."
-msgstr "تعطيل التجديد التلقائي."
+msgstr "تم تعطيل التجديد التلقائي."
 
 #: src/Zypper.cc:1063
 msgid "CD/DVD repositories disabled."
-msgstr "تعطيل مستودعات CD/DVD."
+msgstr "مخازن الأقراص المضغوطة/أقراص الفيديو الرقمية معطلة."
 
 #: src/Zypper.cc:1070
 msgid "Remote repositories disabled."
