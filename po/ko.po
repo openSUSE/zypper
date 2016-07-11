@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 01:45+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-11 01:50+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2390,12 +2390,12 @@ msgstr "체로키어"
 #. language code: chu cu
 #: zypp/LanguageCode.cc:339
 msgid "Church Slavic"
-msgstr "슬라브어(고대 교회)"
+msgstr "교회슬라브어"
 
 #. language code: chv cv
 #: zypp/LanguageCode.cc:341
 msgid "Chuvash"
-msgstr "추바슈어"
+msgstr "추바시어"
 
 #  textentry label
 #  table header 1/2
@@ -2407,7 +2407,7 @@ msgstr "샤이엔어"
 #. language code: cmc
 #: zypp/LanguageCode.cc:345
 msgid "Chamic Languages"
-msgstr "참어군"
+msgstr "카믹어"
 
 # src/config/routing.y2cc:11
 #. language code: cop
@@ -2428,17 +2428,17 @@ msgstr "코르시카어"
 #. language code: cpe
 #: zypp/LanguageCode.cc:353
 msgid "Creoles and Pidgins, English-Based (Other)"
-msgstr "크리올어 및 피진어 (영어를 바탕으로 한 기타)"
+msgstr "크레오리스와 피긴스어, 영어 기반(기타)"
 
 #. language code: cpf
 #: zypp/LanguageCode.cc:355
 msgid "Creoles and Pidgins, French-Based (Other)"
-msgstr "크리올어 및 피진어 (프랑스어를 바탕으로 한 기타)"
+msgstr "크레오리스와 피긴스어, 프랑스어 기반(기타)"
 
 #. language code: cpp
 #: zypp/LanguageCode.cc:357
 msgid "Creoles and Pidgins, Portuguese-Based (Other)"
-msgstr "크리올어 및 피진어 (포르투갈어를 바탕으로 한 기타)"
+msgstr "크레오리스와 피긴스어, 포르투갈어 기반(기타)"
 
 #. language code: cre cr
 #: zypp/LanguageCode.cc:359
@@ -2448,22 +2448,22 @@ msgstr "크리어"
 #. language code: crh
 #: zypp/LanguageCode.cc:361
 msgid "Crimean Tatar"
-msgstr "크림 타타르어"
+msgstr "크리민 타타르어"
 
 #. language code: crp
 #: zypp/LanguageCode.cc:363
 msgid "Creoles and Pidgins (Other)"
-msgstr "크리올어 및 피진어 (이외의 언어를 바탕으로 한 기타)"
+msgstr "크레오리스와 피긴스어(기타)"
 
 #. language code: csb
 #: zypp/LanguageCode.cc:365
 msgid "Kashubian"
-msgstr "카슈브어"
+msgstr "카슈비아어"
 
 #. language code: cus
 #: zypp/LanguageCode.cc:367
 msgid "Cushitic (Other)"
-msgstr "쿠시어파 (기타)"
+msgstr "쿠시어(기타)"
 
 #. language code: cze ces cs
 #: zypp/LanguageCode.cc:369 zypp/LanguageCode.cc:371
@@ -2483,7 +2483,7 @@ msgstr "덴마크어"
 #. language code: dar
 #: zypp/LanguageCode.cc:377
 msgid "Dargwa"
-msgstr "다르과어"
+msgstr "다르그와어"
 
 #  combo box item
 #. language code: day
@@ -2500,7 +2500,7 @@ msgstr "델라웨어어"
 #. language code: den
 #: zypp/LanguageCode.cc:383
 msgid "Slave (Athapascan)"
-msgstr "슬레이비어 (아타파스카)"
+msgstr "슬라브어(아타파스카어)"
 
 #. language code: dgr
 #: zypp/LanguageCode.cc:385
@@ -2521,38 +2521,38 @@ msgstr "디베히어"
 #. language code: doi
 #: zypp/LanguageCode.cc:391
 msgid "Dogri"
-msgstr "도그라어"
+msgstr "도그리어"
 
 #. language code: dra
 #: zypp/LanguageCode.cc:393
 msgid "Dravidian (Other)"
-msgstr "드라비다어족 (기타)"
+msgstr "드라비다어(기타)"
 
 #  combo box item
 #. language code: dsb
 #: zypp/LanguageCode.cc:395
 msgid "Lower Sorbian"
-msgstr "소르비아어 (저지)"
+msgstr "소르비아어(저지)"
 
 #. language code: dua
 #: zypp/LanguageCode.cc:397
 msgid "Duala"
-msgstr "두알라어"
+msgstr "드와라어"
 
 #. language code: dum
 #: zypp/LanguageCode.cc:399
 msgid "Dutch, Middle (ca.1050-1350)"
-msgstr "네덜란드어 (중세) (1050년-1350년경)"
+msgstr "네덜란드어, 중세(ca.1050-1350)"
 
 #. language code: dut nld nl
 #: zypp/LanguageCode.cc:401 zypp/LanguageCode.cc:403
 msgid "Dutch"
-msgstr "화란어"
+msgstr "네덜란드어"
 
 #. language code: dyu
 #: zypp/LanguageCode.cc:405
 msgid "Dyula"
-msgstr "듈라어"
+msgstr "드율라어"
 
 # TO
 #. language code: dzo dz
@@ -2563,17 +2563,17 @@ msgstr "종카어"
 #. language code: efi
 #: zypp/LanguageCode.cc:409
 msgid "Efik"
-msgstr "에피크어"
+msgstr "이픽어"
 
 #. language code: egy
 #: zypp/LanguageCode.cc:411
 msgid "Egyptian (Ancient)"
-msgstr "이집트어 (고대)"
+msgstr "이집트어(고대)"
 
 #. language code: eka
 #: zypp/LanguageCode.cc:413
 msgid "Ekajuk"
-msgstr "에카주크어"
+msgstr "이카죽어"
 
 #. language code: elx
 #: zypp/LanguageCode.cc:415
@@ -2588,7 +2588,7 @@ msgstr "영어"
 #. language code: enm
 #: zypp/LanguageCode.cc:419
 msgid "English, Middle (1100-1500)"
-msgstr "영어 (중세) (1100년-1500년)"
+msgstr "영어, 중세(1100-1500)"
 
 #. language code: epo eo
 #: zypp/LanguageCode.cc:421
@@ -2603,18 +2603,18 @@ msgstr "에스토니아어"
 #. language code: ewe ee
 #: zypp/LanguageCode.cc:425
 msgid "Ewe"
-msgstr "어웨어"
+msgstr "에웨어"
 
 #. language code: ewo
 #: zypp/LanguageCode.cc:427
 msgid "Ewondo"
-msgstr "에원도어"
+msgstr "이원도어"
 
 #  tree node string
 #. language code: fan
 #: zypp/LanguageCode.cc:429
 msgid "Fang"
-msgstr "팡어"
+msgstr "팡그어"
 
 #. language code: fao fo
 #: zypp/LanguageCode.cc:431
@@ -2644,7 +2644,7 @@ msgstr "핀란드어"
 #. language code: fiu
 #: zypp/LanguageCode.cc:441
 msgid "Finno-Ugrian (Other)"
-msgstr "핀우고르어파 (기타)"
+msgstr "피노우그리아어(기타)"
 
 #. language code: fon
 #: zypp/LanguageCode.cc:443
@@ -2659,12 +2659,12 @@ msgstr "프랑스어"
 #. language code: frm
 #: zypp/LanguageCode.cc:449
 msgid "French, Middle (ca.1400-1600)"
-msgstr "프랑스 (중세) (1400년-1600년경)"
+msgstr "프랑스어, 중세(ca.1400-1600)"
 
 #. language code: fro
 #: zypp/LanguageCode.cc:451
 msgid "French, Old (842-ca.1400)"
-msgstr "프랑스 (고대) (842년-1400년경)"
+msgstr "프랑스어, 고대(842-ca.1400)"
 
 #. language code: fry fy
 #: zypp/LanguageCode.cc:453
@@ -2679,7 +2679,7 @@ msgstr "풀라어"
 #. language code: fur
 #: zypp/LanguageCode.cc:457
 msgid "Friulian"
-msgstr "프릴리안어"
+msgstr "프리우리안어"
 
 #. language code: gaa
 #: zypp/LanguageCode.cc:459
@@ -2700,27 +2700,27 @@ msgstr "그바야어"
 #. language code: gem
 #: zypp/LanguageCode.cc:465
 msgid "Germanic (Other)"
-msgstr "게르만어파 (기타)"
+msgstr "독일어(기타)"
 
 #. language code: geo kat ka
 #: zypp/LanguageCode.cc:467 zypp/LanguageCode.cc:469
 msgid "Georgian"
-msgstr "그루지야어"
+msgstr "그루지아어"
 
 #. language code: ger deu de
 #: zypp/LanguageCode.cc:471 zypp/LanguageCode.cc:473
 msgid "German"
-msgstr "독어"
+msgstr "독일어"
 
 #. language code: gez
 #: zypp/LanguageCode.cc:475
 msgid "Geez"
-msgstr "게에즈어"
+msgstr "게이즈어"
 
 #. language code: gil
 #: zypp/LanguageCode.cc:477
 msgid "Gilbertese"
-msgstr "키리바스어"
+msgstr "키리바시어"
 
 # ML
 #. language code: gla gd
@@ -2741,23 +2741,23 @@ msgstr "갈리시아어"
 #. language code: glv gv
 #: zypp/LanguageCode.cc:485
 msgid "Manx"
-msgstr "맨어; 맹크스어"
+msgstr "맹크스어"
 
 #. language code: gmh
 #: zypp/LanguageCode.cc:487
 msgid "German, Middle High (ca.1050-1500)"
-msgstr "독일어 (중세 고지) (1050년-1500년경)"
+msgstr "독일어, 중세 고지(ca.1050-1500)"
 
 #. language code: goh
 #: zypp/LanguageCode.cc:489
 msgid "German, Old High (ca.750-1050)"
-msgstr "독일어 (고대 고지) (750년-1050년경)"
+msgstr "독일어, 고대 고지(ca.750-1050)"
 
 # GA
 #. language code: gon
 #: zypp/LanguageCode.cc:491
 msgid "Gondi"
-msgstr "곤드어"
+msgstr "곤디어"
 
 #. language code: gor
 #: zypp/LanguageCode.cc:493
@@ -2773,22 +2773,22 @@ msgstr "고트어"
 #. language code: grb
 #: zypp/LanguageCode.cc:497
 msgid "Grebo"
-msgstr "그레보어"
+msgstr "그리보어"
 
 #. language code: grc
 #: zypp/LanguageCode.cc:499
 msgid "Greek, Ancient (to 1453)"
-msgstr "그리스어 (고대) (1453년 이전)"
+msgstr "그리스어, 고대(1453년까지)"
 
 #. language code: gre ell el
 #: zypp/LanguageCode.cc:501 zypp/LanguageCode.cc:503
 msgid "Greek, Modern (1453-)"
-msgstr "그리스어 (현대) (1453년 이후)"
+msgstr "그리스어, 현대(1453년 이후)"
 
 #. language code: grn gn
 #: zypp/LanguageCode.cc:505
 msgid "Guarani"
-msgstr "과라니어"
+msgstr "구아라니어"
 
 #. language code: guj gu
 #: zypp/LanguageCode.cc:507
@@ -2798,7 +2798,7 @@ msgstr "구자라트어"
 #. language code: gwi
 #: zypp/LanguageCode.cc:509
 msgid "Gwich'in"
-msgstr "귀틴어"
+msgstr "그위친어"
 
 # src/isdn/complex.ycp:260
 #. language code: hai
@@ -2810,13 +2810,13 @@ msgstr "하이다어"
 #. language code: hat ht
 #: zypp/LanguageCode.cc:513
 msgid "Haitian"
-msgstr "아이티 크리올어"
+msgstr "아이티어"
 
 #  combo box item
 #. language code: hau ha
 #: zypp/LanguageCode.cc:515
 msgid "Hausa"
-msgstr "하우사어"
+msgstr "하우자어"
 
 #. language code: haw
 #: zypp/LanguageCode.cc:517
@@ -2836,12 +2836,12 @@ msgstr "헤레로어"
 #. language code: hil
 #: zypp/LanguageCode.cc:523
 msgid "Hiligaynon"
-msgstr "힐리가이노어"
+msgstr "헤리가뇬어"
 
 #. language code: him
 #: zypp/LanguageCode.cc:525
 msgid "Himachali"
-msgstr "히마찰어"
+msgstr "히마차리어"
 
 #. language code: hin hi
 #: zypp/LanguageCode.cc:527
@@ -2857,7 +2857,7 @@ msgstr "히타이트어"
 #. language code: hmn
 #: zypp/LanguageCode.cc:531
 msgid "Hmong"
-msgstr "몽어"
+msgstr "흐몽어"
 
 #. language code: hmo ho
 #: zypp/LanguageCode.cc:533
@@ -2867,7 +2867,7 @@ msgstr "히리 모투어"
 #. language code: hsb
 #: zypp/LanguageCode.cc:535
 msgid "Upper Sorbian"
-msgstr "소르비아어 (고지대)"
+msgstr "소르비아어(고지)"
 
 #. language code: hun hu
 #: zypp/LanguageCode.cc:537
@@ -2900,12 +2900,12 @@ msgstr "아이슬란드어"
 #. language code: ido io
 #: zypp/LanguageCode.cc:549
 msgid "Ido"
-msgstr "이도"
+msgstr "이도어"
 
 #. language code: iii ii
 #: zypp/LanguageCode.cc:551
 msgid "Sichuan Yi"
-msgstr "쓰촨 이어"
+msgstr "시츄안 이어"
 
 #. language code: ijo
 #: zypp/LanguageCode.cc:553
@@ -2915,27 +2915,27 @@ msgstr "이조어"
 #. language code: iku iu
 #: zypp/LanguageCode.cc:555
 msgid "Inuktitut"
-msgstr "이누이트어"
+msgstr "이눅티투트어"
 
 #. language code: ile ie
 #: zypp/LanguageCode.cc:557
 msgid "Interlingue"
-msgstr "인테르링구에"
+msgstr "인터링게어"
 
 #. language code: ilo
 #: zypp/LanguageCode.cc:559
 msgid "Iloko"
-msgstr "일로코어"
+msgstr "이로코어"
 
 #. language code: ina ia
 #: zypp/LanguageCode.cc:561
 msgid "Interlingua (International Auxiliary Language Association)"
-msgstr "인터링 (국제 보조언어 협회)"
+msgstr "국제어(국제보조어협회)"
 
 #. language code: inc
 #: zypp/LanguageCode.cc:563
 msgid "Indic (Other)"
-msgstr "인도아리아어군 (기타)"
+msgstr "인도어(기타)"
 
 #. language code: ind id
 #: zypp/LanguageCode.cc:565
@@ -2945,12 +2945,12 @@ msgstr "인도네시아어"
 #. language code: ine
 #: zypp/LanguageCode.cc:567
 msgid "Indo-European (Other)"
-msgstr "인도유럽어족 (기타)"
+msgstr "인도유럽어(기타)"
 
 #. language code: inh
 #: zypp/LanguageCode.cc:569
 msgid "Ingush"
-msgstr "인구시어"
+msgstr "인귀시어"
 
 #. language code: ipk ik
 #: zypp/LanguageCode.cc:571
@@ -2960,18 +2960,18 @@ msgstr "이누피아크어"
 #. language code: ira
 #: zypp/LanguageCode.cc:573
 msgid "Iranian (Other)"
-msgstr "이란어군 (기타)"
+msgstr "이란어(기타)"
 
 # src/config/proxy.y2cc:21
 #. language code: iro
 #: zypp/LanguageCode.cc:575
 msgid "Iroquoian Languages"
-msgstr "이로쿼이어족"
+msgstr "이러쿼이어"
 
 #. language code: ita it
 #: zypp/LanguageCode.cc:577
 msgid "Italian"
-msgstr "이태리어"
+msgstr "이탈리아어"
 
 #. language code: jav jv
 #: zypp/LanguageCode.cc:579
@@ -2981,7 +2981,7 @@ msgstr "자바어"
 #. language code: jbo
 #: zypp/LanguageCode.cc:581
 msgid "Lojban"
-msgstr "로지반"
+msgstr "로반어"
 
 #. language code: jpn ja
 #: zypp/LanguageCode.cc:583
@@ -2991,12 +2991,12 @@ msgstr "일본어"
 #. language code: jpr
 #: zypp/LanguageCode.cc:585
 msgid "Judeo-Persian"
-msgstr "유대페르시아어"
+msgstr "유대-페르시아어"
 
 #. language code: jrb
 #: zypp/LanguageCode.cc:587
 msgid "Judeo-Arabic"
-msgstr "유대아랍어"
+msgstr "유대-아라비아어"
 
 #. language code: kaa
 #: zypp/LanguageCode.cc:589
@@ -3006,7 +3006,7 @@ msgstr "카라칼파크어"
 #. language code: kab
 #: zypp/LanguageCode.cc:591
 msgid "Kabyle"
-msgstr "카빌어"
+msgstr "커바일어"
 
 #. language code: kac
 #: zypp/LanguageCode.cc:593
@@ -3058,7 +3058,7 @@ msgstr "카자흐어"
 #. language code: kbd
 #: zypp/LanguageCode.cc:611
 msgid "Kabardian"
-msgstr "카바르디아어"
+msgstr "카바르디어"
 
 #. language code: kha
 #: zypp/LanguageCode.cc:613
@@ -3068,7 +3068,7 @@ msgstr "카시어"
 #. language code: khi
 #: zypp/LanguageCode.cc:615
 msgid "Khoisan (Other)"
-msgstr "코이산어족 (기타)"
+msgstr "코이산어(기타)"
 
 #. language code: khm km
 #: zypp/LanguageCode.cc:617
@@ -3078,17 +3078,17 @@ msgstr "크메르어"
 #. language code: kho
 #: zypp/LanguageCode.cc:619
 msgid "Khotanese"
-msgstr "호탄어"
+msgstr "코탄스어"
 
 #. language code: kik ki
 #: zypp/LanguageCode.cc:621
 msgid "Kikuyu"
-msgstr "키쿠유어; 기쿠유어"
+msgstr "키쿠유어"
 
 #. language code: kin rw
 #: zypp/LanguageCode.cc:623
 msgid "Kinyarwanda"
-msgstr "르완다어"
+msgstr "키냐르완다어"
 
 #. language code: kir ky
 #: zypp/LanguageCode.cc:625
@@ -3103,7 +3103,7 @@ msgstr "킴분두어"
 #. language code: kok
 #: zypp/LanguageCode.cc:629
 msgid "Konkani"
-msgstr "콘칸어"
+msgstr "코카니어"
 
 #. language code: kom kv
 #: zypp/LanguageCode.cc:631
@@ -3124,42 +3124,42 @@ msgstr "한국어"
 #. language code: kos
 #: zypp/LanguageCode.cc:637
 msgid "Kosraean"
-msgstr "코스라에어"
+msgstr "코스라이엔어"
 
 #. language code: kpe
 #: zypp/LanguageCode.cc:639
 msgid "Kpelle"
-msgstr "크펠레어"
+msgstr "크펠르어"
 
 #. language code: krc
 #: zypp/LanguageCode.cc:641
 msgid "Karachay-Balkar"
-msgstr "카라차이발카르어"
+msgstr "카라챠이-발카르어"
 
 #. language code: kro
 #: zypp/LanguageCode.cc:643
 msgid "Kru"
-msgstr "쿠루크어"
+msgstr "크루어"
 
 #. language code: kru
 #: zypp/LanguageCode.cc:645
 msgid "Kurukh"
-msgstr "쿠루크어"
+msgstr "쿠르크어"
 
 #. language code: kua kj
 #: zypp/LanguageCode.cc:647
 msgid "Kuanyama"
-msgstr "콰냐마어"
+msgstr "쿠안야마어"
 
 #. language code: kum
 #: zypp/LanguageCode.cc:649
 msgid "Kumyk"
-msgstr "쿠미크어"
+msgstr "쿠믹어"
 
 #. language code: kur ku
 #: zypp/LanguageCode.cc:651
 msgid "Kurdish"
-msgstr "쿠르드어"
+msgstr "루르드어"
 
 # KE
 #. language code: kut
