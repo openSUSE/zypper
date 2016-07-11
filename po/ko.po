@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 02:15+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-11 02:17+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -4847,55 +4847,52 @@ msgstr "'%s'에 대한 다운로드(curl) 옵션을 설정하는 동안 오류�
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "'%s' 미디어 소스에는 필요한 매체가 없음"
+msgstr "미디어 소스 '%s'에 원하는 매체가 없습니다."
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "매체 '%s' 는 다른 프로그램에 의해 사용되고 있음"
+msgstr "미디어 '%s'이(가) 다른 인스턴스에서 사용 중입니다."
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
-msgstr "미디어를 꺼낼 수 없음"
+msgstr "미디어를 꺼낼 수 없습니다."
 
 #  Frame title for installation target hard disk / partition(s)
 #: zypp/media/MediaException.cc:184
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
-msgstr "'%s' 미디어를 꺼낼 수 없음"
+msgstr "미디어 '%s'을(를) 꺼낼 수 없습니다."
 
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr "'%s' 에 접근할 권한이 없습니다."
+msgstr "'%s' 액세스 권한이 거부되었습니다."
 
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "'%s'에 접근 할 수 있는 제한시간이 초과되었습니다."
+msgstr "'%s'에 액세스할 때 제한 시간이 초과되었습니다."
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
-msgstr "'%s' 는 일시적으로 접근 할 수 없게 되어있습니다."
+msgstr "위치 '%s'에 일시적으로 액세스할 수 없습니다."
 
 #: zypp/media/MediaException.cc:223
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
-" SSL 인증서에 문제, '%s'에 임해서 증명 기관에 문제가 있는지 확인 해보세요."
+msgstr " SSL 인증서 문제, '%s'의 CA 인증서에 문제가 없는지 확인하십시오."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr ""
-"'%s' 로부터 이미지 파일 마운트에 필요한 사용할 수 있는 루프 장치를 찾을 수 없"
-"음"
+msgstr "'%s'에서 이미지 파일을 탑재하기 위해 사용 가능한 루프 장치를 찾을 수 없습니다."
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr "지원하지 않는 HTTP 인증 방식 '%s'"
+msgstr "지원하지 않는 HTTP 인증 방법 '%s'"
 
 #: zypp/media/MediaCurl.cc:1008
 msgid ""
@@ -4906,7 +4903,7 @@ msgstr ""
 
 #: zypp/sat/detail/PoolImpl.cc:184
 msgid "Can not create sat-pool."
-msgstr "sat-pool을 작성 할 수 없습니다."
+msgstr "sat-pool을 생성할 수 없습니다."
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
