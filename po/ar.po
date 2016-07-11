@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 01:08+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 01:09+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2402,7 +2402,7 @@ msgstr "تشغيل"
 
 #: src/repos.cc:1103 src/repos.cc:1104
 msgid "Off"
-msgstr "إيقاف"
+msgstr "إيقاف تشغيل"
 
 #: src/repos.cc:1104
 msgid "Keep Packages"
@@ -2410,15 +2410,15 @@ msgstr "الاحتفاظ بالحزم"
 
 #: src/repos.cc:1106
 msgid "GPG Key URI"
-msgstr "GPG مفتاح المسار"
+msgstr "URI الخاص بمفتاح GPG"
 
 #: src/repos.cc:1107
 msgid "Path Prefix"
-msgstr "مسار الاختصار"
+msgstr "بادئة المسار"
 
 #: src/repos.cc:1108
 msgid "Parent Service"
-msgstr "أًصل الخدمة"
+msgstr "الخدمة الرئيسية"
 
 #: src/repos.cc:1109
 #, fuzzy
@@ -2427,11 +2427,11 @@ msgstr "الكلمات الأساسية"
 
 #: src/repos.cc:1110
 msgid "Repo Info Path"
-msgstr "مسار معلومات المستودع"
+msgstr "مسار معلومات المخزن"
 
 #: src/repos.cc:1111
 msgid "MD Cache Path"
-msgstr "مسار التخزين المؤقت MD"
+msgstr "مسار الذاكرة المؤقتة لـ MD"
 
 #: src/repos.cc:1163 src/repos.cc:1231 src/repos.cc:1375
 msgid "Error reading repositories:"
