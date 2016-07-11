@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 07:53+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5434,7 +5434,7 @@ msgstr "لم يتم العثور على المخزن '%s'."
 #: src/Zypper.cc:3829
 #, c-format, boost-format
 msgid "Repository %s not found."
-msgstr "لم يتم التعرف على المخزن %s."
+msgstr "لم يتم العثور على المخزن %s."
 
 #: src/Zypper.cc:3846
 msgid "Root privileges are required for refreshing system repositories."
