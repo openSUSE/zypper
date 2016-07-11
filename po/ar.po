@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:46+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 00:47+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2156,12 +2156,12 @@ msgstr ""
 #: src/repos.cc:176
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "التحقق ما إذا تم تجديد بيانات تعريف %s"
+msgstr "التحقق من ضرورة تجديد بيانات التعريف لـ %s"
 
 #: src/repos.cc:202
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
-msgstr "المستودع '%s' حديث."
+msgstr "المخزن '%s' محدَّث."
 
 #: src/repos.cc:208
 #, c-format, boost-format
