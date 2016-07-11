@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:20+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 00:22+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -1002,7 +1002,7 @@ msgstr "تم قفل التصحيح '%s'. استخدم '%s' لتثبيته أو �
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "الرقعة '%s' ليست في الفئة المحددة."
+msgstr "التصحيح '%s' غير موجود في الفئة المحددة."
 
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
@@ -1012,27 +1012,27 @@ msgstr "لا يحتوي التصحيح '%s' على الخطورة المحددة
 #: src/RequestFeedback.cc:213
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "الرقعة '%s' صدرت بعد التاريخ المحدد."
+msgstr "تم إصدار التصحيح '%s' بعد التاريخ المحدد."
 
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "تحديد '%s' من المستودع '%s' للتثبيت."
+msgstr "تحديد '%s' من المخزن '%s' للتثبيت."
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "إجبار التثبيت '%s' من المستودع '%s'."
+msgstr "فرض تثبيت '%s' من المخزن '%s'."
 
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
-msgstr "اختيار '%s' للإزالة."
+msgstr "تحديد '%s' للإزالة."
 
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr "'%s' مؤمن. استخدم '%s' لإلغاء تأمينه."
+msgstr "'%s' مؤمن. استخدم '%s' لإزالة تأمينه."
 
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
