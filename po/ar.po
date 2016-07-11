@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:34+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 00:35+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2036,7 +2036,7 @@ msgstr "قم بتعطيل التحقق من جهة إصدار الشهادات S
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
 #: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
-msgstr "هل تريد الإيقاف أو إعادة المحاولة أم التجاهل؟"
+msgstr "هل تريد الإيقاف أو إعادة المحاولة أو التجاهل؟"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
