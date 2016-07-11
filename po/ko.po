@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-11 01:52+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -3291,13 +3291,13 @@ msgstr "마가히어"
 #. language code: mah mh
 #: zypp/LanguageCode.cc:703
 msgid "Marshallese"
-msgstr "마셜어"
+msgstr "마셜제도어"
 
 # ML
 #. language code: mai
 #: zypp/LanguageCode.cc:705
 msgid "Maithili"
-msgstr "마이틸라어"
+msgstr "마이틸리"
 
 # MG
 #. language code: mak
