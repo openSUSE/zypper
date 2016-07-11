@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-11 01:53+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -3303,7 +3303,7 @@ msgstr "마이틸리어"
 #. language code: mak
 #: zypp/LanguageCode.cc:707
 msgid "Makasar"
-msgstr "마카사르어"
+msgstr "마카사어"
 
 #. language code: mal ml
 #: zypp/LanguageCode.cc:709
@@ -3327,7 +3327,7 @@ msgstr "말라얄람어"
 #. language code: man
 #: zypp/LanguageCode.cc:711
 msgid "Mandingo"
-msgstr "만데어"
+msgstr "만딩고어"
 
 #  tree node string
 #. language code: mao mri mi
