@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 07:34+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"PO-Revision-Date: 2016-07-11 07:37+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3601,7 +3601,7 @@ msgstr "مخازن الأقراص المضغوطة/أقراص الفيديو ا�
 
 #: src/Zypper.cc:1070
 msgid "Remote repositories disabled."
-msgstr "المستودعات البعيدة معطلة."
+msgstr "المخازن البعيدة معطلة."
 
 #: src/Zypper.cc:1077
 msgid "Ignoring installed resolvables."
