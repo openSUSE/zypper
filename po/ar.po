@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 00:34+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2036,7 +2036,7 @@ msgstr "قم بتعطيل التحقق من جهة إصدار الشهادات S
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
 #: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
-msgstr "إحباطA، إعادة المحاولةR، وتجاهلI؟"
+msgstr "هل تريد الإيقاف أو إعادة المحاولة أم التجاهل؟"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
