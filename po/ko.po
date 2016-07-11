@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 02:06+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-11 02:10+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -4300,12 +4300,12 @@ msgstr "볼라퓌크어"
 #. language code: vot
 #: zypp/LanguageCode.cc:1105
 msgid "Votic"
-msgstr "보트어"
+msgstr "보틱어"
 
 #. language code: wak
 #: zypp/LanguageCode.cc:1107
 msgid "Wakashan Languages"
-msgstr "와카시어족"
+msgstr "와카샨어"
 
 #. language code: wal
 #: zypp/LanguageCode.cc:1109
@@ -4325,13 +4325,13 @@ msgstr "와쇼어"
 #. language code: wel cym cy
 #: zypp/LanguageCode.cc:1115 zypp/LanguageCode.cc:1117
 msgid "Welsh"
-msgstr "웨일스어"
+msgstr "웨일즈어"
 
 # src/config/proxy.y2cc:21
 #. language code: wen
 #: zypp/LanguageCode.cc:1119
 msgid "Sorbian Languages"
-msgstr "소르비아어계"
+msgstr "소르브어"
 
 #. language code: wln wa
 #: zypp/LanguageCode.cc:1121
@@ -4341,7 +4341,7 @@ msgstr "왈론어"
 #. language code: wol wo
 #: zypp/LanguageCode.cc:1123
 msgid "Wolof"
-msgstr "월로프어"
+msgstr "올로프어"
 
 #. language code: xal
 #: zypp/LanguageCode.cc:1125
@@ -4351,17 +4351,17 @@ msgstr "칼미크어"
 #. language code: xho xh
 #: zypp/LanguageCode.cc:1127
 msgid "Xhosa"
-msgstr "코사어"
+msgstr "코사족어"
 
 #. language code: yao
 #: zypp/LanguageCode.cc:1129
 msgid "Yao"
-msgstr "야오어"
+msgstr "야오족어"
 
 #. language code: yap
 #: zypp/LanguageCode.cc:1131
 msgid "Yapese"
-msgstr "야프어"
+msgstr "얍페세어"
 
 #. language code: yid yi
 #: zypp/LanguageCode.cc:1133
@@ -4377,12 +4377,12 @@ msgstr "요루바어"
 #. language code: ypk
 #: zypp/LanguageCode.cc:1137
 msgid "Yupik Languages"
-msgstr "유피크어군"
+msgstr "야픽어"
 
 #. language code: zap
 #: zypp/LanguageCode.cc:1139
 msgid "Zapotec"
-msgstr "사포텍어"
+msgstr "사포테크어"
 
 #. language code: zen
 #: zypp/LanguageCode.cc:1141
@@ -4393,7 +4393,7 @@ msgstr "제나가어"
 #. language code: zha za
 #: zypp/LanguageCode.cc:1143
 msgid "Zhuang"
-msgstr "좡어"
+msgstr "주앙어"
 
 #  Table header item - DNS listing zones
 #  table header
@@ -4420,25 +4420,25 @@ msgstr "기존 키 %s을(를) 키링 %s(으)로 임포트하려고 했습니다.
 
 #: zypp/KeyRing.cc:566
 msgid "Failed to delete key."
-msgstr "키를 삭제하는데 실패했습니다"
+msgstr "키를 삭제하지 못했습니다."
 
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "서명 파일 %s 가 없음"
+msgstr "서명 파일 %s을(를) 찾을 수 없습니다."
 
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "'%s'('%s'로 부터) 를 제공 할 수 없음"
+msgstr "파일 '%s'을(를) 리포지토리 '%s'에서 제공할 수 없습니다."
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
-msgstr "저장소에 URL이 없습니다."
+msgstr "리포지토리에 URL이 없습니다."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr "서비스 플러그인은 속성 변경을 지원하지 않습니다."
+msgstr "서비스 플러그인이 특성 변경을 지원하지 않습니다."
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
@@ -4446,7 +4446,7 @@ msgstr "서비스 플러그인은 속성 변경을 지원하지 않습니다."
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
-msgstr "%s 꾸러미가 전송되는 동안 깨진것 같습니다. 다시 전송 하시겠습니까?"
+msgstr "패키지 %s이(가) 전송 중에 손상된 것 같습니다. 다시 검색하시겠습니까?"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4456,15 +4456,15 @@ msgstr "서명 확인 실패"
 #: zypp/repo/PackageProvider.cc:386
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr "꾸러미 %s 의 제공에 실패했습니다. 다시 시도 하시겠습니까?"
+msgstr "패키지 %s을(를) 제공하지 못했습니다. 다시 검색하시겠습니까?"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
-msgstr "applydeltarpm 확인에 실패했습니다."
+msgstr "applydeltarpm 검사 실패."
 
 #: zypp/repo/PackageProvider.cc:525
 msgid "applydeltarpm failed."
-msgstr "applydeltarpm 가 실패했습니다."
+msgstr "applydeltarpm 실패."
 
 #: zypp/ZYppFactory.cc:394
 #, c-format, boost-format
@@ -4472,80 +4472,80 @@ msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
 msgstr ""
-"시스템 관리는 응용프로그램 pid %d (%s) 에 의해 잠겨 있습니다.\n"
-"다시 시도 하기 전에 이 응용프로그램을 종료하세요."
+"시스템 관리가 응용 프로그램에서 pid %d(%s)과(와) 함께 잠겼습니다.\n"
+"다시 시도하기 전에 이 응용 프로그램을 닫으십시오."
 
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr "%s는 distupgrade 저장소에 속해 있지 않음"
+msgstr "%s이(가) 배포 업그레이드 리포지토리에 속해 있지 않습니다."
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
 msgid "%s has inferior architecture"
-msgstr "%s는 하위 아키텍쳐입니다."
+msgstr "%s에 하위 아키텍처가 있습니다."
 
 #: zypp/solver/detail/SATResolver.cc:983
 #, c-format, boost-format
 msgid "problem with installed package %s"
-msgstr "설치된 %s 꾸러미에 문제가 있음"
+msgstr "설치된 패키지 %s에 문제가 발생했습니다."
 
 #: zypp/solver/detail/SATResolver.cc:986
 msgid "conflicting requests"
-msgstr "요구가 모순됨"
+msgstr "요청 충돌"
 
 #: zypp/solver/detail/SATResolver.cc:989
 msgid "some dependency problem"
-msgstr "일부 의존성 문제"
+msgstr "일부 종속성 문제"
 
 #: zypp/solver/detail/SATResolver.cc:992
 #, c-format, boost-format
 msgid "nothing provides requested %s"
-msgstr "요구한 %s 는 어디에서도 제공되지 않음"
+msgstr "요청한 %s이(가) 제공되지 않습니다."
 
 #: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
 msgid "Have you enabled all requested repositories?"
-msgstr "요청한 모든 저장소를 활성화 하시겠습니까?"
+msgstr "요청한 모든 리포지토리를 활성화했습니까?"
 
 #: zypp/solver/detail/SATResolver.cc:996
 #, c-format, boost-format
 msgid "package %s does not exist"
-msgstr "%s 꾸러미는 없음"
+msgstr "%s 패키지가 존재하지 않습니다."
 
 #: zypp/solver/detail/SATResolver.cc:1000
 msgid "unsupported request"
-msgstr "지원하지 않는 요청"
+msgstr "지원되지 않는 요청"
 
 #: zypp/solver/detail/SATResolver.cc:1003
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr "%s 는 지울 수 없음과 동시에 시스템에 의해 제공됨"
+msgstr "%s은(는) 시스템에서 제공되며 지울 수 없습니다."
 
 #: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
 msgid "%s is not installable"
-msgstr "%s 는 설치 할 수 없음"
+msgstr "%s을(를) 설치할 수 없습니다."
 
 #: zypp/solver/detail/SATResolver.cc:1012
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr "%s(%s 로 필요로 하는)은 어디에서도 제공되지 않음"
+msgstr "%s(%s에서 필요)이(가) 제공되지 않습니다."
 
 #  Frame title for installation target hard disk / partition(s)
 #: zypp/solver/detail/SATResolver.cc:1017
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
-msgstr "%s 와 %s 둘다 모두 설치 할 수 없음"
+msgstr "%s과(와) %s을(를) 모두 설치할 수 없습니다."
 
 #: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%s 는 %s(%s에 의해 제공되는)와 충돌"
+msgstr "%s이(가) %s(%s에서 제공)과(와) 충돌합니다."
 
 #: zypp/solver/detail/SATResolver.cc:1027
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s 는 %s(%s에 의해 제공되는)를 폐기"
+msgstr "%s이(가) %s(%s에서 제공)을(를) 폐기합니다."
 
 #: zypp/solver/detail/SATResolver.cc:1032
 #, c-format, boost-format
@@ -4555,16 +4555,16 @@ msgstr "설치된 %s이(가) %s(%s에서 제공)을(를) 제거합니다."
 #: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
-msgstr "해결방법 %s 는 제공되는 %s 와 충돌"
+msgstr "Solvable %s이(가) 자체적으로 제공된 %s과(와) 충돌합니다."
 
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s 는 %s 가 필요, 이 요구를 해결하는 방법이 없음"
+msgstr "%s에 %s이(가) 필요하지만, 이 요구사항을 제공할 수 없습니다."
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
-msgstr "지워진 제공자: "
+msgstr "삭제된 공급자: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -4573,12 +4573,12 @@ msgid ""
 "uninstallable providers: "
 msgstr ""
 "\n"
-"설치 불가능한 제공자: "
+"설치 불가능한 공급자: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1084
 msgid "uninstallable providers: "
-msgstr "설치 할 수 없는 제공자:"
+msgstr "설치할 수 없는 공급자:"
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
