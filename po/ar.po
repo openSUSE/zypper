@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 01:10+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 01:13+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2435,55 +2435,55 @@ msgstr "مسار ذاكرة التخزين المؤقت لـ MD"
 
 #: src/repos.cc:1163 src/repos.cc:1231 src/repos.cc:1375
 msgid "Error reading repositories:"
-msgstr "خطأ في قراءة المستودعات:"
+msgstr "حدث خطأ أثناء قراءة المخازن:"
 
 #: src/repos.cc:1189
 #, c-format, boost-format
 msgid "Can't open %s for writing."
-msgstr "تعذّر فتح الملف %s للكتابة."
+msgstr "تعذر فتح %s للكتابة."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
-msgstr "ربما ليس لديك إذن للكتابة؟"
+msgstr "هل من الممكن ألا يكون لديك أذونات كتابة؟"
 
 #: src/repos.cc:1196
 #, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "قد تم تصدير المستودعات بنجاح إلى %s."
+msgstr "تم تصدير المخازن بنجاح إلى %s."
 
 #: src/repos.cc:1248 src/repos.cc:1392
 msgid "Specified repositories: "
-msgstr "المستودعات المحددة: "
+msgstr "المخازن المحددة: "
 
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "تجاهل المستودع المعطل '%s'"
+msgstr "تخطي المخزن '%s' الذي تم تعطيله"
 
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
-msgstr "المستودعات المحددة غير ممكنة أو لم تعرف."
+msgstr "لم يتم تمكين المخازن المحددة أو تعريفها."
 
 #: src/repos.cc:1312
 msgid "There are no enabled repositories defined."
-msgstr "لم يتم تمكين مستودعات معرفة."
+msgstr "لم يتم تعريف أية مخازن ممكَّنة."
 
 #: src/repos.cc:1313
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "استخدم الأمر '%s' أو '%s' لإضافة أو تعطيل المستودعات."
+msgstr "استخدم الأمرين '%s' أو '%s' لإضافة مخازن أو تمكينها."
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
-msgstr "لا يمكن تجديد المستودعات لوجود أخطاء."
+msgstr "تعذر تجديد المخازن بسبب حدوث أخطاء."
 
 #: src/repos.cc:1329
 msgid "Specified repositories have been refreshed."
-msgstr "قد تم تجديد المستودعات المحددة."
+msgstr "تم تجديد المخازن المحددة."
 
 #: src/repos.cc:1331
 msgid "All repositories have been refreshed."
-msgstr "تم تجديد كل المستودعات."
+msgstr "تم تجديد كافة المخازن."
 
 #: src/repos.cc:1438
 #, c-format, boost-format
