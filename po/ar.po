@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 07:56+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -5475,7 +5475,7 @@ msgstr "نوع الحزمة غير معروف: '%s'"
 
 #: src/Zypper.cc:3945
 msgid "Cannot uninstall patches."
-msgstr "تعذر إلغاء تثبيت الدفعات."
+msgstr "تعذر إلغاء تثبيت التصحيحات."
 
 #: src/Zypper.cc:3946
 msgid ""
