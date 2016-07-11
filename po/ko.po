@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
 "PO-Revision-Date: 2016-07-11 01:45+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -2380,7 +2380,7 @@ msgstr "촉토어"
 #. language code: chp
 #: zypp/LanguageCode.cc:335
 msgid "Chipewyan"
-msgstr "치페우얀"
+msgstr "치페와이언어"
 
 #. language code: chr
 #: zypp/LanguageCode.cc:337
