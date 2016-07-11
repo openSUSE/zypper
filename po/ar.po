@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 00:17+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 00:19+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -966,7 +966,8 @@ msgstr ""
 msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
-msgstr "الحزمة المحددة '%s' من المستودع '%s' بإصدار أقل من المثبتة."
+msgstr ""
+"يتوفر إصدار أقدم من الإصدار المثبت في الحزمة المحددة '%s' من المخزن '%s'."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
@@ -977,12 +978,12 @@ msgstr "استخدم '%s' لفرض تثبيت الحزمة."
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "الرقعة '%s' تفاعلية، تخطي."
+msgstr "التصحيح '%s' تفاعلي، تخطي."
 
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
-msgstr "الرقعة '%s' ليس هناك حاجة لها."
+msgstr "التصحيح '%s' غير مطلوب."
 
 #: src/RequestFeedback.cc:181
 #, boost-format
@@ -996,7 +997,8 @@ msgstr ""
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
-msgstr "الرقعة '%s' مقفلة. استخدم '%s' لتثبيتها، أو الغ القفل لتستخدمها '%s'."
+msgstr ""
+"تم تأمين التصحيح '%s'. استخدم '%s' لتثبيته أو إلغاء تأمينه باستخدام '%s'."
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
