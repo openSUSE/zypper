@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 02:10+0000\n"
-"Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
+"PO-Revision-Date: 2016-07-11 02:12+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
 "Language: ko\n"
@@ -4590,7 +4590,7 @@ msgstr "잠금 해제로 %s 제거 허용"
 #: zypp/solver/detail/SATResolver.cc:1182
 #, c-format, boost-format
 msgid "do not install %s"
-msgstr "%s 설치하지 않음"
+msgstr "%s 설치 안 함"
 
 #: zypp/solver/detail/SATResolver.cc:1161
 #: zypp/solver/detail/SATResolver.cc:1203
@@ -4606,57 +4606,57 @@ msgstr "잠금 해제로 %s 설치 허용"
 #: zypp/solver/detail/SATResolver.cc:1217
 #: zypp/solver/detail/SATResolver.cc:1238
 msgid "This request will break your system!"
-msgstr "이 요구사항은 시스템을 망가트릴 수 있습니다!"
+msgstr "이 요청은 시스템을 손상시킵니다!"
 
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
 msgid "ignore the warning of a broken system"
-msgstr "시스템 고장에 대한 주의를 무시"
+msgstr "손상된 시스템에 대한 경고를 무시합니다."
 
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
-msgstr "%s 로 제공되는 해결방법의 설치에 대해 묻지 않음"
+msgstr "%s을(를) 제공하는 solvable 설치를 묻지 않음"
 
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "%s 로 제공되는 사항의 삭제에 대해 묻지 않음"
+msgstr "%s을(를) 제공하는 모든 solvable 삭제를 묻지 않음"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
-msgstr "%s 의 최신버전을 설치 하지 않음"
+msgstr "%s의 최신 버전을 설치하지 않음"
 
 #: zypp/solver/detail/SATResolver.cc:1279
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr "하위의 아키텍쳐라도 %s 를 유지"
+msgstr "하위 아키텍처인 경우에도 %s 유지"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
-msgstr "하위의 아키텍쳐라도 %s 를 설치"
+msgstr "하위 아키텍처인 경우에도 %s 설치"
 
 #: zypp/solver/detail/SATResolver.cc:1293
 #, c-format, boost-format
 msgid "keep obsolete %s"
-msgstr "예전 %s 를 유지"
+msgstr "구식 %s 유지"
 
 #: zypp/solver/detail/SATResolver.cc:1298
 #, c-format, boost-format
 msgid "install %s from excluded repository"
-msgstr "제외된 저장소로부터 %s 를 설치"
+msgstr "제외된 리포지토리에서 %s 설치"
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr "%s 를 %s 로 다운그레이드"
+msgstr "%s을(를) %s(으)로 다운그레이드"
 
 #: zypp/solver/detail/SATResolver.cc:1325
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
-msgstr "아키텍처를 %s 로 부터 %s 로 변경"
+msgstr "%s에서 %s(으)로 아키텍처 변경"
 
 #: zypp/solver/detail/SATResolver.cc:1334
 #, c-format, boost-format
@@ -4664,25 +4664,25 @@ msgid ""
 "install %s (with vendor change)\n"
 "  %s  -->  %s"
 msgstr ""
-"%s를 설치(제조사 변경)\n"
+"%s 설치(벤더 변경)\n"
 "  %s  -->  %s"
 
 #: zypp/solver/detail/SATResolver.cc:1343
 #, c-format, boost-format
 msgid "replacement of %s with %s"
-msgstr "%s 를 %s 로 옮김"
+msgstr "%s을(를) %s(으)로 대체"
 
 #: zypp/solver/detail/SATResolver.cc:1354
 #, c-format, boost-format
 msgid "deinstallation of %s"
-msgstr "%s 의 설치제거"
+msgstr "%s 설치 제거"
 
 #  text is shown in a column of a package list entry
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
 #, c-format, boost-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr "일부 의존성을 무시하여 %s를 부숩니다."
+msgstr "일부 종속성을 무시하여 %s을(를) 구분합니다."
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
@@ -4691,12 +4691,12 @@ msgstr "일부 종속을 일반적으로 무시"
 #: zypp/parser/RepoindexFileReader.cc:197
 #, c-format, boost-format
 msgid "Required attribute '%s' is missing."
-msgstr "필요한 '%s' 속성이 빠졌습니다."
+msgstr "필수 특성 '%s'이(가) 누락되었습니다."
 
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "'%s' 또는 '%s' (혹은 모두)의 속성이 필요합니다."
+msgstr "'%s' 또는 '%s' 속성 중 하나, 또는 둘 다가 필요합니다. "
 
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
