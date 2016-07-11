@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
 "PO-Revision-Date: 2016-07-11 08:18+0000\n"
-"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -6148,7 +6148,7 @@ msgstr "لا توجد حزم مصدر غير ضرورية ليتم حذفها."
 
 #: src/source-download.cc:411
 msgid "Downloading required source packages..."
-msgstr "جاري تنزيل حزم المصدر المطلوبة..."
+msgstr "يتم الآن تنزيل الحزم المصدر المطلوبة..."
 
 #: src/source-download.cc:430
 #, c-format, boost-format
