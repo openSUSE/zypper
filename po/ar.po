@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 01:44+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 01:46+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2806,32 +2806,32 @@ msgstr "تحقق من صلاحية محدد URI وإمكانية الوصول إ
 #: src/repos.cc:2699
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "تخطي تعطيل الخدمة '%s'"
+msgstr "تخطي الخدمة المعطلة '%s'"
 
 #: src/repos.cc:2751
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
-msgstr "استخدام أوامر '%s' أو '%s' لإضافة أو تمكين الخدمات."
+msgstr "استخدم الأمرين '%s' أو '%s' لإضافة خدمات أو تمكينها."
 
 #: src/repos.cc:2754
 msgid "Specified services are not enabled or defined."
-msgstr "الخدمات المحددة غير ممكنة أو غير معرفة."
+msgstr "لم يتم تمكين الخدمات المحددة أو تعريفها."
 
 #: src/repos.cc:2756
 msgid "There are no enabled services defined."
-msgstr "لا توجد أي خدمات معرفة ممكنة."
+msgstr "لم يتم تعريف أية خدمات ممكَّنة."
 
 #: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
-msgstr "لا يمكن تجديد الخدمات لوجود أخطاء."
+msgstr "تعذر تجديد الخدمات بسبب حدوث أخطاء."
 
 #: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "لم يتم تجديد بعض الخدمات لوجود خطأ."
+msgstr "لم يتم تجديد بعض الخدمات بسبب حدوث خطأ."
 
 #: src/repos.cc:2771
 msgid "Specified services have been refreshed."
-msgstr "تم تجديد خدمات محددة."
+msgstr "تم تجديد الخدمات المحددة."
 
 #: src/repos.cc:2773
 msgid "All services have been refreshed."
@@ -2850,17 +2850,17 @@ msgstr "تم تعطيل الخدمة '%s' بنجاح."
 #: src/repos.cc:2928
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "تم تمكين التجديد التلقائي لخدمة '%s'."
+msgstr "تم تمكين التجديد التلقائي للخدمة '%s'."
 
 #: src/repos.cc:2930
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "تم تعطيل التجديد التلقائي لخدمة '%s'."
+msgstr "تم تعطيل التجديد التلقائي للخدمة '%s'."
 
 #: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr "تم تعيين اسم الخدمة '%s' إلى '%s'."
+msgstr "تم تعيين اسم الخدمة '%s' على '%s'."
 
 #: src/repos.cc:2940
 #, c-format, boost-format
