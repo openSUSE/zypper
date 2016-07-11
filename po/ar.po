@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 01:38+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-07-11 01:39+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2729,21 +2729,23 @@ msgstr "تم تعيين اسم المخزن '%s' إلى '%s'."
 #: src/repos.cc:2091
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
-msgstr "لم يتغير شيئ للمستودع '%s'."
+msgstr "لم يطرأ أي تغيير على المخزن '%s'."
 
 #: src/repos.cc:2098
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
-msgstr "ترك المستودع %s دون تغيير."
+msgstr "ترك المخزن %s دون تغيير."
 
 #: src/repos.cc:2130
 msgid "Error reading services:"
-msgstr "خطأ في قراءة الخدمات:"
+msgstr "حدث خطأ أثناء قراءة الخدمات:"
 
 #: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "خدمة '%s' لم يتم العثور عليها بالاسم المستعار أو الرقم أوالمسار."
+msgstr ""
+"لم يتم العثور على الخدمة '%s' حسب الاسم المستعار أو الرقم أو معرف URI الخاص "
+"بها."
 
 #: src/repos.cc:2222
 #, c-format, boost-format
