@@ -89,13 +89,10 @@ namespace zypp
         do { ++ch; } while ( *ch != '\0' );	// skip to next field
       }
 
-      if ( pinfo.command.size() == 15 )
-      {
-        // the command name might be truncated, so we check against /proc/<pid>/exe
-        Pathname command( filesystem::readlink( Pathname("/proc")/pinfo.pid/"exe" ) );
-        if ( ! command.empty() )
-          pinfo.command = command.basename();
-      }
+      // the command name might be truncated, so we check against /proc/<pid>/exe
+      Pathname command( filesystem::readlink( Pathname("/proc")/pinfo.pid/"exe" ) );
+      if ( ! command.empty() )
+        pinfo.command = command.basename();
       //MIL << " Take " << pinfo << endl;
     }
 
