@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-05 01:50+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-12 13:40+0000\n"
+"Last-Translator: Henry Shen <henry.shen@lqs-lionbridge.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -47,11 +47,11 @@ msgstr "無效的空白 Url 物件參照"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
-msgstr "無法分析 Url 元件"
+msgstr "無法剖析 Url 元件"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
-msgstr "無法啟始化 mutex 屬性"
+msgstr "無法初始化 mutex 屬性"
 
 #: zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -59,7 +59,7 @@ msgstr "無法設定遞迴 mutex 屬性"
 
 #: zypp/thread/Mutex.cc:47
 msgid "Can't initialize recursive mutex"
-msgstr "無法啟始化遞迴 mutex"
+msgstr "無法初始化遞迴 mutex"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
@@ -75,7 +75,7 @@ msgstr "提供"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
-msgstr "預先需要"
+msgstr "先決條件"
 
 #: zypp/Dep.cc:98
 msgid "Requires"
@@ -157,11 +157,11 @@ msgstr "HalContext 未連接"
 
 #: zypp/target/hal/HalContext.cc:127
 msgid "HalDrive not initialized"
-msgstr "HalDrive 未啟始化"
+msgstr "HalDrive 未初始化"
 
 #: zypp/target/hal/HalContext.cc:137
 msgid "HalVolume not initialized"
-msgstr "HalVolume 未啟始化"
+msgstr "HalVolume 未初始化"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
@@ -177,7 +177,7 @@ msgstr "libhal_set_dbus_connection： 無法設定 dbus 連接"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "無法啟始化 HAL 網路位置 -- hald 尚未執行嗎？"
+msgstr "無法初始化 HAL 網路位置 -- hald 尚未執行嗎？"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
@@ -284,7 +284,7 @@ msgstr "檔案不存在或是簽章無法驗證"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
-msgstr "下列行動將被執行："
+msgstr "將執行以下操作："
 
 #: zypp/RepoManager.cc:297
 #, boost-format
@@ -424,7 +424,7 @@ msgstr "無效的 %s 元件"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
-msgstr "此 URL 不支援查詢字串分析"
+msgstr "此 URL 不支援查詢字串剖析"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
