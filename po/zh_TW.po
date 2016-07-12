@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-05 06:35+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2016-07-12 14:07+0000\n"
+"Last-Translator: Henry Shen <henry.shen@lqs-lionbridge.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -220,7 +220,7 @@ msgstr ""
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
-msgstr "接受安裝錯誤檢核碼的套件會導致系統損壞，甚至危及系統安全。"
+msgstr "接受帶有錯誤檢核碼的套件會導致系統損壞，甚至危及系統安全。"
 
 #: src/callbacks/keyring.h:352
 #, boost-format
@@ -416,7 +416,7 @@ msgstr "否"
 
 #: src/Zypper.h:463
 msgid "Finished with error."
-msgstr "發生錯誤而結束。"
+msgstr "已結束，但有錯誤。"
 
 #: src/Zypper.h:465
 msgid "Done."
