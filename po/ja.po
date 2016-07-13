@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-10 05:07+0000\n"
-"Last-Translator: Koichi Miyashiro <Koichi.Miyashiro@lqs-lionbridge.com>\n"
+"PO-Revision-Date: 2016-07-13 09:03+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
@@ -163,8 +163,7 @@ msgstr "ファイル '%s' (リポジトリ '%s') に対する署名検証が失�
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-"ファイルに対して悪意のある変更が為されていないか、もう一度ご確認ください！"
+msgstr "ファイルに対して悪意のある変更が行われていないか、もう一度ご確認ください！"
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
@@ -215,8 +214,8 @@ msgstr ""
 "ファイル '%1%' に対するダイジェスト値を検証しましたが、失敗しました\n"
 "[%2%]\n"
 "\n"
-"  期待されていた値: %3%\n"
-"  登録されていた値: %4%\n"
+"  期待されていた値:%3%\n"
+"  登録されていた値:%4%\n"
 
 #: src/callbacks/keyring.h:344
 msgid ""
@@ -264,7 +263,7 @@ msgstr "保護を解除しますか？それとも破棄しますか？"
 #: src/callbacks/rpm.h:151
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
-msgstr "実行しています: %s  (%s, %s)"
+msgstr "実行しています:%s  (%s, %s)"
 
 #: src/callbacks/rpm.h:208
 #, c-format, boost-format
@@ -285,7 +284,7 @@ msgstr "%s の削除に失敗しました:"
 #: src/callbacks/rpm.h:279
 #, c-format, boost-format
 msgid "Installing: %s"
-msgstr "インストールしています: %s"
+msgstr "インストールしています:%s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:284
@@ -360,18 +359,16 @@ msgstr "下記の問い合わせは、削除しようとしているオブジェ
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr ""
-"下記の問い合わせは、ロック (施錠) を解除しようとしているオブジェクトをロック"
-"してしまいます:"
+msgstr "下記の問い合わせは、ロックを解除しようとしているオブジェクトをロックしてしまいます:"
 
 # power-off message
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
 msgid "Do you want to remove this lock?"
-msgstr "このロック (施錠) を解除しますか？"
+msgstr "このロックを解除しますか？"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr "下記の問い合わせは何もロック (施錠) しません:"
+msgstr "下記の問い合わせは何もロックしません:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
@@ -472,7 +469,7 @@ msgstr "アーキテクチャ"
 
 #: src/info.cc:76
 msgid "Vendor"
-msgstr "製造元"
+msgstr "ベンダ"
 
 #. translators: package summary (header)
 #: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
@@ -903,9 +900,7 @@ msgstr "アップデート候補 '%s' が '%s' に対して存在しますが、
 msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
 "Use '%s' to install this candidate."
-msgstr ""
-"'%s' に対する更新候補がありますが、これは異なる製造元からのものです。 '%s' を"
-"使用すると、この候補をインストールできます。"
+msgstr "'%s' に対する更新候補がありますが、これは異なるベンダからのものです。 '%s' を使用すると、この候補をインストールできます。"
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -921,9 +916,7 @@ msgstr ""
 msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
-msgstr ""
-"'%s' に対する更新候補がありますが、これはロック (施錠) されています。 '%s' を"
-"使用するとロックを解除することができます。"
+msgstr "'%s' に対する更新候補がありますが、これはロックされています。 '%s' を使用するとロックを解除することができます。"
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -969,8 +962,7 @@ msgstr ""
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
-msgstr ""
-"パッチ '%s' はロック (施錠) されています。インストールを行なうには '%s' を、ロックを解除するには '%s' を使用してください。"
+msgstr "パッチ '%s' はロックされています。インストールを行なうには '%s' を、ロックを解除するには '%s' を使用してください。"
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
@@ -1005,9 +997,7 @@ msgstr "削除する '%s' を選択します。"
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr ""
-"'%s' はロック (施錠) されています。ロックを解除するには '%s' をお使いくださ"
-"い。"
+msgstr "'%s' はロックされています。ロックを解除するには '%s' をお使いください。"
 
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
@@ -1369,37 +1359,37 @@ msgstr[0] "以下 %d 個のアプリケーションのアーキテクチャを�
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
-msgstr[0] "以下 %d 個のパッケージの製造元を変更します:"
+msgstr[0] "以下 %d 個のパッケージのベンダを変更します:"
 
 #: src/Summary.cc:1075
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] "以下 %d 個の修正の製造元を変更します:"
+msgstr[0] "以下 %d 個の修正のベンダを変更します:"
 
 #: src/Summary.cc:1080
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
-msgstr[0] "以下 %d 個のパターンの製造元を変更します:"
+msgstr[0] "以下 %d 個のパターンのベンダを変更します:"
 
 #: src/Summary.cc:1085
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
-msgstr[0] "以下 %d 個の製品の製造元を変更します:"
+msgstr[0] "以下 %d 個の製品のベンダを変更します:"
 
 #: src/Summary.cc:1090
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] "以下 %d 個のアプリケーションの製造元を変更します:"
+msgstr[0] "以下 %d 個のアプリケーションのベンダを変更します:"
 
 #: src/Summary.cc:1110
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "以下 %d 個のパッケージは製造元でサポートされていません:"
+msgstr[0] "以下 %d 個のパッケージはベンダでサポートされていません:"
 
 #: src/Summary.cc:1130
 #, c-format, boost-format
@@ -1433,7 +1423,7 @@ msgstr[0] "以下 %d 個のアプリケーション更新はインストール�
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "以下 %d 個の項目はロック (施錠) されているため、何も行ないません:"
+msgstr[0] "以下 %d 個の項目はロックされているため、何も行ないません:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1455,7 +1445,7 @@ msgstr[0] "以下 %d 個の修正を適用するには、システムの再起�
 #: src/Summary.cc:1240
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
-msgstr "全ダウンロードサイズ: %1%。すでにキャッシュ済み: %2%。"
+msgstr "全ダウンロードサイズ:%1%。すでにキャッシュ済み:%2%。"
 
 #: src/Summary.cc:1243
 msgid "Download only."
@@ -1535,13 +1525,13 @@ msgstr[0] "個のパッケージ削除"
 #: src/Summary.cc:1348
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "個の製造元変更"
+msgstr[0] "個のベンダ変更"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1351
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] "個のパッケージ製造元変更"
+msgstr[0] "個のパッケージベンダ変更"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1362
@@ -2128,7 +2118,7 @@ msgstr ""
 #: src/repos.cc:1568
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
-msgstr "リポジトリの別名が正しくありません: '%s'"
+msgstr "リポジトリの別名が正しくありません:'%s'"
 
 #: src/repos.cc:1576 src/repos.cc:1858
 #, c-format, boost-format
@@ -2614,7 +2604,7 @@ msgstr "パッチ"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr "ロック (施錠)"
+msgstr "ロック"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2979,7 +2969,7 @@ msgid ""
 "\tlocks, ll\t\tList current package locks.\n"
 "\tcleanlocks, cl\t\tRemove unused locks.\n"
 msgstr ""
-"     パッケージロック(施錠):\n"
+"     パッケージロック:\n"
 "\taddlock, al\t\tパッケージロックを追加する。\n"
 "\tremovelock, rl\t\tパッケージロックを削除する。\n"
 "\tlocks, ll\t\t現在のパッケージロックを表示する。\n"
@@ -3042,7 +3032,7 @@ msgstr "コマンド固有のヘルプを取得するには '%s' と入力して
 #: src/Zypper.cc:771
 #, c-format, boost-format
 msgid "Verbosity: %d"
-msgstr "冗長性: %d"
+msgstr "冗長性:%d"
 
 #: src/Zypper.cc:785
 #, c-format, boost-format
@@ -3207,11 +3197,11 @@ msgstr ""
 "    --from <alias|#|URI>    指定したリポジトリからのパッケージを選択します。\n"
 "-r, --repo <alias|#|URI>    指定したリポジトリのみを読み込みます。\n"
 "-t, --type <type>           パッケージの種類(%s)。\n"
-"                            デフォルト: %s\n"
+"                            デフォルト:%s\n"
 "-n, --name                  能力設定ではなく、単に名前でパッケージを指定する\n"
 "-C, --capability            能力設定でパッケージを選択します。\n"
 "-f, --force                 既にインストールされている場合であっても、インストールします(再インストール)。\n"
-"                            ダウングレードや製造元の変更、アーキテクチャの変更などが発生する場合があります。\n"
+"                            ダウングレードやベンダの変更、アーキテクチャの変更などが発生する場合があります。\n"
 "    --oldpackage            新しいものを古いもので置き換えることができるように\n"
 "                            します。古いバージョンに戻す場合に有用です。--force\n"
 "                            とは異なり、再インストールを強制することはありません。\n"
@@ -3283,7 +3273,7 @@ msgstr ""
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI>    指定したリポジトリのみをロードします。\n"
 "-t, --type <type>           パッケージの種類(%s)\n"
-"                            デフォルト: %s\n"
+"                            デフォルト:%s\n"
 "-n, --name                  能力設定ではなく単に名前でパッケージを指定します。\n"
 "-C, --capability            能力設定で選択します。\n"
 "    --debug-solver          デバッグ用に解決器のテストケースを作成します。\n"
@@ -3803,11 +3793,9 @@ msgstr ""
 "\n"
 "  コマンドオプション:\n"
 "-t, --type <type>             パッケージの種類を指定する (%s)\n"
-"                              既定: %s\n"
-"-r, --repo <alias|#|URI>      指定した別名のリポジトリからの更新のみを表示す"
-"る\n"
-"    --best-effort             「ベストエフォート」方式での更新を指定する。最"
-"新・最良\n"
+"                              デフォルト:%s\n"
+"-r, --repo <alias|#|URI>      指定した別名のリポジトリからの更新のみを表示する\n"
+"    --best-effort             「ベストエフォート」方式での更新を指定する。最新・最良\n"
 "                              ではない古いバージョンへの更新も受け入れる\n"
 "-a, --all                     インストール可能であるかどうかを問わず、\n"
 "                              新しいバージョンが利用可能な\n"
@@ -3866,7 +3854,7 @@ msgstr ""
 "  コマンドオプション:\n"
 "\n"
 "-t, --type <type>           パッケージの種類(%s)。\n"
-"                            デフォルト: %s。\n"
+"                            デフォルト:%s。\n"
 "-r, --repo <alias|#|URI>    指定したリポジトリのみを読み込みます。\n"
 "    --skip-interactive      対話処理が必要な更新をスキップします。\n"
 "    --with-interactive      対話処理が必要な更新をスキップしません。\n"
@@ -4153,7 +4141,7 @@ msgstr ""
 
 #: src/Zypper.cc:2382
 msgid "Whether to allow changing the vendor of installed resolvables."
-msgstr "インストールされているresolvableのベンダー変更を許可するかどうか。"
+msgstr "インストールされているresolvableのベンダ変更を許可するかどうか。"
 
 #: src/Zypper.cc:2420
 msgid ""
@@ -4397,7 +4385,7 @@ msgstr ""
 "-s, --match-substrings    名前が部分的に一致するパッケージの出力情報。\n"
 "-r, --repo <alias|#|URI>  指定したリポジトリでのみ作業を行います。\n"
 "-t, --type <type>          パッケージの種類(%s)。\n"
-"                          デフォルト: %s。\n"
+"                          デフォルト:%s。\n"
 "    --provides            提供するものを表示します。\n"
 "    --requires            必要なものと前提を表示します。\n"
 "    --conflicts           競合を表示します。\n"
@@ -4493,12 +4481,12 @@ msgid ""
 msgstr ""
 "addlock (al) [options] <packagename> ...\n"
 "\n"
-"パッケージロック (施錠) を設定します。パッケージは名前で指定できるほか、ワイルドカード指定(「*」「?」)による一括指定を行なうこともできます。\n"
+"パッケージロックを設定します。パッケージは名前で指定できるほか、ワイルドカード指定(「*」「?」)による一括指定を行なうこともできます。\n"
 "\n"
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI>  指定したリポジトリからのもののみをロックします。\n"
 "-t, --type <type>         パッケージの種類を指定します (%s)。 \n"
-"                          デフォルト: %s\n"
+"                          デフォルト:%s\n"
 
 #: src/Zypper.cc:2803
 #, c-format, boost-format
@@ -4515,13 +4503,12 @@ msgid ""
 msgstr ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
 "\n"
-"パッケージロック (施錠) を解除します。 '%s' で表示される番号かパッケージの名"
-"前で指定してください。\n"
+"パッケージロックを解除します。 '%s' で表示される番号かパッケージの名前で指定してください。\n"
 "\n"
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI>  指定したリポジトリからのロックのみを解除する\n"
 "-t, --type <type>         パッケージの種類を指定する (%s) \n"
-"                          既定: %s\n"
+"                          デフォルト:%s\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:2830
@@ -4555,7 +4542,7 @@ msgid ""
 msgstr ""
 "cleanlocks (cl)\n"
 "\n"
-"意味のないロック (施錠) を削除します。\n"
+"意味のないロックを削除します。\n"
 "\n"
 "  コマンドオプション:\n"
 "-d, --only-duplicates     重複したロックのみを削除します。\n"
@@ -4961,7 +4948,7 @@ msgstr "引数を無視し、リポジトリ全体にマークを付与します
 #: src/Zypper.cc:3935
 #, c-format, boost-format
 msgid "Unknown package type: %s"
-msgstr "不明なパッケージ種類です: %s"
+msgstr "不明なパッケージ種類です:%s"
 
 #: src/Zypper.cc:3945
 msgid "Cannot uninstall patches."
@@ -5124,12 +5111,12 @@ msgstr "このコマンドでは XML 形式での出力が実装されていま�
 #: src/Zypper.cc:5047
 #, c-format, boost-format
 msgid "Distribution Label: %s"
-msgstr "ディストリビューションラベル: %s"
+msgstr "ディストリビューションラベル:%s"
 
 #: src/Zypper.cc:5048
 #, c-format, boost-format
 msgid "Short Label: %s"
-msgstr "短縮ラベル: %s"
+msgstr "短縮ラベル:%s"
 
 #: src/Zypper.cc:5089
 #, c-format, boost-format
@@ -5227,7 +5214,7 @@ msgstr "指定された機能が見つかりません"
 #: src/solve-commit.cc:160
 #, c-format, boost-format
 msgid "Problem: %s"
-msgstr "問題点: %s"
+msgstr "問題点:%s"
 
 #: src/solve-commit.cc:179
 msgid "Resolving dependencies..."
@@ -5385,7 +5372,7 @@ msgstr "パッケージのインストール元リポジトリの表示を切り
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:660
 msgid "Toggle display of package vendor names."
-msgstr "パッケージのベンダー名の表示を切り替えます。"
+msgstr "パッケージのベンダ名の表示を切り替えます。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:662
@@ -5783,17 +5770,17 @@ msgstr "概要"
 #: src/misc.cc:257
 #, c-format, boost-format
 msgid "Installed packages: %d"
-msgstr "インストール済みパッケージ: %d"
+msgstr "インストール済みパッケージ:%d"
 
 #: src/misc.cc:258
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "リポジトリ内にカウンターパーツがあるインストール済みパッケージ: %d"
+msgstr "リポジトリ内にカウンターパーツがあるインストール済みパッケージ:%d"
 
 #: src/misc.cc:259
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
-msgstr "使用許諾契約のあるインストール済みパッケージ: %d"
+msgstr "使用許諾契約のあるインストール済みパッケージ:%d"
 
 #: src/misc.cc:289
 #, c-format, boost-format
@@ -6132,7 +6119,7 @@ msgstr "obs://<プロジェクト名>/<プラットフォーム>の形式で指�
 #: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
 msgid "Example: %s"
-msgstr "例: %s"
+msgstr "例:%s"
 
 #: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
@@ -6168,7 +6155,7 @@ msgstr "不明なダウンロードモード '%s' です。"
 #: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Available download modes: %s"
-msgstr "利用可能なダウンロードモード: %s"
+msgstr "利用可能なダウンロードモード:%s"
 
 #: src/utils/misc.cc:701
 #, c-format, boost-format
