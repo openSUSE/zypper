@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-13 11:54+0000\n"
+"PO-Revision-Date: 2016-07-13 17:33+0000\n"
 "Last-Translator: Guenther Pfeiffer <gunther.pfeiffer@lqs-lionbridge.com>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -163,7 +163,7 @@ msgstr "Dem Schlüssel nicht vertrauen."
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:218
 msgid "Trust the key temporarily."
-msgstr "Dem Schlüssel zeitweise vertrauen."
+msgstr "Dem Schlüssel vorübergehend vertrauen."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:221
@@ -3927,7 +3927,8 @@ msgstr ""
 "-n, --name                Den Repository-Namen anzeigen.\n"
 "-u, --uri                 Die Basis-URI der Repositorys anzeigen.\n"
 "-p, --priority            Die Priorität der Repositorys anzeigen.\n"
-"-r, --refresh             Das Aktualisierungskennzeichen anzeigen.\n"
+"-r, --refresh             Das Kennzeichen für automatische Aktualisierung "
+"anzeigen.\n"
 "-d, --details             Mehr Informationen anzeigen, wie URI, Priorität, "
 "Typ.\n"
 "-s, --service             Den Alias des übergeordneten Dienstes anzeigen.\n"
