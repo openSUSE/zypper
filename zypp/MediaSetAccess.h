@@ -41,8 +41,8 @@ namespace zypp
      * This is provided as a means to handle CD or DVD sets accessible through
      * dir, iso, nfs or other URL schemes other than cd/dvd (see
      * \ref MediaManager for info on different implemented media backends).
-     * Currently it handles URLs containing cdN, CDN, dvdN, and DVDN strings,
-     * where N is the number of particular media in the set.
+     * Currently it handles URLs ending on (case insensitive ) CD#, DVD# or MEDIA#,
+     * where # is the number of a particular medium in the set.
      *
      * Examples:
      * \code
@@ -50,11 +50,13 @@ namespace zypp
      * "dir:/path/to/cdset/sources/openSUSE-10.3/Alpha2plus/CD1"
      * \endcode
      *
-     * MediaSetAccess accesses files on desired media by rewriting
+     * MediaSetAccess accesses files on the desired medium by rewriting
      * the original URL, replacing the digit (usually) 1 with requested media
      * number and uses \ref MediaManager to get the files from the new URL.
      *
-     * Additionaly, each media number can be assined a media verifier which
+     * NOTE: Access to medium #1 always uses the url passed to the CTOR!
+     *
+     * Additionaly, each media number can be assinged a media verifier which
      * checks if the media we are trying to access is the desired one. See
      * \ref MediaVerifierBase for more info.
      *
@@ -239,8 +241,8 @@ namespace zypp
        * Replaces media number in specified url with given \a medianr.
        *
        * Media number in the URL is searched for with regex
-       * <tt> "^(.*(cd|dvd))([0-9]+)(\\.iso)$" </tt> for iso scheme and
-       * with <tt> "^(.*(cd|dvd))([0-9]+)(/?)$" </tt> for other schemes.
+       * <tt> "^(.*(cd|dvd|media))([0-9]+)(\\.iso)$" </tt> for iso scheme and
+       * with <tt> "^(.*(cd|dvd|media))([0-9]+)(/?)$" </tt> for other schemes.
        *
        * For cd and dvd scheme it returns the original URL, as well as for
        * URL which do not match the above regexes.

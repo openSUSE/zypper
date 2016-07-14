@@ -354,31 +354,27 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
   media::MediaAccessId MediaSetAccess::getMediaAccessId (media::MediaNr medianr)
   {
-    media::MediaManager media_mgr;
-
-    if (_medias.find(medianr) != _medias.end())
+    if ( _medias.find( medianr ) != _medias.end() )
     {
-      media::MediaAccessId id = _medias[medianr];
-      return id;
+      return _medias[medianr];
     }
-    Url url;
-    url = rewriteUrl (_url, medianr);
-    media::MediaAccessId id = media_mgr.open(url, _prefAttachPoint);
+
+    Url url( medianr > 1 ? rewriteUrl( _url, medianr ) : _url );
+    media::MediaManager media_mgr;
+    media::MediaAccessId id = media_mgr.open( url, _prefAttachPoint );
     _medias[medianr] = id;
 
     try
     {
-      if (_verifiers.find(medianr) != _verifiers.end())
+      if ( _verifiers.find(medianr) != _verifiers.end() )
       {
         // a verifier is set for this media
         // FIXME check the case where the verifier exists
         // but we have no access id for the media
-        media::MediaAccessId id = _medias[medianr];
-        media::MediaManager media_mgr;
-        media_mgr.delVerifier(id);
+        media_mgr.delVerifier( id );
         media_mgr.addVerifier( id, _verifiers[medianr] );
         // remove any saved verifier for this media
-        _verifiers.erase(medianr);
+        _verifiers.erase( medianr );
       }
     }
     catch ( const Exception &e )
