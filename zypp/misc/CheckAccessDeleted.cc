@@ -81,21 +81,15 @@ namespace zypp
           case 'L':
             pinfo.login = &*(ch+1);
             break;
-          case 'c':
-            pinfo.command = &*(ch+1);
-            break;
         }
         if ( *ch == '\n' ) break;		// end of data
         do { ++ch; } while ( *ch != '\0' );	// skip to next field
       }
 
-      if ( pinfo.command.size() == 15 )
-      {
-        // the command name might be truncated, so we check against /proc/<pid>/exe
-        Pathname command( filesystem::readlink( Pathname("/proc")/pinfo.pid/"exe" ) );
-        if ( ! command.empty() )
-          pinfo.command = command.basename();
-      }
+      // the command name might be truncated, so we check against /proc/<pid>/exe
+      Pathname command( filesystem::readlink( Pathname("/proc")/pinfo.pid/"exe" ) );
+      if ( ! command.empty() )
+        pinfo.command = command.basename();
       //MIL << " Take " << pinfo << endl;
     }
 
@@ -208,7 +202,7 @@ namespace zypp
 
     static const char* argv[] =
     {
-      "lsof", "-n", "-FpcuLRftkn0", NULL
+      "lsof", "-n", "-FpuLRftkn0", NULL
     };
     ExternalProgram prog( argv, ExternalProgram::Discard_Stderr );
 
