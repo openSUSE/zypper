@@ -81,9 +81,6 @@ namespace zypp
           case 'L':
             pinfo.login = &*(ch+1);
             break;
-          case 'c':
-            pinfo.command = &*(ch+1);
-            break;
         }
         if ( *ch == '\n' ) break;		// end of data
         do { ++ch; } while ( *ch != '\0' );	// skip to next field
@@ -205,7 +202,7 @@ namespace zypp
 
     static const char* argv[] =
     {
-      "lsof", "-n", "-FpcuLRftkn0", NULL
+      "lsof", "-n", "-FpuLRftkn0", NULL
     };
     ExternalProgram prog( argv, ExternalProgram::Discard_Stderr );
 
