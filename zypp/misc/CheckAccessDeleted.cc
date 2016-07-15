@@ -65,6 +65,7 @@ namespace zypp
       pinfo.files.insert( pinfo.files.begin(), filelist.begin(), filelist.end() );
 
       const std::string & pline( cache_r.first );
+      std::string commandname;	// pinfo.command if still needed...
       for_( ch, pline.begin(), pline.end() )
       {
         switch ( *ch )
@@ -81,16 +82,22 @@ namespace zypp
           case 'L':
             pinfo.login = &*(ch+1);
             break;
+          case 'c':
+	    if ( pinfo.command.empty() )
+	      commandname = &*(ch+1);
+	    break;
         }
         if ( *ch == '\n' ) break;		// end of data
         do { ++ch; } while ( *ch != '\0' );	// skip to next field
       }
 
-      // the command name might be truncated, so we check against /proc/<pid>/exe
-      Pathname command( filesystem::readlink( Pathname("/proc")/pinfo.pid/"exe" ) );
-      if ( ! command.empty() )
-        pinfo.command = command.basename();
-      //MIL << " Take " << pinfo << endl;
+      if ( pinfo.command.empty() )
+      {
+	// the lsof command name might be truncated, so we prefer /proc/<pid>/exe
+	pinfo.command = filesystem::readlink( Pathname("/proc")/pinfo.pid/"exe" ).basename();
+	if ( pinfo.command.empty() )
+	  pinfo.command = std::move(commandname);
+      }
     }
 
 
@@ -202,7 +209,7 @@ namespace zypp
 
     static const char* argv[] =
     {
-      "lsof", "-n", "-FpuLRftkn0", NULL
+      "lsof", "-n", "-FpcuLRftkn0", NULL
     };
     ExternalProgram prog( argv, ExternalProgram::Discard_Stderr );
 
