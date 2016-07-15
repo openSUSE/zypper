@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 15 14:31:57 CEST 2016 - ma@suse.de
+
+- Update Translations (bsc#968588)
+- version 1.13.4
+
+-------------------------------------------------------------------
 Mon Jun 27 09:34:09 CEST 2016 - ma@suse.de
 
 - info: Take care data are in sync with those printed in patch
