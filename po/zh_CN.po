@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 12:33+0000\n"
-"Last-Translator: Raymond Wang <raymond.wang@lqs-lionbridge.com>\n"
+"PO-Revision-Date: 2016-07-15 03:08+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -159,7 +159,7 @@ msgstr "正在忽略文件 '%s' 失败的签名校验！"
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "正在忽略文件 '%s' (来自软件源 '%s') 的失败签名校验！"
+msgstr "正在忽略文件 '%s'（来自软件源 '%s'）的失败签名校验！"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -173,7 +173,7 @@ msgstr "文件 '%s' 签名校验失败。"
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "文件 '%s' (来自软件源 '%s') 的签名校验失败。"
+msgstr "文件 '%s'（来自软件源 '%s'）的签名校验失败。"
 
 #: src/callbacks/keyring.h:284
 msgid ""
@@ -368,7 +368,7 @@ msgstr "以下查询未锁定任何对象："
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "正在撷取增量升级"
+msgstr "正在检索增量升级"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
@@ -379,7 +379,7 @@ msgstr "正在应用增量升级"
 #: src/callbacks/repo.h:103
 #, c-format, boost-format
 msgid "(%s unpacked)"
-msgstr "(解压后 %s)"
+msgstr "（解压后 %s）"
 
 #: src/callbacks/repo.h:112
 #, boost-format
@@ -389,7 +389,7 @@ msgstr "在缓存 %1% 中"
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "正在撷取 %s %s-%s.%s"
+msgstr "正在检索 %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
@@ -523,7 +523,7 @@ msgstr "状态"
 #: src/info.cc:265
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
-msgstr "过时 (已安装版本 %s)"
+msgstr "过时（已安装版本 %s）"
 
 #: src/info.cc:269
 msgid "up-to-date"
@@ -605,7 +605,7 @@ msgstr "内容"
 
 #: src/info.cc:419
 msgid "(empty)"
-msgstr "(空)"
+msgstr "（空）"
 
 #: src/info.cc:472
 msgid "Flavor"
@@ -919,7 +919,7 @@ msgstr "在您的软件源中未找到软件包 '%s'。无法重装、升级或�
 msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
-msgstr "所选软件包 '%s' (来自软件源 '%s') 的版本比当前安装的版本低。"
+msgstr "所选软件包 '%s'（来自软件源 '%s'）的版本比当前安装的版本低。"
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
@@ -1214,7 +1214,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
-msgstr[0] "推荐以下 %d 个软件包，但不会安装 (仅会安装依赖的软件包)："
+msgstr[0] "推荐以下 %d 个软件包，但不会安装（仅会安装依赖的软件包）："
 
 #: src/Summary.cc:911
 #, c-format, boost-format
@@ -1224,8 +1224,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] ""
-"推荐以下 %d 个软件包，但不会安装，因为它们是不需要的 (曾经手动移除过)："
+msgstr[0] "推荐以下 %d 个软件包，但不会安装，因为它们是不需要的（曾经手动移除过）："
 
 #: src/Summary.cc:921
 #, c-format, boost-format
@@ -1538,24 +1537,24 @@ msgstr "需要重启。"
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "跳过撷取该文件并中止当前操作。"
+msgstr "跳过检索该文件并中止当前操作。"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
-msgstr "再次尝试撷取该文件。"
+msgstr "再次尝试检索该文件。"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:32
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
-msgstr "跳过撷取该文件并尝试在没有该文件的情况下继续操作。"
+msgstr "跳过检索该文件并尝试在没有该文件的情况下继续操作。"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr "修改当前的基础 URI 并尝试再次撷取该文件。"
+msgstr "修改当前的基础 URI 并尝试再次检索该文件。"
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
@@ -1714,7 +1713,7 @@ msgstr "正在强制执行原始元数据刷新"
 #: src/repos.cc:236
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "正在撷取软件源 '%s' 的元数据"
+msgstr "正在检索软件源 '%s' 的元数据"
 
 #: src/repos.cc:263
 #, c-format, boost-format
@@ -1729,7 +1728,7 @@ msgstr "禁用软件源 '%s' 时出错。"
 #: src/repos.cc:295
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
-msgstr "从 '%s' 撷取文件时出现问题。"
+msgstr "从 '%s'检索文件时出现问题。"
 
 #: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
@@ -1747,7 +1746,7 @@ msgstr "没有为 '%s' 定义 URI。"
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr "请添加一个或者更多的基础 URI 项 (baseurl=URI) 至 %s (针对软件源 '%s'）。"
+msgstr "请添加一个或者更多的基础 URI 项 (baseurl=URI) 至 %s（针对软件源 '%s'）。"
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
@@ -1767,7 +1766,7 @@ msgstr "请检查此软件源定义的 URI 是否指向了一个有效的软件�
 #: src/repos.cc:352
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "撷取 '%s' 元数据时出错："
+msgstr "检索 '%s' 元数据时出错："
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
@@ -2314,7 +2313,7 @@ msgstr "正在刷新服务 '%s'。"
 #: src/repos.cc:2630 src/repos.cc:2640
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "撷取服务 '%s' 的软件源索引文件出现问题："
+msgstr "检索服务 '%s' 的软件源索引文件出现问题："
 
 #: src/repos.cc:2632 src/repos.cc:2740 src/repos.cc:2798
 #, c-format, boost-format
@@ -2436,7 +2435,7 @@ msgstr "正在加载软件源数据..."
 #: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "正在撷取软件源 '%s' 的数据..."
+msgstr "正在检索软件源 '%s' 的数据..."
 
 #: src/repos.cc:3107
 #, c-format, boost-format
@@ -2661,7 +2660,7 @@ msgstr "通知 PackageKit 退出吗？"
 
 #: src/Zypper.cc:118
 msgid "PackageKit is still running (probably busy)."
-msgstr "PackageKit 仍在运行 (或许正忙)。"
+msgstr "PackageKit 仍在运行（或许正忙）。"
 
 #: src/Zypper.cc:119
 msgid "Try again?"
@@ -2724,10 +2723,10 @@ msgstr ""
 "\t--config, -c <文件>\t使用指定而非默认的配置文件。\n"
 "\t--userdata <字符串>\t用户自定义的用于历史和插件中的事务 ID。\n"
 "\t--quiet, -q\t\t压制正常输出，仅打印错误消息。\n"
-"\t--verbose, -v\t\t增加消息的详细程度 (调试模式)。\n"
+"\t--verbose, -v\t\t增加消息的详细程度（调试模式）。\n"
 "\t--[no-]color\t\t若 tty 支持是否使用有颜色输出。\n"
 "\t--no-abbrev, -A\t\t在表格中不要缩写文本。\n"
-"\t--table-style, -s\t表格样式 (整数)。\n"
+"\t--table-style, -s\t表格样式（整数）。\n"
 "\t--non-interactive, -n\t不询问任何选择，自动使用默认回复。\n"
 "\t--non-interactive-include-reboot-patches\t不把那些设置了\"建议重启\"旗标\n"
 "\t\t\t\t的补丁视为可与用户交互的。\n"
@@ -2777,8 +2776,7 @@ msgstr ""
 "\t--no-refresh\t\t不刷新软件源。\n"
 "\t--no-cd\t\t\t忽略 CD/DVD 软件源。\n"
 "\t--no-remote\t\t忽略远程软件源。\n"
-"\t--releasever\t\t设置全部 .repo 文件中 $releasever 的值 (默认：发行版版本"
-"号)\n"
+"\t--releasever\t\t设置全部 .repo 文件中 $releasever 的值（默认：发行版版本号）\n"
 
 #: src/Zypper.cc:472
 msgid ""
@@ -3125,8 +3123,8 @@ msgid ""
 msgstr ""
 "install (in) [选项] <功能|rpm_文件_uri> ...\n"
 "\n"
-"安装具有指定功能的软件包或者指定位置的 RPM 文件。功能的定义为\"名称[.架构][操"
-"作符<版本>]\"，操作符为 <, <=, =, >=, > 其中之一。\n"
+"安装具有指定功能的软件包或者指定位置的 RPM 文件。功能的定义为\"名称[.架构][操作符<版本>]\"，操作符为 <, <=, =, >=, > "
+"其中之一。\n"
 "\n"
 "  命令选项：\n"
 "    --from <别名|#|URI>    从指定软件源选择软件包。\n"
@@ -3135,11 +3133,10 @@ msgstr ""
 "                                默认：%s。\n"
 "-n, --name              单纯通过名称而非功能选择软件包。\n"
 "-C, --capability       通过功能选择软件包。\n"
-"-f, --force                即使该软件包已安装仍强制安装 (重装)，\n"
+"-f, --force                即使该软件包已安装仍强制安装（重装），\n"
 "                                降级或变更厂商或架构。\n"
 "    --oldpackage      允许使用旧软件包替换新软件包。\n"
-"                                若您正在做回滚那么该选项超有用。不像 --"
-"force \n"
+"                                若您正在做回滚那么该选项超有用。不像 --force \n"
 "                                那样，它不强行重装。\n"
 "    --replacefiles      即使新软件包会替换其它已安装软件包的文件\n"
 "                                也安装它们。默认是将文件冲突视为错误。\n"
@@ -3151,7 +3148,7 @@ msgstr ""
 "    --no-recommends  不安装推荐的软件包，仅安装必需的软件包。\n"
 "    --recommends        安装必需的软件包也安装推荐的软件包。\n"
 "-R, --no-force-resolution    不强制解决依赖关系，允许提问。\n"
-"     --force-resolution          强制解决依赖关系 (即使方案很激进)。\n"
+"     --force-resolution          强制解决依赖关系（即使方案很激进）。\n"
 "-D, --dry-run           测试安装，并不真正安装。\n"
 "      --details            显示详细安装摘要。\n"
 "     --download       设置下载-安装模式。可用模式：\n"
@@ -3195,8 +3192,7 @@ msgid ""
 msgstr ""
 "remove (rm) [选项] <功能> ...\n"
 "\n"
-"移除具有指定功能的软件包。功能的定义为\"名称[.架构][操作符 <版本>]\"，操作符"
-"为 <, <=, =, >=, > 其中之一。\n"
+"移除具有指定功能的软件包。功能的定义为\"名称[.架构][操作符 <版本>]\"，操作符为 <, <=, =, >=, > 其中之一。\n"
 "\n"
 "  命令选项\n"
 "-r, --repo <别名|#|URI>       仅加载指定软件源。\n"
@@ -3206,7 +3202,7 @@ msgstr ""
 "-C, --capability                 通过功能选择软件包。\n"
 "    --debug-solver             创建依赖关系解决器试例以供调试。\n"
 "-R, --no-force-resolution       不强制解决依赖关系，允许提问。\n"
-"    --force-resolution          强制解决依赖关系 (即使方案很激进)。\n"
+"    --force-resolution          强制解决依赖关系（即使方案很激进）。\n"
 "-u, --clean-deps               自动移除不需要的依赖关系。\n"
 "-U, --no-clean-deps           不自动移除不需要的依赖关系。\n"
 "-D, --dry-run                   测试移除，并不真正移除。\n"
@@ -3489,8 +3485,7 @@ msgstr ""
 "addrepo (ar) [选项] <URI> <别名>\n"
 "addrepo (ar) [选项] <文件.repo>\n"
 "\n"
-"向系统中添加一个软件源。软件源可通过其 URI 指定也可从指定的 .repo 文件 (甚至"
-"是远程) 中读取。\n"
+"向系统中添加一个软件源。软件源可通过其 URI 指定也可从指定的 .repo 文件（甚至是远程）中读取。\n"
 "\n"
 "  命令选项：\n"
 "-r, --repo <文件名.repo>    指定要读取的 .repo 文件的另一种方法。\n"
@@ -4096,7 +4091,7 @@ msgstr ""
 "搜索匹配任意给定搜索字符串的软件包。\n"
 "\n"
 "  命令选项：\n"
-"    --match-substrings     搜索部分匹配关键词的软件包 (默认)。\n"
+"    --match-substrings     搜索部分匹配关键词的软件包（默认）。\n"
 "    --match-words    仅搜索匹配整个关键词的软件包。\n"
 " -x, --match-exact    搜索精确匹配搜索字符串的软件包。\n"
 "    --provides    搜索提供了搜索字符串内容的软件包。\n"
@@ -4113,11 +4108,11 @@ msgstr ""
 "-u, --uninstalled-only    仅显示目前未安装的软件包。\n"
 "-t, --type <类型>    仅搜索指定类型的软件包。\n"
 "-r, --repo <别名|#|URI>    仅在指定软件源中搜索。\n"
-"    --sort-by-name    按软件包名称排序 (默认)。\n"
+"    --sort-by-name    按软件包名称排序（默认）。\n"
 "    --sort-by-repo    按软件源排序。\n"
 "-s, --details    分行显示每个软件源中的每个可用版本。\n"
 "-v, --vorbose    像 --details 一样，带有搜索匹配到的位置的额外信息\n"
-"                         (在依赖关系中搜索时很有用)。\n"
+"                         （在依赖关系中搜索时很有用）。\n"
 "\n"
 "* 和 ? 通配符也可以用于搜索字符串中。\n"
 "若搜索字符串以 '/' 结尾，它将被解释为一个正则表达式。\n"
@@ -4198,7 +4193,7 @@ msgstr ""
 "-r, --repo <别名|#|URI>   指定软件源的另一种方法。\n"
 "-i, --installed-only      仅显示已安装的软件包。\n"
 "-u, --uninstalled-only    仅显示未安装的软件包。\n"
-"    --orphaned    显示孤立的 (没有源的) 软件包。\n"
+"    --orphaned    显示孤立的（没有源） 软件包。\n"
 "    --suggested    显示建议的软件包。\n"
 "    --recommended    显示推荐的软件包。\n"
 "    --unneeded    显示不再需要的软件包。\n"
@@ -5273,7 +5268,7 @@ msgstr "(演习)"
 
 #: src/solve-commit.cc:800 src/solve-commit.cc:833
 msgid "Problem retrieving the package file from the repository:"
-msgstr "从软件源撷取软件包文件出现问题："
+msgstr "从软件源检索软件包文件出现问题："
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
 #: src/solve-commit.cc:830
@@ -5525,7 +5520,7 @@ msgstr "完毕"
 #: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
 #: src/output/OutNormal.cc:321
 msgid "Retrieving:"
-msgstr "正在撷取："
+msgstr "正在检索："
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/output/OutNormal.cc:256
@@ -5669,7 +5664,7 @@ msgstr "正在安装源代码包 %s-%s"
 #: src/misc.cc:382
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr "已成功撷取源代码包 %s-%s。"
+msgstr "已成功检索源代码包 %s-%s。"
 
 #: src/misc.cc:388
 #, c-format, boost-format
@@ -5684,12 +5679,12 @@ msgstr "安装源代码包 %s-%s 出现问题："
 #. translators: locks table value
 #: src/locks.cc:24 src/locks.cc:128
 msgid "(any)"
-msgstr "(任意)"
+msgstr "（任意）"
 
 #. translators: locks table value
 #: src/locks.cc:26 src/locks.cc:125
 msgid "(multiple)"
-msgstr "(多个)"
+msgstr "（多个）"
 
 #. translators: property name; short; used like "Name: value"
 #: src/locks.cc:72
@@ -5996,7 +5991,7 @@ msgstr "正确格式为 obs://<项目>/[平台]"
 
 #: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "复制指定 RPM 文件到缓存文件夹出现问题。"
+msgstr "复制指定的 RPM 文件到缓存文件夹时出现问题。"
 
 #: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
