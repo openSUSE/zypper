@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: zypp.el\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-10 23:49+0000\n"
+"PO-Revision-Date: 2016-07-16 11:02+0000\n"
 "Last-Translator: Michail Vourlakos <mvourlakos@gmail.com>\n"
 "Language-Team: Greek <https://l10n.opensuse.org/projects/libzypp/master/el/>"
 "\n"
@@ -4488,7 +4488,7 @@ msgstr "εγκαταστήσετε %s από το εξαιρετέο αποθε�
 #: zypp/solver/detail/SATResolver.cc:1318
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr "υποβάθμιση του %s από %s"
+msgstr "υποβάθμιση του %s σε %s"
 
 #: zypp/solver/detail/SATResolver.cc:1325
 #, c-format, boost-format
