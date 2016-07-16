@@ -19,16 +19,16 @@ msgstr ""
 "Project-Id-Version: zypp.el\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-09 13:14+0200\n"
-"PO-Revision-Date: 2016-07-16 11:02+0000\n"
+"PO-Revision-Date: 2018-04-29 06:37+0000\n"
 "Last-Translator: Michail Vourlakos <mvourlakos@gmail.com>\n"
-"Language-Team: Greek <https://l10n.opensuse.org/projects/libzypp/master/el/"
-">\n"
+"Language-Team: Greek <https://l10n.opensuse.org/projects/libzypp/master/el/>"
+"\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.18\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -49,7 +49,7 @@ msgstr "Άγνωστη χώρα: "
 #. Defined LanguageCode constants
 #: zypp/CountryCode.cc:149 zypp/LanguageCode.cc:148
 msgid "No Code"
-msgstr "Όχι Κώδικας"
+msgstr "Κανένας κώδικας"
 
 #: zypp/CountryCode.cc:158
 msgid "Andorra"
