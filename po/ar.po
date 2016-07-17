@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-11 15:29+0000\n"
+"PO-Revision-Date: 2016-07-17 10:30+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
@@ -676,7 +676,7 @@ msgstr "افغانستان"
 #. :AFG:004:
 #: zypp/CountryCode.cc:161
 msgid "Antigua and Barbuda"
-msgstr "أنتيغوا و باربودا"
+msgstr "أنتيغوا وباربودا"
 
 #. :ATG:028:
 #: zypp/CountryCode.cc:162
