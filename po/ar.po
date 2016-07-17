@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-11 16:56+0000\n"
+"PO-Revision-Date: 2016-07-17 09:58+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
@@ -95,7 +95,7 @@ msgstr "قبول الملف '%s' الموقَّع باستخدام المفتا�
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "قبول ملف '%s'من المخزن '%s' تم توقيعه بمفتاح غير معروف '%s'."
+msgstr "قبول ملف '%s' من المخزن '%s' تم توقيعه بمفتاح غير معروف '%s'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -241,10 +241,11 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"ومع ذلك فإن عمل ملف مع المجموع الاختباري '%1%..' آمنة وصحيحة\n"
-"وينبغي أن تستخدم مع هذه العملية، أدخل 4 الأحرف الأولى من المجموع الاختباري\n"
-"لإلغاء حظر استخدام هذا الملف على مسؤوليتك الخاصة. سيتم تجاهل الإدخال فارغ في "
-"الملف.\n"
+"ومع ذلك إذا كنت متأكدًا أن الملف مع المجموع الاختباري '%1%..' آمنًا وصحيحًا\n"
+"وينبغي استخدامه مع هذه العملية، فأدخل الأربعة أحرف الأولى من المجموع "
+"الاختباري\n"
+"لإلغاء حظر استخدام هذا الملف على مسؤوليتك الخاصة. سيؤدي الإدخال الفارغ إلى "
+"تجاهل الملف.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:359
@@ -264,7 +265,7 @@ msgstr "تجاهل الملف."
 #. translators: A prompt text
 #: src/callbacks/keyring.h:368
 msgid "Unblock or discard?"
-msgstr "إلغاء أو تجاهل؟"
+msgstr "إلغاء حظر أم تجاهل؟"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:151
