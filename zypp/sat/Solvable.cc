@@ -155,6 +155,12 @@ namespace zypp
       return ::solvable_lookup_num( _solvable, attr.id(), 0 );
     }
 
+    unsigned long long Solvable::lookupNumAttribute( const SolvAttr & attr, unsigned long long notfound_r ) const
+    {
+      NO_SOLVABLE_RETURN( notfound_r );
+      return ::solvable_lookup_num( _solvable, attr.id(), notfound_r );
+    }
+
     bool Solvable::lookupBoolAttribute( const SolvAttr & attr ) const
     {
       NO_SOLVABLE_RETURN( false );

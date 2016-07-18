@@ -133,6 +133,7 @@ namespace zypp
       bool		lookupBoolAttribute( const SolvAttr & attr ) const	{ return satSolvable().lookupBoolAttribute( attr ); }
       detail::IdType	lookupIdAttribute( const SolvAttr & attr ) const	{ return satSolvable().lookupIdAttribute( attr ); }
       unsigned long long lookupNumAttribute( const SolvAttr & attr ) const	{ return satSolvable().lookupNumAttribute( attr ); }
+      unsigned long long lookupNumAttribute( const SolvAttr & attr, unsigned long long notfound_r ) const	{ return satSolvable().lookupNumAttribute( attr, notfound_r ); }
       CheckSum		lookupCheckSumAttribute( const SolvAttr & attr ) const	{ return satSolvable().lookupCheckSumAttribute( attr ); }
       OnMediaLocation	lookupLocation() const			{ return satSolvable().lookupLocation(); }
       Solvable::IdType	id() const 					{ return satSolvable().id(); }

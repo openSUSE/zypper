@@ -337,6 +337,8 @@ namespace zypp
        * or 0 if it does not exists.
        */
       unsigned long long lookupNumAttribute( const SolvAttr & attr ) const;
+      /** \overload returning custom notfound_r value */
+      unsigned long long lookupNumAttribute( const SolvAttr & attr, unsigned long long notfound_r ) const;
 
       /**
        * returns the boolean attribute value for \ref attr
