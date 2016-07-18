@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 18 16:36:25 CEST 2016 - ma@suse.de
+
+- Product: Offer tri-state hasEndOfLife details (FATE#320699)
+- version 16.2.0 (0)
+
+-------------------------------------------------------------------
 Thu Jul 14 19:02:57 CEST 2016 - ma@suse.de
 
 - use more user friendly command names for "zypper ps" (bsc#980541)
