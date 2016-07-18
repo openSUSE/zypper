@@ -214,6 +214,19 @@ namespace zypp
   Date Product::endOfLife() const
   { return Date( lookupNumAttribute( sat::SolvAttr::productEndOfLife ) );}
 
+  bool Product::hasEndOfLife() const
+  { return( lookupNumAttribute( sat::SolvAttr::productEndOfLife, -1 ) != -1 ); }
+
+  bool Product::hasEndOfLife( Date & value ) const
+  {
+    Date res( lookupNumAttribute( sat::SolvAttr::productEndOfLife, -1 ) );
+    if ( res == -1 )
+      return false;
+    // else:
+    value = res;
+    return true;
+  }
+
   std::vector<Repository::ContentIdentifier> Product::updateContentIdentifier() const
   {
     std::vector<Repository::ContentIdentifier> ret;

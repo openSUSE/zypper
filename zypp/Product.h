@@ -97,8 +97,24 @@ namespace zypp
     /** The product flags */
     std::list<std::string> flags() const;
 
-    /** The date when this Product goes out of support as indicated by it's medadata. */
+    /** The date when this Product goes out of support as indicated by it's medadata.
+     * Use \ref hasEOfLife if it's important to distinguish whether the value
+     * is not defined in the metadata, or defined but empty/invalid/TBD.
+     */
     Date endOfLife() const;
+
+    /** Return whether an EndOfLife value is actually defined in the metadata.
+     * A missing value (\c false) usually indicates that there will be no EOL,
+     * while an empty/invalid value indicates that there will be an  EOL date,
+     * but it's not yet known (FATE#320699).
+     */
+    bool hasEndOfLife() const;
+    /** \overload additionally returning the date (0 if TBD)
+     * 	false, ( unchanged )	: no EOL
+     * 	true,  ( 0 )		: EOL is still TBD
+     * 	true,  ( !=0 )		: a valid EOL date
+     */
+    bool hasEndOfLife( Date & value ) const;
 
     /** ContentIdentifier of required update repositories. */
     std::vector<Repository::ContentIdentifier> updateContentIdentifier() const;
