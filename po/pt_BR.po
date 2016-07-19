@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-07-13 23:30+0000\n"
+"PO-Revision-Date: 2016-07-19 16:17+0000\n"
 "Last-Translator: Marcos Teofilo <mteofilo@tesbrasil.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
@@ -52,7 +52,7 @@ msgstr "Referência a objeto URL vazio inválida"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
-msgstr "Não foi possível analisar os componentes do URL"
+msgstr "Não foi possível analisar os componentes da URL"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
@@ -114,7 +114,7 @@ msgstr "Complementa"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Tipo '%s' duvidoso da checksum '%s' de  %u byte(s)"
+msgstr "Tipo '%s' duvidoso da soma de verificação '%s' de  %u byte(s)"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
@@ -134,7 +134,7 @@ msgstr "%s já executado como %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
-msgstr " execução ignorada durante a interrupção"
+msgstr " execução ignorada durante o cancelamento"
 
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
@@ -154,7 +154,8 @@ msgstr "A instalação foi cancelada conforme instruções."
 
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr "Esta versão do libzypp foi criada sem o suporte ao HAL."
+msgstr ""
+"Desculpe, mas esta versão do libzypp foi compilada sem o suporte ao HAL."
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
@@ -220,7 +221,7 @@ msgstr "Arquivos de configuração alterados para %s:"
 #: zypp/target/rpm/RpmDb.cc:2024
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "o rpm salvou %s como %s, mas não foi possível determinar a diferença"
+msgstr "o RPM salvou %s como %s, mas não foi possível determinar a diferença"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2026
@@ -282,12 +283,12 @@ msgstr "A assinatura está OK, mas a chave não é confiável"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2373
 msgid "Signatures public key is not available"
-msgstr "A chave de assinatura pública não está disponível"
+msgstr "Chave pública das assinaturas não disponível"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2375
 msgid "File does not exist or signature can't be checked"
-msgstr "O arquivo não existe ou a assinatura não pôde ser verificada"
+msgstr "O arquivo não existe ou a assinatura não pode ser verificada"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
