@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-23 10:04+0200\n"
-"PO-Revision-Date: 2016-07-14 00:56+0000\n"
+"PO-Revision-Date: 2016-07-20 03:03+0000\n"
 "Last-Translator: Marcos Teofilo <mteofilo@tesbrasil.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
@@ -31,7 +31,7 @@ msgstr "Repositório:"
 
 #: src/callbacks/keyring.h:38
 msgid "Key Name:"
-msgstr "Nome da Chave:"
+msgstr "Nome da chave:"
 
 #: src/callbacks/keyring.h:39
 msgid "Key Fingerprint:"
@@ -1668,15 +1668,15 @@ msgstr[1] "para alterar de arquitetura"
 #: src/Summary.cc:1365
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] "pacote mudará a arquitetura"
-msgstr[1] "pacotes mudarão a arquitetura"
+msgstr[0] "pacote alterará a arquitetura"
+msgstr[1] "pacotes alterarão a arquitetura"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1376
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] "pacote de origem"
-msgstr[1] "pacotes de origem"
+msgstr[0] "pacote fonte"
+msgstr[1] "pacotes fonte"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1379
