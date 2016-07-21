@@ -12,11 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-23 10:04+0200\n"
+"POT-Creation-Date: 2016-07-21 16:00+0200\n"
 "PO-Revision-Date: 2016-07-12 14:07+0000\n"
 "Last-Translator: Henry Shen <henry.shen@lqs-lionbridge.com>\n"
-"Language-Team: Chinese (Taiwan) "
-"<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
+"Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
+"master/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -312,7 +312,9 @@ msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
-msgstr "檢查檔案衝突需要事先下載尚未安裝的套件，才能存取其檔案清單。詳情請見 zypper 說明文件中關於選項 '%1%' 的說明。"
+msgstr ""
+"檢查檔案衝突需要事先下載尚未安裝的套件，才能存取其檔案清單。詳情請見 zypper "
+"說明文件中關於選項 '%1%' 的說明。"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
@@ -440,140 +442,152 @@ msgstr "無效的物件"
 msgid "Error"
 msgstr "錯誤"
 
+#. translators: property name; short; used like "Name: value"
+#. translators: package's repository (header)
+#: src/info.cc:66 src/update.cc:798 src/search.cc:74 src/search.cc:378
+#: src/search.cc:512 src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "套件庫"
+
+#. translators: property name; short; used like "Name: value"
+#. translators: Table coumn header
 #. translators: name (general header)
-#: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
+#: src/info.cc:68 src/info.cc:413 src/repos.cc:961 src/repos.cc:1094
 #: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
 msgstr "名稱"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package version (header)
-#: src/info.cc:74 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/info.cc:70 src/search.cc:70 src/search.cc:377 src/search.cc:514
 #: src/search.cc:576
 msgid "Version"
 msgstr "版本"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/info.cc:72 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
 msgstr "結構"
 
-#: src/info.cc:76
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:74
 msgid "Vendor"
 msgstr "供應商"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
+#: src/info.cc:80 src/search.cc:233 src/utils/misc.cc:255
 #: src/utils/misc.cc:296
 msgid "Summary"
 msgstr "摘要"
 
+#. translators: property name; short; used like "Name: value"
 #: src/info.cc:82 src/Zypper.cc:5246
 msgid "Description"
 msgstr "描述"
 
-#: src/info.cc:136
+#: src/info.cc:152
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] "有 %1% 筆符合 '%2%'。"
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:168
+#: src/info.cc:184
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' 找不到。"
 
-#: src/info.cc:190
+#. TranslatorExplanation E.g. "Information for package zypper:"
+#: src/info.cc:204
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "%s %s 的資訊："
 
-#. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-#: src/info.cc:206
-#, c-format, boost-format
-msgid "Info for type '%s' not implemented."
-msgstr "'%s' 類型的詳細資訊功能尚未完成。"
-
-#. translators: package's repository (header)
-#: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
-#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
-#: src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "套件庫"
-
-#: src/info.cc:255
+#: src/info.cc:283
 msgid "Support Level"
 msgstr "支援層級"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:286
+msgid "Installed Size"
+msgstr "安裝的大小"
+
+#. translators: property name; short; used like "Name: value"
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:258 src/info.cc:390 src/info.cc:479 src/Summary.cc:1207
+#: src/info.cc:288 src/info.cc:390 src/info.cc:521 src/Summary.cc:1207
 msgid "Installed"
 msgstr "已安裝"
 
-#: src/info.cc:260 src/info.cc:311 src/utils/misc.cc:254 src/utils/misc.cc:295
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:290 src/info.cc:336 src/info.cc:524 src/utils/misc.cc:254
+#: src/utils/misc.cc:295
 msgid "Status"
 msgstr "狀態"
 
-#: src/info.cc:265
+#: src/info.cc:294 src/info.cc:528
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "過期 (版本 %s 已安裝)"
 
-#: src/info.cc:269
+#: src/info.cc:296 src/info.cc:530
 msgid "up-to-date"
 msgstr "最新"
 
-#: src/info.cc:273
+#: src/info.cc:299 src/info.cc:533
 msgid "not installed"
 msgstr "未安裝"
 
-#: src/info.cc:275
-msgid "Installed Size"
-msgstr "安裝的大小"
-
+#. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:314 src/update.cc:350 src/utils/misc.cc:251
+#: src/info.cc:338 src/update.cc:350 src/utils/misc.cc:251
 #: src/utils/misc.cc:292
 msgid "Category"
 msgstr "分類"
 
-#: src/info.cc:315 src/utils/misc.cc:252 src/utils/misc.cc:293
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:340 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
 msgstr "嚴重度"
 
-#: src/info.cc:316
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:342
 msgid "Created On"
 msgstr "建立時間"
 
-#: src/info.cc:318
+#: src/info.cc:345
 msgid "Reboot Required"
 msgstr "需要重新開機"
 
-#: src/info.cc:319
+#: src/info.cc:346
 msgid "Package Manager Restart Required"
 msgstr "需要重新啟動套件管理員"
 
-#. print interactive flags the same style as list-patches
-#: src/info.cc:327 src/info.cc:330 src/utils/misc.cc:253 src/utils/misc.cc:294
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:353 src/info.cc:356 src/utils/misc.cc:253 src/utils/misc.cc:294
 msgid "Interactive"
 msgstr "互動式"
 
-#: src/info.cc:354 src/search.cc:318
-msgid "Recommended"
-msgstr "推薦"
-
-#: src/info.cc:356 src/search.cc:320
-msgid "Suggested"
-msgstr "建議"
-
-#: src/info.cc:391
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:392
 msgid "Visible to User"
 msgstr "對使用者可見"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:406 src/info.cc:442
+msgid "Contents"
+msgstr "內容"
+
+#: src/info.cc:406
+msgid "(empty)"
+msgstr "(空)"
+
+#. translators: Table coumn header
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
 #.
@@ -581,72 +595,95 @@ msgstr "對使用者可見"
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:412 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
+#. translators: Table coumn header
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
+#: src/info.cc:414 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "類型"
 
-#: src/info.cc:402 src/search.cc:379
+#. translators: Table coumn header
+#: src/info.cc:415 src/search.cc:379
 msgid "Dependency"
 msgstr "相依性"
 
-#: src/info.cc:417
-msgid "Contents"
-msgstr "內容"
+#: src/info.cc:420 src/info.cc:434
+#, fuzzy
+msgid "Required"
+msgstr "需要"
 
-#: src/info.cc:419
-msgid "(empty)"
-msgstr "(空)"
+#: src/info.cc:425 src/info.cc:434 src/search.cc:318
+msgid "Recommended"
+msgstr "推薦"
 
-#: src/info.cc:472
-msgid "Flavor"
-msgstr "類別"
+#: src/info.cc:431 src/info.cc:434 src/search.cc:320
+msgid "Suggested"
+msgstr "建議"
 
-#: src/info.cc:477
-msgid "Short Name"
-msgstr "簡稱"
-
-#: src/info.cc:481 src/search.cc:578
-msgid "Is Base"
-msgstr "是基礎"
-
-#: src/info.cc:485
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:501
 msgid "End of Support"
 msgstr "終止支援"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
-msgid "undefined"
-msgstr "未定義"
+#: src/info.cc:506
+msgid "unknown"
+msgstr "不明的"
 
-#: src/info.cc:488
-msgid "CPE Name"
-msgstr "CPE 名稱"
+#. translators: %1% is an URL or Path pointing to some document
+#: src/info.cc:511
+#, boost-format
+msgid "See %1%"
+msgstr ""
 
-#: src/info.cc:495
-msgid "invalid CPE Name"
-msgstr "無效的 CPE 名稱"
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:517
+msgid "Flavor"
+msgstr "類別"
 
-#: src/info.cc:498
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:519 src/search.cc:578
+msgid "Is Base"
+msgstr "是基礎"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:540 src/info.cc:567
 msgid "Update Repositories"
 msgstr "更新套件庫"
 
-#: src/info.cc:506
+#: src/info.cc:545
 msgid "Content Id"
 msgstr "內容 ID"
 
-#: src/info.cc:513
+#: src/info.cc:557
 msgid "Provided by enabled repository"
 msgstr "由啟用的套件庫提供"
 
-#: src/info.cc:519
+#: src/info.cc:562
 msgid "Not provided by any enabled repository"
 msgstr "非由任何啟用的套件庫提供"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:572
+msgid "CPE Name"
+msgstr "CPE 名稱"
+
+#: src/info.cc:577
+msgid "undefined"
+msgstr "未定義"
+
+#: src/info.cc:579
+msgid "invalid CPE Name"
+msgstr "無效的 CPE 名稱"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:582
+msgid "Short Name"
+msgstr "簡稱"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -939,7 +976,9 @@ msgstr "不需要修補程式 '%s'。"
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
-msgstr "'%s' 為選擇性修補程式。請用 '%s' 來安裝它，或使用 '%s' 包括所有選擇性修補程式。"
+msgstr ""
+"'%s' 為選擇性修補程式。請用 '%s' 來安裝它，或使用 '%s' 包括所有選擇性修補程"
+"式。"
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1743,7 +1782,8 @@ msgstr "'%s' 沒有定義位址。"
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr "請加入一個或數個基礎位址 (baseurl=位址) 項目到 %s，以供套件庫 '%s' 使用。"
+msgstr ""
+"請加入一個或數個基礎位址 (baseurl=位址) 項目到 %s，以供套件庫 '%s' 使用。"
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
@@ -1782,8 +1822,9 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"這可能是因為套件庫的中繼資訊不適用，或中繼資訊分析器存在錯誤。若是後者的情形(或您懷疑是)請參考 "
-"http://en.opensuse.org/Zypper/Troubleshooting 的指引發出錯誤回報"
+"這可能是因為套件庫的中繼資訊不適用，或中繼資訊分析器存在錯誤。若是後者的情形"
+"(或您懷疑是)請參考 http://en.opensuse.org/Zypper/Troubleshooting 的指引發出錯"
+"誤回報"
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -2079,7 +2120,9 @@ msgstr "套件庫名稱 '%s' 已存在。請使用其他的別名。"
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
-msgstr "無法決定套件庫的類型。請檢查是否定義的位址 (參看下方) 真的指向一個有效的套件庫："
+msgstr ""
+"無法決定套件庫的類型。請檢查是否定義的位址 (參看下方) 真的指向一個有效的套件"
+"庫："
 
 #: src/repos.cc:1591
 msgid "Can't find a valid repository at given location:"
@@ -2504,7 +2547,7 @@ msgstr[0] "%d 個修補程式被鎖定"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
 msgstr[0] "%d 個選擇性修補程式"
@@ -2647,7 +2690,8 @@ msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
-"PackageKit 正在阻擋 zypper。如果您正在執行使用 PackageKit 的更新程式 applet 或其他軟體管理應用程式，此情況就會發生。"
+"PackageKit 正在阻擋 zypper。如果您正在執行使用 PackageKit 的更新程式 applet "
+"或其他軟體管理應用程式，此情況就會發生。"
 
 #: src/Zypper.cc:109
 msgid "Tell PackageKit to quit?"
@@ -2773,7 +2817,8 @@ msgstr ""
 "\t--no-refresh\t\t不要重新整理套件庫。\n"
 "\t--no-cd\t\t\t忽略 CD/DVD 套件庫。\n"
 "\t--no-remote\t\t忽略遠端套件庫。\n"
-"\t--releasever\t\t在所有 .repo 檔案中設定 $releasever 的值 (預設︰發行版的版本)\n"
+"\t--releasever\t\t在所有 .repo 檔案中設定 $releasever 的值 (預設︰發行版的版"
+"本)\n"
 
 #: src/Zypper.cc:472
 msgid ""
@@ -3138,11 +3183,14 @@ msgstr ""
 "-f, --force                    安裝套件，即使該套件已安裝 (重新安裝)、\n"
 "                               已降級、或已變更供應商或架構。\n"
 "    --oldpackage               允許使用舊版本取代新版本。\n"
-"                               如果您要回復到舊版本，該選項是個方便的功能。不像 --force，\n"
+"                               如果您要回復到舊版本，該選項是個方便的功能。不"
+"像 --force，\n"
 "                               它不會強迫重新安裝。\n"
-"    --replacefiles             安裝套件，即使它會取代來自其他已安裝套件的檔案。\n"
+"    --replacefiles             安裝套件，即使它會取代來自其他已安裝套件的檔"
+"案。\n"
 "                               預設將檔案衝突視為錯誤來處理。\n"
-"                               使用 --download-as-needed 選項來停用檔案衝突檢查。\n"
+"                               使用 --download-as-needed 選項來停用檔案衝突檢"
+"查。\n"
 "-l, --auto-agree-with-licenses\n"
 "                               對第三方授權確認提示自動\n"
 "                               選取「是」。\n"
@@ -3309,7 +3357,8 @@ msgid ""
 msgstr ""
 "install-new-recommends (inr) [選項]\n"
 "\n"
-"安裝已安裝套件所建議的新增套件。為新增硬體安裝新語言套件或驅動程式時，通常可以使用此指令。\n"
+"安裝已安裝套件所建議的新增套件。為新增硬體安裝新語言套件或驅動程式時，通常可"
+"以使用此指令。\n"
 "\n"
 "  指令選項：\n"
 "-r, --repo <別名|編號|位址> 僅載入指定的套件庫。\n"
@@ -3322,7 +3371,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3363,7 +3412,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3589,7 +3638,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3657,7 +3706,8 @@ msgid ""
 msgstr ""
 "refresh (ref) [別名|編號|位址]...\n"
 "\n"
-"重新整理由別名、編號或位址指定的套件庫。若未指定任何套件庫，將會重新整理所有啟用的套件庫。\n"
+"重新整理由別名、編號或位址指定的套件庫。若未指定任何套件庫，將會重新整理所有"
+"啟用的套件庫。\n"
 "\n"
 "  指令選項︰\n"
 "-f、--force              強制執行完整的重新整理。\n"
@@ -3796,9 +3846,11 @@ msgstr ""
 "    --no-recommends          不要安裝推薦套件，只安裝必需的。\n"
 "    --recommends             除了必需的套件外，也安裝\n"
 "                             推薦的套件。\n"
-"    --replacefiles           安裝套件，即使它會取代來自其他已安裝套件的檔案。\n"
+"    --replacefiles           安裝套件，即使它會取代來自其他已安裝套件的檔"
+"案。\n"
 "                             預設將檔案衝突視為錯誤來處理。\n"
-"                             使用 --download-as-needed 選項來停用檔案衝突檢查。\n"
+"                             使用 --download-as-needed 選項來停用檔案衝突檢"
+"查。\n"
 "-R, --no-force-resolution    不要強迫找尋解決方案，\n"
 "                             要先詢問。\n"
 "    --force-resolution       強迫找尋一個解決方案 (即使\n"
@@ -3870,9 +3922,11 @@ msgstr ""
 "    --no-recommends         不要安裝推薦的套件，僅安裝必需的。\n"
 "    --recommends            除了必需的套件外，也安裝\n"
 "                            推薦的套件。\n"
-"    --replacefiles          安裝套件，即使它會取代來自其他已安裝套件的檔案。\n"
+"    --replacefiles          安裝套件，即使它會取代來自其他已安裝套件的檔"
+"案。\n"
 "                            預設將檔案衝突視為錯誤來處理。\n"
-"                            使用 --download-as-needed 選項來停用檔案衝突檢查。\n"
+"                            使用 --download-as-needed 選項來停用檔案衝突檢"
+"查。\n"
 "-r, --repo <別名|編號|位址> 僅載入指定的套件庫。\n"
 "-D, --dry-run               測試更新，而不要真正更新。\n"
 "    --details               顯示詳細的安裝摘要。\n"
@@ -4037,9 +4091,11 @@ msgstr ""
 "    --no-recommends            不要安裝推薦套件，僅安裝必需的。\n"
 "    --recommends               除了必需的套件，也安裝\n"
 "                               推薦的套件。\n"
-"    --replacefiles             安裝套件，即使它會取代來自其他已安裝套件的檔案。\n"
+"    --replacefiles             安裝套件，即使它會取代來自其他已安裝套件的檔"
+"案。\n"
 "                               預設將檔案衝突視為錯誤來處理。\n"
-"                               使用 --download-as-needed 選項來停用檔案衝突檢查。\n"
+"                               使用 --download-as-needed 選項來停用檔案衝突檢"
+"查。\n"
 "-D, --dry-run                  測試升級，不要真的升級\n"
 "    --details                  顯示詳細的安裝摘要。\n"
 "    --download                 設定下載-安裝模式。可用的模式：\n"
@@ -4152,7 +4208,9 @@ msgstr "patch-check (pchk) [選項]"
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
-msgstr "顯示適用修補程式的統計資料。如果找到需要的修補程式，該指令會傳回 100；如果至少存在一個需要的安全性修補程式，則傳回 101。"
+msgstr ""
+"顯示適用修補程式的統計資料。如果找到需要的修補程式，該指令會傳回 100；如果至"
+"少存在一個需要的安全性修補程式，則傳回 101。"
 
 #: src/Zypper.cc:2476
 msgid ""
@@ -4397,7 +4455,8 @@ msgid ""
 msgstr ""
 "addlock (al) [選項] <套件名稱> ...\n"
 "\n"
-"新增套件鎖定。 透過確切名稱或使用 '*' 和 '?' 萬用字元的全域樣式指定要鎖定的套件。\n"
+"新增套件鎖定。 透過確切名稱或使用 '*' 和 '?' 萬用字元的全域樣式指定要鎖定的套"
+"件。\n"
 "\n"
 "  指令選項：\n"
 "-r, --repo <別名|編號|位址>  限制僅鎖定指定的套件庫。\n"
@@ -4541,7 +4600,9 @@ msgid ""
 "For each associated system service print <format> on the standard output, "
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
-msgstr "對每個相關系統服務列印 <格式> 至標準輸出，並緊接著輸出一個換行字元。任何在 <格式> 中的 '%s' 指令會被代換成系統服務名稱。"
+msgstr ""
+"對每個相關系統服務列印 <格式> 至標準輸出，並緊接著輸出一個換行字元。任何在 <"
+"格式> 中的 '%s' 指令會被代換成系統服務名稱。"
 
 #: src/Zypper.cc:2968
 msgid ""
@@ -4568,7 +4629,8 @@ msgstr ""
 "\n"
 "下載指令行上指定的 RPM 到本地目錄。\n"
 "套件預設會下載到 libzypp 套件快取目錄中\n"
-"(/var/cache/zypp/packages；非 root 使用者的目錄為 $XDG_CACHE_HOME/zypp/packages)，\n"
+"(/var/cache/zypp/packages；非 root 使用者的目錄為 $XDG_CACHE_HOME/zypp/"
+"packages)，\n"
 "不過，該預設值可透過全域設定 --pkg-cache-dir 修改。\n"
 "\n"
 "在 XML 輸出模式下，對每個 zypper 嘗試下載的套件，\n"
@@ -4967,7 +5029,9 @@ msgstr "要更新已安裝的產品請用 '%s'。"
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
-msgstr "Zypper 不會追蹤安裝的原始碼套件。若要安裝最新的原始碼套件及其建構相依項，請使用 '%s 1'。"
+msgstr ""
+"Zypper 不會追蹤安裝的原始碼套件。若要安裝最新的原始碼套件及其建構相依項，請使"
+"用 '%s 1'。"
 
 #: src/Zypper.cc:4709
 msgid ""
@@ -5157,7 +5221,9 @@ msgstr "建立解決測試方案時發生錯誤。"
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
-msgstr "檢查使用已刪除函式庫之執行中程序的功能在 zypper.conf 中已被關閉。請手動執行 '%s' 來做檢查。"
+msgstr ""
+"檢查使用已刪除函式庫之執行中程序的功能在 zypper.conf 中已被關閉。請手動執行 "
+"'%s' 來做檢查。"
 
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
@@ -5178,7 +5244,9 @@ msgid ""
 "There are some running programs that might use files deleted by recent "
 "upgrade. You may wish to check and restart some of them. Run '%s' to list "
 "these programs."
-msgstr "有些正在執行的程式使用了已被最近更新刪除的檔案。 您可能會想要檢查並重新啟動這些程式。請執行 '%s' 來列出這些程式。"
+msgstr ""
+"有些正在執行的程式使用了已被最近更新刪除的檔案。 您可能會想要檢查並重新啟動這"
+"些程式。請執行 '%s' 來列出這些程式。"
 
 #: src/solve-commit.cc:468
 msgid "Update notifications were received from the following packages:"
@@ -5401,7 +5469,9 @@ msgid ""
 "Note: Not running as root you are limited to searching for files you have "
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
-msgstr "注意：您沒有使用 root 身分執行，您的搜尋範圍將限制為透過 system stat(2) 功能有權檢視的檔案。結果可能並不完整。"
+msgstr ""
+"注意：您沒有使用 root 身分執行，您的搜尋範圍將限制為透過 system stat(2) 功能"
+"有權檢視的檔案。結果可能並不完整。"
 
 #: src/source-download.cc:208
 #, c-format, boost-format
@@ -6021,20 +6091,23 @@ msgstr "取回指定的 RPM 檔案時出現問題"
 msgid "Please check whether the file is accessible."
 msgstr "請檢查此檔案是否可存取。"
 
-#: src/utils/misc.cc:686
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "未知的下載模式 '%s'。"
 
-#: src/utils/misc.cc:687
+#: src/utils/misc.cc:688
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "可用的下載模式︰%s"
 
-#: src/utils/misc.cc:701
+#: src/utils/misc.cc:702
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "選項 '%s' 會覆蓋 '%s'。"
+
+#~ msgid "Info for type '%s' not implemented."
+#~ msgstr "'%s' 類型的詳細資訊功能尚未完成。"
 
 #~ msgid "Name: "
 #~ msgstr "名稱: "
@@ -6150,9 +6223,6 @@ msgstr "選項 '%s' 會覆蓋 '%s'。"
 
 #~ msgid "None"
 #~ msgstr "無"
-
-#~ msgid "Requires"
-#~ msgstr "需要"
 
 #~ msgid "Provides"
 #~ msgstr "提供"

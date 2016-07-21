@@ -11,11 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-23 10:04+0200\n"
+"POT-Creation-Date: 2016-07-21 16:00+0200\n"
 "PO-Revision-Date: 2016-07-15 03:08+0000\n"
 "Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
-"Language-Team: Chinese (China) "
-"<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
+"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
+"master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -443,140 +443,152 @@ msgstr "无效对象"
 msgid "Error"
 msgstr "错误"
 
+#. translators: property name; short; used like "Name: value"
+#. translators: package's repository (header)
+#: src/info.cc:66 src/update.cc:798 src/search.cc:74 src/search.cc:378
+#: src/search.cc:512 src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "软件源"
+
+#. translators: property name; short; used like "Name: value"
+#. translators: Table coumn header
 #. translators: name (general header)
-#: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
+#: src/info.cc:68 src/info.cc:413 src/repos.cc:961 src/repos.cc:1094
 #: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
 msgstr "名称"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package version (header)
-#: src/info.cc:74 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/info.cc:70 src/search.cc:70 src/search.cc:377 src/search.cc:514
 #: src/search.cc:576
 msgid "Version"
 msgstr "版本"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/info.cc:72 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
 msgstr "架构"
 
-#: src/info.cc:76
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:74
 msgid "Vendor"
 msgstr "厂商"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
+#: src/info.cc:80 src/search.cc:233 src/utils/misc.cc:255
 #: src/utils/misc.cc:296
 msgid "Summary"
 msgstr "摘要"
 
+#. translators: property name; short; used like "Name: value"
 #: src/info.cc:82 src/Zypper.cc:5246
 msgid "Description"
 msgstr "描述"
 
-#: src/info.cc:136
+#: src/info.cc:152
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] "针对 '%2%' 将有 %1% 个匹配。"
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:168
+#: src/info.cc:184
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' 未找到。"
 
-#: src/info.cc:190
+#. TranslatorExplanation E.g. "Information for package zypper:"
+#: src/info.cc:204
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "%s %s 的信息："
 
-#. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-#: src/info.cc:206
-#, c-format, boost-format
-msgid "Info for type '%s' not implemented."
-msgstr "类型为 '%s' 的信息尚未实现。"
-
-#. translators: package's repository (header)
-#: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
-#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
-#: src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "软件源"
-
-#: src/info.cc:255
+#: src/info.cc:283
 msgid "Support Level"
 msgstr "支持级别"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:286
+msgid "Installed Size"
+msgstr "已安装大小"
+
+#. translators: property name; short; used like "Name: value"
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:258 src/info.cc:390 src/info.cc:479 src/Summary.cc:1207
+#: src/info.cc:288 src/info.cc:390 src/info.cc:521 src/Summary.cc:1207
 msgid "Installed"
 msgstr "已安装"
 
-#: src/info.cc:260 src/info.cc:311 src/utils/misc.cc:254 src/utils/misc.cc:295
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:290 src/info.cc:336 src/info.cc:524 src/utils/misc.cc:254
+#: src/utils/misc.cc:295
 msgid "Status"
 msgstr "状态"
 
-#: src/info.cc:265
+#: src/info.cc:294 src/info.cc:528
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "过时（已安装版本 %s）"
 
-#: src/info.cc:269
+#: src/info.cc:296 src/info.cc:530
 msgid "up-to-date"
 msgstr "最新"
 
-#: src/info.cc:273
+#: src/info.cc:299 src/info.cc:533
 msgid "not installed"
 msgstr "未安装"
 
-#: src/info.cc:275
-msgid "Installed Size"
-msgstr "已安装大小"
-
+#. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:314 src/update.cc:350 src/utils/misc.cc:251
+#: src/info.cc:338 src/update.cc:350 src/utils/misc.cc:251
 #: src/utils/misc.cc:292
 msgid "Category"
 msgstr "分类"
 
-#: src/info.cc:315 src/utils/misc.cc:252 src/utils/misc.cc:293
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:340 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
 msgstr "严重性"
 
-#: src/info.cc:316
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:342
 msgid "Created On"
 msgstr "创建于"
 
-#: src/info.cc:318
+#: src/info.cc:345
 msgid "Reboot Required"
 msgstr "需要重启"
 
-#: src/info.cc:319
+#: src/info.cc:346
 msgid "Package Manager Restart Required"
 msgstr "需要重启软件包管理器"
 
-#. print interactive flags the same style as list-patches
-#: src/info.cc:327 src/info.cc:330 src/utils/misc.cc:253 src/utils/misc.cc:294
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:353 src/info.cc:356 src/utils/misc.cc:253 src/utils/misc.cc:294
 msgid "Interactive"
 msgstr "交互的"
 
-#: src/info.cc:354 src/search.cc:318
-msgid "Recommended"
-msgstr "推荐"
-
-#: src/info.cc:356 src/search.cc:320
-msgid "Suggested"
-msgstr "建议"
-
-#: src/info.cc:391
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:392
 msgid "Visible to User"
 msgstr "对用户可见"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:406 src/info.cc:442
+msgid "Contents"
+msgstr "内容"
+
+#: src/info.cc:406
+msgid "(empty)"
+msgstr "（空）"
+
+#. translators: Table coumn header
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
 #.
@@ -584,72 +596,95 @@ msgstr "对用户可见"
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:412 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
+#. translators: Table coumn header
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
+#: src/info.cc:414 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "类型"
 
-#: src/info.cc:402 src/search.cc:379
+#. translators: Table coumn header
+#: src/info.cc:415 src/search.cc:379
 msgid "Dependency"
 msgstr "依赖关系"
 
-#: src/info.cc:417
-msgid "Contents"
-msgstr "内容"
+#: src/info.cc:420 src/info.cc:434
+#, fuzzy
+msgid "Required"
+msgstr "依赖"
 
-#: src/info.cc:419
-msgid "(empty)"
-msgstr "（空）"
+#: src/info.cc:425 src/info.cc:434 src/search.cc:318
+msgid "Recommended"
+msgstr "推荐"
 
-#: src/info.cc:472
-msgid "Flavor"
-msgstr "风格"
+#: src/info.cc:431 src/info.cc:434 src/search.cc:320
+msgid "Suggested"
+msgstr "建议"
 
-#: src/info.cc:477
-msgid "Short Name"
-msgstr "短名称"
-
-#: src/info.cc:481 src/search.cc:578
-msgid "Is Base"
-msgstr "是基础"
-
-#: src/info.cc:485
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:501
 msgid "End of Support"
 msgstr "支持终止"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
-msgid "undefined"
-msgstr "未定义"
+#: src/info.cc:506
+msgid "unknown"
+msgstr "未知"
 
-#: src/info.cc:488
-msgid "CPE Name"
-msgstr "CPE 名称"
+#. translators: %1% is an URL or Path pointing to some document
+#: src/info.cc:511
+#, boost-format
+msgid "See %1%"
+msgstr ""
 
-#: src/info.cc:495
-msgid "invalid CPE Name"
-msgstr "无效的 CPE 名称"
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:517
+msgid "Flavor"
+msgstr "风格"
 
-#: src/info.cc:498
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:519 src/search.cc:578
+msgid "Is Base"
+msgstr "是基础"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:540 src/info.cc:567
 msgid "Update Repositories"
 msgstr "更新软件源"
 
-#: src/info.cc:506
+#: src/info.cc:545
 msgid "Content Id"
 msgstr "内容 ID"
 
-#: src/info.cc:513
+#: src/info.cc:557
 msgid "Provided by enabled repository"
 msgstr "由已启用的软件源提供"
 
-#: src/info.cc:519
+#: src/info.cc:562
 msgid "Not provided by any enabled repository"
 msgstr "任何已启用的软件源均未提供"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:572
+msgid "CPE Name"
+msgstr "CPE 名称"
+
+#: src/info.cc:577
+msgid "undefined"
+msgstr "未定义"
+
+#: src/info.cc:579
+msgid "invalid CPE Name"
+msgstr "无效的 CPE 名称"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:582
+msgid "Short Name"
+msgstr "短名称"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -1224,7 +1259,8 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] "推荐以下 %d 个软件包，但不会安装，因为它们是不需要的（曾经手动移除过）："
+msgstr[0] ""
+"推荐以下 %d 个软件包，但不会安装，因为它们是不需要的（曾经手动移除过）："
 
 #: src/Summary.cc:921
 #, c-format, boost-format
@@ -1746,7 +1782,8 @@ msgstr "没有为 '%s' 定义 URI。"
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr "请添加一个或者更多的基础 URI 项 (baseurl=URI) 至 %s（针对软件源 '%s'）。"
+msgstr ""
+"请添加一个或者更多的基础 URI 项 (baseurl=URI) 至 %s（针对软件源 '%s'）。"
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
@@ -2776,7 +2813,8 @@ msgstr ""
 "\t--no-refresh\t\t不刷新软件源。\n"
 "\t--no-cd\t\t\t忽略 CD/DVD 软件源。\n"
 "\t--no-remote\t\t忽略远程软件源。\n"
-"\t--releasever\t\t设置全部 .repo 文件中 $releasever 的值（默认：发行版版本号）\n"
+"\t--releasever\t\t设置全部 .repo 文件中 $releasever 的值（默认：发行版版本"
+"号）\n"
 
 #: src/Zypper.cc:472
 msgid ""
@@ -3123,8 +3161,8 @@ msgid ""
 msgstr ""
 "install (in) [选项] <功能|rpm_文件_uri> ...\n"
 "\n"
-"安装具有指定功能的软件包或者指定位置的 RPM 文件。功能的定义为\"名称[.架构][操作符<版本>]\"，操作符为 <, <=, =, >=, > "
-"其中之一。\n"
+"安装具有指定功能的软件包或者指定位置的 RPM 文件。功能的定义为\"名称[.架构][操"
+"作符<版本>]\"，操作符为 <, <=, =, >=, > 其中之一。\n"
 "\n"
 "  命令选项：\n"
 "    --from <别名|#|URI>    从指定软件源选择软件包。\n"
@@ -3136,7 +3174,8 @@ msgstr ""
 "-f, --force                即使该软件包已安装仍强制安装（重装），\n"
 "                                降级或变更厂商或架构。\n"
 "    --oldpackage      允许使用旧软件包替换新软件包。\n"
-"                                若您正在做回滚那么该选项超有用。不像 --force \n"
+"                                若您正在做回滚那么该选项超有用。不像 --"
+"force \n"
 "                                那样，它不强行重装。\n"
 "    --replacefiles      即使新软件包会替换其它已安装软件包的文件\n"
 "                                也安装它们。默认是将文件冲突视为错误。\n"
@@ -3192,7 +3231,8 @@ msgid ""
 msgstr ""
 "remove (rm) [选项] <功能> ...\n"
 "\n"
-"移除具有指定功能的软件包。功能的定义为\"名称[.架构][操作符 <版本>]\"，操作符为 <, <=, =, >=, > 其中之一。\n"
+"移除具有指定功能的软件包。功能的定义为\"名称[.架构][操作符 <版本>]\"，操作符"
+"为 <, <=, =, >=, > 其中之一。\n"
 "\n"
 "  命令选项\n"
 "-r, --repo <别名|#|URI>       仅加载指定软件源。\n"
@@ -3485,7 +3525,8 @@ msgstr ""
 "addrepo (ar) [选项] <URI> <别名>\n"
 "addrepo (ar) [选项] <文件.repo>\n"
 "\n"
-"向系统中添加一个软件源。软件源可通过其 URI 指定也可从指定的 .repo 文件（甚至是远程）中读取。\n"
+"向系统中添加一个软件源。软件源可通过其 URI 指定也可从指定的 .repo 文件（甚至"
+"是远程）中读取。\n"
 "\n"
 "  命令选项：\n"
 "-r, --repo <文件名.repo>    指定要读取的 .repo 文件的另一种方法。\n"
@@ -6005,20 +6046,23 @@ msgstr "检索指定的 RPM 文件时出现问题"
 msgid "Please check whether the file is accessible."
 msgstr "请检查是否可访问文件。"
 
-#: src/utils/misc.cc:686
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "未知下载模式 '%s'。"
 
-#: src/utils/misc.cc:687
+#: src/utils/misc.cc:688
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "可用下载模式：%s"
 
-#: src/utils/misc.cc:701
+#: src/utils/misc.cc:702
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "选项 '%s' 覆盖了 '%s'。"
+
+#~ msgid "Info for type '%s' not implemented."
+#~ msgstr "类型为 '%s' 的信息尚未实现。"
 
 #~ msgid "Name: "
 #~ msgstr "名称： "
@@ -6161,9 +6205,6 @@ msgstr "选项 '%s' 覆盖了 '%s'。"
 
 #~ msgid "None"
 #~ msgstr "无"
-
-#~ msgid "Requires"
-#~ msgstr "依赖"
 
 #~ msgid "Provides"
 #~ msgstr "提供"

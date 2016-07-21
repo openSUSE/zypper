@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-23 10:04+0200\n"
+"POT-Creation-Date: 2016-07-21 16:00+0200\n"
 "PO-Revision-Date: 2016-07-13 09:03+0000\n"
 "Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
-"Language-Team: Japanese "
-"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
+"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
+">\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,7 +89,9 @@ msgstr ""
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "受け入れようとしているファイル '%s' (リポジトリ '%s') は不明な鍵 '%s' で署名されています。"
+msgstr ""
+"受け入れようとしているファイル '%s' (リポジトリ '%s') は不明な鍵 '%s' で署名"
+"されています。"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -102,7 +104,9 @@ msgstr "ファイル '%s' は不明なキー '%s' で署名されています。
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "ファイル '%s' (リポジトリ '%s') は不明な鍵 '%s' で署名されています。続行しますか?"
+msgstr ""
+"ファイル '%s' (リポジトリ '%s') は不明な鍵 '%s' で署名されています。続行しま"
+"すか?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
@@ -119,7 +123,9 @@ msgstr "新しいリポジトリまたはパッケージの署名鍵を受信し
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr "鍵を拒否しますか(R)? 一時的に信頼しますか(T)?それとも今後ずっと信頼しますか(A)?"
+msgstr ""
+"鍵を拒否しますか(R)? 一時的に信頼しますか(T)?それとも今後ずっと信頼しますか"
+"(A)?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -159,11 +165,14 @@ msgstr "ファイル '%s' に対する署名検証が失敗しましたが、無
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "ファイル '%s' (リポジトリ '%s') に対する署名検証が失敗しましたが、無視しています!"
+msgstr ""
+"ファイル '%s' (リポジトリ '%s') に対する署名検証が失敗しましたが、無視してい"
+"ます!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "ファイルに対して悪意のある変更が行われていないか、もう一度ご確認ください！"
+msgstr ""
+"ファイルに対して悪意のある変更が行われていないか、もう一度ご確認ください！"
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
@@ -235,7 +244,8 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"チェックサム '%1%..' のファイルが不正に改変されておらず、間違いのないことが分かっている場合で、\n"
+"チェックサム '%1%..' のファイルが不正に改変されておらず、間違いのないことが分"
+"かっている場合で、\n"
 "この操作を続行したい場合は、チェックサムの冒頭4文字を入力し、自己責任で\n"
 "保護を解除してください。何も入力しないと、対象のファイルは廃棄されます。\n"
 
@@ -315,8 +325,9 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
-"ファイルの競合の確認では、インストールされていないパッケージを事前にダウンロードしてファイルリストを入手する必要があります。詳細については、"
-"zypperのマニュアルのオプション '%1%' を参照してください。"
+"ファイルの競合の確認では、インストールされていないパッケージを事前にダウン"
+"ロードしてファイルリストを入手する必要があります。詳細については、zypperのマ"
+"ニュアルのオプション '%1%' を参照してください。"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
@@ -349,17 +360,21 @@ msgid ""
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
 msgstr ""
-"ファイルの競合は、2つのパッケージが、同じ名前を持つ異なる内容の複数のファイルをインストールしようとすると発生します。続行すると、競合するファイルは置き換"
+"ファイルの競合は、2つのパッケージが、同じ名前を持つ異なる内容の複数のファイル"
+"をインストールしようとすると発生します。続行すると、競合するファイルは置き換"
 "えられ、以前の内容は失われます。"
 
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
-msgstr "下記の問い合わせは、削除しようとしているオブジェクトをロックしてしまいます:"
+msgstr ""
+"下記の問い合わせは、削除しようとしているオブジェクトをロックしてしまいます:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr "下記の問い合わせは、ロックを解除しようとしているオブジェクトをロックしてしまいます:"
+msgstr ""
+"下記の問い合わせは、ロックを解除しようとしているオブジェクトをロックしてしま"
+"います:"
 
 # power-off message
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
@@ -447,140 +462,152 @@ msgstr "無効なオブジェクト"
 msgid "Error"
 msgstr "エラー"
 
+#. translators: property name; short; used like "Name: value"
+#. translators: package's repository (header)
+#: src/info.cc:66 src/update.cc:798 src/search.cc:74 src/search.cc:378
+#: src/search.cc:512 src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "リポジトリ"
+
+#. translators: property name; short; used like "Name: value"
+#. translators: Table coumn header
 #. translators: name (general header)
-#: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
+#: src/info.cc:68 src/info.cc:413 src/repos.cc:961 src/repos.cc:1094
 #: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
 msgstr "名前"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package version (header)
-#: src/info.cc:74 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/info.cc:70 src/search.cc:70 src/search.cc:377 src/search.cc:514
 #: src/search.cc:576
 msgid "Version"
 msgstr "バージョン"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/info.cc:72 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
 msgstr "アーキテクチャ"
 
-#: src/info.cc:76
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:74
 msgid "Vendor"
 msgstr "ベンダ"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
+#: src/info.cc:80 src/search.cc:233 src/utils/misc.cc:255
 #: src/utils/misc.cc:296
 msgid "Summary"
 msgstr "概要"
 
+#. translators: property name; short; used like "Name: value"
 #: src/info.cc:82 src/Zypper.cc:5246
 msgid "Description"
 msgstr "説明"
 
-#: src/info.cc:136
+#: src/info.cc:152
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] "'%2%' に対しては %1% 個の該当があるものと思われます。"
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:168
+#: src/info.cc:184
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' が見つかりません。"
 
-#: src/info.cc:190
+#. TranslatorExplanation E.g. "Information for package zypper:"
+#: src/info.cc:204
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "%s %s に関する情報:"
 
-#. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-#: src/info.cc:206
-#, c-format, boost-format
-msgid "Info for type '%s' not implemented."
-msgstr "種類 '%s' に関する情報はまだ提供されていません。"
-
-#. translators: package's repository (header)
-#: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
-#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
-#: src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "リポジトリ"
-
-#: src/info.cc:255
+#: src/info.cc:283
 msgid "Support Level"
 msgstr "サポートレベル"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:286
+msgid "Installed Size"
+msgstr "インストール後のサイズ"
+
+#. translators: property name; short; used like "Name: value"
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:258 src/info.cc:390 src/info.cc:479 src/Summary.cc:1207
+#: src/info.cc:288 src/info.cc:390 src/info.cc:521 src/Summary.cc:1207
 msgid "Installed"
 msgstr "インストール済み"
 
-#: src/info.cc:260 src/info.cc:311 src/utils/misc.cc:254 src/utils/misc.cc:295
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:290 src/info.cc:336 src/info.cc:524 src/utils/misc.cc:254
+#: src/utils/misc.cc:295
 msgid "Status"
 msgstr "状態"
 
-#: src/info.cc:265
+#: src/info.cc:294 src/info.cc:528
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "期限切れ (バージョン %s がインストールされています)"
 
-#: src/info.cc:269
+#: src/info.cc:296 src/info.cc:530
 msgid "up-to-date"
 msgstr "最新"
 
-#: src/info.cc:273
+#: src/info.cc:299 src/info.cc:533
 msgid "not installed"
 msgstr "インストールされていません"
 
-#: src/info.cc:275
-msgid "Installed Size"
-msgstr "インストール後のサイズ"
-
+#. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:314 src/update.cc:350 src/utils/misc.cc:251
+#: src/info.cc:338 src/update.cc:350 src/utils/misc.cc:251
 #: src/utils/misc.cc:292
 msgid "Category"
 msgstr "カテゴリ"
 
-#: src/info.cc:315 src/utils/misc.cc:252 src/utils/misc.cc:293
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:340 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
 msgstr "重要度"
 
-#: src/info.cc:316
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:342
 msgid "Created On"
 msgstr "作成日"
 
-#: src/info.cc:318
+#: src/info.cc:345
 msgid "Reboot Required"
 msgstr "システム再起動"
 
-#: src/info.cc:319
+#: src/info.cc:346
 msgid "Package Manager Restart Required"
 msgstr "パッケージ管理ツールの再起動が必要です"
 
-#. print interactive flags the same style as list-patches
-#: src/info.cc:327 src/info.cc:330 src/utils/misc.cc:253 src/utils/misc.cc:294
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:353 src/info.cc:356 src/utils/misc.cc:253 src/utils/misc.cc:294
 msgid "Interactive"
 msgstr "対話性"
 
-#: src/info.cc:354 src/search.cc:318
-msgid "Recommended"
-msgstr "推奨"
-
-#: src/info.cc:356 src/search.cc:320
-msgid "Suggested"
-msgstr "提案"
-
-#: src/info.cc:391
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:392
 msgid "Visible to User"
 msgstr "ユーザへの表示"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:406 src/info.cc:442
+msgid "Contents"
+msgstr "内容"
+
+#: src/info.cc:406
+msgid "(empty)"
+msgstr "(何もありません)"
+
+#. translators: Table coumn header
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
 #.
@@ -588,72 +615,95 @@ msgstr "ユーザへの表示"
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:412 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
+#. translators: Table coumn header
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
+#: src/info.cc:414 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "種類"
 
-#: src/info.cc:402 src/search.cc:379
+#. translators: Table coumn header
+#: src/info.cc:415 src/search.cc:379
 msgid "Dependency"
 msgstr "依存関係"
 
-#: src/info.cc:417
-msgid "Contents"
-msgstr "内容"
+#: src/info.cc:420 src/info.cc:434
+#, fuzzy
+msgid "Required"
+msgstr "システム再起動"
 
-#: src/info.cc:419
-msgid "(empty)"
-msgstr "(何もありません)"
+#: src/info.cc:425 src/info.cc:434 src/search.cc:318
+msgid "Recommended"
+msgstr "推奨"
 
-#: src/info.cc:472
-msgid "Flavor"
-msgstr "フレーバー"
+#: src/info.cc:431 src/info.cc:434 src/search.cc:320
+msgid "Suggested"
+msgstr "提案"
 
-#: src/info.cc:477
-msgid "Short Name"
-msgstr "短縮名"
-
-#: src/info.cc:481 src/search.cc:578
-msgid "Is Base"
-msgstr "ベース"
-
-#: src/info.cc:485
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:501
 msgid "End of Support"
 msgstr "サポート終了"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
-msgid "undefined"
-msgstr "未定義"
+#: src/info.cc:506
+msgid "unknown"
+msgstr "不明"
 
-#: src/info.cc:488
-msgid "CPE Name"
-msgstr "CPE名"
+#. translators: %1% is an URL or Path pointing to some document
+#: src/info.cc:511
+#, boost-format
+msgid "See %1%"
+msgstr ""
 
-#: src/info.cc:495
-msgid "invalid CPE Name"
-msgstr "CPE名が正しくありません"
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:517
+msgid "Flavor"
+msgstr "フレーバー"
 
-#: src/info.cc:498
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:519 src/search.cc:578
+msgid "Is Base"
+msgstr "ベース"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:540 src/info.cc:567
 msgid "Update Repositories"
 msgstr "更新リポジトリ"
 
-#: src/info.cc:506
+#: src/info.cc:545
 msgid "Content Id"
 msgstr "コンテンツID"
 
-#: src/info.cc:513
+#: src/info.cc:557
 msgid "Provided by enabled repository"
 msgstr "有効なリポジトリによって提供されています"
 
-#: src/info.cc:519
+#: src/info.cc:562
 msgid "Not provided by any enabled repository"
 msgstr "有効なリポジトリによって提供されていません"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:572
+msgid "CPE Name"
+msgstr "CPE名"
+
+#: src/info.cc:577
+msgid "undefined"
+msgstr "未定義"
+
+#: src/info.cc:579
+msgid "invalid CPE Name"
+msgstr "CPE名が正しくありません"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:582
+msgid "Short Name"
+msgstr "短縮名"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -893,14 +943,18 @@ msgstr "'%s' に対するアップデート候補がありません。"
 msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
-msgstr "アップデート候補 '%s' が '%s' に対して存在しますが、指定したバージョン、アーキテクチャ、またはリポジトリに一致しません。"
+msgstr ""
+"アップデート候補 '%s' が '%s' に対して存在しますが、指定したバージョン、アー"
+"キテクチャ、またはリポジトリに一致しません。"
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
 "Use '%s' to install this candidate."
-msgstr "'%s' に対する更新候補がありますが、これは異なるベンダからのものです。 '%s' を使用すると、この候補をインストールできます。"
+msgstr ""
+"'%s' に対する更新候補がありますが、これは異なるベンダからのものです。 '%s' を"
+"使用すると、この候補をインストールできます。"
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -916,7 +970,9 @@ msgstr ""
 msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
-msgstr "'%s' に対する更新候補がありますが、これはロックされています。 '%s' を使用するとロックを解除することができます。"
+msgstr ""
+"'%s' に対する更新候補がありますが、これはロックされています。 '%s' を使用する"
+"とロックを解除することができます。"
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -932,7 +988,9 @@ msgstr ""
 msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
-msgstr "選択したパッケージ '%s' (リポジトリ '%s' から選択) は、インストール済みのバージョンよりも古いものになっています。"
+msgstr ""
+"選択したパッケージ '%s' (リポジトリ '%s' から選択) は、インストール済みのバー"
+"ジョンよりも古いものになっています。"
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
@@ -962,7 +1020,9 @@ msgstr ""
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
-msgstr "パッチ '%s' はロックされています。インストールを行なうには '%s' を、ロックを解除するには '%s' を使用してください。"
+msgstr ""
+"パッチ '%s' はロックされています。インストールを行なうには '%s' を、ロックを"
+"解除するには '%s' を使用してください。"
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
@@ -997,7 +1057,8 @@ msgstr "削除する '%s' を選択します。"
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr "'%s' はロックされています。ロックを解除するには '%s' をお使いください。"
+msgstr ""
+"'%s' はロックされています。ロックを解除するには '%s' をお使いください。"
 
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
@@ -1681,7 +1742,9 @@ msgstr "a/r/i/u"
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
-msgstr "%s にアクセスするには認証が必要です。%s からの証明書を読むには、rootである必要があります。"
+msgstr ""
+"%s にアクセスするには認証が必要です。%s からの証明書を読むには、rootである必"
+"要があります。"
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -1779,7 +1842,9 @@ msgstr "'%s' に対して何も URI が設定されていません。"
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr "%s (リポジトリ '%s')に (baseurl=URI) の形式で1つ以上のベースURIエントリを設定してください。"
+msgstr ""
+"%s (リポジトリ '%s')に (baseurl=URI) の形式で1つ以上のベースURIエントリを設定"
+"してください。"
 
 #: src/repos.cc:327
 msgid "No alias defined for this repository."
@@ -1820,9 +1885,10 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"この問題はリポジトリ内に無効なメタデータが含まれているか、メタデータ解析プログラムにバグがある場合に\n"
-"発生することがあります。後者をお疑いの場合は、https://ja.opensuse.org/SDB:Zypperのトラブルシューティングにある手順でバグ"
-"報告をお願いいたします。"
+"この問題はリポジトリ内に無効なメタデータが含まれているか、メタデータ解析プロ"
+"グラムにバグがある場合に\n"
+"発生することがあります。後者をお疑いの場合は、https://ja.opensuse.org/SDB:"
+"Zypperのトラブルシューティングにある手順でバグ報告をお願いいたします。"
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -1880,8 +1946,8 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
-"リポジトリ '%s' に対するメタデータキャッシュの構築が必要です。 root ユーザで 'zypper refresh' "
-"コマンドを実行すると行うことができます。"
+"リポジトリ '%s' に対するメタデータキャッシュの構築が必要です。 root ユーザで "
+"'zypper refresh' コマンドを実行すると行うことができます。"
 
 #: src/repos.cc:820
 #, c-format, boost-format
@@ -1961,7 +2027,8 @@ msgstr "リポジトリが定義されていません。"
 
 #: src/repos.cc:1070
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "「zypper addrepo」コマンドを使用して、リポジトリを1つ以上追加してください。"
+msgstr ""
+"「zypper addrepo」コマンドを使用して、リポジトリを1つ以上追加してください。"
 
 #: src/repos.cc:1103
 msgid "Auto-refresh"
@@ -2081,7 +2148,9 @@ msgstr "'%s' のパッケージのキャッシュを削除しています。"
 #: src/repos.cc:1468
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "エラーが発生したため、リポジトリ '%s' のキャッシュ削除を行うことができませんでした。"
+msgstr ""
+"エラーが発生したため、リポジトリ '%s' のキャッシュ削除を行うことができません"
+"でした。"
 
 #: src/repos.cc:1479
 msgid "Cleaning installed packages cache."
@@ -2089,11 +2158,15 @@ msgstr "インストール済みのパッケージキャッシュを削除して
 
 #: src/repos.cc:1488
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "エラーが発生したため、インストール済みパッケージのキャッシュ削除を行うことができませんでした。"
+msgstr ""
+"エラーが発生したため、インストール済みパッケージのキャッシュ削除を行うことが"
+"できませんでした。"
 
 #: src/repos.cc:1507
 msgid "Could not clean the repositories because of errors."
-msgstr "エラーが発生したため、リポジトリのキャッシュ削除を行うことができませんでした。"
+msgstr ""
+"エラーが発生したため、リポジトリのキャッシュ削除を行うことができませんでし"
+"た。"
 
 #: src/repos.cc:1513
 msgid "Some of the repositories have not been cleaned up because of an error."
@@ -2157,7 +2230,9 @@ msgstr "リポジトリを追加する際に未知の問題:"
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
-msgstr "リポジトリ '%1%' は、 GPGの検証を無効化するように設定されています。パッケージの正当性と作成元は検証されません。"
+msgstr ""
+"リポジトリ '%1%' は、 GPGの検証を無効化するように設定されています。パッケージ"
+"の正当性と作成元は検証されません。"
 
 #: src/repos.cc:1622
 #, c-format, boost-format
@@ -2211,7 +2286,8 @@ msgstr "指定した URI にあるファイルを読む際に問題が発生し�
 
 #: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "ファイル内に別名定義のないリポジトリが見つかりました。スキップしています。"
+msgstr ""
+"ファイル内に別名定義のないリポジトリが見つかりました。スキップしています。"
 
 #: src/repos.cc:1779
 #, c-format, boost-format
@@ -2443,14 +2519,16 @@ msgstr "サービス '%s' の名前を '%s' に設定しました。"
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "リポジトリ「%s」を有効化されているサービスのリポジトリ「%s」に追加しました"
+msgstr[0] ""
+"リポジトリ「%s」を有効化されているサービスのリポジトリ「%s」に追加しました"
 
 #: src/repos.cc:2947
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "リポジトリ「%s」を無効化されているサービスのリポジトリ「%s」に追加しました"
+msgstr[0] ""
+"リポジトリ「%s」を無効化されているサービスのリポジトリ「%s」に追加しました"
 
 #: src/repos.cc:2954
 #, c-format, boost-format
@@ -2458,7 +2536,8 @@ msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "リポジトリ「%s」を有効化されているサービスのリポジトリ「%s」から削除しました"
+msgstr[0] ""
+"リポジトリ「%s」を有効化されているサービスのリポジトリ「%s」から削除しました"
 
 #: src/repos.cc:2961
 #, c-format, boost-format
@@ -2467,7 +2546,8 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
-msgstr[0] "リポジトリ「%s」を無効化されているサービスのリポジトリ「%s」から削除しました"
+msgstr[0] ""
+"リポジトリ「%s」を無効化されているサービスのリポジトリ「%s」から削除しました"
 
 #: src/repos.cc:2970
 #, c-format, boost-format
@@ -2540,7 +2620,9 @@ msgstr "インストール済みのパッケージを読み込む際にエラー
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
-msgstr "引数が設定された類似オプションが指定されているため、引数のない %s を無視しています。"
+msgstr ""
+"引数が設定された類似オプションが指定されているため、引数のない %s を無視して"
+"います。"
 
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:280
@@ -2668,7 +2750,9 @@ msgstr "以下のパッチの説明に該当するものが見つかりました
 #: src/update.cc:1057
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
-msgstr "Bugzilla発信番号 %s に対する修正は見つからなかったか、もしくは不要なものです。"
+msgstr ""
+"Bugzilla発信番号 %s に対する修正は見つからなかったか、もしくは不要なもので"
+"す。"
 
 #: src/update.cc:1059
 #, c-format, boost-format
@@ -2709,8 +2793,8 @@ msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
-"PackageKitがzypperをブロックしています。更新アプレットやその他のPackageKitを使用するソフトウエア管理アプリケーションが動作してい"
-"るものと思われます。"
+"PackageKitがzypperをブロックしています。更新アプレットやその他のPackageKitを"
+"使用するソフトウエア管理アプリケーションが動作しているものと思われます。"
 
 #: src/Zypper.cc:109
 msgid "Tell PackageKit to quit?"
@@ -2735,7 +2819,9 @@ msgstr ""
 #: src/Zypper.cc:190
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
-msgstr "古い形式のコマンドラインオプション %1% が指定されています。%2% をお使いください。"
+msgstr ""
+"古い形式のコマンドラインオプション %1% が指定されています。%2% をお使いくださ"
+"い。"
 
 #: src/Zypper.cc:269
 msgid "Command options:"
@@ -2780,14 +2866,17 @@ msgstr ""
 "\t--help, -h\t\tヘルプ\n"
 "\t--version, -V\t\tバージョン情報を表示\n"
 "\t--promptids\t\tzypperのユーザプロンプト一覧を出力する\n"
-"\t--config, -c <file>\t既定の設定ファイルの代わりに指定した設定ファイルを使用\n"
-"\t--userdata <string>\t履歴やプラグインで使用されるユーザ定義のトランザクションIDの指定\n"
+"\t--config, -c <file>\t既定の設定ファイルの代わりに指定した設定ファイルを使"
+"用\n"
+"\t--userdata <string>\t履歴やプラグインで使用されるユーザ定義のトランザクショ"
+"ンIDの指定\n"
 "\t--quiet, -q\t\tエラーメッセージを除く出力を抑止\n"
 "\t--verbose, -v\t\tより詳細な出力\n"
 "\t--[no-]color\t\ttty側で対応している場合、色を使用するかどうか\n"
 "\t--no-abbrev, -A\t\t表内でのテキストの省略を行なわない\n"
 "\t--table-style, -s\t表形式 (整数)\n"
-"\t--non-interactive, -n\t質問や確認を行なわず、全ての質問に既定の回答を行なったものとして扱う\n"
+"\t--non-interactive, -n\t質問や確認を行なわず、全ての質問に既定の回答を行なっ"
+"たものとして扱う\n"
 "\t--non-interactive-include-reboot-patches\n"
 "\t\t\t\trebootSuggested (再起動を提案する) フラグが設定された修正に対して、\n"
 "\t\t\t\tこれらを対話的な修正として扱わない\n"
@@ -2805,7 +2894,8 @@ msgid ""
 msgstr ""
 "\t--reposd-dir, -D <dir>\t代替レポジトリ定義ファイルディレクトリを使用する\n"
 "\t--cache-dir, -C <dir>\tすべてのキャッシュに代替ディレクトリを使用する\n"
-"\t--raw-cache-dir <dir>\t代替未加工メタデータキャッシュディレクトリを使用する\n"
+"\t--raw-cache-dir <dir>\t代替未加工メタデータキャッシュディレクトリを使用す"
+"る\n"
 "\t--solv-cache-dir <dir>\t代替解決ファイルキャッシュディレクトリを使用する\n"
 "\t--pkg-cache-dir <dir>\t代替パッケージキャッシュディレクトリを使用する\n"
 
@@ -2829,16 +2919,19 @@ msgid ""
 msgstr ""
 "     リポジトリオプション:\n"
 "\t--no-gpg-checks\t\tGPGによる確認の失敗を無視して続行する\n"
-"\t--gpg-auto-import-keys\t新しいリポジトリの署名鍵を自動的に信用し、インポートする\n"
+"\t--gpg-auto-import-keys\t新しいリポジトリの署名鍵を自動的に信用し、インポー"
+"トする\n"
 "\t--plus-repo, -p <URI>\t追加のリポジトリを使用する\n"
-"\t--plus-content <tag>\t特定のキーワードを含む無効化されたリポジトリを、追加で使用する\n"
-"\t\t\t\tたとえば '--plus-content debug' のように指定すると、デバッグ用のリポジトリを有効化することができます。\n"
+"\t--plus-content <tag>\t特定のキーワードを含む無効化されたリポジトリを、追加"
+"で使用する\n"
+"\t\t\t\tたとえば '--plus-content debug' のように指定すると、デバッグ用のリポ"
+"ジトリを有効化することができます。\n"
 "\t--disable-repositories\tリポジトリからメタデータを読み込まない\n"
 "\t--no-refresh\tリポジトリの更新を行なわない\n"
 "\t--no-cd\t\t\tCD/DVDのリポジトリを無視する\n"
 "\t--no-remote\t\tリモートのリポジトリを無視する\n"
-"\t--releasever\t\tすべての.repoファイル内で$releaseverの値を設定する (既定値: ディストリビューションのバージョン)"
-"\n"
+"\t--releasever\t\tすべての.repoファイル内で$releaseverの値を設定する (既定"
+"値: ディストリビューションのバージョン)\n"
 
 #: src/Zypper.cc:472
 msgid ""
@@ -2914,8 +3007,10 @@ msgstr ""
 "\tinstall, in\t\tパッケージをインストールします。\n"
 "\tremove, rm\t\tパッケージを削除します。\n"
 "\tverify, ve\t\tパッケージの依存関係を検証します。\n"
-"\tsource-install, si\t構築の際に依存するものを含めてソースパッケージをインストールします。\n"
-"\tinstall-new-recommends, inr インストール済みのパッケージから判断される新規推奨パッケージをインストールします。\n"
+"\tsource-install, si\t構築の際に依存するものを含めてソースパッケージをインス"
+"トールします。\n"
+"\tinstall-new-recommends, inr インストール済みのパッケージから判断される新規"
+"推奨パッケージをインストールします。\n"
 
 #: src/Zypper.cc:513
 msgid ""
@@ -2959,7 +3054,8 @@ msgstr ""
 "\tpackages, pa\t\t利用可能なパッケージをすべてリストします。\n"
 "\tpatterns, pt\t\t利用可能なパターンをすべてリストします。\n"
 "\tproducts, pd\t\t利用可能な製品をすべてリストします。\n"
-"\twhat-provides, wp\t指定した能力設定が提供するパッケージをすべてリストします。\n"
+"\twhat-provides, wp\t指定した能力設定が提供するパッケージをすべてリストしま"
+"す。\n"
 
 #: src/Zypper.cc:537
 msgid ""
@@ -2989,11 +3085,14 @@ msgid ""
 msgstr ""
 "     その他のコマンド:\n"
 "\tversioncmp, vcmp\t2つのバージョン文字列を比較します。\n"
-"\ttargetos, tos\t\tターゲットのオペレーティングシステムのID文字列を表示します。\n"
-"\tlicenses\t\tインストール済みのパッケージに対し、ライセンスと使用許諾契約を\t\t\t\t表示します。\n"
-"\tdownload\t\tコマンドラインで指定したRPMを、ローカルのディレクトリにダウンロードします。\n"
-"\tsource-download\t\tすべてのインストール済みパッケージに対し、ソースRPMを\t\t\t\t"
-"ローカルのディレクトリにダウンロードします。\n"
+"\ttargetos, tos\t\tターゲットのオペレーティングシステムのID文字列を表示しま"
+"す。\n"
+"\tlicenses\t\tインストール済みのパッケージに対し、ライセンスと使用許諾契約を"
+"\t\t\t\t表示します。\n"
+"\tdownload\t\tコマンドラインで指定したRPMを、ローカルのディレクトリにダウン"
+"ロードします。\n"
+"\tsource-download\t\tすべてのインストール済みパッケージに対し、ソースRPMを\t"
+"\t\t\tローカルのディレクトリにダウンロードします。\n"
 
 #: src/Zypper.cc:554
 msgid ""
@@ -3090,11 +3189,14 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "/etc/products.d/baseproductのSymlinkに参照先がないか、見つかりません。\n"
-"このリンクは、/etc/products.d内にあるコア製品の.prodファイルを指定する必要があります。\n"
+"このリンクは、/etc/products.d内にあるコア製品の.prodファイルを指定する必要が"
+"あります。\n"
 
 #: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr "リポジトリは無効化されています。インストール済みのパッケージデータベースのみを使用します。"
+msgstr ""
+"リポジトリは無効化されています。インストール済みのパッケージデータベースのみ"
+"を使用します。"
 
 #: src/Zypper.cc:1056
 msgid "Autorefresh disabled."
@@ -3189,43 +3291,58 @@ msgid ""
 msgstr ""
 "install (in) [オプション] <能力設定|RPMファイルのURI> ...\n"
 "\n"
-"指定した能力設定を解決してパッケージのインストールを行うか、もしくは指定した場所から\n"
-"RPMパッケージファイルをインストールします。能力設定はNAME[.ARCH][OP<VERSION>]の形式で記述します。\n"
+"指定した能力設定を解決してパッケージのインストールを行うか、もしくは指定した"
+"場所から\n"
+"RPMパッケージファイルをインストールします。能力設定はNAME[.ARCH][OP<VERSION>]"
+"の形式で記述します。\n"
 "「OP」は<、<=、=、>=、>のうちのいずれかを指定します。\n"
 "\n"
 "  コマンドオプション:\n"
-"    --from <alias|#|URI>    指定したリポジトリからのパッケージを選択します。\n"
+"    --from <alias|#|URI>    指定したリポジトリからのパッケージを選択しま"
+"す。\n"
 "-r, --repo <alias|#|URI>    指定したリポジトリのみを読み込みます。\n"
 "-t, --type <type>           パッケージの種類(%s)。\n"
 "                            デフォルト:%s\n"
-"-n, --name                  能力設定ではなく、単に名前でパッケージを指定する\n"
+"-n, --name                  能力設定ではなく、単に名前でパッケージを指定す"
+"る\n"
 "-C, --capability            能力設定でパッケージを選択します。\n"
-"-f, --force                 既にインストールされている場合であっても、インストールします(再インストール)。\n"
-"                            ダウングレードやベンダの変更、アーキテクチャの変更などが発生する場合があります。\n"
-"    --oldpackage            新しいものを古いもので置き換えることができるように\n"
-"                            します。古いバージョンに戻す場合に有用です。--force\n"
-"                            とは異なり、再インストールを強制することはありません。\n"
+"-f, --force                 既にインストールされている場合であっても、インス"
+"トールします(再インストール)。\n"
+"                            ダウングレードやベンダの変更、アーキテクチャの変"
+"更などが発生する場合があります。\n"
+"    --oldpackage            新しいものを古いもので置き換えることができるよう"
+"に\n"
+"                            します。古いバージョンに戻す場合に有用です。--"
+"force\n"
+"                            とは異なり、再インストールを強制することはありま"
+"せん。\n"
 "    --replacefiles          既にインストール済みの他のファイルを置き換える\n"
-"                            "
-"ことになる場合でも、パッケージをインストールします。デフォルトではファイルの衝突をエラーとして扱います。\n"
-"                            --download-as-neededを指定するとファイルの衝突の確認が無効になります。\n"
+"                            ことになる場合でも、パッケージをインストールしま"
+"す。デフォルトではファイルの衝突をエラーとして扱います。\n"
+"                            --download-as-neededを指定するとファイルの衝突の"
+"確認が無効になります。\n"
 "-l, --auto-agree-with-licenses\n"
 "                            サードパーティのライセンス確認プロンプトで、\n"
 "                            自動的に「yes」と回答します。\n"
 "                            詳細は「man zypper」を参照してください。\n"
 "    --debug-solver          デバッグ用に解決器のテストケースを作成します。\n"
-"    --no-recommends         推奨パッケージについてはインストールせず、必要なもののみをインストールします。\n"
-"    --recommends            必要なパッケージに加え、推奨パッケージについても\n"
+"    --no-recommends         推奨パッケージについてはインストールせず、必要な"
+"もののみをインストールします。\n"
+"    --recommends            必要なパッケージに加え、推奨パッケージについて"
+"も\n"
 "                            インストールします。\n"
 "-R, --no-force-resolution   解決器に対して解決方法を見つけるよう強制せず、\n"
 "                            尋ねるようにします。\n"
 "    --force-resolution      解決器に対して解決方法を見つけるよう強制します\n"
 "                            (より積極的な動作)。\n"
-"-D, --dry-run               インストールをテストするだけで実際には何もしません。\n"
+"-D, --dry-run               インストールをテストするだけで実際には何もしませ"
+"ん。\n"
 "    --details               インストールの詳細なサマリを表示します。\n"
-"    --download              ダウンロード - インストールモードを指定します。利用可能なモード:\n"
+"    --download              ダウンロード - インストールモードを指定します。利"
+"用可能なモード:\n"
 "                            %s\n"
-"-d, --download-only         パッケージをダウンロードするだけでインストールは行いません。\n"
+"-d, --download-only         パッケージをダウンロードするだけでインストールは"
+"行いません。\n"
 
 #: src/Zypper.cc:1495 src/Zypper.cc:1550 src/Zypper.cc:1631 src/Zypper.cc:2178
 #: src/Zypper.cc:2251
@@ -3274,7 +3391,8 @@ msgstr ""
 "-r, --repo <alias|#|URI>    指定したリポジトリのみをロードします。\n"
 "-t, --type <type>           パッケージの種類(%s)\n"
 "                            デフォルト:%s\n"
-"-n, --name                  能力設定ではなく単に名前でパッケージを指定します。\n"
+"-n, --name                  能力設定ではなく単に名前でパッケージを指定しま"
+"す。\n"
 "-C, --capability            能力設定で選択します。\n"
 "    --debug-solver          デバッグ用に解決器のテストケースを作成します。\n"
 "-R, --no-force-resolution   解決器に対して解決方法を見つけるよう強制せず、\n"
@@ -3301,13 +3419,18 @@ msgid ""
 msgstr ""
 "source-install (si) [options] <name> ...\n"
 "\n"
-"指定したソースパッケージと、ビルドの際に依存するパッケージのソースコードをインストールします。\n"
+"指定したソースパッケージと、ビルドの際に依存するパッケージのソースコードをイ"
+"ンストールします。\n"
 "\n"
 "  コマンドオプション:\n"
-"-d, --build-deps-only    指定したパッケージのうちビルドの際に依存するもののソースコードのみをインストールします。\n"
-"-D, --no-build-deps      ビルドの際に依存するパッケージのソースコードをインストールしません。\n"
-"-r, --repo <alias|#|URI> 指定したリポジトリからのパッケージのみをインストールします。\n"
-"    --download-only      パッケージをダウンロードするだけでインストールは行いません。\n"
+"-d, --build-deps-only    指定したパッケージのうちビルドの際に依存するものの"
+"ソースコードのみをインストールします。\n"
+"-D, --no-build-deps      ビルドの際に依存するパッケージのソースコードをインス"
+"トールしません。\n"
+"-r, --repo <alias|#|URI> 指定したリポジトリからのパッケージのみをインストール"
+"します。\n"
+"    --download-only      パッケージをダウンロードするだけでインストールは行い"
+"ません。\n"
 
 #: src/Zypper.cc:1579
 #, boost-format
@@ -3344,19 +3467,23 @@ msgid ""
 msgstr ""
 "verify (ve) [options]\n"
 "\n"
-"インストール済みのパッケージについて、依存関係が満たされているかどうかを確認し、依存関係の問題を修復するためにインストールまたは削除を提案します。\n"
+"インストール済みのパッケージについて、依存関係が満たされているかどうかを確認"
+"し、依存関係の問題を修復するためにインストールまたは削除を提案します。\n"
 "\n"
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI>     指定したリポジトリのみを読み込みます。\n"
 "    --no-recommends         推奨パッケージについてはインストールせず、\n"
 "                            必要なもののみをインストールします。\n"
-"    --recommends            必要なパッケージに加え、推奨パッケージについても\n"
+"    --recommends            必要なパッケージに加え、推奨パッケージについて"
+"も\n"
 "                            インストールします。\n"
 "-D, --dry-run               修復をテストするだけで実際には何もしません。\n"
 "    --details               インストールの詳細なサマリを表示します。\n"
-"    --download              ダウンロード - インストールモードを指定します。利用可能なモード:\n"
+"    --download              ダウンロード - インストールモードを指定します。利"
+"用可能なモード:\n"
 "                            %s\n"
-"-d, --download-only         パッケージをダウンロードするだけでインストールは行いません。\n"
+"-d, --download-only         パッケージをダウンロードするだけでインストールは"
+"行いません。\n"
 
 #: src/Zypper.cc:1655
 #, c-format, boost-format
@@ -3378,16 +3505,20 @@ msgid ""
 msgstr ""
 "install-new-recommends (inr) [options]\n"
 "\n"
-"すでにインストールされたパッケージから判断される新規の推奨パッケージをインストールします。この操作は、新しい言語パッケージをインストールしたり、新しく追加"
-"したハードウエアのドライバをインストールしたりする際に利用します。\n"
+"すでにインストールされたパッケージから判断される新規の推奨パッケージをインス"
+"トールします。この操作は、新しい言語パッケージをインストールしたり、新しく追"
+"加したハードウエアのドライバをインストールしたりする際に利用します。\n"
 "\n"
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI> 指定したリポジトリのみを読み込みます。\n"
-"-D, --dry-run            インストールをテストするだけで実際にはインストールしません。\n"
+"-D, --dry-run            インストールをテストするだけで実際にはインストールし"
+"ません。\n"
 "    --details            インストールの詳細なサマリを表示します。\n"
-"    --download           ダウンロード - インストールモードを指定します。利用可能なモード:\n"
+"    --download           ダウンロード - インストールモードを指定します。利用"
+"可能なモード:\n"
 "                         %s\n"
-"-d, --download-only      パッケージをダウンロードするだけでインストールは行いません。\n"
+"-d, --download-only      パッケージをダウンロードするだけでインストールは行い"
+"ません。\n"
 "    --debug-solver       デバッグ用に解決器のテストケースを作成します。\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
@@ -3569,10 +3700,12 @@ msgstr ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <file.repo>\n"
 "\n"
-"システムにリポジトリを追加します。リポジトリはURIにより指定するか、または指定された.repoファイルから読み込むことができます(リモートでも)。\n"
+"システムにリポジトリを追加します。リポジトリはURIにより指定するか、または指定"
+"された.repoファイルから読み込むことができます(リモートでも)。\n"
 "\n"
 "  コマンドオプション:\n"
-"-r, --repo <file.repo>    読み込むために.repoファイルを指定するもう一つの方法\n"
+"-r, --repo <file.repo>    読み込むために.repoファイルを指定するもう一つの方"
+"法\n"
 "-t, --type <type>         リポジトリのタイプ(%s)\n"
 "-d, --disable             リポジトリを無効として追加します。\n"
 "-c, --check               URIを検索します。\n"
@@ -3612,7 +3745,8 @@ msgstr ""
 "定義済みリポジトリのリストを表示します。\n"
 "\n"
 "  コマンドオプション:\n"
-"-e, --export <FILE.repo>  すべての定義済みリポジトリを単一の.repoファイルにエクスポートします。\n"
+"-e, --export <FILE.repo>  すべての定義済みリポジトリを単一の.repoファイルにエ"
+"クスポートします。\n"
 "-a, --alias               リポジトリのエイリアスも表示します。\n"
 "-n, --name                リポジトリの名前も表示します。\n"
 "-u, --uri                 リポジトリのベースURIも表示します。\n"
@@ -3654,7 +3788,8 @@ msgid ""
 msgstr ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
-"別名 (<alias>) 、番号、またはURIで指定したリポジトリの名前を変更し、 <new-alias>にします。\n"
+"別名 (<alias>) 、番号、またはURIで指定したリポジトリの名前を変更し、 <new-"
+"alias>にします。\n"
 "\n"
 "このコマンドにはオプションはありません\n"
 
@@ -3730,15 +3865,18 @@ msgid ""
 msgstr ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
-"別名 (<alias>) 、番号、またはURIで指定したリポジトリの情報を更新します。 "
-"何も指定しない場合は無効に設定されているものを除くすべてのリポジトリを更新します。\n"
+"別名 (<alias>) 、番号、またはURIで指定したリポジトリの情報を更新します。 何も"
+"指定しない場合は無効に設定されているものを除くすべてのリポジトリを更新しま"
+"す。\n"
 "\n"
 "  コマンドオプション:\n"
 "-f, --force              完全な更新を強制します。\n"
 "-b, --force-build        データベースの再構築を強制します。\n"
 "-d, --force-download     未加工のメタデータのダウンロードを強制します。\n"
-"-B, --build-only         データベースを構築し直すだけで、メタデータのダウンロードを行いません。\n"
-"-D, --download-only      未加工のメタデータをダウンロードするだけでデータベースの再構築を行いません。\n"
+"-B, --build-only         データベースを構築し直すだけで、メタデータのダウン"
+"ロードを行いません。\n"
+"-D, --download-only      未加工のメタデータをダウンロードするだけでデータベー"
+"スの再構築を行いません。\n"
 "-r, --repo <alias|#|URI> 指定したリポジトリだけを更新します。\n"
 "-s, --services           リポジトリを更新する前にサービスも更新します。\n"
 
@@ -3762,7 +3900,8 @@ msgstr ""
 "-r, --repo <alias|#|URI> 指定したリポジトリのキャッシュだけを削除します。\n"
 "-m, --metadata           メタデータキャッシュを削除します。\n"
 "-M, --raw-metadata       未加工のメタデータキャッシュを削除します。\n"
-"-a, --all                メタデータとパッケージの両方のキャッシュを削除します。\n"
+"-a, --all                メタデータとパッケージの両方のキャッシュを削除しま"
+"す。\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -3794,8 +3933,10 @@ msgstr ""
 "  コマンドオプション:\n"
 "-t, --type <type>             パッケージの種類を指定する (%s)\n"
 "                              デフォルト:%s\n"
-"-r, --repo <alias|#|URI>      指定した別名のリポジトリからの更新のみを表示する\n"
-"    --best-effort             「ベストエフォート」方式での更新を指定する。最新・最良\n"
+"-r, --repo <alias|#|URI>      指定した別名のリポジトリからの更新のみを表示す"
+"る\n"
+"    --best-effort             「ベストエフォート」方式での更新を指定する。最"
+"新・最良\n"
 "                              ではない古いバージョンへの更新も受け入れる\n"
 "-a, --all                     インストール可能であるかどうかを問わず、\n"
 "                              新しいバージョンが利用可能な\n"
@@ -3849,7 +3990,8 @@ msgid ""
 msgstr ""
 "update (up) [options] [packagename] ...\n"
 "\n"
-"指定のまたはすべてのインストール済みのパッケージを新しいバージョンに更新します(可能な場合)。\n"
+"指定のまたはすべてのインストール済みのパッケージを新しいバージョンに更新しま"
+"す(可能な場合)。\n"
 "\n"
 "  コマンドオプション:\n"
 "\n"
@@ -3866,21 +4008,28 @@ msgstr ""
 "                            最新バージョンより古いバージョンへの更新も\n"
 "                            受け入れます。\n"
 "    --debug-solver          デバッグ用に解決器のテストケースを作成します。\n"
-"    --no-recommends         推奨パッケージについてはインストールせず、必要なもののみをインストールします。\n"
-"    --recommends            必要なパッケージに加え、推奨パッケージについても\n"
+"    --no-recommends         推奨パッケージについてはインストールせず、必要な"
+"もののみをインストールします。\n"
+"    --recommends            必要なパッケージに加え、推奨パッケージについて"
+"も\n"
 "                            インストールします。\n"
-"    --replacefiles          既にインストール済みの他のファイルを置き換えることになる場合でも、\n"
-"                            パッケージをインストールします。デフォルトではファイルの衝突をエラーとして扱います。\n"
-"                            --download-as-neededを指定するとファイルの衝突の確認が無効になります。\n"
+"    --replacefiles          既にインストール済みの他のファイルを置き換えるこ"
+"とになる場合でも、\n"
+"                            パッケージをインストールします。デフォルトでは"
+"ファイルの衝突をエラーとして扱います。\n"
+"                            --download-as-neededを指定するとファイルの衝突の"
+"確認が無効になります。\n"
 "-R, --no-force-resolution   解決器に対して解決方法を見つけるよう強制せず、\n"
 "                            尋ねるようにします。\n"
 "    --force-resolution      解決器に対して解決方法を見つけるよう強制します\n"
 "                            (より積極的な動作)。\n"
 "-D, --dry-run               更新をテストするだけで実際には何もしません。\n"
 "    --details               インストールの詳細なサマリを表示します。\n"
-"    --download              ダウンロード - インストールモードを指定します。利用可能なモード:\n"
+"    --download              ダウンロード - インストールモードを指定します。利"
+"用可能なモード:\n"
 "                            %s\n"
-"-d, --download-only         パッケージをダウンロードするだけでインストールは行いません。\n"
+"-d, --download-only         パッケージをダウンロードするだけでインストールは"
+"行いません。\n"
 
 #: src/Zypper.cc:2218
 #, c-format, boost-format
@@ -3934,28 +4083,37 @@ msgstr ""
 "                            サードパーティのライセンス確認を行なう際、\n"
 "                            自動的に「yes」と回答します。\n"
 "                            (詳細はman zypperをご覧ください)\n"
-"-b, --bugzilla #            指定したBugzilla発信番号の修正をインストールします。\n"
+"-b, --bugzilla #            指定したBugzilla発信番号の修正をインストールしま"
+"す。\n"
 "    --cve #                 指定したCVE発信番号の修正をインストールします。\n"
 "-g  --category <category>   分類に該当するパッチのみをインストールします。\n"
-"    --severity <severity>   重要度に該当するパッチのみをインストールします。\n"
+"    --severity <severity>   重要度に該当するパッチのみをインストールしま"
+"す。\n"
 "    --date <YYYY-MM-DD>     指定した日付まで (指定した日付は含まず) に発行\n"
 "                            されたパッチのみをインストールします。\n"
 "    --debug-solver          解決処理についてデバッグを行います。\n"
 "    --no-recommends         推奨パッケージについてはインストールせず、\n"
 "                            必要なもののみをインストールします。\n"
-"    --recommends            必要なパッケージに加え、推奨パッケージについても\n"
+"    --recommends            必要なパッケージに加え、推奨パッケージについて"
+"も\n"
 "                            インストールします。\n"
-"    --replacefiles          既にインストールされているパッケージとファイルが\n"
-"                            競合する場合も、インストールを行なうようにします。\n"
-"                            何も指定しない場合は競合をエラーとして扱います。\n"
-"                            なお、 --download-as-neededを指定すると競合チェックを\n"
+"    --replacefiles          既にインストールされているパッケージとファイル"
+"が\n"
+"                            競合する場合も、インストールを行なうようにしま"
+"す。\n"
+"                            何も指定しない場合は競合をエラーとして扱いま"
+"す。\n"
+"                            なお、 --download-as-neededを指定すると競合チェッ"
+"クを\n"
 "                            行なわないようになります。\n"
 "-r, --repo <alias|#|URI>    指定したリポジトリからのみ読み込みます。\n"
 "-D, --dry-run               更新をテストするだけで実際には何もしません。\n"
 "    --details               インストールの概要を詳細に表示します。\n"
-"    --download              ダウンロードモードを指定します。利用可能なモード:\n"
+"    --download              ダウンロードモードを指定します。利用可能なモー"
+"ド:\n"
 "                            %s\n"
-"-d, --download-only         パッケージをダウンロードするだけでインストールは行いません。\n"
+"-d, --download-only         パッケージをダウンロードするだけでインストールは"
+"行いません。\n"
 
 #: src/Zypper.cc:2249
 msgid "Install only patches which affect the package management itself."
@@ -4107,24 +4265,33 @@ msgstr ""
 "\n"
 "  コマンドオプション:\n"
 "\n"
-"    --from <alias|#|URI>    指定したリポジトリのアップグレードに限定します。\n"
+"    --from <alias|#|URI>    指定したリポジトリのアップグレードに限定しま"
+"す。\n"
 "-r, --repo <alias|#|URI>    指定したリポジトリのみを読み込みます。\n"
 "-l, --auto-agree-with-licenses\n"
 "                            サードパーティのライセンス確認プロンプトで、\n"
 "                            自動的に「yes」と回答します。\n"
 "                            詳細は「man zypper」を参照してください。\n"
 "    --debug-solver          デバッグ用に解決器のテストケースを作成します。\n"
-"    --no-recommends         推奨パッケージについてはインストールせず、必要なもののみをインストールします。\n"
-"    --recommends            必要なパッケージに加え、推奨パッケージについても\n"
+"    --no-recommends         推奨パッケージについてはインストールせず、必要な"
+"もののみをインストールします。\n"
+"    --recommends            必要なパッケージに加え、推奨パッケージについて"
+"も\n"
 "                            インストールします。\n"
-"    --replacefiles          既にインストール済みの他のファイルを置き換えることになる場合でも、\n"
-"                            パッケージをインストールします。デフォルトではファイルの衝突をエラーとして扱います。\n"
-"                            --download-as-neededを指定するとファイルの衝突の確認が無効になります。\n"
-"-D, --dry-run               アップグレードをテストするだけで実際には何もしません。\n"
+"    --replacefiles          既にインストール済みの他のファイルを置き換えるこ"
+"とになる場合でも、\n"
+"                            パッケージをインストールします。デフォルトでは"
+"ファイルの衝突をエラーとして扱います。\n"
+"                            --download-as-neededを指定するとファイルの衝突の"
+"確認が無効になります。\n"
+"-D, --dry-run               アップグレードをテストするだけで実際には何もしま"
+"せん。\n"
 "    --details               インストールの詳細なサマリを表示します。\n"
-"    --download              ダウンロード - インストールモードを指定します。利用可能なモード:\n"
+"    --download              ダウンロード - インストールモードを指定します。利"
+"用可能なモード:\n"
 "                            %s\n"
-"-d, --download-only         パッケージをダウンロードするだけでインストールは行いません。\n"
+"-d, --download-only         パッケージをダウンロードするだけでインストールは"
+"行いません。\n"
 
 #: src/Zypper.cc:2379
 msgid "Whether to allow downgrading installed resolvables."
@@ -4204,13 +4371,16 @@ msgstr ""
 "    --suggests             検索文字列を提案するパッケージを検索します。\n"
 "    --conflicts            検索文字列と矛盾するパッケージを検索します。\n"
 "    --obsoletes            検索文字列を廃棄するパッケージを検索します。\n"
-"-n, --name                 依存関係オプションと共に使用する場合に役立ちます。そうでない場合、\n"
+"-n, --name                 依存関係オプションと共に使用する場合に役立ちます。"
+"そうでない場合、\n"
 "                           パッケージ名の検索がデフォルトです。\n"
 "-f, --file-list            パッケージのファイルリストの一致を検索します。\n"
 "-d, --search-descriptions  パッケージのサマリおよび説明でも検索します。\n"
 "-C, --case-sensitive       大文字小文字を区別した検索を実行します。\n"
-"-i, --installed-only       すでにインストールされているパッケージのみを表示します。\n"
-"-u, --uninstalled-only     現在インストールされていないパッケージのみを表示します。\n"
+"-i, --installed-only       すでにインストールされているパッケージのみを表示し"
+"ます。\n"
+"-u, --uninstalled-only     現在インストールされていないパッケージのみを表示し"
+"ます。\n"
 "-t, --type <type>          指定されたタイプのパッケージのみを検索します。\n"
 "-r, --repo <alias|#|URI>   指定されたリポジトリでのみ検索します。\n"
 "    --sort-by-name         名前別にパッケージをソートします(デフォルト)。\n"
@@ -4218,7 +4388,8 @@ msgstr ""
 "-s, --details              各リポジトリ内で使用可能な各バージョンを別の行に\n"
 "                           表示します。\n"
 "-v, --verbose              同様に、--detailsは、\n"
-"                           検索が一致し(依存関係の検索に役立つ)                    \n"
+"                           検索が一致し(依存関係の検索に役立"
+"つ)                    \n"
 "\n"
 "* ? ワイルドカードも検索文字列内でも使用できる追加情報と共に使用されます。\n"
 "検索文字列が「/」で囲まれている場合、正規表現であると解釈されます。\n"
@@ -4299,8 +4470,10 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI>  リポジトリを指定するもう一つの方法。\n"
 "-i, --installed-only      インストール済みのパッケージのみを表示します。\n"
-"-u, --uninstalled-only    インストールされていないパッケージのみを表示します。\n"
-"    --orphaned            孤立している(リポジトリのない)パッケージを表示します。\n"
+"-u, --uninstalled-only    インストールされていないパッケージのみを表示しま"
+"す。\n"
+"    --orphaned            孤立している(リポジトリのない)パッケージを表示しま"
+"す。\n"
 "    --suggested           提案されているパッケージを表示します。\n"
 "    --recommended         推奨パッケージを表示します。\n"
 "    --unneeded            不要なパッケージを表示します。\n"
@@ -4327,7 +4500,8 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI>  リポジトリを指定するもう一つの方法。\n"
 "-i, --installed-only      インストール済みのパターンのみを表示します。\n"
-"-u, --uninstalled-only    インストールされていないパターンのみを表示します。\n"
+"-u, --uninstalled-only    インストールされていないパターンのみを表示しま"
+"す。\n"
 
 #: src/Zypper.cc:2583
 msgid ""
@@ -4378,7 +4552,8 @@ msgstr ""
 "\n"
 "指定したパッケージに関する詳細情報を表示します。\n"
 "デフォルトでは、指定の名前と完全に一致するパッケージが表示されます。\n"
-"部分的に一致するパッケージも取得するには、「--match-substrings」オプションを使用するか、\n"
+"部分的に一致するパッケージも取得するには、「--match-substrings」オプションを"
+"使用するか、\n"
 "名前でワイルドカード(*?)を使用します。\n"
 "\n"
 "  コマンドオプション:\n"
@@ -4481,7 +4656,8 @@ msgid ""
 msgstr ""
 "addlock (al) [options] <packagename> ...\n"
 "\n"
-"パッケージロックを設定します。パッケージは名前で指定できるほか、ワイルドカード指定(「*」「?」)による一括指定を行なうこともできます。\n"
+"パッケージロックを設定します。パッケージは名前で指定できるほか、ワイルドカー"
+"ド指定(「*」「?」)による一括指定を行なうこともできます。\n"
 "\n"
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI>  指定したリポジトリからのもののみをロックします。\n"
@@ -4503,7 +4679,8 @@ msgid ""
 msgstr ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
 "\n"
-"パッケージロックを解除します。 '%s' で表示される番号かパッケージの名前で指定してください。\n"
+"パッケージロックを解除します。 '%s' で表示される番号かパッケージの名前で指定"
+"してください。\n"
 "\n"
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI>  指定したリポジトリからのロックのみを解除する\n"
@@ -4593,7 +4770,8 @@ msgid ""
 msgstr ""
 "licenses\n"
 "\n"
-"現在インストール済みのソフトウエアパッケージについて、ライセンスと使用許諾契約を表示します。\n"
+"現在インストール済みのソフトウエアパッケージについて、ライセンスと使用許諾契"
+"約を表示します。\n"
 "\n"
 "このコマンドにはオプションはありません。\n"
 
@@ -4607,7 +4785,9 @@ msgstr "ps [オプション]"
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
-msgstr "最新アップグレードによって削除されたファイルとライブラリをまだ使用する可能性のある実行中プロセスを一覧表示します。"
+msgstr ""
+"最新アップグレードによって削除されたファイルとライブラリをまだ使用する可能性"
+"のある実行中プロセスを一覧表示します。"
 
 #. translators: -s, --short
 #: src/Zypper.cc:2947
@@ -4616,8 +4796,9 @@ msgid ""
 "processes which are associated with a system service. Given three times, "
 "list the associated system service names only."
 msgstr ""
-"削除されたファイルを表示しない短縮テーブルを作成します。2回指定すると、システムサービスに関連付けられたプロセスのみが表示されます。3回指定すると、関連付"
-"けられたシステムサービスの名前のみが表示されます。"
+"削除されたファイルを表示しない短縮テーブルを作成します。2回指定すると、システ"
+"ムサービスに関連付けられたプロセスのみが表示されます。3回指定すると、関連付け"
+"られたシステムサービスの名前のみが表示されます。"
 
 #. translators: --print <format>
 #: src/Zypper.cc:2949
@@ -4627,8 +4808,9 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
-"関連付けられたシステムサービスごとに、標準出力でprint <format>を指定した後、改行してください。<format>の '%s' "
-"ディレクティブは、システムサービス名に置き換えられます。"
+"関連付けられたシステムサービスごとに、標準出力でprint <format>を指定した後、"
+"改行してください。<format>の '%s' ディレクティブは、システムサービス名に置き"
+"換えられます。"
 
 #: src/Zypper.cc:2968
 msgid ""
@@ -4901,7 +5083,8 @@ msgstr "サービス '%s' は別名／番号／URIのいずれでも見つかり
 
 #: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
-msgstr "パラメータが少なすぎます。少なくともURIと別名を指定する必要があります。"
+msgstr ""
+"パラメータが少なすぎます。少なくともURIと別名を指定する必要があります。"
 
 #: src/Zypper.cc:3765
 #, c-format, boost-format
@@ -4982,7 +5165,9 @@ msgstr "'%s' で指定したRPMファイルで問題が発生しました。ス�
 #: src/Zypper.cc:4006
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
-msgstr "%s のRPMヘッダを読み込む際に問題が発生しました。 RPMファイルでない可能性があります。"
+msgstr ""
+"%s のRPMヘッダを読み込む際に問題が発生しました。 RPMファイルでない可能性があ"
+"ります。"
 
 #: src/Zypper.cc:4028
 msgid "Plain RPM files cache"
@@ -4996,7 +5181,9 @@ msgstr "正しいパラメータが指定されていません。"
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
-msgstr "リポジトリが定義されていません。操作はインストール済みの解決方法についてのみ行なわれます。何もインストールできません。"
+msgstr ""
+"リポジトリが定義されていません。操作はインストール済みの解決方法についてのみ"
+"行なわれます。何もインストールできません。"
 
 #. translators: meaning --capability contradicts --force/--name
 #: src/Zypper.cc:4099 src/Zypper.cc:4658
@@ -5073,11 +5260,13 @@ msgstr ""
 #: src/Zypper.cc:4709
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
-msgstr "引数にパッケージを指定した場合は、複数の種類を指定することができません。"
+msgstr ""
+"引数にパッケージを指定した場合は、複数の種類を指定することができません。"
 
 #: src/Zypper.cc:4801
 msgid "Root privileges are required for performing a distribution upgrade."
-msgstr "ディストリビューションのアップグレード処理を行うにはroot権限が必要です。"
+msgstr ""
+"ディストリビューションのアップグレード処理を行うにはroot権限が必要です。"
 
 #: src/Zypper.cc:4821
 #, c-format, boost-format
@@ -5086,8 +5275,9 @@ msgid ""
 "Make sure these repositories are compatible before you continue. See '%s' "
 "for more information about this command."
 msgstr ""
-"すべての有効なリポジトリを利用して、ディストリビューションのアップグレードを行おうとしています。続行する前に、これらのリポジトリに互換性があることをご確認"
-"ください。このコマンドについての詳しい情報は '%s' をご覧ください。"
+"すべての有効なリポジトリを利用して、ディストリビューションのアップグレードを"
+"行おうとしています。続行する前に、これらのリポジトリに互換性があることをご確"
+"認ください。このコマンドについての詳しい情報は '%s' をご覧ください。"
 
 #: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
@@ -5164,14 +5354,18 @@ msgstr " 解決方法 %d: "
 #: src/solve-commit.cc:71
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] "「1」を使用して上記の解決策を受け入れるか、スキップ、再試行、またはキャンセルのいずれかを選択してください"
+msgstr[0] ""
+"「1」を使用して上記の解決策を受け入れるか、スキップ、再試行、またはキャンセル"
+"のいずれかを選択してください"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:78
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "「1」を選択して上記の解決策を選択するか、「c」 を使用してキャンセルしてください"
+msgstr[0] ""
+"「1」を選択して上記の解決策を選択するか、「c」 を使用してキャンセルしてくださ"
+"い"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -5258,7 +5452,8 @@ msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
-"削除されたライブラリを使用している実行中プロセスの確認は、zypper.confで無効にされています。'%s' を実行して手動で確認してください。"
+"削除されたライブラリを使用している実行中プロセスの確認は、zypper.confで無効に"
+"されています。'%s' を実行して手動で確認してください。"
 
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
@@ -5339,7 +5534,9 @@ msgstr "y/n/p/v/a/r/m/d/g"
 #: src/solve-commit.cc:648
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
-msgstr "はい、概要に表示されている内容を受け入れ、パッケージのインストール/削除を行います。"
+msgstr ""
+"はい、概要に表示されている内容を受け入れ、パッケージのインストール/削除を行い"
+"ます。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: src/solve-commit.cc:650
@@ -5438,7 +5635,9 @@ msgstr "'%1%' を実行することで、依存関係の問題を修復するこ
 msgid ""
 "One of installed patches requires reboot of your machine. Reboot as soon as "
 "possible."
-msgstr "インストールされたパッチの中にはコンピュータの再起動を必要とするものがあります。できるだけ早めに再起動してください。"
+msgstr ""
+"インストールされたパッチの中にはコンピュータの再起動を必要とするものがありま"
+"す。できるだけ早めに再起動してください。"
 
 #: src/solve-commit.cc:887
 msgid ""
@@ -5511,8 +5710,9 @@ msgid ""
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
 msgstr ""
-"注意: rootとして実行しない場合、システムのstat(2)関数を実行する際に許可の制限を受けるため、ファイルの検索が制限されます。したがって、結果が不"
-"完全なものになる場合があります。"
+"注意: rootとして実行しない場合、システムのstat(2)関数を実行する際に許可の制限"
+"を受けるため、ファイルの検索が制限されます。したがって、結果が不完全なものに"
+"なる場合があります。"
 
 #: src/source-download.cc:208
 #, c-format, boost-format
@@ -5567,7 +5767,9 @@ msgstr "インストール済みパッケージ"
 
 #: src/source-download.cc:370
 msgid "Use '--verbose' option for a full list of required source packages."
-msgstr "必要なソースパッケージをすべて表示するには、 '--verbose' オプションをご利用ください。"
+msgstr ""
+"必要なソースパッケージをすべて表示するには、 '--verbose' オプションをご利用く"
+"ださい。"
 
 #: src/source-download.cc:379
 msgid "Deleting superfluous source packages"
@@ -5700,7 +5902,9 @@ msgstr "'%s' というパッケージ名は見つかりません。 '%s' とし�
 msgid ""
 "Different package type specified in '%s' option and '%s' argument. Will use "
 "the latter."
-msgstr "'%s' オプションで指定したものと '%s' 引数で指定したもののパッケージ種類が異なります。後者を使用します。"
+msgstr ""
+"'%s' オプションで指定したものと '%s' 引数で指定したもののパッケージ種類が異な"
+"ります。後者を使用します。"
 
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
@@ -6005,7 +6209,8 @@ msgid ""
 "option to make zypper use default answers to prompts."
 msgstr ""
 "zypperを端末無しで実行する場合、 '%s' のグローバルオプションを\n"
-"指定することで、 zypperに対して問い合わせへの既定の応答を設定することができます。"
+"指定することで、 zypperに対して問い合わせへの既定の応答を設定することができま"
+"す。"
 
 #: src/utils/prompt.cc:321
 #, c-format, boost-format
@@ -6016,7 +6221,9 @@ msgstr "回答 '%s' が正しくありません。"
 #: src/utils/prompt.cc:326
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr "うまく動作しない場合、 「%s」(「%s」の場合)、 「%s」(「%s」の場合)を入力してください。"
+msgstr ""
+"うまく動作しない場合、 「%s」(「%s」の場合)、 「%s」(「%s」の場合)を入力して"
+"ください。"
 
 #: src/utils/misc.cc:113
 msgid "package"
@@ -6147,20 +6354,23 @@ msgstr "指定したRPMファイルの取得の際に問題が発生しました
 msgid "Please check whether the file is accessible."
 msgstr "ファイルがアクセス可能かどうか確認してください。"
 
-#: src/utils/misc.cc:686
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "不明なダウンロードモード '%s' です。"
 
-#: src/utils/misc.cc:687
+#: src/utils/misc.cc:688
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "利用可能なダウンロードモード:%s"
 
-#: src/utils/misc.cc:701
+#: src/utils/misc.cc:702
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "オプション '%s' により '%s' を上書きします。"
+
+#~ msgid "Info for type '%s' not implemented."
+#~ msgstr "種類 '%s' に関する情報はまだ提供されていません。"
 
 #~ msgid "Name: "
 #~ msgstr "名前: "

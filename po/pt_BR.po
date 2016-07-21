@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-23 10:04+0200\n"
+"POT-Creation-Date: 2016-07-21 16:00+0200\n"
 "PO-Revision-Date: 2016-07-20 03:03+0000\n"
 "Last-Translator: Marcos Teofilo <mteofilo@tesbrasil.com>\n"
-"Language-Team: Portuguese (Brazil) "
-"<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
+"Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
+"zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -469,41 +469,55 @@ msgstr "Objeto inválido"
 msgid "Error"
 msgstr "Erro"
 
+#. translators: property name; short; used like "Name: value"
+#. translators: package's repository (header)
+#: src/info.cc:66 src/update.cc:798 src/search.cc:74 src/search.cc:378
+#: src/search.cc:512 src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Repositório"
+
+#. translators: property name; short; used like "Name: value"
+#. translators: Table coumn header
 #. translators: name (general header)
-#: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
+#: src/info.cc:68 src/info.cc:413 src/repos.cc:961 src/repos.cc:1094
 #: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
 msgstr "Nome"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package version (header)
-#: src/info.cc:74 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/info.cc:70 src/search.cc:70 src/search.cc:377 src/search.cc:514
 #: src/search.cc:576
 msgid "Version"
 msgstr "Versão"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/info.cc:72 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
 msgstr "Arquitetura"
 
-#: src/info.cc:76
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:74
 msgid "Vendor"
 msgstr "Fornecedor"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
+#: src/info.cc:80 src/search.cc:233 src/utils/misc.cc:255
 #: src/utils/misc.cc:296
 msgid "Summary"
 msgstr "Resumo"
 
+#. translators: property name; short; used like "Name: value"
 #: src/info.cc:82 src/Zypper.cc:5246
 msgid "Description"
 msgstr "Descrição"
 
-#: src/info.cc:136
+#: src/info.cc:152
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
@@ -511,99 +525,97 @@ msgstr[0] "Existe %1% correspondência para '%2%'."
 msgstr[1] "Existem %1% correspondências para '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:168
+#: src/info.cc:184
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' não encontrado."
 
-#: src/info.cc:190
+#. TranslatorExplanation E.g. "Information for package zypper:"
+#: src/info.cc:204
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "Informação para %s %s:"
 
-#. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-#: src/info.cc:206
-#, c-format, boost-format
-msgid "Info for type '%s' not implemented."
-msgstr "Informação para o tipo '%s' ainda não implementada."
-
-#. translators: package's repository (header)
-#: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
-#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
-#: src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "Repositório"
-
-#: src/info.cc:255
+#: src/info.cc:283
 msgid "Support Level"
 msgstr "Nível de suporte"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:286
+msgid "Installed Size"
+msgstr "Tamanho após instalação"
+
+#. translators: property name; short; used like "Name: value"
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:258 src/info.cc:390 src/info.cc:479 src/Summary.cc:1207
+#: src/info.cc:288 src/info.cc:390 src/info.cc:521 src/Summary.cc:1207
 msgid "Installed"
 msgstr "Instalado"
 
-#: src/info.cc:260 src/info.cc:311 src/utils/misc.cc:254 src/utils/misc.cc:295
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:290 src/info.cc:336 src/info.cc:524 src/utils/misc.cc:254
+#: src/utils/misc.cc:295
 msgid "Status"
 msgstr "Status"
 
-#: src/info.cc:265
+#: src/info.cc:294 src/info.cc:528
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "desatualizado (versão %s instalada)"
 
-#: src/info.cc:269
+#: src/info.cc:296 src/info.cc:530
 msgid "up-to-date"
 msgstr "atualizado"
 
-#: src/info.cc:273
+#: src/info.cc:299 src/info.cc:533
 msgid "not installed"
 msgstr "não instalado"
 
-#: src/info.cc:275
-msgid "Installed Size"
-msgstr "Tamanho após instalação"
-
+#. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:314 src/update.cc:350 src/utils/misc.cc:251
+#: src/info.cc:338 src/update.cc:350 src/utils/misc.cc:251
 #: src/utils/misc.cc:292
 msgid "Category"
 msgstr "Categoria"
 
-#: src/info.cc:315 src/utils/misc.cc:252 src/utils/misc.cc:293
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:340 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
 msgstr "Gravidade"
 
-#: src/info.cc:316
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:342
 msgid "Created On"
 msgstr "Criado em"
 
-#: src/info.cc:318
+#: src/info.cc:345
 msgid "Reboot Required"
 msgstr "Reinicialização necessária"
 
-#: src/info.cc:319
+#: src/info.cc:346
 msgid "Package Manager Restart Required"
 msgstr "Reinício do gerenciador de pacotes necessário"
 
-#. print interactive flags the same style as list-patches
-#: src/info.cc:327 src/info.cc:330 src/utils/misc.cc:253 src/utils/misc.cc:294
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:353 src/info.cc:356 src/utils/misc.cc:253 src/utils/misc.cc:294
 msgid "Interactive"
 msgstr "Interativo"
 
-#: src/info.cc:354 src/search.cc:318
-msgid "Recommended"
-msgstr "Recomendado"
-
-#: src/info.cc:356 src/search.cc:320
-msgid "Suggested"
-msgstr "Sugerido"
-
-#: src/info.cc:391
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:392
 msgid "Visible to User"
 msgstr "Visível ao usuário"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:406 src/info.cc:442
+msgid "Contents"
+msgstr "Conteúdo"
+
+#: src/info.cc:406
+msgid "(empty)"
+msgstr "(vazio)"
+
+#. translators: Table coumn header
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
 #.
@@ -611,72 +623,95 @@ msgstr "Visível ao usuário"
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:412 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
+#. translators: Table coumn header
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
+#: src/info.cc:414 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Tipo"
 
-#: src/info.cc:402 src/search.cc:379
+#. translators: Table coumn header
+#: src/info.cc:415 src/search.cc:379
 msgid "Dependency"
 msgstr "Dependência"
 
-#: src/info.cc:417
-msgid "Contents"
-msgstr "Conteúdo"
+#: src/info.cc:420 src/info.cc:434
+#, fuzzy
+msgid "Required"
+msgstr "Requer"
 
-#: src/info.cc:419
-msgid "(empty)"
-msgstr "(vazio)"
+#: src/info.cc:425 src/info.cc:434 src/search.cc:318
+msgid "Recommended"
+msgstr "Recomendado"
 
-#: src/info.cc:472
-msgid "Flavor"
-msgstr "Tipo"
+#: src/info.cc:431 src/info.cc:434 src/search.cc:320
+msgid "Suggested"
+msgstr "Sugerido"
 
-#: src/info.cc:477
-msgid "Short Name"
-msgstr "Nome curto"
-
-#: src/info.cc:481 src/search.cc:578
-msgid "Is Base"
-msgstr "Base"
-
-#: src/info.cc:485
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:501
 msgid "End of Support"
 msgstr "Fim do suporte"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
-msgid "undefined"
-msgstr "indefinido"
+#: src/info.cc:506
+msgid "unknown"
+msgstr "desconhecido"
 
-#: src/info.cc:488
-msgid "CPE Name"
-msgstr "Nome CPE"
+#. translators: %1% is an URL or Path pointing to some document
+#: src/info.cc:511
+#, boost-format
+msgid "See %1%"
+msgstr ""
 
-#: src/info.cc:495
-msgid "invalid CPE Name"
-msgstr "Nome CPE inválido"
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:517
+msgid "Flavor"
+msgstr "Tipo"
 
-#: src/info.cc:498
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:519 src/search.cc:578
+msgid "Is Base"
+msgstr "Base"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:540 src/info.cc:567
 msgid "Update Repositories"
 msgstr "Repositórios de atualização"
 
-#: src/info.cc:506
+#: src/info.cc:545
 msgid "Content Id"
 msgstr "ID do conteúdo"
 
-#: src/info.cc:513
+#: src/info.cc:557
 msgid "Provided by enabled repository"
 msgstr "Fornecido pelo repositório habilitado"
 
-#: src/info.cc:519
+#: src/info.cc:562
 msgid "Not provided by any enabled repository"
 msgstr "Não fornecido por nenhum repositório habilitado"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:572
+msgid "CPE Name"
+msgstr "Nome CPE"
+
+#: src/info.cc:577
+msgid "undefined"
+msgstr "indefinido"
+
+#: src/info.cc:579
+msgid "invalid CPE Name"
+msgstr "Nome CPE inválido"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:582
+msgid "Short Name"
+msgstr "Nome curto"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -2595,7 +2630,8 @@ msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "Repositório '%s' removido dos repositórios habilitados do serviço '%s'"
+msgstr[0] ""
+"Repositório '%s' removido dos repositórios habilitados do serviço '%s'"
 msgstr[1] ""
 "Repositórios '%s' removidos dos repositórios habilitados do serviço '%s'"
 
@@ -3378,8 +3414,8 @@ msgstr ""
 "um dos operadores <, <=, =, >=, >.\n"
 "\n"
 "  Opções do comando:\n"
-"    --from <apelido|#|URI>    Selecionar pacotes do repositório especificado."
-"\n"
+"    --from <apelido|#|URI>    Selecionar pacotes do repositório "
+"especificado.\n"
 "-r, --repo <apelido|#|URI>    Carregar apenas o repositório especificado.\n"
 "-t, --type <tipo>           Tipo de pacote (%s).\n"
 "                            Padrão: %s.\n"
@@ -3415,8 +3451,8 @@ msgstr ""
 "-R, --no-force-resolution   Não forçar o solucionador a encontrar uma "
 "solução, deixar\n"
 "                            ele perguntar.\n"
-"    --force-resolution      Forçar o solucionador a encontrar a solução ("
-"mesmo que\n"
+"    --force-resolution      Forçar o solucionador a encontrar a solução "
+"(mesmo que\n"
 "                            agressiva).\n"
 "-D, --dry-run           Testar a instalação, não instalar realmente.\n"
 "    --details               Exibir o resumo de instalação detalhado.\n"
@@ -3469,8 +3505,8 @@ msgstr ""
 "um dos operadores <, <=, =, >=, >.\n"
 "\n"
 "  Opções do comando:\n"
-"-r, --repo <apelido|#|URI>        Carregar apenas o repositório especificado."
-"\n"
+"-r, --repo <apelido|#|URI>        Carregar apenas o repositório "
+"especificado.\n"
 "-t, --type <tipo>               Tipo de pacote (%s).\n"
 "                                Padrão: %s.\n"
 "-n, --name                      Selecionar pacotes pelo nome, não pelo "
@@ -3481,8 +3517,8 @@ msgstr ""
 "-R, --no-force-resolution   Não forçar o solucionador a encontrar uma "
 "solução,\n"
 "                            deixar ele perguntar.\n"
-"    --force-resolution      Forçar o solucionador a encontrar uma solução ("
-"mesmo que\n"
+"    --force-resolution      Forçar o solucionador a encontrar uma solução "
+"(mesmo que\n"
 "                            agressiva).\n"
 "-u, --clean-deps            Remover automaticamente dependências "
 "desnecessárias.\n"
@@ -3594,8 +3630,8 @@ msgstr ""
 "drivers para hardware recém adicionado.\n"
 "\n"
 "  Opções do comando:\n"
-"-r, --repo <apelido|#|URI>    Carregar somente os repositórios especificados."
-"\n"
+"-r, --repo <apelido|#|URI>    Carregar somente os repositórios "
+"especificados.\n"
 "-D, --dry-run               Testar a instalação, não instalar realmente.\n"
 "    --details               Exibir o resumo detalhado da instalação.\n"
 "    --download              Definir o modo de download e instalação. Modos "
@@ -3797,8 +3833,8 @@ msgstr ""
 "seu URI ou pode ser lido do arquivo .repo especificado (mesmo remoto).\n"
 "\n"
 "  Opções do comando:\n"
-"-r, --repo <arquivo.repo>    Apenas outro modo de especificar um arquivo "
-".repo para leitura.\n"
+"-r, --repo <arquivo.repo>    Apenas outro modo de especificar um arquivo ."
+"repo para leitura.\n"
 "-t, --type <tipo>         Tipo do repositório (%s).\n"
 "-d, --disable             Adicionar o repositório como desabilitado.\n"
 "-c, --check               Testar o URI.\n"
@@ -4127,8 +4163,8 @@ msgstr ""
 "-R, --no-force-resolution   Não forçar o solucionador a encontrar uma "
 "solução,\n"
 "                            deixar ele perguntar.\n"
-"    --force-resolution      Forçar o solucionador a encontrar uma solução ("
-"mesmo que\n"
+"    --force-resolution      Forçar o solucionador a encontrar uma solução "
+"(mesmo que\n"
 "                            agressiva).\n"
 "-D, --dry-run                   Testar a atualização, não atualizar "
 "realmente.\n"
@@ -4394,8 +4430,8 @@ msgstr ""
 "conflitos de arquivos\n"
 "                            como erro. --download-as-needed desabilita a "
 "verificação de conflito de arquivos.\n"
-"-D, --dry-run                 Testar a atualização, não atualizar realmente."
-"\n"
+"-D, --dry-run                 Testar a atualização, não atualizar "
+"realmente.\n"
 "    --details               Exibir o resumo detalhado da instalação.\n"
 "    --download              Definir o modo de download e instalação. Modos "
 "disponíveis:\n"
@@ -4414,7 +4450,8 @@ msgstr "Se é para permitir alteração de nomes dos resolvíveis instalados."
 
 #: src/Zypper.cc:2381
 msgid "Whether to allow changing the architecture of installed resolvables."
-msgstr "Se é para permitir alteração da arquitetura dos resolvíveis instalados."
+msgstr ""
+"Se é para permitir alteração da arquitetura dos resolvíveis instalados."
 
 #: src/Zypper.cc:2382
 msgid "Whether to allow changing the vendor of installed resolvables."
@@ -4498,8 +4535,8 @@ msgstr ""
 "dos pacotes.\n"
 "-d, --search-descriptions  Pesquisar também nos resumos e descrições do "
 "pacote.\n"
-"-C, --case-sensitive       Diferenciar maiúsculas de minúsculas na pesquisa."
-"\n"
+"-C, --case-sensitive       Diferenciar maiúsculas de minúsculas na "
+"pesquisa.\n"
 "-i, --installed-only       Exibir apenas os pacotes já instalados.\n"
 "-u, --uninstalled-only     Exibir apenas os pacotes não instalados.\n"
 "-t, --type <tipo>          Pesquisar apenas em pacotes de determinado tipo.\n"
@@ -4680,8 +4717,8 @@ msgstr ""
 "  Opções do comando:\n"
 "-s, --match-substrings    Exibir informações de pacotes que correspondem "
 "parcialmente o nome.\n"
-"-r, --repo <apelido|#|URI>  Trabalhar somente com o repositório especificado."
-"\n"
+"-r, --repo <apelido|#|URI>  Trabalhar somente com o repositório "
+"especificado.\n"
 "-t, --type <tipo>         Tipo de pacote (%s).\n"
 "                          Padrão: %s.\n"
 "    --provides            Exibir o que fornece.\n"
@@ -4961,8 +4998,8 @@ msgstr ""
 "\n"
 "Baixa os RPMs especificados na linha de comando para um diretório local.\n"
 "Por padrão os pacotes são baixados no cache de pacotes do libzypp\n"
-"(/var/cache/zypp/packages; para usuários não root "
-"$XDG_CACHE_HOME/zypp/packages),\n"
+"(/var/cache/zypp/packages; para usuários não root $XDG_CACHE_HOME/zypp/"
+"packages),\n"
 "mas isso pode ser alterado usando a opção global --pkg-cache-dir.\n"
 "\n"
 "Na saída XML um nó <download-result> é gravado para cada pacote que o\n"
@@ -4995,8 +5032,8 @@ msgid ""
 msgstr ""
 "source-download\n"
 "\n"
-"Baixa os RPMs fontes para todos os pacotes instalados em um diretório local."
-"\n"
+"Baixa os RPMs fontes para todos os pacotes instalados em um diretório "
+"local.\n"
 "\n"
 "  Opções do comando:\n"
 "-d, --directory <dir>\n"
@@ -5415,7 +5452,8 @@ msgstr "Uso"
 
 #: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
-msgstr "São necessários privilégios de root para adicionar bloqueios de pacote."
+msgstr ""
+"São necessários privilégios de root para adicionar bloqueios de pacote."
 
 #: src/Zypper.cc:5023
 #, c-format, boost-format
@@ -6093,8 +6131,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
-"Cancelando a instalação devido ao usuário não estar de acordo com a licença %"
-"s %s."
+"Cancelando a instalação devido ao usuário não estar de acordo com a licença "
+"%s %s."
 
 #: src/misc.cc:225
 msgid "License"
@@ -6222,7 +6260,8 @@ msgstr "Registre um relatório de bugs sobre isto."
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr "Consulte http://en.opensuse.org/Zypper/Troubleshooting para instruções."
+msgstr ""
+"Consulte http://en.opensuse.org/Zypper/Troubleshooting para instruções."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
@@ -6500,20 +6539,23 @@ msgstr "Problema ao baixar o arquivo RPM especificado"
 msgid "Please check whether the file is accessible."
 msgstr "Verifique se o arquivo é acessível."
 
-#: src/utils/misc.cc:686
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Modo de download desconhecido '%s'."
 
-#: src/utils/misc.cc:687
+#: src/utils/misc.cc:688
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Modos de download disponíveis: %s"
 
-#: src/utils/misc.cc:701
+#: src/utils/misc.cc:702
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "A opção '%s' anula '%s'."
+
+#~ msgid "Info for type '%s' not implemented."
+#~ msgstr "Informação para o tipo '%s' ainda não implementada."
 
 #~ msgid "Name: "
 #~ msgstr "Nome: "
@@ -7486,9 +7528,6 @@ msgstr "A opção '%s' anula '%s'."
 
 #~ msgid "None"
 #~ msgstr "Nenhum"
-
-#~ msgid "Requires"
-#~ msgstr "Requer"
 
 #~ msgid "Provides"
 #~ msgstr "Fornece"

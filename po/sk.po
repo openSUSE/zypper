@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-23 10:04+0200\n"
+"POT-Creation-Date: 2016-07-21 16:00+0200\n"
 "PO-Revision-Date: 2016-07-03 12:43+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
@@ -155,7 +155,8 @@ msgstr "Ignorujem zlyhanie overenia podpisu pre súbor '%s'!"
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ignorovanie zlyhania overenia podpisu pre súbor '%s' z repozitára '%s'!"
+msgstr ""
+"Ignorovanie zlyhania overenia podpisu pre súbor '%s' z repozitára '%s'!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -456,41 +457,55 @@ msgstr "Neplatný objekt"
 msgid "Error"
 msgstr "Chyba"
 
+#. translators: property name; short; used like "Name: value"
+#. translators: package's repository (header)
+#: src/info.cc:66 src/update.cc:798 src/search.cc:74 src/search.cc:378
+#: src/search.cc:512 src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Repozitár"
+
+#. translators: property name; short; used like "Name: value"
+#. translators: Table coumn header
 #. translators: name (general header)
-#: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
+#: src/info.cc:68 src/info.cc:413 src/repos.cc:961 src/repos.cc:1094
 #: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
 msgstr "Názov"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package version (header)
-#: src/info.cc:74 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/info.cc:70 src/search.cc:70 src/search.cc:377 src/search.cc:514
 #: src/search.cc:576
 msgid "Version"
 msgstr "Verzia"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/info.cc:72 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
 msgstr "Arch"
 
-#: src/info.cc:76
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:74
 msgid "Vendor"
 msgstr "Dodávateľ"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
+#: src/info.cc:80 src/search.cc:233 src/utils/misc.cc:255
 #: src/utils/misc.cc:296
 msgid "Summary"
 msgstr "Súhrn"
 
+#. translators: property name; short; used like "Name: value"
 #: src/info.cc:82 src/Zypper.cc:5246
 msgid "Description"
 msgstr "Popis"
 
-#: src/info.cc:136
+#: src/info.cc:152
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
@@ -499,99 +514,97 @@ msgstr[1] "Mali by existovať  %1% zhody pre '%2%'."
 msgstr[2] "Malo by existovať  %1% zhôd pre '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:168
+#: src/info.cc:184
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' nenájdené."
 
-#: src/info.cc:190
+#. TranslatorExplanation E.g. "Information for package zypper:"
+#: src/info.cc:204
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "Informácie pre %s %s:"
 
-#. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-#: src/info.cc:206
-#, c-format, boost-format
-msgid "Info for type '%s' not implemented."
-msgstr "Informácia pre typ '%s' nie je implementovaná."
-
-#. translators: package's repository (header)
-#: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
-#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
-#: src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "Repozitár"
-
-#: src/info.cc:255
+#: src/info.cc:283
 msgid "Support Level"
 msgstr "Úroveň podpory"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:286
+msgid "Installed Size"
+msgstr "Inštalovaná veľkosť"
+
+#. translators: property name; short; used like "Name: value"
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:258 src/info.cc:390 src/info.cc:479 src/Summary.cc:1207
+#: src/info.cc:288 src/info.cc:390 src/info.cc:521 src/Summary.cc:1207
 msgid "Installed"
 msgstr "Nainštalovaný"
 
-#: src/info.cc:260 src/info.cc:311 src/utils/misc.cc:254 src/utils/misc.cc:295
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:290 src/info.cc:336 src/info.cc:524 src/utils/misc.cc:254
+#: src/utils/misc.cc:295
 msgid "Status"
 msgstr "Stav"
 
-#: src/info.cc:265
+#: src/info.cc:294 src/info.cc:528
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "zastaralý (nainštalovaná verzia: %s)"
 
-#: src/info.cc:269
+#: src/info.cc:296 src/info.cc:530
 msgid "up-to-date"
 msgstr "aktuálny"
 
-#: src/info.cc:273
+#: src/info.cc:299 src/info.cc:533
 msgid "not installed"
 msgstr "nenainštalovaný"
 
-#: src/info.cc:275
-msgid "Installed Size"
-msgstr "Inštalovaná veľkosť"
-
+#. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:314 src/update.cc:350 src/utils/misc.cc:251
+#: src/info.cc:338 src/update.cc:350 src/utils/misc.cc:251
 #: src/utils/misc.cc:292
 msgid "Category"
 msgstr "Kategória"
 
-#: src/info.cc:315 src/utils/misc.cc:252 src/utils/misc.cc:293
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:340 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
 msgstr "Závažnosť"
 
-#: src/info.cc:316
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:342
 msgid "Created On"
 msgstr "Dátum vytvorenia"
 
-#: src/info.cc:318
+#: src/info.cc:345
 msgid "Reboot Required"
 msgstr "Požadovaný reštart"
 
-#: src/info.cc:319
+#: src/info.cc:346
 msgid "Package Manager Restart Required"
 msgstr "Požadovaný reštart správcu balíkov"
 
-#. print interactive flags the same style as list-patches
-#: src/info.cc:327 src/info.cc:330 src/utils/misc.cc:253 src/utils/misc.cc:294
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:353 src/info.cc:356 src/utils/misc.cc:253 src/utils/misc.cc:294
 msgid "Interactive"
 msgstr "Interaktívny"
 
-#: src/info.cc:354 src/search.cc:318
-msgid "Recommended"
-msgstr "Odporúčaný"
-
-#: src/info.cc:356 src/search.cc:320
-msgid "Suggested"
-msgstr "Navrhovaný"
-
-#: src/info.cc:391
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:392
 msgid "Visible to User"
 msgstr "Viditeľný pre používateľa"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:406 src/info.cc:442
+msgid "Contents"
+msgstr "Obsah"
+
+#: src/info.cc:406
+msgid "(empty)"
+msgstr "(prázdny)"
+
+#. translators: Table coumn header
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
 #.
@@ -599,72 +612,95 @@ msgstr "Viditeľný pre používateľa"
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:412 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
+#. translators: Table coumn header
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
+#: src/info.cc:414 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Typ"
 
-#: src/info.cc:402 src/search.cc:379
+#. translators: Table coumn header
+#: src/info.cc:415 src/search.cc:379
 msgid "Dependency"
 msgstr "Závislosť"
 
-#: src/info.cc:417
-msgid "Contents"
-msgstr "Obsah"
+#: src/info.cc:420 src/info.cc:434
+#, fuzzy
+msgid "Required"
+msgstr "Požadovaný reštart"
 
-#: src/info.cc:419
-msgid "(empty)"
-msgstr "(prázdny)"
+#: src/info.cc:425 src/info.cc:434 src/search.cc:318
+msgid "Recommended"
+msgstr "Odporúčaný"
 
-#: src/info.cc:472
-msgid "Flavor"
-msgstr "Druh"
+#: src/info.cc:431 src/info.cc:434 src/search.cc:320
+msgid "Suggested"
+msgstr "Navrhovaný"
 
-#: src/info.cc:477
-msgid "Short Name"
-msgstr "Krátky názov"
-
-#: src/info.cc:481 src/search.cc:578
-msgid "Is Base"
-msgstr "Základný"
-
-#: src/info.cc:485
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:501
 msgid "End of Support"
 msgstr "Koniec podpory"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
-msgid "undefined"
-msgstr "nedefinované"
+#: src/info.cc:506
+msgid "unknown"
+msgstr "neznámy"
 
-#: src/info.cc:488
-msgid "CPE Name"
-msgstr "Názov CPE"
+#. translators: %1% is an URL or Path pointing to some document
+#: src/info.cc:511
+#, boost-format
+msgid "See %1%"
+msgstr ""
 
-#: src/info.cc:495
-msgid "invalid CPE Name"
-msgstr "Neplatný názov CPE"
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:517
+msgid "Flavor"
+msgstr "Druh"
 
-#: src/info.cc:498
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:519 src/search.cc:578
+msgid "Is Base"
+msgstr "Základný"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:540 src/info.cc:567
 msgid "Update Repositories"
 msgstr "Aktualizačné repozitáre"
 
-#: src/info.cc:506
+#: src/info.cc:545
 msgid "Content Id"
 msgstr "Id obsahu"
 
-#: src/info.cc:513
+#: src/info.cc:557
 msgid "Provided by enabled repository"
 msgstr "Poskytované zapnutým repozitárom"
 
-#: src/info.cc:519
+#: src/info.cc:562
 msgid "Not provided by any enabled repository"
 msgstr "Neposkytované žiadnym zapnutým repozitárom"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:572
+msgid "CPE Name"
+msgstr "Názov CPE"
+
+#: src/info.cc:577
+msgid "undefined"
+msgstr "nedefinované"
+
+#: src/info.cc:579
+msgid "invalid CPE Name"
+msgstr "Neplatný názov CPE"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:582
+msgid "Short Name"
+msgstr "Krátky názov"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -1385,7 +1421,8 @@ msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "Nasledujúci produkt je odporúčaný, ale nebude sa inštalovať:"
 msgstr[1] "Nasledujúce %d produkty sú odporúčané, ale nebudú sa inštalovať:"
-msgstr[2] "Nasledujúcich %d produktov je odporúčaných, ale nebudú sa inštalovať:"
+msgstr[2] ""
+"Nasledujúcich %d produktov je odporúčaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:946
 #, c-format, boost-format
@@ -1394,7 +1431,8 @@ msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "Nasledujúca aplikácia je odporúčaná, ale nebude sa inštalovať:"
 msgstr[1] "Nasledujúce %d aplikácie sú odporúčané, ale nebudú sa inštalovať:"
-msgstr[2] "Nasledujúcich %d aplikácií je odporúčaných, ale nebudú sa inštalovať:"
+msgstr[2] ""
+"Nasledujúcich %d aplikácií je odporúčaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:986
 #, c-format, boost-format
@@ -1430,7 +1468,8 @@ msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "Nasledujúci produkt je navrhovaný, ale nebude sa inštalovať:"
 msgstr[1] "Nasledujúce %d produkty sú navrhované, ale nebudú sa inštalovať:"
-msgstr[2] "Nasledujúcich %d produktov je navrhovaných, ale nebudú sa inštalovať:"
+msgstr[2] ""
+"Nasledujúcich %d produktov je navrhovaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:1006
 #, c-format, boost-format
@@ -1439,7 +1478,8 @@ msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "Nasledujúca aplikácia je navrhovaná, ale nebude sa inštalovať:"
 msgstr[1] "Nasledujúce %d aplikácie sú navrhované, ale nebudú sa inštalovať:"
-msgstr[2] "Nasledujúcich %d aplikácií je navrhovaných, ale nebudú sa inštalovať:"
+msgstr[2] ""
+"Nasledujúcich %d aplikácií je navrhovaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:1028
 #, c-format, boost-format
@@ -1865,8 +1905,8 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
-"Autentifikácia požadovaná pre prístup k %s. Musíte byť správca systému (root)"
-", aby ste boli schopní čítať prihlasovacie údaje z %s."
+"Autentifikácia požadovaná pre prístup k %s. Musíte byť správca systému "
+"(root), aby ste boli schopní čítať prihlasovacie údaje z %s."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -2008,8 +2048,8 @@ msgid ""
 msgstr ""
 "Chyba môže byť spôsobená nesprávnymi metadátami v repozitári alebo chybou v "
 "analyzátore metadát. V tom druhom prípade alebo ak si nie ste istí, nahláste "
-"prosím chybu podľa inštrukcií na adrese "
-"http://en.opensuse.org/Zypper/Troubleshooting"
+"prosím chybu podľa inštrukcií na adrese http://en.opensuse.org/Zypper/"
+"Troubleshooting"
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -2229,7 +2269,8 @@ msgstr "Nie sú definované žiadne zapnuté repozitáre."
 #: src/repos.cc:1313
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie repozitárov."
+msgstr ""
+"Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie repozitárov."
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
@@ -2415,8 +2456,8 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"Zmeniť alias repozitára '%s' nie je možné. Tento repozitár patrí službe '%"
-"s', ktorá je zodpovedná za nastavenie jeho aliasu."
+"Zmeniť alias repozitára '%s' nie je možné. Tento repozitár patrí službe "
+"'%s', ktorá je zodpovedná za nastavenie jeho aliasu."
 
 #: src/repos.cc:1854
 #, c-format, boost-format
@@ -2878,7 +2919,8 @@ msgstr "Našli sa zhody v popisoch týchto opráv:"
 #: src/update.cc:1057
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
-msgstr "Oprava bugzilla problému číslo %s nebola nájdená alebo nie je potrebná."
+msgstr ""
+"Oprava bugzilla problému číslo %s nebola nájdená alebo nie je potrebná."
 
 #: src/update.cc:1059
 #, c-format, boost-format
@@ -3061,8 +3103,8 @@ msgstr ""
 "\t--no-refresh\t\tNeobnovovať repozitáre.\n"
 "\t--no-cd\t\t\tIgnorovať repozitáre CD/DVD.\n"
 "\t--no-remote\t\tIgnorovať vzdialené repozitáre.\n"
-"\t--releasever\t\tNastaviť hodnotu $releasever vo všetkých súboroch .repo ("
-"predvolená hodnota: distribution version)\n"
+"\t--releasever\t\tNastaviť hodnotu $releasever vo všetkých súboroch .repo "
+"(predvolená hodnota: distribution version)\n"
 
 #: src/Zypper.cc:472
 msgid ""
@@ -3321,8 +3363,8 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "Symbolický odkaz /etc/products.d/baseproduct je voľne visiaci alebo chýba!\n"
-"Odkaz musí smerovať do .prod súboru vašich kľúčových produktov v "
-"/etc/products.d.\n"
+"Odkaz musí smerovať do .prod súboru vašich kľúčových produktov v /etc/"
+"products.d.\n"
 
 #: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
@@ -3516,11 +3558,11 @@ msgstr ""
 "-r, --repo <alias|#|URI>    Načítať iba zadaný repozitár.\n"
 "-t, --type <typ>            Typ balíka (%s)\n"
 "                            Predvolený typ: %s.\n"
-"-n, --name                  Vybrať balíky podľa názvu, nie podľa schopnosti."
-"\n"
+"-n, --name                  Vybrať balíky podľa názvu, nie podľa "
+"schopnosti.\n"
 "-C, --capability            Vybrať balíky podľa schopnosti.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
-"\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
+"ladenie.\n"
 "-R, --no-force-resolution   Nenútiť riešiteľa nájsť riešenie,\n"
 "                            umožniť mu spýtať sa.\n"
 "    --force-resolution      Prinútiť riešiteľa nájsť riešenie (aj keby\n"
@@ -3639,8 +3681,8 @@ msgstr ""
 "režimy:\n"
 "                            %s\n"
 "-d, --download-only         Len stiahnuť balíky, neinštalovať.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
-"\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
+"ladenie.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
@@ -4014,8 +4056,8 @@ msgstr ""
 "-r, --repo <alias|#|URI> Vyčistiť len zadané repozitáre.\n"
 "-m, --metadata           Vyčistiť vyrovnávaciu pamäť metadát.\n"
 "-M, --raw-metadata       Vyčistiť vyrovnávaciu pamäť surových metadát.\n"
-"-a, --all                Vyčistiť vyrovnávacie pamäte pre metadáta aj balíky."
-"\n"
+"-a, --all                Vyčistiť vyrovnávacie pamäte pre metadáta aj "
+"balíky.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -4119,8 +4161,8 @@ msgstr ""
 "                            Aktualizácia na nižšiu verziu, aj keď existuje "
 "vyššia\n"
 "                            je tiež prijateľná.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
-"\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
+"ladenie.\n"
 "    --no-recommends         Neinštalovať odporúčané balíky, len vyžadované.\n"
 "    --recommends            Nainštalovať aj odporúčané balíky naviac\n"
 "                            k vyžadovaným.\n"
@@ -4137,8 +4179,8 @@ msgstr ""
 "-D, --dry-run               Otestovať aktualizáciu, nič v skutočnosti "
 "neaktualizovať.\n"
 "    --details               Zobraziť podrobný súhrn inštalácie.\n"
-"    --download              Nastaviť režim download-install. Dostupné režimy:"
-"\n"
+"    --download              Nastaviť režim download-install. Dostupné "
+"režimy:\n"
 "                            %s\n"
 "-d, --download-only             Len stiahnuť balíky, neinštalovať.\n"
 
@@ -4194,15 +4236,15 @@ msgstr ""
 "                            Automaticky odpovedať 'áno' na výzvu\n"
 "                            na potvrdenie licencie tretej strany.\n"
 "                            Pre ďalšie podrobnosti pozrieť 'man zypper'.\n"
-"-b, --bugzilla #            Nainštalovať opravu pre zadaný bugzilla problém."
-"\n"
+"-b, --bugzilla #            Nainštalovať opravu pre zadaný bugzilla "
+"problém.\n"
 "    --cve #                 Nainštalovať opravu pre zadaný CVE problém.\n"
 "-g  --category <kategória>   Nainštalovať opravy iba s touto kategóriou.\n"
 "    --severity <závažnosť>   Nainštalovať opravy iba s touto závažnosťou.\n"
 "    --date <RRRR-MM-DD>     Nainštalovať iba opravy vydané po zadanom "
 "dátume, ale nie vrátane neho\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
-"\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
+"ladenie.\n"
 "    --no-recommends         Neinštalovať odporúčané balíky, len vyžadované.\n"
 "    --recommends            Nainštalovať aj odporúčané balíky naviac\n"
 "                            k vyžadovaným.\n"
@@ -4216,8 +4258,8 @@ msgstr ""
 "-D, --dry-run               Otestovať aktualizáciu, nič v skutočnosti "
 "neaktualizovať.\n"
 "    --details               Zobraziť podrobný súhrn inštalácie.\n"
-"    --download              Nastaviť režim download-install. Dostupné režimy:"
-"\n"
+"    --download              Nastaviť režim download-install. Dostupné "
+"režimy:\n"
 "                            %s\n"
 "-d, --download-only         Len stiahnuť balíky, neinštalovať.\n"
 
@@ -4375,8 +4417,8 @@ msgstr ""
 "                            Automaticky odpovedať 'áno' na výzvu\n"
 "                            na potvrdenie licencie tretej strany.\n"
 "                            Pre ďalšie podrobnosti pozrieť 'man zypper'.\n"
-"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre ladenie."
-"\n"
+"    --debug-solver          Vytvoriť testovací prípad riešiteľa pre "
+"ladenie.\n"
 "    --no-recommends         Neinštalovať odporúčané balíky, len vyžadované.\n"
 "    --recommends            Nainštalovať aj odporúčané balíky naviac\n"
 "                            k vyžadovaným.\n"
@@ -4389,8 +4431,8 @@ msgstr ""
 "-D, --dry-run               Otestovať aktualizáciu, nič v skutočnosti "
 "neaktualizovať.\n"
 "    --details               Zobraziť podrobný súhrn inštalácie.\n"
-"    --download              Nastaviť režim download-install. Dostupné režimy:"
-"\n"
+"    --download              Nastaviť režim download-install. Dostupné "
+"režimy:\n"
 "                            %s\n"
 "-d, --download-only         Len stiahnuť balíky, neinštalovať.\n"
 
@@ -4471,8 +4513,8 @@ msgstr ""
 "    --suggests             Hľadať balíky, ktoré navrhujú hľadané reťazce.\n"
 "    --conflicts            Hľadať balíky, ktoré sú v konflikte s hľadanými "
 "reťazcami.\n"
-"    --obsoletes            Hľadať balíky, ktoré zastarávajú hľadané reťazce."
-"\n"
+"    --obsoletes            Hľadať balíky, ktoré zastarávajú hľadané "
+"reťazce.\n"
 "-n, --name                 Užitočné spolu s voľbami závislosti, inak \n"
 "                           je predvolené vyhľadávanie v názve balíčka.\n"
 "-f, --file-list            Hľadať zhodu v súborovom zozname balíkov.\n"
@@ -5179,7 +5221,8 @@ msgstr ""
 #: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "Služba '%s' nebola nájdená podľa zadaného aliasu, čísla ani URI adresy."
+msgstr ""
+"Služba '%s' nebola nájdená podľa zadaného aliasu, čísla ani URI adresy."
 
 #: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
@@ -5386,7 +5429,8 @@ msgstr "Použitie"
 
 #: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
-msgstr "Pre pridávanie zámkov balíkov sú potrebné práva správcu systému (root)."
+msgstr ""
+"Pre pridávanie zámkov balíkov sú potrebné práva správcu systému (root)."
 
 #: src/Zypper.cc:5023
 #, c-format, boost-format
@@ -6476,20 +6520,23 @@ msgstr "Problém pri sťahovaní zadaného RPM súboru"
 msgid "Please check whether the file is accessible."
 msgstr "Prosím overte, či je súbor dostupný."
 
-#: src/utils/misc.cc:686
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Neznámy mód sťahovania '%s'."
 
-#: src/utils/misc.cc:687
+#: src/utils/misc.cc:688
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Dostupné režimy sťahovania: %s"
 
-#: src/utils/misc.cc:701
+#: src/utils/misc.cc:702
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Voľba '%s' prepisuje '%s'."
+
+#~ msgid "Info for type '%s' not implemented."
+#~ msgstr "Informácia pre typ '%s' nie je implementovaná."
 
 #~ msgid "Name: "
 #~ msgstr "Názov: "

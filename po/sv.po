@@ -11,11 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-23 10:04+0200\n"
+"POT-Creation-Date: 2016-07-21 16:00+0200\n"
 "PO-Revision-Date: 2016-07-11 15:45+0000\n"
 "Last-Translator: Asa Karlsson <asa.karlsson@lqs-lionbridge.com>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
-"\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
+">\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -461,41 +461,55 @@ msgstr "Ogiltigt objekt"
 msgid "Error"
 msgstr "Fel"
 
+#. translators: property name; short; used like "Name: value"
+#. translators: package's repository (header)
+#: src/info.cc:66 src/update.cc:798 src/search.cc:74 src/search.cc:378
+#: src/search.cc:512 src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "Förråd"
+
+#. translators: property name; short; used like "Name: value"
+#. translators: Table coumn header
 #. translators: name (general header)
-#: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
+#: src/info.cc:68 src/info.cc:413 src/repos.cc:961 src/repos.cc:1094
 #: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
 msgstr "Namn"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package version (header)
-#: src/info.cc:74 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/info.cc:70 src/search.cc:70 src/search.cc:377 src/search.cc:514
 #: src/search.cc:576
 msgid "Version"
 msgstr "Version"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/info.cc:72 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
 msgstr "Ark"
 
-#: src/info.cc:76
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:74
 msgid "Vendor"
 msgstr "Leverantör"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
+#: src/info.cc:80 src/search.cc:233 src/utils/misc.cc:255
 #: src/utils/misc.cc:296
 msgid "Summary"
 msgstr "Sammanfattning"
 
+#. translators: property name; short; used like "Name: value"
 #: src/info.cc:82 src/Zypper.cc:5246
 msgid "Description"
 msgstr "Beskrivning"
 
-#: src/info.cc:136
+#: src/info.cc:152
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
@@ -503,99 +517,98 @@ msgstr[0] "Det finns %1% matchning för  '%2%'."
 msgstr[1] "Det finns %1% matchningar för  '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:168
+#: src/info.cc:184
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' hittades inte."
 
-#: src/info.cc:190
+#. TranslatorExplanation E.g. "Information for package zypper:"
+#: src/info.cc:204
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "Information för %s %s:"
 
-#. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-#: src/info.cc:206
-#, c-format, boost-format
-msgid "Info for type '%s' not implemented."
-msgstr "Informationen för typen %s har inte implementerats."
-
-#. translators: package's repository (header)
-#: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
-#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
-#: src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "Förråd"
-
-#: src/info.cc:255
+#: src/info.cc:283
 msgid "Support Level"
 msgstr "Supportnivå"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:286
+msgid "Installed Size"
+msgstr "Installerad storlek"
+
+#. translators: property name; short; used like "Name: value"
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:258 src/info.cc:390 src/info.cc:479 src/Summary.cc:1207
+#: src/info.cc:288 src/info.cc:390 src/info.cc:521 src/Summary.cc:1207
 msgid "Installed"
 msgstr "Installerad"
 
-#: src/info.cc:260 src/info.cc:311 src/utils/misc.cc:254 src/utils/misc.cc:295
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:290 src/info.cc:336 src/info.cc:524 src/utils/misc.cc:254
+#: src/utils/misc.cc:295
 msgid "Status"
 msgstr "Status"
 
-#: src/info.cc:265
+#: src/info.cc:294 src/info.cc:528
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "för gammal (version %s är installerad)"
 
-#: src/info.cc:269
+#: src/info.cc:296 src/info.cc:530
 msgid "up-to-date"
 msgstr "uppdaterad"
 
-#: src/info.cc:273
+#: src/info.cc:299 src/info.cc:533
 msgid "not installed"
 msgstr "inte installerad"
 
-#: src/info.cc:275
-msgid "Installed Size"
-msgstr "Installerad storlek"
-
+#. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:314 src/update.cc:350 src/utils/misc.cc:251
+#: src/info.cc:338 src/update.cc:350 src/utils/misc.cc:251
 #: src/utils/misc.cc:292
 msgid "Category"
 msgstr "Kategori"
 
-#: src/info.cc:315 src/utils/misc.cc:252 src/utils/misc.cc:293
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:340 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
 msgstr "Allvarlighetsgrad"
 
-#: src/info.cc:316
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:342
 msgid "Created On"
 msgstr "Skapad den"
 
-#: src/info.cc:318
+#: src/info.cc:345
 msgid "Reboot Required"
 msgstr "Omstart krävs"
 
-#: src/info.cc:319
+#: src/info.cc:346
 msgid "Package Manager Restart Required"
 msgstr "Omstart av pakethanterare krävs"
 
-#. print interactive flags the same style as list-patches
-#: src/info.cc:327 src/info.cc:330 src/utils/misc.cc:253 src/utils/misc.cc:294
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:353 src/info.cc:356 src/utils/misc.cc:253 src/utils/misc.cc:294
 msgid "Interactive"
 msgstr "Interaktivt"
 
-#: src/info.cc:354 src/search.cc:318
-msgid "Recommended"
-msgstr "Rekommenderad"
-
-#: src/info.cc:356 src/search.cc:320
-msgid "Suggested"
-msgstr "Föreslagen"
-
-#: src/info.cc:391
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:392
 msgid "Visible to User"
 msgstr "Visas för användare"
 
+# continue button label
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:406 src/info.cc:442
+msgid "Contents"
+msgstr "Innehåll"
+
+#: src/info.cc:406
+msgid "(empty)"
+msgstr "(tom)"
+
+#. translators: Table coumn header
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
 #.
@@ -603,74 +616,96 @@ msgstr "Visas för användare"
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:412 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
+#. translators: Table coumn header
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
+#: src/info.cc:414 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "Typ"
 
-#: src/info.cc:402 src/search.cc:379
+#. translators: Table coumn header
+#: src/info.cc:415 src/search.cc:379
 msgid "Dependency"
 msgstr "Beroende"
 
-# continue button label
-#: src/info.cc:417
-msgid "Contents"
-msgstr "Innehåll"
+#: src/info.cc:420 src/info.cc:434
+#, fuzzy
+msgid "Required"
+msgstr "Kräver"
 
-#: src/info.cc:419
-msgid "(empty)"
-msgstr "(tom)"
+#: src/info.cc:425 src/info.cc:434 src/search.cc:318
+msgid "Recommended"
+msgstr "Rekommenderad"
 
-#: src/info.cc:472
-msgid "Flavor"
-msgstr "Smak"
+#: src/info.cc:431 src/info.cc:434 src/search.cc:320
+msgid "Suggested"
+msgstr "Föreslagen"
 
-#: src/info.cc:477
-msgid "Short Name"
-msgstr "Kortnamn"
-
-#: src/info.cc:481 src/search.cc:578
-msgid "Is Base"
-msgstr "Är bas"
-
-#: src/info.cc:485
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:501
 msgid "End of Support"
 msgstr "Slut på support"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
-msgid "undefined"
-msgstr "odefinierat"
+#: src/info.cc:506
+msgid "unknown"
+msgstr "okänd"
 
-#: src/info.cc:488
-msgid "CPE Name"
-msgstr "CPE-namn"
+#. translators: %1% is an URL or Path pointing to some document
+#: src/info.cc:511
+#, boost-format
+msgid "See %1%"
+msgstr ""
 
-#: src/info.cc:495
-msgid "invalid CPE Name"
-msgstr "Ogiltigt CPE-namn"
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:517
+msgid "Flavor"
+msgstr "Smak"
 
-#: src/info.cc:498
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:519 src/search.cc:578
+msgid "Is Base"
+msgstr "Är bas"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:540 src/info.cc:567
 msgid "Update Repositories"
 msgstr "Uppdatera förråd"
 
 # continue button label
-#: src/info.cc:506
+#: src/info.cc:545
 msgid "Content Id"
 msgstr "Innehålls-id"
 
-#: src/info.cc:513
+#: src/info.cc:557
 msgid "Provided by enabled repository"
 msgstr "Tillhandahålls av aktiverat förråd"
 
-#: src/info.cc:519
+#: src/info.cc:562
 msgid "Not provided by any enabled repository"
 msgstr "Tillhandahålls inte av något aktiverat förråd"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:572
+msgid "CPE Name"
+msgstr "CPE-namn"
+
+#: src/info.cc:577
+msgid "undefined"
+msgstr "odefinierat"
+
+#: src/info.cc:579
+msgid "invalid CPE Name"
+msgstr "Ogiltigt CPE-namn"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:582
+msgid "Short Name"
+msgstr "Kortnamn"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -2688,7 +2723,7 @@ msgstr[1] "%d programfixar låsta"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
 msgstr[0] "%d valfri progamfix"
@@ -2703,7 +2738,7 @@ msgstr "använd '%1%' för att inkludera med valfria programfixar"
 
 #. translator: stats summary
 #: src/update.cc:315
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
 msgstr[0] "%d nödvändig programfix"
@@ -2711,7 +2746,7 @@ msgstr[1] "%d nödvändiga programfixar"
 
 #. translator: stats summary
 #: src/update.cc:318
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
 msgstr[0] "%d säkerhetsuppdatering"
@@ -3563,7 +3598,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3604,7 +3639,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3651,8 +3686,8 @@ msgstr ""
 "aktiveras.\n"
 "-I, --ar-to-disable <alias>    Lägg till ett RIS-tjänstarkiv som ska "
 "inaktiveras.\n"
-"-j, --rr-to-enable <alias>     Ta bort ett RIS-tjänstarkiv som ska aktiveras."
-"\n"
+"-j, --rr-to-enable <alias>     Ta bort ett RIS-tjänstarkiv som ska "
+"aktiveras.\n"
 "-J, --rr-to-disable <alias>    Ta bort ett RIS-tjänstarkiv som ska "
 "inaktiveras.\n"
 "-k, --cl-to-enable             Rensa listan med RIS-tjänstarkiv som ska "
@@ -3842,7 +3877,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3878,8 +3913,8 @@ msgstr ""
 "  Kommandoalternativ:\n"
 "-d, --disable             Inaktivera lagringsplatsen (ta inte bort den).\n"
 "-e, --enable              Aktivera en inaktiverad lagringsplats.\n"
-"-r, --refresh             Aktivera automatisk uppdatering av lagringsplatsen."
-"\n"
+"-r, --refresh             Aktivera automatisk uppdatering av "
+"lagringsplatsen.\n"
 "-R, --no-refresh          Inaktivera automatisk uppdatering av "
 "lagringsplatsen.\n"
 "-n, --name <namn>           Ange ett namn för lagringsplatsen.\n"
@@ -5445,7 +5480,7 @@ msgid "Applying solution %s"
 msgstr "Lösningen %s tillämpas"
 
 #: src/solve-commit.cc:146
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
 msgstr[0] "%d problem:"
@@ -6414,20 +6449,23 @@ msgstr "Det gick inte att hämta den angivna RPM-filen"
 msgid "Please check whether the file is accessible."
 msgstr "Kontrollera att filen är hämtningsbar."
 
-#: src/utils/misc.cc:686
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Okänt hämtningsläge %s."
 
-#: src/utils/misc.cc:687
+#: src/utils/misc.cc:688
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Tillgängliga hämtningslägen: %s"
 
-#: src/utils/misc.cc:701
+#: src/utils/misc.cc:702
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Alternativet %s åsidosätter %s."
+
+#~ msgid "Info for type '%s' not implemented."
+#~ msgstr "Informationen för typen %s har inte implementerats."
 
 #~ msgid "Name: "
 #~ msgstr "Namn: "
@@ -6565,9 +6603,6 @@ msgstr "Alternativet %s åsidosätter %s."
 
 #~ msgid "None"
 #~ msgstr "Ingen"
-
-#~ msgid "Requires"
-#~ msgstr "Kräver"
 
 #~ msgid "Provides"
 #~ msgstr "Tillhandahåller"

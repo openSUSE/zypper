@@ -11,11 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-23 10:04+0200\n"
+"POT-Creation-Date: 2016-07-21 16:00+0200\n"
 "PO-Revision-Date: 2016-07-17 09:58+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
-"\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
+">\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -274,7 +274,7 @@ msgid "Running: %s  (%s, %s)"
 msgstr "تشغيل: %s (%s و%s)"
 
 #: src/callbacks/rpm.h:208
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Removing %s"
 msgstr "إزالة  %s 1"
 
@@ -290,7 +290,7 @@ msgid "Removal of %s failed:"
 msgstr "فشلت إزالة %s:"
 
 #: src/callbacks/rpm.h:279
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Installing: %s"
 msgstr "التثبيت: %s"
 
@@ -301,7 +301,7 @@ msgid "Installing: %s-%s"
 msgstr "تثبيت: %s-%s"
 
 #: src/callbacks/rpm.h:308
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "فشل تثبيت %s:"
 
@@ -476,41 +476,55 @@ msgstr "كائن غير صالح"
 msgid "Error"
 msgstr "الخطأ"
 
+#. translators: property name; short; used like "Name: value"
+#. translators: package's repository (header)
+#: src/info.cc:66 src/update.cc:798 src/search.cc:74 src/search.cc:378
+#: src/search.cc:512 src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
+msgid "Repository"
+msgstr "المخزن"
+
+#. translators: property name; short; used like "Name: value"
+#. translators: Table coumn header
 #. translators: name (general header)
-#: src/info.cc:73 src/info.cc:402 src/repos.cc:961 src/repos.cc:1094
+#: src/info.cc:68 src/info.cc:413 src/repos.cc:961 src/repos.cc:1094
 #: src/repos.cc:2402 src/update.cc:801 src/Zypper.cc:5246 src/search.cc:66
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
 msgstr "الاسم"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package version (header)
-#: src/info.cc:74 src/search.cc:70 src/search.cc:377 src/search.cc:514
+#: src/info.cc:70 src/search.cc:70 src/search.cc:377 src/search.cc:514
 #: src/search.cc:576
 msgid "Version"
 msgstr "الإصدار"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:75 src/update.cc:807 src/search.cc:72 src/search.cc:515
+#: src/info.cc:72 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
 msgstr "الهيكل"
 
-#: src/info.cc:76
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:74
 msgid "Vendor"
 msgstr "المُنتِج"
 
+#. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:233 src/utils/misc.cc:255
+#: src/info.cc:80 src/search.cc:233 src/utils/misc.cc:255
 #: src/utils/misc.cc:296
 msgid "Summary"
 msgstr "الملخص"
 
+#. translators: property name; short; used like "Name: value"
 #: src/info.cc:82 src/Zypper.cc:5246
 msgid "Description"
 msgstr "الوصف"
 
-#: src/info.cc:136
+#: src/info.cc:152
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
@@ -522,99 +536,97 @@ msgstr[4] "سيكون هناك عدد %1% من التطابقات لـ '%2%'."
 msgstr[5] "سيكون هناك عدد %1% من التطابقات لـ '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:168
+#: src/info.cc:184
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "لم يتم العثور على %s '%s'."
 
-#: src/info.cc:190
+#. TranslatorExplanation E.g. "Information for package zypper:"
+#: src/info.cc:204
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "معلومات %s %s:"
 
-#. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-#: src/info.cc:206
-#, c-format, boost-format
-msgid "Info for type '%s' not implemented."
-msgstr "لم يتم تنفيذ معلومات النوع '%s'."
-
-#. translators: package's repository (header)
-#: src/info.cc:247 src/info.cc:386 src/info.cc:458 src/update.cc:798
-#: src/search.cc:74 src/search.cc:378 src/search.cc:512 src/search.cc:571
-#: src/locks.cc:107 src/utils/misc.cc:249
-msgid "Repository"
-msgstr "المخزن"
-
-#: src/info.cc:255
+#: src/info.cc:283
 msgid "Support Level"
 msgstr "مستوى الدعم"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:286
+msgid "Installed Size"
+msgstr "الحجم المُثَّبت"
+
+#. translators: property name; short; used like "Name: value"
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/info.cc:258 src/info.cc:390 src/info.cc:479 src/Summary.cc:1207
+#: src/info.cc:288 src/info.cc:390 src/info.cc:521 src/Summary.cc:1207
 msgid "Installed"
 msgstr "مثبَّت"
 
-#: src/info.cc:260 src/info.cc:311 src/utils/misc.cc:254 src/utils/misc.cc:295
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:290 src/info.cc:336 src/info.cc:524 src/utils/misc.cc:254
+#: src/utils/misc.cc:295
 msgid "Status"
 msgstr "الحالة"
 
-#: src/info.cc:265
+#: src/info.cc:294 src/info.cc:528
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "قديم (تم تثبيت الإصدار %s)"
 
-#: src/info.cc:269
+#: src/info.cc:296 src/info.cc:530
 msgid "up-to-date"
 msgstr "حديث"
 
-#: src/info.cc:273
+#: src/info.cc:299 src/info.cc:533
 msgid "not installed"
 msgstr "غير مثبت"
 
-#: src/info.cc:275
-msgid "Installed Size"
-msgstr "الحجم المُثَّبت"
-
+#. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:314 src/update.cc:350 src/utils/misc.cc:251
+#: src/info.cc:338 src/update.cc:350 src/utils/misc.cc:251
 #: src/utils/misc.cc:292
 msgid "Category"
 msgstr "الفئة"
 
-#: src/info.cc:315 src/utils/misc.cc:252 src/utils/misc.cc:293
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:340 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
 msgstr "الخطورة"
 
-#: src/info.cc:316
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:342
 msgid "Created On"
 msgstr "تاريخ الإنشاء"
 
-#: src/info.cc:318
+#: src/info.cc:345
 msgid "Reboot Required"
 msgstr "مطلوب إعادة التشغيل"
 
-#: src/info.cc:319
+#: src/info.cc:346
 msgid "Package Manager Restart Required"
 msgstr "مطلوب إعادة تشغيل مدير الحزم"
 
-#. print interactive flags the same style as list-patches
-#: src/info.cc:327 src/info.cc:330 src/utils/misc.cc:253 src/utils/misc.cc:294
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:353 src/info.cc:356 src/utils/misc.cc:253 src/utils/misc.cc:294
 msgid "Interactive"
 msgstr "تفاعلي"
 
-#: src/info.cc:354 src/search.cc:318
-msgid "Recommended"
-msgstr "مستحسن"
-
-#: src/info.cc:356 src/search.cc:320
-msgid "Suggested"
-msgstr "مقترح"
-
-#: src/info.cc:391
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:392
 msgid "Visible to User"
 msgstr "مرئية للمستخدم"
 
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:406 src/info.cc:442
+msgid "Contents"
+msgstr "المحتويات"
+
+#: src/info.cc:406
+msgid "(empty)"
+msgstr "(فارغ)"
+
+#. translators: Table coumn header
 #. TranslatorExplanation S stands for Status
 #. translators: S for 'installed Status'
 #.
@@ -622,72 +634,95 @@ msgstr "مرئية للمستخدم"
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:402 src/update.cc:796 src/search.cc:64 src/search.cc:230
+#: src/info.cc:412 src/update.cc:796 src/search.cc:64 src/search.cc:230
 #: src/search.cc:375 src/search.cc:511 src/search.cc:570
 msgid "S"
 msgstr "S"
 
+#. translators: Table coumn header
 #. translators: type (general header)
-#: src/info.cc:402 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
+#: src/info.cc:414 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
 msgstr "النوع"
 
-#: src/info.cc:402 src/search.cc:379
+#. translators: Table coumn header
+#: src/info.cc:415 src/search.cc:379
 msgid "Dependency"
 msgstr "التبعية"
 
-#: src/info.cc:417
-msgid "Contents"
-msgstr "المحتويات"
+#: src/info.cc:420 src/info.cc:434
+#, fuzzy
+msgid "Required"
+msgstr "تتطلّب"
 
-#: src/info.cc:419
-msgid "(empty)"
-msgstr "(فارغ)"
+#: src/info.cc:425 src/info.cc:434 src/search.cc:318
+msgid "Recommended"
+msgstr "مستحسن"
 
-#: src/info.cc:472
-msgid "Flavor"
-msgstr "صفة"
+#: src/info.cc:431 src/info.cc:434 src/search.cc:320
+msgid "Suggested"
+msgstr "مقترح"
 
-#: src/info.cc:477
-msgid "Short Name"
-msgstr "الاسم القصير"
-
-#: src/info.cc:481 src/search.cc:578
-msgid "Is Base"
-msgstr "هو أساس"
-
-#: src/info.cc:485
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:501
 msgid "End of Support"
 msgstr "نهاية الدعم"
 
-#: src/info.cc:485 src/info.cc:493 src/info.cc:524
-msgid "undefined"
-msgstr "غير معرّف"
+#: src/info.cc:506
+msgid "unknown"
+msgstr "غير معروف"
 
-#: src/info.cc:488
-msgid "CPE Name"
-msgstr "اسم CPE"
+#. translators: %1% is an URL or Path pointing to some document
+#: src/info.cc:511
+#, boost-format
+msgid "See %1%"
+msgstr ""
 
-#: src/info.cc:495
-msgid "invalid CPE Name"
-msgstr "اسم CPE غير صالح"
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:517
+msgid "Flavor"
+msgstr "صفة"
 
-#: src/info.cc:498
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:519 src/search.cc:578
+msgid "Is Base"
+msgstr "هو أساس"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:540 src/info.cc:567
 msgid "Update Repositories"
 msgstr "تحديث المخازن"
 
-#: src/info.cc:506
+#: src/info.cc:545
 msgid "Content Id"
 msgstr "معرف المحتوى"
 
-#: src/info.cc:513
+#: src/info.cc:557
 msgid "Provided by enabled repository"
 msgstr "متوفر بواسطة المخزن الممكّن"
 
-#: src/info.cc:519
+#: src/info.cc:562
 msgid "Not provided by any enabled repository"
 msgstr "لم يتوفر بواسطة أي مخزن ممكّن"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:572
+msgid "CPE Name"
+msgstr "اسم CPE"
+
+#: src/info.cc:577
+msgid "undefined"
+msgstr "غير معرّف"
+
+#: src/info.cc:579
+msgid "invalid CPE Name"
+msgstr "اسم CPE غير صالح"
+
+#. translators: property name; short; used like "Name: value"
+#: src/info.cc:582
+msgid "Short Name"
+msgstr "الاسم القصير"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -952,7 +987,7 @@ msgid ""
 msgstr "يتوفر تحديث مرشح لـ '%s'، ولكنه مقفل. استخدم '%s' لإلغاء القفل."
 
 #: src/RequestFeedback.cc:148
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
@@ -1228,7 +1263,7 @@ msgstr[4] "المنتجون التالين %d سيتم ترقيتهم:"
 msgstr[5] "المنتجون التالين %d سيتم ترقيتهم:"
 
 #: src/Summary.cc:611
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "ستتم ترقية التطبيق التالي:"
@@ -1443,7 +1478,7 @@ msgstr[5] ""
 "يوصي بالحزم التالية %d ولكن لن يتم تثبيتها (سيتم تثبيت الحزم المطلوبة فقط):"
 
 #: src/Summary.cc:911
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
 "unwanted (was manually removed before):"
@@ -1499,7 +1534,7 @@ msgstr[4] "يوصى بالرقع التالية %d لكن لن يتم تثبيت
 msgstr[5] "يوصى بالرقع التالية %d لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:938
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
@@ -1511,7 +1546,7 @@ msgstr[4] "يوصى بالأنماط التالية %d، لكن لن يتم تث
 msgstr[5] "يوصى بالأنماط التالية %d، لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:942
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
@@ -1547,7 +1582,7 @@ msgstr[4] "الحزم التالية مقترحة %d لكن لن يتم تثبي
 msgstr[5] "الحزم التالية مقترحة %d لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:991
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
@@ -1571,7 +1606,7 @@ msgstr[4] "الأنماط التالية %d مقترحة، لكن لن يتم ت
 msgstr[5] "الأنماط التالية %d مقترحة، لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:1001
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
@@ -1785,7 +1820,7 @@ msgid "Run '%1%' to see the complete list of locked items."
 msgstr "تشغيل '%1%' للاطلاع على القائمة الكاملة للعناصر المقفلة."
 
 #: src/Summary.cc:1222
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "تتطلب الدفعة التالية إعادة تشغيل نظام:"
@@ -2224,8 +2259,7 @@ msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
-"الرجاء التحقق مما إذا كانت محددات URI المعرَّفة لهذا المخزن تشير إلى مخزن "
-"صالح."
+"الرجاء التحقق مما إذا كانت محددات URI المعرَّفة لهذا المخزن تشير إلى مخزن صالح."
 
 #: src/repos.cc:352
 #, c-format, boost-format
@@ -2251,8 +2285,8 @@ msgid ""
 msgstr ""
 "ربما نتج هذا الخطأ بسبب وجود بيانات تعريف غير صالحة في المخزن أو خطأ في محلل "
 "بيانات التعريف. وفي الحالة الأخيرة، أو في حالة وجود شك، الرجاء تقديم تقرير "
-"خطأ وذلك باتباع الإرشادات الموجودة على "
-"http://en.opensuse.org/Zypper#Troubleshooting"
+"خطأ وذلك باتباع الإرشادات الموجودة على http://en.opensuse.org/"
+"Zypper#Troubleshooting"
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -3008,7 +3042,7 @@ msgstr[5] "%1% من التصحيحات القابلة للتطبيق تم الع
 
 #. translator: stats summary
 #: src/update.cc:294
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
 msgstr[0] "%d من التصحيحات المقفلة"
@@ -3020,7 +3054,7 @@ msgstr[5] "%d من التصحيحات المقفلة"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
 msgstr[0] "%d من التصحيحات الاختيارية"
@@ -3286,8 +3320,8 @@ msgstr ""
 "التعريف الأولية.\n"
 "\t--solv-cache-dir <dir>\tاستخدام دليل ذاكرة التخزين المؤقت لملف المحلل "
 "البديل.\n"
-"\t--pkg-cache-dir <dir>\tاستخدام الدليل البديل لذاكرة التخزين المؤقت للحزمة ."
-"\n"
+"\t--pkg-cache-dir <dir>\tاستخدام الدليل البديل لذاكرة التخزين المؤقت "
+"للحزمة .\n"
 
 #: src/Zypper.cc:458
 msgid ""
@@ -3577,8 +3611,8 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "الارتباط الرمزي /etc/products.d/baseproduct غير سليم أو مفقود!\n"
-"يجب أن يشير الارتباط إلى ملف ‎.prod الخاص بمنتجاتك الأساسية في "
-"/etc/products.d.\n"
+"يجب أن يشير الارتباط إلى ملف ‎.prod الخاص بمنتجاتك الأساسية في /etc/products."
+"d.\n"
 
 #: src/Zypper.cc:1044
 msgid "Repositories disabled, using the database of installed packages only."
@@ -3886,7 +3920,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1685
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3927,7 +3961,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1744
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -4154,7 +4188,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:1983
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4255,8 +4289,8 @@ msgstr ""
 "  خيارات الأوامر:\n"
 "-r, --repo <alias|#|URI> تنظيف المخازن المحددة فقط.\n"
 "-m, --metadata           تنظيف ذاكرة التخزين المؤقت لبيانات التعريف.\n"
-"-M, --raw-metadata       تنظيف ذاكرة التخزين المؤقت لبيانات التعريف الأولية."
-"\n"
+"-M, --raw-metadata       تنظيف ذاكرة التخزين المؤقت لبيانات التعريف "
+"الأولية.\n"
 "-a, --all                تنظيف الذاكرتين المؤقتتين لبيانات التعريف والحزم.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
@@ -4435,8 +4469,8 @@ msgstr ""
 "                            راجع man zypper  لمزيد من التفاصيل.\n"
 "-b, --bugzilla #            تثبيت التصحيح الذي يقوم بإصلاح مشكلة bugzilla "
 "المحددة.\n"
-"    --cve #                 تثبيت التصحيح الذي يقوم بإصلاح مشكلة CVE المحددة."
-"\n"
+"    --cve #                 تثبيت التصحيح الذي يقوم بإصلاح مشكلة CVE "
+"المحددة.\n"
 "-g  --category <category>   تثبيت التصحيحات من هذه الفئة فقط.\n"
 "    --severity <severity>   تثبيت التصحيحات بهذه الخطورة فقط.\n"
 "    --date <YYYY-MM-DD>     تثبيت التصحيحات التي تم إصدارها في الأيام حتى "
@@ -4881,8 +4915,7 @@ msgstr ""
 "\n"
 "عرض المعلومات التفصيلية حول الحزم المحددة.\n"
 "بشكل افتراضي، يتم عرض الحزم التي تطابق بدقة الأسماء المحددة.\n"
-"للحصول أيضًا على الحزم التي تتطابق جزئيًا، استخدم الخيار '--match-substrings'"
-"\n"
+"للحصول أيضًا على الحزم التي تتطابق جزئيًا، استخدم الخيار '--match-substrings'\n"
 "أو استخدم حرفي البدل (*?) بالاسم.\n"
 "\n"
 "  خيارات الأوامر:\n"
@@ -5291,8 +5324,8 @@ msgid ""
 msgstr ""
 "patch-search [خيارات] [querystring...]\n"
 "\n"
-"بحث عن التصحيحات التي تتطابق مع سلاسل البحث المحددة. ويعتبر هذا اسمًا مستعارً"
-"ا لـ '%s'.\n"
+"بحث عن التصحيحات التي تتطابق مع سلاسل البحث المحددة. ويعتبر هذا اسمًا مستعارًا "
+"لـ '%s'.\n"
 
 #. translators: this is just a legacy command
 #: src/Zypper.cc:3153
@@ -6736,20 +6769,23 @@ msgstr "حدثت مشكلة أثناء استرداد ملف RPM المحدد"
 msgid "Please check whether the file is accessible."
 msgstr "الرجاء التحقق من إمكانية الوصول إلى الملف."
 
-#: src/utils/misc.cc:686
+#: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "وضع الإنزال غير معروف '%s'."
 
-#: src/utils/misc.cc:687
+#: src/utils/misc.cc:688
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "أوضاع الإنزال المتوفرة: %s"
 
-#: src/utils/misc.cc:701
+#: src/utils/misc.cc:702
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "يتجاوز خيار '%s' '%s'."
+
+#~ msgid "Info for type '%s' not implemented."
+#~ msgstr "لم يتم تنفيذ معلومات النوع '%s'."
 
 #~ msgid "Name: "
 #~ msgstr "الاسم: "
@@ -7029,9 +7065,6 @@ msgstr "يتجاوز خيار '%s' '%s'."
 
 #~ msgid "None"
 #~ msgstr "بلا"
-
-#~ msgid "Requires"
-#~ msgstr "تتطلّب"
 
 #~ msgid "Provides"
 #~ msgstr "توفّر"
