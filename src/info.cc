@@ -508,7 +508,7 @@ void printProductInfo( Zypper & zypper, const ui::Selectable & s )
 	{
 	  p.lastValue() += "; ";
 	  // translators: %1% is an URL or Path pointing to some document
-	  p.lastValue() += str::Format(_("See %1%")) % "http://www.suse.com/lifecycle";
+	  p.lastValue() += str::Format(_("See %1%")) % "https://www.suse.com/lifecycle";
 	}
       }
     }
