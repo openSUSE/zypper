@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jul 21 16:28:27 CEST 2016 - ma@suse.de
+
+- Differ between products without end-of-life data and those where
+  EOL is not yet known (FATE#320699)
+- BuildRequires:  libzypp-devel >= 16.2.1
+- version 1.13.5
+
+-------------------------------------------------------------------
 Fri Jul 15 14:31:57 CEST 2016 - ma@suse.de
 
 - Update Translations (bsc#968588)
