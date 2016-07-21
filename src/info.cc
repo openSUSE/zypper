@@ -494,9 +494,24 @@ void printProductInfo( Zypper & zypper, const ui::Selectable & s )
   Product::constPtr product = ( installed ? installed : theone )->asKind<Product>();
 
   {
-    Date eol( product->endOfLife() );
-    // translators: property name; short; used like "Name: value"
-    p.add( _("End of Support"),		( eol ? eol.printDate() : _("undefined") ) );
+    Date eol;
+    if ( product->hasEndOfLife( eol ) )
+    {
+      // translators: property name; short; used like "Name: value"
+      p.add( _("End of Support") );
+      if ( eol )
+	p.lastValue() = eol.printDate();
+      else
+      {
+	p.lastValue() = _("unknown");
+	if ( str::startsWithCI( product->vendor(), "suse" ) )
+	{
+	  p.lastValue() += "; ";
+	  // translators: %1% is an URL or Path pointing to some document
+	  p.lastValue() += str::Format(_("See %1%")) % "http://www.suse.com/lifecycle";
+	}
+      }
+    }
   }
   // translators: property name; short; used like "Name: value"
   p.add( _("Flavor"),			joinWords( product->flavor(), product->registerFlavor() ) );
