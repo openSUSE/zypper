@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 21 13:09:33 CEST 2016 - ma@suse.de
+
+- Rebuild .solv-files not matching the parsers LIBSOLV_TOOLVERSION
+- BuildRequires:  libsolv-devel >= 0.6.23
+- version 16.2.1 (0)
+
+-------------------------------------------------------------------
 Mon Jul 18 16:36:25 CEST 2016 - ma@suse.de
 
 - Product: Offer tri-state hasEndOfLife details (FATE#320699)
