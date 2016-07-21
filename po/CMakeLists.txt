@@ -56,13 +56,13 @@ ENDFOREACH()
 SET( SOURCE_POT_FILE ${CMAKE_CURRENT_SOURCE_DIR}/${POT_NAME}.pot )
 
 ADD_CUSTOM_TARGET( translations ALL
-  COMMAND diff -u -I ^\#: -I ^.POT-Creation-Date: ${SOURCE_POT_FILE} ${POT_FILE} | grep '^[+-][^\#]' || true
+  COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/PotfileDiff.sh ${SOURCE_POT_FILE} ${POT_FILE} | grep '^[+-][^+-]' || true
   DEPENDS ${GMO_FILES}
+  COMMENT ".pot file diff..."
 )
 
 ADD_CUSTOM_TARGET( potfile_update
-  COMMAND diff -q -I ^\#: -I ^.POT-Creation-Date: ${SOURCE_POT_FILE} ${POT_FILE}
-       || ./PotfileUpadte.sh ${CMAKE_CURRENT_BINARY_DIR}
+  COMMAND ./PotfileDiff.sh ${SOURCE_POT_FILE} ${POT_FILE} -q || ./PotfileUpadte.sh ${CMAKE_CURRENT_BINARY_DIR}
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   DEPENDS translations
   COMMENT "Checking for uncommitted changes to the .pot file..."
