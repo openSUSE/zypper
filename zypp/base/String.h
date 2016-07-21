@@ -1027,14 +1027,23 @@ namespace zypp
     /** Return whether \a str_r has prefix \a prefix_r. */
     inline bool hasPrefix( const C_Str & str_r, const C_Str & prefix_r )
     { return( ::strncmp( str_r, prefix_r, prefix_r.size() ) == 0 ); }
+    /** \overload Case insensitive */
+    inline bool hasPrefixCI( const C_Str & str_r, const C_Str & prefix_r )
+    { return( ::strncasecmp( str_r, prefix_r, prefix_r.size() ) == 0 ); }
 
     /** Strip a \a prefix_r from \a str_r and return the resulting string. */
     inline std::string stripPrefix( const C_Str & str_r, const C_Str & prefix_r )
     { return( hasPrefix( str_r, prefix_r ) ? str_r + prefix_r.size() : str_r.c_str() ); }
+    /** \overload Case insensitive */
+    inline std::string stripPrefixCI( const C_Str & str_r, const C_Str & prefix_r )
+    { return( hasPrefixCI( str_r, prefix_r ) ? str_r + prefix_r.size() : str_r.c_str() ); }
 
     /** Return whether \a str_r has suffix \a suffix_r. */
     inline bool hasSuffix( const C_Str & str_r, const C_Str & suffix_r )
     { return( str_r.size() >= suffix_r.size() && ::strncmp( str_r + str_r.size() - suffix_r.size() , suffix_r, suffix_r.size() ) == 0 ); }
+    /** \overload Case insensitive */
+    inline bool hasSuffixCI( const C_Str & str_r, const C_Str & suffix_r )
+    { return( str_r.size() >= suffix_r.size() && ::strncasecmp( str_r + str_r.size() - suffix_r.size() , suffix_r, suffix_r.size() ) == 0 ); }
 
     /** Strip a \a suffix_r from \a str_r and return the resulting string. */
     inline std::string stripSuffix( const C_Str & str_r, const C_Str & suffix_r )
@@ -1043,6 +1052,14 @@ namespace zypp
         return std::string( str_r, str_r.size() - suffix_r.size() );
       return str_r.c_str();
     }
+    /** \overload Case insensitive */
+    inline std::string stripSuffixCI( const C_Str & str_r, const C_Str & suffix_r )
+    {
+      if ( hasSuffixCI( str_r, suffix_r ) )
+        return std::string( str_r, str_r.size() - suffix_r.size() );
+      return str_r.c_str();
+    }
+
     /** Return size of the common prefix of \a lhs and \a rhs. */
     inline std::string::size_type commonPrefix( const C_Str & lhs, const C_Str & rhs )
     {
@@ -1053,13 +1070,31 @@ namespace zypp
       { ++lp, ++rp, ++ret; }
       return ret;
     }
+    /** \overload Case insensitive */
+    inline std::string::size_type commonPrefixCI( const C_Str & lhs, const C_Str & rhs )
+    {
+      const char * lp = lhs.c_str();
+      const char * rp = rhs.c_str();
+      std::string::size_type ret = 0;
+      while ( tolower(*lp) == tolower(*rp) && *lp != '\0' )
+      { ++lp, ++rp, ++ret; }
+      return ret;
+    }
+
 
     /** alias for \ref hasPrefix */
     inline bool startsWith( const C_Str & str_r, const C_Str & prefix_r )
     { return hasPrefix( str_r, prefix_r ); }
+    /** \overload Case insensitive */
+    inline bool startsWithCI( const C_Str & str_r, const C_Str & prefix_r )
+    { return hasPrefixCI( str_r, prefix_r ); }
+
     /** alias for \ref hasSuffix */
     inline bool endsWith( const C_Str & str_r, const C_Str & prefix_r )
     { return hasSuffix( str_r, prefix_r ); }
+    /** \overload Case insensitive */
+    inline bool endsWithCI( const C_Str & str_r, const C_Str & prefix_r )
+    { return hasSuffixCI( str_r, prefix_r ); }
     //@}
   } // namespace str
   ///////////////////////////////////////////////////////////////////
