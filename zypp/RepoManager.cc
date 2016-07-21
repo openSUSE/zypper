@@ -18,6 +18,8 @@
 #include <map>
 #include <algorithm>
 
+#include <solv/solvversion.h>
+
 #include "zypp/base/InputStream.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/base/Gettext.h"
@@ -1574,19 +1576,13 @@ namespace zypp
     {
       Repository repo = sat::Pool::instance().addRepoSolv( solvfile, info );
       // test toolversion in order to rebuild solv file in case
-      // it was written by an old libsolv-tool parser.
-      //
-      // Known version strings used:
-      //  - <no string>
-      //  - "1.0"
-      //
-      sat::LookupRepoAttr toolversion( sat::SolvAttr::repositoryToolVersion, repo );
-      if ( toolversion.begin().asString().empty() )
+      // it was written by a different libsolv-tool parser.
+      const std::string & toolversion( sat::LookupRepoAttr( sat::SolvAttr::repositoryToolVersion, repo ).begin().asString() );
+      if ( toolversion != LIBSOLV_TOOLVERSION )
       {
         repo.eraseFromPool();
-        ZYPP_THROW(Exception("Solv-file was created by old parser."));
+        ZYPP_THROW(Exception(str::Str() << "Solv-file was created by '"<<toolversion<<"'-parser (want "<<LIBSOLV_TOOLVERSION<<")."));
       }
-      // else: up-to-date (or even newer).
     }
     catch ( const Exception & exp )
     {
