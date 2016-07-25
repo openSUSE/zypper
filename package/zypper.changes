@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 25 10:49:08 CEST 2016 - ma@suse.de
+
+- info: fix --repo also listing all matching installed packages
+  (bsc#981743)
+- version 1.13.6
+
+-------------------------------------------------------------------
 Thu Jul 21 16:28:27 CEST 2016 - ma@suse.de
 
 - Differ between products without end-of-life data and those where
