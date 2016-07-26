@@ -870,17 +870,14 @@ void list_patches_by_issue( Zypper & zypper )
   CliMatchPatch cliMatchPatch( zypper );
   bool only_needed = !zypper.cOpts().count("all");
 
-  // Basic PoolQuery tuned for each argument
-  PoolQuery basicQ;
-  basicQ.setMatchSubstring();
-  basicQ.setCaseSensitive( false );
-  basicQ.addKind( ResKind::patch );
-
   std::vector<const Issue*> pass2; // on the fly remember anyType issues for pass2
 
   for ( const Issue & issue : issues )
   {
-    PoolQuery q( basicQ );
+    PoolQuery q;
+    q.setMatchSubstring();
+    q.setCaseSensitive( false );
+    q.addKind( ResKind::patch );
     // PoolQuery ORs attributes but we need AND.
     // Post processing the match must assert correct type of specific IDs!
     if ( issue.specificType() && issue.anyId() )
@@ -939,7 +936,10 @@ void list_patches_by_issue( Zypper & zypper )
   for ( const Issue* _issue : pass2 )
   {
     const Issue & issue( *_issue );
-    PoolQuery q( basicQ );
+    PoolQuery q;
+    q.setMatchSubstring();
+    q.setCaseSensitive( false );
+    q.addKind( ResKind::patch );
     q.addAttribute(sat::SolvAttr::summary, issue.id() );
     q.addAttribute(sat::SolvAttr::description, issue.id() );
 
@@ -997,12 +997,6 @@ void mark_updates_by_issue( Zypper & zypper )
 {
   CliScanIssues issues;
 
-  // Basic PoolQuery tuned for each argument
-  PoolQuery basicQ;
-  basicQ.setMatchExact();
-  basicQ.setCaseSensitive( false );
-  basicQ.addKind( ResKind::patch );
-
   SolverRequester::Options srOpts;
   srOpts.force = zypper.cOpts().count("force");
   srOpts.skip_interactive = zypper.cOpts().count("skip-interactive");
@@ -1011,7 +1005,10 @@ void mark_updates_by_issue( Zypper & zypper )
 
   for ( const Issue & issue : issues )
   {
-    PoolQuery q( basicQ );
+    PoolQuery q;
+    q.setMatchExact();
+    q.setCaseSensitive( false );
+    q.addKind( ResKind::patch );
     // PoolQuery ORs attributes but we need AND.
     // Post processing the match must assert correct type of specific IDs!
     if ( issue.specificType() && issue.anyId() )

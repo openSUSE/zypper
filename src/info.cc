@@ -142,6 +142,22 @@ namespace
 
 ///////////////////////////////////////////////////////////////////
 namespace {
+  // PoolQuery does no COW :( - build and return the basic query
+  inline PoolQuery printInfo_BasicQuery( Zypper & zypper )
+  {
+    PoolQuery baseQ;
+    if ( zypper.cOpts().count("match-substrings") )
+    { baseQ.setMatchSubstring(); }
+    else
+    { baseQ.setMatchGlob(); }	// is Exact if no glob chars included in name
+    if ( zypper.cOpts().count("repo") )
+    {
+      for ( const RepoInfo & repo : zypper.runtimeData().repos  )
+      { baseQ.addRepo( repo.alias() ); }
+    }
+    return baseQ;
+  }
+
   void logOtherKindMatches( const PoolQuery & q_r, const std::string & name_r )
   {
     std::map<ResKind,DefaultIntegral<unsigned,0U>> count;
@@ -164,23 +180,12 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
 {
   zypper.out().gap();
 
-  PoolQuery baseQ;
-  if ( zypper.cOpts().count("match-substrings") )
-  { baseQ.setMatchSubstring(); }
-  else
-  { baseQ.setMatchGlob(); }	// is Exact if no glob chars included in name
-  if ( zypper.cOpts().count("repo") )
-  {
-    for ( const RepoInfo & repo : zypper.runtimeData().repos  )
-    { baseQ.addRepo( repo.alias() ); }
-  }
-
   for ( const std::string & rawarg : zypper.arguments() )
   {
     // Use the right kind!
     KNSplit kn( rawarg, kind_r );
 
-    PoolQuery q( baseQ );
+    PoolQuery q( printInfo_BasicQuery( zypper ) );
     q.addKind( kn._kind );
     q.addAttribute( sat::SolvAttr::name, kn._name );
 
@@ -190,7 +195,7 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
       cout << "\n" << str::Format(_("%s '%s' not found.")) % kind_to_string_localized( kn._kind, 1 ) % rawarg << endl;
       {
 	// hint to matches of different kind
-	PoolQuery q( baseQ );
+	PoolQuery q( printInfo_BasicQuery( zypper ) );
 	q.addAttribute( sat::SolvAttr::name, kn._name );
 	if ( ! q.empty() )
 	  logOtherKindMatches( q, kn._name );
