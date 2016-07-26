@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul 26 13:52:32 CEST 2016 - ma@suse.de
+
+- Prefer option --not-installed-only over the
+  misleading --uninstalled-only (bsc#972997)
+- version 1.13.7
+
+-------------------------------------------------------------------
 Mon Jul 25 10:49:08 CEST 2016 - ma@suse.de
 
 - info: fix --repo also listing all matching installed packages
