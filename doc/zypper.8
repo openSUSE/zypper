@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 06/17/2016
+.\"      Date: 07/26/2016
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "06/17/2016" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "07/26/2016" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1407,12 +1407,14 @@ Perform case\-sensitive search\&.
 .PP
 \fB\-i\fR, \fB\-\-installed\-only\fR
 .RS 4
-Show only packages that are already installed\&.
+Show only installed packages\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uninstalled\-only\fR
+\fB\-u\fR, \fB\-\-not\-installed\-only\fR
 .RS 4
-Show only packages that are not currently installed\&.
+Show only packages which are not installed\&.
+
+The old option name \-\-uninstalled\-only is still acceptable, but should be considered deprecated\&.
 .RE
 .PP
 \fB\-t\fR, \fB\-\-type\fR \fItype\fR
@@ -1491,9 +1493,11 @@ Just another means to specify repositories\&.
 Show only installed packages\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uninstalled\-only\fR
+\fB\-u\fR, \fB\-\-not\-installed\-only\fR
 .RS 4
 Show only packages which are not installed\&.
+
+The old option name \-\-uninstalled\-only is still acceptable, but should be considered deprecated\&.
 .RE
 .PP
 \fB\-\-orphaned\fR
@@ -1543,9 +1547,11 @@ Just another means to specify repositories\&.
 Show only installed patterns\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uninstalled\-only\fR
+\fB\-u\fR, \fB\-\-not\-installed\-only\fR
 .RS 4
 Show only patterns which are not installed\&.
+
+The old option name \-\-uninstalled\-only is still acceptable, but should be considered deprecated\&.
 .RE
 .RE
 .PP
@@ -1565,9 +1571,11 @@ Just another means to specify repositories\&.
 Show only installed products\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uninstalled\-only\fR
+\fB\-u\fR, \fB\-\-not\-installed\-only\fR
 .RS 4
 Show only products which are not installed\&.
+
+The old option name \-\-uninstalled\-only is still acceptable, but should be considered deprecated\&.
 .RE
 .RE
 .PP

@@ -742,10 +742,12 @@ Query Commands
 		Perform case-sensitive search.
 
 	*-i*, *--installed-only*::
-		Show only packages that are already installed.
+		Show only installed packages.
 
-	*-u*, *--uninstalled-only*::
-		Show only packages that are not currently installed.
+	*-u*, *--not-installed-only*::
+		Show only packages which are not installed.
+		+
+		The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
 
 	*-t*, *--type* 'type'::
 		Search only for packages of specified type. See section *Package Types* for a list of available package types. Multiple *--type* options are allowed.
@@ -789,8 +791,10 @@ Query Commands
 	*-i*, *--installed-only*::
 		Show only installed packages.
 
-	*-u*, *--uninstalled-only*::
+	*-u*, *--not-installed-only*::
 		Show only packages which are not installed.
+		+
+		The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
 
 	*--orphaned*::
 		Show packages which are orphaned (without repository).
@@ -823,8 +827,10 @@ Query Commands
 	*-i*, *--installed-only*::
 		Show only installed patterns.
 
-	*-u*, *--uninstalled-only*::
+	*-u*, *--not-installed-only*::
 		Show only patterns which are not installed.
+		+
+		The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
 --
 
 *products* (*pd*) ['options'] ['repository']...::
@@ -835,10 +841,12 @@ Query Commands
 		Just another means to specify repositories.
 
 	*-i*, *--installed-only*::
-			Show only installed products.
+		Show only installed products.
 
-	*-u*, *--uninstalled-only*::
+	*-u*, *--not-installed-only*::
 		Show only products which are not installed.
+		+
+		The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
 --
 
 *what-provides* (*wp*) 'capability'::

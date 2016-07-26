@@ -347,7 +347,7 @@ static void list_patterns_xml( Zypper & zypper )
   cout << "<pattern-list>" << endl;
 
   bool installed_only = zypper.cOpts().count("installed-only");
-  bool notinst_only = zypper.cOpts().count("uninstalled-only");
+  bool notinst_only = zypper.cOpts().count("not-installed-only");
 
   for_( it, God->pool().byKindBegin<Pattern>(), God->pool().byKindEnd<Pattern>() )
   {
@@ -379,7 +379,7 @@ static void list_pattern_table( Zypper & zypper)
       << _("Dependency") );
 
   bool installed_only = zypper.cOpts().count("installed-only");
-  bool notinst_only = zypper.cOpts().count("uninstalled-only");
+  bool notinst_only = zypper.cOpts().count("not-installed-only");
 
   for( const PoolItem & pi : God->pool().byKind<Pattern>() )
   {
@@ -426,7 +426,7 @@ void list_packages( Zypper & zypper )
 
   const auto & copts( zypper.cOpts() );
   bool installed_only = copts.count("installed-only");
-  bool uninstalled_only = copts.count("uninstalled-only");
+  bool uninstalled_only = copts.count("not-installed-only");
   bool showInstalled = installed_only || !uninstalled_only;
   bool showUninstalled = uninstalled_only || !installed_only;
 
@@ -526,7 +526,7 @@ void list_packages( Zypper & zypper )
 static void list_products_xml( Zypper & zypper )
 {
   bool installed_only = zypper.cOpts().count("installed-only");
-  bool notinst_only = zypper.cOpts().count("uninstalled-only");
+  bool notinst_only = zypper.cOpts().count("not-installed-only");
 
   cout << "<product-list>" << endl;
   for_( it, God->pool().byKindBegin(ResKind::product), God->pool().byKindEnd(ResKind::product) )
@@ -578,7 +578,7 @@ static void list_product_table( Zypper & zypper )
       << _("Is Base") );
 
   bool installed_only = zypper.cOpts().count("installed-only");
-  bool notinst_only = zypper.cOpts().count("uninstalled-only");
+  bool notinst_only = zypper.cOpts().count("not-installed-only");
 
   for_( it, God->pool().proxy().byKindBegin(ResKind::product), God->pool().proxy().byKindEnd(ResKind::product) )
   {

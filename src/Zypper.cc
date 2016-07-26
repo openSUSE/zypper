@@ -69,6 +69,12 @@ using namespace zypp;
 // for now use some defines to have consistent definition of args
 // used across multiple commands
 
+// bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
+#define ARG_not_INSTALLED_ONLY	\
+    {"installed-only",		no_argument, 0, 'i'},	\
+    {"not-installed-only",	no_argument, 0, 'u'},	\
+    {"uninstalled-only",	no_argument, 0,  0 }
+
 #define ARG_WITHout_OPTIONAL	\
     {"with-optional",			no_argument,		&_gopts.exclude_optional_patches, 0 },	\
     {"without-optional",		no_argument,		&_gopts.exclude_optional_patches, 1 }
@@ -2387,8 +2393,7 @@ void Zypper::processCommandOptions()
   case ZypperCommand::SEARCH_e:
   {
     static struct option search_options[] = {
-      {"installed-only", no_argument, 0, 'i'},
-      {"uninstalled-only", no_argument, 0, 'u'},
+      ARG_not_INSTALLED_ONLY,
       {"match-substrings", no_argument, 0, 0},
       {"match-words", no_argument, 0, 0},
       {"match-exact", no_argument, 0, 'x'},
@@ -2436,8 +2441,8 @@ void Zypper::processCommandOptions()
       "-f, --file-list            Search for a match in the file list of packages.\n"
       "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
       "-C, --case-sensitive       Perform case-sensitive search.\n"
-      "-i, --installed-only       Show only packages that are already installed.\n"
-      "-u, --uninstalled-only     Show only packages that are not currently installed.\n"
+      "-i, --installed-only       Show only installed packages.\n"
+      "-u, --not-installed-only   Show only packages which are not installed.\n"
       "-t, --type <type>          Search only for packages of the specified type.\n"
       "-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
       "    --sort-by-name         Sort packages by name (default).\n"
@@ -2508,8 +2513,7 @@ void Zypper::processCommandOptions()
       {"repo",			required_argument,	0, 'r'},
       // rug compatibility option, we have --repo
       {"catalog",		required_argument,	0, 'c'},
-      {"installed-only",	no_argument,		0, 'i'},
-      {"uninstalled-only",	no_argument,		0, 'u'},
+      ARG_not_INSTALLED_ONLY,
       {"orphaned",		no_argument,		0,  0 },
       {"suggested",		no_argument,		0,  0 },
       {"recommended",		no_argument,		0,  0 },
@@ -2530,7 +2534,7 @@ void Zypper::processCommandOptions()
       "\n"
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
       "-i, --installed-only      Show only installed packages.\n"
-      "-u, --uninstalled-only    Show only packages which are not installed.\n"
+      "-u, --not-installed-only  Show only packages which are not installed.\n"
       "    --orphaned            Show packages which are orphaned (without repository).\n"
       "    --suggested           Show packages which are suggested.\n"
       "    --recommended         Show packages which are recommended.\n"
@@ -2547,8 +2551,7 @@ void Zypper::processCommandOptions()
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
       {"catalog", required_argument, 0, 'c'},
-      {"installed-only", no_argument, 0, 'i'},
-      {"uninstalled-only", no_argument, 0, 'u'},
+      ARG_not_INSTALLED_ONLY,
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2562,7 +2565,7 @@ void Zypper::processCommandOptions()
       "\n"
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
       "-i, --installed-only      Show only installed patterns.\n"
-      "-u, --uninstalled-only    Show only patterns which are not installed.\n"
+      "-u, --not-installed-only  Show only patterns which are not installed.\n"
     );
     break;
   }
@@ -2573,8 +2576,7 @@ void Zypper::processCommandOptions()
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
       {"catalog", required_argument, 0, 'c'},
-      {"installed-only", no_argument, 0, 'i'},
-      {"uninstalled-only", no_argument, 0, 'u'},
+      ARG_not_INSTALLED_ONLY,
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2588,7 +2590,7 @@ void Zypper::processCommandOptions()
       "\n"
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
       "-i, --installed-only      Show only installed products.\n"
-      "-u, --uninstalled-only    Show only products which are not installed.\n"
+      "-u, --not-installed-only  Show only products which are not installed.\n"
     );
     break;
   }
@@ -3119,8 +3121,7 @@ void Zypper::processCommandOptions()
   case ZypperCommand::RUG_PATCH_SEARCH_e:
   {
     static struct option search_options[] = {
-      {"installed-only", no_argument, 0, 'i'},
-      {"uninstalled-only", no_argument, 0, 'u'},
+      ARG_not_INSTALLED_ONLY,
       {"match-substrings", no_argument, 0, 0},
       {"match-words", no_argument, 0, 0},
       {"match-exact", no_argument, 0, 0},
@@ -3230,6 +3231,13 @@ void Zypper::processCommandOptions()
     }
   }
 
+  // bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
+  if ( _copts.count("uninstalled-only") )
+  {
+    out().warning( legacyCLI( "--uninstalled-only", "--not-installed-only" ), Out::HIGH );
+    _copts.erase( "uninstalled-only" );
+    _copts["not-installed-only"];
+  }
 
   ::copts = _copts;
   MIL << "Done parsing options." << endl;
@@ -4210,7 +4218,7 @@ void Zypper::doCommand()
     PoolQuery query;
 
     TriBool inst_notinst = indeterminate;
-    if ( globalOpts().disable_system_resolvables || copts.count("uninstalled-only") )
+    if ( globalOpts().disable_system_resolvables || copts.count("not-installed-only") )
     {
       query.setUninstalledOnly(); // beware: this is not all to it, look at zypper-search, _only_not_installed
       inst_notinst = false;
