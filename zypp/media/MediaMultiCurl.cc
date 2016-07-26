@@ -1476,6 +1476,22 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
   DBG << "done: " << PathInfo(dest) << endl;
 }
 
+///////////////////////////////////////////////////////////////////
+namespace {
+  // bsc#933839: propagate proxy settings passed in the repo URL
+  inline Url propagateQueryParams( Url url_r, const Url & template_r )
+  {
+    for ( std::string param : { "proxy", "proxyport", "proxyuser", "proxypass"} )
+    {
+      const std::string & value( template_r.getQueryParam( param ) );
+      if ( ! value.empty() )
+	url_r.setQueryParam( param, value );
+    }
+    return url_r;
+  }
+}
+///////////////////////////////////////////////////////////////////
+
 void MediaMultiCurl::multifetch(const Pathname & filename, FILE *fp, std::vector<Url> *urllist, callback::SendReport<DownloadProgressReport> *report, MediaBlockList *blklist, off_t filesize) const
 {
   Url baseurl(getFileUrl(filename));
@@ -1514,7 +1530,7 @@ void MediaMultiCurl::multifetch(const Pathname & filename, FILE *fp, std::vector
 	  if (scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "tftp")
 	    {
 	      checkProtocol(*urliter);
-	      myurllist.push_back(*urliter);
+	      myurllist.push_back(propagateQueryParams(*urliter, _url));
 	    }
 	}
       catch (...)
