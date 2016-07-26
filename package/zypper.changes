@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul 26 14:39:22 CEST 2016 - ma@suse.de
+
+- fixup! info: fix --repo also listing all matching installed
+  packages (bsc#981743). Muliple commandline arguments cause
+  items to be listed nultiple times.
+
+-------------------------------------------------------------------
 Tue Jul 26 13:52:32 CEST 2016 - ma@suse.de
 
 - Prefer option --not-installed-only over the
