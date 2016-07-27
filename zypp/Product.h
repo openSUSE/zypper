@@ -43,7 +43,7 @@ namespace zypp
      */
     sat::Solvable referencePackage() const;
 
-    /** For installed products the name of the coddesponding
+    /** For installed products the name of the corresponding
      * \c /etc/products.d entry.
     .*/
     std::string referenceFilename() const;
@@ -157,7 +157,7 @@ namespace zypp
     /***/
     class UrlList;
 
-    /** Rerieve urls flagged with \c key_r for this product.
+    /** Retrieve URLs flagged with \c key_r for this product.
      *
      * This is the most common interface. There are convenience methods for
      * wellknown flags like \c "releasenotes", \c "register", \c "updateurls",
