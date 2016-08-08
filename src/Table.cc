@@ -205,8 +205,8 @@ Table & Table::add( TableRow tr )
 
 Table & Table::setHeader( TableHeader tr )
 {
-  _has_header = true;
   _header = std::move(tr);
+  _has_header = !_header.empty();
   return *this;
 }
 
