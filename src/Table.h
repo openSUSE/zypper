@@ -79,13 +79,15 @@ public:
   { return addDetail( asString( val_r ) ); }
 
 
+  bool empty() const
+  { return _columns.empty(); }
+
   // return number of columns
   unsigned size() const
   { return _columns.size(); }
 
   unsigned cols() const
   { return size(); }
-
 
   //! tab separated output
   std::ostream & dumbDumpTo( std::ostream & stream ) const;
