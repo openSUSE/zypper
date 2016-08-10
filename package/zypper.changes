@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug 10 16:50:48 CEST 2016 - ma@suse.de
+
+- locks: add parsable XML output (bsc#985390)
+- version 1.12.45
+
+-------------------------------------------------------------------
 Tue Jun 28 11:50:12 CEST 2016 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2 (bsc#986694)
