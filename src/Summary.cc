@@ -1392,6 +1392,16 @@ void Summary::dumpTo( std::ostream & out )
 
   _wrap_width = get_screen_width();
 
+  // bsc#958161: While the resolver is not able to tag packages which
+  // are 'recommended but not required' we suppress the output if we know
+  // that all packages are actually required.
+  DtorReset guard( _viewop );
+  if ( getZYpp()->resolver()->onlyRequires() )
+  {
+    unsetViewOption( SHOW_RECOMMENDED );
+    unsetViewOption( SHOW_SUGGESTED );
+  }
+
   if ( _viewop & SHOW_LOCKS )
     writeLocked( out );
   if ( _viewop & SHOW_NOT_UPDATED )
