@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Aug 10 18:43:28 CEST 2016 - ma@suse.de
+
+- --no-recommends: don't make an attempt to show recommends/suggests
+  as we know there are none (bsc#958161)
+- remove dead code
+- version 1.13.9
+
+-------------------------------------------------------------------
 Wed Aug 10 17:00:18 CEST 2016 - ma@suse.de
 
 - locks: add parsable XML output (bsc#985390)
