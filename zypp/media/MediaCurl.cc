@@ -1062,7 +1062,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
         break;
       case CURLE_SSL_PEER_CERTIFICATE:
       default:
-        err = "Unrecognized error";
+        err = "Curl error " + str::numstring( code );
         break;
       }
 
