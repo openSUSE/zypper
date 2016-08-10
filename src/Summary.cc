@@ -952,16 +952,6 @@ void Summary::writeRecommended( std::ostream & out )
       writeResolvableList( out, it->second, ColorContext::HIGHLIGHT );
     }
   }
-
-/*
-  for_(it, required.begin(), required.end())
-  {
-    std::string label = "These are required:";
-    out << endl << label << endl;
-
-    writeResolvableList(out, it->second);
-  }
-*/
 }
 
 // --------------------------------------------------------------------------
