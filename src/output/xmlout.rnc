@@ -17,6 +17,7 @@ stream-element =
       selectable-list-element? |
       search-result-element? |   # for zypper search
       selectable-info-element? | # for zypper info
+      locks-list-element? |	 # for zypper locks
 
       # random text can appear between tags - this text should be ignored
       text
@@ -207,6 +208,29 @@ selectable-info-element =
     )
   }
 
+locks-list-element =
+  element locks {
+    attribute size { xsd:integer },
+    element lock {
+      attribute number { xsd:integer },
+      element name { xsd:string }*,
+      element type { xsd:string }*,
+      element repo { xsd:string }*,
+      element matches {
+        attribute size { xsd:integer },
+        element match {
+          attribute arch { xsd:string },
+          attribute edition { xsd:string },
+          attribute installed { xsd:boolean },
+          attribute name { xsd:string },
+          attribute repo { xsd:string },
+          attribute kind { xsd:string }
+        }*
+      }?
+    }*
+  }
+
+
 # TODO
 common-selectable-info =
   attribute installed { xsd:boolean },
@@ -222,3 +246,5 @@ patch-selectable-info =
     "installed" | "not-installed" | "not-applicable" | "no-longer-applicable" |
     "applied" | "not-needed" | "broken" | "needed"
   }
+
+
