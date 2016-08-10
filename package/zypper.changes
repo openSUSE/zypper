@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug 10 17:00:18 CEST 2016 - ma@suse.de
+
+- locks: add parsable XML output (bsc#985390)
+- version 1.13.8
+
+-------------------------------------------------------------------
 Tue Jul 26 14:39:22 CEST 2016 - ma@suse.de
 
 - fixup! info: fix --repo also listing all matching installed
