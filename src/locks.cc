@@ -177,7 +177,7 @@ namespace out
 	    p.add( _("Do not install"), names );
 	  }
 	}
-	tr.addDetail( str::Str() << p );
+	tr.addDetail( (str::Str() << p).str() );
       }
       return tr;
     }
