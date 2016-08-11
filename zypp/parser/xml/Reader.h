@@ -76,7 +76,7 @@ namespace zypp
      *   return reader_r.foreachNodeAttribute( consumeNode );
      * }
      *
-     * // Consume all nodes and thair attributes.
+     * // Consume all nodes and their attributes.
      * void example()
      * {
      *   Pathname repodata( "/Local/repodata/repomd.xml" );
@@ -105,7 +105,7 @@ namespace zypp
     public:
 
       /**
-       *  If the curent node is not empty, advances the reader to the next
+       *  If the current node is not empty, advances the reader to the next
        *  node, and returns the value
        *
        * \note if the node has a xml subtree you will probably jump to that node
