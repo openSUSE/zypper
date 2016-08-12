@@ -112,16 +112,38 @@ namespace zypp
       /** Dtor wrting end tag */
       ~Node()
       {
-	if ( _name.empty() )
-	  _out << "-->";
-	else
+	if ( !_name.empty() )
 	{
-	  if ( _hasContent )
-	    _out << "</" << _name << ">";
+	  if ( isComment() )
+	    _out << "-->";
 	  else
-	    _out << "/>";
+	  {
+	    if ( _hasContent )
+	      _out << "</" << _name << ">";
+	    else
+	      _out << "/>";
+	  }
 	}
       }
+
+      /** Exception type thrown if attributes are added to a closed start node. */
+      struct HasContentException{};
+
+       /** Add additional attributes (requires OptionalContentType)
+	* \throw HasContentException If start node is already closed
+	*/
+      Node & addAttr( const std::initializer_list<Attr> & attrs_r = {} )
+      {
+	if ( _hasContent )
+	  throw HasContentException();
+	printAttr( attrs_r );
+	return *this;
+      }
+
+      /** \overload for one */
+      Node & addAttr( const Attr & attr_r )
+      { return addAttr( { attr_r } ); }
+
 
       /** Return the output stream */
       std::ostream & operator*()
@@ -129,7 +151,7 @@ namespace zypp
 	if ( ! _hasContent )
 	{
 	  _hasContent = true;
-	  if ( _name.empty() )
+	  if ( isComment() )
 	    _out << "|";
 	  else
 	    _out << ">";
@@ -143,17 +165,26 @@ namespace zypp
 	if ( _name.empty() || _name[0] == '!' )
 	{
 	  _out << "<!--" << _name;
-	  _name.clear();
+	  _name = "!";	// a comment
 	}
 	else
 	  _out << "<" << _name;
 
-	for ( const auto & pair : attrs_r )
-	  _out << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
+	printAttr( attrs_r );
 
-	if ( ! _name.empty() && _hasContent )
+	if ( isComment() && _hasContent )
 	  _out << ">";
       }
+
+      void printAttr( const std::initializer_list<Attr> & attrs_r )
+      {
+	for ( const auto & pair : attrs_r )
+	  _out << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
+      }
+
+      bool isComment() const
+      { return( _name == "!" );  }
+
     private:
       std::ostream & _out;
       std::string _name;
