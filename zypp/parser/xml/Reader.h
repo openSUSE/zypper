@@ -49,7 +49,7 @@ namespace zypp
      *
      * \code
      * // Consume a node.
-     * bool consumeNode( XML::Reader & reader_r )
+     * bool consumeNode( xml::Reader & reader_r )
      * {
      *   DBG << *reader_r << endl;
      *   return true;
@@ -60,7 +60,7 @@ namespace zypp
      * {
      *   try
      *     {
-     *       XML::Reader reader( "/Local/repodata/repomd.xml" );
+     *       xml::Reader reader( "/Local/repodata/repomd.xml" );
      *       reader.foreachNode( consumeNode );
      *     }
      *   catch ( const Exception & )
@@ -70,7 +70,7 @@ namespace zypp
      *
      * \code
      * // Consume a node.
-     * bool consumeNodeAndAttribute( XML::Reader & reader_r )
+     * bool consumeNodeAndAttribute( xml::Reader & reader_r )
      * {
      *   consumeNode( reader_r );
      *   return reader_r.foreachNodeAttribute( consumeNode );
@@ -82,7 +82,7 @@ namespace zypp
      *   Pathname repodata( "/Local/repodata/repomd.xml" );
      *   try
      *     {
-     *       XML::Reader reader( "/Local/repodata/repomd.xml" );
+     *       xml::Reader reader( "/Local/repodata/repomd.xml" );
      *       reader.foreachNode( consumeNodeAndAttribute );
      *       // or:
      *       // reader.foreachNodeOrAttribute( consumeNode )
