@@ -196,7 +196,7 @@ Package Management Commands
 		+
 		Zypper will download the files into its cache directory (/var/cache/zypper/RPMS), add this directory as a temporary *plaindir* repository and mark the respective packages for installation.
 
-	In the install command, you can specify also packages you wish to remove in addition to the packages you wish to install, by prepending their names by a '-' or '~' character. For example: ;;
+	In the install command, you can specify also packages you wish to remove in addition to the packages you wish to install, by prepending their names by a '-' or '!' character. For example: ;;
 		+
 		$ '*zypper install vim -emacs*'{nbsp}
 		+
