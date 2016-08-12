@@ -196,13 +196,12 @@ Package Management Commands
 		+
 		Zypper will download the files into its cache directory (/var/cache/zypper/RPMS), add this directory as a temporary *plaindir* repository and mark the respective packages for installation.
 
-	In the install command, you can specify also packages you wish to remove in addition to the packages you wish to install, by prepending their names by a '-' or '~' character. For example: ;;
+	In the install command, you can also specify packages you wish to remove by prepending their names by a '-' or '!' character. For example: ;;
 		+
-		$ '*zypper install vim -emacs*'{nbsp}
+		$ *zypper install \!Firefox*{nbsp}
 		+
-		$ *zypper remove emacs +vim*{nbsp}
-		+
-		will both 'install vim' and 'remove emacs'. Note that if you choose to use *-* with the first package you specify, you need to write *--* before it to prevent its interpretation as a command option:
+		In contrast to *zypper remove Firefox* which removes Firefox and its dependent packages, the install command will try to keep dependent packages installed by looking for Firefox alternatives.
+		+ Note that if you choose to use *-* with the first package you specify, you need to write *--* before it to prevent its interpretation as a command option:
 		+
 		$ *zypper install -- -boring-game great-game great-game-manual*{nbsp}
 
@@ -251,7 +250,7 @@ Package Management Commands
 		Do not force the solver to find a solution. Instead, report dependency problems and prompt the user to resolve them manually.
 
 	*--force-resolution*::
-		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove *). This option overrides *--no-force-resolution* in case both are specified on the command line.
+		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove*). This option overrides *--no-force-resolution* in case both are specified on the command line.
 
 	*-D*, *--dry-run*::
 		Test the installation, do not actually install any package. This option will add the *--test* option to the rpm commands run by the install command.
@@ -382,6 +381,8 @@ Package Management Commands
 *remove* (*rm*) ['options'] *--capability* 'capability'...::
 	Remove (uninstall) packages.
 	+
+	The remove command will uninstall the selected and their dependent packages. It will not try to install alternatives in order to keep dependent packages installed. If you want this, use *zypper install !'name'*.
+	+
 	The packages can be selected by their name or by a capability they provide. For details on package selection see the *install* command description.
 +
 --
@@ -406,7 +407,7 @@ Package Management Commands
 		Do not force the solver to find a solution. Instead, report dependency problems and prompt the user to resolve them manually.
 
 	*--force-resolution*::
-		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove *). This option overrides *--no-force-resolution* in case both are specified on the command line.
+		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove*). This option overrides *--no-force-resolution* in case both are specified on the command line.
 
 	*-u*, *--clean-deps*::
 		Automatically remove dependencies which become unneeded after removal of requested packages.
@@ -486,7 +487,7 @@ Update Management Commands
 		Do not force the solver to find a solution. Instead, report dependency problems and prompt the user to resolve them manually.
 
 	*--force-resolution*::
-		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove *). This option overrides *--no-force-resolution* in case both are specified on the command line.
+		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove*). This option overrides *--no-force-resolution* in case both are specified on the command line.
 
 	*-D*, *--dry-run*::
 		Test the update, do not actually install or update any package. This option will add the *--test* option to the rpm commands run by the update command.
