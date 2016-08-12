@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 06/17/2016
+.\"      Date: 08/12/2016
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "06/17/2016" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "08/12/2016" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -338,19 +338,15 @@ Zypper will download the files into its cache directory (/var/cache/zypper/RPMS)
 repository and mark the respective packages for installation\&.
 .RE
 .PP
-In the install command, you can specify also packages you wish to remove in addition to the packages you wish to install, by prepending their names by a \fI\-\fR or \fI~\fR character\&. For example:
+In the install command, you can also specify packages you wish to remove by prepending their names by a \fI\-\fR or \fI!\fR character\&. For example:
 .RS 4
 
 $
-\fI\fBzypper install vim \-emacs\fR\fR\ \&
+\fBzypper install \e!Firefox\fR\ \&
 
-$
-\fBzypper remove emacs +vim\fR\ \&
-
-will both
-\fIinstall vim\fR
-and
-\fIremove emacs\fR\&. Note that if you choose to use
+In contrast to
+\fBzypper remove Firefox\fR
+which removes Firefox and its dependent packages, the install command will try to keep dependent packages installed by looking for Firefox alternatives\&. + Note that if you choose to use
 \fB\-\fR
 with the first package you specify, you need to write
 \fB\-\-\fR
@@ -452,7 +448,8 @@ Do not force the solver to find a solution\&. Instead, report dependency problem
 .PP
 \fB\-\-force\-resolution\fR
 .RS 4
-Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove *)\&. This option overrides *\-\-no\-force\-resolution\fR
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
+\fB\-\-no\-force\-resolution\fR
 in case both are specified on the command line\&.
 .RE
 .PP
@@ -669,6 +666,9 @@ This command also accepts the \fBDownload\-and\-install mode options\fR describe
 .RS 4
 Remove (uninstall) packages\&.
 
+The remove command will uninstall the selected and their dependent packages\&. It will not try to install alternatives in order to keep dependent packages installed\&. If you want this, use
+\fBzypper install !\fR\fB\fIname\fR\fR\&.
+
 The packages can be selected by their name or by a capability they provide\&. For details on package selection see the
 \fBinstall\fR
 command description\&.
@@ -711,7 +711,8 @@ Do not force the solver to find a solution\&. Instead, report dependency problem
 .PP
 \fB\-\-force\-resolution\fR
 .RS 4
-Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove *)\&. This option overrides *\-\-no\-force\-resolution\fR
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
+\fB\-\-no\-force\-resolution\fR
 in case both are specified on the command line\&.
 .RE
 .PP
@@ -857,7 +858,8 @@ Do not force the solver to find a solution\&. Instead, report dependency problem
 .PP
 \fB\-\-force\-resolution\fR
 .RS 4
-Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove *)\&. This option overrides *\-\-no\-force\-resolution\fR
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
+\fB\-\-no\-force\-resolution\fR
 in case both are specified on the command line\&.
 .RE
 .PP
