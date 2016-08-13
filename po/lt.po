@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-01-11 12:42+0200\n"
+"PO-Revision-Date: 2016-08-13 06:53+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
-"Language-Team: lt <opensuse-translation@opensuse.org>\n"
+"Language-Team: Lithuanian "
+"<https://l10n.opensuse.org/projects/zypper/master/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10==1 && n%100!=11 ? 1 : n"
-"%10>=2 && (n%100<10 || n%100>=20) ? 2 : 3);\n"
-"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -266,9 +267,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "Vykdoma: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:208
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "Šalinama %s-%s"
+msgstr "Šalinama: %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:213
@@ -282,9 +283,9 @@ msgid "Removal of %s failed:"
 msgstr "Nepavyko pašalinti %s:"
 
 #: src/callbacks/rpm.h:279
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "Diegiama: %s-%s"
+msgstr "Diegiama: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:284
@@ -293,9 +294,9 @@ msgid "Installing: %s-%s"
 msgstr "Diegiama: %s-%s"
 
 #: src/callbacks/rpm.h:308
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "Nepavyko įdiegti %s-%s:"
+msgstr "Nepavyko įdiegti %s:"
 
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
@@ -634,9 +635,8 @@ msgid "Dependency"
 msgstr "Priklausomybė"
 
 #: src/info.cc:420 src/info.cc:434
-#, fuzzy
 msgid "Required"
-msgstr "Reikalauja"
+msgstr "Reikia"
 
 #: src/info.cc:425 src/info.cc:434 src/search.cc:318
 msgid "Recommended"
@@ -991,13 +991,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Pataisa „%s“ nereikalinga."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Pataisa „%s“ yra užrakinta. Ją diekite naudodami „%s“ arba atrakinkite su "
-"„%s“."
+"Pataisos „%1%“ įdiegti nebūtina. Ją diekite naudodami „%2%“, arba įdiekite "
+"visas nebūtinas pataisas naudodami „%3%“."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -2942,9 +2942,8 @@ msgstr "Pirmiausia bus įdiegti šie programinės įrangos atnaujinimai:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "Pirmiausia bus įdiegti šie programinės įrangos atnaujinimai:"
+msgstr "Pirmiausia įdiegsimi reikalingiausi programinės įrangos atnaujinimai:"
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
@@ -4576,11 +4575,12 @@ msgid ""
 msgstr ""
 
 #: src/Zypper.cc:2477
-#, fuzzy
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
-msgstr "Tikrinti tik paketus, kurie susiję su pačia paketų tvarkymo programa."
+msgstr ""
+"--updatestack-only\n"
+"Tikrinti tik pataisas, kurie susiję su pačia paketų tvarkymo programa."
 
 #: src/Zypper.cc:2494
 msgid ""
@@ -5329,9 +5329,8 @@ msgstr "Nurodyta saugykla „%s“ yra uždrausta."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
-msgstr "Nerasta atitinkančių ydų"
+msgstr "Atitikmenų nerasta."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
@@ -5593,9 +5592,8 @@ msgid "Check failed:"
 msgstr "Patikrinti nepavyko:"
 
 #: src/solve-commit.cc:449
-#, fuzzy
 msgid "Skip check:"
-msgstr "GPG patikra"
+msgstr "Praleisti patikrinimą:"
 
 #: src/solve-commit.cc:457
 #, c-format, boost-format
@@ -6428,9 +6426,8 @@ msgstr "nepageidaujama"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
-#, fuzzy
 msgid "optional"
-msgstr "ps [parinktys]"
+msgstr "nebūtina"
 
 #. translator: patch status
 #: src/utils/misc.cc:136
