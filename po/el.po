@@ -16,15 +16,15 @@ msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2015-07-06 01:22+0300\n"
-"Last-Translator: Danae <danae.asderi@gmail.com>\n"
-"Language-Team: opensuse-translation-el@opensuse.org\n"
+"PO-Revision-Date: 2016-08-23 07:58+0000\n"
+"Last-Translator: Anastasios Mavrommatis <anastasios@mavrommatis.net>\n"
+"Language-Team: Greek <https://l10n.opensuse.org/projects/zypper/master/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -155,7 +155,7 @@ msgstr "Απόρριψη του κλειδιού."
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:218
 msgid "Trust the key temporarily."
-msgstr "Προσωρινή αποδοχή του κλειδιού. "
+msgstr "Προσωρινή αποδοχή του κλειδιού."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:221
@@ -289,7 +289,7 @@ msgstr "Εκτέλεση του: %s  (%s, %s)"
 #: src/callbacks/rpm.h:208
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr ""
+msgstr "Αφαίρεση %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:213
@@ -305,7 +305,7 @@ msgstr "Αφαίρεση του %s απέτυχε:"
 #: src/callbacks/rpm.h:279
 #, c-format, boost-format
 msgid "Installing: %s"
-msgstr ""
+msgstr "Εγκατάσταση: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:284
@@ -316,7 +316,7 @@ msgstr "Εγκατάσταση του: %s-%s"
 #: src/callbacks/rpm.h:308
 #, c-format, boost-format
 msgid "Installation of %s failed:"
-msgstr ""
+msgstr "Η εγκατάσταση του %s απέτυχε:"
 
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
@@ -610,7 +610,7 @@ msgstr "Απαιτείται Επανεκκίνηση του Διαχειρισ�
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:353 src/info.cc:356 src/utils/misc.cc:253 src/utils/misc.cc:294
 msgid "Interactive"
-msgstr ""
+msgstr "Διαδραστικός"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:392
@@ -677,7 +677,7 @@ msgstr "άγνωστη"
 #: src/info.cc:511
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Βλέπε %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:517
@@ -722,7 +722,7 @@ msgstr "μη έγκυρο όνομα CPE"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:582
 msgid "Short Name"
-msgstr "Σύντομη Ονομασία:"
+msgstr "Σύντομη Ονομασία"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -1728,7 +1728,7 @@ msgid ""
 "the file."
 msgstr ""
 "Παράλειψη ανάκτησης του αρχείου και προσπάθεια συνέχειας της διαδικασίας "
-"χωρίς το αρχείο"
+"χωρίς το αρχείο."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
@@ -2374,9 +2374,7 @@ msgstr "Πρόβλημα κατά την ανάλυση του αρχείου σ
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1754
 msgid "Is it a .repo file?"
-msgstr ""
-"Είναι ένα αρχείο .repo; Για λεπτομέρειες δείτε την http://en.opensuse.org/"
-"Standards/RepoInfo ."
+msgstr "Είναι ένα αρχείο .repo;"
 
 #: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
@@ -3338,7 +3336,7 @@ msgstr ""
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Τα αποθετήρια έχουν απενεργοποιηθεί, χρήση μόνο της βάσης δεδομένων των "
-"εγκατεστημένων πακέτων. "
+"εγκατεστημένων πακέτων."
 
 #: src/Zypper.cc:1056
 msgid "Autorefresh disabled."
@@ -3376,7 +3374,7 @@ msgstr "Η εντολή '%s' αντικαταστάθηκε από την '%s'."
 #: src/Zypper.cc:1314
 #, c-format, boost-format
 msgid "See '%s' for all available options."
-msgstr "Δείτε την '%s' για τις διαθέσιμε επολογές"
+msgstr "Δείτε την '%s' για τις διαθέσιμες επολογές."
 
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
@@ -4965,7 +4963,7 @@ msgstr ""
 #: src/Zypper.cc:3423
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
-msgstr "Το '%s' δεν είναι ένα έγκυρος τύπος υπηρεσίας"
+msgstr "Το '%s' δεν είναι ένας έγκυρος τύπος υπηρεσίας."
 
 #: src/Zypper.cc:3425
 #, c-format, boost-format
@@ -5068,7 +5066,7 @@ msgstr "Η καθολική επιλογή '%s' δεν έχει αποτέλεσ
 #: src/Zypper.cc:3860
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr "Οι παράμετροι δεν επιτρέπονται εάν χρησιμοποιηθεί το '%s'"
+msgstr "Οι παράμετροι δεν επιτρέπονται εάν χρησιμοποιηθεί το '%s'."
 
 #: src/Zypper.cc:3884
 msgid "Root privileges are required for cleaning local caches."
@@ -5882,7 +5880,7 @@ msgstr "Δεν μεταφορτώνεται το πακέτο '%s'."
 #: src/PackageArgs.cc:204
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "Το '%s' δεν βρέθηκε στα ονόματα πακέτων. Δοκιμή '%s'"
+msgstr "Το '%s' δεν βρέθηκε στα ονόματα πακέτων. Δοκιμή '%s'."
 
 #: src/PackageArgs.cc:219
 #, c-format, boost-format
