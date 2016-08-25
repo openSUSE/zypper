@@ -9,14 +9,16 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2006-07-12 07:32+0200\n"
-"Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
-"Language-Team: Vietnamese <i18n@suse.de>\n"
+"PO-Revision-Date: 2016-08-25 08:06+0000\n"
+"Last-Translator: Hoàng Phạm <pnhoang96@gmail.com>\n"
+"Language-Team: Vietnamese "
+"<https://l10n.opensuse.org/projects/libzypp/master/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -74,11 +76,11 @@ msgstr ""
 
 #: zypp/Dep.cc:98
 msgid "Requires"
-msgstr ""
+msgstr "Cần"
 
 #: zypp/Dep.cc:99
 msgid "Conflicts"
-msgstr ""
+msgstr "Xung đột"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
@@ -135,13 +137,13 @@ msgstr ""
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
-msgstr ""
+msgstr "Thông báo cập nhật mới"
 
 #: zypp/target/TargetImpl.cc:1219 zypp/target/TargetImpl.cc:1288
 #: zypp/target/TargetImpl.cc:1640
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."
-msgstr ""
+msgstr "Đã huỷ cài đặt theo yêu cầu."
 
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
@@ -178,14 +180,14 @@ msgstr ""
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
-msgstr ""
+msgstr "Không phải ổ đĩa CDROM"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
 #: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
 #: zypp/target/rpm/RpmDb.cc:2189
 msgid "RPM failed: "
-msgstr ""
+msgstr "Lỗi RPM: "
 
 #. TranslatorExplanation first %s is file name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1124
@@ -307,9 +309,9 @@ msgstr ""
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
 #: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't open file '%s' for writing."
-msgstr "Couldn't open file: %s."
+msgstr "Không thể mở tập tin '%s' để ghi."
 
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
@@ -326,9 +328,9 @@ msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] ""
 
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't create %s"
-msgstr "Couldn't open file: %s."
+msgstr "Không thể tạo %s"
 
 #: zypp/RepoManager.cc:1140
 msgid "Can't create metadata cache directory."
@@ -362,7 +364,7 @@ msgstr ""
 #: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
-msgstr ""
+msgstr "Lỗi khi đọc từ '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
@@ -373,7 +375,7 @@ msgstr ""
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr ""
+msgstr "Đang thêm kho '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
@@ -384,17 +386,17 @@ msgstr ""
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr ""
+msgstr "Đang xoá kho '%s'"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
-msgstr ""
+msgstr "Không thể xác định nơi chứa kho phần mềm."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't delete '%s'"
-msgstr "Couldn't open file: %s."
+msgstr "Không thể xoá '%s'"
 
 #: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
 msgid "Can't figure out where the service is stored."
