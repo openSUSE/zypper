@@ -1,16 +1,14 @@
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-08-25 15:05+0000\n"
-"Last-Translator: Wanto Yo <wantoyek@gmail.com>\n"
+"PO-Revision-Date: 2016-08-26 00:33+0700\n"
+"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
 "Language: id\n"
@@ -18,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -30,7 +28,7 @@ msgstr "Nama Kunci:"
 
 #: src/callbacks/keyring.h:39
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Tanda tangan kunci:"
 
 #: src/callbacks/keyring.h:40
 msgid "Key Created:"
@@ -38,61 +36,66 @@ msgstr "Kunci Diciptakan:"
 
 #: src/callbacks/keyring.h:41
 msgid "Key Expires:"
-msgstr ""
+msgstr "Kunci Kadaluarsa:"
 
 #: src/callbacks/keyring.h:42
 msgid "Rpm Name:"
-msgstr ""
+msgstr "Nama Rpm:"
 
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "Penandatanganan kunci gpg file '%1%' telah kadaluarsa."
+msgstr "Berkas penandatanganan kunci '%1%' telah kadaluarsa."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
+msgstr[0] "Berkas penandatanganan kunci '%1%' akan kadaluarsa dalam %2% hari."
 
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr ""
+msgstr "Menerima berkas tidak ditandatangani '%s'."
 
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr ""
+msgstr "Menerima berkas tidak ditandatangani '%s' dari repositori '%s'."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:112
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr ""
+msgstr "Berkas '%s' tidak ditandatangani, lanjutkan?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr ""
+msgstr "Berkas '%s' dari repositori '%s' tidak ditandatangani, lanjutkan?"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr ""
+"Menerima berkas '%s' yang ditandatangani dengan kunci '%s' yang tidak "
+"dikenal."
 
 #: src/callbacks/keyring.h:143
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
+"Menerima berkas '%s' dari repositori '%s' yang ditandatangani dengan kunci '%"
+"s' yang tidak dikenal."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
+"Berkas '%s' ditandatangani dengan kunci '%s' yang tidak dikenal. Lanjutkan?"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:157
@@ -100,23 +103,27 @@ msgstr ""
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
+"Berkas '%s' dari repositori '%s' ditandatangani dengan kunci '%s' yang tidak "
+"dikenal. Lanjutkan?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
-msgstr ""
+msgstr "Mengimpor kunci berikut secara otomatis:"
 
 #: src/callbacks/keyring.h:175
 msgid "Automatically trusting the following key:"
-msgstr ""
+msgstr "Mempercayai kunci berikut secara otomatis:"
 
 #: src/callbacks/keyring.h:177
 msgid "New repository or package signing key received:"
-msgstr ""
+msgstr "Kunci penandatanganan repositori dan paket baru diterima:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
+"Apakah Anda ingin menolak, mempercayai sementara, atau selalu mempercayai "
+"kunci?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -125,76 +132,82 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:211
 msgid "r/t/a/"
-msgstr ""
+msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:214
 msgid "r/t"
-msgstr ""
+msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:216
 msgid "Don't trust the key."
-msgstr ""
+msgstr "Tidak mempercayai kunci."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:218
 msgid "Trust the key temporarily."
-msgstr ""
+msgstr "Percayai kunci sementara."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:221
 msgid "Trust the key and import it into trusted keyring."
-msgstr ""
+msgstr "Percayai kunci dan mengimpornya ke dalam keyring terpercaya."
 
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr ""
+msgstr "Mengabaikan verifikasi tanda tangan yang gagal untuk berkas '%s'!"
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
+"Mengabaikan verifikasi tanda tangan yang gagal untuk berkas '%s' dari "
+"repositori '%s'!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
+"Periksa ulang bahwa ini bukan disebabkan oleh beberapa perubahan berbahaya "
+"dalam berkas!"
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s'."
-msgstr ""
+msgstr "Verifikasi tanda tangan gagal untuk berkas '%s'."
 
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr ""
+msgstr "Verifikasi tanda tangan gagal untuk berkas '%s' dari repositori '%s'."
 
 #: src/callbacks/keyring.h:284
 msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
 msgstr ""
+"Peringatan: Ini mungkin disebabkan oleh perubahan berbahaya di dalam berkas!"
+"\n"
+"Melanjutkan mungkin akan beresiko. Tetap lanjutkan?"
 
 #: src/callbacks/keyring.h:307
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "No digest for file %s."
-msgstr "Viewer untuk file rpm."
+msgstr "Tidak ada intisari untuk berkas %s."
 
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
 #: src/callbacks/rpm.h:138 src/callbacks/rpm.h:424 src/solve-commit.cc:668
-#, fuzzy
 msgid "Continue?"
-msgstr "Lanjut"
+msgstr "Lanjutkan?"
 
 #: src/callbacks/keyring.h:315
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
-msgstr ""
+msgstr "Intisari %s tidak dikenal untuk berkas %s."
 
 #: src/callbacks/keyring.h:332
 #, boost-format
@@ -205,12 +218,19 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
+"Verifikasi intisari gagal untuk berkas '%1%'\n"
+"[%2%]\n"
+"\n"
+"  diharapkan %3%\n"
+"  tetapi didapat  %4%\n"
 
 #: src/callbacks/keyring.h:344
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
+"Menerima paket dengan checksum yang salah dapat menyebabkan sistem rusak dan "
+"dalam kasus ekstrim bahkan dapat membahayakan sistem."
 
 #: src/callbacks/keyring.h:352
 #, boost-format
@@ -222,74 +242,81 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
+"Namun apabila Anda yakin bahwa berkas dengan checksum '%1%..' aman, perbaiki "
+"dan boleh\n"
+"digunakan dalam operasi ini, masukkan 4 karakter pertama dari checksum untuk "
+"membuka blokir\n"
+"penggunaan berkas ini dengan resiko Anda sendiri. Tidak memasukkan akan "
+"mengabaikan berkas ini.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:359
 msgid "discard"
-msgstr ""
+msgstr "abaikan"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:361
 msgid "Unblock using this file on your own risk."
 msgstr ""
+"Buka blokir penggunaan berkas ini dengan resiko ditanggung Anda sendiri."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:363
 msgid "Discard the file."
-msgstr ""
+msgstr "Abaikan berkas."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:368
 msgid "Unblock or discard?"
-msgstr ""
+msgstr "Buka blokir atau abaikan?"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:151
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
-msgstr ""
+msgstr "Menjalankan: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:208
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr ""
+msgstr "Menghapus %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:213
 #, c-format, boost-format
 msgid "Removing %s-%s"
-msgstr ""
+msgstr "Menghapus %s-%s"
 
 #: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr ""
+msgstr "Menghapus %s gagal:"
 
 #: src/callbacks/rpm.h:279
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Installing: %s"
-msgstr "Instalasi"
+msgstr "Memasang: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:284
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Installing: %s-%s"
-msgstr "Instalasi"
+msgstr "Memasang: %s-%s"
 
 #: src/callbacks/rpm.h:308
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Installation of %s failed:"
-msgstr "Instalasi--ACPI ditiadakan"
+msgstr "Pemasangan %s gagal:"
 
 #: src/callbacks/rpm.h:310
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Installation of %s-%s failed:"
-msgstr "Instalasi--ACPI ditiadakan"
+msgstr "Pemasangan %s-%s gagal:"
 
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:356
 msgid "Checking for file conflicts:"
-msgstr ""
+msgstr "Memeriksa konflik pada berkas:"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:390
@@ -299,6 +326,9 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
+"Memeriksa konflik pada berkas memerlukan paket yang belum terpasang untuk "
+"diunduh terlebih dahulu guna mengakses daftar berkas mereka. Lihat opsi '%1%"
+"' di halaman panduan zypper untuk informasi lebih lengkap."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
@@ -310,17 +340,19 @@ msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
 msgstr[0] ""
+"Paket %1% berikut akan dikecualikan dari pemeriksaan konflik pada berkas "
+"karena belum diunduh:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:408
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
-msgstr[0] ""
+msgstr[0] "Terdeteksi %1% konflik pada berkas:"
 
 #: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
-msgstr ""
+msgstr "Berkas-berkas yang konflik akan diganti."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
 #: src/callbacks/rpm.h:422
@@ -368,12 +400,11 @@ msgid "In cache %1%"
 msgstr ""
 
 #: src/callbacks/repo.h:128
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Retrieving %s %s-%s.%s"
 msgstr "Kesalahan memuatkan %1"
 
 #: src/callbacks/repo.h:217
-#, fuzzy
 msgid "Signature verification failed"
 msgstr "Instalasi--ACPI ditiadakan"
 
@@ -413,17 +444,14 @@ msgid "Not found"
 msgstr ""
 
 #: src/utils/prompt.h:160
-#, fuzzy
 msgid "I/O error"
 msgstr "Kesalahan I/O"
 
 #: src/utils/prompt.h:160
-#, fuzzy
 msgid "Invalid object"
 msgstr "Skema url '%1' tidak valid"
 
 #: src/utils/prompt.h:167
-#, fuzzy
 msgid "Error"
 msgstr "Kesalahan I/O"
 
@@ -460,7 +488,6 @@ msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:74
-#, fuzzy
 msgid "Vendor"
 msgstr "Vendor"
 
@@ -484,13 +511,13 @@ msgstr[0] ""
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:184
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "%s '%s' not found."
 msgstr "Path kamus %s tidak valid"
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
 #: src/info.cc:204
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Information for %s %s:"
 msgstr "Informasi OS"
 
@@ -506,14 +533,12 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/info.cc:288 src/info.cc:390 src/info.cc:521 src/Summary.cc:1207
-#, fuzzy
 msgid "Installed"
 msgstr "Instalasi"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:290 src/info.cc:336 src/info.cc:524 src/utils/misc.cc:254
 #: src/utils/misc.cc:295
-#, fuzzy
 msgid "Status"
 msgstr "Status Network"
 
@@ -545,7 +570,6 @@ msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:342
-#, fuzzy
 msgid "Created On"
 msgstr "Membuat %s"
 
@@ -569,7 +593,6 @@ msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:406 src/info.cc:442
-#, fuzzy
 msgid "Contents"
 msgstr "Lanjut"
 
@@ -641,22 +664,18 @@ msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:540 src/info.cc:567
-#, fuzzy
 msgid "Update Repositories"
 msgstr "Path kamus %s tidak valid"
 
 #: src/info.cc:545
-#, fuzzy
 msgid "Content Id"
 msgstr "Lanjut"
 
 #: src/info.cc:557
-#, fuzzy
 msgid "Provided by enabled repository"
 msgstr "Skema url '%1' tidak valid"
 
 #: src/info.cc:562
-#, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "Skema url merupakan komponen yang dibutuhkan"
 
@@ -786,22 +805,22 @@ msgid "'%s' not found in package names. Trying capabilities."
 msgstr ""
 
 #: src/RequestFeedback.cc:46
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Package '%s' not found."
 msgstr "Path kamus %s tidak valid"
 
 #: src/RequestFeedback.cc:48
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Patch '%s' not found."
 msgstr "Path kamus %s tidak valid"
 
 #: src/RequestFeedback.cc:50
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Product '%s' not found."
 msgstr "Path kamus %s tidak valid"
 
 #: src/RequestFeedback.cc:52
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Pattern '%s' not found."
 msgstr "Path kamus %s tidak valid"
 
@@ -812,7 +831,7 @@ msgstr ""
 
 #. just in case
 #: src/RequestFeedback.cc:56
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Object '%s' not found."
 msgstr "Path kamus %s tidak valid"
 
@@ -822,7 +841,7 @@ msgid "Package '%s' not found in specified repositories."
 msgstr ""
 
 #: src/RequestFeedback.cc:63
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Patch '%s' not found in specified repositories."
 msgstr "Path kamus %s tidak valid"
 
@@ -849,13 +868,13 @@ msgstr ""
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "No provider of '%s' found."
 msgstr "Path kamus %s tidak valid"
 
 #. wildcards used
 #: src/RequestFeedback.cc:84
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "No package matching '%s' is installed."
 msgstr "Path kamus %s tidak valid"
 
@@ -866,7 +885,7 @@ msgstr ""
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "No provider of '%s' is installed."
 msgstr "Path kamus %s tidak valid"
 
@@ -889,7 +908,7 @@ msgid ""
 msgstr ""
 
 #: src/RequestFeedback.cc:108
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "No update candidate for '%s'."
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -950,7 +969,7 @@ msgid "Patch '%s' is interactive, skipping."
 msgstr ""
 
 #: src/RequestFeedback.cc:175
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Patch '%s' is not needed."
 msgstr "Path kamus %s tidak valid"
 
@@ -967,17 +986,17 @@ msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
 
 #: src/RequestFeedback.cc:199
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Patch '%s' is not in the specified category."
 msgstr "Path kamus %s tidak valid"
 
 #: src/RequestFeedback.cc:206
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Patch '%s' has not the specified severity."
 msgstr "Path kamus %s tidak valid"
 
 #: src/RequestFeedback.cc:213
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Patch '%s' was issued after the specified date."
 msgstr "Path kamus %s tidak valid"
 
@@ -1418,7 +1437,6 @@ msgstr[0] ""
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/Summary.cc:1201
-#, fuzzy
 msgid "Available"
 msgstr "Ruang tersedia"
 
@@ -1439,7 +1457,6 @@ msgid "Overall download size: %1%. Already cached: %2%."
 msgstr ""
 
 #: src/Summary.cc:1243
-#, fuzzy
 msgid "Download only."
 msgstr "Kesalahan memuatkan %1"
 
@@ -1485,7 +1502,6 @@ msgstr[0] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1309
-#, fuzzy
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "Status network tidak diketahui"
@@ -1546,7 +1562,6 @@ msgstr[0] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1379
-#, fuzzy
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "Status network tidak diketahui"
@@ -1633,7 +1648,6 @@ msgstr ""
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:157
-#, fuzzy
 msgid "Retrying..."
 msgstr "Mulai..."
 
@@ -1687,7 +1701,7 @@ msgid "Password"
 msgstr "Password"
 
 #: src/Command.cc:201
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Unknown command '%s'"
 msgstr "Tidak dapat memperoleh opsi"
 
@@ -1724,7 +1738,7 @@ msgid "Repository '%s' is up to date."
 msgstr ""
 
 #: src/repos.cc:208
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "Path kamus %s tidak valid"
 
@@ -1733,7 +1747,7 @@ msgid "Forcing raw metadata refresh"
 msgstr ""
 
 #: src/repos.cc:236
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "Path kamus %s tidak valid"
 
@@ -1743,7 +1757,7 @@ msgid "Do you want to disable the repository %s permanently?"
 msgstr ""
 
 #: src/repos.cc:279
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Error while disabling repository '%s'."
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -1761,7 +1775,7 @@ msgid "Please see the above error message for a hint."
 msgstr ""
 
 #: src/repos.cc:308
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "No URIs defined for '%s'."
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -1777,7 +1791,6 @@ msgid ""
 msgstr ""
 
 #: src/repos.cc:327
-#, fuzzy
 msgid "No alias defined for this repository."
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -1785,7 +1798,7 @@ msgstr ""
 "%s"
 
 #: src/repos.cc:339
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' is invalid."
 msgstr "Path kamus %s tidak valid"
 
@@ -1824,7 +1837,6 @@ msgid "Repository metadata for '%s' not found in local cache."
 msgstr ""
 
 #: src/repos.cc:409
-#, fuzzy
 msgid "Error building the cache:"
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -1842,17 +1854,17 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr ""
 
 #: src/repos.cc:633
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "Skema url '%1' tidak valid"
 
 #: src/repos.cc:716 src/repos.cc:722
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:749
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Skema url '%1' tidak valid"
 
@@ -1881,7 +1893,7 @@ msgid "Disabling repository '%s'."
 msgstr ""
 
 #: src/repos.cc:834
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Temporarily enabling repository '%s'."
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -1889,7 +1901,7 @@ msgstr ""
 "%s"
 
 #: src/repos.cc:841
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' stays disabled."
 msgstr "Path kamus %s tidak valid"
 
@@ -1898,12 +1910,10 @@ msgid "Some of the repositories have not been refreshed because of an error."
 msgstr ""
 
 #: src/repos.cc:889
-#, fuzzy
 msgid "Initializing Target"
 msgstr "Menginisialisasi port parallel ... "
 
 #: src/repos.cc:897
-#, fuzzy
 msgid "Target initialization failed:"
 msgstr "Instalasi--ACPI ditiadakan"
 
@@ -1918,7 +1928,6 @@ msgstr ""
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:968 src/repos.cc:1100 src/repos.cc:1628 src/repos.cc:2403
-#, fuzzy
 msgid "Enabled"
 msgstr "Adakan"
 
@@ -1949,12 +1958,10 @@ msgstr ""
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
 #: src/repos.cc:1015 src/ps.cc:125
-#, fuzzy
 msgid "Service"
 msgstr "Device"
 
 #: src/repos.cc:1069
-#, fuzzy
 msgid "No repositories defined."
 msgstr "Path kamus %s tidak valid"
 
@@ -1968,7 +1975,6 @@ msgstr ""
 
 # OM
 #: src/repos.cc:1103 src/repos.cc:1104
-#, fuzzy
 msgid "On"
 msgstr "Oman"
 
@@ -1977,7 +1983,6 @@ msgid "Off"
 msgstr ""
 
 #: src/repos.cc:1104
-#, fuzzy
 msgid "Keep Packages"
 msgstr "Paket pengembangan KDE"
 
@@ -1990,7 +1995,6 @@ msgid "Path Prefix"
 msgstr ""
 
 #: src/repos.cc:1108
-#, fuzzy
 msgid "Parent Service"
 msgstr "Print Server"
 
@@ -2011,7 +2015,7 @@ msgid "Error reading repositories:"
 msgstr ""
 
 #: src/repos.cc:1189
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Can't open %s for writing."
 msgstr "Tidak dapat membuka %s untuk membaca: %s"
 
@@ -2085,7 +2089,6 @@ msgid "Cannot clean repository '%s' because of an error."
 msgstr ""
 
 #: src/repos.cc:1479
-#, fuzzy
 msgid "Cleaning installed packages cache."
 msgstr "Mempersiapkan instalasi..."
 
@@ -2106,7 +2109,6 @@ msgid "Specified repositories have been cleaned up."
 msgstr ""
 
 #: src/repos.cc:1520
-#, fuzzy
 msgid "All repositories have been cleaned up."
 msgstr "Path kamus %s tidak valid"
 
@@ -2115,7 +2117,7 @@ msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 
 #: src/repos.cc:1568
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Skema url '%1' tidak valid"
 
@@ -2143,7 +2145,6 @@ msgid "Please check whether the specified URI is accessible."
 msgstr ""
 
 #: src/repos.cc:1607
-#, fuzzy
 msgid "Unknown problem when adding repository:"
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -2210,17 +2211,16 @@ msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr ""
 
 #: src/repos.cc:1773
-#, fuzzy
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:1779
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:1821
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' has been removed."
 msgstr "Path kamus %s tidak valid"
 
@@ -2232,12 +2232,11 @@ msgid ""
 msgstr ""
 
 #: src/repos.cc:1854
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:1863 src/repos.cc:2097
-#, fuzzy
 msgid "Error while modifying the repository:"
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -2245,22 +2244,22 @@ msgstr ""
 "%s"
 
 #: src/repos.cc:1864
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:2001
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:2039
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:2041
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Path kamus %s tidak valid"
 
@@ -2290,17 +2289,17 @@ msgid "GPG check has been enabled for repository '%s'."
 msgstr ""
 
 #: src/repos.cc:2068
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Skema url '%1' tidak valid"
 
 #: src/repos.cc:2074
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:2080
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Path kamus %s tidak valid"
 
@@ -2315,7 +2314,6 @@ msgid "Leaving repository %s unchanged."
 msgstr ""
 
 #: src/repos.cc:2130
-#, fuzzy
 msgid "Error reading services:"
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -2323,7 +2321,7 @@ msgstr ""
 "%s"
 
 #: src/repos.cc:2219
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "Path kamus %s tidak valid"
 
@@ -2343,12 +2341,12 @@ msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
 
 #: src/repos.cc:2554
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Error occured while adding service '%s'."
 msgstr "Mempersiapkan instalasi..."
 
 #: src/repos.cc:2560
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Service '%s' has been successfully added."
 msgstr "Path kamus %s tidak valid"
 
@@ -2358,7 +2356,7 @@ msgid "Removing service '%s':"
 msgstr ""
 
 #: src/repos.cc:2601
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Service '%s' has been removed."
 msgstr "Path kamus %s tidak valid"
 
@@ -2408,22 +2406,20 @@ msgid "Some of the services have not been refreshed because of an error."
 msgstr ""
 
 #: src/repos.cc:2771
-#, fuzzy
 msgid "Specified services have been refreshed."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:2773
-#, fuzzy
 msgid "All services have been refreshed."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:2920
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:2922
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "Path kamus %s tidak valid"
 
@@ -2438,7 +2434,7 @@ msgid "Autorefresh has been disabled for service '%s'."
 msgstr ""
 
 #: src/repos.cc:2935
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "Path kamus %s tidak valid"
 
@@ -2479,7 +2475,6 @@ msgid "Nothing to change for service '%s'."
 msgstr ""
 
 #: src/repos.cc:2976
-#, fuzzy
 msgid "Error while modifying the service:"
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -2487,12 +2482,11 @@ msgstr ""
 "%s"
 
 #: src/repos.cc:2977
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Leaving service %s unchanged."
 msgstr "Path kamus %s tidak valid"
 
 #: src/repos.cc:3081
-#, fuzzy
 msgid "Loading repository data..."
 msgstr "Path kamus %s tidak valid"
 
@@ -2512,7 +2506,7 @@ msgid "Problem loading data from '%s'"
 msgstr ""
 
 #: src/repos.cc:3117
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "Path kamus %s tidak valid"
 
@@ -2535,12 +2529,10 @@ msgid "Try '%s', or even '%s' before doing so."
 msgstr ""
 
 #: src/repos.cc:3160
-#, fuzzy
 msgid "Reading installed packages..."
 msgstr "Mempersiapkan instalasi..."
 
 #: src/repos.cc:3169
-#, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Mempersiapkan instalasi..."
 
@@ -2655,17 +2647,14 @@ msgid "Product updates"
 msgstr ""
 
 #: src/update.cc:806
-#, fuzzy
 msgid "Current Version"
 msgstr "User saat ini:"
 
 #: src/update.cc:807
-#, fuzzy
 msgid "Available Version"
 msgstr "Ruang tersedia"
 
 #: src/update.cc:969
-#, fuzzy
 msgid "No matching issues found."
 msgstr "Path kamus %s tidak valid"
 
@@ -2720,7 +2709,6 @@ msgid ""
 msgstr ""
 
 #: src/Zypper.cc:109
-#, fuzzy
 msgid "Tell PackageKit to quit?"
 msgstr "Status network tidak diketahui"
 
@@ -2729,7 +2717,6 @@ msgid "PackageKit is still running (probably busy)."
 msgstr ""
 
 #: src/Zypper.cc:119
-#, fuzzy
 msgid "Try again?"
 msgstr "Mempersiapkan instalasi..."
 
@@ -2745,7 +2732,6 @@ msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
 
 #: src/Zypper.cc:269
-#, fuzzy
 msgid "Command options:"
 msgstr "Tidak dapat memperoleh opsi"
 
@@ -2945,7 +2931,7 @@ msgid "Verbosity: %d"
 msgstr ""
 
 #: src/Zypper.cc:785
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Invalid table style %d."
 msgstr "Skema url '%1' tidak valid"
 
@@ -3011,7 +2997,6 @@ msgid "CD/DVD repositories disabled."
 msgstr ""
 
 #: src/Zypper.cc:1070
-#, fuzzy
 msgid "Remote repositories disabled."
 msgstr "Path kamus %s tidak valid"
 
@@ -4116,12 +4101,11 @@ msgstr ""
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
 #: src/Zypper.cc:3450 src/Zypper.cc:3797
-#, fuzzy
 msgid "Alias or an aggregate option is required."
 msgstr "Skema url merupakan komponen yang dibutuhkan"
 
 #: src/Zypper.cc:3482
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Service '%s' not found."
 msgstr "Path kamus %s tidak valid"
 
@@ -4159,14 +4143,14 @@ msgstr ""
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: src/Zypper.cc:3688
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Path kamus %s tidak valid"
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: src/Zypper.cc:3710
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Path kamus %s tidak valid"
 
@@ -4175,7 +4159,7 @@ msgid "Too few arguments. At least URI and alias are required."
 msgstr ""
 
 #: src/Zypper.cc:3765
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Repository '%s' not found."
 msgstr "Path kamus %s tidak valid"
 
@@ -4203,7 +4187,6 @@ msgid "Root privileges are required for cleaning local caches."
 msgstr ""
 
 #: src/Zypper.cc:3903
-#, fuzzy
 msgid "At least one package name is required."
 msgstr "Skema url merupakan komponen yang dibutuhkan"
 
@@ -4218,12 +4201,11 @@ msgid "Ignoring arguments, marking the entire repository."
 msgstr ""
 
 #: src/Zypper.cc:3935
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Unknown package type: %s"
 msgstr "Status network tidak diketahui"
 
 #: src/Zypper.cc:3945
-#, fuzzy
 msgid "Cannot uninstall patches."
 msgstr "Mempersiapkan instalasi..."
 
@@ -4280,7 +4262,6 @@ msgid "%s cannot currently be used with %s"
 msgstr ""
 
 #: src/Zypper.cc:4148
-#, fuzzy
 msgid "Source package name is a required argument."
 msgstr "Skema url merupakan komponen yang dibutuhkan"
 
@@ -4290,18 +4271,17 @@ msgstr ""
 
 #: src/Zypper.cc:4251 src/Zypper.cc:4577 src/Zypper.cc:4677 src/Zypper.cc:4874
 #: src/Zypper.cc:4922 src/Zypper.cc:4962
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Unknown package type '%s'."
 msgstr "Status network tidak diketahui"
 
 #: src/Zypper.cc:4273
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Path kamus %s tidak valid"
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
-#, fuzzy
 msgid "No matching items found."
 msgstr "Path kamus %s tidak valid"
 
@@ -4314,7 +4294,7 @@ msgid "See the above message for a hint."
 msgstr ""
 
 #: src/Zypper.cc:4596 src/Zypper.cc:4644
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Cannot use %s together with %s."
 msgstr "Tidak dapat membuka %s untuk membaca: %s"
 
@@ -4413,7 +4393,6 @@ msgid "You already are running zypper's shell."
 msgstr ""
 
 #: src/Zypper.cc:5310
-#, fuzzy
 msgid "Resolvable Type"
 msgstr "Status network tidak diketahui"
 
@@ -4532,7 +4511,6 @@ msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 
 #: src/solve-commit.cc:447 src/ps.cc:59
-#, fuzzy
 msgid "Check failed:"
 msgstr "File _lock:"
 
@@ -4655,7 +4633,6 @@ msgid "(dry run)"
 msgstr ""
 
 #: src/solve-commit.cc:800 src/solve-commit.cc:833
-#, fuzzy
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Mempersiapkan instalasi..."
 
@@ -4737,7 +4714,6 @@ msgstr ""
 # menu item for selecting a file
 #. "list of deleted files or libraries accessed"
 #: src/ps.cc:129
-#, fuzzy
 msgid "Files"
 msgstr "File"
 
@@ -4772,7 +4748,7 @@ msgid "Can't create or access download directory '%s'."
 msgstr ""
 
 #: src/source-download.cc:221
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Using download directory at '%s'."
 msgstr "Tidak dapat memperoleh opsi"
 
@@ -4785,17 +4761,14 @@ msgid "Scanning download directory"
 msgstr ""
 
 #: src/source-download.cc:266
-#, fuzzy
 msgid "Scanning installed packages"
 msgstr "Mempersiapkan instalasi..."
 
 #: src/source-download.cc:285
-#, fuzzy
 msgid "Installed packages:"
 msgstr "Instalasi"
 
 #: src/source-download.cc:288
-#, fuzzy
 msgid "Required source packages:"
 msgstr "Status network tidak diketahui"
 
@@ -4813,12 +4786,10 @@ msgstr ""
 
 #. translators: table headers
 #: src/source-download.cc:319
-#, fuzzy
 msgid "Source package"
 msgstr "Status network tidak diketahui"
 
 #: src/source-download.cc:319
-#, fuzzy
 msgid "Installed package"
 msgstr "Instalasi"
 
@@ -4831,7 +4802,7 @@ msgid "Deleting superfluous source packages"
 msgstr ""
 
 #: src/source-download.cc:390
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Failed to remove source package '%s'"
 msgstr "Failed to parse: %s."
 
@@ -4840,22 +4811,20 @@ msgid "No superfluous source packages to delete."
 msgstr ""
 
 #: src/source-download.cc:411
-#, fuzzy
 msgid "Downloading required source packages..."
 msgstr "Mempersiapkan instalasi..."
 
 #: src/source-download.cc:430
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Source package '%s' is not provided by any repository."
 msgstr "Skema url merupakan komponen yang dibutuhkan"
 
 #: src/source-download.cc:449 src/source-download.cc:463
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Error downloading source package '%s'."
 msgstr "Mempersiapkan instalasi..."
 
 #: src/source-download.cc:474
-#, fuzzy
 msgid "No source packages to download."
 msgstr "Status network tidak diketahui"
 
@@ -4878,17 +4847,15 @@ msgstr ""
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
 #: src/search.cc:574
-#, fuzzy
 msgid "Internal Name"
 msgstr "Gateway Internet"
 
 #: src/search.cc:651
-#, fuzzy
 msgid "No products found."
 msgstr "Path kamus %s tidak valid"
 
 #: src/search.cc:675
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "No providers of '%s' found."
 msgstr "Path kamus %s tidak valid"
 
@@ -4904,7 +4871,6 @@ msgstr ""
 # ID
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
-#, fuzzy
 msgid "done"
 msgstr "Indonesia"
 
@@ -4915,7 +4881,6 @@ msgstr ""
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/output/OutNormal.cc:256
-#, fuzzy
 msgid "starting"
 msgstr "Mulai..."
 
@@ -4945,17 +4910,17 @@ msgid "Not downloading anything..."
 msgstr ""
 
 #: src/download.cc:190
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Error downloading package '%s'."
 msgstr "Mempersiapkan instalasi..."
 
 #: src/download.cc:204
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Not downloading package '%s'."
 msgstr "Mempersiapkan instalasi..."
 
 #: src/PackageArgs.cc:204
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "'%s' not found in package names. Trying '%s'."
 msgstr "Path kamus %s tidak valid"
 
@@ -5024,7 +4989,7 @@ msgid "SUMMARY"
 msgstr ""
 
 #: src/misc.cc:257
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Installed packages: %d"
 msgstr "Instalasi"
 
@@ -5034,7 +4999,7 @@ msgid "Installed packages with counterparts in repositories: %d"
 msgstr ""
 
 #: src/misc.cc:259
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Installed packages with EULAs: %d"
 msgstr "Instalasi Paket dengan YaST"
 
@@ -5044,7 +5009,7 @@ msgid "Package '%s' has source package '%s'."
 msgstr ""
 
 #: src/misc.cc:295
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Source package '%s' for package '%s' not found."
 msgstr "Path kamus %s tidak valid"
 
@@ -5054,7 +5019,7 @@ msgid "Installing source package %s-%s"
 msgstr ""
 
 #: src/misc.cc:382
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Source package %s-%s successfully retrieved."
 msgstr "Path kamus %s tidak valid"
 
@@ -5080,7 +5045,6 @@ msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/locks.cc:72
-#, fuzzy
 msgid "Keep installed"
 msgstr "Instalasi"
 
@@ -5098,7 +5062,6 @@ msgid "There are no package locks defined."
 msgstr ""
 
 #: src/locks.cc:166
-#, fuzzy
 msgid "Error reading the locks file:"
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -5106,34 +5069,29 @@ msgstr ""
 "%s"
 
 #: src/locks.cc:226
-#, fuzzy
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "Path kamus %s tidak valid"
 
 #: src/locks.cc:233
-#, fuzzy
 msgid "Problem adding the package lock:"
 msgstr "Mempersiapkan instalasi..."
 
 #: src/locks.cc:257
-#, fuzzy
 msgid "Specified lock has been successfully removed."
 msgstr "Path kamus %s tidak valid"
 
 #: src/locks.cc:302
-#, fuzzy
 msgid "No lock has been removed."
 msgstr "Path kamus %s tidak valid"
 
 #: src/locks.cc:306
-#, fuzzy, c-format
+#, c-format, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
 msgstr[0] "Path kamus %s tidak valid"
 
 #: src/locks.cc:313
-#, fuzzy
 msgid "Problem removing the package lock:"
 msgstr "Mempersiapkan instalasi..."
 
@@ -5178,7 +5136,6 @@ msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 
 #: src/utils/Augeas.cc:26
-#, fuzzy
 msgid "Cannot initialize configuration file parser."
 msgstr "Instalasi--ACPI ditiadakan"
 
@@ -5191,7 +5148,6 @@ msgid "Could not parse the config files."
 msgstr ""
 
 #: src/utils/Augeas.cc:99
-#, fuzzy
 msgid "Error parsing zypper.conf:"
 msgstr ""
 "Terjadi kesalahan ketika mengakses server FTP:\n"
@@ -5205,7 +5161,6 @@ msgstr ""
 #. argument. (bnc #299375)
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
-#, fuzzy
 msgid "Unknown option "
 msgstr "Tidak dapat memperoleh opsi"
 
@@ -5227,7 +5182,6 @@ msgid "shows all options"
 msgstr ""
 
 #: src/utils/prompt.cc:125 src/utils/prompt.cc:247 src/utils/prompt.cc:327
-#, fuzzy
 msgid "yes"
 msgstr "Ya"
 
@@ -5275,6 +5229,7 @@ msgstr ""
 
 #: src/utils/prompt.cc:321
 #, boost-format, c-format
+#, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "Jawaban '%s' tak valid."
 
@@ -5343,7 +5298,6 @@ msgstr ""
 
 #. translator: patch status
 #: src/utils/misc.cc:138
-#, fuzzy
 msgid "not needed"
 msgstr "tidak tersambung"
 
@@ -5358,7 +5312,6 @@ msgid "Issue"
 msgstr ""
 
 #: src/utils/misc.cc:290
-#, fuzzy
 msgid "No."
 msgstr "Tidak"
 
@@ -5386,6 +5339,7 @@ msgstr "Silakan gunakan obs://<project>/<platform>"
 
 #: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, boost-format, c-format
+#, c-format, boost-format
 msgid "Example: %s"
 msgstr "Contoh: %s"
 
@@ -5415,6 +5369,7 @@ msgstr "Silakan periksa apakah file dapat diakses."
 
 #: src/utils/misc.cc:687
 #, boost-format, c-format
+#, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Unduhan mode '%s' tak diketahui."
 
@@ -5428,121 +5383,93 @@ msgstr "Mode-mode unduhan yang tersedia: %s"
 msgid "Option '%s' overrides '%s'."
 msgstr ""
 
-#, fuzzy
 #~ msgid "Description: "
 #~ msgstr "Deskripsi"
 
-#, fuzzy
 #~ msgid "Installed: "
 #~ msgstr "Instalasi"
 
-#, fuzzy
 #~ msgid "Category: "
 #~ msgstr "Catalan"
 
-#, fuzzy
 #~ msgid "Unknown"
 #~ msgstr "tidak dikenal"
 
-#, fuzzy
 #~ msgid "Not Needed"
 #~ msgstr "tidak tersambung"
 
-#, fuzzy
 #~ msgid "Catalog: "
 #~ msgstr "Catalan"
 
-#, fuzzy
 #~ msgid "Catalog"
 #~ msgstr "Catalan"
 
-#, fuzzy
 #~ msgid "Unknown configuration option '%s'"
 #~ msgstr "Tidak dapat memperoleh opsi"
 
 # FR
-#, fuzzy
 #~ msgid "Importance"
 #~ msgstr "Perancis"
 
-#, fuzzy
 #~ msgid "Login"
 #~ msgstr "login: "
 
-#, fuzzy
 #~ msgid "Retrieving patch rpm"
 #~ msgstr "Kesalahan memuatkan %1"
 
-#, fuzzy
 #~ msgid "Not Applicable"
 #~ msgstr "Aplikasi Novell"
 
 # ID
-#, fuzzy
 #~ msgid "None"
 #~ msgstr "Indonesia"
 
-#, fuzzy
 #~ msgid "Cannot parse '%s < %s'"
 #~ msgstr "Tidak dapat membuka %s: %m"
 
-#, fuzzy
 #~ msgid "No patches matching '%s' found."
 #~ msgstr "Path kamus %s tidak valid"
 
-#, fuzzy
 #~ msgid "'%s' not found"
 #~ msgstr "Path kamus %s tidak valid"
 
-#, fuzzy
 #~ msgid "abort"
 #~ msgstr "Batal"
 
-#, fuzzy
 #~ msgid "Downloading delta"
 #~ msgstr "Kesalahan memuatkan %1"
 
-#, fuzzy
 #~ msgid "Downloading:"
 #~ msgstr "Kesalahan memuatkan %1"
 
-#, fuzzy
 #~ msgid "script"
 #~ msgid_plural "scripts"
 #~ msgstr[0] "Deskripsi"
 
-#, fuzzy
 #~ msgid ""
 #~ "Couldn't restore repository.\n"
 #~ "Detail: %s"
 #~ msgstr "Couldn't retrieve query."
 
-#, fuzzy
 #~ msgid "Invalid lock number: %s"
 #~ msgstr "Skema url '%1' tidak valid"
 
-#, fuzzy
 #~ msgid "Alias is a required argument."
 #~ msgstr "Skema url merupakan komponen yang dibutuhkan"
 
-#, fuzzy
 #~ msgid "language"
 #~ msgid_plural "languages"
 #~ msgstr[0] "Bahasa"
 
-#, fuzzy
 #~ msgid "system"
 #~ msgid_plural "systems"
 #~ msgstr[0] "Sistem:"
 
-#, fuzzy
 #~ msgid "N"
 #~ msgstr "Tidak"
 
-#, fuzzy
 #~ msgid "continue?"
 #~ msgstr "Lanjut"
 
-#, fuzzy
 #~ msgid "Error while fetching "
 #~ msgstr "Kesalahan ketika merubah password NIS."
