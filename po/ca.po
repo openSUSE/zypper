@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-07-25 08:22+0000\n"
+"PO-Revision-Date: 2016-08-26 09:24+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -30,11 +30,11 @@ msgstr "Nom de la clau:"
 
 #: src/callbacks/keyring.h:39
 msgid "Key Fingerprint:"
-msgstr "Empremta digital de la clau:"
+msgstr "Empremta de la clau:"
 
 #: src/callbacks/keyring.h:40
 msgid "Key Created:"
-msgstr "Clau creada:"
+msgstr "Creació de la clau:"
 
 #: src/callbacks/keyring.h:41
 msgid "Key Expires:"
@@ -47,24 +47,24 @@ msgstr "Nom Rpm:"
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "Ha caducat la signatura digital gpg '%1%'."
+msgstr "El fitxer %1% està signat amb una clau gpg caducada."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "La signatura digital gpg \"%1%\" caducarà d'aquí a %2% dia."
-msgstr[1] "La signatura digital gpg \"%1%\" caducarà d'aquí a %2% dies."
+msgstr[0] "La signatura gpg del fitxer %1% caducarà d'aquí a %2% dia."
+msgstr[1] "La signatura gpg del fitxer %1% caducarà d'aquí a %2% dies."
 
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Acceptant el fitxer %s no signat."
+msgstr "S'accepta el fitxer %s no signat."
 
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Acceptant el fitxer no signat %s del repositori %s."
+msgstr "S'accepta el fitxer no signat %s del repositori %s."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:112
@@ -103,12 +103,12 @@ msgstr "El fitxer %s està signat amb una clau desconeguda: \"%s\". Continuo?"
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"El fitxer %s del repositori %s està signat amb un identificador de clau "
-"desconeguda: \"%s\". Continuo?"
+"El fitxer %s del repositori %s està signat amb una clau desconeguda: \"%s\". "
+"Continuo?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
-msgstr "Important automàticament la clau següent:"
+msgstr "S'importa automàticament la clau següent:"
 
 #: src/callbacks/keyring.h:175
 msgid "Automatically trusting the following key:"
@@ -116,12 +116,13 @@ msgstr "Es confia automàticament en el certificat següent:"
 
 #: src/callbacks/keyring.h:177
 msgid "New repository or package signing key received:"
-msgstr "Nou repositori o firma de paquet rebut:"
+msgstr "Nova clau de signatura de repositori o paquet rebuda:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr "Voleu rebutjar la firma digital, confiar-hi temporalment o sempre?"
+msgstr ""
+"Voleu _rebutjar la signatura, confiar-hi _temporalment o confiar-hi _sempre?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -130,12 +131,12 @@ msgstr "Voleu rebutjar la firma digital, confiar-hi temporalment o sempre?"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:211
 msgid "r/t/a/"
-msgstr "rebutjar/confiar-hi temporalment/confiar-hi sempre"
+msgstr "r/t/s/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:214
 msgid "r/t"
-msgstr "rebutjar/confiar-hi temporalment"
+msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:216
@@ -155,14 +156,14 @@ msgstr "Confia en la clau i importa-la a l'anell de claus de confiança."
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignorant la verificació fallida de la firma digital per al fitxer %s!"
+msgstr "S'ignora la verificació fallida de la signatura per al fitxer %s!"
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
-"Ignorant la verificació fallida de la firma digital per al fitxer %s del "
+"S'ignora la verificació fallida de la signatura per al fitxer %s del "
 "repositori %s!"
 
 #: src/callbacks/keyring.h:266
@@ -186,20 +187,20 @@ msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
 msgstr ""
-"Atenció: això pot ser causat per un canvi maliciós al fitxer!\n"
-"Continuar podria ser perillós. Voleu continuar tanmateix?"
+"Atenció: això pot estar causat per un canvi maliciós al fitxer!\n"
+"Continuar podria ser perillós. Voleu continuar, tanmateix?"
 
 #: src/callbacks/keyring.h:307
 #, c-format, boost-format
 msgid "No digest for file %s."
-msgstr "No hi ha resum per a %s."
+msgstr "No hi ha resum per al fitxer %s."
 
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
 #: src/callbacks/rpm.h:138 src/callbacks/rpm.h:424 src/solve-commit.cc:668
 msgid "Continue?"
-msgstr "Voleu continuar?"
+msgstr "Continuo?"
 
 #: src/callbacks/keyring.h:315
 #, c-format, boost-format
@@ -254,7 +255,7 @@ msgstr "descarta"
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:361
 msgid "Unblock using this file on your own risk."
-msgstr "Desbloquegeu l'ús d'aquest fitxer al vostre risc."
+msgstr "Desbloquegeu l'ús d'aquest fitxer sota la vostra responsabilitat."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:363
@@ -322,9 +323,9 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
-"Comprovar els conflictes entre fitxers requereix que es descarreguin abans "
-"els paquets per tal d'accedir a la seva llista de fitxers. Vegeu l'opció  "
-"'%1%' al manual del zypper per a més detalls."
+"Comprovar els conflictes entre fitxers requereix que els paquets no instal·"
+"lats es baixin abans per tal d'accedir a la seva llista de fitxers. Vegeu "
+"l'opció \"%1%\" al manual del zypper per a més detalls."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:397
@@ -2147,7 +2148,7 @@ msgstr "Manté els paquets"
 
 #: src/repos.cc:1106
 msgid "GPG Key URI"
-msgstr "Firma GPG de l'adreça del recurs (URI)"
+msgstr "URI de la clau GPG"
 
 #: src/repos.cc:1107
 msgid "Path Prefix"
