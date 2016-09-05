@@ -8,43 +8,45 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2016-09-05 15:10+0000\n"
+"Last-Translator: Enol P <enolp@softastur.org>\n"
+"Language-Team: Asturian "
+"<https://l10n.opensuse.org/projects/zypper/master/ast/>\n"
 "Language: ast\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
-msgstr ""
+msgstr "Repositoriu:"
 
 #: src/callbacks/keyring.h:38
 msgid "Key Name:"
-msgstr ""
+msgstr "Nome de clave:"
 
 #: src/callbacks/keyring.h:39
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Buelga de clave:"
 
 #: src/callbacks/keyring.h:40
 msgid "Key Created:"
-msgstr ""
+msgstr "Creóse la clave:"
 
 #: src/callbacks/keyring.h:41
 msgid "Key Expires:"
-msgstr ""
+msgstr "Caduca la clave'l:"
 
 #: src/callbacks/keyring.h:42
 msgid "Rpm Name:"
-msgstr ""
+msgstr "Nome de RPM:"
 
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr ""
+msgstr "Caducó'l ficheru de robáu de clave GPG «%1%»."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
@@ -56,24 +58,24 @@ msgstr[1] ""
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr ""
+msgstr "Aceutando un ficheru ensin roblar «%s»."
 
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr ""
+msgstr "Aceutando un ficheru ensin roblar «%s» del repositoriu «%s»."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:112
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr ""
+msgstr "El ficheru «%s» nun ta robláu, ¿siguir?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr ""
+msgstr "El ficheru «%s» del repositoriu «%s» nun ta robláu, ¿siguir?"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
@@ -112,7 +114,7 @@ msgstr ""
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "¿Quies refugar, enfotar temporalmente o enfotar dafechu la clave?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -121,17 +123,17 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:211
 msgid "r/t/a/"
-msgstr ""
+msgstr "r/t/s"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:214
 msgid "r/t"
-msgstr ""
+msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:216
 msgid "Don't trust the key."
-msgstr ""
+msgstr "Nun enfotase na clave."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:218
@@ -146,7 +148,7 @@ msgstr ""
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr ""
+msgstr "¡Inorando verificación fallida de robla pal ficheru «%s»!"
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
@@ -183,7 +185,7 @@ msgstr ""
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
 #: src/callbacks/rpm.h:138 src/callbacks/rpm.h:424 src/solve-commit.cc:668
 msgid "Continue?"
-msgstr ""
+msgstr "¿Siguir?"
 
 #: src/callbacks/keyring.h:315
 #, c-format, boost-format
@@ -203,6 +205,8 @@ msgstr ""
 #: src/callbacks/keyring.h:344
 msgid "Accepting packages with wrong checksums can lead to a corrupted system and in extreme cases even to a system compromise."
 msgstr ""
+"Aceutar paquetes con comprobaciones incorreutes de sumes pue toyer el "
+"sistema y en casu estremu, comprometelu."
 
 #: src/callbacks/keyring.h:352
 #, boost-format
@@ -230,55 +234,55 @@ msgstr ""
 #. translators: A prompt text
 #: src/callbacks/keyring.h:368
 msgid "Unblock or discard?"
-msgstr ""
+msgstr "¿Desbloquiar o descartar?"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:151
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
-msgstr ""
+msgstr "Executando: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:208
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr ""
+msgstr "Desaniciando %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:213
 #, c-format, boost-format
 msgid "Removing %s-%s"
-msgstr ""
+msgstr "Desaniciando %s-%s"
 
 #: src/callbacks/rpm.h:236
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr ""
+msgstr "Falló'l desaniciu de %s:"
 
 #: src/callbacks/rpm.h:279
 #, c-format, boost-format
 msgid "Installing: %s"
-msgstr ""
+msgstr "Instalando: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:284
 #, c-format, boost-format
 msgid "Installing: %s-%s"
-msgstr ""
+msgstr "Instalando: %s-%s"
 
 #: src/callbacks/rpm.h:308
 #, c-format, boost-format
 msgid "Installation of %s failed:"
-msgstr ""
+msgstr "Falló la instalación de %s:"
 
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
 msgid "Installation of %s-%s failed:"
-msgstr ""
+msgstr "Falló la instalación de %s-%s:"
 
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:356
 msgid "Checking for file conflicts:"
-msgstr ""
+msgstr "Comprobando confilctos de ficheros:"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:390
@@ -304,12 +308,15 @@ msgstr[1] ""
 
 #: src/callbacks/rpm.h:416
 msgid "Conflicting files will be replaced."
-msgstr ""
+msgstr "Trocaránse tolos conflictos de ficheros."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
 #: src/callbacks/rpm.h:422
 msgid "File conflicts happen when two packages attempt to install files with the same name but different contents. If you continue, conflicting files will be replaced losing the previous content."
 msgstr ""
+"Los conflictos de ficheros asoceden cuando dos paquetes tenten d'instalar "
+"ficheros col mesmu nome pero conteníu diferente. Si sigues, trocaránse los "
+"ficheros en conflictu perdiendo'l conteníu previu."
 
 #: src/callbacks/locks.h:27
 msgid "The following query locks the same objects as the one you want to remove:"
@@ -321,7 +328,7 @@ msgstr ""
 
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
 msgid "Do you want to remove this lock?"
-msgstr ""
+msgstr "¿Quies desaniciar esti bloquéu?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
@@ -350,11 +357,11 @@ msgstr ""
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr ""
+msgstr "Recibiendo %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
-msgstr ""
+msgstr "Falló la verificación de robla"
 
 #: src/callbacks/repo.h:236
 msgid "Accepting package despite the error."
@@ -372,43 +379,43 @@ msgstr ""
 
 #: src/output/Out.h:33 src/repos.cc:111 src/repos.cc:139
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: src/output/Out.h:33 src/repos.cc:117 src/repos.cc:145
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: src/Zypper.h:463
 msgid "Finished with error."
-msgstr ""
+msgstr "Finó con fallos."
 
 #: src/Zypper.h:465
 msgid "Done."
-msgstr ""
+msgstr "Fecho."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
 msgid "Not found"
-msgstr ""
+msgstr "Nun s'alcontró"
 
 #: src/utils/prompt.h:160
 msgid "I/O error"
-msgstr ""
+msgstr "Fallu d'E/S"
 
 #: src/utils/prompt.h:160
 msgid "Invalid object"
-msgstr ""
+msgstr "Oxetu non válidu"
 
 #: src/utils/prompt.h:167
 msgid "Error"
-msgstr ""
+msgstr "Fallu"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/info.cc:66 src/update.cc:798 src/search.cc:74 src/search.cc:378
 #: src/search.cc:512 src/search.cc:571 src/locks.cc:107 src/utils/misc.cc:249
 msgid "Repository"
-msgstr ""
+msgstr "Repositoriu"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table coumn header
@@ -418,38 +425,38 @@ msgstr ""
 #: src/search.cc:231 src/search.cc:376 src/search.cc:513 src/search.cc:575
 #: src/locks.cc:104 src/utils/misc.cc:250
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package version (header)
 #: src/info.cc:70 src/search.cc:70 src/search.cc:377 src/search.cc:514
 #: src/search.cc:576
 msgid "Version"
-msgstr ""
+msgstr "Versión"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
 #: src/info.cc:72 src/update.cc:807 src/search.cc:72 src/search.cc:515
 #: src/search.cc:577
 msgid "Arch"
-msgstr ""
+msgstr "Arq."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:74
 msgid "Vendor"
-msgstr ""
+msgstr "Vendedor"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
 #: src/info.cc:80 src/search.cc:233 src/utils/misc.cc:255
 #: src/utils/misc.cc:296
 msgid "Summary"
-msgstr ""
+msgstr "Resume"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:82 src/Zypper.cc:5246
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: src/info.cc:152
 #, boost-format
@@ -462,13 +469,13 @@ msgstr[1] ""
 #: src/info.cc:184
 #, c-format, boost-format
 msgid "%s '%s' not found."
-msgstr ""
+msgstr "Nun s'alcontró'l %s «%s»"
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
 #: src/info.cc:204
 #, c-format, boost-format
 msgid "Information for %s %s:"
-msgstr ""
+msgstr "Información pa %s %s:"
 
 #: src/info.cc:283
 msgid "Support Level"
@@ -489,7 +496,7 @@ msgstr ""
 #: src/info.cc:290 src/info.cc:336 src/info.cc:524 src/utils/misc.cc:254
 #: src/utils/misc.cc:295
 msgid "Status"
-msgstr ""
+msgstr "Estáu"
 
 #: src/info.cc:294 src/info.cc:528
 #, c-format, boost-format
@@ -510,25 +517,25 @@ msgstr ""
 #: src/info.cc:338 src/update.cc:350 src/utils/misc.cc:251
 #: src/utils/misc.cc:292
 msgid "Category"
-msgstr ""
+msgstr "Estaya"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:340 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
-msgstr ""
+msgstr "Severidá"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:342
 msgid "Created On"
-msgstr ""
+msgstr "Creóse'l"
 
 #: src/info.cc:345
 msgid "Reboot Required"
-msgstr ""
+msgstr "Ríquese'l reaniciu"
 
 #: src/info.cc:346
 msgid "Package Manager Restart Required"
-msgstr ""
+msgstr "Ríquese'l reaniciu del xestor de paquetes"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:353 src/info.cc:356 src/utils/misc.cc:253 src/utils/misc.cc:294
@@ -538,12 +545,12 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:392
 msgid "Visible to User"
-msgstr ""
+msgstr "Visible al usuariu"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:406 src/info.cc:442
 msgid "Contents"
-msgstr ""
+msgstr "Conteníos"
 
 #: src/info.cc:406
 msgid "(empty)"
@@ -567,29 +574,29 @@ msgstr ""
 #: src/info.cc:414 src/repos.cc:999 src/repos.cc:1105 src/repos.cc:2411
 #: src/search.cc:68 src/search.cc:234 src/locks.cc:107
 msgid "Type"
-msgstr ""
+msgstr "Triba"
 
 #. translators: Table coumn header
 #: src/info.cc:415 src/search.cc:379
 msgid "Dependency"
-msgstr ""
+msgstr "Dependencia"
 
 #: src/info.cc:420 src/info.cc:434
 msgid "Required"
-msgstr ""
+msgstr "Ríquese"
 
 #: src/info.cc:425 src/info.cc:434 src/search.cc:318
 msgid "Recommended"
-msgstr ""
+msgstr "Aconséyase"
 
 #: src/info.cc:431 src/info.cc:434 src/search.cc:320
 msgid "Suggested"
-msgstr ""
+msgstr "Suxerse"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:501
 msgid "End of Support"
-msgstr ""
+msgstr "Fin de sofitu"
 
 #: src/info.cc:506
 msgid "unknown"
@@ -644,7 +651,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:582
 msgid "Short Name"
-msgstr ""
+msgstr "Nome curtiu"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -717,6 +724,15 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
+"Los socomandos de zypper son executables independientes que\n"
+"tán nel zypper_execdir («%1%»).\n"
+"\n"
+"Pa los socomandos que zypper forne, un wrapper sabe u tán y\n"
+"execútalos pasándo-yos los argumentos de llinia de comandos.\n"
+"\n"
+"Si nun s'alcuentra un socomandu en zypper_execdir, el wrapper\n"
+"guetará nel to $PATH. Poro, ye posible escribir les estensiones\n"
+"llocales de zypper que nun tán nel espaciu'l sistema.\n"
 
 #: src/subcommand.cc:401
 #, boost-format
@@ -729,7 +745,7 @@ msgstr ""
 #: src/subcommand.cc:418
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr ""
+msgstr "Socomandos de zypper disponibles en «%1%»"
 
 #. translators: headline of an enumeration
 #: src/subcommand.cc:423
@@ -756,98 +772,98 @@ msgstr ""
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr ""
+msgstr "Nun s'alcontró'l paquete «%s»."
 
 #: src/RequestFeedback.cc:48
-#, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' not found."
-msgstr ""
+msgstr "Nun s'alcontró'l parche «%s»."
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr ""
+msgstr "Nun s'alcontró'l productu «%s»."
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr ""
+msgstr "Nun s'alcontró'l patrón «%s»."
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr ""
+msgstr "Nun s'alcontró'l paquete fonte «%s»."
 
 #. just in case
 #: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr ""
+msgstr "Nun s'alcontró l'oxetu «%s»."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr ""
+msgstr "Nun s'alcontró'l paquete «%s» nos repositorios especificaos."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr ""
+msgstr "Nun s'alcontró'l parche «%s» nos repositorios especificaos."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr ""
+msgstr "Nun s'alcontró'l productu «%s» nos repositorios especificaos."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr ""
+msgstr "Nun s'alcontró'l patrón «%s» nos repositorios especificaos."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr ""
+msgstr "Nun s'alcontró'l paquete fonte «%s» nos repositorios especificaos."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr ""
+msgstr "Nun s'alcontró l'oxetu «%s» nos repositorios especificaos."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
-msgstr ""
+msgstr "Nun s'alcontró fornidor dalu de «%s»"
 
 #. wildcards used
 #: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr ""
+msgstr "Nun hai paquete instaláu dalu que concase con «%s»."
 
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr ""
+msgstr "Nun ta instaláu'l paquete «%s»."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr ""
+msgstr "Nun s'instaló fornidor dalu de «%s»."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr ""
+msgstr "«%s» yá ta instaláu."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr ""
+msgstr "Yá s'instaló «%s» que forne «%s»."
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
@@ -953,18 +969,18 @@ msgstr ""
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
-msgstr ""
+msgstr "Amestando'l requirimientu: «%s»."
 
 #: src/RequestFeedback.cc:241
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
-msgstr ""
+msgstr "Amestando'l conflictu: «%s»."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "¿Quixesti dicir %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -972,43 +988,43 @@ msgstr ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... y %1% elementu más."
+msgstr[1] "... y %1% elementos más."
 
 #: src/Summary.cc:505
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va instalase'l paquete NUEVU de darréu:"
+msgstr[1] "Van instalase los paquetes NUEVOS de darréu:"
 
 #: src/Summary.cc:510
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va instalase'l parche NUEVU de darréu:"
+msgstr[1] "Van instalase los parches NUEVOS de darréu:"
 
 #: src/Summary.cc:515
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va instalase'l patrón NUEVU de darréu:"
+msgstr[1] "Van instalase los patrones NUEVOS de darréu:"
 
 #: src/Summary.cc:520
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va instalase'l productu NUEVU de darréu:"
+msgstr[1] "Van instalase los productos NUEVOS de darréu:"
 
 #: src/Summary.cc:525
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va instalase'l paquete fonte de darréu:"
+msgstr[1] "Van instalase %d paquetes fonte de darréu:"
 
 #: src/Summary.cc:530
 #, c-format, boost-format
@@ -1399,7 +1415,7 @@ msgstr[1] ""
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/Summary.cc:1201
 msgid "Available"
-msgstr ""
+msgstr "Disponible"
 
 #: src/Summary.cc:1212
 #, boost-format
@@ -1426,11 +1442,11 @@ msgstr ""
 #: src/Summary.cc:1249
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
-msgstr ""
+msgstr "Dempués de la operación, usaránse %s adicionales."
 
 #: src/Summary.cc:1251
 msgid "No additional space will be used or freed after the operation."
-msgstr ""
+msgstr "Nun s'usará o lliberará espaciu adicional dempués de la operación."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1258
@@ -1580,7 +1596,7 @@ msgstr ""
 #. 's' stands for Disable SSL certificate authority check
 #: src/callbacks/media.cc:77
 msgid "a/r/i/u/s"
-msgstr ""
+msgstr "a/r/i/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
@@ -1590,7 +1606,7 @@ msgstr ""
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
 #: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
-msgstr ""
+msgstr "¿Albortar, retentar o inorar?"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
@@ -1606,11 +1622,11 @@ msgstr ""
 
 #: src/callbacks/media.cc:121
 msgid "Detected devices:"
-msgstr ""
+msgstr "Preseos deteutaos:"
 
 #: src/callbacks/media.cc:136
 msgid "Cancel"
-msgstr ""
+msgstr "Encaboxar"
 
 #: src/callbacks/media.cc:139
 msgid "Select device to eject."
@@ -1622,7 +1638,7 @@ msgstr ""
 
 #: src/callbacks/media.cc:157
 msgid "Retrying..."
-msgstr ""
+msgstr "Retentando..."
 
 #. cd/dvd options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -1632,7 +1648,7 @@ msgstr ""
 #. 'e' stands for Eject medium
 #: src/callbacks/media.cc:172
 msgid "a/r/i/u/e"
-msgstr ""
+msgstr "a/r/i/u/e"
 
 #: src/callbacks/media.cc:174
 msgid "Eject medium."
@@ -1652,26 +1668,28 @@ msgstr ""
 #. the 'u' reply means 'Change URI'.
 #: src/callbacks/media.cc:255
 msgid "a/r/i/u"
-msgstr ""
+msgstr "a/r/i/u"
 
 #: src/callbacks/media.cc:299
 #, c-format, boost-format
 msgid "Authentication required to access %s. You need to be root to be able to read the credentials from %s."
 msgstr ""
+"Ríquese l'autenticación p'acceder a %s. Precises ser root pa ser a lleer les "
+"credenciales de %s."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
-msgstr ""
+msgstr "Nome d'usuariu"
 
 #. password
 #: src/callbacks/media.cc:336
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: src/Command.cc:201
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr ""
+msgstr "Comandu desconocíu «%s»"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -1718,17 +1736,17 @@ msgstr ""
 #: src/repos.cc:263
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
-msgstr ""
+msgstr "¿Quies deshabilitar dafechu'l repositoriu %s?"
 
 #: src/repos.cc:279
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
-msgstr ""
+msgstr "Fallu entrín se deshabilitaba'l repositoriu «%s»."
 
 #: src/repos.cc:295
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
-msgstr ""
+msgstr "Problemes recibiendo ficheros de «%s»."
 
 #: src/repos.cc:296 src/repos.cc:3170 src/solve-commit.cc:801
 #: src/solve-commit.cc:832 src/solve-commit.cc:856
@@ -1771,7 +1789,7 @@ msgstr ""
 #: src/repos.cc:390
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
-msgstr ""
+msgstr "Fallu analizando datos meta pa «%s»:"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: src/repos.cc:392
@@ -1785,7 +1803,7 @@ msgstr ""
 
 #: src/repos.cc:409
 msgid "Error building the cache:"
-msgstr ""
+msgstr "Fallu construyendo la caché:"
 
 #: src/repos.cc:609
 #, c-format, boost-format
@@ -1810,7 +1828,7 @@ msgstr ""
 #: src/repos.cc:749
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr ""
+msgstr "Escaniando'l conteníu del repositoriu deshabilitáu «%s»."
 
 #: src/repos.cc:765 src/repos.cc:798 src/repos.cc:1297
 #, c-format, boost-format
@@ -1844,7 +1862,7 @@ msgstr ""
 
 #: src/repos.cc:849 src/repos.cc:1324
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr ""
+msgstr "Nun se refrescaron dellos repositorios pola mor d'un fallu."
 
 #: src/repos.cc:889
 msgid "Initializing Target"
@@ -1860,7 +1878,7 @@ msgstr ""
 
 #: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
-msgstr ""
+msgstr "Nomatu"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -1886,7 +1904,7 @@ msgstr ""
 #. translators: repository priority (in zypper repos -p or -d)
 #: src/repos.cc:990 src/repos.cc:1102 src/repos.cc:1634 src/repos.cc:2410
 msgid "Priority"
-msgstr ""
+msgstr "Prioridá"
 
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2413
@@ -4158,7 +4176,7 @@ msgstr ""
 #: src/Zypper.cc:4849 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
-msgstr ""
+msgstr "Usu"
 
 #: src/Zypper.cc:4901 src/Zypper.cc:4942
 msgid "Root privileges are required for adding of package locks."
@@ -4207,7 +4225,7 @@ msgstr ""
 
 #: src/Zypper.cc:5223
 msgid "This command only makes sense in the zypper shell."
-msgstr ""
+msgstr "Esti comandu namái tien xacíu nel shell de zypper."
 
 #: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
@@ -4220,7 +4238,7 @@ msgstr ""
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:40
 msgid "Problem: "
-msgstr ""
+msgstr "Problema: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:52
@@ -4250,7 +4268,7 @@ msgstr[1] ""
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:97
 msgid "s/r/c"
-msgstr ""
+msgstr "s/r/e"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -4261,7 +4279,7 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: src/solve-commit.cc:109
 msgid "c"
-msgstr ""
+msgstr "e"
 
 #. continue with next problem
 #: src/solve-commit.cc:130
@@ -4273,8 +4291,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d problema:"
+msgstr[1] "%d problemes:"
 
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
@@ -4284,7 +4302,7 @@ msgstr ""
 #: src/solve-commit.cc:160
 #, c-format, boost-format
 msgid "Problem: %s"
-msgstr ""
+msgstr "Problema: %s"
 
 #: src/solve-commit.cc:179
 msgid "Resolving dependencies..."
@@ -4352,11 +4370,11 @@ msgstr ""
 #: src/solve-commit.cc:477
 #, c-format, boost-format
 msgid "Message from package %s:"
-msgstr ""
+msgstr "Mensaxe del paquete %s:"
 
 #: src/solve-commit.cc:485
 msgid "y/n"
-msgstr ""
+msgstr "s/n"
 
 #: src/solve-commit.cc:486
 msgid "View the notifications now?"
@@ -4368,7 +4386,7 @@ msgstr ""
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
-msgstr ""
+msgstr "Ríquesen dependencies de paquetes..."
 
 #: src/solve-commit.cc:614
 msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
@@ -4376,7 +4394,7 @@ msgstr ""
 
 #: src/solve-commit.cc:621
 msgid "Root privileges are required to fix broken package dependencies."
-msgstr ""
+msgstr "Ríquense privilexos root pa iguar dependencies rotes de paquetes."
 
 #. translators: These are the "Continue?" prompt options corresponding to
 #. "Yes / No / show Problems / Versions / Arch / Repository /
@@ -4390,7 +4408,7 @@ msgstr ""
 #. ! \todo add c for changelog and x for explain (show the dep tree)
 #: src/solve-commit.cc:643
 msgid "y/n/p/v/a/r/m/d/g"
-msgstr ""
+msgstr "s/n/p/v/a/r/m/d/x"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: src/solve-commit.cc:648
@@ -4439,7 +4457,7 @@ msgstr ""
 
 #: src/solve-commit.cc:774
 msgid "committing"
-msgstr ""
+msgstr "unviando"
 
 #: src/solve-commit.cc:776
 msgid "(dry run)"
@@ -4497,32 +4515,32 @@ msgstr ""
 #. process ID
 #: src/ps.cc:115
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #. parent process ID
 #: src/ps.cc:117
 msgid "PPID"
-msgstr ""
+msgstr "PPID"
 
 #. process user ID
 #: src/ps.cc:119
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #. process login name
 #: src/ps.cc:121
 msgid "User"
-msgstr ""
+msgstr "Usuariu"
 
 #. process command name
 #: src/ps.cc:123
 msgid "Command"
-msgstr ""
+msgstr "Comandu"
 
 #. "list of deleted files or libraries accessed"
 #: src/ps.cc:129
 msgid "Files"
-msgstr ""
+msgstr "Ficheros"
 
 #: src/ps.cc:160
 msgid "No processes using deleted files found."
@@ -4534,7 +4552,7 @@ msgstr ""
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
-msgstr ""
+msgstr "Quiciabes desees reaniciar estos procesos."
 
 #: src/ps.cc:168
 #, c-format, boost-format
@@ -4548,7 +4566,7 @@ msgstr ""
 #: src/source-download.cc:208
 #, c-format, boost-format
 msgid "Can't create or access download directory '%s'."
-msgstr ""
+msgstr "Nun pue crease o accedese al direutoriu de descarga «%s»."
 
 #: src/source-download.cc:221
 #, c-format, boost-format
@@ -4569,7 +4587,7 @@ msgstr ""
 
 #: src/source-download.cc:285
 msgid "Installed packages:"
-msgstr ""
+msgstr "Paquetes instalaos:"
 
 #: src/source-download.cc:288
 msgid "Required source packages:"
@@ -4590,7 +4608,7 @@ msgstr ""
 #. translators: table headers
 #: src/source-download.cc:319
 msgid "Source package"
-msgstr ""
+msgstr "Paquete fonte"
 
 #: src/source-download.cc:319
 msgid "Installed package"
@@ -4625,7 +4643,7 @@ msgstr ""
 #: src/source-download.cc:449 src/source-download.cc:463
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
-msgstr ""
+msgstr "Fallu baxando'l paquete fonte «%s»."
 
 #: src/source-download.cc:474
 msgid "No source packages to download."
@@ -4633,29 +4651,29 @@ msgstr ""
 
 #: src/search.cc:137
 msgid "System Packages"
-msgstr ""
+msgstr "Paquetes del sistema"
 
 #: src/search.cc:336
 msgid "No needed patches found."
-msgstr ""
+msgstr "Nun s'alcontraron los parches precisos."
 
 #: src/search.cc:408
 msgid "No patterns found."
-msgstr ""
+msgstr "Nun s'alcontraron patrones."
 
 #: src/search.cc:505
 msgid "No packages found."
-msgstr ""
+msgstr "Nun s'alcontraron paquetes."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
 #: src/search.cc:574
 msgid "Internal Name"
-msgstr ""
+msgstr "Nome internu"
 
 #: src/search.cc:651
 msgid "No products found."
-msgstr ""
+msgstr "Nun s'alcontraron productos."
 
 #: src/search.cc:675
 #, c-format, boost-format
@@ -4664,22 +4682,22 @@ msgstr ""
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr ""
+msgstr "Alvertencia: "
 
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
 msgid "error"
-msgstr ""
+msgstr "fallu"
 
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
 msgid "done"
-msgstr ""
+msgstr "fecho"
 
 #: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
 #: src/output/OutNormal.cc:321
 msgid "Retrieving:"
-msgstr ""
+msgstr "Recibiendo:"
 
 #: src/output/OutNormal.cc:256
 msgid "starting"
@@ -4713,7 +4731,7 @@ msgstr ""
 #: src/download.cc:190
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
-msgstr ""
+msgstr "Fallu baxando'l paquete «%s»."
 
 #: src/download.cc:204
 #, c-format, boost-format
@@ -4733,7 +4751,7 @@ msgstr ""
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr ""
+msgstr "«%s» nun ye un nome de paquete o capacidá."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -4749,6 +4767,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
 msgstr ""
+"Pa instalar «%s»%s, tienes d'aceutar los términos del alcuerdu de llicencia "
+"de darréu:"
 
 #. lincense prompt
 #: src/misc.cc:167
@@ -4773,15 +4793,15 @@ msgstr ""
 
 #: src/misc.cc:225
 msgid "License"
-msgstr ""
+msgstr "Llicencia"
 
 #: src/misc.cc:244
 msgid "EULA"
-msgstr ""
+msgstr "EULA"
 
 #: src/misc.cc:256
 msgid "SUMMARY"
-msgstr ""
+msgstr "RESUME"
 
 #: src/misc.cc:257
 #, c-format, boost-format
@@ -4858,7 +4878,7 @@ msgstr ""
 
 #: src/locks.cc:166
 msgid "Error reading the locks file:"
-msgstr ""
+msgstr "Fallu lleendo los ficheros de bloquéu:"
 
 #: src/locks.cc:226
 msgid "Specified lock has been successfully added."
@@ -4901,12 +4921,12 @@ msgstr ""
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
-msgstr ""
+msgstr "Milenta argumentos."
 
 #: src/utils/messages.cc:56
 #, c-format, boost-format
 msgid "The '--%s' option has currently no effect."
-msgstr ""
+msgstr "Anguaño la opción «--%s» nun tien efeutu dalu."
 
 #: src/utils/messages.cc:74
 #, c-format, boost-format
@@ -4928,7 +4948,7 @@ msgstr ""
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
-msgstr ""
+msgstr "Nun pue aniciase l'analizador de ficheros de configuración."
 
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
@@ -4936,11 +4956,11 @@ msgstr ""
 
 #: src/utils/Augeas.cc:64
 msgid "Could not parse the config files."
-msgstr ""
+msgstr "Nun pudieron analizase los ficheros de configuración."
 
 #: src/utils/Augeas.cc:99
 msgid "Error parsing zypper.conf:"
-msgstr ""
+msgstr "Fallu analizando zypper.conf:"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -4965,15 +4985,15 @@ msgstr ""
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:72
 msgid "shows all options"
-msgstr ""
+msgstr "amosar toles opciones"
 
 #: src/utils/prompt.cc:125 src/utils/prompt.cc:247 src/utils/prompt.cc:327
 msgid "yes"
-msgstr ""
+msgstr "sí"
 
 #: src/utils/prompt.cc:125 src/utils/prompt.cc:247 src/utils/prompt.cc:327
 msgid "no"
-msgstr ""
+msgstr "non"
 
 #: src/utils/prompt.cc:145 src/utils/prompt.cc:190
 #, c-format, boost-format
@@ -4988,7 +5008,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/utils/prompt.cc:151 src/utils/prompt.cc:235
 msgid "a/r/i"
-msgstr ""
+msgstr "a/r/i"
 
 #: src/utils/prompt.cc:200
 #, c-format, boost-format
@@ -4999,7 +5019,7 @@ msgstr[1] ""
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
-msgstr ""
+msgstr "Tentado de nueves..."
 
 #: src/utils/prompt.cc:288
 msgid "Cannot read input: bad stream or EOF."
@@ -5026,14 +5046,14 @@ msgstr ""
 #: src/utils/misc.cc:113
 msgid "package"
 msgid_plural "packages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "paquete"
+msgstr[1] "paquetes"
 
 #: src/utils/misc.cc:115
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "patrón"
+msgstr[1] "patrones"
 
 #: src/utils/misc.cc:117
 msgid "product"
@@ -5044,8 +5064,8 @@ msgstr[1] ""
 #: src/utils/misc.cc:119
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "parche"
+msgstr[1] "parches"
 
 #: src/utils/misc.cc:121
 msgid "srcpackage"
@@ -5056,8 +5076,8 @@ msgstr[1] ""
 #: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "aplicación"
+msgstr[1] "aplicaciones"
 
 #. default
 #: src/utils/misc.cc:125
@@ -5112,7 +5132,7 @@ msgstr ""
 
 #: src/utils/misc.cc:367
 msgid "Specified local path does not exist or is not accessible."
-msgstr ""
+msgstr "El camín llocal especificáu nun esiste o nun ye accesible."
 
 #: src/utils/misc.cc:379
 msgid "Given URI is invalid"
@@ -5122,7 +5142,7 @@ msgstr ""
 #. translators: don't translate '<platform>'
 #: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
-msgstr ""
+msgstr "Nun pue albidrase'l valor pa <plataforma>"
 
 #: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
@@ -5131,7 +5151,7 @@ msgstr ""
 #: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
 msgid "Example: %s"
-msgstr ""
+msgstr "Exemplu: %s"
 
 #: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
@@ -5155,19 +5175,19 @@ msgstr ""
 
 #: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
-msgstr ""
+msgstr "Comprueba si'l ficheru ye accesible, por favor."
 
 #: src/utils/misc.cc:687
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
-msgstr ""
+msgstr "Mou desconocíu de descarga «%s»."
 
 #: src/utils/misc.cc:688
 #, c-format, boost-format
 msgid "Available download modes: %s"
-msgstr ""
+msgstr "Moos disponibles de descarga: %s"
 
 #: src/utils/misc.cc:702
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
-msgstr ""
+msgstr "La opción «%s» troca «%s»."
