@@ -112,17 +112,14 @@ namespace zypp
       /** Dtor wrting end tag */
       ~Node()
       {
-	if ( !_name.empty() )
+	if ( isComment() )
+	  _out << "-->";
+	else
 	{
-	  if ( isComment() )
-	    _out << "-->";
+	  if ( _hasContent )
+	    _out << "</" << _name << ">";
 	  else
-	  {
-	    if ( _hasContent )
-	      _out << "</" << _name << ">";
-	    else
-	      _out << "/>";
-	  }
+	    _out << "/>";
 	}
       }
 
@@ -165,14 +162,14 @@ namespace zypp
 	if ( _name.empty() || _name[0] == '!' )
 	{
 	  _out << "<!--" << _name;
-	  _name = "!";	// a comment
+	  _name.clear();	// a comment
 	}
 	else
 	  _out << "<" << _name;
 
 	printAttr( attrs_r );
 
-	if ( isComment() && _hasContent )
+	if ( !isComment() && _hasContent )
 	  _out << ">";
       }
 
@@ -183,7 +180,7 @@ namespace zypp
       }
 
       bool isComment() const
-      { return( _name == "!" );  }
+      { return _name.empty();  }
 
     private:
       std::ostream & _out;
