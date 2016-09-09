@@ -2577,11 +2577,13 @@ void Zypper::processCommandOptions()
       // rug compatibility option, we have --repo
       {"catalog", required_argument, 0, 'c'},
       ARG_not_INSTALLED_ONLY,
+      {"xmlfwd",		required_argument,	0,  0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = _(
+    _command_help = ( CommandHelpFormater()
+      << _(
       "products (pd) [options] [repository] ...\n"
       "\n"
       "List all products available in specified repositories.\n"
@@ -2590,8 +2592,9 @@ void Zypper::processCommandOptions()
       "\n"
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
       "-i, --installed-only      Show only installed products.\n"
-      "-u, --not-installed-only  Show only products which are not installed.\n"
-    );
+      "-u, --not-installed-only  Show only products which are not installed.\n") )
+    .option26( "--xmlfwd <tag>",	_("XML output only: Literally forward the XML tags found in a product file.") )
+      ;
     break;
   }
 
@@ -4516,6 +4519,10 @@ void Zypper::doCommand()
       list_packages( *this );
       break;
     case ZypperCommand::PRODUCTS_e:
+      if ( copts.count("xmlfwd") && out().type() != Out::TYPE_XML )
+      {
+	out().warning( str::Format(_("Option %1% has no effect without the %2% global option.")) % "--xmlfwd" % "--xmlout" );
+      }
       list_products( *this );
       break;
     default:;

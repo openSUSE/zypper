@@ -29,6 +29,7 @@
 #include "repos.h"
 
 #include "utils/misc.h"
+#include "utils/XmlFilter.h"
 
 extern ZYpp::Ptr God;
 
@@ -616,6 +617,26 @@ std::string asXML( const Product & p, bool is_installed )
       const std::string & text( p.description() );
       if ( ! text.empty() )
 	*xmlout::Node( *parent, "description" ) << xml::escape( text );
+    }
+
+    if ( is_installed && copts.count("xmlfwd") )
+    {
+      // literally forward tags found in the .prod file...
+      xmlout::Node fwd( *parent, "xmlfwd", xmlout::Node::optionalContent );
+
+      std::vector<std::string> tags;
+      for ( const auto & tag : copts["xmlfwd"] )
+      { tags.push_back( Pathname::assertprefix( "/product", tag ).asString() ); }
+
+      const Pathname & proddir( Pathname::assertprefix( Zypper::instance()->globalOpts().root_dir, "/etc/products.d" ) );
+      try
+      {
+	XmlFilter::fwd( InputStream( proddir+p.referenceFilename() ), *fwd, std::move(tags)  );
+      }
+      catch ( const Exception & exp )
+      {
+	ZYPP_CAUGHT( exp );	// parse error
+      }
     }
   }
   return str.str();

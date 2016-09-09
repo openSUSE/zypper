@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 08/12/2016
+.\"      Date: 09/09/2016
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "08/12/2016" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "09/09/2016" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1578,6 +1578,34 @@ Show only installed products\&.
 Show only products which are not installed\&.
 
 The old option name \-\-uninstalled\-only is still acceptable, but should be considered deprecated\&.
+.RE
+.PP
+\fB\-\-xmlfwd\fR \fItag\fR
+.RS 4
+XML output only: Literally forward the XML
+\fItag\fR, if it is found in an installed products \&.prod\-file (in
+\fB/etc/products\&.d\fR)\&.
+
+Using this option, for each installed product an
+\fB<xmlfwd>\fR
+node will be created inside the
+\fB<product>\fR
+output node of the product\&.
+
+Tag defines the name (or
+\fI/\fR\-separated path) of a xml\-tag inside an installed products \&.prod\-file\&. If the tag is present inside the products \&.prod\-file, the tag and it\(cqs content is literally forwarded into the products
+\fB<xmlfwd>\fR
+output node\&.
+
+The option may be specified multiple times\&.
+.RE
+.PP
+Examples:
+.RS 4
+.PP
+$ \fBzypper \-x pd \-\-xmlfwd name \-\-xmlfwd register/target\fR
+.RS 4
+.RE
 .RE
 .RE
 .PP

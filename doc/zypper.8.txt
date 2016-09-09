@@ -848,6 +848,20 @@ Query Commands
 		Show only products which are not installed.
 		+
 		The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
+
+	*--xmlfwd* 'tag'::
+		XML output only: Literally forward the XML 'tag', if it is found in an installed products .prod-file (in */etc/products.d*). 
+		+
+		Using this option, for each installed product an *<xmlfwd>* node will be created inside the *<product>* output node of the product.
+		+
+		Tag defines the name (or '/'-separated path) of a xml-tag inside an installed products .prod-file. If the tag is present inside the products .prod-file, the tag and it's content is literally forwarded into the products *<xmlfwd>* output node.
+		+
+		The option may be specified multiple times.
+
+	Examples: :: {nop}
+
+		$ *zypper -x pd --xmlfwd name --xmlfwd register/target*;;
+		{nop}
 --
 
 *what-provides* (*wp*) 'capability'::
