@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Sep  9 17:26:37 CEST 2016 - ma@suse.de
+
+- products --xmlfwd: Literally forward the XML tags found in a
+  product file (FATE#320699)
+- BuildRequires:  libzypp-devel >= 16.2.3
+- man: enhance install/uninstall section
+- version 1.13.10
+
+-------------------------------------------------------------------
 Wed Aug 10 18:43:28 CEST 2016 - ma@suse.de
 
 - --no-recommends: don't make an attempt to show recommends/suggests
