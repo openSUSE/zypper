@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep  9 16:43:30 CEST 2016 - ma@suse.de
+
+- xmlout::Node:  Allow adding nore attributes while the start node
+  is not closed (FATE#320699)
+- version 16.2.3 (0)
+
+-------------------------------------------------------------------
 Wed Aug 10 17:10:41 CEST 2016 - ma@suse.de
 
 - Report numeric curl error if code is unrecognized (bsc#992302)
