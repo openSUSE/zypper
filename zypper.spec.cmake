@@ -24,6 +24,7 @@ BuildRequires:  gcc-c++ >= 4.7
 BuildRequires:  gettext-devel >= 0.15
 BuildRequires:  libzypp-devel >= 16.2.3
 BuildRequires:  readline-devel >= 5.1
+BuildRequires:  libxml2-devel
 Requires:       procps
 %if 0%{?suse_version}
 %requires_ge    libzypp
