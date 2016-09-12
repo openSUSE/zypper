@@ -24,7 +24,7 @@ namespace repo
       static NamedValue<RepoType::Type> & _t( *new NamedValue<RepoType::Type> );
       if ( _t.empty() )
       {
-	_t( RepoType::RPMMD_e )		| "rpm-md"	| "rpmmd"|"repomd"|"yum"|"up2date";
+	_t( RepoType::RPMMD_e )		| "rpm-md"	| "rpm"|"rpmmd"|"repomd"|"yum"|"up2date";
 	_t( RepoType::YAST2_e )		| "yast2"	| "yast"|"susetags";
 	_t( RepoType::RPMPLAINDIR_e )	| "plaindir";
 	_t( RepoType::NONE_e )		| "NONE"	| "none";
