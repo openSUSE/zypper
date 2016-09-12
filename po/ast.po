@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-09-06 20:25+0000\n"
+"PO-Revision-Date: 2016-09-12 11:49+0000\n"
 "Last-Translator: Enol P <enolp@softastur.org>\n"
 "Language-Team: Asturian "
 "<https://l10n.opensuse.org/projects/zypper/master/ast/>\n"
@@ -473,7 +473,7 @@ msgstr[1] ""
 #: src/info.cc:184
 #, c-format, boost-format
 msgid "%s '%s' not found."
-msgstr "Nun s'alcontró'l %s «%s»"
+msgstr "Nun s'alcontró'l %s «%s»."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
 #: src/info.cc:204
@@ -839,7 +839,7 @@ msgstr "Nun s'alcontró l'oxetu «%s» nos repositorios especificaos."
 #: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
-msgstr "Nun s'alcontró fornidor dalu de «%s»"
+msgstr "Nun s'alcontró fornidor dalu de «%s»."
 
 #. wildcards used
 #: src/RequestFeedback.cc:84
@@ -1000,28 +1000,28 @@ msgstr[1] "... y %1% elementos más."
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "Va instalase'l paquete NUEVU de darréu:"
-msgstr[1] "Van instalase los paquetes NUEVOS de darréu:"
+msgstr[1] "Van instalase los %d paquetes NUEVOS de darréu:"
 
 #: src/Summary.cc:510
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "Va instalase'l parche NUEVU de darréu:"
-msgstr[1] "Van instalase los parches NUEVOS de darréu:"
+msgstr[1] "Van instalase los %d parches NUEVOS de darréu:"
 
 #: src/Summary.cc:515
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "Va instalase'l patrón NUEVU de darréu:"
-msgstr[1] "Van instalase los patrones NUEVOS de darréu:"
+msgstr[1] "Van instalase los %d patrones NUEVOS de darréu:"
 
 #: src/Summary.cc:520
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "Va instalase'l productu NUEVU de darréu:"
-msgstr[1] "Van instalase los productos NUEVOS de darréu:"
+msgstr[1] "Van instalase los %d productos NUEVOS de darréu:"
 
 #: src/Summary.cc:525
 #, c-format, boost-format
@@ -2646,15 +2646,15 @@ msgstr ""
 
 #: src/Zypper.cc:109
 msgid "Tell PackageKit to quit?"
-msgstr ""
+msgstr "¿Dici-y a PackageKit que cole?"
 
 #: src/Zypper.cc:118
 msgid "PackageKit is still running (probably busy)."
-msgstr ""
+msgstr "PackageKit entá ta executándose (quiciabes tea ocupáu)."
 
 #: src/Zypper.cc:119
 msgid "Try again?"
-msgstr ""
+msgstr "¿Tentar de nueves?"
 
 #: src/Zypper.cc:189
 #, boost-format
@@ -2676,11 +2676,11 @@ msgstr ""
 
 #: src/Zypper.cc:275
 msgid "This command has no additional options."
-msgstr ""
+msgstr "Esti comandu nun tien opciones adicionales."
 
 #: src/Zypper.cc:406 src/Zypper.cc:1345
 msgid "Unexpected exception."
-msgstr ""
+msgstr "Esceición inesperada."
 
 #: src/Zypper.cc:428
 msgid ""
@@ -2936,12 +2936,12 @@ msgstr ""
 #: src/Zypper.cc:1104 src/Zypper.cc:1151
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
-msgstr ""
+msgstr "Equí nun tien efeutu dalu la opción %s, inorando."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1234
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "El shell de zypper nun sofita la execución de socomandos."
 
 #: src/Zypper.cc:1313
 #, c-format, boost-format
@@ -2951,7 +2951,7 @@ msgstr ""
 #: src/Zypper.cc:1314
 #, c-format, boost-format
 msgid "See '%s' for all available options."
-msgstr ""
+msgstr "Mira «%s» pa toles opciones disponibles."
 
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
@@ -3423,7 +3423,7 @@ msgstr ""
 #. translators: command description
 #: src/Zypper.cc:2299
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Llista tolos parches aplicables."
 
 #: src/Zypper.cc:2302
 msgid ""
@@ -3454,18 +3454,24 @@ msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <ESTAYA>\n"
+"Llista namái parches con esta estaya."
 
 #: src/Zypper.cc:2307
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <SEVERIDÁ>\n"
+"Llista namái parches con esta severidá."
 
 #: src/Zypper.cc:2308
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Llista tolos parches, non solo los aplicables."
 
 #: src/Zypper.cc:2310
 msgid ""
@@ -3799,6 +3805,8 @@ msgstr ""
 #: src/Zypper.cc:2943
 msgid "List running processes which might still use files and libraries deleted by recent upgrades."
 msgstr ""
+"Llista procesos n'execución qu'entá puen usar ficheros y biblioteques "
+"desanciaes por anovamientos recientes."
 
 #. translators: -s, --short
 #: src/Zypper.cc:2947
@@ -3928,14 +3936,17 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
 
 #: src/Zypper.cc:3326
 msgid "Root privileges are required for refreshing services."
-msgstr ""
+msgstr "Ríquense privilexos root p'anovar servicios."
 
 #: src/Zypper.cc:3350 src/Zypper.cc:3439 src/Zypper.cc:3656
 msgid "Root privileges are required for modifying system services."
-msgstr ""
+msgstr "Ríquense privilexos root pa modificar servicios del sistema."
 
 #: src/Zypper.cc:3423
 #, c-format, boost-format
@@ -3958,11 +3969,11 @@ msgstr ""
 #: src/Zypper.cc:3482
 #, c-format, boost-format
 msgid "Service '%s' not found."
-msgstr ""
+msgstr "Nun s'alcontró'l serviciu «%s»."
 
 #: src/Zypper.cc:3509 src/Zypper.cc:3655 src/Zypper.cc:3734 src/Zypper.cc:3786
 msgid "Root privileges are required for modifying system repositories."
-msgstr ""
+msgstr "Ríquense privilexos root pa modificar repositorios del sistema."
 
 #: src/Zypper.cc:3564 src/Zypper.cc:3902
 msgid "Too few arguments."
@@ -3971,6 +3982,7 @@ msgstr ""
 #: src/Zypper.cc:3587
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
+"Si namái s'usa un argumentu, ha ser un URI qu'apunte a un ficheru .repo."
 
 #: src/Zypper.cc:3617
 #, c-format, boost-format
@@ -3995,14 +4007,14 @@ msgstr ""
 #: src/Zypper.cc:3688
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr ""
+msgstr "Nun s'alcontró'l repositoriu «%s» pol nomatu, númberu o URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr ""
+msgstr "Nun s'alcontró'l serviciu «%s» pol nomatu, númberu o URI."
 
 #: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
@@ -4011,30 +4023,30 @@ msgstr ""
 #: src/Zypper.cc:3765
 #, c-format, boost-format
 msgid "Repository '%s' not found."
-msgstr ""
+msgstr "Nun s'alcontró'l repositoriu %s."
 
 #: src/Zypper.cc:3829
 #, c-format, boost-format
 msgid "Repository %s not found."
-msgstr ""
+msgstr "Nun s'alcontró'l repositoriu %s."
 
 #: src/Zypper.cc:3846
 msgid "Root privileges are required for refreshing system repositories."
-msgstr ""
+msgstr "Ríquense privilexos root p'anovar los repositorios del sistema."
 
 #: src/Zypper.cc:3852
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
-msgstr ""
+msgstr "Equí nun tien efeutu dalu la opción global «%s»."
 
 #: src/Zypper.cc:3860
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr ""
+msgstr "Nun s'almiten los argumentos si s'usa «%s»."
 
 #: src/Zypper.cc:3884
 msgid "Root privileges are required for cleaning local caches."
-msgstr ""
+msgstr "Ríquense privilexos root pa llimpiar cachés llocales."
 
 #: src/Zypper.cc:3903
 msgid "At least one package name is required."
@@ -4042,7 +4054,7 @@ msgstr "Ríquese polo menos un nome de paquete."
 
 #: src/Zypper.cc:3912
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr ""
+msgstr "Ríquense privilexos root pa instalar o desinstalar paquetes."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
@@ -4083,7 +4095,7 @@ msgstr ""
 #: src/Zypper.cc:4006
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
-msgstr ""
+msgstr "Problema lleendo la testera RPM de %s. ¿Ye un ficheru RPM?"
 
 #: src/Zypper.cc:4028
 msgid "Plain RPM files cache"
@@ -4111,7 +4123,7 @@ msgstr "Anguaño %s nun pue usase con %s"
 
 #: src/Zypper.cc:4148
 msgid "Source package name is a required argument."
-msgstr ""
+msgstr "Ríquese como un argumentu'l nome del paquete fonte."
 
 #: src/Zypper.cc:4231
 msgid "Mode is set to 'match-exact'"
@@ -4131,7 +4143,7 @@ msgstr ""
 #. translators: empty search result message
 #: src/Zypper.cc:4403
 msgid "No matching items found."
-msgstr ""
+msgstr "Nun s'alcontraron elementos que concasen."
 
 #: src/Zypper.cc:4438
 msgid "Problem occurred initializing or executing the search query"
@@ -4167,6 +4179,7 @@ msgstr ""
 #: src/Zypper.cc:4709
 msgid "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
+"Nun puen usase tribes múltiples al dar paquetes específicos como argumentos."
 
 #: src/Zypper.cc:4801
 msgid "Root privileges are required for performing a distribution upgrade."
@@ -4198,7 +4211,7 @@ msgstr[1] ""
 
 #: src/Zypper.cc:5034
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "Nun s'implementó la salida XML pa esti comandu."
 
 #: src/Zypper.cc:5047
 #, c-format, boost-format
@@ -4256,16 +4269,17 @@ msgstr ""
 #: src/solve-commit.cc:71
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] ""
+msgstr[0] "Escueyi la solución d'enriba usando «1» o saltar, retentar o encaboxar"
 msgstr[1] ""
+"Escueyi les soluciones d'enriba colos númberos o saltar, retentar o encaboxar"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:78
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Escueyi la solución d'enriba usando «1» o encaboxar usando «e»"
+msgstr[1] "Escueyi les soluciones d'enriba colos númberos o encaboxar"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -4313,7 +4327,7 @@ msgstr "Problema: %s"
 
 #: src/solve-commit.cc:179
 msgid "Resolving dependencies..."
-msgstr ""
+msgstr "Resolviendo dependencies..."
 
 #. translators: meaning --force-resolution and --no-force-resolution
 #: src/solve-commit.cc:220
@@ -4478,7 +4492,7 @@ msgstr ""
 #: src/solve-commit.cc:830
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr ""
+msgstr "El repositoriu «%s» ta ensin anovar. Executar «%s» quiciabes ayude."
 
 #: src/solve-commit.cc:841
 msgid ""
@@ -4517,7 +4531,7 @@ msgstr ""
 
 #: src/solve-commit.cc:907 src/download.cc:129
 msgid "Nothing to do."
-msgstr ""
+msgstr "Nada pa facer."
 
 #. process ID
 #: src/ps.cc:115
@@ -4551,11 +4565,11 @@ msgstr "Ficheros"
 
 #: src/ps.cc:160
 msgid "No processes using deleted files found."
-msgstr ""
+msgstr "Nun s'alcontraron procesos usando ficheros desanciaos."
 
 #: src/ps.cc:164
 msgid "The following running processes use deleted files:"
-msgstr ""
+msgstr "Los procesos n'execución de darréu usen ficheros desaniciaos:"
 
 #: src/ps.cc:167
 msgid "You may wish to restart these processes."
@@ -4565,10 +4579,14 @@ msgstr "Quiciabes desees reaniciar estos procesos."
 #, c-format, boost-format
 msgid "See '%s' for information about the meaning of values in the above table."
 msgstr ""
+"Mira «%s» pa información tocante al significáu de valores na tabla d'enriba."
 
 #: src/ps.cc:175
 msgid "Note: Not running as root you are limited to searching for files you have permission to examine with the system stat(2) function. The result might be incomplete."
 msgstr ""
+"Nota: Nun executar como root llimita la gueta de ficheros nos que tienes "
+"permisu pa desaminar cola función del sistema stat(2). El resultáu quiciabes "
+"seya incompletu."
 
 #: src/source-download.cc:208
 #, c-format, boost-format
@@ -4578,7 +4596,7 @@ msgstr "Nun pue crease o accedese al direutoriu de descarga «%s»."
 #: src/source-download.cc:221
 #, c-format, boost-format
 msgid "Using download directory at '%s'."
-msgstr ""
+msgstr "Usando'l direutoriu de descarga en «%s»."
 
 #: src/source-download.cc:231 src/source-download.cc:262
 msgid "Failed to read download directory"
@@ -4619,7 +4637,7 @@ msgstr "Paquete fonte"
 
 #: src/source-download.cc:319
 msgid "Installed package"
-msgstr ""
+msgstr "Paquete instaláu"
 
 #: src/source-download.cc:370
 msgid "Use '--verbose' option for a full list of required source packages."
@@ -4645,7 +4663,7 @@ msgstr "Baxando los paquetes fonte riquíos..."
 #: src/source-download.cc:430
 #, c-format, boost-format
 msgid "Source package '%s' is not provided by any repository."
-msgstr ""
+msgstr "El paquete fonte «%s» nun lu forne repositoriu dalu."
 
 #: src/source-download.cc:449 src/source-download.cc:463
 #, c-format, boost-format
@@ -4685,7 +4703,7 @@ msgstr "Nun s'alcontraron productos."
 #: src/search.cc:675
 #, c-format, boost-format
 msgid "No providers of '%s' found."
-msgstr ""
+msgstr "Nun s'alcontraron fornidores de «%s»."
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
@@ -4716,7 +4734,7 @@ msgstr ""
 
 #: src/output/OutNormal.cc:422
 msgid "no help available for this option"
-msgstr ""
+msgstr "nun hai ayuda disponible pa esta opción"
 
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/download.cc:114
@@ -4733,7 +4751,7 @@ msgstr ""
 
 #: src/download.cc:148
 msgid "Not downloading anything..."
-msgstr ""
+msgstr "Nun ta baxándose nada..."
 
 #: src/download.cc:190
 #, c-format, boost-format
@@ -4785,18 +4803,22 @@ msgstr "¿Tas acordies colos términos de la llicencia?"
 #: src/misc.cc:175
 msgid "Aborting installation due to the need for license confirmation."
 msgstr ""
+"Albortando instalación pola mor de la confirmación precisa pa la llicencia."
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:178
 #, c-format, boost-format
 msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
 msgstr ""
+"Reanicia la operación nel mou interactivu y confirma'l to alcuerdu coles "
+"llicencies riquíes o usa la opción %s."
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:187
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
+"Albortando la instalación pola mor del desalcuerdu cola llicencia de %s %s."
 
 #: src/misc.cc:225
 msgid "License"
@@ -4918,7 +4940,7 @@ msgstr ""
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
-msgstr ""
+msgstr "Rellena un informe de fallos tocante a esto, por favor."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
@@ -4939,6 +4961,9 @@ msgstr "Anguaño la opción «--%s» nun tien efeutu dalu."
 #, c-format, boost-format
 msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
 msgstr ""
+"Escoyesti inorar un problema cola descarga o instalación d'un paquete que "
+"quiciabes ruempa dependencies d'otros paquetes. Acoséyase executar «%s» "
+"dempués que fine la operación."
 
 #: src/utils/pager.cc:32
 #, c-format, boost-format
@@ -5005,7 +5030,7 @@ msgstr "non"
 #: src/utils/prompt.cc:145 src/utils/prompt.cc:190
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
-msgstr ""
+msgstr "Retentando en %u segundos..."
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -5149,7 +5174,7 @@ msgstr ""
 #. translators: don't translate '<platform>'
 #: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
-msgstr "Nun pue albidrase'l valor pa <plataforma>"
+msgstr "Nun pue albidrase'l valor pa <plataforma>."
 
 #: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
@@ -5170,7 +5195,7 @@ msgstr ""
 
 #: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr ""
+msgstr "Problema copiando'l ficheru RPM especificáu al direutoriu caché."
 
 #: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
@@ -5178,7 +5203,7 @@ msgstr ""
 
 #: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
-msgstr ""
+msgstr "Problema recibiendo'l ficheru RPM especificáu"
 
 #: src/utils/misc.cc:568
 msgid "Please check whether the file is accessible."
