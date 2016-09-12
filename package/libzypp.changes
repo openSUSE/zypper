@@ -3,6 +3,8 @@ Fri Sep  9 16:43:30 CEST 2016 - ma@suse.de
 
 - xmlout::Node:  Allow adding nore attributes while the start node
   is not closed (FATE#320699)
+- Fixes broken XML output introduced by an unwanted change in 16.2.2
+  (bsc#998344)
 - version 16.2.3 (0)
 
 -------------------------------------------------------------------
