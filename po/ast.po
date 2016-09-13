@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-09-13 17:52+0000\n"
+"PO-Revision-Date: 2016-09-13 21:09+0000\n"
 "Last-Translator: Enol P <enolp@softastur.org>\n"
 "Language-Team: Asturian "
 "<https://l10n.opensuse.org/projects/zypper/master/ast/>\n"
@@ -1092,8 +1092,8 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va ANOVASE'l parche de darréu:"
+msgstr[1] "Van ANOVASE los %d parches de darréu:"
 
 #: src/Summary.cc:601
 #, c-format, boost-format
@@ -1106,15 +1106,15 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va ANOVASE'l productu de darréu:"
+msgstr[1] "Van ANOVASE los %d productos de darréu:"
 
 #: src/Summary.cc:611
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va ANOVASE l'aplicación de darréu:"
+msgstr[1] "Van ANOVASE les %d aplicaciones de darréu:"
 
 #: src/Summary.cc:630
 #, c-format, boost-format
@@ -1155,36 +1155,36 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va REINSTALASE'l paquete de darréu:"
+msgstr[1] "Van REINSTALASE los %d paquetes de darréu:"
 
 #: src/Summary.cc:674
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va REINSTALASE'l parche de darréu:"
+msgstr[1] "Van REINSTALASE los %d parches de darréu:"
 
 #: src/Summary.cc:679
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va REINSTALASE'l patrón de darréu:"
+msgstr[1] "Van REINSTALASE los %d patrones de darréu:"
 
 #: src/Summary.cc:684
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va REINSTALASE'l productu de darréu:"
+msgstr[1] "Van REINSTALASE los %d productos de darréu:"
 
 #: src/Summary.cc:696
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va REINSTALASE l'aplicación de darréu:"
+msgstr[1] "Van REINSTALASE les %d aplicaciones de darréu:"
 
 #: src/Summary.cc:830
 #, c-format, boost-format
@@ -1407,8 +1407,8 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "NUN s'instalará l'anovamientu del productu de darréu:"
+msgstr[1] "NUN s'instalarán los %d anovamientos de productos de darréu:"
 
 #: src/Summary.cc:1158
 #, c-format, boost-format
@@ -1492,8 +1492,8 @@ msgstr[1] "paquetes pa baxar de versión"
 #: src/Summary.cc:1306
 msgid "new"
 msgid_plural "new"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "nuevu"
+msgstr[1] "nuevos"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1309
@@ -1506,29 +1506,29 @@ msgstr[1] "paquetes nuevos pa instalar"
 #: src/Summary.cc:1320
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pa reinstalar"
+msgstr[1] "pa reinstalar"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1323
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "paquete pa reinstalar"
+msgstr[1] "paquetes pa reinstalar"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1334
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pa desaniciar"
+msgstr[1] "pa desaniciar"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1337
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "paquete pa desaniciar"
+msgstr[1] "paquetes pa desaniciar"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1348
@@ -1548,8 +1548,8 @@ msgstr[1] ""
 #: src/Summary.cc:1362
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pa camudar d'arquitectura"
+msgstr[1] "pa camudar d'arquitectura"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1365
@@ -1562,8 +1562,8 @@ msgstr[1] ""
 #: src/Summary.cc:1376
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "paquete fonte"
+msgstr[1] "paquetes fonte"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1379
@@ -1574,7 +1574,7 @@ msgstr[1] ""
 
 #: src/Summary.cc:1430
 msgid "System reboot required."
-msgstr ""
+msgstr "Ríquese'l reaniciu'l sistema."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
@@ -1599,7 +1599,7 @@ msgstr ""
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
 msgid "New URI"
-msgstr ""
+msgstr "URI nuevu"
 
 #. https options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -1627,7 +1627,7 @@ msgstr ""
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
-msgstr ""
+msgstr "Nun se deteutaron preseos, nun pue estrayese."
 
 #: src/callbacks/media.cc:110
 msgid "Try to eject the device manually."
@@ -1821,7 +1821,7 @@ msgstr "Fallu construyendo la caché:"
 #: src/repos.cc:609
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr ""
+msgstr "Nun s'alcontró'l repositoriu «%s» pol so alcuñu, númberu o URI."
 
 #: src/repos.cc:612
 #, c-format, boost-format
@@ -1861,7 +1861,7 @@ msgstr ""
 #: src/repos.cc:820
 #, c-format, boost-format
 msgid "Disabling repository '%s'."
-msgstr ""
+msgstr "Deshabilitando'l repositoriu «%s»."
 
 #: src/repos.cc:834
 #, c-format, boost-format
@@ -1887,7 +1887,7 @@ msgstr ""
 
 #: src/repos.cc:898 src/Zypper.cc:4440
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr ""
+msgstr "Executar «zypper refresh» quiciabes igüe'l problema."
 
 #: src/repos.cc:950 src/repos.cc:1093 src/repos.cc:2401 src/Zypper.cc:5246
 msgid "Alias"
@@ -1955,7 +1955,7 @@ msgstr ""
 
 #: src/repos.cc:1106
 msgid "GPG Key URI"
-msgstr ""
+msgstr "URI de clave GPG"
 
 #: src/repos.cc:1107
 msgid "Path Prefix"
@@ -1963,7 +1963,7 @@ msgstr ""
 
 #: src/repos.cc:1108
 msgid "Parent Service"
-msgstr ""
+msgstr "Serviciu pá"
 
 #: src/repos.cc:1109
 msgid "Keywords"
@@ -2032,17 +2032,17 @@ msgstr "Refrescáronse tolos repositorios."
 #: src/repos.cc:1438
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr ""
+msgstr "Llimpiando caché de datos meta pa «%s»."
 
 #: src/repos.cc:1447
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr ""
+msgstr "Llimpiando caché de datos meta en bruto pa «%s»."
 
 #: src/repos.cc:1453
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr ""
+msgstr "Calteniendo la caché de datos meta en bruto pa %s «%s»."
 
 #. translators: meaning the cached rpm files
 #: src/repos.cc:1460
@@ -2057,7 +2057,7 @@ msgstr "Nun pue llimpiase'l repositoriu «%s» pola mor d'un fallu."
 
 #: src/repos.cc:1479
 msgid "Cleaning installed packages cache."
-msgstr ""
+msgstr "Llimpiando cache de paquetes instalaos."
 
 #: src/repos.cc:1488
 msgid "Cannot clean installed packages cache because of an error."
@@ -2065,19 +2065,19 @@ msgstr "Nun puen llimpiase los paquetes pola mor d'un fallu."
 
 #: src/repos.cc:1507
 msgid "Could not clean the repositories because of errors."
-msgstr ""
+msgstr "Nun pudieron llimpiase los repositorios pola mor de fallos."
 
 #: src/repos.cc:1513
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr ""
+msgstr "Nun se llimpiaron dellos repositorios pols mor d'un fallu."
 
 #: src/repos.cc:1518
 msgid "Specified repositories have been cleaned up."
-msgstr ""
+msgstr "Llimpiáronse los repositorios especificaos."
 
 #: src/repos.cc:1520
 msgid "All repositories have been cleaned up."
-msgstr ""
+msgstr "Llimpiáronse tolos repositorios."
 
 #: src/repos.cc:1547
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
@@ -2086,12 +2086,12 @@ msgstr ""
 #: src/repos.cc:1568
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
-msgstr ""
+msgstr "Nomatu non válidu de repositoriu: «%s»"
 
 #: src/repos.cc:1576 src/repos.cc:1858
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr ""
+msgstr "Yá esiste'l repositoriu nomáu «%s». Usa otru nomatu, por favor."
 
 #: src/repos.cc:1585
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
@@ -2107,11 +2107,11 @@ msgstr ""
 
 #: src/repos.cc:1600
 msgid "Please check whether the specified URI is accessible."
-msgstr ""
+msgstr "Comprueba si l'URI especificáu ye accesible, por favor."
 
 #: src/repos.cc:1607
 msgid "Unknown problem when adding repository:"
-msgstr ""
+msgstr "Problema desconocíu al amestar el repositoriu:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
@@ -2123,7 +2123,7 @@ msgstr ""
 #: src/repos.cc:1622
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
-msgstr ""
+msgstr "Amestóse con ésitu'l repositoriu «%s»"
 
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:1630
@@ -2198,7 +2198,7 @@ msgstr ""
 
 #: src/repos.cc:1863 src/repos.cc:2097
 msgid "Error while modifying the repository:"
-msgstr ""
+msgstr "Fallu entrín se modificaba'l repositoriu:"
 
 #: src/repos.cc:1864
 #, c-format, boost-format
@@ -2288,6 +2288,7 @@ msgstr ""
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
+"Nun se definieron servicios. Usa'l comandu «%s» p'amestar ún o más servicios."
 
 #: src/repos.cc:2547
 #, c-format, boost-format
@@ -2302,7 +2303,7 @@ msgstr "Asocedió un fallu entrín s'amestaba'l serviciu «%s»."
 #: src/repos.cc:2560
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
-msgstr ""
+msgstr "Amestóse con ésitu'l serviciu «%s»."
 
 #: src/repos.cc:2598
 #, c-format, boost-format
@@ -2312,12 +2313,12 @@ msgstr "Desaniciando'l serviciu «%s»:"
 #: src/repos.cc:2601
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
-msgstr ""
+msgstr "Desanicióse con ésitu'l serviciu «%s»."
 
 #: src/repos.cc:2615
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
-msgstr ""
+msgstr "Refrescando'l serviciu «%s»."
 
 #: src/repos.cc:2630 src/repos.cc:2640
 #, c-format, boost-format
