@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-09-12 11:49+0000\n"
+"PO-Revision-Date: 2016-09-13 17:52+0000\n"
 "Last-Translator: Enol P <enolp@softastur.org>\n"
 "Language-Team: Asturian "
 "<https://l10n.opensuse.org/projects/zypper/master/ast/>\n"
@@ -620,7 +620,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:519 src/search.cc:578
 msgid "Is Base"
-msgstr ""
+msgstr "Ye base"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:540 src/info.cc:567
@@ -873,11 +873,12 @@ msgstr "Yá s'instaló «%s» que forne «%s»."
 #, c-format, boost-format
 msgid "No update candidate for '%s'. The highest available version is already installed."
 msgstr ""
+"Nun hai candidatu d'anovamientu pa «%s». Yá ta instalada la versión más alta."
 
 #: src/RequestFeedback.cc:108
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
-msgstr ""
+msgstr "Nun hai candidatu d'anovamientu pa «%s»."
 
 #: src/RequestFeedback.cc:114
 #, c-format, boost-format
@@ -888,16 +889,22 @@ msgstr ""
 #, c-format, boost-format
 msgid "There is an update candidate for '%s', but it is from a different vendor. Use '%s' to install this candidate."
 msgstr ""
+"Hai un candidatu d'anovamientu pa «%s», pero ye d'un vendedor diferente. Usa "
+"«%s» pa instalar esti candidatu."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
 msgid "There is an update candidate for '%s', but it comes from a repository with a lower priority. Use '%s' to install this candidate."
 msgstr ""
+"Hai un candidatu d'anovamientu pa «%s», pero ye d'un repositoriu con una "
+"prioridámás baxa. Usa «%s» pa instalar esti candidatu."
 
 #: src/RequestFeedback.cc:142
 #, c-format, boost-format
 msgid "There is an update candidate for '%s', but it is locked. Use '%s' to unlock it."
 msgstr ""
+"Hai un candidatu d'anovamientu pa «%s», pero ta bloquiáu. Usa «%s» pa "
+"desbloquialu."
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -908,17 +915,19 @@ msgstr ""
 #, c-format, boost-format
 msgid "The selected package '%s' from repository '%s' has lower version than the installed one."
 msgstr ""
+"El paquete esbilláu «%s» del repositoriu «%s» tien una versión más baxa que "
+"la instalada."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr ""
+msgstr "Usa «%s» pa forciar la instalación del paquete."
 
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr ""
+msgstr "El parche «%s» ye interactivu, saltando."
 
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
@@ -1069,8 +1078,8 @@ msgstr[1] "Van DESANICIASE los %d productos de darréu:"
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Va DESANICIASE l'aplicación de darréu:"
+msgstr[1] "Van DESANICIASE les %d aplicaciones de darréu:"
 
 #: src/Summary.cc:591
 #, c-format, boost-format
@@ -1195,15 +1204,15 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural "The following %d recommended patterns were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Esbillóse automáticamente'l patrón recomendáu de darréu:"
+msgstr[1] "Esbilláronse automáticamente los %d patrones recomendaos de darréu:"
 
 #: src/Summary.cc:845
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural "The following %d recommended products were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Esbillóse automáticamente'l productu recomendáu de darréu:"
+msgstr[1] "Esbilláronse automáticamente los %d productos recomendaos de darréu:"
 
 #: src/Summary.cc:850
 #, c-format, boost-format
@@ -1272,8 +1281,8 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural "The following %d packages are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Suxerse'l paquete de darréu pero nun s'instalará:"
+msgstr[1] "Suxérense los %d paquetes de darréu pero nun s'instalarán:"
 
 #: src/Summary.cc:991
 #, c-format, boost-format
@@ -1469,15 +1478,15 @@ msgstr[1] ""
 #: src/Summary.cc:1292
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pa baxar de versión"
+msgstr[1] "pa baxar de versión"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1295
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "paquete pa baxar de versión"
+msgstr[1] "paquetes pa baxar de versión"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1306
@@ -1490,8 +1499,8 @@ msgstr[1] ""
 #: src/Summary.cc:1309
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "paquete nuevu pa instalar"
+msgstr[1] "paquetes nuevos pa instalar"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1320
@@ -1721,7 +1730,7 @@ msgstr ""
 #: src/repos.cc:202
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
-msgstr ""
+msgstr "El repositoriu «%s» ta anováu."
 
 #: src/repos.cc:208
 #, c-format, boost-format
@@ -1730,12 +1739,12 @@ msgstr ""
 
 #: src/repos.cc:230
 msgid "Forcing raw metadata refresh"
-msgstr ""
+msgstr "Forciando'l refrescu de datos meta en bruto"
 
 #: src/repos.cc:236
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr ""
+msgstr "Recibiendo datos meta del repositoriu «%s»"
 
 #: src/repos.cc:263
 #, c-format, boost-format
@@ -1775,7 +1784,7 @@ msgstr ""
 #: src/repos.cc:339
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
-msgstr ""
+msgstr "El reposituriu «%s» nun ye váldu."
 
 #: src/repos.cc:340
 msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
@@ -1784,7 +1793,7 @@ msgstr ""
 #: src/repos.cc:352
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr ""
+msgstr "Fallu recibiendo los datos meta pa «%s»:"
 
 #: src/repos.cc:365
 msgid "Forcing building of repository cache"
@@ -1822,12 +1831,12 @@ msgstr ""
 #: src/repos.cc:633
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
-msgstr ""
+msgstr "Inorando'l repositoriu deshabilitáu «%s»"
 
 #: src/repos.cc:716 src/repos.cc:722
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr ""
+msgstr "Inorando'l repositoriu «%s» pola mor de la opción «%s»."
 
 #: src/repos.cc:749
 #, c-format, boost-format
@@ -1913,16 +1922,16 @@ msgstr "Prioridá"
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:1006 src/repos.cc:1095 src/repos.cc:1636 src/repos.cc:2413
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
 #: src/repos.cc:1015 src/ps.cc:125
 msgid "Service"
-msgstr ""
+msgstr "Serviciu"
 
 #: src/repos.cc:1069
 msgid "No repositories defined."
-msgstr ""
+msgstr "Nun se definieron repositorios."
 
 #: src/repos.cc:1070
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
@@ -1958,7 +1967,7 @@ msgstr ""
 
 #: src/repos.cc:1109
 msgid "Keywords"
-msgstr ""
+msgstr "Pallabres clave"
 
 #: src/repos.cc:1110
 msgid "Repo Info Path"
@@ -1970,12 +1979,12 @@ msgstr ""
 
 #: src/repos.cc:1163 src/repos.cc:1231 src/repos.cc:1375
 msgid "Error reading repositories:"
-msgstr ""
+msgstr "Fallu lleendo los repositorios:"
 
 #: src/repos.cc:1189
 #, c-format, boost-format
 msgid "Can't open %s for writing."
-msgstr ""
+msgstr "Nun pue abrise %s pa escritura."
 
 #: src/repos.cc:1190
 msgid "Maybe you do not have write permissions?"
@@ -1988,7 +1997,7 @@ msgstr ""
 
 #: src/repos.cc:1248 src/repos.cc:1392
 msgid "Specified repositories: "
-msgstr ""
+msgstr "Repositorios especificaos: "
 
 #: src/repos.cc:1283
 #, c-format, boost-format
@@ -2001,7 +2010,7 @@ msgstr ""
 
 #: src/repos.cc:1312
 msgid "There are no enabled repositories defined."
-msgstr ""
+msgstr "Nun hai definíos repositorios habilitaos."
 
 #: src/repos.cc:1313
 #, c-format, boost-format
@@ -2010,15 +2019,15 @@ msgstr ""
 
 #: src/repos.cc:1318
 msgid "Could not refresh the repositories because of errors."
-msgstr ""
+msgstr "Nun pudieron refrescase los repositorios pola mor de fallos."
 
 #: src/repos.cc:1329
 msgid "Specified repositories have been refreshed."
-msgstr ""
+msgstr "Refrescáronse los repositorios especificaos."
 
 #: src/repos.cc:1331
 msgid "All repositories have been refreshed."
-msgstr ""
+msgstr "Refrescáronse tolos repositorios."
 
 #: src/repos.cc:1438
 #, c-format, boost-format
@@ -2039,12 +2048,12 @@ msgstr ""
 #: src/repos.cc:1460
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
-msgstr ""
+msgstr "Llimpiando paquetes pa «%s»."
 
 #: src/repos.cc:1468
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr ""
+msgstr "Nun pue llimpiase'l repositoriu «%s» pola mor d'un fallu."
 
 #: src/repos.cc:1479
 msgid "Cleaning installed packages cache."
@@ -2052,7 +2061,7 @@ msgstr ""
 
 #: src/repos.cc:1488
 msgid "Cannot clean installed packages cache because of an error."
-msgstr ""
+msgstr "Nun puen llimpiase los paquetes pola mor d'un fallu."
 
 #: src/repos.cc:1507
 msgid "Could not clean the repositories because of errors."
@@ -2090,7 +2099,7 @@ msgstr ""
 
 #: src/repos.cc:1591
 msgid "Can't find a valid repository at given location:"
-msgstr ""
+msgstr "Nun pue alcontrase un repositoriu válidu nel allugamientu dau:"
 
 #: src/repos.cc:1599
 msgid "Problem transferring repository data from specified URI:"
@@ -2124,7 +2133,7 @@ msgstr ""
 #: src/repos.cc:1648
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
-msgstr ""
+msgstr "Lleendo datos del mediu «%s»"
 
 #: src/repos.cc:1654
 #, c-format, boost-format
@@ -2155,11 +2164,13 @@ msgstr ""
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1754
 msgid "Is it a .repo file?"
-msgstr ""
+msgstr "¿Ye un ficheru .repo?"
 
 #: src/repos.cc:1761
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr ""
+"Alcontróse un problema entrín se tentaba de lleer el ficheru nel URI "
+"especificáu"
 
 #: src/repos.cc:1773
 msgid "Repository with no alias defined found in the file, skipping."
@@ -2173,7 +2184,7 @@ msgstr ""
 #: src/repos.cc:1821
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
-msgstr ""
+msgstr "Desanicióse'l repositoriu «%s»."
 
 #: src/repos.cc:1843
 #, c-format, boost-format
@@ -2261,12 +2272,12 @@ msgstr ""
 
 #: src/repos.cc:2130
 msgid "Error reading services:"
-msgstr ""
+msgstr "Fallu lleendo los servicios:"
 
 #: src/repos.cc:2219
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr ""
+msgstr "Nun s'alcontró'l serviciu «%s» pol so nomatu, númberu o URI."
 
 #: src/repos.cc:2222
 #, c-format, boost-format
@@ -2286,7 +2297,7 @@ msgstr ""
 #: src/repos.cc:2554
 #, c-format, boost-format
 msgid "Error occured while adding service '%s'."
-msgstr ""
+msgstr "Asocedió un fallu entrín s'amestaba'l serviciu «%s»."
 
 #: src/repos.cc:2560
 #, c-format, boost-format
@@ -2296,7 +2307,7 @@ msgstr ""
 #: src/repos.cc:2598
 #, c-format, boost-format
 msgid "Removing service '%s':"
-msgstr ""
+msgstr "Desaniciando'l serviciu «%s»:"
 
 #: src/repos.cc:2601
 #, c-format, boost-format
@@ -2342,7 +2353,7 @@ msgstr ""
 
 #: src/repos.cc:2760
 msgid "Could not refresh the services because of errors."
-msgstr ""
+msgstr "Nun pudieron refrescase los servicios pola mor de fallos."
 
 #: src/repos.cc:2766
 msgid "Some of the services have not been refreshed because of an error."
@@ -2354,7 +2365,7 @@ msgstr ""
 
 #: src/repos.cc:2773
 msgid "All services have been refreshed."
-msgstr ""
+msgstr "Refrescáronse tolos servicios."
 
 #: src/repos.cc:2920
 #, c-format, boost-format
@@ -2379,7 +2390,7 @@ msgstr ""
 #: src/repos.cc:2935
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr ""
+msgstr "Afitóse'l nome del serviciu «%s» a «%s»."
 
 #: src/repos.cc:2940
 #, c-format, boost-format
@@ -2416,7 +2427,7 @@ msgstr ""
 
 #: src/repos.cc:2976
 msgid "Error while modifying the service:"
-msgstr ""
+msgstr "Fallu entrín se modificaba'l serviciu:"
 
 #: src/repos.cc:2977
 #, c-format, boost-format
@@ -2430,7 +2441,7 @@ msgstr ""
 #: src/repos.cc:3101
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr ""
+msgstr "Recibiendo los datos del repositoriu «%s»..."
 
 #: src/repos.cc:3107
 #, c-format, boost-format
@@ -2440,7 +2451,7 @@ msgstr ""
 #: src/repos.cc:3113 src/repos.cc:3147
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
-msgstr ""
+msgstr "Problema cargando los datos de «%s»"
 
 #: src/repos.cc:3117
 #, c-format, boost-format
@@ -2465,11 +2476,11 @@ msgstr ""
 
 #: src/repos.cc:3160
 msgid "Reading installed packages..."
-msgstr ""
+msgstr "Lleendo los paquetes instalaos..."
 
 #: src/repos.cc:3169
 msgid "Problem occurred while reading the installed packages:"
-msgstr ""
+msgstr "Asocedió un fallu entrín se lleíen los paquetes instalaos:"
 
 #: src/update.cc:84
 #, c-format, boost-format
@@ -2553,7 +2564,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "Estayes incluyíes"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -2566,12 +2577,12 @@ msgstr ""
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
-msgstr ""
+msgstr "Nun s'alcontraron anovamientos."
 
 #. translator: Table headline
 #: src/update.cc:621
 msgid "The following updates are also available:"
-msgstr ""
+msgstr "Tamién tán disponibles los anovamientos de darréu:"
 
 #: src/update.cc:714
 msgid "Package updates"
@@ -2587,11 +2598,11 @@ msgstr ""
 
 #: src/update.cc:806
 msgid "Current Version"
-msgstr ""
+msgstr "Versión actual"
 
 #: src/update.cc:807
 msgid "Available Version"
-msgstr ""
+msgstr "Versión disponible"
 
 #: src/update.cc:969
 msgid "No matching issues found."
@@ -2624,7 +2635,7 @@ msgstr ""
 #. translators: this will show up if you press ctrl+c twice (but outside of zypper shell)
 #: src/main.cc:38
 msgid "OK OK! Exiting immediately..."
-msgstr ""
+msgstr "Entendíte. Yá colo, yá..."
 
 #: src/Zypper.cc:77
 msgid ""
@@ -2745,6 +2756,9 @@ msgid ""
 "\thelp, ?\t\t\tPrint help.\n"
 "\tshell, sh\t\tAccept multiple commands at once.\n"
 msgstr ""
+"  Comandos:\n"
+"\thelp, ?\t\t\t\t\tAmuesa l'ayuda.\n"
+"\tshell, sh\t\t\t\t\tAceuta múltiples commandos al empar.\n"
 
 #: src/Zypper.cc:484
 msgid ""
@@ -2780,6 +2794,16 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
+"     Software Management:\n"
+"\t\tinstall, in\t\t\t\tInstala paquetes.\n"
+"\t\tremove, rm\t\t\tDesanicia paquetes.\n"
+"\t\tverify, ve\t\t\t\tVerifica la integridá de les dependencies de\n"
+"\t\t\t\t\t\t\tpaquetes.\n"
+"\t\tsource-install, si\t\tInstala paquetes fonte y les sos dependecies\n"
+"\t\t\t\t\t\t\tde construcción.\n"
+"\t\tinstall-new-recommends, inr\n"
+"\t\t\t\t\t\t\tInstala paquetes aconseyaos como nuevos polos\n"
+"\t\t\t\t\t\t\tpaquetes instalaos.\n"
 
 #: src/Zypper.cc:513
 msgid ""
@@ -2791,6 +2815,13 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
+"     Xestión d'anovamientos:\n"
+"\t\tupdate, up\t\t\t\tAnueva los paquetes instalaos.\n"
+"\t\tlist-updates, lu\t\t\t\tLlista los anovamientos disponibles.\n"
+"\t\tpatch\t\t\t\t\tInstala los parches precisos.\n"
+"\t\tlist-patches, lp\t\t\t\tLlista los parches precisos.\n"
+"\t\tdist-upgrade, dup\t\t\tFai un anovamientu de distribución.\n"
+"\t\tpatch-check, pchk\t\t\tComprueba parches.\n"
 
 #: src/Zypper.cc:522
 msgid ""
@@ -2833,6 +2864,8 @@ msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
 msgstr ""
+"     Socomandos:\n"
+"\t\tsubcommand\t\t\t\tLlista los socomandos disponibles.\n"
 
 #: src/Zypper.cc:559
 msgid ""
@@ -2846,7 +2879,7 @@ msgstr ""
 #: src/Zypper.cc:587
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr ""
+msgstr "Teclexa «%s» pa consiguir un llistáu global d'opciones y comandos."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -3418,7 +3451,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2296
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [OPCIONES]"
 
 #. translators: command description
 #: src/Zypper.cc:2299
@@ -3563,7 +3596,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2470
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [OPCIONES]"
 
 #. translators: command description
 #: src/Zypper.cc:2473
@@ -3708,6 +3741,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
+"moo\n"
+"\n"
+"Amuesa un animal.\n"
+"\n"
+"Esti comandu nun tien opciones adicionales.\n"
 
 #: src/Zypper.cc:2776
 #, c-format, boost-format
