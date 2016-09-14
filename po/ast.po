@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-09-13 21:09+0000\n"
+"PO-Revision-Date: 2016-09-14 09:50+0000\n"
 "Last-Translator: Enol P <enolp@softastur.org>\n"
 "Language-Team: Asturian "
 "<https://l10n.opensuse.org/projects/zypper/master/ast/>\n"
@@ -4016,7 +4016,7 @@ msgstr "Ríquense privilexos root pa modificar repositorios del sistema."
 
 #: src/Zypper.cc:3564 src/Zypper.cc:3902
 msgid "Too few arguments."
-msgstr ""
+msgstr "Permunchos argumentos."
 
 #: src/Zypper.cc:3587
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
@@ -4026,7 +4026,7 @@ msgstr ""
 #: src/Zypper.cc:3617
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr ""
+msgstr "Nun pue usase %s xunto con %s. Usando l'axuste %s."
 
 #: src/Zypper.cc:3636
 msgid "Specified type is not a valid repository type:"
@@ -4057,7 +4057,7 @@ msgstr "Nun s'alcontró'l serviciu «%s» pol nomatu, númberu o URI."
 
 #: src/Zypper.cc:3741
 msgid "Too few arguments. At least URI and alias are required."
-msgstr ""
+msgstr "Permunchos argumentos. Ríquese polo menos un URI y nomatu."
 
 #: src/Zypper.cc:3765
 #, c-format, boost-format
@@ -4894,12 +4894,12 @@ msgstr ""
 #: src/misc.cc:295
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr ""
+msgstr "Nun s'alcontró'l paquete fonte «%s» pal paquete «%s»."
 
 #: src/misc.cc:373
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
-msgstr ""
+msgstr "Instalando'l paquete fonte %s-%s"
 
 #: src/misc.cc:382
 #, c-format, boost-format
@@ -5207,7 +5207,7 @@ msgstr "El camín llocal especificáu nun esiste o nun ye accesible."
 
 #: src/utils/misc.cc:379
 msgid "Given URI is invalid"
-msgstr ""
+msgstr "L'URI dau nun ye validu"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
@@ -5226,11 +5226,11 @@ msgstr "Exemplu: %s"
 
 #: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
-msgstr ""
+msgstr "URI non válida d'OBS"
 
 #: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
-msgstr ""
+msgstr "La forma correuta ye obs://<proyeutu>/[plataforma]"
 
 #: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
