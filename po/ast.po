@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-09-14 09:50+0000\n"
+"PO-Revision-Date: 2016-09-14 18:32+0000\n"
 "Last-Translator: Enol P <enolp@softastur.org>\n"
 "Language-Team: Asturian "
 "<https://l10n.opensuse.org/projects/zypper/master/ast/>\n"
@@ -3615,6 +3615,8 @@ msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr ""
+"--updatestack-only\n"
+"Namái comprueba parches qu'afeuten la xestión de paquetes."
 
 #: src/Zypper.cc:2494
 msgid ""
@@ -3704,6 +3706,11 @@ msgid ""
 "\n"
 "This is an alias for '%s'.\n"
 msgstr ""
+"patch-info <nome_parche> ...\n"
+"\n"
+"Amuesa información detallada pa parches.\n"
+"\n"
+"Esto ye un nomatu pa «%s».\n"
 
 #: src/Zypper.cc:2667
 #, c-format, boost-format
@@ -3714,6 +3721,11 @@ msgid ""
 "\n"
 "This is an alias for '%s'.\n"
 msgstr ""
+"pattern-info <nome_patrón> ...\n"
+"\n"
+"Amuesa información detallada pa patrones.\n"
+"\n"
+"Esto ye un nomatu pa «%s».\n"
 
 #: src/Zypper.cc:2686
 #, c-format, boost-format
@@ -3724,6 +3736,11 @@ msgid ""
 "\n"
 "This is an alias for '%s'.\n"
 msgstr ""
+"product-info <nome_productu> ...\n"
+"\n"
+"Amuesa información detallada pa productos.\n"
+"\n"
+"Esto ye un nomatu pa «%s».\n"
 
 #: src/Zypper.cc:2703
 msgid ""
@@ -3777,7 +3794,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:2830
 msgid "locks (ll) [options]"
-msgstr ""
+msgstr "locks (ll) [opciones]"
 
 #. translators: command description
 #: src/Zypper.cc:2833
@@ -3804,6 +3821,13 @@ msgid ""
 "-d, --only-duplicates     Clean only duplicate locks.\n"
 "-e, --only-empty          Clean only locks which doesn't lock anything.\n"
 msgstr ""
+"cleanlocks (cl)\n"
+"\n"
+"Desanicia bloqueos inútiles.\n"
+"\n"
+" Opciones del comandu:\n"
+"-d, --only-duplicates\t\tLlimpia namái bloqueos duplicaos.\n"
+"-e, --only-empty\t\tLlimpia namái bloqueos que nun bloquien nada.\n"
 
 #: src/Zypper.cc:2876
 msgid ""
@@ -3834,11 +3858,16 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
+"licenses\n"
+"\n"
+"Informa de llicencies y EULAs de los paquetes instalaos anguaño.\n"
+"\n"
+"Esti comandu nun tien opciones adicionales.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:2940
 msgid "ps [options]"
-msgstr ""
+msgstr "ps [opciones]"
 
 #. translators: command description
 #: src/Zypper.cc:2943
@@ -3912,6 +3941,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
+"shell (sh)\n"
+"\n"
+"Entra nel shell de comandos de zypper.\n"
+"\n"
+"Esti comandu nun tien opciones adicionales.\n"
 
 #. translators: this is just a legacy command
 #: src/Zypper.cc:3069
@@ -3920,6 +3954,9 @@ msgid ""
 "\n"
 "List available service types.\n"
 msgstr ""
+"service-types (st)\n"
+"\n"
+"Llista les tribes disponibles de servicios.\n"
 
 #. translators: this is just a legacy command
 #: src/Zypper.cc:3085
@@ -3959,6 +3996,9 @@ msgid ""
 "\n"
 "This command has dummy implementation which always returns 0.\n"
 msgstr ""
+"ping [opciones]\n"
+"\n"
+"Esti comandu tien una implementación maniquín que siempres devuelve 0.\n"
 
 #: src/Zypper.cc:3196 src/Zypper.cc:5236
 msgid "Unexpected program flow."
@@ -3996,6 +4036,7 @@ msgstr ""
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
+"Mira «%s» o «%s» pa consiguir un llistáu de tribes conocíes de servicios."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -4036,6 +4077,7 @@ msgstr ""
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
+"Mira «%s» o «%s» pa consiguir un llistáu de tribes conocíes de repositorios."
 
 #: src/Zypper.cc:3663 src/Zypper.cc:4846 src/utils/messages.cc:45
 msgid "Required argument missing."
@@ -4177,7 +4219,7 @@ msgstr ""
 #: src/Zypper.cc:4273
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
-msgstr ""
+msgstr "El repositoriu «%s» ta deshabilitáu."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4403
@@ -4422,10 +4464,13 @@ msgstr ""
 #, c-format, boost-format
 msgid "There are some running programs that might use files deleted by recent upgrade. You may wish to check and restart some of them. Run '%s' to list these programs."
 msgstr ""
+"Hai dellos programes n'execución que quiciabes usen ficheros desaniciaos pol "
+"anovamientu recién. Pues desear comprobar y reaniciar dellos. Executa «%s» "
+"pa llistar estos programes."
 
 #: src/solve-commit.cc:468
 msgid "Update notifications were received from the following packages:"
-msgstr ""
+msgstr "Recibiéronse avisos d'anovamientu de los paquetes de darréu:"
 
 #: src/solve-commit.cc:477
 #, c-format, boost-format
@@ -4442,7 +4487,7 @@ msgstr "¿Ver agora los avisos?"
 
 #: src/solve-commit.cc:532
 msgid "Computing distribution upgrade..."
-msgstr ""
+msgstr "Calculando anovamientu de distribución..."
 
 #: src/solve-commit.cc:537
 msgid "Resolving package dependencies..."
@@ -4559,10 +4604,14 @@ msgstr ""
 #: src/solve-commit.cc:879
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
 msgstr ""
+"Ún de los parches instalaos rique'l reaniciu del to ordenador. Reanicia lo "
+"más ceo posible."
 
 #: src/solve-commit.cc:887
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
 msgstr ""
+"Ún de los parches instalaos afeuta al xestor de paquetes. Executa esti "
+"comandu una vegada más pa instalar cualesquier otru parche precisu."
 
 #: src/solve-commit.cc:905
 msgid "Dependencies of all installed packages are satisfied."
@@ -4951,8 +5000,8 @@ msgstr "Fallu lleendo los ficheros de bloquéu:"
 #: src/locks.cc:226
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Amestóse con ésitu'l bloquéu especificáu."
+msgstr[1] "Amestáronse con ésitu los bloqueos especificaos."
 
 #: src/locks.cc:233
 msgid "Problem adding the package lock:"
@@ -4964,7 +5013,7 @@ msgstr ""
 
 #: src/locks.cc:302
 msgid "No lock has been removed."
-msgstr ""
+msgstr "Nun se desanició bloquéu dalu."
 
 #: src/locks.cc:306
 #, c-format
@@ -4985,7 +5034,7 @@ msgstr "Rellena un informe de fallos tocante a esto, por favor."
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr ""
+msgstr "Mira http://en.opensuse.org/Zypper/Troubleshooting pa instrucciones."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
@@ -5226,7 +5275,7 @@ msgstr "Exemplu: %s"
 
 #: src/utils/misc.cc:507
 msgid "Invalid OBS URI."
-msgstr "URI non válida d'OBS"
+msgstr "URI non válida d'OBS."
 
 #: src/utils/misc.cc:507
 msgid "Correct form is obs://<project>/[platform]"
