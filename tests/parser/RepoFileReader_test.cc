@@ -14,6 +14,9 @@ static string suse_repo = "[factory-oss]\n"
 "enabled=1\n"
 "autorefresh=0\n"
 "baseurl=http://download.opensuse.org/factory-tested/repo/oss/\n"
+"baseurl=http://download.opensuse.org/factory-tested/repo/oss/2\n"
+"plugin:spacewalk?channel=sle-manager-tools12-pool-x86_64-sp1&server=0\n"
+"http://download.opensuse.org/factory-tested/repo/=oss/4\n"
 "type=yast2\n"
 "keeppackages=0\n";
 
@@ -46,6 +49,10 @@ BOOST_AUTO_TEST_CASE(read_repo_file)
     RepoCollector collector;
     parser::RepoFileReader parser( input, bind( &RepoCollector::collect, &collector, _1 ) );
     BOOST_CHECK_EQUAL(1, collector.repos.size());
+
+    const RepoInfo & repo( collector.repos.front() );
+    BOOST_CHECK_EQUAL( 4, repo.baseUrlsSize() );
+    cout << repo << endl;
   }
   // fedora
   {

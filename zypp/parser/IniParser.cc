@@ -33,7 +33,7 @@ namespace parser
   namespace {
     inline const std::string & keyGarbage()
     {
-      static const std::string & _val( ",|/\\" );
+      static const std::string & _val( ":/?|,\\" );
       return _val;
     }
   } //namespace
