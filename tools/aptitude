@@ -4,6 +4,7 @@
 # License: GPL v2 or later
 
 use strict;
+my $prog=$0; $prog=~s{.*/}{};
 my @options=();
 my $option;
 foreach(@ARGV) {
@@ -36,14 +37,22 @@ foreach(@options) {
 	if($_ eq "-d" || $_ eq "--download-only") {push @zopt2, "--download-only"}
 	if($_ eq "-y" || $_ eq "--assume-yes") {push @zopt, "--non-interactive"}
 	if($_ eq "-q" || $_ eq "--quiet") {push @zopt, "--quiet"}
-	if($_ eq "-V" || $_ eq "-v" || $_ eq "--verbose") {push @zopt, "--verbose"}
+	if($prog eq "aptitude") {
+		if($_ eq "-V" || $_ eq "-v" || $_ eq "--verbose") {push @zopt, "--verbose"}
+	} else {
+		if($_ eq "-v" || $_ eq "--version" || $_ eq "-V" || $_ eq "--verbose-versions") {push @zopt, "--version"}
+	}
 	if($_ eq "-u") {system("zypper", "refresh")}
 	if($_ eq "--without-recommends") {push @zopt2, "--no-recommends"}
 	if($_ eq "--with-recommends") {push @zopt, "--recommends"}
 }
 
 my $action=shift;
-if(!defined($action)) {exec "/sbin/yast2", "-i"}
+if($prog eq "aptitude") {
+    if(!defined($action)) {exec "/sbin/yast2", "-i"}
+} else {
+    $action||="";
+}
 
 # install, remove are the same
 if($action eq "show") {$action="info"}
