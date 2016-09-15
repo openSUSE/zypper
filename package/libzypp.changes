@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 15 15:27:15 CEST 2016 - ma@suse.de
+
+- RepoFileReader: fix parsing of multiline url entries (bsc#964932)
+- Allow repo type 'rpm' as alias for 'rpm-md' (fixes openSUSE/zypper#100)
+- version 16.2.4 (0)
+
+-------------------------------------------------------------------
 Fri Sep  9 16:43:30 CEST 2016 - ma@suse.de
 
 - xmlout::Node:  Allow adding nore attributes while the start node
