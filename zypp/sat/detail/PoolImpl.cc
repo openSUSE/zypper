@@ -107,6 +107,12 @@ namespace zypp
 
       static void logSat( CPool *, void *data, int type, const char *logString )
       {
+	//                            "1234567890123456789012345678901234567890
+	if ( 0 == strncmp( logString, "  - no rule created", 19 ) )
+	  return;
+	if ( 0 == strncmp( logString, "    next rules: 0 0", 19 ) )
+	  return;
+
 	  if ( type & (SOLV_FATAL|SOLV_ERROR) ) {
 	    L_ERR("libsolv") << logString;
 	  } else if ( type & SOLV_DEBUG_STATS ) {
