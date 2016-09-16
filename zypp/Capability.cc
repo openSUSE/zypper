@@ -381,7 +381,9 @@ namespace zypp
 
     // str_r might be the form "libzypp-1.2.3-4.5(.arch)'
     // correctly parsed as name capability by the ctor.
-    if ( detail.isNamed() && ::strrchr( detail.name().c_str(), '-' ) && sat::WhatProvides( cap ).empty() )
+    // TODO: Think about allowing glob char in name - for now don't process
+    if ( detail.isNamed() && !::strpbrk( detail.name().c_str(), "*?[{" )
+      && ::strrchr( detail.name().c_str(), '-' ) && sat::WhatProvides( cap ).empty() )
     {
       Arch origArch( detail.arch() ); // to support a trailing .arch
 
