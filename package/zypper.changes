@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 20 11:40:48 CEST 2016 - ma@suse.de
+
+- aptitude: handle --version (fixes #99)
+- version 1.13.11
+
+-------------------------------------------------------------------
 Fri Sep  9 17:26:37 CEST 2016 - ma@suse.de
 
 - products --xmlfwd: Literally forward the XML tags found in a
