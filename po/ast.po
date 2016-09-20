@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-09-14 18:32+0000\n"
+"PO-Revision-Date: 2016-09-20 10:46+0000\n"
 "Last-Translator: Enol P <enolp@softastur.org>\n"
 "Language-Team: Asturian "
 "<https://l10n.opensuse.org/projects/zypper/master/ast/>\n"
@@ -156,6 +156,8 @@ msgstr "¡Inorando verificación fallida de robla pal ficheru «%s»!"
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
+"¡Inorando'l fallu de verificación de robla pal ficheru «%s» del repositoriu "
+"«%s»!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -164,12 +166,12 @@ msgstr ""
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s'."
-msgstr ""
+msgstr "Falló la verificación de robla pal ficheru «%s»."
 
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr ""
+msgstr "Falló la verificación de robla pal ficheru «%s» del repositoriu «%s»."
 
 #: src/callbacks/keyring.h:284
 msgid ""
@@ -466,8 +468,8 @@ msgstr "Descripción"
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Habría %1% coincidencia pa «%2»."
+msgstr[1] "Habríen %1% coincidencies pa «%2»."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:184
@@ -650,7 +652,7 @@ msgstr ""
 
 #: src/info.cc:579
 msgid "invalid CPE Name"
-msgstr ""
+msgstr "nome CPE non válidu"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:582
@@ -659,7 +661,7 @@ msgstr "Nome curtiu"
 
 #: src/subcommand.cc:51
 msgid "none"
-msgstr ""
+msgstr "nada"
 
 #: src/subcommand.cc:275
 #, boost-format
@@ -761,6 +763,7 @@ msgstr ""
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
+"Teclexa «%1%» pa consiguir ayuda específica de socomandos si ta disponible."
 
 #. translators: %1% - command name
 #: src/subcommand.cc:451
