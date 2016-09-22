@@ -20,6 +20,7 @@
 #include <zypp/base/Flags.h>
 
 #include <zypp/RepoManager.h>
+#include <zypp/ZYppCallbacks.h>
 #include <zypp/repo/RepoException.h>
 #include <zypp/parser/ParseException.h>
 #include <zypp/media/MediaException.h>
@@ -84,6 +85,9 @@ static bool refresh_raw_metadata(Zypper & zypper,
           Out::HIGH);
       if (!repo.baseUrlsEmpty())
       {
+	// Suppress (interactive) media::MediaChangeReport if we in have multiple basurls (>1)
+	media::ScopedDisableMediaChangeReport guard( repo.baseUrlsSize() > 1 );
+
         for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
             it != repo.baseUrlsEnd();)
         {
