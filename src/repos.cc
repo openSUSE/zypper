@@ -1100,7 +1100,7 @@ static void print_repo_details( Zypper & zypper, std::list<RepoInfo> & repos )
     p.add( _("Enabled"),	repoGpgCheck._enabledYN.str() );
     p.add( _("GPG Check"),	repoGpgCheck._gpgCheckYN.str() );
     p.add( _("Priority"),	str::form("%d", repo.priority()) );
-    p.add( _("Auto-refresh"),	(repo.autorefresh() ? _("On") : _("Off")) );
+    p.add( _("Autorefresh"),	(repo.autorefresh() ? _("On") : _("Off")) );
     p.add( _("Keep Packages"),	(repo.keepPackages() ? _("On") : _("Off")) );
     p.add( _("Type"),		repo.type().asString() );
     p.add( _("GPG Key URI"),	repo.gpgKeyUrl() );
