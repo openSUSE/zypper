@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-08-26 09:24+0000\n"
+"PO-Revision-Date: 2016-09-23 07:16+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -2366,7 +2366,7 @@ msgstr "Si us plau, comproveu si l'URI especificat és vàlid i accessible."
 
 #: src/repos.cc:1752
 msgid "Problem parsing the file at the specified URI"
-msgstr "Problema analitzant el fitxer a l'URI especificat."
+msgstr "Problema en analitzar el fitxer a l'URI especificat."
 
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1754
@@ -5526,19 +5526,19 @@ msgstr " Solució %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
-"Escolliu la solució anterior marcant \"1\" o salteu-ho, reintenteu-ho o "
-"cancel·leu-ho."
+"Trieu la solució anterior marcant \"1\" o salteu-ho, reintenteu-ho o cancel"
+"·leu-ho."
 msgstr[1] ""
-"Escolliu la solució marcant-ne el número corresponent o salteu-ho, "
-"reintenteu-ho o cancel·leu-ho."
+"Trieu la solució marcant-ne el número corresponent o salteu-ho, reintenteu-"
+"ho o cancel·leu-ho."
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:78
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Escolliu la solució anterior amb \"1\" o cancel·leu-ho amb \"c\"."
-msgstr[1] "Escolliu la solució amb el número corresponent o cancel·leu-ho."
+msgstr[0] "Trieu la solució anterior amb \"1\" o cancel·leu-ho amb \"c\"."
+msgstr[1] "Trieu la solució amb el número corresponent o cancel·leu-ho."
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
