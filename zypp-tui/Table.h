@@ -96,6 +96,12 @@ public:
 
   typedef std::vector<std::string> container;
 
+  int nsidx() const
+  { return _nsidx; }
+
+  void nsidx( int n )
+  { _nsidx = n; }
+
   // BinaryPredicate
   struct Less
   {
@@ -107,7 +113,12 @@ public:
       bool noL = _by_column >= a._columns.size();
       bool noR = _by_column >= b._columns.size();
       if ( noL || noR )
-      {	return noL && ! noR; }
+      {
+	if ( noL && noR )
+	  return a.nsidx() < b.nsidx();
+	else
+	  return noL && ! noR;
+      }
       return a._columns[_by_column] < b._columns[_by_column];
     }
   };
@@ -122,6 +133,7 @@ private:
   container _columns;
   container _details;
   ColorContext _ctxt;
+  ZeroInit<int>_nsidx;	///< numerial sort index, e.g. if string values don't work due to coloring
   friend class Table;
 };
 
@@ -170,6 +182,8 @@ public:
 
   /** Unsorted - pseudo sort column indicating not to sort. */
   static constexpr unsigned Unsorted		= unsigned(-1);
+  /** Nsidx - pseudo sort column using the numberical sort index. */
+  static constexpr unsigned Nsidx		= unsigned(-2);
 
   /** Get the default sort column or \ref Unsorted (default) */
   unsigned defaultSortColumn() const		{ return _defaultSortColumn; }
