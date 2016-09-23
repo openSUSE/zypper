@@ -54,6 +54,15 @@ inline std::string volatileServiceRepoChange( const RepoInfo & repo_r )
 		    % repo_r.alias() % repo_r.service();
 }
 
+// ----------------------------------------------------------------------------
+
+inline const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r )
+{
+  static std::string dashes( ColorString( ColorContext::LOWLIGHT , "----" ).str() );
+  return( repo_r.enabled() ? asYesNo( repo_r.autorefresh() ) : dashes.c_str() );
+}
+
+// ----------------------------------------------------------------------------
 
 template <typename Target, typename Source>
 void safe_lexical_cast( Source s, Target & tr )
@@ -1043,7 +1052,8 @@ static void print_repo_list( Zypper & zypper, const std::list<RepoInfo> & repos 
     // GPG Check
     tr << repoGpgCheck._gpgCheckYN.str();
     // autorefresh?
-    if ( all || showrefresh ) tr << asYesNo( repo.autorefresh() );
+    if ( all || showrefresh )
+      tr << repoAutorefreshStr( repo );
     // priority
     if ( all || showprio )
       // output flush right; looks nicer and sorts correctly
@@ -2339,7 +2349,7 @@ static void service_list_tr( Zypper & zypper,
   // GPG Check
   tr << repoGpgCheck._gpgCheckYN.str();
   // autorefresh?
-  tr << asYesNo( srv->autorefresh() );
+  tr << repoAutorefreshStr( *srv );
 
   // priority
   if ( flags & SF_SHOW_PRIO )
