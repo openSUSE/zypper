@@ -32,8 +32,8 @@ msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-08-26 13:13+0000\n"
-"Last-Translator: Pasca Alexandru <yo6ial@yahoo.com>\n"
+"PO-Revision-Date: 2016-09-27 13:16+0000\n"
+"Last-Translator: Andrei Cipu <andrei@cipu.ro>\n"
 "Language-Team: Romanian "
 "<https://l10n.opensuse.org/projects/zypper/master/ro/>\n"
 "Language: ro\n"
@@ -235,7 +235,7 @@ msgid "Unknown digest %s for file %s."
 msgstr "Rezumat necunoscut %s pentru fișierul %s."
 
 #: src/callbacks/keyring.h:332
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
 "[%2%]\n"
@@ -243,13 +243,19 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
-"Verificarea rezumatului pentru %s a eșuat. Am așteptat %s, am găsit %s."
+"Verificarea sumei de control pentru fișierul '%1%' a eșuat. \n"
+"[%2%]\n"
+"\n"
+" așteptam %3%\n"
+" am primit %4%\n"
 
 #: src/callbacks/keyring.h:344
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
+"Acceptarea pachetelor cu sume de control greșite poate duce la coruperea "
+"sistemului și, în situații extreme, chiar la compromiterea sistemului."
 
 #: src/callbacks/keyring.h:352
 #, boost-format
@@ -261,26 +267,32 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
+"Totuși, dacă v-ați asigurat că fișierul cu suma de control '%1%..' este "
+"sigur, corect\n"
+"și ar trebui folosit pentru această operație, introduceți primele 4 "
+"caractere ale sumei\n"
+"de control pentru a debloca fișierul pe riscul dumneavoastră. O intrare vidă "
+"va respinge fișierul.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:359
 msgid "discard"
-msgstr ""
+msgstr "refuză"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:361
 msgid "Unblock using this file on your own risk."
-msgstr ""
+msgstr "Deblocați utilizarea acestui fișier pe riscul dumneavoastră."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:363
 msgid "Discard the file."
-msgstr ""
+msgstr "Respinge fișierul."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:368
 msgid "Unblock or discard?"
-msgstr ""
+msgstr "Deblochez sau arunc?"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:151
@@ -289,9 +301,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "Rulează: %s (%s, %s)"
 
 #: src/callbacks/rpm.h:208
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "Îndepărtez %s-%s"
+msgstr "Îndepărtez %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:213
@@ -305,9 +317,9 @@ msgid "Removal of %s failed:"
 msgstr "Îndepărtarea %s a eșuat:"
 
 #: src/callbacks/rpm.h:279
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "Instalez: %s-%s"
+msgstr "Instalez: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:284
@@ -316,9 +328,9 @@ msgid "Installing: %s-%s"
 msgstr "Instalez: %s-%s"
 
 #: src/callbacks/rpm.h:308
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "Instalarea %s-%s a eșuat:"
+msgstr "Instalarea %s a eșuat:"
 
 #: src/callbacks/rpm.h:310
 #, c-format, boost-format
@@ -328,7 +340,7 @@ msgstr "Instalarea %s-%s a eșuat:"
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:356
 msgid "Checking for file conflicts:"
-msgstr ""
+msgstr "Verific conflicte de fișiere:"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:390
