@@ -56,6 +56,28 @@ inline std::string volatileServiceRepoChange( const RepoInfo & repo_r )
 
 // ----------------------------------------------------------------------------
 
+inline ColorContext repoPriorityColor( unsigned prio_r )
+{
+  if ( prio_r == RepoInfo::defaultPriority() || prio_r == 0 )
+    return ColorContext::DEFAULT;
+  return( prio_r < RepoInfo::defaultPriority() ? ColorContext::HIGHLIGHT : ColorContext::LOWLIGHT );
+}
+
+inline std::string repoPriorityAnnotationStr( unsigned prio_r )
+{
+  if ( prio_r == RepoInfo::defaultPriority() || prio_r == 0 )
+    return _("default priority");
+  return( prio_r < RepoInfo::defaultPriority() ? _("raised priority") : _("lowered priority") );
+}
+
+inline ColorString repoPriorityNumber( unsigned prio_r, int width_r = 0 )
+{ return ColorString( repoPriorityColor( prio_r ), str::numstring( prio_r, width_r ) ); }
+
+inline ColorString repoPriorityNumberAnnotated( unsigned prio_r, int width_r = 0 )
+{ return repoPriorityNumber( prio_r, width_r ) << " (" << repoPriorityAnnotationStr( prio_r ) << ")"; }
+
+// ----------------------------------------------------------------------------
+
 inline const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r )
 {
   static std::string dashes( ColorString( ColorContext::LOWLIGHT , "----" ).str() );
@@ -999,7 +1021,7 @@ static void print_repo_list( Zypper & zypper, const std::list<RepoInfo> & repos 
     th << _("Priority");
     ++index;
     if ( zypper.cOpts().count("sort-by-priority") || ( list_cols.find("P") != std::string::npos && !sort_override ) )
-      sort_index = index;
+      sort_index = Table::Nsidx;
   }
 
   // type
@@ -1056,8 +1078,8 @@ static void print_repo_list( Zypper & zypper, const std::list<RepoInfo> & repos 
       tr << repoAutorefreshStr( repo );
     // priority
     if ( all || showprio )
-      // output flush right; looks nicer and sorts correctly
-      tr << str::numstring( repo.priority(), 4 );
+      // output flush right; use numerical sort index as coloring will break lex. sort
+      ( tr << repoPriorityNumber( repo.priority(), 4 ) ).nsidx( repo.priority() );
     // type
     if ( all )
       tr << repo.type().asString();
@@ -1109,7 +1131,7 @@ static void print_repo_details( Zypper & zypper, std::list<RepoInfo> & repos )
 				    : repo.mirrorListUrl().asString())) );
     p.add( _("Enabled"),	repoGpgCheck._enabledYN.str() );
     p.add( _("GPG Check"),	repoGpgCheck._gpgCheckYN.str() );
-    p.add( _("Priority"),	str::form("%d", repo.priority()) );
+    p.add( _("Priority"),	repoPriorityNumberAnnotated( repo.priority() ) );
     p.add( _("Autorefresh"),	(repo.autorefresh() ? _("On") : _("Off")) );
     p.add( _("Keep Packages"),	(repo.keepPackages() ? _("On") : _("Off")) );
     p.add( _("Type"),		repo.type().asString() );
@@ -1629,21 +1651,21 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
   }
 
   std::ostringstream s;
-  s << str::Format(_("Repository '%s' successfully added")) % repo.asUserString();
+  s << str::Format(_("Repository '%s' successfully added")) % repo.asUserString() << endl;
   s << endl;
 
   {
     PropertyTable p;
     // translators: property name; short; used like "Name: value"
-    p.add( _("Enabled"),	repo.enabled() );
+    p.add( _("URI"),		repo.baseUrlsBegin(), repo.baseUrlsEnd() );
     // translators: property name; short; used like "Name: value"
-    p.add( _("Autorefresh"),	repo.autorefresh() );
+    p.add( _("Enabled"),	repo.enabled() );
     // translators: property name; short; used like "Name: value"
     p.add( _("GPG Check"), 	repo.gpgCheck() ).paint( ColorContext::MSG_WARNING, repo.gpgCheck() == false );
     // translators: property name; short; used like "Name: value"
-    p.add( _("Priority"),	repo.priority() );
+    p.add( _("Autorefresh"),	repo.autorefresh() );
     // translators: property name; short; used like "Name: value"
-    p.add( _("URI"),		repo.baseUrlsBegin(), repo.baseUrlsEnd() );
+    p.add( _("Priority"),	repoPriorityNumberAnnotated( repo.priority() ) );
     s << p;
   }
   zypper.out().info( s.str() );
@@ -2357,7 +2379,7 @@ static void service_list_tr( Zypper & zypper,
     if ( service )
       tr << "";
     else
-      tr << str::numstring (repo->priority(), 4); // output flush right; looks nicer and sorts correctly
+      tr << repoPriorityNumber( repo->priority(), 4 );
   }
 
   // type
