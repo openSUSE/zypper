@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct  6 17:20:24 CEST 2016 - ma@suse.de
+
+- addrepo: show repo priority summary (issue #82)
+- Color repo priority values
+- version 1.13.12
+
+-------------------------------------------------------------------
 Tue Sep 20 11:40:48 CEST 2016 - ma@suse.de
 
 - aptitude: handle --version (fixes #99)
