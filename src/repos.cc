@@ -182,6 +182,40 @@ struct RepoGpgCheckStrings
   ColorString _gpgCheckYN;	///< colored GPG Check status if enabled else "----"
 };
 
+void repoPrioSummary( Zypper & zypper )
+{
+  if ( zypper.out().type() != Out::TYPE_NORMAL )
+    return;
+
+  std::map<unsigned,ZeroInit<unsigned>> priomap;
+  for ( const auto & repoi : zypper.repoManager().knownRepositories() )
+  {
+    if ( repoi.enabled() )
+      priomap[repoi.priority()]++;
+  }
+
+  if ( priomap.size() <= 1 )
+  {
+    zypper.out().info(_("Repository priorities are without effect. All enabled repositories share the same priority.") );
+  }
+  else
+  {
+    zypper.out().infoLRHint(_("Repository priorities in effect:"),
+			    str::Format(_("See '%1%' for details")) % "zypper lr -P" );
+
+    Table t;
+    t.lineStyle( ::Colon );
+    priomap[RepoInfo::defaultPriority()];	// show always
+    for ( const auto & el : priomap )
+    {
+       t << ( TableRow()
+         << repoPriorityNumberAnnotated( el.first, 8 )
+         << str::Format(PL_("%1% repository", "%1% repositories", el.second) ) % str::numstring(el.second,2) );
+    }
+    cout << t;
+  }
+}
+
 // ----------------------------------------------------------------------------
 
 static bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_download )
@@ -1830,6 +1864,8 @@ void add_repo_from_file( Zypper & zypper,
 
     add_repo( zypper, repo );
   }
+
+  repoPrioSummary( zypper );
   return;
 }
 
