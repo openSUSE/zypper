@@ -3,13 +3,12 @@
 # Copyright (C) 2002 SuSE Linux AG.
 # Copyright (C) 1999-2001 SuSE GmbH.
 # I Made Wiryana <made@nakula.rvs.uni-bielefeld.de>, 1999.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2002-10-08 13:38+0200\n"
+"PO-Revision-Date: 2016-10-07 17:23+0700\n"
 "Last-Translator: I Made Wiryana <made@nakula.rvs.uni-bielefeld.de>\n"
 "Language-Team: Indonesian <i18n@suse.de>\n"
 "Language: id\n"
@@ -70,39 +69,39 @@ msgstr ""
 
 #: zypp/Dep.cc:96
 msgid "Provides"
-msgstr ""
+msgstr "Menyediakan\t"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
-msgstr ""
+msgstr "Prasyarat"
 
 #: zypp/Dep.cc:98
 msgid "Requires"
-msgstr ""
+msgstr "Syarat"
 
 #: zypp/Dep.cc:99
 msgid "Conflicts"
-msgstr ""
+msgstr "Konflik"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
-msgstr ""
+msgstr "Usang"
 
 #: zypp/Dep.cc:101
 msgid "Recommends"
-msgstr ""
+msgstr "Rekomendasi"
 
 #: zypp/Dep.cc:102
 msgid "Suggests"
-msgstr ""
+msgstr "Saran"
 
 #: zypp/Dep.cc:103
 msgid "Enhances"
-msgstr ""
+msgstr "Meningkatkan"
 
 #: zypp/Dep.cc:104
 msgid "Supplements"
-msgstr ""
+msgstr "Suplemen"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -112,12 +111,11 @@ msgstr ""
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
-msgstr ""
+msgstr "Eksekusi berhasil"
 
 #: zypp/target/TargetImpl.cc:332
-#, fuzzy
 msgid " execution failed"
-msgstr "DBI Execution failed: %s"
+msgstr "eksekusi gagal"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
@@ -125,49 +123,47 @@ msgstr "DBI Execution failed: %s"
 #: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr ""
+msgstr "%s telah dieksekusi as %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
-msgstr ""
+msgstr "Eksekusi dilewatkan ketika diberhentikan "
 
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
 #: zypp/target/TargetImpl.cc:607
 msgid "Error sending update message notification."
-msgstr ""
+msgstr "Gagal ketika mengirim pesan notifikasi pembaharuan"
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
-msgstr ""
+msgstr "Pesan baru"
 
 #: zypp/target/TargetImpl.cc:1219 zypp/target/TargetImpl.cc:1288
 #: zypp/target/TargetImpl.cc:1640
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."
-msgstr ""
+msgstr "Instalasi dibatalkan sesuai perintah"
 
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr ""
+msgstr "Maaf, versi dari libzypp telah dibangun tanpa HAL support."
 
 #: zypp/target/hal/HalContext.cc:117
-#, fuzzy
 msgid "HalContext not connected"
-msgstr "tidak tersambung"
+msgstr "HalContext tidak tersambung"
 
 #: zypp/target/hal/HalContext.cc:127
 msgid "HalDrive not initialized"
-msgstr ""
+msgstr "HalDrive tidak dinisialisasi"
 
 #: zypp/target/hal/HalContext.cc:137
 msgid "HalVolume not initialized"
-msgstr ""
+msgstr "HalVolume tidak dinisialisasi"
 
 #: zypp/target/hal/HalContext.cc:229
-#, fuzzy
 msgid "Unable to create dbus connection"
-msgstr "Tidak dapat memparse komponen url utama"
+msgstr "Tidak dapat membuat koneksi dbus"
 
 #: zypp/target/hal/HalContext.cc:242
 msgid "libhal_ctx_new: Can't create libhal context"
@@ -183,39 +179,41 @@ msgstr ""
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
-msgstr ""
+msgstr "Bukan CDROM"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
 #: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
 #: zypp/target/rpm/RpmDb.cc:2189
 msgid "RPM failed: "
-msgstr ""
+msgstr "RPM Gagal:"
 
 #. TranslatorExplanation first %s is file name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1124
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
-msgstr ""
+msgstr "Gagal mengimport publik key dari file %s: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1195
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
-msgstr ""
+msgstr "Gagal menghapus publik key %s: %s"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
 #: zypp/target/rpm/RpmDb.cc:1848
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr ""
+msgstr "Merubah konfigurasi file untuk %s:"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2024
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
+"rpm telah disimpan %s sebagai %s, tetapi tidak memungkinkan untuk menentukan "
+"perbedaan"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2026
@@ -224,12 +222,16 @@ msgid ""
 "rpm saved %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
+"rpm telah disimpan %s sebagai %s.\n"
+"Disini adalah 25 baris perbedaan pertama:\n"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2029
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
+"rpm telah dibuat %s sebagai %s, tetapi tidak memungkinkan untuk menentukan "
+"perbedaan"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2031
@@ -238,84 +240,85 @@ msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
+"rpm telah dibuat %s sebagai %s.\n"
+"Disini adalah 25 baris perbedaan pertama:\n"
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #: zypp/target/rpm/RpmDb.cc:2056 zypp/target/rpm/RpmDb.cc:2202
-#, fuzzy
 msgid "Additional rpm output"
-msgstr "Software Tambahan"
+msgstr "Tambahan output RPM"
 
 #: zypp/target/rpm/RpmDb.cc:2344
 #, c-format, boost-format
 msgid "created backup %s"
-msgstr ""
+msgstr "membuat backup %s"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2365
 msgid "Signature is OK"
-msgstr ""
+msgstr "Tanda tangan OK"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2367
 msgid "Unknown type of signature"
-msgstr ""
+msgstr "Tanda tangan tidak dikenal"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
 msgid "Signature does not verify"
-msgstr ""
+msgstr "Tanda tangan tidak terverifikasi"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2371
 msgid "Signature is OK, but key is not trusted"
-msgstr ""
+msgstr "Tanda tangan OK, tetapi kunci tidak terpercaya"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2373
 msgid "Signatures public key is not available"
-msgstr ""
+msgstr "Tanda tangan publik key tidak tersedia"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2375
 msgid "File does not exist or signature can't be checked"
-msgstr ""
+msgstr "File tidak ada atau tanda tangan tidak dapat diperiksa"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
-msgstr ""
+msgstr "Tindakan berikut dapat menyelesaikan:"
 
 #: zypp/RepoManager.cc:297
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr ""
+msgstr "Tidak dapat membaca direktori repo '%1%': Izin ditolak"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
 #: zypp/repo/PluginServices.cc:49
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Failed to read directory '%s'"
-msgstr "Failed to parse: %s."
+msgstr "Gagal membaca direktori '%s'"
 
 #: zypp/RepoManager.cc:315
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr ""
+msgstr "Tidak dapat membaca berkas repo '%1%': Izin ditolak"
 
 #: zypp/RepoManager.cc:338
 msgid "Repository alias cannot start with dot."
-msgstr ""
+msgstr "Alias repository tidak dapat dijalankan dengan dot."
 
 #: zypp/RepoManager.cc:349
 msgid "Service alias cannot start with dot."
-msgstr ""
+msgstr "Alias layanan tidak dapat dimulai dengan dot."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
 #: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Can't open file '%s' for writing."
-msgstr "Tidak dapat membuka %s untuk membaca: %s"
+msgstr "Tidak dapat membuka '%s' untuk menulis."
 
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
@@ -324,36 +327,38 @@ msgstr "Tidak dapat membuka %s untuk membaca: %s"
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
+"Layanan tidak diketahui '%1%': Menghapus layanan repositori yang tidak "
+"terpakai '%2%'"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] ""
+msgstr[0] "Metadata yang sah tidak ditemukan pada URL yang ditentukan"
 
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Can't create %s"
-msgstr "Italia"
+msgstr "Tidak dapat membuat %s"
 
 #: zypp/RepoManager.cc:1140
 msgid "Can't create metadata cache directory."
-msgstr ""
+msgstr "Tidak dapat membuat metadata direktori cache."
 
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr ""
+msgstr "Membangun repository '%s' cache"
 
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr ""
+msgstr "Tidak dapat membuat cache di %s - tidak ada izin untuk menulis"
 
 #: zypp/RepoManager.cc:1366
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Failed to cache repo (%d)."
-msgstr "Failed to parse: %s."
+msgstr "Gagal untuk men-cache repo (%d)."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
@@ -368,58 +373,58 @@ msgstr ""
 #: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
-msgstr ""
+msgstr "Error saat membaca dari '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
-msgstr ""
+msgstr "Error tidak diketahui dari '%s'"
 
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr ""
+msgstr "Menambah repository '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Skema url '%1' tidak valid"
+msgstr "Nama berkas repo tidak sah di '%s'"
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr ""
+msgstr "Menghapus reposotori '%s'"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
-msgstr ""
+msgstr "Tidak dapat mengetahui dimana repo disimpan"
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Can't delete '%s'"
-msgstr "Italia"
+msgstr "Tidak dapat menghapus '%s'"
 
 #: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
 msgid "Can't figure out where the service is stored."
-msgstr ""
+msgstr "Tidak dapat mengetahui dimana layanan disimpan"
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
 msgid "Url scheme does not allow a %s"
-msgstr ""
+msgstr "Skema Url tidak diizinkan %s"
 
 #: zypp/url/UrlBase.cc:173
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Invalid %s component '%s'"
-msgstr "Data komponen url '%2' tidak valid %1"
+msgstr "Komponen '%s' tidak sah %s"
 
 #: zypp/url/UrlBase.cc:180
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Invalid %s component"
-msgstr "Data tidak valid dalam komponen url %1"
+msgstr "Komponen '%s' tidak sah"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 #, fuzzy
@@ -428,44 +433,42 @@ msgstr "Parsing string query tidak didukung untuk url ini"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
-msgstr "Skema url merupakan komponen yang dibutuhkan"
+msgstr "Skema url merupakan komponen yang diperlukan"
 
 #: zypp/url/UrlBase.cc:830
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Invalid Url scheme '%s'"
-msgstr "Skema url '%1' tidak valid"
+msgstr "Skema url '%s' tidak valid"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
-msgstr ""
+msgstr "Skema Url tidak memperbolehkan nama pengguna"
 
 #: zypp/url/UrlBase.cc:983
 msgid "Url scheme does not allow a password"
-msgstr ""
+msgstr "Skema Url tidak memperbolehkan password"
 
 #: zypp/url/UrlBase.cc:1012
-#, fuzzy
 msgid "Url scheme requires a host component"
-msgstr "Skema url merupakan komponen yang dibutuhkan"
+msgstr "Skema Url membutuhkan komponen host"
 
 #: zypp/url/UrlBase.cc:1022
-#, fuzzy
 msgid "Url scheme does not allow a host component"
-msgstr "Skema url merupakan komponen yang dibutuhkan"
+msgstr "Skema Url tidak memperbolehkan komponen host"
 
 #: zypp/url/UrlBase.cc:1049
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Invalid host component '%s'"
-msgstr "Data komponen url nama host '%1' tidak valid"
+msgstr "Komponen host '%s' tidak valid"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
-msgstr ""
+msgstr "Skema Url tidak memperbolehkan port"
 
 #: zypp/url/UrlBase.cc:1081
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Invalid port component '%s'"
-msgstr "Data komponen url '%2' tidak valid %1"
+msgstr "Komponen Port '%s' tidak sah"
 
 #: zypp/url/UrlBase.cc:1098
 #, fuzzy
@@ -497,35 +500,35 @@ msgid "Invalid parameter array join separator character"
 msgstr "Karakter pemisah parameter map join tidak valid"
 
 #: zypp/ExternalProgram.cc:258
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Can't open pty (%s)."
-msgstr "Tidak dapat membuka %s: %m"
+msgstr "Tidak dapat membuka pty (%s)."
 
 #: zypp/ExternalProgram.cc:269
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Can't open pipe (%s)."
-msgstr "Tidak dapat membuka %s: %m"
+msgstr "Tidak dapat membuka pipe (%s)."
 
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr ""
+msgstr "Tidak dapat chroot untuk '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr ""
+msgstr "Tidak dapat chdir ke '%s' dalam chroot '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:361
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr "Tidak dapat membuka %s: %m"
+msgstr "Tidak dapat membuka ke '%s' (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
-msgstr ""
+msgstr "Tidak dapat mengeksekusi '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
@@ -535,39 +538,38 @@ msgstr ""
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
 msgid "Command exited with status %d."
-msgstr ""
+msgstr "Perintah berhenti dengan status %d"
 
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr ""
+msgstr "Perintah terhenti oleh sinyal %d (%s)."
 
 #: zypp/ExternalProgram.cc:532
-#, fuzzy
 msgid "Command exited with unknown error."
-msgstr "Perintah yang di jalankan ketika menyambung"
+msgstr "Perintah berhenti dengan error yang tidak diketahui"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:116
 msgid "(does not expire)"
-msgstr ""
+msgstr "(Tidak berakhir)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:125
 msgid "(EXPIRED)"
-msgstr ""
+msgstr "(BERAKHIR)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:129
 msgid "(expires within 24h)"
-msgstr ""
+msgstr "(Berakhir dalam waktu 24 jam)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] ""
+msgstr[0] "(Berakhir dalam %d hari)"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
@@ -575,35 +577,35 @@ msgstr "tidak dikenal"
 
 #: zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
-msgstr ""
+msgstr "Tidak didukung"
 
 #: zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr ""
+msgstr "Level 1"
 
 #: zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr ""
+msgstr "Level 2"
 
 #: zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr ""
+msgstr "Level 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr ""
+msgstr "Kontrak pelanggan tambahan diperlukan"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr ""
+msgstr "Tidak sah"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr ""
+msgstr "Tingkat dukungan ini tidak ditentukan"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
-msgstr ""
+msgstr "Vendor tidak menyediakan support"
 
 #: zypp/VendorSupportOptions.cc:45
 msgid ""
@@ -643,7 +645,7 @@ msgstr ""
 #. Defined LanguageCode constants
 #: zypp/CountryCode.cc:149 zypp/LanguageCode.cc:148
 msgid "No Code"
-msgstr ""
+msgstr "Tidak ada kode"
 
 # AD
 #: zypp/CountryCode.cc:158
@@ -737,9 +739,8 @@ msgstr "Aruba"
 # KY
 #. :ABW:533:
 #: zypp/CountryCode.cc:173
-#, fuzzy
 msgid "Aland Islands"
-msgstr "Pulau Cayman"
+msgstr "Kepulauan Aland"
 
 # AZ
 #. :ALA:248:
@@ -883,7 +884,6 @@ msgstr "Kongo"
 # CF
 #. :COD:180:
 #: zypp/CountryCode.cc:197
-#, fuzzy
 msgid "Central African Republic"
 msgstr "Republik Afrika Tengah"
 
@@ -897,7 +897,6 @@ msgstr "Swiss"
 # fuzzy
 #. :CHE:756:
 #: zypp/CountryCode.cc:200
-#, fuzzy
 msgid "Cote D'Ivoire"
 msgstr "Pantai Gading"
 
@@ -959,7 +958,7 @@ msgstr "Pulau Christmas"
 #. :CXR:162:
 #: zypp/CountryCode.cc:210
 msgid "Cyprus"
-msgstr "Kipros"
+msgstr "Cyprus"
 
 # CZ
 #. :CYP:196:
@@ -1066,7 +1065,7 @@ msgstr "Kepulauan Malvinas"
 #. :FLK:238:
 #: zypp/CountryCode.cc:228
 msgid "Federated States of Micronesia"
-msgstr ""
+msgstr "Federasi Mikronesia"
 
 # FO
 #. :FSM:583:
@@ -1083,7 +1082,7 @@ msgstr "Perancis"
 #. :FRA:250:
 #: zypp/CountryCode.cc:231
 msgid "Metropolitan France"
-msgstr ""
+msgstr "Perancis Metropolitan"
 
 # GA
 #. :FXX:249:
@@ -1094,7 +1093,7 @@ msgstr "Gabon"
 #. :GAB:266:
 #: zypp/CountryCode.cc:233
 msgid "United Kingdom"
-msgstr ""
+msgstr "Inggris"
 
 # GD
 #. :GBR:826:
@@ -1118,9 +1117,8 @@ msgstr "Guiana Perancis"
 # DE
 #. :GUF:254:
 #: zypp/CountryCode.cc:237
-#, fuzzy
 msgid "Guernsey"
-msgstr "Jerman"
+msgstr "Guernsey"
 
 # GH
 #: zypp/CountryCode.cc:238
@@ -1210,7 +1208,6 @@ msgstr "Hong Kong"
 # fuzzy
 #. :HKG:344:
 #: zypp/CountryCode.cc:252
-#, fuzzy
 msgid "Heard Island and McDonald Islands"
 msgstr "Pulau Heard dan Kepulauan McDonald"
 
@@ -1259,7 +1256,7 @@ msgstr "Palestina"
 #. :ISR:376:
 #: zypp/CountryCode.cc:260
 msgid "Isle of Man"
-msgstr ""
+msgstr "Pulau Man"
 
 # IN
 #: zypp/CountryCode.cc:261
@@ -1283,7 +1280,7 @@ msgstr "Iraq"
 #. :IRQ:368:
 #: zypp/CountryCode.cc:264
 msgid "Iran"
-msgstr "Iraq"
+msgstr "Iran"
 
 # IS
 #. :IRN:364:
@@ -1300,7 +1297,7 @@ msgstr "Italia"
 #. :ITA:380:
 #: zypp/CountryCode.cc:267
 msgid "Jersey"
-msgstr ""
+msgstr "Jersey"
 
 # JM
 # fuzzy
@@ -1318,7 +1315,7 @@ msgstr "Jordania"
 #. :JOR:400:
 #: zypp/CountryCode.cc:270
 msgid "Japan"
-msgstr "jepang"
+msgstr "Jepang"
 
 # KE
 #. :JPN:392:
@@ -1355,21 +1352,19 @@ msgstr "Comoros"
 # fuzzy
 #. :COM:174:
 #: zypp/CountryCode.cc:276
-#, fuzzy
 msgid "Saint Kitts and Nevis"
 msgstr "Santa Kitts dan Nevis"
 
 #. :KNA:659:
 #: zypp/CountryCode.cc:277
 msgid "North Korea"
-msgstr ""
+msgstr "Korea Utara"
 
 # ZA
 #. :PRK:408:
 #: zypp/CountryCode.cc:278
-#, fuzzy
 msgid "South Korea"
-msgstr "Afrika Selatan"
+msgstr "Korea Selatan"
 
 # KW
 #. :KOR:410:
@@ -1394,7 +1389,6 @@ msgstr "Kazakhstan"
 # fuzzy
 #. :KAZ:398:
 #: zypp/CountryCode.cc:282
-#, fuzzy
 msgid "Lao People's Democratic Republic"
 msgstr "Laos"
 
@@ -1408,7 +1402,6 @@ msgstr "Lebanon"
 # fuzzy
 #. :LBN:422:
 #: zypp/CountryCode.cc:284
-#, fuzzy
 msgid "Saint Lucia"
 msgstr "Santa Lucia"
 
@@ -1482,13 +1475,11 @@ msgstr "Moldova"
 # CG
 #. :MDA:498:
 #: zypp/CountryCode.cc:296
-#, fuzzy
 msgid "Montenegro"
 msgstr "Kongo"
 
 # SM
 #: zypp/CountryCode.cc:297
-#, fuzzy
 msgid "Saint Martin"
 msgstr "San Marino"
 
@@ -1727,7 +1718,6 @@ msgstr "Polandia"
 # fuzzy
 #. :POL:616:
 #: zypp/CountryCode.cc:336
-#, fuzzy
 msgid "Saint Pierre and Miquelon"
 msgstr "Santa Pierre dan Miquelon"
 
@@ -1746,9 +1736,8 @@ msgstr "Puerto Rico"
 # IO
 #. :PRI:630:
 #: zypp/CountryCode.cc:339
-#, fuzzy
 msgid "Palestinian Territory"
-msgstr "Inggris, Teritori Samudera Indonesia"
+msgstr "Palestina"
 
 # PT
 #. :PSE:275:
@@ -1788,7 +1777,6 @@ msgstr "Romania"
 
 #. :ROU:642:
 #: zypp/CountryCode.cc:346
-#, fuzzy
 msgid "Serbia"
 msgstr "Serbia"
 
@@ -1911,7 +1899,7 @@ msgstr "El Salvador"
 #. :SLV:222:
 #: zypp/CountryCode.cc:366
 msgid "Syria"
-msgstr "Suriname"
+msgstr "Suriah"
 
 # SZ
 #. :SYR:760:
@@ -1923,7 +1911,6 @@ msgstr "Swaziland"
 # fuzzy
 #. :SWZ:748:
 #: zypp/CountryCode.cc:368
-#, fuzzy
 msgid "Turks and Caicos Islands"
 msgstr "Kepulauan Turks dan Caicos"
 
@@ -1937,9 +1924,8 @@ msgstr "Chad"
 # fuzzy
 #. :TCD:148:
 #: zypp/CountryCode.cc:370
-#, fuzzy
 msgid "French Southern Territories"
-msgstr "Perancis, Teritori Selatan"
+msgstr "Perancis Selatan"
 
 # TG
 #. :ATF:260:
@@ -1951,7 +1937,7 @@ msgstr "Togo"
 #. :TGO:768:
 #: zypp/CountryCode.cc:372
 msgid "Thailand"
-msgstr "Muangthai"
+msgstr "Thailand"
 
 # TJ
 #. :THA:764:
@@ -1987,7 +1973,7 @@ msgstr "Tonga"
 #. :TON:776:
 #: zypp/CountryCode.cc:378
 msgid "East Timor"
-msgstr ""
+msgstr "Timor Leste"
 
 # TR
 #. :TLS:626:
@@ -2013,12 +1999,12 @@ msgstr "Tuvalu"
 #. :TUV:798:
 #: zypp/CountryCode.cc:382
 msgid "Taiwan"
-msgstr "Muangthai"
+msgstr "Taiwan"
 
 #. :TWN:158:
 #: zypp/CountryCode.cc:383
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzania"
 
 # UA
 #. :TZA:834:
@@ -2036,7 +2022,7 @@ msgstr "Uganda"
 #. :UGA:800:
 #: zypp/CountryCode.cc:386
 msgid "United States Minor Outlying Islands"
-msgstr "Amerika Serikat, kepulauan Luar Minor"
+msgstr "Kepulauan Luar Minor Amerika Serikat"
 
 # US
 #. :UMI:581:
@@ -2061,15 +2047,14 @@ msgstr "Uzbekistan"
 #. :UZB:860:
 #: zypp/CountryCode.cc:390
 msgid "Holy See (Vatican City State)"
-msgstr "Negara Kota Vatican (Holy See)"
+msgstr "Vatikan"
 
 # VC
 # fuzzy
 #. :VAT:336:
 #: zypp/CountryCode.cc:391
-#, fuzzy
 msgid "Saint Vincent and the Grenadines"
-msgstr "Santa Vincent dan Grenadin"
+msgstr "Saint Vincent and the Grenadines"
 
 # VE
 #. :VCT:670:
@@ -2081,23 +2066,22 @@ msgstr "Venezuela"
 # fuzzy
 #. :VEN:862:
 #: zypp/CountryCode.cc:393
-#, fuzzy
 msgid "British Virgin Islands"
-msgstr "Virgin Islands (Amerika)"
+msgstr "Kepulauan Virgin Britania Raya"
 
 # VI
 # fuzzy
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr "Virgin Islands (Amerika)"
+msgstr "Kepulauan Virgin Amerika Serikat"
 
 # VN
 # fuzzy
 #. :VIR:850:
 #: zypp/CountryCode.cc:395
 msgid "Vietnam"
-msgstr "Viet Nam"
+msgstr "Vietnam"
 
 # VU
 #. :VNM:704:
@@ -2150,50 +2134,48 @@ msgstr "Zimbabwe"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
-msgstr ""
+msgstr "Bahasa tidak diketahui"
 
 #. language code: aar aa
 #: zypp/LanguageCode.cc:161
 msgid "Afar"
-msgstr ""
+msgstr "Afar"
 
 # AZ
 #. language code: abk ab
 #: zypp/LanguageCode.cc:163
-#, fuzzy
 msgid "Abkhazian"
-msgstr "Azerbaijan"
+msgstr "Abkhazian"
 
 #. language code: ace
 #: zypp/LanguageCode.cc:165
-#, fuzzy
 msgid "Achinese"
-msgstr "Cina"
+msgstr "Bahasa Aceh"
 
 #. language code: ach
 #: zypp/LanguageCode.cc:167
 msgid "Acoli"
-msgstr ""
+msgstr "Acoli"
 
 #. language code: ada
 #: zypp/LanguageCode.cc:169
 msgid "Adangme"
-msgstr ""
+msgstr "Adangme"
 
 #. language code: ady
 #: zypp/LanguageCode.cc:171
 msgid "Adyghe"
-msgstr ""
+msgstr "Adyghe"
 
 #. language code: afa
 #: zypp/LanguageCode.cc:173
 msgid "Afro-Asiatic (Other)"
-msgstr ""
+msgstr "Afro-Asiatic (Other)"
 
 #. language code: afh
 #: zypp/LanguageCode.cc:175
 msgid "Afrihili"
-msgstr ""
+msgstr "Afrihili"
 
 #. language code: afr af
 #: zypp/LanguageCode.cc:177
@@ -2203,37 +2185,34 @@ msgstr "Afrika"
 #. language code: ain
 #: zypp/LanguageCode.cc:179
 msgid "Ainu"
-msgstr ""
+msgstr "Ainu"
 
 #. language code: aka ak
 #: zypp/LanguageCode.cc:181
-#, fuzzy
 msgid "Akan"
-msgstr "Afrika"
+msgstr "Akan"
 
 #. language code: akk
 #: zypp/LanguageCode.cc:183
 msgid "Akkadian"
-msgstr ""
+msgstr "Akkadia"
 
 # AL
 #. language code: alb sqi sq
 #: zypp/LanguageCode.cc:185 zypp/LanguageCode.cc:187
-#, fuzzy
 msgid "Albanian"
 msgstr "Albania"
 
 #. language code: ale
 #: zypp/LanguageCode.cc:189
 msgid "Aleut"
-msgstr ""
+msgstr "Aleut"
 
 # LK
 #. language code: alg
 #: zypp/LanguageCode.cc:191
-#, fuzzy
 msgid "Algonquian Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Algonquian"
 
 # ZA
 #. language code: alt
@@ -2244,21 +2223,19 @@ msgstr "Afrika Selatan"
 
 #. language code: amh am
 #: zypp/LanguageCode.cc:195
-#, fuzzy
 msgid "Amharic"
-msgstr "Arab"
+msgstr "Amharic"
 
 #. language code: ang
 #: zypp/LanguageCode.cc:197
 msgid "English, Old (ca.450-1100)"
-msgstr ""
+msgstr "English, Lampau (ca.450-1100)"
 
 # LK
 #. language code: apa
 #: zypp/LanguageCode.cc:199
-#, fuzzy
 msgid "Apache Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Athabaskan"
 
 #. language code: ara ar
 #: zypp/LanguageCode.cc:201
@@ -2267,136 +2244,123 @@ msgstr "Arab"
 
 #. language code: arc
 #: zypp/LanguageCode.cc:203
-#, fuzzy
 msgid "Aramaic"
-msgstr "Arab"
+msgstr "Aramaic"
 
 #. language code: arg an
 #: zypp/LanguageCode.cc:205
 msgid "Aragonese"
-msgstr ""
+msgstr "Aragonese"
 
 # AM
 #. language code: arm hye hy
 #: zypp/LanguageCode.cc:207 zypp/LanguageCode.cc:209
-#, fuzzy
 msgid "Armenian"
-msgstr "Armenia"
+msgstr "Armenian"
 
 # MR
 #. language code: arn
 #: zypp/LanguageCode.cc:211
-#, fuzzy
 msgid "Araucanian"
-msgstr "Mauritania"
+msgstr "Araucanian"
 
 #. language code: arp
 #: zypp/LanguageCode.cc:213
 msgid "Arapaho"
-msgstr ""
+msgstr "Arapaho"
 
 #. language code: art
 #: zypp/LanguageCode.cc:215
 msgid "Artificial (Other)"
-msgstr ""
+msgstr "Artificial (Other)"
 
 #. language code: arw
 #: zypp/LanguageCode.cc:217
 msgid "Arawak"
-msgstr ""
+msgstr "Arawak"
 
 #. language code: asm as
 #: zypp/LanguageCode.cc:219
 msgid "Assamese"
-msgstr ""
+msgstr "Assamese"
 
 # AT
 #. language code: ast
 #: zypp/LanguageCode.cc:221
-#, fuzzy
 msgid "Asturian"
 msgstr "Austria"
 
 # AU
 #. language code: ath
 #: zypp/LanguageCode.cc:223
-#, fuzzy
 msgid "Athapascan Languages"
-msgstr "Australia"
+msgstr "Athabaskan"
 
 # AU
 #. language code: aus
 #: zypp/LanguageCode.cc:225
-#, fuzzy
 msgid "Australian Languages"
 msgstr "Australia"
 
 #. language code: ava av
 #: zypp/LanguageCode.cc:227
-#, fuzzy
 msgid "Avaric"
-msgstr "Arab"
+msgstr "Avar"
 
 #. language code: ave ae
 #: zypp/LanguageCode.cc:229
 msgid "Avestan"
-msgstr ""
+msgstr "Avestan"
 
 #. language code: awa
 #: zypp/LanguageCode.cc:231
 msgid "Awadhi"
-msgstr ""
+msgstr "Awadhi"
 
 # MM
 #. language code: aym ay
 #: zypp/LanguageCode.cc:233
-#, fuzzy
 msgid "Aymara"
 msgstr "Myanmar"
 
 # AZ
 #. language code: aze az
 #: zypp/LanguageCode.cc:235
-#, fuzzy
 msgid "Azerbaijani"
 msgstr "Azerbaijan"
 
 # CA
 #. language code: bad
 #: zypp/LanguageCode.cc:237
-#, fuzzy
 msgid "Banda"
-msgstr "Kanada"
+msgstr "Banda"
 
 # LK
 #. language code: bai
 #: zypp/LanguageCode.cc:239
-#, fuzzy
 msgid "Bamileke Languages"
-msgstr "Sri Lanka"
+msgstr "Bamileke"
 
 #. language code: bak ba
 #: zypp/LanguageCode.cc:241
 msgid "Bashkir"
-msgstr ""
+msgstr "Bashkir"
 
 #. language code: bal
 #: zypp/LanguageCode.cc:243
 msgid "Baluchi"
-msgstr ""
+msgstr "Baluchi"
 
 # GM
 #. language code: bam bm
 #: zypp/LanguageCode.cc:245
-#, fuzzy
 msgid "Bambara"
-msgstr "Gambia"
+msgstr "Bambara"
 
 #. language code: ban
 #: zypp/LanguageCode.cc:247
-#, fuzzy
 msgid "Balinese"
-msgstr "Cina"
+msgstr "Bahasa Bali"
 
 #. language code: baq eus eu
 #: zypp/LanguageCode.cc:249 zypp/LanguageCode.cc:251
@@ -2405,14 +2369,13 @@ msgstr "Basque"
 
 #. language code: bas
 #: zypp/LanguageCode.cc:253
-#, fuzzy
 msgid "Basa"
-msgstr "Basque"
+msgstr "Bassa"
 
 #. language code: bat
 #: zypp/LanguageCode.cc:255
 msgid "Baltic (Other)"
-msgstr ""
+msgstr "Baltic"
 
 #. language code: bej
 #: zypp/LanguageCode.cc:257
