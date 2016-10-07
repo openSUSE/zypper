@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-10-07 16:33+0100\n"
+"PO-Revision-Date: 2016-10-07 16:48+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -1966,11 +1966,13 @@ msgstr "Priority repozitárov v platnosti:"
 
 #: src/repos.cc:204
 #, boost-format, boost-format
+#, boost-format
 msgid "See '%1%' for details"
 msgstr "Podrobnosti nájdete v '%1%'"
 
 #: src/repos.cc:213
 #, boost-format, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
 msgstr[0] "%1% repozitár"
@@ -3781,8 +3783,8 @@ msgid ""
 "-t, --remote                   Apply changes to all remote services.\n"
 "-m, --medium-type <type>       Apply changes to services of specified type.\n"
 msgstr ""
-"modifyservice (mr) <voľby> <alias|#|URI>\n"
-"modifyservice (mr) <voľby> <%s>\n"
+"modifyservice (ms) <voľby> <alias|#|URI>\n"
+"modifyservice (ms) <voľby> <%s>\n"
 "\n"
 "Zmení vlastnosti služieb zadaných pomocou aliasu, čísla, URI\n"
 "alebo úhrnných volieb '%s'.\n"
@@ -5404,7 +5406,7 @@ msgstr "Pozrite predchádzajúcu správu. Poskytne vám tip o príčine chyby."
 #: src/Zypper.cc:4524
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr "Voľba %1% nemá žiadny účinok bez globálnej voľby %2%"
+msgstr "Voľba %1% nemá žiadny účinok bez globálnej voľby %2%."
 
 #: src/Zypper.cc:4611 src/Zypper.cc:4659
 #, c-format, boost-format
