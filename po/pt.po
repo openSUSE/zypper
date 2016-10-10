@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-10-10 12:07+0000\n"
+"PO-Revision-Date: 2016-10-10 20:05+0000\n"
 "Last-Translator: Pedro Rosado <pdvrosado@gmail.com>\n"
 "Language-Team: Portuguese "
 "<https://l10n.opensuse.org/projects/zypper/master/pt/>\n"
@@ -785,6 +785,17 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
+"Sub-comandos do zypper são executáveis autónomos que vivem em\n"
+" zypper_execdir ('%1%').\n"
+"\n"
+"Para os sub-comandos, o zypper providencia um envoltório que tem "
+"conhecimento de onde\n"
+"os sub-comandos vivem e executam-nos, passando-lhes argumentos\n"
+"da linha de comandos.\n"
+"\n"
+"Se um sub-comando não for encontrado em zypper_execdir, o envoltório\n"
+"irá procurar no restante $PATH por ele. Como tal, é possível\n"
+"escrever extensões locais do zypper que não vivem no espaço do sistema.\n"
 
 #: src/subcommand.cc:401
 #, boost-format
@@ -792,54 +803,59 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
+"Usar as opções globais do zypper juntamente com sub-comandos, tal como\n"
+"executar sub-comandos em '%1%', não é suportado atualmente.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/subcommand.cc:418
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr ""
+msgstr "Comandos disponíveis do zypper em '%1%'"
 
 #. translators: headline of an enumeration
 #: src/subcommand.cc:423
 msgid "Zypper subcommands available from elsewhere on your $PATH"
-msgstr ""
+msgstr "Sub-comandos do zypper disponíveis de outros lugares no seu $PATH"
 
 #. translators: helptext; %1% is a zypper command
 #: src/subcommand.cc:428
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
+"Escreva '%1%' para obter ajuda relativa aos sub-comandos, caso esteja "
+"disponível."
 
 #. translators: %1% - command name
 #: src/subcommand.cc:451
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
-msgstr ""
+msgstr "Entrada manual para %1% não pode ser exibida"
 
 #: src/RequestFeedback.cc:40
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "'%s' não é um pacote ou nome de capacidade válida."
+msgstr ""
+"'%s' não foi encontrado entre os nomes de pacotes. A tentar capacidades."
 
 #: src/RequestFeedback.cc:46
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Package '%s' not found."
-msgstr "%s '%s' não encontrado"
+msgstr "Pacote '%s', não foi encontrado."
 
 #: src/RequestFeedback.cc:48
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' not found."
-msgstr "%s '%s' não encontrado"
+msgstr "Correção '%s' não encontrada."
 
 #: src/RequestFeedback.cc:50
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Product '%s' not found."
-msgstr "%s '%s' não encontrado"
+msgstr "Produto '%s' não encontrado."
 
 #: src/RequestFeedback.cc:52
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Pattern '%s' not found."
-msgstr "%s '%s' não encontrado"
+msgstr "Padrão '%s' não encontrado."
 
 #: src/RequestFeedback.cc:54 src/misc.cc:298
 #, c-format, boost-format
@@ -848,63 +864,63 @@ msgstr "Pacote de código '%s'  não encontrado."
 
 #. just in case
 #: src/RequestFeedback.cc:56
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Object '%s' not found."
-msgstr "'%s' não encontrado."
+msgstr "Objeto '%s' não encontrado."
 
 #: src/RequestFeedback.cc:61
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "Ficheiro %1 não encontrado no repositório."
+msgstr "Pacote '%s' não encontrado nos repositórios especificados."
 
 #: src/RequestFeedback.cc:63
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Ficheiro %1 não encontrado no repositório."
+msgstr "Correção '%s' não encontrada nos repositórios especificados."
 
 #: src/RequestFeedback.cc:65
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Ficheiro %1 não encontrado no repositório."
+msgstr "Produto '%s' não encontrado nos repositórios especificados."
 
 #: src/RequestFeedback.cc:67
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "Ficheiro %1 não encontrado no repositório."
+msgstr "Padrão '%s' não encontrado nos repositórios especificados."
 
 #: src/RequestFeedback.cc:69
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Pacote de código '%s'  não encontrado."
+msgstr "Pacote fonte '%s' não encontrado nos repositórios especificados."
 
 #. just in case
 #: src/RequestFeedback.cc:71
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "Ficheiro %1 não encontrado no repositório."
+msgstr "Objeto '%s' não encontrado nos repositórios especificados."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No provider of '%s' found."
-msgstr "Nenhum fornecedor de '%s' encontrado."
+msgstr "Nenhum fornecedor para '%s' encontrado."
 
 #. wildcards used
 #: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr ""
+msgstr "Nenhum pacote correspondente a '%s' está instalado."
 
 #: src/RequestFeedback.cc:86
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Package '%s' is not installed."
-msgstr "Os Pacotes estão a ser Instalados..."
+msgstr "O pacote '%s' não se encontra instalado."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No provider of '%s' is installed."
-msgstr "Nenhum fornecedor de '%s' encontrado."
+msgstr "Nenhum fornecedor para '%s' está instalado."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
@@ -918,16 +934,18 @@ msgid "'%s' providing '%s' is already installed."
 msgstr "'%s' a fornecer '%s' já está instalado."
 
 #: src/RequestFeedback.cc:105
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "No update candidate for '%s'. The highest available version is already "
 "installed."
-msgstr "a saltar %s '%s' (a versão mais recente já se encontrada instalada)"
+msgstr ""
+"Nenhum candidato a atualização para '%s'. A versão mais recente já se "
+"encontra instada."
 
 #: src/RequestFeedback.cc:108
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No update candidate for '%s'."
-msgstr "Nenhum URL definido para '%s'."
+msgstr "Nenhum candidato a atualização para '%s'."
 
 #: src/RequestFeedback.cc:114
 #, c-format, boost-format
@@ -935,6 +953,8 @@ msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
 msgstr ""
+"Existe um candidato a atualização '%s' para '%s', mas não corresponde à "
+"versão, arquitetura ou repositório especificado."
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -942,6 +962,8 @@ msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
 "Use '%s' to install this candidate."
 msgstr ""
+"Existe um candidato a atualização '%s', mas pertence a um fornecedor "
+"diferente. Utilize '%s' para instalar este candidato."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -949,6 +971,8 @@ msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
 "lower priority. Use '%s' to install this candidate."
 msgstr ""
+"Existe um candidato a atualização para '%s', mas provém de um repositório "
+"com baixa prioridade. Utilize '%s' para instalar este candidato."
 
 #: src/RequestFeedback.cc:142
 #, c-format, boost-format
@@ -956,14 +980,17 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
+"Existe um candidato a atualização para '%s', mas está bloqueado. Utilize '%"
+"s' para desbloqueá-lo."
 
 #: src/RequestFeedback.cc:148
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"Pacote %s-%s.%s não encontrado nos repositórios, incapaz de reinstalar."
+"O pacote '%s' não está disponível nos seus repositórios. Incapaz de "
+"reinstalar, atualizar ou desatualizar."
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
@@ -971,22 +998,24 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
+"O seguinte pacote '%s' do repositório '%s' possui uma versão inferior "
+"comparado à instalada."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Use '%s' to force installation of the package."
-msgstr "Forçar instalação do pacote"
+msgstr "Utilize '%s' para forçar a instalação do pacote."
 
 #: src/RequestFeedback.cc:169
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "%s é interactivo, ignorado."
+msgstr "Correção '%s' é interativa, avançar."
 
 #: src/RequestFeedback.cc:175
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' is not needed."
-msgstr "%s '%s' não encontrado"
+msgstr "Correção '%s' não é necessária."
 
 #: src/RequestFeedback.cc:181
 #, boost-format
@@ -994,62 +1023,66 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
+"Correção '%1%' é opcional. Utilize '%2%' para a instalar ou '%3%' para "
+"incluir todas as correções opcionais."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
+"Correção '%s' está bloqueada. Utilize '%s' para a instalar ou '%s' para a "
+"desbloquear."
 
 #: src/RequestFeedback.cc:199
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "Ficheiro %1 não encontrado no repositório."
+msgstr "Correção '%s' não está presente na categoria especificada."
 
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
-msgstr ""
+msgstr "Correção '%s' não apresenta a severidade especificada."
 
 #: src/RequestFeedback.cc:213
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "Ficheiro %1 não encontrado no repositório."
+msgstr "Correção '%s'  foi emitida após a data especificada."
 
 #: src/RequestFeedback.cc:218
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "Ficheiro '%s' do repositório '%s' não está assinado, continuar?"
+msgstr "Selecionar '%s' do repositório '%s' para instalação."
 
 #: src/RequestFeedback.cc:222
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "A aceitar um ficheiro %s não assinado do repositório '%s'."
+msgstr "Forçar a instação de '%s' do repositório '%s'."
 
 #: src/RequestFeedback.cc:226
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Selecting '%s' for removal."
-msgstr "Auto-seleccionar '%s' depois de %u segundos."
+msgstr "Selecionar '%s' para remoção."
 
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr ""
+msgstr "'%s' está bloqueado. Utilize '%s' para o desbloquear."
 
 #: src/RequestFeedback.cc:238
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Adding requirement: '%s'."
-msgstr "A Adicionar repositório '%s'"
+msgstr "A adicionar requisito: '%s'."
 
 #: src/RequestFeedback.cc:241
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Adding conflict: '%s'."
-msgstr "A Adicionar repositório '%s'"
+msgstr "A adicionar conflito: '%s'."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Será que quis dizer %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1057,134 +1090,134 @@ msgstr ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... e mais %1% item."
+msgstr[1] "... e mais %1% itens."
 
 #: src/Summary.cc:505
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] "O seguinte NOVO pacote irá ser instalado:"
-msgstr[1] "Os seguintes NOVOS pacotes irão ser instalados:"
+msgstr[0] "O seguinte pacote NOVO irá ser instalado:"
+msgstr[1] "Os %d seguintes NOVOS pacotes irão ser instalados:"
 
 #: src/Summary.cc:510
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] "A seguinte NOVA correcção irá ser instalada:"
-msgstr[1] "As seguintes NOVAS correcções irão ser instaladas:"
+msgstr[0] "A seguinte NOVA correção irá ser instalada:"
+msgstr[1] "As seguintes %d correções NOVAS irão ser instaladas:"
 
 #: src/Summary.cc:515
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "O seguinte NOVO padrão irá ser instalado:"
-msgstr[1] "Os seguintes NOVOS padrões irão ser instalados:"
+msgstr[1] "Os %d seguintes NOVOS padrões irão ser instalados:"
 
 #: src/Summary.cc:520
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "O seguinte NOVO produto irá ser instalado:"
-msgstr[1] "Os seguintes NOVOS produtos irão ser instalados:"
+msgstr[1] "Os %d seguintes NOVOS produtos irão ser instalados:"
 
 #: src/Summary.cc:525
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "O seguinte pacote fonte irá ser instalado:"
-msgstr[1] "Os seguintes pacotes fonte irão ser instalados:"
+msgstr[1] "Os %d pacotes fonte seguintes irão ser instalados:"
 
 #: src/Summary.cc:530
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] "O seguinte padrão irá ser reinstalado:"
-msgstr[1] "Os seguintes padrões irão ser reinstalados:"
+msgstr[0] "A seguinte aplicação irá ser instalada:"
+msgstr[1] "As %d aplicações seguintes irão ser instaladas:"
 
 #: src/Summary.cc:552
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "O seguinte pacote irá ser REMOVIDO:"
-msgstr[1] "Os seguintes pacotes irão ser REMOVIDOS:"
+msgstr[1] "Os %d pacotes seguintes irão ser REMOVIDOS:"
 
 #: src/Summary.cc:557
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] "A seguinte correcção irá ser REMOVIDA:"
-msgstr[1] "As seguintes correcções irão ser REMOVIDAS:"
+msgstr[0] "A seguinte correção irá ser REMOVIDA:"
+msgstr[1] "As %d correções seguintes irão ser REMOVIDAS:"
 
 #: src/Summary.cc:562
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "O seguinte padrão irá ser REMOVIDO:"
-msgstr[1] "Os seguintes padrões irão ser REMOVIDOS:"
+msgstr[1] "Os %d padrões seguintes irão ser REMOVIDOS:"
 
 #: src/Summary.cc:567
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "O seguinte produto irá ser REMOVIDO:"
-msgstr[1] "Os seguintes produtos irão ser REMOVIDOS:"
+msgstr[1] "Os %d produtos seguintes irão ser REMOVIDOS:"
 
 #: src/Summary.cc:572
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] "O seguinte padrão irá ser REMOVIDO:"
-msgstr[1] "Os seguintes padrões irão ser REMOVIDOS:"
+msgstr[0] "A seguinte aplicação irá ser REMOVIDA:"
+msgstr[1] "As %d aplicações seguintes irão ser REMOVIDAS:"
 
 #: src/Summary.cc:591
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "O seguinte pacote irá ser melhorado:"
-msgstr[1] "Os seguintes pacotes irão ser melhorados:"
+msgstr[0] "O seguinte pacote irá ser atualizado:"
+msgstr[1] "Os %d pacotes seguintes irão ser atualizados:"
 
 #: src/Summary.cc:596
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "A seguinte correcção irá ser melhorada:"
-msgstr[1] "As seguintes correcções irão ser melhoradas:"
+msgstr[0] "A seguinte correção irá ser atualizada:"
+msgstr[1] "As %d correções seguintes irão ser atualizadas:"
 
 #: src/Summary.cc:601
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] "O seguinte padrão irá ser melhorado:"
-msgstr[1] "Os seguintes padrões irão ser actualizados:"
+msgstr[0] "O seguinte padrão irá ser atualizado:"
+msgstr[1] "Os %d padrões seguintes irão ser atualizados:"
 
 #: src/Summary.cc:606
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
-msgstr[0] "O seguinte produto irá ser melhorado:"
-msgstr[1] "Os seguintes produtos irão ser melhorados:"
+msgstr[0] "O seguinte produto irá ser atualizado:"
+msgstr[1] "Os %d produtos seguintes irão ser atualizados:"
 
 #: src/Summary.cc:611
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "O seguinte padrão irá ser melhorado:"
-msgstr[1] "Os seguintes padrões irão ser actualizados:"
+msgstr[0] "A seguinte aplicação irá ser atualizada:"
+msgstr[1] "As %d aplicações seguintes irão ser atualizadas:"
 
 #: src/Summary.cc:630
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "O seguinte pacote irá ser desmelhorado:"
-msgstr[1] "Os seguintes pacotes irão ser desmelhorados:"
+msgstr[0] "O pacote seguinte irá ser desatualizado:"
+msgstr[1] "Os %d pacotes seguintes irão ser desatualizados:"
 
 #: src/Summary.cc:635
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "A seguinte correcção irá ser desmelhorada:"
-msgstr[1] "As seguintes correcções irão ser desmelhoradas:"
+msgstr[0] "A correção seguinte será desatualizada:"
+msgstr[1] "As %d correções seguintes irão ser desatualizadas:"
 
 #: src/Summary.cc:640
 #, fuzzy, c-format, boost-format
@@ -1514,12 +1547,12 @@ msgstr[1] "Os seguintes padrões irão ser reinstalados:"
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/Summary.cc:1191
 msgid "Available"
-msgstr ""
+msgstr "Disponível"
 
 #: src/Summary.cc:1202
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
-msgstr ""
+msgstr "Execute '%1%' para ver a lista completa de itens bloqueados."
 
 #: src/Summary.cc:1212
 #, fuzzy, c-format, boost-format
@@ -1534,9 +1567,8 @@ msgid "Overall download size: %1%. Already cached: %2%."
 msgstr ""
 
 #: src/Summary.cc:1233
-#, fuzzy
 msgid "Download only."
-msgstr "A transferir"
+msgstr "Somente a descarregar."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1239
@@ -1665,7 +1697,7 @@ msgstr[1] "novos pacotes para instalado"
 
 #: src/Summary.cc:1430
 msgid "System reboot required."
-msgstr ""
+msgstr "É necessário o reinicio do sistema."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
@@ -1709,7 +1741,7 @@ msgstr "a/r/i"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr ""
+msgstr "Desative a verificação do certificado de autoridade SSL e prossiga."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
@@ -1719,21 +1751,19 @@ msgstr "(A)bortar, (R)epetir, (I)gnorar?"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
-msgstr ""
+msgstr "verificação do certificado de autoridade SSL desativada."
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
-msgstr ""
+msgstr "Nenhum dispositivo detetado, impossível ejetar."
 
 #: src/callbacks/media.cc:110
-#, fuzzy
 msgid "Try to eject the device manually."
-msgstr "Tentar obter o ficheiro outra vez."
+msgstr "Tente ejetar o dispositivo manualmente."
 
 #: src/callbacks/media.cc:121
-#, fuzzy
 msgid "Detected devices:"
-msgstr "Desactivar os seguintes dispositivos:"
+msgstr "Dispositivos detetados:"
 
 # cancel button label
 #: src/callbacks/media.cc:136
@@ -1741,20 +1771,17 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: src/callbacks/media.cc:139
-#, fuzzy
 msgid "Select device to eject."
-msgstr "Seleccione primeiro o perfil a remover."
+msgstr "Selecione o dispositivo a ejetar."
 
 #: src/callbacks/media.cc:154
-#, fuzzy
 msgid "Insert the CD/DVD and press ENTER to continue."
-msgstr "Insira o disco e pressione ENTER."
+msgstr "Insira o CD/DVD e prima ENTER para prosseguir."
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:157
-#, fuzzy
 msgid "Retrying..."
-msgstr "A iniciar..."
+msgstr "A tentar novamente..."
 
 #. cd/dvd options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -1768,8 +1795,9 @@ msgid "a/r/i/u/e"
 msgstr "a/r/i"
 
 #: src/callbacks/media.cc:174
+#, fuzzy
 msgid "Eject medium."
-msgstr ""
+msgstr "Ejetar média."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -1816,7 +1844,7 @@ msgstr "Comando '%s' desconhecido"
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
 msgid "volatile"
-msgstr ""
+msgstr "volátil"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
 #: src/repos.cc:53
@@ -1828,16 +1856,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "prioridade padrão"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "Prioridade"
+msgstr "prioridade elevada"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "prioridade reduzida"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1900,12 +1927,12 @@ msgstr "A obter metadados do repositório '%s'"
 #: src/repos.cc:328
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
-msgstr ""
+msgstr "Quer desativar o repositório %s permanentemente?"
 
 #: src/repos.cc:344
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
-msgstr ""
+msgstr "Erro ao desativar o repositório '%s'."
 
 #: src/repos.cc:360
 #, c-format, boost-format
@@ -1997,9 +2024,9 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "Use '%s' para obter a lista dos repositórios definidos."
 
 #: src/repos.cc:698
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Ignoring disabled repository '%s'"
-msgstr "A saltar o repositório desactivado '%s'"
+msgstr "A ignorar o repositório desativado '%s'"
 
 #: src/repos.cc:781 src/repos.cc:787
 #, c-format, boost-format
@@ -2009,7 +2036,7 @@ msgstr "A ignorar o repositório '%s' devido à opção '%s'."
 #: src/repos.cc:814
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr ""
+msgstr "A examinar o conteúdo do repositório desativado '%s'."
 
 #: src/repos.cc:830 src/repos.cc:863 src/repos.cc:1363
 #, c-format, boost-format
@@ -2042,7 +2069,7 @@ msgstr "A desactivar repositório '%s'."
 #: src/repos.cc:899
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
-msgstr ""
+msgstr "A ativar temporariamente o repositório '%s'."
 
 #: src/repos.cc:906
 #, c-format, boost-format
@@ -2079,9 +2106,8 @@ msgstr "Activado"
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/repos.cc:1037 src/repos.cc:1167 src/repos.cc:1698 src/repos.cc:2472
-#, fuzzy
 msgid "GPG Check"
-msgstr "Verificação de DNS"
+msgstr "Verificação de GPG"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
@@ -2109,7 +2135,7 @@ msgstr "Serviço"
 
 #: src/repos.cc:1135
 msgid "No repositories defined."
-msgstr ""
+msgstr "Sem repositórios definidos."
 
 #: src/repos.cc:1136
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
@@ -2129,9 +2155,8 @@ msgid "Off"
 msgstr "Desligado"
 
 #: src/repos.cc:1170
-#, fuzzy
 msgid "Keep Packages"
-msgstr "Pacotes de Sistema"
+msgstr "Manter Pacotes"
 
 #: src/repos.cc:1172
 msgid "GPG Key URI"
@@ -2149,7 +2174,7 @@ msgstr "Servidor de Impressão"
 
 #: src/repos.cc:1175
 msgid "Keywords"
-msgstr ""
+msgstr "Palavras-chave"
 
 #: src/repos.cc:1176
 msgid "Repo Info Path"
@@ -2694,7 +2719,7 @@ msgstr "A ler pacotes instalados..."
 
 #: src/repos.cc:3237
 msgid "Problem occurred while reading the installed packages:"
-msgstr ""
+msgstr "Um problema ocorreu ao ler os pacotes instalados:"
 
 #: src/update.cc:84
 #, c-format, boost-format
@@ -2771,7 +2796,7 @@ msgstr "Correcções"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "Bloqueado"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2780,18 +2805,20 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "Categorias incluídas"
 
 #: src/update.cc:603
-#, fuzzy
 msgid "The following software management updates will be installed first:"
-msgstr "Os seguintes pacotes irão ser instalados:\n"
+msgstr ""
+"As seguintes atualizações de gestão de software irão ser instaladas em "
+"antemão:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "Os seguintes pacotes irão ser instalados:\n"
+msgstr ""
+"As atualizações de gestão de software necessárias irão ser instaladas de "
+"antemão:"
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
@@ -2800,9 +2827,8 @@ msgstr "Nenhuma actualização encontrada."
 # /usr/lib/YaST2/clients/menu.ycp:43
 #. translator: Table headline
 #: src/update.cc:621
-#, fuzzy
 msgid "The following updates are also available:"
-msgstr "Estão disponíveis as seguintes actualizações:"
+msgstr "As seguintes atualizações estão também disponíveis:"
 
 #: src/update.cc:714
 msgid "Package updates"
@@ -2817,19 +2843,16 @@ msgid "Product updates"
 msgstr "Actualizações de produtos"
 
 #: src/update.cc:806
-#, fuzzy
 msgid "Current Version"
-msgstr "Ligação Actual"
+msgstr "Versão Atual"
 
 #: src/update.cc:807
-#, fuzzy
 msgid "Available Version"
-msgstr "Memória Disponível"
+msgstr "Versão Disponível"
 
 #: src/update.cc:969
-#, fuzzy
 msgid "No matching issues found."
-msgstr "Não foram encontradas igualdades"
+msgstr "Não foram encontrados problemas de correspondência."
 
 #: src/update.cc:977
 #, fuzzy
@@ -2839,6 +2862,8 @@ msgstr "O seguinte %s irá ser desactualizado:"
 #: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
+"Foram encontradas correspondências nas descrições da correção, nas seguintes "
+"correções:"
 
 #: src/update.cc:1054
 #, c-format, boost-format
@@ -2870,31 +2895,32 @@ msgstr ""
 
 #: src/Zypper.cc:86
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "A norma é excluir correções opcionais."
 
 #: src/Zypper.cc:87
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "A norma é incluir correções opcionais."
 
 #: src/Zypper.cc:110
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
+"O PackageKit está a bloquear o zypper. Isto acontece se tiver uma applet de "
+"atualizações ou outra aplicação de gestão de software que utilize o "
+"PackageKit a ser executada."
 
 #: src/Zypper.cc:115
-#, fuzzy
 msgid "Tell PackageKit to quit?"
-msgstr "Aviso do PackageKit"
+msgstr "Dizer ao PackageKit para encerrar?"
 
 #: src/Zypper.cc:124
 msgid "PackageKit is still running (probably busy)."
-msgstr ""
+msgstr "O PackageKit ainda está a ser executado (provavelmente está ocupado)."
 
 #: src/Zypper.cc:125
-#, fuzzy
 msgid "Try again?"
-msgstr "A tentar de novo..."
+msgstr "Tentar novamente?"
 
 #: src/Zypper.cc:195
 #, boost-format
@@ -2909,15 +2935,15 @@ msgstr ""
 
 #: src/Zypper.cc:275
 msgid "Command options:"
-msgstr ""
+msgstr "Opções de comando:"
 
 #: src/Zypper.cc:278
 msgid "Expert options:"
-msgstr ""
+msgstr "Opções para peritos:"
 
 #: src/Zypper.cc:281
 msgid "This command has no additional options."
-msgstr ""
+msgstr "Este comando não possui opções adicionais."
 
 #: src/Zypper.cc:412 src/Zypper.cc:1351
 msgid "Unexpected exception."
@@ -3183,14 +3209,12 @@ msgid "Autorefresh disabled."
 msgstr "Auto-actualização desactivada."
 
 #: src/Zypper.cc:1069
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "Auto-actualização desactivada."
+msgstr "Repositórios de CD/DVD foram desativados."
 
 #: src/Zypper.cc:1076
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "Auto-actualização desactivada."
+msgstr "Repositórios remotos foram desativados."
 
 #: src/Zypper.cc:1083
 msgid "Ignoring installed resolvables."
@@ -3206,7 +3230,7 @@ msgstr "A opção %s não tem nenhum efeito aqui, a ignorar."
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1240
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "A shell do zypper não suporta a execução de sub-comandos."
 
 #: src/Zypper.cc:1319
 #, c-format, boost-format
@@ -5785,17 +5809,16 @@ msgstr "É necessário reiniciar"
 #. translator: patch status
 #: src/utils/misc.cc:140
 msgid "undetermined"
-msgstr ""
+msgstr "indeterminado"
 
 #. << _("Repository")
 #: src/utils/misc.cc:290
 msgid "Issue"
-msgstr ""
+msgstr "problema"
 
 #: src/utils/misc.cc:291
-#, fuzzy
 msgid "No."
-msgstr "Não"
+msgstr "Não."
 
 #: src/utils/misc.cc:292
 msgid "Patch"
