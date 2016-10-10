@@ -15,51 +15,52 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2009-10-08 12:36+0100\n"
-"Last-Translator: Hugo Ricardo Gonçalves Martins <rikhard.martins@gmail.com>\n"
-"Language-Team: Portuguese <opensuse-pt@opensuse.org>\n"
+"PO-Revision-Date: 2016-10-10 12:07+0000\n"
+"Last-Translator: Pedro Rosado <pdvrosado@gmail.com>\n"
+"Language-Team: Portuguese "
+"<https://l10n.opensuse.org/projects/zypper/master/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.2\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
-msgstr ""
+msgstr "Repositório:"
 
 #: src/callbacks/keyring.h:38
 msgid "Key Name:"
-msgstr ""
+msgstr "Termo Chave:"
 
 #: src/callbacks/keyring.h:39
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Impressão chave:"
 
 #: src/callbacks/keyring.h:40
 msgid "Key Created:"
-msgstr ""
+msgstr "Chave criada:"
 
 #: src/callbacks/keyring.h:41
 msgid "Key Expires:"
-msgstr ""
+msgstr "Chave expira:"
 
 #: src/callbacks/keyring.h:42
 msgid "Rpm Name:"
-msgstr ""
+msgstr "Nome Rpm:"
 
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr ""
+msgstr "O ficheiro de assinatura da chave gpg '%1%' expirou."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "O ficheiro de assinatura da chave gpg '%1%' vai expirar num %2% dia."
+msgstr[1] "O ficheiro de assinatura da chave gpg '%1%' vai expirar em %2% dias."
 
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
@@ -113,9 +114,8 @@ msgstr ""
 "desconhecida. Continuar?"
 
 #: src/callbacks/keyring.h:173
-#, fuzzy
 msgid "Automatically importing the following key:"
-msgstr "A confiar automaticamente a seguinte chave:"
+msgstr "A importar automaticamente a seguinte chave:"
 
 #: src/callbacks/keyring.h:175
 msgid "Automatically trusting the following key:"
@@ -127,7 +127,6 @@ msgstr "Recebida nova chave de assinatura de repositório ou pacote:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
-#, fuzzy
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr "Quer rejeitar a chave, confiar temporariamente, ou confiar sempre?"
 
@@ -137,7 +136,6 @@ msgstr "Quer rejeitar a chave, confiar temporariamente, ou confiar sempre?"
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:211
-#, fuzzy
 msgid "r/t/a/"
 msgstr "r/t/s"
 
@@ -225,12 +223,19 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
+"Falhou a verificação do sumário para o ficheiro '%1%'\n"
+"[%2%]\n"
+"\n"
+"  esperado %3%\n"
+"  obteve  %4%\n"
 
 #: src/callbacks/keyring.h:344
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
+"Aceitar pacotes cuja soma de verificação está errada pode levar a um sistema "
+"corrompido e em casos extremos a um sistema comprometido."
 
 #: src/callbacks/keyring.h:352
 #, boost-format
@@ -242,26 +247,32 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
+"No entanto, se se certificou que o ficheiro cuja soma de verificação '%1%..' "
+"está segura / correta\n"
+"e possa ser usado nesta operação, introduza os primeiros 4 caracteres da "
+"soma de verificação\n"
+"para desbloquear o uso deste ficheiro à sua responsabilidade. A não "
+"introdução de caracteres irá descartar o ficheiro.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:359
 msgid "discard"
-msgstr ""
+msgstr "descartar"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:361
 msgid "Unblock using this file on your own risk."
-msgstr ""
+msgstr "Desbloqueie o uso do ficheiro à sua responsabilidade."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:363
 msgid "Discard the file."
-msgstr ""
+msgstr "Descarte o ficheiro."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:368
 msgid "Unblock or discard?"
-msgstr ""
+msgstr "Desbloquear ou descartar?"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:145
@@ -270,9 +281,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "A correr: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:202
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "A remover %s-%s"
+msgstr "A remover %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:207
@@ -286,9 +297,9 @@ msgid "Removal of %s failed:"
 msgstr "A remoção de%s falhou:"
 
 #: src/callbacks/rpm.h:273
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "A Instalar: %s-%s"
+msgstr "A Instalar: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:278
@@ -297,9 +308,9 @@ msgid "Installing: %s-%s"
 msgstr "A Instalar: %s-%s"
 
 #: src/callbacks/rpm.h:302
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "A instalação de %s-%s falhou:"
+msgstr "A instalação de %s falhou:"
 
 #: src/callbacks/rpm.h:304
 #, c-format, boost-format
@@ -309,7 +320,7 @@ msgstr "A instalação de %s-%s falhou:"
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:350
 msgid "Checking for file conflicts:"
-msgstr ""
+msgstr "A verificar conflitos de ficheiros:"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:384
@@ -319,6 +330,9 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
+"Verificar conflitos entre ficheiros não requer que estes sejam descarregados "
+"em antemão de forma a aceder às suas listas de ficheiros. Veja a opção '%1%' "
+"para mais detalhes, no manual do zypper."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:391
@@ -330,19 +344,23 @@ msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
 msgstr[0] ""
+"O seguinte pacote teve de ser excluído da verificação de conflitos de "
+"ficheiro porque ainda não foi descarregado:"
 msgstr[1] ""
+"O seguintes pacotes (%1%) tiveram de ser excluídos da verificação de "
+"conflitos de ficheiro porque ainda não foram descarregados:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:402
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Foi detetado %1% conflito de ficheiro:"
+msgstr[1] "Foram detetados %1% conflitos de ficheiro:"
 
 #: src/callbacks/rpm.h:410
 msgid "Conflicting files will be replaced."
-msgstr ""
+msgstr "Ficheiros em conflito serão substituídos."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
 #: src/callbacks/rpm.h:416
@@ -351,13 +369,16 @@ msgid ""
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
 msgstr ""
+"Conflitos de ficheiro ocorrem quando dois pacotes tentam instalar ficheiros "
+"com o mesmo nome mas conteúdo diferente. Se continuar, os ficheiros "
+"conflituosos serão substituídos e o seu conteúdo será perdido."
 
 #: src/callbacks/locks.h:27
-#, fuzzy
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
 msgstr ""
-"A seguinte interrogação tranca alguns dos objectos que quer destrancar:"
+"A seguinte questão tranca os mesmos objetos tal como o objeto que quer "
+"remover:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
@@ -366,9 +387,8 @@ msgstr ""
 
 # power-off message
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
-#, fuzzy
 msgid "Do you want to remove this lock?"
-msgstr "Pretende instalar este ficheiro?"
+msgstr "Deseja remover este bloqueio?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
@@ -392,7 +412,7 @@ msgstr "(%s descompactado)"
 #: src/callbacks/repo.h:112
 #, boost-format
 msgid "In cache %1%"
-msgstr ""
+msgstr "Em cache %1%"
 
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
@@ -401,21 +421,21 @@ msgstr "A obter %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
-msgstr ""
+msgstr "A verificação de assinatura falhou"
 
 #: src/callbacks/repo.h:236
 msgid "Accepting package despite the error."
-msgstr ""
+msgstr "Aceitar o pacote apesar do erro."
 
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Valor do filtro de categoria é suspeito ('%1%')."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Valor do filtro de severidade é suspeito ('%1%')."
 
 #: src/output/Out.h:25 src/repos.cc:142 src/repos.cc:170
 msgid "Yes"
@@ -427,11 +447,11 @@ msgstr "Não"
 
 #: src/Zypper.h:463
 msgid "Finished with error."
-msgstr ""
+msgstr "Terminado, mas com erros."
 
 #: src/Zypper.h:465
 msgid "Done."
-msgstr ""
+msgstr "Feito."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -503,8 +523,8 @@ msgstr "Descrição"
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Haverá %1% correspondência para '%2%'."
+msgstr[1] "Haverá %1% correspondências para '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:195
@@ -519,9 +539,8 @@ msgid "Information for %s %s:"
 msgstr "Informação para %s %s:"
 
 #: src/info.cc:290
-#, fuzzy
 msgid "Support Level"
-msgstr "Nível de Segurança"
+msgstr "Nível de suporte"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:293
@@ -582,12 +601,12 @@ msgstr "É Necessário Reiniciar o Gestor de Pacotes"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:360 src/info.cc:363 src/utils/misc.cc:254 src/utils/misc.cc:295
 msgid "Interactive"
-msgstr ""
+msgstr "Interativo"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:399
 msgid "Visible to User"
-msgstr ""
+msgstr "Visível ao Utilizador"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:413 src/info.cc:449
@@ -624,7 +643,6 @@ msgid "Dependency"
 msgstr "Dependência"
 
 #: src/info.cc:427 src/info.cc:441
-#, fuzzy
 msgid "Required"
 msgstr "Requer"
 
@@ -639,7 +657,7 @@ msgstr "Sugerido"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:508
 msgid "End of Support"
-msgstr ""
+msgstr "Fim de Suporte"
 
 #: src/info.cc:513
 msgid "unknown"
@@ -649,7 +667,7 @@ msgstr "desconhecido"
 #: src/info.cc:518
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Veja %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:524
@@ -663,34 +681,33 @@ msgstr "É Base"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:547 src/info.cc:574
-#, fuzzy
 msgid "Update Repositories"
-msgstr "Repositórios especificados:"
+msgstr "Atualize Repositórios"
 
 #: src/info.cc:552
 msgid "Content Id"
-msgstr ""
+msgstr "Identificação do conteúdo"
 
 #: src/info.cc:564
 msgid "Provided by enabled repository"
-msgstr ""
+msgstr "Fornecido pelo repositório ativado"
 
 #: src/info.cc:569
 msgid "Not provided by any enabled repository"
-msgstr ""
+msgstr "Não fornecido pelos repositórios ativados"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:579
 msgid "CPE Name"
-msgstr ""
+msgstr "Nome CPE"
 
 #: src/info.cc:584
 msgid "undefined"
-msgstr ""
+msgstr "não definido"
 
 #: src/info.cc:586
 msgid "invalid CPE Name"
-msgstr ""
+msgstr "nome CPE inválido"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:589
@@ -699,26 +716,26 @@ msgstr "Nome Curto"
 
 #: src/subcommand.cc:51
 msgid "none"
-msgstr ""
+msgstr "nenhum"
 
 #: src/subcommand.cc:275
 #, boost-format
 msgid "cannot exec %1% (%2%)"
-msgstr ""
+msgstr "incapaz de executar %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
 #: src/subcommand.cc:284
 #, boost-format
 msgid "fork for %1% failed (%2%)"
-msgstr ""
+msgstr "falhou a bifurcação de %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
 #: src/subcommand.cc:303
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
-msgstr ""
+msgstr "waitpid para  %1% , falhou (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
@@ -726,7 +743,7 @@ msgstr ""
 #: src/subcommand.cc:313
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr ""
+msgstr "waitpid para %1% devolve um pid inesperado %2%, enquanto espera por %3%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
@@ -734,25 +751,25 @@ msgstr ""
 #: src/subcommand.cc:324
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
-msgstr ""
+msgstr "%1% foi morto pelo sinal %2% (%3%)"
 
 #: src/subcommand.cc:328
 msgid "core dumped"
-msgstr ""
+msgstr "núcleo despejado"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
 #: src/subcommand.cc:338
 #, boost-format
 msgid "%1% exited with status %2%"
-msgstr ""
+msgstr "%1% saiu com o estado %2%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
 #: src/subcommand.cc:353
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr ""
+msgstr "waitpid para %1% devolve resultados de estado de saída inesperados %2%"
 
 #: src/subcommand.cc:386
 #, boost-format
