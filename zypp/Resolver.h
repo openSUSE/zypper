@@ -286,6 +286,11 @@ namespace zypp
     void addUpgradeRepo( Repository repo_r );
 
     /**
+     * Whether there is at least one \c UpgradeRepo request pending
+     */
+    bool upgradingRepos() const;
+
+    /**
      * Whether there is an \c UpgradeRepo request pending for this repo.
      */
     bool upgradingRepo( Repository repo_r ) const;
