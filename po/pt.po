@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-10-10 20:05+0000\n"
+"PO-Revision-Date: 2016-10-11 11:27+0000\n"
 "Last-Translator: Pedro Rosado <pdvrosado@gmail.com>\n"
 "Language-Team: Portuguese "
 "<https://l10n.opensuse.org/projects/zypper/master/pt/>\n"
@@ -1220,68 +1220,69 @@ msgstr[0] "A correção seguinte será desatualizada:"
 msgstr[1] "As %d correções seguintes irão ser desatualizadas:"
 
 #: src/Summary.cc:640
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] "O seguinte padrão irá ser desmelhorado:"
-msgstr[1] "Os seguintes padrões irão ser desmelhorados:"
+msgstr[0] "O seguinte padrão irá ser desatualizado:"
+msgstr[1] "Os %d padrões seguintes irão ser desatualizados:"
 
 #: src/Summary.cc:645
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] "O seguinte produto irá ser desmelhorado:"
-msgstr[1] "Os seguintes produtos irão ser desmelhorados:"
+msgstr[0] "O seguinte produto irá ser desatualizado:"
+msgstr[1] "Os %d produtos seguintes irão ser desatualizados:"
 
 #: src/Summary.cc:650
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] "O seguinte padrão irá ser desmelhorado:"
-msgstr[1] "Os seguintes padrões irão ser desmelhorados:"
+msgstr[0] "A seguinte aplicação irá ser desatualizada:"
+msgstr[1] "As %d aplicações seguintes irão ser desatualizadas:"
 
 #: src/Summary.cc:669
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "O seguinte pacote irá ser reinstalado:"
-msgstr[1] "Os seguintes pacotes irão ser reinstalados:"
+msgstr[1] "Os %d pacotes seguintes irão ser reinstalados:"
 
 #: src/Summary.cc:674
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "A seguinte correcção irá ser reinstalado:"
-msgstr[1] "As seguintes correcções irão ser reinstalados:"
+msgstr[0] "A seguinte correção irá ser reinstalada:"
+msgstr[1] "As %d correções seguintes irão ser reinstaladas:"
 
 #: src/Summary.cc:679
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "O seguinte padrão irá ser reinstalado:"
-msgstr[1] "Os seguintes padrões irão ser reinstalados:"
+msgstr[1] "Os %d padrões seguintes irão ser reinstalados:"
 
 #: src/Summary.cc:684
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "O seguinte produto irá ser reinstalado:"
-msgstr[1] "Os seguintes produtos irão ser reinstalados:"
+msgstr[1] "Os %d produtos seguintes irão ser reinstalados:"
 
 #: src/Summary.cc:696
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] "O seguinte padrão irá ser reinstalado:"
-msgstr[1] "Os seguintes padrões irão ser reinstalados:"
+msgstr[0] "A seguinte aplicação irá ser reinstalada:"
+msgstr[1] "As %d aplicações seguintes irão ser reinstaladas:"
 
 #: src/Summary.cc:830
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] "O seguinte pacote fonte irá ser instalado:"
-msgstr[1] "Os seguintes pacotes fonte irão ser instalados:"
+msgstr[0] "O seguinte pacote recomendado foi selecionado automaticamente:"
+msgstr[1] ""
+"Os %d pacotes recomandados seguintes, foram selecionados automaticamente:"
 
 #: src/Summary.cc:835
 #, fuzzy, c-format, boost-format
