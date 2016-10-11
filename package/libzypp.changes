@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 11 18:04:18 CEST 2016 - ma@suse.de
+
+- Let 'dup --from' leave an updateTestcase-<DATE> in /var/log (bsc#1004096)
+- version 16.3.1 (0)
+
+-------------------------------------------------------------------
 Tue Oct 11 11:41:47 CEST 2016 - ma@suse.de
 
 - RepoInfo: Allow parsing multiple gpgkey= URLs (bsc#1003748)
