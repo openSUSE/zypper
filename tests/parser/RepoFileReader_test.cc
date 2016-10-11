@@ -23,12 +23,15 @@ static string suse_repo = "[factory-oss]\n"
 static string fedora_repo = "[fedora]\n"
 "name=Fedora $releasever - $basearch\n"
 "failovermethod=priority\n"
-"#baseurl=http://download.fedora.redhat.com/pub/fedora/linux/releases/$releasever/Everything/$basearch/os/\n"
-"#mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever&arch=$basearch\n"
+"baseurl=http://download.fedora.redhat.com/pub/fedora/linux/releases/$releasever/Everything/$basearch/os/\n"
+"        http://download.fedora.redhat.com/pub/fedora/linux/releases/$releasever/Everything/$basearch/os2/\n"
+"mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever&arch=$basearch\n"
 "mirrorlist=file:///etc/yum.repos.d/local.mirror\n"
 "enabled=1\n"
 "gpgcheck=1\n"
-"gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora file:///etc/pki/rpm-gpg/RPM-GPG-KEY\n";
+"gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora file:///etc/pki/rpm-gpg/RPM-GPG-KEY-$releasever/\n"
+"gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-3\n"
+"file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-4\n";
 
 struct RepoCollector : private base::NonCopyable
 {
@@ -52,7 +55,7 @@ BOOST_AUTO_TEST_CASE(read_repo_file)
 
     const RepoInfo & repo( collector.repos.front() );
     BOOST_CHECK_EQUAL( 4, repo.baseUrlsSize() );
-    cout << repo << endl;
+    // cout << repo << endl;
   }
   // fedora
   {
@@ -64,6 +67,14 @@ BOOST_AUTO_TEST_CASE(read_repo_file)
     RepoInfo repo = *collector.repos.begin();
     // should have taken the first url if more are present
     BOOST_CHECK_EQUAL(Url("file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora"), repo.gpgKeyUrl());
+    BOOST_CHECK_EQUAL( 4, repo.gpgKeyUrlsSize() );
+    // cout << repo << endl;
+    // cout << "------------------------------------------------------------" << endl;
+    // repo.dumpOn( cout ) << endl;
+    // cout << "------------------------------------------------------------" << endl;
+    // repo.dumpAsIniOn( cout ) << endl;
+    // cout << "------------------------------------------------------------" << endl;
+    // repo.dumpAsXmlOn( cout ) << endl;
   }
 
 }

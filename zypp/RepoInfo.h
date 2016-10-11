@@ -290,30 +290,26 @@ namespace zypp
       /** Set the value for \ref validRepoSignature (or \c indeterminate if unsigned). */
       void setValidRepoSignature( TriBool value_r );
 
-      /**
-       * \short Key to use for gpg checking of this repository
-       *
-       * \param url Url to the key in ASCII armored format
-       *
-       * \note This is a just a hint to the application and can
-       * be ignored.
-       *
-       */
+
+      /** Whether gpgkey URLs are defined */
+      bool gpgKeyUrlsEmpty() const;
+      /** Number of gpgkey URLs defined */
+      urls_size_type gpgKeyUrlsSize() const;
+
+      /** The list of gpgkey URLs defined for this repo */
+      url_set gpgKeyUrls() const;
+      /** The list of raw gpgkey URLs defined for this repo (no variables replaced) */
+      url_set rawGpgKeyUrls() const;
+      /** Set a list of gpgkey URLs defined for this repo */
+      void setGpgKeyUrls( url_set urls );
+
+      /** (leagcy API) The 1st gpgkey URL defined for this repo */
       Url gpgKeyUrl() const;
-      /**
-       * The raw gpgKeyUrl (no variables replaced).
-       */
+      /** (leagcy API) The 1st raw gpgkey URL defined for this repo (no variables replaced) */
       Url rawGpgKeyUrl() const;
-      /**
-       * \short Key to use for gpg checking of this repository
-       *
-       * \param url Url to the key in ASCII armored format
-       *
-       * \note This is a just a hint to the application and can
-       * be ignored.
-       *
-       */
+      /** (leagcy API) Set the gpgkey URL defined for this repo */
       void setGpgKeyUrl( const Url &gpgkey );
+
 
       /**
        * \short Whether packages downloaded from this repository will be kept in local cache

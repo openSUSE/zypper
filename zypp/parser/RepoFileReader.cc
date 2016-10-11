@@ -46,33 +46,64 @@ namespace zypp
 	{
 	  if ( key_r == "baseurl" )
 	  {
-	    setInBaseurls( true );
+	    _inMultiline = MultiLine::baseurl;
 	    _baseurls[section_r].push_back( Url(value_r) );
+	  }
+	  else if ( key_r == "gpgkey" )
+	  {
+	    _inMultiline = MultiLine::gpgkey;
+	    legacyStoreUrl( _gpgkeys[section_r], value_r );
 	  }
 	  else
 	  {
-	    setInBaseurls( false );
+	    _inMultiline = MultiLine::none;
 	    IniDict::consume( section_r, key_r, value_r );
 	  }
 	}
 
 	virtual void garbageLine( const std::string & section_r, const std::string & line_r )
 	{
-	  if ( _inBaseurls )
-	    _baseurls[section_r].push_back( Url(line_r) );
-	  else
-	    IniDict::garbageLine( section_r, line_r );	// throw
+	  switch ( _inMultiline )
+	  {
+	    case MultiLine::baseurl:
+	      _baseurls[section_r].push_back( Url(line_r) );
+	      break;
+
+	    case MultiLine::gpgkey:
+	      legacyStoreUrl( _gpgkeys[section_r], line_r );
+	      break;
+
+	    case MultiLine::none:
+	      IniDict::garbageLine( section_r, line_r );	// throw
+	      break;
+	  }
 	}
 
 	std::list<Url> & baseurls( const std::string & section_r )
 	{ return _baseurls[section_r]; }
 
-      private:
-	void setInBaseurls( bool yesno_r )
-	{ if ( _inBaseurls != yesno_r ) _inBaseurls = yesno_r; }
+	std::list<Url> & gpgkeys( const std::string & section_r )
+	{ return _gpgkeys[section_r]; }
 
-	DefaultIntegral<bool,false> _inBaseurls;
+      private:
+	void legacyStoreUrl( std::list<Url> & store_r, const std::string & line_r )
+	{
+	  // Legacy:
+	  // 	commit 4ef65a442038caf7a1e310bc719e329b34dbdb67
+	  // 	- split the gpgkey line and take the first one as url to avoid
+	  // 	  crash when creating an url from the line, as Fedora hat the
+	  // 	  *BRILLIANT* idea of using more than one url per line.
+	  std::vector<std::string> keys;
+	  str::split( line_r, std::back_inserter(keys) );
+	  for ( auto && str : keys )
+	    store_r.push_back( Url(std::move(str)) );
+	}
+
+	enum class MultiLine { none, baseurl, gpgkey };
+	MultiLine _inMultiline = MultiLine::none;
+
 	std::map<std::string,std::list<Url>> _baseurls;
+	std::map<std::string,std::list<Url>> _gpgkeys;
       };
 
     } //namespace
@@ -113,13 +144,6 @@ namespace zypp
             info.setMirrorListUrl(Url(it->second));
 	  else if ( it->first == "metalink" && !it->second.empty())
 	    info.setMetalinkUrl(Url(it->second));
-          else if ( it->first == "gpgkey" && !it->second.empty())
-          {
-            std::vector<std::string> keys;
-            str::split( it->second, std::back_inserter(keys) );
-            if ( ! keys.empty() )
-              info.setGpgKeyUrl( Url(*keys.begin()) );
-          }
           else if ( it->first == "gpgcheck" )
             info.setGpgCheck( str::strToTriBool( it->second ) );
           else if ( it->first == "repo_gpgcheck" )
@@ -160,6 +184,8 @@ namespace zypp
 	  }
 	  info.addBaseUrl( url );
 	}
+
+	info.setGpgKeyUrls( std::move(dict.gpgkeys( *its )) );
 
         info.setFilepath(is.path());
         MIL << info << endl;

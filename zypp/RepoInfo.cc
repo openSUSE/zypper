@@ -94,6 +94,13 @@ namespace zypp
     { return !emptybaseurls && !_baseUrls.empty(); }
 
 
+    const RepoVariablesReplacedUrlList & gpgKeyUrls() const
+    { return _gpgKeyUrls; }
+
+    RepoVariablesReplacedUrlList & gpgKeyUrls()
+    { return _gpgKeyUrls; }
+
+
     const std::set<std::string> & contentKeywords() const
     { hasContent()/*init if not yet done*/; return _keywords.second; }
 
@@ -214,7 +221,6 @@ namespace zypp
     TriBool _validRepoSignature;///< have  signed and valid repo metadata
   public:
     TriBool keeppackages;
-    RepoVariablesReplacedUrl _gpgKeyUrl;
     RepoVariablesReplacedUrl _mirrorListUrl;
     bool                     _mirrorListForceMetalink;
     repo::RepoType type;
@@ -230,6 +236,8 @@ namespace zypp
   private:
     mutable RepoVariablesReplacedUrlList _baseUrls;
     mutable std::pair<FalseBool, std::set<std::string> > _keywords;
+
+    RepoVariablesReplacedUrlList _gpgKeyUrls;
 
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
@@ -330,8 +338,14 @@ namespace zypp
   void  RepoInfo::setMetalinkUrl( const Url & url_r )	// Raw
   { _pimpl->_mirrorListUrl.raw() = url_r; _pimpl->_mirrorListForceMetalink = true; }
 
+  void RepoInfo::setGpgKeyUrls( url_set urls )
+  { _pimpl->gpgKeyUrls().raw().swap( urls ); }
+
   void RepoInfo::setGpgKeyUrl( const Url & url_r )
-  { _pimpl->_gpgKeyUrl.raw() = url_r; }
+  {
+    _pimpl->gpgKeyUrls().raw().clear();
+    _pimpl->gpgKeyUrls().raw().push_back( url_r );
+  }
 
   void RepoInfo::addBaseUrl( const Url & url_r )
   {
@@ -393,11 +407,23 @@ namespace zypp
   Url RepoInfo::rawMirrorListUrl() const		// Raw
   { return _pimpl->_mirrorListUrl.raw(); }
 
+  bool RepoInfo::gpgKeyUrlsEmpty() const
+  { return _pimpl->gpgKeyUrls().empty(); }
+
+  RepoInfo::urls_size_type RepoInfo::gpgKeyUrlsSize() const
+  { return _pimpl->gpgKeyUrls().size(); }
+
+  RepoInfo::url_set RepoInfo::gpgKeyUrls() const	// Variables replaced!
+  { return _pimpl->gpgKeyUrls().transformed(); }
+
+  RepoInfo::url_set RepoInfo::rawGpgKeyUrls() const	// Raw
+  { return _pimpl->gpgKeyUrls().raw(); }
+
   Url RepoInfo::gpgKeyUrl() const			// Variables replaced!
-  { return _pimpl->_gpgKeyUrl.transformed(); }
+  { return( _pimpl->gpgKeyUrls().empty() ? Url() : *_pimpl->gpgKeyUrls().transformedBegin() ); }
 
   Url RepoInfo::rawGpgKeyUrl() const			// Raw
-  {  return _pimpl->_gpgKeyUrl.raw(); }
+  { return( _pimpl->gpgKeyUrls().empty() ? Url() : *_pimpl->gpgKeyUrls().rawBegin() ) ; }
 
   RepoInfo::url_set RepoInfo::baseUrls() const		// Variables replaced!
   { return _pimpl->baseUrls().transformed(); }
@@ -587,7 +613,10 @@ namespace zypp
 			      << std::endl;
 #undef OUTS
 
-    strif( "- gpgkey      : ", rawGpgKeyUrl().asString() );
+    for ( const auto & url : _pimpl->gpgKeyUrls().raw() )
+    {
+      str << "- gpgkey      : " << url << std::endl;
+    }
 
     if ( ! indeterminate(_pimpl->keeppackages) )
       str << "- keeppackages: " << keepPackages() << std::endl;
@@ -635,8 +664,15 @@ namespace zypp
     if ( ! indeterminate(_pimpl->_pkgGpgCheck) )
       str << "pkg_gpgcheck=" << (_pimpl->_pkgGpgCheck ? "1" : "0") << endl;
 
-    if ( ! (rawGpgKeyUrl().asString().empty()) )
-      str << "gpgkey=" << rawGpgKeyUrl() << endl;
+    {
+      std::string indent( "gpgkey=");
+      for ( const auto & url : _pimpl->gpgKeyUrls().raw() )
+      {
+	str << indent << url << endl;
+	if ( indent[0] != ' ' )
+	  indent = "       ";
+      }
+    }
 
     if (!indeterminate(_pimpl->keeppackages))
       str << "keeppackages=" << keepPackages() << endl;
