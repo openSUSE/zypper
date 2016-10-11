@@ -886,7 +886,7 @@ void solve_and_commit ( Zypper & zypper )
 	}
 
         // check for running services (fate #300763)
-        if ( !dryRunEtc
+        if ( !( zypper.globalOpts().changedRoot || dryRunEtc )
 	  && ( summary.packagesToRemove() || summary.packagesToUpgrade() || summary.packagesToDowngrade() ) )
 	{
           notify_processes_using_deleted_files( zypper );
