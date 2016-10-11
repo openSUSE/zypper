@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 11 11:41:47 CEST 2016 - ma@suse.de
+
+- RepoInfo: Allow parsing multiple gpgkey= URLs (bsc#1003748)
+- version 16.3.0 (0)
+
+-------------------------------------------------------------------
 Tue Sep 20 11:41:48 CEST 2016 - ma@suse.de
 
 - guessPackageSpec: Don't break globbing (fixes openSUSE/zypper#97)
