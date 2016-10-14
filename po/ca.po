@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-06-29 07:45+0000\n"
+"PO-Revision-Date: 2016-10-14 08:35+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan "
 "<https://l10n.opensuse.org/projects/libzypp/master/ca/>\n"
@@ -452,16 +452,16 @@ msgstr "L'esquema de l'URL no permet una contrasenya"
 
 #: zypp/url/UrlBase.cc:1012
 msgid "Url scheme requires a host component"
-msgstr "L'esquema de l'URL requereix un component d'ordinador central"
+msgstr "L'esquema de l'URL requereix un component d'amfitrió"
 
 #: zypp/url/UrlBase.cc:1022
 msgid "Url scheme does not allow a host component"
-msgstr "L'esquema de l'URL no permet un component d'ordinador central"
+msgstr "L'esquema de l'URL no permet un component d'amfitrió"
 
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr "El component de l'ordinador central \"%s\" no és vàlid"
+msgstr "El component d'amfitrió \"%s\" no és vàlid."
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
