@@ -79,7 +79,11 @@ void dDump( const std::string & spec_r )
   for ( const auto & el : q )
   {
     message << endl << "==============================" << endl << dump(el);
-    if ( isKind<Pattern>(el) )
+    if ( isKind<Product>(el) )
+    {
+      message << endl << "REPLACES: " << make<Product>(el)->replacedProducts();
+    }
+    else if ( isKind<Pattern>(el) )
     {
       message << endl << "CONTENT: " << make<Pattern>(el)->contents();
     }
