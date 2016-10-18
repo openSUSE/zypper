@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-10-17 07:31+0000\n"
-"Last-Translator: M. Edwin Zakaria <medwin@opensuse.org>\n"
+"PO-Revision-Date: 2016-10-18 12:39+0000\n"
+"Last-Translator: John Vandenberg <jayvdb@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
 "Language: id\n"
@@ -2053,7 +2053,7 @@ msgid ""
 "repository."
 msgstr ""
 "Silahkan periksa jika URI terdefinisikan ke sebuah repositori, mengacu ke "
-"repositori yang benar. "
+"repositori yang benar."
 
 #: src/repos.cc:417
 #: src/repos.cc:352
@@ -2354,7 +2354,7 @@ msgstr "Repositori telah sukses diexpor ke %s."
 #: src/repos.cc:1248
 #: src/repos.cc:1392
 msgid "Specified repositories: "
-msgstr "Repositori tertentu:"
+msgstr "Repositori tertentu: "
 
 #: src/repos.cc:1349
 #: src/repos.cc:1283
@@ -5458,7 +5458,7 @@ msgstr "Alur program yang tidak diduga."
 #: src/Zypper.cc:3255
 #: src/Zypper.cc:3244
 msgid "Non-option program arguments: "
-msgstr "Bukan argumen program pilihan:"
+msgstr "Bukan argumen program pilihan: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: src/Zypper.cc:3314
