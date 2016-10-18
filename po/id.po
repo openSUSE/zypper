@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-10-18 15:49+0000\n"
+"PO-Revision-Date: 2016-10-18 16:06+0000\n"
 "Last-Translator: Sage Muhammad Abdullah <laymonage@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
@@ -462,7 +462,7 @@ msgstr "Selesai dengan kesalahan."
 
 #: src/Zypper.h:465
 msgid "Done."
-msgstr "Selesai"
+msgstr "Selesai."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -1915,8 +1915,8 @@ msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr ""
-"Repo '%1%' dikelola oleh layanan '%2%'. Perubahan sementara akan diatur "
-"ulang oleh layanan berikutnya."
+"Repo '%1%' dikelola oleh layanan '%2%'. Perubahan sementara akan hilang pada "
+"penyegaran layanan berikutnya!"
 
 #: src/repos.cc:69
 msgid "default priority"
@@ -2366,12 +2366,12 @@ msgstr "Melewati repositori '%s' yang tidak aktif"
 #: src/repos.cc:1376
 #: src/repos.cc:1310
 msgid "Specified repositories are not enabled or defined."
-msgstr "Repositori tertentu tidak aktif atau tidak terdefinisikan"
+msgstr "Repositori tertentu tidak aktif atau tidak terdefinisikan."
 
 #: src/repos.cc:1378
 #: src/repos.cc:1312
 msgid "There are no enabled repositories defined."
-msgstr "Tidak ada repositori aktif yang terdefinisikan"
+msgstr "Tidak ada repositori aktif yang terdefinisikan."
 
 #: src/repos.cc:1379
 #: src/repos.cc:1313
@@ -2499,15 +2499,12 @@ msgstr "Terjadi kendala saat mengirim data repositori dari URI:"
 #: src/repos.cc:1666
 #: src/repos.cc:1600
 msgid "Please check whether the specified URI is accessible."
-msgstr "Silahkan periksa apakah URI yang dimaksud bisa diakses"
+msgstr "Mohon periksa apakah URI yang dimaksud bisa diakses."
 
 #: src/repos.cc:1673
 #: src/repos.cc:1607
 msgid "Unknown problem when adding repository:"
-msgstr ""
-"Terjadi kesalahan ketika mengakses server FTP:\n"
-"\n"
-"%s"
+msgstr "Terjadi kesalahan ketika menambahkan repositori:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
@@ -2751,7 +2748,7 @@ msgstr "Layanan '%s' telah sukses ditambahkan."
 #: src/repos.cc:2598
 #, c-format, boost-format
 msgid "Removing service '%s':"
-msgstr "Menghapus layanan '%s'."
+msgstr "Menghapus layanan '%s':"
 
 #: src/repos.cc:2669
 #: src/repos.cc:2601
@@ -2770,7 +2767,7 @@ msgstr "Menyegarkan layanan '%s'."
 #: src/repos.cc:2640
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Terkendala saat mengambil berkas indeks repositori untuk layanan '%s'."
+msgstr "Terkendala saat mengambil berkas indeks repositori untuk layanan '%s':"
 
 #: src/repos.cc:2700 src/repos.cc:2808 src/repos.cc:2866
 #: src/repos.cc:2632
@@ -2832,13 +2829,13 @@ msgstr "Semua layanan telah disegarkan ulang."
 #: src/repos.cc:2920
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
-msgstr "Layanan '%s' telah sukses diaktifkan"
+msgstr "Layanan '%s' telah sukses diaktifkan."
 
 #: src/repos.cc:2990
 #: src/repos.cc:2922
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
-msgstr "Layanan '%s' telah sukses dinonaktifkan"
+msgstr "Layanan '%s' telah sukses dinonaktifkan."
 
 #: src/repos.cc:2996
 #: src/repos.cc:2928
@@ -2882,7 +2879,7 @@ msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "Repositori '%s' telah dihapus dari layanan repositori aktif '%s'."
+msgstr[0] "Repositori '%s' telah dihapus dari layanan repositori aktif '%s'"
 
 #: src/repos.cc:3029
 #: src/repos.cc:2961
@@ -2892,7 +2889,7 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
-msgstr[0] "Repositori '%s' telah dihapus dari layanan repositori tidak aktif '%s'."
+msgstr[0] "Repositori '%s' telah dihapus dari layanan repositori tidak aktif '%s'"
 
 #: src/repos.cc:3038
 #: src/repos.cc:2970
@@ -3101,7 +3098,7 @@ msgstr "Versi tersedia"
 
 #: src/update.cc:969
 msgid "No matching issues found."
-msgstr "Tidak ditemukan isu yang cocok"
+msgstr "Tidak ditemukan isu yang cocok."
 
 #: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
@@ -3150,12 +3147,12 @@ msgstr ""
 #: src/Zypper.cc:86
 #: src/Zypper.cc:80
 msgid "The default is to exclude optional patches."
-msgstr "Secara baku, tidak menyertakan patch-patch opsional"
+msgstr "Secara baku, tidak menyertakan patch-patch opsional."
 
 #: src/Zypper.cc:87
 #: src/Zypper.cc:81
 msgid "The default is to include optional patches."
-msgstr "Secara baku, menyertakan patch-patch opsional"
+msgstr "Secara baku, menyertakan patch-patch opsional."
 
 #: src/Zypper.cc:110
 #: src/Zypper.cc:104
@@ -3272,12 +3269,12 @@ msgid ""
 "\t--solv-cache-dir <dir>\tUse alternative solv file cache directory.\n"
 "\t--pkg-cache-dir <dir>\tUse alternative package cache directory.\n"
 msgstr ""
-"\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
-"\t\t\t\tdirectory.\n"
-"\t--cache-dir, -C <dir>\tUse alternative directory for all caches.\n"
-"\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
-"\t--solv-cache-dir <dir>\tUse alternative solv file cache directory.\n"
-"\t--pkg-cache-dir <dir>\tUse alternative package cache directory.\n"
+"\t--reposd-dir, -D <dir>\tGunakan direktori berkas definisi repositori\n"
+"\t\t\t\talternatif.\n"
+"\t--cache-dir, -C <dir>\tGunakan direktori alternatif untuk semua cache.\n"
+"\t--raw-cache-dir <dir>\tGunakan direktori cache raw meta-data alternatif.\n"
+"\t--solv-cache-dir <dir>\tGunakan direktori cache berkas solv alternatif.\n"
+"\t--pkg-cache-dir <dir>\tGunakan direktori cache package alternatif.\n"
 
 #: src/Zypper.cc:464
 #: src/Zypper.cc:458
