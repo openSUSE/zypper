@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-10-18 15:12+0000\n"
-"Last-Translator: M. Edwin Zakaria <medwin@opensuse.org>\n"
+"PO-Revision-Date: 2016-10-18 15:49+0000\n"
+"Last-Translator: Sage Muhammad Abdullah <laymonage@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
 "Language: id\n"
@@ -1945,22 +1945,23 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Prioritas repositori tidak berlaku. Semua repositori yang aktif memiliki "
+"prioritas yang sama."
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "Path kamus %s tidak valid"
+msgstr "Prioritas repositori yang berlaku:"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "Memilih '%s' untuk dihapus."
+msgstr "Lihat '%1%' untuk rincian"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Repositori"
+msgstr[0] "Repositori %1%"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -4969,6 +4970,8 @@ msgstr ""
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
+"Keluaran XML saja: Teruskan secara harfiah tag XML yang ditemukan dalam "
+"berkas produk."
 
 #: src/Zypper.cc:2620
 #: src/Zypper.cc:2615
@@ -5759,7 +5762,7 @@ msgstr "Lihat pesan di atas untuk petunjuk."
 #: src/Zypper.cc:4524
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "Opsi %1% tidak berpengaruh tanpa opsi global %2%."
 
 #: src/Zypper.cc:4611 src/Zypper.cc:4659
 #: src/Zypper.cc:4596
