@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-10-18 16:06+0000\n"
-"Last-Translator: Sage Muhammad Abdullah <laymonage@gmail.com>\n"
+"PO-Revision-Date: 2016-10-20 03:21+0000\n"
+"Last-Translator: Weblate Admin <weblate-admin@opensuse.org>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
 "Language: id\n"
@@ -28,7 +28,7 @@ msgstr "Nama Kunci:"
 
 #: src/callbacks/keyring.h:39
 msgid "Key Fingerprint:"
-msgstr "Tanda tangan Kunci:"
+msgstr "Sidik jari kunci:"
 
 #: src/callbacks/keyring.h:40
 msgid "Key Created:"
