@@ -158,19 +158,19 @@ msgstr "z/t"
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:216
 msgid "Don't trust the key."
-msgstr "Dem Schlüssel nicht vertrauen."
+msgstr "Den Schlüssel abweisen. (a)"
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:218
 msgid "Trust the key temporarily."
-msgstr "Dem Schlüssel vorübergehend vertrauen."
+msgstr "Dem Schlüssel temporär vertrauen. (t)"
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:221
 msgid "Trust the key and import it into trusted keyring."
 msgstr ""
-"Dem Schlüssel vertrauen und in den vertrauenswürdigen Schlüsselbund "
-"importieren."
+"Dem Schlüssel immer vertrauen und in den vertrauenswürdigen Schlüsselbund "
+"importieren. (i)"
 
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
