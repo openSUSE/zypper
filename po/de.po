@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-10-23 10:20+0100\n"
+"PO-Revision-Date: 2016-10-23 10:47+0100\n"
 "Last-Translator: Sarah Julia Kriesch <sarah.kriesch@opensuse.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>\n"
 "Language: de\n"
@@ -298,7 +298,7 @@ msgstr "Wird ausgeführt: %s  (%s, %s)"
 #: src/callbacks/rpm.h:202
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr "%s 1 wird entfernt"
+msgstr "%s  wird entfernt"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:207
@@ -314,7 +314,7 @@ msgstr "Entfernen von %s fehlgeschlagen:"
 #: src/callbacks/rpm.h:273
 #, c-format, boost-format
 msgid "Installing: %s"
-msgstr "%s wird installiert"
+msgstr "Installieren: %s "
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:278
@@ -656,8 +656,8 @@ msgstr "Typ"
 msgid "Dependency"
 msgstr "Abhängigkeit"
 
-#: src/info.cc:427 src/info.cc:441
-#, fuzzy
+#: src/info.cc:427 src/info.cc:441:wq
+
 msgid "Required"
 msgstr "Benötigt"
 
@@ -682,7 +682,7 @@ msgstr "Unbekannt"
 #: src/info.cc:518
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Siehe %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:524
@@ -1912,16 +1912,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "Standard-Priorität"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "Priorität"
+msgstr "erhöhte Priorität"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "gesenkte Priorität"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1937,23 +1936,24 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Die Repository-Prioritäten sind ohne Effekt. Alle aktivierten Repositorys"
+" teilen sich die gleiche Priorität."
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "Die Priorität von Repository '%s' wurde auf %d festgelegt."
+msgstr "Repository-Prioritäten treten in Kraft:"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "'%s' wird zum Entfernen ausgewählt."
+msgstr "Siehe '%1%' für Details"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Repository"
-msgstr[1] "Repository"
+msgstr[0] "%1% Repository"
+msgstr[1] "%1% Repositorys"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -2933,7 +2933,7 @@ msgstr "Paketaktualisierungen"
 
 #: src/update.cc:718
 msgid "Pattern updates"
-msgstr "Schemaaktualisierungen"
+msgstr "Pattern-Aktualisierungen"
 
 #: src/update.cc:720
 msgid "Product updates"
@@ -4811,6 +4811,8 @@ msgstr ""
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
+"Nur XML-Ausgabe: Wortwörtliche Weitergabe der gefundenen XML-Tags in einer"
+" Produktdatei."
 
 #: src/Zypper.cc:2620
 #, c-format, boost-format
@@ -5546,7 +5548,7 @@ msgstr "In der Meldung oben finden Sie einen entsprechenden Hinweis."
 #: src/Zypper.cc:4524
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "Option %1% hat ohne die globale Option %2% keinen Effekt."
 
 #: src/Zypper.cc:4611 src/Zypper.cc:4659
 #, c-format, boost-format
@@ -5618,7 +5620,7 @@ msgstr[1] "%lu Sperren entfernt."
 
 #: src/Zypper.cc:5049
 msgid "XML output not implemented for this command."
-msgstr "XML-Ausgabe für diesen Befehl nicht umgesetzt."
+msgstr "XML-Ausgabe für diesen Befehl nicht implementiert."
 
 #: src/Zypper.cc:5062
 #, c-format, boost-format
