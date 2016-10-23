@@ -15,21 +15,21 @@
 # Christopher Hofmann <cwh@suse.de>, 2011.
 # Hendrik Woltersdorf <hendrikw@arcor.de>, 2013.
 # Sarah Kriesch <ada.lovelace@gmx.de>, 2014, 2015.
+# Sarah Julia Kriesch <sarah.kriesch@opensuse.de>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-07-13 17:33+0000\n"
-"Last-Translator: Guenther Pfeiffer <gunther.pfeiffer@lqs-lionbridge.com>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2016-10-23 10:20+0100\n"
+"Last-Translator: Sarah Julia Kriesch <sarah.kriesch@opensuse.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -138,8 +138,7 @@ msgstr "Neuen Signierungsschlüssel für Repository oder Paket erhalten:"
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
-"Wollen Sie den Schlüssel zurückweisen, ihm temporär oder immer vertrauen?"
+msgstr "Wollen Sie den Schlüssel abweisen, ihm temporär oder immer vertrauen?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -148,12 +147,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:211
 msgid "r/t/a/"
-msgstr "z/t/i/"
+msgstr "a/t/i/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:214
 msgid "r/t"
-msgstr "z/t"
+msgstr "a/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:216
