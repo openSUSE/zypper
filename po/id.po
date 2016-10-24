@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-10-22 16:56+0000\n"
+"PO-Revision-Date: 2016-10-24 13:15+0000\n"
 "Last-Translator: Hanhan Hahn <matcherapy@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/libzypp/master/id/>\n"
@@ -61,7 +61,7 @@ msgstr "Tak bisa menginisialisasi mutex rekursif"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr ""
+msgstr "Tidak dapat memperoleh kunci mutex"
 
 #: zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
