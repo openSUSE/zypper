@@ -1779,6 +1779,7 @@ void add_repo_by_url( Zypper & zypper,
     repo.setGpgCheck( gpgCheck );
 
   add_repo( zypper, repo );
+  repoPrioSummary( zypper );
 }
 
 // ----------------------------------------------------------------------------
