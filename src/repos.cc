@@ -1137,6 +1137,11 @@ static void print_repo_list( Zypper & zypper, const std::list<RepoInfo> & repos 
   }
   else
   {
+    if ( !showprio )
+    {
+      repoPrioSummary( zypper );
+      zypper.out().gap();
+    }
     // sort
     tbl.sort( sort_index );
     // print
