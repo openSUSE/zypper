@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Oct 31 12:08:19 CET 2016 - ma@suse.de
+
+- lr: show repo priority summary
+- Fix german translations (bsc#975777, bsc#975794)
+- Do not warn about processes using deleted files
+  when using --root (bsc#731333)
+- version 1.13.13
+
+-------------------------------------------------------------------
 Thu Oct  6 17:20:24 CEST 2016 - ma@suse.de
 
 - addrepo: show repo priority summary (issue #82)
