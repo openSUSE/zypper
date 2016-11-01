@@ -5,15 +5,16 @@ msgstr ""
 "Project-Id-Version: opensuse-i 18n\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2016-11-01 23:38+0330\n"
-"Last-Translator: hayyan <joghdeshab@live.com>\n"
-"Language-Team: Persian <kde-i18n-doc@kde.org>\n"
-"Language: ru\n"
+"PO-Revision-Date: 2016-11-01 20:29+0000\n"
+"Last-Translator: hayyan rostami <hayyan71@yahoo.com>\n"
+"Language-Team: Persian "
+"<https://l10n.opensuse.org/projects/libzypp/master/fa/>\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -43,7 +44,7 @@ msgstr "ناتوان در تجزیه ی اجزاء آدرس"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
-msgstr "نمیتوان صفات mutex را مقدار دهی اولیه کرد."
+msgstr "نمیتوان صفات mutex را مقدار دهی اولیه کرد"
 
 #: zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -105,11 +106,11 @@ msgstr "مورد مشکوک '%s' برای %u بایت checksum '%s'"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
-msgstr "اجرا شده"
+msgstr " اجرا شده"
 
 #: zypp/target/TargetImpl.cc:332
 msgid " execution failed"
-msgstr "اجرا ناموفق بود"
+msgstr " اجرا ناموفق بود"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
@@ -121,13 +122,13 @@ msgstr "%s در حال حاظر اجرا شده به عنوان %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
-msgstr "اجرا در هنگام انصراف پرش شد"
+msgstr " اجرا در هنگام انصراف پرش شد"
 
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
 #: zypp/target/TargetImpl.cc:607
 msgid "Error sending update message notification."
-msgstr "خطا در ارسال اعلام پیغام بروزرسانی"
+msgstr "خطا در ارسال اعلام پیغام بروزرسانی."
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
@@ -137,7 +138,7 @@ msgstr "پیغام بروزرسانی جدید"
 #: zypp/target/TargetImpl.cc:1640
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."
-msgstr "نصب انصراف داده شد و یا جهتدار شد"
+msgstr "نصب انصراف داده شد و یا جهتدار شد."
 
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
@@ -166,7 +167,7 @@ msgstr "libhal_ctx_new: نمیتوان متن libhal را ساخت"
 
 #: zypp/target/hal/HalContext.cc:257
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: نمیتوان ارتباط dbus را تنظیم کرد."
+msgstr "libhal_set_dbus_connection: نمیتوان ارتباط dbus را تنظیم کرد"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
@@ -181,7 +182,7 @@ msgstr "درایو CDROM نیست"
 #: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
 #: zypp/target/rpm/RpmDb.cc:2189
 msgid "RPM failed: "
-msgstr "RPM شکست خورد:"
+msgstr "RPM شکست خورد: "
 
 #. TranslatorExplanation first %s is file name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1124
@@ -339,7 +340,7 @@ msgstr "نمیتوان فهرست کش شبه داده را ساخت."
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "در حال ساخت کش مخزن '%s' "
+msgstr "در حال ساخت کش مخزن '%s'"
 
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
@@ -497,7 +498,7 @@ msgstr "نمیتوان pipe (%s) را باز کرد."
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr "نمیتوان chroot کرد به '%s' (%s) "
+msgstr "نمیتوان chroot کرد به '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
@@ -513,17 +514,17 @@ msgstr "نمیتوان chdir کرد به '%s' (%s)."
 #: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
-msgstr "'%s' (%s) رانمیتوان اجرا کرد"
+msgstr "'%s' (%s) را نمیتوان اجرا کرد."
 
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr "(%s) را نمیتوان fork کرد "
+msgstr "نمیتوان fork کرد (%s)."
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
 msgid "Command exited with status %d."
-msgstr "دستور با وضعیت %d خارج شد"
+msgstr "دستور با وضعیت %d خارج شد."
 
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
@@ -532,7 +533,7 @@ msgstr "دستور با سیگنال %d (%s) کشته شد."
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
-msgstr "دستور با خطای ناشناخته خارج شد"
+msgstr "دستور با خطای ناشناخته خارج شد."
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:116
@@ -627,15 +628,15 @@ msgstr ""
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr "یک قرارداد اضافی مشتری برای دریافت پشتیبانی نیاز است"
+msgstr "یک قرارداد اضافی مشتری برای دریافت پشتیبانی نیاز است."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "اختیار پشتیبانی نامشخص. تعاریف در دسترس نیستند."
+msgstr "اختیار پشتیبانی ناشناخته. تعاریف در دسترس نیستند"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr "کشور ناشناخته:"
+msgstr "کشور ناشناخته: "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
@@ -1867,7 +1868,7 @@ msgstr "زیمباوه"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
-msgstr "زبان ناشناخته:"
+msgstr "زبان ناشناخته: "
 
 #. language code: aar aa
 #: zypp/LanguageCode.cc:161
@@ -2412,7 +2413,7 @@ msgstr "دینکا"
 #. language code: div dv
 #: zypp/LanguageCode.cc:389
 msgid "Divehi"
-msgstr "Divehi"
+msgstr "دیوهی"
 
 #. language code: doi
 #: zypp/LanguageCode.cc:391
@@ -2687,7 +2688,7 @@ msgstr "گجراتی"
 #. language code: gwi
 #: zypp/LanguageCode.cc:509
 msgid "Gwich'in"
-msgstr "Gwich'in"
+msgstr "جویشن"
 
 #. language code: hai
 #: zypp/LanguageCode.cc:511
@@ -3132,7 +3133,7 @@ msgstr "لوییزنو"
 #. language code: lun
 #: zypp/LanguageCode.cc:689
 msgid "Lunda"
-msgstr "Lunda"
+msgstr "لوندا"
 
 #. language code: luo
 #: zypp/LanguageCode.cc:691
@@ -3392,7 +3393,7 @@ msgstr "نیجر-کنگویی"
 #. language code: niu
 #: zypp/LanguageCode.cc:801
 msgid "Niuean"
-msgstr "Niuean"
+msgstr "نیویان"
 
 #. language code: nno nn
 #: zypp/LanguageCode.cc:803
@@ -4373,7 +4374,7 @@ msgstr "%s میخواهد %s را، اما این نیازمندی قابل مه
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
-msgstr "ارائه دهنده های حذف شده:"
+msgstr "ارائه دهنده های حذف شده: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -4382,12 +4383,12 @@ msgid ""
 "uninstallable providers: "
 msgstr ""
 "\n"
-"ارائه دهندگان غیر قابل نصب:"
+"ارائه دهندگان غیر قابل نصب: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1084
 msgid "uninstallable providers: "
-msgstr "ارائه دهندگان غیر قابل نصب"
+msgstr "ارائه دهندگان غیر قابل نصب: "
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
@@ -4459,7 +4460,7 @@ msgstr "نصب %s از مخزن مستثنی"
 #: zypp/solver/detail/SATResolver.cc:1318
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr "تن"
+msgstr "تنزل درجه ی %s به %s"
 
 #: zypp/solver/detail/SATResolver.cc:1325
 #, c-format, boost-format
@@ -4596,7 +4597,7 @@ msgstr "مقداردهی دریافت (curl9) برای '%s' ناموفق بود"
 #: zypp/media/MediaException.cc:91
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr "استثناء سیستم '%s' برای رسانه ی '%s'"
+msgstr "استثناء سیستم '%s' برای رسانه ی '%s'."
 
 #: zypp/media/MediaException.cc:98
 #, c-format, boost-format
@@ -4648,7 +4649,7 @@ msgstr ""
 #: zypp/media/MediaException.cc:161
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "خطایی در هنگام تنظیم اختیارات دریافت (curl) برای '%s' رخ داد."
+msgstr "خطایی در هنگام تنظیم اختیارات دریافت (curl) برای '%s' رخ داد:"
 
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
@@ -4687,7 +4688,7 @@ msgstr "مکان '%s' به صورت موقتی غیر قابل دسترسی اس
 #: zypp/media/MediaException.cc:223
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr "ایراد گواهی SSL، لطفا بررسی کنید که گواهی CA برای '%s' درست است."
+msgstr " ایراد گواهی SSL، لطفا بررسی کنید که گواهی CA برای '%s' درست است."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
@@ -4722,6 +4723,11 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
+"پرونده ی %1%\n"
+"  از بسته ی \n"
+"     %2%\n"
+"  متداخل است با پرونده ای از بسته ی\n"
+"     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:40
@@ -4733,6 +4739,11 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
+"پرونده ی %1%\n"
+"  از بسته ی\n"
+"     %2%\n"
+"  متداخل است با پرونده ای از نصب\n"
+"     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:47
@@ -4744,6 +4755,11 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
+"پرونده ی %1%\n"
+"  از نصب\n"
+"     %2%\n"
+"  متداخل است با پرونده ای از بسته ی\n"
+"     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:53
@@ -4755,6 +4771,11 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
+"پرونده ی %1%\n"
+"  از نصب\n"
+"     %2%\n"
+"  متداخل است با پرونده ای از نصب\n"
+"     %3%"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
@@ -4769,6 +4790,13 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
+"پرونده ی %1%\n"
+"  از بسته ی\n"
+"     %2%\n"
+"  متداخل است با پرونده ی\n"
+"     %3%\n"
+"  از بسته ی\n"
+"     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:76
@@ -4782,6 +4810,13 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
+"پرونده ی %1%\n"
+"  از بسته ی\n"
+"     %2%\n"
+"  متداخل است با پرونده ی\n"
+"     %3%\n"
+"از نصب\n"
+"     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:85
@@ -4795,6 +4830,13 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
+"پرونده ی %1%\n"
+"  از نصب\n"
+"     %2%\n"
+"  متداخل است با پرونده ی\n"
+"     %3%\n"
+"  از بسته ی\n"
+"     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:93
@@ -4808,3 +4850,10 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
+"پرونده ی %1%\n"
+"  از نصب\n"
+"     %2%\n"
+"  متداخل است با پرونده ی\n"
+"     %3%\n"
+"  از نصب\n"
+"     %4%"
