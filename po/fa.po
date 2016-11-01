@@ -1,115 +1,115 @@
 # Mohammad Rezaei Seresht <mohammad@rezaeiseresht.ir>, 2014.
-#
+# hayyan <joghdeshab@live.com>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: opensuse-i 18n\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 15:55+0200\n"
-"PO-Revision-Date: 2014-02-02 01:13+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2016-11-01 23:38+0330\n"
+"Last-Translator: hayyan <joghdeshab@live.com>\n"
+"Language-Team: Persian <kde-i18n-doc@kde.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
 msgid "Hal Exception"
-msgstr ""
+msgstr "استثنای Hal"
 
 #: zypp/Url.cc:114
 msgid "Invalid LDAP URL query string"
-msgstr ""
+msgstr "رشته ی پرس و جوی آدرس LDAP نامعتبر"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr ""
+msgstr "پارامتر پرس و جوی آدرس LDAP نامعتبر '%s'"
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
-msgstr ""
+msgstr "ناتوان در همزاد سازی آدرس شیء"
 
 #: zypp/Url.cc:313
 msgid "Invalid empty Url object reference"
-msgstr ""
+msgstr "مرجع شیء آدرس خالی نامعتبر"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
-msgstr ""
+msgstr "ناتوان در تجزیه ی اجزاء آدرس"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
-msgstr ""
+msgstr "نمیتوان صفات mutex را مقدار دهی اولیه کرد."
 
 #: zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
-msgstr ""
+msgstr "نمیتوان صفت mutex بازگشتی را قرار داد"
 
 #: zypp/thread/Mutex.cc:47
 msgid "Can't initialize recursive mutex"
-msgstr ""
+msgstr "نمیتوان mutex بازگشتی را مقداردهی اولیه کرد"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr ""
+msgstr "نمیتوان قفل mutex را دریافت کرد"
 
 #: zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
-msgstr ""
+msgstr "نمیتوان قفل mutex را آزاد کرد"
 
 #: zypp/Dep.cc:96
 msgid "Provides"
-msgstr ""
+msgstr "ارائه میدهد"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
-msgstr ""
+msgstr "از پیش نیاز دارد"
 
 #: zypp/Dep.cc:98
 msgid "Requires"
-msgstr ""
+msgstr "نیاز دارد"
 
 #: zypp/Dep.cc:99
 msgid "Conflicts"
-msgstr ""
+msgstr "مغایر است با"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
-msgstr ""
+msgstr "منسوخ میکند"
 
 #: zypp/Dep.cc:101
 msgid "Recommends"
-msgstr ""
+msgstr "توصیه میکند"
 
 #: zypp/Dep.cc:102
 msgid "Suggests"
-msgstr ""
+msgstr "پیشنهاد میکند"
 
 #: zypp/Dep.cc:103
 msgid "Enhances"
-msgstr ""
+msgstr "بالا میبرد"
 
 #: zypp/Dep.cc:104
 msgid "Supplements"
-msgstr ""
+msgstr "تکمیل میکند"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr ""
+msgstr "مورد مشکوک '%s' برای %u بایت checksum '%s'"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
-msgstr ""
+msgstr "اجرا شده"
 
 #: zypp/target/TargetImpl.cc:332
 msgid " execution failed"
-msgstr ""
+msgstr "اجرا ناموفق بود"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
@@ -117,95 +117,96 @@ msgstr ""
 #: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr ""
+msgstr "%s در حال حاظر اجرا شده به عنوان %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
-msgstr ""
+msgstr "اجرا در هنگام انصراف پرش شد"
 
 #: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
 #: zypp/target/TargetImpl.cc:607
 msgid "Error sending update message notification."
-msgstr ""
+msgstr "خطا در ارسال اعلام پیغام بروزرسانی"
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
-msgstr ""
+msgstr "پیغام بروزرسانی جدید"
 
 #: zypp/target/TargetImpl.cc:1219 zypp/target/TargetImpl.cc:1288
 #: zypp/target/TargetImpl.cc:1640
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."
-msgstr ""
+msgstr "نصب انصراف داده شد و یا جهتدار شد"
 
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
 msgstr ""
+"عذخواهی میکنیم، اما این نسخه ی libzypp بدون پشتیبانی از HAL ساخته شده است."
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
-msgstr ""
+msgstr "HalContext متصل نشده است"
 
 #: zypp/target/hal/HalContext.cc:127
 msgid "HalDrive not initialized"
-msgstr ""
+msgstr "HalDrive مقداردهی اولیه نشده است"
 
 #: zypp/target/hal/HalContext.cc:137
 msgid "HalVolume not initialized"
-msgstr ""
+msgstr "HalVolume مقداردهی نشده است"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
-msgstr ""
+msgstr "ناتوان در ساخت ارتباط dbus"
 
 #: zypp/target/hal/HalContext.cc:242
 msgid "libhal_ctx_new: Can't create libhal context"
-msgstr ""
+msgstr "libhal_ctx_new: نمیتوان متن libhal را ساخت"
 
 #: zypp/target/hal/HalContext.cc:257
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr ""
+msgstr "libhal_set_dbus_connection: نمیتوان ارتباط dbus را تنظیم کرد."
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr ""
+msgstr "ناتوان در مقداردهی به متن HAL -- آیا hald اجرا نمیشود؟"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
-msgstr ""
+msgstr "درایو CDROM نیست"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
 #: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
 #: zypp/target/rpm/RpmDb.cc:2189
 msgid "RPM failed: "
-msgstr ""
+msgstr "RPM شکست خورد:"
 
 #. TranslatorExplanation first %s is file name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1124
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
-msgstr ""
+msgstr "ناموفق در وارد کردن کلید عمومی از پرونده ی %s: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
 #: zypp/target/rpm/RpmDb.cc:1195
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
-msgstr ""
+msgstr "ناموفق در حذف کلید عمومی %s: %s"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
 #: zypp/target/rpm/RpmDb.cc:1848
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr ""
+msgstr "پرونده های پیکربندی تغییر کرده برای %s:"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2024
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr ""
+msgstr "rpm ذخیره شد %s به عنوان %s، اما تعیین اختلاف امکانپذیر نبود"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2026
@@ -214,12 +215,14 @@ msgid ""
 "rpm saved %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
+"rpm ذخیره شد %s به عنوان %s\n"
+"اینها 25 خط اولیه ی اختلاف ها هستند:\n"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2029
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr ""
+msgstr "rpm ساخته شد %s به عنوان %s، اما تعیین اختلاف امکانپذیر نبود"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2031
@@ -228,83 +231,85 @@ msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
+"rpm ساخته شد %s به عنوان %s\n"
+"اینها 25 خط اولیه ی اختلاف ها هستند:\n"
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #: zypp/target/rpm/RpmDb.cc:2056 zypp/target/rpm/RpmDb.cc:2202
 msgid "Additional rpm output"
-msgstr ""
+msgstr "خروجی rpm اضافی"
 
 #: zypp/target/rpm/RpmDb.cc:2344
 #, c-format, boost-format
 msgid "created backup %s"
-msgstr ""
+msgstr "پشتیبان ساخته شد %s"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2365
 msgid "Signature is OK"
-msgstr ""
+msgstr "امضا خوب است"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2367
 msgid "Unknown type of signature"
-msgstr ""
+msgstr "نوع امضا ناشناخته است"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
 msgid "Signature does not verify"
-msgstr ""
+msgstr "امضا قابل تایید نیست"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2371
 msgid "Signature is OK, but key is not trusted"
-msgstr ""
+msgstr "امضا خوب است، اما کلید اعتمادسازی نشده است"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2373
 msgid "Signatures public key is not available"
-msgstr ""
+msgstr "کلید عمومی امضاها موجود نیست"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2375
 msgid "File does not exist or signature can't be checked"
-msgstr ""
+msgstr "پرونده موجود نیست و یا امضاها قابل بررسی نیستند"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
-msgstr ""
+msgstr "این اعمال انجام خواهند شد:"
 
 #: zypp/RepoManager.cc:297
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr ""
+msgstr "نمیتوان فهرست مخزن '%1%' را خواند: دسترسی غیرمجاز است"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr ""
+msgstr "ناموفق در خواندن مسیر '%s'"
 
 #: zypp/RepoManager.cc:315
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr ""
+msgstr "نمیتوان پرونده ی مخزن  '%1%' را خواند: دسترسی غیرمجاز است"
 
 #: zypp/RepoManager.cc:338
 msgid "Repository alias cannot start with dot."
-msgstr ""
+msgstr "نام مستعار مخزن نمیتواند با نقطه شروع شود."
 
 #: zypp/RepoManager.cc:349
 msgid "Service alias cannot start with dot."
-msgstr ""
+msgstr "نام مستعار سرویس نمیتواند با نقطه شروع شود."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
 #: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
-msgstr ""
+msgstr "نمیتوان پرونده ی '%s' را برای نوشتن باز کرد."
 
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
@@ -312,43 +317,43 @@ msgstr ""
 #: zypp/RepoManager.cc:849
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr ""
+msgstr "سرویس ناشناخته '%1%': در حال حذف مخزن سرویس جدا افتاده '%2%'"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1082
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "شبه داده ی معتبر  در آدرس تعیین شده یافت نشد"
+msgstr[1] "شبه داده ی معتبر در آدرسهای تعیین شده یافت نشد"
+msgstr[2] "شبه داده ی معتبر در آدرسهای تعیین شده یافت نشد"
 
 #: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
 #, c-format, boost-format
 msgid "Can't create %s"
-msgstr ""
+msgstr "نمیتوان %s را ساخت"
 
 #: zypp/RepoManager.cc:1140
 msgid "Can't create metadata cache directory."
-msgstr ""
+msgstr "نمیتوان فهرست کش شبه داده را ساخت."
 
 #: zypp/RepoManager.cc:1282
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr ""
+msgstr "در حال ساخت کش مخزن '%s' "
 
 #: zypp/RepoManager.cc:1302
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr ""
+msgstr "نمیتوان کش را در %s ساخت - دسترسی نوشتن نیست."
 
 #: zypp/RepoManager.cc:1366
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr ""
+msgstr "ناموفق در کش مخزن (%d)."
 
 #: zypp/RepoManager.cc:1377
 msgid "Unhandled repository type"
-msgstr ""
+msgstr "نوع مخزن کنترل نشده"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -359,235 +364,235 @@ msgstr ""
 #: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
-msgstr ""
+msgstr "خطا در تلاش برای خواندن از '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
-msgstr ""
+msgstr "خطای ناشناس در خواندن از  '%s'"
 
 #: zypp/RepoManager.cc:1611
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr ""
+msgstr "در حال اضافه کردن مخزن '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1701
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr ""
+msgstr "نام پرونده ی مخزن نامعتبر در '%s'"
 
 #: zypp/RepoManager.cc:1740
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr ""
+msgstr "در حال حذف مخزن  '%s'"
 
 #: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
 msgid "Can't figure out where the repo is stored."
-msgstr ""
+msgstr "نمیتوان کشف کرد که مخزن در کجا ذخیره شده است."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
 #, c-format, boost-format
 msgid "Can't delete '%s'"
-msgstr ""
+msgstr "'%s' را نمیتوان حذف کرد"
 
 #: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
 msgid "Can't figure out where the service is stored."
-msgstr ""
+msgstr "نمیتوان کشف کرد سرویس در کجا ذخیره شده است."
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
 msgid "Url scheme does not allow a %s"
-msgstr ""
+msgstr "شکل آدرس یک %s را مجاز نمیکند"
 
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr ""
+msgstr "%s نامعتبر جزء %s'"
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
 msgid "Invalid %s component"
-msgstr ""
+msgstr "جزء %s نامعتبر"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
-msgstr ""
+msgstr "تجزیه ی پرس و جوی رشته برای این آدرس پشتیبانی نمیشود"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
-msgstr ""
+msgstr "شکل آدرس یک جزء درخواستی است"
 
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr ""
+msgstr "شکل آدرس نامعتبر '%s'"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
-msgstr ""
+msgstr "شکل آدرس، نام کاربری را مجاز نمیکند"
 
 #: zypp/url/UrlBase.cc:983
 msgid "Url scheme does not allow a password"
-msgstr ""
+msgstr "شکل آدرس، رمز عبور را مجاز نمیکند"
 
 #: zypp/url/UrlBase.cc:1012
 msgid "Url scheme requires a host component"
-msgstr ""
+msgstr "شکل آدرس یک جزء میزبان را میخواهد"
 
 #: zypp/url/UrlBase.cc:1022
 msgid "Url scheme does not allow a host component"
-msgstr ""
+msgstr "شکل آدرس یک جزء میزبان را اجازه نمیدهد"
 
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr ""
+msgstr "جزء میزبان نامعتبر  '%s'"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
-msgstr ""
+msgstr "شکل آدس یک درگاه را مجاز نمیکند"
 
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
 msgid "Invalid port component '%s'"
-msgstr ""
+msgstr "جزء درگاه نامعتبر  '%s'"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
-msgstr ""
+msgstr "شکل آدرس یک نام مسیر را میخواهد"
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
-msgstr ""
+msgstr "مسیر نسبی در صورت وجود مرجع مجاز نیست"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
-msgstr ""
+msgstr "رشته ی رمزی حاوی بایت NUL است"
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
-msgstr ""
+msgstr "پارامتر کاراکتر جداکننده ی تقسیمگر آرایه نامعتبر"
 
 #: zypp/url/UrlUtils.cc:213
 msgid "Invalid parameter map split separator character"
-msgstr ""
+msgstr "پارامتر کاراکتر جداکننده ی تقسیمگر نقشه نامعتبر"
 
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
-msgstr ""
+msgstr "پارامتر کاراکتر جداکننده ی پیوند آرایه نامعتبر"
 
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
-msgstr ""
+msgstr "نمیتوان pty (%s) را باز کرد."
 
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
-msgstr ""
+msgstr "نمیتوان pipe (%s) را باز کرد."
 
 #: zypp/ExternalProgram.cc:350
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr ""
+msgstr "نمیتوان chroot کرد به '%s' (%s) "
 
 #: zypp/ExternalProgram.cc:360
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr ""
+msgstr "نمیتوان chdir کرد به '%s'  درون chroot '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:361
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr ""
+msgstr "نمیتوان chdir کرد به '%s' (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
-msgstr ""
+msgstr "'%s' (%s) رانمیتوان اجرا کرد"
 
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr ""
+msgstr "(%s) را نمیتوان fork کرد "
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
 msgid "Command exited with status %d."
-msgstr ""
+msgstr "دستور با وضعیت %d خارج شد"
 
 #: zypp/ExternalProgram.cc:527
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr ""
+msgstr "دستور با سیگنال %d (%s) کشته شد."
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
-msgstr ""
+msgstr "دستور با خطای ناشناخته خارج شد"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:116
 msgid "(does not expire)"
-msgstr ""
+msgstr "(منقضی نمیشود)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:125
 msgid "(EXPIRED)"
-msgstr ""
+msgstr "(منقضی شده است)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:129
 msgid "(expires within 24h)"
-msgstr ""
+msgstr "(در 24 ساعت منقضی میشود)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "(در %d منقضی می شود)"
+msgstr[1] "(در %d منقضی می شود)"
+msgstr[2] "(در %d منقضی می شود)"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
-msgstr ""
+msgstr "ناشناخته"
 
 #: zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
-msgstr ""
+msgstr "پشتیبانی نشده"
 
 #: zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr ""
+msgstr "سطح 1"
 
 #: zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr ""
+msgstr "سطح 2"
 
 #: zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr ""
+msgstr "سطح 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr ""
+msgstr "قرارداد اضافی مشتری نیاز است"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr ""
+msgstr "نامعتبر"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr ""
+msgstr "سطح پشتیبانی تعیین نشده است"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
-msgstr ""
+msgstr "فروشنده پشتیبانی ارائه نمیدهد."
 
 #: zypp/VendorSupportOptions.cc:45
 msgid ""
@@ -596,6 +601,9 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
+"تعیین مشکل، که به معنای پشتیبانی تخصصی جهت مهیا کردن اطلاعات سازگاری، کمک در "
+"نصب، پشتیبانی در استفاده، نگهداری در دست اقدام و عیب یابی پایه ای است. "
+"پشتیبانی سطح 1 برای ترمیم خطاهای نقض محصول در نظر گرفته نشده است."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
@@ -603,6 +611,9 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
+"انزوای مشکل، که به معنای پشتیبانی تخصصی جهت مشابه سازی مشکلات مشتری، انزوای "
+"مکان مشکل و مهیا سازی روش حل برای مشکلاتی است که توسط پشتیبانی سطح 1 رفع "
+"نشده است، طراحی شده است."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -610,3628 +621,3631 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
+"روش حل مشکل، که به معنای پشتیبانی تخصصی طراحی شده جهت حل مشکلات پیچیده به "
+"وسیله ی جذب مهندسی در حل نقص های محصول که توسط پشتیبانی سطح 2 شناسایی شده "
+"است."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr ""
+msgstr "یک قرارداد اضافی مشتری برای دریافت پشتیبانی نیاز است"
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr ""
+msgstr "اختیار پشتیبانی نامشخص. تعاریف در دسترس نیستند."
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr ""
+msgstr "کشور ناشناخته:"
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
 #: zypp/CountryCode.cc:149 zypp/LanguageCode.cc:148
 msgid "No Code"
-msgstr ""
+msgstr "بدون کد"
 
 #: zypp/CountryCode.cc:158
 msgid "Andorra"
-msgstr ""
+msgstr "آندورا"
 
 #. :AND:020:
 #: zypp/CountryCode.cc:159
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "امارات متحده ی عربی"
 
 #. :ARE:784:
 #: zypp/CountryCode.cc:160
 msgid "Afghanistan"
-msgstr ""
+msgstr "افغانستان"
 
 #. :AFG:004:
 #: zypp/CountryCode.cc:161
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "آنتیگوا و باربودا"
 
 #. :ATG:028:
 #: zypp/CountryCode.cc:162
 msgid "Anguilla"
-msgstr ""
+msgstr "آنگویلا"
 
 #. :AIA:660:
 #: zypp/CountryCode.cc:163
 msgid "Albania"
-msgstr ""
+msgstr "آلبانی"
 
 #. :ALB:008:
 #: zypp/CountryCode.cc:164
 msgid "Armenia"
-msgstr ""
+msgstr "ارمنستان"
 
 #. :ARM:051:
 #: zypp/CountryCode.cc:165
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "آنتیل هلند"
 
 #. :ANT:530:
 #: zypp/CountryCode.cc:166
 msgid "Angola"
-msgstr ""
+msgstr "آنگولا"
 
 #. :AGO:024:
 #: zypp/CountryCode.cc:167
 msgid "Antarctica"
-msgstr ""
+msgstr "قاره قطب جنوب"
 
 #. :ATA:010:
 #: zypp/CountryCode.cc:168
 msgid "Argentina"
-msgstr ""
+msgstr "آرژانتین"
 
 #. :ARG:032:
 #: zypp/CountryCode.cc:169
 msgid "American Samoa"
-msgstr ""
+msgstr "ساموآ"
 
 #. :ASM:016:
 #: zypp/CountryCode.cc:170
 msgid "Austria"
-msgstr ""
+msgstr "اتریش"
 
 #. :AUT:040:
 #: zypp/CountryCode.cc:171
 msgid "Australia"
-msgstr ""
+msgstr "استرالیا"
 
 #. :AUS:036:
 #: zypp/CountryCode.cc:172
 msgid "Aruba"
-msgstr ""
+msgstr "اروبا"
 
 #. :ABW:533:
 #: zypp/CountryCode.cc:173
 msgid "Aland Islands"
-msgstr ""
+msgstr "جزایر آلند"
 
 #. :ALA:248:
 #: zypp/CountryCode.cc:174
 msgid "Azerbaijan"
-msgstr ""
+msgstr "آذربایجان"
 
 #. :AZE:031:
 #: zypp/CountryCode.cc:175
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "بوسنی و هرزگوین"
 
 #. :BIH:070:
 #: zypp/CountryCode.cc:176
 msgid "Barbados"
-msgstr ""
+msgstr "باربادوس"
 
 #. :BRB:052:
 #: zypp/CountryCode.cc:177
 msgid "Bangladesh"
-msgstr ""
+msgstr "بنگلادش"
 
 #. :BGD:050:
 #: zypp/CountryCode.cc:178
 msgid "Belgium"
-msgstr ""
+msgstr "بلژیک"
 
 #. :BEL:056:
 #: zypp/CountryCode.cc:179
 msgid "Burkina Faso"
-msgstr ""
+msgstr "بورکینا فاسو"
 
 #. :BFA:854:
 #: zypp/CountryCode.cc:180
 msgid "Bulgaria"
-msgstr ""
+msgstr "بلغارستان"
 
 #. :BGR:100:
 #: zypp/CountryCode.cc:181
 msgid "Bahrain"
-msgstr ""
+msgstr "بحرین"
 
 #. :BHR:048:
 #: zypp/CountryCode.cc:182
 msgid "Burundi"
-msgstr ""
+msgstr "بروندی"
 
 #. :BDI:108:
 #: zypp/CountryCode.cc:183
 msgid "Benin"
-msgstr ""
+msgstr "بنین"
 
 #. :BEN:204:
 #: zypp/CountryCode.cc:184
 msgid "Bermuda"
-msgstr ""
+msgstr "برمودا"
 
 #. :BMU:060:
 #: zypp/CountryCode.cc:185
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "برونئی دارالسلام"
 
 #. :BRN:096:
 #: zypp/CountryCode.cc:186
 msgid "Bolivia"
-msgstr ""
+msgstr "بولیوی"
 
 #. :BOL:068:
 #: zypp/CountryCode.cc:187
 msgid "Brazil"
-msgstr ""
+msgstr "برزیل"
 
 #. :BRA:076:
 #: zypp/CountryCode.cc:188
 msgid "Bahamas"
-msgstr ""
+msgstr "باهاماس"
 
 #. :BHS:044:
 #: zypp/CountryCode.cc:189
 msgid "Bhutan"
-msgstr ""
+msgstr "بوتان"
 
 #. :BTN:064:
 #: zypp/CountryCode.cc:190
 msgid "Bouvet Island"
-msgstr ""
+msgstr "جزیره بووت"
 
 #. :BVT:074:
 #: zypp/CountryCode.cc:191
 msgid "Botswana"
-msgstr ""
+msgstr "بوتسوانا"
 
 #. :BWA:072:
 #: zypp/CountryCode.cc:192
 msgid "Belarus"
-msgstr ""
+msgstr "بلاروس"
 
 #. :BLR:112:
 #: zypp/CountryCode.cc:193
 msgid "Belize"
-msgstr ""
+msgstr "بلیز"
 
 #. :BLZ:084:
 #: zypp/CountryCode.cc:194
 msgid "Canada"
-msgstr ""
+msgstr "کانادا"
 
 #. :CAN:124:
 #: zypp/CountryCode.cc:195
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "جزایر کوکوس (کیلینگ)"
 
 #. :CCK:166:
 #. :CAF:140:
 #: zypp/CountryCode.cc:196 zypp/CountryCode.cc:198
 msgid "Congo"
-msgstr ""
+msgstr "کونگو"
 
 #. :COD:180:
 #: zypp/CountryCode.cc:197
 msgid "Central African Republic"
-msgstr ""
+msgstr "جمهوجمهوری آفریقای مرکزی"
 
 #. :COG:178:
 #: zypp/CountryCode.cc:199
 msgid "Switzerland"
-msgstr ""
+msgstr "سوئیس"
 
 #. :CHE:756:
 #: zypp/CountryCode.cc:200
 msgid "Cote D'Ivoire"
-msgstr ""
+msgstr "ساحل عاج"
 
 #. :CIV:384:
 #: zypp/CountryCode.cc:201
 msgid "Cook Islands"
-msgstr ""
+msgstr "جزایر کوک"
 
 #. :COK:184:
 #: zypp/CountryCode.cc:202
 msgid "Chile"
-msgstr ""
+msgstr "شیلی"
 
 #. :CHL:152:
 #: zypp/CountryCode.cc:203
 msgid "Cameroon"
-msgstr ""
+msgstr "کامرون"
 
 #. :CMR:120:
 #: zypp/CountryCode.cc:204
 msgid "China"
-msgstr ""
+msgstr "چین"
 
 #. :CHN:156:
 #: zypp/CountryCode.cc:205
 msgid "Colombia"
-msgstr ""
+msgstr "کلمبیا"
 
 #. :COL:170:
 #: zypp/CountryCode.cc:206
 msgid "Costa Rica"
-msgstr ""
+msgstr "کاستاریکا"
 
 #. :CRI:188:
 #: zypp/CountryCode.cc:207
 msgid "Cuba"
-msgstr ""
+msgstr "کوبا"
 
 #. :CUB:192:
 #: zypp/CountryCode.cc:208
 msgid "Cape Verde"
-msgstr ""
+msgstr "کیپ ورد"
 
 #. :CPV:132:
 #: zypp/CountryCode.cc:209
 msgid "Christmas Island"
-msgstr ""
+msgstr "جزیره ی کریسمس"
 
 #. :CXR:162:
 #: zypp/CountryCode.cc:210
 msgid "Cyprus"
-msgstr ""
+msgstr "قبرس"
 
 #. :CYP:196:
 #: zypp/CountryCode.cc:211
 msgid "Czech Republic"
-msgstr ""
+msgstr "جمهوری چک"
 
 #. :CZE:203:
 #: zypp/CountryCode.cc:212
 msgid "Germany"
-msgstr ""
+msgstr "آلمان"
 
 #. :DEU:276:
 #: zypp/CountryCode.cc:213
 msgid "Djibouti"
-msgstr ""
+msgstr "جیبوتی"
 
 #. :DJI:262:
 #: zypp/CountryCode.cc:214
 msgid "Denmark"
-msgstr ""
+msgstr "دانمارک"
 
 #. :DNK:208:
 #: zypp/CountryCode.cc:215
 msgid "Dominica"
-msgstr ""
+msgstr "دومینیکا"
 
 #. :DMA:212:
 #: zypp/CountryCode.cc:216
 msgid "Dominican Republic"
-msgstr ""
+msgstr "جمهوری دومینیکن"
 
 #. :DOM:214:
 #: zypp/CountryCode.cc:217
 msgid "Algeria"
-msgstr ""
+msgstr "الجزایر"
 
 #. :DZA:012:
 #: zypp/CountryCode.cc:218
 msgid "Ecuador"
-msgstr ""
+msgstr "اکوادر"
 
 #. :ECU:218:
 #: zypp/CountryCode.cc:219
 msgid "Estonia"
-msgstr ""
+msgstr "استونی"
 
 #. :EST:233:
 #: zypp/CountryCode.cc:220
 msgid "Egypt"
-msgstr ""
+msgstr "مصر"
 
 #. :EGY:818:
 #: zypp/CountryCode.cc:221
 msgid "Western Sahara"
-msgstr ""
+msgstr "صحرای غربی"
 
 #. :ESH:732:
 #: zypp/CountryCode.cc:222
 msgid "Eritrea"
-msgstr ""
+msgstr "اریتره"
 
 #. :ERI:232:
 #: zypp/CountryCode.cc:223
 msgid "Spain"
-msgstr ""
+msgstr "اسپانیا"
 
 #. :ESP:724:
 #: zypp/CountryCode.cc:224
 msgid "Ethiopia"
-msgstr ""
+msgstr "اتیوپی"
 
 #. :ETH:231:
 #: zypp/CountryCode.cc:225
 msgid "Finland"
-msgstr ""
+msgstr "فنلاند"
 
 #. :FIN:246:
 #: zypp/CountryCode.cc:226
 msgid "Fiji"
-msgstr ""
+msgstr "فیجی"
 
 #. :FJI:242:
 #: zypp/CountryCode.cc:227
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "جزایر فالکلند (مالویناس)"
 
 #. :FLK:238:
 #: zypp/CountryCode.cc:228
 msgid "Federated States of Micronesia"
-msgstr ""
+msgstr "ایالات فدرال میکرونزی"
 
 #. :FSM:583:
 #: zypp/CountryCode.cc:229
 msgid "Faroe Islands"
-msgstr ""
+msgstr "جزایر فارو"
 
 #. :FRO:234:
 #: zypp/CountryCode.cc:230
 msgid "France"
-msgstr ""
+msgstr "فرانسه"
 
 #. :FRA:250:
 #: zypp/CountryCode.cc:231
 msgid "Metropolitan France"
-msgstr ""
+msgstr "شهری فرانسه"
 
 #. :FXX:249:
 #: zypp/CountryCode.cc:232
 msgid "Gabon"
-msgstr ""
+msgstr "گابن"
 
 #. :GAB:266:
 #: zypp/CountryCode.cc:233
 msgid "United Kingdom"
-msgstr ""
+msgstr "انگلستان"
 
 #. :GBR:826:
 #: zypp/CountryCode.cc:234
 msgid "Grenada"
-msgstr ""
+msgstr "گرانادا"
 
 #. :GRD:308:
 #: zypp/CountryCode.cc:235
 msgid "Georgia"
-msgstr ""
+msgstr "گرجستان"
 
 #. :GEO:268:
 #: zypp/CountryCode.cc:236
 msgid "French Guiana"
-msgstr ""
+msgstr "گویان فرانسه"
 
 #. :GUF:254:
 #: zypp/CountryCode.cc:237
 msgid "Guernsey"
-msgstr ""
+msgstr "گرنزی"
 
 #: zypp/CountryCode.cc:238
 msgid "Ghana"
-msgstr ""
+msgstr "غنا"
 
 #. :GHA:288:
 #: zypp/CountryCode.cc:239
 msgid "Gibraltar"
-msgstr ""
+msgstr "جبل الطارق"
 
 #. :GIB:292:
 #: zypp/CountryCode.cc:240
 msgid "Greenland"
-msgstr ""
+msgstr "گرینلند"
 
 #. :GRL:304:
 #: zypp/CountryCode.cc:241
 msgid "Gambia"
-msgstr ""
+msgstr "گامبیا"
 
 #. :GMB:270:
 #: zypp/CountryCode.cc:242
 msgid "Guinea"
-msgstr ""
+msgstr "گینه"
 
 #. :GIN:324:
 #: zypp/CountryCode.cc:243
 msgid "Guadeloupe"
-msgstr ""
+msgstr "جزیره گوادلوپ"
 
 #. :GLP:312:
 #: zypp/CountryCode.cc:244
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "گینه استوایی"
 
 #. :GNQ:226:
 #: zypp/CountryCode.cc:245
 msgid "Greece"
-msgstr ""
+msgstr "یونان"
 
 #. :GRC:300:
 #: zypp/CountryCode.cc:246
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "جورجیای جنوبی و جزایر ساندویچ جنوبی"
 
 #. :SGS:239:
 #: zypp/CountryCode.cc:247
 msgid "Guatemala"
-msgstr ""
+msgstr "گواتمالا"
 
 #. :GTM:320:
 #: zypp/CountryCode.cc:248
 msgid "Guam"
-msgstr ""
+msgstr "گوام"
 
 #. :GUM:316:
 #: zypp/CountryCode.cc:249
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "گینه بیسائو"
 
 #. :GNB:624:
 #: zypp/CountryCode.cc:250
 msgid "Guyana"
-msgstr ""
+msgstr "گویان"
 
 #. :GUY:328:
 #: zypp/CountryCode.cc:251
 msgid "Hong Kong"
-msgstr ""
+msgstr "هنگ کنگ"
 
 #. :HKG:344:
 #: zypp/CountryCode.cc:252
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "جزیره هرد و جزایر مک دونالد"
 
 #. :HMD:334:
 #: zypp/CountryCode.cc:253
 msgid "Honduras"
-msgstr ""
+msgstr "هندوراس"
 
 #. :HND:340:
 #: zypp/CountryCode.cc:254
 msgid "Croatia"
-msgstr ""
+msgstr "کرواسی"
 
 #. :HRV:191:
 #: zypp/CountryCode.cc:255
 msgid "Haiti"
-msgstr ""
+msgstr "هائیتی"
 
 #. :HTI:332:
 #: zypp/CountryCode.cc:256
 msgid "Hungary"
-msgstr ""
+msgstr "مجارستان"
 
 #. :HUN:348:
 #: zypp/CountryCode.cc:257
 msgid "Indonesia"
-msgstr ""
+msgstr "اندونزی"
 
 #. :IDN:360:
 #: zypp/CountryCode.cc:258
 msgid "Ireland"
-msgstr ""
+msgstr "ایرلند"
 
 #. :IRL:372:
 #: zypp/CountryCode.cc:259
 msgid "Israel"
-msgstr ""
+msgstr "اسرائیل"
 
 #. :ISR:376:
 #: zypp/CountryCode.cc:260
 msgid "Isle of Man"
-msgstr ""
+msgstr "جزیره ی من"
 
 #: zypp/CountryCode.cc:261
 msgid "India"
-msgstr ""
+msgstr "هند"
 
 #. :IND:356:
 #: zypp/CountryCode.cc:262
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "قلمرو بریتانیا در اقیانوس هند"
 
 #. :IOT:086:
 #: zypp/CountryCode.cc:263
 msgid "Iraq"
-msgstr ""
+msgstr "عراق"
 
 #. :IRQ:368:
 #: zypp/CountryCode.cc:264
 msgid "Iran"
-msgstr ""
+msgstr "ایران"
 
 #. :IRN:364:
 #: zypp/CountryCode.cc:265
 msgid "Iceland"
-msgstr ""
+msgstr "ایسلند"
 
 #. :ISL:352:
 #: zypp/CountryCode.cc:266
 msgid "Italy"
-msgstr ""
+msgstr "ایتالیا"
 
 #. :ITA:380:
 #: zypp/CountryCode.cc:267
 msgid "Jersey"
-msgstr ""
+msgstr "جرسی"
 
 #: zypp/CountryCode.cc:268
 msgid "Jamaica"
-msgstr ""
+msgstr "جامائیکا"
 
 #. :JAM:388:
 #: zypp/CountryCode.cc:269
 msgid "Jordan"
-msgstr ""
+msgstr "اردن"
 
 #. :JOR:400:
 #: zypp/CountryCode.cc:270
 msgid "Japan"
-msgstr ""
+msgstr "ژاپن"
 
 #. :JPN:392:
 #: zypp/CountryCode.cc:271
 msgid "Kenya"
-msgstr ""
+msgstr "کنیا"
 
 #. :KEN:404:
 #: zypp/CountryCode.cc:272
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "قرقیزستان"
 
 #. :KGZ:417:
 #: zypp/CountryCode.cc:273
 msgid "Cambodia"
-msgstr ""
+msgstr "کلمبیا"
 
 #. :KHM:116:
 #: zypp/CountryCode.cc:274
 msgid "Kiribati"
-msgstr ""
+msgstr "کیریباتی"
 
 #. :KIR:296:
 #: zypp/CountryCode.cc:275
 msgid "Comoros"
-msgstr ""
+msgstr "کومور"
 
 #. :COM:174:
 #: zypp/CountryCode.cc:276
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "سنت کیتس و نویس"
 
 #. :KNA:659:
 #: zypp/CountryCode.cc:277
 msgid "North Korea"
-msgstr ""
+msgstr "کره ی شمالی"
 
 #. :PRK:408:
 #: zypp/CountryCode.cc:278
 msgid "South Korea"
-msgstr ""
+msgstr "کره ی جنوبی"
 
 #. :KOR:410:
 #: zypp/CountryCode.cc:279
 msgid "Kuwait"
-msgstr ""
+msgstr "کویت"
 
 #. :KWT:414:
 #: zypp/CountryCode.cc:280
 msgid "Cayman Islands"
-msgstr ""
+msgstr "جزایر کیمن"
 
 #. :CYM:136:
 #: zypp/CountryCode.cc:281
 msgid "Kazakhstan"
-msgstr ""
+msgstr "قزاقستان"
 
 #. :KAZ:398:
 #: zypp/CountryCode.cc:282
 msgid "Lao People's Democratic Republic"
-msgstr ""
+msgstr "جمهوری دموکراتیک خلق لائوس"
 
 #. :LAO:418:
 #: zypp/CountryCode.cc:283
 msgid "Lebanon"
-msgstr ""
+msgstr "لبنان"
 
 #. :LBN:422:
 #: zypp/CountryCode.cc:284
 msgid "Saint Lucia"
-msgstr ""
+msgstr "سنت لوسیا"
 
 #. :LCA:662:
 #: zypp/CountryCode.cc:285
 msgid "Liechtenstein"
-msgstr ""
+msgstr "لیختن اشتاین"
 
 #. :LIE:438:
 #: zypp/CountryCode.cc:286
 msgid "Sri Lanka"
-msgstr ""
+msgstr "سریلانکا"
 
 #. :LKA:144:
 #: zypp/CountryCode.cc:287
 msgid "Liberia"
-msgstr ""
+msgstr "لیبریا"
 
 #. :LBR:430:
 #: zypp/CountryCode.cc:288
 msgid "Lesotho"
-msgstr ""
+msgstr "لسوتو"
 
 #. :LSO:426:
 #: zypp/CountryCode.cc:289
 msgid "Lithuania"
-msgstr ""
+msgstr "لیتوانی"
 
 #. :LTU:440:
 #: zypp/CountryCode.cc:290
 msgid "Luxembourg"
-msgstr ""
+msgstr "لوکزامبورگ"
 
 #. :LUX:442:
 #: zypp/CountryCode.cc:291
 msgid "Latvia"
-msgstr ""
+msgstr "لتونی"
 
 #. :LVA:428:
 #: zypp/CountryCode.cc:292
 msgid "Libya"
-msgstr ""
+msgstr "لیبی"
 
 #. :LBY:434:
 #: zypp/CountryCode.cc:293
 msgid "Morocco"
-msgstr ""
+msgstr "مراکش"
 
 #. :MAR:504:
 #: zypp/CountryCode.cc:294
 msgid "Monaco"
-msgstr ""
+msgstr "موناکو"
 
 #. :MCO:492:
 #: zypp/CountryCode.cc:295
 msgid "Moldova"
-msgstr ""
+msgstr "مولدووا"
 
 #. :MDA:498:
 #: zypp/CountryCode.cc:296
 msgid "Montenegro"
-msgstr ""
+msgstr "مونته نگرو"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
-msgstr ""
+msgstr "سنت مارتین"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
-msgstr ""
+msgstr "ماداگاسکار"
 
 #. :MDG:450:
 #: zypp/CountryCode.cc:299
 msgid "Marshall Islands"
-msgstr ""
+msgstr "جزایر مارشال"
 
 #. :MHL:584:
 #: zypp/CountryCode.cc:300
 msgid "Macedonia"
-msgstr ""
+msgstr "مقدونیه"
 
 #. :MKD:807:
 #: zypp/CountryCode.cc:301
 msgid "Mali"
-msgstr ""
+msgstr "مالی"
 
 #. :MLI:466:
 #: zypp/CountryCode.cc:302
 msgid "Myanmar"
-msgstr ""
+msgstr "میانمار"
 
 #. :MMR:104:
 #: zypp/CountryCode.cc:303
 msgid "Mongolia"
-msgstr ""
+msgstr "مغولستان"
 
 #. :MNG:496:
 #: zypp/CountryCode.cc:304
 msgid "Macao"
-msgstr ""
+msgstr "ماکائو"
 
 #. :MAC:446:
 #: zypp/CountryCode.cc:305
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "جزایر ماریانای شمالی"
 
 #. :MNP:580:
 #: zypp/CountryCode.cc:306
 msgid "Martinique"
-msgstr ""
+msgstr "مارتینیک"
 
 #. :MTQ:474:
 #: zypp/CountryCode.cc:307
 msgid "Mauritania"
-msgstr ""
+msgstr "موریتانی"
 
 #. :MRT:478:
 #: zypp/CountryCode.cc:308
 msgid "Montserrat"
-msgstr ""
+msgstr "مونتسرات"
 
 #. :MSR:500:
 #: zypp/CountryCode.cc:309
 msgid "Malta"
-msgstr ""
+msgstr "مالت"
 
 #. :MLT:470:
 #: zypp/CountryCode.cc:310
 msgid "Mauritius"
-msgstr ""
+msgstr "موریس"
 
 #. :MUS:480:
 #: zypp/CountryCode.cc:311
 msgid "Maldives"
-msgstr ""
+msgstr "مالدیو"
 
 #. :MDV:462:
 #: zypp/CountryCode.cc:312
 msgid "Malawi"
-msgstr ""
+msgstr "مالاوی"
 
 #. :MWI:454:
 #: zypp/CountryCode.cc:313
 msgid "Mexico"
-msgstr ""
+msgstr "مکزیک"
 
 #. :MEX:484:
 #: zypp/CountryCode.cc:314
 msgid "Malaysia"
-msgstr ""
+msgstr "مالزی"
 
 #. :MYS:458:
 #: zypp/CountryCode.cc:315
 msgid "Mozambique"
-msgstr ""
+msgstr "موزامبیک"
 
 #. :MOZ:508:
 #: zypp/CountryCode.cc:316
 msgid "Namibia"
-msgstr ""
+msgstr "نامیبیا"
 
 #. :NAM:516:
 #: zypp/CountryCode.cc:317
 msgid "New Caledonia"
-msgstr ""
+msgstr "کالدونیای جدید"
 
 #. :NCL:540:
 #: zypp/CountryCode.cc:318
 msgid "Niger"
-msgstr ""
+msgstr "نیجر"
 
 #. :NER:562:
 #: zypp/CountryCode.cc:319
 msgid "Norfolk Island"
-msgstr ""
+msgstr "جزیره نورفولک"
 
 #. :NFK:574:
 #: zypp/CountryCode.cc:320
 msgid "Nigeria"
-msgstr ""
+msgstr "نیجریه"
 
 #. :NGA:566:
 #: zypp/CountryCode.cc:321
 msgid "Nicaragua"
-msgstr ""
+msgstr "نیکاراگوئه"
 
 #. :NIC:558:
 #: zypp/CountryCode.cc:322
 msgid "Netherlands"
-msgstr ""
+msgstr "هلند"
 
 #. :NLD:528:
 #: zypp/CountryCode.cc:323
 msgid "Norway"
-msgstr ""
+msgstr "نروژ"
 
 #. :NOR:578:
 #: zypp/CountryCode.cc:324
 msgid "Nepal"
-msgstr ""
+msgstr "نپال"
 
 #. :NPL:524:
 #. language code: nau na
 #: zypp/CountryCode.cc:325 zypp/LanguageCode.cc:781
 msgid "Nauru"
-msgstr ""
+msgstr "نائورو"
 
 #. :NRU:520:
 #: zypp/CountryCode.cc:326
 msgid "Niue"
-msgstr ""
+msgstr "نیوئه"
 
 #. :NIU:570:
 #: zypp/CountryCode.cc:327
 msgid "New Zealand"
-msgstr ""
+msgstr "نیوزیلند"
 
 #. :NZL:554:
 #: zypp/CountryCode.cc:328
 msgid "Oman"
-msgstr ""
+msgstr "عمان"
 
 #. :OMN:512:
 #: zypp/CountryCode.cc:329
 msgid "Panama"
-msgstr ""
+msgstr "پاناما"
 
 #. :PAN:591:
 #: zypp/CountryCode.cc:330
 msgid "Peru"
-msgstr ""
+msgstr "پرو"
 
 #. :PER:604:
 #: zypp/CountryCode.cc:331
 msgid "French Polynesia"
-msgstr ""
+msgstr "پلینزی فرانسه"
 
 #. :PYF:258:
 #: zypp/CountryCode.cc:332
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "پاپوآ گینه نو"
 
 #. :PNG:598:
 #: zypp/CountryCode.cc:333
 msgid "Philippines"
-msgstr ""
+msgstr "فیلیپین"
 
 #. :PHL:608:
 #: zypp/CountryCode.cc:334
 msgid "Pakistan"
-msgstr ""
+msgstr "پاکستان"
 
 #. :PAK:586:
 #: zypp/CountryCode.cc:335
 msgid "Poland"
-msgstr ""
+msgstr "لهستان"
 
 #. :POL:616:
 #: zypp/CountryCode.cc:336
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "سنت پیر و ماژلان"
 
 #. :SPM:666:
 #: zypp/CountryCode.cc:337
 msgid "Pitcairn"
-msgstr ""
+msgstr "پیتکرن"
 
 #. :PCN:612:
 #: zypp/CountryCode.cc:338
 msgid "Puerto Rico"
-msgstr ""
+msgstr "پورتوریکو"
 
 #. :PRI:630:
 #: zypp/CountryCode.cc:339
 msgid "Palestinian Territory"
-msgstr ""
+msgstr "سرزمین فلسطین"
 
 #. :PSE:275:
 #: zypp/CountryCode.cc:340
 msgid "Portugal"
-msgstr ""
+msgstr "پرتغال"
 
 #. :PRT:620:
 #: zypp/CountryCode.cc:341
 msgid "Palau"
-msgstr ""
+msgstr "پالائو"
 
 #. :PLW:585:
 #: zypp/CountryCode.cc:342
 msgid "Paraguay"
-msgstr ""
+msgstr "پاراگوئه"
 
 #. :PRY:600:
 #: zypp/CountryCode.cc:343
 msgid "Qatar"
-msgstr ""
+msgstr "قطر"
 
 #. :QAT:634:
 #: zypp/CountryCode.cc:344
 msgid "Reunion"
-msgstr ""
+msgstr "رئونیون"
 
 #. :REU:638:
 #: zypp/CountryCode.cc:345
 msgid "Romania"
-msgstr ""
+msgstr "رومانی"
 
 #. :ROU:642:
 #: zypp/CountryCode.cc:346
 msgid "Serbia"
-msgstr ""
+msgstr "صربستان"
 
 #: zypp/CountryCode.cc:347
 msgid "Russian Federation"
-msgstr ""
+msgstr "روسیه"
 
 #. :RUS:643:
 #: zypp/CountryCode.cc:348
 msgid "Rwanda"
-msgstr ""
+msgstr "رواندا"
 
 #. :RWA:646:
 #: zypp/CountryCode.cc:349
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "عربستان سعودی"
 
 #. :SAU:682:
 #: zypp/CountryCode.cc:350
 msgid "Solomon Islands"
-msgstr ""
+msgstr "جزایر سلیمان"
 
 #. :SLB:090:
 #: zypp/CountryCode.cc:351
 msgid "Seychelles"
-msgstr ""
+msgstr "سیشل"
 
 #. :SYC:690:
 #: zypp/CountryCode.cc:352
 msgid "Sudan"
-msgstr ""
+msgstr "سودان"
 
 #. :SDN:736:
 #: zypp/CountryCode.cc:353
 msgid "Sweden"
-msgstr ""
+msgstr "سوئد"
 
 #. :SWE:752:
 #: zypp/CountryCode.cc:354
 msgid "Singapore"
-msgstr ""
+msgstr "سنگاپور"
 
 #. :SGP:702:
 #: zypp/CountryCode.cc:355
 msgid "Saint Helena"
-msgstr ""
+msgstr "سنت هلن"
 
 #. :SHN:654:
 #: zypp/CountryCode.cc:356
 msgid "Slovenia"
-msgstr ""
+msgstr "اسلوونی"
 
 #. :SVN:705:
 #: zypp/CountryCode.cc:357
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "سوالبارد و یان ماین"
 
 #. :SJM:744:
 #: zypp/CountryCode.cc:358
 msgid "Slovakia"
-msgstr ""
+msgstr "اسلواکی"
 
 #. :SVK:703:
 #: zypp/CountryCode.cc:359
 msgid "Sierra Leone"
-msgstr ""
+msgstr "سیرالئون"
 
 #. :SLE:694:
 #: zypp/CountryCode.cc:360
 msgid "San Marino"
-msgstr ""
+msgstr "سان مارینو"
 
 #. :SMR:674:
 #: zypp/CountryCode.cc:361
 msgid "Senegal"
-msgstr ""
+msgstr "سنگال"
 
 #. :SEN:686:
 #: zypp/CountryCode.cc:362
 msgid "Somalia"
-msgstr ""
+msgstr "سومالی"
 
 #. :SOM:706:
 #: zypp/CountryCode.cc:363
 msgid "Suriname"
-msgstr ""
+msgstr "سورینام"
 
 #. :SUR:740:
 #: zypp/CountryCode.cc:364
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "سائوتومه و پرینسیپ"
 
 #. :STP:678:
 #: zypp/CountryCode.cc:365
 msgid "El Salvador"
-msgstr ""
+msgstr "السالوادور"
 
 #. :SLV:222:
 #: zypp/CountryCode.cc:366
 msgid "Syria"
-msgstr ""
+msgstr "سوریه"
 
 #. :SYR:760:
 #: zypp/CountryCode.cc:367
 msgid "Swaziland"
-msgstr ""
+msgstr "سوازیلند"
 
 #. :SWZ:748:
 #: zypp/CountryCode.cc:368
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "جزایر تورکس و کایکوس"
 
 #. :TCA:796:
 #: zypp/CountryCode.cc:369
 msgid "Chad"
-msgstr ""
+msgstr "چاد"
 
 #. :TCD:148:
 #: zypp/CountryCode.cc:370
 msgid "French Southern Territories"
-msgstr ""
+msgstr "سرزمین های جنوبی فرانسه"
 
 #. :ATF:260:
 #: zypp/CountryCode.cc:371
 msgid "Togo"
-msgstr ""
+msgstr "توگو"
 
 #. :TGO:768:
 #: zypp/CountryCode.cc:372
 msgid "Thailand"
-msgstr ""
+msgstr "تایلند"
 
 #. :THA:764:
 #: zypp/CountryCode.cc:373
 msgid "Tajikistan"
-msgstr ""
+msgstr "تاجیکستان"
 
 #. :TJK:762:
 #. language code: tkl
 #: zypp/CountryCode.cc:374 zypp/LanguageCode.cc:1045
 msgid "Tokelau"
-msgstr ""
+msgstr "توکلائو"
 
 #. :TKL:772:
 #: zypp/CountryCode.cc:375
 msgid "Turkmenistan"
-msgstr ""
+msgstr "ترکمنستان"
 
 #. :TKM:795:
 #: zypp/CountryCode.cc:376
 msgid "Tunisia"
-msgstr ""
+msgstr "تونس"
 
 #. :TUN:788:
 #: zypp/CountryCode.cc:377
 msgid "Tonga"
-msgstr ""
+msgstr "تونگا"
 
 #. :TON:776:
 #: zypp/CountryCode.cc:378
 msgid "East Timor"
-msgstr ""
+msgstr "شرق تیمور"
 
 #. :TLS:626:
 #: zypp/CountryCode.cc:379
 msgid "Turkey"
-msgstr ""
+msgstr "ترکیه"
 
 #. :TUR:792:
 #: zypp/CountryCode.cc:380
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "ترینیداد و توباگو"
 
 #. :TTO:780:
 #. language code: tvl
 #: zypp/CountryCode.cc:381 zypp/LanguageCode.cc:1075
 msgid "Tuvalu"
-msgstr ""
+msgstr "تووالو"
 
 #. :TUV:798:
 #: zypp/CountryCode.cc:382
 msgid "Taiwan"
-msgstr ""
+msgstr "تایوان"
 
 #. :TWN:158:
 #: zypp/CountryCode.cc:383
 msgid "Tanzania"
-msgstr ""
+msgstr "تانزانیا"
 
 #. :TZA:834:
 #: zypp/CountryCode.cc:384
 msgid "Ukraine"
-msgstr ""
+msgstr "اوکراین"
 
 #. :UKR:804:
 #: zypp/CountryCode.cc:385
 msgid "Uganda"
-msgstr ""
+msgstr "اوگاندا"
 
 #. :UGA:800:
 #: zypp/CountryCode.cc:386
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "جزایر کوچک حاشیه های ایالات متحده"
 
 #. :UMI:581:
 #: zypp/CountryCode.cc:387
 msgid "United States"
-msgstr ""
+msgstr "ایالات متحده"
 
 #. :USA:840:
 #: zypp/CountryCode.cc:388
 msgid "Uruguay"
-msgstr ""
+msgstr "اوروگوئه"
 
 #. :URY:858:
 #: zypp/CountryCode.cc:389
 msgid "Uzbekistan"
-msgstr ""
+msgstr "ازبکستان"
 
 #. :UZB:860:
 #: zypp/CountryCode.cc:390
 msgid "Holy See (Vatican City State)"
-msgstr ""
+msgstr "واتیکان"
 
 #. :VAT:336:
 #: zypp/CountryCode.cc:391
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "سنت وینسنت و گرنادینها"
 
 #. :VCT:670:
 #: zypp/CountryCode.cc:392
 msgid "Venezuela"
-msgstr ""
+msgstr "ونزوئلا"
 
 #. :VEN:862:
 #: zypp/CountryCode.cc:393
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "جزایر ویرجین بریتانیا"
 
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr ""
+msgstr "جزایر ویرجین ایالات متحده"
 
 #. :VIR:850:
 #: zypp/CountryCode.cc:395
 msgid "Vietnam"
-msgstr ""
+msgstr "ویتنام"
 
 #. :VNM:704:
 #: zypp/CountryCode.cc:396
 msgid "Vanuatu"
-msgstr ""
+msgstr "وانواتو"
 
 #. :VUT:548:
 #: zypp/CountryCode.cc:397
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "والیس و فوتونا"
 
 #. :WLF:876:
 #: zypp/CountryCode.cc:398
 msgid "Samoa"
-msgstr ""
+msgstr "ساموآ"
 
 #. :WSM:882:
 #: zypp/CountryCode.cc:399
 msgid "Yemen"
-msgstr ""
+msgstr "یمن"
 
 #. :YEM:887:
 #: zypp/CountryCode.cc:400
 msgid "Mayotte"
-msgstr ""
+msgstr "مایوت"
 
 #. :MYT:175:
 #: zypp/CountryCode.cc:401
 msgid "South Africa"
-msgstr ""
+msgstr "آفریقای جنوبی"
 
 #. :ZAF:710:
 #: zypp/CountryCode.cc:402
 msgid "Zambia"
-msgstr ""
+msgstr "زامبیا"
 
 #. :ZMB:894:
 #: zypp/CountryCode.cc:403
 msgid "Zimbabwe"
-msgstr ""
+msgstr "زیمباوه"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
-msgstr ""
+msgstr "زبان ناشناخته:"
 
 #. language code: aar aa
 #: zypp/LanguageCode.cc:161
 msgid "Afar"
-msgstr ""
+msgstr "افر"
 
 #. language code: abk ab
 #: zypp/LanguageCode.cc:163
 msgid "Abkhazian"
-msgstr ""
+msgstr "آبخازیا"
 
 #. language code: ace
 #: zypp/LanguageCode.cc:165
 msgid "Achinese"
-msgstr ""
+msgstr "آچه ای"
 
 #. language code: ach
 #: zypp/LanguageCode.cc:167
 msgid "Acoli"
-msgstr ""
+msgstr "آشولی"
 
 #. language code: ada
 #: zypp/LanguageCode.cc:169
 msgid "Adangme"
-msgstr ""
+msgstr "دانگمه"
 
 #. language code: ady
 #: zypp/LanguageCode.cc:171
 msgid "Adyghe"
-msgstr ""
+msgstr "آدیغی"
 
 #. language code: afa
 #: zypp/LanguageCode.cc:173
 msgid "Afro-Asiatic (Other)"
-msgstr ""
+msgstr "آفریقایی-آسیایی (دیگر)"
 
 #. language code: afh
 #: zypp/LanguageCode.cc:175
 msgid "Afrihili"
-msgstr ""
+msgstr "آفریهیلی"
 
 #. language code: afr af
 #: zypp/LanguageCode.cc:177
 msgid "Afrikaans"
-msgstr ""
+msgstr "آفریکانس"
 
 #. language code: ain
 #: zypp/LanguageCode.cc:179
 msgid "Ainu"
-msgstr ""
+msgstr "آینو"
 
 #. language code: aka ak
 #: zypp/LanguageCode.cc:181
 msgid "Akan"
-msgstr ""
+msgstr "آکانی"
 
 #. language code: akk
 #: zypp/LanguageCode.cc:183
 msgid "Akkadian"
-msgstr ""
+msgstr "اکدی"
 
 #. language code: alb sqi sq
 #: zypp/LanguageCode.cc:185 zypp/LanguageCode.cc:187
 msgid "Albanian"
-msgstr ""
+msgstr "آلبانیایی"
 
 #. language code: ale
 #: zypp/LanguageCode.cc:189
 msgid "Aleut"
-msgstr ""
+msgstr "اینوپیات"
 
 #. language code: alg
 #: zypp/LanguageCode.cc:191
 msgid "Algonquian Languages"
-msgstr ""
+msgstr "زبان‌های آلگونکویان"
 
 #. language code: alt
 #: zypp/LanguageCode.cc:193
 msgid "Southern Altai"
-msgstr ""
+msgstr "آلتای جنوبی"
 
 #. language code: amh am
 #: zypp/LanguageCode.cc:195
 msgid "Amharic"
-msgstr ""
+msgstr "امهری"
 
 #. language code: ang
 #: zypp/LanguageCode.cc:197
 msgid "English, Old (ca.450-1100)"
-msgstr ""
+msgstr "انگلیسی، قدیمی (ca.450-1100)"
 
 #. language code: apa
 #: zypp/LanguageCode.cc:199
 msgid "Apache Languages"
-msgstr ""
+msgstr "زبانهای آپاچی"
 
 #. language code: ara ar
 #: zypp/LanguageCode.cc:201
 msgid "Arabic"
-msgstr ""
+msgstr "عربی"
 
 #. language code: arc
 #: zypp/LanguageCode.cc:203
 msgid "Aramaic"
-msgstr ""
+msgstr "آرماییک"
 
 #. language code: arg an
 #: zypp/LanguageCode.cc:205
 msgid "Aragonese"
-msgstr ""
+msgstr "آراگونی"
 
 #. language code: arm hye hy
 #: zypp/LanguageCode.cc:207 zypp/LanguageCode.cc:209
 msgid "Armenian"
-msgstr ""
+msgstr "ارمنی"
 
 #. language code: arn
 #: zypp/LanguageCode.cc:211
 msgid "Araucanian"
-msgstr ""
+msgstr "آراکانیان"
 
 #. language code: arp
 #: zypp/LanguageCode.cc:213
 msgid "Arapaho"
-msgstr ""
+msgstr "آراپاهو"
 
 #. language code: art
 #: zypp/LanguageCode.cc:215
 msgid "Artificial (Other)"
-msgstr ""
+msgstr "ساختگی (دیگر)"
 
 #. language code: arw
 #: zypp/LanguageCode.cc:217
 msgid "Arawak"
-msgstr ""
+msgstr "آراواک"
 
 #. language code: asm as
 #: zypp/LanguageCode.cc:219
 msgid "Assamese"
-msgstr ""
+msgstr "آسامی"
 
 #. language code: ast
 #: zypp/LanguageCode.cc:221
 msgid "Asturian"
-msgstr ""
+msgstr "آستوری"
 
 #. language code: ath
 #: zypp/LanguageCode.cc:223
 msgid "Athapascan Languages"
-msgstr ""
+msgstr "زبانهای آتاباسکی"
 
 #. language code: aus
 #: zypp/LanguageCode.cc:225
 msgid "Australian Languages"
-msgstr ""
+msgstr "زبانهای استرالیایی"
 
 #. language code: ava av
 #: zypp/LanguageCode.cc:227
 msgid "Avaric"
-msgstr ""
+msgstr "آواری"
 
 #. language code: ave ae
 #: zypp/LanguageCode.cc:229
 msgid "Avestan"
-msgstr ""
+msgstr "اوستایی"
 
 #. language code: awa
 #: zypp/LanguageCode.cc:231
 msgid "Awadhi"
-msgstr ""
+msgstr "اودهی"
 
 #. language code: aym ay
 #: zypp/LanguageCode.cc:233
 msgid "Aymara"
-msgstr ""
+msgstr "آیمارا"
 
 #. language code: aze az
 #: zypp/LanguageCode.cc:235
 msgid "Azerbaijani"
-msgstr ""
+msgstr "آذربایجانی"
 
 #. language code: bad
 #: zypp/LanguageCode.cc:237
 msgid "Banda"
-msgstr ""
+msgstr "باندا"
 
 #. language code: bai
 #: zypp/LanguageCode.cc:239
 msgid "Bamileke Languages"
-msgstr ""
+msgstr "زبانهای بامیلیکی"
 
 #. language code: bak ba
 #: zypp/LanguageCode.cc:241
 msgid "Bashkir"
-msgstr ""
+msgstr "باشقیری"
 
 #. language code: bal
 #: zypp/LanguageCode.cc:243
 msgid "Baluchi"
-msgstr ""
+msgstr "بلوچی"
 
 #. language code: bam bm
 #: zypp/LanguageCode.cc:245
 msgid "Bambara"
-msgstr ""
+msgstr "بامبارا"
 
 #. language code: ban
 #: zypp/LanguageCode.cc:247
 msgid "Balinese"
-msgstr ""
+msgstr "بالی"
 
 #. language code: baq eus eu
 #: zypp/LanguageCode.cc:249 zypp/LanguageCode.cc:251
 msgid "Basque"
-msgstr ""
+msgstr "باسکی"
 
 #. language code: bas
 #: zypp/LanguageCode.cc:253
 msgid "Basa"
-msgstr ""
+msgstr "باسا"
 
 #. language code: bat
 #: zypp/LanguageCode.cc:255
 msgid "Baltic (Other)"
-msgstr ""
+msgstr "بالتیک (دیگر)"
 
 #. language code: bej
 #: zypp/LanguageCode.cc:257
 msgid "Beja"
-msgstr ""
+msgstr "بژایی"
 
 #. language code: bel be
 #: zypp/LanguageCode.cc:259
 msgid "Belarusian"
-msgstr ""
+msgstr "بلاروسی"
 
 #. language code: bem
 #: zypp/LanguageCode.cc:261
 msgid "Bemba"
-msgstr ""
+msgstr "بمبایی"
 
 #. language code: ben bn
 #: zypp/LanguageCode.cc:263
 msgid "Bengali"
-msgstr ""
+msgstr "بنگالی"
 
 #. language code: ber
 #: zypp/LanguageCode.cc:265
 msgid "Berber (Other)"
-msgstr ""
+msgstr "بربر (دیگر)"
 
 #. language code: bho
 #: zypp/LanguageCode.cc:267
 msgid "Bhojpuri"
-msgstr ""
+msgstr "بوجپوری"
 
 #. language code: bih bh
 #: zypp/LanguageCode.cc:269
 msgid "Bihari"
-msgstr ""
+msgstr "بیهاری"
 
 #. language code: bik
 #: zypp/LanguageCode.cc:271
 msgid "Bikol"
-msgstr ""
+msgstr "بیکلی"
 
 #. language code: bin
 #: zypp/LanguageCode.cc:273
 msgid "Bini"
-msgstr ""
+msgstr "بینی"
 
 #. language code: bis bi
 #: zypp/LanguageCode.cc:275
 msgid "Bislama"
-msgstr ""
+msgstr "بسلامایی"
 
 #. language code: bla
 #: zypp/LanguageCode.cc:277
 msgid "Siksika"
-msgstr ""
+msgstr "سیکسیکایی"
 
 #. language code: bnt
 #: zypp/LanguageCode.cc:279
 msgid "Bantu (Other)"
-msgstr ""
+msgstr "بانتو (دیگر)"
 
 #. language code: bos bs
 #: zypp/LanguageCode.cc:281
 msgid "Bosnian"
-msgstr ""
+msgstr "بوسنیایی"
 
 #. language code: bra
 #: zypp/LanguageCode.cc:283
 msgid "Braj"
-msgstr ""
+msgstr "براج"
 
 #. language code: bre br
 #: zypp/LanguageCode.cc:285
 msgid "Breton"
-msgstr ""
+msgstr "برتون"
 
 #. language code: btk
 #: zypp/LanguageCode.cc:287
 msgid "Batak (Indonesia)"
-msgstr ""
+msgstr "باتاک (اندونزی)"
 
 #. language code: bua
 #: zypp/LanguageCode.cc:289
 msgid "Buriat"
-msgstr ""
+msgstr "بوریاتی"
 
 #. language code: bug
 #: zypp/LanguageCode.cc:291
 msgid "Buginese"
-msgstr ""
+msgstr "بوگینی"
 
 #. language code: bul bg
 #: zypp/LanguageCode.cc:293
 msgid "Bulgarian"
-msgstr ""
+msgstr "بلغاری"
 
 #. language code: bur mya my
 #: zypp/LanguageCode.cc:295 zypp/LanguageCode.cc:297
 msgid "Burmese"
-msgstr ""
+msgstr "برمهایی"
 
 #. language code: byn
 #: zypp/LanguageCode.cc:299
 msgid "Blin"
-msgstr ""
+msgstr "بلینی"
 
 #. language code: cad
 #: zypp/LanguageCode.cc:301
 msgid "Caddo"
-msgstr ""
+msgstr "کادو"
 
 #. language code: cai
 #: zypp/LanguageCode.cc:303
 msgid "Central American Indian (Other)"
-msgstr ""
+msgstr "هندی آمریکای مرکزی (دیگر)"
 
 #. language code: car
 #: zypp/LanguageCode.cc:305
 msgid "Carib"
-msgstr ""
+msgstr "کاریبی"
 
 #. language code: cat ca
 #: zypp/LanguageCode.cc:307
 msgid "Catalan"
-msgstr ""
+msgstr "کاتالان"
 
 #. language code: cau
 #: zypp/LanguageCode.cc:309
 msgid "Caucasian (Other)"
-msgstr ""
+msgstr "قفقازی (دیگر)"
 
 #. language code: ceb
 #: zypp/LanguageCode.cc:311
 msgid "Cebuano"
-msgstr ""
+msgstr "سبویی"
 
 #. language code: cel
 #: zypp/LanguageCode.cc:313
 msgid "Celtic (Other)"
-msgstr ""
+msgstr "سلتیکی (دیگر)"
 
 #. language code: cha ch
 #: zypp/LanguageCode.cc:315
 msgid "Chamorro"
-msgstr ""
+msgstr "چامورو"
 
 #. language code: chb
 #: zypp/LanguageCode.cc:317
 msgid "Chibcha"
-msgstr ""
+msgstr "چیبچا"
 
 #. language code: che ce
 #: zypp/LanguageCode.cc:319
 msgid "Chechen"
-msgstr ""
+msgstr "چچن"
 
 #. language code: chg
 #: zypp/LanguageCode.cc:321
 msgid "Chagatai"
-msgstr ""
+msgstr "جغتایی"
 
 #. language code: chi zho zh
 #: zypp/LanguageCode.cc:323 zypp/LanguageCode.cc:325
 msgid "Chinese"
-msgstr ""
+msgstr "چینی"
 
 #. language code: chk
 #: zypp/LanguageCode.cc:327
 msgid "Chuukese"
-msgstr ""
+msgstr "چوکیسی"
 
 #. language code: chm
 #: zypp/LanguageCode.cc:329
 msgid "Mari"
-msgstr ""
+msgstr "ماری"
 
 #. language code: chn
 #: zypp/LanguageCode.cc:331
 msgid "Chinook Jargon"
-msgstr ""
+msgstr "شینوک"
 
 #. language code: cho
 #: zypp/LanguageCode.cc:333
 msgid "Choctaw"
-msgstr ""
+msgstr "چوکتاو"
 
 #. language code: chp
 #: zypp/LanguageCode.cc:335
 msgid "Chipewyan"
-msgstr ""
+msgstr "چیپواین"
 
 #. language code: chr
 #: zypp/LanguageCode.cc:337
 msgid "Cherokee"
-msgstr ""
+msgstr "چروکی"
 
 #. language code: chu cu
 #: zypp/LanguageCode.cc:339
 msgid "Church Slavic"
-msgstr ""
+msgstr "کلیسای اسلاوی"
 
 #. language code: chv cv
 #: zypp/LanguageCode.cc:341
 msgid "Chuvash"
-msgstr ""
+msgstr "چوواشی"
 
 #. language code: chy
 #: zypp/LanguageCode.cc:343
 msgid "Cheyenne"
-msgstr ""
+msgstr "شاینی"
 
 #. language code: cmc
 #: zypp/LanguageCode.cc:345
 msgid "Chamic Languages"
-msgstr ""
+msgstr "زبانهای چامیک"
 
 #. language code: cop
 #: zypp/LanguageCode.cc:347
 msgid "Coptic"
-msgstr ""
+msgstr "قبطی"
 
 #. language code: cor kw
 #: zypp/LanguageCode.cc:349
 msgid "Cornish"
-msgstr ""
+msgstr "کورنیش"
 
 #. language code: cos co
 #: zypp/LanguageCode.cc:351
 msgid "Corsican"
-msgstr ""
+msgstr "کورسی"
 
 #. language code: cpe
 #: zypp/LanguageCode.cc:353
 msgid "Creoles and Pidgins, English-Based (Other)"
-msgstr ""
+msgstr "کرئولس و پیجینز، بر پایه ی انگلیسی (دیگر)"
 
 #. language code: cpf
 #: zypp/LanguageCode.cc:355
 msgid "Creoles and Pidgins, French-Based (Other)"
-msgstr ""
+msgstr "کرئولس و پیجینز، بر پایه ی فرانسوی (دیگر)"
 
 #. language code: cpp
 #: zypp/LanguageCode.cc:357
 msgid "Creoles and Pidgins, Portuguese-Based (Other)"
-msgstr ""
+msgstr "کرئولس و پیجینز، بر پایه ی پرتغالی (دیگر)"
 
 #. language code: cre cr
 #: zypp/LanguageCode.cc:359
 msgid "Cree"
-msgstr ""
+msgstr "کری"
 
 #. language code: crh
 #: zypp/LanguageCode.cc:361
 msgid "Crimean Tatar"
-msgstr ""
+msgstr "کریمه تاتار"
 
 #. language code: crp
 #: zypp/LanguageCode.cc:363
 msgid "Creoles and Pidgins (Other)"
-msgstr ""
+msgstr "کرئولس و پیجینز"
 
 #. language code: csb
 #: zypp/LanguageCode.cc:365
 msgid "Kashubian"
-msgstr ""
+msgstr "کاشوبی"
 
 #. language code: cus
 #: zypp/LanguageCode.cc:367
 msgid "Cushitic (Other)"
-msgstr ""
+msgstr "کوشی (دیگر)"
 
 #. language code: cze ces cs
 #: zypp/LanguageCode.cc:369 zypp/LanguageCode.cc:371
 msgid "Czech"
-msgstr ""
+msgstr "چکی"
 
 #. language code: dak
 #: zypp/LanguageCode.cc:373
 msgid "Dakota"
-msgstr ""
+msgstr "داکوتایی"
 
 #. language code: dan da
 #: zypp/LanguageCode.cc:375
 msgid "Danish"
-msgstr ""
+msgstr "دانمارکى"
 
 #. language code: dar
 #: zypp/LanguageCode.cc:377
 msgid "Dargwa"
-msgstr ""
+msgstr "دارگوا"
 
 #. language code: day
 #: zypp/LanguageCode.cc:379
 msgid "Dayak"
-msgstr ""
+msgstr "دایاک"
 
 #. language code: del
 #: zypp/LanguageCode.cc:381
 msgid "Delaware"
-msgstr ""
+msgstr "دلاویر"
 
 #. language code: den
 #: zypp/LanguageCode.cc:383
 msgid "Slave (Athapascan)"
-msgstr ""
+msgstr "برده (آتاباسکی)"
 
 #. language code: dgr
 #: zypp/LanguageCode.cc:385
 msgid "Dogrib"
-msgstr ""
+msgstr "داگریب"
 
 #. language code: din
 #: zypp/LanguageCode.cc:387
 msgid "Dinka"
-msgstr ""
+msgstr "دینکا"
 
 #. language code: div dv
 #: zypp/LanguageCode.cc:389
 msgid "Divehi"
-msgstr ""
+msgstr "Divehi"
 
 #. language code: doi
 #: zypp/LanguageCode.cc:391
 msgid "Dogri"
-msgstr ""
+msgstr "دوگری"
 
 #. language code: dra
 #: zypp/LanguageCode.cc:393
 msgid "Dravidian (Other)"
-msgstr ""
+msgstr "دراویدی (دیگر)"
 
 #. language code: dsb
 #: zypp/LanguageCode.cc:395
 msgid "Lower Sorbian"
-msgstr ""
+msgstr "صربی پایین"
 
 #. language code: dua
 #: zypp/LanguageCode.cc:397
 msgid "Duala"
-msgstr ""
+msgstr "دوآلایی"
 
 #. language code: dum
 #: zypp/LanguageCode.cc:399
 msgid "Dutch, Middle (ca.1050-1350)"
-msgstr ""
+msgstr "هلندی، میانی (ca.1050-1350)"
 
 #. language code: dut nld nl
 #: zypp/LanguageCode.cc:401 zypp/LanguageCode.cc:403
 msgid "Dutch"
-msgstr ""
+msgstr "هلندی"
 
 #. language code: dyu
 #: zypp/LanguageCode.cc:405
 msgid "Dyula"
-msgstr ""
+msgstr "دیولا"
 
 #. language code: dzo dz
 #: zypp/LanguageCode.cc:407
 msgid "Dzongkha"
-msgstr ""
+msgstr "دزونگخا"
 
 #. language code: efi
 #: zypp/LanguageCode.cc:409
 msgid "Efik"
-msgstr ""
+msgstr "افیک"
 
 #. language code: egy
 #: zypp/LanguageCode.cc:411
 msgid "Egyptian (Ancient)"
-msgstr ""
+msgstr "مصری (باستانی)"
 
 #. language code: eka
 #: zypp/LanguageCode.cc:413
 msgid "Ekajuk"
-msgstr ""
+msgstr "اکاجوک"
 
 #. language code: elx
 #: zypp/LanguageCode.cc:415
 msgid "Elamite"
-msgstr ""
+msgstr "ایلامی"
 
 #. language code: eng en
 #: zypp/LanguageCode.cc:417
 msgid "English"
-msgstr ""
+msgstr "انگلیسی"
 
 #. language code: enm
 #: zypp/LanguageCode.cc:419
 msgid "English, Middle (1100-1500)"
-msgstr ""
+msgstr "انگلیسی، وسطی (1100-1500)"
 
 #. language code: epo eo
 #: zypp/LanguageCode.cc:421
 msgid "Esperanto"
-msgstr ""
+msgstr "اسپرانتو"
 
 #. language code: est et
 #: zypp/LanguageCode.cc:423
 msgid "Estonian"
-msgstr ""
+msgstr "استونیایی"
 
 #. language code: ewe ee
 #: zypp/LanguageCode.cc:425
 msgid "Ewe"
-msgstr ""
+msgstr "اوه ای"
 
 #. language code: ewo
 #: zypp/LanguageCode.cc:427
 msgid "Ewondo"
-msgstr ""
+msgstr "اووندو"
 
 #. language code: fan
 #: zypp/LanguageCode.cc:429
 msgid "Fang"
-msgstr ""
+msgstr "فانگ"
 
 #. language code: fao fo
 #: zypp/LanguageCode.cc:431
 msgid "Faroese"
-msgstr ""
+msgstr "فاروئی"
 
 #. language code: fat
 #: zypp/LanguageCode.cc:433
 msgid "Fanti"
-msgstr ""
+msgstr "فانتی"
 
 #. language code: fij fj
 #: zypp/LanguageCode.cc:435
 msgid "Fijian"
-msgstr ""
+msgstr "فیجی"
 
 #. language code: fil
 #: zypp/LanguageCode.cc:437
 msgid "Filipino"
-msgstr ""
+msgstr "فیلیپینی"
 
 #. language code: fin fi
 #: zypp/LanguageCode.cc:439
 msgid "Finnish"
-msgstr ""
+msgstr "فنلاندی"
 
 #. language code: fiu
 #: zypp/LanguageCode.cc:441
 msgid "Finno-Ugrian (Other)"
-msgstr ""
+msgstr "فینو-اوگریان (دیگر)"
 
 #. language code: fon
 #: zypp/LanguageCode.cc:443
 msgid "Fon"
-msgstr ""
+msgstr "فن"
 
 #. language code: fre fra fr
 #: zypp/LanguageCode.cc:445 zypp/LanguageCode.cc:447
 msgid "French"
-msgstr ""
+msgstr "فرانسوی"
 
 #. language code: frm
 #: zypp/LanguageCode.cc:449
 msgid "French, Middle (ca.1400-1600)"
-msgstr ""
+msgstr "فرانسوی، وسطی (ca.1400-1600)"
 
 #. language code: fro
 #: zypp/LanguageCode.cc:451
 msgid "French, Old (842-ca.1400)"
-msgstr ""
+msgstr "فرانسوی، قدیمی (842-ca.1400)"
 
 #. language code: fry fy
 #: zypp/LanguageCode.cc:453
 msgid "Frisian"
-msgstr ""
+msgstr "فریزی"
 
 #. language code: ful ff
 #: zypp/LanguageCode.cc:455
 msgid "Fulah"
-msgstr ""
+msgstr "فولا"
 
 #. language code: fur
 #: zypp/LanguageCode.cc:457
 msgid "Friulian"
-msgstr ""
+msgstr "فریولی"
 
 #. language code: gaa
 #: zypp/LanguageCode.cc:459
 msgid "Ga"
-msgstr ""
+msgstr "گا"
 
 #. language code: gay
 #: zypp/LanguageCode.cc:461
 msgid "Gayo"
-msgstr ""
+msgstr "گایو"
 
 #. language code: gba
 #: zypp/LanguageCode.cc:463
 msgid "Gbaya"
-msgstr ""
+msgstr "بایا"
 
 #. language code: gem
 #: zypp/LanguageCode.cc:465
 msgid "Germanic (Other)"
-msgstr ""
+msgstr "ژرمنی (دیگر)"
 
 #. language code: geo kat ka
 #: zypp/LanguageCode.cc:467 zypp/LanguageCode.cc:469
 msgid "Georgian"
-msgstr ""
+msgstr "گرجی"
 
 #. language code: ger deu de
 #: zypp/LanguageCode.cc:471 zypp/LanguageCode.cc:473
 msgid "German"
-msgstr ""
+msgstr "آلمانی"
 
 #. language code: gez
 #: zypp/LanguageCode.cc:475
 msgid "Geez"
-msgstr ""
+msgstr "گیز"
 
 #. language code: gil
 #: zypp/LanguageCode.cc:477
 msgid "Gilbertese"
-msgstr ""
+msgstr "کیریباتی"
 
 #. language code: gla gd
 #: zypp/LanguageCode.cc:479
 msgid "Gaelic"
-msgstr ""
+msgstr "زبان بومی اسکاتلندی"
 
 #. language code: gle ga
 #: zypp/LanguageCode.cc:481
 msgid "Irish"
-msgstr ""
+msgstr "ایرلندی"
 
 #. language code: glg gl
 #: zypp/LanguageCode.cc:483
 msgid "Galician"
-msgstr ""
+msgstr "گالیسی"
 
 #. language code: glv gv
 #: zypp/LanguageCode.cc:485
 msgid "Manx"
-msgstr ""
+msgstr "مانی"
 
 #. language code: gmh
 #: zypp/LanguageCode.cc:487
 msgid "German, Middle High (ca.1050-1500)"
-msgstr ""
+msgstr "آلمانی، میانه ی بالایی (ca.1050-1500)"
 
 #. language code: goh
 #: zypp/LanguageCode.cc:489
 msgid "German, Old High (ca.750-1050)"
-msgstr ""
+msgstr "آلمانی، قدیمی بالایی (ca.750-1050)"
 
 #. language code: gon
 #: zypp/LanguageCode.cc:491
 msgid "Gondi"
-msgstr ""
+msgstr "گندی"
 
 #. language code: gor
 #: zypp/LanguageCode.cc:493
 msgid "Gorontalo"
-msgstr ""
+msgstr "گورونتالو"
 
 #. language code: got
 #: zypp/LanguageCode.cc:495
 msgid "Gothic"
-msgstr ""
+msgstr "گوتیک"
 
 #. language code: grb
 #: zypp/LanguageCode.cc:497
 msgid "Grebo"
-msgstr ""
+msgstr "گربو"
 
 #. language code: grc
 #: zypp/LanguageCode.cc:499
 msgid "Greek, Ancient (to 1453)"
-msgstr ""
+msgstr "یونانی، باستانی (تا 1453)"
 
 #. language code: gre ell el
 #: zypp/LanguageCode.cc:501 zypp/LanguageCode.cc:503
 msgid "Greek, Modern (1453-)"
-msgstr ""
+msgstr "یونانی، مدرن (1453-)"
 
 #. language code: grn gn
 #: zypp/LanguageCode.cc:505
 msgid "Guarani"
-msgstr ""
+msgstr "گوارانی"
 
 #. language code: guj gu
 #: zypp/LanguageCode.cc:507
 msgid "Gujarati"
-msgstr ""
+msgstr "گجراتی"
 
 #. language code: gwi
 #: zypp/LanguageCode.cc:509
 msgid "Gwich'in"
-msgstr ""
+msgstr "Gwich'in"
 
 #. language code: hai
 #: zypp/LanguageCode.cc:511
 msgid "Haida"
-msgstr ""
+msgstr "هایدا"
 
 #. language code: hat ht
 #: zypp/LanguageCode.cc:513
 msgid "Haitian"
-msgstr ""
+msgstr "هائیتی"
 
 #. language code: hau ha
 #: zypp/LanguageCode.cc:515
 msgid "Hausa"
-msgstr ""
+msgstr "هوسا"
 
 #. language code: haw
 #: zypp/LanguageCode.cc:517
 msgid "Hawaiian"
-msgstr ""
+msgstr "زبان هاوایی"
 
 #. language code: heb he
 #: zypp/LanguageCode.cc:519
 msgid "Hebrew"
-msgstr ""
+msgstr "عبری"
 
 #. language code: her hz
 #: zypp/LanguageCode.cc:521
 msgid "Herero"
-msgstr ""
+msgstr "هررو"
 
 #. language code: hil
 #: zypp/LanguageCode.cc:523
 msgid "Hiligaynon"
-msgstr ""
+msgstr "هیلیگاینون"
 
 #. language code: him
 #: zypp/LanguageCode.cc:525
 msgid "Himachali"
-msgstr ""
+msgstr "هیماچالی"
 
 #. language code: hin hi
 #: zypp/LanguageCode.cc:527
 msgid "Hindi"
-msgstr ""
+msgstr "هندی"
 
 #. language code: hit
 #: zypp/LanguageCode.cc:529
 msgid "Hittite"
-msgstr ""
+msgstr "هیتی"
 
 #. language code: hmn
 #: zypp/LanguageCode.cc:531
 msgid "Hmong"
-msgstr ""
+msgstr "همانگ"
 
 #. language code: hmo ho
 #: zypp/LanguageCode.cc:533
 msgid "Hiri Motu"
-msgstr ""
+msgstr "هیری موتو"
 
 #. language code: hsb
 #: zypp/LanguageCode.cc:535
 msgid "Upper Sorbian"
-msgstr ""
+msgstr "صربی بالا"
 
 #. language code: hun hu
 #: zypp/LanguageCode.cc:537
 msgid "Hungarian"
-msgstr ""
+msgstr "مجارستانی"
 
 #. language code: hup
 #: zypp/LanguageCode.cc:539
 msgid "Hupa"
-msgstr ""
+msgstr "هاپا"
 
 #. language code: iba
 #: zypp/LanguageCode.cc:541
 msgid "Iban"
-msgstr ""
+msgstr "ایبان"
 
 #. language code: ibo ig
 #: zypp/LanguageCode.cc:543
 msgid "Igbo"
-msgstr ""
+msgstr "ایگبو"
 
 #. language code: ice isl is
 #: zypp/LanguageCode.cc:545 zypp/LanguageCode.cc:547
 msgid "Icelandic"
-msgstr ""
+msgstr "ایسلندی"
 
 #. language code: ido io
 #: zypp/LanguageCode.cc:549
 msgid "Ido"
-msgstr ""
+msgstr "ایدو"
 
 #. language code: iii ii
 #: zypp/LanguageCode.cc:551
 msgid "Sichuan Yi"
-msgstr ""
+msgstr "سیچوان یی"
 
 #. language code: ijo
 #: zypp/LanguageCode.cc:553
 msgid "Ijo"
-msgstr ""
+msgstr "ایجو"
 
 #. language code: iku iu
 #: zypp/LanguageCode.cc:555
 msgid "Inuktitut"
-msgstr ""
+msgstr "اینوکتیتوت"
 
 #. language code: ile ie
 #: zypp/LanguageCode.cc:557
 msgid "Interlingue"
-msgstr ""
+msgstr "Interlingue"
 
 #. language code: ilo
 #: zypp/LanguageCode.cc:559
 msgid "Iloko"
-msgstr ""
+msgstr "ایلوکو"
 
 #. language code: ina ia
 #: zypp/LanguageCode.cc:561
 msgid "Interlingua (International Auxiliary Language Association)"
-msgstr ""
+msgstr "اینترلینگوا"
 
 #. language code: inc
 #: zypp/LanguageCode.cc:563
 msgid "Indic (Other)"
-msgstr ""
+msgstr "هندو (دیگر)"
 
 #. language code: ind id
 #: zypp/LanguageCode.cc:565
 msgid "Indonesian"
-msgstr ""
+msgstr "اندونزیایی"
 
 #. language code: ine
 #: zypp/LanguageCode.cc:567
 msgid "Indo-European (Other)"
-msgstr ""
+msgstr "هندو-اروپایی (دیگر)"
 
 #. language code: inh
 #: zypp/LanguageCode.cc:569
 msgid "Ingush"
-msgstr ""
+msgstr "اینگوش"
 
 #. language code: ipk ik
 #: zypp/LanguageCode.cc:571
 msgid "Inupiaq"
-msgstr ""
+msgstr "اینوپیاک"
 
 #. language code: ira
 #: zypp/LanguageCode.cc:573
 msgid "Iranian (Other)"
-msgstr ""
+msgstr "ایرانی (دیگر)"
 
 #. language code: iro
 #: zypp/LanguageCode.cc:575
 msgid "Iroquoian Languages"
-msgstr ""
+msgstr "زبانهای ایروکویان"
 
 #. language code: ita it
 #: zypp/LanguageCode.cc:577
 msgid "Italian"
-msgstr ""
+msgstr "ایتالیایی"
 
 #. language code: jav jv
 #: zypp/LanguageCode.cc:579
 msgid "Javanese"
-msgstr ""
+msgstr "جاوه ای"
 
 #. language code: jbo
 #: zypp/LanguageCode.cc:581
 msgid "Lojban"
-msgstr ""
+msgstr "لژبان"
 
 #. language code: jpn ja
 #: zypp/LanguageCode.cc:583
 msgid "Japanese"
-msgstr ""
+msgstr "ژاپنی"
 
 #. language code: jpr
 #: zypp/LanguageCode.cc:585
 msgid "Judeo-Persian"
-msgstr ""
+msgstr "یهودی-فارسی"
 
 #. language code: jrb
 #: zypp/LanguageCode.cc:587
 msgid "Judeo-Arabic"
-msgstr ""
+msgstr "یهودی-عربی"
 
 #. language code: kaa
 #: zypp/LanguageCode.cc:589
 msgid "Kara-Kalpak"
-msgstr ""
+msgstr "کارا-کالپاک"
 
 #. language code: kab
 #: zypp/LanguageCode.cc:591
 msgid "Kabyle"
-msgstr ""
+msgstr "قبایلی"
 
 #. language code: kac
 #: zypp/LanguageCode.cc:593
 msgid "Kachin"
-msgstr ""
+msgstr "کاچینی"
 
 #. language code: kal kl
 #: zypp/LanguageCode.cc:595
 msgid "Kalaallisut"
-msgstr ""
+msgstr "کالالیسوت"
 
 #. language code: kam
 #: zypp/LanguageCode.cc:597
 msgid "Kamba"
-msgstr ""
+msgstr "کامبا"
 
 #. language code: kan kn
 #: zypp/LanguageCode.cc:599
 msgid "Kannada"
-msgstr ""
+msgstr "کانادا"
 
 #. language code: kar
 #: zypp/LanguageCode.cc:601
 msgid "Karen"
-msgstr ""
+msgstr "کارن"
 
 #. language code: kas ks
 #: zypp/LanguageCode.cc:603
 msgid "Kashmiri"
-msgstr ""
+msgstr "کشمیری"
 
 #. language code: kau kr
 #: zypp/LanguageCode.cc:605
 msgid "Kanuri"
-msgstr ""
+msgstr "کنوری"
 
 #. language code: kaw
 #: zypp/LanguageCode.cc:607
 msgid "Kawi"
-msgstr ""
+msgstr "کاوی"
 
 #. language code: kaz kk
 #: zypp/LanguageCode.cc:609
 msgid "Kazakh"
-msgstr ""
+msgstr "قزاقی"
 
 #. language code: kbd
 #: zypp/LanguageCode.cc:611
 msgid "Kabardian"
-msgstr ""
+msgstr "کاباردیان"
 
 #. language code: kha
 #: zypp/LanguageCode.cc:613
 msgid "Khasi"
-msgstr ""
+msgstr "خاصی"
 
 #. language code: khi
 #: zypp/LanguageCode.cc:615
 msgid "Khoisan (Other)"
-msgstr ""
+msgstr "خویسان (دیگر)"
 
 #. language code: khm km
 #: zypp/LanguageCode.cc:617
 msgid "Khmer"
-msgstr ""
+msgstr "خمری"
 
 #. language code: kho
 #: zypp/LanguageCode.cc:619
 msgid "Khotanese"
-msgstr ""
+msgstr "ختنی"
 
 #. language code: kik ki
 #: zypp/LanguageCode.cc:621
 msgid "Kikuyu"
-msgstr ""
+msgstr "کیکویو"
 
 #. language code: kin rw
 #: zypp/LanguageCode.cc:623
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "کینیارواندایی"
 
 #. language code: kir ky
 #: zypp/LanguageCode.cc:625
 msgid "Kirghiz"
-msgstr ""
+msgstr "قرقیزی"
 
 #. language code: kmb
 #: zypp/LanguageCode.cc:627
 msgid "Kimbundu"
-msgstr ""
+msgstr "کیمبوندو"
 
 #. language code: kok
 #: zypp/LanguageCode.cc:629
 msgid "Konkani"
-msgstr ""
+msgstr "کونکانی"
 
 #. language code: kom kv
 #: zypp/LanguageCode.cc:631
 msgid "Komi"
-msgstr ""
+msgstr "کومی"
 
 #. language code: kon kg
 #: zypp/LanguageCode.cc:633
 msgid "Kongo"
-msgstr ""
+msgstr "کونگویی"
 
 #. language code: kor ko
 #: zypp/LanguageCode.cc:635
 msgid "Korean"
-msgstr ""
+msgstr "کره ای"
 
 #. language code: kos
 #: zypp/LanguageCode.cc:637
 msgid "Kosraean"
-msgstr ""
+msgstr "کوسرائی"
 
 #. language code: kpe
 #: zypp/LanguageCode.cc:639
 msgid "Kpelle"
-msgstr ""
+msgstr "کپله ای"
 
 #. language code: krc
 #: zypp/LanguageCode.cc:641
 msgid "Karachay-Balkar"
-msgstr ""
+msgstr "قرهچای و بالکار"
 
 #. language code: kro
 #: zypp/LanguageCode.cc:643
 msgid "Kru"
-msgstr ""
+msgstr "کرو"
 
 #. language code: kru
 #: zypp/LanguageCode.cc:645
 msgid "Kurukh"
-msgstr ""
+msgstr "کوروخ"
 
 #. language code: kua kj
 #: zypp/LanguageCode.cc:647
 msgid "Kuanyama"
-msgstr ""
+msgstr "کوانیاما"
 
 #. language code: kum
 #: zypp/LanguageCode.cc:649
 msgid "Kumyk"
-msgstr ""
+msgstr "قموقی"
 
 #. language code: kur ku
 #: zypp/LanguageCode.cc:651
 msgid "Kurdish"
-msgstr ""
+msgstr "کردی"
 
 #. language code: kut
 #: zypp/LanguageCode.cc:653
 msgid "Kutenai"
-msgstr ""
+msgstr "کونته ای"
 
 #. language code: lad
 #: zypp/LanguageCode.cc:655
 msgid "Ladino"
-msgstr ""
+msgstr "لادینو"
 
 #. language code: lah
 #: zypp/LanguageCode.cc:657
 msgid "Lahnda"
-msgstr ""
+msgstr "لندا"
 
 #. language code: lam
 #: zypp/LanguageCode.cc:659
 msgid "Lamba"
-msgstr ""
+msgstr "لامبا"
 
 #. language code: lao lo
 #: zypp/LanguageCode.cc:661
 msgid "Lao"
-msgstr ""
+msgstr "لائو"
 
 #. language code: lat la
 #: zypp/LanguageCode.cc:663
 msgid "Latin"
-msgstr ""
+msgstr "لاتین"
 
 #. language code: lav lv
 #: zypp/LanguageCode.cc:665
 msgid "Latvian"
-msgstr ""
+msgstr "لتونی"
 
 #. language code: lez
 #: zypp/LanguageCode.cc:667
 msgid "Lezghian"
-msgstr ""
+msgstr "لزگی"
 
 #. language code: lim li
 #: zypp/LanguageCode.cc:669
 msgid "Limburgan"
-msgstr ""
+msgstr "لیمبورگان"
 
 #. language code: lin ln
 #: zypp/LanguageCode.cc:671
 msgid "Lingala"
-msgstr ""
+msgstr "لینگالا"
 
 #. language code: lit lt
 #: zypp/LanguageCode.cc:673
 msgid "Lithuanian"
-msgstr ""
+msgstr "لیتوانیایی"
 
 #. language code: lol
 #: zypp/LanguageCode.cc:675
 msgid "Mongo"
-msgstr ""
+msgstr "مونگویی"
 
 #. language code: loz
 #: zypp/LanguageCode.cc:677
 msgid "Lozi"
-msgstr ""
+msgstr "لوزی"
 
 #. language code: ltz lb
 #: zypp/LanguageCode.cc:679
 msgid "Luxembourgish"
-msgstr ""
+msgstr "لوکزامبورگی"
 
 #. language code: lua
 #: zypp/LanguageCode.cc:681
 msgid "Luba-Lulua"
-msgstr ""
+msgstr "لوبا-لولوا"
 
 #. language code: lub lu
 #: zypp/LanguageCode.cc:683
 msgid "Luba-Katanga"
-msgstr ""
+msgstr "لوبا-کاتانگا"
 
 #. language code: lug lg
 #: zypp/LanguageCode.cc:685
 msgid "Ganda"
-msgstr ""
+msgstr "گاندایی"
 
 #. language code: lui
 #: zypp/LanguageCode.cc:687
 msgid "Luiseno"
-msgstr ""
+msgstr "لوییزنو"
 
 #. language code: lun
 #: zypp/LanguageCode.cc:689
 msgid "Lunda"
-msgstr ""
+msgstr "Lunda"
 
 #. language code: luo
 #: zypp/LanguageCode.cc:691
 msgid "Luo (Kenya and Tanzania)"
-msgstr ""
+msgstr "لو (کنیا و تانزانیا)"
 
 #. language code: lus
 #: zypp/LanguageCode.cc:693
 msgid "Lushai"
-msgstr ""
+msgstr "لوشای"
 
 #. language code: mac mkd mk
 #: zypp/LanguageCode.cc:695 zypp/LanguageCode.cc:697
 msgid "Macedonian"
-msgstr ""
+msgstr "مقدونی"
 
 #. language code: mad
 #: zypp/LanguageCode.cc:699
 msgid "Madurese"
-msgstr ""
+msgstr "مادورس"
 
 #. language code: mag
 #: zypp/LanguageCode.cc:701
 msgid "Magahi"
-msgstr ""
+msgstr "ماگهی"
 
 #. language code: mah mh
 #: zypp/LanguageCode.cc:703
 msgid "Marshallese"
-msgstr ""
+msgstr "مارشالی"
 
 #. language code: mai
 #: zypp/LanguageCode.cc:705
 msgid "Maithili"
-msgstr ""
+msgstr "میتهیلی"
 
 #. language code: mak
 #: zypp/LanguageCode.cc:707
 msgid "Makasar"
-msgstr ""
+msgstr "ماکاسار"
 
 #. language code: mal ml
 #: zypp/LanguageCode.cc:709
 msgid "Malayalam"
-msgstr ""
+msgstr "مالایایی"
 
 #. language code: man
 #: zypp/LanguageCode.cc:711
 msgid "Mandingo"
-msgstr ""
+msgstr "ماندینگو"
 
 #. language code: mao mri mi
 #: zypp/LanguageCode.cc:713 zypp/LanguageCode.cc:715
 msgid "Maori"
-msgstr ""
+msgstr "Maori"
 
 #. language code: map
 #: zypp/LanguageCode.cc:717
 msgid "Austronesian (Other)"
-msgstr ""
+msgstr "آسترونزی (دیگر)"
 
 #. language code: mar mr
 #: zypp/LanguageCode.cc:719
 msgid "Marathi"
-msgstr ""
+msgstr "مراتی"
 
 #. language code: mas
 #: zypp/LanguageCode.cc:721
 msgid "Masai"
-msgstr ""
+msgstr "ماسایی"
 
 #. language code: may msa ms
 #: zypp/LanguageCode.cc:723 zypp/LanguageCode.cc:725
 msgid "Malay"
-msgstr ""
+msgstr "مالایا"
 
 #. language code: mdf
 #: zypp/LanguageCode.cc:727
 msgid "Moksha"
-msgstr ""
+msgstr "موکشا"
 
 #. language code: mdr
 #: zypp/LanguageCode.cc:729
 msgid "Mandar"
-msgstr ""
+msgstr "ماندار"
 
 #. language code: men
 #: zypp/LanguageCode.cc:731
 msgid "Mende"
-msgstr ""
+msgstr "منده"
 
 #. language code: mga
 #: zypp/LanguageCode.cc:733
 msgid "Irish, Middle (900-1200)"
-msgstr ""
+msgstr "ایرلندی، وسطی (900-1200)"
 
 #. language code: mic
 #: zypp/LanguageCode.cc:735
 msgid "Mi'kmaq"
-msgstr ""
+msgstr "Mi'kmaq"
 
 #. language code: min
 #: zypp/LanguageCode.cc:737
 msgid "Minangkabau"
-msgstr ""
+msgstr "مینغکاباو"
 
 #. language code: mis
 #: zypp/LanguageCode.cc:739
 msgid "Miscellaneous Languages"
-msgstr ""
+msgstr "زبانهای متفرقه"
 
 #. language code: mkh
 #: zypp/LanguageCode.cc:741
 msgid "Mon-Khmer (Other)"
-msgstr ""
+msgstr "مونی-خمری (دیگر)"
 
 #. language code: mlg mg
 #: zypp/LanguageCode.cc:743
 msgid "Malagasy"
-msgstr ""
+msgstr "ماداگاسکاری"
 
 #. language code: mlt mt
 #: zypp/LanguageCode.cc:745
 msgid "Maltese"
-msgstr ""
+msgstr "مالتی"
 
 #. language code: mnc
 #: zypp/LanguageCode.cc:747
 msgid "Manchu"
-msgstr ""
+msgstr "مانچو"
 
 #. language code: mni
 #: zypp/LanguageCode.cc:749
 msgid "Manipuri"
-msgstr ""
+msgstr "مانیپوری"
 
 #. language code: mno
 #: zypp/LanguageCode.cc:751
 msgid "Manobo Languages"
-msgstr ""
+msgstr "زبانهای مانوبو"
 
 #. language code: moh
 #: zypp/LanguageCode.cc:753
 msgid "Mohawk"
-msgstr ""
+msgstr "موهاک"
 
 #. language code: mol mo
 #: zypp/LanguageCode.cc:755
 msgid "Moldavian"
-msgstr ""
+msgstr "مولداویایی"
 
 #. language code: mon mn
 #: zypp/LanguageCode.cc:757
 msgid "Mongolian"
-msgstr ""
+msgstr "مغولی"
 
 #. language code: mos
 #: zypp/LanguageCode.cc:759
 msgid "Mossi"
-msgstr ""
+msgstr "موسی"
 
 #. language code: mul
 #: zypp/LanguageCode.cc:761
 msgid "Multiple Languages"
-msgstr ""
+msgstr "چندین زبانه"
 
 #. language code: mun
 #: zypp/LanguageCode.cc:763
 msgid "Munda languages"
-msgstr ""
+msgstr "زبانهای موندا"
 
 #. language code: mus
 #: zypp/LanguageCode.cc:765
 msgid "Creek"
-msgstr ""
+msgstr "کریکی"
 
 #. language code: mwl
 #: zypp/LanguageCode.cc:767
 msgid "Mirandese"
-msgstr ""
+msgstr "میراندی"
 
 #. language code: mwr
 #: zypp/LanguageCode.cc:769
 msgid "Marwari"
-msgstr ""
+msgstr "مارواری"
 
 #. language code: myn
 #: zypp/LanguageCode.cc:771
 msgid "Mayan Languages"
-msgstr ""
+msgstr "زبانهای مایان"
 
 #. language code: myv
 #: zypp/LanguageCode.cc:773
 msgid "Erzya"
-msgstr ""
+msgstr "ارزیا"
 
 #. language code: nah
 #: zypp/LanguageCode.cc:775
 msgid "Nahuatl"
-msgstr ""
+msgstr "ناهواتل"
 
 #. language code: nai
 #: zypp/LanguageCode.cc:777
 msgid "North American Indian"
-msgstr ""
+msgstr "هندی امریکای شمالی"
 
 #. language code: nap
 #: zypp/LanguageCode.cc:779
 msgid "Neapolitan"
-msgstr ""
+msgstr "ناپولی"
 
 #. language code: nav nv
 #: zypp/LanguageCode.cc:783
 msgid "Navajo"
-msgstr ""
+msgstr "ناواهو"
 
 #. language code: nbl nr
 #: zypp/LanguageCode.cc:785
 msgid "Ndebele, South"
-msgstr ""
+msgstr "اندهبله ای، جنوبی"
 
 #. language code: nde nd
 #: zypp/LanguageCode.cc:787
 msgid "Ndebele, North"
-msgstr ""
+msgstr "اندهبله ای، شمالی"
 
 #. language code: ndo ng
 #: zypp/LanguageCode.cc:789
 msgid "Ndonga"
-msgstr ""
+msgstr "اندونگا"
 
 #. language code: nds
 #: zypp/LanguageCode.cc:791
 msgid "Low German"
-msgstr ""
+msgstr "آلمانی سفلا"
 
 #. language code: nep ne
 #: zypp/LanguageCode.cc:793
 msgid "Nepali"
-msgstr ""
+msgstr "نپالی"
 
 #. language code: new
 #: zypp/LanguageCode.cc:795
 msgid "Nepal Bhasa"
-msgstr ""
+msgstr "نپال بهاسایی"
 
 #. language code: nia
 #: zypp/LanguageCode.cc:797
 msgid "Nias"
-msgstr ""
+msgstr "نیاس"
 
 #. language code: nic
 #: zypp/LanguageCode.cc:799
 msgid "Niger-Kordofanian (Other)"
-msgstr ""
+msgstr "نیجر-کنگویی"
 
 #. language code: niu
 #: zypp/LanguageCode.cc:801
 msgid "Niuean"
-msgstr ""
+msgstr "Niuean"
 
 #. language code: nno nn
 #: zypp/LanguageCode.cc:803
 msgid "Norwegian Nynorsk"
-msgstr ""
+msgstr "نروژی نینورسک"
 
 #. language code: nob nb
 #: zypp/LanguageCode.cc:805
 msgid "Norwegian Bokmal"
-msgstr ""
+msgstr "نروژی بوکمال"
 
 #. language code: nog
 #: zypp/LanguageCode.cc:807
 msgid "Nogai"
-msgstr ""
+msgstr "نوقایی"
 
 #. language code: non
 #: zypp/LanguageCode.cc:809
 msgid "Norse, Old"
-msgstr ""
+msgstr "نورس، قدیمی"
 
 #. language code: nor no
 #: zypp/LanguageCode.cc:811
 msgid "Norwegian"
-msgstr ""
+msgstr "نروژی"
 
 #. language code: nso
 #: zypp/LanguageCode.cc:813
 msgid "Northern Sotho"
-msgstr ""
+msgstr "شمالی سوتو"
 
 #. language code: nub
 #: zypp/LanguageCode.cc:815
 msgid "Nubian Languages"
-msgstr ""
+msgstr "زبانهای نوبیایی"
 
 #. language code: nwc
 #: zypp/LanguageCode.cc:817
 msgid "Classical Newari"
-msgstr ""
+msgstr "نواری کلاسیک"
 
 #. language code: nya ny
 #: zypp/LanguageCode.cc:819
 msgid "Chichewa"
-msgstr ""
+msgstr "چیچوا"
 
 #. language code: nym
 #: zypp/LanguageCode.cc:821
 msgid "Nyamwezi"
-msgstr ""
+msgstr "نیاموزی"
 
 #. language code: nyn
 #: zypp/LanguageCode.cc:823
 msgid "Nyankole"
-msgstr ""
+msgstr "نیانکولی"
 
 #. language code: nyo
 #: zypp/LanguageCode.cc:825
 msgid "Nyoro"
-msgstr ""
+msgstr "نیورو"
 
 #. language code: nzi
 #: zypp/LanguageCode.cc:827
 msgid "Nzima"
-msgstr ""
+msgstr "انزیمایی"
 
 #. language code: oci oc
 #: zypp/LanguageCode.cc:829
 msgid "Occitan (post 1500)"
-msgstr ""
+msgstr "اکسیتان (بعد از 1500)"
 
 #. language code: oji oj
 #: zypp/LanguageCode.cc:831
 msgid "Ojibwa"
-msgstr ""
+msgstr "اوجیبوا"
 
 #. language code: ori or
 #: zypp/LanguageCode.cc:833
 msgid "Oriya"
-msgstr ""
+msgstr "اوریا"
 
 #. language code: orm om
 #: zypp/LanguageCode.cc:835
 msgid "Oromo"
-msgstr ""
+msgstr "اورومو"
 
 #. language code: osa
 #: zypp/LanguageCode.cc:837
 msgid "Osage"
-msgstr ""
+msgstr "اوسیج"
 
 #. language code: oss os
 #: zypp/LanguageCode.cc:839
 msgid "Ossetian"
-msgstr ""
+msgstr "اوسته ای"
 
 #. language code: ota
 #: zypp/LanguageCode.cc:841
 msgid "Turkish, Ottoman (1500-1928)"
-msgstr ""
+msgstr "ترکی، اوتامان (1500-1928)"
 
 #. language code: oto
 #: zypp/LanguageCode.cc:843
 msgid "Otomian Languages"
-msgstr ""
+msgstr "زبانهای اوتامیایی"
 
 #. language code: paa
 #: zypp/LanguageCode.cc:845
 msgid "Papuan (Other)"
-msgstr ""
+msgstr "پاپوآ (دیگر)"
 
 #. language code: pag
 #: zypp/LanguageCode.cc:847
 msgid "Pangasinan"
-msgstr ""
+msgstr "پانگاسینانی"
 
 #. language code: pal
 #: zypp/LanguageCode.cc:849
 msgid "Pahlavi"
-msgstr ""
+msgstr "پهلوی"
 
 #. language code: pam
 #: zypp/LanguageCode.cc:851
 msgid "Pampanga"
-msgstr ""
+msgstr "پامپانگا"
 
 #. language code: pan pa
 #: zypp/LanguageCode.cc:853
 msgid "Panjabi"
-msgstr ""
+msgstr "پنجابی"
 
 #. language code: pap
 #: zypp/LanguageCode.cc:855
 msgid "Papiamento"
-msgstr ""
+msgstr "پاپیامنتو"
 
 #. language code: pau
 #: zypp/LanguageCode.cc:857
 msgid "Palauan"
-msgstr ""
+msgstr "پالائویی"
 
 #. language code: peo
 #: zypp/LanguageCode.cc:859
 msgid "Persian, Old (ca.600-400 B.C.)"
-msgstr ""
+msgstr "فارسی، قدیمی (ca.600-400 B.C.)"
 
 #. language code: per fas fa
 #: zypp/LanguageCode.cc:861 zypp/LanguageCode.cc:863
 msgid "Persian"
-msgstr ""
+msgstr "فارسی"
 
 #. language code: phi
 #: zypp/LanguageCode.cc:865
 msgid "Philippine (Other)"
-msgstr ""
+msgstr "فیلیپینی (دیگر)"
 
 #. language code: phn
 #: zypp/LanguageCode.cc:867
 msgid "Phoenician"
-msgstr ""
+msgstr "فنیقی"
 
 #. language code: pli pi
 #: zypp/LanguageCode.cc:869
 msgid "Pali"
-msgstr ""
+msgstr "پالی"
 
 #. language code: pol pl
 #: zypp/LanguageCode.cc:871
 msgid "Polish"
-msgstr ""
+msgstr "لهستانی"
 
 #. language code: pon
 #: zypp/LanguageCode.cc:873
 msgid "Pohnpeian"
-msgstr ""
+msgstr "پنپه ای"
 
 #. language code: por pt
 #: zypp/LanguageCode.cc:875
 msgid "Portuguese"
-msgstr ""
+msgstr "پرتغالی"
 
 #. language code: pra
 #: zypp/LanguageCode.cc:877
 msgid "Prakrit Languages"
-msgstr ""
+msgstr "زبانهای پراکریت"
 
 #. language code: pro
 #: zypp/LanguageCode.cc:879
 msgid "Provencal, Old (to 1500)"
-msgstr ""
+msgstr "پرووونسال، قدیمی (تا 1500)"
 
 #. language code: pus ps
 #: zypp/LanguageCode.cc:881
 msgid "Pushto"
-msgstr ""
+msgstr "پشتو"
 
 #. language code: que qu
 #: zypp/LanguageCode.cc:883
 msgid "Quechua"
-msgstr ""
+msgstr "کچوا"
 
 #. language code: raj
 #: zypp/LanguageCode.cc:885
 msgid "Rajasthani"
-msgstr ""
+msgstr "راجستانی"
 
 #. language code: rap
 #: zypp/LanguageCode.cc:887
 msgid "Rapanui"
-msgstr ""
+msgstr "رپنویی"
 
 #. language code: rar
 #: zypp/LanguageCode.cc:889
 msgid "Rarotongan"
-msgstr ""
+msgstr "راروتونگا"
 
 #. language code: roa
 #: zypp/LanguageCode.cc:891
 msgid "Romance (Other)"
-msgstr ""
+msgstr "رومی (دیگر)"
 
 #. language code: roh rm
 #: zypp/LanguageCode.cc:893
 msgid "Raeto-Romance"
-msgstr ""
+msgstr "ریتو-رومانی"
 
 #. language code: rom
 #: zypp/LanguageCode.cc:895
 msgid "Romany"
-msgstr ""
+msgstr "کولی"
 
 #. language code: rum ron ro
 #: zypp/LanguageCode.cc:897 zypp/LanguageCode.cc:899
 msgid "Romanian"
-msgstr ""
+msgstr "رومانیایی"
 
 #. language code: run rn
 #: zypp/LanguageCode.cc:901
 msgid "Rundi"
-msgstr ""
+msgstr "روندیایی"
 
 #. language code: rus ru
 #: zypp/LanguageCode.cc:903
 msgid "Russian"
-msgstr ""
+msgstr "روسی"
 
 #. language code: sad
 #: zypp/LanguageCode.cc:905
 msgid "Sandawe"
-msgstr ""
+msgstr "سنداوی"
 
 #. language code: sag sg
 #: zypp/LanguageCode.cc:907
 msgid "Sango"
-msgstr ""
+msgstr "سانگو"
 
 #. language code: sah
 #: zypp/LanguageCode.cc:909
 msgid "Yakut"
-msgstr ""
+msgstr "یاقوتی"
 
 #. language code: sai
 #: zypp/LanguageCode.cc:911
 msgid "South American Indian (Other)"
-msgstr ""
+msgstr "هندی امریکای شمالی (دیگر)"
 
 #. language code: sal
 #: zypp/LanguageCode.cc:913
 msgid "Salishan Languages"
-msgstr ""
+msgstr "زبانهای سالیشان"
 
 #. language code: sam
 #: zypp/LanguageCode.cc:915
 msgid "Samaritan Aramaic"
-msgstr ""
+msgstr "سامری آرامی"
 
 #. language code: san sa
 #: zypp/LanguageCode.cc:917
 msgid "Sanskrit"
-msgstr ""
+msgstr "سانسکریت"
 
 #. language code: sas
 #: zypp/LanguageCode.cc:919
 msgid "Sasak"
-msgstr ""
+msgstr "ساساک"
 
 #. language code: sat
 #: zypp/LanguageCode.cc:921
 msgid "Santali"
-msgstr ""
+msgstr "سانتالی"
 
 #. language code: scc srp sr
 #: zypp/LanguageCode.cc:923 zypp/LanguageCode.cc:925
 msgid "Serbian"
-msgstr ""
+msgstr "صربی"
 
 #. language code: scn
 #: zypp/LanguageCode.cc:927
 msgid "Sicilian"
-msgstr ""
+msgstr "سیسیلی"
 
 #. language code: sco
 #: zypp/LanguageCode.cc:929
 msgid "Scots"
-msgstr ""
+msgstr "اسکاتلندی"
 
 #. language code: scr hrv hr
 #: zypp/LanguageCode.cc:931 zypp/LanguageCode.cc:933
 msgid "Croatian"
-msgstr ""
+msgstr "کرواتی"
 
 #. language code: sel
 #: zypp/LanguageCode.cc:935
 msgid "Selkup"
-msgstr ""
+msgstr "سلکوپی"
 
 #. language code: sem
 #: zypp/LanguageCode.cc:937
 msgid "Semitic (Other)"
-msgstr ""
+msgstr "سامی (دیگر)"
 
 #. language code: sga
 #: zypp/LanguageCode.cc:939
 msgid "Irish, Old (to 900)"
-msgstr ""
+msgstr "ایرلندی، قدیمی (تا 900)"
 
 #. language code: sgn
 #: zypp/LanguageCode.cc:941
 msgid "Sign Languages"
-msgstr ""
+msgstr "زبانهای امضایی"
 
 #. language code: shn
 #: zypp/LanguageCode.cc:943
 msgid "Shan"
-msgstr ""
+msgstr "شان"
 
 #. language code: sid
 #: zypp/LanguageCode.cc:945
 msgid "Sidamo"
-msgstr ""
+msgstr "سیدامو"
 
 #. language code: sin si
 #: zypp/LanguageCode.cc:947
 msgid "Sinhala"
-msgstr ""
+msgstr "سینهالی"
 
 #. language code: sio
 #: zypp/LanguageCode.cc:949
 msgid "Siouan Languages"
-msgstr ""
+msgstr "زبانهای سیوآن"
 
 #. language code: sit
 #: zypp/LanguageCode.cc:951
 msgid "Sino-Tibetan (Other)"
-msgstr ""
+msgstr "چینی-تبتی (دیگر)"
 
 #. language code: sla
 #: zypp/LanguageCode.cc:953
 msgid "Slavic (Other)"
-msgstr ""
+msgstr "اسلاوی (دیگر)"
 
 #. language code: slo slk sk
 #: zypp/LanguageCode.cc:955 zypp/LanguageCode.cc:957
 msgid "Slovak"
-msgstr ""
+msgstr "اسلواکی"
 
 #. language code: slv sl
 #: zypp/LanguageCode.cc:959
 msgid "Slovenian"
-msgstr ""
+msgstr "اسلونیایی"
 
 #. language code: sma
 #: zypp/LanguageCode.cc:961
 msgid "Southern Sami"
-msgstr ""
+msgstr "سامی جنوبی"
 
 #. language code: sme se
 #: zypp/LanguageCode.cc:963
 msgid "Northern Sami"
-msgstr ""
+msgstr "سامی شمالی"
 
 #. language code: smi
 #: zypp/LanguageCode.cc:965
 msgid "Sami Languages (Other)"
-msgstr ""
+msgstr "زبانهای سامی (دیگر)"
 
 #. language code: smj
 #: zypp/LanguageCode.cc:967
 msgid "Lule Sami"
-msgstr ""
+msgstr "لوله سامی"
 
 #. language code: smn
 #: zypp/LanguageCode.cc:969
 msgid "Inari Sami"
-msgstr ""
+msgstr "ایناری سامی"
 
 #. language code: smo sm
 #: zypp/LanguageCode.cc:971
 msgid "Samoan"
-msgstr ""
+msgstr "ساموایی"
 
 #. language code: sms
 #: zypp/LanguageCode.cc:973
 msgid "Skolt Sami"
-msgstr ""
+msgstr "سامی اسکولت"
 
 #. language code: sna sn
 #: zypp/LanguageCode.cc:975
 msgid "Shona"
-msgstr ""
+msgstr "شونا"
 
 #. language code: snd sd
 #: zypp/LanguageCode.cc:977
 msgid "Sindhi"
-msgstr ""
+msgstr "سندی"
 
 #. language code: snk
 #: zypp/LanguageCode.cc:979
 msgid "Soninke"
-msgstr ""
+msgstr "سونینکه"
 
 #. language code: sog
 #: zypp/LanguageCode.cc:981
 msgid "Sogdian"
-msgstr ""
+msgstr "سغدی"
 
 #. language code: som so
 #: zypp/LanguageCode.cc:983
 msgid "Somali"
-msgstr ""
+msgstr "سومالی"
 
 #. language code: son
 #: zypp/LanguageCode.cc:985
 msgid "Songhai"
-msgstr ""
+msgstr "سونغایی"
 
 #. language code: sot st
 #: zypp/LanguageCode.cc:987
 msgid "Sotho, Southern"
-msgstr ""
+msgstr "سوتو، جنوبی"
 
 #. language code: spa es
 #: zypp/LanguageCode.cc:989
 msgid "Spanish"
-msgstr ""
+msgstr "اسپانیایی"
 
 #. language code: srd sc
 #: zypp/LanguageCode.cc:991
 msgid "Sardinian"
-msgstr ""
+msgstr "ساردنی"
 
 #. language code: srr
 #: zypp/LanguageCode.cc:993
 msgid "Serer"
-msgstr ""
+msgstr "سرر"
 
 #. language code: ssa
 #: zypp/LanguageCode.cc:995
 msgid "Nilo-Saharan (Other)"
-msgstr ""
+msgstr "نیلو-ساهاران (دیگر)"
 
 #. language code: ssw ss
 #: zypp/LanguageCode.cc:997
 msgid "Swati"
-msgstr ""
+msgstr "سواتی"
 
 #. language code: suk
 #: zypp/LanguageCode.cc:999
 msgid "Sukuma"
-msgstr ""
+msgstr "سوکوما"
 
 #. language code: sun su
 #: zypp/LanguageCode.cc:1001
 msgid "Sundanese"
-msgstr ""
+msgstr "ساندانس"
 
 #. language code: sus
 #: zypp/LanguageCode.cc:1003
 msgid "Susu"
-msgstr ""
+msgstr "سوسو"
 
 #. language code: sux
 #: zypp/LanguageCode.cc:1005
 msgid "Sumerian"
-msgstr ""
+msgstr "سومری"
 
 #. language code: swa sw
 #: zypp/LanguageCode.cc:1007
 msgid "Swahili"
-msgstr ""
+msgstr "سواحیلی"
 
 #. language code: swe sv
 #: zypp/LanguageCode.cc:1009
 msgid "Swedish"
-msgstr ""
+msgstr "سوئدی"
 
 #. language code: syr
 #: zypp/LanguageCode.cc:1011
 msgid "Syriac"
-msgstr ""
+msgstr "سریانی"
 
 #. language code: tah ty
 #: zypp/LanguageCode.cc:1013
 msgid "Tahitian"
-msgstr ""
+msgstr "زبان تاهیتی"
 
 #. language code: tai
 #: zypp/LanguageCode.cc:1015
 msgid "Tai (Other)"
-msgstr ""
+msgstr "تای (دیگر)"
 
 #. language code: tam ta
 #: zypp/LanguageCode.cc:1017
 msgid "Tamil"
-msgstr ""
+msgstr "تامیل"
 
 #. language code: tat tt
 #: zypp/LanguageCode.cc:1019
 msgid "Tatar"
-msgstr ""
+msgstr "تاتار"
 
 #. language code: tel te
 #: zypp/LanguageCode.cc:1021
 msgid "Telugu"
-msgstr ""
+msgstr "تلوگو"
 
 #. language code: tem
 #: zypp/LanguageCode.cc:1023
 msgid "Timne"
-msgstr ""
+msgstr "تیمنه ای"
 
 #. language code: ter
 #: zypp/LanguageCode.cc:1025
 msgid "Tereno"
-msgstr ""
+msgstr "ترنو"
 
 #. language code: tet
 #: zypp/LanguageCode.cc:1027
 msgid "Tetum"
-msgstr ""
+msgstr "تتوم"
 
 #. language code: tgk tg
 #: zypp/LanguageCode.cc:1029
 msgid "Tajik"
-msgstr ""
+msgstr "تاجیکی"
 
 #. language code: tgl tl
 #: zypp/LanguageCode.cc:1031
 msgid "Tagalog"
-msgstr ""
+msgstr "تاگالوگ"
 
 #. language code: tha th
 #: zypp/LanguageCode.cc:1033
 msgid "Thai"
-msgstr ""
+msgstr "تایلندی"
 
 #. language code: tib bod bo
 #: zypp/LanguageCode.cc:1035 zypp/LanguageCode.cc:1037
 msgid "Tibetan"
-msgstr ""
+msgstr "تبتی"
 
 #. language code: tig
 #: zypp/LanguageCode.cc:1039
 msgid "Tigre"
-msgstr ""
+msgstr "تیگر"
 
 #. language code: tir ti
 #: zypp/LanguageCode.cc:1041
 msgid "Tigrinya"
-msgstr ""
+msgstr "تیگرینیا"
 
 #. language code: tiv
 #: zypp/LanguageCode.cc:1043
 msgid "Tiv"
-msgstr ""
+msgstr "تیو"
 
 #. language code: tlh
 #: zypp/LanguageCode.cc:1047
 msgid "Klingon"
-msgstr ""
+msgstr "کلینگون"
 
 #. language code: tli
 #: zypp/LanguageCode.cc:1049
 msgid "Tlingit"
-msgstr ""
+msgstr "تلینگیتی"
 
 #. language code: tmh
 #: zypp/LanguageCode.cc:1051
 msgid "Tamashek"
-msgstr ""
+msgstr "طوارقی"
 
 #. language code: tog
 #: zypp/LanguageCode.cc:1053
 msgid "Tonga (Nyasa)"
-msgstr ""
+msgstr "تونگا (نیاسا)"
 
 #. language code: ton to
 #: zypp/LanguageCode.cc:1055
 msgid "Tonga (Tonga Islands)"
-msgstr ""
+msgstr "تونگا (جزایر تونگا)"
 
 #. language code: tpi
 #: zypp/LanguageCode.cc:1057
 msgid "Tok Pisin"
-msgstr ""
+msgstr "توک پیسین"
 
 #. language code: tsi
 #: zypp/LanguageCode.cc:1059
 msgid "Tsimshian"
-msgstr ""
+msgstr "سیمیشان"
 
 #. language code: tsn tn
 #: zypp/LanguageCode.cc:1061
 msgid "Tswana"
-msgstr ""
+msgstr "تسوانا"
 
 #. language code: tso ts
 #: zypp/LanguageCode.cc:1063
 msgid "Tsonga"
-msgstr ""
+msgstr "سونگا"
 
 #. language code: tuk tk
 #: zypp/LanguageCode.cc:1065
 msgid "Turkmen"
-msgstr ""
+msgstr "ترکمن"
 
 #. language code: tum
 #: zypp/LanguageCode.cc:1067
 msgid "Tumbuka"
-msgstr ""
+msgstr "تومبوکایی"
 
 #. language code: tup
 #: zypp/LanguageCode.cc:1069
 msgid "Tupi Languages"
-msgstr ""
+msgstr "زبانهای توپیایی"
 
 #. language code: tur tr
 #: zypp/LanguageCode.cc:1071
 msgid "Turkish"
-msgstr ""
+msgstr "ترکی"
 
 #. language code: tut
 #: zypp/LanguageCode.cc:1073
 msgid "Altaic (Other)"
-msgstr ""
+msgstr "آلتاییک (دیگر)"
 
 #. language code: twi tw
 #: zypp/LanguageCode.cc:1077
 msgid "Twi"
-msgstr ""
+msgstr "توی"
 
 #. language code: tyv
 #: zypp/LanguageCode.cc:1079
 msgid "Tuvinian"
-msgstr ""
+msgstr "تووینیایی"
 
 #. language code: udm
 #: zypp/LanguageCode.cc:1081
 msgid "Udmurt"
-msgstr ""
+msgstr "ادمورت"
 
 #. language code: uga
 #: zypp/LanguageCode.cc:1083
 msgid "Ugaritic"
-msgstr ""
+msgstr "اوگاریتی"
 
 #. language code: uig ug
 #: zypp/LanguageCode.cc:1085
 msgid "Uighur"
-msgstr ""
+msgstr "اویغور"
 
 #. language code: ukr uk
 #: zypp/LanguageCode.cc:1087
 msgid "Ukrainian"
-msgstr ""
+msgstr "اوکراینی"
 
 #. language code: umb
 #: zypp/LanguageCode.cc:1089
 msgid "Umbundu"
-msgstr ""
+msgstr "آمباندو"
 
 #. language code: und
 #: zypp/LanguageCode.cc:1091
 msgid "Undetermined"
-msgstr ""
+msgstr "نا معین"
 
 #. language code: urd ur
 #: zypp/LanguageCode.cc:1093
 msgid "Urdu"
-msgstr ""
+msgstr "اردو"
 
 #. language code: uzb uz
 #: zypp/LanguageCode.cc:1095
 msgid "Uzbek"
-msgstr ""
+msgstr "ازبکی"
 
 #. language code: vai
 #: zypp/LanguageCode.cc:1097
 msgid "Vai"
-msgstr ""
+msgstr "وای"
 
 #. language code: ven ve
 #: zypp/LanguageCode.cc:1099
 msgid "Venda"
-msgstr ""
+msgstr "وندا"
 
 #. language code: vie vi
 #: zypp/LanguageCode.cc:1101
 msgid "Vietnamese"
-msgstr ""
+msgstr "ویتنامی"
 
 #. language code: vol vo
 #: zypp/LanguageCode.cc:1103
 msgid "Volapuk"
-msgstr ""
+msgstr "ولاپوک"
 
 #. language code: vot
 #: zypp/LanguageCode.cc:1105
 msgid "Votic"
-msgstr ""
+msgstr "وتیک"
 
 #. language code: wak
 #: zypp/LanguageCode.cc:1107
 msgid "Wakashan Languages"
-msgstr ""
+msgstr "زبانهای واکاشان"
 
 #. language code: wal
 #: zypp/LanguageCode.cc:1109
 msgid "Walamo"
-msgstr ""
+msgstr "والامو"
 
 #. language code: war
 #: zypp/LanguageCode.cc:1111
 msgid "Waray"
-msgstr ""
+msgstr "وارای"
 
 #. language code: was
 #: zypp/LanguageCode.cc:1113
 msgid "Washo"
-msgstr ""
+msgstr "وشوو"
 
 #. language code: wel cym cy
 #: zypp/LanguageCode.cc:1115 zypp/LanguageCode.cc:1117
 msgid "Welsh"
-msgstr ""
+msgstr "ولز"
 
 #. language code: wen
 #: zypp/LanguageCode.cc:1119
 msgid "Sorbian Languages"
-msgstr ""
+msgstr "زبانهای سربی"
 
 #. language code: wln wa
 #: zypp/LanguageCode.cc:1121
 msgid "Walloon"
-msgstr ""
+msgstr "والون"
 
 #. language code: wol wo
 #: zypp/LanguageCode.cc:1123
 msgid "Wolof"
-msgstr ""
+msgstr "ولوف"
 
 #. language code: xal
 #: zypp/LanguageCode.cc:1125
 msgid "Kalmyk"
-msgstr ""
+msgstr "کالمیک"
 
 #. language code: xho xh
 #: zypp/LanguageCode.cc:1127
 msgid "Xhosa"
-msgstr ""
+msgstr "خوزا"
 
 #. language code: yao
 #: zypp/LanguageCode.cc:1129
 msgid "Yao"
-msgstr ""
+msgstr "یائو"
 
 #. language code: yap
 #: zypp/LanguageCode.cc:1131
 msgid "Yapese"
-msgstr ""
+msgstr "یاپیزی"
 
 #. language code: yid yi
 #: zypp/LanguageCode.cc:1133
 msgid "Yiddish"
-msgstr ""
+msgstr "ییدیش"
 
 #. language code: yor yo
 #: zypp/LanguageCode.cc:1135
 msgid "Yoruba"
-msgstr ""
+msgstr "یوروبا"
 
 #. language code: ypk
 #: zypp/LanguageCode.cc:1137
 msgid "Yupik Languages"
-msgstr ""
+msgstr "زبانهای یوپیک"
 
 #. language code: zap
 #: zypp/LanguageCode.cc:1139
 msgid "Zapotec"
-msgstr ""
+msgstr "زاپوتکی"
 
 #. language code: zen
 #: zypp/LanguageCode.cc:1141
 msgid "Zenaga"
-msgstr ""
+msgstr "زناگا"
 
 #. language code: zha za
 #: zypp/LanguageCode.cc:1143
 msgid "Zhuang"
-msgstr ""
+msgstr "ژوانگ"
 
 #. language code: znd
 #: zypp/LanguageCode.cc:1145
 msgid "Zande"
-msgstr ""
+msgstr "زند"
 
 #. language code: zul zu
 #: zypp/LanguageCode.cc:1147
 msgid "Zulu"
-msgstr ""
+msgstr "زولو"
 
 #. language code: zun
 #: zypp/LanguageCode.cc:1149
 msgid "Zuni"
-msgstr ""
+msgstr "زونی"
 
 #. TranslatorExplanation first %s is key name, second is keyring name
 #: zypp/KeyRing.cc:522
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr ""
+msgstr "برای وارد کردن کلید ناموجود %s در دسته کلید %s تلاش شد"
 
 #: zypp/KeyRing.cc:566
 msgid "Failed to delete key."
-msgstr ""
+msgstr "در حذف کلید ناموفق بود."
 
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr ""
+msgstr "پرونده ی امضای %s  یافت نشد"
 
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr ""
+msgstr "نمیتوان پرونده ی '%s' از مخزن '%s' را مهیا کرد"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
-msgstr ""
+msgstr "هیچ آدرسی در مخزن نیست."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr ""
+msgstr "افزونه ی سرویس از تغییر صفت پشتیبانی نمیکند."
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
@@ -4240,24 +4254,27 @@ msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
 msgstr ""
+"بسته ی %s ظاهرا در هنگام انتقال خراب شده است. آیا میخواهید دریافت را مجددا "
+"امتحان کنید؟"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
-msgstr ""
+msgstr "تایید امضا ناموفق بود"
 
 #. TranslatorExplanation %s = name of the package being processed.
 #: zypp/repo/PackageProvider.cc:386
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr ""
+"در مهیا کردن بسته ی %s ناموفق بود. آیا میخواهید دریافت را مجددا امتحان کنید؟"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
-msgstr ""
+msgstr "بررسی applydeltarpm ناموفق بود."
 
 #: zypp/repo/PackageProvider.cc:525
 msgid "applydeltarpm failed."
-msgstr ""
+msgstr "applydeltarpm ناموفق بود."
 
 #: zypp/ZYppFactory.cc:394
 #, c-format, boost-format
@@ -4265,96 +4282,98 @@ msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
 msgstr ""
+"مدیریت سیستم توسط نرم افزار با pid %d (%s) قفل شده است.\n"
+"این نرم افزار را قبل از تلاش مجدد ببندید."
 
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr ""
+msgstr "%s مربوط به یک مخزن distupgrade نیست"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
 msgid "%s has inferior architecture"
-msgstr ""
+msgstr "%s دارای معماری نامرغوب است"
 
 #: zypp/solver/detail/SATResolver.cc:983
 #, c-format, boost-format
 msgid "problem with installed package %s"
-msgstr ""
+msgstr "ایراد در بسته ی نصب شده ی %s"
 
 #: zypp/solver/detail/SATResolver.cc:986
 msgid "conflicting requests"
-msgstr ""
+msgstr "درخواستهای متداخل"
 
 #: zypp/solver/detail/SATResolver.cc:989
 msgid "some dependency problem"
-msgstr ""
+msgstr "برخی مشکلات وابستگی"
 
 #: zypp/solver/detail/SATResolver.cc:992
 #, c-format, boost-format
 msgid "nothing provides requested %s"
-msgstr ""
+msgstr "هیچ چیز %s درخواستی را مهیا نمیکند"
 
 #: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
 msgid "Have you enabled all requested repositories?"
-msgstr ""
+msgstr "آیا شما تمامی مخازن درخواستی را فعال کرده اید؟"
 
 #: zypp/solver/detail/SATResolver.cc:996
 #, c-format, boost-format
 msgid "package %s does not exist"
-msgstr ""
+msgstr "بسته ی %s وجود ندارد"
 
 #: zypp/solver/detail/SATResolver.cc:1000
 msgid "unsupported request"
-msgstr ""
+msgstr "درخواست پشتیبانی نشده"
 
 #: zypp/solver/detail/SATResolver.cc:1003
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr ""
+msgstr "%s توسط سیستم مهیا شده است و نمیتواند حذف شود"
 
 #: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
 msgid "%s is not installable"
-msgstr ""
+msgstr "%s قابل نصب نیست"
 
 #: zypp/solver/detail/SATResolver.cc:1012
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr ""
+msgstr "هیچ چیز %s که توسط %s مورد نیاز است را مهیا نمیکند"
 
 #: zypp/solver/detail/SATResolver.cc:1017
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
-msgstr ""
+msgstr "نمیتوان هردو %s و %s را نصب کرد"
 
 #: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
-msgstr ""
+msgstr "%s با %s که توسط %s مهیا شده است متداخل است"
 
 #: zypp/solver/detail/SATResolver.cc:1027
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr ""
+msgstr "%s منسوخ میکند %s را که توسط %s مهیا شده است"
 
 #: zypp/solver/detail/SATResolver.cc:1032
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
-msgstr ""
+msgstr "%s نصب شده منسوخ میکند %s را که توسط %s مهیا شده است"
 
 #: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
-msgstr ""
+msgstr "حل شونده ی %s با %s مهیا شده توسط خودش متداخل است"
 
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr ""
+msgstr "%s میخواهد %s را، اما این نیازمندی قابل مهیا شدن نیست"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
-msgstr ""
+msgstr "ارائه دهنده های حذف شده:"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -4362,88 +4381,90 @@ msgid ""
 "\n"
 "uninstallable providers: "
 msgstr ""
+"\n"
+"ارائه دهندگان غیر قابل نصب:"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1084
 msgid "uninstallable providers: "
-msgstr ""
+msgstr "ارائه دهندگان غیر قابل نصب"
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
-msgstr ""
+msgstr "قفل را جهت حذف %s پاک کنید"
 
 #: zypp/solver/detail/SATResolver.cc:1146
 #: zypp/solver/detail/SATResolver.cc:1182
 #, c-format, boost-format
 msgid "do not install %s"
-msgstr ""
+msgstr "%s را نصب نکن"
 
 #: zypp/solver/detail/SATResolver.cc:1161
 #: zypp/solver/detail/SATResolver.cc:1203
 #, c-format, boost-format
 msgid "keep %s"
-msgstr ""
+msgstr "%s را نگه دار"
 
 #: zypp/solver/detail/SATResolver.cc:1166
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
-msgstr ""
+msgstr "قفل را جهت نصب %s حذف کن"
 
 #: zypp/solver/detail/SATResolver.cc:1217
 #: zypp/solver/detail/SATResolver.cc:1238
 msgid "This request will break your system!"
-msgstr ""
+msgstr "این درخواست سیستم شما را خواهد شکست!"
 
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
 msgid "ignore the warning of a broken system"
-msgstr ""
+msgstr "نادیده گرفتن هشدار سیستم شکسته شده"
 
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
-msgstr ""
+msgstr "درباره ی نصب یک حل شونده که %s را ارائه میدهد سوال نکن"
 
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr ""
+msgstr "درباره ی حذف تمامی حل شونده ها که %s را ارائه میدهند سوال نکن"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
-msgstr ""
+msgstr "نسخه های جدیدتر %s را نصب نکن"
 
 #: zypp/solver/detail/SATResolver.cc:1279
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr ""
+msgstr "نگهداری %s با وجود اینکه معماری نامرغوب دارد"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
-msgstr ""
+msgstr "نصب %s با وجود اینکه معماری نامرغوب دارد"
 
 #: zypp/solver/detail/SATResolver.cc:1293
 #, c-format, boost-format
 msgid "keep obsolete %s"
-msgstr ""
+msgstr "نگهداری %s منسوخ شده"
 
 #: zypp/solver/detail/SATResolver.cc:1298
 #, c-format, boost-format
 msgid "install %s from excluded repository"
-msgstr ""
+msgstr "نصب %s از مخزن مستثنی"
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr ""
+msgstr "تن"
 
 #: zypp/solver/detail/SATResolver.cc:1325
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
-msgstr ""
+msgstr "تغییر معماری %s به %s"
 
 #: zypp/solver/detail/SATResolver.cc:1334
 #, c-format, boost-format
@@ -4451,164 +4472,166 @@ msgid ""
 "install %s (with vendor change)\n"
 "  %s  -->  %s"
 msgstr ""
+"نصب %s (با تغییر فروشنده) \n"
+"  %s  -->  %s"
 
 #: zypp/solver/detail/SATResolver.cc:1343
 #, c-format, boost-format
 msgid "replacement of %s with %s"
-msgstr ""
+msgstr "جایگزینی %s با %s"
 
 #: zypp/solver/detail/SATResolver.cc:1354
 #, c-format, boost-format
 msgid "deinstallation of %s"
-msgstr ""
+msgstr "از نصب خارج کردن %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
 #, c-format, boost-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr ""
+msgstr "شکستن %s با نادیده گرفتن برخی از وابستگیها"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
-msgstr ""
+msgstr "نادیده گرفته برخی وابستگیها به صورت عمومی"
 
 #: zypp/parser/RepoindexFileReader.cc:197
 #, c-format, boost-format
 msgid "Required attribute '%s' is missing."
-msgstr ""
+msgstr "صفت '%s' مفقود است."
 
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr ""
+msgstr "یک یا جفت صفتهای '%s' یا '%s' نیاز است."
 
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
 msgid "Can't open lock file: %s"
-msgstr ""
+msgstr "نمیتوان فایل قفل را باز کرد: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
-msgstr ""
+msgstr "این عمل در حال حاظر در حال اجرا توسط یک نرم افزار دیگر است."
 
 #. TranslatorExplanation followed by the list of error messages that lead to this exception
 #: zypp/base/Exception.cc:107
 msgid "History:"
-msgstr ""
+msgstr "تاریخچه:"
 
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
 msgid "Unknown match mode '%s'"
-msgstr ""
+msgstr "حالت تطابق ناشناخته '%s'"
 
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr ""
+msgstr "حالت تطابق ناشناخته '%s' برای الگوی '%s'"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr ""
+msgstr "عبارت عادی نامعتبر '%s': regcompبازگرداند %d"
 
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
 msgid "Invalid regular expression '%s'"
-msgstr ""
+msgstr "عبارت عادی نامعتبر '%s'"
 
 #: zypp/misc/CheckAccessDeleted.cc:242
 msgid "Please install package 'lsof' first."
-msgstr ""
+msgstr "لطفا ابتدا بسته ی 'lsof' را نصب کنید."
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
-msgstr ""
+msgstr "احراز هویت برای '%s' مورد نیاز است"
 
 #: zypp/media/MediaException.cc:31
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
-msgstr ""
+msgstr "ناموفق در سوار کردن %s بر روی %s"
 
 #: zypp/media/MediaException.cc:41
 #, c-format, boost-format
 msgid "Failed to unmount %s"
-msgstr ""
+msgstr "ناموفق در پیاده سازی %s"
 
 #: zypp/media/MediaException.cc:47
 #, c-format, boost-format
 msgid "Bad file name: %s"
-msgstr ""
+msgstr "نام پرونده ی بد: %s"
 
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr ""
+msgstr "رسانه در هنگام تلاش برای انجام عمل '%s' باز نشده است."
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr ""
+msgstr "پرونده ی '%s' در رسانه ی '%s' یافت نشد"
 
 #: zypp/media/MediaException.cc:67
 #, c-format, boost-format
 msgid "Cannot write file '%s'."
-msgstr ""
+msgstr "نمیتوان پرونده ی '%s' را نوشت."
 
 #: zypp/media/MediaException.cc:72
 msgid "Medium not attached"
-msgstr ""
+msgstr "رسانه متصل نشده است"
 
 #: zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr ""
+msgstr "نقطه ی اتصال رسانه ی بد"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr ""
+msgstr "مقداردهی دریافت (curl9) برای '%s' ناموفق بود"
 
 #: zypp/media/MediaException.cc:91
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr ""
+msgstr "استثناء سیستم '%s' برای رسانه ی '%s'"
 
 #: zypp/media/MediaException.cc:98
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr ""
+msgstr "مسیر '%s' در رسانه ی '%s' یک پرونده نیست."
 
 #: zypp/media/MediaException.cc:106
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr ""
+msgstr "مسیر '%s' در رسانه ی '%s' یک فهرست نیست."
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr ""
+msgstr "ادرس بدشکل"
 
 #: zypp/media/MediaException.cc:125
 msgid "Empty host name in URI"
-msgstr ""
+msgstr "نام میزبان خالی در آدرس"
 
 #: zypp/media/MediaException.cc:130
 msgid "Empty filesystem in URI"
-msgstr ""
+msgstr "فایل سیستم خالی در آدرس"
 
 #: zypp/media/MediaException.cc:135
 msgid "Empty destination in URI"
-msgstr ""
+msgstr "مسیر خالی در آدرس"
 
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr ""
+msgstr "شکل آدرس پشتیبانی نشده در '%s'."
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
-msgstr ""
+msgstr "عملیات توسط رسانه پشتیبانی نشده است"
 
 #: zypp/media/MediaException.cc:152
 #, c-format, boost-format
@@ -4617,71 +4640,76 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
+"خطای دریافت (curl) برای '%s':\n"
+"کد خطا: %s \n"
+"متن خطا: %s \n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:161
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
+msgstr "خطایی در هنگام تنظیم اختیارات دریافت (curl) برای '%s' رخ داد."
 
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr ""
+msgstr "منبع رسانه ی '%s' حاوی رسانه ی مطلوب نیست"
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr ""
+msgstr "رسانه ی '%s' توسط یک مورد دیگر در حال استفاده است"
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
-msgstr ""
+msgstr "نمیتوان هیچ رسانه ای را خارج کرد"
 
 #: zypp/media/MediaException.cc:184
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
-msgstr ""
+msgstr "نمیتوان رسانه ی '%s' را خارج کرد"
 
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr ""
+msgstr "اجازه برای دسترسی به '%s' داده نشد."
 
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr ""
+msgstr "مهلت زمانی در هنگام دسترسی به '%s' به اتمام رسید."
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
-msgstr ""
+msgstr "مکان '%s' به صورت موقتی غیر قابل دسترسی است."
 
 #: zypp/media/MediaException.cc:223
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
+msgstr "ایراد گواهی SSL، لطفا بررسی کنید که گواهی CA برای '%s' درست است."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr ""
+msgstr "نمیتوان دستگاه حلقه را برای سوار کردن پرونده ی ایمیج از '%s' پیدا کرد"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr ""
+msgstr "حالت احراز هویت پشتیبانی نشده '%s'"
 
 #: zypp/media/MediaCurl.cc:1008
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"مرکز مشتریان Novell را برای بررسی اینکه ثبت نام شما معتبر است و منقضی نشده "
+"است را مشاهده کنید."
 
 #: zypp/sat/detail/PoolImpl.cc:184
 msgid "Can not create sat-pool."
-msgstr ""
+msgstr "نمیتوان sat-pool را ساخت."
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
