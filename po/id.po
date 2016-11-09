@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-11-09 10:26+0000\n"
-"Last-Translator: Prasasto Adi <prasastoadi@gmail.com>\n"
+"PO-Revision-Date: 2016-11-09 12:46+0000\n"
+"Last-Translator: M. Edwin Zakaria <medwin@opensuse.org>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
 "Language: id\n"
@@ -3541,7 +3541,7 @@ msgstr "Gunakan nomor intejer dari %d ke %d"
 #: src/Zypper.cc:898
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
-msgstr "Subcommand %1% tidak mendukung opsi global zypper"
+msgstr "Subcommand %1% tidak mendukung opsi global zypper."
 
 #: src/Zypper.cc:925
 #: src/Zypper.cc:919
@@ -3559,7 +3559,7 @@ msgstr ""
 #: src/Zypper.cc:953
 #: src/Zypper.cc:3227
 msgid "Entering non-interactive mode."
-msgstr "Memasuki mode tidak interaktif"
+msgstr "Memasuki mode tidak interaktif."
 
 #: src/Zypper.cc:966
 #: src/Zypper.cc:960
@@ -5526,7 +5526,7 @@ msgstr "Hak akses root diperlukan untuk memodifikasi repositori sistem."
 #: src/Zypper.cc:3564
 #: src/Zypper.cc:3902
 msgid "Too few arguments."
-msgstr "Argumen terlalu sedikit"
+msgstr "Argumen terlalu sedikit."
 
 #: src/Zypper.cc:3598
 #: src/Zypper.cc:3587
@@ -5767,7 +5767,7 @@ msgstr "Opsi %1% tidak berpengaruh tanpa opsi global %2%."
 #: src/Zypper.cc:4644
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
-msgstr "Tidak dapat menggunakan %s untuk membaca: %s"
+msgstr "Tidak dapat menggunakan %s bersamaan dengan %s."
 
 #: src/Zypper.cc:4640
 #: src/Zypper.cc:4625
@@ -5890,7 +5890,7 @@ msgstr "Perintah ini hanya berguna di zypper shell."
 #: src/Zypper.cc:5248
 #: src/Zypper.cc:5233
 msgid "You already are running zypper's shell."
-msgstr "Anda sudah menjalankan shell zypper"
+msgstr "Anda sudah menjalankan shell zypper."
 
 #: src/Zypper.cc:5325
 #: src/Zypper.cc:5310
@@ -5900,26 +5900,25 @@ msgstr "Tipe Perbaikan"
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:40
 msgid "Problem: "
-msgstr "Kendala:"
+msgstr "Kendala: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:52
 #, c-format, boost-format
 msgid " Solution %d: "
-msgstr "Solusi %d:"
+msgstr " Solusi %d: "
 
 #: src/solve-commit.cc:71
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] ""
-"Pilih solusi di atas menggunakan nomor atau lewati, ulangi atau batalkan."
+msgstr[0] "Pilih solusi di atas menggunakan '1' atau lewati, ulangi atau batalkan"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:78
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Pilih solusi di atas menggunakan nomor atau lewati,  atau batalkan."
+msgstr[0] "Pilih solusi di atas menggunakan '1' atau batalkan dengan 'c'"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -6396,11 +6395,11 @@ msgstr "Tidak ditemukan produk."
 #: src/search.cc:675
 #, c-format, boost-format
 msgid "No providers of '%s' found."
-msgstr "Tidak ditemukan penyedia '%s'"
+msgstr "Tidak ditemukan penyedia '%s'."
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr "Peringatan:"
+msgstr "Peringatan: "
 
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
@@ -6620,13 +6619,13 @@ msgstr "Galat saat membaca berkas kunci:"
 #: src/locks.cc:232
 #: src/locks.cc:159
 msgid "There are no package locks defined."
-msgstr "Tidak ada paket kunci ditentukan"
+msgstr "Tidak ada paket kunci ditentukan."
 
 #: src/locks.cc:292
 #: src/locks.cc:226
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] "Kunci yang ditentukan sukses ditambahkan"
+msgstr[0] "Kunci yang ditentukan sukses ditambahkan."
 
 #: src/locks.cc:299
 #: src/locks.cc:233
@@ -6648,7 +6647,7 @@ msgstr "Tidak ada kunci yang dihapus."
 #, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "Path kamus %zu tidak valid"
+msgstr[0] "Kunci %zu berhasil disingkirkan."
 
 #: src/locks.cc:379
 #: src/locks.cc:313
@@ -6663,7 +6662,7 @@ msgstr "Silahkan arsipkan laporan kutu tentang hal ini."
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr "Lihat http://en.opensuse.org/Zypper/Troubleshooting  untuk instruksi"
+msgstr "Lihat http://en.opensuse.org/Zypper/Troubleshooting  untuk instruksi."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
@@ -6726,11 +6725,11 @@ msgstr "Galat saat memparsing zypper.conf:"
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr "Opsi tidak dikenali"
+msgstr "Opsi tidak dikenali "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
-msgstr "Kehilangan argumen untuk"
+msgstr "Kehilangan argumen untuk "
 
 #. translators: speaking of two mutually contradicting command line options
 #: src/utils/getopt.cc:123
