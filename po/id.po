@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-21 16:00+0200\n"
-"PO-Revision-Date: 2016-11-01 07:46+0000\n"
-"Last-Translator: M. Edwin Zakaria <medwin@opensuse.org>\n"
+"PO-Revision-Date: 2016-11-09 10:26+0000\n"
+"Last-Translator: Prasasto Adi <prasastoadi@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
 "Language: id\n"
@@ -875,12 +875,12 @@ msgstr ""
 "Zypper sub perintah adalah executable tersendiri yang berada didalam\n"
 "zypper_execdir ('%1%').\n"
 "\n"
-"Untuk sub perintah, zypper menyediakan sebuah wrapper yang mengetahui\n"
-"dimana sub perintah berada, dan jalankan dengan memilih argumen baris "
+"Untuk subperintah, zypper menyediakan sebuah wrapper yang mengetahui\n"
+"dimana subperintah berada, dan jalankan dengan memilih argumen baris "
 "perintah\n"
 "mereka.\n"
 "\n"
-"Jika sub perintah tidak ditemukan dalam zypper_execdir, wrapper akan\n"
+"Jika subperintah tidak ditemukan dalam zypper_execdir, wrapper akan\n"
 "melihat pada seluruh $PATH Anda. Dengan demikian, maka memungkinkan\n"
 "untuk menulis ekstensi zypper lokal yang tidak berada didalam ruang sistem.\n"
 
@@ -890,26 +890,26 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
-"Menggunakan zypper opsi global bersama dengan sub perintah, seperti\n"
-"mengeksekusi sub perintah di '%1%' saat ini tidak didukung.\n"
+"Menggunakan zypper opsi global bersama dengan subperintah, seperti\n"
+"mengeksekusi subperintah di '%1%' saat ini tidak didukung.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/subcommand.cc:418
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr "Zypper sub perintah yang tersedia di '%1%'"
+msgstr "Zypper subperintah yang tersedia di '%1%'"
 
 #. translators: headline of an enumeration
 #: src/subcommand.cc:423
 msgid "Zypper subcommands available from elsewhere on your $PATH"
-msgstr "Zypper sub perintah tersedia dari tempat lain pada $PATH Anda"
+msgstr "Zypper subperintah tersedia dari tempat lain pada $PATH Anda"
 
 #. translators: helptext; %1% is a zypper command
 #: src/subcommand.cc:428
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
-"Ketik '%1%' untuk mendapatkan bantuan sub perintah spesifik jika tersedia."
+"Ketik '%1%' untuk mendapatkan bantuan subperintah spesifik jika tersedia."
 
 #. translators: %1% - command name
 #: src/subcommand.cc:451
@@ -3639,7 +3639,7 @@ msgstr "Opsi %s tidak berfungsi di sini. Abaikan."
 #: src/Zypper.cc:1240
 #: src/Zypper.cc:1234
 msgid "Zypper shell does not support execution of subcommands."
-msgstr "Shell zypper tidak mendukung eksekusi sub perintah."
+msgstr "Shell zypper tidak mendukung eksekusi subperintah."
 
 #: src/Zypper.cc:1319
 #: src/Zypper.cc:1313
