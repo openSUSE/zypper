@@ -49,17 +49,17 @@ bool SUSEMediaVerifier::isDesiredMedia(const media::MediaAccessRef &ref)
   if (_media_vendor.empty() || _media_id.empty())
     return true;
 
-    Pathname media_file = "/media." + str::numstring(_media_nr) + "/media";
-    ref->provideFile (media_file);
-    media_file = ref->localPath(media_file);
-    std::ifstream str(media_file.asString().c_str());
-    std::string vendor;
-    std::string id;
+  Pathname media_file = "/media." + str::numstring(_media_nr) + "/media";
+  ref->provideFile (media_file);
+  media_file = ref->localPath(media_file);
+  std::ifstream str(media_file.asString().c_str());
+  std::string vendor;
+  std::string id;
 #warning check the stream status
-    getline(str, vendor);
-    getline(str, id);
+  getline(str, vendor);
+  getline(str, id);
 
-    return (vendor == _media_vendor && id == _media_id );
+  return (vendor == _media_vendor && id == _media_id );
 }
 
 }

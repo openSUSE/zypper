@@ -174,7 +174,7 @@ namespace zypp
     for ( const Capability & rhs : *this )
       if ( lhs.matches( rhs ) == CapMatch::yes )
 	return true;
-      return false;
+    return false;
   }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

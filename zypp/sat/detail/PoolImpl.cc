@@ -113,13 +113,13 @@ namespace zypp
 	if ( 0 == strncmp( logString, "    next rules: 0 0", 19 ) )
 	  return;
 
-	  if ( type & (SOLV_FATAL|SOLV_ERROR) ) {
-	    L_ERR("libsolv") << logString;
-	  } else if ( type & SOLV_DEBUG_STATS ) {
-	    L_DBG("libsolv") << logString;
-	  } else {
-	    L_MIL("libsolv") << logString;
-	  }
+	if ( type & (SOLV_FATAL|SOLV_ERROR) ) {
+	  L_ERR("libsolv") << logString;
+	} else if ( type & SOLV_DEBUG_STATS ) {
+	  L_DBG("libsolv") << logString;
+	} else {
+	  L_MIL("libsolv") << logString;
+	}
       }
 
       detail::IdType PoolImpl::nsCallback( CPool *, void * data, detail::IdType lhs, detail::IdType rhs )
