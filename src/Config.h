@@ -24,6 +24,8 @@ public:
   static const ConfigOption SOLVER_INSTALL_RECOMMENDS;
   static const ConfigOption SOLVER_FORCE_RESOLUTION_COMMANDS;
 
+  static const ConfigOption COMMIT_PS_CHECK_ACCESS_DELETED;
+
   static const ConfigOption COLOR_USE_COLORS;
   static const ConfigOption COLOR_BACKGROUND;
   static const ConfigOption COLOR_RESULT;
@@ -46,6 +48,8 @@ public:
 
     SOLVER_INSTALL_RECOMMENDS_e,
     SOLVER_FORCE_RESOLUTION_COMMANDS_e,
+
+    COMMIT_PS_CHECK_ACCESS_DELETED_e,
 
     COLOR_USE_COLORS_e,
     COLOR_BACKGROUND_e,
@@ -94,6 +98,8 @@ struct Config
 
   bool solver_installRecommends;
   std::set<ZypperCommand> solver_forceResolutionCommands;
+
+  bool psCheckAccessDeleted;
 
   /**
    * Whether to colorize the output. This is evaluated according to

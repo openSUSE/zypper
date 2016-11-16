@@ -36,6 +36,7 @@ const ConfigOption ConfigOption::MAIN_SHOW_ALIAS(ConfigOption::MAIN_SHOW_ALIAS_e
 const ConfigOption ConfigOption::MAIN_REPO_LIST_COLUMNS(ConfigOption::MAIN_REPO_LIST_COLUMNS_e);
 const ConfigOption ConfigOption::SOLVER_INSTALL_RECOMMENDS(ConfigOption::SOLVER_INSTALL_RECOMMENDS_e);
 const ConfigOption ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS(ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS_e);
+const ConfigOption ConfigOption::COMMIT_PS_CHECK_ACCESS_DELETED(ConfigOption::COMMIT_PS_CHECK_ACCESS_DELETED_e);
 const ConfigOption ConfigOption::COLOR_USE_COLORS(ConfigOption::COLOR_USE_COLORS_e);
 const ConfigOption ConfigOption::COLOR_BACKGROUND(ConfigOption::COLOR_BACKGROUND_e);
 const ConfigOption ConfigOption::COLOR_RESULT(ConfigOption::COLOR_RESULT_e);
@@ -63,6 +64,7 @@ ConfigOption::Option ConfigOption::parse(const std::string & strval_r)
     _table["main/repoListColumns"] = MAIN_REPO_LIST_COLUMNS_e;
     _table["solver/installRecommends"] = SOLVER_INSTALL_RECOMMENDS_e;
     _table["solver/forceResolutionCommands"] = SOLVER_FORCE_RESOLUTION_COMMANDS_e;
+    _table["commit/psCheckAccessDeleted"] = COMMIT_PS_CHECK_ACCESS_DELETED_e;
     _table["color/useColors"] = COLOR_USE_COLORS_e;
     _table["color/background"] = COLOR_BACKGROUND_e;
     _table["color/result"] = COLOR_RESULT_e;
@@ -93,6 +95,7 @@ const string ConfigOption::asString() const
     _table_str[MAIN_REPO_LIST_COLUMNS_e] = "main/repoListColumns";
     _table_str[SOLVER_INSTALL_RECOMMENDS_e] = "solver/installRecommends";
     _table_str[SOLVER_FORCE_RESOLUTION_COMMANDS_e] = "solver/forceResolutionCommands";
+    _table_str[COMMIT_PS_CHECK_ACCESS_DELETED_e] = "commit/psCheckAccessDeleted";
     _table_str[COLOR_USE_COLORS_e] = "color/useColors";
     _table_str[COLOR_BACKGROUND_e] = "color/background";
     _table_str[COLOR_RESULT_e] = "color/result";
@@ -116,6 +119,7 @@ const string ConfigOption::asString() const
 Config::Config()
   : repo_list_columns("anr")
   , solver_installRecommends(!ZConfig::instance().solver_onlyRequires())
+  , psCheckAccessDeleted(true)
   , do_colors        (false)
   , color_useColors  ("never")
   , color_background (false)    // dark background
@@ -174,6 +178,11 @@ void Config::read(const string & file)
         solver_forceResolutionCommands.insert(ZypperCommand(str::trim(*c)));
     }
 
+    // ---------------[ commit ]------------------------------------------------
+
+    s = augeas.getOption(ConfigOption::COMMIT_PS_CHECK_ACCESS_DELETED.asString());
+    if (!s.empty())
+      psCheckAccessDeleted = str::strToBool(s, true);
 
     // ---------------[ colors ]------------------------------------------------
 
