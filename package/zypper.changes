@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov 18 13:35:51 CET 2016 - ma@suse.de
+
+- zypper.conf: new commit/psCheckAccessDeleted to avoid 'lsof' call
+  after commit (bsc#945169, bsc#1010096, FATE#322060)
+- version 1.6.183
+
+-------------------------------------------------------------------
 Thu Sep 29 17:37:38 CEST 2016 - ma@suse.de
 
 - Suppress MediaChangeReport while testing multiple baseurls (bnc#899510)
