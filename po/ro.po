@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 15:55+0200\n"
+"POT-Creation-Date: 2016-11-21 15:07+0100\n"
 "PO-Revision-Date: 2012-11-19 14:59+0200\n"
 "Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
 "Language-Team: Romanian <LL@li.org>\n"
@@ -306,34 +306,34 @@ msgstr ""
 msgid "Following actions will be done:"
 msgstr "Vor fi efectuate următoarele acțiuni:"
 
-#: zypp/RepoManager.cc:297
+#: zypp/RepoManager.cc:299
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr ""
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
+#: zypp/RepoManager.cc:307 zypp/RepoManager.cc:769 zypp/RepoManager.cc:1528
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Citirea directorului '%s' a eșuat"
 
-#: zypp/RepoManager.cc:315
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr ""
 
-#: zypp/RepoManager.cc:338
+#: zypp/RepoManager.cc:340
 msgid "Repository alias cannot start with dot."
 msgstr "Aliasul sursei de instalare nu poate începe cu punct."
 
-#: zypp/RepoManager.cc:349
+#: zypp/RepoManager.cc:351
 msgid "Service alias cannot start with dot."
 msgstr "Aliasul serviciului nu poate începe cu punct."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
-#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
+#: zypp/RepoManager.cc:724 zypp/RepoManager.cc:1649 zypp/RepoManager.cc:1714
+#: zypp/RepoManager.cc:1790 zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1976
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Nu se poate deschide fișierul '%s' pentru scriere."
@@ -341,13 +341,13 @@ msgstr "Nu se poate deschide fișierul '%s' pentru scriere."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:849
+#: zypp/RepoManager.cc:851
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1082
+#: zypp/RepoManager.cc:1084
 #, fuzzy
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
@@ -355,31 +355,31 @@ msgstr[0] "La URL-ul (URL-urile) specificate nu au fost găsite metadate valide"
 msgstr[1] "La URL-ul (URL-urile) specificate nu au fost găsite metadate valide"
 msgstr[2] "La URL-ul (URL-urile) specificate nu au fost găsite metadate valide"
 
-#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1134 zypp/RepoManager.cc:1245 zypp/RepoManager.cc:1301
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "Nu se poate crea %s"
 
-#: zypp/RepoManager.cc:1140
+#: zypp/RepoManager.cc:1142
 msgid "Can't create metadata cache directory."
 msgstr "Nu se poate crea directorul pentru cache-ul de metadate."
 
-#: zypp/RepoManager.cc:1282
+#: zypp/RepoManager.cc:1287
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Construirea cache-ului sursei de instalare '%s'"
 
-#: zypp/RepoManager.cc:1302
+#: zypp/RepoManager.cc:1307
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "Nu se poate crea memoria cache la %s - lipsește dreptul de scriere."
 
-#: zypp/RepoManager.cc:1366
+#: zypp/RepoManager.cc:1371
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Sursa de instalare (%d) nu a putut fi încărcată în cache."
 
-#: zypp/RepoManager.cc:1377
+#: zypp/RepoManager.cc:1382
 msgid "Unhandled repository type"
 msgstr "Tip de sursă de instalare netratat"
 
@@ -389,44 +389,44 @@ msgstr "Tip de sursă de instalare netratat"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
+#: zypp/RepoManager.cc:1419 zypp/RepoManager.cc:2465
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Eroare la încercarea de a citi din '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
+#: zypp/RepoManager.cc:1472 zypp/RepoManager.cc:2473
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Eroare necunoscută la citirea de la '%s'"
 
-#: zypp/RepoManager.cc:1611
+#: zypp/RepoManager.cc:1610
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Adaug sursa de instalare '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1701
+#: zypp/RepoManager.cc:1700
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Nume de fișier sursă de instalare invalid la '%s'"
 
-#: zypp/RepoManager.cc:1740
+#: zypp/RepoManager.cc:1739
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Îndepărtez sursa de instalare '%s'"
 
-#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+#: zypp/RepoManager.cc:1758 zypp/RepoManager.cc:1836
 msgid "Can't figure out where the repo is stored."
 msgstr "Nu pot determina unde este stocată sursa de instalare."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
+#: zypp/RepoManager.cc:1772 zypp/RepoManager.cc:1964
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "Nu pot șterge '%s'"
 
-#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
+#: zypp/RepoManager.cc:1952 zypp/RepoManager.cc:2396
 msgid "Can't figure out where the service is stored."
 msgstr "Nu pot determina unde este stocat serviciul."
 
@@ -4577,13 +4577,19 @@ msgstr "'%s' este o expresie regulată invalidă: regcomp a întors %d"
 msgid "Invalid regular expression '%s'"
 msgstr "Expresie regulată invalidă '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:242
+#: zypp/misc/CheckAccessDeleted.cc:243
 #, fuzzy
 msgid "Please install package 'lsof' first."
 msgstr "Curăț cache-ul pachetelor instalate."
 
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Pentru '%s' este necesară autentificarea"
@@ -4742,7 +4748,7 @@ msgstr "Nu este disponibil dispozitivul pentru a monta imagine de la '%s'"
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Metodă de autentificare HTTP nesuportată '%s'"
 
-#: zypp/media/MediaCurl.cc:1008
+#: zypp/media/MediaCurl.cc:1003
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4750,7 +4756,7 @@ msgstr ""
 "Vizitează Centru de Relații cu Clienții Novell pentru a verifica dacă "
 "înregistrarea este validă și încă valabilă."
 
-#: zypp/sat/detail/PoolImpl.cc:184
+#: zypp/sat/detail/PoolImpl.cc:189
 msgid "Can not create sat-pool."
 msgstr "Nu pot crea sat-pool."
 

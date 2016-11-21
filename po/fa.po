@@ -4,11 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opensuse-i 18n\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 15:55+0200\n"
+"POT-Creation-Date: 2016-11-21 15:07+0100\n"
 "PO-Revision-Date: 2016-11-01 20:29+0000\n"
 "Last-Translator: hayyan rostami <hayyan71@yahoo.com>\n"
-"Language-Team: Persian "
-"<https://l10n.opensuse.org/projects/libzypp/master/fa/>\n"
+"Language-Team: Persian <https://l10n.opensuse.org/projects/libzypp/master/fa/"
+">\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -280,34 +280,34 @@ msgstr "پرونده موجود نیست و یا امضاها قابل بررس�
 msgid "Following actions will be done:"
 msgstr "این اعمال انجام خواهند شد:"
 
-#: zypp/RepoManager.cc:297
+#: zypp/RepoManager.cc:299
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "نمیتوان فهرست مخزن '%1%' را خواند: دسترسی غیرمجاز است"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
+#: zypp/RepoManager.cc:307 zypp/RepoManager.cc:769 zypp/RepoManager.cc:1528
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "ناموفق در خواندن مسیر '%s'"
 
-#: zypp/RepoManager.cc:315
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "نمیتوان پرونده ی مخزن  '%1%' را خواند: دسترسی غیرمجاز است"
 
-#: zypp/RepoManager.cc:338
+#: zypp/RepoManager.cc:340
 msgid "Repository alias cannot start with dot."
 msgstr "نام مستعار مخزن نمیتواند با نقطه شروع شود."
 
-#: zypp/RepoManager.cc:349
+#: zypp/RepoManager.cc:351
 msgid "Service alias cannot start with dot."
 msgstr "نام مستعار سرویس نمیتواند با نقطه شروع شود."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
-#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
+#: zypp/RepoManager.cc:724 zypp/RepoManager.cc:1649 zypp/RepoManager.cc:1714
+#: zypp/RepoManager.cc:1790 zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1976
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "نمیتوان پرونده ی '%s' را برای نوشتن باز کرد."
@@ -315,44 +315,44 @@ msgstr "نمیتوان پرونده ی '%s' را برای نوشتن باز کر
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:849
+#: zypp/RepoManager.cc:851
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "سرویس ناشناخته '%1%': در حال حذف مخزن سرویس جدا افتاده '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1082
+#: zypp/RepoManager.cc:1084
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "شبه داده ی معتبر  در آدرس تعیین شده یافت نشد"
 msgstr[1] "شبه داده ی معتبر در آدرسهای تعیین شده یافت نشد"
 msgstr[2] "شبه داده ی معتبر در آدرسهای تعیین شده یافت نشد"
 
-#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1134 zypp/RepoManager.cc:1245 zypp/RepoManager.cc:1301
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "نمیتوان %s را ساخت"
 
-#: zypp/RepoManager.cc:1140
+#: zypp/RepoManager.cc:1142
 msgid "Can't create metadata cache directory."
 msgstr "نمیتوان فهرست کش شبه داده را ساخت."
 
-#: zypp/RepoManager.cc:1282
+#: zypp/RepoManager.cc:1287
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "در حال ساخت کش مخزن '%s'"
 
-#: zypp/RepoManager.cc:1302
+#: zypp/RepoManager.cc:1307
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "نمیتوان کش را در %s ساخت - دسترسی نوشتن نیست."
 
-#: zypp/RepoManager.cc:1366
+#: zypp/RepoManager.cc:1371
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "ناموفق در کش مخزن (%d)."
 
-#: zypp/RepoManager.cc:1377
+#: zypp/RepoManager.cc:1382
 msgid "Unhandled repository type"
 msgstr "نوع مخزن کنترل نشده"
 
@@ -362,44 +362,44 @@ msgstr "نوع مخزن کنترل نشده"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
+#: zypp/RepoManager.cc:1419 zypp/RepoManager.cc:2465
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "خطا در تلاش برای خواندن از '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
+#: zypp/RepoManager.cc:1472 zypp/RepoManager.cc:2473
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "خطای ناشناس در خواندن از  '%s'"
 
-#: zypp/RepoManager.cc:1611
+#: zypp/RepoManager.cc:1610
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "در حال اضافه کردن مخزن '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1701
+#: zypp/RepoManager.cc:1700
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "نام پرونده ی مخزن نامعتبر در '%s'"
 
-#: zypp/RepoManager.cc:1740
+#: zypp/RepoManager.cc:1739
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "در حال حذف مخزن  '%s'"
 
-#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+#: zypp/RepoManager.cc:1758 zypp/RepoManager.cc:1836
 msgid "Can't figure out where the repo is stored."
 msgstr "نمیتوان کشف کرد که مخزن در کجا ذخیره شده است."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
+#: zypp/RepoManager.cc:1772 zypp/RepoManager.cc:1964
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "'%s' را نمیتوان حذف کرد"
 
-#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
+#: zypp/RepoManager.cc:1952 zypp/RepoManager.cc:2396
 msgid "Can't figure out where the service is stored."
 msgstr "نمیتوان کشف کرد سرویس در کجا ذخیره شده است."
 
@@ -4540,12 +4540,18 @@ msgstr "عبارت عادی نامعتبر '%s': regcompبازگرداند %d"
 msgid "Invalid regular expression '%s'"
 msgstr "عبارت عادی نامعتبر '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:242
+#: zypp/misc/CheckAccessDeleted.cc:243
 msgid "Please install package 'lsof' first."
 msgstr "لطفا ابتدا بسته ی 'lsof' را نصب کنید."
 
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "احراز هویت برای '%s' مورد نیاز است"
@@ -4700,7 +4706,7 @@ msgstr "نمیتوان دستگاه حلقه را برای سوار کردن پ�
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "حالت احراز هویت پشتیبانی نشده '%s'"
 
-#: zypp/media/MediaCurl.cc:1008
+#: zypp/media/MediaCurl.cc:1003
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4708,7 +4714,7 @@ msgstr ""
 "مرکز مشتریان Novell را برای بررسی اینکه ثبت نام شما معتبر است و منقضی نشده "
 "است را مشاهده کنید."
 
-#: zypp/sat/detail/PoolImpl.cc:184
+#: zypp/sat/detail/PoolImpl.cc:189
 msgid "Can not create sat-pool."
 msgstr "نمیتوان sat-pool را ساخت."
 

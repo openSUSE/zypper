@@ -13,11 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 15:55+0200\n"
+"POT-Creation-Date: 2016-11-21 15:07+0100\n"
 "PO-Revision-Date: 2016-07-11 14:07+0000\n"
 "Last-Translator: Asa Karlsson <asa.karlsson@lqs-lionbridge.com>\n"
-"Language-Team: Swedish "
-"<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/libzypp/master/sv/"
+">\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -289,34 +289,34 @@ msgstr "Filen finns inte eller signaturen kan inte kontrolleras"
 msgid "Following actions will be done:"
 msgstr "Följande åtgärder kommer att vidtas:"
 
-#: zypp/RepoManager.cc:297
+#: zypp/RepoManager.cc:299
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "Kan inte läsa lagringsplatskatalog '%1%': Åtkomst nekad"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
+#: zypp/RepoManager.cc:307 zypp/RepoManager.cc:769 zypp/RepoManager.cc:1528
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Det gick inte att läsa katalogen '%s'"
 
-#: zypp/RepoManager.cc:315
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "Kan inte läsa lagringsplatsfilen '%1%': Åtkomst nekad"
 
-#: zypp/RepoManager.cc:338
+#: zypp/RepoManager.cc:340
 msgid "Repository alias cannot start with dot."
 msgstr "Aliaset för en lagringsplats kan inte inledas med en punkt."
 
-#: zypp/RepoManager.cc:349
+#: zypp/RepoManager.cc:351
 msgid "Service alias cannot start with dot."
 msgstr "Ett alias för en tjänst kan inte inledas med en punkt."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
-#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
+#: zypp/RepoManager.cc:724 zypp/RepoManager.cc:1649 zypp/RepoManager.cc:1714
+#: zypp/RepoManager.cc:1790 zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1976
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Kan inte skriva till filen '%s'."
@@ -324,43 +324,43 @@ msgstr "Kan inte skriva till filen '%s'."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:849
+#: zypp/RepoManager.cc:851
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "Okänd tjänst '%1%': Tar bort övergiven lagringsplats '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1082
+#: zypp/RepoManager.cc:1084
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "Giltig metadata hittades inte på specificerad URL"
 msgstr[1] "Giltig metadata hittades inte på specificerade URL:er"
 
-#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1134 zypp/RepoManager.cc:1245 zypp/RepoManager.cc:1301
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "Kan inte skapa %s"
 
-#: zypp/RepoManager.cc:1140
+#: zypp/RepoManager.cc:1142
 msgid "Can't create metadata cache directory."
 msgstr "Kan inte att skapa cachekatalog för metadata."
 
-#: zypp/RepoManager.cc:1282
+#: zypp/RepoManager.cc:1287
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Cache för lagringsplatsen '%s' byggs"
 
-#: zypp/RepoManager.cc:1302
+#: zypp/RepoManager.cc:1307
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "Kan inte att skapa cache på %s - ingen skrivrättighet."
 
-#: zypp/RepoManager.cc:1366
+#: zypp/RepoManager.cc:1371
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Misslyckades att cachelagra lagringsplats (%d)."
 
-#: zypp/RepoManager.cc:1377
+#: zypp/RepoManager.cc:1382
 msgid "Unhandled repository type"
 msgstr "Kan inte hantera lagringsplatstypen"
 
@@ -370,44 +370,44 @@ msgstr "Kan inte hantera lagringsplatstypen"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
+#: zypp/RepoManager.cc:1419 zypp/RepoManager.cc:2465
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Det gick inte att läsa från '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
+#: zypp/RepoManager.cc:1472 zypp/RepoManager.cc:2473
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Ett okänt fel uppstod vid läsning från '%s'"
 
-#: zypp/RepoManager.cc:1611
+#: zypp/RepoManager.cc:1610
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Lägger till förrådet '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1701
+#: zypp/RepoManager.cc:1700
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Ogiltigt namn på lagringsplats '%s'"
 
-#: zypp/RepoManager.cc:1740
+#: zypp/RepoManager.cc:1739
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Lagringsplatsen '%s' tas bort"
 
-#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+#: zypp/RepoManager.cc:1758 zypp/RepoManager.cc:1836
 msgid "Can't figure out where the repo is stored."
 msgstr "Kan inte identifiera var lagringsplatsen finns."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
+#: zypp/RepoManager.cc:1772 zypp/RepoManager.cc:1964
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "Kan inte radera '%s'"
 
-#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
+#: zypp/RepoManager.cc:1952 zypp/RepoManager.cc:2396
 msgid "Can't figure out where the service is stored."
 msgstr "Det gick inte att identifiera var tjänsten är lagrad."
 
@@ -4718,12 +4718,18 @@ msgstr "Ogiltigt reguljärt uttryck '%s': regcomp returnerade %d"
 msgid "Invalid regular expression '%s'"
 msgstr "Ogiltigt reguljärt uttryck '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:242
+#: zypp/misc/CheckAccessDeleted.cc:243
 msgid "Please install package 'lsof' first."
 msgstr "Installera paketet 'lsof' först."
 
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Autentisering krävs för '%s'"
@@ -4881,7 +4887,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Det finns inte stöd för HTTP-autentiseringsmetoden '%s'"
 
-#: zypp/media/MediaCurl.cc:1008
+#: zypp/media/MediaCurl.cc:1003
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4889,7 +4895,7 @@ msgstr ""
 "Besök Novells kundcenter och kontrollera att din registrering är giltig och "
 "fortfarande gäller."
 
-#: zypp/sat/detail/PoolImpl.cc:184
+#: zypp/sat/detail/PoolImpl.cc:189
 msgid "Can not create sat-pool."
 msgstr "Kan inte skapa sat-pool."
 

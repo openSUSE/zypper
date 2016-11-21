@@ -18,11 +18,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 15:55+0200\n"
+"POT-Creation-Date: 2016-11-21 15:07+0100\n"
 "PO-Revision-Date: 2016-07-11 17:30+0000\n"
 "Last-Translator: Csaba Palinkas <Csaba.Palinkas@lqs-lionbridge.com>\n"
-"Language-Team: Hungarian "
-"<https://l10n.opensuse.org/projects/libzypp/master/hu/>\n"
+"Language-Team: Hungarian <https://l10n.opensuse.org/projects/libzypp/master/"
+"hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -301,7 +301,7 @@ msgstr "A fájl nem létezik, vagy nem ellenőrizhető az aláírása"
 msgid "Following actions will be done:"
 msgstr "A rendszer a következő műveleteket hajtja végre:"
 
-#: zypp/RepoManager.cc:297
+#: zypp/RepoManager.cc:299
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr ""
@@ -309,30 +309,30 @@ msgstr ""
 "megtagadta az engedélyt"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
+#: zypp/RepoManager.cc:307 zypp/RepoManager.cc:769 zypp/RepoManager.cc:1528
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Nem sikerült a(z) '%s' könyvtár beolvasása."
 
-#: zypp/RepoManager.cc:315
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr ""
 "A következő telepítésiforrás-fájl nem olvasható: '%1%': A rendszer "
 "megtagadta az engedélyt"
 
-#: zypp/RepoManager.cc:338
+#: zypp/RepoManager.cc:340
 msgid "Repository alias cannot start with dot."
 msgstr "A telepítési forrás álneve nem kezdődhet ponttal."
 
-#: zypp/RepoManager.cc:349
+#: zypp/RepoManager.cc:351
 msgid "Service alias cannot start with dot."
 msgstr "A szolgáltatás álneve nem kezdődhet ponttal."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
-#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
+#: zypp/RepoManager.cc:724 zypp/RepoManager.cc:1649 zypp/RepoManager.cc:1714
+#: zypp/RepoManager.cc:1790 zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1976
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "A '%s' fájl nem nyitható meg írásra."
@@ -340,45 +340,45 @@ msgstr "A '%s' fájl nem nyitható meg írásra."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:849
+#: zypp/RepoManager.cc:851
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
 "Ismeretlen '%1%' szolgáltatás: az árva '%2%' szolgáltatástároló eltávolítása"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1082
+#: zypp/RepoManager.cc:1084
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "A megadott URL-címen nem találhatók érvényes metaadatok"
 msgstr[1] "A megadott URL-címeken nem találhatók érvényes metaadatok"
 
-#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1134 zypp/RepoManager.cc:1245 zypp/RepoManager.cc:1301
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "A(z) %s nem hozható létre"
 
-#: zypp/RepoManager.cc:1140
+#: zypp/RepoManager.cc:1142
 msgid "Can't create metadata cache directory."
 msgstr "Nem hozható létre a metaadat gyorsítótár-könyvtára."
 
-#: zypp/RepoManager.cc:1282
+#: zypp/RepoManager.cc:1287
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "A(z) '%s' telepítési forrás gyorsítótárának felépítése"
 
-#: zypp/RepoManager.cc:1302
+#: zypp/RepoManager.cc:1307
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
 "Írási engedélyek hiányában nem hozható létre gyorsítótár a(z) %s helyen."
 
-#: zypp/RepoManager.cc:1366
+#: zypp/RepoManager.cc:1371
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Nem sikerült a tároló gyorsítótárazása (%d)."
 
-#: zypp/RepoManager.cc:1377
+#: zypp/RepoManager.cc:1382
 msgid "Unhandled repository type"
 msgstr "Nem kezelt tárolótípus"
 
@@ -388,44 +388,44 @@ msgstr "Nem kezelt tárolótípus"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
+#: zypp/RepoManager.cc:1419 zypp/RepoManager.cc:2465
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Hiba történt a(z) '%s' beolvasása közben."
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
+#: zypp/RepoManager.cc:1472 zypp/RepoManager.cc:2473
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Ismeretlen hiba a '%s' beolvasása közben"
 
-#: zypp/RepoManager.cc:1611
+#: zypp/RepoManager.cc:1610
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "A(z) '%s' telepítési forrás hozzáadása"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1701
+#: zypp/RepoManager.cc:1700
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Érvénytelen tárolónév: '%s'"
 
-#: zypp/RepoManager.cc:1740
+#: zypp/RepoManager.cc:1739
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "A(z) '%s' telepítési forrás eltávolítása"
 
-#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+#: zypp/RepoManager.cc:1758 zypp/RepoManager.cc:1836
 msgid "Can't figure out where the repo is stored."
 msgstr "Nem sikerült a tároló felismerése."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
+#: zypp/RepoManager.cc:1772 zypp/RepoManager.cc:1964
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "A(z) '%s' törlése sikertelen"
 
-#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
+#: zypp/RepoManager.cc:1952 zypp/RepoManager.cc:2396
 msgid "Can't figure out where the service is stored."
 msgstr "Nem sikerült a szolgáltatás felismerése."
 
@@ -446,7 +446,8 @@ msgstr "Érvénytelen %s-komponens"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
-msgstr "A lekérdezési karakterlánc feldolgozása ehhez az URL-hez nem támogatott"
+msgstr ""
+"A lekérdezési karakterlánc feldolgozása ehhez az URL-hez nem támogatott"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
@@ -582,7 +583,7 @@ msgstr "(24 órán belül lejár)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
 msgstr[0] "(%d napon belül lejár)"
@@ -4844,12 +4845,18 @@ msgstr "Érvénytelen reguláris kifejezés '%s': regcomp visszatérési érték
 msgid "Invalid regular expression '%s'"
 msgstr "Érvénytelen reguláris kifejezés '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:242
+#: zypp/misc/CheckAccessDeleted.cc:243
 msgid "Please install package 'lsof' first."
 msgstr "Először az 'lsof' csomagot kell telepíteni."
 
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Felhasználóhitelesítés szükséges ehhez: '%s'"
@@ -5008,7 +5015,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Nem támogatott HTTP hitelesítési metódus: '%s'"
 
-#: zypp/media/MediaCurl.cc:1008
+#: zypp/media/MediaCurl.cc:1003
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -5016,7 +5023,7 @@ msgstr ""
 "Látogassa meg a Novell Ügyfélközpotot (Novell Customer Center), hogy "
 "ellenőrizni tudja, hogy a regisztrációja érvényes és nem jár re."
 
-#: zypp/sat/detail/PoolImpl.cc:184
+#: zypp/sat/detail/PoolImpl.cc:189
 msgid "Can not create sat-pool."
 msgstr "Nem hozható létre sat-pool."
 

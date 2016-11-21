@@ -17,11 +17,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 15:55+0200\n"
+"POT-Creation-Date: 2016-11-21 15:07+0100\n"
 "PO-Revision-Date: 2016-07-13 08:57+0000\n"
 "Last-Translator: Guenther Pfeiffer <gunther.pfeiffer@lqs-lionbridge.com>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
-"\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -299,34 +299,34 @@ msgstr "Datei nicht vorhanden oder Signatur kann nicht geprüft werden"
 msgid "Following actions will be done:"
 msgstr "Folgende Aktionen werden ausgeführt:"
 
-#: zypp/RepoManager.cc:297
+#: zypp/RepoManager.cc:299
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "Repo-Verzeichnis '%1%' kann nicht gelesen werden: Zugriff verweigert"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
+#: zypp/RepoManager.cc:307 zypp/RepoManager.cc:769 zypp/RepoManager.cc:1528
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Verzeichnis '%s' konnte nicht gelesen werden"
 
-#: zypp/RepoManager.cc:315
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "Repo-Datei '%1%' kann nicht gelesen werden: Zugriff verweigert"
 
-#: zypp/RepoManager.cc:338
+#: zypp/RepoManager.cc:340
 msgid "Repository alias cannot start with dot."
 msgstr "Ein Repository-Alias darf nicht mit einem Punkt beginnen."
 
-#: zypp/RepoManager.cc:349
+#: zypp/RepoManager.cc:351
 msgid "Service alias cannot start with dot."
 msgstr "Ein Dienst-Alias darf nicht mit einem Punkt beginnen."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
-#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
+#: zypp/RepoManager.cc:724 zypp/RepoManager.cc:1649 zypp/RepoManager.cc:1714
+#: zypp/RepoManager.cc:1790 zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1976
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Datei '%s' konnte nicht zum Schreiben geöffnet werden."
@@ -334,45 +334,45 @@ msgstr "Datei '%s' konnte nicht zum Schreiben geöffnet werden."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:849
+#: zypp/RepoManager.cc:851
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
 "Unbekannter Dienst '%1%': Verwaistes Dienst-Repository '%2%' wird entfernt"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1082
+#: zypp/RepoManager.cc:1084
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "Keine gültigen Metadaten bei dem festgelegten URL gefunden"
 msgstr[1] "Keine gültigen Metadaten bei den festgelegten URLs gefunden"
 
-#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1134 zypp/RepoManager.cc:1245 zypp/RepoManager.cc:1301
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "%s konnte nicht erstellt werden"
 
-#: zypp/RepoManager.cc:1140
+#: zypp/RepoManager.cc:1142
 msgid "Can't create metadata cache directory."
 msgstr "Metadaten-Cache-Verzeichnis konnte nicht erstellt werden."
 
-#: zypp/RepoManager.cc:1282
+#: zypp/RepoManager.cc:1287
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Cache für Repository '%s' erzeugen"
 
-#: zypp/RepoManager.cc:1302
+#: zypp/RepoManager.cc:1307
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
 "Cache konnte auf %s nicht erstellt werden - keine Schreibberechtigungen."
 
-#: zypp/RepoManager.cc:1366
+#: zypp/RepoManager.cc:1371
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Repo (%d) konnte nicht im Cache gespeichert werden."
 
-#: zypp/RepoManager.cc:1377
+#: zypp/RepoManager.cc:1382
 msgid "Unhandled repository type"
 msgstr "Unverarbeiteter Repository-Typ"
 
@@ -382,44 +382,44 @@ msgstr "Unverarbeiteter Repository-Typ"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
+#: zypp/RepoManager.cc:1419 zypp/RepoManager.cc:2465
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Fehler beim Versuch, aus '%s' zu lesen"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
+#: zypp/RepoManager.cc:1472 zypp/RepoManager.cc:2473
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Unbekannter Fehler beim Lesen aus '%s'"
 
-#: zypp/RepoManager.cc:1611
+#: zypp/RepoManager.cc:1610
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Repository '%s' hinzufügen"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1701
+#: zypp/RepoManager.cc:1700
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Repo-Dateiname bei '%s' ungültig"
 
-#: zypp/RepoManager.cc:1740
+#: zypp/RepoManager.cc:1739
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Repository '%s' entfernen"
 
-#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+#: zypp/RepoManager.cc:1758 zypp/RepoManager.cc:1836
 msgid "Can't figure out where the repo is stored."
 msgstr "Speicherort des Repos kann nicht gefunden werden."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
+#: zypp/RepoManager.cc:1772 zypp/RepoManager.cc:1964
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "'%s' kann nicht gelöscht werden"
 
-#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
+#: zypp/RepoManager.cc:1952 zypp/RepoManager.cc:2396
 msgid "Can't figure out where the service is stored."
 msgstr "Speicherort des Dienstes kann nicht gefunden werden."
 
@@ -575,7 +575,7 @@ msgstr "(läuft innerhalb 24 Stunden ab)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
 msgstr[0] "(läuft innerhalb von %d Tag ab)"
@@ -4265,7 +4265,8 @@ msgstr "Signaturdatei %s nicht gefunden"
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Datei '%s' aus Repository '%s' kann nicht zur Verfügung gestellt werden"
+msgstr ""
+"Datei '%s' aus Repository '%s' kann nicht zur Verfügung gestellt werden"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
@@ -4461,7 +4462,8 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "Löschen aller auflösbaren Elemente mit %s darf nicht angefordert werden"
+msgstr ""
+"Löschen aller auflösbaren Elemente mit %s darf nicht angefordert werden"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
@@ -4571,12 +4573,18 @@ msgstr "Ungültiger regulärer Ausdruck '%s': regcomp gab %d zurück"
 msgid "Invalid regular expression '%s'"
 msgstr "Ungültiger regulärer Ausdruck '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:242
+#: zypp/misc/CheckAccessDeleted.cc:243
 msgid "Please install package 'lsof' first."
 msgstr "Bitte zuerst Paket 'lsof' installieren."
 
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Authentifizierung erforderlich für '%s'"
@@ -4738,7 +4746,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Nicht unterstützte HTTP-Authentifizierungsmethode '%s'"
 
-#: zypp/media/MediaCurl.cc:1008
+#: zypp/media/MediaCurl.cc:1003
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4746,7 +4754,7 @@ msgstr ""
 "Prüfen Sie im Novell Customer Center, ob Ihre Registrierung gültig und nicht "
 "abgelaufen ist."
 
-#: zypp/sat/detail/PoolImpl.cc:184
+#: zypp/sat/detail/PoolImpl.cc:189
 msgid "Can not create sat-pool."
 msgstr "Sat-Pool kann nicht erstellt werden."
 

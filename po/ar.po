@@ -12,11 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 15:55+0200\n"
+"POT-Creation-Date: 2016-11-21 15:07+0100\n"
 "PO-Revision-Date: 2016-07-17 10:30+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
-"\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/"
+">\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgid "Invalid LDAP URL query string"
 msgstr "سلسلة استعلام URL لبروتوكول LDAP غير صالحة"
 
 #: zypp/Url.cc:153
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
 msgstr "معلمة استعلام URL لبروتوكول LDAP ‏'%s' غير صالحة"
 
@@ -291,34 +291,34 @@ msgstr "الملف غير موجود أو لا يمكن التحقق من توق
 msgid "Following actions will be done:"
 msgstr "سيتم تنفيذ الإجراءات التالية:"
 
-#: zypp/RepoManager.cc:297
+#: zypp/RepoManager.cc:299
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "تعذرت قراءة دليل المخازن '%1%': تم رفض الإذن"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
+#: zypp/RepoManager.cc:307 zypp/RepoManager.cc:769 zypp/RepoManager.cc:1528
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "فشلت قراءة الدليل '%s'"
 
-#: zypp/RepoManager.cc:315
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "تعذرت قراءة ملف المخزن '%1%': تم رفض الإذن"
 
-#: zypp/RepoManager.cc:338
+#: zypp/RepoManager.cc:340
 msgid "Repository alias cannot start with dot."
 msgstr "لا يمكن أن يبدأ الاسم المستعار للمخزن بنقطة."
 
-#: zypp/RepoManager.cc:349
+#: zypp/RepoManager.cc:351
 msgid "Service alias cannot start with dot."
 msgstr "لا يمكن أن يبدأ الاسم المستعار للخدمة بنقطة."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
-#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
+#: zypp/RepoManager.cc:724 zypp/RepoManager.cc:1649 zypp/RepoManager.cc:1714
+#: zypp/RepoManager.cc:1790 zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1976
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "تعذر فتح الملف '%s' للكتابة."
@@ -326,13 +326,13 @@ msgstr "تعذر فتح الملف '%s' للكتابة."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:849
+#: zypp/RepoManager.cc:851
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "خدمة غير معروفة '%1%': إزالة مخزن الخدمة الوحيد '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1082
+#: zypp/RepoManager.cc:1084
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "لم يتم العثور على بيانات تعريف صالحة في أي عنوان URL محدد"
@@ -342,31 +342,31 @@ msgstr[3] "لم يتم العثور على بيانات تعريف صالحة ف
 msgstr[4] "لم يتم العثور على بيانات تعريف صالحة في كثير من عناوين URL المحددة"
 msgstr[5] "لم يتم العثور على بيانات تعريف صالحة في عناوين  URL محددة أخرى"
 
-#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
-#, boost-format, c-format
+#: zypp/RepoManager.cc:1134 zypp/RepoManager.cc:1245 zypp/RepoManager.cc:1301
+#, c-format, boost-format
 msgid "Can't create %s"
 msgstr "لا يمكن إنشاء %s"
 
-#: zypp/RepoManager.cc:1140
+#: zypp/RepoManager.cc:1142
 msgid "Can't create metadata cache directory."
 msgstr "لا يمكن إنشاء دليل لذاكرة التخزين المؤقت لبيانات التعريف."
 
-#: zypp/RepoManager.cc:1282
+#: zypp/RepoManager.cc:1287
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "بناء الذاكرة المؤقتة لمخزن '%s'"
 
-#: zypp/RepoManager.cc:1302
-#, boost-format, c-format
+#: zypp/RepoManager.cc:1307
+#, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "لا يمكن إنشاء ذاكرة التخزين المؤقت في %s - لا توجد أذونات للكتابة."
 
-#: zypp/RepoManager.cc:1366
-#, boost-format, c-format
+#: zypp/RepoManager.cc:1371
+#, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "فشل التخزين المؤقت للمخزن (%d)."
 
-#: zypp/RepoManager.cc:1377
+#: zypp/RepoManager.cc:1382
 msgid "Unhandled repository type"
 msgstr "نوع مخزن غير معالج"
 
@@ -376,44 +376,44 @@ msgstr "نوع مخزن غير معالج"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
-#, boost-format, c-format
+#: zypp/RepoManager.cc:1419 zypp/RepoManager.cc:2465
+#, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "حدث خطأ أثناء محاولة القراءة من '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
+#: zypp/RepoManager.cc:1472 zypp/RepoManager.cc:2473
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "حدث خطأ غير معروف أثناء القراءة من '%s'"
 
-#: zypp/RepoManager.cc:1611
+#: zypp/RepoManager.cc:1610
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "إضافة المخزن '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1701
-#, boost-format, c-format
+#: zypp/RepoManager.cc:1700
+#, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "اسم ملف المخزن غير صالح في '%s'"
 
-#: zypp/RepoManager.cc:1740
+#: zypp/RepoManager.cc:1739
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "إزالة المخزن '%s'"
 
-#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+#: zypp/RepoManager.cc:1758 zypp/RepoManager.cc:1836
 msgid "Can't figure out where the repo is stored."
 msgstr "لا يمكن معرفة مكان تخزين المخزن."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
-#, boost-format, c-format
+#: zypp/RepoManager.cc:1772 zypp/RepoManager.cc:1964
+#, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "لا يمكن حذف '%s'"
 
-#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
+#: zypp/RepoManager.cc:1952 zypp/RepoManager.cc:2396
 msgid "Can't figure out where the service is stored."
 msgstr "لا يمكن معرفة مكان تخزين الخدمة."
 
@@ -505,17 +505,17 @@ msgid "Can't open pty (%s)."
 msgstr "تعذر فتح pty (%s)."
 
 #: zypp/ExternalProgram.cc:269
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "لا يمكن فتح المسار (%s)."
 
 #: zypp/ExternalProgram.cc:350
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "لا يمكن إجراء chroot لتغيير الدليل الجذر إلى '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:360
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "لا يمكن إجراء chdir إلى '%s' داخل chroot تغيير الدليل الجذر '%s' (%s)."
 
@@ -526,12 +526,12 @@ msgstr "لا يمكن إجراء chdir إلى '%s' (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:373
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "لا يمكن تنفيذ '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:381
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "تعذر تقسيم (%s)."
 
@@ -566,7 +566,7 @@ msgstr "(ستنتهي الصلاحية خلال 24 ساعة)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
 msgstr[0] "(ستنتهي الصلاحية خلال %d من الأيام)"
@@ -619,9 +619,9 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
-"تحديد المشكلة والذي يعني دعمًا فنيًا مصممًا لتوفير معلومات التوافق والمساعدة "
-"في التثبيت ودعم الاستخدام والصيانة المستمرة واستكشاف الأخطاء وإصلاحها "
-"الأساسي. والمستوى 1 من الدعم ليس مخصصًا لتصحيح أخطاء عيوب المنتجات."
+"تحديد المشكلة والذي يعني دعمًا فنيًا مصممًا لتوفير معلومات التوافق والمساعدة في "
+"التثبيت ودعم الاستخدام والصيانة المستمرة واستكشاف الأخطاء وإصلاحها الأساسي. "
+"والمستوى 1 من الدعم ليس مخصصًا لتصحيح أخطاء عيوب المنتجات."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
@@ -2343,7 +2343,8 @@ msgstr "الكورسيكية"
 #. language code: cpe
 #: zypp/LanguageCode.cc:353
 msgid "Creoles and Pidgins, English-Based (Other)"
-msgstr "الكرييولى واللغات المبسطة الأخرى للتفاهم بين الشعوب على أساس الأنجليزية"
+msgstr ""
+"الكرييولى واللغات المبسطة الأخرى للتفاهم بين الشعوب على أساس الأنجليزية"
 
 #. language code: cpf
 #: zypp/LanguageCode.cc:355
@@ -2353,7 +2354,8 @@ msgstr "الكرييولى واللغات المبسطة الأخرى للتفا
 #. language code: cpp
 #: zypp/LanguageCode.cc:357
 msgid "Creoles and Pidgins, Portuguese-Based (Other)"
-msgstr "الكرييولى واللغات المبسطة الأخرى للتفاهم بين الشعوب على أساس البرتغالية"
+msgstr ""
+"الكرييولى واللغات المبسطة الأخرى للتفاهم بين الشعوب على أساس البرتغالية"
 
 #. language code: cre cr
 #: zypp/LanguageCode.cc:359
@@ -4251,7 +4253,7 @@ msgid "Signature file %s not found"
 msgstr "ملف التوقيع  %s غير موجود"
 
 #: zypp/repo/RepoProvideFile.cc:259
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr "لا يمكن توفير الملف '%s' من المخزن '%s'"
 
@@ -4265,7 +4267,7 @@ msgstr "لا تدعم الأداة الإضافية للخدمة تغيير إح
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
@@ -4341,7 +4343,7 @@ msgid "unsupported request"
 msgstr "الطلب غير مدعوم"
 
 #: zypp/solver/detail/SATResolver.cc:1003
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "يتم توفير %s من خلال النظام ولا يمكن حذفه"
 
@@ -4356,7 +4358,7 @@ msgid "nothing provides %s needed by %s"
 msgstr "لا يوجد مصدر لتوفير %s المطلوب من قبل %s"
 
 #: zypp/solver/detail/SATResolver.cc:1017
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "لا يمكن تثبيت كل من %s و%s"
 
@@ -4381,7 +4383,7 @@ msgid "solvable %s conflicts with %s provided by itself"
 msgstr "المشكلة القابلة للحل %s تتعارض مع %s المتوفرة من نفسها"
 
 #: zypp/solver/detail/SATResolver.cc:1068
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s يتطلب %s، ولكن لا يمكن توفير هذا المتطلب"
 
@@ -4461,7 +4463,7 @@ msgid "install %s despite the inferior architecture"
 msgstr "تثبيت %s بغض النظر عن الهيكل غير الملائم"
 
 #: zypp/solver/detail/SATResolver.cc:1293
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "الحفاظ على %s القديمة"
 
@@ -4520,7 +4522,7 @@ msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "إحدى السمتين '%s' أو '%s' أو كلتيهما مطلوبة."
 
 #: zypp/base/InterProcessMutex.cc:83
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Can't open lock file: %s"
 msgstr "لا يمكن فتح ملف القفل: %s"
 
@@ -4544,7 +4546,7 @@ msgid "Unknown match mode '%s' for pattern '%s'"
 msgstr "وضع التطابق '%s' غير معروف للنمط '%s'"
 
 #: zypp/base/StrMatcher.cc:157
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "تعبير عادي غير صالح '%s': regcomp أعاد %d"
 
@@ -4553,12 +4555,18 @@ msgstr "تعبير عادي غير صالح '%s': regcomp أعاد %d"
 msgid "Invalid regular expression '%s'"
 msgstr "التعبير العادي '%s' غير صالح"
 
-#: zypp/misc/CheckAccessDeleted.cc:242
+#: zypp/misc/CheckAccessDeleted.cc:243
 msgid "Please install package 'lsof' first."
 msgstr "الرجاء تثبيت حزمة 'lsof' أولًا."
 
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "التصديق مطلوب لـ '%s'"
@@ -4639,7 +4647,7 @@ msgid "Empty destination in URI"
 msgstr "وجهة فارغة في URI"
 
 #: zypp/media/MediaException.cc:140
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "مخطط URI غير مدعوم في '%s'."
 
@@ -4679,7 +4687,7 @@ msgid "Cannot eject any media"
 msgstr "لا يمكن إخراج أية وسائط"
 
 #: zypp/media/MediaException.cc:184
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Cannot eject media '%s'"
 msgstr "لا يمكن إخراج الوسائط '%s'"
 
@@ -4704,7 +4712,7 @@ msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " مشكلة في شهادة SSL، تحقق من أن شهادة CA صالحة لـ '%s'."
 
 #: zypp/media/MediaException.cc:231
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
 msgstr "لا يمكن العثور على جهاز التسلسل المتاح لتوصيل ملف الصور من '%s'"
 
@@ -4713,7 +4721,7 @@ msgstr "لا يمكن العثور على جهاز التسلسل المتاح �
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "أسلوب تصديق HTTP غير مدعوم '%s'"
 
-#: zypp/media/MediaCurl.cc:1008
+#: zypp/media/MediaCurl.cc:1003
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4721,7 +4729,7 @@ msgstr ""
 "تفضل بزيارة Novell Customer Center (مركز خدمة عملاء Novell) للتحقق من صلاحية "
 "التسجيل وعدم انتهائها."
 
-#: zypp/sat/detail/PoolImpl.cc:184
+#: zypp/sat/detail/PoolImpl.cc:189
 msgid "Can not create sat-pool."
 msgstr "تعذر إنشاء sat-pool."
 

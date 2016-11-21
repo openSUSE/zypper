@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 15:55+0200\n"
+"POT-Creation-Date: 2016-11-21 15:07+0100\n"
 "PO-Revision-Date: 2016-07-14 05:34+0000\n"
 "Last-Translator: Brad Song <brad.song@lqs-lionbridge.com>\n"
-"Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
-"\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/"
+">\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -287,34 +287,34 @@ msgstr "파일이 존재하지 않거나 서명을 확인할 수 없음"
 msgid "Following actions will be done:"
 msgstr "다음 작업이 수행됨:"
 
-#: zypp/RepoManager.cc:297
+#: zypp/RepoManager.cc:299
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "리포지토리 디렉토리 '%1%'을(를) 읽을 수 없음: 사용 권한 거부됨"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
+#: zypp/RepoManager.cc:307 zypp/RepoManager.cc:769 zypp/RepoManager.cc:1528
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "디렉토리 '%s'을(를) 읽지 못했습니다."
 
-#: zypp/RepoManager.cc:315
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "리포지토리 파일 '%1%'을(를) 읽을 수 없음: 사용 권한 거부됨"
 
-#: zypp/RepoManager.cc:338
+#: zypp/RepoManager.cc:340
 msgid "Repository alias cannot start with dot."
 msgstr "리포지토리 별칭은 점(.)으로 시작할 수 없습니다."
 
-#: zypp/RepoManager.cc:349
+#: zypp/RepoManager.cc:351
 msgid "Service alias cannot start with dot."
 msgstr "서비스 별칭은 점(.)으로 시작할 수 없습니다."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
-#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
+#: zypp/RepoManager.cc:724 zypp/RepoManager.cc:1649 zypp/RepoManager.cc:1714
+#: zypp/RepoManager.cc:1790 zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1976
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "쓰기 위한 파일 '%s'을(를) 열 수 없습니다."
@@ -322,42 +322,42 @@ msgstr "쓰기 위한 파일 '%s'을(를) 열 수 없습니다."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:849
+#: zypp/RepoManager.cc:851
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "알 수 없는 서비스 '%1%': 독립 서비스 리포지토리 '%2%' 제거 중"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1082
+#: zypp/RepoManager.cc:1084
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "지정한 URL에는 유효한 메타데이터가 없음"
 
-#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1134 zypp/RepoManager.cc:1245 zypp/RepoManager.cc:1301
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "%s을(를) 생성할 수 없음"
 
-#: zypp/RepoManager.cc:1140
+#: zypp/RepoManager.cc:1142
 msgid "Can't create metadata cache directory."
 msgstr "메타 데이터 캐시 디렉토리를 생성할 수 없습니다."
 
-#: zypp/RepoManager.cc:1282
+#: zypp/RepoManager.cc:1287
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "리포지토리 '%s' 캐시 빌드 중"
 
-#: zypp/RepoManager.cc:1302
+#: zypp/RepoManager.cc:1307
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "%s에서 캐시를 생성할 수 없음 - 쓰기 권한이 없습니다."
 
-#: zypp/RepoManager.cc:1366
+#: zypp/RepoManager.cc:1371
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "리포지토리(%d)를 캐시하지 못했습니다."
 
-#: zypp/RepoManager.cc:1377
+#: zypp/RepoManager.cc:1382
 msgid "Unhandled repository type"
 msgstr "리포지토리 유형이 처리되지 않았습니다."
 
@@ -367,45 +367,45 @@ msgstr "리포지토리 유형이 처리되지 않았습니다."
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
+#: zypp/RepoManager.cc:1419 zypp/RepoManager.cc:2465
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "'%s'에서 읽기를 시도하는 중에 오류가 발생했습니다."
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
+#: zypp/RepoManager.cc:1472 zypp/RepoManager.cc:2473
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "'%s'에서 읽는 중에 알 수 없는 오류가 발생했습니다."
 
-#: zypp/RepoManager.cc:1611
+#: zypp/RepoManager.cc:1610
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "'%s' 리포지토리 추가 중"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1701
+#: zypp/RepoManager.cc:1700
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "'%s'에서 리포지토리 파일 이름이 잘못되었습니다."
 
-#: zypp/RepoManager.cc:1740
+#: zypp/RepoManager.cc:1739
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "'%s' 리포지토리 제거 중"
 
-#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+#: zypp/RepoManager.cc:1758 zypp/RepoManager.cc:1836
 msgid "Can't figure out where the repo is stored."
 msgstr "리포지토리가 저장된 위치를 알 수 없습니다."
 
 #  Frame title for installation target hard disk / partition(s)
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
+#: zypp/RepoManager.cc:1772 zypp/RepoManager.cc:1964
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "'%s'을(를) 삭제할 수 없습니다."
 
-#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
+#: zypp/RepoManager.cc:1952 zypp/RepoManager.cc:2396
 msgid "Can't figure out where the service is stored."
 msgstr "서비스가 저장된 위치를 알 수 없습니다."
 
@@ -558,7 +558,7 @@ msgstr "(24시간 내 만료)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:133
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
 msgstr[0] "%d(24시간 내 만료)"
@@ -607,8 +607,9 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
-"Problem determination(문제 결정) - 호환성 정보, 설치 기술 지원, 사용 지원, 지속적인 유지보수 및 기본적인 "
-"문제해결를 위한 기술 지원을 의미합니다. 레벨 1 지원은 제품 결함 오류를 해결하기 위한 지원이 아닙니다."
+"Problem determination(문제 결정) - 호환성 정보, 설치 기술 지원, 사용 지원, 지"
+"속적인 유지보수 및 기본적인 문제해결를 위한 기술 지원을 의미합니다. 레벨 1 지"
+"원은 제품 결함 오류를 해결하기 위한 지원이 아닙니다."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
@@ -616,8 +617,9 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
-"Problem isolation(문제 격리) - 중복되는 문제, 문제 영역 격리, 그리고 레벨 1 지원에서 해결할 수 없는 문제에 대한 "
-"해답 제공을 위해 만들어진 기술 지원 서비스입니다."
+"Problem isolation(문제 격리) - 중복되는 문제, 문제 영역 격리, 그리고 레벨 1 "
+"지원에서 해결할 수 없는 문제에 대한 해답 제공을 위해 만들어진 기술 지원 서비"
+"스입니다."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -625,8 +627,9 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
-"Problem resolution(문제 해결) - 레벨 2 지원에서 식별된 제품 결함을 해결하기 위해 엔지니어링 작업을 통해 복잡한 "
-"문제를 해결하도록 만들어진 기술 지원 서비스입니다."
+"Problem resolution(문제 해결) - 레벨 2 지원에서 식별된 제품 결함을 해결하기 "
+"위해 엔지니어링 작업을 통해 복잡한 문제를 해결하도록 만들어진 기술 지원 서비"
+"스입니다."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
@@ -4732,12 +4735,18 @@ msgstr "잘못된 정규식 '%s': regcomp가 %d을(를) 반환했습니다."
 msgid "Invalid regular expression '%s'"
 msgstr "잘못된 정규식 '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:242
+#: zypp/misc/CheckAccessDeleted.cc:243
 msgid "Please install package 'lsof' first."
 msgstr "'lsof' 패키지를 먼저 설치하십시오."
 
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "'%s'에 대한 인증 필요"
@@ -4887,21 +4896,23 @@ msgstr " SSL 인증서 문제, '%s'의 CA 인증서에 문제가 없는지 확�
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr "'%s'에서 이미지 파일을 탑재하기 위해 사용 가능한 루프 장치를 찾을 수 없습니다."
+msgstr ""
+"'%s'에서 이미지 파일을 탑재하기 위해 사용 가능한 루프 장치를 찾을 수 없습니"
+"다."
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "지원하지 않는 HTTP 인증 방법 '%s'"
 
-#: zypp/media/MediaCurl.cc:1008
+#: zypp/media/MediaCurl.cc:1003
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 "등록이 유효하고 만료되지 않았는지 확인하려면 Novell 고객 센터에 문의하십시오."
 
-#: zypp/sat/detail/PoolImpl.cc:184
+#: zypp/sat/detail/PoolImpl.cc:189
 msgid "Can not create sat-pool."
 msgstr "sat-pool을 생성할 수 없습니다."
 

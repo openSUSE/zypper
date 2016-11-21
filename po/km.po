@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 15:55+0200\n"
+"POT-Creation-Date: 2016-11-21 15:07+0100\n"
 "PO-Revision-Date: 2010-06-03 08:04+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -290,34 +290,34 @@ msgstr ""
 msgid "Following actions will be done:"
 msgstr "អំពើ​ខាងក្រោម​នឹង​ត្រូវបាន​ធ្វើ​រួច ៖"
 
-#: zypp/RepoManager.cc:297
+#: zypp/RepoManager.cc:299
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr ""
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:305 zypp/RepoManager.cc:767 zypp/RepoManager.cc:1523
+#: zypp/RepoManager.cc:307 zypp/RepoManager.cc:769 zypp/RepoManager.cc:1528
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "បាន​បរាជ័យ​ក្នុង​ការ​អាន​ថត '%s'"
 
-#: zypp/RepoManager.cc:315
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr ""
 
-#: zypp/RepoManager.cc:338
+#: zypp/RepoManager.cc:340
 msgid "Repository alias cannot start with dot."
 msgstr "ឈ្មោះ​ក្លែងក្លាយ​ឃ្លាំង​មិន​អាច​ចាប់​ផ្តើម​ជា​មួយ​ចំណុច (.)បាន​ទេ ។"
 
-#: zypp/RepoManager.cc:349
+#: zypp/RepoManager.cc:351
 msgid "Service alias cannot start with dot."
 msgstr "ឈ្មោះ​ក្លែងក្លាយ​សេវាមិន​អាច​​ចាប់​ផ្តើម​​ជាមួយចំណុច ​(.)​បាន​ទេ ។"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:722 zypp/RepoManager.cc:1650 zypp/RepoManager.cc:1715
-#: zypp/RepoManager.cc:1789 zypp/RepoManager.cc:1854 zypp/RepoManager.cc:1975
+#: zypp/RepoManager.cc:724 zypp/RepoManager.cc:1649 zypp/RepoManager.cc:1714
+#: zypp/RepoManager.cc:1790 zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1976
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "មិន​អាច​បើក​ឯកសារ '%s' ដើម្បី​សរសេរ​បានទេ ។"
@@ -325,43 +325,43 @@ msgstr "មិន​អាច​បើក​ឯកសារ '%s' ដើម្ប
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:849
+#: zypp/RepoManager.cc:851
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1082
+#: zypp/RepoManager.cc:1084
 #, fuzzy
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "រក​មិន​ឃើញ​ទិន្នន័យ​មេតា​ដែល​ត្រឹមត្រូវ​នៅ URL ដែល​បាន​បញ្ជាក់"
 
-#: zypp/RepoManager.cc:1132 zypp/RepoManager.cc:1240 zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1134 zypp/RepoManager.cc:1245 zypp/RepoManager.cc:1301
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "មិន​អាច​បង្កើត​ %s"
 
-#: zypp/RepoManager.cc:1140
+#: zypp/RepoManager.cc:1142
 msgid "Can't create metadata cache directory."
 msgstr "មិន​អាច​បង្កើត​ថត​ឃ្លាំង​សម្ងាត់​របស់​ទិន្នន័យ​មេតា ។"
 
-#: zypp/RepoManager.cc:1282
+#: zypp/RepoManager.cc:1287
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "កំពុង​ស្ថាបនា​ឃ្លាំង '%s'"
 
-#: zypp/RepoManager.cc:1302
+#: zypp/RepoManager.cc:1307
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "មិន​អាច​បង្កើត​ឃ្លាំង​សម្ងាត់​នៅ​ត្រង់​ %s - គ្មាន​សិទ្ធិ​ក្នុង​ការ​សរសេរ ។"
 
-#: zypp/RepoManager.cc:1366
+#: zypp/RepoManager.cc:1371
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ឃ្លាំង​ជា​ឃ្លាំង​សម្ងាត់ (%d) ។"
 
-#: zypp/RepoManager.cc:1377
+#: zypp/RepoManager.cc:1382
 msgid "Unhandled repository type"
 msgstr "ប្រភេទ​ឃ្លាំង​ដែល​មិន​បាន​ដោះស្រាយ"
 
@@ -371,44 +371,44 @@ msgstr "ប្រភេទ​ឃ្លាំង​ដែល​មិន​បា
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1414 zypp/RepoManager.cc:2464
+#: zypp/RepoManager.cc:1419 zypp/RepoManager.cc:2465
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "កំហុស​ក្នុង​ការ​ព្យាយាម​អាន​ពី '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1467 zypp/RepoManager.cc:2472
+#: zypp/RepoManager.cc:1472 zypp/RepoManager.cc:2473
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "មាន​កំហុស​ដែល​មិន​ស្គាល់​ក្នុង​ការ​អាន​ពី '%s'"
 
-#: zypp/RepoManager.cc:1611
+#: zypp/RepoManager.cc:1610
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "កំពុង​បន្ថែម​ឃ្លាំង '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1701
+#: zypp/RepoManager.cc:1700
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "ឈ្មោះ​ឯកសារ​ឃ្លាំង​មិន​ត្រឹមត្រូវ​នៅ '%s'"
 
-#: zypp/RepoManager.cc:1740
+#: zypp/RepoManager.cc:1739
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "យក​ឃ្លាំង '%s' ចេញ"
 
-#: zypp/RepoManager.cc:1759 zypp/RepoManager.cc:1835
+#: zypp/RepoManager.cc:1758 zypp/RepoManager.cc:1836
 msgid "Can't figure out where the repo is stored."
 msgstr "មិន​អាច​ដោះស្រាយ​កន្លែង​ដែល​ឃ្លាំង​ត្រូវ​បាន​ទុក​បានទេ ។"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1963
+#: zypp/RepoManager.cc:1772 zypp/RepoManager.cc:1964
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "មិនអាច​លុប '%s'"
 
-#: zypp/RepoManager.cc:1951 zypp/RepoManager.cc:2395
+#: zypp/RepoManager.cc:1952 zypp/RepoManager.cc:2396
 msgid "Can't figure out where the service is stored."
 msgstr "មិនអាច​​ដោះស្រាយ​កន្លែង​ដែល​សេវា​ត្រូវ​បានផ្ទុក​បានទេ ។"
 
@@ -4546,12 +4546,18 @@ msgstr "កន្សោម​ធម្មតា​មិនត្រឹមត្
 msgid "Invalid regular expression '%s'"
 msgstr "កន្សោម​ធម្មតា​មិន​ត្រឹមត្រូវ '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:242
+#: zypp/misc/CheckAccessDeleted.cc:243
 msgid "Please install package 'lsof' first."
 msgstr ""
 
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:430 zypp/media/MediaCurl.cc:1692
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "បាន​ទាមទារ​ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​សម្រាប់ '%s'"
@@ -4706,14 +4712,14 @@ msgstr "មិន​អាច​រក​ឧបករណ៍​ដែល​មា
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "មិនបាន​គាំទ្រ​វិធីសាស្ត្រ​ផ្ទៀងផ្ទាត់​ភាពត្រឹមត្រូវ HTTP '%s' ឡើយ"
 
-#: zypp/media/MediaCurl.cc:1008
+#: zypp/media/MediaCurl.cc:1003
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 "មើល​មជ្ឈមណ្ឌល​អតិថិជន​របស់ Novell ដើម្បីពិនិត្យ​មើល​ថាតើ ការ​ចុះឈ្មោះ​ត្រឹមត្រូវ ហើយមិនបាន​ផុត​កំណត់ ។"
 
-#: zypp/sat/detail/PoolImpl.cc:184
+#: zypp/sat/detail/PoolImpl.cc:189
 msgid "Can not create sat-pool."
 msgstr "មិនអាច​បង្កើត sat-pool បានទេ ។"
 
