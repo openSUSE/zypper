@@ -172,9 +172,10 @@ class MediaHandler {
 
 	/**
 	 * Try to create a default / temporary attach point.
-	 * It trys to create it in attachPrefix if avaliable,
+	 * It tries to create it in attachPrefix if avaliable,
 	 * then in built-in directories.
-	 * \return The name of the new attach point or empty path name.
+	 * \throws MediaBadAttachPointException if no attach point can be created
+	 * \return The name of the new attach point
 	 */
 	Pathname         createAttachPoint() const;
 	/**

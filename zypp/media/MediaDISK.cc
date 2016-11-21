@@ -263,16 +263,13 @@ namespace zypp {
 	}
       }
 
-      Mount mount;
-      std::string mountpoint = attachPoint().asString();
-      if( !isUseableAttachPoint(attachPoint()))
+      if( !isUseableAttachPoint( attachPoint() ) )
       {
-	mountpoint = createAttachPoint().asString();
-	if( mountpoint.empty())
-	  ZYPP_THROW( MediaBadAttachPointException(url()));
-	setAttachPoint( mountpoint, true);
+	setAttachPoint( createAttachPoint(), true );
       }
+      std::string mountpoint( attachPoint().asString() );
 
+      Mount mount;
       string options = _url.getQueryParam("mountoptions");
       if(options.empty())
       {

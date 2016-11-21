@@ -274,7 +274,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
               media_nr,
               _label,
               reason,
-              excp.asUserString(),
+              excp.asUserHistory(),
               devices,
               devindex
             );

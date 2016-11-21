@@ -409,9 +409,14 @@ namespace zypp
     // This also fills the _devices list on demand
     DeviceList detected( detectDevices( _url.getScheme() == "dvd" ? true : false ) );
 
+    if( !isUseableAttachPoint( attachPoint() ) )
+    {
+      setAttachPoint( createAttachPoint(), true );
+    }
+    std::string mountpoint( attachPoint().asString() );
+
     Mount mount;
     MediaMountException merr;
-    string mountpoint = attachPoint().asString();
 
     string options = _url.getQueryParam( "mountoptions" );
     if ( options.empty() )
@@ -526,16 +531,6 @@ namespace zypp
       {
         try
         {
-          if( !isUseableAttachPoint(Pathname(mountpoint)))
-          {
-            mountpoint = createAttachPoint().asString();
-            setAttachPoint( mountpoint, true);
-            if( mountpoint.empty())
-            {
-              ZYPP_THROW( MediaBadAttachPointException(url()));
-            }
-          }
-
           mount.mount(it->name, mountpoint, *fsit, options);
 
           setMediaSource(media);

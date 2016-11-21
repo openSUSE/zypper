@@ -18,6 +18,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/Date.h"
 #include "zypp/base/LogTools.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
 #include "zypp/media/MediaHandler.h"
 #include "zypp/media/MediaManager.h"
@@ -365,12 +366,12 @@ MediaHandler::createAttachPoint() const
 
   if ( apoint.empty() )
   {
-    ERR << "Create attach point: Can't find a writable directory to create an attach point" << std::endl;
+    auto except = MediaBadAttachPointException( url() );
+    except.addHistory( _("Create attach point: Can't find a writable directory to create an attach point") );
+    ZYPP_THROW( std::move(except) );
   }
-  else
-  {
-    MIL << "Created default attach point " << apoint << std::endl;
-  }
+
+  MIL << "Created default attach point " << apoint << std::endl;
   return apoint;
 }
 

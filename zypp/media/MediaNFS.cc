@@ -86,16 +86,11 @@ namespace zypp {
 	return;
       }
 
-      std::string mountpoint( attachPoint().asString() );
-      Mount mount;
-
-      if( !isUseableAttachPoint(attachPoint()))
+      if( !isUseableAttachPoint( attachPoint() ) )
       {
-	mountpoint = createAttachPoint().asString();
-	if( mountpoint.empty())
-	  ZYPP_THROW( MediaBadAttachPointException(url()));
-	setAttachPoint( mountpoint, true);
+	setAttachPoint( createAttachPoint(), true );
       }
+      std::string mountpoint( attachPoint().asString() );
 
       std::string filesystem( _url.getScheme() );
       if ( filesystem != "nfs4" && _url.getQueryParam("type") == "nfs4" )
@@ -145,6 +140,7 @@ namespace zypp {
         options = str::join( optionList, "," );
       }
 
+      Mount mount;
       mount.mount(path,mountpoint,filesystem,options);
 
       setMediaSource(media);
