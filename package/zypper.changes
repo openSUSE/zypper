@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov 22 17:19:43 CET 2016 - ma@suse.de
+
+- Properly escape patch script output in xml mode (bsc#1010712)
+- version 1.13.14
+
+-------------------------------------------------------------------
 Mon Oct 31 12:08:19 CET 2016 - ma@suse.de
 
 - lr: show repo priority summary
