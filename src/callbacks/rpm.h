@@ -137,13 +137,31 @@ struct PatchMessageReportReceiver : public callback::ReceiveReport<target::Patch
 struct PatchScriptReportReceiver : public callback::ReceiveReport<target::PatchScriptReport>
 {
   std::string _label;
+  scoped_ptr<Out::XmlNode> _guard;	// guard script output if Out::TYPE_XML
+
+  void closeNode()
+  { if ( _guard ) _guard.reset(); }
+
+  std::ostream & printOut( const std::string & output_r )
+  {
+    if ( _guard )
+      std::cout << xml::escape( output_r );
+    else
+      std::cout << output_r;
+    return std::cout;
+  }
+
 
   virtual void start( const Package::constPtr & package,
 		      const Pathname & path_r ) // script path
   {
+    Zypper & zypper = *Zypper::instance();
+    if ( zypper.out().type() == Out::TYPE_XML )
+      _guard.reset( new Out::XmlNode( zypper.out(), "message", { "type", "info" } ) );
+
     // TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
     _label = str::Format(_("Running: %s  (%s, %s)")) % path_r.basename() % package->name() % path_r.dirname();
-    std::cout << _label << std::endl;
+    printOut( _label ) << std::endl;
   }
 
   /**
@@ -164,7 +182,8 @@ struct PatchScriptReportReceiver : public callback::ReceiveReport<target::PatchS
     {
       if (was_ping_before)
        std::cout << std::endl;
-      std::cout << output;
+      printOut( output );
+
       was_ping_before = false;
     }
 
@@ -174,6 +193,7 @@ struct PatchScriptReportReceiver : public callback::ReceiveReport<target::PatchS
   /** Report error. */
   virtual Action problem( const std::string & description )
   {
+    closeNode();
     Zypper & zypper = *Zypper::instance();
 
     zypper.out().error(description);
@@ -187,8 +207,13 @@ struct PatchScriptReportReceiver : public callback::ReceiveReport<target::PatchS
   /** Report success. */
   virtual void finish()
   {
+    closeNode();
     Zypper::instance()->out().progressEnd("run-script", _label);
   }
+
+  /** Catch unexpected end. */
+  virtual void reportend()
+  { closeNode(); }
 };
 
 ///////////////////////////////////////////////////////////////////
