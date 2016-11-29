@@ -271,7 +271,7 @@ int WebServer::port() const
 Url WebServer::url() const
 {
     Url url;
-    url.setHost(hostname());
+    url.setHost("localhost");
     url.setPort(str::numstring(port()));
     url.setScheme("http");
     return url;
