@@ -100,6 +100,19 @@ namespace
 	tab_r.lst( dep.asUserString(), pi_r.dep( dep ) );	// dep.asUserString - i18n translation
     }
   }
+
+  inline std::string propertyInstalled( const PoolItem & installedObj_r )
+  {
+    std::string ret( asYesNo( bool(installedObj_r) ) );
+    if ( installedObj_r && installedObj_r.identIsAutoInstalled() )
+    {
+      ret += " (";
+      ret += _("automatically");
+      ret += ")";
+    }
+    return ret;
+  }
+
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
@@ -324,7 +337,7 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
   // translators: property name; short; used like "Name: value"
   p.add( _("Installed Size"),	theone.installSize() );
   // translators: property name; short; used like "Name: value"
-  p.add( _("Installed"),	bool(installed) );
+  p.add( _("Installed"),	propertyInstalled( installed ) );
   // translators: property name; short; used like "Name: value"
   p.add( _("Status") );
   if ( installed )
@@ -428,7 +441,7 @@ void printPatternInfo( Zypper & zypper, const ui::Selectable & s )
   printCommonData( theone, p );
 
   // translators: property name; short; used like "Name: value"
-  p.add( _("Installed"),		s.hasInstalledObj() );
+  p.add( _("Installed"),		propertyInstalled( s.installedObj() ) );
   // translators: property name; short; used like "Name: value"
   p.add( _("Visible to User"),		pattern->userVisible() );
 
@@ -559,7 +572,7 @@ void printProductInfo( Zypper & zypper, const ui::Selectable & s )
   // translators: property name; short; used like "Name: value"
   p.add( _("Is Base"),			bool(product->isTargetDistribution()) );
   // translators: property name; short; used like "Name: value"
-  p.add( _("Installed"),		bool(installed) );
+  p.add( _("Installed"),		propertyInstalled( installed ) );
   {
     // translators: property name; short; used like "Name: value"
     p.add( _("Status") );
