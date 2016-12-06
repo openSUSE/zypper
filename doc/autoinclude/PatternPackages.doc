@@ -10,7 +10,7 @@
 
 Since Code12 (SLES-12) we utilizes a new method of defining patterns, as opposed to the older XML-based patterns files. A pattern and it's dependencies are now represented by an rpm package and the few pattern specific properties are provided by the package. No extra XML-file is needed.
 
-By convention a patterns package for a \c pattern:FOO is named \c patterns-*-FOO and is must provide \c pattern() \c = \c apparmor. The pattens content is expressed by dependencies to other packages and patterns-packages.
+By convention a patterns package for a \c pattern:FOO is named \c patterns-*-FOO and is must provide \c pattern() \c = \c FOO. The pattens content is expressed by dependencies to other packages and patterns-packages.
 
 The list of provides used for the new pattern pseudo-package autogeneration:
 
