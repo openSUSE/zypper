@@ -8,7 +8,7 @@
 
 \section zypp-pattern-packages_intro Intro
 
-Since Code12 (SLES-12) we utilizes a new method of defining patterns, as opposed to the older XML-based patterns files. A pattern and it's dependencies are now represented by a rpm package and the few pattern specific properties are provided by the package. No extra XML-file is needed.
+Since Code12 (SLES-12) we utilize a new method of defining patterns, as opposed to the older XML-based patterns files. A pattern and it's dependencies are now represented by a rpm package and the few pattern specific properties are provided by the package. No extra XML-file is needed.
 
 By convention a patterns-package for a <tt>pattern:FOO</tt> is named <tt>patterns-[*-]FOO</tt> and is must provide <tt>pattern() = FOO</tt>. Usually the patterns-package name has a distribution or product identifier embedded, like in <tt>patterns-sles-Minimal</tt> or <tt>patterns-openSUSE-xfce</tt>.
 
