@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-12-07 16:18+0000\n"
-"Last-Translator: Isis Binder <isis.binder@gmail.com>\n"
+"PO-Revision-Date: 2016-12-07 16:24+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -1726,7 +1726,7 @@ msgstr "Reinicialização do sistema necessária."
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "Ignorar o download do arquivo e interromper a operação atual."
+msgstr "Ignorar o download do arquivo e cancelar a operação atual."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
@@ -1907,24 +1907,23 @@ msgid ""
 "same priority."
 msgstr ""
 "As prioridades de repositório não possuem efeito algum. Todos os "
-"repositórios possuem a mesma prioridade."
+"repositórios habilitados possuem a mesma prioridade."
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "Prioridade do repositório '%s' alterada para %d."
+msgstr "Prioridades de repositório em vigor:"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "Selecionando '%s' para remoção."
+msgstr "Veja '%1%' para detalhes"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Repositório"
-msgstr[1] "Repositório"
+msgstr[0] "%1% repositório"
+msgstr[1] "%1% repositórios"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -4717,6 +4716,8 @@ msgstr ""
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
+"Saída XML apenas: Literalmente encaminhar as etiquetas XML encontradas em um "
+"arquivo de produto."
 
 #: src/Zypper.cc:2620
 #, c-format, boost-format
@@ -5435,7 +5436,7 @@ msgstr "Veja a mensagem acima para uma dica."
 #: src/Zypper.cc:4524
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "A opção %1% não tem efeito sem a opção global %2%."
 
 #: src/Zypper.cc:4611 src/Zypper.cc:4659
 #, c-format, boost-format
@@ -5483,8 +5484,9 @@ msgid ""
 "for more information about this command."
 msgstr ""
 "Você está prestes a fazer uma atualização da distribuição com todos os "
-"repositórios habilitados. Verifique se esses repositórios são compatíveis "
-"antes de continuar. Consulte '%s' para mais informações sobre este comando."
+"repositórios habilitados. Certifique-se de que esses repositórios são "
+"compatíveis antes de continuar. Consulte '%s' para mais informações sobre "
+"este comando."
 
 #: src/Zypper.cc:4864 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
