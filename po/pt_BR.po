@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
 "PO-Revision-Date: 2016-12-07 16:13+0000\n"
-"Last-Translator: Carlos Filho <caffilhobr@gmail.com>\n"
+"Last-Translator: Isis Binder <isis.binder@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -665,7 +665,7 @@ msgstr "desconhecido"
 #: src/info.cc:518
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Veja %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:524
