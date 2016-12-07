@@ -4582,7 +4582,7 @@ msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
 msgstr ""
-"Anschlusspunkt erstellen: Kann kein schreibbares Verzeichnis findem, um "
+"Anschlusspunkt erstellen: Kann kein schreibbares Verzeichnis finden, um "
 "einen Anschlusspunkt zu erstellen"
 
 #. !\todo add comma to the message for the next release
