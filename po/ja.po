@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-07-13 09:03+0000\n"
-"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"PO-Revision-Date: 2016-12-07 22:39+0000\n"
+"Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -633,9 +633,8 @@ msgid "Dependency"
 msgstr "依存関係"
 
 #: src/info.cc:427 src/info.cc:441
-#, fuzzy
 msgid "Required"
-msgstr "システム再起動"
+msgstr "必要"
 
 #: src/info.cc:432 src/info.cc:441 src/search.cc:318
 msgid "Recommended"
@@ -658,7 +657,7 @@ msgstr "不明"
 #: src/info.cc:518
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "詳しくは %1% をお読みください"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:524
@@ -1778,16 +1777,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "既定の優先順位"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "優先順位"
+msgstr "高い優先順位"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "低い優先順位"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1802,23 +1800,22 @@ msgstr ""
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
-msgstr ""
+msgstr "リポジトリの優先順位は無効化されています。有効化されている全てのリポジトリが同じ優先順位になっています。"
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "リポジトリ '%s' の優先順位を %d に設定しました。"
+msgstr "リポジトリの優先順位は有効化されています:"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "削除する '%s' を選択します。"
+msgstr "詳しくは '%1%' をご覧ください。"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "リポジトリ"
+msgstr[0] "%1% 個のリポジトリ"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -4558,7 +4555,7 @@ msgstr ""
 #: src/Zypper.cc:2596
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
-msgstr ""
+msgstr "XML 出力のみ: 製品ファイル内にある XML タグをそのまま出力します。"
 
 #: src/Zypper.cc:2620
 #, c-format, boost-format
@@ -5267,7 +5264,7 @@ msgstr "解決へのヒントとして上記のメッセージをお読みくだ
 #: src/Zypper.cc:4524
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "%2% のグローバルオプションが指定されていないと、オプション %1% は効果がありません。"
 
 #: src/Zypper.cc:4611 src/Zypper.cc:4659
 #, c-format, boost-format
