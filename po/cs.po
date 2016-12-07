@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
 "PO-Revision-Date: 2016-12-07 20:01+0000\n"
-"Last-Translator: Jan Papež <honyczek@centrum.cz>\n"
+"Last-Translator: Vojtech Zeisek <Vojtech.Zeisek@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -5441,7 +5441,7 @@ msgstr "Nápovědu naleznete v předchozí zprávě."
 #: src/Zypper.cc:4524
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "Volba %1% nemá žádný efekt bez globální volby %2%."
 
 #: src/Zypper.cc:4611 src/Zypper.cc:4659
 #, c-format, boost-format
