@@ -8,28 +8,58 @@
 
 \section zypp-pattern-packages_intro Intro
 
-Since Code12 (SLES-12) we utilizes a new method of defining patterns, as opposed to the older XML-based patterns files. A pattern and it's dependencies are now represented by an rpm package and the few pattern specific properties are provided by the package. No extra XML-file is needed.
+Since Code12 (SLES-12) we utilizes a new method of defining patterns, as opposed to the older XML-based patterns files. A pattern and it's dependencies are now represented by a rpm package and the few pattern specific properties are provided by the package. No extra XML-file is needed.
 
-By convention a patterns package for a \c pattern:FOO is named \c patterns-*-FOO and is must provide \c pattern() \c = \c FOO. The pattens content is expressed by dependencies to other packages and patterns-packages.
+By convention a patterns-package for a <tt>pattern:FOO</tt> is named <tt>patterns-[*-]FOO</tt> and is must provide <tt>pattern() = FOO</tt>. Usually the patterns-package name has a distribution or product identifier embedded, like in <tt>patterns-sles-Minimal</tt> or <tt>patterns-openSUSE-xfce</tt>.
 
-The list of provides used for the new pattern pseudo-package autogeneration:
+The pattens content is expressed by the patterns-packages dependencies to other packages and patterns-packages.
 
-\code
-  Provides:  pattern-category() = STRING
-  Provides:  pattern-category(de) = STRING
-	     (... other languages ...)
-  Provides:  pattern-includes() = STRING
-  Provides:  pattern-extends() = STRING
-  Provides:  pattern-icon() = STRING
-  Provides:  pattern-order() = STRING
-  Provides:  pattern-visible()
+The list of patterns-package provides used for the new pattern autogeneration:
 
-  STRING must be url-hexencoded so that it does not contain any characters
-  that rpm provides can't have. E.g.:
-    ' ' => %20
-    ',' => %2C
-    '-' => %2D
-\endcode
+<table width="100%" border="1">
+  <tr>
+    <td colspan="2"><b>Basic provides relevant for package management (libzypp/zypper):</b></td>
+  </tr>
+  <tr>
+    <td width="30%"><tt>Provides:  pattern() = FOO</tt></td>
+    <td>The patterns name: <tt>FOO</tt>. Additional attributes like version, release, architecture, summary and description are taken from the pattenrs-package.</td>
+  </tr>
+  <tr>
+    <td><tt>Provides:  pattern-visible()</tt></td>
+    <td>A UI hint telling whether the pattern should be shown to the user. If the provides is missing, the UI will usually hide the pattern in lists and output. This is mainly used for helper patterns defining a basic content which is then required/recommended by different (visible) patterns.</td>
+  </tr>
+  <tr>
+    <td colspan="2"><b>Additional pattern properties not used by libzypp, but provided by the API mainly for the YAST UI:</b></td>
+  </tr>
+  <tr>
+    <td><tt>Provides:  pattern-icon() = STRING</tt></td>
+    <td>Name of an icon the UI should use for this pattern.</td>
+  </tr>
+  <tr>
+    <td><tt>Provides:  pattern-order() = STRING</tt></td>
+    <td>A string used by the UI for sorting patterns rather than 'by name'. Usually some 4-digit string like "1750"</td>
+  </tr>
+  <tr>
+    <td><tt>Provides:  pattern-category() = STRING</tt></td>
+    <td>The category name used in the UI in English (en).</td>
+  </tr>
+  <tr>
+    <td><tt>Provides:  pattern-category(de) = STRING</tt></td>
+    <td>The category name translated. E.g. into German (de).</td>
+  </tr>
+  <tr>
+    <td><tt>Provides:  pattern-includes() = STRING</tt></td>
+    <td>Hint for the UI to include an other patterns content (i.e. its required and recommended packages) in this patterns content list. Usually used to embed the content of an invisible pattern in a visible one.</td>
+  </tr>
+  <tr>
+    <td><tt>Provides:  pattern-extends() = STRING</tt></td>
+    <td>Reverse-includes. Hint for the UI to include this patterns content (i.e. its required and recommended packages) in an other patterns content list. Usually used to embed the content of an invisible pattern in a visible one.</td>
+  </tr>
+  <tr>
+    <td colspan="2">STRING must be url-hexencoded so that it does not contain any characters that rpm-provides can't have.</br>
+    E.g.: ' ' => %20 / ',' => %2C / '-' => %2D</td>
+  </tr>
+</table>
 
 \code
 patterns-sles-Minimal-12-37.1.x86_64.rpm
@@ -61,6 +91,5 @@ patterns-sles-Minimal-12-37.1.x86_64.rpm
   ...
 }
 \endcode
-
 
 */
