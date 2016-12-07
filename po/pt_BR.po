@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-12-07 16:14+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2016-12-07 16:18+0000\n"
+"Last-Translator: Isis Binder <isis.binder@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -58,8 +58,8 @@ msgstr "A chave GPG que assina o arquivo '%1%' expirou."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "A chave GPG que assina o arquivo '%1%' expirará em %2% dia(s)."
-msgstr[1] ""
+msgstr[0] "A chave GPG que assina o arquivo '%1%' expirará em %2% dia."
+msgstr[1] "A chave GPG que assina o arquivo '%1%' expirará em %2% dias."
 
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
@@ -1885,13 +1885,12 @@ msgid "default priority"
 msgstr "prioridade padrão"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "Prioridade"
+msgstr "maior prioridade"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "menor prioridade"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1907,6 +1906,8 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"As prioridades de repositório não possuem efeito algum. Todos os "
+"repositórios possuem a mesma prioridade."
 
 #: src/repos.cc:203
 #, fuzzy
