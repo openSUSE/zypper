@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-12-07 19:56+0000\n"
-"Last-Translator: Jan Papež <honyczek@centrum.cz>\n"
+"PO-Revision-Date: 2016-12-07 19:57+0000\n"
+"Last-Translator: Vojtech Zeisek <Vojtech.Zeisek@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -1987,12 +1987,12 @@ msgid "See '%1%' for details"
 msgstr "Pro více podrobností vizte '%1%'"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Úložiště"
-msgstr[1] "Úložiště"
-msgstr[2] "Úložiště"
+msgstr[0] "Repozitáře"
+msgstr[1] "Repozitáře"
+msgstr[2] "Repozitáře"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
