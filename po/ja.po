@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2016-12-07 22:35+0000\n"
+"PO-Revision-Date: 2016-12-07 22:36+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
@@ -108,7 +108,7 @@ msgstr "補足"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "'%s' は %u バイトのチェックサム '%s' の疑わしい種類です"
+msgstr "%2$u バイトのチェックサム '%3$s' は '%1$s' と思われますが、疑わしいタイプです"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
@@ -4270,7 +4270,7 @@ msgstr "署名の検証に失敗しました"
 #: zypp/repo/PackageProvider.cc:386
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr "パッケージ %s の提供に失敗しました。検索を再試行しますか?"
+msgstr "パッケージ %s の提供に失敗しました。取得を再試行しますか?"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
