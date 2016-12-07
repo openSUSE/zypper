@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-07-27 14:39+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2016-12-07 19:56+0000\n"
+"Last-Translator: Jan Papež <honyczek@centrum.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -1950,16 +1950,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "výchozí priorita"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "Priorita"
+msgstr "zvýšená priorita"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "snížená priorita"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1975,16 +1974,17 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Priority repozitářů nemají žádný efekt. Všechny povolené repozitáře mají "
+"stejnou prioritu."
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "Priorita repozitáře '%s' byla nastavena na %d."
+msgstr "Skutečné priority repozitářů:"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "Vybírám '%s' k odebrání."
+msgstr "Pro více podrobností vizte '%1%'"
 
 #: src/repos.cc:213
 #, fuzzy, boost-format
