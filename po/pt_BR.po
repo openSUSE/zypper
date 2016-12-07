@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2016-12-07 16:12+0000\n"
-"Last-Translator: Isis Binder <isis.binder@gmail.com>\n"
+"PO-Revision-Date: 2016-12-07 16:13+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -114,7 +114,7 @@ msgstr "Complementa"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Tipo '%s' duvidoso da soma de verificação de byte(s) %u ('%s')"
+msgstr "Tipo '%s' duvidoso da soma de verificação de bytes %u ('%s')"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
@@ -360,7 +360,7 @@ msgstr "Construindo o cache do repositório '%s'"
 #: zypp/RepoManager.cc:1307
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "Impossível criar o cache em %s - sem permissão de gravação."
+msgstr "Não foi possível criar o cache em %s - sem permissão de gravação."
 
 #: zypp/RepoManager.cc:1371
 #, c-format, boost-format
