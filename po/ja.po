@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-12-07 22:39+0000\n"
+"PO-Revision-Date: 2016-12-07 22:42+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
@@ -398,7 +398,7 @@ msgstr "差分を適用しています"
 #: src/callbacks/repo.h:103
 #, c-format, boost-format
 msgid "(%s unpacked)"
-msgstr "(%s を解凍しました)"
+msgstr "(%s を展開しました)"
 
 #: src/callbacks/repo.h:112
 #, boost-format
@@ -1051,7 +1051,7 @@ msgstr "'%s' (リポジトリ '%s' から) を強制インストールしてい�
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
-msgstr "削除する '%s' を選択します。"
+msgstr "削除向けに '%s' を選択します。"
 
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
@@ -1666,7 +1666,7 @@ msgstr "SSL証明局の確認を無効にして続行します。"
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
 #: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
-msgstr "中止、再試行、無視？"
+msgstr "中止(A)、再試行(R)、無視(I)？"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
@@ -1809,7 +1809,7 @@ msgstr "リポジトリの優先順位は有効化されています:"
 #: src/repos.cc:204
 #, boost-format
 msgid "See '%1%' for details"
-msgstr "詳しくは '%1%' をご覧ください。"
+msgstr "詳しくは '%1%' をご覧ください"
 
 #: src/repos.cc:213
 #, boost-format
@@ -3216,9 +3216,8 @@ msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
-"/etc/products.d/baseproductのSymlinkに参照先がないか、見つかりません。\n"
-"このリンクは、/etc/products.d内にあるコア製品の.prodファイルを指定する必要が"
-"あります。\n"
+"/etc/products.d/baseproductのシンボリックリンクに参照先がないか、見つかりません。\n"
+"このリンクは、/etc/products.d内にあるコア製品の.prodファイルを示していなければなりません。\n"
 
 #: src/Zypper.cc:1050
 msgid "Repositories disabled, using the database of installed packages only."
@@ -3693,7 +3692,7 @@ msgid ""
 msgstr ""
 "refresh-services (refs) [options]\n"
 "\n"
-"定義済みリポジトリインデックスサービスを更新します。\n"
+"定義済みのリポジトリインデックスサービスを更新します。\n"
 "\n"
 "  コマンドオプション:\n"
 "-f, --force           完全な更新を強制します。\n"
@@ -4018,13 +4017,12 @@ msgid ""
 msgstr ""
 "update (up) [options] [packagename] ...\n"
 "\n"
-"指定のまたはすべてのインストール済みのパッケージを新しいバージョンに更新しま"
-"す(可能な場合)。\n"
+"指定したパッケージ、またはすべてのインストール済みのパッケージを、可能であれば新しいバージョンに更新します。\n"
 "\n"
 "  コマンドオプション:\n"
 "\n"
 "-t, --type <type>           パッケージの種類(%s)。\n"
-"                            デフォルト:%s。\n"
+"                            デフォルト: %s。\n"
 "-r, --repo <alias|#|URI>    指定したリポジトリのみを読み込みます。\n"
 "    --skip-interactive      対話処理が必要な更新をスキップします。\n"
 "    --with-interactive      対話処理が必要な更新をスキップしません。\n"
@@ -4036,28 +4034,21 @@ msgstr ""
 "                            最新バージョンより古いバージョンへの更新も\n"
 "                            受け入れます。\n"
 "    --debug-solver          デバッグ用に解決器のテストケースを作成します。\n"
-"    --no-recommends         推奨パッケージについてはインストールせず、必要な"
-"もののみをインストールします。\n"
-"    --recommends            必要なパッケージに加え、推奨パッケージについて"
-"も\n"
+"    --no-recommends         推奨パッケージについてはインストールせず、必要なもののみをインストールします。\n"
+"    --recommends            必要なパッケージに加え、推奨パッケージについても\n"
 "                            インストールします。\n"
-"    --replacefiles          既にインストール済みの他のファイルを置き換えるこ"
-"とになる場合でも、\n"
-"                            パッケージをインストールします。デフォルトでは"
-"ファイルの衝突をエラーとして扱います。\n"
-"                            --download-as-neededを指定するとファイルの衝突の"
-"確認が無効になります。\n"
+"    --replacefiles          既にインストール済みの他のファイルを置き換えることになる場合でも、\n"
+"                            パッケージをインストールします。デフォルトではファイルの衝突をエラーとして扱います。\n"
+"                            --download-as-neededを指定するとファイルの衝突の確認が無効になります。\n"
 "-R, --no-force-resolution   解決器に対して解決方法を見つけるよう強制せず、\n"
 "                            尋ねるようにします。\n"
 "    --force-resolution      解決器に対して解決方法を見つけるよう強制します\n"
 "                            (より積極的な動作)。\n"
 "-D, --dry-run               更新をテストするだけで実際には何もしません。\n"
 "    --details               インストールの詳細なサマリを表示します。\n"
-"    --download              ダウンロード - インストールモードを指定します。利"
-"用可能なモード:\n"
+"    --download              ダウンロード - インストールモードを指定します。利用可能なモード:\n"
 "                            %s\n"
-"-d, --download-only         パッケージをダウンロードするだけでインストールは"
-"行いません。\n"
+"-d, --download-only         パッケージをダウンロードするだけでインストールは行いません。\n"
 
 #: src/Zypper.cc:2224
 #, c-format, boost-format
@@ -4613,7 +4604,7 @@ msgstr ""
 "\n"
 "パッチに関する詳細情報を表示します。\n"
 "\n"
-"これは '%s 1' の別名です。\n"
+"これは '%s' の別名です。\n"
 
 #: src/Zypper.cc:2672
 #, c-format, boost-format
@@ -4628,7 +4619,7 @@ msgstr ""
 "\n"
 "パターンについての詳細情報を表示します。\n"
 "\n"
-"これは '%s 1' の別名です。\n"
+"これは '%s' の別名です。\n"
 
 #: src/Zypper.cc:2691
 #, c-format, boost-format
@@ -4817,9 +4808,7 @@ msgstr "ps [オプション]"
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
-msgstr ""
-"最新アップグレードによって削除されたファイルとライブラリをまだ使用する可能性"
-"のある実行中プロセスを一覧表示します。"
+msgstr "直近のアップグレードによって削除されたファイルとライブラリについて、これらをまだ使用している可能性のある実行中プロセスを一覧表示します。"
 
 #. translators: -s, --short
 #: src/Zypper.cc:2952
@@ -4840,9 +4829,8 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
-"関連付けられたシステムサービスごとに、標準出力でprint <format>を指定した後、"
-"改行してください。<format>の '%s' ディレクティブは、システムサービス名に置き"
-"換えられます。"
+"関連付けられたシステムサービスごとに、標準出力に対して<format>で指定した書式を出力し、改行します。<format>の '%s' "
+"ディレクティブは、システムサービス名に置き換えられます。"
 
 #: src/Zypper.cc:2973
 msgid ""
@@ -5011,7 +4999,7 @@ msgid ""
 msgstr ""
 "ping [options]\n"
 "\n"
-"このコマンドには常に0を返すダミー実装があります。\n"
+"このコマンドは常に0を返すダミー実装です。\n"
 
 #: src/Zypper.cc:3200 src/Zypper.cc:5251
 msgid "Unexpected program flow."
@@ -6016,7 +6004,7 @@ msgstr "インストール済みパッケージ:%d"
 #: src/misc.cc:258
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "リポジトリ内にカウンターパーツがあるインストール済みパッケージ:%d"
+msgstr "リポジトリ内に対応するものがあるインストール済みパッケージ: %d"
 
 #: src/misc.cc:259
 #, c-format, boost-format
