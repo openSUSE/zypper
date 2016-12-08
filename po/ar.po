@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-10-12 13:51+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2016-12-08 04:42+0000\n"
+"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -652,9 +652,8 @@ msgid "Dependency"
 msgstr "التبعية"
 
 #: src/info.cc:427 src/info.cc:441
-#, fuzzy
 msgid "Required"
-msgstr "تتطلّب"
+msgstr "مطلوب"
 
 #: src/info.cc:432 src/info.cc:441 src/search.cc:318
 msgid "Recommended"
@@ -677,7 +676,7 @@ msgstr "غير معروف"
 #: src/info.cc:518
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "أنظر %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:524
@@ -2178,16 +2177,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "الأولوية الافتراضية"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "الأولوية"
+msgstr "رفع الأولوية"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "خفظ الأولوية"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -2203,27 +2201,27 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"أولويات مستودع ليس لها تأثير.  تشترك جميع مستودعات الممكنة بنفس الأولوية."
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "تم تعيين أولوية المخزن '%s' إلى %d."
+msgstr "أثر الأولويات في المستودع:"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "تحديد '%s' للإزالة."
+msgstr "لمزيد من التفصيل'%1%' انظر"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "المخزن"
-msgstr[1] "المخزن"
-msgstr[2] "المخزن"
-msgstr[3] "المخزن"
-msgstr[4] "المخزن"
-msgstr[5] "المخزن"
+msgstr[0] "%1% مستودع"
+msgstr[1] "%1% مستودع"
+msgstr[2] "%1% مستودعان"
+msgstr[3] "%1% مستودعات"
+msgstr[4] "%1% مستودعات"
+msgstr[5] "%1% مستودعات"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -4926,7 +4924,7 @@ msgstr ""
 #: src/Zypper.cc:2596
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
-msgstr ""
+msgstr "مخرجات XML فقط: إحالة حرفية لعلامات XML في ملف المنتج."
 
 #: src/Zypper.cc:2620
 #, c-format, boost-format
@@ -5624,7 +5622,7 @@ msgstr "راجع الرسالة أعلاه للحصول على تلميح."
 #: src/Zypper.cc:4524
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "خيار %1% ليس له تأثير بدون الخيار العالمي  %2%."
 
 #: src/Zypper.cc:4611 src/Zypper.cc:4659
 #, c-format, boost-format
