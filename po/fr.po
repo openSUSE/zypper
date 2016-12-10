@@ -1,13 +1,7 @@
 # translation of zypper.fr.po to
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-#
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
-#
-#
-#
-#
-#
 # Benoit Verduyn <benoit.verduyn@videotron.ca>, 2007.
 # Guillaume GARDET <guillaume.gardet@opensuse.org>, 2007, 2008, 2009.
 # Rémy Marquis <remy.marquis@opensuse.org>, 2008.
@@ -15,22 +9,20 @@
 # Guillaume GARDET <guillaume.gardet@opensuse.org>, 2011, 2012, 2013, 2014, 2015.
 # Maxime Corteel <maxime.corteel@gadz.org>, 2013, 2014.
 # Antoine Belvire <antoine.belvire@laposte.net>, 2015, 2016.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-07-11 03:53+0000\n"
-"Last-Translator: martine caillaud <caillaud@wanadoo.fr>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"PO-Revision-Date: 2016-12-10 20:49+0100\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"Language-Team: français <opensuse-fr@opensuse.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: src/callbacks/keyring.h:36
 msgid "Repository:"
@@ -256,8 +248,8 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"Cependant, si vous êtes certain que le fichier avec la somme de contrôle "
-"'%1%..' est\n"
+"Cependant, si vous êtes certain que le fichier avec la somme de contrôle '%1%"
+"..' est\n"
 "sûr et devrait être utilisé au cours de cette opération, saisissez les 4 "
 "premiers\n"
 "caractères de la somme de contrôle pour débloquer, à vos risques et périls, "
@@ -661,9 +653,8 @@ msgid "Dependency"
 msgstr "Dépendance"
 
 #: src/info.cc:427 src/info.cc:441
-#, fuzzy
 msgid "Required"
-msgstr "Redémarrage requis "
+msgstr "Nécessaire"
 
 #: src/info.cc:432 src/info.cc:441 src/search.cc:318
 msgid "Recommended"
@@ -686,7 +677,7 @@ msgstr "inconnu"
 #: src/info.cc:518
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Voir %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:524
@@ -1242,8 +1233,7 @@ msgstr[1] "Les %d paquets suivants vont être remis à une version inférieure 
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Le correctif suivant va être remis à une version inférieure :"
-msgstr[1] ""
-"Les %d correctifs suivants vont être remis à une version inférieure :"
+msgstr[1] "Les %d correctifs suivants vont être remis à une version inférieure :"
 
 #: src/Summary.cc:640
 #, c-format, boost-format
@@ -1343,8 +1333,7 @@ msgstr[1] ""
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
-"Le paquet source recommandé suivant a été sélectionné automatiquement :"
+msgstr[0] "Le paquet source recommandé suivant a été sélectionné automatiquement :"
 msgstr[1] ""
 "Les %d paquets source recommandés suivants ont été sélectionnés "
 "automatiquement :"
@@ -1354,8 +1343,7 @@ msgstr[1] ""
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] ""
-"L'application recommandée suivante a été automatiquement sélectionnée :"
+msgstr[0] "L'application recommandée suivante a été automatiquement sélectionnée :"
 msgstr[1] ""
 "Les %d applications recommandées suivantes ont été automatiquement "
 "sélectionnées :"
@@ -1437,8 +1425,7 @@ msgstr[1] ""
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] ""
-"L'application suivante est recommandée, mais ne sera pas installée :"
+msgstr[0] "L'application suivante est recommandée, mais ne sera pas installée :"
 msgstr[1] ""
 "Les %d applications suivantes sont recommandées, mais ne seront pas "
 "installées :"
@@ -1449,8 +1436,7 @@ msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
 msgstr[0] "Le paquet suivant est suggéré, mais ne sera pas installé :"
-msgstr[1] ""
-"Les %d paquets suivants sont suggérés, mais ne seront pas installés :"
+msgstr[1] "Les %d paquets suivants sont suggérés, mais ne seront pas installés :"
 
 #: src/Summary.cc:981
 #, c-format, boost-format
@@ -1467,8 +1453,7 @@ msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
 msgstr[0] "Le schéma suivant est suggéré, mais ne sera pas installé :"
-msgstr[1] ""
-"Les %d schémas suivants sont suggérés, mais ne seront pas installés :"
+msgstr[1] "Les %d schémas suivants sont suggérés, mais ne seront pas installés :"
 
 #: src/Summary.cc:991
 #, c-format, boost-format
@@ -1476,8 +1461,7 @@ msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "Le produit suivant est suggéré, mais ne sera pas installé :"
-msgstr[1] ""
-"Les %d produits suivants sont suggérés, mais ne seront pas installés :"
+msgstr[1] "Les %d produits suivants sont suggérés, mais ne seront pas installés :"
 
 #: src/Summary.cc:996
 #, c-format, boost-format
@@ -1563,8 +1547,7 @@ msgstr[1] "Les %d applications suivantes vont changer de fournisseur :"
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Le paquet suivant n'est pas supporté par son fournisseur :"
-msgstr[1] ""
-"Les %d paquets suivants ne sont pas supportés par leur fournisseur :"
+msgstr[1] "Les %d paquets suivants ne sont pas supportés par leur fournisseur :"
 
 #: src/Summary.cc:1120
 #, c-format, boost-format
@@ -1591,24 +1574,21 @@ msgstr[1] "Les %d mises à jour de paquets suivantes ne seront PAS installées 
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "La mise à jour de produit suivante ne sera PAS installée :"
-msgstr[1] ""
-"Les %d mises à jour de produits suivantes ne seront PAS installées :"
+msgstr[1] "Les %d mises à jour de produits suivantes ne seront PAS installées :"
 
 #: src/Summary.cc:1148
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "La mise à jour d'application suivante ne sera PAS installée :"
-msgstr[1] ""
-"Les %d mises à jour d'applications suivantes ne seront PAS installées :"
+msgstr[1] "Les %d mises à jour d'applications suivantes ne seront PAS installées :"
 
 #: src/Summary.cc:1178
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] ""
-"L'élément suivant est verrouillé et ne sera modifié par aucune action :"
+msgstr[0] "L'élément suivant est verrouillé et ne sera modifié par aucune action :"
 msgstr[1] ""
 "Les %d éléments suivants sont verrouillés et ne seront modifiés par aucune "
 "action :"
@@ -1930,16 +1910,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "priorité par défaut"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "Priorité"
+msgstr "priorité relevée"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "priorité abaissée"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1955,23 +1934,24 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Les priorités des dépôts sont sans effet. Tous les dépôts activés partagent "
+"la même priorité."
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "La priorité du dépôt '%s' a été réglée à %d."
+msgstr "Priorités de dépôt en vigueur :"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format, boost-format
 msgid "See '%1%' for details"
-msgstr "'%s' sélectionné pour suppression."
+msgstr "Consultez '%1%' pour plus de détails"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Dépôt"
-msgstr[1] "Dépôt"
+msgstr[0] "%1% dépôt"
+msgstr[1] "%1% dépôts"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -2302,8 +2282,7 @@ msgstr "Il n'y a pas de dépôts activés définis."
 #: src/repos.cc:1379
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr ""
-"Utilisez les commandes '%s' ou '%s' pour ajouter ou activer des dépôts."
+msgstr "Utilisez les commandes '%s' ou '%s' pour ajouter ou activer des dépôts."
 
 #: src/repos.cc:1384
 msgid "Could not refresh the repositories because of errors."
@@ -2399,8 +2378,7 @@ msgstr "Impossible de trouver un dépôt valide à l'endroit indiqué :"
 
 #: src/repos.cc:1665
 msgid "Problem transferring repository data from specified URI:"
-msgstr ""
-"Problème lors du transfert des données du dépôt depuis l'URI spécifié :"
+msgstr "Problème lors du transfert des données du dépôt depuis l'URI spécifié :"
 
 #: src/repos.cc:1666
 msgid "Please check whether the specified URI is accessible."
@@ -2492,8 +2470,8 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"Ne peut pas changer l'alias du dépôt '%s'. Le dépôt appartient au service "
-"'%s' qui est responsable de la mise en place de son alias."
+"Ne peut pas changer l'alias du dépôt '%s'. Le dépôt appartient au service '%"
+"s' qui est responsable de la mise en place de son alias."
 
 #: src/repos.cc:1922
 #, c-format, boost-format
@@ -2715,8 +2693,7 @@ msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] "Le dépôt '%s' a été ajouté aux dépôts désactivés du service '%s'"
-msgstr[1] ""
-"Les dépôts '%s' ont été ajoutés aux dépôts désactivés du service '%s'"
+msgstr[1] "Les dépôts '%s' ont été ajoutés aux dépôts désactivés du service '%s'"
 
 #: src/repos.cc:3022
 #, c-format, boost-format
@@ -2725,8 +2702,7 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] "Le dépôt '%s' a été supprimé des dépôts activés du service '%s'"
-msgstr[1] ""
-"Les dépôts '%s' ont été supprimés des dépôts activés du service '%s'"
+msgstr[1] "Les dépôts '%s' ont été supprimés des dépôts activés du service '%s'"
 
 #: src/repos.cc:3029
 #, c-format, boost-format
@@ -2736,8 +2712,7 @@ msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
 msgstr[0] "Le dépôt '%s' a été supprimé des dépôts désactivés du service '%s'"
-msgstr[1] ""
-"Les dépôts '%s' ont été supprimés des dépôts désactivés du service '%s'"
+msgstr[1] "Les dépôts '%s' ont été supprimés des dépôts désactivés du service '%s'"
 
 #: src/repos.cc:3038
 #, c-format, boost-format
@@ -2777,8 +2752,7 @@ msgstr "Problème lors du chargement des données depuis '%s'"
 #: src/repos.cc:3185
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr ""
-"Le dépôt '%s' n'a pas pu être rafraichi. Utilisation de l'ancien cache."
+msgstr "Le dépôt '%s' n'a pas pu être rafraichi. Utilisation de l'ancien cache."
 
 #: src/repos.cc:3189 src/repos.cc:3218
 #, c-format, boost-format
@@ -2948,8 +2922,8 @@ msgstr "Aucun problème correspondant n'a été trouvé."
 #: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
 msgstr ""
-"Les correspondances suivantes dans les numéros de problèmes ont été "
-"trouvées :"
+"Les correspondances suivantes dans les numéros de problèmes ont été trouvées "
+":"
 
 #: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
@@ -3146,8 +3120,8 @@ msgid ""
 "distribution version)\n"
 msgstr ""
 "     Options concernant les dépôts :\n"
-"\t--no-gpg-checks\t\tIgnorer les échecs de vérification de GPG et "
-"continuer.\n"
+"\t--no-gpg-checks\t\tIgnorer les échecs de vérification de GPG et continuer."
+"\n"
 "\t--gpg-auto-import-keys\tAutomatiquement faire confiance et importer les "
 "clés de signature du\n"
 "\t\t\t\tnouveau dépôt.\n"
@@ -3279,8 +3253,8 @@ msgid ""
 msgstr ""
 "     Requêtes :\n"
 "\tsearch, se\t\tRecherche les paquets correspondants à un modèle.\n"
-"\tinfo, if\t\tAffiche les informations complètes pour les paquets "
-"spécifiés.\n"
+"\tinfo, if\t\tAffiche les informations complètes pour les paquets spécifiés."
+"\n"
 "\tpatch-info\t\tAffiche les informations complètes pour les correctifs "
 "spécifiés.\n"
 "\tpattern-info\t\tAffiche les informations complètes pour les modèles "
@@ -3430,8 +3404,8 @@ msgid ""
 msgstr ""
 "Le lien symbolique /etc/products.d/baseproduct n'existe pas ou n'a pas de "
 "cible valide !\n"
-"Le lien doit pointer vers le fichier .prod de vos produits clés dans /etc/"
-"products.d.\n"
+"Le lien doit pointer vers le fichier .prod de vos produits clés dans "
+"/etc/products.d.\n"
 
 #: src/Zypper.cc:1050
 msgid "Repositories disabled, using the database of installed packages only."
@@ -3532,8 +3506,8 @@ msgid ""
 msgstr ""
 "install (in) [options] <fonction|uri_fichier_rpm> ...\n"
 "\n"
-"Installer les paquets d'après les fonctions spécifiées ou les fichiers RPM "
-"d'après\n"
+"Installer les paquets d'après les fonctions spécifiées ou les fichiers RPM d'"
+"après\n"
 "l'emplacement spécifié. Une fonction s'écrit NOM[.ARCH][OP<VERSION>], où OP "
 "est l'un des\n"
 "opérateurs suivants : <, <=, =, >=, >.\n"
@@ -3568,8 +3542,8 @@ msgstr ""
 "confirmation\n"
 "                            d'accord avec des licences tierces.\n"
 "                            Voir 'man zypper' pour plus de détails.\n"
-"    --debug-solver          Créer un cas de test du solveur pour le "
-"débogage.\n"
+"    --debug-solver          Créer un cas de test du solveur pour le débogage."
+"\n"
 "    --no-recommends         Ne pas installer les paquets recommandés, "
 "seulement ceux requis.\n"
 "    --recommends            Installer également les paquets recommandés en "
@@ -3596,8 +3570,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
-"Se passer de l'interaction avec l'utilisateur. Alias de l'option globale --"
-"non-interactive."
+"Se passer de l'interaction avec l'utilisateur. Alias de l'option globale "
+"--non-interactive."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -3640,8 +3614,8 @@ msgstr ""
 "-n, --name                  Sélectionner les paquets par leur nom, pas par "
 "leur fonction.\n"
 "-C, --capability            Sélectionner les paquets par leur fonction.\n"
-"    --debug-solver          Créer un cas de test du solveur pour le "
-"débogage.\n"
+"    --debug-solver          Créer un cas de test du solveur pour le débogage."
+"\n"
 "-R, --no-force-resolution   Ne pas forcer le solveur à trouver une solution, "
 "le laisser\n"
 "                            demander.\n"
@@ -3771,8 +3745,8 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Uniquement télécharger les paquets, ne pas "
 "installer.\n"
-"    --debug-solver          Créer un cas de test du solveur pour le "
-"débogage.\n"
+"    --debug-solver          Créer un cas de test du solveur pour le débogage."
+"\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1691
@@ -3868,13 +3842,13 @@ msgstr ""
 "-i, --ar-to-enable <alias>     Ajoute un dépôt de service RIS à activer.\n"
 "-I, --ar-to-disable <alias>    Ajoute un dépôt de service RIS à désactiver.\n"
 "-j, --rr-to-enable <alias>     Supprime un dépôt de service RIS à activer.\n"
-"-J, --rr-to-disable <alias>    Supprime un dépôt de service RIS à "
-"désactiver.\n"
+"-J, --rr-to-disable <alias>    Supprime un dépôt de service RIS à désactiver."
+"\n"
 "-k, --cl-to-enable             Efface la liste des dépôts RIS à activer.\n"
 "-K, --cl-to-disable            Efface la liste des dépôts RIS à désactiver.\n"
 "\n"
-"-a, --all                      Applique les changements à tous les "
-"services.\n"
+"-a, --all                      Applique les changements à tous les services."
+"\n"
 "-l, --local                    Applique les changements à tous les services\n"
 "                               locaux.\n"
 "-t, --remote                   Applique les changements à tous les services\n"
@@ -3982,8 +3956,8 @@ msgstr ""
 "-K, --no-keep-packages     Désactiver la mise en cache des fichiers RPM.\n"
 "-g, --gpgcheck             Activer la vérification GPG pour ce dépôt.\n"
 "-G, --no-gpgcheck          Désactiver la vérification GPG pour ce dépôt.\n"
-"-f, --refresh              Activer le rafraîchissement automatique du "
-"dépôt.\n"
+"-f, --refresh              Activer le rafraîchissement automatique du dépôt."
+"\n"
 
 #: src/Zypper.cc:1905
 msgid ""
@@ -4102,8 +4076,8 @@ msgstr ""
 "-d, --disable             Désactive le dépôt (mais ne le supprime pas).\n"
 "-e, --enable              Active un dépôt préalablement désactivé.\n"
 "-r, --refresh             Active le rafraichissement automatique du dépôt.\n"
-"-R, --no-refresh          Désactive le rafraichissement automatique du "
-"dépôt.\n"
+"-R, --no-refresh          Désactive le rafraichissement automatique du dépôt."
+"\n"
 "-n, --name <nom>               Spécifie un nom descriptif pour le dépôt.\n"
 "-p, --priority <entier>   Définit la priorité du dépôt.\n"
 "-k, --keep-packages       Active la mise en cache des fichiers RPM.\n"
@@ -4112,8 +4086,8 @@ msgstr ""
 "-G, --no-gpgcheck         Désactive la vérification GPG pour ce dépôt.\n"
 "\n"
 "-a, --all                 Applique les changements à tous les dépôts.\n"
-"-l, --local               Applique les changements à tous les dépôts "
-"locaux.\n"
+"-l, --local               Applique les changements à tous les dépôts locaux."
+"\n"
 "-t, --remote              Applique les changements à tous les dépôts "
 "distants.\n"
 "-m, --medium-type <type>  Applique les changements à tous les dépôts du "
@@ -4286,8 +4260,8 @@ msgstr ""
 "les mises à jour. Les mises à jour\n"
 "\t\t\t\tvers une version inférieure à la dernière version sont\n"
 "                            aussi possibles.\n"
-"    --debug-solver          Créer un cas de test du solveur pour le "
-"débogage.\n"
+"    --debug-solver          Créer un cas de test du solveur pour le débogage."
+"\n"
 "    --no-recommends         Ne pas installer les paquets recommandés, "
 "seulement ceux requis.\n"
 "    --recommends            Installer également les paquets recommandés en "
@@ -4379,8 +4353,8 @@ msgstr ""
 "gravité.\n"
 "    --date <AAAA-MM-JJ>     Installer les correctifs émis avant à la date "
 "spécifiée.\n"
-"    --debug-solver          Créer un cas de test du solveur pour le "
-"débogage.\n"
+"    --debug-solver          Créer un cas de test du solveur pour le débogage."
+"\n"
 "    --no-recommends         Ne pas installer les paquets recommandés, "
 "seulement ceux requis.\n"
 "    --recommends            Installer également les paquets recommandés en "
@@ -4566,8 +4540,8 @@ msgstr ""
 "                            d'accord avec des licences tierces.\n"
 "                            Consultez le manuel de zypper pour plus de "
 "détails.\n"
-"    --debug-solver          Créer un cas de test du solveur pour le "
-"débogage.\n"
+"    --debug-solver          Créer un cas de test du solveur pour le débogage."
+"\n"
 "    --no-recommends         Ne pas installer les paquets recommandés, "
 "seulement ceux requis.\n"
 "    --recommends            Installer également les paquets recommandés en "
@@ -4660,8 +4634,8 @@ msgstr ""
 "Rechercher les paquets contenant l'une des chaînes spécifiées.\n"
 "\n"
 "  Options de la commande :\n"
-"    --match-substrings    Rechercher les correspondances partielles de mots "
-"(par défaut).\n"
+"    --match-substrings    Rechercher les correspondances partielles de mots ("
+"par défaut).\n"
 "    --match-words          Rechercher les correspondances exactes de mots "
 "uniquement.\n"
 "-x, --match-exact          Rechercher une correspondance exacte avec les "
@@ -4977,8 +4951,8 @@ msgstr ""
 "addlock (al) [options] <nompaquet>\n"
 "\n"
 "Ajoute un verrouillage sur un paquet. Spécifiez les paquets à verrouiller "
-"par leur nom exact ou par un modèle Glob en utilisant les caractères joker "
-"'*' et '?'.\n"
+"par leur nom exact ou par un modèle Glob en utilisant les caractères joker '*"
+"' et '?'.\n"
 "\n"
 "  Options de la commande :\n"
 "-r, --repo <alias|#|URI>  Restreint le verrouillage au dépôt spécifié.\n"
@@ -5162,8 +5136,8 @@ msgstr ""
 "Par défaut, les paquets sont enregistrés dans le cache de paquets de "
 "libzypp\n"
 "(/var/cache/zypp/packages ; pour les utilisateurs non-root :\n"
-"$XDG_CACHE_HOME/zypp/packages), mais cela peut être changé en utilisant "
-"l'option\n"
+"$XDG_CACHE_HOME/zypp/packages), mais cela peut être changé en utilisant l'"
+"option\n"
 "globale --pkg-cache-dir.\n"
 "\n"
 "Dans la sortie XML, un noeud <download-result> est écrit pour chaque paquet "
@@ -5574,7 +5548,7 @@ msgstr "Voir le message ci-dessus pour une indication."
 #: src/Zypper.cc:4524
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "L'option %1% n'a pas d'effet sans l'option globale %2%."
 
 #: src/Zypper.cc:4611 src/Zypper.cc:4659
 #, c-format, boost-format
@@ -5819,8 +5793,7 @@ msgstr ""
 #. Here: Table output
 #: src/solve-commit.cc:436 src/ps.cc:104
 msgid "Checking for running processes using deleted libraries..."
-msgstr ""
-"Contrôle des processus actifs utilisant des bibliothèques supprimées..."
+msgstr "Contrôle des processus actifs utilisant des bibliothèques supprimées..."
 
 #: src/solve-commit.cc:447 src/ps.cc:59
 msgid "Check failed:"
@@ -5981,8 +5954,8 @@ msgid ""
 "- use another repository"
 msgstr ""
 "Échec de la vérification de l'intégrité du paquet. Il y a peut-être un "
-"problème avec le support ou le dépôt. Essayez l'une des solutions "
-"suivantes :\n"
+"problème avec le support ou le dépôt. Essayez l'une des solutions suivantes :"
+"\n"
 "\n"
 "- Réessayez la commande précédente.\n"
 "- Rafraîchissez les dépôts via 'zypper refresh'.\n"
@@ -6286,8 +6259,8 @@ msgid ""
 "Different package type specified in '%s' option and '%s' argument. Will use "
 "the latter."
 msgstr ""
-"Type de paquet différent spécifié dans l'option '%s' et dans l'argument "
-"'%s'. Ce dernier type sera utilisé."
+"Type de paquet différent spécifié dans l'option '%s' et dans l'argument '%"
+"s'. Ce dernier type sera utilisé."
 
 #: src/PackageArgs.cc:233
 #, c-format, boost-format
@@ -6406,9 +6379,8 @@ msgstr "(multiple)"
 
 #. translators: locks table value
 #: src/locks.cc:131 src/locks.cc:195
-#, fuzzy
 msgid "(any)"
-msgstr "(aucun)"
+msgstr "(tous)"
 
 #. translators: property name; short; used like "Name: value"
 #: src/locks.cc:169
