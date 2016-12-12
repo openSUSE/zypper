@@ -13,10 +13,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-07-12 14:07+0000\n"
-"Last-Translator: Henry Shen <henry.shen@lqs-lionbridge.com>\n"
-"Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_TW/>\n"
+"PO-Revision-Date: 2016-12-12 17:49+0000\n"
+"Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
+"Language-Team: Chinese (Taiwan) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -613,7 +613,6 @@ msgid "Dependency"
 msgstr "相依性"
 
 #: src/info.cc:427 src/info.cc:441
-#, fuzzy
 msgid "Required"
 msgstr "需要"
 
@@ -638,7 +637,7 @@ msgstr "不明的"
 #: src/info.cc:518
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "詳見 %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:524
@@ -1720,16 +1719,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "預設優先權"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "優先權"
+msgstr "提升的優先權"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "下降的優先權"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1742,23 +1740,22 @@ msgstr "無效的優先權 '%s'。 請使用正整數。數字越大優先權越
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
-msgstr ""
+msgstr "套件庫優先權沒有作用。所有啟用的套件庫共享相同的優先權。"
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "套件庫 '%s' 的優先權已被設為 %d。"
+msgstr "套件庫優先權作用中："
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "正在選取 '%s' 以移除。"
+msgstr "詳見 '%1%'"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "套件庫"
+msgstr[0] "%1% 個套件庫"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -5044,7 +5041,7 @@ msgstr "請檢視上面的訊息以獲得提示。"
 #: src/Zypper.cc:4524
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "當未指定 %2% 全域選項時，%1% 選項沒有作用。"
 
 #: src/Zypper.cc:4611 src/Zypper.cc:4659
 #, c-format, boost-format
