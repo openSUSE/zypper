@@ -52,10 +52,26 @@ namespace zypp
       CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
       if ( (real_checksum != _checksum) )
       {
+	// Remember askUserToAcceptWrongDigest decision for at most 12hrs in memory;
+	// Actually we just want to prevent asking the same question again when the
+	// previously downloaded file is retrieved from the disk cache.
+	static std::map<std::string,std::string> exceptions;
+	static Date exceptionsAge;
+	Date now( Date::now() );
+	if ( !exceptions.empty() && now-exceptionsAge > 12*Date::hour )
+	  exceptions.clear();
+
 	WAR << "File " <<  file << " has wrong checksum " << real_checksum << " (expected " << _checksum << ")" << endl;
-        if ( report->askUserToAcceptWrongDigest( file, _checksum.checksum(), real_checksum.checksum() ) )
+	if ( !exceptions.empty() && exceptions[real_checksum.checksum()] == _checksum.checksum() )
+	{
+	  WAR << "User accepted " <<  file << " with WRONG CHECKSUM. (remembered)" << std::endl;
+          return;
+	}
+        else if ( report->askUserToAcceptWrongDigest( file, _checksum.checksum(), real_checksum.checksum() ) )
         {
           WAR << "User accepted " <<  file << " with WRONG CHECKSUM." << std::endl;
+	  exceptions[real_checksum.checksum()] = _checksum.checksum();
+	  exceptionsAge = now;
           return;
         }
         else
