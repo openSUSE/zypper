@@ -302,68 +302,32 @@ namespace zypp
         ++it;
         try
         {
-          MIL << "Providing file of repo '" << repo_r.alias()
-              << "' from " << url << endl;
+          MIL << "Providing file of repo '" << repo_r.alias() << "' from " << url << endl;
           shared_ptr<MediaSetAccess> access = _impl->mediaAccessForUrl( url, repo_r );
 
 	  fetcher.enqueue( loc_r );
-
-	  // FIXME: works for packages only
 	  fetcher.start( destinationDir, *access );
 
 	  // reached if no exception has been thrown, so this is the correct file
           ManagedFile ret( destinationDir + loc_r.filename() );
-
-          std::string scheme( url.getScheme() );
           if ( !repo_r.keepPackages() )
           {
             ret.setDispose( filesystem::unlink );
           }
 
-          if ( loc_r.checksum().empty() )
-          {
-            // no checksum in metadata
-            WAR << "No checksum in metadata " << loc_r << endl;
-          }
-          else
-          {
-            std::ifstream input( ret->asString().c_str() );
-            CheckSum retChecksum( loc_r.checksum().type(), input );
-            input.close();
-
-            if ( loc_r.checksum() != retChecksum )
-            {
-              // failed integity check
-              std::ostringstream err;
-              err << "File " << ret << " fails integrity check. Expected: [" << loc_r.checksum() << "] Got: [";
-              if ( retChecksum.empty() )
-                err << "Failed to compute checksum";
-              else
-                err << retChecksum;
-              err << "]";
-
-              WAR << err.str() << endl;
-
-              if ( policy_r.failOnChecksumError() )
-                ZYPP_THROW( FileCheckException( err.str() ) );
-              else
-                WAR << "NO failOnChecksumError: " << err.str() << endl;
-            }
-          }
-
           MIL << "provideFile at " << ret << endl;
           return ret;
         }
-        catch ( const SkipRequestException &e )
-        {
-          ZYPP_CAUGHT( e );
-          ZYPP_RETHROW(e);
-        }
-        catch ( const AbortRequestException &e )
-        {
-          ZYPP_CAUGHT( e );
-          ZYPP_RETHROW(e);
-        }
+        catch ( const UserRequestException & excpt )
+	{
+	  ZYPP_CAUGHT( excpt );
+	  ZYPP_RETHROW( excpt );
+	}
+        catch ( const FileCheckException & excpt )
+	{
+	  ZYPP_CAUGHT( excpt );
+	  ZYPP_RETHROW( excpt );
+	}
         catch ( const Exception &e )
         {
           ZYPP_CAUGHT( e );

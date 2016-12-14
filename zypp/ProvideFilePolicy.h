@@ -22,9 +22,7 @@ namespace zypp
 // CLASS NAME : ProvideFilePolicy
   
   /** Policy for \ref provideFile.
-    * Provides callback hooks for e.g progress reporting or
-    * behaviour on checksum failure. Provides default
-    * implementations if no callback is set.
+    * Provides callback hook for progress reporting.
     */
   class ProvideFilePolicy
   {
@@ -40,23 +38,9 @@ namespace zypp
     bool progress( int value ) const;
 
   public:
-    /** FailOnChecksumError callback signature. */
-    typedef function<bool ()> FailOnChecksumErrorCB;
-
-    /** Set callback. */
-    ProvideFilePolicy & failOnChecksumErrorCB( FailOnChecksumErrorCB failOnChecksumErrorCB_r )
-    { _failOnChecksumErrorCB = failOnChecksumErrorCB_r; return *this; }
-
-    /** Set callback convenience.
-      * Let callback return \c yesno_r.
-    */
-    ProvideFilePolicy & failOnChecksumErrorCB( bool yesno_r );
-
-    /** Evaluate callback. */
-    bool failOnChecksumError() const;
-
+    typedef function<bool ()> FailOnChecksumErrorCB;	///< Legacy to remain bincompat
   private:
-    FailOnChecksumErrorCB _failOnChecksumErrorCB;
+    FailOnChecksumErrorCB _failOnChecksumErrorCB;	///< Legacy to remain bincompat
     ProgressCB            _progressCB;
   };
 

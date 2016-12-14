@@ -124,17 +124,14 @@ namespace zypp
        * Report start/problem/finish and retry loop are hadled by \ref providePackage.
        * Here you trigger just progress and delta/plugin callbacks as needed.
        *
-       * Proxy methods for progressPackageDownload and failOnChecksum are provided here.
-       * Create similar proxies for other progress callbacks in derived classes and link
-       * it to ProvideFilePolicy for download:
+       * Proxy method for progressPackageDownload is provided here.
        * \code
        * ProvideFilePolicy policy;
        * policy.progressCB( bind( &Base::progressPackageDownload, this, _1 ) );
-       * policy.failOnChecksumErrorCB( bind( &Base::failOnChecksumError, this ) );
        * return _access.provideFile( _package->repoInfo(), loc, policy );
        * \endcode
        *
-       * \note The provoided default implementation retrieves the packages default
+       * \note The provided default implementation retrieves the packages default
        * location.
        */
       virtual ManagedFile doProvidePackage() const = 0;
@@ -147,29 +144,6 @@ namespace zypp
       /** Redirect ProvideFilePolicy package download progress to this. */
       bool progressPackageDownload( int value ) const
       {	return report()->progress( value, _package ); }
-
-      /** Redirect ProvideFilePolicy failOnChecksumError to this if needed. */
-      bool failOnChecksumError() const
-      {
-	std::string package_str = _package->name() + "-" + _package->edition().asString();
-
-	// TranslatorExplanation %s = package being checked for integrity
-	switch ( report()->problem( _package, repo::DownloadResolvableReport::INVALID, str::form(_("Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"), package_str.c_str() ) ) )
-	{
-	  case repo::DownloadResolvableReport::RETRY:
-	    _retry = true;
-	    break;
-	  case repo::DownloadResolvableReport::IGNORE:
-	    ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
-	    break;
-	  case repo::DownloadResolvableReport::ABORT:
-	    ZYPP_THROW(AbortRequestException("User requested to abort"));
-	    break;
-	  default:
-	    break;
-	}
-	return true; // anyway a failure
-      }
 
       typedef target::rpm::RpmDb RpmDb;
 
@@ -190,17 +164,18 @@ namespace zypp
 	return ret;
       }
 
-      /** React on signature verrification error user action */
+      /** React on signature verification error user action
+       * \note: IGNORE == accept insecure file (no SkipRequestException!)
+       */
       void resolveSignatureErrorAction( repo::DownloadResolvableReport::Action action_r ) const
       {
-	// TranslatorExplanation %s = package being checked for integrity
 	switch ( action_r )
 	{
 	  case repo::DownloadResolvableReport::RETRY:
 	    _retry = true;
 	    break;
 	  case repo::DownloadResolvableReport::IGNORE:
-	    WAR << _package->asUserString() << ": " << "User requested skip of insecure file" << endl;
+	    WAR << _package->asUserString() << ": " << "User requested to accept insecure file" << endl;
 	    break;
 	  default:
 	  case repo::DownloadResolvableReport::ABORT:
@@ -209,7 +184,7 @@ namespace zypp
 	}
       }
 
-      /** Default signature verrification error handling. */
+      /** Default signature verification error handling. */
       void defaultReportSignatureError( RpmDb::CheckPackageResult ret, const std::string & detail_r = std::string() ) const
       {
 	str::Str msg;
@@ -257,7 +232,6 @@ namespace zypp
 
       ProvideFilePolicy policy;
       policy.progressCB( bind( &Base::progressPackageDownload, this, _1 ) );
-      policy.failOnChecksumErrorCB( bind( &Base::failOnChecksumError, this ) );
       return _access.provideFile( _package->repoInfo(), loc, policy );
     }
 
@@ -333,7 +307,7 @@ namespace zypp
 	      RpmDb::CheckPackageResult res = packageSigCheck( ret, userData );
 	      // publish the checkresult, even if it is OK. Apps may want to report something...
 	      report()->pkgGpgCheck( userData );
-
+USR << "CHK: " << res << endl;
 	      if ( res != RpmDb::CHK_OK )
 	      {
 		if ( userData.hasvalue( "Action" ) )	// pkgGpgCheck report provided an user error action
@@ -367,20 +341,40 @@ namespace zypp
           }
         catch ( const UserRequestException & excpt )
           {
-            // UserRequestException e.g. from failOnChecksumError was already reported.
             ERR << "Failed to provide Package " << _package << endl;
-            if ( ! _retry )
-              {
-                ZYPP_RETHROW( excpt );
-              }
+	    if ( ! _retry )
+	      ZYPP_RETHROW( excpt );
           }
+        catch ( const FileCheckException & excpt )
+          {
+	    ERR << "Failed to provide Package " << _package << endl;
+	    if ( ! _retry )
+	    {
+	      const std::string & package_str = _package->asUserString();
+	      // TranslatorExplanation %s = package being checked for integrity
+	      switch ( report()->problem( _package, repo::DownloadResolvableReport::INVALID, str::form(_("Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"), package_str.c_str() ) ) )
+	      {
+		case repo::DownloadResolvableReport::RETRY:
+		  _retry = true;
+		  break;
+		case repo::DownloadResolvableReport::IGNORE:
+		  ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
+		  break;
+		case repo::DownloadResolvableReport::ABORT:
+		  ZYPP_THROW(AbortRequestException("User requested to abort"));
+		  break;
+		default:
+		  break;
+	      }
+	    }
+	  }
         catch ( const Exception & excpt )
           {
             ERR << "Failed to provide Package " << _package << endl;
             if ( ! _retry )
-              {
+	    {
                 // Aything else gets reported
-                std::string package_str = _package->name() + "-" + _package->edition().asString();
+                const std::string & package_str = _package->asUserString();
 
                 // TranslatorExplanation %s = name of the package being processed.
                 std::string detail_str( str::form(_("Failed to provide Package %s. Do you want to retry retrieval?"), package_str.c_str() ) );
@@ -392,7 +386,7 @@ namespace zypp
                         _retry = true;
                         break;
                       case repo::DownloadResolvableReport::IGNORE:
-                        ZYPP_THROW(SkipRequestException("User requested skip of corrupted file", excpt));
+                        ZYPP_THROW(SkipRequestException("User requested skip of file", excpt));
                         break;
                       case repo::DownloadResolvableReport::ABORT:
                         ZYPP_THROW(AbortRequestException("User requested to abort", excpt));
