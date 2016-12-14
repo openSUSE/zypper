@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Dec 14 12:24:23 CET 2016 - ma@suse.de
+
+- Don't raise FileCheckException if user accepted a package with wrong
+  digest (bsc#1014265)
+- Also provide the exception history when requesting a media failed
+  (bsc#1010952)
+- version 16.3.2 (0)
+
+-------------------------------------------------------------------
 Tue Oct 11 18:04:18 CEST 2016 - ma@suse.de
 
 - Let 'dup --from' leave an updateTestcase-<DATE> in /var/log (bsc#1004096)
