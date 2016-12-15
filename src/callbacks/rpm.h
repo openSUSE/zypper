@@ -32,26 +32,15 @@ namespace out
   ///////////////////////////////////////////////////////////////////
   struct FileConflictsListFormater
   {
-    typedef out::DefaultGapedListLayout ListLayout;
+    typedef out::DefaultGapedListLayout NormalLayout;
 
-    struct XmlFormater
-    {
-      std::string operator()( const sat::FileConflicts::Conflict & val_r ) const
-      { str::Str str; dumpAsXmlOn( str.stream(), val_r ); return str; }
-    };
+    std::string xmlListElement( const sat::FileConflicts::Conflict & val_r ) const
+    { str::Str str; dumpAsXmlOn( str.stream(), val_r ); return str; }
 
-    std::string operator()( const sat::FileConflicts::Conflict & val_r ) const
+    std::string listElement( const sat::FileConflicts::Conflict & val_r ) const
     { return asUserString( val_r ); }
   };
   ///////////////////////////////////////////////////////////////////
-
-  /** \relates SolvableListFormater Conversion to sat::Solvable */
-  template <class _Tp>
-  sat::Solvable asSolvable( const _Tp & val_r )
-  { return sat::asSolvable( val_r ); }
-
-  sat::Solvable asSolvable( int val_r )		// e.g. satQueues use int as SolvabeId
-  { return sat::Solvable( val_r ); }
 
   ///////////////////////////////////////////////////////////////////
   /// \class SolvableListFormater
@@ -59,44 +48,49 @@ namespace out
   ///////////////////////////////////////////////////////////////////
   struct SolvableListFormater
   {
-    typedef out::CompressedListLayout ListLayout;
+    typedef out::CompressedListLayout NormalLayout;
 
-    struct XmlFormater
+    template <class Tp_>
+    std::string xmlListElement( const Tp_ & val_r ) const
+    { return xmlListElement( makeResObject( asSolvable( val_r ) ) ); }
+
+    std::string xmlListElement( const ResObject::Ptr & val_r ) const
     {
-      template <class _Tp>
-      std::string operator()( const _Tp & val_r ) const
-      { return operator()( makeResObject( asSolvable( val_r ) ) ); }
-
-      std::string operator()( ResObject::Ptr val_r, ResObject::Ptr old_r = nullptr ) const
+      str::Str ret;
+      ret << "<solvable";
+      ret << " type=\""	<< val_r->kind() << "\"";
+      ret << " name=\""	<< val_r->name() << "\"";
+      ret << " edition=\""	<< val_r->edition() << "\"";
+      ret << " arch=\""	<< val_r->arch() << "\"";
       {
-	str::Str ret;
-	ret << "<solvable";
-	ret << " type=\""	<< val_r->kind() << "\"";
-	ret << " name=\""	<< val_r->name() << "\"";
-	ret << " edition=\""	<< val_r->edition() << "\"";
-	ret << " arch=\""	<< val_r->arch() << "\"";
-	{
-	  const std::string & text( val_r->summary() );
-	  if ( ! text.empty() )
-	    ret << " summary=\"" << xml::escape( text ) << "\"";
-	}
-	{
-	  const std::string & text( val_r->description() );
-	  if ( ! text.empty() )
-	    ret << ">\n" << "<description>" << xml::escape( text ) << "</description>" << "</solvable>";
-	  else
-	    ret << "/>";
-	}
-	return ret;
+	const std::string & text( val_r->summary() );
+	if ( ! text.empty() )
+	  ret << " summary=\"" << xml::escape( text ) << "\"";
       }
-    };
+      {
+	const std::string & text( val_r->description() );
+	if ( ! text.empty() )
+	  ret << ">\n" << "<description>" << xml::escape( text ) << "</description>" << "</solvable>";
+	else
+	  ret << "/>";
+      }
+      return ret;
+    }
 
-    template <class _Tp>
-    std::string operator()( const _Tp & val_r ) const
-    { return operator()( makeResObject( asSolvable( val_r ) ) ); }
+    template <class Tp>
+    std::string listElement( const Tp & val_r ) const
+    { return listElement( makeResObject( asSolvable( val_r ) ) ); }
 
-    std::string operator()( ResObject::Ptr val_r, ResObject::Ptr old_r = nullptr ) const
+    std::string listElement( const ResObject::Ptr & val_r ) const
     { return val_r->ident().asString(); }
+
+  private:
+    template <class Tp_>
+    static sat::Solvable asSolvable( const Tp_ & val_r )
+    { return sat::asSolvable( val_r ); }
+
+    static sat::Solvable asSolvable( int val_r )		// e.g. satQueues use int as SolvabeId
+    { return sat::Solvable( val_r ); }
   };
 
 } // namespace out

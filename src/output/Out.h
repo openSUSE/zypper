@@ -24,34 +24,25 @@
 #include "utils/richtext.h"
 #include "output/prompt.h"
 
-using namespace zypp;
-
-class Table;
-class Zypper;
-
+inline char * asYesNo( bool val_r ) { return val_r ? _("Yes") : _("No"); }
+#include "Table.h"
 #define OSD ColorStream( std::cout, ColorContext::OSDEBUG )
 
-inline char * asYesNo( bool val_r )
-{ return val_r ? _("Yes") : _("No"); }
+using namespace zypp;
+
+class Zypper;
 
 ///////////////////////////////////////////////////////////////////
 namespace out
 {
   static constexpr unsigned termwidthUnlimited = 0u;
+  unsigned defaultTermwidth();	// Zypper::instance()->out().termwidth()
 } // namespace out
 ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 namespace out
 {
-  /** \relates ListFormater NORMAL representation of types in lists [no default] */
-  template <class _Tp>
-  std::string asListElement( const _Tp & val_r );
-
-  /** \relates ListFormater XML representation of types in lists [no default] */
-  template <class _Tp>
-  std::string asXmlListElement( const _Tp & val_r );
-
   ///////////////////////////////////////////////////////////////////
   /// \class ListLayout
   /// \brief Basic list layout
@@ -59,6 +50,8 @@ namespace out
   ///////////////////////////////////////////////////////////////////
   struct ListLayout
   {
+    template <class TFormater> struct Writer;
+
     ListLayout( bool singleline_r, bool wrapline_r, bool gaped_r, unsigned indent_r )
     : _singleline( singleline_r )
     , _wrapline( wrapline_r )
@@ -76,6 +69,7 @@ namespace out
     template <bool _Singleline, bool _Wrapline, bool _Gaped, unsigned _Indent>
     struct ListLayoutInit : public ListLayout { ListLayoutInit() : ListLayout( _Singleline, _Wrapline, _Gaped, _Indent ) {} };
   }
+
   typedef detail::ListLayoutInit<true, false,false, 0U>	XmlListLayout;
   typedef detail::ListLayoutInit<true, true, false, 0U>	DefaultListLayout;	///< one element per line, no indent
   typedef detail::ListLayoutInit<true, true, true,  0U>	DefaultGapedListLayout;	///< one element per line, no indent, gaped
@@ -84,29 +78,102 @@ namespace out
   typedef detail::ListLayoutInit<false,true, false, 2U>	CompressedListLayout;	///< multiple elements per line, indented
 
   ///////////////////////////////////////////////////////////////////
-  /// \class ListFormater
-  /// \brief Default representation of types in Lists [asListElement|asXmlListElement]
+  /// \class TableLayout
+  /// \brief Basic table layout
   ///////////////////////////////////////////////////////////////////
-  struct ListFormater
+  struct TableLayout
   {
-    typedef DefaultListLayout ListLayout;	//< ListLayout for NORMAL lists
+    template <class TFormater> struct Writer;
+  };
 
-    struct XmlFormater				//< XML representation of element
-    {
-      template <class _Tp>
-      std::string operator()( const _Tp & val_r ) const
-      { return asXmlListElement( val_r ); }
-    };
+  typedef TableLayout	DefaultTableLayout;	///< Simple Table
 
-    template <class _Tp>			//< NORMAL representation of element
-    std::string operator()( const _Tp & val_r ) const
+  ///////////////////////////////////////////////////////////////////
+  // Either specialize per Type or define a custom Formater:
+
+  /** \relates XmlFormater XML representation of types [no default] */
+  template <class Tp>
+  std::string asXmlListElement( const Tp & val_r );
+  inline std::string asXmlListElement( const std::string & val_r ){ return val_r; }
+  inline std::string asXmlListElement( const char * val_r )	{ return val_r; }
+
+  /** \relates ListFormater NORMAL representation of types in lists [no default] */
+  template <class Tp>
+  std::string asListElement( const Tp & val_r );
+  inline std::string asListElement( const std::string & val_r )	{ return val_r; }
+  inline std::string asListElement( const char * val_r )	{ return val_r; }
+
+  /** \relates TableFormater NORMAL representation of types as TableHeader [no default] */
+  template <class Tp = void>
+  TableHeader asTableHeader();
+
+  template <>
+  inline TableHeader asTableHeader<void>()
+  { return TableHeader(); }
+
+  /** \relates TableFormater NORMAL representation of types as TableRow [no default] */
+  template <class Tp>
+  TableRow asTableRow( const Tp & val_r );
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class XmlFormater
+  /// \brief XML representation of types in container [asXmlListElement]
+  ///////////////////////////////////////////////////////////////////
+  struct XmlFormater
+  {
+    template <class Tp>
+    std::string xmlListElement( const Tp & val_r ) const//< XML representation of element
+    { return asXmlListElement( val_r ); }
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class ListFormater
+  /// \brief Default representation of types in Lists [asListElement]
+  ///////////////////////////////////////////////////////////////////
+  struct ListFormater : public XmlFormater
+  {
+    typedef DefaultListLayout	NormalLayout;		//< ListLayout for NORMAL lists
+
+    template <class Tp>
+    std::string listElement( const Tp & val_r ) const	//< NORMAL representation of list element
     { return asListElement( val_r ); }
+  };
 
-    std::string operator()( const std::string & val_r ) const
-    { return val_r; }
+  ///////////////////////////////////////////////////////////////////
+  /// \class TableFormater
+  /// \brief Special list formater writing a Table [asTableHeader|asTableRow]
+  ///////////////////////////////////////////////////////////////////
+  struct TableFormater : public XmlFormater
+  {
+    typedef DefaultTableLayout	NormalLayout;		//< NORMAL layout as Table
 
-    std::string operator()( const char * val_r ) const
-    { return val_r; }
+    TableHeader header() const				//< TableHeader for TableRow representation
+    { return asTableHeader<>(); }
+
+    template <class Tp>					//< Representation as TableRow
+    TableRow row( const Tp & val_r ) const
+    { return asTableRow( val_r ); }
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class XmlFormaterAdaptor
+  /// \brief Adaptor mapping xmlListElement->listElement for container XML output
+  ///////////////////////////////////////////////////////////////////
+   /** Adaptor */
+  template <class TFormater>
+  struct XmlFormaterAdaptor
+  {
+    typedef XmlListLayout	NormalLayout;		//< Layout as XML list
+
+    template <class Tp>
+    std::string listElement( const Tp & val_r ) const	//< use TFormater::asXmlListElement
+    { return _formater.xmlListElement( val_r ); }
+
+    XmlFormaterAdaptor( const TFormater & formater_r )
+    : _formater( formater_r )
+    {}
+  private:
+    const TFormater & _formater;
   };
 
 } // namespace out
@@ -115,65 +182,125 @@ namespace out
 ///////////////////////////////////////////////////////////////////
 namespace out
 {
-  namespace detail
+  ///////////////////////////////////////////////////////////////////
+  /// \class ListLayout::Writer
+  /// \brief Write out a List according to the layout
+  // TODO: wrap singlelines; support for attributed text;
+  ///////////////////////////////////////////////////////////////////
+  template <class TFormater>
+  struct ListLayout::Writer
   {
-    // TODO: wrap singlelines; support for atttibuted text;
-    struct BasicList
+    NON_COPYABLE( Writer );
+
+    Writer( std::ostream & str_r, ListLayout layout_r, const TFormater & formater_r )
+    : _str( str_r )
+    , _layout( layout_r )
+    , _formater( formater_r )
+    , _linewidth( defaultTermwidth() )
+    , _indent( _layout._indent, ' ' )
+    {}
+
+    ~Writer()
+    { if ( !_layout._singleline && _cpos ) _str << std::endl; }
+
+    template <class Tp>
+    void operator<<( Tp && val_r ) const
     {
-      NON_COPYABLE( BasicList );
+      const std::string & element( _formater.listElement( std::forward<Tp>(val_r) ) );
 
-      BasicList( ListLayout layout_r, unsigned linewidth_r )
-      : _layout( std::move(layout_r) )
-      , _linewidth( linewidth_r )
-      , _indent( _layout._indent, ' ' )
-      , _cpos( 0U )
-      {}
-
-      ~BasicList()
-      { if ( !_layout._singleline && _cpos ) std::cout << std::endl; }
-
-      void print( const std::string & val_r )
+      if ( _layout._singleline )
       {
-	if ( _layout._singleline )
+	if ( _layout._gaped )
+	  _str << std::endl;
+	_str << _indent << element << std::endl;
+      }
+      else
+      {
+	if ( _cpos != 0 && ! fitsOnLine( 1/*' '*/ + element.size() ) )
+	  endLine();
+
+	if ( _cpos == 0 )
 	{
-	  if ( _layout._gaped )
-	    std::cout << std::endl;
-	  std::cout << _indent << val_r << std::endl;
+	  if ( !_indent.empty() )
+	    printAndCount( _indent );
 	}
 	else
-	{
-	  if ( _cpos != 0 && ! fitsOnLine( 1/*' '*/ + val_r.size() ) )
-	    endLine();
+	  printAndCount( " " );
 
-	  if ( _cpos == 0 )
-	  {
-	    if ( !_indent.empty() )
-	      printAndCount( _indent );
-	  }
-	  else
-	    printAndCount( " " );
-
-	  printAndCount( val_r );
-	}
+	printAndCount( element );
       }
+    }
 
-    private:
-      bool fitsOnLine( unsigned val_r )
-      { return( !_layout._wrapline || _linewidth == out::termwidthUnlimited || _cpos + val_r <= _linewidth ); }
+  private:
+    bool fitsOnLine( unsigned size_r ) const
+    { return( !_layout._wrapline || _linewidth == out::termwidthUnlimited || _cpos + size_r <= _linewidth ); }
 
-      void printAndCount( const std::string & val_r )
-      { _cpos += val_r.size(); std::cout << val_r; }
+    void printAndCount( const std::string & element_r ) const
+    { _cpos += element_r.size(); _str << element_r; }
 
-      void endLine()
-      { std::cout << std::endl; _cpos = 0U; }
+    void endLine() const
+    { _str << std::endl; _cpos = 0U; }
 
-    private:
-      const ListLayout	_layout;
-      unsigned		_linewidth;	///< desired line width
-      const std::string	_indent;
-      unsigned		_cpos;
-    };
+  private:
+    std::ostream &	_str;
+    const ListLayout &	_layout;
+    const TFormater &	_formater;
+    const unsigned	_linewidth;	///< desired line width
+    const std::string	_indent;
+    mutable unsigned	_cpos = 0U;
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class TableLayout::Writer
+  /// \brief Write out a Table according to the layout
+  ///////////////////////////////////////////////////////////////////
+  template <class TFormater>
+  struct TableLayout::Writer
+  {
+    NON_COPYABLE( Writer );
+
+    Writer( std::ostream & str_r, const TableLayout & layout_r, const TFormater & formater_r )
+    : _str( str_r )
+    , _layout( layout_r )
+    , _formater( formater_r )
+    {}
+
+    ~Writer()
+    {
+      if ( !_t.empty() )
+      {
+	_t.setHeader( _formater.header() );
+	_str << _t;
+      }
+    }
+
+    template <class Tp>
+    void operator<<( Tp && val_r ) const
+    { _t.add( _formater.row( std::forward<Tp>(val_r) ) ); }
+
+  private:
+    std::ostream &	_str;
+    const TableLayout &	_layout;
+    const TFormater &	_formater;
+    mutable Table	_t;
+  };
+
+
+  /** Write formated container to stream */
+  template <class TContainer, class TFormater, class TLayout = typename TFormater::NormalLayout>
+  void writeContainer( std::ostream & str_r, const TContainer & container_r, const TFormater & formater_r, const TLayout & layout_r = TLayout() )
+  {
+    typedef typename TLayout::template Writer<TFormater> Writer;
+    Writer writer( str_r, layout_r, formater_r );
+    for ( auto && el : container_r )
+      writer << el;
   }
+
+  /** Write XML formated container to stream */
+  template <class TContainer, class TFormater>
+  void xmlWriteContainer( std::ostream & str_r, const TContainer & container_r, const TFormater & formater_r )
+  { writeContainer( str_r, container_r, out::XmlFormaterAdaptor<TFormater>(formater_r) ); }
+
 } // namespace out
 ///////////////////////////////////////////////////////////////////
 
@@ -360,74 +487,40 @@ public:
     { if ( out().typeNORMAL() && ! title_r.empty() ) std::cout << title_r << std::endl; }
   };
 
-  ///////////////////////////////////////////////////////////////////
-  /// \class List<ListFormater>
-  /// \brief Printing a list
-  ///////////////////////////////////////////////////////////////////
-  template <class _ListFormater = out::ListFormater>
-  struct List : protected ParentOut
+private:
+  /** Write container creating a TitleNode with \c size="nnn" attribue and
+   * replacing optional \c %1% in \a title_r with size. */
+  template <class TContainer, class TFormater>
+  void container( const std::string & nodeName_r, const std::string & title_r,
+		  const TContainer & container_r, const TFormater & formater_r )
   {
-    List( Out & out_r, _ListFormater formater_r, out::ListLayout layout_r = typename _ListFormater::ListLayout() )
-    : ParentOut( out_r ), _formater( std::move(formater_r) ), _base( std::move(layout_r), out_r.termwidth() )
-    {}
-
-    template <class _Tp>
-    List & operator<<( _Tp && val_r )
-    { _base.print( _formater( std::forward<_Tp>(val_r) ) ); return *this; }
-
-  private:
-    _ListFormater _formater;
-    out::detail::BasicList _base;
-  };
-  ///////////////////////////////////////////////////////////////////
-
-public:
-  /** Write list from iterator pair */
-  template <class _Iterator, class _ListFormater = out::ListFormater>
-  void list( _Iterator begin_r, _Iterator end_r, _ListFormater && formater_r = _ListFormater() )
-  {
+    TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::Attr( "size", str::numstring( container_r.size() ) ) ),
+		     str::FormatNAC( title_r ) % container_r.size() );
     switch ( type() )
     {
       case TYPE_NORMAL:
-      {
-	List<_ListFormater> mlist( *this, std::forward<_ListFormater>(formater_r) );
-	for_( it, begin_r, end_r ) mlist << ( *it );
-      }
-      break;
+	writeContainer( std::cout, container_r, formater_r );
+	break;
       case TYPE_XML:
-      {
-	typedef typename _ListFormater::XmlFormater XmlFormater;
-	List<XmlFormater> mlist( *this, XmlFormater(), out::XmlListLayout() );
-	for_( it, begin_r, end_r ) mlist << ( *it );
-      }
-      break;
+	xmlWriteContainer( std::cout, container_r, formater_r );
+	break;
     }
   }
 
-  /** Write list from constainer */
-  template <class _Container, class _ListFormater = out::ListFormater>
-  void list( const _Container & container_r, _ListFormater && formater_r = _ListFormater() )
-  { list( container_r.begin(), container_r.end(), std::forward<_ListFormater>(formater_r) ); }
-
-  /** Write list from iterator pair enclosed by a \ref Node */
-  template <class _Iterator, class _ListFormater = out::ListFormater>
-  void list( XmlNode && node_r, _Iterator begin_r, _Iterator end_r, _ListFormater && formater_r = _ListFormater() )
-  { XmlNode guard( std::move(node_r) ); list( begin_r, end_r, std::forward<_ListFormater>(formater_r) ); }
-
-  /** Write list from constainer enclosed by a \ref Node */
-  template <class _Container, class _ListFormater = out::ListFormater>
-  void list( XmlNode && node_r, const _Container & container_r, _ListFormater && formater_r = _ListFormater() )
-  { XmlNode guard( std::move(node_r) ); list( container_r.begin(), container_r.end(), std::forward<_ListFormater>(formater_r) ); }
-
+public:
   /** Write list from container creating a TitleNode with \c size="nnn" attribue and
    * replacing optional \c %1% in \a title_r with size. */
-  template <class _Container, class _ListFormater = out::ListFormater>
-  void list( const std::string & nodeName_r, const std::string & title_r, const _Container & container_r, _ListFormater && formater_r = _ListFormater() )
-  {
-    TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::Attr( "size", str::numstring( container_r.size() ) ) ),
-		     (boost::formatNAC( title_r ) % container_r.size()).str() );
-    list( container_r, std::forward<_ListFormater>(formater_r) );
-  }
+  template <class TContainer, class TFormater = out::ListFormater>
+  void list( const std::string & nodeName_r, const std::string & title_r,
+	     const TContainer & container_r, const TFormater & formater_r = TFormater() )
+  { container( nodeName_r, title_r, container_r, formater_r ); }
+
+  /** Write table from container creating a TitleNode with \c size="nnn" attribue and
+   * replacing optional \c %1% in \a title_r with size. */
+  template <class TContainer, class TFormater = out::TableFormater>
+  void table( const std::string & nodeName_r, const std::string & title_r,
+	      const TContainer & container_r, const TFormater & formater_r = TFormater() )
+  { container( nodeName_r, title_r, container_r, formater_r ); }
 
 public:
   /** NORMAL: An empty line */
@@ -481,8 +574,8 @@ public:
     ~Info()
     { out().info( _str->str() ); }
 
-    template<class _Tp>
-    std::ostream & operator<<( const _Tp & val )
+    template<class Tp>
+    std::ostream & operator<<( const Tp & val )
     { return (*_str) << val; /*return *this;*/ }
 
    private:
@@ -707,9 +800,10 @@ public:
     return ret;
   }
 
-protected:
   /** Width for formated output [0==unlimited]. */
   virtual unsigned termwidth() const { return out::termwidthUnlimited; }
+
+protected:
 
   /**
    * Determine whether the output is intended for the particular type.
