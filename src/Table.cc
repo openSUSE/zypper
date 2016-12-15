@@ -48,10 +48,6 @@ TableRow & TableRow::addDetail(const string& s)
   return *this;
 }
 
-unsigned int TableRow::cols( void ) const {
-  return _columns.size();
-}
-
 // 1st implementation: no width calculation, just tabs
 void TableRow::dumbDumpTo (ostream &stream) const {
   bool seen_first = false;
@@ -215,9 +211,10 @@ Table & Table::add (const TableRow& tr) {
   return *this;
 }
 
-Table & Table::setHeader (const TableHeader& tr) {
-  _has_header = true;
+Table & Table::setHeader( const TableHeader & tr )
+{
   _header = tr;
+  _has_header = !_header.empty();
   return *this;
 }
 

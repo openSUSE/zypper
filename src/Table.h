@@ -66,8 +66,15 @@ public:
   TableRow & addDetail( const _Tp & val_r )
   { return addDetail( zypp::str::asString( val_r ) ); }
 
+  bool empty() const
+  { return _columns.empty(); }
+
   // return number of columns
-  unsigned int cols( void ) const;
+  unsigned size() const
+  { return _columns.size(); }
+
+  unsigned cols() const
+  { return size(); }
 
   //! tab separated output
   void dumbDumpTo (ostream &stream) const;
