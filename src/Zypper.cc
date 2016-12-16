@@ -97,11 +97,11 @@ namespace {
 
   inline std::string legacyCLI( const std::string & old_r, const std::string & new_r, bool global_r = false )
   {
-    return boost::str( boost::formatNAC( global_r
-					 ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
-					 : _("Legacy commandline option %1% detected. Please use %2% instead.") )
-		     % old_r
-		     % new_r );
+    return str::FormatNAC( global_r
+                        ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
+                        : _("Legacy commandline option %1% detected. Please use %2% instead.") )
+                        % old_r
+                        % new_r;
   }
 
   inline std::string dashdash( std::string optname_r )

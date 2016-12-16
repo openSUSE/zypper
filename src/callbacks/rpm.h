@@ -392,7 +392,7 @@ struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<z
 
       if ( ! noFilelist_r.empty() )	// warning
       {
-	out.warning( boost::formatNAC(
+	out.warning( str::FormatNAC(
 		       // TranslatorExplanation %1%(commandline option)
 		       _("Checking for file conflicts requires not installed packages to be downloaded in advance "
 	                 "in order to access their file lists. See option '%1%' in the zypper manual page for details.")
