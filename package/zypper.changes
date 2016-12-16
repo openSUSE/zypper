@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Dec 16 11:48:19 CET 2016 - ma@suse.de
+
+- locks: add parsable XML output (bsc#985390)
+- BuildRequires:  libzypp-devel >= 14.45.0
+- version 1.11.60
+
+-------------------------------------------------------------------
 Wed Nov 23 08:47:56 CET 2016 - ma@suse.de
 
 - Do not warn about processes using deleted files when using --root
