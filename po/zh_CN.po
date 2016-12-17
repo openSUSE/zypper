@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-12-17 04:54+0000\n"
-"Last-Translator: Marguerite Su <i@marguerite.su>\n"
+"PO-Revision-Date: 2016-12-17 05:04+0000\n"
+"Last-Translator: houninghui <houninghuimail@gmail.com>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -1719,16 +1719,15 @@ msgstr "软件源 '%1%' 由服务 '%2%' 管理。下次服务刷新将重置非�
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "默认优先级"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "优先级"
+msgstr "更高的优先级"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "更低的优先级"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1741,7 +1740,7 @@ msgstr "无效的优先级 '%s'。请使用正整数。数字越大，优先级�
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
-msgstr ""
+msgstr "软件源优先级无效。当前所有已生效的软件源将处于相同的优先级。"
 
 #: src/repos.cc:203
 #, fuzzy
