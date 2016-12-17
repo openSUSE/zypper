@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-12-17 05:04+0000\n"
-"Last-Translator: houninghui <houninghuimail@gmail.com>\n"
+"PO-Revision-Date: 2016-12-17 05:14+0000\n"
+"Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -1740,23 +1740,22 @@ msgstr "无效的优先级 '%s'。请使用正整数。数字越大，优先级�
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
-msgstr "软件源优先级无效。当前所有已生效的软件源将处于相同的优先级。"
+msgstr "软件源优先级无效。当前所有已启用的软件源将处于相同的优先级。"
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "软件源 '%s' 的优先级已设为 %d。"
+msgstr "软件源优先级已生效："
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "正在选择删除 '%s'。"
+msgstr "细节请参考 '%1%'"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "软件源"
+msgstr[0] "%1% 个软件源"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -4316,7 +4315,7 @@ msgstr ""
 #: src/Zypper.cc:2596
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
-msgstr ""
+msgstr "仅 XML 输出：直接显示产品文件中找到的 XML 标签。"
 
 #: src/Zypper.cc:2620
 #, c-format, boost-format
@@ -4995,7 +4994,7 @@ msgstr "请参考以上消息汲取灵感。"
 #: src/Zypper.cc:4524
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "当未指定全局选项 %2% 时，%1% 选项无法单独生效。"
 
 #: src/Zypper.cc:4611 src/Zypper.cc:4659
 #, c-format, boost-format
