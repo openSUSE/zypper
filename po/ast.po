@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2016-09-20 10:46+0000\n"
+"PO-Revision-Date: 2016-12-18 01:42+0000\n"
 "Last-Translator: Enol P <enolp@softastur.org>\n"
-"Language-Team: Asturian <https://l10n.opensuse.org/projects/zypper/master/"
-"ast/>\n"
+"Language-Team: Asturian "
+"<https://l10n.opensuse.org/projects/zypper/master/ast/>\n"
 "Language: ast\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1797,9 +1797,8 @@ msgid "default priority"
 msgstr ""
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "Prioridá"
+msgstr ""
 
 #: src/repos.cc:70
 msgid "lowered priority"
@@ -1828,11 +1827,11 @@ msgid "See '%1%' for details"
 msgstr ""
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Repositoriu"
-msgstr[1] "Repositoriu"
+msgstr[0] "%1% repositoriu"
+msgstr[1] "%1% repositorios"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
