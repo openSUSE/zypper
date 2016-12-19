@@ -1336,7 +1336,7 @@ namespace zypp
         scoped_ptr<MediaMounter> forPlainDirs;
 
         ExternalProgram::Arguments cmd;
-        cmd.push_back( "repo2solv.sh" );
+        cmd.push_back( PathInfo( "/usr/bin/repo2solv" ).isFile() ? "repo2solv" : "repo2solv.sh" );
         // repo2solv expects -o as 1st arg!
         cmd.push_back( "-o" );
         cmd.push_back( solvfile.asString() );
