@@ -180,3 +180,9 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r) const
   }
   return it->second;
 }
+
+const std::string & ZypperCommand::asString() const
+{
+  static std::string _unk( "unknown_command" );
+  return _unk;
+}
