@@ -13,61 +13,149 @@
 #include "repos.h"
 
 using namespace zypp;
-using namespace std;
 
-static const string
-get_string_for_table(const set<string> & attrvals)
+///////////////////////////////////////////////////////////////////
+namespace zypp { namespace sat {
+    /** \relates Solvable Compare according to \a kind and \a name. */
+    inline int compareByN( const Solvable & lhs, const Solvable & rhs )
+    {
+      int res = 0;
+      if ( lhs != rhs )
+      {
+        if ( (res = lhs.kind().compare( rhs.kind() )) == 0 )
+          res = lhs.name().compare( rhs.name() );
+      }
+      return res;
+    }
+} } // namespace zypp::sat
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+namespace
 {
-  if (attrvals.empty())
-    return _("(any)");
-  else if (attrvals.size() > 1)
-    return _("(multiple)");
-  else
-    return *attrvals.begin();
-}
+  struct DoCompare
+  {
+    int operator()( const sat::Solvable & lhs, const sat::Solvable & rhs ) const
+    { return( doComapre( lhs, rhs ) < 0 ); }
+
+    int doComapre( const sat::Solvable & lhs, const sat::Solvable & rhs ) const
+    {
+      // return zypp::sat::compareByNVRA( lhs, rhs );
+      // do N(<) A(>) VR(>)
+      int res = zypp::sat::compareByN( lhs, rhs );		// ascending  l<r
+      if ( res == 0 )
+	res = rhs.arch().compare( lhs.arch() );		// descending r<l
+	if ( res == 0 )
+	  res = rhs.edition().compare( lhs.edition() );	// descending r<l
+	  return res;
+    }
+  };
+
+  inline std::string get_string_for_table( const std::set<std::string> & attrvals )
+  {
+    std::string ret;
+    if ( attrvals.empty() )
+      ret = _("(any)");
+    else if ( attrvals.size() > 1 )
+      ret = _("(multiple)");
+    else
+      ret = *attrvals.begin();
+    return ret;
+  }
+
+  inline std::string getLockDetails( const PoolQuery & q )
+  {
+    if ( q.empty() )
+      return "";
+
+    PropertyTable p;
+    {
+      std::set<sat::Solvable,DoCompare> i;
+      std::set<sat::Solvable,DoCompare> a;
+      for_( it, q.begin(), q.end() )
+      { ((*it).isSystem()?i:a).insert( *it ); }
+
+      std::vector<std::string> names;
+      names.reserve( std::max( i.size(), a.size() ) );
+
+      if ( ! i.empty() )
+      {
+	//names.clear();
+	for_( it, i.begin(), i.end() )
+	{ names.push_back( (*it).asString() ); }
+	// translators: property name; short; used like "Name: value"
+	p.add( _("Keep installed"), names );
+      }
+      if ( ! a.empty() )
+      {
+	names.clear();
+	for_( it, a.begin(), a.end() )
+	{ names.push_back( (*it).asString() ); }
+	// translators: property name; short; used like "Name: value"
+	p.add( _("Do not install"), names );
+      }
+    }
+    return str::Str() << p;
+  }
+
+} //namespace
+///////////////////////////////////////////////////////////////////
 
 void list_locks(Zypper & zypper)
 {
+  shared_ptr<ListLocksOptions> listLocksOptions = zypper.commandOptionsOrDefaultAs<ListLocksOptions>();
+
+  bool withSolvables = listLocksOptions->_withSolvables;
+  bool withMatches = withSolvables||listLocksOptions->_withMatches;
+
   try
   {
     Locks & locks = Locks::instance();
-    locks.read(Pathname::assertprefix
-        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
+    locks.read( Pathname::assertprefix( zypper.globalOpts().root_dir, ZConfig::instance().locksFile() ) );
 
     Table t;
 
     TableHeader th;
     th << "#" << _("Name");
+    if ( withMatches )
+      th << _("Matches");
     if (zypper.globalOpts().is_rug_compatible)
       th << _("Catalog") << _("Importance");
     else
       th << _("Type") << _("Repository");
-
     t << th;
 
-    unsigned i = 1;
-    for_(it, locks.begin(), locks.end())
+    unsigned i = 0;
+    for_( it, locks.begin(), locks.end() )
     {
+      const PoolQuery & q( *it );
+
       TableRow tr;
+      ++i;
 
       // #
-      tr << str::numstring (i);
+      tr << str::numstring( i );
 
       // name
-      PoolQuery::StrContainer attr = it->attribute(sat::SolvAttr::name);
-      it->strings();
-      if (attr.size() + it->strings().size() > 1)
+      const PoolQuery::StrContainer & nameStings( q.attribute( sat::SolvAttr::name ) );
+      const PoolQuery::StrContainer & globalStrings( q.strings() );
+
+      if ( nameStings.size() + globalStrings.size() > 1 )
         // translators: locks table value
         tr << _("(multiple)");
-      else if (attr.empty() && it->strings().empty())
+      else if ( nameStings.empty() && globalStrings.empty() )
         // translators: locks table value
         tr << _("(any)");
-      else if (attr.empty())
-        tr << *it->strings().begin();
+      else if ( nameStings.empty() )
+        tr << *globalStrings.begin();
       else
-        tr << *attr.begin();
+        tr << *nameStings.begin();
 
-      set<string> strings;
+      // opt Matches
+      if ( withMatches )
+	tr << q.size();
+
+      std::set<std::string> strings;
       if (zypper.globalOpts().is_rug_compatible)
       {
         // catalog
@@ -88,8 +176,13 @@ void list_locks(Zypper & zypper)
         tr << get_string_for_table(strings);
       }
 
+      // opt Solvables
+      if ( withSolvables )
+      {
+	tr.addDetail( getLockDetails( q ) );
+      }
+
       t << tr;
-      ++i;
     }
 
     if (t.empty())
