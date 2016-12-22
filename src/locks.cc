@@ -101,8 +101,64 @@ namespace
 } //namespace
 ///////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////
+namespace xml
+{
+  struct Node
+  {
+    Node( std::ostream & str_r, const std::string & name_r )
+    : _str( str_r )
+    , _name( name_r )
+    , _nopen( true )
+    { _str << "<" << _name; }
+
+    ~Node()
+    {
+      if ( _nopen )
+	_str << "/>" << endl;
+      else
+	_str << "</" << _name<< ">" << endl;
+    }
+
+    void addAttr( const std::string & key_r, const std::string & value_r )
+    {
+      if ( !_nopen ) ZYPP_THROW( Exception() );
+      _str << " " << key_r << "=\"" << xml_encode( value_r ) << "\"";
+    }
+
+    template<class _Tp>
+    void addAttr( const std::string & key_r, const _Tp & value_r )
+    { addAttr( key_r, zypp::str::asString( value_r ) ); }
+
+    std::ostream & str()
+    { nclose(); return _str << std::flush; }
+
+  private:
+    void nclose()
+    {
+      if ( _nopen )
+      {
+	_str << ">";
+	_nopen = false;
+      }
+    }
+
+  private:
+    std::ostream & _str;
+    std::string _name;
+    char _nopen;
+  };
+} //namespace
+///////////////////////////////////////////////////////////////////
+void xml_list_locks(Zypper & zypper);
+
 void list_locks(Zypper & zypper)
 {
+  if ( zypper.out().type() == Out::TYPE_XML )
+  {
+    xml_list_locks( zypper );
+    return;
+  }
   shared_ptr<ListLocksOptions> listLocksOptions = zypper.commandOptionsOrDefaultAs<ListLocksOptions>();
 
   bool withSolvables = listLocksOptions->_withSolvables;
@@ -189,6 +245,79 @@ void list_locks(Zypper & zypper)
       zypper.out().info(_("There are no package locks defined."));
     else
       cout << t;
+  }
+  catch(const Exception & e)
+  {
+    ZYPP_CAUGHT(e);
+    zypper.out().error(e, _("Error reading the locks file:"));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+  }
+}
+void xml_list_locks(Zypper & zypper)
+{
+  shared_ptr<ListLocksOptions> listLocksOptions = zypper.commandOptionsOrDefaultAs<ListLocksOptions>();
+
+  bool withSolvables = listLocksOptions->_withSolvables;
+  bool withMatches = withSolvables||listLocksOptions->_withMatches;
+
+  try
+  {
+    Locks & locks = Locks::instance();
+    locks.read( Pathname::assertprefix( zypper.globalOpts().root_dir, ZConfig::instance().locksFile() ) );
+
+    xml::Node nLocks( cout, "locks" );
+    nLocks.addAttr( "size", locks.size() );
+    nLocks.str() << endl;
+
+    unsigned i = 0;
+    for_( it, locks.begin(), locks.end() )
+    {
+      const PoolQuery & q( *it );
+      ++i;
+
+      xml::Node nLock( nLocks.str(), "lock" );
+      nLock.addAttr( "number", i );
+      nLock.str() << endl;
+
+      const PoolQuery::StrContainer & nameStings( q.attribute( sat::SolvAttr::name ) );
+      const PoolQuery::StrContainer & globalStrings( q.strings() );
+      for_( it, nameStings.begin(), nameStings.end() )
+      {
+	xml::Node n( nLock.str(), "name" );
+	n.str() << xml_encode( *it );
+      }
+      for_( it, globalStrings.begin(), globalStrings.end() )
+      {
+	xml::Node n( nLock.str(), "name" );
+	n.str() << xml_encode( *it );
+      }
+
+      for_( it, q.kinds().begin(), q.kinds().end() )
+      {
+	xml::Node n( nLock.str(), "type" );
+	n.str() << xml_encode(  (*it).asString() );
+      }
+
+      if ( withMatches )
+      {
+	xml::Node n( nLock.str(), "matches" );
+	n.addAttr( "size", q.size() );
+
+	if ( withSolvables && !q.empty() )
+	{
+	  for_( it, q.begin(), q.end() )
+	  {
+	    xml::Node m( n.str(), "match" );
+	    m.addAttr( "kind",		(*it).kind()	);
+	    m.addAttr( "name",		(*it).name()	);
+	    m.addAttr( "edition",	(*it).edition()	);
+	    m.addAttr( "arch",		(*it).arch()	);
+	    m.addAttr( "installed",	(*it).isSystem() ? "true" : "false"	);
+	    m.addAttr( "repo",		(*it).repository().alias()	);
+	  }
+	}
+      }
+    }
   }
   catch(const Exception & e)
   {
