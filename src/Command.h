@@ -175,10 +175,10 @@ struct ZypperCommand
 
   Command _command;
 };
-/*
+
 inline std::ostream & operator<<( std::ostream & str, const ZypperCommand & obj )
 { return str << obj.asString(); }
-*/
+
 inline bool operator==(const ZypperCommand & obj1, const ZypperCommand & obj2)
 { return obj1._command == obj2._command; }
 

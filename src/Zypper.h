@@ -39,12 +39,11 @@ using std::cout;
 using std::cerr;
 using std::endl;
 
+struct Options;
+
 /** directory for storing manually installed (zypper install foo.rpm) RPM files
  */
 #define ZYPPER_RPM_CACHE_DIR "/var/cache/zypper/RPMS"
-
-/** Base class for command specific option classes. */
-struct Options { virtual ~Options() {} };
 
 /**
  * Structure for holding global options.
@@ -241,6 +240,16 @@ public:
   shared_ptr<_Opt> commandOptionsAs() const
   { return dynamic_pointer_cast<_Opt>( _commandOptions ); }
 
+  /** Convenience to return _commandOptions or default constructed Options. */
+  template<class Opt_>
+  shared_ptr<Opt_> commandOptionsOrDefaultAs() const
+  {
+    shared_ptr<Opt_> myopt = commandOptionsAs<Opt_>();
+    if ( ! myopt )
+      myopt.reset( new Opt_() );
+    return myopt;
+  }
+
   /** Convenience to return command options for \c _Op, either casted from _commandOptions or newly created. */
   template<class _Opt>
   shared_ptr<_Opt> assertCommandOptions()
@@ -307,6 +316,45 @@ void print_main_help(const Zypper & zypper);
 void print_unknown_command_hint(Zypper & zypper);
 void print_command_help_hint(Zypper & zypper);
 
+///////////////////////////////////////////////////////////////////
+/// \brief Base class for command specific option classes.
+///////////////////////////////////////////////////////////////////
+struct Options
+{
+  //Options() : _command( "" ) {}      // FIXME: DefaultCtor is actually undesired!
+  Options( const ZypperCommand & command_r ) : _command( command_r ) {}
+  virtual ~Options() {}
+
+  /** The command. */
+  const ZypperCommand & command() const
+  { return _command; }
+
+  /** The command name (optionally suffixed). */
+  std::string commandName( const std::string & suffix_r = std::string() ) const
+  { std::string ret( _command.asString() ); if ( ! suffix_r.empty() ) ret += suffix_r; return ret; }
+
+  /** The command help text written to a stream. */
+  virtual std::ostream & showHelpOn( std::ostream & out ) const        // FIXME: become pure virtual
+  {
+    out
+      << _command << " ...?\n"
+      << "This is just a placeholder for a commands help.\n"
+      << "Please file a bug report if this text is displayed.\n"
+      ;
+    return out;
+  }
+
+  /** The command help as string. */
+  std::string helpString() const
+  { std::ostringstream str; showHelpOn( str ); return str.str(); }
+
+  /** Show user help on command. */
+  void showUserHelp( Zypper & zypper_r ) const
+  { zypper_r.out().info( helpString(), Out::QUIET ); } // always visible
+
+private:
+  ZypperCommand _command;      //< my command
+};
 
 class ExitRequestException : public zypp::Exception
 {
