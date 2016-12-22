@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Dec 22 18:17:57 CET 2016 - ma@suse.de
+
+- locks: add parsable XML output (bsc#985390)
+- locks: add --matches and --solvables options
+- version 1.6.335
+
+-------------------------------------------------------------------
 Fri Nov 18 13:18:16 CET 2016 - ma@suse.de
 
 - zypper.conf: new commit/psCheckAccessDeleted to avoid 'lsof' call
