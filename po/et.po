@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: zypper.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2007-07-20 10:34+0300\n"
-"Last-Translator: Ain Vagula <avagula@gmail.com>\n"
-"Language-Team: Estonian <linux-ee@lists.eenet.ee>\n"
+"PO-Revision-Date: 2016-12-23 00:01+0000\n"
+"Last-Translator: Kristjan Kütaru <kusti85@gmail.com>\n"
+"Language-Team: Estonian "
+"<https://l10n.opensuse.org/projects/zypper/master/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
 #, fuzzy
@@ -31,34 +32,31 @@ msgstr "Nimi: "
 
 #: src/callbacks/keyring.h:39
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Võtme sõrmejälg:"
 
 #: src/callbacks/keyring.h:40
-#, fuzzy
 msgid "Key Created:"
-msgstr "Nimi: "
+msgstr "Võti loodud:"
 
 #: src/callbacks/keyring.h:41
-#, fuzzy
 msgid "Key Expires:"
-msgstr "Nimi: "
+msgstr "Võti aegub:"
 
 #: src/callbacks/keyring.h:42
-#, fuzzy
 msgid "Rpm Name:"
-msgstr "Nimi: "
+msgstr "RPM paketi nimi:"
 
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr ""
+msgstr "Faili  '%1%' allkirjastamiseks vajalik gpg  võti on aegunud."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Gpg võtme allkirjastamise fail '%1%' aegub %2% päeva pärast."
+msgstr[1] "Gpg võtme allkirjastamise fail '%1%' aegub %2% päeva pärast."
 
 #: src/callbacks/keyring.h:97
 #, fuzzy, c-format, boost-format
@@ -66,9 +64,10 @@ msgid "Accepting an unsigned file '%s'."
 msgstr "Hoiatus: aktsepteeriakse allkirjastamata faili %s."
 
 #: src/callbacks/keyring.h:101
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Hoiatus: aktsepteeriakse allkirjastamata faili %s."
+msgstr ""
+"Hoiatus: allkirjastamata faili '%s' aksepteerimine repositooriumist '%s'"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:112
@@ -78,9 +77,9 @@ msgstr "%s on allkirjastamata, kas jätkata?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:116
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "%s on allkirjastamata, kas jätkata?"
+msgstr "Fail  %s repositooriumist %s on allkirjastamata, kas jätkata?"
 
 #: src/callbacks/keyring.h:139
 #, fuzzy, c-format, boost-format
@@ -90,12 +89,12 @@ msgstr ""
 "%s."
 
 #: src/callbacks/keyring.h:143
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Hoiatus: aktsepteeritakse faili %s, mis on allkirjastatud tundamtu võtmega "
-"%s."
+"Hoiatus:Faili '%s' aktsepteeritakse repositooriumist '%s' , mis on "
+"allkirjastatud tundamtu võtmega '%s'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
@@ -105,29 +104,30 @@ msgstr "%s on allkirjastatud tundmatu võtmega %s. Kas jätkata?"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:157
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "%s on allkirjastatud tundmatu võtmega %s. Kas jätkata?"
+msgstr ""
+"Fail '%s' repositooriumist '%s' on allkirjastatud tundmatu võtmega %s. Kas "
+"jätkata?"
 
 #: src/callbacks/keyring.h:173
-#, fuzzy
 msgid "Automatically importing the following key:"
-msgstr "Aplett käivitatakse sisselogimisel automaatselt"
+msgstr "Järgnev võti imporditakse automaatselt:"
 
 #: src/callbacks/keyring.h:175
-#, fuzzy
 msgid "Automatically trusting the following key:"
-msgstr "Aplett käivitatakse sisselogimisel automaatselt"
+msgstr "Järgnev võti saab automaatselt usalduse:"
 
 #: src/callbacks/keyring.h:177
 msgid "New repository or package signing key received:"
-msgstr ""
+msgstr "Uue repositooriumi või paketi võti vastu võetud:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:199
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
+"Kas soovid võtit tagasi lükata, ajutiselt usaldada või alaliselt usaldada?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -136,60 +136,66 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:211
 msgid "r/t/a/"
-msgstr ""
+msgstr "t/u/a"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:214
 msgid "r/t"
-msgstr ""
+msgstr "t/u"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:216
 msgid "Don't trust the key."
-msgstr ""
+msgstr "Ära usalda võtit."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:218
 msgid "Trust the key temporarily."
-msgstr ""
+msgstr "Usalda võtit ajutiselt."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:221
-#, fuzzy
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Kas importida võti %s usaldusväärsete võtmete hulka?"
+msgstr "Usalda ja lisa võti alaliselt usaldatud võtmete hoidlasse."
 
 #: src/callbacks/keyring.h:257
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr ""
+msgstr "Eiran faili '%s' ebaõnnestunud allkirjakontrolli !"
 
 #: src/callbacks/keyring.h:260
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
+"Eiran repositooriumist '%s' pärineva faili '%s' ebaõnnestunud "
+"allkirjakontrolli!"
 
 #: src/callbacks/keyring.h:266
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
+"Veendu põhjalikult, et see ei ole põhjustatud faili pahatahtlikust "
+"muutmisest!"
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s'."
-msgstr ""
+msgstr "Faili '%s' allkirja kinnitamine ebaõnnestus."
 
 #: src/callbacks/keyring.h:279
 #, c-format, boost-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
 msgstr ""
+"Repositooriumist '%s' pärineva faili '%s' allkirja kinnitamine ebaõnnestus."
 
 #: src/callbacks/keyring.h:284
 #, fuzzy
 msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
-msgstr "Automaatne võtme id %s usaldamine, %s, sõrmejälg %s"
+msgstr ""
+"Hoiatus: See võib olla põhjustatud pahatahtlikest muudatustest failis!\n"
+"Jätkamisega võivad kaasneda ohud. Jätkata siiski?"
 
 #: src/callbacks/keyring.h:307
 #, fuzzy, c-format, boost-format
