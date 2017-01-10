@@ -63,7 +63,7 @@ namespace zypp
       ResKind 		kind() const				{ return satSolvable().kind(); }
       bool		isKind( const ResKind & kind_r ) const	{ return satSolvable().isKind( kind_r ); }
       template<class TRes>
-      bool		isKind() const				{ return satSolvable().isKind<TRes>(); }
+      bool		isKind() const				{ return satSolvable().template isKind<TRes>(); }
       template<class TIterator>
       bool isKind( TIterator begin, TIterator end ) const	{ return satSolvable().isKind( begin, end ); }
 
