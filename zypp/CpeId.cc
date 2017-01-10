@@ -845,9 +845,9 @@ namespace zypp
 	case '*':
 	  if ( src.size() == 1 )
 	    return true;	// "*" matches always: superset
-	  else
-	    prefx = std::string::npos;
-	    src.erase( 0, 1 );
+	  // else
+	  prefx = std::string::npos;
+	  src.erase( 0, 1 );
 	  break;
 	case '?':
 	  ++prefx;
@@ -855,8 +855,8 @@ namespace zypp
 	  { if ( *it == '?' ) ++prefx; else break; }
 	  if ( src.size() == prefx )
 	    return( trg.size() <= prefx );	// "??..?": superset if at most #prefx chars
-	  else
-	    src.erase( 0, prefx );
+	  // else
+	  src.erase( 0, prefx );
 	  break;
 	default:
 	  break;

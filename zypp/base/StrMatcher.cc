@@ -207,7 +207,7 @@ namespace zypp
 
       if ( ! string_r )
 	return false; // NULL never matches
-	return ::datamatcher_match( _matcher.get(), string_r );
+      return ::datamatcher_match( _matcher.get(), string_r );
     }
 
     /** The current searchstring. */

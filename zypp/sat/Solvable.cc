@@ -141,10 +141,12 @@ namespace zypp
       else
       {
 	for ( Locale l( lang_r ); l; l = l.fallback() )
+	{
 	  if ( (s = ::solvable_lookup_str_lang( _solvable, attr.id(), l.c_str(), 0 )) )
 	    return s;
-	  // here: no matching locale, so use default
-	  s = ::solvable_lookup_str_lang( _solvable, attr.id(), 0, 0 );
+	}
+	// here: no matching locale, so use default
+	s = ::solvable_lookup_str_lang( _solvable, attr.id(), 0, 0 );
       }
       return s ? s : std::string();
    }
