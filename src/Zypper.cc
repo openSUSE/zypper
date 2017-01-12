@@ -80,7 +80,8 @@ using namespace zypp;
     {"without-optional",		no_argument,		&_gopts.exclude_optional_patches, 1 }
 
 #define option_WITHout_OPTIONAL	\
-    option(_("--with[out]-optional"	"\n"	"Whether applicable optional patches should be treated as needed or be excluded.")	\
+     option( "--with-optional" )	\
+    .option( "--without-optional",	_("Whether applicable optional patches should be treated as needed or be excluded.")	\
     + std::string(" ")					\
     + ( _gopts.exclude_optional_patches_default		\
     ? _("The default is to exclude optional patches.")	\
@@ -440,7 +441,8 @@ void print_main_help( Zypper & zypper )
     "\t--quiet, -q\t\tSuppress normal output, print only error\n"
     "\t\t\t\tmessages.\n"
     "\t--verbose, -v\t\tIncrease verbosity.\n"
-    "\t--[no-]color\t\tWhether to use colors in output if tty supports it.\n"
+    "\t--color\n"
+    "\t--no-color\t\tWhether to use colors in output if tty supports it.\n"
     "\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
     "\t--table-style, -s\tTable style (integer).\n"
     "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
@@ -2382,10 +2384,14 @@ void Zypper::processCommandOptions()
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
       .optionSectionExpertOptions()
-      .option( "--[no-]allow-downgrade",	_("Whether to allow downgrading installed resolvables.") )
-      .option( "--[no-]allow-name-change",	_("Whether to allow changing the names of installed resolvables.") )
-      .option( "--[no-]allow-arch-change",	_("Whether to allow changing the architecture of installed resolvables.") )
-      .option( "--[no-]allow-vendor-change",	_("Whether to allow changing the vendor of installed resolvables.") )
+      .option( "--allow-downgrade" )
+      .option( "--no-allow-downgrade",		_("Whether to allow downgrading installed resolvables.") )
+      .option( "--allow-name-change" )
+      .option( "--no-allow-name-change",	_("Whether to allow changing the names of installed resolvables.") )
+      .option( "--allow-arch-change" )
+      .option( "--no-allow-arch-change",	_("Whether to allow changing the architecture of installed resolvables.") )
+      .option( "--allow-vendor-change" )
+      .option( "--no-allow-vendor-change",	_("Whether to allow changing the vendor of installed resolvables.") )
       ;
     break;
   }
