@@ -180,7 +180,7 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
       const std::string & pname( pIdent( _objsel ) );
       return( str::Format(_("Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all optional patches."))
 	      % pname
-	      % ( "zypper in " + pname )
+	      % ( "zypper in patch:" + _objsel->name() )
 	      % "--with-optional" ).str();
     }
 
