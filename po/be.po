@@ -7,94 +7,98 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-06 17:19+0200\n"
-"PO-Revision-Date: 2006-01-04 08:58+0100\n"
-"Last-Translator: Alexander Nyakhaychyk <nyakhaychyk@gmail.com>\n"
-"Language-Team: Belarusian <i18n@suse.de>\n"
+"PO-Revision-Date: 2017-01-18 16:13+0000\n"
+"Last-Translator: Paul One <jadjer@mail.ru>\n"
+"Language-Team: Belarusian "
+"<https://l10n.opensuse.org/projects/zypper/master/be/>\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n"
-"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:36
-#, fuzzy
 msgid "Repository:"
-msgstr "Сховішча"
+msgstr "Рэпазітар:"
 
 #: src/callbacks/keyring.h:38
-#, fuzzy
 msgid "Key Name:"
-msgstr "Імя модуля"
+msgstr "Імя ключа:"
 
 #: src/callbacks/keyring.h:39
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Адбітак ключа:"
 
 #: src/callbacks/keyring.h:40
-#, fuzzy
 msgid "Key Created:"
-msgstr "Стварыць"
+msgstr "Дата стварэння ключа:"
 
 #: src/callbacks/keyring.h:41
 msgid "Key Expires:"
-msgstr ""
+msgstr "Дата заканчэння тэрміну дзеяння ключа:"
 
 #: src/callbacks/keyring.h:42
 msgid "Rpm Name:"
-msgstr ""
+msgstr "Назва пакета:"
 
 #: src/callbacks/keyring.h:68
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr ""
+msgstr "Тэрмін дзеяння gpg-ключа, якім падпісаны файл '% 1%', мінуў."
 
 #: src/callbacks/keyring.h:74
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] ""
+"Тэрмін дзеяння gpg-ключа, якім падпісаны файл '%1%', скончыцца праз %2% "
+"дзень."
 msgstr[1] ""
+"Тэрмін дзеяння gpg-ключа, якім падпісаны файл '%1%', скончыцца праз %2% дня."
 msgstr[2] ""
+"Тэрмін дзеяння gpg-ключа, якім падпісаны файл '%1%', скончыцца праз %2% дзён."
 
 #: src/callbacks/keyring.h:97
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr ""
+msgstr "Прыём непадпісанага файла '%s'."
 
 #: src/callbacks/keyring.h:101
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr ""
+msgstr "Прыём непадпісанага файла '%s' з рэпазітара '%s'."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:112
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr ""
+msgstr "Файлы \"%s\" не падпісаны, працягнуць?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr ""
+msgstr "Файл \"%s\" з рэпазітара \"%s\" не падпісаны, працягнуць?"
 
 #: src/callbacks/keyring.h:139
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr ""
+msgstr "Прыём файла \"%s\", падпісанага невядомым ключом \"%s\"."
 
 #: src/callbacks/keyring.h:143
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
+"Прыём файла \"%s\" з рэпазітара \"%s\", падпісанага невядомым ключом \"%s\"."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:153
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
+msgstr "Файл \"%s\" падпісаны невядомым ключом \"%s\". Працягнуць?"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:157
@@ -102,6 +106,8 @@ msgstr ""
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
+"Файл \"%s\" з рэпазітара \"%s\" падпісаны невядомым ключом \"%s\". "
+"Працягнуць?"
 
 #: src/callbacks/keyring.h:173
 msgid "Automatically importing the following key:"
@@ -189,9 +195,8 @@ msgstr ""
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:307 src/callbacks/keyring.h:315
 #: src/callbacks/rpm.h:132 src/callbacks/rpm.h:418 src/solve-commit.cc:668
-#, fuzzy
 msgid "Continue?"
-msgstr "Працягнуць"
+msgstr "Працягнуць?"
 
 #: src/callbacks/keyring.h:315
 #, c-format, boost-format
@@ -252,9 +257,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr ""
 
 #: src/callbacks/rpm.h:202
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "Запускаюцца сервісы..."
+msgstr "Выдаленне %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:207
@@ -268,25 +273,25 @@ msgid "Removal of %s failed:"
 msgstr ""
 
 #: src/callbacks/rpm.h:273
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "Усталяванне пакетаў..."
+msgstr "Ўстаноўка: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:278
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s-%s"
-msgstr "Усталяванне пакетаў..."
+msgstr "Ўстаноўка: %s-%s"
 
 #: src/callbacks/rpm.h:302
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "Усталёўка завершана"
+msgstr "Збой пры ўсталёўцы %s:"
 
 #: src/callbacks/rpm.h:304
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s-%s failed:"
-msgstr "Усталёўка завершана"
+msgstr "Збой пры ўсталёўцы %s-%s:"
 
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:350
@@ -397,12 +402,10 @@ msgid "Suspicious severity filter value '%1%'."
 msgstr ""
 
 #: src/output/Out.h:25 src/repos.cc:142 src/repos.cc:170
-#, fuzzy
 msgid "Yes"
-msgstr "Да"
+msgstr "Так"
 
 #: src/output/Out.h:25 src/repos.cc:148 src/repos.cc:176
-#, fuzzy
 msgid "No"
 msgstr "Не"
 
@@ -505,16 +508,14 @@ msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:293
-#, fuzzy
 msgid "Installed Size"
-msgstr "Адноўленне усталяванай сістэмы"
+msgstr "Размер пасля ўстаноўкі"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/info.cc:295 src/info.cc:397 src/info.cc:528 src/Summary.cc:1197
-#, fuzzy
 msgid "Installed"
-msgstr "Усталяваць"
+msgstr "Усталявана"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:297 src/info.cc:343 src/info.cc:531 src/utils/misc.cc:255
@@ -528,9 +529,8 @@ msgid "out-of-date (version %s installed)"
 msgstr ""
 
 #: src/info.cc:303 src/info.cc:537
-#, fuzzy
 msgid "up-to-date"
-msgstr "Пачаць абнаўленне"
+msgstr "актуальны"
 
 #: src/info.cc:306 src/info.cc:540
 msgid "not installed"
@@ -551,9 +551,8 @@ msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:349
-#, fuzzy
 msgid "Created On"
-msgstr "Стварыць"
+msgstr "Створаны"
 
 #: src/info.cc:352
 msgid "Reboot Required"
@@ -579,9 +578,8 @@ msgid "Contents"
 msgstr ""
 
 #: src/info.cc:413
-#, fuzzy
 msgid "(empty)"
-msgstr "Пусты"
+msgstr "(пуста)"
 
 #. translators: Table coumn header
 #. TranslatorExplanation S stands for Status
@@ -647,23 +645,20 @@ msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:547 src/info.cc:574
-#, fuzzy
 msgid "Update Repositories"
-msgstr "Дадаць уключаныя сховішчы"
+msgstr "Рэпазітар абнаўленняў"
 
 #: src/info.cc:552
 msgid "Content Id"
 msgstr ""
 
 #: src/info.cc:564
-#, fuzzy
 msgid "Provided by enabled repository"
-msgstr "Дадаць уключаныя сховішчы"
+msgstr "Прадастаўлены уключаным рэпазітаром"
 
 #: src/info.cc:569
-#, fuzzy
 msgid "Not provided by any enabled repository"
-msgstr "Дадаць уключаныя сховішчы"
+msgstr "Адсутнічае ва уключаных рэпазітарах"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:579
@@ -791,9 +786,9 @@ msgid "'%s' not found in package names. Trying capabilities."
 msgstr ""
 
 #: src/RequestFeedback.cc:46
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Package '%s' not found."
-msgstr "Сервіс не запушчаны"
+msgstr "Пакет \"%s\" не знойдзены."
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
