@@ -215,7 +215,7 @@ namespace zypp
   { return Date( lookupNumAttribute( sat::SolvAttr::productEndOfLife ) );}
 
   bool Product::hasEndOfLife() const
-  { return( lookupNumAttribute( sat::SolvAttr::productEndOfLife, -1 ) != -1 ); }
+  { return( lookupNumAttribute( sat::SolvAttr::productEndOfLife, -1 ) != (unsigned long long)(-1) ); }
 
   bool Product::hasEndOfLife( Date & value ) const
   {
