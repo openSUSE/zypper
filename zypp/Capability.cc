@@ -313,8 +313,6 @@ namespace zypp
 
   CapMatch Capability::_doMatch( sat::detail::IdType lhs,  sat::detail::IdType rhs )
   {
-#warning MIGRATE TO SAT
-#warning TESTCASE
     if ( lhs == rhs )
       return CapMatch::yes;
 
