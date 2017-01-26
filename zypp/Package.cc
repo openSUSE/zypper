@@ -92,6 +92,11 @@ namespace zypp
       case VendorSupportUnsupported:
       case VendorSupportACC:
 	return true;
+
+      case VendorSupportLevel1:
+      case VendorSupportLevel2:
+      case VendorSupportLevel3:
+	break;	// intentionally no default:
     }
     return false;
   }
