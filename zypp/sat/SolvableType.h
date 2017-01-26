@@ -77,6 +77,8 @@ namespace zypp
 
       bool		isSystem() const			{ return satSolvable().isSystem(); }
       bool		onSystemByUser() const			{ return satSolvable().onSystemByUser(); }
+      bool		onSystemByAuto() const			{ return satSolvable().onSystemByAuto(); }
+      bool		identIsAutoInstalled() const		{ return satSolvable().identIsAutoInstalled(); }
       bool		multiversionInstall() const		{ return satSolvable().multiversionInstall(); }
 
       Date		buildtime() const			{ return satSolvable().buildtime(); }

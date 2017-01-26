@@ -58,7 +58,15 @@ namespace zypp
 
       std::ofstream outs( tmp.path().c_str() );
       outs << "# " << file_r.basename() << " generated " << Date::now() << endl;
-      dumpRange( outs, data_r.begin(), data_r.end(), "#", "\n", "\n", "\n", "#\n" );
+      if ( true )
+      {
+	std::set<IdString> sorted( data_r.begin(), data_r.end() );
+	dumpRange( outs, sorted.begin(), sorted.end(), "#", "\n", "\n", "\n", "#\n" );
+      }
+      else
+      {
+	dumpRange( outs, data_r.begin(), data_r.end(), "#", "\n", "\n", "\n", "#\n" );
+      }
       outs.close();
 
       if ( outs.good() )

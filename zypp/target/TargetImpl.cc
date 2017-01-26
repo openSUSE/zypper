@@ -1733,6 +1733,15 @@ namespace zypp
       return RequestedLocalesFile( home(needroot) / "RequestedLocales" ).locales();
     }
 
+    void TargetImpl::updateAutoInstalled()
+    {
+      MIL << "updateAutoInstalled if changed..." << endl;
+      SolvIdentFile::Data newdata;
+      for ( auto id : sat::Pool::instance().autoInstalled() )
+	newdata.insert( IdString(id) );	// explicit ctor!
+      _autoInstalledFile.setData( std::move(newdata) );
+    }
+
     std::string TargetImpl::targetDistribution() const
     { return baseproductdata( _root ).registerTarget(); }
     // static version:

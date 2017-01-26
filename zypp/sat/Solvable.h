@@ -121,11 +121,17 @@ namespace zypp
       bool isSystem() const;
 
       /** Whether this is known to be installed on behalf of a user request.
-       * \note This is a hint guessed by evaluating an available install history.
-       * Returns \c false for non-system (uninstalled) solvables, or if no history
-       * is available.
+       * \note Returns \c false for non-system (uninstalled) solvables.
        */
       bool onSystemByUser() const;
+
+      /** Whether this is known to be automatically installed (as dependency of a user request package).
+       * \note Returns \c false for non-system (uninstalled) solvables.
+       */
+      bool onSystemByAuto() const;
+
+      /** Whether an installed solvable with the same ident is flagged as AutoInstalled. */
+      bool identIsAutoInstalled() const;
 
       /** Whether different versions of this package can be installed at the same time.
        * Per default \c false. \see also \ref ZConfig::multiversion.

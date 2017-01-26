@@ -127,6 +127,11 @@ namespace zypp
      */
     static LocaleSet requestedLocales( const Pathname & root_r );
 
+    /** Update the database of autoinstalled packages.
+     * This is done on commit, so you usually don't need to call this explicitly.
+     */
+    void updateAutoInstalled();
+
   public:
     /** \name Base product and registration.
      *

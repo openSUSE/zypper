@@ -162,6 +162,9 @@ namespace zypp
       /** \overload */
       static LocaleSet requestedLocales( const Pathname & root_r );
 
+      /** \copydoc Target::updateAutoInstalled */
+      void updateAutoInstalled();
+
       /** \copydoc Target::targetDistribution() */
       std::string targetDistribution() const;
       /** \overload */

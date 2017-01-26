@@ -99,6 +99,9 @@ namespace zypp
   LocaleSet Target::requestedLocales( const Pathname & root_r )
   { return target::TargetImpl::requestedLocales( root_r ); }
 
+  void Target::updateAutoInstalled()
+  { return _pimpl->updateAutoInstalled(); }
+
   std::string Target::targetDistribution() const
   { return _pimpl->targetDistribution(); }
   std::string Target::targetDistribution( const Pathname & root_r )

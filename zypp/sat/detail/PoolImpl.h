@@ -299,6 +299,9 @@ namespace zypp
 
           bool isOnSystemByUser( IdString ident_r ) const
           { return !_autoinstalled.contains( ident_r.id() ); }
+
+          bool isOnSystemByAuto( IdString ident_r ) const
+          { return _autoinstalled.contains( ident_r.id() ); }
           //@}
 
 	public:
