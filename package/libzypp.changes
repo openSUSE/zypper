@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Jan 26 13:03:37 CET 2017 - ma@suse.de
+
+- Add API for updating the AutoInstalled db
+- MediaCD: Fix mountpoint creation after failing udf mount (bsc#1022046)
+- fix misleading indentation (fixes #65)
+- Fix compilation error reported by GCC7 (#63).
+- Prefer calling "repo2solv" rather than "repo2solv.sh"
+- version 16.4.0 (0)
+
+-------------------------------------------------------------------
 Wed Dec 14 12:24:23 CET 2016 - ma@suse.de
 
 - Don't raise FileCheckException if user accepted a package with wrong
