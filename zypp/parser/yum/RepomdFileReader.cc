@@ -62,9 +62,9 @@ namespace zypp
   public:
     /** Ctro taking a ProcessResource2 callback */
     Impl(const Pathname &repomd_file, const ProcessResource2 & callback )
-    : _tag( tag_NONE )
+    : _callback( callback )
+    , _tag( tag_NONE )
     , _type( ResourceType::NONE_e )
-    , _callback( callback )
     {
       Reader reader( repomd_file );
       MIL << "Reading " << repomd_file << endl;
