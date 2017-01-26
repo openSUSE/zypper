@@ -409,12 +409,6 @@ namespace zypp
     // This also fills the _devices list on demand
     DeviceList detected( detectDevices( _url.getScheme() == "dvd" ? true : false ) );
 
-    if( !isUseableAttachPoint( attachPoint() ) )
-    {
-      setAttachPoint( createAttachPoint(), true );
-    }
-    std::string mountpoint( attachPoint().asString() );
-
     Mount mount;
     MediaMountException merr;
 
@@ -435,6 +429,7 @@ namespace zypp
 
     // try all devices in sequence
     int count = 0;
+    std::string mountpoint( attachPoint().asString() );
     bool mountsucceeded = false;
     for ( DeviceList::iterator it = _devices.begin() ; ! mountsucceeded && it != _devices.end() ; ++it, ++count )
     {
@@ -531,6 +526,12 @@ namespace zypp
       {
         try
         {
+	  if( !isUseableAttachPoint( attachPoint() ) )
+	  {
+	    setAttachPoint( createAttachPoint(), true );
+	    mountpoint = attachPoint().asString();
+	  }
+
           mount.mount(it->name, mountpoint, *fsit, options);
 
           setMediaSource(media);
