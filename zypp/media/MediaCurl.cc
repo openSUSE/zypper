@@ -156,25 +156,91 @@ namespace zypp {
   namespace {
     struct ProgressData
     {
-      ProgressData(CURL *_curl, const long _timeout, const zypp::Url &_url = zypp::Url(),
-                   callback::SendReport<DownloadProgressReport> *_report=NULL)
-        : curl(_curl)
-        , timeout(_timeout)
-        , reached(false)
-        , report(_report)
-        , drate_period(-1)
-        , dload_period(0)
-        , secs(0)
-        , drate_avg(-1)
-        , ltime( time(NULL))
-        , dload( 0)
-        , uload( 0)
-        , url(_url)
+      ProgressData( CURL *_curl, time_t _timeout = 0, const Url & _url = Url(),
+		    callback::SendReport<DownloadProgressReport> *_report = nullptr )
+        : curl( _curl )
+	, url( _url )
+	, timeout( _timeout )
+        , reached( false )
+        , report( _report )
       {}
-      CURL                                         *curl;
-      long                                          timeout;
-      bool                                          reached;
+
+      CURL	*curl;
+      Url	url;
+      time_t	timeout;
+      bool	reached;
       callback::SendReport<DownloadProgressReport> *report;
+
+      time_t _timeStart	= 0;	///< Start total stats
+      time_t _timeLast	= 0;	///< Start last period(~1sec)
+      time_t _timeRcv	= 0;	///< Start of no-data timeout
+      time_t _timeNow	= 0;	///< Now
+
+      double _dnlTotal	= 0.0;	///< Bytes to download or 0 if unknown
+      double _dnlLast	= 0.0;	///< Bytes downloaded at period start
+      double _dnlNow	= 0.0;	///< Bytes downloaded now
+
+      int    _dnlPercent= 0;	///< Percent completed or 0 if _dnlTotal is unknown
+
+      double _drateTotal= 0.0;	///< Download rate so far
+      double _drateLast	= 0.0;	///< Download rate in last period
+
+      void updateStats( double dltotal = 0.0, double dlnow = 0.0 )
+      {
+	time_t now = _timeNow = time(0);
+
+	// If called without args (0.0), recompute based on the last values seen
+	if ( dltotal && dltotal != _dnlTotal )
+	  _dnlTotal = dltotal;
+
+	if ( dlnow && dlnow != _dnlNow )
+	{
+	  _timeRcv = now;
+	  _dnlNow = dlnow;
+	}
+	else if ( !_dnlNow && !_dnlTotal )
+	{
+	  // Start time counting as soon as first data arrives.
+	  // Skip the connection / redirection time at begin.
+	  return;
+	}
+
+	// init or reset if time jumps back
+	if ( !_timeStart || _timeStart > now )
+	  _timeStart = _timeLast = _timeRcv = now;
+
+	// timeout condition
+	if ( timeout )
+	  reached = ( (now - _timeRcv) > timeout );
+
+	// percentage:
+	if ( _dnlTotal )
+	  _dnlPercent = int(_dnlNow * 100 / _dnlTotal);
+
+	// download rates:
+	_drateTotal = _dnlNow / std::max( int(now - _timeStart), 1 );
+
+	if ( _timeLast < now )
+	{
+	  _drateLast = (_dnlNow - _dnlLast) / int(now - _timeLast);
+	  // start new period
+	  _timeLast  = now;
+	  _dnlLast   = _dnlNow;
+	}
+	else if ( _timeStart == _timeLast )
+	  _drateLast = _drateTotal;
+      }
+
+      int reportProgress() const
+      {
+	if ( reached )
+	  return 1;	// no-data timeout
+	if ( report && !(*report)->progress( _dnlPercent, url, _drateTotal, _drateLast ) )
+	  return 1;	// user requested abort
+	return 0;
+      }
+
+
       // download rate of the last period (cca 1 sec)
       double                                        drate_period;
       // bytes downloaded at the start of the last period
@@ -189,7 +255,6 @@ namespace zypp {
       double                                        dload;
       // bytes uploaded at the moment the progress was last reported
       double                                        uload;
-      zypp::Url                                     url;
     };
 
     ///////////////////////////////////////////////////////////////////
@@ -1531,97 +1596,33 @@ void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
 }
 
 ///////////////////////////////////////////////////////////////////
-
-int MediaCurl::progressCallback( void *clientp,
-                                 double dltotal, double dlnow,
-                                 double ultotal, double ulnow)
+//
+int MediaCurl::aliveCallback( void *clientp, double /*dltotal*/, double dlnow, double /*ultotal*/, double /*ulnow*/ )
 {
-  ProgressData *pdata = reinterpret_cast<ProgressData *>(clientp);
-  if( pdata)
+  ProgressData *pdata = reinterpret_cast<ProgressData *>( clientp );
+  if( pdata )
+  {
+    // Do not propagate dltotal in alive callbacks. MultiCurl uses this to
+    // prevent a percentage raise while downloading a metalink file. Download
+    // activity however is indicated by propagating the download rate (via dlnow).
+    pdata->updateStats( 0.0, dlnow );
+    return pdata->reportProgress();
+  }
+  return 0;
+}
+
+int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow, double ultotal, double ulnow )
+{
+  ProgressData *pdata = reinterpret_cast<ProgressData *>( clientp );
+  if( pdata )
   {
     // work around curl bug that gives us old data
     long httpReturnCode = 0;
-    if (curl_easy_getinfo(pdata->curl, CURLINFO_RESPONSE_CODE, &httpReturnCode) != CURLE_OK || httpReturnCode == 0)
-      return 0;
+    if ( curl_easy_getinfo( pdata->curl, CURLINFO_RESPONSE_CODE, &httpReturnCode ) != CURLE_OK || httpReturnCode == 0 )
+      return aliveCallback( clientp, dltotal, dlnow, ultotal, ulnow );
 
-    time_t now   = time(NULL);
-    if( now > 0)
-    {
-    	// reset time of last change in case initial time()
-	// failed or the time was adjusted (goes backward)
-	if( pdata->ltime <= 0 || pdata->ltime > now)
-	{
-	  pdata->ltime = now;
-	}
-
-	// start time counting as soon as first data arrives
-	// (skip the connection / redirection time at begin)
-	time_t dif = 0;
-	if (dlnow > 0 || ulnow > 0)
-	{
-    	  dif = (now - pdata->ltime);
-	  dif = dif > 0 ? dif : 0;
-
-	  pdata->secs += dif;
-	}
-
-	// update the drate_avg and drate_period only after a second has passed
-	// (this callback is called much more often than a second)
-	// otherwise the values would be far from accurate when measuring
-	// the time in seconds
-	//! \todo more accurate download rate computationn, e.g. compute average value from last 5 seconds, or work with milliseconds instead of seconds
-
-        if ( pdata->secs > 1 && (dif > 0 || dlnow == dltotal ))
-          pdata->drate_avg = (dlnow / pdata->secs);
-
-	if ( dif > 0 )
-	{
-	  pdata->drate_period = ((dlnow - pdata->dload_period) / dif);
-	  pdata->dload_period = dlnow;
-	}
-    }
-
-    // send progress report first, abort transfer if requested
-    if( pdata->report)
-    {
-      if (!(*(pdata->report))->progress(int( dltotal ? dlnow * 100 / dltotal : 0 ),
-	                                pdata->url,
-	                                pdata->drate_avg,
-	                                pdata->drate_period))
-      {
-        return 1; // abort transfer
-      }
-    }
-
-    // check if we there is a timeout set
-    if( pdata->timeout > 0)
-    {
-      if( now > 0)
-      {
-        bool progress = false;
-
-        // update download data if changed, mark progress
-        if( dlnow != pdata->dload)
-        {
-          progress     = true;
-          pdata->dload = dlnow;
-          pdata->ltime = now;
-        }
-        // update upload data if changed, mark progress
-        if( ulnow != pdata->uload)
-        {
-          progress     = true;
-          pdata->uload = ulnow;
-          pdata->ltime = now;
-        }
-
-        if( !progress && (now >= (pdata->ltime + pdata->timeout)))
-        {
-          pdata->reached = true;
-          return 1; // aborts transfer
-        }
-      }
-    }
+    pdata->updateStats( dltotal, dlnow );
+    return pdata->reportProgress();
   }
   return 0;
 }

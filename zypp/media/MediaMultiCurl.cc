@@ -1236,16 +1236,19 @@ static bool looks_like_metalink(const Pathname & file)
 }
 
 // here we try to suppress all progress coming from a metalink download
+// bsc#1021291: Nevertheless send alive trigger (without stats), so UIs
+// are able to abort a hanging metalink download via callback response.
 int MediaMultiCurl::progressCallback( void *clientp, double dltotal, double dlnow, double ultotal, double ulnow)
 {
   CURL *_curl = MediaCurl::progressCallback_getcurl(clientp);
   if (!_curl)
-    return 0;
+    return MediaCurl::aliveCallback(clientp, dltotal, dlnow, ultotal, ulnow);
+
 
   // work around curl bug that gives us old data
   long httpReturnCode = 0;
   if (curl_easy_getinfo(_curl, CURLINFO_RESPONSE_CODE, &httpReturnCode ) != CURLE_OK || httpReturnCode == 0)
-    return 0;
+    return MediaCurl::aliveCallback(clientp, dltotal, dlnow, ultotal, ulnow);
 
   char *ptr = NULL;
   bool ismetalink = false;
@@ -1257,25 +1260,23 @@ int MediaMultiCurl::progressCallback( void *clientp, double dltotal, double dlno
     }    
   if (!ismetalink && dlnow < 256)
     {
-      // can't tell yet, suppress callback
-      return 0;
+      // can't tell yet, ...
+      return MediaCurl::aliveCallback(clientp, dltotal, dlnow, ultotal, ulnow);
     }
   if (!ismetalink)
     {
       FILE *fp = 0;
-      if (curl_easy_getinfo(_curl, CURLINFO_PRIVATE, &fp) != CURLE_OK)
-	return 0;
-      if (!fp)
-	return 0;	/* hmm */
+      if (curl_easy_getinfo(_curl, CURLINFO_PRIVATE, &fp) != CURLE_OK || !fp)
+	return MediaCurl::aliveCallback(clientp, dltotal, dlnow, ultotal, ulnow);
       fflush(fp);
       ismetalink = looks_like_metalink_fd(fileno(fp));
       DBG << "looks_like_metalink_fd: " << ismetalink << endl;
     }
   if (ismetalink)
     {
-      // we're downloading the metalink file. no progress please.
-      curl_easy_setopt(_curl, CURLOPT_NOPROGRESS, 1L);
-      return 0;
+      // we're downloading the metalink file. Just trigger aliveCallbacks
+      curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, &MediaCurl::aliveCallback);
+      return MediaCurl::aliveCallback(clientp, dltotal, dlnow, ultotal, ulnow);
     }
   curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, &MediaCurl::progressCallback);
   return MediaCurl::progressCallback(clientp, dltotal, dlnow, ultotal, ulnow);
