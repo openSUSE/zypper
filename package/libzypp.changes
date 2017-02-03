@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb  3 13:40:04 CET 2017 - ma@suse.de
+
+- MediaMultiCurl: Trigger aliveCallback when downloading metalink
+  files (bsc#1021291)
+- version 16.4.1 (0)
+
+-------------------------------------------------------------------
 Thu Jan 26 13:03:37 CET 2017 - ma@suse.de
 
 - Add API for updating the AutoInstalled db
