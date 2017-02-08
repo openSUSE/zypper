@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2016-12-07 22:36+0000\n"
+"PO-Revision-Date: 2017-02-08 22:38+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
@@ -4260,7 +4260,7 @@ msgstr "サービスプラグインは属性の変更をサポートしていま
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
-msgstr "パッケージ %s は転送中に破れてしまったようです。もう一度取得しますか?"
+msgstr "パッケージ %s は転送中に壊れてしまったようです。もう一度取得しますか？"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
