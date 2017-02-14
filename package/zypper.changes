@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb 14 13:10:55 CET 2017 - ma@suse.de
+
+- Fix invalid xml in gpg key info output(bsc#1024909)
+- BuildRequires:  libzypp-devel >= 14.45.1
+- version 1.11.61
+
+-------------------------------------------------------------------
 Thu Dec 22 01:14:36 CET 2016 - ma@suse.de
 
 - Update zypper-po.tar.bz2
