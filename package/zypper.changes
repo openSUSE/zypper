@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb 14 12:21:14 CET 2017 - ma@suse.de
+
+- Fix invalid xml in gpg key info output(bsc#1024909)
+- BuildRequires:  libzypp-devel >= 16.4.2
+- version 1.13.16
+
+-------------------------------------------------------------------
 Thu Jan 12 14:58:55 CET 2017 - ma@suse.de
 
 - Fix --help output breaking tab completion (bsc#983021)
