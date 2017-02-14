@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb 14 13:10:16 CET 2017 - ma@suse.de
+
+- Fix invalid xml in gpg key info output(bsc#1024909)
+- BuildRequires:  libzypp-devel >= 15.23.3
+- version 1.12.48
+
+-------------------------------------------------------------------
 Wed Nov 23 08:47:28 CET 2016 - ma@suse.de
 
 - Do not warn about processes using deleted files when using --root
