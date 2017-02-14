@@ -214,7 +214,7 @@ namespace zypp
   {
     xmlout::Node guard( str, name_r, xmlout::Node::optionalContent );
     const std::string & content( asString( obj ) );
-    if ( ! content.empty() ) *guard << content;
+    if ( ! content.empty() ) *guard << xml::escape( content );
     return str;
   }
   //@}
