@@ -42,7 +42,7 @@ bool is_changeable_media( const Url & url );
 
 /** Converts user-supplied kind to ResKind object.
  * Returns an empty one if not recognized. */
-ResKind string_to_kind( const std::string & skind );
+ResKind string_to_kind( std::string skind );
 
 ResKindSet kindset_from( const std::list<std::string> & kindstrings );
 

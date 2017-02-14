@@ -70,24 +70,23 @@ bool is_changeable_media(const Url & url)
 
 // ----------------------------------------------------------------------------
 
-ResKind string_to_kind( const std::string & skind )
+ResKind string_to_kind( std::string skind )
 {
-  ResObject::Kind empty;
-  std::string lskind = str::toLower( skind );
-  if ( lskind == "package" )
+  skind = str::toLower( skind );
+  if ( skind == "package" )
     return ResKind::package;
-  if ( lskind == "pattern" )
+  if ( skind == "pattern" )
     return ResKind::pattern;
-  if ( lskind == "product" )
+  if ( skind == "product" )
     return ResKind::product;
-  if ( lskind == "patch" )
+  if ( skind == "patch" )
     return ResKind::patch;
-  if ( lskind == "srcpackage" )
+  if ( skind == "srcpackage" )
     return ResKind::srcpackage;
-  if ( lskind == "application" )
+  if ( skind == "application" )
     return ResKind::application;
   // not recognized
-  return empty;
+  return ResKind::nokind;
 }
 
 // ----------------------------------------------------------------------------
