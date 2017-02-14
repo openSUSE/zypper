@@ -30,6 +30,25 @@ namespace zypp
   {
     std::ostream & dumpKeyInfo( std::ostream & str, const PublicKeyData & key, const KeyContext & context = KeyContext() )
     {
+      Zypper & zypper = *Zypper::instance();
+      if ( zypper.out().type() == Out::TYPE_XML )
+      {
+	{
+	  xmlout::Node parent( str, "gpgkey-info", xmlout::Node::optionalContent );
+
+	  if ( !context.empty() )
+	  {
+	    dumpAsXmlOn( *parent, context.repoInfo().asUserString(), "repository" );
+	  }
+	  dumpAsXmlOn( *parent, key.name(), "key-name" );
+	  dumpAsXmlOn( *parent, key.fingerprint(), "key-fingerprint" );
+	  dumpAsXmlOn( *parent, key.created(), "key-created" );
+	  dumpAsXmlOn( *parent, key.expires(), "key-expires" );
+	  dumpAsXmlOn( *parent, str::Format( "gpg-pubkey-%1%-%2%" ) % key.gpgPubkeyVersion() % key.gpgPubkeyRelease(), "rpm-name" );
+	}
+	return str;
+      }
+
       Table t;
       t.lineStyle( none );
       if ( !context.empty() )
