@@ -31,6 +31,7 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s );
 void printPatchInfo( Zypper & zypper, const ui::Selectable & s );
 void printPatternInfo( Zypper & zypper, const ui::Selectable & s );
 void printProductInfo( Zypper & zypper, const ui::Selectable & s );
+void printSrcPackageInfo( Zypper & zypper, const ui::Selectable & s );
 void printDefaultInfo( Zypper & zypper, const ui::Selectable & s );
 
 ///////////////////////////////////////////////////////////////////
@@ -176,31 +177,60 @@ namespace {
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-void printInfo( Zypper & zypper, const ResKind & kind_r )
+void printInfo( Zypper & zypper, ResKindSet kinds_r )
 {
   zypper.out().gap();
 
   for ( const std::string & rawarg : zypper.arguments() )
   {
     // Use the right kind!
-    KNSplit kn( rawarg, kind_r );
+    KNSplit kn( rawarg );
 
     PoolQuery q( printInfo_BasicQuery( zypper ) );
-    q.addKind( kn._kind );
     q.addAttribute( sat::SolvAttr::name, kn._name );
+
+    bool fallBackToAny = false;
+    if ( kn._kind )
+    {
+      q.addKind( kn._kind );			// explicit kind in arg
+    }
+    else if ( !kinds_r.empty() )
+    {
+      for ( const auto & kind : kinds_r )	// wanted kinds via -t
+	q.addKind( kind );
+    }
+    else
+    {
+      q.addKind( ResKind::package );
+      fallBackToAny = true;			// Prefer packages, but fall back to any
+    }
 
     if ( q.empty() )
     {
-      // TranslatorExplanation E.g. "package 'zypper' not found."
-      cout << "\n" << str::Format(_("%s '%s' not found.")) % kind_to_string_localized( kn._kind, 1 ) % rawarg << endl;
+      ResKind oneKind( kn._kind );
+      if ( !oneKind )
       {
-	// hint to matches of different kind
-	PoolQuery q( printInfo_BasicQuery( zypper ) );
-	q.addAttribute( sat::SolvAttr::name, kn._name );
-	if ( ! q.empty() )
-	  logOtherKindMatches( q, kn._name );
+	if ( !kinds_r.empty() && kinds_r.size() == 1 )
+	  oneKind = *kinds_r.begin();
+	else
+	  oneKind = ResKind::package;
       }
-      continue;
+      // TranslatorExplanation E.g. "package 'zypper' not found."
+      cout << "\n" << str::Format(_("%s '%s' not found.")) % kind_to_string_localized( oneKind, 1 ) % rawarg << endl;
+
+      // hint to matches of different kind (preferPackages looked for any)
+      PoolQuery h( printInfo_BasicQuery( zypper ) );
+      h.addAttribute( sat::SolvAttr::name, kn._name );
+
+      if ( h.empty() )
+	continue;
+      else if ( !fallBackToAny )
+      {
+	logOtherKindMatches( h, kn._name );
+	continue;
+      }
+      else
+	q = h;
     }
 
     for_( it, q.selectableBegin(), q.selectableEnd() )
@@ -209,7 +239,7 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
       {
 	// TranslatorExplanation E.g. "Information for package zypper:"
 	std::string info = str::Format(_("Information for %s %s:"))
-				 % kind_to_string_localized( kn._kind, 1 )
+				 % kind_to_string_localized( (*it)->kind(), 1 )
 				 % (*it)->name();
 
 	cout << endl << info << endl;
@@ -220,6 +250,7 @@ void printInfo( Zypper & zypper, const ResKind & kind_r )
       else if ( kn._kind == ResKind::patch )	{ printPatchInfo( zypper, *(*it) ); }
       else if ( kn._kind == ResKind::pattern )	{ printPatternInfo( zypper, *(*it) ); }
       else if ( kn._kind == ResKind::product )	{ printProductInfo( zypper, *(*it) ); }
+      else if ( kn._kind == ResKind::srcpackage){ printSrcPackageInfo( zypper, *(*it) ); }
       else 					{ printDefaultInfo( zypper, *(*it) ); }
     }
   }
@@ -281,6 +312,7 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
     if ( !theone )
       theone = installed;
   }
+  Package::constPtr package = theone->asKind<Package>();
 
   PropertyTable p;
   printCommonData( theone, p );
@@ -304,6 +336,8 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
   }
   else
       p.lastValue() = _("not installed");
+  // translators: property name; short; used like "Name: value"
+  p.add( _("Source package"),	package->sourcePkgLongName() );
 
   printSummaryDescDeps( theone, p );
   zypper.out().info( str::Str() << p );
@@ -416,10 +450,10 @@ void printPatternInfo( Zypper & zypper, const ui::Selectable & s )
     {
       Table t;
       t << ( TableHeader()
-	  /* translators: Table coumn header */	<< _("S")
-	  /* translators: Table coumn header */	<< _("Name")
-	  /* translators: Table coumn header */	<< _("Type")
-	  /* translators: Table coumn header */	<< _("Dependency") );
+	  /* translators: Table column header */	<< _("S")
+	  /* translators: Table column header */	<< _("Name")
+	  /* translators: Table column header */	<< _("Type")
+	  /* translators: Table column header */	<< _("Dependency") );
 
       for ( ui::Selectable::Ptr sel : collect.req.selectable() )
       {
@@ -589,5 +623,90 @@ void printProductInfo( Zypper & zypper, const ui::Selectable & s )
   p.add( _("Short Name"),		product->shortName() );
 
   printSummaryDescDeps( theone, p );
+  zypper.out().info( str::Str() << p );
+}
+
+/**
+ * Print source package information.
+ */
+///////////////////////////////////////////////////////////////////
+namespace
+{
+  typedef std::pair<IdString,Edition>	BinPkg;
+  typedef std::set<BinPkg>		BinPkgs;
+
+  // TODO for libzypp: find packages built from 'theone'...
+  // i.e. SolvAttr::sourcename/sourceevr mathes 'theone' name and edition
+  BinPkgs findBinPkgsBuiltFromSrc( const PoolItem & theone_r )
+  {
+    BinPkgs ret;
+
+    sat::LookupAttr query( sat::SolvAttr::sourcename );
+    for_( it, query.begin(), query.end() )
+    {
+      if ( it.id() )			// found Solvable with a SolvAttr::sourcename attribute
+      {
+	// empty SolvAttr::sourcename means 'same as package'
+	IdString srcname( it.id() == sat::detail::emptyId ? it.inSolvable().ident().id() : it.id() );
+	if ( theone_r.ident() == srcname )	// name Solvable was built from matches, now check Edition...
+	{
+	  // empty SolvAttr::sourceevr means 'same as package'  (id-based comparisons are fine)
+	  IdString srcevr( it.inSolvable().lookupIdAttribute( sat::SolvAttr::sourceevr ) );
+	  if ( srcevr.empty() ) srcevr = IdString( it.inSolvable().edition().id() );
+	  if ( theone_r.edition().id() == srcevr.id() )
+	  {
+	    //std::cerr << it.inSolvable() << " - " << it.id() << " (" << it.inSolvable().ident().id() << ") | " << srcname << endl;
+	    ret.insert( { it.inSolvable().ident(), it.inSolvable().edition() } );
+	  }
+	}
+      }
+    }
+    return ret;
+  }
+
+  // TODO Use a common status tag computation here, in search.cc, ...
+  const char * BinPkgStatus( const BinPkg & binPkg_r )
+  {
+    ui::Selectable::Ptr sel( ui::Selectable::get( binPkg_r.first ) );
+    if ( sel->installedEmpty() )
+      return "";
+    for ( const PoolItem & pi : sel->installed() )
+      if ( pi.edition() == binPkg_r.second )
+	return "i";
+    return "v";
+  }
+
+} // namespace
+///////////////////////////////////////////////////////////////////
+
+void printSrcPackageInfo( Zypper & zypper, const ui::Selectable & s )
+{
+  PoolItem theone( s.theObj() );
+  SrcPackage::constPtr srcPackage = theone->asKind<SrcPackage>();
+
+  PropertyTable p;
+  printCommonData( theone, p );
+  printSummaryDescDeps( theone, p );
+
+  ///////////////////////////////////////////////////////////////////
+  BinPkgs builtFrom( findBinPkgsBuiltFromSrc( theone ) );
+  if ( ! builtFrom.empty() )
+  {
+    Table t;
+    t << ( TableHeader()
+	/* translators: Table column header */	<< _("S")
+	/* translators: Table column header */	<< _("Name")
+	/* translators: Table column header */	<< _("Version") );
+
+    for ( auto binPkg : builtFrom )
+    { t << ( TableRow() << BinPkgStatus( binPkg ) << binPkg.first << binPkg.second ); }
+
+    t.sort( 1 );
+
+    // translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
+    p.addDetail( _("Builds binary package"),	str::Str() << t );
+  }
+  ///////////////////////////////////////////////////////////////////
+
   zypper.out().info( str::Str() << p );
 }

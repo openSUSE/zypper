@@ -4874,28 +4874,36 @@ void Zypper::doCommand()
       return;
     }
 
+    ResKindSet kinds;
     switch ( command().toEnum() )
     {
     case ZypperCommand::RUG_PATCH_INFO_e:
-      kind =  ResKind::patch;
+      kinds.insert( ResKind::patch );
       break;
     case ZypperCommand::RUG_PATTERN_INFO_e:
-      kind =  ResKind::pattern;
+      kinds.insert( ResKind::pattern );
       break;
     case ZypperCommand::RUG_PRODUCT_INFO_e:
-      kind =  ResKind::product;
+      kinds.insert( ResKind::product );
       break;
     default:
     case ZypperCommand::INFO_e:
-      // read resolvable type
-      std::string skind = copts.count("type")?  copts["type"].front() : "package";
-      kind = string_to_kind( skind );
-      if ( kind == ResObject::Kind() )
+      if ( copts.count("type") )
       {
-        out().error( str::Format(_("Unknown package type '%s'.")) % skind );
-        setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-        return;
+	for ( auto kindstr : copts["type"] )
+	{
+	  ResKind kind( string_to_kind( kindstr ) );
+	  if ( kind )
+	    kinds.insert( kind );
+	  else
+	  {
+	    out().error( str::Format(_("Unknown package type '%s'.")) % kindstr );
+	    setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+	    return;
+	  }
+	}
       }
+      break;
     }
 
     initRepoManager();
@@ -4907,7 +4915,7 @@ void Zypper::doCommand()
     // needed to compute status of PPP
     resolve( *this );
 
-    printInfo( *this, kind );
+    printInfo( *this, std::move(kinds) );
 
     return;
   }
