@@ -751,9 +751,11 @@ namespace zypp
 
     void TargetImpl::createAnonymousId() const
     {
+      // bsc#1024741: Omit creating a new uid for chrooted systems (if it already has one, fine)
+      if ( root() != "/" )
+	return;
 
-      // create the anonymous unique id
-      // this value is used for statistics
+      // Create the anonymous unique id, used for download statistics
       Pathname idpath( home() / "AnonymousUniqueId");
 
       try
@@ -1830,15 +1832,29 @@ namespace zypp
     }
 
     ///////////////////////////////////////////////////////////////////
+    namespace
+    {
+      std::string guessAnonymousUniqueId( const Pathname & root_r )
+      {
+	// bsc#1024741: Omit creating a new uid for chrooted systems (if it already has one, fine)
+	std::string ret( firstNonEmptyLineIn( root_r / "/var/lib/zypp/AnonymousUniqueId" ) );
+	if ( ret.empty() && root_r != "/" )
+	{
+	  // if it has nonoe, use the outer systems one
+	  ret = firstNonEmptyLineIn( "/var/lib/zypp/AnonymousUniqueId" );
+	}
+	return ret;
+      }
+    }
 
     std::string TargetImpl::anonymousUniqueId() const
     {
-      return firstNonEmptyLineIn( home() / "AnonymousUniqueId" );
+      return guessAnonymousUniqueId( root() );
     }
     // static version:
     std::string TargetImpl::anonymousUniqueId( const Pathname & root_r )
     {
-      return firstNonEmptyLineIn( staticGuessRoot(root_r) / "/var/lib/zypp/AnonymousUniqueId" );
+      return guessAnonymousUniqueId( staticGuessRoot(root_r) );
     }
 
     ///////////////////////////////////////////////////////////////////

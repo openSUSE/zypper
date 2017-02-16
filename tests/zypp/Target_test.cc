@@ -1,5 +1,5 @@
-
 #include <iostream>
+#include <fstream>
 #include <list>
 #include <string>
 
@@ -34,9 +34,17 @@ BOOST_AUTO_TEST_CASE(target_test)
 
     z->initializeTarget( tmp.path() );
 
-    BOOST_CHECK( ! z->target()->anonymousUniqueId().empty() );
+    // bsc#1024741: Omit creating a new uid for chrooted systems (if it already has one, fine)
+    BOOST_CHECK( ! PathInfo( tmp.path() / "/var/lib/zypp/AnonymousUniqueId").isExist() );
+    // create an artificial one
+    {
+      Pathname f( tmp.path() / "/var/lib/zypp" );
+      filesystem::assert_dir( f );
+      std::ofstream o( (f/"AnonymousUniqueId").c_str() );
+      o << "AnonymousUniqueId";
+    }
     BOOST_CHECK( PathInfo( tmp.path() / "/var/lib/zypp/AnonymousUniqueId").isExist() );
-    BOOST_CHECK( PathInfo( tmp.path() / "/var/lib/zypp/AnonymousUniqueId").size() > 0 );
+    BOOST_CHECK_EQUAL( z->target()->anonymousUniqueId(), "AnonymousUniqueId" );
 
     // now check the base product
     BOOST_CHECK_EQUAL( z->target()->targetDistribution(), "sle-10-i586");
