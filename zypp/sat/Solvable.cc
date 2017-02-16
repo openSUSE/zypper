@@ -525,7 +525,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     {
-      /** Expand \ref Capability and call \c fnc_r for each namescpace:language
+      /** Expand \ref Capability and call \c fnc_r for each namespace:language
        * dependency. Return #invocations of fnc_r, negative if fnc_r returned
        * false to indicate abort.
        */
@@ -566,7 +566,7 @@ namespace zypp
         return 0;
       }
 
-       /** Expand \ref Capability and call \c fnc_r for each namescpace:language
+       /** Expand \ref Capability and call \c fnc_r for each namespace:language
        * dependency. Return #invocations of fnc_r, negative if fnc_r returned
        * false to indicate abort.
        */

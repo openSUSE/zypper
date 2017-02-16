@@ -1709,7 +1709,7 @@ namespace zypp
         }
         return std::string();
       }
-    } // namescpace
+    } // namespace
     ///////////////////////////////////////////////////////////////////
 
     Product::constPtr TargetImpl::baseProduct() const
