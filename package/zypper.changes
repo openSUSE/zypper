@@ -1,4 +1,20 @@
 -------------------------------------------------------------------
+Thu Feb 16 18:28:47 CET 2017 - ma@suse.de
+
+- Translation: updated .pot file
+- Improve srcpackage info (FATE#321104)
+- version 1.13.17
+
+-------------------------------------------------------------------
+Thu Feb 16 18:13:55 CET 2017 - ma@suse.de
+
+- Improve package info. Show binary packages built from a source
+  package and for packages the source package it was built from.
+  If no specific type is requested and no package matches, show
+  non-package matches if available. (FATE#321104)
+- version 1.13.17
+
+-------------------------------------------------------------------
 Tue Feb 14 12:21:14 CET 2017 - ma@suse.de
 
 - Fix invalid xml in gpg key info output(bsc#1024909)
