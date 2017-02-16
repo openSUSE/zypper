@@ -95,6 +95,7 @@ void TransferSettings::reset()
 
 void TransferSettings::addHeader( const std::string &header )
 {
+  if ( ! header.empty() )
     _impl->_headers.push_back(header);
 }
 
