@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 09/09/2016
+.\"      Date: 02/17/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "09/09/2016" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "02/17/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1205,6 +1205,11 @@ Create solver test case for debugging\&. See the install command for details\&.
 Test the upgrade, do not actually install or update any package\&. This option will add the
 \fB\-\-test\fR
 option to the rpm commands run by the dist\-upgrade command\&.
+.RE
+.PP
+\fB\-y\fR, \fB\-\-no\-confirm\fR
+.RS 4
+Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
 .RE
 .PP
 \fB\-\-details\fR

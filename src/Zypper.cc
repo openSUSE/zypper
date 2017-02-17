@@ -2325,6 +2325,7 @@ void Zypper::processCommandOptions()
     shared_ptr<DupOptions> myOpts( new DupOptions() );
     _commandOptions = myOpts;
     static struct option dupdate_options[] = {
+      {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
       {"repo",                      required_argument, 0, 'r'},
       {"from",                      required_argument, 0,  0 },
       {"no-recommends",             no_argument,       0,  0 },
@@ -2383,6 +2384,7 @@ void Zypper::processCommandOptions()
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
+      .option( "-y, --no-confirm",		_("Don't require user interaction. Alias for the --non-interactive global option.") )
       .optionSectionExpertOptions()
       .option( "--allow-downgrade" )
       .option( "--no-allow-downgrade",		_("Whether to allow downgrading installed resolvables.") )

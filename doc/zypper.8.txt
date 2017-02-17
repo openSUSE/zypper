@@ -652,6 +652,9 @@ Update Management Commands
 	*-D*, *--dry-run*::
 		Test the upgrade, do not actually install or update any package. This option will add the *--test* option to the rpm commands run by the dist-upgrade command.
 
+	*-y*, *--no-confirm*::
+		Don't require user interaction. Alias for the --non-interactive global option.
+
 	*--details*::
 		Show the detailed installation summary.
 
