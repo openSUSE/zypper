@@ -18,7 +18,11 @@
 
 Name:           @PACKAGE@
 BuildRequires:  augeas-devel >= 0.5.0
+%if 0%{?suse_version} > 1325
+BuildRequires:  libboost_headers-devel
+%else
 BuildRequires:  boost-devel >= 1.33.1
+%endif
 BuildRequires:  cmake >= 2.4.6
 BuildRequires:  gcc-c++ >= 4.7
 BuildRequires:  gettext-devel >= 0.15
