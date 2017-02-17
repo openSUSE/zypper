@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb 17 11:39:43 CET 2017 - ma@suse.de
+
+- dup: add -y command option as alias for --non-interactive global
+  option to be conssistent with other install commands (bsc#1018873)
+- version 1.13.18
+
+-------------------------------------------------------------------
 Thu Feb 16 18:28:47 CET 2017 - ma@suse.de
 
 - Translation: updated .pot file
