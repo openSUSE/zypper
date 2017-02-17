@@ -204,10 +204,7 @@ namespace zypp
     { _home_path = path; }
 
     Pathname ZYppImpl::tmpPath() const
-    {
-      static TmpDir zypp_tmp_dir( TmpPath::defaultLocation(), "zypp." );
-      return zypp_tmp_dir.path();
-    }
+    { return zypp::myTmpDir(); }
 
     /******************************************************************
      **
@@ -222,6 +219,13 @@ namespace zypp
     /////////////////////////////////////////////////////////////////
   } // namespace zypp_detail
   ///////////////////////////////////////////////////////////////////
+
+  Pathname myTmpDir()	// from TmpPath.h
+  {
+    static filesystem::TmpDir _tmpdir( TmpPath::defaultLocation(), "zypp." );
+    return _tmpdir.path();
+  }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

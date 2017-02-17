@@ -196,6 +196,10 @@ namespace zypp {
     ///////////////////////////////////////////////////////////////////
 
   } // namespace filesystem
+
+  /** Global access to the zypp.TMPDIR (created on demand, deleted when libzypp is unloaded) */
+  Pathname myTmpDir();	// implemented in ZYppImpl.cc
+
 } // namespace zypp
 
 #endif // ZYPP_TMPPATH_H
