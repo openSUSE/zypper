@@ -24,9 +24,6 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/Date.h"
-#include "zypp/TmpPath.h"
-
-#include <ctime>
 
 /** \todo Fix duplicate define in PublicKey/KeyRing */
 #define GPG_BINARY "/usr/bin/gpg2"
@@ -344,13 +341,15 @@ namespace zypp
       { return _hiddenKeys; }
 
     protected:
+      std::string _initHomeDir()	///< readFromFile helper to prepare the 'gpg --homedir'
+      { Pathname ret( zypp::myTmpDir() / "PublicKey" ); filesystem::assert_dir( ret ); return ret.asString(); }
+
       void readFromFile()
       {
         PathInfo info( _dataFile.path() );
         MIL << "Reading pubkey from " << info.path() << " of size " << info.size() << " and sha1 " << filesystem::checksum(info.path(), "sha1") << endl;
 
-        static filesystem::TmpDir dir;
-	std::string tmppath( dir.path().asString() );
+	static std::string tmppath( _initHomeDir() );
 	std::string datapath( _dataFile.path().asString() );
 
         const char* argv[] =
