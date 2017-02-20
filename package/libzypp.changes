@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Feb 20 10:10:43 CET 2017 - ma@suse.de
+
+- PublicKey: Create tmpdirs inside ZYpp::tmpPath (bsc#926844)
+- Don't create AnonymousUniqueId in chroot (bsc#1024741)
+- version 16.4.3 (0)
+
+-------------------------------------------------------------------
 Tue Feb 14 12:07:14 CET 2017 - ma@suse.de
 
 - dumpAsXmlOnL: xml escape node content (bsc#1024909)
