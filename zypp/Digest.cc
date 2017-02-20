@@ -67,7 +67,7 @@ namespace zypp {
     	P();
     	~P();
 
-    	EVP_MD_CTX mdctx;
+        EVP_MD_CTX *mdctx;
 
     	const EVP_MD *md;
     	unsigned char md_value[EVP_MAX_MD_SIZE];
@@ -117,9 +117,13 @@ namespace zypp {
     	if(!md)
     	    return false;
 
-    	EVP_MD_CTX_init(&mdctx);
-
-    	if(!EVP_DigestInit_ex(&mdctx, md, NULL))
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
+        mdctx = (EVP_MD_CTX*) malloc(sizeof(EVP_MD_CTX));
+        EVP_MD_CTX_init(mdctx);
+#else
+        mdctx = EVP_MD_CTX_new();
+#endif
+        if(!EVP_DigestInit_ex(mdctx, md, NULL))
     	    return false;
 
     	md_len = 0;
@@ -133,7 +137,11 @@ namespace zypp {
     {
       if(initialized)
       {
-    	EVP_MD_CTX_cleanup(&mdctx);
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
+        EVP_MD_CTX_cleanup(mdctx);
+#else
+        EVP_MD_CTX_free(mdctx);
+#endif
     	initialized = false;
     	finalized = false;
       }
@@ -171,10 +179,10 @@ namespace zypp {
 	return false;
       if(!_dp->finalized)
 	{
-	  (void)EVP_DigestFinal_ex(&_dp->mdctx, _dp->md_value, &_dp->md_len);
+	  (void)EVP_DigestFinal_ex(_dp->mdctx, _dp->md_value, &_dp->md_len);
           _dp->finalized = true;
 	}
-      if(!EVP_DigestInit_ex(&_dp->mdctx, _dp->md, NULL))
+      if(!EVP_DigestInit_ex(_dp->mdctx, _dp->md, NULL))
 	return false;
       _dp->finalized = false;
       return true;
@@ -187,7 +195,7 @@ namespace zypp {
 
       if(!_dp->finalized)
       {
-    	if(!EVP_DigestFinal_ex(&_dp->mdctx, _dp->md_value, &_dp->md_len))
+    	if(!EVP_DigestFinal_ex(_dp->mdctx, _dp->md_value, &_dp->md_len))
     	    return std::string();
 
     	_dp->finalized = true;
@@ -212,7 +220,7 @@ namespace zypp {
 
       if(!_dp->finalized)
       {
-        if(!EVP_DigestFinal_ex(&_dp->mdctx, _dp->md_value, &_dp->md_len))
+        if(!EVP_DigestFinal_ex(_dp->mdctx, _dp->md_value, &_dp->md_len))
             return r;
         _dp->finalized = true;
       }
@@ -239,7 +247,7 @@ namespace zypp {
     	    return false;
 
       }
-      if(!EVP_DigestUpdate(&_dp->mdctx, reinterpret_cast<const unsigned char*>(bytes), len))
+      if(!EVP_DigestUpdate(_dp->mdctx, reinterpret_cast<const unsigned char*>(bytes), len))
     	return false;
 
       return true;
