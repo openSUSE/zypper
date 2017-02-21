@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-16 18:27+0100\n"
-"PO-Revision-Date: 2016-07-12 14:52+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2017-02-21 10:38+0000\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -660,9 +660,8 @@ msgid "Dependency"
 msgstr "Afhankelijkheden"
 
 #: src/info.cc:461 src/info.cc:475
-#, fuzzy
 msgid "Required"
-msgstr "Benodigd"
+msgstr "Vereist"
 
 #: src/info.cc:466 src/info.cc:475 src/search.cc:318
 msgid "Recommended"
@@ -685,7 +684,7 @@ msgstr "onbekend"
 #: src/info.cc:552
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Zie %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:558
@@ -735,7 +734,7 @@ msgstr "Korte naam"
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:707
 msgid "Builds binary package"
-msgstr ""
+msgstr "Bouwt binair pakket"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -1942,16 +1941,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "standaard prioriteit"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "Prioriteit"
+msgstr "verhoogde prioriteit"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "verlaagde prioriteit"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1967,23 +1965,24 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Prioriteiten van opslagruimten hebben geen effect. Alle ingeschakelde "
+"opslagruimten delen dezelfde prioriteit."
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "De prioriteit van installatiebron '%s' is op %d gezet."
+msgstr "Prioriteiten van opslagruimten zijn van kracht:"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "Selecteren van '%s' voor verwijderen."
+msgstr "Zie '%1%' voor details"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Installatiebron"
-msgstr[1] "Installatiebron"
+msgstr[0] "%1% opslagruimte"
+msgstr[1] "%1% opslagruimten"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -4789,6 +4788,8 @@ msgstr ""
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
+"Alleen XML-uitvoer: woordelijk doorgeven van de XML-tags die gevonden zijn "
+"in een productbestand."
 
 #: src/Zypper.cc:2626
 #, c-format, boost-format
@@ -5512,7 +5513,7 @@ msgstr "Zie bovenstaande melding voor een hint."
 #: src/Zypper.cc:4530
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "Optie %1% heeft geen effect zonder de globale optie %2%."
 
 #: src/Zypper.cc:4617 src/Zypper.cc:4665
 #, c-format, boost-format
