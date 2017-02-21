@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-22 14:39+0100\n"
-"PO-Revision-Date: 2017-02-21 10:38+0000\n"
+"PO-Revision-Date: 2017-02-27 12:16+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -2992,7 +2992,7 @@ msgstr "OK OK! Onmiddellijke beëindiging..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:38
 msgid "Trying to exit gracefully..."
-msgstr ""
+msgstr "Proberen netjes te eindigen..."
 
 #: src/Zypper.cc:84
 msgid ""
