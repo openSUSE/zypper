@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Feb 22 11:42:05 CET 2017 - ma@suse.de
+
+- Try to exit gracefully after SIGPIPE (bsc#926844)
+- BuildRequires:  libzypp-devel >= 16.4.3
+- version 1.13.19
+
+-------------------------------------------------------------------
 Fri Feb 17 14:20:17 UTC 2017 - adam.majer@suse.de
 
 - use individual libboost-*-devel packages instead of boost-devel
