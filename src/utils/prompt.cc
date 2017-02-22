@@ -273,6 +273,9 @@ unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & 
     bool & _flag;
   } say_goodbye( zypper.runtimeData().waiting_for_input );
 
+  // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
+  zypper.immediateExitCheck();
+
   // open a terminal for input (bnc #436963)
   std::ifstream stm( "/dev/tty" );
 
