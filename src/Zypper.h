@@ -129,7 +129,10 @@ struct RuntimeData
   , action_rpm_download( false )
   , waiting_for_input( false )
   , entered_commit( false )
-  {}
+  , tmpdir( zypp::myTmpDir() / "zypper" )
+  {
+    filesystem::assert_dir( tmpdir );
+  }
 
   std::list<RepoInfo> repos;
   std::list<RepoInfo> additional_repos;
@@ -177,7 +180,7 @@ struct RuntimeData
   bool entered_commit;	// bsc#946750 - give ZYPPER_EXIT_ERR_COMMIT priority over ZYPPER_EXIT_ON_SIGNAL
 
   //! Temporary directory for any use. Used e.g. as packagesPath of TMP_RPM_REPO_ALIAS repository.
-  filesystem::TmpDir tmpdir;
+  Pathname tmpdir;
 };
 
 typedef shared_ptr<RepoManager> RepoManager_Ptr;
