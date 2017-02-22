@@ -98,7 +98,6 @@ namespace ZmartRecipients
       out.dwnldProgressStart(uri);
     }
 
-    //! \todo return false on SIGINT
     virtual bool progress(int value, const Url & uri, double drate_avg, double drate_now)
     {
       // don't report more often than 1 second
@@ -106,7 +105,7 @@ namespace ZmartRecipients
       if (now > _last_reported)
         _last_reported = now;
       else
-        return true;
+        return !Zypper::instance()->exitRequested();
 
       Zypper & zypper = *(Zypper::instance());
 

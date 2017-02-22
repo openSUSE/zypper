@@ -275,7 +275,7 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
       Zypper::instance()->out().progress(
           str::numstring(data.numericId()),
           data.name(), data.val());
-    return true;
+    return !Zypper::instance()->exitRequested();
   }
 
 //   virtual Action problem( Repository /*repo*/, Error error, const std::string & description )
@@ -307,7 +307,7 @@ struct RepoReportReceiver  : public callback::ReceiveReport<repo::RepoReport>
   {
     Zypper::instance()->out()
       .progress("repo", "(" + _repo.name() + ") " + pd.name(), pd.val());
-    return true;
+    return !Zypper::instance()->exitRequested();
   }
 
   virtual Action problem( Repository /*repo*/, Error error, const std::string & description )

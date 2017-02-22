@@ -322,7 +322,7 @@ Zypper::Zypper()
 , _refreshCode( ZYPPER_EXIT_OK )
 , _running_shell( false )
 , _running_help( false )
-, _exit_requested( false )
+, _exit_requested( 0 )
 , _sh_argc( 0 )
 , _sh_argv( NULL )
 {
@@ -344,8 +344,10 @@ Zypper::Ptr & Zypper::instance()
   if ( !_instance )
     _instance.reset( new Zypper() );
   else
-    XXX << "Got an existing instance." << endl;
-
+  {
+    // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
+    _instance->immediateExitCheck();
+  }
   return _instance;
 }
 
@@ -377,7 +379,7 @@ int Zypper::main( int argc, char ** argv )
 	  break;
 
 	case ZypperCommand::NONE_e:
-	  setExitCode( ZYPPER_EXIT_ERR_SYNTAX  );
+	  setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
 	  break;
 
 	default:
@@ -422,6 +424,9 @@ int Zypper::main( int argc, char ** argv )
 
 Out & Zypper::out()
 {
+  // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
+  immediateExitCheck();
+
   if ( _out_ptr )
     return *_out_ptr;
 

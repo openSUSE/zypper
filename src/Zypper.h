@@ -244,8 +244,21 @@ public:
 
   bool runningShell() const			{ return _running_shell; }
   bool runningHelp() const			{ return _running_help; }
-  bool exitRequested() const			{ return _exit_requested; }
-  void requestExit( bool do_exit = true )	{ _exit_requested = do_exit; }
+
+  unsigned exitRequested() const		{ return _exit_requested; }
+  void requestExit( bool do_exit = true )	{ _exit_requested = do_exit ? 1 : 0; }
+  void requestImmediateExit()			{ _exit_requested = 2; }
+
+  /** Pending SigINT? Check at some frequently called place to avoid exiting from within the signal handler. */
+  void immediateExitCheck()
+  { if ( _exit_requested > 1 ) immediateExit(); }
+  /** E.g. from SIGNINT handler (main.cc) */
+  void immediateExit()
+  {
+    WAR << "Immediate Exit requested." << endl;
+    cleanup();
+    exit( runtimeData().entered_commit ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ON_SIGNAL );
+  }
 
   int argc()					{ return _running_shell ? _sh_argc : _argc; }
   char ** argv()				{ return _running_shell ? _sh_argv : _argv; }
@@ -333,7 +346,7 @@ private:
   int   _refreshCode;	// do_init_repos hack!
   bool  _running_shell;
   bool  _running_help;
-  bool  _exit_requested;
+  unsigned  _exit_requested;
 
   RuntimeData _rdata;
 

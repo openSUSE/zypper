@@ -239,7 +239,7 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
   {
     if ( _progress )
       (*_progress)->set( value );
-    return true;
+    return !Zypper::instance()->exitRequested();
   }
 
   virtual Action problem( Resolvable::constPtr resolvable, Error error, const std::string & description )
@@ -310,7 +310,7 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
   {
     if ( _progress )
       (*_progress)->set( value );
-    return true;
+    return !Zypper::instance()->exitRequested();
   }
 
   virtual Action problem( Resolvable::constPtr resolvable, Error error, const std::string & description, RpmLevel /*unused*/ )

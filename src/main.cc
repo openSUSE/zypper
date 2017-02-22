@@ -17,41 +17,40 @@
 #include "output/OutNormal.h"
 #include "utils/messages.h"
 
-
 void signal_handler( int sig )
 {
   Zypper & zypper( *Zypper::instance() );
-  if ( zypper.exitRequested() )
+  if ( zypper.runtimeData().waiting_for_input )
   {
-    /*
-    if (zypper.runningShell())
-    {
-      cout << endl << str::form(
-          _("Use '%s' or enter '%s' to quit the shell."), "Ctrl+D", "quit") << endl;
-      ::rl_reset_after_signal();
-      exit( zypper.runtimeData().entered_commit ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ON_SIGNAL );
-      //! \todo improve to drop to shell only
-    }
-    else*/
-    {
-      // translators: this will show up if you press ctrl+c twice (but outside of zypper shell)
-      cerr << endl << _("OK OK! Exiting immediately...") << endl;
-      zypper.cleanup();
-      exit( zypper.runtimeData().entered_commit ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ON_SIGNAL );
-    }
+    /// \todo try to get rid of this by improving the ^C handling when prompting
+    zypper.immediateExit();
   }
-  else if ( zypper.runtimeData().waiting_for_input )
+  else if ( zypper.exitRequested() > 1 )
   {
-    zypper.cleanup();
-    exit( zypper.runtimeData().entered_commit ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ON_SIGNAL );
+    // translators: this will show up if you press ctrl+c twice
+    cerr << endl << _("OK OK! Exiting immediately...") << endl;
+    WAR << "Immediate Exit requested." << endl;
+    zypper.immediateExit();
+  }
+  else if ( zypper.exitRequested() == 1 )
+  {
+    // translators: this will show up if you press ctrl+c twice
+    cerr << endl << _("Trying to exit gracefully...") << endl;
+    WAR << "Trying to exit gracefully..." << endl;
+    zypper.requestImmediateExit();
   }
   else
   {
-    //! \todo cerr << endl << _("Trying to exit gracefully...") << endl;
     zypper.requestExit();
   }
 }
 
+void signal_nopipe( int sig )
+{
+  WAR << "Exiting on SIGPIPE..." << endl;
+  Zypper & zypper( *Zypper::instance() );
+  zypper.requestImmediateExit();
+}
 
 int main( int argc, char **argv )
 {
@@ -77,10 +76,14 @@ int main( int argc, char **argv )
 
   OutNormal out( Out::QUIET );
 
+
   if ( ::signal( SIGINT, signal_handler ) == SIG_ERR )
     out.error("Failed to set SIGINT handler.");
   if ( ::signal (SIGTERM, signal_handler ) == SIG_ERR )
     out.error("Failed to set SIGTERM handler.");
+
+  if ( ::signal( SIGPIPE, signal_nopipe ) == SIG_ERR )
+    out.error("Failed to set SIGPIPE handler.");
 
   try
   {
