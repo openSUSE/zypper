@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 23 01:14:11 CET 2017 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Feb 14 13:10:55 CET 2017 - ma@suse.de
 
 - Fix invalid xml in gpg key info output(bsc#1024909)
