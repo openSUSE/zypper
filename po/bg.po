@@ -9,88 +9,85 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-16 18:27+0100\n"
-"PO-Revision-Date: 2005-08-18 21:16+0300\n"
-"Last-Translator: Borislav Mitev <morbid_viper@tkzs.org>\n"
-"Language-Team: Bulgarian <bg@li.org>\n"
+"PO-Revision-Date: 2017-02-23 21:17+0000\n"
+"Last-Translator: Shyukri Shyukriev <shshyukriev@suse.com>\n"
+"Language-Team: Bulgarian "
+"<https://l10n.opensuse.org/projects/zypper/master/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:55
-#, fuzzy
 msgid "Repository:"
-msgstr "Хостът %s не бе открит."
+msgstr "Хранилище:"
 
 #: src/callbacks/keyring.h:57
-#, fuzzy
 msgid "Key Name:"
-msgstr "Име"
+msgstr "Име на ключ:"
 
 #: src/callbacks/keyring.h:58
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Отпечатък на ключ"
 
 #: src/callbacks/keyring.h:59
-#, fuzzy
 msgid "Key Created:"
-msgstr "Име"
+msgstr "Ключ създаден на:"
 
 #: src/callbacks/keyring.h:60
-#, fuzzy
 msgid "Key Expires:"
-msgstr "Име"
+msgstr "Ключ валиден до:"
 
 #: src/callbacks/keyring.h:61
-#, fuzzy
 msgid "Rpm Name:"
-msgstr "Име"
+msgstr "Име на пакет:"
 
 #: src/callbacks/keyring.h:87
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr ""
+msgstr "Криптографичният ключ '%1%' е изтекъл."
 
 #: src/callbacks/keyring.h:93
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
+msgstr[0] "Криптографичният ключ '%1%' ще изтече след %2% дни."
 msgstr[1] ""
 
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr ""
+msgstr "Приемане на неподписан файл %s."
 
 #: src/callbacks/keyring.h:120
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Грешка при четенето на сектор %u."
+msgstr "Приемане на неподписан файл %s от хранилище %s."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:131
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr ""
+msgstr "%s файлът е неподписан. Да продължа ли?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:135
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr ""
+msgstr "%s Файлът от %s хранилище е неподписан. Да продължа ли?"
 
 #: src/callbacks/keyring.h:158
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr ""
+msgstr "Приетият %s файл е подписан с непознат %s ключ."
 
 #: src/callbacks/keyring.h:162
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr ""
+msgstr "Приетият файл %s от хранилище %s е подписан с непознат ключ %s."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:172
