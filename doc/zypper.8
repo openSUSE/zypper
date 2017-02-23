@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 02/17/2017
+.\"      Date: 02/23/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "02/17/2017" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "02/23/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -163,7 +163,12 @@ Focuses on packages a user might want to install and hide away supporting packag
 Throughout this manual we will often refer to resolvables simply as \fIpackages\fR and to resolvable types as \fIpackage type\fR or \fIkind\fR\&. These type names can be used as arguments of \fB\-\-type\fR option in several commands like \fBinstall\fR, \fBinfo\fR, or \fBsearch\fR\&. Commands should also allow to specify resolvables as \fIKIND\fR\fB:\fR\fINAME\fR (e\&.g\&. \fBpatch:openSUSE\-2014\-7\fR)\&.
 .SS "Package Dependencies"
 .sp
-Software packages depend on each other in various ways\&. Packages usually \fIrequire\fR or \fIrecommend\fR other packages, but they can also \fIconflict\fR with other packages\&. Packages can also support specific hardware or language settings\&. Zypper uses a \fIdependency solver\fR to find out what packages need to be installed to satisfy the user\(cqs request\&. See http://old\-en\&.opensuse\&.org/Software_Management/Dependencies for more information\&.
+Software packages depend on each other in various ways\&. Packages usually \fIrequire\fR or \fIrecommend\fR other packages, but they can also \fIconflict\fR with other packages\&. Packages may also support specific hardware or language settings\&. Zypper uses a \fIdependency solver\fR to find out what packages need to be installed to satisfy the user\(cqs request\&. See http://old\-en\&.opensuse\&.org/Software_Management/Dependencies for more information\&.
+.SS "Automatically installed packages"
+.sp
+Packages added by the dependency solver in order to resolve a user\(cqs request, are marked as having been \fIautomatically installed\fR\&. They may later be removed, if no more manually installed packages depend on them (e\&.g\&. by \fBzypper remove \-\-clean\-deps\fR)\&.
+.sp
+In the \fBS\fRtatus column the \fBsearch\fR command distinguishes between manually installed packages (\fBI\fR) and automatically installed packages (\fBi\fR)\&.
 .SS "Package File Conflicts"
 .sp
 File conflicts happen when two packages attempt to install files with the same name but different contents\&. This may happen if you are installing a newer version of a package without erasing the older version, of if two unrelated packages each install a file with the same name\&.
@@ -1314,11 +1319,18 @@ tab(:);
 lt lt
 lt lt
 lt lt
+lt lt
 lt lt.
+T{
+\fBI\fR
+T}:T{
+installed manually (by user request)
+T}
 T{
 \fBi\fR
 T}:T{
-installed
+installed automatically (by the resolver, see section
+\fBAutomatically installed packages\fR)
 T}
 T{
 \fBv\fR
@@ -1328,12 +1340,12 @@ T}
 T{
 \fIempty\fR
 T}:T{
-neither of the former cases
+neither of the above cases
 T}
 T{
 \&.\fBl\fR
 T}:T{
-appended to the above status tags if the item is locked (see section
+is appended to the above status tags if the item is locked (see section
 \fBPackage Locks Management\fR)
 T}
 .TE
