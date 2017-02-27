@@ -2283,27 +2283,6 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = list_updates_options;
-#if 0
-    _command_help = ( CommandHelpFormater()
-      // legacy help text
-      << _(
-      "list-patches (lp) [options]\n"
-      "\n"
-      "List all available needed patches.\n"
-      "\n"
-      "  Command options:\n"
-      "-b, --bugzilla[=#]         List needed patches for Bugzilla issues.\n"
-      "    --cve[=#]              List needed patches for CVE issues.\n"
-      "    --issues[=string]      Look for issues matching the specified string.\n"
-      "-a, --all                  List all patches, not only the needed ones.\n"
-      "-g  --category <category>  List only patches with this category.\n"
-      "    --severity <severity>  List only patches with this severity.\n"
-      "-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
-      "    --date <YYYY-MM-DD>    List only patches issued up to, but not including, the specified date\n"
-      ) )
-      .option_WITHout_OPTIONAL
-      ;
-#endif
     _command_help = CommandHelpFormater()
     .synopsis(	// translators: command synopsis; do not translate lowercase words
     _("list-patches (lp) [OPTIONS]")
