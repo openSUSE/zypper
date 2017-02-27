@@ -2550,7 +2550,7 @@ msgstr "Um serviço chamado '%s' já existe. Escolha outro apelido."
 
 #: src/repos.cc:2628
 #, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "Erro ao adicionar o serviço '%s'."
 
 #: src/repos.cc:2634

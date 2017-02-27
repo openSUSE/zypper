@@ -2366,7 +2366,7 @@ msgstr "服務別名 '%s' 已存在。請使用其他的別名。"
 
 #: src/repos.cc:2628
 #, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "加入服務 '%s' 發生錯誤。"
 
 #: src/repos.cc:2634

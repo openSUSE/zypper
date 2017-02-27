@@ -2541,7 +2541,7 @@ msgstr ""
 #  progress stages
 #: src/repos.cc:2628
 #, fuzzy, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "&Instaliraj pakete"
 
 #: src/repos.cc:2634

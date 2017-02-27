@@ -2572,7 +2572,7 @@ msgstr "Ilyen nevű ('%s') szolgáltatás már létezik. Adjon egy másik álnev
 
 #: src/repos.cc:2628
 #, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "Hiba a(z) '%s' szolgáltatás hozzáadása közben."
 
 #: src/repos.cc:2634

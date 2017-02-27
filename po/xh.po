@@ -2477,7 +2477,7 @@ msgstr ""
 
 #: src/repos.cc:2628
 #, fuzzy, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "Icandelo lokufunda imposiso %u."
 
 #: src/repos.cc:2634

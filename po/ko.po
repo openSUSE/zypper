@@ -2417,7 +2417,7 @@ msgstr "별칭이 '%s'인 서비스가 이미 있습니다. 다른 별칭을 사
 #  progress stages
 #: src/repos.cc:2628
 #, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "'%s' 서비스를 추가하는 중 오류가 발생했습니다."
 
 #: src/repos.cc:2634

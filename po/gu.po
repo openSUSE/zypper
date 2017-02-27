@@ -2489,7 +2489,7 @@ msgstr "આ નામનું પ્લેલિસ્ટ તો છે જ. �
 
 #: src/repos.cc:2628
 #, fuzzy, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "%u સેકટર વાંચતી વખતે ભૂલ."
 
 #: src/repos.cc:2634

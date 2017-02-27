@@ -2392,7 +2392,7 @@ msgstr "มีชื่อเรียกอื่น '%s' ของบริก
 
 #: src/repos.cc:2628
 #, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "เกิดข้อผิดพลาดระหว่างทำการเพิ่มบริการ '%s'"
 
 #: src/repos.cc:2634

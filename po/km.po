@@ -2373,7 +2373,7 @@ msgstr "មាន​សេវា​ដែល​​មាន​ឈ្មោះ​
 
 #: src/repos.cc:2628
 #, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "កំហុស​បានកើត​ឡើង​ខណៈពេល​បន្ថែម​សេវា '%s' ។"
 
 #: src/repos.cc:2634

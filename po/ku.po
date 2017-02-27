@@ -2457,7 +2457,7 @@ msgstr ""
 
 #: src/repos.cc:2628
 #, fuzzy, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "Demê xwendina rojnivîskê de çewtî çêbû."
 
 #: src/repos.cc:2634

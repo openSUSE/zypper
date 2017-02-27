@@ -2457,7 +2457,7 @@ msgstr ""
 
 #: src/repos.cc:2628
 #, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "サービス '%s' を追加する際にエラーが発生しました。"
 
 #: src/repos.cc:2634

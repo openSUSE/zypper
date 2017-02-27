@@ -2525,7 +2525,7 @@ msgstr "Tjänsten med alias %s finns redan. Använd ett annat alias."
 
 #: src/repos.cc:2628
 #, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "Ett fel uppstod när tjänsten %s lades till."
 
 #: src/repos.cc:2634

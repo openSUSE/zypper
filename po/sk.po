@@ -2611,7 +2611,7 @@ msgstr "Alias služby '%s' už existuje. Prosím, použite iný alias."
 
 #: src/repos.cc:2628
 #, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "Pri pridávané služby '%s' nastala chyba."
 
 #: src/repos.cc:2634

@@ -2471,7 +2471,7 @@ msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨਾਂ '%s' ਪਹਿਲਾਂ ਹੀ ਮ
 
 #: src/repos.cc:2628
 #, fuzzy, c-format, boost-format
-msgid "Error occured while adding service '%s'."
+msgid "Error occurred while adding service '%s'."
 msgstr "ਸੈਕਟਰ %u ਪੜ੍ਹਨ ਦੌਰਾਨ ਗਲਤੀ ਹੈ।"
 
 #: src/repos.cc:2634
