@@ -5048,7 +5048,7 @@ msgstr ""
 
 #: src/solve-commit.cc:855
 #, fuzzy
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ।"
 
 #: src/solve-commit.cc:863

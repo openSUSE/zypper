@@ -5388,7 +5388,7 @@ msgstr ""
 "－ 使用其它软件源"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "安装/移除以下软件包期间或之后发生问题："
 
 #: src/solve-commit.cc:863

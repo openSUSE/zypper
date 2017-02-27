@@ -5741,7 +5741,7 @@ msgstr ""
 "- utilizați altă sursă de instalare"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "A apărut o problemă în timpul sau după instalarea sau îndepărtarea de "
 "pachete:"

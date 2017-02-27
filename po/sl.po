@@ -5069,7 +5069,7 @@ msgstr ""
 
 #: src/solve-commit.cc:855
 #, fuzzy
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Med namestitvijo je prišlo do napake."
 
 #: src/solve-commit.cc:863

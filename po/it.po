@@ -5966,7 +5966,7 @@ msgstr ""
 "- utilizzare un altro repository"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Si è verificato un problema durante o dopo l'installazione o la rimozione "
 "dei pacchetti:"

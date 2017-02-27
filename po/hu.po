@@ -5936,7 +5936,7 @@ msgstr ""
 " - használjon másik telepítési forrást"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "A telepítés során hiba történt:"
 
 #: src/solve-commit.cc:863

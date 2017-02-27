@@ -5805,7 +5805,7 @@ msgstr ""
 "- naudokite kitą saugyklą"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Diegimo metu ar po jo, arba šalinant paketus, kilo nesklandumų:"
 
 #: src/solve-commit.cc:863

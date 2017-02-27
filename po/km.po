@@ -5352,7 +5352,7 @@ msgstr ""
 "- ប្រើ​ឃ្លាំង​ផ្សេង"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "មាន​បញ្ហា​កើតឡើង​នៅពេល ឬ​បន្ទាប់​ដំឡើង ឬ​ការ​យក​កញ្ចប់​ចេញ ៖"
 
 #: src/solve-commit.cc:863

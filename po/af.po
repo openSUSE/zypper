@@ -5021,7 +5021,7 @@ msgstr ""
 
 #: src/solve-commit.cc:855
 #, fuzzy
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "’n Fout het  tydens die installasie voorgekom."
 
 #: src/solve-commit.cc:863

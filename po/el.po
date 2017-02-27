@@ -5658,7 +5658,7 @@ msgstr ""
 "- χρησιμοποιήστε άλλο αποθετήριο"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Παρουσιάστηκε πρόβλημα κατά ή μετά την εγκατάσταση ή την αφαίρεση των "
 "πακέτων:"
