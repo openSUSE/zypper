@@ -5676,7 +5676,7 @@ msgstr ""
 "- 他のリポジトリを使用する"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "インストールまたは削除の際、もしくはそれぞれの作業の後に問題が発生しました:"
 

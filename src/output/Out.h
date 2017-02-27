@@ -59,7 +59,7 @@ namespace out
     bool	_singleline;	///< one list element per line
     bool	_wrapline;	///< fold lines longer than \c _linewidth
     bool	_gaped;		///< add extra NL before element (if singleline)
-    unsigned	_indent;	///< ammount of indent
+    unsigned	_indent;	///< amount of indent
   };
 
   namespace detail
@@ -284,7 +284,7 @@ namespace out
   };
 
 
-  /** Write formated container to stream */
+  /** Write formatted container to stream */
   template <class TContainer, class TFormater, class TLayout = typename TFormater::NormalLayout>
   void writeContainer( std::ostream & str_r, const TContainer & container_r, const TFormater & formater_r, const TLayout & layout_r = TLayout() )
   {
@@ -294,7 +294,7 @@ namespace out
       writer << el;
   }
 
-  /** Write XML formated container to stream */
+  /** Write XML formatted container to stream */
   template <class TContainer, class TFormater>
   void xmlWriteContainer( std::ostream & str_r, const TContainer & container_r, const TFormater & formater_r )
   { writeContainer( str_r, container_r, out::XmlFormaterAdaptor<TFormater>(formater_r) ); }
@@ -331,7 +331,7 @@ struct TermLine
   std::string get() const
   { return std::string(lhs) + std::string(rhs); }
 
-  /** Return line optionally formated according to \a width_r and \a flags_r.
+  /** Return line optionally formatted according to \a width_r and \a flags_r.
    * If \a width_r or \a flags_r is zero a plain line made of lhs + rhs is returned.
    */
   std::string get( unsigned width_r, SplitFlags flags_r, char exp_r ) const;
@@ -486,7 +486,7 @@ public:
   };
 
 private:
-  /** Write container creating a TitleNode with \c size="nnn" attribue and
+  /** Write container creating a TitleNode with \c size="nnn" attribute and
    * replacing optional \c %1% in \a title_r with size. */
   template <class TContainer, class TFormater>
   void container( const std::string & nodeName_r, const std::string & title_r,
@@ -506,14 +506,14 @@ private:
   }
 
 public:
-  /** Write list from container creating a TitleNode with \c size="nnn" attribue and
+  /** Write list from container creating a TitleNode with \c size="nnn" attribute and
    * replacing optional \c %1% in \a title_r with size. */
   template <class TContainer, class TFormater = out::ListFormater>
   void list( const std::string & nodeName_r, const std::string & title_r,
 	     const TContainer & container_r, const TFormater & formater_r = TFormater() )
   { container( nodeName_r, title_r, container_r, formater_r ); }
 
-  /** Write table from container creating a TitleNode with \c size="nnn" attribue and
+  /** Write table from container creating a TitleNode with \c size="nnn" attribute and
    * replacing optional \c %1% in \a title_r with size. */
   template <class TContainer, class TFormater = out::TableFormater>
   void table( const std::string & nodeName_r, const std::string & title_r,
@@ -619,14 +619,14 @@ public:
    *
    * An error message should be shown regardless of the verbosity level.
    *
-   * \param problem_desc Problem description (what happend)
+   * \param problem_desc Problem description (what happened)
    * \param hint         Hint for the user (what to do, or explanation)
    */
   virtual void error(const std::string & problem_desc, const std::string & hint = "") = 0;
 
   /**
    * Prints the problem description caused by an exception, its cause and,
-   * optionaly, a hint for the user.
+   * optionally, a hint for the user.
    *
    * \param e Exception which caused the problem.
    * \param Problem description for the user.
@@ -808,7 +808,7 @@ public:
     return ret;
   }
 
-  /** Width for formated output [0==unlimited]. */
+  /** Width for formatted output [0==unlimited]. */
   virtual unsigned termwidth() const { return out::termwidthUnlimited; }
 
 protected:

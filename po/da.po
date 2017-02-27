@@ -5591,7 +5591,7 @@ msgstr ""
 "- brug en anden softwarekilde"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Der opstod en problem under eller efter installation eller fjernelse af "
 "pakker:"

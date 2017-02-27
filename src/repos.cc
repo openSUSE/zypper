@@ -277,7 +277,7 @@ static bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool f
                 WAR << "new item in enum, which is not covered" << endl;
               }
             }
-            break; // don't check all the urls, just the first successfull.
+            break; // don't check all the urls, just the first successful.
           }
           catch ( const Exception & e )
           {
@@ -464,7 +464,7 @@ static bool build_cache( Zypper & zypper, const RepoInfo & repo, bool force_buil
   {
     ZYPP_CAUGHT( e );
     zypper.out().error( e, str::Format(_("Repository metadata for '%s' not found in local cache.")) % repo.asUserString() );
-    // this should not happend and is probably a bug, rethrowing
+    // this should not happened and is probably a bug, rethrowing
     ZYPP_RETHROW( e );
   }
   catch ( const Exception & e )
@@ -712,7 +712,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
 {
   // load gpg keys & get target info
   // the target must be known before refreshing services so that repo manager
-  // can ignore repos targetted for other systems
+  // can ignore repos targeted for other systems
   init_target( zypper );
 
   if ( geteuid() == 0 && !zypper.globalOpts().no_refresh )
@@ -2625,7 +2625,7 @@ void add_service( Zypper & zypper, const ServiceInfo & service )
   catch ( const Exception & e )
   {
     ZYPP_CAUGHT( e );
-    zypper.out().error( str::Format(_("Error occured while adding service '%s'.")) % service.alias() );
+    zypper.out().error( str::Format(_("Error occurred while adding service '%s'.")) % service.alias() );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
     return;
   }

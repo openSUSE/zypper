@@ -6002,7 +6002,7 @@ msgstr ""
 
 # TLABEL linuxrc_2002_03_29_0036__95
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Un problème s'est produit pendant ou après l'installation ou la suppression "
 "des paquets :"

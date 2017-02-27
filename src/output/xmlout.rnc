@@ -1,4 +1,4 @@
-# !! still WORK IN PROGRESS (untill 11.1 freeze) !!
+# !! still WORK IN PROGRESS (until 11.1 freeze) !!
 # namespace zypper
 
 start = stream-element

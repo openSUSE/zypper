@@ -5862,7 +5862,7 @@ msgstr ""
 "- скористайтесь іншим сховищем"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Під час або після встановлення або вилучення пакунків сталася помилка:"
 
 #: src/solve-commit.cc:863

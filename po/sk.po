@@ -5835,7 +5835,7 @@ msgstr ""
 "- použite iný repozitár"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Počas alebo po inštalácii alebo odstraňovaní balíkov nastala chyba:"
 
 #: src/solve-commit.cc:863

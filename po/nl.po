@@ -5928,7 +5928,7 @@ msgstr ""
 " - gebruik een andere installatiebron"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Er is een fout opgetreden tijdens of na de installatie of verwijdering van "
 "pakketten:"

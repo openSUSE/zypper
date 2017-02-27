@@ -27,7 +27,7 @@ class Zypper;
       "--all-matches        Download all versions matching the commandline\n"
       "                     arguments. Otherwise only the best version of\n"
       "                     each matching package is downloaded.\n"
-      "--dry-run            Don't download any package, just report waht\n"
+      "--dry-run            Don't download any package, just report what\n"
       "                     would be done.\n"
 */
 

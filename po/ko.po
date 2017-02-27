@@ -5570,7 +5570,7 @@ msgstr ""
 "- 다른 리포지토리 사용"
 
 #: src/solve-commit.cc:855
-msgid "Problem occured during or after installation or removal of packages:"
+msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "패키지 설치 중이나 패키지 설치 또는 제거 후 문제 발생:"
 
 #: src/solve-commit.cc:863
