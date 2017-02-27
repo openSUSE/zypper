@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-02-27 12:16+0000\n"
+"PO-Revision-Date: 2017-02-28 14:00+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -530,7 +530,7 @@ msgstr "Beschrijving"
 
 #: src/info.cc:110
 msgid "automatically"
-msgstr ""
+msgstr "automatisch"
 
 #: src/info.cc:182
 #, boost-format
