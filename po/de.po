@@ -21,10 +21,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-02-27 12:47+0000\n"
+"PO-Revision-Date: 2017-03-02 21:44+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -537,7 +537,7 @@ msgstr "Beschreibung"
 
 #: src/info.cc:110
 msgid "automatically"
-msgstr ""
+msgstr "automatisch"
 
 #: src/info.cc:182
 #, boost-format
