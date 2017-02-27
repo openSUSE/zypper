@@ -133,7 +133,7 @@ private:
   container _columns;
   container _details;
   ColorContext _ctxt;
-  ZeroInit<int>_nsidx;	///< numerial sort index, e.g. if string values don't work due to coloring
+  ZeroInit<int>_nsidx;	///< numerical sort index, e.g. if string values don't work due to coloring
   friend class Table;
 };
 
@@ -153,7 +153,7 @@ public:
   TableHeader (unsigned c = 0): TableRow (c) {}
 };
 
-/** \relates TableHeader  Add colummn. */
+/** \relates TableHeader  Add column. */
 template<class Tp_>
 TableHeader & operator<<( TableHeader & th, Tp_ && val )
 { static_cast<TableRow&>(th) << std::forward<Tp_>(val); return th; }
@@ -182,7 +182,7 @@ public:
 
   /** Unsorted - pseudo sort column indicating not to sort. */
   static constexpr unsigned Unsorted		= unsigned(-1);
-  /** Nsidx - pseudo sort column using the numberical sort index. */
+  /** Nsidx - pseudo sort column using the numerical sort index. */
   static constexpr unsigned Nsidx		= unsigned(-2);
 
   /** Get the default sort column or \ref Unsorted (default) */
@@ -215,7 +215,7 @@ public:
 
   Table();
 
-  // poor workaroud missing column styles and table entry objects
+  // poor workaround missing column styles and table entry objects
   void setEditionStyle( unsigned column )
   { _editionStyle.insert( column ); }
 
@@ -271,7 +271,7 @@ namespace table
   };
 
   // NOTE: Overloading TableHeader operator<< which uses a universal-reference
-  // requires excact matches for the EditionStyleSetter arg! Missing overloads
+  // requires exact matches for the EditionStyleSetter arg! Missing overloads
   // result in compiler complaining about missing EditionStyleSetter::asString.
 
   /** \relates table::EditionStyleSetter */
@@ -300,7 +300,7 @@ inline std::ostream & operator<<( std::ostream & stream, const Table & table )
 
 ///////////////////////////////////////////////////////////////////
 /// \class PropertyTable
-/// \brief Alligned key/value with multiline support
+/// \brief Aligned key/value with multiline support
 /// Key       : value 1
 /// LongKey   : value 2
 /// Multiline :
@@ -392,7 +392,7 @@ public:
   {
     if ( cond_r )
     {
-      // FIXME re-coloring like this works ony once
+      // FIXME re-coloring like this works only once
       std::string & lastval( _table.rows().back().columns().back() );
       lastval = ColorString( lastval, color_r ).str();
     }

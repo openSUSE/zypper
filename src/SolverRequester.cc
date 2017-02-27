@@ -758,7 +758,7 @@ void SolverRequester::setToInstall( const PoolItem & pi )
     // This will enable the solver to report the lock conflict, while
     // selecting the item will silently remove the lock.
     // Basically the right way but zypp solver job API needs polishing
-    // as ther are better jobs than 'addRequire'.
+    // as there are better jobs than 'addRequire'.
     sat::Solvable solv( pi.satSolvable() );
     Capability cap( solv.arch(), solv.name(), Rel::EQ, solv.edition(), solv.kind() );
     getZYpp()->resolver()->addRequire( cap );
@@ -785,7 +785,7 @@ void SolverRequester::setToRemove( const PoolItem & pi )
     // This will enable the solver to report the lock conflict, while
     // selecting the item will silently remove the lock.
     // Basically the right way but zypp solver job API needs polishing
-    // as ther are better jobs than 'addRequire'.
+    // as there are better jobs than 'addRequire'.
     sat::Solvable solv( pi.satSolvable() );
     Capability cap( solv.arch(), solv.name(), Rel::EQ, solv.edition(), solv.kind() );
     getZYpp()->resolver()->addConflict( cap );

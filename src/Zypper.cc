@@ -2784,7 +2784,7 @@ void Zypper::processCommandOptions()
     {
       {"type", required_argument, 0, 't'},
       {"repo", required_argument, 0, 'r'},
-      // rug compatiblity (although rug does not seem to support this)
+      // rug compatibility (although rug does not seem to support this)
       {"catalog", required_argument, 0, 'c'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -2811,7 +2811,7 @@ void Zypper::processCommandOptions()
     {
       {"type", required_argument, 0, 't'},
       {"repo", required_argument, 0, 'r'},
-      // rug compatiblity (although rug does not seem to support this)
+      // rug compatibility (although rug does not seem to support this)
       {"catalog", required_argument, 0, 'c'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
