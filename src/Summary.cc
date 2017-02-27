@@ -285,7 +285,7 @@ void Summary::readPool( const ResPool & pool )
   // compare available updates with the list of packages to be upgraded
   //
   // note: operator[] (kindToResPairSet[kind]) actually creates ResPairSet when
-  //       used. This avoids bnc #594282 which occured when there was
+  //       used. This avoids bnc #594282 which occurred when there was
   //       for_(it, _toupgrade.begin(), _toupgrade.end()) loop used here and there
   //       were no upgrades for that kind.
   for_( kit, kinds.begin(), kinds.end() )

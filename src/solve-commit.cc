@@ -852,7 +852,7 @@ void solve_and_commit ( Zypper & zypper )
         {
           ZYPP_CAUGHT( e );
           zypper.out().error( e,
-              _("Problem occured during or after installation or removal of packages:"),
+              _("Problem occurred during or after installation or removal of packages:"),
               _("Please see the above error message for a hint.") );
           zypper.setExitCode( ZYPPER_EXIT_ERR_COMMIT );
           return;

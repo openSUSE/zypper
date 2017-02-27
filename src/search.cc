@@ -689,7 +689,7 @@ void list_what_provides( Zypper & zypper, const std::string & str )
   for_( nameit, res.begin(), res.end() )
   {
     const ui::Selectable::Ptr sel( ui::Selectable::get( nameit->first ) );
-    // replace installed by identical availabe if exists
+    // replace installed by identical available if exists
     std::set<PoolItem> piset;
     for_( solvit, nameit->second.begin(), nameit->second.end() )
     {
