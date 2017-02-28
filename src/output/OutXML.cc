@@ -187,7 +187,7 @@ void OutXML::searchResult( const Table & table_r )
 	cout << ' ' << (cidx < header.size() ? header[cidx] : "?" ) << "=\"";
 	if ( cidx == 0 )
 	{
-	  if ( (*cit)[0] == 'i' )	// test 1st char as locked is "iL"
+	  if ( (*cit)[0] == 'i' || (*cit)[0] == 'I' )	// test 1st char as locked is "iL"/"IL"
 	    cout << "installed\"";
 	  else if ( (*cit)[0] == 'v' )	// test 1st char as locked is "vL"
 	    cout << "other-version\"";
