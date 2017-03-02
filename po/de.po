@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-03-02 21:44+0000\n"
+"PO-Revision-Date: 2017-03-02 21:46+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -6662,7 +6662,7 @@ msgstr "Wert für <Plattform> kann nicht geschätzt werden."
 
 #: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
-msgstr "obs://<Projekt>/<Plattform> verwenden"
+msgstr "Bitte obs://<Projekt>/<Plattform> verwenden"
 
 #: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
@@ -6679,12 +6679,11 @@ msgstr "Das korrekte Format ist: obs://<Projekt>/[Plattform]"
 
 #: src/utils/misc.cc:558
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr ""
-"Problem beim Kopieren der angegebenen RPM-Datei zum Cache-Ververzeichnis."
+msgstr "Problem beim Kopieren der angegebenen RPM-Datei zum Cache-Verzeichnis."
 
 #: src/utils/misc.cc:559
 msgid "Perhaps you are running out of disk space."
-msgstr "Möglicherweise reicht Ihr Speicherplatz nicht aus."
+msgstr "Möglicherweise reicht Ihr Festplattenplatz nicht aus."
 
 #: src/utils/misc.cc:567
 msgid "Problem retrieving the specified RPM file"
