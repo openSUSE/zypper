@@ -33,7 +33,7 @@ my @zopt;
 my @zopt2;
 foreach(@options) {
 	shift @ARGV;
-	if($_ eq "-s" || $_ eq "--simulate") {push @zopt2, "--dry-run"}
+	if($_ eq "-s" || $_ eq "--simulate") {push @zopt2, "--dry-run -y"}
 	if($_ eq "-d" || $_ eq "--download-only") {push @zopt2, "--download-only"}
 	if($_ eq "-y" || $_ eq "--assume-yes") {push @zopt, "--non-interactive"}
 	if($_ eq "-q" || $_ eq "--quiet") {push @zopt, "--quiet"}
