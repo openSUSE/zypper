@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-03-02 21:46+0000\n"
+"PO-Revision-Date: 2017-03-08 10:16+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -158,19 +158,19 @@ msgstr "a/t"
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:235
 msgid "Don't trust the key."
-msgstr "Den Schlüssel abweisen. (a)"
+msgstr "Den Schlüssel abweisen."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:237
 msgid "Trust the key temporarily."
-msgstr "Dem Schlüssel temporär vertrauen. (t)"
+msgstr "Dem Schlüssel temporär vertrauen."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:240
 msgid "Trust the key and import it into trusted keyring."
 msgstr ""
 "Dem Schlüssel immer vertrauen und in den vertrauenswürdigen Schlüsselbund "
-"importieren. (i)"
+"importieren."
 
 #: src/callbacks/keyring.h:276
 #, c-format, boost-format
