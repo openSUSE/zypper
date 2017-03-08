@@ -1763,15 +1763,7 @@ https://github.com/openSUSE/zypper
 
 AUTHORS
 -------
-....................
-Martin Vidner <mvidner@suse.cz>
-Jan Kupec <>
-Michael Andres <ma@suse.de>
-Duncan Mac-Vicar <dmacvicar@suse.de>
-Josef Reidinger <jreidinger@suse.cz>
-Stanislav Visnovsky <visnov@suse.cz>
-....................
-
+The zypper project was started by Martin Vidner, Jan Kupec, Michael Andres, Duncan Mac-Vicar Prett, Josef Reidinger and Stanislav Visnovsky. Many people have later contributed to it.
 
 SEE ALSO
 --------
