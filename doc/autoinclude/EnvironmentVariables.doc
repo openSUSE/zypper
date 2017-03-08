@@ -30,6 +30,7 @@
 \li \c LIBSOLV_DEBUGMASK=<INT> Pass value to libsolv::pool_setdebugmask
 
 \li \c ZYPP_MEDIA_CURL_DEBUG=<1|2> Log http headers, if \c 2 also log server responses.
+\li \c ZYPP_MEDIA_CURL_IPRESOLVE=<4|6> Tell curl to resolve names to IPv4/IPv6 addresses only.
 
 \subsection zypp-envars-mediabackend Selecting the mediabackend to use.
 

@@ -151,6 +151,33 @@ namespace
 }
 
 namespace zypp {
+
+  ///////////////////////////////////////////////////////////////////
+  namespace env
+  {
+    namespace
+    {
+      inline int getZYPP_MEDIA_CURL_IPRESOLVE()
+      {
+	int ret = 0;
+	if ( const char * envp = getenv( "ZYPP_MEDIA_CURL_IPRESOLVE" ) )
+	{
+	  WAR << "env set: $ZYPP_MEDIA_CURL_IPRESOLVE='" << envp << "'" << endl;
+	  if (      strcmp( envp, "4" ) == 0 )	ret = 4;
+	  else if ( strcmp( envp, "6" ) == 0 )	ret = 6;
+	}
+	return ret;
+      }
+    }
+
+    inline int ZYPP_MEDIA_CURL_IPRESOLVE()
+    {
+      static int _v = getZYPP_MEDIA_CURL_IPRESOLVE();
+      return _v;
+    }
+  } // namespace env
+  ///////////////////////////////////////////////////////////////////
+
   namespace media {
 
   namespace {
@@ -670,6 +697,16 @@ void MediaCurl::setupEasy()
   {
       // ...at the system proxy settings
       fillSettingsSystemProxy(_url, _settings);
+  }
+
+  /** Force IPv4/v6 */
+  if ( env::ZYPP_MEDIA_CURL_IPRESOLVE() )
+  {
+    switch ( env::ZYPP_MEDIA_CURL_IPRESOLVE() )
+    {
+      case 4: SET_OPTION(CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4); break;
+      case 6: SET_OPTION(CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V6); break;
+    }
   }
 
  /**
