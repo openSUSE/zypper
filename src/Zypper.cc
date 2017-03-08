@@ -4210,9 +4210,10 @@ void Zypper::doCommand()
   case ZypperCommand::SEARCH_e:
   case ZypperCommand::RUG_PATCH_SEARCH_e:
   {
+    // check args...
     PoolQuery query;
-
     TriBool inst_notinst = indeterminate;
+
     if ( globalOpts().disable_system_resolvables || copts.count("not-installed-only") )
     {
       query.setUninstalledOnly(); // beware: this is not all to it, look at zypper-search, _only_not_installed
@@ -4259,11 +4260,11 @@ void Zypper::doCommand()
       }
     }
 
-    initRepoManager();
-
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
+    // load system data...
+    if ( defaultLoadSystem() != ZYPPER_EXIT_OK )
       return;
+
+    // build query...
 
     // add available repos to query
     if ( cOpts().count("repo") )
@@ -4364,13 +4365,7 @@ void Zypper::doCommand()
       }
     }
 
-    init_target( *this );
-
-    // now load resolvables:
-    load_resolvables( *this );
-    // needed to compute status of PPP
-    resolve( *this );
-
+    // Output query result...
     Table t;
     t.lineStyle( Ascii );
 
