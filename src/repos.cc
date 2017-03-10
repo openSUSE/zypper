@@ -483,6 +483,20 @@ bool match_repo( Zypper & zypper, std::string str, RepoInfo *repo )
 {
   RepoManager & manager( zypper.repoManager() );
 
+  if ( ! zypper.runtimeData().temporary_repos.empty() )
+  {
+    // Quick check for temporary_repos (alias only)
+    for ( auto && ri : zypper.runtimeData().temporary_repos )
+    {
+      if ( ri.alias() == str )
+      {
+	if ( repo )
+	  *repo = ri;
+	return true;
+      }
+    }
+  }
+
   // Quick check for alias/reponumber/name first.
   // Name can be ambiguous, in which case the first match found will be returned
   {
@@ -756,6 +770,10 @@ void do_init_repos( Zypper & zypper, const Container & container )
   // if no repository was specified on the command line, use all known repos
   if ( gData.repos.empty() )
     gData.repos.insert( gData.repos.end(), manager.repoBegin(), manager.repoEnd() );
+
+  // add temp repos (e.g. .rpm as CLI arg)
+  if ( !gData.temporary_repos.empty() )
+    gData.repos.insert( gData.repos.end(), gData.temporary_repos.begin(), gData.temporary_repos.end() );
 
   // additional repositories (--plus-repo)
   if ( !gData.additional_repos.empty() )

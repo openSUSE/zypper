@@ -3981,7 +3981,7 @@ void Zypper::doCommand()
           // download the rpm into the cache
           //! \todo do we want this or a tmp dir? What about the files cached before?
           //! \todo optimize: don't mount the same media multiple times for each rpm
-          Pathname rpmpath = cache_rpm( *it, (_gopts.root_dir != "/" ? _gopts.root_dir : "") + ZYPPER_RPM_CACHE_DIR );
+          Pathname rpmpath = cache_rpm( *it, Pathname::assertprefix( _gopts.root_dir, ZYPPER_RPM_CACHE_DIR ) );
           if ( rpmpath.empty() )
           {
             out().error( str::Format(_("Problem with the RPM file specified as '%s', skipping.")) % *it );
@@ -4024,23 +4024,23 @@ void Zypper::doCommand()
       // add a plaindir repo
       RepoInfo repo;
       repo.setType( repo::RepoType::RPMPLAINDIR );
-      repo.addBaseUrl( Url( "dir://" + (_gopts.root_dir != "/" ? _gopts.root_dir : "") + ZYPPER_RPM_CACHE_DIR ) );
+      repo.addBaseUrl( Pathname::assertprefix( _gopts.root_dir, ZYPPER_RPM_CACHE_DIR ).asDirUrl() );
       repo.setEnabled( true );
       repo.setAutorefresh( true );
       repo.setAlias( TMP_RPM_REPO_ALIAS );
       repo.setName(_("Plain RPM files cache") );
       repo.setKeepPackages( false );
-      // empty packages path would cause unwanted removal of installed rpms
-      // in current working directory (bnc #445504)
-      // OTOH packages path == ZYPPER_RPM_CACHE_DIR (the same as repo URI)
-      // causes cp file thesamefile, which fails silently. This may be worth
-      // fixing in libzypp.
+      // - Empty packages path would cause unwanted removal of installed rpms
+      //   in current working directory (bnc #445504)
+      // - Packages path == ZYPPER_RPM_CACHE_DIR (the same as repo URI) would work, but
+      //   zypp would assume the cached packages signature has already been verified.
+      //   We want zypp to do thisn on commit, so we choose a diofferent directory.
       repo.setPackagesPath( runtimeData().tmpdir );
 
       // shut up zypper
       SCOPED_VERBOSITY( out(), Out::QUIET );
-      add_repo( *this, repo );
       refresh_repo( *this, repo );
+      runtimeData().temporary_repos.push_back( repo );
     }
     // no rpms and no other arguments either
     else if ( _arguments.empty() )
@@ -5300,16 +5300,6 @@ void Zypper::cleanup()
   // remove the additional repositories specified by --plus-repo
   for_( it, _rdata.additional_repos.begin(), _rdata.additional_repos.end() )
     remove_repo( *this, *it );
-
-  // remove tmprpm cache repo
-  for_( it, _rdata.repos.begin(), _rdata.repos.end() )
-    if ( it->alias() == TMP_RPM_REPO_ALIAS )
-    {
-      // shut up zypper
-      SCOPED_VERBOSITY( out(), Out::QUIET );
-      remove_repo( *this, *it );
-      break;
-    }
 
   _rm.reset();	// release any pending appdata trigger now.
 }

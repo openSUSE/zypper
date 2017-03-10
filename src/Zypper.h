@@ -136,6 +136,7 @@ struct RuntimeData
 
   std::list<RepoInfo> repos;
   std::list<RepoInfo> additional_repos;
+  std::list<RepoInfo> temporary_repos;		///< repos not visible to RepoManager/System
   std::set<std::string> additional_content_repos;
   /**
    * Used by requestMedia callback
