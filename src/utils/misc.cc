@@ -529,7 +529,7 @@ bool looks_like_rpm_file( const std::string & s )
 
 // ----------------------------------------------------------------------------
 
-Pathname cache_rpm( const std::string & rpm_uri_str, const std::string & cache_dir )
+Pathname cache_rpm( const std::string & rpm_uri_str, const Pathname & cache_dir )
 {
   Url rpmurl = make_url(rpm_uri_str);
   Pathname rpmpath(rpmurl.getPathName());
@@ -544,10 +544,9 @@ Pathname cache_rpm( const std::string & rpm_uri_str, const std::string & cache_d
 
     mm.provideFile(mid, rpmpath.basename());
     Pathname localrpmpath = mm.localPath(mid, rpmpath.basename());
-    Pathname cachedrpmpath = cache_dir;
-    filesystem::assert_dir(cachedrpmpath);
+    filesystem::assert_dir(cache_dir);
     bool error =
-      filesystem::copy(localrpmpath, cachedrpmpath / localrpmpath.basename());
+      filesystem::copy(localrpmpath, cache_dir / localrpmpath.basename());
 
     mm.release(mid);
     mm.close(mid);
@@ -559,7 +558,7 @@ Pathname cache_rpm( const std::string & rpm_uri_str, const std::string & cache_d
         _("Perhaps you are running out of disk space."));
       return Pathname();
     }
-    return cachedrpmpath / localrpmpath.basename();
+    return cache_dir / localrpmpath.basename();
   }
   catch (const Exception & e)
   {

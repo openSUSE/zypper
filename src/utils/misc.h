@@ -112,7 +112,7 @@ bool looks_like_rpm_file( const std::string & s );
  * \return The local Pathname of the file in the cache on success, empty
  *      Pathname if a problem occurs.
  */
-Pathname cache_rpm( const std::string & rpm_uri_str, const std::string & cache_dir );
+Pathname cache_rpm( const std::string & rpm_uri_str, const Pathname & cache_dir );
 
 std::string & indent( std::string & text, int columns );
 
