@@ -720,18 +720,13 @@ void do_init_repos( Zypper & zypper, const Container & container )
     MIL << "Refreshing autorefresh services." << endl;
 
     const std::list<ServiceInfo> & services( zypper.repoManager().knownServices() );
-    bool called_refresh = false;
     for_( s, services.begin(), services.end() )
     {
       if ( s->enabled() && s->autorefresh() )
       {
         refresh_service(zypper, *s);
-        called_refresh = true;
       }
     }
-    // reinitialize the repo manager to re-read the list of repos
-    if ( called_refresh )
-      zypper.initRepoManager();
   }
 
   MIL << "Going to initialize repositories." << endl;
