@@ -248,23 +248,25 @@ void printInfo( Zypper & zypper, ResKindSet kinds_r )
 
     for_( it, q.selectableBegin(), q.selectableEnd() )
     {
+      const ui::Selectable & sel( *(*it) );
+
       if ( zypper.out().type() != Out::TYPE_XML )
       {
 	// TranslatorExplanation E.g. "Information for package zypper:"
 	std::string info = str::Format(_("Information for %s %s:"))
-				 % kind_to_string_localized( (*it)->kind(), 1 )
-				 % (*it)->name();
+				 % kind_to_string_localized( sel.kind(), 1 )
+				 % sel.name();
 
 	cout << endl << info << endl;
 	cout << std::string( mbs_width(info), '-' ) << endl;
       }
 
-      if ( kn._kind == ResKind::package )	{ printPkgInfo( zypper, *(*it) ); }
-      else if ( kn._kind == ResKind::patch )	{ printPatchInfo( zypper, *(*it) ); }
-      else if ( kn._kind == ResKind::pattern )	{ printPatternInfo( zypper, *(*it) ); }
-      else if ( kn._kind == ResKind::product )	{ printProductInfo( zypper, *(*it) ); }
-      else if ( kn._kind == ResKind::srcpackage){ printSrcPackageInfo( zypper, *(*it) ); }
-      else 					{ printDefaultInfo( zypper, *(*it) ); }
+      if      ( sel.kind() == ResKind::package )	{ printPkgInfo( zypper, sel ); }
+      else if ( sel.kind() == ResKind::patch )		{ printPatchInfo( zypper, sel ); }
+      else if ( sel.kind() == ResKind::pattern )	{ printPatternInfo( zypper, sel ); }
+      else if ( sel.kind() == ResKind::product )	{ printProductInfo( zypper, sel ); }
+      else if ( sel.kind() == ResKind::srcpackage)	{ printSrcPackageInfo( zypper, sel ); }
+      else 						{ printDefaultInfo( zypper, sel ); }
     }
   }
 }
