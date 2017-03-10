@@ -49,6 +49,8 @@ namespace zypp
   class DtorReset
   {
   public:
+    DtorReset() {}
+
     template<class TVar>
       DtorReset( TVar & var_r )
       : _pimpl( new Impl<TVar,TVar>( var_r, var_r ) )
