@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2016-07-14 06:46+0000\n"
-"Last-Translator: Brad Song <brad.song@lqs-lionbridge.com>\n"
-"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
-">\n"
+"PO-Revision-Date: 2017-03-12 07:10+0000\n"
+"Last-Translator: Kim Dooman <dm8.kim@gmail.com>\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -498,7 +498,7 @@ msgstr "설명"
 
 #: src/info.cc:110
 msgid "automatically"
-msgstr ""
+msgstr "자동으로"
 
 #: src/info.cc:182
 #, boost-format
@@ -653,9 +653,9 @@ msgstr "알 수 없음"
 
 #. translators: %1% is an URL or Path pointing to some document
 #: src/info.cc:565
-#, boost-format
+#, boost-format, fuzzy
 msgid "See %1%"
-msgstr ""
+msgstr "%1 확인"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:571
@@ -706,8 +706,9 @@ msgstr "짧은 이름"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:720
+#, fuzzy
 msgid "Builds binary package"
-msgstr ""
+msgstr "바이너리 패키지 빌드"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -1767,16 +1768,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "기본 우선순위"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "우선순위"
+msgstr "높은 우선순위"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "낮은 우선순위"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1791,23 +1791,23 @@ msgstr ""
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
-msgstr ""
+msgstr "저장소는 우선순위가 없습니다. 모든 저장소는 같은 우선순위를 공유합니다."
 
 #: src/repos.cc:203
 #, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "'%s' 리포지토리의 우선순위가 %d(으)로 설정되었습니다."
+msgstr "저장소 우선순위 적용:"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "제거를 위해 '%s'을(를) 선택하는 중입니다."
+msgstr "자세한 사항은 '%s'을(를) 참고하세요"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "리포지토리"
+msgstr[0] "%1% 저장소"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -2770,7 +2770,7 @@ msgstr "예, 즉시 종료하는 중입니다..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:38
 msgid "Trying to exit gracefully..."
-msgstr ""
+msgstr "우아한 종료를 시도중입니다..."
 
 #: src/Zypper.cc:84
 msgid ""
@@ -4458,7 +4458,7 @@ msgstr ""
 #: src/Zypper.cc:2588
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
-msgstr ""
+msgstr "XML 출력만 사용: 산출된 파일에서 검색된 XML tag를 문자 그대로 재전송."
 
 #: src/Zypper.cc:2612
 #, c-format, boost-format
@@ -5156,7 +5156,7 @@ msgstr "자세한 내용은 위의 메시지를 참조하십시오."
 #: src/Zypper.cc:4516
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "옵션 %1% 은(는) 전역옵션 %2% (이)가 없는 경우 적용되지 않습니다."
 
 #: src/Zypper.cc:4603 src/Zypper.cc:4651
 #, c-format, boost-format
