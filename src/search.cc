@@ -29,7 +29,7 @@ namespace
     if ( islocked_r )
     {
       if ( *tag_r == 'i' )
-	return( isautoinst_r ? "il" : "Il" );
+	return "il";
       else if ( *tag_r == 'v' )
 	return "vl";
       else if ( *tag_r == '\0' || *tag_r == ' ' )
@@ -37,8 +37,10 @@ namespace
       INT << "unknown status tag '" << tag_r << "'" << endl;
       return "?L";	// should not happen
     }
+#if 0
     if ( *tag_r == 'i' )
-      return( isautoinst_r ? "i" : "I" );
+      return( isautoinst_r ? "i" : "i+" );
+#endif
     return tag_r;
   }
 

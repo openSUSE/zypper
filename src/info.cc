@@ -104,12 +104,14 @@ namespace
   inline std::string propertyInstalled( const PoolItem & installedObj_r )
   {
     std::string ret( asYesNo( bool(installedObj_r) ) );
+#if 0
     if ( installedObj_r && installedObj_r.identIsAutoInstalled() )
     {
       ret += " (";
       ret += _("automatically");
       ret += ")";
     }
+#endif
     return ret;
   }
 
