@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Mar 13 12:51:10 CET 2017 - ma@suse.de
+
+- Info: Improve srcpackage info (FATE#321104)
+- Make temporary repos invisible for other zypp instances (bsc#1017267)
+- man: remove (non-working) email addresses from author section (bsc#1028003)
+- aptitude: simulate is non-interactive (boo#1028119)
+- version 1.13.20
+
+-------------------------------------------------------------------
 Wed Feb 22 11:42:05 CET 2017 - ma@suse.de
 
 - Try to exit gracefully after SIGPIPE (bsc#926844)
