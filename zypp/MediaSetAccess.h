@@ -172,6 +172,15 @@ namespace zypp
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1, ProvideFileOptions options = PROVIDE_DEFAULT );
 
       /**
+       * Provides an optional \a file from media \a media_nr.
+       *
+       * Like \ref provideFile (NON_INTERACTIVE), but return an empty \ref Pathname
+       * rather than throwing a \ref MediaException if the file is not present on
+       * the media.
+       */
+      Pathname provideOptionalFile( const Pathname & file, unsigned media_nr = 1 );
+
+      /**
        * Release file from media.
        * This signal that file is not needed anymore.
        *
