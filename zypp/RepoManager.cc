@@ -960,27 +960,31 @@ namespace zypp
       Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
       filesystem::assert_dir( mediarootpath );
       RepoStatus oldstatus = metadataStatus( info );
-
       if ( oldstatus.empty() )
       {
         MIL << "No cached metadata, going to refresh" << endl;
         return REFRESH_NEEDED;
       }
 
+      if ( url.schemeIsVolatile() )
       {
-        if ( url.schemeIsVolatile() )
-	{
-	  MIL << "never refresh CD/DVD" << endl;
-          return REPO_UP_TO_DATE;
-	}
-	if ( url.schemeIsLocal() )
-	{
-	  policy = RefreshIfNeededIgnoreDelay;
-	}
+	MIL << "Never refresh CD/DVD" << endl;
+	return REPO_UP_TO_DATE;
+      }
+
+      if ( policy == RefreshForced )
+      {
+	MIL << "Forced refresh!" << endl;
+	return REFRESH_NEEDED;
+      }
+
+      if ( url.schemeIsLocal() )
+      {
+	policy = RefreshIfNeededIgnoreDelay;
       }
 
       // now we've got the old (cached) status, we can decide repo.refresh.delay
-      if (policy != RefreshForced && policy != RefreshIfNeededIgnoreDelay)
+      if ( policy != RefreshIfNeededIgnoreDelay )
       {
         // difference in seconds
         double diff = difftime(
@@ -1042,27 +1046,17 @@ namespace zypp
       }
 
       // check status
-      bool refresh = false;
       if ( oldstatus == newstatus )
       {
 	MIL << "repo has not changed" << endl;
-	if ( policy == RefreshForced )
-	{
-	  MIL << "refresh set to forced" << endl;
-	  refresh = true;
-	}
+	touchIndexFile( info );
+	return REPO_UP_TO_DATE;
       }
       else
       {
 	MIL << "repo has changed, going to refresh" << endl;
-	refresh = true;
+	return REFRESH_NEEDED;
       }
-
-      if (!refresh)
-	touchIndexFile(info);
-
-      return refresh ? REFRESH_NEEDED : REPO_UP_TO_DATE;
-
     }
     catch ( const Exception &e )
     {
