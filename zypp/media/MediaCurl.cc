@@ -1058,7 +1058,6 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
     else
       url = getFileUrl(filename);
     std::string err;
-    try
     {
       switch ( code )
       {
@@ -1165,10 +1164,6 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
 
       // uhm, no 0 code but unknown curl exception
       ZYPP_THROW(MediaCurlException(url, err, _curlError));
-    }
-    catch (const MediaException & excpt_r)
-    {
-      ZYPP_RETHROW(excpt_r);
     }
   }
   else
