@@ -891,7 +891,7 @@ namespace zypp
     switch ( repokind.toEnum() )
     {
       case RepoType::RPMMD_e :
-        status = RepoStatus( productdatapath/"repodata/repomd.xml");
+        status = RepoStatus( productdatapath/"repodata/repomd.xml") && RepoStatus( mediarootpath/"media.1/media" );
 	break;
 
       case RepoType::YAST2_e :

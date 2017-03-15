@@ -37,8 +37,8 @@ Downloader::Downloader( const RepoInfo &repoinfo , const Pathname &delta_dir)
 
 RepoStatus Downloader::status( MediaSetAccess &media )
 {
-  Pathname repomd = media.provideFile( repoInfo().path() + "/repodata/repomd.xml");
-  return RepoStatus(repomd);
+  return RepoStatus( media.provideFile( repoInfo().path() / "/repodata/repomd.xml" ) )
+      && RepoStatus( media.provideOptionalFile( "/media.1/media" ) );
 }
 
 static OnMediaLocation loc_with_path_prefix( const OnMediaLocation & loc, const Pathname & prefix )
@@ -173,6 +173,8 @@ bool Downloader::repomd_Callback( const OnMediaLocation & loc_r, const ResourceT
 
 void Downloader::download( MediaSetAccess & media, const Pathname & dest_dir, const ProgressData::ReceiverFnc & progressrcv )
 {
+  downloadMediaInfo( dest_dir, media );
+
   Pathname masterIndex( repoInfo().path() / "/repodata/repomd.xml" );
   defaultDownloadMasterIndex( media, dest_dir, masterIndex );
 

@@ -27,7 +27,7 @@ void downloadMediaInfo( const Pathname &dest_dir,
                         const ProgressData::ReceiverFnc & progressrcv )
 {
   Fetcher fetcher;
-  fetcher.enqueue( OnMediaLocation("/media.1/media") );
+  fetcher.enqueue( OnMediaLocation("/media.1/media").setOptional(true) );
   fetcher.start( dest_dir, media, progressrcv );
   // ready, go!
   fetcher.reset();
