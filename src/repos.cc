@@ -301,13 +301,10 @@ static bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool f
       plabel = str::form(_("Retrieving repository '%s' metadata"), repo.asUserString().c_str() );
       zypper.out().progressStart( "raw-refresh", plabel, true );
 
-      manager.refreshMetadata( repo,
-			       force_download
-				 ? RepoManager::RefreshForced
-				 : zypper.command() == ZypperCommand::REFRESH ||
-				   zypper.command() == ZypperCommand::REFRESH_SERVICES
-				     ? RepoManager::RefreshIfNeededIgnoreDelay
-				     : RepoManager::RefreshIfNeeded );
+      // RepoManager::RefreshForced because we already know from checkIfToRefreshMetadata above
+      // that refresh is needed (or forced anyway). Forcing here prevents refreshMetadata from
+      // doing it's own checkIfToRefreshMetadata. Otherwise we'd download the stats twice.
+      manager.refreshMetadata( repo, RepoManager::RefreshForced );
 
       //plabel += repoGpgCheckStatus( repo );
       zypper.out().progressEnd( "raw-refresh", plabel );
