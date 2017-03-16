@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Mar 16 14:06:03 CET 2017 - ma@suse.de
+
+- Support multi-volume repomd repositories (FATE#320544)
+- MediaCurl: ZYPP_MEDIA_CURL_IPRESOLVE=<4|6> to force name resolution
+  to IPv4/IPv6 only (fixes openSUSE/zypper#49)
+- Add support for openssl >= 1.1
+- version 16.5.0 (0)
+
+-------------------------------------------------------------------
 Mon Feb 20 10:10:43 CET 2017 - ma@suse.de
 
 - PublicKey: Create tmpdirs inside ZYpp::tmpPath (bsc#926844)
