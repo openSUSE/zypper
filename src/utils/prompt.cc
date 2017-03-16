@@ -67,7 +67,7 @@ ColorString PromptOptions::optionString() const
   if ( !_opt_help.empty() )
   {
     if ( shown )
-      str << "/";
+      str << ( maxidx != _options.size() ? "/..." : "/" );
     // translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
     str << ( ColorContext::PROMPT_OPTION << "?" ) << " " << _("shows all options");
   }
