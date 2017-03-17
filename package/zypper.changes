@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar 17 11:58:22 CET 2017 - ma@suse.de
+
+- Don't show installed system packages if list command is restricted
+  to repos (bsc#1028492)
+- version 1.12.49
+
+-------------------------------------------------------------------
 Tue Feb 14 13:10:16 CET 2017 - ma@suse.de
 
 - Fix invalid xml in gpg key info output(bsc#1024909)
