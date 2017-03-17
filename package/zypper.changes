@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Mar 17 11:47:52 CET 2017 - ma@suse.de
+
+- Don't show installed system packages if list command is restricted
+  to repos (bsc#1028492)
+- Indicate presence of additional prompt options not mentioned in the
+  prompt string.
+- version 1.13.21
+
+-------------------------------------------------------------------
 Mon Mar 13 12:51:10 CET 2017 - ma@suse.de
 
 - Info: Improve srcpackage info (FATE#321104)
