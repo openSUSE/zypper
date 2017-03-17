@@ -410,6 +410,7 @@ static void list_patterns_xml( Zypper & zypper )
 {
   cout << "<pattern-list>" << endl;
 
+  bool repofilter = zypper.cOpts().count("repo");	// suppress @System if repo filter is on
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
@@ -419,6 +420,8 @@ static void list_patterns_xml( Zypper & zypper )
     if ( isInstalled && notinst_only && !installed_only )
       continue;
     if ( !isInstalled && installed_only && !notinst_only )
+      continue;
+    if ( repofilter && it->repository().info().name() == "@System" )
       continue;
 
     Pattern::constPtr pattern = asKind<Pattern>(it->resolvable());
@@ -442,6 +445,7 @@ static void list_pattern_table( Zypper & zypper)
       << _("Repository")
       << _("Dependency") );
 
+  bool repofilter = zypper.cOpts().count("repo");	// suppress @System if repo filter is on
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
@@ -451,6 +455,10 @@ static void list_pattern_table( Zypper & zypper)
     if ( isInstalled && notinst_only && !installed_only )
       continue;
     else if ( !isInstalled && installed_only && !notinst_only )
+      continue;
+
+    const std::string & piRepoName( pi.repoInfo().name() );
+    if ( repofilter && piRepoName == "@System" )
       continue;
 
     Pattern::constPtr pattern = asKind<Pattern>(pi.resolvable());
@@ -463,7 +471,7 @@ static void list_pattern_table( Zypper & zypper)
 	<< (isInstalled ? lockStatusTag( "i", isLocked ) : lockStatusTag( "", isLocked ))
 	<< pi.name()
 	<< pi.edition()
-	<< pi.repoInfo().name()
+	<< piRepoName
 	<< string_weak_status(pi.status()) );
   }
   tbl.sort( 1 ); // Name
@@ -489,6 +497,7 @@ void list_packages( Zypper & zypper )
   Table tbl;
 
   const auto & copts( zypper.cOpts() );
+  bool repofilter = copts.count("repo");	// suppress @System if repo filter is on
   bool installed_only = copts.count("installed-only");
   bool uninstalled_only = copts.count("uninstalled-only");
   bool showInstalled = installed_only || !uninstalled_only;
@@ -547,6 +556,10 @@ void list_packages( Zypper & zypper )
 	}
       }
 
+      const std::string & piRepoName( pi->repository().info().name() );
+      if ( repofilter && piRepoName == "@System" )
+	continue;
+
       TableRow row;
       bool isLocked = pi.status().isLocked();
       if ( s->hasInstalledObj() )
@@ -557,7 +570,7 @@ void list_packages( Zypper & zypper )
       {
 	row << lockStatusTag( "", isLocked );
       }
-      row << pi->repository().info().name()
+      row << piRepoName
           << pi->name()
           << pi->edition().asString()
           << pi->arch().asString();
@@ -589,6 +602,7 @@ void list_packages( Zypper & zypper )
 
 static void list_products_xml( Zypper & zypper )
 {
+  bool repofilter = zypper.cOpts().count("repo");	// suppress @System if repo filter is on
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
@@ -599,7 +613,8 @@ static void list_products_xml( Zypper & zypper )
       continue;
     else if ( !it->status().isInstalled() && installed_only )
       continue;
-
+    if ( repofilter && it->repository().info().name() == "@System" )
+      continue;
     Product::constPtr product = asKind<Product>(it->resolvable());
     cout << asXML( *product, it->status().isInstalled() ) << endl;
   }
@@ -641,6 +656,7 @@ static void list_product_table( Zypper & zypper )
       << _("Arch")
       << _("Is Base") );
 
+  bool repofilter = zypper.cOpts().count("repo");	// suppress @System if repo filter is on
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
@@ -699,7 +715,7 @@ static void list_product_table( Zypper & zypper )
     if ( missedInstalled ) // no available hit, we need to print it
     {
       // show installed product in absence of an available one:
-      if ( notinst_only )
+      if ( notinst_only || repofilter )
         continue;
 
       TableRow tr;
