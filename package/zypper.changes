@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar 17 12:22:52 CET 2017 - ma@suse.de
+
+- Don't show installed system packages if list command is restricted
+  to repos (bsc#1028492)
+- version 1.11.62
+
+-------------------------------------------------------------------
 Thu Feb 23 01:14:11 CET 2017 - ma@suse.de
 
 - Update zypper-po.tar.bz2
