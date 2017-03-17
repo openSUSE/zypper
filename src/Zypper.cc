@@ -4509,10 +4509,16 @@ void Zypper::doCommand()
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
+    for ( auto & repo : _arguments )
+    {
+      // see todo at ::copts
+      copts["repo"].push_back( repo );	// convert arguments to '-r repo'
+      _copts["repo"].push_back( repo );	// convert arguments to '-r repo'
+    }
     initRepoManager();
 
     init_target(*this);
-    init_repos(*this, _arguments);
+    init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     load_resolvables(*this);
