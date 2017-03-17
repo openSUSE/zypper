@@ -164,6 +164,10 @@ void Zypper::assertZYppPtrGod()
 }
 ///////////////////////////////////////////////////////////////////
 
+/// \todo Investigate why the global copts here is used in addition to
+/// Zypper::_copts? There should not be 2 instances with possibly
+/// different content. The global here is also unnecessarily exported
+/// to utils/getopt.
 parsed_opts copts; // command options
 
 static void rug_list_resolvables(Zypper & zypper);
