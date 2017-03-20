@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar 20 13:18:53 CET 2017 - ma@suse.de
+
+- Share TmpDir with libzypp (bsc#926844)
+- BuildRequires:  libzypp-devel >= 15.24.0
+- version 1.12.50
+
+-------------------------------------------------------------------
 Fri Mar 17 11:58:22 CET 2017 - ma@suse.de
 
 - Don't show installed system packages if list command is restricted
