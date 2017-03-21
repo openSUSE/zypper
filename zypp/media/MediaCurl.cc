@@ -1105,6 +1105,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
             ZYPP_THROW(MediaForbiddenException(url, msg403));
           }
           case 404:
+          case 410:
               ZYPP_THROW(MediaFileNotFoundException(_url, filename));
           }
 
