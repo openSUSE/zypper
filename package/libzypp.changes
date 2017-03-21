@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar 21 13:38:08 CET 2017 - ma@suse.de
+
+- MediaCurl: Treat http response 410(Gone) like 404(Not Found)
+  (bsc#1030136)
+- version 16.5.1 (0)
+
+-------------------------------------------------------------------
 Thu Mar 16 14:06:03 CET 2017 - ma@suse.de
 
 - Support multi-volume repomd repositories (FATE#320544)
