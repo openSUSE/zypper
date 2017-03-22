@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-03-08 15:45+0000\n"
-"Last-Translator: Fun MR <mrfun1993@protonmail.com>\n"
+"PO-Revision-Date: 2017-03-22 13:41+0000\n"
+"Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -698,7 +698,7 @@ msgstr "簡稱"
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:720
 msgid "Builds binary package"
-msgstr "構建二進制軟件包"
+msgstr "建構二進位套件"
 
 #: src/subcommand.cc:51
 msgid "none"
