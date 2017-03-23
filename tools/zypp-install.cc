@@ -1,6 +1,16 @@
 //
 // g++ -Wall -std=c++11 zypp-install.cc -l zypp -o zypp-install
 //
+// A small (and simple) demo which walks through zypp, initializing
+// and refreshing the repos, selecting packages ('zypper dup'),
+// resolving dependencies and finally comitting/installing the
+// result (in dry-run mode).
+//
+// No callbacks, questions or fancy output during commit, but it will
+// do a 'zypper dup' if you'd remove the DryRun and DownloadOnly flag.
+//
+// So be careful if running it as root.
+//
 #include <iostream>
 
 #define TEST_DEBUGLOG 0
