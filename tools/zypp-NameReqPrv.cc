@@ -28,7 +28,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   }
   cerr << "Usage: " << appname << " [--root ROOTDIR] [OPTIONS] NAME... [[OPTIONS] NAME...]..." << endl;
   cerr << "  Load all enabled repositories (no refresh) and search for" << endl;
-  cerr << "  occurrences of NAME (regex) in package names or dependencies" << endl;
+  cerr << "  occurrences of NAME (regex or -x) in package names or dependencies" << endl;
   cerr << "  --root   Load repos from the system located below ROOTDIR. If ROOTDIR" << endl;
   cerr << "           denotes a sover testcase, the testcase is loaded." << endl;
   cerr << "  --installed Process installed packages only." << endl;
@@ -43,6 +43,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "  -e/-E    turn on/off looking for enhan./sugg.(default off)" << endl;
   cerr << "  -a       short for -n -p -r" << endl;
   cerr << "  -A       short for -n -P -R" << endl;
+  cerr << "  -x       do exact matching (glob) rather than regex (substring)" << endl;
   cerr << "  -D <pkg> dump dependencies of <pkg>" << endl;
   cerr << "" << endl;
   return exit_r;
@@ -195,6 +196,7 @@ int main( int argc, char * argv[] )
   ///////////////////////////////////////////////////////////////////
 
   bool ignorecase	( true );
+  bool matechexact	( false );
   bool names		( true );
   bool provides		( false );
   bool requires		( false );
@@ -203,6 +205,7 @@ int main( int argc, char * argv[] )
   bool recommends	( false );
   bool supplements	( false );
   bool enhacements	( false );
+
 
   for ( ; argc; --argc,++argv )
   {
@@ -223,6 +226,7 @@ int main( int argc, char * argv[] )
 	  break;
         case 'i': ignorecase =	true;	break;
         case 'I': ignorecase =	false;	break;
+        case 'x': matechexact =	true;	break;
         case 'n': names =	true;	break;
         case 'N': names =	false;	break;
         case 'r': requires =	true;	break;
@@ -271,7 +275,10 @@ int main( int argc, char * argv[] )
       else
 	q.addString( qstr );
 
-      q.setMatchRegex();
+      if ( matechexact )
+	q.setMatchGlob();
+      else
+	q.setMatchRegex();
       q.setCaseSensitive( ! ignorecase );
 
       if ( names )
