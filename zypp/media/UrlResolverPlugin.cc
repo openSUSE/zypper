@@ -68,7 +68,7 @@ namespace zypp
                     std::pair<std::string, std::string> values(*it);
                     // curl resets headers that are empty, so we use a workaround
                     if (values.second.empty()) {
-                        values.second = "\nX-libcurl-Empty-Header-Workaround: *";
+                        values.second = "\r\nX-libcurl-Empty-Header-Workaround: *";
                     }                    
                     headers.insert(values);                    
                 }
