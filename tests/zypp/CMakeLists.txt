@@ -16,6 +16,7 @@ ADD_TESTS(
   Digest
   Deltarpm
   Edition
+  ExtendedPool
   Fetcher
   FileChecker
   Flags

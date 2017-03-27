@@ -66,6 +66,10 @@ namespace zypp
           const SerialNumber & serial() const
           { return _serial; }
 
+          /** Serial number changing whenever resusePoolIDs==true was used. ResPool must also invalidate it's PoolItems! */
+          const SerialNumber & serialIDs() const
+          { return _serialIDs; }
+
           /** Update housekeeping data (e.g. whatprovides).
            * \todo actually requires a watcher.
            */
@@ -311,8 +315,10 @@ namespace zypp
         private:
           /** sat-pool. */
           CPool * _pool;
-          /** Serial number. */
+          /** Serial number - changes with each Pool content change. */
           SerialNumber _serial;
+          /** Serial number of IDs - changes whenever resusePoolIDs==true - ResPool must also invalidate it's PoolItems! */
+          SerialNumber _serialIDs;
           /** Watch serial number. */
           SerialNumberWatcher _watcher;
           /** Additional \ref RepoInfo. */

@@ -55,6 +55,9 @@ namespace zypp
     const SerialNumber & Pool::serial() const
     { return myPool().serial(); }
 
+    const SerialNumber & Pool::serialIDs() const
+    { return myPool().serialIDs(); }
+
     void Pool::prepare() const
     { return myPool().prepare(); }
 

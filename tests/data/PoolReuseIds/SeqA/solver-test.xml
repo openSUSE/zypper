@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<test>
+<setup arch="x86_64">
+	<channel file="repo.xml" name="SEQA" priority="99" />
+</setup>
+</test>

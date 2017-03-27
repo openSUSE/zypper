@@ -313,7 +313,10 @@ namespace zypp
 	// If the last repo is removed clear the pool to actually reuse all IDs.
 	// NOTE: the explicit ::repo_free above asserts all solvables are memset(0)!
 	if ( !_pool->urepos )
+	{
+	  _serialIDs.setDirty();	// Indicate resusePoolIDs - ResPool must also invalidate it's PoolItems
 	  ::pool_freeallrepos( _pool, /*resusePoolIDs*/true );
+	}
       }
 
       int PoolImpl::_addSolv( CRepo * repo_r, FILE * file_r )

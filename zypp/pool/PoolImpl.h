@@ -306,6 +306,7 @@ namespace zypp
           {
             sat::Pool pool( satpool() );
             bool addedItems = false;
+	    bool reusedIDs = _watcherIDs.remember( pool.serialIDs() );
             std::list<PoolItem> addedProducts;
 
 	    _store.resize( pool.capacity() );
@@ -321,7 +322,7 @@ namespace zypp
                   // the PoolItem got invalidated (e.g unloaded repo)
                   pi = PoolItem();
                 }
-                else if ( s && ! pi )
+                else if ( reusedIDs || (s && ! pi) )
                 {
                   // new PoolItem to add
                   pi = PoolItem::makePoolItem( s ); // the only way to create a new one!
@@ -398,6 +399,8 @@ namespace zypp
       private:
         /** Watch sat pools serial number. */
         SerialNumberWatcher                   _watcher;
+	/** Watch sat pools Serial number of IDs - changes whenever resusePoolIDs==true - ResPool must also invalidate it's PoolItems! */
+        SerialNumberWatcher                   _watcherIDs;
         mutable ContainerT                    _store;
         mutable DefaultIntegral<bool,true>    _storeDirty;
 	mutable Id2ItemT		      _id2item;

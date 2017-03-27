@@ -1,0 +1,56 @@
+<channel><subchannel>
+<package>
+	<name>package</name>
+	<vendor>unkown</vendor>
+	<history><update>
+		<arch>x86_64</arch>
+		<version>4</version>
+		<release>1</release>
+	</update></history>
+</package>
+<patch>
+	<name>patch</name>
+	<vendor>unkown</vendor>
+	<history><update>
+		<arch>x86_64</arch>
+		<version>4</version>
+		<release>1</release>
+	</update></history>
+</patch>
+<pattern>
+	<name>pattern</name>
+	<vendor>unkown</vendor>
+	<history><update>
+		<arch>x86_64</arch>
+		<version>4</version>
+		<release>1</release>
+	</update></history>
+</pattern>
+<product>
+	<name>product</name>
+	<vendor>unkown</vendor>
+	<history><update>
+		<arch>x86_64</arch>
+		<version>4</version>
+		<release>1</release>
+	</update></history>
+</product>
+<srcpackage>
+	<name>srcpackage</name>
+	<vendor>unkown</vendor>
+	<history><update>
+		<arch>x86_64</arch>
+		<version>4</version>
+		<release>1</release>
+	</update></history>
+</srcpackage>
+<application>
+	<name>application</name>
+	<vendor>unkown</vendor>
+	<history><update>
+		<arch>x86_64</arch>
+		<version>4</version>
+		<release>1</release>
+	</update></history>
+</application>
+</subchannel></channel>
