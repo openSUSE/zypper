@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar 27 17:10:52 CEST 2017 - ma@suse.de
+
+- Fix invalidation of PoolItems if Pool IDs are reused (bsc#1028661)
+- version 16.6.0 (0)
+
+-------------------------------------------------------------------
 Mon Mar 27 09:33:26 CEST 2017 - ma@suse.de
 
 - Fix X-libcurl-Empty-Header-Workaround (bsc#1030919)
