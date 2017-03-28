@@ -82,32 +82,21 @@ namespace zypp
           }
         }
 
-        inline void
-        checkDesired(MediaAccessId id)
+        inline void checkDesired( MediaAccessId id )
         {
-          checkAttached(id);
+          checkAttached( id );
 
-          if( !desired)
+          if ( !desired )
           {
-            try {
-              desired = verifier->isDesiredMedia(handler);
-            }
-            catch(const zypp::Exception &e) {
-              ZYPP_CAUGHT(e);
-              desired = false;
-            }
+	    desired = verifier->isDesiredMedia(handler);
 
-            if( !desired)
+            if( !desired )
             {
-              DBG << "checkDesired(" << id << "): not desired (report by "
-                  << verifier->info() << ")" << std::endl;
-              ZYPP_THROW(MediaNotDesiredException(
-                handler->url()
-              ));
+              DBG << "checkDesired(" << id << "): not desired (report by " << verifier->info() << ")" << std::endl;
+              ZYPP_THROW( MediaNotDesiredException( handler->url() ) );
             }
 
-            DBG << "checkDesired(" << id << "): desired (report by "
-                << verifier->info() << ")" << std::endl;
+            DBG << "checkDesired(" << id << "): desired (report by " << verifier->info() << ")" << std::endl;
           } else {
             DBG << "checkDesired(" << id << "): desired (cached)" << std::endl;
           }
