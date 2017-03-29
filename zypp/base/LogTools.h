@@ -114,7 +114,52 @@ namespace zypp
     std::ostream & dumpRangeLine( std::ostream & str,
                                   TIterator begin, TIterator end )
     { return dumpRange( str, begin, end, "(", "", ", ", "", ")" ); }
+  /** \overload for container */
+  template<class TContainer>
+    std::ostream & dumpRangeLine( std::ostream & str, const TContainer & cont )
+    { return dumpRangeLine( str, cont.begin(), cont.end() ); }
 
+
+  ///////////////////////////////////////////////////////////////////
+  namespace iomanip
+  {
+    ///////////////////////////////////////////////////////////////////
+    /// \class RangeLine<TIterator>
+    /// \brief Iomanip helper printing dumpRangeLine style
+    ///////////////////////////////////////////////////////////////////
+    template<class TIterator>
+    struct RangeLine
+    {
+      RangeLine( TIterator begin, TIterator end )
+      : _begin( begin )
+      , _end( end )
+      {}
+      TIterator _begin;
+      TIterator _end;
+    };
+
+    /** \relates RangeLine<TIterator> */
+    template<class TIterator>
+    std::ostream & operator<<( std::ostream & str, const RangeLine<TIterator> & obj )
+    { return dumpRangeLine( str, obj._begin, obj._end ); }
+
+  } // namespce iomanip
+  ///////////////////////////////////////////////////////////////////
+
+  /** Iomanip printing dumpRangeLine style
+   * \code
+   *   std::vector<int> c( { 1, 1, 2, 3, 5, 8 } );
+   *   std::cout << rangeLine(c) << std::endl;
+   *   -> (1, 1, 2, 3, 5, 8)
+   * \endcode
+   */
+  template<class TIterator>
+  iomanip::RangeLine<TIterator> rangeLine( TIterator begin, TIterator end )
+  { return iomanip::RangeLine<TIterator>( begin, end ); }
+  /** \overload for container */
+  template<class TContainer>
+  auto rangeLine( const TContainer & cont ) -> decltype( rangeLine( cont.begin(), cont.end() ) )
+  { return rangeLine( cont.begin(), cont.end() ); }
 
   template<class Tp>
     std::ostream & operator<<( std::ostream & str, const std::vector<Tp> & obj )
