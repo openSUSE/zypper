@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Mar 30 15:00:30 CEST 2017 - ma@suse.de
+
+- Recognize license tarball in rpmmd repos (FATE#316159)
+- Fix media verification to properly propagate media access errors
+  (bsc#1031093)
+- version 16.6.1 (0)
+
+-------------------------------------------------------------------
 Mon Mar 27 17:10:52 CEST 2017 - ma@suse.de
 
 - Fix invalidation of PoolItems if Pool IDs are reused (bsc#1028661)
