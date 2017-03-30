@@ -17,6 +17,7 @@
 #include "zypp/parser/xml/XmlEscape.h"
 
 #include "zypp/RepoInfo.h"
+#include "zypp/Glob.h"
 #include "zypp/TriBool.h"
 #include "zypp/Pathname.h"
 #include "zypp/ZConfig.h"
@@ -71,8 +72,22 @@ namespace zypp
     }
 
   public:
+    /** Path to a license tarball in case it exists in the repo. */
     Pathname licenseTgz() const
-    { return metadatapath.empty() ? Pathname() : metadatapath / path / "license.tar.gz"; }
+    {
+      Pathname ret;
+      if ( !metadatapath.empty() )
+      {
+	filesystem::Glob g;
+	g.add( metadatapath / path / "repodata/*license.tar.gz" );
+	if ( g.empty() )
+	  g.add( metadatapath / path / "license.tar.gz" );
+
+	if ( !g.empty() )
+	  ret = *g.begin();
+      }
+      return ret;
+    }
 
     const RepoVariablesReplacedUrlList & baseUrls() const
     {
@@ -474,8 +489,7 @@ namespace zypp
 
   bool RepoInfo::hasLicense() const
   {
-    Pathname licenseTgz( _pimpl->licenseTgz() );
-    return ! licenseTgz.empty() &&  PathInfo(licenseTgz).isFile();
+    return !_pimpl->licenseTgz().empty();
   }
 
   bool RepoInfo::needToAcceptLicense() const
@@ -483,8 +497,8 @@ namespace zypp
     static const std::string noAcceptanceFile = "no-acceptance-needed\n";
     bool accept = true;
 
-    Pathname licenseTgz( _pimpl->licenseTgz() );
-    if ( licenseTgz.empty() || ! PathInfo( licenseTgz ).isFile() )
+    const Pathname & licenseTgz( _pimpl->licenseTgz() );
+    if ( licenseTgz.empty() )
       return false;     // no licenses at all
 
     ExternalProgram::Arguments cmd;
@@ -551,8 +565,8 @@ namespace zypp
 
   LocaleSet RepoInfo::getLicenseLocales() const
   {
-    Pathname licenseTgz( _pimpl->licenseTgz() );
-    if ( licenseTgz.empty() || ! PathInfo( licenseTgz ).isFile() )
+    const Pathname & licenseTgz( _pimpl->licenseTgz() );
+    if ( licenseTgz.empty() )
       return LocaleSet();
 
     ExternalProgram::Arguments cmd;
