@@ -31,7 +31,7 @@ void init_repos( Zypper & zypper, const Container & container = Container() );
 template<typename T>
 void get_repos( Zypper & zypper, const T & begin, const T & end, std::list<RepoInfo> & repos, std::list<std::string> & not_found );
 
-void report_unknown_repos( Out & out, std::list<std::string> not_found );
+void report_unknown_repos( Out & out, const std::list<std::string> & not_found );
 
 /**
  * Looks for known repos based on specified arguments and creates a list

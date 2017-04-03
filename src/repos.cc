@@ -679,13 +679,15 @@ template void get_repos<std::list<std::string>::const_iterator>( Zypper &,
 /**
  * Say "Repository %s not found" for all strings in \a not_found list.
  */
-void report_unknown_repos( Out & out, std::list<std::string> not_found )
+void report_unknown_repos( Out & out, const std::list<std::string> & not_found )
 {
+  if ( not_found.empty() )
+    return;
+
   for_( it, not_found.begin(), not_found.end() )
     out.error( str::Format(_("Repository '%s' not found by its alias, number, or URI.")) % *it );
 
-  if ( !not_found.empty() )
-    out.info( str::Format(_("Use '%s' to get the list of defined repositories.")) % "zypper repos" );
+  out.info( str::Format(_("Use '%s' to get the list of defined repositories.")) % "zypper repos" );
 }
 
 // ----------------------------------------------------------------------------
