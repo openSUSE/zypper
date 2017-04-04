@@ -161,6 +161,7 @@ namespace zypp
     RepoSizeType repoSize() const;
     RepoConstIterator repoBegin() const;
     RepoConstIterator repoEnd() const;
+    Iterable<RepoConstIterator> repos() const;
 
     /** List of known repositories. */
     std::list<RepoInfo> knownRepositories() const
@@ -537,6 +538,9 @@ namespace zypp
      */
     ServiceConstIterator serviceEnd() const;
 
+    /** Iterate the known services. */
+    Iterable<ServiceConstIterator> services() const;
+
     /** List of known services. */
     std::list<ServiceInfo> knownServices() const
     { return std::list<ServiceInfo>(serviceBegin(),serviceEnd()); }
@@ -698,6 +702,14 @@ namespace zypp
 
   /** \relates RepoManager Stream output */
   std::ostream & operator<<( std::ostream & str, const RepoManager & obj );
+
+  /** Iterate the known repositories. */
+  inline Iterable<RepoManager::RepoConstIterator> RepoManager::repos() const
+  { return makeIterable( repoBegin(), repoEnd() ); }
+
+  /** Iterate the known services. */
+  inline Iterable<RepoManager::ServiceConstIterator> RepoManager::services() const
+  { return makeIterable( serviceBegin(), serviceEnd() ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
