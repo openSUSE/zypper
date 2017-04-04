@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr  4 14:45:42 CEST 2017 - ma@suse.de
+
+- man: describe supported SSL related URL options (bsc#1032152)
+- version 1.11.63
+
+-------------------------------------------------------------------
 Fri Mar 17 12:22:52 CET 2017 - ma@suse.de
 
 - Don't show installed system packages if list command is restricted
