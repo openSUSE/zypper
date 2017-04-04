@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 06/17/2016
+.\"      Date: 04/04/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "06/17/2016" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "04/04/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1619,8 +1619,36 @@ HTTP authentication methods to use can be defined as comma separated list via op
 \fIdigest\fR,
 \fIntlm\fR,
 \fInegotiate\fR\&. Note, that this list depends on the list of methods supported by the curl library\&.
+
+SSL verification behavior can be changed using the
+\fIssl_verify\fR
+option (this should be used with care)\&. Valid values are
+\fByes\fR
+(the secure default),
+\fBhost\fR,
+\fBpeer\fR
+or
+\fBno\fR\&.
+\fIHost\fR
+just checks that the "Common Name" field or a "Subject Alternate Name" field in the servers certificate matches the host name in the URL\&.
+\fIPeer\fR
+just verifies whether the certificate provided by the server is authentic against the chain of digital signatures found in ssl_capath\&.
+\fINo\fR
+performs no checks at all\&.
+\fIYes\fR
+is the secure default, performing host and peer check\&.
+
+For SSL client certificate authentication use the options
+\fIssl_clientcert\fR
+to define the path to the ssl client certificate and
+\fIssl_clientkey\fR
+to define the path to the SSL client key\&. Use
+\fIssl_capath\fR
+to change the directory holding the CA certificates (default is
+\fB/etc/ssl/certs\fR)\&.
 .TS
 tab(:);
+lt lt
 lt lt
 lt lt
 lt lt
@@ -1644,6 +1672,11 @@ T{
 
 T}:T{
 \fBhttps://user:pass@server/path\fR\fI?proxy=foo&proxyuser=me&proxypass=pw\fR
+T}
+T{
+
+T}:T{
+\fBhttps://server/path\fR\fI?ssl_clientcert=/entitlement/1234\&.pem&ssl_clientkey=/entitlement/1234\-key\&.pem\fR
 T}
 .TE
 .sp 1
