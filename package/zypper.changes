@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr  4 14:44:33 CEST 2017 - ma@suse.de
+
+- man: describe supported SSL related URL options (bsc#1032152)
+- version 1.12.51
+
+-------------------------------------------------------------------
 Mon Mar 20 13:18:53 CET 2017 - ma@suse.de
 
 - Share TmpDir with libzypp (bsc#926844)
