@@ -181,6 +181,10 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const std::list<Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
+  template<class Tp>
+    std::ostream & operator<<( std::ostream & str, const Iterable<Tp> & obj )
+    { return dumpRange( str, obj.begin(), obj.end() ); }
+
   ///////////////////////////////////////////////////////////////////
   namespace _logtoolsdetail
   { /////////////////////////////////////////////////////////////////
