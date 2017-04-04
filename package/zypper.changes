@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr  4 14:51:48 CEST 2017 - ma@suse.de
+
+- man: describe supported SSL related URL options (bsc#1032152)
+- version 1.6.336
+
+-------------------------------------------------------------------
 Thu Dec 22 18:17:57 CET 2016 - ma@suse.de
 
 - locks: add parsable XML output (bsc#985390)
