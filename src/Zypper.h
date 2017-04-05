@@ -137,7 +137,7 @@ struct RuntimeData
   std::list<RepoInfo> repos;
   std::list<RepoInfo> additional_repos;
   std::list<RepoInfo> temporary_repos;		///< repos not visible to RepoManager/System
-  std::set<std::string> additional_content_repos;
+  std::set<std::string> plusContentRepos;
   /**
    * Used by requestMedia callback
    * \todo but now it uses label, remove this variable?

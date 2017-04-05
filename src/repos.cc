@@ -811,16 +811,16 @@ void do_init_repos( Zypper & zypper, const Container & container )
     MIL << "checking if to refresh " << repo.alias() << endl;
 
     // disabled repos may get temp. enabled to check for --plus-content
-    bool contentcheck = false;
-    if ( ! ( gData.additional_content_repos.empty()
+    bool postContentcheck = false;
+    if ( ! ( gData.plusContentRepos.empty()
           || repo.url().schemeIsVolatile()
 	  || repo.enabled() ) )
     {
       // Preliminarily enable if last content matches or no content info available.
       // Final check is done after refresh.
-      if ( repo.hasContentAny( gData.additional_content_repos ) || ! repo.hasContent() )
+      if ( repo.hasContentAny( gData.plusContentRepos ) || ! repo.hasContent() )
       {
-	contentcheck = true;
+	postContentcheck = true;
 	repo.setEnabled( true );
 	MIL << "[--plus-content] check " << repo.alias() << endl;
 	zypper.out().info( str::Format(_("Scanning content of disabled repository '%s'.")) % repo.asUserString(),
@@ -843,7 +843,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
 				Out::QUIET );
 
           it->setEnabled( false );
-	  contentcheck = false;
+	  postContentcheck = false;
 	  ++skip_count;
         }
       }
@@ -876,7 +876,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
 				Out::QUIET );
 
           it->setEnabled( false );
-	  contentcheck = false;
+	  postContentcheck = false;
 	  ++skip_count;
         }
       }
@@ -897,15 +897,15 @@ void do_init_repos( Zypper & zypper, const Container & container )
           zypper.out().info( str::Format(_("Disabling repository '%s'.")) % repo.asUserString() );
 
           it->setEnabled( false );
-	  contentcheck = false;
+	  postContentcheck = false;
 	  ++skip_count;
 	}
       }
     }
 
-    if ( contentcheck )
+    if ( postContentcheck )
     {
-      if ( repo.hasContentAny( gData.additional_content_repos ) )
+      if ( repo.hasContentAny( gData.plusContentRepos ) )
       {
 	MIL << "[--plus-content] check says use " << repo.alias() << endl;
 	zypper.out().info( str::Format(_("Temporarily enabling repository '%s'.")) % repo.asUserString(),
@@ -1322,10 +1322,24 @@ void refresh_repos( Zypper & zypper )
   // ...as command arguments
   get_repos( zypper, zypper.arguments().begin(), zypper.arguments().end(), specified, not_found );
   // ...as --repo options
-  parsed_opts::const_iterator tmp1;
-  if ( (tmp1 = copts.find("repo")) != copts.end() )
+  parsed_opts::const_iterator tmp1( copts.find("repo") );
+  if ( tmp1 != copts.end() )
     get_repos( zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found );
   report_unknown_repos( zypper.out(), not_found );
+
+  // --plus-content: It either specifies a known repo (by #, alias or URL)
+  // or we need to also refresh all disabled repos to get their content
+  // keywords.
+  std::set<RepoInfo> plusContent;
+  bool doContentCheck = false;
+  for ( const std::string & spec : zypper.runtimeData().plusContentRepos )
+  {
+    RepoInfo r;
+    if ( match_repo( zypper, spec, &r ) )
+      plusContent.insert( r );	// specific repo: add to plusContent
+    else if ( ! doContentCheck )
+      doContentCheck = true;	// keyword: need to scan all disabled repos
+  }
 
   std::ostringstream s;
   s << _("Specified repositories: ");
@@ -1342,36 +1356,54 @@ void refresh_repos( Zypper & zypper )
     {
       const RepoInfo & repo( *rit );
 
-      if ( !specified.empty() )
+      if ( repo.enabled() )
       {
-        bool found = false;
-        for_( it, specified.begin(), specified.end() )
-	  if ( it->alias() == repo.alias() )
+	// enabled: Refreshed unless restricted by CLI args or mentioned in
+	// --plus-content as specific repo.
+	if ( !specified.empty() && std::find( specified.begin(), specified.end(), repo ) == specified.end() )
+	{
+	  if ( plusContent.count( repo ) )
 	  {
-            found = true;
-            break;
-          }
-
-        if ( !found )
-        {
-          DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
-          enabled_repo_count--;
-          continue;
-        }
+	    MIL << "[--plus-content] check " << repo.alias() << endl;
+	    zypper.out().info( str::Format(_("Refreshing repository '%s'.")) % repo.asUserString(),
+			       " [--plus-content]" );
+	  }
+	  else
+	  {
+	    DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
+	    enabled_repo_count--;
+	    continue;
+	  }
+	}
       }
-
-      // skip disabled repos
-      if ( !repo.enabled() )
+      else
       {
-        std::string msg( str::Format(_("Skipping disabled repository '%s'")) % repo.asUserString() );
+	// disabled: No refresh unless mentioned in --plus-content (specific or content check).
+	// CLI args reffering to disabled repos are reported as error.
+	if ( doContentCheck || plusContent.count( repo ) )
+	{
+	  MIL << "[--plus-content] check " << repo.alias() << endl;
+	  zypper.out().info( str::Format(_("Scanning content of disabled repository '%s'.")) % repo.asUserString(),
+			     " [--plus-content]" );
+	}
+	else
+	{
+	  if ( !specified.empty() && std::find( specified.begin(), specified.end(), repo ) == specified.end() )
+	  {
+	    DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
+	  }
+	  else
+	  {
+	    std::string msg( str::Format(_("Skipping disabled repository '%s'")) % repo.asUserString() );
 
-        if ( specified.empty() )
-          zypper.out().info( msg, Out::HIGH );
-        else
-          zypper.out().error( msg );
-
-        enabled_repo_count--;
-        continue;
+	    if ( specified.empty() )
+	      zypper.out().info( msg, Out::HIGH );
+	    else
+	      zypper.out().error( msg );
+	  }
+	  enabled_repo_count--;
+	  continue;
+	}
       }
 
       // do the refresh

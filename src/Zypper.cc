@@ -1171,7 +1171,7 @@ void Zypper::processGlobalOptions()
     default:
     {
       const std::list<std::string> & content( gopts["plus-content"] );
-      _rdata.additional_content_repos.insert( content.begin(), content.end() );
+      _rdata.plusContentRepos.insert( content.begin(), content.end() );
     }
     }
   }
