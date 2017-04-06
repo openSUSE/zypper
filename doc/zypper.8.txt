@@ -1001,7 +1001,7 @@ Supported URI formats:
 *addrepo* (*ar*) ['options'] 'FILE'*.repo*::
 	Add a new repository specified by URI and assign specified alias to it or specify URI to a .repo file.
 	+
-	Newly added repositories have auto-refresh disabled by default (except for repositories imported from a .repo, having the auto-refresh enabled). To enable auto-refresh, use the *--refresh* option of the *modifyrepo* command.
+	Newly added repositories have auto-refresh disabled by default (except for repositories imported from a .repo, having the auto-refresh enabled). To enable auto-refresh use *addrepo -f*, or the *--refresh* option of the *modifyrepo* command.
 	+
 	Also, this command does not automatically refresh the newly added repositories. The repositories will get refreshed when used for the first time, or you can use the *refresh* command after finishing your modifications with **repo* commands. See also *METADATA REFRESH POLICY* section for more details.
 +
@@ -1606,7 +1606,18 @@ Repository Options: :: {nop}
 	Use an additional repository for this operation. The repository aliased tmp# and named by the specified URI will be added for this operation and removed at the end. You can specify this option multiple times.
 
 *--plus-content* 'tag'::
-	Additionally use disabled repositories providing a specific keyword. Disabled repositories are refreshed and those providing the specified 'tag' keyword are temporarily enabled. To enable for example repositories which may provide additional *-debuginfo* or *-debugsource* packages use *--plus-content debug*. You can specify this option multiple times.
+	Additionally use disabled repositories denoted by 'tag' for this operation. If 'tag' matches a repositories 'alias', 'name' or 'URL', or is a 'keyword' defined in the repositories metadata, the repository will be temporarily enabled for this operation. The repository will then be refreshed and used according to the commands rules. You can specify this option multiple times.
+	+
+	If a disabled repositories metadata are not available in the local cache, they will be downloaded to scan for matching keywords. Otherwise the keyword scan will use the metadata available in the local cache. Only if used together with the *refresh* command, a keyword scan will refresh 'all' disabled repositories.
+	+
+	To refresh all disabled repositories metadata: :::
+		*zypper --plus-content '' ref*
+	To include a disabled repository 'repo-debug' in a search: :::
+		*zypper --plus-content repo-debug search* '...'
+	To search only in a disabled repository 'repo-debug': :::
+		*zypper --plus-content repo-debug search -r repo-debug* '...'
+	To enable all repos providing the 'debug' keyword: :::
+		*zypper in --plus-content debug* '{nop} some -debuginfo or -debugsource package'
 
 *--disable-repositories*::
 	Do not read metadata from repositories. This option will prevent loading of packages from repositories, thus making zypper work only with the installed packages (if *--disable-system-resolvables* was not specified).
