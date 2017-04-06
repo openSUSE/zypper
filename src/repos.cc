@@ -766,9 +766,42 @@ void do_init_repos( Zypper & zypper, const Container & container )
     return;
   }
 
+  // --plus-content: It either specifies a known repo (by #, alias or URL)
+  // or we need to also refresh all disabled repos to get their content
+  // keywords.
+  std::set<RepoInfo> plusContent;
+  bool doContentCheck = false;
+  for ( const std::string & spec : zypper.runtimeData().plusContentRepos )
+  {
+    RepoInfo r;
+    if ( match_repo( zypper, spec, &r ) )
+      plusContent.insert( r );	// specific repo: add to plusContent
+    else if ( ! doContentCheck )
+      doContentCheck = true;	// keyword: need to scan all disabled repos
+  }
+
   // if no repository was specified on the command line, use all known repos
   if ( gData.repos.empty() )
     gData.repos.insert( gData.repos.end(), manager.repoBegin(), manager.repoEnd() );
+  else
+  {
+    // All command line repos must be either enabled or mentioned in --plus-content
+    bool ok = true;
+    for ( auto && repo : gData.repos )
+    {
+      if ( ! ( repo.enabled() || plusContent.count( repo ) ) )
+      {
+	zypper.out().error( str::Format(_("Specified repository '%s' is disabled.")) % repo.asUserString() );
+	ok = false;
+      }
+    }
+    if ( ! ok )
+    {
+      zypper.out().info( str::Format(_("Global option '%s' can be used to temporarily enable repositories.")) % "--plus-content" );
+      zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      return;
+    }
+  }
 
   // add temp repos (e.g. .rpm as CLI arg)
   if ( !gData.temporary_repos.empty() )
@@ -807,24 +840,33 @@ void do_init_repos( Zypper & zypper, const Container & container )
   unsigned skip_count = 0;
   for ( std::list<RepoInfo>::iterator it = gData.repos.begin(); it !=  gData.repos.end(); ++it )
   {
-    RepoInfo repo( *it );
+    RepoInfo repo( *it );	// play with a copy, persistent changes need to be made in gData!
     MIL << "checking if to refresh " << repo.alias() << endl;
 
     // disabled repos may get temp. enabled to check for --plus-content
     bool postContentcheck = false;
-    if ( ! ( gData.plusContentRepos.empty()
-          || repo.url().schemeIsVolatile()
-	  || repo.enabled() ) )
+    if ( ! repo.enabled() )
     {
-      // Preliminarily enable if last content matches or no content info available.
-      // Final check is done after refresh.
-      if ( repo.hasContentAny( gData.plusContentRepos ) || ! repo.hasContent() )
+      if ( plusContent.count( repo ) )
       {
-	postContentcheck = true;
-	repo.setEnabled( true );
-	MIL << "[--plus-content] check " << repo.alias() << endl;
-	zypper.out().info( str::Format(_("Scanning content of disabled repository '%s'.")) % repo.asUserString(),
+	MIL << "[--plus-content] check says use " << repo.alias() << endl;
+	zypper.out().info( str::Format(_("Temporarily enabling repository '%s'.")) % repo.asUserString(),
 			   " [--plus-content]" );
+	repo.setEnabled( true );	// found by its alias: no postContentcheck needed
+	it->setEnabled( true );		// in gData!
+      }
+      else if ( doContentCheck && !repo.url().schemeIsVolatile() )
+      {
+	// Preliminarily enable if last content matches or no content info available.
+	// Final check is done after refresh.
+	if ( repo.hasContentAny( gData.plusContentRepos ) || !repo.hasContent() )
+	{
+	  postContentcheck = true;	// preliminary enable it
+	  repo.setEnabled( true );
+	  MIL << "[--plus-content] check " << repo.alias() << endl;
+	  zypper.out().info( str::Format(_("Scanning content of disabled repository '%s'.")) % repo.asUserString(),
+			     " [--plus-content]" );
+	}
       }
     }
 
@@ -842,7 +884,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
           zypper.out().warning( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString(),
 				Out::QUIET );
 
-          it->setEnabled( false );
+          it->setEnabled( false );	// in gData!
 	  postContentcheck = false;
 	  ++skip_count;
         }
@@ -896,7 +938,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
           WAR << "Disabling repository '" << repo.alias() << "'" << endl;
           zypper.out().info( str::Format(_("Disabling repository '%s'.")) % repo.asUserString() );
 
-          it->setEnabled( false );
+          it->setEnabled( false );	// in gData!
 	  postContentcheck = false;
 	  ++skip_count;
 	}
@@ -910,7 +952,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
 	MIL << "[--plus-content] check says use " << repo.alias() << endl;
 	zypper.out().info( str::Format(_("Temporarily enabling repository '%s'.")) % repo.asUserString(),
 			   " [--plus-content]" );
-	it->setEnabled( true );
+	it->setEnabled( true );		// in gData!
       }
       else
       {
