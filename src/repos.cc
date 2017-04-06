@@ -1343,20 +1343,8 @@ void refresh_repos( Zypper & zypper )
   MIL << "going to refresh repositories" << endl;
   // need gpg keys when downloading (#304672)
   init_target( zypper );
-  RepoManager & manager = zypper.repoManager();
-
-  std::list<RepoInfo> repos;
-  try
-  {
-    repos.insert( repos.end(), manager.repoBegin(), manager.repoEnd()  );
-  }
-  catch ( const Exception & e )
-  {
-    ZYPP_CAUGHT( e );
-    zypper.out().error( e, _("Error reading repositories:") );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
-  }
+  RepoManager & manager( zypper.repoManager() );
+  const std::list<RepoInfo> & repos( manager.knownRepositories() );
 
   // get the list of repos specified on the command line ...
   std::list<RepoInfo> specified;
