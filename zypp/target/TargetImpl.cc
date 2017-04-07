@@ -1234,7 +1234,7 @@ namespace zypp
       if ( ! policy_r.dryRun() || policy_r.downloadMode() == DownloadOnly )
       {
 	// Prepare the package cache. Pass all items requiring download.
-        CommitPackageCache packageCache( root() );
+        CommitPackageCache packageCache;
 	packageCache.setCommitList( steps.begin(), steps.end() );
 
         bool miss = false;

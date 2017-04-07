@@ -83,8 +83,7 @@ namespace zypp
     class CommitPackageCacheReadAhead : public CommitPackageCache::Impl
     {
     public:
-      CommitPackageCacheReadAhead( const Pathname &        /*rootDir_r*/,
-                                   const PackageProvider & packageProvider_r );
+      CommitPackageCacheReadAhead( const PackageProvider & packageProvider_r );
 
     public:
       /** Provide the package. Either from Source or from cache. */

@@ -50,10 +50,8 @@ namespace zypp
     //	METHOD NAME : CommitPackageCacheReadAhead::CommitPackageCacheReadAhead
     //	METHOD TYPE : Ctor
     //
-    CommitPackageCacheReadAhead::CommitPackageCacheReadAhead( const Pathname &        /*rootDir_r*/,
-                                                              const PackageProvider & packageProvider_r )
+    CommitPackageCacheReadAhead::CommitPackageCacheReadAhead( const PackageProvider & packageProvider_r )
     : CommitPackageCache::Impl( packageProvider_r )
-    //, _rootDir( rootDir_r )
     {}
 
     ///////////////////////////////////////////////////////////////////

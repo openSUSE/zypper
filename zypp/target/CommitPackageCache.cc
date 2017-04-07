@@ -108,8 +108,7 @@ namespace zypp
       assert( _pimpl );
     }
 
-    CommitPackageCache::CommitPackageCache( const Pathname &        rootDir_r,
-                                            const PackageProvider & packageProvider_r )
+    CommitPackageCache::CommitPackageCache( const PackageProvider & packageProvider_r )
     {
       if ( getenv("ZYPP_COMMIT_NO_PACKAGE_CACHE") )
         {
@@ -118,12 +117,17 @@ namespace zypp
         }
       else
         {
-          _pimpl.reset( new CommitPackageCacheReadAhead( rootDir_r, packageProvider_r ) );
+          _pimpl.reset( new CommitPackageCacheReadAhead( packageProvider_r ) );
         }
       assert( _pimpl );
     }
 
-    CommitPackageCache::~CommitPackageCache()
+    CommitPackageCache::CommitPackageCache( const Pathname &        /*rootDir_r*/,
+                                            const PackageProvider & packageProvider_r )
+    : CommitPackageCache( packageProvider_r )
+    {}
+
+   CommitPackageCache::~CommitPackageCache()
     {}
 
     void CommitPackageCache::setCommitList( std::vector<sat::Solvable> commitList_r )
