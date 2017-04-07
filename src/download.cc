@@ -149,8 +149,7 @@ namespace
     }
 
     // Prepare the package cache. Pass all items requiring download.
-    target::CommitPackageCache packageCache( _zypper.globalOpts().root_dir );
-    //packageCache.setCommitList( steps.begin(), steps.end() );
+    target::CommitPackageCache packageCache;
 
     unsigned current = 0;
     _zypper.runtimeData().commit_pkgs_total = total; // fix DownloadResolvableReport total counter
