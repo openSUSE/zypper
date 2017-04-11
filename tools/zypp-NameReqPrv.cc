@@ -144,7 +144,12 @@ int main( int argc, char * argv[] )
   else if ( TestSetup::isTestSetup( sysRoot ) )
   {
     message << str::form( "*** Load TestSetup from '%s'", sysRoot.c_str() ) << endl;
-    TestSetup test( sysRoot, Arch_x86_64 );
+    const char * astr = getenv( "ZYPP_TESTSUITE_FAKE_ARCH" );
+    if ( !astr || !*astr )
+      astr = getenv( "ZYPP_ARCH" );
+    if ( !astr || !*astr )
+      astr = "x86_64";
+    TestSetup test( sysRoot, Arch( astr ) );
     test.loadRepos();
     dumpRange( message, satpool.reposBegin(), satpool.reposEnd() ) << endl;
   }
