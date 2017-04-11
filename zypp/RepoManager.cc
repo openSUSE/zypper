@@ -388,7 +388,7 @@ namespace zypp
     inline Pathname rawproductdata_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
     {
       assert_alias(info);
-      return opt.repoRawCachePath / info.escaped_alias() / info.path();
+      return rawcache_path_for_repoinfo( opt, info ) / info.path();
     }
 
     /**
@@ -403,7 +403,7 @@ namespace zypp
     /**
      * \short Calculates the solv cache path for a repository
      */
-    inline Pathname solv_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info)
+    inline Pathname solv_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
     {
       assert_alias(info);
       return opt.repoSolvCachePath / info.escaped_alias();
@@ -1645,14 +1645,15 @@ namespace zypp
 
     tosave.dumpAsIniOn(file);
     tosave.setFilepath(repofile);
-    tosave.setMetadataPath( metadataPath( tosave ) );
-    tosave.setPackagesPath( packagesPath( tosave ) );
+    tosave.setMetadataPath( rawcache_path_for_repoinfo( _options, tosave ) );
+    tosave.setPackagesPath( packagescache_path_for_repoinfo( _options, tosave ) );
     {
-      // We chould fix the API as we must injet those paths
+      // We should fix the API as we must inject those paths
       // into the repoinfo in order to keep it usable.
       RepoInfo & oinfo( const_cast<RepoInfo &>(info) );
-      oinfo.setMetadataPath( metadataPath( tosave ) );
-      oinfo.setPackagesPath( packagesPath( tosave ) );
+      oinfo.setFilepath(repofile);
+      oinfo.setMetadataPath( rawcache_path_for_repoinfo( _options, tosave ) );
+      oinfo.setPackagesPath( packagescache_path_for_repoinfo( _options, tosave ) );
     }
     reposManip().insert(tosave);
 
@@ -1713,8 +1714,10 @@ namespace zypp
           ++it )
     {
       MIL << "Saving " << (*it).alias() << endl;
-      it->setFilepath(repofile.asString());
       it->dumpAsIniOn(file);
+      it->setFilepath(repofile);
+      it->setMetadataPath( rawcache_path_for_repoinfo( _options, *it ) );
+      it->setPackagesPath( packagescache_path_for_repoinfo( _options, *it ) );
       reposManip().insert(*it);
 
       HistoryLog(_options.rootDir).addRepository(*it);
@@ -1869,6 +1872,16 @@ namespace zypp
       }
 
       newinfo.setFilepath(toedit.filepath());
+      newinfo.setMetadataPath( rawcache_path_for_repoinfo( _options, newinfo ) );
+      newinfo.setPackagesPath( packagescache_path_for_repoinfo( _options, newinfo ) );
+      {
+	// We should fix the API as we must inject those paths
+	// into the repoinfo in order to keep it usable.
+	RepoInfo & oinfo( const_cast<RepoInfo &>(newinfo_r) );
+	oinfo.setFilepath(toedit.filepath());
+	oinfo.setMetadataPath( rawcache_path_for_repoinfo( _options, newinfo ) );
+	oinfo.setPackagesPath( packagescache_path_for_repoinfo( _options, newinfo ) );
+      }
       reposManip().erase(toedit);
       reposManip().insert(newinfo);
       // check for credentials in Urls
