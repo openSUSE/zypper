@@ -4781,6 +4781,7 @@ msgstr "%s didukung oleh sistem dan tidak dapat dihapus"
 
 #: zypp/solver/detail/SATResolver.cc:1007
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s tidak dapat dipasang"
 
@@ -4791,6 +4792,7 @@ msgstr "tidak ada dukungan %s dibutuhkan oleh %s"
 
 #: zypp/solver/detail/SATResolver.cc:1017
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "tidak dapat memasang kedua %s dan %s"
 
@@ -4845,6 +4847,7 @@ msgstr "hapus kunci untuk mengizinkan menghapus %s"
 #: zypp/solver/detail/SATResolver.cc:1146
 #: zypp/solver/detail/SATResolver.cc:1182
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "do not install %s"
 msgstr "jangan memasang %s"
 
@@ -4856,6 +4859,7 @@ msgstr "simpan %s"
 
 #: zypp/solver/detail/SATResolver.cc:1166
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "hapus kunci untuk mengizinkan pemasangan dari %s"
 
@@ -4930,6 +4934,7 @@ msgstr "penggantian %s dengan %s"
 
 #: zypp/solver/detail/SATResolver.cc:1354
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "penghapusan dari %s"
 
@@ -4955,6 +4960,7 @@ msgstr "Satu atau kedua dari '%s' or '%s' atribut dibutuhkan."
 
 #: zypp/base/InterProcessMutex.cc:83
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "Can't open lock file: %s"
 msgstr "Ttidak dapat membuka file kunci: %s"
 
@@ -4984,6 +4990,7 @@ msgstr "Expresi reguler '%s' tidak valid: regcomp kembali %d"
 
 #: zypp/base/StrMatcher.cc:158
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "Invalid regular expression '%s'"
 msgstr "Expresi reguler '%s' tidak valid"
 
@@ -5007,11 +5014,13 @@ msgstr "Autentikasikan dibutuhkan untuk '%s'"
 
 #: zypp/media/MediaException.cc:31
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "Failed to mount %s on %s"
 msgstr "Gagal untuk mengaitkan%s pada %s"
 
 #: zypp/media/MediaException.cc:41
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "Failed to unmount %s"
 msgstr "Gagal untuk melepas %s"
 
@@ -5032,6 +5041,7 @@ msgstr "File '%s' tidak ditemukan pada medium '%s'"
 
 #: zypp/media/MediaException.cc:67
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "Cannot write file '%s'."
 msgstr "Tidak dapat menulis file '%s'."
 
@@ -5122,6 +5132,7 @@ msgstr "Tidak dapat mengeluarkan media apapun"
 
 #: zypp/media/MediaException.cc:184
 #, boost-format, boost-format, c-format, c-format
+#, c-format, boost-format
 msgid "Cannot eject media '%s'"
 msgstr "Tidak dapat mengeluarkan media '%s'"
 
