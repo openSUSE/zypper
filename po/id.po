@@ -8,40 +8,38 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2016-10-24 13:15+0000\n"
+"PO-Revision-Date: 2017-04-12 18:59+0700\n"
 "Last-Translator: Hanhan Hahn <matcherapy@gmail.com>\n"
-"Language-Team: Indonesian <https://l10n.opensuse.org/projects/libzypp/master/"
-"id/>\n"
+"Language-Team: Indonesian "
+"<https://l10n.opensuse.org/projects/libzypp/master/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Poedit 2.0.1\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
 msgid "Hal Exception"
-msgstr ""
+msgstr "Pengecualian Hal"
 
 #: zypp/Url.cc:114
-#, fuzzy
 msgid "Invalid LDAP URL query string"
-msgstr "Parameter query LDAP URL tidak valid '%1'"
+msgstr "Permintaan String LDAP URL Tidak Valid"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Parameter '%s' query LDAP URL tidak valid"
+msgstr "Parameter '%s’ query LDAP URL tidak valid"
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
 msgstr "Tidak dapat mengkloning objek Url"
 
 #: zypp/Url.cc:313
-#, fuzzy
 msgid "Invalid empty Url object reference"
-msgstr "Referensi implementasi url kosong tidak valid"
+msgstr "Referensi objek URL kosong tidak valid"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
@@ -69,7 +67,7 @@ msgstr "Tak bisa membuka kunci mutex"
 
 #: zypp/Dep.cc:96
 msgid "Provides"
-msgstr "Menyediakan\t"
+msgstr "Menyediakan"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
@@ -427,9 +425,8 @@ msgid "Invalid %s component"
 msgstr "Komponen '%s' tidak sah"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
-#, fuzzy
 msgid "Query string parsing not supported for this URL"
-msgstr "Parsing string query tidak didukung untuk url ini"
+msgstr "Penguraian string query tidak didukung untuk url ini"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
@@ -471,7 +468,6 @@ msgid "Invalid port component '%s'"
 msgstr "Komponen Port '%s' tidak sah"
 
 #: zypp/url/UrlBase.cc:1098
-#, fuzzy
 msgid "Url scheme requires path name"
 msgstr "Skema url membutuhkan nama path"
 
@@ -484,19 +480,16 @@ msgid "Encoded string contains a NUL byte"
 msgstr "String encoded memuat byte NUL"
 
 #: zypp/url/UrlUtils.cc:173
-#, fuzzy
 msgid "Invalid parameter array split separator character"
-msgstr "Karakter pemisah parameter map join tidak valid"
+msgstr "Karakter pemisah susunan pemecah tidak valid"
 
 #: zypp/url/UrlUtils.cc:213
-#, fuzzy
 msgid "Invalid parameter map split separator character"
-msgstr "Karakter pemisah parameter map join tidak valid"
+msgstr "Karakter pemisah parameter map tidak valid"
 
 #: zypp/url/UrlUtils.cc:283
-#, fuzzy
 msgid "Invalid parameter array join separator character"
-msgstr "Karakter pemisah parameter larik join tidak valid"
+msgstr "Karakter pemisah susunan join tidak valid"
 
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
@@ -532,7 +525,7 @@ msgstr "Tidak dapat mengeksekusi '%s' (%s)."
 #: zypp/ExternalProgram.cc:381
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr ""
+msgstr "Tidak dapat melakukan fork (%s)."
 
 #: zypp/ExternalProgram.cc:507
 #, c-format, boost-format
@@ -613,6 +606,10 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
+"Penentuan masalah, yang berarti dukungan teknis yang dirancang untuk "
+"memberikan informasi kompatibilitas, bantuan instalasi, dukungan penggunaan, "
+"pemeliharaan berlanjut dan pemecahan masalah dasar. Dukungan Level 1 tidak "
+"dimaksudkan untuk memperbaiki kesalahan produk cacat."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
@@ -620,6 +617,9 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
+"Isolasi masalah, yang berarti dukungan teknis yang dirancang untuk "
+"menduplikasi masalah pelanggan, mengisolasi pada area masalah dan memberikan "
+"solusi untuk masalah tidak diselesaikan dengan Level 1 Support."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -627,18 +627,22 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
+"Penyelesaian masalah, yang berarti dukungan teknis dirancang untuk "
+"menyelesaikan masalah yang kompleks dengan cara melibatkan teknik pada "
+"penyelesaian produk yang cacat sebagaimana telah diidentifikasi oleh Support "
+"Level 2."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr ""
+msgstr "Kontrak pelanggan tambahan diperlukan untuk mendapatkan dukungan."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr ""
+msgstr "Opsi support tidak diketahui. Deskripsi tidak ditemukan"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr ""
+msgstr "Negara tidak diketahui:"
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
@@ -2046,7 +2050,7 @@ msgstr "Uzbekistan"
 #. :UZB:860:
 #: zypp/CountryCode.cc:390
 msgid "Holy See (Vatican City State)"
-msgstr "Vatikan"
+msgstr "Holy See (Kota Vatikan)"
 
 # VC
 # fuzzy
@@ -2073,7 +2077,7 @@ msgstr "Kepulauan Virgin Britania Raya"
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr "Kepulauan Virgin Amerika Serikat"
+msgstr "Kepulauan Virgin, U.S."
 
 # VN
 # fuzzy
@@ -2378,12 +2382,11 @@ msgstr "Baltic"
 #. language code: bej
 #: zypp/LanguageCode.cc:257
 msgid "Beja"
-msgstr ""
+msgstr "Beja"
 
 # BY
 #. language code: bel be
 #: zypp/LanguageCode.cc:259
-#, fuzzy
 msgid "Belarusian"
 msgstr "Belarus"
 
@@ -2402,12 +2405,12 @@ msgstr "Bengali"
 #. language code: ber
 #: zypp/LanguageCode.cc:265
 msgid "Berber (Other)"
-msgstr ""
+msgstr "Berber (Lainnya)"
 
 #. language code: bho
 #: zypp/LanguageCode.cc:267
 msgid "Bhojpuri"
-msgstr ""
+msgstr "Bhojpuri"
 
 # BH
 #. language code: bih bh
@@ -2418,7 +2421,7 @@ msgstr "Bihari"
 #. language code: bik
 #: zypp/LanguageCode.cc:271
 msgid "Bikol"
-msgstr ""
+msgstr "Bikol"
 
 # BJ
 #. language code: bin
@@ -2429,17 +2432,17 @@ msgstr "Bini"
 #. language code: bis bi
 #: zypp/LanguageCode.cc:275
 msgid "Bislama"
-msgstr ""
+msgstr "Bislama"
 
 #. language code: bla
 #: zypp/LanguageCode.cc:277
 msgid "Siksika"
-msgstr ""
+msgstr "Siksika"
 
 #. language code: bnt
 #: zypp/LanguageCode.cc:279
 msgid "Bantu (Other)"
-msgstr ""
+msgstr "Bantu (Other)"
 
 # BW
 #. language code: bos bs
@@ -2483,7 +2486,7 @@ msgstr "Bulgaria"
 #. language code: bur mya my
 #: zypp/LanguageCode.cc:295 zypp/LanguageCode.cc:297
 msgid "Burmese"
-msgstr ""
+msgstr "Burmese"
 
 # BJ
 #. language code: byn
@@ -2500,7 +2503,7 @@ msgstr "Caddo"
 #. language code: cai
 #: zypp/LanguageCode.cc:303
 msgid "Central American Indian (Other)"
-msgstr ""
+msgstr "Amerika Hindi Bagian Tengah (Lainnya)"
 
 #. language code: car
 #: zypp/LanguageCode.cc:305
@@ -2515,19 +2518,18 @@ msgstr "Catalan"
 #. language code: cau
 #: zypp/LanguageCode.cc:309
 msgid "Caucasian (Other)"
-msgstr ""
+msgstr "Caucasian (Lainnya)"
 
 # LB
 #. language code: ceb
 #: zypp/LanguageCode.cc:311
-#, fuzzy
 msgid "Cebuano"
 msgstr "Cebuano"
 
 #. language code: cel
 #: zypp/LanguageCode.cc:313
 msgid "Celtic (Other)"
-msgstr ""
+msgstr "Celtic (Lainnya)"
 
 # KM
 #. language code: cha ch
@@ -2538,20 +2540,18 @@ msgstr "Chamorro"
 # CN
 #. language code: chb
 #: zypp/LanguageCode.cc:317
-#, fuzzy
 msgid "Chibcha"
 msgstr "Chibcha"
 
 #. language code: che ce
 #: zypp/LanguageCode.cc:319
-#, fuzzy
 msgid "Chechen"
 msgstr "Chechen"
 
 #. language code: chg
 #: zypp/LanguageCode.cc:321
 msgid "Chagatai"
-msgstr ""
+msgstr "Chagatai"
 
 #. language code: chi zho zh
 #: zypp/LanguageCode.cc:323 zypp/LanguageCode.cc:325
@@ -2571,37 +2571,37 @@ msgstr "Mari"
 #. language code: chn
 #: zypp/LanguageCode.cc:331
 msgid "Chinook Jargon"
-msgstr ""
+msgstr "Chinook Jargon"
 
 #. language code: cho
 #: zypp/LanguageCode.cc:333
 msgid "Choctaw"
-msgstr ""
+msgstr "Choctaw"
 
 #. language code: chp
 #: zypp/LanguageCode.cc:335
 msgid "Chipewyan"
-msgstr ""
+msgstr "Chipewyan"
 
 #. language code: chr
 #: zypp/LanguageCode.cc:337
 msgid "Cherokee"
-msgstr ""
+msgstr "Cherokee"
 
 #. language code: chu cu
 #: zypp/LanguageCode.cc:339
 msgid "Church Slavic"
-msgstr ""
+msgstr "Church Slavic"
 
 #. language code: chv cv
 #: zypp/LanguageCode.cc:341
 msgid "Chuvash"
-msgstr ""
+msgstr "Chuvash"
 
 #. language code: chy
 #: zypp/LanguageCode.cc:343
 msgid "Cheyenne"
-msgstr ""
+msgstr "Cheyenne"
 
 # LK
 #. language code: cmc
@@ -2617,7 +2617,6 @@ msgstr "Koptik"
 
 #. language code: cor kw
 #: zypp/LanguageCode.cc:349
-#, fuzzy
 msgid "Cornish"
 msgstr "Cornish"
 
@@ -2630,17 +2629,17 @@ msgstr "Korsika"
 #. language code: cpe
 #: zypp/LanguageCode.cc:353
 msgid "Creoles and Pidgins, English-Based (Other)"
-msgstr ""
+msgstr "Creoles dan Pidgins, Berbasis Bahasa English(Lainnya)"
 
 #. language code: cpf
 #: zypp/LanguageCode.cc:355
 msgid "Creoles and Pidgins, French-Based (Other)"
-msgstr ""
+msgstr "Creoles dan Pidgins, Berbasis Bahasa Perancis (Lainnya)"
 
 #. language code: cpp
 #: zypp/LanguageCode.cc:357
 msgid "Creoles and Pidgins, Portuguese-Based (Other)"
-msgstr ""
+msgstr "Creoles dan Pidgins, Berbasis Bahasa Portugis (Lainnya)"
 
 #. language code: cre cr
 #: zypp/LanguageCode.cc:359
@@ -2650,22 +2649,22 @@ msgstr "Cree"
 #. language code: crh
 #: zypp/LanguageCode.cc:361
 msgid "Crimean Tatar"
-msgstr ""
+msgstr "Crimean Tatar"
 
 #. language code: crp
 #: zypp/LanguageCode.cc:363
 msgid "Creoles and Pidgins (Other)"
-msgstr ""
+msgstr "Creoles dan Pidgins (Lainnya)"
 
 #. language code: csb
 #: zypp/LanguageCode.cc:365
 msgid "Kashubian"
-msgstr ""
+msgstr "Kashubian"
 
 #. language code: cus
 #: zypp/LanguageCode.cc:367
 msgid "Cushitic (Other)"
-msgstr ""
+msgstr "Cushitic (Lainnya)"
 
 #. language code: cze ces cs
 #: zypp/LanguageCode.cc:369 zypp/LanguageCode.cc:371
@@ -2675,7 +2674,7 @@ msgstr "Cekoslowakia"
 #. language code: dak
 #: zypp/LanguageCode.cc:373
 msgid "Dakota"
-msgstr ""
+msgstr "Dakota"
 
 #. language code: dan da
 #: zypp/LanguageCode.cc:375
@@ -2685,27 +2684,27 @@ msgstr "Denmark"
 #. language code: dar
 #: zypp/LanguageCode.cc:377
 msgid "Dargwa"
-msgstr ""
+msgstr "Dargwa"
 
 #. language code: day
 #: zypp/LanguageCode.cc:379
 msgid "Dayak"
-msgstr ""
+msgstr "Dayak"
 
 #. language code: del
 #: zypp/LanguageCode.cc:381
 msgid "Delaware"
-msgstr ""
+msgstr "Delaware"
 
 #. language code: den
 #: zypp/LanguageCode.cc:383
 msgid "Slave (Athapascan)"
-msgstr ""
+msgstr "Slave (Athapascan)"
 
 #. language code: dgr
 #: zypp/LanguageCode.cc:385
 msgid "Dogrib"
-msgstr ""
+msgstr "Dogrib"
 
 # DM
 #. language code: din
@@ -2716,7 +2715,7 @@ msgstr "Dinka"
 #. language code: div dv
 #: zypp/LanguageCode.cc:389
 msgid "Divehi"
-msgstr ""
+msgstr "Divehi"
 
 #. language code: doi
 #: zypp/LanguageCode.cc:391
@@ -2726,25 +2725,23 @@ msgstr "Dogri"
 #. language code: dra
 #: zypp/LanguageCode.cc:393
 msgid "Dravidian (Other)"
-msgstr ""
+msgstr "Dravidian (Lainnya)"
 
 #. language code: dsb
 #: zypp/LanguageCode.cc:395
-#, fuzzy
 msgid "Lower Sorbian"
 msgstr "Lower Sorbian"
 
 # PW
 #. language code: dua
 #: zypp/LanguageCode.cc:397
-#, fuzzy
 msgid "Duala"
 msgstr "Duala"
 
 #. language code: dum
 #: zypp/LanguageCode.cc:399
 msgid "Dutch, Middle (ca.1050-1350)"
-msgstr ""
+msgstr "Belanda, Antara (Th.1050-1350)"
 
 #. language code: dut nld nl
 #: zypp/LanguageCode.cc:401 zypp/LanguageCode.cc:403
@@ -2754,7 +2751,7 @@ msgstr "Belanda"
 #. language code: dyu
 #: zypp/LanguageCode.cc:405
 msgid "Dyula"
-msgstr ""
+msgstr "Dyula"
 
 # TO
 #. language code: dzo dz
@@ -2765,33 +2762,32 @@ msgstr "Dzongkha"
 #. language code: efi
 #: zypp/LanguageCode.cc:409
 msgid "Efik"
-msgstr ""
+msgstr "Efik"
 
 #. language code: egy
 #: zypp/LanguageCode.cc:411
 msgid "Egyptian (Ancient)"
-msgstr ""
+msgstr "Mesir Kuno"
 
 #. language code: eka
 #: zypp/LanguageCode.cc:413
 msgid "Ekajuk"
-msgstr ""
+msgstr "Ekajuk"
 
 #. language code: elx
 #: zypp/LanguageCode.cc:415
 msgid "Elamite"
-msgstr ""
+msgstr "Elamite"
 
 #. language code: eng en
 #: zypp/LanguageCode.cc:417
-#, fuzzy
 msgid "English"
 msgstr "Inggris (British)"
 
 #. language code: enm
 #: zypp/LanguageCode.cc:419
 msgid "English, Middle (1100-1500)"
-msgstr ""
+msgstr "Inggris, Antara (1100-1500)"
 
 #. language code: epo eo
 #: zypp/LanguageCode.cc:421
@@ -2806,12 +2802,12 @@ msgstr "Estonia"
 #. language code: ewe ee
 #: zypp/LanguageCode.cc:425
 msgid "Ewe"
-msgstr ""
+msgstr "Ewe"
 
 #. language code: ewo
 #: zypp/LanguageCode.cc:427
 msgid "Ewondo"
-msgstr ""
+msgstr "Ewondo"
 
 # FR
 #. language code: fan
@@ -2822,7 +2818,6 @@ msgstr "Fang"
 # FO
 #. language code: fao fo
 #: zypp/LanguageCode.cc:431
-#, fuzzy
 msgid "Faroese"
 msgstr "Kepulauan Faroe"
 
@@ -2835,14 +2830,12 @@ msgstr "Fanti"
 # FJ
 #. language code: fij fj
 #: zypp/LanguageCode.cc:435
-#, fuzzy
 msgid "Fijian"
-msgstr "Fiji"
+msgstr "Fijian"
 
 # PH
 #. language code: fil
 #: zypp/LanguageCode.cc:437
-#, fuzzy
 msgid "Filipino"
 msgstr "Filipina"
 
@@ -2854,12 +2847,12 @@ msgstr "Finlandia"
 #. language code: fiu
 #: zypp/LanguageCode.cc:441
 msgid "Finno-Ugrian (Other)"
-msgstr ""
+msgstr "Finno-Ugrian (Lainnya)"
 
 #. language code: fon
 #: zypp/LanguageCode.cc:443
 msgid "Fon"
-msgstr ""
+msgstr "Fon"
 
 #. language code: fre fra fr
 #: zypp/LanguageCode.cc:445 zypp/LanguageCode.cc:447
@@ -2869,45 +2862,41 @@ msgstr "Prancis"
 #. language code: frm
 #: zypp/LanguageCode.cc:449
 msgid "French, Middle (ca.1400-1600)"
-msgstr ""
+msgstr "Prancis, Antara (Thn.1400-1600)"
 
 #. language code: fro
 #: zypp/LanguageCode.cc:451
 msgid "French, Old (842-ca.1400)"
-msgstr ""
+msgstr "Prancis, Kuno (Thn.842-1400)"
 
 # FR
 #. language code: fry fy
 #: zypp/LanguageCode.cc:453
-#, fuzzy
 msgid "Frisian"
-msgstr "Perancis"
+msgstr "Frisian"
 
 #. language code: ful ff
 #: zypp/LanguageCode.cc:455
 msgid "Fulah"
-msgstr ""
+msgstr "Fulah"
 
 # FI
 #. language code: fur
 #: zypp/LanguageCode.cc:457
-#, fuzzy
 msgid "Friulian"
-msgstr "Finlandia"
+msgstr "Friulian"
 
 # GU
 #. language code: gaa
 #: zypp/LanguageCode.cc:459
-#, fuzzy
 msgid "Ga"
-msgstr "Guam"
+msgstr "Ga"
 
 # GA
 #. language code: gay
 #: zypp/LanguageCode.cc:461
-#, fuzzy
 msgid "Gayo"
-msgstr "Gabon"
+msgstr "Gayo"
 
 # LY
 # fuzzy
@@ -2919,14 +2908,12 @@ msgstr "Liberia"
 
 #. language code: gem
 #: zypp/LanguageCode.cc:465
-#, fuzzy
 msgid "Germanic (Other)"
-msgstr "Jerman (Swiss)"
+msgstr "Jerman (Lainnya)"
 
 # GE
 #. language code: geo kat ka
 #: zypp/LanguageCode.cc:467 zypp/LanguageCode.cc:469
-#, fuzzy
 msgid "Georgian"
 msgstr "Grujia"
 
@@ -2937,21 +2924,19 @@ msgstr "Jerman"
 
 #. language code: gez
 #: zypp/LanguageCode.cc:475
-#, fuzzy
 msgid "Geez"
 msgstr "Yunani"
 
 #. language code: gil
 #: zypp/LanguageCode.cc:477
 msgid "Gilbertese"
-msgstr ""
+msgstr "Gilbertese"
 
 # ML
 #. language code: gla gd
 #: zypp/LanguageCode.cc:479
-#, fuzzy
 msgid "Gaelic"
-msgstr "Mali"
+msgstr "Gaelic"
 
 #. language code: gle ga
 #: zypp/LanguageCode.cc:481
@@ -2960,100 +2945,93 @@ msgstr "Irlandia"
 
 #. language code: glg gl
 #: zypp/LanguageCode.cc:483
-#, fuzzy
 msgid "Galician"
-msgstr "Italia"
+msgstr "Galician"
 
 #. language code: glv gv
 #: zypp/LanguageCode.cc:485
 msgid "Manx"
-msgstr ""
+msgstr "Manx"
 
 #. language code: gmh
 #: zypp/LanguageCode.cc:487
 msgid "German, Middle High (ca.1050-1500)"
-msgstr ""
+msgstr "Jerman, Menengah Tinggi (Thn.1050-1500)"
 
 #. language code: goh
 #: zypp/LanguageCode.cc:489
 msgid "German, Old High (ca.750-1050)"
-msgstr ""
+msgstr "German, Kuno Tinggi (Thn.750-1050)"
 
 # IN
 #. language code: gon
 #: zypp/LanguageCode.cc:491
-#, fuzzy
 msgid "Gondi"
 msgstr "India"
 
 #. language code: gor
 #: zypp/LanguageCode.cc:493
 msgid "Gorontalo"
-msgstr ""
+msgstr "Gorontalo"
 
 #. language code: got
 #: zypp/LanguageCode.cc:495
 msgid "Gothic"
-msgstr ""
+msgstr "Gothic"
 
 # GA
 #. language code: grb
 #: zypp/LanguageCode.cc:497
-#, fuzzy
 msgid "Grebo"
-msgstr "Gabon"
+msgstr "Grebo"
 
 #. language code: grc
 #: zypp/LanguageCode.cc:499
 msgid "Greek, Ancient (to 1453)"
-msgstr ""
+msgstr "Yunani, Kuno (untuk 1453)"
 
 #. language code: gre ell el
 #: zypp/LanguageCode.cc:501 zypp/LanguageCode.cc:503
 msgid "Greek, Modern (1453-)"
-msgstr ""
+msgstr "Yunani, Modern (1453 keatas)"
 
 #. language code: grn gn
 #: zypp/LanguageCode.cc:505
-#, fuzzy
 msgid "Guarani"
-msgstr "Hongaria"
+msgstr "Guarani"
 
 #. language code: guj gu
 #: zypp/LanguageCode.cc:507
 msgid "Gujarati"
-msgstr ""
+msgstr "Gujarat"
 
 #. language code: gwi
 #: zypp/LanguageCode.cc:509
 msgid "Gwich'in"
-msgstr ""
+msgstr "Gwich’in"
 
 # HT
 #. language code: hai
 #: zypp/LanguageCode.cc:511
-#, fuzzy
 msgid "Haida"
-msgstr "Haiti"
+msgstr "Haida"
 
 # HT
 #. language code: hat ht
 #: zypp/LanguageCode.cc:513
-#, fuzzy
 msgid "Haitian"
 msgstr "Haiti"
 
 #. language code: hau ha
 #: zypp/LanguageCode.cc:515
 msgid "Hausa"
-msgstr ""
+msgstr "Hausa"
 
 # HT
 #. language code: haw
 #: zypp/LanguageCode.cc:517
-#, fuzzy
 msgid "Hawaiian"
-msgstr "Haiti"
+msgstr "Hawai"
 
 #. language code: heb he
 #: zypp/LanguageCode.cc:519
@@ -3062,49 +3040,44 @@ msgstr "Israel"
 
 #. language code: her hz
 #: zypp/LanguageCode.cc:521
-#, fuzzy
 msgid "Herero"
-msgstr "Israel"
+msgstr "Herero"
 
 #. language code: hil
 #: zypp/LanguageCode.cc:523
 msgid "Hiligaynon"
-msgstr ""
+msgstr "Hiligaynon"
 
 #. language code: him
 #: zypp/LanguageCode.cc:525
 msgid "Himachali"
-msgstr ""
+msgstr "Himachali"
 
 # IN
 #. language code: hin hi
 #: zypp/LanguageCode.cc:527
-#, fuzzy
 msgid "Hindi"
 msgstr "India"
 
 # HT
 #. language code: hit
 #: zypp/LanguageCode.cc:529
-#, fuzzy
 msgid "Hittite"
 msgstr "Haiti"
 
 # TO
 #. language code: hmn
 #: zypp/LanguageCode.cc:531
-#, fuzzy
 msgid "Hmong"
 msgstr "Tonga"
 
 #. language code: hmo ho
 #: zypp/LanguageCode.cc:533
 msgid "Hiri Motu"
-msgstr ""
+msgstr "Hiri Motu"
 
 #. language code: hsb
 #: zypp/LanguageCode.cc:535
-#, fuzzy
 msgid "Upper Sorbian"
 msgstr "Serbia"
 
@@ -3116,20 +3089,19 @@ msgstr "Hongaria"
 #. language code: hup
 #: zypp/LanguageCode.cc:539
 msgid "Hupa"
-msgstr ""
+msgstr "Hupa"
 
 # IR
 # fuzzy
 #. language code: iba
 #: zypp/LanguageCode.cc:541
-#, fuzzy
 msgid "Iban"
-msgstr "Iraq"
+msgstr "Iban"
 
 #. language code: ibo ig
 #: zypp/LanguageCode.cc:543
 msgid "Igbo"
-msgstr ""
+msgstr "Igbo"
 
 #. language code: ice isl is
 #: zypp/LanguageCode.cc:545 zypp/LanguageCode.cc:547
@@ -3139,80 +3111,76 @@ msgstr "Islandia"
 #. language code: ido io
 #: zypp/LanguageCode.cc:549
 msgid "Ido"
-msgstr ""
+msgstr "Ido"
 
 # LT
 #. language code: iii ii
 #: zypp/LanguageCode.cc:551
-#, fuzzy
 msgid "Sichuan Yi"
-msgstr "Lithuania"
+msgstr "Sichuan Yi"
 
 #. language code: ijo
 #: zypp/LanguageCode.cc:553
 msgid "Ijo"
-msgstr ""
+msgstr "Ijo"
 
 #. language code: iku iu
 #: zypp/LanguageCode.cc:555
 msgid "Inuktitut"
-msgstr ""
+msgstr "Inuktitut"
 
 #. language code: ile ie
 #: zypp/LanguageCode.cc:557
 msgid "Interlingue"
-msgstr ""
+msgstr "Interlingue"
 
 #. language code: ilo
 #: zypp/LanguageCode.cc:559
 msgid "Iloko"
-msgstr ""
+msgstr "Iloko"
 
 #. language code: ina ia
 #: zypp/LanguageCode.cc:561
 msgid "Interlingua (International Auxiliary Language Association)"
-msgstr ""
+msgstr "Interlingua (Asosiasi Bahasa Bantu Internasional)"
 
 #. language code: inc
 #: zypp/LanguageCode.cc:563
 msgid "Indic (Other)"
-msgstr ""
+msgstr "Indic (Lainnya)"
 
 # ID
 #. language code: ind id
 #: zypp/LanguageCode.cc:565
-#, fuzzy
 msgid "Indonesian"
 msgstr "Indonesia"
 
 #. language code: ine
 #: zypp/LanguageCode.cc:567
 msgid "Indo-European (Other)"
-msgstr ""
+msgstr "Indo-Eropa (Lainnya)"
 
 #. language code: inh
 #: zypp/LanguageCode.cc:569
 msgid "Ingush"
-msgstr ""
+msgstr "Ingush"
 
 # IN
 #. language code: ipk ik
 #: zypp/LanguageCode.cc:571
-#, fuzzy
 msgid "Inupiaq"
-msgstr "India"
+msgstr "IndiaInupiaq"
 
 #. language code: ira
 #: zypp/LanguageCode.cc:573
 msgid "Iranian (Other)"
-msgstr ""
+msgstr "Iran (Lainnya)"
 
 # LK
 #. language code: iro
 #: zypp/LanguageCode.cc:575
-#, fuzzy
 msgid "Iroquoian Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Iroquoia"
 
 #. language code: ita it
 #: zypp/LanguageCode.cc:577
@@ -3221,16 +3189,14 @@ msgstr "Italia"
 
 #. language code: jav jv
 #: zypp/LanguageCode.cc:579
-#, fuzzy
 msgid "Javanese"
-msgstr "Jepang"
+msgstr "Bahasa Jawa"
 
 # LB
 #. language code: jbo
 #: zypp/LanguageCode.cc:581
-#, fuzzy
 msgid "Lojban"
-msgstr "Lebanon"
+msgstr "Lojban"
 
 #. language code: jpn ja
 #: zypp/LanguageCode.cc:583
@@ -3240,70 +3206,64 @@ msgstr "Jepang"
 #. language code: jpr
 #: zypp/LanguageCode.cc:585
 msgid "Judeo-Persian"
-msgstr ""
+msgstr "Judeo-Persian"
 
 #. language code: jrb
 #: zypp/LanguageCode.cc:587
-#, fuzzy
 msgid "Judeo-Arabic"
-msgstr "Arab"
+msgstr "Judeo-Arab"
 
 #. language code: kaa
 #: zypp/LanguageCode.cc:589
 msgid "Kara-Kalpak"
-msgstr ""
+msgstr "Kara-Kalpak"
 
 #. language code: kab
 #: zypp/LanguageCode.cc:591
 msgid "Kabyle"
-msgstr ""
+msgstr "Kabyle"
 
 # BH
 #. language code: kac
 #: zypp/LanguageCode.cc:593
-#, fuzzy
 msgid "Kachin"
-msgstr "Bahrain"
+msgstr "Kachin"
 
 #. language code: kal kl
 #: zypp/LanguageCode.cc:595
 msgid "Kalaallisut"
-msgstr ""
+msgstr "Kalaallisut"
 
 # GM
 #. language code: kam
 #: zypp/LanguageCode.cc:597
-#, fuzzy
 msgid "Kamba"
-msgstr "Gambia"
+msgstr "Kamba"
 
 # CA
 #. language code: kan kn
 #: zypp/LanguageCode.cc:599
-#, fuzzy
 msgid "Kannada"
 msgstr "Kanada"
 
 #. language code: kar
 #: zypp/LanguageCode.cc:601
-#, fuzzy
 msgid "Karen"
-msgstr "Korea"
+msgstr "Karen"
 
 #. language code: kas ks
 #: zypp/LanguageCode.cc:603
 msgid "Kashmiri"
-msgstr ""
+msgstr "Kashmiri"
 
 #. language code: kau kr
 #: zypp/LanguageCode.cc:605
 msgid "Kanuri"
-msgstr ""
+msgstr "Kanuri"
 
 # MW
 #. language code: kaw
 #: zypp/LanguageCode.cc:607
-#, fuzzy
 msgid "Kawi"
 msgstr "Malawi"
 
@@ -3311,72 +3271,67 @@ msgstr "Malawi"
 # fuzzy
 #. language code: kaz kk
 #: zypp/LanguageCode.cc:609
-#, fuzzy
 msgid "Kazakh"
 msgstr "Kazakhstan"
 
 #. language code: kbd
 #: zypp/LanguageCode.cc:611
 msgid "Kabardian"
-msgstr ""
+msgstr "Kabardian"
 
 #. language code: kha
 #: zypp/LanguageCode.cc:613
-#, fuzzy
 msgid "Khasi"
-msgstr "Thailand"
+msgstr "Khasi"
 
 #. language code: khi
 #: zypp/LanguageCode.cc:615
 msgid "Khoisan (Other)"
-msgstr ""
+msgstr "Khoisan (Lainnya)"
 
 #. language code: khm km
 #: zypp/LanguageCode.cc:617
 msgid "Khmer"
-msgstr ""
+msgstr "Khmer"
 
 #. language code: kho
 #: zypp/LanguageCode.cc:619
-#, fuzzy
 msgid "Khotanese"
-msgstr "Cina"
+msgstr "Khotanese"
 
 #. language code: kik ki
 #: zypp/LanguageCode.cc:621
 msgid "Kikuyu"
-msgstr ""
+msgstr "Kikuyu"
 
 #. language code: kin rw
 #: zypp/LanguageCode.cc:623
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "Kinyarwanda"
 
 #. language code: kir ky
 #: zypp/LanguageCode.cc:625
 msgid "Kirghiz"
-msgstr ""
+msgstr "Kirghiz"
 
 #. language code: kmb
 #: zypp/LanguageCode.cc:627
 msgid "Kimbundu"
-msgstr ""
+msgstr "Kimbundu"
 
 #. language code: kok
 #: zypp/LanguageCode.cc:629
-#, fuzzy
 msgid "Konkani"
-msgstr "Korea"
+msgstr "Konkani"
 
 #. language code: kom kv
 #: zypp/LanguageCode.cc:631
 msgid "Komi"
-msgstr ""
+msgstr "Komi"
 
 # CG
 #. language code: kon kg
 #: zypp/LanguageCode.cc:633
-#, fuzzy
 msgid "Kongo"
 msgstr "Kongo"
 
@@ -3387,116 +3342,103 @@ msgstr "Korea"
 
 #. language code: kos
 #: zypp/LanguageCode.cc:637
-#, fuzzy
 msgid "Kosraean"
-msgstr "Korea"
+msgstr "Kosraean"
 
 #. language code: kpe
 #: zypp/LanguageCode.cc:639
 msgid "Kpelle"
-msgstr ""
+msgstr "Kpelle"
 
 #. language code: krc
 #: zypp/LanguageCode.cc:641
 msgid "Karachay-Balkar"
-msgstr ""
+msgstr "Karachay-Balkar"
 
 #. language code: kro
 #: zypp/LanguageCode.cc:643
 msgid "Kru"
-msgstr ""
+msgstr "Kru"
 
 #. language code: kru
 #: zypp/LanguageCode.cc:645
-#, fuzzy
 msgid "Kurukh"
-msgstr "Turki"
+msgstr "Kurukh"
 
 # PA
 #. language code: kua kj
 #: zypp/LanguageCode.cc:647
-#, fuzzy
 msgid "Kuanyama"
-msgstr "Panama"
+msgstr "Kuanyama"
 
 #. language code: kum
 #: zypp/LanguageCode.cc:649
 msgid "Kumyk"
-msgstr ""
+msgstr "Kumyk"
 
 #. language code: kur ku
 #: zypp/LanguageCode.cc:651
-#, fuzzy
 msgid "Kurdish"
-msgstr "Turki"
+msgstr "Kurdish"
 
 # KE
 #. language code: kut
 #: zypp/LanguageCode.cc:653
-#, fuzzy
 msgid "Kutenai"
-msgstr "Kenya"
+msgstr "Kutenai"
 
 # LB
 #. language code: lad
 #: zypp/LanguageCode.cc:655
-#, fuzzy
 msgid "Ladino"
-msgstr "Lebanon"
+msgstr "Ladino"
 
 # UG
 #. language code: lah
 #: zypp/LanguageCode.cc:657
-#, fuzzy
 msgid "Lahnda"
-msgstr "Uganda"
+msgstr "Lahnda"
 
 # GM
 #. language code: lam
 #: zypp/LanguageCode.cc:659
-#, fuzzy
 msgid "Lamba"
-msgstr "Gambia"
+msgstr "Lamba"
 
 # LB
 #. language code: lao lo
 #: zypp/LanguageCode.cc:661
-#, fuzzy
 msgid "Lao"
-msgstr "Lebanon"
+msgstr "Lao"
 
 # LV
 #. language code: lat la
 #: zypp/LanguageCode.cc:663
-#, fuzzy
 msgid "Latin"
-msgstr "Latvia"
+msgstr "Latin"
 
 # LV
 #. language code: lav lv
 #: zypp/LanguageCode.cc:665
-#, fuzzy
 msgid "Latvian"
 msgstr "Latvia"
 
 #. language code: lez
 #: zypp/LanguageCode.cc:667
 msgid "Lezghian"
-msgstr ""
+msgstr "Lezghian"
 
 # LU
 #. language code: lim li
 #: zypp/LanguageCode.cc:669
-#, fuzzy
 msgid "Limburgan"
-msgstr "Luxembourg"
+msgstr "Limburgan"
 
 # AO
 #. language code: lin ln
 #: zypp/LanguageCode.cc:671
-#, fuzzy
 msgid "Lingala"
-msgstr "Angola"
+msgstr "Lingala"
 
 #. language code: lit lt
 #: zypp/LanguageCode.cc:673
@@ -3506,114 +3448,103 @@ msgstr "Lithuania"
 # CG
 #. language code: lol
 #: zypp/LanguageCode.cc:675
-#, fuzzy
 msgid "Mongo"
-msgstr "Kongo"
+msgstr "Mongo"
 
 #. language code: loz
 #: zypp/LanguageCode.cc:677
 msgid "Lozi"
-msgstr ""
+msgstr "Lozi"
 
 # LU
 #. language code: ltz lb
 #: zypp/LanguageCode.cc:679
-#, fuzzy
 msgid "Luxembourgish"
 msgstr "Luxembourg"
 
 #. language code: lua
 #: zypp/LanguageCode.cc:681
 msgid "Luba-Lulua"
-msgstr ""
+msgstr "Luba-Lulua"
 
 #. language code: lub lu
 #: zypp/LanguageCode.cc:683
 msgid "Luba-Katanga"
-msgstr ""
+msgstr "Luba-Katanga"
 
 # GH
 #. language code: lug lg
 #: zypp/LanguageCode.cc:685
-#, fuzzy
 msgid "Ganda"
-msgstr "Ghana"
+msgstr "Ganda"
 
 #. language code: lui
 #: zypp/LanguageCode.cc:687
 msgid "Luiseno"
-msgstr ""
+msgstr "Luiseno"
 
 # SD
 #. language code: lun
 #: zypp/LanguageCode.cc:689
-#, fuzzy
 msgid "Lunda"
-msgstr "Sudan"
+msgstr "Lunda"
 
 #. language code: luo
 #: zypp/LanguageCode.cc:691
 msgid "Luo (Kenya and Tanzania)"
-msgstr ""
+msgstr "Luo (Kenya dan Tanzania)"
 
 #. language code: lus
 #: zypp/LanguageCode.cc:693
-#, fuzzy
 msgid "Lushai"
-msgstr "Thailand"
+msgstr "Lushai"
 
 #. language code: mac mkd mk
 #: zypp/LanguageCode.cc:695 zypp/LanguageCode.cc:697
 msgid "Macedonian"
-msgstr "Masedonian"
+msgstr "Masedonia"
 
 # MV
 # fuzzy
 #. language code: mad
 #: zypp/LanguageCode.cc:699
-#, fuzzy
 msgid "Madurese"
-msgstr "Mali"
+msgstr "Madura"
 
 # MW
 #. language code: mag
 #: zypp/LanguageCode.cc:701
-#, fuzzy
 msgid "Magahi"
-msgstr "Malawi"
+msgstr "Magahi"
 
 # MH
 #. language code: mah mh
 #: zypp/LanguageCode.cc:703
-#, fuzzy
 msgid "Marshallese"
 msgstr "Kepulauan Marshall"
 
 # ML
 #. language code: mai
 #: zypp/LanguageCode.cc:705
-#, fuzzy
 msgid "Maithili"
-msgstr "Mali"
+msgstr "Maithili"
 
 # MG
 #. language code: mak
 #: zypp/LanguageCode.cc:707
-#, fuzzy
 msgid "Makasar"
-msgstr "Madagaskar"
+msgstr "Makasar"
 
 # MY
 #. language code: mal ml
 #: zypp/LanguageCode.cc:709
-#, fuzzy
 msgid "Malayalam"
-msgstr "Malaysia"
+msgstr "Malayalam"
 
 #. language code: man
 #: zypp/LanguageCode.cc:711
 msgid "Mandingo"
-msgstr ""
+msgstr "Mandingo"
 
 #. language code: mao mri mi
 #: zypp/LanguageCode.cc:713 zypp/LanguageCode.cc:715
@@ -3623,136 +3554,123 @@ msgstr "Maori"
 #. language code: map
 #: zypp/LanguageCode.cc:717
 msgid "Austronesian (Other)"
-msgstr ""
+msgstr "Austronesian (Lainnya)"
 
 #. language code: mar mr
 #: zypp/LanguageCode.cc:719
-#, fuzzy
 msgid "Marathi"
-msgstr "Maori"
+msgstr "Marathi"
 
 # MW
 #. language code: mas
 #: zypp/LanguageCode.cc:721
-#, fuzzy
 msgid "Masai"
-msgstr "Malawi"
+msgstr "Masai"
 
 # MT
 #. language code: may msa ms
 #: zypp/LanguageCode.cc:723 zypp/LanguageCode.cc:725
-#, fuzzy
 msgid "Malay"
-msgstr "Malta"
+msgstr "Malay"
 
 #. language code: mdf
 #: zypp/LanguageCode.cc:727
 msgid "Moksha"
-msgstr ""
+msgstr "Moksha"
 
 # MM
 #. language code: mdr
 #: zypp/LanguageCode.cc:729
-#, fuzzy
 msgid "Mandar"
-msgstr "Myanmar"
+msgstr "Mandar"
 
 #. language code: men
 #: zypp/LanguageCode.cc:731
 msgid "Mende"
-msgstr ""
+msgstr "Mende"
 
 #. language code: mga
 #: zypp/LanguageCode.cc:733
 msgid "Irish, Middle (900-1200)"
-msgstr ""
+msgstr "Irish, Antara (900-1200)"
 
 #. language code: mic
 #: zypp/LanguageCode.cc:735
 msgid "Mi'kmaq"
-msgstr ""
+msgstr "Mi’kmaq"
 
 #. language code: min
 #: zypp/LanguageCode.cc:737
 msgid "Minangkabau"
-msgstr ""
+msgstr "Minangkabau"
 
 # LK
 #. language code: mis
 #: zypp/LanguageCode.cc:739
-#, fuzzy
 msgid "Miscellaneous Languages"
-msgstr "Sri Lanka"
+msgstr "Ragam Bahasa"
 
 #. language code: mkh
 #: zypp/LanguageCode.cc:741
 msgid "Mon-Khmer (Other)"
-msgstr ""
+msgstr "Mon-Khmer (Lainnya)"
 
 # MG
 #. language code: mlg mg
 #: zypp/LanguageCode.cc:743
-#, fuzzy
 msgid "Malagasy"
-msgstr "Madagaskar"
+msgstr "Malagasy"
 
 # MV
 # fuzzy
 #. language code: mlt mt
 #: zypp/LanguageCode.cc:745
-#, fuzzy
 msgid "Maltese"
-msgstr "Mali"
+msgstr "Maltese"
 
 #. language code: mnc
 #: zypp/LanguageCode.cc:747
 msgid "Manchu"
-msgstr ""
+msgstr "Manchu"
 
 #. language code: mni
 #: zypp/LanguageCode.cc:749
-#, fuzzy
 msgid "Manipuri"
-msgstr "Maori"
+msgstr "Manipuri"
 
 # KY
 #. language code: mno
 #: zypp/LanguageCode.cc:751
-#, fuzzy
 msgid "Manobo Languages"
-msgstr "Pulau Cayman"
+msgstr "Bahasa Manobo"
 
 #. language code: moh
 #: zypp/LanguageCode.cc:753
 msgid "Mohawk"
-msgstr ""
+msgstr "Mohawk"
 
 # MD
 #. language code: mol mo
 #: zypp/LanguageCode.cc:755
-#, fuzzy
 msgid "Moldavian"
-msgstr "Moldova"
+msgstr "Moldavian"
 
 # MN
 #. language code: mon mn
 #: zypp/LanguageCode.cc:757
-#, fuzzy
 msgid "Mongolian"
-msgstr "Mongolia"
+msgstr "Mongolian"
 
 #. language code: mos
 #: zypp/LanguageCode.cc:759
-#, fuzzy
 msgid "Mossi"
-msgstr "Maori"
+msgstr "Mossi"
 
 # LK
 #. language code: mul
 #: zypp/LanguageCode.cc:761
-#, fuzzy
 msgid "Multiple Languages"
-msgstr "Sri Lanka"
+msgstr "Multi Bahasa"
 
 #. language code: mun
 #: zypp/LanguageCode.cc:763
@@ -3761,135 +3679,122 @@ msgstr ""
 
 #. language code: mus
 #: zypp/LanguageCode.cc:765
-#, fuzzy
 msgid "Creek"
-msgstr "Yunani"
+msgstr "Creek"
 
 # FM
 # fuzzy
 #. language code: mwl
 #: zypp/LanguageCode.cc:767
-#, fuzzy
 msgid "Mirandese"
-msgstr "Maine"
+msgstr "Mirandese"
 
 #. language code: mwr
 #: zypp/LanguageCode.cc:769
-#, fuzzy
 msgid "Marwari"
-msgstr "Maori"
+msgstr "Marwari"
 
 # KY
 #. language code: myn
 #: zypp/LanguageCode.cc:771
-#, fuzzy
 msgid "Mayan Languages"
-msgstr "Pulau Cayman"
+msgstr "Bahasa Mayan"
 
 #. language code: myv
 #: zypp/LanguageCode.cc:773
 msgid "Erzya"
-msgstr ""
+msgstr "Erzya"
 
 #. language code: nah
 #: zypp/LanguageCode.cc:775
 msgid "Nahuatl"
-msgstr ""
+msgstr "Nahuatl"
 
 # MP
 #. language code: nai
 #: zypp/LanguageCode.cc:777
-#, fuzzy
 msgid "North American Indian"
-msgstr "Kepulauan Mariana Utara"
+msgstr "Indian Amerika Utara"
 
 #. language code: nap
 #: zypp/LanguageCode.cc:779
 msgid "Neapolitan"
-msgstr ""
+msgstr "Neapolitan"
 
 #. language code: nav nv
 #: zypp/LanguageCode.cc:783
 msgid "Navajo"
-msgstr ""
+msgstr "Navajo"
 
 #. language code: nbl nr
 #: zypp/LanguageCode.cc:785
 msgid "Ndebele, South"
-msgstr ""
+msgstr "Ndebele, Selatan"
 
 #. language code: nde nd
 #: zypp/LanguageCode.cc:787
 msgid "Ndebele, North"
-msgstr ""
+msgstr "Ndebele, Utara"
 
 # TO
 #. language code: ndo ng
 #: zypp/LanguageCode.cc:789
-#, fuzzy
 msgid "Ndonga"
-msgstr "Tonga"
+msgstr "Ndonga"
 
 #. language code: nds
 #: zypp/LanguageCode.cc:791
-#, fuzzy
 msgid "Low German"
-msgstr "Jerman"
+msgstr "Jerman Bawah"
 
 # NP
 #. language code: nep ne
 #: zypp/LanguageCode.cc:793
-#, fuzzy
 msgid "Nepali"
-msgstr "Nepal"
+msgstr "Nepali"
 
 # NP
 #. language code: new
 #: zypp/LanguageCode.cc:795
-#, fuzzy
 msgid "Nepal Bhasa"
-msgstr "Nepal"
+msgstr "Nepal Bhasa"
 
 #. language code: nia
 #: zypp/LanguageCode.cc:797
 msgid "Nias"
-msgstr ""
+msgstr "Nias"
 
 #. language code: nic
 #: zypp/LanguageCode.cc:799
 msgid "Niger-Kordofanian (Other)"
-msgstr ""
+msgstr "Niger-Kordofanian (Lainnya)"
 
 # NU
 #. language code: niu
 #: zypp/LanguageCode.cc:801
-#, fuzzy
 msgid "Niuean"
-msgstr "Niue"
+msgstr "Niuean"
 
 #. language code: nno nn
 #: zypp/LanguageCode.cc:803
-#, fuzzy
 msgid "Norwegian Nynorsk"
-msgstr "Norwegia"
+msgstr "Norwegian Nynorsk"
 
 #. language code: nob nb
 #: zypp/LanguageCode.cc:805
-#, fuzzy
 msgid "Norwegian Bokmal"
-msgstr "Norwegia"
+msgstr "Norwegian Bokmal"
 
 # TO
 #. language code: nog
 #: zypp/LanguageCode.cc:807
-#, fuzzy
 msgid "Nogai"
-msgstr "Tonga"
+msgstr "Nogai"
 
 #. language code: non
 #: zypp/LanguageCode.cc:809
 msgid "Norse, Old"
-msgstr ""
+msgstr "Norse, Kuno"
 
 #. language code: nor no
 #: zypp/LanguageCode.cc:811
@@ -3899,167 +3804,153 @@ msgstr "Norwegia"
 #. language code: nso
 #: zypp/LanguageCode.cc:813
 msgid "Northern Sotho"
-msgstr ""
+msgstr "Utara Sothi=o"
 
 # LK
 #. language code: nub
 #: zypp/LanguageCode.cc:815
-#, fuzzy
 msgid "Nubian Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Nubian"
 
 #. language code: nwc
 #: zypp/LanguageCode.cc:817
 msgid "Classical Newari"
-msgstr ""
+msgstr "Classical Newari"
 
 # CL
 #. language code: nya ny
 #: zypp/LanguageCode.cc:819
-#, fuzzy
 msgid "Chichewa"
-msgstr "Chile"
+msgstr "Chichewa"
 
 #. language code: nym
 #: zypp/LanguageCode.cc:821
 msgid "Nyamwezi"
-msgstr ""
+msgstr "Nyamwezi"
 
 #. language code: nyn
 #: zypp/LanguageCode.cc:823
 msgid "Nyankole"
-msgstr ""
+msgstr "Nyankole"
 
 #. language code: nyo
 #: zypp/LanguageCode.cc:825
 msgid "Nyoro"
-msgstr ""
+msgstr "Nyoro"
 
 #. language code: nzi
 #: zypp/LanguageCode.cc:827
 msgid "Nzima"
-msgstr ""
+msgstr "Nzima"
 
 #. language code: oci oc
 #: zypp/LanguageCode.cc:829
 msgid "Occitan (post 1500)"
-msgstr ""
+msgstr "Occitan (setelah 1500)"
 
 #. language code: oji oj
 #: zypp/LanguageCode.cc:831
 msgid "Ojibwa"
-msgstr ""
+msgstr "Ojibwa"
 
 # SY
 # fuzzy
 #. language code: ori or
 #: zypp/LanguageCode.cc:833
-#, fuzzy
 msgid "Oriya"
-msgstr "Suriname"
+msgstr "Oriya"
 
 #. language code: orm om
 #: zypp/LanguageCode.cc:835
 msgid "Oromo"
-msgstr ""
+msgstr "Oromo"
 
 #. language code: osa
 #: zypp/LanguageCode.cc:837
 msgid "Osage"
-msgstr ""
+msgstr "Osage"
 
 #. language code: oss os
 #: zypp/LanguageCode.cc:839
-#, fuzzy
 msgid "Ossetian"
-msgstr "Rusia"
+msgstr "Ossetian"
 
 #. language code: ota
 #: zypp/LanguageCode.cc:841
 msgid "Turkish, Ottoman (1500-1928)"
-msgstr ""
+msgstr "Turkish, Ottoman (1500-1928)"
 
 # LK
 #. language code: oto
 #: zypp/LanguageCode.cc:843
-#, fuzzy
 msgid "Otomian Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Otomia"
 
 #. language code: paa
 #: zypp/LanguageCode.cc:845
 msgid "Papuan (Other)"
-msgstr ""
+msgstr "Papua (Lainnya)"
 
 #. language code: pag
 #: zypp/LanguageCode.cc:847
-#, fuzzy
 msgid "Pangasinan"
-msgstr "Hongaria"
+msgstr "Pangasinan"
 
 # PW
 #. language code: pal
 #: zypp/LanguageCode.cc:849
-#, fuzzy
 msgid "Pahlavi"
-msgstr "Palau"
+msgstr "Pahlavi"
 
 # PY
 #. language code: pam
 #: zypp/LanguageCode.cc:851
-#, fuzzy
 msgid "Pampanga"
-msgstr "Paraguay"
+msgstr "Pampanga"
 
 # PA
 #. language code: pan pa
 #: zypp/LanguageCode.cc:853
-#, fuzzy
 msgid "Panjabi"
-msgstr "Panama"
+msgstr "Panjabi"
 
 #. language code: pap
 #: zypp/LanguageCode.cc:855
 msgid "Papiamento"
-msgstr ""
+msgstr "Papiamento"
 
 # PW
 #. language code: pau
 #: zypp/LanguageCode.cc:857
-#, fuzzy
 msgid "Palauan"
-msgstr "Palau"
+msgstr "Palauan"
 
 #. language code: peo
 #: zypp/LanguageCode.cc:859
 msgid "Persian, Old (ca.600-400 B.C.)"
-msgstr ""
+msgstr "Persia, Kuno (ca.600-400 B.C.)"
 
 #. language code: per fas fa
 #: zypp/LanguageCode.cc:861 zypp/LanguageCode.cc:863
-#, fuzzy
 msgid "Persian"
-msgstr "Serbia"
+msgstr "SerbiaPersian"
 
 # PH
 #. language code: phi
 #: zypp/LanguageCode.cc:865
-#, fuzzy
 msgid "Philippine (Other)"
-msgstr "Filipina"
+msgstr "FIlipina (Lainnya)"
 
 #. language code: phn
 #: zypp/LanguageCode.cc:867
-#, fuzzy
 msgid "Phoenician"
-msgstr "Slovenia"
+msgstr "Phoenician"
 
 # ML
 #. language code: pli pi
 #: zypp/LanguageCode.cc:869
-#, fuzzy
 msgid "Pali"
-msgstr "Mali"
+msgstr "Pali"
 
 #. language code: pol pl
 #: zypp/LanguageCode.cc:871
@@ -4069,7 +3960,7 @@ msgstr "Polandia"
 #. language code: pon
 #: zypp/LanguageCode.cc:873
 msgid "Pohnpeian"
-msgstr ""
+msgstr "Pohnpeian"
 
 #. language code: por pt
 #: zypp/LanguageCode.cc:875
@@ -4079,60 +3970,56 @@ msgstr "Portugis"
 # LK
 #. language code: pra
 #: zypp/LanguageCode.cc:877
-#, fuzzy
 msgid "Prakrit Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Prakrit"
 
 #. language code: pro
 #: zypp/LanguageCode.cc:879
 msgid "Provencal, Old (to 1500)"
-msgstr ""
+msgstr "Provencal, Kuno (ke 1500)"
 
 #. language code: pus ps
 #: zypp/LanguageCode.cc:881
 msgid "Pushto"
-msgstr ""
+msgstr "Pushto"
 
 #. language code: que qu
 #: zypp/LanguageCode.cc:883
 msgid "Quechua"
-msgstr ""
+msgstr "Quechua"
 
 # TJ
 #. language code: raj
 #: zypp/LanguageCode.cc:885
-#, fuzzy
 msgid "Rajasthani"
-msgstr "Tajikistan"
+msgstr "Rajasthani"
 
 # JP
 #. language code: rap
 #: zypp/LanguageCode.cc:887
-#, fuzzy
 msgid "Rapanui"
-msgstr "jepang"
+msgstr "Rapanui"
 
 #. language code: rar
 #: zypp/LanguageCode.cc:889
 msgid "Rarotongan"
-msgstr ""
+msgstr "Rarotongan"
 
 #. language code: roa
 #: zypp/LanguageCode.cc:891
 msgid "Romance (Other)"
-msgstr ""
+msgstr "Romance (Other)"
 
 #. language code: roh rm
 #: zypp/LanguageCode.cc:893
 msgid "Raeto-Romance"
-msgstr ""
+msgstr "Raeto-Romance"
 
 # RO
 #. language code: rom
 #: zypp/LanguageCode.cc:895
-#, fuzzy
 msgid "Romany"
-msgstr "Romania"
+msgstr "Romany"
 
 #. language code: rum ron ro
 #: zypp/LanguageCode.cc:897 zypp/LanguageCode.cc:899
@@ -4142,9 +4029,8 @@ msgstr "Rumania"
 # RE
 #. language code: run rn
 #: zypp/LanguageCode.cc:901
-#, fuzzy
 msgid "Rundi"
-msgstr "Reunion"
+msgstr "Rundi"
 
 #. language code: rus ru
 #: zypp/LanguageCode.cc:903
@@ -4154,55 +4040,51 @@ msgstr "Rusia"
 # CA
 #. language code: sad
 #: zypp/LanguageCode.cc:905
-#, fuzzy
 msgid "Sandawe"
-msgstr "Kanada"
+msgstr "Sandawe"
 
 # WS
 #. language code: sag sg
 #: zypp/LanguageCode.cc:907
-#, fuzzy
 msgid "Sango"
-msgstr "Samoa"
+msgstr "Sango"
 
 #. language code: sah
 #: zypp/LanguageCode.cc:909
 msgid "Yakut"
-msgstr ""
+msgstr "Yakut"
 
 #. language code: sai
 #: zypp/LanguageCode.cc:911
 msgid "South American Indian (Other)"
-msgstr ""
+msgstr "Indian Amerika Selatan (Lainnya)"
 
 # LK
 #. language code: sal
 #: zypp/LanguageCode.cc:913
-#, fuzzy
 msgid "Salishan Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Salishan"
 
 #. language code: sam
 #: zypp/LanguageCode.cc:915
 msgid "Samaritan Aramaic"
-msgstr ""
+msgstr "Samaritan Aramaic"
 
 #. language code: san sa
 #: zypp/LanguageCode.cc:917
 msgid "Sanskrit"
-msgstr ""
+msgstr "Sanskrit"
 
 # WS
 #. language code: sas
 #: zypp/LanguageCode.cc:919
-#, fuzzy
 msgid "Sasak"
-msgstr "Samoa"
+msgstr "Sasak"
 
 #. language code: sat
 #: zypp/LanguageCode.cc:921
 msgid "Santali"
-msgstr ""
+msgstr "Santali"
 
 #. language code: scc srp sr
 #: zypp/LanguageCode.cc:923 zypp/LanguageCode.cc:925
@@ -4212,12 +4094,12 @@ msgstr "Serbia"
 #. language code: scn
 #: zypp/LanguageCode.cc:927
 msgid "Sicilian"
-msgstr ""
+msgstr "Sicilian"
 
 #. language code: sco
 #: zypp/LanguageCode.cc:929
 msgid "Scots"
-msgstr ""
+msgstr "Scots"
 
 #. language code: scr hrv hr
 #: zypp/LanguageCode.cc:931 zypp/LanguageCode.cc:933
@@ -4227,60 +4109,56 @@ msgstr "Kroasia"
 #. language code: sel
 #: zypp/LanguageCode.cc:935
 msgid "Selkup"
-msgstr ""
+msgstr "Selkup"
 
 #. language code: sem
 #: zypp/LanguageCode.cc:937
 msgid "Semitic (Other)"
-msgstr ""
+msgstr "Semitic (Lainnya)"
 
 #. language code: sga
 #: zypp/LanguageCode.cc:939
 msgid "Irish, Old (to 900)"
-msgstr ""
+msgstr "Irish, Kuno (ke 900)"
 
 # LK
 #. language code: sgn
 #: zypp/LanguageCode.cc:941
-#, fuzzy
 msgid "Sign Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Sign"
 
 # SD
 #. language code: shn
 #: zypp/LanguageCode.cc:943
-#, fuzzy
 msgid "Shan"
-msgstr "Sudan"
+msgstr "Shan"
 
 # WS
 #. language code: sid
 #: zypp/LanguageCode.cc:945
-#, fuzzy
 msgid "Sidamo"
-msgstr "Samoa"
+msgstr "Sidamo"
 
 #. language code: sin si
 #: zypp/LanguageCode.cc:947
 msgid "Sinhala"
-msgstr ""
+msgstr "Sinhala"
 
 # LK
 #. language code: sio
 #: zypp/LanguageCode.cc:949
-#, fuzzy
 msgid "Siouan Languages"
-msgstr "Sri Lanka"
+msgstr "Siouan Languages"
 
 #. language code: sit
 #: zypp/LanguageCode.cc:951
 msgid "Sino-Tibetan (Other)"
-msgstr ""
+msgstr "Sino-Tibetan (Lainnya)"
 
 #. language code: sla
 #: zypp/LanguageCode.cc:953
 msgid "Slavic (Other)"
-msgstr ""
+msgstr "Slavic (Lainnya)"
 
 #. language code: slo slk sk
 #: zypp/LanguageCode.cc:955 zypp/LanguageCode.cc:957
@@ -4295,85 +4173,78 @@ msgstr "Slovenia"
 #. language code: sma
 #: zypp/LanguageCode.cc:961
 msgid "Southern Sami"
-msgstr ""
+msgstr "Selatan Sami"
 
 #. language code: sme se
 #: zypp/LanguageCode.cc:963
 msgid "Northern Sami"
-msgstr ""
+msgstr "Utara Sami"
 
 # LK
 #. language code: smi
 #: zypp/LanguageCode.cc:965
-#, fuzzy
 msgid "Sami Languages (Other)"
-msgstr "Sri Lanka"
+msgstr "Bahasa Sami"
 
 #. language code: smj
 #: zypp/LanguageCode.cc:967
 msgid "Lule Sami"
-msgstr ""
+msgstr "Lule Sami"
 
 #. language code: smn
 #: zypp/LanguageCode.cc:969
 msgid "Inari Sami"
-msgstr ""
+msgstr "Inari Sami"
 
 # WS
 #. language code: smo sm
 #: zypp/LanguageCode.cc:971
-#, fuzzy
 msgid "Samoan"
 msgstr "Samoa"
 
 #. language code: sms
 #: zypp/LanguageCode.cc:973
 msgid "Skolt Sami"
-msgstr ""
+msgstr "Skolt Sami"
 
 # SI
 #. language code: sna sn
 #: zypp/LanguageCode.cc:975
-#, fuzzy
 msgid "Shona"
-msgstr "Slovenia"
+msgstr "Shona"
 
 #. language code: snd sd
 #: zypp/LanguageCode.cc:977
 msgid "Sindhi"
-msgstr ""
+msgstr "Sindhi"
 
 #. language code: snk
 #: zypp/LanguageCode.cc:979
-#, fuzzy
 msgid "Soninke"
-msgstr "Slovenia"
+msgstr "Soninke"
 
 # SD
 #. language code: sog
 #: zypp/LanguageCode.cc:981
-#, fuzzy
 msgid "Sogdian"
-msgstr "Sudan"
+msgstr "Sogdian"
 
 # SO
 #. language code: som so
 #: zypp/LanguageCode.cc:983
-#, fuzzy
 msgid "Somali"
 msgstr "Somalia"
 
 # TO
 #. language code: son
 #: zypp/LanguageCode.cc:985
-#, fuzzy
 msgid "Songhai"
-msgstr "Tonga"
+msgstr "Songhai"
 
 #. language code: sot st
 #: zypp/LanguageCode.cc:987
 msgid "Sotho, Southern"
-msgstr ""
+msgstr "Sotho, Selatan"
 
 #. language code: spa es
 #: zypp/LanguageCode.cc:989
@@ -4383,56 +4254,51 @@ msgstr "Spanyol"
 # MR
 #. language code: srd sc
 #: zypp/LanguageCode.cc:991
-#, fuzzy
 msgid "Sardinian"
-msgstr "Mauritania"
+msgstr "Sardinian"
 
 #. language code: srr
 #: zypp/LanguageCode.cc:993
 msgid "Serer"
-msgstr ""
+msgstr "Serer"
 
 #. language code: ssa
 #: zypp/LanguageCode.cc:995
 msgid "Nilo-Saharan (Other)"
-msgstr ""
+msgstr "Nilo-Saharan (Lainnya)"
 
 # HT
 #. language code: ssw ss
 #: zypp/LanguageCode.cc:997
-#, fuzzy
 msgid "Swati"
-msgstr "Haiti"
+msgstr "Swati"
 
 #. language code: suk
 #: zypp/LanguageCode.cc:999
 msgid "Sukuma"
-msgstr ""
+msgstr "Sukuma"
 
 # SD
 #. language code: sun su
 #: zypp/LanguageCode.cc:1001
-#, fuzzy
 msgid "Sundanese"
-msgstr "Sudan"
+msgstr "Bahasa Sunda"
 
 #. language code: sus
 #: zypp/LanguageCode.cc:1003
 msgid "Susu"
-msgstr ""
+msgstr "Susu"
 
 #. language code: sux
 #: zypp/LanguageCode.cc:1005
-#, fuzzy
 msgid "Sumerian"
-msgstr "Serbia"
+msgstr "Sumerian"
 
 # SZ
 #. language code: swa sw
 #: zypp/LanguageCode.cc:1007
-#, fuzzy
 msgid "Swahili"
-msgstr "Swaziland"
+msgstr "Swahili"
 
 #. language code: swe sv
 #: zypp/LanguageCode.cc:1009
@@ -4443,22 +4309,20 @@ msgstr "Swedia"
 # fuzzy
 #. language code: syr
 #: zypp/LanguageCode.cc:1011
-#, fuzzy
 msgid "Syriac"
-msgstr "Suriname"
+msgstr "Syriac"
 
 # TW
 # fuzzy
 #. language code: tah ty
 #: zypp/LanguageCode.cc:1013
-#, fuzzy
 msgid "Tahitian"
-msgstr "Muangthai"
+msgstr "Tahiti"
 
 #. language code: tai
 #: zypp/LanguageCode.cc:1015
 msgid "Tai (Other)"
-msgstr ""
+msgstr "Tai (Lainnya)"
 
 #. language code: tam ta
 #: zypp/LanguageCode.cc:1017
@@ -4468,396 +4332,368 @@ msgstr "Tamil"
 # QA
 #. language code: tat tt
 #: zypp/LanguageCode.cc:1019
-#, fuzzy
 msgid "Tatar"
-msgstr "Qatar"
+msgstr "Tatar"
 
 # BE
 #. language code: tel te
 #: zypp/LanguageCode.cc:1021
-#, fuzzy
 msgid "Telugu"
-msgstr "Belgia"
+msgstr "Telugu"
 
 #. language code: tem
 #: zypp/LanguageCode.cc:1023
 msgid "Timne"
-msgstr ""
+msgstr "Timne"
 
 #. language code: ter
 #: zypp/LanguageCode.cc:1025
 msgid "Tereno"
-msgstr ""
+msgstr "Tereno"
 
 #. language code: tet
 #: zypp/LanguageCode.cc:1027
 msgid "Tetum"
-msgstr ""
+msgstr "Tetum"
 
 # TJ
 #. language code: tgk tg
 #: zypp/LanguageCode.cc:1029
-#, fuzzy
 msgid "Tajik"
-msgstr "Tajikistan"
+msgstr "Tajik"
 
 #. language code: tgl tl
 #: zypp/LanguageCode.cc:1031
 msgid "Tagalog"
-msgstr ""
+msgstr "Tagalog"
 
 #. language code: tha th
 #: zypp/LanguageCode.cc:1033
 msgid "Thai"
-msgstr "Thailand"
+msgstr "Thai"
 
 # TW
 # fuzzy
 #. language code: tib bod bo
 #: zypp/LanguageCode.cc:1035 zypp/LanguageCode.cc:1037
-#, fuzzy
 msgid "Tibetan"
-msgstr "Muangthai"
+msgstr "Tibetan"
 
 # NE
 #. language code: tig
 #: zypp/LanguageCode.cc:1039
-#, fuzzy
 msgid "Tigre"
-msgstr "Niger"
+msgstr "Tigre"
 
 # NG
 #. language code: tir ti
 #: zypp/LanguageCode.cc:1041
-#, fuzzy
 msgid "Tigrinya"
-msgstr "Nigeria"
+msgstr "Tigrinya"
 
 #. language code: tiv
 #: zypp/LanguageCode.cc:1043
 msgid "Tiv"
-msgstr ""
+msgstr "Tiv"
 
 #. language code: tlh
 #: zypp/LanguageCode.cc:1047
 msgid "Klingon"
-msgstr ""
+msgstr "Klingon"
 
 #. language code: tli
 #: zypp/LanguageCode.cc:1049
 msgid "Tlingit"
-msgstr ""
+msgstr "Tlingit"
 
 #. language code: tmh
 #: zypp/LanguageCode.cc:1051
 msgid "Tamashek"
-msgstr ""
+msgstr "Tamashek"
 
 #. language code: tog
 #: zypp/LanguageCode.cc:1053
 msgid "Tonga (Nyasa)"
-msgstr ""
+msgstr "Tonga (Nyasa)"
 
 # SB
 #. language code: ton to
 #: zypp/LanguageCode.cc:1055
-#, fuzzy
 msgid "Tonga (Tonga Islands)"
-msgstr "Pulau Sulaiman"
+msgstr "Tonga (Kepulauan Tonga)"
 
 #. language code: tpi
 #: zypp/LanguageCode.cc:1057
 msgid "Tok Pisin"
-msgstr ""
+msgstr "Tok Pisin"
 
 #. language code: tsi
 #: zypp/LanguageCode.cc:1059
-#, fuzzy
 msgid "Tsimshian"
-msgstr "Rusia"
+msgstr "Tsimshian"
 
 # BW
 #. language code: tsn tn
 #: zypp/LanguageCode.cc:1061
-#, fuzzy
 msgid "Tswana"
-msgstr "Botswana"
+msgstr "Tswana"
 
 # TO
 #. language code: tso ts
 #: zypp/LanguageCode.cc:1063
-#, fuzzy
 msgid "Tsonga"
-msgstr "Tonga"
+msgstr "Tsonga"
 
 # TR
 #. language code: tuk tk
 #: zypp/LanguageCode.cc:1065
-#, fuzzy
 msgid "Turkmen"
-msgstr "Turki"
+msgstr "Turkmenistan"
 
 #. language code: tum
 #: zypp/LanguageCode.cc:1067
 msgid "Tumbuka"
-msgstr ""
+msgstr "Tumbuka"
 
 # LK
 #. language code: tup
 #: zypp/LanguageCode.cc:1069
-#, fuzzy
 msgid "Tupi Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Tupi"
 
 #. language code: tur tr
 #: zypp/LanguageCode.cc:1071
 msgid "Turkish"
-msgstr "Turki"
+msgstr "Turkish"
 
 #. language code: tut
 #: zypp/LanguageCode.cc:1073
 msgid "Altaic (Other)"
-msgstr ""
+msgstr "Altaic (Lainnya)"
 
 #. language code: twi tw
 #: zypp/LanguageCode.cc:1077
 msgid "Twi"
-msgstr ""
+msgstr "Twi"
 
 # TN
 #. language code: tyv
 #: zypp/LanguageCode.cc:1079
-#, fuzzy
 msgid "Tuvinian"
-msgstr "Tunisia"
+msgstr "Tuvinian"
 
 #. language code: udm
 #: zypp/LanguageCode.cc:1081
 msgid "Udmurt"
-msgstr ""
+msgstr "Udmurt"
 
 # HT
 #. language code: uga
 #: zypp/LanguageCode.cc:1083
-#, fuzzy
 msgid "Ugaritic"
-msgstr "Haiti"
+msgstr "Ugaritic"
 
 #. language code: uig ug
 #: zypp/LanguageCode.cc:1085
 msgid "Uighur"
-msgstr ""
+msgstr "Uighur"
 
 # UA
 #. language code: ukr uk
 #: zypp/LanguageCode.cc:1087
-#, fuzzy
 msgid "Ukrainian"
 msgstr "Ukraina"
 
 #. language code: umb
 #: zypp/LanguageCode.cc:1089
 msgid "Umbundu"
-msgstr ""
+msgstr "Umbundu"
 
 #. language code: und
 #: zypp/LanguageCode.cc:1091
 msgid "Undetermined"
-msgstr ""
+msgstr "Tidak dapat ditentukan"
 
 #. language code: urd ur
 #: zypp/LanguageCode.cc:1093
 msgid "Urdu"
-msgstr ""
+msgstr "Urdu"
 
 # UZ
 #. language code: uzb uz
 #: zypp/LanguageCode.cc:1095
-#, fuzzy
 msgid "Uzbek"
 msgstr "Uzbekistan"
 
 #. language code: vai
 #: zypp/LanguageCode.cc:1097
 msgid "Vai"
-msgstr ""
+msgstr "Vai"
 
 # VN
 # fuzzy
 #. language code: ven ve
 #: zypp/LanguageCode.cc:1099
-#, fuzzy
 msgid "Venda"
-msgstr "Viet Nam"
+msgstr "Venda"
 
 # VN
 # fuzzy
 #. language code: vie vi
 #: zypp/LanguageCode.cc:1101
-#, fuzzy
 msgid "Vietnamese"
-msgstr "Viet Nam"
+msgstr "Vietnam"
 
 #. language code: vol vo
 #: zypp/LanguageCode.cc:1103
 msgid "Volapuk"
-msgstr ""
+msgstr "Volapuk"
 
 #. language code: vot
 #: zypp/LanguageCode.cc:1105
 msgid "Votic"
-msgstr ""
+msgstr "Votic"
 
 # KY
 #. language code: wak
 #: zypp/LanguageCode.cc:1107
-#, fuzzy
 msgid "Wakashan Languages"
-msgstr "Pulau Cayman"
+msgstr "Bahasa Wakashan"
 
 #. language code: wal
 #: zypp/LanguageCode.cc:1109
 msgid "Walamo"
-msgstr ""
+msgstr "Walamo"
 
 # PY
 #. language code: war
 #: zypp/LanguageCode.cc:1111
-#, fuzzy
 msgid "Waray"
-msgstr "Paraguay"
+msgstr "ParaguayWaray"
 
 #. language code: was
 #: zypp/LanguageCode.cc:1113
 msgid "Washo"
-msgstr ""
+msgstr "Washo"
 
 #. language code: wel cym cy
 #: zypp/LanguageCode.cc:1115 zypp/LanguageCode.cc:1117
 msgid "Welsh"
-msgstr ""
+msgstr "Welsh"
 
 # LK
 #. language code: wen
 #: zypp/LanguageCode.cc:1119
-#, fuzzy
 msgid "Sorbian Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Sorbian"
 
 #. language code: wln wa
 #: zypp/LanguageCode.cc:1121
 msgid "Walloon"
-msgstr ""
+msgstr "Walloon"
 
 #. language code: wol wo
 #: zypp/LanguageCode.cc:1123
 msgid "Wolof"
-msgstr ""
+msgstr "Wolof"
 
 #. language code: xal
 #: zypp/LanguageCode.cc:1125
 msgid "Kalmyk"
-msgstr ""
+msgstr "Kalmyk"
 
 #. language code: xho xh
 #: zypp/LanguageCode.cc:1127
 msgid "Xhosa"
-msgstr ""
+msgstr "Xhosa"
 
 #. language code: yao
 #: zypp/LanguageCode.cc:1129
 msgid "Yao"
-msgstr ""
+msgstr "Yao"
 
 #. language code: yap
 #: zypp/LanguageCode.cc:1131
-#, fuzzy
 msgid "Yapese"
-msgstr "Jepang"
+msgstr "Yapese"
 
 #. language code: yid yi
 #: zypp/LanguageCode.cc:1133
 msgid "Yiddish"
-msgstr ""
+msgstr "Yiddish"
 
 # AW
 #. language code: yor yo
 #: zypp/LanguageCode.cc:1135
-#, fuzzy
 msgid "Yoruba"
-msgstr "Aruba"
+msgstr "Yoruba"
 
 # LK
 #. language code: ypk
 #: zypp/LanguageCode.cc:1137
-#, fuzzy
 msgid "Yupik Languages"
-msgstr "Sri Lanka"
+msgstr "Bahasa Yupi"
 
 #. language code: zap
 #: zypp/LanguageCode.cc:1139
 msgid "Zapotec"
-msgstr ""
+msgstr "Zapotec"
 
 # GD
 #. language code: zen
 #: zypp/LanguageCode.cc:1141
-#, fuzzy
 msgid "Zenaga"
-msgstr "Grenada"
+msgstr "Zenaga"
 
 # BT
 #. language code: zha za
 #: zypp/LanguageCode.cc:1143
-#, fuzzy
 msgid "Zhuang"
-msgstr "Bhutan"
+msgstr "Zhuang"
 
 #. language code: znd
 #: zypp/LanguageCode.cc:1145
 msgid "Zande"
-msgstr ""
+msgstr "Zande"
 
 # TV
 #. language code: zul zu
 #: zypp/LanguageCode.cc:1147
-#, fuzzy
 msgid "Zulu"
-msgstr "Tuvalu"
+msgstr "Zulu"
 
 #. language code: zun
 #: zypp/LanguageCode.cc:1149
 msgid "Zuni"
-msgstr ""
+msgstr "Zuni"
 
 #. TranslatorExplanation first %s is key name, second is keyring name
 #: zypp/KeyRing.cc:522
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr ""
+msgstr "Mencoba untuk mengimpor kunci %s tidak ada ke keyring %s"
 
 #: zypp/KeyRing.cc:566
-#, fuzzy
 msgid "Failed to delete key."
-msgstr "Failed to parse: %s."
+msgstr "Gagal untuk menghapus key."
 
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr ""
+msgstr "Tanda tangan file %s tidak ditemukan"
 
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr ""
+msgstr "Tidak dapat meyediakan file '%s' dari repositori '%s'"
 
 #: zypp/repo/RepoProvideFile.cc:265
 msgid "No url in repository."
-msgstr ""
+msgstr "Tidak ada url pada repositori."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr ""
+msgstr "Layanan Plugin tidak mendukung perubahan atribut."
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
@@ -4866,25 +4702,27 @@ msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
 msgstr ""
+"Paket %s terlihat korup saat transfer berlangsung. Apakah anda henda "
+"mengulang pemulihan?"
 
 #: zypp/repo/PackageProvider.cc:216
-#, fuzzy
 msgid "Signature verification failed"
-msgstr "DBI Execution failed: %s"
+msgstr "Verifikasi tanda tangan gagal"
 
 #. TranslatorExplanation %s = name of the package being processed.
 #: zypp/repo/PackageProvider.cc:386
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr ""
+"Gagal untuk menyediakan paket %s. Apakah anda hendak memulai ulang pemulihan?"
 
 #: zypp/repo/PackageProvider.cc:515
 msgid "applydeltarpm check failed."
-msgstr ""
+msgstr "pengecekan applydeltarpm gagal."
 
 #: zypp/repo/PackageProvider.cc:525
 msgid "applydeltarpm failed."
-msgstr ""
+msgstr "applydeltarpm gagal."
 
 #: zypp/ZYppFactory.cc:394
 #, c-format, boost-format
@@ -4892,96 +4730,98 @@ msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
 msgstr ""
+"Manajemen sistem dikunci oleh aplikasi dengan pid %d (%s).\n"
+"Tutup aplikasi ini sebelum mengulang kembali."
 
 #: zypp/solver/detail/SATResolver.cc:975
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr ""
+msgstr "%s bukan termasuk pada golongan repository distupgrade"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
 msgid "%s has inferior architecture"
-msgstr ""
+msgstr "%s memiliki arsitektur rendah"
 
 #: zypp/solver/detail/SATResolver.cc:983
 #, c-format, boost-format
 msgid "problem with installed package %s"
-msgstr ""
+msgstr "masalah dengan paket %s yang telah terpasang"
 
 #: zypp/solver/detail/SATResolver.cc:986
 msgid "conflicting requests"
-msgstr ""
+msgstr "permintaan konflik"
 
 #: zypp/solver/detail/SATResolver.cc:989
 msgid "some dependency problem"
-msgstr ""
+msgstr "beberapa dependensi bermasalah"
 
 #: zypp/solver/detail/SATResolver.cc:992
 #, c-format, boost-format
 msgid "nothing provides requested %s"
-msgstr ""
+msgstr "tidak ada ketersediaan yang meminta %s"
 
 #: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
 msgid "Have you enabled all requested repositories?"
-msgstr ""
+msgstr "Apakah anda telah menghidupkan repositori yang diminta?"
 
 #: zypp/solver/detail/SATResolver.cc:996
 #, c-format, boost-format
 msgid "package %s does not exist"
-msgstr ""
+msgstr "paket %s tidak tersedia"
 
 #: zypp/solver/detail/SATResolver.cc:1000
 msgid "unsupported request"
-msgstr ""
+msgstr "permintaan tidak didukung"
 
 #: zypp/solver/detail/SATResolver.cc:1003
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr ""
+msgstr "%s didukung oleh sistem dan tidak dapat dihapus"
 
 #: zypp/solver/detail/SATResolver.cc:1007
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "%s is not installable"
-msgstr "Italia"
+msgstr "%s tidak dapat dipasang"
 
 #: zypp/solver/detail/SATResolver.cc:1012
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr ""
+msgstr "tidak ada dukungan %s dibutuhkan oleh %s"
 
 #: zypp/solver/detail/SATResolver.cc:1017
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "cannot install both %s and %s"
-msgstr "Italia"
+msgstr "tidak dapat memasang kedua %s dan %s"
 
 #: zypp/solver/detail/SATResolver.cc:1022
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
-msgstr ""
+msgstr "%s konflik dengan %s yang didukung oleh %s"
 
 #: zypp/solver/detail/SATResolver.cc:1027
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr ""
+msgstr "%s sudah usah %s didukung oleh %s"
 
 #: zypp/solver/detail/SATResolver.cc:1032
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
-msgstr ""
+msgstr "telah dipasang %s usang  %s didukung oleh %s"
 
 #: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
-msgstr ""
+msgstr "dapat dipecahkan %s konflik dengan %s didukung dengan sendirinya"
 
 #: zypp/solver/detail/SATResolver.cc:1068
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr ""
+msgstr "%s dibutuhkan %s, tetapi kebutuhan ini tidak dapat disediakan"
 
 #: zypp/solver/detail/SATResolver.cc:1070
 msgid "deleted providers: "
-msgstr ""
+msgstr "penyedia dihapus: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1081
@@ -4989,88 +4829,90 @@ msgid ""
 "\n"
 "uninstallable providers: "
 msgstr ""
+"\n"
+"penyedia tidak dapat dihapus: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1084
 msgid "uninstallable providers: "
-msgstr ""
+msgstr "penyedia tidak dapat dihapus: "
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
-msgstr ""
+msgstr "hapus kunci untuk mengizinkan menghapus %s"
 
 #: zypp/solver/detail/SATResolver.cc:1146
 #: zypp/solver/detail/SATResolver.cc:1182
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "do not install %s"
-msgstr "Italia"
+msgstr "jangan memasang %s"
 
 #: zypp/solver/detail/SATResolver.cc:1161
 #: zypp/solver/detail/SATResolver.cc:1203
 #, c-format, boost-format
 msgid "keep %s"
-msgstr ""
+msgstr "simpan %s"
 
 #: zypp/solver/detail/SATResolver.cc:1166
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "remove lock to allow installation of %s"
-msgstr "Italia"
+msgstr "hapus kunci untuk mengizinkan pemasangan dari %s"
 
 #: zypp/solver/detail/SATResolver.cc:1217
 #: zypp/solver/detail/SATResolver.cc:1238
 msgid "This request will break your system!"
-msgstr ""
+msgstr "Permintaan ini akan merusak sistem anda!"
 
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
 msgid "ignore the warning of a broken system"
-msgstr ""
+msgstr "abaikan peringatan dari kerusakan sistem"
 
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
-msgstr ""
+msgstr "jangan meminta untuk memasang pemecahan yang didukung %s"
 
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr ""
+msgstr "jangan meminta untuk menghapus pemecahan yang didukung %s"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
-msgstr ""
+msgstr "jangan memasang versi terbaru dari %s"
 
 #: zypp/solver/detail/SATResolver.cc:1279
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr ""
+msgstr "jaga %s meskipun arsitektur rendah"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
-msgstr ""
+msgstr "pasang %s meskipun arsitektur rendah"
 
 #: zypp/solver/detail/SATResolver.cc:1293
 #, c-format, boost-format
 msgid "keep obsolete %s"
-msgstr ""
+msgstr "biarkan usang %s"
 
 #: zypp/solver/detail/SATResolver.cc:1298
 #, c-format, boost-format
 msgid "install %s from excluded repository"
-msgstr ""
+msgstr "pasang %s dari repositori pengecualian"
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr ""
+msgstr "turunkan dari %s to %s"
 
 #: zypp/solver/detail/SATResolver.cc:1325
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
-msgstr ""
+msgstr "arsitektur berubah dari %s ke %s"
 
 #: zypp/solver/detail/SATResolver.cc:1334
 #, c-format, boost-format
@@ -5078,170 +4920,174 @@ msgid ""
 "install %s (with vendor change)\n"
 "  %s  -->  %s"
 msgstr ""
+"pasang %s (dengan perubahan vendor)\n"
+"  %s  -->  %s"
 
 #: zypp/solver/detail/SATResolver.cc:1343
 #, c-format, boost-format
 msgid "replacement of %s with %s"
-msgstr ""
+msgstr "penggantian %s dengan %s"
 
 #: zypp/solver/detail/SATResolver.cc:1354
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "deinstallation of %s"
-msgstr "Instalasi"
+msgstr "penghapusan dari %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
 #, c-format, boost-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr ""
+msgstr "patahkan %s dengan mengabaikan beberapa dependensi"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
-msgstr ""
+msgstr "umumnya mengabaikan beberapa dependensi"
 
 #: zypp/parser/RepoindexFileReader.cc:197
 #, c-format, boost-format
 msgid "Required attribute '%s' is missing."
-msgstr ""
+msgstr "Kebutuhan atribut '%s' hilang."
 
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr ""
+msgstr "Satu atau kedua dari '%s' or '%s' atribut dibutuhkan."
 
 #: zypp/base/InterProcessMutex.cc:83
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Can't open lock file: %s"
-msgstr "Tidak dapat membuka %s: %m"
+msgstr "Ttidak dapat membuka file kunci: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
-msgstr ""
+msgstr "Tindakan ini sudah dijalankan oleh program lain."
 
 #. TranslatorExplanation followed by the list of error messages that lead to this exception
 #: zypp/base/Exception.cc:107
 msgid "History:"
-msgstr ""
+msgstr "Riwayat:"
 
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
 msgid "Unknown match mode '%s'"
-msgstr ""
+msgstr "Kesesuaian mode '%s' tidak diketahui"
 
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr ""
+msgstr "Kesesuaian mode '%s' tidak diketahui untuk pola '%s'"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr ""
+msgstr "Expresi reguler '%s' tidak valid: regcomp kembali %d"
 
 #: zypp/base/StrMatcher.cc:158
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Invalid regular expression '%s'"
-msgstr "Skema url '%1' tidak valid"
+msgstr "Expresi reguler '%s' tidak valid"
 
 #: zypp/misc/CheckAccessDeleted.cc:243
 msgid "Please install package 'lsof' first."
-msgstr ""
+msgstr "Mohon pasang paket 'lsof' terlebih dahulu."
 
 #: zypp/media/MediaHandler.cc:370
 msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
 msgstr ""
+"Buat point lampiran: Tidak dapat menemukan direktori yang dapat ditulis "
+"untuk membuat point lampiran"
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
-msgstr ""
+msgstr "Autentikasikan dibutuhkan untuk '%s'"
 
 #: zypp/media/MediaException.cc:31
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Failed to mount %s on %s"
-msgstr "Failed to parse: %s."
+msgstr "Gagal untuk mengaitkan%s pada %s"
 
 #: zypp/media/MediaException.cc:41
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Failed to unmount %s"
-msgstr "Failed to parse: %s."
+msgstr "Gagal untuk melepas %s"
 
 #: zypp/media/MediaException.cc:47
 #, c-format, boost-format
 msgid "Bad file name: %s"
-msgstr ""
+msgstr "Nama file yang buruk: %s"
 
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr ""
+msgstr "Medium tidak dibuka ketika mencoba untuk melakukan tindakan '% s'."
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr ""
+msgstr "File '%s' tidak ditemukan pada medium '%s'"
 
 #: zypp/media/MediaException.cc:67
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Cannot write file '%s'."
-msgstr "Tidak dapat membuat file temp (%s): %m"
+msgstr "Tidak dapat menulis file '%s'."
 
 #: zypp/media/MediaException.cc:72
 msgid "Medium not attached"
-msgstr ""
+msgstr "Medium tidak dilampirkan"
 
 #: zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr ""
+msgstr "Media poin lampiran buruk"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr ""
+msgstr "Unduh (curl) inisialisasi gagal untuk '%s'"
 
 #: zypp/media/MediaException.cc:91
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr ""
+msgstr "Pengecualian sistem '%s' pada medium '%s'."
 
 #: zypp/media/MediaException.cc:98
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr ""
+msgstr "Lokasi '%s' pada medium '%s' bukan sebuah file."
 
 #: zypp/media/MediaException.cc:106
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr ""
+msgstr "Lokasi '%s' pada medium '%s' bukan sebuah direktori."
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr ""
+msgstr "URI cacat"
 
 #: zypp/media/MediaException.cc:125
 msgid "Empty host name in URI"
-msgstr ""
+msgstr "Nama host kosong pada URI"
 
 #: zypp/media/MediaException.cc:130
 msgid "Empty filesystem in URI"
-msgstr ""
+msgstr "Filesistem kosong pada URI"
 
 #: zypp/media/MediaException.cc:135
 msgid "Empty destination in URI"
-msgstr ""
+msgstr "Tujuan kosong pada URI"
 
 #: zypp/media/MediaException.cc:140
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr ""
+msgstr "Skema URI tidak didukung pada '%s'."
 
 #: zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
-msgstr ""
+msgstr "Operasi tidak didukung oleh medium"
 
 #: zypp/media/MediaException.cc:152
 #, c-format, boost-format
@@ -5250,72 +5096,78 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
+"Unduh (curl) gagal untuk '%s':\n"
+"Kode Kesalahan: %s\n"
+"Pesan Kesalahan: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:161
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
+msgstr "Kesalahan terjadi ketika mengatur download (curl) pada opsi untuk '%s':"
 
 #: zypp/media/MediaException.cc:169
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr ""
+msgstr "Sumber media '%s' tidak berisi media yang diinginkan"
 
 #: zypp/media/MediaException.cc:175
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr ""
+msgstr "Medium '%s' sedabg digunakan oleh instansi lain"
 
 #: zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
-msgstr ""
+msgstr "Tidak dapat mengeluarkan media apapun"
 
 #: zypp/media/MediaException.cc:184
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format
 msgid "Cannot eject media '%s'"
-msgstr "Italia"
+msgstr "Tidak dapat mengeluarkan media '%s'"
 
 #: zypp/media/MediaException.cc:199
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr ""
+msgstr "Izin untuk mengakses '%s' ditolak."
 
 #: zypp/media/MediaException.cc:207
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr ""
+msgstr "Timeout melebihi ketika mengakses '%s'."
 
 #: zypp/media/MediaException.cc:215
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
-msgstr ""
+msgstr "Lokasi '%s' tidak dapat diakses sementara waktu."
 
 #: zypp/media/MediaException.cc:223
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
+msgstr "Masalah SSL Sertifikat, pastikan CA cert sudah benar untuk '%s'."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
 msgstr ""
+"Tidak dapat menemukan perangkat loop tersedia untuk mengaitkan file image "
+"dari '%s'"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr ""
+msgstr "Metode autentikasi HTTP '%s' tidak didukung"
 
 #: zypp/media/MediaCurl.cc:1003
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"Kunjungi pusat pelanggan Novell untuk memeriksa apakah pendaftaran anda "
+"valid dan tidak kadaluarsa."
 
 #: zypp/sat/detail/PoolImpl.cc:189
-#, fuzzy
 msgid "Can not create sat-pool."
-msgstr "Tidak dapat membuat file temp %s: %m"
+msgstr "Tidak dapat membuat sat-pool."
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -5328,6 +5180,11 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
+"File %1%\n"
+"  dari paket\n"
+"     %2%\n"
+"  konflik dengan file dari paket\n"
+"     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:40
@@ -5339,6 +5196,11 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
+"File %1%\n"
+"  dari paket\n"
+"     %2%\n"
+"  konflik dengan file dari pemasangan\n"
+"     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:47
@@ -5350,6 +5212,11 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
+"File %1%\n"
+"  dari pemasangan\n"
+"     %2%\n"
+"  konflik dengan file dari paket\n"
+"     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:53
@@ -5361,6 +5228,11 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
+"File %1%\n"
+"  dari pemasangan\n"
+"     %2%\n"
+"  konflik dengan file dari pemasangan\n"
+"     %3%"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
@@ -5375,6 +5247,13 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
+"File %1%\n"
+"  dari paket\n"
+"     %2%\n"
+"  konflik dengan file\n"
+"     %3%\n"
+"  dari paket\n"
+"     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:76
@@ -5388,6 +5267,13 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
+"File %1%\n"
+"  dari paket\n"
+"     %2%\n"
+"  konflik dengan file\n"
+"     %3%\n"
+"  dari pemasangan\n"
+"     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:85
@@ -5401,10 +5287,10 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
-"Berkas %1%\n"
+"File %1%\n"
 "  dari pemasangan\n"
 "     %2%\n"
-"  konflik dengan berkas\n"
+"  konflik dengan file\n"
 "     %3%\n"
 "  dari paket\n"
 "     %4%"
@@ -5421,10 +5307,10 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
-"Berkas %1%\n"
+"File %1%\n"
 "  dari pemasangan\n"
 "     %2%\n"
-"  konflik dengan berkas\n"
+"  konflik dengan FIle\n"
 "     %3%\n"
 "  dari pemasangan\n"
 "     %4%"
