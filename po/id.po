@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2017-04-13 03:49+0000\n"
-"Last-Translator: Hanhan Hahn <matcherapy@gmail.com>\n"
+"PO-Revision-Date: 2017-04-13 03:56+0000\n"
+"Last-Translator: M. Edwin Zakaria <medwin@opensuse.org>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/libzypp/master/id/>\n"
 "Language: id\n"
@@ -2276,7 +2276,7 @@ msgstr "Arapaho"
 #. language code: art
 #: zypp/LanguageCode.cc:215
 msgid "Artificial (Other)"
-msgstr "Artificial (Other)"
+msgstr "Buatan (Lainnya)"
 
 #. language code: arw
 #: zypp/LanguageCode.cc:217
