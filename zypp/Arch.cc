@@ -191,12 +191,15 @@ namespace zypp
   DEF_BUILTIN( sparc );
 
   DEF_BUILTIN( aarch64 );
-  DEF_BUILTIN( armv7tnhl );
-  DEF_BUILTIN( armv7thl );
-  DEF_BUILTIN( armv7nhl );
+
+  DEF_BUILTIN( armv7tnhl );	/* exists? */
+  DEF_BUILTIN( armv7thl );	/* exists? */
+
+  DEF_BUILTIN( armv7hnl );	/* legacy: */DEF_BUILTIN( armv7nhl );
   DEF_BUILTIN( armv7hl );
-  DEF_BUILTIN( armv7l );
   DEF_BUILTIN( armv6hl );
+
+  DEF_BUILTIN( armv7l );
   DEF_BUILTIN( armv6l );
   DEF_BUILTIN( armv5tejl );
   DEF_BUILTIN( armv5tel );
@@ -339,12 +342,17 @@ namespace zypp
         defCompatibleWith( _armv5tel(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l() );
         defCompatibleWith( _armv5tejl(),	_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel() );
         defCompatibleWith( _armv6l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel(),_armv5tejl() );
-        defCompatibleWith( _armv6hl(),		_noarch() );
         defCompatibleWith( _armv7l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel(),_armv5tejl(),_armv6l() );
+
+        defCompatibleWith( _armv6hl(),		_noarch() );
         defCompatibleWith( _armv7hl(),		_noarch(),_armv6hl() );
-        defCompatibleWith( _armv7nhl(),		_noarch(),_armv7hl() );
-        defCompatibleWith( _armv7thl(),		_noarch(),_armv7hl() );
-        defCompatibleWith( _armv7tnhl(),	_noarch(),_armv7hl(),_armv7nhl(),_armv7thl() );
+        defCompatibleWith( _armv7hnl(),		_noarch(),_armv7hl(),_armv6hl() );
+	/*legacy: rpm uses v7hnl */
+	defCompatibleWith( _armv7nhl(),		_noarch(),_armv7hnl(),_armv7hl(),_armv6hl() );
+
+	/*?*/defCompatibleWith( _armv7thl(),	_noarch(),_armv7hl() );
+        /*?*/defCompatibleWith( _armv7tnhl(),	_noarch(),_armv7hl(),_armv7nhl(),_armv7thl() );
+
         defCompatibleWith( _aarch64(),		_noarch() );
         //
         defCompatibleWith( _sh3(),		_noarch() );
