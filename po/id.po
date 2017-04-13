@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2017-04-13 03:38+0000\n"
-"Last-Translator: M. Edwin Zakaria <medwin@opensuse.org>\n"
+"PO-Revision-Date: 2017-04-13 03:42+0000\n"
+"Last-Translator: Hanhan Hahn <matcherapy@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/libzypp/master/id/>\n"
 "Language: id\n"
@@ -121,7 +121,7 @@ msgstr " eksekusi gagal"
 #: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr "%s telah dieksekusi as %s)"
+msgstr "%s telah dieksekusi sebagai %s)"
 
 #: zypp/target/TargetImpl.cc:459
 msgid " execution skipped while aborting"
@@ -131,7 +131,7 @@ msgstr " Eksekusi dilewati ketika diberhentikan"
 #: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
 #: zypp/target/TargetImpl.cc:607
 msgid "Error sending update message notification."
-msgstr "Gagal ketika mengirim pesan notifikasi pembaharuan."
+msgstr "Gagal mengirim pesan notifikasi pembaharuan."
 
 #: zypp/target/TargetImpl.cc:658
 msgid "New update message"
