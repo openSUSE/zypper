@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2017-04-13 03:42+0000\n"
-"Last-Translator: Hanhan Hahn <matcherapy@gmail.com>\n"
+"PO-Revision-Date: 2017-04-13 03:49+0000\n"
+"Last-Translator: M. Edwin Zakaria <medwin@opensuse.org>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/libzypp/master/id/>\n"
 "Language: id\n"
@@ -145,7 +145,9 @@ msgstr "Instalasi dibatalkan sesuai perintah."
 
 #: zypp/target/hal/HalContext.cc:24
 msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr "Maaf, versi dari libzypp telah dibangun tanpa HAL support."
+msgstr ""
+"Maaf, tetapi versi dari libzypp yang digunakan ini dibangun tanpa dukungan "
+"HAL."
 
 #: zypp/target/hal/HalContext.cc:117
 msgid "HalContext not connected"
@@ -211,7 +213,7 @@ msgstr "Mengubah konfigurasi berkas untuk %s:"
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 "rpm telah disimpan %s sebagai %s, tetapi tidak memungkinkan untuk menentukan "
-"perbedaan"
+"perbedaannya"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2026
@@ -228,8 +230,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
-"rpm telah dibuat %s sebagai %s, tetapi tidak memungkinkan untuk menentukan "
-"perbedaan"
+"rpm telah disimpan %s sebagai %s, tetapi tidak memungkinkan untuk menentukan "
+"perbedaannya"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2031
@@ -245,7 +247,7 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #: zypp/target/rpm/RpmDb.cc:2056 zypp/target/rpm/RpmDb.cc:2202
 msgid "Additional rpm output"
-msgstr "Tambahan output RPM"
+msgstr "Tambahan keluaran RPM"
 
 #: zypp/target/rpm/RpmDb.cc:2344
 #, c-format, boost-format
@@ -275,7 +277,7 @@ msgstr "Tanda tangan OK, tetapi kunci tidak terpercaya"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2373
 msgid "Signatures public key is not available"
-msgstr "Tanda tangan publik key tidak tersedia"
+msgstr "Tanda tangan kunci publik tidak tersedia"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2375
@@ -284,7 +286,7 @@ msgstr "File tidak ada atau tanda tangan tidak dapat diperiksa"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
-msgstr "Tindakan berikut dapat menyelesaikan:"
+msgstr "Tindakan berikut akan dilakukan:"
 
 #: zypp/RepoManager.cc:299
 #, boost-format
