@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
 "PO-Revision-Date: 2017-04-13 03:49+0000\n"
-"Last-Translator: M. Edwin Zakaria <medwin@opensuse.org>\n"
+"Last-Translator: Hanhan Hahn <matcherapy@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/libzypp/master/id/>\n"
 "Language: id\n"
@@ -1278,7 +1278,7 @@ msgstr "Inggris, Teritori Samudera Indonesia"
 #. :IOT:086:
 #: zypp/CountryCode.cc:263
 msgid "Iraq"
-msgstr "Iraq"
+msgstr "Irak"
 
 # IR
 # fuzzy
