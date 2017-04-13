@@ -203,6 +203,7 @@ namespace zypp
   DEF_BUILTIN( armv6l );
   DEF_BUILTIN( armv5tejl );
   DEF_BUILTIN( armv5tel );
+  DEF_BUILTIN( armv5tl );
   DEF_BUILTIN( armv5l );
   DEF_BUILTIN( armv4tl );
   DEF_BUILTIN( armv4l );
@@ -339,10 +340,11 @@ namespace zypp
         defCompatibleWith( _armv4l(),		_noarch(),_armv3l() );
         defCompatibleWith( _armv4tl(),		_noarch(),_armv3l(),_armv4l() );
         defCompatibleWith( _armv5l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl() );
-        defCompatibleWith( _armv5tel(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l() );
-        defCompatibleWith( _armv5tejl(),	_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel() );
-        defCompatibleWith( _armv6l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel(),_armv5tejl() );
-        defCompatibleWith( _armv7l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel(),_armv5tejl(),_armv6l() );
+        defCompatibleWith( _armv5tl(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l() );
+        defCompatibleWith( _armv5tel(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tl() );
+        defCompatibleWith( _armv5tejl(),	_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tl(),_armv5tel() );
+        defCompatibleWith( _armv6l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tl(),_armv5tel(),_armv5tejl() );
+        defCompatibleWith( _armv7l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tl(),_armv5tel(),_armv5tejl(),_armv6l() );
 
         defCompatibleWith( _armv6hl(),		_noarch() );
         defCompatibleWith( _armv7hl(),		_noarch(),_armv6hl() );

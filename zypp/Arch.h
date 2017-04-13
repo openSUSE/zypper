@@ -250,6 +250,8 @@ namespace zypp
   /** \relates Arch */
   extern const Arch Arch_armv5tel;
   /** \relates Arch */
+  extern const Arch Arch_armv5tl;
+  /** \relates Arch */
   extern const Arch Arch_armv5l;
   /** \relates Arch */
   extern const Arch Arch_armv4tl;
