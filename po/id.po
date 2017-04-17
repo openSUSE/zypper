@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2017-04-17 04:27+0000\n"
+"PO-Revision-Date: 2017-04-17 04:29+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/libzypp/master/id/>\n"
@@ -644,7 +644,7 @@ msgstr "Opsi support tidak diketahui. Deskripsi tidak ditemukan"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr "Negara tidak diketahui:"
+msgstr "Negara tidak diketahui: "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
@@ -5033,7 +5033,7 @@ msgstr "Nama file yang buruk: %s"
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Medium tidak dibuka ketika mencoba untuk melakukan tindakan '% s'."
+msgstr "Medium tidak dibuka ketika mencoba untuk melakukan tindakan '%s'."
 
 #: zypp/media/MediaException.cc:60
 #, c-format, boost-format
@@ -5155,7 +5155,7 @@ msgstr "Lokasi '%s' tidak dapat diakses sementara waktu."
 #: zypp/media/MediaException.cc:223
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr "Masalah SSL Sertifikat, pastikan CA cert sudah benar untuk '%s'."
+msgstr " Masalah SSL Sertifikat, pastikan CA cert sudah benar untuk '%s'."
 
 #: zypp/media/MediaException.cc:231
 #, c-format, boost-format
