@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2017-04-13 03:56+0000\n"
-"Last-Translator: M. Edwin Zakaria <medwin@opensuse.org>\n"
+"PO-Revision-Date: 2017-04-17 04:27+0000\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/libzypp/master/id/>\n"
 "Language: id\n"
@@ -362,7 +362,7 @@ msgstr "Gagal untuk membuat cache repo (%d)."
 
 #: zypp/RepoManager.cc:1382
 msgid "Unhandled repository type"
-msgstr ""
+msgstr "Jenis repositori yang tidak tertangani"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -2904,9 +2904,8 @@ msgstr "Gayo"
 # fuzzy
 #. language code: gba
 #: zypp/LanguageCode.cc:463
-#, fuzzy
 msgid "Gbaya"
-msgstr "Liberia"
+msgstr "Gbaya"
 
 #. language code: gem
 #: zypp/LanguageCode.cc:465
@@ -3677,7 +3676,7 @@ msgstr "Multi Bahasa"
 #. language code: mun
 #: zypp/LanguageCode.cc:763
 msgid "Munda languages"
-msgstr ""
+msgstr "Bahasa Munda"
 
 #. language code: mus
 #: zypp/LanguageCode.cc:765
