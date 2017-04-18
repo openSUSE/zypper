@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-04-18 10:47+0000\n"
-"Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
+"PO-Revision-Date: 2017-04-18 11:12+0000\n"
+"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
 "Language: pl\n"
@@ -725,7 +725,7 @@ msgstr "Skrócona nazwa"
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:720
 msgid "Builds binary package"
-msgstr ""
+msgstr "Kompilowane pakiety binarne"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -2018,16 +2018,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "domyślny priorytet"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "Priorytet"
+msgstr "podniesiony priorytet"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "obniżony priorytet"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -2043,23 +2042,24 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Priorytety repozytoriów nie mają zastosowania. Wszystkie włączone "
+"repozytoria współdzielą ten sam priorytet."
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "Ustawiono priorytet repozytorium '%s' na %d."
+msgstr "Priorytety repozytoriów mające zastosowanie:"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "Wybrano '%s' do usunięcia."
+msgstr "Zobacz '%s', aby uzyskać szczegółowe informacje."
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Repozytorium"
-msgstr[1] "Repozytorium"
+msgstr[0] "%1% repozytorium"
+msgstr[1] "%1% repozytoria(-ów)"
 msgstr[2] "Repozytorium"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
@@ -3073,7 +3073,7 @@ msgstr "Przyjęto. Natychmiastowe przerwanie..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:38
 msgid "Trying to exit gracefully..."
-msgstr ""
+msgstr "Bezpieczne zamykanie..."
 
 #: src/Zypper.cc:84
 msgid ""
@@ -4861,6 +4861,8 @@ msgstr ""
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
+"Tylko dane wyjściowe XML: dosłownie przekazuj znaczniki XML znalezione w "
+"pliku produktu."
 
 #: src/Zypper.cc:2612
 #, c-format, boost-format
@@ -5581,7 +5583,7 @@ msgstr "Wskazówki można znaleźć w powyższym komunikacie."
 #: src/Zypper.cc:4516
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "Opcja %1% nie ma zastosowania bez opcji globalnej %2%."
 
 #: src/Zypper.cc:4603 src/Zypper.cc:4651
 #, c-format, boost-format
