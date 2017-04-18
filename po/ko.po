@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-04-18 04:18+0000\n"
+"PO-Revision-Date: 2017-04-18 04:24+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
@@ -654,7 +654,7 @@ msgstr "알 수 없음"
 #: src/info.cc:565
 #, boost-format
 msgid "See %1%"
-msgstr "%1% 보기"
+msgstr "%1 확인"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:571
