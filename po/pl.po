@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-04-18 10:46+0000\n"
-"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
+"PO-Revision-Date: 2017-04-18 10:47+0000\n"
+"Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
 "Language: pl\n"
@@ -651,9 +651,8 @@ msgid "Dependency"
 msgstr "Zależność"
 
 #: src/info.cc:474 src/info.cc:488
-#, fuzzy
 msgid "Required"
-msgstr "Wymaga"
+msgstr "Wymagany"
 
 #: src/info.cc:479 src/info.cc:488 src/search.cc:320
 msgid "Recommended"
@@ -676,7 +675,7 @@ msgstr "nieznany"
 #: src/info.cc:565
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Zobacz %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:571
