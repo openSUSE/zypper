@@ -2052,7 +2052,7 @@ msgstr "Priorytety repozytoriów mające zastosowanie:"
 #: src/repos.cc:204
 #, boost-format
 msgid "See '%1%' for details"
-msgstr "Zobacz '%s', aby uzyskać szczegółowe informacje."
+msgstr "Zobacz '%s', aby uzyskać szczegóły"
 
 #: src/repos.cc:213
 #, boost-format
