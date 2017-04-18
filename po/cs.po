@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2016-12-07 20:01+0000\n"
-"Last-Translator: Vojtech Zeisek <Vojtech.Zeisek@opensuse.org>\n"
+"PO-Revision-Date: 2017-04-18 08:39+0000\n"
+"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -523,7 +523,7 @@ msgstr "Popis"
 
 #: src/info.cc:110
 msgid "automatically"
-msgstr ""
+msgstr "automaticky"
 
 #: src/info.cc:182
 #, boost-format
@@ -730,7 +730,7 @@ msgstr "Zkrácený název"
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:720
 msgid "Builds binary package"
-msgstr ""
+msgstr "Vytváří binární balíček"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -2994,7 +2994,7 @@ msgstr "No jo, no jo! Končím ihned..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:38
 msgid "Trying to exit gracefully..."
-msgstr ""
+msgstr "Pokus o řádné ukončení..."
 
 #: src/Zypper.cc:84
 msgid ""
