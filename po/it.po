@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-04-19 08:12+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2017-04-19 08:14+0000\n"
+"Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -1963,11 +1963,11 @@ msgid "See '%1%' for details"
 msgstr "Vedere '%s' per ulteriori dettagli"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Repository"
-msgstr[1] "Repository"
+msgstr[0] "%1% repository"
+msgstr[1] "%1% repository"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
