@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-04-19 08:18+0000\n"
-"Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
+"PO-Revision-Date: 2017-04-19 08:20+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -1955,7 +1955,7 @@ msgstr ""
 
 #: src/repos.cc:203
 msgid "Repository priorities in effect:"
-msgstr "La priorità del repository effettiva:"
+msgstr "Priorità del repository effettive:"
 
 #: src/repos.cc:204
 #, boost-format
