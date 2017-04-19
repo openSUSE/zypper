@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
 "PO-Revision-Date: 2017-04-19 08:18+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -5518,7 +5518,7 @@ msgstr "Leggere il messaggio visualizzato sopra."
 #: src/Zypper.cc:4516
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "L'opzione %1% non produce effetti senza l'opzione globale %2%."
 
 #: src/Zypper.cc:4603 src/Zypper.cc:4651
 #, c-format, boost-format
