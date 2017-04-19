@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2016-12-29 17:31+0000\n"
-"Last-Translator: Benoît Monin <benoit.monin@gmx.fr>\n"
+"PO-Revision-Date: 2017-04-19 10:58+0000\n"
+"Last-Translator: Guillaume GARDET <guillaume.gardet@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -117,7 +117,7 @@ msgstr "Complète"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Type '%s' douteux pour la somme de contrôle '%s' sur %u octet"
+msgstr "Type '%s' douteux pour %u octet(s) sur la somme de contrôle '%s'"
 
 # TLABEL online_update_2002_01_04_0147__113
 #: zypp/target/TargetImpl.cc:310
