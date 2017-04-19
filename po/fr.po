@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2017-04-19 10:58+0000\n"
-"Last-Translator: Guillaume GARDET <guillaume.gardet@opensuse.org>\n"
+"PO-Revision-Date: 2017-04-19 11:10+0000\n"
+"Last-Translator: SLE Merge Robot <weblate-admin@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -4470,13 +4470,13 @@ msgstr "ignorer l'avertissement d'un système cassé"
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
-msgstr "Ne pas demander d'installer un élément fournissant %s"
+msgstr "ne pas demander d'installer un élément résoluble fournissant %s"
 
 #: zypp/solver/detail/SATResolver.cc:1245
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr ""
-"ne pas demander de supprimer tous les éléments résolvables fournissant %s"
+"ne pas demander de supprimer tous les éléments résolubles fournissant %s"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 #, c-format, boost-format
@@ -4772,7 +4772,7 @@ msgstr ""
 
 #: zypp/sat/detail/PoolImpl.cc:189
 msgid "Can not create sat-pool."
-msgstr "Impossible de créer le pool-sat."
+msgstr "Impossible de créer la réserve sat."
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
