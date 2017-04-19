@@ -76,12 +76,12 @@ namespace zypp
     Pathname licenseTgz() const
     {
       Pathname ret;
-      if ( !metadatapath.empty() )
+      if ( !metadataPath().empty() )
       {
 	filesystem::Glob g;
-	g.add( metadatapath / path / "repodata/*license.tar.gz" );
+	g.add( metadataPath() / path / "repodata/*license.tar.gz" );
 	if ( g.empty() )
-	  g.add( metadatapath / path / "license.tar.gz" );
+	  g.add( metadataPath() / path / "license.tar.gz" );
 
 	if ( !g.empty() )
 	  ret = *g.begin();
@@ -95,8 +95,8 @@ namespace zypp
       if ( _baseUrls.empty() && ! mlurl.asString().empty() )
       {
         emptybaseurls = true;
-        DBG << "MetadataPath: " << metadatapath << endl;
-	repo::RepoMirrorList rmurls( mlurl, metadatapath, _mirrorListForceMetalink );
+        DBG << "MetadataPath: " << metadataPath() << endl;
+	repo::RepoMirrorList rmurls( mlurl, metadataPath(), _mirrorListForceMetalink );
 	_baseUrls.raw().insert( _baseUrls.raw().end(), rmurls.getUrls().begin(), rmurls.getUrls().end() );
       }
       return _baseUrls;
@@ -124,14 +124,14 @@ namespace zypp
 
     bool hasContent() const
     {
-      if ( !_keywords.first && ! metadatapath.empty() )
+      if ( !_keywords.first && ! metadataPath().empty() )
       {
 	// HACK directly check master index file until RepoManager offers
 	// some content probing and zypper uses it.
 	/////////////////////////////////////////////////////////////////
-	MIL << "Empty keywords...." << metadatapath << endl;
+	MIL << "Empty keywords...." << metadataPath() << endl;
 	Pathname master;
-	if ( PathInfo( (master=metadatapath/"/repodata/repomd.xml") ).isFile() )
+	if ( PathInfo( (master=metadataPath()/"/repodata/repomd.xml") ).isFile() )
 	{
 	  //MIL << "GO repomd.." << endl;
 	  xml::Reader reader( master );
@@ -142,7 +142,7 @@ namespace zypp
 	  }
 	  _keywords.first = true;	// valid content in _keywords even if empty
 	}
-	else if ( PathInfo( (master=metadatapath/"/content") ).isFile() )
+	else if ( PathInfo( (master=metadataPath()/"/content") ).isFile() )
 	{
 	  //MIL << "GO content.." << endl;
 	  iostr::forEachLine( InputStream( master ),
@@ -170,7 +170,7 @@ namespace zypp
     bool hasContent( const std::string & keyword_r ) const
     { return( hasContent() && _keywords.second.find( keyword_r ) != _keywords.second.end() ); }
 
-    /** Signature check result needs to be stored/retrieved from _metadatapath.
+    /** Signature check result needs to be stored/retrieved from _metadataPath.
      * Don't call them from outside validRepoSignature/setValidRepoSignature
      */
     //@{
@@ -178,10 +178,10 @@ namespace zypp
     {
       if ( ! indeterminate(_validRepoSignature) )		return _validRepoSignature;
       // check metadata:
-      if ( ! metadatapath.empty() )
+      if ( ! metadataPath().empty() )
       {
 	//TODO: a missing ".repo_gpgcheck" might be plaindir(no Downloader) or not yet refreshed signed repo!
-	TriBool linkval = triBoolFromPath( metadatapath / ".repo_gpgcheck" );
+	TriBool linkval = triBoolFromPath( metadataPath() / ".repo_gpgcheck" );
 	return linkval;
       }
       return indeterminate;
@@ -189,9 +189,9 @@ namespace zypp
 
     void internalSetValidRepoSignature( TriBool value_r )
     {
-      if ( PathInfo(metadatapath).isDir() )
+      if ( PathInfo(metadataPath()).isDir() )
       {
-	Pathname gpgcheckFile( metadatapath / ".repo_gpgcheck" );
+	Pathname gpgcheckFile( metadataPath() / ".repo_gpgcheck" );
 	if ( PathInfo(gpgcheckFile).isExist() )
 	{
 	  TriBool linkval( indeterminate );
@@ -242,13 +242,38 @@ namespace zypp
     Pathname path;
     std::string service;
     std::string targetDistro;
-    Pathname metadatapath;
-    Pathname packagespath;
+
+    void metadataPath( Pathname new_r )
+    { _metadataPath = std::move( new_r ); }
+
+    void packagesPath( Pathname new_r )
+    { _packagesPath = std::move( new_r ); }
+
+    bool usesAutoMethadataPaths() const
+    { return str::hasSuffix( _metadataPath.asString(), "/%AUTO%" ); }
+
+    Pathname metadataPath() const
+    {
+      if ( usesAutoMethadataPaths() )
+	return _metadataPath.dirname() / "%RAW%";
+      return _metadataPath;
+    }
+
+    Pathname packagesPath() const
+    {
+      if ( _packagesPath.empty() && usesAutoMethadataPaths() )
+	return _metadataPath.dirname() / "%PKG%";
+      return _packagesPath;
+    }
+
     DefaultIntegral<unsigned,defaultPriority> priority;
     mutable bool emptybaseurls;
     repo::RepoVariablesUrlReplacer replacer;
 
   private:
+    Pathname _metadataPath;
+    Pathname _packagesPath;
+
     mutable RepoVariablesReplacedUrlList _baseUrls;
     mutable std::pair<FalseBool, std::set<std::string> > _keywords;
 
@@ -390,10 +415,10 @@ namespace zypp
 
 
   void RepoInfo::setMetadataPath( const Pathname &path )
-  { _pimpl->metadatapath = path; }
+  { _pimpl->metadataPath( path ); }
 
   void RepoInfo::setPackagesPath( const Pathname &path )
-  { _pimpl->packagespath = path; }
+  { _pimpl->packagesPath( path ); }
 
   void RepoInfo::setKeepPackages( bool keep )
   { _pimpl->keeppackages = keep; }
@@ -408,10 +433,13 @@ namespace zypp
   { return indeterminate(_pimpl->keeppackages) ? false : (bool)_pimpl->keeppackages; }
 
   Pathname RepoInfo::metadataPath() const
-  { return _pimpl->metadatapath; }
+  { return _pimpl->metadataPath(); }
 
   Pathname RepoInfo::packagesPath() const
-  { return _pimpl->packagespath; }
+  { return _pimpl->packagesPath(); }
+
+  bool RepoInfo::usesAutoMethadataPaths() const
+  { return _pimpl->usesAutoMethadataPaths(); }
 
   repo::RepoType RepoInfo::type() const
   { return _pimpl->type; }
@@ -637,6 +665,7 @@ namespace zypp
 
     strif( "- service     : ", service() );
     strif( "- targetdistro: ", targetDistribution() );
+    strif( "- filePath:     ", filepath().asString() );
     strif( "- metadataPath: ", metadataPath().asString() );
     strif( "- packagesPath: ", packagesPath().asString() );
 

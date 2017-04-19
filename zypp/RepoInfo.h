@@ -235,14 +235,35 @@ namespace zypp
        */
       Pathname metadataPath() const;
       /**
-       * \short set the path where the local metadata is stored
+       * \short Set the path where the local metadata is stored
        *
-       * The path to the metadata of this repository
-       * was defined, or empty if nowhere.
+       * The path to the repositories metadata is usually provided by
+       * the RepoManager. If you want to use a temporary repository
+       * (not under RepoManagers control), and you set a metadataPath
+       * with basename \c %AUTO%, all data directories (raw metadata,
+       * solv file and package cache) will be created by replacing \c %AUTO%
+       * with \c %RAW%, \c %SLV% or \c %PKG% . This will change the value
+       * of \ref packagesPath accordingly, unless you assigned a custom
+       * value using \ref setPackagesPath.
+       *
+       * \code
+       *   RepoInfo repo;
+       *   repo.setAlias( "Temp" );
+       *   repo.setBaseUrl( Url("http://someserver/somepath/") );
+       *   repo.setMetadataPath( "/tmp/temprepodata/%AUTO%" );
+       *
+       *   // will use
+       *   //  /tmp/temprepodata/%RAW% - raw metadata
+       *   //                   /%SLV% - solv file
+       *   //                   /%PKG% - packages
+       *\endcode
        *
        * \param path directory path
        */
       void setMetadataPath( const Pathname &path );
+
+      /** Whether \ref metadataPath uses \c %AUTO% setup. */
+      bool usesAutoMethadataPaths() const;
 
       /**
        * \short Path where this repo packages are cached

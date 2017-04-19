@@ -228,24 +228,29 @@ namespace zypp
 
   /** \relates Arch */
   extern const Arch Arch_aarch64;
+
   /** \relates Arch */
-  extern const Arch Arch_armv7tnhl;
+  extern const Arch Arch_armv7tnhl;	/* exists? */
   /** \relates Arch */
-  extern const Arch Arch_armv7thl;
+  extern const Arch Arch_armv7thl;	/* exists? */
+
   /** \relates Arch */
-  extern const Arch Arch_armv7nhl;
+  extern const Arch Arch_armv7hnl,	/* legacy: */Arch_armv7nhl;
   /** \relates Arch */
   extern const Arch Arch_armv7hl;
   /** \relates Arch */
-  extern const Arch Arch_armv7l;
-  /** \relates Arch */
   extern const Arch Arch_armv6hl;
+
+  /** \relates Arch */
+  extern const Arch Arch_armv7l;
   /** \relates Arch */
   extern const Arch Arch_armv6l;
   /** \relates Arch */
   extern const Arch Arch_armv5tejl;
   /** \relates Arch */
   extern const Arch Arch_armv5tel;
+  /** \relates Arch */
+  extern const Arch Arch_armv5tl;
   /** \relates Arch */
   extern const Arch Arch_armv5l;
   /** \relates Arch */

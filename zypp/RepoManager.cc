@@ -367,6 +367,15 @@ namespace zypp
 
     ////////////////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    {
+      /** Whether repo is not under RM control and provides it's own methadata paths. */
+      inline bool isTmpRepo( const RepoInfo & info_r )
+      { return( info_r.filepath().empty() && info_r.usesAutoMethadataPaths() ); }
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
+
     /**
      * \short Calculates the raw cache path for a repository, this is usually
      * /var/cache/zypp/alias
@@ -374,7 +383,7 @@ namespace zypp
     inline Pathname rawcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
     {
       assert_alias(info);
-      return opt.repoRawCachePath / info.escaped_alias();
+      return isTmpRepo( info ) ? info.metadataPath() : opt.repoRawCachePath / info.escaped_alias();
     }
 
     /**
@@ -386,10 +395,7 @@ namespace zypp
      * for example /var/cache/zypp/alias/addondir
      */
     inline Pathname rawproductdata_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
-    {
-      assert_alias(info);
-      return rawcache_path_for_repoinfo( opt, info ) / info.path();
-    }
+    { return rawcache_path_for_repoinfo( opt, info ) / info.path(); }
 
     /**
      * \short Calculates the packages cache path for a repository
@@ -397,7 +403,7 @@ namespace zypp
     inline Pathname packagescache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
     {
       assert_alias(info);
-      return opt.repoPackagesCachePath / info.escaped_alias();
+      return isTmpRepo( info ) ? info.packagesPath() : opt.repoPackagesCachePath / info.escaped_alias();
     }
 
     /**
@@ -406,7 +412,7 @@ namespace zypp
     inline Pathname solv_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
     {
       assert_alias(info);
-      return opt.repoSolvCachePath / info.escaped_alias();
+      return isTmpRepo( info ) ? info.metadataPath().dirname() / "%SLV%" : opt.repoSolvCachePath / info.escaped_alias();
     }
 
     ////////////////////////////////////////////////////////////////////////////
