@@ -3972,6 +3972,7 @@ void Zypper::doCommand()
 
     // check for rpm files among the arguments
     ArgList rpms_files_caps;
+    Pathname cliRPMCache;	// temporary plaindir repo (if needed)
     if ( install_not_remove )
     {
       for ( std::vector<std::string>::iterator it = _arguments.begin(); it != _arguments.end(); )
@@ -3982,10 +3983,10 @@ void Zypper::doCommand()
           out().info( str::Format(_("'%s' looks like an RPM file. Will try to download it.")) % *it,
 		      Out::HIGH );
 
-          // download the rpm into the cache
-          //! \todo do we want this or a tmp dir? What about the files cached before?
-          //! \todo optimize: don't mount the same media multiple times for each rpm
-          Pathname rpmpath = cache_rpm( *it, Pathname::assertprefix( _gopts.root_dir, ZYPPER_RPM_CACHE_DIR ) );
+          // download the rpm into the temp cache
+	  if ( cliRPMCache.empty() )
+	    cliRPMCache = runtimeData().tmpdir / TMP_RPM_REPO_ALIAS / "%CLI%";
+	  Pathname rpmpath = cache_rpm( *it, cliRPMCache );
           if ( rpmpath.empty() )
           {
             out().error( str::Format(_("Problem with the RPM file specified as '%s', skipping.")) % *it );
@@ -4022,24 +4023,23 @@ void Zypper::doCommand()
       }
     }
 
-    // if there were some rpm files, add the rpm cache as a temporary plaindir repo
+    // If there were some rpm files, add the rpm cache as a temporary plaindir repo.
+    // Set up as temp repo, but redirect PackagesPath to ZYPPER_RPM_CACHE_DIR. This
+    // way downloaded packages (e.g. --download-only) are accessible until they get
+    // installed (unless .keeppackages)
     if ( !rpms_files_caps.empty() )
     {
       // add a plaindir repo
       RepoInfo repo;
-      repo.setType( repo::RepoType::RPMPLAINDIR );
-      repo.addBaseUrl( Pathname::assertprefix( _gopts.root_dir, ZYPPER_RPM_CACHE_DIR ).asDirUrl() );
-      repo.setEnabled( true );
-      repo.setAutorefresh( true );
       repo.setAlias( TMP_RPM_REPO_ALIAS );
       repo.setName(_("Plain RPM files cache") );
+      repo.setBaseUrl( cliRPMCache.asDirUrl() );
+      repo.setMetadataPath( runtimeData().tmpdir / TMP_RPM_REPO_ALIAS / "%AUTO%" );
+      repo.setPackagesPath( Pathname::assertprefix( _gopts.root_dir, ZYPPER_RPM_CACHE_DIR ) );
+      repo.setType( repo::RepoType::RPMPLAINDIR );
+      repo.setEnabled( true );
+      repo.setAutorefresh( true );
       repo.setKeepPackages( false );
-      // - Empty packages path would cause unwanted removal of installed rpms
-      //   in current working directory (bnc #445504)
-      // - Packages path == ZYPPER_RPM_CACHE_DIR (the same as repo URI) would work, but
-      //   zypp would assume the cached packages signature has already been verified.
-      //   We want zypp to do thisn on commit, so we choose a diofferent directory.
-      repo.setPackagesPath( runtimeData().tmpdir );
 
       // shut up zypper
       SCOPED_VERBOSITY( out(), Out::QUIET );

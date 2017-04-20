@@ -1635,16 +1635,15 @@ void clean_repos( Zypper & zypper )
     }
   }
 
-  if ( zypper.arguments().empty() && copts.find("all") != copts.end() )
+  if ( zypper.arguments().empty() && clean_packages )
   {
     // clean up garbage
     // this could also be done with a special option or on each 'clean'
     // regardless of the options used ...
     manager.cleanCacheDirGarbage();
-
     // clean zypper's cache
     // this could also be done with a special option
-    filesystem::recursive_rmdir( Pathname(zypper.globalOpts().root_dir) / ZYPPER_RPM_CACHE_DIR );
+    filesystem::recursive_rmdir( Pathname::assertprefix( zypper.globalOpts().root_dir, ZYPPER_RPM_CACHE_DIR ) );
   }
 
   if ( error_count >= enabled_repo_count )

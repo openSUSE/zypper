@@ -180,7 +180,7 @@ struct RuntimeData
   bool waiting_for_input;
   bool entered_commit;	// bsc#946750 - give ZYPPER_EXIT_ERR_COMMIT priority over ZYPPER_EXIT_ON_SIGNAL
 
-  //! Temporary directory for any use. Used e.g. as packagesPath of TMP_RPM_REPO_ALIAS repository.
+  //! Temporary directory for any use, e.g. for temporary repositories.
   Pathname tmpdir;
 };
 

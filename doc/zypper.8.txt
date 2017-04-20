@@ -195,7 +195,7 @@ Package Management Commands
 		+
 		Zypper will report packages that it cannot find. Further, in interactive mode, zypper proceeds with installation of the rest of requested packages, and it will abort immediately in non-interactive mode. In both cases zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND* after finishing the operation.
 		+
-		Zypper will download the files into its cache directory (/var/cache/zypper/RPMS), add this directory as a temporary *plaindir* repository and mark the respective packages for installation.
+		Zypper will collect the files in a temporary *plaindir* repository and mark the respective packages for installation. If *--download-only* is used, the downloaded packages will be available in */var/cache/zypper/RPMS* until you actually install them or call *zypper clean* to clear the package caches.
 
 	In the install command, you can also specify packages you wish to remove by prepending their names by a '-' or '!' character. For example: ;;
 		+

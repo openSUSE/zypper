@@ -350,9 +350,15 @@ Zypper will report packages that it cannot find\&. Further, in interactive mode,
 \fBZYPPER_EXIT_INF_CAP_NOT_FOUND\fR
 after finishing the operation\&.
 
-Zypper will download the files into its cache directory (/var/cache/zypper/RPMS), add this directory as a temporary
+Zypper will collect the files in a temporary
 \fBplaindir\fR
-repository and mark the respective packages for installation\&.
+repository and mark the respective packages for installation\&. If
+\fB\-\-download\-only\fR
+is used, the downloaded packages will be available in
+\fB/var/cache/zypper/RPMS\fR
+until you actually install them or call
+\fBzypper clean\fR
+to clear the package caches\&.
 .RE
 .PP
 In the install command, you can also specify packages you wish to remove by prepending their names by a \fI\-\fR or \fI!\fR character\&. For example:
