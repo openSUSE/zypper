@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
 "PO-Revision-Date: 2017-04-20 05:16+0000\n"
-"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -687,7 +687,7 @@ msgstr "غير معروف"
 #: src/info.cc:565
 #, boost-format
 msgid "See %1%"
-msgstr "أنظر%1%"
+msgstr "انظر %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:571
