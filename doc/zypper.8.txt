@@ -204,7 +204,7 @@ Package Management Commands
 		In contrast to *zypper remove Firefox* which removes Firefox and its dependent packages, the install command will try to keep dependent packages installed by looking for Firefox alternatives.
 		+ Note that if you choose to use *-* with the first package you specify, you need to write *--* before it to prevent its interpretation as a command option:
 		+
-		$ *zypper install -- -boring-game great-game great-game-manual*{nbsp}
+		$ *zypper install --{nbsp} -boring-game great-game great-game-manual*{nbsp}
 
 +
 --
