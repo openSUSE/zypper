@@ -803,19 +803,9 @@ void do_init_repos( Zypper & zypper, const Container & container )
     }
   }
 
-  // add temp repos (e.g. .rpm as CLI arg)
+  // add temp repos (e.g. .rpm as CLI arg and --plus-repo)
   if ( !gData.temporary_repos.empty() )
     gData.repos.insert( gData.repos.end(), gData.temporary_repos.begin(), gData.temporary_repos.end() );
-
-  // additional repositories (--plus-repo)
-  if ( !gData.additional_repos.empty() )
-  {
-    for_( it, gData.additional_repos.begin(), gData.additional_repos.end() )
-    {
-      add_repo( zypper, *it );
-      gData.repos.push_back( *it );
-    }
-  }
 
   bool no_cd = zypper.globalOpts().no_cd;
   bool no_remote = zypper.globalOpts().no_remote;
@@ -1289,9 +1279,9 @@ void list_repos( Zypper & zypper )
     exit( ZYPPER_EXIT_ERR_ZYPP );
   }
 
-  // add the additional repos specified with the --plus-repo to the list
-  if ( !gData.additional_repos.empty() )
-    repos.insert( repos.end(), gData.additional_repos.begin(), gData.additional_repos.end() );
+  // add the temporary repos specified with the --plus-repo to the list
+  if ( !gData.temporary_repos.empty() )
+    repos.insert( repos.end(), gData.temporary_repos.begin(), gData.temporary_repos.end() );
 
   // export to file or stdout in repo file format
   /// \todo dedup writing code in list_services

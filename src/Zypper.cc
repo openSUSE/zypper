@@ -1139,10 +1139,13 @@ void Zypper::processGlobalOptions()
         repo.addBaseUrl( url );
         repo.setEnabled( true );
         repo.setAutorefresh( true );
-        repo.setAlias( str::Format("tmp%d") % count );
+        repo.setAlias( str::Format("~plus-repo-%d") % count );
         repo.setName( url.asString() );
 
-        _rdata.additional_repos.push_back( repo );
+	repo.setMetadataPath( runtimeData().tmpdir / repo.alias() / "%AUTO%" );
+	repo.setPackagesPath( Pathname::assertprefix( _gopts.root_dir, ZYPPER_RPM_CACHE_DIR ) );
+
+        _rdata.temporary_repos.push_back( repo );
         DBG << "got additional repo: " << url << endl;
         count++;
       }
@@ -5307,11 +5310,6 @@ void Zypper::doCommand()
 void Zypper::cleanup()
 {
   MIL << "START" << endl;
-
-  // remove the additional repositories specified by --plus-repo
-  for_( it, _rdata.additional_repos.begin(), _rdata.additional_repos.end() )
-    remove_repo( *this, *it );
-
   _rm.reset();	// release any pending appdata trigger now.
 }
 
