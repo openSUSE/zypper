@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-28 13:53+0100\n"
-"PO-Revision-Date: 2017-04-20 05:16+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2017-04-20 05:17+0000\n"
+"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -2193,7 +2193,7 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr "الأولوية الافتراضية"
+msgstr "الألولوية الافتراضية"
 
 #: src/repos.cc:70
 msgid "raised priority"
