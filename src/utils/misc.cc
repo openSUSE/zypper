@@ -546,7 +546,7 @@ Pathname cache_rpm( const std::string & rpm_uri_str, const Pathname & cache_dir 
     Pathname localrpmpath = mm.localPath(mid, rpmpath.basename());
     filesystem::assert_dir(cache_dir);
     bool error =
-      filesystem::copy(localrpmpath, cache_dir / localrpmpath.basename());
+      filesystem::hardlinkCopy(localrpmpath, cache_dir / localrpmpath.basename());
 
     mm.release(mid);
     mm.close(mid);
