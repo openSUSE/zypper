@@ -251,12 +251,20 @@ public:
 
   /** Pending SigINT? Check at some frequently called place to avoid exiting from within the signal handler. */
   void immediateExitCheck()
-  { if ( _exit_requested > 1 ) immediateExit(); }
+  { if ( _exit_requested > 1 ) immediateExit( /* not called from within a sighandler */false ); }
+
   /** E.g. from SIGNINT handler (main.cc) */
-  void immediateExit()
+  void immediateExit( bool fromWithinSigHandler_r = true )
   {
     WAR << "Immediate Exit requested." << endl;
     cleanup();
+    if ( fromWithinSigHandler_r )
+    {
+      // _exit will call no dtor, so cleanup the worst mess...
+      filesystem::recursive_rmdir( zypp::myTmpDir() );
+      _exit( runtimeData().entered_commit ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ON_SIGNAL );
+    }
+    // else
     exit( runtimeData().entered_commit ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ON_SIGNAL );
   }
 

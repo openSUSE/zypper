@@ -5309,6 +5309,8 @@ void Zypper::doCommand()
 
 void Zypper::cleanup()
 {
+  // NOTE: Via immediateExit this may be invoked from within
+  // a signal handler.
   MIL << "START" << endl;
   _rm.reset();	// release any pending appdata trigger now.
 }
