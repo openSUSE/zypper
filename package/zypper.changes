@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 21 16:16:57 CEST 2017 - ma@suse.de
+
+- Fix TODOs in zypper manpage (bsc#1032259)
+- version 1.6.337
+
+-------------------------------------------------------------------
 Tue Apr  4 14:51:48 CEST 2017 - ma@suse.de
 
 - man: describe supported SSL related URL options (bsc#1032152)
