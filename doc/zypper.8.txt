@@ -1455,7 +1455,7 @@ GLOBAL OPTIONS
 	Terse output for machine consumption. Implies *--no-abbrev* and *--no-color*.
 
 *-s*, *--table-style*::
-	Specifies table style to use. Table style is identified by an integer number. TODO
+	Specifies table style to use. Table style is identified by an integer number.
 
 *-n*, *--non-interactive*::
 	Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. Those default answers also depend on other options like *--no-gpg-checks* or *--ignore-unknown*.
