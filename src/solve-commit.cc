@@ -876,7 +876,7 @@ void solve_and_commit ( Zypper & zypper )
 	  if ( summary.needMachineReboot() )
 	  {
 	    zypper.setExitCode( ZYPPER_EXIT_INF_REBOOT_NEEDED );
-	    zypper.out().warning(_("One of installed patches requires reboot of"
+	    zypper.out().warning(_("One of the installed patches requires a reboot of"
 	    " your machine. Reboot as soon as possible."), Out::QUIET );
 	  }
 	  // set return value to 'restart needed' (restart of package manager)
@@ -884,7 +884,7 @@ void solve_and_commit ( Zypper & zypper )
 	  else if ( zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && summary.needPkgMgrRestart() )
 	  {
 	    zypper.setExitCode( ZYPPER_EXIT_INF_RESTART_NEEDED );
-	    zypper.out().warning(_("One of installed patches affects the package"
+	    zypper.out().warning(_("One of the installed patches affects the package"
 	    " manager itself. Run this command once more to install any other"
 	    " needed patches." ), Out::QUIET, Out::TYPE_NORMAL ); // don't show this to machines
 	  }
