@@ -27,16 +27,17 @@ namespace zypp
 BOOST_AUTO_TEST_CASE(vendor2_test)
 {
   reconfigureZConfig( DATADIR / "zypp2.conf" );
+  // bsc#1030686: Remove legacy vendor equivalence between 'suse' and 'opensuse'
 
   BOOST_REQUIRE( VendorAttr::instance().equivalent("suse", "suse") );
   BOOST_REQUIRE( VendorAttr::instance().equivalent("equal", "equal") );
   BOOST_REQUIRE( VendorAttr::instance().equivalent("suse", "SuSE") );
-  BOOST_REQUIRE( VendorAttr::instance().equivalent("opensuse", "SuSE") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse", "SuSE") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("open", "SuSE") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("nothing", "SuSE") );
   BOOST_REQUIRE( VendorAttr::instance().equivalent("nvidia", "SuSE") );
   BOOST_REQUIRE( VendorAttr::instance().equivalent("nvidia_new_new", "SuSE") );
-  BOOST_REQUIRE( VendorAttr::instance().equivalent("nvidia", "opensuse") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("nvidia", "opensuse") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("ati", "SuSE") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("ati", "nvidia") );
   BOOST_REQUIRE( VendorAttr::instance().equivalent("ati_new", "ati") );

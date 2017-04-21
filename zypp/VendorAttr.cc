@@ -136,30 +136,14 @@ namespace zypp
       // creating entries
       addVendorDirectory (vendorPath);
 
-      // Checking if suse,opensuse has been defined, else create entries:
-      // - if both are defined we leve them as thay are.
-      // - if only one of them is defined, we add the other to the same group.
-      // - if both are undefined they make up a new group
-      VendorMap::const_iterator suseit( _vendorMap.find("suse") );
-      VendorMap::const_iterator opensuseit( _vendorMap.find("opensuse") );
-      if ( suseit == _vendorMap.end() )
-      {
-        if ( opensuseit == _vendorMap.end() )
-        {
-          // both are undefined
-          _vendorMap["suse"] = _vendorMap["opensuse"] = ++vendorGroupCounter;
-        }
-        else
-        {
-          // add suse to opensuse
-          _vendorMap["suse"] = opensuseit->second;
-        }
-      }
-      else if ( opensuseit == _vendorMap.end() )
-      {
-        // add opensuse to suse
-        _vendorMap["opensuse"] = suseit->second;
-      }
+      // bsc#1030686: The legacy default equivalence of 'suse' and 'opensuse'
+      // has been removed. Unless they are mentioned in a custom rule, create
+      // separate classes for them.
+      if ( _vendorMap.find("suse") == _vendorMap.end() )
+	_vendorMap["suse"] = ++vendorGroupCounter;
+
+      if ( _vendorMap.find("opensuse") == _vendorMap.end() )
+	_vendorMap["opensuse"] = ++vendorGroupCounter;
 
       MIL << *this << endl;
   }

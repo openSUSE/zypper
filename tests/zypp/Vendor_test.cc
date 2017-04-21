@@ -26,12 +26,13 @@ namespace zypp
 BOOST_AUTO_TEST_CASE(vendor_test1)
 {
   reconfigureZConfig( DATADIR / "zypp1.conf" );
-  // No vendor definition files has been read. So only suse,opensuse vendors are
+  // bsc#1030686: Remove legacy vendor equivalence between 'suse' and 'opensuse'
+  // No vendor definition files has been read. So only suse* vendors are
   // equivalent
   BOOST_REQUIRE( VendorAttr::instance().equivalent("suse", "suse") );
   BOOST_REQUIRE( VendorAttr::instance().equivalent("equal", "equal") );
   BOOST_REQUIRE( VendorAttr::instance().equivalent("suse", "SuSE") );
-  BOOST_REQUIRE( VendorAttr::instance().equivalent("opensuse", "SuSE") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse", "SuSE") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("open", "SuSE") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("nothing", "SuSE") );
 

@@ -1,7 +1,7 @@
 <channel><subchannel>
 <package>
 	<name>candidate</name>
-	<vendor>SUSE</vendor>
+	<vendor>openSUSE</vendor>
 	<history><update>
 		<arch>x86_64</arch>
 		<version>0</version>
@@ -10,7 +10,7 @@
 </package>
 <package>
 	<name>candidate</name>
-	<vendor>SUSE</vendor>
+	<vendor>openSUSE</vendor>
 	<history><update>
 		<arch>i586</arch>
 		<version>0</version>

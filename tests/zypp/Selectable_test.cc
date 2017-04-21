@@ -28,8 +28,8 @@ BOOST_AUTO_TEST_CASE(candiadate)
   // } (A 6) {
   //   U__s_(2)candidate-4-1.x86_64(RepoHIGH)(unkown)
   //   U__s_(3)candidate-4-1.i586(RepoHIGH)(unkown) <- (update) candidate if allowVendorChange
-  //   U__s_(6)candidate-0-1.x86_64(RepoMID)(SUSE)
-  //   U__s_(7)candidate-0-1.i586(RepoMID)(SUSE) <- candidate (highest prio matching arch and vendor)
+  //   U__s_(6)candidate-0-1.x86_64(RepoMID)(openSUSE)
+  //   U__s_(7)candidate-0-1.i586(RepoMID)(openSUSE) <- candidate (highest prio matching arch and vendor)
   //   U__s_(4)candidate-2-1.x86_64(RepoLOW)(openSUSE)
   //   U__s_(5)candidate-2-1.i586(RepoLOW)(openSUSE)
   // }

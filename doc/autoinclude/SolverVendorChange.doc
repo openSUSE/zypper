@@ -62,18 +62,20 @@ solver.allowVendorChange = true
 
 \subsection zypp-solv-vendorchange-equiv Groups of equivalent vendor strings
 
-A built in example for this are the \c vendor strings for \c SuSE  and \c openSUSE. All vendor strings starting (case insensitive) with either \c "suse" or \c "opensuse", are considered to be the \e same \e vendor and their packages may replace each other without asking.
+A built in example for this is the \c vendor string \c SuSE. All vendor strings starting (case insensitive) with \c "suse", are considered to be the \e same \e vendor and their packages may replace each other without asking.
 
-You may define your own classes of equivalent \c vendor strings by creating an entry in the \c /etc/zypp/vendors.d directory. The directory does not exist per default, so you may have to create it first. For each group of \c vendor strings create a file, name it as you like, with the following content:
+You may define your own classes of equivalent \c vendor strings by creating an entry in the \c /etc/zypp/vendors.d directory. For each group of \c vendor strings create a file, name it as you like, with the following content:
 
 \code
 [main]
-## A comma separated list of vendor string (prefixes!)
-## Example: suse,opensuse
+## A comma separated list of equivalent vendor string (prefixes!)
+## Example:
+## vendors = suse,opensuse
 vendors = <PUT YOUR LIST HERE>
 \endcode
 
-\note The built in rule unifying \c "suse"  and \c "opensuse" gets disabled as soon as you mention either of those string in a custom rule.
+\note A built in rule unifying \c "suse"  and \c "opensuse" was disabled in libzypp-16.7.1. The above example would recreate it.
+
 
 
 \section zypp-solv-vendorchange-Impl Related classes
