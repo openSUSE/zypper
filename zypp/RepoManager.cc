@@ -1188,7 +1188,8 @@ namespace zypp
         // ok we have the metadata, now exchange
         // the contents
 	filesystem::exchange( tmpdir.path(), mediarootpath );
-	reposManip();	// remember to trigger appdata refresh
+	if ( ! isTmpRepo( info ) )
+	  reposManip();	// remember to trigger appdata refresh
 
         // we are done.
         return;
