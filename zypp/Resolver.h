@@ -205,6 +205,14 @@ namespace zypp
     bool upgradeMode() const;
 
     /**
+     * Setting whether the solver should perform in 'update' mode or
+     * not. If on, it will add a resolver job to update all packages.
+     * \see \ref doUpdate.
+     */
+    void setUpdateMode( bool yesno_r );
+    bool updateMode() const;
+
+    /**
      * Setting whether the solver should allow or disallow vendor changes.
      *
      * If OFF (the default) the solver will replace packages with packages

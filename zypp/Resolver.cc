@@ -93,6 +93,9 @@ namespace zypp
   void Resolver::setUpgradeMode( bool yesno_r )		{ return _pimpl->setUpgradeMode( yesno_r ); }
   bool Resolver::upgradeMode() const			{ return _pimpl->isUpgradeMode(); }
 
+  void Resolver::setUpdateMode( bool yesno_r )		{ return _pimpl->setUpdateMode( yesno_r ); }
+  bool Resolver::updateMode() const			{ return _pimpl->isUpdateMode(); }
+
   void Resolver::setAllowVendorChange( bool yesno_r )	{ _pimpl->setAllowVendorChange( yesno_r ); }
   void Resolver::setDefaultAllowVendorChange()		{ _pimpl->setAllowVendorChange( indeterminate ); }
   bool Resolver::allowVendorChange() const		{ return _pimpl->allowVendorChange(); }

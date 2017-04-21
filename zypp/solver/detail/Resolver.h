@@ -181,6 +181,7 @@ class Resolver : private base::NonCopyable
     void setUpgradeMode( bool yesno_r )		{ _upgradeMode = yesno_r; }
 
     bool isUpdateMode() const 			{ return _updateMode; }	// Resolver has been called with doUpdate
+    void setUpdateMode( bool yesno_r )		{ _updateMode = yesno_r; }
 
     bool isVerifyingMode() const 		{ return _verifying; }	// The system will be checked
     void setVerifyingMode( TriBool state_r )	{ _verifying = indeterminate(state_r) ? false : bool(state_r); }

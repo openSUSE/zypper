@@ -312,7 +312,7 @@ void Resolver::solverInit()
     _satResolver->setAllowarchchange		(false);
     _satResolver->setAllowvendorchange		( allowVendorChange() );
     _satResolver->setAllowuninstall		( forceResolve() );
-    _satResolver->setUpdatesystem		(false);
+    _satResolver->setUpdatesystem		(_updateMode);
     _satResolver->setNoupdateprovide		(false);
     _satResolver->setDosplitprovides		(true);
     _satResolver->setSolveSrcPackages		( solveSrcPackages() );
