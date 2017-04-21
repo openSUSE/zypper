@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Apr 21 09:42:39 CEST 2017 - ma@suse.de
+
+- Fix crash when exiting after pressing CTRL-C quickly twice or more
+  (bsc#1032279)
+- Use private temporary repos for --plus-repo (bsc#1032632,bsc#1017267)
+- Use private temporary repos to collect rpms passed on the command
+  line (bsc#1032632)
+- Allow --plus-content to temporarily enable repos by alias/number
+- refresh: recognize --plus-content repos (FATE#319486)
+- BuildRequires:  libzypp-devel >= 16.7.0
+- version 1.13.23
+
+-------------------------------------------------------------------
 Tue Apr  4 15:20:01 CEST 2017 - ma@suse.de
 
 - man: describe supported SSL related URL options (bsc#1032152)
