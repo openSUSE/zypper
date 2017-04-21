@@ -31,7 +31,7 @@ namespace zypp {
 
 /** Definition of vendor equivalence.
  *
- * Packages with equivalment vendor strings may replace themself without
+ * Packages with equivalent vendor strings may replace themselves without
  * creating a solver error.
  *
  * Per default vendor strings starting with \c "suse" or \c "opensuse"
@@ -65,7 +65,7 @@ class VendorAttr
     void addVendorList( TIterator begin, TIterator end ) const
     { VendorList tmp( begin, end ); _addVendorList( tmp ); }
 
-    /** Return whether two vendor strings shold be treated as the same vendor.
+    /** Return whether two vendor strings should be treated as the same vendor.
      * Usually the solver is allowed to automatically select a package of an
      * equivalent vendor when updating. Replacing a package with one of a
      * different vendor usually must be confirmed by the user.

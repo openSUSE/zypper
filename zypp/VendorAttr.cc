@@ -34,8 +34,6 @@
 #include "zypp/PathInfo.h"
 #include "zypp/parser/IniDict.h"
 
-using namespace std;
-
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::VendorAttr"
 
@@ -47,9 +45,9 @@ namespace zypp
   namespace
   { /////////////////////////////////////////////////////////////////
 
-    typedef map<Vendor,unsigned int> VendorMap;
+    typedef std::map<Vendor,unsigned> VendorMap;
     VendorMap _vendorMap;
-    unsigned int vendorGroupCounter;
+    unsigned vendorGroupCounter;
 
     /////////////////////////////////////////////////////////////////
   } // namespace
@@ -227,14 +225,14 @@ namespace zypp
 	    sit != dict.sectionsEnd();
 	    ++sit )
       {
-          string section(*sit);
+          std::string section(*sit);
           //MIL << section << endl;
           for ( parser::IniDict::entry_const_iterator it = dict.entriesBegin(*sit);
                 it != dict.entriesEnd(*sit);
                 ++it )
           {
-	      string entry(it->first);
-	      string value(it->second);
+	      std::string entry(it->first);
+	      std::string value(it->second);
 	      if ( section == "main" )
 	      {
 		  if ( entry == "vendors" )
@@ -259,12 +257,9 @@ namespace zypp
           return false;
       }
 
-      list<Pathname> filenames;
-
-      filesystem::readdir( filenames,
-			   dirname, false );
-      for (list<Pathname>::iterator it = filenames.begin();
-	   it != filenames.end(); ++it) {
+      std::list<Pathname> filenames;
+      filesystem::readdir( filenames, dirname, false );
+      for_( it, filenames.begin(), filenames.end() ) {
 	  MIL << "Adding file " << *it << endl;
 	  addVendorFile( *it );
       }
