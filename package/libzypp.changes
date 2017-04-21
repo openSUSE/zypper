@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Apr 21 09:40:32 CEST 2017 - ma@suse.de
+
+- RepoInfo: Allow temporary repos to control their metadata
+  directories (bsc#1032632)
+- Arch: add armv5tl
+- version 16.7.0 (0)
+
+-------------------------------------------------------------------
 Thu Mar 30 15:00:30 CEST 2017 - ma@suse.de
 
 - Recognize license tarball in rpmmd repos (FATE#316159)
