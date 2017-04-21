@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Apr 21 16:23:51 CEST 2017 - ma@suse.de
+
+- Add API to control resolver job to update all packages (FATE#320653)
+- Remove legacy vendor equivalence between 'suse' and 'opensuse'
+  (bsc#1030686)
+- version 16.8.0 (0)
+
+-------------------------------------------------------------------
 Fri Apr 21 09:40:32 CEST 2017 - ma@suse.de
 
 - RepoInfo: Allow temporary repos to control their metadata
