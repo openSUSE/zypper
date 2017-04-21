@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-21 17:23+0200\n"
-"PO-Revision-Date: 2017-02-28 14:34+0000\n"
+"PO-Revision-Date: 2017-04-21 16:39+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2072,10 +2072,10 @@ msgid "Specified repository '%s' is disabled."
 msgstr "El repositori especificat '%s' està inhabilitat."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
-"Feu servir les ordres \"%s\" o \"%s\" per afegir o habilitar repositoris."
+"Es pot usar l'opció global \"%s\" per habilitar repositoris temporalment."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2257,9 +2257,9 @@ msgid "Specified repositories: "
 msgstr "Repositoris especificats: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Inhabilitant el repositori %s."
+msgstr "Refrescant el repositori %s."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
