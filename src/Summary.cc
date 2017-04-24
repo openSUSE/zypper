@@ -1377,6 +1377,8 @@ void Summary::writePackageCounts( std::ostream & out )
 
 void Summary::dumpTo( std::ostream & out )
 {
+  Zypper & zypper( *Zypper::instance() );
+
   struct SetColor
   {
     SetColor( bool force )
@@ -1426,6 +1428,11 @@ void Summary::dumpTo( std::ostream & out )
   out << endl;
   writePackageCounts( out );
   writeDownloadAndInstalledSizeSummary( out );
+  if ( _need_restart && zypper.runtimeData().plain_patch_command && !zypper.cOpts().count("updatestack-only") )
+  {
+    // patch command (auto)restricted to update stack patches
+    out << ( ColorContext::MSG_WARNING << _("Package manager restart required. (Run this command once again after the update stack got updated)") ) << endl;
+  }
   if ( _need_reboot )
   { out << ( ColorContext::MSG_WARNING << _("System reboot required.") ) << endl; }
 

@@ -2205,6 +2205,7 @@ void Zypper::processCommandOptions()
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       {"updatestack-only",	    no_argument,       0,  0 },
+      {"with-update",		    no_argument,       0,  0 },
       {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
       {"skip-interactive",          no_argument,       0,  0 },
       {"with-interactive",          no_argument,       0,  0 },
@@ -2267,6 +2268,7 @@ void Zypper::processCommandOptions()
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
       .option("--updatestack-only",	_("Install only patches which affect the package management itself.") )
+      .option("--with-update",		_("Additionally try to update all packages not covered by patches. The option is ignored, if the patch command must update the update stack first. Can not be combined with --updatestack-only.") )
       .option_WITHout_OPTIONAL
       .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
       ;
@@ -4653,7 +4655,7 @@ void Zypper::doCommand()
 
     if ( copts.count("updatestack-only") )
     {
-      for ( const char * opt : { "bugzilla", "bz", "cve" } )
+      for ( const char * opt : { "bugzilla", "bz", "cve", "with-update" } )
       {
 	if ( copts.count( opt ) )
 	{
@@ -4740,7 +4742,12 @@ void Zypper::doCommand()
 
     load_resolvables( *this );
     resolve( *this ); // needed to compute status of PPP
-
+    // Beware: While zypper calls resolve() once just to compute the PPP status,
+    // solve_with_update must be false until the command passed the initialization!
+    // Reset to false when leaving the block in case we are in shell mode!
+    DtorReset guard( runtimeData().solve_with_update );
+    if ( copts.count( "with-update" ) )
+      runtimeData().solve_with_update = true;
 
     // patch --bugzilla/--cve
     if ( copts.count("bugzilla") || copts.count("bz") || copts.count("cve") )
@@ -4772,7 +4779,10 @@ void Zypper::doCommand()
           }
           // update -t patch; patch
           else if ( *kit == ResKind::patch )
-            sr.updatePatches();
+	  {
+	    runtimeData().plain_patch_command = true;
+	    sr.updatePatches();
+	  }
           else if ( *kit == ResKind::pattern )
             sr.updatePatterns();
           // should not get here (see above kind parsing code), but just in case

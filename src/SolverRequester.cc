@@ -467,7 +467,21 @@ void SolverRequester::updatePatches()
     if ( ! ignore_pkgmgmt )	// just checked the update stack
     {
       if ( any_marked )
+      {
 	MIL << "got some pkgmgmt patches, will install these first" << endl;
+
+	// When (auto)restricting patch to the updatestack only, drop "--with-update"
+	if ( Zypper::instance()->runtimeData().solve_with_update )
+	{
+	  WAR << "Drop --with-update while patching the update stack" << endl;
+	  Zypper::instance()->out().info(
+	    ColorString( ColorContext::MSG_WARNING,
+			 str::Format(_("Ignoring option %s when updating the update stack first.")) % "--with-update"
+	    ).str()
+	  );
+	  Zypper::instance()->runtimeData().solve_with_update = false;
+	}
+      }
 
       if ( Zypper::instance()->cOpts().count("updatestack-only") )
       {

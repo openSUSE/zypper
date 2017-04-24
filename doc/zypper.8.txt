@@ -568,6 +568,11 @@ Update Management Commands
 	*--updatestack-only*::
 		Install only patches which affect the package management itself and exit.
 
+	*--with-update*::
+		Additionally try to update all packages not covered by patches. This is basically the same as running *zypper update* afterwards.
+		+
+		The option is ignored, if the patch command must update the update stack first, thus it can not be combined with the *--updatestack-only* option.
+
 	*--with*[*out*]*-optional*::
 		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
 

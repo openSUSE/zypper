@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 04/21/2017
+.\"      Date: 04/24/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "04/21/2017" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "04/24/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1027,6 +1027,17 @@ This command is similar to
 \fB\-\-updatestack\-only\fR
 .RS 4
 Install only patches which affect the package management itself and exit\&.
+.RE
+.PP
+\fB\-\-with\-update\fR
+.RS 4
+Additionally try to update all packages not covered by patches\&. This is basically the same as running
+\fBzypper update\fR
+afterwards\&.
+
+The option is ignored, if the patch command must update the update stack first, thus it can not be combined with the
+\fB\-\-updatestack\-only\fR
+option\&.
 .RE
 .PP
 \fB\-\-with\fR[\fBout\fR]\fB\-optional\fR

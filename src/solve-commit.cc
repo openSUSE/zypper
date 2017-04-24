@@ -299,6 +299,10 @@ static void set_solver_flags( Zypper & zypper )
   set_no_recommends( zypper );
   set_ignore_recommends_of_installed( zypper );
 
+  // Beware: While zypper calls resolve() once just to compute the PPP status,
+  // solve_with_update must be false until the command passed the initialization!
+  God->resolver()->setUpdateMode( zypper.runtimeData().solve_with_update );
+
   shared_ptr<DupOptions> dupOptions = zypper.commandOptionsAs<DupOptions>();
   if ( dupOptions )
   {
