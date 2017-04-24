@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-21 16:39+0000\n"
+"PO-Revision-Date: 2017-04-24 14:13+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1738,6 +1738,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Cal reiniciar el gestor de paquets. (Executeu aquesta ordre un altre cop "
+"després d'actualitzar la pila d'actualització)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1886,7 +1888,7 @@ msgstr "L'ordre \"%s\" és desconeguda"
 #: src/SolverRequester.cc:479
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "S'ignora l'opció %s quan primer s'actualitza la pila d'actualització."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -4342,6 +4344,9 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Addicionalment, intenteu actualitzar tots els paquets no coberts pels "
+"pedaços. L'opció s'ignora, si l'ordre de pedaç ha d'actualitzar primer la "
+"pila d'actualització. No es pot combinar amb --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
