@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-21 17:23+0200\n"
+"POT-Creation-Date: 2017-04-24 13:46+0200\n"
 "PO-Revision-Date: 2012-05-24 15:15+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -195,7 +195,7 @@ msgstr "គ្មាន​អត្ថបទ​សង្ខេប​សម្រ
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:326 src/callbacks/keyring.h:334
-#: src/callbacks/rpm.h:132 src/callbacks/rpm.h:443 src/solve-commit.cc:668
+#: src/callbacks/rpm.h:132 src/callbacks/rpm.h:443 src/solve-commit.cc:672
 msgid "Continue?"
 msgstr "បន្ត ?"
 
@@ -409,11 +409,11 @@ msgstr "បាទ/ចាស"
 msgid "No"
 msgstr "ទេ"
 
-#: src/Zypper.h:487
+#: src/Zypper.h:491
 msgid "Finished with error."
 msgstr ""
 
-#: src/Zypper.h:489
+#: src/Zypper.h:493
 msgid "Done."
 msgstr ""
 
@@ -446,7 +446,7 @@ msgstr "ឃ្លាំង"
 #. translators: Table column header
 #. translators: name (general header)
 #: src/info.cc:69 src/info.cc:471 src/info.cc:715 src/repos.cc:1070
-#: src/repos.cc:1209 src/repos.cc:2539 src/update.cc:801 src/Zypper.cc:5270
+#: src/repos.cc:1209 src/repos.cc:2539 src/update.cc:801 src/Zypper.cc:5280
 #: src/search.cc:70 src/search.cc:235 src/search.cc:383 src/search.cc:530
 #: src/search.cc:594 src/locks.cc:107 src/utils/misc.cc:250
 msgid "Name"
@@ -480,7 +480,7 @@ msgid "Summary"
 msgstr "សង្ខេប"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:83 src/Zypper.cc:5270
+#: src/info.cc:83 src/Zypper.cc:5280
 msgid "Description"
 msgstr "សេចក្តី​ពិពណ៌នា"
 
@@ -1577,7 +1577,14 @@ msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "កញ្ចប់​ប្រភព​ត្រូវ​ដំឡើង"
 
-#: src/Summary.cc:1430
+#. patch command (auto)restricted to update stack patches
+#: src/Summary.cc:1434
+msgid ""
+"Package manager restart required. (Run this command once again after the "
+"update stack got updated)"
+msgstr ""
+
+#: src/Summary.cc:1437
 #, fuzzy
 msgid "System reboot required."
 msgstr "តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​ឡើង​វិញ ៖ "
@@ -1721,6 +1728,11 @@ msgstr "ពាក្យសម្ងាត់"
 msgid "Unknown command '%s'"
 msgstr "មិន​ស្គាល់​ពាក្យ​បញ្ជា '%s'"
 
+#: src/SolverRequester.cc:479
+#, c-format, boost-format
+msgid "Ignoring option %s when updating the update stack first."
+msgstr ""
+
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
 msgid "volatile"
@@ -1818,8 +1830,8 @@ msgstr "បិទ​ឃ្លាំង '%s' ។"
 msgid "Problem retrieving files from '%s'."
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​ពី '%s' ។"
 
-#: src/repos.cc:358 src/repos.cc:3307 src/solve-commit.cc:801
-#: src/solve-commit.cc:832 src/solve-commit.cc:856
+#: src/repos.cc:358 src/repos.cc:3307 src/solve-commit.cc:805
+#: src/solve-commit.cc:836 src/solve-commit.cc:860
 msgid "Please see the above error message for a hint."
 msgstr "សូម​មើល​សារ​កំហុស​ខាងលើ សម្រាប់​ព័ត៌មាន​ជំនួយ ។"
 
@@ -1901,7 +1913,7 @@ msgstr "ប្រើ '%s' ដើម្បី​ទទួល​បញ្ជី​
 msgid "Ignoring disabled repository '%s'"
 msgstr "មិនអើពើ​ឃ្លាំង​ដែលបាន​បិទ '%s'"
 
-#: src/repos.cc:794 src/Zypper.cc:4284
+#: src/repos.cc:794 src/Zypper.cc:4286
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "ឃ្លាំង​ដែល​បាន​បញ្ជាក់​ '%s' ត្រូវ​បាន​បិទ ។"
@@ -1970,11 +1982,11 @@ msgstr "ចាប់ផ្ដើម​គោលដៅ"
 msgid "Target initialization failed:"
 msgstr "ការ​ចាប់ផ្ដើម​គោលដៅ​បាន​បរាជ័យ ៖"
 
-#: src/repos.cc:1007 src/Zypper.cc:4445
+#: src/repos.cc:1007 src/Zypper.cc:4447
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "ការ​រត់ 'zypper refresh' ជា root គឺ​អាច​ដោះស្រាយ​បញ្ហា​បាន ។"
 
-#: src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2538 src/Zypper.cc:5270
+#: src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2538 src/Zypper.cc:5280
 msgid "Alias"
 msgstr "ឈ្មោះ​ក្លែងក្លាយ"
 
@@ -3112,7 +3124,7 @@ msgstr ""
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 
-#: src/Zypper.cc:970 src/Zypper.cc:3230
+#: src/Zypper.cc:970 src/Zypper.cc:3232
 msgid "Entering non-interactive mode."
 msgstr "បញ្ចូល​របៀប​​មិន​អន្តរសកម្ម ។"
 
@@ -3270,7 +3282,7 @@ msgstr ""
 "-d, --download-only         គ្រាន់តែ​ទាញយក​ញ្ចប់ កុំ​ដំឡើង ។\n"
 
 #: src/Zypper.cc:1515 src/Zypper.cc:1570 src/Zypper.cc:1651 src/Zypper.cc:2198
-#: src/Zypper.cc:2271 src/Zypper.cc:2378
+#: src/Zypper.cc:2273 src/Zypper.cc:2380
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -3913,7 +3925,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         គ្រាន់តែ​ទាញយក​កញ្ចប់ កុំ​ដំឡើង​វា ។\n"
 
-#: src/Zypper.cc:2238
+#: src/Zypper.cc:2239
 #, fuzzy, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -3981,69 +3993,76 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         ទាញ​យក​តែ​កញ្ចប់​ប៉ុណ្ណោះ ប៉ុន្តែ​សូម​កុំ​ដំឡើង ។\n"
 
-#: src/Zypper.cc:2269
+#: src/Zypper.cc:2270
 msgid "Install only patches which affect the package management itself."
 msgstr ""
 
+#: src/Zypper.cc:2271
+msgid ""
+"Additionally try to update all packages not covered by patches. The option "
+"is ignored, if the patch command must update the update stack first. Can not "
+"be combined with --updatestack-only."
+msgstr ""
+
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2295
+#: src/Zypper.cc:2297
 msgid "list-patches (lp) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2298
+#: src/Zypper.cc:2300
 msgid "List all applicable patches."
 msgstr ""
 
-#: src/Zypper.cc:2301
+#: src/Zypper.cc:2303
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
 
-#: src/Zypper.cc:2302
+#: src/Zypper.cc:2304
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
 
-#: src/Zypper.cc:2303
+#: src/Zypper.cc:2305
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
 
-#: src/Zypper.cc:2304
+#: src/Zypper.cc:2306
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
 
-#: src/Zypper.cc:2305
+#: src/Zypper.cc:2307
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
 
-#: src/Zypper.cc:2306
+#: src/Zypper.cc:2308
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
 
-#: src/Zypper.cc:2307
+#: src/Zypper.cc:2309
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
 
-#: src/Zypper.cc:2309
+#: src/Zypper.cc:2311
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
 
-#: src/Zypper.cc:2353
+#: src/Zypper.cc:2355
 #, fuzzy, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -4096,24 +4115,24 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         គ្រាន់តែ​ទាញយក​កញ្ចប់​ប៉ុណ្ណោះ កុំ​ដំឡើង ​។\n"
 
-#: src/Zypper.cc:2381
+#: src/Zypper.cc:2383
 #, fuzzy
 msgid "Whether to allow downgrading installed resolvables."
 msgstr "មិនអើពើ​នឹង​កញ្ចប់​ដោះស្រាយ​ដែល​បាន​ដំឡើង ។"
 
-#: src/Zypper.cc:2383
+#: src/Zypper.cc:2385
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr ""
 
-#: src/Zypper.cc:2385
+#: src/Zypper.cc:2387
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
 
-#: src/Zypper.cc:2387
+#: src/Zypper.cc:2389
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr ""
 
-#: src/Zypper.cc:2424
+#: src/Zypper.cc:2426
 #, fuzzy
 msgid ""
 "search (se) [options] [querystring] ...\n"
@@ -4184,30 +4203,30 @@ msgstr ""
 "តួអក្សរ​ជំនួស * និង ? ក៏​អាច​ត្រូវ​បាន​ប្រើ​នៅ​ក្នុងពាក្យ​ស្វែងរក ។\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2474
+#: src/Zypper.cc:2476
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2477
+#: src/Zypper.cc:2479
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
 
-#: src/Zypper.cc:2480
+#: src/Zypper.cc:2482
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
 
-#: src/Zypper.cc:2481
+#: src/Zypper.cc:2483
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr ""
 
-#: src/Zypper.cc:2498
+#: src/Zypper.cc:2500
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -4225,7 +4244,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI>  ជា​អត្ថន័យ​មួយ​ទៀត​ដើម្បីបញ្ជាក់​ឃ្លាំង ។\n"
 
-#: src/Zypper.cc:2528
+#: src/Zypper.cc:2530
 #, fuzzy
 msgid ""
 "packages (pa) [options] [repository] ...\n"
@@ -4257,7 +4276,7 @@ msgstr ""
 "-N, --sort-by-name        តម្រៀប​បញ្ជី​តាម​ឈ្មោះ​កញ្ចប់ ។\n"
 "-R, --sort-by-repo        តម្រៀប​បញ្ជី​តាម​ឃ្លាំង ។\n"
 
-#: src/Zypper.cc:2559
+#: src/Zypper.cc:2561
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -4279,7 +4298,7 @@ msgstr ""
 "-i, --installed-only      បង្ហាញ​តែ​លំនាំ​ដែល​បាន​ដំឡើង​ប៉ុណ្ណោះ ។\n"
 "-u, --not-installed-only  បង្ហាញ​តែ​លំនាំ​ដែល​មិន​ត្រូវ​បាន​ដំឡើង​ប៉ុណ្ណោះ ។\n"
 
-#: src/Zypper.cc:2586
+#: src/Zypper.cc:2588
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -4301,12 +4320,12 @@ msgstr ""
 "-i, --installed-only      បង្ហាញ​តែ​ផលិតផល​ដែល​ដំឡើង​ប៉ុណ្ណោះ ។\n"
 "-u, --not-installed-only  បង្ហាញ​តែ​ផលិតផល​ដែល​មិន​ត្រូវ​បានដំឡើង ។\n"
 
-#: src/Zypper.cc:2595
+#: src/Zypper.cc:2597
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
 
-#: src/Zypper.cc:2619
+#: src/Zypper.cc:2621
 #, fuzzy, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -4340,7 +4359,7 @@ msgstr ""
 "    --requires            បង្ហាញ​ទាំង​កញ្ចប់​ដែល​ត្រូវការ និង​កញ្ចប់​ដែល​ត្រូវការ​ជា​មុន ។\n"
 "    --recommends          បង្ហាញ​ទាំង​កញ្ចប់​ដែល​បាន​ផ្ដល់​អានុសាសន៍ ។"
 
-#: src/Zypper.cc:2652
+#: src/Zypper.cc:2654
 #, fuzzy, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -4355,7 +4374,7 @@ msgstr ""
 "\n"
 "នេះ​ជា​ឈ្មោះ​ក្លែងក្លាយ​ឆបគ្នាសម្រាប់ '%s' ។\n"
 
-#: src/Zypper.cc:2671
+#: src/Zypper.cc:2673
 #, fuzzy, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -4370,7 +4389,7 @@ msgstr ""
 "\n"
 "នេះ​ជា​ឈ្មោះ​ក្លែងក្លាយ​ដែល​ឆបគ្នា​សម្រាប់ '%s' ។\n"
 
-#: src/Zypper.cc:2690
+#: src/Zypper.cc:2692
 #, fuzzy, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -4385,7 +4404,7 @@ msgstr ""
 "\n"
 "នេះ​ជា​ឈ្មោះ​ក្លែងក្លាយ​ដែល​ឆបគ្នា​សម្រាប់ '%s' ។\n"
 
-#: src/Zypper.cc:2707
+#: src/Zypper.cc:2709
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -4399,7 +4418,7 @@ msgstr ""
 "\n"
 "ពាក្យ​បញ្ជា​នេះ​មិនមាន​ជម្រើស​បន្ថែម​ទេ ។\n"
 
-#: src/Zypper.cc:2758
+#: src/Zypper.cc:2760
 msgid ""
 "moo\n"
 "\n"
@@ -4413,7 +4432,7 @@ msgstr ""
 "\n"
 "ពាក្យ​បញ្ជា​នេះ​គ្មាន​ជម្រើស​បន្ថែម​ទេ ។\n"
 
-#: src/Zypper.cc:2780
+#: src/Zypper.cc:2782
 #, c-format, boost-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -4436,7 +4455,7 @@ msgstr ""
 "-t, --type <type>         ប្រភេទ​កញ្ចប់ (%s) ។\n"
 "                          លំនាំដើម ៖ %s ។\n"
 
-#: src/Zypper.cc:2807
+#: src/Zypper.cc:2809
 #, fuzzy, c-format, boost-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -4457,27 +4476,27 @@ msgstr ""
 "-r, --repo <alias|#|URI>  យក​តែសោ​ដែល​មានឃ្លាំង​ដែល​បាន​បញ្ជាក់ ។\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2834
+#: src/Zypper.cc:2836
 msgid "locks (ll) [options]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2837
+#: src/Zypper.cc:2839
 #, fuzzy
 msgid "List current package locks."
 msgstr "មិនមាន​សោ​កញ្ចប់​ដែល​បាន​កំណត់​ទេ ។"
 
 #. translators: -m, --matches
-#: src/Zypper.cc:2841
+#: src/Zypper.cc:2843
 msgid "Show the number of resolvables matched by each lock."
 msgstr ""
 
 #. translators: -s, --solvables
-#: src/Zypper.cc:2843
+#: src/Zypper.cc:2845
 msgid "List the resolvables matched by each lock."
 msgstr ""
 
-#: src/Zypper.cc:2859
+#: src/Zypper.cc:2861
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -4495,7 +4514,7 @@ msgstr ""
 "-d, --only-duplicates     ជម្រះ​តែ​សោ​ដែល​ស្ទួន ។\n"
 "-e, --only-empty          ជម្រះ​តែ​សោ​ដែល​មិន​ជាប់​អ្វី​ទាំងអស់ ។\n"
 
-#: src/Zypper.cc:2880
+#: src/Zypper.cc:2882
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -4513,7 +4532,7 @@ msgstr ""
 "  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
 "-l, --label                 បង្ហាញ​ស្លាក​ប្រព័ន្ធ​ប្រតិបត្តិការ ។\n"
 
-#: src/Zypper.cc:2901
+#: src/Zypper.cc:2903
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4529,7 +4548,7 @@ msgstr ""
 "  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
 "-m, --match  យក​លេខចេញ​ផ្សាយ​ដែល​បាត់​ជា​ការ​ចេញ​ផ្សាយ​ណា​មួយ ។\n"
 
-#: src/Zypper.cc:2920
+#: src/Zypper.cc:2922
 msgid ""
 "licenses\n"
 "\n"
@@ -4544,12 +4563,12 @@ msgstr ""
 "ពាក្យ​បញ្ជា​នេះ​គ្មាន​ជម្រើស​បន្ថែម​ទេ ។\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2944
+#: src/Zypper.cc:2946
 msgid "ps [options]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2947
+#: src/Zypper.cc:2949
 #, fuzzy
 msgid ""
 "List running processes which might still use files and libraries deleted by "
@@ -4562,7 +4581,7 @@ msgstr ""
 "ពាក្យ​បញ្ជា​នេះ​គ្មាន​ជម្រើស​បន្ថែម​ទេ ។\n"
 
 #. translators: -s, --short
-#: src/Zypper.cc:2951
+#: src/Zypper.cc:2953
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4570,7 +4589,7 @@ msgid ""
 msgstr ""
 
 #. translators: --print <format>
-#: src/Zypper.cc:2953
+#: src/Zypper.cc:2955
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4578,7 +4597,7 @@ msgid ""
 "system service name."
 msgstr ""
 
-#: src/Zypper.cc:2972
+#: src/Zypper.cc:2974
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4600,7 +4619,7 @@ msgid ""
 "                     would be done.\n"
 msgstr ""
 
-#: src/Zypper.cc:3011
+#: src/Zypper.cc:3013
 msgid ""
 "source-download\n"
 "\n"
@@ -4616,7 +4635,7 @@ msgid ""
 "                     but show which source rpms are missing or extraneous.\n"
 msgstr ""
 
-#: src/Zypper.cc:3038
+#: src/Zypper.cc:3040
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4630,7 +4649,7 @@ msgstr ""
 "\n"
 "ពាក្យ​បញ្ជា​នេះ​មិនមាន​ជម្រើស​បន្ថែម​ទេ ។\n"
 
-#: src/Zypper.cc:3055
+#: src/Zypper.cc:3057
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4645,7 +4664,7 @@ msgstr ""
 "ពាក្យ​បញ្ជា​នេះ​គ្មាន​ជម្រើស​បន្ថែម​ទេ ។\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3073
+#: src/Zypper.cc:3075
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4656,7 +4675,7 @@ msgstr ""
 "បញ្ជី​មាន​ប្រភេទ​សេវា ។\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3089
+#: src/Zypper.cc:3091
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4669,7 +4688,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3111
+#: src/Zypper.cc:3113
 msgid ""
 "mount\n"
 "\n"
@@ -4689,7 +4708,7 @@ msgstr ""
 "-n, --name <name>    ប្រើ​ខ្សែអក្សរ​ដែល​បាន​ផ្ដល់​ជា​ឈ្មោះ​សេវា ។\n"
 "-r, --recurse        ចូល​ទៅ​ថត​រង ។\n"
 
-#: src/Zypper.cc:3139
+#: src/Zypper.cc:3141
 #, fuzzy, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4703,7 +4722,7 @@ msgstr ""
 "'%s' ។ ចំពោះ​សេចក្ដី​លម្អិត សូម​មើល​សៀវភៅ​ដៃ​របស់ zypper ។\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3156
+#: src/Zypper.cc:3158
 #, fuzzy
 msgid ""
 "ping [options]\n"
@@ -4715,16 +4734,16 @@ msgstr ""
 "ពាក្យ​បញ្ជា​នេះ​មាន​ការ​អនុវត្ត​មិន​ល្អ ដែល​តែងតែ​ត្រឡប់ ០ ។\n"
 "វា​ត្រូវ​បាន​ផ្ដល់​សម្រាប់​ភាព​ឆបគ្នា​ជា​មួយ rug ។\n"
 
-#: src/Zypper.cc:3199 src/Zypper.cc:5260
+#: src/Zypper.cc:3201 src/Zypper.cc:5270
 msgid "Unexpected program flow."
 msgstr "លំហូរ​កម្មវិធី​មិនរំពឹង​ទុក ។"
 
-#: src/Zypper.cc:3254
+#: src/Zypper.cc:3256
 msgid "Non-option program arguments: "
 msgstr "អាគុយម៉ង់​កម្មវិធី​មិនមែន​ជម្រើស ៖ "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3313
+#: src/Zypper.cc:3315
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4734,20 +4753,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3336
+#: src/Zypper.cc:3338
 msgid "Root privileges are required for refreshing services."
 msgstr "សិទ្ធិជា Root ត្រូវ​បានទាមទារ​សម្រាប់​ធ្វើ​ឲ្យសេវា​ស្រស់ ។"
 
-#: src/Zypper.cc:3360 src/Zypper.cc:3449 src/Zypper.cc:3666
+#: src/Zypper.cc:3362 src/Zypper.cc:3451 src/Zypper.cc:3668
 msgid "Root privileges are required for modifying system services."
 msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​កែប្រែ​សេវា​ប្រព័ន្ធ ។"
 
-#: src/Zypper.cc:3433
+#: src/Zypper.cc:3435
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' មិន​មែន​ជា​ប្រភេទ​សេវា​ដែល​ត្រឹមត្រូវ​ទេ ។"
 
-#: src/Zypper.cc:3435
+#: src/Zypper.cc:3437
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "សូម​មើល '%s' ឬ '%s' ដើម្បីយក​បញ្ជី​របស់​ប្រភេទ​សេវា​ដែល​ស្គាល់ ។"
@@ -4756,116 +4775,116 @@ msgstr "សូម​មើល '%s' ឬ '%s' ដើម្បីយក​បញ្
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3460 src/Zypper.cc:3807
+#: src/Zypper.cc:3462 src/Zypper.cc:3809
 msgid "Alias or an aggregate option is required."
 msgstr "ឈ្មោះ​ក្លែងក្លាយ ឬ​ជម្រើស​ផ្ដុំ​ត្រូវ​បាន​ទាមទារ ។"
 
-#: src/Zypper.cc:3492
+#: src/Zypper.cc:3494
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "រក​មិនឃើញ​សេវា '%s' ។"
 
-#: src/Zypper.cc:3519 src/Zypper.cc:3665 src/Zypper.cc:3744 src/Zypper.cc:3796
+#: src/Zypper.cc:3521 src/Zypper.cc:3667 src/Zypper.cc:3746 src/Zypper.cc:3798
 msgid "Root privileges are required for modifying system repositories."
 msgstr "ត្រូវ​ការ​សិទ្ធិជា Root ដើម្បី​កែប្រែ​ឃ្លាំង​ប្រព័ន្ធ ។"
 
-#: src/Zypper.cc:3574 src/Zypper.cc:3912
+#: src/Zypper.cc:3576 src/Zypper.cc:3914
 msgid "Too few arguments."
 msgstr "អាគុយម៉ង់​តិច​ពេក ។"
 
-#: src/Zypper.cc:3597
+#: src/Zypper.cc:3599
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "ប្រសិន​បើ​ប្រើ​តែ​អាគុយម៉ង់​តែ​មួយ គឺ​វា​ត្រូវតែ​ជា URI ដែល​ចង្អុល​ទៅកាន់​ឯកសារ .repo ។"
 
-#: src/Zypper.cc:3627
+#: src/Zypper.cc:3629
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "មិនអាច​ប្រើ %s ជាមួយ​នឹង %s បានទេ ។ ប្រើ​ការ​កំណត់ %s ។"
 
-#: src/Zypper.cc:3646
+#: src/Zypper.cc:3648
 msgid "Specified type is not a valid repository type:"
 msgstr "ប្រភេទ​ដែល​បាន​បញ្ជាក់​មិន​មែន​ជា​ប្រភេទ​ឃ្លាំង​ត្រឹមត្រូវ​ទេ ៖"
 
-#: src/Zypper.cc:3647
+#: src/Zypper.cc:3649
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "សូមមើល '%s' ឬ '%s' ដើម្បី​ទទួល​បញ្ជី​របស់​ប្រភេទ​​ឃ្លាំង​ដែល​ស្គាល់ ។"
 
-#: src/Zypper.cc:3673 src/Zypper.cc:4862 src/utils/messages.cc:45
+#: src/Zypper.cc:3675 src/Zypper.cc:4872 src/utils/messages.cc:45
 msgid "Required argument missing."
 msgstr "បាត់​អាគុយម៉ង់​ដែល​ត្រូវ​ការ ។"
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:3698
+#: src/Zypper.cc:3700
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "រក​មិនឃើញ​​ឃ្លាំង '%s' តាម​ឈ្មោះ​ក្លែងក្លាយ លេខ ឬ URI ។"
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:3720
+#: src/Zypper.cc:3722
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "រក​មិនឃើញសេវា '%s'  តាម​ឈ្មោះ​ក្លែងក្លាយ​ លេខ ឬ URI ទេ ។"
 
-#: src/Zypper.cc:3751
+#: src/Zypper.cc:3753
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "អាគុយម៉ង់​តិចពេក ។ ត្រូវការ​យ៉ាងហោចណាស់ URI ឬ​ឈ្មោះ​ក្លែងក្លាយ​មួយ ។"
 
-#: src/Zypper.cc:3775
+#: src/Zypper.cc:3777
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "រក​មិន​ឃើញ​ឃ្លាំង '%s' ទេ ។"
 
-#: src/Zypper.cc:3839
+#: src/Zypper.cc:3841
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "រក​មិន​ឃើញ​ឃ្លាំង %s ។"
 
-#: src/Zypper.cc:3856
+#: src/Zypper.cc:3858
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ធ្វើ​ឲ្យ​ឃ្លាំង​ប្រព័ន្ធ​ស្រស់ ។"
 
-#: src/Zypper.cc:3862
+#: src/Zypper.cc:3864
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "ជម្រើស​សកល '%s' មិនមាន​បែបផែន​នៅ​ទីនេះ​ទេ ។"
 
-#: src/Zypper.cc:3870
+#: src/Zypper.cc:3872
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "អាគុយម៉ង់​មិន​ត្រូវ​បាន​អនុញ្ញាត​ប្រសិន​បើ '%s' ត្រូវ​បានប្រើ ។"
 
-#: src/Zypper.cc:3894
+#: src/Zypper.cc:3896
 msgid "Root privileges are required for cleaning local caches."
 msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ជម្រះ​ឃ្លាំង​សម្ងាត់​មូលដ្ឋាន ។"
 
-#: src/Zypper.cc:3913
+#: src/Zypper.cc:3915
 msgid "At least one package name is required."
 msgstr "ត្រូវការ​យ៉ាងហោចណាស់​ឈ្មោះ​កញ្ចប់​មួយ ។"
 
-#: src/Zypper.cc:3922
+#: src/Zypper.cc:3924
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ដំឡើង ឬ​លុប​កញ្ចប់ ។"
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:3934
+#: src/Zypper.cc:3936
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "មិនអើពើ​នឹង​អាគុយម៉ង់ សម្គាល់​ឃ្លាំង​ទាំង​មូល ។"
 
-#: src/Zypper.cc:3945
+#: src/Zypper.cc:3947
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "មិន​ស្គាល់​ប្រភេទកញ្ចប់ ៖ %s"
 
-#: src/Zypper.cc:3955
+#: src/Zypper.cc:3957
 msgid "Cannot uninstall patches."
 msgstr "មិនអាច​លុប​បំណះ​បានទេ ។"
 
-#: src/Zypper.cc:3956
+#: src/Zypper.cc:3958
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4875,35 +4894,35 @@ msgstr ""
 "បំណះ​មិនត្រូវបាន​ដំឡើង​នៅ​ក្នុង​ឯកសារ​ដែល​បាន​ចម្លង មូលដ្ឋាន​ទិន្នន័យ កំណត់ត្រា\n"
 "ឬ​អ្វី​ផ្សេងទៀត​ដែល​ស្រដៀង​គ្នា ។"
 
-#: src/Zypper.cc:3966
+#: src/Zypper.cc:3968
 #, fuzzy
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "ការ​លុប​កញ្ចប់​ប្រភព​មិន​បានកំណត់ និងអនុវត្ត​ទេ"
 
-#: src/Zypper.cc:3986
+#: src/Zypper.cc:3988
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' ដូចជា​ឯកសារ RPM ។ ព្យាយាម​ទាញយក​វា ។"
 
-#: src/Zypper.cc:3995
+#: src/Zypper.cc:3997
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "មាន​បញ្ហា​ជាមួយ​ឯកសារ RPM ដែល​បាន​បញ្ជាក់​ជា '%s' ដូច្នេះ​រំលង ។"
 
-#: src/Zypper.cc:4017
+#: src/Zypper.cc:4019
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "មាន​បញ្ហា​ក្នុងការ​អាន​បឋមកថា RPM របស់ %s ។ តើ​វា​ជា​ឯកសារ RPM ឬ ?"
 
-#: src/Zypper.cc:4038
+#: src/Zypper.cc:4040
 msgid "Plain RPM files cache"
 msgstr "ឃ្លាំង​សម្ងាត់​ឯកសារ RPM ធម្មតា"
 
-#: src/Zypper.cc:4055
+#: src/Zypper.cc:4057
 msgid "No valid arguments specified."
 msgstr "គ្មាន​អាគុយម៉ង់​ត្រឹមត្រូវ​ដែល​បាន​បញ្ជាក់​ទេ ។"
 
-#: src/Zypper.cc:4072 src/Zypper.cc:4203
+#: src/Zypper.cc:4074 src/Zypper.cc:4205
 #, fuzzy
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
@@ -4913,69 +4932,69 @@ msgstr ""
 "គ្មាន​អ្វី​ត្រូវ​បាន​ដំឡើង​ទេ ។"
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4109 src/Zypper.cc:4674
+#: src/Zypper.cc:4111 src/Zypper.cc:4676
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s ប្រជែង​នឹង %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4117
+#: src/Zypper.cc:4119
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "បច្ចុប្បន្ន %s មិនអាច​ប្រើ​ជាមួយ %s"
 
-#: src/Zypper.cc:4158
+#: src/Zypper.cc:4160
 msgid "Source package name is a required argument."
 msgstr "ឈ្មោះ​កញ្ចប់​ប្រភព​ត្រូវការ​អាគុយម៉ង់ ។"
 
-#: src/Zypper.cc:4242
+#: src/Zypper.cc:4244
 msgid "Mode is set to 'match-exact'"
 msgstr ""
 
-#: src/Zypper.cc:4262 src/Zypper.cc:4593 src/Zypper.cc:4693 src/Zypper.cc:4895
-#: src/Zypper.cc:4946 src/Zypper.cc:4986
+#: src/Zypper.cc:4264 src/Zypper.cc:4595 src/Zypper.cc:4695 src/Zypper.cc:4905
+#: src/Zypper.cc:4956 src/Zypper.cc:4996
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "មិនស្គាល់​ប្រភេទ​កញ្ចប់ '%s' ។"
 
 #. translators: empty search result message
-#: src/Zypper.cc:4408
+#: src/Zypper.cc:4410
 #, fuzzy
 msgid "No matching items found."
 msgstr "រក​មិនឃើញ​ការ​ចេញផ្សាយ​​ដែល​ផ្គូផ្គង ។​"
 
-#: src/Zypper.cc:4443
+#: src/Zypper.cc:4445
 msgid "Problem occurred initializing or executing the search query"
 msgstr "មាន​បញ្ហា​កើតឡើង​​នៅពេល​ចាប់ផ្ដើម ឬ​ប្រតិបត្តិ​សំណួរ​ស្វែងរក"
 
-#: src/Zypper.cc:4444
+#: src/Zypper.cc:4446
 msgid "See the above message for a hint."
 msgstr "មើល​សារ​ខាងលើ​សម្រាប់​ព័ត៌មាន​ជំនួយ ។"
 
-#: src/Zypper.cc:4525
+#: src/Zypper.cc:4527
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
 
-#: src/Zypper.cc:4612 src/Zypper.cc:4660
+#: src/Zypper.cc:4614 src/Zypper.cc:4662
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "មិនអាច​ប្រើ %s រួម​ជា​មួយ​នឹង %s បានទេ ។"
 
-#: src/Zypper.cc:4641
+#: src/Zypper.cc:4643
 msgid "Root privileges are required for updating packages."
 msgstr "ត្រូវ​ការ​សិទ្ធិ​ជា Root ដើម្បី​ធ្វើ​បច្ចុប្បន្នភាព​កញ្ចប់​ ។"
 
-#: src/Zypper.cc:4700 src/Zypper.cc:4708 src/Zypper.cc:4781
+#: src/Zypper.cc:4702 src/Zypper.cc:4710 src/Zypper.cc:4791
 msgid "Operation not supported."
 msgstr "ប្រតិបត្តិការ​មិនបានគាំទ្រ​ទេ ។"
 
-#: src/Zypper.cc:4701
+#: src/Zypper.cc:4703
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "ដើម្បី​ធ្វើ​បច្ចុប្បន្នភាព​ផលិតផល​ដែលបាន​ដំឡើង​ ប្រើ '%s' ។"
 
-#: src/Zypper.cc:4709
+#: src/Zypper.cc:4711
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4984,16 +5003,16 @@ msgstr ""
 "Zypper មិន​រក្សាទុក​ដាន​របស់​កញ្ចប់​ប្រភព​ដែល​បាន​ដំឡើង​ទេ ។ ដើម្បី​ដំឡើង​កញ្ចប់​ប្រភព​ចុងក្រោយ និង​ភាព​អាស្រ័យ​"
 "ស្ថាបនា​របស់​វា ប្រើ '%s' ។"
 
-#: src/Zypper.cc:4725
+#: src/Zypper.cc:4727
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr "មិនអាច​ប្រើ​ប្រភេទ​ច្រើន​ នៅពេល​កញ្ចប់​ជាក់លាក់​ត្រូ​វបាន​ផ្ដល់​ជា​អាគុយម៉ង់​នោះ​ទេ ។"
 
-#: src/Zypper.cc:4817
+#: src/Zypper.cc:4827
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ធ្វើ​ឲ្យ​ការ​ចែកចាយ​ប្រសើរ ។"
 
-#: src/Zypper.cc:4837
+#: src/Zypper.cc:4847
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -5003,64 +5022,64 @@ msgstr ""
 "អ្នករៀប​នឹង​ធ្វើ​ឲ្យ​​ការ​ចែកចាយ​ប្រសើរ​ឡើង​ជា​មួយ​នឹង​ឃ្លាំង​ដែលបាន​បើក​ទាំងអស់ ។ សូម​ប្រាកដថា ឃ្លាំង​ទាំង​នេះ​"
 "ឆប​គ្នា មុន​នឹង​អ្នក​បន្ត ។ ចំពោះ​ព័ត៌មាន​បន្ថែម​អំពី​ពាក្យ​បញ្ជា​នេះ​ សូម​មើល '%s' ។"
 
-#: src/Zypper.cc:4865 src/utils/messages.cc:37 src/utils/messages.cc:47
+#: src/Zypper.cc:4875 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
 msgstr "កា​រប្រើ"
 
-#: src/Zypper.cc:4925 src/Zypper.cc:4966
+#: src/Zypper.cc:4935 src/Zypper.cc:4976
 msgid "Root privileges are required for adding of package locks."
 msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​បន្ថែម​សោ​កញ្ចប់ ។"
 
-#: src/Zypper.cc:5047
+#: src/Zypper.cc:5057
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "សោ %lu ដែលបាន​យកចេញ ។"
 
-#: src/Zypper.cc:5058
+#: src/Zypper.cc:5068
 msgid "XML output not implemented for this command."
 msgstr ""
 
-#: src/Zypper.cc:5071
+#: src/Zypper.cc:5081
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "ស្លាក​ចែកចាយ ៖ %s"
 
-#: src/Zypper.cc:5072
+#: src/Zypper.cc:5082
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "ស្លាក​ខ្លី ៖ %s"
 
-#: src/Zypper.cc:5113
+#: src/Zypper.cc:5123
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s ផ្គូផ្គង %s"
 
-#: src/Zypper.cc:5115
+#: src/Zypper.cc:5125
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s គឺ​ថ្មីជាង %s"
 
-#: src/Zypper.cc:5117
+#: src/Zypper.cc:5127
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s គឺ​ចាស់​ជាង %s"
 
-#: src/Zypper.cc:5195 src/source-download.cc:217
+#: src/Zypper.cc:5205 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr ""
 
-#: src/Zypper.cc:5247
+#: src/Zypper.cc:5257
 msgid "This command only makes sense in the zypper shell."
 msgstr "ពាក្យ​បញ្ជា​នេះ​គឺ​អាច​ដឹងបាន​តែ​នៅ​ក្នុង​សែល zypper ប៉ុណ្ណោះ ។"
 
-#: src/Zypper.cc:5257
+#: src/Zypper.cc:5267
 msgid "You already are running zypper's shell."
 msgstr "អ្នក​កំពុង​រត់​សែល​របស់ zypper រួច​ហើយ ។"
 
-#: src/Zypper.cc:5321
+#: src/Zypper.cc:5331
 msgid "Resolvable Type"
 msgstr "ប្រភេទ​កញ្ចប់​ដោះស្រាយ"
 
@@ -5144,29 +5163,29 @@ msgstr "%s ប៉ះទង្គិច​ជាមួយ %s ហើយ​វា�
 msgid "Force resolution:"
 msgstr "តម្រូវ​ឲ្យប្រើ​គុណភាព​បង្ហាញ ៖"
 
-#: src/solve-commit.cc:330
+#: src/solve-commit.cc:334
 msgid "Verifying dependencies..."
 msgstr "កំពុង​ផ្ទៀងផ្ទាត់​ភាព​អាស្រ័យ..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:378
+#: src/solve-commit.cc:382
 msgid "Computing upgrade..."
 msgstr "កំពុង​គណនា​ការ​ធ្វើ​ឲ្យ​ប្រសើរឡើង..."
 
-#: src/solve-commit.cc:392
+#: src/solve-commit.cc:396
 msgid "Generating solver test case..."
 msgstr "កំពុង​បង្កើត​ការ​សាកល្បង​កម្មវិធី​ដោះស្រាយ..."
 
-#: src/solve-commit.cc:394
+#: src/solve-commit.cc:398
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "ករណី​សាកល្បង​កញ្ចប់​ដោះស្រាយ បាន​បង្កើត​ដោយ​ជោគជ័យ​នៅ %s ។"
 
-#: src/solve-commit.cc:397
+#: src/solve-commit.cc:401
 msgid "Error creating the solver test case."
 msgstr "កំហុស​ក្នុង​ការ​បង្កើត​ការ​សាកល្បង​កម្មវិធី​ដោះស្រាយ ។"
 
-#: src/solve-commit.cc:431
+#: src/solve-commit.cc:435
 #, fuzzy, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -5174,20 +5193,20 @@ msgid ""
 msgstr "ពិនិត្យ​មើល​ដំណើរការ​ដែល​កំពុង​រត់ ដោយ​ប្រើបណ្ណាល័យ​ដែល​បាន​លុប..."
 
 #. Here: Table output
-#: src/solve-commit.cc:436 src/ps.cc:104
+#: src/solve-commit.cc:440 src/ps.cc:104
 msgid "Checking for running processes using deleted libraries..."
 msgstr "ពិនិត្យ​មើល​ដំណើរការ​ដែល​កំពុង​រត់ ដោយ​ប្រើបណ្ណាល័យ​ដែល​បាន​លុប..."
 
-#: src/solve-commit.cc:447 src/ps.cc:59
+#: src/solve-commit.cc:451 src/ps.cc:59
 msgid "Check failed:"
 msgstr "បានបរាជ័យ​ក្នុងការ​ត្រួតពិនិត្យ ៖"
 
-#: src/solve-commit.cc:449
+#: src/solve-commit.cc:453
 #, fuzzy
 msgid "Skip check:"
 msgstr "ការ​ពិនិត្យ​មើល GPG"
 
-#: src/solve-commit.cc:457
+#: src/solve-commit.cc:461
 #, fuzzy, c-format, boost-format
 msgid ""
 "There are some running programs that might use files deleted by recent "
@@ -5198,32 +5217,32 @@ msgstr ""
 "ចាប់ផ្ដើម​ដំណើរ​ការ​មួយ​ចំនួន​ក្នុង​ចំណោម​ដំណើរការ​​ទាំង​នេះ​ឡើងវិញ​បាន ។ រត់ '%s' ដើម្បី​រាយ​កម្មវិធី​ទាំង​​"
 "នេះ ។"
 
-#: src/solve-commit.cc:468
+#: src/solve-commit.cc:472
 msgid "Update notifications were received from the following packages:"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព​​​ការ​ជូនដំណឹង​ដែល​ត្រូវបានទទួល​ពី​កញ្ចប់​ដូច​ខាងក្រោម ៖"
 
-#: src/solve-commit.cc:477
+#: src/solve-commit.cc:481
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "សារ​ពី​កញ្ចប់​ %s ៖"
 
-#: src/solve-commit.cc:485
+#: src/solve-commit.cc:489
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:486
+#: src/solve-commit.cc:490
 msgid "View the notifications now?"
 msgstr "មើល​ការ​​ជូន​ដំណឹងឥឡូវ ?"
 
-#: src/solve-commit.cc:532
+#: src/solve-commit.cc:536
 msgid "Computing distribution upgrade..."
 msgstr "កំពុង​គណនា​ការ​ធ្វើ​ឲ្យការ​ចែកចាយ​ប្រសើរឡើង..."
 
-#: src/solve-commit.cc:537
+#: src/solve-commit.cc:541
 msgid "Resolving package dependencies..."
 msgstr "កំពុង​ដោះស្រាយ​ភាព​អាស្រ័យ​របស់​កញ្ចប់..."
 
-#: src/solve-commit.cc:614
+#: src/solve-commit.cc:618
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -5231,7 +5250,7 @@ msgstr ""
 "ភាព​អាស្រ័យ​មួយ​ចំនួន​នៃ​កញ្ចប់​ដែលបាន​ដំឡើង គឺ​ខូច ។ ដើម្បី​ជួសជុល​ភាព​អាស្រ័យ​ទាំងនេះ ដែល​អំពើ​ខាងក្រោម​ត្រូវ​"
 "ជ្រើស ៖"
 
-#: src/solve-commit.cc:621
+#: src/solve-commit.cc:625
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ជួសជុល​ភាព​អាស្រ័យ​របស់​កញ្ចប់​ដែល​ខូច ។"
 
@@ -5245,78 +5264,78 @@ msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:647
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:652
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "បាទ​/​ចាស ទទួល​យក​សេចក្ដី​សង្ខេប និង​បន្ត​ដំឡើង/​យក​កញ្ចប់​ចេញ ។"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:650
+#: src/solve-commit.cc:654
 msgid "No, cancel the operation."
 msgstr "ទេ បោះបង់​ប្រតិបត្តិការ ។"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:652
+#: src/solve-commit.cc:656
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "ចាប់ផ្ដើម​កម្មវិធី​ដោះស្រាយ​នៅ​ក្នុង​របៀប​គ្មាន​កា​របង្ខំ ដើម្បី​បង្ហាញ​បញ្ហា​ភាព​អាស្រ័យ ។"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:654
+#: src/solve-commit.cc:658
 msgid "Toggle display of package versions."
 msgstr "បិទបើក​ការ​បង្ហាញ​កំណែ​កញ្ចប់ ។"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:656
+#: src/solve-commit.cc:660
 msgid "Toggle display of package architectures."
 msgstr "បិទបើក​ការ​បង្ហាញ​ស្ថាបត្យកម្ម​កញ្ចប់ ។"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:658
+#: src/solve-commit.cc:662
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "បិទបើក​ការ​បង្ហាញ​ឃ្លាំង​ពី​កញ្ចប់​ដែល​នឹង​ត្រូវ​ដំឡើង ។"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:660
+#: src/solve-commit.cc:664
 msgid "Toggle display of package vendor names."
 msgstr "បិទ​បើក​ការ​បង្ហាញ​ឈ្មោះ​ក្រុមហ៊ុន​ផលិត​កញ្ចប់ ។"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:662
+#: src/solve-commit.cc:666
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "បិទបើក​ការ​បង្ហាញ​សេចក្ដី​លម្អិតទាំង​អស់ និង​សេចក្ដី​លម្អិត​មួយ​ចំនួន​ដែល​អាច​បង្ហាញ​បាន ។"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:664
+#: src/solve-commit.cc:668
 msgid "View the summary in pager."
 msgstr "មើល​សេចក្ដី​សង្ខេប​​ក្នុង​ភេគយ័រ ។"
 
-#: src/solve-commit.cc:774
+#: src/solve-commit.cc:778
 msgid "committing"
 msgstr "ដាក់​ស្នើ"
 
-#: src/solve-commit.cc:776
+#: src/solve-commit.cc:780
 msgid "(dry run)"
 msgstr "(អនុវត្ត)"
 
-#: src/solve-commit.cc:800 src/solve-commit.cc:833
+#: src/solve-commit.cc:804 src/solve-commit.cc:837
 msgid "Problem retrieving the package file from the repository:"
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​កញ្ចប់​ពី​ឃ្លាំង ៖"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:830
+#: src/solve-commit.cc:834
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "ឃ្លាំង '%s' គឺ​ហួស​សម័យ ។ បើ​រត់ '%s' គឺ​អាច​ជួយ​បាន ។"
 
-#: src/solve-commit.cc:841
+#: src/solve-commit.cc:845
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -5334,20 +5353,20 @@ msgstr ""
 "- ប្រើ​ឧបករណ៍​ផ្ទុក​ដំឡើង​ផ្សេង (ឧ. ប្រសិន​បើ​វា​ខូច)\n"
 "- ប្រើ​ឃ្លាំង​ផ្សេង"
 
-#: src/solve-commit.cc:855
+#: src/solve-commit.cc:859
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "មាន​បញ្ហា​កើតឡើង​នៅពេល ឬ​បន្ទាប់​ដំឡើង ឬ​ការ​យក​កញ្ចប់​ចេញ ៖"
 
-#: src/solve-commit.cc:863
+#: src/solve-commit.cc:867
 msgid "Installation has completed with error."
 msgstr ""
 
-#: src/solve-commit.cc:865
+#: src/solve-commit.cc:869
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 
-#: src/solve-commit.cc:879
+#: src/solve-commit.cc:883
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -5355,7 +5374,7 @@ msgstr ""
 "បំណះ​ដែល​បាន​ដំឡើង​មួយ តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​ម៉ាស៊ីន​របស់​អ្នក​ឡើងវិញ ។ ចាប់ផ្ដើម​ឡើងវិញ​ឲ្យ​លឿន​តាម​ដែល​អាច​ធ្វើ​"
 "ទៅបាន ។"
 
-#: src/solve-commit.cc:887
+#: src/solve-commit.cc:891
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -5363,11 +5382,11 @@ msgstr ""
 "បំណះ​មួយ​ក្នុង​ចំណោម​បំណះ​ដូច​ខាងក្រោម​ប៉ះពាល់​ដល់​កម្មវិធី​គ្រប់គ្រង​​កញ្ចប់​ខ្លួន​ឯង ។ រត់​ពាក្យ​បញ្ជា​ម្ដង​ទៀត​ដើម្បី​"
 "ដំឡើង​បំណះ​ដែល​ត្រូវការ​ផ្សេងៗ​ទៀត ។"
 
-#: src/solve-commit.cc:905
+#: src/solve-commit.cc:909
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "ភាព​អាស្រ័យ​របស់​កញ្ចប់​ដែល​បាន​ដំឡើង​គឺ​ត្រឹមត្រូវ ។"
 
-#: src/solve-commit.cc:907 src/download.cc:129
+#: src/solve-commit.cc:911 src/download.cc:129
 msgid "Nothing to do."
 msgstr "គ្មាន​អ្វី​ត្រូវ​ធ្វើ ។"
 

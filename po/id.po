@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-21 17:23+0200\n"
+"POT-Creation-Date: 2017-04-24 13:46+0200\n"
 "PO-Revision-Date: 2017-04-17 04:34+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -201,7 +201,7 @@ msgstr "Tidak ada intisari untuk berkas %s."
 #. translators: help text for 'x' option in the 'Continue?' prompt
 #. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 #: src/callbacks/keyring.h:326 src/callbacks/keyring.h:334
-#: src/callbacks/rpm.h:132 src/callbacks/rpm.h:443 src/solve-commit.cc:668
+#: src/callbacks/rpm.h:132 src/callbacks/rpm.h:443 src/solve-commit.cc:672
 msgid "Continue?"
 msgstr "Lanjutkan?"
 
@@ -435,11 +435,11 @@ msgstr "Ya"
 msgid "No"
 msgstr "Tidak"
 
-#: src/Zypper.h:487
+#: src/Zypper.h:491
 msgid "Finished with error."
 msgstr "Selesai dengan kesalahan."
 
-#: src/Zypper.h:489
+#: src/Zypper.h:493
 msgid "Done."
 msgstr "Selesai."
 
@@ -471,7 +471,7 @@ msgstr "Repositori"
 #. translators: Table column header
 #. translators: name (general header)
 #: src/info.cc:69 src/info.cc:471 src/info.cc:715 src/repos.cc:1070
-#: src/repos.cc:1209 src/repos.cc:2539 src/update.cc:801 src/Zypper.cc:5270
+#: src/repos.cc:1209 src/repos.cc:2539 src/update.cc:801 src/Zypper.cc:5280
 #: src/search.cc:70 src/search.cc:235 src/search.cc:383 src/search.cc:530
 #: src/search.cc:594 src/locks.cc:107 src/utils/misc.cc:250
 msgid "Name"
@@ -505,7 +505,7 @@ msgid "Summary"
 msgstr "Ringkasan"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:83 src/Zypper.cc:5270
+#: src/info.cc:83 src/Zypper.cc:5280
 msgid "Description"
 msgstr "Deskripsi"
 
@@ -1639,7 +1639,14 @@ msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "paket sumber yang akan dipasang"
 
-#: src/Summary.cc:1430
+#. patch command (auto)restricted to update stack patches
+#: src/Summary.cc:1434
+msgid ""
+"Package manager restart required. (Run this command once again after the "
+"update stack got updated)"
+msgstr ""
+
+#: src/Summary.cc:1437
 msgid "System reboot required."
 msgstr "Perlu menjalankan ulang sistem."
 
@@ -1782,6 +1789,11 @@ msgstr "Kata Sandi"
 msgid "Unknown command '%s'"
 msgstr "Perintah '%s' tidak diketahui"
 
+#: src/SolverRequester.cc:479
+#, c-format, boost-format
+msgid "Ignoring option %s when updating the update stack first."
+msgstr ""
+
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
 msgid "volatile"
@@ -1882,8 +1894,8 @@ msgstr "Galat saat menonaktifkan repositori '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Ada kendala saat mengambil berkas dari '%s'."
 
-#: src/repos.cc:358 src/repos.cc:3307 src/solve-commit.cc:801
-#: src/solve-commit.cc:832 src/solve-commit.cc:856
+#: src/repos.cc:358 src/repos.cc:3307 src/solve-commit.cc:805
+#: src/solve-commit.cc:836 src/solve-commit.cc:860
 msgid "Please see the above error message for a hint."
 msgstr "Silahkan lihat pesan galat di atas sebagai petunjuk."
 
@@ -1971,7 +1983,7 @@ msgstr ""
 msgid "Ignoring disabled repository '%s'"
 msgstr "Mengabaikan repositori tidak aktif '%s'"
 
-#: src/repos.cc:794 src/Zypper.cc:4284
+#: src/repos.cc:794 src/Zypper.cc:4286
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Repositori '%s' yang telah ditentukan tidak aktif."
@@ -2043,12 +2055,12 @@ msgstr "Menginisialisasi Target"
 msgid "Target initialization failed:"
 msgstr "Inisialisasi target gagal:"
 
-#: src/repos.cc:1007 src/Zypper.cc:4445
+#: src/repos.cc:1007 src/Zypper.cc:4447
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Menjalankan 'zypper refresh' sebagai root mungkin bisa menyelesaikan masalah."
 
-#: src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2538 src/Zypper.cc:5270
+#: src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2538 src/Zypper.cc:5280
 msgid "Alias"
 msgstr "Alias"
 
@@ -3227,7 +3239,7 @@ msgstr ""
 "String data pengguna harus tidak memuat karakter yang tidak bisa dicetak "
 "atau baris baru!"
 
-#: src/Zypper.cc:970 src/Zypper.cc:3230
+#: src/Zypper.cc:970 src/Zypper.cc:3232
 msgid "Entering non-interactive mode."
 msgstr "Memasuki mode tidak interaktif."
 
@@ -3409,7 +3421,7 @@ msgstr ""
 "-d, --download-only         Only download the packages, do not install.\n"
 
 #: src/Zypper.cc:1515 src/Zypper.cc:1570 src/Zypper.cc:1651 src/Zypper.cc:2198
-#: src/Zypper.cc:2271 src/Zypper.cc:2378
+#: src/Zypper.cc:2273 src/Zypper.cc:2380
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -4081,7 +4093,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 
-#: src/Zypper.cc:2238
+#: src/Zypper.cc:2239
 #, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -4158,77 +4170,84 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 
-#: src/Zypper.cc:2269
+#: src/Zypper.cc:2270
 msgid "Install only patches which affect the package management itself."
 msgstr "Hanya memasang patch-patch yang mempengaruhi manajemen paket tersebut."
 
+#: src/Zypper.cc:2271
+msgid ""
+"Additionally try to update all packages not covered by patches. The option "
+"is ignored, if the patch command must update the update stack first. Can not "
+"be combined with --updatestack-only."
+msgstr ""
+
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2295
+#: src/Zypper.cc:2297
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [OPTIONS]"
 
 #. translators: command description
-#: src/Zypper.cc:2298
+#: src/Zypper.cc:2300
 msgid "List all applicable patches."
 msgstr "Daftar semua patch-patch yang bisa diterapkan."
 
-#: src/Zypper.cc:2301
-msgid ""
-"-b, --bugzilla[=#]\n"
-"List applicable patches for Bugzilla issues."
-msgstr ""
-"-b, --bugzilla[=#]\n"
-"List applicable patches for Bugzilla issues."
-
-#: src/Zypper.cc:2302
-msgid ""
-"--cve[=#]\n"
-"List applicable patches for CVE issues."
-msgstr ""
-"--cve[=#]\n"
-"List applicable patches for CVE issues."
-
 #: src/Zypper.cc:2303
 msgid ""
-"--issues[=STRING]\n"
-"Look for issues matching the specified string."
+"-b, --bugzilla[=#]\n"
+"List applicable patches for Bugzilla issues."
 msgstr ""
-"--issues[=STRING]\n"
-"Look for issues matching the specified string."
+"-b, --bugzilla[=#]\n"
+"List applicable patches for Bugzilla issues."
 
 #: src/Zypper.cc:2304
 msgid ""
-"--date <YYYY-MM-DD>\n"
-"List only patches issued up to, but not including, the specified date."
+"--cve[=#]\n"
+"List applicable patches for CVE issues."
 msgstr ""
-"--date <YYYY-MM-DD>\n"
-"List only patches issued up to, but not including, the specified date."
+"--cve[=#]\n"
+"List applicable patches for CVE issues."
 
 #: src/Zypper.cc:2305
 msgid ""
-"-g, --category <CATEGORY>\n"
-"List only patches with this category."
+"--issues[=STRING]\n"
+"Look for issues matching the specified string."
 msgstr ""
-"-g, --category <CATEGORY>\n"
-"List only patches with this category."
+"--issues[=STRING]\n"
+"Look for issues matching the specified string."
 
 #: src/Zypper.cc:2306
 msgid ""
-"--severity <SEVERITY>\n"
-"List only patches with this severity."
+"--date <YYYY-MM-DD>\n"
+"List only patches issued up to, but not including, the specified date."
 msgstr ""
-"--severity <SEVERITY>\n"
-"List only patches with this severity."
+"--date <YYYY-MM-DD>\n"
+"List only patches issued up to, but not including, the specified date."
 
 #: src/Zypper.cc:2307
 msgid ""
+"-g, --category <CATEGORY>\n"
+"List only patches with this category."
+msgstr ""
+"-g, --category <CATEGORY>\n"
+"List only patches with this category."
+
+#: src/Zypper.cc:2308
+msgid ""
+"--severity <SEVERITY>\n"
+"List only patches with this severity."
+msgstr ""
+"--severity <SEVERITY>\n"
+"List only patches with this severity."
+
+#: src/Zypper.cc:2309
+msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 
-#: src/Zypper.cc:2309
+#: src/Zypper.cc:2311
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
@@ -4236,7 +4255,7 @@ msgstr ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 
-#: src/Zypper.cc:2353
+#: src/Zypper.cc:2355
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -4297,26 +4316,26 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 
-#: src/Zypper.cc:2381
+#: src/Zypper.cc:2383
 msgid "Whether to allow downgrading installed resolvables."
 msgstr "Apakah memperbolehkan penuruan versi perbaikan yang terpasang."
 
-#: src/Zypper.cc:2383
+#: src/Zypper.cc:2385
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr "Apakah memperbolehkan mengubah nama perbaikan yang terpasang."
 
-#: src/Zypper.cc:2385
+#: src/Zypper.cc:2387
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
 "Apakah memperbolehkan mengubah arsitektur dari perbaikan yang telah "
 "terpasang."
 
-#: src/Zypper.cc:2387
+#: src/Zypper.cc:2389
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr ""
 "Apakah memperbolehkan mengubah vendor dari perbaikan yang telah terpasang."
 
-#: src/Zypper.cc:2424
+#: src/Zypper.cc:2426
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -4407,12 +4426,12 @@ msgstr ""
 "expression.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2474
+#: src/Zypper.cc:2476
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr "patch-check (pchk) [OPTIONS]"
 
 #. translators: command description
-#: src/Zypper.cc:2477
+#: src/Zypper.cc:2479
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
@@ -4421,7 +4440,7 @@ msgstr ""
 "mengembalikan 100 jika patch-patch ditemukan. 101 jika ada setidaknya 1 "
 "patch keamanan dibutuhkan."
 
-#: src/Zypper.cc:2480
+#: src/Zypper.cc:2482
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
@@ -4429,7 +4448,7 @@ msgstr ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 
-#: src/Zypper.cc:2481
+#: src/Zypper.cc:2483
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
@@ -4437,7 +4456,7 @@ msgstr ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 
-#: src/Zypper.cc:2498
+#: src/Zypper.cc:2500
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -4455,7 +4474,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
 
-#: src/Zypper.cc:2528
+#: src/Zypper.cc:2530
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -4491,7 +4510,7 @@ msgstr ""
 "-N, --sort-by-name        Sort the list by package name.\n"
 "-R, --sort-by-repo        Sort the list by repository.\n"
 
-#: src/Zypper.cc:2559
+#: src/Zypper.cc:2561
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -4513,7 +4532,7 @@ msgstr ""
 "-i, --installed-only      Show only installed patterns.\n"
 "-u, --not-installed-only  Show only patterns which are not installed.\n"
 
-#: src/Zypper.cc:2586
+#: src/Zypper.cc:2588
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -4535,14 +4554,14 @@ msgstr ""
 "-i, --installed-only      Show only installed products.\n"
 "-u, --not-installed-only  Show only products which are not installed.\n"
 
-#: src/Zypper.cc:2595
+#: src/Zypper.cc:2597
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
 "Keluaran XML saja: Teruskan secara harfiah tag XML yang ditemukan dalam "
 "berkas produk."
 
-#: src/Zypper.cc:2619
+#: src/Zypper.cc:2621
 #, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -4585,7 +4604,7 @@ msgstr ""
 "    --recommends          Show recommends.\n"
 "    --suggests            Show suggests.\n"
 
-#: src/Zypper.cc:2652
+#: src/Zypper.cc:2654
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -4600,7 +4619,7 @@ msgstr ""
 "\n"
 "This is an alias for '%s'.\n"
 
-#: src/Zypper.cc:2671
+#: src/Zypper.cc:2673
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -4615,7 +4634,7 @@ msgstr ""
 "\n"
 "This is an alias for '%s'.\n"
 
-#: src/Zypper.cc:2690
+#: src/Zypper.cc:2692
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -4630,7 +4649,7 @@ msgstr ""
 "\n"
 "This is an alias for '%s'.\n"
 
-#: src/Zypper.cc:2707
+#: src/Zypper.cc:2709
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -4644,7 +4663,7 @@ msgstr ""
 "\n"
 "This command has no additional options.\n"
 
-#: src/Zypper.cc:2758
+#: src/Zypper.cc:2760
 msgid ""
 "moo\n"
 "\n"
@@ -4658,7 +4677,7 @@ msgstr ""
 "\n"
 "This command has no additional options.\n"
 
-#: src/Zypper.cc:2780
+#: src/Zypper.cc:2782
 #, c-format, boost-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -4681,7 +4700,7 @@ msgstr ""
 "-t, --type <type>         Type of package (%s).\n"
 "                          Default: %s.\n"
 
-#: src/Zypper.cc:2807
+#: src/Zypper.cc:2809
 #, c-format, boost-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -4705,26 +4724,26 @@ msgstr ""
 "                          Default: %s.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2834
+#: src/Zypper.cc:2836
 msgid "locks (ll) [options]"
 msgstr "locks (ll) [options]"
 
 #. translators: command description
-#: src/Zypper.cc:2837
+#: src/Zypper.cc:2839
 msgid "List current package locks."
 msgstr "Daftar kunci paket saat ini."
 
 #. translators: -m, --matches
-#: src/Zypper.cc:2841
+#: src/Zypper.cc:2843
 msgid "Show the number of resolvables matched by each lock."
 msgstr "Tampilkan nomor perbaikan yang cocok dengan tiap kunci."
 
 #. translators: -s, --solvables
-#: src/Zypper.cc:2843
+#: src/Zypper.cc:2845
 msgid "List the resolvables matched by each lock."
 msgstr "Daftar perbaikan yang cocok dengan tiap kunci."
 
-#: src/Zypper.cc:2859
+#: src/Zypper.cc:2861
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -4742,7 +4761,7 @@ msgstr ""
 "-d, --only-duplicates     Clean only duplicate locks.\n"
 "-e, --only-empty          Clean only locks which doesn't lock anything.\n"
 
-#: src/Zypper.cc:2880
+#: src/Zypper.cc:2882
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -4760,7 +4779,7 @@ msgstr ""
 "  Command options:\n"
 "-l, --label                 Show the operating system label.\n"
 
-#: src/Zypper.cc:2901
+#: src/Zypper.cc:2903
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4776,7 +4795,7 @@ msgstr ""
 "  Command options:\n"
 "-m, --match  Takes missing release number as any release.\n"
 
-#: src/Zypper.cc:2920
+#: src/Zypper.cc:2922
 msgid ""
 "licenses\n"
 "\n"
@@ -4791,12 +4810,12 @@ msgstr ""
 "This command has no additional options.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2944
+#: src/Zypper.cc:2946
 msgid "ps [options]"
 msgstr "ps [options]"
 
 #. translators: command description
-#: src/Zypper.cc:2947
+#: src/Zypper.cc:2949
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -4805,7 +4824,7 @@ msgstr ""
 "librari yang terhapus oleh pembaruan saat ini."
 
 #. translators: -s, --short
-#: src/Zypper.cc:2951
+#: src/Zypper.cc:2953
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4816,7 +4835,7 @@ msgstr ""
 "tiga kali, tampilkan hanya daftar nama layanan yang terkait dengan sistem."
 
 #. translators: --print <format>
-#: src/Zypper.cc:2953
+#: src/Zypper.cc:2955
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4827,7 +4846,7 @@ msgstr ""
 "diikuti oleh baris baru. Tiap petunjuk dalam '%s' <format> ditimpa oleh nama "
 "layanan sistem."
 
-#: src/Zypper.cc:2972
+#: src/Zypper.cc:2974
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4867,7 +4886,7 @@ msgstr ""
 "--dry-run            Don't download any package, just report what\n"
 "                     would be done.\n"
 
-#: src/Zypper.cc:3011
+#: src/Zypper.cc:3013
 msgid ""
 "source-download\n"
 "\n"
@@ -4895,7 +4914,7 @@ msgstr ""
 "--status             Don't download any source rpms,\n"
 "                     but show which source rpms are missing or extraneous.\n"
 
-#: src/Zypper.cc:3038
+#: src/Zypper.cc:3040
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4909,7 +4928,7 @@ msgstr ""
 "\n"
 "This command has no additional options.\n"
 
-#: src/Zypper.cc:3055
+#: src/Zypper.cc:3057
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4924,7 +4943,7 @@ msgstr ""
 "This command has no additional options.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3073
+#: src/Zypper.cc:3075
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4935,7 +4954,7 @@ msgstr ""
 "List available service types.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3089
+#: src/Zypper.cc:3091
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4948,7 +4967,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3111
+#: src/Zypper.cc:3113
 msgid ""
 "mount\n"
 "\n"
@@ -4968,7 +4987,7 @@ msgstr ""
 "-n, --name <name>    Use given string as service name.\n"
 "-r, --recurse        Dive into subdirectories.\n"
 
-#: src/Zypper.cc:3139
+#: src/Zypper.cc:3141
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4982,7 +5001,7 @@ msgstr ""
 "'%s'.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3156
+#: src/Zypper.cc:3158
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4992,16 +5011,16 @@ msgstr ""
 "\n"
 "This command has dummy implementation which always returns 0.\n"
 
-#: src/Zypper.cc:3199 src/Zypper.cc:5260
+#: src/Zypper.cc:3201 src/Zypper.cc:5270
 msgid "Unexpected program flow."
 msgstr "Alur program yang tidak diduga."
 
-#: src/Zypper.cc:3254
+#: src/Zypper.cc:3256
 msgid "Non-option program arguments: "
 msgstr "Bukan argumen program pilihan: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3313
+#: src/Zypper.cc:3315
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -5011,20 +5030,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3336
+#: src/Zypper.cc:3338
 msgid "Root privileges are required for refreshing services."
 msgstr "Hak akses root diperlukan untuk memuat ulang layanan."
 
-#: src/Zypper.cc:3360 src/Zypper.cc:3449 src/Zypper.cc:3666
+#: src/Zypper.cc:3362 src/Zypper.cc:3451 src/Zypper.cc:3668
 msgid "Root privileges are required for modifying system services."
 msgstr "Hak akses root diperlukan untuk memodifikasi layanan sistem."
 
-#: src/Zypper.cc:3433
+#: src/Zypper.cc:3435
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' bukan tipe layanan yang tepat."
 
-#: src/Zypper.cc:3435
+#: src/Zypper.cc:3437
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -5034,120 +5053,120 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3460 src/Zypper.cc:3807
+#: src/Zypper.cc:3462 src/Zypper.cc:3809
 msgid "Alias or an aggregate option is required."
 msgstr "Alias atau sebuah kumpulan opsi diperlukan."
 
-#: src/Zypper.cc:3492
+#: src/Zypper.cc:3494
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Layanan '%s' tidak ditemukan."
 
-#: src/Zypper.cc:3519 src/Zypper.cc:3665 src/Zypper.cc:3744 src/Zypper.cc:3796
+#: src/Zypper.cc:3521 src/Zypper.cc:3667 src/Zypper.cc:3746 src/Zypper.cc:3798
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Hak akses root diperlukan untuk memodifikasi repositori sistem."
 
-#: src/Zypper.cc:3574 src/Zypper.cc:3912
+#: src/Zypper.cc:3576 src/Zypper.cc:3914
 msgid "Too few arguments."
 msgstr "Argumen terlalu sedikit."
 
-#: src/Zypper.cc:3597
+#: src/Zypper.cc:3599
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Jika hanya satu argumen yang digunakan, harus berupa URI yang mengarah ke "
 "berkas .repo."
 
-#: src/Zypper.cc:3627
+#: src/Zypper.cc:3629
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 "Tidak bisa menggunakan %s bersama dengan %s. Menggunakan pengaturan %s."
 
-#: src/Zypper.cc:3646
+#: src/Zypper.cc:3648
 msgid "Specified type is not a valid repository type:"
 msgstr "Tipe yang ditentukan bukan tipe repositori yang tepat:"
 
-#: src/Zypper.cc:3647
+#: src/Zypper.cc:3649
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
 "Lihat '%s' atau '%s' untuk mendapatkan semua tipe repositori yang diketahui."
 
-#: src/Zypper.cc:3673 src/Zypper.cc:4862 src/utils/messages.cc:45
+#: src/Zypper.cc:3675 src/Zypper.cc:4872 src/utils/messages.cc:45
 msgid "Required argument missing."
 msgstr "Diperlukan argumen yang hilang."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:3698
+#: src/Zypper.cc:3700
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Repositori '%s' tidak ditemukan berdasarkan alias. nomor atau URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:3720
+#: src/Zypper.cc:3722
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Layanan '%s' tidak ditemukan berdasarkan alias. nomor atau URI."
 
-#: src/Zypper.cc:3751
+#: src/Zypper.cc:3753
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Argumen terlalu sedikit. Setidaknya URI dan alias diperlukan."
 
-#: src/Zypper.cc:3775
+#: src/Zypper.cc:3777
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Repositori '%s' tidak ditemukan."
 
-#: src/Zypper.cc:3839
+#: src/Zypper.cc:3841
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Repositori '%s' tidak ditemukan."
 
-#: src/Zypper.cc:3856
+#: src/Zypper.cc:3858
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Hak akses root diperlukan untuk memuat ulang repositori sistem."
 
-#: src/Zypper.cc:3862
+#: src/Zypper.cc:3864
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Pengaturan global '%s' tidak berpengaruh di sini."
 
-#: src/Zypper.cc:3870
+#: src/Zypper.cc:3872
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argumen tidak diijinkan jika '%s' sedang digunakan."
 
-#: src/Zypper.cc:3894
+#: src/Zypper.cc:3896
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Hak akses root diperlukan untuk membersikan cache lokal."
 
-#: src/Zypper.cc:3913
+#: src/Zypper.cc:3915
 msgid "At least one package name is required."
 msgstr "Setidaknya dibutuhkan 1 nama paket."
 
-#: src/Zypper.cc:3922
+#: src/Zypper.cc:3924
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Hak akses root diperlukan untuk memasang atau menghapus paket-paket."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:3934
+#: src/Zypper.cc:3936
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Mengabaikan argumen, menandai semua repositori."
 
-#: src/Zypper.cc:3945
+#: src/Zypper.cc:3947
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Tipe paket tidak dikenali: %s"
 
-#: src/Zypper.cc:3955
+#: src/Zypper.cc:3957
 msgid "Cannot uninstall patches."
 msgstr "Tidak bisa menghapus patch-patch."
 
-#: src/Zypper.cc:3956
+#: src/Zypper.cc:3958
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -5158,34 +5177,34 @@ msgstr ""
 "data,\n"
 "atau yang mirip."
 
-#: src/Zypper.cc:3966
+#: src/Zypper.cc:3968
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Penghapusan dari paket sumber tidak didefinisikan dan diterapkan."
 
-#: src/Zypper.cc:3986
+#: src/Zypper.cc:3988
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' seperti berkas RPM. Mencoba untuk mengunduhnya."
 
-#: src/Zypper.cc:3995
+#: src/Zypper.cc:3997
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Terkendala dengan berkas RPM tertentu sebagai '%s', lewati."
 
-#: src/Zypper.cc:4017
+#: src/Zypper.cc:4019
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Terkendala saat membaca header RPM dari %s. Apakah ini berkas RPM?"
 
-#: src/Zypper.cc:4038
+#: src/Zypper.cc:4040
 msgid "Plain RPM files cache"
 msgstr "Cache berkas RPM yang plain"
 
-#: src/Zypper.cc:4055
+#: src/Zypper.cc:4057
 msgid "No valid arguments specified."
 msgstr "Tidak ada argumen valid yang ditetapkan."
 
-#: src/Zypper.cc:4072 src/Zypper.cc:4203
+#: src/Zypper.cc:4074 src/Zypper.cc:4205
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -5194,68 +5213,68 @@ msgstr ""
 "terpasang. Tidak ada yang bisa dipasang."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4109 src/Zypper.cc:4674
+#: src/Zypper.cc:4111 src/Zypper.cc:4676
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s kontradiksi %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4117
+#: src/Zypper.cc:4119
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s tidak bisa digunakan bersama dengan %s"
 
-#: src/Zypper.cc:4158
+#: src/Zypper.cc:4160
 msgid "Source package name is a required argument."
 msgstr "Nama paket sumber diperlukan oleh argumen."
 
-#: src/Zypper.cc:4242
+#: src/Zypper.cc:4244
 msgid "Mode is set to 'match-exact'"
 msgstr "Mode diatur ke 'match-exact'"
 
-#: src/Zypper.cc:4262 src/Zypper.cc:4593 src/Zypper.cc:4693 src/Zypper.cc:4895
-#: src/Zypper.cc:4946 src/Zypper.cc:4986
+#: src/Zypper.cc:4264 src/Zypper.cc:4595 src/Zypper.cc:4695 src/Zypper.cc:4905
+#: src/Zypper.cc:4956 src/Zypper.cc:4996
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Tipe paket '%s' tidak dikenali."
 
 #. translators: empty search result message
-#: src/Zypper.cc:4408
+#: src/Zypper.cc:4410
 msgid "No matching items found."
 msgstr "Tidak ditemukan item yang cocok."
 
-#: src/Zypper.cc:4443
+#: src/Zypper.cc:4445
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Kendala terjadi saat inisialisasi atau eksekusi queri pencarian"
 
-#: src/Zypper.cc:4444
+#: src/Zypper.cc:4446
 msgid "See the above message for a hint."
 msgstr "Lihat pesan di atas untuk petunjuk."
 
-#: src/Zypper.cc:4525
+#: src/Zypper.cc:4527
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "Opsi %1% tidak berpengaruh tanpa opsi global %2%."
 
-#: src/Zypper.cc:4612 src/Zypper.cc:4660
+#: src/Zypper.cc:4614 src/Zypper.cc:4662
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Tidak dapat menggunakan %s bersamaan dengan %s."
 
-#: src/Zypper.cc:4641
+#: src/Zypper.cc:4643
 msgid "Root privileges are required for updating packages."
 msgstr "Hak akses root dibutuhkan untuk memperbarui paket-paket."
 
-#: src/Zypper.cc:4700 src/Zypper.cc:4708 src/Zypper.cc:4781
+#: src/Zypper.cc:4702 src/Zypper.cc:4710 src/Zypper.cc:4791
 msgid "Operation not supported."
 msgstr "Operasi tidak didukung."
 
-#: src/Zypper.cc:4701
+#: src/Zypper.cc:4703
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Untuk memperbarui produk yang terpasang, gunakan '%s'."
 
-#: src/Zypper.cc:4709
+#: src/Zypper.cc:4711
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -5264,18 +5283,18 @@ msgstr ""
 "Zypper tidak menyimpan jejak dari paket-paket sumber yang terpasang. Untuk "
 "memasang paket sumber termutakhir dan membangunnya, gunakan '%s'."
 
-#: src/Zypper.cc:4725
+#: src/Zypper.cc:4727
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Tidak bisa menggunakan banyak tipe jika paket yang spesifif digunakan "
 "sebagai argumen."
 
-#: src/Zypper.cc:4817
+#: src/Zypper.cc:4827
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Hak akses root diperlukan untuk menjalankan ugrade distribusi."
 
-#: src/Zypper.cc:4837
+#: src/Zypper.cc:4847
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -5286,64 +5305,64 @@ msgstr ""
 "Pastikan repositori tersebut cocok sebelum Anda melanjutkan. Lihat '%s' "
 "untuk informasi lanjutan tentang perintah ini."
 
-#: src/Zypper.cc:4865 src/utils/messages.cc:37 src/utils/messages.cc:47
+#: src/Zypper.cc:4875 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
 msgstr "Penggunaan"
 
-#: src/Zypper.cc:4925 src/Zypper.cc:4966
+#: src/Zypper.cc:4935 src/Zypper.cc:4976
 msgid "Root privileges are required for adding of package locks."
 msgstr "Hak akses root diperlukan untuk menambah paket-paket kunci."
 
-#: src/Zypper.cc:5047
+#: src/Zypper.cc:5057
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "menghapus kunci %lu."
 
-#: src/Zypper.cc:5058
+#: src/Zypper.cc:5068
 msgid "XML output not implemented for this command."
 msgstr "Keluaran XML tidak bisa diterapkan pada perintah ini."
 
-#: src/Zypper.cc:5071
+#: src/Zypper.cc:5081
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Label Distribusi: %s"
 
-#: src/Zypper.cc:5072
+#: src/Zypper.cc:5082
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Label Singkat: %s"
 
-#: src/Zypper.cc:5113
+#: src/Zypper.cc:5123
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s cocok %s"
 
-#: src/Zypper.cc:5115
+#: src/Zypper.cc:5125
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s lebih baru dari %s"
 
-#: src/Zypper.cc:5117
+#: src/Zypper.cc:5127
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s lebih tua dari %s"
 
-#: src/Zypper.cc:5195 src/source-download.cc:217
+#: src/Zypper.cc:5205 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Hak akses tidak cukup untuk menggunakan direktori unduh '%s'."
 
-#: src/Zypper.cc:5247
+#: src/Zypper.cc:5257
 msgid "This command only makes sense in the zypper shell."
 msgstr "Perintah ini hanya berguna di zypper shell."
 
-#: src/Zypper.cc:5257
+#: src/Zypper.cc:5267
 msgid "You already are running zypper's shell."
 msgstr "Anda sudah menjalankan shell zypper."
 
-#: src/Zypper.cc:5321
+#: src/Zypper.cc:5331
 msgid "Resolvable Type"
 msgstr "Tipe Perbaikan"
 
@@ -5428,29 +5447,29 @@ msgstr "%s konflik dengan %s, akan menggunakan cara yang kurang agresif %s"
 msgid "Force resolution:"
 msgstr "Paksa resolusi:"
 
-#: src/solve-commit.cc:330
+#: src/solve-commit.cc:334
 msgid "Verifying dependencies..."
 msgstr "Memeriksa dependensi-dependensi..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:378
+#: src/solve-commit.cc:382
 msgid "Computing upgrade..."
 msgstr "Menghitung upgrade..."
 
-#: src/solve-commit.cc:392
+#: src/solve-commit.cc:396
 msgid "Generating solver test case..."
 msgstr "Menghasilkan kasus uji solver..."
 
-#: src/solve-commit.cc:394
+#: src/solve-commit.cc:398
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Kasus uji solver sukses dihasilkan pada %s."
 
-#: src/solve-commit.cc:397
+#: src/solve-commit.cc:401
 msgid "Error creating the solver test case."
 msgstr "Galat saat membuat uji kasus solver."
 
-#: src/solve-commit.cc:431
+#: src/solve-commit.cc:435
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -5460,19 +5479,19 @@ msgstr ""
 "menonaktifkan di zypper.conf. Jalankan '%s' untuk memeriksa secara manual."
 
 #. Here: Table output
-#: src/solve-commit.cc:436 src/ps.cc:104
+#: src/solve-commit.cc:440 src/ps.cc:104
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Periksa proses yang berjalan dengan pustaka yang terhapus..."
 
-#: src/solve-commit.cc:447 src/ps.cc:59
+#: src/solve-commit.cc:451 src/ps.cc:59
 msgid "Check failed:"
 msgstr "Pemeriksaan gagal:"
 
-#: src/solve-commit.cc:449
+#: src/solve-commit.cc:453
 msgid "Skip check:"
 msgstr "Melewati pemeriksaan:"
 
-#: src/solve-commit.cc:457
+#: src/solve-commit.cc:461
 #, c-format, boost-format
 msgid ""
 "There are some running programs that might use files deleted by recent "
@@ -5484,33 +5503,33 @@ msgstr ""
 "ulang program tersebut. Jalankan '%s' untuk mendapatkan daftar program-"
 "program tersebut."
 
-#: src/solve-commit.cc:468
+#: src/solve-commit.cc:472
 msgid "Update notifications were received from the following packages:"
 msgstr ""
 "Pemberitahuan pembaruan diterima dari beberapa paket-paket berikut ini:"
 
-#: src/solve-commit.cc:477
+#: src/solve-commit.cc:481
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Pesan dari paket %s:"
 
-#: src/solve-commit.cc:485
+#: src/solve-commit.cc:489
 msgid "y/n"
 msgstr "y/t"
 
-#: src/solve-commit.cc:486
+#: src/solve-commit.cc:490
 msgid "View the notifications now?"
 msgstr "Lihat pemberitahuan sekarang?"
 
-#: src/solve-commit.cc:532
+#: src/solve-commit.cc:536
 msgid "Computing distribution upgrade..."
 msgstr "Menghitung upgrade distribusi..."
 
-#: src/solve-commit.cc:537
+#: src/solve-commit.cc:541
 msgid "Resolving package dependencies..."
 msgstr "Memperbaiki paket dependensi-dependensi..."
 
-#: src/solve-commit.cc:614
+#: src/solve-commit.cc:618
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -5519,7 +5538,7 @@ msgstr ""
 "memperbaiki dependensi-dependensi tersebut, diperlukan penanganan sebagai "
 "berikut:"
 
-#: src/solve-commit.cc:621
+#: src/solve-commit.cc:625
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Hak akses root diperlukan untuk memperbaiki paket dependensi-dependensi yang "
@@ -5535,24 +5554,24 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:647
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:652
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
 "Ya, terima rangkupan dan memproses pemasangan/penghapusan dari paket-paket."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:650
+#: src/solve-commit.cc:654
 msgid "No, cancel the operation."
 msgstr "Tidak, batalkan operasi."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:652
+#: src/solve-commit.cc:656
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -5561,57 +5580,57 @@ msgstr ""
 "kendala dependensi."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:654
+#: src/solve-commit.cc:658
 msgid "Toggle display of package versions."
 msgstr "Pilihan untuk menampilkan versi-versi paket."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:656
+#: src/solve-commit.cc:660
 msgid "Toggle display of package architectures."
 msgstr "Pilihan untuk menampilkan arsitektur-arsitektur paket."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:658
+#: src/solve-commit.cc:662
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 "Pilihan untuk menampilkan repositori dari paket-paket yang akan dipasang."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:660
+#: src/solve-commit.cc:664
 msgid "Toggle display of package vendor names."
 msgstr "Pilihan untuk menampilkan nama-nama penyedia paket."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:662
+#: src/solve-commit.cc:666
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Pilihan antara menampilkan semua detil dan beberapa detil yang memungkinkan."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:664
+#: src/solve-commit.cc:668
 msgid "View the summary in pager."
 msgstr "Tampilkan kesimpulan dalam halaman."
 
-#: src/solve-commit.cc:774
+#: src/solve-commit.cc:778
 msgid "committing"
 msgstr "Komit"
 
-#: src/solve-commit.cc:776
+#: src/solve-commit.cc:780
 msgid "(dry run)"
 msgstr "(dry run)"
 
-#: src/solve-commit.cc:800 src/solve-commit.cc:833
+#: src/solve-commit.cc:804 src/solve-commit.cc:837
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Kendala saat mengambil berkas paket dari repositori:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:830
+#: src/solve-commit.cc:834
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Repositori '%s' sudah kadaluarsa. Jalankan  '%s' untuk bantuan."
 
-#: src/solve-commit.cc:841
+#: src/solve-commit.cc:845
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -5629,23 +5648,23 @@ msgstr ""
 "- gunakan media pemasangan yang lain (jika rusak)\n"
 "- gunakan repositori yang lain"
 
-#: src/solve-commit.cc:855
+#: src/solve-commit.cc:859
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Terjadi kendala saat atau setelah pemasangan atau penghapusan paket-paket:"
 
-#: src/solve-commit.cc:863
+#: src/solve-commit.cc:867
 msgid "Installation has completed with error."
 msgstr "Pemasangan selesai dengan galat."
 
-#: src/solve-commit.cc:865
+#: src/solve-commit.cc:869
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 "Anda perlu melakukan '%1%' untuk memperbaik kendala-kendala tiap-tiap "
 "dependensi."
 
-#: src/solve-commit.cc:879
+#: src/solve-commit.cc:883
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -5653,7 +5672,7 @@ msgstr ""
 "Satu dari patch yang terpasang memerlukan reboot mesin Anda. Reboot sesegera "
 "mungkin."
 
-#: src/solve-commit.cc:887
+#: src/solve-commit.cc:891
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -5661,11 +5680,11 @@ msgstr ""
 "Satu dari patch yang terpasang mempengaruhi manajer paket. Jalankan perintah "
 "ini sekali lagi untuk memasang patch-patch yang diinginkan."
 
-#: src/solve-commit.cc:905
+#: src/solve-commit.cc:909
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Dependensi-dependensi dari semua paket yang terpasang sudah terpenuhi."
 
-#: src/solve-commit.cc:907 src/download.cc:129
+#: src/solve-commit.cc:911 src/download.cc:129
 msgid "Nothing to do."
 msgstr "Tidak ada yang perlu dilakukan."
 
