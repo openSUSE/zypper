@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Mon Apr 24 13:47:12 CEST 2017 - ma@suse.de
+
+- patch: add --with-update to install also plain package updates.
+  This is basically the same as running 'zypper update' afterwards.
+  (FATE#320653)
+- BuildRequires:  libzypp-devel >= 16.8.0
+- Fix TODOs in zypper manpage (bsc#1032259)
+- Remove legacy vendor equivalence between 'suse' and 'opensuse'
+  (bsc#1030686)
+- version 1.13.24
+
+-------------------------------------------------------------------
 Fri Apr 21 09:42:39 CEST 2017 - ma@suse.de
 
 - Fix crash when exiting after pressing CTRL-C quickly twice or more
