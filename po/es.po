@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-18 12:24+0000\n"
+"PO-Revision-Date: 2017-04-25 10:17+0000\n"
 "Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1756,6 +1756,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Es necesario reiniciar el gestor de paquetes. Ejecute este comando de nuevo "
+"una vez después de que se actualice la pila de actualización."
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1905,6 +1907,8 @@ msgstr "Comando desconocido %s"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
+"Cuando se actualiza en primer lugar la pila de actualización, se ignora la "
+"opción %s."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -2101,9 +2105,11 @@ msgid "Specified repository '%s' is disabled."
 msgstr "El repositorio especificado (%s) está inhabilitado."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr "Utilice los comandos %s o %s para añadir o habilitar repositorios."
+msgstr ""
+"La opción global %s se puede usar para habilitar temporalmente los "
+"repositorios."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2282,9 +2288,9 @@ msgid "Specified repositories: "
 msgstr "Repositorios especificados: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Se está inhabilitando el repositorio %s."
+msgstr "Se está actualizando el repositorio %s."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -4395,6 +4401,9 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Intenta también actualizar todos los paquetes no cubiertos por los parches. "
+"La opción se ignora si el comando del parche debe actualizar en primer lugar "
+"la pila de actualización. No se puede combinar con --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
