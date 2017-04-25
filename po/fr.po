@@ -1934,8 +1934,7 @@ msgstr "Commande '%s' inconnue"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
-"L'option %s est ignorée lors de la première actualisation de la pile de mise "
-"à jour."
+"L'option %s est ignorée si la pile de mise à jour est d'abord actualisée."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
