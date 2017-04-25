@@ -1757,7 +1757,7 @@ msgid ""
 "update stack got updated)"
 msgstr ""
 "Es necesario reiniciar el gestor de paquetes. Ejecute este comando de nuevo "
-"una vez después de que se actualice la pila de actualización."
+"una vez después de que se actualice la pila de actualización"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
