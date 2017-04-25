@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-20 02:37+0000\n"
+"PO-Revision-Date: 2017-04-25 02:12+0000\n"
 "Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
-"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_CN/>\n"
+"Language-Team: Chinese (China) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1586,7 +1586,7 @@ msgstr[0] "个源代码包将安装"
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
-msgstr ""
+msgstr "需要重启动包管理器（请在更新堆栈获得更新后再次运行此命令）。"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1730,7 +1730,7 @@ msgstr "未知命令 '%s'"
 #: src/SolverRequester.cc:479
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "先更新更新堆栈时忽略选项 %s。"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -1916,9 +1916,9 @@ msgid "Specified repository '%s' is disabled."
 msgstr "已禁用指定软件源 '%s'。"
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr "请使用 '%s' 或者 '%s' 命令添加或启用软件源。"
+msgstr "全局选项 '%s' 可用来临时启用软件源。"
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2094,9 +2094,9 @@ msgid "Specified repositories: "
 msgstr "指定的软件源： "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "正在禁用软件源 '%s'。"
+msgstr "正在刷新软件源 '%s'。"
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -3985,6 +3985,7 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"额外尝试更新增补程序未涵盖的所有包。如果增补程序命令必须先更新更新堆栈，将会忽略此选项。不能与 --updatestack-only 结合使用。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
