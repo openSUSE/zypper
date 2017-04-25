@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-02-28 22:33+0000\n"
-"Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"PO-Revision-Date: 2017-04-25 09:04+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1638,7 +1638,7 @@ msgstr[0] "個のソースパッケージのインストール"
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
-msgstr ""
+msgstr "パッケージマネージャの再起動が必要です (更新スタックの更新後、再度このコマンドを実行してください) 。"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1984,11 +1984,9 @@ msgid "Specified repository '%s' is disabled."
 msgstr "指定したリポジトリ '%s' は無効化されています。"
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr ""
-"リポジトリを追加したり有効化したりするには、それぞれ '%s' コマンドや '%s' コ"
-"マンドをご利用ください。"
+msgstr "リポジトリを一時的に有効化するには、グローバルオプション '%s' をご利用ください。"
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2168,9 +2166,9 @@ msgid "Specified repositories: "
 msgstr "指定したリポジトリ: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "リポジトリ '%s' を無効にしています。"
+msgstr "リポジトリ '%s' を更新しています。"
 
 #: src/repos.cc:1417
 #, c-format, boost-format
