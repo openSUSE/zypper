@@ -11,7 +11,7 @@
 # Michael Skiba <trans@michael-skiba.de>, 2008, 2009, 2012, 2013, 2014.
 # Marko Schugardt <mail.sapex@gmx.de>, 2008.
 # Hermann-Josef Beckers <hj.beckers@onlinehome.de>, 2009.
-# Hermann J. Beckers <hj.beckers@onlinehome.de>, 2011.
+# Hermann J. Beckers <hj.beckers@onlinehome.de>, 2011.Fcancel
 # Christopher Hofmann <cwh@suse.de>, 2011.
 # Hendrik Woltersdorf <hendrikw@arcor.de>, 2013.
 # Sarah Kriesch <ada.lovelace@gmx.de>, 2014, 2015.
@@ -5695,19 +5695,19 @@ msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
 "Wählen Sie die obige Lösung mittels '1' oder Sie (u)eberspringen, "
-"(w)iederholen oder (b)rechen ab"
+"(w)iederholen oder brechen (a)b"
 msgstr[1] ""
 "Wählen Sie aus den obigen Lösungen mittels Nummer oder Sie (u)eberspringen, "
-"(w)iederholen oder (b)rechen ab"
+"(w)iederholen oder brechen (a)b"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:78
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Wählen Sie die obige Lösung mittels '1' oder brechen Sie a(b)"
+msgstr[0] "Wählen Sie die obige Lösung mittels '1' oder brechen Sie (a)b"
 msgstr[1] ""
-"Wählen Sie aus den obigen Lösungen mittels Nummer oder brechen Sie a(b)"
+"Wählen Sie aus den obigen Lösungen mittels Nummer oder brechen Sie (a)b"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
