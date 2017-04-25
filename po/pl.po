@@ -10,10 +10,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-18 11:12+0000\n"
+"PO-Revision-Date: 2017-04-25 13:21+0000\n"
 "Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
-"Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/"
-">\n"
+"Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
+"\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1866,6 +1866,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Wymagane ponowne uruchomienie menedżera pakietów. (Uruchom to polecenie "
+"ponownie po zakończeniu aktualizacji stosu aktualizacji)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -2012,6 +2014,8 @@ msgstr "Nieznane polecenie '%s'"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
+"Pomijanie opcji %s w przypadku aktualizowania stosu aktualizacji w pierwszej "
+"kolejności."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -2210,9 +2214,9 @@ msgid "Specified repository '%s' is disabled."
 msgstr "Określone repozytorium '%s' jest wyłączone."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr "Należy użyć '%s' lub '%s', aby dodać i odblokować repozytoria."
+msgstr "Można użyć opcji globalnej '%s', aby tymczasowo włączyć repozytoria."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2392,9 +2396,9 @@ msgid "Specified repositories: "
 msgstr "Wybrane repozytoria: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Wyłączanie repozytorium '%s'."
+msgstr "Odświeżanie repozytorium '%s'."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -4502,6 +4506,10 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Dodatkowo podejmowana jest próba zaktualizowania wszystkich pakietów "
+"nieobjętych poprawkami. Ta opcja jest pomijana, jeśli polecenie zastosowania "
+"poprawki musi najpierw zaktualizować stos aktualizacji. Nie można używać "
+"razem z opcją --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
