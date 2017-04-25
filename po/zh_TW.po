@@ -13,10 +13,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-03-22 13:41+0000\n"
-"Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
-"Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_TW/>\n"
+"PO-Revision-Date: 2017-04-25 02:27+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"Language-Team: Chinese (Taiwan) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1588,7 +1588,7 @@ msgstr[0] "要安裝的原始碼套件"
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
-msgstr ""
+msgstr "需要重新啟動套件管理員 (更新堆疊得到更新後，請再次執行此指令)。"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1729,7 +1729,7 @@ msgstr "未知的指令 '%s'"
 #: src/SolverRequester.cc:479
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "先更新更新堆疊時忽略選項 %s。"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -1916,9 +1916,9 @@ msgid "Specified repository '%s' is disabled."
 msgstr "指定套件庫 '%s' 已停用。"
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr "請用 '%s' 或 '%s' 指令來加入或啟用套件庫。"
+msgstr "全域選項 '%s' 可用來暫時啟用套件庫。"
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2094,9 +2094,9 @@ msgid "Specified repositories: "
 msgstr "指定的套件庫： "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "正在停用套件庫 '%s'。"
+msgstr "正在重新整理套件庫 '%s'。"
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -4019,6 +4019,7 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"另外嘗試更新修補程式未涵蓋的所有套件。如果修補程式指令必須先更新更新堆疊，則會忽略此選項。不能與 --updatestack-only 結合使用。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
