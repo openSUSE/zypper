@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-18 08:43+0000\n"
+"PO-Revision-Date: 2017-04-25 07:24+0000\n"
 "Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -1812,6 +1812,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Vyžadován restart správce balíčků. (Po aktualizaci zásobníku oprav spusťte "
+"tento příkaz znovu.)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1959,7 +1961,7 @@ msgstr "Neznámý příkaz '%s'"
 #: src/SolverRequester.cc:479
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "Při aktualizaci zásobníku oprav se ignoruje možnost %s."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -2156,9 +2158,9 @@ msgid "Specified repository '%s' is disabled."
 msgstr "Zadaný repozitář '%s' je zakázán."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr "Použijte příkazy '%s' nebo '%s' k přidání a povolení repozitářů."
+msgstr "Lze použít globální možnost %s k dočasnému povolení repozitářů."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2341,9 +2343,9 @@ msgid "Specified repositories: "
 msgstr "Zadané repozitáře: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Zakazuji repozitář '%s'."
+msgstr "Obnovuje se repozitář '%s'."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -4371,6 +4373,9 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Dále se provede pokus o aktualizaci všech balíčků nepokrytých opravami. Tato "
+"možnost je ignorována, pokud příkaz opravy musí nejprve aktualizovat "
+"zásobník oprav. Nelze kombinovat s možností --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
