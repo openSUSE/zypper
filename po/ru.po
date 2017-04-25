@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-18 05:36+0000\n"
+"PO-Revision-Date: 2017-04-25 11:24+0000\n"
 "Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:55
@@ -1820,6 +1820,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Необходимо перезагрузить менеджер пакетов. (Выполните это повторно, после "
+"того как обновится стек обновлений.)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1965,7 +1967,7 @@ msgstr "Неизвестная команда '%s'"
 #: src/SolverRequester.cc:479
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "При обновлении стека обновлений сначала игнорировать параметр %s."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -2164,10 +2166,9 @@ msgid "Specified repository '%s' is disabled."
 msgstr "Указанный репозиторий \"%s\" отключен."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr ""
-"Используйте команду '%s' или '%s', чтобы добавить или включить репозитории."
+msgstr "Общий параметр \"%s\" позволяет временно включить репозитории."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2348,9 +2349,9 @@ msgid "Specified repositories: "
 msgstr "Указанные репозитории: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Отключение репозитория \"%s\"."
+msgstr "Обновление репозитория \"%s\"."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -4423,6 +4424,10 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Дополнительно пытаться обновить все пакеты, не затрагиваемые исправлениями. "
+"Этот параметр игнорируется, если при установке исправления сначала "
+"обновляется стек обновлений. Параметр нельзя использовать с параметром, "
+"запускающим обновление только стека обновлений."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
