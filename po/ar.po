@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-20 05:17+0000\n"
-"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
-">\n"
+"PO-Revision-Date: 2017-04-26 12:22+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2041,6 +2041,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"يجب إعادة تشغيل مدير الحزمة. (قم بتشغيل هذا الأمر مرة أخرى بعد تحديث كومة "
+"التحديثات)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -2186,7 +2188,7 @@ msgstr "أمر غير معروف '%s'"
 #: src/SolverRequester.cc:479
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "تجاهل الخيار %s عند تحديث كومة التحديثات أولاَ."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -2387,9 +2389,9 @@ msgid "Specified repository '%s' is disabled."
 msgstr "تم تعطيل المخزن المحدد '%s'."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr "استخدم الأمرين '%s' أو '%s' لإضافة مخازن أو تمكينها."
+msgstr "يمكن استخدام الأمرالعام '%s' لتمكين المستودعات مؤقتًا."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2565,9 +2567,9 @@ msgid "Specified repositories: "
 msgstr "المخازن المحددة: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "تعطيل المخزن '%s'."
+msgstr "تحديث المستودع '%s'."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -4583,6 +4585,9 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"بالإضافة إلى ذلك، حاول تحديث كل الحزم التي لم تغطيها الإصلاحات. يتم تجاهل "
+"الخيار، إذا كان يجب على أمر الإصلاح تحديث كومة التحديثات أولاً. لا يمكن "
+"الجمع مع --updatestack- فقط."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
