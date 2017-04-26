@@ -16,10 +16,10 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-21 10:42+0000\n"
+"PO-Revision-Date: 2017-04-26 13:16+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
-"Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
-"hu/>\n"
+"Language-Team: Hungarian "
+"<https://l10n.opensuse.org/projects/zypper/master/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1744,6 +1744,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"A csomagkezelőt újra kell indítani. (Futtassa újra ezt a parancsot, miután "
+"frissült a frissítőcsomag)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1895,6 +1897,7 @@ msgstr "Ismeretlen parancs: '%s'"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
+"A(z) %s opció figyelmen kívül hagyása a frissítőcsomag első frissítésekor."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -2093,11 +2096,11 @@ msgid "Specified repository '%s' is disabled."
 msgstr "A megadott '%s' telepítési forrás le van tiltva."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
-"Telepítési forrás hozzáadásához vagy engedélyezéséhez használja a '%s' vagy "
-"'%s' parancsot."
+"A telepítési források ideiglenes engedélyezéséhez használhatja a globális '%"
+"s' opciót."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2279,9 +2282,9 @@ msgid "Specified repositories: "
 msgstr "Megadott telepítési forrás: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "A(z) '%s' telepítési forrás letiltása."
+msgstr "A(z) '%s' telepítési forrás frissítése."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -4411,6 +4414,10 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Emellett próbálja meg frissíteni az összes olyan csomagot, amelyet nem "
+"érintenek a javítások. A rendszer figyelmen kívül hagyja a kapcsolót, ha a "
+"javítási parancsnak először a frissítőcsomagot kell frissítenie. Nem "
+"használható együtt az --updatestack-only kapcsolóval."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
