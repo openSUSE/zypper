@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-18 04:24+0000\n"
+"PO-Revision-Date: 2017-04-26 08:36+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
-"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
-">\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1613,7 +1613,7 @@ msgstr[0] "설치할 소스 패키지"
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
-msgstr ""
+msgstr "패키지 관리자 재시작이 필요합니다. (업데이트 스택이 업데이트된 후 이 명령을 다시 실행하십시오.)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1757,9 +1757,9 @@ msgid "Unknown command '%s'"
 msgstr "알 수 없는 명령 '%s'"
 
 #: src/SolverRequester.cc:479
-#, c-format, boost-format
+#, boost-format, c-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "업데이트 스택을 먼저 업데이트할 경우 %s 옵션을 무시합니다."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -1953,9 +1953,9 @@ msgid "Specified repository '%s' is disabled."
 msgstr "지정된 리포지토리 '%s'이(가) 비활성화되었습니다."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr "'%s' 또는 '%s' 명령을 사용하여 리포지토리를 추가하거나 활성화합니다."
+msgstr "'%s' 전역 옵션을 사용하여 리포지토리를 일시적으로 활성화할 수 있습니다."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2134,9 +2134,9 @@ msgid "Specified repositories: "
 msgstr "지정된 리포지토리: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "'%s' 리포지토리를 비활성화하는 중입니다."
+msgstr "'%s' 리포지토리를 새로 고치는 중입니다."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -4124,6 +4124,8 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"패치에 포함되지 않는 모든 패키지를 추가로 업데이트해 보십시오. 패치 명령이 업데이트 스택을 먼저 업데이트해야 하는 경우 옵션이 "
+"무시됩니다. --updatestack-only와 함께 사용할 수 없습니다."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
