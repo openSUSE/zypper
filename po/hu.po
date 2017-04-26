@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-26 13:16+0000\n"
+"PO-Revision-Date: 2017-04-26 13:20+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian "
 "<https://l10n.opensuse.org/projects/zypper/master/hu/>\n"
@@ -1897,7 +1897,7 @@ msgstr "Ismeretlen parancs: '%s'"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
-"A(z) %s opció figyelmen kívül hagyása a frissítőcsomag első frissítésekor."
+"A(z) %s kapcsoló figyelmen kívül hagyása a frissítőcsomag első frissítésekor."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -5530,7 +5530,7 @@ msgstr "Tekintse meg a fent található hibaüzenetet."
 #: src/Zypper.cc:4527
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr "A(z) %1% opciónak nincs hatása a(z) %2% globális opció nélkül."
+msgstr "A(z) %1% kapcsolónak nincs hatása a(z) %2% globális kapcsoló nélkül."
 
 #: src/Zypper.cc:4614 src/Zypper.cc:4662
 #, c-format, boost-format
