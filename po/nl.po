@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-02-28 14:00+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"PO-Revision-Date: 2017-04-26 13:52+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -1787,6 +1787,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Opnieuw opstarten van de pakketbeheerder is vereist. (Voer dit commando nog "
+"een keer uit nadat de softwarestack voor bijwerken is bijgewerkt)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1939,6 +1941,8 @@ msgstr "Onbekend commando '%s'"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
+"Optie %s wordt genegeerd wanneer de softwarestack voor bijwerken als eerste "
+"wordt bijgewerkt."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
