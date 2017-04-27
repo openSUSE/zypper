@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-19 16:22+0000\n"
-"Last-Translator: Maribel Florido <mflorido@jensen-localization.com>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"PO-Revision-Date: 2017-04-27 12:21+0000\n"
+"Last-Translator: Mattias Börjesson <mattias@wallacesolutions.net>\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1717,6 +1717,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Du måste starta om pakethanteraren. (Kör detta kommando en gång till när "
+"uppdateringsstacken har uppdaterats)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1863,7 +1865,7 @@ msgstr "Kommandot \"%s\" är okänt"
 #: src/SolverRequester.cc:479
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "Ignorerar alternativet %s när uppdateringsstacken uppdateras först."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
