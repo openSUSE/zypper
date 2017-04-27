@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
 "PO-Revision-Date: 2017-04-27 12:18+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -2315,7 +2315,7 @@ msgstr "Angegebene Repositorys: "
 #: src/repos.cc:1388
 #, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Repository '%s' aktualisieren."
+msgstr "Repository '%s 1' wird aktualisiert."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
