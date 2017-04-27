@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
 "PO-Revision-Date: 2017-04-27 12:23+0000\n"
-"Last-Translator: Mattias Börjesson <mattias@wallacesolutions.net>\n"
+"Last-Translator: Maribel Florido <mflorido@jensen-localization.com>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -2066,7 +2066,7 @@ msgstr "Den angivna lagringsplatsen \"%s\" är inaktiverad."
 #, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
-"Det globala alternativet %s kan användas för att tillfälligt aktivera "
+"Det globala alternativet %s 1 kan användas för att tillfälligt aktivera "
 "lagringsplatser."
 
 #: src/repos.cc:816 src/repos.cc:822
