@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
 "PO-Revision-Date: 2017-04-27 12:24+0000\n"
-"Last-Translator: Mattias Börjesson <mattias@wallacesolutions.net>\n"
+"Last-Translator: Maribel Florido <mflorido@jensen-localization.com>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -2249,7 +2249,7 @@ msgstr "Angivna förråd: "
 #: src/repos.cc:1388
 #, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Uppdaterar förrådet %s."
+msgstr "Uppdaterar förrådet '%s'."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
