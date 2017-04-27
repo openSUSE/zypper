@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 27 16:03:32 CEST 2017 - ma@suse.de
+
+- PoolQuery: Treat explicit queries for 'kind:name' correctly
+  (bsc#1035729)
+- version 16.9.0 (0)
+
+-------------------------------------------------------------------
 Fri Apr 21 16:23:51 CEST 2017 - ma@suse.de
 
 - Add API to control resolver job to update all packages (FATE#320653)
