@@ -170,8 +170,8 @@ namespace zypp
     Impl()
     {}
 
-    Impl( const std::string & search_r, const Match & flags_r )
-    : _search( search_r )
+    Impl( std::string search_r, const Match & flags_r )
+    : _search( std::move(search_r) )
     , _flags( flags_r )
     {}
 
@@ -215,8 +215,8 @@ namespace zypp
     { return _search; }
 
     /** Set a new searchstring. */
-    void setSearchstring( const std::string & string_r )
-    { invalidate(); _search = string_r; }
+    void setSearchstring( std::string string_r )
+    { invalidate(); _search = std::move(string_r); }
 
     /** The current search flags. */
     const Match & flags() const
@@ -264,17 +264,29 @@ namespace zypp
   StrMatcher::StrMatcher( const std::string & search_r )
   : _pimpl( new Impl( search_r, Match::STRING ) )
   {}
+  StrMatcher::StrMatcher( std::string && search_r )
+  : _pimpl( new Impl( std::move(search_r), Match::STRING ) )
+  {}
 
   StrMatcher::StrMatcher( const std::string & search_r, const Match & flags_r )
   : _pimpl( new Impl( search_r, flags_r ) )
+  {}
+  StrMatcher::StrMatcher( std::string && search_r, const Match & flags_r )
+  : _pimpl( new Impl( std::move(search_r), flags_r ) )
   {}
 
   StrMatcher::StrMatcher( const std::string & search_r, const Match::Mode & flags_r )
   : _pimpl( new Impl( search_r, flags_r ) )
   {}
+  StrMatcher::StrMatcher( std::string && search_r, const Match::Mode & flags_r )
+  : _pimpl( new Impl( std::move(search_r), flags_r ) )
+  {}
 
   StrMatcher::StrMatcher( const std::string & search_r, int flags_r )
   : _pimpl( new Impl( search_r, Match(flags_r) ) )
+  {}
+  StrMatcher::StrMatcher( std::string && search_r, int flags_r )
+  : _pimpl( new Impl( std::move(search_r), Match(flags_r) ) )
   {}
 
   void StrMatcher::compile() const
@@ -291,10 +303,17 @@ namespace zypp
 
   void StrMatcher::setSearchstring( const std::string & string_r )
   { _pimpl->setSearchstring( string_r ); }
+  void StrMatcher::setSearchstring( std::string && string_r )
+  { _pimpl->setSearchstring( std::move(string_r) ); }
 
   void StrMatcher::setSearchstring( const std::string & string_r, const Match & flags_r )
   {
     _pimpl->setSearchstring( string_r );
+    _pimpl->setFlags( flags_r );
+  }
+  void StrMatcher::setSearchstring( std::string && string_r, const Match & flags_r )
+  {
+    _pimpl->setSearchstring( std::move(string_r) );
     _pimpl->setFlags( flags_r );
   }
 

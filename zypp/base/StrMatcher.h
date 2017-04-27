@@ -311,18 +311,26 @@ namespace zypp
 
     /** Ctor from string matches in \ref Match::STRING mode per default. */
     StrMatcher( const std::string & search_r );
+    /** \overload for rvalues */
+    StrMatcher( std::string && search_r );
 
     /** Ctor taking string and \ref Match flags. */
     StrMatcher( const std::string & search_r, const Match & flags_r );
+    /** \overload for rvalues */
+    StrMatcher( std::string && search_r, const Match & flags_r );
 
     /** Ctor taking string and \ref Match::Mode.
      * Needed because we want them to be treated as \ref Match,
      * and not as \ref int as the compiler woud do.
      */
     StrMatcher( const std::string & search_r, const Match::Mode & flags_r );
+    /** \overload for rvalues */
+    StrMatcher( std::string && search_r, const Match::Mode & flags_r );
 
     /** Low level interface wraps \a flags into \ref Match. */
     StrMatcher( const std::string & search_r, int flags_r );
+    /** \overload for rvalues */
+    StrMatcher( std::string && search_r, int flags_r );
 
     /** Evaluate in a boolean context <tt>( ! searchstring().empty() )</tt>. */
     explicit operator bool() const
@@ -347,9 +355,13 @@ namespace zypp
 
     /** Set a new searchstring. */
     void setSearchstring( const std::string & string_r );
+    /** \overload for rvalues */
+    void setSearchstring( std::string && string_r );
 
     /** Set a new searchstring and flags. */
     void setSearchstring( const std::string & string_r, const Match & flags_r );
+    /** \overload for rvalues */
+    void setSearchstring( std::string && string_r, const Match & flags_r );
 
     /** The current search flags. */
     const Match & flags() const;
