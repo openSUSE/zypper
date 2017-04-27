@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
 "PO-Revision-Date: 2017-04-27 12:23+0000\n"
-"Last-Translator: Maribel Florido <mflorido@jensen-localization.com>\n"
+"Last-Translator: Mattias Börjesson <mattias@wallacesolutions.net>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
 "Language: sv\n"
@@ -2063,9 +2063,11 @@ msgid "Specified repository '%s' is disabled."
 msgstr "Den angivna lagringsplatsen \"%s\" är inaktiverad."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr "Lägg till eller aktivera arkiv med hjälp av kommandona %s eller %s."
+msgstr ""
+"Det globala alternativet %s kan användas för att tillfälligt aktivera "
+"lagringsplatser."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -4287,6 +4289,9 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Prova också att uppdatera alla paket som inte omfattas av korrigeringar. "
+"Alternativet ignoreras om korrigeringskommandot måste uppdatera "
+"uppdateringsstacken först. Kan inte kombineras med enbart uppdateringsstack."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
