@@ -179,6 +179,13 @@ namespace zypp
      * match, it's also suitable for sub-structure (flexarray) inspection
      * (\see \ref sat::LookupAttr::iterator::solvAttrSubEntry).
      *
+     * (bsc#1035729) If SolvAttr::name searches for an explicit \c kind:name,
+     * this \c kind is stored in \ref kindPredicate and will overwrite any
+     * 'global' kind restriction applied via \ref PoolQuery::addKind. This
+     * task can't be passed off to a predicate, as \ref PoolQueryMatcher::isAMatch
+     * must accept only explicit-kind-checking predicate matches, in case the
+     * 'global' kind restriction woudl otherwise discard the match.
+     *
      * \note: \see \ref addPredicate for further constraints.
      */
     struct AttrMatchData
@@ -189,6 +196,10 @@ namespace zypp
       static bool never( sat::LookupAttr::iterator ) { return false; }
 
       AttrMatchData()
+      {}
+
+      AttrMatchData( sat::SolvAttr attr_r )
+        : attr( attr_r )
       {}
 
       AttrMatchData( sat::SolvAttr attr_r, const StrMatcher & strMatcher_r )
@@ -301,15 +312,18 @@ namespace zypp
      }
 
       sat::SolvAttr    attr;
-      StrMatcher strMatcher;
+      StrMatcher       strMatcher;
       Predicate        predicate;
       std::string      predicateStr;
+      ResKind          kindPredicate = ResKind::nokind;	// holds the 'kind' part if SolvAttr:name looks for an explicit 'kind:name'
     };
 
     /** \relates AttrMatchData */
     inline std::ostream & operator<<( std::ostream & str, const AttrMatchData & obj )
     {
       str << obj.attr << ": " << obj.strMatcher;
+      if ( obj.kindPredicate )
+        str << " +(" << obj.kindPredicate << ")";
       if ( obj.predicate )
         str << " +(" << obj.predicateStr << ")";
       return str;
@@ -620,9 +634,10 @@ attremptycheckend:
           if ( joined.size() > 1 ) // switch to regex for multiple strings
             cflags.setModeRegex();
 
-          _attrMatchList.push_back( AttrMatchData( it->attr,
-                                    StrMatcher( rcstrings, cflags ),
-                                                      it->predicate, it->predicateStr ) );
+	  // copy and exchange the StrMatcher
+	  AttrMatchData nattr( *it );
+	  nattr.strMatcher = StrMatcher( rcstrings, cflags ),
+          _attrMatchList.push_back( std::move(nattr) );
         }
         else
         {
@@ -859,10 +874,14 @@ attremptycheckend:
 
   void PoolQuery::addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition, const Arch & arch )
   {
+    // SolvAttr::name with explicit 'kind:name' will overwrite the default _kinds
+    ResKind explicitKind;
+    if ( attr == sat::SolvAttr::name ) explicitKind = ResKind::explicitBuiltin( name );
+
     switch ( op.inSwitch() )
     {
       case Rel::ANY_e:	// no additional constraint on edition.
-        if ( arch.empty() )	// no additional constraint on arch.
+        if ( arch.empty() && !explicitKind )	// no additional constraint on arch/kind
 	{
 	  addAttribute( attr, name );
 	  return;
@@ -878,7 +897,15 @@ attremptycheckend:
 
     // Match::OTHER indicates need to compile
     // (merge global search strings into name).
-    AttrMatchData attrMatchData( attr, StrMatcher( name, Match::OTHER ) );
+    AttrMatchData attrMatchData( attr );
+    if ( !explicitKind )
+      attrMatchData.strMatcher = StrMatcher( name, Match::OTHER );
+    else
+    {
+      // ResKind::explicitBuiltin call above asserts the presence of the ':' in name
+      attrMatchData.strMatcher = StrMatcher( strchr( name.c_str(), ':')+1, Match::OTHER );
+      attrMatchData.kindPredicate = explicitKind;
+    }
 
     if ( isDependencyAttribute( attr ) )
       attrMatchData.addPredicate( EditionRangePredicate( op, edition, arch ) );
@@ -1614,19 +1641,18 @@ attremptycheckend:
 	  }
 	  /////////////////////////////////////////////////////////////////////
 	  sat::Solvable inSolvable( base_r.inSolvable() );
-	  // Kind restriction:
-	  if ( ! _kinds.empty() && ! inSolvable.isKind( _kinds.begin(), _kinds.end() ) )
-	  {
-            base_r.nextSkipSolvable();
-            return false;
-	  }
-
 	  // Edition restriction:
 	  if ( _op != Rel::ANY && !compareByRel( _op, inSolvable.edition(), _edition, Edition::Match() ) )
 	  {
 	    base_r.nextSkipSolvable();
 	    return false;
 	  }
+
+	  // Kind restriction:
+	  // Delay the decision to nextSkipSolvable and return false, as there may be
+	  // some explicit kind:name predicate which overrules the global kinds.
+	  bool globalKindOk =( _kinds.empty() || inSolvable.isKind( _kinds.begin(), _kinds.end() ) );
+
 	  /////////////////////////////////////////////////////////////////////
 	  // string and predicate matching:
 
@@ -1634,17 +1660,38 @@ attremptycheckend:
           {
             // String matching was done by the base iterator.
             // Now check any predicate:
-            const AttrMatchData::Predicate & predicate( _attrMatchList.front().predicate );
-            if ( ! predicate || predicate( base_r ) )
+	    const AttrMatchData & matchData( _attrMatchList.front() );
+
+	    if ( matchData.kindPredicate )
+	    {
+	      if ( matchData.kindPredicate != inSolvable.kind() )
+	      {
+		base_r.nextSkipSolvable();	// this matchData will never match in this solvable
+		return false;
+	      }
+	    }
+	    else if ( !globalKindOk )
+	      return false;			// only matching kindPredicate could overwrite this
+
+            if ( !matchData.predicate || matchData.predicate( base_r ) )
               return true;
 
-            return false; // no skip as there may be more occurrences od this attr.
+            return false; // no skip as there may be more occurrences in this solvable of this attr.
           }
 
           // Here: search all attributes ;(
           for_( mi, _attrMatchList.begin(), _attrMatchList.end() )
           {
             const AttrMatchData & matchData( *mi );
+
+	    if ( matchData.kindPredicate )
+	    {
+	      if ( matchData.kindPredicate != inSolvable.kind() )
+		continue;			// this matchData does not apply
+	    }
+	    else if ( !globalKindOk )
+	      continue;				// only matching kindPredicate could overwrite this
+
             sat::LookupAttr q( matchData.attr, inSolvable );
             if ( matchData.strMatcher ) // an empty searchstring matches always
               q.setStrMatcher( matchData.strMatcher );
