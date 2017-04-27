@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr 27 16:05:16 CEST 2017 - ma@suse.de
+
+- Fix translation shortcut error (bsc#1035344)
+- version 1.13.25
+
+-------------------------------------------------------------------
 Mon Apr 24 13:47:12 CEST 2017 - ma@suse.de
 
 - patch: add --with-update to install also plain package updates.
