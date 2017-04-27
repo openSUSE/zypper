@@ -21,10 +21,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-03-08 10:16+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2017-04-27 12:15+0000\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1774,6 +1774,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Neustart des Paketmanagers erforderlich. (Führen Sie diesen Befehl nach der "
+"Aktualisierung des Aktualisierungsstapels erneut aus.)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1922,6 +1924,8 @@ msgstr "Unbekanntes Kommando '%s'"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
+"Wenn der Aktualisierungsstapel zuerst aktualisiert wird, wird die Option %s "
+"1 ignoriert."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -4437,6 +4441,10 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Versuchen Sie außerdem, alle Pakete zu aktualisieren, die nicht von Patches "
+"betroffen sind. Wenn mit dem Patch-Befehl zuerst der Aktualisierungsstapel "
+"aktualisiert werden muss, wird diese Option ignoriert. Kann nicht mit „Nur "
+"Aktualisierungsstapel“ kombiniert werden."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2297
