@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:46+0200\n"
-"PO-Revision-Date: 2017-04-27 12:15+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2017-04-27 12:17+0000\n"
+"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -2125,11 +2125,11 @@ msgid "Specified repository '%s' is disabled."
 msgstr "Das angegebene Repository '%s' ist deaktiviert."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
-"Verwenden Sie die Kommandos '%s' oder '%s', um Repositorys hinzuzufügen oder "
-"zu aktivieren."
+"Die globale Option '%s'  kann zur temporären Aktivierung von Repositorys "
+"verwendet werden."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
