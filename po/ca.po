@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-28 19:29+0200\n"
-"PO-Revision-Date: 2017-04-24 14:13+0000\n"
+"PO-Revision-Date: 2017-04-28 17:49+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2969,27 +2969,28 @@ msgid "Trying to exit gracefully..."
 msgstr "S'intenta sortir elegantment..."
 
 #: src/Zypper.cc:86
-#, fuzzy
 msgid "Create a solver test case for debugging."
-msgstr "S'ha produït un error en crear el test de solució."
+msgstr "Crea un cas de prova de resolució per a la depuració."
 
 #: src/Zypper.cc:87
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr ""
+"Força el resolutor a trobar una solució (fins i tot una d'agressiva) més que "
+"no pas preguntis què fer."
 
 #: src/Zypper.cc:88
 msgid "Do not force the solver to find solution, let it ask."
-msgstr ""
+msgstr "No forcis el resolutor a trobar una solució. Deixa que pregunti."
 
 #: src/Zypper.cc:97
 msgid "Install also recommended packages in addition to the required ones."
-msgstr ""
+msgstr "Instal·la també els paquets recomanats a més dels requerits."
 
 #: src/Zypper.cc:98
 msgid "Do not install recommended packages, only required ones."
-msgstr ""
+msgstr "No instal·lis els paquets recomanats, només els requerits."
 
 #: src/Zypper.cc:108
 msgid ""
@@ -3048,9 +3049,8 @@ msgid "Command options:"
 msgstr "Opcions de l'ordre:"
 
 #: src/Zypper.cc:307
-#, fuzzy
 msgid "Solver options:"
-msgstr "Opcions avançades:"
+msgstr "Opcions del resolutor:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
