@@ -75,6 +75,30 @@ using namespace zypp;
     {"not-installed-only",	no_argument, 0, 'u'},	\
     {"uninstalled-only",	no_argument, 0,  0 }
 
+// Solver flag options common to all solving commands
+// (install remove update dup patch verify inr)
+#define ARG_Solver_Flags_Common	\
+    {"debug-solver",		no_argument, 0,  0 },	\
+    {"force-resolution",	no_argument, 0,  0 },	\
+    {"no-force-resolution",	no_argument, 0, 'R'}
+
+#define option_Solver_Flags_Common	\
+     option( "--debug-solver",		_("Create a solver test case for debugging.") )	\
+    .option( "--force-resolution",	_("Force the solver to find a solution (even an aggressive one) rather than asking.") )	\
+    .option( "--no-force-resolution",	_("Do not force the solver to find solution, let it ask.") )
+
+// Solver flag with/without recommends
+// (not used in remove and inr)
+#define ARG_Solver_Flags_Recommends	\
+    {"recommends",		no_argument, 0,  0 },	\
+    {"no-recommends",		no_argument, 0,  0 }
+
+#define option_Solver_Flags_Recommends	\
+     option( "--recommends",		_("Install also recommended packages in addition to the required ones.") )	\
+    .option( "--no-recommends	",	_("Do not install recommended packages, only required ones.") )
+
+
+// with/without optional patches
 #define ARG_WITHout_OPTIONAL	\
     {"with-optional",			no_argument,		&_gopts.exclude_optional_patches, 0 },	\
     {"without-optional",		no_argument,		&_gopts.exclude_optional_patches, 1 }
@@ -278,6 +302,9 @@ namespace
 
     CommandHelpFormater & optionSectionCommandOptions()
     { return optionSection(_("Command options:") ); }
+
+    CommandHelpFormater & optionSectionSolverOptions()
+    { return optionSection(_("Solver options:") ); }
 
     CommandHelpFormater & optionSectionExpertOptions()
     { return optionSection(_("Expert options:") ); }
@@ -1444,14 +1471,11 @@ void Zypper::processCommandOptions()
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       // rug compatibility, we have --auto-agree-with-licenses
       {"agree-to-third-party-licenses",  no_argument,  0,  0 },
-      {"debug-solver",              no_argument,       0,  0 },
-      {"no-force-resolution",       no_argument,       0, 'R'},
-      {"force-resolution",          no_argument,       0,  0 },
+      ARG_Solver_Flags_Common,
+      ARG_Solver_Flags_Recommends,
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
-      {"no-recommends",             no_argument,       0,  0 },
-      {"recommends",                no_argument,       0,  0 },
       {"details",		    no_argument,       0,  0 },
       {"download",                  required_argument, 0,  0 },
       // aliases for --download
@@ -1528,9 +1552,7 @@ void Zypper::processCommandOptions()
       {"name",       no_argument,       0, 'n'},
       {"capability", no_argument,       0, 'C'},
       {"no-confirm", no_argument,       0, 'y'},		// pkg/apt/yum user convenience ==> --non-interactive
-      {"debug-solver", no_argument,     0, 0},
-      {"no-force-resolution", no_argument, 0, 'R'},
-      {"force-resolution", no_argument, 0,  0 },
+      ARG_Solver_Flags_Common,
       {"clean-deps", no_argument,       0, 'u'},
       {"no-clean-deps", no_argument,    0, 'U'},
       {"dry-run",    no_argument,       0, 'D'},
@@ -1621,10 +1643,9 @@ void Zypper::processCommandOptions()
       {"download-in-heaps",         no_argument,       0,  0 },
       {"download-as-needed",        no_argument,       0,  0 },
       {"repo",                      required_argument, 0, 'r'},
-      {"no-recommends",             no_argument,       0,  0 },
-      {"recommends",                no_argument,       0,  0 },
+      ARG_Solver_Flags_Common,
+      ARG_Solver_Flags_Recommends,
       {"help", no_argument, 0, 'h'},
-      {"debug-solver", no_argument, 0, 0},
       {0, 0, 0, 0}
     };
     specific_options = verify_options;
@@ -1666,7 +1687,7 @@ void Zypper::processCommandOptions()
       {"download-in-heaps",         no_argument,       0,  0 },
       {"download-as-needed",        no_argument,       0,  0 },
       {"repo", required_argument, 0, 'r'},
-      {"debug-solver", no_argument, 0, 0},
+      ARG_Solver_Flags_Common,
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2132,11 +2153,8 @@ void Zypper::processCommandOptions()
       // rug compatibility, we have --auto-agree-with-licenses
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"best-effort",               no_argument,       0, 0},
-      {"debug-solver",              no_argument,       0, 0},
-      {"no-force-resolution",       no_argument,       0, 'R'},
-      {"force-resolution",          no_argument,       0,  0 },
-      {"no-recommends",             no_argument,       0,  0 },
-      {"recommends",                no_argument,       0,  0 },
+      ARG_Solver_Flags_Common,
+      ARG_Solver_Flags_Recommends,
       {"replacefiles",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
@@ -2210,9 +2228,8 @@ void Zypper::processCommandOptions()
       {"skip-interactive",          no_argument,       0,  0 },
       {"with-interactive",          no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      {"debug-solver",              no_argument,       0,  0 },
-      {"no-recommends",             no_argument,       0,  0 },
-      {"recommends",                no_argument,       0,  0 },
+      ARG_Solver_Flags_Common,
+      ARG_Solver_Flags_Recommends,
       {"replacefiles",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       {"details",		    no_argument,       0,  0 },
@@ -2321,11 +2338,8 @@ void Zypper::processCommandOptions()
       {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
       {"repo",                      required_argument, 0, 'r'},
       {"from",                      required_argument, 0,  0 },
-      {"no-recommends",             no_argument,       0,  0 },
-      {"recommends",                no_argument,       0,  0 },
       {"replacefiles",              no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      {"debug-solver",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
@@ -2337,6 +2351,9 @@ void Zypper::processCommandOptions()
       {"download-in-advance",       no_argument,       0,  0 },
       {"download-in-heaps",         no_argument,       0,  0 },
       {"download-as-needed",        no_argument,       0,  0 },
+      // solver flags
+      ARG_Solver_Flags_Common,
+      ARG_Solver_Flags_Recommends,
       // dup solver flags
       {"allow-downgrade",           no_argument,       &myOpts->_dupAllowDowngrade, 1 },
       {"no-allow-downgrade",        no_argument,       &myOpts->_dupAllowDowngrade, 0 },
@@ -2378,6 +2395,11 @@ void Zypper::processCommandOptions()
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
       .option( "-y, --no-confirm",		_("Don't require user interaction. Alias for the --non-interactive global option.") )
+#if 0
+      .optionSectionSolverOptions()
+      .option_Solver_Flags_Common
+      .option_Solver_Flags_Recommends
+#endif
       .optionSectionExpertOptions()
       .option( "--allow-downgrade" )
       .option( "--no-allow-downgrade",		_("Whether to allow downgrading installed resolvables.") )
