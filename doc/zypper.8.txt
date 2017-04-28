@@ -6,6 +6,7 @@ ZYPPER(8)
 :openbr: {
 :closebr: }
 :asterisk: *
+:incdir: zypper.8.d
 
 NAME
 ----
@@ -238,20 +239,8 @@ Package Management Commands
 	*-l*, *--auto-agree-with-licenses*::
 		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
-	*--debug-solver*::
-		Create solver test case for debugging. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper.solverTestCase directory to your bug report. To use this option, simply add it to the problematic install or remove command.
-
-	*--no-recommends*::
-		By default, zypper installs also packages recommended by the requested ones. This option causes the recommended packages to be ignored and only the required ones to be installed.
-
 	*--replacefiles*::
 		Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. *--download-as-needed* disables the file conflict check because access to all packages file lists is needed in advance in order to perform the check.
-
-	*-R*, *--no-force-resolution*::
-		Do not force the solver to find a solution. Instead, report dependency problems and prompt the user to resolve them manually.
-
-	*--force-resolution*::
-		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove*). This option overrides *--no-force-resolution* in case both are specified on the command line.
 
 	*-D*, *--dry-run*::
 		Test the installation, do not actually install any package. This option will add the *--test* option to the rpm commands run by the install command.
@@ -261,6 +250,10 @@ Package Management Commands
 
 	*-y*, *--no-confirm*::
 		Don't require user interaction. Alias for the --non-interactive global option.
+
+	Solver related options: :: {nop}
+include::{incdir}/option_Solver_Flags_Common.txt[]
+include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
 	Download-and-install mode options: :: {nop}
 
@@ -338,9 +331,6 @@ Package Management Commands
 	In case that any dependency problems are found, zypper suggests packages to install or remove to fix them.
 +
 --
-	*--no-recommends*::
-		By default, zypper installs also packages recommended by the requested ones (the ones needed to fix broken dependencies in this case). This option causes the recommended packages to be ignored and only the required ones to be installed.
-
 	*-D*, *--dry-run*::
 		Test the repair, do not actually do anything to the system.
 
@@ -350,11 +340,12 @@ Package Management Commands
 	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
-	*--debug-solver*::
-		Create solver test case for debugging. See the install command for details.
-
 	*-y*, *--no-confirm*::
 		Don't require user interaction. Alias for the --non-interactive global option.
+
+	Solver related options: :: {nop}
+include::{incdir}/option_Solver_Flags_Common.txt[]
+include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
 	This command also accepts the *Download-and-install mode options* described in the *install* command.:: {nop}
 --
@@ -372,10 +363,11 @@ Package Management Commands
 	*--details*::
 		Show the detailed installation summary.
 
-	*--debug-solver*::
-		Create solver test case for debugging. See the install command for details.
+	Solver related options: :: {nop}
+include::{incdir}/option_Solver_Flags_Common.txt[]
+// not supported here! //include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
-	This command also accepts the *Download-and-install mode options* described in the *install* command.:: {nop}
+This command also accepts the *Download-and-install mode options* described in the *install* command.:: {nop}
 --
 
 *remove* (*rm*) ['options'] 'name'...:: {nop}
@@ -401,21 +393,6 @@ Package Management Commands
 	*-C*, *--capability*::
 		Select packages by capabilities.
 
-	*--debug-solver*::
-		Create solver test case for debugging. See the install command for details.
-
-	*-R*, *--no-force-resolution*::
-		Do not force the solver to find a solution. Instead, report dependency problems and prompt the user to resolve them manually.
-
-	*--force-resolution*::
-		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove*). This option overrides *--no-force-resolution* in case both are specified on the command line.
-
-	*-u*, *--clean-deps*::
-		Automatically remove dependencies which become unneeded after removal of requested packages.
-
-	*-U*, *--no-clean-deps*::
-		No automatic removal of unneeded dependencies.
-
 	*-D*, *--dry-run*::
 		Test the removal of packages, do not actually remove anything. This option will add the *--test* option to the rpm commands run by the remove command.
 
@@ -424,6 +401,16 @@ Package Management Commands
 
 	*-y*, *--no-confirm*::
 		Don't require user interaction. Alias for the --non-interactive global option.
+
+	Solver related options: :: {nop}
+include::{incdir}/option_Solver_Flags_Common.txt[]
+// not supported here! //include::{incdir}/option_Solver_Flags_Recommends.txt[]
+
+	*-u*, *--clean-deps*::
+		Automatically remove dependencies which become unneeded after removal of requested packages.
+
+	*-U*, *--no-clean-deps*::
+		No automatic removal of unneeded dependencies.
 --
 
 Update Management Commands
@@ -475,20 +462,8 @@ Update Management Commands
 	*-l*, *--auto-agree-with-licenses*::
 		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
-	*--debug-solver*::
-		Create solver test case for debugging. See the install command for details.
-
-	*--no-recommends*::
-		By default, zypper installs also packages recommended by the requested ones. This option causes the recommended packages to be ignored and only the required ones to be installed.
-
 	*--replacefiles*::
 		Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. *--download-as-needed* disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
-
-	*-R*, *--no-force-resolution*::
-		Do not force the solver to find a solution. Instead, report dependency problems and prompt the user to resolve them manually.
-
-	*--force-resolution*::
-		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove*). This option overrides *--no-force-resolution* in case both are specified on the command line.
 
 	*-D*, *--dry-run*::
 		Test the update, do not actually install or update any package. This option will add the *--test* option to the rpm commands run by the update command.
@@ -501,6 +476,10 @@ Update Management Commands
 
 	*-y*, *--no-confirm*::
 		Don't require user interaction. Alias for the --non-interactive global option.
+
+	Solver related options: :: {nop}
+include::{incdir}/option_Solver_Flags_Common.txt[]
+include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
 	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 --
@@ -603,24 +582,21 @@ Update Management Commands
 	*-l*, *--auto-agree-with-licenses*::
 		See the *update* command for description of this option.
 
-	*--no-recommends*::
-		By default, zypper installs also packages recommended by the requested ones. This option causes the recommended packages to be ignored and only the required ones to be installed.
-
 	*--replacefiles*::
 		Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. *--download-as-needed* disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
 
-	*--debug-solver*::
-		Create test case for debugging of dependency resolver.
-
 	*-D*, *--dry-run*::
 		Test the update, do not actually update.
-
 
 	*--details*::
 		Show the detailed installation summary.
 
 	*-y*, *--no-confirm*::
 		Don't require user interaction. Alias for the --non-interactive global option.
+
+	Solver related options: :: {nop}
+include::{incdir}/option_Solver_Flags_Common.txt[]
+include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
 	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 --
@@ -646,14 +622,8 @@ Update Management Commands
 	*-l*, *--auto-agree-with-licenses*::
 		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
-	*--no-recommends*::
-		By default, zypper installs also packages recommended by the requested ones. This option causes the recommended packages to be ignored and only the required ones to be installed.
-
 	*--replacefiles*::
 		Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. *--download-as-needed* disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
-
-	*--debug-solver*::
-		Create solver test case for debugging. See the install command for details.
 
 	*-D*, *--dry-run*::
 		Test the upgrade, do not actually install or update any package. This option will add the *--test* option to the rpm commands run by the dist-upgrade command.
@@ -664,9 +634,11 @@ Update Management Commands
 	*--details*::
 		Show the detailed installation summary.
 
-	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
+	Solver related options: :: {nop}
+include::{incdir}/option_Solver_Flags_Common.txt[]
+include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
-	*Expert Options:* :: Don't use them unless you know you need them.
+	Expert Options: :: Don't use them unless you know you need them.
 
 	*--*[*no-*]*allow-downgrade*::
 		Whether to allow downgrading installed resolvables [zypp.conf:solver.dupAllowDowngrade].
@@ -680,6 +652,7 @@ Update Management Commands
 	*--*[*no-*]*allow-vendor-change*::
 		Whether to allow changing the vendor of installed resolvables [zypp.conf:solver.dupAllowVendorChange]. Setting this to *no* might be useful if you do not want packages from foreign repos being dup'ed to the distributions version (or vice versa).
 
+	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 
 	Examples: :: {nop}
 

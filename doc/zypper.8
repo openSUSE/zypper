@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 04/24/2017
+.\"      Date: 04/28/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "04/24/2017" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "04/28/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -445,33 +445,11 @@ Automatically say
 to third party license confirmation prompt\&. By using this option, you choose to agree with licenses of all third\-party software this command will install\&. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before\&.
 .RE
 .PP
-\fB\-\-debug\-solver\fR
-.RS 4
-Create solver test case for debugging\&. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper\&.solverTestCase directory to your bug report\&. To use this option, simply add it to the problematic install or remove command\&.
-.RE
-.PP
-\fB\-\-no\-recommends\fR
-.RS 4
-By default, zypper installs also packages recommended by the requested ones\&. This option causes the recommended packages to be ignored and only the required ones to be installed\&.
-.RE
-.PP
 \fB\-\-replacefiles\fR
 .RS 4
 Install the packages even if they replace files from other, already installed, packages\&. Default is to treat file conflicts as an error\&.
 \fB\-\-download\-as\-needed\fR
 disables the file conflict check because access to all packages file lists is needed in advance in order to perform the check\&.
-.RE
-.PP
-\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
-.RS 4
-Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&.
-.RE
-.PP
-\fB\-\-force\-resolution\fR
-.RS 4
-Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
-\fB\-\-no\-force\-resolution\fR
-in case both are specified on the command line\&.
 .RE
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
@@ -489,6 +467,37 @@ Show the detailed installation summary\&.
 \fB\-y\fR, \fB\-\-no\-confirm\fR
 .RS 4
 Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
+.RE
+.PP
+Solver related options:
+.RS 4
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper\&.solverTestCase directory to your bug report\&. To use this option, simply add it to the problematic install or remove command\&.
+.RE
+.PP
+\fB\-\-force\-resolution\fR
+.RS 4
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
+\fB\-\-no\-force\-resolution\fR
+in case both are specified on the command line\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
+.RS 4
+Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&. This is the default except when removing packages (\fBzypper remove\fR)\&.
+.RE
+.PP
+\fB\-\-recommends\fR
+.RS 4
+Install also recommended packages in addition to the required ones\&. The default behavior is determined by [zypp\&.conf:solver\&.onlyRequires]\&.
+.RE
+.PP
+\fB\-\-no\-recommends\fR
+.RS 4
+Do not install recommended packages, but only required ones\&. The default behavior is determined by [zypp\&.conf:solver\&.onlyRequires]\&.
 .RE
 .PP
 Download\-and\-install mode options:
@@ -615,11 +624,6 @@ Check whether dependencies of installed packages are satisfied\&.
 
 In case that any dependency problems are found, zypper suggests packages to install or remove to fix them\&.
 .PP
-\fB\-\-no\-recommends\fR
-.RS 4
-By default, zypper installs also packages recommended by the requested ones (the ones needed to fix broken dependencies in this case)\&. This option causes the recommended packages to be ignored and only the required ones to be installed\&.
-.RE
-.PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
 .RS 4
 Test the repair, do not actually do anything to the system\&.
@@ -635,14 +639,40 @@ Show the detailed installation summary\&.
 Work only with the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
 .RE
 .PP
-\fB\-\-debug\-solver\fR
-.RS 4
-Create solver test case for debugging\&. See the install command for details\&.
-.RE
-.PP
 \fB\-y\fR, \fB\-\-no\-confirm\fR
 .RS 4
 Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
+.RE
+.PP
+Solver related options:
+.RS 4
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper\&.solverTestCase directory to your bug report\&. To use this option, simply add it to the problematic install or remove command\&.
+.RE
+.PP
+\fB\-\-force\-resolution\fR
+.RS 4
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
+\fB\-\-no\-force\-resolution\fR
+in case both are specified on the command line\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
+.RS 4
+Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&. This is the default except when removing packages (\fBzypper remove\fR)\&.
+.RE
+.PP
+\fB\-\-recommends\fR
+.RS 4
+Install also recommended packages in addition to the required ones\&. The default behavior is determined by [zypp\&.conf:solver\&.onlyRequires]\&.
+.RE
+.PP
+\fB\-\-no\-recommends\fR
+.RS 4
+Do not install recommended packages, but only required ones\&. The default behavior is determined by [zypp\&.conf:solver\&.onlyRequires]\&.
 .RE
 .PP
 This command also accepts the \fBDownload\-and\-install mode options\fR described in the \fBinstall\fR command\&.
@@ -669,9 +699,25 @@ Test the installation, do not actually install anything\&.
 Show the detailed installation summary\&.
 .RE
 .PP
+Solver related options:
+.RS 4
+.RE
+.PP
 \fB\-\-debug\-solver\fR
 .RS 4
-Create solver test case for debugging\&. See the install command for details\&.
+Create solver test case for debugging\&. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper\&.solverTestCase directory to your bug report\&. To use this option, simply add it to the problematic install or remove command\&.
+.RE
+.PP
+\fB\-\-force\-resolution\fR
+.RS 4
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
+\fB\-\-no\-force\-resolution\fR
+in case both are specified on the command line\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
+.RS 4
+Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&. This is the default except when removing packages (\fBzypper remove\fR)\&.
 .RE
 .PP
 This command also accepts the \fBDownload\-and\-install mode options\fR described in the \fBinstall\fR command\&.
@@ -720,33 +766,6 @@ Select packages by their name (default)\&.
 Select packages by capabilities\&.
 .RE
 .PP
-\fB\-\-debug\-solver\fR
-.RS 4
-Create solver test case for debugging\&. See the install command for details\&.
-.RE
-.PP
-\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
-.RS 4
-Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&.
-.RE
-.PP
-\fB\-\-force\-resolution\fR
-.RS 4
-Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
-\fB\-\-no\-force\-resolution\fR
-in case both are specified on the command line\&.
-.RE
-.PP
-\fB\-u\fR, \fB\-\-clean\-deps\fR
-.RS 4
-Automatically remove dependencies which become unneeded after removal of requested packages\&.
-.RE
-.PP
-\fB\-U\fR, \fB\-\-no\-clean\-deps\fR
-.RS 4
-No automatic removal of unneeded dependencies\&.
-.RE
-.PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
 .RS 4
 Test the removal of packages, do not actually remove anything\&. This option will add the
@@ -762,6 +781,37 @@ Show the detailed installation summary\&.
 \fB\-y\fR, \fB\-\-no\-confirm\fR
 .RS 4
 Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
+.RE
+.PP
+Solver related options:
+.RS 4
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper\&.solverTestCase directory to your bug report\&. To use this option, simply add it to the problematic install or remove command\&.
+.RE
+.PP
+\fB\-\-force\-resolution\fR
+.RS 4
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
+\fB\-\-no\-force\-resolution\fR
+in case both are specified on the command line\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
+.RS 4
+Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&. This is the default except when removing packages (\fBzypper remove\fR)\&.
+.RE
+.PP
+\fB\-u\fR, \fB\-\-clean\-deps\fR
+.RS 4
+Automatically remove dependencies which become unneeded after removal of requested packages\&.
+.RE
+.PP
+\fB\-U\fR, \fB\-\-no\-clean\-deps\fR
+.RS 4
+No automatic removal of unneeded dependencies\&.
 .RE
 .RE
 .SS "Update Management Commands"
@@ -855,33 +905,11 @@ Automatically say
 to third party license confirmation prompt\&. By using this option, you choose to agree with licenses of all third\-party software this command will install\&. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before\&.
 .RE
 .PP
-\fB\-\-debug\-solver\fR
-.RS 4
-Create solver test case for debugging\&. See the install command for details\&.
-.RE
-.PP
-\fB\-\-no\-recommends\fR
-.RS 4
-By default, zypper installs also packages recommended by the requested ones\&. This option causes the recommended packages to be ignored and only the required ones to be installed\&.
-.RE
-.PP
 \fB\-\-replacefiles\fR
 .RS 4
 Install the packages even if they replace files from other, already installed, packages\&. Default is to treat file conflicts as an error\&.
 \fB\-\-download\-as\-needed\fR
 disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check\&.
-.RE
-.PP
-\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
-.RS 4
-Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&.
-.RE
-.PP
-\fB\-\-force\-resolution\fR
-.RS 4
-Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
-\fB\-\-no\-force\-resolution\fR
-in case both are specified on the command line\&.
 .RE
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
@@ -906,6 +934,37 @@ approach to update\&. This method does not explicitly select packages with best 
 \fB\-y\fR, \fB\-\-no\-confirm\fR
 .RS 4
 Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
+.RE
+.PP
+Solver related options:
+.RS 4
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper\&.solverTestCase directory to your bug report\&. To use this option, simply add it to the problematic install or remove command\&.
+.RE
+.PP
+\fB\-\-force\-resolution\fR
+.RS 4
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
+\fB\-\-no\-force\-resolution\fR
+in case both are specified on the command line\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
+.RS 4
+Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&. This is the default except when removing packages (\fBzypper remove\fR)\&.
+.RE
+.PP
+\fB\-\-recommends\fR
+.RS 4
+Install also recommended packages in addition to the required ones\&. The default behavior is determined by [zypp\&.conf:solver\&.onlyRequires]\&.
+.RE
+.PP
+\fB\-\-no\-recommends\fR
+.RS 4
+Do not install recommended packages, but only required ones\&. The default behavior is determined by [zypp\&.conf:solver\&.onlyRequires]\&.
 .RE
 .PP
 This command also accepts the \fBDownload\-and\-install mode options\fR described in the \fBinstall\fR command description\&.
@@ -1108,21 +1167,11 @@ See the
 command for description of this option\&.
 .RE
 .PP
-\fB\-\-no\-recommends\fR
-.RS 4
-By default, zypper installs also packages recommended by the requested ones\&. This option causes the recommended packages to be ignored and only the required ones to be installed\&.
-.RE
-.PP
 \fB\-\-replacefiles\fR
 .RS 4
 Install the packages even if they replace files from other, already installed, packages\&. Default is to treat file conflicts as an error\&.
 \fB\-\-download\-as\-needed\fR
 disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check\&.
-.RE
-.PP
-\fB\-\-debug\-solver\fR
-.RS 4
-Create test case for debugging of dependency resolver\&.
 .RE
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
@@ -1138,6 +1187,37 @@ Show the detailed installation summary\&.
 \fB\-y\fR, \fB\-\-no\-confirm\fR
 .RS 4
 Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
+.RE
+.PP
+Solver related options:
+.RS 4
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper\&.solverTestCase directory to your bug report\&. To use this option, simply add it to the problematic install or remove command\&.
+.RE
+.PP
+\fB\-\-force\-resolution\fR
+.RS 4
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
+\fB\-\-no\-force\-resolution\fR
+in case both are specified on the command line\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
+.RS 4
+Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&. This is the default except when removing packages (\fBzypper remove\fR)\&.
+.RE
+.PP
+\fB\-\-recommends\fR
+.RS 4
+Install also recommended packages in addition to the required ones\&. The default behavior is determined by [zypp\&.conf:solver\&.onlyRequires]\&.
+.RE
+.PP
+\fB\-\-no\-recommends\fR
+.RS 4
+Do not install recommended packages, but only required ones\&. The default behavior is determined by [zypp\&.conf:solver\&.onlyRequires]\&.
 .RE
 .PP
 This command also accepts the \fBDownload\-and\-install mode options\fR described in the \fBinstall\fR command description\&.
@@ -1200,21 +1280,11 @@ Automatically say
 to third party license confirmation prompt\&. By using this option, you choose to agree with licenses of all third\-party software this command will install\&. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before\&.
 .RE
 .PP
-\fB\-\-no\-recommends\fR
-.RS 4
-By default, zypper installs also packages recommended by the requested ones\&. This option causes the recommended packages to be ignored and only the required ones to be installed\&.
-.RE
-.PP
 \fB\-\-replacefiles\fR
 .RS 4
 Install the packages even if they replace files from other, already installed, packages\&. Default is to treat file conflicts as an error\&.
 \fB\-\-download\-as\-needed\fR
 disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check\&.
-.RE
-.PP
-\fB\-\-debug\-solver\fR
-.RS 4
-Create solver test case for debugging\&. See the install command for details\&.
 .RE
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
@@ -1234,11 +1304,38 @@ Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global o
 Show the detailed installation summary\&.
 .RE
 .PP
-This command also accepts the \fBDownload\-and\-install mode options\fR described in the \fBinstall\fR command description\&.
+Solver related options:
 .RS 4
 .RE
 .PP
-\fBExpert Options:\fR
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper\&.solverTestCase directory to your bug report\&. To use this option, simply add it to the problematic install or remove command\&.
+.RE
+.PP
+\fB\-\-force\-resolution\fR
+.RS 4
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove\fR)\&. This option overrides
+\fB\-\-no\-force\-resolution\fR
+in case both are specified on the command line\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
+.RS 4
+Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&. This is the default except when removing packages (\fBzypper remove\fR)\&.
+.RE
+.PP
+\fB\-\-recommends\fR
+.RS 4
+Install also recommended packages in addition to the required ones\&. The default behavior is determined by [zypp\&.conf:solver\&.onlyRequires]\&.
+.RE
+.PP
+\fB\-\-no\-recommends\fR
+.RS 4
+Do not install recommended packages, but only required ones\&. The default behavior is determined by [zypp\&.conf:solver\&.onlyRequires]\&.
+.RE
+.PP
+Expert Options:
 .RS 4
 Don\(cqt use them unless you know you need them\&.
 .RE
@@ -1265,6 +1362,10 @@ Whether to allow changing the architecture of installed resolvables [zypp\&.conf
 Whether to allow changing the vendor of installed resolvables [zypp\&.conf:solver\&.dupAllowVendorChange]\&. Setting this to
 \fBno\fR
 might be useful if you do not want packages from foreign repos being dup\(cqed to the distributions version (or vice versa)\&.
+.RE
+.PP
+This command also accepts the \fBDownload\-and\-install mode options\fR described in the \fBinstall\fR command description\&.
+.RS 4
 .RE
 .PP
 Examples:

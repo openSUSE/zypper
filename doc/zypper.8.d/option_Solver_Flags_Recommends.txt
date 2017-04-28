@@ -1,0 +1,5 @@
+*--recommends*::
+	Install also recommended packages in addition to the required ones. The default behavior is determined by [zypp.conf:solver.onlyRequires].
+
+*--no-recommends*::
+	Do not install recommended packages, but only required ones. The default behavior is determined by [zypp.conf:solver.onlyRequires].
