@@ -6,15 +6,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-28 19:29+0200\n"
-"PO-Revision-Date: 2017-04-24 20:08+0100\n"
+"PO-Revision-Date: 2017-04-30 14:06+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:55
 msgid "Repository:"
@@ -3097,9 +3098,8 @@ msgid "Command options:"
 msgstr "Voľby príkazu:"
 
 #: src/Zypper.cc:307
-#, fuzzy
 msgid "Solver options:"
-msgstr "Pokročilé možnosti:"
+msgstr "Voľby riešiteľa:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
@@ -5680,17 +5680,16 @@ msgstr "Vypočítavam povýšenie..."
 
 #: src/solve-commit.cc:396
 msgid "Generating solver test case..."
-msgstr "Generujem testovací prípad pre riešiteľa závislostí..."
+msgstr "Generujem testovací prípad pre riešiteľa..."
 
 #: src/solve-commit.cc:398
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr ""
-"Testovací prípad pre riešiteľa závislostí bol úspešne vygenerovaný v %s."
+msgstr "Testovací prípad pre riešiteľa bol úspešne vygenerovaný v %s."
 
 #: src/solve-commit.cc:401
 msgid "Error creating the solver test case."
-msgstr "Chyba pri vytváraní testovacieho prípadu pre riešiteľa závislostí."
+msgstr "Chyba pri vytváraní testovacieho prípadu pre riešiteľa."
 
 #: src/solve-commit.cc:435
 #, c-format, boost-format
@@ -5794,8 +5793,8 @@ msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
-"Znovu spustiť riešenie závislostí bez vynúteného riešenia a zobraziť "
-"problémy so závislosťami."
+"Znovu spustiť riešiteľa v režime bez vynúteného riešenia a zobraziť problémy "
+"so závislosťami."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:658
