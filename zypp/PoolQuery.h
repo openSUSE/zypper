@@ -141,6 +141,13 @@ namespace zypp
      * By default, all kinds will be returned. If addKind() is used,
      * only the specified kinds will be returned (multiple kinds will be ORed).
      *
+     * \note This kind filter does not apply if you explicitly specify a ResKind
+     * when searching for \c sat::SolvAttr::name. The following will always match
+     * and include the kernel \c packages, no matter which kind filter is set.
+     * \code
+     *   addDependency( sat::SolvAttr::name, "package:kernel" );
+     * \endcode
+     *
      * Pass ResKind constants to this method, (e.g. ResKind::package).
      */
     void addKind(const ResKind & kind);
