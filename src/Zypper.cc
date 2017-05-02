@@ -1520,14 +1520,6 @@ void Zypper::processCommandOptions()
       "                            Automatically say 'yes' to third party license\n"
       "                            confirmation prompt.\n"
       "                            See 'man zypper' for more details.\n"
-      "    --debug-solver          Create solver test case for debugging.\n"
-      "    --no-recommends         Do not install recommended packages, only required.\n"
-      "    --recommends            Install also recommended packages in addition\n"
-      "                            to the required.\n"
-      "-R, --no-force-resolution   Do not force the solver to find solution,\n"
-      "                            let it ask.\n"
-      "    --force-resolution      Force the solver to find a solution (even\n"
-      "                            an aggressive one).\n"
       "-D, --dry-run               Test the installation, do not actually install.\n"
       "    --details               Show the detailed installation summary.\n"
       "    --download              Set the download-install mode. Available modes:\n"
@@ -1537,6 +1529,10 @@ void Zypper::processCommandOptions()
        "package",
        "only, in-advance, in-heaps, as-needed") )
     .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+
+    .optionSectionSolverOptions()
+    .option_Solver_Flags_Common
+    .option_Solver_Flags_Recommends
     ;
     break;
   }
@@ -1579,17 +1575,15 @@ void Zypper::processCommandOptions()
       "                            Default: %s.\n"
       "-n, --name                  Select packages by plain name, not by capability.\n"
       "-C, --capability            Select packages by capability.\n"
-      "    --debug-solver          Create solver test case for debugging.\n"
-      "-R, --no-force-resolution   Do not force the solver to find solution,\n"
-      "                            let it ask.\n"
-      "    --force-resolution      Force the solver to find a solution (even\n"
-      "                            an aggressive one).\n"
       "-u, --clean-deps            Automatically remove unneeded dependencies.\n"
       "-U, --no-clean-deps         No automatic removal of unneeded dependencies.\n"
       "-D, --dry-run               Test the removal, do not actually remove.\n"
       "    --details               Show the detailed installation summary.\n"
       ), "package, patch, pattern, product", "package") )
     .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+
+    .optionSectionSolverOptions()
+    .option_Solver_Flags_Common
     ;
     break;
   }
@@ -1659,9 +1653,6 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
-      "    --no-recommends         Do not install recommended packages, only required.\n"
-      "    --recommends            Install also packages recommended by newly installed\n"
-      "                            ones.\n"
       "-D, --dry-run               Test the repair, do not actually do anything to\n"
       "                            the system.\n"
       "    --details               Show the detailed installation summary.\n"
@@ -1670,6 +1661,10 @@ void Zypper::processCommandOptions()
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
     .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+
+    .optionSectionSolverOptions()
+    .option_Solver_Flags_Common
+    .option_Solver_Flags_Recommends
     ;
     break;
   }
@@ -1692,7 +1687,8 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = str::form(_(
+    _command_help = ( CommandHelpFormater()
+      << str::form(_(
       "install-new-recommends (inr) [options]\n"
       "\n"
       "Install newly added packages recommended by already installed packages."
@@ -1706,8 +1702,11 @@ void Zypper::processCommandOptions()
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-      "    --debug-solver          Create solver test case for debugging.\n"
-    ), "only, in-advance, in-heaps, as-needed");
+    ), "only, in-advance, in-heaps, as-needed") )
+
+    .optionSectionSolverOptions()
+    .option_Solver_Flags_Common
+    ;
     break;
   }
 
@@ -2194,17 +2193,9 @@ void Zypper::processCommandOptions()
       "    --best-effort           Do a 'best effort' approach to update. Updates\n"
       "                            to a lower than the latest version are\n"
       "                            also acceptable.\n"
-      "    --debug-solver          Create solver test case for debugging.\n"
-      "    --no-recommends         Do not install recommended packages, only required.\n"
-      "    --recommends            Install also recommended packages in addition\n"
-      "                            to the required.\n"
       "    --replacefiles          Install the packages even if they replace files from other,\n"
       "                            already installed, packages. Default is to treat file conflicts\n"
       "                            as an error. --download-as-needed disables the fileconflict check.\n"
-      "-R, --no-force-resolution   Do not force the solver to find solution,\n"
-      "                            let it ask.\n"
-      "    --force-resolution      Force the solver to find a solution (even\n"
-      "                            an aggressive one).\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
       "    --details               Show the detailed installation summary.\n"
       "    --download              Set the download-install mode. Available modes:\n"
@@ -2214,6 +2205,10 @@ void Zypper::processCommandOptions()
          "package",
          "only, in-advance, in-heaps, as-needed") )
     .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+
+    .optionSectionSolverOptions()
+    .option_Solver_Flags_Common
+    .option_Solver_Flags_Recommends
     ;
     break;
   }
@@ -2270,10 +2265,6 @@ void Zypper::processCommandOptions()
       "-g  --category <category>   Install only patches with this category.\n"
       "    --severity <severity>   Install only patches with this severity.\n"
       "    --date <YYYY-MM-DD>     Install only patches issued up to, but not including, the specified date\n"
-      "    --debug-solver          Create solver test case for debugging.\n"
-      "    --no-recommends         Do not install recommended packages, only required.\n"
-      "    --recommends            Install also recommended packages in addition\n"
-      "                            to the required.\n"
       "    --replacefiles          Install the packages even if they replace files from other,\n"
       "                            already installed, packages. Default is to treat file conflicts\n"
       "                            as an error. --download-as-needed disables the fileconflict check.\n"
@@ -2288,6 +2279,10 @@ void Zypper::processCommandOptions()
       .option("--with-update",		_("Additionally try to update all packages not covered by patches. The option is ignored, if the patch command must update the update stack first. Can not be combined with --updatestack-only.") )
       .option_WITHout_OPTIONAL
       .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+
+      .optionSectionSolverOptions()
+      .option_Solver_Flags_Common
+      .option_Solver_Flags_Recommends
       ;
     break;
   }
@@ -2381,10 +2376,6 @@ void Zypper::processCommandOptions()
       "                            Automatically say 'yes' to third party license\n"
       "                            confirmation prompt.\n"
       "                            See man zypper for more details.\n"
-      "    --debug-solver          Create solver test case for debugging\n"
-      "    --no-recommends         Do not install recommended packages, only required.\n"
-      "    --recommends            Install also recommended packages in addition\n"
-      "                            to the required.\n"
       "    --replacefiles          Install the packages even if they replace files from other,\n"
       "                            already installed, packages. Default is to treat file conflicts\n"
       "                            as an error. --download-as-needed disables the fileconflict check.\n"
@@ -2395,11 +2386,11 @@ void Zypper::processCommandOptions()
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
       .option( "-y, --no-confirm",		_("Don't require user interaction. Alias for the --non-interactive global option.") )
-#if 0
+
       .optionSectionSolverOptions()
       .option_Solver_Flags_Common
       .option_Solver_Flags_Recommends
-#endif
+
       .optionSectionExpertOptions()
       .option( "--allow-downgrade" )
       .option( "--no-allow-downgrade",		_("Whether to allow downgrading installed resolvables.") )
