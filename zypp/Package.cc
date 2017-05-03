@@ -23,6 +23,47 @@
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
+namespace zyppintern
+{
+  using namespace zypp;
+
+  inline bool schemeIsLocalDir( const Url & url_r )
+  {
+      const std::string & s( url_r.getScheme() );
+      return s == "dir" || s == "file";
+  }
+
+  // here and from SrcPackage.cc
+  Pathname cachedLocation( const OnMediaLocation & loc_r, const RepoInfo & repo_r )
+  {
+    PathInfo pi( repo_r.packagesPath() / loc_r.filename() );
+
+    if ( ! pi.isExist() )
+      return Pathname();	// no file in cache
+
+    if ( loc_r.checksum().empty() )
+    {
+      Url url( repo_r.url() );
+      if ( ! schemeIsLocalDir( url ) )
+	return Pathname();	// same name but no checksum to verify
+
+      // for local repos compare with the checksum in repo
+      if ( CheckSum( CheckSum::md5Type(), std::ifstream( (url.getPathName() / loc_r.filename()).c_str() ) )
+	!= CheckSum( CheckSum::md5Type(), std::ifstream( pi.c_str() ) ) )
+	return Pathname();	// same name but wrong checksum
+    }
+    else
+    {
+      if ( loc_r.checksum() != CheckSum( loc_r.checksum().type(), std::ifstream( pi.c_str() ) ) )
+	return Pathname();	// same name but wrong checksum
+    }
+
+    return pi.path();		// the right one
+  }
+} // namespace zyppintern
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
@@ -160,42 +201,8 @@ namespace zypp
   OnMediaLocation Package::location() const
   { return lookupLocation(); }
 
-  namespace
-  {
-    bool schemeIsLocalDir( const Url & url_r )
-    {
-      std::string s( url_r.getScheme() );
-      return s == "dir" || s == "file";
-    }
-  }
-
   Pathname Package::cachedLocation() const
-  {
-    OnMediaLocation loc( location() );
-    PathInfo pi( repoInfo().packagesPath() / loc.filename() );
-
-    if ( ! pi.isExist() )
-      return Pathname();	// no file in cache
-
-    if ( loc.checksum().empty() )
-    {
-      Url url( repoInfo().url() );
-      if ( ! schemeIsLocalDir( url ) )
-	return Pathname();	// same name but no checksum to verify
-
-      // for local repos compare with the checksum in repo
-      if ( CheckSum( CheckSum::md5Type(), std::ifstream( (url.getPathName() / loc.filename()).c_str() ) )
-	!= CheckSum( CheckSum::md5Type(), std::ifstream( pi.c_str() ) ) )
-	return Pathname();	// same name but wrong checksum
-    }
-    else
-    {
-      if ( loc.checksum() != CheckSum( loc.checksum().type(), std::ifstream( pi.c_str() ) ) )
-	return Pathname();	// same name but wrong checksum
-    }
-
-    return pi.path();		// the right one
-  }
+  { return zyppintern::cachedLocation( location(), repoInfo() ); }
 
   std::string Package::sourcePkgName() const
   {

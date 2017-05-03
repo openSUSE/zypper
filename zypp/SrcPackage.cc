@@ -10,6 +10,14 @@
  *
 */
 #include "zypp/SrcPackage.h"
+///////////////////////////////////////////////////////////////////
+namespace zyppintern
+{
+  using namespace zypp;
+  // in Package.cc
+  Pathname cachedLocation( const OnMediaLocation & loc_r, const RepoInfo & repo_r );
+} // namespace zyppintern
+///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -45,6 +53,9 @@ namespace zypp
 
   OnMediaLocation SrcPackage::location() const
   { return lookupLocation(); }
+
+  Pathname SrcPackage::cachedLocation() const
+  { return zyppintern::cachedLocation( location(), repoInfo() ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
