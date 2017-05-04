@@ -64,11 +64,9 @@ namespace zypp
       /** Ctor taking the Package to provide. */
       Impl( RepoMediaAccess & access_r,
 	    const Package::constPtr & package_r,
-	    const DeltaCandidates & deltas_r,
 	    const PackageProviderPolicy & policy_r )
       : _policy( policy_r )
       , _package( package_r )
-      , _deltas( deltas_r )
       , _access( access_r )
       , _retry(false)
       {}
@@ -188,7 +186,6 @@ namespace zypp
     protected:
       PackageProviderPolicy	_policy;
       Package::constPtr		_package;
-      DeltaCandidates		_deltas;
       RepoMediaAccess &		_access;
 
     private:
@@ -407,7 +404,8 @@ USR << "CHK: " << res << endl;
 			  const Package::constPtr & package_r,
 			  const DeltaCandidates & deltas_r,
 			  const PackageProviderPolicy & policy_r )
-      : PackageProvider::Impl( access_r, package_r, deltas_r, policy_r )
+      : PackageProvider::Impl( access_r, package_r, policy_r )
+      , _deltas( deltas_r )
       {}
 
     protected:
@@ -428,6 +426,9 @@ USR << "CHK: " << res << endl;
 
       bool queryInstalled( const Edition & ed_r = Edition() ) const
       { return _policy.queryInstalled( _package->name(), ed_r, _package->arch() ); }
+
+    private:
+      DeltaCandidates		_deltas;
     };
     ///////////////////////////////////////////////////////////////////
 
