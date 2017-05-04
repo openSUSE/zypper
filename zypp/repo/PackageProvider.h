@@ -60,11 +60,25 @@ namespace zypp
     class PackageProvider
     {
     public:
-      /** Ctor taking the Package to provide. */
+      /** Ctor taking the package to provide.
+       * \throws Exception If pi_r refers to neither a \c Package nor a \c SrcPackage.
+       */
+      PackageProvider( RepoMediaAccess & access, const PoolItem & pi_r,
+                       const PackageProviderPolicy & policy_r = PackageProviderPolicy() );
+
+      /** \overload Ctor taking additional hint to deltarpms (not used for SrcPackages)
+       * \throws Exception If pi_r refers to neither a \c Package nor a \c SrcPackage.
+       */
+      PackageProvider( RepoMediaAccess & access, const PoolItem & pi_r,
+                       const DeltaCandidates & deltas,
+		       const PackageProviderPolicy & policy_r = PackageProviderPolicy() );
+
+      /** Legacy Ctor taking a \c Package::constPtr to provide. */
       PackageProvider( RepoMediaAccess & access,
                        const Package::constPtr & package,
                        const DeltaCandidates & deltas,
                        const PackageProviderPolicy & policy_r = PackageProviderPolicy() );
+
       ~PackageProvider();
 
     public:

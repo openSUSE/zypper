@@ -79,8 +79,7 @@ namespace zypp
        * Called by PackageProvider ctor. Returned pointer should be
        * immediately wrapped into a smartpointer.
        */
-      static Impl * factoryMake( RepoMediaAccess & access_r,
-				 const Package::constPtr & package_r,
+      static Impl * factoryMake( RepoMediaAccess & access_r, const PoolItem & pi_r,
 				 const DeltaCandidates & deltas_r,
 				 const PackageProviderPolicy & policy_r );
 
@@ -561,19 +560,33 @@ USR << "CHK: " << res << endl;
     //	class PackageProvider
     ///////////////////////////////////////////////////////////////////
 
-    PackageProvider::Impl * PackageProvider::Impl::factoryMake( RepoMediaAccess & access_r,
-								const Package::constPtr & package_r,
+    PackageProvider::Impl * PackageProvider::Impl::factoryMake( RepoMediaAccess & access_r, const PoolItem & pi_r,
 								const DeltaCandidates & deltas_r,
 								const PackageProviderPolicy & policy_r )
     {
-      return new RpmPackageProvider( access_r, package_r, deltas_r, policy_r );
+      if ( ! pi_r.isKind<Package>() )
+	ZYPP_THROW( Exception( str::Str() << "Don't know how to cache non-package " << pi_r.asUserString() ) );
+
+      return new RpmPackageProvider( access_r, pi_r->asKind<Package>(), deltas_r, policy_r );
     }
 
+    PackageProvider::PackageProvider( RepoMediaAccess & access_r, const PoolItem & pi_r,
+				      const DeltaCandidates & deltas_r, const PackageProviderPolicy & policy_r )
+
+    : _pimpl( Impl::factoryMake( access_r, pi_r, deltas_r, policy_r ) )
+    {}
+
+    PackageProvider::PackageProvider( RepoMediaAccess & access_r, const PoolItem & pi_r,
+				      const PackageProviderPolicy & policy_r )
+    : _pimpl( Impl::factoryMake( access_r, pi_r, DeltaCandidates(), policy_r ) )
+    {}
+
+    /* legacy */
     PackageProvider::PackageProvider( RepoMediaAccess & access_r,
 				      const Package::constPtr & package_r,
 				      const DeltaCandidates & deltas_r,
 				      const PackageProviderPolicy & policy_r )
-    : _pimpl( Impl::factoryMake( access_r, package_r, deltas_r, policy_r ) )
+    : _pimpl( Impl::factoryMake( access_r, PoolItem(package_r), deltas_r, policy_r ) )
     {}
 
     PackageProvider::~PackageProvider()

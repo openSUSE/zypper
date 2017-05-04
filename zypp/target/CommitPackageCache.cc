@@ -80,20 +80,26 @@ namespace zypp
     RepoProvidePackage::~RepoProvidePackage()
     {}
 
-    ManagedFile RepoProvidePackage::operator()( const PoolItem & pi, bool fromCache_r )
+    ManagedFile RepoProvidePackage::operator()( const PoolItem & pi_r, bool fromCache_r )
     {
-      Package::constPtr p = asKind<Package>(pi.resolvable());
+      ManagedFile ret;
       if ( fromCache_r )
       {
-	repo::PackageProvider pkgProvider( _impl->_access, p, repo::DeltaCandidates(), _impl->_packageProviderPolicy );
-	return pkgProvider.providePackageFromCache();
+	repo::PackageProvider pkgProvider( _impl->_access, pi_r, _impl->_packageProviderPolicy );
+	ret = pkgProvider.providePackageFromCache();
       }
-      else
+      else if ( pi_r.isKind<Package>() )	// may make use of deltas
       {
-	repo::DeltaCandidates deltas( _impl->_repos, p->name() );
-	repo::PackageProvider pkgProvider( _impl->_access, p, deltas, _impl->_packageProviderPolicy );
+	repo::DeltaCandidates deltas( _impl->_repos, pi_r.name() );
+	repo::PackageProvider pkgProvider( _impl->_access, pi_r, deltas, _impl->_packageProviderPolicy );
 	return pkgProvider.providePackage();
       }
+      else	// SrcPackage or throws
+      {
+	repo::PackageProvider pkgProvider( _impl->_access, pi_r, _impl->_packageProviderPolicy );
+	return pkgProvider.providePackage();
+      }
+      return ret;
     }
 
     ///////////////////////////////////////////////////////////////////
