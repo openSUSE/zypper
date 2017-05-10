@@ -25,6 +25,7 @@
 #include "zypp/ZConfig.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/RepoManager.h"
+#include "zypp/SrcPackage.h"
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/Target.h"
@@ -52,36 +53,58 @@ namespace zypp
       return false;
     }
 
-
     ///////////////////////////////////////////////////////////////////
     /// \class PackageProvider::Impl
-    /// \brief PackageProvider implementation.
+    /// \brief PackageProvider implementation interface.
     ///////////////////////////////////////////////////////////////////
-    class PackageProvider::Impl : private base::NonCopyable
+    struct PackageProvider::Impl : private base::NonCopyable
     {
+      Impl() {}
+      virtual ~Impl() {}
+
+      /** Provide the package.
+       * The basic workflow.
+       * \throws Exception.
+       */
+      virtual ManagedFile providePackage() const = 0;
+
+      /** Provide the package if it is cached. */
+      virtual ManagedFile providePackageFromCache() const = 0;
+
+      /** Whether the package is cached. */
+      virtual bool isCached() const = 0;
+    };
+
+    ///////////////////////////////////////////////////////////////////
+    /// \class PackageProviderImpl<TPackage>
+    /// \brief PackageProvider implementation for \c Package and \c SrcPackage
+    ///////////////////////////////////////////////////////////////////
+    template <class TPackage>
+    class PackageProviderImpl : public PackageProvider::Impl
+    {
+      typedef typename TPackage::constPtr TPackagePtr;	// Package or SrcPackage
       typedef callback::UserData UserData;
     public:
       /** Ctor taking the Package to provide. */
-      Impl( RepoMediaAccess & access_r,
-	    const Package::constPtr & package_r,
-	    const PackageProviderPolicy & policy_r )
+      PackageProviderImpl( RepoMediaAccess & access_r, const TPackagePtr & package_r,
+			   const PackageProviderPolicy & policy_r )
       : _policy( policy_r )
       , _package( package_r )
       , _access( access_r )
       , _retry(false)
       {}
 
-      virtual ~Impl() {}
+      virtual ~PackageProviderImpl() {}
 
     public:
       /** Provide the package.
        * The basic workflow.
        * \throws Exception.
        */
-      ManagedFile providePackage() const;
+      virtual ManagedFile providePackage() const;
 
       /** Provide the package if it is cached. */
-      ManagedFile providePackageFromCache() const
+      virtual ManagedFile providePackageFromCache() const
       {
 	ManagedFile ret( doProvidePackageFromCache() );
 	if ( ! ( ret->empty() ||  _package->repoInfo().keepPackages() ) )
@@ -90,24 +113,22 @@ namespace zypp
       }
 
       /** Whether the package is cached. */
-      bool isCached() const
+      virtual bool isCached() const
       { return ! doProvidePackageFromCache()->empty(); }
 
     protected:
-      typedef PackageProvider::Impl	Base;
+      typedef PackageProviderImpl<TPackage>	Base;
       typedef callback::SendReport<repo::DownloadResolvableReport>	Report;
 
       /** Lookup the final rpm in cache.
        *
-       * A non empty ManagedFile will be returned to the caller.
+       * A cache hit will return a non empty ManagedFile and an empty one on cache miss.
        *
        * \note File disposal depending on the repos keepPackages setting
        * are not set here, but in \ref providePackage or \ref providePackageFromCache.
-       *
-       * \note The provoided default implementation returns an empty ManagedFile
-       * (cache miss).
        */
-      virtual ManagedFile doProvidePackageFromCache() const = 0;
+      ManagedFile doProvidePackageFromCache() const
+      { return ManagedFile( _package->cachedLocation() ); }
 
       /** Actually provide the final rpm.
        * Report start/problem/finish and retry loop are hadled by \ref providePackage.
@@ -123,7 +144,15 @@ namespace zypp
        * \note The provided default implementation retrieves the packages default
        * location.
        */
-      virtual ManagedFile doProvidePackage() const = 0;
+      virtual ManagedFile doProvidePackage() const
+      {
+	ManagedFile ret;
+	OnMediaLocation loc = _package->location();
+
+	ProvideFilePolicy policy;
+	policy.progressCB( bind( &Base::progressPackageDownload, this, _1 ) );
+	return _access.provideFile( _package->repoInfo(), loc, policy );
+      }
 
     protected:
       /** Access to the DownloadResolvableReport */
@@ -185,7 +214,7 @@ namespace zypp
 
     protected:
       PackageProviderPolicy	_policy;
-      Package::constPtr		_package;
+      TPackagePtr		_package;
       RepoMediaAccess &		_access;
 
     private:
@@ -208,24 +237,8 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** Default implementation (cache miss). */
-    ManagedFile PackageProvider::Impl::doProvidePackageFromCache() const
-    { return ManagedFile(); }
-
-    /** Default implementation (provide full package) */
-    ManagedFile PackageProvider::Impl::doProvidePackage() const
-    {
-      ManagedFile ret;
-      OnMediaLocation loc = _package->location();
-
-      ProvideFilePolicy policy;
-      policy.progressCB( bind( &Base::progressPackageDownload, this, _1 ) );
-      return _access.provideFile( _package->repoInfo(), loc, policy );
-    }
-
-    ///////////////////////////////////////////////////////////////////
-
-    ManagedFile PackageProvider::Impl::providePackage() const
+    template <class TPackage>
+    ManagedFile PackageProviderImpl<TPackage>::providePackage() const
     {
       ScopedGuard guardReport( newReport() );
 
@@ -290,12 +303,14 @@ namespace zypp
 	    if ( info.pkgGpgCheck() )
 	    {
 	      UserData userData( "pkgGpgCheck" );
-	      userData.set( "Package", _package );
+	      userData.set( "ResObject", _package->asKind<ResObject>() );
+	      /*legacy:*/userData.set( "Package", _package->asKind<Package>() );
 	      userData.set( "Localpath", ret.value() );
 	      RpmDb::CheckPackageResult res = packageSigCheck( ret, userData );
 	      // publish the checkresult, even if it is OK. Apps may want to report something...
 	      report()->pkgGpgCheck( userData );
-USR << "CHK: " << res << endl;
+	      DBG << "CHK: " << res << endl;
+
 	      if ( res != RpmDb::CHK_OK )
 	      {
 		if ( userData.hasvalue( "Action" ) )	// pkgGpgCheck report provided an user error action
@@ -395,22 +410,20 @@ USR << "CHK: " << res << endl;
 
     ///////////////////////////////////////////////////////////////////
     /// \class RpmPackageProvider
-    /// \brief RPM PackageProvider implementation.
+    /// \brief RPM PackageProvider implementation (with deltarpm processing).
     ///////////////////////////////////////////////////////////////////
-    class RpmPackageProvider : public PackageProvider::Impl
+    class RpmPackageProvider : public PackageProviderImpl<Package>
     {
     public:
       RpmPackageProvider( RepoMediaAccess & access_r,
 			  const Package::constPtr & package_r,
 			  const DeltaCandidates & deltas_r,
 			  const PackageProviderPolicy & policy_r )
-      : PackageProvider::Impl( access_r, package_r, policy_r )
+      : PackageProviderImpl<Package>( access_r, package_r, policy_r )
       , _deltas( deltas_r )
       {}
 
     protected:
-      virtual ManagedFile doProvidePackageFromCache() const;
-
       virtual ManagedFile doProvidePackage() const;
 
     private:
@@ -431,11 +444,6 @@ USR << "CHK: " << res << endl;
       DeltaCandidates		_deltas;
     };
     ///////////////////////////////////////////////////////////////////
-
-    ManagedFile RpmPackageProvider::doProvidePackageFromCache() const
-    {
-      return ManagedFile( _package->cachedLocation() );
-    }
 
     ManagedFile RpmPackageProvider::doProvidePackage() const
     {
@@ -516,57 +524,39 @@ USR << "CHK: " << res << endl;
       return ManagedFile( destination, filesystem::unlink );
     }
 
-#if 0
-    ///////////////////////////////////////////////////////////////////
-    /// \class PluginPackageProvider
-    /// \brief Plugin PackageProvider implementation.
-    ///
-    /// Basically downloads the default package and calls a
-    /// 'stem'2rpm plugin to cteate the final .rpm package.
-    ///////////////////////////////////////////////////////////////////
-    class PluginPackageProvider : public PackageProvider::Impl
-    {
-    public:
-      PluginPackageProvider( const std::string & stem_r,
-			     RepoMediaAccess & access_r,
-			     const Package::constPtr & package_r,
-			     const DeltaCandidates & deltas_r,
-			     const PackageProviderPolicy & policy_r )
-      : Base( access_r, package_r, deltas_r, policy_r )
-      {}
-
-    protected:
-      virtual ManagedFile doProvidePackageFromCache() const
-      {
-	return Base::doProvidePackageFromCache();
-      }
-
-      virtual ManagedFile doProvidePackage() const
-      {
-	return Base::doProvidePackage();
-      }
-    };
-    ///////////////////////////////////////////////////////////////////
-#endif
-
     ///////////////////////////////////////////////////////////////////
     //	class PackageProvider
     ///////////////////////////////////////////////////////////////////
     namespace factory
     {
-      PackageProvider::Impl * make( RepoMediaAccess & access_r, const PoolItem & pi_r,
-				    const DeltaCandidates & deltas_r,
-				    const PackageProviderPolicy & policy_r )
+      inline PackageProvider::Impl * make( RepoMediaAccess & access_r, const PoolItem & pi_r,
+					   const DeltaCandidates & deltas_r,
+					   const PackageProviderPolicy & policy_r )
       {
-	if ( ! pi_r.isKind<Package>() )
+	if ( pi_r.isKind<Package>() )
+	  return new RpmPackageProvider( access_r, pi_r->asKind<Package>(), deltas_r, policy_r );
+	else if ( pi_r.isKind<SrcPackage>() )
+	  return new PackageProviderImpl<SrcPackage>( access_r, pi_r->asKind<SrcPackage>(), policy_r );
+	else
 	  ZYPP_THROW( Exception( str::Str() << "Don't know how to cache non-package " << pi_r.asUserString() ) );
-
-	return new RpmPackageProvider( access_r, pi_r->asKind<Package>(), deltas_r, policy_r );
       }
 
       inline PackageProvider::Impl * make( RepoMediaAccess & access_r, const PoolItem & pi_r,
+						  const PackageProviderPolicy & policy_r )
+      {
+	if ( pi_r.isKind<Package>() )
+	  return new PackageProviderImpl<Package>( access_r, pi_r->asKind<Package>(), policy_r );
+	else if ( pi_r.isKind<SrcPackage>() )
+	  return new PackageProviderImpl<SrcPackage>( access_r, pi_r->asKind<SrcPackage>(), policy_r );
+	else
+	  ZYPP_THROW( Exception( str::Str() << "Don't know how to cache non-package " << pi_r.asUserString() ) );
+      }
+
+      inline PackageProvider::Impl * make( RepoMediaAccess & access_r, const Package::constPtr & package_r,
+					   const DeltaCandidates & deltas_r,
 					   const PackageProviderPolicy & policy_r )
-      { return make( access_r, pi_r, DeltaCandidates(), policy_r ); }
+      { return new RpmPackageProvider( access_r, package_r, deltas_r, policy_r ); }
+
     } // namespace factory
     ///////////////////////////////////////////////////////////////////
 
@@ -586,7 +576,7 @@ USR << "CHK: " << res << endl;
 				      const Package::constPtr & package_r,
 				      const DeltaCandidates & deltas_r,
 				      const PackageProviderPolicy & policy_r )
-    : _pimpl( factory::make( access_r, PoolItem(package_r), deltas_r, policy_r ) )
+    : _pimpl( factory::make( access_r, package_r, deltas_r, policy_r ) )
     {}
 
     PackageProvider::~PackageProvider()

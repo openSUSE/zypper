@@ -171,7 +171,7 @@ namespace zypp
       /** Detail information about the result of a performed pkgGpgCheck.
        *
        * Userdata sent:
-       * \param "Package"	Package::constPtr of the package
+       * \param "ResObject"	ResObject::constPtr of the downloaded package (Package or SrcPackage)
        * \param "Localpath"	Pathname to downloaded package on disk
        * \param "CheckPackageResult"	RpmDb::CheckPackageResult of signature check
        * \param "CheckPackageDetail"	RpmDb::CheckPackageDetail logmessages of rpm signature check
@@ -179,6 +179,9 @@ namespace zypp
        *  Userdata accepted:
        * \param "Action"	DownloadResolvableReport::Action user advice how to behave on error (ABORT).
        *                        If you set just an empty value here, a default probelm report will be triggered.
+       *
+       * Legacy data:
+       * \param "Package"	Replaced by \c "ResObject" in 16.10.0. Package::constPtr of the package (\c nullptr in case of a SrcPackage)
        */
       virtual void pkgGpgCheck( const UserData & userData_r = UserData() )
       {}
