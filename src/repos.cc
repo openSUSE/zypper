@@ -3112,6 +3112,7 @@ void modify_service( Zypper & zypper, const std::string & alias )
     ERR << "Error while modifying the service:" << ex.asUserString() << endl;
     zypper.out().error( ex, _("Error while modifying the service:"),
 			str::Format(_("Leaving service %s unchanged.")) % alias );
+    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
   }
 }
 
