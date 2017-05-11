@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu May 11 15:30:15 CEST 2017 - ma@suse.de
+
+- download: fix crash when non-package types are passed as argument
+  (bsc#1037210)
+- Use a common definition for common solver options (bsc#1017486)
+- BuildRequires:  libzypp-devel >= 16.10.0
+- version 1.13.26
+
+-------------------------------------------------------------------
 Thu Apr 27 16:05:16 CEST 2017 - ma@suse.de
 
 - Fix translation shortcut error (bsc#1035344)
