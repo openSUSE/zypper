@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu May 11 15:23:28 CEST 2017 - ma@suse.de
+
+- Use a common workflow for downloading packages and srcpackages.
+  This includes a common way of handling and reposrting gpg signature
+  and checks. (bsc#1037210)
+- PackageProvider: as well support downloading SrcPackage (for bsc#1037210)
+- version 16.10.0 (0)
+
+-------------------------------------------------------------------
 Thu Apr 27 16:03:32 CEST 2017 - ma@suse.de
 
 - PoolQuery: Treat explicit queries for 'kind:name' correctly
