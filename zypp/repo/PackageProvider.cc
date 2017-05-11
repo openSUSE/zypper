@@ -314,8 +314,9 @@ namespace zypp
 	      && !( env::YAST_IS_RUNNING() && _package->isKind<SrcPackage>() ) )
 	    {
 	      UserData userData( "pkgGpgCheck" );
-	      userData.set( "ResObject", _package->asKind<ResObject>() );
-	      /*legacy:*/userData.set( "Package", _package->asKind<Package>() );
+	      ResObject::constPtr roptr( _package );	// gcc6 needs it more explcit. Has problem deducing
+	      userData.set( "ResObject", roptr );	// a type for '_package->asKind<ResObject>()'...
+	      /*legacy:*/userData.set( "Package", roptr->asKind<Package>() );
 	      userData.set( "Localpath", ret.value() );
 	      RpmDb::CheckPackageResult res = packageSigCheck( ret, userData );
 	      // publish the checkresult, even if it is OK. Apps may want to report something...
