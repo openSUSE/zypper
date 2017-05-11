@@ -1264,22 +1264,7 @@ namespace zypp
               ManagedFile localfile;
               try
               {
-		// TODO: unify packageCache.get for Package and SrcPackage
-		if ( pi->isKind<Package>() )
-		{
-		  localfile = packageCache.get( pi );
-		}
-		else if ( pi->isKind<SrcPackage>() )
-		{
-		  repo::RepoMediaAccess access;
-		  repo::SrcPackageProvider prov( access );
-		  localfile = prov.provideSrcPackage( pi->asKind<SrcPackage>() );
-		}
-		else
-		{
-		  INT << "Don't know howto cache: Neither Package nor SrcPackage: " << pi << endl;
-		  continue;
-		}
+		localfile = packageCache.get( pi );
                 localfile.resetDispose(); // keep the package file in the cache
               }
               catch ( const AbortRequestException & exp )
