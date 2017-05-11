@@ -48,6 +48,18 @@ namespace
   };
   ///////////////////////////////////////////////////////////////////
 
+  inline bool isPackageType( const sat::Solvable & slv_r )
+  { return( slv_r.isKind<Package>() || slv_r.isKind<SrcPackage>() ); }
+
+  // Valid for Package and SrcPackage
+  bool isCached( const PoolItem & pi_r )
+  { return ( pi_r.isKind<Package>() && pi_r->asKind<Package>()->isCached() )
+        || ( pi_r.isKind<SrcPackage>() && pi_r->asKind<SrcPackage>()->isCached() ); }
+
+  // Valid for Package and SrcPackage; assumes isPackageType() == true
+  Pathname cachedLocation( const PoolItem & pi_r )
+  { return( pi_r.isKind<Package>() ? pi_r->asKind<Package>()->cachedLocation() : pi_r->asKind<SrcPackage>()->cachedLocation() ); }
+
   inline void logXmlResult( const PoolItem & pi_r, const Pathname & localfile_r )
   {
     //   <download-result>
@@ -108,7 +120,7 @@ namespace
 			 capDetail.ed(),
 			 Arch( capDetail.arch() ) );	// defaults Arch_empty (NOOP) if no arch in cap
 
-      if ( q.empty() )
+      if ( q.empty() || !isPackageType( *q.begin() ) )
       {
 	// translators: Label text; is followed by ': cmdline argument'
 	_zypper.out().warning( str::Str() << _("Argument resolves to no package") << ": " << pkgspec.orig_str );
@@ -159,20 +171,20 @@ namespace
       for ( const auto & pi : ent.second )
       {
 	++current;
-	Package::constPtr pkg( pi->asKind<Package>() );
-	if ( ! pkg->isCached() )
+
+	if ( ! isCached( pi ) )
 	{
 	  if ( !_options->_dryrun )
 	  {
 	    ManagedFile localfile;
 	    try
 	    {
-	      Out::ProgressBar report( _zypper.out(), Out::ProgressBar::noStartBar, pi.satSolvable().asUserString(), current, total );
+	      Out::ProgressBar report( _zypper.out(), Out::ProgressBar::noStartBar, pi.asUserString(), current, total );
 	      report.error(); // error if provideSrcPackage throws
 	      Out::DownloadProgress redirect( report );
 	      localfile = packageCache.get( pi );
 	      report.error( false );
-	      report.print( pkg->cachedLocation().asString() );
+	      report.print( cachedLocation( pi ).asString() );
 	    }
 	    catch ( const Out::Error & error_r )
 	    {
@@ -187,7 +199,7 @@ namespace
 	      // TODO: Need class Out::Error support for exceptions
 	      ERR << exp << endl;
 	      _zypper.out().error( exp,
-				   boost::str( boost::format(_("Error downloading package '%s'.") ) % pi.satSolvable().asUserString() ) );
+				   str::Format(_("Error downloading package '%s'.")) % pi.satSolvable().asUserString() );
 	    }
 
 	    //DBG << localfile << endl;
@@ -201,13 +213,13 @@ namespace
 	  else
 	  {
 	    _zypper.out().info( str::Str()
-	                        << boost::str( boost::format(_("Not downloading package '%s'.") ) % pi.satSolvable().asUserString() )
+	                        << str::Format(_("Not downloading package '%s'.")) % pi.satSolvable().asUserString()
 				<< " (--dry-run)" );
 	  }
 	}
 	else
 	{
-	  const Pathname &  localfile( pkg->cachedLocation() );
+	  const Pathname &  localfile( cachedLocation( pi ) );
 	  Out::ProgressBar report( _zypper.out(), localfile.asString(), current, total );
 	  if ( _zypper.out().typeXML() )
 	    logXmlResult( pi, localfile );
