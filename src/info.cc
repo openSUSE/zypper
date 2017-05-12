@@ -104,16 +104,17 @@ namespace
   inline std::string propertyInstalled( const PoolItem & installedObj_r )
   {
     std::string ret( asYesNo( bool(installedObj_r) ) );
-#if 0
     if ( installedObj_r && installedObj_r.identIsAutoInstalled() )
     {
       ret += " (";
       ret += _("automatically");
       ret += ")";
     }
-#endif
     return ret;
   }
+
+  inline const char * lockStatusTag( const ui::Selectable & sel_r )
+  { return ::lockStatusTag( sel_r.installedEmpty() ? "" : "i", sel_r.locked(), sel_r.identIsAutoInstalled() ); }
 
 } // namespace
 ///////////////////////////////////////////////////////////////////
@@ -462,18 +463,18 @@ void printPatternInfo( Zypper & zypper, const ui::Selectable & s )
       for ( ui::Selectable::Ptr sel : collect.req.selectable() )
       {
 	const ui::Selectable & s = *sel;
-	t << ( TableRow() << (s.installedEmpty() ? "" : "i") << s.name() << s.kind().asString() << _("Required") );
+	t << ( TableRow() << lockStatusTag( s ) << s.name() << s.kind().asString() << _("Required") );
       }
       for ( ui::Selectable::Ptr sel : collect.rec.selectable() )
       {
 	const ui::Selectable & s = *sel;
-	t << ( TableRow() << (s.installedEmpty() ? "" : "i") << s.name() << s.kind().asString() << _("Recommended") );
+	t << ( TableRow() << lockStatusTag( s ) << s.name() << s.kind().asString() << _("Recommended") );
       }
       if ( showSuggests )
 	for ( ui::Selectable::Ptr sel : collect.sug.selectable() )
 	{
 	  const ui::Selectable & s = *sel;
-	  t << ( TableRow() << (s.installedEmpty() ? "" : "i") << s.name() << s.kind().asString() << _("Suggested") );
+	  t << ( TableRow() << lockStatusTag( s ) << s.name() << s.kind().asString() << _("Suggested") );
 	}
 
       std::map<std::string, unsigned> depPrio({{_("Required"),0}, {_("Recommended"),1}, {_("Suggested"),2}});

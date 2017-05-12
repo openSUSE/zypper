@@ -98,7 +98,13 @@ Throughout this manual we will often refer to resolvables simply as 'packages' a
 
 Package Dependencies
 ~~~~~~~~~~~~~~~~~~~~
-Software packages depend on each other in various ways. Packages usually 'require' or 'recommend' other packages, but they can also 'conflict' with other packages. Packages may also support specific hardware or language settings. Zypper uses a 'dependency solver' to find out what packages need to be installed to satisfy the user's request. See http://old-en.opensuse.org/Software_Management/Dependencies for more information.
+Software packages depend on each other in various ways. Packages usually 'require' or 'recommend' other packages, but they can also 'conflict' with other packages. Packages may support specific hardware or language settings. Zypper uses a 'dependency solver' to find out which packages need to be installed to satisfy the user's request. See http://old-en.opensuse.org/Software_Management/Dependencies for more information.
+
+Automatically installed packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Packages added by the dependency solver in order to resolve a user\'s request are remembered as having been 'automatically installed'. They may later be removed, if no more user installed packages depend on them (e.g. by *zypper remove --clean-deps*).
+
+In the *S*+tatus+ column the *search* command distinguishes between user installed packages (*i+*) and automatically installed packages (*i*).
 
 Package File Conflicts
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -673,7 +679,8 @@ Query Commands
 +
 --
 [horizontal]
-	*i*;;	installed
+	*i+*;;	installed by user request
+	*i*;;	installed automatically (by the resolver, see section *Automatically installed packages*)
 	*v*;;	a different version is installed
 	'empty';;	neither of the above cases
 	.*l*;;	is shown in the 2nd column if the item is locked (see section *Package Locks Management*)

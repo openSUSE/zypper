@@ -21,32 +21,6 @@
 
 extern ZYpp::Ptr God;
 
-///////////////////////////////////////////////////////////////////
-namespace
-{
-  inline const char * lockStatusTag( const char * tag_r, bool islocked_r, bool isautoinst_r = false )
-  {
-    if ( islocked_r )
-    {
-      if ( *tag_r == 'i' )
-	return "il";
-      else if ( *tag_r == 'v' )
-	return "vl";
-      else if ( *tag_r == '\0' || *tag_r == ' ' )
-	return " l";
-      INT << "unknown status tag '" << tag_r << "'" << endl;
-      return "?L";	// should not happen
-    }
-#if 0
-    if ( *tag_r == 'i' )
-      return( isautoinst_r ? "i" : "i+" );
-#endif
-    return tag_r;
-  }
-
-} // namespace
-///////////////////////////////////////////////////////////////////
-
 FillSearchTableSolvable::FillSearchTableSolvable( Table & table, TriBool inst_notinst )
 : _table( &table )
 , _inst_notinst( inst_notinst )
@@ -280,7 +254,7 @@ bool FillSearchTableSelectable::operator()( const ui::Selectable::constPtr & s )
       // not-installed only
       if ( inst_notinst == false )
         return true;
-      row << lockStatusTag( "i", isLocked, s->theObj().identIsAutoInstalled() );
+      row << lockStatusTag( "i", isLocked, s->identIsAutoInstalled() );
     }
     // this happens if the solvable has installed objects, but no counterpart
     // of them in specified repos

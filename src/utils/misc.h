@@ -33,6 +33,27 @@ using namespace zypp;
 
 typedef std::set<ResKind> ResKindSet;
 
+/** Build search status column tag */
+inline const char * lockStatusTag( const char * tag_r, bool islocked_r, bool isautoinst_r = false )
+{
+  if ( islocked_r )
+  {
+    if ( *tag_r == 'i' )
+      return "il";
+    else if ( *tag_r == 'v' )
+      return "vl";
+    else if ( *tag_r == '\0' || *tag_r == ' ' )
+      return " l";
+    INT << "unknown status tag '" << tag_r << "'" << std::endl;
+    return "?L";	// should not happen
+  }
+
+  if ( *tag_r == 'i' )
+    return( isautoinst_r ? "i" : "i+" );
+
+  return tag_r;
+}
+
 /** Whether running on SLE.
  * If so, report e.g. unsupported packages per default.
  */
