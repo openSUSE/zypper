@@ -398,21 +398,8 @@ void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
   p.add( _("Severity"),		patchHighlightSeverity( *patch ) );
   // translators: property name; short; used like "Name: value"
   p.add( _("Created On"),	patch->timestamp().asString() );
-
-#if 0
-  p.add( _("Reboot Required"),	patch->rebootSuggested() );
-  p.add( _("Package Manager Restart Required"),	patch->restartSuggested() );
-
-  Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
-  if ( zypper.globalOpts().reboot_req_non_interactive )
-    ignoreFlags |= Patch::Reboot;
-  if ( zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses") )
-    ignoreFlags |= Patch::License;
-  p.add( _("Interactive"),	patch->interactiveWhenIgnoring( ignoreFlags ) );
-#else
   // translators: property name; short; used like "Name: value"
   p.add( _("Interactive"),	patchInteractiveFlags( *patch ) );	// print interactive flags the same style as list-patches
-#endif
 
   printSummaryDescDeps( theone, p );
   zypper.out().info( str::Str() << p );
