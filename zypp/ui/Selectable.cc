@@ -82,6 +82,9 @@ namespace zypp
     PoolItem Selectable::highestAvailableVersionObj() const
     { return _pimpl->highestAvailableVersionObj(); }
 
+    bool Selectable::identIsAutoInstalled() const
+    { return _pimpl->identIsAutoInstalled(); }
+
     bool Selectable::identicalAvailable( const PoolItem & rhs ) const
     { return _pimpl->identicalAvailable( rhs ); }
 

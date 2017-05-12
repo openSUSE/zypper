@@ -130,8 +130,11 @@ namespace zypp
        */
       bool onSystemByAuto() const;
 
-      /** Whether an installed solvable with the same ident is flagged as AutoInstalled. */
-      bool identIsAutoInstalled() const;
+      /** Whether an installed solvable with the same \ref ident is flagged as AutoInstalled. */
+      bool identIsAutoInstalled() const
+      { return identIsAutoInstalled( ident() ); }
+      /** \overload static version */
+      static bool identIsAutoInstalled( const IdString & ident_r );
 
       /** Whether different versions of this package can be installed at the same time.
        * Per default \c false. \see also \ref ZConfig::multiversion.

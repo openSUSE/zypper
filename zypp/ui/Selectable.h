@@ -150,7 +150,10 @@ namespace zypp
        */
       PoolItem highestAvailableVersionObj() const;
 
-     /** \c True if \a rhs is installed and one with the same content is available.
+      /** Whether this \ref ident is flagged as AutoInstalled. */
+      bool identIsAutoInstalled() const;
+
+      /** \c True if \a rhs is installed and one with the same content is available.
        * Basically the same name, edition, arch, vendor and buildtime.
        * \see \ref sat::Solvable::identical
        */

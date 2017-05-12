@@ -382,9 +382,9 @@ namespace zypp
       return isSystem() && myPool().isOnSystemByAuto( ident() );
     }
 
-    bool Solvable::identIsAutoInstalled() const
+    bool Solvable::identIsAutoInstalled( const IdString & ident_r )
     {
-      return myPool().isOnSystemByAuto( ident() );
+      return myPool().isOnSystemByAuto( ident_r );
     }
 
     bool Solvable::multiversionInstall() const

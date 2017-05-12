@@ -183,6 +183,10 @@ namespace zypp
         return ret;
       }
 
+      /** \copydoc Selectable::identIsAutoInstalled()const */
+      bool identIsAutoInstalled() const
+      { return sat::Solvable::identIsAutoInstalled( ident() ); }
+
       /** \copydoc Selectable::identicalAvailable( const PoolItem & )const */
       bool identicalAvailable( const PoolItem & rhs ) const
       { return bool(identicalAvailableObj( rhs )); }
