@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri May 12 12:48:30 CEST 2017 - ma@suse.de
+
+- Unknown command: add hint about possibly missing plugin package
+  (bsc#1037254)
+- Search: tag packages installed by user request as 'i+'
+- set non-zero exit code if modifying a service fails.
+- BuildRequires:  libzypp-devel >= 16.11.0
+- version 1.13.27
+
+-------------------------------------------------------------------
 Thu May 11 15:30:15 CEST 2017 - ma@suse.de
 
 - download: fix crash when non-package types are passed as argument
