@@ -623,13 +623,29 @@ void print_main_help( Zypper & zypper )
   print_command_help_hint( zypper );
 }
 
-void print_unknown_command_hint( Zypper & zypper )
+void print_unknown_command_hint( Zypper & zypper, const std::string & cmd_r )
 {
   zypper.out().info(
     // translators: %s is "help" or "zypper help" depending on whether
     // zypper shell is running or not
     str::Format(_("Type '%s' to get a list of global options and commands."))
     % (zypper.runningShell() ? "help" : "zypper help") );
+  zypper.out().gap();
+  zypper.out().info(
+    // translators: %1% is the name of an (unknown) command
+    // translators: %2% something providing more info (like 'zypper help subcommand')
+    // translators: The word 'subcommand' also refers to a zypper command and should not be translated.
+    str::Format(_("In case '%1%' is not a typo it's probably not a built-in command, but provided as a subcommand or plug-in (see '%2%').") )
+    /*%1%*/ % cmd_r
+    /*%2%*/ % "zypper help subcommand"
+  );
+  zypper.out().info(
+    // translators: %1% and %2% are plug-in packages which might provide it.
+    // translators: The word 'subcommand' also refers to a zypper command and should not be translated.
+    str::Format(_("In this case a specific package providing the subcommand needs to be installed first. Those packages are often named '%1%' or '%2%'.") )
+    /*%1%*/ % ("zypper-"+cmd_r)
+    /*%2%*/ % ("zypper-"+cmd_r+"-plugin")
+  );
 }
 
 void print_command_help_hint( Zypper & zypper )
@@ -853,7 +869,7 @@ void Zypper::processGlobalOptions()
     catch ( const Exception & e )
     {
       out().error( e.asUserString() );
-      print_unknown_command_hint( *this );
+      print_unknown_command_hint( *this, _argv[optind-1] );
       setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
       ZYPP_THROW( ExitRequestException("unknown command") );
     }
@@ -882,7 +898,7 @@ void Zypper::processGlobalOptions()
 	catch ( const Exception & e )
 	{
 	  out().error( e.asUserString() );
-	  print_unknown_command_hint( *this );
+	  print_unknown_command_hint( *this, arg );
 	  setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
 	  ZYPP_THROW( ExitRequestException("unknown command") );
 	}
@@ -901,8 +917,7 @@ void Zypper::processGlobalOptions()
     }
     else if ( command() == ZypperCommand::HELP )// help on help
     {
-      print_unknown_command_hint( *this );
-      print_command_help_hint( *this );
+      print_main_help( *this );
       ZYPP_THROW( ExitRequestException("help provided") );
     }
   }
@@ -1274,7 +1289,7 @@ void Zypper::commandShell()
       if ( command() == ZypperCommand::SHELL_QUIT )
         break;
       else if ( command() == ZypperCommand::NONE )
-        print_unknown_command_hint( *this );
+        print_unknown_command_hint( *this, command_str );
       else if ( command() == ZypperCommand::SUBCOMMAND )
       {
 	// Currently no concept how to handle global options and ZYPPlock
@@ -1286,7 +1301,7 @@ void Zypper::commandShell()
     catch ( const Exception & e )
     {
       out().error( e.msg() );
-      print_unknown_command_hint( *this );
+      print_unknown_command_hint( *this, command_str ); // TODO: command_str should come via the Exception, same for other print_unknown_command_hint's
     }
 
     shellCleanup();
@@ -1425,7 +1440,7 @@ void Zypper::processCommandOptions()
           if ( !cmd.empty() && cmd != "-h" && cmd != "--help" )
           {
             out().error( ex.asUserString() );
-            print_unknown_command_hint( *this );
+            print_unknown_command_hint( *this, cmd );
             ZYPP_THROW( ExitRequestException("help provided") );
           }
         }
@@ -1445,8 +1460,7 @@ void Zypper::processCommandOptions()
   // this should work for both, in shell and out of shell
   case ZypperCommand::HELP_e:
   {
-    print_unknown_command_hint( *this );
-    print_command_help_hint( *this );
+    print_main_help( *this );
     ZYPP_THROW( ExitRequestException("help provided") );
   }
 
