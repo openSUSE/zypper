@@ -202,6 +202,7 @@ int main( int argc, char * argv[] )
 
   bool ignorecase	( true );
   bool matechexact	( false );
+  bool withSrcPackages	( false );
   bool names		( true );
   bool provides		( false );
   bool requires		( false );
@@ -313,6 +314,9 @@ int main( int argc, char * argv[] )
 
     for_( it, q.begin(), q.end() )
     {
+      if ( it->isKind( ResKind::srcpackage ) && !withSrcPackages )
+	continue;
+
       tableOut( str::numstring( it->id() ), it->asString(),
 		str::form( "(%d)%s", it->repository().info().priority(), it->repository().name().c_str() ),
 		str::numstring( PoolItem(*it)->buildtime() ) );
