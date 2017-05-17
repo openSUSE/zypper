@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <zypp/PoolQuery.h>
 #include <zypp/ResObjects.h>
+#include <zypp/ui/SelectableTraits.h>
 
 static std::string appname( "NameReqPrv" );
 
@@ -63,6 +64,29 @@ void tableOut( const std::string & s1 = std::string(),
   message << endl;
 }
 
+struct PQSort
+{
+  // std::less semantic
+  bool operator()( const PoolQuery::const_iterator & lhs, const PoolQuery::const_iterator & rhs ) const
+  {
+    {
+      bool l = lhs->isSystem();
+      bool r = rhs->isSystem();
+      if ( l != r )
+	return r;
+    }
+    {
+      std::string l( lhs->ident().asString() );
+      std::string r( rhs->ident().asString() );
+      if ( l != r )
+	return l < r;
+    }
+    return avo( PoolItem(*lhs), PoolItem(*rhs) );
+    return lhs->id() > rhs->id();
+  }
+
+  ui::SelectableTraits::AVOrder avo;
+};
 
 ///////////////////////////////////////////////////////////////////
 
@@ -312,7 +336,11 @@ int main( int argc, char * argv[] )
     << (conflicts?'c':'_') << (obsoletes?'o':'_') << (recommends?'m':'_') << (supplements?'s':'_') << (enhacements?'e':'_')
     << "] {" << endl;
 
+    std::set<PoolQuery::const_iterator,PQSort> qsorted;
     for_( it, q.begin(), q.end() )
+      qsorted.insert( it );
+
+    for ( auto && it : qsorted )
     {
       if ( it->isKind( ResKind::srcpackage ) && !withSrcPackages )
 	continue;
