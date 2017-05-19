@@ -476,15 +476,15 @@ namespace zypp
                 }
                 else if ( entry == "gpgcheck" )
 		{
-		  gpgCheck.set( str::strToBool( value, gpgCheck ) );
+		  gpgCheck.restoreToDefault( str::strToBool( value, gpgCheck ) );
 		}
 		else if ( entry == "repo_gpgcheck" )
 		{
-		  repoGpgCheck.set( str::strToTriBool( value ) );
+		  repoGpgCheck.restoreToDefault( str::strToTriBool( value ) );
 		}
 		else if ( entry == "pkg_gpgcheck" )
 		{
-		  pkgGpgCheck.set( str::strToTriBool( value ) );
+		  pkgGpgCheck.restoreToDefault( str::strToTriBool( value ) );
 		}
                 else if ( entry == "vendordir" )
                 {
@@ -656,9 +656,9 @@ namespace zypp
 
     Option<DownloadMode> commit_downloadMode;
 
-    Option<bool>	gpgCheck;
-    Option<TriBool>	repoGpgCheck;
-    Option<TriBool>	pkgGpgCheck;
+    DefaultOption<bool>		gpgCheck;
+    DefaultOption<TriBool>	repoGpgCheck;
+    DefaultOption<TriBool>	pkgGpgCheck;
 
     Option<bool>	solver_onlyRequires;
     Option<bool>	solver_allowVendorChange;
@@ -1011,14 +1011,19 @@ namespace zypp
   DownloadMode ZConfig::commit_downloadMode() const
   { return _pimpl->commit_downloadMode; }
 
-  bool ZConfig::gpgCheck() const
-  { return _pimpl->gpgCheck; }
 
-  TriBool ZConfig::repoGpgCheck() const
-  { return _pimpl->repoGpgCheck; }
+  bool ZConfig::gpgCheck() const			{ return _pimpl->gpgCheck; }
+  TriBool ZConfig::repoGpgCheck() const			{ return _pimpl->repoGpgCheck; }
+  TriBool ZConfig::pkgGpgCheck() const			{ return _pimpl->pkgGpgCheck; }
 
-  TriBool ZConfig::pkgGpgCheck() const
-  { return _pimpl->pkgGpgCheck; }
+  void ZConfig::setGpgCheck( bool val_r )		{ _pimpl->gpgCheck.set( val_r ); }
+  void ZConfig::setRepoGpgCheck( TriBool val_r )	{ _pimpl->repoGpgCheck.set( val_r ); }
+  void ZConfig::setPkgGpgCheck( TriBool val_r )		{ _pimpl->pkgGpgCheck.set( val_r ); }
+
+  void ZConfig::resetGpgCheck()				{ _pimpl->gpgCheck.restoreToDefault(); }
+  void ZConfig::resetRepoGpgCheck()			{ _pimpl->repoGpgCheck.restoreToDefault(); }
+  void ZConfig::resetPkgGpgCheck()			{ _pimpl->pkgGpgCheck.restoreToDefault(); }
+
 
   bool ZConfig::solver_onlyRequires() const
   { return _pimpl->solver_onlyRequires; }

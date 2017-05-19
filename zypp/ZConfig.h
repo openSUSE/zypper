@@ -293,10 +293,18 @@ namespace zypp
        * repositories \a .repo file will overwrite the defaults here.
        */
       //@{
-      bool gpgCheck() const;		///< Turn signature checking on/off (on)
-      TriBool repoGpgCheck() const;	///< Check repo matadata signatures (indeterminate - according to gpgcheck)
-      TriBool pkgGpgCheck() const;	///< Check rpm package signatures (indeterminate - according to gpgcheck)
-      //@}
+      bool gpgCheck() const;			///< Turn signature checking on/off (on)
+      TriBool repoGpgCheck() const;		///< Check repo matadata signatures (indeterminate - according to gpgcheck)
+      TriBool pkgGpgCheck() const;		///< Check rpm package signatures (indeterminate - according to gpgcheck)
+
+      void setGpgCheck( bool val_r );		///< Change the value
+      void setRepoGpgCheck( TriBool val_r );	///< Change the value
+      void setPkgGpgCheck( TriBool val_r );	///< Change the value
+
+      void resetGpgCheck();			///< Reset to the zconfig default
+      void resetRepoGpgCheck();			///< Reset to the zconfig default
+      void resetPkgGpgCheck();			///< Reset to the zconfig default
+     //@}
       //
       /**
        * Directory for equivalent vendor definitions  (configPath()/vendors.d)
