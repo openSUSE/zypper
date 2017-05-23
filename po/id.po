@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-04-25 03:41+0000\n"
+"PO-Revision-Date: 2017-05-23 08:10+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
-"Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
-"id/>\n"
+"Language-Team: Indonesian "
+"<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2846,27 +2846,27 @@ msgid "Trying to exit gracefully..."
 msgstr "Mencoba untuk keluar dengan anggun ..."
 
 #: src/Zypper.cc:86
-#, fuzzy
 msgid "Create a solver test case for debugging."
-msgstr "Galat saat membuat uji kasus solver."
+msgstr "Buat pemecah uji kasus untuk awakutu."
 
 #: src/Zypper.cc:87
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr ""
+"Paksa pemecah untuk mencari solusi (bahkan yang agresif) daripada bertanya."
 
 #: src/Zypper.cc:88
 msgid "Do not force the solver to find solution, let it ask."
-msgstr ""
+msgstr "Jangan paksa pemecah untuk mencari solusinya, biarkan tanya."
 
 #: src/Zypper.cc:97
 msgid "Install also recommended packages in addition to the required ones."
-msgstr ""
+msgstr "Pasang juga paket yang direkomendasikan disamping yang dibutuhkan."
 
 #: src/Zypper.cc:98
 msgid "Do not install recommended packages, only required ones."
-msgstr ""
+msgstr "Jangan memasang paket yang direkomendasikan, hanya yang diperlukan."
 
 #: src/Zypper.cc:108
 msgid ""
@@ -2921,9 +2921,8 @@ msgid "Command options:"
 msgstr "Opsi perintah:"
 
 #: src/Zypper.cc:307
-#, fuzzy
 msgid "Solver options:"
-msgstr "Opsi mahir:"
+msgstr "Opsi pemecah:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
@@ -3230,6 +3229,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"Jika '%1%' bukan salah ketik, ini mungkin bukan perintah bawaan, namun "
+"disediakan sebagai sub perintah atau pengaya (lihat '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -3239,6 +3240,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"Dalam hal ini paket khusus yang menyediakan sub perintah perlu dipasang "
+"terlebih dahulu. Paket tersebut sering dinamakan '%1%' atau '%2%'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
