@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-04-25 21:48+0000\n"
+"PO-Revision-Date: 2017-05-29 23:23+0000\n"
 "Last-Translator: Samanta Magalhaes <samanta@texttrans.com>\n"
-"Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
-"zypper/master/pt_BR/>\n"
+"Language-Team: Portuguese (Brazil) "
+"<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3036,9 +3036,8 @@ msgid "Command options:"
 msgstr "Opções do comando:"
 
 #: src/Zypper.cc:307
-#, fuzzy
 msgid "Solver options:"
-msgstr "Opções avançadas:"
+msgstr "Opções do Solver:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
@@ -3346,6 +3345,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"Se '%1%' não é um erro de digitação, provavelmente ele não é um comando "
+"incorporado, mas fornecido como um subcomando ou plug-in (consulte '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -3355,6 +3356,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"Neste caso, é necessário primeiro instalar um pacote específico que inclua o "
+"subcomando. Geralmente, esses pacotes são chamados '%1%' ou '%2%'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
