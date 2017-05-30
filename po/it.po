@@ -3416,8 +3416,9 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
-"Se '%1%' non è un errore di battitura, probabilmente non è un comando "
-"integrato, ma viene fornito come subcommand o plug-in (consultare '%2%')."
+"Nel caso in cui '%1%' non sia un errore di digitazione, probabilmente non si "
+"tratta di un comando integrato, ma viene fornito come subcommand o plug-in ("
+"si veda '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -3427,8 +3428,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
-"In questo caso è necessario installare prima un pacchetto specifico che "
-"fornisca il subcommand. Tali pacchetti vengono spesso nominati '%1%' o '%2%'."
+"In questo caso deve essere prima installato un pacchetto specifico che "
+"fornisce il subcommand. Tali pacchetti sono spesso denominati '%1%' o '%2%'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
