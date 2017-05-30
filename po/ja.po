@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-04-25 10:30+0000\n"
+"PO-Revision-Date: 2017-05-30 04:47+0000\n"
 "Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2923,9 +2923,8 @@ msgid "Command options:"
 msgstr "コマンドオプション:"
 
 #: src/Zypper.cc:307
-#, fuzzy
 msgid "Solver options:"
-msgstr "熟練者向けオプション:"
+msgstr "解決器オプション:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
@@ -3232,6 +3231,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"「%1%」が入力ミスではない場合、これは組み込みのコマンドではなく、サブコマンドやプラグインとして提供されている可能性があります(「%2%」を参照してくだ"
+"さい) 。"
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -3241,6 +3242,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"この場合、あらかじめサブコマンドを提供する特定のパッケージをインストールしておく必要があります。多くの場合、これらのパッケージは「%1%」や「%2%」のよ"
+"うな名前になっています。"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
