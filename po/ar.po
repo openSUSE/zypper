@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-05-30 08:25+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
+"PO-Revision-Date: 2017-05-30 08:26+0000\n"
+"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3286,7 +3286,7 @@ msgstr "تثبيت الحزم الموصى بها أيضًا مع الحزم ا�
 
 #: src/Zypper.cc:98
 msgid "Do not install recommended packages, only required ones."
-msgstr ""
+msgstr "لا تقم بتثبيت الحزم الموصى بها، ثبت فقط المطلوبة."
 
 #: src/Zypper.cc:108
 msgid ""
