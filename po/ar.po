@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-05-30 08:22+0000\n"
-"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
+"PO-Revision-Date: 2017-05-30 08:24+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3274,7 +3274,7 @@ msgstr "إنشاء حالة اختبار المحلل لتصحيح الأخطا�
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
-msgstr "فرض المحلل لإيجاد حل (السماح بالمغامرةر) بدلا من السؤال."
+msgstr "فرض على المحلل إيجاد حل (حتى لو كان حلاً شديدًا) بدلاً من السؤال."
 
 #: src/Zypper.cc:88
 msgid "Do not force the solver to find solution, let it ask."
