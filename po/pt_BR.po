@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
 "PO-Revision-Date: 2017-05-30 13:57+0000\n"
-"Last-Translator: Samanta Magalhaes <samanta@texttrans.com>\n"
+"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -3037,7 +3037,7 @@ msgstr "Opções do comando:"
 
 #: src/Zypper.cc:307
 msgid "Solver options:"
-msgstr "Opções do Solver:"
+msgstr "Opções avançadas:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
