@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
 "PO-Revision-Date: 2017-05-30 08:25+0000\n"
-"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -3282,7 +3282,7 @@ msgstr "لا تجبر المحلل على إيجاد حل، واسمح بالس�
 
 #: src/Zypper.cc:97
 msgid "Install also recommended packages in addition to the required ones."
-msgstr "تثبيت الحزم الموصى مع الحزم المطلوبة."
+msgstr "تثبيت الحزم الموصى بها أيضًا مع الحزم المطلوبة."
 
 #: src/Zypper.cc:98
 msgid "Do not install recommended packages, only required ones."
