@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-05-30 08:59+0000\n"
-"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"PO-Revision-Date: 2017-05-30 13:46+0000\n"
+"Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -3103,7 +3103,7 @@ msgstr "Opzioni del comando:"
 
 #: src/Zypper.cc:307
 msgid "Solver options:"
-msgstr "Opzioni risolutore:"
+msgstr "Opzioni del risolutore:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
