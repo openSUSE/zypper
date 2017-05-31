@@ -85,9 +85,6 @@ class Resolver : private base::NonCopyable
 
     /** \name Solver flags */
     //@{
-    bool _forceResolve;           // remove items which are conflicts with others or
-                                  // have unfulfilled requirements.
-                                  // This behaviour is favourited by ZMD
     bool _upgradeMode;            // Resolver has been called with doUpgrade
     bool _updateMode;            // Resolver has been called with doUpdate
     bool _verifying;              // The system will be checked
@@ -173,9 +170,6 @@ class Resolver : private base::NonCopyable
     bool onlyRequires () const			{ return _onlyRequires; }
     void setOnlyRequires( TriBool state_r );
 
-    bool forceResolve()	const 			{ return _forceResolve; }
-    void setForceResolve( TriBool state_r )	{ _forceResolve = indeterminate(state_r) ? false : bool(state_r); }
-
     bool isUpgradeMode() const 			{ return _upgradeMode; }// Resolver has been called with doUpgrade
     void setUpgradeMode( bool yesno_r )		{ _upgradeMode = yesno_r; }
 
@@ -195,6 +189,8 @@ class Resolver : private base::NonCopyable
 #define ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER )	\
     void ZSETTER( TriBool state_r );		\
     bool ZGETTER() const;			\
+
+    ZOLV_FLAG_TRIBOOL( setForceResolve,		forceResolve )
 
     ZOLV_FLAG_TRIBOOL( setAllowDowngrade,	allowDowngrade )
     ZOLV_FLAG_TRIBOOL( setAllowNameChange,	allowNameChange )

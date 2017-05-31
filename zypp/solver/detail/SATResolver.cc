@@ -143,13 +143,13 @@ SATResolver::dumpOn( std::ostream & os ) const
 	OUTS( ALLOW_DOWNGRADE );
 	OUTS( ALLOW_ARCHCHANGE );
 	OUTS( ALLOW_VENDORCHANGE );
+	OUTS( ALLOW_NAMECHANGE );
 	OUTS( ALLOW_UNINSTALL );
 	OUTS( NO_UPDATEPROVIDE );
 	OUTS( SPLITPROVIDES );
 	OUTS( IGNORE_RECOMMENDED );
 	OUTS( ADD_ALREADY_RECOMMENDED );
 	OUTS( NO_INFARCHCHECK );
-	OUTS( ALLOW_NAMECHANGE );
 	OUTS( KEEP_EXPLICIT_OBSOLETES );
 	OUTS( BEST_OBEY_POLICY );
 	OUTS( NO_AUTOTARGET );
@@ -185,10 +185,10 @@ SATResolver::SATResolver (const ResPool & pool, sat::detail::CPool *satPool)
     , _allownamechange		( false )
     , _allowarchchange		( false )
     , _allowvendorchange	( ZConfig::instance().solver_allowVendorChange() )
-    , _allowuninstall(false)
+    , _allowuninstall		( false )
     , _updatesystem(false)
-    , _noupdateprovide(false)
-    , _dosplitprovides(true)
+    , _noupdateprovide		( false )
+    , _dosplitprovides		( true )
     , _onlyRequires(ZConfig::instance().solver_onlyRequires())
     , _ignorealreadyrecommended(true)
     , _distupgrade(false)
@@ -399,9 +399,9 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_NAMECHANGE,		_allownamechange);
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE,		_allowarchchange);
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE,		_allowvendorchange);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
-    solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
-    solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL,		_allowuninstall);
+    solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE,		_noupdateprovide);
+    solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES,		_dosplitprovides);
     solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
     solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
     solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
@@ -837,9 +837,9 @@ void SATResolver::doUpdate()
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_NAMECHANGE,		_allownamechange);
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE,		_allowarchchange);
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE,		_allowvendorchange);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
-    solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
-    solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL,		_allowuninstall);
+    solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE,		_noupdateprovide);
+    solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES,		_dosplitprovides);
     solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
 
     sat::Pool::instance().prepare();

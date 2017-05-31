@@ -66,7 +66,6 @@ std::ostream & Resolver::dumpOn( std::ostream & os ) const
 {
   os << "<resolver>" << endl;
   #define OUTS(t) os << "  " << #t << ":\t" << t << endl;
-  OUTS( _forceResolve );
   OUTS( _upgradeMode );
   OUTS( _updateMode );
   OUTS( _verifying );
@@ -85,7 +84,6 @@ Resolver::Resolver (const ResPool & pool)
     : _pool(pool)
     , _satResolver(NULL)
     , _poolchanged(_pool.serial() )
-    , _forceResolve		(false)
     , _upgradeMode		(false)
     , _updateMode		(false)
     , _verifying		(false)
@@ -114,6 +112,8 @@ Resolver::~Resolver()
     { return _satResolver->ZVARNAME; }							\
 
 // NOTE: ZVARDEFAULT must be in sync with SATResolver ctor
+ZOLV_FLAG_TRIBOOL( setForceResolve,		forceResolve,		_allowuninstall,	false )
+
 ZOLV_FLAG_TRIBOOL( setAllowDowngrade,		allowDowngrade,		_allowdowngrade,	false )
 ZOLV_FLAG_TRIBOOL( setAllowNameChange,		allowNameChange,	_allownamechange,	false )
 ZOLV_FLAG_TRIBOOL( setAllowArchChange,		allowArchChange,	_allowarchchange,	false )
@@ -307,13 +307,7 @@ void Resolver::solverInit()
     _satResolver->setFixsystem			( isVerifyingMode() );
     _satResolver->setIgnorealreadyrecommended	( ignoreAlreadyRecommended() );
     _satResolver->setOnlyRequires		( onlyRequires() );
-    _satResolver->setAllowdowngrade		(false);
-    _satResolver->setAllowarchchange		(false);
-    _satResolver->setAllowvendorchange		( allowVendorChange() );
-    _satResolver->setAllowuninstall		( forceResolve() );
     _satResolver->setUpdatesystem		(_updateMode);
-    _satResolver->setNoupdateprovide		(false);
-    _satResolver->setDosplitprovides		(true);
     _satResolver->setSolveSrcPackages		( solveSrcPackages() );
     _satResolver->setCleandepsOnRemove		( cleandepsOnRemove() );
 
