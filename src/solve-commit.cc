@@ -285,7 +285,8 @@ static void set_no_recommends( Zypper & zypper )
 static void set_ignore_recommends_of_installed(Zypper & zypper)
 {
   bool ignore = true;
-  if ( zypper.command() == ZypperCommand::DIST_UPGRADE || zypper.command() == ZypperCommand::INSTALL_NEW_RECOMMENDS )
+  if ( ( zypper.command() == ZypperCommand::DIST_UPGRADE && !zypper.cOpts().count("no-recommends") )
+    || zypper.command() == ZypperCommand::INSTALL_NEW_RECOMMENDS )
     ignore = false;
   DBG << "ignore recommends of already installed packages: " << ignore << endl;
   God->resolver()->setIgnoreAlreadyRecommended( ignore );
