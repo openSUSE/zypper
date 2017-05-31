@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May 31 11:49:07 CEST 2017 - ma@suse.de
+
+- Testcase: add missing solver flags (bsc#1041889)
+- version 16.12.0 (0)
+
+-------------------------------------------------------------------
 Fri May 12 11:36:52 CEST 2017 - ma@suse.de
 
 - add identIsAutoInstalled convenience methods
