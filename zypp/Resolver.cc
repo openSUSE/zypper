@@ -96,10 +96,6 @@ namespace zypp
   void Resolver::setUpdateMode( bool yesno_r )		{ return _pimpl->setUpdateMode( yesno_r ); }
   bool Resolver::updateMode() const			{ return _pimpl->isUpdateMode(); }
 
-  void Resolver::setAllowVendorChange( bool yesno_r )	{ _pimpl->setAllowVendorChange( yesno_r ); }
-  void Resolver::setDefaultAllowVendorChange()		{ _pimpl->setAllowVendorChange( indeterminate ); }
-  bool Resolver::allowVendorChange() const		{ return _pimpl->allowVendorChange(); }
-
   void Resolver::setSystemVerification( bool yesno_r )	{ _pimpl->setVerifyingMode( yesno_r ); }
   void Resolver::setDefaultSystemVerification()		{ _pimpl->setVerifyingMode( indeterminate ); }
   bool Resolver::systemVerification() const		{ return _pimpl->isVerifyingMode(); }
@@ -119,6 +115,11 @@ namespace zypp
 #define ZOLV_FLAG_TRIBOOL( ZSETTER, ZDEFAULT, ZGETTER )				\
   ZOLV_FLAG_BOOL( ZSETTER , ZGETTER )						\
   void Resolver::ZDEFAULT()		{ _pimpl->ZSETTER( indeterminate ); }	\
+
+  ZOLV_FLAG_TRIBOOL( setAllowDowngrade,		setDefaultAllowDowngrade,	allowDowngrade )
+  ZOLV_FLAG_TRIBOOL( setAllowNameChange,	setDefaultAllowNameChange,	allowNameChange )
+  ZOLV_FLAG_TRIBOOL( setAllowArchChange,	setDefaultAllowArchChange,	allowArchChange )
+  ZOLV_FLAG_TRIBOOL( setAllowVendorChange,	setDefaultAllowVendorChange,	allowVendorChange )
 
   ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade,	dupSetDefaultAllowDowngrade,	dupAllowDowngrade )
   ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange,	dupSetDefaultAllowNameChange,	dupAllowNameChange )

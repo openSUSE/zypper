@@ -212,17 +212,33 @@ namespace zypp
     void setUpdateMode( bool yesno_r );
     bool updateMode() const;
 
-    /**
-     * Setting whether the solver should allow or disallow vendor changes.
-     *
-     * If OFF (the default) the solver will replace packages with packages
-     * of the same (or equivalent) vendor ony.
-     *
+
+    /** \name  Solver flags (non DUP modes)
+     * Default for all flags is \c false unless overwritten by zypp.conf.
+     */
+    //@{
+    /** Whether to allow to downgrade installed solvable */
+    void setAllowDowngrade( bool yesno_r );
+    void setDefaultAllowDowngrade();	// Set back to default
+    bool allowDowngrade() const;
+
+    /** Whether to allow to change name of installed solvable */
+    void setAllowNameChange( bool yesno_r );
+    void setDefaultAllowNameChange();	// Set back to default
+    bool allowNameChange() const;
+
+    /** Whether to allow to change architecture of installed solvables */
+    void setAllowArchChange( bool yesno_r );
+    void setDefaultAllowArchChange();	// Set back to default
+    bool allowArchChange() const;
+
+    /**  Whether to allow to change vendor of installed solvables
      * \see \ref VendorAttr for definition of vendor equivalence.
-     **/
+     */
     void setAllowVendorChange( bool yesno_r );
-    void setDefaultAllowVendorChange(); // set back to default (in zypp.conf)
+    void setDefaultAllowVendorChange();	// Set back to default
     bool allowVendorChange() const;
+    //@}
 
     /**
      * System verification mode also monitors and repairs dependencies
@@ -256,7 +272,7 @@ namespace zypp
 
     /** \name  Solver flags for DUP mode.
      * DUP mode default settings differ from 'ordinary' ones. Default for
-     * all DUP flags is \c true.
+     * all DUP flags is \c true unless overwritten by zypp.conf.
      */
     //@{
     /** dup mode: allow to downgrade installed solvable */

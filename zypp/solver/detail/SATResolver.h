@@ -96,6 +96,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
   public:
     bool _fixsystem:1;			// repair errors in rpm dependency graph
     bool _allowdowngrade:1;		// allow to downgrade installed solvable
+    bool _allownamechange:1;		// allow to change name of installed solvable
     bool _allowarchchange:1;		// allow to change architecture of installed solvables
     bool _allowvendorchange:1;		// allow to change vendor of installed solvables
     bool _allowuninstall:1;		// allow removal of installed solvables

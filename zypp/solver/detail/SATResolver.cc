@@ -175,14 +175,16 @@ SATResolver::dumpOn( std::ostream & os ) const
 
 //---------------------------------------------------------------------------
 
+// NOTE: flag defaults must be in sync with ZVARDEFAULT in Resolver.cc
 SATResolver::SATResolver (const ResPool & pool, sat::detail::CPool *satPool)
     : _pool(pool)
     , _satPool(satPool)
     , _satSolver(NULL)
     , _fixsystem(false)
-    , _allowdowngrade(false)
-    , _allowarchchange(false)
-    , _allowvendorchange(ZConfig::instance().solver_allowVendorChange())
+    , _allowdowngrade		( false )
+    , _allownamechange		( false )
+    , _allowarchchange		( false )
+    , _allowvendorchange	( ZConfig::instance().solver_allowVendorChange() )
     , _allowuninstall(false)
     , _updatesystem(false)
     , _noupdateprovide(false)
@@ -393,10 +395,11 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	queue_push( &(_jobQueue), 0 );
     }
     solver_set_flag(_satSolver, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE, _allowdowngrade);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE,		_allowdowngrade);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_NAMECHANGE,		_allownamechange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE,		_allowarchchange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE,		_allowvendorchange);
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE, _allowarchchange);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE, _allowvendorchange);
     solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
     solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
     solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
@@ -830,10 +833,11 @@ void SATResolver::doUpdate()
 	queue_push( &(_jobQueue), 0 );
     }
     solver_set_flag(_satSolver, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE, _allowdowngrade);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE,		_allowdowngrade);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_NAMECHANGE,		_allownamechange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE,		_allowarchchange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE,		_allowvendorchange);
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE, _allowarchchange);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE, _allowvendorchange);
     solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
     solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
     solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);

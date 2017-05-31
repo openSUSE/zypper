@@ -94,7 +94,6 @@ class Resolver : private base::NonCopyable
     bool _onlyRequires; 	  // do install required resolvables only
                                   // no recommended resolvables, language
                                   // packages, hardware packages (modalias)
-    bool _allowVendorChange;	// whether the solver should allow or disallow vendor changes.
     bool _solveSrcPackages;	// whether to generate solver jobs for selected source packges.
     bool _cleandepsOnRemove;	// whether removing a package should also remove no longer needed requirements
 
@@ -186,9 +185,6 @@ class Resolver : private base::NonCopyable
     bool isVerifyingMode() const 		{ return _verifying; }	// The system will be checked
     void setVerifyingMode( TriBool state_r )	{ _verifying = indeterminate(state_r) ? false : bool(state_r); }
 
-    bool allowVendorChange() const		{ return _allowVendorChange; }
-    void setAllowVendorChange( TriBool state_r );
-
     bool solveSrcPackages() const 		{ return _solveSrcPackages; }
     void setSolveSrcPackages( TriBool state_r )	{ _solveSrcPackages = indeterminate(state_r) ? false : bool(state_r); }
 
@@ -199,6 +195,11 @@ class Resolver : private base::NonCopyable
 #define ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER )	\
     void ZSETTER( TriBool state_r );		\
     bool ZGETTER() const;			\
+
+    ZOLV_FLAG_TRIBOOL( setAllowDowngrade,	allowDowngrade )
+    ZOLV_FLAG_TRIBOOL( setAllowNameChange,	allowNameChange )
+    ZOLV_FLAG_TRIBOOL( setAllowArchChange,	allowArchChange )
+    ZOLV_FLAG_TRIBOOL( setAllowVendorChange,	allowVendorChange )
 
     ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade,	dupAllowDowngrade )
     ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange,	dupAllowNameChange )

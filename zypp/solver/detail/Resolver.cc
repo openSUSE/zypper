@@ -71,7 +71,6 @@ std::ostream & Resolver::dumpOn( std::ostream & os ) const
   OUTS( _updateMode );
   OUTS( _verifying );
   OUTS( _onlyRequires );
-  OUTS( _allowVendorChange );
   OUTS( _solveSrcPackages );
   OUTS( _cleandepsOnRemove );
   OUTS( _ignoreAlreadyRecommended );
@@ -91,7 +90,7 @@ Resolver::Resolver (const ResPool & pool)
     , _updateMode		(false)
     , _verifying		(false)
     , _onlyRequires		( ZConfig::instance().solver_onlyRequires() )
-    , _allowVendorChange	( ZConfig::instance().solver_allowVendorChange() )
+//    , _allowVendorChange	( ZConfig::instance().solver_allowVendorChange() )
     , _solveSrcPackages		( false )
     , _cleandepsOnRemove	( ZConfig::instance().solver_cleandepsOnRemove() )
     , _ignoreAlreadyRecommended	( true )
@@ -115,6 +114,12 @@ Resolver::~Resolver()
     bool Resolver::ZGETTER() const							\
     { return _satResolver->ZVARNAME; }							\
 
+// NOTE: ZVARDEFAULT must be in sync with SATResolver ctor
+ZOLV_FLAG_TRIBOOL( setAllowDowngrade,		allowDowngrade,		_allowdowngrade,	false )
+ZOLV_FLAG_TRIBOOL( setAllowNameChange,		allowNameChange,	_allownamechange,	false )
+ZOLV_FLAG_TRIBOOL( setAllowArchChange,		allowArchChange,	_allowarchchange,	false )
+ZOLV_FLAG_TRIBOOL( setAllowVendorChange,	allowVendorChange,	_allowvendorchange,	ZConfig::instance().solver_allowVendorChange() )
+
 ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade,	dupAllowDowngrade,	_dup_allowdowngrade,	ZConfig::instance().solver_dupAllowDowngrade() )
 ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange,	dupAllowNameChange,	_dup_allownamechange,	ZConfig::instance().solver_dupAllowNameChange() )
 ZOLV_FLAG_TRIBOOL( dupSetAllowArchChange,	dupAllowArchChange,	_dup_allowarchchange,	ZConfig::instance().solver_dupAllowArchChange() )
@@ -122,11 +127,6 @@ ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange,	dupAllowVendorChange,	_dup_allowvend
 
 #undef ZOLV_FLAG_TRIBOOL
 //---------------------------------------------------------------------------
-
-void Resolver::setAllowVendorChange( TriBool state_r )
-{
-  _allowVendorChange = indeterminate(state_r) ? ZConfig::instance().solver_allowVendorChange() : bool(state_r);
-}
 
 void Resolver::setOnlyRequires( TriBool state_r )
 {
