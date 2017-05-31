@@ -276,6 +276,7 @@ class  HelixControl {
   private:
     std::string dumpFile; // Path of the generated testcase
     std::ofstream *file;
+    bool _inSetup;
 
   public:
     HelixControl (const std::string & controlPath,
@@ -283,12 +284,24 @@ class  HelixControl {
 		  const Arch & systemArchitecture,
 		  const target::Modalias::ModaliasList & modaliasList,
 		  const std::set<std::string> & multiversionSpec,
-		  const std::string & systemPath,
-		  const bool forceResolve,
-		  const bool onlyRequires,
-		  const bool ignorealreadyrecommended);
+		  const std::string & systemPath);
     HelixControl ();
     ~HelixControl ();
+
+    void closeSetup()
+    {
+      if ( _inSetup )
+      {
+	*file << "</setup>" << endl << "<trial>" << endl;
+	_inSetup = false;
+      }
+    }
+
+    void addTagIf( const std::string & tag_r, bool yesno_r = true )
+    {
+      if ( yesno_r )
+	*file << (_inSetup ? TAB : "") << "<" << tag_r << "/>" << endl;
+    }
 
     void installResolvable( const PoolItem & pi_r );
     void lockResolvable( const PoolItem & pi_r );
@@ -296,10 +309,6 @@ class  HelixControl {
     void deleteResolvable( const PoolItem & pi_r );
     void addDependencies (const CapabilitySet &capRequire, const CapabilitySet &capConflict);
     void addUpgradeRepos( const std::set<Repository> & upgradeRepos_r );
-
-    void distupgrade ();
-    void verifySystem ();
-    void update ();
 
     std::string filename () { return dumpFile; }
 };
@@ -309,11 +318,9 @@ HelixControl::HelixControl(const std::string & controlPath,
 			   const Arch & systemArchitecture,
 			   const target::Modalias::ModaliasList & modaliasList,
 			   const std::set<std::string> & multiversionSpec,
-			   const std::string & systemPath,
-			   const bool forceResolve,
-			   const bool onlyRequires,
-			   const bool ignorealreadyrecommended)
+			   const std::string & systemPath)
     :dumpFile (controlPath)
+    ,_inSetup( true )
 {
     file = new ofstream(controlPath.c_str());
     if (!file) {
@@ -375,7 +382,7 @@ HelixControl::HelixControl(const std::string & controlPath,
 
 
     for_( it, modaliasList.begin(), modaliasList.end() ) {
-	*file << TAB << "<modalias name=\"" <<  *it
+	*file << TAB << "<modalias name=\"" <<  xml_escape(*it)
 	      << "\" />" << endl;
     }
 
@@ -384,15 +391,7 @@ HelixControl::HelixControl(const std::string & controlPath,
 	      << "\" />" << endl;
     }
 
-    if (forceResolve)
-	*file << TAB << "<forceResolve/>" << endl;
-    if (onlyRequires)
-	*file << TAB << "<onlyRequires/>" << endl;
-    if (ignorealreadyrecommended)
-	*file << TAB << "<ignorealreadyrecommended/>" << endl;
-
-    *file << "</setup>" << endl
-	  << "<trial>" << endl;
+    // setup continued outside....
 }
 
 HelixControl::HelixControl()
@@ -403,6 +402,7 @@ HelixControl::HelixControl()
 
 HelixControl::~HelixControl()
 {
+    closeSetup();	// in case it is still open
     *file << "</trial>" << endl
 	  << "</test>" << endl;
     delete(file);
@@ -468,21 +468,6 @@ void HelixControl::addUpgradeRepos( const std::set<Repository> & upgradeRepos_r 
   {
     *file << "<upgradeRepo name=\"" << it->alias() << "\"/>" << endl;
   }
-}
-
-void HelixControl::distupgrade()
-{
-    *file << "<distupgrade/>" << endl;
-}
-
-void HelixControl::verifySystem()
-{
-    *file << "<verify/>" << endl;
-}
-
-void HelixControl::update()
-{
-    *file << "<update/>" << endl;
 }
 
 //---------------------------------------------------------------------------
@@ -578,10 +563,27 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 			  ZConfig::instance().systemArchitecture(),
 			  target::Modalias::instance().modaliasList(),
 			  ZConfig::instance().multiversionSpec(),
-			  "solver-system.xml.gz",
-			  resolver.forceResolve(),
-			  resolver.onlyRequires(),
-			  resolver.ignoreAlreadyRecommended() );
+			  "solver-system.xml.gz");
+
+    // In <setup>: resolver flags,...
+    control.addTagIf( "ignorealreadyrecommended",	resolver.ignoreAlreadyRecommended() );
+    control.addTagIf( "onlyRequires",		resolver.onlyRequires() );
+    control.addTagIf( "forceResolve",		resolver.forceResolve() );
+
+    control.addTagIf( "cleandepsOnRemove",	resolver.cleandepsOnRemove() );
+
+    control.addTagIf( "allowDowngrade",		resolver.allowDowngrade() );
+    control.addTagIf( "allowNameChange",	resolver.allowNameChange() );
+    control.addTagIf( "allowArchChange",	resolver.allowArchChange() );
+    control.addTagIf( "allowVendorChange",	resolver.allowVendorChange() );
+
+    control.addTagIf( "dupAllowDowngrade",	resolver.dupAllowDowngrade() );
+    control.addTagIf( "dupAllowNameChange",	resolver.dupAllowNameChange() );
+    control.addTagIf( "dupAllowArchChange",	resolver.dupAllowArchChange() );
+    control.addTagIf( "dupAllowVendorChange",	resolver.dupAllowVendorChange() );
+
+    control.closeSetup();
+    // Entering <trial>...
 
     for ( const PoolItem & pi : items_to_install )
     { control.installResolvable( pi ); }
@@ -600,12 +602,9 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 			     SystemCheck::instance().conflictSystemCap());
     control.addUpgradeRepos( resolver.upgradeRepos() );
 
-    if (resolver.isUpgradeMode())
-	control.distupgrade ();
-    if (resolver.isUpdateMode())
-	control.update();
-    if (resolver.isVerifyingMode())
-	control.verifySystem();
+    control.addTagIf( "distupgrade",	resolver.isUpgradeMode() );
+    control.addTagIf( "verify",	 	resolver.isUpdateMode() );
+    control.addTagIf( "update",	 	resolver.isVerifyingMode() );
 
     return true;
 }
