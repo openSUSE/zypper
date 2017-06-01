@@ -143,7 +143,7 @@ bool confirm_licenses(Zypper & zypper)
             << " is different, needs confirmation " << endl;
       }
 
-      bool auto_agree = auto_agree_all || ( auto_agree_product && pi.isKind<Product>() );
+      bool auto_agree = auto_agree_all || ( auto_agree_product && it->resolvable()->isKind<Product>() );
       if ( auto_agree )
       {
       	zypper.out().info(boost::str(
