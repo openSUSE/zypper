@@ -103,7 +103,8 @@ using namespace zypp;
     {"auto-agree-with-product-licenses",no_argument,	0,  0  }	// Mainly for SUSEConnect, not (yet) documented
 
 #define option_License_Agreement	\
-     option( "-l", "auto-agree-with-licenses",	_("Automatically say 'yes' to third party license confirmation prompt. See 'man zypper' for more details.") )
+     option( "-l", "auto-agree-with-licenses",	_("Automatically say 'yes' to third party license confirmation prompt. See 'man zypper' for more details.") ),	\
+    .option( "auto-agree-with-product-licenses",_("Automatically accept product licenses only. See 'man zypper' for more details.") )
 
 // with/without optional patches
 #define ARG_WITHout_OPTIONAL	\
