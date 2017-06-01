@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jun  1 14:58:45 CEST 2017 - ma@suse.de
+
+- Accept --auto-agree-with-product-licenses from SUSEconnect (bsc#1037783)
+- version 1.13.28
+
+-------------------------------------------------------------------
 Fri May 12 12:48:30 CEST 2017 - ma@suse.de
 
 - Unknown command: add hint about possibly missing plugin package
