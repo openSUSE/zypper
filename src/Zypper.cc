@@ -97,6 +97,13 @@ using namespace zypp;
      option( "--recommends",		_("Install also recommended packages in addition to the required ones.") )	\
     .option( "--no-recommends	",	_("Do not install recommended packages, only required ones.") )
 
+// auto license agreements
+#define ARG_License_Agreement	\
+    {"auto-agree-with-licenses",	no_argument,	0, 'l' },	\
+    {"auto-agree-with-product-licenses",no_argument,	0,  0  }	// Mainly for SUSEConnect, not (yet) documented
+
+#define option_License_Agreement	\
+     option( "-l", "auto-agree-with-licenses",	_("Automatically say 'yes' to third party license confirmation prompt. See 'man zypper' for more details.") )
 
 // with/without optional patches
 #define ARG_WITHout_OPTIONAL	\
@@ -1482,9 +1489,8 @@ void Zypper::processCommandOptions()
       {"replacefiles",              no_argument,       0,  0 },
       {"capability",                no_argument,       0, 'C'},
       {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
-      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      // rug compatibility, we have --auto-agree-with-licenses
-      {"agree-to-third-party-licenses",  no_argument,  0,  0 },
+      ARG_License_Agreement,
+      {"agree-to-third-party-licenses",  no_argument,  0,  0 },	// rug compatibility, we have --auto-agree-with-licenses
       ARG_Solver_Flags_Common,
       ARG_Solver_Flags_Recommends,
       {"dry-run",                   no_argument,       0, 'D'},
@@ -2162,9 +2168,8 @@ void Zypper::processCommandOptions()
       {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
       {"skip-interactive",          no_argument,       0,  0 },
       {"with-interactive",          no_argument,       0,  0 },
-      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      // rug compatibility, we have --auto-agree-with-licenses
-      {"agree-to-third-party-licenses",  no_argument,  0, 0},
+      ARG_License_Agreement,
+      {"agree-to-third-party-licenses",  no_argument,  0, 0},	// rug compatibility, we have --auto-agree-with-licenses
       {"best-effort",               no_argument,       0, 0},
       ARG_Solver_Flags_Common,
       ARG_Solver_Flags_Recommends,
@@ -2236,7 +2241,7 @@ void Zypper::processCommandOptions()
       {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
       {"skip-interactive",          no_argument,       0,  0 },
       {"with-interactive",          no_argument,       0,  0 },
-      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      ARG_License_Agreement,
       ARG_Solver_Flags_Common,
       ARG_Solver_Flags_Recommends,
       {"replacefiles",              no_argument,       0,  0 },
@@ -2348,7 +2353,7 @@ void Zypper::processCommandOptions()
       {"repo",                      required_argument, 0, 'r'},
       {"from",                      required_argument, 0,  0 },
       {"replacefiles",              no_argument,       0,  0 },
-      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      ARG_License_Agreement,
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},

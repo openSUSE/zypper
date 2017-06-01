@@ -96,13 +96,11 @@ namespace
 bool confirm_licenses( Zypper & zypper )
 {
   bool confirmed = true;
-  bool license_auto_agree = zypper.cOpts().count("auto-agree-with-licenses")
-                         || zypper.cOpts().count("agree-to-third-party-licenses");
+  bool auto_agree_all = zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses");
+  bool auto_agree_product = auto_agree_all || zypper.cOpts().count("auto-agree-with-product-licenses");
 
   for ( const PoolItem & pi : God->pool() )
   {
-    bool to_accept = true;
-
     if ( pi.status().isToBeInstalled() && !pi.licenseToConfirm().empty() )
     {
       ui::Selectable::Ptr selectable = God->pool().proxy().lookup( pi.kind(), pi.name() );
@@ -124,7 +122,8 @@ bool confirm_licenses( Zypper & zypper )
         DBG << "new license for " << pi.name() << " is different, needs confirmation " << endl;
       }
 
-      if ( license_auto_agree )
+      bool auto_agree = auto_agree_all || ( auto_agree_product && pi.isKind<Product>() );
+      if ( auto_agree )
       {
 	zypper.out().info(
 	  // translators: the first %s is name of the resolvable,
@@ -142,9 +141,7 @@ bool confirm_licenses( Zypper & zypper )
       if ( pi.kind() != ResKind::package )
 	kindstr = " (" + kind_to_string_localized( pi.kind(), 1 ) + ")";
 
-      if ( !pi.needToAcceptLicense() )
-        to_accept = false;
-
+      bool to_accept = pi.needToAcceptLicense();	// true except for e.g. openSUSE which wants the text to be shown, but no need to agree.
       if (to_accept)
       {
         // introduction
@@ -166,7 +163,7 @@ bool confirm_licenses( Zypper & zypper )
         // lincense prompt
         std::string question( _("Do you agree with the terms of the license?") );
         //! \todo add 'v' option to view the license again, add prompt help
-        if ( !read_bool_answer( PROMPT_YN_LICENSE_AGREE, question, license_auto_agree ) )
+        if ( !read_bool_answer( PROMPT_YN_LICENSE_AGREE, question, auto_agree ) )
         {
           confirmed = false;
 

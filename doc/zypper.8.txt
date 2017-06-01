@@ -245,6 +245,9 @@ Package Management Commands
 	*-l*, *--auto-agree-with-licenses*::
 		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
+	*--auto-agree-with-product-licenses*::
+		Automatically accept product licenses only. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered. So there's no need to confirm the product license again at install time.
+
 	*--replacefiles*::
 		Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. *--download-as-needed* disables the file conflict check because access to all packages file lists is needed in advance in order to perform the check.
 
@@ -468,6 +471,9 @@ Update Management Commands
 	*-l*, *--auto-agree-with-licenses*::
 		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
+	*--auto-agree-with-product-licenses*::
+		Automatically accept product licenses only. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered. So there's no need to confirm the product license again at install time.
+
 	*--replacefiles*::
 		Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. *--download-as-needed* disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
 
@@ -586,7 +592,10 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 		Avoid skipping of interactive patches when in non-interactive mode.
 
 	*-l*, *--auto-agree-with-licenses*::
-		See the *update* command for description of this option.
+		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+
+	*--auto-agree-with-product-licenses*::
+		Automatically accept product licenses only. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered. So there's no need to confirm the product license again at install time.
 
 	*--replacefiles*::
 		Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. *--download-as-needed* disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
@@ -627,6 +636,9 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
 	*-l*, *--auto-agree-with-licenses*::
 		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+
+	*--auto-agree-with-product-licenses*::
+		Automatically accept product licenses only. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered. So there's no need to confirm the product license again at install time.
 
 	*--replacefiles*::
 		Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. *--download-as-needed* disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
