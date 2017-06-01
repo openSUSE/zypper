@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jun  1 15:45:55 CEST 2017 - ma@suse.de
+
+- Accept --auto-agree-with-product-licenses from SUSEconnect (bsc#1037783)
+- version 1.11.65
+
+-------------------------------------------------------------------
 Fri Apr 21 16:15:10 CEST 2017 - ma@suse.de
 
 - Fix TODOs in zypper manpage (bsc#1032259)
