@@ -113,14 +113,11 @@ ostream& operator << (ostream & stm, ios::iostate state)
 bool confirm_licenses(Zypper & zypper)
 {
   bool confirmed = true;
-  bool license_auto_agree =
-    zypper.cOpts().count("auto-agree-with-licenses")
-    || zypper.cOpts().count("agree-to-third-party-licenses");
+  bool auto_agree_all = zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses");
+  bool auto_agree_product = auto_agree_all || zypper.cOpts().count("auto-agree-with-product-licenses");
 
   for (ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it)
   {
-    bool to_accept = true;
-
     if (it->status().isToBeInstalled() &&
         !it->resolvable()->licenseToConfirm().empty())
     {
@@ -146,7 +143,8 @@ bool confirm_licenses(Zypper & zypper)
             << " is different, needs confirmation " << endl;
       }
 
-      if (license_auto_agree)
+      bool auto_agree = auto_agree_all || ( auto_agree_product && pi.isKind<Product>() );
+      if ( auto_agree )
       {
       	zypper.out().info(boost::str(
             // translators: the first %s is name of the resolvable,
@@ -168,9 +166,7 @@ bool confirm_licenses(Zypper & zypper)
           " (" + kind_to_string_localized(it->resolvable()->kind(), 1) + ")" :
           string();
 
-      if ( !it->resolvable()->needToAcceptLicense() )
-        to_accept = false;
-
+      bool to_accept = it->resolvable()->needToAcceptLicense();	// true except for e.g. openSUSE which wants the text to be shown, but no need to agree.
       if (to_accept)
       {
         // introduction
@@ -194,7 +190,7 @@ bool confirm_licenses(Zypper & zypper)
         // lincense prompt
         string question = _("Do you agree with the terms of the license?");
         //! \todo add 'v' option to view the license again, add prompt help
-        if (!read_bool_answer(PROMPT_YN_LICENSE_AGREE, question, license_auto_agree))
+        if (!read_bool_answer(PROMPT_YN_LICENSE_AGREE, question, auto_agree))
         {
           confirmed = false;
 

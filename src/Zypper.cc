@@ -68,6 +68,16 @@
 using boost::format;
 using namespace zypp;
 
+///////////////////////////////////////////////////////////////////
+// for now use some defines to have consistent definition of args
+// used across multiple commands
+
+// auto license agreements
+#define ARG_License_Agreement	\
+    {"auto-agree-with-licenses",	no_argument,	0, 'l' },	\
+    {"auto-agree-with-product-licenses",no_argument,	0,  0  }	// Mainly for SUSEConnect, not (yet) documented
+
+///////////////////////////////////////////////////////////////////
 ZYpp::Ptr God = NULL;
 parsed_opts copts; // command options
 
@@ -1298,9 +1308,8 @@ void Zypper::processCommandOptions()
       {"replacefiles",              no_argument,       0,  0 },
       {"capability",                no_argument,       0, 'C'},
       {"no-confirm",                no_argument,       0, 'y'},	// rug legacy: use --non-interactive
-      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      // rug compatibility, we have --auto-agree-with-licenses
-      {"agree-to-third-party-licenses",  no_argument,  0,  0 },
+      ARG_License_Agreement,
+      {"agree-to-third-party-licenses",  no_argument,  0,  0 },	// rug compatibility, we have --auto-agree-with-licenses
       {"debug-solver",              no_argument,       0,  0 },
       {"no-force-resolution",       no_argument,       0, 'R'},
       {"force-resolution",          no_argument,       0,  0 },
@@ -1984,9 +1993,8 @@ void Zypper::processCommandOptions()
       {"no-confirm",                no_argument,       0, 'y'},	// rug legacy: use --non-interactive
       {"skip-interactive",          no_argument,       0,  0 },
       {"with-interactive",          no_argument,       0,  0 },
-      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      // rug compatibility, we have --auto-agree-with-licenses
-      {"agree-to-third-party-licenses",  no_argument,  0, 0},
+      ARG_License_Agreement,
+      {"agree-to-third-party-licenses",  no_argument,  0, 0},	// rug compatibility, we have --auto-agree-with-licenses
       {"best-effort",               no_argument,       0, 0},
       {"debug-solver",              no_argument,       0, 0},
       {"no-force-resolution",       no_argument,       0, 'R'},
@@ -2063,7 +2071,7 @@ void Zypper::processCommandOptions()
       {"updatestack-only",	    no_argument,       0,  0 },
       {"skip-interactive",          no_argument,       0,  0 },
       {"with-interactive",          no_argument,       0,  0 },
-      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      ARG_License_Agreement,
       {"debug-solver",              no_argument,       0,  0 },
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
@@ -2165,7 +2173,7 @@ void Zypper::processCommandOptions()
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
       {"replacefiles",              no_argument,       0,  0 },
-      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      ARG_License_Agreement,
       {"debug-solver",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
