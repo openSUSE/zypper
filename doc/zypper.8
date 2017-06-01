@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 04/21/2017
+.\"      Date: 06/01/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "04/21/2017" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "06/01/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -424,6 +424,11 @@ Automatically say
 to third party license confirmation prompt\&. By using this option, you choose to agree with licenses of all third\-party software this command will install\&. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before\&.
 .RE
 .PP
+\fB\-\-auto\-agree\-with\-product\-licenses\fR
+.RS 4
+Automatically accept product licenses only\&. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered\&. So there\(cqs no need to confirm the product license again at install time\&.
+.RE
+.PP
 \fB\-\-debug\-solver\fR
 .RS 4
 Create solver test case for debugging\&. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper\&.solverTestCase directory to your bug report\&. To use this option, simply add it to the problematic install or remove command\&.
@@ -834,6 +839,11 @@ Automatically say
 to third party license confirmation prompt\&. By using this option, you choose to agree with licenses of all third\-party software this command will install\&. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before\&.
 .RE
 .PP
+\fB\-\-auto\-agree\-with\-product\-licenses\fR
+.RS 4
+Automatically accept product licenses only\&. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered\&. So there\(cqs no need to confirm the product license again at install time\&.
+.RE
+.PP
 \fB\-\-debug\-solver\fR
 .RS 4
 Create solver test case for debugging\&. See the install command for details\&.
@@ -1056,9 +1066,14 @@ Avoid skipping of interactive patches when in non\-interactive mode\&.
 .PP
 \fB\-l\fR, \fB\-\-auto\-agree\-with\-licenses\fR
 .RS 4
-See the
-\fBupdate\fR
-command for description of this option\&.
+Automatically say
+\fIyes\fR
+to third party license confirmation prompt\&. By using this option, you choose to agree with licenses of all third\-party software this command will install\&. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before\&.
+.RE
+.PP
+\fB\-\-auto\-agree\-with\-product\-licenses\fR
+.RS 4
+Automatically accept product licenses only\&. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered\&. So there\(cqs no need to confirm the product license again at install time\&.
 .RE
 .PP
 \fB\-\-no\-recommends\fR
@@ -1151,6 +1166,11 @@ or
 Automatically say
 \fIyes\fR
 to third party license confirmation prompt\&. By using this option, you choose to agree with licenses of all third\-party software this command will install\&. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before\&.
+.RE
+.PP
+\fB\-\-auto\-agree\-with\-product\-licenses\fR
+.RS 4
+Automatically accept product licenses only\&. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered\&. So there\(cqs no need to confirm the product license again at install time\&.
 .RE
 .PP
 \fB\-\-no\-recommends\fR
