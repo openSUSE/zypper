@@ -225,17 +225,28 @@ namespace {
     return mayuse;
   }
 
-  inline std::string legacyCLI( const std::string & old_r, const std::string & new_r, bool global_r = false )
+  inline std::string dashdash( std::string optname_r )
+  { return optname_r.insert( 0, "--" ); }
+
+  inline std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, bool global_r = false )
   {
     return str::FormatNAC( global_r
 			 ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
 			 : _("Legacy commandline option %1% detected. Please use %2% instead.") )
-			 % old_r
-			 % new_r;
+			 % NEGATIVEString(dashdash(old_r))
+			 % POSITIVEString(dashdash(new_r));
   }
 
-  inline std::string dashdash( std::string optname_r )
-  { return std::move(optname_r.insert( 0, "--" )); }
+  inline void legacyCLITranslate( parsed_opts & copts_r, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r = Out::NORMAL )
+  {
+    if ( copts_r.count( old_r ) )
+    {
+      Zypper::instance()->out().warning( legacyCLIStr( old_r, new_r ), verbosity_r );
+      if ( ! copts_r.count( new_r ) )
+	copts_r[new_r];
+      copts_r.erase( old_r );
+    }
+  }
 
 } //namespace
 ///////////////////////////////////////////////////////////////////
@@ -3247,14 +3258,10 @@ void Zypper::processCommandOptions()
     ERR << "Unknown option or missing argument, returning." << endl;
     return;
   }
-  // RUG TRANSLATE sort-by-catalog into sort-by-repo
-  if ( _copts.count("sort-by-catalog") )
-  {
-    out().warning( legacyCLI( "--sort-by-catalog", "--sort-by-repo" ) );
-    if ( ! _copts.count("sort-by-repo") )
-      _copts["sort-by-repo"].push_back( "" );
-    _copts.erase( "sort-by-catalog" );
-  }
+
+  // Leagcy cli translations (mostly from rug to zypper)
+  legacyCLITranslate( _copts, "sort-by-catalog",		"sort-by-repo" );
+  legacyCLITranslate( _copts, "uninstalled-only",		"not-installed-only",	Out::HIGH );	// bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
 
   // bsc#957862: pkg/apt/yum user convenience: no-confirm  ==> --non-interactive
   if ( _copts.count("no-confirm") )
@@ -3265,14 +3272,6 @@ void Zypper::processCommandOptions()
       MIL << "Entering non-interactive mode" << endl;
      _gopts.non_interactive = true;
     }
-  }
-
-  // bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
-  if ( _copts.count("uninstalled-only") )
-  {
-    out().warning( legacyCLI( "--uninstalled-only", "--not-installed-only" ), Out::HIGH );
-    _copts.erase( "uninstalled-only" );
-    _copts["not-installed-only"];
   }
 
   ::copts = _copts;
