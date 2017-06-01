@@ -520,8 +520,7 @@ bool SolverRequester::installPatch( const PackageSpec & patchspec, const PoolIte
       Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
       if ( Zypper::instance()->globalOpts().reboot_req_non_interactive )
         ignoreFlags |= Patch::Reboot;
-      if ( Zypper::instance()->cOpts().count("auto-agree-with-licenses")
-	|| Zypper::instance()->cOpts().count("agree-to-third-party-licenses") )
+      if ( Zypper::instance()->cOpts().count("auto-agree-with-licenses") )
 	ignoreFlags |= Patch::License;
 
       if ( selected.isUnwanted() )

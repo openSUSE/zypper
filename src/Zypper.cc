@@ -3261,6 +3261,7 @@ void Zypper::processCommandOptions()
   }
 
   // Leagcy cli translations (mostly from rug to zypper)
+  legacyCLITranslate( _copts, "agree-to-third-party-licenses",	"auto-agree-with-licenses" );
   legacyCLITranslate( _copts, "sort-by-catalog",		"sort-by-repo" );
   legacyCLITranslate( _copts, "uninstalled-only",		"not-installed-only",	Out::HIGH );	// bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
 

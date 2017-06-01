@@ -431,7 +431,7 @@ static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
   Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
   if (zypper.globalOpts().reboot_req_non_interactive)
     ignoreFlags |= Patch::Reboot;
-  if ( zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses") )
+  if ( zypper.cOpts().count("auto-agree-with-licenses") )
     ignoreFlags |= Patch::License;
 
   cout << "interactive=\"" << (patch->interactiveWhenIgnoring(ignoreFlags) ? "true" : "false") << "\" ";

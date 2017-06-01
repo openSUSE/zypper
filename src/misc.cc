@@ -96,7 +96,7 @@ namespace
 bool confirm_licenses( Zypper & zypper )
 {
   bool confirmed = true;
-  bool auto_agree_all = zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses");
+  bool auto_agree_all = zypper.cOpts().count("auto-agree-with-licenses");
   bool auto_agree_product = auto_agree_all || zypper.cOpts().count("auto-agree-with-product-licenses");
 
   for ( const PoolItem & pi : God->pool() )
