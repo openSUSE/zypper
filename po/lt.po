@@ -12,16 +12,17 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2016-01-11 10:57+0200\n"
+"PO-Revision-Date: 2017-06-02 18:02+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
-"Language-Team: lt <opensuse-translation@opensuse.org>\n"
+"Language-Team: Lithuanian "
+"<https://l10n.opensuse.org/projects/libzypp/master/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10==1 && n%100!=11 ? 1 : n"
-"%10>=2 && (n%100<10 || n%100>=20) ? 2 : 3);\n"
-"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || "
+"n%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Weblate 2.6\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -260,7 +261,7 @@ msgstr "Parašas geras"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2367
 msgid "Unknown type of signature"
-msgstr ""
+msgstr "Nežinomo tipo parašas"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
@@ -325,6 +326,7 @@ msgstr "Nepavyksta atverti rinkmenos „%s“ įrašymui."
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
+"Nežinoma paslauga „%1%“: pašalinama nebereikalinga paslaugų saugykla „%2%“"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1084
@@ -352,7 +354,7 @@ msgstr "Kuriamas saugyklos „%s“ podėlis"
 #: zypp/RepoManager.cc:1307
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr ""
+msgstr "Nepavyksta sukurti podėlio ties %s - nepakanka teisių."
 
 #: zypp/RepoManager.cc:1371
 #, c-format, boost-format
@@ -4348,7 +4350,7 @@ msgstr "Saugykloje nėra url."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr ""
+msgstr "Paslaugos papildinys nepalaiko atributų keitimo."
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
