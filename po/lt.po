@@ -1,6 +1,5 @@
 # translation of zypper.po to lietuvių
 # Copyright (C) 2007 SuSE Linux Products GmbH, Nuernberg
-#
 # Andrius Štikonas <stikonas@gmail.com>, 2007.
 # Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016.
 msgid ""
@@ -333,13 +332,13 @@ msgstr[0] ""
 "%1% paketas neįtraukiamas į konfliktuojančių rinkmenų analizę, nes jis dar "
 "neparsiųstas:"
 msgstr[1] ""
-"%1% paketas neįtraukiamas į konfliktuojančių rinkmenų analizę, nes jie dar "
-"neparsiųsti:"
-msgstr[2] ""
 "%1% paketai neįtraukiami į konfliktuojančių rinkmenų analizę, nes jie dar "
 "neparsiųsti:"
-msgstr[3] ""
+msgstr[2] ""
 "%1% paketų neįtraukiami į konfliktuojančių rinkmenų analizę, nes jie dar "
+"neparsiųsti:"
+msgstr[3] ""
+"%1% paketas neįtraukiamas į konfliktuojančių rinkmenų analizę, nes jie dar "
 "neparsiųsti:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
@@ -348,9 +347,9 @@ msgstr[3] ""
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] "Aptiktas %1% failų konfliktas:"
-msgstr[1] "Aptiktas %1% failų konfliktas:"
-msgstr[2] "Aptikti %1% failų konfliktai:"
-msgstr[3] "Aptikta %1% failų konfliktų:"
+msgstr[1] "Aptiktas %1% failų konfliktai:"
+msgstr[2] "Aptikti %1% failų konfliktų:"
+msgstr[3] "Aptikta %1% failų konfliktas:"
 
 #: src/callbacks/rpm.h:435
 msgid "Conflicting files will be replaced."
@@ -519,9 +518,9 @@ msgstr "automatiškai"
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] "„%2%“ turi %1% atitikmenį."
-msgstr[1] "„%2%“ turi %1% atitikmenį."
-msgstr[2] "„%2%“ turi %1% atitikmenis."
-msgstr[3] "„%2%“ turi %1% atitikmenų."
+msgstr[1] "„%2%“ turi %1% atitikmenis."
+msgstr[2] "„%2%“ turi %1% atitikmenų."
+msgstr[3] "„%2%“ turi %1% atitikmenį."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:235
@@ -1081,234 +1080,234 @@ msgstr[3] "... ir dar %1%."
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "Bus įdiegtas %d NAUJAS paketas:"
-msgstr[1] "Bus įdiegtas %d NAUJAS paketas:"
-msgstr[2] "Bus įdiegti %d NAUJI paketai:"
-msgstr[3] "Bus įdiegta %d NAUJŲ paketų:"
+msgstr[1] "Bus įdiegti %d NAUJI paketai:"
+msgstr[2] "Bus įdiegta %d NAUJŲ paketų:"
+msgstr[3] "Bus įdiegtas %d NAUJAS paketas:"
 
 #: src/Summary.cc:510
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "Bus įdiegta %d NAUJA pataisa:"
-msgstr[1] "Bus įdiegta %d NAUJA pataisa:"
-msgstr[2] "Bus įdiegtos %d NAUJOS pataisos:"
-msgstr[3] "Bus įdiegta %d NAUJŲ pataisų:"
+msgstr[1] "Bus įdiegtos %d NAUJOS pataisos:"
+msgstr[2] "Bus įdiegta %d NAUJŲ pataisų:"
+msgstr[3] "Bus įdiegta %d NAUJA pataisa:"
 
 #: src/Summary.cc:515
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "Bus įdiegtas %d NAUJAS šablonas:"
-msgstr[1] "Bus įdiegtas %d NAUJAS šablonas:"
-msgstr[2] "Bus įdiegti %d NAUJI šablonai:"
-msgstr[3] "Bus įdiegta %d NAUJŲ šablonų:"
+msgstr[1] "Bus įdiegti %d NAUJI šablonai:"
+msgstr[2] "Bus įdiegta %d NAUJŲ šablonų:"
+msgstr[3] "Bus įdiegtas %d NAUJAS šablonas:"
 
 #: src/Summary.cc:520
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "Bus įdiegtas %d NAUJAS produktas:"
-msgstr[1] "Bus įdiegtas %d NAUJAS produktas:"
-msgstr[2] "Bus įdiegti %d NAUJI produktai:"
-msgstr[3] "Bus įdiegta %d NAUJŲ produktų:"
+msgstr[1] "Bus įdiegti %d NAUJI produktai:"
+msgstr[2] "Bus įdiegta %d NAUJŲ produktų:"
+msgstr[3] "Bus įdiegtas %d NAUJAS produktas:"
 
 #: src/Summary.cc:525
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "Bus įdiegtas %d šaltinis paketas:"
-msgstr[1] "Bus įdiegtas %d šaltinis paketas:"
-msgstr[2] "Bus įdiegti %d šaltiniai paketai:"
-msgstr[3] "Bus įdiegta %d šaltinių paketų:"
+msgstr[1] "Bus įdiegti %d šaltiniai paketai:"
+msgstr[2] "Bus įdiegta %d šaltinių paketų:"
+msgstr[3] "Bus įdiegtas %d šaltinis paketas:"
 
 #: src/Summary.cc:530
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "Bus įdiegta %d programa:"
-msgstr[1] "Bus įdiegta %d programa:"
-msgstr[2] "Bus įdiegtos %d programos:"
-msgstr[3] "Bus įdiegta %d programų:"
+msgstr[1] "Bus įdiegtos %d programos:"
+msgstr[2] "Bus įdiegta %d programų:"
+msgstr[3] "Bus įdiegta %d programa:"
 
 #: src/Summary.cc:552
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "Bus PAŠALINTAS %d paketas:"
-msgstr[1] "Bus PAŠALINTAS %d paketas:"
-msgstr[2] "Bus PAŠALINTI %d paketai:"
-msgstr[3] "Bus PAŠALINTA %d paketų:"
+msgstr[1] "Bus PAŠALINTI %d paketai:"
+msgstr[2] "Bus PAŠALINTA %d paketų:"
+msgstr[3] "Bus PAŠALINTAS %d paketas:"
 
 #: src/Summary.cc:557
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "Bus PAŠALINTA %d pataisa:"
-msgstr[1] "Bus PAŠALINTA %d pataisa:"
-msgstr[2] "Bus PAŠALINTOS %d pataisos:"
-msgstr[3] "Bus PAŠALINTA %d pataisų:"
+msgstr[1] "Bus PAŠALINTOS %d pataisos:"
+msgstr[2] "Bus PAŠALINTA %d pataisų:"
+msgstr[3] "Bus PAŠALINTA %d pataisa:"
 
 #: src/Summary.cc:562
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "Bus PAŠALINTAS %d šablonas:"
-msgstr[1] "Bus PAŠALINTAS %d šablonas:"
-msgstr[2] "Bus PAŠALINTI %d šablonai:"
-msgstr[3] "Bus PAŠALINTA %d šablonų:"
+msgstr[1] "Bus PAŠALINTI %d šablonai:"
+msgstr[2] "Bus PAŠALINTA %d šablonų:"
+msgstr[3] "Bus PAŠALINTAS %d šablonas:"
 
 #: src/Summary.cc:567
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "Bus PAŠALINTAS %d produktas:"
-msgstr[1] "Bus PAŠALINTAS %d produktas:"
-msgstr[2] "Bus PAŠALINTI %d produktai:"
-msgstr[3] "Bus PAŠALINTA %d produktų:"
+msgstr[1] "Bus PAŠALINTI %d produktai:"
+msgstr[2] "Bus PAŠALINTA %d produktų:"
+msgstr[3] "Bus PAŠALINTAS %d produktas:"
 
 #: src/Summary.cc:572
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "Bus PAŠALINTA %d programa:"
-msgstr[1] "Bus PAŠALINTA %d programa:"
-msgstr[2] "Bus PAŠALINTOS %d programos:"
-msgstr[3] "Bus PAŠALINTA %d programų:"
+msgstr[1] "Bus PAŠALINTOS %d programos:"
+msgstr[2] "Bus PAŠALINTA %d programų:"
+msgstr[3] "Bus PAŠALINTA %d programa:"
 
 #: src/Summary.cc:591
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "Bus naujovinamas %d paketas :"
-msgstr[1] "Bus naujovinamas %d paketas:"
-msgstr[2] "Bus naujovinami %d paketai:"
-msgstr[3] "Bus naujovinama %d paketų:"
+msgstr[0] "Bus naujovinamas %d paketas:"
+msgstr[1] "Bus naujovinami %d paketai:"
+msgstr[2] "Bus naujovinama %d paketų:"
+msgstr[3] "Bus naujovinamas %d paketas:"
 
 #: src/Summary.cc:596
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "Bus atnaujinta %d pataisa:"
-msgstr[1] "Bus atnaujinta %d pataisa:"
-msgstr[2] "Bus atnaujintos %d pataisos:"
-msgstr[3] "Bus atnaujinta %d pataisų:"
+msgstr[1] "Bus atnaujintos %d pataisos:"
+msgstr[2] "Bus atnaujinta %d pataisų:"
+msgstr[3] "Bus atnaujinta %d pataisa:"
 
 #: src/Summary.cc:601
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "Bus atnaujintas %d šablonas:"
-msgstr[1] "Bus atnaujintas %d šablonas:"
-msgstr[2] "Bus atnaujinti %d šablonai:"
-msgstr[3] "Bus atnaujinta %d šablonų:"
+msgstr[1] "Bus atnaujinti %d šablonai:"
+msgstr[2] "Bus atnaujinta %d šablonų:"
+msgstr[3] "Bus atnaujintas %d šablonas:"
 
 #: src/Summary.cc:606
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "%d produktas bus naujovinamas:"
-msgstr[1] "%d produktas bus naujovinamas:"
-msgstr[2] "%d produktai bus naujovinami:"
-msgstr[3] "%d produktų bus naujovinama:"
+msgstr[1] "%d produktai bus naujovinami:"
+msgstr[2] "%d produktų bus naujovinama:"
+msgstr[3] "%d produktas bus naujovinamas:"
 
 #: src/Summary.cc:611
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "%d šablonas bus naujovinamas:"
-msgstr[1] "%d šablonas bus naujovinamas:"
-msgstr[2] "%d šablonai bus naujovinami:"
-msgstr[3] "%d šablonų bus naujovinama:"
+msgstr[1] "%d šablonai bus naujovinami:"
+msgstr[2] "%d šablonų bus naujovinama:"
+msgstr[3] "%d šablonas bus naujovinamas:"
 
 #: src/Summary.cc:630
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "%d paketas bus pakeistas senesniu:"
-msgstr[1] "%d paketas bus pakeistas senesniu:"
-msgstr[2] "%d paketai bus pakeisti senesniais:"
-msgstr[3] "%d paketų bus pakeista senesniais:"
+msgstr[1] "%d paketai bus pakeisti senesniais:"
+msgstr[2] "%d paketų bus pakeista senesniais:"
+msgstr[3] "%d paketas bus pakeistas senesniu:"
 
 #: src/Summary.cc:635
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "%d pataisa bus pakeista senesne:"
-msgstr[1] "%d pataisa bus pakeista senesne:"
-msgstr[2] "%d pataisos bus pakeistos senesnėmis:"
-msgstr[3] "%d pataisų bus pakeista senesnėmis:"
+msgstr[1] "%d pataisos bus pakeistos senesnėmis:"
+msgstr[2] "%d pataisų bus pakeista senesnėmis:"
+msgstr[3] "%d pataisa bus pakeista senesne:"
 
 #: src/Summary.cc:640
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "%d šablonas bus pakeistas senesniu:"
-msgstr[1] "%d šablonas bus pakeistas senesniu:"
-msgstr[2] "%d šablonai bus pakeisti senesniais:"
-msgstr[3] "%d šablonų bus pakeista senesniais:"
+msgstr[1] "%d šablonai bus pakeisti senesniais:"
+msgstr[2] "%d šablonų bus pakeista senesniais:"
+msgstr[3] "%d šablonas bus pakeistas senesniu:"
 
 #: src/Summary.cc:645
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "%d produktas bus pakeistas senesniu:"
-msgstr[1] "%d produktas bus pakeistas senesniu:"
-msgstr[2] "%d produktai bus pakeisti senesniais:"
-msgstr[3] "%d produktų bus pakeista senesniais:"
+msgstr[1] "%d produktai bus pakeisti senesniais:"
+msgstr[2] "%d produktų bus pakeista senesniais:"
+msgstr[3] "%d produktas bus pakeistas senesniu:"
 
 #: src/Summary.cc:650
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "%d programa bus pakeista senesne:"
-msgstr[1] "%d programa bus pakeista senesne:"
-msgstr[2] "%d programos bus pakeistos senesnėmis:"
-msgstr[3] "%d programų bus pakeista senesnėmis:"
+msgstr[1] "%d programos bus pakeistos senesnėmis:"
+msgstr[2] "%d programų bus pakeista senesnėmis:"
+msgstr[3] "%d programa bus pakeista senesne:"
 
 #: src/Summary.cc:669
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "%d paketas bus įdiegtas iš naujo:"
-msgstr[1] "%d paketas bus įdiegtas iš naujo:"
-msgstr[2] "%d paketai bus įdiegti iš naujo:"
-msgstr[3] "%d paketų bus įdiegta iš naujo:"
+msgstr[1] "%d paketai bus įdiegti iš naujo:"
+msgstr[2] "%d paketų bus įdiegta iš naujo:"
+msgstr[3] "%d paketas bus įdiegtas iš naujo:"
 
 #: src/Summary.cc:674
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "%d pataisa bus įdiegta iš naujo:"
-msgstr[1] "%d pataisa bus įdiegta iš naujo:"
-msgstr[2] "%d pataisos bus įdiegtos iš naujo:"
-msgstr[3] "%d pataisų bus įdiegta iš naujo:"
+msgstr[1] "%d pataisos bus įdiegtos iš naujo:"
+msgstr[2] "%d pataisų bus įdiegta iš naujo:"
+msgstr[3] "%d pataisa bus įdiegta iš naujo:"
 
 #: src/Summary.cc:679
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "%d šablonas bus įdiegtas iš naujo:"
-msgstr[1] "%d šablonas bus įdiegtas iš naujo:"
-msgstr[2] "%d šablonai bus įdiegti iš naujo:"
-msgstr[3] "%d šablonų bus įdiegta iš naujo:"
+msgstr[1] "%d šablonai bus įdiegti iš naujo:"
+msgstr[2] "%d šablonų bus įdiegta iš naujo:"
+msgstr[3] "%d šablonas bus įdiegtas iš naujo:"
 
 #: src/Summary.cc:684
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "%d produktas bus įdiegtas iš naujo:"
-msgstr[1] "%d produktas bus įdiegtas iš naujo:"
-msgstr[2] "%d produktai bus įdiegti iš naujo:"
-msgstr[3] "%d produktų bus įdiegta iš naujo:"
+msgstr[1] "%d produktai bus įdiegti iš naujo:"
+msgstr[2] "%d produktų bus įdiegta iš naujo:"
+msgstr[3] "%d produktas bus įdiegtas iš naujo:"
 
 #: src/Summary.cc:696
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "%d programa bus įdiegtas iš naujo:"
-msgstr[1] "%d programa bus įdiegtas iš naujo:"
-msgstr[2] "%d programos bus įdiegtos iš naujo:"
-msgstr[3] "%d programų bus įdiegta iš naujo:"
+msgstr[1] "%d programos bus įdiegtos iš naujo:"
+msgstr[2] "%d programų bus įdiegta iš naujo:"
+msgstr[3] "%d programa bus įdiegtas iš naujo:"
 
 #: src/Summary.cc:830
 #, c-format, boost-format
@@ -1316,9 +1315,9 @@ msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
 msgstr[0] "Savaime parinktas %d patartinas paketas:"
-msgstr[1] "Savaime parinktas %d patartinas paketas:"
-msgstr[2] "Savaime parinkti %d patartini paketai:"
-msgstr[3] "Savaime parinkta %d patartinų paketų:"
+msgstr[1] "Savaime parinkti %d patartini paketai:"
+msgstr[2] "Savaime parinkta %d patartinų paketų:"
+msgstr[3] "Savaime parinktas %d patartinas paketas:"
 
 #: src/Summary.cc:835
 #, c-format, boost-format
@@ -1326,9 +1325,9 @@ msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
 msgstr[0] "Savaime parinkta %d patartina pataisa:"
-msgstr[1] "Savaime parinkta %d patartina pataisa:"
-msgstr[2] "Savaime parinktos %d patartinos pataisos:"
-msgstr[3] "Savaime parinkta %d patartinų pataisų:"
+msgstr[1] "Savaime parinktos %d patartinos pataisos:"
+msgstr[2] "Savaime parinkta %d patartinų pataisų:"
+msgstr[3] "Savaime parinkta %d patartina pataisa:"
 
 #: src/Summary.cc:840
 #, c-format, boost-format
@@ -1336,9 +1335,9 @@ msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
 msgstr[0] "Savaime parinktas %d patartinas šablonas:"
-msgstr[1] "Savaime parinktas %d patartinas šablonas:"
-msgstr[2] "Savaime parinkti %d patartini šablonai:"
-msgstr[3] "Savaime parinkta %d patartinų šablonų:"
+msgstr[1] "Savaime parinkti %d patartini šablonai:"
+msgstr[2] "Savaime parinkta %d patartinų šablonų:"
+msgstr[3] "Savaime parinktas %d patartinas šablonas:"
 
 #: src/Summary.cc:845
 #, c-format, boost-format
@@ -1346,9 +1345,9 @@ msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
 msgstr[0] "Savaime parinktas %d patartinas produktas:"
-msgstr[1] "Savaime parinktas %d patartinas produktas:"
-msgstr[2] "Savaime parinkti %d patartini produktai:"
-msgstr[3] "Savaime parinkta %d patartinų produktų:"
+msgstr[1] "Savaime parinkti %d patartini produktai:"
+msgstr[2] "Savaime parinkta %d patartinų produktų:"
+msgstr[3] "Savaime parinktas %d patartinas produktas:"
 
 #: src/Summary.cc:850
 #, c-format, boost-format
@@ -1356,9 +1355,9 @@ msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
 msgstr[0] "Savaime parinktas %d patartinas šaltinis paketas:"
-msgstr[1] "Savaime parinktas %d patartinas šaltinis paketas:"
-msgstr[2] "Savaime parinkti %d patarti šaltiniai paketai:"
-msgstr[3] "Savaime parinkta %d patartinų šaltinių paketų:"
+msgstr[1] "Savaime parinkti %d patarti šaltiniai paketai:"
+msgstr[2] "Savaime parinkta %d patartinų šaltinių paketų:"
+msgstr[3] "Savaime parinktas %d patartinas šaltinis paketas:"
 
 #: src/Summary.cc:855
 #, c-format, boost-format
@@ -1366,9 +1365,9 @@ msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
 msgstr[0] "Savaime parinktas %d patartina programa:"
-msgstr[1] "Savaime parinktas %d patartina programa:"
-msgstr[2] "Savaime parinktos %d patartinos programos:"
-msgstr[3] "Savaime parinkta %d patartinų programų:"
+msgstr[1] "Savaime parinktos %d patartinos programos:"
+msgstr[2] "Savaime parinkta %d patartinų programų:"
+msgstr[3] "Savaime parinktas %d patartina programa:"
 
 #: src/Summary.cc:899
 #, c-format, boost-format
@@ -1382,13 +1381,13 @@ msgstr[0] ""
 "%d paketas yra patartinas, bet nebus įdiegtas (diegiami tik reikalingi "
 "paketai):"
 msgstr[1] ""
-"%d paketas yra patartinas, bet nebus įdiegtas (diegiami tik reikalingi "
-"paketai):"
-msgstr[2] ""
 "%d paketai yra patartini, bet nebus įdiegti (diegiami tik reikalingi "
 "paketai):"
-msgstr[3] ""
+msgstr[2] ""
 "%d paketų yra patartini, bet nebus įdiegti (diegiami tik reikalingi paketai):"
+msgstr[3] ""
+"%d paketas yra patartinas, bet nebus įdiegtas (diegiami tik reikalingi "
+"paketai):"
 
 #: src/Summary.cc:911
 #, c-format, boost-format
@@ -1401,11 +1400,11 @@ msgid_plural ""
 msgstr[0] ""
 "%d paketas yra patartinas, bet nebus įdiegtas, nes jį pašalinote anksčiau:"
 msgstr[1] ""
-"%d paketas yra patartinas, bet nebus įdiegtas, nes juos pašalinote anksčiau:"
-msgstr[2] ""
 "%d paketai yra patartini, bet nebus įdiegti, nes juos pašalinote anksčiau:"
-msgstr[3] ""
+msgstr[2] ""
 "%d paketų yra patartini, bet nebus įdiegta, nes juos pašalinote anksčiau:"
+msgstr[3] ""
+"%d paketas yra patartinas, bet nebus įdiegtas, nes juos pašalinote anksčiau:"
 
 #: src/Summary.cc:921
 #, c-format, boost-format
@@ -1419,13 +1418,13 @@ msgstr[0] ""
 "%d paketas yra patartinas, bet nebus įdiegtas dėl esamų priklausomybių "
 "nesuderinamumo:"
 msgstr[1] ""
-"%d paketas yra patartinas, bet nebus įdiegtas dėl esamų priklausomybių "
-"nesuderinamumo:"
-msgstr[2] ""
 "%d paketai yra patartini, bet nebus įdiegti dėl esamų priklausomybių "
 "nesuderinamumo:"
-msgstr[3] ""
+msgstr[2] ""
 "%d paketų yra patartinų, bet nebus įdiegtas dėl esamų priklausomybių "
+"nesuderinamumo:"
+msgstr[3] ""
+"%d paketas yra patartinas, bet nebus įdiegtas dėl esamų priklausomybių "
 "nesuderinamumo:"
 
 #: src/Summary.cc:934
@@ -1434,9 +1433,9 @@ msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
 msgstr[0] "%d pataisa yra patartina, bet nebus įdiegta:"
-msgstr[1] "%d pataisa yra patartina, bet nebus įdiegta:"
-msgstr[2] "%d pataisos yra patartinos, bet nebus įdiegtos:"
-msgstr[3] "%d pataisų yra patartinų, bet nebus įdiegtos:"
+msgstr[1] "%d pataisos yra patartinos, bet nebus įdiegtos:"
+msgstr[2] "%d pataisų yra patartinų, bet nebus įdiegtos:"
+msgstr[3] "%d pataisa yra patartina, bet nebus įdiegta:"
 
 #: src/Summary.cc:938
 #, c-format, boost-format
@@ -1444,9 +1443,9 @@ msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
 msgstr[0] "%d šablonas yra patartinas, bet nebus įdiegtas:"
-msgstr[1] "%d šablonas yra patartinas, bet nebus įdiegtas:"
-msgstr[2] "%d šablonai yra patartini, bet nebus įdiegti:"
-msgstr[3] "%d šablonų yra patartinų, bet nebus įdiegti:"
+msgstr[1] "%d šablonai yra patartini, bet nebus įdiegti:"
+msgstr[2] "%d šablonų yra patartinų, bet nebus įdiegti:"
+msgstr[3] "%d šablonas yra patartinas, bet nebus įdiegtas:"
 
 #: src/Summary.cc:942
 #, c-format, boost-format
@@ -1454,9 +1453,9 @@ msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "%d produktas yra patartinas, bet nebus įdiegtas:"
-msgstr[1] "%d produktas yra patartinas, bet nebus įdiegtas:"
-msgstr[2] "%d produktai yra patartini, bet nebus įdiegti:"
-msgstr[3] "%d produktų yra patartinų, bet nebus įdiegtas:"
+msgstr[1] "%d produktai yra patartini, bet nebus įdiegti:"
+msgstr[2] "%d produktų yra patartinų, bet nebus įdiegtas:"
+msgstr[3] "%d produktas yra patartinas, bet nebus įdiegtas:"
 
 #: src/Summary.cc:946
 #, c-format, boost-format
@@ -1464,9 +1463,9 @@ msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "%d programa yra patartina, bet nebus įdiegta:"
-msgstr[1] "%d programa yra patartina, bet nebus įdiegta:"
-msgstr[2] "%d programos yra patartinos, bet nebus įdiegtos:"
-msgstr[3] "%d programų yra patartinų, bet nebus įdiegtos:"
+msgstr[1] "%d programos yra patartinos, bet nebus įdiegtos:"
+msgstr[2] "%d programų yra patartinų, bet nebus įdiegtos:"
+msgstr[3] "%d programa yra patartina, bet nebus įdiegta:"
 
 #: src/Summary.cc:976
 #, c-format, boost-format
@@ -1474,9 +1473,9 @@ msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
 msgstr[0] "%d paketas yra siūlomas, bet nebus įdiegtas:"
-msgstr[1] "%d paketas yra siūlomas, bet nebus įdiegti:"
-msgstr[2] "%d paketai yra siūlomi, bet nebus įdiegti:"
-msgstr[3] "%d paketų yra siūloma, bet nebus įdiegti:"
+msgstr[1] "%d paketai yra siūlomi, bet nebus įdiegti:"
+msgstr[2] "%d paketų yra siūloma, bet nebus įdiegti:"
+msgstr[3] "%d paketas yra siūlomas, bet nebus įdiegtas:"
 
 #: src/Summary.cc:981
 #, c-format, boost-format
@@ -1484,9 +1483,9 @@ msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
 msgstr[0] "%d pataisa yra siūloma, bet nebus įdiegta:"
-msgstr[1] "%d pataisa yra siūloma, bet nebus įdiegtos:"
-msgstr[2] "%d pataisos yra siūlomos, bet nebus įdiegtos:"
-msgstr[3] "%d pataisų yra siūloma, bet nebus įdiegtos:"
+msgstr[1] "%d pataisos yra siūlomos, bet nebus įdiegtos:"
+msgstr[2] "%d pataisų yra siūloma, bet nebus įdiegtos:"
+msgstr[3] "%d pataisa yra siūloma, bet nebus įdiegta:"
 
 #: src/Summary.cc:986
 #, c-format, boost-format
@@ -1494,9 +1493,9 @@ msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
 msgstr[0] "%d šablonas yra siūlomas, bet nebus įdiegtas:"
-msgstr[1] "%d šablonas yra siūlomas, bet nebus įdiegtas:"
-msgstr[2] "%d šablonai yra siūlomi, bet nebus įdiegti:"
-msgstr[3] "%d šablonas yra siūloma, bet nebus įdiegti:"
+msgstr[1] "%d šablonai yra siūlomi, bet nebus įdiegti:"
+msgstr[2] "%d šablonas yra siūloma, bet nebus įdiegti:"
+msgstr[3] "%d šablonas yra siūlomas, bet nebus įdiegtas:"
 
 #: src/Summary.cc:991
 #, c-format, boost-format
@@ -1504,9 +1503,9 @@ msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "Yra siūlomas %d produktas, bet jis nebus įdiegtas:"
-msgstr[1] "Yra siūlomas %d produktas, bet nebus įdiegtas:"
-msgstr[2] "Yra siūlomi %d produktai, bet nebus įdiegti:"
-msgstr[3] "Yra siūloma %d produktų, bet nebus įdiegti:"
+msgstr[1] "Yra siūlomi %d produktai, bet nebus įdiegti:"
+msgstr[2] "Yra siūloma %d produktų, bet nebus įdiegti:"
+msgstr[3] "Yra siūlomas %d produktas, bet nebus įdiegtas:"
 
 #: src/Summary.cc:996
 #, c-format, boost-format
@@ -1514,108 +1513,108 @@ msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "%d programa yra siūloma, bet nebus įdiegta:"
-msgstr[1] "%d programa yra siūloma, bet nebus įdiegta:"
-msgstr[2] "%d programos yra siūlomos, bet nebus įdiegtos:"
-msgstr[3] "%d programų yra siūloma, bet nebus įdiegta:"
+msgstr[1] "%d programos yra siūlomos, bet nebus įdiegtos:"
+msgstr[2] "%d programų yra siūloma, bet nebus įdiegta:"
+msgstr[3] "%d programa yra siūloma, bet nebus įdiegta:"
 
 #: src/Summary.cc:1018
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "Bus pakeista %d paketo architektūra:"
-msgstr[1] "Bus pakeista %d paketo architektūra:"
+msgstr[1] "Bus pakeista %d paketų architektūra:"
 msgstr[2] "Bus pakeista %d paketų architektūra:"
-msgstr[3] "Bus pakeista %d paketų architektūra:"
+msgstr[3] "Bus pakeista %d paketo architektūra:"
 
 #: src/Summary.cc:1023
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "Bus pakeista %d pataisos architektūra:"
-msgstr[1] "Bus pakeista %d pataisos architektūra:"
+msgstr[1] "Bus pakeista %d pataisų architektūra:"
 msgstr[2] "Bus pakeista %d pataisų architektūra:"
-msgstr[3] "Bus pakeista %d pataisų architektūra:"
+msgstr[3] "Bus pakeista %d pataisos architektūra:"
 
 #: src/Summary.cc:1028
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "Bus pakeista %d šablono architektūra:"
-msgstr[1] "Bus pakeista %d šablono architektūra:"
+msgstr[1] "Bus pakeista %d šablonų architektūra:"
 msgstr[2] "Bus pakeista %d šablonų architektūra:"
-msgstr[3] "Bus pakeista %d šablonų architektūra:"
+msgstr[3] "Bus pakeista %d šablono architektūra:"
 
 #: src/Summary.cc:1033
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "Bus pakeista %d produkto architektūra:"
-msgstr[1] "Bus pakeista %d produkto architektūra:"
+msgstr[1] "Bus pakeista %d produktų architektūra:"
 msgstr[2] "Bus pakeista %d produktų architektūra:"
-msgstr[3] "Bus pakeista %d produktų architektūra:"
+msgstr[3] "Bus pakeista %d produkto architektūra:"
 
 #: src/Summary.cc:1038
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "Bus pakeista %d programos architektūra:"
-msgstr[1] "Bus pakeista %d programos architektūra:"
+msgstr[1] "Bus pakeista %d programų architektūra:"
 msgstr[2] "Bus pakeista %d programų architektūra:"
-msgstr[3] "Bus pakeista %d programų architektūra:"
+msgstr[3] "Bus pakeista %d programos architektūra:"
 
 #: src/Summary.cc:1060
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "Bus pakeistas %d paketo gamintojas:"
-msgstr[1] "Bus pakeistas %d paketo gamintojas:"
+msgstr[1] "Bus pakeistas %d paketų gamintojas:"
 msgstr[2] "Bus pakeistas %d paketų gamintojas:"
-msgstr[3] "Bus pakeistas %d paketų gamintojas:"
+msgstr[3] "Bus pakeistas %d paketo gamintojas:"
 
 #: src/Summary.cc:1065
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "Bus pakeistas %d pataisos gamintojas:"
-msgstr[1] "Bus pakeistas %d pataisos gamintojas:"
+msgstr[1] "Bus pakeistas %d pataisų gamintojas:"
 msgstr[2] "Bus pakeistas %d pataisų gamintojas:"
-msgstr[3] "Bus pakeistas %d pataisų gamintojas:"
+msgstr[3] "Bus pakeistas %d pataisos gamintojas:"
 
 #: src/Summary.cc:1070
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "Bus pakeistas %d šablono gamintojas:"
-msgstr[1] "Bus pakeistas %d šablono gamintojas:"
+msgstr[1] "Bus pakeistas %d šablonų gamintojas:"
 msgstr[2] "Bus pakeistas %d šablonų gamintojas:"
-msgstr[3] "Bus pakeistas %d šablonų gamintojas:"
+msgstr[3] "Bus pakeistas %d šablono gamintojas:"
 
 #: src/Summary.cc:1075
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "Bus pakeistas %d produkto gamintojas:"
-msgstr[1] "Bus pakeistas %d produkto gamintojas:"
+msgstr[1] "Bus pakeistas %d produktų gamintojas:"
 msgstr[2] "Bus pakeistas %d produktų gamintojas:"
-msgstr[3] "Bus pakeistas %d produktų gamintojas:"
+msgstr[3] "Bus pakeistas %d produkto gamintojas:"
 
 #: src/Summary.cc:1080
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "Bus pakeistas %d programos gamintojas:"
-msgstr[1] "Bus pakeistas %d programos gamintojas:"
+msgstr[1] "Bus pakeistas %d programų gamintojas:"
 msgstr[2] "Bus pakeistas %d programų gamintojas:"
-msgstr[3] "Bus pakeistas %d programų gamintojas:"
+msgstr[3] "Bus pakeistas %d programos gamintojas:"
 
 #: src/Summary.cc:1100
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "%d paketo nepalaiko jo gamintojas:"
-msgstr[1] "%d paketo nepalaiko jo gamintojas:"
-msgstr[2] "%d paketų nepalaiko jų gamintojas:"
-msgstr[3] "%d paketų nepalaiko jų gamintojas:"
+msgstr[1] "%d paketų nepalaiko jų gamintojai:"
+msgstr[2] "%d paketų nepalaiko jų gamintojai:"
+msgstr[3] "%d paketo nepalaiko jų gamintojai:"
 
 #: src/Summary.cc:1120
 #, c-format, boost-format
@@ -1626,38 +1625,38 @@ msgid_plural ""
 msgstr[0] ""
 "Norint gauti palaikymą, %d paketui reikalinga papildoma kliento sutartis:"
 msgstr[1] ""
-"Norint gauti palaikymą, %d paketui reikalinga papildoma kliento sutartis:"
-msgstr[2] ""
 "Norint gauti palaikymą, %d paketams reikalinga papildoma kliento sutartis:"
-msgstr[3] ""
+msgstr[2] ""
 "Norint gauti palaikymą, %d paketų reikalinga papildoma kliento sutartis:"
+msgstr[3] ""
+"Norint gauti palaikymą, %d paketui reikalinga papildoma kliento sutartis:"
 
 #: src/Summary.cc:1138
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "%d paketo atnaujinimas NEBUS įdiegtas:"
-msgstr[1] "%d paketo atnaujinimas NEBUS įdiegtas:"
+msgstr[1] "%d paketų atnaujinimai NEBUS įdiegti:"
 msgstr[2] "%d paketų atnaujinimai NEBUS įdiegti:"
-msgstr[3] "%d paketų atnaujinimai NEBUS įdiegti:"
+msgstr[3] "%d paketo atnaujinimas NEBUS įdiegtas:"
 
 #: src/Summary.cc:1143
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "%d produkto atnaujinimas NEBUS įdiegtas:"
-msgstr[1] "%d produkto atnaujinimas NEBUS įdiegtas:"
-msgstr[2] "%d produkto atnaujinimai NEBUS įdiegti:"
-msgstr[3] "%d produkto atnaujinimų NEBUS įdiegta:"
+msgstr[1] "%d produkto atnaujinimai NEBUS įdiegti:"
+msgstr[2] "%d produkto atnaujinimų NEBUS įdiegta:"
+msgstr[3] "%d produkto atnaujinimas NEBUS įdiegtas:"
 
 #: src/Summary.cc:1148
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "%d programos atnaujinimas NEBUS įdiegtas:"
-msgstr[1] "%d programos atnaujinimas NEBUS įdiegtas:"
+msgstr[1] "%d programų atnaujinimai NEBUS įdiegti:"
 msgstr[2] "%d programų atnaujinimai NEBUS įdiegti:"
-msgstr[3] "%d programų atnaujinimai NEBUS įdiegti:"
+msgstr[3] "%d programos atnaujinimas NEBUS įdiegtas:"
 
 #: src/Summary.cc:1178
 #, c-format, boost-format
@@ -1665,9 +1664,9 @@ msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
 msgstr[0] "%d elementas užrakintas, tad jokie veiksmai jo nepakeis:"
-msgstr[1] "%d elementas užrakintas, tad jokie veiksmai jų nepakeis:"
-msgstr[2] "%d elementai užrakinti, tad jokie veiksmai jų nepakeis:"
-msgstr[3] "%d elementų užrakinti, tad jokie veiksmai jų nepakeis:"
+msgstr[1] "%d elementai užrakinti, tad jokie veiksmai jų nepakeis:"
+msgstr[2] "%d elementų užrakinti, tad jokie veiksmai jų nepakeis:"
+msgstr[3] "%d elementas užrakintas, tad jokie veiksmai jų nepakeis:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1685,9 +1684,9 @@ msgstr "Norėdami gauti užrakinimų sąrašą, įvykdykite „%1%“."
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "%d pataisa prašo iš naujo paleisti kompiuterį:"
-msgstr[1] "%d pataisa prašo iš naujo paleisti kompiuterį:"
-msgstr[2] "%d pataisos prašo iš naujo paleisti kompiuterį:"
-msgstr[3] "%d pataisų prašo iš naujo paleisti kompiuterį:"
+msgstr[1] "%d pataisos prašo iš naujo paleisti kompiuterį:"
+msgstr[2] "%d pataisų prašo iš naujo paleisti kompiuterį:"
+msgstr[3] "%d pataisa prašo iš naujo paleisti kompiuterį:"
 
 #: src/Summary.cc:1230
 #, boost-format
@@ -1719,81 +1718,81 @@ msgstr "Įvykdžius, bus atlaisvinta %s."
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "naujovintinas paketas"
-msgstr[1] "naujovintinas paketas"
-msgstr[2] "naujovintini paketai"
-msgstr[3] "naujovintinų paketų"
+msgstr[1] "naujovintini paketai"
+msgstr[2] "naujovintinų paketų"
+msgstr[3] "naujovintinas paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1282
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "pakeistinas senesniu"
-msgstr[1] "pakeistinas senesniu"
-msgstr[2] "pakeistini senesniais"
-msgstr[3] "pakeistinų senesniais"
+msgstr[1] "pakeistini senesniais"
+msgstr[2] "pakeistinų senesniais"
+msgstr[3] "pakeistinas senesniu"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1285
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "pakeistinas senesniu paketas"
-msgstr[1] "pakeistinas senesniu paketas"
-msgstr[2] "pakeistini senesniais paketai"
-msgstr[3] "pakeistinų senesniais paketų"
+msgstr[1] "pakeistini senesniais paketai"
+msgstr[2] "pakeistinų senesniais paketų"
+msgstr[3] "pakeistinas senesniu paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1296
 msgid "new"
 msgid_plural "new"
 msgstr[0] "naujas"
-msgstr[1] "naujas"
-msgstr[2] "nauji"
-msgstr[3] "naujų"
+msgstr[1] "nauji"
+msgstr[2] "naujų"
+msgstr[3] "naujas"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1299
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "naujai įdiegtinas paketas"
-msgstr[1] "naujai įdiegtinas paketas"
-msgstr[2] "naujai įdiegtini paketai"
-msgstr[3] "naujai įdiegtinų paketų"
+msgstr[1] "naujai įdiegtini paketai"
+msgstr[2] "naujai įdiegtinų paketų"
+msgstr[3] "naujai įdiegtinas paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1310
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "įdiegtinas iš naujo"
-msgstr[1] "įdiegtinas iš naujo"
-msgstr[2] "įdiegtini iš naujo"
-msgstr[3] "įdiegtinų iš naujo"
+msgstr[1] "įdiegtini iš naujo"
+msgstr[2] "įdiegtinų iš naujo"
+msgstr[3] "įdiegtinas iš naujo"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1313
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "įdiegtinas iš naujo paketas"
-msgstr[1] "įdiegtinas iš naujo paketas"
-msgstr[2] "įdiegtini iš naujo paketai"
-msgstr[3] "įdiegtinų iš naujo paketų"
+msgstr[1] "įdiegtini iš naujo paketai"
+msgstr[2] "įdiegtinų iš naujo paketų"
+msgstr[3] "įdiegtinas iš naujo paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1324
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "pašalintinas"
-msgstr[1] "pašalintinas"
-msgstr[2] "pašalintini"
-msgstr[3] "pašalintinų"
+msgstr[1] "pašalintini"
+msgstr[2] "pašalintinų"
+msgstr[3] "pašalintinas"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1327
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "pašalintinas paketas"
-msgstr[1] "pašalintinas paketas"
-msgstr[2] "pašalintini paketai"
-msgstr[3] "pašalintinų paketų"
+msgstr[1] "pašalintini paketai"
+msgstr[2] "pašalintinų paketų"
+msgstr[3] "pašalintinas paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1338
@@ -1809,9 +1808,9 @@ msgstr[3] "pakeis gamintoją"
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "paketas pakeis gamintoją"
-msgstr[1] "paketas pakeis gamintoją"
-msgstr[2] "paketai pakeis gamintoją"
-msgstr[3] "paketų pakeis gamintoją"
+msgstr[1] "paketai pakeis gamintoją"
+msgstr[2] "paketų pakeis gamintoją"
+msgstr[3] "paketas pakeis gamintoją"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1352
@@ -1827,27 +1826,27 @@ msgstr[3] "pakeis architektūrą"
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "paketas pakeis architektūrą"
-msgstr[1] "paketas pakeis architektūrą"
-msgstr[2] "paketai pakeis architektūrą"
-msgstr[3] "paketų pakeis architektūrą"
+msgstr[1] "paketai pakeis architektūrą"
+msgstr[2] "paketų pakeis architektūrą"
+msgstr[3] "paketas pakeis architektūrą"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1366
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "šaltinis paketas"
-msgstr[1] "šaltinis paketas"
-msgstr[2] "šaltiniai paketai"
-msgstr[3] "šaltinių paketų"
+msgstr[1] "šaltiniai paketai"
+msgstr[2] "šaltinių paketų"
+msgstr[3] "šaltinis paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1369
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "naujai įdiegsimas paketas"
-msgstr[1] "naujai įdiegsimas paketas"
-msgstr[2] "naujai įdiegsimi paketai"
-msgstr[3] "naujai įdiegsimų paketų"
+msgstr[1] "naujai įdiegsimi paketai"
+msgstr[2] "naujai įdiegsimų paketų"
+msgstr[3] "naujai įdiegsimas paketas"
 
 #. patch command (auto)restricted to update stack patches
 #: src/Summary.cc:1434
@@ -2062,7 +2061,7 @@ msgid "See '%1%' for details"
 msgstr "„%1%“ pateikia daugiau informacijos"
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format, boost-format, fuzzy
 msgid "%1% repository"
 msgid_plural "%1% repositories"
 msgstr[0] "Saugykla"
@@ -2169,8 +2168,8 @@ msgid ""
 msgstr ""
 "Taip gali nutikti dėl netinkamų saugyklos metaduomenų arba dėl duomenų "
 "analizatoriuje esančios ydos. Pastaruoju atveju (arba jei abejojate) "
-"prašytume užpildyti ydos pranešimą naudodamiesi http://en.opensuse.org/"
-"Zypper/Troubleshooting instrukcijomis."
+"prašytume užpildyti ydos pranešimą naudodamiesi "
+"http://en.opensuse.org/Zypper/Troubleshooting instrukcijomis."
 
 #: src/repos.cc:463
 #, c-format, boost-format
@@ -2204,7 +2203,7 @@ msgid "Specified repository '%s' is disabled."
 msgstr "Nurodyta saugykla „%s“ yra uždrausta."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr "Saugyklų pridėjimui ar įgalinimui naudokite komandas „%s“ arba „%s“."
 
@@ -2388,7 +2387,7 @@ msgid "Specified repositories: "
 msgstr "Nurodytos saugyklos:"
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid "Refreshing repository '%s'."
 msgstr "Išjungiama saugykla „%s“."
 
@@ -2493,8 +2492,8 @@ msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
-"Nepavyksta apibrėžti saugyklos tipo. Patikrinkite, ar nurodytas URI "
-"(žiūrėkite žemiau) skirtas tinkamai saugyklai:"
+"Nepavyksta apibrėžti saugyklos tipo. Patikrinkite, ar nurodytas URI ("
+"žiūrėkite žemiau) skirtas tinkamai saugyklai:"
 
 #: src/repos.cc:1725
 msgid "Can't find a valid repository at given location:"
@@ -2941,19 +2940,19 @@ msgstr[3] ""
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
 msgstr[0] "%d pataisa užrakinta"
-msgstr[1] "%d pataisa užrakinta"
-msgstr[2] "%d pataisos užrakintos"
-msgstr[3] "%d pataisų užrakinta"
+msgstr[1] "%d pataisos užrakintos"
+msgstr[2] "%d pataisų užrakinta"
+msgstr[3] "%d pataisa užrakinta"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
 msgstr[0] "%d pataisa užrakinta"
-msgstr[1] "%d pataisa užrakinta"
-msgstr[2] "%d pataisos užrakintos"
-msgstr[3] "%d pataisų užrakinta"
+msgstr[1] "%d pataisos užrakintos"
+msgstr[2] "%d pataisų užrakinta"
+msgstr[3] "%d pataisa užrakinta"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -2968,9 +2967,9 @@ msgstr ""
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
 msgstr[0] "Reikia %d pataisos"
-msgstr[1] "Reikia %d pataisos"
+msgstr[1] "Reikia %d pataisų"
 msgstr[2] "Reikia %d pataisų"
-msgstr[3] "Reikia %d pataisų"
+msgstr[3] "Reikia %d pataisos"
 
 #. translator: stats summary
 #: src/update.cc:318
@@ -2978,9 +2977,9 @@ msgstr[3] "Reikia %d pataisų"
 msgid "%d security patch"
 msgid_plural "%d security patches"
 msgstr[0] "Reikia %d saugumo pataisos"
-msgstr[1] "Reikia %d saugumo pataisos"
+msgstr[1] "Reikia %d saugumo pataisų"
 msgstr[2] "Reikia %d saugumo pataisų"
-msgstr[3] "Reikia %d saugumo pataisų"
+msgstr[3] "Reikia %d saugumo pataisos"
 
 #. translator: Table column header.
 #: src/update.cc:352
@@ -3090,8 +3089,7 @@ msgstr "Sukurti priklausomybių sprendimo aprašą derinimui."
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
-msgstr ""
-"Priverstinai rasti priklausomybių sprendimą (leistina net ir agresyvų)."
+msgstr "Priverstinai rasti priklausomybių sprendimą (leistina net ir agresyvų)."
 
 #: src/Zypper.cc:88
 msgid "Do not force the solver to find solution, let it ask."
@@ -3440,8 +3438,8 @@ msgid ""
 "\tzypper <subcommand> [--command-options] [arguments]\n"
 msgstr ""
 "  Naudojimas:\n"
-"\tzypper [--bendros-parinktys] <komanda> [--komandos-parinktys] "
-"[argumentai]\n"
+"\tzypper [--bendros-parinktys] <komanda> [--komandos-parinktys] [argumentai]"
+"\n"
 "\tzypper <pokomandis> [--komandos-parinktys] [argumentai]\n"
 
 #. translators: %s is "help" or "zypper help" depending on whether
@@ -3588,7 +3586,7 @@ msgstr "Visoms parinktims matyti rinkitės „%s“."
 #. second %s = "package",
 #. and the third %s = "only, in-advance, in-heaps, as-needed"
 #: src/Zypper.cc:1512
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
@@ -3647,8 +3645,8 @@ msgstr ""
 "versija prieinama saugyklose,\n"
 "                            pasendintas ar keičiamas gamintojas ar "
 "architektūra.\n"
-"    --oldpackage            Leisti naujesnį paketą pakeisti senesniu "
-"paketu.\n"
+"    --oldpackage            Leisti naujesnį paketą pakeisti senesniu paketu."
+"\n"
 "                            Tinka „roolback“ atveju. Kitaip nei --force "
 "atveju, neverčia diegti iš naujo.\n"
 "-l, --auto-agree-with-licenses\n"
@@ -3672,7 +3670,7 @@ msgstr ""
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
 #: src/Zypper.cc:1580
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -3706,8 +3704,8 @@ msgstr ""
 "pagal charakteristiką.\n"
 "-C, --capability            Paketus pasirinkti pagal charakteristiką.\n"
 "-u, --clean-deps            Savaime pašalinti nereikalingas priklausomybes.\n"
-"-U, --no-clean-deps         Savaime nešalinti nebereikalingų "
-"priklausomybių.\n"
+"-U, --no-clean-deps         Savaime nešalinti nebereikalingų priklausomybių."
+"\n"
 "-D, --dry-run               Pabandyti pašalinti, tačiau iš tiesų nebus "
 "šalinama.\n"
 
@@ -3743,7 +3741,7 @@ msgid ""
 msgstr ""
 
 #: src/Zypper.cc:1662
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "verify (ve) [options]\n"
 "\n"
@@ -3775,7 +3773,7 @@ msgstr ""
 "-d, --download-only         Tik parsiųsti paketus, jų neįdiegti.\n"
 
 #: src/Zypper.cc:1706
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "install-new-recommends (inr) [options]\n"
 "\n"
@@ -3808,7 +3806,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1739
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3850,7 +3848,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1798
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3896,8 +3894,8 @@ msgstr ""
 "-i, --ar-to-enable <pseud>     Pridėti RIS paslaugos įgalintiną saugyklą.\n"
 "-I, --ar-to-disable <pseud>    Pridėti RIS paslaugos uždraustiną saugyklą.\n"
 "-j, --rr-to-enable <pseud>     Pašalinti RIS paslaugos įgalintiną saugyklą.\n"
-"-J, --rr-to-disable <pseud>    Pašalinti RIS paslaugos uždraustiną "
-"saugyklą.\n"
+"-J, --rr-to-disable <pseud>    Pašalinti RIS paslaugos uždraustiną saugyklą."
+"\n"
 "-k, --cl-to-enable             Išvalyti įgalintinas RIS saugyklas.\n"
 "-K, --cl-to-disable            Išvalyti uždraustinas RIS saugyklas.\n"
 "\n"
@@ -3963,7 +3961,7 @@ msgstr ""
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1907
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <file.repo>\n"
@@ -3997,8 +3995,8 @@ msgstr ""
 "-t, --type <tipas>      Saugyklos tipas (%s).\n"
 "-d, --disable           Pridėti saugyklą ir ją uždrausti.\n"
 "-c, --check             Patikrinti URI.\n"
-"-C, --no-check          Netikrinti URI, tikrinti tik vėliau atnaujinimo "
-"metu.\n"
+"-C, --no-check          Netikrinti URI, tikrinti tik vėliau atnaujinimo metu."
+"\n"
 "-n, --name <pavad>      Nurodyti aprašomąjį saugyklos pavadinimą.\n"
 "-k, --keep-packages     Įgalinti RPM rinkmenų podėlį.\n"
 "-K, --no-keep-packages  Uždrausti RPM rinkmenų podėlį.\n"
@@ -4086,7 +4084,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:2037
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4131,8 +4129,8 @@ msgstr ""
 "-G, --no-gpgcheck       Šiai saugyklai uždrausti GPG tikrinimą.\n"
 "\n"
 "-a, --all                 Pakeitimus pritaikyti visoms saugykloms.\n"
-"-l, --local               Pakeitimus pritaikyti visoms vietinėms "
-"saugykloms.\n"
+"-l, --local               Pakeitimus pritaikyti visoms vietinėms saugykloms."
+"\n"
 "-t, --remote              Pakeitimus pritaikyti visoms nuotolinėms "
 "saugykloms.\n"
 "-m, --medium-type <tipas>  Pakeitimus pritaikyti nurodyto tipo saugykloms.\n"
@@ -4223,8 +4221,8 @@ msgstr ""
 "  Komandos parinktys:\n"
 "-t, --type <tipas>            Paketo tipas (%s).\n"
 "                              Numatytasis: %s.\n"
-"-r, --repo <pseud|Nr.|URI>    Pateikti tik konkrečios saugyklos "
-"atnaujinimus.\n"
+"-r, --repo <pseud|Nr.|URI>    Pateikti tik konkrečios saugyklos atnaujinimus."
+"\n"
 "    --best-effort             Įvykdyti „geriausio bandymo“ atnaujinimą. Taip "
 "pat\n"
 "                              galimi atnaujinimai ne iki pačios naujausios\n"
@@ -4238,7 +4236,7 @@ msgstr ""
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
 #: src/Zypper.cc:2192
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "update (up) [options] [packagename] ...\n"
 "\n"
@@ -4298,7 +4296,7 @@ msgstr ""
 "-d, --download-only         Tik parsiųsti paketus, nieko neįdiegti.\n"
 
 #: src/Zypper.cc:2265
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "patch [options]\n"
 "\n"
@@ -4350,8 +4348,8 @@ msgstr ""
 "ydą.\n"
 "    --cve Nr.               Įdiegti pataisą, ištaisančią konkrečią CVE ydą.\n"
 "-g  --category <kategorija> Įdiegti visas šios kategorijos pataisas.\n"
-"    --date <mmmm-MM-DD>      Įdiegti pataisas, išleistas iki nurodytos "
-"datos.\n"
+"    --date <mmmm-MM-DD>      Įdiegti pataisas, išleistas iki nurodytos datos."
+"\n"
 "-r, --repo <pseud|Nr.|URI>  Įkelti tik konkrečią saugyklą.\n"
 "-D, --dry-run               Pabandyti atnaujinti, tačiau iš tiesų nieko "
 "nebus atnaujinama.\n"
@@ -4430,7 +4428,7 @@ msgid ""
 msgstr ""
 
 #: src/Zypper.cc:2381
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "dist-upgrade (dup) [options]\n"
 "\n"
@@ -4547,12 +4545,12 @@ msgstr ""
 "elementams (numatyta).\n"
 "    --match-any            Ieškoti atitikmenų bet kuriam paieškos eilutės "
 "elementui.\n"
-"    --match-substrings     Ieškoti atitikmenų bent žodžių dalyse "
-"(numatyta).\n"
+"    --match-substrings     Ieškoti atitikmenų bent žodžių dalyse (numatyta)."
+"\n"
 "    --match-words          Ieškoti atitikmenų tik pilnuose žodžiuose.\n"
 "    --match-exact          Ieškoti tiksliai užklausą atitinkančio paketo.\n"
-"-d, --search-descriptions  Taip pat ieškoti paketų santraukose ir "
-"aprašuose.\n"
+"-d, --search-descriptions  Taip pat ieškoti paketų santraukose ir aprašuose."
+"\n"
 "-C, --case-sensitive       Skirti didžiąsias ir mažąsias raides.\n"
 "-i, --installed-only       Rodyti tik jau įdiegtus paketus.\n"
 "-u, --not-installed-only   Rodyti tik neįdiegtus paketus.\n"
@@ -4692,7 +4690,7 @@ msgid ""
 msgstr ""
 
 #: src/Zypper.cc:2648
-#, fuzzy, c-format, boost-format
+#, boost-format, boost-format, c-format, c-format, fuzzy
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -5012,8 +5010,8 @@ msgstr ""
 "--delete             Pašalinti nebereikalingus šaltinius rpm.\n"
 "--no-delete          Netrinti nebereikalingų šaltinių rpm.\n"
 "--status             Nesiųsti šaltinių rpm, o tik\n"
-"                     parodyti trūkstamus ir nereikalingus šaltinius "
-"paketus.\n"
+"                     parodyti trūkstamus ir nereikalingus šaltinius paketus."
+"\n"
 
 #: src/Zypper.cc:3067
 msgid ""
@@ -5418,9 +5416,9 @@ msgstr "Paketų užrakinimui reikalingos root teisės."
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "Atrakintas %lu."
-msgstr[1] "Atrakintas %lu."
-msgstr[2] "Atrakinti %lu."
-msgstr[3] "Atrakinta %lu."
+msgstr[1] "Atrakinti %lu."
+msgstr[2] "Atrakinta %lu."
+msgstr[3] "Atrakintas %lu."
 
 #: src/Zypper.cc:5095
 msgid "XML output not implemented for this command."
@@ -5537,9 +5535,9 @@ msgstr "Pritaikomas sprendimas %s"
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
 msgstr[0] "%d problema: "
-msgstr[1] "%d problema: "
-msgstr[2] "%d problemos:"
-msgstr[3] "%d problemų: "
+msgstr[1] "%d problemos:"
+msgstr[2] "%d problemų: "
+msgstr[3] "%d problema: "
 
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
@@ -6208,9 +6206,9 @@ msgstr "Užrakinimai nepanaikinti."
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
 msgstr[0] "Sėkmingai pašalintas %zu užrakinimas."
-msgstr[1] "Sėkmingai pašalintas %zu užrakinimas."
-msgstr[2] "Sėkmingai pašalinti %zu užrakinimai."
-msgstr[3] "Sėkmingai pašalinta %zu užrakinimų."
+msgstr[1] "Sėkmingai pašalinti %zu užrakinimai."
+msgstr[2] "Sėkmingai pašalinta %zu užrakinimų."
+msgstr[3] "Sėkmingai pašalintas %zu užrakinimas."
 
 #: src/locks.cc:379
 msgid "Problem removing the package lock:"
@@ -6338,9 +6336,9 @@ msgstr "n/k/i"
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
 msgstr[0] "Savaime pasirenkamas „%s“ po %u sekundės."
-msgstr[1] "Savaime pasirenkamas „%s“ po %u sekundės."
+msgstr[1] "Savaime pasirenkamas „%s“ po %u sekundžių."
 msgstr[2] "Savaime pasirenkamas „%s“ po %u sekundžių."
-msgstr[3] "Savaime pasirenkamas „%s“ po %u sekundžių."
+msgstr[3] "Savaime pasirenkamas „%s“ po %u sekundės."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
@@ -6375,58 +6373,58 @@ msgstr ""
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "paketas"
-msgstr[1] "paketas"
-msgstr[2] "paketai"
-msgstr[3] "paketų"
+msgstr[1] "paketai"
+msgstr[2] "paketų"
+msgstr[3] "paketas"
 
 #: src/utils/misc.cc:115
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "šablonas"
-msgstr[1] "šablonas"
-msgstr[2] "šablonai"
-msgstr[3] "šablonų"
+msgstr[1] "šablonai"
+msgstr[2] "šablonų"
+msgstr[3] "šablonas"
 
 #: src/utils/misc.cc:117
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produktas"
-msgstr[1] "produktas"
-msgstr[2] "produktai"
-msgstr[3] "produktų"
+msgstr[1] "produktai"
+msgstr[2] "produktų"
+msgstr[3] "produktas"
 
 #: src/utils/misc.cc:119
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "pataisa"
-msgstr[1] "pataisa"
-msgstr[2] "pataisos"
-msgstr[3] "pataisų"
+msgstr[1] "pataisos"
+msgstr[2] "pataisų"
+msgstr[3] "pataisa"
 
 #: src/utils/misc.cc:121
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "šaltinis paketas"
-msgstr[1] "šaltinis paketas"
-msgstr[2] "šaltiniai paketai"
-msgstr[3] "šaltinių paketų"
+msgstr[1] "šaltiniai paketai"
+msgstr[2] "šaltinių paketų"
+msgstr[3] "šaltinis paketas"
 
 #: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "programa"
-msgstr[1] "programa"
-msgstr[2] "programos"
-msgstr[3] "programų"
+msgstr[1] "programos"
+msgstr[2] "programų"
+msgstr[3] "programa"
 
 #. default
 #: src/utils/misc.cc:125
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "išsprenžiamas"
-msgstr[1] "išsprenžiamas"
-msgstr[2] "išsprenžiami"
-msgstr[3] "išsprenžiamų"
+msgstr[1] "išsprenžiami"
+msgstr[2] "išsprenžiamų"
+msgstr[3] "išsprenžiamas"
 
 #. Patch status: i18n + color
 #. translator: patch status
@@ -6566,17 +6564,15 @@ msgstr "Parinktis „%s“ viršesnė už „%s“."
 #~ "  Komandos parinktys:\n"
 #~ "-b, --bugzilla[=Nr.]       Parodyti reikalingas pataisas Bugzilla ydoms "
 #~ "ištaisyti.\n"
-#~ "    --cve[=Nr.]            Parodyti reikalingas pataisas CVE ydoms "
-#~ "ištaisyti.\n"
+#~ "    --cve[=Nr.]            Parodyti reikalingas pataisas CVE ydoms ištaisyti."
+#~ "\n"
 #~ "-g  --category <kategorija> Parodyti visas šios kategorijos pataisas.\n"
 #~ "    --issues[=tekstas]     Ieškoti ydos, atitinkančios nurodytą paieškos "
 #~ "raktažodį.\n"
-#~ "-a, --all                  Parodyti visas pataisas, ne tik "
-#~ "reikalingąsias.\n"
-#~ "-r, --repo <pseud|Nr.|URI> Parodyti tik pataisas iš konkrečios "
-#~ "saugyklos.\n"
-#~ "    --date <mmmm-MM-DD>    Parodyti pataisas, išleistas iki nurodytos "
-#~ "datos.\n"
+#~ "-a, --all                  Parodyti visas pataisas, ne tik reikalingąsias.\n"
+#~ "-r, --repo <pseud|Nr.|URI> Parodyti tik pataisas iš konkrečios saugyklos.\n"
+#~ "    --date <mmmm-MM-DD>    Parodyti pataisas, išleistas iki nurodytos datos."
+#~ "\n"
 
 #~ msgid "Auto-refresh"
 #~ msgstr "Atsinaujinimas"
