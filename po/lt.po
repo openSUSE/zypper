@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2016-08-13 06:53+0000\n"
+"PO-Revision-Date: 2017-06-02 12:21+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
-"Language-Team: Lithuanian <https://l10n.opensuse.org/projects/zypper/master/"
-"lt/>\n"
+"Language-Team: Lithuanian "
+"<https://l10n.opensuse.org/projects/zypper/master/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:55
@@ -512,7 +512,7 @@ msgstr "Aprašas"
 
 #: src/info.cc:110
 msgid "automatically"
-msgstr ""
+msgstr "automatiškai"
 
 #: src/info.cc:185
 #, boost-format
@@ -662,7 +662,7 @@ msgstr "nežinoma"
 #: src/info.cc:557
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Žr. %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:563
@@ -694,7 +694,7 @@ msgstr "Nė viena įgalinta saugyklos nepateikia"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:618
 msgid "CPE Name"
-msgstr ""
+msgstr "CPE vardas"
 
 #: src/info.cc:623
 msgid "undefined"
@@ -702,7 +702,7 @@ msgstr "neapibrėžta"
 
 #: src/info.cc:625
 msgid "invalid CPE Name"
-msgstr ""
+msgstr "netinkamas CPE vardas"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:628
@@ -712,7 +712,7 @@ msgstr "Trumpas pavadinimas"
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:712
 msgid "Builds binary package"
-msgstr ""
+msgstr "Dvejetainiai paketai"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -797,7 +797,7 @@ msgstr ""
 #: src/subcommand.cc:418
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr ""
+msgstr "Galimi zypper „%1%“ pokomandžiai"
 
 #. translators: headline of an enumeration
 #: src/subcommand.cc:423
@@ -1063,7 +1063,7 @@ msgstr "Pridedamas konfliktas: „%s“."
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Gal norėjote parašyti %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1855,6 +1855,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Reikia iš naujo paleisti paketų tvarkytuvę. (Kai atsinaujins pati "
+"atnaujinimo sistema, paleiskite šią komandą iš naujo)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -2023,16 +2025,15 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "numatytasis prioritetas"
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "Prioritetas"
+msgstr "aukštesnis prioritetas"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "žemesnis prioritetas"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -2048,16 +2049,17 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Saugyklų prioritetai čia nieko nekeičia, nes visų jūsų įgalintų saugyklų "
+"prioritetai vienodi."
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "Saugyklai „%s“ nustatytas prioritetas %d."
+msgstr "Saugyklų prioritetų poveikis:"
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "„%s“ pažymimas pašalinimui."
+msgstr "„%1%“ pateikia daugiau informacijos"
 
 #: src/repos.cc:213
 #, fuzzy, boost-format
