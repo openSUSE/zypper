@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-02 16:27+0000\n"
+"PO-Revision-Date: 2017-06-03 20:01+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian "
 "<https://l10n.opensuse.org/projects/zypper/master/lt/>\n"
@@ -2061,12 +2061,13 @@ msgid "See '%1%' for details"
 msgstr "„%1%“ pateikia daugiau informacijos"
 
 #: src/repos.cc:213
-#, boost-format, boost-format, fuzzy
+#, boost-format, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Saugykla"
-msgstr[1] "Saugykla"
-msgstr[2] "Saugykla"
+msgstr[0] "%1% saugykla"
+msgstr[1] "%1% saugyklos"
+msgstr[2] "%1% saugyklos"
+msgstr[3] "%1% saugykla"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -2354,7 +2355,7 @@ msgstr "Pirminė paslauga"
 
 #: src/repos.cc:1224
 msgid "Keywords"
-msgstr ""
+msgstr "Raktažodžiai"
 
 #: src/repos.cc:1225
 msgid "Repo Info Path"
@@ -2387,9 +2388,9 @@ msgid "Specified repositories: "
 msgstr "Nurodytos saugyklos:"
 
 #: src/repos.cc:1388
-#, boost-format, boost-format, c-format, c-format, fuzzy
+#, boost-format, boost-format, c-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Išjungiama saugykla „%s“."
+msgstr "Atnaujinama saugykla „%s“."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -2929,10 +2930,10 @@ msgstr[3] ""
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Rasta %1% pritaikoma pataisa:"
+msgstr[1] "Rastos %1% pritaikomos pataisos:"
+msgstr[2] "Rasta %1% pritaikomų pataisų:"
+msgstr[3] "Rasta %1% pritaikoma pataisa:"
 
 #. translator: stats summary
 #: src/update.cc:294
@@ -2946,13 +2947,13 @@ msgstr[3] "%d pataisa užrakinta"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, boost-format, boost-format, c-format, c-format, fuzzy
+#, boost-format, boost-format, c-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d pataisa užrakinta"
-msgstr[1] "%d pataisos užrakintos"
-msgstr[2] "%d pataisų užrakinta"
-msgstr[3] "%d pataisa užrakinta"
+msgstr[0] "%d pasirenkama pataisa"
+msgstr[1] "%d pasirenkamos pataisos"
+msgstr[2] "%d pasirenkamų pataisų"
+msgstr[3] "%d pasirenkama pataisa"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -2994,7 +2995,7 @@ msgstr "Pataisos"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "Užrakinta"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -3079,7 +3080,7 @@ msgstr "Gerai gerai! Išeinama tuoj pat..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:38
 msgid "Trying to exit gracefully..."
-msgstr ""
+msgstr "Bandoma išeiti tvarkingai..."
 
 #: src/Zypper.cc:86
 msgid "Create a solver test case for debugging."
@@ -3154,9 +3155,8 @@ msgid "Command options:"
 msgstr "Komandos parinktys:"
 
 #: src/Zypper.cc:307
-#, fuzzy
 msgid "Solver options:"
-msgstr "Nuostatos pažengusiems naudotojams:"
+msgstr "Sprendiklio parinktys:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
