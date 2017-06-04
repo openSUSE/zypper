@@ -7,15 +7,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2015-10-06 21:56+0200\n"
-"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
-"Language-Team: Danish <opensuse-translation@opensuse.org>\n"
+"PO-Revision-Date: 2017-06-04 12:58+0000\n"
+"Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.6\n"
 
 #: src/callbacks/keyring.h:55
 msgid "Repository:"
@@ -256,9 +257,9 @@ msgid "Running: %s  (%s, %s)"
 msgstr "Kører: %s  (%s,%s)"
 
 #: src/callbacks/rpm.h:227
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing %s"
-msgstr "Fjerner %s-%s"
+msgstr "Fjerner %s"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:232
@@ -269,12 +270,12 @@ msgstr "Fjerner %s-%s"
 #: src/callbacks/rpm.h:255
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr "Fjernelse af %s fejlede"
+msgstr "Fjernelse af %s fejlede:"
 
 #: src/callbacks/rpm.h:298
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "Installerer: %s-%s"
+msgstr "Installerer: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:303
@@ -283,9 +284,9 @@ msgid "Installing: %s-%s"
 msgstr "Installerer: %s-%s"
 
 #: src/callbacks/rpm.h:327
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "Installation af %s-%s fejlede:"
+msgstr "Installation af %s fejlede:"
 
 #: src/callbacks/rpm.h:329
 #, c-format, boost-format
@@ -612,9 +613,8 @@ msgid "Dependency"
 msgstr "Afhængighed"
 
 #: src/info.cc:466 src/info.cc:480
-#, fuzzy
 msgid "Required"
-msgstr "Kræver genopstart"
+msgstr "Kræver"
 
 #: src/info.cc:471 src/info.cc:480 src/search.cc:296
 msgid "Recommended"
@@ -1563,7 +1563,7 @@ msgstr ""
 
 #: src/Summary.cc:1233
 msgid "Download only."
-msgstr "Download kun"
+msgstr "Kun download."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1239
@@ -2340,7 +2340,7 @@ msgstr "Kan ikke finde en gyldig softwarekilde på den givne placering:"
 
 #: src/repos.cc:1733
 msgid "Problem transferring repository data from specified URI:"
-msgstr "Problem med at overføre softwarekilde-data fra den angivne URI."
+msgstr "Problem med at overføre softwarekilde-data fra den angivne URI:"
 
 #: src/repos.cc:1734
 msgid "Please check whether the specified URI is accessible."
@@ -2500,7 +2500,7 @@ msgstr "Navnet på softwarekilden '%s' blev sat til '%s'."
 #: src/repos.cc:2228
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
-msgstr "Intet at ændre for softwarekilden '%s'"
+msgstr "Intet at ændre for softwarekilden '%s'."
 
 #: src/repos.cc:2235
 #, c-format, boost-format
@@ -2546,7 +2546,7 @@ msgstr "Tjenesten '%s' er blevet tilføjet."
 #: src/repos.cc:2735
 #, c-format, boost-format
 msgid "Removing service '%s':"
-msgstr "Fjerner tjenesten '%s'."
+msgstr "Fjerner tjenesten '%s':"
 
 #: src/repos.cc:2738
 #, c-format, boost-format
@@ -5820,7 +5820,7 @@ msgstr "Argumentet løses ikke til nogen pakke"
 
 #: src/download.cc:148
 msgid "No prune to best version."
-msgstr "Ingen justér til bedste version"
+msgstr "Ingen justér til bedste version."
 
 #: src/download.cc:154
 msgid "Prune to best version..."
@@ -5984,9 +5984,8 @@ msgstr "ikke installeret"
 
 #. translators: property name; short; used like "Name: value"
 #: src/locks.cc:177
-#, fuzzy
 msgid "Do not install"
-msgstr "ikke installeret"
+msgstr "Installer ikke"
 
 #: src/locks.cc:226
 msgid "Error reading the locks file:"
@@ -6034,7 +6033,7 @@ msgstr "Opret venligst en fejlrapport om dette."
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr "Du kan få vejledning på http://en.opensuse.org/Zypper/Troubleshooting"
+msgstr "Du kan få vejledning på http://en.opensuse.org/Zypper/Troubleshooting ."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
