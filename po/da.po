@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2016-09-17 19:18+0000\n"
-"Last-Translator: Martin Schlander <martin.schlander@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/"
-">\n"
+"PO-Revision-Date: 2017-06-05 19:48+0000\n"
+"Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr "Hal-undtagelse"
 
 #: zypp/Url.cc:114
 msgid "Invalid LDAP URL query string"
-msgstr "Ugyldig LDAP URL-forespørgselsstreng."
+msgstr "Ugyldig LDAP URL-forespørgselsstreng"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
@@ -153,11 +153,11 @@ msgstr "HalContext er ikke tilsluttet"
 
 #: zypp/target/hal/HalContext.cc:127
 msgid "HalDrive not initialized"
-msgstr "HalDrive er ikke initialiseret."
+msgstr "HalDrive er ikke initialiseret"
 
 #: zypp/target/hal/HalContext.cc:137
 msgid "HalVolume not initialized"
-msgstr "HalVolume er ikke initialiseret."
+msgstr "HalVolume er ikke initialiseret"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
@@ -251,7 +251,7 @@ msgstr "backup %s blev oprettet"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2365
 msgid "Signature is OK"
-msgstr "Signatur er o.k."
+msgstr "Signatur er OK"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2367
@@ -266,7 +266,7 @@ msgstr "Signaturen verificerer ikke"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2371
 msgid "Signature is OK, but key is not trusted"
-msgstr "Signaturen er o.k., men nøglen er ikke betroet"
+msgstr "Signaturen er OK, men nøglen er ikke betroet"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2373
@@ -477,15 +477,15 @@ msgstr "Kodede strenge indeholder en NUL-byte"
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
-msgstr "Ugyldigt skilletegn for parameter-array."
+msgstr "Ugyldigt skilletegn for parameter-array"
 
 #: zypp/url/UrlUtils.cc:213
 msgid "Invalid parameter map split separator character"
-msgstr "Ugyldigt skilletegn for parameter-map."
+msgstr "Ugyldigt skilletegn for parameter-map"
 
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
-msgstr "Ugyldigt skilletegn for parameter-array join."
+msgstr "Ugyldigt skilletegn for parameter-array join"
 
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
@@ -535,7 +535,7 @@ msgstr "Kommando dræbtes af signalet %d (%s)."
 
 #: zypp/ExternalProgram.cc:532
 msgid "Command exited with unknown error."
-msgstr "Kommando afsluttet med ukendt fejl"
+msgstr "Kommando afsluttet med ukendt fejl."
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:116
@@ -4235,7 +4235,7 @@ msgstr "Sletning af nøgle fejlede."
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "Signaturfilen %s blev ikke fundet."
+msgstr "Signaturfilen %s blev ikke fundet"
 
 #: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
@@ -4550,6 +4550,8 @@ msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
 msgstr ""
+"Opret tilknytningspunkt: Kan ikke finde en skrivbar mappe til oprettelse af "
+"et tilknytningspunkt"
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
@@ -4560,7 +4562,7 @@ msgstr "Autentificering påkrævet for '%s'"
 #: zypp/media/MediaException.cc:31
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
-msgstr "Montering af %s fejlede på %s."
+msgstr "Montering af %s fejlede på %s"
 
 #: zypp/media/MediaException.cc:41
 #, c-format, boost-format
