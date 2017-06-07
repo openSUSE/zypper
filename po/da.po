@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-04 12:58+0000\n"
+"PO-Revision-Date: 2017-06-07 10:13+0000\n"
 "Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -48,11 +48,11 @@ msgid "The gpg key signing file '%1%' has expired."
 msgstr "Gpg-nøglesigneringsfilen \"%1%\" er udløbet."
 
 #: src/callbacks/keyring.h:93
-#, fuzzy, boost-format
+#, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "Gpg-nøglesigneringsfilen \"%1%\" er udløbet."
-msgstr[1] "Gpg-nøglesigneringsfilen \"%1%\" er udløbet."
+msgstr[0] "Gpg-nøglesigneringsfilen \"%1%\" vil udløbe om %2% dag."
+msgstr[1] "Gpg-nøglesigneringsfilen \"%1%\" vil udløbe om %2% dage."
 
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
@@ -324,11 +324,11 @@ msgstr[1] ""
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:427
-#, fuzzy, boost-format
+#, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
-msgstr[0] "Tjekker for filkonflikter:"
-msgstr[1] "Tjekker for filkonflikter:"
+msgstr[0] "Registrerer %1% filfilkonflikt:"
+msgstr[1] "Registrerer %1% filfilkonflikter:"
 
 #: src/callbacks/rpm.h:435
 msgid "Conflicting files will be replaced."
@@ -977,13 +977,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Rettelsen \"%s\" er ikke nødvendig."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Rettelsen \"%s\" er låst. Brug \"%s\" til at installere den, eller lås den "
-"op med \"%s\"."
+"Rettelsen \"%1%\" er valgfri. Brug \"'%2%\" til at installere den, eller \""
+"%3%\" for at inkluderer alle valgfrie rettelser."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
