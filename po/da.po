@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-07 13:37+0000\n"
+"PO-Revision-Date: 2017-06-07 17:36+0000\n"
 "Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -1751,7 +1751,7 @@ msgstr "Deaktivér tjek af SSL-certifikatautoritet og fortsæt."
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
 #: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
-msgstr "Afbryd, Forsøg igen, Ignorér?"
+msgstr "Afbryd, prøv igen, ignorér?"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
@@ -2724,7 +2724,7 @@ msgstr ""
 #: src/repos.cc:3287
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "Forsøg '%s', eller måske endda '%s' før du gør det."
+msgstr "Prøv '%s', eller måske endda '%s' før du gør det."
 
 #: src/repos.cc:3298
 msgid "Reading installed packages..."
@@ -5110,7 +5110,7 @@ msgstr "Afinstallation af en kildepakke er ikke defineret og implementeret."
 #: src/Zypper.cc:4015
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' ligner en RPM-fil. Vil forsøge at downloade den."
+msgstr "'%s' ligner en RPM-fil. Vil prøve at downloade den."
 
 #: src/Zypper.cc:4024
 #, c-format, boost-format
@@ -5565,7 +5565,7 @@ msgstr ""
 "Tjek af pakkeintegritet fejlede. Det kan være et problem med softwarekilden "
 "eller mediet. Prøv et af følgende:\n"
 "\n"
-"- forsøg blot forrige kommando igen\n"
+"- prøv blot forrige kommando igen\n"
 "- genopfrisk softwarekilder med 'zypper refresh'\n"
 "- brug et andet installationsmedie ( f.eks. hvis det er beskadiget)\n"
 "- brug en anden softwarekilde"
