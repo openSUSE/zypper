@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-07 10:13+0000\n"
+"PO-Revision-Date: 2017-06-07 13:37+0000\n"
 "Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -1899,11 +1899,11 @@ msgid "See '%1%' for details"
 msgstr "Vælger \"%s\" til fjernelse."
 
 #: src/repos.cc:213
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Softwarekilde"
-msgstr[1] "Softwarekilde"
+msgstr[0] "%1% softwarekilde"
+msgstr[1] "%1% softwarekilder"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -2899,7 +2899,7 @@ msgstr ""
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
 msgid "OK OK! Exiting immediately..."
-msgstr "O.k., O.k.! Afbryder straks..."
+msgstr "OK, OK! Afbryder straks..."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:38
@@ -5347,11 +5347,11 @@ msgid "Applying solution %s"
 msgstr "Anvender løsningen %s"
 
 #: src/solve-commit.cc:146
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
-msgstr[0] "Problem: "
-msgstr[1] "Problem: "
+msgstr[0] "%d problem:"
+msgstr[1] "%d problemer:"
 
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
