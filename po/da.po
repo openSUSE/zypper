@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2017-06-05 19:48+0000\n"
+"PO-Revision-Date: 2017-06-07 13:07+0000\n"
 "Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
 "\n"
@@ -356,7 +356,7 @@ msgstr "Caching af softwarekilde (%d) mislykkedes."
 
 #: zypp/RepoManager.cc:1382
 msgid "Unhandled repository type"
-msgstr "Ikke-håndteret  softwarekilde-type"
+msgstr "Ikke-håndteret softwarekilde-type"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -490,7 +490,7 @@ msgstr "Ugyldigt skilletegn for parameter-array join"
 #: zypp/ExternalProgram.cc:258
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
-msgstr "Kunne ikke åbne pseudo-terminal: %s."
+msgstr "Kunne ikke åbne pty (%s)."
 
 #: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
@@ -3495,7 +3495,7 @@ msgstr "Ossetian"
 #. language code: ota
 #: zypp/LanguageCode.cc:841
 msgid "Turkish, Ottoman (1500-1928)"
-msgstr "Tyrkisk, Osmannisk"
+msgstr "Tyrkisk, Osmannisk (1500-1928)"
 
 #. language code: oto
 #: zypp/LanguageCode.cc:843
@@ -4248,7 +4248,7 @@ msgstr "Ingen URL i softwarekilden."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr "tjeneste-plugin understøtter ikke ændring af en attribut."
+msgstr "Tjeneste-plugin understøtter ikke ændring af en attribut."
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:157
@@ -4394,7 +4394,7 @@ msgstr "ikke-installérbare leverandører: "
 #: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
-msgstr "Fjern lås for at tillade fjernelse af %s"
+msgstr "fjern lås for at tillade fjernelse af %s"
 
 #: zypp/solver/detail/SATResolver.cc:1146
 #: zypp/solver/detail/SATResolver.cc:1182
@@ -4421,7 +4421,7 @@ msgstr "Denne anmodning vil ødelægge dit system!"
 #: zypp/solver/detail/SATResolver.cc:1218
 #: zypp/solver/detail/SATResolver.cc:1239
 msgid "ignore the warning of a broken system"
-msgstr "Ignorér advarslen om et ødelagt system"
+msgstr "ignorér advarslen om et ødelagt system"
 
 #: zypp/solver/detail/SATResolver.cc:1223
 #, c-format, boost-format
@@ -4446,7 +4446,7 @@ msgstr "behold %s på trods af laverestående arkitektur"
 #: zypp/solver/detail/SATResolver.cc:1284
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
-msgstr "Installér %s på trods af laverestående arkitektur"
+msgstr "installér %s på trods af laverestående arkitektur"
 
 #: zypp/solver/detail/SATResolver.cc:1293
 #, c-format, boost-format
