@@ -292,7 +292,7 @@ namespace zypp
       << timestamp()							// 1 timestamp
       << _sep << HistoryActionID::REPO_ADD.asString(true)		// 2 action
       << _sep << str::escape(repo.alias(), _sep)			// 3 alias
-      << _sep << *repo.baseUrlsBegin()					// 4 primary URL
+      << _sep << str::escape(repo.url().asString(), _sep)		// 4 primary URL
       << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 5 userdata
       << endl;
   }
@@ -322,13 +322,13 @@ namespace zypp
         << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 5 userdata
         << endl;
     }
-    if (*oldrepo.baseUrlsBegin() != *newrepo.baseUrlsBegin())
+    if ( oldrepo.url() != newrepo.url() )
     {
       _log
         << timestamp()							// 1 timestamp
         << _sep << HistoryActionID::REPO_CHANGE_URL.asString(true)	// 2 action
-        << _sep << str::escape(oldrepo.alias(), _sep)			// 3 old url
-        << _sep << *newrepo.baseUrlsBegin()				// 4 new url
+        << _sep << str::escape(oldrepo.url().asString(), _sep)		// 3 old url
+        << _sep << str::escape(newrepo.url().asString(), _sep)		// 4 new url
         << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 5 userdata
         << endl;
     }

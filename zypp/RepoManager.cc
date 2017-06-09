@@ -1345,7 +1345,7 @@ namespace zypp
 
         if ( repokind == RepoType::RPMPLAINDIR )
         {
-          forPlainDirs.reset( new MediaMounter( *info.baseUrlsBegin() ) );
+          forPlainDirs.reset( new MediaMounter( info.url() ) );
           // recusive for plaindir as 2nd arg!
           cmd.push_back( "-R" );
           // FIXME this does only work form dir: URLs
@@ -1621,16 +1621,13 @@ namespace zypp
     if ( _options.probe )
     {
       DBG << "unknown repository type, probing" << endl;
+      assert_urls(tosave);
 
-      RepoType probedtype;
-      probedtype = probe( *tosave.baseUrlsBegin(), info.path() );
-      if ( tosave.baseUrlsSize() > 0 )
-      {
-        if ( probedtype == RepoType::NONE )
-          ZYPP_THROW(RepoUnknownTypeException(info));
-        else
-          tosave.setType(probedtype);
-      }
+      RepoType probedtype( probe( tosave.url(), info.path() ) );
+      if ( probedtype == RepoType::NONE )
+	ZYPP_THROW(RepoUnknownTypeException(info));
+      else
+	tosave.setType(probedtype);
     }
 
     progress.set(50);
