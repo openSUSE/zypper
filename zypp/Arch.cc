@@ -150,8 +150,8 @@ namespace zypp
   //       bit for each architecture.
   //
   #define DEF_BUILTIN(A) \
-  namespace { static inline const IdString & _##A () { static IdString __str(#A); return __str; } } \
-  const Arch Arch_##A( _##A() )
+  namespace { static inline const IdString & a_##A () { static IdString _str(#A); return _str; } } \
+  const Arch Arch_##A( a_##A() )
 
   DEF_BUILTIN( noarch );
 
@@ -293,81 +293,81 @@ namespace zypp
         // _noarch must have _idBit 0.
         // Other builtins have 1-bit set
         // and are initialized done on the fly.
-        _compatSet.insert( Arch::CompatEntry( _noarch(), 0 ) );
+        _compatSet.insert( Arch::CompatEntry( a_noarch(), 0 ) );
         ///////////////////////////////////////////////////////////////////
         // Define the CompatibleWith relation:
         //
         // NOTE: Order of definition is significant! (Arch::compare)
 	//       - define compatible (less) architectures first!
         //
-        defCompatibleWith( _i386(),		_noarch() );
-        defCompatibleWith( _i486(),		_noarch(),_i386() );
-        defCompatibleWith( _i586(),		_noarch(),_i386(),_i486() );
-        defCompatibleWith( _i686(),		_noarch(),_i386(),_i486(),_i586() );
-        defCompatibleWith( _athlon(),		_noarch(),_i386(),_i486(),_i586(),_i686() );
-        defCompatibleWith( _x86_64(),		_noarch(),_i386(),_i486(),_i586(),_i686(),_athlon() );
+        defCompatibleWith( a_i386(),		a_noarch() );
+        defCompatibleWith( a_i486(),		a_noarch(),a_i386() );
+        defCompatibleWith( a_i586(),		a_noarch(),a_i386(),a_i486() );
+        defCompatibleWith( a_i686(),		a_noarch(),a_i386(),a_i486(),a_i586() );
+        defCompatibleWith( a_athlon(),		a_noarch(),a_i386(),a_i486(),a_i586(),a_i686() );
+        defCompatibleWith( a_x86_64(),		a_noarch(),a_i386(),a_i486(),a_i586(),a_i686(),a_athlon() );
 
-        defCompatibleWith( _pentium3(),		_noarch(),_i386(),_i486(),_i586(),_i686() );
-        defCompatibleWith( _pentium4(),		_noarch(),_i386(),_i486(),_i586(),_i686(),_pentium3() );
+        defCompatibleWith( a_pentium3(),	a_noarch(),a_i386(),a_i486(),a_i586(),a_i686() );
+        defCompatibleWith( a_pentium4(),	a_noarch(),a_i386(),a_i486(),a_i586(),a_i686(),a_pentium3() );
 
-        defCompatibleWith( _ia64(),		_noarch(),_i386(),_i486(),_i586(),_i686() );
+        defCompatibleWith( a_ia64(),		a_noarch(),a_i386(),a_i486(),a_i586(),a_i686() );
         //
-        defCompatibleWith( _s390(),		_noarch() );
-        defCompatibleWith( _s390x(),		_noarch(),_s390() );
+        defCompatibleWith( a_s390(),		a_noarch() );
+        defCompatibleWith( a_s390x(),		a_noarch(),a_s390() );
         //
-        defCompatibleWith( _ppc(),		_noarch() );
-        defCompatibleWith( _ppc64(),		_noarch(),_ppc() );
-        defCompatibleWith( _ppc64p7(),		_noarch(),_ppc(),_ppc64() );
+        defCompatibleWith( a_ppc(),		a_noarch() );
+        defCompatibleWith( a_ppc64(),		a_noarch(),a_ppc() );
+        defCompatibleWith( a_ppc64p7(),		a_noarch(),a_ppc(),a_ppc64() );
         //
-        defCompatibleWith( _ppc64le(),		_noarch() );
+        defCompatibleWith( a_ppc64le(),		a_noarch() );
         //
-        defCompatibleWith( _alpha(),		_noarch() );
-        defCompatibleWith( _alphaev5(),		_noarch(),_alpha() );
-        defCompatibleWith( _alphaev56(),	_noarch(),_alpha(),_alphaev5() );
-        defCompatibleWith( _alphapca56(),	_noarch(),_alpha(),_alphaev5(),_alphaev56() );
-        defCompatibleWith( _alphaev6(),		_noarch(),_alpha(),_alphaev5(),_alphaev56(),_alphapca56() );
-        defCompatibleWith( _alphaev67(),	_noarch(),_alpha(),_alphaev5(),_alphaev56(),_alphapca56(),_alphaev6() );
+        defCompatibleWith( a_alpha(),		a_noarch() );
+        defCompatibleWith( a_alphaev5(),	a_noarch(),a_alpha() );
+        defCompatibleWith( a_alphaev56(),	a_noarch(),a_alpha(),a_alphaev5() );
+        defCompatibleWith( a_alphapca56(),	a_noarch(),a_alpha(),a_alphaev5(),a_alphaev56() );
+        defCompatibleWith( a_alphaev6(),	a_noarch(),a_alpha(),a_alphaev5(),a_alphaev56(),a_alphapca56() );
+        defCompatibleWith( a_alphaev67(),	a_noarch(),a_alpha(),a_alphaev5(),a_alphaev56(),a_alphapca56(),a_alphaev6() );
         //
-        defCompatibleWith( _sparc(),		_noarch() );
-        defCompatibleWith( _sparcv8(),		_noarch(),_sparc() );
-        defCompatibleWith( _sparcv9(),		_noarch(),_sparc(),_sparcv8() );
-	defCompatibleWith( _sparcv9v(),		_noarch(),_sparc(),_sparcv8(),_sparcv9() );
+        defCompatibleWith( a_sparc(),		a_noarch() );
+        defCompatibleWith( a_sparcv8(),		a_noarch(),a_sparc() );
+        defCompatibleWith( a_sparcv9(),		a_noarch(),a_sparc(),a_sparcv8() );
+	defCompatibleWith( a_sparcv9v(),	a_noarch(),a_sparc(),a_sparcv8(),a_sparcv9() );
 	//
-        defCompatibleWith( _sparc64(),		_noarch(),_sparc(),_sparcv8(),_sparcv9() );
-	defCompatibleWith( _sparc64v(),		_noarch(),_sparc(),_sparcv8(),_sparcv9(),_sparcv9v(),_sparc64() );
+        defCompatibleWith( a_sparc64(),		a_noarch(),a_sparc(),a_sparcv8(),a_sparcv9() );
+	defCompatibleWith( a_sparc64v(),	a_noarch(),a_sparc(),a_sparcv8(),a_sparcv9(),a_sparcv9v(),a_sparc64() );
         //
-        defCompatibleWith( _armv3l(),		_noarch() );
-        defCompatibleWith( _armv4l(),		_noarch(),_armv3l() );
-        defCompatibleWith( _armv4tl(),		_noarch(),_armv3l(),_armv4l() );
-        defCompatibleWith( _armv5l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl() );
-        defCompatibleWith( _armv5tl(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l() );
-        defCompatibleWith( _armv5tel(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tl() );
-        defCompatibleWith( _armv5tejl(),	_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tl(),_armv5tel() );
-        defCompatibleWith( _armv6l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tl(),_armv5tel(),_armv5tejl() );
-        defCompatibleWith( _armv7l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tl(),_armv5tel(),_armv5tejl(),_armv6l() );
+        defCompatibleWith( a_armv3l(),		a_noarch() );
+        defCompatibleWith( a_armv4l(),		a_noarch(),a_armv3l() );
+        defCompatibleWith( a_armv4tl(),		a_noarch(),a_armv3l(),a_armv4l() );
+        defCompatibleWith( a_armv5l(),		a_noarch(),a_armv3l(),a_armv4l(),a_armv4tl() );
+        defCompatibleWith( a_armv5tl(),		a_noarch(),a_armv3l(),a_armv4l(),a_armv4tl(),a_armv5l() );
+        defCompatibleWith( a_armv5tel(),	a_noarch(),a_armv3l(),a_armv4l(),a_armv4tl(),a_armv5l(),a_armv5tl() );
+        defCompatibleWith( a_armv5tejl(),	a_noarch(),a_armv3l(),a_armv4l(),a_armv4tl(),a_armv5l(),a_armv5tl(),a_armv5tel() );
+        defCompatibleWith( a_armv6l(),		a_noarch(),a_armv3l(),a_armv4l(),a_armv4tl(),a_armv5l(),a_armv5tl(),a_armv5tel(),a_armv5tejl() );
+        defCompatibleWith( a_armv7l(),		a_noarch(),a_armv3l(),a_armv4l(),a_armv4tl(),a_armv5l(),a_armv5tl(),a_armv5tel(),a_armv5tejl(),a_armv6l() );
 
-        defCompatibleWith( _armv6hl(),		_noarch() );
-        defCompatibleWith( _armv7hl(),		_noarch(),_armv6hl() );
-        defCompatibleWith( _armv7hnl(),		_noarch(),_armv7hl(),_armv6hl() );
+        defCompatibleWith( a_armv6hl(),		a_noarch() );
+        defCompatibleWith( a_armv7hl(),		a_noarch(),a_armv6hl() );
+        defCompatibleWith( a_armv7hnl(),	a_noarch(),a_armv7hl(),a_armv6hl() );
 	/*legacy: rpm uses v7hnl */
-	defCompatibleWith( _armv7nhl(),		_noarch(),_armv7hnl(),_armv7hl(),_armv6hl() );
+	defCompatibleWith( a_armv7nhl(),	a_noarch(),a_armv7hnl(),a_armv7hl(),a_armv6hl() );
 
-	/*?*/defCompatibleWith( _armv7thl(),	_noarch(),_armv7hl() );
-        /*?*/defCompatibleWith( _armv7tnhl(),	_noarch(),_armv7hl(),_armv7nhl(),_armv7thl() );
+	/*?*/defCompatibleWith( a_armv7thl(),	a_noarch(),a_armv7hl() );
+        /*?*/defCompatibleWith( a_armv7tnhl(),	a_noarch(),a_armv7hl(),a_armv7nhl(),a_armv7thl() );
 
-        defCompatibleWith( _aarch64(),		_noarch() );
+        defCompatibleWith( a_aarch64(),		a_noarch() );
         //
-        defCompatibleWith( _sh3(),		_noarch() );
+        defCompatibleWith( a_sh3(),		a_noarch() );
         //
-        defCompatibleWith( _sh4(),		_noarch() );
-        defCompatibleWith( _sh4a(),		_noarch(),_sh4() );
+        defCompatibleWith( a_sh4(),		a_noarch() );
+        defCompatibleWith( a_sh4a(),		a_noarch(),a_sh4() );
 
-        defCompatibleWith( _m68k(),		_noarch() );
+        defCompatibleWith( a_m68k(),		a_noarch() );
 
-	defCompatibleWith( _mips(),		_noarch() );
-	defCompatibleWith( _mipsel(),		_noarch() );
-	defCompatibleWith( _mips64(),		_noarch() );
-	defCompatibleWith( _mips64el(),		_noarch() );
+	defCompatibleWith( a_mips(),		a_noarch() );
+	defCompatibleWith( a_mipsel(),		a_noarch() );
+	defCompatibleWith( a_mips64(),		a_noarch() );
+	defCompatibleWith( a_mips64el(),	a_noarch() );
         //
         ///////////////////////////////////////////////////////////////////
         // dumpOn( USR ) << endl;
@@ -442,7 +442,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   Arch::Arch()
-  : _entry( &ArchCompatSet::instance().assertDef( _noarch() ) )
+  : _entry( &ArchCompatSet::instance().assertDef( a_noarch() ) )
   {}
 
   Arch::Arch( IdString::IdType id_r )
