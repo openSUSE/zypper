@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-15 15:43+0000\n"
+"PO-Revision-Date: 2017-06-16 11:32+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -1053,31 +1053,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:505
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende NYE pakke vil blive installeret:"
+msgstr[1] "Følgende %d NYE pakker vil blive installeret:"
 
 #: src/Summary.cc:510
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende NYE rettelse vil blive installeret:"
+msgstr[1] "Følgende %d NYE rettelser vil blive installeret:"
 
 #: src/Summary.cc:515
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende NYE mønster vil blive installeret:"
+msgstr[1] "Følgende %d NYE mønstre vil blive installeret:"
 
 #: src/Summary.cc:520
 #, c-format, boost-format
@@ -1087,13 +1081,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:525
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende NYE kildepakke vil blive installeret:"
+msgstr[1] "Følgende %d NYE kildepakker vil blive installeret:"
 
 #: src/Summary.cc:530
 #, c-format, boost-format
@@ -1117,11 +1109,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:562
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] "De følgende opdateringer er også tilgængelige:"
-msgstr[1] "De følgende opdateringer er også tilgængelige:"
+msgstr[0] "Følgende mønster vil blive FJERNET:"
+msgstr[1] "Følgende %d mønstre vil blive FJERNET:"
 
 #: src/Summary.cc:567
 #, c-format, boost-format
@@ -1145,18 +1137,18 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:596
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "Følgende matchende problemstillingsnumre er blevet fundet:"
-msgstr[1] "Følgende matchende problemstillingsnumre er blevet fundet:"
+msgstr[0] "Følgende rettelse vil blive opgraderet:"
+msgstr[1] "Følgende %d rettelser vil blive opgraderet:"
 
 #: src/Summary.cc:601
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] "Følgende matchende problemstillingsnumre er blevet fundet:"
-msgstr[1] "Følgende matchende problemstillingsnumre er blevet fundet:"
+msgstr[0] "Følgende mønster vil blive opgraderet:"
+msgstr[1] "Følgende %d mønstre vil blive opgraderet:"
 
 #: src/Summary.cc:606
 #, c-format, boost-format
@@ -1173,25 +1165,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:630
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "Påkrævede kildepakker der skal downloades:"
-msgstr[1] "Påkrævede kildepakker der skal downloades:"
+msgstr[0] "Følgende pakke vil blive nedgraderet:"
+msgstr[1] "Følgende %d pakker vil blive nedgraderet:"
 
 #: src/Summary.cc:635
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "Følgende matchende problemstillingsnumre er blevet fundet:"
-msgstr[1] "Følgende matchende problemstillingsnumre er blevet fundet:"
+msgstr[0] "Følgende rettelsle vil blive nedgraderet:"
+msgstr[1] "Følgende %d rettelsler vil blive nedgraderet:"
 
 #: src/Summary.cc:640
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] "Følgende matchende problemstillingsnumre er blevet fundet:"
-msgstr[1] "Følgende matchende problemstillingsnumre er blevet fundet:"
+msgstr[0] "Følgende mønster vil blive nedgraderet:"
+msgstr[1] "Følgende %d mønstre vil blive nedgraderet:"
 
 #: src/Summary.cc:645
 #, c-format, boost-format
@@ -1208,36 +1200,32 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:669
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende pakke vil blive geninstalleret:"
+msgstr[1] "Følgende %d pakker vil blive geninstalleret:"
 
 #: src/Summary.cc:674
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "Følgende matchende problemstillingsnumre er blevet fundet:"
-msgstr[1] "Følgende matchende problemstillingsnumre er blevet fundet:"
+msgstr[0] "Følgende rettelse vil blive geninstalleret:"
+msgstr[1] "Følgende %d rettelser vil blive geninstalleret:"
 
 #: src/Summary.cc:679
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] "De følgende opdateringer er også tilgængelige:"
-msgstr[1] "De følgende opdateringer er også tilgængelige:"
+msgstr[0] "Følgende mønster vil blive geninstalleret:"
+msgstr[1] "Følgende %d mønstre vil blive geninstalleret:"
 
 #: src/Summary.cc:684
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende produkt vil blive geninstalleret:"
+msgstr[1] "Følgende %d produkter vil blive geninstalleret:"
 
 #: src/Summary.cc:696
 #, c-format, boost-format
@@ -1328,44 +1316,36 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:934
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende rettelse anbefales, men vil ikke blive installeret:"
+msgstr[1] "Følgende %d rettelser anbefales, men vil ikke blive installeret:"
 
 #: src/Summary.cc:938
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende mønster anbefales, men vil ikke blive installeret:"
+msgstr[1] "Følgende %d mønstre anbefales, men vil ikke blive installeret:"
 
 #: src/Summary.cc:942
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende produkt anbefales, men vil ikke blive installeret:"
+msgstr[1] "Følgende %d produkter anbefales, men vil ikke blive installeret:"
 
 #: src/Summary.cc:946
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende program anbefales, men vil ikke blive installeret:"
+msgstr[1] "Følgende %d programmer anbefales, men vil ikke blive installeret:"
 
 #: src/Summary.cc:976
 #, fuzzy, c-format, boost-format
@@ -1547,7 +1527,7 @@ msgstr ""
 #: src/Summary.cc:1202
 #, fuzzy, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
-msgstr "Brug '%s' for at få en liste over angivne tjenester."
+msgstr "Kør '%1%' for at få en komplet liste over låste elementer."
 
 #: src/Summary.cc:1212
 #, fuzzy, c-format, boost-format
@@ -1584,11 +1564,10 @@ msgstr "Efter transaktionen vil %s være frigjort."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1271
-#, fuzzy
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] "Pakkeopdateringer"
-msgstr[1] "Pakkeopdateringer"
+msgstr[0] "pakke som skal opgraderes"
+msgstr[1] "pakker som skal opgraderes"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1282
@@ -1599,11 +1578,10 @@ msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1285
-#, fuzzy
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] "Ingen kildepakker der skal downloades."
-msgstr[1] "Ingen kildepakker der skal downloades."
+msgstr[0] "pakke som skal nedgraderes"
+msgstr[1] "pakker som skal nedgraderes"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1296
@@ -1614,27 +1592,24 @@ msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1299
-#, fuzzy
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] "Pakken '%s' er ikke installeret."
-msgstr[1] "Pakken '%s' er ikke installeret."
+msgstr[0] "ny pakke som skal installeres"
+msgstr[1] "nye pakker som skal installeres"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1310
-#, fuzzy
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] "ikke installeret"
-msgstr[1] "ikke installeret"
+msgstr[0] "som skal geninstalleres"
+msgstr[1] "som skal geninstalleres"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1313
-#, fuzzy
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] "Pakken '%s' er ikke installeret."
-msgstr[1] "Pakken '%s' er ikke installeret."
+msgstr[0] "pakke som skal geninstalleres"
+msgstr[1] "pakker som skal geninstalleres"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1324
@@ -1680,19 +1655,17 @@ msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1366
-#, fuzzy
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] "Kildepakke"
-msgstr[1] "Kildepakke"
+msgstr[0] "kildepakke"
+msgstr[1] "kildepakker"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1369
-#, fuzzy
 msgid "source package to install"
 msgid_plural "source packages to install"
-msgstr[0] "Ingen kildepakker der skal downloades."
-msgstr[1] "Ingen kildepakker der skal downloades."
+msgstr[0] "kildepakke som skal installeres"
+msgstr[1] "kildepakker som skal installeres"
 
 #. patch command (auto)restricted to update stack patches
 #: src/Summary.cc:1434
@@ -1894,9 +1867,9 @@ msgid "Repository priorities in effect:"
 msgstr "Prioritet for softwarekilden '%s' blev sat til %d."
 
 #: src/repos.cc:204
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "Vælger \"%s\" til fjernelse."
+msgstr "Se \"%1%\" for detaljer"
 
 #: src/repos.cc:213
 #, boost-format
@@ -3643,7 +3616,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:1739
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3656,12 +3629,12 @@ msgid ""
 msgstr ""
 "addservice (as) [tilvalg] <URI> <alias>\n"
 "\n"
-"Føj en indekstjeneste for softwarekilder til systemet.\n"
+"Tilføj en indekstjeneste for softwarekilder til systemet.\n"
 "\n"
 "  Kommandotilvalg:\n"
 "-t, --type <type>       Type af tjeneste (%s).\n"
 "-d, --disable           Tilføj tjeneste som deaktiveret.\n"
-"-n, --name <aliaa>      Angiv beskrivende navn for tjenesten.\n"
+"-n, --name <navn>       Angiv beskrivende navn for tjenesten.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1762
@@ -4690,15 +4663,13 @@ msgstr ""
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:2863
-#, fuzzy
 msgid "locks (ll) [options]"
-msgstr "vis alle tilvalg"
+msgstr "locks (ll) [tilvalg]"
 
 #. translators: command description
 #: src/Zypper.cc:2866
-#, fuzzy
 msgid "List current package locks."
-msgstr "Der er ikke angivet nogen pakkelåse."
+msgstr "Vis nuværende pakkelåse."
 
 #. translators: -m, --matches
 #: src/Zypper.cc:2870
@@ -5206,9 +5177,8 @@ msgstr "Ukendt pakketype \"%s\"."
 
 #. translators: empty search result message
 #: src/Zypper.cc:4437
-#, fuzzy
 msgid "No matching items found."
-msgstr "Ingen matchende problemstillinger fundet."
+msgstr "Ingen matchende elementer fundet."
 
 #: src/Zypper.cc:4472
 msgid "Problem occurred initializing or executing the search query"
@@ -6002,9 +5972,8 @@ msgid "Problem installing source package %s-%s:"
 msgstr "Problem med installation af kildepakken %s-%s:"
 
 #: src/locks.cc:109
-#, fuzzy
 msgid "Matches"
-msgstr "Rettelser"
+msgstr "Match"
 
 #. translators: locks table value
 #: src/locks.cc:128 src/locks.cc:197
@@ -6219,11 +6188,10 @@ msgstr ""
 "for dig."
 
 #: src/utils/misc.cc:113
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "Behold pakker"
-msgstr[1] "Behold pakker"
+msgstr[0] "pakke"
+msgstr[1] "pakker"
 
 #: src/utils/misc.cc:115
 msgid "pattern"
@@ -6238,11 +6206,10 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/utils/misc.cc:119
-#, fuzzy
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "Rettelse"
-msgstr[1] "Rettelse"
+msgstr[0] "rettelse"
+msgstr[1] "rettelser"
 
 #: src/utils/misc.cc:121
 #, fuzzy
