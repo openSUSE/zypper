@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-16 11:32+0000\n"
+"PO-Revision-Date: 2017-06-16 20:29+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -1348,54 +1348,44 @@ msgstr[0] "Følgende program anbefales, men vil ikke blive installeret:"
 msgstr[1] "Følgende %d programmer anbefales, men vil ikke blive installeret:"
 
 #: src/Summary.cc:976
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende pakke er foreslået, men vil ikke blive installeret:"
+msgstr[1] "Følgende %d pakker er foreslået, men vil ikke blive installeret:"
 
 #: src/Summary.cc:981
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende rettelse er foreslået, men vil ikke blive installeret:"
+msgstr[1] "Følgende %d rettelser er foreslået, men vil ikke blive installeret:"
 
 #: src/Summary.cc:986
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende mønster er foreslået, men vil ikke blive installeret:"
+msgstr[1] "Følgende %d mønstre er foreslået, men vil ikke blive installeret:"
 
 #: src/Summary.cc:991
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende produkt er foreslået, men vil ikke blive installeret:"
+msgstr[1] "Følgende %d produkter er foreslået, men vil ikke blive installeret:"
 
 #: src/Summary.cc:996
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende program er foreslået, men vil ikke blive installeret:"
+msgstr[1] "Følgende %d programmer er foreslået, men vil ikke blive installeret:"
 
 #: src/Summary.cc:1018
 #, c-format, boost-format
@@ -1433,25 +1423,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1060
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
-msgstr[0] "Følgende matchende problemstillingsnumre er blevet fundet:"
-msgstr[1] "Følgende matchende problemstillingsnumre er blevet fundet:"
+msgstr[0] "Følgende pakke vil skifte leverandør:"
+msgstr[1] "Følgende %d pakker vil skifte leverandør:"
 
 #: src/Summary.cc:1065
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] "Følgende matchende problemstillingsnumre er blevet fundet:"
-msgstr[1] "Følgende matchende problemstillingsnumre er blevet fundet:"
+msgstr[0] "Følgende rettelse vil skifte leverandør:"
+msgstr[1] "Følgende %d rettelser vil skifte leverandør:"
 
 #: src/Summary.cc:1070
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
-msgstr[0] "Følgende matchende problemstillingsnumre er blevet fundet:"
-msgstr[1] "Følgende matchende problemstillingsnumre er blevet fundet:"
+msgstr[0] "Følgende mønster vil skifte leverandør:"
+msgstr[1] "Følgende %d mønstre vil skifte leverandør:"
 
 #: src/Summary.cc:1075
 #, c-format, boost-format
@@ -1468,11 +1458,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1100
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "Følgende matchende problemstillingsnumre er blevet fundet:"
-msgstr[1] "Følgende matchende problemstillingsnumre er blevet fundet:"
+msgstr[0] "Følgende pakke understøttes ikke af dens leverandør:"
+msgstr[1] "Følgende %d pakker understøttes ikke af deres leverandør:"
 
 #: src/Summary.cc:1120
 #, c-format, boost-format
@@ -1484,31 +1474,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1138
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende pakkeopdatering vil IKKE blive installeret:"
+msgstr[1] "Følgende %d pakkeopdateringer vil IKKE blive installeret:"
 
 #: src/Summary.cc:1143
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende produktopdatering vil IKKE blive installeret:"
+msgstr[1] "Følgende %d produktopdateringer vil IKKE blive installeret:"
 
 #: src/Summary.cc:1148
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
-msgstr[0] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
-msgstr[1] ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+msgstr[0] "Følgende programopdatering vil IKKE blive installeret:"
+msgstr[1] "Følgende %d programopdateringer vil IKKE blive installeret:"
 
 #: src/Summary.cc:1178
 #, c-format, boost-format
@@ -1525,16 +1509,16 @@ msgid "Available"
 msgstr ""
 
 #: src/Summary.cc:1202
-#, fuzzy, boost-format
+#, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
-msgstr "Kør '%1%' for at få en komplet liste over låste elementer."
+msgstr "Kør '%1%' for at se den komplette liste af låste elementer."
 
 #: src/Summary.cc:1212
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "Følgende matchende problemstillingsnumre er blevet fundet:"
-msgstr[1] "Følgende matchende problemstillingsnumre er blevet fundet:"
+msgstr[0] "Følgende rettelse kræver at systemet genstartes:"
+msgstr[1] "Følgende %d rettelser kræver at systemet genstartes:"
 
 #: src/Summary.cc:1230
 #, boost-format
@@ -1838,9 +1822,8 @@ msgid "default priority"
 msgstr ""
 
 #: src/repos.cc:70
-#, fuzzy
 msgid "raised priority"
-msgstr "Prioritet"
+msgstr "ophøjet prioritet"
 
 #: src/repos.cc:70
 msgid "lowered priority"
@@ -1862,9 +1845,8 @@ msgid ""
 msgstr ""
 
 #: src/repos.cc:203
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "Prioritet for softwarekilden '%s' blev sat til %d."
+msgstr "Prioritet for softwarekilde som er i brug:"
 
 #: src/repos.cc:204
 #, boost-format
@@ -2012,11 +1994,10 @@ msgid "Specified repository '%s' is disabled."
 msgstr "Den angivne softwarekilde \"%s\" er deaktiveret."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
-"Brug kommandoerne '%s' eller '%s' for at tilføje eller aktivere "
-"softwarekilder."
+"Globale tilvalg '%s' kan bruges til at aktivere softwarekilder midlertidigt."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2196,9 +2177,9 @@ msgid "Specified repositories: "
 msgstr "Angivne softwarekilder: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Deaktiverer softwarekilden '%s'."
+msgstr "Genopfrisker softwarekilden '%s'."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -2607,39 +2588,55 @@ msgid "Name of service '%s' has been set to '%s'."
 msgstr "Navnet på tjenesten '%s' blev sat til '%s'."
 
 #: src/repos.cc:3077
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "Automatisk genopfriskning blev aktiveret for tjenesten '%s'."
-msgstr[1] "Automatisk genopfriskning blev aktiveret for tjenesten '%s'."
+msgstr[0] ""
+"Softwarekilden '%s' er blevet tilføjet til aktiverede softwarekilder for "
+"tjenesten '%s'"
+msgstr[1] ""
+"Softwarekilderne '%s' er blevet tilføjet til aktiverede softwarekilder for "
+"tjenesten '%s'"
 
 #: src/repos.cc:3084
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "Automatisk genopfriskning blev deaktiveret for tjenesten '%s'."
-msgstr[1] "Automatisk genopfriskning blev deaktiveret for tjenesten '%s'."
+msgstr[0] ""
+"Softwarekilden '%s' er blevet tilføjet til deaktiverede softwarekilder for "
+"tjenesten '%s'"
+msgstr[1] ""
+"Softwarekilderne '%s' er blevet tilføjet til deaktiverede softwarekilder for "
+"tjenesten '%s'"
 
 #: src/repos.cc:3091
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "Automatisk genopfriskning blev aktiveret for tjenesten '%s'."
-msgstr[1] "Automatisk genopfriskning blev aktiveret for tjenesten '%s'."
+msgstr[0] ""
+"Softwarekilden '%s' er blevet fjernet fra aktiverede softwarekilder for "
+"tjenesten '%s'"
+msgstr[1] ""
+"Softwarekilderne '%s' er blevet fjernet fra aktiverede softwarekilder for "
+"tjenesten '%s'"
 
 #: src/repos.cc:3098
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
-msgstr[0] "Automatisk genopfriskning blev deaktiveret for tjenesten '%s'."
-msgstr[1] "Automatisk genopfriskning blev deaktiveret for tjenesten '%s'."
+msgstr[0] ""
+"Softwarekilden '%s' er blevet fjernet fra deaktiverede softwarekilder for "
+"tjenesten '%s'"
+msgstr[1] ""
+"Softwarekilderne '%s' er blevet fjernet fra deaktiverede softwarekilder for "
+"tjenesten '%s'"
 
 #: src/repos.cc:3107
 #, c-format, boost-format
@@ -2742,11 +2739,11 @@ msgstr[1] ""
 
 #. translator: stats summary
 #: src/update.cc:302
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "ikke nødvendig"
-msgstr[1] "ikke nødvendig"
+msgstr[0] "%d rettelse valgfri"
+msgstr[1] "%d rettelser valgfri"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -2757,11 +2754,11 @@ msgstr ""
 
 #. translator: stats summary
 #: src/update.cc:315
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] "ikke nødvendig"
-msgstr[1] "ikke nødvendig"
+msgstr[0] "%d rettelse kræves"
+msgstr[1] "%d rettelser kræves"
 
 #. translator: stats summary
 #: src/update.cc:318
@@ -2802,10 +2799,9 @@ msgstr ""
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr ""
-"Følgende opdateringer af softwarehåndteringen vil blive installeret først:"
+"Krævede opdateringer af softwarehåndteringen vil blive installeret først:"
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
@@ -2881,7 +2877,7 @@ msgstr ""
 
 #: src/Zypper.cc:86
 msgid "Create a solver test case for debugging."
-msgstr "Opret solver-test-case til fejlsøgning."
+msgstr "Opret løser-testsag til fejlsøgning."
 
 #: src/Zypper.cc:87
 msgid ""
@@ -2951,9 +2947,8 @@ msgid "Command options:"
 msgstr ""
 
 #: src/Zypper.cc:307
-#, fuzzy
 msgid "Solver options:"
-msgstr "vis alle tilvalg"
+msgstr "Tilvalg for løser:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
@@ -3355,7 +3350,7 @@ msgstr "Cd-/dvd-softwarekilder deaktiverede."
 
 #: src/Zypper.cc:1129
 msgid "Remote repositories disabled."
-msgstr "Eksterne softwarekilder deaktiverede."
+msgstr "Fjern-softwarekilder deaktiveret."
 
 #: src/Zypper.cc:1136
 msgid "Ignoring installed resolvables."
@@ -3653,11 +3648,11 @@ msgstr ""
 "\n"
 "  Kommandotilvalg:\n"
 "    --loose-auth  Ignorér bruger-autentifikationsdata i URI.\n"
-"    --loose-query  Ignorér forespørgsels-streng i URI.\n"
+"    --loose-query  Ignorér forespørgselsstreng i URI.\n"
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:1798
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -3689,15 +3684,17 @@ msgstr ""
 "modifyservice (ms) <tilvalg> <alias|#|URL>\n"
 "modifyservice (ms) <tilvalg> <%s>\n"
 "\n"
-"Ændr egenskaber for softwarekilde angivet ved alias, nummer eller URI eller "
-"ved de samlede tilvalg '%s'.\n"
+"Ændr egenskaber for tjenester angivet ved alias, nummer eller URI eller ved "
+"de samlede tilvalg '%s'.\n"
 "\n"
 "  Kommandotilvalg:\n"
-"-d, --disable             Deaktivér tjenesten (uden at fjerne den).\n"
-"-e, --enable              Aktivér en deaktiveret tjeneste.\n"
-"-r, --refresh             Aktivér automatisk genopfriskning af tjenesten.\n"
-"-R, --no-refresh          Deaktivér automatisk genopfriskning af tjenesten.\n"
-"-n, --name                Angiv et beskrivende navn for tjenesten.\n"
+"-d, --disable                  Deaktivér tjenesten (uden at fjerne den).\n"
+"-e, --enable                   Aktivér en deaktiveret tjeneste.\n"
+"-r, --refresh                  Aktivér automatisk genopfriskning af "
+"tjenesten.\n"
+"-R, --no-refresh               Deaktivér automatisk genopfriskning af "
+"tjenesten.\n"
+"-n, --name <navn>              Angiv et beskrivende navn for tjenesten.\n"
 "\n"
 "-i, --ar-to-enable <alias>     Tilføj en softwarekilde for RIS-tjeneste til "
 "aktivering.\n"
@@ -3712,11 +3709,11 @@ msgstr ""
 "-K, --cl-to-disable            Ryd listen over RIS-softwarekilder til "
 "deaktivering.\n"
 "\n"
-"-a, --all                 Anvend ændringer på alle tjenester.\n"
-"-l, --local               Anvend ændringer på alle lokale tjenester.\n"
-"-t, --remote              Anvend ændringer på alle eksterne tjenester.\n"
-"-m, --medium-type <type>  Anvend ændringer på alle tjenester af angiven "
-"type.\n"
+"-a, --all                      Anvend ændringer på alle tjenester.\n"
+"-l, --local                    Anvend ændringer på alle lokale tjenester.\n"
+"-t, --remote                   Anvend ændringer på alle fjern-tjenester.\n"
+"-m, --medium-type <type>       Anvend ændringer på tjenester af angiven type."
+"\n"
 
 #: src/Zypper.cc:1846
 msgid ""
@@ -3774,7 +3771,7 @@ msgstr ""
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1907
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <file.repo>\n"
@@ -3800,24 +3797,25 @@ msgstr ""
 "addrepo (ar) [tilvalg] <URI> <alias>\n"
 "addrepo (ar) [tilvalg] <fil.repo>\n"
 "\n"
-"Tilføj softwarekilde til systemet. Softwarekilden kan angives ved URI eller "
-"læses fra en angivet .repo-fil (også eksternt).\n"
+"Tilføj en softwarekilde til systemet. Softwarekilden kan angives med dens "
+"URI eller læses fra en angivet .repo-fil (også fjern).\n"
 "\n"
 "   Kommandotilvalg:\n"
-"-r, --repo <fil.repo>  Blot en anden måde at angive en .repo-fil til "
-"læsning.\n"
+"-r, --repo <fil.repo>  Blot en anden måde at angive en .repo-fil til læsning."
+"\n"
 "-t, --type <type>       Type af softwarekilde (%s).\n"
 "-d, --disable          Tilføj softwarekilde som deaktiveret.\n"
 "-c, --check             Undersøg URI.\n"
 "-C, --nocheck           Undersøg ikke URI, undersøg senere under "
 "genopfriskning.\n"
 "-n, --name <navn>       Angiv et beskrivende navn på softwarekilden.\n"
+"-p, --priority <heltal>  Sæt prioritet af softwarekilden.\n"
 "-k, --keep-packages     Aktivér caching af RPM-filer.\n"
 "-K, --no-keep-packages  Deaktivér caching af RPM-filer.\n"
 "-g, --gpgcheck          Aktivér GPG-tjek for denne softwarekilde.\n"
 "-G, --no-gpgcheck       Deaktivér GPG-tjek for denne softwarekilde.\n"
-"-f, --refresh           Aktivér automatisk genopfriskning af "
-"softwarekilden.\n"
+"-f, --refresh           Aktivér automatisk genopfriskning af softwarekilden."
+"\n"
 
 #: src/Zypper.cc:1953
 msgid ""
@@ -3878,7 +3876,7 @@ msgstr ""
 "\n"
 "  Kommandotilvalg:\n"
 "    --loose-auth  Ignorér bruger-autentifikationsdata i URI.\n"
-"    --loose-query  Ignorér forespørgsels-streng i URI.\n"
+"    --loose-query  Ignorér forespørgselsstreng i URI.\n"
 
 #: src/Zypper.cc:2004
 msgid ""
@@ -3897,7 +3895,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:2037
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3926,7 +3924,7 @@ msgstr ""
 "modifyrepo (mr) <tilvalg> <alias|#|URL> ...\n"
 "modifyrepo (mr) <tilvalg> <%s>\n"
 "\n"
-"Ændr egenskaber for softwarekilde angivet ved alias, nummer eller URI eller "
+"Ændr egenskaber for softwarekilde angivet ved alias, nummer eller URI eller\n"
 "ved de samlede tilvalg \"%s\".\n"
 "\n"
 "  Kommandotilvalg:\n"
@@ -3936,8 +3934,8 @@ msgstr ""
 "softwarekilden.\n"
 "-R, --no-refresh          Deaktivér automatisk genopfriskning af "
 "softwarekilden.\n"
-"-n, --name                Angiv et beskrivende navn for softwarekilden.\n"
-"-p, --priority <heltal>     Angiv prioritet af softwarekilden.\n"
+"-n, --name <navn>         Angiv et beskrivende navn for softwarekilden.\n"
+"-p, --priority <heltal>   Angiv prioritet af softwarekilden.\n"
 "-k, --keep-packages       Aktivér caching af RPM-filer.\n"
 "-K, --no-keep-packages    Deaktivér caching af RPM-filer.\n"
 "-g, --gpgcheck            Aktivér GPG-tjek for denne softwarekilde.\n"
@@ -3945,7 +3943,7 @@ msgstr ""
 "\n"
 "-a, --all                 Anvend ændringer på alle softwarekilder.\n"
 "-l, --local               Anvend ændringer på alle lokale softwarekilder.\n"
-"-t, --remote              Anvend ændringer på alle eksterne softwarekilder.\n"
+"-t, --remote              Anvend ændringer på alle fjern-softwarekilder.\n"
 "-m, --medium-type <type>  Anvend ændringer på alle softwarekilder af angiven "
 "type.\n"
 
@@ -4285,7 +4283,6 @@ msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr ""
 
 #: src/Zypper.cc:2453
-#, fuzzy
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -4331,7 +4328,7 @@ msgid ""
 "If a search string is enclosed in '/', it's interpreted as a regular "
 "expression.\n"
 msgstr ""
-"search (se) [tilvalg] [søgestreng] ...\n"
+"search (se) [tilvalg] [forespørgselsstreng] ...\n"
 "\n"
 "Søg efter pakker, der matcher en af de angivne søgestrenge.\n"
 " \n"
@@ -4339,7 +4336,7 @@ msgstr ""
 "    --match-substrings     Søg efter resultater, der matcher  dele af ord "
 "(standard).\n"
 "    --match-words          Søg kun efter resultater, der matcher hele ord.\n"
-"    --match-exact          Søg efter et nøjagtigt af søgestrengen.\n"
+"-x, --match-exact          Søg efter et nøjagtigt af søgestrengen.\n"
 "    --provides             Søg efter pakker som leverer søgestrengene.\n"
 "    --recommends           Søg efter pakker som anbefaler søgestrengene.\n"
 "    --requires             Søg efter pakker som kræver søgestrengene.\n"
@@ -4367,9 +4364,9 @@ msgstr ""
 "                           søgningen har matchet (nyttigt ved søgning i "
 "afhængigheder).\n"
 " \n"
-"Wildcardene  * og ? kan også bruges i søgestrenge.\n"
-"Hvis en søgestreng omsluttes af \"/\", fortolkes den som et regulært "
-"udtryk.\n"
+"Jokertegnene * og ? kan også bruges i søgestrenge.\n"
+"Hvis en søgestreng omsluttes af \"/\", fortolkes den som et regulært udtryk."
+"\n"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2503
@@ -5398,16 +5395,16 @@ msgstr "Beregner opgradering..."
 
 #: src/solve-commit.cc:396
 msgid "Generating solver test case..."
-msgstr "Genererer solver-test-case..."
+msgstr "Genererer løser-testsag..."
 
 #: src/solve-commit.cc:398
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr "Generering af solver-test-case gennemført i %s."
+msgstr "Generering af løser-testsag gennemført i %s."
 
 #: src/solve-commit.cc:401
 msgid "Error creating the solver test case."
-msgstr "Fejl under oprettelse af solver-test-case."
+msgstr "Fejl under oprettelse af løser-testsag."
 
 #: src/solve-commit.cc:435
 #, c-format, boost-format
@@ -5987,9 +5984,8 @@ msgstr "(enhver)"
 
 #. translators: property name; short; used like "Name: value"
 #: src/locks.cc:169
-#, fuzzy
 msgid "Keep installed"
-msgstr "ikke installeret"
+msgstr "Lad være installeret"
 
 #. translators: property name; short; used like "Name: value"
 #: src/locks.cc:177
@@ -6005,11 +6001,10 @@ msgid "There are no package locks defined."
 msgstr "Der er ikke angivet nogen pakkelåse."
 
 #: src/locks.cc:292
-#, fuzzy
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] "Angivet lås er blevet fjernet."
-msgstr[1] "Angivet lås er blevet fjernet."
+msgstr[0] "Angivet lås er blevet tilføjet."
+msgstr[1] "Angivet låse er blevet tilføjet."
 
 #: src/locks.cc:299
 msgid "Problem adding the package lock:"
@@ -6024,11 +6019,11 @@ msgid "No lock has been removed."
 msgstr "Ingen lås blev fjernet."
 
 #: src/locks.cc:372
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "Angivet lås er blevet fjernet."
-msgstr[1] "Angivet lås er blevet fjernet."
+msgstr[0] "%zu lås er blevet fjernet."
+msgstr[1] "%zu låse er blevet fjernet."
 
 #: src/locks.cc:379
 msgid "Problem removing the package lock:"
@@ -6151,11 +6146,11 @@ msgid "a/r/i"
 msgstr "a/f/i"
 
 #: src/utils/prompt.cc:200
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] "Vælger \"%s\" til fjernelse."
-msgstr[1] "Vælger \"%s\" til fjernelse."
+msgstr[0] "Vælger automatisk '%s' efter %u sekund."
+msgstr[1] "Vælger automatisk '%s' efter %u sekunder."
 
 #: src/utils/prompt.cc:217
 msgid "Trying again..."
@@ -6212,11 +6207,10 @@ msgstr[0] "rettelse"
 msgstr[1] "rettelser"
 
 #: src/utils/misc.cc:121
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "Kildepakke"
-msgstr[1] "Kildepakke"
+msgstr[0] "kildepakke"
+msgstr[1] "kildepakker"
 
 #: src/utils/misc.cc:123
 msgid "application"
@@ -6226,11 +6220,10 @@ msgstr[1] ""
 
 #. default
 #: src/utils/misc.cc:125
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "Type af resolvable"
-msgstr[1] "Type af resolvable"
+msgstr[0] "resolvable"
+msgstr[1] "resolvables"
 
 #. Patch status: i18n + color
 #. translator: patch status
@@ -6260,9 +6253,8 @@ msgstr "ikke nødvendig"
 
 #. translator: patch status
 #: src/utils/misc.cc:139
-#, fuzzy
 msgid "undetermined"
-msgstr "udefineret"
+msgstr "ikke fastsat"
 
 #. << _("Repository")
 #: src/utils/misc.cc:289
