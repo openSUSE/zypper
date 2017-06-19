@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-16 20:29+0000\n"
+"PO-Revision-Date: 2017-06-19 09:50+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -212,12 +212,19 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
+"Digest verifikation mislykkedes for filen '%1%'\n"
+"[%2%]\n"
+"\n"
+"  ventede %3%\n"
+"  men fik  %4%\n"
 
 #: src/callbacks/keyring.h:363
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
+"Accept af pakker med forkert tjeksom kan fører til at et ødelagt system og i "
+"ekstreme tilfælde endda kompromitering af systemet."
 
 #: src/callbacks/keyring.h:371
 #, boost-format
@@ -233,22 +240,22 @@ msgstr ""
 #. translators: A prompt option
 #: src/callbacks/keyring.h:378
 msgid "discard"
-msgstr ""
+msgstr "forkast"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:380
 msgid "Unblock using this file on your own risk."
-msgstr ""
+msgstr "Afbloker ved brug af denne fil på eget ansvar."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:382
 msgid "Discard the file."
-msgstr ""
+msgstr "Forkast filen."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:387
 msgid "Unblock or discard?"
-msgstr ""
+msgstr "Afbloker eller forkast?"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:163
@@ -389,11 +396,11 @@ msgstr "Henter %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
-msgstr ""
+msgstr "Signaturverifikation mislykkedes"
 
 #: src/callbacks/repo.h:236
 msgid "Accepting package despite the error."
-msgstr ""
+msgstr "Accepterer pakken selvom der er fejl."
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -489,7 +496,7 @@ msgstr "Beskrivelse"
 
 #: src/info.cc:110
 msgid "automatically"
-msgstr ""
+msgstr "automatisk"
 
 #: src/info.cc:185
 #, boost-format
@@ -571,7 +578,7 @@ msgstr "Oprettet den"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:403 src/utils/misc.cc:253 src/utils/misc.cc:294
 msgid "Interactive"
-msgstr ""
+msgstr "Interaktiv"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:438
@@ -637,7 +644,7 @@ msgstr "ukendt"
 #: src/info.cc:557
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Se %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:563
@@ -696,7 +703,7 @@ msgstr "ingen"
 #: src/subcommand.cc:275
 #, boost-format
 msgid "cannot exec %1% (%2%)"
-msgstr ""
+msgstr "kan ikke eksekvere %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
@@ -730,14 +737,14 @@ msgstr ""
 
 #: src/subcommand.cc:328
 msgid "core dumped"
-msgstr ""
+msgstr "kerne dumpet"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
 #: src/subcommand.cc:338
 #, boost-format
 msgid "%1% exited with status %2%"
-msgstr ""
+msgstr "%1% afsluttede med status %2%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
@@ -772,12 +779,12 @@ msgstr ""
 #: src/subcommand.cc:418
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr ""
+msgstr "Tilgængelige zypper-underkommandoer i '%1%'"
 
 #. translators: headline of an enumeration
 #: src/subcommand.cc:423
 msgid "Zypper subcommands available from elsewhere on your $PATH"
-msgstr ""
+msgstr "Zypper-underkommandoer tilgængelige fra andre steder end din $PATH"
 
 #. translators: helptext; %1% is a zypper command
 #: src/subcommand.cc:428
@@ -1041,7 +1048,7 @@ msgstr "Tilføjer konflikt: \"%s\"."
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Mente du %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -2944,7 +2951,7 @@ msgstr ""
 
 #: src/Zypper.cc:304
 msgid "Command options:"
-msgstr ""
+msgstr "Kommandotilvalg:"
 
 #: src/Zypper.cc:307
 msgid "Solver options:"
@@ -2952,11 +2959,11 @@ msgstr "Tilvalg for løser:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
-msgstr ""
+msgstr "Ekspert-tilvalg:"
 
 #: src/Zypper.cc:313
 msgid "This command has no additional options."
-msgstr ""
+msgstr "Denne kommando har ingen yderligere tilvalg."
 
 #: src/Zypper.cc:446 src/Zypper.cc:1407
 msgid "Unexpected exception."
@@ -3017,13 +3024,13 @@ msgid ""
 "\t--solv-cache-dir <dir>\tUse alternative solv file cache directory.\n"
 "\t--pkg-cache-dir <dir>\tUse alternative package cache directory.\n"
 msgstr ""
-"\t--reposd-dir, -D <dir>\tBrug alternativ mappe til definitionsfiler\n"
-"\t\t\t\ttil softwarekilder.\n"
-"\t--cache-dir, -C <dir>\tBrug alternativ mappe til meta-data cache-"
+"\t--reposd-dir, -D <mappe>\tBrug alternativ mappe til definitionsfiler\n"
+"\t\t\t\t\ttil softwarekilder.\n"
+"\t--cache-dir, -C <mappe>\t\tBrug alternativ mappe til meta-data cache-"
 "database.\n"
-"\t--raw-cache-dir <dir>\tBrug alternativ mappe til rå meta-data-cache.\n"
-"\t--solv-cache-dir <dir>\tBrug alternativ mappe til solv-fil-cache.\n"
-"\t--pkg-cache-dir <dir>\tBrug alternativ mappe til pakke-cache.\n"
+"\t--raw-cache-dir <mappe>\t\tBrug alternativ mappe til rå meta-data-cache.\n"
+"\t--solv-cache-dir <mappe>\tBrug alternativ mappe til solv-fil-cache.\n"
+"\t--pkg-cache-dir <mappe>\t\tBrug alternativ mappe til pakke-cache.\n"
 
 #: src/Zypper.cc:502
 msgid ""
