@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-19 09:50+0000\n"
+"PO-Revision-Date: 2017-06-19 18:00+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -327,7 +327,11 @@ msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
 msgstr[0] ""
+"Følgende pakke er blevet ekskluderet fra filkonfliktertjek da den endnu ikke "
+"er downloadet:"
 msgstr[1] ""
+"Følgende %1 pakker er blevet ekskluderet fra filkonfliktertjek da de endnu "
+"ikke er downloadet:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:427
@@ -405,12 +409,12 @@ msgstr "Accepterer pakken selvom der er fejl."
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Mistænkelig kategorifilterværdi '%1%'."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Mistænkelig alvorlighedsfilterværdi '%1%'."
 
 #: src/output/Out.h:25 src/repos.cc:142 src/repos.cc:170
 msgid "Yes"
@@ -694,7 +698,7 @@ msgstr "Kort navn"
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:712
 msgid "Builds binary package"
-msgstr ""
+msgstr "Bygningens binære pakke"
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -733,7 +737,7 @@ msgstr ""
 #: src/subcommand.cc:324
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
-msgstr ""
+msgstr "%1% blev dræbt af signal %2% (%3%)"
 
 #: src/subcommand.cc:328
 msgid "core dumped"
@@ -791,6 +795,8 @@ msgstr "Zypper-underkommandoer tilgængelige fra andre steder end din $PATH"
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
+"Skriv '%1%' for at få hjælp til en specifik underkommando, hvis det er "
+"tilgængeligt."
 
 #. translators: %1% - command name
 #: src/subcommand.cc:451
