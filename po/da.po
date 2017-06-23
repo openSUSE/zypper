@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-22 13:06+0000\n"
+"PO-Revision-Date: 2017-06-23 18:52+0000\n"
 "Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -718,14 +718,14 @@ msgstr "kan ikke eksekvere %1% (%2%)"
 #: src/subcommand.cc:284
 #, boost-format
 msgid "fork for %1% failed (%2%)"
-msgstr ""
+msgstr "fork for %1% mislykkedes (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
 #: src/subcommand.cc:303
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
-msgstr ""
+msgstr "waitpid for %1% mislykkedes (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
@@ -733,7 +733,7 @@ msgstr ""
 #: src/subcommand.cc:313
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr ""
+msgstr "waitpid for %1% returnerer uventet pid %2% mens der ventes på %3%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
@@ -759,7 +759,7 @@ msgstr "%1% afsluttede med status %2%"
 #: src/subcommand.cc:353
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr ""
+msgstr "waitpid for %1% returnerer uventet afslutningsstatus %2%"
 
 #: src/subcommand.cc:386
 #, boost-format
@@ -1017,7 +1017,7 @@ msgstr "Rettelsen \"%s\" er ikke i den angivne kategori."
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
-msgstr ""
+msgstr "Rettelsen '%s' har ikke den angivne alvorlighed."
 
 #: src/RequestFeedback.cc:213
 #, c-format, boost-format
@@ -1677,7 +1677,7 @@ msgstr ""
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
-msgstr ""
+msgstr "Kræver genstart af system."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
@@ -1824,7 +1824,7 @@ msgstr ""
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
 msgid "volatile"
-msgstr ""
+msgstr "flygtig"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
 #: src/repos.cc:53
@@ -1836,7 +1836,7 @@ msgstr ""
 
 #: src/repos.cc:69
 msgid "default priority"
-msgstr ""
+msgstr "standardprioritet"
 
 #: src/repos.cc:70
 msgid "raised priority"
@@ -1844,7 +1844,7 @@ msgstr "ophøjet prioritet"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr ""
+msgstr "sænket prioritet"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -2161,7 +2161,7 @@ msgstr "Forældertjeneste"
 
 #: src/repos.cc:1224
 msgid "Keywords"
-msgstr ""
+msgstr "Nøgleord"
 
 #: src/repos.cc:1225
 msgid "Repo Info Path"
@@ -2582,12 +2582,12 @@ msgstr "Alle tjenester blev genopfrisket."
 #: src/repos.cc:3057
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
-msgstr ""
+msgstr "Tjenesten '%s' er blevet aktiveret."
 
 #: src/repos.cc:3059
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
-msgstr ""
+msgstr "Tjenesten '%s' er blevet deaktiveret."
 
 #: src/repos.cc:3065
 #, c-format, boost-format
@@ -2751,8 +2751,8 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d rettelse låst"
+msgstr[1] "%d rettelser låst"
 
 #. translator: stats summary
 #: src/update.cc:302
@@ -2767,7 +2767,7 @@ msgstr[1] "%d rettelser valgfri"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "brug '%1%' for at inkludere valgfrie rettelser"
 
 #. translator: stats summary
 #: src/update.cc:315
@@ -2782,8 +2782,8 @@ msgstr[1] "%d rettelser kræves"
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d sikkehedsrettelse"
+msgstr[1] "%d sikkehedsrettelser"
 
 #. translator: Table column header.
 #: src/update.cc:352
@@ -2798,7 +2798,7 @@ msgstr "Rettelser"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "Låst"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -3309,7 +3309,7 @@ msgstr ""
 
 #: src/Zypper.cc:978
 msgid "Enforced setting"
-msgstr ""
+msgstr "Påtvunget indstilling"
 
 #: src/Zypper.cc:988
 msgid "User data string must not contain nonprintable or newline characters!"
@@ -4176,7 +4176,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2323
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [TILVALG]"
 
 #. translators: command description
 #: src/Zypper.cc:2326
@@ -4388,7 +4388,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2503
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [TILVALG]"
 
 #. translators: command description
 #: src/Zypper.cc:2506
@@ -4764,7 +4764,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:2973
 msgid "ps [options]"
-msgstr ""
+msgstr "ps [tilvalg]"
 
 #. translators: command description
 #: src/Zypper.cc:2976
@@ -5206,7 +5206,7 @@ msgstr "Se meddelelsen ovenfor for at få et tip."
 #: src/Zypper.cc:4554
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "Tilvalget %1% har ingen virkning uden det globale tilvalg %2%."
 
 #: src/Zypper.cc:4641 src/Zypper.cc:4689
 #, c-format, boost-format
@@ -5269,8 +5269,8 @@ msgstr "Der kræves root-rettigheder for at tilføje pakkelåse."
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fjernede %lu lås."
+msgstr[1] "Fjernede %lu låse."
 
 #: src/Zypper.cc:5095
 msgid "XML output not implemented for this command."
@@ -5602,12 +5602,12 @@ msgstr ""
 
 #: src/solve-commit.cc:867
 msgid "Installation has completed with error."
-msgstr ""
+msgstr "Installationen er fuldført uden fejl."
 
 #: src/solve-commit.cc:869
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr ""
+msgstr "Du kan kører '%1%' for at reparere afhængigsproblemer."
 
 #: src/solve-commit.cc:883
 msgid ""
@@ -5651,7 +5651,7 @@ msgstr "UID"
 #. process login name
 #: src/ps.cc:121
 msgid "User"
-msgstr ""
+msgstr "Bruger"
 
 #. process command name
 #: src/ps.cc:123
@@ -6175,7 +6175,7 @@ msgstr "Prøver igen..."
 
 #: src/utils/prompt.cc:291
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "Kan ikke læse input: dårlig strøm eller EOF."
 
 #: src/utils/prompt.cc:292
 #, c-format, boost-format
@@ -6208,14 +6208,14 @@ msgstr[1] "pakker"
 #: src/utils/misc.cc:115
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "mønster"
+msgstr[1] "mønstre"
 
 #: src/utils/misc.cc:117
 msgid "product"
 msgid_plural "product"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "produkt"
+msgstr[1] "produkter"
 
 #: src/utils/misc.cc:119
 msgid "patch"
@@ -6232,8 +6232,8 @@ msgstr[1] "kildepakker"
 #: src/utils/misc.cc:123
 msgid "application"
 msgid_plural "applications"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "program"
+msgstr[1] "programmer"
 
 #. default
 #: src/utils/misc.cc:125
@@ -6246,12 +6246,12 @@ msgstr[1] "resolvables"
 #. translator: patch status
 #: src/utils/misc.cc:134
 msgid "unwanted"
-msgstr ""
+msgstr "uønsket"
 
 #. translator: patch status
 #: src/utils/misc.cc:135
 msgid "optional"
-msgstr ""
+msgstr "valgfri"
 
 #. translator: patch status
 #: src/utils/misc.cc:136
@@ -6261,7 +6261,7 @@ msgstr "nødvendig"
 #. translator: patch status
 #: src/utils/misc.cc:137
 msgid "applied"
-msgstr ""
+msgstr "anvendt"
 
 #. translator: patch status
 #: src/utils/misc.cc:138
@@ -6298,11 +6298,11 @@ msgstr "Den givne URI er ugyldig"
 #. translators: don't translate '<platform>'
 #: src/utils/misc.cc:469
 msgid "Unable to guess a value for <platform>."
-msgstr ""
+msgstr "Kan ikke gætte en værdi for <platform>."
 
 #: src/utils/misc.cc:470
 msgid "Please use obs://<project>/<platform>"
-msgstr ""
+msgstr "Brug venligst obs://<project>/<platform>"
 
 #: src/utils/misc.cc:471 src/utils/misc.cc:508
 #, c-format, boost-format
