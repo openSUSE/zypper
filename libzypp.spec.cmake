@@ -247,6 +247,11 @@ mkdir -p $RPM_BUILD_ROOT%{_var}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT%{_var}/log/zypp
 mkdir -p $RPM_BUILD_ROOT%{_var}/cache/zypp
 
+%if "%{distribution}" == "openSUSE Tumbleweed"
+# Adjust zypp.conf for openSUSE Tumbleweed - minor modifications over the 'usual' defaults - boo#1031756
+sed -i "s|# solver.dupAllowVendorChange = true|solver.dupAllowVendorChange = false|g" %{buildroot}%{_sysconfdir}/zypp/zypp.conf
+%endif
+
 make -C po install DESTDIR=$RPM_BUILD_ROOT
 # Create filelist with translations
 cd ..
