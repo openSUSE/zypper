@@ -610,6 +610,21 @@ MediaHandler::checkAttached(bool matchMountFs) const
 	  }
           // differs
         }
+        else // mixed cases:
+	{
+	  // Type ISO: Since 11.1 mtab might contain the name of
+	  // the loop device instead of the iso file:
+	  if ( ref.mediaSource->type == "iso"
+	    && str::hasPrefix( Pathname(e->src).asString(), "/dev/loop" )
+	    && ref.attachPoint->path == Pathname(e->dir) )
+	  {
+	    DBG << "Found bound media "
+	    << ref.mediaSource->asString()
+	    << " in the mount table as " << e->src << std::endl;
+	    _isAttached = true;
+	    break;
+	  }
+	}
       }
 
       if( !_isAttached)

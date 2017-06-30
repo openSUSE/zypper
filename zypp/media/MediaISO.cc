@@ -16,10 +16,6 @@
 
 #include "zypp/media/MediaISO.h"
 
-
-#define LOSETUP_TOOL_PATH "/sbin/losetup"
-
-using std::string;
 using std::endl;
 
 //////////////////////////////////////////////////////////////////////
@@ -149,32 +145,6 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
-    string MediaISO::findUnusedLoopDevice()
-    {
-      const char* argv[] =
-      {
-        LOSETUP_TOOL_PATH,
-        "-f",
-        NULL
-      };
-      ExternalProgram losetup(argv, ExternalProgram::Stderr_To_Stdout);
-
-      string out = losetup.receiveLine();
-      string device = out.substr(0, out.size() - 1); // remove the trailing endl
-      for(; out.length(); out = losetup.receiveLine())
-        DBG << "losetup: " << out;
-
-      if (losetup.close() != 0)
-      {
-        ERR << LOSETUP_TOOL_PATH " failed to find an unused loop device." << std::endl;
-        ZYPP_THROW(MediaNoLoopDeviceException(_url));
-      }
-
-      DBG << "found " << device << endl;
-      return device;
-    }
-
-    // ---------------------------------------------------------------
     void MediaISO::attachTo(bool next)
     {
       if(next)
@@ -215,20 +185,9 @@ namespace zypp
         ZYPP_THROW(MediaNotSupportedException(_url));
       }
 
-      //! \todo make this thread-safe - another thread might pick up the same device
-      string loopdev = findUnusedLoopDevice(); // (bnc #428009)
+      MediaSourceRef media( new MediaSource("iso", isofile.asString() ) );
 
-      MediaSourceRef media( new MediaSource("iso",  loopdev));
-      PathInfo dinfo(loopdev);
-      if( dinfo.isBlk())
-      {
-        media->maj_nr = dinfo.devMajor();
-        media->min_nr = dinfo.devMinor();
-      }
-      else
-        ERR << loopdev << " is not a block device" << endl;
-
-      AttachedMedia  ret( findAttachedMedia( media));
+      AttachedMedia  ret( findAttachedMedia(media));
       if( ret.mediaSource &&
           ret.attachPoint &&
           !ret.attachPoint->empty())
@@ -249,7 +208,7 @@ namespace zypp
 	setAttachPoint( createAttachPoint(), true );
       }
       std::string mountpoint( attachPoint().asString() );
-      std::string mountopts("ro,loop=" + loopdev);
+      std::string mountopts("ro,loop");
 
       Mount mount;
       mount.mount(isofile.asString(), mountpoint,
