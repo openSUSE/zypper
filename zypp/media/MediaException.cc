@@ -226,14 +226,6 @@ namespace zypp
       return str;
     }
 
-    std::ostream & MediaNoLoopDeviceException::dumpOn( std::ostream & str ) const
-    {
-      str << form(_("Cannot find available loop device to mount the image file from '%s'"), _url.c_str()) << endl;
-      if ( !_msg.empty() )
-        str << endl << _msg << endl;
-      return str;
-    }
-
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp

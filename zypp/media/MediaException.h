@@ -515,28 +515,6 @@ namespace zypp
       std::string _msg;
     };
 
-    /**
-     * Thrown if /sbin/losetup fails to find an unused loop device for mounting
-     * an .iso image.
-     *
-     * UI hint: tell user to check permissions to read /dev/loop# or enablement
-     * of support for loop devices.
-     *
-     * \see MediaISO
-     */
-    class MediaNoLoopDeviceException : public MediaException
-    {
-    public:
-      MediaNoLoopDeviceException(const Url & url_r, const std::string & msg = "")
-        : MediaException(msg)
-        , _url(url_r.asString()), _msg(msg)
-      {}
-      virtual ~MediaNoLoopDeviceException() throw() {};
-    protected:
-      virtual std::ostream & dumpOn( std::ostream & str ) const;
-      std::string _url;
-      std::string _msg;
-    };
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp
