@@ -8,6 +8,7 @@
 \---------------------------------------------------------------------*/
 
 #include <fstream>
+#include "zypp/base/Logger.h"
 #include "zypp/repo/SUSEMediaVerifier.h"
 
 using namespace std;
@@ -31,7 +32,7 @@ SUSEMediaVerifier::SUSEMediaVerifier( int media_nr, const Pathname &path_r )
   std::ifstream str(path_r.asString().c_str());
   std::string vendor;
   std::string id;
-  
+
   if ( str )
   {
     getline(str, _media_vendor);
@@ -55,11 +56,17 @@ bool SUSEMediaVerifier::isDesiredMedia(const media::MediaAccessRef &ref)
   std::ifstream str(media_file.asString().c_str());
   std::string vendor;
   std::string id;
-#warning check the stream status
   getline(str, vendor);
   getline(str, id);
 
-  return (vendor == _media_vendor && id == _media_id );
+  bool ret = ( vendor == _media_vendor && id == _media_id  );
+  if ( !ret ) {
+    DBG << "cached vendor: " << _media_vendor << endl;
+    DBG << "repo vendor: " << vendor << endl;
+    DBG << "cached id: " << _media_id << endl;
+    DBG << "repo id: " << id << endl;
+  }
+  return ret;
 }
 
 }
