@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Jun 30 14:25:29 CEST 2017 - ma@suse.de
+
+- Adapt loop mounting of iso images (bsc#1038132, bsc#1033236)
+- Adjust zypp.conf for openSUSE Tumbleweed (bsc#1031756)
+- Change arch variable names conflicting with compiler macros (fixes #70)
+- Fix potential crash if repo has no baseurl (bnc#1043218)
+- version 16.13.0 (0)
+
+-------------------------------------------------------------------
 Wed May 31 11:49:07 CEST 2017 - ma@suse.de
 
 - Testcase: add missing solver flags (bsc#1041889)
