@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-23 18:52+0000\n"
+"PO-Revision-Date: 2017-06-30 17:16+0000\n"
 "Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -775,6 +775,16 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
+"Zypper-underkommandoer er alenestående eksekverbare som findes i\n"
+"zypper_execdir ('%1%').\n"
+"\n"
+"Zypper leverer en wrapper til underkommandoer som ved hvor\n"
+"underkommandoerne findes og kører dem ved at videregive\n"
+"kommandolinjeargumenter til dem.\n"
+"\n"
+"Hvis en underkommando ikke findes i zypper_execdir, så vil wrapperen\n"
+"lede efter den i resten af din $PATH. Det er derfor muligt at skrive\n"
+"lokale zypper-udvidelser som ikke findes i systemområde.\n"
 
 #: src/subcommand.cc:401
 #, boost-format
@@ -782,6 +792,9 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
+"Brug af zypper globale tilvalg sammen med underkommandoer såvel som\n"
+"eksekvering af underkommandoer i '%1%' understøttes ikke på nuværende "
+"tidspunkt.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/subcommand.cc:418
@@ -806,7 +819,7 @@ msgstr ""
 #: src/subcommand.cc:451
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
-msgstr ""
+msgstr "Manuel indtastning for %1% kan ikke vises"
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
@@ -1066,8 +1079,8 @@ msgstr "Mente du %1%?"
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... og %1% yderligere element."
+msgstr[1] "... og %1% yderligere elementer."
 
 #: src/Summary.cc:505
 #, boost-format, c-format
@@ -1094,8 +1107,8 @@ msgstr[1] "Følgende %d NYE mønstre vil blive installeret:"
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende NYE produkt vil blive installeret:"
+msgstr[1] "Følgende %d produkter vil blive installeret:"
 
 #: src/Summary.cc:525
 #, boost-format, c-format
@@ -1108,22 +1121,22 @@ msgstr[1] "Følgende %d NYE kildepakker vil blive installeret:"
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende program vil blive installeret:"
+msgstr[1] "Følgende %d programmer vil blive installeret:"
 
 #: src/Summary.cc:552
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende pakke vil blive FJERNET:"
+msgstr[1] "Følgende %d pakker vil blive FJERNET:"
 
 #: src/Summary.cc:557
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende rettelse vil blive FJERNET:"
+msgstr[1] "Følgende %d rettelser vil blive FJERNET:"
 
 #: src/Summary.cc:562
 #, boost-format, c-format
@@ -1136,22 +1149,22 @@ msgstr[1] "Følgende %d mønstre vil blive FJERNET:"
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende produkt vil blive FJERNET:"
+msgstr[1] "Følgende %d produkter vil blive FJERNET:"
 
 #: src/Summary.cc:572
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende program vil blive FJERNET:"
+msgstr[1] "Følgende %d programmer vil blive FJERNET:"
 
 #: src/Summary.cc:591
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende pakke vil blive opgraderet:"
+msgstr[1] "Følgende %d pakker vil blive opgraderet:"
 
 #: src/Summary.cc:596
 #, boost-format, c-format
@@ -1171,15 +1184,15 @@ msgstr[1] "Følgende %d mønstre vil blive opgraderet:"
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende produkt vil blive opgraderet:"
+msgstr[1] "Følgende %d produkter vil blive opgraderet:"
 
 #: src/Summary.cc:611
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende program vil blive opgraderet:"
+msgstr[1] "Følgende %d programmer vil blive opgraderet:"
 
 #: src/Summary.cc:630
 #, boost-format, c-format
@@ -1206,15 +1219,15 @@ msgstr[1] "Følgende %d mønstre vil blive nedgraderet:"
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende produkt vil blive nedgraderet:"
+msgstr[1] "Følgende %d produkter vil blive nedgraderet:"
 
 #: src/Summary.cc:650
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende program vil blive nedgraderet:"
+msgstr[1] "Følgende %d programmer vil blive nedgraderet:"
 
 #: src/Summary.cc:669
 #, boost-format, c-format
@@ -1248,8 +1261,8 @@ msgstr[1] "Følgende %d produkter vil blive geninstalleret:"
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende program vil blive geninstalleret:"
+msgstr[1] "Følgende %d programmer vil blive geninstalleret:"
 
 #: src/Summary.cc:830
 #, c-format, boost-format
@@ -1574,8 +1587,8 @@ msgstr[1] "pakker som skal opgraderes"
 #: src/Summary.cc:1282
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "som nedgraderes"
+msgstr[1] "som nedgraderes"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1285
@@ -1588,8 +1601,8 @@ msgstr[1] "pakker som skal nedgraderes"
 #: src/Summary.cc:1296
 msgid "new"
 msgid_plural "new"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ny"
+msgstr[1] "nye"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1299
@@ -1616,15 +1629,15 @@ msgstr[1] "pakker som skal geninstalleres"
 #: src/Summary.cc:1324
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "som fjernes"
+msgstr[1] "som fjernes"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1327
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pakke som fjernes"
+msgstr[1] "pakker som fjernes"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1338
@@ -2807,7 +2820,7 @@ msgstr "Låst"
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "Inkluderet kategorier"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -2890,7 +2903,7 @@ msgstr "OK, OK! Afbryder straks..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:38
 msgid "Trying to exit gracefully..."
-msgstr ""
+msgstr "Prøver at afslutte med ynde..."
 
 #: src/Zypper.cc:86
 msgid "Create a solver test case for debugging."
