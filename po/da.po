@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-06-30 17:16+0000\n"
-"Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
+"PO-Revision-Date: 2017-07-03 10:22+0000\n"
+"Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
 "Language: da\n"
@@ -1269,48 +1269,48 @@ msgstr[1] "Følgende %d programmer vil blive geninstalleret:"
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende anbefalede pakke blev automatisk valgt:"
+msgstr[1] "Følgende %d anbefalede pakker blev automatisk valgt:"
 
 #: src/Summary.cc:835
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende anbefalede rettelse blev automatisk valgt:"
+msgstr[1] "Følgende %d anbefalede rettelser blev automatisk valgt:"
 
 #: src/Summary.cc:840
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende anbefalede mønster blev automatisk valgt:"
+msgstr[1] "Følgende %d anbefalede mønstre blev automatisk valgt:"
 
 #: src/Summary.cc:845
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende anbefalede produkt blev automatisk valgt:"
+msgstr[1] "Følgende %d anbefalede produkter blev automatisk valgt:"
 
 #: src/Summary.cc:850
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende anbefalede kildepakke blev automatisk valgt:"
+msgstr[1] "Følgende %d anbefalede kildepakker blev automatisk valgt:"
 
 #: src/Summary.cc:855
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende anbefalede program blev automatisk valgt:"
+msgstr[1] "Følgende %d anbefalede programmer blev automatisk valgt:"
 
 #: src/Summary.cc:899
 #, c-format, boost-format
@@ -1321,7 +1321,11 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
 msgstr[0] ""
+"Følgende pakke anbefales, men vil ikke blive installeret (kun påkrævede "
+"pakker vil blive installeret):"
 msgstr[1] ""
+"Følgende %d pakker anbefales, men vil ikke blive installeret (kun påkrævede "
+"pakker vil blive installeret):"
 
 #: src/Summary.cc:911
 #, c-format, boost-format
@@ -1332,7 +1336,11 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
 msgstr[0] ""
+"Følgende pakke anbefales, men vil ikke blive installeret da den er uønsket ("
+"blev fjernet manuelt tidligere):"
 msgstr[1] ""
+"Følgende %d pakker anbefales, men vil ikke blive installeret da de er "
+"uønsket (blev fjernet manuelt tidligere):"
 
 #: src/Summary.cc:921
 #, c-format, boost-format
@@ -1343,7 +1351,11 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgstr[0] ""
+"Følgende pakke anbefales, men vil ikke blive installeret pga. problemer med "
+"konflikter eller afhængigheder:"
 msgstr[1] ""
+"Følgende %d pakker anbefales, men vil ikke blive installeret pga. problemer "
+"med konflikter eller afhængigheder:"
 
 #: src/Summary.cc:934
 #, boost-format, c-format
@@ -1421,36 +1433,36 @@ msgstr[1] "Følgende %d programmer er foreslået, men vil ikke blive installeret
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende pakke vil skifte arkitektur:"
+msgstr[1] "Følgende %d pakker vil skifte arkitektur:"
 
 #: src/Summary.cc:1023
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende rettelse vil skifte arkitektur:"
+msgstr[1] "Følgende %d rettelser vil skifte arkitektur:"
 
 #: src/Summary.cc:1028
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende mønster vil skifte arkitektur:"
+msgstr[1] "Følgende %d mønstre vil skifte arkitektur:"
 
 #: src/Summary.cc:1033
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende produkt vil skifte arkitektur:"
+msgstr[1] "Følgende %d produkter vil skifte arkitektur:"
 
 #: src/Summary.cc:1038
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende program vil skifte arkitektur:"
+msgstr[1] "Følgende %d programmer vil skifte arkitektur:"
 
 #: src/Summary.cc:1060
 #, boost-format, c-format
@@ -1477,15 +1489,15 @@ msgstr[1] "Følgende %d mønstre vil skifte leverandør:"
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende produkt vil skifte leverandør:"
+msgstr[1] "Følgende %d produkter vil skifte leverandør:"
 
 #: src/Summary.cc:1080
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende program vil skifte leverandør:"
+msgstr[1] "Følgende %d programmer vil skifte leverandør:"
 
 #: src/Summary.cc:1100
 #, boost-format, c-format
@@ -1536,7 +1548,7 @@ msgstr[1] ""
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/Summary.cc:1191
 msgid "Available"
-msgstr ""
+msgstr "Tilgængelig"
 
 #: src/Summary.cc:1202
 #, boost-format
@@ -1553,7 +1565,7 @@ msgstr[1] "Følgende %d rettelser kræver at systemet genstartes:"
 #: src/Summary.cc:1230
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
-msgstr ""
+msgstr "Samlet downloadstørrelse: %1%. Allerede mellemlagret: %2%."
 
 #: src/Summary.cc:1233
 msgid "Download only."
@@ -1650,8 +1662,8 @@ msgstr[1] ""
 #: src/Summary.cc:1341
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pakke vil skifte leverandør"
+msgstr[1] "pakker vil skifte leverandør"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1352
@@ -1664,8 +1676,8 @@ msgstr[1] ""
 #: src/Summary.cc:1355
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pakke vil skifte arkitektur"
+msgstr[1] "pakker vil skifte arkitektur"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1366
@@ -2732,7 +2744,7 @@ msgstr "Læser installerede pakker..."
 
 #: src/repos.cc:3307
 msgid "Problem occurred while reading the installed packages:"
-msgstr ""
+msgstr "Problem opstod ved læsning af de installerede pakker:"
 
 #: src/update.cc:84
 #, c-format, boost-format
@@ -2801,7 +2813,7 @@ msgstr[1] "%d sikkehedsrettelser"
 #. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
-msgstr ""
+msgstr "Opdateringsstak"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
@@ -2935,11 +2947,11 @@ msgstr ""
 
 #: src/Zypper.cc:111
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Standarden er er ekskludere valgfrie rettelser."
 
 #: src/Zypper.cc:112
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Standarden er er inkludere valgfrie rettelser."
 
 #: src/Zypper.cc:135
 msgid ""
@@ -3499,6 +3511,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Kræver ikke brugerinteraktion. Alias for det globale tilvalg --non-"
+"interactive."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -4177,7 +4191,7 @@ msgstr ""
 
 #: src/Zypper.cc:2292
 msgid "Install only patches which affect the package management itself."
-msgstr ""
+msgstr "Installer kun rettelser som påvirker selve pakkehåndteringen."
 
 #: src/Zypper.cc:2293
 msgid ""
@@ -5454,7 +5468,7 @@ msgstr "Tjek mislykkedes:"
 
 #: src/solve-commit.cc:453
 msgid "Skip check:"
-msgstr ""
+msgstr "Spring tjek over:"
 
 #: src/solve-commit.cc:461
 #, c-format, boost-format
