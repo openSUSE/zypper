@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-07-03 10:22+0000\n"
+"PO-Revision-Date: 2017-07-03 13:52+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -576,7 +576,7 @@ msgstr "Kategori"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:399 src/utils/misc.cc:252 src/utils/misc.cc:293
 msgid "Severity"
-msgstr "Alvor"
+msgstr "Alvorlighed"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:401
@@ -1512,8 +1512,8 @@ msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende pakke behøver yderligere kundekontrakt for at få support:"
+msgstr[1] "Følgende %d pakker behøver yderligere kundekontrakt for at få support:"
 
 #: src/Summary.cc:1138
 #, boost-format, c-format
@@ -1541,8 +1541,9 @@ msgstr[1] "Følgende %d programopdateringer vil IKKE blive installeret:"
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] ""
+msgstr[0] "Følgende element er låst og vil ikke blive ændret af nogen handling:"
 msgstr[1] ""
+"Følgende %d elementer er låst og vil ikke blive ændret af nogen handling:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -2760,16 +2761,16 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Overvejer %1% ud af %2% anvendelige rettelser:"
+msgstr[1] "Overvejer %1% ud af %2% anvendelige rettelser:"
 
 #. translator: stats table header
 #: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fandt %1% anvendelig rettelse:"
+msgstr[1] "Fandt %1% anvendelige rettelser:"
 
 #. translator: stats summary
 #: src/update.cc:294
@@ -3408,7 +3409,7 @@ msgstr "Tilvalget %s har ingen virkning her. Det ignoreres."
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1296
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "Zypper-skal understøtter ikke eksekvering af underkommandoer."
 
 #: src/Zypper.cc:1375
 #, c-format, boost-format
@@ -4208,43 +4209,55 @@ msgstr "list-patches (lp) [TILVALG]"
 #. translators: command description
 #: src/Zypper.cc:2326
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Vis alle anvendelige rettelser."
 
 #: src/Zypper.cc:2329
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
+"-b, --bugzilla[=#]\n"
+"Vis anvendelige rettelser for Bugzilla-issues."
 
 #: src/Zypper.cc:2330
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
+"--cve[=#]\n"
+"Vis anvendelige rettelser for CVE-issues."
 
 #: src/Zypper.cc:2331
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
+"--issues[=STRENG]\n"
+"Kig efter issues som matcher den angivne streng."
 
 #: src/Zypper.cc:2332
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
+"--date <ÅÅÅÅ-MM-DD>\n"
+"Vis kun rettelser udstedt op til, men ikke inkluderende den angivne dato."
 
 #: src/Zypper.cc:2333
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
+"-g, --category <KATEGORI>\n"
+"Vis kun rettelser med denne kategori."
 
 #: src/Zypper.cc:2334
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
+"--severity <ALVORLIGHED>\n"
+"Vis kun rettelser med denne alvorlighed."
 
 #: src/Zypper.cc:2335
 msgid ""
@@ -4715,12 +4728,12 @@ msgstr "Vis nuværende pakkelåse."
 #. translators: -m, --matches
 #: src/Zypper.cc:2870
 msgid "Show the number of resolvables matched by each lock."
-msgstr ""
+msgstr "Vis antallet af løsbare matchet af hver lås."
 
 #. translators: -s, --solvables
 #: src/Zypper.cc:2872
 msgid "List the resolvables matched by each lock."
-msgstr ""
+msgstr "Vis de løsbare matchet af hver lås."
 
 #: src/Zypper.cc:2888
 msgid ""
@@ -5301,7 +5314,7 @@ msgstr[1] "Fjernede %lu låse."
 
 #: src/Zypper.cc:5095
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "XML-output ikke implementeret for denne kommando."
 
 #: src/Zypper.cc:5108
 #, c-format, boost-format
