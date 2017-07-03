@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-04-25 10:46+0000\n"
+"PO-Revision-Date: 2017-07-03 13:17+0000\n"
 "Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:55
 msgid "Repository:"
@@ -3100,9 +3100,8 @@ msgid "Command options:"
 msgstr "Options de la commande :"
 
 #: src/Zypper.cc:307
-#, fuzzy
 msgid "Solver options:"
-msgstr "Options avancées :"
+msgstr "Options de résolution :"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
@@ -3429,6 +3428,9 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"Si '%1%' n'est pas une erreur typographique, il ne s'agit probablement pas "
+"d'une commande intégrée, mais est plutôt fourni(e) à titre de subcommand ou "
+"de plug-in (voir '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -3438,6 +3440,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"Dans ce cas, un paquet spécifique fournissant subcommand doit d'abord être "
+"installé. Ces paquets sont souvent appelés '%1%' ou '%2%'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
