@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-07-04 07:26+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2017-07-04 07:30+0000\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -3025,13 +3025,15 @@ msgstr "Proberen netjes te eindigen..."
 
 #: src/Zypper.cc:86
 msgid "Create a solver test case for debugging."
-msgstr "voer een test uit voor foutopsporing"
+msgstr "Maak een oplosser-testgeval voor foutopsporing."
 
 #: src/Zypper.cc:87
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
-msgstr "forceer de oplosser om een oplossing te vinden (zelfs een agressieve)"
+msgstr ""
+"Forceer de oplosser om een oplossing te vinden (zelfs een agressieve) in "
+"plaats van vragen."
 
 #: src/Zypper.cc:88
 msgid "Do not force the solver to find solution, let it ask."
