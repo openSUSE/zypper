@@ -1,22 +1,20 @@
 # @TITLE@
 # Copyright (C) 2011, SUSE Linux GmbH, Nuremberg
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
-# Karl Ove Hufthammer <karl@huftis.org>, 2015.
-#
-#
+# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2015-10-16 16:31+0100\n"
+"PO-Revision-Date: 2017-07-04 15:11+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: NorwegianNynorsk <i18n-nn@lister.ping.uio.no>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
@@ -337,7 +335,7 @@ msgstr ""
 #: zypp/RepoManager.cc:1287
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "Byggjer pakkebrønnmellomlager for «%s»"
+msgstr "Byggjer mellomlager for pakkebrønnen «%s»"
 
 #: zypp/RepoManager.cc:1307
 #, c-format, boost-format
@@ -4520,7 +4518,7 @@ msgstr ""
 
 #: zypp/misc/CheckAccessDeleted.cc:243
 msgid "Please install package 'lsof' first."
-msgstr ""
+msgstr "Installer pakken «lsof» først."
 
 #: zypp/media/MediaHandler.cc:370
 msgid ""
@@ -4595,7 +4593,7 @@ msgstr ""
 
 #: zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr ""
+msgstr "Ugyldig URI"
 
 #: zypp/media/MediaException.cc:125
 msgid "Empty host name in URI"
