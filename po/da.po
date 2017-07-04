@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-07-04 11:57+0000\n"
+"PO-Revision-Date: 2017-07-04 17:11+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -3308,6 +3308,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"Hvis '%1%' ikke er en stavefejl, så er det sandsynligvis ikke en indbygget "
+"kommando, men leveret som en underkommando eller plug-in (se '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -3317,6 +3319,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"I denne tilfælde skal en bestemt pakke, som leverer underkommandoen, først "
+"være installeret. Disse pakker hedder oftest '%1%' eller '%2%'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -3600,6 +3604,9 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"Standardplaceringen hvor rpm installere kildepakker er i '%1%', du værdien "
+"kan ændres i din lokale rpm-konfiguration. I tvivlstilfælde kan du prøve at "
+"eksekvere '%2%'."
 
 #: src/Zypper.cc:1662
 #, c-format, boost-format
@@ -4213,6 +4220,9 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Prøv også at opdatere alle pakker som ikke dækkes af rettelser. "
+"Valgmuligheden ignoreres hvis patch-kommandoen først skal opdatere den "
+"første opdateringsstak. Kan ikke kombineres med --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2323
@@ -4456,6 +4466,9 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Vis stats om anvendelige rettelser. Kommandoen returnerer 100 hvis "
+"nødvendige rettelser blev fundet, 101 hvis der er mindst én nødvendig "
+"sikkerhedsrettelse."
 
 #: src/Zypper.cc:2509
 msgid ""
@@ -4575,6 +4588,8 @@ msgstr ""
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
+"Kun XML-output: Videresend bogstavelig talt XML-taggene fundet i en "
+"produktfil."
 
 #: src/Zypper.cc:2648
 #, c-format, boost-format
@@ -4836,6 +4851,8 @@ msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
+"Vis kørende processer som måske stadig bruger filer og biblioteker slettet "
+"af nylige opgraderinger."
 
 #. translators: -s, --short
 #: src/Zypper.cc:2980
@@ -4844,6 +4861,9 @@ msgid ""
 "processes which are associated with a system service. Given three times, "
 "list the associated system service names only."
 msgstr ""
+"Opret en kort tabel uden de slettede filer. Gives den to gange, vises kun "
+"processer som er tilknyttet en systemtjeneste. Gives den tre gange, vises "
+"kun de tilknyttede systemtjenestenavne."
 
 #. translators: --print <format>
 #: src/Zypper.cc:2982
@@ -4853,6 +4873,9 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Print <format> på standardoutputten for hver tilknyttet systemtjeneste , "
+"efterfulgt af et linjeskift. '%s'-direktiver i <format> erstattes af "
+"systemtjenestenavnet."
 
 #: src/Zypper.cc:3001
 msgid ""
@@ -5397,15 +5420,18 @@ msgstr " Løsning %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
+"Vælg løsningen overfor med '1' eller spring over, prøv igen eller annuller"
 msgstr[1] ""
+"Vælg blandt løsningerne overfor med et nummer eller spring over, prøv igen "
+"eller annuller"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:78
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vælg løsningen overfor med '1' eller annuller med 'c'"
+msgstr[1] "Vælg blandt løsningerne overfor med et nummer"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
