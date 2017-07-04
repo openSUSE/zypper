@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-07-03 13:52+0000\n"
+"PO-Revision-Date: 2017-07-04 11:57+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -1600,8 +1600,8 @@ msgstr[1] "pakker som skal opgraderes"
 #: src/Summary.cc:1282
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] "som nedgraderes"
-msgstr[1] "som nedgraderes"
+msgstr[0] "som skal nedgraderes"
+msgstr[1] "som skal nedgraderes"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1285
@@ -1642,43 +1642,43 @@ msgstr[1] "pakker som skal geninstalleres"
 #: src/Summary.cc:1324
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "som fjernes"
-msgstr[1] "som fjernes"
+msgstr[0] "som skal fjernes"
+msgstr[1] "som skal fjernes"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1327
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] "pakke som fjernes"
-msgstr[1] "pakker som fjernes"
+msgstr[0] "pakke som skal fjernes"
+msgstr[1] "pakker som skal fjernes"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1338
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "som skal skifte leverandør"
+msgstr[1] "som skal skifte leverandør"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1341
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] "pakke vil skifte leverandør"
-msgstr[1] "pakker vil skifte leverandør"
+msgstr[0] "pakke som vil skifte leverandør"
+msgstr[1] "pakker som vil skifte leverandør"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1352
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "som vil skifte arkitektur"
+msgstr[1] "som vil skifte arkitektur"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1355
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] "pakke vil skifte arkitektur"
-msgstr[1] "pakker vil skifte arkitektur"
+msgstr[0] "pakke som vil skifte arkitektur"
+msgstr[1] "pakker som vil skifte arkitektur"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1366
@@ -1700,6 +1700,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Kræver genstart af pakkehåndtering (kør denne kommando igen efter "
+"opdateringsstakken blev opdateret)."
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1845,7 +1847,7 @@ msgstr "Ukendt kommando '%s'"
 #: src/SolverRequester.cc:479
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "Ignorerer tilvalget %s når opdateringsstakken opdateres først."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -1859,6 +1861,8 @@ msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr ""
+"Softwarekilden '%1%' håndteres af tjenesten '%2%'. Flygtige ændringer "
+"nulstilles ved næste genopfriskning af tjeneste!"
 
 #: src/repos.cc:69
 msgid "default priority"
@@ -1886,6 +1890,8 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Softwarekildeprioriteter uden effekt. Alle aktiverede softwarekilder deler "
+"den samme prioritet."
 
 #: src/repos.cc:203
 msgid "Repository priorities in effect:"
@@ -2355,6 +2361,8 @@ msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
+"GPG-tjek er deaktiveret i konfigurationen af softwarekilden '%1%'. "
+"Integritet og oprindelse af pakker kan ikke verificeres."
 
 #: src/repos.cc:1756
 #, c-format, boost-format
@@ -2906,7 +2914,7 @@ msgstr ""
 #: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
-msgstr ""
+msgstr "Rettelse for %s issue nummer %s blev ikke fundet eller behøves ikke."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -2945,6 +2953,8 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"Hvorvidt anvendelige valgfrie rettelser skal behandles som nødvendige eller "
+"ekskluderes."
 
 #: src/Zypper.cc:111
 msgid "The default is to exclude optional patches."
@@ -2979,11 +2989,14 @@ msgstr "Prøv igen?"
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
+"Forældet kommandolinje tilvalg %1% registreret. Brug venligst globale "
+"tilvalg %2% i stedet."
 
 #: src/Zypper.cc:225
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
+"Forældet kommandolinje tilvalg %1% registreret. Brug venligst %2% i stedet."
 
 #: src/Zypper.cc:304
 msgid "Command options:"
@@ -3198,7 +3211,7 @@ msgstr ""
 "\tpatch\t\t\tInstallér nødvendige rettelser.\n"
 "\tlist-patches, lp\tVis nødvendige rettelser.\n"
 "\tdist-upgrade, dup\tUdfør en distributionsopgradering.\n"
-"\tpatch-check, pchk\tTjek efter rettelser.\n"
+"\tpatch-check, pchk\tSøg efter rettelser.\n"
 
 #: src/Zypper.cc:566
 msgid ""
@@ -3331,7 +3344,7 @@ msgstr "Benyt et heltal fra %d til %d"
 #: src/Zypper.cc:957
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
-msgstr ""
+msgstr "Underkommando %1% understøtter ikke zypper globale tilvalg."
 
 #: src/Zypper.cc:978
 msgid "Enforced setting"
@@ -4264,12 +4277,16 @@ msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
+"-a, --all\n"
+"Vis alle rettelser, ikke kun de anvendelige."
 
 #: src/Zypper.cc:2337
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Vis kun rettelser fra den angive softwarekilde."
 
 #: src/Zypper.cc:2381
 #, c-format, boost-format
@@ -4325,19 +4342,22 @@ msgstr ""
 
 #: src/Zypper.cc:2410
 msgid "Whether to allow downgrading installed resolvables."
-msgstr ""
+msgstr "Hvorvidt det skal være tilladt at nedgradere installerede løsbare."
 
 #: src/Zypper.cc:2412
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr ""
+"Hvorvidt det skal være tilladt at ændre navnene på installerede løsbare."
 
 #: src/Zypper.cc:2414
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
+"Hvorvidt det skal være tilladt at ændre arkitekturen på installerede løsbare."
 
 #: src/Zypper.cc:2416
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr ""
+"Hvorvidt det skal være tilladt at ændre leverandør på installerede løsbare."
 
 #: src/Zypper.cc:2453
 msgid ""
@@ -4442,12 +4462,16 @@ msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
+"-r, --repo <ALIAS|#|URI>\n"
+"Søg efter rettelser i den angive softwarekilde."
 
 #: src/Zypper.cc:2510
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr ""
+"--updatestack-only\n"
+"Tjek tjek for rettelser som har indflydelse på selve pakkehåndteringen.."
 
 #: src/Zypper.cc:2527
 msgid ""
@@ -5469,6 +5493,8 @@ msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
+"Søgning efter kørende processer ved brug af slettede biblioteker er "
+"deaktiveret i zypper.conf. Kør '%s' for at søge manualt."
 
 #. Here: Table output
 #: src/solve-commit.cc:440 src/ps.cc:104
