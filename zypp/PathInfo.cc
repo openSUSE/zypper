@@ -660,6 +660,34 @@ namespace zypp
     }
 
     ///////////////////////////////////////////////////////////////////
+    namespace
+    {
+      int safe_rename( const Pathname & oldpath, const Pathname & newpath )
+      {
+        int ret = ::rename( oldpath.asString().c_str(), newpath.asString().c_str() );
+
+        // rename(2) can fail on OverlayFS. Fallback to using mv(1), which is
+        // explicitly mentioned in the kernel docs to deal correctly with OverlayFS.
+        if ( ret == -1 && errno == EXDEV ) {
+          const char *const argv[] = {
+            "/usr/bin/mv",
+            oldpath.asString().c_str(),
+            newpath.asString().c_str(),
+            NULL
+          };
+          ExternalProgram prog( argv, ExternalProgram::Stderr_To_Stdout );
+          for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
+            MIL << "  " << output;
+          }
+          ret = prog.close();
+        }
+
+        return ret;
+      }
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : rename
     //	METHOD TYPE : int
@@ -667,7 +695,7 @@ namespace zypp
     int rename( const Pathname & oldpath, const Pathname & newpath )
     {
       MIL << "rename " << oldpath << " -> " << newpath;
-      if ( ::rename( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 ) {
+      if ( safe_rename( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 ) {
         return logResult( errno );
       }
       return logResult( 0 );
@@ -696,7 +724,7 @@ namespace zypp
         int ret = assert_dir( lpath.dirname() );
         if ( ret != 0 )
           return logResult( ret );
-        if ( ::rename( rpath.c_str(), lpath.c_str() ) == -1 ) {
+        if ( safe_rename( rpath.c_str(), lpath.c_str() ) == -1 ) {
           return logResult( errno );
         }
         return logResult( 0 );
@@ -709,7 +737,7 @@ namespace zypp
         int ret = assert_dir( rpath.dirname() );
         if ( ret != 0 )
           return logResult( ret );
-        if ( ::rename( lpath.c_str(), rpath.c_str() ) == -1 ) {
+        if ( safe_rename( lpath.c_str(), rpath.c_str() ) == -1 ) {
           return logResult( errno );
         }
         return logResult( 0 );
@@ -722,16 +750,16 @@ namespace zypp
       Pathname tmp( tmpfile.path() );
       ::unlink( tmp.c_str() );
 
-      if ( ::rename( lpath.c_str(), tmp.c_str() ) == -1 ) {
+      if ( safe_rename( lpath.c_str(), tmp.c_str() ) == -1 ) {
         return logResult( errno );
       }
-      if ( ::rename( rpath.c_str(), lpath.c_str() ) == -1 ) {
-        ::rename( tmp.c_str(), lpath.c_str() );
+      if ( safe_rename( rpath.c_str(), lpath.c_str() ) == -1 ) {
+        safe_rename( tmp.c_str(), lpath.c_str() );
         return logResult( errno );
       }
-      if ( ::rename( tmp.c_str(), rpath.c_str() ) == -1 ) {
-        ::rename( lpath.c_str(), rpath.c_str() );
-        ::rename( tmp.c_str(), lpath.c_str() );
+      if ( safe_rename( tmp.c_str(), rpath.c_str() ) == -1 ) {
+        safe_rename( lpath.c_str(), rpath.c_str() );
+        safe_rename( tmp.c_str(), lpath.c_str() );
         return logResult( errno );
       }
       return logResult( 0 );
