@@ -598,7 +598,10 @@ namespace zypp
     int unlink( const Pathname & path );
 
     /**
-     * Like '::rename'. Renames a file, moving it between directories if required.
+     * Like '::rename'. Renames a file, moving it between directories if
+     * required. It falls back to using mv(1) in case errno is set to
+     * EXDEV, indicating a cross-device rename, which is likely to happen when
+     * oldpath and newpath are not on the same OverlayFS layer.
      *
      * @return 0 on success, errno on failure
      **/
