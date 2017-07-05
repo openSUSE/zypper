@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-05-23 08:10+0000\n"
-"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
+"PO-Revision-Date: 2017-07-05 01:57+0000\n"
+"Last-Translator: Hanhan Hahn <matcherapy@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
 "Language: id\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:55
 msgid "Repository:"
@@ -1129,7 +1129,7 @@ msgstr[0] "%d aplikasi berikut ini akan dipasang:"
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] "%d Paket berikut ini akan di HAPUS:"
+msgstr[0] "Paket berikut %d akan DIHAPUS:"
 
 #: src/Summary.cc:557
 #, c-format, boost-format
@@ -1459,7 +1459,7 @@ msgstr[0] "%d Aplikasi berikut ini akan diubah vendornya:"
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "%d Paket berikut ini tidak didukung oleh vendornya:"
+msgstr[0] "Paket berikut %d tidak didukung oleh vendornya:"
 
 #: src/Summary.cc:1120
 #, c-format, boost-format
@@ -2339,7 +2339,7 @@ msgstr "Silahkan periksa apakah URI yang dimaksud bisa diakses dan benar."
 
 #: src/repos.cc:1887
 msgid "Problem parsing the file at the specified URI"
-msgstr "Terjadi kendala saat memparsing berkas pada URI yang telah ditentukan"
+msgstr "Terjadi kendala saat menguraikan berkas pada URI yang telah ditentukan"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1889
@@ -4787,7 +4787,7 @@ msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
-"Daftar proses yang sedang berjalan yang mungkin masih menggunakan berkas dan "
+"Daftar proses yang sedang berjalan mungkin masih menggunakan berkas dan "
 "librari yang terhapus oleh pembaruan saat ini."
 
 #. translators: -s, --short
@@ -4809,7 +4809,7 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
-"Tiap-tiap layanan sistem yang terkait, cetak <format> pada keluaran baku, "
+"Untuk setiap layanan sistem yang terkait, cetak <format> pada keluaran baku, "
 "diikuti oleh baris baru. Tiap petunjuk dalam '%s' <format> ditimpa oleh nama "
 "layanan sistem."
 
@@ -5104,7 +5104,7 @@ msgstr "Pengaturan global '%s' tidak berpengaruh di sini."
 #: src/Zypper.cc:3899
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr "Argumen tidak diijinkan jika '%s' sedang digunakan."
+msgstr "Argumen tidak diizinkan jika '%s' sedang digunakan."
 
 #: src/Zypper.cc:3923
 msgid "Root privileges are required for cleaning local caches."
@@ -5146,7 +5146,7 @@ msgstr ""
 
 #: src/Zypper.cc:3995
 msgid "Uninstallation of a source package not defined and implemented."
-msgstr "Penghapusan dari paket sumber tidak didefinisikan dan diterapkan."
+msgstr "Penghapusan paket sumber yang tidak didefinisikan dan diterapkan."
 
 #: src/Zypper.cc:4015
 #, c-format, boost-format
@@ -5748,7 +5748,7 @@ msgstr "Paket-paket source yang diperlukan:"
 
 #: src/source-download.cc:297
 msgid "Required source packages available in download directory:"
-msgstr "Membutuhkan paket-paket source yang tersedia di direktori unduh:"
+msgstr "Membutuhkan paket-paket sumber yang tersedia di direktori unduh:"
 
 #: src/source-download.cc:301
 msgid "Required source packages to be downloaded:"
@@ -6006,7 +6006,7 @@ msgstr "Paket source %s-%s sukses diambil."
 #: src/misc.cc:388
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
-msgstr "Paket source %s-%s sukses terpasang."
+msgstr "Paket sumber %s-%s sukses terpasang."
 
 #: src/misc.cc:394
 #, c-format, boost-format
@@ -6246,7 +6246,7 @@ msgstr[0] "patch"
 #: src/utils/misc.cc:121
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "srcpackage"
+msgstr[0] "srcpackages"
 
 #: src/utils/misc.cc:123
 msgid "application"
