@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2017-04-17 04:29+0000\n"
-"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
+"PO-Revision-Date: 2017-07-05 01:44+0000\n"
+"Last-Translator: Hanhan Hahn <matcherapy@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/libzypp/master/id/>\n"
 "Language: id\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -428,7 +428,7 @@ msgstr "Komponen '%s' tidak sah"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
-msgstr "Penguraian string query tidak didukung untuk url ini"
+msgstr "Pemrosesan string kueri tidak didukung untuk URL ini"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
@@ -859,7 +859,7 @@ msgstr "Botswana"
 #. :BWA:072:
 #: zypp/CountryCode.cc:192
 msgid "Belarus"
-msgstr "Belarus"
+msgstr "Belarusia"
 
 # BZ
 #. :BLR:112:
@@ -933,13 +933,13 @@ msgstr "Cina"
 #. :CHN:156:
 #: zypp/CountryCode.cc:205
 msgid "Colombia"
-msgstr "Colombia"
+msgstr "Kolombia"
 
 # CR
 #. :COL:170:
 #: zypp/CountryCode.cc:206
 msgid "Costa Rica"
-msgstr "Costa Rica"
+msgstr "Kosta Rica"
 
 # CU
 #. :CRI:188:
@@ -963,7 +963,7 @@ msgstr "Pulau Christmas"
 #. :CXR:162:
 #: zypp/CountryCode.cc:210
 msgid "Cyprus"
-msgstr "Cyprus"
+msgstr "Siprus"
 
 # CZ
 #. :CYP:196:
@@ -1401,7 +1401,7 @@ msgstr "Laos"
 #. :LAO:418:
 #: zypp/CountryCode.cc:283
 msgid "Lebanon"
-msgstr "Lebanon"
+msgstr "Libanon"
 
 # LC
 # fuzzy
@@ -1481,7 +1481,7 @@ msgstr "Moldova"
 #. :MDA:498:
 #: zypp/CountryCode.cc:296
 msgid "Montenegro"
-msgstr "Kongo"
+msgstr "Montenegro"
 
 # SM
 #: zypp/CountryCode.cc:297
@@ -1699,7 +1699,7 @@ msgstr "Polinesia Perancis"
 #. :PYF:258:
 #: zypp/CountryCode.cc:332
 msgid "Papua New Guinea"
-msgstr "Papua New Guinea"
+msgstr "Papua Nugini"
 
 # PH
 #. :PNG:598:
@@ -1778,7 +1778,7 @@ msgstr "Reunion"
 #. :REU:638:
 #: zypp/CountryCode.cc:345
 msgid "Romania"
-msgstr "Romania"
+msgstr "Rumania"
 
 #. :ROU:642:
 #: zypp/CountryCode.cc:346
@@ -2175,7 +2175,7 @@ msgstr "Adyghe"
 #. language code: afa
 #: zypp/LanguageCode.cc:173
 msgid "Afro-Asiatic (Other)"
-msgstr "Afro-Asiatic (Other)"
+msgstr "Afro-Asiatic (Lainnya)"
 
 #. language code: afh
 #: zypp/LanguageCode.cc:175
@@ -3266,7 +3266,7 @@ msgstr "Kanuri"
 #. language code: kaw
 #: zypp/LanguageCode.cc:607
 msgid "Kawi"
-msgstr "Malawi"
+msgstr "Kawi"
 
 # KZ
 # fuzzy
@@ -4074,7 +4074,7 @@ msgstr "Samaritan Aramaic"
 #. language code: san sa
 #: zypp/LanguageCode.cc:917
 msgid "Sanskrit"
-msgstr "Sanskrit"
+msgstr "Sanskerta"
 
 # WS
 #. language code: sas
@@ -4185,7 +4185,7 @@ msgstr "Utara Sami"
 #. language code: smi
 #: zypp/LanguageCode.cc:965
 msgid "Sami Languages (Other)"
-msgstr "Bahasa Sami"
+msgstr "Bahasa Sami (Lainnya)"
 
 #. language code: smj
 #: zypp/LanguageCode.cc:967
@@ -4676,7 +4676,7 @@ msgstr "Mencoba untuk mengimpor kunci %s tidak ada ke keyring %s"
 
 #: zypp/KeyRing.cc:566
 msgid "Failed to delete key."
-msgstr "Gagal untuk menghapus key."
+msgstr "Gagal menghapus kunci."
 
 #: zypp/KeyRing.cc:575
 #, c-format, boost-format
@@ -5011,7 +5011,7 @@ msgstr ""
 #: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
-msgstr "Autentikasikan dibutuhkan untuk '%s'"
+msgstr "Autentikasi dibutuhkan untuk '%s'"
 
 #: zypp/media/MediaException.cc:31
 #, boost-format, boost-format, c-format, c-format
@@ -5108,8 +5108,8 @@ msgid ""
 "Error message: %s\n"
 msgstr ""
 "Unduh (curl) gagal untuk '%s':\n"
-"Kode Kesalahan: %s\n"
-"Pesan Kesalahan: %s\n"
+"Kode kesalahan: %s\n"
+"Pesan kesalahan: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:161
@@ -5259,10 +5259,10 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
-"File %1%\n"
+"Berkas %1%\n"
 "  dari paket\n"
 "     %2%\n"
-"  konflik dengan file\n"
+"  konflik dengan berkas\n"
 "     %3%\n"
 "  dari paket\n"
 "     %4%"
