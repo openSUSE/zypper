@@ -33,6 +33,6 @@ The variable expander also supports shell like definition of default and alterna
 
 \subsection zypp-repoars-userdefined User defined repository variables [requires 'libzypp(repovarexpand) >= 1']
 
-A custom repository variable is defined by creating a file in \c /etc/zypp/vars.d. The variable name equals the file name. The files fist line (up to but not including the newline character) defines the variables value.
+A custom repository variable is defined by creating a file in \c /etc/zypp/vars.d. The variable name equals the file name. The files first line (up to but not including the newline character) defines the variables value.
 
 */
