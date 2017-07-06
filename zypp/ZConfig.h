@@ -171,6 +171,13 @@ namespace zypp
       Pathname knownServicesPath() const;
 
       /**
+       * Path containing custom repo variable definitions (configPath()/vars.d).
+       * \see \ref zypp::repo::RepoVarExpand Repo variable expander
+       * \ingroup g_ZC_CONFIGFILES
+       */
+      Pathname varsPath() const;
+
+      /**
        * Whether repository urls should be probed.
        / config option
        * repo.add.probe

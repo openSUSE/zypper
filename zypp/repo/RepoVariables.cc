@@ -6,16 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-#include <cstring>
-
-#define ZYPP_DBG_VAREXPAND 0
-#if ( ZYPP_DBG_VAREXPAND )
-#warning ZYPP_DBG_VAREXPAND is on
 #include <iostream>
-#include <sstream>
-using std::cout;
-using std::endl;
-#endif // ZYPP_DBG_VAREXPAND
+#include <fstream>
 
 #include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
@@ -27,6 +19,12 @@ using std::endl;
 #include "zypp/Arch.h"
 #include "zypp/repo/RepoVariables.h"
 #include "zypp/base/NonCopyable.h"
+
+#define ZYPP_DBG_VAREXPAND 0
+#if ( ZYPP_DBG_VAREXPAND )
+#warning ZYPP_DBG_VAREXPAND is on
+using std::cout;
+#endif // ZYPP_DBG_VAREXPAND
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -390,144 +388,177 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     {
-      inline std::string getReleaseverString()
+      class RepoVarsMap : public std::map<std::string,std::string>
       {
-	std::string ret( env::ZYPP_REPO_RELEASEVER() );
-	if( ret.empty() )
-	{
-	  Target_Ptr trg( getZYpp()->getTarget() );
-	  if ( trg )
-	    ret = trg->distributionVersion();
-	  else
-	    ret = Target::distributionVersion( Pathname()/*guess*/ );
-	}
-	else
-	  WAR << "ENV overwrites $releasever=" << ret << endl;
+      public:
+	static RepoVarsMap & instance()
+	{ static RepoVarsMap _instance; return _instance; }
 
-	return ret;
-      }
-
-      /** \brief Provide lazy initialized repo variables
-       */
-      struct RepoVars : private zypp::base::NonCopyable
-      {
-	typedef const std::string & (RepoVars::*Getter)() const;
-
-	const std::string & arch() const
-	{
-	  assertArchStr();
-	  return _arch;
-	}
-
-	const std::string & basearch() const
-	{
-	  assertArchStr();
-	  return _basearch;
-	}
-
-	const std::string & releasever() const
-	{
-	  assertReleaseverStr();
-	  return _releasever;
-	}
-
-	const std::string & releaseverMajor() const
-	{
-	  assertReleaseverStr();
-	  return _releaseverMajor;
-	}
-
-	const std::string & releaseverMinor() const
-	{
-	  assertReleaseverStr();
-	  return _releaseverMinor;
-	}
+	static const std::string * lookup( const std::string & name_r )
+	{ return instance()._lookup( name_r ); }
 
       private:
-	void assertArchStr() const
+	const std::string * _lookup( const std::string & name_r )
 	{
-	  if ( _arch.empty() )
+	  if ( empty() )	// at init / after reset
 	  {
-	    Arch arch( ZConfig::instance().systemArchitecture() );
-	    _arch = arch.asString();
-	    _basearch = arch.baseArch().asString();
+	    // load user definitions from vars.d
+	    filesystem::dirForEach( ZConfig::instance().systemRoot() / ZConfig::instance().varsPath(),
+				    filesystem::matchNoDots(), bind( &RepoVarsMap::parse, this, _1, _2 ) );
+	    // releasever_major/_minor are per default derived from releasever.
+	    // If releasever is userdefined, inject missing _major/_minor too.
+	    deriveFromReleasever( "releasever", /*dont't overwrite user defined values*/false );
+
+	    dumOn( DBG );
+	    // add builtin vars except for releasever{,_major,_minor} (see checkOverride)
+	    {
+	      const Arch & arch( ZConfig::instance().systemArchitecture() );
+	      {
+		std::string & var( operator[]( "arch" ) );
+		if ( var.empty() ) var = arch.asString();
+	      }
+	      {
+		std::string & var( operator[]( "basearch" ) );
+		if ( var.empty() ) var = arch.baseArch().asString();
+	      }
+	    }
+	  }
+
+	  const std::string * ret = checkOverride( name_r );
+	  if ( !ret )
+	  {
+	    // get value from map
+	    iterator it = find( name_r );
+	    if ( it != end() )
+	      ret = &(it->second);
+	  }
+
+	  return ret;
+	}
+
+	std::ostream & dumOn( std::ostream & str ) const
+	{ for ( auto && kv : *this ) { str << '{' << kv.first << '=' << kv.second << '}' << endl; } }
+
+      private:
+	/** Get first line from file */
+	bool parse( const Pathname & dir_r, const std::string & str_r )
+	{
+	  std::ifstream file( (dir_r/str_r).c_str() );
+	  operator[]( str_r ) = str::getline( file, /*trim*/false );
+	  return true;
+	}
+
+	/** Derive \c releasever_major/_minor from \c releasever, keeping or overwrititing existing values. */
+	void deriveFromReleasever( const std::string & stem_r, bool overwrite_r )
+	{
+	  if ( count( stem_r ) )	// releasever is defined..
+	  {
+	    const std::string & stem_major( stem_r+"_major" );
+	    const std::string & stem_minor( stem_r+"_minor" );
+	    if ( overwrite_r )
+	      splitReleaseverTo( operator[]( stem_r ), &operator[]( stem_major ), &operator[]( stem_minor ) );
+	    else
+	      splitReleaseverTo( operator[]( stem_r ),
+				 count( stem_major ) ? nullptr : &operator[]( stem_major ),
+				 count( stem_minor ) ? nullptr : &operator[]( stem_minor ) );
 	  }
 	}
 
-	void assertReleaseverStr() const
+	/** Split \c releasever at \c '.' and store major/minor parts as requested. */
+	void splitReleaseverTo( const std::string & releasever_r, std::string * major_r, std::string * minor_r ) const
 	{
-	  // check for changing releasever (bnc#943563)
-	  std::string check( getReleaseverString() );
-	  if ( check != _releasever )
+	  if ( major_r || minor_r )
 	  {
-	    _releasever = std::move(check);
-	    // split major/minor for SLE
-	    std::string::size_type pos = _releasever.find( "." );
+	    std::string::size_type pos = releasever_r.find( "." );
 	    if ( pos == std::string::npos )
 	    {
-	      _releaseverMajor = _releasever;
-	      _releaseverMinor.clear();
+	      if ( major_r ) *major_r = releasever_r;
+	      if ( minor_r ) minor_r->clear();
 	    }
 	    else
 	    {
-	      _releaseverMajor = _releasever.substr( 0, pos );
-	      _releaseverMinor = _releasever.substr( pos+1 ) ;
+	      if ( major_r ) *major_r = releasever_r.substr( 0, pos );
+	      if ( minor_r ) *minor_r = releasever_r.substr( pos+1 ) ;
 	    }
 	  }
 	}
-      private:
-	mutable std::string _arch;
-	mutable std::string _basearch;
-	mutable std::string _releasever;
-	mutable std::string _releaseverMajor;
-	mutable std::string _releaseverMinor;
+
+	/** Check for conditions overwriting the (user) defined values. */
+	const std::string * checkOverride( const std::string & name_r )
+	{
+	  ///////////////////////////////////////////////////////////////////
+	  // Always check for changing releasever{,_major,_minor} (bnc#943563)
+	  if ( str::startsWith( name_r, "releasever" )
+	    && ( name_r.size() == 10
+	      || strcmp( name_r.c_str()+10, "_minor" ) == 0
+	      || strcmp( name_r.c_str()+10, "_major" ) == 0 ) )
+	  {
+	    std::string val( env::ZYPP_REPO_RELEASEVER() );
+	    if ( !val.empty() )
+	    {
+	      // $ZYPP_REPO_RELEASEVER always overwrites any defined value
+	      if ( val != operator[]( "$releasever" ) )
+	      {
+		operator[]( "$releasever" ) = std::move(val);
+		deriveFromReleasever( "$releasever", /*overwrite previous values*/true );
+	      }
+	      return &operator[]( "$"+name_r );
+	    }
+	    else if ( !count( name_r ) )
+	    {
+	      // No user defined value, so we follow the target
+	      Target_Ptr trg( getZYpp()->getTarget() );
+	      if ( trg )
+		val = trg->distributionVersion();
+	      else
+		val = Target::distributionVersion( Pathname()/*guess*/ );
+
+	      if ( val != operator[]( "$_releasever" ) )
+	      {
+		operator[]( "$_releasever" ) = std::move(val);
+		deriveFromReleasever( "$_releasever", /*overwrite previous values*/true );
+	      }
+	      return &operator[]( "$_"+name_r );
+	    }
+	    // else:
+	    return nullptr;	// get user value from map
+	  }
+	  ///////////////////////////////////////////////////////////////////
+
+	  return nullptr;	// get user value from map
+	}
       };
-
-      /** \brief */
-      const std::string * repoVarLookup( const std::string & name_r )
-      {
-	RepoVars::Getter getter = nullptr;
-	switch ( name_r.size() )
-	{
-#define ASSIGN_IF(NAME,GETTER) if ( name_r == NAME ) getter = GETTER
-	  case  4:	ASSIGN_IF( "arch",		&RepoVars::arch );		break;
-	  case  8:	ASSIGN_IF( "basearch",		&RepoVars::basearch );		break;
-	  case 10:	ASSIGN_IF( "releasever",	&RepoVars::releasever );	break;
-	  case 16:	ASSIGN_IF( "releasever_major",	&RepoVars::releaseverMajor );
-	      else	ASSIGN_IF( "releasever_minor",	&RepoVars::releaseverMinor );	break;
-#undef ASSIGN_IF
-	}
-
-	const std::string * ret = nullptr;
-	if ( getter )	// known var
-	{
-	  static const RepoVars _repoVars;
-	  ret = &(_repoVars.*getter)();
-	}
-	return ret;
-      }
     } // namespace
     ///////////////////////////////////////////////////////////////////
 
     std::string RepoVariablesStringReplacer::operator()( const std::string & value ) const
     {
-      return RepoVarExpand()( value, repoVarLookup );
+      return RepoVarExpand()( value, RepoVarsMap::lookup );
     }
     std::string RepoVariablesStringReplacer::operator()( std::string && value ) const
     {
-      return RepoVarExpand()( value, repoVarLookup );
+      return RepoVarExpand()( value, RepoVarsMap::lookup );
     }
 
     Url RepoVariablesUrlReplacer::operator()( const Url & value ) const
     {
       RepoVarExpand expand;
       Url newurl( value );
-      newurl.setPathData( expand( value.getPathData(), repoVarLookup ) );
-      newurl.setQueryString( expand( value.getQueryString(), repoVarLookup ) );
+      newurl.setPathData( expand( value.getPathData(), RepoVarsMap::lookup ) );
+      newurl.setQueryString( expand( value.getQueryString(), RepoVarsMap::lookup ) );
       return newurl;
     }
-
   } // namespace repo
   ///////////////////////////////////////////////////////////////////
 } // namespace zypp
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace zyppintern
+{
+  using namespace zypp;
+  // internal helper called when re-acquiring the lock
+  void repoVariablesReset()
+  { repo::RepoVarsMap::instance().clear(); }
+
+} // namespace zyppintern
 ///////////////////////////////////////////////////////////////////

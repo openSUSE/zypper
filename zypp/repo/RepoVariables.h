@@ -70,8 +70,9 @@ namespace zypp
     /**
      * \short Functor replacing repository variables
      *
-     * Replaces '$arch', '$basearch' and $releasever in a string
-     * with the global ZYpp values.
+     * Replaces the built-in '$arch', '$basearch' and '$releasever' ans also
+     * custom repo variables (\see \ref zypp-repovars) in a string with the
+     * assigned values.
      *
      * Additionally $releasever_major and $releasever_minor can be used
      * to refer to $releasever major number (everything up to the 1st \c '.' )

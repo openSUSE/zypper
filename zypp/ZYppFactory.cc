@@ -38,6 +38,8 @@ using boost::interprocess::sharable_lock;
 
 using std::endl;
 
+namespace zyppintern { void repoVariablesReset(); }	// upon re-acquiring the lock...
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -306,11 +308,14 @@ namespace zypp
   ZYpp::ZYpp( const Impl_Ptr & impl_r )
   : _pimpl( impl_r )
   {
+    ::zyppintern::repoVariablesReset();	// upon re-acquiring the lock...
+    MIL << "ZYpp is on..." << endl;
   }
 
   ZYpp::~ZYpp()
   {
     _theGlobalLock.reset();
+    MIL << "ZYpp is off..." << endl;
   }
 
   ///////////////////////////////////////////////////////////////////

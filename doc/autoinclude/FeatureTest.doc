@@ -66,6 +66,8 @@ Packages requiring a feature may use the corresponding \c Requires: in their .sp
     <DT>\ref zypp-repovars </DT>
     <DT>version 0</DT>
     <DD>Also support braced variables, shell like default and alternate values.</DD>
+    <DT>version 1</DT>
+    <DD>Also support user defined repo variables in /etc/zypp/vars.d.</DD>
   </DL></DD>
 </DL>
 

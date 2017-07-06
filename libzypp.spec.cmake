@@ -38,7 +38,7 @@ Provides:       libzypp(plugin:commit) = 1
 Provides:       libzypp(plugin:services) = 1
 Provides:       libzypp(plugin:system) = 1
 Provides:       libzypp(plugin:urlresolver) = 0
-Provides:       libzypp(repovarexpand) = 0
+Provides:       libzypp(repovarexpand) = 1
 
 %if 0%{?suse_version}
 Recommends:     logrotate
@@ -233,6 +233,7 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
 %endif
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/services.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/systemCheck.d
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/vars.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/vendors.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/multiversion.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/credentials.d
@@ -336,6 +337,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %endif
 %dir               %{_sysconfdir}/zypp/services.d
 %dir               %{_sysconfdir}/zypp/systemCheck.d
+%dir               %{_sysconfdir}/zypp/vars.d
 %dir               %{_sysconfdir}/zypp/vendors.d
 %dir               %{_sysconfdir}/zypp/multiversion.d
 %dir               %{_sysconfdir}/zypp/credentials.d
