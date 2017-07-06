@@ -38,10 +38,10 @@
 
 \subsection zypp-envars-plugin Variables related to plugins
 
-\li \c PLUGIN_DEBUG=1 Verbose logging from plugin framework.
-\li \c PLUGIN_TIMEOUT=<sec> Send/receive timeout for plugin communication.
-\li \c PLUGIN_SEND_TIMEOUT=<sec> Send timeout for plugin communication.
-\li \c PLUGIN_RECEIVE_TIMEOUT=<sec> Receive timeout for plugin communication.
+\li \c ZYPP_PLUGIN_DEBUG=1 Verbose logging from plugin framework.
+\li \c ZYPP_PLUGIN_TIMEOUT=<sec> Send/receive timeout for plugin communication.
+\li \c ZYPP_PLUGIN_SEND_TIMEOUT=<sec> Send timeout for plugin communication.
+\li \c ZYPP_PLUGIN_RECEIVE_TIMEOUT=<sec> Receive timeout for plugin communication.
 
 \subsection zypp-envars-misc Variables not for common use (test and debug)
 
