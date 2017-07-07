@@ -63,6 +63,19 @@ using namespace zypp::repo;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
+
+  ///////////////////////////////////////////////////////////////////
+  namespace env
+  {
+    /** To trigger appdata refresh unconditionally */
+    inline bool ZYPP_PLUGIN_APPDATA_FORCE_COLLECT()
+    {
+      const char * env = getenv("ZYPP_PLUGIN_APPDATA_FORCE_COLLECT");
+      return( env && str::strToBool( env, true ) );
+    }
+  } // namespace env
+  ///////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
   namespace
   {
@@ -523,7 +536,8 @@ namespace zypp
     ~Impl()
     {
       // trigger appdata refresh if some repos change
-      if ( _reposDirty && geteuid() == 0 && ( _options.rootDir.empty() || _options.rootDir == "/" ) )
+      if ( ( _reposDirty || env::ZYPP_PLUGIN_APPDATA_FORCE_COLLECT() )
+	&& geteuid() == 0 && ( _options.rootDir.empty() || _options.rootDir == "/" ) )
       {
 	try {
 	  std::list<Pathname> entries;

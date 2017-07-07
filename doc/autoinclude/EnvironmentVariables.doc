@@ -43,6 +43,8 @@
 \li \c ZYPP_PLUGIN_SEND_TIMEOUT=<sec> Send timeout for plugin communication.
 \li \c ZYPP_PLUGIN_RECEIVE_TIMEOUT=<sec> Receive timeout for plugin communication.
 
+\li \c ZYPP_PLUGIN_APPDATA_FORCE_COLLECT=1 Make RepoManager trigger the appdata collector plugin unconditionally. Can be used with \c 'zypper \c lr' (as root) to trigger an initial collect rather than calling \c 'zypper \c ref \c -f' or waiting for some repo to be refreshed.
+
 \subsection zypp-envars-misc Variables not for common use (test and debug)
 
 \li \c ZYPP_MODALIAS_SYSFS=<PATH> Use this instead of \c /sys to evaluate modaliases.
