@@ -409,7 +409,7 @@ namespace zypp
 	    // If releasever is userdefined, inject missing _major/_minor too.
 	    deriveFromReleasever( "releasever", /*dont't overwrite user defined values*/false );
 
-	    dumOn( DBG );
+	    dumpOn( DBG );
 	    // add builtin vars except for releasever{,_major,_minor} (see checkOverride)
 	    {
 	      const Arch & arch( ZConfig::instance().systemArchitecture() );
@@ -436,8 +436,8 @@ namespace zypp
 	  return ret;
 	}
 
-	std::ostream & dumOn( std::ostream & str ) const
-	{ for ( auto && kv : *this ) { str << '{' << kv.first << '=' << kv.second << '}' << endl; } }
+	std::ostream & dumpOn( std::ostream & str ) const
+	{ for ( auto && kv : *this ) { return str << '{' << kv.first << '=' << kv.second << '}' << endl; } }
 
       private:
 	/** Get first line from file */
