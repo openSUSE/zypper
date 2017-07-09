@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-07-04 15:29+0100\n"
+"PO-Revision-Date: 2017-07-09 12:48+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: NorwegianNynorsk <i18n-nn@lister.ping.uio.no>\n"
 "Language: nn\n"
@@ -50,8 +50,8 @@ msgstr "GPG-nøkkelsigneringsfila «%1%» er utgått på dato."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "GPG-nøkkelsigneringsfila «%1%» utgår på data om %2% dag."
-msgstr[1] "GPG-nøkkelsigneringsfila «%1%» utgår på data om %2% dagar."
+msgstr[0] "GPG-nøkkelsigneringsfila «%1%» utgår på dato om %2% dag."
+msgstr[1] "GPG-nøkkelsigneringsfila «%1%» utgår på dato om %2% dagar."
 
 #: src/callbacks/keyring.h:116
 #, c-format, boost-format
@@ -113,7 +113,7 @@ msgstr "Stolar automatisk på denne nøkkelen:"
 
 #: src/callbacks/keyring.h:196
 msgid "New repository or package signing key received:"
-msgstr "Ny nøkkel for signering av pakkebrønn eller pakke motteken:"
+msgstr "Ny nøkkel for signering av pakkebrønn eller pakke vart motteken:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:218
@@ -224,7 +224,7 @@ msgid ""
 "in extreme cases even to a system compromise."
 msgstr ""
 "Å godta pakkar med ugyldige kontrollsummar kan resultera i eit øydelagt "
-"system, og i ekstreme tilfelle at andre kan bryta seg inn på systemet."
+"system og, i ekstreme tilfelle, at andre kan bryta seg inn på systemet."
 
 #: src/callbacks/keyring.h:371
 #, boost-format
@@ -239,12 +239,12 @@ msgstr ""
 "Men viss du er sikker på at fila med kontrollsummen «%1%» er trygg\n"
 "og skal brukast i denne operasjonen, kan du skriva inn dei første fire\n"
 "teikna til kontrollsummen for å fjerna blokkeringa av fila, på eige ansvar.\n"
-"Viss du ikkje skriv noko, vert fila avvist.\n"
+"Viss du ikkje skriv noko, vert fila forkasta.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:378
 msgid "discard"
-msgstr "avvis"
+msgstr "forkast"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:380
@@ -254,12 +254,12 @@ msgstr "Fjern filblokkering på eige ansvar."
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:382
 msgid "Discard the file."
-msgstr "Avvis fila."
+msgstr "Forkast fila."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:387
 msgid "Unblock or discard?"
-msgstr "Fjern blokkering eller avvis?"
+msgstr "Fjern blokkering eller forkast?"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:163
@@ -318,8 +318,8 @@ msgid ""
 "zypper manual page for details."
 msgstr ""
 "Å undersøkja om det er filkonfliktar krev at ikkje-installerte pakkar vert "
-"lasta ned, slik at ein får tilgang til filoversiktlistene deira. Sjå valet "
-"«%1%» i manualsida til zypper for meir informasjon."
+"lasta ned, slik at programmet får tilgang til filoversiktlistene deira. Sjå "
+"valet «%1%» i manualsida til zypper for meir informasjon."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:416
@@ -332,10 +332,10 @@ msgid_plural ""
 "because they are not yet downloaded:"
 msgstr[0] ""
 "Denne pakken kunne ikkje takast med i kontrollen for filkonfliktar, sidan "
-"han ikkje er nedlasta enno:"
+"han ikkje er lasta ned enno:"
 msgstr[1] ""
 "Desse %1% pakkane kunne ikkje takast med i kontrollen for filkonfliktar, "
-"sidan dei ikkje er nedlasta enno:"
+"sidan dei ikkje er lasta ned enno:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:427
@@ -390,7 +390,7 @@ msgstr "Tek i bruk delta"
 #: src/callbacks/repo.h:103
 #, c-format, boost-format
 msgid "(%s unpacked)"
-msgstr "(%s utpakka)"
+msgstr "(%s pakka ut)"
 
 #: src/callbacks/repo.h:112
 #, boost-format
@@ -418,7 +418,7 @@ msgstr "Mistenkjeleg verdi på kategorifilter: «%1%»."
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr "Mistenkjeleg verdi på alvorsgradfilter: «%1%»."
+msgstr "Mistenkjeleg verdi på alvorsgradsfilter: «%1%»."
 
 #: src/output/Out.h:25 src/repos.cc:142 src/repos.cc:170
 msgid "Yes"
@@ -549,7 +549,7 @@ msgstr "Status"
 #: src/info.cc:351 src/info.cc:574
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
-msgstr "forelda (versjon %s installert)"
+msgstr "forelda (versjon %s er installert)"
 
 #: src/info.cc:353 src/info.cc:576
 msgid "up-to-date"
@@ -775,6 +775,16 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
+"Underkommandoar til Zypper er separate programfiler som ligg i mappa \n"
+"zypper_execdir («%1%»).\n"
+"\n"
+"Zypper har ein innebygd funksjon som veit kor desse programfilene\n"
+"ligg og vidaresender kommandolinjeargument til dei.\n"
+"\n"
+"Viss ein underkommando ikkje finst i mappa zypper_execdir,\n"
+"vil funksjonen sjå etter han i resten av $PATH-variabelen.\n"
+"Det er derfor mogleg å skriva lokale zypper-utvidingar som\n"
+"ligg utanfor systemområdet.\n"
 
 #: src/subcommand.cc:401
 #, boost-format
@@ -782,6 +792,8 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
+"Bruk av globale zypper-val saman med underkommandoar,\n"
+"og å køyra underkommandoar i «%1%», er ikkje støtta.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/subcommand.cc:418
@@ -798,18 +810,18 @@ msgstr "Zypper-underkommandoar tilgjengelege frå andre stadar i $PATH"
 #: src/subcommand.cc:428
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
-msgstr "Skriv '%1%' for å visa eventuell underkommando-spesifikk hjelp."
+msgstr "Skriv «%1%» for å visa eventuell underkommando-spesifikk hjelp."
 
 #. translators: %1% - command name
 #: src/subcommand.cc:451
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
-msgstr "Kan ikkje visa manualoppføring for %1%"
+msgstr "Kan ikkje visa manualsida til %1%"
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "Fann ikkje «%s» som pakkenamn. Prøver eigenskapar."
+msgstr "Fann ikkje «%s» som pakkenamn. Søkjer i eigenskapar."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
@@ -899,13 +911,13 @@ msgstr "Ingen leverandør av «%s» er installert."
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr "«%s» er installert frå før."
+msgstr "«%s» er alt installert."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "«%s» som inneheld «%s» alt installert."
+msgstr "«%s» som inneheld «%s» er alt installert."
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
@@ -992,13 +1004,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Programfiksen «%s» er ikkje nødvendig."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Programfiksen «%s» er låst. Bruk «%s» for å installera han, eller lås han "
-"opp med «%s»."
+"Programfiksen «%1%» er ikkje obligatoriske. Bruk «%2%» for å installera han "
+"eller «%3%» for å ta med alle ikkje-obligatoriske programfiksar."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1010,7 +1022,7 @@ msgstr ""
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "Programfiksen «%s» er ikkje den valde kategorien."
+msgstr "Programfiksen «%s» er ikkje i den valde kategorien."
 
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
@@ -1056,7 +1068,7 @@ msgstr "Legg til konflikt: «%s»."
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Meinte du %1%?"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1336,11 +1348,11 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgstr[0] ""
-"Denne pakken er anbefalt, men vert ikkje installert, på grunn av konfliktar "
-"eller avhengnadsproblem:"
+"Denne pakken er anbefalt, men vert ikkje installert (på grunn av konfliktar "
+"eller avhengnadsproblem):"
 msgstr[1] ""
-"Desse %d pakkane er anbefalte, men vert ikkje installerte, på grunn av "
-"konfliktar eller avhengnadsproblem:"
+"Desse %d pakkane er anbefalte, men vert ikkje installerte (på grunn av "
+"konfliktar eller avhengnadsproblem):"
 
 #: src/Summary.cc:934
 #, c-format, boost-format
@@ -1379,40 +1391,40 @@ msgstr[1] "Desse %d programma er anbefalte, men vert ikkje installerte:"
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] "Dette pakken er foreslått, men vert ikkje installert:"
-msgstr[1] "Desse %d pakkane er foreslåtte, men vert ikkje installerte:"
+msgstr[0] "Dette pakken er føreslått, men vert ikkje installert:"
+msgstr[1] "Desse %d pakkane er føreslåtte, men vert ikkje installerte:"
 
 #: src/Summary.cc:981
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "Denne programfiksen er foreslått, men vert ikkje installert:"
-msgstr[1] "Desse %d programfiksane er foreslåtte, men vert ikkje installerte:"
+msgstr[0] "Denne programfiksen er føreslått, men vert ikkje installert:"
+msgstr[1] "Desse %d programfiksane er føreslåtte, men vert ikkje installerte:"
 
 #: src/Summary.cc:986
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] "Dette mønsteret er foreslått, men vert ikkje installert:"
-msgstr[1] "Desse %d mønstera er foreslåtte, men vert ikkje installerte:"
+msgstr[0] "Dette mønsteret er føreslått, men vert ikkje installert:"
+msgstr[1] "Desse %d mønstera er føreslåtte, men vert ikkje installerte:"
 
 #: src/Summary.cc:991
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] "Dette produktet er foreslått, men vert ikkje installert:"
-msgstr[1] "Desse %d produkta er foreslåtte, men vert ikkje installerte:"
+msgstr[0] "Dette produktet er føreslått, men vert ikkje installert:"
+msgstr[1] "Desse %d produkta er føreslåtte, men vert ikkje installerte:"
 
 #: src/Summary.cc:996
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] "Dette programmet er foreslått, men vert ikkje installert:"
-msgstr[1] "Desse %d programma er foreslåtte, men vert ikkje installerte:"
+msgstr[0] "Dette programmet er føreslått, men vert ikkje installert:"
+msgstr[1] "Desse %d programma er føreslåtte, men vert ikkje installerte:"
 
 #: src/Summary.cc:1018
 #, c-format, boost-format
@@ -1552,7 +1564,7 @@ msgstr[1] "Desse %d programfiksane krev omstart av systemet:"
 #: src/Summary.cc:1230
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
-msgstr "Samla storleik på nedlasting: %1%. Allereie nedlasta: %2%."
+msgstr "Samla storleik på nedlasting: %1%. Allereie lasta ned: %2%."
 
 #: src/Summary.cc:1233
 msgid "Download only."
@@ -1685,6 +1697,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Pakkehandsamaren må startast på nytt. (Køyr denne kommandoen om att etter "
+"oppdateringa.)"
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
@@ -1710,7 +1724,7 @@ msgstr "Ikkje hent fila, og prøv å halda fram handlinga utan fila."
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr ""
+msgstr "Byt gjeldande grunnadresse og prøv å henta fila på nytt."
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
@@ -1725,7 +1739,7 @@ msgstr "Ny adresse"
 #. 's' stands for Disable SSL certificate authority check
 #: src/callbacks/media.cc:77
 msgid "a/r/i/u/s"
-msgstr "a/g/i/u/s"
+msgstr "a/g/i/d/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
@@ -1763,7 +1777,7 @@ msgstr "Vel eininga du vil løysa ut."
 
 #: src/callbacks/media.cc:154
 msgid "Insert the CD/DVD and press ENTER to continue."
-msgstr "Set inn ein CD/DVD og trykk «Enter» for å halda fram."
+msgstr "Set inn ein CD/DVD, og trykk «Enter» for å halda fram."
 
 #: src/callbacks/media.cc:157
 msgid "Retrying..."
@@ -1777,7 +1791,7 @@ msgstr "Prøver på nytt …"
 #. 'e' stands for Eject medium
 #: src/callbacks/media.cc:172
 msgid "a/r/i/u/e"
-msgstr "a/g/i/u/l"
+msgstr "a/g/i/d/l"
 
 #: src/callbacks/media.cc:174
 msgid "Eject medium."
@@ -1793,7 +1807,7 @@ msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
 "operation."
 msgstr ""
-"Set inn mediet [%s] #%d og trykk «j» for å halda fram eller «n» for å "
+"Set inn mediet [%s] #%d, og trykk «j» for å halda fram eller «n» for å "
 "avbryta handlinga."
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
@@ -1801,7 +1815,7 @@ msgstr ""
 #. the 'u' reply means 'Change URI'.
 #: src/callbacks/media.cc:255
 msgid "a/r/i/u"
-msgstr "a/g/i/u"
+msgstr "a/g/i/d"
 
 #: src/callbacks/media.cc:299
 #, c-format, boost-format
@@ -1809,6 +1823,8 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
+"Krev autentisering for å få tilgang til %s. Du må vera rotbrukar for å kunna "
+"lesa akkreditiv frå %s."
 
 #: src/callbacks/media.cc:321 src/callbacks/media.cc:328
 msgid "User Name"
@@ -1827,7 +1843,7 @@ msgstr "Ukjend kommando «%s»"
 #: src/SolverRequester.cc:479
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "Ignorerer først valet %s ved oppdatering av oppdateringsstabelen."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:47
@@ -1854,7 +1870,7 @@ msgstr "opphøgd prioritet"
 
 #: src/repos.cc:70
 msgid "lowered priority"
-msgstr "senkt prioritet"
+msgstr "senka prioritet"
 
 #: src/repos.cc:115
 #, c-format, boost-format
@@ -1870,10 +1886,12 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Pakkebrønnprioritetane har ikkje nokon effekt. Alle aktiverte pakkebrønnar "
+"har same prioritet."
 
 #: src/repos.cc:203
 msgid "Repository priorities in effect:"
-msgstr ""
+msgstr "Pakkebrønnprioritet:"
 
 #: src/repos.cc:204
 #, boost-format
@@ -1950,7 +1968,7 @@ msgstr ""
 
 #: src/repos.cc:389
 msgid "No alias defined for this repository."
-msgstr "Ingen alias definert for denne pakkebrønnen."
+msgstr "Inkje alias er definert for denne pakkebrønnen."
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -1962,7 +1980,7 @@ msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
-"Kontroller at nettadressene definert for denne pakkebrønnen peikar til ein "
+"Kontroller at nettadressene definerte for denne pakkebrønnen peikar til ein "
 "gyldig pakkebrønn."
 
 #: src/repos.cc:414
@@ -1987,10 +2005,10 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"Dette kan komma av ugyldig metadata i pakkebrønnen eller av ein feil i "
-"metadata-parseren. Viss det kjem av ein feil i parseren, eller om du er i "
-"tvil om grunnen, meld det inn som ein feil, slik forklart på http://en."
-"opensuse.org/Zypper/Troubleshooting."
+"Dette kan komma av ugyldige metadata i pakkebrønnen eller av ein feil i "
+"metadatatolkaren. Viss det kjem av ein feil i tolkaren, eller om du er i "
+"tvil om grunnen, meld det inn som ein feil, slik forklart på "
+"http://en.opensuse.org/Zypper/Troubleshooting."
 
 #: src/repos.cc:463
 #, c-format, boost-format
@@ -2019,14 +2037,12 @@ msgstr "Hoppar over den deaktiverte pakkebrønnen «%s»"
 #: src/repos.cc:794 src/Zypper.cc:4313
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
-msgstr ""
+msgstr "Den valde pakkebrønnen «%s» er deaktivert."
 
 #: src/repos.cc:800
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr ""
-"Bruk kommandoane «%s» eller «%s» for å leggja til eller aktivera "
-"pakkebrønnar."
+msgstr "Globale val «%s» kan brukast til å mellombels aktivera pakkebrønnar."
 
 #: src/repos.cc:816 src/repos.cc:822
 #, c-format, boost-format
@@ -2036,7 +2052,7 @@ msgstr "Hoppar over pakkebrønnen «%s» på grunn av valet «%s»."
 #: src/repos.cc:843 src/repos.cc:943
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
-msgstr "Reaktiverer pakkebrønnen «%s» mellombels."
+msgstr "Aktiverer pakkebrønnen «%s» mellombels."
 
 #: src/repos.cc:857 src/repos.cc:1406
 #, c-format, boost-format
@@ -2134,7 +2150,7 @@ msgstr "Teneste"
 
 #: src/repos.cc:1179
 msgid "No repositories defined."
-msgstr "Ingen pakkebrønnar definert."
+msgstr "Ingen pakkebrønnar er definerte."
 
 #: src/repos.cc:1180
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
@@ -2173,7 +2189,7 @@ msgstr "Overordna teneste"
 
 #: src/repos.cc:1224
 msgid "Keywords"
-msgstr ""
+msgstr "Nøkkelord"
 
 #: src/repos.cc:1225
 msgid "Repo Info Path"
@@ -2206,9 +2222,9 @@ msgid "Specified repositories: "
 msgstr "Valde pakkebrønnar: "
 
 #: src/repos.cc:1388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Deaktiverer pakkebrønnen «%s»."
+msgstr "Oppdaterer pakkebrønnen «%s»."
 
 #: src/repos.cc:1417
 #, c-format, boost-format
@@ -2255,7 +2271,7 @@ msgstr "Fjernar råmetadata-mellomlager for «%s»."
 #: src/repos.cc:1588
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr "Beheld råmeta-mellomlager for %s «%s»."
+msgstr "Beheld råmetadata-mellomlager for %s «%s»."
 
 #. translators: meaning the cached rpm files
 #: src/repos.cc:1595
@@ -2270,7 +2286,7 @@ msgstr "Klarte ikkje rydda opp i pakkebrønnen «%s», på grunn av ein feil."
 
 #: src/repos.cc:1614
 msgid "Cleaning installed packages cache."
-msgstr "Ryddar opp i mellomlager for instalerte pakkar."
+msgstr "Ryddar opp i mellomlager for installerte pakkar."
 
 #: src/repos.cc:1623
 msgid "Cannot clean installed packages cache because of an error."
@@ -2297,7 +2313,7 @@ msgstr "Alle pakkebrønnane er no rydda opp i."
 #: src/repos.cc:1681
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
-"Dette er eit utbytbart skriveverna medium (CD/DVD). Slå av autooppdatering."
+"Dette er eit utbytbart skriveverna medium (CD/DVD). Slår av autooppdatering."
 
 #: src/repos.cc:1702
 #, c-format, boost-format
@@ -2342,6 +2358,8 @@ msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
+"GPG-kontroll er slått av i oppsettet til pakkebrønnen «%1%». Kan derfor "
+"ikkje stadfesta integritet og opphav til pakkar."
 
 #: src/repos.cc:1756
 #, c-format, boost-format
@@ -2360,7 +2378,7 @@ msgstr "Feil ved lesing av data frå mediet «%s»"
 
 #: src/repos.cc:1789
 msgid "Please check if your installation media is valid and readable."
-msgstr "Kontroller at installasjonsmedier er gyldig og lesbart."
+msgstr "Kontroller at installasjonsmediet er gyldig og lesbart."
 
 #: src/repos.cc:1796
 #, c-format, boost-format
