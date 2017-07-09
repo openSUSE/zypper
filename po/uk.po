@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-07-09 15:40+0000\n"
+"PO-Revision-Date: 2017-07-09 15:47+0000\n"
 "Last-Translator: Yaroslav Semchenko <ukrkyi@gmail.com>\n"
 "Language-Team: Ukrainian "
 "<https://l10n.opensuse.org/projects/zypper/master/uk/>\n"
@@ -2025,12 +2025,12 @@ msgstr "Перевірка чи освіжати метадані для %s"
 #: src/repos.cc:267
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
-msgstr "Сховище «%s» не потребує оновлення."
+msgstr "Сховище \"%s\" не потребує оновлення."
 
 #: src/repos.cc:273
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "Перевірку сховища «%s» на відповідність було відкладено."
+msgstr "Перевірку сховища \"%s\" на відповідність було відкладено."
 
 #: src/repos.cc:295
 msgid "Forcing raw metadata refresh"
@@ -2039,7 +2039,7 @@ msgstr "Примусове освіження сирих метаданих"
 #: src/repos.cc:301
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Звантаження метаданих сховища «%s»"
+msgstr "Звантаження метаданих сховища \"%s\""
 
 # power-off message
 #: src/repos.cc:325
@@ -5465,7 +5465,7 @@ msgid ""
 msgstr ""
 "Ви збираєтесь оновити дистрибутив до нової версії за допомогою всіх "
 "увімкнених сховищ. Перед тим як продовжити переконайтесь, що ці сховища між "
-"собою сумісні. Для детальнішої інформації про цю команду дивіться «%s»."
+"собою сумісні. Для детальнішої інформації про цю команду дивіться \"%s\"."
 
 #: src/Zypper.cc:4902 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
@@ -5680,8 +5680,8 @@ msgid ""
 "these programs."
 msgstr ""
 "Існують запущені програми, що використовують файли, які вилучено недавнім "
-"оновленням. Можливо, бажаєте перезапустити деякі з них. Запустіть «%s», щоб "
-"отримати список цих програм."
+"оновленням. Можливо, бажаєте перезапустити деякі з них. Запустіть \"%s\", "
+"щоб отримати список цих програм."
 
 #: src/solve-commit.cc:472
 msgid "Update notifications were received from the following packages:"
