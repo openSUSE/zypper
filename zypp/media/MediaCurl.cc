@@ -1003,8 +1003,13 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     // unexpected exception
     catch (MediaException & excpt_r)
     {
-      // FIXME: error number fix
-      report->finish(fileurl, zypp::media::DownloadProgressReport::ERROR, excpt_r.asUserHistory());
+      media::DownloadProgressReport::Error reason = media::DownloadProgressReport::ERROR;
+      if( typeid(excpt_r) == typeid( media::MediaFileNotFoundException )  ||
+	  typeid(excpt_r) == typeid( media::MediaNotAFileException ) )
+      {
+	reason = media::DownloadProgressReport::NOT_FOUND;
+      }
+      report->finish(fileurl, reason, excpt_r.asUserHistory());
       ZYPP_RETHROW(excpt_r);
     }
   }
