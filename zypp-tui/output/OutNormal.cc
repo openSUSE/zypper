@@ -304,12 +304,12 @@ void OutNormal::dwnldProgress( const Url & uri, int value, long rate )
   _newline = false;
 }
 
-void OutNormal::dwnldProgressEnd( const Url & uri, long rate, bool error )
+void OutNormal::dwnldProgressEnd( const Url & uri, long rate, TriBool error )
 {
   if ( verbosity() < NORMAL )
     return;
 
-  if ( !error && _use_colors )
+  if ( bool(!error) && _use_colors )
     cout << ColorContext::MSG_STATUS;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '.' );
@@ -325,13 +325,18 @@ void OutNormal::dwnldProgressEnd( const Url & uri, long rate, bool error )
       outstr.lhs << Pathname(uri.getPathName()).basename();
     outstr.lhs << ' ';
     outstr.rhs << '[';
-    if ( error )
+    if ( indeterminate( error ) )
+      // Translator: download progress bar result: "........[not found]"
+      outstr.rhs << ColorString( _("not found"), ColorContext::CHANGE );
+    else if ( error )
+      // Translator: download progress bar result: "............[error]"
       outstr.rhs << ColorString( _("error"), ColorContext::NEGATIVE );
     else
+      // Translator: download progress bar result: ".............[done]"
       outstr.rhs << _("done");
   }
   else
-    outstr.rhs << (error ? _("error") : _("done"));
+    outstr.rhs << ( indeterminate( error ) ? _("not found") : ( error ? _("error") : _("done") ) );
 
   if ( rate > 0 )
     outstr.rhs << " (" << ByteCount(rate) << "/s)";
@@ -341,7 +346,7 @@ void OutNormal::dwnldProgressEnd( const Url & uri, long rate, bool error )
   cout << outline << endl << std::flush;
   _newline = true;
 
-  if ( !error && _use_colors )
+  if ( bool(!error) && _use_colors )
     cout << ColorContext::DEFAULT;
 }
 

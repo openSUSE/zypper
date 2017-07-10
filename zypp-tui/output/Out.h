@@ -712,11 +712,11 @@ public:
    *
    * \param uri   Uri of the file to download.
    * \param rate  Average download rate at the end. -1 if unknown.
-   * \param error Error flag - did the download finish with error?
+   * \param error Error flag - did the download finish with error? \c indeterminate == 'not found'
    */
   virtual void dwnldProgressEnd(const Url & uri,
                                 long rate = -1,
-                                bool error = false) = 0;
+                                TriBool error = false) = 0;
   //@}
 
   /**
