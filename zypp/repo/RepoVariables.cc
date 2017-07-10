@@ -437,7 +437,13 @@ namespace zypp
 	}
 
 	std::ostream & dumpOn( std::ostream & str ) const
-	{ for ( auto && kv : *this ) { return str << '{' << kv.first << '=' << kv.second << '}' << endl; } }
+	{
+	  for ( auto && kv : *this )
+	  {
+	    str << '{' << kv.first << '=' << kv.second << '}' << endl;
+	  }
+	  return str;
+	}
 
       private:
 	/** Get first line from file */
