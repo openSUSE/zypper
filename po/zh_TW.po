@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 15:59+0200\n"
+"POT-Creation-Date: 2017-07-10 11:55+0200\n"
 "PO-Revision-Date: 2017-07-04 01:57+0000\n"
 "Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -453,7 +453,7 @@ msgstr "套件庫"
 #. translators: Table column header
 #. translators: name (general header)
 #: src/info.cc:69 src/info.cc:459 src/info.cc:703 src/repos.cc:1070
-#: src/repos.cc:1209 src/repos.cc:2539 src/update.cc:801 src/Zypper.cc:5313
+#: src/repos.cc:1209 src/repos.cc:2539 src/update.cc:801 src/Zypper.cc:5317
 #: src/search.cc:44 src/search.cc:209 src/search.cc:357 src/search.cc:504
 #: src/search.cc:568 src/locks.cc:107 src/utils/misc.cc:250
 msgid "Name"
@@ -487,7 +487,7 @@ msgid "Summary"
 msgstr "摘要"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:83 src/Zypper.cc:5313
+#: src/info.cc:83 src/Zypper.cc:5317
 msgid "Description"
 msgstr "描述"
 
@@ -1902,7 +1902,7 @@ msgstr "請用 '%s' 取得已定義的套件庫清單。"
 msgid "Ignoring disabled repository '%s'"
 msgstr "正在忽略已停用的套件庫 '%s'"
 
-#: src/repos.cc:794 src/Zypper.cc:4319
+#: src/repos.cc:794 src/Zypper.cc:4323
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "指定套件庫 '%s' 已停用。"
@@ -1970,11 +1970,11 @@ msgstr "啟始化目標"
 msgid "Target initialization failed:"
 msgstr "目標初始化失敗："
 
-#: src/repos.cc:1007 src/Zypper.cc:4480
+#: src/repos.cc:1007 src/Zypper.cc:4484
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "以 root 執行 'zypper refresh' 也許可以解決這個問題。"
 
-#: src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2538 src/Zypper.cc:5313
+#: src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2538 src/Zypper.cc:5317
 msgid "Alias"
 msgstr "別名"
 
@@ -2794,51 +2794,57 @@ msgstr ""
 "PackageKit 正在阻擋 zypper。如果您正在執行使用 PackageKit 的更新程式 applet "
 "或其他軟體管理應用程式，此情況就會發生。"
 
-#: src/Zypper.cc:148
-msgid "Tell PackageKit to quit?"
+#: src/Zypper.cc:149
+msgid ""
+"We can ask PackageKit to interrupt the current action as soon as possible, "
+"but it depends on PackageKit how fast it will respond to this request."
+msgstr ""
+
+#: src/Zypper.cc:152
+msgid "Ask PackageKit to quit?"
 msgstr "要求 PackageKit 退出嗎？"
 
-#: src/Zypper.cc:157
+#: src/Zypper.cc:161
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKit 仍在執行中 (可能正忙)。"
 
-#: src/Zypper.cc:158
+#: src/Zypper.cc:162
 msgid "Try again?"
 msgstr "再次嘗試嗎？"
 
-#: src/Zypper.cc:235
+#: src/Zypper.cc:239
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr "偵測到舊的指令行選項 %1%。請改用全域選項 %2%。"
 
-#: src/Zypper.cc:236
+#: src/Zypper.cc:240
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr "偵測到舊的指令行選項 %1%。請改用 %2%。"
 
-#: src/Zypper.cc:323
+#: src/Zypper.cc:327
 msgid "Command options:"
 msgstr "指令選項："
 
-#: src/Zypper.cc:326
+#: src/Zypper.cc:330
 #, fuzzy
 msgid "Solver options:"
 msgstr "進階選項："
 
-#: src/Zypper.cc:329
+#: src/Zypper.cc:333
 msgid "Expert options:"
 msgstr "進階選項："
 
-#: src/Zypper.cc:332
+#: src/Zypper.cc:336
 msgid "This command has no additional options."
 msgstr "本指令沒有其他選項。"
 
-#: src/Zypper.cc:465 src/Zypper.cc:1426
+#: src/Zypper.cc:469 src/Zypper.cc:1430
 msgid "Unexpected exception."
 msgstr "非預期的例外。"
 
-#: src/Zypper.cc:490
+#: src/Zypper.cc:494
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2881,7 +2887,7 @@ msgstr ""
 "\t--xmlout, -x\t\t切換為 XML 輸出。\n"
 "\t--ignore-unknown, -i\t忽略未知的套件。\n"
 
-#: src/Zypper.cc:513
+#: src/Zypper.cc:517
 msgid ""
 "\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
 "\t\t\t\tdirectory.\n"
@@ -2897,7 +2903,7 @@ msgstr ""
 "\t--solv-cache-dir <dir>\t使用不同的解決方案檔案快取目錄。\n"
 "\t--pkg-cache-dir <dir>\t使用不同的套件快取目錄。\n"
 
-#: src/Zypper.cc:521
+#: src/Zypper.cc:525
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -2928,7 +2934,7 @@ msgstr ""
 "\t--releasever\t\t在所有 .repo 檔案中設定 $releasever 的值 (預設︰發行版的版"
 "本)\n"
 
-#: src/Zypper.cc:535
+#: src/Zypper.cc:539
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -2940,7 +2946,7 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\t不要讀取已安裝的套件。\n"
 
-#: src/Zypper.cc:542
+#: src/Zypper.cc:546
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -2950,7 +2956,7 @@ msgstr ""
 "\thelp, ?\t\t\t印出說明。\n"
 "\tshell, sh\t\t同時接受多重指令。\n"
 
-#: src/Zypper.cc:547
+#: src/Zypper.cc:551
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -2970,7 +2976,7 @@ msgstr ""
 "\trefresh, ref\t\t重新整理所有套件庫。\n"
 "\tclean\t\t\t清理本機快取。\n"
 
-#: src/Zypper.cc:557
+#: src/Zypper.cc:561
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -2986,7 +2992,7 @@ msgstr ""
 "\tremoveservice, rs\t移除指定的服務。\n"
 "\trefresh-services, refs\t重新整理所有的服務。\n"
 
-#: src/Zypper.cc:565
+#: src/Zypper.cc:569
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -3008,7 +3014,7 @@ msgstr ""
 "\t\t\t\t安裝已安裝套件所建議\n"
 "\t\t\t\t的新套件。\n"
 
-#: src/Zypper.cc:576
+#: src/Zypper.cc:580
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -3026,7 +3032,7 @@ msgstr ""
 "\tdist-upgrade, dup\t進行一個發行版本升級。\n"
 "\tpatch-check, pchk\t檢查有無修補程式。\n"
 
-#: src/Zypper.cc:585
+#: src/Zypper.cc:589
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -3052,7 +3058,7 @@ msgstr ""
 "\tproducts, pd\t\t列出所有可用的產品。\n"
 "\twhat-provides, wp\t列出提供指定功能的套件。\n"
 
-#: src/Zypper.cc:600
+#: src/Zypper.cc:604
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -3066,7 +3072,7 @@ msgstr ""
 "\tlocks, ll\t\t列出目前的套件鎖定。\n"
 "\tcleanlocks, cl\t\t移除未使用的鎖定。\n"
 
-#: src/Zypper.cc:607
+#: src/Zypper.cc:611
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -3087,7 +3093,7 @@ msgstr ""
 "\tsource-download\t\t下載所有已安裝套件的原始碼 rpm\n"
 "\t\t\t\t到本地目錄。\n"
 
-#: src/Zypper.cc:617
+#: src/Zypper.cc:621
 msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
@@ -3095,7 +3101,7 @@ msgstr ""
 "     個別指令：\n"
 "\tsubcommand\t\t列出可用的個別指令。\n"
 
-#: src/Zypper.cc:622
+#: src/Zypper.cc:626
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -3107,7 +3113,7 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:650
+#: src/Zypper.cc:654
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr "輸入 '%s' 以獲取全域選項與指令的清單。"
@@ -3115,7 +3121,7 @@ msgstr "輸入 '%s' 以獲取全域選項與指令的清單。"
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:657
+#: src/Zypper.cc:661
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -3124,7 +3130,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:664
+#: src/Zypper.cc:668
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "
@@ -3133,65 +3139,65 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:675
+#: src/Zypper.cc:679
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "輸入 '%s' 以獲取個別指令的說明。"
 
-#: src/Zypper.cc:850
+#: src/Zypper.cc:854
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "詳細：%d"
 
-#: src/Zypper.cc:864
+#: src/Zypper.cc:868
 #, c-format, boost-format
 msgid "Invalid table style %d."
 msgstr "無效的表格樣式 %d。"
 
-#: src/Zypper.cc:865
+#: src/Zypper.cc:869
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
 msgstr "使用由 %d 到 %d 的整數"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:976
+#: src/Zypper.cc:980
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "個別指令 %1% 不支援 zypper 全域選項。"
 
-#: src/Zypper.cc:997
+#: src/Zypper.cc:1001
 msgid "Enforced setting"
 msgstr "強制設定"
 
-#: src/Zypper.cc:1007
+#: src/Zypper.cc:1011
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr "使用者資料字串不能包含不可列印或換行字元！"
 
-#: src/Zypper.cc:1031 src/Zypper.cc:3273
+#: src/Zypper.cc:1035 src/Zypper.cc:3277
 msgid "Entering non-interactive mode."
 msgstr "進入非互動模式。"
 
-#: src/Zypper.cc:1038
+#: src/Zypper.cc:1042
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr "對於有建議重開機旗標的修補程式將不會被視為可互動的。"
 
-#: src/Zypper.cc:1045
+#: src/Zypper.cc:1049
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "正在進入忽略 GPG 檢查模式。"
 
-#: src/Zypper.cc:1053
+#: src/Zypper.cc:1057
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr "正在開啟 '%s'。新套件庫簽名金鑰將自動被匯入！"
 
-#: src/Zypper.cc:1066
+#: src/Zypper.cc:1070
 msgid "The path specified in the --root option must be absolute."
 msgstr "使用 --root 選項時需指定絕對路徑。"
 
-#: src/Zypper.cc:1082
+#: src/Zypper.cc:1086
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -3199,44 +3205,44 @@ msgstr ""
 "符號連結 /etc/products.d/baseproduct 指向目標不存在或連結本身已遺失！\n"
 "該連結必須要指向您在 /etc/products.d 的核心產品 .prod 檔案。\n"
 
-#: src/Zypper.cc:1122
+#: src/Zypper.cc:1126
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "套件庫已停用，僅使用已安裝套件的資料庫。"
 
-#: src/Zypper.cc:1134
+#: src/Zypper.cc:1138
 msgid "Autorefresh disabled."
 msgstr "停用自動重新整理。"
 
-#: src/Zypper.cc:1141
+#: src/Zypper.cc:1145
 msgid "CD/DVD repositories disabled."
 msgstr "CD/DVD 套件庫停用。"
 
-#: src/Zypper.cc:1148
+#: src/Zypper.cc:1152
 msgid "Remote repositories disabled."
 msgstr "遠端套件庫停用。"
 
-#: src/Zypper.cc:1155
+#: src/Zypper.cc:1159
 msgid "Ignoring installed resolvables."
 msgstr "忽略已安裝的解決方案。"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:1182 src/Zypper.cc:1232
+#: src/Zypper.cc:1186 src/Zypper.cc:1236
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "%s 選項在此無效，將忽略。"
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:1315
+#: src/Zypper.cc:1319
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "zypper shell 不支援執行個別指令。"
 
-#: src/Zypper.cc:1394
+#: src/Zypper.cc:1398
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "指令 '%s' 已由 '%s' 取代。"
 
-#: src/Zypper.cc:1395
+#: src/Zypper.cc:1399
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "參閱 '%s' 查看所有可用的選項。"
@@ -3244,7 +3250,7 @@ msgstr "參閱 '%s' 查看所有可用的選項。"
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
 #. and the third %s = "only, in-advance, in-heaps, as-needed"
-#: src/Zypper.cc:1530
+#: src/Zypper.cc:1534
 #, c-format, boost-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -3319,8 +3325,8 @@ msgstr ""
 "                               %s\n"
 "-d, --download-only            僅下載套件，不要安裝。\n"
 
-#: src/Zypper.cc:1563 src/Zypper.cc:1615 src/Zypper.cc:1695 src/Zypper.cc:2238
-#: src/Zypper.cc:2312 src/Zypper.cc:2419
+#: src/Zypper.cc:1567 src/Zypper.cc:1619 src/Zypper.cc:1699 src/Zypper.cc:2242
+#: src/Zypper.cc:2316 src/Zypper.cc:2423
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -3328,7 +3334,7 @@ msgstr "不需要與使用者互動。相當於全域選項 --non-interactive。
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: src/Zypper.cc:1598
+#: src/Zypper.cc:1602
 #, c-format, boost-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -3366,7 +3372,7 @@ msgstr ""
 "-D, --dry-run                 測試移除，不要真的移除。\n"
 "    --details                 顯示詳細的安裝摘要。\n"
 
-#: src/Zypper.cc:1636
+#: src/Zypper.cc:1640
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -3389,7 +3395,7 @@ msgstr ""
 "-r, --repo <別名|編號|位址> 僅從指定的套件庫安裝套件。\n"
 "    --download-only         僅下載套件，不安裝。\n"
 
-#: src/Zypper.cc:1647
+#: src/Zypper.cc:1651
 #, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
@@ -3399,7 +3405,7 @@ msgstr ""
 "預設 rpm 源碼套件的安裝位置是在 '%1%'，但您可在本地端的 rpm 設定修改此值。若"
 "有疑問，請嘗試執行 '%2%'。"
 
-#: src/Zypper.cc:1680
+#: src/Zypper.cc:1684
 #, c-format, boost-format
 msgid ""
 "verify (ve) [options]\n"
@@ -3429,7 +3435,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         僅下載所需套件，不要安裝。\n"
 
-#: src/Zypper.cc:1724
+#: src/Zypper.cc:1728
 #, c-format, boost-format
 msgid ""
 "install-new-recommends (inr) [options]\n"
@@ -3460,7 +3466,7 @@ msgstr ""
 "-d, --download-only         僅下載套件，不要安裝。\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: src/Zypper.cc:1757
+#: src/Zypper.cc:1761
 #, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -3482,7 +3488,7 @@ msgstr ""
 "-n, --name <別名>       為此服務指定描述性的名稱。\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1780
+#: src/Zypper.cc:1784
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -3501,7 +3507,7 @@ msgstr ""
 "    --loose-query  忽略位址中的查詢字串。\n"
 
 #. translators: %s is "--all" and "--all"
-#: src/Zypper.cc:1816
+#: src/Zypper.cc:1820
 #, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -3556,7 +3562,7 @@ msgstr ""
 "-t, --remote                  套用變更到所有遠端服務。\n"
 "-m, --medium-type <類型>      套用變更到指定類型的服務。\n"
 
-#: src/Zypper.cc:1864
+#: src/Zypper.cc:1868
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -3586,7 +3592,7 @@ msgstr ""
 "-U, --sort-by-uri         依位址排序清單。\n"
 "-N, --sort-by-name        依名稱排序清單。\n"
 
-#: src/Zypper.cc:1892
+#: src/Zypper.cc:1896
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -3608,7 +3614,7 @@ msgstr ""
 "-R, --restore-status  同時也回復服務套件庫的啟用/停用狀態。\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1925
+#: src/Zypper.cc:1929
 #, c-format, boost-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -3652,7 +3658,7 @@ msgstr ""
 "-G, --no-gpgcheck       針對此套件庫停用 GPG 檢查。\n"
 "-f, --refresh           啟用套件庫的自動重新整理。\n"
 
-#: src/Zypper.cc:1971
+#: src/Zypper.cc:1975
 msgid ""
 "repos (lr) [options] [repo] ...\n"
 "\n"
@@ -3693,7 +3699,7 @@ msgstr ""
 "-A, --sort-by-alias       依別名排列清單。\n"
 "-N, --sort-by-name        依名稱排列清單。\n"
 
-#: src/Zypper.cc:2003
+#: src/Zypper.cc:2007
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -3711,7 +3717,7 @@ msgstr ""
 "    --loose-auth   忽略位址中的使用者認證資料\n"
 "    --loose-query  忽略位址中的查詢字串\n"
 
-#: src/Zypper.cc:2022
+#: src/Zypper.cc:2026
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -3727,7 +3733,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:2055
+#: src/Zypper.cc:2059
 #, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -3777,7 +3783,7 @@ msgstr ""
 "-t, --remote              套用變更到所有遠端套件庫。\n"
 "-m, --medium-type <類型>  套用變更到指定類型的套件庫。\n"
 
-#: src/Zypper.cc:2097
+#: src/Zypper.cc:2101
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3808,7 +3814,7 @@ msgstr ""
 "-r、--repo <別名|編號|URI> 僅重新整理指定的套件庫。\n"
 "-s、--services           重新整理套件庫之前也重新整理服務。\n"
 
-#: src/Zypper.cc:2126
+#: src/Zypper.cc:2130
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3832,7 +3838,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2155
+#: src/Zypper.cc:2159
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -3871,7 +3877,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2209
+#: src/Zypper.cc:2213
 #, fuzzy, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -3934,7 +3940,7 @@ msgstr ""
 "                             %s\n"
 "-d, --download-only          僅下載套件，不要安裝。\n"
 
-#: src/Zypper.cc:2282
+#: src/Zypper.cc:2286
 #, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -3998,11 +4004,11 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         僅下載套件，不要安裝。\n"
 
-#: src/Zypper.cc:2309
+#: src/Zypper.cc:2313
 msgid "Install only patches which affect the package management itself."
 msgstr "只安裝會影響套件管理本身的修補程式。"
 
-#: src/Zypper.cc:2310
+#: src/Zypper.cc:2314
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
@@ -4012,16 +4018,16 @@ msgstr ""
 "會忽略此選項。不能與 --updatestack-only 結合使用。"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2340
+#: src/Zypper.cc:2344
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [選項]"
 
 #. translators: command description
-#: src/Zypper.cc:2343
+#: src/Zypper.cc:2347
 msgid "List all applicable patches."
 msgstr "列出所有適用修補程式。"
 
-#: src/Zypper.cc:2346
+#: src/Zypper.cc:2350
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
@@ -4029,7 +4035,7 @@ msgstr ""
 "-b, --bugzilla[=#]\n"
 "列出適用於解決 Bugzilla 問題的修補程式。"
 
-#: src/Zypper.cc:2347
+#: src/Zypper.cc:2351
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
@@ -4037,7 +4043,7 @@ msgstr ""
 "--cve[=#]\n"
 "列出適用於解決 CVE 問題的修補程式。"
 
-#: src/Zypper.cc:2348
+#: src/Zypper.cc:2352
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
@@ -4045,7 +4051,7 @@ msgstr ""
 "--issues[=STRING]\n"
 "尋找符合指定字串的問題。"
 
-#: src/Zypper.cc:2349
+#: src/Zypper.cc:2353
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
@@ -4053,7 +4059,7 @@ msgstr ""
 "--date <YYYY-MM-DD>\n"
 "僅列出截至 (但不含) 指定日期發行的修補程式。"
 
-#: src/Zypper.cc:2350
+#: src/Zypper.cc:2354
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
@@ -4061,7 +4067,7 @@ msgstr ""
 "-g, --category <類別>\n"
 "僅列出此類別的修補程式。"
 
-#: src/Zypper.cc:2351
+#: src/Zypper.cc:2355
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
@@ -4069,7 +4075,7 @@ msgstr ""
 "--severity <嚴重性>\n"
 "僅列出此嚴重性的修補程式。"
 
-#: src/Zypper.cc:2352
+#: src/Zypper.cc:2356
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
@@ -4077,7 +4083,7 @@ msgstr ""
 "-a, --all\n"
 "列出所有修補程式，不僅僅是適用的那些。"
 
-#: src/Zypper.cc:2354
+#: src/Zypper.cc:2358
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
@@ -4085,7 +4091,7 @@ msgstr ""
 "-r, --repo <別名|編號|位址>\n"
 "僅列出來自指定套件庫的修補程式。"
 
-#: src/Zypper.cc:2398
+#: src/Zypper.cc:2402
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -4135,23 +4141,23 @@ msgstr ""
 "                               %s\n"
 "-d, --download-only            僅下載套件，不要安裝。\n"
 
-#: src/Zypper.cc:2427
+#: src/Zypper.cc:2431
 msgid "Whether to allow downgrading installed resolvables."
 msgstr "是否允許降級已安裝的解決方案。"
 
-#: src/Zypper.cc:2429
+#: src/Zypper.cc:2433
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr "是否允許改變已安裝的解決方案名稱。"
 
-#: src/Zypper.cc:2431
+#: src/Zypper.cc:2435
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr "是否允許改變已安裝的解決方案架構。"
 
-#: src/Zypper.cc:2433
+#: src/Zypper.cc:2437
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr "是否允許改變已安裝的解決方案廠商。"
 
-#: src/Zypper.cc:2470
+#: src/Zypper.cc:2474
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -4231,12 +4237,12 @@ msgstr ""
 "如果搜尋字串被 '/' 包圍，它會被解讀為正規表示式。\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2520
+#: src/Zypper.cc:2524
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr "patch-check (pchk) [選項]"
 
 #. translators: command description
-#: src/Zypper.cc:2523
+#: src/Zypper.cc:2527
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
@@ -4244,7 +4250,7 @@ msgstr ""
 "顯示適用修補程式的統計資料。如果找到需要的修補程式，該指令會傳回 100；如果至"
 "少存在一個需要的安全性修補程式，則傳回 101。"
 
-#: src/Zypper.cc:2526
+#: src/Zypper.cc:2530
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
@@ -4252,7 +4258,7 @@ msgstr ""
 "-r, --repo <別名|編號|位址>\n"
 "僅在指定的套件庫中檢查修補程式。"
 
-#: src/Zypper.cc:2527
+#: src/Zypper.cc:2531
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
@@ -4260,7 +4266,7 @@ msgstr ""
 "--updatestack-only\n"
 "只檢查會影響套件管理本身的修補程式。"
 
-#: src/Zypper.cc:2544
+#: src/Zypper.cc:2548
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -4278,7 +4284,7 @@ msgstr ""
 "\n"
 "-r, --repo <別名|編號|位址>  這是指定套件庫的另一種方法。\n"
 
-#: src/Zypper.cc:2574
+#: src/Zypper.cc:2578
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -4313,7 +4319,7 @@ msgstr ""
 "-N, --sort-by-name          以套件名稱排列清單。\n"
 "-R, --sort-by-repo          以套件庫排列清單。\n"
 
-#: src/Zypper.cc:2605
+#: src/Zypper.cc:2609
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -4335,7 +4341,7 @@ msgstr ""
 "-i, --installed-only        僅顯示已安裝的樣式。\n"
 "-u, --not-installed-only    僅顯示未安裝的樣式。\n"
 
-#: src/Zypper.cc:2632
+#: src/Zypper.cc:2636
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -4357,12 +4363,12 @@ msgstr ""
 "-i, --installed-only        僅顯示已安裝的產品。\n"
 "-u, --not-installed-only    僅顯示未安裝的產品。\n"
 
-#: src/Zypper.cc:2641
+#: src/Zypper.cc:2645
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr "僅限 XML 輸出：直接轉發在產品文件中找到的 XML 標記。"
 
-#: src/Zypper.cc:2665
+#: src/Zypper.cc:2669
 #, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -4404,7 +4410,7 @@ msgstr ""
 "    --recommends           顯示推薦套件。\n"
 "    --suggests              顯示建議套件。\n"
 
-#: src/Zypper.cc:2698
+#: src/Zypper.cc:2702
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -4419,7 +4425,7 @@ msgstr ""
 "\n"
 "這是 '%s' 的別名。\n"
 
-#: src/Zypper.cc:2717
+#: src/Zypper.cc:2721
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -4434,7 +4440,7 @@ msgstr ""
 "\n"
 "這是 '%s' 的別名。\n"
 
-#: src/Zypper.cc:2736
+#: src/Zypper.cc:2740
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -4449,7 +4455,7 @@ msgstr ""
 "\n"
 "這是 '%s' 的別名。\n"
 
-#: src/Zypper.cc:2753
+#: src/Zypper.cc:2757
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -4463,7 +4469,7 @@ msgstr ""
 "\n"
 "此指令無其他選項。\n"
 
-#: src/Zypper.cc:2804
+#: src/Zypper.cc:2808
 msgid ""
 "moo\n"
 "\n"
@@ -4477,7 +4483,7 @@ msgstr ""
 "\n"
 "本指令沒有其他選項。\n"
 
-#: src/Zypper.cc:2826
+#: src/Zypper.cc:2830
 #, c-format, boost-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -4500,7 +4506,7 @@ msgstr ""
 "-t、--type <類型>         套件 (%s) 的類型。\n"
 "                          預設︰%s。\n"
 
-#: src/Zypper.cc:2853
+#: src/Zypper.cc:2857
 #, c-format, boost-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -4523,26 +4529,26 @@ msgstr ""
 "                          預設︰%s。\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2880
+#: src/Zypper.cc:2884
 msgid "locks (ll) [options]"
 msgstr "locks (ll) [選項]"
 
 #. translators: command description
-#: src/Zypper.cc:2883
+#: src/Zypper.cc:2887
 msgid "List current package locks."
 msgstr "列出目前的套件鎖定。"
 
 #. translators: -m, --matches
-#: src/Zypper.cc:2887
+#: src/Zypper.cc:2891
 msgid "Show the number of resolvables matched by each lock."
 msgstr "顯示與每個鎖定相符的解決方案數量。"
 
 #. translators: -s, --solvables
-#: src/Zypper.cc:2889
+#: src/Zypper.cc:2893
 msgid "List the resolvables matched by each lock."
 msgstr "列出與每個鎖定相符的解決方案。"
 
-#: src/Zypper.cc:2905
+#: src/Zypper.cc:2909
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -4560,7 +4566,7 @@ msgstr ""
 "-d, --only-duplicates     僅移除重覆的鎖定。\n"
 "-e, --only-empty          僅移除未鎖定任何東西的鎖定。\n"
 
-#: src/Zypper.cc:2926
+#: src/Zypper.cc:2930
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -4578,7 +4584,7 @@ msgstr ""
 "  指令選項：\n"
 "-l, --label                 顯示作業系統標籤。\n"
 
-#: src/Zypper.cc:2947
+#: src/Zypper.cc:2951
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4594,7 +4600,7 @@ msgstr ""
 "  指令選項：\n"
 "-m, --match  將遺失版本號當成任何版本。\n"
 
-#: src/Zypper.cc:2966
+#: src/Zypper.cc:2970
 msgid ""
 "licenses\n"
 "\n"
@@ -4609,19 +4615,19 @@ msgstr ""
 "這個指令沒有其他的選項。\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2990
+#: src/Zypper.cc:2994
 msgid "ps [options]"
 msgstr "ps [選項]"
 
 #. translators: command description
-#: src/Zypper.cc:2993
+#: src/Zypper.cc:2997
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr "列出所用檔案及函式庫被最近升級刪除的執行中程序。"
 
 #. translators: -s, --short
-#: src/Zypper.cc:2997
+#: src/Zypper.cc:3001
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4631,7 +4637,7 @@ msgstr ""
 "程序。給定三次，則只列出相關的系統服務名稱。"
 
 #. translators: --print <format>
-#: src/Zypper.cc:2999
+#: src/Zypper.cc:3003
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4641,7 +4647,7 @@ msgstr ""
 "對每個相關系統服務列印 <格式> 至標準輸出，並緊接著輸出一個換行字元。任何在 <"
 "格式> 中的 '%s' 指令會被代換成系統服務名稱。"
 
-#: src/Zypper.cc:3018
+#: src/Zypper.cc:3022
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4681,7 +4687,7 @@ msgstr ""
 "--dry-run            不下載任何套件，\n"
 "                     只報告將要執行的操作。\n"
 
-#: src/Zypper.cc:3057
+#: src/Zypper.cc:3061
 msgid ""
 "source-download\n"
 "\n"
@@ -4709,7 +4715,7 @@ msgstr ""
 "--status             不要下載任何原始碼 rpm，只顯示那些遺失或\n"
 "                     不相關的 rpm。\n"
 
-#: src/Zypper.cc:3084
+#: src/Zypper.cc:3088
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4723,7 +4729,7 @@ msgstr ""
 "\n"
 "本指令沒有其他選項。\n"
 
-#: src/Zypper.cc:3101
+#: src/Zypper.cc:3105
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4738,7 +4744,7 @@ msgstr ""
 "本指令沒有選項。\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3119
+#: src/Zypper.cc:3123
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4749,7 +4755,7 @@ msgstr ""
 "列出可用的服務類型。\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3135
+#: src/Zypper.cc:3139
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4762,7 +4768,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3157
+#: src/Zypper.cc:3161
 msgid ""
 "mount\n"
 "\n"
@@ -4782,7 +4788,7 @@ msgstr ""
 "-n, --name <名稱>    使用給定的字串做為服務名稱。\n"
 "-r, --recurse        延伸到子目錄。\n"
 
-#: src/Zypper.cc:3185
+#: src/Zypper.cc:3189
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4795,7 +4801,7 @@ msgstr ""
 "搜尋符合給定搜尋字串的修補程式。這是 '%s' 的別名。\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3202
+#: src/Zypper.cc:3206
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4805,16 +4811,16 @@ msgstr ""
 "\n"
 "此指令是一個假動作，它只會回應 0。\n"
 
-#: src/Zypper.cc:3245 src/Zypper.cc:5303
+#: src/Zypper.cc:3249 src/Zypper.cc:5307
 msgid "Unexpected program flow."
 msgstr "非預期的程式流程。"
 
-#: src/Zypper.cc:3289
+#: src/Zypper.cc:3293
 msgid "Non-option program arguments: "
 msgstr "非選項程式引數︰ "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3348
+#: src/Zypper.cc:3352
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4824,20 +4830,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3371
+#: src/Zypper.cc:3375
 msgid "Root privileges are required for refreshing services."
 msgstr "需要有 Root 權限才能重新整理服務。"
 
-#: src/Zypper.cc:3395 src/Zypper.cc:3484 src/Zypper.cc:3701
+#: src/Zypper.cc:3399 src/Zypper.cc:3488 src/Zypper.cc:3705
 msgid "Root privileges are required for modifying system services."
 msgstr "需要有 Root 權限才能修改系統服務。"
 
-#: src/Zypper.cc:3468
+#: src/Zypper.cc:3472
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' 不是有效的服務類型。"
 
-#: src/Zypper.cc:3470
+#: src/Zypper.cc:3474
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "參閱 '%s' 或 '%s' 取得已知服務類型清單。"
@@ -4846,116 +4852,116 @@ msgstr "參閱 '%s' 或 '%s' 取得已知服務類型清單。"
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3495 src/Zypper.cc:3842
+#: src/Zypper.cc:3499 src/Zypper.cc:3846
 msgid "Alias or an aggregate option is required."
 msgstr "別名或聚集選項是必要的。"
 
-#: src/Zypper.cc:3527
+#: src/Zypper.cc:3531
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "服務 '%s' 找不到。"
 
-#: src/Zypper.cc:3554 src/Zypper.cc:3700 src/Zypper.cc:3779 src/Zypper.cc:3831
+#: src/Zypper.cc:3558 src/Zypper.cc:3704 src/Zypper.cc:3783 src/Zypper.cc:3835
 msgid "Root privileges are required for modifying system repositories."
 msgstr "需要有 Root 權限才能修改系統套件庫。"
 
-#: src/Zypper.cc:3609 src/Zypper.cc:3947
+#: src/Zypper.cc:3613 src/Zypper.cc:3951
 msgid "Too few arguments."
 msgstr "引數太少。"
 
-#: src/Zypper.cc:3632
+#: src/Zypper.cc:3636
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "如果只使用一個參數，它必須是一個指向 .repo 檔的位址。"
 
-#: src/Zypper.cc:3662
+#: src/Zypper.cc:3666
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "無法一起使用 %s 和 %s。 將使用 %s 設定。"
 
-#: src/Zypper.cc:3681
+#: src/Zypper.cc:3685
 msgid "Specified type is not a valid repository type:"
 msgstr "指定的類型不是有效的套件庫類型："
 
-#: src/Zypper.cc:3682
+#: src/Zypper.cc:3686
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "參閱 '%s' 或 '%s' 取得已知的套件庫類型清單。"
 
-#: src/Zypper.cc:3708 src/Zypper.cc:4905 src/utils/messages.cc:45
+#: src/Zypper.cc:3712 src/Zypper.cc:4909 src/utils/messages.cc:45
 msgid "Required argument missing."
 msgstr "缺少需要的參數。"
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:3733
+#: src/Zypper.cc:3737
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "無法由它的別名、編號或位址找到套件庫 '%s'。"
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:3755
+#: src/Zypper.cc:3759
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "無法由它的別名、編號或位址找到服務 '%s'。"
 
-#: src/Zypper.cc:3786
+#: src/Zypper.cc:3790
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "參數過少。至少要有位址和別名。"
 
-#: src/Zypper.cc:3810
+#: src/Zypper.cc:3814
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "找不到套件庫 '%s'。"
 
-#: src/Zypper.cc:3874
+#: src/Zypper.cc:3878
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "找不到套件庫 %s。"
 
-#: src/Zypper.cc:3891
+#: src/Zypper.cc:3895
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "需要有 Root 權限才能重新整理系統套件庫。"
 
-#: src/Zypper.cc:3897
+#: src/Zypper.cc:3901
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "全域選項 '%s' 在此無效。"
 
-#: src/Zypper.cc:3905
+#: src/Zypper.cc:3909
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "如果使用了 '%s'，則不允許使用參數。"
 
-#: src/Zypper.cc:3929
+#: src/Zypper.cc:3933
 msgid "Root privileges are required for cleaning local caches."
 msgstr "需要有 Root 權限才能清除本機快取。"
 
-#: src/Zypper.cc:3948
+#: src/Zypper.cc:3952
 msgid "At least one package name is required."
 msgstr "至少需要一個套件名稱。"
 
-#: src/Zypper.cc:3957
+#: src/Zypper.cc:3961
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "需要有 Root 權限才能安裝或移除套件。"
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:3969
+#: src/Zypper.cc:3973
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "將忽略參數，標示整個套件庫。"
 
-#: src/Zypper.cc:3980
+#: src/Zypper.cc:3984
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "不明的套件類型：%s"
 
-#: src/Zypper.cc:3990
+#: src/Zypper.cc:3994
 msgid "Cannot uninstall patches."
 msgstr "無法反安裝修補程式。"
 
-#: src/Zypper.cc:3991
+#: src/Zypper.cc:3995
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4965,34 +4971,34 @@ msgstr ""
 "從複製的檔案、資料庫記錄或類似項目來看，\n"
 "修補程式並未安裝。"
 
-#: src/Zypper.cc:4001
+#: src/Zypper.cc:4005
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "反安裝一個原始碼套件仍未定義且未完成。"
 
-#: src/Zypper.cc:4021
+#: src/Zypper.cc:4025
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' 看起來像是一個 RPM 檔。將嘗試去下載它。"
 
-#: src/Zypper.cc:4030
+#: src/Zypper.cc:4034
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "指定的 RPM 檔 '%s' 有問題，正在跳過。"
 
-#: src/Zypper.cc:4052
+#: src/Zypper.cc:4056
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "讀取 %s 的 RPM 檔頭出現問題。確認是一個 RPM 檔嗎？"
 
-#: src/Zypper.cc:4073
+#: src/Zypper.cc:4077
 msgid "Plain RPM files cache"
 msgstr "純 RPM 檔快取"
 
-#: src/Zypper.cc:4090
+#: src/Zypper.cc:4094
 msgid "No valid arguments specified."
 msgstr "沒有指定有效的引數。"
 
-#: src/Zypper.cc:4107 src/Zypper.cc:4238
+#: src/Zypper.cc:4111 src/Zypper.cc:4242
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -5000,68 +5006,68 @@ msgstr ""
 "警告：沒有已定義的套件庫。您只能使用已安裝的解決方案操作。無法安裝任何項目。"
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4144 src/Zypper.cc:4709
+#: src/Zypper.cc:4148 src/Zypper.cc:4713
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s 與 %s 衝突"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4152
+#: src/Zypper.cc:4156
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s 目前不能和 %s 一起用"
 
-#: src/Zypper.cc:4193
+#: src/Zypper.cc:4197
 msgid "Source package name is a required argument."
 msgstr "原始碼套件的名稱為必要的參數。"
 
-#: src/Zypper.cc:4277
+#: src/Zypper.cc:4281
 msgid "Mode is set to 'match-exact'"
 msgstr "模式已被設定為'完全符合'"
 
-#: src/Zypper.cc:4297 src/Zypper.cc:4628 src/Zypper.cc:4728 src/Zypper.cc:4938
-#: src/Zypper.cc:4989 src/Zypper.cc:5029
+#: src/Zypper.cc:4301 src/Zypper.cc:4632 src/Zypper.cc:4732 src/Zypper.cc:4942
+#: src/Zypper.cc:4993 src/Zypper.cc:5033
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "不明的套件類型：'%s'。"
 
 #. translators: empty search result message
-#: src/Zypper.cc:4443
+#: src/Zypper.cc:4447
 msgid "No matching items found."
 msgstr "找不到符合項目。"
 
-#: src/Zypper.cc:4478
+#: src/Zypper.cc:4482
 msgid "Problem occurred initializing or executing the search query"
 msgstr "初始化或執行搜尋查詢時出現問題"
 
-#: src/Zypper.cc:4479
+#: src/Zypper.cc:4483
 msgid "See the above message for a hint."
 msgstr "請檢視上面的訊息以獲得提示。"
 
-#: src/Zypper.cc:4560
+#: src/Zypper.cc:4564
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "當未指定 %2% 全域選項時，%1% 選項沒有作用。"
 
-#: src/Zypper.cc:4647 src/Zypper.cc:4695
+#: src/Zypper.cc:4651 src/Zypper.cc:4699
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "無法一起使用 %s 和 %s。"
 
-#: src/Zypper.cc:4676
+#: src/Zypper.cc:4680
 msgid "Root privileges are required for updating packages."
 msgstr "需要有 Root 權限才能更新套件。"
 
-#: src/Zypper.cc:4735 src/Zypper.cc:4743 src/Zypper.cc:4824
+#: src/Zypper.cc:4739 src/Zypper.cc:4747 src/Zypper.cc:4828
 msgid "Operation not supported."
 msgstr "不支援此操作。"
 
-#: src/Zypper.cc:4736
+#: src/Zypper.cc:4740
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "要更新已安裝的產品請用 '%s'。"
 
-#: src/Zypper.cc:4744
+#: src/Zypper.cc:4748
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -5070,16 +5076,16 @@ msgstr ""
 "Zypper 不會追蹤安裝的原始碼套件。若要安裝最新的原始碼套件及其建構相依項，請使"
 "用 '%s 1'。"
 
-#: src/Zypper.cc:4760
+#: src/Zypper.cc:4764
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr "當指定套件作為參數時無法使用多重格式。"
 
-#: src/Zypper.cc:4860
+#: src/Zypper.cc:4864
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "需要有 Root 權限才能進行發行版本升級。"
 
-#: src/Zypper.cc:4880
+#: src/Zypper.cc:4884
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -5089,64 +5095,64 @@ msgstr ""
 "您將要使用所有可用的套件庫進行發行版本升級。 在您繼續之前，請先確定這些套件庫"
 "的相容性。參閱 '%s' 得到更多關於此命令的資訊。"
 
-#: src/Zypper.cc:4908 src/utils/messages.cc:37 src/utils/messages.cc:47
+#: src/Zypper.cc:4912 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
 msgstr "使用"
 
-#: src/Zypper.cc:4968 src/Zypper.cc:5009
+#: src/Zypper.cc:4972 src/Zypper.cc:5013
 msgid "Root privileges are required for adding of package locks."
 msgstr "加入套件鎖定需要 root 權限。"
 
-#: src/Zypper.cc:5090
+#: src/Zypper.cc:5094
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "移除 %lu 鎖定。"
 
-#: src/Zypper.cc:5101
+#: src/Zypper.cc:5105
 msgid "XML output not implemented for this command."
 msgstr "該命令未實作 XML 輸出。"
 
-#: src/Zypper.cc:5114
+#: src/Zypper.cc:5118
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "發行版本標籤：%s"
 
-#: src/Zypper.cc:5115
+#: src/Zypper.cc:5119
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "簡短標籤：%s"
 
-#: src/Zypper.cc:5156
+#: src/Zypper.cc:5160
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s 符合 %s"
 
-#: src/Zypper.cc:5158
+#: src/Zypper.cc:5162
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s 比 %s 還新"
 
-#: src/Zypper.cc:5160
+#: src/Zypper.cc:5164
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s 比 %s 還舊"
 
-#: src/Zypper.cc:5238 src/source-download.cc:217
+#: src/Zypper.cc:5242 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "權限不足以使用下載目錄 '%s'。"
 
-#: src/Zypper.cc:5290
+#: src/Zypper.cc:5294
 msgid "This command only makes sense in the zypper shell."
 msgstr "這個指令只在 zypper shell 中有意義。"
 
-#: src/Zypper.cc:5300
+#: src/Zypper.cc:5304
 msgid "You already are running zypper's shell."
 msgstr "您已經在執行 zypper shell。"
 
-#: src/Zypper.cc:5364
+#: src/Zypper.cc:5368
 msgid "Resolvable Type"
 msgstr "解決方案類型"
 
