@@ -20,15 +20,16 @@ msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-21 15:07+0100\n"
-"PO-Revision-Date: 2014-09-28 11:11+0300\n"
-"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
-"Language-Team: American English <kde-i18n-doc@kde.org>\n"
-"Language: en_US\n"
+"PO-Revision-Date: 2017-07-10 15:05+0000\n"
+"Last-Translator: Jyri Palokangas <jmp@opensuse.org>\n"
+"Language-Team: Finnish "
+"<https://l10n.opensuse.org/projects/libzypp/master/fi/>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -221,7 +222,7 @@ msgstr "Muunnettiin paketin %s asetustiedostoja:"
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
-"rpm tallensi tiedoston %s niemellä %s. Erojen selvittäminen ei onnistunut."
+"rpm tallensi tiedoston %s nimellä %s. Erojen selvittäminen ei onnistunut"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2026
@@ -237,7 +238,7 @@ msgstr ""
 #: zypp/target/rpm/RpmDb.cc:2029
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr "rpm loi tiedoston %s nimellä %s. Erojen selvittäminen ei onnistunut."
+msgstr "rpm loi tiedoston %s nimellä %s, erojen selvittäminen ei onnistunut"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2031
@@ -269,7 +270,7 @@ msgstr "Allekirjoitustiedostoa %s ei löydetty"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2367
 msgid "Unknown type of signature"
-msgstr ""
+msgstr "Tuntematon allekirjoituksen tyyppi"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2369
@@ -286,12 +287,12 @@ msgstr "Allekirjoitustiedostoa %s ei löydetty"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2373
 msgid "Signatures public key is not available"
-msgstr ""
+msgstr "Allekirjoituksen julkinen avain ei ole saatavilla"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2375
 msgid "File does not exist or signature can't be checked"
-msgstr ""
+msgstr "Tiedostoa ei ole tai allekirjoitusta ei voi tarkistaa"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
@@ -300,7 +301,7 @@ msgstr "Tehdään seuraavat toiminnot:"
 #: zypp/RepoManager.cc:299
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr ""
+msgstr "repo hakemiston lukeminen ei onnistu '%1%': Pääsy estetty"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:307 zypp/RepoManager.cc:769 zypp/RepoManager.cc:1528
@@ -312,7 +313,7 @@ msgstr "Hakemiston \"%s\" lukeminen ei onnistu"
 #: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr ""
+msgstr "repo-tiedostoa '%1%' ei voitu lukea: Pääsy estetty"
 
 #: zypp/RepoManager.cc:340
 msgid "Repository alias cannot start with dot."
@@ -651,7 +652,7 @@ msgstr "Tuen saamiseksi edellytetään erillinen asiakassopimus."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "Tuntematon tukivaihtoehto. Kuvausta ei ole saatavilla."
+msgstr "Tuntematon tukivaihtoehto. Kuvausta ei ole saatavilla"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -2106,7 +2107,7 @@ msgstr "englanti, muinais- (noin 450 - 1100)"
 #. language code: apa
 #: zypp/LanguageCode.cc:199
 msgid "Apache Languages"
-msgstr "apaššikielet "
+msgstr "apaššikielet"
 
 #. language code: ara ar
 #: zypp/LanguageCode.cc:201
@@ -4610,7 +4611,7 @@ msgstr "poistetut tarjoajat: "
 #: zypp/solver/detail/SATResolver.cc:1141
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
-msgstr ""
+msgstr "poista lukitus salliaksesi %s poiston"
 
 #: zypp/solver/detail/SATResolver.cc:1146
 #: zypp/solver/detail/SATResolver.cc:1182
