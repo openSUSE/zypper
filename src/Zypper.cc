@@ -138,14 +138,18 @@ void Zypper::assertZYppPtrGod()
     // check for packagekit (bnc #580513)
     if ( excpt_r.lockerName().find( "packagekitd" ) != std::string::npos )
     {
-      // ask user wheter to tell it to quit
-      out().info(_(
+      // ask user whether to tell it to quit
+      mbs_write_wrapped( Out::Info(out()) << "", _(
 	"PackageKit is blocking zypper. This happens if you have an"
 	" updater applet or other software management application using"
 	" PackageKit running."
-      ));
+      ), 0, out().defaultFormatWidth( 100 ) );
 
-      bool reply = read_bool_answer( PROMPT_PACKAGEKIT_QUIT, _("Tell PackageKit to quit?"), false );
+      mbs_write_wrapped( Out::Info(out()) << "", _(
+	"We can ask PackageKit to interrupt the current action as soon as possible, but it depends on PackageKit how fast it will respond to this request."
+      ), 0, out().defaultFormatWidth( 100 ) );
+
+      bool reply = read_bool_answer( PROMPT_PACKAGEKIT_QUIT, _("Ask PackageKit to quit?"), false );
 
       // tell it to quit
       while ( reply && still_locked )
