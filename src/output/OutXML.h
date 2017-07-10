@@ -35,7 +35,7 @@ public:
                              long rate = -1);
   virtual void dwnldProgressEnd(const Url & uri,
                                 long rate = -1,
-                                bool error = false);
+                                TriBool error = false);
 
   virtual void searchResult( const Table & table_r );
 

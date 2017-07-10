@@ -88,7 +88,7 @@ void OutXML::writeProgressTag( const std::string & id, const std::string & label
   cout << " id=\"" << xml::escape(id) << "\"";
   cout << " name=\"" << xml::escape(label) << "\"";
   if ( done )
-    cout << " done=\"" << error << "\"";
+    cout << " done=\"" << !error << "\"";
   // print value only if it is known (percentage progress)
   // missing value means 'is-alive' notification
   else if ( value >= 0 )
@@ -139,12 +139,12 @@ void OutXML::dwnldProgress( const Url & uri, int value, long rate )
     << "/>" << endl;
 }
 
-void OutXML::dwnldProgressEnd( const Url & uri, long rate, bool error )
+void OutXML::dwnldProgressEnd( const Url & uri, long rate, TriBool error )
 {
   cout << "<download"
     << " url=\"" << xml::escape(uri.asString()) << "\""
     << " rate=\"" << rate << "\""
-    << " done=\"" << error << "\""
+    << " done=\"" << bool(!error) << "\""
     << "/>" << endl;
 }
 

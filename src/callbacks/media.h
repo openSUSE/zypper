@@ -149,7 +149,7 @@ namespace ZmartRecipients
         return;
 
       Zypper::instance()->out().dwnldProgressEnd(
-          uri, _last_drate_avg, error != NO_ERROR);
+          uri, _last_drate_avg, ( error == NOT_FOUND ? indeterminate : TriBool(error != NO_ERROR) ) );
     }
 
   private:
