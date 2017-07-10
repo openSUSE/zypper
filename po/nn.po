@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-07-09 12:48+0100\n"
+"PO-Revision-Date: 2017-07-10 12:36+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: NorwegianNynorsk <i18n-nn@lister.ping.uio.no>\n"
 "Language: nn\n"
@@ -1557,8 +1557,8 @@ msgstr "Køyr «%1%» for ei fullstendig oversikt over låste element."
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "Denne programfiksen krev omstart av systemet:"
-msgstr[1] "Desse %d programfiksane krev omstart av systemet:"
+msgstr[0] "Denne programfiksen krev omstart av maskina:"
+msgstr[1] "Desse %d programfiksane krev omstart av maskina:"
 
 # Bevisst bruk av punktum i staden for mellomrom på slutten.
 #: src/Summary.cc:1230
@@ -1702,7 +1702,7 @@ msgstr ""
 
 #: src/Summary.cc:1437
 msgid "System reboot required."
-msgstr "Krev systemomstart."
+msgstr "Krev omstart av maskina."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
@@ -2426,6 +2426,8 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
+"Kan ikkje endra alias til pakkebrønnen «%s». Pakkebrønnen høyrer til tenesta "
+"«%s», som vert brukt til å definera aliaset."
 
 #: src/repos.cc:1991
 #, c-format, boost-format
@@ -2444,7 +2446,7 @@ msgstr "Gjer ingen endringar på pakkebrønnen «%s»."
 #: src/repos.cc:2138
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "Prioriteten til pakkebrønnen «%s» vart ikkje endra (er %d)"
+msgstr "Prioriteten til pakkebrønnen «%s» vart ikkje endra (er %d)."
 
 #: src/repos.cc:2176
 #, c-format, boost-format
@@ -2459,186 +2461,188 @@ msgstr "Pakkebrønnen «%s» er no deaktivert."
 #: src/repos.cc:2185
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr ""
+msgstr "Automatisk oppdatering er slått på for pakkebrønnen «%s»."
 
 #: src/repos.cc:2187
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr ""
+msgstr "Automatisk oppdatering er slått av for pakkebrønnen «%s»."
 
 #: src/repos.cc:2194
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr ""
+msgstr "Mellomlagring av RPM-filer er slått på for pakkebrønnen «%s»."
 
 #: src/repos.cc:2196
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr ""
+msgstr "Mellomlagring av RPM-filer er slått av for pakkebrønnen «%s»."
 
 #: src/repos.cc:2203
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
-msgstr ""
+msgstr "GPG-kontroll er slått på for pakkebrønnen «%s»."
 
 #: src/repos.cc:2205
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
-msgstr ""
+msgstr "GPG-kontroll er slått av for pakkebrønnen «%s»."
 
 #: src/repos.cc:2211
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr ""
+msgstr "Prioriteten til pakkebrønnen «%s» er sett til %d."
 
 #: src/repos.cc:2217
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr ""
+msgstr "Namnet på pakkebrønnen «%s» er sett til «%s»."
 
 #: src/repos.cc:2228
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
-msgstr ""
+msgstr "Ingen endringar var nødvendige for pakkebrønnen «%s»."
 
 #: src/repos.cc:2235
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
-msgstr ""
+msgstr "Gjer ingen endringar på pakkebrønnen «%s»."
 
 #: src/repos.cc:2267
 msgid "Error reading services:"
-msgstr ""
+msgstr "Feil ved lesing av tenester:"
 
 #: src/repos.cc:2356
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr ""
+msgstr "Fann ikkje tenesta «%s» etter alias, tal eller nettadresse."
 
 #: src/repos.cc:2359
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
-msgstr ""
+msgstr "Bruk «%s» for å henta oversikt over definerte tenester."
 
 #: src/repos.cc:2601
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
+"Ingen tenester er definerte. Bruk kommandoen «%s» for å leggja til éi eller "
+"fleire tenester."
 
 #: src/repos.cc:2684
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr ""
+msgstr "Det finst alt ei teneste med aliaset «%s». Vel eit anna alias."
 
 #: src/repos.cc:2691
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
-msgstr ""
+msgstr "Det oppstod ein feil ved forsøk på å leggja til tenesta «%s»."
 
 #: src/repos.cc:2697
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
-msgstr ""
+msgstr "Tenesta «%s» er no lagd til."
 
 #: src/repos.cc:2735
 #, c-format, boost-format
 msgid "Removing service '%s':"
-msgstr ""
+msgstr "Fjernar tenesta «%s»:"
 
 #: src/repos.cc:2738
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
-msgstr ""
+msgstr "Tenesta «%s» er no fjerna."
 
 #: src/repos.cc:2752
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
-msgstr ""
+msgstr "Oppdaterer tenesta «%s»."
 
 #: src/repos.cc:2767 src/repos.cc:2777
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr ""
+msgstr "Feil ved henting indeksfil for pakkebrønn for tenesta «%s»:"
 
 #: src/repos.cc:2769 src/repos.cc:2877 src/repos.cc:2935
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
-msgstr ""
+msgstr "Hoppar over tenesta «%s» på grunn av feilen ovanfor."
 
 #: src/repos.cc:2779
 msgid "Check if the URI is valid and accessible."
-msgstr ""
+msgstr "Kontroller at adressa er gyldig og fungerer."
 
 #: src/repos.cc:2836
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr ""
+msgstr "Hoppar over den deaktiverte tenesta «%s»"
 
 #: src/repos.cc:2888
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
+"Bruk kommandoane «%s» eller «%s» for å leggja til eller aktivera tenester."
 
 #: src/repos.cc:2891
 msgid "Specified services are not enabled or defined."
-msgstr ""
+msgstr "Dei valde tenestene er ikkje aktiverte eller er udefinerte."
 
 #: src/repos.cc:2893
 msgid "There are no enabled services defined."
-msgstr ""
+msgstr "Det finst ikkje nokon aktiverte tenester definert."
 
 #: src/repos.cc:2897
 msgid "Could not refresh the services because of errors."
-msgstr ""
+msgstr "Klarte ikkje oppdatera tenestene, på grunn av feil."
 
 #: src/repos.cc:2903
 msgid "Some of the services have not been refreshed because of an error."
-msgstr ""
+msgstr "På grunn av feil vart nokre av tenestene ikkje oppdaterte."
 
 #: src/repos.cc:2908
 msgid "Specified services have been refreshed."
-msgstr ""
+msgstr "Dei valde tenestene er no oppdaterte."
 
 #: src/repos.cc:2910
 msgid "All services have been refreshed."
-msgstr ""
+msgstr "Alle tenestene vart oppdaterte."
 
 #: src/repos.cc:3057
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' has been successfully enabled."
-msgstr "Fann ikkje tenesta «%s»."
+msgstr "Tenesta «%s» er no aktivert."
 
 #: src/repos.cc:3059
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
-msgstr ""
+msgstr "Tenesta «%s» er no deaktivert."
 
 #: src/repos.cc:3065
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr ""
+msgstr "Automatisk oppdatering er slått på for tenesta «%s»."
 
 #: src/repos.cc:3067
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr ""
+msgstr "Automatisk oppdatering er slått av for tenesta «%s»."
 
 #: src/repos.cc:3072
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr ""
+msgstr "Namnet på tenesta «%s» er sett til «%s»."
 
 #: src/repos.cc:3077
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
 msgstr[0] ""
-"Bruk kommandoane «%s» eller «%s» for å leggja til eller aktivera "
-"pakkebrønnar."
+"Pakkebrønnen «%s» er no lagd til dei aktiverte pakkebrønnane for tenesta «%s»"
 msgstr[1] ""
-"Bruk kommandoane «%s» eller «%s» for å leggja til eller aktivera "
-"pakkebrønnar."
+"Pakkebrønnane «%s» er no lagde til dei aktiverte pakkebrønnane for tenesta "
+"«%s»"
 
 #: src/repos.cc:3084
 #, c-format, boost-format
@@ -2646,7 +2650,11 @@ msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] ""
+"Pakkebrønnen «%s» er no lagd til dei deaktiverte pakkebrønnane for tenesta "
+"«%s»"
 msgstr[1] ""
+"Pakkebrønnen «%s» er no lagd til dei deaktiverte pakkebrønnane for tenesta "
+"«%s»"
 
 #: src/repos.cc:3091
 #, c-format, boost-format
@@ -2655,7 +2663,11 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] ""
+"Pakkebrønnen «%s» er no fjerna frå dei aktiverte pakkebrønnane for tenesta "
+"«%s»"
 msgstr[1] ""
+"Pakkebrønnane «%s» er no fjerna frå dei aktiverte pakkebrønnane for tenesta "
+"«%s»"
 
 #: src/repos.cc:3098
 #, c-format, boost-format
@@ -2665,21 +2677,25 @@ msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
 msgstr[0] ""
+"Pakkebrønnen «%s» er no fjerna frå dei deaktiverte pakkebrønnane for tenesta "
+"«%s»"
 msgstr[1] ""
+"Pakkebrønnane «%s» er no fjerna frå dei deaktiverte pakkebrønnane for "
+"tenesta «%s»"
 
 #: src/repos.cc:3107
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
-msgstr ""
+msgstr "Ingen endringar var nødvendige for tenesta «%s»."
 
 #: src/repos.cc:3113
 msgid "Error while modifying the service:"
-msgstr ""
+msgstr "Feil ved endring av tenesta:"
 
 #: src/repos.cc:3114
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
-msgstr ""
+msgstr "Gjer ingen endringar på tenesta «%s»."
 
 #: src/repos.cc:3219
 msgid "Loading repository data..."
@@ -2693,7 +2709,7 @@ msgstr "Hentar data for pakkebrønnen «%s» …"
 #: src/repos.cc:3245
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr ""
+msgstr "Pakkebrønnen «%s» finst ikkje i mellomlageret. Gjer klar mellomlager …"
 
 #: src/repos.cc:3251 src/repos.cc:3285
 #, c-format, boost-format
@@ -2703,12 +2719,12 @@ msgstr "Feil ved lasting av data frå «%s»"
 #: src/repos.cc:3255
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr ""
+msgstr "Klarte ikkje oppdatera pakkebrønnen «%s». Brukar gammalt mellomlager."
 
 #: src/repos.cc:3259 src/repos.cc:3288
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr ""
+msgstr "På grunn av feil vart ikkje element frå «%s» lasta."
 
 #: src/repos.cc:3276
 #, c-format, boost-format
@@ -2716,21 +2732,22 @@ msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
 msgstr ""
+"Pakkebrønnen «%s» ser ut til å vera utdatert. Vurder å bruka ein annan tenar "
+"som kjelde for pakkebrønnen."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:3287
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr ""
+msgstr "Prøv «%s», eventuelt òg «%s», før du gjer dette."
 
 #: src/repos.cc:3298
 msgid "Reading installed packages..."
 msgstr "Les installerte pakkar …"
 
 #: src/repos.cc:3307
-#, fuzzy
 msgid "Problem occurred while reading the installed packages:"
-msgstr "Les installerte pakkar …"
+msgstr "Feil ved lesing av installerte pakkar:"
 
 #: src/update.cc:84
 #, c-format, boost-format
@@ -2738,76 +2755,77 @@ msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr ""
+"Ignorerer %s utan argument, sidan liknande val med argument òg er definert."
 
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:280
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vurderer %1% av %2% aktuelle programfiksar:"
+msgstr[1] "Vurderer %1% av %2% aktuelle programfiksar:"
 
 #. translator: stats table header
 #: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fann %1% aktuell programfiks:"
+msgstr[1] "Fann %1% aktuelle programfiksar:"
 
 #. translator: stats summary
 #: src/update.cc:294
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "ikkje nødvendig"
-msgstr[1] "ikkje nødvendig"
+msgstr[0] "%d låst programfiks"
+msgstr[1] "%d låste programfiksar"
 
 #. translator: stats summary
 #: src/update.cc:302
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "ikkje nødvendig"
-msgstr[1] "ikkje nødvendig"
+msgstr[0] "%d valfri programfiks"
+msgstr[1] "%d valfrie programfiksar"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "bruk «%1%» for å ta med valfrie programfiksar"
 
 #. translator: stats summary
 #: src/update.cc:315
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] "ikkje nødvendig"
-msgstr[1] "ikkje nødvendig"
+msgstr[0] "%d nødvendig programfiks"
+msgstr[1] "%d nødvendige programfiksar"
 
 #. translator: stats summary
 #: src/update.cc:318
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d tryggleiksoppdatering"
+msgstr[1] "%d tryggleiksoppdateringar"
 
 #. translator: Table column header.
 #: src/update.cc:352
 msgid "Updatestack"
-msgstr ""
+msgstr "Oppdateringsstabel"
 
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:716
 msgid "Patches"
-msgstr ""
+msgstr "Programfiksar"
 
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "Låst"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -2816,7 +2834,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "Brukte kategoriar"
 
 #: src/update.cc:603
 msgid "The following software management updates will be installed first:"
@@ -2824,9 +2842,8 @@ msgstr "Desse programhandsamingsoppdateringane vert installerte først:"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:606
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "Desse programhandsamingsoppdateringane vert installerte først:"
+msgstr "Nødvendige programhandsamingsoppdateringar vert installerte først:"
 
 #: src/update.cc:614 src/update.cc:854
 msgid "No updates found."
@@ -2859,31 +2876,37 @@ msgstr "Tilgjengelege versjon"
 
 #: src/update.cc:969
 msgid "No matching issues found."
-msgstr ""
+msgstr "Fann ikkje nokon samsvarande feilrapportar."
 
 #: src/update.cc:977
 msgid "The following matches in issue numbers have been found:"
-msgstr ""
+msgstr "Fann treff i følgjande feilrapport-ID-ar:"
 
 #: src/update.cc:987
 msgid "Matches in patch descriptions of the following patches have been found:"
-msgstr ""
+msgstr "Fann treff i programfiksskildringar til desse programfiksane:"
 
 #: src/update.cc:1054
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
+"Programfiks for Bugzilla-feilrapport-ID %s vart ikkje funnen eller er ikkje "
+"nødvendig."
 
 #: src/update.cc:1056
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
+"Programfiks for CVE-feilrapport-ID %s vart ikkje funnen eller er ikkje "
+"nødvendig."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
 #: src/update.cc:1059
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
+"Programfiks for %s i feilrapport-ID %s vart ikkje funnen eller er ikkje "
+"nødvendig."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -2893,81 +2916,90 @@ msgstr "Greitt! Avsluttar med ein gong …"
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:38
 msgid "Trying to exit gracefully..."
-msgstr ""
+msgstr "Prøver å avslutta normalt …"
 
 #: src/Zypper.cc:86
 msgid "Create a solver test case for debugging."
-msgstr ""
+msgstr "Lagar testkasus for avhengnadsløysing, til feilsøking."
 
 #: src/Zypper.cc:87
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr ""
+"Tving avhengnadsløysaren til å finna ei løysing (sjølv ei aggressiv ei) i "
+"staden for å spørja."
 
 #: src/Zypper.cc:88
 msgid "Do not force the solver to find solution, let it ask."
 msgstr ""
+"Ikkje tving avhengnadsløysaren til å finna ei løysing, men heller spørja."
 
 #: src/Zypper.cc:97
 msgid "Install also recommended packages in addition to the required ones."
-msgstr ""
+msgstr "Installer anbefalte pakkar i tillegg til nødvendige pakkar."
 
 #: src/Zypper.cc:98
 msgid "Do not install recommended packages, only required ones."
-msgstr ""
+msgstr "Ikkje installer anbefalte pakkar, berre nødvendige pakkar."
 
 #: src/Zypper.cc:108
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"Om aktuelle men valfrie programfiksar skal handterast som nødvendige eller "
+"ekskluderast."
 
 #: src/Zypper.cc:111
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Standard er å ekskludera valfrie programfiksar."
 
 #: src/Zypper.cc:112
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Standard er å ta med valfrie programfiksar."
 
 #: src/Zypper.cc:135
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
+"PackageKit blokkerer zypper. Dette skjer viss du har eit skjermelement for "
+"programoppdateringar eller køyrer eit anna program for pakkehandsaming som "
+"brukar PackageKit."
 
 #: src/Zypper.cc:140
 msgid "Tell PackageKit to quit?"
-msgstr ""
+msgstr "Vil du be PackageKit å avslutta?"
 
 #: src/Zypper.cc:149
 msgid "PackageKit is still running (probably busy)."
-msgstr ""
+msgstr "PackageKit køyrer framleis (er truleg oppteken)."
 
 #: src/Zypper.cc:150
 msgid "Try again?"
-msgstr ""
+msgstr "Vil du prøva på nytt?"
 
 #: src/Zypper.cc:224
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
+"Brukte det utdaterte kommandolinjevalet %1%. Bruk heller det globale valet "
+"%2%."
 
 #: src/Zypper.cc:225
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
-msgstr ""
+msgstr "Brukte det utdaterte kommandolinjevalet %1%. Bruk heller %2%."
 
 #: src/Zypper.cc:304
 msgid "Command options:"
 msgstr "Kommandolinjeval:"
 
 #: src/Zypper.cc:307
-#, fuzzy
 msgid "Solver options:"
-msgstr "Ekspertval:"
+msgstr "Val for avhengnadsløysar:"
 
 #: src/Zypper.cc:310
 msgid "Expert options:"
@@ -2975,7 +3007,7 @@ msgstr "Ekspertval:"
 
 #: src/Zypper.cc:313
 msgid "This command has no additional options."
-msgstr ""
+msgstr "Denne kommandoen har ikkje fleire val."
 
 #: src/Zypper.cc:446 src/Zypper.cc:1407
 msgid "Unexpected exception."
@@ -3145,6 +3177,9 @@ msgid ""
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
 "\tzypper <subcommand> [--command-options] [arguments]\n"
 msgstr ""
+"  Bruk:\n"
+"\tzypper [--globale-val] <kommando> [--val-for-kommando] [argument]\n"
+"\tzypper <underkommando> [--val-for-kommando] [argument]\n"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -3162,6 +3197,9 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"Viss «%1%» ikkje er ein skrivefeil, er det truleg ikkje ein innebygd "
+"kommando, men er tilgjengeleg som ein underkommando eller eit tillegg (sjå "
+"«%2%»)."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -3171,6 +3209,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"I så fall må du installera ein eigen pakke som gjev støtte for "
+"underkommandoen. Desse pakkane har ofte namn som «%1%» eller «%2%»."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -3198,15 +3238,15 @@ msgstr "Bruk eit heiltal mellom %d og %d"
 #: src/Zypper.cc:957
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
-msgstr ""
+msgstr "Underkommandoen %1% støttar ikkje globale zypper-val."
 
 #: src/Zypper.cc:978
 msgid "Enforced setting"
-msgstr ""
+msgstr "Tvinga innstilling"
 
 #: src/Zypper.cc:988
 msgid "User data string must not contain nonprintable or newline characters!"
-msgstr ""
+msgstr "Brukardatateksten kan ikkje innehelda usynlege teikn eller linjeskift."
 
 #: src/Zypper.cc:1012 src/Zypper.cc:3259
 msgid "Entering non-interactive mode."
@@ -3217,68 +3257,77 @@ msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
+"Programfiksar med flagget «rebootSuggested» vert ikkje handsama som "
+"interaktive."
 
 #: src/Zypper.cc:1026
 msgid "Entering 'no-gpg-checks' mode."
-msgstr ""
+msgstr "Går over til «no-gpg-checks»-modus."
 
 #: src/Zypper.cc:1034
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
+"Slår på «%s». Nye signeringsnøklar for pakkebrønnar vert automatisk "
+"importerte."
 
 #: src/Zypper.cc:1047
 msgid "The path specified in the --root option must be absolute."
-msgstr ""
+msgstr "Adressa i valet «--root» må vera absolutt."
 
 #: src/Zypper.cc:1063
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
+"Den symbolske lenkja «/etc/products.d/baseproduct» manglar eller peikar "
+"ikkje ikkje til ei reell fil.\n"
+"Lenkja må peika til .prod-fila til kjerneproduktet ditt i «/etc/products.d»."
+"\n"
 
 #: src/Zypper.cc:1103
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
+"Pakkebrønnar er deaktiverte. Brukar berre databasen med installerte pakkar."
 
 #: src/Zypper.cc:1115
 msgid "Autorefresh disabled."
-msgstr ""
+msgstr "Autooppdatering er slått av."
 
 #: src/Zypper.cc:1122
 msgid "CD/DVD repositories disabled."
-msgstr ""
+msgstr "CD- og DVD-pakkebrønnar er deaktiverte."
 
 #: src/Zypper.cc:1129
 msgid "Remote repositories disabled."
-msgstr ""
+msgstr "Eksterne pakkebrønnar er deaktiverte."
 
 #: src/Zypper.cc:1136
 msgid "Ignoring installed resolvables."
-msgstr ""
+msgstr "Hoppar over installerte element."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
 #: src/Zypper.cc:1163 src/Zypper.cc:1213
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
-msgstr ""
+msgstr "Valet %s har ikkje nokon effekt her og vert ignorert."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1296
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "Zypper-skalet støttar ikkje køyring av underkommandoar."
 
 #: src/Zypper.cc:1375
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
-msgstr ""
+msgstr "Kommandoen «%s» er no erstatta av «%s»."
 
 #: src/Zypper.cc:1376
 #, c-format, boost-format
 msgid "See '%s' for all available options."
-msgstr "Sjå «%s» for oversikt over all tilgjengelege val."
+msgstr "Sjå «%s» for oversikt over alle tilgjengelege val."
 
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
@@ -3331,6 +3380,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Ikkje krev brukarinteraksjon. Alias for det globale valet «--non-"
+"interactive»."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -4560,8 +4611,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fjerna %lu lås."
+msgstr[1] "Fjerna %lu låsar."
 
 #: src/Zypper.cc:5095
 msgid "XML output not implemented for this command."
@@ -4570,27 +4621,27 @@ msgstr ""
 #: src/Zypper.cc:5108
 #, c-format, boost-format
 msgid "Distribution Label: %s"
-msgstr ""
+msgstr "Distribusjonsmerkelapp: %s"
 
 #: src/Zypper.cc:5109
 #, c-format, boost-format
 msgid "Short Label: %s"
-msgstr ""
+msgstr "Kort merkelapp: %s"
 
 #: src/Zypper.cc:5150
 #, c-format, boost-format
 msgid "%s matches %s"
-msgstr ""
+msgstr "%s samsvarer med %s"
 
 #: src/Zypper.cc:5152
 #, c-format, boost-format
 msgid "%s is newer than %s"
-msgstr ""
+msgstr "%s er nyare enn %s"
 
 #: src/Zypper.cc:5154
 #, c-format, boost-format
 msgid "%s is older than %s"
-msgstr ""
+msgstr "%s er eldre enn %s"
 
 #: src/Zypper.cc:5232 src/source-download.cc:217
 #, c-format, boost-format
@@ -4599,40 +4650,41 @@ msgstr ""
 
 #: src/Zypper.cc:5284
 msgid "This command only makes sense in the zypper shell."
-msgstr ""
+msgstr "Denne kommandoen fungerer berre i eit zypper-skal."
 
 #: src/Zypper.cc:5294
 msgid "You already are running zypper's shell."
-msgstr ""
+msgstr "Du køyrer alt eit zypper-skal."
 
 #: src/Zypper.cc:5358
 msgid "Resolvable Type"
-msgstr ""
+msgstr "Løysbar type"
 
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:40
 msgid "Problem: "
-msgstr ""
+msgstr "Problem: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:52
 #, c-format, boost-format
 msgid " Solution %d: "
-msgstr ""
+msgstr " Løysing %d: "
 
 #: src/solve-commit.cc:71
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] ""
+msgstr[0] "Vel løysinga ovanfor med «%1», eller hopp over, gjenta eller avbryt"
 msgstr[1] ""
+"Vel frå løysingane ovanfor med tal, eller hopp over, gjenta eller avbryt"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:78
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vel løysinga ovanfor med «1» eller avbryt med «a»"
+msgstr[1] "Vel frå løysingane ovanfor med «1» eller avbryt med «a»"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -4642,7 +4694,7 @@ msgstr[1] ""
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:97
 msgid "s/r/c"
-msgstr ""
+msgstr "h/g/a"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -4653,20 +4705,20 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: src/solve-commit.cc:109
 msgid "c"
-msgstr ""
+msgstr "a"
 
 #. continue with next problem
 #: src/solve-commit.cc:130
 #, c-format, boost-format
 msgid "Applying solution %s"
-msgstr ""
+msgstr "Brukar løysinga %s"
 
 #: src/solve-commit.cc:146
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d problem:"
+msgstr[1] "%d problem:"
 
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
@@ -4676,11 +4728,11 @@ msgstr ""
 #: src/solve-commit.cc:160
 #, c-format, boost-format
 msgid "Problem: %s"
-msgstr ""
+msgstr "Problem: %s"
 
 #: src/solve-commit.cc:179
 msgid "Resolving dependencies..."
-msgstr ""
+msgstr "Løyser opp i avhengnadar …"
 
 #. translators: meaning --force-resolution and --no-force-resolution
 #: src/solve-commit.cc:220
@@ -4690,11 +4742,11 @@ msgstr "%s er i konflikt med %s – vil bruka den mindre aggressive %s"
 
 #: src/solve-commit.cc:248
 msgid "Force resolution:"
-msgstr ""
+msgstr "Tving løysing:"
 
 #: src/solve-commit.cc:334
 msgid "Verifying dependencies..."
-msgstr ""
+msgstr "Kontrollerer avhengnadar …"
 
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:382
@@ -4703,16 +4755,16 @@ msgstr "Bereknar oppgradering …"
 
 #: src/solve-commit.cc:396
 msgid "Generating solver test case..."
-msgstr ""
+msgstr "Lagar testkasus for avhengnadsløysar …"
 
 #: src/solve-commit.cc:398
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr ""
+msgstr "Lagra testkasus for avhengnadsløysar i %s."
 
 #: src/solve-commit.cc:401
 msgid "Error creating the solver test case."
-msgstr ""
+msgstr "Feil ved laging av testkasus for avhengnadsløysar."
 
 #: src/solve-commit.cc:435
 #, c-format, boost-format
@@ -4724,15 +4776,15 @@ msgstr ""
 #. Here: Table output
 #: src/solve-commit.cc:440 src/ps.cc:104
 msgid "Checking for running processes using deleted libraries..."
-msgstr ""
+msgstr "Ser etter prosessar som køyrer og brukar sletta bibliotekfiler …"
 
 #: src/solve-commit.cc:451 src/ps.cc:59
 msgid "Check failed:"
-msgstr ""
+msgstr "Feil ved kontroll:"
 
 #: src/solve-commit.cc:453
 msgid "Skip check:"
-msgstr ""
+msgstr "Hopp over kontroll:"
 
 #: src/solve-commit.cc:461
 #, c-format, boost-format
@@ -4747,7 +4799,7 @@ msgstr ""
 
 #: src/solve-commit.cc:472
 msgid "Update notifications were received from the following packages:"
-msgstr ""
+msgstr "Fekk oppdateringsmeldingar frå desse pakkane:"
 
 #: src/solve-commit.cc:481
 #, c-format, boost-format
@@ -4801,7 +4853,7 @@ msgstr "j/n/p/v/a/b/l/i/e"
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
-"Ja, godkjenn samandraget og hald fram med installering/fjering av pakkar."
+"Ja, godkjenn samandraget og hald fram med installering/fjerning av pakkar."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: src/solve-commit.cc:654
@@ -4831,12 +4883,12 @@ msgstr "Vis/gøym pakkearkitektur."
 #: src/solve-commit.cc:662
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
-msgstr "Vis/gøm informasjon om kva pakkebrønnar pakkane vert installerte frå."
+msgstr "Vis/gøym informasjon om kva pakkebrønnar pakkane vert installerte frå."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:664
 msgid "Toggle display of package vendor names."
-msgstr "Vis/gøm leverandørnamn for pakkar."
+msgstr "Vis/gøym leverandørnamn for pakkar."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:666
@@ -4850,7 +4902,7 @@ msgstr "Vis samandraget i eksternt program."
 
 #: src/solve-commit.cc:778
 msgid "committing"
-msgstr ""
+msgstr "utfører"
 
 #: src/solve-commit.cc:780
 msgid "(dry run)"
@@ -4895,12 +4947,16 @@ msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
 msgstr ""
+"Ein av dei installerte programfiksane krev omstart av maskina. Du bør starta "
+"ho på nytt så snart som mogleg."
 
 #: src/solve-commit.cc:891
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
 msgstr ""
+"Ein av dei installerte programfiksane påverkar pakkehandsamaren sjølv. Køyr "
+"kommandoen på nytt for å installera andre nødvendige programfiksar."
 
 #: src/solve-commit.cc:909
 msgid "Dependencies of all installed packages are satisfied."
