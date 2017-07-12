@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Wed Jul 12 17:06:14 CEST 2017 - ma@suse.de
+
+- repo refresh: Re-probe if the repository type changes (bsc#1048315)
+- MediaCurl: Propagate proper error code to DownloadProgressReport
+  (bsc#1047785)
+- Allow to trigger an appdata refresh unconditionally (bsc#1009745)
+- Support custom repo variables defined in /etc/zypp/vars.d (fixes #68)
+- rename: handle EXDEV error on OverlayFS
+- version 16.14.0 (0)
+
+-------------------------------------------------------------------
 Fri Jun 30 14:25:29 CEST 2017 - ma@suse.de
 
 - Adapt loop mounting of iso images (bsc#1038132, bsc#1033236)
