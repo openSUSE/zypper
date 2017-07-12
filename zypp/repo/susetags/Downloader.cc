@@ -35,12 +35,11 @@ Downloader::Downloader( const RepoInfo &repoinfo, const Pathname &delta_dir )
 
 RepoStatus Downloader::status( MediaSetAccess &media )
 {
-  Pathname content = media.provideFile( repoInfo().path() + "/content");
-  // the media.1 is always in the root of the media, not like the content
-  // file which is in the path() location
-  Pathname mediafile = media.provideFile( "/media.1/media" );
-
-  return RepoStatus(content) && RepoStatus(mediafile);
+  RepoStatus ret( media.provideOptionalFile( repoInfo().path() + "/content") );
+  if ( !ret.empty() )	// else: mandatory master index is missing
+    ret = ret && RepoStatus( media.provideOptionalFile( "/media.1/media" ) );
+  // else: mandatory master index is missing -> stay empty
+  return ret;
 }
 
 // search old repository file file to run the delta algorithm on

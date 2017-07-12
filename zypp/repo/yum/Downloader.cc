@@ -37,8 +37,11 @@ Downloader::Downloader( const RepoInfo &repoinfo , const Pathname &delta_dir)
 
 RepoStatus Downloader::status( MediaSetAccess &media )
 {
-  return RepoStatus( media.provideFile( repoInfo().path() / "/repodata/repomd.xml" ) )
-      && RepoStatus( media.provideOptionalFile( "/media.1/media" ) );
+  RepoStatus ret( media.provideFile( repoInfo().path() / "/repodata/repomd.xml" ) );
+  if ( !ret.empty() )	// else: mandatory master index is missing
+    ret = ret && RepoStatus( media.provideOptionalFile( "/media.1/media" ) );
+  // else: mandatory master index is missing -> stay empty
+  return ret;
 }
 
 static OnMediaLocation loc_with_path_prefix( const OnMediaLocation & loc, const Pathname & prefix )
