@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Wed Jul 12 17:13:48 CEST 2017 - ma@suse.de
+
+- dwnldProgress: Report missing/optional files as 'not found' rather
+  than 'error' (bsc#1047785)
+- Emphasize that it depends on PackageKit how fast it will respond
+  to a 'quit' request sent if PK blocks package management.
+- man: Mention support for custom repository variables defined in
+  /etc/zypp/vars.d (openSUSE/libzypp#68)
+- BuildRequires:  libzypp-devel >= 16.13.1
+- version 1.13.29
+
+-------------------------------------------------------------------
 Thu Jun  1 14:58:45 CEST 2017 - ma@suse.de
 
 - Accept --auto-agree-with-product-licenses from SUSEconnect (bsc#1037783)
