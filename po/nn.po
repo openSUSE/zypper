@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 12:47+0200\n"
-"PO-Revision-Date: 2017-07-11 15:20+0100\n"
+"PO-Revision-Date: 2017-07-12 12:56+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: NorwegianNynorsk <i18n-nn@lister.ping.uio.no>\n"
 "Language: nn\n"
@@ -2921,7 +2921,7 @@ msgstr "Prøver å avslutta normalt …"
 
 #: src/Zypper.cc:86
 msgid "Create a solver test case for debugging."
-msgstr "Lagar testkasus for avhengnadsløysing, til feilsøking."
+msgstr "Lag testkasus for avhengnadsløysing, til feilsøking."
 
 #: src/Zypper.cc:87
 msgid ""
@@ -3041,10 +3041,10 @@ msgstr ""
 "\t--help, -h\t\tHjelp.\n"
 "\t--version, -V\t\tVis versjonsnummer.\n"
 "\t--promptids\t\tVis oversikt over zypper-spørsmål.\n"
-"\t--config, -c <file>\tBruk valt oppsettfil i staden for standardoppsett.\n"
-"\t--userdata <string>\tBrukardefinert transaksjons-ID brukt i logg og "
+"\t--config, -c <fil>\tBruk valt oppsettfil i staden for standardoppsett.\n"
+"\t--userdata <tekst>\tBrukardefinert transaksjons-ID brukt i logg og "
 "programtillegg.\n"
-"\t--quiet, -q\t\tVis berre feilmeldingar, ikkje vanleg utdata.\n"
+"\t--quiet, -q\t\tVis berre feilmeldingar, ikkje vanlege utdata.\n"
 "\t--verbose, -v\t\tVis meir detaljerte meldingar.\n"
 "\t--color\n"
 "\t--no-color\t\tOm fargar skal brukast der det er støtta.\n"
@@ -3066,12 +3066,14 @@ msgid ""
 "\t--solv-cache-dir <dir>\tUse alternative solv file cache directory.\n"
 "\t--pkg-cache-dir <dir>\tUse alternative package cache directory.\n"
 msgstr ""
-"\t--reposd-dir, -D <dir>\tBruk alternativ definisjonsfil for\n"
-"\t\t\t\tpakkebrønnmappe.\n"
-"\t--cache-dir, -C <dir>\tBruk alternativ mappe for alle mellomlagera.\n"
-"\t--raw-cache-dir <dir>\tBruk alternativ mappe for råmetadata-mellomlager.\n"
-"\t--solv-cache-dir <dir>\tBruk alternativ mappe for solv-mellomlager.\n"
-"\t--pkg-cache-dir <dir>\tBruk alternativ mappe for pakkemellomlager.\n"
+"\t--reposd-dir, -D <mappe>\n"
+"\t\t\t\tBruk alternativ definisjonsfil for pakkebrønnmappe.\n"
+"\t--cache-dir, -C <mappe>\tBruk alternativ mappe for alle mellomlager.\n"
+"\t--raw-cache-dir <mappe>\tBruk alternativ mappe for råmetadata-mellomlager."
+"\n"
+"\t--pkg-cache-dir <mappe>\tBruk alternativ mappe for pakkemellomlager.\n"
+"\t--solv-cache-dir <mappe>\n"
+"\t\t\t\tBruk alternativ mappe for solv-mellomlager.\n"
 
 #: src/Zypper.cc:502
 msgid ""
@@ -3091,6 +3093,21 @@ msgid ""
 "\t--releasever\t\tSet the value of $releasever in all .repo files (default: "
 "distribution version)\n"
 msgstr ""
+"     Pakkebrønnval:\n"
+"\t--no-gpg-checks\t\tIgnorer feil ved GPG-kontrollar, og hald fram.\n"
+"\t--gpg-auto-import-keys\tStol automatisk på og importer nye "
+"signeringsnøklar for pakkebrønnar.\n"
+"\t--plus-repo, -p <URI>\tBruk ekstra pakkebrønn.\n"
+"\t--plus-content <nøkkel>\tBruk òg uverksame pakkebrønnar med valt nøkkelord."
+"\n"
+"\t\t\t\tPrøv «--plus-content debug» for å ta i bruk pakkebrønnar med "
+"«debug»-pakkar.\n"
+"\t--disable-repositories\tIkkje les metadata frå pakkebrønnar.\n"
+"\t--no-refresh\t\tIkkje oppdater pakkebrønnar.\n"
+"\t--no-cd\t\t\tIgnorer CD- og DVD-pakkebrønnar.\n"
+"\t--no-remote\t\tIgnorer eksterne pakkebrønnar.\n"
+"\t--releasever\t\tSet verdien til $releasever i alle .repo-filer (standard: "
+"distribusjonsversjon).\n"
 
 #: src/Zypper.cc:516
 msgid ""
@@ -3099,6 +3116,10 @@ msgid ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tDo not read installed packages.\n"
 msgstr ""
+"     Målval:\n"
+"\t--root, -R <mappe>\tBruk anna rotmappe.\n"
+"\t--disable-system-resolvables\n"
+"\t\t\t\tIkkje les installerte pakkar.\n"
 
 #: src/Zypper.cc:523
 msgid ""
@@ -3121,6 +3142,14 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
+"     Administrering av pakkebrønnar:\n"
+"\trepos, lr\t\tVis oversikt over pakkebrønnar.\n"
+"\taddrepo, ar\t\tLegg til ny pakkebrønn.\n"
+"\tremoverepo, rr\t\tFjern valt pakkebrønn.\n"
+"\trenamerepo, nr\t\tGje valt pakkebrønn nytt namn.\n"
+"\tmodifyrepo, mr\t\tGjer endringar i valt pakkebrønn.\n"
+"\trefresh, ref\t\tOppdater alle pakkebrønnane.\n"
+"\tclean\t\t\tTøm lokale mellomlager.\n"
 
 #: src/Zypper.cc:538
 msgid ""
@@ -3131,6 +3160,12 @@ msgid ""
 "\tremoveservice, rs\tRemove specified service.\n"
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
+"     Administrering av tenester:\n"
+"\tservices, ls\t\tVis oversikt over tenester.\n"
+"\taddservice, as\t\tLegg til ny teneste.\n"
+"\tremoveservice, rs\tFjern valt teneste.\n"
+"\tmodifyservice, ms\tGjer endringar i valt teneste.\n"
+"\trefresh-services, refs\tOppdater alle tenestene.\n"
 
 #: src/Zypper.cc:546
 msgid ""
@@ -3144,6 +3179,14 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
+"     Administrering av pakkar:\n"
+"\tinstall, in\t\tInstaller pakkar.\n"
+"\tremove, rm\t\tFjern pakkar.\n"
+"\tverify, ve\t\tKontroller at pakkeavhengnadar er oppfylde.\n"
+"\tsource-install, si\tInstaller kjeldepakkar og tilhøyrande "
+"byggjeavhengnadar.\n"
+"\tinstall-new-recommends, inr\n"
+"\t\t\t\tInstaller nye pakkar anbefalt av installerte pakkar.\n"
 
 #: src/Zypper.cc:557
 msgid ""
@@ -3155,6 +3198,13 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
+"     Administrering av oppdateringar:\n"
+"\tupdate, up\t\tOppdater installerte pakkar med nyare versjonar.\n"
+"\tlist-updates, lu\tVis oversikt over tilgjengelege oppdateringar.\n"
+"\tpatch\t\t\tInstaller nødvendige programfiksar.\n"
+"\tlist-patches, lp\tVis oversikt over nødvendige programfiksar.\n"
+"\tdist-upgrade, dup\tKøyr distribusjonsoppgradering.\n"
+"\tpatch-check, pchk\tSjå etter programfiksar.\n"
 
 #: src/Zypper.cc:566
 msgid ""
@@ -3170,6 +3220,17 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
+"     Søk:\n"
+"\tsearch, se\t\tSøk etter pakkar i samsvar med mønster.\n"
+"\tinfo, if\t\tVis fullstendig informasjon for valde pakkar.\n"
+"\tpatch-info\t\tVis fullstendig informasjon for valde programfiksar.\n"
+"\tpattern-info\t\tVis fullstendig informasjon for valde mønster.\n"
+"\tproduct-info\t\tVis fullstendig informasjon for valde produkt.\n"
+"\tpatches, pch\t\tVis oversikt over tilgjengelege programfiksar.\n"
+"\tpackages, pa\t\tVis oversikt over tilgjengelege pakkar.\n"
+"\tpatterns, pt\t\tVis oversikt over tilgjengelege mønster.\n"
+"\tproducts, pd\t\tVis oversikt over tilgjengelege produkt.\n"
+"\twhat-provides, wp\tVis oversikt over pakkar med valt eigenskap.\n"
 
 #: src/Zypper.cc:581
 msgid ""
@@ -3179,6 +3240,11 @@ msgid ""
 "\tlocks, ll\t\tList current package locks.\n"
 "\tcleanlocks, cl\t\tRemove unused locks.\n"
 msgstr ""
+"     Pakkelåsing:\n"
+"\taddlock, al\t\tLegg til pakkelås.\n"
+"\tremovelock, rl\t\tFjern pakkelås.\n"
+"\tlocks, ll\t\tVis oversikt over pakkelåsar.\n"
+"\tcleanlocks, cl\t\tFjern ubrukte låsar.\n"
 
 #: src/Zypper.cc:588
 msgid ""
@@ -3192,6 +3258,14 @@ msgid ""
 "\tsource-download\t\tDownload source rpms for all installed packages\n"
 "\t\t\t\tto a local directory.\n"
 msgstr ""
+"     Andre kommandoar:\n"
+"\tversioncmp, vcmp\tSamanlikn to versjonsstrengar.\n"
+"\ttargetos, tos\t\tVis identifikator for operativsystemet.\n"
+"\tlicenses\t\tVis rapport om lisensar og lisensavtaler for installerte "
+"pakkar.\n"
+"\tdownload\t\tLast ned valde RPM-filer til lokal mappe.\n"
+"\tsource-download\t\tLast ned kjelde-RPM-filer for alle installerte pakkar "
+"til lokal mappe.\n"
 
 #: src/Zypper.cc:598
 msgid ""
@@ -3199,7 +3273,7 @@ msgid ""
 "\tsubcommand\t\tLists available subcommands.\n"
 msgstr ""
 "     Underkommandoar:\n"
-"\tsubcommand\t\tViser tilgjengelege underkommandoar.\n"
+"\tsubcommand\t\tVis tilgjengelege underkommandoar.\n"
 
 #: src/Zypper.cc:603
 msgid ""
@@ -3247,7 +3321,7 @@ msgstr ""
 #: src/Zypper.cc:656
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Skriv «%s» for kommandospesifikk hjelp."
+msgstr "Skriv «%s» for hjelp til valt kommando."
 
 #: src/Zypper.cc:831
 #, c-format, boost-format
@@ -4266,6 +4340,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
+"licenses\n"
+"\n"
+"Vis oversikt over lisensar og lisensavtaler for installerte pakkar.\n"
+"\n"
+"Denne kommandoen har ikkje fleire val.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:2973
@@ -4278,6 +4357,8 @@ msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
+"Vis oversikt over prosessar som køyrer og som framleis brukar filer og "
+"bibliotek som vart sletta i dei siste oppdateringane."
 
 #. translators: -s, --short
 #: src/Zypper.cc:2980
@@ -4726,7 +4807,7 @@ msgstr "Kort merkelapp: %s"
 #: src/Zypper.cc:5150
 #, c-format, boost-format
 msgid "%s matches %s"
-msgstr "%s samsvarer med %s"
+msgstr "%s er lik %s"
 
 #: src/Zypper.cc:5152
 #, c-format, boost-format
@@ -5359,7 +5440,7 @@ msgstr "Lisens"
 
 #: src/misc.cc:244
 msgid "EULA"
-msgstr "Lisensvilkår"
+msgstr "Lisensavtale"
 
 #: src/misc.cc:256
 msgid "SUMMARY"
@@ -5378,7 +5459,7 @@ msgstr "Installerte pakkar med versjonar i pakkebrønnar: %d"
 #: src/misc.cc:259
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Installerte pakkar med lisensvilkår: %d"
+msgstr "Installerte pakkar med lisensavtaler: %d"
 
 #: src/misc.cc:289
 #, c-format, boost-format
