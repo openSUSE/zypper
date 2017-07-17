@@ -168,37 +168,28 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     // "Action"			DownloadResolvableReport::Action user advice how to behave on error (ABORT).
     using target::rpm::RpmDb;
     RpmDb::CheckPackageResult result		( userData_r.get<RpmDb::CheckPackageResult>( "CheckPackageResult" ) );
-
-
-    if ( result == RpmDb::CHK_OK )	// quiet about good sigcheck unless verbose.
-    {
-      if ( zypper.out().verbosity() >= Out::HIGH )
-      {
-	const RpmDb::CheckPackageDetail & details	( userData_r.get<RpmDb::CheckPackageDetail>( "CheckPackageDetail" ) );
-	if ( ! details.empty() )
-	{
-	  zypper.out().info( details.begin()->second, Out::HIGH );
-	}
-      }
-      return;
-    }
-
-
-    // report problems in individual checks...
-    const Pathname & localpath			( userData_r.get<Pathname>( "Localpath" ) );
-    const std::string & rpmname			( localpath.basename() );
     const RpmDb::CheckPackageDetail & details	( userData_r.get<RpmDb::CheckPackageDetail>( "CheckPackageDetail" ) );
 
     str::Str msg;
-    msg << rpmname << ":" << "\n";
+    if ( result != RpmDb::CHK_OK )	// only on error...
+    {
+      const Pathname & localpath		( userData_r.get<Pathname>( "Localpath" ) );
+      const std::string & rpmname		( localpath.basename() );
+      msg << rpmname << ":" << "\n";
+    }
+
+    // report problems in individual checks...
     for ( const auto & el : details )
     {
       switch ( el.first )
       {
 	case RpmDb::CHK_OK:
-	  if ( zypper.out().verbosity() >= Out::HIGH )
+	  if ( zypper.out().verbosity() >= Out::HIGH )	// quiet about good sigcheck unless verbose.
 	    msg << el.second << "\n";
 	  break;
+	case RpmDb::CHK_NOSIG:
+	   msg << ( (result == RpmDb::CHK_OK ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR ) << el.second ) << "\n";
+	   break;
 	case RpmDb::CHK_NOKEY:		// can't check
 	case RpmDb::CHK_NOTFOUND:
 	  msg << ( ColorContext::MSG_WARNING << el.second ) << "\n";
@@ -210,6 +201,15 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 	  break;
       }
     }
+
+    if ( result == RpmDb::CHK_OK )
+    {
+      const std::string & msgstr( msg.str() );
+      if ( ! msgstr.empty() )
+	zypper.out().info( msg );
+      return;
+    }
+
     // determine action
     if ( zypper.globalOpts().no_gpg_checks )
     {
@@ -224,6 +224,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 
 	case RpmDb::CHK_NOKEY:		// can't check
 	case RpmDb::CHK_NOTFOUND:
+	case RpmDb::CHK_NOSIG:
 	  msg << ( ColorContext::MSG_WARNING << err ) << "\n";
 	  break;
 
