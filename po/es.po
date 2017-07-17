@@ -16,11 +16,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 15:07+0100\n"
+"POT-Creation-Date: 2017-07-17 16:24+0200\n"
 "PO-Revision-Date: 2017-07-03 14:53+0000\n"
 "Last-Translator: Javier Llorente <javier@opensuse.org>\n"
-"Language-Team: Spanish "
-"<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -150,8 +150,8 @@ msgstr "Error al enviar la notificación del mensaje de actualización."
 msgid "New update message"
 msgstr "Nuevo mensaje de actualización"
 
-#: zypp/target/TargetImpl.cc:1219 zypp/target/TargetImpl.cc:1288
-#: zypp/target/TargetImpl.cc:1640
+#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
+#: zypp/target/TargetImpl.cc:1627
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."
 msgstr "La instalación se ha cancelado siguiendo las indicaciones."
@@ -198,22 +198,26 @@ msgstr "No es una unidad de CD-ROM"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2043
-#: zypp/target/rpm/RpmDb.cc:2189
+#: zypp/target/rpm/RpmDb.cc:851 zypp/target/rpm/RpmDb.cc:2071
+#: zypp/target/rpm/RpmDb.cc:2217
 msgid "RPM failed: "
 msgstr "RPM fallido: "
 
 #. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1124
+#: zypp/target/rpm/RpmDb.cc:1127
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Error al importar la clave pública desde el archivo %s: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1195
+#: zypp/target/rpm/RpmDb.cc:1198
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Error al eliminar la clave pública %s: %s"
+
+#: zypp/target/rpm/RpmDb.cc:1576
+msgid "Package is not signed!"
+msgstr ""
 
 #
 # modules/Mail.ycp:458
@@ -222,20 +226,20 @@ msgstr "Error al eliminar la clave pública %s: %s"
 # modules/Mail.ycp:563
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1848
+#: zypp/target/rpm/RpmDb.cc:1876
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Se han modificado los archivos de configuración para %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2024
+#: zypp/target/rpm/RpmDb.cc:2052
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 "rpm ha guardado %s como %s, pero no es posible determinar la diferencia"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2026
+#: zypp/target/rpm/RpmDb.cc:2054
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -245,13 +249,13 @@ msgstr ""
 "A continuación se presentan las primeras 25 líneas de diferencia:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2029
+#: zypp/target/rpm/RpmDb.cc:2057
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ha creado %s como %s, pero no es posible determinar la diferencia"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2031
+#: zypp/target/rpm/RpmDb.cc:2059
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -262,79 +266,84 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2056 zypp/target/rpm/RpmDb.cc:2202
+#: zypp/target/rpm/RpmDb.cc:2084 zypp/target/rpm/RpmDb.cc:2230
 msgid "Additional rpm output"
 msgstr "Salida de rpm adicional"
 
 # include/nis_server/io.ycp:582
 # include/backup/ui.ycp:1286
-#: zypp/target/rpm/RpmDb.cc:2344
+#: zypp/target/rpm/RpmDb.cc:2372
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "creada copia de seguridad %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2365
+#: zypp/target/rpm/RpmDb.cc:2393
 msgid "Signature is OK"
 msgstr "La firma es correcta"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2367
+#: zypp/target/rpm/RpmDb.cc:2395
 msgid "Unknown type of signature"
 msgstr "Tipo de firma desconocido"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2369
+#: zypp/target/rpm/RpmDb.cc:2397
 msgid "Signature does not verify"
 msgstr "La firma no cumple la verificación"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2371
+#: zypp/target/rpm/RpmDb.cc:2399
 msgid "Signature is OK, but key is not trusted"
 msgstr "La firma es correcta, pero la clave no es de confianza"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2373
+#: zypp/target/rpm/RpmDb.cc:2401
 msgid "Signatures public key is not available"
 msgstr "La clave pública de firma no está disponible"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2375
+#: zypp/target/rpm/RpmDb.cc:2403
 msgid "File does not exist or signature can't be checked"
 msgstr "El archivo no existe o no es posible comprobar la firma"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2405
+msgid "File is unsigned"
+msgstr ""
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
 msgstr "Se realizarán las siguientes acciones:"
 
-#: zypp/RepoManager.cc:299
+#: zypp/RepoManager.cc:312
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "No es posible leer el directorio de repositorio %1%: permiso denegado"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:307 zypp/RepoManager.cc:769 zypp/RepoManager.cc:1528
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Error al leer el directorio %s"
 
-#: zypp/RepoManager.cc:317
+#: zypp/RepoManager.cc:330
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "No es posible leer el archivo de repositorio %1%: permiso denegado"
 
-#: zypp/RepoManager.cc:340
+#: zypp/RepoManager.cc:353
 msgid "Repository alias cannot start with dot."
 msgstr "El alias del repositorio no puede comenzar con un punto."
 
-#: zypp/RepoManager.cc:351
+#: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
 msgstr "El alias del servicio no puede comenzar con un punto."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:724 zypp/RepoManager.cc:1649 zypp/RepoManager.cc:1714
-#: zypp/RepoManager.cc:1790 zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1976
+#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
+#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "No es posible abrir el archivo %s para escribir en él."
@@ -342,7 +351,7 @@ msgstr "No es posible abrir el archivo %s para escribir en él."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:851
+#: zypp/RepoManager.cc:871
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
@@ -350,37 +359,37 @@ msgstr ""
 "huérfano %2%"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1084
+#: zypp/RepoManager.cc:1098
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "No se han encontrado metadatos válidos en la URL especificada"
 msgstr[1] "No se han encontrado metadatos válidos en las URL especificadas"
 
-#: zypp/RepoManager.cc:1134 zypp/RepoManager.cc:1245 zypp/RepoManager.cc:1301
+#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "No es posible crear %s"
 
-#: zypp/RepoManager.cc:1142
+#: zypp/RepoManager.cc:1154
 msgid "Can't create metadata cache directory."
 msgstr "No es posible crear el directorio para el caché de metadatos."
 
-#: zypp/RepoManager.cc:1287
+#: zypp/RepoManager.cc:1300
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Construyendo el caché del repositorio %s"
 
-#: zypp/RepoManager.cc:1307
+#: zypp/RepoManager.cc:1320
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "No es posible crear el caché en %s, no posee permisos de escritura."
 
-#: zypp/RepoManager.cc:1371
+#: zypp/RepoManager.cc:1384
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Error al añadir a caché el repositorio (%d)."
 
-#: zypp/RepoManager.cc:1382
+#: zypp/RepoManager.cc:1395
 msgid "Unhandled repository type"
 msgstr "Tipo de repositorio no gestionado"
 
@@ -390,44 +399,44 @@ msgstr "Tipo de repositorio no gestionado"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1419 zypp/RepoManager.cc:2465
+#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Error al intentar leer de %s"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1472 zypp/RepoManager.cc:2473
+#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Error desconocido al leer de %s"
 
-#: zypp/RepoManager.cc:1610
+#: zypp/RepoManager.cc:1623
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Añadiendo el repositorio %s"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1700
+#: zypp/RepoManager.cc:1711
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Nombre de archivo del repositorio no válido en %s"
 
-#: zypp/RepoManager.cc:1739
+#: zypp/RepoManager.cc:1752
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Eliminando el repositorio %s"
 
-#: zypp/RepoManager.cc:1758 zypp/RepoManager.cc:1836
+#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
 msgid "Can't figure out where the repo is stored."
 msgstr "No es posible determinar dónde está almacenado el repositorio."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1772 zypp/RepoManager.cc:1964
+#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "No es posible suprimir %s"
 
-#: zypp/RepoManager.cc:1952 zypp/RepoManager.cc:2396
+#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
 msgid "Can't figure out where the service is stored."
 msgstr "No es posible determinar donde está almacenado el servicio."
 
@@ -567,22 +576,22 @@ msgid "Command exited with unknown error."
 msgstr "El comando ha terminado con un error desconocido."
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:116
+#: zypp/PublicKey.cc:113
 msgid "(does not expire)"
 msgstr "(no caduca)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:125
+#: zypp/PublicKey.cc:122
 msgid "(EXPIRED)"
 msgstr "(CADUCADO)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:129
+#: zypp/PublicKey.cc:126
 msgid "(expires within 24h)"
 msgstr "(caduca en las próximas 24 horas)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:133
+#: zypp/PublicKey.cc:130
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -4261,17 +4270,17 @@ msgid "Zuni"
 msgstr "Zuñi"
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:522
+#: zypp/KeyRing.cc:505
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr ""
 "Se intentó importar una clave que no existe (%s) al almacén de claves %s"
 
-#: zypp/KeyRing.cc:566
+#: zypp/KeyRing.cc:549
 msgid "Failed to delete key."
 msgstr "Error al suprimir la clave."
 
-#: zypp/KeyRing.cc:575
+#: zypp/KeyRing.cc:558
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "No se encuentra el archivo de firma %s"
@@ -4289,8 +4298,12 @@ msgstr "No hay ninguna URL en el repositorio."
 msgid "Service plugin does not support changing an attribute."
 msgstr "El complemento del servicio no admite el cambio de un atributo."
 
+#: zypp/repo/PackageProvider.cc:225
+msgid "Signature verification failed"
+msgstr "Error de verificación de firma"
+
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:157
+#: zypp/repo/PackageProvider.cc:377
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4299,27 +4312,23 @@ msgstr ""
 "Parece que el paquete %s se ha dañado durante la transferencia. ¿Desea "
 "volver a intentar la recuperación?"
 
-#: zypp/repo/PackageProvider.cc:216
-msgid "Signature verification failed"
-msgstr "Error de verificación de firma"
-
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:386
+#: zypp/repo/PackageProvider.cc:402
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr ""
 "Error al proporcionar el paquete %s. ¿Desea volver a intentar la "
 "recuperación?"
 
-#: zypp/repo/PackageProvider.cc:515
+#: zypp/repo/PackageProvider.cc:528
 msgid "applydeltarpm check failed."
 msgstr "Error al comprobar applydeltarpm."
 
-#: zypp/repo/PackageProvider.cc:525
+#: zypp/repo/PackageProvider.cc:538
 msgid "applydeltarpm failed."
 msgstr "Error de applydeltarpm."
 
-#: zypp/ZYppFactory.cc:394
+#: zypp/ZYppFactory.cc:399
 #, c-format, boost-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
@@ -4328,58 +4337,59 @@ msgstr ""
 "La gestión del sistema está bloqueada por la aplicación con pid %d (%s).\n"
 "Cierre la aplicación antes de volver a intentarlo."
 
-#: zypp/solver/detail/SATResolver.cc:975
+#: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr "%s no pertenece a un repositorio distupgrade"
 
-#: zypp/solver/detail/SATResolver.cc:979
+#: zypp/solver/detail/SATResolver.cc:983
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s posee una arquitectura inferior"
 
-#: zypp/solver/detail/SATResolver.cc:983
+#: zypp/solver/detail/SATResolver.cc:987
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "se ha producido un problema con el paquete instalado %s"
 
-#: zypp/solver/detail/SATResolver.cc:986
+#: zypp/solver/detail/SATResolver.cc:990
 msgid "conflicting requests"
 msgstr "peticiones en conflicto"
 
-#: zypp/solver/detail/SATResolver.cc:989
+#: zypp/solver/detail/SATResolver.cc:993
 msgid "some dependency problem"
 msgstr "algún problema de dependencia"
 
-#: zypp/solver/detail/SATResolver.cc:992
+#: zypp/solver/detail/SATResolver.cc:996
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "no hay nada que proporcione el elemento %s pedido"
 
-#: zypp/solver/detail/SATResolver.cc:993 zypp/solver/detail/SATResolver.cc:997
+#: zypp/solver/detail/SATResolver.cc:997
+#: zypp/solver/detail/SATResolver.cc:1001
 msgid "Have you enabled all requested repositories?"
 msgstr "¿Ha habilitado todos los repositorios pedidos?"
 
-#: zypp/solver/detail/SATResolver.cc:996
+#: zypp/solver/detail/SATResolver.cc:1000
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "el paquete %s no existe"
 
-#: zypp/solver/detail/SATResolver.cc:1000
+#: zypp/solver/detail/SATResolver.cc:1004
 msgid "unsupported request"
 msgstr "petición no admitida"
 
-#: zypp/solver/detail/SATResolver.cc:1003
+#: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s proviene del sistema y no se puede eliminar"
 
-#: zypp/solver/detail/SATResolver.cc:1007
+#: zypp/solver/detail/SATResolver.cc:1011
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s no es instalable"
 
-#: zypp/solver/detail/SATResolver.cc:1012
+#: zypp/solver/detail/SATResolver.cc:1016
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "no hay nada que proporcione %s, necesario para %s"
@@ -4387,42 +4397,42 @@ msgstr "no hay nada que proporcione %s, necesario para %s"
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
-#: zypp/solver/detail/SATResolver.cc:1017
+#: zypp/solver/detail/SATResolver.cc:1021
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "no es posible instalar ambos elementos: %s y %s"
 
-#: zypp/solver/detail/SATResolver.cc:1022
+#: zypp/solver/detail/SATResolver.cc:1026
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s está en conflicto con %s proporcionado por %s"
 
-#: zypp/solver/detail/SATResolver.cc:1027
+#: zypp/solver/detail/SATResolver.cc:1031
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s deja obsoleto %s, proporcionado por %s"
 
-#: zypp/solver/detail/SATResolver.cc:1032
+#: zypp/solver/detail/SATResolver.cc:1036
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "%s instalado, deja obsoleto a %s proporcionado por %s"
 
-#: zypp/solver/detail/SATResolver.cc:1036
+#: zypp/solver/detail/SATResolver.cc:1040
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "La solución %s está en conflicto con %s, proporcionada por ella misma"
 
-#: zypp/solver/detail/SATResolver.cc:1068
+#: zypp/solver/detail/SATResolver.cc:1072
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s requiere %s, pero este requisito no se puede cumplir"
 
-#: zypp/solver/detail/SATResolver.cc:1070
+#: zypp/solver/detail/SATResolver.cc:1074
 msgid "deleted providers: "
 msgstr "proveedores suprimidos: "
 
 #. translators: 'uninstallable' == 'not installable'
-#: zypp/solver/detail/SATResolver.cc:1081
+#: zypp/solver/detail/SATResolver.cc:1085
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -4431,11 +4441,11 @@ msgstr ""
 "proveedores no instalables: "
 
 #. translators: 'uninstallable' == 'not installable'
-#: zypp/solver/detail/SATResolver.cc:1084
+#: zypp/solver/detail/SATResolver.cc:1088
 msgid "uninstallable providers: "
 msgstr "proveedores no instalables: "
 
-#: zypp/solver/detail/SATResolver.cc:1141
+#: zypp/solver/detail/SATResolver.cc:1145
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "eliminar bloqueo para permitir la desinstalación de %s"
@@ -4443,80 +4453,80 @@ msgstr "eliminar bloqueo para permitir la desinstalación de %s"
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
-#: zypp/solver/detail/SATResolver.cc:1146
-#: zypp/solver/detail/SATResolver.cc:1182
+#: zypp/solver/detail/SATResolver.cc:1150
+#: zypp/solver/detail/SATResolver.cc:1186
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "no instalar %s"
 
-#: zypp/solver/detail/SATResolver.cc:1161
-#: zypp/solver/detail/SATResolver.cc:1203
+#: zypp/solver/detail/SATResolver.cc:1165
+#: zypp/solver/detail/SATResolver.cc:1207
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "mantener %s"
 
-#: zypp/solver/detail/SATResolver.cc:1166
+#: zypp/solver/detail/SATResolver.cc:1170
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "eliminar bloqueo para permitir la instalación de %s"
 
-#: zypp/solver/detail/SATResolver.cc:1217
-#: zypp/solver/detail/SATResolver.cc:1238
+#: zypp/solver/detail/SATResolver.cc:1221
+#: zypp/solver/detail/SATResolver.cc:1242
 msgid "This request will break your system!"
 msgstr "Esta petición dañará su sistema."
 
-#: zypp/solver/detail/SATResolver.cc:1218
-#: zypp/solver/detail/SATResolver.cc:1239
+#: zypp/solver/detail/SATResolver.cc:1222
+#: zypp/solver/detail/SATResolver.cc:1243
 msgid "ignore the warning of a broken system"
 msgstr "ignorar la advertencia de daño del sistema"
 
-#: zypp/solver/detail/SATResolver.cc:1223
+#: zypp/solver/detail/SATResolver.cc:1227
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "no preguntar si se debe instalar una solución que proporciona %s"
 
-#: zypp/solver/detail/SATResolver.cc:1245
+#: zypp/solver/detail/SATResolver.cc:1249
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr ""
 "no preguntar si se deben suprimir todas las soluciones que proporcionan %s"
 
-#: zypp/solver/detail/SATResolver.cc:1258
+#: zypp/solver/detail/SATResolver.cc:1262
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "no instalar la versión mas reciente de %s"
 
-#: zypp/solver/detail/SATResolver.cc:1279
+#: zypp/solver/detail/SATResolver.cc:1283
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "mantener %s a pesar de la arquitectura inferior"
 
-#: zypp/solver/detail/SATResolver.cc:1284
+#: zypp/solver/detail/SATResolver.cc:1288
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "instalar %s a pesar de la arquitectura inferior"
 
-#: zypp/solver/detail/SATResolver.cc:1293
+#: zypp/solver/detail/SATResolver.cc:1297
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "mantener el antiguo %s"
 
-#: zypp/solver/detail/SATResolver.cc:1298
+#: zypp/solver/detail/SATResolver.cc:1302
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "instalar %s desde el repositorio excluido"
 
-#: zypp/solver/detail/SATResolver.cc:1318
+#: zypp/solver/detail/SATResolver.cc:1322
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "restablecer versión anterior de %s a %s"
 
-#: zypp/solver/detail/SATResolver.cc:1325
+#: zypp/solver/detail/SATResolver.cc:1329
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "cambio en la arquitectura de %s a %s"
 
-#: zypp/solver/detail/SATResolver.cc:1334
+#: zypp/solver/detail/SATResolver.cc:1338
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4525,12 +4535,12 @@ msgstr ""
 "instalar %s (con cambio de proveedor)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1343
+#: zypp/solver/detail/SATResolver.cc:1347
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "reemplazo de %s con %s"
 
-#: zypp/solver/detail/SATResolver.cc:1354
+#: zypp/solver/detail/SATResolver.cc:1358
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "desinstalación de %s"
@@ -4602,7 +4612,7 @@ msgstr ""
 "se pueda escribir para crear un punto de conexión"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1687
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Se requiere autenticación para %s"
@@ -4749,19 +4759,12 @@ msgstr ""
 " Hay un problema con el certificado SSL. Compruebe que la autoridad de "
 "certificación (CA) es correcta para %s."
 
-#: zypp/media/MediaException.cc:231
-#, c-format, boost-format
-msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr ""
-"No se encuentra ningún dispositivo de bucle disponible para montar el "
-"archivo de imagen desde %s"
-
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Método de autenticación HTTP no compatible %s"
 
-#: zypp/media/MediaCurl.cc:1003
+#: zypp/media/MediaCurl.cc:1109
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4918,6 +4921,11 @@ msgstr ""
 "     %3%\n"
 "  de la instalación de\n"
 "     %4%"
+
+#~ msgid "Cannot find available loop device to mount the image file from '%s'"
+#~ msgstr ""
+#~ "No se encuentra ningún dispositivo de bucle disponible para montar el "
+#~ "archivo de imagen desde %s"
 
 #~ msgid "generally ignore of some dependecies"
 #~ msgstr "generalmente ignorar algunas dependencias"
