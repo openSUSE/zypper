@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2008-11-17 23:32+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -384,7 +384,7 @@ msgstr "กำลังรับข้อมูล %s %s-%s.%s"
 msgid "Signature verification failed"
 msgstr "ไม่สนใจต่อความล้มเหลวในการตรวจสอบลายเซ็นของแฟ้ม '%s' !"
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr ""
 
@@ -5091,13 +5091,15 @@ msgstr "ไม่พบตัวที่มีสิ่งที่ให้ม
 msgid "Warning: "
 msgstr "แจ้งเตือน: "
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "ผิดพลาด"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "เสร็จแล้ว"
 
@@ -5110,11 +5112,17 @@ msgstr "กำลังรับข้อมูล:"
 msgid "starting"
 msgstr "กำลังเริ่ม"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "ไม่พบ"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "ไม่พบข้อความช่วยเหลือของส่วนนี้"
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "ไม่พบข้อความช่วยเหลือของตัวเลือกนี้"
 

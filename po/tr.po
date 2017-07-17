@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2011-11-24 16:28+0200\n"
 "Last-Translator: Mert çetin <alirizanazli95@gmail.com>\n"
 "Language-Team: turkish <i18n@suse.de>\n"
@@ -388,7 +388,7 @@ msgstr "İndirme işlemi başarısız oldu:"
 msgid "Signature verification failed"
 msgstr ""
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr ""
 
@@ -5122,14 +5122,16 @@ msgid "Warning: "
 msgstr "Uyarı"
 
 # include/ui/common_messages.ycp:95
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 #, fuzzy
 msgid "error"
 msgstr "Hata"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 #, fuzzy
 msgid "done"
 msgstr "Endonezya"
@@ -5145,11 +5147,18 @@ msgstr "Alınıyor:"
 msgid "starting"
 msgstr "Başlatılıyor..."
 
-#: src/output/OutNormal.cc:411
+# clients/nis_write.ycp:73
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "'{0}' kullanıcısı bulunamadı"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "Bu bilgi için yardım mevcut değil"
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "Bu seçenek için yardım mevcut değil"
 
@@ -6719,11 +6728,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "continue?"
 #~ msgstr "Devam et"
-
-# clients/nis_write.ycp:73
-#, fuzzy
-#~ msgid "not found"
-#~ msgstr "'{0}' kullanıcısı bulunamadı"
 
 #, fuzzy
 #~ msgid ""

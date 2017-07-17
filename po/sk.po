@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2017-05-15 19:26+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
@@ -410,7 +410,7 @@ msgstr "Sťahujem %s %s-%s.%s"
 msgid "Signature verification failed"
 msgstr "Overenie podpisu zlyhalo"
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr "Prijatie balíka napriek chybe."
 
@@ -6033,13 +6033,15 @@ msgstr "Žiadni poskytovatelia '%s' neboli nájdení."
 msgid "Warning: "
 msgstr "Pozor: "
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "chyba"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "hotovo"
 
@@ -6052,11 +6054,17 @@ msgstr "Sťahujem:"
 msgid "starting"
 msgstr "štartovanie"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Nenájdený"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "Pre túto výzvu nie je k dispozícii pomocník."
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "pre túto voľbu nie je k dispozícii pomocník"
 

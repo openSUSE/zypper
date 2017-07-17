@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: memory.ku.po\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2005-09-23 00:15+0200\n"
 "Last-Translator: Kurdish Team <i18n@suse.de>\n"
 "Language-Team: Kurdish Team <i18n@suse.de>\n"
@@ -381,7 +381,7 @@ msgstr ""
 msgid "Signature verification failed"
 msgstr ""
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr ""
 
@@ -5077,14 +5077,16 @@ msgstr ""
 msgid "Warning: "
 msgstr "Hişyarî:"
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 #, fuzzy
 msgid "error"
 msgstr "Çewtî"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 #, fuzzy
 msgid "done"
 msgstr "Endonezya"
@@ -5100,12 +5102,18 @@ msgstr "Tê rakirin"
 msgid "starting"
 msgstr "Mîheng"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Tu nehat dîtin"
+
+#: src/output/OutNormal.cc:416
 #, fuzzy
 msgid "No help available for this prompt."
 msgstr "Tu alîkarî tune ye."
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 #, fuzzy
 msgid "no help available for this option"
 msgstr "Tu alîkarî tune ye"

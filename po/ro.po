@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2016-10-26 12:30+0000\n"
 "Last-Translator: Pasca Alexandru <yo6ial@yahoo.com>\n"
 "Language-Team: Romanian <https://l10n.opensuse.org/projects/zypper/master/ro/"
@@ -444,7 +444,7 @@ msgstr "Preluare %s %s-%s.%s"
 msgid "Signature verification failed"
 msgstr "Verificarea semnăturii a eșuat pentru fișierul '%s'."
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr ""
 
@@ -5957,13 +5957,15 @@ msgstr "Nu a fost găsit nici un furnizor pentru '%s'."
 msgid "Warning: "
 msgstr "Avertisment:"
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "eroare"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "gata"
 
@@ -5977,11 +5979,17 @@ msgstr "Se descarcă:"
 msgid "starting"
 msgstr "pornesc"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Nu s-a găsit"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "Niciun ajutor disponibil pentru acest dialog."
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "niciun ajutor disponibil pentru această opțiune"
 

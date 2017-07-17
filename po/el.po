@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2016-08-23 07:58+0000\n"
 "Last-Translator: Anastasios Mavrommatis <anastasios@mavrommatis.net>\n"
 "Language-Team: Greek <https://l10n.opensuse.org/projects/zypper/master/el/>\n"
@@ -432,7 +432,7 @@ msgstr "Λήψη: %s %s-%s.%s"
 msgid "Signature verification failed"
 msgstr "Η επαλήθευση υπογραφής απέτυχε"
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr "Αποδοχή πακέτου παρά το σφάλμα."
 
@@ -5895,13 +5895,15 @@ msgstr "Δεν βρέθηκαν πάροχοι του '%s'."
 msgid "Warning: "
 msgstr "Προειδοποιηση: "
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "σφάλμα"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "έγινε"
 
@@ -5915,11 +5917,17 @@ msgstr "Λήψη:"
 msgid "starting"
 msgstr "εκκίνηση"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Δεν βρέθηκε"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "Καμία διαθέσιμη βοήθεια για αυτή την εντολή."
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "καμία διαθέσιμη βοήθεια για αυτή την επιλογή"
 

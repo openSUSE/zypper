@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2013-10-04 20:03+0200\n"
 "Last-Translator: Olav Pettershagen <olpetter@bbnett.no>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
@@ -396,7 +396,7 @@ msgstr "Henter %s %s-%s.%s"
 msgid "Signature verification failed"
 msgstr "Signaturverifisering mislyktes for filen '%s'."
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr ""
 
@@ -5834,13 +5834,15 @@ msgstr "Ingen leverandører av '%s' funnet."
 msgid "Warning: "
 msgstr "Advarsel: "
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "feil"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "fullført"
 
@@ -5854,11 +5856,17 @@ msgstr "Henter:"
 msgid "starting"
 msgstr "starter"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Ikke funnet"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "Ingen tilgjengelig hjelp for denne meldingen."
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "ingen tilgjengelig hjelp for dette valget"
 

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2017-05-30 13:46+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
@@ -427,7 +427,7 @@ msgstr "Recupero di %s %s-%s.%s"
 msgid "Signature verification failed"
 msgstr "Verifica della firma non riuscita"
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr "Il pacchetto viene accettato malgrado l'errore."
 
@@ -6161,13 +6161,15 @@ msgstr "Non è stato trovato alcun provider per '%s'."
 msgid "Warning: "
 msgstr "Avvertenza: "
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "errore"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "fine"
 
@@ -6181,11 +6183,17 @@ msgstr "Recupero di:"
 msgid "starting"
 msgstr "avvio"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Non trovato"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "Nessun aiuto disponibile per questa richiesta."
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "nessun aiuto disponibile per questa opzione"
 

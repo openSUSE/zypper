@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2017-07-04 08:29+0000\n"
 "Last-Translator: Stefan Schlesinger <translate75@web.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
@@ -438,7 +438,7 @@ msgstr "%s %s-%s.%s abrufen"
 msgid "Signature verification failed"
 msgstr "Fehler beim Überprüfen der Signatur"
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr "Das Paket trotz des Fehlers akzeptieren."
 
@@ -6174,13 +6174,15 @@ msgstr "Keine Anbieter von '%s' gefunden."
 msgid "Warning: "
 msgstr "Warnung: "
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "Fehler"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "fertig"
 
@@ -6194,11 +6196,17 @@ msgstr "Abrufen:"
 msgid "starting"
 msgstr "Starten"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Nicht gefunden"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "Keine Hilfe für diese Eingabeaufforderung verfügbar."
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "Keine Hilfe für diese Option verfügbar"
 

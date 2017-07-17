@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2017-05-12 13:24+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
@@ -415,7 +415,7 @@ msgstr "Obtenint %s %s-%s.%s"
 msgid "Signature verification failed"
 msgstr "Ha fallat la verificació de la signatura."
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr "S'accepta el paquet malgrat l'error."
 
@@ -6066,14 +6066,16 @@ msgstr "No s'ha trobat cap proveïdor de \"%s\"."
 msgid "Warning: "
 msgstr "Avís: "
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "error"
 
 # ID
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "fet"
 
@@ -6087,11 +6089,17 @@ msgstr "Obtenint"
 msgid "starting"
 msgstr "començant"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "No s'ha trobat"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "No hi ha ajuda per a aquesta entrada."
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "no hi ha ajuda disponible per a aquesta opció"
 

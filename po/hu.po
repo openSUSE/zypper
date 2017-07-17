@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2017-04-26 13:20+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -427,7 +427,7 @@ msgstr "%s %s-%s.%s letöltése"
 msgid "Signature verification failed"
 msgstr "Az aláírás-ellenőrzés sikertelen"
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr "A csomag elfogadása a hiba ellenére."
 
@@ -6133,13 +6133,15 @@ msgstr "Semmi sem szolgáltatja '%s'-t."
 msgid "Warning: "
 msgstr "Figyelmeztetés: "
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "hiba"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "kész"
 
@@ -6153,11 +6155,17 @@ msgstr "Letöltés:"
 msgid "starting"
 msgstr "indítás"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Nem található"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "Ennél a parancssornál nem érhető el a súgó."
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "ehhez a paraméterhez nem tartozik súgó"
 

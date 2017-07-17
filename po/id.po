@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2017-07-05 01:57+0000\n"
 "Last-Translator: Hanhan Hahn <matcherapy@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -413,7 +413,7 @@ msgstr "Menerima %s %s-%s.%s"
 msgid "Signature verification failed"
 msgstr "Verifikasi tanda tangan gagal"
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr "Menerima paket meskipun ada kesalahan."
 
@@ -5854,14 +5854,16 @@ msgstr "Tidak ditemukan penyedia '%s'."
 msgid "Warning: "
 msgstr "Peringatan: "
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "galat"
 
 # ID
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "selesai"
 
@@ -5875,11 +5877,17 @@ msgstr "Mengambil:"
 msgid "starting"
 msgstr "mulai"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Tidak ditemukan"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "Tidak ada bantuan tersedia untuk perintah ini."
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "tidak ada bantuan tersedia untuk opsi ini"
 

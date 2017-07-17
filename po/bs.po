@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2002-07-23 18:27+0200\n"
 "Last-Translator: Damir Bjelobradic <Nagual@lugbih.org>\n"
 "Language-Team: Bosnian <i18n@suse.de>\n"
@@ -386,7 +386,7 @@ msgstr ""
 msgid "Signature verification failed"
 msgstr ""
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr ""
 
@@ -5167,14 +5167,16 @@ msgstr "Novi moduli nisu pronađeni."
 msgid "Warning: "
 msgstr ""
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 #, fuzzy
 msgid "error"
 msgstr "Greška"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 #, fuzzy
 msgid "done"
 msgstr "Indonesija"
@@ -5189,11 +5191,17 @@ msgstr ""
 msgid "starting"
 msgstr "Postavke"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Novi moduli nisu pronađeni."
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr ""
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr ""
 
@@ -5778,10 +5786,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "No patches matching '%s' found."
-#~ msgstr "Novi moduli nisu pronađeni."
-
-#, fuzzy
-#~ msgid "'%s' not found"
 #~ msgstr "Novi moduli nisu pronađeni."
 
 #, fuzzy

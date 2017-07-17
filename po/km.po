@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2012-05-24 15:15+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -387,7 +387,7 @@ msgstr "ទទួល​យក %s %s-%s.%s"
 msgid "Signature verification failed"
 msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ផ្ទៀងផ្ទាត់​ហត្ថលេខា​សម្រាប់​ឯកសារ '%s' ។"
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr ""
 
@@ -5557,13 +5557,15 @@ msgstr "រកមិនឃើញ​ក្រុមហ៊ុន​ផ្ដល់
 msgid "Warning: "
 msgstr "ព្រមាន ៖"
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "កំហុស"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "ធ្វើរួច"
 
@@ -5577,11 +5579,17 @@ msgstr "ទៅ​ប្រមូល​យក ៖"
 msgid "starting"
 msgstr "ចាប់ផ្តើម"
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "រក​មិនឃើញ"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr "គ្មាន​ជំនួយ​សម្រាប់​ប្រអប់​សំណួរ​នេះ​ទេ ។"
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr "គ្មាន​ជំនួយ​សម្រាប់​ជម្រើស​នេះ​ទេ"
 

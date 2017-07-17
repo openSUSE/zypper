@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:55+0200\n"
+"POT-Creation-Date: 2017-07-17 16:55+0200\n"
 "PO-Revision-Date: 2016-05-23 12:39+0000\n"
 "Last-Translator: Sarah O'Farrell <sarah.ofarrell@vistatec.com>\n"
 "Language-Team: English (United Kingdom) <http://l10n.opensuse.org/projects/"
@@ -401,7 +401,7 @@ msgstr "Downloading %s %s-%s.%s"
 msgid "Signature verification failed"
 msgstr "Digest verification failed for %s. Expected %s, found %s."
 
-#: src/callbacks/repo.h:236
+#: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
 msgstr ""
 
@@ -5527,13 +5527,15 @@ msgstr "No matches found"
 msgid "Warning: "
 msgstr "Warning"
 
+#. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:329 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
 msgid "error"
 msgstr "error"
 
+#. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:331 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
 msgid "done"
 msgstr "done"
 
@@ -5548,11 +5550,17 @@ msgstr ""
 msgid "starting"
 msgstr "Starting..."
 
-#: src/output/OutNormal.cc:411
+#. Translator: download progress bar result: "........[not found]"
+#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#, fuzzy
+msgid "not found"
+msgstr "Not found"
+
+#: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
 msgstr ""
 
-#: src/output/OutNormal.cc:422
+#: src/output/OutNormal.cc:427
 msgid "no help available for this option"
 msgstr ""
 
