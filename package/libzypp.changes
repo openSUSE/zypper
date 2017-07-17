@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Jul 17 16:38:14 CEST 2017 - ma@suse.de
+
+- PackageProvider: enforce a signed package if pkgGpgCheckIsMandatory
+- Add RpmDb::checkPackageSignature to report unsigned packages
+- Fix repo gpg check workflows, mainly for unsigned repos and packages
+  (bsc#1045735, bsc#1038984)
+- version 16.15.0 (0)
+
+-------------------------------------------------------------------
 Wed Jul 12 17:06:14 CEST 2017 - ma@suse.de
 
 - repo refresh: Re-probe if the repository type changes (bsc#1048315)
