@@ -174,7 +174,7 @@ namespace zypp
 
       typedef target::rpm::RpmDb RpmDb;
 
-      RpmDb::CheckPackageResult packageSigCheck( const Pathname & path_r, UserData & userData ) const
+      RpmDb::CheckPackageResult packageSigCheck( const Pathname & path_r, bool isMandatory_r, UserData & userData ) const
       {
 	if ( !_target )
 	  _target = getZYpp()->getTarget();
@@ -182,7 +182,14 @@ namespace zypp
 	RpmDb::CheckPackageResult ret = RpmDb::CHK_ERROR;
 	RpmDb::CheckPackageDetail detail;
 	if ( _target )
-	  ret = _target->rpmDb().checkPackage( path_r, detail );
+	{
+	  ret = _target->rpmDb().checkPackageSignature( path_r, detail );
+	  if ( ret == RpmDb::CHK_NOSIG && !isMandatory_r )
+	  {
+	    WAR << "Relax CHK_NOSIG: Config says unsigned packages are OK" << endl;
+	    ret = RpmDb::CHK_OK;
+	  }
+	}
 	else
 	  detail.push_back( RpmDb::CheckPackageDetail::value_type( ret, "OOps. Target is not initialized!" ) );
 
@@ -318,10 +325,9 @@ namespace zypp
 	      userData.set( "ResObject", roptr );	// a type for '_package->asKind<ResObject>()'...
 	      /*legacy:*/userData.set( "Package", roptr->asKind<Package>() );
 	      userData.set( "Localpath", ret.value() );
-	      RpmDb::CheckPackageResult res = packageSigCheck( ret, userData );
+	      RpmDb::CheckPackageResult res = packageSigCheck( ret, info.pkgGpgCheckIsMandatory(), userData );
 	      // publish the checkresult, even if it is OK. Apps may want to report something...
 	      report()->pkgGpgCheck( userData );
-	      DBG << "CHK: " << res << endl;
 
 	      if ( res != RpmDb::CHK_OK )
 	      {
@@ -345,6 +351,7 @@ namespace zypp
 		    case RpmDb::CHK_FAIL:	// Signature does not verify
 		    case RpmDb::CHK_NOTTRUSTED:	// Signature is OK, but key is not trusted
 		    case RpmDb::CHK_ERROR:	// File does not exist or can't be opened
+		    case RpmDb::CHK_NOSIG:	// File is unsigned
 		    default:
 		      // report problem (w. details), throw if to abort, else retry/ignore
 		      defaultReportSignatureError( res, str::Str() << userData.get<RpmDb::CheckPackageDetail>( "CheckPackageDetail" ) );
