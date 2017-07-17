@@ -433,7 +433,8 @@ public:
     CHK_FAIL          = 2, /*!< Signature does not verify. */
     CHK_NOTTRUSTED    = 3, /*!< Signature is OK, but key is not trusted. */
     CHK_NOKEY         = 4, /*!< Public key is unavailable. */
-    CHK_ERROR         = 5  /*!< File does not exist or can't be opened. */
+    CHK_ERROR         = 5, /*!< File does not exist or can't be opened. */
+    CHK_NOSIG         = 6, /*!< File has no gpg signature (only digests). */
   };
 
   /** Detailed rpm signature check log messages
@@ -444,16 +445,30 @@ public:
   {};
 
   /**
-   * Check signature of rpm file on disk.
+   * Check signature of rpm file on disk (legacy version returning CHK_OK if file is unsigned, like 'rpm -K')
    *
    * @param path_r which file to check
    * @param detail_r Return detailed rpm log messages
    *
-   * @return CheckPackageResult
-  */
+   * @return CheckPackageResult (CHK_OK if file is unsigned)
+   *
+   * \see also \ref checkPackageSignature
+   */
   CheckPackageResult checkPackage( const Pathname & path_r, CheckPackageDetail & detail_r );
-  /** \overload Ignoring the \a datails_r */
+  /** \overload Ignoring the \a details_r */
   CheckPackageResult checkPackage( const Pathname & path_r );
+
+  /**
+   * Check signature of rpm file on disk (strict check returning CHK_NOSIG if file is unsigned).
+   *
+   * @param path_r which file to check
+   * @param detail_r Return detailed rpm log messages
+   *
+   * @return CheckPackageResult (CHK_NOSIG if file is unsigned)
+   *
+   * \see also \ref checkPackage
+   */
+  CheckPackageResult checkPackageSignature( const Pathname & path_r, CheckPackageDetail & detail_r );
 
   /** install rpm package
    *

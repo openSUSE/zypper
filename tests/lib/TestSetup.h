@@ -48,7 +48,8 @@ inline std::string getXmlNodeVal( const std::string & line_r, const std::string 
 
 enum TestSetupOptionBits
 {
-  TSO_CLEANROOT = (1 <<  0)
+  TSO_CLEANROOT		= (1 <<  0),	// wipe rootdir in ctor
+  TSO_REPO_DEFAULT_GPG	= (1 <<  1),	// dont turn off gpgcheck in repos
 };
 ZYPP_DECLARE_FLAGS_AND_OPERATORS( TestSetupOptions, TestSetupOptionBits );
 
@@ -81,8 +82,8 @@ class TestSetup
     typedef TestSetupOptions Options;
 
   public:
-    TestSetup( const Arch & sysarch_r = Arch_empty )
-    { _ctor( Pathname(), sysarch_r, Options() ); }
+    TestSetup( const Arch & sysarch_r = Arch_empty, const Options & options_r = Options() )
+    { _ctor( Pathname(), sysarch_r, options_r ); }
 
     TestSetup( const Pathname & rootdir_r, const Arch & sysarch_r = Arch_empty, const Options & options_r = Options() )
     { _ctor( rootdir_r, sysarch_r, options_r ); }
@@ -147,7 +148,8 @@ class TestSetup
       RepoInfo nrepo;
       nrepo.setAlias( alias_r.empty() ? url_r.getHost()+":"+Pathname::basename(url_r.getPathName()) : alias_r );
       nrepo.addBaseUrl( url_r );
-      nrepo.setGpgCheck( false );
+      if ( ! _options.testFlag( TSO_REPO_DEFAULT_GPG ) )
+	nrepo.setGpgCheck( false );
       loadRepo( nrepo );
     }
     /** Directly load repo from metadata(dir) or solvfile(file) to pool.
@@ -390,12 +392,14 @@ class TestSetup
   private:
     void _ctor( const Pathname & rootdir_r, const Arch & sysarch_r, const Options & options_r )
     {
+      _options = options_r;
+
       if ( rootdir_r.empty() )
         _rootdir = _tmprootdir.path();
       else
       {
         filesystem::assert_dir( (_rootdir = rootdir_r) );
-        if ( options_r.testFlag( TSO_CLEANROOT ) )
+        if ( _options.testFlag( TSO_CLEANROOT ) )
           filesystem::clean_dir( _rootdir );
       }
 
@@ -406,6 +410,7 @@ class TestSetup
   private:
     filesystem::TmpDir _tmprootdir;
     Pathname           _rootdir;
+    Options            _options;
 };
 
 

@@ -385,7 +385,7 @@ namespace zypp
     if( signature.empty() || (!PathInfo( signature ).isExist()) )
     {
       bool res = report->askUserToAcceptUnsignedFile( filedesc, context );
-      MIL << "User decision on unsigned file: " << res << endl;
+      MIL << "askUserToAcceptUnsignedFile: " << res << endl;
       return res;
     }
 
@@ -410,22 +410,21 @@ namespace zypp
         {
           MIL << "Key was updated. Saving new version into trusted keyring: " << generalKeyData << endl;
           importKey( exportKey( generalKeyData, generalKeyRing() ), true );
-	  trustedKeyData = generalKeyData = PublicKeyData(); // invalidated by import.
+	  trustedKeyData = publicKeyExists( id, trustedKeyRing() ); // re-read: invalidated by import?
 	}
       }
 
-      if ( ! trustedKeyData )	// invalidated by previous import
-	trustedKeyData = publicKeyExists( id, trustedKeyRing() );
+      // it exists, is trusted, does it validate?
       report->infoVerify( filedesc, trustedKeyData, context );
-
-      // it exists, is trusted, does it validates?
       if ( verifyFile( file, signature, trustedKeyRing() ) )
       {
         return (sigValid_r=true);	// signature is actually successfully validated!
       }
       else
       {
-        return report->askUserToAcceptVerificationFailed( filedesc, exportKey( trustedKeyData, trustedKeyRing() ), context );
+	bool res = report->askUserToAcceptVerificationFailed( filedesc, exportKey( trustedKeyData, trustedKeyRing() ), context );
+	MIL << "askUserToAcceptVerificationFailed: " << res << endl;
+        return res;
       }
     }
     else
@@ -443,7 +442,6 @@ namespace zypp
             reply == KeyRingReport::KEY_TRUST_AND_IMPORT )
         {
           MIL << "User wants to trust key " << id << " " << key.name() << endl;
-          //dumpFile( unKey.path() );
 
           Pathname whichKeyring;
           if ( reply == KeyRingReport::KEY_TRUST_AND_IMPORT )
@@ -455,25 +453,17 @@ namespace zypp
           else
             whichKeyring = generalKeyRing();
 
-          // emit key added
+          // does it validate?
+	  report->infoVerify( filedesc, generalKeyData, context );
           if ( verifyFile( file, signature, whichKeyring ) )
           {
-            MIL << "File signature is verified" << endl;
 	    return (sigValid_r=true);	// signature is actually successfully validated!
           }
           else
           {
-            MIL << "File signature check fails" << endl;
-            if ( report->askUserToAcceptVerificationFailed( filedesc, key, context ) )
-            {
-              MIL << "User continues anyway." << endl;
-              return true;
-            }
-            else
-            {
-              MIL << "User does not want to continue" << endl;
-              return false;
-            }
+	    bool res = report->askUserToAcceptVerificationFailed( filedesc, key, context );
+	    MIL << "askUserToAcceptVerificationFailed: " << res << endl;
+	    return res;
           }
         }
         else
@@ -484,18 +474,11 @@ namespace zypp
       }
       else
       {
-        // unknown key...
+        // signed with an unknown key...
         MIL << "File [" << file << "] ( " << filedesc << " ) signed with unknown key [" << id << "]" << endl;
-        if ( report->askUserToAcceptUnknownKey( filedesc, id, context ) )
-        {
-          MIL << "User wants to accept unknown key " << id << endl;
-          return true;
-        }
-        else
-        {
-          MIL << "User does not want to accept unknown key " << id << endl;
-          return false;
-        }
+	bool res = report->askUserToAcceptUnknownKey( filedesc, id, context );
+	MIL << "askUserToAcceptUnknownKey: " << res << endl;
+	return res;
       }
     }
     return false;
@@ -574,7 +557,7 @@ namespace zypp
     if ( ! PathInfo( signature ).isFile() )
       ZYPP_THROW(Exception( str::Format(_("Signature file %s not found")) % signature.asString() ));
 
-    MIL << "Determining key id if signature " << signature << endl;
+    MIL << "Determining key id of signature " << signature << endl;
     // HACK create a tmp keyring with no keys
     filesystem::TmpDir dir( _base_dir, "fake-keyring" );
     std::string tmppath( dir.path().asString() );

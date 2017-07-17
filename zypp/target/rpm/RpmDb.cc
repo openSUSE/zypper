@@ -58,6 +58,9 @@ using namespace zypp::filesystem;
 
 #define WORKAROUNDRPMPWDBUG
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "ZZZZZZZ"
+
 namespace zypp
 {
   namespace zypp_readonly_hack
@@ -1484,6 +1487,105 @@ namespace
     { static Rpmlog _rpmlog; return _rpmlog; }
   };
 
+  RpmDb::CheckPackageResult doCheckPackageSig( const Pathname & path_r,			// rpm file to check
+					       const Pathname & root_r,			// target root
+					       bool  requireGPGSig_r,			// whether no gpg signature is to be reported
+					       RpmDb::CheckPackageDetail & detail_r )	// detailed result
+  {
+    PathInfo file( path_r );
+    if ( ! file.isFile() )
+    {
+      ERR << "Not a file: " << file << endl;
+      return RpmDb::CHK_ERROR;
+    }
+
+    FD_t fd = ::Fopen( file.asString().c_str(), "r.ufdio" );
+    if ( fd == 0 || ::Ferror(fd) )
+    {
+      ERR << "Can't open file for reading: " << file << " (" << ::Fstrerror(fd) << ")" << endl;
+      if ( fd )
+	::Fclose( fd );
+      return RpmDb::CHK_ERROR;
+    }
+    rpmts ts = ::rpmtsCreate();
+    ::rpmtsSetRootDir( ts, root_r.c_str() );
+    ::rpmtsSetVSFlags( ts, RPMVSF_DEFAULT );
+
+    rpmQVKArguments_s qva;
+    memset( &qva, 0, sizeof(rpmQVKArguments_s) );
+    qva.qva_flags = (VERIFY_DIGEST|VERIFY_SIGNATURE);
+
+    RpmlogCapture vresult;
+    int res = ::rpmVerifySignatures( &qva, ts, fd, path_r.basename().c_str() );
+
+    ts = rpmtsFree(ts);
+    ::Fclose( fd );
+
+    // results per line...
+    //     Header V3 RSA/SHA256 Signature, key ID 3dbdc284: OK
+    //     Header SHA1 digest: OK (a60386347863affefef484ff1f26c889373eb094)
+    //     V3 RSA/SHA256 Signature, key ID 3dbdc284: OK
+    //     MD5 digest: OK (fd5259fe677a406951dcb2e9d08c4dcc)
+    //
+    // TODO: try to get SIG info from the header rather than parsing the output
+    std::vector<std::string> lines;
+    str::split( vresult, std::back_inserter(lines), "\n" );
+    unsigned count[7] = { 0, 0, 0, 0, 0, 0, 0 };
+
+    for ( unsigned i = 1; i < lines.size(); ++i )
+    {
+      std::string & line( lines[i] );
+      RpmDb::CheckPackageResult lineres = RpmDb::CHK_ERROR;
+      if ( line.find( ": OK" ) != std::string::npos )
+      {
+	lineres = RpmDb::CHK_OK;
+	if ( line.find( "Signature, key ID" ) == std::string::npos )
+	  ++count[RpmDb::CHK_NOSIG];	// Valid but no gpg signature -> CHK_NOSIG
+      }
+      else if ( line.find( ": NOKEY" ) != std::string::npos )
+      { lineres = RpmDb::CHK_NOKEY; }
+      else if ( line.find( ": BAD" ) != std::string::npos )
+      { lineres = RpmDb::CHK_FAIL; }
+      else if ( line.find( ": UNKNOWN" ) != std::string::npos )
+      { lineres = RpmDb::CHK_NOTFOUND; }
+      else if ( line.find( ": NOTRUSTED" ) != std::string::npos )
+      { lineres = RpmDb::CHK_NOTTRUSTED; }
+
+      ++count[lineres];
+      detail_r.push_back( RpmDb::CheckPackageDetail::value_type( lineres, std::move(line) ) );
+    }
+
+    RpmDb::CheckPackageResult ret = ( res ? RpmDb::CHK_ERROR : RpmDb::CHK_OK );
+
+    if ( count[RpmDb::CHK_FAIL] )
+      ret = RpmDb::CHK_FAIL;
+
+    else if ( count[RpmDb::CHK_NOTFOUND] )
+      ret = RpmDb::CHK_NOTFOUND;
+
+    else if ( count[RpmDb::CHK_NOKEY] )
+      ret = RpmDb::CHK_NOKEY;
+
+    else if ( count[RpmDb::CHK_NOTTRUSTED] )
+      ret = RpmDb::CHK_NOTTRUSTED;
+
+    else if ( ret == RpmDb::CHK_OK )
+    {
+      if ( count[RpmDb::CHK_OK] == count[RpmDb::CHK_NOSIG]  )
+      {
+	detail_r.push_back( RpmDb::CheckPackageDetail::value_type( RpmDb::CHK_NOSIG, std::string("    ")+_("Package is not signed!") ) );
+	if ( requireGPGSig_r )
+	  ret = RpmDb::CHK_NOSIG;
+      }
+    }
+
+    if ( ret != RpmDb::CHK_OK )
+    {
+      WAR << path_r << " (" << requireGPGSig_r << " -> " << ret << ")" << endl;
+      WAR << vresult;
+    }
+    return ret;
+  }
 
 } // namespace
 ///////////////////////////////////////////////////////////////////
@@ -1492,87 +1594,13 @@ namespace
 //	METHOD TYPE : RpmDb::CheckPackageResult
 //
 RpmDb::CheckPackageResult RpmDb::checkPackage( const Pathname & path_r, CheckPackageDetail & detail_r )
-{
-  PathInfo file( path_r );
-  if ( ! file.isFile() )
-  {
-    ERR << "Not a file: " << file << endl;
-    return CHK_ERROR;
-  }
-
-  FD_t fd = ::Fopen( file.asString().c_str(), "r.ufdio" );
-  if ( fd == 0 || ::Ferror(fd) )
-  {
-    ERR << "Can't open file for reading: " << file << " (" << ::Fstrerror(fd) << ")" << endl;
-    if ( fd )
-      ::Fclose( fd );
-    return CHK_ERROR;
-  }
-  rpmts ts = ::rpmtsCreate();
-  ::rpmtsSetRootDir( ts, root().asString().c_str() );
-  ::rpmtsSetVSFlags( ts, RPMVSF_DEFAULT );
-
-  rpmQVKArguments_s qva;
-  memset( &qva, 0, sizeof(rpmQVKArguments_s) );
-  qva.qva_flags = (VERIFY_DIGEST|VERIFY_SIGNATURE);
-
-  RpmlogCapture vresult;
-  int res = ::rpmVerifySignatures( &qva, ts, fd, path_r.basename().c_str() );
-
-  ts = rpmtsFree(ts);
-  ::Fclose( fd );
-
-
-  if ( res == 0 )
-  {
-    // remove trailing NL!
-    detail_r.push_back( CheckPackageDetail::value_type( CHK_OK, str::rtrim( std::move(vresult) ) ) );
-    return CHK_OK;
-  }
-
-  // results per line...
-  WAR << vresult;
-  std::vector<std::string> lines;
-  str::split( vresult, std::back_inserter(lines), "\n" );
-  unsigned count[6] = { 0, 0, 0, 0, 0, 0 };
-
-  for ( unsigned i = 1; i < lines.size(); ++i )
-  {
-    std::string & line( lines[i] );
-    CheckPackageResult lineres = CHK_ERROR;
-    if ( line.find( ": OK" ) != std::string::npos )
-    { lineres = CHK_OK; }
-    else if ( line.find( ": NOKEY" ) != std::string::npos )
-    { lineres = CHK_NOKEY; }
-    else if ( line.find( ": BAD" ) != std::string::npos )
-    { lineres = CHK_FAIL; }
-    else if ( line.find( ": UNKNOWN" ) != std::string::npos )
-    { lineres = CHK_NOTFOUND; }
-    else if ( line.find( ": NOTRUSTED" ) != std::string::npos )
-    { lineres = CHK_NOTTRUSTED; }
-
-    ++count[lineres];
-    detail_r.push_back( CheckPackageDetail::value_type( lineres, std::move(line) ) );
-  }
-
-  CheckPackageResult ret = CHK_ERROR;
-  if ( count[CHK_FAIL] )
-    ret = CHK_FAIL;
-
-  else if ( count[CHK_NOTFOUND] )
-    ret = CHK_NOTFOUND;
-
-  else if ( count[CHK_NOKEY] )
-    ret = CHK_NOKEY;
-
-  else if ( count[CHK_NOTTRUSTED] )
-    ret = CHK_NOTTRUSTED;
-
-  return ret;
-}
+{ return doCheckPackageSig( path_r, root(), false/*requireGPGSig_r*/, detail_r ); }
 
 RpmDb::CheckPackageResult RpmDb::checkPackage( const Pathname & path_r )
 { CheckPackageDetail dummy; return checkPackage( path_r, dummy ); }
+
+RpmDb::CheckPackageResult RpmDb::checkPackageSignature( const Pathname & path_r, RpmDb::CheckPackageDetail & detail_r )
+{ return doCheckPackageSig( path_r, root(), true/*requireGPGSig_r*/, detail_r ); }
 
 
 // determine changed files of installed package
@@ -2373,6 +2401,8 @@ std::ostream & operator<<( std::ostream & str, RpmDb::CheckPackageResult obj )
     OUTS( CHK_NOKEY,		_("Signatures public key is not available") );
     // translators: possible rpm package signature check result [brief]
     OUTS( CHK_ERROR,		_("File does not exist or signature can't be checked") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_NOSIG,		_("File is unsigned") );
 #undef OUTS
   }
   return str << "UnknowSignatureCheckError("+str::numstring(obj)+")";
