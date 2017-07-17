@@ -63,7 +63,7 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
 
   if ( repoInfo().repoGpgCheck() )
   {
-    if ( isSigned || !repoInfo().pkgGpgCheck() )
+    if ( isSigned || repoInfo().repoGpgCheckIsMandatory() )
     {
       // only add the signature if it exists
       if ( isSigned )
@@ -83,7 +83,7 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
     }
     else
     {
-      WAR << "Accept unsigned repository because pkgGpgCheck is on for " << repoInfo().alias() << endl;
+      WAR << "Accept unsigned repository because repoGpgCheck is not mandatory for " << repoInfo().alias() << endl;
     }
   }
   else

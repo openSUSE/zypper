@@ -277,30 +277,80 @@ namespace zypp
       void setPackagesPath( const Pathname &path );
 
 
-      /** Whether default signature checking should be performed for this repo.
+      /** \name Repository gpgchecks
+       * How signature checking should be performed for this repo.
        *
-       * This will turn on \ref repoGpgCheck for signed repos and
-       * \ref pkgGpgCheck for unsigned ones or if \ref repoGpgCheck is off.
+       * The values are computed based in the settings of \c gpgcheck, \c repo_gpgcheck
+       * end \c pkg_gpgcheck in \c zypp.conf. Explicitly setting these values in the
+       * repositories \a .repo file will overwrite the defaults from \c zypp.conf for this
+       * repo.
        *
-       * The default is \c true but may be overwritten by \c zypp.conf or a \ref .repo file.
+       * If \c gpgcheck is \c on (the default) we will check the signature of repo metadata
+       * (packages are secured via checksum inside the metadata). Using unsigned repos
+       * needs to be confirmed.
+       * Packages from signed repos are accepted if their checksum matches the checksum
+       * stated in the repo metadata.
+       * Packages from unsigned repos need a valid gpg signature, using unsigned packages
+       * needs to be confirmed.
+       *
+       * The above default behavior can be tuned by explicitly setting \c repo_gpgcheck
+       * and/or \c pkg_gpgcheck:
+       *
+       *   \c repo_gpgcheck = \c on same as the default.
+       *
+       *   \c repo_gpgcheck = \c off will silently accept unsigned repos. It will NOT turn of
+       *   signature checking on the whole, nevertheless it's not a secure setting.
+       *
+       *   \c pkg_gpgcheck = \c on will enforce the package signature checking and the need
+       *   to confirm unsigned packages for all repos (signed and unsigned).
+       *
+       *   \c pkg_gpgcheck = \c off will silently accept unsigned packages. It will NOT turn of
+       *   signature checking on the whole, nevertheless it's not a secure setting.
+       *
+       * If \c gpgCheck is \c off (not recommneded), no checks are performed. You can still
+       * enable them individually by setting \c repo_gpgcheck and/or \c pkg_gpgcheck to \c on.
+       *
+       * \code
+       *  R: check repo signature is mandatory, confirm unsigned repos
+       *  r: check repo signature, unsigned repos are ok but enforce p
+       *   : do not check repo signatures
+       *
+       *  P: check package signature always, confirm unsigned packages
+       *  p: like P for unsigned repos, accepted by checksum for signed repos
+       *  b: like p but accept unsigned packages
+       *   : do not check package signatures
+       *                    pkg_
+       * gpgcheck 1|     *       0       1
+       * ------------------------------------
+       * repo_   *1|     R/p     R/b     R/P
+       *          0|     r/p     r/b     r/P
+       *
+       *                    pkg_
+       * gpgcheck 0|     *       0       1
+       * ------------------------------------
+       * repo_   *0|                       P
+       *          1|     R       R       R/P
+       * \endcode
        */
+      //@{
+      /** Whether default signature checking should be performed. */
       bool gpgCheck() const;
       /** Set the value for \ref gpgCheck (or \c indeterminate to use the default). */
       void setGpgCheck( TriBool value_r );
       /** \overload \deprecated legacy and for squid */
       void setGpgCheck( bool value_r );
 
-      /** Whether the signature of repo metadata should be checked for this repo.
-       * The default is defined by \ref gpgCheck but may be overwritten by \c zypp.conf or a \ref .repo file.
-       */
+      /** Whether the signature of repo metadata should be checked for this repo. */
       bool repoGpgCheck() const;
+      /** Mandatory check (\ref repoGpgCheck is \c on) must ask to confirm using unsigned repos. */
+      bool repoGpgCheckIsMandatory() const;
       /** Set the value for \ref repoGpgCheck (or \c indeterminate to use the default). */
       void setRepoGpgCheck( TriBool value_r );
 
-      /** Whether the signature of rpm packages should be checked for this repo.
-       * The default is defined by \ref gpgCheck but may be overwritten by \c zypp.conf or a \ref .repo file.
-       */
+      /** Whether the signature of rpm packages should be checked for this repo. */
       bool pkgGpgCheck() const;
+      /** Mandatory check (\ref pkgGpgCheck is not \c off) must ask to confirm using unsigned packages. */
+      bool pkgGpgCheckIsMandatory() const;
       /** Set the value for \ref pkgGpgCheck (or \c indeterminate to use the default). */
       void setPkgGpgCheck( TriBool value_r );
 
@@ -310,6 +360,7 @@ namespace zypp
       TriBool validRepoSignature() const;
       /** Set the value for \ref validRepoSignature (or \c indeterminate if unsigned). */
       void setValidRepoSignature( TriBool value_r );
+      //@}
 
 
       /** Whether gpgkey URLs are defined */
