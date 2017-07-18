@@ -295,6 +295,7 @@ namespace zypp
 
       MIL << "provide Package " << _package << endl;
       Url url = * info.baseUrlsBegin();
+      try {
       do {
         _retry = false;
 	if ( ! ret->empty() )
@@ -409,6 +410,16 @@ namespace zypp
               }
           }
       } while ( _retry );
+      } catch(...){
+	// bsc#1045735: Be sure no invalid files stay in the cache!
+	// TODO: It would be better to provide a filechecker passed to the
+	// fetcher that performs the pkgGpgCheck. This way a bad file would be
+	// discarded before it's moved to the cache.
+	// For now make sure the file gets deleted (even if keeppackages=1).
+	if ( ! ret->empty() )
+	  ret.setDispose( filesystem::unlink );
+	throw;
+      }
 
       report()->finish( _package, repo::DownloadResolvableReport::NO_ERROR, std::string() );
       MIL << "provided Package " << _package << " at " << ret << endl;
