@@ -58,9 +58,6 @@ using namespace zypp::filesystem;
 
 #define WORKAROUNDRPMPWDBUG
 
-#undef ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "ZZZZZZZ"
-
 namespace zypp
 {
   namespace zypp_readonly_hack
