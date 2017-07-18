@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
 Tue Jul 18 13:18:16 CEST 2017 - ma@suse.de
 
-- Be sure bad packages do not stay in the cache (bsc#1045735)
+- Be sure bad packages do not stay in the cache
+  (bsc#1045735, CVE-2017-9269)
 - version 16.15.1 (0)
 
 -------------------------------------------------------------------
@@ -10,7 +11,7 @@ Mon Jul 17 16:38:14 CEST 2017 - ma@suse.de
 - PackageProvider: enforce a signed package if pkgGpgCheckIsMandatory
 - Add RpmDb::checkPackageSignature to report unsigned packages
 - Fix repo gpg check workflows, mainly for unsigned repos and packages
-  (bsc#1045735, bsc#1038984)
+  (bsc#1045735, bsc#1038984, CVE-2017-7435, CVE-2017-7436, CVE-2017-9269)
 - version 16.15.0 (0)
 
 -------------------------------------------------------------------
