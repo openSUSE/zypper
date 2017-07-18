@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <fstream>
 #include <unordered_set>
 #include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
@@ -199,6 +200,44 @@ namespace zypp
       ino_t mntNS;
     };
 
+#if 0
+    void lsofdebug( const Pathname & file_r )
+    {
+      std::ifstream infile( file_r.c_str() );
+      USR << infile << endl;
+      std::vector<std::string> fields;
+      CacheEntry cache;
+      for( iostr::EachLine in( infile ); in; in.next() )
+      {
+	std::string field( *in );
+	if ( field[0] == 'f' || field[0] == 'p' )
+	{
+	  if ( !fields.empty() )
+	  {
+	    // consume
+	    std::string line( str::join( fields, "\n" ) );
+	    for ( char & c : line )
+	    { if ( c == '\n' ) c = '\0'; }
+	    line.push_back( '\n' );
+
+	    size_t sze = cache.second.size();
+	    addCacheIf( cache, line, false );
+	    if ( sze != cache.second.size() )
+	      USR << fields << endl;
+
+	    fields.clear();
+	  }
+	  if ( field[0] == 'p' )
+	    continue;
+	  fields.push_back( field );
+	}
+	else if ( !fields.empty() )
+	{
+	  fields.push_back( field );
+	}
+      }
+    }
+#endif
     /////////////////////////////////////////////////////////////////
   } // namespace
   ///////////////////////////////////////////////////////////////////
