@@ -37,15 +37,6 @@ using std::endl;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
-  namespace env
-  {
-    bool YAST_IS_RUNNING()
-    {
-      static const char * envp = getenv( "YAST_IS_RUNNING" );
-      return envp && *envp;
-    }
-  }
-
   ///////////////////////////////////////////////////////////////////
   namespace repo
   {
@@ -316,9 +307,7 @@ namespace zypp
           {
             ret = doProvidePackage();
 
-	    if ( info.pkgGpgCheck()
-#warning bsc1037210 disabled SrcPackage signature check if YAST_IS_RUNNING - waiting for yast to be fixed
-	      && !( env::YAST_IS_RUNNING() && isKind<SrcPackage>( _package ) ) )
+	    if ( info.pkgGpgCheck() )
 	    {
 	      UserData userData( "pkgGpgCheck" );
 	      ResObject::constPtr roptr( _package );	// gcc6 needs it more explcit. Has problem deducing
