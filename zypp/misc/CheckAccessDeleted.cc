@@ -162,6 +162,7 @@ namespace zypp
         static const char * black[] = {
             "/SYSV"
           , "/var/run/"
+          , "/var/lib/sss/"
           , "/dev/"
         };
         for_( it, arrayBegin( black ), arrayEnd( black ) )
