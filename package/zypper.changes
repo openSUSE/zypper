@@ -2,7 +2,7 @@
 Mon Jul 17 16:48:09 CEST 2017 - ma@suse.de
 
 - Adapt download callback to report and handle unsigned packages
-  (bsc#1038984)
+  (bsc#1038984, CVE-2017-7436)
 - BuildRequires:  libzypp-devel >= 16.15.0
 - version 1.13.30
 
