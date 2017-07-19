@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:24+0200\n"
-"PO-Revision-Date: 2017-06-08 13:01+0000\n"
-"Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/"
-">\n"
+"PO-Revision-Date: 2017-07-19 19:55+0000\n"
+"Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -200,7 +200,7 @@ msgstr "Fjernelse af den offentlige nøgle %s fejlede: %s"
 
 #: zypp/target/rpm/RpmDb.cc:1576
 msgid "Package is not signed!"
-msgstr ""
+msgstr "Pakke er ikke signeret!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -285,7 +285,7 @@ msgstr "Filen findes ikke eller signaturen kan ikke tjekkes"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2405
 msgid "File is unsigned"
-msgstr ""
+msgstr "Filen er uden signatur"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
