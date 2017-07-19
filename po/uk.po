@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:55+0200\n"
-"PO-Revision-Date: 2017-06-02 11:47+0000\n"
-"Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
+"PO-Revision-Date: 2017-07-09 15:47+0000\n"
+"Last-Translator: Yaroslav Semchenko <ukrkyi@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
 "Language: uk\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:55
 msgid "Repository:"
@@ -508,8 +508,7 @@ msgstr "Постачальник"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:255
-#: src/utils/misc.cc:296
+#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:255 src/utils/misc.cc:296
 msgid "Summary"
 msgstr "Підсумок"
 
@@ -2025,12 +2024,12 @@ msgstr "Перевірка чи освіжати метадані для %s"
 #: src/repos.cc:267
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
-msgstr "Сховище «%s» не потребує оновлення."
+msgstr "Сховище \"%s\" не потребує оновлення."
 
 #: src/repos.cc:273
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "Перевірку сховища «%s» на відповідність було відкладено."
+msgstr "Перевірку сховища \"%s\" на відповідність було відкладено."
 
 #: src/repos.cc:295
 msgid "Forcing raw metadata refresh"
@@ -2039,7 +2038,7 @@ msgstr "Примусове освіження сирих метаданих"
 #: src/repos.cc:301
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Звантаження метаданих сховища «%s»"
+msgstr "Звантаження метаданих сховища \"%s\""
 
 # power-off message
 #: src/repos.cc:325
@@ -5485,7 +5484,7 @@ msgid ""
 msgstr ""
 "Ви збираєтесь оновити дистрибутив до нової версії за допомогою всіх "
 "увімкнених сховищ. Перед тим як продовжити переконайтесь, що ці сховища між "
-"собою сумісні. Для детальнішої інформації про цю команду дивіться «%s»."
+"собою сумісні. Для детальнішої інформації про цю команду дивіться \"%s\"."
 
 #: src/Zypper.cc:4912 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
@@ -5700,8 +5699,8 @@ msgid ""
 "these programs."
 msgstr ""
 "Існують запущені програми, що використовують файли, які вилучено недавнім "
-"оновленням. Можливо, бажаєте перезапустити деякі з низ. Запустіть «%s», щоб "
-"отримати список цих програм."
+"оновленням. Можливо, бажаєте перезапустити деякі з них. Запустіть \"%s\", "
+"щоб отримати список цих програм."
 
 #: src/solve-commit.cc:473
 msgid "Update notifications were received from the following packages:"
@@ -6611,6 +6610,9 @@ msgstr "Наявні режими звантаження: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Параметр \"%s\" скасовує \"%s\"."
+
+#~ msgid "Tell PackageKit to quit?"
+#~ msgstr "Завершити PackageKit?"
 
 #~ msgid "Reboot Required"
 #~ msgstr "Потрібне перезавантаження"
