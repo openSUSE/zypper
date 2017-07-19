@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:55+0200\n"
-"PO-Revision-Date: 2017-07-04 22:47+0000\n"
-"Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"PO-Revision-Date: 2017-07-19 19:59+0000\n"
+"Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2958,12 +2958,15 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Sig automatisk 'ja' når der spørges om tredjepartslicens. Se 'man zypper' "
+"for flere detaljer."
 
 #: src/Zypper.cc:107
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Accepter automatisk produktlicenser kun. Se 'man zypper' for flere detaljer."
 
 #: src/Zypper.cc:116
 msgid ""
@@ -2994,6 +2997,9 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Vi kan spørge PackageKit om at afbryde den nuværende handling så snart det "
+"er muligt, men det afhænger af hvor hurtigt PackageKit vil svare på denne "
+"anmodning."
 
 #: src/Zypper.cc:152
 msgid "Ask PackageKit to quit?"
@@ -6000,9 +6006,8 @@ msgstr "starter"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "Ikke fundet"
+msgstr "ikke fundet"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
