@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:55+0200\n"
-"PO-Revision-Date: 2017-05-12 13:24+0000\n"
+"PO-Revision-Date: 2017-07-20 09:38+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:55
 msgid "Repository:"
@@ -2991,12 +2991,16 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Respon automàticament \"sí\" a la confirmació d'acceptació de la llicència "
+"de tercers. Vegeu \"man zypper\" per a més detalls."
 
 #: src/Zypper.cc:107
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Accepta automàticament només llicències de productes. Vegeu \"man zypper\" "
+"per a més detalls."
 
 #: src/Zypper.cc:116
 msgid ""
@@ -3028,6 +3032,8 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Puc demanar al PackageKit que interrompi l'acció actual al més aviat "
+"possible, però depèn del PackageKit la rapidesa amb què respon la petició."
 
 #: src/Zypper.cc:152
 msgid "Ask PackageKit to quit?"
@@ -6091,9 +6097,8 @@ msgstr "començant"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "No s'ha trobat"
+msgstr "no trobat"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
