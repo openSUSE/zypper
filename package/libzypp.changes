@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Jul 21 13:26:48 CEST 2017 - ma@suse.de
+
+- Weaken fix for bsc#1038984 if 'gpgcheck=0' in libzypp-16.15.x only.
+  This will allow some already released products to adapt to the
+  behavioral changes introduced by fixing bsc#1038984, while systems
+  with a default configuration (gpgcheck=1) already benefit from
+  the fix in libzypp-16.15.x. For details see section
+  'Signature checking' in /etc/zypp/zypp.conf.
+- Fix gpg-pubkey relase (creation time) computation (bsc#1036659)
+- update lsof blacklist (bsc#1046417)
+- version 16.15.2 (0)
+
+-------------------------------------------------------------------
 Tue Jul 18 13:18:16 CEST 2017 - ma@suse.de
 
 - Be sure bad packages do not stay in the cache
