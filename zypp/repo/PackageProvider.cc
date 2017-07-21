@@ -315,7 +315,28 @@ namespace zypp
 	      userData.set( "ResObject", roptr );	// a type for '_package->asKind<ResObject>()'...
 	      /*legacy:*/userData.set( "Package", roptr->asKind<Package>() );
 	      userData.set( "Localpath", ret.value() );
+#if ( 1 )
+	      bool pkgGpgCheckIsMandatory = info.pkgGpgCheckIsMandatory();
+	      if ( str::startsWith( VERSION, "16.15." ) )
+	      {
+		// BSC#1038984: For a short period of time, libzypp-16.15.x
+		// will silently accept unsigned packages IFF a repositories gpgcheck
+		// configuration is explicitly turned OFF like this:
+		//     gpgcheck      = 0
+		//     repo_gpgcheck = 0
+		//     pkg_gpgcheck  = 1
+		// This will allow some already released products to adapt to the behavioral
+		// changes introduced by fixing BSC#1038984, while systems with a default
+		// configuration (gpgcheck = 1) already benefit from the fix.
+		// With libzypp-16.16.x the above configuration will reject unsigned packages
+		// as it should.
+		if ( pkgGpgCheckIsMandatory && !info.gpgCheck() && !info.repoGpgCheck() )
+		  pkgGpgCheckIsMandatory = false;
+	      }
+	      RpmDb::CheckPackageResult res = packageSigCheck( ret, pkgGpgCheckIsMandatory, userData );
+#else
 	      RpmDb::CheckPackageResult res = packageSigCheck( ret, info.pkgGpgCheckIsMandatory(), userData );
+#endif
 	      // publish the checkresult, even if it is OK. Apps may want to report something...
 	      report()->pkgGpgCheck( userData );
 
