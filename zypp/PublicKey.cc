@@ -251,8 +251,8 @@ namespace zypp
 
 	case pSIG:
 	  // Update creation/modification date from signatures type "13x".
-	  if ( ( _words.size() > 10 && _words[10] == "13x" )
-	    || ( _words.size() > 12 && _words[12] == "13x" ) )
+	  if ( ( _words.size() > 10 && _words[10] == "13x" && !_words[9].empty() && _words[9] != "[User ID not found]" )
+	    || ( _words.size() > 12 && _words[12] == "13x" /* [selfsig] */) )
 	  {
 	    Date cdate(str::strtonum<Date::ValueType>(_words[5]));
 	    if ( key->_pimpl->_created < cdate )
@@ -266,7 +266,7 @@ namespace zypp
 	  break;
 
 	case pUID:
-	  if ( ! _words[9].empty() )
+	  if ( ! _words[9].empty() && _words[9] != "[User ID not found]" )
 	    key->_pimpl->_name = str::replaceAll( _words[9], "\\x3a", ":" );
 	  break;
 
