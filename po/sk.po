@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:55+0200\n"
-"PO-Revision-Date: 2017-05-15 19:26+0100\n"
+"PO-Revision-Date: 2017-07-22 14:46+0100\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
 "Language: sk\n"
@@ -3041,12 +3041,16 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Automaticky povedať 'áno' výzve na potvrdenie licencie tretích strán. Viac "
+"informácií nájdete na 'man zipper'."
 
 #: src/Zypper.cc:107
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Automaticky prijať iba licencie produktov. Viac informácií nájdete na 'man "
+"zipper'."
 
 #: src/Zypper.cc:116
 msgid ""
@@ -3077,6 +3081,8 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Môžeme požiadať PackageKit, aby prerušil súčasnú akciu čo najskôr, ale "
+"záleží od PackageKit, ako rýchlo zareaguje na túto požiadavku."
 
 #: src/Zypper.cc:152
 msgid "Ask PackageKit to quit?"
@@ -6056,9 +6062,8 @@ msgstr "štartovanie"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "Nenájdený"
+msgstr "nenájdené"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
