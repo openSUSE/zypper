@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:24+0200\n"
-"PO-Revision-Date: 2017-07-19 19:55+0000\n"
-"Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
+"PO-Revision-Date: 2017-07-26 20:15+0000\n"
+"Last-Translator: Martin Eilsøe <martin@eilsoe.dk>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
 "\n"
 "Language: da\n"
@@ -1171,7 +1171,7 @@ msgstr "Indien"
 #. :IND:356:
 #: zypp/CountryCode.cc:262
 msgid "British Indian Ocean Territory"
-msgstr "British Indian Ocean Territory"
+msgstr "Britisk område indiske ocean"
 
 #. :IOT:086:
 #: zypp/CountryCode.cc:263
