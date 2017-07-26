@@ -43,11 +43,21 @@ namespace zypp
     */
     class Fd
     {
+      NON_COPYABLE( Fd );
     public:
       /** Ctor opens file.
        * \throw EXCEPTION If open fails.
       */
       Fd( const Pathname & file_r, int open_flags, mode_t mode = 0 );
+
+      /** Move ctor */
+      Fd( Fd && rhs )
+      : m_fd( -1 )
+      { std::swap( m_fd, rhs.m_fd ); }
+
+      /** Move assign */
+      Fd & operator=( Fd && rhs )
+      { if ( this != &rhs ) std::swap( m_fd, rhs.m_fd ); }
 
       /** Dtor closes file. */
       ~Fd()
@@ -64,13 +74,13 @@ namespace zypp
       int fd() const
       { return m_fd; }
 
+      /** Return the filedescriptor. */
+      int operator*() const
+      { return m_fd; }
+
     private:
       /** The filedescriptor. */
       int m_fd;
-      /** No copy. */
-      Fd( const Fd & );
-      /** No assign. */
-      Fd & operator=( const Fd & );
     };
     ///////////////////////////////////////////////////////////////////
 
