@@ -46,6 +46,9 @@ struct Options;
  */
 #define ZYPPER_RPM_CACHE_DIR "/var/cache/zypper/RPMS"
 
+inline std::string dashdash( std::string optname_r )
+{ return optname_r.insert( 0, "--" ); }
+
 /**
  * Structure for holding global options.
  *

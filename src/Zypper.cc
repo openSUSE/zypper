@@ -230,9 +230,6 @@ namespace {
     return mayuse;
   }
 
-  inline std::string dashdash( std::string optname_r )
-  { return optname_r.insert( 0, "--" ); }
-
   inline std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, bool global_r = false )
   {
     return str::FormatNAC( global_r
