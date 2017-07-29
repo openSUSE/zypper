@@ -21,15 +21,15 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:55+0200\n"
-"PO-Revision-Date: 2017-04-25 07:24+0000\n"
-"Last-Translator: Jakub Muzik <JakubMu@virtus.cz>\n"
+"PO-Revision-Date: 2017-07-29 08:40+0000\n"
+"Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:55
 msgid "Repository:"
@@ -3046,12 +3046,15 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Automatická odpověď \"ano\" (resp. \"yes\") na dotaz přijetí licencí třetích "
+"stran. Podrobnosti viz \"man zypper\"."
 
 #: src/Zypper.cc:107
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Automaticky přijmout poute licence produktů. Podrobnosti viz \"man zypper\"."
 
 #: src/Zypper.cc:116
 msgid ""
@@ -3082,6 +3085,8 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Můžeme požádať PackageKit, aby co nejdříve přerušil současnou akci, ale "
+"záleží na PackageKitu, jak rychle zareaguje na tento požiadavek."
 
 #: src/Zypper.cc:152
 msgid "Ask PackageKit to quit?"
@@ -3113,9 +3118,8 @@ msgid "Command options:"
 msgstr "Volby příkazu:"
 
 #: src/Zypper.cc:330
-#, fuzzy
 msgid "Solver options:"
-msgstr "Expertní volby:"
+msgstr "Řešitelské volby:"
 
 #: src/Zypper.cc:333
 msgid "Expert options:"
@@ -3426,6 +3430,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"Není-li '%1%' překlep, patrně nejde o vestavěný příkaz, ale dodaný podpříkaz "
+"nebo plug-in (viz '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -3435,6 +3441,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"V tomto případě nejprve nainstalujte specifický balíček, který dodá "
+"podpříkaz. Tyto balíčky se často nazývají '%1%' nebo '%2%'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -6077,9 +6085,8 @@ msgstr "startuji"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "Nenalezeno"
+msgstr "nenalezeno"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
