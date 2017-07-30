@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:55+0200\n"
-"PO-Revision-Date: 2017-07-03 22:24+0000\n"
-"Last-Translator: Samanta Magalhaes <samanta@texttrans.com>\n"
-"Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
-"zypper/master/pt_BR/>\n"
+"PO-Revision-Date: 2017-07-30 00:27+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) "
+"<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2988,12 +2988,16 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Dizer automaticamente 'sim' no prompt de confirmação de licenças de "
+"terceiros. Veja 'man zypper' para mais detalhes."
 
 #: src/Zypper.cc:107
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Aceitar automaticamente apenas as licenças de produto. Veja 'man zypper' "
+"para mais detalhes."
 
 #: src/Zypper.cc:116
 msgid ""
@@ -3025,6 +3029,9 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Podemos pedir para o PackageKit interromper a ação atual o mais rápido "
+"possível, mas depende do PackageKit o quão rápido ele irá responder a este "
+"pedido."
 
 #: src/Zypper.cc:152
 msgid "Ask PackageKit to quit?"
@@ -6068,9 +6075,8 @@ msgstr "iniciando"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "Não encontrado"
+msgstr "não encontrado"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
@@ -6363,11 +6369,11 @@ msgstr "Erro ao analisar zypper.conf:"
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr "Opção desconhecida "
+msgstr "Opção desconhecida"
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
-msgstr "Argumento ausente para "
+msgstr "Argumento ausente para"
 
 #. translators: speaking of two mutually contradicting command line options
 #: src/utils/getopt.cc:123
