@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:55+0200\n"
-"PO-Revision-Date: 2017-07-19 19:59+0000\n"
+"PO-Revision-Date: 2017-07-31 22:30+0000\n"
 "Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -2978,11 +2978,11 @@ msgstr ""
 
 #: src/Zypper.cc:119
 msgid "The default is to exclude optional patches."
-msgstr "Standarden er er ekskludere valgfrie rettelser."
+msgstr "Standarden er ekskludere valgfrie rettelser."
 
 #: src/Zypper.cc:120
 msgid "The default is to include optional patches."
-msgstr "Standarden er er inkludere valgfrie rettelser."
+msgstr "Standarden er inkludere valgfrie rettelser."
 
 #: src/Zypper.cc:143
 msgid ""
