@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:55+0200\n"
-"PO-Revision-Date: 2017-07-03 15:13+0000\n"
-"Last-Translator: Javier Llorente <javier@opensuse.org>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2017-08-08 21:10+0000\n"
+"Last-Translator: jc sl <trcs@gmx.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3018,12 +3018,16 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Responder «sí» automáticamente a las solicitudes de confirmación para "
+"aceptar licencias de terceros. Vea «man zypper» para más detalles."
 
 #: src/Zypper.cc:107
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Aceptar automáticamente solo licencias de productos. Vea «man zypper» para "
+"más detalles."
 
 #: src/Zypper.cc:116
 msgid ""
@@ -3055,6 +3059,9 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Se puede pedir a PackageKit que interrumpa la acción en curso tan pronto "
+"como sea posible, pero depende de PackageKit cómo de rápido responde a la "
+"petición."
 
 #: src/Zypper.cc:152
 msgid "Ask PackageKit to quit?"
@@ -3086,9 +3093,8 @@ msgid "Command options:"
 msgstr "Opciones del comando:"
 
 #: src/Zypper.cc:330
-#, fuzzy
 msgid "Solver options:"
-msgstr "Opciones de experto:"
+msgstr "Opciones del solucionador:"
 
 #: src/Zypper.cc:333
 msgid "Expert options:"
@@ -3416,6 +3422,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"En este caso, es necesario instalar primero un paquete específico que "
+"proporcione el subcomando. Dichos paquetes se llaman a menudo '%1%' o '%2%'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -6148,9 +6156,8 @@ msgstr "iniciando"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "No encontrado"
+msgstr "no encontrado"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
