@@ -264,9 +264,9 @@ namespace zypp
     bool cfgGpgCheck() const
     { return indeterminate(_rawGpgCheck) ? ZConfig::instance().gpgCheck() : (bool)_rawGpgCheck; }
     TriBool cfgRepoGpgCheck() const
-    { return indeterminate(_rawRepoGpgCheck) ? ZConfig::instance().repoGpgCheck() : _rawRepoGpgCheck; }
+    { return indeterminate(_rawGpgCheck) && indeterminate(_rawRepoGpgCheck) ? ZConfig::instance().repoGpgCheck() : _rawRepoGpgCheck; }
     TriBool cfgPkgGpgCheck() const
-    { return indeterminate(_rawPkgGpgCheck) ? ZConfig::instance().pkgGpgCheck() : _rawPkgGpgCheck; }
+    { return indeterminate(_rawGpgCheck) && indeterminate(_rawPkgGpgCheck) ? ZConfig::instance().pkgGpgCheck() : _rawPkgGpgCheck; }
 
   private:
     TriBool _validRepoSignature;///< have  signed and valid repo metadata
