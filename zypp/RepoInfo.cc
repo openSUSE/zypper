@@ -409,6 +409,63 @@ namespace zypp
   void RepoInfo::setValidRepoSignature( TriBool value_r )
   { _pimpl->internalSetValidRepoSignature( value_r ); }
 
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  {
+    inline bool changeGpgCheckTo( TriBool & lhs, TriBool rhs )
+    { if ( ! sameTriboolState( lhs, rhs ) ) { lhs = rhs; return true; } return false; }
+
+    inline bool changeGpgCheckTo( TriBool ogpg[3], TriBool g, TriBool r, TriBool p )
+    {
+      bool changed = false;
+      if ( changeGpgCheckTo( ogpg[0], g ) ) changed = true;
+      if ( changeGpgCheckTo( ogpg[1], r ) ) changed = true;
+      if ( changeGpgCheckTo( ogpg[2], p ) ) changed = true;
+      return changed;
+    }
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
+  bool RepoInfo::setGpgCheck( GpgCheck mode_r )
+  {
+    TriBool ogpg[3];	// Gpg RepoGpg PkgGpg
+    getRawGpgChecks( ogpg[0], ogpg[1], ogpg[2] );
+
+    bool changed = false;
+    switch ( mode_r )
+    {
+      case GpgCheck::On:
+	changed = changeGpgCheckTo( ogpg, true,          indeterminate, indeterminate );
+	break;
+      case GpgCheck::Strict:
+	changed = changeGpgCheckTo( ogpg, true,          true,          true          );
+	break;
+      case GpgCheck::AllowUnsigned:
+	changed = changeGpgCheckTo( ogpg, true,          false,         false         );
+	break;
+      case GpgCheck::AllowUnsignedRepo:
+	changed = changeGpgCheckTo( ogpg, true,          false,         indeterminate );
+	break;
+      case GpgCheck::AllowUnsignedPackage:
+	changed = changeGpgCheckTo( ogpg, true,          indeterminate, false         );
+	break;
+      case GpgCheck::Default:
+	changed = changeGpgCheckTo( ogpg, indeterminate, indeterminate, indeterminate );
+	break;
+      case GpgCheck::Off:
+	changed = changeGpgCheckTo( ogpg, false,         indeterminate, indeterminate );
+	break;
+      case GpgCheck::indeterminate:	// no change
+	break;
+    }
+
+    if ( changed )
+    {
+      setGpgCheck    ( ogpg[0] );
+      setRepoGpgCheck( ogpg[1] );
+      setPkgGpgCheck ( ogpg[2] );
+    }
+    return changed;
+  }
 
   void RepoInfo::setMirrorListUrl( const Url & url_r )	// Raw
   { _pimpl->_mirrorListUrl.raw() = url_r; _pimpl->_mirrorListForceMetalink = false; }
@@ -802,6 +859,23 @@ namespace zypp
     return obj.dumpOn(str);
   }
 
+  std::ostream & operator<<( std::ostream & str, const RepoInfo::GpgCheck & obj )
+  {
+    switch ( obj )
+    {
+#define OUTS( V ) case RepoInfo::V: return str << #V; break
+      OUTS( GpgCheck::On );
+      OUTS( GpgCheck::Strict );
+      OUTS( GpgCheck::AllowUnsigned );
+      OUTS( GpgCheck::AllowUnsignedRepo );
+      OUTS( GpgCheck::AllowUnsignedPackage );
+      OUTS( GpgCheck::Default );
+      OUTS( GpgCheck::Off );
+      OUTS( GpgCheck::indeterminate );
+#undef OUTS
+    }
+    return str << "GpgCheck::UNKNOWN";
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

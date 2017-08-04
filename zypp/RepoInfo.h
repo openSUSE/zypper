@@ -360,6 +360,24 @@ namespace zypp
       TriBool validRepoSignature() const;
       /** Set the value for \ref validRepoSignature (or \c indeterminate if unsigned). */
       void setValidRepoSignature( TriBool value_r );
+
+      /** Some predefined settings */
+      enum class GpgCheck {
+	indeterminate,		//< not specified
+	On,			//< 1** --gpgcheck
+	Strict,			//< 111 --gpgcheck-strict
+	AllowUnsigned,		//< 100 --gpgcheck-allow-unsigned
+	AllowUnsignedRepo,	//< 10* --gpgcheck-allow-unsigned-repo
+	AllowUnsignedPackage,	//< 1*0 --gpgcheck-allow-unsigned-package
+	Default,		//< *** --default-gpgcheck
+	Off,			//< 0** --no-gpgcheck
+      };
+
+      /** Adjust *GpgCheck settings according to \a mode_r.
+       * \c GpgCheck::indeterminate will leave the settings as they are.
+       * \return whether setting were changed
+       */
+      bool setGpgCheck( GpgCheck mode_r );
       //@}
 
 
@@ -524,6 +542,8 @@ namespace zypp
   /** \relates RepoInfo Stream output */
   std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
 
+  /** \relates RepoInfo::GpgCheck Stream output */
+  std::ostream & operator<<( std::ostream & str, const RepoInfo::GpgCheck & obj );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
