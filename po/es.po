@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-17 16:24+0200\n"
-"PO-Revision-Date: 2017-07-03 14:53+0000\n"
-"Last-Translator: Javier Llorente <javier@opensuse.org>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
-">\n"
+"PO-Revision-Date: 2017-08-04 17:45+0000\n"
+"Last-Translator: jc sl <trcs@gmx.com>\n"
+"Language-Team: Spanish "
+"<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -217,7 +217,7 @@ msgstr "Error al eliminar la clave pública %s: %s"
 
 #: zypp/target/rpm/RpmDb.cc:1576
 msgid "Package is not signed!"
-msgstr ""
+msgstr "¡El paquete no está firmado!"
 
 #
 # modules/Mail.ycp:458
@@ -310,7 +310,7 @@ msgstr "El archivo no existe o no es posible comprobar la firma"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2405
 msgid "File is unsigned"
-msgstr ""
+msgstr "El fichero no está firmado"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
