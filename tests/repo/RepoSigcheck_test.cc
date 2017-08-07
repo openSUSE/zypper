@@ -123,9 +123,9 @@ BOOST_AUTO_TEST_CASE(init)
 	      repo.setPkgGpgCheck( r_PkgGpgCheck );
 
 	      // check the repo methods returning what to do:
-	      bool	cfgGpgCheck	= indeterminate(r_GpgCheck)     ? g_GpgCheck     : bool(r_GpgCheck);
-	      TriBool	cfgRepoGpgCheck	= indeterminate(r_RepoGpgCheck) ? g_RepoGpgCheck : r_RepoGpgCheck;
-	      TriBool	cfgPkgGpgCheck	= indeterminate(r_PkgGpgCheck)  ? g_PkgGpgCheck  : r_PkgGpgCheck;
+	      bool	cfgGpgCheck	= indeterminate(r_GpgCheck)                                  ? g_GpgCheck     : bool(r_GpgCheck);
+	      TriBool	cfgRepoGpgCheck	= indeterminate(r_GpgCheck) && indeterminate(r_RepoGpgCheck) ? g_RepoGpgCheck : r_RepoGpgCheck;
+	      TriBool	cfgPkgGpgCheck	= indeterminate(r_GpgCheck) && indeterminate(r_PkgGpgCheck)  ? g_PkgGpgCheck  : r_PkgGpgCheck;
 #if ( TC_VERBOSE )
 	      COUT << chr(cfgGpgCheck) << "\t" << chr(cfgRepoGpgCheck) << "\t" << chr(cfgPkgGpgCheck)
 		   << "\t(" << chr(r_GpgCheck)     << "," << chr(g_GpgCheck)     << ")"
