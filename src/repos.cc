@@ -1808,7 +1808,7 @@ void add_repo_by_url( Zypper & zypper,
 		      TriBool enabled,
 		      TriBool autorefresh,
 		      TriBool keepPackages,
-		      TriBool gpgCheck )
+		      RepoInfo::GpgCheck gpgCheck )
 {
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url << ")" << endl;
 
@@ -1843,7 +1843,7 @@ void add_repo_by_url( Zypper & zypper,
   if ( !indeterminate(keepPackages) )
     repo.setKeepPackages( keepPackages );
 
-  if ( !indeterminate(gpgCheck) )
+  if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
     repo.setGpgCheck( gpgCheck );
 
   add_repo( zypper, repo );
@@ -1857,7 +1857,7 @@ void add_repo_from_file( Zypper & zypper,
 			 TriBool enabled,
                          TriBool autorefresh,
 			 TriBool keepPackages,
-			 TriBool gpgCheck )
+			 RepoInfo::GpgCheck gpgCheck )
 {
   Url url = make_url( repo_file_url );
   if ( !url.isValid() )
@@ -1925,7 +1925,7 @@ void add_repo_from_file( Zypper & zypper,
     if ( !indeterminate(keepPackages) )
       repo.setKeepPackages( keepPackages );
 
-    if ( !indeterminate(gpgCheck) )
+    if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
       repo.setGpgCheck( gpgCheck );
 
     if ( prio >= 1 )
@@ -2089,8 +2089,7 @@ void modify_repo( Zypper & zypper, const std::string & alias )
   TriBool keepPackages = get_boolean_option( zypper, "keep-packages", "no-keep-packages" );
   DBG << "keepPackages = " << keepPackages << endl;
 
-  TriBool gpgCheck = get_boolean_option( zypper, "gpgcheck", "no-gpgcheck" );
-  DBG << "gpgCheck = " << gpgCheck << endl;
+  RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
 
   unsigned prio = parse_priority( zypper );
 
@@ -2125,11 +2124,10 @@ void modify_repo( Zypper & zypper, const std::string & alias )
       repo.setKeepPackages( keepPackages );
     }
 
-    if ( !indeterminate(gpgCheck) )
+    if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
     {
-      if ( gpgCheck != repo.gpgCheck() )
-        changed_gpgcheck = true;
-      repo.setGpgCheck( gpgCheck );
+      if ( repo.setGpgCheck( gpgCheck ) )
+	changed_gpgcheck = true;
     }
 
     if ( prio >= 1 )

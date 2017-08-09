@@ -109,7 +109,7 @@ void add_repo_by_url( Zypper & zypper,
 		      TriBool enabled = indeterminate,
 		      TriBool autorefresh = indeterminate,
 		      TriBool keepPackages = indeterminate,
-		      TriBool gpgCheck  = indeterminate );
+		      RepoInfo::GpgCheck gpgCheck = RepoInfo::GpgCheck::indeterminate );
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -125,7 +125,7 @@ void add_repo_from_file( Zypper & zypper,
 			 TriBool enabled = indeterminate,
 			 TriBool autorefresh = indeterminate,
 			 TriBool keepPackages = indeterminate,
-			 TriBool gpgCheck  = indeterminate );
+			 RepoInfo::GpgCheck gpgCheck = RepoInfo::GpgCheck::indeterminate );
 
 
 /**

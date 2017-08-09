@@ -49,6 +49,15 @@ struct Options;
 inline std::string dashdash( std::string optname_r )
 { return optname_r.insert( 0, "--" ); }
 
+///////////////////////////////////////////////////////////////////
+namespace cli
+{
+  /** Evaluate mutual exlusive '--*gpgcheck*' options. */
+  RepoInfo::GpgCheck gpgCheck( Zypper & zypper );
+
+} // namespace cli
+///////////////////////////////////////////////////////////////////
+
 /**
  * Structure for holding global options.
  *

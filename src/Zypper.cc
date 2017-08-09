@@ -69,6 +69,25 @@ using namespace zypp;
 // for now use some defines to have consistent definition of args
 // used across multiple commands
 
+// GPG check settings for add/modify repo
+#define ARG_GPG_Check	\
+    {"gpgcheck",			no_argument,	0, 'g'},	\
+    {"gpgcheck-strict",			no_argument,	0,  0 },	\
+    {"gpgcheck-allow-unsigned",		no_argument,	0,  0 },	\
+    {"gpgcheck-allow-unsigned-repo",	no_argument,	0,  0 },	\
+    {"gpgcheck-allow-unsigned-package",	no_argument,	0,  0 },	\
+    {"no-gpgcheck",			no_argument,	0, 'G'},	\
+    {"default-gpgcheck",		no_argument,	0,  0 }
+
+#define option_GPG_Check	\
+     option26( "-g, --gpgcheck",		_("Enable GPG check for this repository.") )	\
+    .option26( "--gpgcheck-strict",		_("Enable strict GPG check for this repository.") )	\
+    .option26( "--gpgcheck-allow-unsigned",	(str::Format(_("Short hand for '%1%'.") ) % "--gpgcheck-allow-unsigned-repo --gpgcheck-allow-unsigned-package" ).str() )	\
+    .option26( "--gpgcheck-allow-unsigned-repo",_("Enable GPG check but allow the repository metadata to be unsigned.") )	\
+    .option26( "--gpgcheck-allow-unsigned-package",_("Enable GPG check but allow installing unsigned packages from this repository.") )	\
+    .option26( "-G, --no-gpgcheck",		_("Disable GPG check for this repository.") )	\
+    .option26( "--default-gpgcheck",		_("Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the default.") )	\
+
 // bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
 #define ARG_not_INSTALLED_ONLY	\
     {"installed-only",		no_argument, 0, 'i'},	\
@@ -120,6 +139,52 @@ using namespace zypp;
     : _("The default is to include optional patches.") ))
 
 ///////////////////////////////////////////////////////////////////
+namespace cli
+{
+  RepoInfo::GpgCheck gpgCheck( Zypper & zypper )
+  {
+    RepoInfo::GpgCheck ret = RepoInfo::GpgCheck::indeterminate;
+    bool	fail = false;
+    std::string	failDetail;
+
+    typedef std::pair<RepoInfo::GpgCheck,const char *> Pair;
+    for ( const Pair & p : {
+      Pair{ RepoInfo::GpgCheck::On,			"gpgcheck"				},
+      Pair{ RepoInfo::GpgCheck::Strict,			"gpgcheck-strict"			},
+      Pair{ RepoInfo::GpgCheck::AllowUnsigned,		"gpgcheck-allow-unsigned"		},
+      Pair{ RepoInfo::GpgCheck::AllowUnsignedRepo,	"gpgcheck-allow-unsigned-repo"		},
+      Pair{ RepoInfo::GpgCheck::AllowUnsignedPackage,	"gpgcheck-allow-unsigned-package"	},
+      Pair{ RepoInfo::GpgCheck::Default,		"default-gpgcheck"			},
+      Pair{ RepoInfo::GpgCheck::Off,			"no-gpgcheck"				},
+    } )
+    {
+      if ( copts.count( p.second ) )
+      {
+	if ( ret == RepoInfo::GpgCheck::indeterminate )
+	{
+	  ret = p.first;
+	  failDetail = p.second;
+	}
+	else
+	{
+	  fail = true;
+	  failDetail += " --";
+	  failDetail += p.second;
+	}
+      }
+    }
+    if ( fail )
+    {
+      // translator: %1% is a list of command line options
+      zypper.out().error( str::Format(_("These options are mutually exclusive: %1%")) % dashdash(failDetail) );
+      zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      ZYPP_THROW( ExitRequestException("invalid args") );
+    }
+    return ret;
+  }
+} // namespace cli
+///////////////////////////////////////////////////////////////////
+
 ZYpp::Ptr God = NULL;
 void Zypper::assertZYppPtrGod()
 {
@@ -1915,13 +1980,13 @@ void Zypper::processCommandOptions()
       {"priority", required_argument, 0, 'p'},
       {"keep-packages", no_argument, 0, 'k'},
       {"no-keep-packages", no_argument, 0, 'K'},
-      {"gpgcheck", no_argument, 0, 'g'},
-      {"no-gpgcheck", no_argument, 0, 'G'},
+      ARG_GPG_Check,
       {"refresh", no_argument, 0, 'f'},
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
-    _command_help = str::form(_(
+    _command_help = ( CommandHelpFormater()
+    << str::form(_(
       // translators: the %s = "yast2, rpm-md, plaindir"
       "addrepo (ar) [options] <URI> <alias>\n"
       "addrepo (ar) [options] <file.repo>\n"
@@ -1939,10 +2004,9 @@ void Zypper::processCommandOptions()
       "-p, --priority <integer>  Set priority of the repository.\n"
       "-k, --keep-packages       Enable RPM files caching.\n"
       "-K, --no-keep-packages    Disable RPM files caching.\n"
-      "-g, --gpgcheck            Enable GPG check for this repository.\n"
-      "-G, --no-gpgcheck         Disable GPG check for this repository.\n"
       "-f, --refresh             Enable autorefresh of the repository.\n"
-    ), "yast2, rpm-md, plaindir");
+    ), "yast2, rpm-md, plaindir") )
+    .option_GPG_Check;
     break;
   }
 
@@ -2041,8 +2105,7 @@ void Zypper::processCommandOptions()
       {"priority", required_argument, 0, 'p'},
       {"keep-packages", no_argument, 0, 'k'},
       {"no-keep-packages", no_argument, 0, 'K'},
-      {"gpgcheck", no_argument, 0, 'g'},
-      {"no-gpgcheck", no_argument, 0, 'G'},
+      ARG_GPG_Check,
       {"all", no_argument, 0, 'a' },
       {"local", no_argument, 0, 'l' },
       {"remote", no_argument, 0, 't' },
@@ -2050,7 +2113,8 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = service_modify_options;
-    _command_help = str::form(_(
+    _command_help = ( CommandHelpFormater()
+    << str::form(_(
       // translators: %s is "--all|--remote|--local|--medium-type"
       // and "--all, --remote, --local, --medium-type"
       "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -2068,15 +2132,15 @@ void Zypper::processCommandOptions()
       "-p, --priority <integer>  Set priority of the repository.\n"
       "-k, --keep-packages       Enable RPM files caching.\n"
       "-K, --no-keep-packages    Disable RPM files caching.\n"
-      "-g, --gpgcheck            Enable GPG check for this repository.\n"
-      "-G, --no-gpgcheck         Disable GPG check for this repository.\n"
-      "\n"
+    ), "--all|--remote|--local|--medium-type"
+     , "--all, --remote, --local, --medium-type") )
+    .option_GPG_Check
+    << "\n" << _(
       "-a, --all                 Apply changes to all repositories.\n"
       "-l, --local               Apply changes to all local repositories.\n"
       "-t, --remote              Apply changes to all remote repositories.\n"
       "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
-    ), "--all|--remote|--local|--medium-type"
-     , "--all, --remote, --local, --medium-type");
+    );
     break;
   }
 
@@ -3581,11 +3645,7 @@ void Zypper::doCommand()
     else if ( copts.count("no-keep-packages") )
       keep_pkgs = false;
 
-    TriBool gpgCheck( indeterminate );
-    if ( copts.count("gpgcheck") )
-      gpgCheck = true;
-    else if ( copts.count("no-gpgcheck") )
-      gpgCheck = false;
+    RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( *this ) );	//
 
     try
     {
@@ -3854,7 +3914,6 @@ void Zypper::doCommand()
       setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
       return;
     }
-
 
     initRepoManager();
     if ( aggregate )
