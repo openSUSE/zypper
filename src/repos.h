@@ -107,14 +107,14 @@ bool match_repo(Zypper & zypper, const std::string str, zypp::RepoInfo *repo = 0
  * \param enabled     Whether the repo should be enabled
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
-void add_repo_by_url(Zypper & zypper,
-                     const zypp::Url & url,
-                     const std::string & alias,
-                     const std::string & type = "",
-                     zypp::TriBool enabled = boost::indeterminate,
-                     zypp::TriBool autorefresh = boost::indeterminate,
-                     zypp::TriBool keepPackages = boost::indeterminate,
-                     zypp::TriBool gpgCheck  = boost::indeterminate);
+void add_repo_by_url( Zypper & zypper,
+		      const Url & url,
+		      const std::string & alias,
+		      const std::string & type = "",
+		      TriBool enabled = indeterminate,
+		      TriBool autorefresh = indeterminate,
+		      TriBool keepPackages = indeterminate,
+		      RepoInfo::GpgCheck gpgCheck = RepoInfo::GpgCheck::indeterminate );
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -125,12 +125,12 @@ void add_repo_by_url(Zypper & zypper,
  * \param enabled     Whether the repo should be enabled
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
-void add_repo_from_file(Zypper & zypper,
-                        const std::string & repo_file_url,
-                        zypp::TriBool enabled = boost::indeterminate,
-                        zypp::TriBool autorefresh = boost::indeterminate,
-                        zypp::TriBool keepPackages = boost::indeterminate,
-                        zypp::TriBool gpgCheck  = boost::indeterminate);
+void add_repo_from_file( Zypper & zypper,
+			 const std::string & repo_file_url,
+			 TriBool enabled = indeterminate,
+			 TriBool autorefresh = indeterminate,
+			 TriBool keepPackages = indeterminate,
+			 RepoInfo::GpgCheck gpgCheck = RepoInfo::GpgCheck::indeterminate );
 
 
 /**

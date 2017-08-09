@@ -1830,9 +1830,13 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
 // ----------------------------------------------------------------------------
 
 void add_repo_by_url( Zypper & zypper,
-                     const zypp::Url & url, const string & alias,
-                     const string & type,
-                     TriBool enabled, TriBool autorefresh, TriBool keepPackages, TriBool gpgCheck)
+		      const Url & url,
+		      const std::string & alias,
+		      const std::string & type,
+		      TriBool enabled,
+		      TriBool autorefresh,
+		      TriBool keepPackages,
+		      RepoInfo::GpgCheck gpgCheck )
 {
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url
       << ")" << endl;
@@ -1861,8 +1865,8 @@ void add_repo_by_url( Zypper & zypper,
   if ( !indeterminate(keepPackages) )
     repo.setKeepPackages(keepPackages);
 
-  if ( !indeterminate(gpgCheck) )
-    repo.setGpgCheck(gpgCheck);
+  if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
+    repo.setGpgCheck( gpgCheck );
 
   add_repo(zypper, repo);
 }
@@ -1870,8 +1874,11 @@ void add_repo_by_url( Zypper & zypper,
 // ----------------------------------------------------------------------------
 
 void add_repo_from_file( Zypper & zypper,
-                         const std::string & repo_file_url, TriBool enabled,
-                         TriBool autorefresh, TriBool keepPackages, TriBool gpgCheck)
+                         const std::string & repo_file_url,
+			 TriBool enabled,
+                         TriBool autorefresh,
+			 TriBool keepPackages,
+			 RepoInfo::GpgCheck gpgCheck )
 {
   Url url = make_url(repo_file_url);
   if (!url.isValid())
@@ -1943,8 +1950,8 @@ void add_repo_from_file( Zypper & zypper,
     if ( !indeterminate(keepPackages) )
       repo.setKeepPackages(keepPackages);
 
-    if ( !indeterminate(gpgCheck) )
-      repo.setGpgCheck(gpgCheck);
+    if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
+      repo.setGpgCheck( gpgCheck );
 
     add_repo( zypper, repo );
   }
@@ -2115,9 +2122,7 @@ void modify_repo(Zypper & zypper, const string & alias)
       zypper, "keep-packages", "no-keep-packages");
   DBG << "keepPackages = " << keepPackages << endl;
 
-  tribool gpgCheck = get_boolean_option(
-      zypper, "gpgcheck", "no-gpgcheck");
-  DBG << "gpgCheck = " << gpgCheck << endl;
+  RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
 
   try
   {
@@ -2150,11 +2155,10 @@ void modify_repo(Zypper & zypper, const string & alias)
       repo.setKeepPackages(keepPackages);
     }
 
-    if (!indeterminate(gpgCheck))
+    if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
     {
-      if (gpgCheck != repo.gpgCheck())
-        changed_gpgcheck = true;
-      repo.setGpgCheck(gpgCheck);
+      if ( repo.setGpgCheck( gpgCheck ) )
+	changed_gpgcheck = true;
     }
 
     long long prio = 0;
