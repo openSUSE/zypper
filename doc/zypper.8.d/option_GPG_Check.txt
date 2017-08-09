@@ -1,0 +1,24 @@
+*-g*, *--gpgcheck*::
+	Enable GPG check for this repository. The behavior as described in section *GPG checks*.
+
+*--gpgcheck-strict*::
+	Enable strict GPG check for this repository. Even packages from signed repositories need a valid GPG signature and using unsigned packages must be confirmed.
+
+*--gpgcheck-allow-unsigned*::
+	Short hand for *--gpgcheck-allow-unsigned-repo --gpgcheck-allow-unsigned-package*
+
+*--gpgcheck-allow-unsigned-repo*::
+	Enable GPG check but allow the repository metadata to be unsigned.
+
+*--gpgcheck-allow-unsigned-package*::
+	Enable GPG check but allow installing unsigned packages from this repository.
+
+*-G*, *--no-gpgcheck*::
+	Disable GPG check for this repository.
+	+
+	*Disabling GPG checks is not recommended.* Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise.
+
+*--default-gpgcheck*::
+	Use the global GPG check settings defined in */etc/zypp/zypp.conf*. This is the default.
+	+
+	Unless you have modified your zypp.conf settings, this is the same as *--gpgcheck*, the behavior as described in section *GPG checks*.
