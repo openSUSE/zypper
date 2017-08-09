@@ -43,11 +43,15 @@ There is a special set of commands in zypper intended to manipulate repositories
 
 GPG checks
 ~~~~~~~~~~
-Zypp verifies the authenticity of repository metadata by checking their GPG signature. If the repository metadata are signed with a trusted key and and successfully verified, packages from that repository are accepted for installation if they match the checksum provided in the metadata. If the repository metadata  are not signed, the signature of each downloaded rpm package is checked before accepting it for installation.
-
-This default behavior can be tuned by explicitly setting the variables *repo_gpgcheck* and/or *pkg_gpgcheck* in the ZYpp configuration file (*/etc/zypp/zypp.conf*) to perform those checks always (if 'on') or never (if 'off').
-
 *Disabling GPG checks is not recommended.* Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise.
+
+Zypp verifies the authenticity of repository metadata by checking their GPG signature. If the repository metadata are signed with a trusted key and successfully verified, packages from this repository are accepted for installation if they match the checksum provided in the metadata. Using unsigned repositories needs to be confirmed.
+
+If the repository metadata are not signed, the GPG signature of each downloaded rpm package is checked before accepting it for installation. Packages from unsigned repositories need a valid GPG signature. Using unsigned packages needs to be confirmed.
+
+The above is the default behavior defined by settings in /etc/zypp/zypp.conf.
+
+The *addrepo* and *modifyrepo* commands provide further options to tune the behavior per repository. It is for example possible to relax the need to confirm installing unsigned packages for a specific repository. But if you do so, you should be very certain that an attacker can hardly modify the package data within the repository or on the way to your machine. See section *COMMANDS* for details about the command options.
 
 Resource Identifiers (URI)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -994,8 +998,8 @@ Supported URI formats:
 		;; *obs://zypp:Head/openSUSE_Factory*
 		;; *obs://zypp:Head/openSUSE_Factory_Staging_Gcc49_standard*
 
-{nop}
-~~~~~
+ {nop}
+~~~~~~
 
 *addrepo* (*ar*) ['options'] 'URI' 'alias':: {nop}
 *addrepo* (*ar*) ['options'] 'FILE'*.repo*::
@@ -1037,11 +1041,7 @@ Supported URI formats:
 	*-K*, *--no-keep-packages*::
 		Disable RPM files caching.
 
-	*-g*, *--gpgcheck*::
-		Enable GPG check for this repository.
-
-	*-G*, *--no-gpgcheck*::
-		Disable GPG check for this repository.
+include::{incdir}/option_GPG_Check.txt[]
 
 	*-f*, *--refresh*::
 		Enable autorefresh of the repository. The autorefresh is disabled by default when adding new repositories.
@@ -1162,11 +1162,7 @@ Supported URI formats:
 	*-K*, *--no-keep-packages*::
 		Disable RPM files caching.
 
-	*-g*, *--gpgcheck*::
-		Enable GPG check for this repository.
-
-	*-G*, *--no-gpgcheck*::
-		Disable GPG check for this repository.
+include::{incdir}/option_GPG_Check.txt[]
 
 	*-a*, *--all*::
 		Apply changes to all repositories.
@@ -1598,6 +1594,8 @@ Repository Options: :: {nop}
 
 *--no-gpg-checks*::
 	Ignore GPG check failures and continue. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation. Use this option with caution, as you can easily overlook security problems by using it. (see section *GPG checks*)
+	+
+
 
 *--gpg-auto-import-keys*::
 	If new repository signing key is found, do not ask what to do; trust and import it automatically. This option causes that the new key is imported also in non-interactive mode, where it would otherwise got rejected.
