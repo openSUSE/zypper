@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 16:55+0200\n"
+"POT-Creation-Date: 2017-08-09 12:54+0200\n"
 "PO-Revision-Date: 2016-10-26 12:30+0000\n"
 "Last-Translator: Pasca Alexandru <yo6ial@yahoo.com>\n"
 "Language-Team: Romanian <https://l10n.opensuse.org/projects/zypper/master/ro/"
@@ -466,12 +466,12 @@ msgstr "Da"
 msgid "No"
 msgstr "Nu"
 
-#: src/Zypper.h:491
+#: src/Zypper.h:503
 #, fuzzy
 msgid "Finished with error."
 msgstr "Gata."
 
-#: src/Zypper.h:493
+#: src/Zypper.h:505
 #, fuzzy
 msgid "Done."
 msgstr " Gata."
@@ -505,7 +505,7 @@ msgstr "Sursă de instalare"
 #. translators: Table column header
 #. translators: name (general header)
 #: src/info.cc:69 src/info.cc:459 src/info.cc:703 src/repos.cc:1070
-#: src/repos.cc:1209 src/repos.cc:2539 src/update.cc:801 src/Zypper.cc:5317
+#: src/repos.cc:1209 src/repos.cc:2537 src/update.cc:801 src/Zypper.cc:5373
 #: src/search.cc:44 src/search.cc:209 src/search.cc:357 src/search.cc:504
 #: src/search.cc:568 src/locks.cc:107 src/utils/misc.cc:250
 msgid "Name"
@@ -539,7 +539,7 @@ msgid "Summary"
 msgstr "Rezumat"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:83 src/Zypper.cc:5317
+#: src/info.cc:83 src/Zypper.cc:5373
 msgid "Description"
 msgstr "Descriere"
 
@@ -662,7 +662,7 @@ msgstr "S"
 
 #. translators: Table column header
 #. translators: type (general header)
-#: src/info.cc:460 src/repos.cc:1108 src/repos.cc:1220 src/repos.cc:2548
+#: src/info.cc:460 src/repos.cc:1108 src/repos.cc:1220 src/repos.cc:2546
 #: src/search.cc:46 src/search.cc:212 src/locks.cc:110
 msgid "Type"
 msgstr "Tip"
@@ -2086,7 +2086,7 @@ msgstr "Dezactivez sursa de instalare '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problemă la obținerea fișierelor de la '%s'."
 
-#: src/repos.cc:358 src/repos.cc:3308 src/solve-commit.cc:806
+#: src/repos.cc:358 src/repos.cc:3306 src/solve-commit.cc:806
 #: src/solve-commit.cc:837 src/solve-commit.cc:861
 msgid "Please see the above error message for a hint."
 msgstr "Consultați mesajul de eroare de mai sus pentru sugestii."
@@ -2176,7 +2176,7 @@ msgstr "Utilizează '%s' pentru a găsi lista de surse de instalare definite."
 msgid "Ignoring disabled repository '%s'"
 msgstr "Ignor sursa de instalare dezactivată '%s'"
 
-#: src/repos.cc:794 src/Zypper.cc:4323
+#: src/repos.cc:794 src/Zypper.cc:4379
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Sursa de instalare specificată '%s' este dezactivată."
@@ -2250,42 +2250,42 @@ msgstr "Ințializez destinația"
 msgid "Target initialization failed:"
 msgstr "Inițializarea destinației a eșuat:"
 
-#: src/repos.cc:1007 src/Zypper.cc:4484
+#: src/repos.cc:1007 src/Zypper.cc:4540
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "Execuția 'zypper refresh' ca root poate rezolva problema."
 
-#: src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2538 src/Zypper.cc:5317
+#: src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2536 src/Zypper.cc:5373
 msgid "Alias"
 msgstr "Alias"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1077 src/repos.cc:1215 src/repos.cc:1764 src/repos.cc:2540
+#: src/repos.cc:1077 src/repos.cc:1215 src/repos.cc:1764 src/repos.cc:2538
 msgid "Enabled"
 msgstr "Activat"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1081 src/repos.cc:1216 src/repos.cc:1766 src/repos.cc:2541
+#: src/repos.cc:1081 src/repos.cc:1216 src/repos.cc:1766 src/repos.cc:2539
 msgid "GPG Check"
 msgstr "Verificare GPG"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:1089 src/repos.cc:2543
+#: src/repos.cc:1089 src/repos.cc:2541
 msgid "Refresh"
 msgstr "Reîmprospătează"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:1099 src/repos.cc:1217 src/repos.cc:1770 src/repos.cc:2547
+#: src/repos.cc:1099 src/repos.cc:1217 src/repos.cc:1770 src/repos.cc:2545
 msgid "Priority"
 msgstr "Importanță"
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1115 src/repos.cc:1210 src/repos.cc:1762 src/repos.cc:2550
+#: src/repos.cc:1115 src/repos.cc:1210 src/repos.cc:1762 src/repos.cc:2548
 msgid "URI"
 msgstr "URI"
 
@@ -2580,7 +2580,7 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Sursa de instalare '%s' a fost redenumită ca '%s'."
 
-#: src/repos.cc:2000 src/repos.cc:2234
+#: src/repos.cc:2000 src/repos.cc:2232
 msgid "Error while modifying the repository:"
 msgstr "Eroare la modificarea sursei de instalare:"
 
@@ -2589,201 +2589,201 @@ msgstr "Eroare la modificarea sursei de instalare:"
 msgid "Leaving repository '%s' unchanged."
 msgstr "Păstrez sursa de instalare '%s' neschimbată."
 
-#: src/repos.cc:2138
+#: src/repos.cc:2136
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Prioritatea sursei de instalare '%s' a rămas neschimbată (%d)"
 
-#: src/repos.cc:2176
+#: src/repos.cc:2174
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Sursa de instalare '%s' a fost activată cu succes."
 
-#: src/repos.cc:2178
+#: src/repos.cc:2176
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Sursa de instalare '%s' a fost dezactivată cu succes."
 
-#: src/repos.cc:2185
+#: src/repos.cc:2183
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr ""
 "Reîmprospătarea automată a fost activată pentru sursa de instalare '%s'."
 
-#: src/repos.cc:2187
+#: src/repos.cc:2185
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr ""
 "Reîmprospătarea automată a fost deactivată pentru sursa de instalare '%s'."
 
-#: src/repos.cc:2194
+#: src/repos.cc:2192
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Cache-ul fișierelor RPM este activat pentru sursa de instalare '%s'."
 
-#: src/repos.cc:2196
+#: src/repos.cc:2194
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr ""
 "Cache-ul fișierelor RPM este dezactivat pentru sursa de instalare '%s'."
 
-#: src/repos.cc:2203
+#: src/repos.cc:2201
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Verificarea GPG a fost activată pentru sursa de instalare '%s'."
 
-#: src/repos.cc:2205
+#: src/repos.cc:2203
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Verificarea GPG a fost dezactivată pentru sursa de instalare '%s'."
 
-#: src/repos.cc:2211
+#: src/repos.cc:2209
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Prioritatea sursei de instalare '%s' a fost setată pe %d."
 
-#: src/repos.cc:2217
+#: src/repos.cc:2215
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Numele sursei de instalare '%s' este setat la '%s'."
 
-#: src/repos.cc:2228
+#: src/repos.cc:2226
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Nici o schimbare pentru sursa de instalare '%s'."
 
-#: src/repos.cc:2235
+#: src/repos.cc:2233
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Păstrez sursa de instalare %s neschimbată."
 
-#: src/repos.cc:2267
+#: src/repos.cc:2265
 msgid "Error reading services:"
 msgstr "Eroare la citirea serviciilor:"
 
-#: src/repos.cc:2356
+#: src/repos.cc:2354
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "Serviciul '%s' nu a fost găsit după alias, nume sau URI."
 
-#: src/repos.cc:2359
+#: src/repos.cc:2357
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "Utilizați '%s' pentru a obține lista de servicii definite."
 
-#: src/repos.cc:2601
+#: src/repos.cc:2599
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 "Niciun serviciu definit. Utilizați comanda '%s' pentru a adăuga unul sau mai "
 "multe servicii."
 
-#: src/repos.cc:2684
+#: src/repos.cc:2682
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr "Serviciul cu alias-ul '%s' există deja. Utilizați alt alias."
 
-#: src/repos.cc:2691
+#: src/repos.cc:2689
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "A apărut o eroare la adăugarea serviciului '%s'."
 
-#: src/repos.cc:2697
+#: src/repos.cc:2695
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "Serviciul '%s' a fost adăugat cu succes."
 
-#: src/repos.cc:2735
+#: src/repos.cc:2733
 #, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "Îndepărtez serviciul '%s':"
 
-#: src/repos.cc:2738
+#: src/repos.cc:2736
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "Serviciul '%s' a fost îndepărtat."
 
-#: src/repos.cc:2752
+#: src/repos.cc:2750
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "Reîmprospătez serviciul '%s'."
 
-#: src/repos.cc:2767 src/repos.cc:2777
+#: src/repos.cc:2765 src/repos.cc:2775
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr ""
 "Problemă la obținerea fișierului index al sursei de instalare pentru "
 "serviciul '%s':"
 
-#: src/repos.cc:2769 src/repos.cc:2877 src/repos.cc:2935
+#: src/repos.cc:2767 src/repos.cc:2875 src/repos.cc:2933
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Se omite serviciul '%s' datorită erorii de mai sus."
 
-#: src/repos.cc:2779
+#: src/repos.cc:2777
 msgid "Check if the URI is valid and accessible."
 msgstr "Verificați dacă URI-ul este valid și accesibil."
 
-#: src/repos.cc:2836
+#: src/repos.cc:2834
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "Se omite serviciul dezactivat '%s'"
 
-#: src/repos.cc:2888
+#: src/repos.cc:2886
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr "Utilizați comenzile '%s' sau '%s' pentru a adăuga sau activa servicii."
 
-#: src/repos.cc:2891
+#: src/repos.cc:2889
 msgid "Specified services are not enabled or defined."
 msgstr "Serviciile specificate nu sunt activate sau definite."
 
-#: src/repos.cc:2893
+#: src/repos.cc:2891
 msgid "There are no enabled services defined."
 msgstr "Nu este definit niciun serviciu activat."
 
-#: src/repos.cc:2897
+#: src/repos.cc:2895
 msgid "Could not refresh the services because of errors."
 msgstr "Nu am putut reîmprospăta serviciile din cauza unor erori."
 
-#: src/repos.cc:2903
+#: src/repos.cc:2901
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Unele servicii nu au fost reîmprospătate din cauza unei erori."
 
-#: src/repos.cc:2908
+#: src/repos.cc:2906
 msgid "Specified services have been refreshed."
 msgstr "Serviciile specificate au fost reîmprospătate."
 
-#: src/repos.cc:2910
+#: src/repos.cc:2908
 msgid "All services have been refreshed."
 msgstr "Toate serviciile au fost reîmprospătate."
 
-#: src/repos.cc:3057
+#: src/repos.cc:3055
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "Serviciul '%s' a fost activat cu succes."
 
-#: src/repos.cc:3059
+#: src/repos.cc:3057
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "Serviciul '%s' a fost dezactivat cu succes."
 
-#: src/repos.cc:3065
+#: src/repos.cc:3063
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "S-a activat reîmprospătarea automată pentru serviciul '%s'."
 
-#: src/repos.cc:3067
+#: src/repos.cc:3065
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "S-a dezactivat reîmprospătarea automată pentru serviciul '%s'."
 
-#: src/repos.cc:3072
+#: src/repos.cc:3070
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "Numele serviciului '%s' a fost setat pe '%s'."
 
-#: src/repos.cc:3077
+#: src/repos.cc:3075
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
@@ -2792,7 +2792,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/repos.cc:3084
+#: src/repos.cc:3082
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
@@ -2801,7 +2801,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/repos.cc:3091
+#: src/repos.cc:3089
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -2811,7 +2811,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/repos.cc:3098
+#: src/repos.cc:3096
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -2822,52 +2822,52 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/repos.cc:3107
+#: src/repos.cc:3105
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "Nimic de modificat pentru serviciul '%s'."
 
-#: src/repos.cc:3113
+#: src/repos.cc:3111
 msgid "Error while modifying the service:"
 msgstr "Eroare la modificarea serviciului:"
 
-#: src/repos.cc:3114
+#: src/repos.cc:3112
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "Păstrez serviciul %s neschimbat."
 
-#: src/repos.cc:3219
+#: src/repos.cc:3217
 msgid "Loading repository data..."
 msgstr "Încarc datele sursei de instalare..."
 
-#: src/repos.cc:3239
+#: src/repos.cc:3237
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Obțin datele sursei de instalare '%s'..."
 
-#: src/repos.cc:3245
+#: src/repos.cc:3243
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Sursa de instalare '%s' nu este în cache ..."
 
-#: src/repos.cc:3251 src/repos.cc:3285
+#: src/repos.cc:3249 src/repos.cc:3283
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Problemă la încărcarea datelor de la '%s'"
 
-#: src/repos.cc:3255
+#: src/repos.cc:3253
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Sursa de instalare '%s' nu a putut fi reîmprospătată. Se va utiliza "
 "versiunea din memoria cache."
 
-#: src/repos.cc:3259 src/repos.cc:3288
+#: src/repos.cc:3257 src/repos.cc:3286
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Dependențele de la '%s' nu au fost încărcate din cauza unei erori."
 
-#: src/repos.cc:3276
+#: src/repos.cc:3274
 #, fuzzy, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -2877,16 +2877,16 @@ msgstr ""
 "oglindă sau alt server."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3287
+#: src/repos.cc:3285
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Încercați '%s' sau chiar '%s' înainte să faceți asta."
 
-#: src/repos.cc:3298
+#: src/repos.cc:3296
 msgid "Reading installed packages..."
 msgstr "Citesc pachetele instalate..."
 
-#: src/repos.cc:3307
+#: src/repos.cc:3305
 #, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "A apărut o problemă în timpul citirii pachetelor instalate:"
@@ -3068,57 +3068,96 @@ msgstr "OK OK! Se iese imediat..."
 msgid "Trying to exit gracefully..."
 msgstr ""
 
+#: src/Zypper.cc:83
+msgid "Enable GPG check for this repository."
+msgstr ""
+
+#: src/Zypper.cc:84
+#, fuzzy
+msgid "Enable strict GPG check for this repository."
+msgstr "Nu a fost definit nici un alias pentru această sursă de instalare."
+
+#: src/Zypper.cc:85
+#, fuzzy, boost-format
+msgid "Short hand for '%1%'."
+msgstr "Nici un candidat de actualizare pentru '%s'."
+
 #: src/Zypper.cc:86
+msgid "Enable GPG check but allow the repository metadata to be unsigned."
+msgstr ""
+
+#: src/Zypper.cc:87
+msgid ""
+"Enable GPG check but allow installing unsigned packages from this repository."
+msgstr ""
+
+#: src/Zypper.cc:88
+msgid "Disable GPG check for this repository."
+msgstr ""
+
+#: src/Zypper.cc:89
+msgid ""
+"Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
+"default."
+msgstr ""
+
+#: src/Zypper.cc:105
 msgid "Create a solver test case for debugging."
 msgstr "Creează cazul de test solver pentru depanare."
 
-#: src/Zypper.cc:87
+#: src/Zypper.cc:106
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr "Forțează solver-ul să găsească o soluție (chiar și una agresivă)."
 
-#: src/Zypper.cc:88
+#: src/Zypper.cc:107
 msgid "Do not force the solver to find solution, let it ask."
 msgstr "Nu forța solver-ul să găsească o soluție, lasă-l sa întrebe."
 
-#: src/Zypper.cc:97
+#: src/Zypper.cc:116
 msgid "Install also recommended packages in addition to the required ones."
 msgstr "Instalează și pachetele recomandate suplimentar cu cele necesare."
 
-#: src/Zypper.cc:98
+#: src/Zypper.cc:117
 msgid "Do not install recommended packages, only required ones."
 msgstr "Nu instala pachetele recomandate ci doar pe cele necesare."
 
 #. auto license agreements
 #. Mainly for SUSEConnect, not (yet) documented
-#: src/Zypper.cc:106
+#: src/Zypper.cc:125
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
 
-#: src/Zypper.cc:107
+#: src/Zypper.cc:126
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
 
-#: src/Zypper.cc:116
+#: src/Zypper.cc:135
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
 
-#: src/Zypper.cc:119
+#: src/Zypper.cc:138
 msgid "The default is to exclude optional patches."
 msgstr ""
 
-#: src/Zypper.cc:120
+#: src/Zypper.cc:139
 msgid "The default is to include optional patches."
 msgstr ""
 
-#: src/Zypper.cc:143
+#. translator: %1% is a list of command line options
+#: src/Zypper.cc:179
+#, boost-format
+msgid "These options are mutually exclusive: %1%"
+msgstr ""
+
+#: src/Zypper.cc:208
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -3127,50 +3166,50 @@ msgstr ""
 "aveți un applet sau alte aplicații software de management care utilizează "
 "PackageKit."
 
-#: src/Zypper.cc:149
+#: src/Zypper.cc:214
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
 
-#: src/Zypper.cc:152
+#: src/Zypper.cc:217
 msgid "Ask PackageKit to quit?"
 msgstr "Spuneți aplicației PackageKit să renunțe?"
 
-#: src/Zypper.cc:161
+#: src/Zypper.cc:226
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKit rulează (probabil este ocupat)."
 
-#: src/Zypper.cc:162
+#: src/Zypper.cc:227
 msgid "Try again?"
 msgstr "Încerc din nou?"
 
-#: src/Zypper.cc:239
+#: src/Zypper.cc:301
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
 
-#: src/Zypper.cc:240
+#: src/Zypper.cc:302
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
 
-#: src/Zypper.cc:327
+#: src/Zypper.cc:389
 #, fuzzy
 msgid "Command options:"
 msgstr "Comandă"
 
-#: src/Zypper.cc:330
+#: src/Zypper.cc:392
 #, fuzzy
 msgid "Solver options:"
 msgstr "Comandă"
 
-#: src/Zypper.cc:333
+#: src/Zypper.cc:395
 msgid "Expert options:"
 msgstr ""
 
-#: src/Zypper.cc:336
+#: src/Zypper.cc:398
 #, fuzzy
 msgid "This command has no additional options."
 msgstr ""
@@ -3180,11 +3219,11 @@ msgstr ""
 "\n"
 "Această comandă nu are opțiuni adiționale.\n"
 
-#: src/Zypper.cc:469 src/Zypper.cc:1430
+#: src/Zypper.cc:531 src/Zypper.cc:1492
 msgid "Unexpected exception."
 msgstr "Excepție neașteptată."
 
-#: src/Zypper.cc:494
+#: src/Zypper.cc:556
 #, fuzzy
 msgid ""
 "  Global Options:\n"
@@ -3225,7 +3264,7 @@ msgstr ""
 "\t\t\t\tautomat.\n"
 "\t--xmlout, -x\t\tTrece la prezentarea XML.\n"
 
-#: src/Zypper.cc:517
+#: src/Zypper.cc:579
 msgid ""
 "\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
 "\t\t\t\tdirectory.\n"
@@ -3246,7 +3285,7 @@ msgstr ""
 "\t--pkg-cache-dir <dir>\tFolosește directorul alternativ pentru cacheul de "
 "pachete.\n"
 
-#: src/Zypper.cc:525
+#: src/Zypper.cc:587
 #, fuzzy
 msgid ""
 "     Repository Options:\n"
@@ -3275,7 +3314,7 @@ msgstr ""
 "\t--no-cd\t\t\tIgnoră sursele de instalare de pe CD/DVD.\n"
 "\t--no-remote\t\tIgnoră sursele de instalare de la distanță.\n"
 
-#: src/Zypper.cc:539
+#: src/Zypper.cc:601
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -3287,7 +3326,7 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tNu citi pachetele instalate.\n"
 
-#: src/Zypper.cc:546
+#: src/Zypper.cc:608
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -3297,7 +3336,7 @@ msgstr ""
 "\thelp, ?\t\t\tTipărește un text de ajutor.\n"
 "\tshell, sh\t\tAcceptă mai multe comenzi deodată.\n"
 
-#: src/Zypper.cc:551
+#: src/Zypper.cc:613
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -3317,7 +3356,7 @@ msgstr ""
 "\trefresh, ref\t\tReîmprospătează toate sursele de instalare.\n"
 "\tclean\t\t\tCurăță cache-urile locale.\n"
 
-#: src/Zypper.cc:561
+#: src/Zypper.cc:623
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -3333,7 +3372,7 @@ msgstr ""
 "\tremoveservice, rs\tÎndepărtează serviciul specificat.\n"
 "\trefresh-services, refs\tReîmprospătează toate serviciile.\n"
 
-#: src/Zypper.cc:569
+#: src/Zypper.cc:631
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -3355,7 +3394,7 @@ msgstr ""
 "\t\t\t\tInstalează pachete noi adăugate recomandate de\n"
 "\t\t\t\tpachetele instalate.\n"
 
-#: src/Zypper.cc:580
+#: src/Zypper.cc:642
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -3373,7 +3412,7 @@ msgstr ""
 "\tdist-upgrade, dup\tEfectuează un upgrade de distribuție.\n"
 "\tpatch-check, pchk\tCaută petice.\n"
 
-#: src/Zypper.cc:589
+#: src/Zypper.cc:651
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -3401,7 +3440,7 @@ msgstr ""
 "produsele disponibile.\n"
 "\twhat-provides, wp\tListează pachetele ce oferă capabilitatea specificată.\n"
 
-#: src/Zypper.cc:604
+#: src/Zypper.cc:666
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -3415,7 +3454,7 @@ msgstr ""
 "\tlocks, ll\t\tListează blocajele curente ale pachetelor.\n"
 "\tcleanlocks, cl\t\tȘterge blocajele nefolosite.\n"
 
-#: src/Zypper.cc:611
+#: src/Zypper.cc:673
 #, fuzzy
 msgid ""
 "     Other Commands:\n"
@@ -3434,13 +3473,13 @@ msgstr ""
 "\tlicenses\t\tTipărește un raport despre licențtele și EULA ale\n"
 "\t\t\t\tpachetelor instalate.\n"
 
-#: src/Zypper.cc:621
+#: src/Zypper.cc:683
 msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
 msgstr ""
 
-#: src/Zypper.cc:626
+#: src/Zypper.cc:688
 #, fuzzy
 msgid ""
 "  Usage:\n"
@@ -3452,7 +3491,7 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:654
+#: src/Zypper.cc:716
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr ""
@@ -3461,7 +3500,7 @@ msgstr ""
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:661
+#: src/Zypper.cc:723
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -3470,7 +3509,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:668
+#: src/Zypper.cc:730
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "
@@ -3479,45 +3518,45 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:679
+#: src/Zypper.cc:741
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Introduceți '%s' pentru a obține ajutor pentru comanda respectivă."
 
-#: src/Zypper.cc:854
+#: src/Zypper.cc:916
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Nivel de detaliu: %d"
 
-#: src/Zypper.cc:868
+#: src/Zypper.cc:930
 #, c-format, boost-format
 msgid "Invalid table style %d."
 msgstr "Stil de tabel invalid %d."
 
-#: src/Zypper.cc:869
+#: src/Zypper.cc:931
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
 msgstr "Utilizați un număr întreg între %d și %d"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:980
+#: src/Zypper.cc:1042
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr ""
 
-#: src/Zypper.cc:1001
+#: src/Zypper.cc:1063
 msgid "Enforced setting"
 msgstr ""
 
-#: src/Zypper.cc:1011
+#: src/Zypper.cc:1073
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 
-#: src/Zypper.cc:1035 src/Zypper.cc:3277
+#: src/Zypper.cc:1097 src/Zypper.cc:3338
 msgid "Entering non-interactive mode."
 msgstr "Intru în modul non-interactiv."
 
-#: src/Zypper.cc:1042
+#: src/Zypper.cc:1104
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
@@ -3525,11 +3564,11 @@ msgstr ""
 "Peticele ce au setat indicatorul rebootSuggested nu vor fi tratate ca "
 "interactive."
 
-#: src/Zypper.cc:1049
+#: src/Zypper.cc:1111
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Intru în modul 'no-gpg-checks'."
 
-#: src/Zypper.cc:1057
+#: src/Zypper.cc:1119
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -3537,56 +3576,56 @@ msgstr ""
 "Pornește '%s'. Semnăturile electronice ale noilor surse de instalare se vor "
 "importa automat!"
 
-#: src/Zypper.cc:1070
+#: src/Zypper.cc:1132
 msgid "The path specified in the --root option must be absolute."
 msgstr "Calea specificată în opțiunea --root trebuie să fie absolută."
 
-#: src/Zypper.cc:1086
+#: src/Zypper.cc:1148
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 
-#: src/Zypper.cc:1126
+#: src/Zypper.cc:1188
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Sursele de instalare sunt deactivate, utilizez doar baza de date de pachete "
 "instalate."
 
-#: src/Zypper.cc:1138
+#: src/Zypper.cc:1200
 msgid "Autorefresh disabled."
 msgstr "Reîmprospătare automată deactivată."
 
-#: src/Zypper.cc:1145
+#: src/Zypper.cc:1207
 msgid "CD/DVD repositories disabled."
 msgstr "Surse de instalare CD/DVD dezactivate."
 
-#: src/Zypper.cc:1152
+#: src/Zypper.cc:1214
 msgid "Remote repositories disabled."
 msgstr "Surse de instalare la distanță dezactivate."
 
-#: src/Zypper.cc:1159
+#: src/Zypper.cc:1221
 msgid "Ignoring installed resolvables."
 msgstr "Ignor dependențele instalate."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:1186 src/Zypper.cc:1236
+#: src/Zypper.cc:1248 src/Zypper.cc:1298
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Opțiunea %s nu are nici un efect aici, o ignor."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:1319
+#: src/Zypper.cc:1381
 msgid "Zypper shell does not support execution of subcommands."
 msgstr ""
 
-#: src/Zypper.cc:1398
+#: src/Zypper.cc:1460
 #, fuzzy, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "%s este înlocuit de %s"
 
-#: src/Zypper.cc:1399
+#: src/Zypper.cc:1461
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr ""
@@ -3594,7 +3633,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
 #. and the third %s = "only, in-advance, in-heaps, as-needed"
-#: src/Zypper.cc:1534
+#: src/Zypper.cc:1596
 #, fuzzy, c-format, boost-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -3659,8 +3698,8 @@ msgstr ""
 " %s\n"
 "-d, --download-only Doar descarcă pachetele nu le și instala.\n"
 
-#: src/Zypper.cc:1567 src/Zypper.cc:1619 src/Zypper.cc:1699 src/Zypper.cc:2242
-#: src/Zypper.cc:2316 src/Zypper.cc:2423
+#: src/Zypper.cc:1629 src/Zypper.cc:1681 src/Zypper.cc:1761 src/Zypper.cc:2303
+#: src/Zypper.cc:2377 src/Zypper.cc:2484
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -3668,7 +3707,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: src/Zypper.cc:1602
+#: src/Zypper.cc:1664
 #, fuzzy, c-format, boost-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -3705,7 +3744,7 @@ msgstr ""
 "-U, --no-clean-deps Nici o dezinstalare automată a dependințelor inutile.\n"
 "-D, --dry-run Testează dezinstalarea, dar nu șterge.\n"
 
-#: src/Zypper.cc:1640
+#: src/Zypper.cc:1702
 #, fuzzy
 msgid ""
 "source-install (si) [options] <name> ...\n"
@@ -3730,7 +3769,7 @@ msgstr ""
 "-r, --repo <aloas|#|URI> Instalează pachetele doar de la depozitele de "
 "pachete specificate.\n"
 
-#: src/Zypper.cc:1651
+#: src/Zypper.cc:1713
 #, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
@@ -3738,7 +3777,7 @@ msgid ""
 "executing '%2%'."
 msgstr ""
 
-#: src/Zypper.cc:1684
+#: src/Zypper.cc:1746
 #, fuzzy, c-format, boost-format
 msgid ""
 "verify (ve) [options]\n"
@@ -3768,7 +3807,7 @@ msgstr ""
 " %s\n"
 "-d, --download-only Doar descarcă pachetele, fără a fi instalate.\n"
 
-#: src/Zypper.cc:1728
+#: src/Zypper.cc:1790
 #, fuzzy, c-format, boost-format
 msgid ""
 "install-new-recommends (inr) [options]\n"
@@ -3799,7 +3838,7 @@ msgstr ""
 "-d, --download-only Doar descarcă pachetele, nu le instala.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: src/Zypper.cc:1761
+#: src/Zypper.cc:1823
 #, fuzzy, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -3821,7 +3860,7 @@ msgstr ""
 "-n, --name <alias> Specifică un nume descriptiv pentru serviciu.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1784
+#: src/Zypper.cc:1846
 #, fuzzy
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
@@ -3842,7 +3881,7 @@ msgstr ""
 "    --loose-query  Ignoră șirul de interogare din URI.\n"
 
 #. translators: %s is "--all" and "--all"
-#: src/Zypper.cc:1820
+#: src/Zypper.cc:1882
 #, fuzzy, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -3904,7 +3943,7 @@ msgstr ""
 "-m, --medium-type <type> Aplică modificările pentru toate serviciile de un "
 "tip specificat.\n"
 
-#: src/Zypper.cc:1868
+#: src/Zypper.cc:1930
 #, fuzzy
 msgid ""
 "services (ls) [options]\n"
@@ -3935,7 +3974,7 @@ msgstr ""
 "-U, --sort-by-uri Sortează lista după URI.\n"
 "-N, --sort-by-name Sortează lista după nume.\n"
 
-#: src/Zypper.cc:1896
+#: src/Zypper.cc:1958
 #, fuzzy
 msgid ""
 "refresh-services (refs) [options]\n"
@@ -3956,7 +3995,7 @@ msgstr ""
 "-r, --with-repos      Reîmprospătează și sursele de instalare.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1929
+#: src/Zypper.cc:1991
 #, fuzzy, c-format, boost-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -3976,8 +4015,6 @@ msgid ""
 "-p, --priority <integer>  Set priority of the repository.\n"
 "-k, --keep-packages       Enable RPM files caching.\n"
 "-K, --no-keep-packages    Disable RPM files caching.\n"
-"-g, --gpgcheck            Enable GPG check for this repository.\n"
-"-G, --no-gpgcheck         Disable GPG check for this repository.\n"
 "-f, --refresh             Enable autorefresh of the repository.\n"
 msgstr ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -4000,7 +4037,7 @@ msgstr ""
 "-K, --no-keep-packages Dezactivează cache-ul fișierelor RPM.\n"
 "-f, --refresh Activează reîmprospătarea automată a sursei de instalare.\n"
 
-#: src/Zypper.cc:1975
+#: src/Zypper.cc:2036
 #, fuzzy
 msgid ""
 "repos (lr) [options] [repo] ...\n"
@@ -4040,7 +4077,7 @@ msgstr ""
 "-A, --sort-by-alias Sortează lista după alias.\n"
 "-N, --sort-by-name Sortează lista după nume.\n"
 
-#: src/Zypper.cc:2007
+#: src/Zypper.cc:2068
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -4058,7 +4095,7 @@ msgstr ""
 " --loose-auth Ignoră datele de autentificare ale utilizatorului din URI.\n"
 " --loose-query Ignoră șirul de interogare din URI.\n"
 
-#: src/Zypper.cc:2026
+#: src/Zypper.cc:2087
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -4075,7 +4112,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:2059
+#: src/Zypper.cc:2120
 #, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -4094,13 +4131,6 @@ msgid ""
 "-p, --priority <integer>  Set priority of the repository.\n"
 "-k, --keep-packages       Enable RPM files caching.\n"
 "-K, --no-keep-packages    Disable RPM files caching.\n"
-"-g, --gpgcheck            Enable GPG check for this repository.\n"
-"-G, --no-gpgcheck         Disable GPG check for this repository.\n"
-"\n"
-"-a, --all                 Apply changes to all repositories.\n"
-"-l, --local               Apply changes to all local repositories.\n"
-"-t, --remote              Apply changes to all remote repositories.\n"
-"-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -4119,14 +4149,21 @@ msgstr ""
 "-p, --priority <integer> Stabilește prioritarea sursei de instalare.\n"
 "-k, --keep-packages Activează cache-ul fișierelor RPM.\n"
 "-K, --no-keep-packages Dezactivează cache-ul fișierelor RPM.\n"
-"\n"
+
+#: src/Zypper.cc:2139
+msgid ""
+"-a, --all                 Apply changes to all repositories.\n"
+"-l, --local               Apply changes to all local repositories.\n"
+"-t, --remote              Apply changes to all remote repositories.\n"
+"-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
+msgstr ""
 "-a, --all Aplică modificările tuturor surselor de instalare.\n"
 "-l, --local Aplică modificările tuturor surselor de instalare locale.\n"
 "-t, --remote Aplică modificările tuturor surselor de instalare la distanță.\n"
 "-m, --medium-type <type> Aplică modificările surselor de instalare de un "
 "anumit tip.\n"
 
-#: src/Zypper.cc:2101
+#: src/Zypper.cc:2162
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -4161,7 +4198,7 @@ msgstr ""
 "-s, --services Reactualizează și serviciile înaintea reactualizării "
 "depozitelor de pachete.\n"
 
-#: src/Zypper.cc:2130
+#: src/Zypper.cc:2191
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -4185,7 +4222,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2159
+#: src/Zypper.cc:2220
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -4225,7 +4262,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2213
+#: src/Zypper.cc:2274
 #, fuzzy, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -4282,7 +4319,7 @@ msgstr ""
 " %s\n"
 "-d, --download-only Doar descarcă pachetele, nu le instala.\n"
 
-#: src/Zypper.cc:2286
+#: src/Zypper.cc:2347
 #, fuzzy, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -4337,11 +4374,11 @@ msgstr ""
 " %s\n"
 "-d, --download-only Doar descarcă pachetele nu le și instala.\n"
 
-#: src/Zypper.cc:2313
+#: src/Zypper.cc:2374
 msgid "Install only patches which affect the package management itself."
 msgstr ""
 
-#: src/Zypper.cc:2314
+#: src/Zypper.cc:2375
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
@@ -4349,64 +4386,64 @@ msgid ""
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2344
+#: src/Zypper.cc:2405
 msgid "list-patches (lp) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2347
+#: src/Zypper.cc:2408
 msgid "List all applicable patches."
 msgstr ""
 
-#: src/Zypper.cc:2350
+#: src/Zypper.cc:2411
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
 
-#: src/Zypper.cc:2351
+#: src/Zypper.cc:2412
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
 
-#: src/Zypper.cc:2352
+#: src/Zypper.cc:2413
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
 
-#: src/Zypper.cc:2353
+#: src/Zypper.cc:2414
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
 
-#: src/Zypper.cc:2354
+#: src/Zypper.cc:2415
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
 
-#: src/Zypper.cc:2355
+#: src/Zypper.cc:2416
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
 
-#: src/Zypper.cc:2356
+#: src/Zypper.cc:2417
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
 
-#: src/Zypper.cc:2358
+#: src/Zypper.cc:2419
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
 
-#: src/Zypper.cc:2402
+#: src/Zypper.cc:2463
 #, fuzzy, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -4450,24 +4487,24 @@ msgstr ""
 " %s\n"
 "-d, --download-only Doar descarcă pachetele nu le și instala.\n"
 
-#: src/Zypper.cc:2431
+#: src/Zypper.cc:2492
 #, fuzzy
 msgid "Whether to allow downgrading installed resolvables."
 msgstr "Ignor dependențele instalate."
 
-#: src/Zypper.cc:2433
+#: src/Zypper.cc:2494
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr ""
 
-#: src/Zypper.cc:2435
+#: src/Zypper.cc:2496
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
 
-#: src/Zypper.cc:2437
+#: src/Zypper.cc:2498
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr ""
 
-#: src/Zypper.cc:2474
+#: src/Zypper.cc:2535
 #, fuzzy
 msgid ""
 "search (se) [options] [querystring] ...\n"
@@ -4545,30 +4582,30 @@ msgstr ""
 "Șirurile de căutare pot conține caracterele de globalizare * și ?.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2524
+#: src/Zypper.cc:2585
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2527
+#: src/Zypper.cc:2588
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
 
-#: src/Zypper.cc:2530
+#: src/Zypper.cc:2591
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
 
-#: src/Zypper.cc:2531
+#: src/Zypper.cc:2592
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr ""
 
-#: src/Zypper.cc:2548
+#: src/Zypper.cc:2609
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -4586,7 +4623,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI>  Un alt mod de a specifica o sursă de instalare.\n"
 
-#: src/Zypper.cc:2578
+#: src/Zypper.cc:2639
 #, fuzzy
 msgid ""
 "packages (pa) [options] [repository] ...\n"
@@ -4618,7 +4655,7 @@ msgstr ""
 "-N, --sort-by-name        Sortează lista după numele pachetelor.\n"
 "-R, --sort-by-repo        Sortează lista după sursele de instalare.\n"
 
-#: src/Zypper.cc:2609
+#: src/Zypper.cc:2670
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -4640,7 +4677,7 @@ msgstr ""
 "-i, --installed-only      Afișează doar modelele instalate.\n"
 "-u, --not-installed-only  Afișează doar modelele ce nu sunt instalate.\n"
 
-#: src/Zypper.cc:2636
+#: src/Zypper.cc:2697
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -4662,12 +4699,12 @@ msgstr ""
 "-i, --installed-only      Afișează doar produsele instalate.\n"
 "-u, --not-installed-only  Afișează doar produsele ce nu sunt instalate.\n"
 
-#: src/Zypper.cc:2645
+#: src/Zypper.cc:2706
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
 
-#: src/Zypper.cc:2669
+#: src/Zypper.cc:2730
 #, fuzzy, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -4701,7 +4738,7 @@ msgstr ""
 " --requires Arată, de asemenea, cerințele și pre-cerințele.\n"
 " --recommends Arată, de asemenea, recomandările."
 
-#: src/Zypper.cc:2702
+#: src/Zypper.cc:2763
 #, fuzzy, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -4716,7 +4753,7 @@ msgstr ""
 "\n"
 "Acesta este un alias de compatibilitate cu rug pentru '%s'.\n"
 
-#: src/Zypper.cc:2721
+#: src/Zypper.cc:2782
 #, fuzzy, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -4731,7 +4768,7 @@ msgstr ""
 "\n"
 "Această opțiune este un alias de compatibilitate pentru '%s'.\n"
 
-#: src/Zypper.cc:2740
+#: src/Zypper.cc:2801
 #, fuzzy, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -4746,7 +4783,7 @@ msgstr ""
 "\n"
 "Acesta este un alias de compatibilitate pentru '%s'.\n"
 
-#: src/Zypper.cc:2757
+#: src/Zypper.cc:2818
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -4760,7 +4797,7 @@ msgstr ""
 "\n"
 "Această comandă nu are opțiuni adiționale.\n"
 
-#: src/Zypper.cc:2808
+#: src/Zypper.cc:2869
 msgid ""
 "moo\n"
 "\n"
@@ -4774,7 +4811,7 @@ msgstr ""
 "\n"
 "Această comandă nu are opțiuni adiționale.\n"
 
-#: src/Zypper.cc:2830
+#: src/Zypper.cc:2891
 #, c-format, boost-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -4798,7 +4835,7 @@ msgstr ""
 "-t, --type <type> Tipuri de pachete (%s).\n"
 " Implicit: %s.\n"
 
-#: src/Zypper.cc:2857
+#: src/Zypper.cc:2918
 #, c-format, boost-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -4813,27 +4850,27 @@ msgid ""
 msgstr ""
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2884
+#: src/Zypper.cc:2945
 msgid "locks (ll) [options]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2887
+#: src/Zypper.cc:2948
 #, fuzzy
 msgid "List current package locks."
 msgstr "Nu sunt definite blocări de pachete."
 
 #. translators: -m, --matches
-#: src/Zypper.cc:2891
+#: src/Zypper.cc:2952
 msgid "Show the number of resolvables matched by each lock."
 msgstr ""
 
 #. translators: -s, --solvables
-#: src/Zypper.cc:2893
+#: src/Zypper.cc:2954
 msgid "List the resolvables matched by each lock."
 msgstr ""
 
-#: src/Zypper.cc:2909
+#: src/Zypper.cc:2970
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -4851,7 +4888,7 @@ msgstr ""
 "-d, --only-duplicates Curăță doar blocările duplicat.\n"
 "-e, --only-empty Curăță doar blocările care nu blochează nimic.\n"
 
-#: src/Zypper.cc:2930
+#: src/Zypper.cc:2991
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -4869,7 +4906,7 @@ msgstr ""
 " Opțiunile comenzii:\n"
 "-l, --label Arată eticheta sistemului de operare.\n"
 
-#: src/Zypper.cc:2951
+#: src/Zypper.cc:3012
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4886,7 +4923,7 @@ msgstr ""
 "-m, --match Interpretează numărul lipsă al versiunii ca fiind oricare "
 "versiune.\n"
 
-#: src/Zypper.cc:2970
+#: src/Zypper.cc:3031
 msgid ""
 "licenses\n"
 "\n"
@@ -4901,12 +4938,12 @@ msgstr ""
 "Această comandă nu are opțiuni adiționale.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2994
+#: src/Zypper.cc:3055
 msgid "ps [options]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2997
+#: src/Zypper.cc:3058
 #, fuzzy
 msgid ""
 "List running processes which might still use files and libraries deleted by "
@@ -4920,7 +4957,7 @@ msgstr ""
 "Această comandă nu are opțiuni suplimentare.\n"
 
 #. translators: -s, --short
-#: src/Zypper.cc:3001
+#: src/Zypper.cc:3062
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4928,7 +4965,7 @@ msgid ""
 msgstr ""
 
 #. translators: --print <format>
-#: src/Zypper.cc:3003
+#: src/Zypper.cc:3064
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4936,7 +4973,7 @@ msgid ""
 "system service name."
 msgstr ""
 
-#: src/Zypper.cc:3022
+#: src/Zypper.cc:3083
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4958,7 +4995,7 @@ msgid ""
 "                     would be done.\n"
 msgstr ""
 
-#: src/Zypper.cc:3061
+#: src/Zypper.cc:3122
 msgid ""
 "source-download\n"
 "\n"
@@ -4974,7 +5011,7 @@ msgid ""
 "                     but show which source rpms are missing or extraneous.\n"
 msgstr ""
 
-#: src/Zypper.cc:3088
+#: src/Zypper.cc:3149
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4988,7 +5025,7 @@ msgstr ""
 "\n"
 "Această comandă nu are opțiuni adiționale.\n"
 
-#: src/Zypper.cc:3105
+#: src/Zypper.cc:3166
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -5003,7 +5040,7 @@ msgstr ""
 "Această comandă nu are opțiuni adiționale.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3123
+#: src/Zypper.cc:3184
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -5014,7 +5051,7 @@ msgstr ""
 "Listează tipurile de servicii disponibile.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3139
+#: src/Zypper.cc:3200
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -5027,7 +5064,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3161
+#: src/Zypper.cc:3222
 msgid ""
 "mount\n"
 "\n"
@@ -5047,7 +5084,7 @@ msgstr ""
 "-n, --name <name> Folosește o coardă dată ca pe nume de serviciu.\n"
 "-r, --recurse Accesează subfolderul.\n"
 
-#: src/Zypper.cc:3189
+#: src/Zypper.cc:3250
 #, fuzzy, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -5062,7 +5099,7 @@ msgstr ""
 "mai multe informații consultați pagina de manual a lui zypper. \n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3206
+#: src/Zypper.cc:3267
 #, fuzzy
 msgid ""
 "ping [options]\n"
@@ -5074,16 +5111,16 @@ msgstr ""
 "Această comandă are o implementare fictivă care returnează întotdeauna 0.\n"
 "Este oferită pentru compatibilitate cu rug.\n"
 
-#: src/Zypper.cc:3249 src/Zypper.cc:5307
+#: src/Zypper.cc:3310 src/Zypper.cc:5363
 msgid "Unexpected program flow."
 msgstr "Flux program neașteptat."
 
-#: src/Zypper.cc:3293
+#: src/Zypper.cc:3354
 msgid "Non-option program arguments: "
 msgstr "Argumente program non-opțiuni:"
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3352
+#: src/Zypper.cc:3413
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -5093,21 +5130,21 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "_\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3375
+#: src/Zypper.cc:3436
 msgid "Root privileges are required for refreshing services."
 msgstr "Pentru reîmprospătarea serviciilor sunt necesare privilegii de root."
 
-#: src/Zypper.cc:3399 src/Zypper.cc:3488 src/Zypper.cc:3705
+#: src/Zypper.cc:3460 src/Zypper.cc:3549 src/Zypper.cc:3762
 msgid "Root privileges are required for modifying system services."
 msgstr ""
 "Pentru modificarea serviciilor sistem sunt necesare privilegii de root."
 
-#: src/Zypper.cc:3472
+#: src/Zypper.cc:3533
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' nu este un tip de serviciu valid."
 
-#: src/Zypper.cc:3474
+#: src/Zypper.cc:3535
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -5118,105 +5155,105 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3499 src/Zypper.cc:3846
+#: src/Zypper.cc:3560 src/Zypper.cc:3903
 msgid "Alias or an aggregate option is required."
 msgstr "Este necesar un alias sau o opțiune agregat."
 
-#: src/Zypper.cc:3531
+#: src/Zypper.cc:3592
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Serviciul '%s' nu a fost găsit."
 
-#: src/Zypper.cc:3558 src/Zypper.cc:3704 src/Zypper.cc:3783 src/Zypper.cc:3835
+#: src/Zypper.cc:3619 src/Zypper.cc:3761 src/Zypper.cc:3840 src/Zypper.cc:3892
 msgid "Root privileges are required for modifying system repositories."
 msgstr ""
 "Pentru modificarea surselor de instalare sistem sunt necesare privilegii de "
 "root."
 
-#: src/Zypper.cc:3613 src/Zypper.cc:3951
+#: src/Zypper.cc:3670 src/Zypper.cc:4007
 msgid "Too few arguments."
 msgstr "Prea puține argumente."
 
-#: src/Zypper.cc:3636
+#: src/Zypper.cc:3693
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Dacă se utilizează doar un singur argument, trebuie să fie un URI ce indică "
 "un fișier .repo."
 
-#: src/Zypper.cc:3666
+#: src/Zypper.cc:3723
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "Nu pot utiliza %s împreună cu %s. Utilizez setarea %s."
 
-#: src/Zypper.cc:3685
+#: src/Zypper.cc:3742
 msgid "Specified type is not a valid repository type:"
 msgstr "Tipul specificat nu este un tip valid de sursă de instalare:"
 
-#: src/Zypper.cc:3686
+#: src/Zypper.cc:3743
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
 "Consultați '%s' sau '%s' pentru a obține o listă a tipurilor de surse de "
 "instalare cunoscute."
 
-#: src/Zypper.cc:3712 src/Zypper.cc:4909 src/utils/messages.cc:45
+#: src/Zypper.cc:3769 src/Zypper.cc:4965 src/utils/messages.cc:45
 msgid "Required argument missing."
 msgstr "Lipsește un argument obligatoriu."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:3737
+#: src/Zypper.cc:3794
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Sursa de instalare '%s' nu a fost găsită după alias, număr sau URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:3759
+#: src/Zypper.cc:3816
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Serviciul '%s' nu a fost găsit după alias, număr sau URI."
 
-#: src/Zypper.cc:3790
+#: src/Zypper.cc:3847
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Prea puține argumente. Se necesită cel puțin un URI și un alias."
 
-#: src/Zypper.cc:3814
+#: src/Zypper.cc:3871
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Nu am găsit sursa de instalare '%s'."
 
-#: src/Zypper.cc:3878
+#: src/Zypper.cc:3934
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Nu am găsit sursa de instalare %s."
 
-#: src/Zypper.cc:3895
+#: src/Zypper.cc:3951
 msgid "Root privileges are required for refreshing system repositories."
 msgstr ""
 "Pentru reîmprospătarea surselor de instalare sistem sunt necesare privilegii "
 "de root."
 
-#: src/Zypper.cc:3901
+#: src/Zypper.cc:3957
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Opțiunea globală '%s' nu are efect aici."
 
-#: src/Zypper.cc:3909
+#: src/Zypper.cc:3965
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Nu se acceptă argumente dacă se utilizează '%s'."
 
-#: src/Zypper.cc:3933
+#: src/Zypper.cc:3989
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Pentru curățarea cache-urilor locale sunt necesare privilegii de root."
 
-#: src/Zypper.cc:3952
+#: src/Zypper.cc:4008
 msgid "At least one package name is required."
 msgstr "Este necesar cel puțin un nume de pachet."
 
-#: src/Zypper.cc:3961
+#: src/Zypper.cc:4017
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
 "Pentru instalarea sau dezinstalarea de pachete sunt necesare privilegii de "
@@ -5224,20 +5261,20 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:3973
+#: src/Zypper.cc:4029
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Ignor argumentele, marchez întreaga sursă de instalare."
 
-#: src/Zypper.cc:3984
+#: src/Zypper.cc:4040
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Tip de pachet necunoscut: %s"
 
-#: src/Zypper.cc:3994
+#: src/Zypper.cc:4050
 msgid "Cannot uninstall patches."
 msgstr "Nu se pot dezinstala peticele."
 
-#: src/Zypper.cc:3995
+#: src/Zypper.cc:4051
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -5248,34 +5285,34 @@ msgstr ""
 "Pachetele nu se instalează ca fișiere copiate, înregistrări de bază de date\n"
 "sau alte posibilități similare."
 
-#: src/Zypper.cc:4005
+#: src/Zypper.cc:4061
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Dezinstalarea unui pachet sursă nedefinit și neimplementat."
 
-#: src/Zypper.cc:4025
+#: src/Zypper.cc:4081
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' pare a fi un fișier RPM. Voi încerca să-l descarc."
 
-#: src/Zypper.cc:4034
+#: src/Zypper.cc:4090
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Probleme cu fișierul RPM specificat ca '%s', îl omit."
 
-#: src/Zypper.cc:4056
+#: src/Zypper.cc:4112
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Probleme la citirea header-ului RPM al %s. Este un fișier RPM?"
 
-#: src/Zypper.cc:4077
+#: src/Zypper.cc:4133
 msgid "Plain RPM files cache"
 msgstr "Cache pentru fișiere RPM simple"
 
-#: src/Zypper.cc:4094
+#: src/Zypper.cc:4150
 msgid "No valid arguments specified."
 msgstr "Nu a fost specificat nici un argument valid."
 
-#: src/Zypper.cc:4111 src/Zypper.cc:4242
+#: src/Zypper.cc:4167 src/Zypper.cc:4298
 #, fuzzy
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
@@ -5285,70 +5322,70 @@ msgstr ""
 "dependențele instalate. Nu poate fi instalat nimic."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4148 src/Zypper.cc:4713
+#: src/Zypper.cc:4204 src/Zypper.cc:4769
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s contrazice %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4156
+#: src/Zypper.cc:4212
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s nu poate fi utilizat momentan cu %s"
 
-#: src/Zypper.cc:4197
+#: src/Zypper.cc:4253
 msgid "Source package name is a required argument."
 msgstr "Numele pachetului sursă este un argument obligatoriu."
 
-#: src/Zypper.cc:4281
+#: src/Zypper.cc:4337
 msgid "Mode is set to 'match-exact'"
 msgstr ""
 
-#: src/Zypper.cc:4301 src/Zypper.cc:4632 src/Zypper.cc:4732 src/Zypper.cc:4942
-#: src/Zypper.cc:4993 src/Zypper.cc:5033
+#: src/Zypper.cc:4357 src/Zypper.cc:4688 src/Zypper.cc:4788 src/Zypper.cc:4998
+#: src/Zypper.cc:5049 src/Zypper.cc:5089
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Tip de pachet necunoscut '%s'."
 
 #. translators: empty search result message
-#: src/Zypper.cc:4447
+#: src/Zypper.cc:4503
 #, fuzzy
 msgid "No matching items found."
 msgstr "Nici o problemă de potrivire nu a fost găsită."
 
-#: src/Zypper.cc:4482
+#: src/Zypper.cc:4538
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 "A apărut o problemă la inițializarea sau la execuția interogării de căutare"
 
-#: src/Zypper.cc:4483
+#: src/Zypper.cc:4539
 msgid "See the above message for a hint."
 msgstr "Consultați mesajul de mai sus pentru sugestii."
 
-#: src/Zypper.cc:4564
+#: src/Zypper.cc:4620
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
 
-#: src/Zypper.cc:4651 src/Zypper.cc:4699
+#: src/Zypper.cc:4707 src/Zypper.cc:4755
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Nu pot folosi %s împreună cu %s."
 
-#: src/Zypper.cc:4680
+#: src/Zypper.cc:4736
 msgid "Root privileges are required for updating packages."
 msgstr "Pentru actualizarea pachetelor sunt necesare privilegii de root."
 
-#: src/Zypper.cc:4739 src/Zypper.cc:4747 src/Zypper.cc:4828
+#: src/Zypper.cc:4795 src/Zypper.cc:4803 src/Zypper.cc:4884
 msgid "Operation not supported."
 msgstr "Operațiunea nu este suportată."
 
-#: src/Zypper.cc:4740
+#: src/Zypper.cc:4796
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Pentru a actualiza produsele instalate folosiți '%s'."
 
-#: src/Zypper.cc:4748
+#: src/Zypper.cc:4804
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -5357,20 +5394,20 @@ msgstr ""
 "Zypper nu ține evidența pachetelor sursă instalate. Pentru a instala cel mai "
 "nou pachet sursă și pentru ai construi dependințele, folosiți '%s'."
 
-#: src/Zypper.cc:4764
+#: src/Zypper.cc:4820
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Nu pot folosi tipuri multiple atunci când pachetele sunt oferite ca "
 "argumente."
 
-#: src/Zypper.cc:4864
+#: src/Zypper.cc:4920
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
 "Pentru efectuarea unui upgrade de distribuție sunt necesare privilegii de "
 "root."
 
-#: src/Zypper.cc:4884
+#: src/Zypper.cc:4940
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -5382,17 +5419,17 @@ msgstr ""
 "compatibile înainte să continui. Accesează '%s' pentru mai multe informații "
 "despre această comandă."
 
-#: src/Zypper.cc:4912 src/utils/messages.cc:37 src/utils/messages.cc:47
+#: src/Zypper.cc:4968 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
 msgstr "Mod de folosire"
 
-#: src/Zypper.cc:4972 src/Zypper.cc:5013
+#: src/Zypper.cc:5028 src/Zypper.cc:5069
 msgid "Root privileges are required for adding of package locks."
 msgstr ""
 "Pentru adăugarea de blocări de pachete sunt necesare privilegii de root."
 
-#: src/Zypper.cc:5094
+#: src/Zypper.cc:5150
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
@@ -5400,51 +5437,51 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Zypper.cc:5105
+#: src/Zypper.cc:5161
 msgid "XML output not implemented for this command."
 msgstr ""
 
-#: src/Zypper.cc:5118
+#: src/Zypper.cc:5174
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Etichetă de distribuție: %s"
 
-#: src/Zypper.cc:5119
+#: src/Zypper.cc:5175
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Etichetă scurtă: %s"
 
-#: src/Zypper.cc:5160
+#: src/Zypper.cc:5216
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s potriviri %s"
 
-#: src/Zypper.cc:5162
+#: src/Zypper.cc:5218
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s este mai nou decât %s"
 
-#: src/Zypper.cc:5164
+#: src/Zypper.cc:5220
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s este mai vechi decât %s"
 
-#: src/Zypper.cc:5242 src/source-download.cc:217
+#: src/Zypper.cc:5298 src/source-download.cc:217
 #, fuzzy, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr ""
 "Permisiuni insuficiente pentru a salva fişierul în:\n"
 "%s"
 
-#: src/Zypper.cc:5294
+#: src/Zypper.cc:5350
 msgid "This command only makes sense in the zypper shell."
 msgstr "Această comandă are sens doar în shell-ul zypper."
 
-#: src/Zypper.cc:5304
+#: src/Zypper.cc:5360
 msgid "You already are running zypper's shell."
 msgstr "Shell-ul zypper rulează deja."
 
-#: src/Zypper.cc:5368
+#: src/Zypper.cc:5424
 msgid "Resolvable Type"
 msgstr "Tip dependență"
 
@@ -6518,6 +6555,101 @@ msgstr "Moduri disponibile de descărcare: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Opțiunea '%s' suprascrie '%s'."
+
+#, fuzzy
+#~ msgid ""
+#~ "addrepo (ar) [options] <URI> <alias>\n"
+#~ "addrepo (ar) [options] <file.repo>\n"
+#~ "\n"
+#~ "Add a repository to the system. The repository can be specified by its "
+#~ "URI or can be read from specified .repo file (even remote).\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "-r, --repo <file.repo>    Just another means to specify a .repo file to "
+#~ "read.\n"
+#~ "-t, --type <type>         Type of repository (%s).\n"
+#~ "-d, --disable             Add the repository as disabled.\n"
+#~ "-c, --check               Probe URI.\n"
+#~ "-C, --no-check            Don't probe URI, probe later during refresh.\n"
+#~ "-n, --name <name>         Specify descriptive name for the repository.\n"
+#~ "-p, --priority <integer>  Set priority of the repository.\n"
+#~ "-k, --keep-packages       Enable RPM files caching.\n"
+#~ "-K, --no-keep-packages    Disable RPM files caching.\n"
+#~ "-g, --gpgcheck            Enable GPG check for this repository.\n"
+#~ "-G, --no-gpgcheck         Disable GPG check for this repository.\n"
+#~ "-f, --refresh             Enable autorefresh of the repository.\n"
+#~ msgstr ""
+#~ "addrepo (ar) [options] <URI> <alias>\n"
+#~ "addrepo (ar) [options] <file.repo>\n"
+#~ "\n"
+#~ "Adaugă o sursă de instalare la sistem. Sursa de instalare poate fi "
+#~ "specificată prin URI-ul său sau poate fi citită dintr-un fișier .repo "
+#~ "(chiar și la distanță).\n"
+#~ "\n"
+#~ " Opțiuni de comandă:\n"
+#~ "-r, --repo <file.repo> Doar un altul înseamnă specificarea unui fișier ."
+#~ "repo pentru a fi citit.\n"
+#~ "-t, --type <type> Tipul sursei de instalare (%s).\n"
+#~ "-d, --disable Adaugă o sursă de instalare ca dezactivată.\n"
+#~ "-c, --check Verifică URI.\n"
+#~ "-C, --no-check Nu verifica URI, verifică mai târziu, în timpul "
+#~ "reîmprospătării.\n"
+#~ "-n, --name <name> Specifică numele descriptiv pentru sursa de instalare.\n"
+#~ "-k, --keep-packages Activează cache-ul fișierelor RPM.\n"
+#~ "-K, --no-keep-packages Dezactivează cache-ul fișierelor RPM.\n"
+#~ "-f, --refresh Activează reîmprospătarea automată a sursei de instalare.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "modifyrepo (mr) <options> <alias|#|URI> ...\n"
+#~ "modifyrepo (mr) <options> <%s>\n"
+#~ "\n"
+#~ "Modify properties of repositories specified by alias, number, or URI, or "
+#~ "by the\n"
+#~ "'%s' aggregate options.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "-d, --disable             Disable the repository (but don't remove it).\n"
+#~ "-e, --enable              Enable a disabled repository.\n"
+#~ "-r, --refresh             Enable auto-refresh of the repository.\n"
+#~ "-R, --no-refresh          Disable auto-refresh of the repository.\n"
+#~ "-n, --name <name>         Set a descriptive name for the repository.\n"
+#~ "-p, --priority <integer>  Set priority of the repository.\n"
+#~ "-k, --keep-packages       Enable RPM files caching.\n"
+#~ "-K, --no-keep-packages    Disable RPM files caching.\n"
+#~ "-g, --gpgcheck            Enable GPG check for this repository.\n"
+#~ "-G, --no-gpgcheck         Disable GPG check for this repository.\n"
+#~ "\n"
+#~ "-a, --all                 Apply changes to all repositories.\n"
+#~ "-l, --local               Apply changes to all local repositories.\n"
+#~ "-t, --remote              Apply changes to all remote repositories.\n"
+#~ "-m, --medium-type <type>  Apply changes to repositories of specified "
+#~ "type.\n"
+#~ msgstr ""
+#~ "modifyrepo (mr) <options> <alias|#|URI> ...\n"
+#~ "modifyrepo (mr) <options> <%s>\n"
+#~ "\n"
+#~ "Modifică proprietățile surselor de instalare specificate prin alias, "
+#~ "număr sau URI, sau prin\n"
+#~ "'%s' opțiunile agregat.\n"
+#~ "\n"
+#~ " Opțiuni de comandă:\n"
+#~ "-d, --disable Dezactivează sursa de instalare (dar nu o elimina).\n"
+#~ "-e, --enable Activează o sursă de instalare dezactivată.\n"
+#~ "-r, --refresh Activează reîmprospătarea automată a sursei de instalare.\n"
+#~ "-R, --no-refresh Dezactivează reîmprospătarea automată a sursei de "
+#~ "instalare.\n"
+#~ "-n, --name Stabilește un nume descriptiv pentru sursa de instalare.\n"
+#~ "-p, --priority <integer> Stabilește prioritarea sursei de instalare.\n"
+#~ "-k, --keep-packages Activează cache-ul fișierelor RPM.\n"
+#~ "-K, --no-keep-packages Dezactivează cache-ul fișierelor RPM.\n"
+#~ "\n"
+#~ "-a, --all Aplică modificările tuturor surselor de instalare.\n"
+#~ "-l, --local Aplică modificările tuturor surselor de instalare locale.\n"
+#~ "-t, --remote Aplică modificările tuturor surselor de instalare la "
+#~ "distanță.\n"
+#~ "-m, --medium-type <type> Aplică modificările surselor de instalare de un "
+#~ "anumit tip.\n"
 
 #~ msgid "Reboot Required"
 #~ msgstr "Reboot necesar"
