@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 07/12/2018
+.\"      Date: 08/13/2018
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "07/12/2018" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "08/13/2018" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -52,11 +52,15 @@ Libzypp works with repository metadata, this is information about packages and t
 There is a special set of commands in zypper intended to manipulate repositories\&. Also many commands and options take a repository as an argument\&. See section \fBCOMMANDS\fR, subsection \fBRepository Management\fR for more details\&.
 .SS "GPG checks"
 .sp
-Zypp verifies the authenticity of repository metadata by checking their GPG signature\&. If the repository metadata are signed with a trusted key and and successfully verified, packages from that repository are accepted for installation if they match the checksum provided in the metadata\&. If the repository metadata are not signed, the signature of each downloaded rpm package is checked before accepting it for installation\&.
-.sp
-This default behavior can be tuned by explicitly setting the variables \fBrepo_gpgcheck\fR and/or \fBpkg_gpgcheck\fR in the ZYpp configuration file (\fB/etc/zypp/zypp\&.conf\fR) to perform those checks always (if \fIon\fR) or never (if \fIoff\fR)\&.
-.sp
 \fBDisabling GPG checks is not recommended\&.\fR Signing data enables the recipient to verify that no modifications occurred after the data were signed\&. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise\&.
+.sp
+Zypp verifies the authenticity of repository metadata by checking their GPG signature\&. If the repository metadata are signed with a trusted key and successfully verified, packages from this repository are accepted for installation if they match the checksum provided in the metadata\&. Using unsigned repositories needs to be confirmed\&.
+.sp
+If the repository metadata are not signed, the GPG signature of each downloaded rpm package is checked before accepting it for installation\&. Packages from unsigned repositories need a valid GPG signature\&. Using unsigned packages needs to be confirmed\&.
+.sp
+The above is the default behavior defined by settings in /etc/zypp/zypp\&.conf\&.
+.sp
+The \fBaddrepo\fR and \fBmodifyrepo\fR commands provide further options to tune the behavior per repository\&. It is for example possible to relax the need to confirm installing unsigned packages for a specific repository\&. But if you do so, you should be very certain that an attacker can hardly modify the package data within the repository or on the way to your machine\&. See section \fBCOMMANDS\fR for details about the command options\&.
 .SS "Resource Identifiers (URI)"
 .sp
 To specify locations of repositories or other resources (RPM files, \&.repo files) you can use any type of URI supported by libzypp\&. In addition Zypper accepts a special URI identifying openSUSE Build Service (OBS) repositories in the \fBaddrepo\fR command\&. These URIs have the form of \fBobs://\fR\fIproject\fR\fB/\fR[\fIplatform\fR]\&.
@@ -2070,12 +2074,46 @@ Disable RPM files caching\&.
 .PP
 \fB\-g\fR, \fB\-\-gpgcheck\fR
 .RS 4
-Enable GPG check for this repository\&.
+Enable GPG check for this repository\&. The behavior as described in section
+\fBGPG checks\fR\&.
+.RE
+.PP
+\fB\-\-gpgcheck\-strict\fR
+.RS 4
+Enable strict GPG check for this repository\&. Even packages from signed repositories need a valid GPG signature and using unsigned packages must be confirmed\&.
+.RE
+.PP
+\fB\-\-gpgcheck\-allow\-unsigned\fR
+.RS 4
+Short hand for
+\fB\-\-gpgcheck\-allow\-unsigned\-repo \-\-gpgcheck\-allow\-unsigned\-package\fR
+.RE
+.PP
+\fB\-\-gpgcheck\-allow\-unsigned\-repo\fR
+.RS 4
+Enable GPG check but allow the repository metadata to be unsigned\&.
+.RE
+.PP
+\fB\-\-gpgcheck\-allow\-unsigned\-package\fR
+.RS 4
+Enable GPG check but allow installing unsigned packages from this repository\&.
 .RE
 .PP
 \fB\-G\fR, \fB\-\-no\-gpgcheck\fR
 .RS 4
 Disable GPG check for this repository\&.
+\fBDisabling GPG checks is not recommended\&.\fR
+Signing data enables the recipient to verify that no modifications occurred after the data were signed\&. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise\&.
+.RE
+.PP
+\fB\-\-default\-gpgcheck\fR
+.RS 4
+Use the global GPG check settings defined in
+\fB/etc/zypp/zypp\&.conf\fR\&. This is the default\&.
+
+Unless you have modified your zypp\&.conf settings, this is the same as
+\fB\-\-gpgcheck\fR, the behavior as described in section
+\fBGPG checks\fR\&.
 .RE
 .PP
 \fB\-f\fR, \fB\-\-refresh\fR
@@ -2296,12 +2334,46 @@ Disable RPM files caching\&.
 .PP
 \fB\-g\fR, \fB\-\-gpgcheck\fR
 .RS 4
-Enable GPG check for this repository\&.
+Enable GPG check for this repository\&. The behavior as described in section
+\fBGPG checks\fR\&.
+.RE
+.PP
+\fB\-\-gpgcheck\-strict\fR
+.RS 4
+Enable strict GPG check for this repository\&. Even packages from signed repositories need a valid GPG signature and using unsigned packages must be confirmed\&.
+.RE
+.PP
+\fB\-\-gpgcheck\-allow\-unsigned\fR
+.RS 4
+Short hand for
+\fB\-\-gpgcheck\-allow\-unsigned\-repo \-\-gpgcheck\-allow\-unsigned\-package\fR
+.RE
+.PP
+\fB\-\-gpgcheck\-allow\-unsigned\-repo\fR
+.RS 4
+Enable GPG check but allow the repository metadata to be unsigned\&.
+.RE
+.PP
+\fB\-\-gpgcheck\-allow\-unsigned\-package\fR
+.RS 4
+Enable GPG check but allow installing unsigned packages from this repository\&.
 .RE
 .PP
 \fB\-G\fR, \fB\-\-no\-gpgcheck\fR
 .RS 4
 Disable GPG check for this repository\&.
+\fBDisabling GPG checks is not recommended\&.\fR
+Signing data enables the recipient to verify that no modifications occurred after the data were signed\&. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise\&.
+.RE
+.PP
+\fB\-\-default\-gpgcheck\fR
+.RS 4
+Use the global GPG check settings defined in
+\fB/etc/zypp/zypp\&.conf\fR\&. This is the default\&.
+
+Unless you have modified your zypp\&.conf settings, this is the same as
+\fB\-\-gpgcheck\fR, the behavior as described in section
+\fBGPG checks\fR\&.
 .RE
 .PP
 \fB\-a\fR, \fB\-\-all\fR
