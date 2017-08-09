@@ -2,6 +2,8 @@
 SET (my_MAN8
      zypper.8 zypper-log.8 zypp-refresh.8)
 
+FILE( GLOB my_MANINCLUDE zypper.8.d/*)
+
 SET (my_MAN
      ${my_MAN8})
 
