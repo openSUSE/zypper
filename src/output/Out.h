@@ -42,6 +42,12 @@ namespace text
   inline ColorString tagError() { return ColorString( ColorContext::MSG_ERROR, _("Error:") ); }
 
   inline const char * qContinue() { return _("Continue?"); }
+
+
+  /** Simple join of two string types */
+  template <class Tltext, class Trtext>
+  inline std::string join( const Tltext & ltext, const Trtext & rtext, const char * sep = " " )
+  { std::string ret( asString(ltext) ); ret += sep; ret += asString(rtext); return ret; }
 }
 ///////////////////////////////////////////////////////////////////
 
@@ -565,7 +571,7 @@ public:
   /** Paragraph of text preceded by 'tag_r' and a ' ' */
   template <class TText, class Text>
   void taggedPar( size_t indent_r, const TText & tag_r, const Text & text_r, ParFormat format_r = ParFormat() )
-  { par( indent_r, str::Str() << asString(tag_r) << ' ' << asString(text_r), format_r ); }
+  { par( indent_r, text::join( tag_r, text_r ), format_r ); }
   /** \overload convenience for unindented par */
   template <class TText, class Text>
   void taggedPar( const TText & tag_r, const Text & text_r, ParFormat format_r = ParFormat() )
