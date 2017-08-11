@@ -324,8 +324,7 @@ namespace zypp
 
       virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
       {
-	std::string question = boost::str(boost::format(
-	    _("No digest for file %s.")) % file) + " " + _("Continue?");
+	std::string question = (str::Format(_("No digest for file %s.")) % file).str() + " " + text::qContinue();
         return read_bool_answer(PROMPT_GPG_NO_DIGEST_ACCEPT, question, _gopts.no_gpg_checks);
       }
 
@@ -333,9 +332,7 @@ namespace zypp
 
       virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
       {
-        std::string question = boost::str(boost::format(
-            _("Unknown digest %s for file %s.")) %name % file) + " " +
-            _("Continue?");
+        std::string question = (str::Format(_("Unknown digest %s for file %s.")) %name % file).str() + " " + text::qContinue();
         return read_bool_answer(PROMPT_GPG_UNKNOWN_DIGEST_ACCEPT, question, _gopts.no_gpg_checks);
       }
 

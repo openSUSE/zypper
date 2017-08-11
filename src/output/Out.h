@@ -42,6 +42,8 @@ namespace text
   inline ColorString tagWarning() { return ColorString( ColorContext::MSG_WARNING, _("Warning:") ); }
   // translator: usually followed by a ' ' and some explanatory text
   inline ColorString tagError() { return ColorString( ColorContext::MSG_ERROR, _("Error:") ); }
+
+  inline const char * qContinue() { return _("Continue?"); }
 }
 ///////////////////////////////////////////////////////////////////
 
