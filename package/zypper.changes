@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Aug 11 14:53:07 CEST 2017 - ma@suse.de
+
+- Improve signature check callback messages (bsc#1045735)
+- man: Explain new gpgcheck options
+- add/modify repo: Add options to tune the GPG check settings (bsc#1045735)
+- BuildRequires:  libzypp-devel >= 16.15.3
+- version 1.13.31
+
+-------------------------------------------------------------------
 Mon Jul 17 16:48:09 CEST 2017 - ma@suse.de
 
 - Adapt download callback to report and handle unsigned packages
