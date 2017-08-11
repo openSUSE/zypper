@@ -129,7 +129,7 @@ struct PatchMessageReportReceiver : public callback::ReceiveReport<target::Patch
     out.info(s.str(), Out::HIGH);
     out.info(patch->message());
 
-    return read_bool_answer(PROMPT_PATCH_MESSAGE_CONTINUE, _("Continue?"), true);
+    return read_bool_answer(PROMPT_PATCH_MESSAGE_CONTINUE, text::qContinue(), true);
   }
 };
 
@@ -440,7 +440,7 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
 		      // TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
 		      <<_("File conflicts happen when two packages attempt to install files with the same name but different contents. If you continue, conflicting files will be replaced losing the previous content.")
 		      << "\n"
-		      <<_("Continue?"),
+		      << text::qContinue(),
 		      false );
 	  out.gap();
 

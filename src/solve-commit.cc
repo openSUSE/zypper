@@ -670,7 +670,7 @@ void solve_and_commit ( Zypper & zypper )
       // translators: help text for 'x' option in the 'Continue?' prompt
       // popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 
-      std::string prompt_text( _("Continue?") );
+      std::string prompt_text( text::qContinue() );
 
       bool do_commit = false;
       unsigned reply;
