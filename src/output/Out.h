@@ -19,6 +19,7 @@
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/base/LogTools.h>
 
+#include "utils/text.h"
 #include "utils/colors.h"
 #include "utils/prompt.h"
 #include "utils/richtext.h"
@@ -31,6 +32,18 @@ inline char * asYesNo( bool val_r ) { return val_r ? _("Yes") : _("No"); }
 using namespace zypp;
 
 class Zypper;
+
+///////////////////////////////////////////////////////////////////
+namespace text
+{
+  // translator: usually followed by a ' ' and some explanatory text
+  inline ColorString tagNote() { return ColorString( ColorContext::HIGHLIGHT, _("Note:") ); }
+  // translator: usually followed by a ' ' and some explanatory text
+  inline ColorString tagWarning() { return ColorString( ColorContext::MSG_WARNING, _("Warning:") ); }
+  // translator: usually followed by a ' ' and some explanatory text
+  inline ColorString tagError() { return ColorString( ColorContext::MSG_ERROR, _("Error:") ); }
+}
+///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 namespace out
@@ -529,6 +542,64 @@ public:
   void printRichText( std::string text, unsigned indent_r = 0U )
   { ::printRichText( std::cout, text, indent_r, termwidth() ); }
 
+
+  /** Less common Paragraph formats */
+  struct ParFormat	// placeholder until we need it
+  {};
+
+  /** Paragraph of text, optionally indented, or without leading gap */
+  template <class Text>
+  void par( size_t indent_r, const Text & text_r, ParFormat format_r = ParFormat() )
+  {
+    gap();	// if needed make it optional via ParFormat
+    str::Str formated;
+    mbs_write_wrapped( formated.stream(), asString(text_r), indent_r, defaultFormatWidth( 100 ) );
+    info( formated );
+  }
+  /** \overload  convenience for unindented */
+  template <class Text>
+  void par( const Text & text_r, ParFormat format_r = ParFormat() )
+  { par( 0, text_r, format_r ); }
+
+
+  /** Paragraph of text preceded by 'tag_r' and a ' ' */
+  template <class TText, class Text>
+  void taggedPar( size_t indent_r, const TText & tag_r, const Text & text_r, ParFormat format_r = ParFormat() )
+  { par( indent_r, str::Str() << asString(tag_r) << ' ' << asString(text_r), format_r ); }
+  /** \overload convenience for unindented par */
+  template <class TText, class Text>
+  void taggedPar( const TText & tag_r, const Text & text_r, ParFormat format_r = ParFormat() )
+  { taggedPar( 0, tag_r, text_r, format_r ); }
+
+
+  /** Paragraph tagged with 'Note: ' */
+  template <class Text>
+  void notePar( size_t indent_r, const Text & text_r, ParFormat format_r = ParFormat() )
+  { taggedPar( indent_r, text::tagNote(), text_r, format_r ); }
+  /** \overload convenience for unindented par */
+  template <class Text>
+  void notePar( const Text & text_r, ParFormat format_r = ParFormat() )
+  { notePar( 0, text_r, format_r ); }
+
+  /** Paragraph tagged with 'Warning: ' */
+  template <class Text>
+  void warningPar( size_t indent_r, const Text & text_r, ParFormat format_r = ParFormat() )
+  { taggedPar( indent_r, text::tagWarning(), text_r, format_r ); }
+  /** \overload convenience for unindented par */
+  template <class Text>
+  void warningPar( const Text & text_r, ParFormat format_r = ParFormat() )
+  { warningPar( 0, text_r, format_r ); }
+
+  /** Paragraph tagged with 'Error: ' */
+  template <class Text>
+  void errorPar( size_t indent_r, const Text & text_r, ParFormat format_r = ParFormat() )
+  { taggedPar( indent_r, text::tagError(), text_r, format_r ); }
+  /** \overload convenience for unindented par */
+  template <class Text>
+  void errorPar( const Text & text_r, ParFormat format_r = ParFormat() )
+  { errorPar( 0, text_r, format_r ); }
+
+public:
   /**
    * Show an info message.
    *
