@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Aug 11 15:29:40 CEST 2017 - ma@suse.de
+
+- RepoInfo: add enum GpgCheck for convenient gpgcheck mode handling
+  (bsc#1045735)
+- Fix repo/pkg checks to follow explicitly defined gpgcheck in a
+  .repoi file
+- version 16.15.3 (0)
+
+-------------------------------------------------------------------
 Fri Jul 21 13:26:48 CEST 2017 - ma@suse.de
 
 - Weaken fix for bsc#1038984 if 'gpgcheck=0' in libzypp-16.15.x only.
