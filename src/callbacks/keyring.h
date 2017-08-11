@@ -28,6 +28,30 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace
   {
+    inline void hintUnsignedData()
+    {
+      Zypper::instance()->out().notePar( 4, _("Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise.") );
+    }
+
+    inline void hintIfMasterIndex( const std::string & file_r )
+    {
+      if ( file_r == "repomd.xml" || file_r == "content" )
+      {
+	// translator: %1% is a file name
+	Zypper::instance()->out().notePar( 4, str::Format(_("File '%1%' is the repositories master index file. It ensures the integrity of the whole repo.") ) % file_r );
+      }
+    }
+
+    inline void warnCanNotVerifyFile()
+    {
+      Zypper::instance()->out().warningPar( 4, str::Format(_("We can't verify that no one meddled with this file, so it might not be trustworthy anymore! You should not continue unless you know it's safe.") ) );
+    }
+
+    inline void warnFileModifiedAfterSigning()
+    {
+      Zypper::instance()->out().warningPar( 4, str::Format(_("This file was modified after it has been signed. This may have been a malicious change, so it might not be trustworthy anymore! You should not continue unless you know it's safe.") ) );
+    }
+
     std::ostream & dumpKeyInfo( std::ostream & str, const PublicKeyData & key, const KeyContext & context = KeyContext() )
     {
       Zypper & zypper = *Zypper::instance();
@@ -125,6 +149,25 @@ namespace zypp
           return true;
         }
 
+        std::string msg;
+	if ( context.empty() )
+	  // translator: %1% is a file name
+          msg = str::Format(_("File '%1%' is unsigned.") ) % file;
+        else
+	  // translator: %1% is a file name, %2% a repositories name
+          msg = str::Format(_("File '%1%' from repository '%2%' is unsigned.") ) % file % context.repoInfo().asUserString();
+	Zypper::instance()->out().warning( msg );
+
+        hintUnsignedData();
+
+	if ( !context.empty() )
+	  hintIfMasterIndex( file );
+
+	warnCanNotVerifyFile();
+
+	Zypper::instance()->out().gap();
+	// TODO: use text::join( msg, text::qContinue() )
+	// once the above texts for mgs are translated
         std::string question;
         if (context.empty())
           question = boost::str(boost::format(
@@ -166,7 +209,25 @@ namespace zypp
           return true;
         }
 
+        std::string msg;
+	if ( context.empty() )
+	  // translator: %1% is a file name, %2% is a gpg key ID
+          msg = str::Format(_("File '%1%' is signed with an unknown key '%2%'.") ) % file % id;
+        else
+	  // translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+          msg = str::Format(_("File '%1%' from repository '%3%' is signed with an unknown key '%2%'.") ) % file % id % context.repoInfo().asUserString();
+	Zypper::instance()->out().warning( msg );
+
+        hintUnsignedData();
+
+	if ( !context.empty() )
+	  hintIfMasterIndex( file );
+
+	warnCanNotVerifyFile();
+
         std::string question;
+	// TODO: use text::join( msg, text::qContinue() )
+	// once the above texts for mgs are translated
         if (context.empty())
           question = boost::str(boost::format(
             // translators: the last %s is gpg key ID
@@ -290,22 +351,23 @@ namespace zypp
           return true;
         }
 
-        std::ostringstream question;
-        if (context.empty())
-          question << boost::format(
-            _("Signature verification failed for file '%s'.")) % file;
+        std::string msg;
+	if ( context.empty() )
+	  // translator: %1% is a file name
+          msg = str::Format(_("Signature verification failed for file '%1%'.") ) % file;
         else
-          question << boost::format(
-            _("Signature verification failed for file '%s' from repository '%s'."))
-              % file % context.repoInfo().asUserString();
+	  // translator: %1% is a file name, %2% a repositories name
+          msg = str::Format(_("Signature verification failed for file '%1%' from repository '%2%'.") ) % file % context.repoInfo().asUserString();
+	Zypper::instance()->out().error( msg );
 
-        question
-          << std::endl
-          << _("Warning: This might be caused by a malicious change in the file!\n"
-               "Continuing might be risky. Continue anyway?");
+        hintUnsignedData();
 
-        return read_bool_answer(
-            PROMPT_YN_GPG_CHECK_FAILED_IGNORE, question.str(), false);
+	if ( !context.empty() )
+	  hintIfMasterIndex( file );
+
+	warnFileModifiedAfterSigning();
+
+        return read_bool_answer( PROMPT_YN_GPG_CHECK_FAILED_IGNORE, text::join( msg, text::qContinue() ), false);
       }
 
     private:
