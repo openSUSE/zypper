@@ -225,6 +225,7 @@ namespace zypp
 
 	warnCanNotVerifyFile();
 
+	Zypper::instance()->out().gap();
         std::string question;
 	// TODO: use text::join( msg, text::qContinue() )
 	// once the above texts for mgs are translated
@@ -367,6 +368,7 @@ namespace zypp
 
 	warnFileModifiedAfterSigning();
 
+	Zypper::instance()->out().gap();
         return read_bool_answer( PROMPT_YN_GPG_CHECK_FAILED_IGNORE, text::join( msg, text::qContinue() ), false);
       }
 
