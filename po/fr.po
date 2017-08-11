@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-09 12:54+0200\n"
+"POT-Creation-Date: 2017-08-11 14:52+0200\n"
 "PO-Revision-Date: 2017-07-04 12:51+0000\n"
 "Last-Translator: Guillaume GARDET <guillaume.gardet@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
@@ -25,84 +25,143 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 2.13.1\n"
 
-#: src/callbacks/keyring.h:55
+#: src/callbacks/keyring.h:32
+#, fuzzy
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+"Accepter des paquets dont les sommes de contrôle sont incorrectes peut "
+"conduire à l'altération du système voire, dans les cas extrêmes, "
+"compromettre le système."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:40
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+
+#: src/callbacks/keyring.h:46
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:79
 msgid "Repository:"
 msgstr "Dépôt :"
 
-#: src/callbacks/keyring.h:57
+#: src/callbacks/keyring.h:81
 msgid "Key Name:"
 msgstr "Nom de la clé :"
 
-#: src/callbacks/keyring.h:58
+#: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
 msgstr "Empreinte de la clé :"
 
-#: src/callbacks/keyring.h:59
+#: src/callbacks/keyring.h:83
 msgid "Key Created:"
 msgstr "Clé créée le :"
 
-#: src/callbacks/keyring.h:60
+#: src/callbacks/keyring.h:84
 msgid "Key Expires:"
 msgstr "La clé expire le :"
 
-#: src/callbacks/keyring.h:61
+#: src/callbacks/keyring.h:85
 msgid "Rpm Name:"
 msgstr "Nom RPM :"
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:111
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "Le fichier de signature de clé GPG '%1%' est arrivé à expiration."
 
-#: src/callbacks/keyring.h:93
+#: src/callbacks/keyring.h:117
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] "Le fichier de signature de clé gpg '%1%' expirera dans %2% jour."
 msgstr[1] "Le fichier de signature de clé gpg '%1%' expirera dans %2% jours."
 
-#: src/callbacks/keyring.h:116
+#: src/callbacks/keyring.h:140
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "Acceptation d'un fichier non signé '%s'."
 
-#: src/callbacks/keyring.h:120
+#: src/callbacks/keyring.h:144
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "Acceptation d'un fichier non signé '%s' du dépôt '%s'."
 
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:154
+#, fuzzy, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "Le fichier '%s' n'est pas signé, continuer ?"
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:157
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "Le fichier '%s' du dépôt '%s' n'est pas signé, continuer ?"
+
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:131
+#: src/callbacks/keyring.h:174
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "Le fichier '%s' n'est pas signé, continuer ?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:135
+#: src/callbacks/keyring.h:178
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "Le fichier '%s' du dépôt '%s' n'est pas signé, continuer ?"
 
-#: src/callbacks/keyring.h:158
+#: src/callbacks/keyring.h:201
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr "Acceptation du fichier '%s' signé avec une clé inconnue '%s'."
 
-#: src/callbacks/keyring.h:162
+#: src/callbacks/keyring.h:205
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
 "Acceptation du fichier '%s' du dépôt '%s' signé avec une clé inconnue '%s'."
 
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:214
+#, fuzzy, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "Le fichier '%s' est signé avec une clé inconnue '%s'. Continuer ?"
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:217
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr ""
+"Le fichier '%s' du dépôt '%s' est signé avec une clé inconnue '%s'. "
+"Continuer ?"
+
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:172
+#: src/callbacks/keyring.h:233
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "Le fichier '%s' est signé avec une clé inconnue '%s'. Continuer ?"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:176
+#: src/callbacks/keyring.h:237
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
@@ -110,20 +169,20 @@ msgstr ""
 "Le fichier '%s' du dépôt '%s' est signé avec une clé inconnue '%s'. "
 "Continuer ?"
 
-#: src/callbacks/keyring.h:192
+#: src/callbacks/keyring.h:253
 msgid "Automatically importing the following key:"
 msgstr "Import automatique de la clé suivante :"
 
-#: src/callbacks/keyring.h:194
+#: src/callbacks/keyring.h:255
 msgid "Automatically trusting the following key:"
 msgstr "Approuver automatiquement la clé suivante :"
 
-#: src/callbacks/keyring.h:196
+#: src/callbacks/keyring.h:257
 msgid "New repository or package signing key received:"
 msgstr "Nouvelle clé de signature de dépôt ou de paquet reçue :"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:218
+#: src/callbacks/keyring.h:279
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
 "Voulez-vous rejeter la clé, l'approuver temporairement ou systématiquement ?"
@@ -133,37 +192,37 @@ msgstr ""
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:230
+#: src/callbacks/keyring.h:291
 msgid "r/t/a/"
 msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:233
+#: src/callbacks/keyring.h:294
 msgid "r/t"
 msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:235
+#: src/callbacks/keyring.h:296
 msgid "Don't trust the key."
 msgstr "Ne pas approuver la clé."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:237
+#: src/callbacks/keyring.h:298
 msgid "Trust the key temporarily."
 msgstr "Approuver la clé temporairement."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:240
+#: src/callbacks/keyring.h:301
 msgid "Trust the key and import it into trusted keyring."
 msgstr "Approuver la clé et l'importer vers le trousseau approuvé."
 
-#: src/callbacks/keyring.h:276
+#: src/callbacks/keyring.h:337
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr ""
 "Ignore l'échec de la vérification de la signature pour le fichier '%s' !"
 
-#: src/callbacks/keyring.h:279
+#: src/callbacks/keyring.h:340
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
@@ -171,51 +230,37 @@ msgstr ""
 "Ignore l'échec de la vérification de la signature pour le fichier '%s' du "
 "dépôt '%s' !"
 
-#: src/callbacks/keyring.h:285
+#: src/callbacks/keyring.h:346
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 "Vérifiez bien que cela n'est pas causé par une modification non autorisée du "
 "fichier !"
 
-#: src/callbacks/keyring.h:295
-#, c-format, boost-format
-msgid "Signature verification failed for file '%s'."
-msgstr "La vérification de la signature a échoué pour le fichier '%s'."
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:356
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "La vérification de la signature a échoué pour le fichier '%1%'."
 
-#: src/callbacks/keyring.h:298
-#, c-format, boost-format
-msgid "Signature verification failed for file '%s' from repository '%s'."
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:359
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr ""
-"La vérification de la signature a échoué pour le fichier '%s' du dépôt '%s'."
+"La vérification de la signature a échoué pour le fichier '%1%' du dépôt "
+"'%2%'."
 
-#: src/callbacks/keyring.h:303
-msgid ""
-"Warning: This might be caused by a malicious change in the file!\n"
-"Continuing might be risky. Continue anyway?"
-msgstr ""
-"Avertissement : Ceci peut être causé par une modification malveillante dans "
-"le fichier !\n"
-"Poursuivre peut être risqué. Poursuivre tout de même ?"
-
-#: src/callbacks/keyring.h:326
+#: src/callbacks/keyring.h:388
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "Pas de digest pour le fichier %s."
 
-# internal key used: Ok
-#. translators: help text for 'x' option in the 'Continue?' prompt
-#. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
-#: src/callbacks/keyring.h:326 src/callbacks/keyring.h:334
-#: src/callbacks/rpm.h:132 src/callbacks/rpm.h:443 src/solve-commit.cc:673
-msgid "Continue?"
-msgstr "Continuer ?"
-
-#: src/callbacks/keyring.h:334
+#: src/callbacks/keyring.h:396
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "Digest %s inconnu pour le fichier %s."
 
-#: src/callbacks/keyring.h:351
+#: src/callbacks/keyring.h:413
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -230,7 +275,7 @@ msgstr ""
 "  Valeur attendue : %3%\n"
 "  Valeur reçue : %4%\n"
 
-#: src/callbacks/keyring.h:363
+#: src/callbacks/keyring.h:425
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -239,7 +284,7 @@ msgstr ""
 "conduire à l'altération du système voire, dans les cas extrêmes, "
 "compromettre le système."
 
-#: src/callbacks/keyring.h:371
+#: src/callbacks/keyring.h:433
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -257,22 +302,22 @@ msgstr ""
 "l'utilisation de ce fichier. Une entrée vide rejettera le fichier.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:378
+#: src/callbacks/keyring.h:440
 msgid "discard"
 msgstr "rejeter"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:380
+#: src/callbacks/keyring.h:442
 msgid "Unblock using this file on your own risk."
 msgstr "Débloquer l'utilisation de ce fichier à vos risques et périls."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:382
+#: src/callbacks/keyring.h:444
 msgid "Discard the file."
 msgstr "Rejeter le fichier."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:387
+#: src/callbacks/keyring.h:449
 msgid "Unblock or discard?"
 msgstr "Débloquer ou rejeter ?"
 
@@ -443,13 +488,35 @@ msgstr "La valeur de filtre de catégorie '%1%' est suspecte."
 msgid "Suspicious severity filter value '%1%'."
 msgstr "La valeur de filtre de gravité '%1%' est suspecte."
 
-#: src/output/Out.h:25 src/repos.cc:142 src/repos.cc:170
+#: src/output/Out.h:26 src/repos.cc:142 src/repos.cc:170
 msgid "Yes"
 msgstr "Oui"
 
-#: src/output/Out.h:25 src/repos.cc:148 src/repos.cc:176
+#: src/output/Out.h:26 src/repos.cc:148 src/repos.cc:176
 msgid "No"
 msgstr "Non"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:38
+msgid "Note:"
+msgstr ""
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:40
+#, fuzzy
+msgid "Warning:"
+msgstr "Avertissement : "
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:42
+#, fuzzy
+msgid "Error:"
+msgstr "Erreur"
+
+# internal key used: Ok
+#: src/output/Out.h:44
+msgid "Continue?"
+msgstr "Continuer ?"
 
 #: src/Zypper.h:503
 msgid "Finished with error."
@@ -6787,6 +6854,22 @@ msgstr "Modes de téléchargement disponibles : %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "L'option '%s' supplante '%s'."
+
+#~ msgid "Signature verification failed for file '%s'."
+#~ msgstr "La vérification de la signature a échoué pour le fichier '%s'."
+
+#~ msgid "Signature verification failed for file '%s' from repository '%s'."
+#~ msgstr ""
+#~ "La vérification de la signature a échoué pour le fichier '%s' du dépôt "
+#~ "'%s'."
+
+#~ msgid ""
+#~ "Warning: This might be caused by a malicious change in the file!\n"
+#~ "Continuing might be risky. Continue anyway?"
+#~ msgstr ""
+#~ "Avertissement : Ceci peut être causé par une modification malveillante "
+#~ "dans le fichier !\n"
+#~ "Poursuivre peut être risqué. Poursuivre tout de même ?"
 
 #~ msgid ""
 #~ "addrepo (ar) [options] <URI> <alias>\n"

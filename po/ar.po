@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-09 12:54+0200\n"
+"POT-Creation-Date: 2017-08-11 14:52+0200\n"
 "PO-Revision-Date: 2017-07-04 06:42+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
@@ -24,36 +24,68 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 2.13.1\n"
 
-#: src/callbacks/keyring.h:55
+#: src/callbacks/keyring.h:32
+#, fuzzy
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+"قد يؤدي قبول الحزم ذات المجموعات الاختيارية الخاطئة إلى تعطيل النظام، أو في "
+"الحالات القصوى، قد يؤدي إلى نظام غير آمن."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:40
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+
+#: src/callbacks/keyring.h:46
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:79
 msgid "Repository:"
 msgstr "المخزن:"
 
-#: src/callbacks/keyring.h:57
+#: src/callbacks/keyring.h:81
 msgid "Key Name:"
 msgstr "اسم المفتاح:"
 
-#: src/callbacks/keyring.h:58
+#: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
 msgstr "بصمة المفتاح:"
 
-#: src/callbacks/keyring.h:59
+#: src/callbacks/keyring.h:83
 msgid "Key Created:"
 msgstr "إنشاء المفتاح:"
 
-#: src/callbacks/keyring.h:60
+#: src/callbacks/keyring.h:84
 msgid "Key Expires:"
 msgstr "انتهاء صلاحية المفتاح:"
 
-#: src/callbacks/keyring.h:61
+#: src/callbacks/keyring.h:85
 msgid "Rpm Name:"
 msgstr "اسم Rpm:"
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:111
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "انتهت صلاحية ملف توقيع مفتاح gpg بالاسم '%1%'."
 
-#: src/callbacks/keyring.h:93
+#: src/callbacks/keyring.h:117
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
@@ -64,67 +96,92 @@ msgstr[3] "ستنتهي صلاحية توقيع ملف مفتاح gpg '%1%' بع
 msgstr[4] "ستنتهي صلاحية توقيع ملف مفتاح gpg '%1%' بعد %2% من الأيام."
 msgstr[5] "ستنتهي صلاحية توقيع ملف مفتاح gpg '%1%' بعد %2% من الأيام."
 
-#: src/callbacks/keyring.h:116
+#: src/callbacks/keyring.h:140
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "قبول الملف '%s' غير الموقع."
 
-#: src/callbacks/keyring.h:120
+#: src/callbacks/keyring.h:144
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "قبول ملف غير موقع '%s' من المخزن '%s'."
 
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:154
+#, fuzzy, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "الملف '%s' غير مُوقَع، هل تريد المتابعة؟"
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:157
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "لم يتم توقيع الملف '%s' من المخزن '%s'، هل تريد المتابعة؟"
+
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:131
+#: src/callbacks/keyring.h:174
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "الملف '%s' غير مُوقَع، هل تريد المتابعة؟"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:135
+#: src/callbacks/keyring.h:178
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "لم يتم توقيع الملف '%s' من المخزن '%s'، هل تريد المتابعة؟"
 
-#: src/callbacks/keyring.h:158
+#: src/callbacks/keyring.h:201
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr "قبول الملف '%s' الموقَّع باستخدام المفتاح '%s' غير المعروف."
 
-#: src/callbacks/keyring.h:162
+#: src/callbacks/keyring.h:205
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr "قبول ملف '%s' من المخزن '%s' تم توقيعه بمفتاح غير معروف '%s'."
 
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:214
+#, fuzzy, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "الملف '%s' مُوقع بمفتاح '%s' غير معروف. هل تريد المتابعة؟"
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:217
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr ""
+"تم توقيع الملف '%s' من المخزن '%s' بمفتاح غير معروف '%s'. هل تريد المتابعة؟"
+
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:172
+#: src/callbacks/keyring.h:233
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "الملف '%s' مُوقع بمفتاح '%s' غير معروف. هل تريد المتابعة؟"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:176
+#: src/callbacks/keyring.h:237
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
 "تم توقيع الملف '%s' من المخزن '%s' بمفتاح غير معروف '%s'. هل تريد المتابعة؟"
 
-#: src/callbacks/keyring.h:192
+#: src/callbacks/keyring.h:253
 msgid "Automatically importing the following key:"
 msgstr "استيراد المفتاح التالي تلقائياً:"
 
-#: src/callbacks/keyring.h:194
+#: src/callbacks/keyring.h:255
 msgid "Automatically trusting the following key:"
 msgstr "الوثوق بالمفتاح التالي تلقائياً:"
 
-#: src/callbacks/keyring.h:196
+#: src/callbacks/keyring.h:257
 msgid "New repository or package signing key received:"
 msgstr "تم استلام مفتاح توقيع مخزن أو حزمة جديدة:"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:218
+#: src/callbacks/keyring.h:279
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr "هل تريد رفض المفتاح أو الوثوق مؤقتًا أو الوثوق دائمًا؟"
 
@@ -133,82 +190,68 @@ msgstr "هل تريد رفض المفتاح أو الوثوق مؤقتًا أو 
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:230
+#: src/callbacks/keyring.h:291
 msgid "r/t/a/"
 msgstr "رفض/وثوق مؤقت/وثوق دائم"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:233
+#: src/callbacks/keyring.h:294
 msgid "r/t"
 msgstr "رفض/وثوق مؤقت"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:235
+#: src/callbacks/keyring.h:296
 msgid "Don't trust the key."
 msgstr "عدم الوثوق بالمفتاح."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:237
+#: src/callbacks/keyring.h:298
 msgid "Trust the key temporarily."
 msgstr "الوثوق مؤقتًا بالمفتاح."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:240
+#: src/callbacks/keyring.h:301
 msgid "Trust the key and import it into trusted keyring."
 msgstr "الوثوق بالمفتاح واستيراده إلى سلسلة مفاتيح موثوق بها."
 
-#: src/callbacks/keyring.h:276
+#: src/callbacks/keyring.h:337
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "تجاهل التحقق من فشل التوقيع الخاص بالملف '%s'!"
 
-#: src/callbacks/keyring.h:279
+#: src/callbacks/keyring.h:340
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr "تجاهل التحقق من فشل التوقيع الخاص بالملف '%s' من المخزن '%s'!"
 
-#: src/callbacks/keyring.h:285
+#: src/callbacks/keyring.h:346
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr "تأكد أن هذا لم يحدث بسبب بعض التغييرات الضارة في الملف!"
 
-#: src/callbacks/keyring.h:295
-#, c-format, boost-format
-msgid "Signature verification failed for file '%s'."
-msgstr "فشل التحقق من توقيع الملف '%s'."
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:356
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "فشل التحقق من توقيع الملف '%1%'."
 
-#: src/callbacks/keyring.h:298
-#, c-format, boost-format
-msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "فشل التحقق من توقيع الملف '%s' من المخزن '%s'."
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:359
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr "فشل التحقق من توقيع الملف '%1%' من المخزن '%2%'."
 
-#: src/callbacks/keyring.h:303
-msgid ""
-"Warning: This might be caused by a malicious change in the file!\n"
-"Continuing might be risky. Continue anyway?"
-msgstr ""
-"تحذير: قد يتسبب ذلك في حدوث تغيير ضار في الملف!\n"
-"وربما تؤدي المتابعة إلى وجود مخاطرة. هل تريد المتابعة على أي حال؟"
-
-#: src/callbacks/keyring.h:326
+#: src/callbacks/keyring.h:388
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "لا يوجد ملخص للملف %s."
 
-# continue button label
-#. translators: help text for 'x' option in the 'Continue?' prompt
-#. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
-#: src/callbacks/keyring.h:326 src/callbacks/keyring.h:334
-#: src/callbacks/rpm.h:132 src/callbacks/rpm.h:443 src/solve-commit.cc:673
-msgid "Continue?"
-msgstr "هل تريد المتابعة؟"
-
-#: src/callbacks/keyring.h:334
+#: src/callbacks/keyring.h:396
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "خلاصة %s غير معروفة للملف %s."
 
-#: src/callbacks/keyring.h:351
+#: src/callbacks/keyring.h:413
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -223,7 +266,7 @@ msgstr ""
 "   المتوقع %3%\n"
 "    ولكن الناتج %4%\n"
 
-#: src/callbacks/keyring.h:363
+#: src/callbacks/keyring.h:425
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -231,7 +274,7 @@ msgstr ""
 "قد يؤدي قبول الحزم ذات المجموعات الاختيارية الخاطئة إلى تعطيل النظام، أو في "
 "الحالات القصوى، قد يؤدي إلى نظام غير آمن."
 
-#: src/callbacks/keyring.h:371
+#: src/callbacks/keyring.h:433
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -248,22 +291,22 @@ msgstr ""
 "تجاهل الملف.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:378
+#: src/callbacks/keyring.h:440
 msgid "discard"
 msgstr "تجاهل"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:380
+#: src/callbacks/keyring.h:442
 msgid "Unblock using this file on your own risk."
 msgstr "إلغاء حظر استخدام هذا الملف على مسؤوليتك الخاصة."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:382
+#: src/callbacks/keyring.h:444
 msgid "Discard the file."
 msgstr "تجاهل الملف."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:387
+#: src/callbacks/keyring.h:449
 msgid "Unblock or discard?"
 msgstr "إلغاء حظر أم تجاهل؟"
 
@@ -442,13 +485,35 @@ msgstr "تصفية قيمة فئات الخطورة '%1%'."
 msgid "Suspicious severity filter value '%1%'."
 msgstr "تصفية قيمة شدة الخطورة '%1%'."
 
-#: src/output/Out.h:25 src/repos.cc:142 src/repos.cc:170
+#: src/output/Out.h:26 src/repos.cc:142 src/repos.cc:170
 msgid "Yes"
 msgstr "نعم"
 
-#: src/output/Out.h:25 src/repos.cc:148 src/repos.cc:176
+#: src/output/Out.h:26 src/repos.cc:148 src/repos.cc:176
 msgid "No"
 msgstr "لا"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:38
+msgid "Note:"
+msgstr ""
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:40
+#, fuzzy
+msgid "Warning:"
+msgstr "تحذير: "
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:42
+#, fuzzy
+msgid "Error:"
+msgstr "الخطأ"
+
+# continue button label
+#: src/output/Out.h:44
+msgid "Continue?"
+msgstr "هل تريد المتابعة؟"
 
 #: src/Zypper.h:503
 msgid "Finished with error."
@@ -6875,6 +6940,19 @@ msgstr "أوضاع الإنزال المتوفرة: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "يتجاوز خيار '%s' '%s'."
+
+#~ msgid "Signature verification failed for file '%s'."
+#~ msgstr "فشل التحقق من توقيع الملف '%s'."
+
+#~ msgid "Signature verification failed for file '%s' from repository '%s'."
+#~ msgstr "فشل التحقق من توقيع الملف '%s' من المخزن '%s'."
+
+#~ msgid ""
+#~ "Warning: This might be caused by a malicious change in the file!\n"
+#~ "Continuing might be risky. Continue anyway?"
+#~ msgstr ""
+#~ "تحذير: قد يتسبب ذلك في حدوث تغيير ضار في الملف!\n"
+#~ "وربما تؤدي المتابعة إلى وجود مخاطرة. هل تريد المتابعة على أي حال؟"
 
 #~ msgid ""
 #~ "addrepo (ar) [options] <URI> <alias>\n"

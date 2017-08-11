@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-09 12:54+0200\n"
+"POT-Creation-Date: 2017-08-11 14:52+0200\n"
 "PO-Revision-Date: 2012-05-24 15:15+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -21,107 +21,160 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "X-Language: km-KH\n"
 
-#: src/callbacks/keyring.h:55
+#: src/callbacks/keyring.h:32
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:40
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+
+#: src/callbacks/keyring.h:46
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:79
 #, fuzzy
 msgid "Repository:"
 msgstr "ឃ្លាំង ៖ "
 
-#: src/callbacks/keyring.h:57
+#: src/callbacks/keyring.h:81
 #, fuzzy
 msgid "Key Name:"
 msgstr "ឈ្មោះ​សោ ៖ %s"
 
-#: src/callbacks/keyring.h:58
+#: src/callbacks/keyring.h:82
 #, fuzzy
 msgid "Key Fingerprint:"
 msgstr "ស្នាម​ម្រាមដៃ​សោ ៖ %s"
 
-#: src/callbacks/keyring.h:59
+#: src/callbacks/keyring.h:83
 #, fuzzy
 msgid "Key Created:"
 msgstr "សោ​បានបង្កើត​ ៖ %s"
 
-#: src/callbacks/keyring.h:60
+#: src/callbacks/keyring.h:84
 #, fuzzy
 msgid "Key Expires:"
 msgstr "សោ​ផុត​កំណត់ ៖ %s"
 
-#: src/callbacks/keyring.h:61
+#: src/callbacks/keyring.h:85
 #, fuzzy
 msgid "Rpm Name:"
 msgstr "ឈ្មោះ ៖ "
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:111
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr ""
 
-#: src/callbacks/keyring.h:93
+#: src/callbacks/keyring.h:117
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] ""
 
-#: src/callbacks/keyring.h:116
+#: src/callbacks/keyring.h:140
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "ព្រម​ទទួល​ឯកសារ​មិនបាន​ចុះហត្ថលេខា '%s' ។"
 
-#: src/callbacks/keyring.h:120
+#: src/callbacks/keyring.h:144
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "ព្រម​ទទួល​ឯកសារ​មិនបាន​ចុះហត្ថលេខា '%s' ពី '%s' ។"
 
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:154
+#, fuzzy, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "ឯកសារ %s មិន​ត្រូវ​បាន​ចុះហត្ថលេខាទេ តើ​បន្ត​ឬ ?"
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:157
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "ឯកសារ '%s' ពី​ឃ្លាំង '%s' មិន​ត្រូវ​បាន​ចុះហត្ថលេខាទេ តើ​បន្ត​ឬ ?"
+
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:131
+#: src/callbacks/keyring.h:174
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "ឯកសារ %s មិន​ត្រូវ​បាន​ចុះហត្ថលេខាទេ តើ​បន្ត​ឬ ?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:135
+#: src/callbacks/keyring.h:178
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "ឯកសារ '%s' ពី​ឃ្លាំង '%s' មិន​ត្រូវ​បាន​ចុះហត្ថលេខាទេ តើ​បន្ត​ឬ ?"
 
-#: src/callbacks/keyring.h:158
+#: src/callbacks/keyring.h:201
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr "ព្រម​ទទួល​ឯកសារ '%s' ដែល​បាន​ចុះហត្ថលេខា​ជាមួយ​សោ​មិនស្គាល់ '%s' ។"
 
-#: src/callbacks/keyring.h:162
+#: src/callbacks/keyring.h:205
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr "ព្រម​ទទួល​ឯកសារ '%s' ពី​ឃ្លាំង '%s' ដែល​​បាន​ចុះហត្ថលេខា​ជាមួយ​សោ​មិនស្គាល់ '%s' ។"
 
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:214
+#, fuzzy, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "ឯកសារ %s ត្រូវ​បាន​ចុះ​ហត្ថលេខា​​ដោយសោ​ដែល​មិន​ស្គាល់ '%s' ។ បន្តដែរឬទេ ?"
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:217
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr "ឯកសារ '%s' ពី​​ឃ្លាំង '%s' ត្រូវ​បាន​ចុះ​ហត្ថលេខា​​ដោយសោ​ដែល​មិន​ស្គាល់ '%s' ។ បន្ត​ដែរឬទេ ?"
+
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:172
+#: src/callbacks/keyring.h:233
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "ឯកសារ %s ត្រូវ​បាន​ចុះ​ហត្ថលេខា​​ដោយសោ​ដែល​មិន​ស្គាល់ '%s' ។ បន្តដែរឬទេ ?"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:176
+#: src/callbacks/keyring.h:237
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "ឯកសារ '%s' ពី​​ឃ្លាំង '%s' ត្រូវ​បាន​ចុះ​ហត្ថលេខា​​ដោយសោ​ដែល​មិន​ស្គាល់ '%s' ។ បន្ត​ដែរឬទេ ?"
 
-#: src/callbacks/keyring.h:192
+#: src/callbacks/keyring.h:253
 msgid "Automatically importing the following key:"
 msgstr "នាំចូល​សោ​ដូច​ខាងក្រោម​ដោយ​ស្វ័យ​ប្រវត្តិ ៖"
 
-#: src/callbacks/keyring.h:194
+#: src/callbacks/keyring.h:255
 msgid "Automatically trusting the following key:"
 msgstr "ទុកចិត្ត​សោ​ដូច​ខាងក្រោម​ដោយ​ស្វ័យ​ប្រវត្តិ ៖"
 
-#: src/callbacks/keyring.h:196
+#: src/callbacks/keyring.h:257
 msgid "New repository or package signing key received:"
 msgstr "បាន​ទទួល​សោ​ចុះ​ហត្ថលេខា​ឃ្លាំង ឬ​កញ្ចប់ ៖"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:218
+#: src/callbacks/keyring.h:279
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr "តើ​អ្នក​ចង់​បដិសេធ​សោ ទុកចិត្ត​បណ្ដោះ​អាសន្ន ឬ​ទុកចិត្ត​រហូត ?"
 
@@ -130,81 +183,68 @@ msgstr "តើ​អ្នក​ចង់​បដិសេធ​សោ ទុ�
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:230
+#: src/callbacks/keyring.h:291
 msgid "r/t/a/"
 msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:233
+#: src/callbacks/keyring.h:294
 msgid "r/t"
 msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:235
+#: src/callbacks/keyring.h:296
 msgid "Don't trust the key."
 msgstr "កុំ​ទុកចិត្ត​សោ ។"
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:237
+#: src/callbacks/keyring.h:298
 msgid "Trust the key temporarily."
 msgstr "ទុក​ចិត្ត​សោ​បណ្ដោះ​អាសន្ន ។"
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:240
+#: src/callbacks/keyring.h:301
 msgid "Trust the key and import it into trusted keyring."
 msgstr "ជឿជាក់​លើ​សោ និង​នាំចូល​វា​ទៅ​ក្នុង​ keyring ដែល​ជឿជាក់ ។"
 
-#: src/callbacks/keyring.h:276
+#: src/callbacks/keyring.h:337
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "មិនអើពើ​នឹង​កា​រផ្ទៀងផ្ទាត់​ហត្ថលេខា​ដែល​បរាជ័យ​សម្រាប់​ឯកសារ '%s' !"
 
-#: src/callbacks/keyring.h:279
+#: src/callbacks/keyring.h:340
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr "មិន​អើពើ​ការ​ផ្ទៀងផ្ទាត់​ហត្ថលេខា​​សម្រាប់ឯកសារ '%s' ពី​ឃ្លាំង '%s' !"
 
-#: src/callbacks/keyring.h:285
+#: src/callbacks/keyring.h:346
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr "ពិនិត្យ​ទ្វេដង វា​មិនបណ្ដាល​មក​ពី​ការ​ផ្លាស់ប្ដូរ​ដែល​ព្យាបាទ​មួយ​ចំនួន​នៅ​ក្នុង​ឯកសារ​ទេ !"
 
-#: src/callbacks/keyring.h:295
-#, c-format, boost-format
-msgid "Signature verification failed for file '%s'."
-msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ផ្ទៀងផ្ទាត់​ហត្ថលេខា​សម្រាប់​ឯកសារ '%s' ។"
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:356
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ផ្ទៀងផ្ទាត់​ហត្ថលេខា​សម្រាប់​ឯកសារ '%1%' ។"
 
-#: src/callbacks/keyring.h:298
-#, c-format, boost-format
-msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "បាន​បរាជ័យ​ក្នុងកា​រផ្ទៀងផ្ទាត់​ហត្ថលេខា​សម្រាប់​ឯកសារ '%s' ពី​ឃ្លាំង '%s' ។"
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:359
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr "បាន​បរាជ័យ​ក្នុងកា​រផ្ទៀងផ្ទាត់​ហត្ថលេខា​សម្រាប់​ឯកសារ '%1%' ពី​ឃ្លាំង '%2%' ។"
 
-#: src/callbacks/keyring.h:303
-msgid ""
-"Warning: This might be caused by a malicious change in the file!\n"
-"Continuing might be risky. Continue anyway?"
-msgstr ""
-"ព្រមាន ៖ វា​អាច​បណ្ដាល​មក​ពី​ការ​ផ្លាស់ប្ដូរ​ព្យាបាទ​នៅ​ក្នុង​ឯកសារ !\n"
-"ការ​បន្ត​អាច​មាន​គ្រោះថ្នាក់ ។ អញ្ចឹង​បន្ត​ដែរ​ឬទេ ?"
-
-#: src/callbacks/keyring.h:326
+#: src/callbacks/keyring.h:388
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "គ្មាន​អត្ថបទ​សង្ខេប​សម្រាប់​ឯកសារ %s ។"
 
-#. translators: help text for 'x' option in the 'Continue?' prompt
-#. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
-#: src/callbacks/keyring.h:326 src/callbacks/keyring.h:334
-#: src/callbacks/rpm.h:132 src/callbacks/rpm.h:443 src/solve-commit.cc:673
-msgid "Continue?"
-msgstr "បន្ត ?"
-
-#: src/callbacks/keyring.h:334
+#: src/callbacks/keyring.h:396
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "មិន​ស្គាល់​អត្ថបទ​សង្ខេប​ %s សម្រាប់​ឯកសារ %s ។"
 
-#: src/callbacks/keyring.h:351
+#: src/callbacks/keyring.h:413
 #, fuzzy, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -215,13 +255,13 @@ msgid ""
 msgstr ""
 "ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​​អត្ថបទ​សង្ខេប​បាន​បរាជ័យ​សម្រាប់ %s ។ %s ដែល​រំពឹង​ទុក រក​ឃើញ %s ។"
 
-#: src/callbacks/keyring.h:363
+#: src/callbacks/keyring.h:425
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
 
-#: src/callbacks/keyring.h:371
+#: src/callbacks/keyring.h:433
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -233,22 +273,22 @@ msgid ""
 msgstr ""
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:378
+#: src/callbacks/keyring.h:440
 msgid "discard"
 msgstr ""
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:380
+#: src/callbacks/keyring.h:442
 msgid "Unblock using this file on your own risk."
 msgstr ""
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:382
+#: src/callbacks/keyring.h:444
 msgid "Discard the file."
 msgstr ""
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:387
+#: src/callbacks/keyring.h:449
 msgid "Unblock or discard?"
 msgstr ""
 
@@ -401,13 +441,34 @@ msgstr ""
 msgid "Suspicious severity filter value '%1%'."
 msgstr ""
 
-#: src/output/Out.h:25 src/repos.cc:142 src/repos.cc:170
+#: src/output/Out.h:26 src/repos.cc:142 src/repos.cc:170
 msgid "Yes"
 msgstr "បាទ/ចាស"
 
-#: src/output/Out.h:25 src/repos.cc:148 src/repos.cc:176
+#: src/output/Out.h:26 src/repos.cc:148 src/repos.cc:176
 msgid "No"
 msgstr "ទេ"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:38
+msgid "Note:"
+msgstr ""
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:40
+#, fuzzy
+msgid "Warning:"
+msgstr "ព្រមាន ៖"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:42
+#, fuzzy
+msgid "Error:"
+msgstr "កំហុស"
+
+#: src/output/Out.h:44
+msgid "Continue?"
+msgstr "បន្ត ?"
 
 #: src/Zypper.h:503
 msgid "Finished with error."
@@ -6119,6 +6180,19 @@ msgstr "របៀប​ទាញយក​ដែលមាន ៖ %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "ជម្រើស '%s' បដិសេធ '%s' ។"
+
+#~ msgid "Signature verification failed for file '%s'."
+#~ msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ផ្ទៀងផ្ទាត់​ហត្ថលេខា​សម្រាប់​ឯកសារ '%s' ។"
+
+#~ msgid "Signature verification failed for file '%s' from repository '%s'."
+#~ msgstr "បាន​បរាជ័យ​ក្នុងកា​រផ្ទៀងផ្ទាត់​ហត្ថលេខា​សម្រាប់​ឯកសារ '%s' ពី​ឃ្លាំង '%s' ។"
+
+#~ msgid ""
+#~ "Warning: This might be caused by a malicious change in the file!\n"
+#~ "Continuing might be risky. Continue anyway?"
+#~ msgstr ""
+#~ "ព្រមាន ៖ វា​អាច​បណ្ដាល​មក​ពី​ការ​ផ្លាស់ប្ដូរ​ព្យាបាទ​នៅ​ក្នុង​ឯកសារ !\n"
+#~ "ការ​បន្ត​អាច​មាន​គ្រោះថ្នាក់ ។ អញ្ចឹង​បន្ត​ដែរ​ឬទេ ?"
 
 #, fuzzy
 #~ msgid ""

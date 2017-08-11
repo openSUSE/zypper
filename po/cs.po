@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-09 12:54+0200\n"
+"POT-Creation-Date: 2017-08-11 14:52+0200\n"
 "PO-Revision-Date: 2017-07-29 08:40+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
@@ -31,36 +31,68 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 2.13.1\n"
 
-#: src/callbacks/keyring.h:55
+#: src/callbacks/keyring.h:32
+#, fuzzy
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+"Přijímání balíčků s nesprávným kontrolním součtem může vést k poškození "
+"systému a ve výjimečných případech dokonce k ohrožení zabezpečení systému."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:40
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+
+#: src/callbacks/keyring.h:46
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:79
 msgid "Repository:"
 msgstr "Úložiště:"
 
-#: src/callbacks/keyring.h:57
+#: src/callbacks/keyring.h:81
 msgid "Key Name:"
 msgstr "Název klíče:"
 
-#: src/callbacks/keyring.h:58
+#: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
 msgstr "Otisk klíče:"
 
-#: src/callbacks/keyring.h:59
+#: src/callbacks/keyring.h:83
 msgid "Key Created:"
 msgstr "Datum vytvoření klíče:"
 
-#: src/callbacks/keyring.h:60
+#: src/callbacks/keyring.h:84
 msgid "Key Expires:"
 msgstr "Datum vypršení platnosti klíče:"
 
-#: src/callbacks/keyring.h:61
+#: src/callbacks/keyring.h:85
 msgid "Rpm Name:"
 msgstr "Název Rpm:"
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:111
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "Platnost podpisového souboru klíče GPG %1% vypršela."
 
-#: src/callbacks/keyring.h:93
+#: src/callbacks/keyring.h:117
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
@@ -68,68 +100,93 @@ msgstr[0] "Gpg klíč z podpisového souboru '%1%' vyprší za %2% den."
 msgstr[1] "Gpg klíč z podpisového souboru '%1%' vyprší za %2% dny."
 msgstr[2] "Gpg klíč z podpisového souboru '%1%' vyprší za %2% dní."
 
-#: src/callbacks/keyring.h:116
+#: src/callbacks/keyring.h:140
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "Je přijímán nepodepsaný soubor %s."
 
-#: src/callbacks/keyring.h:120
+#: src/callbacks/keyring.h:144
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "Je přijímán nepodepsaný soubor %s z úložiště %s."
 
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:154
+#, fuzzy, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "Soubor %s není podepsán, chcete pokračovat?"
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:157
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "Soubor %s z úložiště %s není podepsán, chcete pokračovat?"
+
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:131
+#: src/callbacks/keyring.h:174
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "Soubor %s není podepsán, chcete pokračovat?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:135
+#: src/callbacks/keyring.h:178
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "Soubor %s z úložiště %s není podepsán, chcete pokračovat?"
 
-#: src/callbacks/keyring.h:158
+#: src/callbacks/keyring.h:201
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr "Je přijímán soubor %s, který je podepsaný neznámým klíčem %s."
 
-#: src/callbacks/keyring.h:162
+#: src/callbacks/keyring.h:205
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
 "Je přijímán soubor %s z úložiště %s, který je podepsaný neznámým klíčem %s."
 
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:214
+#, fuzzy, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "Soubor %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:217
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr ""
+"Soubor %s z úložiště %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
+
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:172
+#: src/callbacks/keyring.h:233
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "Soubor %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:176
+#: src/callbacks/keyring.h:237
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
 "Soubor %s z úložiště %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
 
-#: src/callbacks/keyring.h:192
+#: src/callbacks/keyring.h:253
 msgid "Automatically importing the following key:"
 msgstr "Automaticky importovat následující klíč:"
 
-#: src/callbacks/keyring.h:194
+#: src/callbacks/keyring.h:255
 msgid "Automatically trusting the following key:"
 msgstr "Automaticky se důvěřuje následujícímu klíči:"
 
-#: src/callbacks/keyring.h:196
+#: src/callbacks/keyring.h:257
 msgid "New repository or package signing key received:"
 msgstr "Obdržen nový klíč podepisující balíček nebo repozitář:"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:218
+#: src/callbacks/keyring.h:279
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
 "Chcete klíč odmítnout, důvěřovat mu dočasně nebo mu důvěřovat natrvalo?"
@@ -139,82 +196,68 @@ msgstr ""
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:230
+#: src/callbacks/keyring.h:291
 msgid "r/t/a/"
 msgstr "o/d/v/"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:233
+#: src/callbacks/keyring.h:294
 msgid "r/t"
 msgstr "o/d"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:235
+#: src/callbacks/keyring.h:296
 msgid "Don't trust the key."
 msgstr "Nedůvěřovat klíči."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:237
+#: src/callbacks/keyring.h:298
 msgid "Trust the key temporarily."
 msgstr "Dočasně důvěřovat klíči."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:240
+#: src/callbacks/keyring.h:301
 msgid "Trust the key and import it into trusted keyring."
 msgstr "Důvěřovat klíči a importovat jej do svazku důvěryhodných klíčů."
 
-#: src/callbacks/keyring.h:276
+#: src/callbacks/keyring.h:337
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "Ignoruji selhání ověření podpisu souboru %s!"
 
-#: src/callbacks/keyring.h:279
+#: src/callbacks/keyring.h:340
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr "Ignoruje se nezdařené ověření souboru %s z úložiště %s!"
 
-#: src/callbacks/keyring.h:285
+#: src/callbacks/keyring.h:346
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr "Pečlivě ověřte, že příčinou není nějaká škodlivá změna v souboru!"
 
-#: src/callbacks/keyring.h:295
-#, c-format, boost-format
-msgid "Signature verification failed for file '%s'."
-msgstr "Ověření podpisu pro soubor %s selhalo."
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:356
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "Ověření podpisu pro soubor %1% selhalo."
 
-#: src/callbacks/keyring.h:298
-#, c-format, boost-format
-msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Selhalo ověření podpisu pro soubor %s z úložiště %s."
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:359
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr "Selhalo ověření podpisu pro soubor %1% z úložiště %2%."
 
-#: src/callbacks/keyring.h:303
-msgid ""
-"Warning: This might be caused by a malicious change in the file!\n"
-"Continuing might be risky. Continue anyway?"
-msgstr ""
-"Varování: Může se jednat o úmyslné změny souboru se snahou poškodit či "
-"napadnout systém.\n"
-"Pokračováním se vystavujete nebezpečí. Chcete přesto pokračovat?"
-
-#: src/callbacks/keyring.h:326
+#: src/callbacks/keyring.h:388
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "Žádný přehled pro soubor %s."
 
-#. translators: help text for 'x' option in the 'Continue?' prompt
-#. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
-#: src/callbacks/keyring.h:326 src/callbacks/keyring.h:334
-#: src/callbacks/rpm.h:132 src/callbacks/rpm.h:443 src/solve-commit.cc:673
-msgid "Continue?"
-msgstr "Pokračovat?"
-
-#: src/callbacks/keyring.h:334
+#: src/callbacks/keyring.h:396
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "Neznámý přehled %s pro soubor %s."
 
-#: src/callbacks/keyring.h:351
+#: src/callbacks/keyring.h:413
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -229,7 +272,7 @@ msgstr ""
 "  Očekávaná hodnota byla %3%,\n"
 "  avšak získaná hodnota je %4%.\n"
 
-#: src/callbacks/keyring.h:363
+#: src/callbacks/keyring.h:425
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -237,7 +280,7 @@ msgstr ""
 "Přijímání balíčků s nesprávným kontrolním součtem může vést k poškození "
 "systému a ve výjimečných případech dokonce k ohrožení zabezpečení systému."
 
-#: src/callbacks/keyring.h:371
+#: src/callbacks/keyring.h:433
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -255,22 +298,22 @@ msgstr ""
 "způsobí zahození souboru.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:378
+#: src/callbacks/keyring.h:440
 msgid "discard"
 msgstr "zrušit"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:380
+#: src/callbacks/keyring.h:442
 msgid "Unblock using this file on your own risk."
 msgstr "Odblokování použití tohoto souboru je na vaše riziko."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:382
+#: src/callbacks/keyring.h:444
 msgid "Discard the file."
 msgstr "Zahodit soubor."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:387
+#: src/callbacks/keyring.h:449
 msgid "Unblock or discard?"
 msgstr "Odblokovat nebo zahodit?"
 
@@ -438,13 +481,34 @@ msgstr "Podezřelá hodnota filtru kategorie '%1%'."
 msgid "Suspicious severity filter value '%1%'."
 msgstr "Podezřelá hodnota filtru závažnosti '%1%'."
 
-#: src/output/Out.h:25 src/repos.cc:142 src/repos.cc:170
+#: src/output/Out.h:26 src/repos.cc:142 src/repos.cc:170
 msgid "Yes"
 msgstr "Ano"
 
-#: src/output/Out.h:25 src/repos.cc:148 src/repos.cc:176
+#: src/output/Out.h:26 src/repos.cc:148 src/repos.cc:176
 msgid "No"
 msgstr "Ne"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:38
+msgid "Note:"
+msgstr ""
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:40
+#, fuzzy
+msgid "Warning:"
+msgstr "Upozornění: "
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:42
+#, fuzzy
+msgid "Error:"
+msgstr "Chyba"
+
+#: src/output/Out.h:44
+msgid "Continue?"
+msgstr "Pokračovat?"
 
 #: src/Zypper.h:503
 msgid "Finished with error."
@@ -6649,6 +6713,20 @@ msgstr "Dostupné módy stahování: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Volba '%s' přepisuje '%s'."
+
+#~ msgid "Signature verification failed for file '%s'."
+#~ msgstr "Ověření podpisu pro soubor %s selhalo."
+
+#~ msgid "Signature verification failed for file '%s' from repository '%s'."
+#~ msgstr "Selhalo ověření podpisu pro soubor %s z úložiště %s."
+
+#~ msgid ""
+#~ "Warning: This might be caused by a malicious change in the file!\n"
+#~ "Continuing might be risky. Continue anyway?"
+#~ msgstr ""
+#~ "Varování: Může se jednat o úmyslné změny souboru se snahou poškodit či "
+#~ "napadnout systém.\n"
+#~ "Pokračováním se vystavujete nebezpečí. Chcete přesto pokračovat?"
 
 #~ msgid ""
 #~ "addrepo (ar) [options] <URI> <alias>\n"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-09 12:54+0200\n"
+"POT-Creation-Date: 2017-08-11 14:52+0200\n"
 "PO-Revision-Date: 2017-07-04 01:57+0000\n"
 "Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -24,101 +24,155 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 2.13.1\n"
 
-#: src/callbacks/keyring.h:55
+#: src/callbacks/keyring.h:32
+#, fuzzy
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr "接受帶有錯誤檢核碼的套件會導致系統損壞，甚至危及系統安全。"
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:40
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+
+#: src/callbacks/keyring.h:46
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:79
 msgid "Repository:"
 msgstr "套件庫："
 
-#: src/callbacks/keyring.h:57
+#: src/callbacks/keyring.h:81
 msgid "Key Name:"
 msgstr "金鑰名稱："
 
-#: src/callbacks/keyring.h:58
+#: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
 msgstr "金鑰指紋："
 
-#: src/callbacks/keyring.h:59
+#: src/callbacks/keyring.h:83
 msgid "Key Created:"
 msgstr "金鑰建立日期："
 
-#: src/callbacks/keyring.h:60
+#: src/callbacks/keyring.h:84
 msgid "Key Expires:"
 msgstr "金鑰過期日期："
 
-#: src/callbacks/keyring.h:61
+#: src/callbacks/keyring.h:85
 msgid "Rpm Name:"
 msgstr "RPM 名稱："
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:111
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "gpg 金鑰簽章的檔案 '%1%' 已過期。"
 
-#: src/callbacks/keyring.h:93
+#: src/callbacks/keyring.h:117
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] "gpg 金鑰簽章的檔案 '%1%' 將在 %2% 天後過期。"
 
-#: src/callbacks/keyring.h:116
+#: src/callbacks/keyring.h:140
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "正在接受一個未簽章的檔案 '%s'。"
 
-#: src/callbacks/keyring.h:120
+#: src/callbacks/keyring.h:144
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "正在接受一個未簽章的檔案 '%s' (來自套件庫 '%s')。"
 
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:154
+#, fuzzy, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "檔案 '%s' 未簽章，要繼續嗎？"
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:157
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "檔案 ′%s′ (來自套件庫 ′%s′) 未簽章，要繼續嗎？"
+
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:131
+#: src/callbacks/keyring.h:174
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "檔案 '%s' 未簽章，要繼續嗎？"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:135
+#: src/callbacks/keyring.h:178
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "檔案 ′%s′ (來自套件庫 ′%s′) 未簽章，要繼續嗎？"
 
-#: src/callbacks/keyring.h:158
+#: src/callbacks/keyring.h:201
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr "正在接受檔案 '%s'，此檔案使用未知的金鑰 '%s' 簽章。"
 
-#: src/callbacks/keyring.h:162
+#: src/callbacks/keyring.h:205
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr "正在接受檔案 ′%s′ (來自套件庫 ′%s′)，此檔案使用未知的金鑰 '%s' 簽章。"
 
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:214
+#, fuzzy, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "檔案 '%s' 是以不明金鑰 '%s' 簽章。要繼續嗎？"
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:217
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr "檔案 '%s' (來自套件庫 '%s') 是以不明金鑰 '%s' 簽章。要繼續嗎？"
+
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:172
+#: src/callbacks/keyring.h:233
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "檔案 '%s' 是以不明金鑰 '%s' 簽章。要繼續嗎？"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:176
+#: src/callbacks/keyring.h:237
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "檔案 '%s' (來自套件庫 '%s') 是以不明金鑰 '%s' 簽章。要繼續嗎？"
 
-#: src/callbacks/keyring.h:192
+#: src/callbacks/keyring.h:253
 msgid "Automatically importing the following key:"
 msgstr "自動匯入下列金鑰："
 
-#: src/callbacks/keyring.h:194
+#: src/callbacks/keyring.h:255
 msgid "Automatically trusting the following key:"
 msgstr "自動信任下列金鑰："
 
-#: src/callbacks/keyring.h:196
+#: src/callbacks/keyring.h:257
 msgid "New repository or package signing key received:"
 msgstr "收到新的套件庫或套件簽署金鑰："
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:218
+#: src/callbacks/keyring.h:279
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr "您想要拒絕此金鑰，暫時信任，或永遠信任？"
 
@@ -127,81 +181,68 @@ msgstr "您想要拒絕此金鑰，暫時信任，或永遠信任？"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:230
+#: src/callbacks/keyring.h:291
 msgid "r/t/a/"
 msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:233
+#: src/callbacks/keyring.h:294
 msgid "r/t"
 msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:235
+#: src/callbacks/keyring.h:296
 msgid "Don't trust the key."
 msgstr "不要信任此金鑰。"
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:237
+#: src/callbacks/keyring.h:298
 msgid "Trust the key temporarily."
 msgstr "暫時信任此金鑰。"
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:240
+#: src/callbacks/keyring.h:301
 msgid "Trust the key and import it into trusted keyring."
 msgstr "信任此金鑰並匯入到信任的金鑰圈。"
 
-#: src/callbacks/keyring.h:276
+#: src/callbacks/keyring.h:337
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "正在忽略檔案 '%s' 的失敗簽章驗證！"
 
-#: src/callbacks/keyring.h:279
+#: src/callbacks/keyring.h:340
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr "正在忽略檔案 '%s' (來自套件庫 '%s') 的失敗簽章驗證！"
 
-#: src/callbacks/keyring.h:285
+#: src/callbacks/keyring.h:346
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr "請再次確認這並非是因為檔案遭到惡意修改所造成的！"
 
-#: src/callbacks/keyring.h:295
-#, c-format, boost-format
-msgid "Signature verification failed for file '%s'."
-msgstr "檔案 '%s' 的簽章驗證失敗。"
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:356
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "檔案 '%1%' 的簽章驗證失敗。"
 
-#: src/callbacks/keyring.h:298
-#, c-format, boost-format
-msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "檔案 '%s' (來自套件庫 '%s') 的簽章驗證失敗。"
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:359
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr "檔案 '%1%' (來自套件庫 '%2%') 的簽章驗證失敗。"
 
-#: src/callbacks/keyring.h:303
-msgid ""
-"Warning: This might be caused by a malicious change in the file!\n"
-"Continuing might be risky. Continue anyway?"
-msgstr ""
-"警告：這可能是因為檔案遭到惡意的修改！\n"
-"繼續進行將有風險！無論如何要繼續嗎？"
-
-#: src/callbacks/keyring.h:326
+#: src/callbacks/keyring.h:388
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "檔案 %s 無摘要。"
 
-#. translators: help text for 'x' option in the 'Continue?' prompt
-#. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
-#: src/callbacks/keyring.h:326 src/callbacks/keyring.h:334
-#: src/callbacks/rpm.h:132 src/callbacks/rpm.h:443 src/solve-commit.cc:673
-msgid "Continue?"
-msgstr "要繼續嗎？"
-
-#: src/callbacks/keyring.h:334
+#: src/callbacks/keyring.h:396
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "不明摘要 %s (檔案 %s)。"
 
-#: src/callbacks/keyring.h:351
+#: src/callbacks/keyring.h:413
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -216,13 +257,13 @@ msgstr ""
 "  預期為 %3%\n"
 "  實際為 %4%\n"
 
-#: src/callbacks/keyring.h:363
+#: src/callbacks/keyring.h:425
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr "接受帶有錯誤檢核碼的套件會導致系統損壞，甚至危及系統安全。"
 
-#: src/callbacks/keyring.h:371
+#: src/callbacks/keyring.h:433
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -238,22 +279,22 @@ msgstr ""
 "該檔案。\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:378
+#: src/callbacks/keyring.h:440
 msgid "discard"
 msgstr "放棄"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:380
+#: src/callbacks/keyring.h:442
 msgid "Unblock using this file on your own risk."
 msgstr "取消阻擋該檔案，並自負風險。"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:382
+#: src/callbacks/keyring.h:444
 msgid "Discard the file."
 msgstr "放棄該檔案。"
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:387
+#: src/callbacks/keyring.h:449
 msgid "Unblock or discard?"
 msgstr "取消阻擋或放棄？"
 
@@ -408,13 +449,34 @@ msgstr "類別過濾值 '%1%' 可疑。"
 msgid "Suspicious severity filter value '%1%'."
 msgstr "安全性過濾值 '%1%' 可疑。"
 
-#: src/output/Out.h:25 src/repos.cc:142 src/repos.cc:170
+#: src/output/Out.h:26 src/repos.cc:142 src/repos.cc:170
 msgid "Yes"
 msgstr "是"
 
-#: src/output/Out.h:25 src/repos.cc:148 src/repos.cc:176
+#: src/output/Out.h:26 src/repos.cc:148 src/repos.cc:176
 msgid "No"
 msgstr "否"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:38
+msgid "Note:"
+msgstr ""
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:40
+#, fuzzy
+msgid "Warning:"
+msgstr "警告︰ "
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:42
+#, fuzzy
+msgid "Error:"
+msgstr "錯誤"
+
+#: src/output/Out.h:44
+msgid "Continue?"
+msgstr "要繼續嗎？"
 
 #: src/Zypper.h:503
 msgid "Finished with error."
@@ -6186,6 +6248,19 @@ msgstr "可用的下載模式︰%s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "選項 '%s' 會覆蓋 '%s'。"
+
+#~ msgid "Signature verification failed for file '%s'."
+#~ msgstr "檔案 '%s' 的簽章驗證失敗。"
+
+#~ msgid "Signature verification failed for file '%s' from repository '%s'."
+#~ msgstr "檔案 '%s' (來自套件庫 '%s') 的簽章驗證失敗。"
+
+#~ msgid ""
+#~ "Warning: This might be caused by a malicious change in the file!\n"
+#~ "Continuing might be risky. Continue anyway?"
+#~ msgstr ""
+#~ "警告：這可能是因為檔案遭到惡意的修改！\n"
+#~ "繼續進行將有風險！無論如何要繼續嗎？"
 
 #~ msgid ""
 #~ "addrepo (ar) [options] <URI> <alias>\n"

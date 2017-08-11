@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-09 12:54+0200\n"
+"POT-Creation-Date: 2017-08-11 14:52+0200\n"
 "PO-Revision-Date: 2006-11-11 18:41+0530\n"
 "Last-Translator: Priyavert Sharma<priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions<linux_team@agreeya.com>\n"
@@ -12,48 +12,77 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: src/callbacks/keyring.h:55
+#: src/callbacks/keyring.h:32
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:40
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+
+#: src/callbacks/keyring.h:46
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:79
 #, fuzzy
 msgid "Repository:"
 msgstr "உள்ளீடு காணப்படவில்லை."
 
-#: src/callbacks/keyring.h:57
+#: src/callbacks/keyring.h:81
 #, fuzzy
 msgid "Key Name:"
 msgstr "பெயர்:"
 
-#: src/callbacks/keyring.h:58
+#: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
 msgstr ""
 
-#: src/callbacks/keyring.h:59
+#: src/callbacks/keyring.h:83
 #, fuzzy
 msgid "Key Created:"
 msgstr "பெயர்:"
 
-#: src/callbacks/keyring.h:60
+#: src/callbacks/keyring.h:84
 #, fuzzy
 msgid "Key Expires:"
 msgstr "பெயர்:"
 
-#: src/callbacks/keyring.h:61
+#: src/callbacks/keyring.h:85
 #, fuzzy
 msgid "Rpm Name:"
 msgstr "பெயர்:"
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:111
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr ""
 
-#: src/callbacks/keyring.h:93
+#: src/callbacks/keyring.h:117
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/callbacks/keyring.h:116
+#: src/callbacks/keyring.h:140
 #, fuzzy, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr ""
@@ -61,13 +90,30 @@ msgstr ""
 "%s|%s|%s\n"
 "அவ்வாறிருந்தும் அக்கோப்பை பயன்படுத்தலாமா?"
 
-#: src/callbacks/keyring.h:120
+#: src/callbacks/keyring.h:144
 #, fuzzy, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "மூலங்கள் சேர்க்கப்படுகின்றன"
 
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:154
+#, fuzzy, boost-format
+msgid "File '%1%' is unsigned."
+msgstr ""
+"%s கோப்பு கையொப்பமிடப்படவில்லை.\n"
+"அவ்வாறிருந்தும் அதனை பயன்படுத்தலாமா?"
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:157
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr ""
+"%s கோப்பு அறிந்திராத ஒரு கீயினால் கையொப்பமிடப்பட்டுள்ளது:\n"
+"%s|%s|%s\n"
+"அவ்வாறிருந்தும் அக்கோப்பை பயன்படுத்தலாமா?"
+
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:131
+#: src/callbacks/keyring.h:174
 #, fuzzy, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr ""
@@ -75,12 +121,12 @@ msgstr ""
 "அவ்வாறிருந்தும் அதனை பயன்படுத்தலாமா?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:135
+#: src/callbacks/keyring.h:178
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr ""
 
-#: src/callbacks/keyring.h:158
+#: src/callbacks/keyring.h:201
 #, fuzzy, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr ""
@@ -88,7 +134,7 @@ msgstr ""
 "%s|%s|%s\n"
 "அவ்வாறிருந்தும் அக்கோப்பை பயன்படுத்தலாமா?"
 
-#: src/callbacks/keyring.h:162
+#: src/callbacks/keyring.h:205
 #, fuzzy, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
@@ -97,8 +143,26 @@ msgstr ""
 "%s|%s|%s\n"
 "அவ்வாறிருந்தும் அக்கோப்பை பயன்படுத்தலாமா?"
 
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:214
+#, fuzzy, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr ""
+"%s கோப்பு அறிந்திராத ஒரு கீயினால் கையொப்பமிடப்பட்டுள்ளது:\n"
+"%s|%s|%s\n"
+"அவ்வாறிருந்தும் அக்கோப்பை பயன்படுத்தலாமா?"
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:217
+#, fuzzy, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr ""
+"%s கோப்பு அறிந்திராத ஒரு கீயினால் கையொப்பமிடப்பட்டுள்ளது:\n"
+"%s|%s|%s\n"
+"அவ்வாறிருந்தும் அக்கோப்பை பயன்படுத்தலாமா?"
+
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:172
+#: src/callbacks/keyring.h:233
 #, fuzzy, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
@@ -107,7 +171,7 @@ msgstr ""
 "அவ்வாறிருந்தும் அக்கோப்பை பயன்படுத்தலாமா?"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:176
+#: src/callbacks/keyring.h:237
 #, fuzzy, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
@@ -116,20 +180,20 @@ msgstr ""
 "%s|%s|%s\n"
 "அவ்வாறிருந்தும் அக்கோப்பை பயன்படுத்தலாமா?"
 
-#: src/callbacks/keyring.h:192
+#: src/callbacks/keyring.h:253
 msgid "Automatically importing the following key:"
 msgstr ""
 
-#: src/callbacks/keyring.h:194
+#: src/callbacks/keyring.h:255
 msgid "Automatically trusting the following key:"
 msgstr ""
 
-#: src/callbacks/keyring.h:196
+#: src/callbacks/keyring.h:257
 msgid "New repository or package signing key received:"
 msgstr ""
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:218
+#: src/callbacks/keyring.h:279
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
 
@@ -138,80 +202,68 @@ msgstr ""
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:230
+#: src/callbacks/keyring.h:291
 msgid "r/t/a/"
 msgstr ""
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:233
+#: src/callbacks/keyring.h:294
 msgid "r/t"
 msgstr ""
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:235
+#: src/callbacks/keyring.h:296
 msgid "Don't trust the key."
 msgstr ""
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:237
+#: src/callbacks/keyring.h:298
 msgid "Trust the key temporarily."
 msgstr ""
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:240
+#: src/callbacks/keyring.h:301
 msgid "Trust the key and import it into trusted keyring."
 msgstr ""
 
-#: src/callbacks/keyring.h:276
+#: src/callbacks/keyring.h:337
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr ""
 
-#: src/callbacks/keyring.h:279
+#: src/callbacks/keyring.h:340
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
 
-#: src/callbacks/keyring.h:285
+#: src/callbacks/keyring.h:346
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 
-#: src/callbacks/keyring.h:295
-#, fuzzy, c-format, boost-format
-msgid "Signature verification failed for file '%s'."
-msgstr "%s:க்காக உள்ளமைத்தல் கோப்புகள் மாற்றப்பட்டுள்ளன"
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:356
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr ""
 
-#: src/callbacks/keyring.h:298
-#, fuzzy, c-format, boost-format
-msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "%s:க்காக உள்ளமைத்தல் கோப்புகள் மாற்றப்பட்டுள்ளன"
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:359
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr ""
 
-#: src/callbacks/keyring.h:303
-#, fuzzy
-msgid ""
-"Warning: This might be caused by a malicious change in the file!\n"
-"Continuing might be risky. Continue anyway?"
-msgstr "%s:க்காக உள்ளமைத்தல் கோப்புகள் மாற்றப்பட்டுள்ளன"
-
-#: src/callbacks/keyring.h:326
+#: src/callbacks/keyring.h:388
 #, fuzzy, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "%1 கோப்பின் மீது பூட்ட முடியவில்லை."
 
-#. translators: help text for 'x' option in the 'Continue?' prompt
-#. popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
-#: src/callbacks/keyring.h:326 src/callbacks/keyring.h:334
-#: src/callbacks/rpm.h:132 src/callbacks/rpm.h:443 src/solve-commit.cc:673
-msgid "Continue?"
-msgstr "தொடரலாமா?"
-
-#: src/callbacks/keyring.h:334
+#: src/callbacks/keyring.h:396
 #, fuzzy, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "அறியப்படாத மொழி: "
 
-#: src/callbacks/keyring.h:351
+#: src/callbacks/keyring.h:413
 #, fuzzy, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -221,13 +273,13 @@ msgid ""
 "  but got  %4%\n"
 msgstr "%s:க்காக உள்ளமைத்தல் கோப்புகள் மாற்றப்பட்டுள்ளன"
 
-#: src/callbacks/keyring.h:363
+#: src/callbacks/keyring.h:425
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
 
-#: src/callbacks/keyring.h:371
+#: src/callbacks/keyring.h:433
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -239,22 +291,22 @@ msgid ""
 msgstr ""
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:378
+#: src/callbacks/keyring.h:440
 msgid "discard"
 msgstr ""
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:380
+#: src/callbacks/keyring.h:442
 msgid "Unblock using this file on your own risk."
 msgstr ""
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:382
+#: src/callbacks/keyring.h:444
 msgid "Discard the file."
 msgstr ""
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:387
+#: src/callbacks/keyring.h:449
 msgid "Unblock or discard?"
 msgstr ""
 
@@ -409,13 +461,34 @@ msgstr ""
 msgid "Suspicious severity filter value '%1%'."
 msgstr ""
 
-#: src/output/Out.h:25 src/repos.cc:142 src/repos.cc:170
+#: src/output/Out.h:26 src/repos.cc:142 src/repos.cc:170
 msgid "Yes"
 msgstr "ஆம்"
 
-#: src/output/Out.h:25 src/repos.cc:148 src/repos.cc:176
+#: src/output/Out.h:26 src/repos.cc:148 src/repos.cc:176
 msgid "No"
 msgstr "இல்லை"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:38
+msgid "Note:"
+msgstr ""
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:40
+#, fuzzy
+msgid "Warning:"
+msgstr "எச்சரிக்கை"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:42
+#, fuzzy
+msgid "Error:"
+msgstr "பிழை"
+
+#: src/output/Out.h:44
+msgid "Continue?"
+msgstr "தொடரலாமா?"
 
 #: src/Zypper.h:503
 msgid "Finished with error."
@@ -5752,6 +5825,20 @@ msgstr "கூறு\"%s\"ஐ ஏற்ற முடியவில்லை"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Signature verification failed for file '%s'."
+#~ msgstr "%s:க்காக உள்ளமைத்தல் கோப்புகள் மாற்றப்பட்டுள்ளன"
+
+#, fuzzy
+#~ msgid "Signature verification failed for file '%s' from repository '%s'."
+#~ msgstr "%s:க்காக உள்ளமைத்தல் கோப்புகள் மாற்றப்பட்டுள்ளன"
+
+#, fuzzy
+#~ msgid ""
+#~ "Warning: This might be caused by a malicious change in the file!\n"
+#~ "Continuing might be risky. Continue anyway?"
+#~ msgstr "%s:க்காக உள்ளமைத்தல் கோப்புகள் மாற்றப்பட்டுள்ளன"
 
 #, fuzzy
 #~ msgid "Package Manager Restart Required"
