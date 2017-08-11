@@ -13,6 +13,7 @@
 
 #include <boost/utility/string_ref.hpp>
 #include <zypp/base/DtorReset.h>
+#include <zypp/base/String.h>
 
 #include "output/Out.h"
 
@@ -303,7 +304,7 @@ namespace mbs
 
 
     /** Temporarily increase indent */
-    struct ScopedIndentIncrement : private DtorReset
+    struct ScopedIndentIncrement : private zypp::DtorReset
     {
       ScopedIndentIncrement( MbsWriteWrapped & mww_r, size_t increment_r )
       : DtorReset( mww_r._indent )
@@ -591,6 +592,9 @@ inline void mbs_write_wrapped( std::ostream & out, boost::string_ref text_r, siz
   mbs::MbsWriteWrapped mww( out, indent_r, wrap_r, indentFix_r );
   mww.addString( text_r );
 }
+/** \overload for str::Str */
+inline void mbs_write_wrapped( std::ostream & out, const zypp::str::Str & text_r, size_t indent_r, size_t wrap_r, int indentFix_r = 0 )
+{ mbs_write_wrapped( out, text_r.str(), indent_r, wrap_r, indentFix_r ); }
 
 /** Returns the column width of a multi-byte character string \a text_r */
 inline size_t mbs_width( boost::string_ref text_r )
