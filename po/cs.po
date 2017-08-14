@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-07-29 08:40+0000\n"
+"PO-Revision-Date: 2017-08-14 21:01+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -32,15 +32,15 @@ msgstr ""
 "X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"Přijímání balíčků s nesprávným kontrolním součtem může vést k poškození "
-"systému a ve výjimečných případech dokonce k ohrožení zabezpečení systému."
+"Podepisování dat umožňuje příjemci ověřit, že po podepsání už nebyla data "
+"změněna. Přijímání dat s žádným nesprávným nebo neznámým podpisem může vést "
+"k poškození systému a ve výjimečných případech dokonce k nabourání systému."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -49,12 +49,16 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Soubor '%1%' je hlavní indexový soubor repozitářů. Zajišťuje integritu celé "
+"sestavy repozitářů."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Nemůžeme ověřit, že nikdo soubor nezměnil, takže už nemůže být důvěryhodný! "
+"Nepokračujte, pokud zcela jistě nevíte, že je to bezpečné."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -62,6 +66,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Tento soubor byl po svém podpisu změněn. Může to být zhoubná změna, takže už "
+"mu nelze důvěřovat! Nepokračujte, pokud zcela jistě nevíte, že je to "
+"bezpečné."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -112,15 +119,15 @@ msgstr "Je přijímán nepodepsaný soubor %s z úložiště %s."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Soubor %s není podepsán, chcete pokračovat?"
+msgstr "Soubor '%1%' není podepsán."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:157
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Soubor %s z úložiště %s není podepsán, chcete pokračovat?"
+msgstr "Soubor '%1%' z úložiště '%2%' není podepsán."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:174
@@ -148,16 +155,15 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:214
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Soubor %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
+msgstr "Soubor '%1%' je podepsán neznámým klíčem '%2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:217
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"Soubor %s z úložiště %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
+msgstr "Soubor '%1%' z úložiště '%3%' je podepsán neznámým klíčem '%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:233
@@ -492,19 +498,17 @@ msgstr "Ne"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Poznámka:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Upozornění: "
+msgstr "Pozor:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Chyba"
+msgstr "Chyba:"
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -3086,25 +3090,25 @@ msgid "Enable GPG check for this repository."
 msgstr "Povolí kontrolu GPG pro tento repozitář."
 
 #: src/Zypper.cc:84
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Povolí kontrolu GPG pro tento repozitář."
+msgstr "Povolí přísnou kontrolu GPG pro tento repozitář."
 
 #: src/Zypper.cc:85
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Pro závislost '%s' neexistuje žádný kandidát k aktualizaci."
+msgstr "Zkráceně místo '%1%'."
 
 #: src/Zypper.cc:86
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Povolí kontrolu GPG pro tento repozitář."
+msgstr ""
+"Povolí kontrolu GPG, ale dovolí, aby metadata repozitáře nebyla podepsána."
 
 #: src/Zypper.cc:87
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Povolí kontrolu GPG pro tento repozitář."
+msgstr ""
+"Povolí kontrolu GPG, ale dovolí instalaci nepodepsaných balíčků z tohoto "
+"repozitáře."
 
 #: src/Zypper.cc:88
 msgid "Disable GPG check for this repository."
@@ -3115,6 +3119,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Standardně se použije nastavení globální kontroly GPG definované v "
+"/etc/zypp/zypp.conf."
 
 #: src/Zypper.cc:105
 msgid "Create a solver test case for debugging."
@@ -3175,7 +3181,7 @@ msgstr "Výchozí nastavení je zahrnout volitelné opravy."
 #: src/Zypper.cc:179
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Tyto volby se vzájemně vylučují: %1%"
 
 #: src/Zypper.cc:208
 msgid ""
