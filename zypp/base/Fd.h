@@ -57,7 +57,7 @@ namespace zypp
 
       /** Move assign */
       Fd & operator=( Fd && rhs )
-      { if ( this != &rhs ) std::swap( m_fd, rhs.m_fd ); }
+      { if ( this != &rhs ) std::swap( m_fd, rhs.m_fd ); return *this; }
 
       /** Dtor closes file. */
       ~Fd()
