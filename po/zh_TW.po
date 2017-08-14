@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-07-04 01:57+0000\n"
+"PO-Revision-Date: 2017-08-09 15:02+0000\n"
 "Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_TW/>\n"
@@ -543,8 +543,7 @@ msgstr "供應商"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:255
-#: src/utils/misc.cc:296
+#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:255 src/utils/misc.cc:296
 msgid "Summary"
 msgstr "摘要"
 
@@ -3975,7 +3974,7 @@ msgstr ""
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
 #: src/Zypper.cc:2274
-#, fuzzy, c-format, boost-format
+#, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
 "\n"
@@ -5752,7 +5751,6 @@ msgstr "正在啟動"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
 msgstr "找不到"
 

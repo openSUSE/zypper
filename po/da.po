@@ -1,14 +1,14 @@
 # Copyright (C) YEAR SuSE Linux GmbH, Nuernberg
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Martin Schlander <mschlander@opensuse.org>, 2015.
+# scootergrisen, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-07-19 19:59+0000\n"
-"Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
+"PO-Revision-Date: 2017-07-31 22:30+0000\n"
+"Last-Translator: scootergrisen\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
 ">\n"
 "Language: da\n"
@@ -558,8 +558,7 @@ msgstr "Leverandør"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:255
-#: src/utils/misc.cc:296
+#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:255 src/utils/misc.cc:296
 msgid "Summary"
 msgstr "Resumé"
 
@@ -3079,11 +3078,11 @@ msgstr ""
 
 #: src/Zypper.cc:138
 msgid "The default is to exclude optional patches."
-msgstr "Standarden er er ekskludere valgfrie rettelser."
+msgstr "Standarden er ekskludere valgfrie rettelser."
 
 #: src/Zypper.cc:139
 msgid "The default is to include optional patches."
-msgstr "Standarden er er inkludere valgfrie rettelser."
+msgstr "Standarden er inkludere valgfrie rettelser."
 
 #. translator: %1% is a list of command line options
 #: src/Zypper.cc:179
