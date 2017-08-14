@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 12:49+0200\n"
-"PO-Revision-Date: 2017-08-14 21:01+0000\n"
+"PO-Revision-Date: 2017-08-28 14:42+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -92,7 +92,7 @@ msgstr "Datum vypršení platnosti klíče:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Podklíč:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
