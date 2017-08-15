@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-07-31 22:30+0000\n"
-"Last-Translator: scootergrisen\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"PO-Revision-Date: 2017-08-15 00:27+0000\n"
+"Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,6 +36,8 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Filen '%1%' er softwarekildens hoved indeksfil. Den sikre integriteten af "
+"hele softwarekilden."
 
 #: src/callbacks/keyring.h:46
 msgid ""
@@ -89,36 +91,36 @@ msgstr[1] "Gpg-nøglesigneringsfilen \"%1%\" vil udløbe om %2% dage."
 #: src/callbacks/keyring.h:140
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Accepterer en ikke-signeret fil \"%s\"."
+msgstr "Accepterer en usigneret fil \"%s\"."
 
 #: src/callbacks/keyring.h:144
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Accepterer en ikke-signeret fil '%s' fra softwarekilden '%s'."
+msgstr "Accepterer en usigneret fil '%s' fra softwarekilden '%s'."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Filen '%s' er ikke signeret. Vil du fortsætte?"
+msgstr "Filen '%1%' er usigneret."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:157
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Filen '%s' fra softwarekilden '%s' er ikke signeret. Vil du fortsætte?"
+msgstr "Filen '%1%' fra softwarekilden '%s' er usigneret."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:174
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "Filen '%s' er ikke signeret. Vil du fortsætte?"
+msgstr "Filen '%s' er usigneret. Vil du fortsætte?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:178
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Filen '%s' fra softwarekilden '%s' er ikke signeret. Vil du fortsætte?"
+msgstr "Filen '%s' fra softwarekilden '%s' er usigneret. Vil du fortsætte?"
 
 #: src/callbacks/keyring.h:201
 #, c-format, boost-format
@@ -135,17 +137,16 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:214
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Filen '%s' er signeret med en ukendt nøgle '%s'. Vil du fortsætte?"
+msgstr "Filen '%1%' er signeret med en ukendt nøgle %2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:217
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"Filen '%s' fra softwarekilden '%s' er signeret med en ukendt nøgle '%s'. Vil "
-"du fortsætte?"
+"Filen '%1%' fra softwarekilden '%3%' er signeret med en ukendt nøgle '%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:233
@@ -476,19 +477,17 @@ msgstr "Nej"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Bemærk:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Advarsel: "
+msgstr "Advarsel:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Fejl"
+msgstr "Fejl:"
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -2999,25 +2998,24 @@ msgid "Enable GPG check for this repository."
 msgstr "Aktivér GPG-tjek for denne softwarekilde."
 
 #: src/Zypper.cc:84
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Aktivér GPG-tjek for denne softwarekilde."
+msgstr "Aktivér striks GPG-tjek for denne softwarekilde."
 
 #: src/Zypper.cc:85
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Ingen opdateringskandidat til '%s'."
+msgstr "Kort form for '%1%'."
 
 #: src/Zypper.cc:86
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Aktivér GPG-tjek for denne softwarekilde."
+msgstr "Aktivér GPG-tjek men tillad at softwarekildens metadata er usigneret."
 
 #: src/Zypper.cc:87
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Aktivér GPG-tjek for denne softwarekilde."
+msgstr ""
+"Aktivér GPG-tjek men tillad installation af usignerede pakker fra denne "
+"softwarekilde."
 
 #: src/Zypper.cc:88
 msgid "Disable GPG check for this repository."
@@ -3028,6 +3026,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Brug den globale GPG-tjekindstilling angivet i /etc/zypp/zypp.conf. Dette er "
+"standarden."
 
 #: src/Zypper.cc:105
 msgid "Create a solver test case for debugging."
@@ -3088,7 +3088,7 @@ msgstr "Standarden er inkludere valgfrie rettelser."
 #: src/Zypper.cc:179
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Disse tilvalg er gensidigt eksklusive: %1%"
 
 #: src/Zypper.cc:208
 msgid ""
@@ -4382,9 +4382,9 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
-"Prøv også at opdatere alle pakker som ikke dækkes af rettelser. "
-"Valgmuligheden ignoreres hvis patch-kommandoen først skal opdatere den "
-"første opdateringsstak. Kan ikke kombineres med --updatestack-only."
+"Prøv også at opdatere alle pakker som ikke dækkes af rettelser. Tilvalget "
+"ignoreres hvis patch-kommandoen først skal opdatere den første "
+"opdateringsstak. Kan ikke kombineres med --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2405
