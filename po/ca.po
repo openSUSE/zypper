@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-07-20 09:38+0000\n"
+"PO-Revision-Date: 2017-08-15 10:51+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,15 +21,16 @@ msgstr ""
 "X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"Acceptar paquets amb sumes de verificació errònies pot conduir a un sistema "
-"corromput i, en casos extrems, a un sistema compromès."
+"Signar dades permet al receptor verificar que no hi ha hagut modificacions "
+"després de la signatura de les dades. Acceptar dades sense signatura, amb "
+"signatura incorrecta o desconeguda pot portar a un sistema corrupte i, en "
+"casos extrems, fins i tot a un sistema compromès."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -38,12 +39,16 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"El fitxer \"%1%\" és al fitxer d'índex mestre de repositoris. Assegura la "
+"integritat de tot el repositori."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"No podem verificar que ningú hagi potinejat el fitxer; per tant, pot ja no "
+"ser de confiança! No hauríeu de continuar si no és que sabeu que és segur."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -51,6 +56,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Aquest fitxer s'ha modificat després de ser signat. Això pot haver estat un "
+"canvi maliciós; per tant, pot ja no ser de confiança! No hauríeu de "
+"continuar si no és que sabeu que és segur."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -100,15 +108,15 @@ msgstr "S'accepta el fitxer no signat %s del repositori %s."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "El fitxer %s està sense signar, voleu continuar?"
+msgstr "El fitxer \"%1%\" no està signat."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:157
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "El fitxer %s del repositori %s està sense signar, voleu continuar?"
+msgstr "El fitxer \"%1%\" del repositori \"%2%\" no està signat."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:174
@@ -137,17 +145,17 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:214
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "El fitxer %s està signat amb una clau desconeguda: \"%s\". Continuo?"
+msgstr "El fitxer \"%1%\" està signat amb una clau desconeguda: \"%2%\"."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:217
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"El fitxer %s del repositori %s està signat amb una clau desconeguda: \"%s\". "
-"Continuo?"
+"El fitxer \"%1%\" del repositori \"%3%\" està signat amb una clau "
+"desconeguda: \"%2%\"."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:233
@@ -485,19 +493,17 @@ msgstr "No"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Nota:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Avís: "
+msgstr "Avís:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Error"
+msgstr "Error:"
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -3031,25 +3037,26 @@ msgid "Enable GPG check for this repository."
 msgstr "Activa la comprovació GPG per a aquest repositori."
 
 #: src/Zypper.cc:84
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Activa la comprovació GPG per a aquest repositori."
+msgstr "Habilita la comprovació GPG estricta per a aquest repositori."
 
 #: src/Zypper.cc:85
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Cap actualització candidata per a %s."
+msgstr "Forma breu per a \"%1%\"."
 
 #: src/Zypper.cc:86
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Activa la comprovació GPG per a aquest repositori."
+msgstr ""
+"Habilita la comprovació GPG però permet que les metadades del repositori no "
+"estiguin signades."
 
 #: src/Zypper.cc:87
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Activa la comprovació GPG per a aquest repositori."
+msgstr ""
+"Habilita la comprovació GPG però permet instal·lar paquets sense signar "
+"d'aquest repositori."
 
 #: src/Zypper.cc:88
 msgid "Disable GPG check for this repository."
@@ -3060,6 +3067,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Usa la comprovació GPG global definida a /etc/zypp/zypp.conf. És el valor "
+"per defecte."
 
 #: src/Zypper.cc:105
 msgid "Create a solver test case for debugging."
@@ -3123,7 +3132,7 @@ msgstr "El valor per defecte és incloure els pedaços opcionals."
 #: src/Zypper.cc:179
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Aquestes opcions són mútuament excloents: %1%"
 
 #: src/Zypper.cc:208
 msgid ""
