@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-07-28 23:48+0000\n"
+"PO-Revision-Date: 2017-08-15 03:32+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,15 +23,14 @@ msgstr ""
 "X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"チェックサムが正しくないパッケージを受け入れてしまうと、システムを壊す可能性"
-"があるほか、不正なソフトウエアを動作させることにもなります。"
+"データへの署名は、受信者に署名後の改ざんが無いことを示すための仕組みです。署名のないデータや誤った署名のデータ、もしくは未知の署名が書かれたデータを受け付"
+"けてしまうと、システムを壊すことにも繋がってしまうほか、場合によってはシステムに不正侵入を許してしまう結果にもなりかねません。"
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -39,13 +38,15 @@ msgstr ""
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
-msgstr ""
+msgstr "ファイル '%1%' はリポジトリのマスターインデックスファイルです。リポジトリ全体の整合性を確認するために用意されています。"
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"このファイルが改ざんされていないことを確認できないため、これ以降の処理は危険を伴う場合があります。確実に安全であることを確信できない限り、続行すべきではあ"
+"りません。"
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -53,6 +54,8 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"このファイルは署名後に変更されています。この変更は不正なものである可能性がありますので、これ以降の処理は危険を伴う場合があります。確実に安全であることを確"
+"信できない限り、続行すべきではありません。"
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -101,15 +104,15 @@ msgstr "署名のないファイル「%s」(リポジトリ「%s」)を受け入
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "ファイル '%s' には署名がありません。続行しますか?"
+msgstr "ファイル '%1%' には署名がありません。"
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:157
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "ファイル「%s」(リポジトリ「%s」)には署名がありません。続行しますか?"
+msgstr "リポジトリ '%2%' からのファイル '%1%' には署名がありません。"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:174
@@ -139,17 +142,15 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:214
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "ファイル '%s' は不明なキー '%s' で署名されています。続行しますか？"
+msgstr "ファイル '%1%' は不明な鍵 '%2%' で署名されています。"
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:217
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"ファイル '%s' (リポジトリ '%s') は不明な鍵 '%s' で署名されています。続行しま"
-"すか?"
+msgstr "リポジトリ '%3%' からのファイル '%1%' は不明な鍵 '%2%' で署名されています。"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:233
@@ -482,19 +483,17 @@ msgstr "いいえ"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "注意:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "警告: "
+msgstr "警告:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "エラー"
+msgstr "エラー:"
 
 # internal key used: Ok
 # internal key used: Ok
@@ -2913,28 +2912,25 @@ msgstr "終了処理中です。しばらくお待ちください..."
 
 #: src/Zypper.cc:83
 msgid "Enable GPG check for this repository."
-msgstr "このリポジトリに対して、 GPG チェックを有効にする"
+msgstr "このリポジトリに対して、 GPG チェックを有効にする。"
 
 #: src/Zypper.cc:84
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "このリポジトリに対して、 GPG チェックを有効にする"
+msgstr "このリポジトリに対して厳密な GPG チェックを行なう。"
 
 #: src/Zypper.cc:85
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "'%s' に対するアップデート候補がありません。"
+msgstr "'%s' の省略形です。"
 
 #: src/Zypper.cc:86
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "このリポジトリに対して、 GPG チェックを有効にする"
+msgstr "GPG チェックを有効にするが、リポジトリのメタデータについては未署名を許可する。"
 
 #: src/Zypper.cc:87
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "このリポジトリに対して、 GPG チェックを有効にする"
+msgstr "GPG チェックを有効にするが、このリポジトリからのものについては未署名のパッケージのインストールを許可する。"
 
 #: src/Zypper.cc:88
 msgid "Disable GPG check for this repository."
@@ -2944,7 +2940,7 @@ msgstr "このリポジトリに対して、 GPG チェックを無効にする"
 msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
-msgstr ""
+msgstr "/etc/zypp/zypp.conf に設定されている GPG チェックのグローバル設定を使用する。これが既定値です。"
 
 #: src/Zypper.cc:105
 msgid "Create a solver test case for debugging."
@@ -3006,7 +3002,7 @@ msgstr "既定では、任意指定の修正を含みます。"
 #: src/Zypper.cc:179
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "これらのオプションはお互いに排他関係にあります: %1%"
 
 #: src/Zypper.cc:208
 msgid ""
