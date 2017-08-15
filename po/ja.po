@@ -2934,7 +2934,7 @@ msgstr "GPG チェックを有効にするが、このリポジトリからの�
 
 #: src/Zypper.cc:88
 msgid "Disable GPG check for this repository."
-msgstr "このリポジトリに対して、 GPG チェックを無効にする"
+msgstr "このリポジトリに対して、 GPG チェックを無効にする。"
 
 #: src/Zypper.cc:89
 msgid ""
