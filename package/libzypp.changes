@@ -4,7 +4,7 @@ Fri Aug 11 15:29:40 CEST 2017 - ma@suse.de
 - RepoInfo: add enum GpgCheck for convenient gpgcheck mode handling
   (bsc#1045735)
 - Fix repo/pkg checks to follow explicitly defined gpgcheck in a
-  .repoi file
+  .repo file
 - version 16.15.3 (0)
 
 -------------------------------------------------------------------
@@ -16,7 +16,7 @@ Fri Jul 21 13:26:48 CEST 2017 - ma@suse.de
   with a default configuration (gpgcheck=1) already benefit from
   the fix in libzypp-16.15.x. For details see section
   'Signature checking' in /etc/zypp/zypp.conf.
-- Fix gpg-pubkey relase (creation time) computation (bsc#1036659)
+- Fix gpg-pubkey release (creation time) computation (bsc#1036659)
 - update lsof blacklist (bsc#1046417)
 - version 16.15.2 (0)
 
