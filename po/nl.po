@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-07-31 14:16+0000\n"
+"PO-Revision-Date: 2017-08-15 08:38+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -22,14 +22,16 @@ msgstr ""
 "X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"Accepteren van pakketten met foute controlesommen kan leiden tot een corrupt "
+"Ondertekenen van gegevens maakt het mogelijk voor de ontvanger om te "
+"controleren dat er na het ondertekenen geen wijzigingen zijn geweest na het "
+"ondertekenen.\n"
+"Accepteren van pakketten met foute ondertekeneing kan leiden tot een corrupt "
 "systeem en in extreme gevallen zelfs tot een gecompromitteerd systeem."
 
 #. translator: %1% is a file name
@@ -39,12 +41,17 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Bestand '%1%' is het hoofdindexbestand van de opslagruimten. Het verzekert "
+"de integriteit van de gehele repo (opslagruimte)."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"We kunnen niet verifiëren dat er niet gerommeld is met dit bestand, het kan "
+"niet meer worden vertrouwd! U zou niet moeten doorgaan tenzij u weet dat het "
+"veilig is."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -52,6 +59,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Dit bestand is na ondertekening gewijzigd. Dit kan een gevaarlijke wijziging "
+"zijn, het zou dus niet meer zijn te vertrouwen! U zou niet verder moeten "
+"gaan tenzij u weet dat het veilig is."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -105,15 +115,15 @@ msgstr ""
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Bestand '%s' is niet ondertekend, doorgaan?"
+msgstr "Bestand '%1%' is niet ondertekend."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:157
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Bestand '%s' uit installatiebron '%s' is niet ondertekend, doorgaan?"
+msgstr "Bestand '%1%' uit opslagruimte '%2%' is niet ondertekend."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:174
@@ -144,17 +154,17 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:214
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Bestand '%s' is ondertekend met een onbekende sleutel '%s'. Doorgaan?"
+msgstr "Bestand '%1%' is ondertekend met een onbekende sleutel '%2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:217
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"Bestand '%s' uit installatiebron '%s' is ondertekend met een onbekende "
-"sleutel '%s'. Doorgaan?"
+"Bestand '%1%' uit opslagruimte '%3%' is ondertekend met een onbekende "
+"sleutel '%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:233
@@ -500,19 +510,17 @@ msgstr "Nee"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Opmerking:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Waarschuwing: "
+msgstr "Waarschuwing:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Fout"
+msgstr "Fout:"
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -3093,25 +3101,26 @@ msgid "Enable GPG check for this repository."
 msgstr "schakel GPG-ccontrole in voor deze installatiebron."
 
 #: src/Zypper.cc:84
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "schakel GPG-ccontrole in voor deze installatiebron."
+msgstr "Schakel strikte GPG-ccontrole in voor deze opslagruimte."
 
 #: src/Zypper.cc:85
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Geen updatekandidaat voor '%s'."
+msgstr "Korte naam voor '%1%'."
 
 #: src/Zypper.cc:86
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "schakel GPG-ccontrole in voor deze installatiebron."
+msgstr ""
+"Schakel GPG-ccontrole in maar sta toe dat metagegevens van de opslagruimte "
+"niet zijn ondertekend."
 
 #: src/Zypper.cc:87
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "schakel GPG-ccontrole in voor deze installatiebron."
+msgstr ""
+"Schakel GPG-ccontrole in maar sta het installeren van ongetekende pakketten "
+"uit deze opslagruimte toe."
 
 #: src/Zypper.cc:88
 msgid "Disable GPG check for this repository."
@@ -3122,6 +3131,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Gebruik de globale instellingen voor GPG-controle gedefinieerd in /etc/zypp/"
+"zypp.conf. Dit is de standaard."
 
 #: src/Zypper.cc:105
 msgid "Create a solver test case for debugging."
@@ -3187,7 +3198,7 @@ msgstr "De standaard is om optionele patches mee te nemen."
 #: src/Zypper.cc:179
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Deze opties sluiten elkaar onderling uit: %1%"
 
 #: src/Zypper.cc:208
 msgid ""
