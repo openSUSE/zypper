@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-08-15 10:51+0000\n"
+"PO-Revision-Date: 2017-08-15 11:02+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -493,12 +493,12 @@ msgstr "No"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr "Nota:"
+msgstr "Atenció!"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
 msgid "Warning:"
-msgstr "Avís:"
+msgstr "Avís!"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
@@ -5980,17 +5980,16 @@ msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
 msgstr ""
-"AVÍS: un dels pedaços instal·lats requereix que l'ordinador arrenqui de nou. "
-"Feu-ho al més aviat possible."
+"Un dels pedaços instal·lats requereix reiniciar la màquina. Feu-ho al més "
+"aviat possible."
 
 #: src/solve-commit.cc:892
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
 msgstr ""
-"AVÍS: un dels pedaços instal·lats afecta el gestor de paquets. Feu servir "
-"aquesta ordre una altra vegada per instal·lar qualsevol altre pedaç "
-"necessari."
+"Un dels pedaços instal·lats afecta el mateix gestor de paquets. Executeu "
+"aquesta ordre un altre cop per instal·lar qualsevol altre pedaç necessari."
 
 #: src/solve-commit.cc:910
 msgid "Dependencies of all installed packages are satisfied."
@@ -6057,9 +6056,9 @@ msgid ""
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
 msgstr ""
-"Nota: si no ho feu amb privilegis d'administrador esteu limitats a buscar i "
-"consultar els fitxers només per als quals teniu permís amb la funció de "
-"sistema stat(2). El resultat pot ser incomplet."
+"Nota: si no ho feu amb privilegis d'administrador esteu limitats a cercar "
+"només els fitxers per als quals teniu permís per examinar amb la funció de "
+"sistema stat(2). El resultat pot no ser complet."
 
 #: src/source-download.cc:208
 #, c-format, boost-format
@@ -6177,7 +6176,7 @@ msgstr "No s'ha trobat cap proveïdor de \"%s\"."
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr "Avís: "
+msgstr "Avís! "
 
 #. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
