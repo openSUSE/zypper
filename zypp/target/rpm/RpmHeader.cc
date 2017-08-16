@@ -10,9 +10,7 @@
  *
 */
 #include "librpm.h"
-#ifdef _RPM_4_4
-#include <rpm/ugid.h>
-#else
+
 ////////////////////////////////////////////////////////////////////
 // unameToUid and gnameToGid are shamelessly stolen from rpm-4.4.
 // (rpmio/ugid.c) Those functions were dropped in RPM_4_7
@@ -142,7 +140,6 @@ int gnameToGid(const char * thisGname, gid_t * gid)
     return 0;
 }
 ////////////////////////////////////////////////////////////////////
-#endif
 
 #include <iostream>
 #include <map>

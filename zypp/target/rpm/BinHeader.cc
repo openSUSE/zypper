@@ -16,10 +16,6 @@ extern "C"
 #undef RPM_NULL_TYPE
 #define RPM_NULL_TYPE rpmTagType(0)
 typedef rpmuint32_t rpm_count_t;
-#else
-#ifdef _RPM_4_4
-typedef int32_t rpm_count_t;
-#endif
 #endif
 }
 
@@ -43,7 +39,7 @@ namespace rpm
 {
 
   /** Helper for header data retieval.
-   * With \c _RPM_4_X use \c ::headerGet; with older \c _RPM_4_4
+   * With \c _RPM_4 use \c ::headerGet; with \c _RPM_5
    * use the meanwhile deprecated \c ::headerGetEntry.
    * \ingroup g_RAII
    */
@@ -56,16 +52,16 @@ namespace rpm
       rpm_count_t cnt();
       void *      val();
     private:
-#ifdef _RPM_4_X
+#ifndef _RPM_5
      ::rpmtd		_rpmtd;
 #else
       rpmTagType	_type;
       rpm_count_t	_cnt;
       void *		_val;
-#endif //_RPM_4_X
+#endif //_RPM_5
  };
 
-#ifdef _RPM_4_X
+#ifndef _RPM_5
   inline HeaderEntryGetter::HeaderEntryGetter( const Header & h_r, rpmTag & tag_r )
     : _rpmtd( ::rpmtdNew() )
   { ::headerGet( h_r, tag_r, _rpmtd, HEADERGET_DEFAULT ); }
@@ -85,7 +81,7 @@ namespace rpm
   inline rpmTagType	HeaderEntryGetter::type()	{ return _type; }
   inline rpm_count_t	HeaderEntryGetter::cnt()	{ return _cnt; }
   inline void *		HeaderEntryGetter::val()	{ return _val; }
-#endif //_RPM_4_X
+#endif //_RPM_5
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -113,7 +109,7 @@ unsigned BinHeader::intList::set( void * val_r, unsigned cnt_r, rpmTagType type_
       case RPM_INT32_TYPE:
 	std::vector<long>( (int32_t*)val_r, ((int32_t*)val_r)+cnt_r ).swap( _data );
 	break;
-#ifdef _RPM_4_X
+#ifndef _RPM_5
       case RPM_INT64_TYPE:
 	std::vector<long>( (int64_t*)val_r, ((int64_t*)val_r)+cnt_r ).swap( _data );
 	break;
@@ -257,7 +253,7 @@ unsigned BinHeader::int_list( tag tag_r, intList & lst_r ) const
       case RPM_INT8_TYPE:
       case RPM_INT16_TYPE:
       case RPM_INT32_TYPE:
-#ifdef _RPM_4_X
+#ifndef _RPM_5
       case RPM_INT64_TYPE:
 #endif
         return lst_r.set( headerget.val(), headerget.cnt(), headerget.type() );
@@ -331,7 +327,7 @@ int BinHeader::int_val( tag tag_r ) const
         return *((int16_t*)headerget.val());
       case RPM_INT32_TYPE:
         return *((int32_t*)headerget.val());
-#ifdef _RPM_4_X
+#ifndef _RPM_5
       case RPM_INT64_TYPE:
         return *((int64_t*)headerget.val());
 #endif
