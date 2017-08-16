@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-05-30 13:46+0000\n"
+"PO-Revision-Date: 2017-08-16 14:31+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
-">\n"
+"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:32
 #, fuzzy
@@ -105,15 +105,15 @@ msgstr "Accettazione di un file senza firma '%s' dal repository '%s'."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Il file '%s' non è firmato, continuare?"
+msgstr "Il file '%1%' non è firmato."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:157
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Il file '%s' dal repository '%s' non è firmato, continuare?"
+msgstr "Il file '%1%' dal repository '%2%' non è firmato."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:174
@@ -142,17 +142,17 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:214
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Il file '%s' è firmato con una chiave '%s' sconosciuta. Continuare?"
+msgstr "Il file '%1%' è firmato con una chiave '%2%' sconosciuta."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:217
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"Il file '%s' dal repository '%s' è firmato con una chiave '%s' sconosciuta. "
-"Continuare?"
+"Il file '%1%' dal repository '%3%' è firmato con una chiave '%2%' "
+"sconosciuta."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:233
@@ -495,19 +495,17 @@ msgstr "No"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Nota:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Avvertenza: "
+msgstr "Avvertenza:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Errore"
+msgstr "Errore:"
 
 # internal key used: Ok
 # internal key used: Ok
@@ -3096,14 +3094,13 @@ msgid "Enable GPG check for this repository."
 msgstr "Abilita la verifica GPG per questo repository."
 
 #: src/Zypper.cc:84
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Abilita la verifica GPG per questo repository."
+msgstr "Abilita la verifica GPG stringente per questo repository."
 
 #: src/Zypper.cc:85
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Nessun aggiornamento candidato per '%s'."
+msgstr "Abbreviazione per '%1%'."
 
 #: src/Zypper.cc:86
 #, fuzzy
@@ -3181,7 +3178,7 @@ msgstr "L'impostazione predefinita è di includere le patch opzionali."
 #: src/Zypper.cc:179
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Queste opzioni sono mutualmente esclusive: %1%"
 
 #: src/Zypper.cc:208
 msgid ""
@@ -6286,9 +6283,8 @@ msgstr "avvio"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "Non trovato"
+msgstr "non trovato"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
