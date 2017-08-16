@@ -95,18 +95,18 @@ BuildRequires:  expat-devel
 Requires:       rpm
 
 %if 0%{?suse_version}
-BuildRequires:  rpm-devel
+BuildRequires:  rpm-devel > 4.4
 %endif
 
 %if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
 BuildRequires:  glib2-devel
 BuildRequires:  popt-devel
-BuildRequires:  rpm-devel
+BuildRequires:  rpm-devel > 4.4
 %endif
 
 %if 0%{?mandriva_version}
 BuildRequires:  glib2-devel
-BuildRequires:  librpm-devel
+BuildRequires:  librpm-devel > 4.4
 %endif
 
 %if 0%{?suse_version}
@@ -147,7 +147,7 @@ Requires:       libxml2-devel
 Requires:       libzypp = %{version}
 Requires:       openssl-devel
 Requires:       popt-devel
-Requires:       rpm-devel
+Requires:       rpm-devel > 4.4
 Requires:       zlib-devel
 %if 0%{?suse_version} >= 1130 || 0%{?fedora_version} >= 16
 Requires:       libudev-devel
