@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-08-15 00:27+0000\n"
+"PO-Revision-Date: 2017-08-18 00:02+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -19,14 +19,15 @@ msgstr ""
 "X-Generator: Weblate 2.13.1\n"
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"Accept af pakker med forkert tjeksom kan fører til at et ødelagt system og i "
+"Signering af data giver modtageren mulighed for at bekræfte at der ikke er "
+"sket nogen ændringer efter dataene er blevet signeret. Accept af data med "
+"ingen, forkert eller ukendt signatur kan fører til at et ødelagt system og i "
 "ekstreme tilfælde endda kompromitering af systemet."
 
 #. translator: %1% is a file name
@@ -44,6 +45,9 @@ msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Vi kan ikke bekræfte at denne fil ikke er blevet manipuleret af nogen, så "
+"den er måske ikke længere troværdig! Du bør ikke fortsætte medmindre du ved "
+"at det er sikkert."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -51,6 +55,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Denne fil er blevet ændret efter den er blevet signeret. Det kan være en "
+"ondsindet ændring, så den er måske ikke længere troværdig! Du bør ikke "
+"fortsætte medmindre du ved at det er sikkert."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
