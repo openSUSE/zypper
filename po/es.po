@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-11 14:52+0200\n"
-"PO-Revision-Date: 2017-08-08 21:10+0000\n"
+"PO-Revision-Date: 2017-08-20 17:43+0000\n"
 "Last-Translator: jc sl <trcs@gmx.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,12 +48,16 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"El fichero '%1%' es el del índice maestro de los repositorios. Garantiza la "
+"integridad del repositorio al completo."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"No se puede verificar que nadie haya modificado el archivo, ¡así que ya no "
+"es confiable! No debería continuar a menos que sepa que es seguro."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -61,6 +65,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Este fichero fue modificado después de haber sido firmado. Puede haber sido "
+"un cambio malicioso, ¡así que ya no es confiable! No debería continuar a "
+"menos que sepa que es seguro."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -110,15 +117,15 @@ msgstr "Aceptando un archivo sin firma %s del repositorio %s."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:154
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "El archivo %s no está firmado. ¿Desea continuar?"
+msgstr "El archivo '%1%' no está firmado."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:157
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "El archivo %s del repositorio %s no está firmado. ¿Desea continuar?"
+msgstr "El archivo '%1%' del repositorio '%2%' no está firmado."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:174
@@ -147,18 +154,17 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:214
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr ""
-"El archivo %s está firmado con una clave desconocida %s. ¿Desea continuar?"
+msgstr "El archivo '%1%' está firmado con una clave desconocida '%2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:217
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"El archivo %s del repositorio %s está firmado con una clave desconocida %s. "
-"¿Desea continuar?"
+"El archivo '%1%' del repositorio '%3%' está firmado con una clave "
+"desconocida '%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:233
@@ -498,19 +504,17 @@ msgstr "No"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Nota:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Advertencia: "
+msgstr "Advertencia:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Error"
+msgstr "Error:"
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -3062,9 +3066,8 @@ msgid "Enable GPG check for this repository."
 msgstr "Habilita la comprobación GPG para este repositorio."
 
 #: src/Zypper.cc:84
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Habilita la comprobación GPG para este repositorio."
+msgstr "Habilita la comprobación GPG estricta para este repositorio."
 
 #: src/Zypper.cc:85
 #, fuzzy, boost-format
@@ -3072,15 +3075,17 @@ msgid "Short hand for '%1%'."
 msgstr "No hay candidatos de actualización para %s."
 
 #: src/Zypper.cc:86
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Habilita la comprobación GPG para este repositorio."
+msgstr ""
+"Habilitar la comprobación GPG pero permitir que los metadatos del "
+"repositorio estén si firmar."
 
 #: src/Zypper.cc:87
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Habilita la comprobación GPG para este repositorio."
+msgstr ""
+"Habilitar la comprobación GPG pero permitir la instalación de paquetes sin "
+"formar de este repositorio."
 
 #: src/Zypper.cc:88
 msgid "Disable GPG check for this repository."
@@ -3091,6 +3096,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Usar la configuración de comprobación GPG global definida en /etc/zypp/"
+"zypp.conf.  Este es el valor por omisión."
 
 #: src/Zypper.cc:105
 msgid "Create a solver test case for debugging."
@@ -3152,7 +3159,7 @@ msgstr "La opción por defecto es incluir los parches opcionales."
 #: src/Zypper.cc:179
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Estas opciones son mutuamente exclusivas: %1%"
 
 #: src/Zypper.cc:208
 msgid ""
