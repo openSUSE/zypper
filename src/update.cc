@@ -599,9 +599,6 @@ static bool list_patch_updates( Zypper & zypper )
     zypper.out().gap();
     if (!tbl.empty())
     {
-#if 0
-      N_("The following software management updates will be installed first:"); // keep old text for a while...
-#endif
       // translator: Table headline; 'Needed' refers to patches with status 'needed'
       zypper.out().info(_("Needed software management updates will be installed first:"));
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
