@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 12:50+0200\n"
-"PO-Revision-Date: 2017-07-17 19:25+0000\n"
+"PO-Revision-Date: 2017-08-25 11:13+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
-">\n"
+"Language-Team: Catalan "
+"<https://l10n.opensuse.org/projects/libzypp/master/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -558,21 +558,20 @@ msgstr "L'ordre s'ha executat sense que hi hagués cap error conegut."
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "(no caduca)"
+msgstr "no caduca"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "va caducar el %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "caduca el %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
