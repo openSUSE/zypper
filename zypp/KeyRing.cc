@@ -310,15 +310,16 @@ namespace zypp
   PublicKeyData KeyRing::Impl::publicKeyExists( const std::string & id, const Pathname & keyring )
   {
     MIL << "Searching key [" << id << "] in keyring " << keyring << endl;
-    const std::list<PublicKeyData> & keys( publicKeyData( keyring ) );
-    for_( it, keys.begin(), keys.end() )
+    PublicKeyData ret;
+    for ( const PublicKeyData & key : publicKeyData( keyring ) )
     {
-      if ( id == (*it).id() )
+      if ( key.providesKey( id ) )
       {
-        return *it;
+	ret = key;
+	break;
       }
     }
-    return PublicKeyData();
+    return ret;
   }
 
   PublicKey KeyRing::Impl::exportKey( const PublicKeyData & keyData, const Pathname & keyring )
@@ -389,10 +390,10 @@ namespace zypp
       return res;
     }
 
-    // get the id of the signature
+    // get the id of the signature (it might be a subkey id!)
     std::string id = readSignatureKeyId( signature );
 
-    // doeskey exists in trusted keyring
+    // does key exists in trusted keyring
     PublicKeyData trustedKeyData( publicKeyExists( id, trustedKeyRing() ) );
     if ( trustedKeyData )
     {
@@ -405,6 +406,12 @@ namespace zypp
       {
         // bnc #393160: Comment #30: Compare at least the fingerprint
         // in case an attacker created a key the the same id.
+	//
+	// FIXME: bsc#1008325: For keys using subkeys, we'd actually need
+	// to compare the subkey sets, to tell whether a key was updated.
+	// because created() remains unchanged if the primary key is not touched.
+	// For now we wait until a new subkey signs the data and treat it as a
+	//  new key (else part below).
         if ( trustedKeyData.fingerprint() == generalKeyData.fingerprint()
 	   && trustedKeyData.created() < generalKeyData.created() )
         {

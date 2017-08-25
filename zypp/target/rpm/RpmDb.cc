@@ -1050,7 +1050,12 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
 
   for_( it, rpmKeys.begin(), rpmKeys.end() )
   {
-    if ( keyEd == *it ) // quick test (Edition is IdStringType!)
+    // bsc#1008325: Keys using subkeys for signing don't get a higher release
+    // if new subkeys are added, because the primary key remains unchanged.
+    // For now always re-import keys with subkeys. Here we don't want to export the
+    // keys in the rpm database to check whether the subkeys are the same. The calling
+    // code should take care, we don't re-import the same kesy over and over again.
+    if ( keyEd == *it && !pubkey_r.hasSubkeys() ) // quick test (Edition is IdStringType!)
     {
       MIL << "Key " << pubkey_r << " is already in the rpm trusted keyring. (skip import)" << endl;
       return;
