@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Aug 25 12:51:43 CEST 2017 - ma@suse.de
+
+- verifyFileSignature: Support signing with subkeys (bsc#1008325)
+- PublicKey: Scan and provide subkey information.
+- Enhance sort order for media.1/products (bsc#1054671)
+- Drop detection and support for rpm-4.4 (fixes #77)
+- version 16.15.4 (0)
+
+-------------------------------------------------------------------
 Fri Aug 11 15:29:40 CEST 2017 - ma@suse.de
 
 - RepoInfo: add enum GpgCheck for convenient gpgcheck mode handling
