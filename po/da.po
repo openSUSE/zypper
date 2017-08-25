@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-08-25 23:13+0000\n"
+"PO-Revision-Date: 2017-09-15 14:57+0000\n"
 "Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1223,12 +1223,14 @@ msgstr[0] "Følgende program vil skifte leverandør:"
 msgstr[1] "Følgende %d programmer vil skifte leverandør:"
 
 #: src/Summary.cc:1111
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "Følgende pakke understøttes ikke af dens leverandør:"
-msgstr[1] "Følgende %d pakker understøttes ikke af deres leverandør:"
+msgstr[0] ""
+"Følgende pakke har ingen understøttelsesinformation fra dens leverandør:"
+msgstr[1] ""
+"Følgende %d pakker har ingen understøttelsesinformation fra deres leverandør:"
 
 #: src/Summary.cc:1129
 #, c-format, boost-format
