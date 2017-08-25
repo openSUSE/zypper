@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 12:49+0200\n"
-"PO-Revision-Date: 2017-08-25 20:25+0000\n"
+"PO-Revision-Date: 2017-08-25 20:35+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -94,16 +94,15 @@ msgstr "Rpm-naam:"
 #: src/callbacks/keyring.h:113
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "Het bestand met de GPG-ondertekeningssleutel '%1%' is verlopen."
+msgstr "De GPG-ondertekeningssleutel van bestand '%1%' is verlopen."
 
 #: src/callbacks/keyring.h:119
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-"Het bestand met de gpg ondertekeningssleutel '%1%' zal verlopen na %2% dag."
+msgstr[0] "De GPG-ondertekeningssleutel van bestand '%1%' zal verlopen na %2% dag."
 msgstr[1] ""
-"Het bestand met de gpg ondertekeningssleutel '%1%' zal verlopen na %2% dagen."
+"De GPG-ondertekeningssleutel van bestand '%1%' zal verlopen na %2% dagen."
 
 #: src/callbacks/keyring.h:142
 #, c-format, boost-format
@@ -153,7 +152,7 @@ msgstr ""
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Bestand '%s' uit installatiebron '%s', dat is ondertekend met een onbekende "
+"Bestand '%s' uit opslagruimte '%s', dat is ondertekend met een onbekende "
 "sleutel '%s', wordt geaccepteerd."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
