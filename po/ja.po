@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-11 14:52+0200\n"
+"POT-Creation-Date: 2017-08-25 12:49+0200\n"
 "PO-Revision-Date: 2017-08-15 03:32+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese "
-"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
+"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
+">\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,8 +29,10 @@ msgid ""
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"データへの署名は、受信者に署名後の改ざんが無いことを示すための仕組みです。署名のないデータや誤った署名のデータ、もしくは未知の署名が書かれたデータを受け付"
-"けてしまうと、システムを壊すことにも繋がってしまうほか、場合によってはシステムに不正侵入を許してしまう結果にもなりかねません。"
+"データへの署名は、受信者に署名後の改ざんが無いことを示すための仕組みです。署"
+"名のないデータや誤った署名のデータ、もしくは未知の署名が書かれたデータを受け"
+"付けてしまうと、システムを壊すことにも繋がってしまうほか、場合によってはシス"
+"テムに不正侵入を許してしまう結果にもなりかねません。"
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -38,15 +40,18 @@ msgstr ""
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
-msgstr "ファイル '%1%' はリポジトリのマスターインデックスファイルです。リポジトリ全体の整合性を確認するために用意されています。"
+msgstr ""
+"ファイル '%1%' はリポジトリのマスターインデックスファイルです。リポジトリ全体"
+"の整合性を確認するために用意されています。"
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
-"このファイルが改ざんされていないことを確認できないため、これ以降の処理は危険を伴う場合があります。確実に安全であることを確信できない限り、続行すべきではあ"
-"りません。"
+"このファイルが改ざんされていないことを確認できないため、これ以降の処理は危険"
+"を伴う場合があります。確実に安全であることを確信できない限り、続行すべきでは"
+"ありません。"
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -54,8 +59,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
-"このファイルは署名後に変更されています。この変更は不正なものである可能性がありますので、これ以降の処理は危険を伴う場合があります。確実に安全であることを確"
-"信できない限り、続行すべきではありません。"
+"このファイルは署名後に変更されています。この変更は不正なものである可能性があ"
+"りますので、これ以降の処理は危険を伴う場合があります。確実に安全であることを"
+"確信できない限り、続行すべきではありません。"
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -77,62 +83,66 @@ msgstr "鍵の作成日時:"
 msgid "Key Expires:"
 msgstr "鍵の期限切れ日時:"
 
-#: src/callbacks/keyring.h:85
+#: src/callbacks/keyring.h:86
+msgid "Subkey:"
+msgstr ""
+
+#: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
 msgstr "RPM の名前:"
 
-#: src/callbacks/keyring.h:111
+#: src/callbacks/keyring.h:113
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "GPG 鍵署名ファイル '%1%' の有効期限が切れています。"
 
-#: src/callbacks/keyring.h:117
+#: src/callbacks/keyring.h:119
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] "GPG 鍵署名ファイル '%1%' の有効期限は、あと %2% 日で切れます。"
 
-#: src/callbacks/keyring.h:140
+#: src/callbacks/keyring.h:142
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "署名のないファイル '%s' を受け入れています。"
 
-#: src/callbacks/keyring.h:144
+#: src/callbacks/keyring.h:146
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "署名のないファイル「%s」(リポジトリ「%s」)を受け入れています。"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:154
+#: src/callbacks/keyring.h:156
 #, boost-format
 msgid "File '%1%' is unsigned."
 msgstr "ファイル '%1%' には署名がありません。"
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:157
+#: src/callbacks/keyring.h:159
 #, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
 msgstr "リポジトリ '%2%' からのファイル '%1%' には署名がありません。"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:174
+#: src/callbacks/keyring.h:176
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "ファイル '%s' には署名がありません。続行しますか?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:178
+#: src/callbacks/keyring.h:180
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "ファイル「%s」(リポジトリ「%s」)には署名がありません。続行しますか?"
 
-#: src/callbacks/keyring.h:201
+#: src/callbacks/keyring.h:203
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr ""
 "受け入れようとしているファイル '%s' は不明な鍵 '%s' で署名されています。"
 
-#: src/callbacks/keyring.h:205
+#: src/callbacks/keyring.h:207
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
@@ -141,25 +151,26 @@ msgstr ""
 "されています。"
 
 #. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:214
+#: src/callbacks/keyring.h:216
 #, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
 msgstr "ファイル '%1%' は不明な鍵 '%2%' で署名されています。"
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:217
+#: src/callbacks/keyring.h:219
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr "リポジトリ '%3%' からのファイル '%1%' は不明な鍵 '%2%' で署名されています。"
+msgstr ""
+"リポジトリ '%3%' からのファイル '%1%' は不明な鍵 '%2%' で署名されています。"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:233
+#: src/callbacks/keyring.h:236
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "ファイル '%s' は不明なキー '%s' で署名されています。続行しますか？"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:237
+#: src/callbacks/keyring.h:240
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
@@ -167,20 +178,20 @@ msgstr ""
 "ファイル '%s' (リポジトリ '%s') は不明な鍵 '%s' で署名されています。続行しま"
 "すか?"
 
-#: src/callbacks/keyring.h:253
+#: src/callbacks/keyring.h:256
 msgid "Automatically importing the following key:"
 msgstr "以下の鍵を自動的にインポートします:"
 
-#: src/callbacks/keyring.h:255
+#: src/callbacks/keyring.h:258
 msgid "Automatically trusting the following key:"
 msgstr "以下の鍵を自動的に信頼します:"
 
-#: src/callbacks/keyring.h:257
+#: src/callbacks/keyring.h:260
 msgid "New repository or package signing key received:"
 msgstr "新しいリポジトリまたはパッケージの署名鍵を受信しました:"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:279
+#: src/callbacks/keyring.h:282
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
 "鍵を拒否しますか(R)? 一時的に信頼しますか(T)?それとも今後ずっと信頼しますか"
@@ -191,36 +202,36 @@ msgstr ""
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:291
+#: src/callbacks/keyring.h:294
 msgid "r/t/a/"
 msgstr "r/t/a"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:294
+#: src/callbacks/keyring.h:297
 msgid "r/t"
 msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:296
+#: src/callbacks/keyring.h:299
 msgid "Don't trust the key."
 msgstr "鍵を信頼しない。"
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:298
+#: src/callbacks/keyring.h:301
 msgid "Trust the key temporarily."
 msgstr "一時的に鍵を信頼する。"
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:301
+#: src/callbacks/keyring.h:304
 msgid "Trust the key and import it into trusted keyring."
 msgstr "鍵を信頼して信頼済み鍵リングにインポートする。"
 
-#: src/callbacks/keyring.h:337
+#: src/callbacks/keyring.h:340
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "ファイル '%s' に対する署名検証が失敗しましたが、無視しています！"
 
-#: src/callbacks/keyring.h:340
+#: src/callbacks/keyring.h:343
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
@@ -228,34 +239,34 @@ msgstr ""
 "ファイル '%s' (リポジトリ '%s') に対する署名検証が失敗しましたが、無視してい"
 "ます!"
 
-#: src/callbacks/keyring.h:346
+#: src/callbacks/keyring.h:349
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 "ファイルに対して悪意のある変更が行われていないか、もう一度ご確認ください！"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:356
+#: src/callbacks/keyring.h:359
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "ファイル '%1%' に対する署名検証が失敗しました。"
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:359
+#: src/callbacks/keyring.h:362
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "ファイル '%1%' (リポジトリ '%2%') に対する署名検証が失敗しました。"
 
-#: src/callbacks/keyring.h:388
+#: src/callbacks/keyring.h:392
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "ファイル%sに対するダイジェストがありません。"
 
-#: src/callbacks/keyring.h:396
+#: src/callbacks/keyring.h:400
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "不明なダイジェスト %s です (ファイル %s)。"
 
-#: src/callbacks/keyring.h:413
+#: src/callbacks/keyring.h:417
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -270,7 +281,7 @@ msgstr ""
 "  期待されていた値:%3%\n"
 "  登録されていた値:%4%\n"
 
-#: src/callbacks/keyring.h:425
+#: src/callbacks/keyring.h:429
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -278,7 +289,7 @@ msgstr ""
 "チェックサムが正しくないパッケージを受け入れてしまうと、システムを壊す可能性"
 "があるほか、不正なソフトウエアを動作させることにもなります。"
 
-#: src/callbacks/keyring.h:433
+#: src/callbacks/keyring.h:437
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -294,22 +305,22 @@ msgstr ""
 "保護を解除してください。何も入力しないと、対象のファイルは廃棄されます。\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:440
+#: src/callbacks/keyring.h:444
 msgid "discard"
 msgstr "破棄"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:442
+#: src/callbacks/keyring.h:446
 msgid "Unblock using this file on your own risk."
 msgstr "自己責任でファイルの保護を解除する。"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:444
+#: src/callbacks/keyring.h:448
 msgid "Discard the file."
 msgstr "ファイルを破棄します。"
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:449
+#: src/callbacks/keyring.h:453
 msgid "Unblock or discard?"
 msgstr "保護を解除しますか？それとも破棄しますか？"
 
@@ -529,7 +540,7 @@ msgstr "エラー"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/info.cc:67 src/update.cc:798 src/search.cc:52 src/search.cc:359
+#: src/info.cc:67 src/update.cc:795 src/search.cc:52 src/search.cc:359
 #: src/search.cc:503 src/search.cc:564 src/locks.cc:110 src/utils/misc.cc:249
 msgid "Repository"
 msgstr "リポジトリ"
@@ -538,7 +549,7 @@ msgstr "リポジトリ"
 #. translators: Table column header
 #. translators: name (general header)
 #: src/info.cc:69 src/info.cc:459 src/info.cc:703 src/repos.cc:1070
-#: src/repos.cc:1209 src/repos.cc:2537 src/update.cc:801 src/Zypper.cc:5373
+#: src/repos.cc:1209 src/repos.cc:2537 src/update.cc:798 src/Zypper.cc:5373
 #: src/search.cc:44 src/search.cc:209 src/search.cc:357 src/search.cc:504
 #: src/search.cc:568 src/locks.cc:107 src/utils/misc.cc:250
 msgid "Name"
@@ -554,7 +565,7 @@ msgstr "バージョン"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:73 src/update.cc:807 src/search.cc:50 src/search.cc:506
+#: src/info.cc:73 src/update.cc:804 src/search.cc:50 src/search.cc:506
 #: src/search.cc:570
 msgid "Arch"
 msgstr "アーキテクチャ"
@@ -683,7 +694,7 @@ msgstr "(何もありません)"
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:458 src/info.cc:702 src/update.cc:796 src/search.cc:42
+#: src/info.cc:458 src/info.cc:702 src/update.cc:793 src/search.cc:42
 #: src/search.cc:208 src/search.cc:356 src/search.cc:502 src/search.cc:563
 msgid "S"
 msgstr "S"
@@ -2813,7 +2824,7 @@ msgid "Updatestack"
 msgstr "更新スタック"
 
 #. translator: Table column header.
-#: src/update.cc:354 src/update.cc:716
+#: src/update.cc:354 src/update.cc:713
 msgid "Patches"
 msgstr "パッチ"
 
@@ -2831,70 +2842,66 @@ msgstr "ロック"
 msgid "Included categories"
 msgstr "補助カテゴリ"
 
-#: src/update.cc:603
-msgid "The following software management updates will be installed first:"
-msgstr "以下のソフトウエア管理の更新を先にインストールします:"
-
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:606
+#: src/update.cc:603
 msgid "Needed software management updates will be installed first:"
 msgstr "必要なソフトウエア管理の更新を先にインストールします:"
 
-#: src/update.cc:614 src/update.cc:854
+#: src/update.cc:611 src/update.cc:851
 msgid "No updates found."
 msgstr "更新が見つかりません。"
 
 #. translator: Table headline
-#: src/update.cc:621
+#: src/update.cc:618
 msgid "The following updates are also available:"
 msgstr "以下のソフトウエア更新も利用できます:"
 
-#: src/update.cc:714
+#: src/update.cc:711
 msgid "Package updates"
 msgstr "パッケージの更新"
 
-#: src/update.cc:718
+#: src/update.cc:715
 msgid "Pattern updates"
 msgstr "パターンの更新"
 
-#: src/update.cc:720
+#: src/update.cc:717
 msgid "Product updates"
 msgstr "製品の更新"
 
-#: src/update.cc:806
+#: src/update.cc:803
 msgid "Current Version"
 msgstr "現在のバージョン"
 
-#: src/update.cc:807
+#: src/update.cc:804
 msgid "Available Version"
 msgstr "利用可能なバージョン"
 
-#: src/update.cc:969
+#: src/update.cc:966
 msgid "No matching issues found."
 msgstr "該当する発信がありません。"
 
-#: src/update.cc:977
+#: src/update.cc:974
 msgid "The following matches in issue numbers have been found:"
 msgstr "発信番号に該当する以下のものが見つかりました:"
 
-#: src/update.cc:987
+#: src/update.cc:984
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "以下のパッチの説明に該当するものが見つかりました:"
 
-#: src/update.cc:1054
+#: src/update.cc:1051
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Bugzilla発信番号 %s に対する修正は見つからなかったか、もしくは不要なもので"
 "す。"
 
-#: src/update.cc:1056
+#: src/update.cc:1053
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "CVE発信番号 %s に対する修正は見つからなかったか、または不要です。"
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1059
+#: src/update.cc:1056
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -2925,12 +2932,16 @@ msgstr "'%s' の省略形です。"
 
 #: src/Zypper.cc:86
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "GPG チェックを有効にするが、リポジトリのメタデータについては未署名を許可する。"
+msgstr ""
+"GPG チェックを有効にするが、リポジトリのメタデータについては未署名を許可す"
+"る。"
 
 #: src/Zypper.cc:87
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "GPG チェックを有効にするが、このリポジトリからのものについては未署名のパッケージのインストールを許可する。"
+msgstr ""
+"GPG チェックを有効にするが、このリポジトリからのものについては未署名のパッ"
+"ケージのインストールを許可する。"
 
 #: src/Zypper.cc:88
 msgid "Disable GPG check for this repository."
@@ -2940,7 +2951,9 @@ msgstr "このリポジトリに対して、 GPG チェックを無効にする�
 msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
-msgstr "/etc/zypp/zypp.conf に設定されている GPG チェックのグローバル設定を使用する。これが既定値です。"
+msgstr ""
+"/etc/zypp/zypp.conf に設定されている GPG チェックのグローバル設定を使用する。"
+"これが既定値です。"
 
 #: src/Zypper.cc:105
 msgid "Create a solver test case for debugging."
@@ -6520,6 +6533,9 @@ msgstr "利用可能なダウンロードモード:%s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "オプション '%s' により '%s' を上書きします。"
+
+#~ msgid "The following software management updates will be installed first:"
+#~ msgstr "以下のソフトウエア管理の更新を先にインストールします:"
 
 #~ msgid "Signature verification failed for file '%s'."
 #~ msgstr "ファイル '%s' に対する署名検証が失敗しました。"

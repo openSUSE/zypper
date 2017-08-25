@@ -17,11 +17,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-11 14:52+0200\n"
+"POT-Creation-Date: 2017-08-25 12:49+0200\n"
 "PO-Revision-Date: 2017-08-20 17:43+0000\n"
 "Last-Translator: jc sl <trcs@gmx.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
-"\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,62 +89,66 @@ msgstr "Clave creada:"
 msgid "Key Expires:"
 msgstr "La clave caduca:"
 
-#: src/callbacks/keyring.h:85
+#: src/callbacks/keyring.h:86
+msgid "Subkey:"
+msgstr ""
+
+#: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
 msgstr "Nombre de rpm:"
 
-#: src/callbacks/keyring.h:111
+#: src/callbacks/keyring.h:113
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "El archivo de firma de clave gpg %1% ha caducado."
 
-#: src/callbacks/keyring.h:117
+#: src/callbacks/keyring.h:119
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] "La clave de firma gpg '%1%' expirará en %2% día."
 msgstr[1] "La clave de firma gpg '%1%' expirará en %2% días."
 
-#: src/callbacks/keyring.h:140
+#: src/callbacks/keyring.h:142
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "Aceptando un archivo sin firma %s."
 
-#: src/callbacks/keyring.h:144
+#: src/callbacks/keyring.h:146
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "Aceptando un archivo sin firma %s del repositorio %s."
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:154
+#: src/callbacks/keyring.h:156
 #, boost-format
 msgid "File '%1%' is unsigned."
 msgstr "El archivo '%1%' no está firmado."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:157
+#: src/callbacks/keyring.h:159
 #, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
 msgstr "El archivo '%1%' del repositorio '%2%' no está firmado."
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:174
+#: src/callbacks/keyring.h:176
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "El archivo %s no está firmado. ¿Desea continuar?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:178
+#: src/callbacks/keyring.h:180
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "El archivo %s del repositorio %s no está firmado. ¿Desea continuar?"
 
-#: src/callbacks/keyring.h:201
+#: src/callbacks/keyring.h:203
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr "Aceptando el archivo %s firmado con una clave desconocida %s."
 
-#: src/callbacks/keyring.h:205
+#: src/callbacks/keyring.h:207
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
@@ -153,13 +157,13 @@ msgstr ""
 "%s."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:214
+#: src/callbacks/keyring.h:216
 #, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
 msgstr "El archivo '%1%' está firmado con una clave desconocida '%2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:217
+#: src/callbacks/keyring.h:219
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
@@ -167,14 +171,14 @@ msgstr ""
 "desconocida '%2%'."
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:233
+#: src/callbacks/keyring.h:236
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
 "El archivo %s está firmado con una clave desconocida %s. ¿Desea continuar?"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:237
+#: src/callbacks/keyring.h:240
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
@@ -182,20 +186,20 @@ msgstr ""
 "El archivo %s del repositorio %s está firmado con una clave desconocida %s. "
 "¿Desea continuar?"
 
-#: src/callbacks/keyring.h:253
+#: src/callbacks/keyring.h:256
 msgid "Automatically importing the following key:"
 msgstr "Importación automática de la siguiente clave:"
 
-#: src/callbacks/keyring.h:255
+#: src/callbacks/keyring.h:258
 msgid "Automatically trusting the following key:"
 msgstr "Confiando automáticamente en la siguiente clave:"
 
-#: src/callbacks/keyring.h:257
+#: src/callbacks/keyring.h:260
 msgid "New repository or package signing key received:"
 msgstr "Se ha recibido una nueva clave de firma para el repositorio o paquete:"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:279
+#: src/callbacks/keyring.h:282
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
 "¿Desea rechazar la clave, confiar en ella temporalmente o confiar en ella "
@@ -206,36 +210,36 @@ msgstr ""
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:291
+#: src/callbacks/keyring.h:294
 msgid "r/t/a/"
 msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:294
+#: src/callbacks/keyring.h:297
 msgid "r/t"
 msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:296
+#: src/callbacks/keyring.h:299
 msgid "Don't trust the key."
 msgstr "No confiar en la clave."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:298
+#: src/callbacks/keyring.h:301
 msgid "Trust the key temporarily."
 msgstr "Confiar en la clave temporalmente."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:301
+#: src/callbacks/keyring.h:304
 msgid "Trust the key and import it into trusted keyring."
 msgstr "Confiar en la clave e importarla en el anillo de claves de confianza."
 
-#: src/callbacks/keyring.h:337
+#: src/callbacks/keyring.h:340
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "Ignorando el error de verificación de la firma del archivo %s."
 
-#: src/callbacks/keyring.h:340
+#: src/callbacks/keyring.h:343
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
@@ -243,33 +247,33 @@ msgstr ""
 "Ignorando el error de verificación de la firma del archivo %s del "
 "repositorio %s."
 
-#: src/callbacks/keyring.h:346
+#: src/callbacks/keyring.h:349
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr "Compruebe que no se debe a cambios malintencionados en el archivo."
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:356
+#: src/callbacks/keyring.h:359
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "Error de verificación de la firma del archivo %1%."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:359
+#: src/callbacks/keyring.h:362
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "Error de verificación de la firma del archivo %1% del repositorio %2%."
 
-#: src/callbacks/keyring.h:388
+#: src/callbacks/keyring.h:392
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "No hay resumen para el archivo %s."
 
-#: src/callbacks/keyring.h:396
+#: src/callbacks/keyring.h:400
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "Resumen desconocido %s para el archivo %s."
 
-#: src/callbacks/keyring.h:413
+#: src/callbacks/keyring.h:417
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -284,7 +288,7 @@ msgstr ""
 "  Se esperaba %3%\n"
 "  pero se ha obtenido %4%\n"
 
-#: src/callbacks/keyring.h:425
+#: src/callbacks/keyring.h:429
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -293,7 +297,7 @@ msgstr ""
 "en el sistema y, en casos extremos, incluso que el sistema se vea "
 "comprometido."
 
-#: src/callbacks/keyring.h:433
+#: src/callbacks/keyring.h:437
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -311,22 +315,22 @@ msgstr ""
 "la entrada vacía, el archivo se descartará.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:440
+#: src/callbacks/keyring.h:444
 msgid "discard"
 msgstr "descartar"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:442
+#: src/callbacks/keyring.h:446
 msgid "Unblock using this file on your own risk."
 msgstr "Desbloquear el uso de este archivo bajo su propia responsabilidad."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:444
+#: src/callbacks/keyring.h:448
 msgid "Discard the file."
 msgstr "Descartar el archivo."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:449
+#: src/callbacks/keyring.h:453
 msgid "Unblock or discard?"
 msgstr "¿Desbloquear o descartar?"
 
@@ -547,7 +551,7 @@ msgstr "Error"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/info.cc:67 src/update.cc:798 src/search.cc:52 src/search.cc:359
+#: src/info.cc:67 src/update.cc:795 src/search.cc:52 src/search.cc:359
 #: src/search.cc:503 src/search.cc:564 src/locks.cc:110 src/utils/misc.cc:249
 msgid "Repository"
 msgstr "Repositorio"
@@ -556,7 +560,7 @@ msgstr "Repositorio"
 #. translators: Table column header
 #. translators: name (general header)
 #: src/info.cc:69 src/info.cc:459 src/info.cc:703 src/repos.cc:1070
-#: src/repos.cc:1209 src/repos.cc:2537 src/update.cc:801 src/Zypper.cc:5373
+#: src/repos.cc:1209 src/repos.cc:2537 src/update.cc:798 src/Zypper.cc:5373
 #: src/search.cc:44 src/search.cc:209 src/search.cc:357 src/search.cc:504
 #: src/search.cc:568 src/locks.cc:107 src/utils/misc.cc:250
 msgid "Name"
@@ -572,7 +576,7 @@ msgstr "Versión"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:73 src/update.cc:807 src/search.cc:50 src/search.cc:506
+#: src/info.cc:73 src/update.cc:804 src/search.cc:50 src/search.cc:506
 #: src/search.cc:570
 msgid "Arch"
 msgstr "Arquitectura"
@@ -703,7 +707,7 @@ msgstr "(vacío)"
 #. adapting OutXML::searchResult !
 #.
 #. translators: S for installed Status
-#: src/info.cc:458 src/info.cc:702 src/update.cc:796 src/search.cc:42
+#: src/info.cc:458 src/info.cc:702 src/update.cc:793 src/search.cc:42
 #: src/search.cc:208 src/search.cc:356 src/search.cc:502 src/search.cc:563
 msgid "S"
 msgstr "E"
@@ -2956,7 +2960,7 @@ msgid "Updatestack"
 msgstr "Pila de actualización"
 
 #. translator: Table column header.
-#: src/update.cc:354 src/update.cc:716
+#: src/update.cc:354 src/update.cc:713
 msgid "Patches"
 msgstr "Parches"
 
@@ -2974,69 +2978,64 @@ msgstr "Bloqueadas"
 msgid "Included categories"
 msgstr "Categorías incluidas"
 
-#: src/update.cc:603
-msgid "The following software management updates will be installed first:"
-msgstr ""
-"Primero se instalarán las siguientes actualizaciones de gestión de software:"
-
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:606
+#: src/update.cc:603
 msgid "Needed software management updates will be installed first:"
 msgstr ""
 "Primero se instalarán las actualizaciones de gestión de software necesarias:"
 
-#: src/update.cc:614 src/update.cc:854
+#: src/update.cc:611 src/update.cc:851
 msgid "No updates found."
 msgstr "No se ha encontrado ninguna actualización."
 
 #. translator: Table headline
-#: src/update.cc:621
+#: src/update.cc:618
 msgid "The following updates are also available:"
 msgstr "Las siguientes actualizaciones también están disponibles:"
 
-#: src/update.cc:714
+#: src/update.cc:711
 msgid "Package updates"
 msgstr "Actualizaciones de paquetes"
 
 # menuentries/menuentry_security.ycp:37
-#: src/update.cc:718
+#: src/update.cc:715
 msgid "Pattern updates"
 msgstr "Actualizaciones de patrones"
 
-#: src/update.cc:720
+#: src/update.cc:717
 msgid "Product updates"
 msgstr "Actualizaciones del producto"
 
-#: src/update.cc:806
+#: src/update.cc:803
 msgid "Current Version"
 msgstr "Versión actual"
 
-#: src/update.cc:807
+#: src/update.cc:804
 msgid "Available Version"
 msgstr "Versión disponible"
 
-#: src/update.cc:969
+#: src/update.cc:966
 msgid "No matching issues found."
 msgstr "No se encuentran problemas que coincidan."
 
-#: src/update.cc:977
+#: src/update.cc:974
 msgid "The following matches in issue numbers have been found:"
 msgstr "Se han encontrado las siguientes coincidencias por número de problema:"
 
-#: src/update.cc:987
+#: src/update.cc:984
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 "Se han encontrado coincidencias en las descripciones de los siguientes "
 "parches:"
 
-#: src/update.cc:1054
+#: src/update.cc:1051
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "No se ha encontrado una solución para el problema de bugzilla número %s o "
 "puede que no sea necesaria."
 
-#: src/update.cc:1056
+#: src/update.cc:1053
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
@@ -3044,7 +3043,7 @@ msgstr ""
 "que no sea necesaria."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1059
+#: src/update.cc:1056
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -3096,8 +3095,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Usar la configuración de comprobación GPG global definida en /etc/zypp/"
-"zypp.conf.  Este es el valor por omisión."
+"Usar la configuración de comprobación GPG global definida en /etc/zypp/zypp."
+"conf.  Este es el valor por omisión."
 
 #: src/Zypper.cc:105
 msgid "Create a solver test case for debugging."
@@ -6791,6 +6790,11 @@ msgstr "Modos de descarga disponibles: %s"
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "La opción %s anula %s."
+
+#~ msgid "The following software management updates will be installed first:"
+#~ msgstr ""
+#~ "Primero se instalarán las siguientes actualizaciones de gestión de "
+#~ "software:"
 
 #~ msgid "Signature verification failed for file '%s'."
 #~ msgstr "Error de verificación de la firma del archivo %s."
