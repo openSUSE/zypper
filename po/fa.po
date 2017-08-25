@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opensuse-i 18n\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 16:24+0200\n"
+"POT-Creation-Date: 2017-08-25 12:50+0200\n"
 "PO-Revision-Date: 2016-12-15 09:15+0000\n"
 "Last-Translator: hayyan rostami <hayyan71@yahoo.com>\n"
 "Language-Team: Persian <https://l10n.opensuse.org/projects/libzypp/master/fa/"
@@ -179,42 +179,42 @@ msgstr "درایو CDROM نیست"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:851 zypp/target/rpm/RpmDb.cc:2071
-#: zypp/target/rpm/RpmDb.cc:2217
+#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
+#: zypp/target/rpm/RpmDb.cc:2219
 msgid "RPM failed: "
 msgstr "RPM شکست خورد: "
 
 #. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1127
+#: zypp/target/rpm/RpmDb.cc:1129
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "ناموفق در وارد کردن کلید عمومی از پرونده ی %s: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1198
+#: zypp/target/rpm/RpmDb.cc:1200
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
 msgstr "ناموفق در حذف کلید عمومی %s: %s"
 
-#: zypp/target/rpm/RpmDb.cc:1576
+#: zypp/target/rpm/RpmDb.cc:1578
 msgid "Package is not signed!"
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1876
+#: zypp/target/rpm/RpmDb.cc:1878
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "پرونده های پیکربندی تغییر کرده برای %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2052
+#: zypp/target/rpm/RpmDb.cc:2054
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ذخیره شد %s به عنوان %s، اما تعیین اختلاف امکانپذیر نبود"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
+#: zypp/target/rpm/RpmDb.cc:2056
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -224,13 +224,13 @@ msgstr ""
 "اینها 25 خط اولیه ی اختلاف ها هستند:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2057
+#: zypp/target/rpm/RpmDb.cc:2059
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ساخته شد %s به عنوان %s، اما تعیین اختلاف امکانپذیر نبود"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
+#: zypp/target/rpm/RpmDb.cc:2061
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -241,47 +241,47 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2084 zypp/target/rpm/RpmDb.cc:2230
+#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
 msgid "Additional rpm output"
 msgstr "خروجی rpm اضافی"
 
-#: zypp/target/rpm/RpmDb.cc:2372
+#: zypp/target/rpm/RpmDb.cc:2374
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "پشتیبان ساخته شد %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2393
+#: zypp/target/rpm/RpmDb.cc:2395
 msgid "Signature is OK"
 msgstr "امضا خوب است"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
+#: zypp/target/rpm/RpmDb.cc:2397
 msgid "Unknown type of signature"
 msgstr "نوع امضا ناشناخته است"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
+#: zypp/target/rpm/RpmDb.cc:2399
 msgid "Signature does not verify"
 msgstr "امضا قابل تایید نیست"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
+#: zypp/target/rpm/RpmDb.cc:2401
 msgid "Signature is OK, but key is not trusted"
 msgstr "امضا خوب است، اما کلید اعتمادسازی نشده است"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
+#: zypp/target/rpm/RpmDb.cc:2403
 msgid "Signatures public key is not available"
 msgstr "کلید عمومی امضاها موجود نیست"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
+#: zypp/target/rpm/RpmDb.cc:2405
 msgid "File does not exist or signature can't be checked"
 msgstr "پرونده موجود نیست و یا امضاها قابل بررسی نیستند"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
+#: zypp/target/rpm/RpmDb.cc:2407
 msgid "File is unsigned"
 msgstr ""
 
@@ -545,22 +545,40 @@ msgid "Command exited with unknown error."
 msgstr "دستور با خطای ناشناخته خارج شد."
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:113
+#: zypp/PublicKey.cc:60
+#, fuzzy
+msgid "does not expire"
+msgstr "(منقضی نمیشود)"
+
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
 msgid "(does not expire)"
 msgstr "(منقضی نمیشود)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:122
+#: zypp/PublicKey.cc:88
 msgid "(EXPIRED)"
 msgstr "(منقضی شده است)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:126
+#: zypp/PublicKey.cc:92
 msgid "(expires within 24h)"
 msgstr "(در 24 ساعت منقضی میشود)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:130
+#: zypp/PublicKey.cc:96
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -4230,16 +4248,16 @@ msgid "Zuni"
 msgstr "زونی"
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:505
+#: zypp/KeyRing.cc:512
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "برای وارد کردن کلید ناموجود %s در دسته کلید %s تلاش شد"
 
-#: zypp/KeyRing.cc:549
+#: zypp/KeyRing.cc:556
 msgid "Failed to delete key."
 msgstr "در حذف کلید ناموفق بود."
 
-#: zypp/KeyRing.cc:558
+#: zypp/KeyRing.cc:565
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "پرونده ی امضای %s  یافت نشد"
@@ -4257,12 +4275,12 @@ msgstr "هیچ آدرسی در مخزن نیست."
 msgid "Service plugin does not support changing an attribute."
 msgstr "افزونه ی سرویس از تغییر صفت پشتیبانی نمیکند."
 
-#: zypp/repo/PackageProvider.cc:225
+#: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
 msgstr "تایید امضا ناموفق بود"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:377
+#: zypp/repo/PackageProvider.cc:388
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4272,17 +4290,17 @@ msgstr ""
 "امتحان کنید؟"
 
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:402
+#: zypp/repo/PackageProvider.cc:413
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr ""
 "در مهیا کردن بسته ی %s ناموفق بود. آیا میخواهید دریافت را مجددا امتحان کنید؟"
 
-#: zypp/repo/PackageProvider.cc:528
+#: zypp/repo/PackageProvider.cc:549
 msgid "applydeltarpm check failed."
 msgstr "بررسی applydeltarpm ناموفق بود."
 
-#: zypp/repo/PackageProvider.cc:538
+#: zypp/repo/PackageProvider.cc:559
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm ناموفق بود."
 
@@ -4550,7 +4568,7 @@ msgstr "عبارت عادی نامعتبر '%s': regcompبازگرداند %d"
 msgid "Invalid regular expression '%s'"
 msgstr "عبارت عادی نامعتبر '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:243
+#: zypp/misc/CheckAccessDeleted.cc:283
 msgid "Please install package 'lsof' first."
 msgstr "لطفا ابتدا بسته ی 'lsof' را نصب کنید."
 

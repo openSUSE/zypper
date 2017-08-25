@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 16:24+0200\n"
+"POT-Creation-Date: 2017-08-25 12:50+0200\n"
 "PO-Revision-Date: 2017-06-02 18:02+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -186,42 +186,42 @@ msgstr "Tai ne CD nuskaitymo įrenginys"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:851 zypp/target/rpm/RpmDb.cc:2071
-#: zypp/target/rpm/RpmDb.cc:2217
+#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
+#: zypp/target/rpm/RpmDb.cc:2219
 msgid "RPM failed: "
 msgstr "RPM klaida:"
 
 #. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1127
+#: zypp/target/rpm/RpmDb.cc:1129
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Nepavyko įkelti viešojo rakto iš rinkmenos %s: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1198
+#: zypp/target/rpm/RpmDb.cc:1200
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Nepavyko pašalinti viešojo rakto %s: %s"
 
-#: zypp/target/rpm/RpmDb.cc:1576
+#: zypp/target/rpm/RpmDb.cc:1578
 msgid "Package is not signed!"
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1876
+#: zypp/target/rpm/RpmDb.cc:1878
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Pakeistos %s konfigūracijos rinkmenos:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2052
+#: zypp/target/rpm/RpmDb.cc:2054
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm išsaugojo %s kaip %s, bet neįmanoma nustatyti skirtumo"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
+#: zypp/target/rpm/RpmDb.cc:2056
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -231,13 +231,13 @@ msgstr ""
 "Pateikiamos pirmosios 25 skirtumų eilutės:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2057
+#: zypp/target/rpm/RpmDb.cc:2059
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm sukūrė %s kaip %s, bet neįmanoma nustatyti skirtumo"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
+#: zypp/target/rpm/RpmDb.cc:2061
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -248,47 +248,47 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2084 zypp/target/rpm/RpmDb.cc:2230
+#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
 msgid "Additional rpm output"
 msgstr "Papildoma rpm išvestis"
 
-#: zypp/target/rpm/RpmDb.cc:2372
+#: zypp/target/rpm/RpmDb.cc:2374
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "padaryta %s atsarginė kopija"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2393
+#: zypp/target/rpm/RpmDb.cc:2395
 msgid "Signature is OK"
 msgstr "Parašas geras"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
+#: zypp/target/rpm/RpmDb.cc:2397
 msgid "Unknown type of signature"
 msgstr "Nežinomo tipo parašas"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
+#: zypp/target/rpm/RpmDb.cc:2399
 msgid "Signature does not verify"
 msgstr "Parašas nepatikrinamas. "
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
+#: zypp/target/rpm/RpmDb.cc:2401
 msgid "Signature is OK, but key is not trusted"
 msgstr "Parašas geras, bet raktas nepatikimas"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
+#: zypp/target/rpm/RpmDb.cc:2403
 msgid "Signatures public key is not available"
 msgstr "Paašo viešasis raktas neprieinamas"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
+#: zypp/target/rpm/RpmDb.cc:2405
 msgid "File does not exist or signature can't be checked"
 msgstr "Nėra rinkmenos arba negalima patikrinti parašo"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
+#: zypp/target/rpm/RpmDb.cc:2407
 msgid "File is unsigned"
 msgstr ""
 
@@ -554,22 +554,40 @@ msgid "Command exited with unknown error."
 msgstr "Komanda pasibaigė su nežinoma klaida."
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:113
+#: zypp/PublicKey.cc:60
+#, fuzzy
+msgid "does not expire"
+msgstr "(galiojimas nepasibaigia)"
+
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
 msgid "(does not expire)"
 msgstr "(galiojimas nepasibaigia)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:122
+#: zypp/PublicKey.cc:88
 msgid "(EXPIRED)"
 msgstr "(NEBEGALIOJA)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:126
+#: zypp/PublicKey.cc:92
 msgid "(expires within 24h)"
 msgstr "(baigsis per 24 valandas)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:130
+#: zypp/PublicKey.cc:96
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -4334,16 +4352,16 @@ msgid "Zuni"
 msgstr "Zuni"
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:505
+#: zypp/KeyRing.cc:512
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Mėginta importuoti neegzistuojantį raktą %s į raktinę %s"
 
-#: zypp/KeyRing.cc:549
+#: zypp/KeyRing.cc:556
 msgid "Failed to delete key."
 msgstr "Rakto nepavyko pašalinti."
 
-#: zypp/KeyRing.cc:558
+#: zypp/KeyRing.cc:565
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Parašo rinkmena %s nerasta"
@@ -4361,12 +4379,12 @@ msgstr "Saugykloje nėra url."
 msgid "Service plugin does not support changing an attribute."
 msgstr "Paslaugos papildinys nepalaiko atributų keitimo."
 
-#: zypp/repo/PackageProvider.cc:225
+#: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
 msgstr "Nepavyko patikrinti parašo"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:377
+#: zypp/repo/PackageProvider.cc:388
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4376,16 +4394,16 @@ msgstr ""
 "naujo?"
 
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:402
+#: zypp/repo/PackageProvider.cc:413
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr "Nepavyko pateikti paketo %s. Ar norėtumėte bandyti jį gauti iš naujo?"
 
-#: zypp/repo/PackageProvider.cc:528
+#: zypp/repo/PackageProvider.cc:549
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm patikrinti nepavyko."
 
-#: zypp/repo/PackageProvider.cc:538
+#: zypp/repo/PackageProvider.cc:559
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm nepavyko."
 
@@ -4653,7 +4671,7 @@ msgstr "Netinkamas reguliarusis reiškinys „%s“: regcomp grąžino %d"
 msgid "Invalid regular expression '%s'"
 msgstr "Netinkamas reguliarusis reiškinys „%s“"
 
-#: zypp/misc/CheckAccessDeleted.cc:243
+#: zypp/misc/CheckAccessDeleted.cc:283
 msgid "Please install package 'lsof' first."
 msgstr "Pirmiausia įdiekite „lsof“ paketą."
 

@@ -16,11 +16,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 16:24+0200\n"
+"POT-Creation-Date: 2017-08-25 12:50+0200\n"
 "PO-Revision-Date: 2017-08-04 17:45+0000\n"
 "Last-Translator: jc sl <trcs@gmx.com>\n"
-"Language-Team: Spanish "
-"<https://l10n.opensuse.org/projects/libzypp/master/es/>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -198,24 +198,24 @@ msgstr "No es una unidad de CD-ROM"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:851 zypp/target/rpm/RpmDb.cc:2071
-#: zypp/target/rpm/RpmDb.cc:2217
+#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
+#: zypp/target/rpm/RpmDb.cc:2219
 msgid "RPM failed: "
 msgstr "RPM fallido: "
 
 #. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1127
+#: zypp/target/rpm/RpmDb.cc:1129
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Error al importar la clave pública desde el archivo %s: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1198
+#: zypp/target/rpm/RpmDb.cc:1200
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Error al eliminar la clave pública %s: %s"
 
-#: zypp/target/rpm/RpmDb.cc:1576
+#: zypp/target/rpm/RpmDb.cc:1578
 msgid "Package is not signed!"
 msgstr "¡El paquete no está firmado!"
 
@@ -226,20 +226,20 @@ msgstr "¡El paquete no está firmado!"
 # modules/Mail.ycp:563
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1876
+#: zypp/target/rpm/RpmDb.cc:1878
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Se han modificado los archivos de configuración para %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2052
+#: zypp/target/rpm/RpmDb.cc:2054
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 "rpm ha guardado %s como %s, pero no es posible determinar la diferencia"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
+#: zypp/target/rpm/RpmDb.cc:2056
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -249,13 +249,13 @@ msgstr ""
 "A continuación se presentan las primeras 25 líneas de diferencia:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2057
+#: zypp/target/rpm/RpmDb.cc:2059
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ha creado %s como %s, pero no es posible determinar la diferencia"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
+#: zypp/target/rpm/RpmDb.cc:2061
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -266,49 +266,49 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2084 zypp/target/rpm/RpmDb.cc:2230
+#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
 msgid "Additional rpm output"
 msgstr "Salida de rpm adicional"
 
 # include/nis_server/io.ycp:582
 # include/backup/ui.ycp:1286
-#: zypp/target/rpm/RpmDb.cc:2372
+#: zypp/target/rpm/RpmDb.cc:2374
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "creada copia de seguridad %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2393
+#: zypp/target/rpm/RpmDb.cc:2395
 msgid "Signature is OK"
 msgstr "La firma es correcta"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
+#: zypp/target/rpm/RpmDb.cc:2397
 msgid "Unknown type of signature"
 msgstr "Tipo de firma desconocido"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
+#: zypp/target/rpm/RpmDb.cc:2399
 msgid "Signature does not verify"
 msgstr "La firma no cumple la verificación"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
+#: zypp/target/rpm/RpmDb.cc:2401
 msgid "Signature is OK, but key is not trusted"
 msgstr "La firma es correcta, pero la clave no es de confianza"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
+#: zypp/target/rpm/RpmDb.cc:2403
 msgid "Signatures public key is not available"
 msgstr "La clave pública de firma no está disponible"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
+#: zypp/target/rpm/RpmDb.cc:2405
 msgid "File does not exist or signature can't be checked"
 msgstr "El archivo no existe o no es posible comprobar la firma"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
+#: zypp/target/rpm/RpmDb.cc:2407
 msgid "File is unsigned"
 msgstr "El fichero no está firmado"
 
@@ -576,22 +576,40 @@ msgid "Command exited with unknown error."
 msgstr "El comando ha terminado con un error desconocido."
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:113
+#: zypp/PublicKey.cc:60
+#, fuzzy
+msgid "does not expire"
+msgstr "(no caduca)"
+
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
 msgid "(does not expire)"
 msgstr "(no caduca)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:122
+#: zypp/PublicKey.cc:88
 msgid "(EXPIRED)"
 msgstr "(CADUCADO)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:126
+#: zypp/PublicKey.cc:92
 msgid "(expires within 24h)"
 msgstr "(caduca en las próximas 24 horas)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:130
+#: zypp/PublicKey.cc:96
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -4270,17 +4288,17 @@ msgid "Zuni"
 msgstr "Zuñi"
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:505
+#: zypp/KeyRing.cc:512
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr ""
 "Se intentó importar una clave que no existe (%s) al almacén de claves %s"
 
-#: zypp/KeyRing.cc:549
+#: zypp/KeyRing.cc:556
 msgid "Failed to delete key."
 msgstr "Error al suprimir la clave."
 
-#: zypp/KeyRing.cc:558
+#: zypp/KeyRing.cc:565
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "No se encuentra el archivo de firma %s"
@@ -4298,12 +4316,12 @@ msgstr "No hay ninguna URL en el repositorio."
 msgid "Service plugin does not support changing an attribute."
 msgstr "El complemento del servicio no admite el cambio de un atributo."
 
-#: zypp/repo/PackageProvider.cc:225
+#: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
 msgstr "Error de verificación de firma"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:377
+#: zypp/repo/PackageProvider.cc:388
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4313,18 +4331,18 @@ msgstr ""
 "volver a intentar la recuperación?"
 
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:402
+#: zypp/repo/PackageProvider.cc:413
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr ""
 "Error al proporcionar el paquete %s. ¿Desea volver a intentar la "
 "recuperación?"
 
-#: zypp/repo/PackageProvider.cc:528
+#: zypp/repo/PackageProvider.cc:549
 msgid "applydeltarpm check failed."
 msgstr "Error al comprobar applydeltarpm."
 
-#: zypp/repo/PackageProvider.cc:538
+#: zypp/repo/PackageProvider.cc:559
 msgid "applydeltarpm failed."
 msgstr "Error de applydeltarpm."
 
@@ -4599,7 +4617,7 @@ msgstr "Expresión regular %s no válida: regcomp ha devuelto %d"
 msgid "Invalid regular expression '%s'"
 msgstr "Expresión regular '%s' no válida"
 
-#: zypp/misc/CheckAccessDeleted.cc:243
+#: zypp/misc/CheckAccessDeleted.cc:283
 msgid "Please install package 'lsof' first."
 msgstr "Instale primero el paquete lsof."
 

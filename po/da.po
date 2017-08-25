@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 16:24+0200\n"
+"POT-Creation-Date: 2017-08-25 12:50+0200\n"
 "PO-Revision-Date: 2017-07-31 22:32+0000\n"
 "Last-Translator: scootergrisen\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
-"\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/"
+">\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -181,42 +181,42 @@ msgstr "Ikke et cd-rom-drev"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:851 zypp/target/rpm/RpmDb.cc:2071
-#: zypp/target/rpm/RpmDb.cc:2217
+#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
+#: zypp/target/rpm/RpmDb.cc:2219
 msgid "RPM failed: "
 msgstr "RPM fejlede: "
 
 #. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1127
+#: zypp/target/rpm/RpmDb.cc:1129
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Import af offentlig nøgle fra filen %s fejlede: %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1198
+#: zypp/target/rpm/RpmDb.cc:1200
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Fjernelse af den offentlige nøgle %s fejlede: %s"
 
-#: zypp/target/rpm/RpmDb.cc:1576
+#: zypp/target/rpm/RpmDb.cc:1578
 msgid "Package is not signed!"
 msgstr "Pakke er ikke signeret!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1876
+#: zypp/target/rpm/RpmDb.cc:1878
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Konfigurationsfiler er ændret for %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2052
+#: zypp/target/rpm/RpmDb.cc:2054
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm gemte %s som %s, men det var umuligt at bestemme forskellen"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
+#: zypp/target/rpm/RpmDb.cc:2056
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -226,13 +226,13 @@ msgstr ""
 "Her er de første 25 linjer af forskelle:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2057
+#: zypp/target/rpm/RpmDb.cc:2059
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm oprettede %s som %s, men det var umuligt at bestemme forskellen"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
+#: zypp/target/rpm/RpmDb.cc:2061
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -243,47 +243,47 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2084 zypp/target/rpm/RpmDb.cc:2230
+#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
 msgid "Additional rpm output"
 msgstr "Yderligere rpm-output"
 
-#: zypp/target/rpm/RpmDb.cc:2372
+#: zypp/target/rpm/RpmDb.cc:2374
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "backup %s blev oprettet"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2393
+#: zypp/target/rpm/RpmDb.cc:2395
 msgid "Signature is OK"
 msgstr "Signatur er OK"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
+#: zypp/target/rpm/RpmDb.cc:2397
 msgid "Unknown type of signature"
 msgstr "Ukendt signaturtype"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
+#: zypp/target/rpm/RpmDb.cc:2399
 msgid "Signature does not verify"
 msgstr "Signaturen verificerer ikke"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
+#: zypp/target/rpm/RpmDb.cc:2401
 msgid "Signature is OK, but key is not trusted"
 msgstr "Signaturen er OK, men nøglen er ikke betroet"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
+#: zypp/target/rpm/RpmDb.cc:2403
 msgid "Signatures public key is not available"
 msgstr "Signaturens offentlige nøgle er ikke tilgængelig"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
+#: zypp/target/rpm/RpmDb.cc:2405
 msgid "File does not exist or signature can't be checked"
 msgstr "Filen findes ikke eller signaturen kan ikke tjekkes"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
+#: zypp/target/rpm/RpmDb.cc:2407
 msgid "File is unsigned"
 msgstr "Filen er uden signatur"
 
@@ -547,22 +547,40 @@ msgid "Command exited with unknown error."
 msgstr "Kommando afsluttet med ukendt fejl."
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:113
+#: zypp/PublicKey.cc:60
+#, fuzzy
+msgid "does not expire"
+msgstr "(udløber ikke)"
+
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
 msgid "(does not expire)"
 msgstr "(udløber ikke)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:122
+#: zypp/PublicKey.cc:88
 msgid "(EXPIRED)"
 msgstr "(UDLØBET)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:126
+#: zypp/PublicKey.cc:92
 msgid "(expires within 24h)"
 msgstr "(udløber indenfor 24 t.)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:130
+#: zypp/PublicKey.cc:96
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -4232,16 +4250,16 @@ msgid "Zuni"
 msgstr "Zuni"
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:505
+#: zypp/KeyRing.cc:512
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Prøvede at importere ikke-eksisterende nøgle %s ind i nøgleringen %s"
 
-#: zypp/KeyRing.cc:549
+#: zypp/KeyRing.cc:556
 msgid "Failed to delete key."
 msgstr "Sletning af nøgle fejlede."
 
-#: zypp/KeyRing.cc:558
+#: zypp/KeyRing.cc:565
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Signaturfilen %s blev ikke fundet"
@@ -4259,12 +4277,12 @@ msgstr "Ingen URL i softwarekilden."
 msgid "Service plugin does not support changing an attribute."
 msgstr "Tjeneste-plugin understøtter ikke ændring af en attribut."
 
-#: zypp/repo/PackageProvider.cc:225
+#: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
 msgstr "Verificering af signatur mislykkedes"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:377
+#: zypp/repo/PackageProvider.cc:388
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4274,16 +4292,16 @@ msgstr ""
 "at hente den igen?"
 
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:402
+#: zypp/repo/PackageProvider.cc:413
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr "Kunne ikke levere pakken %s. Vil du prøve at hente den igen?"
 
-#: zypp/repo/PackageProvider.cc:528
+#: zypp/repo/PackageProvider.cc:549
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm-kontrol mislykkedes."
 
-#: zypp/repo/PackageProvider.cc:538
+#: zypp/repo/PackageProvider.cc:559
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm mislykkedes."
 
@@ -4551,7 +4569,7 @@ msgstr "Ugyldigt regulært udtryk '%s': Regcomp returnerede %d"
 msgid "Invalid regular expression '%s'"
 msgstr "Ugyldigt regulært udtryk '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:243
+#: zypp/misc/CheckAccessDeleted.cc:283
 msgid "Please install package 'lsof' first."
 msgstr "Installér pakken \"lsof\" først."
 

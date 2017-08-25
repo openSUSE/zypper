@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 16:24+0200\n"
+"POT-Creation-Date: 2017-08-25 12:50+0200\n"
 "PO-Revision-Date: 2017-04-18 02:48+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/"
@@ -184,43 +184,43 @@ msgstr "CD-ROM 드라이브가 아님"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:851 zypp/target/rpm/RpmDb.cc:2071
-#: zypp/target/rpm/RpmDb.cc:2217
+#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
+#: zypp/target/rpm/RpmDb.cc:2219
 msgid "RPM failed: "
 msgstr "RPM 실패: "
 
 #. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1127
+#: zypp/target/rpm/RpmDb.cc:1129
 #, c-format, boost-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "%s 파일에서 공용 키를 임포트하지 못했습니다. %s"
 
 #. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1198
+#: zypp/target/rpm/RpmDb.cc:1200
 #, c-format, boost-format
 msgid "Failed to remove public key %s: %s"
 msgstr "%s 공용 키를 제거하지 못했습니다. %s"
 
-#: zypp/target/rpm/RpmDb.cc:1576
+#: zypp/target/rpm/RpmDb.cc:1578
 msgid "Package is not signed!"
 msgstr ""
 
 #  progress stage
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1876
+#: zypp/target/rpm/RpmDb.cc:1878
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "%s에 대한 구성 파일을 변경함:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2052
+#: zypp/target/rpm/RpmDb.cc:2054
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "RPM은 %s을(를) %s(으)로 저장했지만, 차이점을 구분할 수 없습니다."
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
+#: zypp/target/rpm/RpmDb.cc:2056
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -230,13 +230,13 @@ msgstr ""
 "다음은 차이에 대한 처음 25개 행입니다.\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2057
+#: zypp/target/rpm/RpmDb.cc:2059
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "RPM은 %s을(를) %s(으)로 생성했지만, 차이점을 구분할 수 없습니다."
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
+#: zypp/target/rpm/RpmDb.cc:2061
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -248,47 +248,47 @@ msgstr ""
 #  dialog caption
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2084 zypp/target/rpm/RpmDb.cc:2230
+#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
 msgid "Additional rpm output"
 msgstr "추가 RPM 출력"
 
-#: zypp/target/rpm/RpmDb.cc:2372
+#: zypp/target/rpm/RpmDb.cc:2374
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "백업 %s을(를) 만들었음"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2393
+#: zypp/target/rpm/RpmDb.cc:2395
 msgid "Signature is OK"
 msgstr "서명 정상"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
+#: zypp/target/rpm/RpmDb.cc:2397
 msgid "Unknown type of signature"
 msgstr "알 수 없는 서명 유형"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
+#: zypp/target/rpm/RpmDb.cc:2399
 msgid "Signature does not verify"
 msgstr "서명을 확인할 수 없음"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
+#: zypp/target/rpm/RpmDb.cc:2401
 msgid "Signature is OK, but key is not trusted"
 msgstr "서명이 정상이지만 키를 신뢰할 수 없음"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
+#: zypp/target/rpm/RpmDb.cc:2403
 msgid "Signatures public key is not available"
 msgstr "서명 공용 키 사용 불가"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
+#: zypp/target/rpm/RpmDb.cc:2405
 msgid "File does not exist or signature can't be checked"
 msgstr "파일이 존재하지 않거나 서명을 확인할 수 없음"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
+#: zypp/target/rpm/RpmDb.cc:2407
 msgid "File is unsigned"
 msgstr ""
 
@@ -551,22 +551,40 @@ msgid "Command exited with unknown error."
 msgstr "알 수 없는 오류와 함께 명령이 종료되었습니다."
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:113
+#: zypp/PublicKey.cc:60
+#, fuzzy
+msgid "does not expire"
+msgstr "(만료되지 않음)"
+
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
 msgid "(does not expire)"
 msgstr "(만료되지 않음)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:122
+#: zypp/PublicKey.cc:88
 msgid "(EXPIRED)"
 msgstr "(만료됨)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:126
+#: zypp/PublicKey.cc:92
 msgid "(expires within 24h)"
 msgstr "(24시간 내 만료)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:130
+#: zypp/PublicKey.cc:96
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -4425,16 +4443,16 @@ msgid "Zuni"
 msgstr "주니어"
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:505
+#: zypp/KeyRing.cc:512
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "기존 키 %s을(를) 키링 %s(으)로 임포트하려고 했습니다."
 
-#: zypp/KeyRing.cc:549
+#: zypp/KeyRing.cc:556
 msgid "Failed to delete key."
 msgstr "키를 삭제하지 못했습니다."
 
-#: zypp/KeyRing.cc:558
+#: zypp/KeyRing.cc:565
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "서명 파일 %s을(를) 찾을 수 없습니다."
@@ -4452,12 +4470,12 @@ msgstr "리포지토리에 URL이 없습니다."
 msgid "Service plugin does not support changing an attribute."
 msgstr "서비스 플러그인이 특성 변경을 지원하지 않습니다."
 
-#: zypp/repo/PackageProvider.cc:225
+#: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
 msgstr "서명 확인 실패"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:377
+#: zypp/repo/PackageProvider.cc:388
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4465,16 +4483,16 @@ msgid ""
 msgstr "패키지 %s이(가) 전송 중에 손상된 것 같습니다. 다시 검색하시겠습니까?"
 
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:402
+#: zypp/repo/PackageProvider.cc:413
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr "패키지 %s을(를) 제공하지 못했습니다. 다시 검색하시겠습니까?"
 
-#: zypp/repo/PackageProvider.cc:528
+#: zypp/repo/PackageProvider.cc:549
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm 검사 실패."
 
-#: zypp/repo/PackageProvider.cc:538
+#: zypp/repo/PackageProvider.cc:559
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm 실패."
 
@@ -4745,7 +4763,7 @@ msgstr "잘못된 정규식 '%s': regcomp가 %d을(를) 반환했습니다."
 msgid "Invalid regular expression '%s'"
 msgstr "잘못된 정규식 '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:243
+#: zypp/misc/CheckAccessDeleted.cc:283
 msgid "Please install package 'lsof' first."
 msgstr "'lsof' 패키지를 먼저 설치하십시오."
 
