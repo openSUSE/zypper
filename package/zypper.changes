@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Aug 25 12:50:11 CEST 2017 - ma@suse.de
+
+- GPG key: Also show a gpg keys subkeys (bsc#1008325)
+- libzypp-devel >= 16.15.4
+- version 1.13.32
+
+-------------------------------------------------------------------
 Fri Aug 11 14:53:07 CEST 2017 - ma@suse.de
 
 - Improve signature check callback messages (bsc#1045735)
