@@ -81,8 +81,10 @@ namespace zypp
       t << ( TableRow() << "" << _("Key Name:") << key.name() )
 	<< ( TableRow() << "" << _("Key Fingerprint:") << str::gapify( key.fingerprint(), 8 ) )
 	<< ( TableRow() << "" << _("Key Created:") << key.created() )
-	<< ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() )
-	<< ( TableRow() << "" << _("Rpm Name:") << str::Format( "gpg-pubkey-%1%-%2%" ) % key.gpgPubkeyVersion() % key.gpgPubkeyRelease() );
+	<< ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() );
+      for ( const PublicSubkeyData & sub : key.subkeys() )
+	t << ( TableRow() << "" << _("Subkey:") << sub.asString() );
+      t << ( TableRow() << "" << _("Rpm Name:") << str::Format( "gpg-pubkey-%1%-%2%" ) % key.gpgPubkeyVersion() % key.gpgPubkeyRelease() );
 
       return str << t;
     }
