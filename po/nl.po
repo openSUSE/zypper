@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-08-25 20:35+0000\n"
+"PO-Revision-Date: 2017-09-11 21:10+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -1283,13 +1283,15 @@ msgstr[0] "De volgende toepassing zal de leverancier wijzigen:"
 msgstr[1] "De volgende %d toepassingen zullen de leverancier wijzigen:"
 
 #: src/Summary.cc:1111
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "Het volgende pakket wordt niet ondersteund door de leverancier:"
-msgstr[1] ""
-"De volgende %d pakketten worden niet ondersteund door de leverancier:"
+msgstr[0] ""
+"Het volgende pakket wordt niet ondersteund door \n"
+"\n"
+"zijnde leverancier:"
+msgstr[1] "De volgende %d pakketten worden niet ondersteund door hun leverancier:"
 
 #: src/Summary.cc:1129
 #, c-format, boost-format
