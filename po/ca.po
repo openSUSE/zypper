@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-08-25 11:15+0000\n"
+"PO-Revision-Date: 2017-09-11 20:07+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1244,12 +1244,13 @@ msgstr[0] "L'aplicació següent canviarà de proveïdor:"
 msgstr[1] "Les següents %d aplicacions canviaran de proveïdor:"
 
 #: src/Summary.cc:1111
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "El paquet següent no té suport del seu proveïdor:"
-msgstr[1] "Els %d paquets següents no tenen suport del seu proveïdor:"
+msgstr[0] "El paquet següent no té informació de suport del seu proveïdor:"
+msgstr[1] ""
+"Els %d paquets següents no tenen informació de suport del seu proveïdor:"
 
 #: src/Summary.cc:1129
 #, c-format, boost-format
