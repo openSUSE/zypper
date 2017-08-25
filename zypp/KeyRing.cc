@@ -558,56 +558,37 @@ namespace zypp
       MIL << "Deleted key " << id << " from keyring " << keyring << endl;
   }
 
-
   std::string KeyRing::Impl::readSignatureKeyId( const Pathname & signature )
   {
     if ( ! PathInfo( signature ).isFile() )
       ZYPP_THROW(Exception( str::Format(_("Signature file %s not found")) % signature.asString() ));
 
     MIL << "Determining key id of signature " << signature << endl;
-    // HACK create a tmp keyring with no keys
-    filesystem::TmpDir dir( _base_dir, "fake-keyring" );
-    std::string tmppath( dir.path().asString() );
-
     const char* argv[] =
     {
       GPG_BINARY,
-      "--homedir", tmppath.c_str(),
-      "--no-default-keyring",
-      "--quiet",
-      "--no-tty",
-      "--no-greeting",
-      "--batch",
-      "--status-fd", "1",
+      "--list-packets",
       signature.asString().c_str(),
       NULL
     };
+    ExternalProgram prog( argv ,ExternalProgram::Discard_Stderr, false, -1, true );
 
-    ExternalProgram prog( argv,ExternalProgram::Discard_Stderr, false, -1, true );
-
-    std::string line;
-    int count = 0;
-
-    str::regex rxNoKey( "^\\[GNUPG:\\] NO_PUBKEY (.+)\n$" );
+    // :signature packet: algo 1, keyid 1397BC53640DB551
+    //         version 4, created 1501094968, md5len 0, sigclass 0x00
+    //         digest algo 8, begin of digest 15 89
+    //         hashed subpkt 2 len 4 (sig created 2017-07-26)
+    //         subpkt 16 len 8 (issuer key ID 1397BC53640DB551)
+    //         data: [4095 bits]
     std::string id;
-    for( line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
+    for( std::string line = prog.receiveLine(); !line.empty(); line = prog.receiveLine() )
     {
-      //MIL << "[" << line << "]" << endl;
-      str::smatch what;
-      if( str::regex_match( line, what, rxNoKey ) )
+      if ( id.empty() && str::startsWith( line, ":signature packet:" ) )
       {
-        if ( what.size() >= 1 )
-	{
-          id = what[1];
-	  break;
-	}
-        //dumpRegexpResults( what );
+	static const str::regex rxKeyId( " keyid +([0-9A-Z]+)" );
+	str::smatch what;
+	if( str::regex_match( line, what, rxKeyId ) )
+	  id = what[1];
       }
-    }
-
-    if ( count == 0 )
-    {
-      MIL << "no output" << endl;
     }
 
     MIL << "Determined key id [" << id << "] for signature " << signature << endl;
