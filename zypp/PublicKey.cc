@@ -32,17 +32,83 @@ using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  {
+    inline bool isExpired( const Date & expires_r )
+    { return( expires_r && expires_r < Date::now() ); }
+
+    inline int hasDaysToLive( const Date & expires_r )
+    {
+      if ( expires_r )
+      {
+	Date exp( expires_r - Date::now() );
+	int ret = exp / Date::day;
+	if ( exp < 0 ) ret -= 1;
+	return ret;
+      }
+      return INT_MAX;
+    }
+
+    inline std::string expiresDetail( const Date & expires_r )
+    {
+      str::Str str;
+      if ( ! expires_r )
+      {
+	// translators: an annotation to a gpg keys expiry date
+	str << _("does not expire");
+      }
+      else if ( isExpired( expires_r ) )
+      {
+	// translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+	str << ( str::Format(_("expired: %1%") ) % expires_r.printDate() );
+      }
+      else
+      {
+	// translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+	str << ( str::Format(_("expires: %1%") ) % expires_r.printDate() );
+      }
+      return str;
+    }
+
+    inline std::string expiresDetailVerbose( const Date & expires_r )
+    {
+      if ( !expires_r )
+      { // translators: an annotation to a gpg keys expiry date
+	return _("(does not expire)");
+      }
+      std::string ret( expires_r.asString() );
+      int ttl( hasDaysToLive( expires_r ) );
+      if ( ttl <= 90 )
+      {
+	ret += " ";
+	if ( ttl < 0 )
+	{ // translators: an annotation to a gpg keys expiry date
+	  ret += _("(EXPIRED)");
+	}
+	else if ( ttl == 0 )
+	{ // translators: an annotation to a gpg keys expiry date
+	  ret += _("(expires within 24h)");
+	}
+	else
+	{ // translators: an annotation to a gpg keys expiry date
+	  ret += str::form( PL_("(expires in %d day)", "(expires in %d days)", ttl ), ttl );
+	}
+      }
+      return ret;
+    }
+
+  } //namespace
+  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  /// \class PublicKeyData::Impl
-  /// \brief  PublicKeyData implementation.
+  /// \class PublicSubkeyData::Impl
+  /// \brief  PublicSubkeyData implementation.
   ///////////////////////////////////////////////////////////////////
-  struct PublicKeyData::Impl
+  struct PublicSubkeyData::Impl
   {
     std::string _id;
-    std::string _name;
-    std::string _fingerprint;
     Date        _created;
     Date        _expires;
 
@@ -60,7 +126,84 @@ namespace zypp
     Impl * clone() const
     { return new Impl( *this ); }
   };
+
   ///////////////////////////////////////////////////////////////////
+  /// class PublicSubkeyData
+  ///////////////////////////////////////////////////////////////////
+
+  PublicSubkeyData::PublicSubkeyData()
+    : _pimpl( Impl::nullimpl() )
+  {}
+
+  PublicSubkeyData::~PublicSubkeyData()
+  {}
+
+  PublicSubkeyData::operator bool() const
+  { return !_pimpl->_id.empty(); }
+
+  std::string PublicSubkeyData::id() const
+  { return _pimpl->_id; }
+
+  Date PublicSubkeyData::created() const
+  { return _pimpl->_created; }
+
+  Date PublicSubkeyData::expires() const
+  { return _pimpl->_expires; }
+
+  bool PublicSubkeyData::expired() const
+  { return isExpired( _pimpl->_expires ); }
+
+  int PublicSubkeyData::daysToLive() const
+  { return hasDaysToLive( _pimpl->_expires ); }
+
+  std::string PublicSubkeyData::asString() const
+  {
+    return str::Str() << id() << " " << created().printDate() << " [" << expiresDetail( expires() ) << "]";
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class PublicKeyData::Impl
+  /// \brief  PublicKeyData implementation.
+  ///////////////////////////////////////////////////////////////////
+  struct PublicKeyData::Impl
+  {
+    std::string _id;
+    std::string _name;
+    std::string _fingerprint;
+    Date        _created;
+    Date        _expires;
+
+    std::vector<PublicSubkeyData> _subkeys;
+
+  public:
+    bool hasSubkeyId( const std::string & id_r ) const
+    {
+      bool ret = false;
+      for ( const PublicSubkeyData & sub : _subkeys )
+      {
+	if ( sub.id() == id_r )
+	{
+	  ret = true;
+	  break;
+	}
+      }
+      return ret;
+    }
+
+  public:
+    /** Offer default Impl. */
+    static shared_ptr<Impl> nullimpl()
+    {
+      static shared_ptr<Impl> _nullimpl( new Impl );
+      return _nullimpl;
+    }
+
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+    /** clone for RWCOW_pointer */
+    Impl * clone() const
+    { return new Impl( *this ); }
+  };
 
   ///////////////////////////////////////////////////////////////////
   /// class PublicKeyData
@@ -92,46 +235,13 @@ namespace zypp
   { return _pimpl->_expires; }
 
   bool PublicKeyData::expired() const
-  { return( _pimpl->_expires && _pimpl->_expires < Date::now() ); }
+  { return isExpired( _pimpl->_expires ); }
 
   int PublicKeyData::daysToLive() const
-  {
-    if ( _pimpl->_expires )
-    {
-      Date exp( _pimpl->_expires - Date::now() );
-      int ret = exp / Date::day;
-      if ( exp < 0 ) ret -= 1;
-      return ret;
-    }
-    return INT_MAX;
-  }
+  { return hasDaysToLive( _pimpl->_expires ); }
 
   std::string PublicKeyData::expiresAsString() const
-  {
-    if ( !_pimpl->_expires )
-    { // translators: an annotation to a gpg keys expiry date
-      return _("(does not expire)");
-    }
-    std::string ret( _pimpl->_expires.asString() );
-    int ttl( daysToLive() );
-    if ( ttl <= 90 )
-    {
-      ret += " ";
-      if ( ttl < 0 )
-      { // translators: an annotation to a gpg keys expiry date
-	ret += _("(EXPIRED)");
-      }
-      else if ( ttl == 0 )
-      { // translators: an annotation to a gpg keys expiry date
-	ret += _("(expires within 24h)");
-      }
-      else
-      { // translators: an annotation to a gpg keys expiry date
-	ret += str::form( PL_("(expires in %d day)", "(expires in %d days)", ttl ), ttl );
-      }
-    }
-    return ret;
-  }
+  { return expiresDetailVerbose( _pimpl->_expires ); }
 
   std::string PublicKeyData::gpgPubkeyVersion() const
   { return _pimpl->_id.empty() ? _pimpl->_id : str::toLower( _pimpl->_id.substr(8,8) ); }
@@ -141,13 +251,21 @@ namespace zypp
 
   std::string PublicKeyData::asString() const
   {
-    return str::form( "[%s-%s] [%s] [%s] [TTL %d]",
-		      _pimpl->_id.c_str(),
-		      gpgPubkeyRelease().c_str(),
-		      _pimpl->_name.c_str(),
-		      _pimpl->_fingerprint.c_str(),
-		      daysToLive() );
+    str::Str str;
+    str << "[" << _pimpl->_id << "-" << gpgPubkeyRelease();
+    for ( auto && sub : _pimpl->_subkeys )
+      str << ", " << sub.id();
+    return str << "] [" << _pimpl->_name.c_str() << "] [" << expiresDetail( _pimpl->_expires ) << "]";
   }
+
+  bool PublicKeyData::hasSubkeys() const
+  { return !_pimpl->_subkeys.empty(); }
+
+  Iterable<PublicKeyData::SubkeyIterator> PublicKeyData::subkeys() const
+  { return makeIterable( &(*_pimpl->_subkeys.begin()), &(*_pimpl->_subkeys.end()) ); }
+
+  bool PublicKeyData::providesKey( const std::string & id_r ) const
+  { return( id_r == _pimpl->_id || _pimpl->hasSubkeyId( id_r ) ); }
 
   std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj )
   {
@@ -157,8 +275,9 @@ namespace zypp
     str << "  cre " << Date::ValueType(obj.created()) << ' ' << obj.created() << endl;
     str << "  exp " << Date::ValueType(obj.expires()) << ' ' << obj.expiresAsString() << endl;
     str << "  ttl " << obj.daysToLive() << endl;
+    for ( auto && sub : obj._pimpl->_subkeys )
+      str << "  sub " << sub << endl;
     str << "  rpm " << obj.gpgPubkeyVersion() << "-" << obj.gpgPubkeyRelease() << endl;
-    str << "]";
     return str;
   }
 
@@ -172,13 +291,13 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   struct PublicKeyScanner::Impl
   {
-    std::vector<std::string>			_words;
-    enum { pNONE, pPUB, pSIG, pFPR, pUID }	_parseEntry;
-    bool 					_parseOff;	// no 'sub:' key parsing
+    enum { pNONE, pPUB, pSIG, pFPR, pUID, pSUB } _parseEntry;
+    std::vector<std::string> _words;
+    PublicKeyData::Impl * _keyDataPtr;
 
    Impl()
       : _parseEntry( pNONE )
-      , _parseOff( false )
+      , _keyDataPtr( nullptr )
     {}
 
     void scan( std::string & line_r, std::list<PublicKeyData> & keys_r )
@@ -202,7 +321,8 @@ namespace zypp
 	  if ( line_r[1] == 'u' && line_r[2] == 'b' && line_r[3] == ':' )
 	  {
 	    _parseEntry = pPUB;
-	    _parseOff = false;
+	    keys_r.push_back( PublicKeyData() );	// reset upon new key
+	    _keyDataPtr = keys_r.back()._pimpl.get();
 	  }
 	  break;
 
@@ -220,33 +340,31 @@ namespace zypp
 	  if ( line_r[1] == 'i' && line_r[2] == 'g' && line_r[3] == ':' )
 	    _parseEntry = pSIG;
 	  else if ( line_r[1] == 'u' && line_r[2] == 'b' && line_r[3] == ':' )
-	    _parseOff = true;
+	    _parseEntry = pSUB;
 	  break;
 
 	default:
 	  return;
       }
-      if ( _parseOff || _parseEntry == pNONE )
+      if ( _parseEntry == pNONE )
 	return;
+      if ( ! ( _keyDataPtr->_subkeys.empty() || _parseEntry == pSUB ) )
+	return;	// collecting subkeys only
 
       if ( line_r[line_r.size()-1] == '\n' )
 	line_r.erase( line_r.size()-1 );
-      // DBG << line_r << endl;
+      //DBG << line_r << endl;
 
       _words.clear();
       str::splitFields( line_r, std::back_inserter(_words), ":" );
 
-      PublicKeyData * key( &keys_r.back() );
-
       switch ( _parseEntry )
       {
 	case pPUB:
-	  keys_r.push_back( PublicKeyData() );	// reset upon new key
-	  key = &keys_r.back();
-	  key->_pimpl->_id      = _words[4];
-	  key->_pimpl->_name    = str::replaceAll( _words[9], "\\x3a", ":" );
-	  key->_pimpl->_created = Date(str::strtonum<Date::ValueType>(_words[5]));
-	  key->_pimpl->_expires = Date(str::strtonum<Date::ValueType>(_words[6]));
+	  _keyDataPtr->_id      = _words[4];
+	  _keyDataPtr->_name    = str::replaceAll( _words[9], "\\x3a", ":" );
+	  _keyDataPtr->_created = Date(str::strtonum<Date::ValueType>(_words[5]));
+	  _keyDataPtr->_expires = Date(str::strtonum<Date::ValueType>(_words[6]));
 	  break;
 
 	case pSIG:
@@ -255,19 +373,29 @@ namespace zypp
 	    || ( _words.size() > 12 && _words[12] == "13x" /* [selfsig] */) )
 	  {
 	    Date cdate(str::strtonum<Date::ValueType>(_words[5]));
-	    if ( key->_pimpl->_created < cdate )
-	      key->_pimpl->_created = cdate;
+	    if ( _keyDataPtr->_created < cdate )
+	      _keyDataPtr->_created = cdate;
 	  }
 	  break;
 
 	case pFPR:
-	  if ( key->_pimpl->_fingerprint.empty() )
-	    key->_pimpl->_fingerprint = _words[9];
+	  if ( _keyDataPtr->_fingerprint.empty() )
+	    _keyDataPtr->_fingerprint = _words[9];
 	  break;
 
 	case pUID:
 	  if ( ! _words[9].empty() && _words[9] != "[User ID not found]" )
-	    key->_pimpl->_name = str::replaceAll( _words[9], "\\x3a", ":" );
+	    _keyDataPtr->_name = str::replaceAll( _words[9], "\\x3a", ":" );
+	  break;
+
+	case pSUB:
+	  _keyDataPtr->_subkeys.push_back( PublicSubkeyData() );
+	  {
+	    PublicSubkeyData::Impl * subPtr = _keyDataPtr->_subkeys.back()._pimpl.get();
+	    subPtr->_id      = _words[4];
+	    subPtr->_created = Date(str::strtonum<Date::ValueType>(_words[5]));
+	    subPtr->_expires = Date(str::strtonum<Date::ValueType>(_words[6]));
+	  }
 	  break;
 
 	case pNONE:

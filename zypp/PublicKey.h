@@ -18,6 +18,7 @@
 #include <set>
 #include <string>
 
+#include "zypp/base/Iterable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
@@ -31,6 +32,7 @@ namespace zypp
   {
     class TmpFile;
   }
+  class PublicKeyData;
 
   ///////////////////////////////////////////////////////////////////
   /// \class BadKeyException
@@ -63,6 +65,62 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
+  /// \class PublicSubkeyData
+  /// \brief Class representing a GPG Public Keys subkeys.
+  /// \see \ref PublicKeyData.
+  ///////////////////////////////////////////////////////////////////
+  class PublicSubkeyData
+  {
+  public:
+    /** Default constructed: empty data. */
+    PublicSubkeyData();
+
+    ~PublicSubkeyData();
+
+    /** Whether this contains valid data (not default constructed). */
+    explicit operator bool() const;
+
+  public:
+    /** Subkey ID. */
+    std::string id() const;
+
+    /** Creation date. */
+    Date created() const;
+
+    /** Expiry date, or \c Date() if the key never expires. */
+    Date expires() const;
+
+    /**  Whether the key has expired. */
+    bool expired() const;
+
+    /** Number of days (24h) until the key expires (or since it exired).
+     * A value of \c 0 means the key will expire within the next 24h.
+     * Negative values indicate the key has expired less than \c N days ago.
+     * For keys without expiration date \c INT_MAX is returned.
+     */
+    int daysToLive() const;
+
+    /** Simple string representation.
+     * Encodes \ref id, \ref created and \ref expires
+     * \code
+     * 640DB551 2016-04-12 [expires: 2019-04-12]
+     * \endcode
+     */
+    std::string asString() const;
+
+  private:
+    class Impl;
+    RWCOW_pointer<Impl> _pimpl;
+    friend class PublicKeyScanner;
+    friend std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj );
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates PublicSubkeyData Stream output */
+  inline std::ostream & operator<<( std::ostream & str, const PublicSubkeyData & obj )
+  { return str << obj.asString(); }
+
+  ///////////////////////////////////////////////////////////////////
   /// \class PublicKeyData
   /// \brief Class representing one GPG Public Keys data.
   /// \ref PublicKeyData are provided e.g. by a \ref PublicKey or
@@ -78,9 +136,6 @@ namespace zypp
     PublicKeyData();
 
     ~PublicKeyData();
-
-    /** Scan data from 'gpg --with-colons' key listings. */
-    friend class PublicKeyScanner;
 
     /** Whether this contains valid data (not default constructed). */
     explicit operator bool() const;
@@ -139,9 +194,23 @@ namespace zypp
      */
     std::string asString() const;
 
+  public:
+    typedef const PublicSubkeyData * SubkeyIterator;
+
+    /** Whether \ref subkeys is not empty. */
+    bool hasSubkeys() const;
+
+    /** Iterate any subkeys. */
+    Iterable<SubkeyIterator> subkeys() const;
+
+    /** Whether \a id_r is the \ref id of the primary key or of a subkey. */
+    bool providesKey( const std::string & id_r ) const;
+
   private:
     class Impl;
     RWCOW_pointer<Impl> _pimpl;
+    friend class PublicKeyScanner;
+    friend std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj );
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -239,6 +308,8 @@ namespace zypp
     /** The public keys data (\see \ref PublicKeyData).*/
     const PublicKeyData & keyData() const;
 
+    typedef PublicKeyData::SubkeyIterator SubkeyIterator;
+
     bool isValid() const
     { return ! ( id().empty() || fingerprint().empty() ); }
 
@@ -253,6 +324,15 @@ namespace zypp
     std::string gpgPubkeyVersion() const;	//!< \see \ref PublicKeyData
     std::string gpgPubkeyRelease() const;	//!< \see \ref PublicKeyData
     std::string asString() const;		//!< \see \ref PublicKeyData
+
+    bool hasSubkeys() const			///!< \see \ref PublicKeyData
+    { return keyData().hasSubkeys(); }
+
+    Iterable<SubkeyIterator> subkeys() const	///!< \see \ref PublicKeyData
+    { return keyData().subkeys(); }
+
+    bool providesKey( const std::string & id_r ) const	///!< \see \ref PublicKeyData
+    { return keyData().providesKey( id_r ); }
 
   public:
     /** File containig the ASCII armored key. */
