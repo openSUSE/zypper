@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 25 14:08:43 CEST 2017 - ma@suse.de
+
+- Adapt to work with GnuPG 2.1.23 (bsc#1054088)
+- version 16.15.5 (0)
+
+-------------------------------------------------------------------
 Fri Aug 25 12:51:43 CEST 2017 - ma@suse.de
 
 - verifyFileSignature: Support signing with subkeys (bsc#1008325)
