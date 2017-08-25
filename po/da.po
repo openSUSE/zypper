@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 12:50+0200\n"
-"PO-Revision-Date: 2017-07-31 22:32+0000\n"
-"Last-Translator: scootergrisen\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/"
-">\n"
+"PO-Revision-Date: 2017-08-25 23:12+0000\n"
+"Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -548,21 +548,20 @@ msgstr "Kommando afsluttet med ukendt fejl."
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "(udløber ikke)"
+msgstr "udløber ikke"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "udløbet: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "udløber: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
