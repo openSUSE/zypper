@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-08-28 14:43+0000\n"
+"PO-Revision-Date: 2017-09-17 13:47+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -1297,13 +1297,13 @@ msgstr[1] "%d aplikace změní dodavatele:"
 msgstr[2] "%d aplikací změní dodavatele:"
 
 #: src/Summary.cc:1111
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "Tento balíček není svým vydavatelem podporován:"
-msgstr[1] "%d balíčky nejsou svým vydavatelem podporovány:"
-msgstr[2] "%d balíčků není svým vydavatelem podporováno:"
+msgstr[0] "Vydavatel neposkytl informace o podpoře tohoto balíčku:"
+msgstr[1] "Pro tyto %d balíčky neposkytl vydavatel informace o podpoře:"
+msgstr[2] "Pro těchto %d balíčků neposkytl vydavatel informace o podpoře:"
 
 #: src/Summary.cc:1129
 #, c-format, boost-format
