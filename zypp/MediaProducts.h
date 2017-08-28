@@ -43,7 +43,7 @@ namespace zypp
     bool operator<( const MediaProductEntry &rhs ) const
     {
       int res = _name.compare( rhs._name );
-      return ( res < 0 || ( res == 0 && _dir < rhs.dir ) );
+      return ( res < 0 || ( res == 0 && _dir < rhs._dir ) );
     }
   };
 
