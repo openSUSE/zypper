@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 12:50+0200\n"
-"PO-Revision-Date: 2017-08-28 15:57+0000\n"
-"Last-Translator: carlo valente <carlo.gt.valente@gmail.com>\n"
+"PO-Revision-Date: 2017-08-28 18:18+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -561,9 +561,8 @@ msgstr "O comando encerrou com erro desconhecido."
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "(não expira)"
+msgstr "não expira"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
