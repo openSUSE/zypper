@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 12:49+0200\n"
-"PO-Revision-Date: 2017-08-28 14:42+0000\n"
+"PO-Revision-Date: 2017-08-28 14:43+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -2280,7 +2280,7 @@ msgstr "Některé repozitáře nebyly z důvodu chyby obnoveny."
 
 #: src/repos.cc:998
 msgid "Initializing Target"
-msgstr "Probíhá inicializace cíle"
+msgstr "Inicializace cíle"
 
 #: src/repos.cc:1006
 msgid "Target initialization failed:"
