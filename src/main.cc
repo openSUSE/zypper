@@ -113,6 +113,6 @@ int main( int argc, char **argv )
   Zypper & zypper( *Zypper::instance() );
   int exitcode = zypper.main( argc, argv );
   if ( !exitcode )
-    exitcode = zypper.refreshCode();	// propagate refresh errors even if main action succeeded
+    exitcode = zypper.exitInfoCode();	// propagate refresh errors even if main action succeeded
   return exitcode;
 }

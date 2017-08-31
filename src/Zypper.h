@@ -252,10 +252,10 @@ public:
     _exitCode = exit;
   }
 
-  int refreshCode() const			{ return _refreshCode; }
-  void setRefreshCode( int exit )		{
-    WAR << "setRefreshCode " << exit << endl;
-    _refreshCode = exit;
+  int exitInfoCode() const			{ return _exitInfoCode; }
+  void setExitInfoCode( int exit )		{
+    WAR << "setExitInfoCode " << exit << endl;
+    _exitInfoCode = exit;
   }
 
   bool runningShell() const			{ return _running_shell; }
@@ -367,7 +367,7 @@ private:
   std::string _command_help;
 
   int   _exitCode;
-  int   _refreshCode;	// do_init_repos hack!
+  int   _exitInfoCode;	// hack for exitcodes that don't abort but are reported if the main action succeeded (e.g. 106, 107)
   bool  _running_shell;
   bool  _running_help;
   unsigned  _exit_requested;
