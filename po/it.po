@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 12:49+0200\n"
-"PO-Revision-Date: 2017-08-16 14:31+0000\n"
+"PO-Revision-Date: 2017-08-31 07:39+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
-">\n"
+"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,7 +77,7 @@ msgstr "Scadenza chiave:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Sottochiave:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -3101,9 +3101,10 @@ msgid "Short hand for '%1%'."
 msgstr "Abbreviazione per '%1%'."
 
 #: src/Zypper.cc:86
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Abilita la verifica GPG per questo repository."
+msgstr ""
+"Abilita la verifica GPG ma consenti ai metadati del repository di non essere "
+"firmati."
 
 #: src/Zypper.cc:87
 #, fuzzy
