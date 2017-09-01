@@ -204,10 +204,9 @@ typedef shared_ptr<RepoManager> RepoManager_Ptr;
 class Zypper : private base::NonCopyable
 {
 public:
-  typedef RW_pointer<Zypper,rw_pointer::Scoped<Zypper> > Ptr;
   typedef std::vector<std::string>  ArgList;
 
-  static Ptr & instance();
+  static Zypper & instance();
 
   int main( int argc, char ** argv );
 

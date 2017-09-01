@@ -60,7 +60,7 @@ namespace
       }
 
       str::Format fmter( indent+"%-"+str::numstring(colw)+"s" );
-      unsigned maxcols = Zypper::instance()->out().defaultFormatWidth() / ( colw + indent.size() );
+      unsigned maxcols = Zypper::instance().out().defaultFormatWidth() / ( colw + indent.size() );
       if ( maxcols == 0 ) maxcols = 1;
 
 #if 1
@@ -373,7 +373,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
   if ( _detected._name.empty() )
   {
     // common subcommand help
-    Zypper & _zypper = *Zypper::instance();
+    Zypper & _zypper = Zypper::instance();
 
     if ( _zypper.out().verbosity() > Out::QUIET )
     {
@@ -443,7 +443,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
     };
     if ( cmd.run() != 0 )
     {
-      Zypper & _zypper = *Zypper::instance();
+      Zypper & _zypper = Zypper::instance();
       if ( cmd.exitStatus() != 16 )	// man already returned 'No manual entry for...'
       {
 	_zypper.out().error( cmd.execError() );

@@ -15,7 +15,7 @@
 namespace out
 {
   unsigned defaultTermwidth()
-  { return Zypper::instance()->out().termwidth(); }
+  { return Zypper::instance().out().termwidth(); }
 } // namespace out
 ///////////////////////////////////////////////////////////////////
 
@@ -152,4 +152,4 @@ std::string Out::Error::combine( std::string && msg_r, const Exception & ex_r )
   return std::move(msg_r);
 }
 std::string Out::Error::combine( const Exception & ex_r )
-{ return Zypper::instance()->out().zyppExceptionReport( ex_r ); }
+{ return Zypper::instance().out().zyppExceptionReport( ex_r ); }

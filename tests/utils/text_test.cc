@@ -39,8 +39,8 @@ BOOST_AUTO_TEST_CASE(mbs_substr_by_width_test)
 
 BOOST_AUTO_TEST_CASE(mbs_iterator)
 {
-  Zypper::instance()->config().do_colors = true;
-  BOOST_CHECK_EQUAL( Zypper::instance()->config().do_colors, true );
+  Zypper::instance().config().do_colors = true;
+  BOOST_CHECK_EQUAL( Zypper::instance().config().do_colors, true );
 
   ColorString cs( "'和\t平'", ColorContext::NEGATIVE );
   const std::string & s( cs.str() );

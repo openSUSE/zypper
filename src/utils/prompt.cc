@@ -131,7 +131,7 @@ bool PromptOptions::isYesNoPrompt() const
 //! \todo The default values seems to be useless - we always want to auto-return 'retry' in case of no user input.
 int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_action )
 {
-  Zypper & zypper( *Zypper::instance() );
+  Zypper & zypper( Zypper::instance() );
 
   if ( default_action > 2 || default_action < 0 )
   {
@@ -225,7 +225,7 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
 //Action ...
 int read_action_ari( PromptId pid, int default_action )
 {
-  Zypper & zypper( *Zypper::instance() );
+  Zypper & zypper( Zypper::instance() );
   // translators: "a/r/i" are the answers to the
   // "Abort, retry, ignore?" prompt
   // Translate the letters to whatever is suitable for your language.
@@ -243,7 +243,7 @@ int read_action_ari( PromptId pid, int default_action )
 
 bool read_bool_answer( PromptId pid, const std::string & question, bool default_answer )
 {
-  Zypper & zypper( *Zypper::instance() );
+  Zypper & zypper( Zypper::instance() );
   std::string yn( std::string(_("yes")) + "/" + _("no") );
   PromptOptions popts( yn, default_answer ? 0 : 1 );
   if ( ! zypper.globalOpts().non_interactive )

@@ -308,7 +308,7 @@ namespace {
   {
     if ( copts_r.count( old_r ) )
     {
-      Zypper::instance()->out().warning( legacyCLIStr( old_r, new_r ), verbosity_r );
+      Zypper::instance().out().warning( legacyCLIStr( old_r, new_r ), verbosity_r );
       if ( ! copts_r.count( new_r ) )
 	copts_r[new_r];
       copts_r.erase( old_r );
@@ -347,7 +347,7 @@ namespace
   struct CommandHelpFormater
   {
     CommandHelpFormater()
-    : _mww( _str, Zypper::instance()->out().defaultFormatWidth( 150 ) )
+    : _mww( _str, Zypper::instance().out().defaultFormatWidth( 150 ) )
     {}
 
     /** Allow using the underlying steam directly. */
@@ -453,17 +453,11 @@ Zypper::~Zypper()
 }
 
 
-Zypper::Ptr & Zypper::instance()
+Zypper & Zypper::instance()
 {
-  static Zypper::Ptr _instance;
-
-  if ( !_instance )
-    _instance.reset( new Zypper() );
-  else
-  {
-    // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
-    _instance->immediateExitCheck();
-  }
+  static Zypper _instance;
+  // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
+  _instance.immediateExitCheck();
   return _instance;
 }
 

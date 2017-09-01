@@ -27,7 +27,7 @@ void report_a_bug( Out & out )
 
 void report_too_many_arguments( const std::string & specific_help )
 {
-  report_too_many_arguments( Zypper::instance()->out(), specific_help );
+  report_too_many_arguments( Zypper::instance().out(), specific_help );
 }
 
 void report_too_many_arguments( Out & out, const std::string & specific_help )

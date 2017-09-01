@@ -227,7 +227,7 @@ static bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool f
 
   // reset the gData.current_repo when going out of scope
   struct Bye {
-    ~Bye() { Zypper::instance()->runtimeData().current_repo = RepoInfo(); }
+    ~Bye() { Zypper::instance().runtimeData().current_repo = RepoInfo(); }
   } reset __attribute__ ((__unused__));
 
   RepoManager & manager = zypper.repoManager();
@@ -1691,7 +1691,7 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
     gData.current_repo = repo;
 
     // reset the gData.current_repo when going out of scope
-    struct Bye { ~Bye() { Zypper::instance()->runtimeData().current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
+    struct Bye { ~Bye() { Zypper::instance().runtimeData().current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
 
     manager.addRepository( repo );
     repo = manager.getRepo( repo );

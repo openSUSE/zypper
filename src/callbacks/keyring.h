@@ -29,7 +29,7 @@ namespace zypp
   {
     inline void hintUnsignedData()
     {
-      Zypper::instance()->out().notePar( 4, _("Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise.") );
+      Zypper::instance().out().notePar( 4, _("Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise.") );
     }
 
     inline void hintIfMasterIndex( const std::string & file_r )
@@ -37,23 +37,23 @@ namespace zypp
       if ( file_r == "repomd.xml" || file_r == "content" )
       {
 	// translator: %1% is a file name
-	Zypper::instance()->out().notePar( 4, str::Format(_("File '%1%' is the repositories master index file. It ensures the integrity of the whole repo.") ) % file_r );
+	Zypper::instance().out().notePar( 4, str::Format(_("File '%1%' is the repositories master index file. It ensures the integrity of the whole repo.") ) % file_r );
       }
     }
 
     inline void warnCanNotVerifyFile()
     {
-      Zypper::instance()->out().warningPar( 4, str::Format(_("We can't verify that no one meddled with this file, so it might not be trustworthy anymore! You should not continue unless you know it's safe.") ) );
+      Zypper::instance().out().warningPar( 4, str::Format(_("We can't verify that no one meddled with this file, so it might not be trustworthy anymore! You should not continue unless you know it's safe.") ) );
     }
 
     inline void warnFileModifiedAfterSigning()
     {
-      Zypper::instance()->out().warningPar( 4, str::Format(_("This file was modified after it has been signed. This may have been a malicious change, so it might not be trustworthy anymore! You should not continue unless you know it's safe.") ) );
+      Zypper::instance().out().warningPar( 4, str::Format(_("This file was modified after it has been signed. This may have been a malicious change, so it might not be trustworthy anymore! You should not continue unless you know it's safe.") ) );
     }
 
     std::ostream & dumpKeyInfo( std::ostream & str, const PublicKeyData & key, const KeyContext & context = KeyContext() )
     {
-      Zypper & zypper = *Zypper::instance();
+      Zypper & zypper = Zypper::instance();
       if ( zypper.out().type() == Out::TYPE_XML )
       {
 	{
@@ -101,7 +101,7 @@ namespace zypp
     struct KeyRingReceive : public callback::ReceiveReport<KeyRingReport>
     {
       KeyRingReceive()
-          : _gopts(Zypper::instance()->globalOpts())
+          : _gopts(Zypper::instance().globalOpts())
           {}
 
       ////////////////////////////////////////////////////////////////////
@@ -110,18 +110,18 @@ namespace zypp
       {
 	if ( keyData_r.expired() )
 	{
-	  Zypper::instance()->out().warning( str::Format(_("The gpg key signing file '%1%' has expired.")) % file_r );
+	  Zypper::instance().out().warning( str::Format(_("The gpg key signing file '%1%' has expired.")) % file_r );
 	  dumpKeyInfo( (std::ostream&)ColorStream(std::cout,ColorContext::MSG_WARNING), keyData_r, context );
 	}
 	else if ( keyData_r.daysToLive() < 15 )
 	{
-	  Zypper::instance()->out().info( str::Format(
+	  Zypper::instance().out().info( str::Format(
 	    PL_( "The gpg key signing file '%1%' will expire in %2% day.",
 		 "The gpg key signing file '%1%' will expire in %2% days.",
 		 keyData_r.daysToLive() )) % file_r %  keyData_r.daysToLive() );
 	  dumpKeyInfo( std::cout, keyData_r, context );
 	}
-	else if ( Zypper::instance()->out().verbosity() > Out::NORMAL )
+	else if ( Zypper::instance().out().verbosity() > Out::NORMAL )
 	{
 	  dumpKeyInfo( std::cout, keyData_r, context );
 	}
@@ -138,11 +138,11 @@ namespace zypp
               << ")" << std::endl;
 
           if (context.empty())
-            Zypper::instance()->out().warning(
+            Zypper::instance().out().warning(
               str::Format(_("Accepting an unsigned file '%s'.")) % file,
               Out::HIGH);
           else
-            Zypper::instance()->out().warning(
+            Zypper::instance().out().warning(
 	      str::Format(_("Accepting an unsigned file '%s' from repository '%s'."))
 	      % file % context.repoInfo().asUserString(),
               Out::HIGH);
@@ -157,7 +157,7 @@ namespace zypp
         else
 	  // translator: %1% is a file name, %2% a repositories name
           msg = str::Format(_("File '%1%' from repository '%2%' is unsigned.") ) % file % context.repoInfo().asUserString();
-	Zypper::instance()->out().warning( msg );
+	Zypper::instance().out().warning( msg );
 
         hintUnsignedData();
 
@@ -166,7 +166,7 @@ namespace zypp
 
 	warnCanNotVerifyFile();
 
-	Zypper::instance()->out().gap();
+	Zypper::instance().out().gap();
 	// TODO: use text::join( msg, text::qContinue() )
 	// once the above texts for mgs are translated
         std::string question;
@@ -199,11 +199,11 @@ namespace zypp
             << ")" << std::endl;
 
           if (context.empty())
-            Zypper::instance()->out().warning(str::Format(
+            Zypper::instance().out().warning(str::Format(
                 _("Accepting file '%s' signed with an unknown key '%s'."))
                 % file % id);
           else
-            Zypper::instance()->out().warning(str::Format(
+            Zypper::instance().out().warning(str::Format(
                 _("Accepting file '%s' from repository '%s' signed with an unknown key '%s'."))
                 % file % context.repoInfo().asUserString() % id);
 
@@ -217,7 +217,7 @@ namespace zypp
         else
 	  // translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
           msg = str::Format(_("File '%1%' from repository '%3%' is signed with an unknown key '%2%'.") ) % file % id % context.repoInfo().asUserString();
-	Zypper::instance()->out().warning( msg );
+	Zypper::instance().out().warning( msg );
 
         hintUnsignedData();
 
@@ -226,7 +226,7 @@ namespace zypp
 
 	warnCanNotVerifyFile();
 
-	Zypper::instance()->out().gap();
+	Zypper::instance().out().gap();
         std::string question;
 	// TODO: use text::join( msg, text::qContinue() )
 	// once the above texts for mgs are translated
@@ -248,7 +248,7 @@ namespace zypp
       virtual KeyRingReport::KeyTrust askUserToAcceptKey(
           const PublicKey &key, const KeyContext & context)
       {
-        Zypper & zypper = *Zypper::instance();
+        Zypper & zypper = Zypper::instance();
         std::ostringstream s;
 
 	s << std::endl;
@@ -349,7 +349,7 @@ namespace zypp
             << _("Double-check this is not caused by some malicious"
                  " changes in the file!");
 
-          Zypper::instance()->out().warning(msg.str(), Out::QUIET);
+          Zypper::instance().out().warning(msg.str(), Out::QUIET);
           return true;
         }
 
@@ -360,7 +360,7 @@ namespace zypp
         else
 	  // translator: %1% is a file name, %2% a repositories name
           msg = str::Format(_("Signature verification failed for file '%1%' from repository '%2%'.") ) % file % context.repoInfo().asUserString();
-	Zypper::instance()->out().error( msg );
+	Zypper::instance().out().error( msg );
 
         hintUnsignedData();
 
@@ -369,7 +369,7 @@ namespace zypp
 
 	warnFileModifiedAfterSigning();
 
-	Zypper::instance()->out().gap();
+	Zypper::instance().out().gap();
         return read_bool_answer( PROMPT_YN_GPG_CHECK_FAILED_IGNORE, text::join( msg, text::qContinue() ), false);
       }
 
@@ -383,7 +383,7 @@ namespace zypp
 
     struct DigestReceive : public callback::ReceiveReport<DigestReport>
     {
-      DigestReceive() : _gopts(Zypper::instance()->globalOpts()) {}
+      DigestReceive() : _gopts(Zypper::instance().globalOpts()) {}
 
       ////////////////////////////////////////////////////////////////////
 
@@ -405,7 +405,7 @@ namespace zypp
 
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
       {
-	Zypper & zypper = *Zypper::instance();
+	Zypper & zypper = Zypper::instance();
 	std::string unblock( found.substr( 0, 4 ) );
 
 	zypper.out().gap();

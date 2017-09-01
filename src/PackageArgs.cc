@@ -17,7 +17,7 @@
 #include "repos.h"
 
 PackageArgs::PackageArgs( const ResKind & kind, const Options & opts )
-: zypper( *Zypper::instance() )
+: zypper( Zypper::instance() )
 , _opts( opts )
 {
   preprocess( zypper.arguments() );
@@ -25,7 +25,7 @@ PackageArgs::PackageArgs( const ResKind & kind, const Options & opts )
 }
 
 PackageArgs::PackageArgs( const std::vector<std::string> & args, const ResKind & kind, const Options & opts )
-: zypper( *Zypper::instance() )
+: zypper( Zypper::instance() )
 , _opts( opts )
 {
   preprocess( args );

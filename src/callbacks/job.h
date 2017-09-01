@@ -28,7 +28,7 @@ namespace ZmartRecipients
   {
     virtual bool message( MsgType type_r, const std::string & msg_r, const UserData & userData_r ) const
     {
-      Out & out( Zypper::instance()->out() );
+      Out & out( Zypper::instance().out() );
       switch ( type_r.asEnum() )
       {
 	case MsgType::debug:

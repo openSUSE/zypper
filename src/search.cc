@@ -25,7 +25,7 @@ FillSearchTableSolvable::FillSearchTableSolvable( Table & table, TriBool inst_no
 : _table( &table )
 , _inst_notinst( inst_notinst )
 {
-  Zypper & zypper( *Zypper::instance() );
+  Zypper & zypper( Zypper::instance() );
   if ( zypper.cOpts().find("repo") != zypper.cOpts().end() )
   {
     std::list<RepoInfo> & repos( zypper.runtimeData().repos );
@@ -191,7 +191,7 @@ FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool ins
 : _table( &table )
 , inst_notinst( installed_only )
 {
-  Zypper & zypper( *Zypper::instance() );
+  Zypper & zypper( Zypper::instance() );
   if ( zypper.cOpts().find("repo") != zypper.cOpts().end() )
   {
     std::list<RepoInfo> & repos( zypper.runtimeData().repos );

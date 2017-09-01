@@ -123,7 +123,7 @@ struct PatchMessageReportReceiver : public callback::ReceiveReport<target::Patch
    */
   virtual bool show( Patch::constPtr & patch )
   {
-    Out & out = Zypper::instance()->out();
+    Out & out = Zypper::instance().out();
     std::ostringstream s;
     s << patch; // [patch]important-patch-101 \todo make some meaningfull message out of this
     out.info(s.str(), Out::HIGH);
@@ -155,7 +155,7 @@ struct PatchScriptReportReceiver : public callback::ReceiveReport<target::PatchS
   virtual void start( const Package::constPtr & package,
 		      const Pathname & path_r ) // script path
   {
-    Zypper & zypper = *Zypper::instance();
+    Zypper & zypper = Zypper::instance();
     if ( zypper.out().type() == Out::TYPE_XML )
       _guard.reset( new Out::XmlNode( zypper.out(), "message", { "type", "info" } ) );
 
@@ -171,7 +171,7 @@ struct PatchScriptReportReceiver : public callback::ReceiveReport<target::PatchS
    */
   virtual bool progress( Notify kind, const std::string &output )
   {
-    Zypper & zypper = *Zypper::instance();
+    Zypper & zypper = Zypper::instance();
     static bool was_ping_before = false;
     if (kind == PING)
     {
@@ -194,7 +194,7 @@ struct PatchScriptReportReceiver : public callback::ReceiveReport<target::PatchS
   virtual Action problem( const std::string & description )
   {
     closeNode();
-    Zypper & zypper = *Zypper::instance();
+    Zypper & zypper = Zypper::instance();
 
     zypper.out().error(description);
 
@@ -208,7 +208,7 @@ struct PatchScriptReportReceiver : public callback::ReceiveReport<target::PatchS
   virtual void finish()
   {
     closeNode();
-    Zypper::instance()->out().progressEnd("run-script", _label);
+    Zypper::instance().out().progressEnd("run-script", _label);
   }
 
   /** Catch unexpected end. */
@@ -222,7 +222,7 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
 {
   virtual void start( Resolvable::constPtr resolvable )
   {
-    Zypper & zypper = *Zypper::instance();
+    Zypper & zypper = Zypper::instance();
 #if 0
     N_("Removing %s");	// what's actually needed here
 #endif
@@ -239,7 +239,7 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
   {
     if ( _progress )
       (*_progress)->set( value );
-    return !Zypper::instance()->exitRequested();
+    return !Zypper::instance().exitRequested();
   }
 
   virtual Action problem( Resolvable::constPtr resolvable, Error error, const std::string & description )
@@ -254,7 +254,7 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
     std::ostringstream s;
     s << str::Format(_("Removal of %s failed:")) % resolvable << std::endl;
     s << zcb_error2str(error, description);
-    Zypper::instance()->out().error(s.str());
+    Zypper::instance().out().error(s.str());
 
     return (Action) read_action_ari (PROMPT_ARI_RPM_REMOVE_PROBLEM, ABORT);
   }
@@ -270,13 +270,13 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
 
     if (error != NO_ERROR)
       // set proper exit code, don't write to output, the error should have been reported in problem()
-      Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     else
     {
       // print additional rpm output
       // bnc #369450
       if ( !reason.empty() )
-        Zypper::instance()->out().info(reason);
+        Zypper::instance().out().info(reason);
     }
   }
 
@@ -293,7 +293,7 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
 {
   virtual void start( Resolvable::constPtr resolvable )
   {
-    Zypper & zypper = *Zypper::instance();
+    Zypper & zypper = Zypper::instance();
 #if 0
     N_("Installing: %s");	// what's actually needed here
 #endif
@@ -310,7 +310,7 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
   {
     if ( _progress )
       (*_progress)->set( value );
-    return !Zypper::instance()->exitRequested();
+    return !Zypper::instance().exitRequested();
   }
 
   virtual Action problem( Resolvable::constPtr resolvable, Error error, const std::string & description, RpmLevel /*unused*/ )
@@ -328,7 +328,7 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
 #endif
     s << fixupNameEditionToIdent(_("Installation of %s-%s failed:"), resolvable->asString() ) << std::endl;
     s << zcb_error2str(error, description);
-    Zypper::instance()->out().error(s.str());
+    Zypper::instance().out().error(s.str());
 
     return (Action) read_action_ari (PROMPT_ARI_RPM_INSTALL_PROBLEM, ABORT);
   }
@@ -344,13 +344,13 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
 
     if ( error != NO_ERROR )
       // don't write to output, the error should have been reported in problem() (bnc #381203)
-      Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     else
     {
       // print additional rpm output
       // bnc #369450
       if ( !reason.empty() )
-        Zypper::instance()->out().info(reason);
+        Zypper::instance().out().info(reason);
     }
   }
 
@@ -369,7 +369,7 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
 {
   virtual void reportbegin()
   {
-    _progress.reset( new Out::ProgressBar( Zypper::instance()->out(),
+    _progress.reset( new Out::ProgressBar( Zypper::instance().out(),
 					   "fileconflict-check",
 					   // TranslatorExplanation A progressbar label
 					   _("Checking for file conflicts:") ) );
@@ -378,13 +378,13 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
   virtual bool start( const ProgressData & progress_r )
   {
     (*_progress)->set( progress_r );
-    return !Zypper::instance()->exitRequested();
+    return !Zypper::instance().exitRequested();
   }
 
   virtual bool progress( const ProgressData & progress_r, const sat::Queue & noFilelist_r )
   {
     (*_progress)->set( progress_r );
-    return !Zypper::instance()->exitRequested();
+    return !Zypper::instance().exitRequested();
   }
 
   virtual bool result( const ProgressData & progress_r, const sat::Queue & noFilelist_r, const sat::FileConflicts & conflicts_r )
@@ -395,10 +395,10 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
     _progress.reset();
 
     if ( conflicts_r.empty() && noFilelist_r.empty() )
-      return !Zypper::instance()->exitRequested();
+      return !Zypper::instance().exitRequested();
 
     // show error result
-    Out & out( Zypper::instance()->out() );
+    Out & out( Zypper::instance().out() );
     {
       Out::XmlNode guard( out, "fileconflict-summary" );
 
@@ -430,7 +430,7 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
 		  conflicts_r, out::FileConflictsListFormater() );
 	out.gap();
 
-	if ( Zypper::instance()->cOpts().count("replacefiles") )
+	if ( Zypper::instance().cOpts().count("replacefiles") )
 	{
 	  out.info( _("Conflicting files will be replaced."), " [--replacefiles]" );
 	}
@@ -450,7 +450,7 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
       }
     }
 
-    return !Zypper::instance()->exitRequested();
+    return !Zypper::instance().exitRequested();
   }
 
   virtual void reportend()

@@ -761,7 +761,7 @@ void solve_and_commit ( Zypper & zypper )
 
         try
         {
-          RuntimeData & gData = Zypper::instance()->runtimeData();
+          RuntimeData & gData = Zypper::instance().runtimeData();
           gData.show_media_progress_hack = true;
           // Total packages to download & install.
           // To be used to write overall progress of retrieving packages.

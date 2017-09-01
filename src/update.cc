@@ -60,7 +60,7 @@ struct CliScanIssues : public std::set<Issue>
 private:
   void checkCLI( const std::string & cliOption_r, const std::string & issueType_r )
   {
-    Zypper & zypper( *Zypper::instance() );
+    Zypper & zypper( Zypper::instance() );
 
     bool anyId = false;	// plain option without opt. args
     std::vector<std::string> issueIds;
@@ -100,7 +100,7 @@ namespace
   {
     return pi.isBroken()
     && ! pi.isUnwanted()
-    && ! ( Zypper::instance()->globalOpts().exclude_optional_patches && pi->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+    && ! ( Zypper::instance().globalOpts().exclude_optional_patches && pi->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
     && pi->asKind<Patch>()->restartSuggested();
   }
 
@@ -385,12 +385,12 @@ namespace
 
 void patch_check()
 {
-  Zypper & zypper( *Zypper::instance() );
+  Zypper & zypper( Zypper::instance() );
   Out & out( zypper.out() );
   DBG << "patch check" << endl;
 
   PatchCheckStats stats( zypper.globalOpts().exclude_optional_patches );
-  bool updatestackOnly = Zypper::instance()->cOpts().count("updatestack-only");
+  bool updatestackOnly = Zypper::instance().cOpts().count("updatestack-only");
   for_( it, God->pool().byKindBegin(ResKind::patch), God->pool().byKindEnd(ResKind::patch) )
   {
     const PoolItem & pi( *it );
@@ -644,7 +644,7 @@ find_updates( const ResKind & kind, Candidates & candidates )
   DBG << "Looking for update candidates of kind " << kind << endl;
 
   // package updates
-  if (kind == ResKind::package && !Zypper::instance()->cOpts().count("all"))
+  if (kind == ResKind::package && !Zypper::instance().cOpts().count("all"))
   {
     God->resolver()->doUpdate();
     ResPool::const_iterator

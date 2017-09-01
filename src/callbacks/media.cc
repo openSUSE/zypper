@@ -204,7 +204,7 @@ namespace ZmartRecipients
 								     const std::vector<std::string> & devices,
 								     unsigned & index)
   {
-    Zypper & zypper = *Zypper::instance();
+    Zypper & zypper = Zypper::instance();
 
     DBG << "medium problem, url: " << url.asString()
 	<< ", error " << error
@@ -271,7 +271,7 @@ namespace ZmartRecipients
       if ( zypper.runtimeData().action_rpm_download
 	&& !zypper.runtimeData().seen_verify_hint )
       {
-	print_verify_hint( Zypper::instance()->out() );
+	print_verify_hint( Zypper::instance().out() );
       }
       zypper.requestExit( false );
     }
@@ -291,7 +291,7 @@ namespace ZmartRecipients
 					     const std::string & description,
 					     media::AuthData & auth_data )
   {
-    Zypper & zypper = *Zypper::instance();
+    Zypper & zypper = Zypper::instance();
 
     if ( geteuid() != 0 && url.getQueryString().find("credentials=") != std::string::npos )
     {

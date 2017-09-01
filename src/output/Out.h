@@ -55,7 +55,7 @@ namespace text
 namespace out
 {
   static constexpr unsigned termwidthUnlimited = 0u;
-  unsigned defaultTermwidth();	// Zypper::instance()->out().termwidth()
+  unsigned defaultTermwidth();	// Zypper::instance().out().termwidth()
 } // namespace out
 ///////////////////////////////////////////////////////////////////
 
@@ -844,9 +844,9 @@ public:
    * \code
    *   {
    *     // shut up zypper
-   *     SCOPED_VERBOSITY( Zypper::instance()->out(), Out::QUIET );
+   *     SCOPED_VERBOSITY( Zypper::instance().out(), Out::QUIET );
    *     // expands to:
-   *     // const auto & raii __attribute__ ((__unused__))( Zypper::instance()->out().scopedVerbosity( Out::QUIET ) );
+   *     // const auto & raii __attribute__ ((__unused__))( Zypper::instance().out().scopedVerbosity( Out::QUIET ) );
    *     ...
    *     // leaving the block restores previous verbosity
    *   }
