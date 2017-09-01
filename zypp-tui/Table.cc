@@ -125,7 +125,7 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
     }
     else
     {
-      if ( !parent._inHeader && parent.editionStyle( c ) && Zypper::instance()->config().do_colors )
+      if ( !parent._inHeader && parent.editionStyle( c ) && Zypper::instance().config().do_colors )
       {
 	// Edition column
 	if ( parent._editionStyle.size() == 2 )

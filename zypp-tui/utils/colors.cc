@@ -26,14 +26,14 @@ bool has_colors()
 
 bool do_colors()
 {
-  return Zypper::instance()->config().do_colors;
+  return Zypper::instance().config().do_colors;
 }
 
 ///////////////////////////////////////////////////////////////////
 
 ansi::Color customColorCtor( ColorContext ctxt_r )
 {
-  const Config & conf( Zypper::instance()->config() );
+  const Config & conf( Zypper::instance().config() );
   switch ( ctxt_r )
   {
     case ColorContext::RESULT:		return conf.color_result;
