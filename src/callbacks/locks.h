@@ -23,10 +23,10 @@ namespace zypp {
     virtual Action conflict( const PoolQuery& query, ConflictState state )
     {
       if (state == SAME_RESULTS)
-        Zypper::instance()->out().error(
+        Zypper::instance().out().error(
           _("The following query locks the same objects as the one you want to remove:"));
       else
-        Zypper::instance()->out().error(
+        Zypper::instance().out().error(
           _("The following query locks some of the objects you want to unlock:"));
 
       query.serialize(std::cout);
@@ -41,7 +41,7 @@ namespace zypp {
   {
     virtual Action execute( const PoolQuery& query )
     {
-      Zypper::instance()->out().error(
+      Zypper::instance().out().error(
         _("The following query does not lock anything:"));
 
       query.serialize(std::cout);

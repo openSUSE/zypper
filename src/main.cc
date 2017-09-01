@@ -19,7 +19,7 @@
 
 void signal_handler( int sig )
 {
-  Zypper & zypper( *Zypper::instance() );
+  Zypper & zypper( Zypper::instance() );
   if ( zypper.runtimeData().waiting_for_input )
   {
     /// \todo try to get rid of this by improving the ^C handling when prompting
@@ -48,7 +48,7 @@ void signal_handler( int sig )
 void signal_nopipe( int sig )
 {
   WAR << "Exiting on SIGPIPE..." << endl;
-  Zypper & zypper( *Zypper::instance() );
+  Zypper & zypper( Zypper::instance() );
   zypper.requestImmediateExit();
 }
 
@@ -110,7 +110,7 @@ int main( int argc, char **argv )
     return ZYPPER_EXIT_ERR_BUG;
   }
 
-  Zypper & zypper( *Zypper::instance() );
+  Zypper & zypper( Zypper::instance() );
   int exitcode = zypper.main( argc, argv );
   if ( !exitcode )
     exitcode = zypper.exitInfoCode();	// propagate refresh errors even if main action succeeded

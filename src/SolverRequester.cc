@@ -471,19 +471,19 @@ void SolverRequester::updatePatches()
 	MIL << "got some pkgmgmt patches, will install these first" << endl;
 
 	// When (auto)restricting patch to the updatestack only, drop "--with-update"
-	if ( Zypper::instance()->runtimeData().solve_with_update )
+	if ( Zypper::instance().runtimeData().solve_with_update )
 	{
 	  WAR << "Drop --with-update while patching the update stack" << endl;
-	  Zypper::instance()->out().info(
+	  Zypper::instance().out().info(
 	    ColorString( ColorContext::MSG_WARNING,
 			 str::Format(_("Ignoring option %s when updating the update stack first.")) % "--with-update"
 	    ).str()
 	  );
-	  Zypper::instance()->runtimeData().solve_with_update = false;
+	  Zypper::instance().runtimeData().solve_with_update = false;
 	}
       }
 
-      if ( Zypper::instance()->cOpts().count("updatestack-only") )
+      if ( Zypper::instance().cOpts().count("updatestack-only") )
       {
 	MIL << "updatestack-only: will stop here!" << endl;
 	break;
@@ -518,9 +518,9 @@ bool SolverRequester::installPatch( const PackageSpec & patchspec, const PoolIte
     if ( ignore_pkgmgmt || patch->restartSuggested() )
     {
       Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
-      if ( Zypper::instance()->globalOpts().reboot_req_non_interactive )
+      if ( Zypper::instance().globalOpts().reboot_req_non_interactive )
         ignoreFlags |= Patch::Reboot;
-      if ( Zypper::instance()->cOpts().count("auto-agree-with-licenses") )
+      if ( Zypper::instance().cOpts().count("auto-agree-with-licenses") )
 	ignoreFlags |= Patch::License;
 
       if ( selected.isUnwanted() )

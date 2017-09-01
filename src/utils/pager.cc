@@ -49,7 +49,7 @@ static std::string pager_help_navigation( const std::string & pager )
 
 static bool show_in_pager( const std::string & pager, const Pathname & file )
 {
-  if ( Zypper::instance()->globalOpts().non_interactive )
+  if ( Zypper::instance().globalOpts().non_interactive )
     return true;
 
   std::ostringstream cmdline;

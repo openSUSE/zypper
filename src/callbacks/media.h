@@ -70,7 +70,7 @@ namespace ZmartRecipients
     : public callback::ReceiveReport<media::DownloadProgressReport>
   {
     DownloadProgressReportReceiver()
-      : _gopts(Zypper::instance()->globalOpts()), _be_quiet(false)
+      : _gopts(Zypper::instance().globalOpts()), _be_quiet(false)
     {}
 
     virtual void start( const Url & uri, Pathname localfile )
@@ -78,12 +78,12 @@ namespace ZmartRecipients
       _last_reported = time(NULL);
       _last_drate_avg = -1;
 
-      Out & out = Zypper::instance()->out();
+      Out & out = Zypper::instance().out();
 
       if (out.verbosity() < Out::HIGH &&
            (
              // don't show download info unless show_media_progress_hack is used
-             !Zypper::instance()->runtimeData().show_media_progress_hack ||
+             !Zypper::instance().runtimeData().show_media_progress_hack ||
              // don't report download of the media file (bnc #330614)
              Pathname(uri.getPathName()).basename() == "media"
            )
@@ -105,9 +105,9 @@ namespace ZmartRecipients
       if (now > _last_reported)
         _last_reported = now;
       else
-        return !Zypper::instance()->exitRequested();
+        return !Zypper::instance().exitRequested();
 
-      Zypper & zypper = *(Zypper::instance());
+      Zypper & zypper( Zypper::instance() );
 
       if (zypper.exitRequested())
       {
@@ -132,13 +132,13 @@ namespace ZmartRecipients
     {
       DBG << "media problem" << std::endl;
       if (_be_quiet)
-        Zypper::instance()->out().dwnldProgressEnd(uri, _last_drate_avg, true);
-      Zypper::instance()->out().error(zcb_error2str(error, description));
+        Zypper::instance().out().dwnldProgressEnd(uri, _last_drate_avg, true);
+      Zypper::instance().out().error(zcb_error2str(error, description));
 
       Action action = (Action) read_action_ari(
           PROMPT_ARI_MEDIA_PROBLEM, DownloadProgressReport::ABORT);
       if (action == DownloadProgressReport::RETRY)
-        Zypper::instance()->requestExit(false);
+        Zypper::instance().requestExit(false);
       return action;
     }
 
@@ -148,7 +148,7 @@ namespace ZmartRecipients
       if (_be_quiet)
         return;
 
-      Zypper::instance()->out().dwnldProgressEnd(
+      Zypper::instance().out().dwnldProgressEnd(
           uri, _last_drate_avg, ( error == NOT_FOUND ? indeterminate : TriBool(error != NO_ERROR) ) );
     }
 

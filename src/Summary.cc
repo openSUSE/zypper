@@ -126,7 +126,7 @@ void Summary::readPool( const ResPool & pool )
     }
   }
 
-  for ( const auto & spkg : Zypper::instance()->runtimeData().srcpkgs_to_install )
+  for ( const auto & spkg : Zypper::instance().runtimeData().srcpkgs_to_install )
   { to_be_installed[ResKind::srcpackage].insert(spkg); }
 
   // total packages to download & install
@@ -359,8 +359,8 @@ bool Summary::writeResolvableList( std::ostream & out,
   {
     static const ColorString quoteCh( "\"", ColorContext::HIGHLIGHT );
 
-    TriBool pkglistHighlight = Zypper::instance()->config().color_pkglistHighlight;
-    ansi::Color pkglistHighlightAttribute = Zypper::instance()->config().color_pkglistHighlightAttribute;
+    TriBool pkglistHighlight = Zypper::instance().config().color_pkglistHighlight;
+    ansi::Color pkglistHighlightAttribute = Zypper::instance().config().color_pkglistHighlightAttribute;
     char firstCh = 0;
 
     std::ostringstream s;
@@ -1377,16 +1377,16 @@ void Summary::writePackageCounts( std::ostream & out )
 
 void Summary::dumpTo( std::ostream & out )
 {
-  Zypper & zypper( *Zypper::instance() );
+  Zypper & zypper( Zypper::instance() );
 
   struct SetColor
   {
     SetColor( bool force )
-    : docolors( Zypper::instance()->config().do_colors )
-    { if (force) Zypper::instance()->config().do_colors = false; }
+    : docolors( Zypper::instance().config().do_colors )
+    { if (force) Zypper::instance().config().do_colors = false; }
 
     ~SetColor()
-    { Zypper::instance()->config().do_colors = docolors; }
+    { Zypper::instance().config().do_colors = docolors; }
 
     bool docolors;
   };

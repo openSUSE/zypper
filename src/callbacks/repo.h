@@ -48,7 +48,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
     std::ostringstream s;
     s << _("Retrieving delta") << ": "
         << _delta << ", " << _delta_size;
-    Zypper::instance()->out().info(s.str());
+    Zypper::instance().out().info(s.str());
   }
 
   // The progress is reported by the media backend
@@ -56,7 +56,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
 
   virtual void problemDeltaDownload( const std::string & description )
   {
-    Zypper::instance()->out().error(description);
+    Zypper::instance().out().error(description);
   }
 
   // implementation not needed prehaps - the media backend reports the download progress
@@ -73,23 +73,23 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
     // translators: this text is a progress display label e.g. "Applying delta foo [42%]"
     s << _("Applying delta") << ": " << _delta;
     _label_apply_delta = s.str();
-    Zypper::instance()->out().progressStart("apply-delta", _label_apply_delta, false);
+    Zypper::instance().out().progressStart("apply-delta", _label_apply_delta, false);
   }
 
   virtual void progressDeltaApply( int value )
   {
-    Zypper::instance()->out().progress("apply-delta", _label_apply_delta, value);
+    Zypper::instance().out().progress("apply-delta", _label_apply_delta, value);
   }
 
   virtual void problemDeltaApply( const std::string & description )
   {
-    Zypper::instance()->out().progressEnd("apply-delta", _label_apply_delta, true);
-    Zypper::instance()->out().error(description);
+    Zypper::instance().out().progressEnd("apply-delta", _label_apply_delta, true);
+    Zypper::instance().out().error(description);
   }
 
   virtual void finishDeltaApply()
   {
-    Zypper::instance()->out().progressEnd("apply-delta", _label_apply_delta);
+    Zypper::instance().out().progressEnd("apply-delta", _label_apply_delta);
   }
 
   void fillsRhs( TermLine & outstr_r, Zypper & zypper_r, Package::constPtr pkg_r )
@@ -106,7 +106,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
 
   virtual void infoInCache( Resolvable::constPtr res_r, const Pathname & localfile_r )
   {
-    Zypper & zypper = *Zypper::instance();
+    Zypper & zypper = Zypper::instance();
 
     TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
     outstr.lhs << str::Format(_("In cache %1%")) % localfile_r.basename();
@@ -122,7 +122,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
   {
     _resolvable_ptr =  resolvable_ptr;
     _url = url;
-    Zypper & zypper = *Zypper::instance();
+    Zypper & zypper = Zypper::instance();
 
     TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
     outstr.lhs << str::Format(_("Retrieving %s %s-%s.%s"))
@@ -144,20 +144,20 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
 
   virtual Action problem( Resolvable::constPtr resolvable_ptr, Error /*error*/, const std::string & description )
   {
-    Zypper::instance()->out().error(description);
+    Zypper::instance().out().error(description);
     DBG << "error report" << std::endl;
 
     Action action = (Action) read_action_ari(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, ABORT);
     if (action == DownloadResolvableReport::RETRY)
-      --Zypper::instance()->runtimeData().commit_pkg_current;
+      --Zypper::instance().runtimeData().commit_pkg_current;
     else
-      Zypper::instance()->runtimeData().action_rpm_download = false;
+      Zypper::instance().runtimeData().action_rpm_download = false;
     return action;
   }
 
   virtual void pkgGpgCheck( const UserData & userData_r )
   {
-    Zypper & zypper = *Zypper::instance();
+    Zypper & zypper = Zypper::instance();
     // "ResObject"		ResObject::constPtr of the package
     // "Localpath"		Pathname to downloaded package on disk
     // "CheckPackageResult"	RpmDb::CheckPackageResult of signature check
@@ -248,7 +248,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
   // implementation not needed prehaps - the media backend reports the download progress
   virtual void finish( Resolvable::constPtr /*resolvable_ptr**/, Error error, const std::string & reason )
   {
-    Zypper::instance()->runtimeData().action_rpm_download = false;
+    Zypper::instance().runtimeData().action_rpm_download = false;
 /*
     display_done ("download-resolvable", cout_v);
     display_error (error, reason);
@@ -260,7 +260,7 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
 {
   virtual void start( const ProgressData &data )
   {
-    Zypper::instance()->out().progressStart(
+    Zypper::instance().out().progressStart(
         str::numstring(data.numericId()),
         data.name(),
         data.reportAlive());
@@ -269,14 +269,14 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
   virtual bool progress( const ProgressData &data )
   {
     if (data.reportAlive())
-      Zypper::instance()->out().progress(
+      Zypper::instance().out().progress(
           str::numstring(data.numericId()),
           data.name());
     else
-      Zypper::instance()->out().progress(
+      Zypper::instance().out().progress(
           str::numstring(data.numericId()),
           data.name(), data.val());
-    return !Zypper::instance()->exitRequested();
+    return !Zypper::instance().exitRequested();
   }
 
 //   virtual Action problem( Repository /*repo*/, Error error, const std::string & description )
@@ -288,7 +288,7 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
 
   virtual void finish( const ProgressData &data )
   {
-    Zypper::instance()->out().progressEnd(
+    Zypper::instance().out().progressEnd(
         str::numstring(data.numericId()),
         data.name());
   }
@@ -300,31 +300,31 @@ struct RepoReportReceiver  : public callback::ReceiveReport<repo::RepoReport>
   virtual void start(const ProgressData & pd, const RepoInfo repo)
   {
     _repo = repo;
-    Zypper::instance()->out()
+    Zypper::instance().out()
       .progressStart("repo", "(" + _repo.name() + ") " + pd.name());
   }
 
   virtual bool progress(const ProgressData & pd)
   {
-    Zypper::instance()->out()
+    Zypper::instance().out()
       .progress("repo", "(" + _repo.name() + ") " + pd.name(), pd.val());
-    return !Zypper::instance()->exitRequested();
+    return !Zypper::instance().exitRequested();
   }
 
   virtual Action problem( Repository /*repo*/, Error error, const std::string & description )
   {
-    Zypper::instance()->out()
+    Zypper::instance().out()
       .progressEnd("repo", "(" + _repo.name() + ") ");
-    Zypper::instance()->out().error(zcb_error2str(error, description));
+    Zypper::instance().out().error(zcb_error2str(error, description));
     return (Action) read_action_ari (PROMPT_ARI_REPO_PROBLEM, ABORT);
   }
 
   virtual void finish( Repository /*repo*/, const std::string & task, Error error, const std::string & reason )
   {
-    Zypper::instance()->out()
+    Zypper::instance().out()
       .progressEnd("repo", "(" + _repo.name() + ") ");
     if (error != NO_ERROR)
-      Zypper::instance()->out().error(zcb_error2str(error, reason));
+      Zypper::instance().out().error(zcb_error2str(error, reason));
 //    display_step(100);
     // many of these, avoid newline -- probably obsolete??
     //if (task.find("Reading patch") == 0)

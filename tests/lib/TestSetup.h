@@ -417,7 +417,7 @@ class TestSetup
   private:
     filesystem::TmpDir _tmprootdir;
     Pathname           _rootdir;
-    Zypper &           _zypper = *Zypper::instance();
+    Zypper &           _zypper = Zypper::instance();
 };
 
 

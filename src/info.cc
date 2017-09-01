@@ -83,7 +83,7 @@ namespace
     tab_r.addDetail( _("Description"),	::printRichText( pi_r.description() ) );
 
     // dependencies according to cli options and kind
-    const auto & cOpts( Zypper::instance()->cOpts() );
+    const auto & cOpts( Zypper::instance().cOpts() );
     bool isPatch = pi_r.isKind<Patch>();
 
     for ( const auto & dep : {

@@ -143,7 +143,7 @@ std::string i18nPatchStatus( const PoolItem & pi_r )
       if ( pi_r.isUnwanted() )
 	// Translator: Patch status: needed, optional, unwanted, applied, not needed
 	return ColorString( tUnwanted, ColorContext::HIGHLIGHT ).str();
-      if ( Zypper::instance()->globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+      if ( Zypper::instance().globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
 	return ColorString( tOptional, ColorContext::LOWLIGHT ).str();
       return tNeeded;
       break;
@@ -172,7 +172,7 @@ const char * textPatchStatus( const PoolItem & pi_r )
     case ResStatus::BROKEN:
       if ( pi_r.isUnwanted() )
 	return tUnwanted;
-      if ( Zypper::instance()->globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+      if ( Zypper::instance().globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
 	return tOptional;
       return tNeeded;
       break;
@@ -255,7 +255,7 @@ FillPatchesTable::FillPatchesTable( Table & table_r, TriBool inst_notinst_r )
   << _("Summary")
   );
   table_r.defaultSortColumn( 1 );	// by Name
-  // if ( ! Zypper::instance()->globalOpts().no_abbrev ) table.allowAbbrev( 6 );	// Summary
+  // if ( ! Zypper::instance().globalOpts().no_abbrev ) table.allowAbbrev( 6 );	// Summary
 };
 
 bool FillPatchesTable::operator()( const PoolItem & pi_r ) const
@@ -364,7 +364,7 @@ Url make_url( const std::string & url_s )
     }
     else
     {
-      Zypper::instance()->out().error(_("Specified local path does not exist or is not accessible."));
+      Zypper::instance().out().error(_("Specified local path does not exist or is not accessible."));
       ERR << "specified local path does not exist or is not accessible" << endl;
       return u;
     }
@@ -376,7 +376,7 @@ Url make_url( const std::string & url_s )
   catch ( const Exception & excpt_r )
   {
     ZYPP_CAUGHT( excpt_r );
-    Zypper::instance()->out().error( str::Str() << _("Given URI is invalid") << ": " << urlstr << " (" << excpt_r.asUserString() << ")" );
+    Zypper::instance().out().error( str::Str() << _("Given URI is invalid") << ": " << urlstr << " (" << excpt_r.asUserString() << ")" );
   }
   return u;
 }
@@ -456,7 +456,7 @@ Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::s
 
     if ( platform.empty() )
     {
-      Zypper & zypper( *Zypper::instance() );
+      Zypper & zypper( Zypper::instance() );
 
       if ( default_platform.empty() )
       {
@@ -504,8 +504,8 @@ Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::s
   }
   else
   {
-    Zypper::instance()->out().error(_("Invalid OBS URI."), _("Correct form is obs://<project>/[platform]"));
-    Zypper::instance()->out().info(str::form(_("Example: %s"), "obs://server:http/openSUSE_11.3"));
+    Zypper::instance().out().error(_("Invalid OBS URI."), _("Correct form is obs://<project>/[platform]"));
+    Zypper::instance().out().info(str::form(_("Example: %s"), "obs://server:http/openSUSE_11.3"));
   }
 
   return Url();
@@ -553,7 +553,7 @@ Pathname cache_rpm( const std::string & rpm_uri_str, const Pathname & cache_dir 
 
     if ( error )
     {
-      Zypper::instance()->out().error(
+      Zypper::instance().out().error(
         _("Problem copying the specified RPM file to the cache directory."),
         _("Perhaps you are running out of disk space."));
       return Pathname();
@@ -562,7 +562,7 @@ Pathname cache_rpm( const std::string & rpm_uri_str, const Pathname & cache_dir 
   }
   catch (const Exception & e)
   {
-    Zypper::instance()->out().error(e,
+    Zypper::instance().out().error(e,
         _("Problem retrieving the specified RPM file") + std::string(":"),
         _("Please check whether the file is accessible."));
   }
@@ -626,7 +626,7 @@ std::string asXML( const Product & p, bool is_installed )
       for ( const auto & tag : copts["xmlfwd"] )
       { tags.push_back( Pathname::assertprefix( "/product", tag ).asString() ); }
 
-      const Pathname & proddir( Pathname::assertprefix( Zypper::instance()->globalOpts().root_dir, "/etc/products.d" ) );
+      const Pathname & proddir( Pathname::assertprefix( Zypper::instance().globalOpts().root_dir, "/etc/products.d" ) );
       try
       {
 	XmlFilter::fwd( InputStream( proddir+p.referenceFilename() ), *fwd, std::move(tags)  );
