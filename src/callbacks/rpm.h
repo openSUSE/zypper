@@ -13,7 +13,9 @@
 #include <ctime>
 
 #include <zypp/base/Logger.h>
+#include <zypp/base/IOStream.h>
 #include <zypp/base/String.h>
+#include <zypp/base/Regex.h>
 #include <zypp/sat/Queue.h>
 #include <zypp/sat/FileConflicts.h>
 #include <zypp/ZYppCallbacks.h>
@@ -34,6 +36,33 @@ namespace
     str::replaceAll( translatedFormat_r, "%s-%s", "%s" );
     return str::Format( translatedFormat_r) % ident_r;
   }
+
+  /** Print additional rpm outout and scan for %script errors. */
+  void processAdditionalRpmOutput( const std::string & output_r )
+  {
+    if ( ! output_r.empty() )
+    {
+      std::istringstream input( output_r );
+
+      Out::Info info( Zypper::instance().out() );
+      ColorStream msg( info << "", ColorContext::HIGHLIGHT );
+      for ( iostr::EachLine in( input ); in; in.next() )
+      {
+	const std::string & line( *in );
+
+	static str::regex  rx("^(warning|error): %.* scriptlet failed, ");
+	static str::smatch what;
+	if ( str::regex_match( line, what, rx ) )
+	{
+	  msg << ( (line[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << *in ) << endl;
+	  Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
+	}
+	else
+	  msg << *in << endl;
+      }
+    }
+  }
+
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
@@ -273,10 +302,8 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
       Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     else
     {
-      // print additional rpm output
-      // bnc #369450
-      if ( !reason.empty() )
-        Zypper::instance().out().info(reason);
+      // bnc #369450: print additional rpm output
+      processAdditionalRpmOutput( reason );
     }
   }
 
@@ -347,10 +374,8 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
       Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     else
     {
-      // print additional rpm output
-      // bnc #369450
-      if ( !reason.empty() )
-        Zypper::instance().out().info(reason);
+      // bnc #369450: print additional rpm output
+      processAdditionalRpmOutput( reason );
     }
   }
 

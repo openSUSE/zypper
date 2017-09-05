@@ -25,6 +25,7 @@
 #define ZYPPER_EXIT_INF_CAP_NOT_FOUND      104 // given capability not found (for install/remove)
 #define ZYPPER_EXIT_ON_SIGNAL              105 // SIGINT or SIGTERM received	(HOW CAN THIS BE 'info'?)
 #define ZYPPER_EXIT_INF_REPOS_SKIPPED      106 // some repos have been skipped due to refresh errors
+#define ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED  107 // some rpm %post configuration script failed
 
 // undefine _, N_ and PL_ macros from libzypp
 #ifdef _
