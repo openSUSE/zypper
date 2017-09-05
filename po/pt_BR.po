@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-09-05 16:40+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
-"zypper/master/pt_BR/>\n"
+"PO-Revision-Date: 2017-09-11 14:38+0000\n"
+"Last-Translator: carlo valente <carlo.gt.valente@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) "
+"<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1251,12 +1251,14 @@ msgstr[0] "O seguinte aplicativo irá alterar de fornecedor:"
 msgstr[1] "Os seguintes %d aplicativos irão alterar de fornecedor:"
 
 #: src/Summary.cc:1111
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "O seguinte pacote não é suportado pelo fornecedor:"
-msgstr[1] "Os seguintes %d pacotes não são suportados pelo fornecedor:"
+msgstr[0] "O seguinte pacote não possui informação de suporte de seu fornecedor:"
+msgstr[1] ""
+"Os seguintes %d pacotes não possuem informação de suporte de seus "
+"fornecedores:"
 
 #: src/Summary.cc:1129
 #, c-format, boost-format
