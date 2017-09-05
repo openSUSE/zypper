@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 08/09/2017
+.\"      Date: 09/05/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "08/09/2017" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "09/05/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -3813,6 +3813,12 @@ Returned upon exiting after receiving a SIGINT or SIGTERM\&.
 .RS 4
 Some repository had to be disabled temporarily because it failed to refresh\&. You should check your repository configuration (e\&.g\&.
 \fBzypper ref \-f\fR)\&.
+.RE
+.PP
+\fB107\fR \- \fBZYPPER_EXIT_INF_RPM_SCRIPT_FAILED\fR
+.RS 4
+Installation basically succeeded, but some of the packages %post install scripts returned an error\&. These packages were successfully unpacked to disk and are registered in the rpm database, but due to the failed install script they may not work as expected\&. The failed scripts output might reveal what actually went wrong\&. Any scripts output is also logged to
+\fB/var/log/zypp/history\fR\&.
 .RE
 .sp
 Zypper subcommands (see section \fBSUBCOMMANDS\fR) may return \fBdifferent codes\fR which should be described in the commands man page\&. Call \fBzypper help \fR\fB\fIsubcommand\fR\fR to see the subcommands man page if one is provided\&.
