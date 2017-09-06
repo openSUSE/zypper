@@ -159,12 +159,20 @@ namespace zypp
      * Use \ref ZYPP_THROW to throw exceptions.
     */
     Exception( const std::string & msg_r );
+    /** \overload */
+    Exception( std::string && msg_r );
 
     /** Ctor taking a message and an exception to remember as history
      * \see \ref remember
      * Use \ref ZYPP_THROW to throw exceptions.
     */
     Exception( const std::string & msg_r, const Exception & history_r );
+    /** \overload moving */
+    Exception( std::string && msg_r, const Exception & history_r );
+    /** \overload moving */
+    Exception( const std::string & msg_r, Exception && history_r );
+    /** \overload moving */
+    Exception( std::string && msg_r, Exception && history_r );
 
     /** Dtor. */
     virtual ~Exception() throw();
@@ -204,9 +212,28 @@ namespace zypp
 
     /** Store an other Exception as history. */
     void remember( const Exception & old_r );
+    /** \overload moving */
+    void remember( Exception && old_r );
 
     /** Add some message text to the history. */
     void addHistory( const std::string & msg_r );
+    /** \overload moving */
+    void addHistory( std::string && msg_r );
+
+    /** \ref addHistory from string container types (oldest first) */
+    template<class TContainer>
+    void addToHistory( const TContainer & msgc_r )
+    {
+      for ( const std::string & el : msgc_r )
+	addHistory( el );
+    }
+    /** \ref addHistory from string container types (oldest first) moving */
+    template<class TContainer>
+    void moveToHistory( TContainer && msgc_r )
+    {
+      for ( std::string & el : msgc_r )
+	addHistory( std::move(el) );
+    }
 
     /** Iterator pointing to the most recent message. */
     HistoryIterator historyBegin() const
@@ -250,6 +277,8 @@ namespace zypp
     static std::string strErrno( int errno_r );
      /** Make a string from \a errno_r and \a msg_r. */
     static std::string strErrno( int errno_r, const std::string & msg_r );
+    /** \overload moving */
+    static std::string strErrno( int errno_r, std::string && msg_r );
 
   public:
     /** Drop a logline on throw, catch or rethrow.

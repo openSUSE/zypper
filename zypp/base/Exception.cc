@@ -49,9 +49,25 @@ namespace zypp
   : _msg( msg_r )
   {}
 
+  Exception::Exception( std::string && msg_r )
+  : _msg( std::move(msg_r) )
+  {}
+
   Exception::Exception( const std::string & msg_r, const Exception & history_r )
   : _msg( msg_r )
   { remember( history_r ); }
+
+  Exception::Exception( std::string && msg_r, const Exception & history_r )
+  : _msg( std::move(msg_r) )
+  { remember( history_r ); }
+
+  Exception::Exception( const std::string & msg_r, Exception && history_r )
+  : _msg( msg_r )
+  { remember( std::move(history_r) ); }
+
+  Exception::Exception( std::string && msg_r, Exception && history_r )
+  : _msg( std::move(msg_r) )
+  { remember( std::move(history_r) ); }
 
   Exception::~Exception() throw()
   {}
@@ -96,10 +112,21 @@ namespace zypp
     }
   }
 
-  void Exception::addHistory( const std::string & msg_r )
+  void Exception::remember( Exception && old_r )
   {
-    _history.push_front( msg_r );
+    if ( &old_r != this ) // no self-remember
+    {
+      History & newh( old_r._history );	// stealing it
+      newh.push_front( old_r.asUserString() );
+      _history.swap( newh );
+    }
   }
+
+  void Exception::addHistory( const std::string & msg_r )
+  { _history.push_front( msg_r ); }
+
+  void Exception::addHistory( std::string && msg_r )
+  { _history.push_front( std::move(msg_r) ); }
 
   std::string Exception::historyAsString() const
   {
@@ -125,10 +152,12 @@ namespace zypp
   { return str::strerror( errno_r ); }
 
   std::string Exception::strErrno( int errno_r, const std::string & msg_r )
+  { return strErrno( errno_r, std::string(msg_r) );  }
+
+  std::string Exception::strErrno( int errno_r, std::string && msg_r )
   {
-    std::string ret( msg_r );
-    ret += ": ";
-    return ret += strErrno( errno_r );
+    msg_r += ": ";
+    return msg_r += strErrno( errno_r );
   }
 
   void Exception::log( const Exception & excpt_r, const CodeLocation & where_r,
