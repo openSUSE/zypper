@@ -29,6 +29,7 @@
 #include "zypp/KeyRing.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/TmpPath.h"
+#include "zypp/ZYppCallbacks.h"       // JobReport::instance
 
 using std::endl;
 
@@ -272,12 +273,18 @@ namespace zypp
     importKey( key.path(), trusted ? trustedKeyRing() : generalKeyRing() );
 
     if ( trusted )
-    {
+    try {
       callback::SendReport<target::rpm::KeyRingSignals> rpmdbEmitSignal;
-      callback::SendReport<KeyRingSignals> emitSignal;
-
       rpmdbEmitSignal->trustedKeyAdded( key );
+
+      callback::SendReport<KeyRingSignals> emitSignal;
       emitSignal->trustedKeyAdded( key );
+    }
+    catch ( const Exception & excp )
+    {
+      ERR << "Could not import key " << excp << endl;
+      // TODO: JobReport as hotfix for bsc#1057188; should bubble up and go through some callback
+      JobReport::error( excp.asUserHistory() );
     }
   }
 
@@ -288,22 +295,23 @@ namespace zypp
 
   void KeyRing::Impl::deleteKey( const std::string & id, bool trusted )
   {
-    PublicKey key;
-
-    if ( trusted )
-    {
-	key = exportKey( id, trustedKeyRing() );
-    }
-
     deleteKey( id, trusted ? trustedKeyRing() : generalKeyRing() );
 
     if ( trusted )
-    {
-      callback::SendReport<target::rpm::KeyRingSignals> rpmdbEmitSignal;
-      callback::SendReport<KeyRingSignals> emitSignal;
+    try {
+      PublicKey key( exportKey( id, trustedKeyRing() ) );
 
+      callback::SendReport<target::rpm::KeyRingSignals> rpmdbEmitSignal;
       rpmdbEmitSignal->trustedKeyRemoved( key );
+
+      callback::SendReport<KeyRingSignals> emitSignal;
       emitSignal->trustedKeyRemoved( key );
+    }
+    catch ( const Exception & excp )
+    {
+      ERR << "Could not delete key " << excp << endl;
+      // TODO: JobReport as hotfix for bsc#1057188; should bubble up and go through some callback
+      JobReport::error( excp.asUserHistory() );
     }
   }
 

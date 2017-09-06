@@ -123,31 +123,14 @@ struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
 
   virtual void trustedKeyAdded( const PublicKey &key )
   {
-    MIL << "trusted key added to zypp Keyring. Importing" << endl;
-    // now import the key in rpm
-    try
-    {
-      _rpmdb.importPubkey( key );
-    }
-    catch (RpmException &e)
-    {
-      ERR << "Could not import key " << key.id() << " (" << key.name() << " from " << key.path() << " in rpm database" << endl;
-    }
+    MIL << "trusted key added to zypp Keyring. Importing..." << endl;
+    _rpmdb.importPubkey( key );
   }
 
   virtual void trustedKeyRemoved( const PublicKey &key  )
   {
     MIL << "Trusted key removed from zypp Keyring. Removing..." << endl;
-
-    // remove the key from rpm
-    try
-    {
-      _rpmdb.removePubkey( key );
-    }
-    catch (RpmException &e)
-    {
-      ERR << "Could not remove key " << key.id() << " (" << key.name() << ") from rpm database" << endl;
-    }
+    _rpmdb.removePubkey( key );
   }
 
   RpmDb &_rpmdb;
@@ -1118,17 +1101,25 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
   std::string line;
+  std::vector<std::string> excplines;
   while ( systemReadLine( line ) )
   {
-    ( str::startsWith( line, "error:" ) ? WAR : DBG ) << line << endl;
+    if ( str::startsWith( line, "error:" ) )
+    {
+      WAR << line << endl;
+      excplines.push_back( std::move(line) );
+    }
+    else
+      DBG << line << endl;
   }
 
   if ( systemStatus() != 0 )
   {
-    //TranslatorExplanation first %s is file name, second is error message
-    ZYPP_THROW(RpmSubprocessException( str::Format(_("Failed to import public key from file %s: %s"))
-				       % pubkey_r.asString()
-				       % error_message ));
+    // Translator: %1% is a gpg public key
+    RpmSubprocessException excp( str::Format(_("Failed to import public key %1%") ) % pubkey_r.asString() % "" );
+    excp.moveToHistory( excplines );
+    excp.addHistory( std::move(error_message) );
+    ZYPP_THROW( std::move(excp) );
   }
   else
   {
@@ -1180,26 +1171,25 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
   std::string line;
+  std::vector<std::string> excplines;
   while ( systemReadLine( line ) )
   {
-    if ( line.substr( 0, 6 ) == "error:" )
+    if ( str::startsWith( line, "error:" ) )
     {
       WAR << line << endl;
+      excplines.push_back( std::move(line) );
     }
     else
-    {
       DBG << line << endl;
-    }
   }
 
-  int rpm_status = systemStatus();
-
-  if ( rpm_status != 0 )
+  if ( systemStatus() != 0 )
   {
-    //TranslatorExplanation first %s is key name, second is error message
-    ZYPP_THROW(RpmSubprocessException( str::Format(_("Failed to remove public key %s: %s"))
-				       % pubkey_r.asString()
-				       % error_message ));
+    // Translator: %1% is a gpg public key
+    RpmSubprocessException excp( str::Format(_("Failed to remove public key %1%")) % pubkey_r.asString() % "" );
+    excp.moveToHistory( excplines );
+    excp.addHistory( std::move(error_message) );
+    ZYPP_THROW( std::move(excp) );
   }
   else
   {
