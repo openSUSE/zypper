@@ -25,7 +25,7 @@ namespace zypp
 
     std::ostream & TargetAbortedException::dumpOn( std::ostream & str ) const
     {
-      return str << "Installation aborted by user" << endl;
+      return str << "Installation aborted by user";
     }
 
 
