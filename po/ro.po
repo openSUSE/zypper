@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 12:50+0200\n"
+"POT-Creation-Date: 2017-09-07 12:25+0200\n"
 "PO-Revision-Date: 2012-11-19 14:59+0200\n"
 "Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
 "Language-Team: Romanian <LL@li.org>\n"
@@ -42,653 +42,11 @@ msgstr ""
 msgid "Hal Exception"
 msgstr "Excepție Hal"
 
-#: zypp/Url.cc:114
-msgid "Invalid LDAP URL query string"
-msgstr "Șir de interogare URL LDAP invalid"
-
-#: zypp/Url.cc:153
-#, c-format, boost-format
-msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Parametru șir de interogare URL LDAP invalid '%s'"
-
-#: zypp/Url.cc:300
-msgid "Unable to clone Url object"
-msgstr "Nu pot clona obiectul Url"
-
-#: zypp/Url.cc:313
-msgid "Invalid empty Url object reference"
-msgstr "Referință vidă invalidă la obiect Url"
-
-#: zypp/Url.cc:326 zypp/Url.cc:340
-msgid "Unable to parse Url components"
-msgstr "Nu pot parcurge componentele Url"
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "Nu pot inițializa atributele mutex"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "Nu pot seta atributul mutex recursiv"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "Nu pot inițializa mutex-ul recursiv"
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "Nu pot obține zăvorul mutex-ului"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "Nu pot elibera zăvorul mutex-ului"
-
-#: zypp/Dep.cc:96
-msgid "Provides"
-msgstr "Oferă"
-
-#: zypp/Dep.cc:97
-msgid "Prerequires"
-msgstr ""
-
-#: zypp/Dep.cc:98
-msgid "Requires"
-msgstr "Necesită"
-
-#: zypp/Dep.cc:99
-msgid "Conflicts"
-msgstr "Conflicte"
-
-#: zypp/Dep.cc:100
-#, fuzzy
-msgid "Obsoletes"
-msgstr "păstrează pachetul vechi %s"
-
-#: zypp/Dep.cc:101
-msgid "Recommends"
-msgstr "Recomandă"
-
-#: zypp/Dep.cc:102
-msgid "Suggests"
-msgstr "Sugerează"
-
-#: zypp/Dep.cc:103
-msgid "Enhances"
-msgstr "Îmbunătățește"
-
-#: zypp/Dep.cc:104
-msgid "Supplements"
-msgstr "Suplimentează"
-
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "Tip dubios '%s' pentru byte-ul %u, suma de control '%s'"
-
-#: zypp/target/TargetImpl.cc:310
-msgid " executed"
-msgstr " executat"
-
-#: zypp/target/TargetImpl.cc:332
-msgid " execution failed"
-msgstr " execuție eșuată"
-
-#. translators: We may find the same script content in files with different names.
-#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
-#. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:449
-#, fuzzy, c-format, boost-format
-msgid "%s already executed as %s)"
-msgstr "%1 este deja decriptat!"
-
-#: zypp/target/TargetImpl.cc:459
-msgid " execution skipped while aborting"
-msgstr " execuție sărită în timpul anulării"
-
-#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
-#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
-#: zypp/target/TargetImpl.cc:607
-msgid "Error sending update message notification."
-msgstr "Eroare trimitere notificare mesaj de actualizare."
-
-#: zypp/target/TargetImpl.cc:658
-msgid "New update message"
-msgstr "Nou mesaj de actualizare"
-
-#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
-#: zypp/target/TargetImpl.cc:1627
-#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
-msgid "Installation has been aborted as directed."
-msgstr "Instalarea a fost anulată la cerere."
-
-#: zypp/target/hal/HalContext.cc:24
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr ""
-"Ne pare rău, dar această versiune de libzypp a fost construită fără suport "
-"HAL."
-
-#: zypp/target/hal/HalContext.cc:117
-msgid "HalContext not connected"
-msgstr "HalContext nu este conectat"
-
-#: zypp/target/hal/HalContext.cc:127
-msgid "HalDrive not initialized"
-msgstr "HalDrive nu este inițializat"
-
-#: zypp/target/hal/HalContext.cc:137
-msgid "HalVolume not initialized"
-msgstr "HalVolume nu este inițializat"
-
-#: zypp/target/hal/HalContext.cc:229
-msgid "Unable to create dbus connection"
-msgstr "Nu pot crea conexiunea dbus"
-
-#: zypp/target/hal/HalContext.cc:242
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: Nu pot crea contextul libhal"
-
-#: zypp/target/hal/HalContext.cc:257
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: Nu pot seta conexiunea dbus"
-
-#: zypp/target/hal/HalContext.cc:272
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "Nu pot inițializa contextul HAL -- este posibil ca hald să nu ruleze?"
-
-#: zypp/target/hal/HalContext.cc:851
-msgid "Not a CDROM drive"
-msgstr "Nu este o unitate CDROM"
-
-#. TranslatorExplanation after semicolon is error message
-#. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
-#: zypp/target/rpm/RpmDb.cc:2219
-msgid "RPM failed: "
-msgstr "RPM a eșuat:"
-
-#. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1129
-#, c-format, boost-format
-msgid "Failed to import public key from file %s: %s"
-msgstr "Importul cheii publice din fișierul %s a eșuat: %s"
-
-#. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1200
-#, c-format, boost-format
-msgid "Failed to remove public key %s: %s"
-msgstr "Îndepărtarea cheii publice %s a eșuat: %s"
-
-#: zypp/target/rpm/RpmDb.cc:1578
-msgid "Package is not signed!"
-msgstr ""
-
-#. Translator: %s = name of an rpm package. A list of diffs follows
-#. this message.
-#: zypp/target/rpm/RpmDb.cc:1878
-#, c-format, boost-format
-msgid "Changed configuration files for %s:"
-msgstr "Fișiere de configurare modificate pentru %s:"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
-#, c-format, boost-format
-msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "rpm a salvat %s ca %s, dar nu a putut determina diferențele"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2056
-#, c-format, boost-format
-msgid ""
-"rpm saved %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"rpm a salvat %s ca %s.\n"
-"Acestea sunt primele 25 de linii diferite:\n"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
-#, c-format, boost-format
-msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr "rpm a creat %s ca %s, dar nu a putut determina diferențele"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2061
-#, c-format, boost-format
-msgid ""
-"rpm created %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"rpm a creat %s ca %s.\n"
-"Acestea sunt primele 25 de linii diferite:\n"
-
-#. report additional rpm output in finish
-#. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
-msgid "Additional rpm output"
-msgstr "Ieșire rpm suplimentară"
-
-#: zypp/target/rpm/RpmDb.cc:2374
-#, c-format, boost-format
-msgid "created backup %s"
-msgstr "backup %s creat"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
-#, fuzzy
-msgid "Signature is OK"
-msgstr "Fișierul semnătură %s nu a fost găsit"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
-msgid "Unknown type of signature"
-msgstr ""
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
-#, fuzzy
-msgid "Signature does not verify"
-msgstr "Fișierul semnătură %s nu a fost găsit"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
-#, fuzzy
-msgid "Signature is OK, but key is not trusted"
-msgstr "Fișierul semnătură %s nu a fost găsit"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
-msgid "Signatures public key is not available"
-msgstr ""
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
-msgid "File does not exist or signature can't be checked"
-msgstr ""
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2407
-msgid "File is unsigned"
-msgstr ""
-
-#: zypp/ProblemSolution.cc:114
-msgid "Following actions will be done:"
-msgstr "Vor fi efectuate următoarele acțiuni:"
-
-#: zypp/RepoManager.cc:312
-#, boost-format
-msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr ""
-
-#. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
-#: zypp/repo/PluginServices.cc:49
-#, c-format, boost-format
-msgid "Failed to read directory '%s'"
-msgstr "Citirea directorului '%s' a eșuat"
-
-#: zypp/RepoManager.cc:330
-#, boost-format
-msgid "Cannot read repo file '%1%': Permission denied"
-msgstr ""
-
-#: zypp/RepoManager.cc:353
-msgid "Repository alias cannot start with dot."
-msgstr "Aliasul sursei de instalare nu poate începe cu punct."
-
-#: zypp/RepoManager.cc:364
-msgid "Service alias cannot start with dot."
-msgstr "Aliasul serviciului nu poate începe cu punct."
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
-#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
-#, c-format, boost-format
-msgid "Can't open file '%s' for writing."
-msgstr "Nu se poate deschide fișierul '%s' pentru scriere."
-
-#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
-#. %1% = service name
-#. %2% = repository name
-#: zypp/RepoManager.cc:871
-#, boost-format
-msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr ""
-
-#. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1098
-#, fuzzy
-msgid "Valid metadata not found at specified URL"
-msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "La URL-ul (URL-urile) specificate nu au fost găsite metadate valide"
-msgstr[1] "La URL-ul (URL-urile) specificate nu au fost găsite metadate valide"
-msgstr[2] "La URL-ul (URL-urile) specificate nu au fost găsite metadate valide"
-
-#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
-#, c-format, boost-format
-msgid "Can't create %s"
-msgstr "Nu se poate crea %s"
-
-#: zypp/RepoManager.cc:1154
-msgid "Can't create metadata cache directory."
-msgstr "Nu se poate crea directorul pentru cache-ul de metadate."
-
-#: zypp/RepoManager.cc:1300
-#, c-format, boost-format
-msgid "Building repository '%s' cache"
-msgstr "Construirea cache-ului sursei de instalare '%s'"
-
-#: zypp/RepoManager.cc:1320
-#, c-format, boost-format
-msgid "Can't create cache at %s - no writing permissions."
-msgstr "Nu se poate crea memoria cache la %s - lipsește dreptul de scriere."
-
-#: zypp/RepoManager.cc:1384
-#, c-format, boost-format
-msgid "Failed to cache repo (%d)."
-msgstr "Sursa de instalare (%d) nu a putut fi încărcată în cache."
-
-#: zypp/RepoManager.cc:1395
-msgid "Unhandled repository type"
-msgstr "Tip de sursă de instalare netratat"
-
-#. prepare exception to be thrown if the type could not be determined
-#. due to a media exception. We can't throw right away, because of some
-#. problems with proxy servers returning an incorrect error
-#. on ftp file-not-found(bnc #335906). Instead we'll check another types
-#. before throwing.
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
-#, c-format, boost-format
-msgid "Error trying to read from '%s'"
-msgstr "Eroare la încercarea de a citi din '%s'"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
-#, c-format, boost-format
-msgid "Unknown error reading from '%s'"
-msgstr "Eroare necunoscută la citirea de la '%s'"
-
-#: zypp/RepoManager.cc:1623
-#, c-format, boost-format
-msgid "Adding repository '%s'"
-msgstr "Adaug sursa de instalare '%s'"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1711
-#, c-format, boost-format
-msgid "Invalid repo file name at '%s'"
-msgstr "Nume de fișier sursă de instalare invalid la '%s'"
-
-#: zypp/RepoManager.cc:1752
-#, c-format, boost-format
-msgid "Removing repository '%s'"
-msgstr "Îndepărtez sursa de instalare '%s'"
-
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
-msgid "Can't figure out where the repo is stored."
-msgstr "Nu pot determina unde este stocată sursa de instalare."
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
-#, c-format, boost-format
-msgid "Can't delete '%s'"
-msgstr "Nu pot șterge '%s'"
-
-#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
-msgid "Can't figure out where the service is stored."
-msgstr "Nu pot determina unde este stocat serviciul."
-
-#: zypp/url/UrlBase.cc:154
-#, c-format, boost-format
-msgid "Url scheme does not allow a %s"
-msgstr "Schema url nu permite %s"
-
-#: zypp/url/UrlBase.cc:173
-#, c-format, boost-format
-msgid "Invalid %s component '%s'"
-msgstr "Componentă %s invalidă '%s'"
-
-#: zypp/url/UrlBase.cc:180
-#, c-format, boost-format
-msgid "Invalid %s component"
-msgstr "Componentă invalidă %s"
-
-#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
-msgid "Query string parsing not supported for this URL"
-msgstr "Pentru acest URL nu este suportată parcurgerea unui șir de interogare"
-
-#: zypp/url/UrlBase.cc:824
-msgid "Url scheme is a required component"
-msgstr "Schema url este o componentă obligatorie"
-
-#: zypp/url/UrlBase.cc:830
-#, c-format, boost-format
-msgid "Invalid Url scheme '%s'"
-msgstr "Schemă ulr invalidă '%s'"
-
-#: zypp/url/UrlBase.cc:949
-msgid "Url scheme does not allow a username"
-msgstr "Schema url nu permite un nume de utilizator"
-
-#: zypp/url/UrlBase.cc:983
-msgid "Url scheme does not allow a password"
-msgstr "Schema url nu permite parolă"
-
-#: zypp/url/UrlBase.cc:1012
-msgid "Url scheme requires a host component"
-msgstr "Schema url necesită o componentă gazdă"
-
-#: zypp/url/UrlBase.cc:1022
-msgid "Url scheme does not allow a host component"
-msgstr "Schema url nu permite componentă gazdă"
-
-#: zypp/url/UrlBase.cc:1049
-#, c-format, boost-format
-msgid "Invalid host component '%s'"
-msgstr "Componentă gazdă invalidă '%s'"
-
-#: zypp/url/UrlBase.cc:1070
-msgid "Url scheme does not allow a port"
-msgstr "Schema url nu permite port"
-
-#: zypp/url/UrlBase.cc:1081
-#, c-format, boost-format
-msgid "Invalid port component '%s'"
-msgstr "Componentă port invalidă '%s'"
-
-#: zypp/url/UrlBase.cc:1098
-msgid "Url scheme requires path name"
-msgstr "Schema url necesită o cale"
-
-#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
-msgid "Relative path not allowed if authority exists"
-msgstr "Calea relativă nu este permisă dacă autoritatea există"
-
-#: zypp/url/UrlUtils.cc:111
-msgid "Encoded string contains a NUL byte"
-msgstr "Șirul codat conține un byte NUL"
-
-#: zypp/url/UrlUtils.cc:173
-msgid "Invalid parameter array split separator character"
-msgstr "Parametru invalid caracter de separare împărțire matrici"
-
-#: zypp/url/UrlUtils.cc:213
-msgid "Invalid parameter map split separator character"
-msgstr "Parametru de hartă invalid pentru separarea caracterelor"
-
-#: zypp/url/UrlUtils.cc:283
-msgid "Invalid parameter array join separator character"
-msgstr "Parametru invalid caracter de separare uniune matrici"
-
-#: zypp/ExternalProgram.cc:258
-#, c-format, boost-format
-msgid "Can't open pty (%s)."
-msgstr "Nu pot deschide pty (%s)."
-
-#: zypp/ExternalProgram.cc:269
-#, c-format, boost-format
-msgid "Can't open pipe (%s)."
-msgstr "Nu pot deschide pipe-ul (%s)."
-
-#: zypp/ExternalProgram.cc:350
-#, c-format, boost-format
-msgid "Can't chroot to '%s' (%s)."
-msgstr "Nu se poate face chroot la '%s' (%s)."
-
-#: zypp/ExternalProgram.cc:360
-#, fuzzy, c-format, boost-format
-msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "Nu pot efectua chdir spre '/' în chroot (%s)."
-
-#: zypp/ExternalProgram.cc:361
-#, fuzzy, c-format, boost-format
-msgid "Can't chdir to '%s' (%s)."
-msgstr "Nu se poate face chroot la '%s' (%s)."
-
-#. don't want to get here
-#: zypp/ExternalProgram.cc:373
-#, c-format, boost-format
-msgid "Can't exec '%s' (%s)."
-msgstr "Nu pot executa '%s' (%s)."
-
-#: zypp/ExternalProgram.cc:381
-#, c-format, boost-format
-msgid "Can't fork (%s)."
-msgstr "Nu pot crea un proces nou (%s)."
-
-#: zypp/ExternalProgram.cc:507
-#, c-format, boost-format
-msgid "Command exited with status %d."
-msgstr "Comandă finalizată cu starea %d."
-
-#: zypp/ExternalProgram.cc:527
-#, c-format, boost-format
-msgid "Command was killed by signal %d (%s)."
-msgstr "Comanda a fost oprită de semnalul %d(%s)."
-
-#: zypp/ExternalProgram.cc:532
-msgid "Command exited with unknown error."
-msgstr "Comandă finalizată cu eroare necunoscută."
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:60
-#, fuzzy
-msgid "does not expire"
-msgstr "(nu expiră)"
-
-#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:65
-#, boost-format
-msgid "expired: %1%"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:70
-#, boost-format
-msgid "expires: %1%"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:79
-msgid "(does not expire)"
-msgstr "(nu expiră)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:88
-msgid "(EXPIRED)"
-msgstr "(EXPIRAT)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:92
-msgid "(expires within 24h)"
-msgstr "(expiră în 24h)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:96
-#, fuzzy, c-format, boost-format
-msgid "(expires in %d day)"
-msgid_plural "(expires in %d days)"
-msgstr[0] "(expiră în 24h)"
-msgstr[1] "(expiră în 24h)"
-msgstr[2] "(expiră în 24h)"
-
-#: zypp/VendorSupportOptions.cc:14
-msgid "unknown"
-msgstr "necunoscut"
-
-#: zypp/VendorSupportOptions.cc:17
-msgid "unsupported"
-msgstr "nesuportat"
-
-#: zypp/VendorSupportOptions.cc:20
-msgid "Level 1"
-msgstr "Nivelul 1"
-
-#: zypp/VendorSupportOptions.cc:23
-msgid "Level 2"
-msgstr "Nivelul 2"
-
-#: zypp/VendorSupportOptions.cc:26
-msgid "Level 3"
-msgstr "Nivelul 3"
-
-#: zypp/VendorSupportOptions.cc:29
-msgid "Additional Customer Contract Necessary"
-msgstr "Este necesar un contract client suplimentar"
-
-#: zypp/VendorSupportOptions.cc:31
-msgid "invalid"
-msgstr "invalid"
-
-#: zypp/VendorSupportOptions.cc:39
-msgid "The level of support is unspecified"
-msgstr "Nivelul de suport este nespecificat"
-
-#: zypp/VendorSupportOptions.cc:42
-msgid "The vendor does not provide support."
-msgstr "Vânzătorul nu oferă suport."
-
-#: zypp/VendorSupportOptions.cc:45
-msgid ""
-"Problem determination, which means technical support designed to provide "
-"compatibility information, installation assistance, usage support, on-going "
-"maintenance and basic troubleshooting. Level 1 Support is not intended to "
-"correct product defect errors."
-msgstr ""
-"Determinarea problemei, ceea ce înseamnă suport tehnic menit să ofere "
-"informații de compatibilitate, asistență la instalare, suport la utilizare, "
-"mentenanță curentă și rezolvarea problemelor simple. Suportul de nivel 1 nu "
-"este menit să corecteze erori ale produsului."
-
-#: zypp/VendorSupportOptions.cc:48
-msgid ""
-"Problem isolation, which means technical support designed to duplicate "
-"customer problems, isolate problem area and provide resolution for problems "
-"not resolved by Level 1 Support."
-msgstr ""
-"Izolarea problemei, ceea ce înseamnă suport tehnic menit să reproducă "
-"problemele clienților, să izoleze zona cu probleme și să ofere soluții "
-"pentru probleme nerezolvate de suportul de nivel 1."
-
-#: zypp/VendorSupportOptions.cc:51
-msgid ""
-"Problem resolution, which means technical support designed to resolve "
-"complex problems by engaging engineering in resolution of product defects "
-"which have been identified by Level 2 Support."
-msgstr ""
-"Rezolvarea problemei, ceea ce înseamnă suport tehnic menit să rezolve "
-"problemele complexe prin contribuția specialiștilor la rezolvarea de defecte "
-"ale produselor, identificate de suportul de nivel 2."
-
-#: zypp/VendorSupportOptions.cc:54
-msgid "An additional customer contract is necessary for getting support."
-msgstr ""
-"Pentru a obține suport tehnic se necesită un contract client suplimentar."
-
-#: zypp/VendorSupportOptions.cc:56
-msgid "Unknown support option. Description not available"
-msgstr "Opțiune de suport necunoscută. Descrierea nu este disponibilă"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -1921,6 +1279,108 @@ msgstr "Zambia"
 #: zypp/CountryCode.cc:403
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
+
+#: zypp/Dep.cc:96
+msgid "Provides"
+msgstr "Oferă"
+
+#: zypp/Dep.cc:97
+msgid "Prerequires"
+msgstr ""
+
+#: zypp/Dep.cc:98
+msgid "Requires"
+msgstr "Necesită"
+
+#: zypp/Dep.cc:99
+msgid "Conflicts"
+msgstr "Conflicte"
+
+#: zypp/Dep.cc:100
+#, fuzzy
+msgid "Obsoletes"
+msgstr "păstrează pachetul vechi %s"
+
+#: zypp/Dep.cc:101
+msgid "Recommends"
+msgstr "Recomandă"
+
+#: zypp/Dep.cc:102
+msgid "Suggests"
+msgstr "Sugerează"
+
+#: zypp/Dep.cc:103
+msgid "Enhances"
+msgstr "Îmbunătățește"
+
+#: zypp/Dep.cc:104
+msgid "Supplements"
+msgstr "Suplimentează"
+
+#: zypp/ExternalProgram.cc:258
+#, c-format, boost-format
+msgid "Can't open pty (%s)."
+msgstr "Nu pot deschide pty (%s)."
+
+#: zypp/ExternalProgram.cc:269
+#, c-format, boost-format
+msgid "Can't open pipe (%s)."
+msgstr "Nu pot deschide pipe-ul (%s)."
+
+#: zypp/ExternalProgram.cc:350
+#, c-format, boost-format
+msgid "Can't chroot to '%s' (%s)."
+msgstr "Nu se poate face chroot la '%s' (%s)."
+
+#: zypp/ExternalProgram.cc:360
+#, fuzzy, c-format, boost-format
+msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
+msgstr "Nu pot efectua chdir spre '/' în chroot (%s)."
+
+#: zypp/ExternalProgram.cc:361
+#, fuzzy, c-format, boost-format
+msgid "Can't chdir to '%s' (%s)."
+msgstr "Nu se poate face chroot la '%s' (%s)."
+
+#. don't want to get here
+#: zypp/ExternalProgram.cc:373
+#, c-format, boost-format
+msgid "Can't exec '%s' (%s)."
+msgstr "Nu pot executa '%s' (%s)."
+
+#: zypp/ExternalProgram.cc:381
+#, c-format, boost-format
+msgid "Can't fork (%s)."
+msgstr "Nu pot crea un proces nou (%s)."
+
+#: zypp/ExternalProgram.cc:507
+#, c-format, boost-format
+msgid "Command exited with status %d."
+msgstr "Comandă finalizată cu starea %d."
+
+#: zypp/ExternalProgram.cc:527
+#, c-format, boost-format
+msgid "Command was killed by signal %d (%s)."
+msgstr "Comanda a fost oprită de semnalul %d(%s)."
+
+#: zypp/ExternalProgram.cc:532
+msgid "Command exited with unknown error."
+msgstr "Comandă finalizată cu eroare necunoscută."
+
+#. TranslatorExplanation first %s is key name, second is keyring name
+#: zypp/KeyRing.cc:520
+#, fuzzy, c-format, boost-format
+msgid "Tried to import not existent key %s into keyring %s"
+msgstr "Am încercat să import cheia inexistentă %s în colecția de chei %s"
+
+#: zypp/KeyRing.cc:564
+msgid "Failed to delete key."
+msgstr "Ștergerea cheii a eșuat."
+
+#: zypp/KeyRing.cc:572
+#, c-format, boost-format
+msgid "Signature file %s not found"
+msgstr "Fișierul semnătură %s nu a fost găsit"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -4276,36 +3736,500 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zuni"
 
-#. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:512
-#, fuzzy, c-format, boost-format
-msgid "Tried to import not existent key %s into keyring %s"
-msgstr "Am încercat să import cheia inexistentă %s în colecția de chei %s"
+#: zypp/ProblemSolution.cc:114
+msgid "Following actions will be done:"
+msgstr "Vor fi efectuate următoarele acțiuni:"
 
-#: zypp/KeyRing.cc:556
-msgid "Failed to delete key."
-msgstr "Ștergerea cheii a eșuat."
-
-#: zypp/KeyRing.cc:565
-#, c-format, boost-format
-msgid "Signature file %s not found"
-msgstr "Fișierul semnătură %s nu a fost găsit"
-
-#: zypp/repo/RepoProvideFile.cc:259
-#, c-format, boost-format
-msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Nu pot oferi fișierul '%s' din sursa '%s'"
-
-#: zypp/repo/RepoProvideFile.cc:265
-msgid "No url in repository."
-msgstr "Nici un url în sursa de instalare."
-
-#: zypp/repo/RepoException.cc:129
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:60
 #, fuzzy
-msgid "Service plugin does not support changing an attribute."
+msgid "does not expire"
+msgstr "(nu expiră)"
+
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
 msgstr ""
-"tipul de resursă VAR1 nu suportă funcția de arătare a modificărilor (show "
-"changes)"
+
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
+msgid "(does not expire)"
+msgstr "(nu expiră)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:88
+msgid "(EXPIRED)"
+msgstr "(EXPIRAT)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:92
+msgid "(expires within 24h)"
+msgstr "(expiră în 24h)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:96
+#, fuzzy, c-format, boost-format
+msgid "(expires in %d day)"
+msgid_plural "(expires in %d days)"
+msgstr[0] "(expiră în 24h)"
+msgstr[1] "(expiră în 24h)"
+msgstr[2] "(expiră în 24h)"
+
+#: zypp/RepoManager.cc:312
+#, boost-format
+msgid "Cannot read repo directory '%1%': Permission denied"
+msgstr ""
+
+#. TranslatorExplanation '%s' is a pathname
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
+#: zypp/repo/PluginServices.cc:49
+#, c-format, boost-format
+msgid "Failed to read directory '%s'"
+msgstr "Citirea directorului '%s' a eșuat"
+
+#: zypp/RepoManager.cc:330
+#, boost-format
+msgid "Cannot read repo file '%1%': Permission denied"
+msgstr ""
+
+#: zypp/RepoManager.cc:353
+msgid "Repository alias cannot start with dot."
+msgstr "Aliasul sursei de instalare nu poate începe cu punct."
+
+#: zypp/RepoManager.cc:364
+msgid "Service alias cannot start with dot."
+msgstr "Aliasul serviciului nu poate începe cu punct."
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
+#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
+#, c-format, boost-format
+msgid "Can't open file '%s' for writing."
+msgstr "Nu se poate deschide fișierul '%s' pentru scriere."
+
+#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
+#. %1% = service name
+#. %2% = repository name
+#: zypp/RepoManager.cc:871
+#, boost-format
+msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
+msgstr ""
+
+#. we will throw this later if no URL checks out fine
+#: zypp/RepoManager.cc:1098
+#, fuzzy
+msgid "Valid metadata not found at specified URL"
+msgid_plural "Valid metadata not found at specified URLs"
+msgstr[0] "La URL-ul (URL-urile) specificate nu au fost găsite metadate valide"
+msgstr[1] "La URL-ul (URL-urile) specificate nu au fost găsite metadate valide"
+msgstr[2] "La URL-ul (URL-urile) specificate nu au fost găsite metadate valide"
+
+#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
+#, c-format, boost-format
+msgid "Can't create %s"
+msgstr "Nu se poate crea %s"
+
+#: zypp/RepoManager.cc:1154
+msgid "Can't create metadata cache directory."
+msgstr "Nu se poate crea directorul pentru cache-ul de metadate."
+
+#: zypp/RepoManager.cc:1300
+#, c-format, boost-format
+msgid "Building repository '%s' cache"
+msgstr "Construirea cache-ului sursei de instalare '%s'"
+
+#: zypp/RepoManager.cc:1320
+#, c-format, boost-format
+msgid "Can't create cache at %s - no writing permissions."
+msgstr "Nu se poate crea memoria cache la %s - lipsește dreptul de scriere."
+
+#: zypp/RepoManager.cc:1384
+#, c-format, boost-format
+msgid "Failed to cache repo (%d)."
+msgstr "Sursa de instalare (%d) nu a putut fi încărcată în cache."
+
+#: zypp/RepoManager.cc:1395
+msgid "Unhandled repository type"
+msgstr "Tip de sursă de instalare netratat"
+
+#. prepare exception to be thrown if the type could not be determined
+#. due to a media exception. We can't throw right away, because of some
+#. problems with proxy servers returning an incorrect error
+#. on ftp file-not-found(bnc #335906). Instead we'll check another types
+#. before throwing.
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
+#, c-format, boost-format
+msgid "Error trying to read from '%s'"
+msgstr "Eroare la încercarea de a citi din '%s'"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
+#, c-format, boost-format
+msgid "Unknown error reading from '%s'"
+msgstr "Eroare necunoscută la citirea de la '%s'"
+
+#: zypp/RepoManager.cc:1623
+#, c-format, boost-format
+msgid "Adding repository '%s'"
+msgstr "Adaug sursa de instalare '%s'"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1711
+#, c-format, boost-format
+msgid "Invalid repo file name at '%s'"
+msgstr "Nume de fișier sursă de instalare invalid la '%s'"
+
+#: zypp/RepoManager.cc:1752
+#, c-format, boost-format
+msgid "Removing repository '%s'"
+msgstr "Îndepărtez sursa de instalare '%s'"
+
+#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
+msgid "Can't figure out where the repo is stored."
+msgstr "Nu pot determina unde este stocată sursa de instalare."
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
+#, c-format, boost-format
+msgid "Can't delete '%s'"
+msgstr "Nu pot șterge '%s'"
+
+#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
+msgid "Can't figure out where the service is stored."
+msgstr "Nu pot determina unde este stocat serviciul."
+
+#: zypp/Url.cc:114
+msgid "Invalid LDAP URL query string"
+msgstr "Șir de interogare URL LDAP invalid"
+
+#: zypp/Url.cc:153
+#, c-format, boost-format
+msgid "Invalid LDAP URL query parameter '%s'"
+msgstr "Parametru șir de interogare URL LDAP invalid '%s'"
+
+#: zypp/Url.cc:300
+msgid "Unable to clone Url object"
+msgstr "Nu pot clona obiectul Url"
+
+#: zypp/Url.cc:313
+msgid "Invalid empty Url object reference"
+msgstr "Referință vidă invalidă la obiect Url"
+
+#: zypp/Url.cc:326 zypp/Url.cc:340
+msgid "Unable to parse Url components"
+msgstr "Nu pot parcurge componentele Url"
+
+#: zypp/VendorSupportOptions.cc:14
+msgid "unknown"
+msgstr "necunoscut"
+
+#: zypp/VendorSupportOptions.cc:17
+msgid "unsupported"
+msgstr "nesuportat"
+
+#: zypp/VendorSupportOptions.cc:20
+msgid "Level 1"
+msgstr "Nivelul 1"
+
+#: zypp/VendorSupportOptions.cc:23
+msgid "Level 2"
+msgstr "Nivelul 2"
+
+#: zypp/VendorSupportOptions.cc:26
+msgid "Level 3"
+msgstr "Nivelul 3"
+
+#: zypp/VendorSupportOptions.cc:29
+msgid "Additional Customer Contract Necessary"
+msgstr "Este necesar un contract client suplimentar"
+
+#: zypp/VendorSupportOptions.cc:31
+msgid "invalid"
+msgstr "invalid"
+
+#: zypp/VendorSupportOptions.cc:39
+msgid "The level of support is unspecified"
+msgstr "Nivelul de suport este nespecificat"
+
+#: zypp/VendorSupportOptions.cc:42
+msgid "The vendor does not provide support."
+msgstr "Vânzătorul nu oferă suport."
+
+#: zypp/VendorSupportOptions.cc:45
+msgid ""
+"Problem determination, which means technical support designed to provide "
+"compatibility information, installation assistance, usage support, on-going "
+"maintenance and basic troubleshooting. Level 1 Support is not intended to "
+"correct product defect errors."
+msgstr ""
+"Determinarea problemei, ceea ce înseamnă suport tehnic menit să ofere "
+"informații de compatibilitate, asistență la instalare, suport la utilizare, "
+"mentenanță curentă și rezolvarea problemelor simple. Suportul de nivel 1 nu "
+"este menit să corecteze erori ale produsului."
+
+#: zypp/VendorSupportOptions.cc:48
+msgid ""
+"Problem isolation, which means technical support designed to duplicate "
+"customer problems, isolate problem area and provide resolution for problems "
+"not resolved by Level 1 Support."
+msgstr ""
+"Izolarea problemei, ceea ce înseamnă suport tehnic menit să reproducă "
+"problemele clienților, să izoleze zona cu probleme și să ofere soluții "
+"pentru probleme nerezolvate de suportul de nivel 1."
+
+#: zypp/VendorSupportOptions.cc:51
+msgid ""
+"Problem resolution, which means technical support designed to resolve "
+"complex problems by engaging engineering in resolution of product defects "
+"which have been identified by Level 2 Support."
+msgstr ""
+"Rezolvarea problemei, ceea ce înseamnă suport tehnic menit să rezolve "
+"problemele complexe prin contribuția specialiștilor la rezolvarea de defecte "
+"ale produselor, identificate de suportul de nivel 2."
+
+#: zypp/VendorSupportOptions.cc:54
+msgid "An additional customer contract is necessary for getting support."
+msgstr ""
+"Pentru a obține suport tehnic se necesită un contract client suplimentar."
+
+#: zypp/VendorSupportOptions.cc:56
+msgid "Unknown support option. Description not available"
+msgstr "Opțiune de suport necunoscută. Descrierea nu este disponibilă"
+
+#: zypp/ZYppFactory.cc:399
+#, c-format, boost-format
+msgid ""
+"System management is locked by the application with pid %d (%s).\n"
+"Close this application before trying again."
+msgstr ""
+"Gestiunea sistemului a fost blocată de aplicația cu pid %d (%s).\n"
+"Închideți această aplicație înainte de a încerca din nou."
+
+#. TranslatorExplanation followed by the list of error messages that lead to this exception
+#: zypp/base/Exception.cc:134
+msgid "History:"
+msgstr "Istoric:"
+
+#: zypp/base/InterProcessMutex.cc:83
+#, c-format, boost-format
+msgid "Can't open lock file: %s"
+msgstr "Nu pot deschide fișierul zăvor: %s"
+
+#: zypp/base/InterProcessMutex.cc:143
+msgid "This action is being run by another program already."
+msgstr "Această acțiune este rulată deja de alt program."
+
+#: zypp/base/StrMatcher.cc:152
+#, c-format, boost-format
+msgid "Unknown match mode '%s'"
+msgstr "Mod necunoscut '%s'"
+
+#: zypp/base/StrMatcher.cc:153
+#, c-format, boost-format
+msgid "Unknown match mode '%s' for pattern '%s'"
+msgstr "Mod necunoscut '%s' pentru modelul '%s'"
+
+#: zypp/base/StrMatcher.cc:157
+#, c-format, boost-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr "'%s' este o expresie regulată invalidă: regcomp a întors %d"
+
+#: zypp/base/StrMatcher.cc:158
+#, c-format, boost-format
+msgid "Invalid regular expression '%s'"
+msgstr "Expresie regulată invalidă '%s'"
+
+#. !\todo add comma to the message for the next release
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
+#, c-format, boost-format
+msgid "Authentication required for '%s'"
+msgstr "Pentru '%s' este necesară autentificarea"
+
+#: zypp/media/MediaCurl.cc:1109
+msgid ""
+"Visit the Novell Customer Center to check whether your registration is valid "
+"and has not expired."
+msgstr ""
+"Vizitează Centru de Relații cu Clienții Novell pentru a verifica dacă "
+"înregistrarea este validă și încă valabilă."
+
+#: zypp/media/MediaException.cc:31
+#, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr "Montarea %s pe %s a eșuat"
+
+#: zypp/media/MediaException.cc:41
+#, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "Demontarea %s a eșuat"
+
+#: zypp/media/MediaException.cc:46
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr "Nume de fișier incorect: %s"
+
+#: zypp/media/MediaException.cc:51
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr ""
+"Mediul nu a fost deschis în timp ce se încerca efectuarea acțiunii '%s'."
+
+#: zypp/media/MediaException.cc:56
+#, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
+msgstr "Fișierul '%s' nu a fost găsit pe mediul '%s'"
+
+#: zypp/media/MediaException.cc:61
+#, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "Nu pot scrie fișierul '%s'."
+
+#: zypp/media/MediaException.cc:66
+msgid "Medium not attached"
+msgstr "Mediu neatașat"
+
+#: zypp/media/MediaException.cc:71
+msgid "Bad media attach point"
+msgstr "Punct incorect de conectare a mediului"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:77
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr "Inițializarea download-ului (curl) a eșuat pentru '%s'"
+
+#: zypp/media/MediaException.cc:82
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr "Excepție sistem '%s' pe mediul '%s'."
+
+#: zypp/media/MediaException.cc:87
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr "Calea '%s' de pe mediul '%s' nu este un fișier."
+
+#: zypp/media/MediaException.cc:92
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "Calea '%s' de pe mediul '%s' nu este un director."
+
+#: zypp/media/MediaException.cc:99
+msgid "Malformed URI"
+msgstr "URI Invalid"
+
+#: zypp/media/MediaException.cc:109
+msgid "Empty host name in URI"
+msgstr "Nume de gazdă vid în URI"
+
+#: zypp/media/MediaException.cc:114
+msgid "Empty filesystem in URI"
+msgstr "Sistem de fișiere vid în URI"
+
+#: zypp/media/MediaException.cc:119
+msgid "Empty destination in URI"
+msgstr "Destinație vidă în URI"
+
+#: zypp/media/MediaException.cc:124
+#, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "Schemă URI nesuportată în '%s'."
+
+#: zypp/media/MediaException.cc:129
+msgid "Operation not supported by medium"
+msgstr "Operația nu este suportată de mediu"
+
+#: zypp/media/MediaException.cc:136
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"Eroare de descărcare (curl) pentru '%s':\n"
+"Cod eroare: %s\n"
+"Mesaj eroare: %s\n"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:144
+#, c-format, boost-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr ""
+"A apărut o eroare la setarea opțiunilor de download (curl) pentru '%s':"
+
+#: zypp/media/MediaException.cc:151
+#, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr "Sursa '%s' nu conține CD-ul/DVD-ul corect"
+
+#: zypp/media/MediaException.cc:156
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr "Mediul '%s' este utilizat momentan de o altă instanță"
+
+#: zypp/media/MediaException.cc:162
+msgid "Cannot eject any media"
+msgstr "Nu pot ejecta nici un mediu"
+
+#: zypp/media/MediaException.cc:164
+#, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr "Nu pot ejecta mediul '%s'"
+
+#: zypp/media/MediaException.cc:179
+#, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "Accesul la '%s' a fost interzis."
+
+#: zypp/media/MediaException.cc:187
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr "Timp depășit în timpul accesării '%s'."
+
+#: zypp/media/MediaException.cc:195
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr "Locația '%s' este temporar inaccesibilă."
+
+#: zypp/media/MediaException.cc:203
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr ""
+"Problemă de certificat SSL, verificați dacă certificatul autorității de "
+"certificare este OK pentru '%s'."
+
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
+#: zypp/media/MediaUserAuth.cc:136
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr "Metodă de autentificare HTTP nesuportată '%s'"
+
+#: zypp/misc/CheckAccessDeleted.cc:283
+#, fuzzy
+msgid "Please install package 'lsof' first."
+msgstr "Curăț cache-ul pachetelor instalate."
+
+#: zypp/parser/RepoindexFileReader.cc:197
+#, c-format, boost-format
+msgid "Required attribute '%s' is missing."
+msgstr "Atributul necesar '%s' lipsește."
+
+#: zypp/parser/RepoindexFileReader.cc:209
+#, c-format, boost-format
+msgid "One or both of '%s' or '%s' attributes is required."
+msgstr "Unul sau ambele din atributele '%s' și '%s' sunt necesare."
 
 #: zypp/repo/PackageProvider.cc:216
 #, fuzzy
@@ -4337,14 +4261,134 @@ msgstr "verificarea applydeltarpm a eșuat."
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm a eșuat."
 
-#: zypp/ZYppFactory.cc:399
-#, c-format, boost-format
-msgid ""
-"System management is locked by the application with pid %d (%s).\n"
-"Close this application before trying again."
+#: zypp/repo/RepoException.cc:129
+#, fuzzy
+msgid "Service plugin does not support changing an attribute."
 msgstr ""
-"Gestiunea sistemului a fost blocată de aplicația cu pid %d (%s).\n"
-"Închideți această aplicație înainte de a încerca din nou."
+"tipul de resursă VAR1 nu suportă funcția de arătare a modificărilor (show "
+"changes)"
+
+#: zypp/repo/RepoProvideFile.cc:259
+#, c-format, boost-format
+msgid "Can't provide file '%s' from repository '%s'"
+msgstr "Nu pot oferi fișierul '%s' din sursa '%s'"
+
+#: zypp/repo/RepoProvideFile.cc:265
+msgid "No url in repository."
+msgstr "Nici un url în sursa de instalare."
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:34
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:40
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:47
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:53
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
+#: zypp/sat/FileConflicts.cc:68
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:76
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:85
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:93
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+
+#: zypp/sat/detail/PoolImpl.cc:189
+msgid "Can not create sat-pool."
+msgstr "Nu pot crea sat-pool."
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#, c-format, boost-format
+msgid "break %s by ignoring some of its dependencies"
+msgstr "întrerupe pachetul %s ignorând o parte din dependențele lui"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+#, fuzzy
+msgid "generally ignore of some dependencies"
+msgstr "în general se ignoră unele dependințe"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
@@ -4374,8 +4418,7 @@ msgstr "o problemă de dependențe"
 msgid "nothing provides requested %s"
 msgstr "nimic nu oferă %s necesar"
 
-#: zypp/solver/detail/SATResolver.cc:997
-#: zypp/solver/detail/SATResolver.cc:1001
+#: zypp/solver/detail/SATResolver.cc:997 zypp/solver/detail/SATResolver.cc:1001
 msgid "Have you enabled all requested repositories?"
 msgstr "Ați activat toate sursele cerute?"
 
@@ -4550,336 +4593,298 @@ msgstr "înlocuirea %s cu %s"
 msgid "deinstallation of %s"
 msgstr "deinstalarea %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
-#, c-format, boost-format
-msgid "break %s by ignoring some of its dependencies"
-msgstr "întrerupe pachetul %s ignorând o parte din dependențele lui"
+#: zypp/target/TargetImpl.cc:310
+msgid " executed"
+msgstr " executat"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+#: zypp/target/TargetImpl.cc:332
+msgid " execution failed"
+msgstr " execuție eșuată"
+
+#. translators: We may find the same script content in files with different names.
+#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
+#. message for a log file. Preferably start translation with "%s"
+#: zypp/target/TargetImpl.cc:449
+#, fuzzy, c-format, boost-format
+msgid "%s already executed as %s)"
+msgstr "%1 este deja decriptat!"
+
+#: zypp/target/TargetImpl.cc:459
+msgid " execution skipped while aborting"
+msgstr " execuție sărită în timpul anulării"
+
+#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
+#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
+#: zypp/target/TargetImpl.cc:607
+msgid "Error sending update message notification."
+msgstr "Eroare trimitere notificare mesaj de actualizare."
+
+#: zypp/target/TargetImpl.cc:658
+msgid "New update message"
+msgstr "Nou mesaj de actualizare"
+
+#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
+#: zypp/target/TargetImpl.cc:1627
+#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
+msgid "Installation has been aborted as directed."
+msgstr "Instalarea a fost anulată la cerere."
+
+#: zypp/target/hal/HalContext.cc:24
+msgid "Sorry, but this version of libzypp was built without HAL support."
+msgstr ""
+"Ne pare rău, dar această versiune de libzypp a fost construită fără suport "
+"HAL."
+
+#: zypp/target/hal/HalContext.cc:117
+msgid "HalContext not connected"
+msgstr "HalContext nu este conectat"
+
+#: zypp/target/hal/HalContext.cc:127
+msgid "HalDrive not initialized"
+msgstr "HalDrive nu este inițializat"
+
+#: zypp/target/hal/HalContext.cc:137
+msgid "HalVolume not initialized"
+msgstr "HalVolume nu este inițializat"
+
+#: zypp/target/hal/HalContext.cc:229
+msgid "Unable to create dbus connection"
+msgstr "Nu pot crea conexiunea dbus"
+
+#: zypp/target/hal/HalContext.cc:242
+msgid "libhal_ctx_new: Can't create libhal context"
+msgstr "libhal_ctx_new: Nu pot crea contextul libhal"
+
+#: zypp/target/hal/HalContext.cc:257
+msgid "libhal_set_dbus_connection: Can't set dbus connection"
+msgstr "libhal_set_dbus_connection: Nu pot seta conexiunea dbus"
+
+#: zypp/target/hal/HalContext.cc:272
+msgid "Unable to initalize HAL context -- hald not running?"
+msgstr "Nu pot inițializa contextul HAL -- este posibil ca hald să nu ruleze?"
+
+#: zypp/target/hal/HalContext.cc:851
+msgid "Not a CDROM drive"
+msgstr "Nu este o unitate CDROM"
+
+#. TranslatorExplanation after semicolon is error message
+#. TranslatorExplanation the colon is followed by an error message
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
+#: zypp/target/rpm/RpmDb.cc:2209
+msgid "RPM failed: "
+msgstr "RPM a eșuat:"
+
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1119
+#, boost-format
+msgid "Failed to import public key %1%"
+msgstr "Importul cheii publice %1% a eșuat"
+
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1189
+#, boost-format
+msgid "Failed to remove public key %1%"
+msgstr "Îndepărtarea cheii publice %1% a eșuat"
+
+#: zypp/target/rpm/RpmDb.cc:1568
+msgid "Package is not signed!"
+msgstr ""
+
+#. Translator: %s = name of an rpm package. A list of diffs follows
+#. this message.
+#: zypp/target/rpm/RpmDb.cc:1868
+#, c-format, boost-format
+msgid "Changed configuration files for %s:"
+msgstr "Fișiere de configurare modificate pentru %s:"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2044
+#, c-format, boost-format
+msgid "rpm saved %s as %s, but it was impossible to determine the difference"
+msgstr "rpm a salvat %s ca %s, dar nu a putut determina diferențele"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2046
+#, c-format, boost-format
+msgid ""
+"rpm saved %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr ""
+"rpm a salvat %s ca %s.\n"
+"Acestea sunt primele 25 de linii diferite:\n"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2049
+#, c-format, boost-format
+msgid "rpm created %s as %s, but it was impossible to determine the difference"
+msgstr "rpm a creat %s ca %s, dar nu a putut determina diferențele"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2051
+#, c-format, boost-format
+msgid ""
+"rpm created %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr ""
+"rpm a creat %s ca %s.\n"
+"Acestea sunt primele 25 de linii diferite:\n"
+
+#. report additional rpm output in finish
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+msgid "Additional rpm output"
+msgstr "Ieșire rpm suplimentară"
+
+#: zypp/target/rpm/RpmDb.cc:2364
+#, c-format, boost-format
+msgid "created backup %s"
+msgstr "backup %s creat"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2385
 #, fuzzy
-msgid "generally ignore of some dependencies"
-msgstr "în general se ignoră unele dependințe"
+msgid "Signature is OK"
+msgstr "Fișierul semnătură %s nu a fost găsit"
 
-#: zypp/parser/RepoindexFileReader.cc:197
-#, c-format, boost-format
-msgid "Required attribute '%s' is missing."
-msgstr "Atributul necesar '%s' lipsește."
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2387
+msgid "Unknown type of signature"
+msgstr ""
 
-#: zypp/parser/RepoindexFileReader.cc:209
-#, c-format, boost-format
-msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "Unul sau ambele din atributele '%s' și '%s' sunt necesare."
-
-#: zypp/base/InterProcessMutex.cc:83
-#, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "Nu pot deschide fișierul zăvor: %s"
-
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr "Această acțiune este rulată deja de alt program."
-
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp/base/Exception.cc:107
-msgid "History:"
-msgstr "Istoric:"
-
-#: zypp/base/StrMatcher.cc:152
-#, c-format, boost-format
-msgid "Unknown match mode '%s'"
-msgstr "Mod necunoscut '%s'"
-
-#: zypp/base/StrMatcher.cc:153
-#, c-format, boost-format
-msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Mod necunoscut '%s' pentru modelul '%s'"
-
-#: zypp/base/StrMatcher.cc:157
-#, c-format, boost-format
-msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "'%s' este o expresie regulată invalidă: regcomp a întors %d"
-
-#: zypp/base/StrMatcher.cc:158
-#, c-format, boost-format
-msgid "Invalid regular expression '%s'"
-msgstr "Expresie regulată invalidă '%s'"
-
-#: zypp/misc/CheckAccessDeleted.cc:283
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2389
 #, fuzzy
-msgid "Please install package 'lsof' first."
-msgstr "Curăț cache-ul pachetelor instalate."
+msgid "Signature does not verify"
+msgstr "Fișierul semnătură %s nu a fost găsit"
 
-#: zypp/media/MediaHandler.cc:370
-msgid ""
-"Create attach point: Can't find a writable directory to create an attach "
-"point"
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2391
+#, fuzzy
+msgid "Signature is OK, but key is not trusted"
+msgstr "Fișierul semnătură %s nu a fost găsit"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2393
+msgid "Signatures public key is not available"
 msgstr ""
 
-#. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
-#, c-format, boost-format
-msgid "Authentication required for '%s'"
-msgstr "Pentru '%s' este necesară autentificarea"
-
-#: zypp/media/MediaException.cc:31
-#, c-format, boost-format
-msgid "Failed to mount %s on %s"
-msgstr "Montarea %s pe %s a eșuat"
-
-#: zypp/media/MediaException.cc:41
-#, c-format, boost-format
-msgid "Failed to unmount %s"
-msgstr "Demontarea %s a eșuat"
-
-#: zypp/media/MediaException.cc:47
-#, c-format, boost-format
-msgid "Bad file name: %s"
-msgstr "Nume de fișier incorect: %s"
-
-#: zypp/media/MediaException.cc:53
-#, c-format, boost-format
-msgid "Medium not opened when trying to perform action '%s'."
-msgstr ""
-"Mediul nu a fost deschis în timp ce se încerca efectuarea acțiunii '%s'."
-
-#: zypp/media/MediaException.cc:60
-#, c-format, boost-format
-msgid "File '%s' not found on medium '%s'"
-msgstr "Fișierul '%s' nu a fost găsit pe mediul '%s'"
-
-#: zypp/media/MediaException.cc:67
-#, c-format, boost-format
-msgid "Cannot write file '%s'."
-msgstr "Nu pot scrie fișierul '%s'."
-
-#: zypp/media/MediaException.cc:72
-msgid "Medium not attached"
-msgstr "Mediu neatașat"
-
-#: zypp/media/MediaException.cc:77
-msgid "Bad media attach point"
-msgstr "Punct incorect de conectare a mediului"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:84
-#, c-format, boost-format
-msgid "Download (curl) initialization failed for '%s'"
-msgstr "Inițializarea download-ului (curl) a eșuat pentru '%s'"
-
-#: zypp/media/MediaException.cc:91
-#, c-format, boost-format
-msgid "System exception '%s' on medium '%s'."
-msgstr "Excepție sistem '%s' pe mediul '%s'."
-
-#: zypp/media/MediaException.cc:98
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a file."
-msgstr "Calea '%s' de pe mediul '%s' nu este un fișier."
-
-#: zypp/media/MediaException.cc:106
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "Calea '%s' de pe mediul '%s' nu este un director."
-
-#: zypp/media/MediaException.cc:115
-msgid "Malformed URI"
-msgstr "URI Invalid"
-
-#: zypp/media/MediaException.cc:125
-msgid "Empty host name in URI"
-msgstr "Nume de gazdă vid în URI"
-
-#: zypp/media/MediaException.cc:130
-msgid "Empty filesystem in URI"
-msgstr "Sistem de fișiere vid în URI"
-
-#: zypp/media/MediaException.cc:135
-msgid "Empty destination in URI"
-msgstr "Destinație vidă în URI"
-
-#: zypp/media/MediaException.cc:140
-#, c-format, boost-format
-msgid "Unsupported URI scheme in '%s'."
-msgstr "Schemă URI nesuportată în '%s'."
-
-#: zypp/media/MediaException.cc:145
-msgid "Operation not supported by medium"
-msgstr "Operația nu este suportată de mediu"
-
-#: zypp/media/MediaException.cc:152
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-"Error message: %s\n"
-msgstr ""
-"Eroare de descărcare (curl) pentru '%s':\n"
-"Cod eroare: %s\n"
-"Mesaj eroare: %s\n"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:161
-#, c-format, boost-format
-msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
-"A apărut o eroare la setarea opțiunilor de download (curl) pentru '%s':"
-
-#: zypp/media/MediaException.cc:169
-#, c-format, boost-format
-msgid "Media source '%s' does not contain the desired medium"
-msgstr "Sursa '%s' nu conține CD-ul/DVD-ul corect"
-
-#: zypp/media/MediaException.cc:175
-#, c-format, boost-format
-msgid "Medium '%s' is in use by another instance"
-msgstr "Mediul '%s' este utilizat momentan de o altă instanță"
-
-#: zypp/media/MediaException.cc:182
-msgid "Cannot eject any media"
-msgstr "Nu pot ejecta nici un mediu"
-
-#: zypp/media/MediaException.cc:184
-#, c-format, boost-format
-msgid "Cannot eject media '%s'"
-msgstr "Nu pot ejecta mediul '%s'"
-
-#: zypp/media/MediaException.cc:199
-#, c-format, boost-format
-msgid "Permission to access '%s' denied."
-msgstr "Accesul la '%s' a fost interzis."
-
-#: zypp/media/MediaException.cc:207
-#, c-format, boost-format
-msgid "Timeout exceeded when accessing '%s'."
-msgstr "Timp depășit în timpul accesării '%s'."
-
-#: zypp/media/MediaException.cc:215
-#, c-format, boost-format
-msgid "Location '%s' is temporarily unaccessible."
-msgstr "Locația '%s' este temporar inaccesibilă."
-
-#: zypp/media/MediaException.cc:223
-#, c-format, boost-format
-msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
-"Problemă de certificat SSL, verificați dacă certificatul autorității de "
-"certificare este OK pentru '%s'."
-
-#: zypp/media/MediaUserAuth.cc:136
-#, c-format, boost-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Metodă de autentificare HTTP nesuportată '%s'"
-
-#: zypp/media/MediaCurl.cc:1109
-msgid ""
-"Visit the Novell Customer Center to check whether your registration is valid "
-"and has not expired."
-msgstr ""
-"Vizitează Centru de Relații cu Clienții Novell pentru a verifica dacă "
-"înregistrarea este validă și încă valabilă."
-
-#: zypp/sat/detail/PoolImpl.cc:189
-msgid "Can not create sat-pool."
-msgstr "Nu pot crea sat-pool."
-
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:34
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2395
+msgid "File does not exist or signature can't be checked"
 msgstr ""
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:40
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2397
+msgid "File is unsigned"
 msgstr ""
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:47
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
+#: zypp/thread/Mutex.cc:33
+msgid "Can't initialize mutex attributes"
+msgstr "Nu pot inițializa atributele mutex"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:53
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
+#: zypp/thread/Mutex.cc:40
+msgid "Can't set recursive mutex attribute"
+msgstr "Nu pot seta atributul mutex recursiv"
 
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
-#: zypp/sat/FileConflicts.cc:68
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
+#: zypp/thread/Mutex.cc:47
+msgid "Can't initialize recursive mutex"
+msgstr "Nu pot inițializa mutex-ul recursiv"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:76
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
-msgstr ""
+#: zypp/thread/Mutex.cc:77
+msgid "Can't acquire the mutex lock"
+msgstr "Nu pot obține zăvorul mutex-ului"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:85
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
+#: zypp/thread/Mutex.cc:87
+msgid "Can't release the mutex lock"
+msgstr "Nu pot elibera zăvorul mutex-ului"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:93
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
-msgstr ""
+#: zypp/url/UrlBase.cc:154
+#, c-format, boost-format
+msgid "Url scheme does not allow a %s"
+msgstr "Schema url nu permite %s"
+
+#: zypp/url/UrlBase.cc:173
+#, c-format, boost-format
+msgid "Invalid %s component '%s'"
+msgstr "Componentă %s invalidă '%s'"
+
+#: zypp/url/UrlBase.cc:180
+#, c-format, boost-format
+msgid "Invalid %s component"
+msgstr "Componentă invalidă %s"
+
+#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
+msgid "Query string parsing not supported for this URL"
+msgstr "Pentru acest URL nu este suportată parcurgerea unui șir de interogare"
+
+#: zypp/url/UrlBase.cc:824
+msgid "Url scheme is a required component"
+msgstr "Schema url este o componentă obligatorie"
+
+#: zypp/url/UrlBase.cc:830
+#, c-format, boost-format
+msgid "Invalid Url scheme '%s'"
+msgstr "Schemă ulr invalidă '%s'"
+
+#: zypp/url/UrlBase.cc:949
+msgid "Url scheme does not allow a username"
+msgstr "Schema url nu permite un nume de utilizator"
+
+#: zypp/url/UrlBase.cc:983
+msgid "Url scheme does not allow a password"
+msgstr "Schema url nu permite parolă"
+
+#: zypp/url/UrlBase.cc:1012
+msgid "Url scheme requires a host component"
+msgstr "Schema url necesită o componentă gazdă"
+
+#: zypp/url/UrlBase.cc:1022
+msgid "Url scheme does not allow a host component"
+msgstr "Schema url nu permite componentă gazdă"
+
+#: zypp/url/UrlBase.cc:1049
+#, c-format, boost-format
+msgid "Invalid host component '%s'"
+msgstr "Componentă gazdă invalidă '%s'"
+
+#: zypp/url/UrlBase.cc:1070
+msgid "Url scheme does not allow a port"
+msgstr "Schema url nu permite port"
+
+#: zypp/url/UrlBase.cc:1081
+#, c-format, boost-format
+msgid "Invalid port component '%s'"
+msgstr "Componentă port invalidă '%s'"
+
+#: zypp/url/UrlBase.cc:1098
+msgid "Url scheme requires path name"
+msgstr "Schema url necesită o cale"
+
+#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
+msgid "Relative path not allowed if authority exists"
+msgstr "Calea relativă nu este permisă dacă autoritatea există"
+
+#: zypp/url/UrlUtils.cc:111
+msgid "Encoded string contains a NUL byte"
+msgstr "Șirul codat conține un byte NUL"
+
+#: zypp/url/UrlUtils.cc:173
+msgid "Invalid parameter array split separator character"
+msgstr "Parametru invalid caracter de separare împărțire matrici"
+
+#: zypp/url/UrlUtils.cc:213
+msgid "Invalid parameter map split separator character"
+msgstr "Parametru de hartă invalid pentru separarea caracterelor"
+
+#: zypp/url/UrlUtils.cc:283
+msgid "Invalid parameter array join separator character"
+msgstr "Parametru invalid caracter de separare uniune matrici"
+
+#~ msgid "Failed to import public key from file %s: %s"
+#~ msgstr "Importul cheii publice din fișierul %s a eșuat: %s"
+
+#~ msgid "Failed to remove public key %s: %s"
+#~ msgstr "Îndepărtarea cheii publice %s a eșuat: %s"
 
 #~ msgid "Cannot find available loop device to mount the image file from '%s'"
 #~ msgstr "Nu este disponibil dispozitivul pentru a monta imagine de la '%s'"

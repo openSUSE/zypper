@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Check hardware-2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 12:50+0200\n"
+"POT-Creation-Date: 2017-09-07 12:25+0200\n"
 "PO-Revision-Date: 2006-11-13 12:55+0530\n"
 "Last-Translator: Priyavert Sharma <priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions <linux_team@agreeya.com>\n"
@@ -18,643 +18,10 @@ msgstr ""
 msgid "Hal Exception"
 msgstr "Hal अपवाद"
 
-#: zypp/Url.cc:114
-msgid "Invalid LDAP URL query string"
-msgstr "अवैध LDAP URL क्वेरी स्ट्रिंग"
-
-#: zypp/Url.cc:153
-#, c-format, boost-format
-msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "अवैध LDAP URL क्वेरी पॅरामीटर %s"
-
-#: zypp/Url.cc:300
-msgid "Unable to clone Url object"
-msgstr "Url ऑब्जेक्ट क्लोन करण्यात असमर्थ"
-
-#: zypp/Url.cc:313
-msgid "Invalid empty Url object reference"
-msgstr "अवैध रिक्त Url ऑब्जेक्ट संदर्भ"
-
-#: zypp/Url.cc:326 zypp/Url.cc:340
-msgid "Unable to parse Url components"
-msgstr "Url भागांचा संबंध जोडण्यात असमर्थ"
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "म्युटेक्स अट्रिब्यूट्स सुरू करू शकत नाही"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "रीकर्सिव्ह म्यूटेक्स अट्रिब्यूट स्थापित करु शकत नाही"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "रीकर्सिव्ह म्युटेक्स सुरू करू शकत नाही "
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "म्युटेक्स लॉक मिळवू शकत नाही"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "म्युटेक्स लॉक उघडू शकत नाही"
-
-#: zypp/Dep.cc:96
-msgid "Provides"
-msgstr ""
-
-#: zypp/Dep.cc:97
-msgid "Prerequires"
-msgstr ""
-
-#: zypp/Dep.cc:98
-msgid "Requires"
-msgstr ""
-
-#: zypp/Dep.cc:99
-msgid "Conflicts"
-msgstr ""
-
-#: zypp/Dep.cc:100
-#, fuzzy
-msgid "Obsoletes"
-msgstr "%s :%s ला बाजूला टाकते"
-
-#: zypp/Dep.cc:101
-msgid "Recommends"
-msgstr ""
-
-#: zypp/Dep.cc:102
-msgid "Suggests"
-msgstr ""
-
-#: zypp/Dep.cc:103
-msgid "Enhances"
-msgstr ""
-
-#: zypp/Dep.cc:104
-msgid "Supplements"
-msgstr ""
-
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr ""
-
-#: zypp/target/TargetImpl.cc:310
-#, fuzzy
-msgid " executed"
-msgstr "अमलात आणा"
-
-#: zypp/target/TargetImpl.cc:332
-#, fuzzy
-msgid " execution failed"
-msgstr "DBI Execution failed: %s"
-
-#. translators: We may find the same script content in files with different names.
-#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
-#. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:449
-#, c-format, boost-format
-msgid "%s already executed as %s)"
-msgstr ""
-
-#: zypp/target/TargetImpl.cc:459
-msgid " execution skipped while aborting"
-msgstr ""
-
-#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
-#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
-#: zypp/target/TargetImpl.cc:607
-#, fuzzy
-msgid "Error sending update message notification."
-msgstr "की च्या सांकेतिकीकरणादरम्यान चूक आली"
-
-#: zypp/target/TargetImpl.cc:658
-msgid "New update message"
-msgstr ""
-
-#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
-#: zypp/target/TargetImpl.cc:1627
-#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
-msgid "Installation has been aborted as directed."
-msgstr "निर्देशानुसार स्थापना मधेच सोडली"
-
-#: zypp/target/hal/HalContext.cc:24
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr ""
-
-#: zypp/target/hal/HalContext.cc:117
-msgid "HalContext not connected"
-msgstr "हॅलकॉन्टेक्स्ट कनेक्ट केलेले नाही"
-
-#: zypp/target/hal/HalContext.cc:127
-msgid "HalDrive not initialized"
-msgstr "हॅलड्राईव्हची सुरुवात नाही"
-
-#: zypp/target/hal/HalContext.cc:137
-msgid "HalVolume not initialized"
-msgstr "हॅलव्हाल्यूमची सुरुवात नाही"
-
-#: zypp/target/hal/HalContext.cc:229
-msgid "Unable to create dbus connection"
-msgstr "डीबस कनेक्शन निर्माण करणे अशक्य"
-
-#: zypp/target/hal/HalContext.cc:242
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: लिभाल कॉन्टेक्स निर्माण करु शकत नाही"
-
-#: zypp/target/hal/HalContext.cc:257
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr " libhal_set_dbus_connection: डीबस कनेक्शन निश्चित करू शकत नाही"
-
-#: zypp/target/hal/HalContext.cc:272
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "HAL कॉन्टेक्स्ट चा प्रारंभ अशक्य – हाल्ड चालू नाही?"
-
-#: zypp/target/hal/HalContext.cc:851
-msgid "Not a CDROM drive"
-msgstr "CDROM ड्राईव्ह नाही"
-
-#. TranslatorExplanation after semicolon is error message
-#. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
-#: zypp/target/rpm/RpmDb.cc:2219
-#, fuzzy
-msgid "RPM failed: "
-msgstr "अयशस्वी"
-
-#. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1129
-#, c-format, boost-format
-msgid "Failed to import public key from file %s: %s"
-msgstr ""
-
-#. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1200
-#, fuzzy, c-format, boost-format
-msgid "Failed to remove public key %s: %s"
-msgstr "सार्वजनिक की मिळवणे अशक्य"
-
-#: zypp/target/rpm/RpmDb.cc:1578
-msgid "Package is not signed!"
-msgstr ""
-
-#. Translator: %s = name of an rpm package. A list of diffs follows
-#. this message.
-#: zypp/target/rpm/RpmDb.cc:1878
-#, c-format, boost-format
-msgid "Changed configuration files for %s:"
-msgstr "%s साठी बदललेल्या आकृतीबंध फाईल्स"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
-#, fuzzy, c-format, boost-format
-msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "rpm ने %s हे %s म्हणन जतन केले, परंतु फरक सांगणे अशक्य"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2056
-#, c-format, boost-format
-msgid ""
-"rpm saved %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr "rpm ने %s हे %s म्हणून जतन केले/nफरकाच्या या पहिल्या 25 ओळी\n"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
-#, fuzzy, c-format, boost-format
-msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr "rpm ने %s  हे %s म्हणून जतन केले फरकाच्या या पहिल्या"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2061
-#, c-format, boost-format
-msgid ""
-"rpm created %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr "rpm ने %s हे %s म्हणून जतन केले/nफरकाच्या या पहिल्या 25 ओळी\n"
-
-#. report additional rpm output in finish
-#. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
-#, fuzzy
-msgid "Additional rpm output"
-msgstr "अतिरिक्त rpm आऊटपुट"
-
-#: zypp/target/rpm/RpmDb.cc:2374
-#, c-format, boost-format
-msgid "created backup %s"
-msgstr "बॅकअप %s  निर्माण केले"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
-#, fuzzy
-msgid "Signature is OK"
-msgstr "नोंद आढळली नाही"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
-msgid "Unknown type of signature"
-msgstr ""
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
-#, fuzzy
-msgid "Signature does not verify"
-msgstr "नोंद आढळली नाही"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
-#, fuzzy
-msgid "Signature is OK, but key is not trusted"
-msgstr "नोंद आढळली नाही"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
-msgid "Signatures public key is not available"
-msgstr ""
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
-msgid "File does not exist or signature can't be checked"
-msgstr ""
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2407
-msgid "File is unsigned"
-msgstr ""
-
-#: zypp/ProblemSolution.cc:114
-msgid "Following actions will be done:"
-msgstr ""
-
-#: zypp/RepoManager.cc:312
-#, boost-format
-msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr ""
-
-#. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
-#: zypp/repo/PluginServices.cc:49
-#, fuzzy, c-format, boost-format
-msgid "Failed to read directory '%s'"
-msgstr "Failed to parse: %s."
-
-#: zypp/RepoManager.cc:330
-#, boost-format
-msgid "Cannot read repo file '%1%': Permission denied"
-msgstr ""
-
-#: zypp/RepoManager.cc:353
-#, fuzzy
-msgid "Repository alias cannot start with dot."
-msgstr " VM चे नाव आकड्याने सुरू होता कामा नये. "
-
-#: zypp/RepoManager.cc:364
-#, fuzzy
-msgid "Service alias cannot start with dot."
-msgstr " VM चे नाव आकड्याने सुरू होता कामा नये. "
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
-#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
-#, fuzzy, c-format, boost-format
-msgid "Can't open file '%s' for writing."
-msgstr "फाईलरायटिंगसाठी उघडू शकत नाही."
-
-#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
-#. %1% = service name
-#. %2% = repository name
-#: zypp/RepoManager.cc:871
-#, boost-format
-msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr ""
-
-#. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1098
-msgid "Valid metadata not found at specified URL"
-msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] ""
-msgstr[1] ""
-
-#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
-#, fuzzy, c-format, boost-format
-msgid "Can't create %s"
-msgstr " डेस्कटॉप आयटेम'%s' उघडू शकत नाही"
-
-#: zypp/RepoManager.cc:1154
-#, fuzzy
-msgid "Can't create metadata cache directory."
-msgstr "डिरेक्टर %1: %2 निर्माण करता आली नाही."
-
-#: zypp/RepoManager.cc:1300
-#, c-format, boost-format
-msgid "Building repository '%s' cache"
-msgstr ""
-
-#: zypp/RepoManager.cc:1320
-#, c-format, boost-format
-msgid "Can't create cache at %s - no writing permissions."
-msgstr ""
-
-#: zypp/RepoManager.cc:1384
-#, fuzzy, c-format, boost-format
-msgid "Failed to cache repo (%d)."
-msgstr "Failed to parse: %s."
-
-#: zypp/RepoManager.cc:1395
-msgid "Unhandled repository type"
-msgstr ""
-
-#. prepare exception to be thrown if the type could not be determined
-#. due to a media exception. We can't throw right away, because of some
-#. problems with proxy servers returning an incorrect error
-#. on ftp file-not-found(bnc #335906). Instead we'll check another types
-#. before throwing.
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
-#, c-format, boost-format
-msgid "Error trying to read from '%s'"
-msgstr ""
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
-#, fuzzy, c-format, boost-format
-msgid "Unknown error reading from '%s'"
-msgstr "फ्लॉपी डिस्कवरुन एरर वाचत आहे."
-
-#: zypp/RepoManager.cc:1623
-#, c-format, boost-format
-msgid "Adding repository '%s'"
-msgstr ""
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1711
-#, fuzzy, c-format, boost-format
-msgid "Invalid repo file name at '%s'"
-msgstr "पाठवल्याच्या फाईलचे अवैध नांव"
-
-#: zypp/RepoManager.cc:1752
-#, fuzzy, c-format, boost-format
-msgid "Removing repository '%s'"
-msgstr "रिसोर्सेस जतन करत आहे"
-
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
-msgid "Can't figure out where the repo is stored."
-msgstr ""
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
-#, fuzzy, c-format, boost-format
-msgid "Can't delete '%s'"
-msgstr " डेस्कटॉप आयटेम'%s' उघडू शकत नाही"
-
-#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
-msgid "Can't figure out where the service is stored."
-msgstr ""
-
-#: zypp/url/UrlBase.cc:154
-#, c-format, boost-format
-msgid "Url scheme does not allow a %s"
-msgstr "Url स्कीम %sला अनुमती देत नाही"
-
-#: zypp/url/UrlBase.cc:173
-#, c-format, boost-format
-msgid "Invalid %s component '%s'"
-msgstr "अवैध %s कॉम्पोनन्ट %s"
-
-#: zypp/url/UrlBase.cc:180
-#, c-format, boost-format
-msgid "Invalid %s component"
-msgstr "अवैध %s कॉम्पोनन्ट"
-
-#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
-msgid "Query string parsing not supported for this URL"
-msgstr "या URL साठी क्वेरी स्ट्रिंग पार्सिंगचे समर्थन नाही"
-
-#: zypp/url/UrlBase.cc:824
-msgid "Url scheme is a required component"
-msgstr "URL स्कीम हा एक आवश्यक भाग आहे"
-
-#: zypp/url/UrlBase.cc:830
-#, c-format, boost-format
-msgid "Invalid Url scheme '%s'"
-msgstr "अवैध Url स्कीम %s"
-
-#: zypp/url/UrlBase.cc:949
-msgid "Url scheme does not allow a username"
-msgstr "Url स्कीम उपभोक्त्याच्या नावाला अनुमती देत नाही"
-
-#: zypp/url/UrlBase.cc:983
-msgid "Url scheme does not allow a password"
-msgstr "Url स्कीम पासवर्डला अनुमती देत नाही"
-
-#: zypp/url/UrlBase.cc:1012
-msgid "Url scheme requires a host component"
-msgstr "Url स्कीमला मुख्य भागाची गरज असते"
-
-#: zypp/url/UrlBase.cc:1022
-msgid "Url scheme does not allow a host component"
-msgstr "Url स्कीम मुख्य भागाला अनुमती देत नाही"
-
-#: zypp/url/UrlBase.cc:1049
-#, c-format, boost-format
-msgid "Invalid host component '%s'"
-msgstr "अवैध मुख्य भाग %s"
-
-#: zypp/url/UrlBase.cc:1070
-msgid "Url scheme does not allow a port"
-msgstr "Url स्कीम पोर्टला अनुमती देत नाही"
-
-#: zypp/url/UrlBase.cc:1081
-#, c-format, boost-format
-msgid "Invalid port component '%s'"
-msgstr "अवैध पोर्ट भाग %s"
-
-#: zypp/url/UrlBase.cc:1098
-msgid "Url scheme requires path name"
-msgstr "Url स्कीमला पाथच्या नावाची गरज असते"
-
-#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
-msgid "Relative path not allowed if authority exists"
-msgstr "अथॉरिटी उपस्थित असेल तर सापेक्ष पाथला अनुमती नाही"
-
-#: zypp/url/UrlUtils.cc:111
-msgid "Encoded string contains a NUL byte"
-msgstr "एनकोडेड स्ट्रिंगमधे NUL बाईटचा समावेश आहे"
-
-#: zypp/url/UrlUtils.cc:173
-msgid "Invalid parameter array split separator character"
-msgstr "अवैध पॅरामीटर अरे स्प्लिट सेपरेटर कॅरॅक्टर"
-
-#: zypp/url/UrlUtils.cc:213
-msgid "Invalid parameter map split separator character"
-msgstr "अवैध पॅरामीटर मॅप स्प्लिट सेपरेटर कॅरॅक्टर"
-
-#: zypp/url/UrlUtils.cc:283
-msgid "Invalid parameter array join separator character"
-msgstr "अवैध पॅरामीटर अरे जॉईन सेपरेटर कॅरॅक्टर "
-
-#: zypp/ExternalProgram.cc:258
-#, fuzzy, c-format, boost-format
-msgid "Can't open pty (%s)."
-msgstr "फाईल उघडता येत नाही %1."
-
-#: zypp/ExternalProgram.cc:269
-#, fuzzy, c-format, boost-format
-msgid "Can't open pipe (%s)."
-msgstr "फाईल उघडता येत नाही %1."
-
-#: zypp/ExternalProgram.cc:350
-#, c-format, boost-format
-msgid "Can't chroot to '%s' (%s)."
-msgstr ""
-
-#: zypp/ExternalProgram.cc:360
-#, c-format, boost-format
-msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr ""
-
-#: zypp/ExternalProgram.cc:361
-#, fuzzy, c-format, boost-format
-msgid "Can't chdir to '%s' (%s)."
-msgstr "%s आढळत नाही."
-
-#. don't want to get here
-#: zypp/ExternalProgram.cc:373
-#, c-format, boost-format
-msgid "Can't exec '%s' (%s)."
-msgstr ""
-
-#: zypp/ExternalProgram.cc:381
-#, fuzzy, c-format, boost-format
-msgid "Can't fork (%s)."
-msgstr "%s आढळत नाही."
-
-#: zypp/ExternalProgram.cc:507
-#, c-format, boost-format
-msgid "Command exited with status %d."
-msgstr ""
-
-#: zypp/ExternalProgram.cc:527
-#, c-format, boost-format
-msgid "Command was killed by signal %d (%s)."
-msgstr ""
-
-#: zypp/ExternalProgram.cc:532
-#, fuzzy
-msgid "Command exited with unknown error."
-msgstr " कनेक्ट करतांना आदेश वापरला "
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:60
-#, fuzzy
-msgid "does not expire"
-msgstr "'%1' अस्तित्वात नाही."
-
-#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:65
-#, boost-format
-msgid "expired: %1%"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:70
-#, boost-format
-msgid "expires: %1%"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:79
-#, fuzzy
-msgid "(does not expire)"
-msgstr "'%1' अस्तित्वात नाही."
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:88
-msgid "(EXPIRED)"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:92
-msgid "(expires within 24h)"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:96
-#, c-format, boost-format
-msgid "(expires in %d day)"
-msgid_plural "(expires in %d days)"
-msgstr[0] ""
-msgstr[1] ""
-
-#: zypp/VendorSupportOptions.cc:14
-msgid "unknown"
-msgstr "अनोळखी"
-
-#: zypp/VendorSupportOptions.cc:17
-msgid "unsupported"
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:20
-msgid "Level 1"
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:23
-msgid "Level 2"
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:26
-msgid "Level 3"
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:29
-msgid "Additional Customer Contract Necessary"
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:31
-msgid "invalid"
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:39
-msgid "The level of support is unspecified"
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:42
-#, fuzzy
-msgid "The vendor does not provide support."
-msgstr "डिस्क अस्तित्वात नाही"
-
-#: zypp/VendorSupportOptions.cc:45
-msgid ""
-"Problem determination, which means technical support designed to provide "
-"compatibility information, installation assistance, usage support, on-going "
-"maintenance and basic troubleshooting. Level 1 Support is not intended to "
-"correct product defect errors."
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:48
-msgid ""
-"Problem isolation, which means technical support designed to duplicate "
-"customer problems, isolate problem area and provide resolution for problems "
-"not resolved by Level 1 Support."
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:51
-msgid ""
-"Problem resolution, which means technical support designed to resolve "
-"complex problems by engaging engineering in resolution of product defects "
-"which have been identified by Level 2 Support."
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:54
-msgid "An additional customer contract is necessary for getting support."
-msgstr ""
-
-#: zypp/VendorSupportOptions.cc:56
-msgid "Unknown support option. Description not available"
 msgstr ""
 
 #: zypp/CountryCode.cc:50
@@ -1892,6 +1259,110 @@ msgstr "झांबिया"
 #: zypp/CountryCode.cc:403
 msgid "Zimbabwe"
 msgstr "झिंबाब्बे"
+
+#: zypp/Dep.cc:96
+msgid "Provides"
+msgstr ""
+
+#: zypp/Dep.cc:97
+msgid "Prerequires"
+msgstr ""
+
+#: zypp/Dep.cc:98
+msgid "Requires"
+msgstr ""
+
+#: zypp/Dep.cc:99
+msgid "Conflicts"
+msgstr ""
+
+#: zypp/Dep.cc:100
+#, fuzzy
+msgid "Obsoletes"
+msgstr "%s :%s ला बाजूला टाकते"
+
+#: zypp/Dep.cc:101
+msgid "Recommends"
+msgstr ""
+
+#: zypp/Dep.cc:102
+msgid "Suggests"
+msgstr ""
+
+#: zypp/Dep.cc:103
+msgid "Enhances"
+msgstr ""
+
+#: zypp/Dep.cc:104
+msgid "Supplements"
+msgstr ""
+
+#: zypp/ExternalProgram.cc:258
+#, fuzzy, c-format, boost-format
+msgid "Can't open pty (%s)."
+msgstr "फाईल उघडता येत नाही %1."
+
+#: zypp/ExternalProgram.cc:269
+#, fuzzy, c-format, boost-format
+msgid "Can't open pipe (%s)."
+msgstr "फाईल उघडता येत नाही %1."
+
+#: zypp/ExternalProgram.cc:350
+#, c-format, boost-format
+msgid "Can't chroot to '%s' (%s)."
+msgstr ""
+
+#: zypp/ExternalProgram.cc:360
+#, c-format, boost-format
+msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
+msgstr ""
+
+#: zypp/ExternalProgram.cc:361
+#, fuzzy, c-format, boost-format
+msgid "Can't chdir to '%s' (%s)."
+msgstr "%s आढळत नाही."
+
+#. don't want to get here
+#: zypp/ExternalProgram.cc:373
+#, c-format, boost-format
+msgid "Can't exec '%s' (%s)."
+msgstr ""
+
+#: zypp/ExternalProgram.cc:381
+#, fuzzy, c-format, boost-format
+msgid "Can't fork (%s)."
+msgstr "%s आढळत नाही."
+
+#: zypp/ExternalProgram.cc:507
+#, c-format, boost-format
+msgid "Command exited with status %d."
+msgstr ""
+
+#: zypp/ExternalProgram.cc:527
+#, c-format, boost-format
+msgid "Command was killed by signal %d (%s)."
+msgstr ""
+
+#: zypp/ExternalProgram.cc:532
+#, fuzzy
+msgid "Command exited with unknown error."
+msgstr " कनेक्ट करतांना आदेश वापरला "
+
+#. TranslatorExplanation first %s is key name, second is keyring name
+#: zypp/KeyRing.cc:520
+#, c-format, boost-format
+msgid "Tried to import not existent key %s into keyring %s"
+msgstr ""
+
+#: zypp/KeyRing.cc:564
+#, fuzzy
+msgid "Failed to delete key."
+msgstr "VM सुरू करण्यात अयशस्वी."
+
+#: zypp/KeyRing.cc:572
+#, fuzzy, c-format, boost-format
+msgid "Signature file %s not found"
+msgstr "नोंद आढळली नाही"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -4247,36 +3718,480 @@ msgstr "झुलू"
 msgid "Zuni"
 msgstr "झुनी"
 
-#. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:512
-#, c-format, boost-format
-msgid "Tried to import not existent key %s into keyring %s"
+#: zypp/ProblemSolution.cc:114
+msgid "Following actions will be done:"
 msgstr ""
 
-#: zypp/KeyRing.cc:556
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:60
 #, fuzzy
-msgid "Failed to delete key."
-msgstr "VM सुरू करण्यात अयशस्वी."
+msgid "does not expire"
+msgstr "'%1' अस्तित्वात नाही."
 
-#: zypp/KeyRing.cc:565
-#, fuzzy, c-format, boost-format
-msgid "Signature file %s not found"
-msgstr "नोंद आढळली नाही"
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
+msgstr ""
 
-#: zypp/repo/RepoProvideFile.cc:259
-#, fuzzy, c-format, boost-format
-msgid "Can't provide file '%s' from repository '%s'"
-msgstr "%s वरून %s पुरवू शकत नाही"
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr ""
 
-#: zypp/repo/RepoProvideFile.cc:265
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
 #, fuzzy
-msgid "No url in repository."
+msgid "(does not expire)"
+msgstr "'%1' अस्तित्वात नाही."
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:88
+msgid "(EXPIRED)"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:92
+msgid "(expires within 24h)"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:96
+#, c-format, boost-format
+msgid "(expires in %d day)"
+msgid_plural "(expires in %d days)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: zypp/RepoManager.cc:312
+#, boost-format
+msgid "Cannot read repo directory '%1%': Permission denied"
+msgstr ""
+
+#. TranslatorExplanation '%s' is a pathname
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
+#: zypp/repo/PluginServices.cc:49
+#, fuzzy, c-format, boost-format
+msgid "Failed to read directory '%s'"
+msgstr "Failed to parse: %s."
+
+#: zypp/RepoManager.cc:330
+#, boost-format
+msgid "Cannot read repo file '%1%': Permission denied"
+msgstr ""
+
+#: zypp/RepoManager.cc:353
+#, fuzzy
+msgid "Repository alias cannot start with dot."
+msgstr " VM चे नाव आकड्याने सुरू होता कामा नये. "
+
+#: zypp/RepoManager.cc:364
+#, fuzzy
+msgid "Service alias cannot start with dot."
+msgstr " VM चे नाव आकड्याने सुरू होता कामा नये. "
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
+#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
+#, fuzzy, c-format, boost-format
+msgid "Can't open file '%s' for writing."
+msgstr "फाईलरायटिंगसाठी उघडू शकत नाही."
+
+#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
+#. %1% = service name
+#. %2% = repository name
+#: zypp/RepoManager.cc:871
+#, boost-format
+msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
+msgstr ""
+
+#. we will throw this later if no URL checks out fine
+#: zypp/RepoManager.cc:1098
+msgid "Valid metadata not found at specified URL"
+msgid_plural "Valid metadata not found at specified URLs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
+#, fuzzy, c-format, boost-format
+msgid "Can't create %s"
+msgstr " डेस्कटॉप आयटेम'%s' उघडू शकत नाही"
+
+#: zypp/RepoManager.cc:1154
+#, fuzzy
+msgid "Can't create metadata cache directory."
+msgstr "डिरेक्टर %1: %2 निर्माण करता आली नाही."
+
+#: zypp/RepoManager.cc:1300
+#, c-format, boost-format
+msgid "Building repository '%s' cache"
+msgstr ""
+
+#: zypp/RepoManager.cc:1320
+#, c-format, boost-format
+msgid "Can't create cache at %s - no writing permissions."
+msgstr ""
+
+#: zypp/RepoManager.cc:1384
+#, fuzzy, c-format, boost-format
+msgid "Failed to cache repo (%d)."
+msgstr "Failed to parse: %s."
+
+#: zypp/RepoManager.cc:1395
+msgid "Unhandled repository type"
+msgstr ""
+
+#. prepare exception to be thrown if the type could not be determined
+#. due to a media exception. We can't throw right away, because of some
+#. problems with proxy servers returning an incorrect error
+#. on ftp file-not-found(bnc #335906). Instead we'll check another types
+#. before throwing.
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
+#, c-format, boost-format
+msgid "Error trying to read from '%s'"
+msgstr ""
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
+#, fuzzy, c-format, boost-format
+msgid "Unknown error reading from '%s'"
+msgstr "फ्लॉपी डिस्कवरुन एरर वाचत आहे."
+
+#: zypp/RepoManager.cc:1623
+#, c-format, boost-format
+msgid "Adding repository '%s'"
+msgstr ""
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1711
+#, fuzzy, c-format, boost-format
+msgid "Invalid repo file name at '%s'"
+msgstr "पाठवल्याच्या फाईलचे अवैध नांव"
+
+#: zypp/RepoManager.cc:1752
+#, fuzzy, c-format, boost-format
+msgid "Removing repository '%s'"
+msgstr "रिसोर्सेस जतन करत आहे"
+
+#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
+msgid "Can't figure out where the repo is stored."
+msgstr ""
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
+#, fuzzy, c-format, boost-format
+msgid "Can't delete '%s'"
+msgstr " डेस्कटॉप आयटेम'%s' उघडू शकत नाही"
+
+#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
+msgid "Can't figure out where the service is stored."
+msgstr ""
+
+#: zypp/Url.cc:114
+msgid "Invalid LDAP URL query string"
+msgstr "अवैध LDAP URL क्वेरी स्ट्रिंग"
+
+#: zypp/Url.cc:153
+#, c-format, boost-format
+msgid "Invalid LDAP URL query parameter '%s'"
+msgstr "अवैध LDAP URL क्वेरी पॅरामीटर %s"
+
+#: zypp/Url.cc:300
+msgid "Unable to clone Url object"
+msgstr "Url ऑब्जेक्ट क्लोन करण्यात असमर्थ"
+
+#: zypp/Url.cc:313
+msgid "Invalid empty Url object reference"
+msgstr "अवैध रिक्त Url ऑब्जेक्ट संदर्भ"
+
+#: zypp/Url.cc:326 zypp/Url.cc:340
+msgid "Unable to parse Url components"
+msgstr "Url भागांचा संबंध जोडण्यात असमर्थ"
+
+#: zypp/VendorSupportOptions.cc:14
+msgid "unknown"
+msgstr "अनोळखी"
+
+#: zypp/VendorSupportOptions.cc:17
+msgid "unsupported"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:20
+msgid "Level 1"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:23
+msgid "Level 2"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:26
+msgid "Level 3"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:29
+msgid "Additional Customer Contract Necessary"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:31
+msgid "invalid"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:39
+msgid "The level of support is unspecified"
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:42
+#, fuzzy
+msgid "The vendor does not provide support."
+msgstr "डिस्क अस्तित्वात नाही"
+
+#: zypp/VendorSupportOptions.cc:45
+msgid ""
+"Problem determination, which means technical support designed to provide "
+"compatibility information, installation assistance, usage support, on-going "
+"maintenance and basic troubleshooting. Level 1 Support is not intended to "
+"correct product defect errors."
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:48
+msgid ""
+"Problem isolation, which means technical support designed to duplicate "
+"customer problems, isolate problem area and provide resolution for problems "
+"not resolved by Level 1 Support."
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:51
+msgid ""
+"Problem resolution, which means technical support designed to resolve "
+"complex problems by engaging engineering in resolution of product defects "
+"which have been identified by Level 2 Support."
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:54
+msgid "An additional customer contract is necessary for getting support."
+msgstr ""
+
+#: zypp/VendorSupportOptions.cc:56
+msgid "Unknown support option. Description not available"
+msgstr ""
+
+#: zypp/ZYppFactory.cc:399
+#, c-format, boost-format
+msgid ""
+"System management is locked by the application with pid %d (%s).\n"
+"Close this application before trying again."
+msgstr ""
+
+#. TranslatorExplanation followed by the list of error messages that lead to this exception
+#: zypp/base/Exception.cc:134
+msgid "History:"
+msgstr ""
+
+#: zypp/base/InterProcessMutex.cc:83
+#, fuzzy, c-format, boost-format
+msgid "Can't open lock file: %s"
+msgstr "फाईल उघडता येत नाही %1."
+
+#: zypp/base/InterProcessMutex.cc:143
+msgid "This action is being run by another program already."
+msgstr ""
+
+#: zypp/base/StrMatcher.cc:152
+#, fuzzy, c-format, boost-format
+msgid "Unknown match mode '%s'"
+msgstr "अज्ञात आज्ञा"
+
+#: zypp/base/StrMatcher.cc:153
+#, c-format, boost-format
+msgid "Unknown match mode '%s' for pattern '%s'"
+msgstr ""
+
+#: zypp/base/StrMatcher.cc:157
+#, c-format, boost-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr ""
+
+#: zypp/base/StrMatcher.cc:158
+#, fuzzy, c-format, boost-format
+msgid "Invalid regular expression '%s'"
+msgstr "अवैध Url स्कीम %s"
+
+#. !\todo add comma to the message for the next release
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
+#, c-format, boost-format
+msgid "Authentication required for '%s'"
+msgstr ""
+
+#: zypp/media/MediaCurl.cc:1109
+msgid ""
+"Visit the Novell Customer Center to check whether your registration is valid "
+"and has not expired."
+msgstr ""
+
+#: zypp/media/MediaException.cc:31
+#, fuzzy, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr " %s - %s उघडणे अशक्य\n"
+
+#: zypp/media/MediaException.cc:41
+#, fuzzy, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "मॉड्युल लोड करण्यात अपयश \"%s\"."
+
+#: zypp/media/MediaException.cc:46
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr ""
+
+#: zypp/media/MediaException.cc:51
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr ""
+
+#: zypp/media/MediaException.cc:56
+#, fuzzy, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
 msgstr "भांडारात फाईल %1 आढळली नाही"
 
-#: zypp/repo/RepoException.cc:129
+#: zypp/media/MediaException.cc:61
+#, fuzzy, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "फाईल %1 लिहिता येत नाही."
+
+#: zypp/media/MediaException.cc:66
+msgid "Medium not attached"
+msgstr ""
+
+#: zypp/media/MediaException.cc:71
+msgid "Bad media attach point"
+msgstr ""
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:77
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr ""
+
+#: zypp/media/MediaException.cc:82
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr ""
+
+#: zypp/media/MediaException.cc:87
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr ""
+
+#: zypp/media/MediaException.cc:92
+#, fuzzy, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "%1 ही डिरेक्टरी नाही."
+
+#: zypp/media/MediaException.cc:99
+msgid "Malformed URI"
+msgstr ""
+
+#: zypp/media/MediaException.cc:109
 #, fuzzy
-msgid "Service plugin does not support changing an attribute."
-msgstr "बदल वैशिष्ट्ये दाखवाला रिसोर्स प्रकार VAR1 समर्थन देत नाही feature"
+msgid "Empty host name in URI"
+msgstr "रिक्त CA नांव."
+
+#: zypp/media/MediaException.cc:114
+msgid "Empty filesystem in URI"
+msgstr ""
+
+#: zypp/media/MediaException.cc:119
+msgid "Empty destination in URI"
+msgstr ""
+
+#: zypp/media/MediaException.cc:124
+#, fuzzy, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "अवैध URL योजना '%1'."
+
+#: zypp/media/MediaException.cc:129
+msgid "Operation not supported by medium"
+msgstr ""
+
+#: zypp/media/MediaException.cc:136
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:144
+#, c-format, boost-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr ""
+
+#: zypp/media/MediaException.cc:151
+#, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr ""
+
+#: zypp/media/MediaException.cc:156
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr ""
+
+#: zypp/media/MediaException.cc:162
+msgid "Cannot eject any media"
+msgstr ""
+
+#: zypp/media/MediaException.cc:164
+#, fuzzy, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr " डेस्कटॉप आयटेम'%s' उघडू शकत नाही"
+
+#: zypp/media/MediaException.cc:179
+#, fuzzy, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "परवानगी नाकारली"
+
+#: zypp/media/MediaException.cc:187
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr ""
+
+#: zypp/media/MediaException.cc:195
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr ""
+
+#: zypp/media/MediaException.cc:203
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr ""
+
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
+#: zypp/media/MediaUserAuth.cc:136
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr ""
+
+#: zypp/misc/CheckAccessDeleted.cc:283
+msgid "Please install package 'lsof' first."
+msgstr ""
+
+#: zypp/parser/RepoindexFileReader.cc:197
+#, c-format, boost-format
+msgid "Required attribute '%s' is missing."
+msgstr ""
+
+#: zypp/parser/RepoindexFileReader.cc:209
+#, c-format, boost-format
+msgid "One or both of '%s' or '%s' attributes is required."
+msgstr ""
 
 #: zypp/repo/PackageProvider.cc:216
 #, fuzzy
@@ -4307,12 +4222,134 @@ msgstr "applydeltarpm चेक अयशस्वी"
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm अयशस्वी"
 
-#: zypp/ZYppFactory.cc:399
-#, c-format, boost-format
+#: zypp/repo/RepoException.cc:129
+#, fuzzy
+msgid "Service plugin does not support changing an attribute."
+msgstr "बदल वैशिष्ट्ये दाखवाला रिसोर्स प्रकार VAR1 समर्थन देत नाही feature"
+
+#: zypp/repo/RepoProvideFile.cc:259
+#, fuzzy, c-format, boost-format
+msgid "Can't provide file '%s' from repository '%s'"
+msgstr "%s वरून %s पुरवू शकत नाही"
+
+#: zypp/repo/RepoProvideFile.cc:265
+#, fuzzy
+msgid "No url in repository."
+msgstr "भांडारात फाईल %1 आढळली नाही"
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:34
+#, boost-format
 msgid ""
-"System management is locked by the application with pid %d (%s).\n"
-"Close this application before trying again."
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
 msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:40
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:47
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:53
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
+#: zypp/sat/FileConflicts.cc:68
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:76
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:85
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:93
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+
+#: zypp/sat/detail/PoolImpl.cc:189
+#, fuzzy
+msgid "Can not create sat-pool."
+msgstr "फाईल निर्माण करु शकत नाही"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#, fuzzy, c-format, boost-format
+msgid "break %s by ignoring some of its dependencies"
+msgstr "या गरजेकडे येथेच दुर्लक्ष करा"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+#, fuzzy
+msgid "generally ignore of some dependencies"
+msgstr "या गरजेकडे येथेच दुर्लक्ष करा"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
@@ -4344,8 +4381,7 @@ msgstr "अवलंबून असण्याच्या (डिपेन्
 msgid "nothing provides requested %s"
 msgstr "कोणतीही गोष्ट %s पुरवत नाही"
 
-#: zypp/solver/detail/SATResolver.cc:997
-#: zypp/solver/detail/SATResolver.cc:1001
+#: zypp/solver/detail/SATResolver.cc:997 zypp/solver/detail/SATResolver.cc:1001
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
@@ -4517,328 +4553,295 @@ msgstr ""
 msgid "deinstallation of %s"
 msgstr "स्थापना (इन्स्टॉलेशन)"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
-#, fuzzy, c-format, boost-format
-msgid "break %s by ignoring some of its dependencies"
-msgstr "या गरजेकडे येथेच दुर्लक्ष करा"
-
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+#: zypp/target/TargetImpl.cc:310
 #, fuzzy
-msgid "generally ignore of some dependencies"
-msgstr "या गरजेकडे येथेच दुर्लक्ष करा"
+msgid " executed"
+msgstr "अमलात आणा"
 
-#: zypp/parser/RepoindexFileReader.cc:197
+#: zypp/target/TargetImpl.cc:332
+#, fuzzy
+msgid " execution failed"
+msgstr "DBI Execution failed: %s"
+
+#. translators: We may find the same script content in files with different names.
+#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
+#. message for a log file. Preferably start translation with "%s"
+#: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
-msgid "Required attribute '%s' is missing."
+msgid "%s already executed as %s)"
 msgstr ""
 
-#: zypp/parser/RepoindexFileReader.cc:209
-#, c-format, boost-format
-msgid "One or both of '%s' or '%s' attributes is required."
+#: zypp/target/TargetImpl.cc:459
+msgid " execution skipped while aborting"
 msgstr ""
 
-#: zypp/base/InterProcessMutex.cc:83
+#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
+#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
+#: zypp/target/TargetImpl.cc:607
+#, fuzzy
+msgid "Error sending update message notification."
+msgstr "की च्या सांकेतिकीकरणादरम्यान चूक आली"
+
+#: zypp/target/TargetImpl.cc:658
+msgid "New update message"
+msgstr ""
+
+#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
+#: zypp/target/TargetImpl.cc:1627
+#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
+msgid "Installation has been aborted as directed."
+msgstr "निर्देशानुसार स्थापना मधेच सोडली"
+
+#: zypp/target/hal/HalContext.cc:24
+msgid "Sorry, but this version of libzypp was built without HAL support."
+msgstr ""
+
+#: zypp/target/hal/HalContext.cc:117
+msgid "HalContext not connected"
+msgstr "हॅलकॉन्टेक्स्ट कनेक्ट केलेले नाही"
+
+#: zypp/target/hal/HalContext.cc:127
+msgid "HalDrive not initialized"
+msgstr "हॅलड्राईव्हची सुरुवात नाही"
+
+#: zypp/target/hal/HalContext.cc:137
+msgid "HalVolume not initialized"
+msgstr "हॅलव्हाल्यूमची सुरुवात नाही"
+
+#: zypp/target/hal/HalContext.cc:229
+msgid "Unable to create dbus connection"
+msgstr "डीबस कनेक्शन निर्माण करणे अशक्य"
+
+#: zypp/target/hal/HalContext.cc:242
+msgid "libhal_ctx_new: Can't create libhal context"
+msgstr "libhal_ctx_new: लिभाल कॉन्टेक्स निर्माण करु शकत नाही"
+
+#: zypp/target/hal/HalContext.cc:257
+msgid "libhal_set_dbus_connection: Can't set dbus connection"
+msgstr " libhal_set_dbus_connection: डीबस कनेक्शन निश्चित करू शकत नाही"
+
+#: zypp/target/hal/HalContext.cc:272
+msgid "Unable to initalize HAL context -- hald not running?"
+msgstr "HAL कॉन्टेक्स्ट चा प्रारंभ अशक्य – हाल्ड चालू नाही?"
+
+#: zypp/target/hal/HalContext.cc:851
+msgid "Not a CDROM drive"
+msgstr "CDROM ड्राईव्ह नाही"
+
+#. TranslatorExplanation after semicolon is error message
+#. TranslatorExplanation the colon is followed by an error message
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
+#: zypp/target/rpm/RpmDb.cc:2209
+#, fuzzy
+msgid "RPM failed: "
+msgstr "अयशस्वी"
+
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1119
+#, boost-format
+msgid "Failed to import public key %1%"
+msgstr ""
+
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1189
+#, boost-format
+msgid "Failed to remove public key %1%"
+msgstr ""
+
+#: zypp/target/rpm/RpmDb.cc:1568
+msgid "Package is not signed!"
+msgstr ""
+
+#. Translator: %s = name of an rpm package. A list of diffs follows
+#. this message.
+#: zypp/target/rpm/RpmDb.cc:1868
+#, c-format, boost-format
+msgid "Changed configuration files for %s:"
+msgstr "%s साठी बदललेल्या आकृतीबंध फाईल्स"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2044
 #, fuzzy, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "फाईल उघडता येत नाही %1."
+msgid "rpm saved %s as %s, but it was impossible to determine the difference"
+msgstr "rpm ने %s हे %s म्हणन जतन केले, परंतु फरक सांगणे अशक्य"
 
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr ""
-
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp/base/Exception.cc:107
-msgid "History:"
-msgstr ""
-
-#: zypp/base/StrMatcher.cc:152
-#, fuzzy, c-format, boost-format
-msgid "Unknown match mode '%s'"
-msgstr "अज्ञात आज्ञा"
-
-#: zypp/base/StrMatcher.cc:153
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2046
 #, c-format, boost-format
-msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr ""
+msgid ""
+"rpm saved %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr "rpm ने %s हे %s म्हणून जतन केले/nफरकाच्या या पहिल्या 25 ओळी\n"
 
-#: zypp/base/StrMatcher.cc:157
-#, c-format, boost-format
-msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr ""
-
-#: zypp/base/StrMatcher.cc:158
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2049
 #, fuzzy, c-format, boost-format
-msgid "Invalid regular expression '%s'"
+msgid "rpm created %s as %s, but it was impossible to determine the difference"
+msgstr "rpm ने %s  हे %s म्हणून जतन केले फरकाच्या या पहिल्या"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2051
+#, c-format, boost-format
+msgid ""
+"rpm created %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr "rpm ने %s हे %s म्हणून जतन केले/nफरकाच्या या पहिल्या 25 ओळी\n"
+
+#. report additional rpm output in finish
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+#, fuzzy
+msgid "Additional rpm output"
+msgstr "अतिरिक्त rpm आऊटपुट"
+
+#: zypp/target/rpm/RpmDb.cc:2364
+#, c-format, boost-format
+msgid "created backup %s"
+msgstr "बॅकअप %s  निर्माण केले"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2385
+#, fuzzy
+msgid "Signature is OK"
+msgstr "नोंद आढळली नाही"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2387
+msgid "Unknown type of signature"
+msgstr ""
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2389
+#, fuzzy
+msgid "Signature does not verify"
+msgstr "नोंद आढळली नाही"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2391
+#, fuzzy
+msgid "Signature is OK, but key is not trusted"
+msgstr "नोंद आढळली नाही"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2393
+msgid "Signatures public key is not available"
+msgstr ""
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2395
+msgid "File does not exist or signature can't be checked"
+msgstr ""
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2397
+msgid "File is unsigned"
+msgstr ""
+
+#: zypp/thread/Mutex.cc:33
+msgid "Can't initialize mutex attributes"
+msgstr "म्युटेक्स अट्रिब्यूट्स सुरू करू शकत नाही"
+
+#: zypp/thread/Mutex.cc:40
+msgid "Can't set recursive mutex attribute"
+msgstr "रीकर्सिव्ह म्यूटेक्स अट्रिब्यूट स्थापित करु शकत नाही"
+
+#: zypp/thread/Mutex.cc:47
+msgid "Can't initialize recursive mutex"
+msgstr "रीकर्सिव्ह म्युटेक्स सुरू करू शकत नाही "
+
+#: zypp/thread/Mutex.cc:77
+msgid "Can't acquire the mutex lock"
+msgstr "म्युटेक्स लॉक मिळवू शकत नाही"
+
+#: zypp/thread/Mutex.cc:87
+msgid "Can't release the mutex lock"
+msgstr "म्युटेक्स लॉक उघडू शकत नाही"
+
+#: zypp/url/UrlBase.cc:154
+#, c-format, boost-format
+msgid "Url scheme does not allow a %s"
+msgstr "Url स्कीम %sला अनुमती देत नाही"
+
+#: zypp/url/UrlBase.cc:173
+#, c-format, boost-format
+msgid "Invalid %s component '%s'"
+msgstr "अवैध %s कॉम्पोनन्ट %s"
+
+#: zypp/url/UrlBase.cc:180
+#, c-format, boost-format
+msgid "Invalid %s component"
+msgstr "अवैध %s कॉम्पोनन्ट"
+
+#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
+msgid "Query string parsing not supported for this URL"
+msgstr "या URL साठी क्वेरी स्ट्रिंग पार्सिंगचे समर्थन नाही"
+
+#: zypp/url/UrlBase.cc:824
+msgid "Url scheme is a required component"
+msgstr "URL स्कीम हा एक आवश्यक भाग आहे"
+
+#: zypp/url/UrlBase.cc:830
+#, c-format, boost-format
+msgid "Invalid Url scheme '%s'"
 msgstr "अवैध Url स्कीम %s"
 
-#: zypp/misc/CheckAccessDeleted.cc:283
-msgid "Please install package 'lsof' first."
-msgstr ""
+#: zypp/url/UrlBase.cc:949
+msgid "Url scheme does not allow a username"
+msgstr "Url स्कीम उपभोक्त्याच्या नावाला अनुमती देत नाही"
 
-#: zypp/media/MediaHandler.cc:370
-msgid ""
-"Create attach point: Can't find a writable directory to create an attach "
-"point"
-msgstr ""
+#: zypp/url/UrlBase.cc:983
+msgid "Url scheme does not allow a password"
+msgstr "Url स्कीम पासवर्डला अनुमती देत नाही"
 
-#. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
+#: zypp/url/UrlBase.cc:1012
+msgid "Url scheme requires a host component"
+msgstr "Url स्कीमला मुख्य भागाची गरज असते"
+
+#: zypp/url/UrlBase.cc:1022
+msgid "Url scheme does not allow a host component"
+msgstr "Url स्कीम मुख्य भागाला अनुमती देत नाही"
+
+#: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
-msgid "Authentication required for '%s'"
-msgstr ""
+msgid "Invalid host component '%s'"
+msgstr "अवैध मुख्य भाग %s"
 
-#: zypp/media/MediaException.cc:31
-#, fuzzy, c-format, boost-format
-msgid "Failed to mount %s on %s"
-msgstr " %s - %s उघडणे अशक्य\n"
+#: zypp/url/UrlBase.cc:1070
+msgid "Url scheme does not allow a port"
+msgstr "Url स्कीम पोर्टला अनुमती देत नाही"
 
-#: zypp/media/MediaException.cc:41
-#, fuzzy, c-format, boost-format
-msgid "Failed to unmount %s"
-msgstr "मॉड्युल लोड करण्यात अपयश \"%s\"."
-
-#: zypp/media/MediaException.cc:47
+#: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
-msgid "Bad file name: %s"
-msgstr ""
+msgid "Invalid port component '%s'"
+msgstr "अवैध पोर्ट भाग %s"
 
-#: zypp/media/MediaException.cc:53
-#, c-format, boost-format
-msgid "Medium not opened when trying to perform action '%s'."
-msgstr ""
+#: zypp/url/UrlBase.cc:1098
+msgid "Url scheme requires path name"
+msgstr "Url स्कीमला पाथच्या नावाची गरज असते"
 
-#: zypp/media/MediaException.cc:60
-#, fuzzy, c-format, boost-format
-msgid "File '%s' not found on medium '%s'"
-msgstr "भांडारात फाईल %1 आढळली नाही"
+#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
+msgid "Relative path not allowed if authority exists"
+msgstr "अथॉरिटी उपस्थित असेल तर सापेक्ष पाथला अनुमती नाही"
 
-#: zypp/media/MediaException.cc:67
-#, fuzzy, c-format, boost-format
-msgid "Cannot write file '%s'."
-msgstr "फाईल %1 लिहिता येत नाही."
+#: zypp/url/UrlUtils.cc:111
+msgid "Encoded string contains a NUL byte"
+msgstr "एनकोडेड स्ट्रिंगमधे NUL बाईटचा समावेश आहे"
 
-#: zypp/media/MediaException.cc:72
-msgid "Medium not attached"
-msgstr ""
+#: zypp/url/UrlUtils.cc:173
+msgid "Invalid parameter array split separator character"
+msgstr "अवैध पॅरामीटर अरे स्प्लिट सेपरेटर कॅरॅक्टर"
 
-#: zypp/media/MediaException.cc:77
-msgid "Bad media attach point"
-msgstr ""
+#: zypp/url/UrlUtils.cc:213
+msgid "Invalid parameter map split separator character"
+msgstr "अवैध पॅरामीटर मॅप स्प्लिट सेपरेटर कॅरॅक्टर"
 
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:84
-#, c-format, boost-format
-msgid "Download (curl) initialization failed for '%s'"
-msgstr ""
+#: zypp/url/UrlUtils.cc:283
+msgid "Invalid parameter array join separator character"
+msgstr "अवैध पॅरामीटर अरे जॉईन सेपरेटर कॅरॅक्टर "
 
-#: zypp/media/MediaException.cc:91
-#, c-format, boost-format
-msgid "System exception '%s' on medium '%s'."
-msgstr ""
-
-#: zypp/media/MediaException.cc:98
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a file."
-msgstr ""
-
-#: zypp/media/MediaException.cc:106
-#, fuzzy, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "%1 ही डिरेक्टरी नाही."
-
-#: zypp/media/MediaException.cc:115
-msgid "Malformed URI"
-msgstr ""
-
-#: zypp/media/MediaException.cc:125
 #, fuzzy
-msgid "Empty host name in URI"
-msgstr "रिक्त CA नांव."
-
-#: zypp/media/MediaException.cc:130
-msgid "Empty filesystem in URI"
-msgstr ""
-
-#: zypp/media/MediaException.cc:135
-msgid "Empty destination in URI"
-msgstr ""
-
-#: zypp/media/MediaException.cc:140
-#, fuzzy, c-format, boost-format
-msgid "Unsupported URI scheme in '%s'."
-msgstr "अवैध URL योजना '%1'."
-
-#: zypp/media/MediaException.cc:145
-msgid "Operation not supported by medium"
-msgstr ""
-
-#: zypp/media/MediaException.cc:152
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-"Error message: %s\n"
-msgstr ""
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:161
-#, c-format, boost-format
-msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
-
-#: zypp/media/MediaException.cc:169
-#, c-format, boost-format
-msgid "Media source '%s' does not contain the desired medium"
-msgstr ""
-
-#: zypp/media/MediaException.cc:175
-#, c-format, boost-format
-msgid "Medium '%s' is in use by another instance"
-msgstr ""
-
-#: zypp/media/MediaException.cc:182
-msgid "Cannot eject any media"
-msgstr ""
-
-#: zypp/media/MediaException.cc:184
-#, fuzzy, c-format, boost-format
-msgid "Cannot eject media '%s'"
-msgstr " डेस्कटॉप आयटेम'%s' उघडू शकत नाही"
-
-#: zypp/media/MediaException.cc:199
-#, fuzzy, c-format, boost-format
-msgid "Permission to access '%s' denied."
-msgstr "परवानगी नाकारली"
-
-#: zypp/media/MediaException.cc:207
-#, c-format, boost-format
-msgid "Timeout exceeded when accessing '%s'."
-msgstr ""
-
-#: zypp/media/MediaException.cc:215
-#, c-format, boost-format
-msgid "Location '%s' is temporarily unaccessible."
-msgstr ""
-
-#: zypp/media/MediaException.cc:223
-#, c-format, boost-format
-msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
-
-#: zypp/media/MediaUserAuth.cc:136
-#, c-format, boost-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr ""
-
-#: zypp/media/MediaCurl.cc:1109
-msgid ""
-"Visit the Novell Customer Center to check whether your registration is valid "
-"and has not expired."
-msgstr ""
-
-#: zypp/sat/detail/PoolImpl.cc:189
-#, fuzzy
-msgid "Can not create sat-pool."
-msgstr "फाईल निर्माण करु शकत नाही"
-
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:34
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
-
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:40
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
-
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:47
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
-
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:53
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
-
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
-#: zypp/sat/FileConflicts.cc:68
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
-
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:76
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
-msgstr ""
-
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:85
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
-
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:93
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
-msgstr ""
+#~ msgid "Failed to remove public key %s: %s"
+#~ msgstr "सार्वजनिक की मिळवणे अशक्य"
 
 #, fuzzy
 #~ msgid "do not keep %s installed"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 12:50+0200\n"
+"POT-Creation-Date: 2017-09-07 12:25+0200\n"
 "PO-Revision-Date: 2017-08-09 14:53+0000\n"
 "Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/libzypp/"
@@ -28,637 +28,11 @@ msgstr ""
 msgid "Hal Exception"
 msgstr "Hal 例外"
 
-#: zypp/Url.cc:114
-msgid "Invalid LDAP URL query string"
-msgstr "無效的 LDAP URL 查詢字串"
-
-#: zypp/Url.cc:153
-#, c-format, boost-format
-msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "無效的 LDAP URL 查詢參數「%s」"
-
-#: zypp/Url.cc:300
-msgid "Unable to clone Url object"
-msgstr "無法複製 Url 物件"
-
-#: zypp/Url.cc:313
-msgid "Invalid empty Url object reference"
-msgstr "無效的空白 Url 物件參照"
-
-#: zypp/Url.cc:326 zypp/Url.cc:340
-msgid "Unable to parse Url components"
-msgstr "無法剖析 Url 元件"
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "無法初始化 mutex 屬性"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "無法設定遞迴 mutex 屬性"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "無法初始化遞迴 mutex"
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "無法取得 mutex 鎖定"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "無法釋放 mutex 鎖定"
-
-#: zypp/Dep.cc:96
-msgid "Provides"
-msgstr "提供"
-
-#: zypp/Dep.cc:97
-msgid "Prerequires"
-msgstr "先決條件"
-
-#: zypp/Dep.cc:98
-msgid "Requires"
-msgstr "需要"
-
-#: zypp/Dep.cc:99
-msgid "Conflicts"
-msgstr "衝突"
-
-#: zypp/Dep.cc:100
-msgid "Obsoletes"
-msgstr "汰換"
-
-#: zypp/Dep.cc:101
-msgid "Recommends"
-msgstr "建議"
-
-#: zypp/Dep.cc:102
-msgid "Suggests"
-msgstr "推薦"
-
-#: zypp/Dep.cc:103
-msgid "Enhances"
-msgstr "增強"
-
-#: zypp/Dep.cc:104
-msgid "Supplements"
-msgstr "補充"
-
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "可疑的類型 '%s' (%u 位元組檢查總數 '%s')"
-
-#: zypp/target/TargetImpl.cc:310
-msgid " executed"
-msgstr " 已執行"
-
-#: zypp/target/TargetImpl.cc:332
-msgid " execution failed"
-msgstr " 執行失敗"
-
-#. translators: We may find the same script content in files with different names.
-#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
-#. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:449
-#, c-format, boost-format
-msgid "%s already executed as %s)"
-msgstr "%s 已作為 %s 執行)"
-
-#: zypp/target/TargetImpl.cc:459
-msgid " execution skipped while aborting"
-msgstr " 中止時跳過執行"
-
-#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
-#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
-#: zypp/target/TargetImpl.cc:607
-msgid "Error sending update message notification."
-msgstr "發送更新訊息提醒失敗。"
-
-#: zypp/target/TargetImpl.cc:658
-msgid "New update message"
-msgstr "新的更新提醒"
-
-#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
-#: zypp/target/TargetImpl.cc:1627
-#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
-msgid "Installation has been aborted as directed."
-msgstr "安裝已如指示中止。"
-
-#: zypp/target/hal/HalContext.cc:24
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr "抱歉，此版本的 libzypp 不支援 HAL。"
-
-#: zypp/target/hal/HalContext.cc:117
-msgid "HalContext not connected"
-msgstr "HalContext 未連接"
-
-#: zypp/target/hal/HalContext.cc:127
-msgid "HalDrive not initialized"
-msgstr "HalDrive 未初始化"
-
-#: zypp/target/hal/HalContext.cc:137
-msgid "HalVolume not initialized"
-msgstr "HalVolume 未初始化"
-
-#: zypp/target/hal/HalContext.cc:229
-msgid "Unable to create dbus connection"
-msgstr "無法建立 dbus 連接"
-
-#: zypp/target/hal/HalContext.cc:242
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new：無法建立 libhal 網路位置"
-
-#: zypp/target/hal/HalContext.cc:257
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection： 無法設定 dbus 連接"
-
-#: zypp/target/hal/HalContext.cc:272
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "無法初始化 HAL 網路位置 -- hald 尚未執行嗎？"
-
-#: zypp/target/hal/HalContext.cc:851
-msgid "Not a CDROM drive"
-msgstr "不是光碟機"
-
-#. TranslatorExplanation after semicolon is error message
-#. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
-#: zypp/target/rpm/RpmDb.cc:2219
-msgid "RPM failed: "
-msgstr "RPM 失敗： "
-
-#. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1129
-#, c-format, boost-format
-msgid "Failed to import public key from file %s: %s"
-msgstr "從檔案 %s 輸入公用金鑰失敗：%s"
-
-#. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1200
-#, c-format, boost-format
-msgid "Failed to remove public key %s: %s"
-msgstr "移除公用金鑰 %s 失敗：%s"
-
-#: zypp/target/rpm/RpmDb.cc:1578
-msgid "Package is not signed!"
-msgstr "套件未簽章！"
-
-#. Translator: %s = name of an rpm package. A list of diffs follows
-#. this message.
-#: zypp/target/rpm/RpmDb.cc:1878
-#, c-format, boost-format
-msgid "Changed configuration files for %s:"
-msgstr "%s 的已變更組態檔："
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
-#, c-format, boost-format
-msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "rpm 已將 %s 儲存為 %s，但看不出差異"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2056
-#, c-format, boost-format
-msgid ""
-"rpm saved %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"rpm 已將 %s 儲存為 %s。\n"
-"這是前 25 行差異：\n"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
-#, c-format, boost-format
-msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr "rpm 已將 %s 建立為 %s，但看不出差異"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2061
-#, c-format, boost-format
-msgid ""
-"rpm created %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"rpm 已將 %s 建立為 %s。\n"
-"這是前 25 行差異：\n"
-
-#. report additional rpm output in finish
-#. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
-msgid "Additional rpm output"
-msgstr "其他 rpm 輸出"
-
-#: zypp/target/rpm/RpmDb.cc:2374
-#, c-format, boost-format
-msgid "created backup %s"
-msgstr "已建立備份 %s"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
-msgid "Signature is OK"
-msgstr "簽章驗證正確"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
-msgid "Unknown type of signature"
-msgstr "未知的簽章類型"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
-msgid "Signature does not verify"
-msgstr "簽章無法驗證"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
-msgid "Signature is OK, but key is not trusted"
-msgstr "簽章驗證正確，然而金鑰是不被信任的"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
-msgid "Signatures public key is not available"
-msgstr "簽章用的公開金鑰不存在"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
-msgid "File does not exist or signature can't be checked"
-msgstr "檔案不存在或是簽章無法驗證"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2407
-msgid "File is unsigned"
-msgstr "檔案未簽章"
-
-#: zypp/ProblemSolution.cc:114
-msgid "Following actions will be done:"
-msgstr "將執行以下操作："
-
-#: zypp/RepoManager.cc:312
-#, boost-format
-msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "無法讀取套件庫目錄 '%1%'︰權限遭拒"
-
-#. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
-#: zypp/repo/PluginServices.cc:49
-#, c-format, boost-format
-msgid "Failed to read directory '%s'"
-msgstr "無法讀取目錄 '%s'"
-
-#: zypp/RepoManager.cc:330
-#, boost-format
-msgid "Cannot read repo file '%1%': Permission denied"
-msgstr "無法讀取套件庫檔案 '%1%'︰權限遭拒"
-
-#: zypp/RepoManager.cc:353
-msgid "Repository alias cannot start with dot."
-msgstr "套件庫別名不能以點開始。"
-
-#: zypp/RepoManager.cc:364
-msgid "Service alias cannot start with dot."
-msgstr "服務的別名不能以點開始。"
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
-#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
-#, c-format, boost-format
-msgid "Can't open file '%s' for writing."
-msgstr "無法開啟檔案 '%s' 來寫入。"
-
-#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
-#. %1% = service name
-#. %2% = repository name
-#: zypp/RepoManager.cc:871
-#, boost-format
-msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr "未知的服務 '%1%'：正在移除落單的服務儲存庫 '%2%'"
-
-#. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1098
-msgid "Valid metadata not found at specified URL"
-msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "在指定的 URL 中找不到有效的中繼資訊"
-
-#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
-#, c-format, boost-format
-msgid "Can't create %s"
-msgstr "無法建立 %s"
-
-#: zypp/RepoManager.cc:1154
-msgid "Can't create metadata cache directory."
-msgstr "無法建立中繼資料快取目錄。"
-
-#: zypp/RepoManager.cc:1300
-#, c-format, boost-format
-msgid "Building repository '%s' cache"
-msgstr "正在建立套件庫 '%s' 的快取"
-
-#: zypp/RepoManager.cc:1320
-#, c-format, boost-format
-msgid "Can't create cache at %s - no writing permissions."
-msgstr "無法在 %s 建立快取 - 無寫入權限。"
-
-#: zypp/RepoManager.cc:1384
-#, c-format, boost-format
-msgid "Failed to cache repo (%d)."
-msgstr "快取套件庫失敗 (%d)。"
-
-#: zypp/RepoManager.cc:1395
-msgid "Unhandled repository type"
-msgstr "無法處理的套件庫類型"
-
-#. prepare exception to be thrown if the type could not be determined
-#. due to a media exception. We can't throw right away, because of some
-#. problems with proxy servers returning an incorrect error
-#. on ftp file-not-found(bnc #335906). Instead we'll check another types
-#. before throwing.
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
-#, c-format, boost-format
-msgid "Error trying to read from '%s'"
-msgstr "嘗試自 '%s' 讀取時發生錯誤"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
-#, c-format, boost-format
-msgid "Unknown error reading from '%s'"
-msgstr "由 '%s' 讀取時發生未知錯誤"
-
-#: zypp/RepoManager.cc:1623
-#, c-format, boost-format
-msgid "Adding repository '%s'"
-msgstr "正在新增套件庫 '%s'"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1711
-#, c-format, boost-format
-msgid "Invalid repo file name at '%s'"
-msgstr "'%s' 處的套件庫檔案名稱無效"
-
-#: zypp/RepoManager.cc:1752
-#, c-format, boost-format
-msgid "Removing repository '%s'"
-msgstr "正在移除套件庫 '%s'"
-
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
-msgid "Can't figure out where the repo is stored."
-msgstr "無法找到套件庫儲存的位置。"
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
-#, c-format, boost-format
-msgid "Can't delete '%s'"
-msgstr "無法刪除 '%s'"
-
-#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
-msgid "Can't figure out where the service is stored."
-msgstr "無法找到服務儲存的位置。"
-
-#: zypp/url/UrlBase.cc:154
-#, c-format, boost-format
-msgid "Url scheme does not allow a %s"
-msgstr "Url 規劃不允許 %s"
-
-#: zypp/url/UrlBase.cc:173
-#, c-format, boost-format
-msgid "Invalid %s component '%s'"
-msgstr "無效的 %s 元件「%s」"
-
-#: zypp/url/UrlBase.cc:180
-#, c-format, boost-format
-msgid "Invalid %s component"
-msgstr "無效的 %s 元件"
-
-#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
-msgid "Query string parsing not supported for this URL"
-msgstr "此 URL 不支援查詢字串剖析"
-
-#: zypp/url/UrlBase.cc:824
-msgid "Url scheme is a required component"
-msgstr "Url 規劃為必要元件"
-
-#: zypp/url/UrlBase.cc:830
-#, c-format, boost-format
-msgid "Invalid Url scheme '%s'"
-msgstr "無效的 Url 規劃「%s」"
-
-#: zypp/url/UrlBase.cc:949
-msgid "Url scheme does not allow a username"
-msgstr "Url 規劃不允許使用者名稱"
-
-#: zypp/url/UrlBase.cc:983
-msgid "Url scheme does not allow a password"
-msgstr "Url 規劃不允許密碼"
-
-#: zypp/url/UrlBase.cc:1012
-msgid "Url scheme requires a host component"
-msgstr "Url 規劃中必須要有主機元件"
-
-#: zypp/url/UrlBase.cc:1022
-msgid "Url scheme does not allow a host component"
-msgstr "Url 規劃不允許主機元件"
-
-#: zypp/url/UrlBase.cc:1049
-#, c-format, boost-format
-msgid "Invalid host component '%s'"
-msgstr "無效的主機元件「%s」"
-
-#: zypp/url/UrlBase.cc:1070
-msgid "Url scheme does not allow a port"
-msgstr "Url 規劃不允許連接埠"
-
-#: zypp/url/UrlBase.cc:1081
-#, c-format, boost-format
-msgid "Invalid port component '%s'"
-msgstr "無效的連接埠元件 '%s'"
-
-#: zypp/url/UrlBase.cc:1098
-msgid "Url scheme requires path name"
-msgstr "Url 規劃必須要有路徑名稱"
-
-#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
-msgid "Relative path not allowed if authority exists"
-msgstr "如果授權存在，則不允許相對路徑"
-
-#: zypp/url/UrlUtils.cc:111
-msgid "Encoded string contains a NUL byte"
-msgstr "編碼字串包含 NUL 位元組"
-
-#: zypp/url/UrlUtils.cc:173
-msgid "Invalid parameter array split separator character"
-msgstr "無效的參數陣列分割分隔符號字元"
-
-#: zypp/url/UrlUtils.cc:213
-msgid "Invalid parameter map split separator character"
-msgstr "無效的參數映射分割分隔符號字元"
-
-#: zypp/url/UrlUtils.cc:283
-msgid "Invalid parameter array join separator character"
-msgstr "無效的參數陣列加入分隔符號字元"
-
-#: zypp/ExternalProgram.cc:258
-#, c-format, boost-format
-msgid "Can't open pty (%s)."
-msgstr "無法開啟 pty (%s)。"
-
-#: zypp/ExternalProgram.cc:269
-#, c-format, boost-format
-msgid "Can't open pipe (%s)."
-msgstr "無法開啟管線 (%s)。"
-
-#: zypp/ExternalProgram.cc:350
-#, c-format, boost-format
-msgid "Can't chroot to '%s' (%s)."
-msgstr "無法 chroot 到 '%s' (%s)。"
-
-#: zypp/ExternalProgram.cc:360
-#, c-format, boost-format
-msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "無法切換目錄到 '%s' (在 chroot '%s' 中) (%s)。"
-
-#: zypp/ExternalProgram.cc:361
-#, c-format, boost-format
-msgid "Can't chdir to '%s' (%s)."
-msgstr "無法切換目錄到 '%s' (%s)。"
-
-#. don't want to get here
-#: zypp/ExternalProgram.cc:373
-#, c-format, boost-format
-msgid "Can't exec '%s' (%s)."
-msgstr "無法執行 '%s' (%s)。"
-
-#: zypp/ExternalProgram.cc:381
-#, c-format, boost-format
-msgid "Can't fork (%s)."
-msgstr "無法 fork (%s)。"
-
-#: zypp/ExternalProgram.cc:507
-#, c-format, boost-format
-msgid "Command exited with status %d."
-msgstr "指令跳出，狀態 %d。"
-
-#: zypp/ExternalProgram.cc:527
-#, c-format, boost-format
-msgid "Command was killed by signal %d (%s)."
-msgstr "指令被信號 %d (%s) 中止。"
-
-#: zypp/ExternalProgram.cc:532
-msgid "Command exited with unknown error."
-msgstr "因未知錯誤指令跳出。"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:60
-#, fuzzy
-msgid "does not expire"
-msgstr "(未過期)"
-
-#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:65
-#, boost-format
-msgid "expired: %1%"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:70
-#, boost-format
-msgid "expires: %1%"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:79
-msgid "(does not expire)"
-msgstr "(未過期)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:88
-msgid "(EXPIRED)"
-msgstr "(已過期)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:92
-msgid "(expires within 24h)"
-msgstr "(在 24 小時內過期)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:96
-#, c-format, boost-format
-msgid "(expires in %d day)"
-msgid_plural "(expires in %d days)"
-msgstr[0] "(在 %d 天內過期)"
-
-#: zypp/VendorSupportOptions.cc:14
-msgid "unknown"
-msgstr "不明的"
-
-#: zypp/VendorSupportOptions.cc:17
-msgid "unsupported"
-msgstr "不支援"
-
-#: zypp/VendorSupportOptions.cc:20
-msgid "Level 1"
-msgstr "層級 1"
-
-#: zypp/VendorSupportOptions.cc:23
-msgid "Level 2"
-msgstr "層級 2"
-
-#: zypp/VendorSupportOptions.cc:26
-msgid "Level 3"
-msgstr "層級 3"
-
-#: zypp/VendorSupportOptions.cc:29
-msgid "Additional Customer Contract Necessary"
-msgstr "需要額外的使用者授權"
-
-#: zypp/VendorSupportOptions.cc:31
-msgid "invalid"
-msgstr "不適用"
-
-#: zypp/VendorSupportOptions.cc:39
-msgid "The level of support is unspecified"
-msgstr "支援的等級未指定"
-
-#: zypp/VendorSupportOptions.cc:42
-msgid "The vendor does not provide support."
-msgstr "此廠商不提供支援。"
-
-#: zypp/VendorSupportOptions.cc:45
-msgid ""
-"Problem determination, which means technical support designed to provide "
-"compatibility information, installation assistance, usage support, on-going "
-"maintenance and basic troubleshooting. Level 1 Support is not intended to "
-"correct product defect errors."
-msgstr ""
-"問題判斷，意指提供相依性資訊、安裝協助、用法支援、持續維護及基本錯誤排除的技"
-"術支援。層級 1 支援並不提供產品缺失錯誤的更正。"
-
-#: zypp/VendorSupportOptions.cc:48
-msgid ""
-"Problem isolation, which means technical support designed to duplicate "
-"customer problems, isolate problem area and provide resolution for problems "
-"not resolved by Level 1 Support."
-msgstr ""
-"問題隔離，意指複製客戶問題、隔離問題區域並提供層級 1 支援無法解決的方案的技術"
-"支援。"
-
-#: zypp/VendorSupportOptions.cc:51
-msgid ""
-"Problem resolution, which means technical support designed to resolve "
-"complex problems by engaging engineering in resolution of product defects "
-"which have been identified by Level 2 Support."
-msgstr ""
-"問題解決，意指透過工程方法解決層級 2 支援所確認的產品缺陷來解決複雜問題的技術"
-"支援。"
-
-#: zypp/VendorSupportOptions.cc:54
-msgid "An additional customer contract is necessary for getting support."
-msgstr "要取得支援，需要額外的使用者授權。"
-
-#: zypp/VendorSupportOptions.cc:56
-msgid "Unknown support option. Description not available"
-msgstr "未知的支援選項。 描述不適用"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -1891,6 +1265,107 @@ msgstr "尚比亞"
 #: zypp/CountryCode.cc:403
 msgid "Zimbabwe"
 msgstr "辛巴威"
+
+#: zypp/Dep.cc:96
+msgid "Provides"
+msgstr "提供"
+
+#: zypp/Dep.cc:97
+msgid "Prerequires"
+msgstr "先決條件"
+
+#: zypp/Dep.cc:98
+msgid "Requires"
+msgstr "需要"
+
+#: zypp/Dep.cc:99
+msgid "Conflicts"
+msgstr "衝突"
+
+#: zypp/Dep.cc:100
+msgid "Obsoletes"
+msgstr "汰換"
+
+#: zypp/Dep.cc:101
+msgid "Recommends"
+msgstr "建議"
+
+#: zypp/Dep.cc:102
+msgid "Suggests"
+msgstr "推薦"
+
+#: zypp/Dep.cc:103
+msgid "Enhances"
+msgstr "增強"
+
+#: zypp/Dep.cc:104
+msgid "Supplements"
+msgstr "補充"
+
+#: zypp/ExternalProgram.cc:258
+#, c-format, boost-format
+msgid "Can't open pty (%s)."
+msgstr "無法開啟 pty (%s)。"
+
+#: zypp/ExternalProgram.cc:269
+#, c-format, boost-format
+msgid "Can't open pipe (%s)."
+msgstr "無法開啟管線 (%s)。"
+
+#: zypp/ExternalProgram.cc:350
+#, c-format, boost-format
+msgid "Can't chroot to '%s' (%s)."
+msgstr "無法 chroot 到 '%s' (%s)。"
+
+#: zypp/ExternalProgram.cc:360
+#, c-format, boost-format
+msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
+msgstr "無法切換目錄到 '%s' (在 chroot '%s' 中) (%s)。"
+
+#: zypp/ExternalProgram.cc:361
+#, c-format, boost-format
+msgid "Can't chdir to '%s' (%s)."
+msgstr "無法切換目錄到 '%s' (%s)。"
+
+#. don't want to get here
+#: zypp/ExternalProgram.cc:373
+#, c-format, boost-format
+msgid "Can't exec '%s' (%s)."
+msgstr "無法執行 '%s' (%s)。"
+
+#: zypp/ExternalProgram.cc:381
+#, c-format, boost-format
+msgid "Can't fork (%s)."
+msgstr "無法 fork (%s)。"
+
+#: zypp/ExternalProgram.cc:507
+#, c-format, boost-format
+msgid "Command exited with status %d."
+msgstr "指令跳出，狀態 %d。"
+
+#: zypp/ExternalProgram.cc:527
+#, c-format, boost-format
+msgid "Command was killed by signal %d (%s)."
+msgstr "指令被信號 %d (%s) 中止。"
+
+#: zypp/ExternalProgram.cc:532
+msgid "Command exited with unknown error."
+msgstr "因未知錯誤指令跳出。"
+
+#. TranslatorExplanation first %s is key name, second is keyring name
+#: zypp/KeyRing.cc:520
+#, c-format, boost-format
+msgid "Tried to import not existent key %s into keyring %s"
+msgstr "嘗試將不存在的金鑰 %s 匯入金鑰圈 %s"
+
+#: zypp/KeyRing.cc:564
+msgid "Failed to delete key."
+msgstr "刪除金鑰失敗。"
+
+#: zypp/KeyRing.cc:572
+#, c-format, boost-format
+msgid "Signature file %s not found"
+msgstr "找不到簽章檔 %s"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -4246,33 +3721,483 @@ msgstr "祖魯語"
 msgid "Zuni"
 msgstr "祖尼語"
 
-#. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:512
+#: zypp/ProblemSolution.cc:114
+msgid "Following actions will be done:"
+msgstr "將執行以下操作："
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:60
+#, fuzzy
+msgid "does not expire"
+msgstr "(未過期)"
+
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
+msgid "(does not expire)"
+msgstr "(未過期)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:88
+msgid "(EXPIRED)"
+msgstr "(已過期)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:92
+msgid "(expires within 24h)"
+msgstr "(在 24 小時內過期)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:96
 #, c-format, boost-format
-msgid "Tried to import not existent key %s into keyring %s"
-msgstr "嘗試將不存在的金鑰 %s 匯入金鑰圈 %s"
+msgid "(expires in %d day)"
+msgid_plural "(expires in %d days)"
+msgstr[0] "(在 %d 天內過期)"
 
-#: zypp/KeyRing.cc:556
-msgid "Failed to delete key."
-msgstr "刪除金鑰失敗。"
+#: zypp/RepoManager.cc:312
+#, boost-format
+msgid "Cannot read repo directory '%1%': Permission denied"
+msgstr "無法讀取套件庫目錄 '%1%'︰權限遭拒"
 
-#: zypp/KeyRing.cc:565
+#. TranslatorExplanation '%s' is a pathname
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
+#: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
-msgid "Signature file %s not found"
-msgstr "找不到簽章檔 %s"
+msgid "Failed to read directory '%s'"
+msgstr "無法讀取目錄 '%s'"
 
-#: zypp/repo/RepoProvideFile.cc:259
+#: zypp/RepoManager.cc:330
+#, boost-format
+msgid "Cannot read repo file '%1%': Permission denied"
+msgstr "無法讀取套件庫檔案 '%1%'︰權限遭拒"
+
+#: zypp/RepoManager.cc:353
+msgid "Repository alias cannot start with dot."
+msgstr "套件庫別名不能以點開始。"
+
+#: zypp/RepoManager.cc:364
+msgid "Service alias cannot start with dot."
+msgstr "服務的別名不能以點開始。"
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
+#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
 #, c-format, boost-format
-msgid "Can't provide file '%s' from repository '%s'"
-msgstr "檔案 '%s' 無法由套件庫 '%s' 提供"
+msgid "Can't open file '%s' for writing."
+msgstr "無法開啟檔案 '%s' 來寫入。"
 
-#: zypp/repo/RepoProvideFile.cc:265
-msgid "No url in repository."
-msgstr "套件庫中沒有 url。"
+#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
+#. %1% = service name
+#. %2% = repository name
+#: zypp/RepoManager.cc:871
+#, boost-format
+msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
+msgstr "未知的服務 '%1%'：正在移除落單的服務儲存庫 '%2%'"
 
-#: zypp/repo/RepoException.cc:129
-msgid "Service plugin does not support changing an attribute."
-msgstr "服務外掛不支援屬性的修改。"
+#. we will throw this later if no URL checks out fine
+#: zypp/RepoManager.cc:1098
+msgid "Valid metadata not found at specified URL"
+msgid_plural "Valid metadata not found at specified URLs"
+msgstr[0] "在指定的 URL 中找不到有效的中繼資訊"
+
+#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
+#, c-format, boost-format
+msgid "Can't create %s"
+msgstr "無法建立 %s"
+
+#: zypp/RepoManager.cc:1154
+msgid "Can't create metadata cache directory."
+msgstr "無法建立中繼資料快取目錄。"
+
+#: zypp/RepoManager.cc:1300
+#, c-format, boost-format
+msgid "Building repository '%s' cache"
+msgstr "正在建立套件庫 '%s' 的快取"
+
+#: zypp/RepoManager.cc:1320
+#, c-format, boost-format
+msgid "Can't create cache at %s - no writing permissions."
+msgstr "無法在 %s 建立快取 - 無寫入權限。"
+
+#: zypp/RepoManager.cc:1384
+#, c-format, boost-format
+msgid "Failed to cache repo (%d)."
+msgstr "快取套件庫失敗 (%d)。"
+
+#: zypp/RepoManager.cc:1395
+msgid "Unhandled repository type"
+msgstr "無法處理的套件庫類型"
+
+#. prepare exception to be thrown if the type could not be determined
+#. due to a media exception. We can't throw right away, because of some
+#. problems with proxy servers returning an incorrect error
+#. on ftp file-not-found(bnc #335906). Instead we'll check another types
+#. before throwing.
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
+#, c-format, boost-format
+msgid "Error trying to read from '%s'"
+msgstr "嘗試自 '%s' 讀取時發生錯誤"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
+#, c-format, boost-format
+msgid "Unknown error reading from '%s'"
+msgstr "由 '%s' 讀取時發生未知錯誤"
+
+#: zypp/RepoManager.cc:1623
+#, c-format, boost-format
+msgid "Adding repository '%s'"
+msgstr "正在新增套件庫 '%s'"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1711
+#, c-format, boost-format
+msgid "Invalid repo file name at '%s'"
+msgstr "'%s' 處的套件庫檔案名稱無效"
+
+#: zypp/RepoManager.cc:1752
+#, c-format, boost-format
+msgid "Removing repository '%s'"
+msgstr "正在移除套件庫 '%s'"
+
+#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
+msgid "Can't figure out where the repo is stored."
+msgstr "無法找到套件庫儲存的位置。"
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
+#, c-format, boost-format
+msgid "Can't delete '%s'"
+msgstr "無法刪除 '%s'"
+
+#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
+msgid "Can't figure out where the service is stored."
+msgstr "無法找到服務儲存的位置。"
+
+#: zypp/Url.cc:114
+msgid "Invalid LDAP URL query string"
+msgstr "無效的 LDAP URL 查詢字串"
+
+#: zypp/Url.cc:153
+#, c-format, boost-format
+msgid "Invalid LDAP URL query parameter '%s'"
+msgstr "無效的 LDAP URL 查詢參數「%s」"
+
+#: zypp/Url.cc:300
+msgid "Unable to clone Url object"
+msgstr "無法複製 Url 物件"
+
+#: zypp/Url.cc:313
+msgid "Invalid empty Url object reference"
+msgstr "無效的空白 Url 物件參照"
+
+#: zypp/Url.cc:326 zypp/Url.cc:340
+msgid "Unable to parse Url components"
+msgstr "無法剖析 Url 元件"
+
+#: zypp/VendorSupportOptions.cc:14
+msgid "unknown"
+msgstr "不明的"
+
+#: zypp/VendorSupportOptions.cc:17
+msgid "unsupported"
+msgstr "不支援"
+
+#: zypp/VendorSupportOptions.cc:20
+msgid "Level 1"
+msgstr "層級 1"
+
+#: zypp/VendorSupportOptions.cc:23
+msgid "Level 2"
+msgstr "層級 2"
+
+#: zypp/VendorSupportOptions.cc:26
+msgid "Level 3"
+msgstr "層級 3"
+
+#: zypp/VendorSupportOptions.cc:29
+msgid "Additional Customer Contract Necessary"
+msgstr "需要額外的使用者授權"
+
+#: zypp/VendorSupportOptions.cc:31
+msgid "invalid"
+msgstr "不適用"
+
+#: zypp/VendorSupportOptions.cc:39
+msgid "The level of support is unspecified"
+msgstr "支援的等級未指定"
+
+#: zypp/VendorSupportOptions.cc:42
+msgid "The vendor does not provide support."
+msgstr "此廠商不提供支援。"
+
+#: zypp/VendorSupportOptions.cc:45
+msgid ""
+"Problem determination, which means technical support designed to provide "
+"compatibility information, installation assistance, usage support, on-going "
+"maintenance and basic troubleshooting. Level 1 Support is not intended to "
+"correct product defect errors."
+msgstr ""
+"問題判斷，意指提供相依性資訊、安裝協助、用法支援、持續維護及基本錯誤排除的技"
+"術支援。層級 1 支援並不提供產品缺失錯誤的更正。"
+
+#: zypp/VendorSupportOptions.cc:48
+msgid ""
+"Problem isolation, which means technical support designed to duplicate "
+"customer problems, isolate problem area and provide resolution for problems "
+"not resolved by Level 1 Support."
+msgstr ""
+"問題隔離，意指複製客戶問題、隔離問題區域並提供層級 1 支援無法解決的方案的技術"
+"支援。"
+
+#: zypp/VendorSupportOptions.cc:51
+msgid ""
+"Problem resolution, which means technical support designed to resolve "
+"complex problems by engaging engineering in resolution of product defects "
+"which have been identified by Level 2 Support."
+msgstr ""
+"問題解決，意指透過工程方法解決層級 2 支援所確認的產品缺陷來解決複雜問題的技術"
+"支援。"
+
+#: zypp/VendorSupportOptions.cc:54
+msgid "An additional customer contract is necessary for getting support."
+msgstr "要取得支援，需要額外的使用者授權。"
+
+#: zypp/VendorSupportOptions.cc:56
+msgid "Unknown support option. Description not available"
+msgstr "未知的支援選項。 描述不適用"
+
+#: zypp/ZYppFactory.cc:399
+#, c-format, boost-format
+msgid ""
+"System management is locked by the application with pid %d (%s).\n"
+"Close this application before trying again."
+msgstr ""
+"系統管理已被 pid 為 %d (%s) 的應用程式鎖定。\n"
+"請關閉此應用程式，然後重試。"
+
+#. TranslatorExplanation followed by the list of error messages that lead to this exception
+#: zypp/base/Exception.cc:134
+msgid "History:"
+msgstr "歷史記錄："
+
+#: zypp/base/InterProcessMutex.cc:83
+#, c-format, boost-format
+msgid "Can't open lock file: %s"
+msgstr "無法開啟鎖定檔案：%s"
+
+#: zypp/base/InterProcessMutex.cc:143
+msgid "This action is being run by another program already."
+msgstr "此行動已被其他程式執行。"
+
+#: zypp/base/StrMatcher.cc:152
+#, c-format, boost-format
+msgid "Unknown match mode '%s'"
+msgstr "未知的符合模式 '%s'"
+
+#: zypp/base/StrMatcher.cc:153
+#, c-format, boost-format
+msgid "Unknown match mode '%s' for pattern '%s'"
+msgstr "未知的符合模式 '%s' (針對樣式 '%s')"
+
+#: zypp/base/StrMatcher.cc:157
+#, c-format, boost-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr "無效的正規表示法 '%s'︰regcomp 傳回 %d"
+
+#: zypp/base/StrMatcher.cc:158
+#, c-format, boost-format
+msgid "Invalid regular expression '%s'"
+msgstr "無效的正規表示法 '%s'"
+
+#. !\todo add comma to the message for the next release
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
+#, c-format, boost-format
+msgid "Authentication required for '%s'"
+msgstr "%s 需要驗證"
+
+#: zypp/media/MediaCurl.cc:1109
+msgid ""
+"Visit the Novell Customer Center to check whether your registration is valid "
+"and has not expired."
+msgstr "請造訪 Novell Customer Center，檢查您的註冊是否有效且是否未過期。"
+
+#: zypp/media/MediaException.cc:31
+#, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr "無法將 %s 載掛到 %s"
+
+#: zypp/media/MediaException.cc:41
+#, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "卸載 %s 失敗"
+
+#: zypp/media/MediaException.cc:46
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr "無效的檔案名稱︰%s"
+
+#: zypp/media/MediaException.cc:51
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr "嘗試執行動作 '%s' 時未開啟媒體。"
+
+#: zypp/media/MediaException.cc:56
+#, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
+msgstr "檔案 '%s' 無法在媒體 '%s' 中找到"
+
+#: zypp/media/MediaException.cc:61
+#, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "無法寫入檔案 '%s'。"
+
+#: zypp/media/MediaException.cc:66
+msgid "Medium not attached"
+msgstr "媒體未加入"
+
+#: zypp/media/MediaException.cc:71
+msgid "Bad media attach point"
+msgstr "無效的媒體附載點"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:77
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr "'%s' 下載 (curl) 初始化失敗"
+
+#: zypp/media/MediaException.cc:82
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr "發生系統例外 '%s' (在媒體 '%s' 上)。"
+
+#: zypp/media/MediaException.cc:87
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr "路徑「%s」(媒體「%s」上) 不是檔案。"
+
+#: zypp/media/MediaException.cc:92
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "路徑 '%s' (媒體 '%s' 上) 不是目錄。"
+
+#: zypp/media/MediaException.cc:99
+msgid "Malformed URI"
+msgstr "格式錯誤的位址"
+
+#: zypp/media/MediaException.cc:109
+msgid "Empty host name in URI"
+msgstr "位址中的主機名稱為空"
+
+#: zypp/media/MediaException.cc:114
+msgid "Empty filesystem in URI"
+msgstr "位址中的檔案系統為空"
+
+#: zypp/media/MediaException.cc:119
+msgid "Empty destination in URI"
+msgstr "位址中的目標為空"
+
+#: zypp/media/MediaException.cc:124
+#, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "'%s' 中存在不受支援的位址規劃。"
+
+#: zypp/media/MediaException.cc:129
+msgid "Operation not supported by medium"
+msgstr "媒體不支援此操作"
+
+#: zypp/media/MediaException.cc:136
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"'%s' 下載 (curl) 錯誤：\n"
+"錯誤碼：%s\n"
+"錯誤訊息：%s\n"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:144
+#, c-format, boost-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr "為 '%s' 設定下載 (curl) 選項時發生錯誤："
+
+#: zypp/media/MediaException.cc:151
+#, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr "媒體來源 '%s' 不包含所需的媒體"
+
+#: zypp/media/MediaException.cc:156
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr "媒體 '%s' 正被其他例項使用"
+
+#: zypp/media/MediaException.cc:162
+msgid "Cannot eject any media"
+msgstr "無法退出任何媒體"
+
+#: zypp/media/MediaException.cc:164
+#, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr "無法退出媒體 '%s'"
+
+#: zypp/media/MediaException.cc:179
+#, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "存取 '%s' 的權限被拒絕。"
+
+#: zypp/media/MediaException.cc:187
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr "存取 '%s' 時超出限定時間。"
+
+#: zypp/media/MediaException.cc:195
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr "位置 '%s' 暫時無法存取。"
+
+#: zypp/media/MediaException.cc:203
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr " SSL 憑證問題，驗證 '%s' 的 CA 憑證是否正確。"
+
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr "建立掛載點：無法找到可寫入的目錄以建立掛載點"
+
+#: zypp/media/MediaUserAuth.cc:136
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr "不支援的 HTTP 驗證方式 '%s'"
+
+#: zypp/misc/CheckAccessDeleted.cc:283
+msgid "Please install package 'lsof' first."
+msgstr "請先安裝套件 'lsof'。"
+
+#: zypp/parser/RepoindexFileReader.cc:197
+#, c-format, boost-format
+msgid "Required attribute '%s' is missing."
+msgstr "需要的屬性 '%s' 遺失。"
+
+#: zypp/parser/RepoindexFileReader.cc:209
+#, c-format, boost-format
+msgid "One or both of '%s' or '%s' attributes is required."
+msgstr "需要 '%s' 及 '%s' 屬性或兩者之一。"
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4300,14 +4225,178 @@ msgstr "applydeltarpm 檢查失敗。"
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm 失敗。"
 
-#: zypp/ZYppFactory.cc:399
+#: zypp/repo/RepoException.cc:129
+msgid "Service plugin does not support changing an attribute."
+msgstr "服務外掛不支援屬性的修改。"
+
+#: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
+msgid "Can't provide file '%s' from repository '%s'"
+msgstr "檔案 '%s' 無法由套件庫 '%s' 提供"
+
+#: zypp/repo/RepoProvideFile.cc:265
+msgid "No url in repository."
+msgstr "套件庫中沒有 url。"
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:34
+#, boost-format
 msgid ""
-"System management is locked by the application with pid %d (%s).\n"
-"Close this application before trying again."
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
 msgstr ""
-"系統管理已被 pid 為 %d (%s) 的應用程式鎖定。\n"
-"請關閉此應用程式，然後重試。"
+"檔案 %1%\n"
+"  (來自以下套件\n"
+"     %2%)\n"
+"  與來自下列套件的檔案相衝突\n"
+"     %3%"
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:40
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+"檔案 %1%\n"
+"  (來自以下套件\n"
+"     %2%)\n"
+"  與來自下列安裝的檔案相衝突\n"
+"     %3%"
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:47
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+"檔案 %1%\n"
+"  (來自以下安裝\n"
+"     %2%)\n"
+"  與來自下列套件的檔案相衝突\n"
+"     %3%"
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:53
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+"檔案 %1%\n"
+"  (來自以下安裝\n"
+"     %2%)\n"
+"  與來自下列安裝的檔案相衝突\n"
+"     %3%"
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
+#: zypp/sat/FileConflicts.cc:68
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+"檔案 %1%\n"
+"  (來自以下套件\n"
+"     %2%)\n"
+"  與下列檔案相衝突\n"
+"     %3%\n"
+"  (來自以下套件\n"
+"     %4%)"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:76
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+"檔案 %1%\n"
+"  (來自以下套件\n"
+"     %2%)\n"
+"  與下列檔案相衝突\n"
+"     %3%\n"
+"  (來自以下安裝\n"
+"     %4%)"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:85
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+"檔案 %1%\n"
+"  (來自以下安裝\n"
+"     %2%)\n"
+"  與下列檔案發生衝突\n"
+"     %3%\n"
+"  (來自以下套件\n"
+"     %4%)"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:93
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+"檔案 %1%\n"
+"  (來自以下的安裝\n"
+"     %2%)\n"
+"  與下列檔案發生衝突\n"
+"     %3%\n"
+"  (來自以下的安裝\n"
+"     %4%)"
+
+#: zypp/sat/detail/PoolImpl.cc:189
+msgid "Can not create sat-pool."
+msgstr "無法建立 sat-pool。"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#, c-format, boost-format
+msgid "break %s by ignoring some of its dependencies"
+msgstr "藉由忽略它的某些相依性以破壞 %s"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+msgid "generally ignore of some dependencies"
+msgstr "一般忽略某些相依性"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
@@ -4337,8 +4426,7 @@ msgstr "一些相依性問題"
 msgid "nothing provides requested %s"
 msgstr "無法提供所需的 %s"
 
-#: zypp/solver/detail/SATResolver.cc:997
-#: zypp/solver/detail/SATResolver.cc:1001
+#: zypp/solver/detail/SATResolver.cc:997 zypp/solver/detail/SATResolver.cc:1001
 msgid "Have you enabled all requested repositories?"
 msgstr "是否已啟用所有需要的套件庫？"
 
@@ -4510,376 +4598,293 @@ msgstr "將 %s 取代為 %s"
 msgid "deinstallation of %s"
 msgstr "反安裝 %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#: zypp/target/TargetImpl.cc:310
+msgid " executed"
+msgstr " 已執行"
+
+#: zypp/target/TargetImpl.cc:332
+msgid " execution failed"
+msgstr " 執行失敗"
+
+#. translators: We may find the same script content in files with different names.
+#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
+#. message for a log file. Preferably start translation with "%s"
+#: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
-msgid "break %s by ignoring some of its dependencies"
-msgstr "藉由忽略它的某些相依性以破壞 %s"
+msgid "%s already executed as %s)"
+msgstr "%s 已作為 %s 執行)"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
-msgid "generally ignore of some dependencies"
-msgstr "一般忽略某些相依性"
+#: zypp/target/TargetImpl.cc:459
+msgid " execution skipped while aborting"
+msgstr " 中止時跳過執行"
 
-#: zypp/parser/RepoindexFileReader.cc:197
-#, c-format, boost-format
-msgid "Required attribute '%s' is missing."
-msgstr "需要的屬性 '%s' 遺失。"
+#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
+#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
+#: zypp/target/TargetImpl.cc:607
+msgid "Error sending update message notification."
+msgstr "發送更新訊息提醒失敗。"
 
-#: zypp/parser/RepoindexFileReader.cc:209
-#, c-format, boost-format
-msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "需要 '%s' 及 '%s' 屬性或兩者之一。"
+#: zypp/target/TargetImpl.cc:658
+msgid "New update message"
+msgstr "新的更新提醒"
 
-#: zypp/base/InterProcessMutex.cc:83
-#, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "無法開啟鎖定檔案：%s"
+#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
+#: zypp/target/TargetImpl.cc:1627
+#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
+msgid "Installation has been aborted as directed."
+msgstr "安裝已如指示中止。"
 
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr "此行動已被其他程式執行。"
+#: zypp/target/hal/HalContext.cc:24
+msgid "Sorry, but this version of libzypp was built without HAL support."
+msgstr "抱歉，此版本的 libzypp 不支援 HAL。"
 
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp/base/Exception.cc:107
-msgid "History:"
-msgstr "歷史記錄："
+#: zypp/target/hal/HalContext.cc:117
+msgid "HalContext not connected"
+msgstr "HalContext 未連接"
 
-#: zypp/base/StrMatcher.cc:152
-#, c-format, boost-format
-msgid "Unknown match mode '%s'"
-msgstr "未知的符合模式 '%s'"
+#: zypp/target/hal/HalContext.cc:127
+msgid "HalDrive not initialized"
+msgstr "HalDrive 未初始化"
 
-#: zypp/base/StrMatcher.cc:153
-#, c-format, boost-format
-msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "未知的符合模式 '%s' (針對樣式 '%s')"
+#: zypp/target/hal/HalContext.cc:137
+msgid "HalVolume not initialized"
+msgstr "HalVolume 未初始化"
 
-#: zypp/base/StrMatcher.cc:157
-#, c-format, boost-format
-msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "無效的正規表示法 '%s'︰regcomp 傳回 %d"
+#: zypp/target/hal/HalContext.cc:229
+msgid "Unable to create dbus connection"
+msgstr "無法建立 dbus 連接"
 
-#: zypp/base/StrMatcher.cc:158
-#, c-format, boost-format
-msgid "Invalid regular expression '%s'"
-msgstr "無效的正規表示法 '%s'"
+#: zypp/target/hal/HalContext.cc:242
+msgid "libhal_ctx_new: Can't create libhal context"
+msgstr "libhal_ctx_new：無法建立 libhal 網路位置"
 
-#: zypp/misc/CheckAccessDeleted.cc:283
-msgid "Please install package 'lsof' first."
-msgstr "請先安裝套件 'lsof'。"
+#: zypp/target/hal/HalContext.cc:257
+msgid "libhal_set_dbus_connection: Can't set dbus connection"
+msgstr "libhal_set_dbus_connection： 無法設定 dbus 連接"
 
-#: zypp/media/MediaHandler.cc:370
-msgid ""
-"Create attach point: Can't find a writable directory to create an attach "
-"point"
-msgstr "建立掛載點：無法找到可寫入的目錄以建立掛載點"
+#: zypp/target/hal/HalContext.cc:272
+msgid "Unable to initalize HAL context -- hald not running?"
+msgstr "無法初始化 HAL 網路位置 -- hald 尚未執行嗎？"
 
-#. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
-#, c-format, boost-format
-msgid "Authentication required for '%s'"
-msgstr "%s 需要驗證"
+#: zypp/target/hal/HalContext.cc:851
+msgid "Not a CDROM drive"
+msgstr "不是光碟機"
 
-#: zypp/media/MediaException.cc:31
-#, c-format, boost-format
-msgid "Failed to mount %s on %s"
-msgstr "無法將 %s 載掛到 %s"
+#. TranslatorExplanation after semicolon is error message
+#. TranslatorExplanation the colon is followed by an error message
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
+#: zypp/target/rpm/RpmDb.cc:2209
+msgid "RPM failed: "
+msgstr "RPM 失敗： "
 
-#: zypp/media/MediaException.cc:41
-#, c-format, boost-format
-msgid "Failed to unmount %s"
-msgstr "卸載 %s 失敗"
-
-#: zypp/media/MediaException.cc:47
-#, c-format, boost-format
-msgid "Bad file name: %s"
-msgstr "無效的檔案名稱︰%s"
-
-#: zypp/media/MediaException.cc:53
-#, c-format, boost-format
-msgid "Medium not opened when trying to perform action '%s'."
-msgstr "嘗試執行動作 '%s' 時未開啟媒體。"
-
-#: zypp/media/MediaException.cc:60
-#, c-format, boost-format
-msgid "File '%s' not found on medium '%s'"
-msgstr "檔案 '%s' 無法在媒體 '%s' 中找到"
-
-#: zypp/media/MediaException.cc:67
-#, c-format, boost-format
-msgid "Cannot write file '%s'."
-msgstr "無法寫入檔案 '%s'。"
-
-#: zypp/media/MediaException.cc:72
-msgid "Medium not attached"
-msgstr "媒體未加入"
-
-#: zypp/media/MediaException.cc:77
-msgid "Bad media attach point"
-msgstr "無效的媒體附載點"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:84
-#, c-format, boost-format
-msgid "Download (curl) initialization failed for '%s'"
-msgstr "'%s' 下載 (curl) 初始化失敗"
-
-#: zypp/media/MediaException.cc:91
-#, c-format, boost-format
-msgid "System exception '%s' on medium '%s'."
-msgstr "發生系統例外 '%s' (在媒體 '%s' 上)。"
-
-#: zypp/media/MediaException.cc:98
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a file."
-msgstr "路徑「%s」(媒體「%s」上) 不是檔案。"
-
-#: zypp/media/MediaException.cc:106
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "路徑 '%s' (媒體 '%s' 上) 不是目錄。"
-
-#: zypp/media/MediaException.cc:115
-msgid "Malformed URI"
-msgstr "格式錯誤的位址"
-
-#: zypp/media/MediaException.cc:125
-msgid "Empty host name in URI"
-msgstr "位址中的主機名稱為空"
-
-#: zypp/media/MediaException.cc:130
-msgid "Empty filesystem in URI"
-msgstr "位址中的檔案系統為空"
-
-#: zypp/media/MediaException.cc:135
-msgid "Empty destination in URI"
-msgstr "位址中的目標為空"
-
-#: zypp/media/MediaException.cc:140
-#, c-format, boost-format
-msgid "Unsupported URI scheme in '%s'."
-msgstr "'%s' 中存在不受支援的位址規劃。"
-
-#: zypp/media/MediaException.cc:145
-msgid "Operation not supported by medium"
-msgstr "媒體不支援此操作"
-
-#: zypp/media/MediaException.cc:152
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-"Error message: %s\n"
-msgstr ""
-"'%s' 下載 (curl) 錯誤：\n"
-"錯誤碼：%s\n"
-"錯誤訊息：%s\n"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:161
-#, c-format, boost-format
-msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "為 '%s' 設定下載 (curl) 選項時發生錯誤："
-
-#: zypp/media/MediaException.cc:169
-#, c-format, boost-format
-msgid "Media source '%s' does not contain the desired medium"
-msgstr "媒體來源 '%s' 不包含所需的媒體"
-
-#: zypp/media/MediaException.cc:175
-#, c-format, boost-format
-msgid "Medium '%s' is in use by another instance"
-msgstr "媒體 '%s' 正被其他例項使用"
-
-#: zypp/media/MediaException.cc:182
-msgid "Cannot eject any media"
-msgstr "無法退出任何媒體"
-
-#: zypp/media/MediaException.cc:184
-#, c-format, boost-format
-msgid "Cannot eject media '%s'"
-msgstr "無法退出媒體 '%s'"
-
-#: zypp/media/MediaException.cc:199
-#, c-format, boost-format
-msgid "Permission to access '%s' denied."
-msgstr "存取 '%s' 的權限被拒絕。"
-
-#: zypp/media/MediaException.cc:207
-#, c-format, boost-format
-msgid "Timeout exceeded when accessing '%s'."
-msgstr "存取 '%s' 時超出限定時間。"
-
-#: zypp/media/MediaException.cc:215
-#, c-format, boost-format
-msgid "Location '%s' is temporarily unaccessible."
-msgstr "位置 '%s' 暫時無法存取。"
-
-#: zypp/media/MediaException.cc:223
-#, c-format, boost-format
-msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr " SSL 憑證問題，驗證 '%s' 的 CA 憑證是否正確。"
-
-#: zypp/media/MediaUserAuth.cc:136
-#, c-format, boost-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr "不支援的 HTTP 驗證方式 '%s'"
-
-#: zypp/media/MediaCurl.cc:1109
-msgid ""
-"Visit the Novell Customer Center to check whether your registration is valid "
-"and has not expired."
-msgstr "請造訪 Novell Customer Center，檢查您的註冊是否有效且是否未過期。"
-
-#: zypp/sat/detail/PoolImpl.cc:189
-msgid "Can not create sat-pool."
-msgstr "無法建立 sat-pool。"
-
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:34
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1119
 #, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
-"檔案 %1%\n"
-"  (來自以下套件\n"
-"     %2%)\n"
-"  與來自下列套件的檔案相衝突\n"
-"     %3%"
+msgid "Failed to import public key %1%"
+msgstr "從檔案 %1% 輸入公用金鑰失敗"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:40
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1189
 #, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
-"檔案 %1%\n"
-"  (來自以下套件\n"
-"     %2%)\n"
-"  與來自下列安裝的檔案相衝突\n"
-"     %3%"
+msgid "Failed to remove public key %1%"
+msgstr "移除公用金鑰 %1% 失敗"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:47
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
-"檔案 %1%\n"
-"  (來自以下安裝\n"
-"     %2%)\n"
-"  與來自下列套件的檔案相衝突\n"
-"     %3%"
+#: zypp/target/rpm/RpmDb.cc:1568
+msgid "Package is not signed!"
+msgstr "套件未簽章！"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:53
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
-"檔案 %1%\n"
-"  (來自以下安裝\n"
-"     %2%)\n"
-"  與來自下列安裝的檔案相衝突\n"
-"     %3%"
+#. Translator: %s = name of an rpm package. A list of diffs follows
+#. this message.
+#: zypp/target/rpm/RpmDb.cc:1868
+#, c-format, boost-format
+msgid "Changed configuration files for %s:"
+msgstr "%s 的已變更組態檔："
 
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
-#: zypp/sat/FileConflicts.cc:68
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
-"檔案 %1%\n"
-"  (來自以下套件\n"
-"     %2%)\n"
-"  與下列檔案相衝突\n"
-"     %3%\n"
-"  (來自以下套件\n"
-"     %4%)"
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2044
+#, c-format, boost-format
+msgid "rpm saved %s as %s, but it was impossible to determine the difference"
+msgstr "rpm 已將 %s 儲存為 %s，但看不出差異"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:76
-#, boost-format
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2046
+#, c-format, boost-format
 msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
+"rpm saved %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
 msgstr ""
-"檔案 %1%\n"
-"  (來自以下套件\n"
-"     %2%)\n"
-"  與下列檔案相衝突\n"
-"     %3%\n"
-"  (來自以下安裝\n"
-"     %4%)"
+"rpm 已將 %s 儲存為 %s。\n"
+"這是前 25 行差異：\n"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:85
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
-"檔案 %1%\n"
-"  (來自以下安裝\n"
-"     %2%)\n"
-"  與下列檔案發生衝突\n"
-"     %3%\n"
-"  (來自以下套件\n"
-"     %4%)"
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2049
+#, c-format, boost-format
+msgid "rpm created %s as %s, but it was impossible to determine the difference"
+msgstr "rpm 已將 %s 建立為 %s，但看不出差異"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:93
-#, boost-format
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2051
+#, c-format, boost-format
 msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
+"rpm created %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
 msgstr ""
-"檔案 %1%\n"
-"  (來自以下的安裝\n"
-"     %2%)\n"
-"  與下列檔案發生衝突\n"
-"     %3%\n"
-"  (來自以下的安裝\n"
-"     %4%)"
+"rpm 已將 %s 建立為 %s。\n"
+"這是前 25 行差異：\n"
+
+#. report additional rpm output in finish
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+msgid "Additional rpm output"
+msgstr "其他 rpm 輸出"
+
+#: zypp/target/rpm/RpmDb.cc:2364
+#, c-format, boost-format
+msgid "created backup %s"
+msgstr "已建立備份 %s"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2385
+msgid "Signature is OK"
+msgstr "簽章驗證正確"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2387
+msgid "Unknown type of signature"
+msgstr "未知的簽章類型"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2389
+msgid "Signature does not verify"
+msgstr "簽章無法驗證"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2391
+msgid "Signature is OK, but key is not trusted"
+msgstr "簽章驗證正確，然而金鑰是不被信任的"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2393
+msgid "Signatures public key is not available"
+msgstr "簽章用的公開金鑰不存在"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2395
+msgid "File does not exist or signature can't be checked"
+msgstr "檔案不存在或是簽章無法驗證"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2397
+msgid "File is unsigned"
+msgstr "檔案未簽章"
+
+#: zypp/thread/Mutex.cc:33
+msgid "Can't initialize mutex attributes"
+msgstr "無法初始化 mutex 屬性"
+
+#: zypp/thread/Mutex.cc:40
+msgid "Can't set recursive mutex attribute"
+msgstr "無法設定遞迴 mutex 屬性"
+
+#: zypp/thread/Mutex.cc:47
+msgid "Can't initialize recursive mutex"
+msgstr "無法初始化遞迴 mutex"
+
+#: zypp/thread/Mutex.cc:77
+msgid "Can't acquire the mutex lock"
+msgstr "無法取得 mutex 鎖定"
+
+#: zypp/thread/Mutex.cc:87
+msgid "Can't release the mutex lock"
+msgstr "無法釋放 mutex 鎖定"
+
+#: zypp/url/UrlBase.cc:154
+#, c-format, boost-format
+msgid "Url scheme does not allow a %s"
+msgstr "Url 規劃不允許 %s"
+
+#: zypp/url/UrlBase.cc:173
+#, c-format, boost-format
+msgid "Invalid %s component '%s'"
+msgstr "無效的 %s 元件「%s」"
+
+#: zypp/url/UrlBase.cc:180
+#, c-format, boost-format
+msgid "Invalid %s component"
+msgstr "無效的 %s 元件"
+
+#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
+msgid "Query string parsing not supported for this URL"
+msgstr "此 URL 不支援查詢字串剖析"
+
+#: zypp/url/UrlBase.cc:824
+msgid "Url scheme is a required component"
+msgstr "Url 規劃為必要元件"
+
+#: zypp/url/UrlBase.cc:830
+#, c-format, boost-format
+msgid "Invalid Url scheme '%s'"
+msgstr "無效的 Url 規劃「%s」"
+
+#: zypp/url/UrlBase.cc:949
+msgid "Url scheme does not allow a username"
+msgstr "Url 規劃不允許使用者名稱"
+
+#: zypp/url/UrlBase.cc:983
+msgid "Url scheme does not allow a password"
+msgstr "Url 規劃不允許密碼"
+
+#: zypp/url/UrlBase.cc:1012
+msgid "Url scheme requires a host component"
+msgstr "Url 規劃中必須要有主機元件"
+
+#: zypp/url/UrlBase.cc:1022
+msgid "Url scheme does not allow a host component"
+msgstr "Url 規劃不允許主機元件"
+
+#: zypp/url/UrlBase.cc:1049
+#, c-format, boost-format
+msgid "Invalid host component '%s'"
+msgstr "無效的主機元件「%s」"
+
+#: zypp/url/UrlBase.cc:1070
+msgid "Url scheme does not allow a port"
+msgstr "Url 規劃不允許連接埠"
+
+#: zypp/url/UrlBase.cc:1081
+#, c-format, boost-format
+msgid "Invalid port component '%s'"
+msgstr "無效的連接埠元件 '%s'"
+
+#: zypp/url/UrlBase.cc:1098
+msgid "Url scheme requires path name"
+msgstr "Url 規劃必須要有路徑名稱"
+
+#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
+msgid "Relative path not allowed if authority exists"
+msgstr "如果授權存在，則不允許相對路徑"
+
+#: zypp/url/UrlUtils.cc:111
+msgid "Encoded string contains a NUL byte"
+msgstr "編碼字串包含 NUL 位元組"
+
+#: zypp/url/UrlUtils.cc:173
+msgid "Invalid parameter array split separator character"
+msgstr "無效的參數陣列分割分隔符號字元"
+
+#: zypp/url/UrlUtils.cc:213
+msgid "Invalid parameter map split separator character"
+msgstr "無效的參數映射分割分隔符號字元"
+
+#: zypp/url/UrlUtils.cc:283
+msgid "Invalid parameter array join separator character"
+msgstr "無效的參數陣列加入分隔符號字元"
+
+#~ msgid "Failed to import public key from file %s: %s"
+#~ msgstr "從檔案 %s 輸入公用金鑰失敗：%s"
+
+#~ msgid "Failed to remove public key %s: %s"
+#~ msgstr "移除公用金鑰 %s 失敗：%s"
 
 #~ msgid "Cannot find available loop device to mount the image file from '%s'"
 #~ msgstr "無法找到可用的 loop 裝置來掛載 '%s' 中的影像檔"

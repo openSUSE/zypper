@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 12:50+0200\n"
+"POT-Creation-Date: 2017-09-07 12:25+0200\n"
 "PO-Revision-Date: 2017-08-25 23:12+0000\n"
 "Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
-"\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/"
+">\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,644 +23,11 @@ msgstr ""
 msgid "Hal Exception"
 msgstr "Hal-undtagelse"
 
-#: zypp/Url.cc:114
-msgid "Invalid LDAP URL query string"
-msgstr "Ugyldig LDAP URL-forespørgselsstreng"
-
-#: zypp/Url.cc:153
-#, c-format, boost-format
-msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Ugyldig LDAP URL-forespørgselsparameter '%s'"
-
-#: zypp/Url.cc:300
-msgid "Unable to clone Url object"
-msgstr "Kan ikke klone URL-objekt"
-
-#: zypp/Url.cc:313
-msgid "Invalid empty Url object reference"
-msgstr "Ugyldig tom URL-objektreference"
-
-#: zypp/Url.cc:326 zypp/Url.cc:340
-msgid "Unable to parse Url components"
-msgstr "Kan ikke  fortolke URL-komponenter"
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "Mutex-attributter kan ikke initialiseres"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "Rekursive mutex-attributter kan ikke angives"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "Rekursive mutex-attributter kan ikke initialiseres"
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "Mutex-lås kan ikke hentes"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "Mutex-lås kan ikke frigives"
-
-#: zypp/Dep.cc:96
-msgid "Provides"
-msgstr "Leverer"
-
-#: zypp/Dep.cc:97
-msgid "Prerequires"
-msgstr "Præ-kræver"
-
-#: zypp/Dep.cc:98
-msgid "Requires"
-msgstr "Kræver"
-
-#: zypp/Dep.cc:99
-msgid "Conflicts"
-msgstr "Konflikter"
-
-#: zypp/Dep.cc:100
-msgid "Obsoletes"
-msgstr "Forælder"
-
-#: zypp/Dep.cc:101
-msgid "Recommends"
-msgstr "Anbefaler"
-
-#: zypp/Dep.cc:102
-msgid "Suggests"
-msgstr "Foreslår"
-
-#: zypp/Dep.cc:103
-msgid "Enhances"
-msgstr "Forbedringer"
-
-#: zypp/Dep.cc:104
-msgid "Supplements"
-msgstr "Supplerer"
-
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "Tvivlsom type '%s' for %u byte checksum '%s'"
-
-#: zypp/target/TargetImpl.cc:310
-msgid " executed"
-msgstr " afviklet"
-
-#: zypp/target/TargetImpl.cc:332
-msgid " execution failed"
-msgstr " afvikling fejlede"
-
-#. translators: We may find the same script content in files with different names.
-#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
-#. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:449
-#, c-format, boost-format
-msgid "%s already executed as %s)"
-msgstr "%s er allerede kørt som %s)"
-
-#: zypp/target/TargetImpl.cc:459
-msgid " execution skipped while aborting"
-msgstr " afvikling skippet under afbrydelse"
-
-#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
-#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
-#: zypp/target/TargetImpl.cc:607
-msgid "Error sending update message notification."
-msgstr "Fejl under afsendelse af bekendtgørelse af opdateringsbesked."
-
-#: zypp/target/TargetImpl.cc:658
-msgid "New update message"
-msgstr "Besked om ny opdatering"
-
-#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
-#: zypp/target/TargetImpl.cc:1627
-#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
-msgid "Installation has been aborted as directed."
-msgstr "Installation er blevet afbrudt som ønsket."
-
-#: zypp/target/hal/HalContext.cc:24
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr ""
-"Beklager, denne version af libzypp blev bygget uden HAL-understøttelse."
-
-#: zypp/target/hal/HalContext.cc:117
-msgid "HalContext not connected"
-msgstr "HalContext er ikke tilsluttet"
-
-#: zypp/target/hal/HalContext.cc:127
-msgid "HalDrive not initialized"
-msgstr "HalDrive er ikke initialiseret"
-
-#: zypp/target/hal/HalContext.cc:137
-msgid "HalVolume not initialized"
-msgstr "HalVolume er ikke initialiseret"
-
-#: zypp/target/hal/HalContext.cc:229
-msgid "Unable to create dbus connection"
-msgstr "Kan ikke  oprette dbus-tilslutning"
-
-#: zypp/target/hal/HalContext.cc:242
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: libhal-kontekst kan ikke oprettes"
-
-#: zypp/target/hal/HalContext.cc:257
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: dbus-tilslutning kan ikke indstilles"
-
-#: zypp/target/hal/HalContext.cc:272
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "Kan ikke initialisere HAL-kontekst -- kører hald  ikke?"
-
-#: zypp/target/hal/HalContext.cc:851
-msgid "Not a CDROM drive"
-msgstr "Ikke et cd-rom-drev"
-
-#. TranslatorExplanation after semicolon is error message
-#. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
-#: zypp/target/rpm/RpmDb.cc:2219
-msgid "RPM failed: "
-msgstr "RPM fejlede: "
-
-#. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1129
-#, c-format, boost-format
-msgid "Failed to import public key from file %s: %s"
-msgstr "Import af offentlig nøgle fra filen %s fejlede: %s"
-
-#. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1200
-#, c-format, boost-format
-msgid "Failed to remove public key %s: %s"
-msgstr "Fjernelse af den offentlige nøgle %s fejlede: %s"
-
-#: zypp/target/rpm/RpmDb.cc:1578
-msgid "Package is not signed!"
-msgstr "Pakke er ikke signeret!"
-
-#. Translator: %s = name of an rpm package. A list of diffs follows
-#. this message.
-#: zypp/target/rpm/RpmDb.cc:1878
-#, c-format, boost-format
-msgid "Changed configuration files for %s:"
-msgstr "Konfigurationsfiler er ændret for %s:"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
-#, c-format, boost-format
-msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "rpm gemte %s som %s, men det var umuligt at bestemme forskellen"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2056
-#, c-format, boost-format
-msgid ""
-"rpm saved %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"rpm gemt %s som %s.\n"
-"Her er de første 25 linjer af forskelle:\n"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
-#, c-format, boost-format
-msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr "rpm oprettede %s som %s, men det var umuligt at bestemme forskellen"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2061
-#, c-format, boost-format
-msgid ""
-"rpm created %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"rpm oprettet %s som %s.\n"
-"Her er de første 25 linjer af forskelle:\n"
-
-#. report additional rpm output in finish
-#. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
-msgid "Additional rpm output"
-msgstr "Yderligere rpm-output"
-
-#: zypp/target/rpm/RpmDb.cc:2374
-#, c-format, boost-format
-msgid "created backup %s"
-msgstr "backup %s blev oprettet"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
-msgid "Signature is OK"
-msgstr "Signatur er OK"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
-msgid "Unknown type of signature"
-msgstr "Ukendt signaturtype"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
-msgid "Signature does not verify"
-msgstr "Signaturen verificerer ikke"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
-msgid "Signature is OK, but key is not trusted"
-msgstr "Signaturen er OK, men nøglen er ikke betroet"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
-msgid "Signatures public key is not available"
-msgstr "Signaturens offentlige nøgle er ikke tilgængelig"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
-msgid "File does not exist or signature can't be checked"
-msgstr "Filen findes ikke eller signaturen kan ikke tjekkes"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2407
-msgid "File is unsigned"
-msgstr "Filen er uden signatur"
-
-#: zypp/ProblemSolution.cc:114
-msgid "Following actions will be done:"
-msgstr "Følgende handlinger udføres:"
-
-#: zypp/RepoManager.cc:312
-#, boost-format
-msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "Kan ikke læse softwarekildemappen \"%1%\": Adgang nægtet"
-
-#. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
-#: zypp/repo/PluginServices.cc:49
-#, c-format, boost-format
-msgid "Failed to read directory '%s'"
-msgstr "Kunne ikke læse mappen \"%s\""
-
-#: zypp/RepoManager.cc:330
-#, boost-format
-msgid "Cannot read repo file '%1%': Permission denied"
-msgstr "Kan ikke læse softwarekildefilen \"%1%\": Adgang nægtet"
-
-#: zypp/RepoManager.cc:353
-msgid "Repository alias cannot start with dot."
-msgstr "Alias for softwarekilde må ikke starte med punktum."
-
-#: zypp/RepoManager.cc:364
-msgid "Service alias cannot start with dot."
-msgstr "Alias for tjeneste må ikke starte med punktum."
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
-#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
-#, c-format, boost-format
-msgid "Can't open file '%s' for writing."
-msgstr "Kan ikke åbne filen \"%s\" til skrivning."
-
-#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
-#. %1% = service name
-#. %2% = repository name
-#: zypp/RepoManager.cc:871
-#, boost-format
-msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr ""
-"Ukendt tjeneste \"%1%\": Fjerner forældreløs tjeneste-softwarekilde \"%2%\""
-
-#. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1098
-msgid "Valid metadata not found at specified URL"
-msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "Der blev ikke fundet gyldige metadata på den angivne URL"
-msgstr[1] "Der blev ikke fundet gyldige metadata på de angivne URL'er"
-
-#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
-#, c-format, boost-format
-msgid "Can't create %s"
-msgstr "Kan ikke oprette %s"
-
-#: zypp/RepoManager.cc:1154
-msgid "Can't create metadata cache directory."
-msgstr "Kan ikke oprette mappe med metadata-cache."
-
-#: zypp/RepoManager.cc:1300
-#, c-format, boost-format
-msgid "Building repository '%s' cache"
-msgstr "Opbygger cache for softwarekilden '%s'"
-
-#: zypp/RepoManager.cc:1320
-#, c-format, boost-format
-msgid "Can't create cache at %s - no writing permissions."
-msgstr "Kan ikke oprette cache i %s - ingen skriverettigheder."
-
-#: zypp/RepoManager.cc:1384
-#, c-format, boost-format
-msgid "Failed to cache repo (%d)."
-msgstr "Caching af softwarekilde (%d) mislykkedes."
-
-#: zypp/RepoManager.cc:1395
-msgid "Unhandled repository type"
-msgstr "Ikke-håndteret softwarekilde-type"
-
-#. prepare exception to be thrown if the type could not be determined
-#. due to a media exception. We can't throw right away, because of some
-#. problems with proxy servers returning an incorrect error
-#. on ftp file-not-found(bnc #335906). Instead we'll check another types
-#. before throwing.
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
-#, c-format, boost-format
-msgid "Error trying to read from '%s'"
-msgstr "Fejl under forsøg på at læse fra \"%s\""
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
-#, c-format, boost-format
-msgid "Unknown error reading from '%s'"
-msgstr "Ukendt fejl ved læsning fra \"%s\""
-
-#: zypp/RepoManager.cc:1623
-#, c-format, boost-format
-msgid "Adding repository '%s'"
-msgstr "Tilføjer softwarekilden '%s'"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1711
-#, c-format, boost-format
-msgid "Invalid repo file name at '%s'"
-msgstr "Ugyldig softwarekilde-filnavn i \"%s\""
-
-#: zypp/RepoManager.cc:1752
-#, c-format, boost-format
-msgid "Removing repository '%s'"
-msgstr "Fjerner softwarekilden '%s'"
-
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
-msgid "Can't figure out where the repo is stored."
-msgstr "Kan ikke regne ud hvor softwarekilden er lagret."
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
-#, c-format, boost-format
-msgid "Can't delete '%s'"
-msgstr "Kan ikke slette \"%s\""
-
-#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
-msgid "Can't figure out where the service is stored."
-msgstr "Kan ikke regne ud hvor tjenesten er lagret."
-
-#: zypp/url/UrlBase.cc:154
-#, c-format, boost-format
-msgid "Url scheme does not allow a %s"
-msgstr "URL-oversigt tillader ikke %s"
-
-#: zypp/url/UrlBase.cc:173
-#, c-format, boost-format
-msgid "Invalid %s component '%s'"
-msgstr "Ugyldig %s-komponent '%s'"
-
-#: zypp/url/UrlBase.cc:180
-#, c-format, boost-format
-msgid "Invalid %s component"
-msgstr "Ugyldig %s-komponent"
-
-#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
-msgid "Query string parsing not supported for this URL"
-msgstr "Fortolkning af forespørgselsstreng er ikke understøttet af denne URL"
-
-#: zypp/url/UrlBase.cc:824
-msgid "Url scheme is a required component"
-msgstr "URL-oversigt er en påkrævet komponent"
-
-#: zypp/url/UrlBase.cc:830
-#, c-format, boost-format
-msgid "Invalid Url scheme '%s'"
-msgstr "Ugyldig URL-oversigt '%s'"
-
-#: zypp/url/UrlBase.cc:949
-msgid "Url scheme does not allow a username"
-msgstr "URL-oversigt tillader ikke et brugernavn"
-
-#: zypp/url/UrlBase.cc:983
-msgid "Url scheme does not allow a password"
-msgstr "URL-oversigt tillader ikke en adgangskode"
-
-#: zypp/url/UrlBase.cc:1012
-msgid "Url scheme requires a host component"
-msgstr "URL-oversigt kræver en værtskomponent"
-
-#: zypp/url/UrlBase.cc:1022
-msgid "Url scheme does not allow a host component"
-msgstr "URL-oversigt tillader ikke en værtskomponent"
-
-#: zypp/url/UrlBase.cc:1049
-#, c-format, boost-format
-msgid "Invalid host component '%s'"
-msgstr "Ugyldig værtskomponent '%s'"
-
-#: zypp/url/UrlBase.cc:1070
-msgid "Url scheme does not allow a port"
-msgstr "URL-oversigt tillader ikke en port"
-
-#: zypp/url/UrlBase.cc:1081
-#, c-format, boost-format
-msgid "Invalid port component '%s'"
-msgstr "Ugyldig portkomponent '%s'"
-
-#: zypp/url/UrlBase.cc:1098
-msgid "Url scheme requires path name"
-msgstr "URL-oversigt kræver et stinavn"
-
-#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
-msgid "Relative path not allowed if authority exists"
-msgstr "Relativ sti er ikke tilladt hvis autoritet eksisterer"
-
-#: zypp/url/UrlUtils.cc:111
-msgid "Encoded string contains a NUL byte"
-msgstr "Kodede strenge indeholder en NUL-byte"
-
-#: zypp/url/UrlUtils.cc:173
-msgid "Invalid parameter array split separator character"
-msgstr "Ugyldigt skilletegn for parameter-array"
-
-#: zypp/url/UrlUtils.cc:213
-msgid "Invalid parameter map split separator character"
-msgstr "Ugyldigt skilletegn for parameter-map"
-
-#: zypp/url/UrlUtils.cc:283
-msgid "Invalid parameter array join separator character"
-msgstr "Ugyldigt skilletegn for parameter-array join"
-
-#: zypp/ExternalProgram.cc:258
-#, c-format, boost-format
-msgid "Can't open pty (%s)."
-msgstr "Kunne ikke åbne pty (%s)."
-
-#: zypp/ExternalProgram.cc:269
-#, c-format, boost-format
-msgid "Can't open pipe (%s)."
-msgstr "Kan ikke åbne dataledning (%s)."
-
-#: zypp/ExternalProgram.cc:350
-#, c-format, boost-format
-msgid "Can't chroot to '%s' (%s)."
-msgstr "Kan ikke skifte rodmappe til '%s' (%s)."
-
-#: zypp/ExternalProgram.cc:360
-#, c-format, boost-format
-msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "Kan ikke skifte mappe til \"%s\" indenfor chroot \"%s\" (%s)."
-
-#: zypp/ExternalProgram.cc:361
-#, c-format, boost-format
-msgid "Can't chdir to '%s' (%s)."
-msgstr "Kan ikke skifte mappe til \"%s\" (%s)."
-
-#. don't want to get here
-#: zypp/ExternalProgram.cc:373
-#, c-format, boost-format
-msgid "Can't exec '%s' (%s)."
-msgstr "Kan ikke eksekvere '%s' (%s)."
-
-#: zypp/ExternalProgram.cc:381
-#, c-format, boost-format
-msgid "Can't fork (%s)."
-msgstr "Kan ikke forgrene (%s)."
-
-#: zypp/ExternalProgram.cc:507
-#, c-format, boost-format
-msgid "Command exited with status %d."
-msgstr "Kommando afsluttet med status %d."
-
-#: zypp/ExternalProgram.cc:527
-#, c-format, boost-format
-msgid "Command was killed by signal %d (%s)."
-msgstr "Kommando dræbtes af signalet %d (%s)."
-
-#: zypp/ExternalProgram.cc:532
-msgid "Command exited with unknown error."
-msgstr "Kommando afsluttet med ukendt fejl."
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:60
-msgid "does not expire"
-msgstr "udløber ikke"
-
-#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:65
-#, boost-format
-msgid "expired: %1%"
-msgstr "udløbet: %1%"
-
-#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:70
-#, boost-format
-msgid "expires: %1%"
-msgstr "udløber: %1%"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:79
-msgid "(does not expire)"
-msgstr "(udløber ikke)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:88
-msgid "(EXPIRED)"
-msgstr "(UDLØBET)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:92
-msgid "(expires within 24h)"
-msgstr "(udløber indenfor 24 t.)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:96
-#, c-format, boost-format
-msgid "(expires in %d day)"
-msgid_plural "(expires in %d days)"
-msgstr[0] "(udløber om %d dag)"
-msgstr[1] "(udløber om %d dage)"
-
-#: zypp/VendorSupportOptions.cc:14
-msgid "unknown"
-msgstr "ukendt"
-
-#: zypp/VendorSupportOptions.cc:17
-msgid "unsupported"
-msgstr "ikke-supporteret"
-
-#: zypp/VendorSupportOptions.cc:20
-msgid "Level 1"
-msgstr "Niveau 1"
-
-#: zypp/VendorSupportOptions.cc:23
-msgid "Level 2"
-msgstr "Niveau 2"
-
-#: zypp/VendorSupportOptions.cc:26
-msgid "Level 3"
-msgstr "Niveau 3"
-
-#: zypp/VendorSupportOptions.cc:29
-msgid "Additional Customer Contract Necessary"
-msgstr "Yderligere kundekontrakt nødvendig"
-
-#: zypp/VendorSupportOptions.cc:31
-msgid "invalid"
-msgstr "ugyldig"
-
-#: zypp/VendorSupportOptions.cc:39
-msgid "The level of support is unspecified"
-msgstr "Supportniveau er ikke angivet"
-
-#: zypp/VendorSupportOptions.cc:42
-msgid "The vendor does not provide support."
-msgstr "Leverandøren yder ikke support."
-
-#: zypp/VendorSupportOptions.cc:45
-msgid ""
-"Problem determination, which means technical support designed to provide "
-"compatibility information, installation assistance, usage support, on-going "
-"maintenance and basic troubleshooting. Level 1 Support is not intended to "
-"correct product defect errors."
-msgstr ""
-"Problembestemmelse, som betyder teknisk support designet til at give "
-"kompatibilitetsinformation, installationsassistance, brugssupport, løbende "
-"vedligeholdelse og basal fejlsøgning. Niveau 1-support er ikke beregnet til "
-"at rette produktfejl."
-
-#: zypp/VendorSupportOptions.cc:48
-msgid ""
-"Problem isolation, which means technical support designed to duplicate "
-"customer problems, isolate problem area and provide resolution for problems "
-"not resolved by Level 1 Support."
-msgstr ""
-"Problemisolering, som betyder teknisk support designet til at duplikere "
-"kundeproblemer, isolere problemområdet og levere løsning på problemer som "
-"ikke løses af niveau 1-support."
-
-#: zypp/VendorSupportOptions.cc:51
-msgid ""
-"Problem resolution, which means technical support designed to resolve "
-"complex problems by engaging engineering in resolution of product defects "
-"which have been identified by Level 2 Support."
-msgstr ""
-"Problemløsning, som betyder teknisk support designet til at løse komplekse "
-"problemer ved at inddrage udvikling i løsning af produktfejl som er blevet "
-"identificeret af niveau 2-support."
-
-#: zypp/VendorSupportOptions.cc:54
-msgid "An additional customer contract is necessary for getting support."
-msgstr "En yderligere kundekontrakt er nødvendig for at få support."
-
-#: zypp/VendorSupportOptions.cc:56
-msgid "Unknown support option. Description not available"
-msgstr "Ukendt support-mulighed. Beskrivelse ikke tilgængelig"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -1893,6 +1260,107 @@ msgstr "Zambia"
 #: zypp/CountryCode.cc:403
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
+
+#: zypp/Dep.cc:96
+msgid "Provides"
+msgstr "Leverer"
+
+#: zypp/Dep.cc:97
+msgid "Prerequires"
+msgstr "Præ-kræver"
+
+#: zypp/Dep.cc:98
+msgid "Requires"
+msgstr "Kræver"
+
+#: zypp/Dep.cc:99
+msgid "Conflicts"
+msgstr "Konflikter"
+
+#: zypp/Dep.cc:100
+msgid "Obsoletes"
+msgstr "Forælder"
+
+#: zypp/Dep.cc:101
+msgid "Recommends"
+msgstr "Anbefaler"
+
+#: zypp/Dep.cc:102
+msgid "Suggests"
+msgstr "Foreslår"
+
+#: zypp/Dep.cc:103
+msgid "Enhances"
+msgstr "Forbedringer"
+
+#: zypp/Dep.cc:104
+msgid "Supplements"
+msgstr "Supplerer"
+
+#: zypp/ExternalProgram.cc:258
+#, c-format, boost-format
+msgid "Can't open pty (%s)."
+msgstr "Kunne ikke åbne pty (%s)."
+
+#: zypp/ExternalProgram.cc:269
+#, c-format, boost-format
+msgid "Can't open pipe (%s)."
+msgstr "Kan ikke åbne dataledning (%s)."
+
+#: zypp/ExternalProgram.cc:350
+#, c-format, boost-format
+msgid "Can't chroot to '%s' (%s)."
+msgstr "Kan ikke skifte rodmappe til '%s' (%s)."
+
+#: zypp/ExternalProgram.cc:360
+#, c-format, boost-format
+msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
+msgstr "Kan ikke skifte mappe til \"%s\" indenfor chroot \"%s\" (%s)."
+
+#: zypp/ExternalProgram.cc:361
+#, c-format, boost-format
+msgid "Can't chdir to '%s' (%s)."
+msgstr "Kan ikke skifte mappe til \"%s\" (%s)."
+
+#. don't want to get here
+#: zypp/ExternalProgram.cc:373
+#, c-format, boost-format
+msgid "Can't exec '%s' (%s)."
+msgstr "Kan ikke eksekvere '%s' (%s)."
+
+#: zypp/ExternalProgram.cc:381
+#, c-format, boost-format
+msgid "Can't fork (%s)."
+msgstr "Kan ikke forgrene (%s)."
+
+#: zypp/ExternalProgram.cc:507
+#, c-format, boost-format
+msgid "Command exited with status %d."
+msgstr "Kommando afsluttet med status %d."
+
+#: zypp/ExternalProgram.cc:527
+#, c-format, boost-format
+msgid "Command was killed by signal %d (%s)."
+msgstr "Kommando dræbtes af signalet %d (%s)."
+
+#: zypp/ExternalProgram.cc:532
+msgid "Command exited with unknown error."
+msgstr "Kommando afsluttet med ukendt fejl."
+
+#. TranslatorExplanation first %s is key name, second is keyring name
+#: zypp/KeyRing.cc:520
+#, c-format, boost-format
+msgid "Tried to import not existent key %s into keyring %s"
+msgstr "Prøvede at importere ikke-eksisterende nøgle %s ind i nøgleringen %s"
+
+#: zypp/KeyRing.cc:564
+msgid "Failed to delete key."
+msgstr "Sletning af nøgle fejlede."
+
+#: zypp/KeyRing.cc:572
+#, c-format, boost-format
+msgid "Signature file %s not found"
+msgstr "Signaturfilen %s blev ikke fundet"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -4248,33 +3716,493 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zuni"
 
-#. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:512
+#: zypp/ProblemSolution.cc:114
+msgid "Following actions will be done:"
+msgstr "Følgende handlinger udføres:"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:60
+msgid "does not expire"
+msgstr "udløber ikke"
+
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
+msgstr "udløbet: %1%"
+
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr "udløber: %1%"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
+msgid "(does not expire)"
+msgstr "(udløber ikke)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:88
+msgid "(EXPIRED)"
+msgstr "(UDLØBET)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:92
+msgid "(expires within 24h)"
+msgstr "(udløber indenfor 24 t.)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:96
 #, c-format, boost-format
-msgid "Tried to import not existent key %s into keyring %s"
-msgstr "Prøvede at importere ikke-eksisterende nøgle %s ind i nøgleringen %s"
+msgid "(expires in %d day)"
+msgid_plural "(expires in %d days)"
+msgstr[0] "(udløber om %d dag)"
+msgstr[1] "(udløber om %d dage)"
 
-#: zypp/KeyRing.cc:556
-msgid "Failed to delete key."
-msgstr "Sletning af nøgle fejlede."
+#: zypp/RepoManager.cc:312
+#, boost-format
+msgid "Cannot read repo directory '%1%': Permission denied"
+msgstr "Kan ikke læse softwarekildemappen \"%1%\": Adgang nægtet"
 
-#: zypp/KeyRing.cc:565
+#. TranslatorExplanation '%s' is a pathname
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
+#: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
-msgid "Signature file %s not found"
-msgstr "Signaturfilen %s blev ikke fundet"
+msgid "Failed to read directory '%s'"
+msgstr "Kunne ikke læse mappen \"%s\""
 
-#: zypp/repo/RepoProvideFile.cc:259
+#: zypp/RepoManager.cc:330
+#, boost-format
+msgid "Cannot read repo file '%1%': Permission denied"
+msgstr "Kan ikke læse softwarekildefilen \"%1%\": Adgang nægtet"
+
+#: zypp/RepoManager.cc:353
+msgid "Repository alias cannot start with dot."
+msgstr "Alias for softwarekilde må ikke starte med punktum."
+
+#: zypp/RepoManager.cc:364
+msgid "Service alias cannot start with dot."
+msgstr "Alias for tjeneste må ikke starte med punktum."
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
+#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
 #, c-format, boost-format
-msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Kan ikke levere filen '%s' fra softwarekilden '%s'"
+msgid "Can't open file '%s' for writing."
+msgstr "Kan ikke åbne filen \"%s\" til skrivning."
 
-#: zypp/repo/RepoProvideFile.cc:265
-msgid "No url in repository."
-msgstr "Ingen URL i softwarekilden."
+#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
+#. %1% = service name
+#. %2% = repository name
+#: zypp/RepoManager.cc:871
+#, boost-format
+msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
+msgstr ""
+"Ukendt tjeneste \"%1%\": Fjerner forældreløs tjeneste-softwarekilde \"%2%\""
 
-#: zypp/repo/RepoException.cc:129
-msgid "Service plugin does not support changing an attribute."
-msgstr "Tjeneste-plugin understøtter ikke ændring af en attribut."
+#. we will throw this later if no URL checks out fine
+#: zypp/RepoManager.cc:1098
+msgid "Valid metadata not found at specified URL"
+msgid_plural "Valid metadata not found at specified URLs"
+msgstr[0] "Der blev ikke fundet gyldige metadata på den angivne URL"
+msgstr[1] "Der blev ikke fundet gyldige metadata på de angivne URL'er"
+
+#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
+#, c-format, boost-format
+msgid "Can't create %s"
+msgstr "Kan ikke oprette %s"
+
+#: zypp/RepoManager.cc:1154
+msgid "Can't create metadata cache directory."
+msgstr "Kan ikke oprette mappe med metadata-cache."
+
+#: zypp/RepoManager.cc:1300
+#, c-format, boost-format
+msgid "Building repository '%s' cache"
+msgstr "Opbygger cache for softwarekilden '%s'"
+
+#: zypp/RepoManager.cc:1320
+#, c-format, boost-format
+msgid "Can't create cache at %s - no writing permissions."
+msgstr "Kan ikke oprette cache i %s - ingen skriverettigheder."
+
+#: zypp/RepoManager.cc:1384
+#, c-format, boost-format
+msgid "Failed to cache repo (%d)."
+msgstr "Caching af softwarekilde (%d) mislykkedes."
+
+#: zypp/RepoManager.cc:1395
+msgid "Unhandled repository type"
+msgstr "Ikke-håndteret softwarekilde-type"
+
+#. prepare exception to be thrown if the type could not be determined
+#. due to a media exception. We can't throw right away, because of some
+#. problems with proxy servers returning an incorrect error
+#. on ftp file-not-found(bnc #335906). Instead we'll check another types
+#. before throwing.
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
+#, c-format, boost-format
+msgid "Error trying to read from '%s'"
+msgstr "Fejl under forsøg på at læse fra \"%s\""
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
+#, c-format, boost-format
+msgid "Unknown error reading from '%s'"
+msgstr "Ukendt fejl ved læsning fra \"%s\""
+
+#: zypp/RepoManager.cc:1623
+#, c-format, boost-format
+msgid "Adding repository '%s'"
+msgstr "Tilføjer softwarekilden '%s'"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1711
+#, c-format, boost-format
+msgid "Invalid repo file name at '%s'"
+msgstr "Ugyldig softwarekilde-filnavn i \"%s\""
+
+#: zypp/RepoManager.cc:1752
+#, c-format, boost-format
+msgid "Removing repository '%s'"
+msgstr "Fjerner softwarekilden '%s'"
+
+#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
+msgid "Can't figure out where the repo is stored."
+msgstr "Kan ikke regne ud hvor softwarekilden er lagret."
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
+#, c-format, boost-format
+msgid "Can't delete '%s'"
+msgstr "Kan ikke slette \"%s\""
+
+#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
+msgid "Can't figure out where the service is stored."
+msgstr "Kan ikke regne ud hvor tjenesten er lagret."
+
+#: zypp/Url.cc:114
+msgid "Invalid LDAP URL query string"
+msgstr "Ugyldig LDAP URL-forespørgselsstreng"
+
+#: zypp/Url.cc:153
+#, c-format, boost-format
+msgid "Invalid LDAP URL query parameter '%s'"
+msgstr "Ugyldig LDAP URL-forespørgselsparameter '%s'"
+
+#: zypp/Url.cc:300
+msgid "Unable to clone Url object"
+msgstr "Kan ikke klone URL-objekt"
+
+#: zypp/Url.cc:313
+msgid "Invalid empty Url object reference"
+msgstr "Ugyldig tom URL-objektreference"
+
+#: zypp/Url.cc:326 zypp/Url.cc:340
+msgid "Unable to parse Url components"
+msgstr "Kan ikke  fortolke URL-komponenter"
+
+#: zypp/VendorSupportOptions.cc:14
+msgid "unknown"
+msgstr "ukendt"
+
+#: zypp/VendorSupportOptions.cc:17
+msgid "unsupported"
+msgstr "ikke-supporteret"
+
+#: zypp/VendorSupportOptions.cc:20
+msgid "Level 1"
+msgstr "Niveau 1"
+
+#: zypp/VendorSupportOptions.cc:23
+msgid "Level 2"
+msgstr "Niveau 2"
+
+#: zypp/VendorSupportOptions.cc:26
+msgid "Level 3"
+msgstr "Niveau 3"
+
+#: zypp/VendorSupportOptions.cc:29
+msgid "Additional Customer Contract Necessary"
+msgstr "Yderligere kundekontrakt nødvendig"
+
+#: zypp/VendorSupportOptions.cc:31
+msgid "invalid"
+msgstr "ugyldig"
+
+#: zypp/VendorSupportOptions.cc:39
+msgid "The level of support is unspecified"
+msgstr "Supportniveau er ikke angivet"
+
+#: zypp/VendorSupportOptions.cc:42
+msgid "The vendor does not provide support."
+msgstr "Leverandøren yder ikke support."
+
+#: zypp/VendorSupportOptions.cc:45
+msgid ""
+"Problem determination, which means technical support designed to provide "
+"compatibility information, installation assistance, usage support, on-going "
+"maintenance and basic troubleshooting. Level 1 Support is not intended to "
+"correct product defect errors."
+msgstr ""
+"Problembestemmelse, som betyder teknisk support designet til at give "
+"kompatibilitetsinformation, installationsassistance, brugssupport, løbende "
+"vedligeholdelse og basal fejlsøgning. Niveau 1-support er ikke beregnet til "
+"at rette produktfejl."
+
+#: zypp/VendorSupportOptions.cc:48
+msgid ""
+"Problem isolation, which means technical support designed to duplicate "
+"customer problems, isolate problem area and provide resolution for problems "
+"not resolved by Level 1 Support."
+msgstr ""
+"Problemisolering, som betyder teknisk support designet til at duplikere "
+"kundeproblemer, isolere problemområdet og levere løsning på problemer som "
+"ikke løses af niveau 1-support."
+
+#: zypp/VendorSupportOptions.cc:51
+msgid ""
+"Problem resolution, which means technical support designed to resolve "
+"complex problems by engaging engineering in resolution of product defects "
+"which have been identified by Level 2 Support."
+msgstr ""
+"Problemløsning, som betyder teknisk support designet til at løse komplekse "
+"problemer ved at inddrage udvikling i løsning af produktfejl som er blevet "
+"identificeret af niveau 2-support."
+
+#: zypp/VendorSupportOptions.cc:54
+msgid "An additional customer contract is necessary for getting support."
+msgstr "En yderligere kundekontrakt er nødvendig for at få support."
+
+#: zypp/VendorSupportOptions.cc:56
+msgid "Unknown support option. Description not available"
+msgstr "Ukendt support-mulighed. Beskrivelse ikke tilgængelig"
+
+#: zypp/ZYppFactory.cc:399
+#, c-format, boost-format
+msgid ""
+"System management is locked by the application with pid %d (%s).\n"
+"Close this application before trying again."
+msgstr ""
+"Systemhåndtering er låst af programmet med pid %d (%s).\n"
+" Luk dette program, før du prøver igen."
+
+#. TranslatorExplanation followed by the list of error messages that lead to this exception
+#: zypp/base/Exception.cc:134
+msgid "History:"
+msgstr "Historik:"
+
+#: zypp/base/InterProcessMutex.cc:83
+#, c-format, boost-format
+msgid "Can't open lock file: %s"
+msgstr "Kan ikke åbne låsefilen: %s"
+
+#: zypp/base/InterProcessMutex.cc:143
+msgid "This action is being run by another program already."
+msgstr "Denne handling køres allerede af et andet program."
+
+#: zypp/base/StrMatcher.cc:152
+#, c-format, boost-format
+msgid "Unknown match mode '%s'"
+msgstr "Ukendt matchtilstand \"%s\""
+
+#: zypp/base/StrMatcher.cc:153
+#, c-format, boost-format
+msgid "Unknown match mode '%s' for pattern '%s'"
+msgstr "Ukendt matchtilstand \"%s\" for mønstret \"%s\""
+
+#: zypp/base/StrMatcher.cc:157
+#, c-format, boost-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr "Ugyldigt regulært udtryk '%s': Regcomp returnerede %d"
+
+#: zypp/base/StrMatcher.cc:158
+#, c-format, boost-format
+msgid "Invalid regular expression '%s'"
+msgstr "Ugyldigt regulært udtryk '%s'"
+
+#. !\todo add comma to the message for the next release
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
+#, c-format, boost-format
+msgid "Authentication required for '%s'"
+msgstr "Autentificering påkrævet for '%s'"
+
+#: zypp/media/MediaCurl.cc:1109
+msgid ""
+"Visit the Novell Customer Center to check whether your registration is valid "
+"and has not expired."
+msgstr ""
+"Besøg Novell kundercenter for at tjekke om din registrering er gyldig og "
+"ikke udløbet."
+
+#: zypp/media/MediaException.cc:31
+#, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr "Montering af %s fejlede på %s"
+
+#: zypp/media/MediaException.cc:41
+#, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "Afmontering af %s fejlede"
+
+#: zypp/media/MediaException.cc:46
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr "Dårligt filnavn: %s"
+
+#: zypp/media/MediaException.cc:51
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr "Mediet åbnedes ikke under forsøg på at udføre handlingen '%s'."
+
+#: zypp/media/MediaException.cc:56
+#, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
+msgstr "Filen %s blev ikke fundet på mediet '%s'"
+
+#: zypp/media/MediaException.cc:61
+#, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "Kan ikke skrive filen '%s'."
+
+#: zypp/media/MediaException.cc:66
+msgid "Medium not attached"
+msgstr "Medie er ikke tilknyttet"
+
+#: zypp/media/MediaException.cc:71
+msgid "Bad media attach point"
+msgstr "Dårligt tilknytningspunkt for medie"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:77
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr "Download (curl) initialisering fejlede for '%s'"
+
+#: zypp/media/MediaException.cc:82
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr "Systemundtagelse '%s' på mediet '%s'."
+
+#: zypp/media/MediaException.cc:87
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr "Stien '%s' på mediet '%s' er ikke en fil."
+
+#: zypp/media/MediaException.cc:92
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "Stien '%s' på mediet '%s' er ikke en mappe."
+
+#: zypp/media/MediaException.cc:99
+msgid "Malformed URI"
+msgstr "Dårligt formeret URI"
+
+#: zypp/media/MediaException.cc:109
+msgid "Empty host name in URI"
+msgstr "Tomt værtsmaskinenavn i URI"
+
+#: zypp/media/MediaException.cc:114
+msgid "Empty filesystem in URI"
+msgstr "Tomt filsystem i URI"
+
+#: zypp/media/MediaException.cc:119
+msgid "Empty destination in URI"
+msgstr "Tom destination i URI"
+
+#: zypp/media/MediaException.cc:124
+#, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "Ikke-understøttet URI-skema i '%s'."
+
+#: zypp/media/MediaException.cc:129
+msgid "Operation not supported by medium"
+msgstr "Operationen understøttes ikke af medie"
+
+#: zypp/media/MediaException.cc:136
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"Download (curl)-fejl for '%s':\n"
+"Fejlkode: %s\n"
+"Fejlmeddelelse: %s\n"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:144
+#, c-format, boost-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr "Fejl opstod under indstilling af download-tilvalg (curl) for \"%s\":"
+
+#: zypp/media/MediaException.cc:151
+#, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr "Mediekilden '%s' indeholder ikke det ønskede medie"
+
+#: zypp/media/MediaException.cc:156
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr "Mediet '%s' er i brug af en anden instans"
+
+#: zypp/media/MediaException.cc:162
+msgid "Cannot eject any media"
+msgstr "Kan ikke skubbe noget medie ud"
+
+#: zypp/media/MediaException.cc:164
+#, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr "Kan ikke skubbe mediet '%s' ud"
+
+#: zypp/media/MediaException.cc:179
+#, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "Adgangstilladelse til '%s' nægtet."
+
+#: zypp/media/MediaException.cc:187
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr "Tidsfrist udløbet ved tilgang af \"%s\"."
+
+#: zypp/media/MediaException.cc:195
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr "Placeringen \"%s\" er midlertidigt utilgængelig."
+
+#: zypp/media/MediaException.cc:203
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr " SSL-certifikatproblem. Tjek at CA-certifikatet er OK for '%s'."
+
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+"Opret tilknytningspunkt: Kan ikke finde en skrivbar mappe til oprettelse af "
+"et tilknytningspunkt"
+
+#: zypp/media/MediaUserAuth.cc:136
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr "Ikke-understøttet HTTP autentificeringsmetode '%s'"
+
+#: zypp/misc/CheckAccessDeleted.cc:283
+msgid "Please install package 'lsof' first."
+msgstr "Installér pakken \"lsof\" først."
+
+#: zypp/parser/RepoindexFileReader.cc:197
+#, c-format, boost-format
+msgid "Required attribute '%s' is missing."
+msgstr "Den påkrævede attribut '%s' mangler."
+
+#: zypp/parser/RepoindexFileReader.cc:209
+#, c-format, boost-format
+msgid "One or both of '%s' or '%s' attributes is required."
+msgstr "En af eller begge '%s'- og '%s'-attributterne er påkrævet."
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4304,14 +4232,178 @@ msgstr "applydeltarpm-kontrol mislykkedes."
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm mislykkedes."
 
-#: zypp/ZYppFactory.cc:399
+#: zypp/repo/RepoException.cc:129
+msgid "Service plugin does not support changing an attribute."
+msgstr "Tjeneste-plugin understøtter ikke ændring af en attribut."
+
+#: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
+msgid "Can't provide file '%s' from repository '%s'"
+msgstr "Kan ikke levere filen '%s' fra softwarekilden '%s'"
+
+#: zypp/repo/RepoProvideFile.cc:265
+msgid "No url in repository."
+msgstr "Ingen URL i softwarekilden."
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:34
+#, boost-format
 msgid ""
-"System management is locked by the application with pid %d (%s).\n"
-"Close this application before trying again."
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
 msgstr ""
-"Systemhåndtering er låst af programmet med pid %d (%s).\n"
-" Luk dette program, før du prøver igen."
+"Filen %1%\n"
+"  fra pakken\n"
+"     %2%\n"
+"  er i konflikt med filen fra pakken\n"
+"     %3%"
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:40
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+"Filen %1%\n"
+"  fra pakken\n"
+"     %2%\n"
+"  er i konflikt med filen fra installation af\n"
+"     %3%"
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:47
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+"Filen %1%\n"
+"  fra installation af\n"
+"     %2%\n"
+"  er i konflikt med en fil fra pakken\n"
+"     %3%"
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:53
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+"Filen %1%\n"
+"  fra installation af\n"
+"     %2%\n"
+"  er i konflikt med filen fra installation af\n"
+"     %3%"
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
+#: zypp/sat/FileConflicts.cc:68
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+"Filen %1%\n"
+"  fra pakken\n"
+"     %2%\n"
+"  er i konflikt med filen\n"
+"     %3%\n"
+"  fra pakken\n"
+"     %4%"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:76
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+"Filen %1%\n"
+"  fra pakken\n"
+"     %2%\n"
+"  er i konflikt med filen\n"
+"     %3%\n"
+"  fra installation af\n"
+"     %4%"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:85
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+"Filen %1%\n"
+"  fra installation af\n"
+"     %2%\n"
+"  er i konflikt med filen\n"
+"     %3%\n"
+"  fra pakken\n"
+"     %4%"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:93
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+"Filen %1%\n"
+"  fra installation af\n"
+"     %2%\n"
+"  er i konflikt med filen\n"
+"     %3%\n"
+"  fra installation af\n"
+"     %4%"
+
+#: zypp/sat/detail/PoolImpl.cc:189
+msgid "Can not create sat-pool."
+msgstr "Kan ikke oprette sat-pulje."
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#, c-format, boost-format
+msgid "break %s by ignoring some of its dependencies"
+msgstr "ødelæg %s ved at ignorere nogle af dens afhængigheder"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+msgid "generally ignore of some dependencies"
+msgstr "ignorér generelt nogle afhængigheder"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
@@ -4341,8 +4433,7 @@ msgstr "et eller andet afhængighedsproblem"
 msgid "nothing provides requested %s"
 msgstr "intet leverer forespurgt %s"
 
-#: zypp/solver/detail/SATResolver.cc:997
-#: zypp/solver/detail/SATResolver.cc:1001
+#: zypp/solver/detail/SATResolver.cc:997 zypp/solver/detail/SATResolver.cc:1001
 msgid "Have you enabled all requested repositories?"
 msgstr "Har du aktiveret alle anmodede softwarekilder?"
 
@@ -4514,380 +4605,294 @@ msgstr "udskiftning af %s med %s"
 msgid "deinstallation of %s"
 msgstr "afinstallation af %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#: zypp/target/TargetImpl.cc:310
+msgid " executed"
+msgstr " afviklet"
+
+#: zypp/target/TargetImpl.cc:332
+msgid " execution failed"
+msgstr " afvikling fejlede"
+
+#. translators: We may find the same script content in files with different names.
+#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
+#. message for a log file. Preferably start translation with "%s"
+#: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
-msgid "break %s by ignoring some of its dependencies"
-msgstr "ødelæg %s ved at ignorere nogle af dens afhængigheder"
+msgid "%s already executed as %s)"
+msgstr "%s er allerede kørt som %s)"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
-msgid "generally ignore of some dependencies"
-msgstr "ignorér generelt nogle afhængigheder"
+#: zypp/target/TargetImpl.cc:459
+msgid " execution skipped while aborting"
+msgstr " afvikling skippet under afbrydelse"
 
-#: zypp/parser/RepoindexFileReader.cc:197
-#, c-format, boost-format
-msgid "Required attribute '%s' is missing."
-msgstr "Den påkrævede attribut '%s' mangler."
+#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
+#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
+#: zypp/target/TargetImpl.cc:607
+msgid "Error sending update message notification."
+msgstr "Fejl under afsendelse af bekendtgørelse af opdateringsbesked."
 
-#: zypp/parser/RepoindexFileReader.cc:209
-#, c-format, boost-format
-msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "En af eller begge '%s'- og '%s'-attributterne er påkrævet."
+#: zypp/target/TargetImpl.cc:658
+msgid "New update message"
+msgstr "Besked om ny opdatering"
 
-#: zypp/base/InterProcessMutex.cc:83
-#, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "Kan ikke åbne låsefilen: %s"
+#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
+#: zypp/target/TargetImpl.cc:1627
+#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
+msgid "Installation has been aborted as directed."
+msgstr "Installation er blevet afbrudt som ønsket."
 
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr "Denne handling køres allerede af et andet program."
-
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp/base/Exception.cc:107
-msgid "History:"
-msgstr "Historik:"
-
-#: zypp/base/StrMatcher.cc:152
-#, c-format, boost-format
-msgid "Unknown match mode '%s'"
-msgstr "Ukendt matchtilstand \"%s\""
-
-#: zypp/base/StrMatcher.cc:153
-#, c-format, boost-format
-msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Ukendt matchtilstand \"%s\" for mønstret \"%s\""
-
-#: zypp/base/StrMatcher.cc:157
-#, c-format, boost-format
-msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "Ugyldigt regulært udtryk '%s': Regcomp returnerede %d"
-
-#: zypp/base/StrMatcher.cc:158
-#, c-format, boost-format
-msgid "Invalid regular expression '%s'"
-msgstr "Ugyldigt regulært udtryk '%s'"
-
-#: zypp/misc/CheckAccessDeleted.cc:283
-msgid "Please install package 'lsof' first."
-msgstr "Installér pakken \"lsof\" først."
-
-#: zypp/media/MediaHandler.cc:370
-msgid ""
-"Create attach point: Can't find a writable directory to create an attach "
-"point"
+#: zypp/target/hal/HalContext.cc:24
+msgid "Sorry, but this version of libzypp was built without HAL support."
 msgstr ""
-"Opret tilknytningspunkt: Kan ikke finde en skrivbar mappe til oprettelse af "
-"et tilknytningspunkt"
+"Beklager, denne version af libzypp blev bygget uden HAL-understøttelse."
 
-#. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
-#, c-format, boost-format
-msgid "Authentication required for '%s'"
-msgstr "Autentificering påkrævet for '%s'"
+#: zypp/target/hal/HalContext.cc:117
+msgid "HalContext not connected"
+msgstr "HalContext er ikke tilsluttet"
 
-#: zypp/media/MediaException.cc:31
-#, c-format, boost-format
-msgid "Failed to mount %s on %s"
-msgstr "Montering af %s fejlede på %s"
+#: zypp/target/hal/HalContext.cc:127
+msgid "HalDrive not initialized"
+msgstr "HalDrive er ikke initialiseret"
 
-#: zypp/media/MediaException.cc:41
-#, c-format, boost-format
-msgid "Failed to unmount %s"
-msgstr "Afmontering af %s fejlede"
+#: zypp/target/hal/HalContext.cc:137
+msgid "HalVolume not initialized"
+msgstr "HalVolume er ikke initialiseret"
 
-#: zypp/media/MediaException.cc:47
-#, c-format, boost-format
-msgid "Bad file name: %s"
-msgstr "Dårligt filnavn: %s"
+#: zypp/target/hal/HalContext.cc:229
+msgid "Unable to create dbus connection"
+msgstr "Kan ikke  oprette dbus-tilslutning"
 
-#: zypp/media/MediaException.cc:53
-#, c-format, boost-format
-msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Mediet åbnedes ikke under forsøg på at udføre handlingen '%s'."
+#: zypp/target/hal/HalContext.cc:242
+msgid "libhal_ctx_new: Can't create libhal context"
+msgstr "libhal_ctx_new: libhal-kontekst kan ikke oprettes"
 
-#: zypp/media/MediaException.cc:60
-#, c-format, boost-format
-msgid "File '%s' not found on medium '%s'"
-msgstr "Filen %s blev ikke fundet på mediet '%s'"
+#: zypp/target/hal/HalContext.cc:257
+msgid "libhal_set_dbus_connection: Can't set dbus connection"
+msgstr "libhal_set_dbus_connection: dbus-tilslutning kan ikke indstilles"
 
-#: zypp/media/MediaException.cc:67
-#, c-format, boost-format
-msgid "Cannot write file '%s'."
-msgstr "Kan ikke skrive filen '%s'."
+#: zypp/target/hal/HalContext.cc:272
+msgid "Unable to initalize HAL context -- hald not running?"
+msgstr "Kan ikke initialisere HAL-kontekst -- kører hald  ikke?"
 
-#: zypp/media/MediaException.cc:72
-msgid "Medium not attached"
-msgstr "Medie er ikke tilknyttet"
+#: zypp/target/hal/HalContext.cc:851
+msgid "Not a CDROM drive"
+msgstr "Ikke et cd-rom-drev"
 
-#: zypp/media/MediaException.cc:77
-msgid "Bad media attach point"
-msgstr "Dårligt tilknytningspunkt for medie"
+#. TranslatorExplanation after semicolon is error message
+#. TranslatorExplanation the colon is followed by an error message
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
+#: zypp/target/rpm/RpmDb.cc:2209
+msgid "RPM failed: "
+msgstr "RPM fejlede: "
 
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:84
-#, c-format, boost-format
-msgid "Download (curl) initialization failed for '%s'"
-msgstr "Download (curl) initialisering fejlede for '%s'"
-
-#: zypp/media/MediaException.cc:91
-#, c-format, boost-format
-msgid "System exception '%s' on medium '%s'."
-msgstr "Systemundtagelse '%s' på mediet '%s'."
-
-#: zypp/media/MediaException.cc:98
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a file."
-msgstr "Stien '%s' på mediet '%s' er ikke en fil."
-
-#: zypp/media/MediaException.cc:106
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "Stien '%s' på mediet '%s' er ikke en mappe."
-
-#: zypp/media/MediaException.cc:115
-msgid "Malformed URI"
-msgstr "Dårligt formeret URI"
-
-#: zypp/media/MediaException.cc:125
-msgid "Empty host name in URI"
-msgstr "Tomt værtsmaskinenavn i URI"
-
-#: zypp/media/MediaException.cc:130
-msgid "Empty filesystem in URI"
-msgstr "Tomt filsystem i URI"
-
-#: zypp/media/MediaException.cc:135
-msgid "Empty destination in URI"
-msgstr "Tom destination i URI"
-
-#: zypp/media/MediaException.cc:140
-#, c-format, boost-format
-msgid "Unsupported URI scheme in '%s'."
-msgstr "Ikke-understøttet URI-skema i '%s'."
-
-#: zypp/media/MediaException.cc:145
-msgid "Operation not supported by medium"
-msgstr "Operationen understøttes ikke af medie"
-
-#: zypp/media/MediaException.cc:152
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-"Error message: %s\n"
-msgstr ""
-"Download (curl)-fejl for '%s':\n"
-"Fejlkode: %s\n"
-"Fejlmeddelelse: %s\n"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:161
-#, c-format, boost-format
-msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "Fejl opstod under indstilling af download-tilvalg (curl) for \"%s\":"
-
-#: zypp/media/MediaException.cc:169
-#, c-format, boost-format
-msgid "Media source '%s' does not contain the desired medium"
-msgstr "Mediekilden '%s' indeholder ikke det ønskede medie"
-
-#: zypp/media/MediaException.cc:175
-#, c-format, boost-format
-msgid "Medium '%s' is in use by another instance"
-msgstr "Mediet '%s' er i brug af en anden instans"
-
-#: zypp/media/MediaException.cc:182
-msgid "Cannot eject any media"
-msgstr "Kan ikke skubbe noget medie ud"
-
-#: zypp/media/MediaException.cc:184
-#, c-format, boost-format
-msgid "Cannot eject media '%s'"
-msgstr "Kan ikke skubbe mediet '%s' ud"
-
-#: zypp/media/MediaException.cc:199
-#, c-format, boost-format
-msgid "Permission to access '%s' denied."
-msgstr "Adgangstilladelse til '%s' nægtet."
-
-#: zypp/media/MediaException.cc:207
-#, c-format, boost-format
-msgid "Timeout exceeded when accessing '%s'."
-msgstr "Tidsfrist udløbet ved tilgang af \"%s\"."
-
-#: zypp/media/MediaException.cc:215
-#, c-format, boost-format
-msgid "Location '%s' is temporarily unaccessible."
-msgstr "Placeringen \"%s\" er midlertidigt utilgængelig."
-
-#: zypp/media/MediaException.cc:223
-#, c-format, boost-format
-msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr " SSL-certifikatproblem. Tjek at CA-certifikatet er OK for '%s'."
-
-#: zypp/media/MediaUserAuth.cc:136
-#, c-format, boost-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Ikke-understøttet HTTP autentificeringsmetode '%s'"
-
-#: zypp/media/MediaCurl.cc:1109
-msgid ""
-"Visit the Novell Customer Center to check whether your registration is valid "
-"and has not expired."
-msgstr ""
-"Besøg Novell kundercenter for at tjekke om din registrering er gyldig og "
-"ikke udløbet."
-
-#: zypp/sat/detail/PoolImpl.cc:189
-msgid "Can not create sat-pool."
-msgstr "Kan ikke oprette sat-pulje."
-
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:34
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1119
 #, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
-"Filen %1%\n"
-"  fra pakken\n"
-"     %2%\n"
-"  er i konflikt med filen fra pakken\n"
-"     %3%"
+msgid "Failed to import public key %1%"
+msgstr "Import af offentlig nøgle %1% fejlede"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:40
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1189
 #, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
-"Filen %1%\n"
-"  fra pakken\n"
-"     %2%\n"
-"  er i konflikt med filen fra installation af\n"
-"     %3%"
+msgid "Failed to remove public key %1%"
+msgstr "Fjernelse af den offentlige nøgle %1% fejlede"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:47
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
-"Filen %1%\n"
-"  fra installation af\n"
-"     %2%\n"
-"  er i konflikt med en fil fra pakken\n"
-"     %3%"
+#: zypp/target/rpm/RpmDb.cc:1568
+msgid "Package is not signed!"
+msgstr "Pakke er ikke signeret!"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:53
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
-"Filen %1%\n"
-"  fra installation af\n"
-"     %2%\n"
-"  er i konflikt med filen fra installation af\n"
-"     %3%"
+#. Translator: %s = name of an rpm package. A list of diffs follows
+#. this message.
+#: zypp/target/rpm/RpmDb.cc:1868
+#, c-format, boost-format
+msgid "Changed configuration files for %s:"
+msgstr "Konfigurationsfiler er ændret for %s:"
 
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
-#: zypp/sat/FileConflicts.cc:68
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
-"Filen %1%\n"
-"  fra pakken\n"
-"     %2%\n"
-"  er i konflikt med filen\n"
-"     %3%\n"
-"  fra pakken\n"
-"     %4%"
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2044
+#, c-format, boost-format
+msgid "rpm saved %s as %s, but it was impossible to determine the difference"
+msgstr "rpm gemte %s som %s, men det var umuligt at bestemme forskellen"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:76
-#, boost-format
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2046
+#, c-format, boost-format
 msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
+"rpm saved %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
 msgstr ""
-"Filen %1%\n"
-"  fra pakken\n"
-"     %2%\n"
-"  er i konflikt med filen\n"
-"     %3%\n"
-"  fra installation af\n"
-"     %4%"
+"rpm gemt %s som %s.\n"
+"Her er de første 25 linjer af forskelle:\n"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:85
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
-"Filen %1%\n"
-"  fra installation af\n"
-"     %2%\n"
-"  er i konflikt med filen\n"
-"     %3%\n"
-"  fra pakken\n"
-"     %4%"
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2049
+#, c-format, boost-format
+msgid "rpm created %s as %s, but it was impossible to determine the difference"
+msgstr "rpm oprettede %s som %s, men det var umuligt at bestemme forskellen"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:93
-#, boost-format
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2051
+#, c-format, boost-format
 msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
+"rpm created %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
 msgstr ""
-"Filen %1%\n"
-"  fra installation af\n"
-"     %2%\n"
-"  er i konflikt med filen\n"
-"     %3%\n"
-"  fra installation af\n"
-"     %4%"
+"rpm oprettet %s som %s.\n"
+"Her er de første 25 linjer af forskelle:\n"
+
+#. report additional rpm output in finish
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+msgid "Additional rpm output"
+msgstr "Yderligere rpm-output"
+
+#: zypp/target/rpm/RpmDb.cc:2364
+#, c-format, boost-format
+msgid "created backup %s"
+msgstr "backup %s blev oprettet"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2385
+msgid "Signature is OK"
+msgstr "Signatur er OK"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2387
+msgid "Unknown type of signature"
+msgstr "Ukendt signaturtype"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2389
+msgid "Signature does not verify"
+msgstr "Signaturen verificerer ikke"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2391
+msgid "Signature is OK, but key is not trusted"
+msgstr "Signaturen er OK, men nøglen er ikke betroet"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2393
+msgid "Signatures public key is not available"
+msgstr "Signaturens offentlige nøgle er ikke tilgængelig"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2395
+msgid "File does not exist or signature can't be checked"
+msgstr "Filen findes ikke eller signaturen kan ikke tjekkes"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2397
+msgid "File is unsigned"
+msgstr "Filen er uden signatur"
+
+#: zypp/thread/Mutex.cc:33
+msgid "Can't initialize mutex attributes"
+msgstr "Mutex-attributter kan ikke initialiseres"
+
+#: zypp/thread/Mutex.cc:40
+msgid "Can't set recursive mutex attribute"
+msgstr "Rekursive mutex-attributter kan ikke angives"
+
+#: zypp/thread/Mutex.cc:47
+msgid "Can't initialize recursive mutex"
+msgstr "Rekursive mutex-attributter kan ikke initialiseres"
+
+#: zypp/thread/Mutex.cc:77
+msgid "Can't acquire the mutex lock"
+msgstr "Mutex-lås kan ikke hentes"
+
+#: zypp/thread/Mutex.cc:87
+msgid "Can't release the mutex lock"
+msgstr "Mutex-lås kan ikke frigives"
+
+#: zypp/url/UrlBase.cc:154
+#, c-format, boost-format
+msgid "Url scheme does not allow a %s"
+msgstr "URL-oversigt tillader ikke %s"
+
+#: zypp/url/UrlBase.cc:173
+#, c-format, boost-format
+msgid "Invalid %s component '%s'"
+msgstr "Ugyldig %s-komponent '%s'"
+
+#: zypp/url/UrlBase.cc:180
+#, c-format, boost-format
+msgid "Invalid %s component"
+msgstr "Ugyldig %s-komponent"
+
+#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
+msgid "Query string parsing not supported for this URL"
+msgstr "Fortolkning af forespørgselsstreng er ikke understøttet af denne URL"
+
+#: zypp/url/UrlBase.cc:824
+msgid "Url scheme is a required component"
+msgstr "URL-oversigt er en påkrævet komponent"
+
+#: zypp/url/UrlBase.cc:830
+#, c-format, boost-format
+msgid "Invalid Url scheme '%s'"
+msgstr "Ugyldig URL-oversigt '%s'"
+
+#: zypp/url/UrlBase.cc:949
+msgid "Url scheme does not allow a username"
+msgstr "URL-oversigt tillader ikke et brugernavn"
+
+#: zypp/url/UrlBase.cc:983
+msgid "Url scheme does not allow a password"
+msgstr "URL-oversigt tillader ikke en adgangskode"
+
+#: zypp/url/UrlBase.cc:1012
+msgid "Url scheme requires a host component"
+msgstr "URL-oversigt kræver en værtskomponent"
+
+#: zypp/url/UrlBase.cc:1022
+msgid "Url scheme does not allow a host component"
+msgstr "URL-oversigt tillader ikke en værtskomponent"
+
+#: zypp/url/UrlBase.cc:1049
+#, c-format, boost-format
+msgid "Invalid host component '%s'"
+msgstr "Ugyldig værtskomponent '%s'"
+
+#: zypp/url/UrlBase.cc:1070
+msgid "Url scheme does not allow a port"
+msgstr "URL-oversigt tillader ikke en port"
+
+#: zypp/url/UrlBase.cc:1081
+#, c-format, boost-format
+msgid "Invalid port component '%s'"
+msgstr "Ugyldig portkomponent '%s'"
+
+#: zypp/url/UrlBase.cc:1098
+msgid "Url scheme requires path name"
+msgstr "URL-oversigt kræver et stinavn"
+
+#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
+msgid "Relative path not allowed if authority exists"
+msgstr "Relativ sti er ikke tilladt hvis autoritet eksisterer"
+
+#: zypp/url/UrlUtils.cc:111
+msgid "Encoded string contains a NUL byte"
+msgstr "Kodede strenge indeholder en NUL-byte"
+
+#: zypp/url/UrlUtils.cc:173
+msgid "Invalid parameter array split separator character"
+msgstr "Ugyldigt skilletegn for parameter-array"
+
+#: zypp/url/UrlUtils.cc:213
+msgid "Invalid parameter map split separator character"
+msgstr "Ugyldigt skilletegn for parameter-map"
+
+#: zypp/url/UrlUtils.cc:283
+msgid "Invalid parameter array join separator character"
+msgstr "Ugyldigt skilletegn for parameter-array join"
+
+#~ msgid "Failed to import public key from file %s: %s"
+#~ msgstr "Import af offentlig nøgle fra filen %s fejlede: %s"
+
+#~ msgid "Failed to remove public key %s: %s"
+#~ msgstr "Fjernelse af den offentlige nøgle %s fejlede: %s"
 
 #~ msgid "Cannot find available loop device to mount the image file from '%s'"
 #~ msgstr ""

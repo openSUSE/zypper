@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 12:50+0200\n"
+"POT-Creation-Date: 2017-09-07 12:25+0200\n"
 "PO-Revision-Date: 2016-07-16 11:02+0000\n"
 "Last-Translator: Michail Vourlakos <mvourlakos@gmail.com>\n"
 "Language-Team: Greek <https://l10n.opensuse.org/projects/libzypp/master/el/"
@@ -35,656 +35,11 @@ msgstr ""
 msgid "Hal Exception"
 msgstr "Εξαίρεση Hal"
 
-#: zypp/Url.cc:114
-msgid "Invalid LDAP URL query string"
-msgstr "Λανθασμένη σειρά αναζήτησης LDAP URL"
-
-#: zypp/Url.cc:153
-#, c-format, boost-format
-msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Λανθασμένη παράμετρος αναζήτησης LDAP URL '%s'"
-
-#: zypp/Url.cc:300
-msgid "Unable to clone Url object"
-msgstr "Αδυναμία κλωνοποίησης αντικειμένου Url"
-
-#: zypp/Url.cc:313
-msgid "Invalid empty Url object reference"
-msgstr "Λανθασμένη αναφορά αντικειμένου κενού Url"
-
-#: zypp/Url.cc:326 zypp/Url.cc:340
-msgid "Unable to parse Url components"
-msgstr "Αδυναμία ανάλυσης συστατικών Url"
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "Αδυναμία αρχικοποίησης ιδιοτήτων mutex"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "Αδυναμία ορισμού παλινδρομικής ιδιότητας mutex"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "Αδυναμία αρχικοποίησης παλινδρομικής mutex"
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "Αδυναμία λήψης κλειδαριάς mutex"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "Αδυναμία ελευθέρωσης κλειδαριάς mutex"
-
-#: zypp/Dep.cc:96
-msgid "Provides"
-msgstr "Παρέχει"
-
-#: zypp/Dep.cc:97
-msgid "Prerequires"
-msgstr "Προαπαιτεί"
-
-#: zypp/Dep.cc:98
-msgid "Requires"
-msgstr "Απαιτεί"
-
-#: zypp/Dep.cc:99
-msgid "Conflicts"
-msgstr "Συγκρούσεις"
-
-#: zypp/Dep.cc:100
-msgid "Obsoletes"
-msgstr "Απαρχαιώνει"
-
-#: zypp/Dep.cc:101
-msgid "Recommends"
-msgstr "Συνιστά"
-
-#: zypp/Dep.cc:102
-msgid "Suggests"
-msgstr "Προτείνει"
-
-#: zypp/Dep.cc:103
-msgid "Enhances"
-msgstr "Ενισχύει"
-
-#: zypp/Dep.cc:104
-msgid "Supplements"
-msgstr "Συμπληρώνει"
-
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "Ύποπτος τύπος '%s' για το %u byte στον αθροιστικό έλεγχο '%s'"
-
-#: zypp/target/TargetImpl.cc:310
-msgid " executed"
-msgstr " εκτελέστηκε"
-
-# %s is either BOOTP or DHCP
-#: zypp/target/TargetImpl.cc:332
-msgid " execution failed"
-msgstr " εκτέλεση απέτυχε"
-
-#. translators: We may find the same script content in files with different names.
-#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
-#. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:449
-#, c-format, boost-format
-msgid "%s already executed as %s)"
-msgstr "%s έχουν ήδη εκτελεστεί ως %s)"
-
-#: zypp/target/TargetImpl.cc:459
-msgid " execution skipped while aborting"
-msgstr " η εκτέλεση σταμάτησε κατά την  ακύρωση"
-
-#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
-#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
-#: zypp/target/TargetImpl.cc:607
-msgid "Error sending update message notification."
-msgstr "Σφάλμα κατα την αποστολή μηνύματος ειδοποίησης ενημέρωσης."
-
-#: zypp/target/TargetImpl.cc:658
-msgid "New update message"
-msgstr "Νέο μήνυμα αναβάθμισης"
-
-#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
-#: zypp/target/TargetImpl.cc:1627
-#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
-msgid "Installation has been aborted as directed."
-msgstr "Η εγκατάσταση ακυρώθηκε όπως επιλέχθηκε."
-
-#: zypp/target/hal/HalContext.cc:24
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr ""
-"Συγγνώμη, αλλά αυτή η έκδοση του libzypp χτίστηκε χωρίς υποστήριξη HAL."
-
-#: zypp/target/hal/HalContext.cc:117
-msgid "HalContext not connected"
-msgstr "Το HalContext δεν είναι συνδεμένο"
-
-#: zypp/target/hal/HalContext.cc:127
-msgid "HalDrive not initialized"
-msgstr "Το HalDrive δεν είναι αρχικοποιημένο"
-
-#: zypp/target/hal/HalContext.cc:137
-msgid "HalVolume not initialized"
-msgstr "Το HalVolume δεν είναι αρχικοποιημένο"
-
-#: zypp/target/hal/HalContext.cc:229
-msgid "Unable to create dbus connection"
-msgstr "Αδυναμία δημιουργίας σύνδεσης dbus"
-
-#: zypp/target/hal/HalContext.cc:242
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: Αδυναμία δημιουργίας περιεχομένου libhal"
-
-#: zypp/target/hal/HalContext.cc:257
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: Αδυναμία ορισμού σύνδεσης dbus"
-
-#: zypp/target/hal/HalContext.cc:272
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr ""
-"Αδυναμία αρχικοποίησης περιεχομένου HAL -- ο δαίμονας hald δεν εκτελείται;"
-
-#: zypp/target/hal/HalContext.cc:851
-msgid "Not a CDROM drive"
-msgstr "Όχι οδηγός CDROM"
-
-#. TranslatorExplanation after semicolon is error message
-#. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
-#: zypp/target/rpm/RpmDb.cc:2219
-msgid "RPM failed: "
-msgstr "Το RPM απέτυχε: "
-
-#. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1129
-#, c-format, boost-format
-msgid "Failed to import public key from file %s: %s"
-msgstr "Απέτυχε να εισάγει το δημόσιο κλειδί από το αρχείο %s: %s"
-
-#. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1200
-#, c-format, boost-format
-msgid "Failed to remove public key %s: %s"
-msgstr "Αδυναμία απομάκρυνσης του δημοσίου κλειδιού %s: %s"
-
-#: zypp/target/rpm/RpmDb.cc:1578
-msgid "Package is not signed!"
-msgstr ""
-
-#. Translator: %s = name of an rpm package. A list of diffs follows
-#. this message.
-#: zypp/target/rpm/RpmDb.cc:1878
-#, c-format, boost-format
-msgid "Changed configuration files for %s:"
-msgstr "Αλλαγή αρχείων ρύθμισης για %s:"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
-#, c-format, boost-format
-msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "Το rpm αποθήκευσε το  %s ως %s αλλά ήταν αδύνατο να διαφανεί η διαφορά"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2056
-#, c-format, boost-format
-msgid ""
-"rpm saved %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"Το rpm αποθήκευσε το  %s ως %s.\n"
-"Εδώ είναι οι πρώτες 25 γραμμές της διαφοράς:\n"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
-#, c-format, boost-format
-msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr "Το rpm δημιουργήσε το %s ως %s αλλά ήταν αδύνατο να διαφανεί η διαφορά"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2061
-#, c-format, boost-format
-msgid ""
-"rpm created %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"To rpm δημιουργήσε το %s ως %s.\n"
-"Εδώ είναι οι πρώτες 25 σειρές της διαφοράς:\n"
-
-#. report additional rpm output in finish
-#. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
-msgid "Additional rpm output"
-msgstr "Επιπρόσθετο αποτέλεσμα rpm"
-
-#: zypp/target/rpm/RpmDb.cc:2374
-#, c-format, boost-format
-msgid "created backup %s"
-msgstr "δημιουργία αντιγράφου ασφαλείας %s"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
-msgid "Signature is OK"
-msgstr "Η υπογραφή είναι ΟΚ"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
-msgid "Unknown type of signature"
-msgstr "Άγνωστος τύπος υπογραφής"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
-msgid "Signature does not verify"
-msgstr "Η υπογραφή δεν μπορεί να επαληθευτεί"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
-msgid "Signature is OK, but key is not trusted"
-msgstr "Η υπογραφή είναι ΟΚ, αλλά το κλειδί δεν είναι έμπιστο"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
-msgid "Signatures public key is not available"
-msgstr "Η υπογραφές του δημόσιου κλειδιού δεν είναι διαθέσιμες"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
-msgid "File does not exist or signature can't be checked"
-msgstr "Το αρχείο δεν υπάρχει ή η υπογραφή δεν μπορεί να ελεχθεί"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2407
-msgid "File is unsigned"
-msgstr ""
-
-#: zypp/ProblemSolution.cc:114
-msgid "Following actions will be done:"
-msgstr "Οι ακόλουθες ενέργειες θα γίνουν:"
-
-#: zypp/RepoManager.cc:312
-#, boost-format
-msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr ""
-"Αδυναμία ανάγνωσης καταλόγου αποθετηρίου '%1%': Δεν έχετε δικαιώματα "
-"πρόσβασης"
-
-#. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
-#: zypp/repo/PluginServices.cc:49
-#, c-format, boost-format
-msgid "Failed to read directory '%s'"
-msgstr "Αποτυχία ανάγνωσης καταλόγου '%s'"
-
-#: zypp/RepoManager.cc:330
-#, boost-format
-msgid "Cannot read repo file '%1%': Permission denied"
-msgstr ""
-"Αδυναμία ανάγνωσης αρχείου αποθετηρίου '%1%': Δεν έχετε δικαιώματα πρόσβασης"
-
-#: zypp/RepoManager.cc:353
-msgid "Repository alias cannot start with dot."
-msgstr "Το alias του αποθετηρίου δεν μπορεί να ξεκινά από τελεία."
-
-#: zypp/RepoManager.cc:364
-msgid "Service alias cannot start with dot."
-msgstr "Το ψευδώνυμο της υπηρεσίας δεν μπορεί να ξεκινά με τελεία."
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
-#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
-#, c-format, boost-format
-msgid "Can't open file '%s' for writing."
-msgstr "Αδυναμία ανοίγματος αρχείου '%s' για εγγραφή."
-
-#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
-#. %1% = service name
-#. %2% = repository name
-#: zypp/RepoManager.cc:871
-#, boost-format
-msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr ""
-"Άγνωστη υπηρεσία '%1%': Αφαίρεση του ορφανού αποθετηρίου υπηρεσιών '%2%'"
-
-#. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1098
-msgid "Valid metadata not found at specified URL"
-msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "Δεν βρέθηκαν έγκυρα μεταδεδομένα στην καθορισμένη URL"
-msgstr[1] "Δεν βρέθηκαν έγκυρα μεταδεδομένα στις καθορισμένες URLs"
-
-#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
-#, c-format, boost-format
-msgid "Can't create %s"
-msgstr "Αδυναμία δημιουργίας %s"
-
-#: zypp/RepoManager.cc:1154
-msgid "Can't create metadata cache directory."
-msgstr "Αδυναμία δημιουργίας καταλόγου μεταδεδομένων λανθάνουσας μνήμης."
-
-#: zypp/RepoManager.cc:1300
-#, c-format, boost-format
-msgid "Building repository '%s' cache"
-msgstr "Δημιουργία λανθάνουσας μνήμης αποθετηρίου '%s'"
-
-#: zypp/RepoManager.cc:1320
-#, c-format, boost-format
-msgid "Can't create cache at %s - no writing permissions."
-msgstr ""
-"Αδυναμία δημιουργίας λανθάνουσας μνήμης στο %s - όχι δικαιώματα εγγραφής."
-
-#: zypp/RepoManager.cc:1384
-#, c-format, boost-format
-msgid "Failed to cache repo (%d)."
-msgstr "Αποτυχία αποθήκευσης στην λανθάνουσα μνήμη του αποθετηρίου (%d)."
-
-#: zypp/RepoManager.cc:1395
-msgid "Unhandled repository type"
-msgstr "Τύπος αδιαχείριστου αποθετηρίου"
-
-#. prepare exception to be thrown if the type could not be determined
-#. due to a media exception. We can't throw right away, because of some
-#. problems with proxy servers returning an incorrect error
-#. on ftp file-not-found(bnc #335906). Instead we'll check another types
-#. before throwing.
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
-#, c-format, boost-format
-msgid "Error trying to read from '%s'"
-msgstr "Σφάλμα προσπαθώντας να διαβάσει από το '%s'"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
-#, c-format, boost-format
-msgid "Unknown error reading from '%s'"
-msgstr "Άγνωστο σφάλμα διαβάζετε από '%s'"
-
-#: zypp/RepoManager.cc:1623
-#, c-format, boost-format
-msgid "Adding repository '%s'"
-msgstr "Προσθήκη αποθετηρίου '%s'"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1711
-#, c-format, boost-format
-msgid "Invalid repo file name at '%s'"
-msgstr "Μη έγκυρο όνομα αποθετηρίου αρχείου στο '%s'"
-
-#: zypp/RepoManager.cc:1752
-#, c-format, boost-format
-msgid "Removing repository '%s'"
-msgstr "Απομάκρυνση αποθετηρίου '%s'"
-
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
-msgid "Can't figure out where the repo is stored."
-msgstr "Δεν είναι κατανοητό που είναι αποθηκευμένο το αποθετήριο."
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
-#, c-format, boost-format
-msgid "Can't delete '%s'"
-msgstr "Αδυναμία διαγραφής '%s'"
-
-#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
-msgid "Can't figure out where the service is stored."
-msgstr "Δεν είναι κατανοητό που είναι αποθηκευμένη η υπηρεσία."
-
-#: zypp/url/UrlBase.cc:154
-#, c-format, boost-format
-msgid "Url scheme does not allow a %s"
-msgstr "Το Url σχήμα δεν επιτρέπει ένα %s"
-
-#: zypp/url/UrlBase.cc:173
-#, c-format, boost-format
-msgid "Invalid %s component '%s'"
-msgstr "Λανθασμένο %s συστατικό '%s'"
-
-#: zypp/url/UrlBase.cc:180
-#, c-format, boost-format
-msgid "Invalid %s component"
-msgstr "Λανθασμένο %s συστατικό"
-
-#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
-msgid "Query string parsing not supported for this URL"
-msgstr "Η ανάλυση γραμμής αναζήτησης δεν υποστηρίζεται από αυτό το URL"
-
-#: zypp/url/UrlBase.cc:824
-msgid "Url scheme is a required component"
-msgstr "Το σχήμα Url είναι ένα απαιτούμενο συστατικό"
-
-#: zypp/url/UrlBase.cc:830
-#, c-format, boost-format
-msgid "Invalid Url scheme '%s'"
-msgstr "Λανθασμένο σχήμα Url '%s'"
-
-#: zypp/url/UrlBase.cc:949
-msgid "Url scheme does not allow a username"
-msgstr "Το σχήμα Url δεν επιτρέπει όνομα χρήστη"
-
-#: zypp/url/UrlBase.cc:983
-msgid "Url scheme does not allow a password"
-msgstr "Το σχήμα Url δεν επιτρέπει συνθηματικό"
-
-#: zypp/url/UrlBase.cc:1012
-msgid "Url scheme requires a host component"
-msgstr "Το σχήμα Url απαιτεί ένα συστατικό διακομιστή"
-
-#: zypp/url/UrlBase.cc:1022
-msgid "Url scheme does not allow a host component"
-msgstr "Το σχήμα Url δεν επιτρέπει ένα συστατικό διακομιστή"
-
-#: zypp/url/UrlBase.cc:1049
-#, c-format, boost-format
-msgid "Invalid host component '%s'"
-msgstr "Λανθασμένο συστατικό διακομιστή '%s'"
-
-#: zypp/url/UrlBase.cc:1070
-msgid "Url scheme does not allow a port"
-msgstr "Το σχήμα Url δεν σας επιτρέπει μια θύρα"
-
-#: zypp/url/UrlBase.cc:1081
-#, c-format, boost-format
-msgid "Invalid port component '%s'"
-msgstr "Λανθασμένο συστατικό θύρας '%s'"
-
-#: zypp/url/UrlBase.cc:1098
-msgid "Url scheme requires path name"
-msgstr "Το σχήμα Url απαιτεί όνομα διαδρομής"
-
-#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
-msgid "Relative path not allowed if authority exists"
-msgstr "Σχετική διαδρομή δεν επιτρέπεται εαν υπάρχει αρχή"
-
-#: zypp/url/UrlUtils.cc:111
-msgid "Encoded string contains a NUL byte"
-msgstr "Κωδικοποιημένο αλφαριθμητικό περιέχει ενα NUL byte"
-
-#: zypp/url/UrlUtils.cc:173
-msgid "Invalid parameter array split separator character"
-msgstr "Λανθασμένος διαχωριστικός χαρακτήρας διαχωρισμού παραμέτρου σειράς"
-
-#: zypp/url/UrlUtils.cc:213
-msgid "Invalid parameter map split separator character"
-msgstr "Λανθασμένος διαχωριστικός χαρακτήρας διαχωρισμού παραμέτρου χάρτη"
-
-#: zypp/url/UrlUtils.cc:283
-msgid "Invalid parameter array join separator character"
-msgstr "Λανθασμένος διαχωριστικός χαρακτήρας ένωσης σειράς"
-
-#: zypp/ExternalProgram.cc:258
-#, c-format, boost-format
-msgid "Can't open pty (%s)."
-msgstr "Αδυναμία ανοίγματος pty (%s)."
-
-#: zypp/ExternalProgram.cc:269
-#, c-format, boost-format
-msgid "Can't open pipe (%s)."
-msgstr "Αδυναμία ανοίγματος διασωλήνωσης (%s)."
-
-#: zypp/ExternalProgram.cc:350
-#, c-format, boost-format
-msgid "Can't chroot to '%s' (%s)."
-msgstr "Δεν μπορεί να κάνει chroot σε '%s' (%s)."
-
-#: zypp/ExternalProgram.cc:360
-#, c-format, boost-format
-msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr ""
-"Αδυναμία αλλαγής καταλόγου στο '%s' μέσα σε περιβάλλον αλλαγμένου καταλόγου "
-"ρίζας '%s' (%s)."
-
-#: zypp/ExternalProgram.cc:361
-#, c-format, boost-format
-msgid "Can't chdir to '%s' (%s)."
-msgstr "Αδυναμία αλλαγής καταλόγου στο '%s' (%s)."
-
-#. don't want to get here
-#: zypp/ExternalProgram.cc:373
-#, c-format, boost-format
-msgid "Can't exec '%s' (%s)."
-msgstr "Μη δυνατή εκτέλεση του '%s' (%s)."
-
-#: zypp/ExternalProgram.cc:381
-#, c-format, boost-format
-msgid "Can't fork (%s)."
-msgstr "Αδυναμία διακλάδωσης (%s)."
-
-#: zypp/ExternalProgram.cc:507
-#, c-format, boost-format
-msgid "Command exited with status %d."
-msgstr "Η εντολή τερματίστηκε με κατάσταση %d."
-
-#: zypp/ExternalProgram.cc:527
-#, c-format, boost-format
-msgid "Command was killed by signal %d (%s)."
-msgstr "Η εντολή τερματίστηκε από το σήμα %d (%s)."
-
-#: zypp/ExternalProgram.cc:532
-msgid "Command exited with unknown error."
-msgstr "Η εντολή τερματίστηκε με άγνωστο σφάλμα."
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:60
-#, fuzzy
-msgid "does not expire"
-msgstr "(δεν λήγει)"
-
-#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:65
-#, boost-format
-msgid "expired: %1%"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:70
-#, boost-format
-msgid "expires: %1%"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:79
-msgid "(does not expire)"
-msgstr "(δεν λήγει)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:88
-msgid "(EXPIRED)"
-msgstr "(ΕΛΗΞΕ)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:92
-msgid "(expires within 24h)"
-msgstr "(λήγει μέσα σε 24ω)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:96
-#, c-format, boost-format
-msgid "(expires in %d day)"
-msgid_plural "(expires in %d days)"
-msgstr[0] "(λήγει σε %d ημέρα)"
-msgstr[1] "(λήγει σε %d ημέρες)"
-
-#: zypp/VendorSupportOptions.cc:14
-msgid "unknown"
-msgstr "άγνωστη"
-
-#: zypp/VendorSupportOptions.cc:17
-msgid "unsupported"
-msgstr "μη υποστηριζόμενο"
-
-#: zypp/VendorSupportOptions.cc:20
-msgid "Level 1"
-msgstr "Επίπεδο 1"
-
-#: zypp/VendorSupportOptions.cc:23
-msgid "Level 2"
-msgstr "Επίπεδο 2"
-
-#: zypp/VendorSupportOptions.cc:26
-msgid "Level 3"
-msgstr "Επίπεδο 3"
-
-#: zypp/VendorSupportOptions.cc:29
-msgid "Additional Customer Contract Necessary"
-msgstr "Συμπληρωματική Σύμβαση Πελάτη είναι Απαραίτητη"
-
-#: zypp/VendorSupportOptions.cc:31
-msgid "invalid"
-msgstr "μη έγκυρο"
-
-#: zypp/VendorSupportOptions.cc:39
-msgid "The level of support is unspecified"
-msgstr "Το επίπεδο υποστήριξης είναι απροσδιόριστο"
-
-#: zypp/VendorSupportOptions.cc:42
-msgid "The vendor does not provide support."
-msgstr "Ο κατασκευαστής δεν παρέχει υποστήριξη."
-
-#: zypp/VendorSupportOptions.cc:45
-msgid ""
-"Problem determination, which means technical support designed to provide "
-"compatibility information, installation assistance, usage support, on-going "
-"maintenance and basic troubleshooting. Level 1 Support is not intended to "
-"correct product defect errors."
-msgstr ""
-"Προσδιορισμός προβλήματος, που σημαίνει πως η τεχνική υποστήριξη είναι "
-"σχεδιασμένη για να παρέχει πληροφορίες συμβατότητας, βοήθεια εγκατάστασης, "
-"υποστήριξη χρήσης, συνεχόμενη συντήρηση και βασική λύση προβλημάτων. Η "
-"υποστήριξη επιπέδου 1 δεν προορίζεται για να διορθώνει σφάλματα "
-"ελαττωματικών προϊόντων."
-
-#: zypp/VendorSupportOptions.cc:48
-msgid ""
-"Problem isolation, which means technical support designed to duplicate "
-"customer problems, isolate problem area and provide resolution for problems "
-"not resolved by Level 1 Support."
-msgstr ""
-"Απομόνωση προβλήματος, που σημαίνει πως η τεχνική υποστήριξη είναι "
-"σχεδιασμένη για να αναπαράγει τα προβλήματα των πελατών, να απομονώνει την "
-"περιοχή του προβλήματος και να παρέχει λύση για προβλήματα που δεν λύνονται "
-"με την υποστήριξη Επιπέδου 1."
-
-#: zypp/VendorSupportOptions.cc:51
-msgid ""
-"Problem resolution, which means technical support designed to resolve "
-"complex problems by engaging engineering in resolution of product defects "
-"which have been identified by Level 2 Support."
-msgstr ""
-"Επίλυση προβλήματος, που σημαίνει ότι η τεχνική υποστήριξη είναι σχεδιασμένη "
-"για να επιλύει πολύπλοκα προβλήματα χρησιμοποιώντας μηχανική στην επίλυση "
-"σφαλμάτων υλικού που έχουν επιβεβαιωθεί από την υποστήριξη Επιπέδου 2."
-
-#: zypp/VendorSupportOptions.cc:54
-msgid "An additional customer contract is necessary for getting support."
-msgstr ""
-"Μια συμπληρωματική σύμβαση πελάτη είναι απαραίτητη για  λήψη υποστήριξης."
-
-#: zypp/VendorSupportOptions.cc:56
-msgid "Unknown support option. Description not available"
-msgstr "Άγνωστη επιλογή υποστήριξης.Δεν υπάρχει διαθέσιμη περιγραφή"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -1918,6 +1273,109 @@ msgstr "Ζάμπια"
 #: zypp/CountryCode.cc:403
 msgid "Zimbabwe"
 msgstr "Ζιμπάμπουε"
+
+#: zypp/Dep.cc:96
+msgid "Provides"
+msgstr "Παρέχει"
+
+#: zypp/Dep.cc:97
+msgid "Prerequires"
+msgstr "Προαπαιτεί"
+
+#: zypp/Dep.cc:98
+msgid "Requires"
+msgstr "Απαιτεί"
+
+#: zypp/Dep.cc:99
+msgid "Conflicts"
+msgstr "Συγκρούσεις"
+
+#: zypp/Dep.cc:100
+msgid "Obsoletes"
+msgstr "Απαρχαιώνει"
+
+#: zypp/Dep.cc:101
+msgid "Recommends"
+msgstr "Συνιστά"
+
+#: zypp/Dep.cc:102
+msgid "Suggests"
+msgstr "Προτείνει"
+
+#: zypp/Dep.cc:103
+msgid "Enhances"
+msgstr "Ενισχύει"
+
+#: zypp/Dep.cc:104
+msgid "Supplements"
+msgstr "Συμπληρώνει"
+
+#: zypp/ExternalProgram.cc:258
+#, c-format, boost-format
+msgid "Can't open pty (%s)."
+msgstr "Αδυναμία ανοίγματος pty (%s)."
+
+#: zypp/ExternalProgram.cc:269
+#, c-format, boost-format
+msgid "Can't open pipe (%s)."
+msgstr "Αδυναμία ανοίγματος διασωλήνωσης (%s)."
+
+#: zypp/ExternalProgram.cc:350
+#, c-format, boost-format
+msgid "Can't chroot to '%s' (%s)."
+msgstr "Δεν μπορεί να κάνει chroot σε '%s' (%s)."
+
+#: zypp/ExternalProgram.cc:360
+#, c-format, boost-format
+msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
+msgstr ""
+"Αδυναμία αλλαγής καταλόγου στο '%s' μέσα σε περιβάλλον αλλαγμένου καταλόγου "
+"ρίζας '%s' (%s)."
+
+#: zypp/ExternalProgram.cc:361
+#, c-format, boost-format
+msgid "Can't chdir to '%s' (%s)."
+msgstr "Αδυναμία αλλαγής καταλόγου στο '%s' (%s)."
+
+#. don't want to get here
+#: zypp/ExternalProgram.cc:373
+#, c-format, boost-format
+msgid "Can't exec '%s' (%s)."
+msgstr "Μη δυνατή εκτέλεση του '%s' (%s)."
+
+#: zypp/ExternalProgram.cc:381
+#, c-format, boost-format
+msgid "Can't fork (%s)."
+msgstr "Αδυναμία διακλάδωσης (%s)."
+
+#: zypp/ExternalProgram.cc:507
+#, c-format, boost-format
+msgid "Command exited with status %d."
+msgstr "Η εντολή τερματίστηκε με κατάσταση %d."
+
+#: zypp/ExternalProgram.cc:527
+#, c-format, boost-format
+msgid "Command was killed by signal %d (%s)."
+msgstr "Η εντολή τερματίστηκε από το σήμα %d (%s)."
+
+#: zypp/ExternalProgram.cc:532
+msgid "Command exited with unknown error."
+msgstr "Η εντολή τερματίστηκε με άγνωστο σφάλμα."
+
+#. TranslatorExplanation first %s is key name, second is keyring name
+#: zypp/KeyRing.cc:520
+#, c-format, boost-format
+msgid "Tried to import not existent key %s into keyring %s"
+msgstr "Προσπάθεια εισαγωγής μη υπάρχοντος κλειδιού %s στην κλειδοθήκη %s"
+
+#: zypp/KeyRing.cc:564
+msgid "Failed to delete key."
+msgstr "Αποτυχία της διαγραφής κλειδιού."
+
+#: zypp/KeyRing.cc:572
+#, c-format, boost-format
+msgid "Signature file %s not found"
+msgstr "Το αρχείο υπογραφής %s δε βρέθηκε"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -4276,33 +3734,503 @@ msgstr "Ζουλού"
 msgid "Zuni"
 msgstr "Zuni"
 
-#. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:512
+#: zypp/ProblemSolution.cc:114
+msgid "Following actions will be done:"
+msgstr "Οι ακόλουθες ενέργειες θα γίνουν:"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:60
+#, fuzzy
+msgid "does not expire"
+msgstr "(δεν λήγει)"
+
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
+msgid "(does not expire)"
+msgstr "(δεν λήγει)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:88
+msgid "(EXPIRED)"
+msgstr "(ΕΛΗΞΕ)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:92
+msgid "(expires within 24h)"
+msgstr "(λήγει μέσα σε 24ω)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:96
 #, c-format, boost-format
-msgid "Tried to import not existent key %s into keyring %s"
-msgstr "Προσπάθεια εισαγωγής μη υπάρχοντος κλειδιού %s στην κλειδοθήκη %s"
+msgid "(expires in %d day)"
+msgid_plural "(expires in %d days)"
+msgstr[0] "(λήγει σε %d ημέρα)"
+msgstr[1] "(λήγει σε %d ημέρες)"
 
-#: zypp/KeyRing.cc:556
-msgid "Failed to delete key."
-msgstr "Αποτυχία της διαγραφής κλειδιού."
+#: zypp/RepoManager.cc:312
+#, boost-format
+msgid "Cannot read repo directory '%1%': Permission denied"
+msgstr ""
+"Αδυναμία ανάγνωσης καταλόγου αποθετηρίου '%1%': Δεν έχετε δικαιώματα "
+"πρόσβασης"
 
-#: zypp/KeyRing.cc:565
+#. TranslatorExplanation '%s' is a pathname
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
+#: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
-msgid "Signature file %s not found"
-msgstr "Το αρχείο υπογραφής %s δε βρέθηκε"
+msgid "Failed to read directory '%s'"
+msgstr "Αποτυχία ανάγνωσης καταλόγου '%s'"
 
-#: zypp/repo/RepoProvideFile.cc:259
+#: zypp/RepoManager.cc:330
+#, boost-format
+msgid "Cannot read repo file '%1%': Permission denied"
+msgstr ""
+"Αδυναμία ανάγνωσης αρχείου αποθετηρίου '%1%': Δεν έχετε δικαιώματα πρόσβασης"
+
+#: zypp/RepoManager.cc:353
+msgid "Repository alias cannot start with dot."
+msgstr "Το alias του αποθετηρίου δεν μπορεί να ξεκινά από τελεία."
+
+#: zypp/RepoManager.cc:364
+msgid "Service alias cannot start with dot."
+msgstr "Το ψευδώνυμο της υπηρεσίας δεν μπορεί να ξεκινά με τελεία."
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
+#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
 #, c-format, boost-format
-msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Αδυναμία παροχής αρχείου '%s' από το αποθετήριο '%s'"
+msgid "Can't open file '%s' for writing."
+msgstr "Αδυναμία ανοίγματος αρχείου '%s' για εγγραφή."
 
-#: zypp/repo/RepoProvideFile.cc:265
-msgid "No url in repository."
-msgstr "Δεν υπάρχει το URL στο αποθετήριο."
+#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
+#. %1% = service name
+#. %2% = repository name
+#: zypp/RepoManager.cc:871
+#, boost-format
+msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
+msgstr ""
+"Άγνωστη υπηρεσία '%1%': Αφαίρεση του ορφανού αποθετηρίου υπηρεσιών '%2%'"
 
-#: zypp/repo/RepoException.cc:129
-msgid "Service plugin does not support changing an attribute."
-msgstr "Το πρόσθετο της υπηρεσίας σεν υποστηρίζει την αλλαγή μιας ιδιότητας."
+#. we will throw this later if no URL checks out fine
+#: zypp/RepoManager.cc:1098
+msgid "Valid metadata not found at specified URL"
+msgid_plural "Valid metadata not found at specified URLs"
+msgstr[0] "Δεν βρέθηκαν έγκυρα μεταδεδομένα στην καθορισμένη URL"
+msgstr[1] "Δεν βρέθηκαν έγκυρα μεταδεδομένα στις καθορισμένες URLs"
+
+#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
+#, c-format, boost-format
+msgid "Can't create %s"
+msgstr "Αδυναμία δημιουργίας %s"
+
+#: zypp/RepoManager.cc:1154
+msgid "Can't create metadata cache directory."
+msgstr "Αδυναμία δημιουργίας καταλόγου μεταδεδομένων λανθάνουσας μνήμης."
+
+#: zypp/RepoManager.cc:1300
+#, c-format, boost-format
+msgid "Building repository '%s' cache"
+msgstr "Δημιουργία λανθάνουσας μνήμης αποθετηρίου '%s'"
+
+#: zypp/RepoManager.cc:1320
+#, c-format, boost-format
+msgid "Can't create cache at %s - no writing permissions."
+msgstr ""
+"Αδυναμία δημιουργίας λανθάνουσας μνήμης στο %s - όχι δικαιώματα εγγραφής."
+
+#: zypp/RepoManager.cc:1384
+#, c-format, boost-format
+msgid "Failed to cache repo (%d)."
+msgstr "Αποτυχία αποθήκευσης στην λανθάνουσα μνήμη του αποθετηρίου (%d)."
+
+#: zypp/RepoManager.cc:1395
+msgid "Unhandled repository type"
+msgstr "Τύπος αδιαχείριστου αποθετηρίου"
+
+#. prepare exception to be thrown if the type could not be determined
+#. due to a media exception. We can't throw right away, because of some
+#. problems with proxy servers returning an incorrect error
+#. on ftp file-not-found(bnc #335906). Instead we'll check another types
+#. before throwing.
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
+#, c-format, boost-format
+msgid "Error trying to read from '%s'"
+msgstr "Σφάλμα προσπαθώντας να διαβάσει από το '%s'"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
+#, c-format, boost-format
+msgid "Unknown error reading from '%s'"
+msgstr "Άγνωστο σφάλμα διαβάζετε από '%s'"
+
+#: zypp/RepoManager.cc:1623
+#, c-format, boost-format
+msgid "Adding repository '%s'"
+msgstr "Προσθήκη αποθετηρίου '%s'"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1711
+#, c-format, boost-format
+msgid "Invalid repo file name at '%s'"
+msgstr "Μη έγκυρο όνομα αποθετηρίου αρχείου στο '%s'"
+
+#: zypp/RepoManager.cc:1752
+#, c-format, boost-format
+msgid "Removing repository '%s'"
+msgstr "Απομάκρυνση αποθετηρίου '%s'"
+
+#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
+msgid "Can't figure out where the repo is stored."
+msgstr "Δεν είναι κατανοητό που είναι αποθηκευμένο το αποθετήριο."
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
+#, c-format, boost-format
+msgid "Can't delete '%s'"
+msgstr "Αδυναμία διαγραφής '%s'"
+
+#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
+msgid "Can't figure out where the service is stored."
+msgstr "Δεν είναι κατανοητό που είναι αποθηκευμένη η υπηρεσία."
+
+#: zypp/Url.cc:114
+msgid "Invalid LDAP URL query string"
+msgstr "Λανθασμένη σειρά αναζήτησης LDAP URL"
+
+#: zypp/Url.cc:153
+#, c-format, boost-format
+msgid "Invalid LDAP URL query parameter '%s'"
+msgstr "Λανθασμένη παράμετρος αναζήτησης LDAP URL '%s'"
+
+#: zypp/Url.cc:300
+msgid "Unable to clone Url object"
+msgstr "Αδυναμία κλωνοποίησης αντικειμένου Url"
+
+#: zypp/Url.cc:313
+msgid "Invalid empty Url object reference"
+msgstr "Λανθασμένη αναφορά αντικειμένου κενού Url"
+
+#: zypp/Url.cc:326 zypp/Url.cc:340
+msgid "Unable to parse Url components"
+msgstr "Αδυναμία ανάλυσης συστατικών Url"
+
+#: zypp/VendorSupportOptions.cc:14
+msgid "unknown"
+msgstr "άγνωστη"
+
+#: zypp/VendorSupportOptions.cc:17
+msgid "unsupported"
+msgstr "μη υποστηριζόμενο"
+
+#: zypp/VendorSupportOptions.cc:20
+msgid "Level 1"
+msgstr "Επίπεδο 1"
+
+#: zypp/VendorSupportOptions.cc:23
+msgid "Level 2"
+msgstr "Επίπεδο 2"
+
+#: zypp/VendorSupportOptions.cc:26
+msgid "Level 3"
+msgstr "Επίπεδο 3"
+
+#: zypp/VendorSupportOptions.cc:29
+msgid "Additional Customer Contract Necessary"
+msgstr "Συμπληρωματική Σύμβαση Πελάτη είναι Απαραίτητη"
+
+#: zypp/VendorSupportOptions.cc:31
+msgid "invalid"
+msgstr "μη έγκυρο"
+
+#: zypp/VendorSupportOptions.cc:39
+msgid "The level of support is unspecified"
+msgstr "Το επίπεδο υποστήριξης είναι απροσδιόριστο"
+
+#: zypp/VendorSupportOptions.cc:42
+msgid "The vendor does not provide support."
+msgstr "Ο κατασκευαστής δεν παρέχει υποστήριξη."
+
+#: zypp/VendorSupportOptions.cc:45
+msgid ""
+"Problem determination, which means technical support designed to provide "
+"compatibility information, installation assistance, usage support, on-going "
+"maintenance and basic troubleshooting. Level 1 Support is not intended to "
+"correct product defect errors."
+msgstr ""
+"Προσδιορισμός προβλήματος, που σημαίνει πως η τεχνική υποστήριξη είναι "
+"σχεδιασμένη για να παρέχει πληροφορίες συμβατότητας, βοήθεια εγκατάστασης, "
+"υποστήριξη χρήσης, συνεχόμενη συντήρηση και βασική λύση προβλημάτων. Η "
+"υποστήριξη επιπέδου 1 δεν προορίζεται για να διορθώνει σφάλματα "
+"ελαττωματικών προϊόντων."
+
+#: zypp/VendorSupportOptions.cc:48
+msgid ""
+"Problem isolation, which means technical support designed to duplicate "
+"customer problems, isolate problem area and provide resolution for problems "
+"not resolved by Level 1 Support."
+msgstr ""
+"Απομόνωση προβλήματος, που σημαίνει πως η τεχνική υποστήριξη είναι "
+"σχεδιασμένη για να αναπαράγει τα προβλήματα των πελατών, να απομονώνει την "
+"περιοχή του προβλήματος και να παρέχει λύση για προβλήματα που δεν λύνονται "
+"με την υποστήριξη Επιπέδου 1."
+
+#: zypp/VendorSupportOptions.cc:51
+msgid ""
+"Problem resolution, which means technical support designed to resolve "
+"complex problems by engaging engineering in resolution of product defects "
+"which have been identified by Level 2 Support."
+msgstr ""
+"Επίλυση προβλήματος, που σημαίνει ότι η τεχνική υποστήριξη είναι σχεδιασμένη "
+"για να επιλύει πολύπλοκα προβλήματα χρησιμοποιώντας μηχανική στην επίλυση "
+"σφαλμάτων υλικού που έχουν επιβεβαιωθεί από την υποστήριξη Επιπέδου 2."
+
+#: zypp/VendorSupportOptions.cc:54
+msgid "An additional customer contract is necessary for getting support."
+msgstr ""
+"Μια συμπληρωματική σύμβαση πελάτη είναι απαραίτητη για  λήψη υποστήριξης."
+
+#: zypp/VendorSupportOptions.cc:56
+msgid "Unknown support option. Description not available"
+msgstr "Άγνωστη επιλογή υποστήριξης.Δεν υπάρχει διαθέσιμη περιγραφή"
+
+#: zypp/ZYppFactory.cc:399
+#, c-format, boost-format
+msgid ""
+"System management is locked by the application with pid %d (%s).\n"
+"Close this application before trying again."
+msgstr ""
+"Η διαχείριση συστήματος έχει κλειδωθεί από την εφαρμογή με pid %d (%s).\n"
+"Κλείστε την εφαρμογή πριν ξαναπροσπαθήσετε."
+
+#. TranslatorExplanation followed by the list of error messages that lead to this exception
+#: zypp/base/Exception.cc:134
+msgid "History:"
+msgstr "Ιστορικό:"
+
+#: zypp/base/InterProcessMutex.cc:83
+#, c-format, boost-format
+msgid "Can't open lock file: %s"
+msgstr "Αδυναμία ανοίγματος αρχείου κλειδώματος: %s"
+
+#: zypp/base/InterProcessMutex.cc:143
+msgid "This action is being run by another program already."
+msgstr "Αυτή η ενέργεια εκτελείται ήδη από άλλο πρόγραμμα."
+
+#: zypp/base/StrMatcher.cc:152
+#, c-format, boost-format
+msgid "Unknown match mode '%s'"
+msgstr "Άγνωστη λειτουργία ταιριάσματος  '%s'"
+
+#: zypp/base/StrMatcher.cc:153
+#, c-format, boost-format
+msgid "Unknown match mode '%s' for pattern '%s'"
+msgstr "Άγνωστη λειτουργία ταιριάσματος '%s' για το μοτίβο '%s'"
+
+#: zypp/base/StrMatcher.cc:157
+#, c-format, boost-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr "Μή έγκυρη κανονική έκφραση '%s': η εντολή regcomp επέστρεψε %d"
+
+#: zypp/base/StrMatcher.cc:158
+#, c-format, boost-format
+msgid "Invalid regular expression '%s'"
+msgstr "Μη  έγκυρη κανονική έκφραση '%s'"
+
+#. !\todo add comma to the message for the next release
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
+#, c-format, boost-format
+msgid "Authentication required for '%s'"
+msgstr "Απαιτείται πιστοποίηση για '%s'"
+
+#: zypp/media/MediaCurl.cc:1109
+msgid ""
+"Visit the Novell Customer Center to check whether your registration is valid "
+"and has not expired."
+msgstr ""
+"Επισκεπτείται  το Κέντρο Πελατών της Novell για να ελέγξετε έαν η εγγραφής "
+"είναι έγκυρη και δεν έχει λήξει."
+
+#: zypp/media/MediaException.cc:31
+#, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr "Αδυναμία προσάρτησης %s στο %s"
+
+#: zypp/media/MediaException.cc:41
+#, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "Αποτυχία από-προσάρτησης %s"
+
+#: zypp/media/MediaException.cc:46
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr "Εσφαλμένο όνομα αρχείου: %s"
+
+#: zypp/media/MediaException.cc:51
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr "Το μέσο δεν ανοίχτηκε κατά την προσπάθεια εκτέλεσης της δράσης '%s'."
+
+#: zypp/media/MediaException.cc:56
+#, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
+msgstr "Το αρχείο '%s' δεν βρέθηκε στο μέσο '%s'"
+
+#: zypp/media/MediaException.cc:61
+#, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "Αδυναμία εγγραφής αρχείο '%s'."
+
+#: zypp/media/MediaException.cc:66
+msgid "Medium not attached"
+msgstr "Μέσο όχι συνδεδεμένο"
+
+#: zypp/media/MediaException.cc:71
+msgid "Bad media attach point"
+msgstr "Εσφαλμένο σημείο σύνδεσης μέσου"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:77
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr "Η αρχικοποίηση λήψης (curl) απέτυχε για '%s'"
+
+#: zypp/media/MediaException.cc:82
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr "Εξαίρεση '%s' συστήματος στο μέσο '%s'."
+
+#: zypp/media/MediaException.cc:87
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr "Η διαδρομή '%s' στο μέσο '%s' δεν είναι αρχείο."
+
+#: zypp/media/MediaException.cc:92
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "Η διαδρομή '%s' στο μέσο '%s' δεν είναι κατάλογος."
+
+#: zypp/media/MediaException.cc:99
+msgid "Malformed URI"
+msgstr "Κακά-διατυπωμένο URI"
+
+#: zypp/media/MediaException.cc:109
+msgid "Empty host name in URI"
+msgstr "Κενό όνομα φιλοξενιας στην  URI"
+
+#: zypp/media/MediaException.cc:114
+msgid "Empty filesystem in URI"
+msgstr "Κενό σύστημα αρχείων στην URI"
+
+#: zypp/media/MediaException.cc:119
+msgid "Empty destination in URI"
+msgstr "Κενός προορισμός στην URI"
+
+#: zypp/media/MediaException.cc:124
+#, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "Μη υποστηριζόμενο URl σχήμα στο '%s'."
+
+#: zypp/media/MediaException.cc:129
+msgid "Operation not supported by medium"
+msgstr "Η λειτουργία δεν υποστηρίζεται από το μέσο"
+
+#: zypp/media/MediaException.cc:136
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"Σφάλμα λήψεως (curl) για '%s':\n"
+"Κωδικός σφάλματος: %s\n"
+"Μήνυμα λάθους: %s\n"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:144
+#, c-format, boost-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr ""
+"Σφάλμα προκλήθηκε κατά την διάρκεια ρύθμισης των ρυθμίσεων λήψεων (curl) για "
+"'%s':"
+
+#: zypp/media/MediaException.cc:151
+#, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr "Η πηγή του πολυμέσου '%s' δεν περιέχει το επιθυμητό μέσο"
+
+#: zypp/media/MediaException.cc:156
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr "Το μέσο '%s' χρησιμοποιείτε από άλλο στιγμιότυπο"
+
+#: zypp/media/MediaException.cc:162
+msgid "Cannot eject any media"
+msgstr "Αδυναμία αποβολής κάποιου μέσου"
+
+#: zypp/media/MediaException.cc:164
+#, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr "Αδυναμία αποβολής μέσου '%s'"
+
+#: zypp/media/MediaException.cc:179
+#, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "Η άδεια για πρόσβαση στο '%s' απαγορεύτηκε."
+
+#: zypp/media/MediaException.cc:187
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr "Το χρονικό όριο εξαντλήθηκε όταν έγινε πρόσβαση '%s'."
+
+#: zypp/media/MediaException.cc:195
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr "Η τοποθεσία '%s' δεν είναι προσωρινά προσβάσιμη."
+
+#: zypp/media/MediaException.cc:203
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr ""
+" πρόβλημα πιστοποιητικού SSL, επιβεβαιώστε ότι το πιστοποιητικό της CA  "
+"είναι εντάξει για '%s'."
+
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
+#: zypp/media/MediaUserAuth.cc:136
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr "Μη υποστηριζόμενη μέθοδος πιστοποίησης HTTP '%s'"
+
+#: zypp/misc/CheckAccessDeleted.cc:283
+msgid "Please install package 'lsof' first."
+msgstr "Παρακαλώ εγκαταστήστε πρώτα το πακέτο 'lsof'."
+
+#: zypp/parser/RepoindexFileReader.cc:197
+#, c-format, boost-format
+msgid "Required attribute '%s' is missing."
+msgstr "Το απαιτούμενο χαρακτηριστικό '%s' λείπει."
+
+#: zypp/parser/RepoindexFileReader.cc:209
+#, c-format, boost-format
+msgid "One or both of '%s' or '%s' attributes is required."
+msgstr "Μία ή και οι δύο ιδιότητες των '%s' ή '%s' χρειάζονται."
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4332,14 +4260,178 @@ msgstr "Έλεγχος applydeltarpm απέτυχε."
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm απέτυχε."
 
-#: zypp/ZYppFactory.cc:399
+#: zypp/repo/RepoException.cc:129
+msgid "Service plugin does not support changing an attribute."
+msgstr "Το πρόσθετο της υπηρεσίας σεν υποστηρίζει την αλλαγή μιας ιδιότητας."
+
+#: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
+msgid "Can't provide file '%s' from repository '%s'"
+msgstr "Αδυναμία παροχής αρχείου '%s' από το αποθετήριο '%s'"
+
+#: zypp/repo/RepoProvideFile.cc:265
+msgid "No url in repository."
+msgstr "Δεν υπάρχει το URL στο αποθετήριο."
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:34
+#, boost-format
 msgid ""
-"System management is locked by the application with pid %d (%s).\n"
-"Close this application before trying again."
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
 msgstr ""
-"Η διαχείριση συστήματος έχει κλειδωθεί από την εφαρμογή με pid %d (%s).\n"
-"Κλείστε την εφαρμογή πριν ξαναπροσπαθήσετε."
+"Το αρχείο %1%\n"
+"  από το πακέτο\n"
+"     %2%\n"
+"  συγκρούεται με το αρχείο από το πακέτο\n"
+"     %3%"
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:40
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+"Το αρχείο %1%\n"
+"  από το πακέτο\n"
+"     %2%\n"
+"  συγκρούεται με το αρχείο από την εγκατάσταση του\n"
+"     %3%"
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:47
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+"Το αρχείο %1%\n"
+"  από την εγκατάσταση του\n"
+"     %2%\n"
+"  συγκρούεται με το αρχείο από το πακέτο\n"
+"     %3%"
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:53
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+"Το αρχείο %1%\n"
+"  από την εγκατάσταση του\n"
+"     %2%\n"
+"  συγκρούεται με το αρχείο από την εγκατάσταση του\n"
+"     %3%"
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
+#: zypp/sat/FileConflicts.cc:68
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+"Το αρχείο %1%\n"
+"  από το πακέτο\n"
+"     %2%\n"
+"  συγκρούεται με το αρχείο\n"
+"     %3%\n"
+"  από το πακέτο\n"
+"     %4%"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:76
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+"Το αρχείο %1%\n"
+"  από το πακέτο\n"
+"     %2%\n"
+"  συγκρούεται με το αρχείο\n"
+"     %3%\n"
+"  από την εγκατάσταση του\n"
+"     %4%"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:85
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+"Το αρχείο %1%\n"
+"  από την εγκατάσταση του\n"
+"     %2%\n"
+"  συγκρούεται με το αρχείο\n"
+"     %3%\n"
+"  από το πακέτο\n"
+"     %4%"
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:93
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+"Το αρχείο %1%\n"
+"  από την εγκατάσταση του\n"
+"     %2%\n"
+"  συγκρούεται με το αρχείο\n"
+"     %3%\n"
+"  από την εγκατάσταση του\n"
+"     %4%"
+
+#: zypp/sat/detail/PoolImpl.cc:189
+msgid "Can not create sat-pool."
+msgstr "Αδυναμία δημιουργίας sat-pool."
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#, c-format, boost-format
+msgid "break %s by ignoring some of its dependencies"
+msgstr "σπάσιμο %s λόγω αγνόησης μερικών εξαρτήσεων του"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+msgid "generally ignore of some dependencies"
+msgstr "γενικά αγνόηση μερικών εξαρτήσεων"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
@@ -4369,8 +4461,7 @@ msgstr "κάποιο πρόβλημα εξαρτήσεων"
 msgid "nothing provides requested %s"
 msgstr "τίποτα δεν παρέχει το ζητούμενο %s"
 
-#: zypp/solver/detail/SATResolver.cc:997
-#: zypp/solver/detail/SATResolver.cc:1001
+#: zypp/solver/detail/SATResolver.cc:997 zypp/solver/detail/SATResolver.cc:1001
 msgid "Have you enabled all requested repositories?"
 msgstr "Έχετε ενεργοποιήσει όλα τα απαιτούμενα αποθετήρια;"
 
@@ -4542,382 +4633,296 @@ msgstr "αντικατάσταση του %s με το %s"
 msgid "deinstallation of %s"
 msgstr "απεγκατάσταση του %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#: zypp/target/TargetImpl.cc:310
+msgid " executed"
+msgstr " εκτελέστηκε"
+
+# %s is either BOOTP or DHCP
+#: zypp/target/TargetImpl.cc:332
+msgid " execution failed"
+msgstr " εκτέλεση απέτυχε"
+
+#. translators: We may find the same script content in files with different names.
+#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
+#. message for a log file. Preferably start translation with "%s"
+#: zypp/target/TargetImpl.cc:449
 #, c-format, boost-format
-msgid "break %s by ignoring some of its dependencies"
-msgstr "σπάσιμο %s λόγω αγνόησης μερικών εξαρτήσεων του"
+msgid "%s already executed as %s)"
+msgstr "%s έχουν ήδη εκτελεστεί ως %s)"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
-msgid "generally ignore of some dependencies"
-msgstr "γενικά αγνόηση μερικών εξαρτήσεων"
+#: zypp/target/TargetImpl.cc:459
+msgid " execution skipped while aborting"
+msgstr " η εκτέλεση σταμάτησε κατά την  ακύρωση"
 
-#: zypp/parser/RepoindexFileReader.cc:197
-#, c-format, boost-format
-msgid "Required attribute '%s' is missing."
-msgstr "Το απαιτούμενο χαρακτηριστικό '%s' λείπει."
+#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
+#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
+#: zypp/target/TargetImpl.cc:607
+msgid "Error sending update message notification."
+msgstr "Σφάλμα κατα την αποστολή μηνύματος ειδοποίησης ενημέρωσης."
 
-#: zypp/parser/RepoindexFileReader.cc:209
-#, c-format, boost-format
-msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "Μία ή και οι δύο ιδιότητες των '%s' ή '%s' χρειάζονται."
+#: zypp/target/TargetImpl.cc:658
+msgid "New update message"
+msgstr "Νέο μήνυμα αναβάθμισης"
 
-#: zypp/base/InterProcessMutex.cc:83
-#, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "Αδυναμία ανοίγματος αρχείου κλειδώματος: %s"
+#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
+#: zypp/target/TargetImpl.cc:1627
+#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
+msgid "Installation has been aborted as directed."
+msgstr "Η εγκατάσταση ακυρώθηκε όπως επιλέχθηκε."
 
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr "Αυτή η ενέργεια εκτελείται ήδη από άλλο πρόγραμμα."
-
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp/base/Exception.cc:107
-msgid "History:"
-msgstr "Ιστορικό:"
-
-#: zypp/base/StrMatcher.cc:152
-#, c-format, boost-format
-msgid "Unknown match mode '%s'"
-msgstr "Άγνωστη λειτουργία ταιριάσματος  '%s'"
-
-#: zypp/base/StrMatcher.cc:153
-#, c-format, boost-format
-msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Άγνωστη λειτουργία ταιριάσματος '%s' για το μοτίβο '%s'"
-
-#: zypp/base/StrMatcher.cc:157
-#, c-format, boost-format
-msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "Μή έγκυρη κανονική έκφραση '%s': η εντολή regcomp επέστρεψε %d"
-
-#: zypp/base/StrMatcher.cc:158
-#, c-format, boost-format
-msgid "Invalid regular expression '%s'"
-msgstr "Μη  έγκυρη κανονική έκφραση '%s'"
-
-#: zypp/misc/CheckAccessDeleted.cc:283
-msgid "Please install package 'lsof' first."
-msgstr "Παρακαλώ εγκαταστήστε πρώτα το πακέτο 'lsof'."
-
-#: zypp/media/MediaHandler.cc:370
-msgid ""
-"Create attach point: Can't find a writable directory to create an attach "
-"point"
+#: zypp/target/hal/HalContext.cc:24
+msgid "Sorry, but this version of libzypp was built without HAL support."
 msgstr ""
+"Συγγνώμη, αλλά αυτή η έκδοση του libzypp χτίστηκε χωρίς υποστήριξη HAL."
 
-#. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
-#, c-format, boost-format
-msgid "Authentication required for '%s'"
-msgstr "Απαιτείται πιστοποίηση για '%s'"
+#: zypp/target/hal/HalContext.cc:117
+msgid "HalContext not connected"
+msgstr "Το HalContext δεν είναι συνδεμένο"
 
-#: zypp/media/MediaException.cc:31
-#, c-format, boost-format
-msgid "Failed to mount %s on %s"
-msgstr "Αδυναμία προσάρτησης %s στο %s"
+#: zypp/target/hal/HalContext.cc:127
+msgid "HalDrive not initialized"
+msgstr "Το HalDrive δεν είναι αρχικοποιημένο"
 
-#: zypp/media/MediaException.cc:41
-#, c-format, boost-format
-msgid "Failed to unmount %s"
-msgstr "Αποτυχία από-προσάρτησης %s"
+#: zypp/target/hal/HalContext.cc:137
+msgid "HalVolume not initialized"
+msgstr "Το HalVolume δεν είναι αρχικοποιημένο"
 
-#: zypp/media/MediaException.cc:47
-#, c-format, boost-format
-msgid "Bad file name: %s"
-msgstr "Εσφαλμένο όνομα αρχείου: %s"
+#: zypp/target/hal/HalContext.cc:229
+msgid "Unable to create dbus connection"
+msgstr "Αδυναμία δημιουργίας σύνδεσης dbus"
 
-#: zypp/media/MediaException.cc:53
-#, c-format, boost-format
-msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Το μέσο δεν ανοίχτηκε κατά την προσπάθεια εκτέλεσης της δράσης '%s'."
+#: zypp/target/hal/HalContext.cc:242
+msgid "libhal_ctx_new: Can't create libhal context"
+msgstr "libhal_ctx_new: Αδυναμία δημιουργίας περιεχομένου libhal"
 
-#: zypp/media/MediaException.cc:60
-#, c-format, boost-format
-msgid "File '%s' not found on medium '%s'"
-msgstr "Το αρχείο '%s' δεν βρέθηκε στο μέσο '%s'"
+#: zypp/target/hal/HalContext.cc:257
+msgid "libhal_set_dbus_connection: Can't set dbus connection"
+msgstr "libhal_set_dbus_connection: Αδυναμία ορισμού σύνδεσης dbus"
 
-#: zypp/media/MediaException.cc:67
-#, c-format, boost-format
-msgid "Cannot write file '%s'."
-msgstr "Αδυναμία εγγραφής αρχείο '%s'."
-
-#: zypp/media/MediaException.cc:72
-msgid "Medium not attached"
-msgstr "Μέσο όχι συνδεδεμένο"
-
-#: zypp/media/MediaException.cc:77
-msgid "Bad media attach point"
-msgstr "Εσφαλμένο σημείο σύνδεσης μέσου"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:84
-#, c-format, boost-format
-msgid "Download (curl) initialization failed for '%s'"
-msgstr "Η αρχικοποίηση λήψης (curl) απέτυχε για '%s'"
-
-#: zypp/media/MediaException.cc:91
-#, c-format, boost-format
-msgid "System exception '%s' on medium '%s'."
-msgstr "Εξαίρεση '%s' συστήματος στο μέσο '%s'."
-
-#: zypp/media/MediaException.cc:98
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a file."
-msgstr "Η διαδρομή '%s' στο μέσο '%s' δεν είναι αρχείο."
-
-#: zypp/media/MediaException.cc:106
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "Η διαδρομή '%s' στο μέσο '%s' δεν είναι κατάλογος."
-
-#: zypp/media/MediaException.cc:115
-msgid "Malformed URI"
-msgstr "Κακά-διατυπωμένο URI"
-
-#: zypp/media/MediaException.cc:125
-msgid "Empty host name in URI"
-msgstr "Κενό όνομα φιλοξενιας στην  URI"
-
-#: zypp/media/MediaException.cc:130
-msgid "Empty filesystem in URI"
-msgstr "Κενό σύστημα αρχείων στην URI"
-
-#: zypp/media/MediaException.cc:135
-msgid "Empty destination in URI"
-msgstr "Κενός προορισμός στην URI"
-
-#: zypp/media/MediaException.cc:140
-#, c-format, boost-format
-msgid "Unsupported URI scheme in '%s'."
-msgstr "Μη υποστηριζόμενο URl σχήμα στο '%s'."
-
-#: zypp/media/MediaException.cc:145
-msgid "Operation not supported by medium"
-msgstr "Η λειτουργία δεν υποστηρίζεται από το μέσο"
-
-#: zypp/media/MediaException.cc:152
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-"Error message: %s\n"
+#: zypp/target/hal/HalContext.cc:272
+msgid "Unable to initalize HAL context -- hald not running?"
 msgstr ""
-"Σφάλμα λήψεως (curl) για '%s':\n"
-"Κωδικός σφάλματος: %s\n"
-"Μήνυμα λάθους: %s\n"
+"Αδυναμία αρχικοποίησης περιεχομένου HAL -- ο δαίμονας hald δεν εκτελείται;"
 
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:161
-#, c-format, boost-format
-msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
-"Σφάλμα προκλήθηκε κατά την διάρκεια ρύθμισης των ρυθμίσεων λήψεων (curl) για "
-"'%s':"
+#: zypp/target/hal/HalContext.cc:851
+msgid "Not a CDROM drive"
+msgstr "Όχι οδηγός CDROM"
 
-#: zypp/media/MediaException.cc:169
-#, c-format, boost-format
-msgid "Media source '%s' does not contain the desired medium"
-msgstr "Η πηγή του πολυμέσου '%s' δεν περιέχει το επιθυμητό μέσο"
+#. TranslatorExplanation after semicolon is error message
+#. TranslatorExplanation the colon is followed by an error message
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
+#: zypp/target/rpm/RpmDb.cc:2209
+msgid "RPM failed: "
+msgstr "Το RPM απέτυχε: "
 
-#: zypp/media/MediaException.cc:175
-#, c-format, boost-format
-msgid "Medium '%s' is in use by another instance"
-msgstr "Το μέσο '%s' χρησιμοποιείτε από άλλο στιγμιότυπο"
-
-#: zypp/media/MediaException.cc:182
-msgid "Cannot eject any media"
-msgstr "Αδυναμία αποβολής κάποιου μέσου"
-
-#: zypp/media/MediaException.cc:184
-#, c-format, boost-format
-msgid "Cannot eject media '%s'"
-msgstr "Αδυναμία αποβολής μέσου '%s'"
-
-#: zypp/media/MediaException.cc:199
-#, c-format, boost-format
-msgid "Permission to access '%s' denied."
-msgstr "Η άδεια για πρόσβαση στο '%s' απαγορεύτηκε."
-
-#: zypp/media/MediaException.cc:207
-#, c-format, boost-format
-msgid "Timeout exceeded when accessing '%s'."
-msgstr "Το χρονικό όριο εξαντλήθηκε όταν έγινε πρόσβαση '%s'."
-
-#: zypp/media/MediaException.cc:215
-#, c-format, boost-format
-msgid "Location '%s' is temporarily unaccessible."
-msgstr "Η τοποθεσία '%s' δεν είναι προσωρινά προσβάσιμη."
-
-#: zypp/media/MediaException.cc:223
-#, c-format, boost-format
-msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
-" πρόβλημα πιστοποιητικού SSL, επιβεβαιώστε ότι το πιστοποιητικό της CA  "
-"είναι εντάξει για '%s'."
-
-#: zypp/media/MediaUserAuth.cc:136
-#, c-format, boost-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Μη υποστηριζόμενη μέθοδος πιστοποίησης HTTP '%s'"
-
-#: zypp/media/MediaCurl.cc:1109
-msgid ""
-"Visit the Novell Customer Center to check whether your registration is valid "
-"and has not expired."
-msgstr ""
-"Επισκεπτείται  το Κέντρο Πελατών της Novell για να ελέγξετε έαν η εγγραφής "
-"είναι έγκυρη και δεν έχει λήξει."
-
-#: zypp/sat/detail/PoolImpl.cc:189
-msgid "Can not create sat-pool."
-msgstr "Αδυναμία δημιουργίας sat-pool."
-
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:34
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1119
 #, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
-"Το αρχείο %1%\n"
-"  από το πακέτο\n"
-"     %2%\n"
-"  συγκρούεται με το αρχείο από το πακέτο\n"
-"     %3%"
+msgid "Failed to import public key %1%"
+msgstr "Απέτυχε να εισάγει το δημόσιο κλειδί από το αρχείο %1%"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:40
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1189
 #, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
-"Το αρχείο %1%\n"
-"  από το πακέτο\n"
-"     %2%\n"
-"  συγκρούεται με το αρχείο από την εγκατάσταση του\n"
-"     %3%"
+msgid "Failed to remove public key %1%"
+msgstr "Αδυναμία απομάκρυνσης του δημοσίου κλειδιού %1%"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:47
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
+#: zypp/target/rpm/RpmDb.cc:1568
+msgid "Package is not signed!"
 msgstr ""
-"Το αρχείο %1%\n"
-"  από την εγκατάσταση του\n"
-"     %2%\n"
-"  συγκρούεται με το αρχείο από το πακέτο\n"
-"     %3%"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:53
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
-"Το αρχείο %1%\n"
-"  από την εγκατάσταση του\n"
-"     %2%\n"
-"  συγκρούεται με το αρχείο από την εγκατάσταση του\n"
-"     %3%"
+#. Translator: %s = name of an rpm package. A list of diffs follows
+#. this message.
+#: zypp/target/rpm/RpmDb.cc:1868
+#, c-format, boost-format
+msgid "Changed configuration files for %s:"
+msgstr "Αλλαγή αρχείων ρύθμισης για %s:"
 
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
-#: zypp/sat/FileConflicts.cc:68
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
-"Το αρχείο %1%\n"
-"  από το πακέτο\n"
-"     %2%\n"
-"  συγκρούεται με το αρχείο\n"
-"     %3%\n"
-"  από το πακέτο\n"
-"     %4%"
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2044
+#, c-format, boost-format
+msgid "rpm saved %s as %s, but it was impossible to determine the difference"
+msgstr "Το rpm αποθήκευσε το  %s ως %s αλλά ήταν αδύνατο να διαφανεί η διαφορά"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:76
-#, boost-format
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2046
+#, c-format, boost-format
 msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
+"rpm saved %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
 msgstr ""
-"Το αρχείο %1%\n"
-"  από το πακέτο\n"
-"     %2%\n"
-"  συγκρούεται με το αρχείο\n"
-"     %3%\n"
-"  από την εγκατάσταση του\n"
-"     %4%"
+"Το rpm αποθήκευσε το  %s ως %s.\n"
+"Εδώ είναι οι πρώτες 25 γραμμές της διαφοράς:\n"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:85
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
-"Το αρχείο %1%\n"
-"  από την εγκατάσταση του\n"
-"     %2%\n"
-"  συγκρούεται με το αρχείο\n"
-"     %3%\n"
-"  από το πακέτο\n"
-"     %4%"
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2049
+#, c-format, boost-format
+msgid "rpm created %s as %s, but it was impossible to determine the difference"
+msgstr "Το rpm δημιουργήσε το %s ως %s αλλά ήταν αδύνατο να διαφανεί η διαφορά"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:93
-#, boost-format
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2051
+#, c-format, boost-format
 msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
+"rpm created %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
 msgstr ""
-"Το αρχείο %1%\n"
-"  από την εγκατάσταση του\n"
-"     %2%\n"
-"  συγκρούεται με το αρχείο\n"
-"     %3%\n"
-"  από την εγκατάσταση του\n"
-"     %4%"
+"To rpm δημιουργήσε το %s ως %s.\n"
+"Εδώ είναι οι πρώτες 25 σειρές της διαφοράς:\n"
+
+#. report additional rpm output in finish
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+msgid "Additional rpm output"
+msgstr "Επιπρόσθετο αποτέλεσμα rpm"
+
+#: zypp/target/rpm/RpmDb.cc:2364
+#, c-format, boost-format
+msgid "created backup %s"
+msgstr "δημιουργία αντιγράφου ασφαλείας %s"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2385
+msgid "Signature is OK"
+msgstr "Η υπογραφή είναι ΟΚ"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2387
+msgid "Unknown type of signature"
+msgstr "Άγνωστος τύπος υπογραφής"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2389
+msgid "Signature does not verify"
+msgstr "Η υπογραφή δεν μπορεί να επαληθευτεί"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2391
+msgid "Signature is OK, but key is not trusted"
+msgstr "Η υπογραφή είναι ΟΚ, αλλά το κλειδί δεν είναι έμπιστο"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2393
+msgid "Signatures public key is not available"
+msgstr "Η υπογραφές του δημόσιου κλειδιού δεν είναι διαθέσιμες"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2395
+msgid "File does not exist or signature can't be checked"
+msgstr "Το αρχείο δεν υπάρχει ή η υπογραφή δεν μπορεί να ελεχθεί"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2397
+msgid "File is unsigned"
+msgstr ""
+
+#: zypp/thread/Mutex.cc:33
+msgid "Can't initialize mutex attributes"
+msgstr "Αδυναμία αρχικοποίησης ιδιοτήτων mutex"
+
+#: zypp/thread/Mutex.cc:40
+msgid "Can't set recursive mutex attribute"
+msgstr "Αδυναμία ορισμού παλινδρομικής ιδιότητας mutex"
+
+#: zypp/thread/Mutex.cc:47
+msgid "Can't initialize recursive mutex"
+msgstr "Αδυναμία αρχικοποίησης παλινδρομικής mutex"
+
+#: zypp/thread/Mutex.cc:77
+msgid "Can't acquire the mutex lock"
+msgstr "Αδυναμία λήψης κλειδαριάς mutex"
+
+#: zypp/thread/Mutex.cc:87
+msgid "Can't release the mutex lock"
+msgstr "Αδυναμία ελευθέρωσης κλειδαριάς mutex"
+
+#: zypp/url/UrlBase.cc:154
+#, c-format, boost-format
+msgid "Url scheme does not allow a %s"
+msgstr "Το Url σχήμα δεν επιτρέπει ένα %s"
+
+#: zypp/url/UrlBase.cc:173
+#, c-format, boost-format
+msgid "Invalid %s component '%s'"
+msgstr "Λανθασμένο %s συστατικό '%s'"
+
+#: zypp/url/UrlBase.cc:180
+#, c-format, boost-format
+msgid "Invalid %s component"
+msgstr "Λανθασμένο %s συστατικό"
+
+#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
+msgid "Query string parsing not supported for this URL"
+msgstr "Η ανάλυση γραμμής αναζήτησης δεν υποστηρίζεται από αυτό το URL"
+
+#: zypp/url/UrlBase.cc:824
+msgid "Url scheme is a required component"
+msgstr "Το σχήμα Url είναι ένα απαιτούμενο συστατικό"
+
+#: zypp/url/UrlBase.cc:830
+#, c-format, boost-format
+msgid "Invalid Url scheme '%s'"
+msgstr "Λανθασμένο σχήμα Url '%s'"
+
+#: zypp/url/UrlBase.cc:949
+msgid "Url scheme does not allow a username"
+msgstr "Το σχήμα Url δεν επιτρέπει όνομα χρήστη"
+
+#: zypp/url/UrlBase.cc:983
+msgid "Url scheme does not allow a password"
+msgstr "Το σχήμα Url δεν επιτρέπει συνθηματικό"
+
+#: zypp/url/UrlBase.cc:1012
+msgid "Url scheme requires a host component"
+msgstr "Το σχήμα Url απαιτεί ένα συστατικό διακομιστή"
+
+#: zypp/url/UrlBase.cc:1022
+msgid "Url scheme does not allow a host component"
+msgstr "Το σχήμα Url δεν επιτρέπει ένα συστατικό διακομιστή"
+
+#: zypp/url/UrlBase.cc:1049
+#, c-format, boost-format
+msgid "Invalid host component '%s'"
+msgstr "Λανθασμένο συστατικό διακομιστή '%s'"
+
+#: zypp/url/UrlBase.cc:1070
+msgid "Url scheme does not allow a port"
+msgstr "Το σχήμα Url δεν σας επιτρέπει μια θύρα"
+
+#: zypp/url/UrlBase.cc:1081
+#, c-format, boost-format
+msgid "Invalid port component '%s'"
+msgstr "Λανθασμένο συστατικό θύρας '%s'"
+
+#: zypp/url/UrlBase.cc:1098
+msgid "Url scheme requires path name"
+msgstr "Το σχήμα Url απαιτεί όνομα διαδρομής"
+
+#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
+msgid "Relative path not allowed if authority exists"
+msgstr "Σχετική διαδρομή δεν επιτρέπεται εαν υπάρχει αρχή"
+
+#: zypp/url/UrlUtils.cc:111
+msgid "Encoded string contains a NUL byte"
+msgstr "Κωδικοποιημένο αλφαριθμητικό περιέχει ενα NUL byte"
+
+#: zypp/url/UrlUtils.cc:173
+msgid "Invalid parameter array split separator character"
+msgstr "Λανθασμένος διαχωριστικός χαρακτήρας διαχωρισμού παραμέτρου σειράς"
+
+#: zypp/url/UrlUtils.cc:213
+msgid "Invalid parameter map split separator character"
+msgstr "Λανθασμένος διαχωριστικός χαρακτήρας διαχωρισμού παραμέτρου χάρτη"
+
+#: zypp/url/UrlUtils.cc:283
+msgid "Invalid parameter array join separator character"
+msgstr "Λανθασμένος διαχωριστικός χαρακτήρας ένωσης σειράς"
+
+#~ msgid "Failed to import public key from file %s: %s"
+#~ msgstr "Απέτυχε να εισάγει το δημόσιο κλειδί από το αρχείο %s: %s"
+
+#~ msgid "Failed to remove public key %s: %s"
+#~ msgstr "Αδυναμία απομάκρυνσης του δημοσίου κλειδιού %s: %s"
 
 #~ msgid "Cannot find available loop device to mount the image file from '%s'"
 #~ msgstr ""

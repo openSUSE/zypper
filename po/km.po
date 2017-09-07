@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 12:50+0200\n"
+"POT-Creation-Date: 2017-09-07 12:25+0200\n"
 "PO-Revision-Date: 2010-06-03 08:04+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -26,645 +26,11 @@ msgstr ""
 msgid "Hal Exception"
 msgstr "ការ​លើកលែង Hal"
 
-#: zypp/Url.cc:114
-msgid "Invalid LDAP URL query string"
-msgstr "ខ្សែអក្សរ​សំណួរ LDAP URL មិន​ត្រឹមត្រូវ"
-
-#: zypp/Url.cc:153
-#, c-format, boost-format
-msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "ប៉ារ៉ាម៉ែត្រ​សំណួរ LDAP URL មិន​ត្រឹមត្រូវ '%s'"
-
-#: zypp/Url.cc:300
-msgid "Unable to clone Url object"
-msgstr "មិនអាច​ក្លូន​វត្ថុ Url បាន​ឡើយ"
-
-#: zypp/Url.cc:313
-msgid "Invalid empty Url object reference"
-msgstr "សេចក្ដី​យោង​វត្ថុ Url ទទេ មិន​ត្រឹមត្រូវ"
-
-# ###############################################################################
-# Old yast2-agents.po
-#: zypp/Url.cc:326 zypp/Url.cc:340
-msgid "Unable to parse Url components"
-msgstr "មិនអាច​ញែក​សមាសភាគ Url បាន​ឡើយ"
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "មិនអាច​ចាប់ផ្ដើម​គុណលក្ខណៈ mutex បានឡើយ"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "មិនអាច​កំណត់​គុណលក្ខណៈ mutex ហៅ​ខ្លួនឯង​បានឡើយ"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "មិនអាច​ចាប់ផ្ដើម mutex ហៅខ្លួន​ឯង​បាន​ឡើយ"
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "មិនអាច​យក​សោ mutex បានឡើយ"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "មិនអាច​លែង​សោ mutex បាន​ឡើយ"
-
-#: zypp/Dep.cc:96
-msgid "Provides"
-msgstr "ផ្ដល់"
-
-#: zypp/Dep.cc:97
-msgid "Prerequires"
-msgstr ""
-
-#: zypp/Dep.cc:98
-msgid "Requires"
-msgstr "ទាមទារ"
-
-#: zypp/Dep.cc:99
-msgid "Conflicts"
-msgstr "ប៉ះទង្គិច"
-
-#: zypp/Dep.cc:100
-#, fuzzy
-msgid "Obsoletes"
-msgstr "លែង​ប្រើ %s"
-
-#: zypp/Dep.cc:101
-msgid "Recommends"
-msgstr "អនុសាសន៍"
-
-#: zypp/Dep.cc:102
-msgid "Suggests"
-msgstr "ស្នើ"
-
-#: zypp/Dep.cc:103
-msgid "Enhances"
-msgstr "ធ្វើ​ឲ្យ​ប្រសើរ​ឡើង"
-
-#: zypp/Dep.cc:104
-msgid "Supplements"
-msgstr "ការ​បន្ថែម"
-
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "ប្រភេទ​មិនច្បាស់ '%s' សម្រាប់ %u បៃ ឆេកសាំ '%s'"
-
-#: zypp/target/TargetImpl.cc:310
-msgid " executed"
-msgstr " បាន​ប្រតិបត្តិ"
-
-#: zypp/target/TargetImpl.cc:332
-msgid " execution failed"
-msgstr " បាន​បរាជ័យ​ក្នុងកា​រប្រតិបត្តិ"
-
-#. translators: We may find the same script content in files with different names.
-#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
-#. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:449
-#, c-format, boost-format
-msgid "%s already executed as %s)"
-msgstr ""
-
-#: zypp/target/TargetImpl.cc:459
-msgid " execution skipped while aborting"
-msgstr " ការ​ប្រតិបត្តិ​បាន​រំលង​ខណៈពេល​បោះបង់"
-
-#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
-#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
-#: zypp/target/TargetImpl.cc:607
-msgid "Error sending update message notification."
-msgstr "កំហុស​ក្នុង​ការ​ផ្ញើ​ការ​ជូនដំណឹង​សារបច្ចុប្បន្នភាព​ ។"
-
-#: zypp/target/TargetImpl.cc:658
-msgid "New update message"
-msgstr "សារ​បច្ចុប្បន្នភាព​ថ្មី"
-
-#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
-#: zypp/target/TargetImpl.cc:1627
-#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
-msgid "Installation has been aborted as directed."
-msgstr "ការ​ដំឡើង ត្រូវបាន​បោះបង់​ដោយ​ផ្ទាល់ ។"
-
-#: zypp/target/hal/HalContext.cc:24
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr "សូមអភ័យទោស កំណែ​នៃ​ libzypp នេះ​ត្រូវ​បាន​ស្ថាបនា​ឡើង​ដោយ​គ្មាន​ការ​គាំទ្រ​ HAL ។"
-
-#: zypp/target/hal/HalContext.cc:117
-msgid "HalContext not connected"
-msgstr "HalContext មិនបាន​តភ្ជាប់​ឡើយ"
-
-#: zypp/target/hal/HalContext.cc:127
-msgid "HalDrive not initialized"
-msgstr "HalDrive មិន​បាន​ចាប់ផ្ដើម​ឡើយ"
-
-#: zypp/target/hal/HalContext.cc:137
-msgid "HalVolume not initialized"
-msgstr "HalVolume មិនបាន​ចាប់ផ្ដើម​ឡើយ"
-
-#: zypp/target/hal/HalContext.cc:229
-msgid "Unable to create dbus connection"
-msgstr "មិនអាច​បង្កើត​ការ​តភ្ជាប់ dbus"
-
-#: zypp/target/hal/HalContext.cc:242
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new ៖ មិនអាច​បង្កើត​បរិបទ libhal បានឡើយ"
-
-#: zypp/target/hal/HalContext.cc:257
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection ៖ មិនអាច​​កំណត់​ការ​តភ្ជាប់ dbus បានឡើយ"
-
-#: zypp/target/hal/HalContext.cc:272
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "មិនអាច​ចាប់ផ្ដើម​បរិបទ HAL បានឡើយ -- hald មិន​កំពុង​រត់​ទេឬ ?"
-
-#: zypp/target/hal/HalContext.cc:851
-msgid "Not a CDROM drive"
-msgstr "មិន​មែន​ជា​ដ្រាយ​ស៊ីឌី​រ៉ូម​ទេ"
-
-#. TranslatorExplanation after semicolon is error message
-#. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:848 zypp/target/rpm/RpmDb.cc:2073
-#: zypp/target/rpm/RpmDb.cc:2219
-msgid "RPM failed: "
-msgstr "RPM បាន​បរាជ័យ ៖ "
-
-#. TranslatorExplanation first %s is file name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1129
-#, c-format, boost-format
-msgid "Failed to import public key from file %s: %s"
-msgstr "បរាជ័យក្នុង​ការ​នាំចូល​សោ​សាធារណៈ​ពី​ឯកសារ %s: %s"
-
-#. TranslatorExplanation first %s is key name, second is error message
-#: zypp/target/rpm/RpmDb.cc:1200
-#, c-format, boost-format
-msgid "Failed to remove public key %s: %s"
-msgstr "បរាជ័យ​ក្នុងការ​យក​សោ​សាធារណៈ %s: %s"
-
-#: zypp/target/rpm/RpmDb.cc:1578
-msgid "Package is not signed!"
-msgstr ""
-
-#. Translator: %s = name of an rpm package. A list of diffs follows
-#. this message.
-#: zypp/target/rpm/RpmDb.cc:1878
-#, c-format, boost-format
-msgid "Changed configuration files for %s:"
-msgstr "បាន​ប្ដូរ​ឯកសារ​កំណត់​រចនាសម្ព័ន្ធ​សម្រាប់ %s ៖"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2054
-#, c-format, boost-format
-msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "rpm បានរ​ក្សា​ទុក %s ជា %s ប៉ុន្តែ​វា​អាច​កំណត់​ភាព​ខុស​គ្នា"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2056
-#, c-format, boost-format
-msgid ""
-"rpm saved %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"rpm បាន​រក្សាទុក %s ជា %s ។\n"
-"នេះ​ជា​បន្ទាត់ ២៥ ជួរ​ដំបូង​ខុសគ្នា៖\n"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2059
-#, c-format, boost-format
-msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr "rpm បាន​បង្កើត %s ជា %s ប៉ុន្តែ​វា​មិន​អាច​កំណត់​ភាព​ខុស​គ្នា"
-
-#. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2061
-#, c-format, boost-format
-msgid ""
-"rpm created %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"rpm បាន​កំណត់ %s ជា %s ។\n"
-"នេះ​ជា​បន្ទាត់ ២៥ ជួរ​ដំបូង​ខុសគ្នា ៖​\n"
-
-#. report additional rpm output in finish
-#. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2086 zypp/target/rpm/RpmDb.cc:2232
-msgid "Additional rpm output"
-msgstr "លទ្ធផល rpm បន្ថែម"
-
-#: zypp/target/rpm/RpmDb.cc:2374
-#, c-format, boost-format
-msgid "created backup %s"
-msgstr "បាន​បង្កើត​ព័ត៌មាន​បម្រុង %s"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
-#, fuzzy
-msgid "Signature is OK"
-msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
-msgid "Unknown type of signature"
-msgstr ""
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2399
-#, fuzzy
-msgid "Signature does not verify"
-msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2401
-#, fuzzy
-msgid "Signature is OK, but key is not trusted"
-msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2403
-msgid "Signatures public key is not available"
-msgstr ""
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2405
-msgid "File does not exist or signature can't be checked"
-msgstr ""
-
-#. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2407
-msgid "File is unsigned"
-msgstr ""
-
-#: zypp/ProblemSolution.cc:114
-msgid "Following actions will be done:"
-msgstr "អំពើ​ខាងក្រោម​នឹង​ត្រូវបាន​ធ្វើ​រួច ៖"
-
-#: zypp/RepoManager.cc:312
-#, boost-format
-msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr ""
-
-#. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
-#: zypp/repo/PluginServices.cc:49
-#, c-format, boost-format
-msgid "Failed to read directory '%s'"
-msgstr "បាន​បរាជ័យ​ក្នុង​ការ​អាន​ថត '%s'"
-
-#: zypp/RepoManager.cc:330
-#, boost-format
-msgid "Cannot read repo file '%1%': Permission denied"
-msgstr ""
-
-#: zypp/RepoManager.cc:353
-msgid "Repository alias cannot start with dot."
-msgstr "ឈ្មោះ​ក្លែងក្លាយ​ឃ្លាំង​មិន​អាច​ចាប់​ផ្តើម​ជា​មួយ​ចំណុច (.)បាន​ទេ ។"
-
-#: zypp/RepoManager.cc:364
-msgid "Service alias cannot start with dot."
-msgstr "ឈ្មោះ​ក្លែងក្លាយ​សេវាមិន​អាច​​ចាប់​ផ្តើម​​ជាមួយចំណុច ​(.)​បាន​ទេ ។"
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
-#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
-#, c-format, boost-format
-msgid "Can't open file '%s' for writing."
-msgstr "មិន​អាច​បើក​ឯកសារ '%s' ដើម្បី​សរសេរ​បានទេ ។"
-
-#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
-#. %1% = service name
-#. %2% = repository name
-#: zypp/RepoManager.cc:871
-#, boost-format
-msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr ""
-
-#. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1098
-#, fuzzy
-msgid "Valid metadata not found at specified URL"
-msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "រក​មិន​ឃើញ​ទិន្នន័យ​មេតា​ដែល​ត្រឹមត្រូវ​នៅ URL ដែល​បាន​បញ្ជាក់"
-
-#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
-#, c-format, boost-format
-msgid "Can't create %s"
-msgstr "មិន​អាច​បង្កើត​ %s"
-
-#: zypp/RepoManager.cc:1154
-msgid "Can't create metadata cache directory."
-msgstr "មិន​អាច​បង្កើត​ថត​ឃ្លាំង​សម្ងាត់​របស់​ទិន្នន័យ​មេតា ។"
-
-#: zypp/RepoManager.cc:1300
-#, c-format, boost-format
-msgid "Building repository '%s' cache"
-msgstr "កំពុង​ស្ថាបនា​ឃ្លាំង '%s'"
-
-#: zypp/RepoManager.cc:1320
-#, c-format, boost-format
-msgid "Can't create cache at %s - no writing permissions."
-msgstr "មិន​អាច​បង្កើត​ឃ្លាំង​សម្ងាត់​នៅ​ត្រង់​ %s - គ្មាន​សិទ្ធិ​ក្នុង​ការ​សរសេរ ។"
-
-#: zypp/RepoManager.cc:1384
-#, c-format, boost-format
-msgid "Failed to cache repo (%d)."
-msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ឃ្លាំង​ជា​ឃ្លាំង​សម្ងាត់ (%d) ។"
-
-#: zypp/RepoManager.cc:1395
-msgid "Unhandled repository type"
-msgstr "ប្រភេទ​ឃ្លាំង​ដែល​មិន​បាន​ដោះស្រាយ"
-
-#. prepare exception to be thrown if the type could not be determined
-#. due to a media exception. We can't throw right away, because of some
-#. problems with proxy servers returning an incorrect error
-#. on ftp file-not-found(bnc #335906). Instead we'll check another types
-#. before throwing.
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
-#, c-format, boost-format
-msgid "Error trying to read from '%s'"
-msgstr "កំហុស​ក្នុង​ការ​ព្យាយាម​អាន​ពី '%s'"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
-#, c-format, boost-format
-msgid "Unknown error reading from '%s'"
-msgstr "មាន​កំហុស​ដែល​មិន​ស្គាល់​ក្នុង​ការ​អាន​ពី '%s'"
-
-#: zypp/RepoManager.cc:1623
-#, c-format, boost-format
-msgid "Adding repository '%s'"
-msgstr "កំពុង​បន្ថែម​ឃ្លាំង '%s'"
-
-#. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1711
-#, c-format, boost-format
-msgid "Invalid repo file name at '%s'"
-msgstr "ឈ្មោះ​ឯកសារ​ឃ្លាំង​មិន​ត្រឹមត្រូវ​នៅ '%s'"
-
-#: zypp/RepoManager.cc:1752
-#, c-format, boost-format
-msgid "Removing repository '%s'"
-msgstr "យក​ឃ្លាំង '%s' ចេញ"
-
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
-msgid "Can't figure out where the repo is stored."
-msgstr "មិន​អាច​ដោះស្រាយ​កន្លែង​ដែល​ឃ្លាំង​ត្រូវ​បាន​ទុក​បានទេ ។"
-
-#. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
-#, c-format, boost-format
-msgid "Can't delete '%s'"
-msgstr "មិនអាច​លុប '%s'"
-
-#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
-msgid "Can't figure out where the service is stored."
-msgstr "មិនអាច​​ដោះស្រាយ​កន្លែង​ដែល​សេវា​ត្រូវ​បានផ្ទុក​បានទេ ។"
-
-#: zypp/url/UrlBase.cc:154
-#, c-format, boost-format
-msgid "Url scheme does not allow a %s"
-msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត %s ទេ"
-
-#: zypp/url/UrlBase.cc:173
-#, c-format, boost-format
-msgid "Invalid %s component '%s'"
-msgstr "សមាសភាគ %s មិន​ត្រឹមត្រូវ '%s'"
-
-#: zypp/url/UrlBase.cc:180
-#, c-format, boost-format
-msgid "Invalid %s component"
-msgstr "សមាសភាគ %s មិន​ត្រឹមត្រូវ"
-
-#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
-msgid "Query string parsing not supported for this URL"
-msgstr "មិនបាន​គាំទ្រ​ការញែក​ខ្សែអក្សរ​សំណួរ​សម្រាប់ URL នេះ​ឡើយ"
-
-#: zypp/url/UrlBase.cc:824
-msgid "Url scheme is a required component"
-msgstr "គ្រោងការណ៍ Url មិនមែន​ជា​សមាសភាគ​ដែល​បាន​ទាមទារ​ឡើយ"
-
-#: zypp/url/UrlBase.cc:830
-#, c-format, boost-format
-msgid "Invalid Url scheme '%s'"
-msgstr "គ្រោងការណ៍ Url មិន​ត្រឹមត្រូវ '%s'"
-
-#: zypp/url/UrlBase.cc:949
-msgid "Url scheme does not allow a username"
-msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត​ឈ្មោះ​អ្នកប្រើ​ឡើយ"
-
-#: zypp/url/UrlBase.cc:983
-msgid "Url scheme does not allow a password"
-msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត​ពាក្យ​សម្ងាត់​ឡើយ"
-
-#: zypp/url/UrlBase.cc:1012
-msgid "Url scheme requires a host component"
-msgstr "គ្រោងការណ៍ Url ទាមទារ​សមាសភាគ​របស់​ម៉ាស៊ីន"
-
-#: zypp/url/UrlBase.cc:1022
-msgid "Url scheme does not allow a host component"
-msgstr "គ្រោងការណ៍ Url មិនអនុញ្ញាត​សមាសភាគ​របស់​ម៉ាស៊ីន​ឡើយ"
-
-#: zypp/url/UrlBase.cc:1049
-#, c-format, boost-format
-msgid "Invalid host component '%s'"
-msgstr "សមាសភាគ​របស់​ម៉ាស៊ីន​មិន​ត្រឹមត្រូវ '%s'"
-
-#: zypp/url/UrlBase.cc:1070
-msgid "Url scheme does not allow a port"
-msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត​ច្រក​ឡើយ"
-
-#: zypp/url/UrlBase.cc:1081
-#, c-format, boost-format
-msgid "Invalid port component '%s'"
-msgstr "សមាសភាគ​ច្រក​មិន​ត្រឹមត្រូវ '%s'"
-
-#: zypp/url/UrlBase.cc:1098
-msgid "Url scheme requires path name"
-msgstr "គ្រោងការណ៍ Url ទាមទារ​ឈ្មោះ​ផ្លូវ"
-
-#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
-msgid "Relative path not allowed if authority exists"
-msgstr "មិនបាន​អនុញ្ញាត​ផ្លូវ​ដែល​ទាក់ទង​ទេ ប្រសិន​បើ​មាន​អាជ្ញាធរ"
-
-#: zypp/url/UrlUtils.cc:111
-msgid "Encoded string contains a NUL byte"
-msgstr "ខ្សែអក្សរ​ដែល​បាន​អ៊ិនកូដ មាន NUL បៃ"
-
-#: zypp/url/UrlUtils.cc:173
-msgid "Invalid parameter array split separator character"
-msgstr "តួអក្សរ​បំបែក​សម្រាប់​ពុះ​អារេ​ប៉ារ៉ាម៉ែត្រ មិន​ត្រឹមត្រូវ"
-
-#: zypp/url/UrlUtils.cc:213
-msgid "Invalid parameter map split separator character"
-msgstr "តួអក្សរ​បំបែក​សម្រាប់​ពុះ​ផែនទី​ប៉ារ៉ាម៉ែត្រ មិន​ត្រឹមត្រូវ"
-
-#: zypp/url/UrlUtils.cc:283
-msgid "Invalid parameter array join separator character"
-msgstr "តួអក្សរ​បំបែក​សម្រាប់​ត​អារេ​ប៉ារ៉ាម៉ែត្រ មិន​ត្រឹមត្រូវ"
-
-#: zypp/ExternalProgram.cc:258
-#, c-format, boost-format
-msgid "Can't open pty (%s)."
-msgstr "មិនអាច​បើក pty (%s) ។"
-
-#: zypp/ExternalProgram.cc:269
-#, c-format, boost-format
-msgid "Can't open pipe (%s)."
-msgstr "មិនអាច​បើក​បំពង់ (%s) ។"
-
-#: zypp/ExternalProgram.cc:350
-#, c-format, boost-format
-msgid "Can't chroot to '%s' (%s)."
-msgstr "មិនអាច chroot ទៅ '%s' (%s) បានទេ ។"
-
-#: zypp/ExternalProgram.cc:360
-#, fuzzy, c-format, boost-format
-msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "មិនអាច chdir ទៅ '/' ក្នុង chroot (%s) បានទេ ។"
-
-#: zypp/ExternalProgram.cc:361
-#, fuzzy, c-format, boost-format
-msgid "Can't chdir to '%s' (%s)."
-msgstr "មិនអាច chroot ទៅ '%s' (%s) បានទេ ។"
-
-#. don't want to get here
-#: zypp/ExternalProgram.cc:373
-#, c-format, boost-format
-msgid "Can't exec '%s' (%s)."
-msgstr "មិនអាច​ប្រតិបត្តិ '%s' (%s) ។"
-
-#: zypp/ExternalProgram.cc:381
-#, c-format, boost-format
-msgid "Can't fork (%s)."
-msgstr "មិនអាច​បែងចែក (%s) បានទេ ។"
-
-#: zypp/ExternalProgram.cc:507
-#, c-format, boost-format
-msgid "Command exited with status %d."
-msgstr "ពាក្យ​បញ្ជា​បាន​ចេញ​ដោយ​ស្ថានភាព %d ។"
-
-#: zypp/ExternalProgram.cc:527
-#, c-format, boost-format
-msgid "Command was killed by signal %d (%s)."
-msgstr "ពាក្យ​បញ្ជា​ត្រូវ​បាន​ផ្ដាច់​ដោយ​សញ្ញា %d (%s) ។"
-
-#: zypp/ExternalProgram.cc:532
-msgid "Command exited with unknown error."
-msgstr "ពាក្យ​បញ្ជា​បាន​ចេញ ដោយ​មាន​កំហុស​មិន​ស្គាល់ ។"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:60
-#, fuzzy
-msgid "does not expire"
-msgstr "(មិន​ផុត​កំណត់)"
-
-#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:65
-#, boost-format
-msgid "expired: %1%"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:70
-#, boost-format
-msgid "expires: %1%"
-msgstr ""
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:79
-msgid "(does not expire)"
-msgstr "(មិន​ផុត​កំណត់)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:88
-msgid "(EXPIRED)"
-msgstr "(បាន​ផុត​កំណត់)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:92
-msgid "(expires within 24h)"
-msgstr "(ផុត​កំណត់​ក្នុង​រយៈពេល ២៤ ម៉ោង)"
-
-#. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:96
-#, fuzzy, c-format, boost-format
-msgid "(expires in %d day)"
-msgid_plural "(expires in %d days)"
-msgstr[0] "(ផុត​កំណត់​ក្នុង​រយៈពេល ២៤ ម៉ោង)"
-
-#: zypp/VendorSupportOptions.cc:14
-msgid "unknown"
-msgstr "មិន​ស្គាល់"
-
-#: zypp/VendorSupportOptions.cc:17
-msgid "unsupported"
-msgstr "មិន​បានគាំទ្រ"
-
-#: zypp/VendorSupportOptions.cc:20
-msgid "Level 1"
-msgstr "កម្រិត ១"
-
-#: zypp/VendorSupportOptions.cc:23
-msgid "Level 2"
-msgstr "កម្រិត ២"
-
-#: zypp/VendorSupportOptions.cc:26
-msgid "Level 3"
-msgstr "កម្រិត ៣"
-
-#: zypp/VendorSupportOptions.cc:29
-msgid "Additional Customer Contract Necessary"
-msgstr "ចាំបាច់​កិច្ចសន្យា​អតិថិជន​បន្ថែម"
-
-#: zypp/VendorSupportOptions.cc:31
-msgid "invalid"
-msgstr "មិន​ត្រឹមត្រូវ"
-
-#: zypp/VendorSupportOptions.cc:39
-msgid "The level of support is unspecified"
-msgstr "កម្រិត​គាំទ្រ​មិន​ត្រូវ​បាន​បញ្ជាក់"
-
-#: zypp/VendorSupportOptions.cc:42
-msgid "The vendor does not provide support."
-msgstr "ក្រុមហ៊ុន​លក់​មិន​បាន​ផ្ដល់​កា​រគាំទ្រ​ទេ ។"
-
-#: zypp/VendorSupportOptions.cc:45
-msgid ""
-"Problem determination, which means technical support designed to provide "
-"compatibility information, installation assistance, usage support, on-going "
-"maintenance and basic troubleshooting. Level 1 Support is not intended to "
-"correct product defect errors."
-msgstr ""
-"ការ​កំណត់​បញ្ហា ដែល​មាន​ន័យ​ថា​ការគាំទ្រ​ផ្នែក​បច្ចេកទេស​បាន​រចនា​ដើម្បី​ផ្ដល់​ព័ត៌មាន​​ដែល​ឆប​គ្នា ជំនួយ​ការ​"
-"ដំឡើង ការ​ប្រើការ​គាំទ្រ និង​ការ​ថែទាំ​ដែល​កំពុង​បន្ត និង​កា​រដោះស្រាយ​បញ្ហា​មូលដ្ឋាន ។ កា​រគាំទ្រ​កម្រិត​មួយ​"
-"មិនមានបំណង​កែ​កំហុស​ផលិតផល​ឥតខ្ចោះ​ទេ ។"
-
-#: zypp/VendorSupportOptions.cc:48
-msgid ""
-"Problem isolation, which means technical support designed to duplicate "
-"customer problems, isolate problem area and provide resolution for problems "
-"not resolved by Level 1 Support."
-msgstr ""
-"ការ​បំបែក​បញ្ហា ដែល​មាន​ន័យ​ថា​ការ​គាំទ្រ​ផ្នែក​បច្ចេកទេស​បាន​រចនា​ដើម្បី​ស្ទួន​បញ្ហា​របស់​អតិថិជន បំបែកបញ្ហា​ "
-"និង​ផ្ដល់​ដំណោះស្រាយ​សម្រាប់​បញ្ហា​មិន​បាន​ដោះស្រាយ​ដោយ​ការគាំទ្រ​កម្រិត​ពីរ ។"
-
-#: zypp/VendorSupportOptions.cc:51
-msgid ""
-"Problem resolution, which means technical support designed to resolve "
-"complex problems by engaging engineering in resolution of product defects "
-"which have been identified by Level 2 Support."
-msgstr ""
-"ការ​ដោះស្រាយ​បញ្ហា ដែល​មានន័យ​ថា ការ​គាំទ្រ​ផ្នែក​បច្ចេកទេស​បាន​រចនា​ដើម្បី​ដោះស្រាយ​បញ្ហា​ស្មុគស្មាញ "
-"ដោយ​ភ្ជាប់​វិស្វរកម្ម​នៅ​ក្នុង​ដំណោះស្រាយ​របស់​ផលិតផល​ដែល​ត្រូ​វបាន​បញ្ជាក់​ដោយ​ការ​គាំទ្រ​កម្រិត​ពីរ ។"
-
-#: zypp/VendorSupportOptions.cc:54
-msgid "An additional customer contract is necessary for getting support."
-msgstr "កិច្ចសន្យា​អតិថិជន​បន្ថែម​ចាំបាច់​សម្រាប់​ទទួល​ជំនួយ ។"
-
-#: zypp/VendorSupportOptions.cc:56
-msgid "Unknown support option. Description not available"
-msgstr "មិន​ស្គាល់​ជម្រើស​គាំទ្រ ។ មិនមាន​សេចក្ដីអធិប្បាយ"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -1897,6 +1263,108 @@ msgstr "ហ្សាំប៊ី"
 #: zypp/CountryCode.cc:403
 msgid "Zimbabwe"
 msgstr "ហ្ស៊ីមបាវ៉េ"
+
+#: zypp/Dep.cc:96
+msgid "Provides"
+msgstr "ផ្ដល់"
+
+#: zypp/Dep.cc:97
+msgid "Prerequires"
+msgstr ""
+
+#: zypp/Dep.cc:98
+msgid "Requires"
+msgstr "ទាមទារ"
+
+#: zypp/Dep.cc:99
+msgid "Conflicts"
+msgstr "ប៉ះទង្គិច"
+
+#: zypp/Dep.cc:100
+#, fuzzy
+msgid "Obsoletes"
+msgstr "លែង​ប្រើ %s"
+
+#: zypp/Dep.cc:101
+msgid "Recommends"
+msgstr "អនុសាសន៍"
+
+#: zypp/Dep.cc:102
+msgid "Suggests"
+msgstr "ស្នើ"
+
+#: zypp/Dep.cc:103
+msgid "Enhances"
+msgstr "ធ្វើ​ឲ្យ​ប្រសើរ​ឡើង"
+
+#: zypp/Dep.cc:104
+msgid "Supplements"
+msgstr "ការ​បន្ថែម"
+
+#: zypp/ExternalProgram.cc:258
+#, c-format, boost-format
+msgid "Can't open pty (%s)."
+msgstr "មិនអាច​បើក pty (%s) ។"
+
+#: zypp/ExternalProgram.cc:269
+#, c-format, boost-format
+msgid "Can't open pipe (%s)."
+msgstr "មិនអាច​បើក​បំពង់ (%s) ។"
+
+#: zypp/ExternalProgram.cc:350
+#, c-format, boost-format
+msgid "Can't chroot to '%s' (%s)."
+msgstr "មិនអាច chroot ទៅ '%s' (%s) បានទេ ។"
+
+#: zypp/ExternalProgram.cc:360
+#, fuzzy, c-format, boost-format
+msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
+msgstr "មិនអាច chdir ទៅ '/' ក្នុង chroot (%s) បានទេ ។"
+
+#: zypp/ExternalProgram.cc:361
+#, fuzzy, c-format, boost-format
+msgid "Can't chdir to '%s' (%s)."
+msgstr "មិនអាច chroot ទៅ '%s' (%s) បានទេ ។"
+
+#. don't want to get here
+#: zypp/ExternalProgram.cc:373
+#, c-format, boost-format
+msgid "Can't exec '%s' (%s)."
+msgstr "មិនអាច​ប្រតិបត្តិ '%s' (%s) ។"
+
+#: zypp/ExternalProgram.cc:381
+#, c-format, boost-format
+msgid "Can't fork (%s)."
+msgstr "មិនអាច​បែងចែក (%s) បានទេ ។"
+
+#: zypp/ExternalProgram.cc:507
+#, c-format, boost-format
+msgid "Command exited with status %d."
+msgstr "ពាក្យ​បញ្ជា​បាន​ចេញ​ដោយ​ស្ថានភាព %d ។"
+
+#: zypp/ExternalProgram.cc:527
+#, c-format, boost-format
+msgid "Command was killed by signal %d (%s)."
+msgstr "ពាក្យ​បញ្ជា​ត្រូវ​បាន​ផ្ដាច់​ដោយ​សញ្ញា %d (%s) ។"
+
+#: zypp/ExternalProgram.cc:532
+msgid "Command exited with unknown error."
+msgstr "ពាក្យ​បញ្ជា​បាន​ចេញ ដោយ​មាន​កំហុស​មិន​ស្គាល់ ។"
+
+#. TranslatorExplanation first %s is key name, second is keyring name
+#: zypp/KeyRing.cc:520
+#, fuzzy, c-format, boost-format
+msgid "Tried to import not existent key %s into keyring %s"
+msgstr "នាំចូល​សោ %s ដែល​មិនមាន​ទៅ​ក្នុង keyring %s"
+
+#: zypp/KeyRing.cc:564
+msgid "Failed to delete key."
+msgstr "បរាជ័យ​ក្នុង​ការ​លុប​សោ ។"
+
+#: zypp/KeyRing.cc:572
+#, c-format, boost-format
+msgid "Signature file %s not found"
+msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -4252,34 +3720,488 @@ msgstr "ហ្ស៊ូលូ"
 msgid "Zuni"
 msgstr "ហ្ស៊ូនី"
 
-#. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:512
-#, fuzzy, c-format, boost-format
-msgid "Tried to import not existent key %s into keyring %s"
-msgstr "នាំចូល​សោ %s ដែល​មិនមាន​ទៅ​ក្នុង keyring %s"
+#: zypp/ProblemSolution.cc:114
+msgid "Following actions will be done:"
+msgstr "អំពើ​ខាងក្រោម​នឹង​ត្រូវបាន​ធ្វើ​រួច ៖"
 
-#: zypp/KeyRing.cc:556
-msgid "Failed to delete key."
-msgstr "បរាជ័យ​ក្នុង​ការ​លុប​សោ ។"
-
-#: zypp/KeyRing.cc:565
-#, c-format, boost-format
-msgid "Signature file %s not found"
-msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
-
-#: zypp/repo/RepoProvideFile.cc:259
-#, c-format, boost-format
-msgid "Can't provide file '%s' from repository '%s'"
-msgstr "មិនអាច​ផ្ដល់​ឯកសារ '%s' ពី​ឃ្លាំង '%s' បានទេ"
-
-#: zypp/repo/RepoProvideFile.cc:265
-msgid "No url in repository."
-msgstr "គ្មាន url នៅ​ក្នុង​ឃ្លាំង ។"
-
-#: zypp/repo/RepoException.cc:129
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:60
 #, fuzzy
-msgid "Service plugin does not support changing an attribute."
-msgstr "ប្រភេទ​ធនធាន VAR1 មិន​គាំទ្រ​លក្ខណៈ​ពិសេស​បង្ហាញ​ភាពផ្លាស់ប្ដូរ"
+msgid "does not expire"
+msgstr "(មិន​ផុត​កំណត់)"
+
+#. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+#: zypp/PublicKey.cc:65
+#, boost-format
+msgid "expired: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+#: zypp/PublicKey.cc:70
+#, boost-format
+msgid "expires: %1%"
+msgstr ""
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:79
+msgid "(does not expire)"
+msgstr "(មិន​ផុត​កំណត់)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:88
+msgid "(EXPIRED)"
+msgstr "(បាន​ផុត​កំណត់)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:92
+msgid "(expires within 24h)"
+msgstr "(ផុត​កំណត់​ក្នុង​រយៈពេល ២៤ ម៉ោង)"
+
+#. translators: an annotation to a gpg keys expiry date
+#: zypp/PublicKey.cc:96
+#, fuzzy, c-format, boost-format
+msgid "(expires in %d day)"
+msgid_plural "(expires in %d days)"
+msgstr[0] "(ផុត​កំណត់​ក្នុង​រយៈពេល ២៤ ម៉ោង)"
+
+#: zypp/RepoManager.cc:312
+#, boost-format
+msgid "Cannot read repo directory '%1%': Permission denied"
+msgstr ""
+
+#. TranslatorExplanation '%s' is a pathname
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
+#: zypp/repo/PluginServices.cc:49
+#, c-format, boost-format
+msgid "Failed to read directory '%s'"
+msgstr "បាន​បរាជ័យ​ក្នុង​ការ​អាន​ថត '%s'"
+
+#: zypp/RepoManager.cc:330
+#, boost-format
+msgid "Cannot read repo file '%1%': Permission denied"
+msgstr ""
+
+#: zypp/RepoManager.cc:353
+msgid "Repository alias cannot start with dot."
+msgstr "ឈ្មោះ​ក្លែងក្លាយ​ឃ្លាំង​មិន​អាច​ចាប់​ផ្តើម​ជា​មួយ​ចំណុច (.)បាន​ទេ ។"
+
+#: zypp/RepoManager.cc:364
+msgid "Service alias cannot start with dot."
+msgstr "ឈ្មោះ​ក្លែងក្លាយ​សេវាមិន​អាច​​ចាប់​ផ្តើម​​ជាមួយចំណុច ​(.)​បាន​ទេ ។"
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
+#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
+#, c-format, boost-format
+msgid "Can't open file '%s' for writing."
+msgstr "មិន​អាច​បើក​ឯកសារ '%s' ដើម្បី​សរសេរ​បានទេ ។"
+
+#. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
+#. %1% = service name
+#. %2% = repository name
+#: zypp/RepoManager.cc:871
+#, boost-format
+msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
+msgstr ""
+
+#. we will throw this later if no URL checks out fine
+#: zypp/RepoManager.cc:1098
+#, fuzzy
+msgid "Valid metadata not found at specified URL"
+msgid_plural "Valid metadata not found at specified URLs"
+msgstr[0] "រក​មិន​ឃើញ​ទិន្នន័យ​មេតា​ដែល​ត្រឹមត្រូវ​នៅ URL ដែល​បាន​បញ្ជាក់"
+
+#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
+#, c-format, boost-format
+msgid "Can't create %s"
+msgstr "មិន​អាច​បង្កើត​ %s"
+
+#: zypp/RepoManager.cc:1154
+msgid "Can't create metadata cache directory."
+msgstr "មិន​អាច​បង្កើត​ថត​ឃ្លាំង​សម្ងាត់​របស់​ទិន្នន័យ​មេតា ។"
+
+#: zypp/RepoManager.cc:1300
+#, c-format, boost-format
+msgid "Building repository '%s' cache"
+msgstr "កំពុង​ស្ថាបនា​ឃ្លាំង '%s'"
+
+#: zypp/RepoManager.cc:1320
+#, c-format, boost-format
+msgid "Can't create cache at %s - no writing permissions."
+msgstr "មិន​អាច​បង្កើត​ឃ្លាំង​សម្ងាត់​នៅ​ត្រង់​ %s - គ្មាន​សិទ្ធិ​ក្នុង​ការ​សរសេរ ។"
+
+#: zypp/RepoManager.cc:1384
+#, c-format, boost-format
+msgid "Failed to cache repo (%d)."
+msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ឃ្លាំង​ជា​ឃ្លាំង​សម្ងាត់ (%d) ។"
+
+#: zypp/RepoManager.cc:1395
+msgid "Unhandled repository type"
+msgstr "ប្រភេទ​ឃ្លាំង​ដែល​មិន​បាន​ដោះស្រាយ"
+
+#. prepare exception to be thrown if the type could not be determined
+#. due to a media exception. We can't throw right away, because of some
+#. problems with proxy servers returning an incorrect error
+#. on ftp file-not-found(bnc #335906). Instead we'll check another types
+#. before throwing.
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
+#, c-format, boost-format
+msgid "Error trying to read from '%s'"
+msgstr "កំហុស​ក្នុង​ការ​ព្យាយាម​អាន​ពី '%s'"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
+#, c-format, boost-format
+msgid "Unknown error reading from '%s'"
+msgstr "មាន​កំហុស​ដែល​មិន​ស្គាល់​ក្នុង​ការ​អាន​ពី '%s'"
+
+#: zypp/RepoManager.cc:1623
+#, c-format, boost-format
+msgid "Adding repository '%s'"
+msgstr "កំពុង​បន្ថែម​ឃ្លាំង '%s'"
+
+#. TranslatorExplanation '%s' is an URL
+#: zypp/RepoManager.cc:1711
+#, c-format, boost-format
+msgid "Invalid repo file name at '%s'"
+msgstr "ឈ្មោះ​ឯកសារ​ឃ្លាំង​មិន​ត្រឹមត្រូវ​នៅ '%s'"
+
+#: zypp/RepoManager.cc:1752
+#, c-format, boost-format
+msgid "Removing repository '%s'"
+msgstr "យក​ឃ្លាំង '%s' ចេញ"
+
+#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
+msgid "Can't figure out where the repo is stored."
+msgstr "មិន​អាច​ដោះស្រាយ​កន្លែង​ដែល​ឃ្លាំង​ត្រូវ​បាន​ទុក​បានទេ ។"
+
+#. TranslatorExplanation '%s' is a filename
+#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
+#, c-format, boost-format
+msgid "Can't delete '%s'"
+msgstr "មិនអាច​លុប '%s'"
+
+#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
+msgid "Can't figure out where the service is stored."
+msgstr "មិនអាច​​ដោះស្រាយ​កន្លែង​ដែល​សេវា​ត្រូវ​បានផ្ទុក​បានទេ ។"
+
+#: zypp/Url.cc:114
+msgid "Invalid LDAP URL query string"
+msgstr "ខ្សែអក្សរ​សំណួរ LDAP URL មិន​ត្រឹមត្រូវ"
+
+#: zypp/Url.cc:153
+#, c-format, boost-format
+msgid "Invalid LDAP URL query parameter '%s'"
+msgstr "ប៉ារ៉ាម៉ែត្រ​សំណួរ LDAP URL មិន​ត្រឹមត្រូវ '%s'"
+
+#: zypp/Url.cc:300
+msgid "Unable to clone Url object"
+msgstr "មិនអាច​ក្លូន​វត្ថុ Url បាន​ឡើយ"
+
+#: zypp/Url.cc:313
+msgid "Invalid empty Url object reference"
+msgstr "សេចក្ដី​យោង​វត្ថុ Url ទទេ មិន​ត្រឹមត្រូវ"
+
+# ###############################################################################
+# Old yast2-agents.po
+#: zypp/Url.cc:326 zypp/Url.cc:340
+msgid "Unable to parse Url components"
+msgstr "មិនអាច​ញែក​សមាសភាគ Url បាន​ឡើយ"
+
+#: zypp/VendorSupportOptions.cc:14
+msgid "unknown"
+msgstr "មិន​ស្គាល់"
+
+#: zypp/VendorSupportOptions.cc:17
+msgid "unsupported"
+msgstr "មិន​បានគាំទ្រ"
+
+#: zypp/VendorSupportOptions.cc:20
+msgid "Level 1"
+msgstr "កម្រិត ១"
+
+#: zypp/VendorSupportOptions.cc:23
+msgid "Level 2"
+msgstr "កម្រិត ២"
+
+#: zypp/VendorSupportOptions.cc:26
+msgid "Level 3"
+msgstr "កម្រិត ៣"
+
+#: zypp/VendorSupportOptions.cc:29
+msgid "Additional Customer Contract Necessary"
+msgstr "ចាំបាច់​កិច្ចសន្យា​អតិថិជន​បន្ថែម"
+
+#: zypp/VendorSupportOptions.cc:31
+msgid "invalid"
+msgstr "មិន​ត្រឹមត្រូវ"
+
+#: zypp/VendorSupportOptions.cc:39
+msgid "The level of support is unspecified"
+msgstr "កម្រិត​គាំទ្រ​មិន​ត្រូវ​បាន​បញ្ជាក់"
+
+#: zypp/VendorSupportOptions.cc:42
+msgid "The vendor does not provide support."
+msgstr "ក្រុមហ៊ុន​លក់​មិន​បាន​ផ្ដល់​កា​រគាំទ្រ​ទេ ។"
+
+#: zypp/VendorSupportOptions.cc:45
+msgid ""
+"Problem determination, which means technical support designed to provide "
+"compatibility information, installation assistance, usage support, on-going "
+"maintenance and basic troubleshooting. Level 1 Support is not intended to "
+"correct product defect errors."
+msgstr ""
+"ការ​កំណត់​បញ្ហា ដែល​មាន​ន័យ​ថា​ការគាំទ្រ​ផ្នែក​បច្ចេកទេស​បាន​រចនា​ដើម្បី​ផ្ដល់​ព័ត៌មាន​​ដែល​ឆប​គ្នា ជំនួយ​ការ​"
+"ដំឡើង ការ​ប្រើការ​គាំទ្រ និង​ការ​ថែទាំ​ដែល​កំពុង​បន្ត និង​កា​រដោះស្រាយ​បញ្ហា​មូលដ្ឋាន ។ កា​រគាំទ្រ​កម្រិត​មួយ​"
+"មិនមានបំណង​កែ​កំហុស​ផលិតផល​ឥតខ្ចោះ​ទេ ។"
+
+#: zypp/VendorSupportOptions.cc:48
+msgid ""
+"Problem isolation, which means technical support designed to duplicate "
+"customer problems, isolate problem area and provide resolution for problems "
+"not resolved by Level 1 Support."
+msgstr ""
+"ការ​បំបែក​បញ្ហា ដែល​មាន​ន័យ​ថា​ការ​គាំទ្រ​ផ្នែក​បច្ចេកទេស​បាន​រចនា​ដើម្បី​ស្ទួន​បញ្ហា​របស់​អតិថិជន បំបែកបញ្ហា​ "
+"និង​ផ្ដល់​ដំណោះស្រាយ​សម្រាប់​បញ្ហា​មិន​បាន​ដោះស្រាយ​ដោយ​ការគាំទ្រ​កម្រិត​ពីរ ។"
+
+#: zypp/VendorSupportOptions.cc:51
+msgid ""
+"Problem resolution, which means technical support designed to resolve "
+"complex problems by engaging engineering in resolution of product defects "
+"which have been identified by Level 2 Support."
+msgstr ""
+"ការ​ដោះស្រាយ​បញ្ហា ដែល​មានន័យ​ថា ការ​គាំទ្រ​ផ្នែក​បច្ចេកទេស​បាន​រចនា​ដើម្បី​ដោះស្រាយ​បញ្ហា​ស្មុគស្មាញ "
+"ដោយ​ភ្ជាប់​វិស្វរកម្ម​នៅ​ក្នុង​ដំណោះស្រាយ​របស់​ផលិតផល​ដែល​ត្រូ​វបាន​បញ្ជាក់​ដោយ​ការ​គាំទ្រ​កម្រិត​ពីរ ។"
+
+#: zypp/VendorSupportOptions.cc:54
+msgid "An additional customer contract is necessary for getting support."
+msgstr "កិច្ចសន្យា​អតិថិជន​បន្ថែម​ចាំបាច់​សម្រាប់​ទទួល​ជំនួយ ។"
+
+#: zypp/VendorSupportOptions.cc:56
+msgid "Unknown support option. Description not available"
+msgstr "មិន​ស្គាល់​ជម្រើស​គាំទ្រ ។ មិនមាន​សេចក្ដីអធិប្បាយ"
+
+#: zypp/ZYppFactory.cc:399
+#, c-format, boost-format
+msgid ""
+"System management is locked by the application with pid %d (%s).\n"
+"Close this application before trying again."
+msgstr ""
+"កា​រគ្រប់គ្រង​ប្រព័ន្ធ​ត្រូវ​បានចាក់​សោ​ដោយ​កម្មវិធី​ដែល​មាន pid %d (%s) ។\n"
+"សូម​បិទ​កម្មវិធី​នេះ​មុន​នឹង​ព្យាយាម​ម្ដង​ទៀត ។"
+
+#. TranslatorExplanation followed by the list of error messages that lead to this exception
+#: zypp/base/Exception.cc:134
+msgid "History:"
+msgstr "ប្រវត្តិ ៖"
+
+#: zypp/base/InterProcessMutex.cc:83
+#, c-format, boost-format
+msgid "Can't open lock file: %s"
+msgstr "មិនអាច​បើក​ឯកសារ​សោ ៖ %s"
+
+#: zypp/base/InterProcessMutex.cc:143
+msgid "This action is being run by another program already."
+msgstr "អំពើ​នេះ កំពុង​រត់​ដោយ​កម្មវិធី​ផ្សេង​មួយ​ទៀត ។"
+
+#: zypp/base/StrMatcher.cc:152
+#, c-format, boost-format
+msgid "Unknown match mode '%s'"
+msgstr "មិន​ស្គាល់​របៀប​ផ្គូផ្គង '%s'"
+
+#: zypp/base/StrMatcher.cc:153
+#, c-format, boost-format
+msgid "Unknown match mode '%s' for pattern '%s'"
+msgstr "មិន​ស្គាល់​របៀប​ផ្គូផ្គង '%s' សម្រាប់​លំនាំ '%s'"
+
+#: zypp/base/StrMatcher.cc:157
+#, c-format, boost-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr "កន្សោម​ធម្មតា​មិនត្រឹមត្រូវ '%s' ៖ regcomp បាន​ត្រឡប់ %d"
+
+#: zypp/base/StrMatcher.cc:158
+#, c-format, boost-format
+msgid "Invalid regular expression '%s'"
+msgstr "កន្សោម​ធម្មតា​មិន​ត្រឹមត្រូវ '%s'"
+
+#. !\todo add comma to the message for the next release
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
+#, c-format, boost-format
+msgid "Authentication required for '%s'"
+msgstr "បាន​ទាមទារ​ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​សម្រាប់ '%s'"
+
+#: zypp/media/MediaCurl.cc:1109
+msgid ""
+"Visit the Novell Customer Center to check whether your registration is valid "
+"and has not expired."
+msgstr ""
+"មើល​មជ្ឈមណ្ឌល​អតិថិជន​របស់ Novell ដើម្បីពិនិត្យ​មើល​ថាតើ ការ​ចុះឈ្មោះ​ត្រឹមត្រូវ ហើយមិនបាន​ផុត​កំណត់ ។"
+
+#: zypp/media/MediaException.cc:31
+#, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr "បរាជ័យ​ក្នុង​ការ​ម៉ោន %s លើ %s"
+
+#: zypp/media/MediaException.cc:41
+#, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "បរាជ័យ​ក្នុងការ​អាន់ម៉ោន %s"
+
+#: zypp/media/MediaException.cc:46
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr "ឯកសារ​ខូច​ឈ្មោះ ៖ %s"
+
+#: zypp/media/MediaException.cc:51
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr "ឧបករណ៍​ផ្ទុក​មិនបាន​បើក នៅពេល​ធ្វើ​អំពើ '%s' ។"
+
+#: zypp/media/MediaException.cc:56
+#, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
+msgstr "រក​មិនឃើញ​ឯកសារ '%s' នៅ​លើ​ឧបករណ៍​ផ្ទុក​ទេ '%s'"
+
+#: zypp/media/MediaException.cc:61
+#, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "មិនអាច​សរសេរ​ឯកសារ '%s' បានទេ ។"
+
+#: zypp/media/MediaException.cc:66
+msgid "Medium not attached"
+msgstr "មិនបាន​ភ្ជាប់​ឧបករណ៍​ផ្ទុក"
+
+#: zypp/media/MediaException.cc:71
+msgid "Bad media attach point"
+msgstr "ចំណុច​ភ្ជាប់​ឧបករណ៍​ផ្ទុក​មិនត្រឹមត្រូវ"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:77
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr "ទាញយក​ការ​ចាប់ផ្ដើម​បាន​បរាជ័យ​សម្រាប់ '%s'"
+
+#: zypp/media/MediaException.cc:82
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr "ករណី​លើកលែង​ប្រព័ន្ធ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' ។"
+
+#: zypp/media/MediaException.cc:87
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr "ផ្លូវ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' មិនមែន​ជា​ឯកសារ​ទេ ។"
+
+#: zypp/media/MediaException.cc:92
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "ផ្លូវ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' មិនមែន​ជា​ថត​ទេ ។"
+
+#: zypp/media/MediaException.cc:99
+msgid "Malformed URI"
+msgstr "URI មាន​ទ្រង់ទ្រាយ​មិនត្រឹមត្រូវ"
+
+#: zypp/media/MediaException.cc:109
+msgid "Empty host name in URI"
+msgstr "ឈ្មោះ​ម៉ាស៊ីន​ទទេ​ក្នុង URI"
+
+#: zypp/media/MediaException.cc:114
+msgid "Empty filesystem in URI"
+msgstr "ប្រព័ន្ធ​ឯកសា​ទទេ​នៅ​ក្នុង URI"
+
+#: zypp/media/MediaException.cc:119
+msgid "Empty destination in URI"
+msgstr "គោលដៅ​ទទេ​នៅ​ក្នុង URI"
+
+#: zypp/media/MediaException.cc:124
+#, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "គ្រោងការណ៍ URI ដែល​មិនបាន​គាំទ្រ​នៅ​ក្នុង '%s' ។"
+
+#: zypp/media/MediaException.cc:129
+msgid "Operation not supported by medium"
+msgstr "ប្រតិបត្តិការ​មិនបាន​គាំទ្រ​ដោយ​ឧបករណ៍​ផ្ទុក​ទេ"
+
+#: zypp/media/MediaException.cc:136
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"ទាញយក​កំហុស​សម្រាប់ '%s' ៖\n"
+"កូដ​កំហុស ៖ %s\n"
+"សារ​កំហុស ៖ %s\n"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp/media/MediaException.cc:144
+#, c-format, boost-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr "កំហុស​នៅពេល​កំណត់​ជម្រើស​ទាញយក​សម្រាប់ '%s' ៖"
+
+#: zypp/media/MediaException.cc:151
+#, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr "ប្រភព​ឧបករណ៍​ផ្ទុក '%s' មិនមាន​ឧបករណ៍​ផ្ទុក​ដែល​ត្រូវការ​ទេ"
+
+#: zypp/media/MediaException.cc:156
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr "ឧបករណ៍​ផ្ទុក '%s' គឺ​កំពុង​ប្រើ​ដោយ​ឧបករណ៍​ផ្សេង"
+
+#: zypp/media/MediaException.cc:162
+msgid "Cannot eject any media"
+msgstr "មិនអាច​ច្រាន​ឧបករណ៍​ផ្ទុក​ណាមួយ​ចេញ​ឡើយ"
+
+#: zypp/media/MediaException.cc:164
+#, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr "មិនអាច​ច្រាន​ឧបករណ៍​ផ្ទុក '%s' ចេញបានទេ"
+
+#: zypp/media/MediaException.cc:179
+#, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "សិទ្ធិ​ចូល​ដំណើរការ​ទៅ '%s' បាន​បដិសេធ ។"
+
+#: zypp/media/MediaException.cc:187
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr "អស់​ពេល​លើល​ពេល​ចូល​ដំណើរការ '%s' ។"
+
+#: zypp/media/MediaException.cc:195
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr "ទីតាំង '%s' មិន​ដំណើរការ​ជា​បណ្ដោះអាសន្ន ។"
+
+#: zypp/media/MediaException.cc:203
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr " បញ្ហា​វិញ្ញាបនបត្រ SSL ផ្ទៀងផ្ទាត់​ថា​វិញ្ញាបនបត្រ CA គឺ​ត្រឹមត្រូវ​សម្រាប់ '%s'."
+
+#: zypp/media/MediaHandler.cc:370
+msgid ""
+"Create attach point: Can't find a writable directory to create an attach "
+"point"
+msgstr ""
+
+#: zypp/media/MediaUserAuth.cc:136
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr "មិនបាន​គាំទ្រ​វិធីសាស្ត្រ​ផ្ទៀងផ្ទាត់​ភាពត្រឹមត្រូវ HTTP '%s' ឡើយ"
+
+#: zypp/misc/CheckAccessDeleted.cc:283
+msgid "Please install package 'lsof' first."
+msgstr ""
+
+#: zypp/parser/RepoindexFileReader.cc:197
+#, c-format, boost-format
+msgid "Required attribute '%s' is missing."
+msgstr "បាត់​គុណលក្ខណៈ​ដែល​ទាមទារ '%s' ។"
+
+#: zypp/parser/RepoindexFileReader.cc:209
+#, c-format, boost-format
+msgid "One or both of '%s' or '%s' attributes is required."
+msgstr "បាន​ទាមទារ​គុណលក្ខណៈ​មួយ ឬ​ពីរ​របស់ '%s' ឬ '%s' ។"
 
 #: zypp/repo/PackageProvider.cc:216
 #, fuzzy
@@ -4308,14 +4230,132 @@ msgstr "ការ​ពិនិត្យ applydeltarpm បាន​បរាជ
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm បាន​បរាជ័យ ។"
 
-#: zypp/ZYppFactory.cc:399
+#: zypp/repo/RepoException.cc:129
+#, fuzzy
+msgid "Service plugin does not support changing an attribute."
+msgstr "ប្រភេទ​ធនធាន VAR1 មិន​គាំទ្រ​លក្ខណៈ​ពិសេស​បង្ហាញ​ភាពផ្លាស់ប្ដូរ"
+
+#: zypp/repo/RepoProvideFile.cc:259
 #, c-format, boost-format
+msgid "Can't provide file '%s' from repository '%s'"
+msgstr "មិនអាច​ផ្ដល់​ឯកសារ '%s' ពី​ឃ្លាំង '%s' បានទេ"
+
+#: zypp/repo/RepoProvideFile.cc:265
+msgid "No url in repository."
+msgstr "គ្មាន url នៅ​ក្នុង​ឃ្លាំង ។"
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:34
+#, boost-format
 msgid ""
-"System management is locked by the application with pid %d (%s).\n"
-"Close this application before trying again."
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
 msgstr ""
-"កា​រគ្រប់គ្រង​ប្រព័ន្ធ​ត្រូវ​បានចាក់​សោ​ដោយ​កម្មវិធី​ដែល​មាន pid %d (%s) ។\n"
-"សូម​បិទ​កម្មវិធី​នេះ​មុន​នឹង​ព្យាយាម​ម្ដង​ទៀត ។"
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:40
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:47
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from package\n"
+"     %3%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
+#: zypp/sat/FileConflicts.cc:53
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file from install of\n"
+"     %3%"
+msgstr ""
+
+#. [lhs][rhs] 0 = installed; 1 = to be installed
+#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
+#: zypp/sat/FileConflicts.cc:68
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:76
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from package\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:85
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from package\n"
+"     %4%"
+msgstr ""
+
+#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
+#: zypp/sat/FileConflicts.cc:93
+#, boost-format
+msgid ""
+"File %1%\n"
+"  from install of\n"
+"     %2%\n"
+"  conflicts with file\n"
+"     %3%\n"
+"  from install of\n"
+"     %4%"
+msgstr ""
+
+#: zypp/sat/detail/PoolImpl.cc:189
+msgid "Can not create sat-pool."
+msgstr "មិនអាច​បង្កើត sat-pool បានទេ ។"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
+#, c-format, boost-format
+msgid "break %s by ignoring some of its dependencies"
+msgstr "បំបែក %s ដោយ​មិនអើពើ​ភាព​អាស្រ័យ​របស់​វា​មួយ​ចំនួន"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+#, fuzzy
+msgid "generally ignore of some dependencies"
+msgstr "ជា​ទូទៅ​មិនអើពើ​នឹង​ភាព​អាស្រ័យ​មួយ​ចំនួន"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
@@ -4345,8 +4385,7 @@ msgstr "បញ្ហា​ភាព​អាស្រ័យ​មួយ​ចំ
 msgid "nothing provides requested %s"
 msgstr "គ្មាន​អ្វី​ផ្ដល់ %s ដែលបាន​ស្នើ​ទេ"
 
-#: zypp/solver/detail/SATResolver.cc:997
-#: zypp/solver/detail/SATResolver.cc:1001
+#: zypp/solver/detail/SATResolver.cc:997 zypp/solver/detail/SATResolver.cc:1001
 msgid "Have you enabled all requested repositories?"
 msgstr "តើ​អ្នក​បាន​បើក​ឃ្លាំង​ដែល​បាន​ស្នើ​ទាំងអស់​ហើយឬនៅ ?"
 
@@ -4519,330 +4558,296 @@ msgstr "ការ​ជំនួស %s ជាមួយ %s"
 msgid "deinstallation of %s"
 msgstr "ការ​លុប​នៃ %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:42
-#, c-format, boost-format
-msgid "break %s by ignoring some of its dependencies"
-msgstr "បំបែក %s ដោយ​មិនអើពើ​ភាព​អាស្រ័យ​របស់​វា​មួយ​ចំនួន"
+#: zypp/target/TargetImpl.cc:310
+msgid " executed"
+msgstr " បាន​ប្រតិបត្តិ"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:48
+#: zypp/target/TargetImpl.cc:332
+msgid " execution failed"
+msgstr " បាន​បរាជ័យ​ក្នុងកា​រប្រតិបត្តិ"
+
+#. translators: We may find the same script content in files with different names.
+#. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
+#. message for a log file. Preferably start translation with "%s"
+#: zypp/target/TargetImpl.cc:449
+#, c-format, boost-format
+msgid "%s already executed as %s)"
+msgstr ""
+
+#: zypp/target/TargetImpl.cc:459
+msgid " execution skipped while aborting"
+msgstr " ការ​ប្រតិបត្តិ​បាន​រំលង​ខណៈពេល​បោះបង់"
+
+#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
+#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
+#: zypp/target/TargetImpl.cc:607
+msgid "Error sending update message notification."
+msgstr "កំហុស​ក្នុង​ការ​ផ្ញើ​ការ​ជូនដំណឹង​សារបច្ចុប្បន្នភាព​ ។"
+
+#: zypp/target/TargetImpl.cc:658
+msgid "New update message"
+msgstr "សារ​បច្ចុប្បន្នភាព​ថ្មី"
+
+#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
+#: zypp/target/TargetImpl.cc:1627
+#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
+msgid "Installation has been aborted as directed."
+msgstr "ការ​ដំឡើង ត្រូវបាន​បោះបង់​ដោយ​ផ្ទាល់ ។"
+
+#: zypp/target/hal/HalContext.cc:24
+msgid "Sorry, but this version of libzypp was built without HAL support."
+msgstr "សូមអភ័យទោស កំណែ​នៃ​ libzypp នេះ​ត្រូវ​បាន​ស្ថាបនា​ឡើង​ដោយ​គ្មាន​ការ​គាំទ្រ​ HAL ។"
+
+#: zypp/target/hal/HalContext.cc:117
+msgid "HalContext not connected"
+msgstr "HalContext មិនបាន​តភ្ជាប់​ឡើយ"
+
+#: zypp/target/hal/HalContext.cc:127
+msgid "HalDrive not initialized"
+msgstr "HalDrive មិន​បាន​ចាប់ផ្ដើម​ឡើយ"
+
+#: zypp/target/hal/HalContext.cc:137
+msgid "HalVolume not initialized"
+msgstr "HalVolume មិនបាន​ចាប់ផ្ដើម​ឡើយ"
+
+#: zypp/target/hal/HalContext.cc:229
+msgid "Unable to create dbus connection"
+msgstr "មិនអាច​បង្កើត​ការ​តភ្ជាប់ dbus"
+
+#: zypp/target/hal/HalContext.cc:242
+msgid "libhal_ctx_new: Can't create libhal context"
+msgstr "libhal_ctx_new ៖ មិនអាច​បង្កើត​បរិបទ libhal បានឡើយ"
+
+#: zypp/target/hal/HalContext.cc:257
+msgid "libhal_set_dbus_connection: Can't set dbus connection"
+msgstr "libhal_set_dbus_connection ៖ មិនអាច​​កំណត់​ការ​តភ្ជាប់ dbus បានឡើយ"
+
+#: zypp/target/hal/HalContext.cc:272
+msgid "Unable to initalize HAL context -- hald not running?"
+msgstr "មិនអាច​ចាប់ផ្ដើម​បរិបទ HAL បានឡើយ -- hald មិន​កំពុង​រត់​ទេឬ ?"
+
+#: zypp/target/hal/HalContext.cc:851
+msgid "Not a CDROM drive"
+msgstr "មិន​មែន​ជា​ដ្រាយ​ស៊ីឌី​រ៉ូម​ទេ"
+
+#. TranslatorExplanation after semicolon is error message
+#. TranslatorExplanation the colon is followed by an error message
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
+#: zypp/target/rpm/RpmDb.cc:2209
+msgid "RPM failed: "
+msgstr "RPM បាន​បរាជ័យ ៖ "
+
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1119
+#, boost-format
+msgid "Failed to import public key %1%"
+msgstr "បរាជ័យក្នុង​ការ​នាំចូល​សោ​សាធារណៈ​ពី​ឯកសារ %1%"
+
+#. Translator: %1% is a gpg public key
+#: zypp/target/rpm/RpmDb.cc:1189
+#, boost-format
+msgid "Failed to remove public key %1%"
+msgstr "បរាជ័យ​ក្នុងការ​យក​សោ​សាធារណៈ %1%"
+
+#: zypp/target/rpm/RpmDb.cc:1568
+msgid "Package is not signed!"
+msgstr ""
+
+#. Translator: %s = name of an rpm package. A list of diffs follows
+#. this message.
+#: zypp/target/rpm/RpmDb.cc:1868
+#, c-format, boost-format
+msgid "Changed configuration files for %s:"
+msgstr "បាន​ប្ដូរ​ឯកសារ​កំណត់​រចនាសម្ព័ន្ធ​សម្រាប់ %s ៖"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2044
+#, c-format, boost-format
+msgid "rpm saved %s as %s, but it was impossible to determine the difference"
+msgstr "rpm បានរ​ក្សា​ទុក %s ជា %s ប៉ុន្តែ​វា​អាច​កំណត់​ភាព​ខុស​គ្នា"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2046
+#, c-format, boost-format
+msgid ""
+"rpm saved %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr ""
+"rpm បាន​រក្សាទុក %s ជា %s ។\n"
+"នេះ​ជា​បន្ទាត់ ២៥ ជួរ​ដំបូង​ខុសគ្នា៖\n"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2049
+#, c-format, boost-format
+msgid "rpm created %s as %s, but it was impossible to determine the difference"
+msgstr "rpm បាន​បង្កើត %s ជា %s ប៉ុន្តែ​វា​មិន​អាច​កំណត់​ភាព​ខុស​គ្នា"
+
+#. %s = filenames
+#: zypp/target/rpm/RpmDb.cc:2051
+#, c-format, boost-format
+msgid ""
+"rpm created %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr ""
+"rpm បាន​កំណត់ %s ជា %s ។\n"
+"នេះ​ជា​បន្ទាត់ ២៥ ជួរ​ដំបូង​ខុសគ្នា ៖​\n"
+
+#. report additional rpm output in finish
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+msgid "Additional rpm output"
+msgstr "លទ្ធផល rpm បន្ថែម"
+
+#: zypp/target/rpm/RpmDb.cc:2364
+#, c-format, boost-format
+msgid "created backup %s"
+msgstr "បាន​បង្កើត​ព័ត៌មាន​បម្រុង %s"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2385
 #, fuzzy
-msgid "generally ignore of some dependencies"
-msgstr "ជា​ទូទៅ​មិនអើពើ​នឹង​ភាព​អាស្រ័យ​មួយ​ចំនួន"
+msgid "Signature is OK"
+msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
 
-#: zypp/parser/RepoindexFileReader.cc:197
-#, c-format, boost-format
-msgid "Required attribute '%s' is missing."
-msgstr "បាត់​គុណលក្ខណៈ​ដែល​ទាមទារ '%s' ។"
-
-#: zypp/parser/RepoindexFileReader.cc:209
-#, c-format, boost-format
-msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "បាន​ទាមទារ​គុណលក្ខណៈ​មួយ ឬ​ពីរ​របស់ '%s' ឬ '%s' ។"
-
-#: zypp/base/InterProcessMutex.cc:83
-#, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "មិនអាច​បើក​ឯកសារ​សោ ៖ %s"
-
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr "អំពើ​នេះ កំពុង​រត់​ដោយ​កម្មវិធី​ផ្សេង​មួយ​ទៀត ។"
-
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp/base/Exception.cc:107
-msgid "History:"
-msgstr "ប្រវត្តិ ៖"
-
-#: zypp/base/StrMatcher.cc:152
-#, c-format, boost-format
-msgid "Unknown match mode '%s'"
-msgstr "មិន​ស្គាល់​របៀប​ផ្គូផ្គង '%s'"
-
-#: zypp/base/StrMatcher.cc:153
-#, c-format, boost-format
-msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "មិន​ស្គាល់​របៀប​ផ្គូផ្គង '%s' សម្រាប់​លំនាំ '%s'"
-
-#: zypp/base/StrMatcher.cc:157
-#, c-format, boost-format
-msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "កន្សោម​ធម្មតា​មិនត្រឹមត្រូវ '%s' ៖ regcomp បាន​ត្រឡប់ %d"
-
-#: zypp/base/StrMatcher.cc:158
-#, c-format, boost-format
-msgid "Invalid regular expression '%s'"
-msgstr "កន្សោម​ធម្មតា​មិន​ត្រឹមត្រូវ '%s'"
-
-#: zypp/misc/CheckAccessDeleted.cc:283
-msgid "Please install package 'lsof' first."
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2387
+msgid "Unknown type of signature"
 msgstr ""
 
-#: zypp/media/MediaHandler.cc:370
-msgid ""
-"Create attach point: Can't find a writable directory to create an attach "
-"point"
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2389
+#, fuzzy
+msgid "Signature does not verify"
+msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2391
+#, fuzzy
+msgid "Signature is OK, but key is not trusted"
+msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
+
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2393
+msgid "Signatures public key is not available"
 msgstr ""
 
-#. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
-#, c-format, boost-format
-msgid "Authentication required for '%s'"
-msgstr "បាន​ទាមទារ​ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​សម្រាប់ '%s'"
-
-#: zypp/media/MediaException.cc:31
-#, c-format, boost-format
-msgid "Failed to mount %s on %s"
-msgstr "បរាជ័យ​ក្នុង​ការ​ម៉ោន %s លើ %s"
-
-#: zypp/media/MediaException.cc:41
-#, c-format, boost-format
-msgid "Failed to unmount %s"
-msgstr "បរាជ័យ​ក្នុងការ​អាន់ម៉ោន %s"
-
-#: zypp/media/MediaException.cc:47
-#, c-format, boost-format
-msgid "Bad file name: %s"
-msgstr "ឯកសារ​ខូច​ឈ្មោះ ៖ %s"
-
-#: zypp/media/MediaException.cc:53
-#, c-format, boost-format
-msgid "Medium not opened when trying to perform action '%s'."
-msgstr "ឧបករណ៍​ផ្ទុក​មិនបាន​បើក នៅពេល​ធ្វើ​អំពើ '%s' ។"
-
-#: zypp/media/MediaException.cc:60
-#, c-format, boost-format
-msgid "File '%s' not found on medium '%s'"
-msgstr "រក​មិនឃើញ​ឯកសារ '%s' នៅ​លើ​ឧបករណ៍​ផ្ទុក​ទេ '%s'"
-
-#: zypp/media/MediaException.cc:67
-#, c-format, boost-format
-msgid "Cannot write file '%s'."
-msgstr "មិនអាច​សរសេរ​ឯកសារ '%s' បានទេ ។"
-
-#: zypp/media/MediaException.cc:72
-msgid "Medium not attached"
-msgstr "មិនបាន​ភ្ជាប់​ឧបករណ៍​ផ្ទុក"
-
-#: zypp/media/MediaException.cc:77
-msgid "Bad media attach point"
-msgstr "ចំណុច​ភ្ជាប់​ឧបករណ៍​ផ្ទុក​មិនត្រឹមត្រូវ"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:84
-#, c-format, boost-format
-msgid "Download (curl) initialization failed for '%s'"
-msgstr "ទាញយក​ការ​ចាប់ផ្ដើម​បាន​បរាជ័យ​សម្រាប់ '%s'"
-
-#: zypp/media/MediaException.cc:91
-#, c-format, boost-format
-msgid "System exception '%s' on medium '%s'."
-msgstr "ករណី​លើកលែង​ប្រព័ន្ធ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' ។"
-
-#: zypp/media/MediaException.cc:98
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a file."
-msgstr "ផ្លូវ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' មិនមែន​ជា​ឯកសារ​ទេ ។"
-
-#: zypp/media/MediaException.cc:106
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "ផ្លូវ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' មិនមែន​ជា​ថត​ទេ ។"
-
-#: zypp/media/MediaException.cc:115
-msgid "Malformed URI"
-msgstr "URI មាន​ទ្រង់ទ្រាយ​មិនត្រឹមត្រូវ"
-
-#: zypp/media/MediaException.cc:125
-msgid "Empty host name in URI"
-msgstr "ឈ្មោះ​ម៉ាស៊ីន​ទទេ​ក្នុង URI"
-
-#: zypp/media/MediaException.cc:130
-msgid "Empty filesystem in URI"
-msgstr "ប្រព័ន្ធ​ឯកសា​ទទេ​នៅ​ក្នុង URI"
-
-#: zypp/media/MediaException.cc:135
-msgid "Empty destination in URI"
-msgstr "គោលដៅ​ទទេ​នៅ​ក្នុង URI"
-
-#: zypp/media/MediaException.cc:140
-#, c-format, boost-format
-msgid "Unsupported URI scheme in '%s'."
-msgstr "គ្រោងការណ៍ URI ដែល​មិនបាន​គាំទ្រ​នៅ​ក្នុង '%s' ។"
-
-#: zypp/media/MediaException.cc:145
-msgid "Operation not supported by medium"
-msgstr "ប្រតិបត្តិការ​មិនបាន​គាំទ្រ​ដោយ​ឧបករណ៍​ផ្ទុក​ទេ"
-
-#: zypp/media/MediaException.cc:152
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-"Error message: %s\n"
-msgstr ""
-"ទាញយក​កំហុស​សម្រាប់ '%s' ៖\n"
-"កូដ​កំហុស ៖ %s\n"
-"សារ​កំហុស ៖ %s\n"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:161
-#, c-format, boost-format
-msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "កំហុស​នៅពេល​កំណត់​ជម្រើស​ទាញយក​សម្រាប់ '%s' ៖"
-
-#: zypp/media/MediaException.cc:169
-#, c-format, boost-format
-msgid "Media source '%s' does not contain the desired medium"
-msgstr "ប្រភព​ឧបករណ៍​ផ្ទុក '%s' មិនមាន​ឧបករណ៍​ផ្ទុក​ដែល​ត្រូវការ​ទេ"
-
-#: zypp/media/MediaException.cc:175
-#, c-format, boost-format
-msgid "Medium '%s' is in use by another instance"
-msgstr "ឧបករណ៍​ផ្ទុក '%s' គឺ​កំពុង​ប្រើ​ដោយ​ឧបករណ៍​ផ្សេង"
-
-#: zypp/media/MediaException.cc:182
-msgid "Cannot eject any media"
-msgstr "មិនអាច​ច្រាន​ឧបករណ៍​ផ្ទុក​ណាមួយ​ចេញ​ឡើយ"
-
-#: zypp/media/MediaException.cc:184
-#, c-format, boost-format
-msgid "Cannot eject media '%s'"
-msgstr "មិនអាច​ច្រាន​ឧបករណ៍​ផ្ទុក '%s' ចេញបានទេ"
-
-#: zypp/media/MediaException.cc:199
-#, c-format, boost-format
-msgid "Permission to access '%s' denied."
-msgstr "សិទ្ធិ​ចូល​ដំណើរការ​ទៅ '%s' បាន​បដិសេធ ។"
-
-#: zypp/media/MediaException.cc:207
-#, c-format, boost-format
-msgid "Timeout exceeded when accessing '%s'."
-msgstr "អស់​ពេល​លើល​ពេល​ចូល​ដំណើរការ '%s' ។"
-
-#: zypp/media/MediaException.cc:215
-#, c-format, boost-format
-msgid "Location '%s' is temporarily unaccessible."
-msgstr "ទីតាំង '%s' មិន​ដំណើរការ​ជា​បណ្ដោះអាសន្ន ។"
-
-#: zypp/media/MediaException.cc:223
-#, c-format, boost-format
-msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr " បញ្ហា​វិញ្ញាបនបត្រ SSL ផ្ទៀងផ្ទាត់​ថា​វិញ្ញាបនបត្រ CA គឺ​ត្រឹមត្រូវ​សម្រាប់ '%s'."
-
-#: zypp/media/MediaUserAuth.cc:136
-#, c-format, boost-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr "មិនបាន​គាំទ្រ​វិធីសាស្ត្រ​ផ្ទៀងផ្ទាត់​ភាពត្រឹមត្រូវ HTTP '%s' ឡើយ"
-
-#: zypp/media/MediaCurl.cc:1109
-msgid ""
-"Visit the Novell Customer Center to check whether your registration is valid "
-"and has not expired."
-msgstr ""
-"មើល​មជ្ឈមណ្ឌល​អតិថិជន​របស់ Novell ដើម្បីពិនិត្យ​មើល​ថាតើ ការ​ចុះឈ្មោះ​ត្រឹមត្រូវ ហើយមិនបាន​ផុត​កំណត់ ។"
-
-#: zypp/sat/detail/PoolImpl.cc:189
-msgid "Can not create sat-pool."
-msgstr "មិនអាច​បង្កើត sat-pool បានទេ ។"
-
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:34
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2395
+msgid "File does not exist or signature can't be checked"
 msgstr ""
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:40
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
+#. translators: possible rpm package signature check result [brief]
+#: zypp/target/rpm/RpmDb.cc:2397
+msgid "File is unsigned"
 msgstr ""
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:47
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from package\n"
-"     %3%"
-msgstr ""
+#: zypp/thread/Mutex.cc:33
+msgid "Can't initialize mutex attributes"
+msgstr "មិនអាច​ចាប់ផ្ដើម​គុណលក្ខណៈ mutex បានឡើយ"
 
-#. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
-#: zypp/sat/FileConflicts.cc:53
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file from install of\n"
-"     %3%"
-msgstr ""
+#: zypp/thread/Mutex.cc:40
+msgid "Can't set recursive mutex attribute"
+msgstr "មិនអាច​កំណត់​គុណលក្ខណៈ mutex ហៅ​ខ្លួនឯង​បានឡើយ"
 
-#. [lhs][rhs] 0 = installed; 1 = to be installed
-#. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
-#: zypp/sat/FileConflicts.cc:68
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
+#: zypp/thread/Mutex.cc:47
+msgid "Can't initialize recursive mutex"
+msgstr "មិនអាច​ចាប់ផ្ដើម mutex ហៅខ្លួន​ឯង​បាន​ឡើយ"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:76
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from package\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
-msgstr ""
+#: zypp/thread/Mutex.cc:77
+msgid "Can't acquire the mutex lock"
+msgstr "មិនអាច​យក​សោ mutex បានឡើយ"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:85
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from package\n"
-"     %4%"
-msgstr ""
+#: zypp/thread/Mutex.cc:87
+msgid "Can't release the mutex lock"
+msgstr "មិនអាច​លែង​សោ mutex បាន​ឡើយ"
 
-#. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
-#: zypp/sat/FileConflicts.cc:93
-#, boost-format
-msgid ""
-"File %1%\n"
-"  from install of\n"
-"     %2%\n"
-"  conflicts with file\n"
-"     %3%\n"
-"  from install of\n"
-"     %4%"
-msgstr ""
+#: zypp/url/UrlBase.cc:154
+#, c-format, boost-format
+msgid "Url scheme does not allow a %s"
+msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត %s ទេ"
+
+#: zypp/url/UrlBase.cc:173
+#, c-format, boost-format
+msgid "Invalid %s component '%s'"
+msgstr "សមាសភាគ %s មិន​ត្រឹមត្រូវ '%s'"
+
+#: zypp/url/UrlBase.cc:180
+#, c-format, boost-format
+msgid "Invalid %s component"
+msgstr "សមាសភាគ %s មិន​ត្រឹមត្រូវ"
+
+#: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
+msgid "Query string parsing not supported for this URL"
+msgstr "មិនបាន​គាំទ្រ​ការញែក​ខ្សែអក្សរ​សំណួរ​សម្រាប់ URL នេះ​ឡើយ"
+
+#: zypp/url/UrlBase.cc:824
+msgid "Url scheme is a required component"
+msgstr "គ្រោងការណ៍ Url មិនមែន​ជា​សមាសភាគ​ដែល​បាន​ទាមទារ​ឡើយ"
+
+#: zypp/url/UrlBase.cc:830
+#, c-format, boost-format
+msgid "Invalid Url scheme '%s'"
+msgstr "គ្រោងការណ៍ Url មិន​ត្រឹមត្រូវ '%s'"
+
+#: zypp/url/UrlBase.cc:949
+msgid "Url scheme does not allow a username"
+msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត​ឈ្មោះ​អ្នកប្រើ​ឡើយ"
+
+#: zypp/url/UrlBase.cc:983
+msgid "Url scheme does not allow a password"
+msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត​ពាក្យ​សម្ងាត់​ឡើយ"
+
+#: zypp/url/UrlBase.cc:1012
+msgid "Url scheme requires a host component"
+msgstr "គ្រោងការណ៍ Url ទាមទារ​សមាសភាគ​របស់​ម៉ាស៊ីន"
+
+#: zypp/url/UrlBase.cc:1022
+msgid "Url scheme does not allow a host component"
+msgstr "គ្រោងការណ៍ Url មិនអនុញ្ញាត​សមាសភាគ​របស់​ម៉ាស៊ីន​ឡើយ"
+
+#: zypp/url/UrlBase.cc:1049
+#, c-format, boost-format
+msgid "Invalid host component '%s'"
+msgstr "សមាសភាគ​របស់​ម៉ាស៊ីន​មិន​ត្រឹមត្រូវ '%s'"
+
+#: zypp/url/UrlBase.cc:1070
+msgid "Url scheme does not allow a port"
+msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត​ច្រក​ឡើយ"
+
+#: zypp/url/UrlBase.cc:1081
+#, c-format, boost-format
+msgid "Invalid port component '%s'"
+msgstr "សមាសភាគ​ច្រក​មិន​ត្រឹមត្រូវ '%s'"
+
+#: zypp/url/UrlBase.cc:1098
+msgid "Url scheme requires path name"
+msgstr "គ្រោងការណ៍ Url ទាមទារ​ឈ្មោះ​ផ្លូវ"
+
+#: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
+msgid "Relative path not allowed if authority exists"
+msgstr "មិនបាន​អនុញ្ញាត​ផ្លូវ​ដែល​ទាក់ទង​ទេ ប្រសិន​បើ​មាន​អាជ្ញាធរ"
+
+#: zypp/url/UrlUtils.cc:111
+msgid "Encoded string contains a NUL byte"
+msgstr "ខ្សែអក្សរ​ដែល​បាន​អ៊ិនកូដ មាន NUL បៃ"
+
+#: zypp/url/UrlUtils.cc:173
+msgid "Invalid parameter array split separator character"
+msgstr "តួអក្សរ​បំបែក​សម្រាប់​ពុះ​អារេ​ប៉ារ៉ាម៉ែត្រ មិន​ត្រឹមត្រូវ"
+
+#: zypp/url/UrlUtils.cc:213
+msgid "Invalid parameter map split separator character"
+msgstr "តួអក្សរ​បំបែក​សម្រាប់​ពុះ​ផែនទី​ប៉ារ៉ាម៉ែត្រ មិន​ត្រឹមត្រូវ"
+
+#: zypp/url/UrlUtils.cc:283
+msgid "Invalid parameter array join separator character"
+msgstr "តួអក្សរ​បំបែក​សម្រាប់​ត​អារេ​ប៉ារ៉ាម៉ែត្រ មិន​ត្រឹមត្រូវ"
+
+#~ msgid "Failed to import public key from file %s: %s"
+#~ msgstr "បរាជ័យក្នុង​ការ​នាំចូល​សោ​សាធារណៈ​ពី​ឯកសារ %s: %s"
+
+#~ msgid "Failed to remove public key %s: %s"
+#~ msgstr "បរាជ័យ​ក្នុងការ​យក​សោ​សាធារណៈ %s: %s"
 
 #~ msgid "Cannot find available loop device to mount the image file from '%s'"
 #~ msgstr "មិន​អាច​រក​ឧបករណ៍​ដែល​មាន​ដើម្បីម៉ោន​ឯកសារ​រូបភាព​ពី '%s'"
