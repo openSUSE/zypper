@@ -2005,32 +2005,31 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
   std::string line;
-  std::string rpmmsg;
-  std::vector<std::string> configwarnings;
+  std::string rpmmsg;				// TODO: immediately forward lines via Callback::report rather than collecting
+  std::vector<std::string> configwarnings;	// TODO: immediately process lines rather than collecting
 
   unsigned linecnt = 0;
-  while (systemReadLine(line))
+  while ( systemReadLine( line ) )
   {
-    if ( linecnt < MAXRPMMESSAGELINES )
-      ++linecnt;
-    else
-      continue;
-
-    if (line.substr(0,2)=="%%")
+    if ( str::startsWith( line, "%%" ) )
     {
       int percent;
-      sscanf (line.c_str () + 2, "%d", &percent);
+      sscanf( line.c_str() + 2, "%d", &percent );
       report->progress( percent );
+      continue;
     }
-    else
-      rpmmsg += line+'\n';
 
-    if ( line.substr(0,8) == "warning:" )
-    {
+    if ( linecnt < MAXRPMMESSAGELINES )
+      ++linecnt;
+    else if ( line.find( " scriptlet failed, " ) == std::string::npos )	// always log %script errors
+      continue;
+
+    rpmmsg += line+'\n';
+
+    if ( str::startsWith( line, "warning:" ) )
       configwarnings.push_back(line);
-    }
   }
-  if ( linecnt > MAXRPMMESSAGELINES )
+  if ( linecnt >= MAXRPMMESSAGELINES )
     rpmmsg += "[truncated]\n";
 
   int rpm_status = systemStatus();
@@ -2177,7 +2176,7 @@ void RpmDb::doRemovePackage( const std::string & name_r, RpmInstFlags flags, cal
   run_rpm (opts, ExternalProgram::Stderr_To_Stdout);
 
   std::string line;
-  std::string rpmmsg;
+  std::string rpmmsg;		// TODO: immediately forward lines via Callback::report rather than collecting
 
   // got no progress from command, so we fake it:
   // 5  - command started
@@ -2189,11 +2188,11 @@ void RpmDb::doRemovePackage( const std::string & name_r, RpmInstFlags flags, cal
   {
     if ( linecnt < MAXRPMMESSAGELINES )
       ++linecnt;
-    else
+    else if ( line.find( " scriptlet failed, " ) == std::string::npos )	// always log %script errors
       continue;
     rpmmsg += line+'\n';
   }
-  if ( linecnt > MAXRPMMESSAGELINES )
+  if ( linecnt >= MAXRPMMESSAGELINES )
     rpmmsg += "[truncated]\n";
   report->progress( 50 );
   int rpm_status = systemStatus();
