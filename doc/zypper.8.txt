@@ -625,7 +625,7 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 	+
 	If no repositories are specified via the *--from* option, zypper will do a global upgrade with all defined repositories. This global form of dup will also consider unchanged installed packages and re-evaluate their dependencies. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13.1 and openSUSE 13.2.
 	+
-	For all repositories which have the distribution version within their URL (like http://download.opensuse.org/distribution/'13.1'/repo/oss) using the *$releasever* variable instead may be helpful (http://download.opensuse.org/distribution/*$releasever*/repo/oss). The variable is per default substituted by the current distributions version ('13.1') This value can be overwritten using the *--releasever* global option. Calling *zypper --releasever 13.2*'...' will cause these repos to use the new location (http://download.opensuse.org/distribution/'13.2'/repo/oss) without need to add/remove anything. Once the *dup* is performed, *$releasever* will default to the new distribution version. See section *Repository Management* for more info about variable substitution.
+	For all repositories which have the distribution version within their URL (like https://download.opensuse.org/distribution/'13.1'/repo/oss) using the *$releasever* variable instead may be helpful (https://download.opensuse.org/distribution/*$releasever*/repo/oss). The variable is per default substituted by the current distributions version ('13.1') This value can be overwritten using the *--releasever* global option. Calling *zypper --releasever 13.2*'...' will cause these repos to use the new location (https://download.opensuse.org/distribution/'13.2'/repo/oss) without need to add/remove anything. Once the *dup* is performed, *$releasever* will default to the new distribution version. See section *Repository Management* for more info about variable substitution.
 	+
 	Note: distribution upgrades in openSUSE are currently only supported between consecutive releases. To upgrade multiple releases, upgrade each consecutive release one at a time. For more details see *http://en.opensuse.org/SDB:System_upgrade* and the 'openSUSE release notes' at *http://doc.opensuse.org/release-notes/*.
 +
@@ -1051,7 +1051,7 @@ include::{incdir}/option_GPG_Check.txt[]
 		$ *zypper ar -c -n \'Packman 11.1 repo' http://packman.iu-bremen.de/suse/11.1 packman*;;
 		Add a HTTP repository, probe it, name it 'Packman 11.1 repo', and use 'packman' as alias.
 
-		$ *zypper ar http://download.opensuse.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn.repo*;; {nop}
+		$ *zypper ar https://download.opensuse.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn.repo*;; {nop}
 		$ *zypper ar myreposbackup.repo*;;
 		Add repositories from a .repo file.
 --

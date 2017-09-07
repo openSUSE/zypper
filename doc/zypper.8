@@ -1258,13 +1258,13 @@ If no repositories are specified via the
 option, zypper will do a global upgrade with all defined repositories\&. This global form of dup will also consider unchanged installed packages and re\-evaluate their dependencies\&. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases\&. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13\&.1 and openSUSE 13\&.2\&.
 
 For all repositories which have the distribution version within their URL (like
-http://download\&.opensuse\&.org/distribution/\fI13\&.1\fR/repo/oss) using the
+https://download\&.opensuse\&.org/distribution/\fI13\&.1\fR/repo/oss) using the
 \fB$releasever\fR
-variable instead may be helpful (http://download\&.opensuse\&.org/distribution/\fB$releasever\fR/repo/oss)\&. The variable is per default substituted by the current distributions version (\fI13\&.1\fR) This value can be overwritten using the
+variable instead may be helpful (https://download\&.opensuse\&.org/distribution/\fB$releasever\fR/repo/oss)\&. The variable is per default substituted by the current distributions version (\fI13\&.1\fR) This value can be overwritten using the
 \fB\-\-releasever\fR
 global option\&. Calling
 \fBzypper \-\-releasever 13\&.2\fR\fI\&...\fR
-will cause these repos to use the new location (http://download\&.opensuse\&.org/distribution/\fI13\&.2\fR/repo/oss) without need to add/remove anything\&. Once the
+will cause these repos to use the new location (https://download\&.opensuse\&.org/distribution/\fI13\&.2\fR/repo/oss) without need to add/remove anything\&. Once the
 \fBdup\fR
 is performed,
 \fB$releasever\fR
@@ -2340,7 +2340,7 @@ Add a HTTP repository, probe it, name it
 as alias\&.
 .RE
 .PP
-$ \fBzypper ar \fR\fBhttp://download\&.opensuse\&.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn\&.repo\fR
+$ \fBzypper ar \fR\fBhttps://download\&.opensuse\&.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn\&.repo\fR
 .RS 4
 .RE
 .PP

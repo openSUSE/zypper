@@ -420,7 +420,7 @@ Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::s
 {
   // obs-server ==> < base_url, default_platform >
   static std::map<std::string, std::pair<Url,std::string>> wellKnownServers({
-    { "build.opensuse.org",	{ Url("http://download.opensuse.org/repositories/"),	std::string() } }
+    { "build.opensuse.org",	{ Url("https://download.opensuse.org/repositories/"),	std::string() } }
   });
 
   static str::regex obs_uri_rx("^obs://(" OBS_PROJECT_NAME_RX ")(/(.*)?)?$");
