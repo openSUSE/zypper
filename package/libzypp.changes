@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep  7 12:27:44 CEST 2017 - ma@suse.de
+
+- Propagate 'rpm --import' errors (bsc#1057188)
+- Fix typos in zypp.conf
+- version 16.16.0 (0)
+
+-------------------------------------------------------------------
 Mon Aug 28 16:05:36 CEST 2017 - ma@suse.de
 
 - Add testcase to compile (bsc#1055920)
