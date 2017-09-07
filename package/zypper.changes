@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep  7 11:16:22 CEST 2017 - ma@suse.de
+
+- Return '107' if some rpm %post configuration script failed
+  (bsc#1047233)
+- version 1.13.33
+
+-------------------------------------------------------------------
 Fri Aug 25 12:50:11 CEST 2017 - ma@suse.de
 
 - GPG key: Also show a gpg keys subkeys (bsc#1008325)
