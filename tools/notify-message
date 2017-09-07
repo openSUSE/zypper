@@ -9,7 +9,7 @@ notification messages. The optional -p argument should
 denote the packages that causes this message to be sent.
 The message text itself is read from stdin.
 
-See update.messages.notify option in /etc/zypp.conf
+See update.messages.notify option in /etc/zypp/zypp.conf
 for details.
 EOF
 exit 0;
