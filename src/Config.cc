@@ -190,7 +190,7 @@ Config::Config()
   , color_osdebug	(namedColor("default") < ansi::Color::Attr::Reverse)
   , color_pkglistHighlight(true)
   , color_pkglistHighlightAttribute(ansi::Color::nocolor())
-  , obs_baseUrl("http://download.opensuse.org/repositories/")
+  , obs_baseUrl("https://download.opensuse.org/repositories/")
   , obs_platform("")	// guess
 {}
 
