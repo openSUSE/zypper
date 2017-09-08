@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Sep  8 18:05:30 CEST 2017 - ma@suse.de
+
+- Support multiple product licenses in repomd (FATE#322276)
+- version 16.17.0 (0)
+
+-------------------------------------------------------------------
 Thu Sep  7 12:27:44 CEST 2017 - ma@suse.de
 
 - Propagate 'rpm --import' errors (bsc#1057188)
