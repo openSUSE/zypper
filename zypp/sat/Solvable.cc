@@ -690,8 +690,12 @@ namespace zypp
       if ( ret.empty() && isKind<Product>() )
       {
 	const RepoInfo & ri( repoInfo() );
-	if ( ri.needToAcceptLicense() || ! ui::Selectable::get( *this )->hasInstalledObj() )
-	  ret = ri.getLicense( lang_r ); // bnc#908976: suppress informal license upon update
+	std::string riname( name() );	// "license-"+name with fallback "license"
+	if ( ! ri.hasLicense( riname ) )
+	  riname.clear();
+
+	if ( ri.needToAcceptLicense( riname ) || ! ui::Selectable::get( *this )->hasInstalledObj() )
+	  ret = ri.getLicense( riname, lang_r ); // bnc#908976: suppress informal license upon update
       }
       return ret;
     }
@@ -699,7 +703,16 @@ namespace zypp
     bool Solvable::needToAcceptLicense() const
     {
       NO_SOLVABLE_RETURN( false );
-      return ( isKind<Product>() ? repoInfo().needToAcceptLicense() : true );
+      if ( isKind<Product>() )
+      {
+	const RepoInfo & ri( repoInfo() );
+	std::string riname( name() );	// "license-"+name with fallback "license"
+	if ( ! ri.hasLicense( riname ) )
+	  riname.clear();
+
+	return ri.needToAcceptLicense( riname );
+      }
+      return true;
     }
 
 

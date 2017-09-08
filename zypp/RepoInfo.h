@@ -476,27 +476,45 @@ namespace zypp
       { return hasContentAny( container_r.begin(), container_r.end() ); }
 
     public:
-      /** \name Repository license
-      */
+      /** \name Repository/Product license
+       * In case a repository provides multiple license tarballs in repomd.xml
+       * \code
+       *   <data type="license">...</data>
+       *   <data type="license-sles">...</data>
+       *   <data type="license-sled">...</data>
+       * \endcode
+       * you can address the individual licenses by passing their name
+       * (e.g. \c "sles" to access the \c type="license-sles").
+       * No on an empty name will refer to \c type="license".
+       */
       //@{
       /** Whether there is a license associated with the repo. */
       bool hasLicense() const;
+      /** \overload taking a (product)name */
+      bool hasLicense( const std::string & name_r ) const;
 
       /** Whether the repo license has to be accepted, e.g. there is no
        * no acceptance needed for openSUSE.
        */
       bool needToAcceptLicense() const;
+      /** \overload taking a (product)name */
+      bool needToAcceptLicense( const std::string & name_r ) const;
 
       /** Return the best license for the current (or a specified) locale. */
       std::string getLicense( const Locale & lang_r = Locale() ) const;
+      /** \overload not const LEGACY API */
       std::string getLicense( const Locale & lang_r = Locale() ); // LEGACY API
+      /** \overload taking a (product)name */
+      std::string getLicense( const std::string & name_r, const Locale & lang_r = Locale() ) const;
 
       /** Return the locales the license is available for.
        * \ref Locale::noCode is included in case of \c license.txt which does
        * not specify a specific locale.
        */
       LocaleSet getLicenseLocales() const;
-      //@}
+      /** \overload taking a (product)name */
+      LocaleSet getLicenseLocales( const std::string & name_r ) const;
+     //@}
 
     public:
       /**

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repomd xmlns="http://linux.duke.edu/metadata/repo">
+  <data type="license">
+    <location href="repodata/CHECKSUM-license.tar.gz" />
+    <checksum type="sha256">3a4013a12934c55f9a6b0c1b8db2ce6660840b1f7cbee95ec92a50c13c5b9e95</checksum>
+  </data>
+  <data type="license-prod">
+    <location href="repodata/CHECKSUM-license-prod.tar.gz" />
+    <checksum type="sha256">3c0371f0a090e0ad6432c705798e7c5617b278e85cf382344e80c4dfaf07cffb</checksum>
+  </data>
+</repomd>

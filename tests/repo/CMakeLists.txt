@@ -9,6 +9,7 @@ ADD_TESTS(
   ExtendedMetadata
   MirrorList
   PluginServices
+  RepoLicense
   RepoSigcheck
   RepoVariables
 )

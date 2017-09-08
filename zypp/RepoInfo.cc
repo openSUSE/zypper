@@ -73,15 +73,24 @@ namespace zypp
 
   public:
     /** Path to a license tarball in case it exists in the repo. */
-    Pathname licenseTgz() const
+    Pathname licenseTgz( const std::string & name_r ) const
     {
       Pathname ret;
       if ( !metadataPath().empty() )
       {
+	std::string licenseStem( "license" );
+	if ( !name_r.empty() )
+	{
+	  licenseStem += "-";
+	  licenseStem += name_r;
+	}
+
 	filesystem::Glob g;
-	g.add( metadataPath() / path / "repodata/*license.tar.gz" );
+	// TODO: REPOMD: this assumes we know the name of the tarball. In fact
+	// we'd need to get the file from repomd.xml (<data type="license[-name_r]">)
+	g.add( metadataPath() / path / ("repodata/*"+licenseStem+".tar.gz") );
 	if ( g.empty() )
-	  g.add( metadataPath() / path / "license.tar.gz" );
+	  g.add( metadataPath() / path / (licenseStem+".tar.gz") );
 
 	if ( !g.empty() )
 	  ret = *g.begin();
@@ -611,16 +620,18 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   bool RepoInfo::hasLicense() const
-  {
-    return !_pimpl->licenseTgz().empty();
-  }
+  { return hasLicense( std::string() ); }
+
+  bool RepoInfo::hasLicense( const std::string & name_r ) const
+  { return !_pimpl->licenseTgz( name_r ).empty(); }
+
 
   bool RepoInfo::needToAcceptLicense() const
-  {
-    static const std::string noAcceptanceFile = "no-acceptance-needed\n";
-    bool accept = true;
+  { return needToAcceptLicense( std::string() ); }
 
-    const Pathname & licenseTgz( _pimpl->licenseTgz() );
+  bool RepoInfo::needToAcceptLicense( const std::string & name_r ) const
+  {
+    const Pathname & licenseTgz( _pimpl->licenseTgz( name_r ) );
     if ( licenseTgz.empty() )
       return false;     // no licenses at all
 
@@ -630,8 +641,10 @@ namespace zypp
     cmd.push_back( "-z" );
     cmd.push_back( "-f" );
     cmd.push_back( licenseTgz.asString() );
-
     ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+
+    bool accept = true;
+    static const std::string noAcceptanceFile = "no-acceptance-needed\n";
     for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() )
     {
       if ( output == noAcceptanceFile )
@@ -639,23 +652,27 @@ namespace zypp
         accept = false;
       }
     }
-    MIL << "License for " << name() << " has to be accepted: " << (accept?"true":"false" ) << endl;
+    MIL << "License(" << name_r << ") in " << name() << " has to be accepted: " << (accept?"true":"false" ) << endl;
     return accept;
   }
 
+
   std::string RepoInfo::getLicense( const Locale & lang_r )
-  { return const_cast<const RepoInfo *>(this)->getLicense( lang_r );  }
+  { return const_cast<const RepoInfo *>(this)->getLicense( std::string(), lang_r ); }
 
   std::string RepoInfo::getLicense( const Locale & lang_r ) const
+  { return getLicense( std::string(), lang_r ); }
+
+  std::string RepoInfo::getLicense( const std::string & name_r, const Locale & lang_r ) const
   {
-    LocaleSet avlocales( getLicenseLocales() );
+    LocaleSet avlocales( getLicenseLocales( name_r ) );
     if ( avlocales.empty() )
       return std::string();
 
     Locale getLang( Locale::bestMatch( avlocales, lang_r ) );
     if ( !getLang && avlocales.find( Locale::noCode ) == avlocales.end() )
     {
-      WAR << "License.tar.gz contains no fallback text! " << *this << endl;
+      WAR << "License(" << name_r << ") in " << name() << " contains no fallback text!" << endl;
       // Using the fist locale instead of returning no text at all.
       // So the user might recognize that there is a license, even if he
       // can't read it.
@@ -673,7 +690,7 @@ namespace zypp
     cmd.push_back( "-z" );
     cmd.push_back( "-O" );
     cmd.push_back( "-f" );
-    cmd.push_back( _pimpl->licenseTgz().asString() ); // if it not exists, avlocales was empty.
+    cmd.push_back( _pimpl->licenseTgz( name_r ).asString() ); // if it not exists, avlocales was empty.
     cmd.push_back( licenseFile );
 
     std::string ret;
@@ -686,9 +703,13 @@ namespace zypp
     return ret;
   }
 
+
   LocaleSet RepoInfo::getLicenseLocales() const
+  { return getLicenseLocales( std::string() ); }
+
+  LocaleSet RepoInfo::getLicenseLocales( const std::string & name_r ) const
   {
-    const Pathname & licenseTgz( _pimpl->licenseTgz() );
+    const Pathname & licenseTgz( _pimpl->licenseTgz( name_r ) );
     if ( licenseTgz.empty() )
       return LocaleSet();
 
