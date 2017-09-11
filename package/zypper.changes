@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Sep 11 16:16:27 CEST 2017 - ma@suse.de
+
+- Summary: Differ between unsupported and packages with unknown
+  support status  (bsc#1057634)
+- Use HTTPS by default for repository URLs derived from obs://
+- version 1.13.34
+
+-------------------------------------------------------------------
 Thu Sep  7 11:16:22 CEST 2017 - ma@suse.de
 
 - Return '107' if some rpm %post configuration script failed
