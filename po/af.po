@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-07 12:53+0200\n"
+"POT-Creation-Date: 2017-09-11 16:15+0200\n"
 "PO-Revision-Date: 2006-11-03 12:03\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -750,196 +750,196 @@ msgstr ""
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:414 src/Summary.cc:486
+#: src/Summary.cc:425 src/Summary.cc:497
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:505
+#: src/Summary.cc:516
 #, fuzzy, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:510
+#: src/Summary.cc:521
 #, fuzzy, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:515
+#: src/Summary.cc:526
 #, fuzzy, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:520
+#: src/Summary.cc:531
 #, fuzzy, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:525
+#: src/Summary.cc:536
 #, fuzzy, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:530
+#: src/Summary.cc:541
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:552
+#: src/Summary.cc:563
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:557
+#: src/Summary.cc:568
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:562
+#: src/Summary.cc:573
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:567
+#: src/Summary.cc:578
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:572
+#: src/Summary.cc:583
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:591
+#: src/Summary.cc:602
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:596
+#: src/Summary.cc:607
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:601
+#: src/Summary.cc:612
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:606
+#: src/Summary.cc:617
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:611
+#: src/Summary.cc:622
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:630
+#: src/Summary.cc:641
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:635
+#: src/Summary.cc:646
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:640
+#: src/Summary.cc:651
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:645
+#: src/Summary.cc:656
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:650
+#: src/Summary.cc:661
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:669
+#: src/Summary.cc:680
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:674
+#: src/Summary.cc:685
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:679
+#: src/Summary.cc:690
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:684
+#: src/Summary.cc:695
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:696
+#: src/Summary.cc:707
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:830
+#: src/Summary.cc:841
 #, fuzzy, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -947,7 +947,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:835
+#: src/Summary.cc:846
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -955,7 +955,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:840
+#: src/Summary.cc:851
 #, fuzzy, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -963,7 +963,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:845
+#: src/Summary.cc:856
 #, fuzzy, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -971,7 +971,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:850
+#: src/Summary.cc:861
 #, fuzzy, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -979,7 +979,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:855
+#: src/Summary.cc:866
 #, fuzzy, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -987,7 +987,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:899
+#: src/Summary.cc:910
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -998,7 +998,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:911
+#: src/Summary.cc:922
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -1009,7 +1009,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:921
+#: src/Summary.cc:932
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1020,7 +1020,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:934
+#: src/Summary.cc:945
 #, fuzzy, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -1028,7 +1028,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:938
+#: src/Summary.cc:949
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -1036,7 +1036,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:942
+#: src/Summary.cc:953
 #, fuzzy, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -1044,7 +1044,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:946
+#: src/Summary.cc:957
 #, fuzzy, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1052,7 +1052,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:976
+#: src/Summary.cc:987
 #, fuzzy, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1060,7 +1060,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:981
+#: src/Summary.cc:992
 #, fuzzy, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -1068,7 +1068,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:986
+#: src/Summary.cc:997
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1076,7 +1076,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:991
+#: src/Summary.cc:1002
 #, fuzzy, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1084,7 +1084,7 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:996
+#: src/Summary.cc:1007
 #, fuzzy, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1092,84 +1092,92 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1018
+#: src/Summary.cc:1029
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1023
+#: src/Summary.cc:1034
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1028
+#: src/Summary.cc:1039
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1033
+#: src/Summary.cc:1044
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1038
+#: src/Summary.cc:1049
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1060
+#: src/Summary.cc:1071
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1065
+#: src/Summary.cc:1076
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1070
+#: src/Summary.cc:1081
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1075
+#: src/Summary.cc:1086
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1080
+#: src/Summary.cc:1091
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1100
+#: src/Summary.cc:1111
+#, fuzzy, c-format, boost-format
+msgid "The following package has no support information from it's vendor:"
+msgid_plural ""
+"The following %d packages have no support information from their vendor:"
+msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
+msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
+
+#: src/Summary.cc:1129
 #, fuzzy, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1120
+#: src/Summary.cc:1147
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1178,28 +1186,28 @@ msgid_plural ""
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1138
+#: src/Summary.cc:1167
 #, fuzzy, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1143
+#: src/Summary.cc:1172
 #, fuzzy, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1148
+#: src/Summary.cc:1177
 #, fuzzy, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1178
+#: src/Summary.cc:1207
 #, fuzzy, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1209,57 +1217,57 @@ msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1191
+#: src/Summary.cc:1220
 #, fuzzy
 msgid "Available"
 msgstr "Beskikbare geheue"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1197 src/info.cc:345 src/info.cc:436 src/info.cc:567
+#: src/Summary.cc:1226 src/info.cc:345 src/info.cc:436 src/info.cc:567
 msgid "Installed"
 msgstr "Geïnstalleer"
 
-#: src/Summary.cc:1202
+#: src/Summary.cc:1231
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr ""
 
-#: src/Summary.cc:1212
+#: src/Summary.cc:1241
 #, fuzzy, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
-#: src/Summary.cc:1230
+#: src/Summary.cc:1259
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr ""
 
-#: src/Summary.cc:1233
+#: src/Summary.cc:1262
 #, fuzzy
 msgid "Download only."
 msgstr "&Laai af"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1239
+#: src/Summary.cc:1268
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr ""
 
-#: src/Summary.cc:1241
+#: src/Summary.cc:1270
 msgid "No additional space will be used or freed after the operation."
 msgstr ""
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1248
+#: src/Summary.cc:1277
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1271
+#: src/Summary.cc:1300
 #, fuzzy
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
@@ -1267,28 +1275,28 @@ msgstr[0] "Geen klank nie"
 msgstr[1] "Geen klank nie"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1282
+#: src/Summary.cc:1311
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1285
+#: src/Summary.cc:1314
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1296
+#: src/Summary.cc:1325
 msgid "new"
 msgid_plural "new"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1299
+#: src/Summary.cc:1328
 #, fuzzy
 msgid "new package to install"
 msgid_plural "new packages to install"
@@ -1296,7 +1304,7 @@ msgstr[0] "Geen nodigheid om %s te installeer nie"
 msgstr[1] "Geen nodigheid om %s te installeer nie"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1310
+#: src/Summary.cc:1339
 #, fuzzy
 msgid "to reinstall"
 msgid_plural "to reinstall"
@@ -1304,7 +1312,7 @@ msgstr[0] "installeer"
 msgstr[1] "installeer"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1313
+#: src/Summary.cc:1342
 #, fuzzy
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
@@ -1312,7 +1320,7 @@ msgstr[0] "Pakketinstallasie"
 msgstr[1] "Pakketinstallasie"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1324
+#: src/Summary.cc:1353
 #, fuzzy
 msgid "to remove"
 msgid_plural "to remove"
@@ -1320,21 +1328,21 @@ msgstr[0] "%s verwyder is goed"
 msgstr[1] "%s verwyder is goed"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1327
+#: src/Summary.cc:1356
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1338
+#: src/Summary.cc:1367
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1341
+#: src/Summary.cc:1370
 #, fuzzy
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
@@ -1342,7 +1350,7 @@ msgstr[0] "Hierdie pakkette moet geïnstalleer word:"
 msgstr[1] "Hierdie pakkette moet geïnstalleer word:"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1352
+#: src/Summary.cc:1381
 #, fuzzy
 msgid "to change arch"
 msgid_plural "to change arch"
@@ -1350,14 +1358,14 @@ msgstr[0] "Laat wysigings weg"
 msgstr[1] "Laat wysigings weg"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1355
+#: src/Summary.cc:1384
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1366
+#: src/Summary.cc:1395
 #, fuzzy
 msgid "source package"
 msgid_plural "source packages"
@@ -1365,7 +1373,7 @@ msgstr[0] "pakket"
 msgstr[1] "pakket"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1369
+#: src/Summary.cc:1398
 #, fuzzy
 msgid "source package to install"
 msgid_plural "source packages to install"
@@ -1373,13 +1381,13 @@ msgstr[0] "Geen nodigheid om %s te installeer nie"
 msgstr[1] "Geen nodigheid om %s te installeer nie"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1434
+#: src/Summary.cc:1464
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
 
-#: src/Summary.cc:1437
+#: src/Summary.cc:1467
 msgid "System reboot required."
 msgstr ""
 

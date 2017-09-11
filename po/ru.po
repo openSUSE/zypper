@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-07 12:53+0200\n"
+"POT-Creation-Date: 2017-09-11 16:15+0200\n"
 "PO-Revision-Date: 2017-04-25 11:24+0000\n"
 "Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
@@ -811,7 +811,7 @@ msgstr "При обновлении стека обновлений сначал
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:414 src/Summary.cc:486
+#: src/Summary.cc:425 src/Summary.cc:497
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
@@ -819,7 +819,7 @@ msgstr[0] "…и ещё %1% пункт."
 msgstr[1] "…и ещё %1% пункта."
 msgstr[2] "…и ещё %1% пунктов."
 
-#: src/Summary.cc:505
+#: src/Summary.cc:516
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
@@ -827,7 +827,7 @@ msgstr[0] "Будет установлен %d НОВЫЙ пакет:"
 msgstr[1] "Будут установлены %d НОВЫХ пакета:"
 msgstr[2] "Будут установлены %d НОВЫХ пакетов:"
 
-#: src/Summary.cc:510
+#: src/Summary.cc:521
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
@@ -835,7 +835,7 @@ msgstr[0] "Будет установлено %d НОВОЕ исправлени�
 msgstr[1] "Будут установлены %d НОВЫХ исправления:"
 msgstr[2] "Будут установлены %d НОВЫХ исправлений:"
 
-#: src/Summary.cc:515
+#: src/Summary.cc:526
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
@@ -843,7 +843,7 @@ msgstr[0] "Будет установлен %d НОВЫЙ шаблон:"
 msgstr[1] "Будут установлены %d НОВЫХ шаблона:"
 msgstr[2] "Будут установлены %d НОВЫХ шаблонов:"
 
-#: src/Summary.cc:520
+#: src/Summary.cc:531
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
@@ -851,7 +851,7 @@ msgstr[0] "Будет установлен %d НОВЫЙ продукт:"
 msgstr[1] "Будут установлены %d НОВЫХ продукта:"
 msgstr[2] "Будут установлены %d НОВЫХ продуктов:"
 
-#: src/Summary.cc:525
+#: src/Summary.cc:536
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
@@ -859,7 +859,7 @@ msgstr[0] "Будет установлен %d пакет с исходным к�
 msgstr[1] "Будут установлены %d пакета с исходным кодом:"
 msgstr[2] "Будут установлены %d пакетов с исходным кодом:"
 
-#: src/Summary.cc:530
+#: src/Summary.cc:541
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
@@ -867,7 +867,7 @@ msgstr[0] "Будет установлено %d приложение:"
 msgstr[1] "Будут установлены %d приложения:"
 msgstr[2] "Будут установлены %d приложений:"
 
-#: src/Summary.cc:552
+#: src/Summary.cc:563
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
@@ -875,7 +875,7 @@ msgstr[0] "Будет УДАЛЕН %d пакет:"
 msgstr[1] "Будут УДАЛЕНЫ %d пакета:"
 msgstr[2] "Будут УДАЛЕНЫ %d пакетов:"
 
-#: src/Summary.cc:557
+#: src/Summary.cc:568
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
@@ -883,7 +883,7 @@ msgstr[0] "Будет УДАЛЕНО %d исправление:"
 msgstr[1] "Будут УДАЛЕНЫ %d исправления:"
 msgstr[2] "Будут УДАЛЕНЫ %d исправлений:"
 
-#: src/Summary.cc:562
+#: src/Summary.cc:573
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
@@ -891,7 +891,7 @@ msgstr[0] "Будет УДАЛЕН %d шаблон:"
 msgstr[1] "Будут УДАЛЕНЫ %d шаблона:"
 msgstr[2] "Будут УДАЛЕНЫ %d шаблонов:"
 
-#: src/Summary.cc:567
+#: src/Summary.cc:578
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
@@ -899,7 +899,7 @@ msgstr[0] "Будет УДАЛЕН %d продукт:"
 msgstr[1] "Будут УДАЛЕНЫ %d продукта:"
 msgstr[2] "Будут УДАЛЕНЫ %d продуктов:"
 
-#: src/Summary.cc:572
+#: src/Summary.cc:583
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
@@ -907,7 +907,7 @@ msgstr[0] "Будет УДАЛЕНО %d приложение:"
 msgstr[1] "Будут УДАЛЕНЫ %d приложения:"
 msgstr[2] "Будут УДАЛЕНЫ %d приложений:"
 
-#: src/Summary.cc:591
+#: src/Summary.cc:602
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
@@ -915,7 +915,7 @@ msgstr[0] "Будет обновлен %d пакет:"
 msgstr[1] "Будут обновлены %d пакета:"
 msgstr[2] "Будут обновлены %d пакетов:"
 
-#: src/Summary.cc:596
+#: src/Summary.cc:607
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
@@ -923,7 +923,7 @@ msgstr[0] "Будет обновлено %d исправление:"
 msgstr[1] "Будут обновлены %d исправления:"
 msgstr[2] "Будут обновлены %d исправлений:"
 
-#: src/Summary.cc:601
+#: src/Summary.cc:612
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
@@ -931,7 +931,7 @@ msgstr[0] "Будет обновлен %d шаблон:"
 msgstr[1] "Будут обновлены %d шаблона:"
 msgstr[2] "Будут обновлены %d шаблонов:"
 
-#: src/Summary.cc:606
+#: src/Summary.cc:617
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
@@ -939,7 +939,7 @@ msgstr[0] "Будет обновлен %d продукт:"
 msgstr[1] "Будут обновлены %d продукта:"
 msgstr[2] "Будут обновлены %d продуктов:"
 
-#: src/Summary.cc:611
+#: src/Summary.cc:622
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
@@ -947,7 +947,7 @@ msgstr[0] "Будет обновлено %d приложение:"
 msgstr[1] "Будут обновлены %d приложения:"
 msgstr[2] "Будут обновлены %d приложений:"
 
-#: src/Summary.cc:630
+#: src/Summary.cc:641
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
@@ -955,7 +955,7 @@ msgstr[0] "Будет возвращен к более старой версии
 msgstr[1] "Будут возвращены к более старой версии %d пакета:"
 msgstr[2] "Будут возвращены к более старой версии %d пакетов:"
 
-#: src/Summary.cc:635
+#: src/Summary.cc:646
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
@@ -963,7 +963,7 @@ msgstr[0] "Будет возвращено к более старой верси
 msgstr[1] "Будут возвращены к более старой версии %d исправления:"
 msgstr[2] "Будут возвращены к более старой версии %d исправлений:"
 
-#: src/Summary.cc:640
+#: src/Summary.cc:651
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
@@ -971,7 +971,7 @@ msgstr[0] "Будет возвращен к более старой версии
 msgstr[1] "Будут возвращены к более старой версии %d шаблона:"
 msgstr[2] "Будут возвращены к более старой версии %d шаблонов:"
 
-#: src/Summary.cc:645
+#: src/Summary.cc:656
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
@@ -979,7 +979,7 @@ msgstr[0] "Будет возвращен к более старой версии
 msgstr[1] "Будут возвращены к более старой версии %d продукта:"
 msgstr[2] "Будут возвращены к более старой версии %d продуктов:"
 
-#: src/Summary.cc:650
+#: src/Summary.cc:661
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
@@ -987,7 +987,7 @@ msgstr[0] "Будет возвращено к более старой верси
 msgstr[1] "Будут возвращены к более старой версии %d приложения:"
 msgstr[2] "Будут возвращены к более старой версии %d приложений:"
 
-#: src/Summary.cc:669
+#: src/Summary.cc:680
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
@@ -995,7 +995,7 @@ msgstr[0] "Будет переустановлен %d пакет:"
 msgstr[1] "Будут переустановлены %d пакета:"
 msgstr[2] "Будут переустановлены %d пакетов:"
 
-#: src/Summary.cc:674
+#: src/Summary.cc:685
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
@@ -1003,7 +1003,7 @@ msgstr[0] "Будет переустановлено %d исправление:"
 msgstr[1] "Будут переустановлены %d исправления:"
 msgstr[2] "Будут переустановлены %d исправлений:"
 
-#: src/Summary.cc:679
+#: src/Summary.cc:690
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
@@ -1011,7 +1011,7 @@ msgstr[0] "Будет переустановлен %d шаблон:"
 msgstr[1] "Будут переустановлены %d шаблона:"
 msgstr[2] "Будут переустановлены %d шаблонов:"
 
-#: src/Summary.cc:684
+#: src/Summary.cc:695
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
@@ -1019,7 +1019,7 @@ msgstr[0] "Будет переустановлен %d продукт:"
 msgstr[1] "Будут переустановлены %d продукта:"
 msgstr[2] "Будут переустановлены %d продуктов:"
 
-#: src/Summary.cc:696
+#: src/Summary.cc:707
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
@@ -1027,7 +1027,7 @@ msgstr[0] "Будет переустановлено %d приложение:"
 msgstr[1] "Будут переустановлены %d приложения:"
 msgstr[2] "Будут переустановлены %d приложений:"
 
-#: src/Summary.cc:830
+#: src/Summary.cc:841
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -1036,7 +1036,7 @@ msgstr[0] "%d рекомендованный пакет был выбран ав
 msgstr[1] "%d рекомендованных пакета были выбраны автоматически:"
 msgstr[2] "%d рекомендованных пакетов были выбраны автоматически:"
 
-#: src/Summary.cc:835
+#: src/Summary.cc:846
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -1045,7 +1045,7 @@ msgstr[0] "%d рекомендованное исправление было в�
 msgstr[1] "%d рекомендованных исправления были выбраны автоматически:"
 msgstr[2] "%d рекомендованных исправлений были выбраны автоматически:"
 
-#: src/Summary.cc:840
+#: src/Summary.cc:851
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -1054,7 +1054,7 @@ msgstr[0] "%d рекомендованный шаблон был выбран а
 msgstr[1] "%d рекомендованных шаблона были выбраны автоматически:"
 msgstr[2] "%d рекомендованных шаблонов были выбраны автоматически:"
 
-#: src/Summary.cc:845
+#: src/Summary.cc:856
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -1063,7 +1063,7 @@ msgstr[0] "%d рекомендованный продукт был выбран 
 msgstr[1] "%d рекомендованных продукта были выбраны автоматически:"
 msgstr[2] "%d рекомендованных продуктов были выбраны автоматически:"
 
-#: src/Summary.cc:850
+#: src/Summary.cc:861
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -1074,7 +1074,7 @@ msgstr[1] ""
 msgstr[2] ""
 "%d рекомендованных пакетов с исходным кодом были выбраны автоматически:"
 
-#: src/Summary.cc:855
+#: src/Summary.cc:866
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -1083,7 +1083,7 @@ msgstr[0] "%d рекомендованное приложение было вы�
 msgstr[1] "%d рекомендованных приложения были выбраны автоматически:"
 msgstr[2] "%d рекомендованных приложений были выбраны автоматически:"
 
-#: src/Summary.cc:899
+#: src/Summary.cc:910
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -1101,7 +1101,7 @@ msgstr[2] ""
 "%d пакетов рекомендованы, но не будут установлены (будут установлены только "
 "требуемые пакеты):"
 
-#: src/Summary.cc:911
+#: src/Summary.cc:922
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -1118,7 +1118,7 @@ msgstr[2] ""
 "%d пакетов рекомендованы, но не будут установлены (были вручную удалены "
 "ранее):"
 
-#: src/Summary.cc:921
+#: src/Summary.cc:932
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1136,7 +1136,7 @@ msgstr[2] ""
 "%d пакетов рекомендованы, но не будут установлены из-за конфликтов либо "
 "проблем с зависимостями:"
 
-#: src/Summary.cc:934
+#: src/Summary.cc:945
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -1145,7 +1145,7 @@ msgstr[0] "%d рекомендованное исправление не буд�
 msgstr[1] "%d рекомендованных исправления не будут установлены:"
 msgstr[2] "%d рекомендованных исправлений не будут установлены:"
 
-#: src/Summary.cc:938
+#: src/Summary.cc:949
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -1154,7 +1154,7 @@ msgstr[0] "%d рекомендованный шаблон не будет уст
 msgstr[1] "%d рекомендованных шаблона не будут установлены:"
 msgstr[2] "%d рекомендованных шаблонов не будут установлены:"
 
-#: src/Summary.cc:942
+#: src/Summary.cc:953
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -1163,7 +1163,7 @@ msgstr[0] "%d рекомендованный продукт не будет ус
 msgstr[1] "%d рекомендованных продукта не будут установлены:"
 msgstr[2] "%d рекомендованных продуктов не будут установлены:"
 
-#: src/Summary.cc:946
+#: src/Summary.cc:957
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1172,7 +1172,7 @@ msgstr[0] "%d рекомендованное приложение не буде�
 msgstr[1] "%d рекомендованных приложения не будут установлены:"
 msgstr[2] "%d рекомендованных приложений не будут установлены:"
 
-#: src/Summary.cc:976
+#: src/Summary.cc:987
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1181,7 +1181,7 @@ msgstr[0] "%d предлагаемый пакет не будет установ
 msgstr[1] "%d предлагаемых пакета не будут установлены:"
 msgstr[2] "%d предлагаемых пакетов не будут установлены:"
 
-#: src/Summary.cc:981
+#: src/Summary.cc:992
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -1190,7 +1190,7 @@ msgstr[0] "%d предлагаемое исправление не будет у
 msgstr[1] "%d предлагаемых исправления не будут установлены:"
 msgstr[2] "%d предлагаемых исправлений не будут установлены:"
 
-#: src/Summary.cc:986
+#: src/Summary.cc:997
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1199,7 +1199,7 @@ msgstr[0] "%d предлагаемый шаблон не будет устано
 msgstr[1] "%d предлагаемых шаблона не будут установлены:"
 msgstr[2] "%d предлагаемых шаблонов не будут установлены:"
 
-#: src/Summary.cc:991
+#: src/Summary.cc:1002
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1208,7 +1208,7 @@ msgstr[0] "%d предлагаемый продукт не будет устан
 msgstr[1] "%d предлагаемых продукта не будут установлены:"
 msgstr[2] "%d предлагаемых продуктов не будут установлены:"
 
-#: src/Summary.cc:996
+#: src/Summary.cc:1007
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1217,7 +1217,7 @@ msgstr[0] "%d предлагаемое приложение не будет ус
 msgstr[1] "%d предлагаемых приложения не будут установлены:"
 msgstr[2] "%d предлагаемых приложений не будут установлены:"
 
-#: src/Summary.cc:1018
+#: src/Summary.cc:1029
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
@@ -1225,7 +1225,7 @@ msgstr[0] "%d пакет изменит архитектуру:"
 msgstr[1] "%d пакета изменят архитектуру:"
 msgstr[2] "%d пакетов изменят архитектуру:"
 
-#: src/Summary.cc:1023
+#: src/Summary.cc:1034
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
@@ -1233,7 +1233,7 @@ msgstr[0] "%d исправление изменит архитектуру:"
 msgstr[1] "%d исправления изменят архитектуру:"
 msgstr[2] "%d исправлений изменят архитектуру:"
 
-#: src/Summary.cc:1028
+#: src/Summary.cc:1039
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
@@ -1241,7 +1241,7 @@ msgstr[0] "%d шаблон изменит архитектуру:"
 msgstr[1] "%d шаблона изменят архитектуру:"
 msgstr[2] "%d шаблонов изменят архитектуру:"
 
-#: src/Summary.cc:1033
+#: src/Summary.cc:1044
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
@@ -1249,7 +1249,7 @@ msgstr[0] "%d продукт изменит архитектуру:"
 msgstr[1] "%d продукта изменят архитектуру:"
 msgstr[2] "%d продуктов изменят архитектуру:"
 
-#: src/Summary.cc:1038
+#: src/Summary.cc:1049
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
@@ -1257,7 +1257,7 @@ msgstr[0] "%d приложение изменит архитектуру:"
 msgstr[1] "%d приложения изменят архитектуру:"
 msgstr[2] "%d приложений изменят архитектуру:"
 
-#: src/Summary.cc:1060
+#: src/Summary.cc:1071
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
@@ -1265,7 +1265,7 @@ msgstr[0] "%d пакет изменит поставщика:"
 msgstr[1] "%d пакета изменят поставщика:"
 msgstr[2] "%d пакетов изменят поставщика:"
 
-#: src/Summary.cc:1065
+#: src/Summary.cc:1076
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
@@ -1273,7 +1273,7 @@ msgstr[0] "%d исправление изменит поставщика:"
 msgstr[1] "%d исправления изменят поставщика:"
 msgstr[2] "%d исправлений изменят поставщика:"
 
-#: src/Summary.cc:1070
+#: src/Summary.cc:1081
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
@@ -1281,7 +1281,7 @@ msgstr[0] "%d шаблон изменит поставщика:"
 msgstr[1] "%d шаблона изменят поставщика:"
 msgstr[2] "%d шаблонов изменят поставщика:"
 
-#: src/Summary.cc:1075
+#: src/Summary.cc:1086
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
@@ -1289,7 +1289,7 @@ msgstr[0] "%d продукт изменит поставщика:"
 msgstr[1] "%d продукта изменят поставщика:"
 msgstr[2] "%d продуктов изменят поставщика:"
 
-#: src/Summary.cc:1080
+#: src/Summary.cc:1091
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
@@ -1297,7 +1297,16 @@ msgstr[0] "%d приложение изменит поставщика:"
 msgstr[1] "%d приложения изменят поставщика:"
 msgstr[2] "%d приложений изменят поставщика:"
 
-#: src/Summary.cc:1100
+#: src/Summary.cc:1111
+#, fuzzy, c-format, boost-format
+msgid "The following package has no support information from it's vendor:"
+msgid_plural ""
+"The following %d packages have no support information from their vendor:"
+msgstr[0] "%d пакет не поддерживается поставщиком:"
+msgstr[1] "%d пакета не поддерживаются поставщиком:"
+msgstr[2] "%d пакетов не поддерживаются поставщиком:"
+
+#: src/Summary.cc:1129
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
@@ -1305,7 +1314,7 @@ msgstr[0] "%d пакет не поддерживается поставщико�
 msgstr[1] "%d пакета не поддерживаются поставщиком:"
 msgstr[2] "%d пакетов не поддерживаются поставщиком:"
 
-#: src/Summary.cc:1120
+#: src/Summary.cc:1147
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1321,7 +1330,7 @@ msgstr[2] ""
 "Для получения поддержки для следующих %d пакетов необходимо заключить "
 "дополнительное соглашение:"
 
-#: src/Summary.cc:1138
+#: src/Summary.cc:1167
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
@@ -1329,7 +1338,7 @@ msgstr[0] "%d обновление НЕ будет установлено:"
 msgstr[1] "%d обновления НЕ будут установлены:"
 msgstr[2] "%d обновлений НЕ будут установлены:"
 
-#: src/Summary.cc:1143
+#: src/Summary.cc:1172
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
@@ -1337,7 +1346,7 @@ msgstr[0] "%d обновление продукта НЕ будет устано
 msgstr[1] "%d обновления продукта НЕ будут установлены:"
 msgstr[2] "%d обновлений продукта НЕ будут установлены:"
 
-#: src/Summary.cc:1148
+#: src/Summary.cc:1177
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
@@ -1345,7 +1354,7 @@ msgstr[0] "%d приложение НЕ будет установлено:"
 msgstr[1] "%d приложения НЕ будут установлены:"
 msgstr[2] "%d приложений НЕ будут установлены:"
 
-#: src/Summary.cc:1178
+#: src/Summary.cc:1207
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1356,23 +1365,23 @@ msgstr[2] "%d пунктов заблокированы и не будут из�
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1191
+#: src/Summary.cc:1220
 msgid "Available"
 msgstr "Доступно"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1197 src/info.cc:345 src/info.cc:436 src/info.cc:567
+#: src/Summary.cc:1226 src/info.cc:345 src/info.cc:436 src/info.cc:567
 msgid "Installed"
 msgstr "Установлено"
 
-#: src/Summary.cc:1202
+#: src/Summary.cc:1231
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr ""
 "Чтобы открыть полный список заблокированных элементов, выполните команду %1%."
 
-#: src/Summary.cc:1212
+#: src/Summary.cc:1241
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
@@ -1380,33 +1389,33 @@ msgstr[0] "%d исправление требует перезагрузки:"
 msgstr[1] "%d исправления требуют перезагрузки:"
 msgstr[2] "%d исправлений требуют перезагрузки:"
 
-#: src/Summary.cc:1230
+#: src/Summary.cc:1259
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr "Общий размер загрузки: %1%. Уже кэшировано: %2%."
 
-#: src/Summary.cc:1233
+#: src/Summary.cc:1262
 msgid "Download only."
 msgstr "Только загрузить."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1239
+#: src/Summary.cc:1268
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr "После этой операции будет использовано дополнительно %s."
 
-#: src/Summary.cc:1241
+#: src/Summary.cc:1270
 msgid "No additional space will be used or freed after the operation."
 msgstr "Эта операция никак не отразится на используемом дисковом пространстве."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1248
+#: src/Summary.cc:1277
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr "После этой операции будет освобождено %s."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1271
+#: src/Summary.cc:1300
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "пакет для обновления"
@@ -1414,7 +1423,7 @@ msgstr[1] "пакета для обновления"
 msgstr[2] "пакетов для обновления"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1282
+#: src/Summary.cc:1311
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "для отката"
@@ -1422,7 +1431,7 @@ msgstr[1] "для отката"
 msgstr[2] "для отката"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1285
+#: src/Summary.cc:1314
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "пакет для отката"
@@ -1430,7 +1439,7 @@ msgstr[1] "пакета для отката"
 msgstr[2] "пакетов для отката"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1296
+#: src/Summary.cc:1325
 msgid "new"
 msgid_plural "new"
 msgstr[0] "новый"
@@ -1438,7 +1447,7 @@ msgstr[1] "новых"
 msgstr[2] "новых"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1299
+#: src/Summary.cc:1328
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "новый пакет для установки"
@@ -1446,7 +1455,7 @@ msgstr[1] "новых пакета для установки"
 msgstr[2] "новых пакетов для установки"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1310
+#: src/Summary.cc:1339
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "для переустановки"
@@ -1454,7 +1463,7 @@ msgstr[1] "для переустановки"
 msgstr[2] "для переустановки"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1313
+#: src/Summary.cc:1342
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "пакет для переустановки"
@@ -1462,7 +1471,7 @@ msgstr[1] "пакета для переустановки"
 msgstr[2] "пакетов для переустановки"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1324
+#: src/Summary.cc:1353
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "для удаления"
@@ -1470,7 +1479,7 @@ msgstr[1] "для удаления"
 msgstr[2] "для удаления"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1327
+#: src/Summary.cc:1356
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "пакет для удаления"
@@ -1478,7 +1487,7 @@ msgstr[1] "пакета для удаления"
 msgstr[2] "пакетов для удаления"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1338
+#: src/Summary.cc:1367
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "для смены поставщика"
@@ -1486,7 +1495,7 @@ msgstr[1] "для смены поставщика"
 msgstr[2] "для смены поставщика"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1341
+#: src/Summary.cc:1370
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "пакет сменит поставщика"
@@ -1494,7 +1503,7 @@ msgstr[1] "пакета сменят поставщика"
 msgstr[2] "пакетов сменят поставщика"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1352
+#: src/Summary.cc:1381
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "для смены архитектуры"
@@ -1502,7 +1511,7 @@ msgstr[1] "для смены архитектуры"
 msgstr[2] "для смены архитектуры"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1355
+#: src/Summary.cc:1384
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "пакет сменит архитектуру"
@@ -1510,7 +1519,7 @@ msgstr[1] "пакета сменят архитектуру"
 msgstr[2] "пакетов сменят архитектуру"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1366
+#: src/Summary.cc:1395
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "пакет с исходным кодом"
@@ -1518,7 +1527,7 @@ msgstr[1] "пакета с исходным кодом"
 msgstr[2] "пакетов с исходным кодом"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1369
+#: src/Summary.cc:1398
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "пакет с исходным кодом для установки"
@@ -1526,7 +1535,7 @@ msgstr[1] "пакета с исходным кодом для установки
 msgstr[2] "пакетов с исходным кодом для установки"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1434
+#: src/Summary.cc:1464
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1534,7 +1543,7 @@ msgstr ""
 "Необходимо перезагрузить менеджер пакетов. (Выполните это повторно, после "
 "того как обновится стек обновлений.)"
 
-#: src/Summary.cc:1437
+#: src/Summary.cc:1467
 msgid "System reboot required."
 msgstr "Требуется перезагрузка системы."
 
