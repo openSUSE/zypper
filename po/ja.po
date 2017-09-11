@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-09-11 22:31+0000\n"
+"PO-Revision-Date: 2017-09-11 22:36+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
@@ -677,9 +677,7 @@ msgstr ""
 msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
 "Use '%s' to install this candidate."
-msgstr ""
-"'%s' に対する更新候補がありますが、これは異なるベンダからのものです。 '%s' を"
-"使用すると、この候補をインストールできます。"
+msgstr "'%s' に対する更新候補がありますが、これは異なるベンダからのものです。 '%s' を使用すると、この候補をインストールできます。"
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1181,13 +1179,13 @@ msgstr[0] "以下 %d 個のアプリケーションのベンダを変更しま�
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "以下 %d 個のパッケージには、製造元におけるサポート情報が記されていません:"
+msgstr[0] "以下 %d 個のパッケージには、ベンダ側でのサポート情報が記されていません:"
 
 #: src/Summary.cc:1129
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "以下 %d 個のパッケージはベンダでサポートされていません:"
+msgstr[0] "以下 %d 個のパッケージはベンダ側でサポートされていません:"
 
 #: src/Summary.cc:1147
 #, c-format, boost-format
