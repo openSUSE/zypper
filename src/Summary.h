@@ -72,8 +72,9 @@ public:
   void writeSuggested( std::ostream & out );
   void writeChangedArch( std::ostream & out );
   void writeChangedVendor( std::ostream & out );
-  void writeUnsupported( std::ostream & out );
-  void writeNeedACC( std::ostream & out );
+  void writeSupportUnknown( std::ostream & out );
+  void writeSupportUnsupported( std::ostream & out );
+  void writeSupportNeedACC( std::ostream & out );
   void writeNotUpdated( std::ostream & out );
   void writePackageCounts( std::ostream & out );
   void writeDownloadAndInstalledSizeSummary( std::ostream & out );
@@ -139,10 +140,10 @@ private:
    * In 'zypper up' this is because of vendor, repo priority, dependiencies,
    * etc; but the list can be used also generally. */
   KindToResPairSet _notupdated;
-  /** objects from previous lists that are marked as not supported */
-  KindToResPairSet _unsupported;
-  /** objects from previous lists that need additional customer contract */
-  KindToResPairSet _support_needacc;
+  /** objects from previous lists with unknown support status */
+  KindToResPairSet _supportUnknown;
+  KindToResPairSet _supportUnsupported;	///< known to be unsupported
+  KindToResPairSet _supportNeedACC;	///< need additional contract
   /** Patches which require a reboot */
   ResPairSet       _rebootNeeded;
 

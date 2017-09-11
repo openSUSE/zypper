@@ -147,10 +147,21 @@ void Summary::readPool( const ResPool & pool )
       Package::constPtr pkg = asKind<Package>(res);
       if ( pkg )
       {
-        if ( pkg->vendorSupport() & VendorSupportACC )
-          _support_needacc[res->kind()].insert( ResPair( nullptr, res ) );
-        else if ( pkg->maybeUnsupported() )
-          _unsupported[res->kind()].insert( ResPair( nullptr, res ) );
+	switch ( pkg->vendorSupport() )
+	{
+	  case VendorSupportUnknown:
+	    _supportUnknown[res->kind()].insert( ResPair( nullptr, res ) );
+	    break;
+	  case VendorSupportUnsupported:
+	    _supportUnsupported[res->kind()].insert( ResPair( nullptr, res ) );
+	    break;
+	  case VendorSupportACC:
+	    _supportNeedACC[res->kind()].insert( ResPair( nullptr, res ) );
+	    break;
+	  default:
+	    // L1, L2 or L3 support are not reported
+	    break;
+	}
       }
 
       // find in to_be_removed:
@@ -1089,9 +1100,27 @@ void Summary::writeChangedVendor( std::ostream & out )
 
 // --------------------------------------------------------------------------
 
-void Summary::writeUnsupported(std::ostream & out)
+void Summary::writeSupportUnknown( std::ostream & out )
 {
-  for_( it, _unsupported.begin(), _unsupported.end() )
+  for_( it, _supportUnknown.begin(), _supportUnknown.end() )
+  {
+    std::string label( "%d" );
+    // we only look at vendor support in packages
+    if ( it->first == ResKind::package )
+      label = PL_(
+        "The following package has no support information from it's vendor:",
+        "The following %d packages have no support information from their vendor:",
+        it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
+
+    out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+    writeResolvableList( out, it->second, ColorContext::HIGHLIGHT );
+  }
+}
+
+void Summary::writeSupportUnsupported( std::ostream & out )
+{
+  for_( it, _supportUnsupported.begin(), _supportUnsupported.end() )
   {
     std::string label( "%d" );
     // we only look at vendor support in packages
@@ -1107,11 +1136,9 @@ void Summary::writeUnsupported(std::ostream & out)
   }
 }
 
-// --------------------------------------------------------------------------
-
-void Summary::writeNeedACC( std::ostream & out )
+void Summary::writeSupportNeedACC( std::ostream & out )
 {
-  for_( it, _support_needacc.begin(), _support_needacc.end() )
+  for_( it, _supportNeedACC.begin(), _supportNeedACC.end() )
   {
     std::string label( "%d" );
     // we only look at vendor support in packages
@@ -1126,6 +1153,8 @@ void Summary::writeNeedACC( std::ostream & out )
     writeResolvableList( out, it->second, ColorContext::HIGHLIGHT );
   }
 }
+
+// --------------------------------------------------------------------------
 
 void Summary::writeNotUpdated( std::ostream & out )
 {
@@ -1421,8 +1450,9 @@ void Summary::dumpTo( std::ostream & out )
   writeChangedVendor(out);
   if ( _viewop & SHOW_UNSUPPORTED )
   {
-    writeNeedACC( out );
-    writeUnsupported( out );
+    writeSupportUnknown( out );
+    writeSupportUnsupported( out );
+    writeSupportNeedACC( out );
   }
   writeRebootNeeded( out );
   out << endl;
@@ -1533,10 +1563,11 @@ void Summary::dumpAsXmlTo( std::ostream & out )
     out << "</to-change-vendor>" << endl;
   }
 
-  if ( _viewop & SHOW_UNSUPPORTED && !_unsupported.empty() )
+  if ( _viewop & SHOW_UNSUPPORTED && !( _supportUnknown.empty() && _supportUnsupported.empty() ) )
   {
     out << "<_unsupported>" << endl;
-    writeXmlResolvableList( out, _unsupported );
+    writeXmlResolvableList( out, _supportUnknown );
+    writeXmlResolvableList( out, _supportUnsupported );
     out << "</_unsupported>" << endl;
   }
 
