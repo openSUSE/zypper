@@ -170,8 +170,7 @@ void add_service( Zypper & zypper, const ServiceInfo & service );
 void add_service_by_url( Zypper & zypper,
                          const Url & url,
 			 const std::string & alias,
-                         const std::string & type,
-                         TriBool enabled = indeterminate );
+                         const std::string & type  );
 
 void remove_service( Zypper & zypper, const ServiceInfo & service );
 

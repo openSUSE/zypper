@@ -1806,8 +1806,11 @@ void Zypper::processCommandOptions()
   {
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
-      {"disable", no_argument, 0, 'd'},
-      {"name", required_argument, 0, 'n'},
+      {"name",		required_argument,	0, 'n'},
+      {"enable",	no_argument,		0, 'e'},
+      {"disable",	no_argument,		0, 'd'},
+      {"refresh",	no_argument,		0, 'r'},
+      {"no-refresh",	no_argument,		0, 'R'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1852,11 +1855,11 @@ void Zypper::processCommandOptions()
   {
     static struct option service_modify_options[] = {
       {"help", no_argument, 0, 'h'},
-      {"disable", no_argument, 0, 'd'},
-      {"enable", no_argument, 0, 'e'},
-      {"refresh", no_argument, 0, 'r'},
-      {"no-refresh", no_argument, 0, 'R'},
-      {"name", required_argument, 0, 'n'},
+      {"name",		required_argument,	0, 'n'},
+      {"enable",	no_argument,		0, 'e'},
+      {"disable",	no_argument,		0, 'd'},
+      {"refresh",	no_argument,		0, 'r'},
+      {"no-refresh",	no_argument,		0, 'R'},
       {"ar-to-enable",  required_argument, 0, 'i'},
       {"ar-to-disable", required_argument, 0, 'I'},
       {"rr-to-enable",  required_argument, 0, 'j'},
@@ -3513,7 +3516,7 @@ void Zypper::doCommand()
     }
 
     if ( isservice )
-      add_service_by_url( *this, url, _arguments[1], type, enabled );
+      add_service_by_url( *this, url, _arguments[1], type );
     else
     {
       try

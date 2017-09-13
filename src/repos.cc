@@ -2700,8 +2700,7 @@ void add_service( Zypper & zypper, const ServiceInfo & service )
 void add_service_by_url( Zypper & zypper,
 			 const Url & url,
 			 const std::string & alias,
-                         const std::string & type,
-			 TriBool enabled )
+                         const std::string & type  )
 {
   MIL << "going to add service by url (alias=" << alias << ", url=" << url << ")" << endl;
 
@@ -2717,8 +2716,11 @@ void add_service_by_url( Zypper & zypper,
     service.setName( it->second.front() );
   service.setUrl( url );
 
-  if ( !indeterminate(enabled) )
-    service.setEnabled( (enabled == true) );
+  TriBool bopt = get_boolean_option( zypper, "enable", "disable" );
+  service.setEnabled( indeterminate(bopt) ? true : bool(bopt) );
+
+  bopt = get_boolean_option( zypper, "refresh", "no-refresh" );
+  service.setAutorefresh( indeterminate(bopt) ? true : bool(bopt) );
 
   add_service( zypper, service );
 }
