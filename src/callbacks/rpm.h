@@ -246,7 +246,7 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
     _progress.reset( new Out::ProgressBar( zypper.out(),
 					   "remove-resolvable",
 					   // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-					   _("Removing %s"),
+					   str::Format(_("Removing %s") ) % resolvable->asString(),
 					   ++zypper.runtimeData().rpm_pkg_current,
 					   zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );	// progress reports percent
@@ -312,7 +312,7 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
     _progress.reset( new Out::ProgressBar( zypper.out(),
 					   "install-resolvable",
 					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-					   _("Installing: %s"),
+					   str::Format(_("Installing: %s") ) % resolvable->asString(),
 					   ++zypper.runtimeData().rpm_pkg_current,
 					   zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );	// progress reports percent
@@ -335,7 +335,7 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
     }
 
     std::ostringstream s;
-    s << _("Installation of %s failed:") << std::endl;
+    s << ( str::Format(_("Installation of %s failed:") ) % resolvable->asString() ) << std::endl;
     s << zcb_error2str(error, description);
     Zypper::instance().out().error(s.str());
 
