@@ -1968,17 +1968,20 @@ void Zypper::processCommandOptions()
   {
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
-      {"disable", no_argument, 0, 'd'},
-      {"repo", required_argument, 0, 'r'},
+      {"repo", 			required_argument, 	0, 'r'},	// :( conflicts with 'r - refresh' as used in all other add/mod repo/service commands
       {"help", no_argument, 0, 'h'},
       {"check", no_argument, 0, 'c'},
       {"no-check", no_argument, 0, 'C'},
-      {"name", required_argument, 0, 'n'},
-      {"priority", required_argument, 0, 'p'},
-      {"keep-packages", no_argument, 0, 'k'},
-      {"no-keep-packages", no_argument, 0, 'K'},
+      {"name",			required_argument,	0, 'n'},
+      {"enable",		no_argument,		0, 'e'},
+      {"disable",		no_argument,		0, 'd'},
+      {"refresh",		no_argument,		0, 'r'},	// FIXME: due to 'r - repo' conflict switch refresh
+      {"refresh",		no_argument,		0, 'f'},	//        to 'fF' in all add/mod repo/service commands
+      {"no-refresh",		no_argument,		0, 'R'},
+      {"priority", 		required_argument,	0, 'p'},
+      {"keep-packages",		no_argument,		0, 'k'},
+      {"no-keep-packages",	no_argument,		0, 'K'},
       ARG_GPG_Check,
-      {"refresh", no_argument, 0, 'f'},
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
@@ -2094,14 +2097,14 @@ void Zypper::processCommandOptions()
   {
     static struct option service_modify_options[] = {
       {"help", no_argument, 0, 'h'},
-      {"disable", no_argument, 0, 'd'},
-      {"enable", no_argument, 0, 'e'},
-      {"refresh", no_argument, 0, 'r'},
-      {"no-refresh", no_argument, 0, 'R'},
-      {"name", required_argument, 0, 'n'},
-      {"priority", required_argument, 0, 'p'},
-      {"keep-packages", no_argument, 0, 'k'},
-      {"no-keep-packages", no_argument, 0, 'K'},
+      {"name",			required_argument,	0, 'n'},
+      {"enable",		no_argument,		0, 'e'},
+      {"disable",		no_argument,		0, 'd'},
+      {"refresh",		no_argument,		0, 'r'},
+      {"no-refresh",		no_argument,		0, 'R'},
+      {"priority",		required_argument,	0, 'p'},
+      {"keep-packages",		no_argument,		0, 'k'},
+      {"no-keep-packages",	no_argument,		0, 'K'},
       ARG_GPG_Check,
       {"all", no_argument, 0, 'a' },
       {"local", no_argument, 0, 'l' },
@@ -3475,16 +3478,6 @@ void Zypper::doCommand()
       return;
     }
 
-    // indeterminate indicates the user has not specified the values
-    TriBool enabled( indeterminate );
-
-    if ( copts.count("disable") )
-      enabled = false;
-
-    // enable by default
-    if ( indeterminate(enabled) )
-      enabled = true;
-
     Url url = make_url( _arguments[0] );
     if ( !url.isValid() )
     {
@@ -3521,7 +3514,7 @@ void Zypper::doCommand()
     {
       try
       {
-        add_repo_by_url( *this, url, _arguments[1], type, enabled );
+        add_repo_by_url( *this, url, _arguments[1], type );
       }
       catch ( const repo::RepoUnknownTypeException & e )
       {
@@ -3626,30 +3619,12 @@ void Zypper::doCommand()
       return;
     }
 
-    // indeterminate indicates the user has not specified the values
-
-    TriBool enabled( indeterminate );
-    if ( copts.count("disable") )
-      enabled = false;
-
-    TriBool autorefresh( indeterminate );
-    if ( copts.count("refresh") )
-      autorefresh = true;
-
-    TriBool keep_pkgs( indeterminate );
-    if ( copts.count("keep-packages") )
-      keep_pkgs = true;
-    else if ( copts.count("no-keep-packages") )
-      keep_pkgs = false;
-
-    RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( *this ) );	//
-
     try
     {
       // add repository specified in .repo file
       if ( copts.count("repo") )
       {
-        add_repo_from_file( *this,copts["repo"].front(), enabled, autorefresh, keep_pkgs, gpgCheck );
+        add_repo_from_file( *this,copts["repo"].front() );
         return;
       }
 
@@ -3696,7 +3671,7 @@ void Zypper::doCommand()
         else
         {
           initRepoManager();
-          add_repo_from_file( *this,_arguments[0], enabled, autorefresh, keep_pkgs, gpgCheck );
+          add_repo_from_file( *this,_arguments[0] );
           break;
         }
       case 2:
@@ -3729,7 +3704,7 @@ void Zypper::doCommand()
         // load gpg keys
         init_target( *this );
 
-        add_repo_by_url( *this, url, _arguments[1]/*alias*/, type, enabled, autorefresh, keep_pkgs, gpgCheck );
+        add_repo_by_url( *this, url, _arguments[1]/*alias*/, type );
         return;
       }
     }

@@ -1804,15 +1804,9 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
 void add_repo_by_url( Zypper & zypper,
 		      const Url & url,
 		      const std::string & alias,
-		      const std::string & type,
-		      TriBool enabled,
-		      TriBool autorefresh,
-		      TriBool keepPackages,
-		      RepoInfo::GpgCheck gpgCheck )
+		      const std::string & type )
 {
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url << ")" << endl;
-
-  unsigned prio = parse_priority( zypper );
 
   RepoInfo repo;
 
@@ -1821,28 +1815,27 @@ void add_repo_by_url( Zypper & zypper,
 
   repo.setAlias( alias.empty() ? timestamp() : alias );
 
+  repo.addBaseUrl( url );
+
   parsed_opts::const_iterator it = zypper.cOpts().find("name");
   if ( it != zypper.cOpts().end() )
     repo.setName( it->second.front() );
 
-  repo.addBaseUrl( url );
+  TriBool bopt = get_boolean_option( zypper, "enable", "disable" );
+  repo.setEnabled( indeterminate(bopt) ? true : bool(bopt) );
 
+  bopt = get_boolean_option( zypper, "refresh", "no-refresh" );
+  repo.setAutorefresh( indeterminate(bopt) ? false : bool(bopt) );	// wouldn't true be the better default?
+
+  unsigned prio = parse_priority( zypper );
   if ( prio >= 1 )
     repo.setPriority( prio );
 
-  // enable the repo by default
-  if ( indeterminate(enabled) )
-    enabled = true;
-  repo.setEnabled( (enabled == true) );
+  bopt = get_boolean_option( zypper, "keep-packages", "no-keep-packages" );
+  if ( !indeterminate(bopt) )
+    repo.setKeepPackages( bopt );
 
-  // disable autorefresh by default
-  if ( indeterminate(autorefresh) )
-    autorefresh = false;
-  repo.setAutorefresh( (autorefresh == true) );
-
-  if ( !indeterminate(keepPackages) )
-    repo.setKeepPackages( keepPackages );
-
+  RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
   if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
     repo.setGpgCheck( gpgCheck );
 
@@ -1853,11 +1846,7 @@ void add_repo_by_url( Zypper & zypper,
 // ----------------------------------------------------------------------------
 /// \todo merge common code with add_repo_by_url
 void add_repo_from_file( Zypper & zypper,
-                         const std::string & repo_file_url,
-			 TriBool enabled,
-                         TriBool autorefresh,
-			 TriBool keepPackages,
-			 RepoInfo::GpgCheck gpgCheck )
+                         const std::string & repo_file_url )
 {
   Url url = make_url( repo_file_url );
   if ( !url.isValid() )
@@ -1866,7 +1855,15 @@ void add_repo_from_file( Zypper & zypper,
     return;
   }
 
-  unsigned prio = parse_priority( zypper );
+  std::string name;
+  if ( zypper.cOpts().count("name") )
+    name = zypper.cOpts().find("name")->second.front();
+
+  TriBool enabled	= get_boolean_option( zypper, "enable", "disable" );
+  TriBool autorefresh	= get_boolean_option( zypper, "refresh", "no-refresh" );
+  unsigned prio		= parse_priority( zypper );
+  TriBool keepPackages	= get_boolean_option( zypper, "keep-packages", "no-keep-packages" );
+  RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
 
   std::list<RepoInfo> repos;
 
@@ -1915,7 +1912,9 @@ void add_repo_from_file( Zypper & zypper,
       continue;
     }
 
-    // enable by default
+    if ( ! name.empty() )
+      repo.setName( name );
+
     if ( !indeterminate(enabled) )
       repo.setEnabled( enabled );
 
