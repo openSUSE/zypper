@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 14 14:21:52 CEST 2017 - ma@suse.de
+
+- Fix missing package names in installation report (bsc#1058695,
+  fixes #134)
+- version 1.13.35
+
+-------------------------------------------------------------------
 Mon Sep 11 16:16:27 CEST 2017 - ma@suse.de
 
 - Summary: Differ between unsupported and packages with unknown
