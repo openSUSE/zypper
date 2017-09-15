@@ -309,7 +309,7 @@ namespace zypp
         : _parsedZyppConf         	( override_r )
         , cfg_arch                	( defaultSystemArchitecture() )
         , cfg_textLocale          	( defaultTextLocale() )
-        , updateMessagesNotify		( "single | /usr/lib/zypp/notify-message -p %p" )
+        , updateMessagesNotify		( "" )
         , repo_add_probe          	( false )
         , repo_refresh_delay      	( 10 )
         , repoLabelIsAlias              ( false )
