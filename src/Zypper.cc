@@ -69,24 +69,69 @@ using namespace zypp;
 // for now use some defines to have consistent definition of args
 // used across multiple commands
 
-// GPG check settings for add/modify repo
-#define ARG_GPG_Check	\
-    {"gpgcheck",			no_argument,	0, 'g'},	\
-    {"gpgcheck-strict",			no_argument,	0,  0 },	\
-    {"gpgcheck-allow-unsigned",		no_argument,	0,  0 },	\
-    {"gpgcheck-allow-unsigned-repo",	no_argument,	0,  0 },	\
-    {"gpgcheck-allow-unsigned-package",	no_argument,	0,  0 },	\
-    {"no-gpgcheck",			no_argument,	0, 'G'},	\
-    {"default-gpgcheck",		no_argument,	0,  0 }
+// Common modify Repo/Service aggregate options (argdef only)
+#define ARG_REPO_SERVICE_COMMON_AGGREGATE	\
+    {"all",		no_argument,		0, 'a' },	\
+    {"local",		no_argument,		0, 'l' },	\
+    {"remote",		no_argument,		0, 't' },	\
+    {"medium-type",	required_argument,	0, 'm' }
 
-#define option_GPG_Check	\
-     option26( "-g, --gpgcheck",		_("Enable GPG check for this repository.") )	\
-    .option26( "--gpgcheck-strict",		_("Enable strict GPG check for this repository.") )	\
-    .option26( "--gpgcheck-allow-unsigned",	(str::Format(_("Short hand for '%1%'.") ) % "--gpgcheck-allow-unsigned-repo --gpgcheck-allow-unsigned-package" ).str() )	\
-    .option26( "--gpgcheck-allow-unsigned-repo",_("Enable GPG check but allow the repository metadata to be unsigned.") )	\
-    .option26( "--gpgcheck-allow-unsigned-package",_("Enable GPG check but allow installing unsigned packages from this repository.") )	\
-    .option26( "-G, --no-gpgcheck",		_("Disable GPG check for this repository.") )	\
-    .option26( "--default-gpgcheck",		_("Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the default.") )	\
+
+// Common Repo/Service properties (argdef only)
+// LEGACY: --refresh short option was -f in ADD_REPO, -r in all other Repo/Service commands.
+//         Unfortunately -r is already --repo in ADD_REPO, so switching all Repo/Service commands
+//         to prefer -f/F.
+#define ARG_REPO_SERVICE_COMMON_PROP	\
+    {"name",		required_argument,	0, 'n'},	\
+    {"enable",		no_argument,		0, 'e'},	\
+    {"disable",		no_argument,		0, 'd'},	\
+    {"refresh",		no_argument,		0, 'f'},	\
+    {"no-refresh",	no_argument,		0, 'F'}
+
+
+// Add/Mod Service property settings
+#define ARG_SERVICE_PROP	\
+    ARG_REPO_SERVICE_COMMON_PROP
+
+#define option_SERVICE_PROP	\
+     option( "-n, --name <NAME>",	_("Set a descriptive name for the service.") )		\
+    .option( "-e, --enable",	        _("Enable a disabled service.") )			\
+    .option( "-d, --disable",	        _("Disable the service (but don't remove it).") )	\
+    .option( "-f, --refresh",	        _("Enable auto-refresh of the service.") )		\
+    .option( "-F, --no-refresh",	_("Disable auto-refresh of the service.") )
+
+
+// Add/Mod Repo property settings
+#define ARG_REPO_PROP	\
+    ARG_REPO_SERVICE_COMMON_PROP,	\
+    {"priority", 			required_argument,	0, 'p'},	\
+    {"keep-packages",			no_argument,		0, 'k'},	\
+    {"no-keep-packages",		no_argument,		0, 'K'},	\
+    {"gpgcheck",			no_argument,		0, 'g'},	\
+    {"gpgcheck-strict",			no_argument,		0,  0 },	\
+    {"gpgcheck-allow-unsigned",		no_argument,		0,  0 },	\
+    {"gpgcheck-allow-unsigned-repo",	no_argument,		0,  0 },	\
+    {"gpgcheck-allow-unsigned-package",	no_argument,		0,  0 },	\
+    {"no-gpgcheck",			no_argument,		0, 'G'},	\
+    {"default-gpgcheck",		no_argument,		0,  0 }
+
+#define option_REPO_PROP	\
+     option( "-n, --name <NAME>",	_("Set a descriptive name for the repository.") )	\
+    .option( "-e, --enable",	        _("Enable a disabled repository.") )			\
+    .option( "-d, --disable",	        _("Disable the repository (but don't remove it).") )	\
+    .option( "-f, --refresh",	        _("Enable auto-refresh of the repository.") )		\
+    .option( "-F, --no-refresh",	_("Disable auto-refresh of the repository.") )		\
+    .option( "-p, --priority <INTEGER>",_("Set priority of the repository.") )			\
+    .option( "-k, --keep-packages",	_("Enable RPM files caching.") )			\
+    .option( "-K, --no-keep-packages",	_("Disable RPM files caching.") )			\
+    .option( "-g, --gpgcheck",			_("Enable GPG check for this repository.") )	\
+    .option( "--gpgcheck-strict",		_("Enable strict GPG check for this repository.") )	\
+    .option( "--gpgcheck-allow-unsigned",	str::Format(_("Short hand for '%1%'.") ) % "--gpgcheck-allow-unsigned-repo --gpgcheck-allow-unsigned-package" )	\
+    .option( "--gpgcheck-allow-unsigned-repo",	_("Enable GPG check but allow the repository metadata to be unsigned.") )	\
+    .option( "--gpgcheck-allow-unsigned-package",_("Enable GPG check but allow installing unsigned packages from this repository.") )	\
+    .option( "-G, --no-gpgcheck",		_("Disable GPG check for this repository.") )	\
+    .option( "--default-gpgcheck",		_("Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the default.") )	\
+
 
 // bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
 #define ARG_not_INSTALLED_ONLY	\
@@ -347,7 +392,7 @@ namespace
   struct CommandHelpFormater
   {
     CommandHelpFormater()
-    : _mww( _str, Zypper::instance().out().defaultFormatWidth( 150 ) )
+    : _mww( _str, Zypper::instance().out().defaultFormatWidth( 100 ) )
     {}
 
     /** Allow using the underlying steam directly. */
@@ -358,6 +403,10 @@ namespace
     /** Conversion to std::string */
     operator std::string() const { return _str.str(); }
 
+    /** An empty line */
+    CommandHelpFormater & gap()
+    { _mww.gotoNextPar(); return *this; }
+
     /** Synopsis
      * \code
      * "<singleline text_r>"
@@ -365,6 +414,16 @@ namespace
      */
     CommandHelpFormater & synopsis( boost::string_ref text_r )
     { _mww.writePar( text_r ); return *this; }
+    /** \overload const char * text */
+    CommandHelpFormater & synopsis( const char * text_r )
+    { return synopsis( boost::string_ref(text_r) ); }
+    /** \overload std::string text */
+    CommandHelpFormater & synopsis( const std::string & text_r )
+    { return synopsis( boost::string_ref(text_r) ); }
+    /** \overload str::Format text */
+    CommandHelpFormater & synopsis( const str::Format & text_r )
+    { return synopsis( boost::string_ref(text_r.str()) ); }
+
 
     /** Description block with leading gap
      * \code
@@ -374,6 +433,15 @@ namespace
      */
     CommandHelpFormater & description( boost::string_ref text_r )
     { _mww.gotoNextPar(); _mww.writePar( text_r ); return *this; }
+    /** \overload const char * text */
+    CommandHelpFormater & description( const char * text_r )
+    { return description( boost::string_ref(text_r) ); }
+    /** \overload std::string text */
+    CommandHelpFormater & description( const std::string & text_r )
+    { return description( boost::string_ref(text_r) ); }
+    /** \overload str::Format text */
+    CommandHelpFormater & description( const str::Format & text_r )
+    { return description( boost::string_ref(text_r.str()) ); }
 
     /** Option section title
      * \code
@@ -397,6 +465,14 @@ namespace
     CommandHelpFormater & noOptionSection()
     { return optionSection(_("This command has no additional options.") ); }
 
+    CommandHelpFormater & legacyOptionSection()
+    { return optionSection(_("Legacy options:") ); }
+
+    CommandHelpFormater & legacyOption( boost::string_ref old_r, boost::string_ref new_r )
+    { // translator: '-r             The same as -f.
+      return option( old_r, str::Format(_("The same as %1%.")) % new_r ); }
+
+
     /** Option definition
      * \code
      * "123456789012345678901234567890123456789
@@ -406,6 +482,15 @@ namespace
      */
     CommandHelpFormater & option( boost::string_ref option_r, boost::string_ref text_r )
     { _mww.writeDefinition( option_r , text_r, (option_r.starts_with( "--" )?4:0), 28 ); return *this; }
+    /** \overload const char * text */
+    CommandHelpFormater & option( boost::string_ref option_r, const char * text_r )
+    { return option( option_r, boost::string_ref(text_r) ); }
+    /** \overload std::string text */
+    CommandHelpFormater & option( boost::string_ref option_r, const std::string & text_r )
+    { return option( option_r, boost::string_ref(text_r) ); }
+    /** \overload str::Format text */
+    CommandHelpFormater & option( boost::string_ref option_r, const str::Format & text_r )
+    { return option( option_r, boost::string_ref(text_r.str()) ); }
     /** \overload "option\ntext_r" */
     CommandHelpFormater & option( boost::string_ref allinone_r )
     {
@@ -1806,16 +1891,12 @@ void Zypper::processCommandOptions()
   {
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
-      {"name",		required_argument,	0, 'n'},
-      {"enable",	no_argument,		0, 'e'},
-      {"disable",	no_argument,		0, 'd'},
-      {"refresh",	no_argument,		0, 'r'},
-      {"no-refresh",	no_argument,		0, 'R'},
       {"help", no_argument, 0, 'h'},
+      ARG_SERVICE_PROP,
       {0, 0, 0, 0}
     };
-    specific_options = service_add_options;
-    _command_help = str::form(_(
+#if 0
+    _(
       // translators: the %s = "ris" (the only service type currently supported)
       "addservice (as) [options] <URI> <alias>\n"
       "\n"
@@ -1825,7 +1906,20 @@ void Zypper::processCommandOptions()
       "-t, --type <type>       Type of the service (%s).\n"
       "-d, --disable           Add the service as disabled.\n"
       "-n, --name <name>       Specify descriptive name for the service.\n"
-    ), "ris");
+    )
+#endif
+    specific_options = service_add_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("addservice (as) [OPTIONS] <URI> <ALIAS>")
+    )
+    .description(// translators: command description
+    _("Add a repository index service to the system.")
+    )
+    .optionSectionCommandOptions()
+    .option_SERVICE_PROP
+    .option( "-t, --type <TYPE>",	(str::Format(_("Type of the service (%1%).") ) % "RIS").str() )	// FIXME: leagcy, actually autodetected but check libzypp
+    ;
     break;
   }
 
@@ -1855,26 +1949,20 @@ void Zypper::processCommandOptions()
   {
     static struct option service_modify_options[] = {
       {"help", no_argument, 0, 'h'},
-      {"name",		required_argument,	0, 'n'},
-      {"enable",	no_argument,		0, 'e'},
-      {"disable",	no_argument,		0, 'd'},
-      {"refresh",	no_argument,		0, 'r'},
-      {"no-refresh",	no_argument,		0, 'R'},
+      ARG_SERVICE_PROP,
+      /* LEGACY(ARG_SERVICE_PROP) prefers -f */	{"refresh",	no_argument,	0, 'r'},
+      /* LEGACY(ARG_SERVICE_PROP) prefers -F */	{"no-refresh",	no_argument,	0, 'R'},
+      ARG_REPO_SERVICE_COMMON_AGGREGATE,
       {"ar-to-enable",  required_argument, 0, 'i'},
       {"ar-to-disable", required_argument, 0, 'I'},
       {"rr-to-enable",  required_argument, 0, 'j'},
       {"rr-to-disable", required_argument, 0, 'J'},
       {"cl-to-enable",  no_argument, 0, 'k'},
       {"cl-to-disable", no_argument, 0, 'K'},
-      // aggregates
-      {"all", no_argument, 0, 'a' },
-      {"local", no_argument, 0, 'l' },
-      {"remote", no_argument, 0, 't' },
-      {"medium-type", required_argument, 0, 'm' },
       {0, 0, 0, 0}
     };
-    specific_options = service_modify_options;
-    _command_help = str::form(_(
+#if 0
+    _(
       // translators: %s is "--all" and "--all"
       "modifyservice (ms) <options> <alias|#|URI>\n"
       "modifyservice (ms) <options> <%s>\n"
@@ -1900,9 +1988,38 @@ void Zypper::processCommandOptions()
       "-l, --local                    Apply changes to all local services.\n"
       "-t, --remote                   Apply changes to all remote services.\n"
       "-m, --medium-type <type>       Apply changes to services of specified type.\n"
-    ), "--all|--remote|--local|--medium-type"
-     , "--all, --remote, --local, --medium-type");
-    // ---------|---------|---------|---------|---------|---------|---------|---------
+    )
+#endif
+    specific_options = service_modify_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("modifyservice (ms) <OPTIONS> <ALIAS|#|URI>")
+    )
+    .synopsis( str::Format(	// translators: command synopsis; do not translate lowercase words
+    _("modifyservice (ms) <OPTIONS> <%1%>") ) % "--all|--remote|--local|--medium-type"
+    )
+    .description( str::Format(// translators: command description
+    _("Modify properties of services specified by alias, number, or URI, or by the '%1%' aggregate options.") ) % "--all, --remote, --local, --medium-type"
+    )
+    .optionSectionCommandOptions()
+    .option_SERVICE_PROP
+    .gap()
+    .option( "-a, --all",			_("Apply changes to all services.") )
+    .option( "-l, --local",			_("Apply changes to all local services.") )
+    .option( "-t, --remote",			_("Apply changes to all remote services.") )
+    .option( "-m, --medium-type <TYPE>",	_("Apply changes to services of specified type.") )
+    .gap()
+    .option( "-i, --ar-to-enable <ALIAS>",	_("Add a RIS service repository to enable.") )
+    .option( "-I, --ar-to-disable <ALIAS>",	_("Add a RIS service repository to disable.") )
+    .option( "-j, --rr-to-enable <ALIAS>",	_("Remove a RIS service repository to enable.") )
+    .option( "-J, --rr-to-disable <ALIAS>",	_("Remove a RIS service repository to disable.") )
+    .option( "-k, --cl-to-enable",		_("Clear the list of RIS repositories to enable.") )
+    .option( "-K, --cl-to-disable",		_("Clear the list of RIS repositories to disable.") )
+    // Legacy Options:
+    .legacyOptionSection()
+    .legacyOption( "-r", "-f" )
+    .legacyOption( "-R", "-F" )
+    ;
     break;
   }
 
@@ -1968,25 +2085,15 @@ void Zypper::processCommandOptions()
   {
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
-      {"repo", 			required_argument, 	0, 'r'},	// :( conflicts with 'r - refresh' as used in all other add/mod repo/service commands
+      {"repo", 			required_argument, 	0, 'r'},	// :( conflicted with '-r --refresh', so ARG_REPO_PROP now uses -f/F
       {"help", no_argument, 0, 'h'},
       {"check", no_argument, 0, 'c'},
       {"no-check", no_argument, 0, 'C'},
-      {"name",			required_argument,	0, 'n'},
-      {"enable",		no_argument,		0, 'e'},
-      {"disable",		no_argument,		0, 'd'},
-      {"refresh",		no_argument,		0, 'r'},	// FIXME: due to 'r - repo' conflict switch refresh
-      {"refresh",		no_argument,		0, 'f'},	//        to 'fF' in all add/mod repo/service commands
-      {"no-refresh",		no_argument,		0, 'R'},
-      {"priority", 		required_argument,	0, 'p'},
-      {"keep-packages",		no_argument,		0, 'k'},
-      {"no-keep-packages",	no_argument,		0, 'K'},
-      ARG_GPG_Check,
+      ARG_REPO_PROP,
       {0, 0, 0, 0}
     };
-    specific_options = service_add_options;
-    _command_help = ( CommandHelpFormater()
-    << str::form(_(
+#if 0
+    _(
       // translators: the %s = "yast2, rpm-md, plaindir"
       "addrepo (ar) [options] <URI> <alias>\n"
       "addrepo (ar) [options] <file.repo>\n"
@@ -2005,8 +2112,27 @@ void Zypper::processCommandOptions()
       "-k, --keep-packages       Enable RPM files caching.\n"
       "-K, --no-keep-packages    Disable RPM files caching.\n"
       "-f, --refresh             Enable autorefresh of the repository.\n"
-    ), "yast2, rpm-md, plaindir") )
-    .option_GPG_Check;
+    )
+#endif
+    specific_options = service_add_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("addrepo (ar) [OPTIONS] <URI> <ALIAS>")
+    )
+     .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("addrepo (ar) [OPTIONS] <FILE.repo>")
+    )
+    .description(// translators: command description
+    _("Add a repository to the system. The repository can be specified by its URI or can be read from specified .repo file (even remote).")
+    )
+    .optionSectionCommandOptions()
+    .option( "-r, --repo <FILE.repo>",	_("Just another means to specify a .repo file to read.") )
+    .option( "-c, --check",		_("Probe URI.") )
+    .option( "-C, --no-check",		_("Don't probe URI, probe later during refresh.") )
+    .gap()
+    .option_REPO_PROP
+    .option( "-t, --type <TYPE>",	str::Format(_("Type of repository (%1%).") ) % "yast2, rpm-md, plaindir" )	// FIXME: leagcy, actually autodetected but check libzypp
+    ;
     break;
   }
 
@@ -2097,24 +2223,14 @@ void Zypper::processCommandOptions()
   {
     static struct option service_modify_options[] = {
       {"help", no_argument, 0, 'h'},
-      {"name",			required_argument,	0, 'n'},
-      {"enable",		no_argument,		0, 'e'},
-      {"disable",		no_argument,		0, 'd'},
-      {"refresh",		no_argument,		0, 'r'},
-      {"no-refresh",		no_argument,		0, 'R'},
-      {"priority",		required_argument,	0, 'p'},
-      {"keep-packages",		no_argument,		0, 'k'},
-      {"no-keep-packages",	no_argument,		0, 'K'},
-      ARG_GPG_Check,
-      {"all", no_argument, 0, 'a' },
-      {"local", no_argument, 0, 'l' },
-      {"remote", no_argument, 0, 't' },
-      {"medium-type", required_argument, 0, 'm' },
+      ARG_REPO_PROP,
+      /* LEGACY(ARG_REPO_PROP) prefers -f */	{"refresh",	no_argument,	0, 'r'},
+      /* LEGACY(ARG_REPO_PROP) prefers -F */	{"no-refresh",	no_argument,	0, 'R'},
+      ARG_REPO_SERVICE_COMMON_AGGREGATE,
       {0, 0, 0, 0}
     };
-    specific_options = service_modify_options;
-    _command_help = ( CommandHelpFormater()
-    << str::form(_(
+#if 0
+    _(
       // translators: %s is "--all|--remote|--local|--medium-type"
       // and "--all, --remote, --local, --medium-type"
       "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -2132,15 +2248,37 @@ void Zypper::processCommandOptions()
       "-p, --priority <integer>  Set priority of the repository.\n"
       "-k, --keep-packages       Enable RPM files caching.\n"
       "-K, --no-keep-packages    Disable RPM files caching.\n"
-    ), "--all|--remote|--local|--medium-type"
-     , "--all, --remote, --local, --medium-type") )
-    .option_GPG_Check
-    << "\n" << _(
+    )
+    _(
       "-a, --all                 Apply changes to all repositories.\n"
       "-l, --local               Apply changes to all local repositories.\n"
       "-t, --remote              Apply changes to all remote repositories.\n"
       "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
-    );
+    )
+#endif
+    specific_options = service_modify_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>")
+    )
+    .synopsis( str::Format(	// translators: command synopsis; do not translate lowercase words
+    _("modifyrepo (mr) <OPTIONS> <%1%>") ) % "--all|--remote|--local|--medium-type"
+    )
+    .description( str::Format(	// translators: command description
+    _("Modify properties of repositories specified by alias, number, or URI, or by the '%1%' aggregate options.") ) % "--all, --remote, --local, --medium-type"
+    )
+    .optionSectionCommandOptions()
+    .option_REPO_PROP
+    .gap()
+    .option( "-a, --all",			_("Apply changes to all repositories.") )
+    .option( "-l, --local",			_("Apply changes to all local repositories.") )
+    .option( "-t, --remote",			_("Apply changes to all remote repositories.") )
+    .option( "-m, --medium-type <TYPE>",	_("Apply changes to repositories of specified type.") )
+    // Legacy Options:
+    .legacyOptionSection()
+    .legacyOption( "-r", "-f" )
+    .legacyOption( "-R", "-F" )
+    ;
     break;
   }
 
