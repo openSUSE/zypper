@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-09-12 16:31+0000\n"
+"PO-Revision-Date: 2017-09-16 20:44+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -5802,8 +5802,8 @@ msgstr "Aplicant la solució %s"
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
-msgstr[0] "%d Problema:"
-msgstr[1] "%d Problemes:"
+msgstr[0] "%d problema:"
+msgstr[1] "%d problemes:"
 
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
