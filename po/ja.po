@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-09-11 22:36+0000\n"
+"PO-Revision-Date: 2017-09-16 23:53+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
@@ -376,7 +376,7 @@ msgstr "差分を適用しています"
 #: src/callbacks/repo.h:103
 #, c-format, boost-format
 msgid "(%s unpacked)"
-msgstr "(%s を展開しました)"
+msgstr "(展開後サイズ %s)"
 
 #: src/callbacks/repo.h:112
 #, boost-format
