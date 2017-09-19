@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-09-16 20:44+0000\n"
+"PO-Revision-Date: 2017-09-19 16:46+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -4179,7 +4179,7 @@ msgstr "a/r/i/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr "Desactiva la verificació d'autoritat del certificat SSL i continua."
+msgstr "Desactiva la comprovació de l'autoritat de certificació SSL i continua."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:84 src/callbacks/media.cc:179
@@ -4189,7 +4189,7 @@ msgstr "Avorta, reintenta, ignora?"
 
 #: src/callbacks/media.cc:92
 msgid "SSL certificate authority check disabled."
-msgstr "Verificació d'autoritat del certificat SSL desactivada."
+msgstr "Comprovació de l'autoritat de certificació SSL desactivada."
 
 #: src/callbacks/media.cc:109
 msgid "No devices detected, cannot eject."
