@@ -11,17 +11,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-04-25 11:24+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"PO-Revision-Date: 2017-09-20 11:33+0000\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.6\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -42,15 +42,16 @@ msgid "Done."
 msgstr "Готово."
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"Согласие на использование пакетов с некорректной контрольной суммой может "
-"привести к повреждению системы и в крайнем случае к её компрометированию."
+"Использование подписи позволяет получателю убедиться, что данные не были "
+"изменены после подписи. Использование данных с некорректной/неизвестной "
+"подписью или вообще без неё может привести к повреждению системы и в крайнем "
+"случае к её компрометированию."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -59,12 +60,17 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Файл '%1%' — это основной индекс репозитория. Он контролирует целостность "
+"всего репозитория."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Мы не можем убедиться, что никто не вносил изменения в файл, поэтому "
+"доверять ему больше нельзя! Не продолжайте установку, если вы не уверены в "
+"безопасности этого."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -72,6 +78,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Файл был изменён после подписи. Это могло быть злонамеренное изменение, "
+"поэтому доверять ему больше нельзя! Не продолжайте установку, если вы не "
+"уверены в безопасности этого."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -95,7 +104,7 @@ msgstr "Дата истечения срока действия ключа:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Подключ:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -129,15 +138,15 @@ msgstr "Приём неподписанного файла '%s' из репоз�
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Файл \"%s\" не подписан, продолжить?"
+msgstr "Файл \"%s\" не подписан."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Файл \"%s\" из репозитория \"%s\" не подписан, продолжить?"
+msgstr "Файл '%1%' из репозитория '%2%' не подписан."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -166,17 +175,15 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Файл \"%s\" подписан неизвестным ключом \"%s\". Продолжить?"
+msgstr "Файл '%1%' подписан неизвестным ключом '%2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"Файл \"%s\" из репозитория \"%s\" подписан неизвестным ключом \"%s\". "
-"Продолжить?"
+msgstr "Файл '%1%' из репозитория '%3%' подписан неизвестным ключом '%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -492,19 +499,17 @@ msgstr "Нет"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Замечание:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Предупреждение: "
+msgstr "Предупреждение:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Ошибка"
+msgstr "Ошибка:"
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -1298,7 +1303,7 @@ msgstr[1] "%d приложения изменят поставщика:"
 msgstr[2] "%d приложений изменят поставщика:"
 
 #: src/Summary.cc:1111
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
@@ -1552,25 +1557,24 @@ msgid "Enable GPG check for this repository."
 msgstr "Включить проверку GPG для этого репозитория."
 
 #: src/Zypper.cc:84
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Включить проверку GPG для этого репозитория."
+msgstr "Включить строгую проверку GPG для этого репозитория."
 
 #: src/Zypper.cc:85
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Нет кандидатов на обновление '%s'."
+msgstr "Сокращение для '%1%'."
 
 #: src/Zypper.cc:86
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Включить проверку GPG для этого репозитория."
+msgstr "Включить проверку GPG, но разрешить метаданные репозитория без подписи."
 
 #: src/Zypper.cc:87
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Включить проверку GPG для этого репозитория."
+msgstr ""
+"Включить проверку GPG, но разрешить установку пакетов без подписи из этого "
+"репозитория."
 
 #: src/Zypper.cc:88
 msgid "Disable GPG check for this repository."
@@ -1581,6 +1585,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Использовать настройку проверки GPG из /etc/zypp/zypp.conf. Это вариант по "
+"умолчанию."
 
 #: src/Zypper.cc:105
 msgid "Create a solver test case for debugging."
@@ -1613,12 +1619,16 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Автоматически отвечать «да» на запросы подтверждения лицензии. Подробнее см. "
+"'man zypper'."
 
 #: src/Zypper.cc:126
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Автоматически принимать только лицензии продуктов. Подробнее см. 'man "
+"zypper'."
 
 #: src/Zypper.cc:135
 msgid ""
@@ -1640,7 +1650,7 @@ msgstr "По умолчанию необязательные исправлен�
 #: src/Zypper.cc:179
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Эти параметры взаимно исключающие: %1%"
 
 #: src/Zypper.cc:208
 msgid ""
@@ -1655,6 +1665,8 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Мы можем попросить PackageKit прервать текущую операцию как можно скорее, но "
+"скорость ответа на этот запрос зависит только от PackageKit."
 
 #: src/Zypper.cc:217
 msgid "Ask PackageKit to quit?"
@@ -1688,9 +1700,8 @@ msgid "Command options:"
 msgstr "Параметры команды:"
 
 #: src/Zypper.cc:392
-#, fuzzy
 msgid "Solver options:"
-msgstr "Экспертные параметры:"
+msgstr "Параметры решателя:"
 
 #: src/Zypper.cc:395
 msgid "Expert options:"
@@ -2002,6 +2013,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"Если '%1%' не опечатка, то это не является встроенной командой, а "
+"предоставляется как subcommand или подключаемый модуль (см. '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -2011,6 +2024,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"В этом случае необходимо сначала установить отдельный пакет с этой "
+"subcommand. Эти пакеты часто называются '%1%' или '%2%'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -4778,9 +4793,8 @@ msgstr "запуск"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "Не найдено"
+msgstr "не найдено"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
