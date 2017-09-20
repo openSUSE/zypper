@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 16:15+0200\n"
-"PO-Revision-Date: 2017-09-20 11:33+0000\n"
+"PO-Revision-Date: 2017-09-20 11:34+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
@@ -1606,7 +1606,7 @@ msgstr ""
 
 #: src/Zypper.cc:116
 msgid "Install also recommended packages in addition to the required ones."
-msgstr "Установить также рекомендуемые пакеты в дополнение"
+msgstr "Установить дополнительно также рекомендуемые пакеты."
 
 #: src/Zypper.cc:117
 msgid "Do not install recommended packages, only required ones."
