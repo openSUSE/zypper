@@ -59,8 +59,6 @@ inline const char * lockStatusTag( const char * tag_r, bool islocked_r, bool isa
  */
 bool runningOnEnterprise();
 
-bool is_changeable_media( const Url & url );
-
 /** Converts user-supplied kind to ResKind object.
  * Returns an empty one if not recognized. */
 ResKind string_to_kind( std::string skind );

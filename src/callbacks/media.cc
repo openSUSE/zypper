@@ -13,7 +13,6 @@
 
 #include "utils/messages.h"
 #include "utils/prompt.h"
-#include "utils/misc.h" // for is_changeable_media
 
 #include <zypp/media/MediaManager.h>
 
@@ -211,7 +210,7 @@ namespace ZmartRecipients
 	<< ", label '" << label << "', #" << mediumNr << endl;
 
     zypper.out().error( description );
-    if ( is_changeable_media( url ) )
+    if ( url.schemeIsVolatile() )	// cd/dvd
     {
       // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
       // Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -245,7 +244,7 @@ namespace ZmartRecipients
     Action action = MediaChangeReport::ABORT;
     if ( url.getScheme() == "https" )
       action = request_medium_https_handler( zypper, url );
-    if ( url.getScheme() == "cd" || url.getScheme() == "dvd" )
+    if ( url.schemeIsVolatile() )	// cd/dvd
       action = request_medium_dvd_handler( zypper, url, devices, index );
     else
     {

@@ -135,7 +135,7 @@ int main( int argc, char **argv )
     Url url = it->url();
     std::string scheme( url.getScheme() );
 
-    if ( scheme == "cd" || scheme == "dvd" )
+    if ( url.schemeIsVolatile() )	// cd/dvd
     {
       MIL << "Skipping CD/DVD repository: "
         "alias:[" << it->alias() << "] "

@@ -811,7 +811,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
   bool no_remote = zypper.globalOpts().no_remote;
   for ( std::list<RepoInfo>::iterator it = gData.repos.begin(); it != gData.repos.end(); )
   {
-    if ( no_cd && ( it->url().getScheme() == "cd" || it->url().getScheme() == "dvd" ) )
+    if ( no_cd && it->url().schemeIsVolatile() )	// cd/dvd
     {
       zypper.out().info( str::form(_("Ignoring repository '%s' because of '%s' option."),
 				   it->asUserString().c_str(), "no-cd" ) );
@@ -1576,8 +1576,7 @@ void clean_repos( Zypper & zypper )
 	}
         if( clean_raw_metadata )
         {
-            std::string scheme( repo.url().getScheme() );
-            if ( ! ( scheme == "cd" || scheme == "dvd" ) )
+            if ( ! repo.url().schemeIsVolatile()  )	// cd/dvd
             {
                 zypper.out().info( str::Format(_("Cleaning raw metadata cache for '%s'.")) % repo.asUserString(),
 				   Out::HIGH );
@@ -1585,7 +1584,7 @@ void clean_repos( Zypper & zypper )
             }
             else
             {
-                zypper.out().info( str::Format(_("Keeping raw metadata cache for %s '%s'.")) % scheme % repo.asUserString(),
+                zypper.out().info( str::Format(_("Keeping raw metadata cache for %s '%s'.")) % repo.url().getScheme() % repo.asUserString(),
 				   Out::HIGH );
             }
         }
@@ -1667,15 +1666,15 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
   RuntimeData & gData = zypper.runtimeData();
 
   bool is_cd = true;
-  if ( !repo.baseUrlsEmpty() )
+  for_( it, repo.baseUrlsBegin(), repo.baseUrlsEnd() )
   {
-    for_( it, repo.baseUrlsBegin(), repo.baseUrlsEnd() )
+    if ( ! it->schemeIsVolatile() )	// cd/dvd
     {
-      is_cd = is_changeable_media( *it );
-      if ( !is_cd )
-        break;
+      is_cd = false;
+      break;
     }
   }
+
   if ( is_cd )
   {
     zypper.out().info( _("This is a changeable read-only media (CD/DVD), disabling autorefresh."),
