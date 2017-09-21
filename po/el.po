@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-11 16:15+0200\n"
+"POT-Creation-Date: 2017-09-21 11:00+0200\n"
 "PO-Revision-Date: 2016-08-23 07:58+0000\n"
 "Last-Translator: Anastasios Mavrommatis <anastasios@mavrommatis.net>\n"
 "Language-Team: Greek <https://l10n.opensuse.org/projects/zypper/master/el/>\n"
@@ -1468,99 +1468,151 @@ msgstr ""
 msgid "System reboot required."
 msgstr ""
 
-#: src/Zypper.cc:83
+#: src/Zypper.cc:97
+msgid "Set a descriptive name for the service."
+msgstr ""
+
+#: src/Zypper.cc:98
+msgid "Enable a disabled service."
+msgstr ""
+
+#: src/Zypper.cc:99
+msgid "Disable the service (but don't remove it)."
+msgstr ""
+
+#: src/Zypper.cc:100
+msgid "Enable auto-refresh of the service."
+msgstr ""
+
+#: src/Zypper.cc:101
+msgid "Disable auto-refresh of the service."
+msgstr ""
+
+#: src/Zypper.cc:119
+msgid "Set a descriptive name for the repository."
+msgstr ""
+
+#: src/Zypper.cc:120
+msgid "Enable a disabled repository."
+msgstr ""
+
+#: src/Zypper.cc:121
+msgid "Disable the repository (but don't remove it)."
+msgstr ""
+
+#: src/Zypper.cc:122
+msgid "Enable auto-refresh of the repository."
+msgstr ""
+
+#: src/Zypper.cc:123
+msgid "Disable auto-refresh of the repository."
+msgstr ""
+
+#: src/Zypper.cc:124
+msgid "Set priority of the repository."
+msgstr ""
+
+#: src/Zypper.cc:125
+msgid "Enable RPM files caching."
+msgstr ""
+
+#: src/Zypper.cc:126
+msgid "Disable RPM files caching."
+msgstr ""
+
+#: src/Zypper.cc:127
 msgid "Enable GPG check for this repository."
 msgstr "Ενεργοποίηση ελέγχου GPG γι' αυτό το αποθετήριο."
 
-#: src/Zypper.cc:84
+#: src/Zypper.cc:128
 #, fuzzy
 msgid "Enable strict GPG check for this repository."
 msgstr "Ενεργοποίηση ελέγχου GPG γι' αυτό το αποθετήριο."
 
-#: src/Zypper.cc:85
+#: src/Zypper.cc:129
 #, fuzzy, boost-format
 msgid "Short hand for '%1%'."
 msgstr "Καμία υποψήφια ενημέρωση για το '%s'."
 
-#: src/Zypper.cc:86
+#: src/Zypper.cc:130
 #, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
 msgstr "Ενεργοποίηση ελέγχου GPG γι' αυτό το αποθετήριο."
 
-#: src/Zypper.cc:87
+#: src/Zypper.cc:131
 #, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
 msgstr "Ενεργοποίηση ελέγχου GPG γι' αυτό το αποθετήριο."
 
-#: src/Zypper.cc:88
+#: src/Zypper.cc:132
 msgid "Disable GPG check for this repository."
 msgstr "Απενεργοποίηση ελέγχου GPG γι' αυτό το αποθετήριο."
 
-#: src/Zypper.cc:89
+#: src/Zypper.cc:133
 msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
 
-#: src/Zypper.cc:105
+#: src/Zypper.cc:150
 #, fuzzy
 msgid "Create a solver test case for debugging."
 msgstr "Σφάλμα κατά τη δημιουργία δοκιμαστικής επίλυσης."
 
-#: src/Zypper.cc:106
+#: src/Zypper.cc:151
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr ""
 
-#: src/Zypper.cc:107
+#: src/Zypper.cc:152
 msgid "Do not force the solver to find solution, let it ask."
 msgstr ""
 
-#: src/Zypper.cc:116
+#: src/Zypper.cc:161
 msgid "Install also recommended packages in addition to the required ones."
 msgstr ""
 
-#: src/Zypper.cc:117
+#: src/Zypper.cc:162
 msgid "Do not install recommended packages, only required ones."
 msgstr ""
 
 #. auto license agreements
 #. Mainly for SUSEConnect, not (yet) documented
-#: src/Zypper.cc:125
+#: src/Zypper.cc:170
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
 
-#: src/Zypper.cc:126
+#: src/Zypper.cc:171
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
 
-#: src/Zypper.cc:135
+#: src/Zypper.cc:180
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
 
-#: src/Zypper.cc:138
+#: src/Zypper.cc:183
 msgid "The default is to exclude optional patches."
 msgstr ""
 
-#: src/Zypper.cc:139
+#: src/Zypper.cc:184
 msgid "The default is to include optional patches."
 msgstr ""
 
 #. translator: %1% is a list of command line options
-#: src/Zypper.cc:179
+#: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
 msgstr ""
 
-#: src/Zypper.cc:208
+#: src/Zypper.cc:253
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1569,25 +1621,25 @@ msgstr ""
 "μικροεφαρμογή ενημέρωσης ή κάποια εφαρμογή διαχείρισης λογισμικού που "
 "χρησιμοποιούν το PackageKit."
 
-#: src/Zypper.cc:214
+#: src/Zypper.cc:259
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
 
-#: src/Zypper.cc:217
+#: src/Zypper.cc:262
 msgid "Ask PackageKit to quit?"
 msgstr "Θέλετε το PackageKit να τερματίσει;"
 
-#: src/Zypper.cc:226
+#: src/Zypper.cc:271
 msgid "PackageKit is still running (probably busy)."
 msgstr "Το PackageKit εκτελείται ακόμα (πιθανόν είναι απασχολημένο)."
 
-#: src/Zypper.cc:227
+#: src/Zypper.cc:272
 msgid "Try again?"
 msgstr "Δοκιμή ξανά;"
 
-#: src/Zypper.cc:301
+#: src/Zypper.cc:346
 #, fuzzy, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
@@ -1595,35 +1647,46 @@ msgstr ""
 "Η επιλογή %1% γραμμή εντολών παλαιού τύπου ανιχνεύθηκε. Παρακαλώ "
 "χρησιμοποιήστε την καθολική επιλογή %2% αντ'αυτού."
 
-#: src/Zypper.cc:302
+#: src/Zypper.cc:347
 #, fuzzy, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
 "Η επιλογή %1% γραμμή εντολών παλαιού τύπου ανιχνεύθηκε. Παρακαλώ "
 "χρησιμοποιήστε %2% αντ'αυτού."
 
-#: src/Zypper.cc:389
+#: src/Zypper.cc:457
 msgid "Command options:"
 msgstr ""
 
-#: src/Zypper.cc:392
+#: src/Zypper.cc:460
 #, fuzzy
 msgid "Solver options:"
 msgstr "εμφάνιση όλων των επιλογών"
 
-#: src/Zypper.cc:395
+#: src/Zypper.cc:463
 msgid "Expert options:"
 msgstr ""
 
-#: src/Zypper.cc:398
+#: src/Zypper.cc:466
 msgid "This command has no additional options."
 msgstr ""
 
-#: src/Zypper.cc:525 src/Zypper.cc:1486
+#: src/Zypper.cc:469
+#, fuzzy
+msgid "Legacy options:"
+msgstr "εμφάνιση όλων των επιλογών"
+
+#. translator: '-r             The same as -f.
+#: src/Zypper.cc:473
+#, boost-format
+msgid "The same as %1%."
+msgstr ""
+
+#: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
 msgstr "Μη αναμενόμενη εξαίρεση."
 
-#: src/Zypper.cc:550
+#: src/Zypper.cc:635
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -1671,7 +1734,7 @@ msgstr ""
 "\t--xmlout, -x\t\tΕναλλαγή σε έξοδο σε XML.\n"
 "\t--ignore-unknown, -i\tΑγνόηση άγνωστων πακέτων.\n"
 
-#: src/Zypper.cc:573
+#: src/Zypper.cc:658
 msgid ""
 "\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
 "\t\t\t\tdirectory.\n"
@@ -1691,7 +1754,7 @@ msgstr ""
 "\t--pkg-cache-dir <dir>\tΧρήση εναλλακτικού καταλόγου λανθάνουσας μνήμης για "
 "τα πακέτα.\n"
 
-#: src/Zypper.cc:581
+#: src/Zypper.cc:666
 #, fuzzy
 msgid ""
 "     Repository Options:\n"
@@ -1726,7 +1789,7 @@ msgstr ""
 "\t--releasever\t\tΟρισμός της τιμής του $releasever σε όλα τα .repo αρχεία "
 "(προεπιλεγμένο: έκδοση διανομής)\n"
 
-#: src/Zypper.cc:595
+#: src/Zypper.cc:680
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -1738,7 +1801,7 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tΝα μην αναγνωσθούν τα εγκατεστημένα πακέτα.\n"
 
-#: src/Zypper.cc:602
+#: src/Zypper.cc:687
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -1748,7 +1811,7 @@ msgstr ""
 "\thelp, ?\t\t\tΕμφάνιση βοήθειας.\n"
 "\tshell, sh\t\tΑποδοχή πολλαπλών εντολών με τη μία.\n"
 
-#: src/Zypper.cc:607
+#: src/Zypper.cc:692
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -1768,7 +1831,7 @@ msgstr ""
 "\trefresh, ref\t\tΑνανέωση όλων των αποθετηρίων.\n"
 "\tclean\t\t\tΕκκαθάριση τοπικής λανθάνουσας μνήμης.\n"
 
-#: src/Zypper.cc:617
+#: src/Zypper.cc:702
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -1784,7 +1847,7 @@ msgstr ""
 "\tremoveservice, rs\tΑφαίρεση ορισμένης υπηρεσίας.\n"
 "\trefresh-services, refs\tΑνανέωση όλων των υπηρεσιών.\n"
 
-#: src/Zypper.cc:625
+#: src/Zypper.cc:710
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -1806,7 +1869,7 @@ msgstr ""
 "\t\t\t\tΕγκατάσταση νέων πακέτων που προστέθηκαν, προτεινόμενων\n"
 "\t\t\t\tαπό τα εγκατεστημένα πακέτα.\n"
 
-#: src/Zypper.cc:636
+#: src/Zypper.cc:721
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -1825,7 +1888,7 @@ msgstr ""
 "\tdist-upgrade, dup\tΕκτέλεση αναβάθμισης διανομής.\n"
 "\tpatch-check, pchk\tΈλεγχος για διορθώσεις.\n"
 
-#: src/Zypper.cc:645
+#: src/Zypper.cc:730
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -1851,7 +1914,7 @@ msgstr ""
 "\tproducts, pd\t\tΛίστα όλων των διαθέσιμων προϊόντων.\n"
 "\twhat-provides, wp\tΛίστα πακέτων που παρέχουν την ορισμένη δυνατότητα.\n"
 
-#: src/Zypper.cc:660
+#: src/Zypper.cc:745
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -1865,7 +1928,7 @@ msgstr ""
 "\tlocks, ll\t\tΛίστα τρεχόντων κλειδωμάτων πακέτων.\n"
 "\tcleanlocks, cl\t\tΑφαίρεση αχρησιμοποίητων κλειδωμάτων.\n"
 
-#: src/Zypper.cc:667
+#: src/Zypper.cc:752
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -1889,13 +1952,13 @@ msgstr ""
 "πακέτα\n"
 "\t\t\t\tσε ένα τοπικό κατάλογο.\n"
 
-#: src/Zypper.cc:677
+#: src/Zypper.cc:762
 msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
 msgstr ""
 
-#: src/Zypper.cc:682
+#: src/Zypper.cc:767
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -1904,7 +1967,7 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:710
+#: src/Zypper.cc:795
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr ""
@@ -1914,7 +1977,7 @@ msgstr ""
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:717
+#: src/Zypper.cc:802
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -1923,7 +1986,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:724
+#: src/Zypper.cc:809
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "
@@ -1932,48 +1995,48 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:735
+#: src/Zypper.cc:820
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr ""
 "Πληκτρολογίστε '%s' για να πάρετε βοήθεια σχετικά με τη συγκεκριμένη εντολή."
 
-#: src/Zypper.cc:910
+#: src/Zypper.cc:995
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Ανάλυτικά: %d"
 
-#: src/Zypper.cc:924
+#: src/Zypper.cc:1009
 #, c-format, boost-format
 msgid "Invalid table style %d."
 msgstr "Μη έγκυρο στυλ πίνακα %d."
 
-#: src/Zypper.cc:925
+#: src/Zypper.cc:1010
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
 msgstr "Χρησιμοποιήστε έναν ακέραιο αριθμό από %d έως %d"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:1036
+#: src/Zypper.cc:1121
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr ""
 
-#: src/Zypper.cc:1057
+#: src/Zypper.cc:1142
 msgid "Enforced setting"
 msgstr "Ενισχυμένη ρύθμιση"
 
-#: src/Zypper.cc:1067
+#: src/Zypper.cc:1152
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "Το string των δεδομένων του χρηστη δεν πρέπει να περιέχει χαρακτήρες μη "
 "εκτυπώσιμους ή χαρακτήρες αλλαγής γραμμής!"
 
-#: src/Zypper.cc:1091 src/Zypper.cc:3332
+#: src/Zypper.cc:1176 src/Zypper.cc:3476
 msgid "Entering non-interactive mode."
 msgstr "Εισαγωγή σε μη-διαδραστική κατάσταση."
 
-#: src/Zypper.cc:1098
+#: src/Zypper.cc:1183
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
@@ -1981,11 +2044,11 @@ msgstr ""
 "Οι διορθώσεις που έχουν σαν σημαία την rebootSuggested δεν θα "
 "αντιμετωπιστούν ως διαδραστικές."
 
-#: src/Zypper.cc:1105
+#: src/Zypper.cc:1190
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Εισαγωγή σε κατάσταση 'no-gpg-checks'."
 
-#: src/Zypper.cc:1113
+#: src/Zypper.cc:1198
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -1993,12 +2056,12 @@ msgstr ""
 "Ενεργοποίηση του '%s'. Τα νέα κλειδιά υπογραφής αποθετηρίου θα εισαχθούν "
 "αυτόματα!"
 
-#: src/Zypper.cc:1126
+#: src/Zypper.cc:1211
 msgid "The path specified in the --root option must be absolute."
 msgstr ""
 "Η διαδρομή που έχει οριστεί στην επιλογή --root πρέπει να είναι απόλυτη."
 
-#: src/Zypper.cc:1142
+#: src/Zypper.cc:1227
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -2007,46 +2070,46 @@ msgstr ""
 "Ο σύνδεσμος πρέπει να δείχνει στο αρχείο .prod των βασικών προϊόντων σας "
 "στο /etc/products.d.\n"
 
-#: src/Zypper.cc:1182
+#: src/Zypper.cc:1267
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Τα αποθετήρια έχουν απενεργοποιηθεί, χρήση μόνο της βάσης δεδομένων των "
 "εγκατεστημένων πακέτων."
 
-#: src/Zypper.cc:1194
+#: src/Zypper.cc:1279
 msgid "Autorefresh disabled."
 msgstr "Η αυτόματη ανανέωση είναι απενεργοποιημένη."
 
-#: src/Zypper.cc:1201
+#: src/Zypper.cc:1286
 msgid "CD/DVD repositories disabled."
 msgstr "Τα αποθετήρια CD/DVD έχουν απενεργοποιηθεί."
 
-#: src/Zypper.cc:1208
+#: src/Zypper.cc:1293
 msgid "Remote repositories disabled."
 msgstr "Τα απομακρυσμένα αποθετήρια έχουν απενεργοποιηθεί."
 
-#: src/Zypper.cc:1215
+#: src/Zypper.cc:1300
 msgid "Ignoring installed resolvables."
 msgstr "Αγνόηση των εγκατεστημένων επιλύσιμων."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:1242 src/Zypper.cc:1292
+#: src/Zypper.cc:1327 src/Zypper.cc:1377
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Η επιλογή %s δεν έχει κάποιο αποτέλεσμα εδώ, αγνόηση."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:1375
+#: src/Zypper.cc:1460
 msgid "Zypper shell does not support execution of subcommands."
 msgstr ""
 
-#: src/Zypper.cc:1454
+#: src/Zypper.cc:1539
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "Η εντολή '%s' αντικαταστάθηκε από την '%s'."
 
-#: src/Zypper.cc:1455
+#: src/Zypper.cc:1540
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "Δείτε την '%s' για τις διαθέσιμες επολογές."
@@ -2054,7 +2117,7 @@ msgstr "Δείτε την '%s' για τις διαθέσιμες επολογέ
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
 #. and the third %s = "only, in-advance, in-heaps, as-needed"
-#: src/Zypper.cc:1590
+#: src/Zypper.cc:1675
 #, c-format, boost-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -2096,8 +2159,8 @@ msgid ""
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
 
-#: src/Zypper.cc:1623 src/Zypper.cc:1675 src/Zypper.cc:1755 src/Zypper.cc:2297
-#: src/Zypper.cc:2371 src/Zypper.cc:2478
+#: src/Zypper.cc:1708 src/Zypper.cc:1760 src/Zypper.cc:1840 src/Zypper.cc:2441
+#: src/Zypper.cc:2515 src/Zypper.cc:2622
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2105,7 +2168,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: src/Zypper.cc:1658
+#: src/Zypper.cc:1743
 #, c-format, boost-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -2145,7 +2208,7 @@ msgstr ""
 "πραγματικότητα.\n"
 "    --details               Εμφάνιση της αναλυτικής περίληψης εγκατάστασης.\n"
 
-#: src/Zypper.cc:1696
+#: src/Zypper.cc:1781
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -2170,7 +2233,7 @@ msgstr ""
 "αποθετήρια.\n"
 "    --download-only      Μόνο λήψη των πακέτων, χωρίς εγκατάσταση.\n"
 
-#: src/Zypper.cc:1707
+#: src/Zypper.cc:1792
 #, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
@@ -2178,7 +2241,7 @@ msgid ""
 "executing '%2%'."
 msgstr ""
 
-#: src/Zypper.cc:1740
+#: src/Zypper.cc:1825
 #, c-format, boost-format
 msgid ""
 "verify (ve) [options]\n"
@@ -2212,7 +2275,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Μόνο λήψη των πακέτων, όχι εγκατάσταση.\n"
 
-#: src/Zypper.cc:1784
+#: src/Zypper.cc:1869
 #, c-format, boost-format
 msgid ""
 "install-new-recommends (inr) [options]\n"
@@ -2246,7 +2309,7 @@ msgstr ""
 "-d, --download-only         Μόνο λήψη πακέτων, όχι εγκατάσταση.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: src/Zypper.cc:1817
+#: src/Zypper.cc:1901
 #, fuzzy, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -2267,8 +2330,23 @@ msgstr ""
 "-d, --disable           Προσθήκη υπηρεσίας ως ανενεργή.\n"
 "-n, --name <alias>      Ορισμός περιγραφικού ονόματος για την υπηρεσία.\n"
 
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:1914
+msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:1917
+msgid "Add a repository index service to the system."
+msgstr ""
+
+#: src/Zypper.cc:1921
+#, boost-format
+msgid "Type of the service (%1%)."
+msgstr ""
+
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1840
+#: src/Zypper.cc:1937
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -2287,7 +2365,7 @@ msgstr ""
 "    --loose-query  Αγνόηση αλφαριθμητικού ερωτήματος στο URI.\n"
 
 #. translators: %s is "--all" and "--all"
-#: src/Zypper.cc:1876
+#: src/Zypper.cc:1967
 #, fuzzy, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -2357,7 +2435,66 @@ msgstr ""
 "-m, --medium-type <type>       Εφαρμογή αλλαγών στις καθορισμένου τύπου "
 "υπηρεσίες.\n"
 
-#: src/Zypper.cc:1924
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:1996
+msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
+msgstr ""
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:1999
+#, boost-format
+msgid "modifyservice (ms) <OPTIONS> <%1%>"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:2002
+#, boost-format
+msgid ""
+"Modify properties of services specified by alias, number, or URI, or by the "
+"'%1%' aggregate options."
+msgstr ""
+
+#: src/Zypper.cc:2007
+msgid "Apply changes to all services."
+msgstr ""
+
+#: src/Zypper.cc:2008
+msgid "Apply changes to all local services."
+msgstr ""
+
+#: src/Zypper.cc:2009
+msgid "Apply changes to all remote services."
+msgstr ""
+
+#: src/Zypper.cc:2010
+msgid "Apply changes to services of specified type."
+msgstr ""
+
+#: src/Zypper.cc:2012
+msgid "Add a RIS service repository to enable."
+msgstr ""
+
+#: src/Zypper.cc:2013
+msgid "Add a RIS service repository to disable."
+msgstr ""
+
+#: src/Zypper.cc:2014
+msgid "Remove a RIS service repository to enable."
+msgstr ""
+
+#: src/Zypper.cc:2015
+msgid "Remove a RIS service repository to disable."
+msgstr ""
+
+#: src/Zypper.cc:2016
+msgid "Clear the list of RIS repositories to enable."
+msgstr ""
+
+#: src/Zypper.cc:2017
+msgid "Clear the list of RIS repositories to disable."
+msgstr ""
+
+#: src/Zypper.cc:2044
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -2389,7 +2526,7 @@ msgstr ""
 "-U, --sort-by-uri         Ταξινόμηση της λίστας κατά URI.\n"
 "-N, --sort-by-name        Ταξινόμηση της λίστας κατά όνομα.\n"
 
-#: src/Zypper.cc:1952
+#: src/Zypper.cc:2072
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -2403,7 +2540,7 @@ msgid ""
 msgstr ""
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1985
+#: src/Zypper.cc:2098
 #, c-format, boost-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -2426,7 +2563,41 @@ msgid ""
 "-f, --refresh             Enable autorefresh of the repository.\n"
 msgstr ""
 
-#: src/Zypper.cc:2030
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:2120
+msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
+msgstr ""
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:2123
+msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:2126
+msgid ""
+"Add a repository to the system. The repository can be specified by its URI "
+"or can be read from specified .repo file (even remote)."
+msgstr ""
+
+#: src/Zypper.cc:2129
+msgid "Just another means to specify a .repo file to read."
+msgstr ""
+
+#: src/Zypper.cc:2130
+msgid "Probe URI."
+msgstr ""
+
+#: src/Zypper.cc:2131
+msgid "Don't probe URI, probe later during refresh."
+msgstr ""
+
+#: src/Zypper.cc:2134
+#, boost-format
+msgid "Type of repository (%1%)."
+msgstr ""
+
+#: src/Zypper.cc:2162
 msgid ""
 "repos (lr) [options] [repo] ...\n"
 "\n"
@@ -2470,7 +2641,7 @@ msgstr ""
 "-A, --sort-by-alias       Ταξινόμηση λίστας κατά ψευδώνυμο.\n"
 "-N, --sort-by-name        Ταξινόμηση λίστας κατά όνομα.\n"
 
-#: src/Zypper.cc:2062
+#: src/Zypper.cc:2194
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -2488,7 +2659,7 @@ msgstr ""
 "    --loose-auth   Αγνόηση δεδομένων πιστοποίησης χρήστη στο URI.\n"
 "    --loose-query  Αγνόηση αλφαριθμητικού ερωτήματος στο URI.\n"
 
-#: src/Zypper.cc:2081
+#: src/Zypper.cc:2213
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -2505,7 +2676,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:2114
+#: src/Zypper.cc:2236
 #, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -2542,7 +2713,7 @@ msgstr ""
 "-k, --keep-packages       Ενεργοποίηση λανθάνουσας μνήμης για αρχεία RPM.\n"
 "-K, --no-keep-packages    Απενεργοποίηση λανθάνουσας μνήμης για αρχεία RPM.\n"
 
-#: src/Zypper.cc:2133
+#: src/Zypper.cc:2253
 msgid ""
 "-a, --all                 Apply changes to all repositories.\n"
 "-l, --local               Apply changes to all local repositories.\n"
@@ -2556,7 +2727,42 @@ msgstr ""
 "-m, --medium-type <type>  Εφαρμογή αλλαγών στα αποθετήρια καθορισμένου "
 "τύπου.\n"
 
-#: src/Zypper.cc:2156
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:2262
+msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
+msgstr ""
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:2265
+#, boost-format
+msgid "modifyrepo (mr) <OPTIONS> <%1%>"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:2268
+#, boost-format
+msgid ""
+"Modify properties of repositories specified by alias, number, or URI, or by "
+"the '%1%' aggregate options."
+msgstr ""
+
+#: src/Zypper.cc:2273
+msgid "Apply changes to all repositories."
+msgstr "Εφαρμογή αλλαγών σε όλα τα αποθετήρια."
+
+#: src/Zypper.cc:2274
+msgid "Apply changes to all local repositories."
+msgstr "Εφαρμογή αλλαγών σε όλα τα τοπικά αποθετήρια."
+
+#: src/Zypper.cc:2275
+msgid "Apply changes to all remote repositories."
+msgstr "Εφαρμογή αλλαγών σε όλα τα απομακρυσμένα αποθετήρια."
+
+#: src/Zypper.cc:2276
+msgid "Apply changes to repositories of specified type."
+msgstr "Εφαρμογή αλλαγών στα αποθετήρια καθορισμένου τύπου."
+
+#: src/Zypper.cc:2300
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -2591,7 +2797,7 @@ msgstr ""
 "-s, --services           Ανανέωση επίσης υπηρεσιών πριν την ανανέωση "
 "αποθετηρίων.\n"
 
-#: src/Zypper.cc:2185
+#: src/Zypper.cc:2329
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -2617,7 +2823,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2214
+#: src/Zypper.cc:2358
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -2660,7 +2866,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2268
+#: src/Zypper.cc:2412
 #, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -2695,7 +2901,7 @@ msgid ""
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
 
-#: src/Zypper.cc:2341
+#: src/Zypper.cc:2485
 #, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -2731,11 +2937,11 @@ msgid ""
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
 
-#: src/Zypper.cc:2368
+#: src/Zypper.cc:2512
 msgid "Install only patches which affect the package management itself."
 msgstr ""
 
-#: src/Zypper.cc:2369
+#: src/Zypper.cc:2513
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
@@ -2743,58 +2949,58 @@ msgid ""
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2399
+#: src/Zypper.cc:2543
 msgid "list-patches (lp) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2402
+#: src/Zypper.cc:2546
 msgid "List all applicable patches."
 msgstr ""
 
-#: src/Zypper.cc:2405
+#: src/Zypper.cc:2549
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
 
-#: src/Zypper.cc:2406
+#: src/Zypper.cc:2550
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
 
-#: src/Zypper.cc:2407
+#: src/Zypper.cc:2551
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
 
-#: src/Zypper.cc:2408
+#: src/Zypper.cc:2552
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
 
-#: src/Zypper.cc:2409
+#: src/Zypper.cc:2553
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
 
-#: src/Zypper.cc:2410
+#: src/Zypper.cc:2554
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
 
-#: src/Zypper.cc:2411
+#: src/Zypper.cc:2555
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
 
-#: src/Zypper.cc:2413
+#: src/Zypper.cc:2557
 #, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
@@ -2803,7 +3009,7 @@ msgstr ""
 "    --from <alias|#|URI>        Paquetes seleccionados sólo del repositorio "
 "indicado.\n"
 
-#: src/Zypper.cc:2457
+#: src/Zypper.cc:2601
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -2860,23 +3066,23 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Να γίνει μόνο λήψη πακέτων, όχι εγκατάσταση.\n"
 
-#: src/Zypper.cc:2486
+#: src/Zypper.cc:2630
 msgid "Whether to allow downgrading installed resolvables."
 msgstr ""
 
-#: src/Zypper.cc:2488
+#: src/Zypper.cc:2632
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr ""
 
-#: src/Zypper.cc:2490
+#: src/Zypper.cc:2634
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
 
-#: src/Zypper.cc:2492
+#: src/Zypper.cc:2636
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr ""
 
-#: src/Zypper.cc:2529
+#: src/Zypper.cc:2673
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -2924,18 +3130,18 @@ msgid ""
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2579
+#: src/Zypper.cc:2723
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2582
+#: src/Zypper.cc:2726
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
 
-#: src/Zypper.cc:2585
+#: src/Zypper.cc:2729
 #, fuzzy
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
@@ -2944,13 +3150,13 @@ msgstr ""
 "    --from <alias|#|URI>        Paquetes seleccionados sólo del repositorio "
 "indicado.\n"
 
-#: src/Zypper.cc:2586
+#: src/Zypper.cc:2730
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr ""
 
-#: src/Zypper.cc:2603
+#: src/Zypper.cc:2747
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -2969,7 +3175,7 @@ msgstr ""
 "-r, --repo <alias|#|URI>  Απλά ένας άλλος τρόπος να καθοριστεί το "
 "αποθετήριο.\n"
 
-#: src/Zypper.cc:2633
+#: src/Zypper.cc:2777
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -3005,7 +3211,7 @@ msgstr ""
 "-N, --sort-by-name        Ταξινόμηση της λίστας βάσει ονόματος πακέτου.\n"
 "-R, --sort-by-repo        Ταξινόμηση λίστας ανά αποθετήριο.\n"
 
-#: src/Zypper.cc:2664
+#: src/Zypper.cc:2808
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3028,7 +3234,7 @@ msgstr ""
 "-u, --not-installed-only  Εμφάνιση μόνο patterns που δεν είναι "
 "εγκατεστημένα.\n"
 
-#: src/Zypper.cc:2691
+#: src/Zypper.cc:2835
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3051,12 +3257,12 @@ msgstr ""
 "-u, --not-installed-only  Εμφάνιση μόνο προιόντων που δεν είναι "
 "εγκατεστημένα.\n"
 
-#: src/Zypper.cc:2700
+#: src/Zypper.cc:2844
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
 
-#: src/Zypper.cc:2724
+#: src/Zypper.cc:2868
 #, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -3100,7 +3306,7 @@ msgstr ""
 "    --recommends          Εμφάνιση συνιστώμενων.\n"
 "    --suggests            Εμφάνιση προτεινόμενων.\n"
 
-#: src/Zypper.cc:2757
+#: src/Zypper.cc:2901
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3115,7 +3321,7 @@ msgstr ""
 "\n"
 "Αυτό είναι ένα ψευδώνυμο για το '%s'.\n"
 
-#: src/Zypper.cc:2776
+#: src/Zypper.cc:2920
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3130,7 +3336,7 @@ msgstr ""
 "\n"
 "Αυτό είναι ένα ψευδώνυμο για το '%s'.\n"
 
-#: src/Zypper.cc:2795
+#: src/Zypper.cc:2939
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3145,7 +3351,7 @@ msgstr ""
 "\n"
 "Αυτό είναι ένα ψευδώνυμο για το '%s'.\n"
 
-#: src/Zypper.cc:2812
+#: src/Zypper.cc:2956
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3159,7 +3365,7 @@ msgstr ""
 "\n"
 "Αυτή η εντολή δεν έχει επιπλέον επιλογές.\n"
 
-#: src/Zypper.cc:2863
+#: src/Zypper.cc:3007
 msgid ""
 "moo\n"
 "\n"
@@ -3173,7 +3379,7 @@ msgstr ""
 "\n"
 "Αυτή η εντολή δεν έχει επιπλέον επιλογές.\n"
 
-#: src/Zypper.cc:2885
+#: src/Zypper.cc:3029
 #, c-format, boost-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -3198,7 +3404,7 @@ msgstr ""
 "-t, --type <type>         Τύπος πακέτου (%s).\n"
 "                          Προεπιλογή: %s.\n"
 
-#: src/Zypper.cc:2912
+#: src/Zypper.cc:3056
 #, c-format, boost-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -3222,26 +3428,26 @@ msgstr ""
 "                          Προεπιλογή: %s.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:2939
+#: src/Zypper.cc:3083
 msgid "locks (ll) [options]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2942
+#: src/Zypper.cc:3086
 msgid "List current package locks."
 msgstr ""
 
 #. translators: -m, --matches
-#: src/Zypper.cc:2946
+#: src/Zypper.cc:3090
 msgid "Show the number of resolvables matched by each lock."
 msgstr ""
 
 #. translators: -s, --solvables
-#: src/Zypper.cc:2948
+#: src/Zypper.cc:3092
 msgid "List the resolvables matched by each lock."
 msgstr ""
 
-#: src/Zypper.cc:2964
+#: src/Zypper.cc:3108
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -3260,7 +3466,7 @@ msgstr ""
 "-e, --only-empty          Εκκαθάριση μόνο κλειδωμάτων τα οποία δεν "
 "κλειδώνουν τίποτα.\n"
 
-#: src/Zypper.cc:2985
+#: src/Zypper.cc:3129
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -3278,7 +3484,7 @@ msgstr ""
 "  Επιλογές εντολής:\n"
 "-l, --label                 Εμφάνιση ετικέτας λειτουργικού συστήματος.\n"
 
-#: src/Zypper.cc:3006
+#: src/Zypper.cc:3150
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3294,7 +3500,7 @@ msgstr ""
 "  Επιλογές εντολής:\n"
 "-m, --match  Δέχεται το νούμερο έκδοσης που λείπει ως οποιαδήποτε έκδοση.\n"
 
-#: src/Zypper.cc:3025
+#: src/Zypper.cc:3169
 msgid ""
 "licenses\n"
 "\n"
@@ -3309,19 +3515,19 @@ msgstr ""
 "Αυτή η εντολή δεν έχει επιπλέον επιλογές.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3049
+#: src/Zypper.cc:3193
 msgid "ps [options]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3052
+#: src/Zypper.cc:3196
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
 
 #. translators: -s, --short
-#: src/Zypper.cc:3056
+#: src/Zypper.cc:3200
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -3329,7 +3535,7 @@ msgid ""
 msgstr ""
 
 #. translators: --print <format>
-#: src/Zypper.cc:3058
+#: src/Zypper.cc:3202
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -3337,7 +3543,7 @@ msgid ""
 "system service name."
 msgstr ""
 
-#: src/Zypper.cc:3077
+#: src/Zypper.cc:3221
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -3359,7 +3565,7 @@ msgid ""
 "                     would be done.\n"
 msgstr ""
 
-#: src/Zypper.cc:3116
+#: src/Zypper.cc:3260
 msgid ""
 "source-download\n"
 "\n"
@@ -3389,7 +3595,7 @@ msgstr ""
 "                     αλλά να εμφανιστούν ποια πηγαία rpms λείπουν ή είναι "
 "εξωγενή.\n"
 
-#: src/Zypper.cc:3143
+#: src/Zypper.cc:3287
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -3403,7 +3609,7 @@ msgstr ""
 "\n"
 "Αυτή η εντολή δεν έχει επιπλέον επιλογές.\n"
 
-#: src/Zypper.cc:3160
+#: src/Zypper.cc:3304
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -3418,7 +3624,7 @@ msgstr ""
 "Αυτή η εντολή δεν έχει επιπλέον επιλογές.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3178
+#: src/Zypper.cc:3322
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -3429,7 +3635,7 @@ msgstr ""
 "Λίστα με τους διαθέσιμους τύπους υπηρεσιών.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3194
+#: src/Zypper.cc:3338
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -3442,7 +3648,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3216
+#: src/Zypper.cc:3360
 msgid ""
 "mount\n"
 "\n"
@@ -3462,7 +3668,7 @@ msgstr ""
 "-n, --name <name>    Χρήση του string σαν υπηρεσία ονόματος.\n"
 "-r, --recurse        Χωρισμός σε υποφακέλους.\n"
 
-#: src/Zypper.cc:3244
+#: src/Zypper.cc:3388
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -3476,7 +3682,7 @@ msgstr ""
 "είναι ένα ψευδώνυμο για το '%s'.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3261
+#: src/Zypper.cc:3405
 msgid ""
 "ping [options]\n"
 "\n"
@@ -3486,16 +3692,16 @@ msgstr ""
 "\n"
 "Αυτή η εντολή έχει εικονική υλοποίηση η οποία πάντα επιστρέφει 0.\n"
 
-#: src/Zypper.cc:3304 src/Zypper.cc:5357
+#: src/Zypper.cc:3448 src/Zypper.cc:5473
 msgid "Unexpected program flow."
 msgstr "Μη αναμενόμενη ροή προγράμματος."
 
-#: src/Zypper.cc:3348
+#: src/Zypper.cc:3492
 msgid "Non-option program arguments: "
 msgstr "Παράμετροι προγράμματος που δεν είναι επιλογές: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3407
+#: src/Zypper.cc:3551
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -3557,21 +3763,21 @@ msgstr ""
 "                       ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n"
 "                       ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓"
 
-#: src/Zypper.cc:3430
+#: src/Zypper.cc:3574
 msgid "Root privileges are required for refreshing services."
 msgstr "Απαιτούνται δικαιώματα root για την ανανέωση των υπηρεσιών."
 
-#: src/Zypper.cc:3454 src/Zypper.cc:3543 src/Zypper.cc:3756
+#: src/Zypper.cc:3598 src/Zypper.cc:3677 src/Zypper.cc:3872
 msgid "Root privileges are required for modifying system services."
 msgstr ""
 "Απαιτούνται δικαιώματα root για την τροποποίηση των υπηρεσιών του συστήματος."
 
-#: src/Zypper.cc:3527
+#: src/Zypper.cc:3661
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "Το '%s' δεν είναι ένας έγκυρος τύπος υπηρεσίας."
 
-#: src/Zypper.cc:3529
+#: src/Zypper.cc:3663
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -3582,129 +3788,129 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3554 src/Zypper.cc:3897
+#: src/Zypper.cc:3688 src/Zypper.cc:4013
 msgid "Alias or an aggregate option is required."
 msgstr "Απαιτείται επιλογή ψευδωνύμου ή άθροισης."
 
-#: src/Zypper.cc:3586
+#: src/Zypper.cc:3720
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Η υπηρεσία '%s' δεν βρέθηκε."
 
-#: src/Zypper.cc:3613 src/Zypper.cc:3755 src/Zypper.cc:3834 src/Zypper.cc:3886
+#: src/Zypper.cc:3747 src/Zypper.cc:3871 src/Zypper.cc:3950 src/Zypper.cc:4002
 msgid "Root privileges are required for modifying system repositories."
 msgstr ""
 "Απαιτούνται δικαιώματα root για την τροποποίηση των αποθετηρίων του "
 "συστήματος."
 
-#: src/Zypper.cc:3664 src/Zypper.cc:4001
+#: src/Zypper.cc:3780 src/Zypper.cc:4117
 msgid "Too few arguments."
 msgstr "Πολύ λίγες παράμετροι."
 
-#: src/Zypper.cc:3687
+#: src/Zypper.cc:3803
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Αν μόνο μια παράμετρος χρησιμοποιηθεί, πρέπει να είναι ένα URI που οδηγεί σε "
 "ένα αρχείο .repo."
 
-#: src/Zypper.cc:3717
+#: src/Zypper.cc:3833
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 "Το %s δεν μπορεί να χρησιμοποιηθεί μαζί με το %s. Χρησιμοποιώντας τις "
 "ρυθμίσεις του %s."
 
-#: src/Zypper.cc:3736
+#: src/Zypper.cc:3852
 msgid "Specified type is not a valid repository type:"
 msgstr "Ο καθορισμένος τύπος δεν είναι έγκυρος τύπος αποθετηρίου:"
 
-#: src/Zypper.cc:3737
+#: src/Zypper.cc:3853
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
 "Κοιτάξτε το '%s' ή το '%s για να πάρετε μια λίστα με γνωστούς τύπους "
 "αποθετηρίων."
 
-#: src/Zypper.cc:3763 src/Zypper.cc:4959 src/utils/messages.cc:45
+#: src/Zypper.cc:3879 src/Zypper.cc:5075 src/utils/messages.cc:45
 msgid "Required argument missing."
 msgstr "Λείπει η απαιτούμενη παράμετρος."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:3788
+#: src/Zypper.cc:3904
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Το αποθετήριο '%s' δεν βρέθηκε από το ψευδώνυμο, τον αριθμό ή το URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:3810
+#: src/Zypper.cc:3926
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Η υπηρεσία '%s' δεν βρέθηκε από το ψευδώνυμο, τον αριθμός ή το URI."
 
-#: src/Zypper.cc:3841
+#: src/Zypper.cc:3957
 msgid "Too few arguments. At least URI and alias are required."
 msgstr ""
 "Πολύ λίγες παράμετροι. Απαιτούνται τουλάχιστον το URI και το ψευδώνυμο."
 
-#: src/Zypper.cc:3865
+#: src/Zypper.cc:3981
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Το αποθετήριο '%s' δεν βρέθηκε."
 
-#: src/Zypper.cc:3928
+#: src/Zypper.cc:4044
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Το αποθετήριο %s δεν βρέθηκε."
 
-#: src/Zypper.cc:3945
+#: src/Zypper.cc:4061
 msgid "Root privileges are required for refreshing system repositories."
 msgstr ""
 "Απαιτούνται δικαιώματα root για την ανανέωση των αποθετηρίων συστήματος."
 
-#: src/Zypper.cc:3951
+#: src/Zypper.cc:4067
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Η καθολική επιλογή '%s' δεν έχει αποτέλεσμα εδώ."
 
-#: src/Zypper.cc:3959
+#: src/Zypper.cc:4075
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Οι παράμετροι δεν επιτρέπονται εάν χρησιμοποιηθεί το '%s'."
 
-#: src/Zypper.cc:3983
+#: src/Zypper.cc:4099
 msgid "Root privileges are required for cleaning local caches."
 msgstr ""
 "Απαιτούνται δικαιώματα root για την εκκαθάριση της τοπικής λανθάνουσας "
 "μνήμης."
 
-#: src/Zypper.cc:4002
+#: src/Zypper.cc:4118
 msgid "At least one package name is required."
 msgstr "Απαιτείται τουλάχιστον ένα όνομα πακέτου."
 
-#: src/Zypper.cc:4011
+#: src/Zypper.cc:4127
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
 "Απαιτούνται δικαιώματα root για την εγκατάσταση ή απεγκατάσταση πακέτων."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4023
+#: src/Zypper.cc:4139
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Αγνόηση παραμέτρων, σημείωση όλου του αποθετηρίου."
 
-#: src/Zypper.cc:4034
+#: src/Zypper.cc:4150
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Πακέτο άγνωστου τύπου: %s"
 
-#: src/Zypper.cc:4044
+#: src/Zypper.cc:4160
 msgid "Cannot uninstall patches."
 msgstr "Αδυναμία απεγκατάστασης διόρθωσης."
 
-#: src/Zypper.cc:4045
+#: src/Zypper.cc:4161
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -3716,34 +3922,34 @@ msgstr ""
 "εγγραφών βάσης δεδομένων,\n"
 "ή παρόμοια."
 
-#: src/Zypper.cc:4055
+#: src/Zypper.cc:4171
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Η απεγκατάσταση ενός πηγαίου πακέτου δεν καθορίστηκε και εφαρμόστηκε."
 
-#: src/Zypper.cc:4075
+#: src/Zypper.cc:4191
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "Το '%s' μοιάζει με αρχείο RPM. Θα γίνει προσπάθεια για λήψη."
 
-#: src/Zypper.cc:4084
+#: src/Zypper.cc:4200
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Πρόβλημα με τον καθορισμό αρχείου RPM ως '%s', προσπέραση."
 
-#: src/Zypper.cc:4106
+#: src/Zypper.cc:4222
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Πρόβλημα ανάγνωσης της επικεφαλίδας του RPM του %s. Είναι αρχείο RPM;"
 
-#: src/Zypper.cc:4127
+#: src/Zypper.cc:4243
 msgid "Plain RPM files cache"
 msgstr "Λανθάνουσα μνήμη απλών αρχείων RPM"
 
-#: src/Zypper.cc:4144
+#: src/Zypper.cc:4260
 msgid "No valid arguments specified."
 msgstr "Δεν καθορίστηκε έγκυρη παράμετρος."
 
-#: src/Zypper.cc:4161 src/Zypper.cc:4292
+#: src/Zypper.cc:4277 src/Zypper.cc:4408
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -3752,81 +3958,81 @@ msgstr ""
 "επιλύσεων. Τίποτα δεν μπορεί να εγκατασταθεί."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4198 src/Zypper.cc:4763
+#: src/Zypper.cc:4314 src/Zypper.cc:4879
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "Το %s έρχεται σε αντίθεση με %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4206
+#: src/Zypper.cc:4322
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "Το %s προς το παρόν δεν μπορεί να χρησιμοποιηθεί με το %s"
 
-#: src/Zypper.cc:4247
+#: src/Zypper.cc:4363
 msgid "Source package name is a required argument."
 msgstr "Το όνομα πηγαίου πακέτου είναι απαιτούμενη παράμετρος."
 
-#: src/Zypper.cc:4331
+#: src/Zypper.cc:4447
 msgid "Mode is set to 'match-exact'"
 msgstr "Η λειτουργία ορίστηκε σε 'ταιριάζει-ακριβώς'"
 
-#: src/Zypper.cc:4351 src/Zypper.cc:4682 src/Zypper.cc:4782 src/Zypper.cc:4992
-#: src/Zypper.cc:5043 src/Zypper.cc:5083
+#: src/Zypper.cc:4467 src/Zypper.cc:4798 src/Zypper.cc:4898 src/Zypper.cc:5108
+#: src/Zypper.cc:5159 src/Zypper.cc:5199
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Πακέτο άγνωστου τύπου '%s'."
 
-#: src/Zypper.cc:4373 src/repos.cc:794
+#: src/Zypper.cc:4489 src/repos.cc:794
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Το καθορισμένο αποθετήριο '%s' είναι απενεργοποιημένο."
 
 #. translators: empty search result message
-#: src/Zypper.cc:4497
+#: src/Zypper.cc:4613
 #, fuzzy
 msgid "No matching items found."
 msgstr "Δεν βρέθηκαν ζητήματα που να ταιριάζουν."
 
-#: src/Zypper.cc:4532
+#: src/Zypper.cc:4648
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 "Προέκυψε πρόβλημα στην αρχικοποίηση ή την εκτέλεση του ερωτήματος της "
 "αναζήτησης"
 
-#: src/Zypper.cc:4533
+#: src/Zypper.cc:4649
 msgid "See the above message for a hint."
 msgstr "Κοιτάξτε το παραπάνω μήνυμα για κάποια συμβουλή."
 
-#: src/Zypper.cc:4534 src/repos.cc:1007
+#: src/Zypper.cc:4650 src/repos.cc:1007
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Η εκτέλεση του 'zypper refresh' ως root μπορεί να επιλύσει το πρόβλημα."
 
-#: src/Zypper.cc:4614
+#: src/Zypper.cc:4730
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
 
-#: src/Zypper.cc:4701 src/Zypper.cc:4749
+#: src/Zypper.cc:4817 src/Zypper.cc:4865
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Αδυναμία χρήσης %s μαζί με %s."
 
-#: src/Zypper.cc:4730
+#: src/Zypper.cc:4846
 msgid "Root privileges are required for updating packages."
 msgstr "Απαιτούνται δικαιώματα root για την ενημέρωση των πακέτων."
 
-#: src/Zypper.cc:4789 src/Zypper.cc:4797 src/Zypper.cc:4878
+#: src/Zypper.cc:4905 src/Zypper.cc:4913 src/Zypper.cc:4994
 msgid "Operation not supported."
 msgstr "Η λειτουργία δεν υποστηρίζεται."
 
-#: src/Zypper.cc:4790
+#: src/Zypper.cc:4906
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Για να ενημερώσετε τα εγκατεστημένα προιόντα χρησιμοποιήστε το '%s'."
 
-#: src/Zypper.cc:4798
+#: src/Zypper.cc:4914
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -3836,18 +4042,18 @@ msgstr ""
 "εγκαταστήσετε τα καινούργια πηγαία πακέτα και τις εξαρτήσεις τους, "
 "χρησιμοποιήστε το '%s'."
 
-#: src/Zypper.cc:4814
+#: src/Zypper.cc:4930
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Αδυναμία χρήσης πολλαπλών τύπων όταν τα καθορισμένα πακέτα ορίζονται σαν "
 "παράμετροι."
 
-#: src/Zypper.cc:4914
+#: src/Zypper.cc:5030
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Απαιτούνται δικαιώματα root για την αναβάθμιση της διανομής."
 
-#: src/Zypper.cc:4934
+#: src/Zypper.cc:5050
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -3858,84 +4064,84 @@ msgstr ""
 "ενεργοποιημένα. Σιγουρευτείτε ότι τα αποθετήρια είναι συμβατά πριν "
 "προχωρήσετε. Ανατρέξτε στο '%s' για πληροφορίες σχετικά με την εντολή."
 
-#: src/Zypper.cc:4962 src/utils/messages.cc:37 src/utils/messages.cc:47
+#: src/Zypper.cc:5078 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
 msgstr "Χρήση"
 
-#: src/Zypper.cc:5022 src/Zypper.cc:5063
+#: src/Zypper.cc:5138 src/Zypper.cc:5179
 msgid "Root privileges are required for adding of package locks."
 msgstr "Απαιτούνται δικαιώματα root για την προσθήκη κλειδωμάτων πακέτων."
 
-#: src/Zypper.cc:5144
+#: src/Zypper.cc:5260
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "Αφαίρεση κλειδώματος %lu."
 msgstr[1] "Αφαίρεση κλειδωμάτων %lu."
 
-#: src/Zypper.cc:5155
+#: src/Zypper.cc:5271
 msgid "XML output not implemented for this command."
 msgstr ""
 
-#: src/Zypper.cc:5168
+#: src/Zypper.cc:5284
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Ετικέτα διανομής: %s"
 
-#: src/Zypper.cc:5169
+#: src/Zypper.cc:5285
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Μικρή ετικέτα: %s"
 
-#: src/Zypper.cc:5210
+#: src/Zypper.cc:5326
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "Το %s ταιριάζει με το %s"
 
-#: src/Zypper.cc:5212
+#: src/Zypper.cc:5328
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "Το %s είναι νεώτερο από το %s"
 
-#: src/Zypper.cc:5214
+#: src/Zypper.cc:5330
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "Το %s είναι παλαιότερο από το %s"
 
-#: src/Zypper.cc:5292 src/source-download.cc:217
+#: src/Zypper.cc:5408 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Ανεπαρκή δικαιώματα χρήσης του καταλόγου λήψεων '%s'."
 
-#: src/Zypper.cc:5344
+#: src/Zypper.cc:5460
 msgid "This command only makes sense in the zypper shell."
 msgstr "Αυτή η εντολή έχει νόημα στο κέλυφος zypper."
 
-#: src/Zypper.cc:5354
+#: src/Zypper.cc:5470
 msgid "You already are running zypper's shell."
 msgstr "Ήδη εκτελείτε το κέλυφος zypper."
 
-#: src/Zypper.cc:5367 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2536
+#: src/Zypper.cc:5483 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2535
 msgid "Alias"
 msgstr "Ψευδώνυμο"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5367 src/info.cc:69 src/info.cc:459 src/info.cc:703
-#: src/locks.cc:107 src/repos.cc:1070 src/repos.cc:1209 src/repos.cc:2537
+#: src/Zypper.cc:5483 src/info.cc:69 src/info.cc:459 src/info.cc:703
+#: src/locks.cc:107 src/repos.cc:1070 src/repos.cc:1209 src/repos.cc:2536
 #: src/search.cc:44 src/search.cc:209 src/search.cc:357 src/search.cc:504
 #: src/search.cc:568 src/update.cc:798 src/utils/misc.cc:250
 msgid "Name"
 msgstr "Όνομα"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5367 src/info.cc:83
+#: src/Zypper.cc:5483 src/info.cc:83
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: src/Zypper.cc:5418
+#: src/Zypper.cc:5534
 msgid "Resolvable Type"
 msgstr "Επιλύσιμος Τύπος"
 
@@ -4250,7 +4456,7 @@ msgstr "Κ"
 #. translators: Table column header
 #. translators: type (general header)
 #: src/info.cc:460 src/locks.cc:110 src/repos.cc:1108 src/repos.cc:1220
-#: src/repos.cc:2546 src/search.cc:46 src/search.cc:212
+#: src/repos.cc:2545 src/search.cc:46 src/search.cc:212
 msgid "Type"
 msgstr "Τύπος"
 
@@ -4731,7 +4937,7 @@ msgstr "Σφάλμα απενεργοποίησης του αποθετηρίο�
 msgid "Problem retrieving files from '%s'."
 msgstr "Πρόβλημα κατά τη λήψη αρχείων από το %s."
 
-#: src/repos.cc:358 src/repos.cc:3306 src/solve-commit.cc:806
+#: src/repos.cc:358 src/repos.cc:3307 src/solve-commit.cc:806
 #: src/solve-commit.cc:837 src/solve-commit.cc:861
 msgid "Please see the above error message for a hint."
 msgstr "Παρακαλώ δείτε το παραπάνω μήνυμα σφάλματος για κάποια υπόδειξη."
@@ -4893,32 +5099,32 @@ msgstr "Αποτυχία αρχικοποίησης στόχου:"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1077 src/repos.cc:1215 src/repos.cc:1764 src/repos.cc:2538
+#: src/repos.cc:1077 src/repos.cc:1215 src/repos.cc:1764 src/repos.cc:2537
 msgid "Enabled"
 msgstr "Ενεργοποιημένο"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1081 src/repos.cc:1216 src/repos.cc:1766 src/repos.cc:2539
+#: src/repos.cc:1081 src/repos.cc:1216 src/repos.cc:1766 src/repos.cc:2538
 msgid "GPG Check"
 msgstr "Έλεγχος GPG"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:1089 src/repos.cc:2541
+#: src/repos.cc:1089 src/repos.cc:2540
 msgid "Refresh"
 msgstr "Ανανέωση"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:1099 src/repos.cc:1217 src/repos.cc:1770 src/repos.cc:2545
+#: src/repos.cc:1099 src/repos.cc:1217 src/repos.cc:1770 src/repos.cc:2544
 msgid "Priority"
 msgstr "Προτεραιότητα"
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1115 src/repos.cc:1210 src/repos.cc:1762 src/repos.cc:2548
+#: src/repos.cc:1115 src/repos.cc:1210 src/repos.cc:1762 src/repos.cc:2547
 msgid "URI"
 msgstr "URI"
 
@@ -5097,7 +5303,7 @@ msgstr ""
 msgid "Invalid repository alias: '%s'"
 msgstr "Μη έγκυρο ψευδώνυμο αποθετηρίου: '%s'"
 
-#: src/repos.cc:1710 src/repos.cc:1995
+#: src/repos.cc:1710 src/repos.cc:1994
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
@@ -5167,44 +5373,44 @@ msgstr ""
 "Η ανάγνωση δεδομένων από το μέσο '%s' καθυστερείται μέχρι την επόμενη "
 "ανανέωση."
 
-#: src/repos.cc:1879
+#: src/repos.cc:1876
 msgid "Problem accessing the file at the specified URI"
 msgstr "Πρόβλημα κατά την πρόσβαση του αρχείου στο καθορισμένο URI"
 
-#: src/repos.cc:1880
+#: src/repos.cc:1877
 msgid "Please check if the URI is valid and accessible."
 msgstr "Παρακαλώ ελέγξτε αν το URI είναι έγκυρο και προσβάσιμο."
 
-#: src/repos.cc:1887
+#: src/repos.cc:1884
 msgid "Problem parsing the file at the specified URI"
 msgstr "Πρόβλημα κατά την ανάλυση του αρχείου στο ορισμένο URI"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1889
+#: src/repos.cc:1886
 msgid "Is it a .repo file?"
 msgstr "Είναι ένα αρχείο .repo;"
 
-#: src/repos.cc:1896
+#: src/repos.cc:1893
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr ""
 "Εμφανίστηκε πρόβλημα κατά την προσπάθεια ανάγνωσης του αρχείου στο "
 "καθορισμένο URI"
 
-#: src/repos.cc:1908
+#: src/repos.cc:1905
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Βρέθηκε αποθετήριο στο αρχείο χωρίς ορισμένο ψευδώνυμο, παράβλεψη."
 
-#: src/repos.cc:1914
+#: src/repos.cc:1911
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Το αποθετήριο '%s' δεν έχει ορισμένο URI, παράβλεψη."
 
-#: src/repos.cc:1958
+#: src/repos.cc:1957
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Το αποθετήριο '%s' έχει αφαιρεθεί."
 
-#: src/repos.cc:1980
+#: src/repos.cc:1979
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
@@ -5213,219 +5419,219 @@ msgstr ""
 "Αδυναμία αλλαγής ψευδωνύμου για το αποθετήριο '%s'. Το αποθετήριο ανήκει "
 "στην υπηρεσία '%s' που είναι υπεύθυνη για τη ρύθμιση του ψευδωνύμου του."
 
-#: src/repos.cc:1991
+#: src/repos.cc:1990
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Το αποθετήριο '%s' μετονομάστηκε σε '%s'."
 
-#: src/repos.cc:2000 src/repos.cc:2232
+#: src/repos.cc:1999 src/repos.cc:2231
 msgid "Error while modifying the repository:"
 msgstr "Σφάλμα κατά την τροποποίηση του αποθετηρίου:"
 
-#: src/repos.cc:2001
+#: src/repos.cc:2000
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Το αποθετήριο '%s' μένει αμετάβλητο."
 
-#: src/repos.cc:2136
+#: src/repos.cc:2135
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Η προτεραιότητα του αποθετηρίου '%s' έχει μείνει αμετάβλητη (%d)"
 
-#: src/repos.cc:2174
+#: src/repos.cc:2173
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Το αποθετήριο '%s' ενεργοποιήθηκε επιτυχώς."
 
-#: src/repos.cc:2176
+#: src/repos.cc:2175
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Το αποθετήριο '%s' απενεργοποιήθηκε επιτυχώς."
 
-#: src/repos.cc:2183
+#: src/repos.cc:2182
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Η αυτόματη ανανέωση έχει ενεργοποιηθεί για το αποθετήριο '%s'."
 
-#: src/repos.cc:2185
+#: src/repos.cc:2184
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Η αυτόματη ανανέωση έχει απενεργοποιηθεί για το αποθετήριο '%s'."
 
-#: src/repos.cc:2192
+#: src/repos.cc:2191
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr ""
 "Η τοπική αποθήκευση αρχείων RPM έχει ενεργοποιηθεί για το αποθετήριο '%s'."
 
-#: src/repos.cc:2194
+#: src/repos.cc:2193
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr ""
 "Η τοπική αποθήκευση αρχείων RPM έχει απενεργοποιηθεί για το αποθετήριο '%s'."
 
-#: src/repos.cc:2201
+#: src/repos.cc:2200
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Ο έλεγχος GPG έχει ενεργοποιηθεί για το αποθετήριο'%s'."
 
-#: src/repos.cc:2203
+#: src/repos.cc:2202
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Ο έλεγχος GPG έχει απενεργοποιηθεί για το αποθετήριο '%s'."
 
-#: src/repos.cc:2209
+#: src/repos.cc:2208
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Η προτεραιότητα του αποθετηρίου '%s' έχει οριστεί στο %d."
 
-#: src/repos.cc:2215
+#: src/repos.cc:2214
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Η ονομασία του αποθετηρίου '%s' έχει οριστεί στο '%s'."
 
-#: src/repos.cc:2226
+#: src/repos.cc:2225
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Τίποτα προς αλλαγή στο αποθετήριο '%s'."
 
-#: src/repos.cc:2233
+#: src/repos.cc:2232
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Το αποθετήριο %s μένει αμετάβλητο."
 
-#: src/repos.cc:2265
+#: src/repos.cc:2264
 msgid "Error reading services:"
 msgstr "Σφάλμα κατά την ανάγνωση των υπηρεσιών:"
 
-#: src/repos.cc:2354
+#: src/repos.cc:2353
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "Η υπηρεσία '%s' δεν βρέθηκε από το ψευδώνυμό της, τον αριθμό ή το URI."
 
-#: src/repos.cc:2357
+#: src/repos.cc:2356
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr ""
 "Χρησιμοποιήστε το '%s' για να λάβετε τη λίστα με τις ορισμένες υπηρεσίες."
 
-#: src/repos.cc:2599
+#: src/repos.cc:2598
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 "Δεν έχουν οριστεί υπηρεσίες. Χρησιμοποιήστε την εντολή '%s' για να "
 "προσθέσετε μια ή περισσότερες υπηρεσίες."
 
-#: src/repos.cc:2682
+#: src/repos.cc:2681
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
 "Η υπηρεσία με την ονομασία '%s' υπάρχει ήδη. Παρακαλώ χρησιμοποιήστε ένα "
 "άλλο ψευδώνυμο."
 
-#: src/repos.cc:2689
+#: src/repos.cc:2688
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "Σφάλμα κατά την προσθήκη της υπηρεσίας '%s'."
 
-#: src/repos.cc:2695
+#: src/repos.cc:2694
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "Η υπηρεσία '%s' προστέθηκε επιτυχώς."
 
-#: src/repos.cc:2733
+#: src/repos.cc:2734
 #, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "Αφαίρεση της υπηρεσίας '%s':"
 
-#: src/repos.cc:2736
+#: src/repos.cc:2737
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "Η υπηρεσία '%s' έχει αφαιρεθεί."
 
-#: src/repos.cc:2750
+#: src/repos.cc:2751
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "Ανανέωση της υπηρεσίας '%s'."
 
-#: src/repos.cc:2765 src/repos.cc:2775
+#: src/repos.cc:2766 src/repos.cc:2776
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr ""
 "Πρόβλημα κατά τη λήψη του αρχείου ευρετηρίου του αποθετηρίου για την "
 "υπηρεσία '%s':"
 
-#: src/repos.cc:2767 src/repos.cc:2875 src/repos.cc:2933
+#: src/repos.cc:2768 src/repos.cc:2876 src/repos.cc:2934
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Παράβλεψη της υπηρεσίας '%s' λόγω του παραπάνω σφάλματος."
 
-#: src/repos.cc:2777
+#: src/repos.cc:2778
 msgid "Check if the URI is valid and accessible."
 msgstr "Ελέγξτε αν το URI είναι έγκυρο και προσβάσιμο."
 
-#: src/repos.cc:2834
+#: src/repos.cc:2835
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "Παράβλεψη απενεργοποιημένης υπηρεσίας '%s'"
 
-#: src/repos.cc:2886
+#: src/repos.cc:2887
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
 "Χρησιμοποιήστε τις εντολές '%s' ή '%s' για να προσθέσετε ή να ενεργοποιήσετε "
 "υπηρεσίες."
 
-#: src/repos.cc:2889
+#: src/repos.cc:2890
 msgid "Specified services are not enabled or defined."
 msgstr "Οι επιλεγμένες υπηρεσίες δεν είναι ενεργοποιημένες ή ορισμένες."
 
-#: src/repos.cc:2891
+#: src/repos.cc:2892
 msgid "There are no enabled services defined."
 msgstr "Δεν έχουν οριστεί ενεργοποιημένες υπηρεσίες."
 
-#: src/repos.cc:2895
+#: src/repos.cc:2896
 msgid "Could not refresh the services because of errors."
 msgstr "Αδυναμία ανανέωσης υπηρεσιών λόγω σφαλμάτων."
 
-#: src/repos.cc:2901
+#: src/repos.cc:2902
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Κάποιες από τις υπηρεσίες δεν ανανεώθηκαν λόγω ενός σφάλματος."
 
-#: src/repos.cc:2906
+#: src/repos.cc:2907
 msgid "Specified services have been refreshed."
 msgstr "Οι καθορισμένες υπηρεσίες έχουν ανανεωθεί."
 
-#: src/repos.cc:2908
+#: src/repos.cc:2909
 msgid "All services have been refreshed."
 msgstr "Όλες οι υπηρεσίες έχουν ανανεωθεί."
 
-#: src/repos.cc:3055
+#: src/repos.cc:3056
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "Η υπηρεσία '%s' έχει ενεργοποιηθεί επιτυχώς."
 
-#: src/repos.cc:3057
+#: src/repos.cc:3058
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "Η υπηρεσία '%s' έχει απενεργοποιηθεί επιτυχώς."
 
-#: src/repos.cc:3063
+#: src/repos.cc:3064
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "Η αυτόματη ανανέωση έχει ενεργοποιηθεί για την υπηρεσία '%s'."
 
-#: src/repos.cc:3065
+#: src/repos.cc:3066
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "Η αυτόματη ανανέωση έχει απενεργοποιηθεί για την υπηρεσία '%s'."
 
-#: src/repos.cc:3070
+#: src/repos.cc:3071
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "Η ονομασία της υπηρεσίας '%s' έχει οριστεί σε '%s'."
 
-#: src/repos.cc:3075
+#: src/repos.cc:3076
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
@@ -5437,7 +5643,7 @@ msgstr[1] ""
 "Τα αποθετήρια '%s' προστέθηκαν στα ενεργοποιημένα αποθετήρια της υπηρεσίας "
 "'%s'"
 
-#: src/repos.cc:3082
+#: src/repos.cc:3083
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
@@ -5449,7 +5655,7 @@ msgstr[1] ""
 "Τα αποθετήρια '%s' προστέθηκαν στα απενεργοποιημένα αποθετήρια της υπηρεσίας "
 "'%s'"
 
-#: src/repos.cc:3089
+#: src/repos.cc:3090
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -5462,7 +5668,7 @@ msgstr[1] ""
 "Τα αποθετήρια '%s' αφαιρέθηκαν από τα ενεργοποιημένα αποθετήρια της "
 "υπηρεσίας '%s'"
 
-#: src/repos.cc:3096
+#: src/repos.cc:3097
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -5476,52 +5682,52 @@ msgstr[1] ""
 "Τα αποθετήρια '%s' αφαιρέθηκαν από τα απενεργοποιημένα αποθετήρια της "
 "υπηρεσίας '%s'"
 
-#: src/repos.cc:3105
+#: src/repos.cc:3106
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "Δεν υπάρχει αλλαγή για την υπηρεσία '%s'."
 
-#: src/repos.cc:3111
+#: src/repos.cc:3112
 msgid "Error while modifying the service:"
 msgstr "Σφάλμα κατά την τροποποίηση της υπηρεσίας:"
 
-#: src/repos.cc:3112
+#: src/repos.cc:3113
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "Η υπηρεσία %s μένει αμετάβλητη."
 
-#: src/repos.cc:3217
+#: src/repos.cc:3218
 msgid "Loading repository data..."
 msgstr "Φόρτωση δεδομένων αποθετηρίου..."
 
-#: src/repos.cc:3237
+#: src/repos.cc:3238
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Λήψη δεδομένων αποθετηρίου '%s'..."
 
-#: src/repos.cc:3243
+#: src/repos.cc:3244
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Το αποθετήριο '%s' δεν είναι στην λανθάνουσα μνήμη. Αποθήκευση..."
 
-#: src/repos.cc:3249 src/repos.cc:3283
+#: src/repos.cc:3250 src/repos.cc:3284
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Πρόβλημα φόρτωσης δεδομένων από '%s'"
 
-#: src/repos.cc:3253
+#: src/repos.cc:3254
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Το αποθετήριο '%s' δεν μπόρεσε να ενημερωθεί. Θα χρησιμοποιήσει την παλιά "
 "λανθάνουσα μνήμη."
 
-#: src/repos.cc:3257 src/repos.cc:3286
+#: src/repos.cc:3258 src/repos.cc:3287
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Επιλύσεις από '%s' δεν φορτώνονται λόγω σφάλματος."
 
-#: src/repos.cc:3274
+#: src/repos.cc:3275
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -5531,17 +5737,17 @@ msgstr ""
 "χρησιμοποιήσετε διαφορετικό mirror ή διακομιστή."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3285
+#: src/repos.cc:3286
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Δοκιμάστε '%s', ή καλύτερα '%s' πριν συνεχίσετε."
 
 #  progress stages
-#: src/repos.cc:3296
+#: src/repos.cc:3297
 msgid "Reading installed packages..."
 msgstr "Ανάγνωση εγκατεστημένων πακέτων..."
 
-#: src/repos.cc:3305
+#: src/repos.cc:3306
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Παρουσιάστηκε πρόβλημα κατά την ανάγνωση των εγκατεστημένων πακέτων:"
 
