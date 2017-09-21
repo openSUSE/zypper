@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 09/05/2017
+.\"      Date: 09/21/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "09/05/2017" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "09/21/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -2214,38 +2214,6 @@ section for more details\&.
 Read URI and alias from specified \&.repo file
 .RE
 .PP
-\fB\-t\fR, \fB\-\-type\fR \fItype\fR
-.RS 4
-Type of repository (yast2, rpm\-md, or plaindir) in case the autodetection fails\&. There are several aliases defined for these types:
-.TS
-tab(:);
-lt lt
-lt lt
-lt lt.
-T{
-\fByast2\fR
-T}:T{
-susetags, yast, YaST, YaST2, YAST
-T}
-T{
-\fBrpm\-md\fR
-T}:T{
-repomd, rpmmd, yum, YUM
-T}
-T{
-\fBplaindir\fR
-T}:T{
-Plaindir
-T}
-.TE
-.sp 1
-.RE
-.PP
-\fB\-d\fR, \fB\-\-disable\fR
-.RS 4
-Add the repository as disabled\&. Repositories are added as enabled by default\&.
-.RE
-.PP
 \fB\-c\fR, \fB\-\-check\fR
 .RS 4
 Probe given URI\&.
@@ -2259,6 +2227,26 @@ Don\(cqt probe URI, probe later during refresh\&.
 \fB\-n\fR, \fB\-\-name\fR \fIname\fR
 .RS 4
 Specify descriptive name for the repository\&.
+.RE
+.PP
+\fB\-e\fR, \fB\-\-enable\fR
+.RS 4
+Enable the repository (the default)\&.
+.RE
+.PP
+\fB\-d\fR, \fB\-\-disable\fR
+.RS 4
+Add the repository as disabled\&. Repositories are added as enabled by default\&.
+.RE
+.PP
+\fB\-f\fR, \fB\-\-refresh\fR
+.RS 4
+Enable autorefresh of the repository\&. The autorefresh is disabled by default when adding new repositories\&.
+.RE
+.PP
+\fB\-F\fR, \fB\-\-no\-refresh\fR
+.RS 4
+Disable auto\-refresh for the repository\&.
 .RE
 .PP
 \fB\-p\fR, \fB\-\-priority\fR \fIpositive\-integer\fR
@@ -2324,9 +2312,31 @@ Unless you have modified your zypp\&.conf settings, this is the same as
 \fBGPG checks\fR\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-refresh\fR
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
 .RS 4
-Enable autorefresh of the repository\&. The autorefresh is disabled by default when adding new repositories\&.
+Type of repository (yast2, rpm\-md, or plaindir) in case the autodetection fails\&. There are several aliases defined for these types:
+.TS
+tab(:);
+lt lt
+lt lt
+lt lt.
+T{
+\fByast2\fR
+T}:T{
+susetags, yast, YaST, YaST2, YAST
+T}
+T{
+\fBrpm\-md\fR
+T}:T{
+repomd, rpmmd, yum, YUM
+T}
+T{
+\fBplaindir\fR
+T}:T{
+Plaindir
+T}
+.TE
+.sp 1
 .RE
 .PP
 Examples:
@@ -2496,6 +2506,11 @@ to
 .RS 4
 Modify properties of repositories specified by alias, name, number, or URI or one of the aggregate options\&.
 .PP
+\fB\-n\fR, \fB\-\-name\fR \fIname\fR
+.RS 4
+Set a descriptive name for the repository\&.
+.RE
+.PP
 \fB\-e\fR, \fB\-\-enable\fR
 .RS 4
 Enable the repository\&.
@@ -2506,19 +2521,14 @@ Enable the repository\&.
 Disable the repository\&.
 .RE
 .PP
-\fB\-r\fR, \fB\-\-refresh\fR
+\fB\-f\fR, \fB\-\-refresh\fR (legacy: \-r)
 .RS 4
 Enable auto\-refresh for the repository\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-no\-refresh\fR
+\fB\-F\fR, \fB\-\-no\-refresh\fR (legacy: \-R)
 .RS 4
 Disable auto\-refresh for the repository\&.
-.RE
-.PP
-\fB\-n\fR, \fB\-\-name\fR \fIname\fR
-.RS 4
-Set a descriptive name for the repository\&.
 .RE
 .PP
 \fB\-p\fR, \fB\-\-priority\fR \fIpositive\-integer\fR
@@ -2707,6 +2717,31 @@ This command also allows one to add also ordinary repositories when used with
 \fB\-\-type\fR
 option, where you specify the type of the repository\&. See the addrepo command for the list of supported repository types\&.
 .PP
+\fB\-n\fR, \fB\-\-name\fR \fIname\fR
+.RS 4
+Specify descriptive name for the service\&.
+.RE
+.PP
+\fB\-e\fR, \fB\-\-enable\fR
+.RS 4
+Enable the service (this is the default)\&.
+.RE
+.PP
+\fB\-d\fR, \fB\-\-disable\fR
+.RS 4
+Add the service as disabled\&.
+.RE
+.PP
+\fB\-f\fR, \fB\-\-refresh\fR
+.RS 4
+Enable auto\-refresh of the service\&.
+.RE
+.PP
+\fB\-F\fR, \fB\-\-no\-refresh\fR
+.RS 4
+Disable auto\-refresh of the service\&.
+.RE
+.PP
 \fB\-t\fR, \fB\-\-type\fR \fItype\fR
 .RS 4
 Type of the service (possible values:
@@ -2721,16 +2756,6 @@ RIS, nu, NU
 T}
 .TE
 .sp 1
-.RE
-.PP
-\fB\-d\fR, \fB\-\-disable\fR
-.RS 4
-Add the service as disabled\&.
-.RE
-.PP
-\fB\-n\fR, \fB\-\-name\fR \fIname\fR
-.RS 4
-Specify descriptive name for the service\&.
 .RE
 .RE
 .PP
@@ -2762,9 +2787,9 @@ Common Options
 These options are common to all types of services and repositories\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-disable\fR
+\fB\-n\fR, \fB\-\-name\fR \fIname\fR
 .RS 4
-Disable the service (but don\(cqt remove it)\&.
+Set a descriptive name for the service\&.
 .RE
 .PP
 \fB\-e\fR, \fB\-\-enable\fR
@@ -2772,19 +2797,19 @@ Disable the service (but don\(cqt remove it)\&.
 Enable a disabled service\&.
 .RE
 .PP
-\fB\-r\fR, \fB\-\-refresh\fR
+\fB\-d\fR, \fB\-\-disable\fR
+.RS 4
+Disable the service (but don\(cqt remove it)\&.
+.RE
+.PP
+\fB\-f\fR, \fB\-\-refresh\fR (legacy: \-r)
 .RS 4
 Enable auto\-refresh of the service\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-no\-refresh\fR
+\fB\-F\fR, \fB\-\-no\-refresh\fR (legacy: \-R)
 .RS 4
 Disable auto\-refresh of the service\&.
-.RE
-.PP
-\fB\-n\fR, \fB\-\-name\fR \fIname\fR
-.RS 4
-Set a descriptive name for the service\&.
 .RE
 .PP
 \fB\-a\fR, \fB\-\-all\fR
