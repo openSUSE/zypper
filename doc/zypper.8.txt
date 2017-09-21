@@ -1013,16 +1013,6 @@ Supported URI formats:
 	*-r*, *--repo* 'file'*.repo*::
 		Read URI and alias from specified .repo file
 
-	*-t*, *--type* 'type'::
-		Type of repository (yast2, rpm-md, or plaindir) in case the autodetection fails. There are several aliases defined for these types:
-[horizontal]
-		*yast2* ;;	susetags, yast, YaST, YaST2, YAST
-		*rpm-md* ;;	repomd, rpmmd, yum, YUM
-		*plaindir*;;	Plaindir
-
-	*-d*, *--disable*::
-		Add the repository as disabled. Repositories are added as enabled by default.
-
 	*-c*, *--check*::
 		Probe given URI.
 
@@ -1031,6 +1021,18 @@ Supported URI formats:
 
 	*-n*, *--name* 'name'::
 		Specify descriptive name for the repository.
+
+	*-e*, *--enable*::
+		Enable the repository (the default).
+
+	*-d*, *--disable*::
+		Add the repository as disabled. Repositories are added as enabled by default.
+
+	*-f*, *--refresh*::
+		Enable autorefresh of the repository. The autorefresh is disabled by default when adding new repositories.
+
+	*-F*, *--no-refresh*::
+		Disable auto-refresh for the repository.
 
 	*-p*, *--priority* 'positive-integer'::
 		Set the priority of the repository. Priority of *1* is the highest, the higher the number the lower the priority. *-p 0* will set the priority back to the default (*99*). Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority.
@@ -1043,8 +1045,12 @@ Supported URI formats:
 
 include::{incdir}/option_GPG_Check.txt[]
 
-	*-f*, *--refresh*::
-		Enable autorefresh of the repository. The autorefresh is disabled by default when adding new repositories.
+	*-t*, *--type* 'type'::
+		Type of repository (yast2, rpm-md, or plaindir) in case the autodetection fails. There are several aliases defined for these types:
+[horizontal]
+		*yast2* ;;	susetags, yast, YaST, YaST2, YAST
+		*rpm-md* ;;	repomd, rpmmd, yum, YUM
+		*plaindir*;;	Plaindir
 
 	Examples: :: {nop}
 
@@ -1138,20 +1144,20 @@ include::{incdir}/option_GPG_Check.txt[]
 	Modify properties of repositories specified by alias, name, number, or URI or one of the aggregate options.
 +
 --
+	*-n*, *--name* 'name'::
+		Set a descriptive name for the repository.
+
 	*-e*, *--enable*::
 		Enable the repository.
 
 	*-d*, *--disable*::
 		Disable the repository.
 
-	*-r*, *--refresh*::
+	*-f*, *--refresh* (legacy: -r)::
 		Enable auto-refresh for the repository.
 
-	*-R*, *--no-refresh*::
+	*-F*, *--no-refresh* (legacy: -R)::
 		Disable auto-refresh for the repository.
-
-	*-n*, *--name* 'name'::
-		Set a descriptive name for the repository.
 
 	*-p*, *--priority* 'positive-integer'::
 		Set the priority of the repository. Priority of *1* is the highest, the higher the number the lower the priority. *-p 0* will set the priority back to the default (*99*). Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority.
@@ -1241,16 +1247,25 @@ Standalone repositories (not belonging to any service) are treated like services
 	This command also allows one to add also ordinary repositories when used with *--type* option, where you specify the type of the repository. See the addrepo command for the list of supported repository types.
 +
 --
-	*-t*, *--type* 'type'::
-		Type of the service (possible values: *ris*) in case the autodetection fails. There are several aliases defined for this type:
-[horizontal]
-		*ris* ;;	RIS, nu, NU
+	*-n*, *--name* 'name'::
+		Specify descriptive name for the service.
+
+	*-e*, *--enable*::
+		Enable the service (this is the default).
 
 	*-d*, *--disable*::
 		Add the service as disabled.
 
-	*-n*, *--name* 'name'::
-		Specify descriptive name for the service.
+	*-f*, *--refresh*::
+		Enable auto-refresh of the service.
+
+	*-F*, *--no-refresh*::
+		Disable auto-refresh of the service.
+
+	*-t*, *--type* 'type'::
+		Type of the service (possible values: *ris*) in case the autodetection fails. There are several aliases defined for this type:
+[horizontal]
+		*ris* ;;	RIS, nu, NU
 --
 
 *removeservice* (*rs*) ['options'] 'alias'|'name'|'#'|'URI'...::
@@ -1272,20 +1287,20 @@ Standalone repositories (not belonging to any service) are treated like services
 	Common Options::
 		These options are common to all types of services and repositories.
 
-	*-d*, *--disable*::
-		Disable the service (but don't remove it).
+	*-n*, *--name* 'name'::
+		Set a descriptive name for the service.
 
 	*-e*, *--enable*::
 		Enable a disabled service.
 
-	*-r*, *--refresh*::
+	*-d*, *--disable*::
+		Disable the service (but don't remove it).
+
+	*-f*, *--refresh*  (legacy: -r)::
 		Enable auto-refresh of the service.
 
-	*-R*, *--no-refresh*::
+	*-F*, *--no-refresh*  (legacy: -R)::
 		Disable auto-refresh of the service.
-
-	*-n*, *--name* 'name'::
-		Set a descriptive name for the service.
 
 	*-a*, *--all*::
 		Apply changes to all services.
