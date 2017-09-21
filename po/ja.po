@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 11:00+0200\n"
-"PO-Revision-Date: 2017-09-21 22:26+0000\n"
+"PO-Revision-Date: 2017-09-21 22:32+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
@@ -1377,55 +1377,55 @@ msgstr "システムの再起動が必要です。"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
-msgstr "サービスを説明する名前を設定する"
+msgstr "サービスを説明するための名前を設定する。"
 
 #: src/Zypper.cc:98
 msgid "Enable a disabled service."
-msgstr "無効に設定してあるサービスを有効にする"
+msgstr "無効に設定してあるサービスを有効にする。"
 
 #: src/Zypper.cc:99
 msgid "Disable the service (but don't remove it)."
-msgstr "サービスを無効に設定する (削除は行なわない)"
+msgstr "サービスを無効に設定する (削除は行なわない) 。"
 
 #: src/Zypper.cc:100
 msgid "Enable auto-refresh of the service."
-msgstr "サービスの自動更新を有効にする"
+msgstr "サービスの自動更新を有効にする。"
 
 #: src/Zypper.cc:101
 msgid "Disable auto-refresh of the service."
-msgstr "サービスの自動更新を無効にする"
+msgstr "サービスの自動更新を無効にする。"
 
 #: src/Zypper.cc:119
 msgid "Set a descriptive name for the repository."
-msgstr "リポジトリを説明する名前を設定する"
+msgstr "リポジトリを説明するための名前を設定する。"
 
 #: src/Zypper.cc:120
 msgid "Enable a disabled repository."
-msgstr "無効に設定してあるリポジトリを有効にする"
+msgstr "無効に設定してあるリポジトリを有効にする。"
 
 #: src/Zypper.cc:121
 msgid "Disable the repository (but don't remove it)."
-msgstr "リポジトリを無効に設定する (削除は行なわない)"
+msgstr "リポジトリを無効に設定する (削除は行なわない) 。"
 
 #: src/Zypper.cc:122
 msgid "Enable auto-refresh of the repository."
-msgstr "リポジトリの自動更新を有効にする"
+msgstr "リポジトリの自動更新を有効にする。"
 
 #: src/Zypper.cc:123
 msgid "Disable auto-refresh of the repository."
-msgstr "リポジトリの自動更新を無効にする"
+msgstr "リポジトリの自動更新を無効にする。"
 
 #: src/Zypper.cc:124
 msgid "Set priority of the repository."
-msgstr "リポジトリの優先順位を指定する"
+msgstr "リポジトリの優先順位を指定する。"
 
 #: src/Zypper.cc:125
 msgid "Enable RPM files caching."
-msgstr "RPM ファイルのキャッシュを有効にする"
+msgstr "RPM ファイルのキャッシュ機能を有効にする。"
 
 #: src/Zypper.cc:126
 msgid "Disable RPM files caching."
-msgstr "RPM ファイルのキャッシュを無効にする"
+msgstr "RPM ファイルのキャッシュ機能を無効にする。"
 
 #: src/Zypper.cc:127
 msgid "Enable GPG check for this repository."
@@ -2304,7 +2304,7 @@ msgstr "システムにリポジトリインデックスサービスを追加し
 #: src/Zypper.cc:1921
 #, boost-format
 msgid "Type of the service (%1%)."
-msgstr "サービスの種類を指定する (%1%)"
+msgstr "サービスの種類を指定する (%1%) 。"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1937
@@ -2407,43 +2407,43 @@ msgstr ""
 
 #: src/Zypper.cc:2007
 msgid "Apply changes to all services."
-msgstr "全てのサービスに対して変更を適用する"
+msgstr "全てのサービスに対して変更を適用する。"
 
 #: src/Zypper.cc:2008
 msgid "Apply changes to all local services."
-msgstr "全てのローカルサービスに対して変更を適用する"
+msgstr "全てのローカルサービスに対して変更を適用する。"
 
 #: src/Zypper.cc:2009
 msgid "Apply changes to all remote services."
-msgstr "全てのリモート (ネットワーク) サービスに対して変更を適用する"
+msgstr "全てのリモート (ネットワーク) サービスに対して変更を適用する。"
 
 #: src/Zypper.cc:2010
 msgid "Apply changes to services of specified type."
-msgstr "指定した種類のサービスに対して変更を適用する"
+msgstr "指定した種類のサービスに対して変更を適用する。"
 
 #: src/Zypper.cc:2012
 msgid "Add a RIS service repository to enable."
-msgstr "有効にする RIS サービスリポジトリを追加する"
+msgstr "有効にする RIS サービスリポジトリを追加する。"
 
 #: src/Zypper.cc:2013
 msgid "Add a RIS service repository to disable."
-msgstr "無効にする RIS サービスリポジトリを追加する"
+msgstr "無効にする RIS サービスリポジトリを追加する。"
 
 #: src/Zypper.cc:2014
 msgid "Remove a RIS service repository to enable."
-msgstr "有効にする RIS サービスリポジトリを削除する"
+msgstr "有効にする RIS サービスリポジトリを削除する。"
 
 #: src/Zypper.cc:2015
 msgid "Remove a RIS service repository to disable."
-msgstr "無効にする RIS サービスリポジトリを削除する"
+msgstr "無効にする RIS サービスリポジトリを削除する。"
 
 #: src/Zypper.cc:2016
 msgid "Clear the list of RIS repositories to enable."
-msgstr "有効にする RIS サービスリポジトリの一覧を消去する"
+msgstr "有効にする RIS サービスリポジトリの一覧を消去する。"
 
 #: src/Zypper.cc:2017
 msgid "Clear the list of RIS repositories to disable."
-msgstr "無効にする RIS サービスリポジトリの一覧を消去する"
+msgstr "無効にする RIS サービスリポジトリの一覧を消去する。"
 
 #: src/Zypper.cc:2044
 msgid ""
@@ -2559,7 +2559,7 @@ msgstr ""
 
 #: src/Zypper.cc:2129
 msgid "Just another means to specify a .repo file to read."
-msgstr "読み込むために.repoファイルを指定するもう一つの方法"
+msgstr ".repo ファイルを指定してリポジトリを読み込む。"
 
 #: src/Zypper.cc:2130
 msgid "Probe URI."
@@ -2572,7 +2572,7 @@ msgstr "URIを検索しません。更新後に検索します。"
 #: src/Zypper.cc:2134
 #, boost-format
 msgid "Type of repository (%1%)."
-msgstr "リポジトリのタイプ(%1%)"
+msgstr "リポジトリの種類 (%1%) 。"
 
 #: src/Zypper.cc:2162
 msgid ""
@@ -2723,19 +2723,19 @@ msgstr ""
 
 #: src/Zypper.cc:2273
 msgid "Apply changes to all repositories."
-msgstr "全てのリポジトリに対して変更を適用する"
+msgstr "全てのリポジトリに対して変更を適用する。"
 
 #: src/Zypper.cc:2274
 msgid "Apply changes to all local repositories."
-msgstr "全てのローカルリポジトリに対して変更を適用する"
+msgstr "全てのローカルリポジトリに対して変更を適用する。"
 
 #: src/Zypper.cc:2275
 msgid "Apply changes to all remote repositories."
-msgstr "全てのリモート (ネットワーク) リポジトリに対して変更を適用する"
+msgstr "全てのリモート (ネットワーク) リポジトリに対して変更を適用する。"
 
 #: src/Zypper.cc:2276
 msgid "Apply changes to repositories of specified type."
-msgstr "指定した種類のリポジトリに対して変更を適用する"
+msgstr "指定した種類のリポジトリに対して変更を適用する。"
 
 #: src/Zypper.cc:2300
 msgid ""
