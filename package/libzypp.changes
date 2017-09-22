@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Sep 22 12:16:34 CEST 2017 - ma@suse.de
+
+- Default to 'solver.dupAllowVendorChange = false' on SLE15
+  (FATE#323478)
+- Remove unused legacy notify-message script (bsc#1058783)
+- version 16.17.1 (0)
+
+-------------------------------------------------------------------
 Fri Sep  8 18:05:30 CEST 2017 - ma@suse.de
 
 - Support multiple product licenses in repomd (FATE#322276)
