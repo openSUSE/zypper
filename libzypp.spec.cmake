@@ -248,8 +248,8 @@ mkdir -p $RPM_BUILD_ROOT%{_var}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT%{_var}/log/zypp
 mkdir -p $RPM_BUILD_ROOT%{_var}/cache/zypp
 
-%if "%{distribution}" == "openSUSE Tumbleweed"
-# Adjust zypp.conf for openSUSE Tumbleweed - minor modifications over the 'usual' defaults - boo#1031756
+# Default to 'solver.dupAllowVendorChange = false' on TW and post SLE12
+%if 0%{?suse_version} >= 1330 || "%{distribution}" == "openSUSE Tumbleweed"
 sed -i "s|# solver.dupAllowVendorChange = true|solver.dupAllowVendorChange = false|g" %{buildroot}%{_sysconfdir}/zypp/zypp.conf
 %endif
 
