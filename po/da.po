@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 11:00+0200\n"
-"PO-Revision-Date: 2017-09-15 14:57+0000\n"
+"PO-Revision-Date: 2017-09-22 22:07+0000\n"
 "Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1657,15 +1657,14 @@ msgid "This command has no additional options."
 msgstr "Denne kommando har ingen yderligere tilvalg."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Tilvalg for løser:"
+msgstr "Forældet tilvalg:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Det samme som %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
