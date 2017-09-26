@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 11:00+0200\n"
-"PO-Revision-Date: 2017-09-26 11:29+0000\n"
-"Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
+"PO-Revision-Date: 2017-09-26 11:32+0000\n"
+"Last-Translator: Vojtech Zeisek <Vojtech.Zeisek@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -1750,15 +1750,14 @@ msgid "This command has no additional options."
 msgstr "Tento příkaz nemá žádné další volby."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Řešitelské volby:"
+msgstr "Zastaralé volby:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Stejný jako %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
