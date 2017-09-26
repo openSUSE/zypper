@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 11:00+0200\n"
-"PO-Revision-Date: 2017-09-26 07:26+0000\n"
+"PO-Revision-Date: 2017-09-26 12:53+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -42,15 +42,16 @@ msgid "Done."
 msgstr "Fine."
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"L'accettazione di pacchetti con checksum errate può comportare la corruzione "
-"del sistema e in casi estremi può anche comprometterlo."
+"La firma dei dati consente al ricevente di verificare che non siano occorse "
+"modifiche successivamente al momento della firma. L'accettazione di dati "
+"senza firma oppure con firma errata o sconosciuta può comportare la "
+"corruzione del sistema e in casi estremi può anche comprometterlo."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
