@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 11:00+0200\n"
-"PO-Revision-Date: 2017-09-22 15:22+0000\n"
+"PO-Revision-Date: 2017-09-26 07:26+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -1702,9 +1702,8 @@ msgid "This command has no additional options."
 msgstr "Il comando non dispone di opzioni aggiuntive."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Opzioni del risolutore:"
+msgstr "Opzioni di retrocompatibilità:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
