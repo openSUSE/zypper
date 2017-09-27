@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 11:00+0200\n"
-"PO-Revision-Date: 2017-09-26 12:53+0000\n"
+"PO-Revision-Date: 2017-09-27 07:31+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -60,12 +60,17 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Il file '%1%' è il file di indice mastro dei repository. Assicura "
+"l'integrità dell'intero repository."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Non è possibile verificare se nessuno abbia interferito con questo file, "
+"pertanto potrebbe non essere più attendibile. È sconsigliato continuare a "
+"meno che non si sia certi che ciò sia sicuro."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -73,6 +78,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Questo file è stato modificato dopo essere stato firmato. Potrebbe trattarsi "
+"di una modifica malevola, pertanto potrebbe non essere più attendibile. È "
+"sconsigliato continuare a meno che non si sia certi che ciò sia sicuro."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -1587,6 +1595,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Usa la configurazione globale di verifica GPG definita in /etc/zypp/"
+"zypp.conf. Questa è l'impostazione predefinita."
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
@@ -1617,12 +1627,16 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Rispondi automaticamente 'sì' alle richieste di conferma di licenza di terze "
+"parti. Consultare 'man zypper' per maggiori dettagli."
 
 #: src/Zypper.cc:171
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Accetta automaticamente solo le licenze di prodotto. Consultare 'man zypper' "
+"per maggiori dettagli."
 
 #: src/Zypper.cc:180
 msgid ""
@@ -1659,6 +1673,8 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"È possibile chiedere a PackageKit di interrompere l'azione corrente il prima "
+"possibile, ma la velocità di risposta a tale richiesta dipende da PackageKit."
 
 #: src/Zypper.cc:262
 msgid "Ask PackageKit to quit?"
@@ -1710,7 +1726,7 @@ msgstr "Opzioni di retrocompatibilità:"
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "La stessa cosa di %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
