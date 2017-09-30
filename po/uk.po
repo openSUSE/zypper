@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 11:00+0200\n"
-"PO-Revision-Date: 2017-07-25 17:59+0000\n"
+"PO-Revision-Date: 2017-09-30 04:57+0000\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
-"Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
-"uk/>\n"
+"Language-Team: Ukrainian "
+"<https://l10n.opensuse.org/projects/zypper/master/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.13.1\n"
 
 #: src/SolverRequester.h:57
@@ -45,15 +45,16 @@ msgid "Done."
 msgstr "Виконано."
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"Приймання пакунків з помилковими контрольними сумами може призвести до "
-"пошкодженої системи та у крайніх випадках навіть до загрози системі."
+"Підписані дані дозволяють користувачеві перевірити, чи дані не були кимось "
+"змінені після підписання. Приймання пакунків з помилковими контрольними "
+"сумами може призвести до пошкодженої системи та у крайніх випадках навіть до "
+"загрози системі."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -62,12 +63,17 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Файл '%1%' — це основний індекс сховища. Він контролює цілісність всього "
+"сховища."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Ми не можемо перевірити, чи ніхто не вносив зміни в цей файл, тому довіряти "
+"йому більше не можна! Не продовжуйте встановлення, якщо не впевнені у "
+"безпеці."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -75,6 +81,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Файл змінено після підписування. Це могло бути зловмисна зміна, тому "
+"довіряти йому більше не можна! Не продовжуйте встановлення, якщо ви не "
+"впевнені в безпеці."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -98,7 +107,7 @@ msgstr "Дата закінчення терміну дії ключа:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Підключ:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -132,15 +141,15 @@ msgstr "Приймається непідписаний файл «%s» зі с�
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Файл «%s» не підписано, продовжити?"
+msgstr "Файл '%1%' не підписаний."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Файл «%s» зі сховища «%s» не підписано, продовжити?"
+msgstr "Файл '%1%' зі сховища '%2%' не підписаний."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -168,15 +177,15 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Файл «%s» підписано невідомим ключем «%s». Продовжити?"
+msgstr "Файл '%1%' підписаний невідомим ключем '%2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr "Файл «%s» зі сховища «%s» підписано невідомим ключем «%s». Продовжити?"
+msgstr "Файл '%1%' зі сховища '%3%' підписаний невідомим ключем '%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -485,19 +494,17 @@ msgstr "Ні"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Примітка:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Попередження: "
+msgstr "Попередження:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Помилка"
+msgstr "Помилка:"
 
 # continue button label
 #: src/output/Out.h:44
@@ -1296,7 +1303,7 @@ msgstr[1] "Буде змінено постачальника %d таких пр
 msgstr[2] "Буде змінено постачальника %d таких програм:"
 
 #: src/Summary.cc:1111
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
@@ -1599,25 +1606,24 @@ msgid "Enable GPG check for this repository."
 msgstr "Увімкнути перевірку GPG для цього сховища."
 
 #: src/Zypper.cc:128
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Увімкнути перевірку GPG для цього сховища."
+msgstr "Увімкнути строгу перевірку GPG для цього сховища."
 
 #: src/Zypper.cc:129
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Не знайдено кандидатури для оновлення '%s 1'."
+msgstr "Скорочення для '%1%'."
 
 #: src/Zypper.cc:130
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Увімкнути перевірку GPG для цього сховища."
+msgstr "Увімкнути перевірку GPG, але дозволити метадані сховища без підпису."
 
 #: src/Zypper.cc:131
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Увімкнути перевірку GPG для цього сховища."
+msgstr ""
+"Увімкнути перевірку GPG, але дозволити встановлення пакунків без підпису з "
+"цього сховища."
 
 #: src/Zypper.cc:132
 msgid "Disable GPG check for this repository."
@@ -1628,6 +1634,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Використовувати налаштування перевірки GPG з /etc/zypp/zypp.conf. Це "
+"стандартний варіант."
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
@@ -1688,7 +1696,7 @@ msgstr "Усталене значення - включити необов'язк
 #: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Ці параметри взаємно виключні: %1%"
 
 #: src/Zypper.cc:253
 msgid ""
@@ -1750,15 +1758,14 @@ msgid "This command has no additional options."
 msgstr "Ця команда не має додаткових параметрів."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Параметри експерта:"
+msgstr "Застарілі параметри:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Те саме, що й %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
