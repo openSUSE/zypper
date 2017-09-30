@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 11:00+0200\n"
-"PO-Revision-Date: 2017-07-19 23:07+0000\n"
-"Last-Translator: M. Edwin Zakaria <medwin@opensuse.org>\n"
-"Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
-"id/>\n"
+"PO-Revision-Date: 2017-09-30 01:32+0000\n"
+"Last-Translator: haikal Vidya <haikalvidya@gmail.com>\n"
+"Language-Team: Indonesian "
+"<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,7 +86,7 @@ msgstr "Kunci Diciptakan:"
 
 #: src/callbacks/keyring.h:84
 msgid "Key Expires:"
-msgstr "Kunci Kadaluarsa:"
+msgstr "Kunci Kedaluwarsa:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
@@ -99,14 +99,13 @@ msgstr "Nama Rpm:"
 #: src/callbacks/keyring.h:113
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "Berkas penandatanganan kunci gpg '%1%' telah kadaluarsa."
+msgstr "Berkas penandatanganan kunci gpg '%1%' telah kedaluwarsa."
 
 #: src/callbacks/keyring.h:119
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-"Berkas penandatanganan kunci gpg '%1%' akan kadaluarsa dalam %2% hari."
+msgstr[0] "Berkas penandatanganan kunci gpg '%1%' akan Kedaluwarsa dalam %2% hari."
 
 #: src/callbacks/keyring.h:142
 #, c-format, boost-format
@@ -622,7 +621,7 @@ msgstr "Tidak ada paket yang cocok dengan '%s' yang terpasang."
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr "Paket '%s' itidak terpasang."
+msgstr "Paket '%s' tidak terpasang."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
@@ -760,7 +759,7 @@ msgstr "Penambalan '%s' diterbitkan setelah tanggal yang ditetapkan."
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "Memilih '%s' dari repositori '%s'untuk pemasangan."
+msgstr "Memilih '%s' dari repositori '%s' untuk pemasangan."
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
@@ -876,31 +875,31 @@ msgstr[0] "%d Aplikasi berikut ini akan di HAPUS:"
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "%d Paket berikut ini akan di tingkatkan:"
+msgstr[0] "%d Paket berikut ini akan ditingkatkan:"
 
 #: src/Summary.cc:607
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "%d Penambalan berikut ini akan di tingkatkan:"
+msgstr[0] "%d Penambalan berikut ini akan ditingkatkan:"
 
 #: src/Summary.cc:612
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] "%d Pola berikut ini akan di tingkatkan:"
+msgstr[0] "%d Pola berikut ini akan ditingkatkan:"
 
 #: src/Summary.cc:617
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
-msgstr[0] "%d Produk berikut ini akan di tingkatkan:"
+msgstr[0] "%d Produk berikut ini akan ditingkatkan:"
 
 #: src/Summary.cc:622
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "%d Aplikasi berikut ini akan di tingkatkan:"
+msgstr[0] "%d Aplikasi berikut ini akan ditingkatkan:"
 
 #: src/Summary.cc:641
 #, c-format, boost-format
@@ -5060,7 +5059,7 @@ msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
-"Repositori '%s' sudah kadaluarsa. Anda bisa melakukan 'zypper refresh' dari "
+"Repositori '%s' sudah kedaluwarsa. Anda bisa melakukan 'zypper refresh' dari "
 "root untuk memperbaruinya."
 
 #: src/repos.cc:925
@@ -5697,7 +5696,7 @@ msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
 msgstr ""
-"Repositori '%s' sepertinya kadaluarsa. Pertimbangkan untuk menggunakan "
+"Repositori '%s' sepertinya kedaluwarsa. Pertimbangkan untuk menggunakan "
 "cerimin atau server lain."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
@@ -5998,7 +5997,7 @@ msgstr "Kendala saat mengambil berkas paket dari repositori:"
 #: src/solve-commit.cc:835
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "Repositori '%s' sudah kadaluarsa. Jalankan  '%s' untuk bantuan."
+msgstr "Repositori '%s' sudah kedaluwarsa. Jalankan  '%s' untuk bantuan."
 
 #: src/solve-commit.cc:846
 msgid ""
