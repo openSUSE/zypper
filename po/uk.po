@@ -14,17 +14,17 @@ msgstr ""
 "Project-Id-Version: zypp.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-07 12:25+0200\n"
-"PO-Revision-Date: 2016-11-26 10:57+0000\n"
+"PO-Revision-Date: 2017-09-30 05:38+0000\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
-"Language-Team: Ukrainian <https://l10n.opensuse.org/projects/libzypp/master/"
-"uk/>\n"
+"Language-Team: Ukrainian "
+"<https://l10n.opensuse.org/projects/libzypp/master/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.6\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -3913,7 +3913,6 @@ msgstr "Буде виконано такі дії:"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
 msgstr "(не минає)"
 
@@ -3921,13 +3920,13 @@ msgstr "(не минає)"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "минув: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "минає: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
@@ -4893,7 +4892,7 @@ msgstr "Не вдалося вилучити відкрити ключ %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1568
 msgid "Package is not signed!"
-msgstr ""
+msgstr "Пакунок не підписаний!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4978,7 +4977,7 @@ msgstr "Файл не існує чи підпис не можна переві�
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2397
 msgid "File is unsigned"
-msgstr ""
+msgstr "Файл не підписаний"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
