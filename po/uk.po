@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 11:00+0200\n"
-"PO-Revision-Date: 2017-09-30 04:57+0000\n"
+"PO-Revision-Date: 2017-09-30 04:58+0000\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
 "Language-Team: Ukrainian "
 "<https://l10n.opensuse.org/projects/zypper/master/uk/>\n"
@@ -1555,11 +1555,11 @@ msgstr "Вказати описову назву служби."
 
 #: src/Zypper.cc:98
 msgid "Enable a disabled service."
-msgstr "Увімкнути вимкнену службу"
+msgstr "Увімкнути вимкнену службу."
 
 #: src/Zypper.cc:99
 msgid "Disable the service (but don't remove it)."
-msgstr "Вимкнути службу (але не вилучати її)"
+msgstr "Вимкнути службу (але не вилучати її)."
 
 #: src/Zypper.cc:100
 msgid "Enable auto-refresh of the service."
@@ -1575,19 +1575,19 @@ msgstr "Вказати описову назву сховища."
 
 #: src/Zypper.cc:120
 msgid "Enable a disabled repository."
-msgstr "Увімкнути вимкнене сховище"
+msgstr "Увімкнути вимкнене сховище."
 
 #: src/Zypper.cc:121
 msgid "Disable the repository (but don't remove it)."
-msgstr "Вимкнути сховище (але не вилучати його)"
+msgstr "Вимкнути сховище (але не вилучати його)."
 
 #: src/Zypper.cc:122
 msgid "Enable auto-refresh of the repository."
-msgstr "Увімкнути автоосвіження сховища"
+msgstr "Увімкнути автооновлення сховища."
 
 #: src/Zypper.cc:123
 msgid "Disable auto-refresh of the repository."
-msgstr "Вимкнути автоосвіження сховища"
+msgstr "Вимкнути автооновлення сховища."
 
 #: src/Zypper.cc:124
 msgid "Set priority of the repository."
