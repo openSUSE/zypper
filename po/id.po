@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 11:00+0200\n"
-"PO-Revision-Date: 2017-09-30 01:32+0000\n"
+"PO-Revision-Date: 2017-10-01 13:02+0000\n"
 "Last-Translator: haikal Vidya <haikalvidya@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
@@ -105,7 +105,7 @@ msgstr "Berkas penandatanganan kunci gpg '%1%' telah kedaluwarsa."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "Berkas penandatanganan kunci gpg '%1%' akan Kedaluwarsa dalam %2% hari."
+msgstr[0] "Berkas penandatanganan kunci gpg '%1%' akan kedaluwarsa dalam %2% hari."
 
 #: src/callbacks/keyring.h:142
 #, c-format, boost-format
