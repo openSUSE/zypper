@@ -368,7 +368,7 @@ bool Summary::writeResolvableList( std::ostream & out,
 
   if ( (_viewop & DETAILS) == 0 )
   {
-    static const ColorString quoteCh( "\"", ColorContext::HIGHLIGHT );
+    static const HIGHLIGHTString quoteCh( "\"" );
 
     TriBool pkglistHighlight = Zypper::instance().config().color_pkglistHighlight;
     ansi::Color pkglistHighlightAttribute = Zypper::instance().config().color_pkglistHighlightAttribute;

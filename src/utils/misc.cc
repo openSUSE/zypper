@@ -120,19 +120,19 @@ std::string i18nPatchStatus( const PoolItem & pi_r )
     case ResStatus::BROKEN:
       if ( pi_r.isUnwanted() )
 	// Translator: Patch status: needed, optional, unwanted, applied, not needed
-	return ColorString( tUnwanted, ColorContext::HIGHLIGHT ).str();
+	return HIGHLIGHTString( tUnwanted ).str();
       if ( Zypper::instance().globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
-	return ColorString( tOptional, ColorContext::LOWLIGHT ).str();
+	return LOWLIGHTString( tOptional ).str();
       return tNeeded;
       break;
-    case ResStatus::SATISFIED:		return ColorString( tApplied, ColorContext::POSITIVE ).str();	break;
-    case ResStatus::NONRELEVANT:	return ColorString( tNotneeded, ColorContext::POSITIVE ).str();	break;
+    case ResStatus::SATISFIED:		return POSITIVEString( tApplied ).str();	break;
+    case ResStatus::NONRELEVANT:	return POSITIVEString( tNotneeded ).str();	break;
 
     case ResStatus::UNDETERMINED:	// fall through
     default:
       break;
   }
-  return ColorString( tUndetermined, ColorContext::NEGATIVE ).str();
+  return NEGATIVEString( tUndetermined ).str();
 }
 
 const char * textPatchStatus( const PoolItem & pi_r )
@@ -170,10 +170,10 @@ std::string patchHighlightCategory( const Patch & patch_r )
   switch ( patch_r.categoryEnum() )	// switch by enum as it matches multiple strings (optional==feature==enhancement)
   {
     case Patch::CAT_SECURITY:
-      ret = ColorString( patch_r.category(), ColorContext::HIGHLIGHT ).str();
+      ret = HIGHLIGHTString( patch_r.category() ).str();
       break;
     case Patch::CAT_OPTIONAL:
-      ret = ColorString( patch_r.category(), ColorContext::LOWLIGHT ).str();
+      ret = LOWLIGHTString( patch_r.category() ).str();
       break;
       // else: fallthrough
     default:
@@ -187,7 +187,7 @@ std::string patchHighlightSeverity( const Patch & patch_r )
 {
   std::string ret;
   if ( patch_r.isSeverity( Patch::SEV_CRITICAL ) )
-    ret = ColorString( patch_r.severity(), ColorContext::HIGHLIGHT ).str();
+    ret = HIGHLIGHTString( patch_r.severity() ).str();
   else
     ret = patch_r.severity();
   return ret;
@@ -208,7 +208,7 @@ std::string patchInteractiveFlags( const Patch & patch_r )
       { Patch::Reboot,	"reboot" },
       { Patch::Message,	"message" },
       { Patch::License,	"licence" },
-      { kRestart,	ColorString( "restart", ColorContext::HIGHLIGHT ).str() }
+      { kRestart,	HIGHLIGHTString( "restart" ).str() }
     }, "", ",", "" );
   }
   else

@@ -475,9 +475,7 @@ void SolverRequester::updatePatches()
 	{
 	  WAR << "Drop --with-update while patching the update stack" << endl;
 	  Zypper::instance().out().info(
-	    ColorString( ColorContext::MSG_WARNING,
-			 str::Format(_("Ignoring option %s when updating the update stack first.")) % "--with-update"
-	    ).str()
+	    MSG_WARNINGString( str::Format(_("Ignoring option %s when updating the update stack first.")) % "--with-update" ).str()
 	  );
 	  Zypper::instance().runtimeData().solve_with_update = false;
 	}

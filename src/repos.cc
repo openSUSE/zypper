@@ -44,7 +44,7 @@ static bool refresh_service( Zypper & zypper, const ServiceInfo & service );
 inline std::string volatileTag()
 {
   // translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
-  return std::string( " [" + ColorString( ColorContext::MSG_WARNING, _("volatile") ).str() + "]" );
+  return std::string( " [" + MSG_WARNINGString(_("volatile") ).str() + "]" );
 }
 
 inline std::string volatileServiceRepoChange( const RepoInfo & repo_r )
@@ -80,7 +80,7 @@ inline ColorString repoPriorityNumberAnnotated( unsigned prio_r, int width_r = 0
 
 inline const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r )
 {
-  static std::string dashes( ColorString( ColorContext::LOWLIGHT , "----" ).str() );
+  static std::string dashes( LOWLIGHTString( "----" ).str() );
   return( repo_r.enabled() ? asYesNo( repo_r.autorefresh() ) : dashes.c_str() );
 }
 

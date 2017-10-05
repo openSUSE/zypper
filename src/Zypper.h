@@ -499,7 +499,7 @@ struct CommandBase
     // finished
     _zypper.out().gap();
     if ( _zypper.exitCode() != ZYPPER_EXIT_OK )
-      _zypper.out().info( _options->commandName(": ")+ColorString(ColorContext::MSG_WARNING,  _("Finished with error.") ).str() );
+      _zypper.out().info( _options->commandName(": ")+MSG_WARNINGString(_("Finished with error.") ).str() );
     else
       _zypper.out().info( _options->commandName(": ")+_("Done.") );
     return _zypper.exitCode();

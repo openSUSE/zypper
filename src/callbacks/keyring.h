@@ -425,7 +425,7 @@ namespace zypp
 		% found
 	);
 
-	zypper.out().info( ColorString( ColorContext::MSG_WARNING, _(
+	zypper.out().info( MSG_WARNINGString(_(
 		"Accepting packages with wrong checksums can lead to a corrupted system "
 		"and in extreme cases even to a system compromise." ) ).str()
 	);
