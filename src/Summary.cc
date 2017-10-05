@@ -76,6 +76,8 @@ void Summary::readPool( const ResPool & pool )
   _incache = ByteCount();
   _inst_size_change = ByteCount();
 
+  _ctc.clear();
+
   // find multi-version packages, which actually have mult. versions installed
   for ( const ui::Selectable::Ptr & s : sat::Pool::instance().multiversion().selectable() )
   {
@@ -356,6 +358,37 @@ namespace
 
     return( withKind_r ? resp_r.second->ident().asString() : resp_r.second->name() );
   }
+
+  /** bsc#1061384: add hint if product is better updated by a different command
+   * Products buddy (the-release package) may provide some indicator telling that
+   * a specific command should be used to update the product.
+   * \code
+   *   Provides product-update() == dup
+   * \endcode
+   */
+  inline void addUpdateHint( TableRow & tr_r, std::list<std::string> & ctc_r, ResObject::constPtr obj_r )
+  {
+    if ( obj_r && obj_r->isKind<Product>() )
+    {
+      // Check if buddy release package contains some update indicator provides.
+      if ( Zypper::instance().command() != ZypperCommand::DIST_UPGRADE_e )
+      {
+	static const Capability indicator( "product-update()", Rel::EQ, "dup" );
+	if ( obj_r->asKind<Product>()->referencePackage().provides().matches( indicator ) )
+	{
+	  WAR << obj_r << " provides " << indicator << endl;
+	  // translator: '%1%' is a products name
+	  //             '%2%' is a command to call (like 'zypper dup')
+	  //             Both may contain whitespace and should be enclosed by quotes!
+	  std::string ctcmsg( str::Format( _("Product '%1%' requires to be updated by calling '%2%'!") ) % obj_r->summary() % DEFAULTString("zypper dup") );
+	  // ^^^ summary() for products like in ResPair2Name
+	  //     DEFAULTString to prevent the command string from being colored in MSG_WARNINGString below
+	  tr_r.addDetail( MSG_WARNINGString( ctcmsg ) );
+	  ctc_r.push_back( std::move(ctcmsg) );
+	}
+      }
+    }
+  }
 } // namespace
 ///////////////////////////////////////////////////////////////////
 bool Summary::writeResolvableList( std::ostream & out,
@@ -460,8 +493,12 @@ bool Summary::writeResolvableList( std::ostream & out,
     if ( _viewop & SHOW_VERSION )
     {
       if ( respair.first && respair.first->edition() != respair.second->edition() )
+      {
         tr << respair.first->edition().asString() + " -> " +
               respair.second->edition().asString();
+	// bsc#1061384: add hint if product is better updated by a different command
+	addUpdateHint( tr, _ctc, respair.second );
+      }
       else
         tr << respair.second->edition().asString();
     }
@@ -595,6 +632,7 @@ void Summary::writeUpgraded( std::ostream & out )
 {
   for_( it, _toupgrade.begin(), _toupgrade.end() )
   {
+    DtorReset guard( _viewop );		// need special viewopts for products
     std::string label( "%d" );
     if ( it->first == ResKind::package )
       label = PL_(
@@ -612,10 +650,13 @@ void Summary::writeUpgraded( std::ostream & out )
         "The following %d patterns are going to be upgraded:",
         it->second.size() );
     else if ( it->first == ResKind::product )
+    {
       label = PL_(
         "The following product is going to be upgraded:",
         "The following %d products are going to be upgraded:",
         it->second.size() );
+      setViewOption( SHOW_VERSION );	// always show version for products
+    }
     else if ( it->first == ResKind::application )
       label = PL_(
         "The following application is going to be upgraded:",
@@ -1465,6 +1506,23 @@ void Summary::dumpTo( std::ostream & out )
   if ( _need_reboot )
   {   Zypper::instance().out().notePar( 4, _("System reboot required.") ); }
 
+  if ( !_ctc.empty() )
+  {
+    str::Str s;
+    for ( const auto & str : _ctc )
+    {
+      s << endl << str;
+    }
+    // translator: Printed after the summary but before the prompt to start the installation.
+    // Followed by some explanatory text telling it might be a good idea NOT to continue:
+    //
+    // # zypper up
+    // ...
+    //    Consider to cancel:
+    //    Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
+    // Continue? [y/n/...? shows all options] (y):
+    Zypper::instance().out().taggedPar( 4, MSG_WARNINGString(_("Consider to cancel:") ), s );
+  }
 }
 
 // --------------------------------------------------------------------------

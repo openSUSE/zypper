@@ -150,6 +150,9 @@ private:
   /** names of packages which have multiple versions (to-be-)installed */
   std::set<std::string> _multiInstalled;
 
+  std::list<std::string> _ctc;		///< reasons to consider to cancel
+
+
   /** \name For weak deps info.
    * @{
    */
