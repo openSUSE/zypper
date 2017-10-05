@@ -15,7 +15,7 @@
 #include <zypp/base/DtorReset.h>
 #include <zypp/base/String.h>
 
-#include "output/Out.h"
+//#include "output/Out.h" MOVED TO THE BOTTOM
 
 using std::endl;
 
@@ -613,4 +613,5 @@ inline size_t mbs_width( boost::string_ref text_r )
  */
 std::string mbs_substr_by_width( boost::string_ref text_r, std::string::size_type colpos_r = 0, std::string::size_type collen_r = std::string::npos );
 
+#include "output/Out.h"
 #endif /* ZYPPER_UTILS_TEXT_H_ */
