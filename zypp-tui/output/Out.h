@@ -35,11 +35,11 @@ class Zypper;
 namespace text
 {
   // translator: usually followed by a ' ' and some explanatory text
-  inline ColorString tagNote() { return ColorString( ColorContext::HIGHLIGHT, _("Note:") ); }
+  inline ColorString tagNote() { return HIGHLIGHTString(_("Note:") ); }
   // translator: usually followed by a ' ' and some explanatory text
-  inline ColorString tagWarning() { return ColorString( ColorContext::MSG_WARNING, _("Warning:") ); }
+  inline ColorString tagWarning() { return MSG_WARNINGString(_("Warning:") ); }
   // translator: usually followed by a ' ' and some explanatory text
-  inline ColorString tagError() { return ColorString( ColorContext::MSG_ERROR, _("Error:") ); }
+  inline ColorString tagError() { return MSG_ERRORString(_("Error:") ); }
 
   inline const char * qContinue() { return _("Continue?"); }
 

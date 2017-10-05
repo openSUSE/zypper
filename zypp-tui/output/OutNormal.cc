@@ -219,7 +219,7 @@ void OutNormal::progressEnd( const std::string & id, const std::string & label, 
     outstr.lhs << label << ' ';
     outstr.rhs << '[';
     if ( error )
-      outstr.rhs << ColorString( _("error"), ColorContext::NEGATIVE );
+      outstr.rhs << NEGATIVEString(_("error") );
     else
       outstr.rhs << _("done");
   }
@@ -327,10 +327,10 @@ void OutNormal::dwnldProgressEnd( const Url & uri, long rate, TriBool error )
     outstr.rhs << '[';
     if ( indeterminate( error ) )
       // Translator: download progress bar result: "........[not found]"
-      outstr.rhs << ColorString( _("not found"), ColorContext::CHANGE );
+      outstr.rhs << CHANGEString(_("not found") );
     else if ( error )
       // Translator: download progress bar result: "............[error]"
-      outstr.rhs << ColorString( _("error"), ColorContext::NEGATIVE );
+      outstr.rhs << NEGATIVEString(_("error") );
     else
       // Translator: download progress bar result: ".............[done]"
       outstr.rhs << _("done");
