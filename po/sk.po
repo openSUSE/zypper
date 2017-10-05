@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-07 12:25+0200\n"
-"PO-Revision-Date: 2017-07-17 17:12+0000\n"
+"PO-Revision-Date: 2017-10-05 11:44+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3721,21 +3721,20 @@ msgstr "Budú vykonané nasledovné akcie:"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "(nevyprší)"
+msgstr "nevyprší"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "vypršal: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "vyprší: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
