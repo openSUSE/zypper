@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Oct  5 18:17:58 CEST 2017 - ma@suse.de
+
+- Add summary hint if product is better updated by a different
+  command. This is mainly used by rolling distributions like Tumbleweed
+  to remind their users to use 'zypper dup' to update (not zypper up or
+  patch). (bsc#1061384)
+- version 1.13.37
+
+-------------------------------------------------------------------
 Fri Sep 22 13:21:27 CEST 2017 - ma@suse.de
 
 - Unify '(add|modify)(repo|service)' property related arguments.
