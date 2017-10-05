@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 11:00+0200\n"
+"POT-Creation-Date: 2017-10-05 18:14+0200\n"
 "PO-Revision-Date: 2017-10-03 16:24+0700\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
-"Language-Team: Indonesian "
-"<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
+"Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
+"id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,7 +105,8 @@ msgstr "Berkas penandatanganan kunci gpg '%1%' telah kedaluwarsa."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "Berkas penandatanganan kunci gpg '%1%' akan kedaluwarsa dalam %2% hari."
+msgstr[0] ""
+"Berkas penandatanganan kunci gpg '%1%' akan kedaluwarsa dalam %2% hari."
 
 #: src/callbacks/keyring.h:142
 #, c-format, boost-format
@@ -789,176 +790,184 @@ msgstr "Menambahkan konflik: '%s'."
 msgid "Did you mean %1%?"
 msgstr "Apakah maksud Anda %1%?"
 
-#: src/SolverRequester.cc:479
+#: src/SolverRequester.cc:478
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "Abaikan opsi %s saat memutakhirkan pembaruan stack terlebih dahulu."
 
+#. translator: '%1%' is a products name
+#. '%2%' is a command to call (like 'zypper dup')
+#. Both may contain whitespace and should be enclosed by quotes!
+#: src/Summary.cc:383
+#, boost-format
+msgid "Product '%1%' requires to be updated by calling '%2%'!"
+msgstr ""
+
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:425 src/Summary.cc:497
+#: src/Summary.cc:458 src/Summary.cc:534
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] "... dan %1% item lagi."
 
-#: src/Summary.cc:516
+#: src/Summary.cc:552
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "%d Paket BARU berikut ini akan dipasang:"
 
-#: src/Summary.cc:521
+#: src/Summary.cc:557
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "%d Penambalan BARU berikut ini akan dipasang:"
 
-#: src/Summary.cc:526
+#: src/Summary.cc:562
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "%d Pola BARU berikut ini akan dipasang:"
 
-#: src/Summary.cc:531
+#: src/Summary.cc:567
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "%d Produk BARU berikut ini akan dipasang:"
 
-#: src/Summary.cc:536
+#: src/Summary.cc:572
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "%d Paket sumber berikut ini akan dipasang:"
 
-#: src/Summary.cc:541
+#: src/Summary.cc:577
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "%d aplikasi berikut ini akan dipasang:"
 
-#: src/Summary.cc:563
+#: src/Summary.cc:599
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "Paket berikut %d akan DIHAPUS:"
 
-#: src/Summary.cc:568
+#: src/Summary.cc:604
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "%d Penambalan berikut ini akan di HAPUS:"
 
-#: src/Summary.cc:573
+#: src/Summary.cc:609
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "%d Pola berikut ini akan di HAPUS:"
 
-#: src/Summary.cc:578
+#: src/Summary.cc:614
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "%d Produk berikut ini akan di HAPUS:"
 
-#: src/Summary.cc:583
+#: src/Summary.cc:619
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "%d Aplikasi berikut ini akan di HAPUS:"
 
-#: src/Summary.cc:602
+#: src/Summary.cc:639
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "%d Paket berikut ini akan ditingkatkan:"
 
-#: src/Summary.cc:607
+#: src/Summary.cc:644
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "%d Penambalan berikut ini akan ditingkatkan:"
 
-#: src/Summary.cc:612
+#: src/Summary.cc:649
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "%d Pola berikut ini akan ditingkatkan:"
 
-#: src/Summary.cc:617
+#: src/Summary.cc:655
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "%d Produk berikut ini akan ditingkatkan:"
 
-#: src/Summary.cc:622
+#: src/Summary.cc:662
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "%d Aplikasi berikut ini akan ditingkatkan:"
 
-#: src/Summary.cc:641
+#: src/Summary.cc:681
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "%d Paket berikut ini akan di turunkan:"
 
-#: src/Summary.cc:646
+#: src/Summary.cc:686
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "%d Penambalan berikut ini akan di turunkan:"
 
-#: src/Summary.cc:651
+#: src/Summary.cc:691
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "%d Pola berikut ini akan di turunkan:"
 
-#: src/Summary.cc:656
+#: src/Summary.cc:696
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "%d Produk berikut ini akan di turunkan:"
 
-#: src/Summary.cc:661
+#: src/Summary.cc:701
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "%d Aplikasi berikut ini akan di turunkan:"
 
-#: src/Summary.cc:680
+#: src/Summary.cc:720
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "%d Paket berikut ini akan di pasang ulang:"
 
-#: src/Summary.cc:685
+#: src/Summary.cc:725
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "%d Penambalan berikut ini akan di pasang ulang:"
 
-#: src/Summary.cc:690
+#: src/Summary.cc:730
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "%d Pola berikut ini akan di pasang ulang:"
 
-#: src/Summary.cc:695
+#: src/Summary.cc:735
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "%d Produk berikut ini akan di pasang ulang:"
 
-#: src/Summary.cc:707
+#: src/Summary.cc:747
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "%d Aplikasi berikut ini akan di pasang ulang:"
 
-#: src/Summary.cc:841
+#: src/Summary.cc:881
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -966,7 +975,7 @@ msgid_plural ""
 msgstr[0] ""
 "%d Paket yang direkomendasikan berikut ini akan dipilih secara otomatis:"
 
-#: src/Summary.cc:846
+#: src/Summary.cc:886
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -974,7 +983,7 @@ msgid_plural ""
 msgstr[0] ""
 "%d Penambalan yang direkomendasikan berikut ini akan dipilih secara otomatis:"
 
-#: src/Summary.cc:851
+#: src/Summary.cc:891
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -982,7 +991,7 @@ msgid_plural ""
 msgstr[0] ""
 "%d Pola yang direkomendasikan berikut ini akan dipilih secara otomatis:"
 
-#: src/Summary.cc:856
+#: src/Summary.cc:896
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -990,7 +999,7 @@ msgid_plural ""
 msgstr[0] ""
 "%d Produk yang direkomendasikan berikut ini akan dipilih secara otomatis:"
 
-#: src/Summary.cc:861
+#: src/Summary.cc:901
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -999,7 +1008,7 @@ msgstr[0] ""
 "%d Paket sumber yang direkomendasikan berikut ini akan dipilih secara "
 "otomatis:"
 
-#: src/Summary.cc:866
+#: src/Summary.cc:906
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -1007,7 +1016,7 @@ msgid_plural ""
 msgstr[0] ""
 "%d Aplikasi yang direkomendasikan berikut ini akan dipilih secara otomatis:"
 
-#: src/Summary.cc:910
+#: src/Summary.cc:950
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -1019,7 +1028,7 @@ msgstr[0] ""
 "%d Paket berikut ini direkomendasikan, tetapi tidak akan dipasang (hanya "
 "paket yang diperlukan saja yang akan dipasang):"
 
-#: src/Summary.cc:922
+#: src/Summary.cc:962
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -1031,7 +1040,7 @@ msgstr[0] ""
 "%d Paket berikut ini direkomendasikan, tetapi tidak akan dipasang karena "
 "mereka tidak diinginkan (Secara manual dihapus sebelumnya):"
 
-#: src/Summary.cc:932
+#: src/Summary.cc:972
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1043,7 +1052,7 @@ msgstr[0] ""
 "%d Paket berikut ini direkomendasikan, tetapi tidak akan dipasang karena "
 "konflik dan masalah ketergantungan:"
 
-#: src/Summary.cc:945
+#: src/Summary.cc:985
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -1051,21 +1060,21 @@ msgid_plural ""
 msgstr[0] ""
 "%d Penambalan berikut ini direkomendasikan, tetapi tidak akan dipasang:"
 
-#: src/Summary.cc:949
+#: src/Summary.cc:989
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
 msgstr[0] "%d Pola berikut ini direkomendasikan, tetapi tidak akan dipasang:"
 
-#: src/Summary.cc:953
+#: src/Summary.cc:993
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "%d Produk berikut ini direkomendasikan, tetapi tidak akan dipasang:"
 
-#: src/Summary.cc:957
+#: src/Summary.cc:997
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1073,115 +1082,115 @@ msgid_plural ""
 msgstr[0] ""
 "%d Aplikasi berikut ini direkomendasikan, tetapi tidak akan dipasang:"
 
-#: src/Summary.cc:987
+#: src/Summary.cc:1027
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
 msgstr[0] "%d Paket berikut ini disarankan, tetapi tidak akan dipasang:"
 
-#: src/Summary.cc:992
+#: src/Summary.cc:1032
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
 msgstr[0] "%d Penambalan berikut ini disarankan, tetapi tidak akan dipasang:"
 
-#: src/Summary.cc:997
+#: src/Summary.cc:1037
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
 msgstr[0] "%d Pola berikut ini disarankan, tetapi tidak akan dipasang:"
 
-#: src/Summary.cc:1002
+#: src/Summary.cc:1042
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "%d Produk berikut ini disarankan, tetapi tidak akan dipasang:"
 
-#: src/Summary.cc:1007
+#: src/Summary.cc:1047
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "%d Aplikasi berikut ini disarankan, tetapi tidak akan dipasang:"
 
-#: src/Summary.cc:1029
+#: src/Summary.cc:1069
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "%d Paket berikut ini akan diubah arsitekturnya:"
 
-#: src/Summary.cc:1034
+#: src/Summary.cc:1074
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "%d Penambalan berikut ini akan diubah arsitekturnya:"
 
-#: src/Summary.cc:1039
+#: src/Summary.cc:1079
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "%d Pola berikut ini akan diubah arsitekturnya:"
 
-#: src/Summary.cc:1044
+#: src/Summary.cc:1084
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "%d Produk berikut ini akan diubah arsitekturnya:"
 
-#: src/Summary.cc:1049
+#: src/Summary.cc:1089
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "%d Aplikasi berikut ini akan diubah arsitekturnya:"
 
-#: src/Summary.cc:1071
+#: src/Summary.cc:1111
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "%d Paket berikut ini akan diubah vendornya:"
 
-#: src/Summary.cc:1076
+#: src/Summary.cc:1116
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "%d Penambalan berikut ini akan diubah vendornya:"
 
-#: src/Summary.cc:1081
+#: src/Summary.cc:1121
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "%d Pola berikut ini akan diubah vendornya:"
 
-#: src/Summary.cc:1086
+#: src/Summary.cc:1126
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "%d Produk berikut ini akan diubah vendornya:"
 
-#: src/Summary.cc:1091
+#: src/Summary.cc:1131
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "%d Aplikasi berikut ini akan diubah vendornya:"
 
-#: src/Summary.cc:1111
+#: src/Summary.cc:1151
 #, fuzzy, c-format, boost-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "Paket berikut %d tidak didukung oleh vendornya:"
 
-#: src/Summary.cc:1129
+#: src/Summary.cc:1169
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Paket berikut %d tidak didukung oleh vendornya:"
 
-#: src/Summary.cc:1147
+#: src/Summary.cc:1187
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1191,25 +1200,25 @@ msgstr[0] ""
 "%d Paket berikut ini perlu kontrak pelanggan tambahan untuk mendapatkan "
 "dukungan:"
 
-#: src/Summary.cc:1167
+#: src/Summary.cc:1207
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "%d Pembaruan paket berikut ini TIDAK akan dipasang:"
 
-#: src/Summary.cc:1172
+#: src/Summary.cc:1212
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "%d Pembaruan produk berikut ini TIDAK akan dipasang:"
 
-#: src/Summary.cc:1177
+#: src/Summary.cc:1217
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "%d Pembaruan aplikasi berikut ini TIDAK akan dipasang:"
 
-#: src/Summary.cc:1207
+#: src/Summary.cc:1247
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1219,146 +1228,146 @@ msgstr[0] ""
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1220
+#: src/Summary.cc:1260
 msgid "Available"
 msgstr "Tersedia"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1226 src/info.cc:345 src/info.cc:436 src/info.cc:567
+#: src/Summary.cc:1266 src/info.cc:345 src/info.cc:436 src/info.cc:567
 msgid "Installed"
 msgstr "Terpasang"
 
-#: src/Summary.cc:1231
+#: src/Summary.cc:1271
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr "Jalankan '%1%' untuk melihat daftar lengkap item yang terkunci."
 
-#: src/Summary.cc:1241
+#: src/Summary.cc:1281
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "%d Penambalan berikut ini perlu menjalankan ulang sistem:"
 
-#: src/Summary.cc:1259
+#: src/Summary.cc:1299
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr "Keseluruhan ukuran unduh %1%. Sudah di cache: %2%."
 
-#: src/Summary.cc:1262
+#: src/Summary.cc:1302
 msgid "Download only."
 msgstr "Hanya unduh."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1268
+#: src/Summary.cc:1308
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr "Setelah operasi ini, %s tambahan akan digunakan."
 
-#: src/Summary.cc:1270
+#: src/Summary.cc:1310
 msgid "No additional space will be used or freed after the operation."
 msgstr ""
 "Tidak ada ruang tambahan yang akan digunakan atau dibebaskan setelah operasi "
 "ini."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1277
+#: src/Summary.cc:1317
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr "Selelah operasi ini, %s akan dibebaskan."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1300
+#: src/Summary.cc:1340
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "paket yang akan ditingkatkan"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1311
+#: src/Summary.cc:1351
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "akan diturunkan"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1314
+#: src/Summary.cc:1354
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "paket yang akan diturunkan"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1325
+#: src/Summary.cc:1365
 msgid "new"
 msgid_plural "new"
 msgstr[0] "baru"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1328
+#: src/Summary.cc:1368
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "paket baru yang akan dipasang"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1339
+#: src/Summary.cc:1379
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "akan dipasang ulang"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1342
+#: src/Summary.cc:1382
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "paket yang akan dipasang ulang"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1353
+#: src/Summary.cc:1393
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "akan dihapus"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1356
+#: src/Summary.cc:1396
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "paket yang akan dihapus"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1367
+#: src/Summary.cc:1407
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "akan berubah vendor"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1370
+#: src/Summary.cc:1410
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "paket yang akan berubah vendor"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1381
+#: src/Summary.cc:1421
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "akan berubah arch"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1384
+#: src/Summary.cc:1424
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "paket yang akan berubah arch"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1395
+#: src/Summary.cc:1435
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "paket sumber"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1398
+#: src/Summary.cc:1438
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "paket sumber yang akan dipasang"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1464
+#: src/Summary.cc:1504
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1366,9 +1375,21 @@ msgstr ""
 "Manajer paket perlu mulai ulang. (Jalankan perintah ini sekali lagi setelah "
 "pemutakhiran stack mendapat pembaruan)"
 
-#: src/Summary.cc:1467
+#: src/Summary.cc:1507
 msgid "System reboot required."
 msgstr "Perlu menjalankan ulang sistem."
+
+#. translator: Printed after the summary but before the prompt to start the installation.
+#. Followed by some explanatory text telling it might be a good idea NOT to continue:
+#.
+#. # zypper up
+#. ...
+#. Consider to cancel:
+#. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
+#. Continue? [y/n/...? shows all options] (y):
+#: src/Summary.cc:1524
+msgid "Consider to cancel:"
+msgstr ""
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -1971,8 +1992,8 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "Symlink /etc/products.d/baseproduct tidak benar atau hilang!\n"
-"Tautan harus mengarah ke inti produk Anda pada berkas .prod di "
-"/etc/products.d.\n"
+"Tautan harus mengarah ke inti produk Anda pada berkas .prod di /etc/products."
+"d.\n"
 
 #: src/Zypper.cc:1267
 msgid "Repositories disabled, using the database of installed packages only."
@@ -4132,7 +4153,7 @@ msgstr "Perintah ini hanya berguna di zypper shell."
 msgid "You already are running zypper's shell."
 msgstr "Anda sudah menjalankan shell zypper."
 
-#: src/Zypper.cc:5483 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2535
+#: src/Zypper.cc:5483 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2534
 msgid "Alias"
 msgstr "Alias"
 
@@ -4140,9 +4161,9 @@ msgstr "Alias"
 #. translators: Table column header
 #. translators: name (general header)
 #: src/Zypper.cc:5483 src/info.cc:69 src/info.cc:459 src/info.cc:703
-#: src/locks.cc:107 src/repos.cc:1070 src/repos.cc:1209 src/repos.cc:2536
+#: src/locks.cc:107 src/repos.cc:1070 src/repos.cc:1209 src/repos.cc:2535
 #: src/search.cc:44 src/search.cc:209 src/search.cc:357 src/search.cc:504
-#: src/search.cc:568 src/update.cc:798 src/utils/misc.cc:250
+#: src/search.cc:568 src/update.cc:798 src/utils/misc.cc:228
 msgid "Name"
 msgstr "Nama"
 
@@ -4156,29 +4177,29 @@ msgid "Resolvable Type"
 msgstr "Tipe Perbaikan"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:28
+#: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
 msgstr "Lewati pengambilan berkas dan batalkan operasi saat ini."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:30
+#: src/callbacks/media.cc:29
 msgid "Try to retrieve the file again."
 msgstr "Coba ubtuk mengambil berkas kembali."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:32
+#: src/callbacks/media.cc:31
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr "Lewati pengambilan berkas dan coba melanjutkan operasi tanpa berkas."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:34
+#: src/callbacks/media.cc:33
 msgid "Change current base URI and try retrieving the file again."
 msgstr "Ubah URI dasar saat ini dan coba mengambil berkas kembali."
 
 #. translators: this is a prompt label, will appear as "New URI: "
-#: src/callbacks/media.cc:49
+#: src/callbacks/media.cc:48
 msgid "New URI"
 msgstr "URI Baru"
 
@@ -4188,51 +4209,51 @@ msgstr "URI Baru"
 #. The 'u' reply means 'Change URI'.
 #. https protocol-specific options:
 #. 's' stands for Disable SSL certificate authority check
-#: src/callbacks/media.cc:77
+#: src/callbacks/media.cc:76
 msgid "a/r/i/u/s"
 msgstr "a/r/i/u/s"
 
-#: src/callbacks/media.cc:79
+#: src/callbacks/media.cc:78
 msgid "Disable SSL certificate authority check and continue."
 msgstr "Nonaktifkan pemeriksaan otoritas sertifikat SSL dan lanjutkan."
 
 #. translators: this is a prompt text
-#: src/callbacks/media.cc:84 src/callbacks/media.cc:179
-#: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
+#: src/callbacks/media.cc:83 src/callbacks/media.cc:178
+#: src/callbacks/media.cc:260 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
 msgstr "Batal, ulangi, abaikan?"
 
-#: src/callbacks/media.cc:92
+#: src/callbacks/media.cc:91
 msgid "SSL certificate authority check disabled."
 msgstr "Pemeriksaan sertifikas SSL dinonaktifkan."
 
-#: src/callbacks/media.cc:109
+#: src/callbacks/media.cc:108
 msgid "No devices detected, cannot eject."
 msgstr "Tidak ada perangkat yang terdeteksi, tidak dapat melepas."
 
-#: src/callbacks/media.cc:110
+#: src/callbacks/media.cc:109
 msgid "Try to eject the device manually."
 msgstr "Coba lepas perangkat secara manual."
 
-#: src/callbacks/media.cc:121
+#: src/callbacks/media.cc:120
 msgid "Detected devices:"
 msgstr "Perangkat yang terdeteksi:"
 
 # FR
-#: src/callbacks/media.cc:136
+#: src/callbacks/media.cc:135
 msgid "Cancel"
 msgstr "Batal"
 
-#: src/callbacks/media.cc:139
+#: src/callbacks/media.cc:138
 msgid "Select device to eject."
 msgstr "Pilih perangkat yang akan dilepas."
 
-#: src/callbacks/media.cc:154
+#: src/callbacks/media.cc:153
 msgid "Insert the CD/DVD and press ENTER to continue."
 msgstr "Sisipkan CD/DVD dan tekan ENTER untuk melanjutkan."
 
 # window title for kernel loading (see txt_load_kernel)
-#: src/callbacks/media.cc:157
+#: src/callbacks/media.cc:156
 msgid "Retrying..."
 msgstr "Mencoba lagi..."
 
@@ -4242,11 +4263,11 @@ msgstr "Mencoba lagi..."
 #. The 'u' reply means 'Change URI'.
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
-#: src/callbacks/media.cc:172
+#: src/callbacks/media.cc:171
 msgid "a/r/i/u/e"
 msgstr "a/r/i/u/e"
 
-#: src/callbacks/media.cc:174
+#: src/callbacks/media.cc:173
 msgid "Eject medium."
 msgstr "Lepas media."
 
@@ -4254,7 +4275,7 @@ msgstr "Lepas media."
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: src/callbacks/media.cc:220
+#: src/callbacks/media.cc:219
 #, c-format, boost-format
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
@@ -4266,11 +4287,11 @@ msgstr ""
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
-#: src/callbacks/media.cc:255
+#: src/callbacks/media.cc:254
 msgid "a/r/i/u"
 msgstr "a/r/i/u"
 
-#: src/callbacks/media.cc:299
+#: src/callbacks/media.cc:298
 #, c-format, boost-format
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
@@ -4279,13 +4300,13 @@ msgstr ""
 "Otentikasi diperlukan untuk mengakses %s. Anda harus menjadi root untuk "
 "dapat membaca kredensial dari %s."
 
-#: src/callbacks/media.cc:321 src/callbacks/media.cc:328
+#: src/callbacks/media.cc:320 src/callbacks/media.cc:327
 msgid "User Name"
 msgstr "Nama Pengguna"
 
 # password dialog title
 #. password
-#: src/callbacks/media.cc:336
+#: src/callbacks/media.cc:335
 msgid "Password"
 msgstr "Kata Sandi"
 
@@ -4323,7 +4344,7 @@ msgstr "Tidak mengunduh paket '%s'."
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/info.cc:67 src/locks.cc:110 src/search.cc:52 src/search.cc:359
-#: src/search.cc:503 src/search.cc:564 src/update.cc:795 src/utils/misc.cc:249
+#: src/search.cc:503 src/search.cc:564 src/update.cc:795 src/utils/misc.cc:227
 msgid "Repository"
 msgstr "Repositori"
 
@@ -4349,7 +4370,7 @@ msgstr "Vendor"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:255 src/utils/misc.cc:296
+#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:233 src/utils/misc.cc:274
 msgid "Summary"
 msgstr "Ringkasan"
 
@@ -4385,8 +4406,8 @@ msgid "Installed Size"
 msgstr "Ukuran Terpasang"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:347 src/info.cc:395 src/info.cc:570 src/utils/misc.cc:254
-#: src/utils/misc.cc:295
+#: src/info.cc:347 src/info.cc:395 src/info.cc:570 src/utils/misc.cc:232
+#: src/utils/misc.cc:273
 msgid "Status"
 msgstr "Status"
 
@@ -4412,13 +4433,13 @@ msgstr "Paket source"
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:397 src/update.cc:350 src/utils/misc.cc:251
-#: src/utils/misc.cc:292
+#: src/info.cc:397 src/update.cc:350 src/utils/misc.cc:229
+#: src/utils/misc.cc:270
 msgid "Category"
 msgstr "Kategori"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:399 src/utils/misc.cc:252 src/utils/misc.cc:293
+#: src/info.cc:399 src/utils/misc.cc:230 src/utils/misc.cc:271
 msgid "Severity"
 msgstr "Tingkat Keparahan"
 
@@ -4428,7 +4449,7 @@ msgid "Created On"
 msgstr "Dibuat Pada"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:403 src/utils/misc.cc:253 src/utils/misc.cc:294
+#: src/info.cc:403 src/utils/misc.cc:231 src/utils/misc.cc:272
 msgid "Interactive"
 msgstr "Interaktif"
 
@@ -4462,7 +4483,7 @@ msgstr "S"
 #. translators: Table column header
 #. translators: type (general header)
 #: src/info.cc:460 src/locks.cc:110 src/repos.cc:1108 src/repos.cc:1220
-#: src/repos.cc:2545 src/search.cc:46 src/search.cc:212
+#: src/repos.cc:2544 src/search.cc:46 src/search.cc:212
 msgid "Type"
 msgstr "Tipe"
 
@@ -4936,7 +4957,7 @@ msgstr "Galat saat menonaktifkan repositori '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Ada kendala saat mengambil berkas dari '%s'."
 
-#: src/repos.cc:358 src/repos.cc:3307 src/solve-commit.cc:806
+#: src/repos.cc:358 src/repos.cc:3306 src/solve-commit.cc:806
 #: src/solve-commit.cc:837 src/solve-commit.cc:861
 msgid "Please see the above error message for a hint."
 msgstr "Silahkan lihat pesan galat di atas sebagai petunjuk."
@@ -5092,32 +5113,32 @@ msgstr "Inisialisasi target gagal:"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1077 src/repos.cc:1215 src/repos.cc:1764 src/repos.cc:2537
+#: src/repos.cc:1077 src/repos.cc:1215 src/repos.cc:1763 src/repos.cc:2536
 msgid "Enabled"
 msgstr "Aktifkan"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1081 src/repos.cc:1216 src/repos.cc:1766 src/repos.cc:2538
+#: src/repos.cc:1081 src/repos.cc:1216 src/repos.cc:1765 src/repos.cc:2537
 msgid "GPG Check"
 msgstr "Periksa GPG"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:1089 src/repos.cc:2540
+#: src/repos.cc:1089 src/repos.cc:2539
 msgid "Refresh"
 msgstr "Segarkan"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:1099 src/repos.cc:1217 src/repos.cc:1770 src/repos.cc:2544
+#: src/repos.cc:1099 src/repos.cc:1217 src/repos.cc:1769 src/repos.cc:2543
 msgid "Priority"
 msgstr "Prioritas"
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1115 src/repos.cc:1210 src/repos.cc:1762 src/repos.cc:2547
+#: src/repos.cc:1115 src/repos.cc:1210 src/repos.cc:1761 src/repos.cc:2546
 msgid "URI"
 msgstr "URI"
 
@@ -5131,7 +5152,7 @@ msgstr ""
 "Gunakan perintah 'zypper addrepo' untuk menambah satu atau lebih repositori."
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1218 src/repos.cc:1768
+#: src/repos.cc:1218 src/repos.cc:1767
 msgid "Autorefresh"
 msgstr "Autorefres"
 
@@ -5236,68 +5257,68 @@ msgstr "Semua repositori telah disegarkan."
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Membersihkan cache metadata untuk '%s'."
 
-#: src/repos.cc:1582
+#: src/repos.cc:1581
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Membersihkan cache metadata raw untuk '%s'."
 
-#: src/repos.cc:1588
+#: src/repos.cc:1587
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Menyimpan cache metadata raw untuk %s '%s'."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1595
+#: src/repos.cc:1594
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Membersihkan paket untuk '%s'."
 
-#: src/repos.cc:1603
+#: src/repos.cc:1602
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Tidak bisa membersihkan repositori '%s' dikarenakan ada galat."
 
-#: src/repos.cc:1614
+#: src/repos.cc:1613
 msgid "Cleaning installed packages cache."
 msgstr "Membersihkan cache paket pemasangan."
 
-#: src/repos.cc:1623
+#: src/repos.cc:1622
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "Tidak dapat membersihkan cache paket pemasangan dikarenakan ada galat."
 
-#: src/repos.cc:1641
+#: src/repos.cc:1640
 msgid "Could not clean the repositories because of errors."
 msgstr "Tidak dapat membersihkan repositori dikarenakan ada galat."
 
-#: src/repos.cc:1647
+#: src/repos.cc:1646
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Beberapa repositori tidak dapat dibersihkan dikarenakan ada galat."
 
-#: src/repos.cc:1652
+#: src/repos.cc:1651
 msgid "Specified repositories have been cleaned up."
 msgstr "Repositori tertentu sudah berhasil dibersihkan."
 
-#: src/repos.cc:1654
+#: src/repos.cc:1653
 msgid "All repositories have been cleaned up."
 msgstr "Semua repositori sudah dibersihkan."
 
-#: src/repos.cc:1681
+#: src/repos.cc:1680
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Ini adalah media read-only (CD/DVD) yang bisa diganti, autorefresh "
 "dinonaktifkan."
 
-#: src/repos.cc:1702
+#: src/repos.cc:1701
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Alias repositori salah: '%s'"
 
-#: src/repos.cc:1710 src/repos.cc:1994
+#: src/repos.cc:1709 src/repos.cc:1993
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Repositori bernama '%s' sudah tersedia. Silahkan gunakan alias lain."
 
-#: src/repos.cc:1719
+#: src/repos.cc:1718
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -5305,26 +5326,26 @@ msgstr ""
 "Tidak dapat menentukan tipe repositori. Silahkan periksa jika URI yang "
 "terdefinisikan (lihat di bawah ini) merujuk ke repositori yang tepat:"
 
-#: src/repos.cc:1725
+#: src/repos.cc:1724
 msgid "Can't find a valid repository at given location:"
 msgstr ""
 "Tidak dapat menemukan repositori yang tepat pada lokasi yang diberikan:"
 
-#: src/repos.cc:1733
+#: src/repos.cc:1732
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Terjadi kendala saat mengirim data repositori dari URI:"
 
-#: src/repos.cc:1734
+#: src/repos.cc:1733
 msgid "Please check whether the specified URI is accessible."
 msgstr "Mohon periksa apakah URI yang dimaksud bisa diakses."
 
-#: src/repos.cc:1741
+#: src/repos.cc:1740
 msgid "Unknown problem when adding repository:"
 msgstr "Terjadi kesalahan ketika menambahkan repositori:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1751
+#: src/repos.cc:1750
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -5333,70 +5354,70 @@ msgstr ""
 "Pemeriksaan GPG tidak aktif pada konfigurasi repositori '%1%'. Integritas "
 "dan keaslian paket tidak dapat diverifikasi."
 
-#: src/repos.cc:1756
+#: src/repos.cc:1755
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "Repositori '%s' telah sukses ditambahkan"
 
-#: src/repos.cc:1782
+#: src/repos.cc:1781
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Membaca data dari media '%s'"
 
-#: src/repos.cc:1788
+#: src/repos.cc:1787
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Terjadi kendala saat membaca data dari media '%s'"
 
-#: src/repos.cc:1789
+#: src/repos.cc:1788
 msgid "Please check if your installation media is valid and readable."
 msgstr ""
 "Silahkan periksa media pemasangan Anda apakah sudah valid dan bisa terbaca."
 
-#: src/repos.cc:1796
+#: src/repos.cc:1795
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "Pembacaan data dari media '%s' tertunda sampai penyegaran berikutnya."
 
-#: src/repos.cc:1876
+#: src/repos.cc:1875
 msgid "Problem accessing the file at the specified URI"
 msgstr "Terjadi kendala saat mengakses berkas pada URI yang telah disebutkan"
 
-#: src/repos.cc:1877
+#: src/repos.cc:1876
 msgid "Please check if the URI is valid and accessible."
 msgstr "Silahkan periksa apakah URI yang dimaksud bisa diakses dan benar."
 
-#: src/repos.cc:1884
+#: src/repos.cc:1883
 msgid "Problem parsing the file at the specified URI"
 msgstr "Terjadi kendala saat menguraikan berkas pada URI yang telah ditentukan"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1886
+#: src/repos.cc:1885
 msgid "Is it a .repo file?"
 msgstr "Apakah ini berkas .repo?"
 
-#: src/repos.cc:1893
+#: src/repos.cc:1892
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr ""
 "Terjadi kendala saat mencoba membaca berkas pada URI yang telah ditentukan"
 
-#: src/repos.cc:1905
+#: src/repos.cc:1904
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr ""
 "Repositori tanpa alias yang didefinisikan telah ditentukan di dalam berkas, "
 "dilewati."
 
-#: src/repos.cc:1911
+#: src/repos.cc:1910
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Repositori '%s' tidak memiliki URI yang terdefinisikan, dilewati."
 
-#: src/repos.cc:1957
+#: src/repos.cc:1956
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Repositori '%s' telah dihapus."
 
-#: src/repos.cc:1979
+#: src/repos.cc:1978
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
@@ -5405,220 +5426,220 @@ msgstr ""
 "Tidak dapat mengubah alias repositori '%s'. Repositori tersebut mili layanan "
 "'%s' dimana layanan tersebut bertanggung jawab terhadap konfigurasi aliasnya."
 
-#: src/repos.cc:1990
+#: src/repos.cc:1989
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Repositori '%s' diganti nama menjadi '%s'."
 
-#: src/repos.cc:1999 src/repos.cc:2231
+#: src/repos.cc:1998 src/repos.cc:2230
 msgid "Error while modifying the repository:"
 msgstr "Galat saat memodifikasi repositori:"
 
-#: src/repos.cc:2000
+#: src/repos.cc:1999
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Meninggalkan repositori '%s' tidak terubah."
 
-#: src/repos.cc:2135
+#: src/repos.cc:2134
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Prioritas repositori '%s' ditinggalkan tanpa perubahan (%d)"
 
-#: src/repos.cc:2173
+#: src/repos.cc:2172
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Repositori '%s' telah sukses diaktifkan."
 
-#: src/repos.cc:2175
+#: src/repos.cc:2174
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Repositori '%s' telah sukses dinonaktifkan."
 
-#: src/repos.cc:2182
+#: src/repos.cc:2181
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Autorefresh telah diaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:2184
+#: src/repos.cc:2183
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Autorefresh telah dinonaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:2191
+#: src/repos.cc:2190
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Cache berkas RPM telah diaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:2193
+#: src/repos.cc:2192
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Cache berkas RPM telah dinonaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:2200
+#: src/repos.cc:2199
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Pemeriksaan GPG telah diaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:2202
+#: src/repos.cc:2201
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Pemeriksaan GPG telah dimatikan untuk repositori '%s'."
 
-#: src/repos.cc:2208
+#: src/repos.cc:2207
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Prioritas repositori '%s' telah diatur ke %d."
 
-#: src/repos.cc:2214
+#: src/repos.cc:2213
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Nama repositori '%s' telah diatur ke '%s'."
 
-#: src/repos.cc:2225
+#: src/repos.cc:2224
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Tidak ada yang perlu diubah untuk repositori '%s'."
 
-#: src/repos.cc:2232
+#: src/repos.cc:2231
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Meninggalkan repositori %s yang tidak jadi diubah."
 
-#: src/repos.cc:2264
+#: src/repos.cc:2263
 msgid "Error reading services:"
 msgstr "Galat saat membaca layanan:"
 
-#: src/repos.cc:2353
+#: src/repos.cc:2352
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "Layanan '%s' tidak ditemukan berdasarkan alias, nomor atau URInya."
 
-#: src/repos.cc:2356
+#: src/repos.cc:2355
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr ""
 "Gunakan '%s' untuk mendapatkan semua daftar layanan yang didefinisikan."
 
-#: src/repos.cc:2598
+#: src/repos.cc:2597
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 "Tidak ada layanan yang didefinisikan. Gunakan perintah '%s' untuk menambah "
 "satu atau lebih layanan."
 
-#: src/repos.cc:2681
+#: src/repos.cc:2680
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
 "Layanan dengan alias '%s' sudah tersedia. Silahkan gunakan alias lainnya."
 
-#: src/repos.cc:2688
+#: src/repos.cc:2687
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "Terjadi galat saat menambah layanan '%s'."
 
-#: src/repos.cc:2694
+#: src/repos.cc:2693
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "Layanan '%s' telah sukses ditambahkan."
 
-#: src/repos.cc:2734
+#: src/repos.cc:2733
 #, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "Menghapus layanan '%s':"
 
-#: src/repos.cc:2737
+#: src/repos.cc:2736
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "Layanan '%s' telah dihapus."
 
-#: src/repos.cc:2751
+#: src/repos.cc:2750
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "Menyegarkan layanan '%s'."
 
-#: src/repos.cc:2766 src/repos.cc:2776
+#: src/repos.cc:2765 src/repos.cc:2775
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Terkendala saat mengambil berkas indeks repositori untuk layanan '%s':"
 
-#: src/repos.cc:2768 src/repos.cc:2876 src/repos.cc:2934
+#: src/repos.cc:2767 src/repos.cc:2875 src/repos.cc:2933
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Melewati layanan '%s' dikarenakan galat tersebut di atas."
 
-#: src/repos.cc:2778
+#: src/repos.cc:2777
 msgid "Check if the URI is valid and accessible."
 msgstr "Periksa jika URI valid dan bisa diakses."
 
-#: src/repos.cc:2835
+#: src/repos.cc:2834
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "Melewati layanan '%s' yang tidak aktif"
 
-#: src/repos.cc:2887
+#: src/repos.cc:2886
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
 "Gunakan perintah '%s' atau '%s' untuk menambahkan atau mengaktifkan layanan."
 
-#: src/repos.cc:2890
+#: src/repos.cc:2889
 msgid "Specified services are not enabled or defined."
 msgstr "Layanan yang ditentukan tidak aktif atau tidak terdefinisikan."
 
-#: src/repos.cc:2892
+#: src/repos.cc:2891
 msgid "There are no enabled services defined."
 msgstr "Tidak ada layanan aktif yang terdefinisikan."
 
-#: src/repos.cc:2896
+#: src/repos.cc:2895
 msgid "Could not refresh the services because of errors."
 msgstr "Tidak dapat menyegarkan layanan dikarenakan ada galat."
 
-#: src/repos.cc:2902
+#: src/repos.cc:2901
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Beberapa layanan tidak dapat disegarkan ulang dikarenakan ada galat."
 
-#: src/repos.cc:2907
+#: src/repos.cc:2906
 msgid "Specified services have been refreshed."
 msgstr "Beberapa layanan telah disegarkan ulang."
 
-#: src/repos.cc:2909
+#: src/repos.cc:2908
 msgid "All services have been refreshed."
 msgstr "Semua layanan telah disegarkan ulang."
 
-#: src/repos.cc:3056
+#: src/repos.cc:3055
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "Layanan '%s' telah sukses diaktifkan."
 
-#: src/repos.cc:3058
+#: src/repos.cc:3057
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "Layanan '%s' telah sukses dinonaktifkan."
 
-#: src/repos.cc:3064
+#: src/repos.cc:3063
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "Autorefresh telah diaktifkan untuk layanan '%s'."
 
-#: src/repos.cc:3066
+#: src/repos.cc:3065
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "Autorefresh telah dinonaktifkan untuk layanan '%s'."
 
-#: src/repos.cc:3071
+#: src/repos.cc:3070
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "Nama layanan '%s' sudah diatur ke '%s'."
 
-#: src/repos.cc:3076
+#: src/repos.cc:3075
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
 msgstr[0] "Repositori '%s' telah ditambahkan ke layanan repositori aktif '%s'"
 
-#: src/repos.cc:3083
+#: src/repos.cc:3082
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
@@ -5626,7 +5647,7 @@ msgid_plural ""
 msgstr[0] ""
 "Repositori '%s' telah ditambahkan ke layanan repositori tidak aktif '%s'"
 
-#: src/repos.cc:3090
+#: src/repos.cc:3089
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -5634,7 +5655,7 @@ msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] "Repositori '%s' telah dihapus dari layanan repositori aktif '%s'"
 
-#: src/repos.cc:3097
+#: src/repos.cc:3096
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -5644,50 +5665,50 @@ msgid_plural ""
 msgstr[0] ""
 "Repositori '%s' telah dihapus dari layanan repositori tidak aktif '%s'"
 
-#: src/repos.cc:3106
+#: src/repos.cc:3105
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "Tidak ada perubahan untuk layanan '%s'."
 
-#: src/repos.cc:3112
+#: src/repos.cc:3111
 msgid "Error while modifying the service:"
 msgstr "Terjadi kesalahan saat memodifikasi layanan:"
 
-#: src/repos.cc:3113
+#: src/repos.cc:3112
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "Meninggalkan layanan %s tanpa perubahan."
 
-#: src/repos.cc:3218
+#: src/repos.cc:3217
 msgid "Loading repository data..."
 msgstr "Memuat data repositori..."
 
-#: src/repos.cc:3238
+#: src/repos.cc:3237
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Mengambil data repositori '%s'..."
 
-#: src/repos.cc:3244
+#: src/repos.cc:3243
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Repositori '%s' tidak dapat tercache. Membuat cache..."
 
-#: src/repos.cc:3250 src/repos.cc:3284
+#: src/repos.cc:3249 src/repos.cc:3283
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Kendala memuat data dari '%s'"
 
-#: src/repos.cc:3254
+#: src/repos.cc:3253
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "Repositori '%s' tidak dapat disegarkan. Akan menggunakan cache lama."
 
-#: src/repos.cc:3258 src/repos.cc:3287
+#: src/repos.cc:3257 src/repos.cc:3286
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Hasil dari '%s' tidak dapat dimuat dikarenakan ada galat."
 
-#: src/repos.cc:3275
+#: src/repos.cc:3274
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -5697,16 +5718,16 @@ msgstr ""
 "cerimin atau server lain."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3286
+#: src/repos.cc:3285
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Coba '%s', atau even '%s' sebelum melakukan ini."
 
-#: src/repos.cc:3297
+#: src/repos.cc:3296
 msgid "Reading installed packages..."
 msgstr "Membaca paket-paket yang terpasang..."
 
-#: src/repos.cc:3306
+#: src/repos.cc:3305
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Kendala terjadi saat membaca paket-paket yang terpasang:"
 
@@ -6470,144 +6491,144 @@ msgstr ""
 "paket di mana hal tersebut membawa kerusakan dependensi-dependensi paket. "
 "Disarankan untuk menjalankan '%s' setelah operasi selesai."
 
-#: src/utils/misc.cc:113
+#: src/utils/misc.cc:91
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "paket"
 
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:93
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "pola"
 
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:95
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produk"
 
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:97
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "patch"
 
-#: src/utils/misc.cc:121
+#: src/utils/misc.cc:99
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "srcpackages"
 
-#: src/utils/misc.cc:123
+#: src/utils/misc.cc:101
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "aplikasi"
 
 #. default
-#: src/utils/misc.cc:125
+#: src/utils/misc.cc:103
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "bisa diselesaikan"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:134
+#: src/utils/misc.cc:112
 msgid "unwanted"
 msgstr "tidak diinginkan"
 
 #. translator: patch status
-#: src/utils/misc.cc:135
+#: src/utils/misc.cc:113
 msgid "optional"
 msgstr "opsional"
 
 #. translator: patch status
-#: src/utils/misc.cc:136
+#: src/utils/misc.cc:114
 msgid "needed"
 msgstr "diperlukan"
 
 #. translator: patch status
-#: src/utils/misc.cc:137
+#: src/utils/misc.cc:115
 msgid "applied"
 msgstr "diterapkan"
 
 #. translator: patch status
-#: src/utils/misc.cc:138
+#: src/utils/misc.cc:116
 msgid "not needed"
 msgstr "tidak diperlukan"
 
 #. translator: patch status
-#: src/utils/misc.cc:139
+#: src/utils/misc.cc:117
 msgid "undetermined"
 msgstr "tidak dapat ditentukan"
 
 #. << _("Repository")
-#: src/utils/misc.cc:289
+#: src/utils/misc.cc:267
 msgid "Issue"
 msgstr "Isu"
 
-#: src/utils/misc.cc:290
+#: src/utils/misc.cc:268
 msgid "No."
 msgstr "Tidak."
 
-#: src/utils/misc.cc:291
+#: src/utils/misc.cc:269
 msgid "Patch"
 msgstr "Patch"
 
-#: src/utils/misc.cc:367
+#: src/utils/misc.cc:345
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Alur lokal yang ditentukan tidak ada atau tidak dapat diakses."
 
-#: src/utils/misc.cc:379
+#: src/utils/misc.cc:357
 msgid "Given URI is invalid"
 msgstr "URL yang diberikan tak valid"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:469
+#: src/utils/misc.cc:447
 msgid "Unable to guess a value for <platform>."
 msgstr "Tidak dapat menerka sebuah nilai untuk <platform>."
 
-#: src/utils/misc.cc:470
+#: src/utils/misc.cc:448
 msgid "Please use obs://<project>/<platform>"
 msgstr "Silakan gunakan obs://<project>/<platform>"
 
-#: src/utils/misc.cc:471 src/utils/misc.cc:508
+#: src/utils/misc.cc:449 src/utils/misc.cc:486
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Contoh: %s"
 
-#: src/utils/misc.cc:507
+#: src/utils/misc.cc:485
 msgid "Invalid OBS URI."
 msgstr "OBS URI tak valid."
 
-#: src/utils/misc.cc:507
+#: src/utils/misc.cc:485
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Form perbaikan adalah obs://<project>/[platform]"
 
-#: src/utils/misc.cc:557
+#: src/utils/misc.cc:535
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Kendala saat menyalin berkas RPM yang ditentukan ke direktori cache."
 
-#: src/utils/misc.cc:558
+#: src/utils/misc.cc:536
 msgid "Perhaps you are running out of disk space."
 msgstr "Barangkali kamu telah kehabisan luang disk."
 
-#: src/utils/misc.cc:566
+#: src/utils/misc.cc:544
 msgid "Problem retrieving the specified RPM file"
 msgstr "Masalah pengambilan file RPM tertentu"
 
-#: src/utils/misc.cc:567
+#: src/utils/misc.cc:545
 msgid "Please check whether the file is accessible."
 msgstr "Silakan periksa apakah file dapat diakses."
 
-#: src/utils/misc.cc:706
+#: src/utils/misc.cc:684
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Unduhan mode '%s' tak diketahui."
 
-#: src/utils/misc.cc:707
+#: src/utils/misc.cc:685
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Mode-mode unduhan yang tersedia: %s"
 
-#: src/utils/misc.cc:721
+#: src/utils/misc.cc:699
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Opsi '%s' menimpa '%s'."

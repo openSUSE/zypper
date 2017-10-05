@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lcn memory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 11:00+0200\n"
+"POT-Creation-Date: 2017-10-05 18:14+0200\n"
 "PO-Revision-Date: 2009-09-17 22:15+0000\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -744,203 +744,211 @@ msgstr ""
 msgid "Did you mean %1%?"
 msgstr ""
 
-#: src/SolverRequester.cc:479
+#: src/SolverRequester.cc:478
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
 
+#. translator: '%1%' is a products name
+#. '%2%' is a command to call (like 'zypper dup')
+#. Both may contain whitespace and should be enclosed by quotes!
+#: src/Summary.cc:383
+#, boost-format
+msgid "Product '%1%' requires to be updated by calling '%2%'!"
+msgstr ""
+
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:425 src/Summary.cc:497
+#: src/Summary.cc:458 src/Summary.cc:534
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:516
+#: src/Summary.cc:552
 #, fuzzy, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:521
+#: src/Summary.cc:557
 #, fuzzy, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:526
+#: src/Summary.cc:562
 #, fuzzy, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:531
+#: src/Summary.cc:567
 #, fuzzy, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:536
+#: src/Summary.cc:572
 #, fuzzy, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:541
+#: src/Summary.cc:577
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:563
+#: src/Summary.cc:599
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:568
+#: src/Summary.cc:604
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:573
+#: src/Summary.cc:609
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:578
+#: src/Summary.cc:614
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:583
+#: src/Summary.cc:619
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:602
+#: src/Summary.cc:639
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:607
+#: src/Summary.cc:644
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:612
+#: src/Summary.cc:649
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:617
+#: src/Summary.cc:655
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:622
+#: src/Summary.cc:662
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:641
+#: src/Summary.cc:681
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:646
+#: src/Summary.cc:686
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:651
+#: src/Summary.cc:691
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:656
+#: src/Summary.cc:696
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:661
+#: src/Summary.cc:701
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:680
+#: src/Summary.cc:720
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:685
+#: src/Summary.cc:725
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:690
+#: src/Summary.cc:730
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:695
+#: src/Summary.cc:735
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:707
+#: src/Summary.cc:747
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:841
+#: src/Summary.cc:881
 #, fuzzy, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -948,7 +956,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:846
+#: src/Summary.cc:886
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -956,7 +964,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:851
+#: src/Summary.cc:891
 #, fuzzy, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -964,7 +972,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:856
+#: src/Summary.cc:896
 #, fuzzy, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -972,7 +980,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:861
+#: src/Summary.cc:901
 #, fuzzy, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -980,7 +988,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:866
+#: src/Summary.cc:906
 #, fuzzy, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -988,7 +996,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:910
+#: src/Summary.cc:950
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -999,7 +1007,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:922
+#: src/Summary.cc:962
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -1010,7 +1018,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:932
+#: src/Summary.cc:972
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1021,7 +1029,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:945
+#: src/Summary.cc:985
 #, fuzzy, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -1029,7 +1037,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:949
+#: src/Summary.cc:989
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -1037,7 +1045,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:953
+#: src/Summary.cc:993
 #, fuzzy, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -1045,7 +1053,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:957
+#: src/Summary.cc:997
 #, fuzzy, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1053,7 +1061,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:987
+#: src/Summary.cc:1027
 #, fuzzy, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1061,7 +1069,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:992
+#: src/Summary.cc:1032
 #, fuzzy, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -1069,7 +1077,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:997
+#: src/Summary.cc:1037
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1077,7 +1085,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1002
+#: src/Summary.cc:1042
 #, fuzzy, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1085,7 +1093,7 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1007
+#: src/Summary.cc:1047
 #, fuzzy, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1093,77 +1101,77 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1029
+#: src/Summary.cc:1069
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1034
+#: src/Summary.cc:1074
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1039
+#: src/Summary.cc:1079
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1044
+#: src/Summary.cc:1084
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1049
+#: src/Summary.cc:1089
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1071
+#: src/Summary.cc:1111
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1076
+#: src/Summary.cc:1116
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1081
+#: src/Summary.cc:1121
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1086
+#: src/Summary.cc:1126
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1091
+#: src/Summary.cc:1131
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1111
+#: src/Summary.cc:1151
 #, fuzzy, c-format, boost-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
@@ -1171,14 +1179,14 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1129
+#: src/Summary.cc:1169
 #, fuzzy, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1147
+#: src/Summary.cc:1187
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1187,28 +1195,28 @@ msgid_plural ""
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1167
+#: src/Summary.cc:1207
 #, fuzzy, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1172
+#: src/Summary.cc:1212
 #, fuzzy, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1177
+#: src/Summary.cc:1217
 #, fuzzy, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1207
+#: src/Summary.cc:1247
 #, fuzzy, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1218,57 +1226,57 @@ msgstr[1] "Ces pakets divèt esse astalés:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1220
+#: src/Summary.cc:1260
 #, fuzzy
 msgid "Available"
 msgstr "Metaedje a djoû d' disponibes"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1226 src/info.cc:345 src/info.cc:436 src/info.cc:567
+#: src/Summary.cc:1266 src/info.cc:345 src/info.cc:436 src/info.cc:567
 msgid "Installed"
 msgstr "Astalé"
 
-#: src/Summary.cc:1231
+#: src/Summary.cc:1271
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr ""
 
-#: src/Summary.cc:1241
+#: src/Summary.cc:1281
 #, fuzzy, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
-#: src/Summary.cc:1259
+#: src/Summary.cc:1299
 #, fuzzy, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr "Tot. grandeu d' l' aberwetaedje: "
 
-#: src/Summary.cc:1262
+#: src/Summary.cc:1302
 #, fuzzy
 msgid "Download only."
 msgstr "A&berweter"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1268
+#: src/Summary.cc:1308
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr ""
 
-#: src/Summary.cc:1270
+#: src/Summary.cc:1310
 msgid "No additional space will be used or freed after the operation."
 msgstr ""
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1277
+#: src/Summary.cc:1317
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1300
+#: src/Summary.cc:1340
 #, fuzzy
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
@@ -1276,28 +1284,28 @@ msgstr[0] "Groupes di pakets"
 msgstr[1] "Groupes di pakets"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1311
+#: src/Summary.cc:1351
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1314
+#: src/Summary.cc:1354
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1325
+#: src/Summary.cc:1365
 msgid "new"
 msgid_plural "new"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1328
+#: src/Summary.cc:1368
 #, fuzzy
 msgid "new package to install"
 msgid_plural "new packages to install"
@@ -1305,7 +1313,7 @@ msgstr[0] "Rén trové"
 msgstr[1] "Rén trové"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1339
+#: src/Summary.cc:1379
 #, fuzzy
 msgid "to reinstall"
 msgid_plural "to reinstall"
@@ -1313,7 +1321,7 @@ msgstr[0] "astaler"
 msgstr[1] "astaler"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1342
+#: src/Summary.cc:1382
 #, fuzzy
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
@@ -1321,7 +1329,7 @@ msgstr[0] "Rén trové"
 msgstr[1] "Rén trové"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1353
+#: src/Summary.cc:1393
 #, fuzzy
 msgid "to remove"
 msgid_plural "to remove"
@@ -1329,21 +1337,21 @@ msgstr[0] "Oister"
 msgstr[1] "Oister"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1356
+#: src/Summary.cc:1396
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1367
+#: src/Summary.cc:1407
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1370
+#: src/Summary.cc:1410
 #, fuzzy
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
@@ -1351,21 +1359,21 @@ msgstr[0] "Ces pakets divèt esse astalés:"
 msgstr[1] "Ces pakets divèt esse astalés:"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1381
+#: src/Summary.cc:1421
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1384
+#: src/Summary.cc:1424
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1395
+#: src/Summary.cc:1435
 #, fuzzy
 msgid "source package"
 msgid_plural "source packages"
@@ -1373,7 +1381,7 @@ msgstr[0] "L' astalaedje des pakets dmandés n' a nén stî."
 msgstr[1] "L' astalaedje des pakets dmandés n' a nén stî."
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1398
+#: src/Summary.cc:1438
 #, fuzzy
 msgid "source package to install"
 msgid_plural "source packages to install"
@@ -1381,16 +1389,28 @@ msgstr[0] "Rén trové"
 msgstr[1] "Rén trové"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1464
+#: src/Summary.cc:1504
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
 
-#: src/Summary.cc:1467
+#: src/Summary.cc:1507
 #, fuzzy
 msgid "System reboot required."
 msgstr "On renondaedje est dmandé"
+
+#. translator: Printed after the summary but before the prompt to start the installation.
+#. Followed by some explanatory text telling it might be a good idea NOT to continue:
+#.
+#. # zypper up
+#. ...
+#. Consider to cancel:
+#. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
+#. Continue? [y/n/...? shows all options] (y):
+#: src/Summary.cc:1524
+msgid "Consider to cancel:"
+msgstr ""
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -3397,7 +3417,7 @@ msgstr ""
 msgid "You already are running zypper's shell."
 msgstr ""
 
-#: src/Zypper.cc:5483 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2535
+#: src/Zypper.cc:5483 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2534
 msgid "Alias"
 msgstr ""
 
@@ -3405,9 +3425,9 @@ msgstr ""
 #. translators: Table column header
 #. translators: name (general header)
 #: src/Zypper.cc:5483 src/info.cc:69 src/info.cc:459 src/info.cc:703
-#: src/locks.cc:107 src/repos.cc:1070 src/repos.cc:1209 src/repos.cc:2536
+#: src/locks.cc:107 src/repos.cc:1070 src/repos.cc:1209 src/repos.cc:2535
 #: src/search.cc:44 src/search.cc:209 src/search.cc:357 src/search.cc:504
-#: src/search.cc:568 src/update.cc:798 src/utils/misc.cc:250
+#: src/search.cc:568 src/update.cc:798 src/utils/misc.cc:228
 msgid "Name"
 msgstr "No"
 
@@ -3422,29 +3442,29 @@ msgid "Resolvable Type"
 msgstr "Coridjaedjes d' amidrés"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:28
+#: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
 msgstr ""
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:30
+#: src/callbacks/media.cc:29
 msgid "Try to retrieve the file again."
 msgstr ""
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:32
+#: src/callbacks/media.cc:31
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr ""
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:34
+#: src/callbacks/media.cc:33
 msgid "Change current base URI and try retrieving the file again."
 msgstr ""
 
 #. translators: this is a prompt label, will appear as "New URI: "
-#: src/callbacks/media.cc:49
+#: src/callbacks/media.cc:48
 msgid "New URI"
 msgstr ""
 
@@ -3454,49 +3474,49 @@ msgstr ""
 #. The 'u' reply means 'Change URI'.
 #. https protocol-specific options:
 #. 's' stands for Disable SSL certificate authority check
-#: src/callbacks/media.cc:77
+#: src/callbacks/media.cc:76
 msgid "a/r/i/u/s"
 msgstr ""
 
-#: src/callbacks/media.cc:79
+#: src/callbacks/media.cc:78
 msgid "Disable SSL certificate authority check and continue."
 msgstr ""
 
 #. translators: this is a prompt text
-#: src/callbacks/media.cc:84 src/callbacks/media.cc:179
-#: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
+#: src/callbacks/media.cc:83 src/callbacks/media.cc:178
+#: src/callbacks/media.cc:260 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
 msgstr ""
 
-#: src/callbacks/media.cc:92
+#: src/callbacks/media.cc:91
 msgid "SSL certificate authority check disabled."
 msgstr ""
 
-#: src/callbacks/media.cc:109
+#: src/callbacks/media.cc:108
 msgid "No devices detected, cannot eject."
 msgstr ""
 
-#: src/callbacks/media.cc:110
+#: src/callbacks/media.cc:109
 msgid "Try to eject the device manually."
 msgstr ""
 
-#: src/callbacks/media.cc:121
+#: src/callbacks/media.cc:120
 msgid "Detected devices:"
 msgstr ""
 
-#: src/callbacks/media.cc:136
+#: src/callbacks/media.cc:135
 msgid "Cancel"
 msgstr "Rinoncî"
 
-#: src/callbacks/media.cc:139
+#: src/callbacks/media.cc:138
 msgid "Select device to eject."
 msgstr ""
 
-#: src/callbacks/media.cc:154
+#: src/callbacks/media.cc:153
 msgid "Insert the CD/DVD and press ENTER to continue."
 msgstr ""
 
-#: src/callbacks/media.cc:157
+#: src/callbacks/media.cc:156
 #, fuzzy
 msgid "Retrying..."
 msgstr "Dj' enonde..."
@@ -3507,11 +3527,11 @@ msgstr "Dj' enonde..."
 #. The 'u' reply means 'Change URI'.
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
-#: src/callbacks/media.cc:172
+#: src/callbacks/media.cc:171
 msgid "a/r/i/u/e"
 msgstr ""
 
-#: src/callbacks/media.cc:174
+#: src/callbacks/media.cc:173
 msgid "Eject medium."
 msgstr ""
 
@@ -3519,7 +3539,7 @@ msgstr ""
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: src/callbacks/media.cc:220
+#: src/callbacks/media.cc:219
 #, c-format, boost-format
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
@@ -3529,24 +3549,24 @@ msgstr ""
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
-#: src/callbacks/media.cc:255
+#: src/callbacks/media.cc:254
 msgid "a/r/i/u"
 msgstr ""
 
-#: src/callbacks/media.cc:299
+#: src/callbacks/media.cc:298
 #, c-format, boost-format
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
 
-#: src/callbacks/media.cc:321 src/callbacks/media.cc:328
+#: src/callbacks/media.cc:320 src/callbacks/media.cc:327
 #, fuzzy
 msgid "User Name"
 msgstr "No d' &uzeu"
 
 #. password
-#: src/callbacks/media.cc:336
+#: src/callbacks/media.cc:335
 msgid "Password"
 msgstr "Sicret"
 
@@ -3585,7 +3605,7 @@ msgstr "Aroke e scrijhant l' lisse des pakets a pårti d' %1"
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/info.cc:67 src/locks.cc:110 src/search.cc:52 src/search.cc:359
-#: src/search.cc:503 src/search.cc:564 src/update.cc:795 src/utils/misc.cc:249
+#: src/search.cc:503 src/search.cc:564 src/update.cc:795 src/utils/misc.cc:227
 msgid "Repository"
 msgstr "Depot"
 
@@ -3612,7 +3632,7 @@ msgstr "No d' vindeu"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:255 src/utils/misc.cc:296
+#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:233 src/utils/misc.cc:274
 msgid "Summary"
 msgstr "Racourti"
 
@@ -3651,8 +3671,8 @@ msgid "Installed Size"
 msgstr "Astalé"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:347 src/info.cc:395 src/info.cc:570 src/utils/misc.cc:254
-#: src/utils/misc.cc:295
+#: src/info.cc:347 src/info.cc:395 src/info.cc:570 src/utils/misc.cc:232
+#: src/utils/misc.cc:273
 msgid "Status"
 msgstr "Estat"
 
@@ -3681,13 +3701,13 @@ msgstr "L' astalaedje des pakets dmandés n' a nén stî."
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:397 src/update.cc:350 src/utils/misc.cc:251
-#: src/utils/misc.cc:292
+#: src/info.cc:397 src/update.cc:350 src/utils/misc.cc:229
+#: src/utils/misc.cc:270
 msgid "Category"
 msgstr "Categoreye"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:399 src/utils/misc.cc:252 src/utils/misc.cc:293
+#: src/info.cc:399 src/utils/misc.cc:230 src/utils/misc.cc:271
 #, fuzzy
 msgid "Severity"
 msgstr "Såvrité"
@@ -3699,7 +3719,7 @@ msgid "Created On"
 msgstr "Ahiver l' imådje ISO"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:403 src/utils/misc.cc:253 src/utils/misc.cc:294
+#: src/info.cc:403 src/utils/misc.cc:231 src/utils/misc.cc:272
 msgid "Interactive"
 msgstr ""
 
@@ -3734,7 +3754,7 @@ msgstr ""
 #. translators: Table column header
 #. translators: type (general header)
 #: src/info.cc:460 src/locks.cc:110 src/repos.cc:1108 src/repos.cc:1220
-#: src/repos.cc:2545 src/search.cc:46 src/search.cc:212
+#: src/repos.cc:2544 src/search.cc:46 src/search.cc:212
 msgid "Type"
 msgstr "Sôre"
 
@@ -4223,7 +4243,7 @@ msgstr "Aroke e scrijhant l' fitchî '%1'"
 msgid "Problem retrieving files from '%s'."
 msgstr "Aroke e scrijhant l' lisse des pakets a pårti d' %1"
 
-#: src/repos.cc:358 src/repos.cc:3307 src/solve-commit.cc:806
+#: src/repos.cc:358 src/repos.cc:3306 src/solve-commit.cc:806
 #: src/solve-commit.cc:837 src/solve-commit.cc:861
 #, fuzzy
 msgid "Please see the above error message for a hint."
@@ -4372,13 +4392,13 @@ msgstr "Astalaedje fini"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1077 src/repos.cc:1215 src/repos.cc:1764 src/repos.cc:2537
+#: src/repos.cc:1077 src/repos.cc:1215 src/repos.cc:1763 src/repos.cc:2536
 msgid "Enabled"
 msgstr "Mete en alaedje"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1081 src/repos.cc:1216 src/repos.cc:1766 src/repos.cc:2538
+#: src/repos.cc:1081 src/repos.cc:1216 src/repos.cc:1765 src/repos.cc:2537
 #, fuzzy
 msgid "GPG Check"
 msgstr "Verifiaedje DNS"
@@ -4386,7 +4406,7 @@ msgstr "Verifiaedje DNS"
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:1089 src/repos.cc:2540
+#: src/repos.cc:1089 src/repos.cc:2539
 #, fuzzy
 msgid "Refresh"
 msgstr "&Ritcherdjî"
@@ -4394,12 +4414,12 @@ msgstr "&Ritcherdjî"
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:1099 src/repos.cc:1217 src/repos.cc:1770 src/repos.cc:2544
+#: src/repos.cc:1099 src/repos.cc:1217 src/repos.cc:1769 src/repos.cc:2543
 msgid "Priority"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1115 src/repos.cc:1210 src/repos.cc:1762 src/repos.cc:2547
+#: src/repos.cc:1115 src/repos.cc:1210 src/repos.cc:1761 src/repos.cc:2546
 msgid "URI"
 msgstr ""
 
@@ -4413,7 +4433,7 @@ msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1218 src/repos.cc:1768
+#: src/repos.cc:1218 src/repos.cc:1767
 #, fuzzy
 msgid "Autorefresh"
 msgstr "&Ritcherdjî"
@@ -4522,378 +4542,378 @@ msgstr ""
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:1582
+#: src/repos.cc:1581
 #, fuzzy, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:1588
+#: src/repos.cc:1587
 #, fuzzy, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1595
+#: src/repos.cc:1594
 #, fuzzy, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Aroke e scrijhant l' lisse des pakets a pårti d' %1"
 
-#: src/repos.cc:1603
+#: src/repos.cc:1602
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr ""
 
-#: src/repos.cc:1614
+#: src/repos.cc:1613
 #, fuzzy
 msgid "Cleaning installed packages cache."
 msgstr "Dji verifeye des pakets RPM astalés..."
 
-#: src/repos.cc:1623
+#: src/repos.cc:1622
 msgid "Cannot clean installed packages cache because of an error."
 msgstr ""
 
-#: src/repos.cc:1641
+#: src/repos.cc:1640
 msgid "Could not clean the repositories because of errors."
 msgstr ""
 
-#: src/repos.cc:1647
+#: src/repos.cc:1646
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr ""
 
-#: src/repos.cc:1652
+#: src/repos.cc:1651
 #, fuzzy
 msgid "Specified repositories have been cleaned up."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:1654
+#: src/repos.cc:1653
 #, fuzzy
 msgid "All repositories have been cleaned up."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:1681
+#: src/repos.cc:1680
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 
-#: src/repos.cc:1702
+#: src/repos.cc:1701
 #, fuzzy, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:1710 src/repos.cc:1994
+#: src/repos.cc:1709 src/repos.cc:1993
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
 
-#: src/repos.cc:1719
+#: src/repos.cc:1718
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
 
-#: src/repos.cc:1725
+#: src/repos.cc:1724
 msgid "Can't find a valid repository at given location:"
 msgstr ""
 
-#: src/repos.cc:1733
+#: src/repos.cc:1732
 #, fuzzy
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:1734
+#: src/repos.cc:1733
 msgid "Please check whether the specified URI is accessible."
 msgstr ""
 
-#: src/repos.cc:1741
+#: src/repos.cc:1740
 #, fuzzy
 msgid "Unknown problem when adding repository:"
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1751
+#: src/repos.cc:1750
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
 
-#: src/repos.cc:1756
+#: src/repos.cc:1755
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:1782
+#: src/repos.cc:1781
 #, fuzzy, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Aroke e scrijhant l' lisse des pakets a pårti d' %1"
 
-#: src/repos.cc:1788
+#: src/repos.cc:1787
 #, fuzzy, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Aroke e scrijhant l' lisse des pakets a pårti d' %1"
 
-#: src/repos.cc:1789
+#: src/repos.cc:1788
 msgid "Please check if your installation media is valid and readable."
 msgstr ""
 
-#: src/repos.cc:1796
+#: src/repos.cc:1795
 #, fuzzy, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "Aroke e scrijhant l' lisse des pakets a pårti d' %1"
 
-#: src/repos.cc:1876
+#: src/repos.cc:1875
 #, fuzzy
 msgid "Problem accessing the file at the specified URI"
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:1877
+#: src/repos.cc:1876
 msgid "Please check if the URI is valid and accessible."
 msgstr ""
 
-#: src/repos.cc:1884
+#: src/repos.cc:1883
 #, fuzzy
 msgid "Problem parsing the file at the specified URI"
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1886
+#: src/repos.cc:1885
 msgid "Is it a .repo file?"
 msgstr ""
 
-#: src/repos.cc:1893
+#: src/repos.cc:1892
 #, fuzzy
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:1905
+#: src/repos.cc:1904
 #, fuzzy
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Li siervice n' est nén enondé"
 
-#: src/repos.cc:1911
+#: src/repos.cc:1910
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Li siervice n' est nén enondé"
 
-#: src/repos.cc:1957
+#: src/repos.cc:1956
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:1979
+#: src/repos.cc:1978
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
 
-#: src/repos.cc:1990
+#: src/repos.cc:1989
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Li siervice n' est nén enondé"
 
-#: src/repos.cc:1999 src/repos.cc:2231
+#: src/repos.cc:1998 src/repos.cc:2230
 #, fuzzy
 msgid "Error while modifying the repository:"
 msgstr "Ene aroke s' a passêye tins ki dj' lijheve li djournå."
 
-#: src/repos.cc:2000
+#: src/repos.cc:1999
 #, fuzzy, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2135
+#: src/repos.cc:2134
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:2173
+#: src/repos.cc:2172
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:2175
+#: src/repos.cc:2174
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:2182
+#: src/repos.cc:2181
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:2184
+#: src/repos.cc:2183
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:2191
+#: src/repos.cc:2190
 #, fuzzy, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2193
+#: src/repos.cc:2192
 #, fuzzy, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2200
+#: src/repos.cc:2199
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2202
+#: src/repos.cc:2201
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2208
+#: src/repos.cc:2207
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:2214
+#: src/repos.cc:2213
 #, fuzzy, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:2225
+#: src/repos.cc:2224
 #, fuzzy, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2232
+#: src/repos.cc:2231
 #, fuzzy, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2264
+#: src/repos.cc:2263
 #, fuzzy
 msgid "Error reading services:"
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2353
+#: src/repos.cc:2352
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "Li siervice n' est nén enondé"
 
-#: src/repos.cc:2356
+#: src/repos.cc:2355
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr ""
 
-#: src/repos.cc:2598
+#: src/repos.cc:2597
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 
-#: src/repos.cc:2681
+#: src/repos.cc:2680
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
 
-#: src/repos.cc:2688
+#: src/repos.cc:2687
 #, fuzzy, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "Dji verifeye des pakets RPM astalés..."
 
-#: src/repos.cc:2694
+#: src/repos.cc:2693
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:2734
+#: src/repos.cc:2733
 #, fuzzy, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "Dji oistêye li programe..."
 
-#: src/repos.cc:2737
+#: src/repos.cc:2736
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:2751
+#: src/repos.cc:2750
 #, fuzzy, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "&Ritcherdjî"
 
-#: src/repos.cc:2766 src/repos.cc:2776
+#: src/repos.cc:2765 src/repos.cc:2775
 #, fuzzy, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2768 src/repos.cc:2876 src/repos.cc:2934
+#: src/repos.cc:2767 src/repos.cc:2875 src/repos.cc:2933
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr ""
 
-#: src/repos.cc:2778
+#: src/repos.cc:2777
 msgid "Check if the URI is valid and accessible."
 msgstr ""
 
-#: src/repos.cc:2835
+#: src/repos.cc:2834
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr ""
 
-#: src/repos.cc:2887
+#: src/repos.cc:2886
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
 
-#: src/repos.cc:2890
+#: src/repos.cc:2889
 #, fuzzy
 msgid "Specified services are not enabled or defined."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2892
+#: src/repos.cc:2891
 msgid "There are no enabled services defined."
 msgstr ""
 
-#: src/repos.cc:2896
+#: src/repos.cc:2895
 msgid "Could not refresh the services because of errors."
 msgstr ""
 
-#: src/repos.cc:2902
+#: src/repos.cc:2901
 msgid "Some of the services have not been refreshed because of an error."
 msgstr ""
 
-#: src/repos.cc:2907
+#: src/repos.cc:2906
 #, fuzzy
 msgid "Specified services have been refreshed."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:2909
+#: src/repos.cc:2908
 #, fuzzy
 msgid "All services have been refreshed."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:3056
+#: src/repos.cc:3055
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:3058
+#: src/repos.cc:3057
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:3064
+#: src/repos.cc:3063
 #, fuzzy, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:3066
+#: src/repos.cc:3065
 #, fuzzy, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:3071
+#: src/repos.cc:3070
 #, fuzzy, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "L' uzeu a bén stî radjouté a zmd"
 
-#: src/repos.cc:3076
+#: src/repos.cc:3075
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
@@ -4901,7 +4921,7 @@ msgid_plural ""
 msgstr[0] "Aroke e scrijhant l' fitchî '%1'"
 msgstr[1] "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:3083
+#: src/repos.cc:3082
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
@@ -4909,7 +4929,7 @@ msgid_plural ""
 msgstr[0] "Aroke e scrijhant l' fitchî '%1'"
 msgstr[1] "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:3090
+#: src/repos.cc:3089
 #, fuzzy, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -4918,7 +4938,7 @@ msgid_plural ""
 msgstr[0] "Aroke e scrijhant l' fitchî '%1'"
 msgstr[1] "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:3097
+#: src/repos.cc:3096
 #, fuzzy, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -4928,52 +4948,52 @@ msgid_plural ""
 msgstr[0] "Aroke e scrijhant l' fitchî '%1'"
 msgstr[1] "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:3106
+#: src/repos.cc:3105
 #, fuzzy, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:3112
+#: src/repos.cc:3111
 #, fuzzy
 msgid "Error while modifying the service:"
 msgstr "Ene aroke s' a passêye tins ki dj' lijheve li djournå."
 
-#: src/repos.cc:3113
+#: src/repos.cc:3112
 #, fuzzy, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:3218
+#: src/repos.cc:3217
 #, fuzzy
 msgid "Loading repository data..."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:3238
+#: src/repos.cc:3237
 #, fuzzy, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Aroke e scrijhant l' fitchî '%1'"
 
-#: src/repos.cc:3244
+#: src/repos.cc:3243
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr ""
 
-#: src/repos.cc:3250 src/repos.cc:3284
+#: src/repos.cc:3249 src/repos.cc:3283
 #, fuzzy, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Aroke e scrijhant l' lisse des pakets a pårti d' %1"
 
-#: src/repos.cc:3254
+#: src/repos.cc:3253
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "Li siervice n' est nén enondé"
 
-#: src/repos.cc:3258 src/repos.cc:3287
+#: src/repos.cc:3257 src/repos.cc:3286
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr ""
 
-#: src/repos.cc:3275
+#: src/repos.cc:3274
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -4981,17 +5001,17 @@ msgid ""
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3286
+#: src/repos.cc:3285
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr ""
 
-#: src/repos.cc:3297
+#: src/repos.cc:3296
 #, fuzzy
 msgid "Reading installed packages..."
 msgstr "Dji verifeye des pakets RPM astalés..."
 
-#: src/repos.cc:3306
+#: src/repos.cc:3305
 #, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Dji verifeye des pakets RPM astalés..."
@@ -5739,40 +5759,40 @@ msgid ""
 "recommended to run '%s' after the operation has finished."
 msgstr ""
 
-#: src/utils/misc.cc:113
+#: src/utils/misc.cc:91
 msgid "package"
 msgid_plural "packages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:93
 #, fuzzy
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "Modeles"
 msgstr[1] "Modeles"
 
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:95
 #, fuzzy
 msgid "product"
 msgid_plural "product"
 msgstr[0] "prodûts"
 msgstr[1] "prodûts"
 
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:97
 #, fuzzy
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "coridjaedjes"
 msgstr[1] "coridjaedjes"
 
-#: src/utils/misc.cc:121
+#: src/utils/misc.cc:99
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/utils/misc.cc:123
+#: src/utils/misc.cc:101
 #, fuzzy
 msgid "application"
 msgid_plural "applications"
@@ -5780,7 +5800,7 @@ msgstr[0] "Tchuze"
 msgstr[1] "Tchuze"
 
 #. default
-#: src/utils/misc.cc:125
+#: src/utils/misc.cc:103
 #, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
@@ -5789,114 +5809,114 @@ msgstr[1] "Coridjaedjes d' amidrés"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:134
+#: src/utils/misc.cc:112
 msgid "unwanted"
 msgstr ""
 
 #. translator: patch status
-#: src/utils/misc.cc:135
+#: src/utils/misc.cc:113
 msgid "optional"
 msgstr ""
 
 #. translator: patch status
-#: src/utils/misc.cc:136
+#: src/utils/misc.cc:114
 #, fuzzy
 msgid "needed"
 msgstr "Dj' end a dandjî"
 
 #. translator: patch status
-#: src/utils/misc.cc:137
+#: src/utils/misc.cc:115
 #, fuzzy
 msgid "applied"
 msgstr "Eployî"
 
 #. translator: patch status
-#: src/utils/misc.cc:138
+#: src/utils/misc.cc:116
 #, fuzzy
 msgid "not needed"
 msgstr "Nén dandjî"
 
 #. translator: patch status
-#: src/utils/misc.cc:139
+#: src/utils/misc.cc:117
 msgid "undetermined"
 msgstr ""
 
 #. << _("Repository")
-#: src/utils/misc.cc:289
+#: src/utils/misc.cc:267
 msgid "Issue"
 msgstr ""
 
-#: src/utils/misc.cc:290
+#: src/utils/misc.cc:268
 #, fuzzy
 msgid "No."
 msgstr "Nonna"
 
-#: src/utils/misc.cc:291
+#: src/utils/misc.cc:269
 #, fuzzy
 msgid "Patch"
 msgstr "Coridjaedjes"
 
-#: src/utils/misc.cc:367
+#: src/utils/misc.cc:345
 msgid "Specified local path does not exist or is not accessible."
 msgstr ""
 
-#: src/utils/misc.cc:379
+#: src/utils/misc.cc:357
 #, fuzzy
 msgid "Given URI is invalid"
 msgstr "Li valixhance di %1 ni covént nén."
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:469
+#: src/utils/misc.cc:447
 msgid "Unable to guess a value for <platform>."
 msgstr ""
 
-#: src/utils/misc.cc:470
+#: src/utils/misc.cc:448
 msgid "Please use obs://<project>/<platform>"
 msgstr ""
 
-#: src/utils/misc.cc:471 src/utils/misc.cc:508
+#: src/utils/misc.cc:449 src/utils/misc.cc:486
 #, fuzzy, c-format, boost-format
 msgid "Example: %s"
 msgstr "No"
 
-#: src/utils/misc.cc:507
+#: src/utils/misc.cc:485
 msgid "Invalid OBS URI."
 msgstr ""
 
-#: src/utils/misc.cc:507
+#: src/utils/misc.cc:485
 msgid "Correct form is obs://<project>/[platform]"
 msgstr ""
 
-#: src/utils/misc.cc:557
+#: src/utils/misc.cc:535
 #, fuzzy
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Aroke e scrijhant l' lisse des pakets a pårti d' %1"
 
-#: src/utils/misc.cc:558
+#: src/utils/misc.cc:536
 msgid "Perhaps you are running out of disk space."
 msgstr ""
 
-#: src/utils/misc.cc:566
+#: src/utils/misc.cc:544
 #, fuzzy
 msgid "Problem retrieving the specified RPM file"
 msgstr "Aroke e scrijhant l' lisse des pakets a pårti d' %1"
 
-#: src/utils/misc.cc:567
+#: src/utils/misc.cc:545
 msgid "Please check whether the file is accessible."
 msgstr ""
 
-#: src/utils/misc.cc:706
+#: src/utils/misc.cc:684
 #, fuzzy, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Comande nén cnoxhowe: %1 "
 
-#: src/utils/misc.cc:707
+#: src/utils/misc.cc:685
 #, fuzzy, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Tot. grandeu d' l' aberwetaedje: "
 
-#: src/utils/misc.cc:721
+#: src/utils/misc.cc:699
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 11:00+0200\n"
+"POT-Creation-Date: 2017-10-05 18:14+0200\n"
 "PO-Revision-Date: 2017-09-22 08:49+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
@@ -819,205 +819,213 @@ msgstr "Conflict toevoegen: '%s'."
 msgid "Did you mean %1%?"
 msgstr "Bedoelde u %1%?"
 
-#: src/SolverRequester.cc:479
+#: src/SolverRequester.cc:478
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
 "Optie %s wordt genegeerd wanneer de softwarestack voor bijwerken eerst wordt "
 "bijgewerkt."
 
+#. translator: '%1%' is a products name
+#. '%2%' is a command to call (like 'zypper dup')
+#. Both may contain whitespace and should be enclosed by quotes!
+#: src/Summary.cc:383
+#, boost-format
+msgid "Product '%1%' requires to be updated by calling '%2%'!"
+msgstr ""
+
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:425 src/Summary.cc:497
+#: src/Summary.cc:458 src/Summary.cc:534
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] "... en nog %1% item meer."
 msgstr[1] "... en nog %1% items meer."
 
-#: src/Summary.cc:516
+#: src/Summary.cc:552
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "Het volgende NIEUWE pakket zal worden geïnstalleerd:"
 msgstr[1] "De volgende %d NIEUWE pakketten zullen worden geïnstalleerd:"
 
-#: src/Summary.cc:521
+#: src/Summary.cc:557
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "De volgende NIEUWE patch zal worden geïnstalleerd:"
 msgstr[1] "De volgende %d NIEUWE patches zullen worden geïnstalleerd:"
 
-#: src/Summary.cc:526
+#: src/Summary.cc:562
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "Het volgende NIEUWE patroon zal worden geïnstalleerd:"
 msgstr[1] "De volgende %d NIEUWE patronen zullen worden geïnstalleerd:"
 
-#: src/Summary.cc:531
+#: src/Summary.cc:567
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "Het volgende NIEUWE product zal worden geïnstalleerd:"
 msgstr[1] "De volgende %d NIEUWE producten zullen worden geïnstalleerd:"
 
-#: src/Summary.cc:536
+#: src/Summary.cc:572
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "Het volgende broncodepakket zal worden geïnstalleerd:"
 msgstr[1] "De volgende %d broncodepakketten zullen worden geïnstalleerd:"
 
-#: src/Summary.cc:541
+#: src/Summary.cc:577
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "De volgende toepassing wordt geïnstalleerd:"
 msgstr[1] "De volgende %d toepassingen worden geïnstalleerd:"
 
-#: src/Summary.cc:563
+#: src/Summary.cc:599
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "Het volgende pakket zal worden VERWIJDERD:"
 msgstr[1] "De volgende %d pakketten zullen worden VERWIJDERD:"
 
-#: src/Summary.cc:568
+#: src/Summary.cc:604
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "De volgende patch zal worden VERWIJDERD:"
 msgstr[1] "De volgende %d patches zullen worden VERWIJDERD:"
 
-#: src/Summary.cc:573
+#: src/Summary.cc:609
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "Het volgende patroon zal worden VERWIJDERD:"
 msgstr[1] "De volgende %d patronen zullen worden VERWIJDERD:"
 
-#: src/Summary.cc:578
+#: src/Summary.cc:614
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "Het volgende product zal worden VERWIJDERD:"
 msgstr[1] "De volgende %d producten zullen worden VERWIJDERD:"
 
-#: src/Summary.cc:583
+#: src/Summary.cc:619
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "De volgende toepassing zal worden VERWIJDERD:"
 msgstr[1] "De volgende %d toepassingen zullen worden VERWIJDERD:"
 
-#: src/Summary.cc:602
+#: src/Summary.cc:639
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "Het volgende pakket zal worden opgewaardeerd:"
 msgstr[1] "De volgende %d pakketten zullen worden opgewaardeerd:"
 
-#: src/Summary.cc:607
+#: src/Summary.cc:644
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "De volgende patch zal worden opgewaardeerd:"
 msgstr[1] "De volgende %d patches zullen worden opgewaardeerd:"
 
-#: src/Summary.cc:612
+#: src/Summary.cc:649
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "Het volgende patroon zal worden opgewaardeerd:"
 msgstr[1] "De volgende %d patronen zullen worden opgewaardeerd:"
 
-#: src/Summary.cc:617
+#: src/Summary.cc:655
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "Het volgende product zal worden opgewaardeerd:"
 msgstr[1] "De volgende %d producten zullen worden opgewaardeerd:"
 
-#: src/Summary.cc:622
+#: src/Summary.cc:662
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "De volgende toepassing zal worden opgewaardeerd:"
 msgstr[1] "De volgende %d toepassingen zullen worden opgewaardeerd:"
 
-#: src/Summary.cc:641
+#: src/Summary.cc:681
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Het volgende pakket wordt afgewaardeerd:"
 msgstr[1] "De volgende %d pakketten worden afgewaardeerd:"
 
-#: src/Summary.cc:646
+#: src/Summary.cc:686
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "De volgende patch wordt afgewaardeerd:"
 msgstr[1] "De volgende %d patches worden afgewaardeerd:"
 
-#: src/Summary.cc:651
+#: src/Summary.cc:691
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "Het volgende patroon wordt afgewaardeerd:"
 msgstr[1] "De volgende %d patronen worden afgewaardeerd:"
 
-#: src/Summary.cc:656
+#: src/Summary.cc:696
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "Het volgende product zal worden afgewaardeerd:"
 msgstr[1] "De volgende %d producten zullen worden afgewaardeerd:"
 
-#: src/Summary.cc:661
+#: src/Summary.cc:701
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "De volgende toepassing zal worden afgewaardeerd:"
 msgstr[1] "De volgende %d toepassingen zullen worden afgewaardeerd:"
 
-#: src/Summary.cc:680
+#: src/Summary.cc:720
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "Het volgende pakket zal opnieuw worden geïnstalleerd:"
 msgstr[1] "De volgende %d pakketten zullen opnieuw worden geïnstalleerd:"
 
-#: src/Summary.cc:685
+#: src/Summary.cc:725
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "De volgende patch zal opnieuw worden geïnstalleerd:"
 msgstr[1] "De volgende %d patches zullen opnieuw worden geïnstalleerd:"
 
-#: src/Summary.cc:690
+#: src/Summary.cc:730
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "Het volgende patroon zal opnieuw worden geïnstalleerd:"
 msgstr[1] "De volgende %d patronen zullen opnieuw worden geïnstalleerd:"
 
-#: src/Summary.cc:695
+#: src/Summary.cc:735
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "Het volgende product zal opnieuw worden geïnstalleerd:"
 msgstr[1] "De volgende %d producten zullen opnieuw worden geïnstalleerd:"
 
-#: src/Summary.cc:707
+#: src/Summary.cc:747
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "De volgende toepassing zal opnieuw worden geïnstalleerd:"
 msgstr[1] "De volgende %d toepassingen zullen opnieuw worden geïnstalleerd:"
 
-#: src/Summary.cc:841
+#: src/Summary.cc:881
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -1025,7 +1033,7 @@ msgid_plural ""
 msgstr[0] "Het volgende aanbevolen pakket was automatisch geselecteerd:"
 msgstr[1] "De volgende %d aanbevolen pakketten zijn automatisch geselecteerd:"
 
-#: src/Summary.cc:846
+#: src/Summary.cc:886
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -1033,7 +1041,7 @@ msgid_plural ""
 msgstr[0] "De volgende aanbevolen patch is automatisch geselecteerd:"
 msgstr[1] "De volgende %d aanbevolen patches zijn automatisch geselecteerd:"
 
-#: src/Summary.cc:851
+#: src/Summary.cc:891
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -1041,7 +1049,7 @@ msgid_plural ""
 msgstr[0] "Het volgende aanbevolen patroon is automatisch geselecteerd:"
 msgstr[1] "De volgende %d aanbevolen patronen zijn automatisch geselecteerd:"
 
-#: src/Summary.cc:856
+#: src/Summary.cc:896
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -1049,7 +1057,7 @@ msgid_plural ""
 msgstr[0] "Het volgende aanbevolen product is automatisch geselecteerd:"
 msgstr[1] "De volgende %d aanbevolen producten zijn automatisch geselecteerd:"
 
-#: src/Summary.cc:861
+#: src/Summary.cc:901
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -1058,7 +1066,7 @@ msgstr[0] "Het volgende aanbevolen broncodepakket is automatisch geselecteerd:"
 msgstr[1] ""
 "De volgende %d aanbevolen broncodepakketten zijn automatisch geselecteerd:"
 
-#: src/Summary.cc:866
+#: src/Summary.cc:906
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -1067,7 +1075,7 @@ msgstr[0] "De volgende aanbevolen toepassing is automatisch geselecteerd:"
 msgstr[1] ""
 "De volgende %d aanbevolen toepassingen zijn automatisch geselecteerd:"
 
-#: src/Summary.cc:910
+#: src/Summary.cc:950
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -1082,7 +1090,7 @@ msgstr[1] ""
 "De volgende %d pakketten zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd (alleen vereiste pakketten zullen geïnstalleerd worden):"
 
-#: src/Summary.cc:922
+#: src/Summary.cc:962
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -1097,7 +1105,7 @@ msgstr[1] ""
 "De volgende %d pakketten zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd omdat ze ongewenst waren (zijn eerder handmatig verwijderd):"
 
-#: src/Summary.cc:932
+#: src/Summary.cc:972
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1112,7 +1120,7 @@ msgstr[1] ""
 "De volgende %d pakketten zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd vanwege conflicten of problemen met afhankelijkheden:"
 
-#: src/Summary.cc:945
+#: src/Summary.cc:985
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -1123,7 +1131,7 @@ msgstr[1] ""
 "De volgende %d patches zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:949
+#: src/Summary.cc:989
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -1134,7 +1142,7 @@ msgstr[1] ""
 "De volgende %d patronen zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:953
+#: src/Summary.cc:993
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -1145,7 +1153,7 @@ msgstr[1] ""
 "De volgende %d producten zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:957
+#: src/Summary.cc:997
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1156,7 +1164,7 @@ msgstr[1] ""
 "De volgende %d toepassingen zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:987
+#: src/Summary.cc:1027
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1167,7 +1175,7 @@ msgstr[1] ""
 "De volgende %d pakketten zijn gesuggereerd, maar zullen niet worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:992
+#: src/Summary.cc:1032
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -1178,7 +1186,7 @@ msgstr[1] ""
 "De volgende %d patches worden gesuggereerd, maar zullen niet worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:997
+#: src/Summary.cc:1037
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1189,7 +1197,7 @@ msgstr[1] ""
 "De volgende %d patronen worden gesuggereerd, maar zullen niet worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:1002
+#: src/Summary.cc:1042
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1200,7 +1208,7 @@ msgstr[1] ""
 "De volgende %d producten worden gesuggereerd, maar zullen niet worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:1007
+#: src/Summary.cc:1047
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1212,77 +1220,77 @@ msgstr[1] ""
 "De volgende %d toepassingen worden gesuggereerd, maar zullen niet worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:1029
+#: src/Summary.cc:1069
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "Het volgende pakket zal de architectuur wijzigen:"
 msgstr[1] "De volgende %d pakketten zullen de architectuur wijzigen:"
 
-#: src/Summary.cc:1034
+#: src/Summary.cc:1074
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "De volgende patch zal de architectuur wijzigen:"
 msgstr[1] "De volgende %d patches zullen de architectuur wijzigen:"
 
-#: src/Summary.cc:1039
+#: src/Summary.cc:1079
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "Het volgende patroon zal de architectuur wijzigen:"
 msgstr[1] "De volgende %d patronen zullen de architectuur wijzigen:"
 
-#: src/Summary.cc:1044
+#: src/Summary.cc:1084
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "Het volgende product zal de architectuur wijzigen:"
 msgstr[1] "De volgende %d producten zullen de architectuur wijzigen:"
 
-#: src/Summary.cc:1049
+#: src/Summary.cc:1089
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "De volgende toepassing zal de architectuur wijzigen:"
 msgstr[1] "De volgende %d toepassingen zullen de architectuur wijzigen:"
 
-#: src/Summary.cc:1071
+#: src/Summary.cc:1111
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "Het volgende pakket zal de leverancier wijzigen:"
 msgstr[1] "De volgende %d pakketten zullen de leverancier wijzigen:"
 
-#: src/Summary.cc:1076
+#: src/Summary.cc:1116
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "Het volgende patch zal de leverancier wijzigen:"
 msgstr[1] "De volgende %d patches zullen de leverancier wijzigen:"
 
-#: src/Summary.cc:1081
+#: src/Summary.cc:1121
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "Het volgende patroon zal de leverancier wijzigen:"
 msgstr[1] "De volgende %d patronen zullen de leverancier wijzigen:"
 
-#: src/Summary.cc:1086
+#: src/Summary.cc:1126
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "Het volgende product zal de leverancier wijzigen:"
 msgstr[1] "De volgende %d producten zullen de leverancier wijzigen:"
 
-#: src/Summary.cc:1091
+#: src/Summary.cc:1131
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "De volgende toepassing zal de leverancier wijzigen:"
 msgstr[1] "De volgende %d toepassingen zullen de leverancier wijzigen:"
 
-#: src/Summary.cc:1111
+#: src/Summary.cc:1151
 #, c-format, boost-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
@@ -1294,7 +1302,7 @@ msgstr[0] ""
 msgstr[1] ""
 "De volgende %d pakketten worden niet ondersteund door hun leverancier:"
 
-#: src/Summary.cc:1129
+#: src/Summary.cc:1169
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
@@ -1302,7 +1310,7 @@ msgstr[0] "Het volgende pakket wordt niet ondersteund door de leverancier:"
 msgstr[1] ""
 "De volgende %d pakketten worden niet ondersteund door de leverancier:"
 
-#: src/Summary.cc:1147
+#: src/Summary.cc:1187
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1315,7 +1323,7 @@ msgstr[1] ""
 "De volgende %d pakketten hebben een aanvullend gebruikerscontract nodig voor "
 "het verkrijgen van ondersteuning:"
 
-#: src/Summary.cc:1167
+#: src/Summary.cc:1207
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
@@ -1325,7 +1333,7 @@ msgstr[0] ""
 msgstr[1] ""
 "De volgende %d items voor bijwerken van een pakket worden NIET geïnstalleerd:"
 
-#: src/Summary.cc:1172
+#: src/Summary.cc:1212
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
@@ -1336,7 +1344,7 @@ msgstr[1] ""
 "De volgende %d items voor bijwerken van een product zullen NIET worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:1177
+#: src/Summary.cc:1217
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
@@ -1347,7 +1355,7 @@ msgstr[1] ""
 "De volgende %d items voor bijwerken van een toepassing zullen NIET worden "
 "geïnstalleerd:"
 
-#: src/Summary.cc:1207
+#: src/Summary.cc:1247
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1361,161 +1369,161 @@ msgstr[1] ""
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1220
+#: src/Summary.cc:1260
 msgid "Available"
 msgstr "Beschikbaar"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1226 src/info.cc:345 src/info.cc:436 src/info.cc:567
+#: src/Summary.cc:1266 src/info.cc:345 src/info.cc:436 src/info.cc:567
 msgid "Installed"
 msgstr "Geïnstalleerd"
 
-#: src/Summary.cc:1231
+#: src/Summary.cc:1271
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr ""
 "Voer '%1%' uit om de volledige lijst met vergrendelde items te bekijken."
 
-#: src/Summary.cc:1241
+#: src/Summary.cc:1281
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "De volgende patch vereist een herstart van het systeem:"
 msgstr[1] "De volgende %d patches vereisen een herstart van het systeem:"
 
-#: src/Summary.cc:1259
+#: src/Summary.cc:1299
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr "Totale downloadgrootte: %1%. Reeds in de cache: %2%."
 
-#: src/Summary.cc:1262
+#: src/Summary.cc:1302
 msgid "Download only."
 msgstr "Alleen downloaden."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1268
+#: src/Summary.cc:1308
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr "Na de bewerking zal aanvullend %s worden gebruikt."
 
-#: src/Summary.cc:1270
+#: src/Summary.cc:1310
 msgid "No additional space will be used or freed after the operation."
 msgstr "Na de bewerking zal er geen extra ruimte in gebruik zijn of vrijkomen."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1277
+#: src/Summary.cc:1317
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr "Na de bewerking zal %s worden vrijgemaakt."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1300
+#: src/Summary.cc:1340
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "op te waarderen pakket"
 msgstr[1] "op te waarderen pakketten"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1311
+#: src/Summary.cc:1351
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "af te waarderen"
 msgstr[1] "af te waarderen"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1314
+#: src/Summary.cc:1354
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "af te waarderen pakket"
 msgstr[1] "af te waarderen pakketten"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1325
+#: src/Summary.cc:1365
 msgid "new"
 msgid_plural "new"
 msgstr[0] "nieuw"
 msgstr[1] "nieuwe"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1328
+#: src/Summary.cc:1368
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "nieuw te installeren pakket"
 msgstr[1] "nieuwe te installeren pakketten"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1339
+#: src/Summary.cc:1379
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "opnieuw te installeren"
 msgstr[1] "opnieuw te installeren"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1342
+#: src/Summary.cc:1382
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "opnieuw te installeren pakket"
 msgstr[1] "opnieuw te installeren pakketten"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1353
+#: src/Summary.cc:1393
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "te verwijderen"
 msgstr[1] "te verwijderen"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1356
+#: src/Summary.cc:1396
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "te verwijderen pakket"
 msgstr[1] "te verwijderen pakketten"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1367
+#: src/Summary.cc:1407
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "te wijzigen van leverancier"
 msgstr[1] " te wijzigen van leverancier"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1370
+#: src/Summary.cc:1410
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "pakket zal van leverancier wijzigen"
 msgstr[1] "pakketten zullen van leverancier wijzigen"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1381
+#: src/Summary.cc:1421
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "te wijzigen van architectuur"
 msgstr[1] "te wijzigen van architectuur"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1384
+#: src/Summary.cc:1424
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "pakket zal van architectuur wijzigen"
 msgstr[1] "pakketten zullen van architectuur wijzigen"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1395
+#: src/Summary.cc:1435
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "broncodepakket"
 msgstr[1] "Broncodepakket"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1398
+#: src/Summary.cc:1438
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "te installeren broncodepakket"
 msgstr[1] "te installeren broncodepakketten"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1464
+#: src/Summary.cc:1504
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1523,9 +1531,21 @@ msgstr ""
 "Opnieuw starten van de pakketbeheerder vereist. (Voer dit commando nog een "
 "keer uit nadat het de softwarestack voor bijwerken is bijgewerkt)"
 
-#: src/Summary.cc:1467
+#: src/Summary.cc:1507
 msgid "System reboot required."
 msgstr "Systeemherstart vereist."
+
+#. translator: Printed after the summary but before the prompt to start the installation.
+#. Followed by some explanatory text telling it might be a good idea NOT to continue:
+#.
+#. # zypper up
+#. ...
+#. Consider to cancel:
+#. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
+#. Continue? [y/n/...? shows all options] (y):
+#: src/Summary.cc:1524
+msgid "Consider to cancel:"
+msgstr ""
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -4393,7 +4413,7 @@ msgid "You already are running zypper's shell."
 msgstr "U voert al een shell van zypper uit."
 
 # ../../db/printers.ycp.noloc:1270
-#: src/Zypper.cc:5483 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2535
+#: src/Zypper.cc:5483 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2534
 msgid "Alias"
 msgstr "Alias"
 
@@ -4401,9 +4421,9 @@ msgstr "Alias"
 #. translators: Table column header
 #. translators: name (general header)
 #: src/Zypper.cc:5483 src/info.cc:69 src/info.cc:459 src/info.cc:703
-#: src/locks.cc:107 src/repos.cc:1070 src/repos.cc:1209 src/repos.cc:2536
+#: src/locks.cc:107 src/repos.cc:1070 src/repos.cc:1209 src/repos.cc:2535
 #: src/search.cc:44 src/search.cc:209 src/search.cc:357 src/search.cc:504
-#: src/search.cc:568 src/update.cc:798 src/utils/misc.cc:250
+#: src/search.cc:568 src/update.cc:798 src/utils/misc.cc:228
 msgid "Name"
 msgstr "Naam"
 
@@ -4417,17 +4437,17 @@ msgid "Resolvable Type"
 msgstr "Oplosbaar type"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:28
+#: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
 msgstr "Sla het ophalen van het bestand over en beëindig de huidige bewerking."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:30
+#: src/callbacks/media.cc:29
 msgid "Try to retrieve the file again."
 msgstr "Probeer het bestand opnieuw op te halen."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:32
+#: src/callbacks/media.cc:31
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
@@ -4436,13 +4456,13 @@ msgstr ""
 "bewerking zonder het bestand."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:34
+#: src/callbacks/media.cc:33
 msgid "Change current base URI and try retrieving the file again."
 msgstr ""
 "Wijzig de huidige basis-URI en probeer het bestand opnieuw op te halen."
 
 #. translators: this is a prompt label, will appear as "New URI: "
-#: src/callbacks/media.cc:49
+#: src/callbacks/media.cc:48
 msgid "New URI"
 msgstr "Nieuw URI"
 
@@ -4452,51 +4472,51 @@ msgstr "Nieuw URI"
 #. The 'u' reply means 'Change URI'.
 #. https protocol-specific options:
 #. 's' stands for Disable SSL certificate authority check
-#: src/callbacks/media.cc:77
+#: src/callbacks/media.cc:76
 msgid "a/r/i/u/s"
 msgstr "a/o/n/u/s"
 
-#: src/callbacks/media.cc:79
+#: src/callbacks/media.cc:78
 msgid "Disable SSL certificate authority check and continue."
 msgstr "Schakel de controle van de SSL-certificaatautoriteit uit en ga door."
 
 #. translators: this is a prompt text
-#: src/callbacks/media.cc:84 src/callbacks/media.cc:179
-#: src/callbacks/media.cc:261 src/utils/prompt.cc:152 src/utils/prompt.cc:238
+#: src/callbacks/media.cc:83 src/callbacks/media.cc:178
+#: src/callbacks/media.cc:260 src/utils/prompt.cc:152 src/utils/prompt.cc:238
 msgid "Abort, retry, ignore?"
 msgstr "Afbreken, opnieuw, negeren?"
 
-#: src/callbacks/media.cc:92
+#: src/callbacks/media.cc:91
 msgid "SSL certificate authority check disabled."
 msgstr "Controle SSL-certificaatautoriteit uitgeschakeld."
 
-#: src/callbacks/media.cc:109
+#: src/callbacks/media.cc:108
 msgid "No devices detected, cannot eject."
 msgstr "Geen apparaten gedetecteerd, kan niet uitwerpen."
 
-#: src/callbacks/media.cc:110
+#: src/callbacks/media.cc:109
 msgid "Try to eject the device manually."
 msgstr "Probeer het apparaat handmatig uit te werpen."
 
-#: src/callbacks/media.cc:121
+#: src/callbacks/media.cc:120
 msgid "Detected devices:"
 msgstr "Gedetecteerde apparaten:"
 
 # cancel button label
-#: src/callbacks/media.cc:136
+#: src/callbacks/media.cc:135
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: src/callbacks/media.cc:139
+#: src/callbacks/media.cc:138
 msgid "Select device to eject."
 msgstr "Selecteer het apparaat voor uitwerpen."
 
-#: src/callbacks/media.cc:154
+#: src/callbacks/media.cc:153
 msgid "Insert the CD/DVD and press ENTER to continue."
 msgstr "Plaats de cd/dvd en druk op ENTER om door te gaan."
 
 # window title for kernel loading (see txt_load_kernel)
-#: src/callbacks/media.cc:157
+#: src/callbacks/media.cc:156
 msgid "Retrying..."
 msgstr "Opnieuw proberen..."
 
@@ -4506,11 +4526,11 @@ msgstr "Opnieuw proberen..."
 #. The 'u' reply means 'Change URI'.
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
-#: src/callbacks/media.cc:172
+#: src/callbacks/media.cc:171
 msgid "a/r/i/u/e"
 msgstr "a/o/n/u/m"
 
-#: src/callbacks/media.cc:174
+#: src/callbacks/media.cc:173
 msgid "Eject medium."
 msgstr "Medium uitwerpen."
 
@@ -4518,7 +4538,7 @@ msgstr "Medium uitwerpen."
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: src/callbacks/media.cc:220
+#: src/callbacks/media.cc:219
 #, c-format, boost-format
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
@@ -4530,11 +4550,11 @@ msgstr ""
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
-#: src/callbacks/media.cc:255
+#: src/callbacks/media.cc:254
 msgid "a/r/i/u"
 msgstr "a/o/n/u"
 
-#: src/callbacks/media.cc:299
+#: src/callbacks/media.cc:298
 #, c-format, boost-format
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
@@ -4544,13 +4564,13 @@ msgstr ""
 "zijn om de aanmeldingsgegevens van %s te kunnen lezen."
 
 # inlognaam/gebruikersnaam
-#: src/callbacks/media.cc:321 src/callbacks/media.cc:328
+#: src/callbacks/media.cc:320 src/callbacks/media.cc:327
 msgid "User Name"
 msgstr "Gebruikersnaam"
 
 # password dialog title
 #. password
-#: src/callbacks/media.cc:336
+#: src/callbacks/media.cc:335
 msgid "Password"
 msgstr "Wachtwoord"
 
@@ -4588,7 +4608,7 @@ msgstr "Pakket '%s' wordt niet gedownload."
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/info.cc:67 src/locks.cc:110 src/search.cc:52 src/search.cc:359
-#: src/search.cc:503 src/search.cc:564 src/update.cc:795 src/utils/misc.cc:249
+#: src/search.cc:503 src/search.cc:564 src/update.cc:795 src/utils/misc.cc:227
 msgid "Repository"
 msgstr "Installatiebron"
 
@@ -4614,7 +4634,7 @@ msgstr "Leverancier"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:255 src/utils/misc.cc:296
+#: src/info.cc:81 src/search.cc:211 src/utils/misc.cc:233 src/utils/misc.cc:274
 msgid "Summary"
 msgstr "Samenvatting"
 
@@ -4652,8 +4672,8 @@ msgstr "Installatiegrootte"
 
 # /usr/lib/YaST2/clients/lan_inetd_custom.ycp:754
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:347 src/info.cc:395 src/info.cc:570 src/utils/misc.cc:254
-#: src/utils/misc.cc:295
+#: src/info.cc:347 src/info.cc:395 src/info.cc:570 src/utils/misc.cc:232
+#: src/utils/misc.cc:273
 msgid "Status"
 msgstr "Status"
 
@@ -4679,13 +4699,13 @@ msgstr "Broncodepakket"
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:397 src/update.cc:350 src/utils/misc.cc:251
-#: src/utils/misc.cc:292
+#: src/info.cc:397 src/update.cc:350 src/utils/misc.cc:229
+#: src/utils/misc.cc:270
 msgid "Category"
 msgstr "Categorie"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:399 src/utils/misc.cc:252 src/utils/misc.cc:293
+#: src/info.cc:399 src/utils/misc.cc:230 src/utils/misc.cc:271
 msgid "Severity"
 msgstr "Ernst"
 
@@ -4696,7 +4716,7 @@ msgstr "Aangemaakt op"
 
 # /usr/lib/YaST2/clients/dialup_dev_cfg.ycp:71
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:403 src/utils/misc.cc:253 src/utils/misc.cc:294
+#: src/info.cc:403 src/utils/misc.cc:231 src/utils/misc.cc:272
 msgid "Interactive"
 msgstr "Interactief"
 
@@ -4730,7 +4750,7 @@ msgstr "S"
 #. translators: Table column header
 #. translators: type (general header)
 #: src/info.cc:460 src/locks.cc:110 src/repos.cc:1108 src/repos.cc:1220
-#: src/repos.cc:2545 src/search.cc:46 src/search.cc:212
+#: src/repos.cc:2544 src/search.cc:46 src/search.cc:212
 msgid "Type"
 msgstr "Type"
 
@@ -5208,7 +5228,7 @@ msgstr "Fout bij het het uitschakelen van installatiebron '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Probleem bij ophalen van bestanden van '%s'."
 
-#: src/repos.cc:358 src/repos.cc:3307 src/solve-commit.cc:806
+#: src/repos.cc:358 src/repos.cc:3306 src/solve-commit.cc:806
 #: src/solve-commit.cc:837 src/solve-commit.cc:861
 msgid "Please see the above error message for a hint."
 msgstr "Zie bovenstaande foutmelding voor een hint."
@@ -5368,32 +5388,32 @@ msgstr "Doelinitialisatie is mislukt:"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1077 src/repos.cc:1215 src/repos.cc:1764 src/repos.cc:2537
+#: src/repos.cc:1077 src/repos.cc:1215 src/repos.cc:1763 src/repos.cc:2536
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1081 src/repos.cc:1216 src/repos.cc:1766 src/repos.cc:2538
+#: src/repos.cc:1081 src/repos.cc:1216 src/repos.cc:1765 src/repos.cc:2537
 msgid "GPG Check"
 msgstr "GPG-controle"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/repos.cc:1089 src/repos.cc:2540
+#: src/repos.cc:1089 src/repos.cc:2539
 msgid "Refresh"
 msgstr "Vernieuwen"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #. translators: repository priority (in zypper repos -p or -d)
-#: src/repos.cc:1099 src/repos.cc:1217 src/repos.cc:1770 src/repos.cc:2544
+#: src/repos.cc:1099 src/repos.cc:1217 src/repos.cc:1769 src/repos.cc:2543
 msgid "Priority"
 msgstr "Prioriteit"
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1115 src/repos.cc:1210 src/repos.cc:1762 src/repos.cc:2547
+#: src/repos.cc:1115 src/repos.cc:1210 src/repos.cc:1761 src/repos.cc:2546
 msgid "URI"
 msgstr "URI"
 
@@ -5407,7 +5427,7 @@ msgstr ""
 "Gebruik het commando 'zypper addrepo' om één of meer bronnen toe te voegen."
 
 #. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1218 src/repos.cc:1768
+#: src/repos.cc:1218 src/repos.cc:1767
 msgid "Autorefresh"
 msgstr "Automatisch vernieuwen"
 
@@ -5511,70 +5531,70 @@ msgstr "Alle opslagruimten zijn vernieuwd."
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Opschonen van metagegevenscache voor '%s'."
 
-#: src/repos.cc:1582
+#: src/repos.cc:1581
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Opschonen van onbewerkte metagegevenscache voor '%s'."
 
-#: src/repos.cc:1588
+#: src/repos.cc:1587
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Bewaren van ruwe metagegevenscache voor %s '%s'."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1595
+#: src/repos.cc:1594
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Opschonen van pakketten voor '%s'."
 
-#: src/repos.cc:1603
+#: src/repos.cc:1602
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Opschonen van opslagruimte '%s' kan niet vanwege een fout."
 
-#: src/repos.cc:1614
+#: src/repos.cc:1613
 msgid "Cleaning installed packages cache."
 msgstr "Opschonen van cache voor geïnstalleerde pakketten."
 
-#: src/repos.cc:1623
+#: src/repos.cc:1622
 msgid "Cannot clean installed packages cache because of an error."
 msgstr ""
 "Opschonen van cache voor geïnstalleerde pakketten kan niet vanwege een fout."
 
-#: src/repos.cc:1641
+#: src/repos.cc:1640
 msgid "Could not clean the repositories because of errors."
 msgstr "Kan de opslagruimten niet opschonen vanwege fouten."
 
-#: src/repos.cc:1647
+#: src/repos.cc:1646
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Enkele opslagruimten zijn vanwege fouten niet opgeschoond."
 
-#: src/repos.cc:1652
+#: src/repos.cc:1651
 msgid "Specified repositories have been cleaned up."
 msgstr "De gespecificeerde opslagruimten zijn opgeschoond."
 
-#: src/repos.cc:1654
+#: src/repos.cc:1653
 msgid "All repositories have been cleaned up."
 msgstr "Alle opslagruimten zijn opgeschoond."
 
-#: src/repos.cc:1681
+#: src/repos.cc:1680
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Dit is een verwisselbaar alleen-lezen medium (cd/dvd). Automatisch "
 "vernieuwen wordt daarom uitgeschakeld."
 
-#: src/repos.cc:1702
+#: src/repos.cc:1701
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Ongeldige alias van opslagruimte: '%s'"
 
-#: src/repos.cc:1710 src/repos.cc:1994
+#: src/repos.cc:1709 src/repos.cc:1993
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
 "Er bestaat al een opslagruimte met de naam '%s'. Gebruik een andere alias."
 
-#: src/repos.cc:1719
+#: src/repos.cc:1718
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -5582,25 +5602,25 @@ msgstr ""
 "Kan het type opslagruimte niet bepalen. Controleer of de gedefinieerde URI's "
 "(zie hieronder) naar een geldige bron verwijzen:"
 
-#: src/repos.cc:1725
+#: src/repos.cc:1724
 msgid "Can't find a valid repository at given location:"
 msgstr "Kan geen geldige opslagruimte vinden op de opgegeven locatie:"
 
-#: src/repos.cc:1733
+#: src/repos.cc:1732
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Probleem bij het overdragen van brongegevens van opgegeven URI:"
 
-#: src/repos.cc:1734
+#: src/repos.cc:1733
 msgid "Please check whether the specified URI is accessible."
 msgstr "Controleer of de opgegeven URI toegankelijk is."
 
-#: src/repos.cc:1741
+#: src/repos.cc:1740
 msgid "Unknown problem when adding repository:"
 msgstr "Onbekend probleem bij toevoegen van opslagruimte:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1751
+#: src/repos.cc:1750
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -5609,68 +5629,68 @@ msgstr ""
 "Controleren met GPG is uitgeschakeld in de configuratie van opslagruimte "
 "'%1%'. Integriteit en oorsprong van pakketten kan niet worden geverifieerd."
 
-#: src/repos.cc:1756
+#: src/repos.cc:1755
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "Opslagruimte '%s' is toegevoegd"
 
-#: src/repos.cc:1782
+#: src/repos.cc:1781
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Leest gegevens van medium '%s"
 
-#: src/repos.cc:1788
+#: src/repos.cc:1787
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Probleem bij lezen van gegevens van '%s' medium"
 
-#: src/repos.cc:1789
+#: src/repos.cc:1788
 msgid "Please check if your installation media is valid and readable."
 msgstr "Controleer of uw installatiemedium geldig en leesbaar is."
 
-#: src/repos.cc:1796
+#: src/repos.cc:1795
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr ""
 "Gegevens lezen van medium '%s' is uitgesteld tot de volgende verversing."
 
-#: src/repos.cc:1876
+#: src/repos.cc:1875
 msgid "Problem accessing the file at the specified URI"
 msgstr "Probleem bij toegang tot het bestand op de opgegeven URI"
 
-#: src/repos.cc:1877
+#: src/repos.cc:1876
 msgid "Please check if the URI is valid and accessible."
 msgstr "Controleer of de opgegeven URI juist en toegankelijk is."
 
-#: src/repos.cc:1884
+#: src/repos.cc:1883
 msgid "Problem parsing the file at the specified URI"
 msgstr "Probleem bij het analyseren van het bestand op de opgegeven URI"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1886
+#: src/repos.cc:1885
 msgid "Is it a .repo file?"
 msgstr "Is het een .repo-bestand?"
 
-#: src/repos.cc:1893
+#: src/repos.cc:1892
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Probleem bij het lezen van het bestand op de opgegeven URI"
 
-#: src/repos.cc:1905
+#: src/repos.cc:1904
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr ""
 "Er is een opslagruimte zonder een gedefinieerde alias gevonden, overslaan."
 
-#: src/repos.cc:1911
+#: src/repos.cc:1910
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Bij opslagruimte '%s' is geen URI gedefinieerd, overslaan."
 
-#: src/repos.cc:1957
+#: src/repos.cc:1956
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Opslagruimte '%s' is verwijderd."
 
-#: src/repos.cc:1979
+#: src/repos.cc:1978
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
@@ -5679,214 +5699,214 @@ msgstr ""
 "Kan de alias van de '%s' opslagruimte niet wijzigen. De opslagruimte behoort "
 "bij service '%s' die verantwoordelijk is voor het instellen van zijn alias."
 
-#: src/repos.cc:1990
+#: src/repos.cc:1989
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Opslagruimte '%s' is hernoemd naar '%s'."
 
-#: src/repos.cc:1999 src/repos.cc:2231
+#: src/repos.cc:1998 src/repos.cc:2230
 msgid "Error while modifying the repository:"
 msgstr "Fout bij het wijzigen van de opslagruimte:"
 
-#: src/repos.cc:2000
+#: src/repos.cc:1999
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Opslagruimte '%s' wordt ongewijzigd gelaten."
 
-#: src/repos.cc:2135
+#: src/repos.cc:2134
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Prioriteit van installatiebron '%s' is ongewijzigd (%d)"
 
-#: src/repos.cc:2173
+#: src/repos.cc:2172
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Installatiebron '%s' is geactiveerd."
 
-#: src/repos.cc:2175
+#: src/repos.cc:2174
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Installatiebron '%s' is gedeactiveerd."
 
-#: src/repos.cc:2182
+#: src/repos.cc:2181
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Autoverversing is geactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2184
+#: src/repos.cc:2183
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Automatisch vernieuwen is gedeactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2191
+#: src/repos.cc:2190
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "RPM-bestanden cachen is geactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2193
+#: src/repos.cc:2192
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "RPM-bestanden cachen is gedeactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2200
+#: src/repos.cc:2199
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "GPG-controle is geactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2202
+#: src/repos.cc:2201
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "GPG-controle is gedeactiveerd voor installatiebron '%s'."
 
-#: src/repos.cc:2208
+#: src/repos.cc:2207
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "De prioriteit van installatiebron '%s' is op %d gezet."
 
-#: src/repos.cc:2214
+#: src/repos.cc:2213
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "De naam van installatiebron '%s' is op '%s' gezet."
 
-#: src/repos.cc:2225
+#: src/repos.cc:2224
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Niets te wijzigen voor installatiebron '%s'."
 
-#: src/repos.cc:2232
+#: src/repos.cc:2231
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Installatiebron %s wordt ongewijzigd gelaten."
 
-#: src/repos.cc:2264
+#: src/repos.cc:2263
 msgid "Error reading services:"
 msgstr "Fout bij lezen van services:"
 
-#: src/repos.cc:2353
+#: src/repos.cc:2352
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr ""
 "Service '%s' is niet gevonden aan de hand van zijn alias, nummer of URI."
 
-#: src/repos.cc:2356
+#: src/repos.cc:2355
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "Gebruik '%s' voor een lijst met gedefinieerde services."
 
-#: src/repos.cc:2598
+#: src/repos.cc:2597
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
 "Geen services gedefinieerd. Gebruik het commando '%s' om één of meer "
 "services toe te voegen."
 
-#: src/repos.cc:2681
+#: src/repos.cc:2680
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr "Service met de alias '%s' bestaat al. Gebruik een andere alias."
 
-#: src/repos.cc:2688
+#: src/repos.cc:2687
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "Fout opgetreden tijdens het toevoegen van de service '%s'."
 
-#: src/repos.cc:2694
+#: src/repos.cc:2693
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "Service '%s' is toegevoegd."
 
-#: src/repos.cc:2734
+#: src/repos.cc:2733
 #, c-format, boost-format
 msgid "Removing service '%s':"
 msgstr "Verwijderen van service '%s':"
 
-#: src/repos.cc:2737
+#: src/repos.cc:2736
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
 msgstr "Service '%s' is verwijderd."
 
-#: src/repos.cc:2751
+#: src/repos.cc:2750
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
 msgstr "Vernieuwen van service '%s'."
 
-#: src/repos.cc:2766 src/repos.cc:2776
+#: src/repos.cc:2765 src/repos.cc:2775
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr ""
 "Probleem bij het ophalen van het indexbestand van de installatiebron voor de "
 "service '%s':"
 
-#: src/repos.cc:2768 src/repos.cc:2876 src/repos.cc:2934
+#: src/repos.cc:2767 src/repos.cc:2875 src/repos.cc:2933
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Overslaan van service '%s' vanwege bovengenoemde fout."
 
-#: src/repos.cc:2778
+#: src/repos.cc:2777
 msgid "Check if the URI is valid and accessible."
 msgstr "Controleer of de URI geldig en toegankelijk is."
 
-#: src/repos.cc:2835
+#: src/repos.cc:2834
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
 msgstr "Overslaan van uitgeschakelde service '%s'"
 
-#: src/repos.cc:2887
+#: src/repos.cc:2886
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
 "Gebruik het commando '%s' of '%s'  om services toe te voegen of te activeren."
 
-#: src/repos.cc:2890
+#: src/repos.cc:2889
 msgid "Specified services are not enabled or defined."
 msgstr "Opgegeven services zijn niet geactiveerd of niet gedefinieerd."
 
-#: src/repos.cc:2892
+#: src/repos.cc:2891
 msgid "There are no enabled services defined."
 msgstr "Er zijn geen geactiveerde services gedefinieerd."
 
-#: src/repos.cc:2896
+#: src/repos.cc:2895
 msgid "Could not refresh the services because of errors."
 msgstr "Kan vanwege fouten de services niet vernieuwen."
 
-#: src/repos.cc:2902
+#: src/repos.cc:2901
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Enkele van de services zijn vanwege fouten niet vernieuwd."
 
-#: src/repos.cc:2907
+#: src/repos.cc:2906
 msgid "Specified services have been refreshed."
 msgstr "De opgegeven services zijn vernieuwd."
 
-#: src/repos.cc:2909
+#: src/repos.cc:2908
 msgid "All services have been refreshed."
 msgstr "Alle services zijn vernieuwd."
 
-#: src/repos.cc:3056
+#: src/repos.cc:3055
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
 msgstr "Service '%s' is met succes geactiveerd."
 
-#: src/repos.cc:3058
+#: src/repos.cc:3057
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
 msgstr "Service '%s' is met succes gedeactiveerd."
 
-#: src/repos.cc:3064
+#: src/repos.cc:3063
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "Automatisch vernieuwen is geactiveerd voor service '%s'."
 
-#: src/repos.cc:3066
+#: src/repos.cc:3065
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "Automatisch vernieuwen is gedeactiveerd voor service '%s'."
 
-#: src/repos.cc:3071
+#: src/repos.cc:3070
 #, c-format, boost-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "De naam van service '%s' is op '%s' gezet."
 
-#: src/repos.cc:3076
+#: src/repos.cc:3075
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
@@ -5898,7 +5918,7 @@ msgstr[1] ""
 "Installatiebronnen '%s' zijn toegevoegd aan de geactiveerde "
 "installatiebronnen van service '%s'"
 
-#: src/repos.cc:3083
+#: src/repos.cc:3082
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
@@ -5910,7 +5930,7 @@ msgstr[1] ""
 "Installatiebronnen '%s' zijn toegevoegd aan de gedeactiveerde "
 "installatiebronnen van service '%s'"
 
-#: src/repos.cc:3090
+#: src/repos.cc:3089
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
@@ -5923,7 +5943,7 @@ msgstr[1] ""
 "Installatiebronnen '%s' zijn toegevoegd aan de geactiveerde "
 "installatiebronnen van service '%s'"
 
-#: src/repos.cc:3097
+#: src/repos.cc:3096
 #, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
@@ -5937,50 +5957,50 @@ msgstr[1] ""
 "Installatiebron '%s' is verwijderd uit de gedeactiveerde installatiebronnen "
 "van service '%s'"
 
-#: src/repos.cc:3106
+#: src/repos.cc:3105
 #, c-format, boost-format
 msgid "Nothing to change for service '%s'."
 msgstr "Niets te wijzigen voor service '%s'."
 
-#: src/repos.cc:3112
+#: src/repos.cc:3111
 msgid "Error while modifying the service:"
 msgstr "Fout bij het wijzigen van de service:"
 
-#: src/repos.cc:3113
+#: src/repos.cc:3112
 #, c-format, boost-format
 msgid "Leaving service %s unchanged."
 msgstr "Service %s wordt ongewijzigd gelaten."
 
-#: src/repos.cc:3218
+#: src/repos.cc:3217
 msgid "Loading repository data..."
 msgstr "Gegevens van installatiebron laden..."
 
-#: src/repos.cc:3238
+#: src/repos.cc:3237
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Gegevens van installatiebron '%s' worden opgehaald..."
 
-#: src/repos.cc:3244
+#: src/repos.cc:3243
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Bron '%s' bevindt zich niet in de cache. Deze wordt nu toegevoegd..."
 
-#: src/repos.cc:3250 src/repos.cc:3284
+#: src/repos.cc:3249 src/repos.cc:3283
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Probleem bij laden van gegevens van '%s'"
 
-#: src/repos.cc:3254
+#: src/repos.cc:3253
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "Bron '%s' kan niet worden vernieuwd. De oude cache wordt gebruikt."
 
-#: src/repos.cc:3258 src/repos.cc:3287
+#: src/repos.cc:3257 src/repos.cc:3286
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Oplosbare pakketten van '%s' zijn niet geladen vanwege een fout."
 
-#: src/repos.cc:3275
+#: src/repos.cc:3274
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -5990,16 +6010,16 @@ msgstr ""
 "of server moet gebruiken."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:3286
+#: src/repos.cc:3285
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Probeer '%s', of zelfs '%s' alvorens dit te doen."
 
-#: src/repos.cc:3297
+#: src/repos.cc:3296
 msgid "Reading installed packages..."
 msgstr "Lezen van geïnstalleerde pakketten..."
 
-#: src/repos.cc:3306
+#: src/repos.cc:3305
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Er is een fout opgetreden bij het lezen van geïnstalleerde pakketten:"
 
@@ -6781,44 +6801,44 @@ msgstr ""
 "afhankelijkheden van andere pakketten. U kunt het beste '%s' uitvoeren nadat "
 "de bewerking is beëindigd."
 
-#: src/utils/misc.cc:113
+#: src/utils/misc.cc:91
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "pakket"
 msgstr[1] "pakketten"
 
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:93
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "patroon"
 msgstr[1] "patronen"
 
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:95
 msgid "product"
 msgid_plural "product"
 msgstr[0] "product"
 msgstr[1] "producten"
 
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:97
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "patch"
 msgstr[1] "patches"
 
-#: src/utils/misc.cc:121
+#: src/utils/misc.cc:99
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "bronpakket"
 msgstr[1] "bronpakketten"
 
-#: src/utils/misc.cc:123
+#: src/utils/misc.cc:101
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "toepassing"
 msgstr[1] "toepassingen"
 
 #. default
-#: src/utils/misc.cc:125
+#: src/utils/misc.cc:103
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "oplosbaar item"
@@ -6826,108 +6846,108 @@ msgstr[1] "oplosbare items"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:134
+#: src/utils/misc.cc:112
 msgid "unwanted"
 msgstr "ongewenst"
 
 #. translator: patch status
-#: src/utils/misc.cc:135
+#: src/utils/misc.cc:113
 msgid "optional"
 msgstr "optioneel"
 
 #. translator: patch status
-#: src/utils/misc.cc:136
+#: src/utils/misc.cc:114
 msgid "needed"
 msgstr "nodig"
 
 #. translator: patch status
-#: src/utils/misc.cc:137
+#: src/utils/misc.cc:115
 msgid "applied"
 msgstr "toegepast"
 
 #. translator: patch status
-#: src/utils/misc.cc:138
+#: src/utils/misc.cc:116
 msgid "not needed"
 msgstr "niet nodig"
 
 #. translator: patch status
-#: src/utils/misc.cc:139
+#: src/utils/misc.cc:117
 msgid "undetermined"
 msgstr "onbepaald"
 
 #. << _("Repository")
-#: src/utils/misc.cc:289
+#: src/utils/misc.cc:267
 msgid "Issue"
 msgstr "Probleem"
 
-#: src/utils/misc.cc:290
+#: src/utils/misc.cc:268
 msgid "No."
 msgstr "Nee."
 
-#: src/utils/misc.cc:291
+#: src/utils/misc.cc:269
 msgid "Patch"
 msgstr "Patch"
 
-#: src/utils/misc.cc:367
+#: src/utils/misc.cc:345
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Het gespecificeerde lokale pad bestaat niet of is niet toegankelijk."
 
-#: src/utils/misc.cc:379
+#: src/utils/misc.cc:357
 msgid "Given URI is invalid"
 msgstr "Opgegeven URI is ongeldig"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:469
+#: src/utils/misc.cc:447
 msgid "Unable to guess a value for <platform>."
 msgstr "Kon geen waarde voor <platform> raden."
 
-#: src/utils/misc.cc:470
+#: src/utils/misc.cc:448
 msgid "Please use obs://<project>/<platform>"
 msgstr "obs://<project>/<platform> gebruiken"
 
-#: src/utils/misc.cc:471 src/utils/misc.cc:508
+#: src/utils/misc.cc:449 src/utils/misc.cc:486
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Voorbeeld: %s"
 
-#: src/utils/misc.cc:507
+#: src/utils/misc.cc:485
 msgid "Invalid OBS URI."
 msgstr "Ongeldige OBS URI."
 
-#: src/utils/misc.cc:507
+#: src/utils/misc.cc:485
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "De juiste vorm is obs://<project>/[platform]"
 
-#: src/utils/misc.cc:557
+#: src/utils/misc.cc:535
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 "Probleem bij het kopiëren van het gespecificeerde RPM-bestand naar de "
 "cachemap."
 
-#: src/utils/misc.cc:558
+#: src/utils/misc.cc:536
 msgid "Perhaps you are running out of disk space."
 msgstr "Wellicht is er onvoldoende schijfruimte."
 
-#: src/utils/misc.cc:566
+#: src/utils/misc.cc:544
 msgid "Problem retrieving the specified RPM file"
 msgstr "Probleem bij ophalen van het gespecificeerde RPM-bestand"
 
-#: src/utils/misc.cc:567
+#: src/utils/misc.cc:545
 msgid "Please check whether the file is accessible."
 msgstr "Controleer of het bestand toegankelijk is."
 
-#: src/utils/misc.cc:706
+#: src/utils/misc.cc:684
 #, c-format, boost-format
 msgid "Unknown download mode '%s'."
 msgstr "Onbekende downloadmodus '%s'."
 
-#: src/utils/misc.cc:707
+#: src/utils/misc.cc:685
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Beschikbare downloadmodi: %s"
 
-#: src/utils/misc.cc:721
+#: src/utils/misc.cc:699
 #, c-format, boost-format
 msgid "Option '%s' overrides '%s'."
 msgstr "Optie '%s' gaat voor op '%s'."
