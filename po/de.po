@@ -21,10 +21,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-07-04 08:29+0000\n"
+"PO-Revision-Date: 2017-10-07 11:32+0000\n"
 "Last-Translator: Stefan Schlesinger <translate75@web.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,13 +51,14 @@ msgid "Done."
 msgstr "Fertig."
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
+"Das Signieren von Daten ermöglicht dem Empfänger die Überprüfung, ob nach "
+"dem Signieren Änderungen an den Daten vorgenommen wurden.\n"
 "Das Akzeptieren von Paketen mit falscher Prüfsumme kann zu einem "
 "beschädigten System führen und in Extremfällen auch zu einer "
 "Systemgefährdung."
@@ -69,12 +70,17 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Die Datei '%1%' ist die Master Index Datei des Repositorys. Sie stellt die "
+"Integrität des gesamten Repositorys sicher."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Wir können nicht überprüfen, ob jemand diese Datei verändert hat, daher ist "
+"es möglich, das sie nicht mehr vertrauenswürdig ist! Sie sollten nur "
+"fortfahren wenn Sie wissen, das die Datei sicher ist."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -82,6 +88,10 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Diese Datei wurde nach dem Signieren verändert. Es ist möglich, dass eine "
+"bösartige Manipulation vorgenommen wurde und die Datei nicht mehr "
+"vertrauenswürdig ist. Sie sollten nur fortfahren, wenn Sie wissen, das die "
+"Datei sicher ist."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -105,7 +115,7 @@ msgstr "Ablauf des Schlüssels:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Unterschlüssel:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -139,15 +149,15 @@ msgstr "Eine unsignierte Datei '%s' aus Repository '%s' wird akzeptiert."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Datei '%s' ist unsigniert. Weiter?"
+msgstr "Datei '%1%' ist nicht signiert."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Datei '%s' aus Repository '%s' ist unsigniert. Weiter?"
+msgstr "Die Datei '%1%' aus dem Repository '%2%' ist nicht signiert."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -178,17 +188,17 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Datei '%s' ist mit einem unbekannten Schlüssel '%s' signiert. Weiter?"
+msgstr "Die Datei '%1%' ist mit dem unbekannten Schlüssel '%2%' signiert."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"Datei '%s' aus Repository '%s' ist mit einem unbekannten Schlüssel '%s' "
-"signiert. Weiter?"
+"Die Datei '%1%' aus dem Repository '%3%' ist mit dem unbekannten Schlüssel "
+"'%2%' signiert."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -504,19 +514,17 @@ msgstr "Nein"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Hinweis:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Warnung: "
+msgstr "Warnung:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Fehler"
+msgstr "Fehler:"
 
 # internal key used: Ok
 # internal key used: Ok
@@ -833,7 +841,7 @@ msgstr ""
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "Das Produkt '%1%' benötigt ein Update mit dem Kommando '%2%'!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1581,9 +1589,8 @@ msgid "Enable GPG check for this repository."
 msgstr "Aktiviere GPG-Überprüfung für dieses Repository."
 
 #: src/Zypper.cc:128
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Aktiviere GPG-Überprüfung für dieses Repository."
+msgstr "Aktiviere eine strenge GPG-Überprüfung für dieses Repository."
 
 #: src/Zypper.cc:129
 #, fuzzy, boost-format
@@ -1591,15 +1598,17 @@ msgid "Short hand for '%1%'."
 msgstr "Kein Aktualisierungskandidat für '%s'."
 
 #: src/Zypper.cc:130
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Aktiviere GPG-Überprüfung für dieses Repository."
+msgstr ""
+"GPG Prüfung für das Repository aktivieren. Die Metadaten des Repositorys "
+"bleiben jedoch unsigniert."
 
 #: src/Zypper.cc:131
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Aktiviere GPG-Überprüfung für dieses Repository."
+msgstr ""
+"GPG-Überprüfung für dieses Repository aktivieren, aber die Installation von "
+"nicht signierten Paketen aus diesem Repository erlauben."
 
 #: src/Zypper.cc:132
 msgid "Disable GPG check for this repository."
@@ -1610,6 +1619,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Verwenden Sie die globale GPG Einstellung in /etc/zypp/zypp.conf. Dies ist "
+"der Standard."
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
@@ -1641,12 +1652,16 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Automatisch 'Ja' bei der Drittanbieter-Lizenz-Bestätigung eingeben. Weitere "
+"Infos erhalten Sie mit 'man zypper'."
 
 #: src/Zypper.cc:171
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Nur Produktlizenzen automatisch akzeptieren. Weitere Infos erhalten Sie mit "
+"'man zypper'."
 
 #: src/Zypper.cc:180
 msgid ""
@@ -1684,6 +1699,8 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"PackageKit mit dem Abbruch der aktuellen Aktion beauftragen. Es hängt von "
+"PackageKit ab, wie schnell auf die Anforderung reagiert wird."
 
 #: src/Zypper.cc:262
 msgid "Ask PackageKit to quit?"
@@ -1728,15 +1745,14 @@ msgid "This command has no additional options."
 msgstr "Für diesen Befehl gibt es keine zusätzlichen Optionen."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Lösungsoptionen:"
+msgstr "Legacy-Optionen:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Das gleiche wie %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
@@ -5030,7 +5046,6 @@ msgstr "Starten"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
 msgstr "Nicht gefunden"
 
