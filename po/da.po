@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-09-22 22:07+0000\n"
-"Last-Translator: scootergrisen Required Fields <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"PO-Revision-Date: 2017-10-09 18:06+0000\n"
+"Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -801,7 +801,7 @@ msgstr "Ignorerer tilvalget %s når opdateringsstakken opdateres først."
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "Produktet '%1%' kræves opdatering ved at kalde '%2%'!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1466,7 +1466,7 @@ msgstr "Kræver genstart af system."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Overvej at annullere:"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
