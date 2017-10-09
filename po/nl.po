@@ -16,10 +16,10 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-07 12:25+0200\n"
-"PO-Revision-Date: 2017-08-28 21:35+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
-"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/"
-">\n"
+"PO-Revision-Date: 2017-10-09 10:19+0000\n"
+"Last-Translator: Nathan Follens <nthn@unseen.is>\n"
+"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
+"\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,7 @@ msgstr "Hal-uitzondering"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Twijfelachtig type '%s' voor %u bytes checksum '%s'"
+msgstr "Twijfelachtig type '%s' voor %u bytes controlesom '%s'"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4838,12 +4838,12 @@ msgstr "%s is niet toegestaan in URL-schema"
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "Ongeldige %s component '%s'"
+msgstr "Ongeldige %s-component '%s'"
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
 msgid "Invalid %s component"
-msgstr "Ongeldige %s component"
+msgstr "Ongeldige %s-component"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
@@ -4851,7 +4851,7 @@ msgstr "Parseren van queryreeks wordt niet ondersteund voor deze URL"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
-msgstr "URL-schema is een vereist component"
+msgstr "URL-schema is een vereiste component"
 
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
