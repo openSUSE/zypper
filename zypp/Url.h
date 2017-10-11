@@ -688,6 +688,11 @@ namespace zypp
                 EEncoding         eflag = zypp::url::E_DECODED);
 
     /**
+     * \brief Extend the path name.
+     */
+    void appendPathName( const Pathname & path_r, EEncoding eflag_r = zypp::url::E_DECODED );
+
+    /**
      * \brief Set the path parameters.
      * \param params The new encoded path parameter string.
      * \throws url::UrlBadComponentException if the path \p params

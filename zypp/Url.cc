@@ -776,6 +776,11 @@ namespace zypp
   }
 
   // -----------------------------------------------------------------
+
+  void Url::appendPathName( const Pathname & path_r, EEncoding eflag_r )
+  { if ( ! path_r.emptyOrRoot() ) setPathName( Pathname(getPathName( eflag_r )) / path_r, eflag_r ); }
+
+  // -----------------------------------------------------------------
   void
   Url::setPathParams(const std::string &params)
   {
