@@ -299,6 +299,7 @@ namespace zypp
             /* incremented in the loop */ )
       {
         Url url( *it );
+	url.appendPathName( repo_r.path() );
         ++it;
         try
         {
