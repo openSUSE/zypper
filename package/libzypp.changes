@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 11 16:29:48 CEST 2017 - ma@suse.de
+
+- Fix RepoProvideFile ignoring a repo path prefix (bsc#1062561)
+- version 16.17.2 (0)
+
+-------------------------------------------------------------------
 Fri Sep 22 12:16:34 CEST 2017 - ma@suse.de
 
 - Default to 'solver.dupAllowVendorChange = false' on SLE15
