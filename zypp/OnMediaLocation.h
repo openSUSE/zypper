@@ -149,6 +149,10 @@ namespace zypp
     OnMediaLocation & changeFilename( const Pathname & val_r )
     { _filename = val_r; return *this; }
 
+    /** Prepend the filename with \a prefix_r */
+    OnMediaLocation & prependPath( const Pathname & prefix_r )
+    { if ( !prefix_r.emptyOrRoot() ) changeFilename( prefix_r / filename() ); return *this; }
+
   private:
     unsigned  _medianr;
     Pathname  _filename;
