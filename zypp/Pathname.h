@@ -116,6 +116,9 @@ namespace zypp
       /** Test for a relative path. */
       bool relative() const { return !( absolute() || empty() ); }
 
+      /** Test for "" or "/". */
+      bool emptyOrRoot() const { return( _name.empty() || _name == "/" ); }
+
       /** Return all but the last component od this path. */
       Pathname dirname() const { return dirname( *this ); }
       static Pathname dirname( const Pathname & name_r );
