@@ -269,11 +269,11 @@ namespace zypp
 	  const OnMediaLocation & loc( _package->location() );
 	  if ( ! loc.checksum().empty() )	// no cache hit without checksum
 	  {
-	    PathInfo pi( topCache.repoPackagesCachePath / info.packagesPath().basename() / loc.filename() );
+	    PathInfo pi( topCache.repoPackagesCachePath / info.packagesPath().basename() / info.path() / loc.filename() );
 	    if ( pi.isExist() && loc.checksum() == CheckSum( loc.checksum().type(), std::ifstream( pi.c_str() ) ) )
 	    {
 	      report()->start( _package, pi.path().asFileUrl() );
-	      const Pathname & dest( info.packagesPath() / loc.filename() );
+	      const Pathname & dest( info.packagesPath() / info.path() / loc.filename() );
 	      if ( filesystem::assert_dir( dest.dirname() ) == 0 && filesystem::hardlinkCopy( pi.path(), dest ) == 0 )
 	      {
 		ret = ManagedFile( dest );
@@ -551,7 +551,7 @@ namespace zypp
         }
 
       // build the package and put it into the cache
-      Pathname destination( _package->repoInfo().packagesPath() / _package->location().filename() );
+      Pathname destination( _package->repoInfo().packagesPath() / _package->repoInfo().path() / _package->location().filename() );
 
       if ( ! applydeltarpm::provide( delta, destination,
                                      bind( &RpmPackageProvider::progressDeltaApply, this, _1 ) ) )

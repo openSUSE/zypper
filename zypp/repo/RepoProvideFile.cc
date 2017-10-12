@@ -246,10 +246,12 @@ namespace zypp
     { return _impl->_defaultPolicy; }
 
     ManagedFile RepoMediaAccess::provideFile( RepoInfo repo_r,
-                                              const OnMediaLocation & loc_r,
+                                              const OnMediaLocation & loc_rx,
                                               const ProvideFilePolicy & policy_r )
     {
-      MIL << loc_r << endl;
+      const OnMediaLocation locWithPath( OnMediaLocation(loc_rx).prependPath( repo_r.path() ) );
+
+      MIL << locWithPath << endl;
       // Arrange DownloadFileReportHack to recieve the source::DownloadFileReport
       // and redirect download progress triggers to call the ProvideFilePolicy
       // callback.
@@ -257,7 +259,7 @@ namespace zypp
 
       RepoException repo_excpt(repo_r,
 			       str::form(_("Can't provide file '%s' from repository '%s'"),
-                               loc_r.filename().c_str(),
+                               locWithPath.filename().c_str(),
                                repo_r.alias().c_str() ) );
 
       if ( repo_r.baseUrlsEmpty() )
@@ -305,11 +307,11 @@ namespace zypp
           MIL << "Providing file of repo '" << repo_r.alias() << "' from " << url << endl;
           shared_ptr<MediaSetAccess> access = _impl->mediaAccessForUrl( url, repo_r );
 
-	  fetcher.enqueue( loc_r );
+	  fetcher.enqueue( locWithPath );
 	  fetcher.start( destinationDir, *access );
 
 	  // reached if no exception has been thrown, so this is the correct file
-          ManagedFile ret( destinationDir + loc_r.filename() );
+          ManagedFile ret( destinationDir + locWithPath.filename() );
           if ( !repo_r.keepPackages() )
           {
             ret.setDispose( filesystem::unlink );

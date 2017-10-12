@@ -36,7 +36,7 @@ namespace zyppintern
   // here and from SrcPackage.cc
   Pathname cachedLocation( const OnMediaLocation & loc_r, const RepoInfo & repo_r )
   {
-    PathInfo pi( repo_r.packagesPath() / loc_r.filename() );
+    PathInfo pi( repo_r.packagesPath() / repo_r.path() / loc_r.filename() );
 
     if ( ! pi.isExist() )
       return Pathname();	// no file in cache
@@ -48,7 +48,7 @@ namespace zyppintern
 	return Pathname();	// same name but no checksum to verify
 
       // for local repos compare with the checksum in repo
-      if ( CheckSum( CheckSum::md5Type(), std::ifstream( (url.getPathName() / loc_r.filename()).c_str() ) )
+      if ( CheckSum( CheckSum::md5Type(), std::ifstream( (url.getPathName() / repo_r.path() / loc_r.filename()).c_str() ) )
 	!= CheckSum( CheckSum::md5Type(), std::ifstream( pi.c_str() ) ) )
 	return Pathname();	// same name but wrong checksum
     }
