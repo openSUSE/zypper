@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 12 18:04:38 CEST 2017 - ma@suse.de
+
+- Fix media handling in presence of a repo path prefix (bsc#1062561)
+- version 16.17.3 (0)
+
+-------------------------------------------------------------------
 Wed Oct 11 16:29:48 CEST 2017 - ma@suse.de
 
 - Fix RepoProvideFile ignoring a repo path prefix (bsc#1062561)
