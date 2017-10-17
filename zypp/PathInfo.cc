@@ -841,6 +841,7 @@ namespace zypp
       if ( pi.isLink() )
       {
 	// dont hardlink symlinks!
+	MIL << " => copy" << endl;
 	return copy( oldpath, newpath );
       }
 
@@ -859,6 +860,7 @@ namespace zypp
         {
 	  case EPERM: // /proc/sys/fs/protected_hardlink in proc(5)
           case EXDEV: // oldpath  and  newpath are not on the same mounted file system
+	    MIL << " => copy" << endl;
             return copy( oldpath, newpath );
             break;
         }
