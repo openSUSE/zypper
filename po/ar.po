@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-07-04 06:42+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
-">\n"
+"PO-Revision-Date: 2017-10-19 04:29+0000\n"
+"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,15 +43,15 @@ msgid "Done."
 msgstr "تم."
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"قد يؤدي قبول الحزم ذات المجموعات الاختيارية الخاطئة إلى تعطيل النظام، أو في "
-"الحالات القصوى، قد يؤدي إلى نظام غير آمن."
+"تمكين التحقق من توقيع البيانات لضمان عدم حدوث أي تعديلات بعد توقيع "
+"البيانات.  قبول البيانات بدون توقيع أو بتوقيع خاطئ أو غير معروف قد أن يؤدي "
+"إلى نظام تالف وفي الحالات القصوى لنظام غير مستقر."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -59,13 +59,15 @@ msgstr ""
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
-msgstr ""
+msgstr "الملف  '%1%' هو ملف فهرس المستودع الرئيسي.  ويضمن سلامة كل المستودع."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"لا يمكننا التحقق من عدم تدخل أحد في هذا الملف، لذا قد لا يكون جدير بالثقة "
+"بعد الآن!  يجب أن لا تستمر في استخدامه إلا إذا كنت تعرف أنه آمن."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -73,6 +75,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"تم تعديل هذا الملف بعد توقيعه.  قد يكون هذا تغيير خبيث، لذلك قد لا يكون "
+"جديرة بالثقة بعد الآن!  يجب أن لا تستمر في استخدامه  إلا إذا كنت تعرف أنه "
+"آمن."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -96,7 +101,7 @@ msgstr "انتهاء صلاحية المفتاح:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "المفتاح الفرعي:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -130,15 +135,15 @@ msgstr "قبول ملف غير موقع '%s' من المخزن '%s'."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "الملف '%s' غير مُوقَع، هل تريد المتابعة؟"
+msgstr "الملف '%1%' غير مُوقَع."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "لم يتم توقيع الملف '%s' من المخزن '%s'، هل تريد المتابعة؟"
+msgstr "الملف'%1%' من المستودع '%2%' بدون توقيع."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -165,16 +170,15 @@ msgstr "قبول ملف '%s' من المخزن '%s' تم توقيعه بمفتا
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "الملف '%s' مُوقع بمفتاح '%s' غير معروف. هل تريد المتابعة؟"
+msgstr "الملف  '%1%' مُوقع بمفتاح  '%2%' غير معروف."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"تم توقيع الملف '%s' من المخزن '%s' بمفتاح غير معروف '%s'. هل تريد المتابعة؟"
+msgstr "الملف  '%1%' من المخزن '%3%' موقع بمفتاح غير معروف  '%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -493,19 +497,17 @@ msgstr "لا"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "ملاحظة:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "تحذير: "
+msgstr "تحذير:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "الخطأ"
+msgstr "خطأ:"
 
 # continue button label
 #: src/output/Out.h:44
@@ -810,7 +812,7 @@ msgstr "تجاهل الخيار %s عند تحديث كومة التحديثات
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "المنتج '٪ 1٪' يحتاج إلى تحديث عن طريق استدعاء '٪ 2٪'!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1468,16 +1470,16 @@ msgstr[4] "الأنماط التالية %d سيغير بائعها:"
 msgstr[5] "الأنماط التالية %d سيغير بائعها:"
 
 #: src/Summary.cc:1151
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "الحزمة التالية غير مدعومة من البائع:"
-msgstr[1] "الحزمة التالية %d غير مدعومة من البائع:"
-msgstr[2] "الحزمتان التاليتان %d غير مدعومتان من البائع:"
-msgstr[3] "الحزم التالية %d غير مدعومة من البائع:"
-msgstr[4] "الحزم التالية %d غير مدعومة من البائع:"
-msgstr[5] "الحزم التالية %d غير مدعومة من البائع:"
+msgstr[0] "لا يوجد للحزمة التالية %d معلومات دعم من المزود:"
+msgstr[1] "لا يوجد للحزمة التالية %d معلومات دعم من المزود:"
+msgstr[2] "لا يوجد للحزمتان التاليتان %d معلومات دعم من المزود:"
+msgstr[3] "لا يوجد للحزم التالية %d معلومات دعم من المزود:"
+msgstr[4] "لا يوجد للحزم التالية %d معلومات دعم من المزود:"
+msgstr[5] "لا يوجد للحزم التالية %d معلومات دعم من المزود:"
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
@@ -1789,7 +1791,7 @@ msgstr "يلزم إعادة تمهيد النظام."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "فكر في الإلغاء:"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -1848,25 +1850,22 @@ msgid "Enable GPG check for this repository."
 msgstr "تمكين تدقيق GPG لهذا المخزن."
 
 #: src/Zypper.cc:128
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
 msgstr "تمكين تدقيق GPG لهذا المخزن."
 
 #: src/Zypper.cc:129
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "لا يتوفر أي مرشح تحديث لـ '%s'."
+msgstr "لا يتوفر أي مرشح تحديث لـ '%1%'."
 
 #: src/Zypper.cc:130
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "تمكين تدقيق GPG لهذا المخزن."
+msgstr "تمكين فحص GPG مع السماح للبيانات الوصفية للمستودع غير الموقعة."
 
 #: src/Zypper.cc:131
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "تمكين تدقيق GPG لهذا المخزن."
+msgstr "تمكين فحص GPG مع السماح بتثبيت حزم غير موقعة من هذا المستودع."
 
 #: src/Zypper.cc:132
 msgid "Disable GPG check for this repository."
@@ -1877,6 +1876,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"استخدم إعداد التحقق من GPG العام المعرف في /etc/zypp/zypp.conf.  هذا هو "
+"الإعداد الافتراضي."
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
@@ -1907,12 +1908,14 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"لاختيار تلقائيا حدد\"نعم\" لتأكيد رخصة الطرف الفوري.  انظر 'man zypper' "
+"لمزيد من التفاصيل."
 
 #: src/Zypper.cc:171
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
-msgstr ""
+msgstr "قبول تراخيص المنتجات تلقائيا.  انظر 'man zypper' لمزيد من التفاصيل."
 
 #: src/Zypper.cc:180
 msgid ""
@@ -1934,7 +1937,7 @@ msgstr "يعد تضمين التصحيحات الاختيارية افتراضي
 #: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "هذه الخيارات غير متكافئة:٪ 1٪"
 
 #: src/Zypper.cc:253
 msgid ""
@@ -1949,6 +1952,8 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"يمكننا أن نسأل عدة الحزم لإيقاف العمل الحالي في أقرب وقت ممكن، ولكن سرعة "
+"الاستجابة تعتمد على عدة الحزم."
 
 #: src/Zypper.cc:262
 msgid "Ask PackageKit to quit?"
@@ -1993,15 +1998,14 @@ msgid "This command has no additional options."
 msgstr "لا توجد خيارات إضافية لهذا الأمر."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "خيارات الحل:"
+msgstr "خيارات قديمة:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "هو نفس ٪ 1٪."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
@@ -5150,9 +5154,8 @@ msgstr "بدء تشغيل"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "غير موجود"
+msgstr "لم يتم العثور عليه"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
