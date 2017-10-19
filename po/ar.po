@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-10-19 04:29+0000\n"
+"PO-Revision-Date: 2017-10-19 04:58+0000\n"
 "Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
@@ -81,7 +81,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
-msgstr "المخزن:"
+msgstr "المستودع:"
 
 #: src/callbacks/keyring.h:81
 msgid "Key Name:"
@@ -131,7 +131,7 @@ msgstr "قبول الملف '%s' غير الموقع."
 #: src/callbacks/keyring.h:146
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "قبول ملف غير موقع '%s' من المخزن '%s'."
+msgstr "قبول ملف غير موقع '%s' من المستودع '%s'."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
@@ -155,7 +155,7 @@ msgstr "الملف '%s' غير مُوقَع، هل تريد المتابعة؟"
 #: src/callbacks/keyring.h:180
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "لم يتم توقيع الملف '%s' من المخزن '%s'، هل تريد المتابعة؟"
+msgstr "لم يتم توقيع الملف '%s' من المستودع '%s'، هل تريد المتابعة؟"
 
 #: src/callbacks/keyring.h:203
 #, c-format, boost-format
@@ -166,7 +166,7 @@ msgstr "قبول الملف '%s' الموقَّع باستخدام المفتا�
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "قبول ملف '%s' من المخزن '%s' تم توقيعه بمفتاح غير معروف '%s'."
+msgstr "قبول ملف '%s' من المستودع '%s' تم توقيعه بمفتاح غير معروف '%s'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
@@ -178,7 +178,7 @@ msgstr "الملف  '%1%' مُوقع بمفتاح  '%2%' غير معروف."
 #: src/callbacks/keyring.h:219
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr "الملف  '%1%' من المخزن '%3%' موقع بمفتاح غير معروف  '%2%'."
+msgstr "الملف  '%1%' من المستودع '%3%' موقع بمفتاح غير معروف  '%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -192,7 +192,7 @@ msgstr "الملف '%s' مُوقع بمفتاح '%s' غير معروف. هل ت�
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"تم توقيع الملف '%s' من المخزن '%s' بمفتاح غير معروف '%s'. هل تريد المتابعة؟"
+"تم توقيع الملف '%s' من المستودع '%s' بمفتاح غير معروف '%s'. هل تريد المتابعة؟"
 
 #: src/callbacks/keyring.h:256
 msgid "Automatically importing the following key:"
@@ -249,7 +249,7 @@ msgstr "تجاهل التحقق من فشل التوقيع الخاص بالمل
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "تجاهل التحقق من فشل التوقيع الخاص بالملف '%s' من المخزن '%s'!"
+msgstr "تجاهل التحقق من فشل التوقيع الخاص بالملف '%s' من المستودع '%s'!"
 
 #: src/callbacks/keyring.h:349
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -265,7 +265,7 @@ msgstr "فشل التحقق من توقيع الملف '%1%'."
 #: src/callbacks/keyring.h:362
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr "فشل التحقق من توقيع الملف '%1%' من المخزن '%2%'."
+msgstr "فشل التحقق من توقيع الملف '%1%' من المستودع '%2%'."
 
 #: src/callbacks/keyring.h:392
 #, c-format, boost-format
@@ -676,7 +676,7 @@ msgid ""
 "specified version, architecture, or repository."
 msgstr ""
 "يوجد مرشح تحديث '%s' لـ '%s'، ولكن لا يطابق الإصدار المحدد أو الهيكل أو "
-"المخزن."
+"المستودع."
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -718,7 +718,7 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"يتوفر إصدار أقدم من الإصدار المثبت في الحزمة المحددة '%s' من المخزن '%s'."
+"يتوفر إصدار أقدم من الإصدار المثبت في الحزمة المحددة '%s' من المستودع '%s'."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
@@ -768,12 +768,12 @@ msgstr "تم إصدار التصحيح '%s' بعد التاريخ المحدد."
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "تحديد '%s' من المخزن '%s' للتثبيت."
+msgstr "تحديد '%s' من المستودع '%s' للتثبيت."
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "فرض تثبيت '%s' من المخزن '%s'."
+msgstr "فرض تثبيت '%s' من المستودع '%s'."
 
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
@@ -1475,7 +1475,7 @@ msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "لا يوجد للحزمة التالية %d معلومات دعم من المزود:"
-msgstr[1] "لا يوجد للحزمة التالية %d معلومات دعم من المزود:"
+msgstr[1] "لا يوجد للحزمة التالية معلومات دعم من المزود:"
 msgstr[2] "لا يوجد للحزمتان التاليتان %d معلومات دعم من المزود:"
 msgstr[3] "لا يوجد للحزم التالية %d معلومات دعم من المزود:"
 msgstr[4] "لا يوجد للحزم التالية %d معلومات دعم من المزود:"
@@ -2940,8 +2940,8 @@ msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
-"ﺄﻀﻓ ﻢﺴﺗﻭﺪﻋًﺍ ﺈﻟﻯ ﺎﻠﻨﻇﺎﻣ. ﻲﻤﻜﻧ ﺖﺣﺪﻳﺩ ﺎﻠﻤﺴﺗﻭﺪﻋ ﻊﻧ ﻁﺮﻴﻗ URI ﺎﻠﺧﺎﺻﺓ ﺐﻫ ﺃﻭ ﻲﻤﻜﻧ "
-"ﻕﺭﺍﺀﺖﻫ ﻢﻧ ﻢﻠﻓ .repo ﻢﺣﺩﺩ (ﺢﺗﻯ ﻊﻧ ﺐُﻋﺩ)"
+"إضافة مستودع إلى النظام.  يمكن تحديد المستودع بواسطة عنوان URI أو يمكن "
+"قراءته من ملف .repo المحدد (حتى البعيد)."
 
 #: src/Zypper.cc:2129
 msgid "Just another means to specify a .repo file to read."
