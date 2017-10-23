@@ -865,7 +865,7 @@ namespace
 	  _inRpmKeys  = &rpmKey_r;
 	  _inZyppKeys = nullptr;
 	  if ( !keyRelease.empty() )
-	    DBG << "Old key in R: gpg-pubkey-" << rpmKey_r.version() << "-" <<  keyRelease << endl;
+	    DBG << "Old key in Z: gpg-pubkey-" << rpmKey_r.version() << "-" <<  keyRelease << endl;
 	}
 	else if ( comp == 0 )
 	{
@@ -889,7 +889,7 @@ namespace
 	  _inRpmKeys  = nullptr;
 	  _inZyppKeys = &zyppKey_r;
 	  if ( !keyRelease.empty() )
-	    DBG << "Old key in Z: gpg-pubkey-" << zyppKey_r.gpgPubkeyVersion() << "-" << keyRelease << endl;
+	    DBG << "Old key in R: gpg-pubkey-" << zyppKey_r.gpgPubkeyVersion() << "-" << keyRelease << endl;
 	}
 	else if ( comp == 0 )
 	{
