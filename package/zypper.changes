@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Oct 24 17:10:48 CEST 2017 - ma@suse.de
+
+- Fixed to return 107 only if ZYPPER_ON_CODE12_RETURN_107=1 is set
+  in the environment. On Code12 we need to stay compatibole in order
+  not to break released products. On Code15 (1.14.x) 107 will always
+  be returned if some rpm %post configuration script failed.
+  (bsc#1047233)
+- version 1.13.38
+
+-------------------------------------------------------------------
 Thu Oct  5 18:17:58 CEST 2017 - ma@suse.de
 
 - Add summary hint if product is better updated by a different
