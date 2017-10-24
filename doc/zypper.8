@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 09/21/2017
+.\"      Date: 10/24/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "09/21/2017" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "10/24/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -3840,10 +3840,14 @@ Some repository had to be disabled temporarily because it failed to refresh\&. Y
 \fBzypper ref \-f\fR)\&.
 .RE
 .PP
-\fB107\fR \- \fBZYPPER_EXIT_INF_RPM_SCRIPT_FAILED\fR
+107 \- ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED
 .RS 4
+(Available on SLE\-12\-SP2/3 and openSUSE\-Leap\-42\&.2/3 since 1\&.13\&.38 but only if
+\fBZYPPER_ON_CODE12_RETURN_107=1\fR
+is set in the environment)
+
 Installation basically succeeded, but some of the packages %post install scripts returned an error\&. These packages were successfully unpacked to disk and are registered in the rpm database, but due to the failed install script they may not work as expected\&. The failed scripts output might reveal what actually went wrong\&. Any scripts output is also logged to
-\fB/var/log/zypp/history\fR\&.
+\fB/var/log/zypp/history\fR\&. (Added in 1\&.14\&.0)
 .RE
 .sp
 Zypper subcommands (see section \fBSUBCOMMANDS\fR) may return \fBdifferent codes\fR which should be described in the commands man page\&. Call \fBzypper help \fR\fB\fIsubcommand\fR\fR to see the subcommands man page if one is provided\&.

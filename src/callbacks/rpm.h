@@ -26,6 +26,17 @@
 #include "output/prompt.h"
 
 ///////////////////////////////////////////////////////////////////
+namespace env
+{
+  inline bool ZYPPER_ON_CODE12_RETURN_107()
+  {
+    const char* envvar = ::getenv( "ZYPPER_ON_CODE12_RETURN_107" );
+    return( envvar && str::strToFalse( envvar ) );	// return false if env is a wellknown false-string
+  }
+} // namespace env
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
 namespace
 {
   /** Print additional rpm outout and scan for %script errors. */
@@ -46,7 +57,12 @@ namespace
 	if ( str::regex_match( line, what, rx ) )
 	{
 	  msg << ( (line[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << *in ) << endl;
-	  Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
+	  // bsc#1047233: Returning 107 is not backported to Code-12,
+	  // but we make it available if $ZYPPER_ON_CODE12_RETURN_107
+	  // is set in the environment.
+	  static const bool envZYPPER_ON_CODE12_RETURN_107 = env::ZYPPER_ON_CODE12_RETURN_107();
+	  if ( envZYPPER_ON_CODE12_RETURN_107 )
+	    Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
 	}
 	else
 	  msg << *in << endl;
