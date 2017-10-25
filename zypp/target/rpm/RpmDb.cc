@@ -1116,7 +1116,7 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
   if ( systemStatus() != 0 )
   {
     // Translator: %1% is a gpg public key
-    RpmSubprocessException excp( str::Format(_("Failed to import public key %1%") ) % pubkey_r.asString() % "" );
+    RpmSubprocessException excp( str::Format(_("Failed to import public key %1%") ) % pubkey_r.asString() );
     excp.moveToHistory( excplines );
     excp.addHistory( std::move(error_message) );
     ZYPP_THROW( std::move(excp) );
@@ -1186,7 +1186,7 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
   if ( systemStatus() != 0 )
   {
     // Translator: %1% is a gpg public key
-    RpmSubprocessException excp( str::Format(_("Failed to remove public key %1%")) % pubkey_r.asString() % "" );
+    RpmSubprocessException excp( str::Format(_("Failed to remove public key %1%") ) % pubkey_r.asString() );
     excp.moveToHistory( excplines );
     excp.addHistory( std::move(error_message) );
     ZYPP_THROW( std::move(excp) );
