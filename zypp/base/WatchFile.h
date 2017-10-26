@@ -65,6 +65,18 @@ namespace zypp
       const Pathname & path() const
       { return _path; }
 
+      off_t  lastSize() const
+      { return _size;}
+
+      time_t lastMtime() const
+      { return _mtime; }
+
+      bool isDirty() const
+      {
+	PathInfo pi( _path );
+	return( _size != pi.size() || _mtime != pi.mtime() );
+      }
+
       bool hasChanged()
       {
 	PathInfo pi( _path );
