@@ -368,26 +368,23 @@ namespace
    */
   inline void addUpdateHint( TableRow & tr_r, std::list<std::string> & ctc_r, ResObject::constPtr obj_r )
   {
-    if ( obj_r && obj_r->isKind<Product>() )
-    {
-      // Check if buddy release package contains some update indicator provides.
-      if ( Zypper::instance().command() != ZypperCommand::DIST_UPGRADE_e )
-      {
-	static const Capability indicator( "product-update()", Rel::EQ, "dup" );
-	if ( obj_r->asKind<Product>()->referencePackage().provides().matches( indicator ) )
-	{
-	  WAR << obj_r << " provides " << indicator << endl;
-	  // translator: '%1%' is a products name
-	  //             '%2%' is a command to call (like 'zypper dup')
-	  //             Both may contain whitespace and should be enclosed by quotes!
-	  std::string ctcmsg( str::Format( _("Product '%1%' requires to be updated by calling '%2%'!") ) % obj_r->summary() % DEFAULTString("zypper dup") );
-	  // ^^^ summary() for products like in ResPair2Name
-	  //     DEFAULTString to prevent the command string from being colored in MSG_WARNINGString below
-	  tr_r.addDetail( MSG_WARNINGString( ctcmsg ) );
-	  ctc_r.push_back( std::move(ctcmsg) );
-	}
-      }
-    }
+    if ( !obj_r || !obj_r->isKind<Product>() )
+      return;
+    // Check if buddy release package contains some update indicator provides.
+    if ( Zypper::instance().command() == ZypperCommand::DIST_UPGRADE_e )
+      return;
+    static const Capability indicator( "product-update()", Rel::EQ, "dup" );
+    if ( !obj_r->asKind<Product>()->referencePackage().provides().matches( indicator ) )
+      return;
+    WAR << obj_r << " provides " << indicator << endl;
+    // translator: '%1%' is a products name
+    //             '%2%' is a command to call (like 'zypper dup')
+    //             Both may contain whitespace and should be enclosed by quotes!
+    std::string ctcmsg( str::Format( _("Product '%1%' requires to be updated by calling '%2%'!") ) % obj_r->summary() % DEFAULTString("zypper dup") );
+    // ^^^ summary() for products like in ResPair2Name
+    //     DEFAULTString to prevent the command string from being colored in MSG_WARNINGString below
+    tr_r.addDetail( MSG_WARNINGString( ctcmsg ) );
+    ctc_r.push_back( std::move(ctcmsg) );
   }
 } // namespace
 ///////////////////////////////////////////////////////////////////
