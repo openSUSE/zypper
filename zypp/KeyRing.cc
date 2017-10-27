@@ -277,6 +277,7 @@ namespace zypp
   void KeyRing::Impl::importKey( const PublicKey & key, bool trusted )
   {
     importKey( key.path(), trusted ? trustedKeyRing() : generalKeyRing() );
+    MIL << "Imported key " << key << " to " << (trusted ? "trustedKeyRing" : "generalKeyRing" ) << endl;
 
     if ( trusted )
     try {
@@ -288,7 +289,7 @@ namespace zypp
     }
     catch ( const Exception & excp )
     {
-      ERR << "Could not import key " << excp << endl;
+      ERR << "Could not import key into rpmdb: " << excp << endl;
       // TODO: JobReport as hotfix for bsc#1057188; should bubble up and go through some callback
       JobReport::error( excp.asUserHistory() );
     }
@@ -301,11 +302,18 @@ namespace zypp
 
   void KeyRing::Impl::deleteKey( const std::string & id, bool trusted )
   {
+    PublicKeyData keyDataToDel( publicKeyExists( id, trusted ? trustedKeyRing() : generalKeyRing() ) );
+    if ( ! keyDataToDel )
+    {
+      WAR << "Key to delete [" << id << "] is not in " << (trusted ? "trustedKeyRing" : "generalKeyRing" ) << endl;
+      return;
+    }
     deleteKey( id, trusted ? trustedKeyRing() : generalKeyRing() );
+    MIL << "Deleted key [" << id << "] from " << (trusted ? "trustedKeyRing" : "generalKeyRing" ) << endl;
 
     if ( trusted )
     try {
-      PublicKey key( exportKey( id, trustedKeyRing() ) );
+      PublicKey key( keyDataToDel );
 
       callback::SendReport<target::rpm::KeyRingSignals> rpmdbEmitSignal;
       rpmdbEmitSignal->trustedKeyRemoved( key );
@@ -315,7 +323,7 @@ namespace zypp
     }
     catch ( const Exception & excp )
     {
-      ERR << "Could not delete key " << excp << endl;
+      ERR << "Could not delete key from rpmmdb: " << excp << endl;
       // TODO: JobReport as hotfix for bsc#1057188; should bubble up and go through some callback
       JobReport::error( excp.asUserHistory() );
     }
@@ -323,7 +331,6 @@ namespace zypp
 
   PublicKeyData KeyRing::Impl::publicKeyExists( const std::string & id, const Pathname & keyring )
   {
-    MIL << "Searching key [" << id << "] in keyring " << keyring << endl;
     PublicKeyData ret;
     for ( const PublicKeyData & key : publicKeyData( keyring ) )
     {
@@ -333,6 +340,7 @@ namespace zypp
 	break;
       }
     }
+    MIL << (ret ? "Found" : "No") << " key [" << id << "] in keyring " << keyring << endl;
     return ret;
   }
 
@@ -348,7 +356,7 @@ namespace zypp
       return PublicKey( dumpPublicKeyToTmp( keyData.id(), keyring ), keyData );
 
     // Here: key not found
-    WAR << "No key " << id << " to export from " << keyring << endl;
+    WAR << "No key [" << id << "] to export from " << keyring << endl;
     return PublicKey();
   }
 
@@ -381,7 +389,7 @@ namespace zypp
   filesystem::TmpFile KeyRing::Impl::dumpPublicKeyToTmp( const std::string & id, const Pathname & keyring )
   {
     filesystem::TmpFile tmpFile( _base_dir, "pubkey-"+id+"-" );
-    MIL << "Going to export key " << id << " from " << keyring << " to " << tmpFile.path() << endl;
+    MIL << "Going to export key [" << id << "] from " << keyring << " to " << tmpFile.path() << endl;
 
     std::ofstream os( tmpFile.path().c_str() );
     dumpPublicKey( id, keyring, os );
@@ -454,20 +462,19 @@ namespace zypp
       if ( generalKeyData )
       {
         PublicKey key( exportKey( generalKeyData, generalKeyRing() ) );
-        MIL << "Exported key " << id << " to " << key.path() << endl;
-        MIL << "Key " << id << " " << key.name() << " is not trusted" << endl;
+        MIL << "Key [" << id << "] " << key.name() << " is not trusted" << endl;
 
         // ok the key is not trusted, ask the user to trust it or not
         KeyRingReport::KeyTrust reply = report->askUserToAcceptKey( key, context );
         if ( reply == KeyRingReport::KEY_TRUST_TEMPORARILY ||
             reply == KeyRingReport::KEY_TRUST_AND_IMPORT )
         {
-          MIL << "User wants to trust key " << id << " " << key.name() << endl;
+          MIL << "User wants to trust key [" << id << "] " << key.name() << endl;
 
           Pathname whichKeyring;
           if ( reply == KeyRingReport::KEY_TRUST_AND_IMPORT )
           {
-            MIL << "User wants to import key " << id << " " << key.name() << endl;
+            MIL << "User wants to import key [" << id << "] " << key.name() << endl;
             importKey( key, true );
             whichKeyring = trustedKeyRing();
           }
@@ -489,7 +496,7 @@ namespace zypp
         }
         else
         {
-          MIL << "User does not want to trust key " << id << " " << key.name() << endl;
+          MIL << "User does not want to trust key [" << id << "] " << key.name() << endl;
           return false;
         }
       }
@@ -544,7 +551,8 @@ namespace zypp
 
     cachedPublicKeyData.setDirty( keyring );
     ExternalProgram prog( argv,ExternalProgram::Discard_Stderr, false, -1, true );
-    prog.close();
+    if ( prog.close() )
+      ZYPP_THROW(KeyRingException(_("Failed to import key.")));
   }
 
   void KeyRing::Impl::deleteKey( const std::string & id, const Pathname & keyring )
@@ -566,18 +574,14 @@ namespace zypp
 
     cachedPublicKeyData.setDirty( keyring );
     ExternalProgram prog( argv,ExternalProgram::Discard_Stderr, false, -1, true );
-
-    int code = prog.close();
-    if ( code )
-      ZYPP_THROW(Exception(_("Failed to delete key.")));
-    else
-      MIL << "Deleted key " << id << " from keyring " << keyring << endl;
+    if ( prog.close() )
+      ZYPP_THROW(KeyRingException(_("Failed to delete key.")));
   }
 
   std::string KeyRing::Impl::readSignatureKeyId( const Pathname & signature )
   {
     if ( ! PathInfo( signature ).isFile() )
-      ZYPP_THROW(Exception( str::Format(_("Signature file %s not found")) % signature.asString() ));
+      ZYPP_THROW(KeyRingException( str::Format(_("Signature file %s not found")) % signature.asString() ));
 
     MIL << "Determining key id of signature " << signature << endl;
     const char* argv[] =
