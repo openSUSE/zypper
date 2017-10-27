@@ -95,10 +95,19 @@ namespace zypp
       const std::list<PublicKeyData> & operator()( const Pathname & keyring_r ) const
       { return getData( keyring_r ); }
 
+      void setDirty( const Pathname & keyring_r )
+      { _cacheMap[keyring_r].setDirty(); }
+
     private:
       struct Cache
       {
 	Cache() {}
+
+	void setDirty()
+	{
+	  _keyringK.reset();
+	  _keyringP.reset();
+	}
 
 	void assertCache( const Pathname & keyring_r )
 	{
@@ -533,6 +542,7 @@ namespace zypp
       NULL
     };
 
+    cachedPublicKeyData.setDirty( keyring );
     ExternalProgram prog( argv,ExternalProgram::Discard_Stderr, false, -1, true );
     prog.close();
   }
@@ -554,6 +564,7 @@ namespace zypp
       NULL
     };
 
+    cachedPublicKeyData.setDirty( keyring );
     ExternalProgram prog( argv,ExternalProgram::Discard_Stderr, false, -1, true );
 
     int code = prog.close();
