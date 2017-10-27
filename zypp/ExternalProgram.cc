@@ -30,6 +30,9 @@
 
 using namespace std;
 
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::exec"
+
 namespace zypp {
 
     ExternalProgram::ExternalProgram()
