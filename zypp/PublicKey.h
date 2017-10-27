@@ -349,6 +349,8 @@ namespace zypp
     friend class KeyRing;
     /** KeyRing ctor: No need to parse file if KeyRing already had valid KeyData. */
     PublicKey( const filesystem::TmpFile & sharedFile_r, const PublicKeyData & keyData_r );
+    /** KeyRing ctor: Legacy callback APIs take PublicKey, but just need the PublicKeyData No need to export to file. */
+    explicit PublicKey( const PublicKeyData & keyData_r );
 
   private:
     /** Pointer to implementation */

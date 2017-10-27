@@ -430,6 +430,7 @@ namespace zypp
     {}
 
     Impl( const Pathname & keyFile_r )
+    : _dontUseThisPtrDirectly( new filesystem::TmpFile )
     {
       PathInfo info( keyFile_r );
       MIL << "Taking pubkey from " << keyFile_r << " of size " << info.size() << " and sha1 " << filesystem::checksum(keyFile_r, "sha1") << endl;
@@ -437,18 +438,18 @@ namespace zypp
       if ( !info.isExist() )
         ZYPP_THROW(Exception("Can't read public key from " + keyFile_r.asString() + ", file not found"));
 
-      if ( filesystem::hardlinkCopy( keyFile_r, _dataFile.path() ) != 0 )
-	ZYPP_THROW(Exception("Can't copy public key data from " + keyFile_r.asString() + " to " +  _dataFile.path().asString() ));
+      if ( filesystem::hardlinkCopy( keyFile_r, path() ) != 0 )
+	ZYPP_THROW(Exception("Can't copy public key data from " + keyFile_r.asString() + " to " +  path().asString() ));
 
       readFromFile();
     }
 
     Impl( const filesystem::TmpFile & sharedFile_r )
-      : _dataFile( sharedFile_r )
+      : _dontUseThisPtrDirectly( new filesystem::TmpFile( sharedFile_r ) )
     { readFromFile(); }
 
     Impl( const filesystem::TmpFile & sharedFile_r, const PublicKeyData & keyData_r )
-      : _dataFile( sharedFile_r )
+      : _dontUseThisPtrDirectly( new filesystem::TmpFile( sharedFile_r ) )
       , _keyData( keyData_r )
     {
       if ( ! keyData_r )
@@ -458,12 +459,16 @@ namespace zypp
       }
     }
 
+    Impl( const PublicKeyData & keyData_r )
+      : _keyData( keyData_r )
+    {}
+
     public:
       const PublicKeyData & keyData() const
       { return _keyData; }
 
       Pathname path() const
-      { return _dataFile.path(); }
+      { return( /*the one and only intended use*/_dontUseThisPtrDirectly ? _dontUseThisPtrDirectly->path() : Pathname() ); }
 
       const std::list<PublicKeyData> & hiddenKeys() const
       { return _hiddenKeys; }
@@ -474,11 +479,11 @@ namespace zypp
 
       void readFromFile()
       {
-        PathInfo info( _dataFile.path() );
+        PathInfo info( path() );
         MIL << "Reading pubkey from " << info.path() << " of size " << info.size() << " and sha1 " << filesystem::checksum(info.path(), "sha1") << endl;
 
 	static std::string tmppath( _initHomeDir() );
-	std::string datapath( _dataFile.path().asString() );
+	std::string datapath( path().asString() );
 
         const char* argv[] =
         {
@@ -513,7 +518,7 @@ namespace zypp
 	    if ( ret == 129 )
 	      ZYPP_THROW( Exception( std::string("Can't read public key data: ") + GPG_BINARY + " is not installed!" ) );
 	    else
-	      ZYPP_THROW( BadKeyException( "File " + _dataFile.path().asString() + " doesn't contain public key data" , _dataFile.path() ) );
+	      ZYPP_THROW( BadKeyException( "File " + path().asString() + " doesn't contain public key data" , path() ) );
 	    break;
 
 	  case 1:
@@ -523,7 +528,7 @@ namespace zypp
 	    break;
 
 	  default:
-	    WAR << "File " << _dataFile.path().asString() << " contains multiple keys: " <<  scanner._keys << endl;
+	    WAR << "File " << path().asString() << " contains multiple keys: " <<  scanner._keys << endl;
 	    _keyData = scanner._keys.back();
 	    scanner._keys.pop_back();
 	    _hiddenKeys.swap( scanner._keys );
@@ -534,7 +539,7 @@ namespace zypp
       }
 
     private:
-      filesystem::TmpFile	_dataFile;
+      shared_ptr<filesystem::TmpFile> _dontUseThisPtrDirectly; // shared_ptr ok because TmpFile itself is a refernce type (no COW)
       PublicKeyData		_keyData;
       std::list<PublicKeyData>  _hiddenKeys;
 
@@ -569,8 +574,12 @@ namespace zypp
   : _pimpl( new Impl( sharedfile ) )
   {}
 
-  PublicKey::PublicKey( const filesystem::TmpFile & sharedfile, const PublicKeyData & keydata )
-  : _pimpl( new Impl( sharedfile, keydata ) )
+  PublicKey::PublicKey( const filesystem::TmpFile & sharedfile, const PublicKeyData & keyData_r )
+  : _pimpl( new Impl( sharedfile, keyData_r ) )
+  {}
+
+  PublicKey::PublicKey( const PublicKeyData & keyData_r )
+  : _pimpl( new Impl( keyData_r ) )
   {}
 
   PublicKey::~PublicKey()
