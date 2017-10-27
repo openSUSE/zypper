@@ -90,7 +90,7 @@ namespace zypp
     ///   const std::list<PublicKeyData> & cachedPublicKeyData( const Pathname & keyring );
     /// \endcode
     ///////////////////////////////////////////////////////////////////
-    struct CachedPublicKeyData // : private base::NonCopyable - but KeyRing uses RWCOW though also NonCopyable :(
+    struct CachedPublicKeyData : private base::NonCopyable
     {
       const std::list<PublicKeyData> & operator()( const Pathname & keyring_r ) const
       { return getData( keyring_r ); }
@@ -98,10 +98,7 @@ namespace zypp
     private:
       struct Cache
       {
-	// Empty copy ctor to allow insert into std::map as
-	// scoped_ptr is noncopyable.
 	Cache() {}
-	Cache( const Cache & rhs ) {}
 
 	void assertCache( const Pathname & keyring_r )
 	{
