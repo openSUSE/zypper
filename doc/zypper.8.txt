@@ -1007,7 +1007,7 @@ Supported URI formats:
 	+
 	Newly added repositories have auto-refresh disabled by default (except for repositories imported from a .repo, having the auto-refresh enabled). To enable auto-refresh use *addrepo -f*, or the *--refresh* option of the *modifyrepo* command.
 	+
-	Also, this command does not automatically refresh the newly added repositories. The repositories will get refreshed when used for the first time, or you can use the *refresh* command after finishing your modifications with **repo* commands. See also *METADATA REFRESH POLICY* section for more details.
+	Also, this command does not automatically refresh the newly added repositories. The repositories will get refreshed when used for the first time, or you can use the *refresh* command after finishing your modifications with **repo* commands.
 +
 --
 	*-r*, *--repo* 'file'*.repo*::
@@ -1196,8 +1196,6 @@ include::{incdir}/option_GPG_Check.txt[]
 
 *refresh* (*ref*) ['alias'|'name'|'#'|'URI']...::
 	Refresh repositories specified by their alias, name, number, or URI. If no repositories are specified, all enabled repositories will be refreshed.
-	+
-	See also *METADATA REFRESH POLICY* section for more details.
 +
 --
 	*-f*, *--force*::
