@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
-.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 09/21/2017
+.\" Generator: DocBook XSL Stylesheets v1.79.0 <http://docbook.sf.net/>
+.\"      Date: 10/31/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "09/21/2017" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "10/31/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -330,6 +330,7 @@ and
 \fIEDITION\fR
 is "\fIVERSION\fR[\fB\-\fR\fIRELEASE\fR]"\&. For example:
 \fBzypper=0\&.8\&.8\-2\fR
+
 The
 \fINAME\fR
 component of a capability is not only a package name but any symbol provided by packages:
@@ -2205,9 +2206,7 @@ Also, this command does not automatically refresh the newly added repositories\&
 \fBrefresh\fR
 command after finishing your modifications with
 \fB*repo\fR
-commands\&. See also
-\fBMETADATA REFRESH POLICY\fR
-section for more details\&.
+commands\&.
 .PP
 \fB\-r\fR, \fB\-\-repo\fR \fIfile\fR\fB\&.repo\fR
 .RS 4
@@ -2298,6 +2297,7 @@ Enable GPG check but allow installing unsigned packages from this repository\&.
 \fB\-G\fR, \fB\-\-no\-gpgcheck\fR
 .RS 4
 Disable GPG check for this repository\&.
+
 \fBDisabling GPG checks is not recommended\&.\fR
 Signing data enables the recipient to verify that no modifications occurred after the data were signed\&. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise\&.
 .RE
@@ -2580,6 +2580,7 @@ Enable GPG check but allow installing unsigned packages from this repository\&.
 \fB\-G\fR, \fB\-\-no\-gpgcheck\fR
 .RS 4
 Disable GPG check for this repository\&.
+
 \fBDisabling GPG checks is not recommended\&.\fR
 Signing data enables the recipient to verify that no modifications occurred after the data were signed\&. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise\&.
 .RE
@@ -2640,10 +2641,6 @@ Disable all repositories\&.
 \fBrefresh\fR (\fBref\fR) [\fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR]\&...
 .RS 4
 Refresh repositories specified by their alias, name, number, or URI\&. If no repositories are specified, all enabled repositories will be refreshed\&.
-
-See also
-\fBMETADATA REFRESH POLICY\fR
-section for more details\&.
 .PP
 \fB\-f\fR, \fB\-\-force\fR
 .RS 4
@@ -3455,17 +3452,20 @@ To refresh all disabled repositories metadata:
 .PP
 To include a disabled repository \fIrepo\-debug\fR in a search:
 .RS 4
-\fBzypper \-\-plus\-content repo\-debug search\fR\fI\&...\fR
+\fBzypper \-\-plus\-content repo\-debug search\fR
+\fI\&...\fR
 .RE
 .PP
 To search only in a disabled repository \fIrepo\-debug\fR:
 .RS 4
-\fBzypper \-\-plus\-content repo\-debug search \-r repo\-debug\fR\fI\&...\fR
+\fBzypper \-\-plus\-content repo\-debug search \-r repo\-debug\fR
+\fI\&...\fR
 .RE
 .PP
 To enable all repos providing the \fIdebug\fR keyword:
 .RS 4
-\fBzypper in \-\-plus\-content debug\fR\fI some \-debuginfo or \-debugsource package\fR
+\fBzypper in \-\-plus\-content debug\fR
+\fI some \-debuginfo or \-debugsource package\fR
 .RE
 .RE
 .PP
