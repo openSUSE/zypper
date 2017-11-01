@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-10-09 18:06+0000\n"
+"PO-Revision-Date: 2017-11-01 04:06+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -716,7 +716,7 @@ msgstr "Brug \"%s\" til at gennemtvinge installation af pakken."
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "Rettelsen \"%s\" er interaktiv. Den skippes."
+msgstr "Rettelsen \"%s\" er interaktiv. Springer over."
 
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
@@ -1325,18 +1325,17 @@ msgstr "Kun download."
 #: src/Summary.cc:1308
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
-msgstr "Efter transaktionen vil yderligere %s blive brugt."
+msgstr "Efter handlingen vil yderligere %s blive brugt."
 
 #: src/Summary.cc:1310
 msgid "No additional space will be used or freed after the operation."
-msgstr ""
-"Ingen yderligere plads vil blive brugt eller frigjort efter operationen."
+msgstr "Ingen yderligere plads vil blive brugt eller frigjort efter handlingen."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1317
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
-msgstr "Efter transaktionen vil %s være frigjort."
+msgstr "Efter handlingen vil %s være frigjort."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1340
@@ -2967,8 +2966,8 @@ msgstr ""
 "-t, --type <type>              Type af pakke (%s).\n"
 "                                Standard: %s\n"
 "-r, --repo <alias|#|URI>        Indlæs kun den angivne softwarekilde.\n"
-"    --skip-interactive         Skip interaktive opdateringer.\n"
-"    --with-interactive      Skip ikke interaktive opdateringer.\n"
+"    --skip-interactive         Spring interaktive opdateringer over.\n"
+"    --with-interactive      Spring ikke interaktive opdateringer over.\n"
 "-l, --auto-agree-with-licenses\n"
 "                            Sig automatisk \"ja\" til bekræftelsesprompt\n"
 "                            om tredjepart licensaftaler.\n"
@@ -4094,7 +4093,7 @@ msgstr "'%s' ligner en RPM-fil. Vil prøve at downloade den."
 #: src/Zypper.cc:4200
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr "Problem med RPM-filen angivet som '%s'. Skipper."
+msgstr "Problem med RPM-filen angivet som '%s'. Springer over."
 
 #: src/Zypper.cc:4222
 #, c-format, boost-format
@@ -4182,7 +4181,7 @@ msgstr "Der kræves root-rettigheder for at opdatere pakker."
 
 #: src/Zypper.cc:4905 src/Zypper.cc:4913 src/Zypper.cc:4994
 msgid "Operation not supported."
-msgstr "Operationen er ikke understøttet."
+msgstr "Handlingen er ikke understøttet."
 
 #: src/Zypper.cc:4906
 #, c-format, boost-format
@@ -4303,7 +4302,7 @@ msgstr "Type af resolvable"
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "Skip hentning af filen og afbryd den aktuelle operation."
+msgstr "Spring hentning af filen over og afbryd den nuværende handling."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:29
@@ -4316,12 +4315,12 @@ msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr ""
-"Skip hentning af filen og prøv at fortsætte med operationen uden filen."
+"Spring hentning af filen over og prøv at fortsætte med handlingen uden filen."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:33
 msgid "Change current base URI and try retrieving the file again."
-msgstr "Ændr aktuel basis-URI og prøv at hente filen igen."
+msgstr "Ændr nuværende basis-URI og prøv at hente filen igen."
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:48
@@ -4405,7 +4404,7 @@ msgid ""
 "operation."
 msgstr ""
 "Indsæt mediet [%s] # %d og tast 'j' for at fortsætte eller 'n' for at "
-"afbryde operationen."
+"annullere handlingen."
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
@@ -4798,8 +4797,8 @@ msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
 msgstr ""
-"Genstart transaktionen i interaktiv tilstand og bekræft din accept af "
-"krævede licensaftaler, eller benyt tilvalget %s."
+"Genstart handlingen i interaktiv tilstand og bekræft din accept af krævede "
+"licensaftaler, eller benyt tilvalget %s."
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:184
@@ -5188,7 +5187,7 @@ msgstr "Scanner indhold af deaktiveret softwarekilde \"%s\"."
 #: src/repos.cc:874 src/repos.cc:907 src/repos.cc:1432
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Skipper softwarekilden '%s' pga. den ovennævnte fejl."
+msgstr "Springer softwarekilden '%s' over pga. den ovennævnte fejl."
 
 #: src/repos.cc:893
 #, c-format, boost-format
@@ -5342,7 +5341,7 @@ msgstr "Genopfrisker softwarekilden '%s'."
 #: src/repos.cc:1417
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Skipper den deaktiverede softwarekilde '%s'"
+msgstr "Springer den deaktiverede softwarekilde '%s' over"
 
 #: src/repos.cc:1445
 msgid "Specified repositories are not enabled or defined."
@@ -5521,12 +5520,12 @@ msgstr "Problem opstod under forsøg på at læse filen på den angivne URI"
 
 #: src/repos.cc:1904
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "Softwarekilde uden angivet alias blev fundet i filen. Skipper."
+msgstr "Softwarekilde uden angivet alias blev fundet i filen. Springer over."
 
 #: src/repos.cc:1910
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "Softwarekilden '%s' har ikke en URI defineret. Skipper."
+msgstr "Softwarekilden '%s' har ikke en URI defineret. Springer over."
 
 #: src/repos.cc:1956
 #, c-format, boost-format
@@ -5681,7 +5680,7 @@ msgstr ""
 #: src/repos.cc:2767 src/repos.cc:2875 src/repos.cc:2933
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Skipper tjenesten '%s' pga. den ovennævnte fejl."
+msgstr "Springer tjenesten '%s' over pga. den ovennævnte fejl."
 
 #: src/repos.cc:2777
 msgid "Check if the URI is valid and accessible."
@@ -5690,7 +5689,7 @@ msgstr "Tjek om URIen er gyldig og tilgængelig."
 #: src/repos.cc:2834
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "Skipper den deaktiverede tjeneste '%s'"
+msgstr "Springer den deaktiverede tjeneste '%s' over"
 
 #: src/repos.cc:2886
 #, c-format, boost-format
@@ -6088,7 +6087,7 @@ msgstr ""
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: src/solve-commit.cc:655
 msgid "No, cancel the operation."
-msgstr "Nej, annullér operationen."
+msgstr "Nej, annullér handlingen."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
 #: src/solve-commit.cc:657
@@ -6628,7 +6627,7 @@ msgid ""
 msgstr ""
 "Du har valgt at ignorere et problem med download eller installation af en "
 "pakke, der kan føre til brudte afhængigheder for andre pakker. Det anbefales "
-"at køre '%s', efter at operationen er færdig."
+"at køre '%s', efter at handlingen er færdig."
 
 #: src/utils/misc.cc:91
 msgid "package"
