@@ -147,9 +147,12 @@ namespace zypp
 	boost::string_ref str( index_r.c_str() );
 	boost::string_ref::size_type sep = str.find( '_' );
 	if ( sep == boost::string_ref::npos )
-	  newval.second._l = LanguageCode( IdString(index_r) );
+	  newval.second._l = LanguageCode( index_r );
 	else
 	{
+	  // bsc#1064999: dup! Creating a new IdString may invalidate the IdString.c_str() stored in str.
+	  std::string dup( str );
+	  str = dup;
 	  newval.second._l = LanguageCode( IdString(str.substr( 0, sep )) );
 	  newval.second._c = CountryCode( IdString(str.substr( sep+1 )) );
 	}
