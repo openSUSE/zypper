@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-07-04 12:51+0000\n"
-"Last-Translator: Guillaume GARDET <guillaume.gardet@opensuse.org>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"PO-Revision-Date: 2017-11-05 16:02+0000\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,24 +44,27 @@ msgid "Done."
 msgstr "Fait."
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"Accepter des paquets dont les sommes de contrôle sont incorrectes peut "
+"La signature des données permet au destinataire de vérifier qu'aucune "
+"modification n'a été effectuée après que les données ont été signées. "
+"Accepter des paquets avec une signature incorrecte ou manquante peut "
 "conduire à l'altération du système voire, dans les cas extrêmes, "
 "compromettre le système."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
-#, boost-format
+#, boost-format, fuzzy
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Le fichier '%1%' est le fichier d'index principal du dépôt. Il garantit "
+"l'intégrité de tout le dépôt."
 
 #: src/callbacks/keyring.h:46
 msgid ""
@@ -97,8 +100,9 @@ msgid "Key Expires:"
 msgstr "La clé expire le :"
 
 #: src/callbacks/keyring.h:86
+#, fuzzy
 msgid "Subkey:"
-msgstr ""
+msgstr "Sous-clé :"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -128,15 +132,15 @@ msgstr "Acceptation d'un fichier non signé '%s' du dépôt '%s'."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Le fichier '%s' n'est pas signé, continuer ?"
+msgstr "Le fichier '%1%' n'est pas signé."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Le fichier '%s' du dépôt '%s' n'est pas signé, continuer ?"
+msgstr "Le fichier '%1%' du dépôt '%2%' n'est pas signé."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -164,17 +168,15 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Le fichier '%s' est signé avec une clé inconnue '%s'. Continuer ?"
+msgstr "Le fichier '%1%' est signé avec une clé inconnue '%2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"Le fichier '%s' du dépôt '%s' est signé avec une clé inconnue '%s'. "
-"Continuer ?"
+msgstr "Le fichier '%1%' du dépôt '%3%' est signé avec une clé inconnue '%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -495,19 +497,17 @@ msgstr "Non"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Note :"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Avertissement : "
+msgstr "Avertissement :"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Erreur"
+msgstr "Erreur :"
 
 # internal key used: Ok
 #: src/output/Out.h:44
@@ -824,7 +824,7 @@ msgstr ""
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "Le produit '%1%' doit être mis à jour avec '%2%' !"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1577,9 +1577,8 @@ msgid "Enable GPG check for this repository."
 msgstr "Active la vérification GPG pour ce dépôt."
 
 #: src/Zypper.cc:128
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Active la vérification GPG pour ce dépôt."
+msgstr "Active la vérification GPG stricte pour ce dépôt."
 
 #: src/Zypper.cc:129
 #, fuzzy, boost-format
@@ -1587,15 +1586,17 @@ msgid "Short hand for '%1%'."
 msgstr "Pas de candidat à la mise à jour pour '%s'."
 
 #: src/Zypper.cc:130
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Active la vérification GPG pour ce dépôt."
+msgstr ""
+"Active la vérification GPG mais autorise les métadonnées du dépôt à ne pas "
+"être signées."
 
 #: src/Zypper.cc:131
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Active la vérification GPG pour ce dépôt."
+msgstr ""
+"Active la vérification GPG mais autorise l'installation de paquets non "
+"signés depuis ce dépôt."
 
 #: src/Zypper.cc:132
 msgid "Disable GPG check for this repository."
@@ -1606,6 +1607,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Utilise la configuration globale de vérification GPG définie dans /etc/zypp/"
+"zypp.conf. C'est le comportement par défaut."
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
@@ -1664,7 +1667,7 @@ msgstr "La configuration par défaut est d'inclure les correctifs optionnels."
 #: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Ces options sont mutuellement exclusives : %1%"
 
 #: src/Zypper.cc:253
 msgid ""
@@ -1728,13 +1731,13 @@ msgstr "Cette commande ne comporte aucune option supplémentaire."
 #: src/Zypper.cc:469
 #, fuzzy
 msgid "Legacy options:"
-msgstr "Options du résolveur :"
+msgstr "Options historiques :"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Identique à %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
@@ -5062,9 +5065,8 @@ msgstr "Démarrage"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "Non trouvé"
+msgstr "non trouvé"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
