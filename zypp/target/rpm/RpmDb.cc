@@ -958,7 +958,7 @@ void RpmDb::syncTrustedKeys( SyncTrustedKeyBits mode_r )
   {
     // export to zypp keyring
     MIL << "Exporting rpm keyring into zypp trusted keyring" <<endl;
-    // Temporarily disconnect to prevent the attemt to re-import the exported keys.
+    // Temporarily disconnect to prevent the attempt to re-import the exported keys.
     callback::TempConnect<KeyRingSignals> tempDisconnect;
     librpmDb::db_const_iterator keepDbOpen; // just to keep a ref.
 
