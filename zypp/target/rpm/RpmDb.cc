@@ -949,6 +949,34 @@ void RpmDb::syncTrustedKeys( SyncTrustedKeyBits mode_r )
   MIL << "Going to sync trusted keys..." << endl;
   std::set<Edition> rpmKeys( pubkeyEditions() );
   std::list<PublicKeyData> zyppKeys( getZYpp()->keyRing()->trustedPublicKeyData() );
+
+  if ( ! ( mode_r & SYNC_FROM_KEYRING ) )
+  {
+    // bsc#1064380: We relief PK from removing excess keys in the zypp keyring
+    // when re-acquiring the zyppp lock. For now we remove all excess keys.
+    // TODO: Once we can safely assume that all PK versions are updated we
+    // can think about re-importing newer key versions found in the zypp keyring and
+    // removing only excess ones (but case is not very likely). Unfixed PK versions
+    // however will remove the newer version found in the zypp keyring and by doing
+    // this, the key here will be removed via callback as well (keys are deleted
+    // via gpg id, regardless of the edition).
+    MIL << "Removing excess keys in zypp trusted keyring" << std::endl;
+    // Temporarily disconnect to prevent the attempt to pass back the delete request.
+    callback::TempConnect<KeyRingSignals> tempDisconnect;
+    bool dirty = false;
+    for ( const PublicKeyData & keyData : zyppKeys )
+    {
+      if ( ! rpmKeys.count( keyData.gpgPubkeyEdition() ) )
+      {
+	DBG << "Excess key in Z to delete: gpg-pubkey-" << keyData.gpgPubkeyEdition() << endl;
+	getZYpp()->keyRing()->deleteKey( keyData.id(), /*trusted*/true );
+	if ( !dirty ) dirty = true;
+      }
+    }
+    if ( dirty )
+      zyppKeys = getZYpp()->keyRing()->trustedPublicKeyData();
+  }
+
   computeKeyRingSync( rpmKeys, zyppKeys );
   MIL << (mode_r & SYNC_TO_KEYRING   ? "" : "(skip) ") << "Rpm keys to export into zypp trusted keyring: " << rpmKeys.size() << endl;
   MIL << (mode_r & SYNC_FROM_KEYRING ? "" : "(skip) ") << "Zypp trusted keys to import into rpm database: " << zyppKeys.size() << endl;
