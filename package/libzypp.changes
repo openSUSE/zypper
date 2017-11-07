@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Tue Nov  7 16:14:31 CET 2017 - ma@suse.de
+
+- Locale: Fix possible segfault (bsc#1064999)
+- RpmDb: Remove excess keys in the zypp keyring when exporting keys only
+  (bsc#1064380)
+- KeyRing: Fix deleted keys not removed from rpmdb too (bsc#1064380)
+- Flag gpg keycache dirty when adding/removing keys (bsc#1064380)
+- Version 17.x for CODE-15, 16.x. is continued on SuSE-SLE-12-SP2-Branch
+- version 17.0.0 (0)
+
+-------------------------------------------------------------------
 Thu Oct 12 18:04:38 CEST 2017 - ma@suse.de
 
 - Fix media handling in presence of a repo path prefix (bsc#1062561)
