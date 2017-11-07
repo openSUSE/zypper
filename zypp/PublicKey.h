@@ -22,6 +22,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
+#include "zypp/Edition.h"
 #include "zypp/Date.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -186,6 +187,10 @@ namespace zypp
     /** Gpg-pubkey release as computed by rpm (hexencoded \ref created) */
     std::string gpgPubkeyRelease() const;
 
+    /** Gpg-pubkey \ref Edition built from version and release.*/
+    Edition gpgPubkeyEdition() const
+    { return Edition( gpgPubkeyVersion(), gpgPubkeyRelease() ); }
+
     /** Simple string representation.
      * Encodes \ref id, \ref gpgPubkeyRelease, \ref name and \ref fingerprint.
      * \code
@@ -324,6 +329,9 @@ namespace zypp
     std::string gpgPubkeyVersion() const;	//!< \see \ref PublicKeyData
     std::string gpgPubkeyRelease() const;	//!< \see \ref PublicKeyData
     std::string asString() const;		//!< \see \ref PublicKeyData
+
+    Edition gpgPubkeyEdition() const		///!< \see \ref PublicKeyData
+    { return keyData().gpgPubkeyEdition(); }
 
     bool hasSubkeys() const			///!< \see \ref PublicKeyData
     { return keyData().hasSubkeys(); }
