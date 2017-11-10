@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 10 15:25:20 CET 2017 - ma@suse.de
+
+- Solvable: fix inconsistent retrieval of mediaNr (bsc#1065677)
+- version 17.0.1 (0)
+
+-------------------------------------------------------------------
 Tue Nov  7 16:14:31 CET 2017 - ma@suse.de
 
 - Locale: Fix possible segfault (bsc#1064999)
