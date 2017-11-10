@@ -638,7 +638,14 @@ namespace zypp
     unsigned Solvable::mediaNr() const
     {
       NO_SOLVABLE_RETURN( 0U );
-      return lookupNumAttribute( SolvAttr::medianr );
+      // medianumber and path
+      unsigned medianr = 0U;
+      const char * file = ::solvable_lookup_location( _solvable, &medianr );
+      if ( ! file )
+        medianr = 0U;
+      else if ( ! medianr )
+	medianr = 1U;
+      return medianr;
     }
 
     ByteCount Solvable::installSize() const
