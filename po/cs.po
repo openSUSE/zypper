@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-11-13 20:30+0000\n"
+"PO-Revision-Date: 2017-12-13 10:35+0000\n"
 "Last-Translator: Vojtech Zeisek <Vojtech.Zeisek@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.17.1\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -6884,7 +6884,7 @@ msgstr ""
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:72
 msgid "shows all options"
-msgstr "zobrazit všechny volby"
+msgstr "zobrazí všechny volby"
 
 #: src/utils/prompt.cc:125 src/utils/prompt.cc:247 src/utils/prompt.cc:330
 msgid "yes"
