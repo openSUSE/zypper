@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-09-26 11:32+0000\n"
+"PO-Revision-Date: 2017-11-13 20:30+0000\n"
 "Last-Translator: Vojtech Zeisek <Vojtech.Zeisek@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -815,7 +815,7 @@ msgstr "Při aktualizaci zásobníku oprav se ignoruje možnost %s."
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "Produkt '%1%' musí být aktualizován spuštěním příkazu '%2%'!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1560,7 +1560,7 @@ msgstr "Vyžadován restart systému."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Zvažte zrušení:"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
