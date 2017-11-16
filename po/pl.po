@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-07 12:25+0200\n"
-"PO-Revision-Date: 2017-11-15 23:02+0000\n"
+"PO-Revision-Date: 2017-11-16 22:31+0000\n"
 "Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/libzypp/master/pl/>"
 "\n"
@@ -3726,9 +3726,8 @@ msgstr "Wykonane zostaną następujące czynności:"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "(nie wygasa)"
+msgstr "nie wygasa"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
@@ -4715,7 +4714,7 @@ msgstr "Usunięcie klucza publicznego nie powiodło się %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1568
 msgid "Package is not signed!"
-msgstr ""
+msgstr "Pakiet nie jest podpisany!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4800,7 +4799,7 @@ msgstr "Plik nie istnieje lub nie można sprawdzić podpisu"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2397
 msgid "File is unsigned"
-msgstr ""
+msgstr "Plik jest niepodpisany"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
