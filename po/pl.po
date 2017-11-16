@@ -10,17 +10,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-04-25 13:21+0000\n"
-"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
-"Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/"
-">\n"
+"PO-Revision-Date: 2017-11-16 23:09+0000\n"
+"Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
+"Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
+"\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.13.1\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -59,6 +59,8 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Plik '%1%' jest głównym plikiem indeksu repozytorium. Zapewnia integralność "
+"całego repozytorium."
 
 #: src/callbacks/keyring.h:46
 msgid ""
@@ -95,7 +97,7 @@ msgstr "Klucz wygasa:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Podklucz:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -126,15 +128,15 @@ msgstr "Akceptowanie niepodpisanego pliku '%s' z repozytorium '%s'."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Plik '%s' nie jest podpisany. Czy kontynuować?"
+msgstr "Plik '%1%' jest niepodpisany."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Plik '%s' z repozytorium '%s' jest niepodpisany. Czy kontynuować?"
+msgstr "Plik '%1%' z repozytorium '%2%' jest niepodpisany."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -163,17 +165,15 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Plik '%s' jest podpisany nieznanym kluczem '%s'. Czy kontynuować?"
+msgstr "Plik '%1%' jest podpisany nieznanym kluczem '%2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"Plik '%s' z repozytorium '%s' jest podpisany nieznanym kluczem '%s'. Czy "
-"kontynuować?"
+msgstr "Plik '%1%' z repozytorium '%3%' jest podpisany nieznanym kluczem '%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -488,19 +488,17 @@ msgstr "Nie"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Informacja:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Ostrzeżenie: "
+msgstr "Ostrzeżenie:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Błąd"
+msgstr "Błąd:"
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -812,7 +810,7 @@ msgstr ""
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "Aby zaktualizować produkt '%1%' należy użyć '%2%'!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1344,13 +1342,13 @@ msgstr[1] "Zostanie zmieniony dostawca następujących %d aplikacji:"
 msgstr[2] "Zostanie zmieniony dostawca następujących %d aplikacji:"
 
 #: src/Summary.cc:1151
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "Ten pakiet nie jest wspierany przez jego dostawcę:"
-msgstr[1] "Te %d pakiety nie są wspierane przez ich dostawcę:"
-msgstr[2] "Tych %d pakietów nie jest wspieranych przez ich dostawcę:"
+msgstr[0] "Poniższy pakiet nie zawiera informacji o wsparciu dostawcy:"
+msgstr[1] "Poniższe %d pakiety nie zawierają informacji o wsparciu dostawcy:"
+msgstr[2] "Poniższe %d pakietów nie zawiera informacji o wsparciu dostawcy:"
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
@@ -1672,25 +1670,26 @@ msgid "Enable GPG check for this repository."
 msgstr "Włącza sprawdzanie GPG tego repozytorium."
 
 #: src/Zypper.cc:128
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Włącza sprawdzanie GPG tego repozytorium."
+msgstr "Włącza dokładne sprawdzanie GPG tego repozytorium."
 
 #: src/Zypper.cc:129
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Brak aktualizacji dla '%s'."
+msgstr "Skrót dla '%1%'."
 
 #: src/Zypper.cc:130
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Włącza sprawdzanie GPG tego repozytorium."
+msgstr ""
+"Włącza sprawdzanie GPG tego repozytorium ale pozwala aby metadane były "
+"niepodpisane."
 
 #: src/Zypper.cc:131
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Włącza sprawdzanie GPG tego repozytorium."
+msgstr ""
+"Włącza sprawdzanie GPG tego repozytorium ale pozwala na instalowanie "
+"niepodpisanych pakietów."
 
 #: src/Zypper.cc:132
 msgid "Disable GPG check for this repository."
@@ -1701,6 +1700,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Używa globalnego ustawienia sprawdzania GPG, zdefiniowanego w /etc/zypp/"
+"zypp.conf. Jest to wartość domyślna."
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
