@@ -179,6 +179,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %defattr(-,root,root)
 %{_bindir}/aptitude
 %{_bindir}/apt-get
+%{_bindir}/apt
 %dir %{_sysconfdir}/zypp/apt-packagemap.d/
 %config(noreplace) %{_sysconfdir}/zypp/apt-packagemap.d/*
 

@@ -98,7 +98,7 @@ INSTALL(
 
 # zypper-aptitude compat tool
 INSTALL(
-  PROGRAMS tools/aptitude tools/apt-get
+  PROGRAMS tools/aptitude tools/apt-get tools/apt
   DESTINATION ${INSTALL_PREFIX}/bin
 )
 INSTALL(
