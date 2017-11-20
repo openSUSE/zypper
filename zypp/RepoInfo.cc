@@ -313,7 +313,6 @@ namespace zypp
 
     DefaultIntegral<unsigned,defaultPriority> priority;
     mutable bool emptybaseurls;
-    repo::RepoVariablesUrlReplacer replacer;
 
   private:
     Pathname _metadataPath;
