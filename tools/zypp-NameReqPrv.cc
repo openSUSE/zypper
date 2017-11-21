@@ -314,21 +314,21 @@ int main( int argc, char * argv[] )
       if ( names )
 	q.addAttribute( sat::SolvAttr::name );
       if ( provides )
-	q.addDependency( sat::SolvAttr::provides );
+	q.addDependency( sat::SolvAttr::provides, Capability(qstr) );
       if ( requires )
-	q.addDependency( sat::SolvAttr::requires );
+	q.addDependency( sat::SolvAttr::requires, Capability(qstr) );
       if ( conflicts )
-	q.addDependency( sat::SolvAttr::conflicts );
+	q.addDependency( sat::SolvAttr::conflicts, Capability(qstr) );
       if ( obsoletes )
-	q.addDependency( sat::SolvAttr::obsoletes );
+	q.addDependency( sat::SolvAttr::obsoletes, Capability(qstr) );
       if ( recommends )
-	q.addDependency( sat::SolvAttr::recommends );
+	q.addDependency( sat::SolvAttr::recommends, Capability(qstr) );
       if ( supplements )
-	q.addDependency( sat::SolvAttr::supplements );
+	q.addDependency( sat::SolvAttr::supplements, Capability(qstr) );
       if ( enhacements )
       {
-	q.addDependency( sat::SolvAttr::enhances );
-	q.addDependency( sat::SolvAttr::suggests );
+	q.addDependency( sat::SolvAttr::enhances, Capability(qstr) );
+	q.addDependency( sat::SolvAttr::suggests, Capability(qstr) );
       }
     }
 
