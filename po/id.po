@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-11-17 06:23+0000\n"
+"PO-Revision-Date: 2017-11-21 13:04+0000\n"
 "Last-Translator: ahmad haris <ahmadharis1982@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
@@ -1403,80 +1403,81 @@ msgstr "Mempertimbangkan untuk batal:"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
-msgstr ""
+msgstr "Atur nams yang menjelaskan layanan."
 
 #: src/Zypper.cc:98
 msgid "Enable a disabled service."
-msgstr ""
+msgstr "Mengaktifkan layanan yang tidak aktif."
 
 #: src/Zypper.cc:99
 msgid "Disable the service (but don't remove it)."
-msgstr ""
+msgstr "Matikan layanan (namun jangan menghapusnya)."
 
 #: src/Zypper.cc:100
 msgid "Enable auto-refresh of the service."
-msgstr ""
+msgstr "Aktifkan auto-refresh layanan."
 
 #: src/Zypper.cc:101
 msgid "Disable auto-refresh of the service."
-msgstr ""
+msgstr "Nonaktif auto-refresh layanan."
 
 #: src/Zypper.cc:119
 msgid "Set a descriptive name for the repository."
-msgstr ""
+msgstr "Atur nama yang menjelaskan repositori."
 
 #: src/Zypper.cc:120
 msgid "Enable a disabled repository."
-msgstr ""
+msgstr "Aktifkan repositori yang tidak aktif."
 
 #: src/Zypper.cc:121
 msgid "Disable the repository (but don't remove it)."
-msgstr ""
+msgstr "Nonaktifkan repositori (tapi jangan menghapusnya)."
 
 #: src/Zypper.cc:122
 msgid "Enable auto-refresh of the repository."
-msgstr ""
+msgstr "Aktifkan auto-refresh pada repositori."
 
 #: src/Zypper.cc:123
 msgid "Disable auto-refresh of the repository."
-msgstr ""
+msgstr "Nonaktifkan auto-refresh pada repositori."
 
 #: src/Zypper.cc:124
 msgid "Set priority of the repository."
-msgstr ""
+msgstr "Atur prioritas repositori."
 
 #: src/Zypper.cc:125
 msgid "Enable RPM files caching."
-msgstr ""
+msgstr "Aktifkan cache berkas-berkas RPM."
 
 #: src/Zypper.cc:126
 msgid "Disable RPM files caching."
-msgstr ""
+msgstr "Nonaktifkan cache berkas-berkas RPM."
 
 #: src/Zypper.cc:127
 msgid "Enable GPG check for this repository."
 msgstr "Enable GPG check for this repository."
 
 #: src/Zypper.cc:128
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Enable GPG check for this repository."
+msgstr "Aktifkan pemeriksaan GPG yang ketat untuk repositori ini."
 
 #: src/Zypper.cc:129
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Tidak ada kandidat pembaruan untuk '%s'."
+msgstr "Singkatan untuk '%1%'."
 
 #: src/Zypper.cc:130
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Enable GPG check for this repository."
+msgstr ""
+"Aktifkan pemeriksaan GPG namun ijinkan metadata repositori tidak ditanda "
+"tangani."
 
 #: src/Zypper.cc:131
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Enable GPG check for this repository."
+msgstr ""
+"Aktifkan pemeriksaan GPG namun ijinkan pemasangan paket-paket yang tidak "
+"ditanda tangani pada repositori ini."
 
 #: src/Zypper.cc:132
 msgid "Disable GPG check for this repository."
@@ -1487,6 +1488,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Gunakan pengaturan pemeriksaan GPG global yang didefinisikan di /etc/zypp/"
+"zypp.conf. Ini sudah baku."
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
@@ -1549,7 +1552,7 @@ msgstr "Secara baku, menyertakan patch-patch opsional."
 #: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Opsi-opsi ini sangat khusus: %1%"
 
 #: src/Zypper.cc:253
 msgid ""
@@ -1609,15 +1612,14 @@ msgid "This command has no additional options."
 msgstr "Perintah ini tidak memiliki opsi tambahan."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Opsi pemecah:"
+msgstr "Opsi-opsi turunan:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Sama seperti %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
@@ -2302,17 +2304,17 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1914
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
-msgstr ""
+msgstr "addservice (as) [OPSI] <URI> <ALIAS>"
 
 #. translators: command description
 #: src/Zypper.cc:1917
 msgid "Add a repository index service to the system."
-msgstr ""
+msgstr "Tambahkan layanan indek repositori pada sistem."
 
 #: src/Zypper.cc:1921
 #, boost-format
 msgid "Type of the service (%1%)."
-msgstr ""
+msgstr "Tipe layanan (%1%)."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1937
@@ -2394,13 +2396,13 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1996
 msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
-msgstr ""
+msgstr "modifyservice (ms) <OPSI> <ALIAS|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1999
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
-msgstr ""
+msgstr "modifyservice (ms) <OPSI> <%1%>"
 
 #. translators: command description
 #: src/Zypper.cc:2002
@@ -2409,46 +2411,48 @@ msgid ""
 "Modify properties of services specified by alias, number, or URI, or by the "
 "'%1%' aggregate options."
 msgstr ""
+"Ubah properti layanan yang ditentukan oleh alias, nomor, atau URI, atau "
+"dengan opsi agregat '% 1%'."
 
 #: src/Zypper.cc:2007
 msgid "Apply changes to all services."
-msgstr ""
+msgstr "Terapkan perubahan-perubahan ke semua layanan."
 
 #: src/Zypper.cc:2008
 msgid "Apply changes to all local services."
-msgstr ""
+msgstr "Terapkan perubahan-perubahan ke semua layanan lokal."
 
 #: src/Zypper.cc:2009
 msgid "Apply changes to all remote services."
-msgstr ""
+msgstr "Terapkan perubahan-perubahan ke semua layanan jarak jauh."
 
 #: src/Zypper.cc:2010
 msgid "Apply changes to services of specified type."
-msgstr ""
+msgstr "Terapkan perubahan pada layanan dengan tipe yang ditentukan."
 
 #: src/Zypper.cc:2012
 msgid "Add a RIS service repository to enable."
-msgstr ""
+msgstr "Tambahkan repositori layanan RIS untuk diaktifkan."
 
 #: src/Zypper.cc:2013
 msgid "Add a RIS service repository to disable."
-msgstr ""
+msgstr "Tambahkan repositori layanan RIS untuk dinonaktifkan."
 
 #: src/Zypper.cc:2014
 msgid "Remove a RIS service repository to enable."
-msgstr ""
+msgstr "Hapus repositori layanan RIS untuk dinonaktifkan."
 
 #: src/Zypper.cc:2015
 msgid "Remove a RIS service repository to disable."
-msgstr ""
+msgstr "Hapus repositori layanan RIS untuk dinonaktifkan."
 
 #: src/Zypper.cc:2016
 msgid "Clear the list of RIS repositories to enable."
-msgstr ""
+msgstr "Hapus daftar repositori-repositori RIS untuk diaktifkan."
 
 #: src/Zypper.cc:2017
 msgid "Clear the list of RIS repositories to disable."
-msgstr ""
+msgstr "Hapus daftar repositori-repositori RIS untuk dinonaktifkan."
 
 #: src/Zypper.cc:2044
 msgid ""
@@ -2547,12 +2551,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2120
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
-msgstr ""
+msgstr "addrepo (ar) [OPSI] <URI> <ALIAS>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2123
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
-msgstr ""
+msgstr "addrepo (ar) [OPSI] <FILE.repo>"
 
 #. translators: command description
 #: src/Zypper.cc:2126
@@ -2560,23 +2564,25 @@ msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
+"Tambah sebuah repositori ke sistem. Repositori dapat ditentukan oleh URI "
+"atau dapat dibaca dari berkas .repo (walaupun jarak jauh)."
 
 #: src/Zypper.cc:2129
 msgid "Just another means to specify a .repo file to read."
-msgstr ""
+msgstr "Cara lain untuk menentukan berkas.repo untuk dibaca."
 
 #: src/Zypper.cc:2130
 msgid "Probe URI."
-msgstr ""
+msgstr "Memeriksa URI."
 
 #: src/Zypper.cc:2131
 msgid "Don't probe URI, probe later during refresh."
-msgstr ""
+msgstr "Jangan periksa URI, periksa nanti saat refresh."
 
 #: src/Zypper.cc:2134
 #, boost-format
 msgid "Type of repository (%1%)."
-msgstr ""
+msgstr "Tipe repositori (%1%)."
 
 #: src/Zypper.cc:2162
 msgid ""
@@ -2706,13 +2712,13 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2262
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
-msgstr ""
+msgstr "modifyrepo (mr) <OPSI> <ALIAS|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2265
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
-msgstr ""
+msgstr "modifyrepo (mr) <OPSI> <%1%>"
 
 #. translators: command description
 #: src/Zypper.cc:2268
