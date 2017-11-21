@@ -175,6 +175,16 @@ BOOST_AUTO_TEST_CASE(RepVarExpand)
   RepVarExpandTest( "__${D:+\\$X--{${E:-==\\$X{o\\}==}\\}--}__\\${B}${}__", "____\\${B}${}__"         , "__$X--{[E]}--__\\[B]${}__"              );
 }
 
+void varInAuthExpect( const Url & url_r, const std::string & expHost_r, const std::string & expPort_r, const std::string & expPath_r,
+		      const std::string & user_r = std::string(), const std::string & pass_r = std::string() )
+{
+  BOOST_CHECK_EQUAL( url_r.getHost(),     expHost_r );
+  BOOST_CHECK_EQUAL( url_r.getPort(),     expPort_r );
+  BOOST_CHECK_EQUAL( url_r.getPathName(), expPath_r );
+  BOOST_CHECK_EQUAL( url_r.getUsername(), user_r );
+  BOOST_CHECK_EQUAL( url_r.getPassword(), pass_r );
+}
+
 BOOST_AUTO_TEST_CASE(replace_text)
 {
   /* check RepoVariablesStringReplacer */
@@ -207,7 +217,7 @@ BOOST_AUTO_TEST_CASE(replace_text)
   /* check RepoVariablesUrlReplacer */
   repo::RepoVariablesUrlReplacer replacer2;
 
-//   // first of all url with {} must be accepted:
+  // first of all url with {} must be accepted:
   BOOST_CHECK_NO_THROW( Url("ftp://site.org/${arch}/?arch=${arch}") );
   BOOST_CHECK_NO_THROW( Url("ftp://site.org/${arch:-noarch}/?arch=${arch:-noarch}") );
   BOOST_CHECK_NO_THROW( Url("ftp://site.org/${arch:+somearch}/?arch=${arch:+somearch}") );
@@ -223,6 +233,16 @@ BOOST_AUTO_TEST_CASE(replace_text)
 
   BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/$releasever/?arch=$arch")).asCompleteString(),
 		    "http://site.org/update/13.2/?arch=i686");
+
+  // - bsc#1067605: Allow VAR in Url authority
+  // fake some host name via $arch
+  varInAuthExpect( replacer2(Url("ftp://$arch/path")),      "i686",     "", "/path" );
+  varInAuthExpect( replacer2(Url("ftp://$arch:1234/path")), "i686", "1234", "/path" );
+  // don't expand in user/pass!
+  varInAuthExpect( replacer2(Url("ftp://$arch:$arch@$arch:1234/path")),	"i686", "1234", "/path", "$arch", "$arch" );
+  // No support for complex vars:
+  // BOOST_CHECK_NO_THROW( Url("ftp://${arch:-nosite}/path") );
+  // BOOST_CHECK_NO_THROW( Url("ftp://${arch:+somesite}/path") );
 }
 
 BOOST_AUTO_TEST_CASE(uncached)

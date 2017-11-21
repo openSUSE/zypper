@@ -151,7 +151,7 @@ namespace zypp
 
 	/** Valid var name char */
 	bool isnamech( int ch ) const
-	{ return ch == '_' || isalpha( ch ); }
+	{ return ch == '_' || isalnum( ch ); }
 
 	/** Scan for a valid variable starting at _vbeg (storing the values) */
 	bool findVarEnd()
@@ -548,10 +548,15 @@ namespace zypp
 
     Url RepoVariablesUrlReplacer::operator()( const Url & value ) const
     {
-      RepoVarExpand expand;
-      Url newurl( value );
-      newurl.setPathData( expand( value.getPathData(), RepoVarsMap::lookup ) );
-      newurl.setQueryString( expand( value.getQueryString(), RepoVarsMap::lookup ) );
+      static const Url::ViewOptions toReplace = url::ViewOption::DEFAULTS - url::ViewOption::WITH_USERNAME - url::ViewOption::WITH_PASSWORD;
+      const std::string & replaced( RepoVarExpand()( value.asString( toReplace ), RepoVarsMap::lookup ) );
+      Url newurl;
+      if ( !replaced.empty() )
+      {
+	newurl = replaced;
+	newurl.setUsername( value.getUsername( url::E_ENCODED ), url::E_ENCODED );
+	newurl.setPassword( value.getPassword( url::E_ENCODED ), url::E_ENCODED );
+      }
       return newurl;
     }
   } // namespace repo

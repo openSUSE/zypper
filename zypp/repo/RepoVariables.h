@@ -115,7 +115,7 @@ namespace zypp
     /**
      * \short Functor replacing repository variables
      *
-     * Replaces repository variables in the path and query part of the URL.
+     * Replaces repository variables in the URL (except for user/pass inside authority)
      * \see RepoVariablesStringReplacer
      */
     struct RepoVariablesUrlReplacer : public std::unary_function<const Url &, Url>

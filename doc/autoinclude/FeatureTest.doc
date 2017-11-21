@@ -68,6 +68,8 @@ Packages requiring a feature may use the corresponding \c Requires: in their .sp
     <DD>Also support braced variables, shell like default and alternate values.</DD>
     <DT>version 1</DT>
     <DD>Also support user defined repo variables in /etc/zypp/vars.d.</DD>
+    <DT>version 1.1</DT>
+    <DD>Support repo variables in an URIs \c host and \c port component.</DD>
   </DL></DD>
 </DL>
 
