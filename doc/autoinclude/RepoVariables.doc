@@ -35,6 +35,6 @@ The variable expander also supports shell like definition of default and alterna
 
 A custom repository variable is defined by creating a file in \c /etc/zypp/vars.d. The variable name equals the file name. The files first line (up to but not including the newline character) defines the variables value. Valid variable(file) names consist of alphanumeric chars and '_' only.
 
-Variable substitution within an URIs authority [requires 'libzypp(repovarexpand) >= 1.1'] is limited to \c host and \c port. Bash style definition of default and values is not supported. No variables can be used in an URIs \c scheme, \c user and \c password.
+Variable substitution within an URIs authority [requires 'libzypp(repovarexpand) >= 1.1'] is limited to \c host and \c port. Bash style definition of default and alternate values is not supported. No variables can be used in an URIs \c scheme, \c user and \c password.
 
 */
