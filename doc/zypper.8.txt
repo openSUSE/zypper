@@ -911,7 +911,7 @@ You can use the following variables within a *.repo* or *.service* files 'name' 
 		In addition *$releasever_major* will be set to the leading portion up to (but not including) the 1st dot; *$releasever_minor* to the trailing portion after the 1st dot. If there's no dot in *$releasever*, *$releasever_major* is the same as *$releasever* and *$releasever_minor* is empty.
 
 	*Custom Variables*:::
-		A custom repository variable is defined by creating a file in */etc/zypp/vars.d*. The variable name equals the file name. The files first line (up to but not including the newline character) defines the variables value.
+		A custom repository variable is defined by creating a file in */etc/zypp/vars.d*. The variable name equals the file name. The files first line (up to but not including the newline character) defines the variables value.  Valid variable(file) names consist of alphanumeric chars and underscore only.
 
 	Remember to protect the *$* when using these variables on a shell command line: :::
 		zypper ar -f http://ftp.gwdg.de/pub/linux/packman/suse/*\$*{nop}releasever packman
@@ -922,8 +922,13 @@ You can use the following variables within a *.repo* or *.service* files 'name' 
 	Bash style definition of default *${*'variable'*:-*'word'*}* and alternate *${*'variable'*:+*'word'*}* values: :::
 		SLE-*${*'releasever_major'*}${*'releasever_minor'*:+*-SP-'$releasever_minor'*}*
 
+
 	To check where you already use *$releasever* call: :::
 		*zypper --releasever @--HERE--@ lr -u*
+
+	NOTE: :::
+		Variable substitution within an URIs authority is limited to *host* and *port*. Bash style definition of default and values is not supported. No variables can be used in an URIs *scheme*, *user* and *password*.
+
 
 
 Supported URI formats:
