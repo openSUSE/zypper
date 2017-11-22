@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 10/24/2017
+.\"      Date: 11/22/2017
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "10/24/2017" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "11/22/2017" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1851,7 +1851,7 @@ is empty\&.
 \fBCustom Variables\fR
 .RS 4
 A custom repository variable is defined by creating a file in
-\fB/etc/zypp/vars\&.d\fR\&. The variable name equals the file name\&. The files first line (up to but not including the newline character) defines the variables value\&.
+\fB/etc/zypp/vars\&.d\fR\&. The variable name equals the file name\&. The files first line (up to but not including the newline character) defines the variables value\&. Valid variable(file) names consist of alphanumeric chars and underscore only\&.
 .RE
 .PP
 Remember to protect the \fB$\fR when using these variables on a shell command line:
@@ -1874,6 +1874,18 @@ SLE\-\fB${\fR\fIreleasever_major\fR\fB}${\fR\fIreleasever_minor\fR\fB:+\fR\-SP\-
 To check where you already use \fB$releasever\fR call:
 .RS 4
 \fBzypper \-\-releasever @\-\-HERE\-\-@ lr \-u\fR
+.RE
+.PP
+NOTE:
+.RS 4
+Variable substitution within an URIs authority is limited to
+\fBhost\fR
+and
+\fBport\fR\&. Bash style definition of default and alternate values is not supported\&. No variables can be used in an URIs
+\fBscheme\fR,
+\fBuser\fR
+and
+\fBpassword\fR\&.
 .RE
 .RE
 .sp
