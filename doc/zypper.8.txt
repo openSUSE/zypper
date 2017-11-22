@@ -927,7 +927,7 @@ You can use the following variables within a *.repo* or *.service* files 'name' 
 		*zypper --releasever @--HERE--@ lr -u*
 
 	NOTE: :::
-		Variable substitution within an URIs authority is limited to *host* and *port*. Bash style definition of default and values is not supported. No variables can be used in an URIs *scheme*, *user* and *password*.
+		Variable substitution within an URIs authority is limited to *host* and *port*. Bash style definition of default and alternate values is not supported. No variables can be used in an URIs *scheme*, *user* and *password*.
 
 
 
