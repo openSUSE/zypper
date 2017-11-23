@@ -179,16 +179,15 @@ namespace zypp
     /// \class FilterRunsInLXC
     /// \brief Functor guessing whether \a PID is running in a container.
     ///
-    /// Asumme a using different \c pid/mnt namespace than \c self.
+    /// Assumme using different \c pid namespace than \c self.
     /////////////////////////////////////////////////////////////////
     struct FilterRunsInLXC
     {
       bool operator()( pid_t pid_r ) const
-      { return( nsIno( pid_r, "pid" ) != pidNS || nsIno( pid_r, "mnt" ) != mntNS ); }
+      { return( nsIno( pid_r, "pid" ) != pidNS ); }
 
       FilterRunsInLXC()
       : pidNS( nsIno( "self", "pid" ) )
-      , mntNS( nsIno( "self", "mnt" ) )
       {}
 
       static inline ino_t nsIno( const std::string & pid_r, const std::string & ns_r )
@@ -198,7 +197,6 @@ namespace zypp
       { return  nsIno( asString(pid_r), ns_r ); }
 
       ino_t pidNS;
-      ino_t mntNS;
     };
 
 #if 0
