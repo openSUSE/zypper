@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Nov 23 12:34:53 CET 2017 - ma@suse.de
+
+- Update manpage regarding custom repository variable fixes
+  (bsc#1057640, bsc#1067605)
+- Version 1.14.x for CODE-15, 1.13.x. is continued on SuSE-SLE-12-SP2-Branch
+- version 1.14.0
+
+-------------------------------------------------------------------
 Thu Oct  5 18:17:58 CEST 2017 - ma@suse.de
 
 - Add summary hint if product is better updated by a different
