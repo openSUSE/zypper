@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Nov 23 12:33:51 CET 2017 - ma@suse.de
+
+- Don't filter procs with a different mnt namespace (bsc#1068708)
+- Support repo variables in an URIs host:port component
+  (bsc#1057640, bsc#1067605)
+- version 17.0.2 (0)
+
+-------------------------------------------------------------------
 Fri Nov 10 15:25:20 CET 2017 - ma@suse.de
 
 - Solvable: fix inconsistent retrieval of mediaNr (bsc#1065677)
