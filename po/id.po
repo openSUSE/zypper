@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-11-21 13:04+0000\n"
+"PO-Revision-Date: 2017-11-27 08:06+0000\n"
 "Last-Translator: ahmad haris <ahmadharis1982@gmail.com>\n"
 "Language-Team: Indonesian "
 "<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
@@ -1455,7 +1455,7 @@ msgstr "Nonaktifkan cache berkas-berkas RPM."
 
 #: src/Zypper.cc:127
 msgid "Enable GPG check for this repository."
-msgstr "Enable GPG check for this repository."
+msgstr "Aktifkan pemeriksaan GPG untuk repositori ini."
 
 #: src/Zypper.cc:128
 msgid "Enable strict GPG check for this repository."
