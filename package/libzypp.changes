@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 28 18:21:51 CET 2017 - ma@suse.de
+
+- When importing multiple keys, export the individual keys
+  ascii armored for import into the rpmdb (bsc#1069381)
+- version 17.0.3 (0)
+
+-------------------------------------------------------------------
 Thu Nov 23 12:33:51 CET 2017 - ma@suse.de
 
 - Don't filter procs with a different mnt namespace (bsc#1068708)
