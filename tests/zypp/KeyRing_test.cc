@@ -208,4 +208,31 @@ BOOST_AUTO_TEST_CASE(signature_test)
   }
 }
 
+BOOST_AUTO_TEST_CASE(keyring_import)
+{
+  // base sandbox for playing
+  TmpDir tmp_dir;
+  KeyRing keyring( tmp_dir.path() );
+  struct Receiver: public callback::ReceiveReport<KeyRingSignals>
+  {
+    Receiver()
+    { connect(); }
+
+    virtual void trustedKeyAdded( const PublicKey & key_r )
+    { ++_cbcnt; }
+
+    unsigned _cbcnt = 0;
+  } receiver;
+
+  ///////////////////////////////////////////////////////////////////
+  // Make sure we get a proper callback notification if multiple
+  // keys are imported at once.
+  ///////////////////////////////////////////////////////////////////
+  PublicKey key( DATADIR + "installkey.gpg" );
+  BOOST_CHECK_EQUAL( key.hiddenKeys().size(), 2 );
+  BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), 0 );
+  keyring.importKey( key, true );
+  BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), 3 );
+  BOOST_CHECK_EQUAL( receiver._cbcnt, keyring.trustedPublicKeys().size() );
+}
 

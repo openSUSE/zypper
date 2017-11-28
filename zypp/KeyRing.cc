@@ -240,6 +240,8 @@ namespace zypp
 
     PublicKey exportKey( const std::string & id, const Pathname & keyring );
     PublicKey exportKey( const PublicKeyData & keyData, const Pathname & keyring );
+    PublicKey exportKey( const PublicKey & key, const Pathname & keyring )
+    { return exportKey( key.keyData(), keyring ); }
 
     void dumpPublicKey( const std::string & id, const Pathname & keyring, std::ostream & stream );
     filesystem::TmpFile dumpPublicKeyToTmp( const std::string & id, const Pathname & keyring );
@@ -273,6 +275,31 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
+  namespace
+  {
+    /// Handle signal emission from within KeyRing::Impl::importKey
+    struct ImportKeyCBHelper
+    {
+      void operator()( const PublicKey & key_r )
+      {
+	try {
+	  _rpmdbEmitSignal->trustedKeyAdded( key_r );
+	  _emitSignal->trustedKeyAdded( key_r );
+	}
+	catch ( const Exception & excp )
+	{
+	  ERR << "Could not import key into rpmdb: " << excp << endl;
+	  // TODO: JobReport as hotfix for bsc#1057188; should bubble up and go through some callback
+	  JobReport::error( excp.asUserHistory() );
+	}
+      }
+
+    private:
+      callback::SendReport<target::rpm::KeyRingSignals> _rpmdbEmitSignal;
+      callback::SendReport<KeyRingSignals>              _emitSignal;
+    };
+  } // namespace
+
 
   void KeyRing::Impl::importKey( const PublicKey & key, bool trusted )
   {
@@ -280,18 +307,19 @@ namespace zypp
     MIL << "Imported key " << key << " to " << (trusted ? "trustedKeyRing" : "generalKeyRing" ) << endl;
 
     if ( trusted )
-    try {
-      callback::SendReport<target::rpm::KeyRingSignals> rpmdbEmitSignal;
-      rpmdbEmitSignal->trustedKeyAdded( key );
-
-      callback::SendReport<KeyRingSignals> emitSignal;
-      emitSignal->trustedKeyAdded( key );
-    }
-    catch ( const Exception & excp )
     {
-      ERR << "Could not import key into rpmdb: " << excp << endl;
-      // TODO: JobReport as hotfix for bsc#1057188; should bubble up and go through some callback
-      JobReport::error( excp.asUserHistory() );
+      ImportKeyCBHelper emitSignal;
+      if ( key.hiddenKeys().empty() )
+      {
+	emitSignal( key );
+      }
+      else
+      {
+	// multiple keys: Export individual keys ascii armored to import in rpmdb
+	emitSignal( exportKey( key, trustedKeyRing() ) );
+	for ( const PublicKeyData & hkey : key.hiddenKeys() )
+	  emitSignal( exportKey( hkey, trustedKeyRing() ) );
+      }
     }
   }
 
