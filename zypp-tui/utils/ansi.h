@@ -31,6 +31,54 @@ bool do_colors();	// implemented in colors.cc
 ///////////////////////////////////////////////////////////////////
 namespace ansi
 {
+  ///////////////////////////////////////////////////////////////////
+  namespace tty
+  {
+    ///////////////////////////////////////////////////////////////////
+    /// \class EscapeSequence
+    /// \brief ANSI Escape sequences and their fallback if no tty
+    ///////////////////////////////////////////////////////////////////
+    class EscapeSequence
+    {
+    public:
+      EscapeSequence( const char * ansi_r, const char * fallback_r = "" )
+      : _seq( ansi_r )
+      , _fbck( fallback_r )
+      {}
+
+      const char * str() const
+      {
+	if ( _fbck )	// determine _seq<>_fbck on 1st use (dtor is too early as do_ttyout() is not yet ready)
+	{
+	  if ( ! do_ttyout() )
+	    _seq = _fbck;
+	  _fbck = nullptr;
+	}
+	return _seq;
+      }
+
+    private:
+      mutable const char * _seq;
+      mutable const char * _fbck;
+    };
+
+    /** \relates EscapeSequence stream output */
+    inline std::ostream & operator<<( std::ostream & str, const EscapeSequence & obj )
+    { return str << obj.str(); }
+
+
+    // EscapeSequence definitions in colors.cc
+
+    extern const EscapeSequence clearLN;	///< Clear entire line
+
+    extern const EscapeSequence cursorUP;	///< Cursor up 1 line
+    extern const EscapeSequence cursorDOWN;	///< Cursor down 1 line
+    extern const EscapeSequence cursorRIGHT;	///< Cursor right 1 char
+    extern const EscapeSequence cursorLEFT;	///< Cursor left 1 char
+
+  } // namespace tty
+  ///////////////////////////////////////////////////////////////////
+
 #define ZYPPER_TRACE_SGR 0
 #undef ESC
 #if ( ZYPPER_TRACE_SGR < 2 )

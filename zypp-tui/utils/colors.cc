@@ -12,6 +12,9 @@
 #include "Zypper.h"
 #include "colors.h"
 
+///////////////////////////////////////////////////////////////////
+// from ansi.h
+
 bool do_ttyout()
 {
   return Zypper::instance().config().do_ttyout;
@@ -22,6 +25,18 @@ bool do_colors()
   return Zypper::instance().config().do_colors;
 }
 
+namespace ansi
+{
+  namespace tty
+  {
+    const EscapeSequence clearLN	( "\033[2K\r", "\n" );
+    const EscapeSequence cursorUP	( "\033[1A" );
+    const EscapeSequence cursorDOWN	( "\033[1B" );
+    const EscapeSequence cursorRIGHT	( "\033[1C" );
+    const EscapeSequence cursorLEFT	( "\033[1D" );
+  } // namespace tty
+} // namespace tty
+// from ansi.h
 ///////////////////////////////////////////////////////////////////
 
 ansi::Color customColorCtor( ColorContext ctxt_r )
