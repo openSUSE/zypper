@@ -32,6 +32,22 @@ using std::endl;
 //////////////////////////////////////////////////////////////////
 namespace
 {
+  /** Simple check whether stdout is a (not dumb) tty */
+  inline bool mayUseANSIEscapes()
+  {
+    if ( ::isatty(STDOUT_FILENO) )
+    {
+      char *term = ::getenv("TERM");
+      if ( term && ::strcmp( term, "dumb" ) )
+	return true;
+    }
+    return false;
+  }
+
+  /** Simple check whether stdout can handle colors */
+  inline bool hasANSIColor()
+  { return mayUseANSIEscapes(); }
+
   /** Color names (case insensitive) accepted in the config file. */
   ansi::Color namedColor( std::string name_r )
   {
@@ -174,6 +190,7 @@ Config::Config()
   : repo_list_columns("anr")
   , solver_installRecommends(!ZConfig::instance().solver_onlyRequires())
   , psCheckAccessDeleted(true)
+  , do_ttyout		(true)
   , do_colors		(false)
   , color_useColors	("autodetect")
   , color_result	(namedColor("default"))
@@ -249,7 +266,8 @@ void Config::read( const std::string & file )
     if (!s.empty())
       color_useColors = s;
 
-    do_colors = ( color_useColors == "autodetect" && has_colors() ) || color_useColors == "always";
+    do_ttyout = mayUseANSIEscapes();
+    do_colors = ( color_useColors == "autodetect" && hasANSIColor() ) || color_useColors == "always";
 
     ansi::Color c;
     for ( const auto & el : std::initializer_list<std::pair<ansi::Color &, ConfigOption>> {

@@ -20,8 +20,13 @@
 #include <zypp/base/String.h>
 using namespace zypp;
 
+/** True unless output is a dumb tty or file.
+ * In this case we should not use any ANSI Escape sequences moving the cursor.
+ */
+bool do_ttyout();	// implemented in colors.cc
+
 /** If output is done in colors (depends on config) */
-bool do_colors();
+bool do_colors();	// implemented in colors.cc
 
 ///////////////////////////////////////////////////////////////////
 namespace ansi
@@ -365,7 +370,7 @@ namespace ansi
     }
 
   private:
-    /** ctor nocolor, all ::Unchange( lhs.uid() == rhs.uid() )d, uid 0 */
+    /** ctor nocolor, all ::Unchanged, uid 0 */
     Color ( UidType ) {}
 
     union Comp {

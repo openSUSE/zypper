@@ -6,22 +6,15 @@
 \*---------------------------------------------------------------------------*/
 
 #include <iostream>
-#include <map>
 
 #include <zypp/base/Logger.h>
 
 #include "Zypper.h"
 #include "colors.h"
 
-bool has_colors()
+bool do_ttyout()
 {
-  if (::isatty(STDOUT_FILENO))
-  {
-    char *term = ::getenv("TERM");
-    if ( term && ::strcmp(term, "dumb") )
-      return true;
-  }
-  return false;
+  return Zypper::instance().config().do_ttyout;
 }
 
 bool do_colors()

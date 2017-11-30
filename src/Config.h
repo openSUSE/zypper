@@ -36,8 +36,15 @@ struct Config
   bool psCheckAccessDeleted;	///< do post commit 'zypper ps' check?
 
   /**
+   * True unless output is a dumb tty or file. In this case we should not use
+   * any ANSI Escape sequences (at least those moving the cursor; color may
+   * be explicitly enabled 'zypper --color ..| less'
+   */
+  bool do_ttyout;
+
+  /**
    * Whether to colorize the output. This is evaluated according to
-   * color_useColors and has_colors()
+   * color_useColors and do_ttyout.
    */
   bool do_colors;
 
