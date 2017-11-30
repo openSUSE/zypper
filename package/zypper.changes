@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov 30 18:31:19 CET 2017 - ma@suse.de
+
+- Avoid writing ANSI Escape sequences on a dumb terminal (bsc#1055315)
+- version 1.14.1
+
+-------------------------------------------------------------------
 Thu Nov 23 12:34:53 CET 2017 - ma@suse.de
 
 - Update manpage regarding custom repository variable fixes
