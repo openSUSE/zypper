@@ -29,7 +29,7 @@ using std::endl;
 OutNormal::OutNormal( Verbosity verbosity_r )
 : Out( TYPE_NORMAL, verbosity_r )
 , _use_colors( false )
-, _isatty( isatty(STDOUT_FILENO) )
+, _isatty( do_ttyout() )
 , _newline( true )
 , _oneup( false )
 {}
@@ -131,8 +131,8 @@ void OutNormal::displayProgress ( const std::string & s, int percent )
     outstr.rhs << '[' << cursor.current() << ']';
 
     if ( _oneup )
-      cout << CLEARLN << CURSORUP(1);
-    cout << CLEARLN;
+      cout << ansi::tty::clearLN << ansi::tty::cursorUP;
+    cout << ansi::tty::clearLN;
 
     std::string outline( outstr.get( termwidth() ) );
     cout << outline << std::flush;
@@ -156,8 +156,8 @@ void OutNormal::displayTick( const std::string & s )
     outstr.rhs << '[' << cursor.current() << ']';
 
     if( _oneup )
-      cout << CLEARLN << CURSORUP(1);
-    cout << CLEARLN;
+      cout << ansi::tty::clearLN << ansi::tty::cursorUP;
+    cout << ansi::tty::clearLN;
 
     std::string outline( outstr.get( termwidth() ) );
     cout << outline << std::flush;
@@ -211,10 +211,10 @@ void OutNormal::progressEnd( const std::string & id, const std::string & label, 
   {
     if ( _oneup )
     {
-      cout << CLEARLN << CURSORUP(1);
+      cout << ansi::tty::clearLN << ansi::tty::cursorUP;
       _oneup = false;
     }
-    cout << CLEARLN;
+    cout << ansi::tty::clearLN;
 
     outstr.lhs << label << ' ';
     outstr.rhs << '[';
@@ -243,7 +243,7 @@ void OutNormal::dwnldProgressStart( const Url & uri )
     return;
 
   if ( _isatty )
-    cout << CLEARLN;
+    cout << ansi::tty::clearLN;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '-' );
   outstr.lhs << _("Retrieving:") << ' ';
@@ -269,15 +269,15 @@ void OutNormal::dwnldProgress( const Url & uri, int value, long rate )
   if ( verbosity() < NORMAL )
     return;
 
-  if ( !isatty(STDOUT_FILENO) )
+  if ( !_isatty )
   {
     cout << '.' << std::flush;
     return;
   }
 
   if( _oneup )
-    cout << CLEARLN << CURSORUP(1);
-  cout << CLEARLN;
+    cout << ansi::tty::clearLN << ansi::tty::cursorUP;
+  cout << ansi::tty::clearLN;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '-' );
   outstr.lhs << _("Retrieving:") << " ";
@@ -316,8 +316,8 @@ void OutNormal::dwnldProgressEnd( const Url & uri, long rate, TriBool error )
   if ( _isatty )
   {
     if( _oneup )
-      cout << CLEARLN << CURSORUP(1);
-    cout << CLEARLN;
+      cout << ansi::tty::clearLN << ansi::tty::cursorUP;
+    cout << ansi::tty::clearLN;
     outstr.lhs << _("Retrieving:") << " ";
     if ( verbosity() == DEBUG )
       outstr.lhs << uri;
@@ -358,7 +358,7 @@ void OutNormal::prompt( PromptId id, const std::string & prompt, const PromptOpt
   if ( startdesc.empty() )
   {
     if ( _isatty )
-      cout << CLEARLN;
+      cout << ansi::tty::clearLN;
   }
   else
     cout << startdesc << endl;

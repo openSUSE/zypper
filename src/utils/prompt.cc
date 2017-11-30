@@ -126,8 +126,6 @@ bool PromptOptions::isYesNoPrompt() const
 
 // ----------------------------------------------------------------------------
 
-#define CLEARLN "\x1B[2K\r"
-
 //! \todo The default values seems to be useless - we always want to auto-return 'retry' in case of no user input.
 int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_action )
 {
@@ -205,7 +203,7 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
       zypper.out().info( msg );	// maybe progress??
     else
     {
-      cout << CLEARLN << msg << " ";
+      cout << ansi::tty::clearLN << msg << " ";
       cout.flush();
     }
 
@@ -214,7 +212,7 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
   }
 
   if ( zypper.out().type() != Out::TYPE_XML )
-    cout << CLEARLN << _("Trying again...") << endl;
+    cout << ansi::tty::clearLN << _("Trying again...") << endl;
 
   return default_action;
 }
