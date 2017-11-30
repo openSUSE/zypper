@@ -13,8 +13,10 @@
 
 #include "ansi.h"
 
-/** Simple check whether stdout can handle colors */
-bool has_colors();
+/** True unless output is a dumb tty or file.
+ * In this case we should not use any ANSI Escape sequences moving the cursor.
+ */
+bool do_ttyout();
 
 /** If output is done in colors (depends on config) */
 bool do_colors();
