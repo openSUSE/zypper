@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Check hardware-2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-07 12:25+0200\n"
+"POT-Creation-Date: 2017-12-01 07:26+0100\n"
 "PO-Revision-Date: 2006-11-13 12:55+0530\n"
 "Last-Translator: Priyavert Sharma <priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions <linux_team@agreeya.com>\n"
@@ -1297,69 +1297,74 @@ msgstr ""
 msgid "Supplements"
 msgstr ""
 
-#: zypp/ExternalProgram.cc:258
+#: zypp/ExternalProgram.cc:261
 #, fuzzy, c-format, boost-format
 msgid "Can't open pty (%s)."
 msgstr "फाईल उघडता येत नाही %1."
 
-#: zypp/ExternalProgram.cc:269
+#: zypp/ExternalProgram.cc:272
 #, fuzzy, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "फाईल उघडता येत नाही %1."
 
-#: zypp/ExternalProgram.cc:350
+#: zypp/ExternalProgram.cc:353
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:360
+#: zypp/ExternalProgram.cc:363
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:361
+#: zypp/ExternalProgram.cc:364
 #, fuzzy, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "%s आढळत नाही."
 
 #. don't want to get here
-#: zypp/ExternalProgram.cc:373
+#: zypp/ExternalProgram.cc:376
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:381
+#: zypp/ExternalProgram.cc:384
 #, fuzzy, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "%s आढळत नाही."
 
-#: zypp/ExternalProgram.cc:507
+#: zypp/ExternalProgram.cc:510
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:527
+#: zypp/ExternalProgram.cc:530
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:532
+#: zypp/ExternalProgram.cc:535
 #, fuzzy
 msgid "Command exited with unknown error."
 msgstr " कनेक्ट करतांना आदेश वापरला "
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:520
+#: zypp/KeyRing.cc:561
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr ""
 
-#: zypp/KeyRing.cc:564
+#: zypp/KeyRing.cc:583
+#, fuzzy
+msgid "Failed to import key."
+msgstr "VM सुरू करण्यात अयशस्वी."
+
+#: zypp/KeyRing.cc:606
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "VM सुरू करण्यात अयशस्वी."
 
-#: zypp/KeyRing.cc:572
+#: zypp/KeyRing.cc:612
 #, fuzzy, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "नोंद आढळली नाही"
@@ -4179,7 +4184,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr ""
 
-#: zypp/misc/CheckAccessDeleted.cc:283
+#: zypp/misc/CheckAccessDeleted.cc:281
 msgid "Please install package 'lsof' first."
 msgstr ""
 
@@ -4227,12 +4232,12 @@ msgstr "applydeltarpm अयशस्वी"
 msgid "Service plugin does not support changing an attribute."
 msgstr "बदल वैशिष्ट्ये दाखवाला रिसोर्स प्रकार VAR1 समर्थन देत नाही feature"
 
-#: zypp/repo/RepoProvideFile.cc:259
+#: zypp/repo/RepoProvideFile.cc:261
 #, fuzzy, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr "%s वरून %s पुरवू शकत नाही"
 
-#: zypp/repo/RepoProvideFile.cc:265
+#: zypp/repo/RepoProvideFile.cc:267
 #, fuzzy
 msgid "No url in repository."
 msgstr "भांडारात फाईल %1 आढळली नाही"
@@ -4630,43 +4635,43 @@ msgstr "CDROM ड्राईव्ह नाही"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
-#: zypp/target/rpm/RpmDb.cc:2209
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2090
+#: zypp/target/rpm/RpmDb.cc:2236
 #, fuzzy
 msgid "RPM failed: "
 msgstr "अयशस्वी"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1119
+#: zypp/target/rpm/RpmDb.cc:1147
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr ""
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1189
+#: zypp/target/rpm/RpmDb.cc:1217
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr ""
 
-#: zypp/target/rpm/RpmDb.cc:1568
+#: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1868
+#: zypp/target/rpm/RpmDb.cc:1896
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "%s साठी बदललेल्या आकृतीबंध फाईल्स"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2044
+#: zypp/target/rpm/RpmDb.cc:2071
 #, fuzzy, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ने %s हे %s म्हणन जतन केले, परंतु फरक सांगणे अशक्य"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2046
+#: zypp/target/rpm/RpmDb.cc:2073
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4674,13 +4679,13 @@ msgid ""
 msgstr "rpm ने %s हे %s म्हणून जतन केले/nफरकाच्या या पहिल्या 25 ओळी\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2049
+#: zypp/target/rpm/RpmDb.cc:2076
 #, fuzzy, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ने %s  हे %s म्हणून जतन केले फरकाच्या या पहिल्या"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2051
+#: zypp/target/rpm/RpmDb.cc:2078
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4689,51 +4694,51 @@ msgstr "rpm ने %s हे %s म्हणून जतन केले/nफ�
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+#: zypp/target/rpm/RpmDb.cc:2103 zypp/target/rpm/RpmDb.cc:2249
 #, fuzzy
 msgid "Additional rpm output"
 msgstr "अतिरिक्त rpm आऊटपुट"
 
-#: zypp/target/rpm/RpmDb.cc:2364
+#: zypp/target/rpm/RpmDb.cc:2391
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "बॅकअप %s  निर्माण केले"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2385
+#: zypp/target/rpm/RpmDb.cc:2412
 #, fuzzy
 msgid "Signature is OK"
 msgstr "नोंद आढळली नाही"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2387
+#: zypp/target/rpm/RpmDb.cc:2414
 msgid "Unknown type of signature"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2389
+#: zypp/target/rpm/RpmDb.cc:2416
 #, fuzzy
 msgid "Signature does not verify"
 msgstr "नोंद आढळली नाही"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2391
+#: zypp/target/rpm/RpmDb.cc:2418
 #, fuzzy
 msgid "Signature is OK, but key is not trusted"
 msgstr "नोंद आढळली नाही"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2393
+#: zypp/target/rpm/RpmDb.cc:2420
 msgid "Signatures public key is not available"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
+#: zypp/target/rpm/RpmDb.cc:2422
 msgid "File does not exist or signature can't be checked"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
+#: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
 msgstr ""
 

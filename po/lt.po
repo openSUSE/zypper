@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-07 12:25+0200\n"
+"POT-Creation-Date: 2017-12-01 07:26+0100\n"
 "PO-Revision-Date: 2017-06-02 18:02+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -1386,67 +1386,72 @@ msgstr "Pagerina"
 msgid "Supplements"
 msgstr "Papildo"
 
-#: zypp/ExternalProgram.cc:258
+#: zypp/ExternalProgram.cc:261
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
 msgstr "Nepavyksta atverti pty (%s)."
 
-#: zypp/ExternalProgram.cc:269
+#: zypp/ExternalProgram.cc:272
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "Nepavyksta atverti kanalo (%s)."
 
-#: zypp/ExternalProgram.cc:350
+#: zypp/ExternalProgram.cc:353
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:360
+#: zypp/ExternalProgram.cc:363
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:361
+#: zypp/ExternalProgram.cc:364
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "Nepavyksta keisti pakeisti aplanko į „%s“ (%s)."
 
 #. don't want to get here
-#: zypp/ExternalProgram.cc:373
+#: zypp/ExternalProgram.cc:376
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Nepavyksta įvykdyti „%s“ (%s)."
 
-#: zypp/ExternalProgram.cc:381
+#: zypp/ExternalProgram.cc:384
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:507
+#: zypp/ExternalProgram.cc:510
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Komanda baigta būsenoje %d."
 
-#: zypp/ExternalProgram.cc:527
+#: zypp/ExternalProgram.cc:530
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Komanda nutraukta naudojant signalą %d (%s)."
 
-#: zypp/ExternalProgram.cc:532
+#: zypp/ExternalProgram.cc:535
 msgid "Command exited with unknown error."
 msgstr "Komanda pasibaigė su nežinoma klaida."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:520
+#: zypp/KeyRing.cc:561
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Mėginta importuoti neegzistuojantį raktą %s į raktinę %s"
 
-#: zypp/KeyRing.cc:564
+#: zypp/KeyRing.cc:583
+#, fuzzy
+msgid "Failed to import key."
+msgstr "Nepavyko įkelti viešojo rakto %1%"
+
+#: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
 msgstr "Rakto nepavyko pašalinti."
 
-#: zypp/KeyRing.cc:572
+#: zypp/KeyRing.cc:612
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Parašo rinkmena %s nerasta"
@@ -4293,7 +4298,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Nepalaikomas HTTP tapatybės nustatymo būdas „%s“"
 
-#: zypp/misc/CheckAccessDeleted.cc:283
+#: zypp/misc/CheckAccessDeleted.cc:281
 msgid "Please install package 'lsof' first."
 msgstr "Pirmiausia įdiekite „lsof“ paketą."
 
@@ -4339,12 +4344,12 @@ msgstr "applydeltarpm nepavyko."
 msgid "Service plugin does not support changing an attribute."
 msgstr "Paslaugos papildinys nepalaiko atributų keitimo."
 
-#: zypp/repo/RepoProvideFile.cc:259
+#: zypp/repo/RepoProvideFile.cc:261
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr "Nepavyksta pateikti rinkmenos „%s“ iš saugyklos „%s“"
 
-#: zypp/repo/RepoProvideFile.cc:265
+#: zypp/repo/RepoProvideFile.cc:267
 msgid "No url in repository."
 msgstr "Saugykloje nėra url."
 
@@ -4782,42 +4787,42 @@ msgstr "Tai ne CD nuskaitymo įrenginys"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
-#: zypp/target/rpm/RpmDb.cc:2209
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2090
+#: zypp/target/rpm/RpmDb.cc:2236
 msgid "RPM failed: "
 msgstr "RPM klaida:"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1119
+#: zypp/target/rpm/RpmDb.cc:1147
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "Nepavyko įkelti viešojo rakto %1%"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1189
+#: zypp/target/rpm/RpmDb.cc:1217
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "Nepavyko pašalinti viešojo rakto %1%"
 
-#: zypp/target/rpm/RpmDb.cc:1568
+#: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1868
+#: zypp/target/rpm/RpmDb.cc:1896
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Pakeistos %s konfigūracijos rinkmenos:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2044
+#: zypp/target/rpm/RpmDb.cc:2071
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm išsaugojo %s kaip %s, bet neįmanoma nustatyti skirtumo"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2046
+#: zypp/target/rpm/RpmDb.cc:2073
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4827,13 +4832,13 @@ msgstr ""
 "Pateikiamos pirmosios 25 skirtumų eilutės:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2049
+#: zypp/target/rpm/RpmDb.cc:2076
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm sukūrė %s kaip %s, bet neįmanoma nustatyti skirtumo"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2051
+#: zypp/target/rpm/RpmDb.cc:2078
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4844,47 +4849,47 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+#: zypp/target/rpm/RpmDb.cc:2103 zypp/target/rpm/RpmDb.cc:2249
 msgid "Additional rpm output"
 msgstr "Papildoma rpm išvestis"
 
-#: zypp/target/rpm/RpmDb.cc:2364
+#: zypp/target/rpm/RpmDb.cc:2391
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "padaryta %s atsarginė kopija"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2385
+#: zypp/target/rpm/RpmDb.cc:2412
 msgid "Signature is OK"
 msgstr "Parašas geras"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2387
+#: zypp/target/rpm/RpmDb.cc:2414
 msgid "Unknown type of signature"
 msgstr "Nežinomo tipo parašas"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2389
+#: zypp/target/rpm/RpmDb.cc:2416
 msgid "Signature does not verify"
 msgstr "Parašas nepatikrinamas. "
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2391
+#: zypp/target/rpm/RpmDb.cc:2418
 msgid "Signature is OK, but key is not trusted"
 msgstr "Parašas geras, bet raktas nepatikimas"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2393
+#: zypp/target/rpm/RpmDb.cc:2420
 msgid "Signatures public key is not available"
 msgstr "Paašo viešasis raktas neprieinamas"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
+#: zypp/target/rpm/RpmDb.cc:2422
 msgid "File does not exist or signature can't be checked"
 msgstr "Nėra rinkmenos arba negalima patikrinti parašo"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
+#: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
 msgstr ""
 

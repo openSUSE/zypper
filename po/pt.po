@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-07 12:25+0200\n"
+"POT-Creation-Date: 2017-12-01 07:26+0100\n"
 "PO-Revision-Date: 2008-06-10 16:04+0100\n"
 "Last-Translator: Antonio Cardoso Martins <digiplan.pt@gmail.com>\n"
 "Language-Team: Portuguese <opensuse-pt@opensuse.org>\n"
@@ -1449,67 +1449,72 @@ msgstr "Melhorar"
 msgid "Supplements"
 msgstr "Suplementos"
 
-#: zypp/ExternalProgram.cc:258
+#: zypp/ExternalProgram.cc:261
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
 msgstr "Não foi possível abrir o pty (%s)."
 
-#: zypp/ExternalProgram.cc:269
+#: zypp/ExternalProgram.cc:272
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "Não é possível abrir o pipe (%s)."
 
-#: zypp/ExternalProgram.cc:350
+#: zypp/ExternalProgram.cc:353
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Não é possível fazer chroot para '%s' (%s)."
 
-#: zypp/ExternalProgram.cc:360
+#: zypp/ExternalProgram.cc:363
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:361
+#: zypp/ExternalProgram.cc:364
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr ""
 
 #. don't want to get here
-#: zypp/ExternalProgram.cc:373
+#: zypp/ExternalProgram.cc:376
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Não é possível executar '%s' (%s)."
 
-#: zypp/ExternalProgram.cc:381
+#: zypp/ExternalProgram.cc:384
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "Não é possível bifurcar (%s)."
 
-#: zypp/ExternalProgram.cc:507
+#: zypp/ExternalProgram.cc:510
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Comando terminou com estado %d."
 
-#: zypp/ExternalProgram.cc:527
+#: zypp/ExternalProgram.cc:530
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Comando foi morto pelo sinal %d (%s)."
 
-#: zypp/ExternalProgram.cc:532
+#: zypp/ExternalProgram.cc:535
 msgid "Command exited with unknown error."
 msgstr "Comando terminou com erro desconhecido."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:520
+#: zypp/KeyRing.cc:561
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr ""
 
-#: zypp/KeyRing.cc:564
+#: zypp/KeyRing.cc:583
+#, fuzzy
+msgid "Failed to import key."
+msgstr "Falha ao importar a chave pública %1%"
+
+#: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
 msgstr "Falha ao apagar chave."
 
-#: zypp/KeyRing.cc:572
+#: zypp/KeyRing.cc:612
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Ficheiro de assinatura %s não encontrado"
@@ -4416,7 +4421,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Método '%s' de autenticação HTTP não suportado"
 
-#: zypp/misc/CheckAccessDeleted.cc:283
+#: zypp/misc/CheckAccessDeleted.cc:281
 msgid "Please install package 'lsof' first."
 msgstr ""
 
@@ -4462,12 +4467,12 @@ msgstr "falhou o applydeltarpm."
 msgid "Service plugin does not support changing an attribute."
 msgstr ""
 
-#: zypp/repo/RepoProvideFile.cc:259
+#: zypp/repo/RepoProvideFile.cc:261
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr "Não é possível fornecer o ficheiro '%s' a partir do repositório '%s'"
 
-#: zypp/repo/RepoProvideFile.cc:265
+#: zypp/repo/RepoProvideFile.cc:267
 msgid "No url in repository."
 msgstr "Nenhum url no repositório."
 
@@ -4863,43 +4868,43 @@ msgstr "Não é uma unidade de CDROM"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
-#: zypp/target/rpm/RpmDb.cc:2209
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2090
+#: zypp/target/rpm/RpmDb.cc:2236
 msgid "RPM failed: "
 msgstr "falha no RPM: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1119
+#: zypp/target/rpm/RpmDb.cc:1147
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "Falha ao importar a chave pública %1%"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1189
+#: zypp/target/rpm/RpmDb.cc:1217
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "Falha ao remover a chave pública %1%"
 
-#: zypp/target/rpm/RpmDb.cc:1568
+#: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1868
+#: zypp/target/rpm/RpmDb.cc:1896
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Ficheiros de configuração modificados para %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2044
+#: zypp/target/rpm/RpmDb.cc:2071
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 "o rpm %s foi guardado como %s, mas foi impossível determinar a diferença"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2046
+#: zypp/target/rpm/RpmDb.cc:2073
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4909,13 +4914,13 @@ msgstr ""
 "Tem as primeiras 25 linhas diferentes:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2049
+#: zypp/target/rpm/RpmDb.cc:2076
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "o rpm %s foi criado como %s, mas foi impossível determinar a diferença"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2051
+#: zypp/target/rpm/RpmDb.cc:2078
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4926,48 +4931,48 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+#: zypp/target/rpm/RpmDb.cc:2103 zypp/target/rpm/RpmDb.cc:2249
 #, fuzzy
 msgid "Additional rpm output"
 msgstr "Resultado adicional do rpm:"
 
-#: zypp/target/rpm/RpmDb.cc:2364
+#: zypp/target/rpm/RpmDb.cc:2391
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "cópia de segurança %s criada"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2385
+#: zypp/target/rpm/RpmDb.cc:2412
 msgid "Signature is OK"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2387
+#: zypp/target/rpm/RpmDb.cc:2414
 msgid "Unknown type of signature"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2389
+#: zypp/target/rpm/RpmDb.cc:2416
 msgid "Signature does not verify"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2391
+#: zypp/target/rpm/RpmDb.cc:2418
 msgid "Signature is OK, but key is not trusted"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2393
+#: zypp/target/rpm/RpmDb.cc:2420
 msgid "Signatures public key is not available"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
+#: zypp/target/rpm/RpmDb.cc:2422
 msgid "File does not exist or signature can't be checked"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
+#: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
 msgstr ""
 

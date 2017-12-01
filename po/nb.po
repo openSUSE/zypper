@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-07 12:25+0200\n"
+"POT-Creation-Date: 2017-12-01 07:26+0100\n"
 "PO-Revision-Date: 2013-10-04 20:05+0200\n"
 "Last-Translator: Olav Pettershagen <olpetter@bbnett.no>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
@@ -1395,67 +1395,72 @@ msgstr "Forbedringer"
 msgid "Supplements"
 msgstr "Tillegg"
 
-#: zypp/ExternalProgram.cc:258
+#: zypp/ExternalProgram.cc:261
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
 msgstr "Kunne ikke åpne pty: %s."
 
-#: zypp/ExternalProgram.cc:269
+#: zypp/ExternalProgram.cc:272
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "Kan ikke åpne pipe (%s)."
 
-#: zypp/ExternalProgram.cc:350
+#: zypp/ExternalProgram.cc:353
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Kan ikke kjøre chroot til '%s' (%s)."
 
-#: zypp/ExternalProgram.cc:360
+#: zypp/ExternalProgram.cc:363
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "Kan ikke kjøre chdir til «%s» fra chroot «%s» (%s)."
 
-#: zypp/ExternalProgram.cc:361
+#: zypp/ExternalProgram.cc:364
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "Kan ikke kjøre chdir til «%s» (%s)."
 
 #. don't want to get here
-#: zypp/ExternalProgram.cc:373
+#: zypp/ExternalProgram.cc:376
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Kan ikke kjøre '%s' (%s)."
 
-#: zypp/ExternalProgram.cc:381
+#: zypp/ExternalProgram.cc:384
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "Kan ikke splitte (%s)."
 
-#: zypp/ExternalProgram.cc:507
+#: zypp/ExternalProgram.cc:510
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Kommandoen ble avsluttet med status %d."
 
-#: zypp/ExternalProgram.cc:527
+#: zypp/ExternalProgram.cc:530
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Kommandoen ble drept av signalet %d (%s)."
 
-#: zypp/ExternalProgram.cc:532
+#: zypp/ExternalProgram.cc:535
 msgid "Command exited with unknown error."
 msgstr "Kommandoen ble avsluttet med en ukjent feil."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:520
+#: zypp/KeyRing.cc:561
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Forsøkte å importere ikke-eksisterende nøkkel %s til nøkkelring %s"
 
-#: zypp/KeyRing.cc:564
+#: zypp/KeyRing.cc:583
+#, fuzzy
+msgid "Failed to import key."
+msgstr "Kunne ikke importere offentlig nøkkel %1%"
+
+#: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
 msgstr "Kunne ikke slette nøkkel."
 
-#: zypp/KeyRing.cc:572
+#: zypp/KeyRing.cc:612
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Signaturfilen %s ikke funnet"
@@ -4327,7 +4332,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "HTTP-autentiseringsmetode '%s' er ikke støttet"
 
-#: zypp/misc/CheckAccessDeleted.cc:283
+#: zypp/misc/CheckAccessDeleted.cc:281
 msgid "Please install package 'lsof' first."
 msgstr "Installer pakken 'lsof' først."
 
@@ -4375,12 +4380,12 @@ msgstr "applydeltarpm mislyktes."
 msgid "Service plugin does not support changing an attribute."
 msgstr "ressurstypen VAR1 støtter ikke funksjonen 'vis endringer'"
 
-#: zypp/repo/RepoProvideFile.cc:259
+#: zypp/repo/RepoProvideFile.cc:261
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr "Kan ikke hente filen '%s' i pakkebrønnen '%s'"
 
-#: zypp/repo/RepoProvideFile.cc:265
+#: zypp/repo/RepoProvideFile.cc:267
 msgid "No url in repository."
 msgstr "Ingen nettadresse i pakkebrønn."
 
@@ -4771,42 +4776,42 @@ msgstr "Ikke en CD-ROM-stasjon"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
-#: zypp/target/rpm/RpmDb.cc:2209
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2090
+#: zypp/target/rpm/RpmDb.cc:2236
 msgid "RPM failed: "
 msgstr "RPM mislyktes: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1119
+#: zypp/target/rpm/RpmDb.cc:1147
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "Kunne ikke importere offentlig nøkkel %1%"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1189
+#: zypp/target/rpm/RpmDb.cc:1217
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "Kunne ikke fjerne offentlig nøkkel %1%"
 
-#: zypp/target/rpm/RpmDb.cc:1568
+#: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1868
+#: zypp/target/rpm/RpmDb.cc:1896
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Endrede konfigurasjonsfiler for %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2044
+#: zypp/target/rpm/RpmDb.cc:2071
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm lagret %s som %s, men det var umulig å finne noen forskjell"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2046
+#: zypp/target/rpm/RpmDb.cc:2073
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4816,13 +4821,13 @@ msgstr ""
 "Her er de 25 første avvikende linjene:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2049
+#: zypp/target/rpm/RpmDb.cc:2076
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm opprettet %s som %s, men det var umulig å finne noen forskjell"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2051
+#: zypp/target/rpm/RpmDb.cc:2078
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4833,50 +4838,50 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+#: zypp/target/rpm/RpmDb.cc:2103 zypp/target/rpm/RpmDb.cc:2249
 msgid "Additional rpm output"
 msgstr "Flere rpm-resultater"
 
-#: zypp/target/rpm/RpmDb.cc:2364
+#: zypp/target/rpm/RpmDb.cc:2391
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "opprettet sikkerhetskopi %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2385
+#: zypp/target/rpm/RpmDb.cc:2412
 #, fuzzy
 msgid "Signature is OK"
 msgstr "Signaturfilen %s ikke funnet"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2387
+#: zypp/target/rpm/RpmDb.cc:2414
 msgid "Unknown type of signature"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2389
+#: zypp/target/rpm/RpmDb.cc:2416
 #, fuzzy
 msgid "Signature does not verify"
 msgstr "Signaturfilen %s ikke funnet"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2391
+#: zypp/target/rpm/RpmDb.cc:2418
 #, fuzzy
 msgid "Signature is OK, but key is not trusted"
 msgstr "Signaturfilen %s ikke funnet"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2393
+#: zypp/target/rpm/RpmDb.cc:2420
 msgid "Signatures public key is not available"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
+#: zypp/target/rpm/RpmDb.cc:2422
 msgid "File does not exist or signature can't be checked"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
+#: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
 msgstr ""
 

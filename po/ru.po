@@ -13,17 +13,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-07 12:25+0200\n"
+"POT-Creation-Date: 2017-12-01 07:26+0100\n"
 "PO-Revision-Date: 2017-10-09 20:13+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
-"Language-Team: Russian "
-"<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/libzypp/master/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.13.1\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
@@ -1305,67 +1305,72 @@ msgstr "Улучшает"
 msgid "Supplements"
 msgstr "Дополняет"
 
-#: zypp/ExternalProgram.cc:258
+#: zypp/ExternalProgram.cc:261
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
 msgstr "Невозможно открыть псевдотерминал (%s)."
 
-#: zypp/ExternalProgram.cc:269
+#: zypp/ExternalProgram.cc:272
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "Невозможно открыть канал (%s)."
 
-#: zypp/ExternalProgram.cc:350
+#: zypp/ExternalProgram.cc:353
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Невозможно выполнить chroot в \"%s\" (%s)."
 
-#: zypp/ExternalProgram.cc:360
+#: zypp/ExternalProgram.cc:363
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "Невозможно сменить каталог на \"%s\" внутри среды chroot \"%s\" (%s)."
 
-#: zypp/ExternalProgram.cc:361
+#: zypp/ExternalProgram.cc:364
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "Невозможно сменить каталог на \"%s\" (%s)."
 
 #. don't want to get here
-#: zypp/ExternalProgram.cc:373
+#: zypp/ExternalProgram.cc:376
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Невозможно выполнить exec \"%s\" (%s)."
 
-#: zypp/ExternalProgram.cc:381
+#: zypp/ExternalProgram.cc:384
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "Невозможно выполнить fork (%s)."
 
-#: zypp/ExternalProgram.cc:507
+#: zypp/ExternalProgram.cc:510
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Команда завершилась с кодом %d."
 
-#: zypp/ExternalProgram.cc:527
+#: zypp/ExternalProgram.cc:530
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Команда была прекращена сигналом %d (%s)."
 
-#: zypp/ExternalProgram.cc:532
+#: zypp/ExternalProgram.cc:535
 msgid "Command exited with unknown error."
 msgstr "Команда завершилась с неизвестной ошибкой."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:520
+#: zypp/KeyRing.cc:561
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Попытка импорта несуществующего ключа %s в хранилище ключей %s"
 
-#: zypp/KeyRing.cc:564
+#: zypp/KeyRing.cc:583
+#, fuzzy
+msgid "Failed to import key."
+msgstr "Не удалось импортировать публичный ключ %1%"
+
+#: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
 msgstr "Не удалось удалить ключ."
 
-#: zypp/KeyRing.cc:572
+#: zypp/KeyRing.cc:612
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Не найден файл подписи %s"
@@ -4204,7 +4209,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Неподдерживаемый метод HTTP-аутентификации '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:283
+#: zypp/misc/CheckAccessDeleted.cc:281
 msgid "Please install package 'lsof' first."
 msgstr "Сначала установите пакет 'lsof'."
 
@@ -4249,12 +4254,12 @@ msgstr "сбой в applydeltarpm."
 msgid "Service plugin does not support changing an attribute."
 msgstr "Модуль службы не поддерживает изменение атрибута."
 
-#: zypp/repo/RepoProvideFile.cc:259
+#: zypp/repo/RepoProvideFile.cc:261
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr "Невозможно предоставить файл '%s' из репозитория '%s'"
 
-#: zypp/repo/RepoProvideFile.cc:265
+#: zypp/repo/RepoProvideFile.cc:267
 msgid "No url in repository."
 msgstr "В репозитории нет URL-адреса."
 
@@ -4696,42 +4701,42 @@ msgstr "Не привод CD-ROM"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2063
-#: zypp/target/rpm/RpmDb.cc:2209
+#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2090
+#: zypp/target/rpm/RpmDb.cc:2236
 msgid "RPM failed: "
 msgstr "Сбой RPM: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1119
+#: zypp/target/rpm/RpmDb.cc:1147
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "Не удалось импортировать публичный ключ %1%"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1189
+#: zypp/target/rpm/RpmDb.cc:1217
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "Не удалось удалить публичный ключ %1%"
 
-#: zypp/target/rpm/RpmDb.cc:1568
+#: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
 msgstr "Пакет не подписан!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1868
+#: zypp/target/rpm/RpmDb.cc:1896
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Измененные файлы конфигурации для %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2044
+#: zypp/target/rpm/RpmDb.cc:2071
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm сохранил %s как %s, но было невозможно определить различия"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2046
+#: zypp/target/rpm/RpmDb.cc:2073
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4741,13 +4746,13 @@ msgstr ""
 "Первые 25 строк различий:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2049
+#: zypp/target/rpm/RpmDb.cc:2076
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm создал %s как %s, но было невозможно определить различия"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2051
+#: zypp/target/rpm/RpmDb.cc:2078
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4758,47 +4763,47 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2076 zypp/target/rpm/RpmDb.cc:2222
+#: zypp/target/rpm/RpmDb.cc:2103 zypp/target/rpm/RpmDb.cc:2249
 msgid "Additional rpm output"
 msgstr "Дополнительный вывод rpm"
 
-#: zypp/target/rpm/RpmDb.cc:2364
+#: zypp/target/rpm/RpmDb.cc:2391
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "создана резервная копия %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2385
+#: zypp/target/rpm/RpmDb.cc:2412
 msgid "Signature is OK"
 msgstr "Подпись в порядке"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2387
+#: zypp/target/rpm/RpmDb.cc:2414
 msgid "Unknown type of signature"
 msgstr "Неизвестный тип подписи"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2389
+#: zypp/target/rpm/RpmDb.cc:2416
 msgid "Signature does not verify"
 msgstr "Подпись не проверена"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2391
+#: zypp/target/rpm/RpmDb.cc:2418
 msgid "Signature is OK, but key is not trusted"
 msgstr "Подпись в порядке, но ключ не является доверенным"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2393
+#: zypp/target/rpm/RpmDb.cc:2420
 msgid "Signatures public key is not available"
 msgstr "Открытый ключ подписей недоступен"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2395
+#: zypp/target/rpm/RpmDb.cc:2422
 msgid "File does not exist or signature can't be checked"
 msgstr "Файл не существует, или невозможно проверить подпись"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2397
+#: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
 msgstr "Файл не подписан"
 
