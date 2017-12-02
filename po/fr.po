@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-11-05 16:02+0000\n"
+"PO-Revision-Date: 2017-12-02 22:53+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.17.1\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -58,7 +58,7 @@ msgstr ""
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
-#, boost-format, fuzzy
+#, boost-format
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
@@ -71,6 +71,9 @@ msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Nous ne pouvons pas assurer que personne n'a touché à ce fichier, donc il "
+"pourrait ne plus être digne de confiance ! Vous ne devriez pas continuer à "
+"moins que vous sachiez que la situation est sûre."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -78,6 +81,10 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Ce fichier a été modifié après sa signature. Cela peut avoir été un "
+"changement malveillant, donc le fichier pourrait ne plus être digne de "
+"confiance ! Vous ne devriez pas continuer à moins que vous sachiez que la "
+"situation est sûre."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -100,7 +107,6 @@ msgid "Key Expires:"
 msgstr "La clé expire le :"
 
 #: src/callbacks/keyring.h:86
-#, fuzzy
 msgid "Subkey:"
 msgstr "Sous-clé :"
 
@@ -1276,13 +1282,12 @@ msgstr[0] "L'application suivante va changer de fournisseur :"
 msgstr[1] "Les %d applications suivantes vont changer de fournisseur :"
 
 #: src/Summary.cc:1151
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "Le paquet suivant n'est pas supporté par son fournisseur :"
-msgstr[1] ""
-"Les %d paquets suivants ne sont pas supportés par leur fournisseur :"
+msgstr[1] "Les %d paquets suivants ne sont pas supportés par leur fournisseur :"
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
@@ -1518,7 +1523,7 @@ msgstr "Redémarrage du système requis."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Veuillez considérer l'annulation :"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -1581,9 +1586,9 @@ msgid "Enable strict GPG check for this repository."
 msgstr "Active la vérification GPG stricte pour ce dépôt."
 
 #: src/Zypper.cc:129
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Pas de candidat à la mise à jour pour '%s'."
+msgstr "Raccourci pour '%1%'."
 
 #: src/Zypper.cc:130
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
@@ -1641,12 +1646,16 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Répondre automatique 'oui' aux demandes de confirmation de licence. Voir "
+"'man zypper' pour plus de détails."
 
 #: src/Zypper.cc:171
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Accepter automatiquement les licences de produit seulement. Voir 'man "
+"zypper' pour plus de détails."
 
 #: src/Zypper.cc:180
 msgid ""
@@ -1683,6 +1692,9 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Nous pouvons demander à PackageKit d'interrompre son action le plus vite "
+"possible, mais cela dépend de PackageKit et de la vitesse avec laquelle il "
+"va répondre à cette requête."
 
 #: src/Zypper.cc:262
 msgid "Ask PackageKit to quit?"
@@ -1729,7 +1741,6 @@ msgid "This command has no additional options."
 msgstr "Cette commande ne comporte aucune option supplémentaire."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
 msgstr "Options historiques :"
 
