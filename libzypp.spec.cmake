@@ -52,7 +52,13 @@ BuildRequires:  pkgconfig(libudev)
 %else
 BuildRequires:  hal-devel
 %endif
+%if 0%{?suse_version} >= 1330
+BuildRequires:  libboost_headers-devel
+BuildRequires:  libboost_program_options-devel
+BuildRequires:  libboost_test-devel
+%else
 BuildRequires:  boost-devel
+%endif
 BuildRequires:  dejagnu
 BuildRequires:  doxygen
 %if 0%{?force_gcc_46}
@@ -139,7 +145,13 @@ Summary:        Package, Patch, Pattern, and Product Management - developers fil
 Group:          Development/Libraries/C and C++
 Provides:       yast2-packagemanager-devel
 Obsoletes:      yast2-packagemanager-devel
+%if 0%{?suse_version} >= 1330
+Requires:       libboost_headers-devel
+Requires:       libboost_program_options-devel
+Requires:       libboost_test-devel
+%else
 Requires:       boost-devel
+%endif
 Requires:       bzip2
 Requires:       glibc-devel
 Requires:       libstdc++-devel
