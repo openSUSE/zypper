@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Dec  4 11:09:24 CET 2017 - ma@suse.de
+
+- Stop BuildRequire dropped boost-devel (bsc#1062782)
+- version 17.0.4 (0)
+
+-------------------------------------------------------------------
 Tue Nov 28 18:21:51 CET 2017 - ma@suse.de
 
 - When importing multiple keys, export the individual keys
