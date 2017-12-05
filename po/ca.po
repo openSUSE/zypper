@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-10-05 18:55+0000\n"
+"PO-Revision-Date: 2017-12-05 13:00+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.17.1\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -495,7 +495,7 @@ msgstr "Atenció!"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
 msgid "Warning:"
-msgstr "Avís!"
+msgstr "Avís:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
@@ -4945,7 +4945,7 @@ msgstr "Problema instal·lant el paquet de codi font %s-%s:"
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
-msgstr "Avís! "
+msgstr "Avís: "
 
 #. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
