@@ -115,7 +115,7 @@ Resolver::~Resolver()
 ZOLV_FLAG_TRIBOOL( setForceResolve,		forceResolve,		_allowuninstall,	false )
 
 ZOLV_FLAG_TRIBOOL( setAllowDowngrade,		allowDowngrade,		_allowdowngrade,	false )
-ZOLV_FLAG_TRIBOOL( setAllowNameChange,		allowNameChange,	_allownamechange,	false )
+ZOLV_FLAG_TRIBOOL( setAllowNameChange,		allowNameChange,	_allownamechange,	true )	// bsc#1071466
 ZOLV_FLAG_TRIBOOL( setAllowArchChange,		allowArchChange,	_allowarchchange,	false )
 ZOLV_FLAG_TRIBOOL( setAllowVendorChange,	allowVendorChange,	_allowvendorchange,	ZConfig::instance().solver_allowVendorChange() )
 

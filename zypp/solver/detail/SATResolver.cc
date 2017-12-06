@@ -182,7 +182,7 @@ SATResolver::SATResolver (const ResPool & pool, sat::detail::CPool *satPool)
     , _satSolver(NULL)
     , _fixsystem(false)
     , _allowdowngrade		( false )
-    , _allownamechange		( false )
+    , _allownamechange		( true )	// bsc#1071466
     , _allowarchchange		( false )
     , _allowvendorchange	( ZConfig::instance().solver_allowVendorChange() )
     , _allowuninstall		( false )
