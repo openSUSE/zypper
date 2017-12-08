@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-10-07 11:32+0000\n"
-"Last-Translator: Stefan Schlesinger <translate75@web.de>\n"
+"PO-Revision-Date: 2017-12-08 07:53+0000\n"
+"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.17.1\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -1292,12 +1292,14 @@ msgstr[0] "Die folgende Anwendung wird den Anbieter ändern:"
 msgstr[1] "Die folgenden %d Anwendungen werden den Anbieter ändern:"
 
 #: src/Summary.cc:1151
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "Das folgende Paket wird vom Anbieter nicht unterstützt:"
-msgstr[1] "Die folgenden %d Pakete werden vom Anbieter nicht unterstützt:"
+msgstr[0] "Das folgende Paket %d wird vom Anbieter nicht unterstützt:"
+msgstr[1] ""
+"Die folgenden %d Pakete  haben keine Support-Informationen von ihrem "
+"Anbieter:"
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
@@ -1530,7 +1532,7 @@ msgstr "Systemneustart erforderlich."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Möglichkeit des Abbruchs:"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -1593,9 +1595,9 @@ msgid "Enable strict GPG check for this repository."
 msgstr "Aktiviere eine strenge GPG-Überprüfung für dieses Repository."
 
 #: src/Zypper.cc:129
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Kein Aktualisierungskandidat für '%s'."
+msgstr "Kürzel für '%1%'."
 
 #: src/Zypper.cc:130
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
@@ -1683,7 +1685,7 @@ msgstr "Die Standardeinstellung sieht die Einbeziehung optionaler Patches vor."
 #: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Diese Optionen sind beiderseits exklusiv: %1%"
 
 #: src/Zypper.cc:253
 msgid ""
