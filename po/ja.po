@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-10-05 22:35+0000\n"
+"PO-Revision-Date: 2017-12-08 09:02+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.17.1\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -677,9 +677,7 @@ msgstr ""
 msgid ""
 "There is an update candidate for '%s', but it is from a different vendor. "
 "Use '%s' to install this candidate."
-msgstr ""
-"'%s' に対する更新候補がありますが、これは異なるベンダからのものです。 '%s' を"
-"使用すると、この候補をインストールできます。"
+msgstr "'%s' に対する更新候補がありますが、これは異なる製造元からのものです。 '%s' を使用すると、この候補をインストールできます。"
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
