@@ -15,7 +15,7 @@
 
 #include "zypp/base/Regex.h"
 #include "zypp/base/String.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/PoolItem.h"
 #include "zypp/PoolQueryUtil.tcc"
@@ -40,32 +40,77 @@ Locks& Locks::instance()
   return _instance;
 }
 
+typedef std::set<PoolQuery> LockSet;
+
+template <typename TPredicate>
+void remove_if( LockSet & lockset_r, TPredicate pred_r )
+{
+  LockSet::iterator first = lockset_r.begin();
+  LockSet::iterator last = lockset_r.end();
+  while ( first != last )
+  {
+    LockSet::iterator next = first;
+    ++next;
+    if ( pred_r( *first ) )
+      lockset_r.erase( first );
+    first = next;
+  }
+}
+
 class Locks::Impl
 {
 public:
-  LockList locks;
-  LockList toAdd;
-  LockList toRemove;
+  LockSet toAdd;
+  LockSet toRemove;
   bool     locksDirty;
 
   bool mergeList(callback::SendReport<SavingLocksReport>& report);
   
-  Impl():locksDirty(false){}
+  Impl()
+  : locksDirty( false )
+  , _APIdirty( false )
+  {}
+
+
+  // need to control manip locks _locks to maintain the legacy API LockList::iterator begin/end
+
+  const LockSet & locks() const
+  { return _locks; }
+
+  LockSet & MANIPlocks()
+  { if ( !_APIdirty ) _APIdirty = true; return _locks; }
+
+  const LockList & APIlocks() const
+  {
+    if ( _APIdirty )
+    {
+      _APIlocks.clear();
+      _APIlocks.insert( _APIlocks.end(), _locks.begin(), _locks.end() );
+      _APIdirty = false;
+    }
+    return _APIlocks;
+  }
+
+private:
+  // need to control manip in ordert to maintain the legacy API LockList::iterator begin/end
+  LockSet _locks;
+  mutable LockList _APIlocks;
+  mutable bool _APIdirty;
 };
 
 Locks::Locks() : _pimpl(new Impl){}
 
 Locks::const_iterator Locks::begin() const
-{ return _pimpl->locks.begin(); }
+{ return _pimpl->APIlocks().begin(); }
 
 Locks::const_iterator Locks::end() const
-{ return _pimpl->locks.end(); }
+{ return _pimpl->APIlocks().end(); }
 
 Locks::LockList::size_type Locks::size() const
-{ return _pimpl->locks.size(); }
+{ return _pimpl->locks().size(); }
 
 bool Locks::empty() const
-{ return _pimpl->locks.empty(); }
+{ return _pimpl->locks().empty(); }
 
 struct ApplyLock
 {
@@ -106,12 +151,12 @@ void Locks::readAndApply( const Pathname& file )
   PathInfo pinfo(file);
   if ( pinfo.isExist() )
   {
-    std::insert_iterator<LockList> ii( _pimpl->locks, _pimpl->locks.end() );
-    LockingOutputIterator<std::insert_iterator<LockList> > lout(ii);
+    std::insert_iterator<LockSet> ii( _pimpl->MANIPlocks(), _pimpl->MANIPlocks().end() );
+    LockingOutputIterator<std::insert_iterator<LockSet> > lout(ii);
     readPoolQueriesFromFile( file, boost::make_function_output_iterator(lout) );
   }
   else
-    MIL << "file not exist(or cannot be stat), no lock added." << endl;
+    MIL << "file does not exist(or cannot be stat), no lock added." << endl;
 
 }
 
@@ -120,16 +165,16 @@ void Locks::read( const Pathname& file )
   MIL << "read locks from "<<file << endl;
   PathInfo pinfo(file);
   if ( pinfo.isExist() )
-    readPoolQueriesFromFile( file, std::insert_iterator<LockList>(_pimpl->locks, _pimpl->locks.end()) );
+    readPoolQueriesFromFile( file, std::insert_iterator<LockSet>(_pimpl->MANIPlocks(), _pimpl->MANIPlocks().end()) );
   else 
-    MIL << "file not exist(or cannot be stat), no lock added." << endl;
+    MIL << "file does not exist(or cannot be stat), no lock added." << endl;
 }
 
 
 void Locks::apply() const
 { 
   DBG << "apply locks" << endl;
-  for_each(begin(), end(), ApplyLock());
+  for_each(_pimpl->locks().begin(), _pimpl->locks().end(), ApplyLock());
 }
 
 
@@ -141,17 +186,14 @@ void Locks::addLock( const PoolQuery& query )
     PoolItem item(*it);
     item.status().setLock(true,ResStatus::USER);
   }
-  LockList::iterator i = find(_pimpl->toRemove.begin(),
-    _pimpl->toRemove.end(), query);
-  if ( i != _pimpl->toRemove.end() )
+  if ( _pimpl->toRemove.erase( query ) )
   {
     DBG << "query removed from toRemove" << endl;
-    _pimpl->toRemove.erase(i);
   }
   else
   {
     DBG << "query added as new" << endl;
-    _pimpl->toAdd.push_back( query );
+    _pimpl->toAdd.insert( query );
   }
 }
 
@@ -186,17 +228,14 @@ void Locks::removeLock( const PoolQuery& query )
     item.status().setLock(false,ResStatus::USER);
   }
   
-  LockList::iterator i = find(_pimpl->toAdd.begin(),
-    _pimpl->toAdd.end(), query);
-  if ( i != _pimpl->toAdd.end() )
+  if ( _pimpl->toAdd.erase( query ) )
   {
     DBG << "query removed from added" << endl;
-    _pimpl->toAdd.erase(i);
   }
   else
   {
-    DBG << "needed remove some old lock" << endl;
-    _pimpl->toRemove.push_back( query );
+    DBG << "need to remove some old lock" << endl;
+    _pimpl->toRemove.insert( query );
   }
 }
 
@@ -219,13 +258,13 @@ void Locks::removeLock( const ResKind &kind_r, const IdString &name_r )
   q.setMatchExact();
   q.setCaseSensitive(true);
   q.requireAll();
-  DBG << "remove lock by selectactable" << endl;
+  DBG << "remove lock by Selectable" << endl;
   removeLock(q);
 }
 
 bool Locks::existEmpty() const
 {
-  for_( it, _pimpl->locks.begin(), _pimpl->locks.end() )
+  for_( it, _pimpl->locks().begin(), _pimpl->locks().end() )
   {
     if( it->empty() )
       return true;
@@ -247,7 +286,7 @@ public:
 
   bool aborted(){ return skip_rest; }
 
-  bool operator()(PoolQuery& q)
+  bool operator()( const PoolQuery & q )
   {
     if( skip_rest )
       return false;
@@ -272,8 +311,7 @@ public:
     case CleanEmptyLocksReport::IGNORE:
       return false;
     default:
-      WAR << "Unknown returned value. Callback have more value then"
-          << " this switch. Need correct handle all enum values." << std::endl;
+      INT << "Unexpected return value from callback. Need to adapt switch statement." << std::endl;
     }
 
     return false;
@@ -283,13 +321,13 @@ public:
 
 void Locks::removeEmpty()
 {
-  MIL << "cleaning of locks" << endl;
+  MIL << "clean of locks" << endl;
   callback::SendReport<CleanEmptyLocksReport> report;
   report->start();
-  size_t sum = _pimpl->locks.size();
+  size_t sum = _pimpl->locks().size();
   LocksCleanPredicate p(sum, report);
 
-  _pimpl->locks.remove_if(p);
+  remove_if( _pimpl->MANIPlocks(), p );
 
   if( p.aborted() )
   {
@@ -302,7 +340,7 @@ void Locks::removeEmpty()
 
   }
 
-  if ( sum != _pimpl->locks.size() ) //some locks has been removed
+  if ( sum != _pimpl->locks().size() ) //some locks has been removed
     _pimpl->locksDirty = true;
 }
 
@@ -376,7 +414,7 @@ public:
       DBG << "skip lock" << endl;
       return false;
     }
-    WAR << "should not reached, some state is missing" << endl;
+    INT << "Unexpected return value from callback. Need to adapt switch statement." << std::endl;
     return false;
   }
 
@@ -385,22 +423,18 @@ public:
 
 bool Locks::Impl::mergeList(callback::SendReport<SavingLocksReport>& report)
 {
-  MIL << "merging list old: " << locks.size()
+  MIL << "merge list old: " << locks().size()
     << " to add: " << toAdd.size() << "to remove: " << toRemove.size() << endl;
   for_(it,toRemove.begin(),toRemove.end())
   {
     std::set<sat::Solvable> s(it->begin(),it->end());
-    locks.remove_if(LocksRemovePredicate(s,*it, report));
+    remove_if( MANIPlocks(), LocksRemovePredicate(s,*it, report) );
   }
 
   if (!report->progress())
     return false;
 
-  for_( it, toAdd.begin(), toAdd.end() )
-  {
-    if( std::find( locks.begin(), locks.end(), *it ) == locks.end() )
-      locks.push_back( *it );
-  }
+  MANIPlocks().insert( toAdd.begin(), toAdd.end() );
 
   toAdd.clear();
   toRemove.clear();
@@ -448,22 +482,12 @@ void Locks::save( const Pathname& file )
     }
   }
 
-  DBG << "writed "<< _pimpl->locks.size() << "locks" << endl;
-  writePoolQueriesToFile( file, _pimpl->locks.begin(), _pimpl->locks.end() );
+  DBG << "wrote "<< _pimpl->locks().size() << "locks" << endl;
+  writePoolQueriesToFile( file, _pimpl->locks().begin(), _pimpl->locks().end() );
   report->finish(SavingLocksReport::NO_ERROR);
 }
 
 void Locks::removeDuplicates()
-{
-  size_type sum = size();
-  for_(it,_pimpl->locks.begin(),_pimpl->locks.end())
-  {
-    if ( find(_pimpl->locks.begin(),it,*it) != it )
-      _pimpl->locks.erase(it--); //-- to avoid using break iterator
-  }
-  
-  if (sum!=size())
-    _pimpl->locksDirty = true;
-}
+{ /* NOP since implementation uses std::set */ }
 
 } // ns zypp
