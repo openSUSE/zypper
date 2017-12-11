@@ -463,6 +463,7 @@ namespace zypp
     /** Return a human-readable description of the query */
     std::string asString() const;
 
+    bool operator<(const PoolQuery& b) const;
     bool operator==(const PoolQuery& b) const;
     bool operator!=(const PoolQuery& b) const { return !(*this == b ); }
 

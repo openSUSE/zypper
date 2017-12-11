@@ -413,6 +413,24 @@ namespace zypp
 
   public:
 
+    bool operator<( const PoolQuery::Impl & rhs ) const
+    {
+#define OUTS(A) if ( A != rhs.A ) return A < rhs.A;
+      OUTS( _strings );
+      OUTS( _attrs );
+      OUTS( _uncompiledPredicated );
+      OUTS( _flags.get() );
+      OUTS( _match_word );
+      OUTS( _require_all );
+      OUTS( _status_flags );
+      OUTS( _edition );
+      OUTS( _op.inSwitch() );
+      OUTS( _repos );
+      OUTS( _kinds );
+#undef OUTS
+      return false;
+    }
+
     bool operator==( const PoolQuery::Impl & rhs ) const
     {
       if ( _flags == rhs._flags
@@ -1435,6 +1453,9 @@ attremptycheckend:
 
   bool PoolQuery::operator==( const PoolQuery & rhs ) const
   { return *_pimpl == *rhs._pimpl; }
+
+  bool PoolQuery::operator<( const PoolQuery & rhs ) const
+  { return *_pimpl < *rhs._pimpl; }
 
   ///////////////////////////////////////////////////////////////////
   namespace detail
