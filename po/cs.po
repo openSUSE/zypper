@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-12-13 13:01+0000\n"
+"PO-Revision-Date: 2017-12-13 16:01+0000\n"
 "Last-Translator: Petr Tesařík <ptesarik@suse.com>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -68,8 +68,8 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
-"Soubor '%1%' je hlavní indexový soubor repozitářů. Zajišťuje integritu celé "
-"sestavy repozitářů."
+"Soubor '%1%' je hlavní indexový soubor úložiště. Zajišťuje jeho integritu "
+"jako celku."
 
 #: src/callbacks/keyring.h:46
 msgid ""
@@ -133,12 +133,12 @@ msgstr[2] "Gpg klíč z podpisového souboru '%1%' vyprší za %2% dní."
 #: src/callbacks/keyring.h:142
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Je přijímán nepodepsaný soubor %s."
+msgstr "Je přijímán nepodepsaný soubor '%s'."
 
 #: src/callbacks/keyring.h:146
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Je přijímán nepodepsaný soubor %s z úložiště %s."
+msgstr "Je přijímán nepodepsaný soubor '%s' z úložiště '%s'."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
@@ -156,25 +156,26 @@ msgstr "Soubor '%1%' z úložiště '%2%' není podepsán."
 #: src/callbacks/keyring.h:176
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "Soubor %s není podepsán, chcete pokračovat?"
+msgstr "Soubor '%s' není podepsán, chcete pokračovat?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:180
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Soubor %s z úložiště %s není podepsán, chcete pokračovat?"
+msgstr "Soubor '%s' z úložiště '%s' není podepsán, chcete pokračovat?"
 
 #: src/callbacks/keyring.h:203
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Je přijímán soubor %s, který je podepsaný neznámým klíčem %s."
+msgstr "Je přijímán soubor '%s', který je podepsaný neznámým klíčem '%s'."
 
 #: src/callbacks/keyring.h:207
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Je přijímán soubor %s z úložiště %s, který je podepsaný neznámým klíčem %s."
+"Je přijímán soubor '%s' z úložiště '%s', který je podepsaný neznámým klíčem "
+"'%s'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
@@ -192,7 +193,7 @@ msgstr "Soubor '%1%' z úložiště '%3%' je podepsán neznámým klíčem '%2%'
 #: src/callbacks/keyring.h:236
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Soubor %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
+msgstr "Soubor '%s' je podepsaný neznámým klíčem '%s'. Chcete pokračovat?"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:240
@@ -200,11 +201,12 @@ msgstr "Soubor %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"Soubor %s z úložiště %s je podepsaný neznámým klíčem %s. Chcete pokračovat?"
+"Soubor '%s' z úložiště '%s' je podepsaný neznámým klíčem '%s'. Chcete "
+"pokračovat?"
 
 #: src/callbacks/keyring.h:256
 msgid "Automatically importing the following key:"
-msgstr "Automaticky importovat následující klíč:"
+msgstr "Automaticky se importuje následující klíč:"
 
 #: src/callbacks/keyring.h:258
 msgid "Automatically trusting the following key:"
@@ -212,7 +214,7 @@ msgstr "Automaticky se důvěřuje následujícímu klíči:"
 
 #: src/callbacks/keyring.h:260
 msgid "New repository or package signing key received:"
-msgstr "Obdržen nový klíč podepisující balíček nebo repozitář:"
+msgstr "Obdržen nový klíč podepisující balíček nebo úložiště:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:282
