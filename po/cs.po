@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-12-13 10:35+0000\n"
-"Last-Translator: Vojtech Zeisek <Vojtech.Zeisek@opensuse.org>\n"
+"PO-Revision-Date: 2017-12-13 13:01+0000\n"
+"Last-Translator: Petr Tesařík <ptesarik@suse.com>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -57,8 +57,9 @@ msgid ""
 "system compromise."
 msgstr ""
 "Podepisování dat umožňuje příjemci ověřit, že po podepsání už nebyla data "
-"změněna. Přijímání dat s žádným nesprávným nebo neznámým podpisem může vést "
-"k poškození systému a ve výjimečných případech dokonce k nabourání systému."
+"změněna. Přijímání dat bez podpisu nebo s nesprávným či neznámým podpisem "
+"může vést k poškození systému a ve výjimečných případech dokonce k nabourání "
+"systému."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -84,9 +85,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
-"Tento soubor byl po svém podpisu změněn. Může to být zhoubná změna, takže už "
-"mu nelze důvěřovat! Nepokračujte, pokud zcela jistě nevíte, že je to "
-"bezpečné."
+"Tento soubor byl po svém podpisu změněn. Tato změna mohla být škodlivá, "
+"takže už mu nelze důvěřovat! Nepokračujte, pokud zcela jistě nevíte, že je "
+"to bezpečné."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -6713,21 +6714,21 @@ msgid "package"
 msgid_plural "packages"
 msgstr[0] "balíček"
 msgstr[1] "balíčky"
-msgstr[2] "balíčky"
+msgstr[2] "balíčků"
 
 #: src/utils/misc.cc:93
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "profil"
 msgstr[1] "profily"
-msgstr[2] "profily"
+msgstr[2] "profilů"
 
 #: src/utils/misc.cc:95
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produkt"
 msgstr[1] "produkty"
-msgstr[2] "produkty"
+msgstr[2] "produktů"
 
 #: src/utils/misc.cc:97
 msgid "patch"
@@ -6796,7 +6797,7 @@ msgstr "Problém"
 
 #: src/utils/misc.cc:268
 msgid "No."
-msgstr "Ne."
+msgstr "Číslo"
 
 #: src/utils/misc.cc:269
 msgid "Patch"
