@@ -166,6 +166,11 @@ namespace zypp
     INT << where_r << " " << prefix_r << " " << excpt_r.asUserHistory() << endl;
   }
 
+  void Exception::log( const char * typename_r, const CodeLocation & where_r,
+                       const char *const prefix_r )
+  {
+    INT << where_r << " " << prefix_r << " exception of type " << typename_r << endl;
+  }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
