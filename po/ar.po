@@ -13,17 +13,17 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-04-16 11:00+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/"
-">\n"
+"PO-Revision-Date: 2017-12-18 07:15+0000\n"
+"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.17.1\n"
 "X-Language-English: Arabic\n"
 "X-Language-Local: Arabic*\n"
 
@@ -1364,9 +1364,8 @@ msgid "Tried to import not existent key %s into keyring %s"
 msgstr "جرت محاولة استيراد المفتاح غير الموجود %s إلى حلقة المفاتيح %s"
 
 #: zypp/KeyRing.cc:583
-#, fuzzy
 msgid "Failed to import key."
-msgstr "فشل حذف المفتاح."
+msgstr "فشل استيراد المفتاح."
 
 #: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
@@ -3739,21 +3738,20 @@ msgstr "سيتم تنفيذ الإجراءات التالية:"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "(الصلاحية غير منتهية)"
+msgstr "الصلاحية غير منتهية"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "نهاية الصلاحية:: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "تنتهي: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
@@ -4708,17 +4706,17 @@ msgstr "فشل RPM: "
 #: zypp/target/rpm/RpmDb.cc:1147
 #, boost-format
 msgid "Failed to import public key %1%"
-msgstr ""
+msgstr "فشل استيراد المفتاح العمومي %1%"
 
 #. Translator: %1% is a gpg public key
 #: zypp/target/rpm/RpmDb.cc:1217
 #, boost-format
 msgid "Failed to remove public key %1%"
-msgstr ""
+msgstr "أخفقت إزالة المفتاح العام %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
-msgstr ""
+msgstr "لم يتم توقيع الحزمة!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4803,7 +4801,7 @@ msgstr "الملف غير موجود أو لا يمكن التحقق من توق
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
-msgstr ""
+msgstr "الملف غير موقع"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
