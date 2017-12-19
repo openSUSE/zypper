@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-12-19 11:05+0000\n"
+"PO-Revision-Date: 2017-12-19 19:20+0000\n"
 "Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
@@ -35,7 +35,7 @@ msgstr "Исключение Hal"
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Подозрительный тип '%s' байта номер %u контрольной суммы '%s'"
+msgstr "Подозрительный тип \"%s\" байта номер %u контрольной суммы \"%s\""
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -54,7 +54,7 @@ msgstr "Андорра"
 #. :AND:020:
 #: zypp/CountryCode.cc:159
 msgid "United Arab Emirates"
-msgstr "Объединённые Арабские Эмираты"
+msgstr "Объединенные Арабские Эмираты"
 
 #. :ARE:784:
 #: zypp/CountryCode.cc:160
@@ -255,7 +255,7 @@ msgstr "Швейцария"
 #. :CHE:756:
 #: zypp/CountryCode.cc:200
 msgid "Cote D'Ivoire"
-msgstr "Кот-д'Ивуар"
+msgstr "Кот-д\"Ивуар"
 
 #. :CIV:384:
 #: zypp/CountryCode.cc:201
@@ -1090,7 +1090,7 @@ msgstr "Свазиленд"
 #. :SWZ:748:
 #: zypp/CountryCode.cc:368
 msgid "Turks and Caicos Islands"
-msgstr "Тёркс и Кайкос"
+msgstr "Теркс и Кайкос"
 
 #. :TCA:796:
 #: zypp/CountryCode.cc:369
@@ -3586,7 +3586,7 @@ msgstr "Умбунду"
 #. language code: und
 #: zypp/LanguageCode.cc:1091
 msgid "Undetermined"
-msgstr "Неопределённый"
+msgstr "Неопределенный"
 
 #. language code: urd ur
 #: zypp/LanguageCode.cc:1093
@@ -3741,7 +3741,7 @@ msgstr "не истекает"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr "истёк: %1%"
+msgstr "истек: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
@@ -3877,7 +3877,7 @@ msgstr "Добавление репозитория \"%s\""
 #: zypp/RepoManager.cc:1711
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Неверное имя файла репозитория в \"%s\""
+msgstr "Недопустимое имя файла репозитория в \"%s\""
 
 #: zypp/RepoManager.cc:1752
 #, c-format, boost-format
@@ -3905,7 +3905,7 @@ msgstr "Недопустимая строка запроса LDAP в URL-адр�
 #: zypp/Url.cc:153
 #, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Недопустимый параметр запроса LDAP в URL-адресе: '%s'"
+msgstr "Недопустимый параметр запроса LDAP в URL-адресе: \"%s\""
 
 #: zypp/Url.cc:300
 msgid "Unable to clone Url object"
@@ -3949,7 +3949,7 @@ msgstr "неверно"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr "Уровень поддержки не определён"
+msgstr "Уровень поддержки не определен"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
@@ -4022,28 +4022,28 @@ msgstr "Это действие уже выполняется другой пр�
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
 msgid "Unknown match mode '%s'"
-msgstr "Неизвестный режим сопоставления '%s'"
+msgstr "Неизвестный режим сопоставления \"%s\""
 
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Неизвестный режим сопоставления '%s' для шаблона '%s'"
+msgstr "Неизвестный режим сопоставления \"%s\" для шаблона \"%s\""
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "Неверное регулярное выражение '%s': regcomp вернул %d"
+msgstr "Недопустимое регулярное выражение \"%s\": regcomp вернул %d"
 
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
 msgid "Invalid regular expression '%s'"
-msgstr "Неверное регулярное выражение '%s'"
+msgstr "Недопустимое регулярное выражение \"%s\""
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
-msgstr "Необходима аутентификация для '%s'"
+msgstr "Необходима аутентификация для \"%s\""
 
 #: zypp/media/MediaCurl.cc:1109
 msgid ""
@@ -4071,21 +4071,21 @@ msgstr "Некорректное имя файла: %s"
 #: zypp/media/MediaException.cc:51
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "При попытке произведения действия '%s' не был открыт носитель."
+msgstr "При попытке произведения действия \"%s\" не был открыт носитель."
 
 #: zypp/media/MediaException.cc:56
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "Файл '%s' не найден на носителе '%s'"
+msgstr "Файл \"%s\" не найден на носителе \"%s\""
 
 #: zypp/media/MediaException.cc:61
 #, c-format, boost-format
 msgid "Cannot write file '%s'."
-msgstr "Невозможно записать файл '%s'."
+msgstr "Невозможно записать файл \"%s\"."
 
 #: zypp/media/MediaException.cc:66
 msgid "Medium not attached"
-msgstr "Носитель не присоединён"
+msgstr "Носитель не присоединен"
 
 #: zypp/media/MediaException.cc:71
 msgid "Bad media attach point"
@@ -4095,22 +4095,22 @@ msgstr "Некорректная точка присоединения носи�
 #: zypp/media/MediaException.cc:77
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "Сбой инициализации загрузки (curl) для '%s'"
+msgstr "Сбой инициализации загрузки (curl) для \"%s\""
 
 #: zypp/media/MediaException.cc:82
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr "Системное исключение '%s' на носителе '%s'."
+msgstr "Системное исключение \"%s\" на носителе \"%s\"."
 
 #: zypp/media/MediaException.cc:87
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr "Путь '%s' на носителе '%s' не является файлом."
+msgstr "Путь \"%s\" на носителе \"%s\" не является файлом."
 
 #: zypp/media/MediaException.cc:92
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "Путь '%s' на носителе '%s' не является каталогом."
+msgstr "Путь \"%s\" на носителе \"%s\" не является каталогом."
 
 #: zypp/media/MediaException.cc:99
 msgid "Malformed URI"
@@ -4118,7 +4118,7 @@ msgstr "Неправильно сформированный URI-адрес"
 
 #: zypp/media/MediaException.cc:109
 msgid "Empty host name in URI"
-msgstr "Пустое имя узла в URI-адресе"
+msgstr "Пустое имя хоста в URI-адресе"
 
 #: zypp/media/MediaException.cc:114
 msgid "Empty filesystem in URI"
@@ -4131,7 +4131,7 @@ msgstr "Пустой пункт назначения в URI-адресе"
 #: zypp/media/MediaException.cc:124
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "Неподдерживаемая схема URI-адреса в '%s'."
+msgstr "Неподдерживаемая схема URI-адреса в \"%s\"."
 
 #: zypp/media/MediaException.cc:129
 msgid "Operation not supported by medium"
@@ -4144,7 +4144,7 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"Ошибка загрузки (curl) '%s':\n"
+"Ошибка загрузки (curl) \"%s\":\n"
 "Код ошибки: %s\n"
 "Сообщение об ошибке: %s\n"
 
@@ -4152,17 +4152,17 @@ msgstr ""
 #: zypp/media/MediaException.cc:144
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "Произошла ошибка при установке параметров загрузки (curl) для '%s':"
+msgstr "Произошла ошибка при установке параметров загрузки (curl) для \"%s\":"
 
 #: zypp/media/MediaException.cc:151
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "Источник носителей '%s' не содержит желаемого носителя"
+msgstr "Источник носителей \"%s\" не содержит желаемого носителя"
 
 #: zypp/media/MediaException.cc:156
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "Носитель'%s' используется другим экземпляром"
+msgstr "Носитель\"%s\" используется другим экземпляром"
 
 #: zypp/media/MediaException.cc:162
 msgid "Cannot eject any media"
@@ -4171,29 +4171,29 @@ msgstr "Невозможно извлечь ни один носитель"
 #: zypp/media/MediaException.cc:164
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
-msgstr "Невозможно извлечь носитель '%s'"
+msgstr "Невозможно извлечь носитель \"%s\""
 
 #: zypp/media/MediaException.cc:179
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr "Доступ к '%s' запрещён."
+msgstr "Доступ к \"%s\" запрещен."
 
 #: zypp/media/MediaException.cc:187
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "Превышено время ожидания при попытке доступа к '%s'."
+msgstr "Превышено время ожидания при попытке доступа к \"%s\"."
 
 #: zypp/media/MediaException.cc:195
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
-msgstr "Расположение '%s' временно недоступно."
+msgstr "Расположение \"%s\" временно недоступно."
 
 #: zypp/media/MediaException.cc:203
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
-" Проблема с сертификатом SSL, проверьте, всё ли в порядке с удостоверяющим "
-"центром сертификата '%s'."
+" Проблема с сертификатом SSL, проверьте, все ли в порядке с удостоверяющим "
+"центром сертификата \"%s\"."
 
 #: zypp/media/MediaHandler.cc:370
 msgid ""
@@ -4206,21 +4206,21 @@ msgstr ""
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Неподдерживаемый метод HTTP-аутентификации '%s'"
+msgstr "Неподдерживаемый метод HTTP-аутентификации \"%s\""
 
 #: zypp/misc/CheckAccessDeleted.cc:281
 msgid "Please install package 'lsof' first."
-msgstr "Сначала установите пакет 'lsof'."
+msgstr "Сначала установите пакет \"lsof\"."
 
 #: zypp/parser/RepoindexFileReader.cc:197
 #, c-format, boost-format
 msgid "Required attribute '%s' is missing."
-msgstr "Необходимый атрибут '%s' отсутствует."
+msgstr "Необходимый атрибут \"%s\" отсутствует."
 
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "Требуются один или оба атрибута '%s' или '%s'."
+msgstr "Требуются один или оба атрибута \"%s\" или \"%s\"."
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
@@ -4233,13 +4233,13 @@ msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
 msgstr ""
-"Похоже, что пакет %s повреждён при передаче. Попробовать получить ещё раз?"
+"Похоже, что пакет %s поврежден при передаче. Попробовать получить еще раз?"
 
 #. TranslatorExplanation %s = name of the package being processed.
 #: zypp/repo/PackageProvider.cc:413
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr "Не удалось предоставить пакет %s. Попробовать получить ещё раз?"
+msgstr "Не удалось предоставить пакет %s. Попробовать получить еще раз?"
 
 #: zypp/repo/PackageProvider.cc:549
 msgid "applydeltarpm check failed."
@@ -4251,12 +4251,12 @@ msgstr "сбой в applydeltarpm."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr "Модуль службы не поддерживает изменение атрибута."
+msgstr "Модуль сервиса не поддерживает изменение атрибута."
 
 #: zypp/repo/RepoProvideFile.cc:261
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Невозможно предоставить файл '%s' из репозитория '%s'"
+msgstr "Невозможно предоставить файл \"%s\" из репозитория \"%s\""
 
 #: zypp/repo/RepoProvideFile.cc:267
 msgid "No url in repository."
@@ -4466,7 +4466,7 @@ msgstr "запрос не поддерживается"
 #: zypp/solver/detail/SATResolver.cc:1007
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr "%s предоставляется системой и не может быть удалён"
+msgstr "%s предоставляется системой и не может быть удален"
 
 #: zypp/solver/detail/SATResolver.cc:1011
 #, c-format, boost-format
@@ -4481,7 +4481,7 @@ msgstr "ничто не предоставляет %s, необходимый д
 #: zypp/solver/detail/SATResolver.cc:1021
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
-msgstr "Не удаётся установить оба %s и %s"
+msgstr "Не удается установить оба %s и %s"
 
 #: zypp/solver/detail/SATResolver.cc:1026
 #, c-format, boost-format
@@ -4512,7 +4512,7 @@ msgstr "%s требует %s, но это требование не может �
 
 #: zypp/solver/detail/SATResolver.cc:1074
 msgid "deleted providers: "
-msgstr "удалённые поставщики: "
+msgstr "удаленные поставщики: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1085
@@ -4595,7 +4595,7 @@ msgstr "оставить устаревший %s"
 #: zypp/solver/detail/SATResolver.cc:1302
 #, c-format, boost-format
 msgid "install %s from excluded repository"
-msgstr "установить %s из исключённого репозитория"
+msgstr "установить %s из исключенного репозитория"
 
 #: zypp/solver/detail/SATResolver.cc:1322
 #, c-format, boost-format
@@ -4852,7 +4852,7 @@ msgstr "Схема URL-адреса является необходимым ко
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr "Неверная схема URL-адреса '%s'"
+msgstr "Неверная схема URL-адреса \"%s\""
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
@@ -4864,16 +4864,16 @@ msgstr "Схема URL-адреса не позволяет использова
 
 #: zypp/url/UrlBase.cc:1012
 msgid "Url scheme requires a host component"
-msgstr "Схема URL-адреса требует указания компонента узла"
+msgstr "Схема URL-адреса требует указания компонента хоста"
 
 #: zypp/url/UrlBase.cc:1022
 msgid "Url scheme does not allow a host component"
-msgstr "Схема URL-адреса не позволяет использовать компонент узла"
+msgstr "Схема URL-адреса не позволяет использовать компонент хоста"
 
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr "Неверный компонент узла \"%s\""
+msgstr "Недопустимый компонент хоста \"%s\""
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
@@ -4882,7 +4882,7 @@ msgstr "Схема URL-адреса не позволяет использова
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
 msgid "Invalid port component '%s'"
-msgstr "Неверный компонент порта '%s'"
+msgstr "Недопустимый компонент порта \"%s\""
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
@@ -4899,15 +4899,15 @@ msgstr "Зашифрованная строка содержит байт со �
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
-msgstr "Неверный символ разделителя для разбиения массива параметров"
+msgstr "Недопустимый символ разделителя для разбиения массива параметров"
 
 #: zypp/url/UrlUtils.cc:213
 msgid "Invalid parameter map split separator character"
-msgstr "Неверный символ разделителя для разбиения отображения параметров"
+msgstr "Недопустимый символ разделителя для разбиения отображения параметров"
 
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
-msgstr "Неверный символ разделителя для объединения массива параметров"
+msgstr "Недопустимый символ разделителя для объединения массива параметров"
 
 #~ msgid "Failed to import public key from file %s: %s"
 #~ msgstr "Не удалось импортировать публичный ключ из файла %s: %s"
