@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-12-19 19:20+0000\n"
+"PO-Revision-Date: 2017-12-20 15:53+0000\n"
 "Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
@@ -3796,7 +3796,7 @@ msgstr "Псевдоним репозитория не может начинат
 
 #: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
-msgstr "Псевдоним службы не может начинаться с точки."
+msgstr "Псевдоним сервис не может начинаться с точки."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
@@ -3819,9 +3819,9 @@ msgstr ""
 #: zypp/RepoManager.cc:1098
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "По указанному URL-адресу не найдено действительных метаданных"
-msgstr[1] "По указанным URL-адресам не найдено действительных метаданных"
-msgstr[2] "По указанным URL-адресам не найдено действительных метаданных"
+msgstr[0] "По указанному URL-адресу не найдено допустимых метаданных"
+msgstr[1] "По указанным URL-адресам не найдено допустимых метаданных"
+msgstr[2] ""
 
 #: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
 #, c-format, boost-format
@@ -3917,7 +3917,7 @@ msgstr "Недопустимая ссылка на пустой объект URL
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
-msgstr "Не удалось выполнить анализ компонентов URL-адреса"
+msgstr "Не удалось выполнить анализ синтаксиса компонентов URL-адреса"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
@@ -4680,7 +4680,7 @@ msgstr "HalVolume не инициализирован"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
-msgstr "Не удалось создать подключение к dbus"
+msgstr "Не удалось установить соединение с dbus"
 
 #: zypp/target/hal/HalContext.cc:242
 msgid "libhal_ctx_new: Can't create libhal context"
@@ -4688,7 +4688,7 @@ msgstr "libhal_ctx_new: не удается создать контекст libh
 
 #: zypp/target/hal/HalContext.cc:257
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: не удалось установить подключение к dbus"
+msgstr "libhal_set_dbus_connection: не удалось установить соединение с dbus"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
@@ -4726,7 +4726,7 @@ msgstr "Пакет не подписан!"
 #: zypp/target/rpm/RpmDb.cc:1896
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr "Измененные файлы конфигурации для %s:"
+msgstr "Измененные конфигурационные файлы для %s:"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2071
@@ -4852,7 +4852,7 @@ msgstr "Схема URL-адреса является необходимым ко
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr "Неверная схема URL-адреса \"%s\""
+msgstr "Недопустимая схема URL-адреса \"%s\""
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
