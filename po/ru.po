@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-12-20 15:53+0000\n"
+"PO-Revision-Date: 2017-12-20 18:05+0000\n"
 "Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian "
 "<https://l10n.opensuse.org/projects/libzypp/master/ru/>\n"
@@ -3821,7 +3821,7 @@ msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "По указанному URL-адресу не найдено допустимых метаданных"
 msgstr[1] "По указанным URL-адресам не найдено допустимых метаданных"
-msgstr[2] ""
+msgstr[2] "По указанным URL-адресам не найдено допустимых метаданных"
 
 #: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
 #, c-format, boost-format
