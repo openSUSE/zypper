@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-12-08 09:02+0000\n"
+"PO-Revision-Date: 2017-12-27 06:03+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
@@ -592,7 +592,7 @@ msgstr "パッケージ '%s' は指定したリポジトリ内に見つかりま
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "修正 '%s' は指定したリポジトリ内に見つかりませんでした。"
+msgstr "パッチ '%s' は指定したリポジトリ内に見つかりませんでした。"
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
@@ -724,7 +724,7 @@ msgstr "パッケージを強制インストールするには、 '%s' をご利
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "パッチ '%s' には対話操作が必要です。スキップしています。"
+msgstr "パッチ '%s' には対話操作が必要であるため、適用せずに飛ばします。"
 
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
@@ -737,15 +737,13 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"修正 '%1%' は任意指定です。これらをインストールするには '%2%' を、全ての任意"
-"指定の修正を含めるには '%3%' をそれぞれお使いください。"
+"パッチ '%1%' は任意指定です。これらをインストールするには '%2%' を、全ての任意指定のパッチを含めるには '%3%' "
+"をそれぞれお使いください。"
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
-msgstr ""
-"パッチ '%s' はロックされています。インストールを行なうには '%s' を、ロックを"
-"解除するには '%s' を使用してください。"
+msgstr "修正 '%s' はロックされています。インストールを行なうには '%s' を、ロックを解除するには '%s' を使用してください。"
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
@@ -830,7 +828,7 @@ msgstr[0] "以下 %d 個の新しいパッケージをインストールしま�
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] "以下 %d 個の新しい修正をインストールします:"
+msgstr[0] "以下 %d 個の新しいパッチをインストールします:"
 
 #: src/Summary.cc:562
 #, c-format, boost-format
@@ -866,7 +864,7 @@ msgstr[0] "以下 %d 個のパッケージを削除します:"
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] "以下 %d 個の修正を削除します:"
+msgstr[0] "以下 %d 個のパッチを削除します:"
 
 #: src/Summary.cc:609
 #, c-format, boost-format
@@ -896,7 +894,7 @@ msgstr[0] "以下 %d 個のパッケージをアップグレードします:"
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "以下 %d 個の修正をアップグレードします:"
+msgstr[0] "以下 %d 個のパッチをアップグレードします:"
 
 #: src/Summary.cc:649
 #, c-format, boost-format
@@ -926,7 +924,7 @@ msgstr[0] "以下 %d 個のパッケージをダウングレードします:"
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "以下 %d 個の修正をダウングレードします:"
+msgstr[0] "以下 %d 個のパッチをダウングレードします:"
 
 #: src/Summary.cc:691
 #, c-format, boost-format
@@ -956,7 +954,7 @@ msgstr[0] "以下 %d 個のパッケージを再インストールします:"
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "以下 %d 個の修正を再インストールします:"
+msgstr[0] "以下 %d 個のパッチを再インストールします:"
 
 #: src/Summary.cc:730
 #, c-format, boost-format
@@ -988,7 +986,7 @@ msgstr[0] "以下 %d 個の推奨パッケージを自動的に選択しまし�
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] "以下 %d 個の推奨される修正を自動的に選択しました:"
+msgstr[0] "以下 %d 個の推奨されるパッチを自動的に選択しました:"
 
 #: src/Summary.cc:891
 #, c-format, boost-format
@@ -1059,7 +1057,7 @@ msgstr[0] ""
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] "以下 %d 個の修正が推奨されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個のパッチが推奨されていますが、インストールを行ないません:"
 
 #: src/Summary.cc:989
 #, c-format, boost-format
@@ -1097,7 +1095,7 @@ msgstr[0] ""
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "以下 %d 個の修正が提案されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個のパッチが提案されていますが、インストールを行ないません:"
 
 #: src/Summary.cc:1037
 #, c-format, boost-format
@@ -1132,7 +1130,7 @@ msgstr[0] "以下 %d 個のパッケージのアーキテクチャを変更し�
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
-msgstr[0] "以下 %d 個の修正のアーキテクチャを変更します:"
+msgstr[0] "以下 %d 個のパッチのアーキテクチャを変更します:"
 
 #: src/Summary.cc:1079
 #, c-format, boost-format
@@ -1162,7 +1160,7 @@ msgstr[0] "以下 %d 個のパッケージのベンダを変更します:"
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] "以下 %d 個の修正のベンダを変更します:"
+msgstr[0] "以下 %d 個のパッチのベンダを変更します:"
 
 #: src/Summary.cc:1121
 #, c-format, boost-format
@@ -1251,7 +1249,7 @@ msgstr "ロックされた項目の詳細なリストを参照するには、'%1
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "以下 %d 個の修正を適用するには、システムの再起動が必要です:"
+msgstr[0] "以下 %d 個のパッチを適用するには、システムの再起動が必要です:"
 
 #: src/Summary.cc:1299
 #, boost-format
@@ -1529,15 +1527,15 @@ msgstr ""
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
-msgstr "任意指定の修正を必要な修正として含めるかどうか。"
+msgstr "任意指定のパッチを必要なパッチとして含めるかどうか。"
 
 #: src/Zypper.cc:183
 msgid "The default is to exclude optional patches."
-msgstr "既定では、任意指定の修正は除外されます。"
+msgstr "既定では、任意指定のパッチは除外されます。"
 
 #: src/Zypper.cc:184
 msgid "The default is to include optional patches."
-msgstr "既定では、任意指定の修正を含みます。"
+msgstr "既定では、任意指定のパッチを含みます。"
 
 #. translator: %1% is a list of command line options
 #: src/Zypper.cc:224
@@ -1646,21 +1644,18 @@ msgstr ""
 "\t--help, -h\t\tヘルプ\n"
 "\t--version, -V\t\tバージョン情報を表示\n"
 "\t--promptids\t\tzypperのユーザプロンプト一覧を出力する\n"
-"\t--config, -c <file>\t既定の設定ファイルの代わりに指定した設定ファイルを使"
-"用\n"
-"\t--userdata <string>\t履歴やプラグインで使用されるユーザ定義のトランザクショ"
-"ンIDの指定\n"
+"\t--config, -c <file>\t既定の設定ファイルの代わりに指定した設定ファイルを使用\n"
+"\t--userdata <string>\t履歴やプラグインで使用されるユーザ定義のトランザクションIDの指定\n"
 "\t--quiet, -q\t\tエラーメッセージを除く出力を抑止\n"
 "\t--verbose, -v\t\tより詳細な出力\n"
 "\t--color\n"
 "\t--no-color\t\ttty側で対応している場合、色を使用するかどうか\n"
 "\t--no-abbrev, -A\t\t表内でのテキストの省略を行なわない\n"
 "\t--table-style, -s\t表形式 (整数)\n"
-"\t--non-interactive, -n\t質問や確認を行なわず、全ての質問に既定の回答を行なっ"
-"たものとして扱う\n"
+"\t--non-interactive, -n\t質問や確認を行なわず、全ての質問に既定の回答を行なったものとして扱う\n"
 "\t--non-interactive-include-reboot-patches\n"
-"\t\t\t\trebootSuggested (再起動を提案する) フラグが設定された修正に対して、\n"
-"\t\t\t\tこれらを対話的な修正として扱わない\n"
+"\t\t\t\trebootSuggested (再起動を提案する) フラグが設定されたパッチに対して、\n"
+"\t\t\t\tこれらを対話的なパッチとして扱わない\n"
 "\t--xmlout, -x\t\tXML形式での出力に切り替える\n"
 "\t--ignore-unknown, -i\t不明なパッケージを無視する\n"
 
@@ -1806,10 +1801,10 @@ msgstr ""
 "     更新管理:\n"
 "\tupdate, up\t\tインストール済みのパッケージを新しいバージョンに更新する\n"
 "\tlist-updates, lu\t利用可能な更新を一覧表示する\n"
-"\tpatch\t\t\t必要な修正をインストールする\n"
-"\tlist-patches, lp\t必要な修正を一覧表示する\n"
+"\tpatch\t\t\t必要なパッチをインストールする\n"
+"\tlist-patches, lp\t必要なパッチを一覧表示する\n"
 "\tdist-upgrade, dup\tディストリビューションのアップグレードを行なう\n"
-"\tpatch-check, pchk\t修正を確認する\n"
+"\tpatch-check, pchk\tパッチを確認する\n"
 
 #: src/Zypper.cc:730
 msgid ""
@@ -1972,7 +1967,7 @@ msgstr "対話処理を行なわない設定にします。"
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
-msgstr "rebootSuggestedフラグの設定されたパッチを、対話型として扱いません。"
+msgstr "rebootSuggested フラグの設定されたパッチを、対話型として扱いません。"
 
 #: src/Zypper.cc:1190
 msgid "Entering 'no-gpg-checks' mode."
@@ -2958,7 +2953,7 @@ msgid ""
 msgstr ""
 "patch [options]\n"
 "\n"
-"利用可能な全ての修正をインストールします。\n"
+"利用可能な全てのパッチをインストールします。\n"
 "\n"
 "  コマンドオプション:\n"
 "\n"
@@ -2968,31 +2963,23 @@ msgstr ""
 "                            サードパーティのライセンス確認を行なう際、\n"
 "                            自動的に「yes」と回答します。\n"
 "                            (詳細はman zypperをご覧ください)\n"
-"-b, --bugzilla #            指定したBugzilla発信番号の修正をインストールしま"
-"す。\n"
-"    --cve #                 指定したCVE発信番号の修正をインストールします。\n"
+"-b, --bugzilla #            指定したBugzilla発信番号のパッチをインストールします。\n"
+"    --cve #                 指定したCVE発信番号のパッチをインストールします。\n"
 "-g  --category <category>   分類に該当するパッチのみをインストールします。\n"
-"    --severity <severity>   重要度に該当するパッチのみをインストールしま"
-"す。\n"
+"    --severity <severity>   重要度に該当するパッチのみをインストールします。\n"
 "    --date <YYYY-MM-DD>     指定した日付まで (指定した日付は含まず) に発行\n"
 "                            されたパッチのみをインストールします。\n"
-"    --replacefiles          既にインストールされているパッケージとファイル"
-"が\n"
-"                            競合する場合も、インストールを行なうようにしま"
-"す。\n"
-"                            何も指定しない場合は競合をエラーとして扱いま"
-"す。\n"
-"                            なお、 --download-as-neededを指定すると競合チェッ"
-"クを\n"
+"    --replacefiles          既にインストールされているパッケージとファイルが\n"
+"                            競合する場合も、インストールを行なうようにします。\n"
+"                            何も指定しない場合は競合をエラーとして扱います。\n"
+"                            なお、 --download-as-neededを指定すると競合チェックを\n"
 "                            行なわないようになります。\n"
 "-r, --repo <alias|#|URI>    指定したリポジトリからのみ読み込みます。\n"
 "-D, --dry-run               更新をテストするだけで実際には何もしません。\n"
 "    --details               インストールの概要を詳細に表示します。\n"
-"    --download              ダウンロードモードを指定します。利用可能なモー"
-"ド:\n"
+"    --download              ダウンロードモードを指定します。利用可能なモード:\n"
 "                            %s\n"
-"-d, --download-only         パッケージをダウンロードするだけでインストールは"
-"行いません。\n"
+"-d, --download-only         パッケージをダウンロードするだけでインストールは行いません。\n"
 
 #: src/Zypper.cc:2512
 msgid "Install only patches which affect the package management itself."
@@ -3004,9 +2991,9 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
-"修正には含まれていない全てのパッケージも追加で更新しようとします。 patch コマ"
-"ンドでは、更新スタック自身を更新しなければならない場合、このオプションは無視"
-"されます。また、 --updatestack-only と同時に指定することはできません。"
+"パッチには含まれていない全てのパッケージも追加で更新しようとします。 patch "
+"コマンドでは、更新スタック自身を更新しなければならない場合、このオプションは無視されます。また、 --updatestack-only "
+"と同時に指定することはできません。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2543
@@ -3016,7 +3003,7 @@ msgstr "list-patches (lp) [オプション]"
 #. translators: command description
 #: src/Zypper.cc:2546
 msgid "List all applicable patches."
-msgstr "適用可能な修正を一覧で表示します。"
+msgstr "適用可能なパッチを一覧で表示します。"
 
 #: src/Zypper.cc:2549
 msgid ""
@@ -3024,7 +3011,7 @@ msgid ""
 "List applicable patches for Bugzilla issues."
 msgstr ""
 "-b, --bugzilla[=#]\n"
-"Bugzilla の発行番号をもとに、適用可能な修正を一覧で表示します。"
+"Bugzilla の発行番号をもとに、適用可能なパッチを一覧で表示します。"
 
 #: src/Zypper.cc:2550
 msgid ""
@@ -3032,7 +3019,7 @@ msgid ""
 "List applicable patches for CVE issues."
 msgstr ""
 "--cve[=#]\n"
-"CVE の発行番号をもとに、適用可能な修正を一覧で表示します。"
+"CVE の発行番号をもとに、適用可能なパッチを一覧で表示します。"
 
 #: src/Zypper.cc:2551
 msgid ""
@@ -3048,7 +3035,7 @@ msgid ""
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
 "--date <YYYY-MM-DD>\n"
-"指定した日付まで　(指定した日は含まず) に発行された修正を一覧で表示します。"
+"指定した日付まで　(指定した日は含まず) に発行されたパッチを一覧で表示します。"
 
 #: src/Zypper.cc:2553
 msgid ""
@@ -3056,7 +3043,7 @@ msgid ""
 "List only patches with this category."
 msgstr ""
 "-g, --category <カテゴリ>\n"
-"指定したカテゴリの修正のみを一覧で表示します。"
+"指定したカテゴリのパッチのみを一覧で表示します。"
 
 #: src/Zypper.cc:2554
 msgid ""
@@ -3064,7 +3051,7 @@ msgid ""
 "List only patches with this severity."
 msgstr ""
 "--severity <重要度>\n"
-"指定した重要度の修正のみを一覧で表示します。"
+"指定した重要度のパッチのみを一覧で表示します。"
 
 #: src/Zypper.cc:2555
 msgid ""
@@ -3072,7 +3059,7 @@ msgid ""
 "List all patches, not only applicable ones."
 msgstr ""
 "-a, --all\n"
-"適用可能なものだけでなく、すべての修正を一覧で表示します。"
+"適用可能なものだけでなく、すべてのパッチを一覧で表示します。"
 
 #: src/Zypper.cc:2557
 msgid ""
@@ -3080,7 +3067,7 @@ msgid ""
 "List only patches from the specified repository."
 msgstr ""
 "-r, --repo <ALIAS|#|URI>\n"
-"指定したリポジトリから提供されている修正のみを一覧で表示します。"
+"指定したリポジトリから提供されているパッチのみを一覧で表示します。"
 
 #: src/Zypper.cc:2601
 #, c-format, boost-format
@@ -3248,9 +3235,8 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
-"適用可能な修正に関する統計情報を表示します。このコマンドは、必要な修正が見つ"
-"かった場合には 100 を、少なくとも 1 つ以上の必要なセキュリティ修正が見つかっ"
-"た場合は 101 を返します。"
+"適用可能なパッチに関する統計情報を表示します。このコマンドは、必要なパッチが見つかった場合には 100 を、少なくとも 1 "
+"つ以上の必要なセキュリティパッチが見つかった場合は 101 を返します。"
 
 #: src/Zypper.cc:2729
 msgid ""
@@ -3258,7 +3244,7 @@ msgid ""
 "Check for patches only in the specified repository."
 msgstr ""
 "-r, --repo <ALIAS|#|URI>\n"
-"指定したリポジトリ内の修正のみを確認します。"
+"指定したリポジトリ内のパッチのみを確認します。"
 
 #: src/Zypper.cc:2730
 msgid ""
@@ -3266,7 +3252,7 @@ msgid ""
 "Check only for patches which affect the package management itself."
 msgstr ""
 "--updatestack-only\n"
-"パッケージ管理システム自身に影響する修正のみを確認します。"
+"パッケージ管理システム自身に影響するパッチのみを確認します。"
 
 #: src/Zypper.cc:2747
 msgid ""
@@ -3983,7 +3969,7 @@ msgstr "不明なパッケージ種類です:%s"
 
 #: src/Zypper.cc:4160
 msgid "Cannot uninstall patches."
-msgstr "修正をアンインストールできません。"
+msgstr "パッチをアンインストールできません。"
 
 #: src/Zypper.cc:4161
 msgid ""
@@ -3991,9 +3977,8 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
-"修正のインストール状態は単にその依存関係でのみ決定されます。\n"
-"修正は単なるファイルコピーやデータベースレコードのような形でインストールされ"
-"ることはありません。"
+"パッチのインストール状態は、単にその依存関係でのみ決定されます。\n"
+"パッチは、単なるファイルコピーやデータベースレコードのような形でインストールされることはありません。"
 
 #: src/Zypper.cc:4171
 msgid "Uninstallation of a source package not defined and implemented."
@@ -5787,7 +5772,7 @@ msgstr "システムパッケージ"
 
 #: src/search.cc:314
 msgid "No needed patches found."
-msgstr "適用すべき修正が見つかりません。"
+msgstr "適用すべきパッチが見つかりません。"
 
 #: src/search.cc:394
 msgid "No patterns found."
@@ -6107,8 +6092,8 @@ msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
 msgstr ""
-"インストールされた修正の中にはパッケージ管理システム自身の修正が含まれていま"
-"す。再度このコマンドを実行してその他の必要な更新をインストールしてください。"
+"インストールされたパッチの中には、パッケージ管理システム自身のパッチが含まれています。再度このコマンドを実行して、その他の必要な更新をインストールしてくだ"
+"さい。"
 
 #: src/solve-commit.cc:910
 msgid "Dependencies of all installed packages are satisfied."
@@ -6328,49 +6313,49 @@ msgstr ""
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] "適用可能な %2% 個の修正のうち、 %1% 個の修正を考慮しています:"
+msgstr[0] "適用可能な %2% 個のパッチのうち、 %1% 個のパッチを考慮しています:"
 
 #. translator: stats table header
 #: src/update.cc:284
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] "%1% 個の適用可能な修正が見つかりました:"
+msgstr[0] "%1% 個の適用可能なパッチが見つかりました:"
 
 #. translator: stats summary
 #: src/update.cc:294
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "%d 個の修正がロックされています"
+msgstr[0] "%d 個のパッチがロックされています"
 
 #. translator: stats summary
 #: src/update.cc:302
 #, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d 個の任意指定の修正"
+msgstr[0] "%d 個の任意指定のパッチ"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:306
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr "任意指定の修正を含めるには、 '%1%' をお使いください"
+msgstr "任意指定のパッチを含めるには、 '%1%' をお使いください"
 
 #. translator: stats summary
 #: src/update.cc:315
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] "%d 個の修正が必要です"
+msgstr[0] "%d 個のパッチが必要です"
 
 #. translator: stats summary
 #: src/update.cc:318
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
-msgstr[0] "%d 個のセキュリティ修正"
+msgstr[0] "%d 個のセキュリティパッチ"
 
 #. translator: Table column header.
 #: src/update.cc:352
@@ -6445,14 +6430,12 @@ msgstr "以下のパッチの説明に該当するものが見つかりました
 #: src/update.cc:1051
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
-msgstr ""
-"Bugzilla発信番号 %s に対する修正は見つからなかったか、もしくは不要なもので"
-"す。"
+msgstr "Bugzilla 発信番号 %s に対する修正は見つからなかったか、もしくは不要なものです。"
 
 #: src/update.cc:1053
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
-msgstr "CVE発信番号 %s に対する修正は見つからなかったか、または不要です。"
+msgstr "CVE 発信番号 %s に対する修正は見つからなかったか、または不要です。"
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
 #: src/update.cc:1056
@@ -6549,7 +6532,7 @@ msgstr[0] "製品"
 #: src/utils/misc.cc:97
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "修正"
+msgstr[0] "パッチ"
 
 #: src/utils/misc.cc:99
 msgid "srcpackage"
