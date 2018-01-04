@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jan  4 17:49:06 CET 2018 - ma@suse.de
+
+- plugin: don't reject header values containing a ':' (bsc#1074687)
+- Locks: Don't store duplicate locks (bsc#969569)
+- version 17.1.0 (0)
+
+-------------------------------------------------------------------
 Wed Dec  6 13:29:42 CET 2017 - ma@suse.de
 
 - Fix default for solver.allowNameChange (bsc#1071466)
