@@ -25,6 +25,8 @@ Packages requiring a feature may use the corresponding \c Requires: in their .sp
   <DD><DL>
     <DT>version 0</DT>
     <DD>General ability to provide and handle plugins.</DD>
+    <DT>version 0.1</DT>
+    <DD>Bugfix: don't reject header values containing a ':'.</DD>
   </DL></DD>
 
   <DT>plugin:commit</DT>

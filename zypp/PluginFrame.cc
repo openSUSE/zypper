@@ -116,7 +116,7 @@ namespace zypp
       {
 	if ( key_r.find_first_of( ":\n" ) != std::string::npos )
 	  ZYPP_THROW( PluginFrameException( "Illegal char in header key", key_r ) );
-	if ( value_r.find_first_of( ":\n" ) != std::string::npos )
+	if ( value_r.find_first_of( "\n" ) != std::string::npos )
 	  ZYPP_THROW( PluginFrameException( "Illegal char in header value", value_r ) );
 	return HeaderList::value_type( key_r, value_r );
       }
