@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-12-20 19:05+0000\n"
+"PO-Revision-Date: 2018-01-10 14:05+0000\n"
 "Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
 "4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.17.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -831,7 +831,7 @@ msgstr "Продукт \"%1%\" требуется обновить команд�
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] "…и еще %1% элемент."
-msgstr[1] "…и еще %1% элемента"
+msgstr[1] "…и еще %1% элемента."
 msgstr[2] ".…и еще %1% элементов."
 
 #: src/Summary.cc:552
