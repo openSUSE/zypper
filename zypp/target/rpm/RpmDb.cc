@@ -1495,7 +1495,7 @@ namespace
 
       int rpmLog( rpmlogRec rec_r )
       {
-	if ( _cap ) (*_cap) = rpmlogRecMessage( rec_r );
+	if ( _cap ) (*_cap) += rpmlogRecMessage( rec_r );
 	return RPMLOG_DEFAULT;
       }
 
