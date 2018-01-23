@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-04-20 02:18+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
-"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
-"master/zh_CN/>\n"
+"PO-Revision-Date: 2018-01-23 09:26+0000\n"
+"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
+"Language-Team: Chinese (China) "
+"<https://l10n.opensuse.org/projects/libzypp/master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.18\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -1359,9 +1359,8 @@ msgid "Tried to import not existent key %s into keyring %s"
 msgstr "尝试导入尚不存在的密钥 %s 到密钥环 %s"
 
 #: zypp/KeyRing.cc:583
-#, fuzzy
 msgid "Failed to import key."
-msgstr "从文件 %1% 中导入公钥失败"
+msgstr "导入密钥失败。"
 
 #: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
@@ -3732,21 +3731,20 @@ msgstr "将执行以下动作："
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "（未过期）"
+msgstr "未过期"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "过期日期：%1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "过期日期：%1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
@@ -4704,7 +4702,7 @@ msgstr "移除公钥 %1% 失败"
 
 #: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
-msgstr ""
+msgstr "未签署包！"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4789,7 +4787,7 @@ msgstr "文件不存在或无法检查其签名"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
-msgstr ""
+msgstr "未签署文件"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
