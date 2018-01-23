@@ -603,8 +603,8 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     control.addUpgradeRepos( resolver.upgradeRepos() );
 
     control.addTagIf( "distupgrade",	resolver.isUpgradeMode() );
-    control.addTagIf( "verify",	 	resolver.isUpdateMode() );
-    control.addTagIf( "update",	 	resolver.isVerifyingMode() );
+    control.addTagIf( "update",	 	resolver.isUpdateMode() );
+    control.addTagIf( "verify",	 	resolver.isVerifyingMode() );
 
     return true;
 }
