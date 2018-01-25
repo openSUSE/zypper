@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-08-20 17:43+0000\n"
-"Last-Translator: jc sl <trcs@gmx.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2018-01-25 19:37+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -48,16 +48,16 @@ msgid "Done."
 msgstr "Hecho."
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"Aceptar paquetes con sumas de verificación incorrectas puede provocar daños "
-"en el sistema y, en casos extremos, incluso que el sistema se vea "
-"comprometido."
+"Firmar los datos permite al destinatario verificar que no se han producido "
+"modificaciones después de la firma. Aceptar datos sin sumas de verificación "
+"o con sumas incorrectas o desconocidas puede provocar daños en el sistema y, "
+"en casos extremos, incluso que el sistema se vea comprometido."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -109,7 +109,7 @@ msgstr "La clave caduca:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Subclave:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -828,7 +828,7 @@ msgstr ""
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "Es preciso actualizar el producto %1% llamando a %2%."
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1270,12 +1270,15 @@ msgstr[0] "La siguiente aplicación cambiará de proveedor:"
 msgstr[1] "Las siguientes %d aplicaciones  cambiaran de proveedor:"
 
 #: src/Summary.cc:1151
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "El siguiente paquete no es soportado por su proveedor:"
-msgstr[1] "Los siguientes %d paquetes no son soportados por su proveedor:"
+msgstr[0] ""
+"El paquete siguiente no tiene información de asistencia de su proveedor:"
+msgstr[1] ""
+"Los %d paquetes siguientes no tienen información de asistencia de su "
+"proveedor:"
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
@@ -1507,7 +1510,7 @@ msgstr "Es necesario reiniciar el sistema."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Puede cancelar:"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -1570,9 +1573,9 @@ msgid "Enable strict GPG check for this repository."
 msgstr "Habilita la comprobación GPG estricta para este repositorio."
 
 #: src/Zypper.cc:129
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "No hay candidatos de actualización para %s."
+msgstr "No hay candidatos de actualización para %1%."
 
 #: src/Zypper.cc:130
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
@@ -1721,15 +1724,14 @@ msgid "This command has no additional options."
 msgstr "Este comando no tiene opciones adicionales."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Opciones del solucionador:"
+msgstr "Opciones legadas:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Igual que %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
