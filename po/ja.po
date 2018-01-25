@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-12-27 06:03+0000\n"
+"PO-Revision-Date: 2018-01-25 08:03+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.17.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -4056,7 +4056,7 @@ msgstr "該当する項目がありません。"
 
 #: src/Zypper.cc:4648
 msgid "Problem occurred initializing or executing the search query"
-msgstr "検索の問い合わせを初期化する際、または実行する際に問題が発生しました"
+msgstr "検索の問い合わせを準備する際、または実行する際に問題が発生しました"
 
 #: src/Zypper.cc:4649
 msgid "See the above message for a hint."
@@ -5134,11 +5134,11 @@ msgstr "エラーにより、いくつかのリポジトリを更新すること
 
 #: src/repos.cc:998
 msgid "Initializing Target"
-msgstr "ターゲットを初期化しています"
+msgstr "ターゲットを準備しています"
 
 #: src/repos.cc:1006
 msgid "Target initialization failed:"
-msgstr "ターゲットの初期化に失敗しました:"
+msgstr "ターゲットの準備に失敗しました:"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -6446,7 +6446,7 @@ msgstr ""
 
 #: src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
-msgstr "環境設定ファイルパーサを初期化できません。"
+msgstr "環境設定ファイルパーサを準備できません。"
 
 #: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
 msgid "Augeas error: setting config file to load failed."
