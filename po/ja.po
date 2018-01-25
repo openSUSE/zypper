@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-12-01 11:06+0000\n"
+"PO-Revision-Date: 2018-01-25 08:03+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/libzypp/master/ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.17.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -4086,7 +4086,7 @@ msgstr "不正なメディアの接続点"
 #: zypp/media/MediaException.cc:77
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "「%s」のダウンロード(curl)初期化が失敗しました"
+msgstr "「%s」のダウンロード(curl)準備が失敗しました"
 
 #: zypp/media/MediaException.cc:82
 #, c-format, boost-format
@@ -4662,11 +4662,11 @@ msgstr "HalContextが接続されていません"
 
 #: zypp/target/hal/HalContext.cc:127
 msgid "HalDrive not initialized"
-msgstr "HalDriveが初期化されていません"
+msgstr "HalDriveが準備されていません"
 
 #: zypp/target/hal/HalContext.cc:137
 msgid "HalVolume not initialized"
-msgstr "HalVolumeが初期化されていません"
+msgstr "HalVolumeが準備されていません"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
@@ -4682,8 +4682,7 @@ msgstr "libhal_set_dbus_connection:dbus接続を設定できません"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr ""
-"HALコンテキストを初期化できません。haldが動作していない可能性があります。"
+msgstr "HALコンテキストを準備できません。haldが動作していない可能性があります。"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
@@ -4799,7 +4798,7 @@ msgstr "ファイルに署名がありません"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
-msgstr "相互排他的属性を初期化できません"
+msgstr "相互排他属性を準備できません"
 
 #: zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -4807,7 +4806,7 @@ msgstr "再帰相互排他的属性を設定できません"
 
 #: zypp/thread/Mutex.cc:47
 msgid "Can't initialize recursive mutex"
-msgstr "再帰相互排他的属性を初期化できません"
+msgstr "再帰相互排他属性を準備できません"
 
 #: zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
