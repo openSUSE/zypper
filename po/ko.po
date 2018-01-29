@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-04-18 02:48+0000\n"
+"PO-Revision-Date: 2018-01-29 02:49+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
-"Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/"
-">\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.18\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
@@ -1437,9 +1437,8 @@ msgid "Tried to import not existent key %s into keyring %s"
 msgstr "기존 키 %s을(를) 키링 %s(으)로 임포트하려고 했습니다."
 
 #: zypp/KeyRing.cc:583
-#, fuzzy
 msgid "Failed to import key."
-msgstr "%1% 파일에서 공용 키를 임포트하지 못했습니다."
+msgstr "키를 임포트하지 못했습니다."
 
 #: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
@@ -3921,21 +3920,20 @@ msgstr "다음 작업이 수행됨:"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "(만료되지 않음)"
+msgstr "만료되지 않음"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "만료됨: 1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "만료: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
@@ -4896,7 +4894,7 @@ msgstr "%1% 공용 키를 제거하지 못했습니다."
 
 #: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
-msgstr ""
+msgstr "패키지가 서명되지 않았습니다!"
 
 #  progress stage
 #. Translator: %s = name of an rpm package. A list of diffs follows
@@ -4983,7 +4981,7 @@ msgstr "파일이 존재하지 않거나 서명을 확인할 수 없음"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
-msgstr ""
+msgstr "파일이 서명되지 않음"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
