@@ -11,14 +11,16 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2011-11-23 19:47+0200\n"
-"Last-Translator: Huseyin <huseyinaksu95@gmail.com>\n"
-"Language-Team: turkish <i18n@suse.de>\n"
-"Language: \n"
+"PO-Revision-Date: 2018-01-29 14:07+0000\n"
+"Last-Translator: Özgür Ateş Fırat <ozgursebahat@mail.ru>\n"
+"Language-Team: Turkish "
+"<https://l10n.opensuse.org/projects/libzypp/master/tr/>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.18\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -1476,8 +1478,9 @@ msgid "Provides"
 msgstr ""
 
 #: zypp/Dep.cc:97
+#, fuzzy
 msgid "Prerequires"
-msgstr ""
+msgstr "Öngereklilikler"
 
 # clients/hwinfo.ycp:54
 #: zypp/Dep.cc:98
