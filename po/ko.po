@@ -6,16 +6,16 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-04-26 08:36+0000\n"
+"PO-Revision-Date: 2018-01-30 05:36+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
-"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
-">\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.18\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: src/SolverRequester.h:57
@@ -37,15 +37,14 @@ msgid "Done."
 msgstr "완료."
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"잘못된 체크섬을 포함한 패키지를 승인하면 시스템이 손상될 수 있으며, 심각한 경"
-"우 보안 위험이 발생할 수도 있습니다."
+"데이터에 서명하면 수신자는 데이터가 서명된 후에 수정이 발생하지 않았음을 확인할 수 있습니다. 서명이 없거나 잘못되었거나 알 수 없는 "
+"데이터를 수락하면 시스템이 손상되고 극단적인 경우 시스템이 손상될 수 있습니다."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -53,13 +52,14 @@ msgstr ""
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
-msgstr ""
+msgstr "'%1%' 파일은 리포지토리 마스터 인덱스 파일입니다. 전체 repo의 무결성을 보장합니다."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"아무도이 파일에 간섭하지 않았음을 확인할 수 없으므로 더 이상 신뢰할 수 없습니다! 안전하다고 판단되지 않는 경우 계속해서는 안됩니다."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -67,6 +67,8 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"이 파일은 서명된 후에 수정되었습니다. 이것은 악의적인 변경일 수 있으므로 더 이상 신뢰할 수 없습니다! 안전하다고 판단되지 않는 경우 "
+"계속해서는 안됩니다."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -90,7 +92,7 @@ msgstr "키 만료:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "하위 키:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -119,15 +121,15 @@ msgstr "서명되지 않은 '%s' 파일을 '%s' 리포지토리에서 승인 중
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "'%s' 파일이 서명되지 않았습니다. 계속하시겠습니까?"
+msgstr "'%1%' 파일이 서명되지 않았습니다."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "'%s' 파일이 '%s' 리포지토리에서 서명되지 않았습니다. 계속하시겠습니까?"
+msgstr "'%1%' 파일이 '%2%' 리포지토리에서 서명되지 않았습니다."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -156,17 +158,15 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "'%s' 파일이 알 수 없는 키 '%s'(으)로 서명되었습니다. 계속하시겠습니까?"
+msgstr "'%1%' 파일이 알 수 없는 키 '%2%'(으)로 서명되었습니다."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"리포지토리 '%s'의 '%s' 파일이 알 수 없는 키 '%s'(으)로 서명되었습니다. 계속하"
-"시겠습니까?"
+msgstr "리포지토리 '%3%'의 '%1%' 파일이 알 수 없는 키 '%2%'(으)로 서명되었습니다."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -465,19 +465,17 @@ msgstr "아니요"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "참조:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "경고: "
+msgstr "경고:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "오류"
+msgstr "오류:"
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -787,7 +785,7 @@ msgstr "업데이트 스택을 먼저 업데이트할 경우 %s 옵션을 무시
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "'%2%'을(를) 호출하여 '%1%' 제품을 업데이트해야 합니다!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1152,11 +1150,11 @@ msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "다음 응용 프로그램의 제조업체가 변경됩니다."
 
 #: src/Summary.cc:1151
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "다음 패키지는 제조업체에서 지원하지 않습니다."
+msgstr[0] "다음 %d 패키지는 제조업체에서 지원하지 않습니다."
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
@@ -1358,7 +1356,7 @@ msgstr "시스템 재부팅이 필요합니다."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "취소 고려:"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -1417,25 +1415,22 @@ msgid "Enable GPG check for this repository."
 msgstr "이 리포지토리에 대해 GPG 확인을 활성화합니다."
 
 #: src/Zypper.cc:128
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "이 리포지토리에 대해 GPG 확인을 활성화합니다."
+msgstr "이 리포지토리에 대해 엄격한 GPG 확인을 활성화합니다."
 
 #: src/Zypper.cc:129
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "'%s'에 대한 업데이트 후보가 없습니다."
+msgstr "'%1%'에 대한 속기입니다."
 
 #: src/Zypper.cc:130
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "이 리포지토리에 대해 GPG 확인을 활성화합니다."
+msgstr "GPG 확인을 활성화하지만 리포지토리 메타데이터가 서명되지 않도록 허용합니다."
 
 #: src/Zypper.cc:131
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "이 리포지토리에 대해 GPG 확인을 활성화합니다."
+msgstr "GPG 확인을 활성화하지만 이 리포지토리에서 서명되지 않은 패키지를 설치하도록 허용합니다."
 
 #: src/Zypper.cc:132
 msgid "Disable GPG check for this repository."
@@ -1445,7 +1440,7 @@ msgstr "이 리포지토리에 대해 GPG 확인을 비활성화합니다."
 msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
-msgstr ""
+msgstr "/etc/zypp/zypp.conf에 정의된 전역 GPG 검사 설정을 사용하십시오. 이는 기본값입니다."
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
@@ -1475,13 +1470,13 @@ msgstr "권장 패키지를 설치하지 않고 필수 패키지만 설치합니
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
-msgstr ""
+msgstr "제3자 라이센스 확인 프롬프트에 자동으로 '예'라고 말하십시오. 자세한 내용은 'man zypper'를 참조하십시오."
 
 #: src/Zypper.cc:171
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
-msgstr ""
+msgstr "제품 라이센스만 자동으로 수락합니다. 자세한 내용은 'man zypper'를 참조하십시오."
 
 #: src/Zypper.cc:180
 msgid ""
@@ -1501,7 +1496,7 @@ msgstr "기본값은 옵션 패치를 포함하는 것입니다."
 #: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "이 옵션은 상호 배타적입니다. %1%"
 
 #: src/Zypper.cc:253
 msgid ""
@@ -1516,6 +1511,8 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"가능한 빨리 현재 작업을 중단하도록 PackageKit에 요청할 수 있지만 PackageKit에서 이 요청에 얼마나 빨리 응답할 것인가에 "
+"달려 있습니다."
 
 #: src/Zypper.cc:262
 msgid "Ask PackageKit to quit?"
@@ -1548,9 +1545,8 @@ msgid "Command options:"
 msgstr "명령 옵션:"
 
 #: src/Zypper.cc:460
-#, fuzzy
 msgid "Solver options:"
-msgstr "고급 옵션:"
+msgstr "해결 옵션:"
 
 #: src/Zypper.cc:463
 msgid "Expert options:"
@@ -1561,15 +1557,14 @@ msgid "This command has no additional options."
 msgstr "이 명령에는 추가 옵션이 없습니다."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "고급 옵션:"
+msgstr "기존 옵션:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "%1%와 동일합니다."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
@@ -1863,7 +1858,7 @@ msgstr "전체 옵션 및 명령 목록을 가져오려면 '%s'을(를) 입력�
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
-msgstr ""
+msgstr "'%1%'은(는) 오타가 아닌 경우 기본 제공 명령이 아니지만 하위 명령 또는 플러그인으로 제공됩니다('%2 %' 참조)."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -1873,6 +1868,7 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"이 경우 하위 명령을 제공하는 특정 패키지를 먼저 설치해야합니다. 이러한 패키지는 종종 '%1%' 또는 '%2%'(으)로 명명됩니다."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -4716,7 +4712,6 @@ msgstr "시작 중"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
 msgstr "찾을 수 없음"
 
