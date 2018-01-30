@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-10-19 04:58+0000\n"
-"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
+"PO-Revision-Date: 2018-01-30 22:00+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -275,7 +275,7 @@ msgstr "لا يوجد ملخص للملف %s."
 #: src/callbacks/keyring.h:400
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
-msgstr "خلاصة %s غير معروفة للملف %s."
+msgstr "ملخص %s غير معروف للملف %s."
 
 #: src/callbacks/keyring.h:417
 #, boost-format
@@ -339,7 +339,7 @@ msgstr "إلغاء حظر أم تجاهل؟"
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
-msgstr "يقوم الاستعلام التالي بقفل نفس الكائنات كالكائن الذي تريد إزالته:"
+msgstr "يقوم الاستعلام التالي بقفل نفس الكائنات التي تريد إزالتها:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
@@ -397,7 +397,7 @@ msgstr "تشغيل: %s (%s و%s)"
 #: src/callbacks/rpm.h:249
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr "إزالة  %s 1"
+msgstr "إزالة %s"
 
 #: src/callbacks/rpm.h:272
 #, c-format, boost-format
@@ -676,7 +676,7 @@ msgid ""
 "specified version, architecture, or repository."
 msgstr ""
 "يوجد مرشح تحديث '%s' لـ '%s'، ولكن لا يطابق الإصدار المحدد أو الهيكل أو "
-"المستودع."
+"المخزن."
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -718,7 +718,7 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"يتوفر إصدار أقدم من الإصدار المثبت في الحزمة المحددة '%s' من المستودع '%s'."
+"يتوفر إصدار أقدم من الإصدار المثبت في الحزمة المحددة '%s' من المخزن '%s'."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
@@ -997,11 +997,11 @@ msgstr[5] "المنتجون التالين %d سيتم ترقيتهم:"
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "ستتم ترقية التطبيق التالي:"
-msgstr[1] "ستتم ترقية %d 1 من التطبيقات التالية:"
-msgstr[2] "ستتم ترقية تطبيقين %d 1 من التطبيقات التالية:"
-msgstr[3] "ستتم ترقية %d 1 من التطبيقات التالية:"
-msgstr[4] "ستتم ترقية %d 1 من التطبيقات التالية:"
-msgstr[5] "ستتم ترقية %d 1 من التطبيقات التالية:"
+msgstr[1] "ستتم ترقية %d من التطبيقات التالية:"
+msgstr[2] "ستتم ترقية %d من التطبيقات التالية:"
+msgstr[3] "ستتم ترقية %d من التطبيقات التالية:"
+msgstr[4] "ستتم ترقية %d من التطبيقات التالية:"
+msgstr[5] "ستتم ترقية %d من التطبيقات التالية:"
 
 #: src/Summary.cc:681
 #, c-format, boost-format
@@ -1219,19 +1219,19 @@ msgstr[0] ""
 "الحزمة التالية موصى بها، ولكن لن يتم تثبيتها لأنه غير مرغوب فيها (تمت "
 "إزالتها من قبل يدوياً):"
 msgstr[1] ""
-"%d 1 من الحزم التالية موصى بها، ولكن لن يتم تثبيتها لأنه غير مرغوب فيها (تمت "
+"%d من الحزم التالية موصى بها، ولكن لن يتم تثبيتها لأنه غير مرغوب فيها (تمت "
 "إزالتها من قبل يدوياً):"
 msgstr[2] ""
-"حزمتان %d 1 من الحزم التالية موصى بهما، ولكن لن يتم تثبيتها لأنه غير مرغوب "
-"فيها (تمت إزالتها من قبل يدوياً):"
+"%d من الحزم التالية موصى بهما، ولكن لن يتم تثبيتها لأنه غير مرغوب فيها (تمت "
+"إزالتها من قبل يدوياً):"
 msgstr[3] ""
-"%d 1 من الحزم التالية موصى بها، ولكن لن يتم تثبيتها لأنه غير مرغوب فيها (تمت "
+"%d من الحزم التالية موصى بها، ولكن لن يتم تثبيتها لأنه غير مرغوب فيها (تمت "
 "إزالتها من قبل يدوياً):"
 msgstr[4] ""
-"%d 1 من الحزم التالية موصى بها، ولكن لن يتم تثبيتها لأنه غير مرغوب فيها (تمت "
+"%d من الحزم التالية موصى بها، ولكن لن يتم تثبيتها لأنه غير مرغوب فيها (تمت "
 "إزالتها من قبل يدوياً):"
 msgstr[5] ""
-"%d 1 من الحزم التالية موصى بها، ولكن لن يتم تثبيتها لأنه غير مرغوب فيها (تمت "
+"%d من الحزم التالية موصى بها، ولكن لن يتم تثبيتها لأنه غير مرغوب فيها (تمت "
 "إزالتها من قبل يدوياً):"
 
 #: src/Summary.cc:972
@@ -1270,10 +1270,10 @@ msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
 msgstr[0] "يوصى بالنمط التالي، ولن يتم تثبيته:"
 msgstr[1] "يوصى بالنمط التالي، ولن يتم تثبيته:"
-msgstr[2] "يوصى بـنمطين مما يلي، لكن لن يتم تثبيتهما:"
-msgstr[3] "يوصى بالأنماط التالية %d، لكن لن يتم تثبيتها:"
-msgstr[4] "يوصى بالأنماط التالية %d، لكن لن يتم تثبيتها:"
-msgstr[5] "يوصى بالأنماط التالية %d، لكن لن يتم تثبيتها:"
+msgstr[2] "يوصى %d من الأنماط التالية، لكن لن يتم تثبيتهما:"
+msgstr[3] "يوصى %d من الأنماط التالية، لكن لن يتم تثبيتها:"
+msgstr[4] "يوصى %d من الأنماط التالية، لكن لن يتم تثبيتها:"
+msgstr[5] "يوصى %d من الأنماط التالية، لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:993
 #, c-format, boost-format
@@ -1282,10 +1282,10 @@ msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "يوصى بالمنتج التالي، لكن لن يتم تثبيته:"
 msgstr[1] "يوصى بالمنتج التالي، لكن لن يتم تثبيته:"
-msgstr[2] "يوصى بالمنتجين التاليين، لكن لن يتم تثبيتهما:"
-msgstr[3] "يوصى بالمنتجات التالية %d، لكن لن يتم تثبيتها:"
-msgstr[4] "يوصى بالمنتجات التالية %d، لكن لن يتم تثبيتها:"
-msgstr[5] "يوصى بالمنتجات التالية %d، لكن لن يتم تثبيتها:"
+msgstr[2] "يوصى بعدد %d من المنتجات التالية، لكن لن يتم تثبيتهما:"
+msgstr[3] "يوصى بعدد %d من المنتجات التالية، لكن لن يتم تثبيتها:"
+msgstr[4] "يوصى بعدد %d من المنتجات التالية، لكن لن يتم تثبيتها:"
+msgstr[5] "يوصى بعدد %d من المنتجات التالية، لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:997
 #, c-format, boost-format
@@ -1474,12 +1474,12 @@ msgstr[5] "الأنماط التالية %d سيغير بائعها:"
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "لا يوجد للحزمة التالية %d معلومات دعم من المزود:"
-msgstr[1] "لا يوجد للحزمة التالية معلومات دعم من المزود:"
-msgstr[2] "لا يوجد للحزمتان التاليتان %d معلومات دعم من المزود:"
-msgstr[3] "لا يوجد للحزم التالية %d معلومات دعم من المزود:"
-msgstr[4] "لا يوجد للحزم التالية %d معلومات دعم من المزود:"
-msgstr[5] "لا يوجد للحزم التالية %d معلومات دعم من المزود:"
+msgstr[0] "لا يوجد معلومات دعم من المزود لعدد %d من الحزم التالية:"
+msgstr[1] "لا يوجد معلومات دعم من المزود لعدد %d من الحزم التالية:"
+msgstr[2] "لا يوجد معلومات دعم من المزود لعدد %d من الحزم التالية:"
+msgstr[3] "لا يوجد معلومات دعم من المزود لعدد %d من الحزم التالية:"
+msgstr[4] "لا يوجد معلومات دعم من المزود لعدد %d من الحزم التالية:"
+msgstr[5] "لا يوجد معلومات دعم من المزود لعدد %d من الحزم التالية:"
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
