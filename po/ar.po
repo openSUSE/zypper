@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-12-18 07:15+0000\n"
-"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
+"PO-Revision-Date: 2018-01-30 22:00+0000\n"
+"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
 "Language: ar\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 2.17.1\n"
+"X-Generator: Weblate 2.18\n"
 "X-Language-English: Arabic\n"
 "X-Language-Local: Arabic*\n"
 
@@ -729,7 +729,7 @@ msgstr "موناكو"
 #. :MCO:492:
 #: zypp/CountryCode.cc:295
 msgid "Moldova"
-msgstr "مولدافا"
+msgstr "مولدوفا"
 
 #. :MDA:498:
 #: zypp/CountryCode.cc:296
@@ -1285,7 +1285,7 @@ msgstr "يتطلب"
 
 #: zypp/Dep.cc:99
 msgid "Conflicts"
-msgstr "يتعارض"
+msgstr "تعارضات"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
@@ -1310,7 +1310,7 @@ msgstr "يُضيف"
 #: zypp/ExternalProgram.cc:261
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
-msgstr "تعذر فتح pty (%s)."
+msgstr "تعذر فتح pty (‏%s)."
 
 #: zypp/ExternalProgram.cc:272
 #, c-format, boost-format
@@ -1320,17 +1320,19 @@ msgstr "لا يمكن فتح المسار (%s)."
 #: zypp/ExternalProgram.cc:353
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr "لا يمكن إجراء chroot لتغيير الدليل الجذر إلى '%s' (%s)."
+msgstr "لا يمكن تغيير الجذر الافتراضي إلى '%s' (‏%s)."
 
 #: zypp/ExternalProgram.cc:363
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "لا يمكن إجراء chdir إلى '%s' داخل chroot تغيير الدليل الجذر '%s' (%s)."
+msgstr ""
+"لا يمكن إجراء تغيير الدليل الافتراضي إلى '%s' داخل تغيير الجذر الافتراضي '%"
+"s' (‏%s)."
 
 #: zypp/ExternalProgram.cc:364
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr "لا يمكن إجراء chdir إلى '%s' (%s)."
+msgstr "لا يمكن تغيير الدليل الافتراضي إلى '%s' (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:376
@@ -1839,18 +1841,21 @@ msgstr "الكورسيكية"
 #: zypp/LanguageCode.cc:353
 msgid "Creoles and Pidgins, English-Based (Other)"
 msgstr ""
-"الكرييولى واللغات المبسطة الأخرى للتفاهم بين الشعوب على أساس الأنجليزية"
+"الكرييولى واللغات المبسطة الأخرى للتفاهم بين الشعوب على أساس الإنجليزية "
+"(أخرى)"
 
 #. language code: cpf
 #: zypp/LanguageCode.cc:355
 msgid "Creoles and Pidgins, French-Based (Other)"
-msgstr "الكرييولى واللغات المبسطة الأخرى للتفاهم بين الشعوب على أساس الفرنسية"
+msgstr ""
+"الكرييولى واللغات المبسطة الأخرى للتفاهم بين الشعوب على أساس الفرنسية (أخرى)"
 
 #. language code: cpp
 #: zypp/LanguageCode.cc:357
 msgid "Creoles and Pidgins, Portuguese-Based (Other)"
 msgstr ""
-"الكرييولى واللغات المبسطة الأخرى للتفاهم بين الشعوب على أساس البرتغالية"
+"الكرييولى واللغات المبسطة الأخرى للتفاهم بين الشعوب على أساس البرتغالية "
+"(أخرى)"
 
 #. language code: cre cr
 #: zypp/LanguageCode.cc:359
@@ -3818,7 +3823,7 @@ msgstr "تعذر فتح الملف '%s' للكتابة."
 #: zypp/RepoManager.cc:871
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr "خدمة غير معروفة '%1%': إزالة مخزن الخدمة الوحيد '%2%'"
+msgstr "خدمة غير معروفة '%1%': تتم الآن إزالة مخزن الخدمة الوحيد '%2%'"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1098
@@ -3843,7 +3848,7 @@ msgstr "لا يمكن إنشاء دليل لذاكرة التخزين المؤق
 #: zypp/RepoManager.cc:1300
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "بناء الذاكرة المؤقتة لمخزن '%s'"
+msgstr "يتم الآن بناء الذاكرة المؤقتة لمخزن '%s'"
 
 #: zypp/RepoManager.cc:1320
 #, c-format, boost-format
@@ -4170,7 +4175,7 @@ msgstr "الوسيط '%s' مستخدَم بواسطة مثيل آخر"
 
 #: zypp/media/MediaException.cc:162
 msgid "Cannot eject any media"
-msgstr "لا يمكن إخراج أية وسائط"
+msgstr "لا يمكن إخراج أي وسائط"
 
 #: zypp/media/MediaException.cc:164
 #, c-format, boost-format
@@ -4562,7 +4567,7 @@ msgstr "تجاهل تحذير النظام المعطل"
 #: zypp/solver/detail/SATResolver.cc:1227
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
-msgstr "عدم طلب تثبيت كل المشاكل القابلة للحل التي توفر %s"
+msgstr "عدم طلب تثبيت المشاكل القابلة للحل التي توفر %s"
 
 #: zypp/solver/detail/SATResolver.cc:1249
 #, c-format, boost-format
@@ -4723,7 +4728,7 @@ msgstr "لم يتم توقيع الحزمة!"
 #: zypp/target/rpm/RpmDb.cc:1896
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr "ملفات التكوين التي تم تغييرها لـ  %s 1:"
+msgstr "ملفات التكوين التي تم تغييرها لـ %s:"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2071
@@ -4849,7 +4854,7 @@ msgstr "يعتبر مخطط Url مكونًا مطلوبًا"
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr "مخطط Url غير صالح '%s'"
+msgstr "مخطط Url '%s' غير صالح"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
