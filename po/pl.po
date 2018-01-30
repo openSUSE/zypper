@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2018-01-30 14:10+0000\n"
-"Last-Translator: anonymous <>\n"
+"PO-Revision-Date: 2018-01-30 14:18+0000\n"
+"Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
 "Language: pl\n"
@@ -76,9 +76,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
-"Ten plik został zmodyfikowany po jego podpisaniu. To może być złośliwe "
-"działanie, więc ten plik nie może być już wiarygodny. Nie powinieneś "
-"kontynuować, chyba że wiesz, że to jest bezpieczne. "
+"Ten plik został zmodyfikowany po podpisaniu. To może być złośliwa zmiana, "
+"więc ten plik może już nie być wiarygodny. Nie kontynuuj, chyba że wiesz, że "
+"to bezpieczne."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -1616,7 +1616,7 @@ msgstr "Wymagane ponowne uruchomienie systemu."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Rozważ anulowanie:"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -1741,12 +1741,14 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Automatycznie zatwierdź monit o potwierdzenie licencji stron trzeciej. "
+"Szczegóły: man zypper."
 
 #: src/Zypper.cc:171
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
-msgstr ""
+msgstr "Automatycznie akceptuj tylko licencje produktów. Szczegóły: man zypper."
 
 #: src/Zypper.cc:180
 msgid ""
@@ -1768,7 +1770,7 @@ msgstr "Domyślnie poprawki opcjonalne są uwzględniane."
 #: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Te opcje wzajemnie się wykluczają: %1%"
 
 #: src/Zypper.cc:253
 msgid ""
@@ -1784,6 +1786,9 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Możemy przesłać do PackageKit zgłoszenie o jak najszybsze przerwanie "
+"aktualnego działania, ale od PackageKit zależy, jak szybko odpowie na to "
+"zgłoszenie."
 
 #: src/Zypper.cc:262
 msgid "Ask PackageKit to quit?"
@@ -1816,9 +1821,8 @@ msgid "Command options:"
 msgstr "Opcje polecenia:"
 
 #: src/Zypper.cc:460
-#, fuzzy
 msgid "Solver options:"
-msgstr "Opcje zaawansowane:"
+msgstr "Opcje modułu rozwiązywania zależności:"
 
 #: src/Zypper.cc:463
 msgid "Expert options:"
@@ -1829,15 +1833,14 @@ msgid "This command has no additional options."
 msgstr "To polecenie nie ma dodatkowych opcji."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Opcje zaawansowane:"
+msgstr "Starsze opcje:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Identyczne jak %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
@@ -2149,6 +2152,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"Jeśli w nazwie %1% nie ma literówki, nie jest to prawdopodobnie wbudowane "
+"polecenie, ale dostarczane jako podpolecenie lub wtyczka (zobacz %2%)."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -2158,6 +2163,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"W takim przypadku najpierw należy zainstalować konkretny pakiet "
+"udostępniający podpolecenie. Te pakiety często mają nazwę: %1% lub %2%."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -5101,9 +5108,8 @@ msgstr "uruchamianie"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "Nie znaleziono"
+msgstr "nie znaleziono"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
