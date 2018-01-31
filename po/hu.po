@@ -16,16 +16,16 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-04-26 13:20+0000\n"
+"PO-Revision-Date: 2018-01-31 20:41+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
-"Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
-"hu/>\n"
+"Language-Team: Hungarian "
+"<https://l10n.opensuse.org/projects/zypper/master/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -46,16 +46,17 @@ msgid "Done."
 msgstr "Kész."
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"A hibás ellenőrző összegű csomagok elfogadása azt eredményezheti, hogy a "
-"rendszer megsérül, végletes esetben akár illetéktelenek számára is "
-"hozzáférhetővé válhat."
+"Az adatok aláírása lehetővé teszi, hogy a címzett ellenőrizze, hogy az "
+"adatok nem lettek-e módosítva az aláírásuk után. Az aláírás nélküli, a "
+"helytelen aláírással vagy az ismeretlen aláírással rendelkező adatok "
+"elfogadása azt eredményezheti, hogy a rendszer megsérül, és végletes esetben "
+"akár illetéktelenek számára is hozzáférhetővé válhat."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -64,12 +65,17 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"A(z) '%1%' fájl a telepítési forrás elsődleges indexfájlja. A teljes "
+"telepítési forrás integritását biztosítja."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Nem tudjuk ellenőrizni, hogy érintetlen-e a fájl, vagyis előfordulhat, hogy "
+"már nem megbízható. Ne folytassa a műveletet, ha nincs meggyőződve arról, "
+"hogy ezt biztonságosan megteheti."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -77,6 +83,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Ez a fájl megváltozott az aláírása után. Ez lehet rosszindulatú módosítás, "
+"ezért előfordulhat, hogy a fájl már nem megbízható. Ne folytassa a "
+"műveletet, ha nincs meggyőződve arról, hogy ezt biztonságosan megteheti."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -100,7 +109,7 @@ msgstr "Kulcs lejárata:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Alkulcs:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -131,15 +140,15 @@ msgstr ""
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "A(z) %s fájl nincs aláírva, folytatja?"
+msgstr "A(z) %s fájl nincs aláírva."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "A(z) %s fájl a(z) '%s' telepítési forrásból nincs aláírva, folytatja?"
+msgstr "A(z) '%2' telepítési forrásból származó  '%1%' fájl nincs aláírva."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -168,18 +177,17 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr ""
-"A(z) %s fájl ismeretlen azonosítójú kulccsal (%s) lett aláírva. Folytatja?"
+msgstr "A(z) '%1%' fájl ismeretlen azonosítójú kulccsal ('%2%') van aláírva."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"A(z) %s fájl a(z) %s telepítési forrásból ismeretlen azonosítójú kulccsal "
-"(%s) lett aláírva. Folytatja?"
+"A(z) '%3%' telepítési forrásból származó '%1%' fájl ismeretlen azonosítójú "
+"kulccsal ('%2%') van aláírva."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -495,19 +503,17 @@ msgstr "Nem"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Megjegyzés:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Figyelmeztetés: "
+msgstr "Figyelmeztetés:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Hiba"
+msgstr "Hiba:"
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -822,7 +828,7 @@ msgstr ""
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "A(z) '%1%' terméket a(z) '%2%' hívásával kell frissíteni."
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1252,7 +1258,7 @@ msgstr[0] "A következő alkalmazás módosítja a gyártót:"
 msgstr[1] "A következő %d alkalmazás módosítja a gyártót:"
 
 #: src/Summary.cc:1151
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
@@ -1486,7 +1492,7 @@ msgstr "Rendszer-újraindítás szükséges."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Fontolja meg a megszakítást:"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -1545,25 +1551,26 @@ msgid "Enable GPG check for this repository."
 msgstr "GPG-ellenőrzés engedélyezése ehhez a telepítési forráshoz."
 
 #: src/Zypper.cc:128
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "GPG-ellenőrzés engedélyezése ehhez a telepítési forráshoz."
+msgstr "Szigorú GPG-ellenőrzés engedélyezése ehhez a telepítési forráshoz."
 
 #: src/Zypper.cc:129
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Nincs jelölt a következő frissítésére: '%s'."
+msgstr "A(z) '%1%' rövidítése."
 
 #: src/Zypper.cc:130
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "GPG-ellenőrzés engedélyezése ehhez a telepítési forráshoz."
+msgstr ""
+"GPG-ellenőrzés engedélyezése úgy, hogy a telepítési forrásnál megengedettek "
+"az aláírás nélküli metaadatok."
 
 #: src/Zypper.cc:131
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "GPG-ellenőrzés engedélyezése ehhez a telepítési forráshoz."
+msgstr ""
+"GPG-ellenőrzés engedélyezése úgy, hogy megengedett az aláírás nélküli "
+"csomagok telepítése ebből a telepítési forrásból."
 
 #: src/Zypper.cc:132
 msgid "Disable GPG check for this repository."
@@ -1574,6 +1581,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Használja az /etc/zypp/zypp.conf fájlban megadott globális GPG-ellenőrzési "
+"beállítást. Ez az alapértelmezett beállítás."
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
@@ -1607,12 +1616,16 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Automatikus 'igen' válasz a harmadik felek licencmegerősítési kérésére. A "
+"további részleteket lásd: 'man zypper'."
 
 #: src/Zypper.cc:171
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Csak a terméklicencek automatikus elfogadása. A további részleteket lásd: "
+"'man zypper'."
 
 #: src/Zypper.cc:180
 msgid ""
@@ -1634,7 +1647,7 @@ msgstr "Az alapértelmezés a nem kötelező javítások belefoglalása."
 #: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Ezek a beállítások kölcsönösen kizárják egymást: %1%"
 
 #: src/Zypper.cc:253
 msgid ""
@@ -1650,6 +1663,9 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Kérhetjük, hogy a PackageKit megszakítsa az aktuális műveletet, amint ez "
+"lehetséges, de a PackageKittől függ, hogy milyen gyorsan reagál erre a "
+"kérésre."
 
 #: src/Zypper.cc:262
 msgid "Ask PackageKit to quit?"
@@ -1683,9 +1699,8 @@ msgid "Command options:"
 msgstr "Parancs beállításai:"
 
 #: src/Zypper.cc:460
-#, fuzzy
 msgid "Solver options:"
-msgstr "Szakértői beállítások:"
+msgstr "Feloldó beállításai:"
 
 #: src/Zypper.cc:463
 msgid "Expert options:"
@@ -1696,15 +1711,14 @@ msgid "This command has no additional options."
 msgstr "Ennek a parancsnak nincsenek további beállításai."
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Szakértői beállítások:"
+msgstr "Örökölt beállítások:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Ugyanaz, mint a(z) %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
@@ -2012,6 +2026,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"Ha a(z) '%1%' nem elírás, akkor valószínűleg nem beépített parancs, hanem "
+"alparancsként vagy beépülő modulként van megadva (lásd: '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -2021,6 +2037,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"Ebben az esetben előbb az alparancsot tartalmazó meghatározott csomagot kell "
+"telepíteni. Az ilyen csomagok neve általában '%1%' vagy '%2%'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -4999,9 +5017,8 @@ msgstr "indítás"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "Nem található"
+msgstr "nem található"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
