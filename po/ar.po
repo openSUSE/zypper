@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2018-01-30 22:00+0000\n"
+"PO-Revision-Date: 2018-01-31 12:00+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
 "\n"
@@ -1318,10 +1318,10 @@ msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
 msgstr[0] "التصحيح التالي مقترح لكن لن يتم تثبيته:"
 msgstr[1] "التصحيح التالي مقترح لكن لن يتم تثبيته:"
-msgstr[2] "التصحيحات التالية %d مقترحة لكن لن يتم تثبيتها:"
-msgstr[3] "التصحيحات التالية %d مقترحة لكن لن يتم تثبيتها:"
-msgstr[4] "التصحيحات التالية %d مقترحة لكن لن يتم تثبيتها:"
-msgstr[5] "التصحيحات التالية %d مقترحة لكن لن يتم تثبيتها:"
+msgstr[2] "%d من التصحيحات التالية مقترحة لكن لن يتم تثبيتها:"
+msgstr[3] "%d من التصحيحات التالية مقترحة لكن لن يتم تثبيتها:"
+msgstr[4] "%d من التصحيحات التالية مقترحة لكن لن يتم تثبيتها:"
+msgstr[5] "%d من التصحيحات التالية مقترحة لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:1037
 #, c-format, boost-format
@@ -1342,10 +1342,10 @@ msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "المنتج التالي مقترح لكن لن يتم تثبيته:"
 msgstr[1] "المنتج التالي مقترح لكن لن يتم تثبيته:"
-msgstr[2] "المنتجان التاليان مقترحان، لكن لن يتم تثبيتهما:"
-msgstr[3] "المنتجات التالية %d مقترحة، لكن لن يتم تثبيتها:"
-msgstr[4] "المنتجات التالية %d مقترحة، لكن لن يتم تثبيتها:"
-msgstr[5] "المنتجات التالية %d مقترحة، لكن لن يتم تثبيتها:"
+msgstr[2] "%d من المنتجات التالية مقترحة، لكن لن يتم تثبيتهما:"
+msgstr[3] "%d من المنتجات التالية مقترحة، لكن لن يتم تثبيتها:"
+msgstr[4] "%d من المنتجات التالية مقترحة، لكن لن يتم تثبيتها:"
+msgstr[5] "%d من المنتجات التالية مقترحة، لكن لن يتم تثبيتها:"
 
 #: src/Summary.cc:1047
 #, c-format, boost-format
@@ -1462,12 +1462,12 @@ msgstr[5] "المنتجين التالين %d سيغير بائعهم:"
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] "النمط التالي سيغير بائعه:"
-msgstr[1] "النمط التالي %d سيغير بائعه:"
-msgstr[2] "النمطان التاليان %d سيغير بائعهما:"
-msgstr[3] "الأنماط التالية %d سيغير بائعها:"
-msgstr[4] "الأنماط التالية %d سيغير بائعها:"
-msgstr[5] "الأنماط التالية %d سيغير بائعها:"
+msgstr[0] "التطبيق التالي سيغير بائعه:"
+msgstr[1] "التطبيق التالي سيغير بائعه:"
+msgstr[2] "%d من التطبيقات التالية سيغيران بائعهما:"
+msgstr[3] "%d من التطبيقات التالية ستغير بائعها:"
+msgstr[4] "%d من التطبيقات التالية ستغير بائعها:"
+msgstr[5] "%d من التطبيقات التالية ستغير بائعها:"
 
 #: src/Summary.cc:1151
 #, boost-format, c-format
@@ -1565,7 +1565,7 @@ msgstr "مثبَّت"
 #: src/Summary.cc:1271
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
-msgstr "تشغيل '%1%' للاطلاع على القائمة الكاملة للعناصر المقفلة."
+msgstr "قم بتشغيل '%1%' للاطلاع على القائمة الكاملة للعناصر المقفلة."
 
 #: src/Summary.cc:1281
 #, c-format, boost-format
@@ -1708,17 +1708,17 @@ msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "لتغيير البائع"
 msgstr[1] "لتغيير البائع"
-msgstr[2] "لتغيير البائع"
-msgstr[3] "لتغيير البائع"
-msgstr[4] "لتغيير البائع"
-msgstr[5] "لتغيير البائع"
+msgstr[2] "لتغيير البائعين"
+msgstr[3] "لتغيير البائعين"
+msgstr[4] "لتغيير البائعين"
+msgstr[5] "لتغيير البائعين"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1410
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "سيتم تغيير بائع الحزمة"
-msgstr[1] "سيتم تغيير بائعي الحزم"
+msgstr[1] "سيتم تغيير بائع الحزم"
 msgstr[2] "سيتم تغيير بائعي الحزم"
 msgstr[3] "سيتم تغيير بائعي الحزم"
 msgstr[4] "سيتم تغيير بائعي الحزم"
@@ -1779,7 +1779,7 @@ msgstr ""
 
 #: src/Summary.cc:1507
 msgid "System reboot required."
-msgstr "يلزم إعادة تمهيد النظام."
+msgstr "يلزم إعادة تشغيل النظام."
 
 #. translator: Printed after the summary but before the prompt to start the installation.
 #. Followed by some explanatory text telling it might be a good idea NOT to continue:
@@ -2432,7 +2432,7 @@ msgstr "تم استبدال الأمر '%s' بـ '%s'."
 #: src/Zypper.cc:1540
 #, c-format, boost-format
 msgid "See '%s' for all available options."
-msgstr "انظر '%s' لجميع الخيارات المتاحة."
+msgstr "اطلع على '%s' لجميع الخيارات المتاحة."
 
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
@@ -4170,7 +4170,7 @@ msgstr ""
 
 #: src/Zypper.cc:3448 src/Zypper.cc:5473
 msgid "Unexpected program flow."
-msgstr "تدفق البرنامج غير متوقع."
+msgstr "تدفق غير متوقع للبرنامج."
 
 #: src/Zypper.cc:3492
 msgid "Non-option program arguments: "
@@ -4527,7 +4527,7 @@ msgstr "لا يعمل هذا الأمر إلا في برنامج الواجهة 
 
 #: src/Zypper.cc:5470
 msgid "You already are running zypper's shell."
-msgstr "أنت تقوم الآن بتشغيل برنامج الواجهة شل في zypper."
+msgstr "أنت تقوم الآن بتشغيل برنامج الواجهة shell في zypper."
 
 #: src/Zypper.cc:5483 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2534
 msgid "Alias"
@@ -4767,7 +4767,7 @@ msgstr[5] "سيكون هناك عدد %1% من التطابقات لـ '%2%'."
 #: src/info.cc:235
 #, c-format, boost-format
 msgid "%s '%s' not found."
-msgstr "لم يتم العثور على %s '%s'."
+msgstr "لم يتم العثور على %s%s."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
 #: src/info.cc:259
@@ -7131,7 +7131,7 @@ msgstr "إعادة المحاولة في %u ثانية (ثوانٍ)..."
 #. The answers should be lower case letters.
 #: src/utils/prompt.cc:151 src/utils/prompt.cc:235
 msgid "a/r/i"
-msgstr "ي/ت/ع"
+msgstr "a/r/i"
 
 #: src/utils/prompt.cc:200
 #, c-format, boost-format
