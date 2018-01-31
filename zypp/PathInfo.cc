@@ -10,9 +10,9 @@
  *
 */
 
-#include <sys/types.h> // for ::minor, ::major macros
 #include <utime.h>     // for ::utime
 #include <sys/statvfs.h>
+#include <sys/sysmacros.h> // for ::minor, ::major macros
 
 #include <iostream>
 #include <fstream>
