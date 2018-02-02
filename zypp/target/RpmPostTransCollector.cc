@@ -53,6 +53,11 @@ namespace zypp
 	bool collectScriptFromPackage( ManagedFile rpmPackage_r )
 	{
 	  rpm::RpmHeader::constPtr pkg( rpm::RpmHeader::readPackage( rpmPackage_r, rpm::RpmHeader::NOVERIFY ) );
+	  if ( ! pkg )
+	  {
+	    WAR << "Unexpectedly this is no package: " << rpmPackage_r << endl;
+	    return false;
+	  }
 
 	  std::string prog( pkg->tag_posttransprog() );
 	  if ( prog.empty() || prog == "<lua>" )	// by now leave lua to rpm
