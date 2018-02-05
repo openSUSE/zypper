@@ -13,16 +13,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-08-09 15:02+0000\n"
-"Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
-"Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_TW/>\n"
+"PO-Revision-Date: 2018-02-05 09:38+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"Language-Team: Chinese (Taiwan) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -43,13 +43,12 @@ msgid "Done."
 msgstr "完成。"
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
-msgstr "接受帶有錯誤檢核碼的套件會導致系統損壞，甚至危及系統安全。"
+msgstr "資料簽名可讓接收者能夠驗證資料被簽名後並無變動。接受無簽名或者簽名錯誤或未知的資料可能導致系統毀損，在極端情況下甚至會導致系統被入侵。"
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -57,20 +56,20 @@ msgstr "接受帶有錯誤檢核碼的套件會導致系統損壞，甚至危及
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
-msgstr ""
+msgstr "檔案「%1%」是套件庫主索引檔案。它可確保整個套件庫的完整性。"
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
-msgstr ""
+msgstr "我們無法確認此檔案是否曾受到他人的干預，因此它可能不再可信！除非您確定該檔案安全，否則不應繼續。"
 
 #: src/callbacks/keyring.h:51
 msgid ""
 "This file was modified after it has been signed. This may have been a "
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
-msgstr ""
+msgstr "此檔案簽章後已被修改。這可能是惡意變更，因此該檔案可能不再可信！除非您確定該檔案安全，否則不應繼續。"
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -94,7 +93,7 @@ msgstr "金鑰過期日期："
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "子金鈅："
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -123,15 +122,15 @@ msgstr "正在接受一個未簽章的檔案 '%s' (來自套件庫 '%s')。"
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "檔案 '%s' 未簽章，要繼續嗎？"
+msgstr "檔案「%s」未簽章。"
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "檔案 ′%s′ (來自套件庫 ′%s′) 未簽章，要繼續嗎？"
+msgstr "套件庫「%2%」中的檔案「%1%」未簽章。"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -158,15 +157,15 @@ msgstr "正在接受檔案 ′%s′ (來自套件庫 ′%s′)，此檔案使用
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "檔案 '%s' 是以不明金鑰 '%s' 簽章。要繼續嗎？"
+msgstr "檔案「%1%」是以未知金鑰「%2%」簽章。"
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr "檔案 '%s' (來自套件庫 '%s') 是以不明金鑰 '%s' 簽章。要繼續嗎？"
+msgstr "套件庫「%3%」中的檔案「%1%」是以未知金鑰「%2%」簽章。"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -457,19 +456,17 @@ msgstr "否"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "注意："
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "警告︰ "
+msgstr "警告："
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "錯誤"
+msgstr "錯誤："
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -765,7 +762,7 @@ msgstr "先更新更新堆疊時忽略選項 %s。"
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "需要透過呼叫「%2%」來更新產品「%1%」！"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1129,11 +1126,11 @@ msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "下列 %d 個應用將會變更供應商："
 
 #: src/Summary.cc:1151
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from it's vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "下列 %d 個套件不被它們的供應商支援："
+msgstr[0] "下列 %d 個套件沒有其供應商的支援資訊："
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
@@ -1333,7 +1330,7 @@ msgstr "系統需要重新啟動。"
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "考慮取消："
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
@@ -1392,25 +1389,22 @@ msgid "Enable GPG check for this repository."
 msgstr "為此套件庫啟用 GPG 檢查。"
 
 #: src/Zypper.cc:128
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "為此套件庫啟用 GPG 檢查。"
+msgstr "為此套件庫啟用嚴格 GPG 檢查。"
 
 #: src/Zypper.cc:129
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "'%s' 無更新候選。"
+msgstr "「%1%」的縮寫。"
 
 #: src/Zypper.cc:130
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "為此套件庫啟用 GPG 檢查。"
+msgstr "啟用 GPG 檢查，但允許不對套件庫中繼資料簽章。"
 
 #: src/Zypper.cc:131
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "為此套件庫啟用 GPG 檢查。"
+msgstr "啟用 GPG 檢查，但允許安裝此套件庫中的未簽章套件。"
 
 #: src/Zypper.cc:132
 msgid "Disable GPG check for this repository."
@@ -1420,7 +1414,7 @@ msgstr "為此套件庫停用 GPG 檢查。"
 msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
-msgstr ""
+msgstr "使用 /etc/zypp/zypp.conf 中定義的全域 GPG 檢查設定。此為預設設定。"
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
@@ -1450,13 +1444,13 @@ msgstr "不要安裝推薦的套件，只安裝必需的。"
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
-msgstr ""
+msgstr "對協力廠商授權資訊提示自動選取「是」。請參閱「man zypper」瞭解詳細資料。"
 
 #: src/Zypper.cc:171
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
-msgstr ""
+msgstr "僅自動接受產品授權。請參閱「man zypper」瞭解詳細資料。"
 
 #: src/Zypper.cc:180
 msgid ""
@@ -1476,7 +1470,7 @@ msgstr "預設設定為包括選擇性修補程式。"
 #: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "以下為互斥選項：%1%"
 
 #: src/Zypper.cc:253
 msgid ""
@@ -1490,7 +1484,7 @@ msgstr ""
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
-msgstr ""
+msgstr "我們可以要求 PackageKit 儘快中止目前的動作，但取決於 PackageKit 對此要求的回應速度。"
 
 #: src/Zypper.cc:262
 msgid "Ask PackageKit to quit?"
@@ -1520,9 +1514,8 @@ msgid "Command options:"
 msgstr "指令選項："
 
 #: src/Zypper.cc:460
-#, fuzzy
 msgid "Solver options:"
-msgstr "進階選項："
+msgstr "解析程式選項："
 
 #: src/Zypper.cc:463
 msgid "Expert options:"
@@ -1533,15 +1526,14 @@ msgid "This command has no additional options."
 msgstr "本指令沒有其他選項。"
 
 #: src/Zypper.cc:469
-#, fuzzy
 msgid "Legacy options:"
-msgstr "進階選項："
+msgstr "舊選項："
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "與 %1% 相同。"
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
@@ -1829,7 +1821,7 @@ msgstr "輸入 '%s' 以獲取全域選項與指令的清單。"
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
-msgstr ""
+msgstr "如果「%1%」不是拼字錯誤，則可能不是內建指令，而是子指令或外掛程式 (請參閱「%2%」)。"
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -1838,7 +1830,7 @@ msgstr ""
 msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
-msgstr ""
+msgstr "在此情況下，需要先安裝提供該子指令的特定套件。這些套件通常名為「%1%」或「%2%」。"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
