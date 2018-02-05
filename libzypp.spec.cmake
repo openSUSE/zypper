@@ -116,8 +116,10 @@ BuildRequires:  librpm-devel > 4.4
 %endif
 
 %if 0%{?suse_version}
+BuildRequires:  gpg2
 Requires:       gpg2
 %else
+BuildRequires:  gnupg2
 Requires:       gnupg2
 %endif
 
