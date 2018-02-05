@@ -32,7 +32,7 @@ BuildRequires:  libxml2-devel
 Requires:       procps
 %if 0%{?suse_version}
 %requires_ge    libzypp
-Recommends:     logrotate cron zypper-log
+Recommends:     logrotate zypper-log
 %endif
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Command line software manager using libzypp
