@@ -225,15 +225,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
 make %{?_smp_mflags} VERBOSE=1
 make -C doc/autodoc %{?_smp_mflags}
 make -C po %{?_smp_mflags} translations
-
-%if 0%{?run_testsuite}
-  make -C tests %{?_smp_mflags}
-  pushd tests
-  LD_LIBRARY_PATH=$PWD/../zypp:$LD_LIBRARY_PATH ctest .
-  popd
-%endif
-
-#make check
+make -C tests %{?_smp_mflags}
 
 %install
 rm -rf "$RPM_BUILD_ROOT"
@@ -271,6 +263,11 @@ make -C po install DESTDIR=$RPM_BUILD_ROOT
 # Create filelist with translations
 cd ..
 %{find_lang} zypp
+
+%check
+pushd build/tests
+LD_LIBRARY_PATH=$RPM_BUILD_ROOT%{_libdir}:${LD_LIBRARY_PATH} ctest .
+popd
 
 %post
 /sbin/ldconfig
