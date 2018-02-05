@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb  5 12:23:05 CET 2018 - ma@suse.de
+
+- do not recommend cron (bsc#1079334)
+- version 1.11.66
+
+-------------------------------------------------------------------
 Thu Jun  1 15:45:55 CEST 2017 - ma@suse.de
 
 - Accept --auto-agree-with-product-licenses from SUSEconnect (bsc#1037783)
