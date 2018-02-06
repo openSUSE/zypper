@@ -52,8 +52,8 @@ include(CheckCXXCompilerFlag)
 CHECK_C_COMPILER_FLAG("-Werror=format-security" CC_FORMAT_SECURITY)
 CHECK_CXX_COMPILER_FLAG("-Werror=format-security" CXX_FORMAT_SECURITY)
 
-SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed" )
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed" )
+SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed -Wp,-D_GLIBCXX_ASSERTIONS" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed -Wp,-D_GLIBCXX_ASSERTIONS" )
 
 SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fvisibility-inlines-hidden -Woverloaded-virtual -Wnon-virtual-dtor" )
 
