@@ -210,7 +210,7 @@ namespace zypp
           const std::streamsize got = zReadTo( &(_buffer[0]), _buffer.size() );
           if ( got > 0 )
             {
-              setg( &(_buffer[0]), &(_buffer[0]), &(_buffer[got]) );
+              setg( &(_buffer[0]), &(_buffer[0]), &(_buffer.data()[got]) );
               ret = traits_type::to_int_type( *gptr() );
             }
           else if ( got == 0 )
