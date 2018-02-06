@@ -16,8 +16,6 @@
 #
 
 
-%define force_gcc_46 0
-
 Name:           @PACKAGE@
 Version:        @VERSION@
 Release:        0
@@ -61,12 +59,7 @@ BuildRequires:  boost-devel
 %endif
 BuildRequires:  dejagnu
 BuildRequires:  doxygen
-%if 0%{?force_gcc_46}
-BuildRequires:  gcc46
-BuildRequires:  gcc46-c++
-%else
 BuildRequires:  gcc-c++ >= 4.6
-%endif
 BuildRequires:  gettext-devel
 BuildRequires:  graphviz
 BuildRequires:  libxml2-devel
@@ -203,10 +196,6 @@ Package, Patch, Pattern, and Product Management - developers files
 %build
 mkdir build
 cd build
-%if 0%{?force_gcc_46}
-export CC=gcc-4.6
-export CXX=g++-4.6
-%endif
 export CFLAGS="$RPM_OPT_FLAGS"
 export CXXFLAGS="$RPM_OPT_FLAGS"
 unset EXTRA_CMAKE_OPTIONS
