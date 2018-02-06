@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2017-12-08 10:02+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
+"PO-Revision-Date: 2018-02-06 17:14+0000\n"
+"Last-Translator: anonymous <>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -5066,7 +5066,7 @@ msgstr "Prüfung fehlerhaft:"
 #. Here: Table output
 #: src/ps.cc:104 src/solve-commit.cc:441
 msgid "Checking for running processes using deleted libraries..."
-msgstr "Prüfung auf aktive Prozesse mithilfe von gelöschten Bibliotheken..."
+msgstr "Suche nach aktiven Prozessen, die gelöschte Bibliotheken benutzen..."
 
 #. process ID
 #: src/ps.cc:115
