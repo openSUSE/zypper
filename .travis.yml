@@ -1,0 +1,29 @@
+sudo: required
+dist: trusty
+group: stable
+language: c++
+os: linux
+
+services:
+- docker
+
+before_install:
+- cat /proc/cpuinfo
+- docker pull opensuse:tumbleweed
+- docker run -i -d --name test opensuse:tumbleweed bash
+- docker exec test zypper ref
+- docker exec test zypper in -y --recommends cmake openssl-devel boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz libxml2-devel libproxy-devel pkg-config libsolv-devel libsolv-tools ruby libexpat-devel rpm-devel libcurl-devel libboost_program_options*-devel libboost_test*-devel libudev-devel xorg-x11-fonts-core xorg-x11-fonts texlive-lm-fonts
+
+script:
+- docker cp ../libzypp/ test:/root
+- docker exec test mkdir /root/build
+- docker exec test bash -c "cd /root/build && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_SKIP_RPATH=1 ../libzypp"
+- docker exec test bash -c "cd /root/build && make -j4 VERBOSE=1"
+- docker exec test bash -c "cd /root/build && make -j4 -C doc/autodoc"
+- docker exec test bash -c "cd /root/build && make -j4 -C po translations"
+- docker exec test bash -c "cd /root/build && make -j4 -C tests"
+- docker exec test bash -c "cd /root/build/tests && LD_LIBRARY_PATH=$PWD/../zypp:$LD_LIBRARY_PATH ctest ."
+
+on:
+    repo: openSUSE/libzypp
+    tags: true
