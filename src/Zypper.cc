@@ -228,13 +228,36 @@ namespace cli
     }
     if ( fail )
     {
-      // translator: %1% is a list of command line options
       zypper.out().error( errorMutuallyExclusiveOptions( dashdash(failDetail) ) );
       zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
       ZYPP_THROW( ExitRequestException("invalid args") );
     }
     return ret;
   }
+
+  /** Make sure only one of \a args_r options is specified on the command line.
+   * \throw ExitRequestException if multiple args are specified
+   * \return the cli arg or \c nullptr
+   */
+  const char * assertMutuallyExclusiveArgs( Zypper & zypper, const std::initializer_list<const char *> & args_r  )
+  {
+    const char * ret = nullptr;
+    for ( const char * arg : args_r )
+    {
+      if ( copts.count(arg) )
+      {
+	if ( ret )
+	{
+	  zypper.out().error( errorMutuallyExclusiveOptions( text::join( dashdash(ret), dashdash(arg) ) ) );
+	  zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+	  ZYPP_THROW( ExitRequestException("invalid args") );
+	}
+	ret = arg;
+      }
+    }
+    return ret;
+  }
+
 } // namespace cli
 ///////////////////////////////////////////////////////////////////
 
