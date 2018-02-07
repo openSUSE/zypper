@@ -121,7 +121,7 @@ namespace out
   private:
     template <class Tp_>
     static sat::Solvable asSolvable( const Tp_ & val_r )
-    { return sat::asSolvable( val_r ); }
+    { return sat::asSolvable()( val_r ); }
 
     static sat::Solvable asSolvable( int val_r )		// e.g. satQueues use int as SolvabeId
     { return sat::Solvable( val_r ); }
