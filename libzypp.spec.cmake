@@ -85,12 +85,6 @@ Requires:       libsolv-tools
 # required for testsuite, webrick
 BuildRequires:  ruby
 
-%if 0%{?suse_version}
-BuildRequires:  libexpat-devel
-%else
-BuildRequires:  expat-devel
-%endif
-
 Requires:       rpm
 
 %if 0%{?suse_version}
