@@ -8,7 +8,7 @@ Version: @VERSION@
 Description: Package, Patch, Pattern, and Product Management
 
 Libs: -L${libdir} -lzypp
-Cflags: -I${includedir} @ZYPP_CFLAGS@
+Cflags: -I${includedir} -D_FILE_OFFSET_BITS=64 @ZYPP_CFLAGS@
 
 features=@ZYPP_FEATURES@
 
