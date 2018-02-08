@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2018-01-06 11:27+0000\n"
-"Last-Translator: Nathan Follens <nthn@unseen.is>\n"
+"PO-Revision-Date: 2018-02-08 13:48+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -106,7 +106,7 @@ msgstr "Argentinië"
 #. :ARG:032:
 #: zypp/CountryCode.cc:169
 msgid "American Samoa"
-msgstr "Amerikaans Samoa"
+msgstr "Amerikaans-Samoa"
 
 #. :ASM:016:
 #: zypp/CountryCode.cc:170
@@ -126,7 +126,7 @@ msgstr "Aruba"
 #. :ABW:533:
 #: zypp/CountryCode.cc:173
 msgid "Aland Islands"
-msgstr "Aland-eilanden"
+msgstr "Åland"
 
 #. :ALA:248:
 #: zypp/CountryCode.cc:174
@@ -211,7 +211,7 @@ msgstr "Bhutan"
 #. :BTN:064:
 #: zypp/CountryCode.cc:190
 msgid "Bouvet Island"
-msgstr "Bouvet-eiland"
+msgstr "Bouveteiland"
 
 #. :BVT:074:
 #: zypp/CountryCode.cc:191
@@ -236,7 +236,7 @@ msgstr "Canada"
 #. :CAN:124:
 #: zypp/CountryCode.cc:195
 msgid "Cocos (Keeling) Islands"
-msgstr "Cocos(Keeling)eilanden"
+msgstr "Cocoseilanden"
 
 #. :CCK:166:
 #. :CAF:140:
@@ -392,7 +392,7 @@ msgstr "Fiji"
 #. :FJI:242:
 #: zypp/CountryCode.cc:227
 msgid "Falkland Islands (Malvinas)"
-msgstr "Falkland Eilanden (Malvinas)"
+msgstr "Falklandeilanden"
 
 #. :FLK:238:
 #: zypp/CountryCode.cc:228
@@ -402,7 +402,7 @@ msgstr "Federale staten van Micronesia"
 #. :FSM:583:
 #: zypp/CountryCode.cc:229
 msgid "Faroe Islands"
-msgstr "Faroe Eilanden"
+msgstr "Faeröer"
 
 #. :FRO:234:
 #: zypp/CountryCode.cc:230
@@ -412,7 +412,7 @@ msgstr "Frankrijk"
 #. :FRA:250:
 #: zypp/CountryCode.cc:231
 msgid "Metropolitan France"
-msgstr "Metropolitaan Frankrijk"
+msgstr "Metropolitaans Frankrijk"
 
 #. :FXX:249:
 #: zypp/CountryCode.cc:232
@@ -486,7 +486,7 @@ msgstr "Griekenland"
 #. :GRC:300:
 #: zypp/CountryCode.cc:246
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Zuid Georgia en de Zuid Sandwich Eilanden"
+msgstr "Zuid-Georgia en de Zuidelijke Sandwicheilanden"
 
 #. :SGS:239:
 #: zypp/CountryCode.cc:247
@@ -511,12 +511,12 @@ msgstr "Guyana"
 #. :GUY:328:
 #: zypp/CountryCode.cc:251
 msgid "Hong Kong"
-msgstr "Hong Kong"
+msgstr "Hongkong"
 
 #. :HKG:344:
 #: zypp/CountryCode.cc:252
 msgid "Heard Island and McDonald Islands"
-msgstr "Heard Island en McDonald Islands"
+msgstr "Heard en McDonaldeilanden"
 
 #. :HMD:334:
 #: zypp/CountryCode.cc:253
@@ -556,7 +556,7 @@ msgstr "Israël"
 #. :ISR:376:
 #: zypp/CountryCode.cc:260
 msgid "Isle of Man"
-msgstr "Isle of Man"
+msgstr "Man (eiland)"
 
 #: zypp/CountryCode.cc:261
 msgid "India"
@@ -565,7 +565,7 @@ msgstr "India"
 #. :IND:356:
 #: zypp/CountryCode.cc:262
 msgid "British Indian Ocean Territory"
-msgstr "Brits Indian Ocean Territory"
+msgstr "Brits Indische Oceaanterritorium"
 
 #. :IOT:086:
 #: zypp/CountryCode.cc:263
@@ -634,7 +634,7 @@ msgstr "Comoren"
 #. :COM:174:
 #: zypp/CountryCode.cc:276
 msgid "Saint Kitts and Nevis"
-msgstr "Sint Kitts en Nevis"
+msgstr "Saint Kitts en Nevis"
 
 #. :KNA:659:
 #: zypp/CountryCode.cc:277
@@ -664,7 +664,7 @@ msgstr "Kazachstan"
 #. :KAZ:398:
 #: zypp/CountryCode.cc:282
 msgid "Lao People's Democratic Republic"
-msgstr "Democratische volksrepubliek Laos"
+msgstr "Democratische Volksrepubliek Laos"
 
 #. :LAO:418:
 #: zypp/CountryCode.cc:283
@@ -748,7 +748,7 @@ msgstr "Madagaskar"
 #. :MDG:450:
 #: zypp/CountryCode.cc:299
 msgid "Marshall Islands"
-msgstr "Marshall Eilanden"
+msgstr "Marshalleilanden"
 
 #. :MHL:584:
 #: zypp/CountryCode.cc:300
@@ -848,7 +848,7 @@ msgstr "Niger"
 #. :NER:562:
 #: zypp/CountryCode.cc:319
 msgid "Norfolk Island"
-msgstr "Norfolk eiland"
+msgstr "Norfolk (eiland)"
 
 #. :NFK:574:
 #: zypp/CountryCode.cc:320
@@ -1348,16 +1348,16 @@ msgstr "Kan geen fork (%s) uitvoeren."
 #: zypp/ExternalProgram.cc:510
 #, c-format, boost-format
 msgid "Command exited with status %d."
-msgstr "Commando beëindigd met status %d."
+msgstr "Opdracht beëindigd met status %d."
 
 #: zypp/ExternalProgram.cc:530
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "Commando is gestopt door signaal %d (%s)."
+msgstr "Opdracht is gestopt door signaal %d (%s)."
 
 #: zypp/ExternalProgram.cc:535
 msgid "Command exited with unknown error."
-msgstr "Commando beëindigd met onbekende fout."
+msgstr "Opdracht beëindigd met onbekende fout."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
 #: zypp/KeyRing.cc:561
@@ -1417,7 +1417,7 @@ msgstr "Adygees"
 #. language code: afa
 #: zypp/LanguageCode.cc:173
 msgid "Afro-Asiatic (Other)"
-msgstr "Afro-Aziatisch (Overige)"
+msgstr "Afro-Aziatisch (overig)"
 
 #. language code: afh
 #: zypp/LanguageCode.cc:175
@@ -1512,7 +1512,7 @@ msgstr "Arapaho"
 #. language code: art
 #: zypp/LanguageCode.cc:215
 msgid "Artificial (Other)"
-msgstr "Kunstmatig (Overige)"
+msgstr "Kunstmatig (overig)"
 
 #. language code: arw
 #: zypp/LanguageCode.cc:217
@@ -1607,7 +1607,7 @@ msgstr "Balinees"
 #. language code: bat
 #: zypp/LanguageCode.cc:255
 msgid "Baltic (Other)"
-msgstr "Baltisch (Overige)"
+msgstr "Baltisch (overig)"
 
 #. language code: bej
 #: zypp/LanguageCode.cc:257
@@ -1632,7 +1632,7 @@ msgstr "Bengaals"
 #. language code: ber
 #: zypp/LanguageCode.cc:265
 msgid "Berber (Other)"
-msgstr "Berbers (Overige)"
+msgstr "Berbers (overig)"
 
 #. language code: bho
 #: zypp/LanguageCode.cc:267
@@ -1667,7 +1667,7 @@ msgstr "Siksika"
 #. language code: bnt
 #: zypp/LanguageCode.cc:279
 msgid "Bantu (Other)"
-msgstr "Bantu (Overige)"
+msgstr "Bantu (overig)"
 
 #. language code: bos bs
 #: zypp/LanguageCode.cc:281
@@ -1722,7 +1722,7 @@ msgstr "Caddo"
 #. language code: cai
 #: zypp/LanguageCode.cc:303
 msgid "Central American Indian (Other)"
-msgstr "Centraal-Amerikaans Indiaans (Overige)"
+msgstr "Centraal-Amerikaans Indiaans (overig)"
 
 #. language code: car
 #: zypp/LanguageCode.cc:305
@@ -1737,7 +1737,7 @@ msgstr "Catalaans"
 #. language code: cau
 #: zypp/LanguageCode.cc:309
 msgid "Caucasian (Other)"
-msgstr "Kaukasisch (Overige)"
+msgstr "Kaukasisch (overig)"
 
 #. language code: ceb
 #: zypp/LanguageCode.cc:311
@@ -1747,7 +1747,7 @@ msgstr "Cebuano"
 #. language code: cel
 #: zypp/LanguageCode.cc:313
 msgid "Celtic (Other)"
-msgstr "Keltisch (Overige)"
+msgstr "Keltisch (overig)"
 
 #. language code: cha ch
 #: zypp/LanguageCode.cc:315
@@ -1879,7 +1879,7 @@ msgstr "Kasjoebisch"
 #. language code: cus
 #: zypp/LanguageCode.cc:367
 msgid "Cushitic (Other)"
-msgstr "Cusjitisch (Overige)"
+msgstr "Cusjitisch (overig)"
 
 #. language code: cze ces cs
 #: zypp/LanguageCode.cc:369 zypp/LanguageCode.cc:371
@@ -1939,7 +1939,7 @@ msgstr "Dogri"
 #. language code: dra
 #: zypp/LanguageCode.cc:393
 msgid "Dravidian (Other)"
-msgstr "Dravidiaans (Overige)"
+msgstr "Dravidiaans (overig)"
 
 #. language code: dsb
 #: zypp/LanguageCode.cc:395
@@ -2044,7 +2044,7 @@ msgstr "Fijisch"
 #. language code: fil
 #: zypp/LanguageCode.cc:437
 msgid "Filipino"
-msgstr "Filipino"
+msgstr "Filipijns"
 
 #. language code: fin fi
 #: zypp/LanguageCode.cc:439
@@ -2054,7 +2054,7 @@ msgstr "Fins"
 #. language code: fiu
 #: zypp/LanguageCode.cc:441
 msgid "Finno-Ugrian (Other)"
-msgstr "Fins-Oegrisch (Overige)"
+msgstr "Fins-Oegrisch (overig)"
 
 #. language code: fon
 #: zypp/LanguageCode.cc:443
@@ -2109,7 +2109,7 @@ msgstr "Gbaya"
 #. language code: gem
 #: zypp/LanguageCode.cc:465
 msgid "Germanic (Other)"
-msgstr "Germaans (Overige)"
+msgstr "Germaans (overig)"
 
 #. language code: geo kat ka
 #: zypp/LanguageCode.cc:467 zypp/LanguageCode.cc:469
@@ -2334,7 +2334,7 @@ msgstr "Interlingua (International Auxiliary Language Association)"
 #. language code: inc
 #: zypp/LanguageCode.cc:563
 msgid "Indic (Other)"
-msgstr "Indisch (Overige)"
+msgstr "Indisch (overig)"
 
 #. language code: ind id
 #: zypp/LanguageCode.cc:565
@@ -2344,7 +2344,7 @@ msgstr "Indonesisch"
 #. language code: ine
 #: zypp/LanguageCode.cc:567
 msgid "Indo-European (Other)"
-msgstr "Indo-Europees (Overige)"
+msgstr "Indo-Europees (overig)"
 
 #. language code: inh
 #: zypp/LanguageCode.cc:569
@@ -2359,7 +2359,7 @@ msgstr "Inupiak"
 #. language code: ira
 #: zypp/LanguageCode.cc:573
 msgid "Iranian (Other)"
-msgstr "Iraans (Overige)"
+msgstr "Iraans (overig)"
 
 #. language code: iro
 #: zypp/LanguageCode.cc:575
@@ -2464,7 +2464,7 @@ msgstr "Khasi"
 #. language code: khi
 #: zypp/LanguageCode.cc:615
 msgid "Khoisan (Other)"
-msgstr "Khoisaans (Overige)"
+msgstr "Khoisaans (overig)"
 
 #. language code: khm km
 #: zypp/LanguageCode.cc:617
@@ -2709,7 +2709,7 @@ msgstr "Maori"
 #. language code: map
 #: zypp/LanguageCode.cc:717
 msgid "Austronesian (Other)"
-msgstr "Austronesisch (Overige)"
+msgstr "Austronesisch (overig)"
 
 #. language code: mar mr
 #: zypp/LanguageCode.cc:719
@@ -2764,7 +2764,7 @@ msgstr "Diverse talen"
 #. language code: mkh
 #: zypp/LanguageCode.cc:741
 msgid "Mon-Khmer (Other)"
-msgstr "Mon-Khmer (Overige)"
+msgstr "Mon-Khmer (overig)"
 
 #. language code: mlg mg
 #: zypp/LanguageCode.cc:743
@@ -2904,7 +2904,7 @@ msgstr "Niaas"
 #. language code: nic
 #: zypp/LanguageCode.cc:799
 msgid "Niger-Kordofanian (Other)"
-msgstr "Niger-Kordofaniaans (Overige)"
+msgstr "Niger-Kordofaniaans (overig)"
 
 #. language code: niu
 #: zypp/LanguageCode.cc:801
@@ -3019,7 +3019,7 @@ msgstr "Otomi-talen"
 #. language code: paa
 #: zypp/LanguageCode.cc:845
 msgid "Papuan (Other)"
-msgstr "Papuaans (Overige)"
+msgstr "Papuaans (overig)"
 
 #. language code: pag
 #: zypp/LanguageCode.cc:847
@@ -3064,7 +3064,7 @@ msgstr "Perzisch"
 #. language code: phi
 #: zypp/LanguageCode.cc:865
 msgid "Philippine (Other)"
-msgstr "Filipijns (Overige)"
+msgstr "Filipijns (overig)"
 
 #. language code: phn
 #: zypp/LanguageCode.cc:867
@@ -3129,7 +3129,7 @@ msgstr "Rarotongaans"
 #. language code: roa
 #: zypp/LanguageCode.cc:891
 msgid "Romance (Other)"
-msgstr "Romaans (Overige)"
+msgstr "Romaans (overig)"
 
 #. language code: roh rm
 #: zypp/LanguageCode.cc:893
@@ -3174,7 +3174,7 @@ msgstr "Jakoets"
 #. language code: sai
 #: zypp/LanguageCode.cc:911
 msgid "South American Indian (Other)"
-msgstr "Zuid-Amerikaans Indiaans (Overige)"
+msgstr "Zuid-Amerikaans Indiaans (overig)"
 
 #. language code: sal
 #: zypp/LanguageCode.cc:913
@@ -3229,7 +3229,7 @@ msgstr "Sulkoeps"
 #. language code: sem
 #: zypp/LanguageCode.cc:937
 msgid "Semitic (Other)"
-msgstr "Semitisch (Overige)"
+msgstr "Semitisch (overig)"
 
 #. language code: sga
 #: zypp/LanguageCode.cc:939
@@ -3264,12 +3264,12 @@ msgstr "Siouaanse talen"
 #. language code: sit
 #: zypp/LanguageCode.cc:951
 msgid "Sino-Tibetan (Other)"
-msgstr "Sino-Tibetaans (Overige)"
+msgstr "Sino-Tibetaans (overig)"
 
 #. language code: sla
 #: zypp/LanguageCode.cc:953
 msgid "Slavic (Other)"
-msgstr "Slavisch (Overige)"
+msgstr "Slavisch (overig)"
 
 #. language code: slo slk sk
 #: zypp/LanguageCode.cc:955 zypp/LanguageCode.cc:957
@@ -3369,7 +3369,7 @@ msgstr "Serer"
 #. language code: ssa
 #: zypp/LanguageCode.cc:995
 msgid "Nilo-Saharan (Other)"
-msgstr "Nilo-Saharaans (Overige)"
+msgstr "Nilo-Saharaans (overig)"
 
 #. language code: ssw ss
 #: zypp/LanguageCode.cc:997
@@ -3419,7 +3419,7 @@ msgstr "Tahitisch"
 #. language code: tai
 #: zypp/LanguageCode.cc:1015
 msgid "Tai (Other)"
-msgstr "Tai (Overige)"
+msgstr "Tai (overig)"
 
 #. language code: tam ta
 #: zypp/LanguageCode.cc:1017
@@ -3554,7 +3554,7 @@ msgstr "Turks"
 #. language code: tut
 #: zypp/LanguageCode.cc:1073
 msgid "Altaic (Other)"
-msgstr "Altaïsch (Overige)"
+msgstr "Altaïsch (overig)"
 
 #. language code: twi tw
 #: zypp/LanguageCode.cc:1077
@@ -3738,7 +3738,7 @@ msgstr "Zuni"
 
 #: zypp/ProblemSolution.cc:114
 msgid "Following actions will be done:"
-msgstr "De volgende acties zullen uitgevoerd worden:"
+msgstr "De volgende acties worden uitgevoerd:"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
@@ -3770,7 +3770,7 @@ msgstr "(VERLOPEN)"
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:92
 msgid "(expires within 24h)"
-msgstr "(verloopt binnen 24u)"
+msgstr "(verloopt binnen 24 uur)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:96
@@ -3783,7 +3783,7 @@ msgstr[1] "(verloopt binnen %d dagen)"
 #: zypp/RepoManager.cc:312
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "Kan map '%1%' van installatiebron niet lezen: Toegang geweigerd"
+msgstr "Kan map '%1%' van opslagruimte niet lezen: Toegang geweigerd"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
@@ -3795,12 +3795,11 @@ msgstr "Het lezen van map '%s' is mislukt"
 #: zypp/RepoManager.cc:330
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr "Kan installatiebronbestand '%1%' niet lezen: Toegang geweigerd"
+msgstr "Kan opslagruimtebestand '%1%' niet lezen: Toegang geweigerd"
 
 #: zypp/RepoManager.cc:353
 msgid "Repository alias cannot start with dot."
-msgstr ""
-"De alias van van een installatiebron mag niet met een punt (.) beginnen."
+msgstr "De alias van van een opslagruimte mag niet met een punt (.) beginnen."
 
 #: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
@@ -3819,8 +3818,7 @@ msgstr "Kan bestand '%s' niet openen voor schrijven."
 #: zypp/RepoManager.cc:871
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr ""
-"Onbekende service '%1%': Verweesde installatiebron '%2%' aan het verwijderen"
+msgstr "Onbekende service '%1%': Verweesde opslagruimte  '%2%' verwijderen"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1098
@@ -3841,7 +3839,7 @@ msgstr "Kan map voor metadata-cache niet aanmaken."
 #: zypp/RepoManager.cc:1300
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "Cache van installatiebron '%s' wordt gebouwd"
+msgstr "Cache van opslagruimte '%s' wordt gebouwd"
 
 #: zypp/RepoManager.cc:1320
 #, c-format, boost-format
@@ -3851,11 +3849,11 @@ msgstr "Kan cache in %s niet aanmaken - geen toegangsrechten."
 #: zypp/RepoManager.cc:1384
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "Kan installatiebron (%d) niet opslaan in de cache."
+msgstr "Kan opslagruimte (%d) niet opslaan in de cache."
 
 #: zypp/RepoManager.cc:1395
 msgid "Unhandled repository type"
-msgstr "Niet behandeld type installatiebron"
+msgstr "Niet behandeld type opslagruimte"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -3877,18 +3875,18 @@ msgstr "Onbekende fout bij lezen van '%s'"
 #: zypp/RepoManager.cc:1623
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "Installatiebron '%s' wordt toegevoegd"
+msgstr "Opslagruimte '%s' wordt toegevoegd"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1711
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Ongeldige naam van installatiebronbestand bij '%s'"
+msgstr "Ongeldige naam van opslagruimtebestand bij '%s'"
 
 #: zypp/RepoManager.cc:1752
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Installatiebron '%s' wordt verwijderd"
+msgstr "Opslagruimte '%s' wordt verwijderd"
 
 #: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
 msgid "Can't figure out where the repo is stored."
@@ -4263,11 +4261,11 @@ msgstr "Service-plug-in ondersteunt geen wijzigen van een attribuut."
 #: zypp/repo/RepoProvideFile.cc:261
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Kan bestand '%s' niet leveren uit installatiebron '%s'"
+msgstr "Kan bestand '%s' niet leveren uit opslagruimte '%s'"
 
 #: zypp/repo/RepoProvideFile.cc:267
 msgid "No url in repository."
-msgstr "Geen url in bron."
+msgstr "Geen URL in opslagruimte."
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4432,7 +4430,7 @@ msgstr "negeer normaliter enige afhankelijkheden"
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr "%s behoort niet tot een installatiebron voor distributieopwaardering"
+msgstr "%s behoort niet tot een opslagruimte voor distributie-upgrade"
 
 #: zypp/solver/detail/SATResolver.cc:983
 #, c-format, boost-format
@@ -4459,7 +4457,7 @@ msgstr "Niets levert het gevraagde %s"
 
 #: zypp/solver/detail/SATResolver.cc:997 zypp/solver/detail/SATResolver.cc:1001
 msgid "Have you enabled all requested repositories?"
-msgstr "Hebt u alle vereiste installatiebronnen ingeschakeld?"
+msgstr "Hebt u alle vereiste opslagruimtes ingeschakeld?"
 
 #: zypp/solver/detail/SATResolver.cc:1000
 #, c-format, boost-format
@@ -4598,12 +4596,12 @@ msgstr "verouderde %s handhaven"
 #: zypp/solver/detail/SATResolver.cc:1302
 #, c-format, boost-format
 msgid "install %s from excluded repository"
-msgstr "%s installeren uit een uitgesloten installatiebron"
+msgstr "%s installeren uit een uitgesloten opslagruimte"
 
 #: zypp/solver/detail/SATResolver.cc:1322
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr "waardeer %s af tot %s"
+msgstr "downgrade %s tot %s"
 
 #: zypp/solver/detail/SATResolver.cc:1329
 #, c-format, boost-format
