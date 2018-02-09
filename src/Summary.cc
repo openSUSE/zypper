@@ -1148,7 +1148,7 @@ void Summary::writeSupportUnknown( std::ostream & out )
     // we only look at vendor support in packages
     if ( it->first == ResKind::package )
       label = PL_(
-        "The following package has no support information from it's vendor:",
+        "The following package has no support information from its vendor:",
         "The following %d packages have no support information from their vendor:",
         it->second.size() );
     label = str::form( label.c_str(), it->second.size() );

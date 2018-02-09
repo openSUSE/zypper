@@ -1174,7 +1174,7 @@ msgstr[1] "Пропускане на %s: вече е инсталиран"
 
 #: src/Summary.cc:1151
 #, fuzzy, c-format, boost-format
-msgid "The following package has no support information from it's vendor:"
+msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "Пропускане на %s: вече е инсталиран"
