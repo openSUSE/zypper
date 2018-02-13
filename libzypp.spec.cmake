@@ -103,11 +103,9 @@ BuildRequires:  librpm-devel > 4.4
 %endif
 
 %if 0%{?suse_version}
-BuildRequires:  gpg2
-Requires:       gpg2
+BuildRequires:  libgpgme-devel
 %else
-BuildRequires:  gnupg2
-Requires:       gnupg2
+BuildRequires:  gpgme-devel
 %endif
 
 %define min_curl_version 7.19.4

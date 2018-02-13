@@ -24,11 +24,14 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/Date.h"
+#include "zypp/KeyManager.h"
 
-/** \todo Fix duplicate define in PublicKey/KeyRing */
-#define GPG_BINARY "/usr/bin/gpg2"
+#include <gpgme.h>
 
 using std::endl;
+
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::gpg"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -102,10 +105,12 @@ namespace zypp
   } //namespace
   ///////////////////////////////////////////////////////////////////
 
+
   ///////////////////////////////////////////////////////////////////
   /// \class PublicSubkeyData::Impl
   /// \brief  PublicSubkeyData implementation.
   ///////////////////////////////////////////////////////////////////
+
   struct PublicSubkeyData::Impl
   {
     std::string _id;
@@ -114,18 +119,24 @@ namespace zypp
 
   public:
     /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
-    }
+    static shared_ptr<Impl> nullimpl();
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
-    Impl * clone() const
-    { return new Impl( *this ); }
+    Impl * clone() const;
   };
+
+  shared_ptr<zypp::PublicSubkeyData::Impl> PublicSubkeyData::Impl::nullimpl()
+  {
+    static shared_ptr<Impl> _nullimpl( new Impl );
+    return _nullimpl;
+  }
+
+  zypp::PublicSubkeyData::Impl *PublicSubkeyData::Impl::clone() const
+  {
+    return new Impl( *this );
+  }
 
   ///////////////////////////////////////////////////////////////////
   /// class PublicSubkeyData
@@ -134,6 +145,14 @@ namespace zypp
   PublicSubkeyData::PublicSubkeyData()
     : _pimpl( Impl::nullimpl() )
   {}
+
+  PublicSubkeyData::PublicSubkeyData(const _gpgme_subkey *rawSubKeyData)
+    : _pimpl (new Impl)
+  {
+    _pimpl->_created = zypp::Date(rawSubKeyData->timestamp);
+    _pimpl->_expires = zypp::Date(rawSubKeyData->expires);
+    _pimpl->_id = str::asString(rawSubKeyData->keyid);
+  }
 
   PublicSubkeyData::~PublicSubkeyData()
   {}
@@ -165,6 +184,7 @@ namespace zypp
   /// \class PublicKeyData::Impl
   /// \brief  PublicKeyData implementation.
   ///////////////////////////////////////////////////////////////////
+  ///
   struct PublicKeyData::Impl
   {
     std::string _id;
@@ -176,34 +196,77 @@ namespace zypp
     std::vector<PublicSubkeyData> _subkeys;
 
   public:
-    bool hasSubkeyId( const std::string & id_r ) const
-    {
-      bool ret = false;
-      for ( const PublicSubkeyData & sub : _subkeys )
-      {
-	if ( sub.id() == id_r )
-	{
-	  ret = true;
-	  break;
-	}
-      }
-      return ret;
-    }
+    bool hasSubkeyId( const std::string & id_r ) const;
 
   public:
     /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
-    }
+    static shared_ptr<Impl> nullimpl();
+    static shared_ptr<Impl> fromGpgmeKey(gpgme_key_t rawData);
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
-    Impl * clone() const
-    { return new Impl( *this ); }
+    Impl * clone() const;
   };
+
+  bool PublicKeyData::Impl::hasSubkeyId(const std::string &id_r) const
+  {
+    bool ret = false;
+    for ( const PublicSubkeyData & sub : _subkeys )
+    {
+      if ( sub.id() == id_r )
+      {
+        ret = true;
+        break;
+      }
+    }
+    return ret;
+  }
+
+  shared_ptr<PublicKeyData::Impl> PublicKeyData::Impl::nullimpl()
+  {
+    static shared_ptr<Impl> _nullimpl( new Impl );
+    return _nullimpl;
+  }
+
+  shared_ptr<PublicKeyData::Impl> PublicKeyData::Impl::fromGpgmeKey(gpgme_key_t rawData)
+  {
+    //gpgpme stores almost nothing in the top level key
+    //the information we look for is stored in the subkey, where subkey[0]
+    //is always the primary key
+    gpgme_subkey_t sKey = rawData->subkeys;
+    if (sKey) {
+      shared_ptr<PublicKeyData::Impl> data(new Impl);
+      //libzypp expects the date of the first signature on the first uid
+      if(rawData->uids && rawData->uids->signatures)
+        data->_created = zypp::Date(rawData->uids->signatures->timestamp);
+      else
+        data->_created = zypp::Date(sKey->timestamp);
+
+      data->_expires = zypp::Date(sKey->expires);
+      data->_fingerprint = str::asString(sKey->fpr);
+      data->_id = str::asString(sKey->keyid);
+
+      //get the primary user ID
+      if (rawData->uids) {
+        data->_name = str::asString(rawData->uids->uid);
+      }
+
+      //the rest of the keys
+      sKey = sKey->next;
+      while (sKey) {
+        data->_subkeys.push_back( PublicSubkeyData(sKey) );
+        sKey = sKey->next;
+      }
+      return data;
+    }
+    return nullimpl();
+  }
+
+  zypp::PublicKeyData::Impl *PublicKeyData::Impl::clone() const
+  {
+    return new Impl( *this );
+  }
 
   ///////////////////////////////////////////////////////////////////
   /// class PublicKeyData
@@ -213,8 +276,15 @@ namespace zypp
     : _pimpl( Impl::nullimpl() )
   {}
 
+  PublicKeyData::PublicKeyData(shared_ptr<Impl> data)
+    : _pimpl( data )
+  {}
+
   PublicKeyData::~PublicKeyData()
   {}
+
+  PublicKeyData PublicKeyData::fromGpgmeKey(_gpgme_key *data)
+  { return PublicKeyData(Impl::fromGpgmeKey(data)); }
 
   PublicKeyData::operator bool() const
   { return !_pimpl->_fingerprint.empty(); }
@@ -286,141 +356,6 @@ namespace zypp
 
 
   ///////////////////////////////////////////////////////////////////
-  /// \class PublicKeyScanner::Impl
-  /// \brief  PublicKeyScanner implementation.
-  ///////////////////////////////////////////////////////////////////
-  struct PublicKeyScanner::Impl
-  {
-    enum { pNONE, pPUB, pSIG, pFPR, pUID, pSUB } _parseEntry;
-    std::vector<std::string> _words;
-    PublicKeyData::Impl * _keyDataPtr;
-
-   Impl()
-      : _parseEntry( pNONE )
-      , _keyDataPtr( nullptr )
-    {}
-
-    void scan( std::string & line_r, std::list<PublicKeyData> & keys_r )
-    {
-      // pub:-:1024:17:A84EDAE89C800ACA:971961473:1214043198::-:SuSE Package Signing Key <build@suse.de>:
-      // fpr:::::::::79C179B2E1C820C1890F9994A84EDAE89C800ACA:
-      // sig:::17:A84EDAE89C800ACA:1087899198:::::[selfsig]::13x:
-      // sig:::17:9E40E310000AABA4:980442706::::[User ID not found]:10x:
-      // sig:::1:77B2E6003D25D3D9:980443247::::[User ID not found]:10x:
-      // sig:::17:A84EDAE89C800ACA:1318348291:::::[selfsig]::13x:
-      // sub:-:2048:16:197448E88495160C:971961490:1214043258::: [expires: 2008-06-21]
-      // sig:::17:A84EDAE89C800ACA:1087899258:::::[keybind]::18x:
-      if ( line_r.empty() )
-	return;
-
-      // quick check for interesting entries, no parsing in subkeys
-      _parseEntry = pNONE;
-      switch ( line_r[0] )
-      {
-	case 'p':
-	  if ( line_r[1] == 'u' && line_r[2] == 'b' && line_r[3] == ':' )
-	  {
-	    _parseEntry = pPUB;
-	    keys_r.push_back( PublicKeyData() );	// reset upon new key
-	    _keyDataPtr = keys_r.back()._pimpl.get();
-	  }
-	  break;
-
-	case 'f':
-	  if ( line_r[1] == 'p' && line_r[2] == 'r' && line_r[3] == ':' )
-	    _parseEntry = pFPR;
-	  break;
-
-	case 'u':
-	  if ( line_r[1] == 'i' && line_r[2] == 'd' && line_r[3] == ':' )
-	    _parseEntry = pUID;
-	  break;
-
-	case 's':
-	  if ( line_r[1] == 'i' && line_r[2] == 'g' && line_r[3] == ':' )
-	    _parseEntry = pSIG;
-	  else if ( line_r[1] == 'u' && line_r[2] == 'b' && line_r[3] == ':' )
-	    _parseEntry = pSUB;
-	  break;
-
-	default:
-	  return;
-      }
-      if ( _parseEntry == pNONE )
-	return;
-      if ( ! ( _keyDataPtr->_subkeys.empty() || _parseEntry == pSUB ) )
-	return;	// collecting subkeys only
-
-      if ( line_r[line_r.size()-1] == '\n' )
-	line_r.erase( line_r.size()-1 );
-      //DBG << line_r << endl;
-
-      _words.clear();
-      str::splitFields( line_r, std::back_inserter(_words), ":" );
-
-      switch ( _parseEntry )
-      {
-	case pPUB:
-	  _keyDataPtr->_id      = _words[4];
-	  _keyDataPtr->_name    = str::replaceAll( _words[9], "\\x3a", ":" );
-	  _keyDataPtr->_created = Date(str::strtonum<Date::ValueType>(_words[5]));
-	  _keyDataPtr->_expires = Date(str::strtonum<Date::ValueType>(_words[6]));
-	  break;
-
-	case pSIG:
-	  // Update creation/modification date from signatures type "13x".
-	  if ( ( _words.size() > 10 && _words[10] == "13x" && !_words[9].empty() && _words[9] != "[User ID not found]" )
-	    || ( _words.size() > 12 && _words[12] == "13x" /* [selfsig] */) )
-	  {
-	    Date cdate(str::strtonum<Date::ValueType>(_words[5]));
-	    if ( _keyDataPtr->_created < cdate )
-	      _keyDataPtr->_created = cdate;
-	  }
-	  break;
-
-	case pFPR:
-	  if ( _keyDataPtr->_fingerprint.empty() )
-	    _keyDataPtr->_fingerprint = _words[9];
-	  break;
-
-	case pUID:
-	  if ( ! _words[9].empty() && _words[9] != "[User ID not found]" )
-	    _keyDataPtr->_name = str::replaceAll( _words[9], "\\x3a", ":" );
-	  break;
-
-	case pSUB:
-	  _keyDataPtr->_subkeys.push_back( PublicSubkeyData() );
-	  {
-	    PublicSubkeyData::Impl * subPtr = _keyDataPtr->_subkeys.back()._pimpl.get();
-	    subPtr->_id      = _words[4];
-	    subPtr->_created = Date(str::strtonum<Date::ValueType>(_words[5]));
-	    subPtr->_expires = Date(str::strtonum<Date::ValueType>(_words[6]));
-	  }
-	  break;
-
-	case pNONE:
-	  break;	// intentionally no default:
-      }
-    }
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-  // class PublicKeyScanner
-  ///////////////////////////////////////////////////////////////////
-
-  PublicKeyScanner::PublicKeyScanner()
-    : _pimpl( new Impl )
-  {}
-
-  PublicKeyScanner::~PublicKeyScanner()
-  {}
-
-  void PublicKeyScanner::scan( std::string line_r )
-  { _pimpl->scan( line_r, _keys ); }
-
-
-  ///////////////////////////////////////////////////////////////////
   /// \class PublicKey::Impl
   /// \brief  PublicKey implementation.
   ///////////////////////////////////////////////////////////////////
@@ -482,60 +417,36 @@ namespace zypp
         PathInfo info( path() );
         MIL << "Reading pubkey from " << info.path() << " of size " << info.size() << " and sha1 " << filesystem::checksum(info.path(), "sha1") << endl;
 
-	static std::string tmppath( _initHomeDir() );
-	std::string datapath( path().asString() );
+        //@TODO is this still required? KeyManagerCtx creates a homedir on the fly
+        static std::string tmppath( _initHomeDir() );
 
-        const char* argv[] =
+        KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
+        if (!ctx || !ctx->setHomedir(tmppath)) {
+          ZYPP_THROW( Exception( std::string("Can't read public key data: Setting the keyring path failed!")) );
+        }
+
+        std::list<PublicKeyData> keys = ctx->readKeyFromFile(path());
+        switch ( keys.size() )
         {
-          GPG_BINARY,
-          "-v",
-          "--no-default-keyring",
-          "--fixed-list-mode",
-          "--with-fingerprint",
-          "--with-colons",
-          "--homedir",
-          tmppath.c_str(),
-          "--quiet",
-          "--no-tty",
-          "--no-greeting",
-          "--batch",
-          "--status-fd", "1",
-          datapath.c_str(),
-          NULL
-        };
-        ExternalProgram prog( argv, ExternalProgram::Discard_Stderr, false, -1, true );
+          case 0:
+            ZYPP_THROW( BadKeyException( "File " + path().asString() + " doesn't contain public key data" , path() ) );
+            break;
 
-	PublicKeyScanner scanner;
-        for ( std::string line = prog.receiveLine(); !line.empty(); line = prog.receiveLine() )
-        {
-	  scanner.scan( line );
-	}
-        int ret = prog.close();
+          case 1:
+            // ok.
+            _keyData = keys.back();
+            _hiddenKeys.clear();
+            break;
 
-	switch ( scanner._keys.size() )
-	{
-	  case 0:
-	    if ( ret == 129 )
-	      ZYPP_THROW( Exception( std::string("Can't read public key data: ") + GPG_BINARY + " is not installed!" ) );
-	    else
-	      ZYPP_THROW( BadKeyException( "File " + path().asString() + " doesn't contain public key data" , path() ) );
-	    break;
+          default:
+            WAR << "File " << path().asString() << " contains multiple keys: " <<  keys << endl;
+            _keyData = keys.back();
+            keys.pop_back();
+            _hiddenKeys.swap( keys );
+            break;
+        }
 
-	  case 1:
-	    // ok.
-	    _keyData = scanner._keys.back();
-	    _hiddenKeys.clear();
-	    break;
-
-	  default:
-	    WAR << "File " << path().asString() << " contains multiple keys: " <<  scanner._keys << endl;
-	    _keyData = scanner._keys.back();
-	    scanner._keys.pop_back();
-	    _hiddenKeys.swap( scanner._keys );
-	    break;
-	}
-
-	MIL << "Read pubkey from " << info.path() << ": " << _keyData << endl;
+        MIL << "Read pubkey from " << info.path() << ": " << _keyData << endl;
       }
 
     private:
@@ -563,7 +474,7 @@ namespace zypp
   // class PublicKey
   ///////////////////////////////////////////////////////////////////
   PublicKey::PublicKey()
-  : _pimpl( Impl::nullimpl() )
+    : _pimpl( Impl::nullimpl() )
   {}
 
   PublicKey::PublicKey( const Pathname & file )
@@ -635,6 +546,9 @@ namespace zypp
 
   std::ostream & dumpOn( std::ostream & str, const PublicKey & obj )
   { return dumpOn( str, obj.keyData() ); }
+
+
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

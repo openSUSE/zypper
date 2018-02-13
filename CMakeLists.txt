@@ -2,6 +2,7 @@ PROJECT(LIBZYPP)
 SET( PACKAGE "libzypp" )
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 SET( CMAKE_MODULE_PATH ${LIBZYPP_SOURCE_DIR}/cmake/modules )
+
 cmake_minimum_required(VERSION 2.6)
 
 OPTION (ENABLE_BUILD_DOCS "Build documentation by default?" OFF)
@@ -119,7 +120,7 @@ ELSE ( NOT RPM_FOUND)
   endif ( RPM_SUSPECT_VERSION STREQUAL "5.x" )
 ENDIF( NOT RPM_FOUND)
 
-FIND_PACKAGE(Boost REQUIRED COMPONENTS program_options unit_test_framework)
+FIND_PACKAGE(Boost REQUIRED COMPONENTS program_options unit_test_framework thread)
 IF (Boost_FOUND)
   MESSAGE( STATUS "boost found: includes in ${Boost_INCLUDE_DIRS}, library in ${Boost_LIBRARY_DIRS}")
   INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
@@ -161,6 +162,14 @@ IF ( NOT LibSolv_FOUND )
   MESSAGE( FATAL_ERROR " libsolv not found" )
 ELSE()
   INCLUDE_DIRECTORIES( ${LibSolv_INCLUDE_DIRS} )
+ENDIF()
+
+FIND_PACKAGE(Gpgme REQUIRED)
+IF ( NOT GPGME_PTHREAD_FOUND )
+  MESSAGE( FATAL_ERROR " gpgme not found" )
+ELSE()
+  INCLUDE_DIRECTORIES( ${GPGME_INCLUDES} )
+  LINK_DIRECTORIES(${GPGME_LIBRARY_DIR})
 ENDIF()
 
 FIND_PACKAGE(OpenSSL REQUIRED)

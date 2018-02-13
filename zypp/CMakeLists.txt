@@ -36,6 +36,7 @@ SET( zypp_SRCS
   HistoryLogData.cc
   IdString.cc
   InstanceId.cc
+  KeyManager.cc
   KeyRing.cc
   Locks.cc
   MediaSetAccess.cc
@@ -128,6 +129,7 @@ SET( zypp_HEADERS
   IdStringType.h
   InstanceId.h
   KeyContext.h
+  KeyManager.h
   KeyRing.h
   KVMap.h
   LanguageCode.h
@@ -935,7 +937,10 @@ TARGET_LINK_LIBRARIES(zypp ${ZLIB_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${LibSolv_LIBRARIES} )
 TARGET_LINK_LIBRARIES(zypp ${OPENSSL_LIBRARIES} )
 TARGET_LINK_LIBRARIES(zypp ${CRYPTO_LIBRARIES} )
-TARGET_LINK_LIBRARIES(zypp ${SIGNALS_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${SIGNALS_LIBRARY})
+TARGET_LINK_LIBRARIES(zypp ${Boost_THREAD_LIBRARY})
+TARGET_LINK_LIBRARIES(zypp ${GPGME_PTHREAD_LIBRARIES})
+
 
 IF ( UDEV_FOUND )
   TARGET_LINK_LIBRARIES(zypp ${UDEV_LIBRARY} )

@@ -25,6 +25,9 @@
 #include "zypp/Edition.h"
 #include "zypp/Date.h"
 
+struct _gpgme_key;
+struct _gpgme_subkey;
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -34,6 +37,7 @@ namespace zypp
     class TmpFile;
   }
   class PublicKeyData;
+  class KeyManagerCtx;
 
   ///////////////////////////////////////////////////////////////////
   /// \class BadKeyException
@@ -112,8 +116,9 @@ namespace zypp
   private:
     class Impl;
     RWCOW_pointer<Impl> _pimpl;
-    friend class PublicKeyScanner;
+    friend class PublicKeyData;
     friend std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj );
+    PublicSubkeyData(const _gpgme_subkey *rawSubKeyData);
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -214,7 +219,11 @@ namespace zypp
   private:
     class Impl;
     RWCOW_pointer<Impl> _pimpl;
-    friend class PublicKeyScanner;
+
+    friend class KeyManagerCtx;
+    static PublicKeyData fromGpgmeKey(_gpgme_key *data);
+
+    PublicKeyData(shared_ptr<Impl> data);
     friend std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj );
   };
   ///////////////////////////////////////////////////////////////////
@@ -232,41 +241,6 @@ namespace zypp
   /** \relates PublicKeyData NotEqual. */
   inline bool operator!=( const PublicKeyData & lhs, const PublicKeyData & rhs )
   { return !( lhs == rhs ); }
-
-  ///////////////////////////////////////////////////////////////////
-  /// \class PublicKeyScanner
-  /// \brief Scan abstract from 'gpg --with-colons' key listings.
-  /// Feed gpg output line by line into \ref scan. The collected \ref PublicKeyData
-  /// contain the keys data (fingerprint, uid,...) but not the key itself (ASCII
-  /// armored stored in a file).
-  /// \code
-  ///   std::list<PublicKeyData> result;
-  ///   {
-  ///     PublicKeyScanner scanner;
-  ///     for ( std::string line = prog.receiveLine(); !line.empty(); line = prog.receiveLine() )
-  ///       scanner.scan( line );
-  ///     result.swap( scanner._keys );
-  ///   }
-  /// \endcode
-  /// \relates PublicKeyData
-  ///////////////////////////////////////////////////////////////////
-  struct PublicKeyScanner
-  {
-    PublicKeyScanner();
-    ~PublicKeyScanner();
-
-    /** Feed gpg output line by line into \ref scan. */
-    void scan( std::string line_r );
-
-    /** Extracted keys. */
-    std::list<PublicKeyData> _keys;
-
-  private:
-    class Impl;
-    RW_pointer<Impl, rw_pointer::Scoped<Impl> > _pimpl;
-  };
-  ///////////////////////////////////////////////////////////////////
-
 
   ///////////////////////////////////////////////////////////////////
   /// \class PublicKey

@@ -221,6 +221,9 @@ BOOST_AUTO_TEST_CASE(keyring_import)
     virtual void trustedKeyAdded( const PublicKey & key_r )
     { ++_cbcnt; }
 
+    virtual void trustedKeyRemoved( const PublicKey & key_r )
+    { --_cbcnt; }
+
     unsigned _cbcnt = 0;
   } receiver;
 
@@ -234,5 +237,59 @@ BOOST_AUTO_TEST_CASE(keyring_import)
   keyring.importKey( key, true );
   BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), 3 );
   BOOST_CHECK_EQUAL( receiver._cbcnt, keyring.trustedPublicKeys().size() );
+}
+
+BOOST_AUTO_TEST_CASE(keyring_delete)
+{
+  PublicKey key( Pathname(DATADIR) + "public.asc" );
+  /** scenario #3
+  * import and delete untrusted key
+  */
+  {
+    // base sandbox for playing
+    TmpDir tmp_dir;
+    KeyRing keyring( tmp_dir.path() );
+
+    BOOST_CHECK_EQUAL( keyring.publicKeys().size(), (unsigned) 0 );
+    BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), (unsigned) 0 );
+
+    keyring.importKey( key, false );
+
+    BOOST_CHECK_EQUAL( keyring.publicKeys().size(), (unsigned) 1 );
+    BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), (unsigned) 0 );
+
+    keyring.deleteKey( key.id(), false);
+
+    BOOST_CHECK_EQUAL( keyring.publicKeys().size(), (unsigned) 0 );
+    BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), (unsigned) 0 );
+  }
+
+  /** scenario #3.1
+  * import and delete trusted key
+  */
+  {
+    // base sandbox for playing
+    TmpDir tmp_dir;
+    KeyRing keyring( tmp_dir.path() );
+
+    BOOST_CHECK_EQUAL( keyring.publicKeys().size(), (unsigned) 0 );
+    BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), (unsigned) 0 );
+
+    keyring.importKey( key, true );
+
+    BOOST_CHECK_EQUAL( keyring.publicKeys().size(), (unsigned) 0 );
+    BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), (unsigned) 1 );
+
+    //try to delete from untrusted keyring
+    keyring.deleteKey( key.id(), false);
+
+    BOOST_CHECK_EQUAL( keyring.publicKeys().size(), (unsigned) 0 );
+    BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), (unsigned) 1 );
+
+    keyring.deleteKey( key.id(), true);
+
+    BOOST_CHECK_EQUAL( keyring.publicKeys().size(), (unsigned) 0 );
+    BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), (unsigned) 0 );
+  }
 }
 

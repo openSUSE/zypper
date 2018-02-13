@@ -30,14 +30,12 @@
 #include "zypp/ExternalProgram.h"
 #include "zypp/TmpPath.h"
 #include "zypp/ZYppCallbacks.h"       // JobReport::instance
+#include "zypp/KeyManager.h"
 
 using std::endl;
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::KeyRing"
-
-/** \todo Fix duplicate define in PublicKey/KeyRing */
-#define GPG_BINARY "/usr/bin/gpg2"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -144,38 +142,17 @@ namespace zypp
 
       const std::list<PublicKeyData> & getData( const Pathname & keyring_r, Cache & cache_r ) const
       {
-	if ( cache_r.hasChanged() )
-	{
-	  const char* argv[] =
-	  {
-	    GPG_BINARY,
-	    "--list-public-keys",
-	    "--homedir", keyring_r.c_str(),
-	    "--no-default-keyring",
-	    "--quiet",
-	    "--with-colons",
-	    "--fixed-list-mode",
-	    "--with-fingerprint",
-	    "--with-sig-list",
-	    "--no-tty",
-	    "--no-greeting",
-	    "--batch",
-	    "--status-fd", "1",
-	    NULL
-	  };
-
-	  PublicKeyScanner scanner;
-	  ExternalProgram prog( argv ,ExternalProgram::Discard_Stderr, false, -1, true );
-	  for( std::string line = prog.receiveLine(); !line.empty(); line = prog.receiveLine() )
-	  {
-	    scanner.scan( line );
-	  }
-	  prog.close();
-
-	  cache_r._data.swap( scanner._keys );
-	  MIL << "Found keys: " << cache_r._data  << endl;
-	}
-	return cache_r._data;
+        if ( cache_r.hasChanged() ) {
+          shared_ptr<KeyManagerCtx> ctx = KeyManagerCtx::createForOpenPGP();
+          if (ctx) {
+            if (ctx->setHomedir(keyring_r)) {
+              std::list<PublicKeyData> foundKeys = ctx->listKeys();
+              cache_r._data.swap(foundKeys);
+            }
+          }
+          MIL << "Found keys: " << cache_r._data  << endl;
+        }
+        return cache_r._data;
       }
 
       mutable CacheMap _cacheMap;
@@ -391,27 +368,10 @@ namespace zypp
 
   void KeyRing::Impl::dumpPublicKey( const std::string & id, const Pathname & keyring, std::ostream & stream )
   {
-    const char* argv[] =
-    {
-      GPG_BINARY,
-      "-a",
-      "--export",
-      "--homedir", keyring.asString().c_str(),
-      "--no-default-keyring",
-      "--quiet",
-      "--no-tty",
-      "--no-greeting",
-      "--no-permission-warning",
-      "--batch",
-      id.c_str(),
-      NULL
-    };
-    ExternalProgram prog( argv,ExternalProgram::Discard_Stderr, false, -1, true );
-    for ( std::string line = prog.receiveLine(); !line.empty(); line = prog.receiveLine() )
-    {
-      stream << line;
-    }
-    prog.close();
+    KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
+    if (!ctx || !ctx->setHomedir(keyring))
+      return;
+    ctx->exportKey(id, stream);
   }
 
   filesystem::TmpFile KeyRing::Impl::dumpPublicKeyToTmp( const std::string & id, const Pathname & keyring )
@@ -562,48 +522,31 @@ namespace zypp
 				   % keyfile.asString()
 				   % keyring.asString() ));
 
-    const char* argv[] =
-    {
-      GPG_BINARY,
-      "--import",
-      "--homedir", keyring.asString().c_str(),
-      "--no-default-keyring",
-      "--quiet",
-      "--no-tty",
-      "--no-greeting",
-      "--no-permission-warning",
-      "--status-fd", "1",
-      keyfile.asString().c_str(),
-      NULL
-    };
+    KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
+    if(!ctx || !ctx->setHomedir(keyring))
+      ZYPP_THROW(KeyRingException(_("Failed to import key.")));
 
     cachedPublicKeyData.setDirty( keyring );
-    ExternalProgram prog( argv,ExternalProgram::Discard_Stderr, false, -1, true );
-    if ( prog.close() )
+    if(!ctx->importKey(keyfile))
       ZYPP_THROW(KeyRingException(_("Failed to import key.")));
   }
 
   void KeyRing::Impl::deleteKey( const std::string & id, const Pathname & keyring )
   {
-    const char* argv[] =
-    {
-      GPG_BINARY,
-      "--delete-keys",
-      "--homedir", keyring.asString().c_str(),
-      "--no-default-keyring",
-      "--yes",
-      "--quiet",
-      "--no-tty",
-      "--batch",
-      "--status-fd", "1",
-      id.c_str(),
-      NULL
-    };
+    KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
+    if(!ctx) {
+      ZYPP_THROW(KeyRingException(_("Failed to delete key.")));
+    }
+
+    if(!ctx->setHomedir(keyring)) {
+      ZYPP_THROW(KeyRingException(_("Failed to delete key.")));
+    }
+
+    if(!ctx->deleteKey(id)){
+      ZYPP_THROW(KeyRingException(_("Failed to delete key.")));
+    }
 
     cachedPublicKeyData.setDirty( keyring );
-    ExternalProgram prog( argv,ExternalProgram::Discard_Stderr, false, -1, true );
-    if ( prog.close() )
-      ZYPP_THROW(KeyRingException(_("Failed to delete key.")));
   }
 
   std::string KeyRing::Impl::readSignatureKeyId( const Pathname & signature )
@@ -612,69 +555,28 @@ namespace zypp
       ZYPP_THROW(KeyRingException( str::Format(_("Signature file %s not found")) % signature.asString() ));
 
     MIL << "Determining key id of signature " << signature << endl;
-    const char* argv[] =
-    {
-      GPG_BINARY,
-      "--list-packets",
-      signature.asString().c_str(),
-      NULL
-    };
-    ExternalProgram prog( argv ,ExternalProgram::Discard_Stderr, false, -1, true );
 
-    // :signature packet: algo 1, keyid 1397BC53640DB551
-    //         version 4, created 1501094968, md5len 0, sigclass 0x00
-    //         digest algo 8, begin of digest 15 89
-    //         hashed subpkt 2 len 4 (sig created 2017-07-26)
-    //         subpkt 16 len 8 (issuer key ID 1397BC53640DB551)
-    //         data: [4095 bits]
-    std::string id;
-    for( std::string line = prog.receiveLine(); !line.empty(); line = prog.receiveLine() )
-    {
-      if ( id.empty() && str::startsWith( line, ":signature packet:" ) )
-      {
-	static const str::regex rxKeyId( " keyid +([0-9A-Z]+)" );
-	str::smatch what;
-	if( str::regex_match( line, what, rxKeyId ) )
-	  id = what[1];
-      }
+    KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
+    if(!ctx) {
+      return std::string();
     }
 
-    MIL << "Determined key id [" << id << "] for signature " << signature << endl;
-    prog.close();
-    return id;
+    std::list<std::string> fprs = ctx->readSignatureFingerprints(signature);
+    if (fprs.size()) {
+      std::string &id = fprs.back();
+      MIL << "Determined key id [" << id << "] for signature " << signature << endl;
+      return id;
+    }
+    return std::string();
   }
 
   bool KeyRing::Impl::verifyFile( const Pathname & file, const Pathname & signature, const Pathname & keyring )
   {
-    const char* argv[] =
-    {
-      GPG_BINARY,
-      "--verify",
-      "--homedir", keyring.asString().c_str(),
-      "--no-default-keyring",
-      "--quiet",
-      "--no-tty",
-      "--batch",
-      "--no-greeting",
-      "--status-fd", "1",
-      signature.asString().c_str(),
-      file.asString().c_str(),
-      NULL
-    };
+    KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
+    if (!ctx || !ctx->setHomedir(keyring))
+      return false;
 
-    // no need to parse output for now
-    //     [GNUPG:] SIG_ID yCc4u223XRJnLnVAIllvYbUd8mQ 2006-03-29 1143618744
-    //     [GNUPG:] GOODSIG A84EDAE89C800ACA SuSE Package Signing Key <build@suse.de>
-    //     gpg: Good signature from "SuSE Package Signing Key <build@suse.de>"
-    //     [GNUPG:] VALIDSIG 79C179B2E1C820C1890F9994A84EDAE89C800ACA 2006-03-29 1143618744 0 3 0 17 2 00 79C179B2E1C820C1890F9994A84EDAE89C800ACA
-    //     [GNUPG:] TRUST_UNDEFINED
-
-    //     [GNUPG:] ERRSIG A84EDAE89C800ACA 17 2 00 1143618744 9
-    //     [GNUPG:] NO_PUBKEY A84EDAE89C800ACA
-
-    ExternalProgram prog( argv,ExternalProgram::Discard_Stderr, false, -1, true );
-
-    return ( prog.close() == 0 ) ? true : false;
+    return ctx->verify(file, signature);
   }
 
   ///////////////////////////////////////////////////////////////////
