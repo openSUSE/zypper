@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2018-02-05 09:38+0000\n"
+"PO-Revision-Date: 2018-02-14 09:01+0000\n"
 "Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
@@ -1378,7 +1378,7 @@ msgstr "設定套件庫的優先性。"
 
 #: src/Zypper.cc:125
 msgid "Enable RPM files caching."
-msgstr " 啟用 RPM 檔案快取。"
+msgstr "啟用 RPM 檔案快取。"
 
 #: src/Zypper.cc:126
 msgid "Disable RPM files caching."
@@ -1418,7 +1418,7 @@ msgstr "使用 /etc/zypp/zypp.conf 中定義的全域 GPG 檢查設定。此為�
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
-msgstr "建立解決測試案例來偵錯"
+msgstr "建立解決測試案例來偵錯。"
 
 #: src/Zypper.cc:151
 msgid ""
@@ -4691,8 +4691,7 @@ msgstr "暫時"
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
-msgstr ""
-"套件庫 '%1%' 由服務 '%2%' 管理。暫時性的變動將會在下次服務重新整理時被重設。"
+msgstr "套件庫「%1%」由服務「%2%」管理。暫時性的變動將會在下次服務重新整理時重設！"
 
 #: src/repos.cc:69
 msgid "default priority"
@@ -6203,7 +6202,7 @@ msgstr "未知選項 "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
-msgstr "遺失引數 "
+msgstr "遺失引數 - "
 
 #. translators: speaking of two mutually contradicting command line options
 #: src/utils/getopt.cc:123

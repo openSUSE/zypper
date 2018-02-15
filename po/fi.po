@@ -23,25 +23,26 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2014-10-12 20:49+0300\n"
-"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
-"Language-Team: American English <kde-i18n-doc@kde.org>\n"
-"Language: en_US\n"
+"PO-Revision-Date: 2018-02-15 15:02+0000\n"
+"Last-Translator: Tommi Nieminen <software@legisign.org>\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
+"\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
-"Plural-Forms:  nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Epäilyttävä luokkasuodattimen arvo \"%1%\"."
 
 #: src/SolverRequester.h:68
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Epäilyttävä vakavuussuodattimen arvo \"%1%\"."
 
 #: src/Zypper.h:502
 msgid "Finished with error."
@@ -58,6 +59,10 @@ msgid ""
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
+"Tietojen allekirjoittaminen sallii vastaanottajan todentaa, ettei mitään ole "
+"muutettu allekirjoittamisen jälkeen. Allekirjoittamattomien tai "
+"kelvottomasti allekirjoitettujen tietojen hyväksyminen voi johtaa "
+"järjestelmän vioittumiseen ja pahimmassa tapauksessa tietoturvauhkaan."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -66,12 +71,16 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Tiedosto \"%1%\" on ohjelmalähteen pääindeksi. Se varmistaa koko "
+"ohjelmalähteen eheyden."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Emme voi vahvistaa, ettei tiedostoon ole kajottu, joten se ei ehkä ole enää "
+"luotettava! Sinun ei pitäisi jatkaa, ellet ole varma sen luotettavuudesta."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -79,6 +88,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Tiedostoa on muutettu sen allekirjoittamisen jälkeen. Tämä voi olla "
+"pahantahtoinen muutos, joten tiedosto ei ole enää luotettava! Sinun ei "
+"pitäisi jatkaa, ellet ole varma."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -102,7 +114,7 @@ msgstr "Avain vanhentuu:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Aliavain:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -133,16 +145,15 @@ msgstr ""
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Tiedostoa \"%s\" ei ole allekirjoitettu, jatketaanko?"
+msgstr "Tiedosto \"%1%\" on allekirjoittamaton."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr ""
-"Tiedostoa \"%s\" asennuslähteestä \"%s\" ei ole allekirjoitettu, jatketaanko?"
+msgstr "Tiedosto \"%1%\" asennuslähteestä \"%2%\" on allekirjoittamaton."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -174,18 +185,17 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr ""
-"\"%s\" on allekirjoitettu tuntemattomalla avaimella \"%s\". Jatketaanko?"
+msgstr "Tiedosto \"%1%\" on allekirjoitettu tuntemattomalla avaimella \"%2%\"."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"Tiedosto \"%s\" asennuslähteestä \"%s\" on allekirjoitettu tuntemattomalla "
-"avaimella \"%s\". Jatketaanko?"
+"Tiedosto \"%1%\" asennuslähteestä \"%3%\" on allekirjoitettu tuntemattomalla "
+"avaimella \"%2%\"."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -292,20 +302,27 @@ msgid "Unknown digest %s for file %s."
 msgstr "Tuntematon kooste %s tiedostolle %s."
 
 #: src/callbacks/keyring.h:417
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
 "[%2%]\n"
 "\n"
 "  expected %3%\n"
 "  but got  %4%\n"
-msgstr "Kohteen %s koostetarkistus epäonnistui. Odotettiin %s, saatiin %s."
+msgstr ""
+"Koosteen todennus epäonnistui tiedostossa \"%1%\"\n"
+"[%2%]\n"
+"\n"
+" odotettiin %3%\n"
+" mutta saatiin %4%\n"
 
 #: src/callbacks/keyring.h:429
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
+"Tarkistussummaltaan virheellisten pakettien hyväksyminen voi johtaa "
+"järjestelmän vioittumiseen ja pahimmassa tapauksessa tietoturvauhkaan."
 
 #: src/callbacks/keyring.h:437
 #, boost-format
@@ -317,26 +334,31 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
+"Jos kuitenkin vahvistat, että tiedosto, jonka tarkistussumma on \"%1%\", on "
+"luotettava,\n"
+"oikea ja sitä tulisi käyttää, anna tarkistussumman neljä ensimmäistä merkkiä "
+"poistaaksesi\n"
+"tiedoston eston omalla vastuullasi. Tiedosto hylätään, jos syöte on tyhjä.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:444
 msgid "discard"
-msgstr ""
+msgstr "hylkää"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:446
 msgid "Unblock using this file on your own risk."
-msgstr ""
+msgstr "Poista tämän tiedoston esto omalla vastuullasi."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:448
 msgid "Discard the file."
-msgstr ""
+msgstr "Hylkää tiedosto."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:453
 msgid "Unblock or discard?"
-msgstr ""
+msgstr "Poistetaanko esto vai hylätäänkö?"
 
 #: src/callbacks/locks.h:27
 msgid ""
@@ -382,13 +404,12 @@ msgid "Retrieving %s %s-%s.%s"
 msgstr "Ladataan %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
-#, fuzzy
 msgid "Signature verification failed"
-msgstr "Aitoustarkistus epäonnistui tiedostossa \"%s\"."
+msgstr "Allekirjoituksen todennus epäonnistui"
 
 #: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
-msgstr ""
+msgstr "Hyväksytään paketti virheestä huolimatta."
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:183
@@ -437,7 +458,7 @@ msgstr ""
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:423
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "The following package had to be excluded from file conflicts check because "
 "it is not yet downloaded:"
@@ -445,11 +466,11 @@ msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
 msgstr[0] ""
-"Kyseinen paketti jouduttiin jättämään pois tiedostojen ristiriidan "
-"tarkistuksesta, koska sitä ei ole vielä ladattu:"
+"Seuraava paketti oli jätettävä pois tiedostoristiriidan takia, koska sitä ei "
+"ole vielä ladattu:"
 msgstr[1] ""
-"Kyseiset paketit jouduttiin jättämään pois tiedostojen ristiriitojen "
-"tarkistuksesta, koska niitä ei ole vielä ladattu:"
+"Seuraavat %1% pakettia oli jätettävä pois tiedostoristiriidan takia, koska "
+"niitä ei ole vielä ladattu:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:434
@@ -485,19 +506,17 @@ msgstr "Ei"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Huomaa:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Varoitus: "
+msgstr "Varoitus:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Virhe"
+msgstr "Virhe:"
 
 #: src/output/Out.h:44
 msgid "Continue?"
@@ -731,13 +750,13 @@ msgid "Patch '%s' is not needed."
 msgstr "Korjausta \"%s\" ei tarvita."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Korjauspäivitys \"%s\" on lukittu. Käytä \"%s\" asentaaksesi sen tai avaa "
-"lukitus käyttäen \"%s\"."
+"Korjauspäivitys \"%1%\" on valinnainen Asenna se käyttämällä \"%2%\" tai "
+"sisällytä kaikki valinnaiset korjauspäivitykset käyttämällä \"%3%\"."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -752,9 +771,9 @@ msgid "Patch '%s' is not in the specified category."
 msgstr "Paikkaus \"%s\" ei ole määritetyssä luokassa."
 
 #: src/RequestFeedback.cc:206
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' has not the specified severity."
-msgstr "Paikkaus \"%s\" ei ole määritetyssä luokassa."
+msgstr "Korjauspäivityksellä \"%s\" ei ole määritettyä vakavuutta."
 
 #: src/RequestFeedback.cc:213
 #, c-format, boost-format
@@ -795,7 +814,7 @@ msgstr "Lisätään ristiriita: \"%s\"."
 #: src/RequestFeedback.cc:263
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Tarkoititko %1%?"
 
 #: src/SolverRequester.cc:478
 #, c-format, boost-format
