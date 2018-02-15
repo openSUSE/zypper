@@ -1196,7 +1196,7 @@ msgstr[1] "निम्नांकित vpnc VPN संबंधन बना�
 
 #: src/Summary.cc:1151
 #, fuzzy, c-format, boost-format
-msgid "The following package has no support information from it's vendor:"
+msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "निम्नांकित vpnc VPN संबंधन बनायी जाएगी:"

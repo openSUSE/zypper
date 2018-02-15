@@ -1471,7 +1471,7 @@ msgstr[5] "%d من التطبيقات التالية ستغير بائعها:"
 
 #: src/Summary.cc:1151
 #, boost-format, c-format
-msgid "The following package has no support information from it's vendor:"
+msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "لا يوجد معلومات دعم من المزود لعدد %d من الحزم التالية:"

@@ -1299,7 +1299,7 @@ msgstr[2] "Nasledujúcich %d aplikácií zmení dodávateľa:"
 
 #: src/Summary.cc:1151
 #, boost-format, c-format
-msgid "The following package has no support information from it's vendor:"
+msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] ""

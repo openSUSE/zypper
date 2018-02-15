@@ -1132,7 +1132,7 @@ msgstr[0] "将改变以下 %d 个应用程序的厂商："
 
 #: src/Summary.cc:1151
 #, c-format, boost-format
-msgid "The following package has no support information from it's vendor:"
+msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "以下 %d 个软件包没有来自其厂商的支援信息："

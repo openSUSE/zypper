@@ -1348,7 +1348,7 @@ msgstr[2] "Zostanie zmieniony dostawca następujących %d aplikacji:"
 
 #: src/Summary.cc:1151
 #, boost-format, c-format
-msgid "The following package has no support information from it's vendor:"
+msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "Poniższy pakiet nie zawiera informacji o wsparciu dostawcy:"

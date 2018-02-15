@@ -1111,7 +1111,7 @@ msgstr[0] "ชุดรูปแบบเหล่านี้จะเปลี
 
 #: src/Summary.cc:1151
 #, fuzzy, c-format, boost-format
-msgid "The following package has no support information from it's vendor:"
+msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "แพกเกจต่อไปนี้ไม่ได้ถูกสนับสนุนโดยผู้จัดจำหน่ายของพวกมัน:"

@@ -1240,8 +1240,8 @@ msgstr[0] "Följande program kommer att byta leverantör:"
 msgstr[1] "Följande %d program kommer att byta leverantör:"
 
 #: src/Summary.cc:1151
-#, boost-format, c-format
-msgid "The following package has no support information from it's vendor:"
+#, c-format, boost-format
+msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "Följande paket har ingen supportinformation från sin leverantör:"

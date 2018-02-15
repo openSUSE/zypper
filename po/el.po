@@ -1252,7 +1252,7 @@ msgstr[1] "Οι ακόλουθες εφαρμογές %d θα αλλάξουν �
 
 #: src/Summary.cc:1151
 #, fuzzy, c-format, boost-format
-msgid "The following package has no support information from it's vendor:"
+msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "Το ακόλουθο πακέτο δεν υποστηρίζεται από τον προμηθευτή του:"
