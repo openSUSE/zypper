@@ -163,9 +163,6 @@ ELSE()
   INCLUDE_DIRECTORIES( ${LibSolv_INCLUDE_DIRS} )
 ENDIF()
 
-# libsolv uses expat and has open references to it:
-FIND_PACKAGE(EXPAT REQUIRED)
-
 FIND_PACKAGE(OpenSSL REQUIRED)
 
 FIND_PACKAGE(Udev)

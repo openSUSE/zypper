@@ -12,7 +12,7 @@ before_install:
 - docker pull opensuse:tumbleweed
 - docker run -i -d --name test opensuse:tumbleweed bash
 - docker exec test zypper ref
-- docker exec test zypper in -y --recommends cmake openssl-devel boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz libxml2-devel libproxy-devel pkg-config libsolv-devel libsolv-tools ruby libexpat-devel rpm-devel libcurl-devel libboost_program_options*-devel libboost_test*-devel libudev-devel xorg-x11-fonts-core xorg-x11-fonts texlive-lm-fonts
+- docker exec test zypper in -y --recommends cmake openssl-devel boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz libxml2-devel libproxy-devel pkg-config libsolv-devel libsolv-tools ruby rpm-devel libcurl-devel libboost_program_options*-devel libboost_test*-devel libudev-devel xorg-x11-fonts-core xorg-x11-fonts texlive-lm-fonts
 
 script:
 - docker cp ../libzypp/ test:/root

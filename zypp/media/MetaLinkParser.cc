@@ -17,12 +17,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <expat.h>
 
 #include <vector>
 #include <algorithm>
 #include <iostream>
 #include <fstream>
+
+#include <libxml2/libxml/SAX2.h>
 
 using namespace std;
 using namespace zypp::base;
@@ -86,13 +87,13 @@ struct ml_url {
   string url;
 };
 
-static void XMLCALL startElement(void *userData, const char *name, const char **atts);
-static void XMLCALL endElement(void *userData, const char *name);
-static void XMLCALL characterData(void *userData, const XML_Char *s, int len);
+static void XMLCALL startElement(void *userData, const xmlChar *name, const xmlChar **atts);
+static void XMLCALL endElement(void *userData, const xmlChar *name);
+static void XMLCALL characterData(void *userData, const xmlChar *s, int len);
 
 struct ml_parsedata : private zypp::base::NonCopyable {
   ml_parsedata()
-    : parser( XML_ParserCreate(NULL) )
+    : parser( nullptr )
     , depth( 0 )
     , state( STATE_START )
     , statedepth( 0 )
@@ -121,18 +122,27 @@ struct ml_parsedata : private zypp::base::NonCopyable {
 	swtab[sw->from] = sw;
       sbtab[sw->to] = sw->from;
     }
-    XML_SetUserData(parser, this);
-    XML_SetElementHandler(parser, startElement, endElement);
-    XML_SetCharacterDataHandler(parser, characterData);
+
+    xmlSAXHandler sax;
+    memset(&sax, 0, sizeof(sax));
+    sax.startElement = startElement;
+    sax.endElement = endElement;
+    sax.characters = characterData;
+
+    //internally creates a copy of xmlSaxHandler, so having it as local variable is save
+    parser = xmlCreatePushParserCtxt(&sax, this, NULL, 0, NULL);
   }
 
   ~ml_parsedata()
   {
-    XML_ParserFree(parser);
+    if (parser) {
+      xmlFreeParserCtxt(parser);
+      parser = nullptr;
+    }
     free(content);
   }
 
-  XML_Parser parser;
+  xmlParserCtxtPtr parser;
   int depth;
   enum state state;
   int statedepth;
@@ -164,18 +174,22 @@ struct ml_parsedata : private zypp::base::NonCopyable {
 };
 
 static const char *
-find_attr(const char *txt, const char **atts)
+find_attr(const char *txt, const xmlChar **atts)
 {
+  if(!atts) {
+    return 0;
+  }
+
   for (; *atts; atts += 2)
     {
-      if (!strcmp(*atts, txt))
-        return atts[1];
+      if (!strcmp(reinterpret_cast<const char*>(*atts), txt))
+        return reinterpret_cast<const char*>(atts[1]);
     }
   return 0;
 }
 
 static void XMLCALL
-startElement(void *userData, const char *name, const char **atts)
+startElement(void *userData, const xmlChar *name, const xmlChar **atts)
 {
   struct ml_parsedata *pd = reinterpret_cast<struct ml_parsedata *>(userData);
   struct stateswitch *sw;
@@ -188,7 +202,7 @@ startElement(void *userData, const char *name, const char **atts)
   if (!pd->swtab[pd->state])
     return;
   for (sw = pd->swtab[pd->state]; sw->from == pd->state; sw++)  /* find name in statetable */
-    if (sw->ename == name)
+    if (sw->ename == reinterpret_cast<const char *>(name))
       break;
   if (sw->from != pd->state)
     return;
@@ -313,7 +327,7 @@ hexstr2bytes(unsigned char *buf, const char *str, int buflen)
 }
 
 static void XMLCALL
-endElement(void *userData, const char *name)
+endElement(void *userData, const xmlChar *name)
 {
   struct ml_parsedata *pd = reinterpret_cast<struct ml_parsedata *>(userData);
   // printf("end depth %d-%d name %s\n", pd->depth, pd->statedepth, name);
@@ -383,7 +397,7 @@ endElement(void *userData, const char *name)
 }
 
 static void XMLCALL
-characterData(void *userData, const XML_Char *s, int len)
+characterData(void *userData, const xmlChar *s, int len)
 {
   struct ml_parsedata *pd = reinterpret_cast<struct ml_parsedata *>(userData);
   int l;
@@ -438,8 +452,10 @@ MetaLinkParser::parseBytes(const char *buf, size_t len)
 {
   if (!len)
     return;
-  if (XML_Parse(pd->parser, buf, len, 0) == XML_STATUS_ERROR)
+
+  if (xmlParseChunk(pd->parser, buf, len, 0)) {
     ZYPP_THROW(Exception("Parse Error"));
+  }
 }
 
 static bool urlcmp(const ml_url &a, const ml_url &b)
@@ -450,8 +466,9 @@ static bool urlcmp(const ml_url &a, const ml_url &b)
 void
 MetaLinkParser::parseEnd()
 {
-  if (XML_Parse(pd->parser, 0, 0, 1) == XML_STATUS_ERROR)
+  if (xmlParseChunk(pd->parser, NULL, 0, 1)) {
     ZYPP_THROW(Exception("Parse Error"));
+  }
   if (pd->nurls)
     stable_sort(pd->urls.begin(), pd->urls.end(), urlcmp);
 }
