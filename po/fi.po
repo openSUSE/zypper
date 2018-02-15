@@ -20,16 +20,16 @@ msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-07-10 15:05+0000\n"
-"Last-Translator: Jyri Palokangas <jmp@opensuse.org>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/libzypp/master/fi/"
-">\n"
+"PO-Revision-Date: 2018-02-15 11:35+0000\n"
+"Last-Translator: Tommi Nieminen <software@legisign.org>\n"
+"Language-Team: Finnish "
+"<https://l10n.opensuse.org/projects/libzypp/master/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -1491,9 +1491,8 @@ msgstr ""
 "Yritettiin lisätä avain %s avainrenkaaseen %s, mutta tiedostoa ei löydetty"
 
 #: zypp/KeyRing.cc:583
-#, fuzzy
 msgid "Failed to import key."
-msgstr "Avaimen tuonti tiedostosta %1% epäonnistui"
+msgstr "Avaimen tuonti epäonnistui."
 
 #: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
@@ -3940,21 +3939,20 @@ msgstr "Tehdään seuraavat toiminnot:"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "(ei vanhene)"
+msgstr "ei vanhene"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "vanhentunut: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "vanhenee: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
@@ -3973,11 +3971,11 @@ msgstr "(vanhenee 24 tunnin kuluessa)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:96
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(vanhenee 24 tunnin kuluessa)"
-msgstr[1] "(vanhenee 24 tunnin kuluessa)"
+msgstr[0] "(vanhenee %d päivässä)"
+msgstr[1] "(vanhenee %d päivässä)"
 
 #: zypp/RepoManager.cc:312
 #, boost-format
@@ -4021,11 +4019,10 @@ msgstr "Tuntematon palvelu '%1%': Poistetaan orpo palvelulähde '%2%'"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1098
-#, fuzzy
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "Annetuista verkko-osoitteista ei löytynyt kelpaavia metatietoja"
-msgstr[1] "Annetuista verkko-osoitteista ei löytynyt kelpaavia metatietoja"
+msgstr[0] "Annetusta verkko-osoitteesta ei löytynyt kelvollista metatietoa"
+msgstr[1] "Annetuista verkko-osoitteista ei löytynyt kelvollista metatietoa"
 
 #: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
 #, c-format, boost-format
@@ -4401,6 +4398,8 @@ msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
 msgstr ""
+"Luo liitospiste: Kirjoitettavissa olevaa kansiota ei löydy liitospisteen "
+"luomiseksi"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
@@ -4422,9 +4421,8 @@ msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "Tarvitaan joko %s tai %s -attribuutti."
 
 #: zypp/repo/PackageProvider.cc:216
-#, fuzzy
 msgid "Signature verification failed"
-msgstr " suoritus epäonnistui"
+msgstr "Allekirjoituksen todennus epäonnistui"
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:388
@@ -4618,9 +4616,8 @@ msgid "break %s by ignoring some of its dependencies"
 msgstr "jätä %s riippuvuuksia huomioimatta"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
-#, fuzzy
 msgid "generally ignore of some dependencies"
-msgstr "jätä joitakin vaatimuksia huomiotta"
+msgstr "jätä joitakin riippuvuuksia huomiotta"
 
 #: zypp/solver/detail/SATResolver.cc:979
 #, c-format, boost-format
@@ -4744,9 +4741,9 @@ msgid "keep %s"
 msgstr "pidä %s"
 
 #: zypp/solver/detail/SATResolver.cc:1170
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "remove lock to allow installation of %s"
-msgstr "Älä estä %s asentamista"
+msgstr "poista lukitus asentaaksesi: %s"
 
 #: zypp/solver/detail/SATResolver.cc:1221
 #: zypp/solver/detail/SATResolver.cc:1242
@@ -4915,7 +4912,7 @@ msgstr "Julkisen avaimen %1% poisto epäonnistui"
 
 #: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
-msgstr ""
+msgstr "Pakettia ei ole allekirjoitettu!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4970,9 +4967,8 @@ msgstr "luotiin varmuuskopio %s"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2412
-#, fuzzy
 msgid "Signature is OK"
-msgstr "Allekirjoitustiedostoa %s ei löydetty"
+msgstr "Allekirjoitus kelpaa"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2414
@@ -4981,15 +4977,13 @@ msgstr "Tuntematon allekirjoituksen tyyppi"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2416
-#, fuzzy
 msgid "Signature does not verify"
-msgstr "Allekirjoitustiedostoa %s ei löydetty"
+msgstr "Allekirjoitusta ei voida todentaa"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2418
-#, fuzzy
 msgid "Signature is OK, but key is not trusted"
-msgstr "Allekirjoitustiedostoa %s ei löydetty"
+msgstr "Allekirjoitus kelpaa, mutta avain ei ole luotettu"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2420
@@ -5004,7 +4998,7 @@ msgstr "Tiedostoa ei ole tai allekirjoitusta ei voi tarkistaa"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
-msgstr ""
+msgstr "Tiedosto on allekirjoittamaton"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
