@@ -27,6 +27,7 @@
 #endif
 
 #include "zypp/Digest.h"
+#include "zypp/base/PtrTypes.h"
 
 namespace zypp {
 
@@ -61,26 +62,27 @@ namespace zypp {
     // private data
     class Digest::P
     {
-    	P(const P& p);
-    	const P& operator=(const P& p);
+      P(const P& p);
+      const P& operator=(const P& p);
+
       public:
-    	P();
-    	~P();
+        typedef zypp::shared_ptr<EVP_MD_CTX> EvpDataPtr;
+        P();
+        ~P();
 
-        EVP_MD_CTX *mdctx;
+        EvpDataPtr mdctx;
 
-    	const EVP_MD *md;
-    	unsigned char md_value[EVP_MAX_MD_SIZE];
-    	unsigned md_len;
+        const EVP_MD *md;
+        unsigned char md_value[EVP_MAX_MD_SIZE];
+        unsigned md_len;
 
-    	bool initialized : 1;
-    	bool finalized : 1;
-    	static bool openssl_digests_added;
+        bool finalized : 1;
+        static bool openssl_digests_added;
 
-    	std::string name;
+        std::string name;
 
-    	inline bool maybeInit();
-    	inline void cleanup();
+        inline bool maybeInit();
+        inline void cleanup();
     };
 
 
@@ -90,7 +92,6 @@ namespace zypp {
 
     Digest::P::P() :
       md(NULL),
-      initialized(false),
       finalized(false)
     {
     }
@@ -104,47 +105,43 @@ namespace zypp {
     {
       if(!openssl_digests_added)
       {
-      	OPENSSL_config(NULL);
-      	ENGINE_load_builtin_engines();
-      	ENGINE_register_all_complete();
-    	OpenSSL_add_all_digests();
-    	openssl_digests_added = true;
+        OPENSSL_config(NULL);
+        ENGINE_load_builtin_engines();
+        ENGINE_register_all_complete();
+        OpenSSL_add_all_digests();
+        openssl_digests_added = true;
       }
 
-      if(!initialized)
+      if(!mdctx)
       {
-    	md = EVP_get_digestbyname(name.c_str());
-    	if(!md)
-    	    return false;
+        md = EVP_get_digestbyname(name.c_str());
+        if(!md)
+          return false;
 
 #if OPENSSL_VERSION_NUMBER < 0x10100000L
-        mdctx = (EVP_MD_CTX*) malloc(sizeof(EVP_MD_CTX));
-        EVP_MD_CTX_init(mdctx);
+        EvpDataPtr tmp_mdctx(EVP_MD_CTX_create(), EVP_MD_CTX_destroy);
 #else
-        mdctx = EVP_MD_CTX_new();
+        EvpDataPtr tmp_mdctx(EVP_MD_CTX_new(), EVP_MD_CTX_free);
 #endif
-        if(!EVP_DigestInit_ex(mdctx, md, NULL))
-    	    return false;
+        if (!tmp_mdctx)
+          return false;
 
-    	md_len = 0;
-    	::memset(md_value, 0, sizeof(md_value));
-    	initialized = true;
+        if (!EVP_DigestInit_ex(tmp_mdctx.get(), md, NULL)) {
+          return false;
+        }
+
+        md_len = 0;
+        ::memset(md_value, 0, sizeof(md_value));
+
+        mdctx.swap(tmp_mdctx);
       }
       return true;
     }
 
     void Digest::P::cleanup()
     {
-      if(initialized)
-      {
-#if OPENSSL_VERSION_NUMBER < 0x10100000L
-        EVP_MD_CTX_cleanup(mdctx);
-#else
-        EVP_MD_CTX_free(mdctx);
-#endif
-    	initialized = false;
-    	finalized = false;
-      }
+      mdctx.reset();
+      finalized = false;
     }
 
     Digest::Digest() : _dp(new P())
@@ -160,7 +157,7 @@ namespace zypp {
     {
       if(name.empty()) return false;
 
-      if(_dp->initialized)
+      if(_dp->mdctx)
     	_dp->cleanup();
 
       _dp->name = name;
@@ -175,15 +172,15 @@ namespace zypp {
 
     bool Digest::reset()
     {
-      if (!_dp->initialized)
-	return false;
+      if (!_dp->mdctx)
+        return false;
       if(!_dp->finalized)
-	{
-	  (void)EVP_DigestFinal_ex(_dp->mdctx, _dp->md_value, &_dp->md_len);
-          _dp->finalized = true;
-	}
-      if(!EVP_DigestInit_ex(_dp->mdctx, _dp->md, NULL))
-	return false;
+      {
+        (void)EVP_DigestFinal_ex(_dp->mdctx.get(), _dp->md_value, &_dp->md_len);
+        _dp->finalized = true;
+      }
+      if(!EVP_DigestInit_ex(_dp->mdctx.get(), _dp->md, NULL))
+        return false;
       _dp->finalized = false;
       return true;
     }
@@ -195,7 +192,7 @@ namespace zypp {
 
       if(!_dp->finalized)
       {
-    	if(!EVP_DigestFinal_ex(_dp->mdctx, _dp->md_value, &_dp->md_len))
+      if(!EVP_DigestFinal_ex(_dp->mdctx.get(), _dp->md_value, &_dp->md_len))
     	    return std::string();
 
     	_dp->finalized = true;
@@ -220,7 +217,7 @@ namespace zypp {
 
       if(!_dp->finalized)
       {
-        if(!EVP_DigestFinal_ex(_dp->mdctx, _dp->md_value, &_dp->md_len))
+        if(!EVP_DigestFinal_ex(_dp->mdctx.get(), _dp->md_value, &_dp->md_len))
             return r;
         _dp->finalized = true;
       }
@@ -247,7 +244,7 @@ namespace zypp {
     	    return false;
 
       }
-      if(!EVP_DigestUpdate(_dp->mdctx, reinterpret_cast<const unsigned char*>(bytes), len))
+      if(!EVP_DigestUpdate(_dp->mdctx.get(), reinterpret_cast<const unsigned char*>(bytes), len))
     	return false;
 
       return true;
