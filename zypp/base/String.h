@@ -142,10 +142,10 @@ namespace zypp
 #endif
 
     inline std::string asString( const char * t )
-    { return t; }
+    { return t == nullptr ? std::string() : t; }
 
     inline std::string asString( char * t )
-    { return t; }
+    { return t == nullptr ? std::string() : t; }
 
     template<class Tp>
         inline std::string asString( const Tp &t )
