@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2018-02-15 15:02+0000\n"
+"PO-Revision-Date: 2018-02-20 20:02+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
 "\n"
@@ -819,7 +819,7 @@ msgstr "Tarkoititko %1%?"
 #: src/SolverRequester.cc:478
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "Sivuutetaan valinta %s päivitettäessä päivityspino ensin."
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -827,7 +827,7 @@ msgstr ""
 #: src/Summary.cc:383
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "Tuote \"%1%\" pitää päivittää suorittamalla \"%2%\"!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -835,8 +835,8 @@ msgstr ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "...ja %1% muu kohde."
+msgstr[1] "...ja %1% muuta kohdetta."
 
 #: src/Summary.cc:552
 #, c-format, boost-format
@@ -1478,6 +1478,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Paketinhallinta pitää käynnistää uudelleen. (Suorita tämä komento uudestaan "
+"päivityspinon päivityttyä)"
 
 #: src/Summary.cc:1507
 #, fuzzy
@@ -1494,59 +1496,59 @@ msgstr "Vaatii järjestelmän uudelleenkäynnistyksen: "
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1524
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Harkitse, voitko perua:"
 
 #: src/Zypper.cc:97
 msgid "Set a descriptive name for the service."
-msgstr ""
+msgstr "Aseta palvelulle kuvaileva nimi."
 
 #: src/Zypper.cc:98
 msgid "Enable a disabled service."
-msgstr ""
+msgstr "Ota käytöstä poistettu palvelu käyttöön."
 
 #: src/Zypper.cc:99
 msgid "Disable the service (but don't remove it)."
-msgstr ""
+msgstr "Poista palvelu käytöstä (mutta älä poista sitä)."
 
 #: src/Zypper.cc:100
 msgid "Enable auto-refresh of the service."
-msgstr ""
+msgstr "Ota käyttöön palvelun automaattivirkistys."
 
 #: src/Zypper.cc:101
 msgid "Disable auto-refresh of the service."
-msgstr ""
+msgstr "Poista palvelun automaattivirkistys käytöstä."
 
 #: src/Zypper.cc:119
 msgid "Set a descriptive name for the repository."
-msgstr ""
+msgstr "Aseta ohjelmalähteelle kuvaileva nimi."
 
 #: src/Zypper.cc:120
 msgid "Enable a disabled repository."
-msgstr ""
+msgstr "Ota käytöstä poistettu ohjelmalähde käyttöön."
 
 #: src/Zypper.cc:121
 msgid "Disable the repository (but don't remove it)."
-msgstr ""
+msgstr "Poista ohjelmalähde käytöstä (mutta älä poista sitä)."
 
 #: src/Zypper.cc:122
 msgid "Enable auto-refresh of the repository."
-msgstr ""
+msgstr "Ota käyttöön ohjelmalähteen automaattivirkistys."
 
 #: src/Zypper.cc:123
 msgid "Disable auto-refresh of the repository."
-msgstr ""
+msgstr "Poista ohjelmalähteesn automaattivirkistys käytöstä."
 
 #: src/Zypper.cc:124
 msgid "Set priority of the repository."
-msgstr ""
+msgstr "Aseta ohjelmalähteen etusijaisuus."
 
 #: src/Zypper.cc:125
 msgid "Enable RPM files caching."
-msgstr ""
+msgstr "Käytä RPM-tiedostojen välimuistia."
 
 #: src/Zypper.cc:126
 msgid "Disable RPM files caching."
-msgstr ""
+msgstr "Poista RPM-välimuisti käytöstä."
 
 #: src/Zypper.cc:127
 msgid "Enable GPG check for this repository."
@@ -1582,6 +1584,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Käytä yleistä GPG-tarkistusasetusta tiedostosta /etc/zypp/zypp.conf. Tämä on "
+"oletus."
 
 #: src/Zypper.cc:150
 msgid "Create a solver test case for debugging."
@@ -1614,32 +1618,38 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Vastaa automaattisesti \"kyllä\" kolmannen osapuolen "
+"käyttöoikeussopimuskyselyihin. Lisätietoa: \"man zypper\"."
 
 #: src/Zypper.cc:171
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Hyväksy automaattisesti vain tuotteiden käyttöoikeussopimukset. Lisätietoa: "
+"\"man zypper\"."
 
 #: src/Zypper.cc:180
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"Katsotaanko sopivat valinnaiset viankorjaukset tarpeellisiksi vai "
+"ohitetaanko ne."
 
 #: src/Zypper.cc:183
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Oletuksena on ohittaa valinnaiset viankorjaukset."
 
 #: src/Zypper.cc:184
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Oletuksena on ottaa mukaan valinnaiset viankorjaukset."
 
 #. translator: %1% is a list of command line options
 #: src/Zypper.cc:224
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
-msgstr ""
+msgstr "Seuraavat valinnat ovat keskenään ristiriidassa: %1%"
 
 #: src/Zypper.cc:253
 msgid ""
@@ -1654,6 +1664,8 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"PackageKitiä voidaan pyytää keskeyttämään toimintansa heti kun mahdollista, "
+"mutta riippuu PackageKitistä, kuinka nopeasti se vastaa pyyntöön."
 
 #: src/Zypper.cc:262
 msgid "Ask PackageKit to quit?"
@@ -1672,11 +1684,15 @@ msgstr "Yritetäänkö uudelleen?"
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
+"Havaittiin vanhentunut komentorivivalitsin %1%. Käytä sen sijaan yleistä "
+"valintaa %2%."
 
 #: src/Zypper.cc:347
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
+"Havaittiin vanhentunut komentorivivalitsin %1%. Käytä sen sijaan valintaa "
+"%2%."
 
 #: src/Zypper.cc:457
 #, fuzzy
@@ -1690,7 +1706,7 @@ msgstr "Komento"
 
 #: src/Zypper.cc:463
 msgid "Expert options:"
-msgstr ""
+msgstr "Asiantuntijavalinnat:"
 
 #: src/Zypper.cc:466
 #, fuzzy
@@ -1711,7 +1727,7 @@ msgstr "Komento"
 #: src/Zypper.cc:473
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Sama kuin %1%."
 
 #: src/Zypper.cc:610 src/Zypper.cc:1571
 msgid "Unexpected exception."
@@ -1979,6 +1995,8 @@ msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
 msgstr ""
+"     Alikomennot:\n"
+"\tsubcommand\t\tLuettele käytettävissä olevat alikomennot.\n"
 
 #: src/Zypper.cc:767
 #, fuzzy
@@ -2006,6 +2024,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"Ellei \"%1%\" ole kirjoitusvirhe, se ei todennäköisesti ole sisäänrakennettu "
+"vaan alikomennon tai liitännäisen tarjoama komento (ks. \"%2%\")."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -2015,6 +2035,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"Tällöin alikomennon tarjoava paketti pitää asentaa ensin. Tällaisten "
+"pakettien nimenä on usein \"%1%\" tai \"%2%\"."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -2042,11 +2064,11 @@ msgstr "Kokonaisluvun tulee olla väliltä %d ja %d"
 #: src/Zypper.cc:1121
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
-msgstr ""
+msgstr "Alikomento %1% ei tue zypperin yleisiä asetuksia."
 
 #: src/Zypper.cc:1142
 msgid "Enforced setting"
-msgstr ""
+msgstr "Pakotettu asetus"
 
 #: src/Zypper.cc:1152
 msgid "User data string must not contain nonprintable or newline characters!"
@@ -2123,7 +2145,7 @@ msgstr "Valinta %s ei vaikuta täällä. Jätetään huomioimatta."
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1460
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "zypper-komentotulkki ei tue alikomentojen suorittamista."
 
 #: src/Zypper.cc:1539
 #, c-format, boost-format
@@ -2229,6 +2251,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Älä vaadi käyttäjän vuorovaikutusta. Vastaa yleistä --non-interactive-"
+"valitsinta."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2308,6 +2332,9 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"RPM asentaa lähdepaketit oletusarvoisesti kohteeseen \"%1%\", mutta sitä voi "
+"muuttaa paikallisessa RPM-määrityksessä. Jos olet epävarma, kokeile "
+"suorittaa \"%2%\"."
 
 #: src/Zypper.cc:1825
 #, c-format, boost-format
@@ -2401,17 +2428,17 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1914
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
-msgstr ""
+msgstr "addservice (as) [VALINNAT] <URI> <ALIAS>"
 
 #. translators: command description
 #: src/Zypper.cc:1917
 msgid "Add a repository index service to the system."
-msgstr ""
+msgstr "Lisää ohjelmalähteen indeksipalvelun järjestelmään."
 
 #: src/Zypper.cc:1921
 #, boost-format
 msgid "Type of the service (%1%)."
-msgstr ""
+msgstr "Palvelun tyyppi (%1%)."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1937
@@ -2495,13 +2522,13 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1996
 msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
-msgstr ""
+msgstr "modifyservice (ms) <VALINNAT> <ALIAS|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1999
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
-msgstr ""
+msgstr "modifyservice (ms) <VALINNAT> <%1%>"
 
 #. translators: command description
 #: src/Zypper.cc:2002
@@ -2510,22 +2537,24 @@ msgid ""
 "Modify properties of services specified by alias, number, or URI, or by the "
 "'%1%' aggregate options."
 msgstr ""
+"Muuta aliaksen, luvun, URIn tai \"%1%\"-koostevalinnan määrittämien "
+"palveluiden ominaisuuksia."
 
 #: src/Zypper.cc:2007
 msgid "Apply changes to all services."
-msgstr ""
+msgstr "Ota kaikkien palveluiden muutokset käyttöön."
 
 #: src/Zypper.cc:2008
 msgid "Apply changes to all local services."
-msgstr ""
+msgstr "Ota paikallisten palveluiden muutokset käyttöön."
 
 #: src/Zypper.cc:2009
 msgid "Apply changes to all remote services."
-msgstr ""
+msgstr "Ota kaikkien etäpalveluiden muutokset käyttöön."
 
 #: src/Zypper.cc:2010
 msgid "Apply changes to services of specified type."
-msgstr ""
+msgstr "Ota määritetyn tyypin palveluiden muutokset käyttöön."
 
 #: src/Zypper.cc:2012
 msgid "Add a RIS service repository to enable."
