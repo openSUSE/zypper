@@ -32,6 +32,7 @@ extern "C"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/LocaleGuard.h"
 
 #include "zypp/Date.h"
 #include "zypp/Pathname.h"
@@ -1536,7 +1537,9 @@ namespace
     qva.qva_flags = (VERIFY_DIGEST|VERIFY_SIGNATURE);
 
     RpmlogCapture vresult;
+    LocaleGuard guard( LC_ALL, "C" );	// bsc#1076415: rpm log output is localized, but we need to parse it :(
     int res = ::rpmVerifySignatures( &qva, ts, fd, path_r.basename().c_str() );
+    guard.restore();
 
     ts = rpmtsFree(ts);
     ::Fclose( fd );
