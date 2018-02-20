@@ -252,6 +252,7 @@ SET( zypp_base_HEADERS
   base/Iterable.h
   base/Iterator.h
   base/Json.h
+  base/LocaleGuard.h
   base/LogControl.h
   base/LogTools.h
   base/Logger.h
