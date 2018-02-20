@@ -229,7 +229,7 @@ namespace zypp
 
       /** Dumb serialization.
        * \code
-       *   AttrMatchData ATTRIBUTE SEARCHSTRING [C|X] SERIALIZED_PREDICATE
+       *   AttrMatchData ATTRIBUTE SEARCHSTRING [C|SEARCHMODE|X] SERIALIZED_PREDICATE
        * \endcode
       */
       std::string serialize() const
@@ -237,10 +237,7 @@ namespace zypp
         std::string ret( "AttrMatchData" );
         str::appendEscaped( ret, attr.asString() );
         str::appendEscaped( ret, strMatcher.searchstring() );
-        // TODO: Actually the flag should be serialized too, but for PoolQuery
-        // it's by now sufficient to differ between mode OTHER and others,
-        // i.e. whether to compile or not compile.
-        str::appendEscaped( ret, strMatcher.flags().mode() == Match::OTHER ? "C" : "X" );
+        str::appendEscaped( ret, serializeMode( strMatcher.flags().mode() ) );
         str::appendEscaped( ret, predicateStr );
         return ret;
       }
@@ -260,8 +257,8 @@ namespace zypp
         AttrMatchData ret;
         ret.attr = sat::SolvAttr( words[1] );
         ret.strMatcher = StrMatcher( words[2] );
-        if ( words[3] == "C" )
-          ret.strMatcher.setFlags( Match::OTHER );
+        if ( Match::Mode mode = deserializeMode( words[3] ) )
+          ret.strMatcher.setFlags( mode );
         ret.predicateStr = words[4];
 
         // now the predicate
@@ -316,6 +313,56 @@ namespace zypp
       Predicate        predicate;
       std::string      predicateStr;
       ResKind          kindPredicate = ResKind::nokind;	// holds the 'kind' part if SolvAttr:name looks for an explicit 'kind:name'
+
+    private:
+      /** Serialize \ref strMatcher \ref Match::Mode */
+      static std::string serializeMode( Match::Mode mode_r )
+      {
+	// Legacy code used "[C|X]" to differ just between OTHER (need to (C)ompile) and
+	// using the default search mode. As we now allow to specify a SEARCHMODE we
+	// need to serialize it:
+	switch ( mode_r )
+	{
+#define OUTS(M,S) case Match::M: return #S; break
+	  // (C)ompile
+	  OUTS( OTHER,		C );
+	  // well known modes:
+	  OUTS( STRING,		T );
+	  OUTS( STRINGSTART,	S );
+	  OUTS( STRINGEND,	E );
+	  OUTS( SUBSTRING,	B );
+	  OUTS( GLOB,		G );
+	  OUTS( REGEX,		R );
+#undef OUTS
+	  // everything else use default
+	  case Match::NOTHING:
+	    break;
+	}
+	return "X";
+      }
+
+      /** Deserialize \ref strMatcher \ref Match::Mode */
+      static Match::Mode deserializeMode( const std::string & str_r )
+      {
+	switch ( str_r[0] )
+	{
+#define OUTS(M,C) case *#C: return Match::M; break
+	  // (C)ompile
+	  OUTS( OTHER,		C );
+	  // well known modes:
+	  OUTS( STRING,		T );
+	  OUTS( STRINGSTART,	S );
+	  OUTS( STRINGEND,	E );
+	  OUTS( SUBSTRING,	B );
+	  OUTS( GLOB,		G );
+	  OUTS( REGEX,		R );
+#undef OUTS
+	  // everything else use default
+	  default:
+	    break;
+	}
+	return Match::NOTHING;
+      }
     };
 
     /** \relates AttrMatchData */
@@ -888,40 +935,46 @@ attremptycheckend:
   { _pimpl->_attrs[attr].insert(value); }
 
   void PoolQuery::addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition )
-  { return addDependency( attr, name, op, edition, Arch_empty ); }
+  {
+    // Default Match::OTHER indicates need to compile, i.e. to merge name into the global search string and mode.
+    return addDependency( attr, name, op, edition, Arch_empty, Match::OTHER );
+  }
 
   void PoolQuery::addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition, const Arch & arch )
   {
+    // Default Match::OTHER indicates need to compile, i.e. to merge name into the global search string and mode.
+    return addDependency( attr, name, op, edition, arch, Match::OTHER );
+  }
+
+  void PoolQuery::addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition, const Arch & arch, Match::Mode mode )
+  {
+    if ( op == Rel::NONE )	// will never match.
+      return;
+
     // SolvAttr::name with explicit 'kind:name' will overwrite the default _kinds
     ResKind explicitKind;
-    if ( attr == sat::SolvAttr::name ) explicitKind = ResKind::explicitBuiltin( name );
+    if ( attr == sat::SolvAttr::name )
+      explicitKind = ResKind::explicitBuiltin( name );
 
-    switch ( op.inSwitch() )
+    // Legacy: Match::OTHER and no additional constraints on edition/arch/kind
+    //         require addAttribute, otherwise de-serialisation breaks (serialized
+    //         and de-serialized query could be !=).
+    // From the results POV we could also use the predicated case below.
+    if ( op == Rel::ANY && arch.empty() && !explicitKind && mode == Match::OTHER )
     {
-      case Rel::ANY_e:	// no additional constraint on edition.
-        if ( arch.empty() && !explicitKind )	// no additional constraint on arch/kind
-	{
-	  addAttribute( attr, name );
-	  return;
-	}
-	break;
-
-      case Rel::NONE_e:	// will never match.
-        return;
-
-      default: // go and add the predicated query (uncompiled)
-        break;
+      addAttribute( attr, name );
+      return;
     }
 
     // Match::OTHER indicates need to compile
     // (merge global search strings into name).
     AttrMatchData attrMatchData( attr );
     if ( !explicitKind )
-      attrMatchData.strMatcher = StrMatcher( name, Match::OTHER );
+      attrMatchData.strMatcher = StrMatcher( name, mode );
     else
     {
       // ResKind::explicitBuiltin call above asserts the presence of the ':' in name
-      attrMatchData.strMatcher = StrMatcher( strchr( name.c_str(), ':')+1, Match::OTHER );
+      attrMatchData.strMatcher = StrMatcher( strchr( name.c_str(), ':')+1, mode );
       attrMatchData.kindPredicate = explicitKind;
     }
 

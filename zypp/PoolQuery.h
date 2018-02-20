@@ -287,6 +287,8 @@ namespace zypp
     void addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition );
     /**  \overload also restricting architecture */
     void addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition, const Arch & arch );
+    /**  \overload also use an individual Match::Mode for the \a name */
+    void addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition, const Arch & arch, Match::Mode mode );
 
     /** \overload Query <tt>"name|global == edition"</tt>. */
     void addDependency( const sat::SolvAttr & attr, const std::string & name, const Edition & edition )
