@@ -1525,6 +1525,9 @@ Other Commands
 	*--print* 'format'::
 		For each associated system service print 'format' on the standard output, followed by a newline. Any *%s* directive in 'format' is replaced by the system service name.
 
+	*-d*, *--debugFile* 'filename'::
+		Output a file with all proc entries that make it into the final set of used open files. This can be submitted as additional information in a bug report.
+
 	Examples: :: {nop}
 
 		$ *zypper ps -ss*;;

@@ -24,10 +24,12 @@ struct PsOptions : public Options
 
   unsigned	_shortness;	//< 1:wo file, 2:only proc with services, 3:service names only
   std::string	_format;	//< format string for --print / shortness 3
+  std::string _debugFile; //< file name for the --debugFile switch
 
   bool tableWithFiles() const		{ return _shortness < 1; }
   bool tableWithNonServiceProcs() const	{ return _shortness < 2; }
   bool printServiceNamesOnly() const	{ return _shortness >= 3; }
+  bool debugEnabled() const {return (!_debugFile.empty());}
 };
 
 /** Execute ps.

@@ -103,6 +103,10 @@ namespace
     // Here: Table output
     _zypper.out().info(_("Checking for running processes using deleted libraries..."), Out::HIGH );
     CheckAccessDeleted checker( false );	// wait for explicit call to check()
+
+    if(options().debugEnabled())
+      checker.setDebugOutputFile(options()._debugFile);
+
     loadData( checker );
 
     Table t;
