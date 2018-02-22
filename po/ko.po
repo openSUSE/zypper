@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-05 18:14+0200\n"
-"PO-Revision-Date: 2018-01-30 05:36+0000\n"
+"PO-Revision-Date: 2018-02-22 10:03+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
@@ -1154,7 +1154,7 @@ msgstr[0] "다음 응용 프로그램의 제조업체가 변경됩니다."
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "다음 %d 패키지는 제조업체에서 지원하지 않습니다."
+msgstr[0] "다음 %d개의 패키지에는 제조업체의 지원 정보가 없습니다."
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
