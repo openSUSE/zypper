@@ -12,6 +12,8 @@
 #include <iostream>
 #include <fstream>
 #include <unordered_set>
+#include <iterator>
+#include <stdio.h>
 #include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -49,132 +51,6 @@ namespace zypp
     /** lsof output line + files extracted so far for this PID */
     typedef std::pair<std::string,std::unordered_set<std::string>> CacheEntry;
 
-    /** Add \c cache to \c data if the process is accessing deleted files.
-     * \c pid string in \c cache is the proc line \c (pcuLR), \c files
-     * are already in place. Always clear the \c cache.files!
-    */
-    inline void addDataIf( std::vector<CheckAccessDeleted::ProcInfo> & data_r, const CacheEntry & cache_r )
-    {
-      const auto & filelist( cache_r.second );
-
-      if ( filelist.empty() )
-        return;
-
-      // at least one file access so keep it:
-      data_r.push_back( CheckAccessDeleted::ProcInfo() );
-      CheckAccessDeleted::ProcInfo & pinfo( data_r.back() );
-      pinfo.files.insert( pinfo.files.begin(), filelist.begin(), filelist.end() );
-
-      const std::string & pline( cache_r.first );
-      std::string commandname;	// pinfo.command if still needed...
-      for_( ch, pline.begin(), pline.end() )
-      {
-        switch ( *ch )
-        {
-          case 'p':
-            pinfo.pid = &*(ch+1);
-            break;
-          case 'R':
-            pinfo.ppid = &*(ch+1);
-            break;
-          case 'u':
-            pinfo.puid = &*(ch+1);
-            break;
-          case 'L':
-            pinfo.login = &*(ch+1);
-            break;
-          case 'c':
-	    if ( pinfo.command.empty() )
-	      commandname = &*(ch+1);
-	    break;
-        }
-        if ( *ch == '\n' ) break;		// end of data
-        do { ++ch; } while ( *ch != '\0' );	// skip to next field
-      }
-
-      if ( pinfo.command.empty() )
-      {
-	// the lsof command name might be truncated, so we prefer /proc/<pid>/exe
-	pinfo.command = filesystem::readlink( Pathname("/proc")/pinfo.pid/"exe" ).basename();
-	if ( pinfo.command.empty() )
-	  pinfo.command = std::move(commandname);
-      }
-    }
-
-
-    /** Add file to cache if it refers to a deleted executable or library file:
-     * - Either the link count \c(k) is \c 0, or no link cout is present.
-     * - The type \c (t) is set to \c REG or \c DEL
-     * - The filedescriptor \c (f) is set to \c txt, \c mem or \c DEL
-    */
-    inline void addCacheIf( CacheEntry & cache_r, const std::string & line_r, bool verbose_r  )
-    {
-      const char * f = 0;
-      const char * t = 0;
-      const char * n = 0;
-
-      for_( ch, line_r.c_str(), ch+line_r.size() )
-      {
-        switch ( *ch )
-        {
-          case 'k':
-            if ( *(ch+1) != '0' )	// skip non-zero link counts
-              return;
-            break;
-          case 'f':
-            f = ch+1;
-            break;
-          case 't':
-            t = ch+1;
-            break;
-          case 'n':
-            n = ch+1;
-            break;
-        }
-        if ( *ch == '\n' ) break;		// end of data
-        do { ++ch; } while ( *ch != '\0' );	// skip to next field
-      }
-
-      if ( !t || !f || !n )
-        return;	// wrong filedescriptor/type/name
-
-      if ( !(    ( *t == 'R' && *(t+1) == 'E' && *(t+2) == 'G' && *(t+3) == '\0' )
-              || ( *t == 'D' && *(t+1) == 'E' && *(t+2) == 'L' && *(t+3) == '\0' ) ) )
-        return;	// wrong type
-
-      if ( !(    ( *f == 'm' && *(f+1) == 'e' && *(f+2) == 'm' && *(f+3) == '\0' )
-              || ( *f == 't' && *(f+1) == 'x' && *(f+2) == 't' && *(f+3) == '\0' )
-              || ( *f == 'D' && *(f+1) == 'E' && *(f+2) == 'L' && *(f+3) == '\0' )
-              || ( *f == 'l' && *(f+1) == 't' && *(f+2) == 'x' && *(f+3) == '\0' ) ) )
-        return;	// wrong filedescriptor type
-
-      if ( str::contains( n, "(stat: Permission denied)" ) )
-        return;	// Avoid reporting false positive due to insufficient permission.
-
-      if ( ! verbose_r )
-      {
-        if ( ! ( str::contains( n, "/lib" ) || str::contains( n, "bin/" ) ) )
-          return; // Try to avoid reporting false positive unless verbose.
-      }
-
-      if ( *f == 'm' || *f == 'D' )	// skip some wellknown nonlibrary memorymapped files
-      {
-        static const char * black[] = {
-            "/SYSV"
-          , "/var/run/"
-          , "/var/lib/sss/"
-          , "/dev/"
-        };
-        for_( it, arrayBegin( black ), arrayEnd( black ) )
-        {
-          if ( str::hasPrefix( n, *it ) )
-            return;
-        }
-      }
-      // Add if no duplicate
-      cache_r.second.insert( n );
-    }
-
     /////////////////////////////////////////////////////////////////
     /// \class FilterRunsInLXC
     /// \brief Functor guessing whether \a PID is running in a container.
@@ -198,100 +74,328 @@ namespace zypp
 
       ino_t pidNS;
     };
+  } //namespace
+  /////////////////////////////////////////////////////////////////
 
-#if 0
-    void lsofdebug( const Pathname & file_r )
+  class CheckAccessDeleted::Impl
+  {
+  public:
+    CheckAccessDeleted::Impl *clone() const;
+
+    bool addDataIf( const CacheEntry & cache_r, std::vector<std::string> *debMap = nullptr );
+    void addCacheIf( CacheEntry & cache_r, const std::string & line_r, std::vector<std::string> *debMap = nullptr );
+
+    std::map<pid_t,CacheEntry> filterInput( externalprogram::ExternalDataSource &source );
+    CheckAccessDeleted::size_type createProcInfo( const std::map<pid_t,CacheEntry> &in );
+
+    std::vector<CheckAccessDeleted::ProcInfo> _data;
+    bool _fromLsofFileMode = false; // Set if we currently process data from a debug file
+    bool _verbose = false;
+
+    std::map<pid_t,std::vector<std::string>> debugMap; //will contain all used lsof files after filtering
+    Pathname _debugFile;
+  };
+
+  CheckAccessDeleted::Impl *CheckAccessDeleted::Impl::clone() const
+  {
+    Impl *myClone = new Impl( *this );
+    return myClone;
+  }
+
+  /** Add \c cache to \c data if the process is accessing deleted files.
+   * \c pid string in \c cache is the proc line \c (pcuLR), \c files
+   * are already in place. Always clear the \c cache.files!
+  */
+  inline bool CheckAccessDeleted::Impl::addDataIf( const CacheEntry & cache_r, std::vector<std::string> *debMap )
+  {
+    const auto & filelist( cache_r.second );
+
+    if ( filelist.empty() )
+      return false;
+
+    // at least one file access so keep it:
+    _data.push_back( CheckAccessDeleted::ProcInfo() );
+    CheckAccessDeleted::ProcInfo & pinfo( _data.back() );
+    pinfo.files.insert( pinfo.files.begin(), filelist.begin(), filelist.end() );
+
+    const std::string & pline( cache_r.first );
+    std::string commandname;	// pinfo.command if still needed...
+    std::ostringstream pLineStr; //rewrite the first line in debug cache
+    for_( ch, pline.begin(), pline.end() )
     {
-      std::ifstream infile( file_r.c_str() );
-      USR << infile << endl;
-      std::vector<std::string> fields;
-      CacheEntry cache;
-      for( iostr::EachLine in( infile ); in; in.next() )
+      switch ( *ch )
       {
-	std::string field( *in );
-	if ( field[0] == 'f' || field[0] == 'p' )
-	{
-	  if ( !fields.empty() )
-	  {
-	    // consume
-	    std::string line( str::join( fields, "\n" ) );
-	    for ( char & c : line )
-	    { if ( c == '\n' ) c = '\0'; }
-	    line.push_back( '\n' );
+        case 'p':
+          pinfo.pid = &*(ch+1);
+          if ( debMap )
+            pLineStr <<&*(ch)<<'\0';
+          break;
+        case 'R':
+          pinfo.ppid = &*(ch+1);
+          if ( debMap )
+            pLineStr <<&*(ch)<<'\0';
+          break;
+        case 'u':
+          pinfo.puid = &*(ch+1);
+          if ( debMap )
+            pLineStr <<&*(ch)<<'\0';
+          break;
+        case 'L':
+          pinfo.login = &*(ch+1);
+          if ( debMap )
+            pLineStr <<&*(ch)<<'\0';
+          break;
+        case 'c':
+          if ( pinfo.command.empty() ) {
+            commandname = &*(ch+1);
+            // the lsof command name might be truncated, so we prefer /proc/<pid>/exe
+            if (!_fromLsofFileMode)
+              pinfo.command = filesystem::readlink( Pathname("/proc")/pinfo.pid/"exe" ).basename();
+            if ( pinfo.command.empty() )
+              pinfo.command = std::move(commandname);
+            if ( debMap )
+              pLineStr <<'c'<<pinfo.command<<'\0';
+          }
+          break;
+      }
+      if ( *ch == '\n' ) break;		// end of data
+      do { ++ch; } while ( *ch != '\0' );	// skip to next field
+    }
 
-	    size_t sze = cache.second.size();
-	    addCacheIf( cache, line, false );
-	    if ( sze != cache.second.size() )
-	      USR << fields << endl;
+    //replace the data in the debug cache as well
+    if ( debMap ) {
+      pLineStr<<endl;
+      debMap->front() = pLineStr.str();
+    }
 
-	    fields.clear();
-	  }
-	  if ( field[0] == 'p' )
-	    continue;
-	  fields.push_back( field );
-	}
-	else if ( !fields.empty() )
-	{
-	  fields.push_back( field );
-	}
+    //entry was added
+    return true;
+  }
+
+
+  /** Add file to cache if it refers to a deleted executable or library file:
+   * - Either the link count \c(k) is \c 0, or no link cout is present.
+   * - The type \c (t) is set to \c REG or \c DEL
+   * - The filedescriptor \c (f) is set to \c txt, \c mem or \c DEL
+  */
+  inline void CheckAccessDeleted::Impl::addCacheIf( CacheEntry & cache_r, const std::string & line_r, std::vector<std::string> *debMap )
+  {
+    const char * f = 0;
+    const char * t = 0;
+    const char * n = 0;
+
+    for_( ch, line_r.c_str(), ch+line_r.size() )
+    {
+      switch ( *ch )
+      {
+        case 'k':
+          if ( *(ch+1) != '0' )	// skip non-zero link counts
+            return;
+          break;
+        case 'f':
+          f = ch+1;
+          break;
+        case 't':
+          t = ch+1;
+          break;
+        case 'n':
+          n = ch+1;
+          break;
+      }
+      if ( *ch == '\n' ) break;		// end of data
+      do { ++ch; } while ( *ch != '\0' );	// skip to next field
+    }
+
+    if ( !t || !f || !n )
+      return;	// wrong filedescriptor/type/name
+
+    if ( !(    ( *t == 'R' && *(t+1) == 'E' && *(t+2) == 'G' && *(t+3) == '\0' )
+            || ( *t == 'D' && *(t+1) == 'E' && *(t+2) == 'L' && *(t+3) == '\0' ) ) )
+      return;	// wrong type
+
+    if ( !(    ( *f == 'm' && *(f+1) == 'e' && *(f+2) == 'm' && *(f+3) == '\0' )
+            || ( *f == 't' && *(f+1) == 'x' && *(f+2) == 't' && *(f+3) == '\0' )
+            || ( *f == 'D' && *(f+1) == 'E' && *(f+2) == 'L' && *(f+3) == '\0' )
+            || ( *f == 'l' && *(f+1) == 't' && *(f+2) == 'x' && *(f+3) == '\0' ) ) )
+      return;	// wrong filedescriptor type
+
+    if ( str::contains( n, "(stat: Permission denied)" ) )
+      return;	// Avoid reporting false positive due to insufficient permission.
+
+    if ( ! _verbose )
+    {
+      if ( ! ( str::contains( n, "/lib" ) || str::contains( n, "bin/" ) ) )
+        return; // Try to avoid reporting false positive unless verbose.
+    }
+
+    if ( *f == 'm' || *f == 'D' )	// skip some wellknown nonlibrary memorymapped files
+    {
+      static const char * black[] = {
+          "/SYSV"
+        , "/var/run/"
+        , "/var/lib/sss/"
+        , "/dev/"
+      };
+      for_( it, arrayBegin( black ), arrayEnd( black ) )
+      {
+        if ( str::hasPrefix( n, *it ) )
+          return;
       }
     }
-#endif
-    /////////////////////////////////////////////////////////////////
-  } // namespace
-  ///////////////////////////////////////////////////////////////////
+    // Add if no duplicate
+    if ( debMap && cache_r.second.find(n) == cache_r.second.end() ) {
+      debMap->push_back(line_r);
+    }
+    cache_r.second.insert( n );
+  }
 
-  CheckAccessDeleted::size_type CheckAccessDeleted::check( bool verbose_r )
+  CheckAccessDeleted::CheckAccessDeleted( bool doCheck_r )
+    : _pimpl(new Impl)
   {
-    _data.clear();
+    if ( doCheck_r ) check();
+  }
 
-    static const char* argv[] =
-    {
-      "lsof", "-n", "-FpcuLRftkn0", NULL
-    };
-    ExternalProgram prog( argv, ExternalProgram::Discard_Stderr );
+  CheckAccessDeleted::size_type CheckAccessDeleted::check( const Pathname &lsofOutput_r, bool verbose_r )
+  {
+    _pimpl->_verbose = verbose_r;
+    _pimpl->_fromLsofFileMode = true;
 
+    FILE *inFile = fopen( lsofOutput_r.c_str(), "r" );
+    if ( !inFile ) {
+      ZYPP_THROW( Exception(  str::Format("Opening input file %1% failed.") % lsofOutput_r.c_str() ) );
+    }
+
+    //inFile is closed by ExternalDataSource
+    externalprogram::ExternalDataSource inSource( inFile, nullptr );
+    auto cache = _pimpl->filterInput( inSource );
+    return _pimpl->createProcInfo( cache );
+  }
+
+  std::map<pid_t,CacheEntry> CheckAccessDeleted::Impl::filterInput( externalprogram::ExternalDataSource &source )
+  {
     // cachemap: PID => (deleted files)
     // NOTE: omit PIDs running in a (lxc/docker) container
     std::map<pid_t,CacheEntry> cachemap;
+
+    bool debugEnabled = !_debugFile.empty();
+
     pid_t cachepid = 0;
     FilterRunsInLXC runsInLXC;
-    for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
+    for( std::string line = source.receiveLine(); ! line.empty(); line = source.receiveLine() )
     {
       // NOTE: line contains '\0' separeated fields!
       if ( line[0] == 'p' )
       {
-	str::strtonum( line.c_str()+1, cachepid );	// line is "p<PID>\0...."
-	if ( !runsInLXC( cachepid ) )
-	  cachemap[cachepid].first.swap( line );
-	else
-	  cachepid = 0;	// ignore this pid
+        str::strtonum( line.c_str()+1, cachepid );	// line is "p<PID>\0...."
+        if ( _fromLsofFileMode || !runsInLXC( cachepid ) ) {
+          if ( debugEnabled ) {
+            auto &pidMad = debugMap[cachepid];
+            if ( pidMad.empty() )
+              debugMap[cachepid].push_back( line );
+            else
+              debugMap[cachepid].front() = line;
+          }
+          cachemap[cachepid].first.swap( line );
+        } else {
+          cachepid = 0;	// ignore this pid
+        }
       }
       else if ( cachepid )
       {
-	addCacheIf( cachemap[cachepid], line, verbose_r );
+        auto &dbgMap = debugMap[cachepid];
+        addCacheIf( cachemap[cachepid], line, debugEnabled ? &dbgMap : nullptr);
       }
     }
+    return cachemap;
+  }
+
+  CheckAccessDeleted::size_type CheckAccessDeleted::check( bool verbose_r  )
+  {
+    static const char* argv[] =
+    {
+      "lsof", "-n", "-FpcuLRftkn0", NULL
+    };
+
+    _pimpl->_verbose = verbose_r;
+    _pimpl->_fromLsofFileMode = false;
+
+    ExternalProgram prog( argv, ExternalProgram::Discard_Stderr );
+    std::map<pid_t,CacheEntry> cachemap = _pimpl->filterInput( prog );
 
     int ret = prog.close();
     if ( ret != 0 )
     {
       if ( ret == 129 )
       {
-	ZYPP_THROW( Exception(_("Please install package 'lsof' first.") ) );
+        ZYPP_THROW( Exception(_("Please install package 'lsof' first.") ) );
       }
-      Exception err( str::form("Executing 'lsof' failed (%d).", ret) );
+      Exception err( str::Format("Executing 'lsof' failed (%1%).") % ret );
       err.remember( prog.execError() );
       ZYPP_THROW( err );
     }
 
-    std::vector<ProcInfo> data;
-    for ( const auto & cached : cachemap )
-    {
-      addDataIf( data, cached.second );
+    return _pimpl->createProcInfo( cachemap );
+  }
+
+  CheckAccessDeleted::size_type CheckAccessDeleted::Impl::createProcInfo(const std::map<pid_t,CacheEntry> &in)
+  {
+    std::ofstream debugFileOut;
+    bool debugEnabled = false;
+    if ( !_debugFile.empty() ) {
+      debugFileOut.open( _debugFile.c_str() );
+      debugEnabled =  debugFileOut.is_open();
+
+      if ( !debugEnabled ) {
+        ERR<<"Unable to open debug file: "<<_debugFile<<endl;
+      }
     }
-    _data.swap( data );
+
+    _data.clear();
+    for ( const auto &cached : in )
+    {
+      if (!debugEnabled)
+        addDataIf( cached.second);
+      else {
+        std::vector<std::string> *mapPtr = nullptr;
+
+        auto dbgInfo = debugMap.find(cached.first);
+        if ( dbgInfo != debugMap.end() )
+          mapPtr = &(dbgInfo->second);
+
+        if( !addDataIf( cached.second, mapPtr ) )
+          continue;
+
+        for ( const std::string &dbgLine: dbgInfo->second ) {
+          debugFileOut.write( dbgLine.c_str(), dbgLine.length() );
+        }
+      }
+    }
     return _data.size();
+  }
+
+  bool CheckAccessDeleted::empty() const
+  {
+    return _pimpl->_data.empty();
+  }
+
+  CheckAccessDeleted::size_type CheckAccessDeleted::size() const
+  {
+    return _pimpl->_data.size();
+  }
+
+  CheckAccessDeleted::const_iterator CheckAccessDeleted::begin() const
+  {
+    return _pimpl->_data.begin();
+  }
+
+  CheckAccessDeleted::const_iterator CheckAccessDeleted::end() const
+  {
+    return _pimpl->_data.end();
+  }
+
+  void CheckAccessDeleted::setDebugOutputFile(const Pathname &filename_r)
+  {
+    _pimpl->_debugFile = filename_r;
   }
 
   std::string CheckAccessDeleted::findService( pid_t pid_r )
@@ -300,13 +404,6 @@ namespace zypp
     p.pid = str::numstring( pid_r );
     return p.service();
   }
-
-  ///////////////////////////////////////////////////////////////////
-  namespace
-  { /////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////
-  } // namespace
-  ///////////////////////////////////////////////////////////////////
 
   std::string CheckAccessDeleted::ProcInfo::service() const
   {

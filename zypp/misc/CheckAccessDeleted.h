@@ -15,6 +15,8 @@
 #include <iosfwd>
 #include <vector>
 #include <string>
+#include <zypp/Pathname.h>
+#include <zypp/base/PtrTypes.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -30,11 +32,17 @@ namespace zypp
    * information about running processes which access deleted files
    * or libraries is collected and provided as a \ref ProcInfo
    * container.
+   *
+   * Provides support for reproducing check results from a foreign system by
+   * creating a debug output file containing all required information,
+   * enabled by \ref setDebugOutputFile.\n
+   * This data file can be used as datasource when passed to \ref check(const Pathname &, bool).
    */
   class CheckAccessDeleted
   {
 
     public:
+      class Impl;
       /**
        * Data about one running process accessing deleted files.
        */
@@ -64,8 +72,7 @@ namespace zypp
        * \throws Exception if \ref check throws.
        * \see \ref check.
        */
-      CheckAccessDeleted( bool doCheck_r = true )
-      { if ( doCheck_r ) check(); }
+      CheckAccessDeleted( bool doCheck_r = true );
 
     public:
       /** Check for running processes which access deleted executables or libraries.
@@ -82,10 +89,25 @@ namespace zypp
        */
       size_type check( bool verbose_r = false );
 
-      bool empty() const		{ return _data.empty(); }
-      size_type size() const		{ return _data.size(); }
-      const_iterator begin() const	{ return _data.begin(); }
-      const_iterator end() const	{ return _data.end(); }
+      /**
+       * \overload
+       * Performs the same checks but instead of investigating the current system it
+       * uses information from \a lsofOutput_r to support debugging.
+       *
+       * \sa setDebugOutputFile
+       */
+      size_type check( const Pathname &lsofOutput_r, bool verbose_r = false );
+
+      bool empty() const;
+      size_type size() const;
+      const_iterator begin() const;
+      const_iterator end() const;
+
+      /**
+       * Writes all filtered process entries that make it into the final set into
+       * a file specified by \a filename_r.
+       */
+      void setDebugOutputFile (const Pathname &filename_r);
 
     public:
       /** Guess if pid was started by a systemd service script.
@@ -93,9 +115,8 @@ namespace zypp
        * \warning This is just a guess.
        */
       static std::string findService( pid_t pid_r );
-
-    private:
-      std::vector<ProcInfo> _data;
+  private:
+      RWCOW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

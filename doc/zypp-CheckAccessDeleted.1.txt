@@ -23,6 +23,10 @@ OPTIONS
 -------
 *--help*::
 	display help and exit
+*--zypper*::
+	use less verbose zypper mode to list processes
+*--debugFile* 'filename'::
+	Reads process and opened files information from a file that was created by zypper previously
 
 
 AUTHORS

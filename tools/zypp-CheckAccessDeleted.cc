@@ -94,33 +94,69 @@ struct ProcInfoTable
   TableCol files;
 };
 
+void usage ( const std::string &appname )
+{
+  std::cout << "Usage: " << appname << " [--help] [--debugFile <file>] [--zypper]" << std::endl;
+  std::cout << "List information about all running processe" << std::endl;
+  std::cout << "which access deleted executables or libraries." << std::endl;
+  std::cout << std::endl;
+  std::cout << "GLOBALOPTS:" << std::endl;
+  std::cout << "  --debugFile <file> Use information from <file> instead" << std::endl;
+  std::cout << "                     of inspecting the host system." << std::endl;
+  std::cout << "  --zypper           Disable verbose checking like zypper does." << std::endl;
+  std::cout << std::endl;
+  std::cout << "TABLEHEADERS:" << std::endl;
+  std::cout << "  PID     " << "process ID" << std::endl;
+  std::cout << "  PPID    " << "parent process ID" << std::endl;
+  std::cout << "  UID     " << "process user ID" << std::endl;
+  std::cout << "  LOGIN   " << "process login name" << std::endl;
+  std::cout << "  COMMAND " << "process command name" << std::endl;
+  std::cout << "  SERVICE " << "/etc/init.d/ script that might be used to restart the command (guessed)" << std::endl;
+  std::cout << "  FILES   " << "list of deleted executables or libraries accessed" << std::endl;
+}
+
 int main( int argc, char * argv[] )
 {
-  if ( argc >= 2 )
-  {
-    std::string progname( zypp::Pathname::basename( argv[0] ) );
-    if ( strcmp( argv[1], "--help" ) == 0 )
+
+  std::string progname( zypp::Pathname::basename( argv[0] ) );
+  std::string debugInputFile;
+  bool verbose = true;
+  argv++;
+  argc--;
+
+  while( argc > 0 ) {
+    if ( strcmp( argv[0], "--help" ) == 0 )
     {
-      std::cout << "Usage: " << progname << " [--help]" << std::endl;
-      std::cout << "List information about all running processe" << std::endl;
-      std::cout << "which access deleted executables or libraries." << std::endl;
-      std::cout << "  PID     " << "process ID" << std::endl;
-      std::cout << "  PPID    " << "parent process ID" << std::endl;
-      std::cout << "  UID     " << "process user ID" << std::endl;
-      std::cout << "  LOGIN   " << "process login name" << std::endl;
-      std::cout << "  COMMAND " << "process command name" << std::endl;
-      std::cout << "  SERVICE " << "/etc/init.d/ script that might be used to restart the command (guessed)" << std::endl;
-      std::cout << "  FILES   " << "list of deleted executables or libraries accessed" << std::endl;
+      usage( progname );
       return 0;
+    } else if ( strcmp( argv[0], "--debugFile" ) == 0 ) {
+      if ( argc < 2 ) {
+        std::cerr << progname << ": debugFile requires a argument" << std::endl;
+        return 1;
+      }
+
+      argv++;
+      argc--;
+      debugInputFile = argv[0];
+
+    } else if ( strcmp( argv[0], "--zypper" ) == 0 ) {
+      verbose = false;
+    } else {
+      std::cerr << progname << ": unexpected argument '" << argv[0] << "'" << std::endl;
+      std::cerr << "Try `" << progname << " --help' for more information." << std::endl;
+      return 1;
     }
-    std::cerr << progname << ": unexpected argument '" << argv[1] << "'" << std::endl;
-    std::cerr << "Try `" << progname << " --help' for more information." << std::endl;
-    return 1;
+
+    argv++;
+    argc--;
   }
 
   zypp::CheckAccessDeleted checker(false); // wait for explicit call to check()
   try {
-    checker.check( /*verbose*/true );
+    if ( debugInputFile.empty() )
+      checker.check( verbose );
+    else
+      checker.check( debugInputFile, verbose );
   }
   catch( const zypp::Exception & err )
   {
