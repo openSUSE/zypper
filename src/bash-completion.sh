@@ -132,7 +132,7 @@ _zypper() {
 
 	if test -n "$command" ; then
 		if ! [[ $cur =~ ^[^-] ]] ; then
-			opts=$(LC_ALL=POSIX $ZYPPER -q help $command 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+			opts=$(LC_ALL=POSIX $ZYPPER -q help $command 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//' | grep -e "^--")
 		fi
 
 		#handling individual commands if they need more then we can dig from help
