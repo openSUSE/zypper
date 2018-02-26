@@ -1050,13 +1050,6 @@ Supported URI formats:
 
 include::{incdir}/option_GPG_Check.txt[]
 
-	*-t*, *--type* 'type'::
-		Type of repository (yast2, rpm-md, or plaindir) in case the autodetection fails. There are several aliases defined for these types:
-[horizontal]
-		*yast2* ;;	susetags, yast, YaST, YaST2, YAST
-		*rpm-md* ;;	repomd, rpmmd, yum, YUM
-		*plaindir*;;	Plaindir
-
 	Examples: :: {nop}
 
 		$ *zypper ar -c -n \'Packman 11.1 repo' http://packman.iu-bremen.de/suse/11.1 packman*;;
@@ -1249,8 +1242,6 @@ Standalone repositories (not belonging to any service) are treated like services
 	+
 	Newly added services are not refreshed automatically. Use the *refresh-services* command to refresh them. Zypper does not access the service URI when adding the service, so the type of the services is unknown until it is refreshed.
 	+
-	This command also allows one to add also ordinary repositories when used with *--type* option, where you specify the type of the repository. See the addrepo command for the list of supported repository types.
-+
 --
 	*-n*, *--name* 'name'::
 		Specify descriptive name for the service.
@@ -1267,10 +1258,6 @@ Standalone repositories (not belonging to any service) are treated like services
 	*-F*, *--no-refresh*::
 		Disable auto-refresh of the service.
 
-	*-t*, *--type* 'type'::
-		Type of the service (possible values: *ris*) in case the autodetection fails. There are several aliases defined for this type:
-[horizontal]
-		*ris* ;;	RIS, nu, NU
 --
 
 *removeservice* (*rs*) ['options'] 'alias'|'name'|'#'|'URI'...::

@@ -340,22 +340,39 @@ namespace {
     return mayuse;
   }
 
-  inline std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, bool global_r = false )
+  enum LegacyCLIMsgType {
+    Local,
+    Global,
+    Ignored
+  };
+
+  inline std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, LegacyCLIMsgType type_r )
   {
-    return str::FormatNAC( global_r
-			 ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
-			 : _("Legacy commandline option %1% detected. Please use %2% instead.") )
-			 % NEGATIVEString(dashdash(old_r))
-			 % POSITIVEString(dashdash(new_r));
+    switch (type_r) {
+    case Local:
+    case Global:
+      return str::FormatNAC( type_r == Global
+         ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
+         : _("Legacy commandline option %1% detected. Please use %2% instead.") )
+         % NEGATIVEString(dashdash(old_r))
+         % POSITIVEString(dashdash(new_r));
+    case Ignored:
+      return str::FormatNAC(
+         _("Legacy commandline option %1% detected. This option is ignored."))
+         % NEGATIVEString(dashdash(old_r));
+      break;
+    }
   }
 
-  inline void legacyCLITranslate( parsed_opts & copts_r, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r = Out::NORMAL )
+  inline void legacyCLITranslate( parsed_opts & copts_r, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r = Out::NORMAL, LegacyCLIMsgType type = Local )
   {
     if ( copts_r.count( old_r ) )
     {
-      Zypper::instance().out().warning( legacyCLIStr( old_r, new_r ), verbosity_r );
-      if ( ! copts_r.count( new_r ) )
-	copts_r[new_r];
+      Zypper::instance().out().warning( legacyCLIStr( old_r, new_r, type ), verbosity_r );
+      if ( new_r.size() ) {
+        if ( ! copts_r.count( new_r ) )
+          copts_r[new_r];
+      }
       copts_r.erase( old_r );
     }
   }
@@ -1918,7 +1935,8 @@ void Zypper::processCommandOptions()
     )
     .optionSectionCommandOptions()
     .option_SERVICE_PROP
-    .option( "-t, --type <TYPE>",	(str::Format(_("Type of the service (%1%).") ) % "RIS").str() )	// FIXME: leagcy, actually autodetected but check libzypp
+    .legacyOptionSection()
+    .option( "-t, --type <TYPE>",	( str::Format(_("The type of service is always autodetected. This option is ignored.") ) ).str() )	// FIXME: leagcy, actually autodetected but check libzypp
     ;
     break;
   }
@@ -2131,7 +2149,8 @@ void Zypper::processCommandOptions()
     .option( "-C, --no-check",		_("Don't probe URI, probe later during refresh.") )
     .gap()
     .option_REPO_PROP
-    .option( "-t, --type <TYPE>",	str::Format(_("Type of repository (%1%).") ) % "yast2, rpm-md, plaindir" )	// FIXME: leagcy, actually autodetected but check libzypp
+    .legacyOptionSection()
+    .option( "-t, --type <TYPE>",	str::Format(_("The repository type is always autodetected. This option is ignored.") ) )
     ;
     break;
   }
@@ -3471,6 +3490,10 @@ void Zypper::processCommandOptions()
   legacyCLITranslate( _copts, "sort-by-catalog",		"sort-by-repo" );
   legacyCLITranslate( _copts, "uninstalled-only",		"not-installed-only",	Out::HIGH );	// bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
 
+  if ( command().toEnum() == ZypperCommand::ADD_REPO_e  || command().toEnum() == ZypperCommand::ADD_SERVICE_e ) {
+    legacyCLITranslate( _copts, "type",	"",  Out::NORMAL, LegacyCLIMsgType::Ignored);
+  }
+
   // bsc#957862: pkg/apt/yum user convenience: no-confirm  ==> --non-interactive
   if ( _copts.count("no-confirm") )
   {
@@ -3650,12 +3673,12 @@ void Zypper::doCommand()
     }
 
     if ( isservice )
-      add_service_by_url( *this, url, _arguments[1], type );
+      add_service_by_url( *this, url, _arguments[1] );
     else
     {
       try
       {
-        add_repo_by_url( *this, url, _arguments[1], type );
+        add_repo_by_url( *this, url, _arguments[1]);
       }
       catch ( const repo::RepoUnknownTypeException & e )
       {
@@ -3769,13 +3792,6 @@ void Zypper::doCommand()
         return;
       }
 
-      // force specific repository type. Validation is done in add_repo_by_url()
-      std::string type = copts.count("type") ? copts["type"].front() : "";
-      if ( command() == ZypperCommand::RUG_MOUNT || type == "mount" )
-        type = "plaindir";
-      else if ( type == "zypp" )
-        type = "";
-
       switch ( _arguments.size() )
       {
       // display help message if insufficient info was given
@@ -3845,7 +3861,7 @@ void Zypper::doCommand()
         // load gpg keys
         init_target( *this );
 
-        add_repo_by_url( *this, url, _arguments[1]/*alias*/, type );
+        add_repo_by_url( *this, url, _arguments[1]/*alias*/ );
         return;
       }
     }

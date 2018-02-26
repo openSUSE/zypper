@@ -1802,15 +1802,11 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
 /// \todo merge common code with add_repo_from_file
 void add_repo_by_url( Zypper & zypper,
 		      const Url & url,
-		      const std::string & alias,
-		      const std::string & type )
+		      const std::string & alias )
 {
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url << ")" << endl;
 
   RepoInfo repo;
-
-  if ( ! type.empty() )
-    repo.setType( repo::RepoType(type) );
 
   repo.setAlias( alias.empty() ? timestamp() : alias );
 
@@ -2697,16 +2693,11 @@ void add_service( Zypper & zypper, const ServiceInfo & service )
 
 void add_service_by_url( Zypper & zypper,
 			 const Url & url,
-			 const std::string & alias,
-                         const std::string & type  )
+			 const std::string & alias)
 {
   MIL << "going to add service by url (alias=" << alias << ", url=" << url << ")" << endl;
 
   ServiceInfo service;
-
-  //! \todo addrepo if type is specified and is not 'ris'.
-  if ( ! type.empty() )
-    service.setType( repo::ServiceType( type ) );
 
   service.setAlias( alias.empty() ? timestamp() : alias );
   parsed_opts::const_iterator it = zypper.cOpts().find("name");

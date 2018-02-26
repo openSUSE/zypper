@@ -98,14 +98,12 @@ bool match_repo( Zypper & zypper, const std::string str, RepoInfo *repo = 0 );
  *
  * \param url Valid URL of the repository.
  * \param alias
- * \param type
  * \param enabled     Whether the repo should be enabled
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
-void add_repo_by_url( Zypper & zypper,
+void add_repo_by_url(Zypper & zypper,
 		      const Url & url,
-		      const std::string & alias,
-		      const std::string & type = "" );
+		      const std::string & alias);
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -158,10 +156,9 @@ void list_services( Zypper & zypper );
 
 void add_service( Zypper & zypper, const ServiceInfo & service );
 
-void add_service_by_url( Zypper & zypper,
+void add_service_by_url(Zypper & zypper,
                          const Url & url,
-			 const std::string & alias,
-                         const std::string & type  );
+			 const std::string & alias);
 
 void remove_service( Zypper & zypper, const ServiceInfo & service );
 
