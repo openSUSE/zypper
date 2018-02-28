@@ -421,11 +421,11 @@ namespace zypp
     //TODO: make configurable
     list<string> filesystems;
 
-    // if DVD, try UDF filesystem before iso9660
+    filesystems.push_back("iso9660");
+
+    // if DVD, try UDF filesystem after iso9660
     if ( _url.getScheme() == "dvd" )
       filesystems.push_back("udf");
-
-    filesystems.push_back("iso9660");
 
     // try all devices in sequence
     int count = 0;
