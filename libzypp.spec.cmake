@@ -124,6 +124,9 @@ BuildRequires:  libcurl-devel >= %{min_curl_version}
 Requires:       libcurl   >= %{min_curl_version}
 %endif
 
+# required for documentation
+BuildRequires:  asciidoc
+
 %description
 Package, Patch, Pattern, and Product Management
 
