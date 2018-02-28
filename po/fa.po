@@ -5,16 +5,16 @@ msgstr ""
 "Project-Id-Version: opensuse-i 18n\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-09-14 21:15+0000\n"
-"Last-Translator: hayyan rostami <hayyan71@yahoo.com>\n"
-"Language-Team: Persian <https://l10n.opensuse.org/projects/libzypp/master/fa/"
-">\n"
+"PO-Revision-Date: 2018-02-28 13:09+0000\n"
+"Last-Translator: Mohammad Rezaei Seresht <m_rezaei_seresht@hotmail.com>\n"
+"Language-Team: Persian "
+"<https://l10n.opensuse.org/projects/libzypp/master/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -1352,9 +1352,8 @@ msgid "Tried to import not existent key %s into keyring %s"
 msgstr "برای وارد کردن کلید ناموجود %s در دسته کلید %s تلاش شد"
 
 #: zypp/KeyRing.cc:583
-#, fuzzy
 msgid "Failed to import key."
-msgstr "ناموفق در وارد کردن کلید عمومی از پرونده ی %1%"
+msgstr "ناموفق در وارد کردن کلید."
 
 #: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
@@ -3732,13 +3731,13 @@ msgstr "منقضی نمیشود"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "منقضی شده: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "تاریخ انقضا: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
@@ -4702,7 +4701,7 @@ msgstr "ناموفق در حذف کلید عمومی %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
-msgstr ""
+msgstr "بسته مورد تایید نیست!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4787,7 +4786,7 @@ msgstr "پرونده موجود نیست و یا امضاها قابل بررس�
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
-msgstr ""
+msgstr "فایل تایید نشده"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
