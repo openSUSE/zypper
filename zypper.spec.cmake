@@ -34,6 +34,10 @@ Requires:       procps
 %requires_ge    libzypp
 Recommends:     logrotate zypper-log
 %endif
+
+# required for documentation
+BuildRequires:  asciidoc
+
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Command line software manager using libzypp
 License:        GPL-2.0+
