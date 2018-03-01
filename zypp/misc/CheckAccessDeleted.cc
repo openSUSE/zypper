@@ -235,6 +235,7 @@ namespace zypp
         , "/var/run/"
         , "/var/lib/sss/"
         , "/dev/"
+        , "/var/lib/gdm"
       };
       for_( it, arrayBegin( black ), arrayEnd( black ) )
       {
