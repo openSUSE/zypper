@@ -23,7 +23,7 @@ script:
 - docker exec test bash -c "cd /root/build && make -j4 -C doc/autodoc"
 - docker exec test bash -c "cd /root/build && make -j4 -C po translations"
 - docker exec test bash -c "cd /root/build && make -j4 -C tests"
-- docker exec test bash -c "cd /root/build/tests && LD_LIBRARY_PATH=$PWD/../zypp:$LD_LIBRARY_PATH ctest -VV ."
+- docker exec test bash -c "cd /root/build/tests && LD_LIBRARY_PATH=\$PWD/../zypp:\$LD_LIBRARY_PATH ctest -VV ."
 
 on:
     repo: openSUSE/libzypp
