@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-03-02 15:46+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
+"PO-Revision-Date: 2018-03-02 15:51+0000\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -2157,6 +2157,7 @@ msgstr "Dem System einen Repository-Indexdienst hinzufügen."
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
+"Dieser Diensttyp wird stets automatisch erkannt. Diese Option wird ignoriert."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2440,6 +2441,8 @@ msgstr "URI nicht jetzt, sondern später während der Aktualisierung überprüfe
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
+"Der Repository-Typ wird stets automatisch erkannt. Diese Option wird "
+"ignoriert."
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3552,7 +3555,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Debug-Ausgabe in die Datei in <Pfad> schreiben."
 
 #: src/Zypper.cc:3245
 msgid ""
