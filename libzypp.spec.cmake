@@ -54,6 +54,7 @@ BuildRequires:  hal-devel
 BuildRequires:  libboost_headers-devel
 BuildRequires:  libboost_program_options-devel
 BuildRequires:  libboost_test-devel
+BuildRequires:  libboost_thread-devel
 %else
 BuildRequires:  boost-devel
 %endif
@@ -139,6 +140,7 @@ Obsoletes:      yast2-packagemanager-devel
 Requires:       libboost_headers-devel
 Requires:       libboost_program_options-devel
 Requires:       libboost_test-devel
+Requires:       libboost_thread-devel
 %else
 Requires:       boost-devel
 %endif
