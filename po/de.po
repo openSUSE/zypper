@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-03-02 15:00+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2018-03-02 15:46+0000\n"
+"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1410,11 +1410,9 @@ msgstr ""
 "Alte Kommandozeilen-Option %1% erkannt. Bitte stattdessen %2% verwenden."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
-msgstr ""
-"Alte Kommandozeilen-Option %1% erkannt. Bitte stattdessen die globale Option "
-"%2% verwenden."
+msgstr "Alte Kommandozeilen-Option %1% erkannt. Diese Option wird ignoriert."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
