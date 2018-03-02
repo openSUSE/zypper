@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-01-25 08:03+0000\n"
+"PO-Revision-Date: 2018-03-02 23:15+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1365,11 +1365,9 @@ msgstr ""
 "い。"
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
-msgstr ""
-"古い形式のコマンドラインオプション %1% が指定されています。グローバルオプショ"
-"ン %2% をお使いください。"
+msgstr "古い形式のコマンドラインオプション %1% が指定されています。このオプションは無視されます。"
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2105,7 +2103,7 @@ msgstr "システムにリポジトリインデックスサービスを追加し
 
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "サービスの種類は常に自動検出されます。このオプションは無視されます。"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2372,7 +2370,7 @@ msgstr "URIを検索しません。更新後に検索します。"
 
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "リポジトリタイプは常に自動検出されます。このオプションは無視されます。"
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3446,7 +3444,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "デバッグ出力をファイル <path> に出力します。"
 
 #: src/Zypper.cc:3245
 msgid ""
