@@ -356,12 +356,14 @@ namespace {
          : _("Legacy commandline option %1% detected. Please use %2% instead.") )
          % NEGATIVEString(dashdash(old_r))
          % POSITIVEString(dashdash(new_r));
+      break;
     case Ignored:
       return str::FormatNAC(
          _("Legacy commandline option %1% detected. This option is ignored."))
          % NEGATIVEString(dashdash(old_r));
       break;
     }
+    return std::string();
   }
 
   inline void legacyCLITranslate( parsed_opts & copts_r, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r = Out::NORMAL, LegacyCLIMsgType type = Local )
