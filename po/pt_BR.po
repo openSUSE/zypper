@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-03-02 19:02+0000\n"
+"PO-Revision-Date: 2018-03-08 16:27+0000\n"
 "Last-Translator: carlo valente <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
@@ -3493,7 +3493,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Gravar saída de depuração no arquivo <caminho>."
 
 #: src/Zypper.cc:3245
 msgid ""
