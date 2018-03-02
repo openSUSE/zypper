@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2017-10-05 17:50+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
-"zypper/master/pt_BR/>\n"
+"PO-Revision-Date: 2018-03-02 19:02+0000\n"
+"Last-Translator: carlo valente <carlo.gt.valente@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) "
+"<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.18\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1378,11 +1378,10 @@ msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr "Opção antiga %1% detectada na linha de comando. Em vez disso, use %2%."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
-"Opção antiga %1% detectada na linha de comando. Em vez disso, use a opção "
-"global %2%."
+"Opção antiga %1% detectada na linha de comando. Essa opção será ignorada."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2117,7 +2116,7 @@ msgstr "Adiciona um serviço de índice do repositório no sistema."
 
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "O tipo de serviço sempre é autodetectado. Essa opção será ignorada."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2394,7 +2393,7 @@ msgstr "Não testar o URI, testá-lo mais tarde durante a atualização."
 
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "O tipo de repositório sempre é autodetectado. Essa opção será ignorada."
 
 #: src/Zypper.cc:2183
 msgid ""
