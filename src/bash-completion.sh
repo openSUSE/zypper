@@ -98,7 +98,7 @@ _zypper() {
 			eval $noglob
 			return 0;
 		;;
-		"--repo" | "-r" || "--from")
+		"--repo" | "-r" | "--from")
 			opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q lr | \
 				sed -rn '/^[0-9]/{
 					s/^[0-9]+[[:blank:]]*\|[[:blank:]]*([^|]+).*/\1/
