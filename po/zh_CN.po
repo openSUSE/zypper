@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-01-31 08:57+0000\n"
-"Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
-"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_CN/>\n"
+"PO-Revision-Date: 2018-03-03 17:02+0000\n"
+"Last-Translator: H. Zeng <zhx@cnzhx.net>\n"
+"Language-Team: Chinese (China) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1296,9 +1296,9 @@ msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr "检测到了过时的命令行选项 %1%。请使用 %2% 代替。"
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
-msgstr "检测到了过时的命令行选项 %1%。请使用全局选项 %2% 代替。"
+msgstr "检测到了过时的命令行选项 %1%。该选项已被忽略。"
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -1978,7 +1978,7 @@ msgstr "向系统中添加一个软件源索引服务。"
 
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "服务类型始终都是自动检测的。该选项已被忽略。"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2238,7 +2238,7 @@ msgstr "不探测 URI，稍后刷新时再探测。"
 
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "源类型始终都是自动检测的。该选项已被忽略。"
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3250,7 +3250,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "将调试信息输出到文件 <path>。"
 
 #: src/Zypper.cc:3245
 msgid ""
