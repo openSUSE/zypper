@@ -21,15 +21,15 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2017-12-13 16:01+0000\n"
-"Last-Translator: Petr Tesařík <ptesarik@suse.com>\n"
+"PO-Revision-Date: 2018-03-03 10:08+0000\n"
+"Last-Translator: Vojtech Zeisek <Vojtech.Zeisek@opensuse.org>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.17.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -1380,11 +1380,10 @@ msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr "Detekována zastaralá volba příkazové řádky %1%. Použijte místo ní %2%."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
-"Detekována zastaralá volba příkazové řádky %1%. Použijte místo ní globální "
-"volbu %2%."
+"Detekována zastaralá volba příkazové řádky %1%. Tato volba je ignorována."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2117,7 +2116,7 @@ msgstr "Přidá do systému službu indexu repozitářů."
 
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "Typ služby je vždy detekován automaticky. Tato volba je ignorována."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2383,7 +2382,7 @@ msgstr ""
 
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "Typ repozitáře je vždy detekován automaticky. Tato volba je ignorována."
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3458,7 +3457,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Zapsat ladící výstup do souboru <cesta>."
 
 #: src/Zypper.cc:3245
 msgid ""
