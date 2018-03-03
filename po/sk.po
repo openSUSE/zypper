@@ -1,20 +1,21 @@
 # Copyright (C) YEAR SuSE Linux GmbH, Nuernberg
 # This file is distributed under the same license as the PACKAGE package.
-# Ferdinand Galko <galko.ferdinand@gmail.com>, 2015, 2016, 2017.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2015, 2016, 2017, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2017-10-12 13:06+0100\n"
+"PO-Revision-Date: 2018-03-03 15:28+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <opensuse-translation-sk@opensuse.org>\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -1362,11 +1363,11 @@ msgstr ""
 "Staršia voľba  %1% príkazového riadka bola zistená. Namiesto toho použiť %2%."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
-"Staršia voľba  %1% príkazového riadka bola zistená. Namiesto toho použiť "
-"globálnu voľbu %2%."
+"Bola zistená zastaraná voľba  %1% príkazového riadka. Táto voľba je "
+"ignorovaná."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2094,7 +2095,7 @@ msgstr "Pridá do systému službu pre index repozitárov."
 
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "Typ služby je vždy automaticky zistený. Táto voľba je ignorovaná."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2358,7 +2359,7 @@ msgstr "Nekontrolovať URI, skontrolovať neskôr počas obnovenia."
 
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "Typ repozitára je vždy automaticky zistený. Táto voľba je ignorovaná."
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3422,7 +3423,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Zapísať ladiaci výstup do súboru <path>."
 
 #: src/Zypper.cc:3245
 msgid ""
