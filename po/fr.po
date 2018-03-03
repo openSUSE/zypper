@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2017-12-02 22:53+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@laposte.net>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"PO-Revision-Date: 2018-03-03 19:48+0000\n"
+"Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.17.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -1409,11 +1409,10 @@ msgstr ""
 "la place."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
-"Ancienne option de ligne de commande %1% détectée. Veuillez utiliser "
-"l'option globale %2% à la place."
+"Ancienne option de ligne de commande %1% détectée. Cette option est ignorée."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2177,7 +2176,7 @@ msgstr "Ajoute un service d'index de dépôts au système."
 
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "Le type de service est toujours auto-détecté. Cette option est ignorée."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2458,7 +2457,7 @@ msgstr "Ne pas vérifier l'URI, vérifier plus tard lors du rafraîchissement."
 
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "Le type de dépôt est toujours auto-détecté. Cette option est ignorée."
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3577,7 +3576,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Écrit la sortie de débogage dans le fichier <path>."
 
 #: src/Zypper.cc:3245
 msgid ""
