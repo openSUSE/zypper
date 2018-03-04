@@ -562,30 +562,28 @@ BOOST_AUTO_TEST_CASE(pool_query_X)
   BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 1);
 }
 
-//! \todo FIXME this segfaults currently - one addString() + (version or kind or installed status condition)
-/*
-BOOST_AUTO_TEST_CASE(pool_query_FIXME)
+BOOST_AUTO_TEST_CASE(pool_query_X1)
 {
-  cout << "****FIXME****"  << endl;
+  cout << "****601.****"  << endl;
   PoolQuery q;
   q.addString("zypper");
-  q.setEdition(Edition("0.10.3-4"), Rel::GE);
+  q.addAttribute(sat::SolvAttr::name );
+  BOOST_CHECK_EQUAL(std::for_each(q.begin(), q.end(), PrintAndCount())._count, 5);
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 2);
+  q.setEdition(Edition("0.12.8"), Rel::GE);
+  BOOST_CHECK_EQUAL(std::for_each(q.begin(), q.end(), PrintAndCount())._count, 4);
 }
-*/
 
-/*
-BOOST_AUTO_TEST_CASE(pool_query_X)
+BOOST_AUTO_TEST_CASE(pool_query_X2)
 {
   cout << "****X****"  << endl;
   PoolQuery q;
-  q.addString("pack*");
+  q.setMatchGlob();
+  q.addString("zypp*");
   q.addAttribute(sat::SolvAttr::name);
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 28);
+  BOOST_CHECK_EQUAL(std::for_each(q.begin(), q.end(), PrintAndCount())._count, 5);
 }
-*/
 
 
 BOOST_AUTO_TEST_CASE(pool_query_recovery)
