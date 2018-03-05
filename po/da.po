@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-03-05 19:02+0000\n"
+"PO-Revision-Date: 2018-03-05 22:01+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -3427,7 +3427,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr "Skriv fejlretningsoutput til filen <sti>."
+msgstr "Skriv fejlsøgningsoutput til filen <sti>."
 
 #: src/Zypper.cc:3245
 msgid ""
