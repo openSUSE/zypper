@@ -16,10 +16,10 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-01-31 20:41+0000\n"
+"PO-Revision-Date: 2018-03-05 17:25+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
-"Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
-"hu/>\n"
+"Language-Team: Hungarian "
+"<https://l10n.opensuse.org/projects/zypper/master/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1407,11 +1407,11 @@ msgstr ""
 "%2%."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
-"Régi parancssori kapcsoló észlelhető (%1%). Használja helyette a következő "
-"általános beállítást: %2%."
+"Régi parancssori kapcsoló észlelhető (%1%). Ez a kapcsoló figyelmen kívül "
+"lesz hagyva."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2160,6 +2160,8 @@ msgstr "Telepítési forrás indexszolgáltatás hozzáadása a rendszerhez."
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
+"A szolgáltatás típusának felismerése mindig automatikusan történik. Ez a "
+"kapcsoló figyelmen kívül lesz hagyva."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2449,6 +2451,8 @@ msgstr "Az URI ellenőrzésének kihagyása, ellenőrzés később, a frissíté
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
+"A telepítési forrás típusának felismerése mindig automatikusan történik. Ez "
+"a kapcsoló figyelmen kívül lesz hagyva."
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3562,7 +3566,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Hibakeresési kimenet írása a következő fájlba: <path>."
 
 #: src/Zypper.cc:3245
 msgid ""
