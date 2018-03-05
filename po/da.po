@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2017-11-01 04:06+0000\n"
+"PO-Revision-Date: 2018-03-05 19:02+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -1346,21 +1346,19 @@ msgstr "Prøv igen?"
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
-"Forældet kommandolinje tilvalg %1% registreret. Brug venligst globale "
-"tilvalg %2% i stedet."
+"Forældet kommandolinjetilvalg %1% registreret. Brug venligst globale tilvalg "
+"%2% i stedet."
 
 #: src/Zypper.cc:356
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
-"Forældet kommandolinje tilvalg %1% registreret. Brug venligst %2% i stedet."
+"Forældet kommandolinjetilvalg %1% registreret. Brug venligst %2% i stedet."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
-msgstr ""
-"Forældet kommandolinje tilvalg %1% registreret. Brug venligst globale "
-"tilvalg %2% i stedet."
+msgstr "Forældet kommandolinjetilvalg %1% registreret. Tilvalget ignoreres."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2082,7 +2080,7 @@ msgstr "Tilføj en indekstjeneste for softwarekilder til systemet."
 
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "Typen af tjeneste registreres altid automatisk. Tilvalget ignoreres."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2361,6 +2359,7 @@ msgstr "Undersøg ikke URI, undersøg senere under genopfriskning."
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
+"Typen af softwarekilde registreres altid automatisk. Tilvalget ignoreres."
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3428,7 +3427,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Skriv fejlretningsoutput til filen <sti>."
 
 #: src/Zypper.cc:3245
 msgid ""
