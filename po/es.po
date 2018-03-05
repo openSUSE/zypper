@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-01-25 19:37+0000\n"
+"PO-Revision-Date: 2018-03-05 16:15+0000\n"
 "Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1390,11 +1390,10 @@ msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr "Opción de línea de comando %1% en desuso. Utilice %2% en su lugar."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
-"Opción de línea de comandos en desuso %1% detectada. Utilice en su lugar la "
-"opción global %2%."
+"Opción de línea de comandos en desuso %1% detectada. Esta opción se ignorará."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2138,6 +2137,8 @@ msgstr "Añade un servicio de indexación de repositorio al sistema."
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
+"El tipo de servicio se detecta siempre automáticamente. Esta opción se "
+"ignora."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2423,6 +2424,8 @@ msgstr "No sondear el URI, sondearlo más tarde al actualizar."
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
+"El tipo de repositorio se detecta siempre automáticamente. Esta opción se "
+"ignora."
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3534,7 +3537,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Escribir resultado de depuración en archivo <path>."
 
 #: src/Zypper.cc:3245
 msgid ""
