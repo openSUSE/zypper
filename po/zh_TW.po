@@ -13,10 +13,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-02-14 09:01+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
-"Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_TW/>\n"
+"PO-Revision-Date: 2018-03-05 08:00+0000\n"
+"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
+"Language-Team: Chinese (Taiwan) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1298,9 +1298,9 @@ msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr "偵測到舊的指令行選項 %1%。請改用 %2%。"
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
-msgstr "偵測到舊的指令行選項 %1%。請改用全域選項 %2%。"
+msgstr "偵測到舊的指令行選項 %1%。將忽略此選項。"
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -1991,7 +1991,7 @@ msgstr "加入一個套件庫索引服務到系統。"
 
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "已自動偵測到該類型的服務。將忽略此選項。"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2252,7 +2252,7 @@ msgstr "不要偵測位址，稍候重新整理時再偵測。"
 
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "已自動偵測到該儲存庫類型。將忽略此選項。"
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3279,7 +3279,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "將除錯輸出寫入到檔案 <路徑>。"
 
 #: src/Zypper.cc:3245
 msgid ""
