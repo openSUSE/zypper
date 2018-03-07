@@ -27,6 +27,11 @@ Thu Nov 23 12:34:53 CET 2017 - ma@suse.de
 - version 1.14.0
 
 -------------------------------------------------------------------
+Fri Nov 17 08:55:57 UTC 2017 - bwiedemann@suse.com
+
+- Add apt alias for compat with new debian package management
+
+-------------------------------------------------------------------
 Thu Oct  5 18:17:58 CEST 2017 - ma@suse.de
 
 - Add summary hint if product is better updated by a different

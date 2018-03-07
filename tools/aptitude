@@ -56,6 +56,7 @@ if($prog eq "aptitude") {
 
 # install, remove are the same
 if($action eq "show") {$action="info"}
+elsif($action eq "list") {$action="search"}
 elsif($action eq "purge") {$action="remove"}
 elsif($action eq "hold") {$action="addlock"}
 elsif($action eq "unhold") {$action="removelock"}
