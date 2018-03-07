@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-01-26 14:05+0000\n"
+"PO-Revision-Date: 2018-03-07 16:02+0000\n"
 "Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
@@ -1389,11 +1389,9 @@ msgstr ""
 "%2%."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
-msgstr ""
-"Обнаружен устаревший параметр командной строки %1%. Используйте вместо него "
-"глобальный параметр %2%."
+msgstr "Обнаружен устаревший параметр командной строки %1%. Он игнорируется."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2132,6 +2130,7 @@ msgstr "Добавить сервис репозиториев в систему
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
+"Тип сервиса всегда определяется автоматически. Этот параметр игнорируется."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2405,6 +2404,8 @@ msgstr "Не зондировать URI; прозондировать его п�
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
+"Тип репозитория всегда определяется автоматически. Этот параметр "
+"игнорируется."
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3500,7 +3501,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Записать выходные данные отладки в файл <path>."
 
 #: src/Zypper.cc:3245
 msgid ""
