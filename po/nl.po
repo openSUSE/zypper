@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-02-24 12:01+0000\n"
-"Last-Translator: Nathan Follens <nthn@unseen.is>\n"
+"PO-Revision-Date: 2018-03-07 11:22+0000\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -1405,11 +1405,11 @@ msgstr ""
 "gebruiken."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
-"Verouderde optie %1% op de opdrachtregel gedetecteerd. Gebruik in plaats "
-"daarvan de algemene optie %2%."
+"Verouderde optie %1% op de opdrachtregel gedetecteerd. Deze optie wordt "
+"genegeerd."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2148,6 +2148,8 @@ msgstr "Voeg een index-service van een opslagruimte toe aan het systeem."
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
+"Dit type service wordt altijd automatisch gedetecteerd. Deze optie wordt "
+"genegeerd."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2431,6 +2433,8 @@ msgstr "Test de URI niet, doe dat later bij een vernieuwing."
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
+"Het type opslagruimte wordt altijd automatisch gedetecteerd. Deze optie "
+"wordt genegeerd."
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3536,7 +3540,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Debuguitvoer naar bestand <pad> schrijven."
 
 #: src/Zypper.cc:3245
 msgid ""
