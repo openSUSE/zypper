@@ -127,6 +127,7 @@ Requires:       libcurl   >= %{min_curl_version}
 
 # required for documentation
 BuildRequires:  asciidoc
+BuildRequires:  libxslt-tools
 
 %description
 Package, Patch, Pattern, and Product Management
