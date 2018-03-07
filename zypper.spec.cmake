@@ -37,6 +37,7 @@ Recommends:     logrotate zypper-log
 
 # required for documentation
 BuildRequires:  asciidoc
+BuildRequires:  libxslt-tools
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Command line software manager using libzypp
