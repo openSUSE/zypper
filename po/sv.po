@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2017-04-19 16:18+0000\n"
-"Last-Translator: Mattias Börjesson <mattias@wallacesolutions.net>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/libzypp/master/sv/"
-">\n"
+"PO-Revision-Date: 2018-03-07 12:07+0000\n"
+"Last-Translator: Martin Devenney <devenneymartin@gmail.com>\n"
+"Language-Team: Swedish "
+"<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 2.18\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -1467,9 +1467,8 @@ msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Försökte importera icke existerande nyckel %s till nyckelringen %s"
 
 #: zypp/KeyRing.cc:583
-#, fuzzy
 msgid "Failed to import key."
-msgstr "Det gick inte att importera den offentliga nyckeln %1%"
+msgstr "Det gick inte att importera nyckeln."
 
 #: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
@@ -3903,21 +3902,20 @@ msgstr "Följande åtgärder kommer att vidtas:"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "(går inte ut)"
+msgstr "går inte ut"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "gick ut: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "går ut: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
@@ -4881,7 +4879,7 @@ msgstr "Det gick inte att ta bort den offentliga nyckeln %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1596
 msgid "Package is not signed!"
-msgstr ""
+msgstr "Paketet är inte signerat!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4966,7 +4964,7 @@ msgstr "Filen finns inte eller signaturen kan inte kontrolleras"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2424
 msgid "File is unsigned"
-msgstr ""
+msgstr "Filen är inte signerad"
 
 #: zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
