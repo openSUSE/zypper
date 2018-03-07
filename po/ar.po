@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2018-01-31 12:00+0000\n"
+"PO-Revision-Date: 2018-03-07 06:42+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
-">\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1389,11 +1389,9 @@ msgstr ""
 "تم إكتشاف خيار سطر الاوامر %1% التقليدي. الرجاء استخدام %2% بدلاً من ذلك."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
-msgstr ""
-"تم إكتشاف خيار سطر الاوامر %1% التقليدي. الرجاء استخدام الاختيار العالمي %2% "
-"بدلاً من ذلك."
+msgstr "تم إكتشاف خيار سطر الاوامر %1% القديم. تم تجاهل هذا الخيار."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2106,7 +2104,7 @@ msgstr "ﺈﺿﺎﻓﺓ ﺥﺪﻣﺓ ﻒﻫﺮﺳ ﻢﺧﺍﺰﻧ ﺈﻟﻯ ﺎ�
 
 #: src/Zypper.cc:1941
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "يتم اكتشاف هذا النوع من الخدمة تلقائيًا دائمًا. تم تجاهل هذا الخيار."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1957
@@ -2370,7 +2368,7 @@ msgstr "عدم فحص URI ولكن فحصه لاحقًا أثناء التحدي
 
 #: src/Zypper.cc:2155
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "يتم اكتشاف هذا النوع من المستودع تلقائيًا دائمًا. تم تجاهل هذا الخيار."
 
 #: src/Zypper.cc:2183
 msgid ""
@@ -3416,7 +3414,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3226
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "كتابة مخرجات تتبع الأخطاء في الملف <path>."
 
 #: src/Zypper.cc:3245
 msgid ""
