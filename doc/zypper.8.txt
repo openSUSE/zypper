@@ -264,6 +264,9 @@ Package Management Commands
 	*-y*, *--no-confirm*::
 		Don't require user interaction. Alias for the --non-interactive global option.
 
+	*--allow-unsigned-rpm*::
+		Silently install unsigned rpm packages given as commandline parameters.
+
 	Solver related options: :: {nop}
 include::{incdir}/option_Solver_Flags_Common.txt[]
 include::{incdir}/option_Solver_Flags_Recommends.txt[]

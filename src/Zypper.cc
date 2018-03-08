@@ -1665,6 +1665,7 @@ void Zypper::processCommandOptions()
       {"replacefiles",              no_argument,       0,  0 },
       {"capability",                no_argument,       0, 'C'},
       {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
+      {"allow-unsigned-rpm",        no_argument,       0,  0 },	// disable gpg checks for directly passed rpms
       ARG_License_Agreement,
       {"agree-to-third-party-licenses",  no_argument,  0,  0 },	// rug compatibility, we have --auto-agree-with-licenses
       ARG_Solver_Flags_Common,
@@ -1725,7 +1726,7 @@ void Zypper::processCommandOptions()
        "package",
        "only, in-advance, in-heaps, as-needed") )
     .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
-
+    .option( "--allow-unsigned-rpm", _("Silently install unsigned rpm packages given as commandline parameters.") )
     .optionSectionSolverOptions()
     .option_Solver_Flags_Common
     .option_Solver_Flags_Recommends
@@ -4269,6 +4270,11 @@ void Zypper::doCommand()
       repo.setEnabled( true );
       repo.setAutorefresh( true );
       repo.setKeepPackages( false );
+
+      if ( _copts.count("allow-unsigned-rpm") )
+      {
+        repo.setGpgCheck(RepoInfo::GpgCheck::AllowUnsignedPackage);
+      }
 
       // shut up zypper
       SCOPED_VERBOSITY( out(), Out::QUIET );
