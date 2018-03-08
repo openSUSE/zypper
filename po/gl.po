@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 07:26+0100\n"
-"PO-Revision-Date: 2018-03-08 18:02+0000\n"
+"PO-Revision-Date: 2018-03-08 22:02+0000\n"
 "Last-Translator: Manuel Vazquez <xixirei@yahoo.es>\n"
 "Language-Team: Galician "
 "<https://l10n.opensuse.org/projects/libzypp/master/gl/>\n"
@@ -246,14 +246,14 @@ msgstr "Botswana"
 #. :BWA:072:
 #: zypp/CountryCode.cc:192
 msgid "Belarus"
-msgstr "Bielorrusia"
+msgstr "República de Belarús"
 
 # BZ
 # fuzzy
 #. :BLR:112:
 #: zypp/CountryCode.cc:193
 msgid "Belize"
-msgstr "Bélxica"
+msgstr "Belize"
 
 # CA
 #. :BLZ:084:
@@ -1501,12 +1501,12 @@ msgstr "Non se pode facer chroot a '%s' (%s)."
 #: zypp/ExternalProgram.cc:363
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr ""
+msgstr "Non foi posíbel executar chdir '%s' dentro de '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:364
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr ""
+msgstr "Non foi posíbel executar '%s' (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:376
@@ -1537,12 +1537,11 @@ msgstr "A orde rematou cun erro descoñecido."
 #: zypp/KeyRing.cc:561
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr ""
+msgstr "Tentouse importar unha chave que non existe %s para o chaveiro %s"
 
 #: zypp/KeyRing.cc:583
-#, fuzzy
 msgid "Failed to import key."
-msgstr "Erro ao importar a chave pública %1%"
+msgstr "Erro ao importar a chave."
 
 #: zypp/KeyRing.cc:606
 msgid "Failed to delete key."
@@ -1567,7 +1566,7 @@ msgstr "Afar"
 #. language code: abk ab
 #: zypp/LanguageCode.cc:163
 msgid "Abkhazian"
-msgstr "Abxasio "
+msgstr "Abxasio"
 
 #. language code: ace
 #: zypp/LanguageCode.cc:165
@@ -1612,7 +1611,7 @@ msgstr "Ainu"
 #. language code: aka ak
 #: zypp/LanguageCode.cc:181
 msgid "Akan"
-msgstr "Akan "
+msgstr "Akan"
 
 #. language code: akk
 #: zypp/LanguageCode.cc:183
@@ -1702,7 +1701,7 @@ msgstr "Arawak"
 #. language code: asm as
 #: zypp/LanguageCode.cc:219
 msgid "Assamese"
-msgstr "Asamés "
+msgstr "Asamés"
 
 # AT
 #. language code: ast
@@ -1730,7 +1729,7 @@ msgstr "Avaric"
 #. language code: ave ae
 #: zypp/LanguageCode.cc:229
 msgid "Avestan"
-msgstr "Avestan "
+msgstr "Avestan"
 
 #. language code: awa
 #: zypp/LanguageCode.cc:231
@@ -1764,7 +1763,7 @@ msgstr "Linguas Bamileke"
 #. language code: bak ba
 #: zypp/LanguageCode.cc:241
 msgid "Bashkir"
-msgstr "Bashkirés "
+msgstr "Bashkirés"
 
 #. language code: bal
 #: zypp/LanguageCode.cc:243
@@ -1776,12 +1775,12 @@ msgstr "Baluchi"
 #. language code: bam bm
 #: zypp/LanguageCode.cc:245
 msgid "Bambara"
-msgstr "Bambara "
+msgstr "Bambara"
 
 #. language code: ban
 #: zypp/LanguageCode.cc:247
 msgid "Balinese"
-msgstr "Balinés "
+msgstr "Balinés"
 
 #. language code: baq eus eu
 #: zypp/LanguageCode.cc:249 zypp/LanguageCode.cc:251
@@ -1801,7 +1800,7 @@ msgstr "Bálticas (Outras)"
 #. language code: bej
 #: zypp/LanguageCode.cc:257
 msgid "Beja"
-msgstr "Beja "
+msgstr "Beja"
 
 # BY
 #. language code: bel be
@@ -1829,14 +1828,14 @@ msgstr "Bereber (Outras )"
 #. language code: bho
 #: zypp/LanguageCode.cc:267
 msgid "Bhojpuri"
-msgstr "Bhojpuri "
+msgstr "Bhojpuri"
 
 # BH
 # fuzzy
 #. language code: bih bh
 #: zypp/LanguageCode.cc:269
 msgid "Bihari"
-msgstr "Biharí "
+msgstr "Bihari"
 
 #. language code: bik
 #: zypp/LanguageCode.cc:271
@@ -1851,7 +1850,7 @@ msgstr "Bini"
 #. language code: bis bi
 #: zypp/LanguageCode.cc:275
 msgid "Bislama"
-msgstr "Bislama "
+msgstr "Bislama"
 
 #. language code: bla
 #: zypp/LanguageCode.cc:277
@@ -4066,21 +4065,20 @@ msgstr "Realizaranse as seguintes accións:"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:60
-#, fuzzy
 msgid "does not expire"
-msgstr "(non caduca)"
+msgstr "non caduca"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:65
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "caducado: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:70
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "caduca: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:79
@@ -4099,28 +4097,28 @@ msgstr "(caduca dentro de 24h)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:96
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(caduca dentro de 24h)"
-msgstr[1] "(caduca dentro de 24h)"
+msgstr[0] "(caduca dentro de %d día)"
+msgstr[1] "(caduca dentro de %d días)"
 
 #: zypp/RepoManager.cc:312
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr ""
+msgstr "Non foi posíbel ler o directorio do repositorio %1%: permiso denegado"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "Erro ao ler o directorio '%s'."
+msgstr "Erro ao ler o directorio '%s'"
 
 #: zypp/RepoManager.cc:330
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr ""
+msgstr "Non foi posíbel ler o ficheiro de repositorio '%1%': permiso denegado"
 
 #: zypp/RepoManager.cc:353
 msgid "Repository alias cannot start with dot."
@@ -4356,7 +4354,7 @@ msgstr "Modo de coincidencias '%s' descoñecido "
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Modo de coincidencias '%s' descoñecido para o patrón '%s'."
+msgstr "Modo de coincidencias '%s' descoñecido para o patrón '%s'"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
@@ -4547,7 +4545,7 @@ msgstr "Falta o atributo requirido '%s'."
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr "Necesítanse un ou ambos os dous atributos '%s' ou '%s'"
+msgstr "Necesítanse un ou ambos os dous atributos '%s' ou '%s'."
 
 #: zypp/repo/PackageProvider.cc:216
 msgid "Signature verification failed"
