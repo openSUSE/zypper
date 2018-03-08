@@ -1660,7 +1660,7 @@ inline std::string timestamp()
 
 // ----------------------------------------------------------------------------
 
-void add_repo( Zypper & zypper, RepoInfo & repo )
+bool add_repo( Zypper & zypper, RepoInfo & repo )
 {
   RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData();
@@ -1700,7 +1700,7 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
     ZYPP_CAUGHT( e );
     zypper.out().error( e, str::Format(_("Invalid repository alias: '%s'")) % repo.alias() );
     zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-    return;
+    return false;
   }
   catch ( const repo::RepoAlreadyExistsException & e )
   {
@@ -1708,7 +1708,7 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
     ERR << "Repository named '" << repo.alias() << "' already exists." << endl;
     zypper.out().error( str::Format(_("Repository named '%s' already exists. Please use another alias.")) % repo.alias() );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
+    return false;
   }
   catch ( const repo::RepoUnknownTypeException & e )
   {
@@ -1723,7 +1723,7 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
     }
     zypper.out().error( e, _("Can't find a valid repository at given location:"), s.str() );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
+    return false;
   }
   catch ( const repo::RepoException & e )
   {
@@ -1732,14 +1732,14 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
     zypper.out().error( e, _("Problem transferring repository data from specified URI:"),
 			is_cd ? "" : _("Please check whether the specified URI is accessible.") );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
+    return false;
   }
   catch ( const Exception & e )
   {
     ZYPP_CAUGHT( e );
     zypper.out().error( e, _("Unknown problem when adding repository:") );
     zypper.setExitCode( ZYPPER_EXIT_ERR_BUG );
-    return;
+    return false;
   }
 
   if ( !repo.gpgCheck() )
@@ -1787,7 +1787,7 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
 	zypper.out().error( str::Format(_("Problem reading data from '%s' media")) % repo.asUserString(),
 			    _("Please check if your installation media is valid and readable.") );
 	zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-	return;
+	return false;
       }
     }
     else
@@ -1796,6 +1796,7 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
 			 " [--no-check]" );
     }
   }
+  return true;
 }
 
 // ----------------------------------------------------------------------------
@@ -1834,8 +1835,8 @@ void add_repo_by_url( Zypper & zypper,
   if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
     repo.setGpgCheck( gpgCheck );
 
-  add_repo( zypper, repo );
-  repoPrioSummary( zypper );
+  if ( add_repo( zypper, repo ) )
+    repoPrioSummary( zypper );
 }
 
 // ----------------------------------------------------------------------------
@@ -1891,6 +1892,7 @@ void add_repo_from_file( Zypper & zypper,
   }
 
   // add repos
+  bool addedAtLeastOneRepository = false;
   for_( rit, repos.begin(), repos.end() )
   {
     RepoInfo & repo( *rit );
@@ -1925,10 +1927,12 @@ void add_repo_from_file( Zypper & zypper,
     if ( prio >= 1 )
       repo.setPriority( prio );
 
-    add_repo( zypper, repo );
+    if ( add_repo( zypper, repo ) )
+      addedAtLeastOneRepository = true;
   }
 
-  repoPrioSummary( zypper );
+  if ( addedAtLeastOneRepository )
+    repoPrioSummary( zypper );
   return;
 }
 
