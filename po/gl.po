@@ -15,16 +15,16 @@ msgstr ""
 "Project-Id-Version: zypper.gl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 16:04+0100\n"
-"PO-Revision-Date: 2017-07-04 08:51+0000\n"
+"PO-Revision-Date: 2018-03-08 17:11+0000\n"
 "Last-Translator: Manuel Vazquez <xixirei@yahoo.es>\n"
-"Language-Team: Galician <https://l10n.opensuse.org/projects/zypper/master/gl/"
-">\n"
+"Language-Team: Galician "
+"<https://l10n.opensuse.org/projects/zypper/master/gl/>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.13.1\n"
+"X-Generator: Weblate 2.18\n"
 "X-Poedit-Language: Galician\n"
 
 #: src/SolverRequester.h:57
@@ -259,16 +259,15 @@ msgstr "Aceptando un ficheiro sen asinar '%s' desde o repositorio '%s'."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "O ficheiro '%s' está sen asinar, desexa continuar?"
+msgstr "O ficheiro '%1%' está sen asinar."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr ""
-"O ficheiro '%s' desde o repositorio '%s' está sen asinar, desexa continuar?"
+msgstr "O ficheiro '%1%' do repositorio '%2%' está sen asinar."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -293,23 +292,22 @@ msgstr "Aceptando o ficheiro '%s' asinado cunha chave descoñecida '%s'."
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Aceptando o ficheiro '%s' desde o repositorio '%s' asinado cunha chave "
+"Aceptando o ficheiro '%s' do repositorio '%s' asinado cunha chave "
 "descoñecida '%s'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr ""
-"O ficheiro '%s' está asinado cunha chave descoñecida '%s'. Desexa continuar?"
+msgstr "O ficheiro '%1%' está asinado cunha chave descoñecida '%2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"O ficheiro '%s' desde o repositorio '%s' está asinado cunha chave "
-"descoñecida '%s'. Desexa continuar?"
+"O ficheiro '%1%' do repositorio '%3%' está asinado cunha chave descoñecida "
+"'%2%'."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -4631,8 +4629,8 @@ msgstr "Abortar, reintentar, ignorar?"
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] "seleccionando automaticamente %s despois de %u segundo."
-msgstr[1] "Seleccionando automaticamente '%s' despois de %u segundos. "
+msgstr[0] "Seleccionando automaticamente '%s' despois de %u segundo."
+msgstr[1] "Seleccionando automaticamente '%s' despois de %u segundos."
 
 #: src/utils/prompt.cc:215
 msgid "Trying again..."
@@ -4670,7 +4668,7 @@ msgstr "Introduza '%s' para '%s' ou '%s' para '%s' se non lle funciona nada."
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr "Opción descoñecida"
+msgstr "Opción descoñecida "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
@@ -5555,10 +5553,10 @@ msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
 msgstr[0] ""
-"Eliminouse o repositorio '%s' dos repositorios desactivados do servizo '%s'."
+"Eliminouse o repositorio '%s' dos repositorios desactivados do servizo '%s'"
 msgstr[1] ""
 "Elimináronse os repositorios '%s' dos repositorios desactivados do servizo "
-"'%s'."
+"'%s'"
 
 #: src/repos.cc:3096
 #, c-format, boost-format
