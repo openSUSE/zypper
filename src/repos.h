@@ -120,7 +120,7 @@ void add_repo_from_file( Zypper & zypper,
 /**
  * Add repository specified by \repo to system repositories.
  */
-void add_repo( Zypper & zypper, RepoInfo & repo );
+bool add_repo( Zypper & zypper, RepoInfo & repo );
 
 /**
  * Remove repository specified by \a alias.
