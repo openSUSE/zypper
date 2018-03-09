@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-10 16:50+0200\n"
-"PO-Revision-Date: 2018-03-09 09:01+0000\n"
+"PO-Revision-Date: 2018-04-10 15:42+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -1909,7 +1909,7 @@ msgstr ""
 #: src/Zypper.cc:711
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
-msgstr ""
+msgstr "Pracuje v jiném kořenovém adresáři, ale sdílí úložiště s hostitelem."
 
 #: src/Zypper.cc:715
 msgid ""
