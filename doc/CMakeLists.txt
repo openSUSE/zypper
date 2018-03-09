@@ -1,9 +1,18 @@
 FIND_PROGRAM(A2X a2x)
-IF (NOT A2X)
-MESSAGE(FATAL_ERROR "Could not find a2x, please install asciidoc")
-ELSE (NOT A2X)
+IF (A2X)
 MESSAGE("a2x found: ${A2X}")
-ENDIF (NOT A2X)
+SET(ASCDOC_CMD ${A2X} -D ${CMAKE_CURRENT_BINARY_DIR} -f manpage)
+ENDIF (A2X)
+
+FIND_PROGRAM(ASCIIDOC asciidoctor)
+IF (ASCIIDOC)
+MESSAGE("asciidoctor found: ${ASCIIDOC}")
+SET(ASCDOC_CMD ${ASCIIDOC} -D ${CMAKE_CURRENT_BINARY_DIR} -b manpage -d manpage)
+ENDIF (ASCIIDOC)
+
+IF (NOT ASCDOC_CMD)
+MESSAGE(FATAL_ERROR "Could not find a2x or asciidoctor, please install either one of them.")
+ENDIF()
 
 function(ADD_A2X_MANPAGES)
     set(options)
@@ -21,7 +30,7 @@ function(ADD_A2X_MANPAGES)
         FOREACH (curr_PAGE ${A2X_MAN_PAGES${MAN_IDX}})
             ADD_CUSTOM_COMMAND (
               OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${curr_PAGE}
-              COMMAND ${A2X} -D ${CMAKE_CURRENT_BINARY_DIR} -f manpage ${CMAKE_CURRENT_SOURCE_DIR}/${curr_PAGE}.txt
+              COMMAND ${ASCDOC_CMD} ${CMAKE_CURRENT_SOURCE_DIR}/${curr_PAGE}.txt
               DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${curr_PAGE}.txt
               WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
               COMMENT "Building manpage ${curr_PAGE}"
