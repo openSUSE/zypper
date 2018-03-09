@@ -126,8 +126,12 @@ Requires:       libcurl   >= %{min_curl_version}
 %endif
 
 # required for documentation
+%if 0%{?suse_version} >= 1330
+BuildRequires:  rubygem(asciidoctor)
+%else
 BuildRequires:  asciidoc
 BuildRequires:  libxslt-tools
+%endif
 
 %description
 Package, Patch, Pattern, and Product Management
