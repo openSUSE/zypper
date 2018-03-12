@@ -238,6 +238,9 @@ namespace zypp
     /// \brief Convenient building of std::string with \ref boost::format.
     /// Basically a \ref boost::format autoconvertible to \ref std::string
     /// for building string arguments.
+    /// \note It won't complain about malformed or incomplete format
+    /// strings. Usefull when dealing with translations or classes
+    /// providing a default formater.
     /// \code
     ///   void fnc( const std::string & txt_r );
     ///   fnc( str::Format("Hello %1%") % 13 );
@@ -247,8 +250,8 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     struct Format
     {
-      Format() {}
-      Format( const std::string & format_r ) : _fmter( format_r ) {}
+      Format() { _fmter.exceptions( boost::io::no_error_bits ); }
+      Format( const std::string & format_r ) : Format() { _fmter.parse( format_r ); }
 
       template<class Tp>
       Format & operator%( Tp && arg )
@@ -269,26 +272,6 @@ namespace zypp
     inline std::ostream & operator<<( std::ostream & str, const Format & obj )
     { return str << obj.fmter(); }
 
-    ///////////////////////////////////////////////////////////////////
-    /// \class FormatNAC
-    /// \brief \ref Format with (N)o (A)rgument (C)heck.
-    /// It won't complain about missing or excess arguments. Sometimes
-    /// usefull when dealing with translations or classes providing a
-    /// default formater.
-    ///////////////////////////////////////////////////////////////////
-    struct FormatNAC : public Format
-    {
-      FormatNAC() { relax(); }
-      FormatNAC( const std::string & format_r ) : Format( format_r ) { relax(); }
-
-    private:
-      void relax()
-      {
-	using namespace boost::io;
-	_fmter.exceptions( all_error_bits ^ ( too_many_args_bit | too_few_args_bit ) );
-      }
-    };
-    ///////////////////////////////////////////////////////////////////
     /** \name String representation of number.
      *
      * Optional second argument sets the minimal string width (' ' padded).
