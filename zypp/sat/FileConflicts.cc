@@ -56,7 +56,7 @@ namespace zypp
 		"  conflicts with file from install of\n"
 		"     %3%" )
 	}};
-	return str::FormatNAC( text[lhsSolvable().isSystem()?0:1][rhsSolvable().isSystem()?0:1] )
+	return str::Format( text[lhsSolvable().isSystem()?0:1][rhsSolvable().isSystem()?0:1] )
 	       % lhsFilename()
 	       % lhsSolvable().asUserString()
 	       % rhsSolvable().asUserString();
@@ -98,7 +98,7 @@ namespace zypp
 		"  from install of\n"
 		"     %4%" )
 	}};
-	return str::FormatNAC( text[lhsSolvable().isSystem()?0:1][rhsSolvable().isSystem()?0:1] )
+	return str::Format( text[lhsSolvable().isSystem()?0:1][rhsSolvable().isSystem()?0:1] )
 	       % lhsFilename()
 	       % lhsSolvable().asUserString()
 	       % rhsFilename()
