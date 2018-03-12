@@ -275,7 +275,7 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
     else
       Zypper::instance().out().progress(
           str::numstring(data.numericId()),
-          data.name(), data.val());
+          data.name(), data.reportValue());
     return !Zypper::instance().exitRequested();
   }
 
