@@ -1747,7 +1747,7 @@ bool add_repo( Zypper & zypper, RepoInfo & repo )
     zypper.out().warning(
       // translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
       // translators: %1% - a repository name
-      str::FormatNAC(_("GPG checking is disabled in configuration of repository '%1%'. Integrity and origin of packages cannot be verified."))
+      str::Format(_("GPG checking is disabled in configuration of repository '%1%'. Integrity and origin of packages cannot be verified."))
       % repo.asUserString() );
   }
 

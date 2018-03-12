@@ -351,14 +351,14 @@ namespace {
     switch (type_r) {
     case Local:
     case Global:
-      return str::FormatNAC( type_r == Global
+      return str::Format( type_r == Global
          ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
          : _("Legacy commandline option %1% detected. Please use %2% instead.") )
          % NEGATIVEString(dashdash(old_r))
          % POSITIVEString(dashdash(new_r));
       break;
     case Ignored:
-      return str::FormatNAC(
+      return str::Format(
          _("Legacy commandline option %1% detected. This option is ignored."))
          % NEGATIVEString(dashdash(old_r));
       break;
