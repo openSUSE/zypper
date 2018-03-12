@@ -1601,8 +1601,9 @@ namespace zypp
 
       // process all remembered posttrans scripts.
       if ( !abort )
-	postTransCollector.executeScripts();
-      else
+	abort = postTransCollector.executeScripts();
+
+      if ( abort )
 	postTransCollector.discardScripts();
 
       // Check presence of update scripts/messages. If aborting,

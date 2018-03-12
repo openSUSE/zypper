@@ -47,7 +47,7 @@ namespace zypp
 	bool collectScriptFromPackage( ManagedFile rpmPackage_r );
 
 	/** Execute te remembered scripts. */
-	void executeScripts();
+	bool executeScripts();
 
 	/** Discard all remembered scrips. */
 	void discardScripts();

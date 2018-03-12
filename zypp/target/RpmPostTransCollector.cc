@@ -12,6 +12,7 @@
 #include <fstream>
 #include "zypp/base/LogTools.h"
 #include "zypp/base/NonCopyable.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/target/RpmPostTransCollector.h"
 
 #include "zypp/TmpPath.h"
@@ -21,6 +22,7 @@
 #include "zypp/ExternalProgram.h"
 #include "zypp/target/rpm/RpmHeader.h"
 #include "zypp/ZConfig.h"
+#include "zypp/ZYppCallbacks.h"
 
 using std::endl;
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -78,20 +80,47 @@ namespace zypp
 	  return true;
 	}
 
-	/** Execute te remembered scripts. */
-	void executeScripts()
+	/** Execute the remembered scripts. */
+	bool executeScripts()
 	{
 	  if ( _scripts.empty() )
-	    return;
+	    return true;
 
 	  HistoryLog historylog;
 
 	  Pathname noRootScriptDir( ZConfig::instance().update_scriptsPath() / tmpDir().basename() );
 
-	  for ( const auto & script : _scripts )
+	  ProgressData scriptProgress( static_cast<ProgressData::value_type>(_scripts.size()) );
+	  callback::SendReport<ProgressReport> report;
+	  scriptProgress.sendTo( ProgressReportAdaptor( ProgressData::ReceiverFnc(), report ) );
+
+	  bool firstScript = true;
+	  while ( ! _scripts.empty() )
 	  {
+	    const std::string & script = _scripts.front();
+	    const std::string & pkgident( script.substr( 0, script.size()-6 ) );	// strip tmp file suffix
+
+	    scriptProgress.name( str::Format(_("Executing %%posttrans script '%1%'")) % pkgident );
+
+	    bool canContinue = true;
+	    if (firstScript)  {
+	      firstScript = false;
+	      canContinue = scriptProgress.toMin();
+	    } else {
+	      canContinue = scriptProgress.incr();
+	    }
+
+	    if (!canContinue) {
+	      str::Str msg;
+	      msg << "Execution of %posttrans scripts cancelled";
+	      WAR << msg << endl;
+	      historylog.comment( msg, true /*timestamp*/);
+	      JobReport::warning( msg );
+	      return false;
+	    }
+
 	    MIL << "EXECUTE posttrans: " << script << endl;
-            ExternalProgram prog( (noRootScriptDir/script).asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
+	    ExternalProgram prog( (noRootScriptDir/script).asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
 
 	    str::Str collect;
 	    for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
@@ -99,13 +128,15 @@ namespace zypp
 	      DBG << line;
 	      collect << "    " << line;
 	    }
+
+	    //script was executed, remove it from the list
+	    _scripts.pop_front();
+
 	    int ret = prog.close();
 	    const std::string & scriptmsg( collect );
 
 	    if ( ret != 0 || ! scriptmsg.empty() )
 	    {
-	      const std::string & pkgident( script.substr( 0, script.size()-6 ) );	// strip tmp file suffix
-
 	      if ( ! scriptmsg.empty() )
 	      {
 		str::Str msg;
@@ -124,7 +155,12 @@ namespace zypp
 	      }
 	    }
 	  }
+
+	  //show a final message
+	  scriptProgress.name( _("Executing %posttrans scripts") );
+	  scriptProgress.toMax();
 	  _scripts.clear();
+	  return true;
 	}
 
 	/** Discard all remembered scrips. */
@@ -149,6 +185,7 @@ namespace zypp
 
 	  _scripts.clear();
 	}
+
 
       private:
 	/** Lazy create tmpdir on demand. */
@@ -189,7 +226,7 @@ namespace zypp
     bool RpmPostTransCollector::collectScriptFromPackage( ManagedFile rpmPackage_r )
     { return _pimpl->collectScriptFromPackage( rpmPackage_r ); }
 
-    void RpmPostTransCollector::executeScripts()
+    bool RpmPostTransCollector::executeScripts()
     { return _pimpl->executeScripts(); }
 
     void RpmPostTransCollector::discardScripts()
