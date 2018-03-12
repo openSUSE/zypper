@@ -2450,7 +2450,7 @@ msgid ""
 "'%1%' aggregate options."
 msgstr ""
 "Ubah properti layanan yang ditentukan oleh alias, nomor, atau URI, atau "
-"dengan opsi agregat '% 1%'."
+"dengan opsi agregat '%1%'."
 
 #: src/Zypper.cc:2028
 msgid "Apply changes to all services."

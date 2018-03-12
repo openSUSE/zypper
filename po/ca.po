@@ -739,7 +739,7 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"El pedaç %1% és opcional. Feu servir \"%2\" per instal·lar-lo o \"%3\" per "
+"El pedaç %1% és opcional. Feu servir \"%2%\" per instal·lar-lo o \"%3%\" per "
 "incloure-hi tots els pedaços opcionals."
 
 #: src/RequestFeedback.cc:192

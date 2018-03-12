@@ -444,7 +444,7 @@ msgstr[0] ""
 "Følgende pakke er blevet ekskluderet fra filkonfliktertjek da den endnu ikke "
 "er downloadet:"
 msgstr[1] ""
-"Følgende %1 pakker er blevet ekskluderet fra filkonfliktertjek da de endnu "
+"Følgende %1% pakker er blevet ekskluderet fra filkonfliktertjek da de endnu "
 "ikke er downloadet:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows

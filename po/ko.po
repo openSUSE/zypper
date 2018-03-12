@@ -1881,7 +1881,7 @@ msgid ""
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
 "'%1%'은(는) 오타가 아닌 경우 기본 제공 명령이 아니지만 하위 명령 또는 플러그"
-"인으로 제공됩니다('%2 %' 참조)."
+"인으로 제공됩니다('%2%' 참조)."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
