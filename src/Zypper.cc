@@ -707,6 +707,9 @@ void print_main_help( Zypper & zypper )
     "\t--disable-system-resolvables\n"
     "\t\t\t\tDo not read installed packages.\n"
   );
+  help_global_target_options += str::Format(
+    "\t--installroot <dir>\t%1%\n" ) % _("Operate on a different root directory, but share repositories with the host."
+  );
 
   static std::string help_commands = _(
     "  Commands:\n"
@@ -915,6 +918,7 @@ void Zypper::processGlobalOptions()
     {"no-gpg-checks",              no_argument,       0,  0 },
     {"gpg-auto-import-keys",       no_argument,       0,  0 },
     {"root",                       required_argument, 0, 'R'},
+    {"installroot",                required_argument, 0,  0 },
     {"reposd-dir",                 required_argument, 0, 'D'},
     {"cache-dir",                  required_argument, 0, 'C'},
     {"raw-cache-dir",              required_argument, 0,  0 },
@@ -1226,20 +1230,35 @@ void Zypper::processGlobalOptions()
     MIL << "gpg-auto-import-keys is on" << endl;
   }
 
-  if ( (it = gopts.find("root")) != gopts.end() )
+  if ( (it = gopts.find("root")) != gopts.end() || (it = gopts.find("installroot")) != gopts.end() )
   {
+    if ( gopts.find("root") != gopts.end() && gopts.find("installroot") != gopts.end() )
+    {
+      out().error( cli::errorMutuallyExclusiveOptions( "--root --installroot" ) );
+      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      ZYPP_THROW( ExitRequestException("invalid args") );
+    }
     _gopts.root_dir = it->second.front();
     _gopts.changedRoot = true;
+    _gopts.is_install_root = (it->first == "installroot");
+
+    //make sure ZConfig knows the RepoManager root is not inside the target rootfs
+    if ( _gopts.is_install_root )
+      ZConfig::instance().setRepoManagerRoot("/");
+
     Pathname tmp( _gopts.root_dir );
     if ( !tmp.absolute() )
     {
       out().error(_("The path specified in the --root option must be absolute."));
       setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
+      ZYPP_THROW( ExitRequestException("invalid args") );
     }
 
-    DBG << "root dir = " << _gopts.root_dir << endl;
-    _gopts.rm_options = RepoManagerOptions(_gopts.root_dir);
+    DBG << "root dir = " << _gopts.root_dir << " is_install_root = " << _gopts.is_install_root << endl;
+    if (_gopts.is_install_root)
+      _gopts.rm_options = RepoManagerOptions("/");
+    else
+      _gopts.rm_options = RepoManagerOptions(_gopts.root_dir);
   }
 
   // on the fly check the baseproduct symlink
