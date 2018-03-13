@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Tue Mar 13 18:15:56 CET 2018 - ma@suse.de
+
+- Fix translated format strings (bsc#1082711)
+- Protect code against broken translations (bsc#1082711)
+- Fix broken translated format strings
+- BuildRequires:  libzypp-devel >= 17.2.2
+- Deprecate the use of asciidoc for new releases
+- Introduce --allow-unsigned-rpm switch to install (bsc#1055533)
+- version 1.14.4
+
+-------------------------------------------------------------------
 Thu Mar  1 18:33:12 CET 2018 - bzeller@suse.de
 
 - Auto complete available repositories with the --from switch
