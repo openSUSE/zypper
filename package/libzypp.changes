@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Mar 13 18:03:42 CET 2018 - ma@suse.de
+
+- Protect code against broken translations (bsc#1082711)
+- Fix broken translated format strings
+- Deprecate the use of asciidoc for new releases
+- version 17.2.2 (2)
+
+-------------------------------------------------------------------
 Wed Mar  7 11:22:02 CET 2018 - ma@suse.de
 
 - PoolQuery::addDependency add overload to define an individual
