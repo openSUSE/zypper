@@ -78,6 +78,7 @@ struct GlobalOptions
   , no_cd( false )
   , no_remote( false )
   , root_dir( "/" )
+  , is_install_root( false )
   , no_abbrev( false )
   , terse( false )
   , changedRoot( false )
@@ -113,6 +114,7 @@ struct GlobalOptions
   /** Whether to ignore remote (http, ...) repos */
   bool no_remote;
   std::string root_dir;
+  bool is_install_root; /// < used when the package target rootfs is not the same as the zypper metadata rootfs
   RepoManagerOptions rm_options;
   bool no_abbrev;
   bool terse;

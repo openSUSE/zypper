@@ -1652,6 +1652,9 @@ Target Options: :: {nop}
 
 *-R*, *--root* 'dir'::
 	Operates on a different root directory. This option influences the location of the repos.d directory and the metadata cache directory and also causes rpm to be run with the *--root* option to do the actual installation or removal of packages. See also the *FILES* section.
+	
+*--installroot* 'dir'::
+	Behaves like *--root* but shares the repositories with the host system.
 
 *--disable-system-resolvables*::
 	This option serves mainly for testing purposes. It will cause zypper to act as if there were no packages installed in the system. Use with caution as you can damage your system using this option.
