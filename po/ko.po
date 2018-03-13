@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-08 18:18+0100\n"
-"PO-Revision-Date: 2018-02-22 10:03+0000\n"
+"PO-Revision-Date: 2018-03-13 06:25+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
-"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
-">\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1555,11 +1555,9 @@ msgstr ""
 "레거시 명령줄 옵션 %1%이(가) 감지되었습니다. %2%을(를) 대신 사용하십시오."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
-msgstr ""
-"레거시 명령줄 옵션 %1%이(가) 감지되었습니다. 전역 옵션 %2%을(를) 대신 사용하"
-"십시오."
+msgstr "레거시 명령줄 옵션 %1%이(가) 감지되었습니다. 이 옵션은 무시됩니다."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2100,7 +2098,7 @@ msgstr ""
 
 #: src/Zypper.cc:1729
 msgid "Silently install unsigned rpm packages given as commandline parameters."
-msgstr ""
+msgstr "명령줄 매개변수로 주어진 서명되지 않은 rpm 패키지를 자동으로 설치하십시오."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2275,7 +2273,7 @@ msgstr "시스템에 리포지토리 인덱스 서비스를 추가합니다."
 
 #: src/Zypper.cc:1942
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "서비스 유형은 항상 자동 감지됩니다. 이 옵션은 무시됩니다."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1958
@@ -2545,7 +2543,7 @@ msgstr "URI를 검사하지 않고 나중에 새로 고치는 동안 검사합�
 
 #: src/Zypper.cc:2156
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "리포지토리 유형은 항상 자동 감지됩니다. 이 옵션은 무시됩니다."
 
 #: src/Zypper.cc:2184
 msgid ""
@@ -3602,7 +3600,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3227
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "디버그 출력을 파일 <path>에 기록합니다."
 
 #: src/Zypper.cc:3246
 msgid ""
