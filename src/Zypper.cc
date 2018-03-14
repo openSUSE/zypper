@@ -147,34 +147,6 @@ void Zypper::assertZYppPtrGod()
   }
 }
 
-///////////////////////////////////////////////////////////////////
-
-namespace {
-
-  /** Whether user may create \a dir_r or has rw-access to it. */
-  inline bool userMayUseDir( const Pathname & dir_r )
-  {
-    bool mayuse = true;
-    if ( dir_r.empty()  )
-      mayuse = false;
-    else
-    {
-      PathInfo pi( dir_r );
-      if ( pi.isExist() )
-      {
-	if ( ! ( pi.isDir() && pi.userMayRWX() ) )
-	  mayuse = false;
-      }
-      else
-	mayuse = userMayUseDir( dir_r.dirname() );
-    }
-    return mayuse;
-  }
-
-} //namespace
-
-///////////////////////////////////////////////////////////////////
-
 Zypper::Zypper()
 : _argc( 0 )
 , _argv( nullptr )

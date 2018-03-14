@@ -19,6 +19,7 @@
 
 #include "Zypper.h"
 #include "Table.h"
+#include "utils/misc.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -56,48 +57,6 @@ namespace zypp
       Zypper::instance().out().warningPar( 4, str::Format(_("This file was modified after it has been signed. This may have been a malicious change, so it might not be trustworthy anymore! You should not continue unless you know it's safe.") ) );
     }
 
-    std::ostream & dumpKeyInfo( std::ostream & str, const PublicKeyData & key, const KeyContext & context = KeyContext() )
-    {
-      Zypper & zypper = Zypper::instance();
-      if ( zypper.out().type() == Out::TYPE_XML )
-      {
-	{
-	  xmlout::Node parent( str, "gpgkey-info", xmlout::Node::optionalContent );
-
-	  if ( !context.empty() )
-	  {
-	    dumpAsXmlOn( *parent, context.repoInfo().asUserString(), "repository" );
-	  }
-	  dumpAsXmlOn( *parent, key.name(), "key-name" );
-	  dumpAsXmlOn( *parent, key.fingerprint(), "key-fingerprint" );
-	  dumpAsXmlOn( *parent, key.algoName(), "key-algorithm" );
-	  dumpAsXmlOn( *parent, key.created(), "key-created" );
-	  dumpAsXmlOn( *parent, key.expires(), "key-expires" );
-	  dumpAsXmlOn( *parent, key.rpmName(), "rpm-name" );
-	}
-	return str;
-      }
-
-      Table t;
-      t.lineStyle( none );
-      if ( !context.empty() )
-      {
-	t << ( TableRow() << "" << _("Repository:") << context.repoInfo().asUserString() );
-      }
-      t << ( TableRow() << "" << _("Key Fingerprint:") << str::gapify( key.fingerprint(), 4 ) )
-	<< ( TableRow() << "" << _("Key Name:") << key.name() )
-	<< ( TableRow() << "" << _("Key Algorithm:") << key.algoName() )
-	<< ( TableRow() << "" << _("Key Created:") << key.created() )
-	<< ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() );
-      for ( const PublicSubkeyData & sub : key.subkeys() )
-	t << ( TableRow() << "" << _("Subkey:") << sub.asString() );
-      t << ( TableRow() << "" << _("Rpm Name:") << key.rpmName() );
-
-      return str << t;
-    }
-
-    inline std::ostream & dumpKeyInfo( std::ostream & str, const PublicKey & key, const KeyContext & context = KeyContext() )
-    { return dumpKeyInfo( str, key.keyData(), context ); }
   } // namespace
   ///////////////////////////////////////////////////////////////////
 

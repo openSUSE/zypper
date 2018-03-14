@@ -88,6 +88,11 @@ struct ZypperCommand
   static const ZypperCommand RUG_PATTERN_INFO;
   static const ZypperCommand RUG_PRODUCT_INFO;
   //!@}
+  //!
+
+  static const ZypperCommand KEYS;
+  static const ZypperCommand ADDKEY;
+  static const ZypperCommand REMOVEKEY;
 
   static const ZypperCommand NEEDS_REBOOTING;
 
@@ -166,7 +171,11 @@ struct ZypperCommand
     ADD_LOCALE_e,
     REMOVE_LOCALE_e,
 
-    NEEDS_REBOOTING_e
+    NEEDS_REBOOTING_e,
+
+    KEYS_e,
+    ADDKEY_e,
+    REMOVEKEY_e
   };
 
   using CmdFactory = std::function<ZypperBaseCommandPtr ()>;
