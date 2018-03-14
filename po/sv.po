@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-08 18:18+0100\n"
-"PO-Revision-Date: 2018-02-14 13:19+0000\n"
-"Last-Translator: Jonas Svensson <jonas@ekhorva.se>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"PO-Revision-Date: 2018-03-14 07:18+0000\n"
+"Last-Translator: Martin Devenney <devenneymartin@gmail.com>\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1668,11 +1668,10 @@ msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr "Äldre kommandoradsalternativ %1% funnet. Använd %2% i stället."
 
 #: src/Zypper.cc:362
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
-"Äldre kommandoradsalternativ %1% funnet. Använd det globala alternativet %2% "
-"i stället."
+"Äldre kommandoradsalternativ %1% funnet. Det här alternativet ignoreras."
 
 #: src/Zypper.cc:476
 msgid "Command options:"
@@ -2224,7 +2223,7 @@ msgstr ""
 
 #: src/Zypper.cc:1729
 msgid "Silently install unsigned rpm packages given as commandline parameters."
-msgstr ""
+msgstr "Installera osignerade rpm-paket i bakgrunden som kommandoradparametrar."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2406,6 +2405,8 @@ msgstr "Lägg till en arkivindextjänst i systemet."
 #: src/Zypper.cc:1942
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
+"Den här typen av tjänst detekteras alltid automatiskt. Det här alternativet "
+"ignoreras."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:1958
@@ -2681,6 +2682,8 @@ msgstr "Sondera inte URI, sondera senare vid uppdatering."
 #: src/Zypper.cc:2156
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
+"Den här arkivtypen detekteras alltid automatiskt. Det här alternativet "
+"ignoreras."
 
 #: src/Zypper.cc:2184
 msgid ""
@@ -3757,7 +3760,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/Zypper.cc:3227
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Skriv felsökningsutdata till fil <sökväg>."
 
 #: src/Zypper.cc:3246
 msgid ""
