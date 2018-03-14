@@ -1,5 +1,5 @@
 ZYPP-REFRESH(8)
-=============
+==============
 :man manual: ZYPPER
 :man source: SUSE Linux
 
