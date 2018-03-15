@@ -172,6 +172,25 @@ namespace zypp
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1, ProvideFileOptions options = PROVIDE_DEFAULT );
 
       /**
+       * Provides \a file from \a url.
+       *
+       * \param absolute url to the file
+       * \return local pathname of the requested file
+       *
+       * \note interaction with the user does not ocurr if
+       * \ref ProvideFileOptions::NON_INTERACTIVE is set.
+       *
+       * \throws MediaException if a problem occured and user has chosen to
+       *         abort the operation. The calling code should take care
+       *         to quit the current operation.
+       * \throws SkipRequestException if a problem occured and user has chosen
+       *         to skip the current operation. The calling code should continue
+       *         with the next one, if possible.
+       * \see zypp::media::MediaManager::provideFile()
+       */
+      static Pathname provideFileFromUrl( const Url & file_url, ProvideFileOptions options = PROVIDE_DEFAULT );
+
+      /**
        * Provides an optional \a file from media \a media_nr.
        *
        * Like \ref provideFile (NON_INTERACTIVE), but return an empty \ref Pathname

@@ -170,6 +170,15 @@ IMPL_PTR_TYPE(MediaSetAccess);
     return op.result;
   }
 
+  Pathname MediaSetAccess::provideFileFromUrl(const Url &file_url, ProvideFileOptions options)
+  {
+    Url url(file_url);
+    Pathname path(url.getPathName());
+    url.setPathName ("/");
+    MediaSetAccess access(url);
+    return access.provideFile(path, 1, options);
+  }
+
   Pathname MediaSetAccess::provideOptionalFile( const Pathname & file, unsigned media_nr )
   {
     try

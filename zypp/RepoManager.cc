@@ -456,13 +456,7 @@ namespace zypp
 
   std::list<RepoInfo> readRepoFile( const Url & repo_file )
   {
-    // no interface to download a specific file, using workaround:
-    //! \todo add MediaManager::provideFile(Url file_url) to easily access any file URLs? (no need for media access id or media_nr)
-    Url url(repo_file);
-    Pathname path(url.getPathName());
-    url.setPathName ("/");
-    MediaSetAccess access(url);
-    Pathname local = access.provideFile(path);
+    Pathname local = MediaSetAccess::provideFileFromUrl(repo_file);
 
     DBG << "reading repo file " << repo_file << ", local path: " << local << endl;
 
