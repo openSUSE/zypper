@@ -246,7 +246,7 @@ namespace zypp {
       EarlyPipe();
       ~EarlyPipe();
       void closeW()		{ if ( _fds[W] != -1 ) { ::close( _fds[W] ); _fds[W] = -1; } }
-      FILE * stderr()		{ return _stderr; }
+      FILE * fStdErr()		{ return _stderr; }
       protected:
 	FILE * _stderr;
 	int _fds[2];
@@ -269,7 +269,7 @@ namespace zypp {
 
     public:
       /** Return \c FILE* to read programms stderr (O_NONBLOCK set). */
-      using externalprogram::EarlyPipe::stderr;
+      using externalprogram::EarlyPipe::fStdErr;
 
       /** Read data up to \c delim_r from stderr (nonblocking).
        * \note If \c delim_r is '\0', we read as much data as possible.
