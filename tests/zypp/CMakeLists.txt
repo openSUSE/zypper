@@ -12,6 +12,7 @@ ADD_TESTS(
   ContentType
   CpeId
   Date
+  DrunkenBishop
   Dup
   Digest
   Deltarpm
