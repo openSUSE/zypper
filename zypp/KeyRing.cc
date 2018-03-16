@@ -211,6 +211,9 @@ namespace zypp
     bool verifyFileTrustedSignature( const Pathname & file, const Pathname & signature )
     { return verifyFile( file, signature, trustedKeyRing() ); }
 
+    PublicKeyData trustedPublicKeyExists( const std::string & id )
+    { return publicKeyExists(id, trustedKeyRing());}
+
   private:
     bool verifyFile( const Pathname & file, const Pathname & signature, const Pathname & keyring );
     void importKey( const Pathname & keyfile, const Pathname & keyring );
@@ -618,6 +621,9 @@ namespace zypp
 
   std::list<PublicKeyData> KeyRing::trustedPublicKeyData()
   { return _pimpl->trustedPublicKeyData(); }
+
+  PublicKeyData KeyRing::trustedPublicKeyData(const std::string &id_r)
+  { return _pimpl->trustedPublicKeyExists( id_r ); }
 
   bool KeyRing::verifyFileSignatureWorkflow( const Pathname & file, const std::string & filedesc, const Pathname & signature, bool & sigValid_r, const KeyContext & keycontext )
   { return _pimpl->verifyFileSignatureWorkflow( file, filedesc, signature, sigValid_r, keycontext ); }

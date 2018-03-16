@@ -240,6 +240,11 @@ namespace zypp
     std::list<PublicKeyData> trustedPublicKeyData();
 
     /**
+     * Get a trusted public key's data in the keyring (key data only)
+     */
+    PublicKeyData trustedPublicKeyData( const std::string &id );
+
+    /**
      * Follows a signature verification interacting with the user.
      * The bool returned depends on user decision to trust or not.
      *
