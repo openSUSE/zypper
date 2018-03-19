@@ -8,6 +8,7 @@ using std::flush;
 namespace opt = boost::program_options;
 
 #include <zypp/target/rpm/RpmDb.h>
+#include <zypp/base/String.h>
 
 static std::string appname( "unknown" );
 
@@ -25,6 +26,22 @@ bool byTTL( const PublicKey & lhs, const PublicKey & rhs )
   int cmp = lhs.gpgPubkeyVersion().compare( rhs.gpgPubkeyVersion() );
   if ( cmp ) return cmp < 0;
   return lhs.gpgPubkeyRelease() > rhs.gpgPubkeyRelease(); // intentionally reverse cdate
+}
+
+std::ostream & dumpPubkeyOn( std::ostream & str, const PublicKey & key_r )
+{
+  std::vector<std::string> art( key_r.asciiArt().asLines( " ", PublicKey::AsciiArt::USE_COLOR ) );
+
+  std::vector<std::string> info;
+  str::split( (str::Str() << dump(key_r)).str(), std::back_inserter( info ), "\n" );
+
+  for ( unsigned i = 1; i < info.size(); ++i )
+    art[i] += info[i];
+
+  str << info[0] << endl;
+  for ( const auto & line : art )
+    str << line << endl;
+  return str << endl;
 }
 
 /******************************************************************
@@ -71,6 +88,8 @@ int main( int argc, char * argv[] )
   std::list<PublicKey> rpmpubkeys( rpmdb.pubkeys() );
   rpmpubkeys.sort( byTTL );
 
+
+
   if ( ! vm.count( "key-file" ) )
   {
     std::string last;
@@ -80,7 +99,7 @@ int main( int argc, char * argv[] )
 	cout << *it << endl;
       else
       {
-	cout << dump( *it ) << endl;
+	dumpPubkeyOn( cout, *it );
 	last = it->gpgPubkeyVersion();
       }
     }
@@ -93,7 +112,7 @@ int main( int argc, char * argv[] )
   {
     cout << "=== " << PathInfo(*it) << endl;
     PublicKey pubkey( *it );
-    cout << dump( pubkey ) << endl;
+    dumpPubkeyOn( cout, pubkey );
 
     std::string pubkeyV( pubkey.gpgPubkeyVersion() );
     std::string pubkeyR( pubkey.gpgPubkeyRelease() );
