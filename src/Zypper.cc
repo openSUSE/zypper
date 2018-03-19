@@ -186,6 +186,12 @@ using namespace zypp;
 ///////////////////////////////////////////////////////////////////
 namespace cli
 {
+  inline std::string errorMutuallyExclusiveOptions( const std::string & options_r )
+  {
+    // translator: %1% is a list of command line option names
+    return str::Format(_("These options are mutually exclusive: %1%")) % options_r;
+  }
+
   RepoInfo::GpgCheck gpgCheck( Zypper & zypper )
   {
     RepoInfo::GpgCheck ret = RepoInfo::GpgCheck::indeterminate;
@@ -221,7 +227,7 @@ namespace cli
     if ( fail )
     {
       // translator: %1% is a list of command line options
-      zypper.out().error( str::Format(_("These options are mutually exclusive: %1%")) % dashdash(failDetail) );
+      zypper.out().error( errorMutuallyExclusiveOptions( dashdash(failDetail) ) );
       zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
       ZYPP_THROW( ExitRequestException("invalid args") );
     }
