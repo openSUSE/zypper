@@ -21,6 +21,7 @@
 #include "zypp/base/Iterable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/DrunkenBishop.h"
 #include "zypp/Pathname.h"
 #include "zypp/Edition.h"
 #include "zypp/Date.h"
@@ -216,6 +217,18 @@ namespace zypp
     /** Whether \a id_r is the \ref id of the primary key or of a subkey. */
     bool providesKey( const std::string & id_r ) const;
 
+  public:
+    /** Random art fingerprint visualization type (\ref base::DrunkenBishop). */
+    typedef base::DrunkenBishop AsciiArt;
+
+    /** Random art fingerprint visualization (\ref base::DrunkenBishop).
+     * \code
+     *    PublicKeyData key;
+     *    cout << key.asciiArt( PublicKey::AsciiArt::USE_COLOR ) << endl;
+     * \endcode
+     */
+    AsciiArt asciiArt() const;
+
   private:
     class Impl;
     RWCOW_pointer<Impl> _pimpl;
@@ -315,6 +328,12 @@ namespace zypp
 
     bool providesKey( const std::string & id_r ) const	///!< \see \ref PublicKeyData
     { return keyData().providesKey( id_r ); }
+
+  public:
+    typedef PublicKeyData::AsciiArt AsciiArt;	///!< \see \ref PublicKeyData
+
+    AsciiArt asciiArt() const			///!< \see \ref PublicKeyData
+    { return keyData().asciiArt(); }
 
   public:
     /** File containig the ASCII armored key. */

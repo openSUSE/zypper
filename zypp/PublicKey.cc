@@ -337,6 +337,9 @@ namespace zypp
   bool PublicKeyData::providesKey( const std::string & id_r ) const
   { return( id_r == _pimpl->_id || _pimpl->hasSubkeyId( id_r ) ); }
 
+  PublicKeyData::AsciiArt PublicKeyData::asciiArt() const
+  { return AsciiArt( fingerprint() /* TODO: key algorithm could be added as top tile. */ ); }
+
   std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj )
   {
     str << "[" << obj.name() << "]" << endl;
