@@ -628,6 +628,7 @@ namespace zypp
     Pathname cfg_known_repos_path;
     Pathname cfg_known_services_path;
     Pathname cfg_vars_path;
+    Pathname cfg_repo_mgr_root_path;
 
     Pathname cfg_vendor_path;
     Pathname cfg_multiversion_path;
@@ -817,6 +818,16 @@ namespace zypp
 
   Pathname ZConfig::systemRoot() const
   { return _autodetectSystemRoot(); }
+
+
+  Pathname ZConfig::repoManagerRoot() const
+  {
+    return ( _pimpl->cfg_repo_mgr_root_path.empty()
+             ? systemRoot() : _pimpl->cfg_repo_mgr_root_path );
+  }
+
+  void ZConfig::setRepoManagerRoot(const zypp::filesystem::Pathname &root)
+  { _pimpl->cfg_repo_mgr_root_path = root; }
 
   ///////////////////////////////////////////////////////////////////
   //

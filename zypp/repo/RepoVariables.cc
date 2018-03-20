@@ -403,7 +403,7 @@ namespace zypp
 	  if ( empty() )	// at init / after reset
 	  {
 	    // load user definitions from vars.d
-	    filesystem::dirForEach( ZConfig::instance().systemRoot() / ZConfig::instance().varsPath(),
+	    filesystem::dirForEach( ZConfig::instance().repoManagerRoot() / ZConfig::instance().varsPath(),
 				    filesystem::matchNoDots(), bind( &RepoVarsMap::parse, this, _1, _2 ) );
 	    // releasever_major/_minor are per default derived from releasever.
 	    // If releasever is userdefined, inject missing _major/_minor too.

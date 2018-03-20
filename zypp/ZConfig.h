@@ -73,6 +73,16 @@ namespace zypp
        */
       Pathname systemRoot() const;
 
+      /** The RepoManager root directory.
+       *  Returns the same as \sa systemRoot() if not explicitely set.
+       */
+      Pathname repoManagerRoot() const;
+
+      /** Sets the RepoManager root directory.
+       *  \sa repoManagerRoot()
+       */
+      void setRepoManagerRoot ( const Pathname &root );
+
     public:
 
       /** The autodetected system architecture. */

@@ -162,7 +162,7 @@ namespace zypp {
       std::string mountpoint( attachPoint().asString() );
 
       Mount mount;
-      CredentialManager cm;
+      CredentialManager cm(CredManagerOptions(ZConfig::instance().repoManagerRoot()));
 
       Mount::Options options( _url.getQueryParam("mountoptions") );
       string username = _url.getUsername();
@@ -403,7 +403,7 @@ namespace zypp {
     bool MediaCIFS::authenticate(AuthData & authdata, bool firstTry) const
     {
       //! \todo need a way to pass different CredManagerOptions here
-      CredentialManager cm(CredManagerOptions(ZConfig::instance().systemRoot()));
+      CredentialManager cm(CredManagerOptions(ZConfig::instance().repoManagerRoot()));
 
       // get stored credentials
       AuthData_Ptr cmcred = cm.getCred(_url);

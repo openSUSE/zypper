@@ -1693,8 +1693,7 @@ string MediaCurl::getAuthHint() const
 bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
 {
   //! \todo need a way to pass different CredManagerOptions here
-  Target_Ptr target = zypp::getZYpp()->getTarget();
-  CredentialManager cm(CredManagerOptions(target ? target->root() : ""));
+  CredentialManager cm(CredManagerOptions(ZConfig::instance().repoManagerRoot()));
   CurlAuthData_Ptr credentials;
 
   // get stored credentials
