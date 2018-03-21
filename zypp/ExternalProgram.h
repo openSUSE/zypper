@@ -259,15 +259,22 @@ namespace zypp {
   class ExternalProgramWithStderr : private externalprogram::EarlyPipe, public ExternalProgram
   {
     public:
-      ExternalProgramWithStderr( const Arguments & argv_r )
-	: ExternalProgram( argv_r, Stderr_To_FileDesc, /*use_pty*/false, _fds[W] )
+      ExternalProgramWithStderr( const Arguments & argv_r, bool defaultLocale_r = false, const Pathname & root_r = "" )
+      : ExternalProgram( argv_r, Stderr_To_FileDesc, /*use_pty*/false, _fds[W], defaultLocale_r, root_r )
       { _initStdErr(); }
+      /** \overlocad Convenience taking just the \a root_r. */
+      ExternalProgramWithStderr( const Arguments & argv_r, const Pathname & root_r )
+      : ExternalProgramWithStderr( argv_r, false, root_r )
+      {}
 
-      ExternalProgramWithStderr( const Arguments & argv_r, const Environment & environment_r )
-        : ExternalProgram( argv_r, environment_r, Stderr_To_FileDesc, /*use_pty*/false, _fds[W] )
+      ExternalProgramWithStderr( const Arguments & argv_r, const Environment & environment_r, bool defaultLocale_r = false, const Pathname & root_r = "" )
+      : ExternalProgram( argv_r, environment_r, Stderr_To_FileDesc, /*use_pty*/false, _fds[W], defaultLocale_r, root_r )
       { _initStdErr(); }
-
-    public:
+      /** \overlocad Convenience taking just the \a root_r.  */
+      ExternalProgramWithStderr( const Arguments & argv_r, const Environment & environment_r, const Pathname & root_r )
+      : ExternalProgramWithStderr( argv_r, environment_r, false, root_r )
+      {}
+  public:
       /** Return \c FILE* to read programms stderr (O_NONBLOCK set). */
       using externalprogram::EarlyPipe::fStdErr;
 
