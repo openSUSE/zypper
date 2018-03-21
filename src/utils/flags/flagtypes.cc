@@ -14,20 +14,6 @@
 namespace zypp {
 namespace ZyppFlags {
 
-namespace {
-
-ResKind parseKindArgument( const CommandOption &opt, const boost::optional<std::string> &in)
-{
-  if (!in) ZYPP_THROW(MissingArgumentException(opt.name)); //value required
-  ResKind knd = string_to_kind(*in);
-  if ( knd == ResKind::nokind )
-    ZYPP_THROW(InvalidValueException( opt.name, *in, _("Unknown package type")));
-
-  return knd;
-}
-
-}
-
 boost::optional<std::string> noDefaultValue()
 {
   return boost::optional<std::string>();
@@ -108,13 +94,9 @@ Value CounterType(int *target, const boost::optional<int> &defValue, const boost
 
 
 Value KindSetType(std::set<ResKind> *target) {
-  return Value (
-        noDefaultValue,
-        [target] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
-            target->insert( parseKindArgument( opt, in ) );
-            return;
-          },
-          "TYPE"
+  return GenericContainerType (
+    *target,
+    ARG_TYPE
   );
 }
 
@@ -236,6 +218,17 @@ int argValueConvert ( const CommandOption &opt, const boost::optional<std::strin
   } catch ( ... ) {
     ZYPP_THROW(ZyppFlagsException(str::Format(_("Unknown error while assigning the value %1% to flag %2%.")) % *in % opt.name));
   }
+}
+
+template<>
+ResKind argValueConvert( const CommandOption &opt, const boost::optional<std::string> &in )
+{
+  if (!in) ZYPP_THROW(MissingArgumentException(opt.name)); //value required
+  ResKind knd = string_to_kind(*in);
+  if ( knd == ResKind::nokind )
+    ZYPP_THROW(InvalidValueException( opt.name, *in, _("Unknown package type")));
+
+  return knd;
 }
 
 Value CallbackVal( SetterFun &&callback , std::string &&hint )

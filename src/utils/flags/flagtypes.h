@@ -111,6 +111,9 @@ inline std::string argValueConvert ( const CommandOption &, const boost::optiona
 template <>
 int argValueConvert ( const CommandOption &, const boost::optional<std::string> &in );
 
+template <>
+ResKind argValueConvert  ( const CommandOption &opt, const boost::optional<std::string> &in );
+
 template <template<typename ...> class Container, typename T >
 Value GenericContainerType  ( Container<T> &target_r, std::string hint = std::string(), const std::string sep = "" ) {
   return Value (

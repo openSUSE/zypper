@@ -170,6 +170,27 @@ _zypper() {
 			install | in | source-install | si | download | info | if | addlock | al)
 				opts=(${opts[@]}$(echo; _available_packages ))
 			;;
+			mark )
+				let ITER=COMP_CWORD
+				local subcmd
+				while test $((ITER--)) -ge 0 ; do
+					comp="${COMP_WORDS[ITER]}"
+					if [[ "${comp}" =~ ^(auto|manual)$ ]]; then
+						subcmd=${COMP_WORDS[ITER]}
+						break;
+					fi
+				done
+				unset SUBCMD_LIST ITER comp
+
+				if [ ! -z "${subcmd}" ]
+					then
+						opts=($(echo; _installed_packages ))
+				else
+					opts=(${opts[@]} "manual" "auto")
+				fi
+
+				unset subcmd
+			;;
 		esac
 		fi
 		IFS=$'\n'
