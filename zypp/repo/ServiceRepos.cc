@@ -25,7 +25,8 @@ namespace zypp
 
     struct RIMServiceRepos : public ServiceRepos::Impl
     {
-      RIMServiceRepos( const ServiceInfo & service,
+      RIMServiceRepos( const Pathname & /*root_r*/,
+		       const ServiceInfo & service,
 		       const ServiceRepos::ProcessRepo & callback,
 		       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() )
       {
@@ -50,19 +51,22 @@ namespace zypp
 
     struct PluginServiceRepos : public ServiceRepos::Impl
     {
-      PluginServiceRepos( const ServiceInfo & service,
+      PluginServiceRepos( const Pathname & root_r,
+			  const ServiceInfo & service,
 			  const ServiceRepos::ProcessRepo & callback,
 			  const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() )
       {
-	Url serviceUrl( service.url() );
+	// bsc#1080693: Service script needs to be executed chrooted to the RepoManagers rootDir.
+	// The service is not aware of the rootDir, so it's explicitly passed and needs to be
+	// stripped from the URLs path.
 	stringstream buffer;
 
 	ExternalProgram::Arguments args;
 	args.reserve( 3 );
 	args.push_back( "/bin/sh" );
 	args.push_back( "-c" );
-	args.push_back( serviceUrl.getPathName() );
-	ExternalProgramWithStderr prog( args );
+	args.push_back( Pathname::stripprefix( root_r, service.url().getPathName() ).asString() );
+	ExternalProgramWithStderr prog( args, root_r );
 	prog >> buffer;
 
 	if ( prog.close() != 0 )
@@ -80,12 +84,13 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
-    ServiceRepos::ServiceRepos( const ServiceInfo & service,
+    ServiceRepos::ServiceRepos( const Pathname & root_r,
+				const ServiceInfo & service,
 				const ServiceRepos::ProcessRepo & callback,
 				const ProgressData::ReceiverFnc &progress )
     : _impl( ( service.type() == ServiceType::PLUGIN )
-	   ? static_cast<ServiceRepos::Impl*>( new PluginServiceRepos( service, callback, progress ) )
-           : static_cast<ServiceRepos::Impl*>( new RIMServiceRepos (service, callback, progress ) ) )
+    ? static_cast<ServiceRepos::Impl*>( new PluginServiceRepos( root_r, service, callback, progress ) )
+    : static_cast<ServiceRepos::Impl*>( new RIMServiceRepos( root_r, service, callback, progress ) ) )
     {}
 
     ServiceRepos::~ServiceRepos()

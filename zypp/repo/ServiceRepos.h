@@ -27,11 +27,16 @@ namespace zypp
     public:
      /**
       * Return false from the callback to get a \ref AbortRequestException
-      * to be thrown and the processing to be cancelled.
+      * to be thrown and the processing to be canceled.
       */
       typedef function< bool( const RepoInfo & )> ProcessRepo;
 
-      ServiceRepos( const ServiceInfo & service,
+      /**
+       * bsc#1080693: Explicitly pass the RemoManagers rootDir until it can be queried from the ServiceInfo.
+       * Required to execute plugin services chrooted.
+       */
+      ServiceRepos( const Pathname & root_r,
+		    const ServiceInfo & service,
                     const ProcessRepo & callback,
                     const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
       ~ServiceRepos();

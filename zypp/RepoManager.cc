@@ -790,7 +790,7 @@ namespace zypp
       }
     }
 
-    repo::PluginServices(_options.pluginsPath/"services", ServiceCollector(_services));
+   repo::PluginServices(_options.pluginsPath/"services", ServiceCollector(_services));
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -2093,7 +2093,13 @@ namespace zypp
     // and in zypper.
     std::pair<DefaultIntegral<bool,false>, repo::ServicePluginInformalException> uglyHack;
     try {
-      ServiceRepos( service, bind( &RepoCollector::collect, &collector, _1 ) );
+      // FIXME bsc#1080693: Shortcoming of (plugin)services (and repos as well) is that they
+      // are not aware of the RepoManagers rootDir. The service url, as created in known_services,
+      // contains the full path to the script. The script however has to be executed chrooted.
+      // Repos would need to know the RepoMangers rootDir to use the correct vars.d to replace
+      // repos variables. Until RepoInfoBase is aware if the rootDir, we need to explicitly pass it
+      // to ServiceRepos.
+      ServiceRepos( _options.rootDir, service, bind( &RepoCollector::collect, &collector, _1 ) );
     }
     catch ( const repo::ServicePluginInformalException & e )
     {
