@@ -241,6 +241,18 @@ namespace zypp
       return root_r / path_r;
     }
 
+    Pathname Pathname::stripprefix( const Pathname & root_r, const Pathname & path_r )
+    {
+      if ( root_r.emptyOrRoot() )
+	return path_r;
+      if ( root_r == path_r )
+	return "/";
+      std::string rest( str::stripPrefix( path_r.asString(), root_r.asString() ) );
+      if ( rest[0] == '/' )	// needs to be a dir prefix!
+	return std::move(rest);
+      return path_r;
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : Pathname::cat

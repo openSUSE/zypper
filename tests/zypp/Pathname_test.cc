@@ -149,3 +149,19 @@ BOOST_AUTO_TEST_CASE(pathname_strval)
   BOOST_CHECK_EQUAL(Pathname("cc:a/b").asString(),	"./cc:a/b" );
 }
 
+BOOST_AUTO_TEST_CASE(pathname_stripprefix)
+{
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "",		"" ),		"" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "",		"/" ),		"/" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "",		"/foo" ),	"/foo" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "/",		"" ),		"" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "/",		"/" ),		"/" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "/",		"/foo" ),	"/foo" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "/f",	"" ),		"" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "/f",	"/" ),		"/" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "/f",	"/foo" ),	"/foo" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "/foo",	"" ),		"" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "/foo",	"/" ),		"/" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "/foo",	"/foo" ),	"/" );
+  BOOST_CHECK_EQUAL( Pathname::stripprefix( "/foo",	"/foo/baa" ),	"/baa" );
+}

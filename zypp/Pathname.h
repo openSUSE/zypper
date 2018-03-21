@@ -147,6 +147,9 @@ namespace zypp
       /** Return \c path_r prefixed with \c root_r, unless it is already prefixed. */
       static Pathname assertprefix( const Pathname & root_r, const Pathname & path_r );
 
+      /** Return \c path_r with any \c root_r dir prefix striped. */
+      static Pathname stripprefix( const Pathname & root_r, const Pathname & path_r );
+
       /** Concatenation of pathnames.
        * \code
        *   "foo"  / "baa"  ==> "foo/baa"
