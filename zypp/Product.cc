@@ -110,10 +110,10 @@ namespace zypp
       // bnc#784900: for installed products check whether the file is owned by
       // some package. If so, ust this as buddy.
       sat::LookupAttr q( sat::SolvAttr::filelist, repository() );
-      std::string refFile( referenceFilename() );
+      std::string refFile( referenceFilename() );	// the basename only!
       if ( ! refFile.empty() )
       {
-	StrMatcher matcher( referenceFilename() );
+	StrMatcher matcher( "/etc/products.d/"+refFile, Match::STRING | Match::FILES );
 	q.setStrMatcher( matcher );
 	if ( ! q.empty() )
 	  found = q.begin().inSolvable();
