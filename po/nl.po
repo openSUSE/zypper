@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-10 16:50+0200\n"
-"PO-Revision-Date: 2018-03-25 17:02+0000\n"
+"PO-Revision-Date: 2018-04-11 08:29+0000\n"
 "Last-Translator: Nathan Follens <nthn@unseen.is>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -1881,7 +1881,7 @@ msgstr ""
 #: src/Zypper.cc:711
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
-msgstr ""
+msgstr "In een andere root-map werken, maar opslagruimten delen met de host."
 
 #: src/Zypper.cc:715
 msgid ""
