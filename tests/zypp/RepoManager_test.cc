@@ -66,8 +66,9 @@ BOOST_AUTO_TEST_CASE(pluginservices_test)
   TmpDir tmpCachePath;
   RepoManagerOptions opts( RepoManagerOptions::makeTestSetup( tmpCachePath ) ) ;
 
-  filesystem::assert_dir( opts.knownReposPath );
-  filesystem::assert_dir( opts.pluginsPath / "services");
+  opts.rootDir = "";	// NOTE: After all paths have been setup correctly,
+  // we must reset the RepoManager rootDir to prevent the plugin script
+  // from being executed chrooted (would require UID 0).
 
   opts.pluginsPath = DATADIR + "/plugin-service-lib-1";
   BOOST_CHECK(PathInfo(opts.pluginsPath / "services/service").isExist());
