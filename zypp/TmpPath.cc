@@ -227,6 +227,14 @@ namespace zypp {
       return ret;
     }
 
+    ManagedFile TmpFile::asManagedFile()
+    {
+      filesystem::TmpFile tmpFile;
+      ManagedFile mFile ( tmpFile.path(), filesystem::unlink );
+      tmpFile.autoCleanup(false); //cleaned up by ManagedFile
+      return mFile;
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TmpFile::defaultPrefix

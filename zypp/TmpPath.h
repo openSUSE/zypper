@@ -16,6 +16,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/base/PtrTypes.h"
+#include "zypp/ManagedFile.h"
 
 namespace zypp {
   namespace filesystem {
@@ -141,6 +142,12 @@ namespace zypp {
          * If \c sibling_r exists, sibling is created using the same mode.
          */
         static TmpFile makeSibling( const Pathname & sibling_r );
+
+        /**
+         * Create a temporary file and convert it to a automatically
+         * cleaned up ManagedFile
+         */
+        static ManagedFile asManagedFile ();
 
       public:
         /**
