@@ -23,6 +23,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/CheckSum.h"
 #include "zypp/OnMediaLocation.h"
+#include "zypp/ManagedFile.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -188,7 +189,7 @@ namespace zypp
        *         with the next one, if possible.
        * \see zypp::media::MediaManager::provideFile()
        */
-      static Pathname provideFileFromUrl( const Url & file_url, ProvideFileOptions options = PROVIDE_DEFAULT );
+      static ManagedFile provideFileFromUrl( const Url & file_url, ProvideFileOptions options = PROVIDE_DEFAULT );
 
       /**
        * Provides an optional \a file from media \a media_nr.

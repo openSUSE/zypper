@@ -16,6 +16,7 @@
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/PathInfo.h"
+#include "zypp/TmpPath.h"
 //#include "zypp/source/MediaSetAccessReportReceivers.h"
 
 using namespace std;
@@ -170,13 +171,22 @@ IMPL_PTR_TYPE(MediaSetAccess);
     return op.result;
   }
 
-  Pathname MediaSetAccess::provideFileFromUrl(const Url &file_url, ProvideFileOptions options)
+  ManagedFile MediaSetAccess::provideFileFromUrl(const Url &file_url, ProvideFileOptions options)
   {
     Url url(file_url);
     Pathname path(url.getPathName());
     url.setPathName ("/");
     MediaSetAccess access(url);
-    return access.provideFile(path, 1, options);
+
+    ManagedFile tmpFile = filesystem::TmpFile::asManagedFile();
+
+    Pathname file = access.provideFile(path, 1, options);
+
+    //prevent the file from being deleted when MediaSetAccess gets out of scope
+    if ( filesystem::hardlinkCopy(file, tmpFile) != 0 )
+      ZYPP_THROW(Exception("Can't copy file from " + file.asString() + " to " +  tmpFile->asString() ));
+
+    return tmpFile;
   }
 
   Pathname MediaSetAccess::provideOptionalFile( const Pathname & file, unsigned media_nr )

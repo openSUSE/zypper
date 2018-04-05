@@ -260,6 +260,25 @@ BOOST_AUTO_TEST_CASE(msa_remote_tests)
 
   // providing a file which does not exist should throw
   BOOST_CHECK_THROW(setaccess.provideFile("/testBADNAME.txt"), media::MediaFileNotFoundException);
+
+  Pathname fPath;
+  {
+    Url url = web.url();
+    url.setPathName("/testBADNAME.txt");
+
+    // providing a file which does not exist should throw
+    BOOST_CHECK_THROW(MediaSetAccess::provideFileFromUrl(url), media::MediaFileNotFoundException);
+
+    url.setPathName("/test.txt");
+
+    //providing a file by static method, file should exist after method call
+    ManagedFile file = MediaSetAccess::provideFileFromUrl( url );
+    fPath = file;
+    BOOST_CHECK(check_file_exists(fPath) == true);
+  }
+  //file should be removed once the ManagedFile goes out of scope
+  BOOST_CHECK(check_file_exists(fPath) == false);
+
   web.stop();
 }
 

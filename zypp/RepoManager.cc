@@ -456,7 +456,7 @@ namespace zypp
 
   std::list<RepoInfo> readRepoFile( const Url & repo_file )
   {
-    Pathname local = MediaSetAccess::provideFileFromUrl(repo_file);
+    ManagedFile local = MediaSetAccess::provideFileFromUrl(repo_file);
 
     DBG << "reading repo file " << repo_file << ", local path: " << local << endl;
 
