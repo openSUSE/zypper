@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-01 07:26+0100\n"
+"POT-Creation-Date: 2018-04-09 13:14+0200\n"
 "PO-Revision-Date: 2017-10-03 15:55+0700\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -1612,21 +1612,21 @@ msgid "Command exited with unknown error."
 msgstr "Perintah berhenti dengan galat yang tidak diketahui."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:561
+#: zypp/KeyRing.cc:524
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Mencoba untuk mengimpor kunci %s tidak ada ke keyring %s"
 
-#: zypp/KeyRing.cc:583
+#: zypp/KeyRing.cc:530 zypp/KeyRing.cc:534
 #, fuzzy
 msgid "Failed to import key."
 msgstr "Gagal mengimpor kunci publik %1%"
 
-#: zypp/KeyRing.cc:606
+#: zypp/KeyRing.cc:541 zypp/KeyRing.cc:545 zypp/KeyRing.cc:549
 msgid "Failed to delete key."
 msgstr "Gagal menghapus kunci."
 
-#: zypp/KeyRing.cc:612
+#: zypp/KeyRing.cc:558
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Tanda tangan file %s tidak ditemukan"
@@ -4167,39 +4167,39 @@ msgid "Following actions will be done:"
 msgstr "Tindakan berikut akan dilakukan:"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:60
+#: zypp/PublicKey.cc:63
 msgid "does not expire"
 msgstr "tidak kedaluwarsa"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:65
+#: zypp/PublicKey.cc:68
 #, boost-format
 msgid "expired: %1%"
 msgstr "kedaluwarsa: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:70
+#: zypp/PublicKey.cc:73
 #, boost-format
 msgid "expires: %1%"
 msgstr "kedaluwarsa: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:79
+#: zypp/PublicKey.cc:82
 msgid "(does not expire)"
 msgstr "(Tidak berakhir)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:88
+#: zypp/PublicKey.cc:91
 msgid "(EXPIRED)"
 msgstr "(BERAKHIR)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:92
+#: zypp/PublicKey.cc:95
 msgid "(expires within 24h)"
 msgstr "(Berakhir dalam waktu 24 jam)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:96
+#: zypp/PublicKey.cc:99
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -4211,7 +4211,7 @@ msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "Tidak dapat membaca direktori repo '%1%': Izin ditolak"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1535
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
@@ -4231,8 +4231,8 @@ msgid "Service alias cannot start with dot."
 msgstr "Alias layanan tidak dapat dimulai dengan dot."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
-#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
+#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1653 zypp/RepoManager.cc:1719
+#: zypp/RepoManager.cc:1797 zypp/RepoManager.cc:1862 zypp/RepoManager.cc:1993
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Tidak dapat membuka '%s' untuk menulis."
@@ -4240,7 +4240,7 @@ msgstr "Tidak dapat membuka '%s' untuk menulis."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:871
+#: zypp/RepoManager.cc:865
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
@@ -4248,36 +4248,36 @@ msgstr ""
 "terpakai '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1098
+#: zypp/RepoManager.cc:1092
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "Metadata yang sah tidak ditemukan pada URL yang ditentukan"
 
-#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
+#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "Tidak dapat membuat %s"
 
-#: zypp/RepoManager.cc:1154
+#: zypp/RepoManager.cc:1148
 msgid "Can't create metadata cache directory."
 msgstr "Tidak dapat membuat metadata direktori cache."
 
-#: zypp/RepoManager.cc:1300
+#: zypp/RepoManager.cc:1294
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Membangun repositori cache '%s'"
 
-#: zypp/RepoManager.cc:1320
+#: zypp/RepoManager.cc:1314
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "Tidak dapat membuat cache di %s - tidak ada izin untuk menulis."
 
-#: zypp/RepoManager.cc:1384
+#: zypp/RepoManager.cc:1378
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Gagal untuk membuat cache repo (%d)."
 
-#: zypp/RepoManager.cc:1395
+#: zypp/RepoManager.cc:1389
 msgid "Unhandled repository type"
 msgstr "Jenis repositori yang tidak tertangani"
 
@@ -4287,44 +4287,44 @@ msgstr "Jenis repositori yang tidak tertangani"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
+#: zypp/RepoManager.cc:1426 zypp/RepoManager.cc:2488
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Galat saat membaca dari '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
+#: zypp/RepoManager.cc:1479 zypp/RepoManager.cc:2496
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Error tidak diketahui dari '%s'"
 
-#: zypp/RepoManager.cc:1623
+#: zypp/RepoManager.cc:1617
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Menambah repositori '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1711
+#: zypp/RepoManager.cc:1705
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Nama berkas repo tidak sah di '%s'"
 
-#: zypp/RepoManager.cc:1752
+#: zypp/RepoManager.cc:1746
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Menghapus reposotori '%s'"
 
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
+#: zypp/RepoManager.cc:1765 zypp/RepoManager.cc:1843
 msgid "Can't figure out where the repo is stored."
 msgstr "Tidak dapat mengetahui di mana repo disimpan."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
+#: zypp/RepoManager.cc:1779 zypp/RepoManager.cc:1981
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "Tidak dapat menghapus '%s'"
 
-#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
+#: zypp/RepoManager.cc:1969 zypp/RepoManager.cc:2419
 msgid "Can't figure out where the service is stored."
 msgstr "Tidak dapat mengetahui di mana layanan disimpan."
 
@@ -4470,7 +4470,7 @@ msgid "Invalid regular expression '%s'"
 msgstr "Expresi reguler '%s' tidak valid"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1725
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Autentikasi dibutuhkan untuk '%s'"
@@ -4637,7 +4637,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Metode autentikasi HTTP '%s' tidak didukung"
 
-#: zypp/misc/CheckAccessDeleted.cc:281
+#: zypp/misc/CheckAccessDeleted.cc:331
 msgid "Please install package 'lsof' first."
 msgstr "Mohon pasang paket 'lsof' terlebih dahulu."
 
@@ -5053,6 +5053,18 @@ msgstr "penggantian %s dengan %s"
 msgid "deinstallation of %s"
 msgstr "penghapusan dari %s"
 
+#. strip tmp file suffix
+#: zypp/target/RpmPostTransCollector.cc:103
+#, boost-format
+msgid "Executing %%posttrans script '%1%'"
+msgstr ""
+
+#. show a final message
+#: zypp/target/RpmPostTransCollector.cc:160
+#, c-format, boost-format
+msgid "Executing %posttrans scripts"
+msgstr ""
+
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
 msgstr " berhasil dieksekusi"
@@ -5084,7 +5096,7 @@ msgid "New update message"
 msgstr "Pesan baru"
 
 #: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
-#: zypp/target/TargetImpl.cc:1627
+#: zypp/target/TargetImpl.cc:1628
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."
 msgstr "Instalasi dibatalkan sesuai perintah."
@@ -5129,36 +5141,36 @@ msgstr "Bukan CDROM"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2090
-#: zypp/target/rpm/RpmDb.cc:2236
+#: zypp/target/rpm/RpmDb.cc:832 zypp/target/rpm/RpmDb.cc:2093
+#: zypp/target/rpm/RpmDb.cc:2239
 msgid "RPM failed: "
 msgstr "RPM gagal: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1147
+#: zypp/target/rpm/RpmDb.cc:1148
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "Gagal mengimpor kunci publik %1%"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1217
+#: zypp/target/rpm/RpmDb.cc:1218
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "Gagal menghapus kunci publik %1%"
 
-#: zypp/target/rpm/RpmDb.cc:1596
+#: zypp/target/rpm/RpmDb.cc:1599
 msgid "Package is not signed!"
 msgstr "Paket tidak ditandatangani!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1896
+#: zypp/target/rpm/RpmDb.cc:1899
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Mengubah konfigurasi berkas untuk %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2071
+#: zypp/target/rpm/RpmDb.cc:2074
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
@@ -5166,7 +5178,7 @@ msgstr ""
 "perbedaannya"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2073
+#: zypp/target/rpm/RpmDb.cc:2076
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -5176,7 +5188,7 @@ msgstr ""
 "Ini adalah perbedaan 25 baris pertama:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2076
+#: zypp/target/rpm/RpmDb.cc:2079
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
@@ -5184,7 +5196,7 @@ msgstr ""
 "perbedaannya"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2078
+#: zypp/target/rpm/RpmDb.cc:2081
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -5195,47 +5207,47 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2103 zypp/target/rpm/RpmDb.cc:2249
+#: zypp/target/rpm/RpmDb.cc:2106 zypp/target/rpm/RpmDb.cc:2252
 msgid "Additional rpm output"
 msgstr "Tambahan keluaran RPM"
 
-#: zypp/target/rpm/RpmDb.cc:2391
+#: zypp/target/rpm/RpmDb.cc:2394
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "membuat backup %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2412
+#: zypp/target/rpm/RpmDb.cc:2415
 msgid "Signature is OK"
 msgstr "Tanda tangan OK"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2414
+#: zypp/target/rpm/RpmDb.cc:2417
 msgid "Unknown type of signature"
 msgstr "Tanda tangan tidak dikenal"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2416
+#: zypp/target/rpm/RpmDb.cc:2419
 msgid "Signature does not verify"
 msgstr "Tanda tangan tidak terverifikasi"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2418
+#: zypp/target/rpm/RpmDb.cc:2421
 msgid "Signature is OK, but key is not trusted"
 msgstr "Tanda tangan OK, tetapi kunci tidak terpercaya"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2420
+#: zypp/target/rpm/RpmDb.cc:2423
 msgid "Signatures public key is not available"
 msgstr "Tanda tangan kunci publik tidak tersedia"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2422
+#: zypp/target/rpm/RpmDb.cc:2425
 msgid "File does not exist or signature can't be checked"
 msgstr "File tidak ada atau tanda tangan tidak dapat diperiksa"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2424
+#: zypp/target/rpm/RpmDb.cc:2427
 msgid "File is unsigned"
 msgstr "Berkas tidak ditandatangani"
 

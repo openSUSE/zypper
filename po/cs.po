@@ -19,11 +19,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-01 07:26+0100\n"
+"POT-Creation-Date: 2018-04-09 13:14+0200\n"
 "PO-Revision-Date: 2017-12-01 16:16+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
-"Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
-"\n"
+"Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/"
+">\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1510,20 +1510,20 @@ msgid "Command exited with unknown error."
 msgstr "Příkaz skončil s neznámou chybou."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:561
+#: zypp/KeyRing.cc:524
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Pokus o import neexistujícího klíče %s do klíčenky %s"
 
-#: zypp/KeyRing.cc:583
+#: zypp/KeyRing.cc:530 zypp/KeyRing.cc:534
 msgid "Failed to import key."
 msgstr "Nepodařilo se importovat klíč."
 
-#: zypp/KeyRing.cc:606
+#: zypp/KeyRing.cc:541 zypp/KeyRing.cc:545 zypp/KeyRing.cc:549
 msgid "Failed to delete key."
 msgstr "Nepodařilo se smazat klíč."
 
-#: zypp/KeyRing.cc:612
+#: zypp/KeyRing.cc:558
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Soubor s podpisem %s nebyl nalezen"
@@ -3950,39 +3950,39 @@ msgid "Following actions will be done:"
 msgstr "Budou provedeny následující akce:"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:60
+#: zypp/PublicKey.cc:63
 msgid "does not expire"
 msgstr "nevyprší nikdy"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:65
+#: zypp/PublicKey.cc:68
 #, boost-format
 msgid "expired: %1%"
 msgstr "vypršel: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:70
+#: zypp/PublicKey.cc:73
 #, boost-format
 msgid "expires: %1%"
 msgstr "vyprší: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:79
+#: zypp/PublicKey.cc:82
 msgid "(does not expire)"
 msgstr "(nevyprší nikdy)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:88
+#: zypp/PublicKey.cc:91
 msgid "(EXPIRED)"
 msgstr "(VYPRŠELO)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:92
+#: zypp/PublicKey.cc:95
 msgid "(expires within 24h)"
 msgstr "(vyprší během 24 hodin)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:96
+#: zypp/PublicKey.cc:99
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -3996,7 +3996,7 @@ msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "Nelze číst z adresáře úložiště %1%: Přístup odepřen"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:789 zypp/RepoManager.cc:1541
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1535
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
@@ -4016,8 +4016,8 @@ msgid "Service alias cannot start with dot."
 msgstr "Alias služby nemůže začínat tečkou."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:744 zypp/RepoManager.cc:1659 zypp/RepoManager.cc:1725
-#: zypp/RepoManager.cc:1803 zypp/RepoManager.cc:1868 zypp/RepoManager.cc:1999
+#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1653 zypp/RepoManager.cc:1719
+#: zypp/RepoManager.cc:1797 zypp/RepoManager.cc:1862 zypp/RepoManager.cc:1993
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Nelze otevřít soubor '%s' pro zápis."
@@ -4025,44 +4025,44 @@ msgstr "Nelze otevřít soubor '%s' pro zápis."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:871
+#: zypp/RepoManager.cc:865
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "Neznámá služba '%1%': Odstraňuje se osiřelé úložiště služby '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1098
+#: zypp/RepoManager.cc:1092
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "Na zadané adrese URL nebyla nalezena platná metadata"
 msgstr[1] "Na zadaných adresách URL nebyla nalezena platná metadata"
 msgstr[2] "Na zadaných adresách URL nebyla nalezena platná metadata"
 
-#: zypp/RepoManager.cc:1146 zypp/RepoManager.cc:1258 zypp/RepoManager.cc:1314
+#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "Nelze vytvořit %s"
 
-#: zypp/RepoManager.cc:1154
+#: zypp/RepoManager.cc:1148
 msgid "Can't create metadata cache directory."
 msgstr "Nelze vytvořit adresář s mezipamětí metadat."
 
-#: zypp/RepoManager.cc:1300
+#: zypp/RepoManager.cc:1294
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Vytváří se vyrovnávací paměť úložiště '%s'"
 
-#: zypp/RepoManager.cc:1320
+#: zypp/RepoManager.cc:1314
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "Nelze vytvořit mezipaměť v adresáři %s - chybí oprávnění k zápisu."
 
-#: zypp/RepoManager.cc:1384
+#: zypp/RepoManager.cc:1378
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Chyba při načítání úložiště do mezipaměti (%d)."
 
-#: zypp/RepoManager.cc:1395
+#: zypp/RepoManager.cc:1389
 msgid "Unhandled repository type"
 msgstr "Nepodporovaný typ úložiště"
 
@@ -4072,44 +4072,44 @@ msgstr "Nepodporovaný typ úložiště"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1432 zypp/RepoManager.cc:2488
+#: zypp/RepoManager.cc:1426 zypp/RepoManager.cc:2488
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Chyba při čtení z '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1485 zypp/RepoManager.cc:2496
+#: zypp/RepoManager.cc:1479 zypp/RepoManager.cc:2496
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Neznámá chyba při čtení z '%s'"
 
-#: zypp/RepoManager.cc:1623
+#: zypp/RepoManager.cc:1617
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Přidává se úložiště %s"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1711
+#: zypp/RepoManager.cc:1705
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Název souboru úložiště na adrese URL „%s“ je neplatný"
 
-#: zypp/RepoManager.cc:1752
+#: zypp/RepoManager.cc:1746
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Odebírá se úložiště %s"
 
-#: zypp/RepoManager.cc:1771 zypp/RepoManager.cc:1849
+#: zypp/RepoManager.cc:1765 zypp/RepoManager.cc:1843
 msgid "Can't figure out where the repo is stored."
 msgstr "Nelze zjistit umístění úložiště."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1785 zypp/RepoManager.cc:1987
+#: zypp/RepoManager.cc:1779 zypp/RepoManager.cc:1981
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "'%s' nelze smazat"
 
-#: zypp/RepoManager.cc:1975 zypp/RepoManager.cc:2419
+#: zypp/RepoManager.cc:1969 zypp/RepoManager.cc:2419
 msgid "Can't figure out where the service is stored."
 msgstr "Nelze zjistit umístění služby."
 
@@ -4253,7 +4253,7 @@ msgid "Invalid regular expression '%s'"
 msgstr "Neplatný regulární výraz: '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1726
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1725
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Pro '%s' je vyžadováno ověřování"
@@ -4421,7 +4421,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Nepodporovaná HTTP ověřovací metoda '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:281
+#: zypp/misc/CheckAccessDeleted.cc:331
 msgid "Please install package 'lsof' first."
 msgstr "Nejprve nainstalujte balíček 'lsof'."
 
@@ -4834,6 +4834,18 @@ msgstr "nahrazení %s položkou %s"
 msgid "deinstallation of %s"
 msgstr "odinstalace %s"
 
+#. strip tmp file suffix
+#: zypp/target/RpmPostTransCollector.cc:103
+#, boost-format
+msgid "Executing %%posttrans script '%1%'"
+msgstr ""
+
+#. show a final message
+#: zypp/target/RpmPostTransCollector.cc:160
+#, c-format, boost-format
+msgid "Executing %posttrans scripts"
+msgstr ""
+
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
 msgstr " provedeno"
@@ -4865,7 +4877,7 @@ msgid "New update message"
 msgstr "Nová zpráva o aktualizaci"
 
 #: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
-#: zypp/target/TargetImpl.cc:1627
+#: zypp/target/TargetImpl.cc:1628
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."
 msgstr "Instalace byla zrušena podle příkazu."
@@ -4908,42 +4920,42 @@ msgstr "Není jednotka CDROM"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:831 zypp/target/rpm/RpmDb.cc:2090
-#: zypp/target/rpm/RpmDb.cc:2236
+#: zypp/target/rpm/RpmDb.cc:832 zypp/target/rpm/RpmDb.cc:2093
+#: zypp/target/rpm/RpmDb.cc:2239
 msgid "RPM failed: "
 msgstr "RPM selhalo: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1147
+#: zypp/target/rpm/RpmDb.cc:1148
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "Nepodařilo se importovat veřejný klíč %1%"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1217
+#: zypp/target/rpm/RpmDb.cc:1218
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "Nepodařilo se smazat veřejný klíč %1%"
 
-#: zypp/target/rpm/RpmDb.cc:1596
+#: zypp/target/rpm/RpmDb.cc:1599
 msgid "Package is not signed!"
 msgstr "Balíček není podepsaný!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1896
+#: zypp/target/rpm/RpmDb.cc:1899
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Změněné konfigurační soubory pro %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2071
+#: zypp/target/rpm/RpmDb.cc:2074
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "Program rpm uložil %s jako %s, ale nebylo možné zjistit rozdíl"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2073
+#: zypp/target/rpm/RpmDb.cc:2076
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4953,13 +4965,13 @@ msgstr ""
 "Prvních 25 řádek rozdílů:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2076
+#: zypp/target/rpm/RpmDb.cc:2079
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "Program rpm vytvořil %s jako %s, ale nebylo možné zjistit rozdíl"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2078
+#: zypp/target/rpm/RpmDb.cc:2081
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4970,47 +4982,47 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2103 zypp/target/rpm/RpmDb.cc:2249
+#: zypp/target/rpm/RpmDb.cc:2106 zypp/target/rpm/RpmDb.cc:2252
 msgid "Additional rpm output"
 msgstr "Další výstup programu rpm"
 
-#: zypp/target/rpm/RpmDb.cc:2391
+#: zypp/target/rpm/RpmDb.cc:2394
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "vytvořena záloha %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2412
+#: zypp/target/rpm/RpmDb.cc:2415
 msgid "Signature is OK"
 msgstr "Podpis je v pořádku"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2414
+#: zypp/target/rpm/RpmDb.cc:2417
 msgid "Unknown type of signature"
 msgstr "Neznámý typ podpisu"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2416
+#: zypp/target/rpm/RpmDb.cc:2419
 msgid "Signature does not verify"
 msgstr "Podpis nelze ověřit"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2418
+#: zypp/target/rpm/RpmDb.cc:2421
 msgid "Signature is OK, but key is not trusted"
 msgstr "Podpis je v pořádku, ale klíč není důvěryhodný"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2420
+#: zypp/target/rpm/RpmDb.cc:2423
 msgid "Signatures public key is not available"
 msgstr "Veřejný klíč podpisu není k dispozici"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2422
+#: zypp/target/rpm/RpmDb.cc:2425
 msgid "File does not exist or signature can't be checked"
 msgstr "Soubor neexistuje nebo podpis nemůže být zkontrolován"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2424
+#: zypp/target/rpm/RpmDb.cc:2427
 msgid "File is unsigned"
 msgstr "Soubor není podepsaný"
 
