@@ -288,9 +288,14 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
 
   virtual void finish( const ProgressData &data )
   {
+    // Don't report success if data reports percent and is not at 100%
+    ProgressData::value_type last = data.reportValue();
+
     Zypper::instance().out().progressEnd(
         str::numstring(data.numericId()),
-        data.name());
+        data.name(),
+	!( last == 100 || last == -1 )
+    );
   }
 };
 
