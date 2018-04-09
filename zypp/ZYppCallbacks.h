@@ -74,11 +74,9 @@ namespace zypp
         _first = false;
       }
 
-      _report->progress(progress);
-      bool value = true;
+      bool value = _report->progress(progress);
       if ( _fnc )
-        value = _fnc(progress);
-
+        value &= _fnc(progress);
 
       if ( progress.finalReport() )
       {
