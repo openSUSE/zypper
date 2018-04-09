@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Mon Apr  9 13:11:50 CEST 2018 - ma@suse.de
+
+- Show progressbar when running posttrans scripts
+- Execute service plugin script chrooted to the RepoManagers root
+  (bsc#1080693)
+- Make sure the product file comes from /etc/products.d for the
+  fallback product search (bsc#1086602)
+- Introduce ZConfig::repoManagerRoot to support having diverging
+  target and repomanager root paths
+- Rename `stderr` as it can be a macro (fixes #102)
+- version 17.3.0 (2)
+
+-------------------------------------------------------------------
 Tue Mar 13 18:03:42 CET 2018 - ma@suse.de
 
 - Protect code against broken translations (bsc#1082711)
