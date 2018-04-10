@@ -142,7 +142,8 @@ namespace zypp
 		str::Str msg;
 		msg << "Output of " << pkgident << " %posttrans script:\n" << scriptmsg;
 		historylog.comment( msg, true /*timestamp*/);
-		JobReport::info( msg );
+		JobReport::UserData userData( "cmdout", "%posttrans" );
+		JobReport::info( msg, userData );
 	      }
 
 	      if ( ret != 0 )
