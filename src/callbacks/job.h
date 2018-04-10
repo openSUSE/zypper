@@ -36,7 +36,13 @@ namespace ZmartRecipients
 	  break;
 
 	case MsgType::info:
-	  out.info( msg_r );
+	  if ( userData_r.type().type() == "cmdout" )
+	  {
+	    // Render command output (like %posttrans) highlighted
+	    out.info( HIGHLIGHTString(msg_r).str() );
+	  }
+	  else
+	    out.info( msg_r );
 	  break;
 
 	case MsgType::warning:
