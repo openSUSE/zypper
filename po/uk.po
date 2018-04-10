@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-08 18:18+0100\n"
+"POT-Creation-Date: 2018-04-10 16:50+0200\n"
 "PO-Revision-Date: 2017-12-06 07:10+0000\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -36,11 +36,11 @@ msgstr "Підозріле значення фільтру категорії'%1
 msgid "Suspicious severity filter value '%1%'."
 msgstr "Підозріле значення фільтру важливості '%1%'."
 
-#: src/Zypper.h:502
+#: src/Zypper.h:504
 msgid "Finished with error."
 msgstr "Завершено з помилкою."
 
-#: src/Zypper.h:504
+#: src/Zypper.h:506
 msgid "Done."
 msgstr "Виконано."
 
@@ -1712,13 +1712,13 @@ msgstr "Усталене значення - виключити необов'яз
 msgid "The default is to include optional patches."
 msgstr "Усталене значення - включити необов'язкові латки."
 
-#. translator: %1% is a list of command line options
-#: src/Zypper.cc:224
+#. translator: %1% is a list of command line option names
+#: src/Zypper.cc:192
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
 msgstr "Ці параметри взаємно виключні: %1%"
 
-#: src/Zypper.cc:253
+#: src/Zypper.cc:259
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1726,7 +1726,7 @@ msgstr ""
 "PackageKit блокує zypper. Це відбувається, якщо у вас запущений аплет "
 "оновлення або інша програма для управління, яка використовує PackageKit."
 
-#: src/Zypper.cc:259
+#: src/Zypper.cc:265
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1734,19 +1734,19 @@ msgstr ""
 "Ми можемо попросити PackageKit перервати поточну дію якнайскоріше, але це "
 "залежить від того, наскільки швидко PackageKit відреагує на  цей запит."
 
-#: src/Zypper.cc:262
+#: src/Zypper.cc:268
 msgid "Ask PackageKit to quit?"
 msgstr "Завершити PackageKit?"
 
-#: src/Zypper.cc:271
+#: src/Zypper.cc:277
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKit досі запущений (можливо, зайнятий)."
 
-#: src/Zypper.cc:272
+#: src/Zypper.cc:278
 msgid "Try again?"
 msgstr "Повторна спроба?"
 
-#: src/Zypper.cc:355
+#: src/Zypper.cc:361
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
@@ -1754,51 +1754,51 @@ msgstr ""
 "Виявлений старий параметр командного рядка %1%. Будь ласка, вживайте "
 "натомість глобальний параметр %2%."
 
-#: src/Zypper.cc:356
+#: src/Zypper.cc:362
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
 "Виявлений старий параметри командного рядка %1%. Будь ласка, вживайте "
 "натомість %2%."
 
-#: src/Zypper.cc:362
+#: src/Zypper.cc:368
 #, fuzzy, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
 "Виявлений старий параметр командного рядка %1%. Будь ласка, вживайте "
 "натомість глобальний параметр %2%."
 
-#: src/Zypper.cc:476
+#: src/Zypper.cc:482
 msgid "Command options:"
 msgstr "Параметри команди:"
 
-#: src/Zypper.cc:479
+#: src/Zypper.cc:485
 msgid "Solver options:"
 msgstr "Параметри експерта:"
 
-#: src/Zypper.cc:482
+#: src/Zypper.cc:488
 msgid "Expert options:"
 msgstr "Параметри експерта:"
 
-#: src/Zypper.cc:485
+#: src/Zypper.cc:491
 msgid "This command has no additional options."
 msgstr "Ця команда не має додаткових параметрів."
 
-#: src/Zypper.cc:488
+#: src/Zypper.cc:494
 msgid "Legacy options:"
 msgstr "Застарілі параметри:"
 
 #. translator: '-r             The same as -f.
-#: src/Zypper.cc:492
+#: src/Zypper.cc:498
 #, boost-format
 msgid "The same as %1%."
 msgstr "Те саме, що й %1%."
 
-#: src/Zypper.cc:629 src/Zypper.cc:1590
+#: src/Zypper.cc:635 src/Zypper.cc:1615
 msgid "Unexpected exception."
 msgstr "Непередбачений виняток."
 
-#: src/Zypper.cc:654
+#: src/Zypper.cc:660
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -1846,7 +1846,7 @@ msgstr ""
 "\t--xmlout, -x\t\tПеремкнутися на виведення у XML.\n"
 "\t--ignore-unknown, -i\tНехтувати невідомими пакунками.\n"
 
-#: src/Zypper.cc:677
+#: src/Zypper.cc:683
 msgid ""
 "\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
 "\t\t\t\tdirectory.\n"
@@ -1866,7 +1866,7 @@ msgstr ""
 "\t--pkg-cache-dir <dir>\tВикористовувати альтернативний каталог кешу "
 "пакунків.\n"
 
-#: src/Zypper.cc:685
+#: src/Zypper.cc:691
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -1900,7 +1900,7 @@ msgstr ""
 "\t--releasever\t\tЗадає значення $releasever у всіх файлах .repo (типове: "
 "версія дистрибутиву)\n"
 
-#: src/Zypper.cc:699
+#: src/Zypper.cc:705
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -1912,7 +1912,12 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tНе читати встановлені пакунки.\n"
 
-#: src/Zypper.cc:706
+#: src/Zypper.cc:711
+msgid ""
+"Operate on a different root directory, but share repositories with the host."
+msgstr ""
+
+#: src/Zypper.cc:715
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -1922,7 +1927,7 @@ msgstr ""
 "\thelp, ?\t\t\tПоказати довідку.\n"
 "\tshell, sh\t\tПриймати по декілька команд одразу.\n"
 
-#: src/Zypper.cc:711
+#: src/Zypper.cc:720
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -1942,7 +1947,7 @@ msgstr ""
 "\trefresh, ref\t\tОсвіжити дані про всі сховища.\n"
 "\tclean\t\t\tОчистити локальний кеш.\n"
 
-#: src/Zypper.cc:721
+#: src/Zypper.cc:730
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -1958,7 +1963,7 @@ msgstr ""
 "\tremoveservice, rs\t\tВилучити вказану службу.\n"
 "\trefresh-services, refs\t\tОсвіжити дані про всі служби.\n"
 
-#: src/Zypper.cc:729
+#: src/Zypper.cc:738
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -1980,7 +1985,7 @@ msgstr ""
 "\t\t\t\tВстановити недавно додані пакунки, які були\n"
 "\t\t\t\tрекомендовані встановленими пакунками.\n"
 
-#: src/Zypper.cc:740
+#: src/Zypper.cc:749
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -1998,7 +2003,7 @@ msgstr ""
 "\tdist-upgrade, dup\tВиконати оновлення дистрибутиву.\n"
 "\tpatch-check, pchk\tПеревірити наявність латок оновлення.\n"
 
-#: src/Zypper.cc:749
+#: src/Zypper.cc:758
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -2025,7 +2030,7 @@ msgstr ""
 "\twhat-provides, wp\tНадати список пакунків, що надають певну "
 "функціональність.\n"
 
-#: src/Zypper.cc:764
+#: src/Zypper.cc:773
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -2039,7 +2044,7 @@ msgstr ""
 "\tlocks, ll\t\tНадати список замків пакунка.\n"
 "\tcleanlocks, cl\t\tВилучити непотрібні замки.\n"
 
-#: src/Zypper.cc:771
+#: src/Zypper.cc:780
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -2061,7 +2066,7 @@ msgstr ""
 "\tsource-download\t\tЗавантажити сирцеві rpm для усіх встановлених пакунків\n"
 "\t\t\t\tу локальний каталог.\n"
 
-#: src/Zypper.cc:781
+#: src/Zypper.cc:790
 msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
@@ -2069,7 +2074,7 @@ msgstr ""
 "     Підкоманди:\n"
 "\tsubcommand\t\tперераховує доступні підкоманди.\n"
 
-#: src/Zypper.cc:786
+#: src/Zypper.cc:795
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -2081,7 +2086,7 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:814
+#: src/Zypper.cc:823
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr "Введіть «%s», щоб прочитати список основних параметрів і команд."
@@ -2089,7 +2094,7 @@ msgstr "Введіть «%s», щоб прочитати список основ
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:821
+#: src/Zypper.cc:830
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -2100,7 +2105,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:828
+#: src/Zypper.cc:837
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "
@@ -2111,58 +2116,58 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:839
+#: src/Zypper.cc:848
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Введіть «%s», щоб прочитати довідку з окремої команди."
 
-#: src/Zypper.cc:1014
+#: src/Zypper.cc:1024
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Багатослівність: %d"
 
-#: src/Zypper.cc:1028
+#: src/Zypper.cc:1038
 #, c-format, boost-format
 msgid "Invalid table style %d."
 msgstr "Непридатний стиль таблиці %d."
 
-#: src/Zypper.cc:1029
+#: src/Zypper.cc:1039
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
 msgstr "Використовуйте ціле число від %d до %d"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:1140
+#: src/Zypper.cc:1150
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Підкоманда %1% не підтримає глобальні параметри zypper."
 
-#: src/Zypper.cc:1161
+#: src/Zypper.cc:1171
 msgid "Enforced setting"
 msgstr "Примусовий параметр"
 
-#: src/Zypper.cc:1171
+#: src/Zypper.cc:1181
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "Рядок користувацьких даних не повинен містити недруковані символи і символи "
 "нового рядка!"
 
-#: src/Zypper.cc:1195 src/Zypper.cc:3505
+#: src/Zypper.cc:1205 src/Zypper.cc:3530
 msgid "Entering non-interactive mode."
 msgstr "Початок неінтерактивного режиму."
 
-#: src/Zypper.cc:1202
+#: src/Zypper.cc:1212
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
 "Латки з прапором rebootSuggested не будуть оброблятися як інтерактивні."
 
-#: src/Zypper.cc:1209
+#: src/Zypper.cc:1219
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Входження до режиму \"no-gpg-checks\"."
 
-#: src/Zypper.cc:1217
+#: src/Zypper.cc:1227
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -2170,11 +2175,11 @@ msgstr ""
 "Буде увімкнено «%s». Нові ключі підписування сховищ будуть імпортуватись "
 "автоматично!"
 
-#: src/Zypper.cc:1230
+#: src/Zypper.cc:1252
 msgid "The path specified in the --root option must be absolute."
 msgstr "Шлях, що визначається параметром --root, має бути абсолютним."
 
-#: src/Zypper.cc:1246
+#: src/Zypper.cc:1271
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -2182,45 +2187,45 @@ msgstr ""
 "Символічне посилання /etc/products.d/baseproduct неправильне або відсутнє!\n"
 "Посилання має вказувати на .prod-файл основних продуктів у /etc/products.d.\n"
 
-#: src/Zypper.cc:1286
+#: src/Zypper.cc:1311
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Сховища вимкнено, буде вживатись тільки база даних встановлених пакунків."
 
-#: src/Zypper.cc:1298
+#: src/Zypper.cc:1323
 msgid "Autorefresh disabled."
 msgstr "Автоосвіження вимкнено."
 
-#: src/Zypper.cc:1305
+#: src/Zypper.cc:1330
 msgid "CD/DVD repositories disabled."
 msgstr "Сховища КД/DVD вимкнено."
 
-#: src/Zypper.cc:1312
+#: src/Zypper.cc:1337
 msgid "Remote repositories disabled."
 msgstr "Віддалені сховища вимкнено."
 
-#: src/Zypper.cc:1319
+#: src/Zypper.cc:1344
 msgid "Ignoring installed resolvables."
 msgstr "Ігнорування встановлених залежності."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:1346 src/Zypper.cc:1396
+#: src/Zypper.cc:1371 src/Zypper.cc:1421
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Параметр %s у цьому випадку не працюватиме, його пропущено."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:1479
+#: src/Zypper.cc:1504
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Оболонка zypper не підтримує виконання підкоманд."
 
-#: src/Zypper.cc:1558
+#: src/Zypper.cc:1583
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "Команду '%s' замінено на '%s'."
 
-#: src/Zypper.cc:1559
+#: src/Zypper.cc:1584
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "Усі доступні параметри наведені в '%s'."
@@ -2228,7 +2233,7 @@ msgstr "Усі доступні параметри наведені в '%s'."
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
 #. and the third %s = "only, in-advance, in-heaps, as-needed"
-#: src/Zypper.cc:1695
+#: src/Zypper.cc:1720
 #, c-format, boost-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -2312,8 +2317,8 @@ msgstr ""
 "-d, --download-only         Тільки завантажити пакунки, але не "
 "встановлювати.\n"
 
-#: src/Zypper.cc:1728 src/Zypper.cc:1780 src/Zypper.cc:1860 src/Zypper.cc:2463
-#: src/Zypper.cc:2537 src/Zypper.cc:2644
+#: src/Zypper.cc:1753 src/Zypper.cc:1805 src/Zypper.cc:1885 src/Zypper.cc:2488
+#: src/Zypper.cc:2562 src/Zypper.cc:2669
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2321,13 +2326,13 @@ msgstr ""
 "Не потрібна взаємодія із користувачем. Псевдонім для глобального параметра --"
 "non-interactive."
 
-#: src/Zypper.cc:1729
+#: src/Zypper.cc:1754
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: src/Zypper.cc:1763
+#: src/Zypper.cc:1788
 #, c-format, boost-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -2369,7 +2374,7 @@ msgstr ""
 "не вилучати.\n"
 "--details               Показати детальний огляд встановлення.\n"
 
-#: src/Zypper.cc:1801
+#: src/Zypper.cc:1826
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -2394,7 +2399,7 @@ msgstr ""
 "-r, --repo <alias|#|URI> Встановити пакунки лише з зазначених сховищ.\n"
 " -- download only  тільки завантажити пакунки, не встановлюючи їх.\n"
 
-#: src/Zypper.cc:1812
+#: src/Zypper.cc:1837
 #, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
@@ -2405,7 +2410,7 @@ msgstr ""
 "значення може змінитися у вашій локальній конфігурації rpm. У випадку "
 "сумніву спробуйте виконати '%2%'."
 
-#: src/Zypper.cc:1845
+#: src/Zypper.cc:1870
 #, c-format, boost-format
 msgid ""
 "verify (ve) [options]\n"
@@ -2438,7 +2443,7 @@ msgstr ""
 "-d, --download-only         Тільки звантажити пакунки, але не "
 "встановлювати.\n"
 
-#: src/Zypper.cc:1889
+#: src/Zypper.cc:1914
 #, c-format, boost-format
 msgid ""
 "install-new-recommends (inr) [options]\n"
@@ -2472,7 +2477,7 @@ msgstr ""
 "-d, --download-only      Тільки звантажити пакунки, але не встановлювати.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: src/Zypper.cc:1921
+#: src/Zypper.cc:1946
 #, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -2494,21 +2499,21 @@ msgstr ""
 "-n, --name <псевдонім>   Вказати описову назву служби.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:1934
+#: src/Zypper.cc:1959
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr "addservice (as) [параметри] <URI> <псевдонім>"
 
 #. translators: command description
-#: src/Zypper.cc:1937
+#: src/Zypper.cc:1962
 msgid "Add a repository index service to the system."
 msgstr "Додати до системи службу індексу сховища."
 
-#: src/Zypper.cc:1942
+#: src/Zypper.cc:1967
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:1958
+#: src/Zypper.cc:1983
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -2527,7 +2532,7 @@ msgstr ""
 "    --loose-query\tІгнорувати рядок запиту в URL\n"
 
 #. translators: %s is "--all" and "--all"
-#: src/Zypper.cc:1988
+#: src/Zypper.cc:2013
 #, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -2584,18 +2589,18 @@ msgstr ""
 "типу.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2017
+#: src/Zypper.cc:2042
 msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
 msgstr "modifyservice (ms) <параметри> <псевдонім|#|URL>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2020
+#: src/Zypper.cc:2045
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
 msgstr "modifyservice (ms) <параметри> <%1%>"
 
 #. translators: command description
-#: src/Zypper.cc:2023
+#: src/Zypper.cc:2048
 #, boost-format
 msgid ""
 "Modify properties of services specified by alias, number, or URI, or by the "
@@ -2604,47 +2609,47 @@ msgstr ""
 "Змінити властивості служб, вказаних за допомогою псевдоніма, номера або URI, "
 "або за допомогою сукупності параметрів «%1%»."
 
-#: src/Zypper.cc:2028
+#: src/Zypper.cc:2053
 msgid "Apply changes to all services."
 msgstr "Застосувати зміни до всіх служб."
 
-#: src/Zypper.cc:2029
+#: src/Zypper.cc:2054
 msgid "Apply changes to all local services."
 msgstr "Застосувати зміни до всіх локальних служб."
 
-#: src/Zypper.cc:2030
+#: src/Zypper.cc:2055
 msgid "Apply changes to all remote services."
 msgstr "Застосувати зміни до всіх віддалених служб."
 
-#: src/Zypper.cc:2031
+#: src/Zypper.cc:2056
 msgid "Apply changes to services of specified type."
 msgstr "Застосувати зміни до всіх служб вказаного типу."
 
-#: src/Zypper.cc:2033
+#: src/Zypper.cc:2058
 msgid "Add a RIS service repository to enable."
 msgstr "Додати RIS служби сховища, щоб увімкнути."
 
-#: src/Zypper.cc:2034
+#: src/Zypper.cc:2059
 msgid "Add a RIS service repository to disable."
 msgstr "Додати RIS служби сховища, щоб вимкнути."
 
-#: src/Zypper.cc:2035
+#: src/Zypper.cc:2060
 msgid "Remove a RIS service repository to enable."
 msgstr "Вилучити RIS служби сховища, щоб увімкнути."
 
-#: src/Zypper.cc:2036
+#: src/Zypper.cc:2061
 msgid "Remove a RIS service repository to disable."
 msgstr "Вилучити RIS служби сховища, щоб вимкнути."
 
-#: src/Zypper.cc:2037
+#: src/Zypper.cc:2062
 msgid "Clear the list of RIS repositories to enable."
 msgstr "Очистити список RIS сховищ, щоб увімкнути."
 
-#: src/Zypper.cc:2038
+#: src/Zypper.cc:2063
 msgid "Clear the list of RIS repositories to disable."
 msgstr "Очистити список RIS сховищ, щоб вимкнути."
 
-#: src/Zypper.cc:2065
+#: src/Zypper.cc:2090
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -2673,7 +2678,7 @@ msgstr ""
 "-U, --sort-by-uri         Впорядкувати список за URI.\n"
 "-N, --sort-by-name        Впорядкувати список за назвами.\n"
 
-#: src/Zypper.cc:2093
+#: src/Zypper.cc:2118
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -2696,7 +2701,7 @@ msgstr ""
 "сховищ.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:2119
+#: src/Zypper.cc:2144
 #, c-format, boost-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -2738,17 +2743,17 @@ msgstr ""
 "-f, --refresh           Увімкнути автоосвіження сховища.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2141
+#: src/Zypper.cc:2166
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
 msgstr "addrepo (ar)  [параметри] <URI> <псевдонім>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2144
+#: src/Zypper.cc:2169
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
 msgstr "addrepo (ar) [параметри] <ФАЙЛ.repo>"
 
 #. translators: command description
-#: src/Zypper.cc:2147
+#: src/Zypper.cc:2172
 msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
@@ -2756,23 +2761,23 @@ msgstr ""
 "Додати сховище до системи. Сховище можна вказати адресою URI або прочитати з "
 "вказаного файлу .repo (можна віддаленого)."
 
-#: src/Zypper.cc:2150
+#: src/Zypper.cc:2175
 msgid "Just another means to specify a .repo file to read."
 msgstr "Ще один спосіб вказати файл .repo для читання."
 
-#: src/Zypper.cc:2151
+#: src/Zypper.cc:2176
 msgid "Probe URI."
 msgstr "Зондувати URI."
 
-#: src/Zypper.cc:2152
+#: src/Zypper.cc:2177
 msgid "Don't probe URI, probe later during refresh."
 msgstr "Не зондувати URI, прозондувати його під час освіження."
 
-#: src/Zypper.cc:2156
+#: src/Zypper.cc:2181
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
 
-#: src/Zypper.cc:2184
+#: src/Zypper.cc:2209
 msgid ""
 "repos (lr) [options] [repo] ...\n"
 "\n"
@@ -2814,7 +2819,7 @@ msgstr ""
 "-A, --sort-by-alias       Впорядкувати список за псевдонімами.\n"
 "-N, --sort-by-name        Впорядкувати список за назвами.\n"
 
-#: src/Zypper.cc:2216
+#: src/Zypper.cc:2241
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -2832,7 +2837,7 @@ msgstr ""
 "    --loose-auth\tІгнорувати дані автентифікації користувача у URL\n"
 "    --loose-query\tІгнорувати рядок запиту у URL\n"
 
-#: src/Zypper.cc:2235
+#: src/Zypper.cc:2260
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -2849,7 +2854,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:2258
+#: src/Zypper.cc:2283
 #, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -2885,7 +2890,7 @@ msgstr ""
 "-k, --keep-packages       Увімкнути кешування файлів RPM.\n"
 "-K, --no-keep-packages    Вимкнути кешування файлів RPM.\n"
 
-#: src/Zypper.cc:2275
+#: src/Zypper.cc:2300
 msgid ""
 "-a, --all                 Apply changes to all repositories.\n"
 "-l, --local               Apply changes to all local repositories.\n"
@@ -2898,18 +2903,18 @@ msgstr ""
 "-m, --medium-type <тип>  Застосувати зміни до сховищ з вказаним типом.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2284
+#: src/Zypper.cc:2309
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
 msgstr "modifyrepo (mr) <параметри> <псевдонім|#|URL>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2287
+#: src/Zypper.cc:2312
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
 msgstr "modifyrepo (mr) <параметри> <%1%>"
 
 #. translators: command description
-#: src/Zypper.cc:2290
+#: src/Zypper.cc:2315
 #, boost-format
 msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
@@ -2918,23 +2923,23 @@ msgstr ""
 "Змінити властивості сховища, вказаного за допомогою псевдоніма, номера або "
 "URI, або за допомогою сукупності параметрів «%1%»."
 
-#: src/Zypper.cc:2295
+#: src/Zypper.cc:2320
 msgid "Apply changes to all repositories."
 msgstr "Застосувати зміни до всіх сховищ."
 
-#: src/Zypper.cc:2296
+#: src/Zypper.cc:2321
 msgid "Apply changes to all local repositories."
 msgstr "Застосувати зміни до всіх локальних сховищ."
 
-#: src/Zypper.cc:2297
+#: src/Zypper.cc:2322
 msgid "Apply changes to all remote repositories."
 msgstr "Застосувати зміни до всіх віддалених сховищ."
 
-#: src/Zypper.cc:2298
+#: src/Zypper.cc:2323
 msgid "Apply changes to repositories of specified type."
 msgstr "Застосувати зміни до сховищ з вказаним типом."
 
-#: src/Zypper.cc:2322
+#: src/Zypper.cc:2347
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -2966,7 +2971,7 @@ msgstr ""
 "-r, --repo <псевдонім|#|URI> Оновити дані лише для вказаних сховищ.\n"
 "-s, --services           Оновити також служби перед оновленням сховищ.\n"
 
-#: src/Zypper.cc:2351
+#: src/Zypper.cc:2376
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -2991,7 +2996,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2380
+#: src/Zypper.cc:2405
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -3033,7 +3038,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2434
+#: src/Zypper.cc:2459
 #, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -3100,7 +3105,7 @@ msgstr ""
 "-d, --download-only         Тільки звантажити пакунки, але не "
 "встановлювати.\n"
 
-#: src/Zypper.cc:2507
+#: src/Zypper.cc:2532
 #, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -3173,11 +3178,11 @@ msgstr ""
 "-d, --download-only         Тільки звантажити пакунки, але не "
 "встановлювати.\n"
 
-#: src/Zypper.cc:2534
+#: src/Zypper.cc:2559
 msgid "Install only patches which affect the package management itself."
 msgstr "Встановити лише латки, які стосуються менеджера пакунків."
 
-#: src/Zypper.cc:2535
+#: src/Zypper.cc:2560
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
@@ -3189,16 +3194,16 @@ msgstr ""
 "only."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2565
+#: src/Zypper.cc:2590
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [ПАРАМЕТРИ]"
 
 #. translators: command description
-#: src/Zypper.cc:2568
+#: src/Zypper.cc:2593
 msgid "List all applicable patches."
 msgstr "Список усіх застосовних латок."
 
-#: src/Zypper.cc:2571
+#: src/Zypper.cc:2596
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
@@ -3206,7 +3211,7 @@ msgstr ""
 "-b, --bugzilla[=#]\n"
 "Список застосовних латок для проблем Bugzilla."
 
-#: src/Zypper.cc:2572
+#: src/Zypper.cc:2597
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
@@ -3214,7 +3219,7 @@ msgstr ""
 "--cve[=#]\n"
 "Список застосовних латок для проблем CVE."
 
-#: src/Zypper.cc:2573
+#: src/Zypper.cc:2598
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
@@ -3222,7 +3227,7 @@ msgstr ""
 "--issues[=РЯДОК]\n"
 "Пошук проблем, які відповідають зазначеному рядку."
 
-#: src/Zypper.cc:2574
+#: src/Zypper.cc:2599
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
@@ -3230,7 +3235,7 @@ msgstr ""
 "--date <YYYY-MM-DD>\n"
 "Список лише латок, випущених до зазначеної дати, але не включаючи її."
 
-#: src/Zypper.cc:2575
+#: src/Zypper.cc:2600
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
@@ -3238,7 +3243,7 @@ msgstr ""
 "-g, --category <КАТЕГОРІЯ>\n"
 "Список латок зі вказаної категорії."
 
-#: src/Zypper.cc:2576
+#: src/Zypper.cc:2601
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
@@ -3246,7 +3251,7 @@ msgstr ""
 "--severity <SEVERITY>\n"
 "Список лише латок зі вказаним рівнем важливості."
 
-#: src/Zypper.cc:2577
+#: src/Zypper.cc:2602
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
@@ -3254,7 +3259,7 @@ msgstr ""
 "-a, --all\n"
 "Список усіх латок, не тільки застосовних."
 
-#: src/Zypper.cc:2579
+#: src/Zypper.cc:2604
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
@@ -3262,7 +3267,7 @@ msgstr ""
 "-r, --repo <НАЗВА|#|URI>\n"
 "Список латок лише зі вказаного сховища."
 
-#: src/Zypper.cc:2623
+#: src/Zypper.cc:2648
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -3318,23 +3323,23 @@ msgstr ""
 "-d, --download-only         Тільки звантажити пакунки, але не "
 "встановлювати.\n"
 
-#: src/Zypper.cc:2652
+#: src/Zypper.cc:2677
 msgid "Whether to allow downgrading installed resolvables."
 msgstr "Чи дозволяти пониження версій встановлених залежностей."
 
-#: src/Zypper.cc:2654
+#: src/Zypper.cc:2679
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr "Чи дозволяти зміну назв встановлених залежностей."
 
-#: src/Zypper.cc:2656
+#: src/Zypper.cc:2681
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr "Чи дозволяти зміну архітектури встановлених залежностей."
 
-#: src/Zypper.cc:2658
+#: src/Zypper.cc:2683
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr "Чи дозволяти зміну постачальника встановлених залежностей."
 
-#: src/Zypper.cc:2695
+#: src/Zypper.cc:2720
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -3421,12 +3426,12 @@ msgstr ""
 "вираз.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2745
+#: src/Zypper.cc:2770
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr "patch-check (pchk) [ПАРАМЕТРИ]"
 
 #. translators: command description
-#: src/Zypper.cc:2748
+#: src/Zypper.cc:2773
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
@@ -3435,7 +3440,7 @@ msgstr ""
 "потрібні латки знайдені, або 101, коли наявна принаймні одна потрібна латка "
 "безпеки."
 
-#: src/Zypper.cc:2751
+#: src/Zypper.cc:2776
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
@@ -3443,13 +3448,13 @@ msgstr ""
 "-r, --repo <НАЗВА|#|URI>\n"
 "Перевірка наявності латок лише у вказаному сховищі."
 
-#: src/Zypper.cc:2752
+#: src/Zypper.cc:2777
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr "Перевірка лише латок, які впливають на менеджер пакунків."
 
-#: src/Zypper.cc:2769
+#: src/Zypper.cc:2794
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3467,7 +3472,7 @@ msgstr ""
 "\n"
 "-r, --repo <псевдонім|#|URI>  Ще один спосіб вказати сховище.\n"
 
-#: src/Zypper.cc:2799
+#: src/Zypper.cc:2824
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -3502,7 +3507,7 @@ msgstr ""
 "n-N, --sort-by-name        Впорядкувати список за назвами пакунків.\n"
 "-R, --sort-by-repo        Впорядкувати список за сховищами.\n"
 
-#: src/Zypper.cc:2830
+#: src/Zypper.cc:2855
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3524,7 +3529,7 @@ msgstr ""
 "-i, --installed-only      Показати лише встановлені шаблони.\n"
 "-u, --not-installed-only  Показати лише невстановлені шаблони.\n"
 
-#: src/Zypper.cc:2857
+#: src/Zypper.cc:2882
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3546,13 +3551,13 @@ msgstr ""
 "-i, --installed-only      Показати лише встановлені продукти.\n"
 "-u, --not-installed-only  Показати лише невстановлені продукти.\n"
 
-#: src/Zypper.cc:2866
+#: src/Zypper.cc:2891
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
 "Лише виведення XML: Буквально пересилати XML-теги, знайдені у файлі продукту."
 
-#: src/Zypper.cc:2890
+#: src/Zypper.cc:2915
 #, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -3596,7 +3601,7 @@ msgstr ""
 "    --recommends          Показати також рекомендовані.    --"
 "suggests            Показати пропоновані пакунки.\n"
 
-#: src/Zypper.cc:2923
+#: src/Zypper.cc:2948
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3611,7 +3616,7 @@ msgstr ""
 "\n"
 "Це псевдо для «%s».\n"
 
-#: src/Zypper.cc:2942
+#: src/Zypper.cc:2967
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3626,7 +3631,7 @@ msgstr ""
 "\n"
 "Це псевдо для «%s».\n"
 
-#: src/Zypper.cc:2961
+#: src/Zypper.cc:2986
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3641,7 +3646,7 @@ msgstr ""
 "\n"
 "Це псевдо для «%s».\n"
 
-#: src/Zypper.cc:2978
+#: src/Zypper.cc:3003
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3655,7 +3660,7 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: src/Zypper.cc:3029
+#: src/Zypper.cc:3054
 msgid ""
 "moo\n"
 "\n"
@@ -3669,7 +3674,7 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: src/Zypper.cc:3051
+#: src/Zypper.cc:3076
 #, c-format, boost-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -3692,7 +3697,7 @@ msgstr ""
 "-t, --type <тип>         Тип пакунка (%s).\n"
 "                          Типовий: %s.\n"
 
-#: src/Zypper.cc:3078
+#: src/Zypper.cc:3103
 #, c-format, boost-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -3716,26 +3721,26 @@ msgstr ""
 "                          Типово: %s.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3105
+#: src/Zypper.cc:3130
 msgid "locks (ll) [options]"
 msgstr "locks (ll) [параметри]"
 
 #. translators: command description
-#: src/Zypper.cc:3108
+#: src/Zypper.cc:3133
 msgid "List current package locks."
 msgstr "Список блокувань поточного пакунку."
 
 #. translators: -m, --matches
-#: src/Zypper.cc:3112
+#: src/Zypper.cc:3137
 msgid "Show the number of resolvables matched by each lock."
 msgstr "Показати число залежностей, які відповідають кожному блокуванню."
 
 #. translators: -s, --solvables
-#: src/Zypper.cc:3114
+#: src/Zypper.cc:3139
 msgid "List the resolvables matched by each lock."
 msgstr "Список залежностей, відповідних кожному блокуванню."
 
-#: src/Zypper.cc:3130
+#: src/Zypper.cc:3155
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -3753,7 +3758,7 @@ msgstr ""
 "-d, --only-duplicates     Очистити тільки замки-дублікати.\n"
 "-e, --only-empty            Очистити тільки замки, які нічого не блокують.\n"
 
-#: src/Zypper.cc:3151
+#: src/Zypper.cc:3176
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -3771,7 +3776,7 @@ msgstr ""
 "Параметри команди:\n"
 "-l, --label              Показувати мітку операційної системи.\n"
 
-#: src/Zypper.cc:3172
+#: src/Zypper.cc:3197
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3787,7 +3792,7 @@ msgstr ""
 "  Параметри команди:\n"
 "-m, --match  Приймає відсутній номер версії як будь-який випуск.\n"
 
-#: src/Zypper.cc:3191
+#: src/Zypper.cc:3216
 msgid ""
 "licenses\n"
 "\n"
@@ -3802,12 +3807,12 @@ msgstr ""
 "Ця команда не має додаткових параметрів.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3216
+#: src/Zypper.cc:3241
 msgid "ps [options]"
 msgstr "ps [параметри]"
 
 #. translators: command description
-#: src/Zypper.cc:3219
+#: src/Zypper.cc:3244
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -3816,7 +3821,7 @@ msgstr ""
 "оновленням."
 
 #. translators: -s, --short
-#: src/Zypper.cc:3223
+#: src/Zypper.cc:3248
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -3827,7 +3832,7 @@ msgstr ""
 "то перераховує лише назви  пов'язаних системних служб."
 
 #. translators: --print <format>
-#: src/Zypper.cc:3225
+#: src/Zypper.cc:3250
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -3839,11 +3844,11 @@ msgstr ""
 "замінюється назвою системної служби."
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3227
+#: src/Zypper.cc:3252
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/Zypper.cc:3246
+#: src/Zypper.cc:3271
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -3882,7 +3887,7 @@ msgstr ""
 "--dry-run Не звантажувати пакети, тільки повідомити про те, що\n"
 "було б зроблено.\n"
 
-#: src/Zypper.cc:3285
+#: src/Zypper.cc:3310
 msgid ""
 "source-download\n"
 "\n"
@@ -3910,7 +3915,7 @@ msgstr ""
 "--status Не завантажувати rpm із сирцями, але\n"
 "показати, які rpm відсутні або є зайвими.\n"
 
-#: src/Zypper.cc:3312
+#: src/Zypper.cc:3337
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -3924,7 +3929,7 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: src/Zypper.cc:3329
+#: src/Zypper.cc:3354
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -3939,7 +3944,7 @@ msgstr ""
 "Ця команда не має додаткових параметрів.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3347
+#: src/Zypper.cc:3372
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -3950,7 +3955,7 @@ msgstr ""
 "Надає список всіх доступних типів служб.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3363
+#: src/Zypper.cc:3388
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -3963,7 +3968,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3385
+#: src/Zypper.cc:3410
 msgid ""
 "mount\n"
 "\n"
@@ -3984,7 +3989,7 @@ msgstr ""
 "-n, --name <назва>    Використовувати вказаний рядок як назву служби.\n"
 "-r, --recurse        Рекурсія за підкаталогами.\n"
 
-#: src/Zypper.cc:3413
+#: src/Zypper.cc:3438
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -3997,7 +4002,7 @@ msgstr ""
 "Шукає латки, що відповідають заданим рядкам пошуку. Це псевдо для \"%s\".\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3430
+#: src/Zypper.cc:3455
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4007,16 +4012,16 @@ msgstr ""
 "\n"
 "Ця команда має порожнє впровадження, яке завжди повертає 0.\n"
 
-#: src/Zypper.cc:3473 src/Zypper.cc:5504
+#: src/Zypper.cc:3498 src/Zypper.cc:5529
 msgid "Unexpected program flow."
 msgstr "Неочікуваний перебіг виконання програми."
 
-#: src/Zypper.cc:3521
+#: src/Zypper.cc:3546
 msgid "Non-option program arguments: "
 msgstr "Аргументи програми (не-параметри): "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3580
+#: src/Zypper.cc:3605
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4026,20 +4031,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3603
+#: src/Zypper.cc:3628
 msgid "Root privileges are required for refreshing services."
 msgstr "Для освіження служб потрібні привілеї адміністратора."
 
-#: src/Zypper.cc:3627 src/Zypper.cc:3706 src/Zypper.cc:3894
+#: src/Zypper.cc:3652 src/Zypper.cc:3731 src/Zypper.cc:3919
 msgid "Root privileges are required for modifying system services."
 msgstr "Для зміни системних служб потрібні привілеї адміністратора."
 
-#: src/Zypper.cc:3690
+#: src/Zypper.cc:3715
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "«%s» не є чинним типом служби."
 
-#: src/Zypper.cc:3692
+#: src/Zypper.cc:3717
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "Щоб отримати список відомих типів служб, скористайтесь «%s» або «%s»."
@@ -4048,119 +4053,119 @@ msgstr "Щоб отримати список відомих типів служ�
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3717 src/Zypper.cc:4035
+#: src/Zypper.cc:3742 src/Zypper.cc:4060
 msgid "Alias or an aggregate option is required."
 msgstr "Потрібен псевдонім або сукупність параметрів сховища."
 
-#: src/Zypper.cc:3749
+#: src/Zypper.cc:3774
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Службу «%s» не знайдено."
 
-#: src/Zypper.cc:3776 src/Zypper.cc:3893 src/Zypper.cc:3972 src/Zypper.cc:4024
+#: src/Zypper.cc:3801 src/Zypper.cc:3918 src/Zypper.cc:3997 src/Zypper.cc:4049
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Для зміни системних сховищ потрібні привілеї адміністратора."
 
-#: src/Zypper.cc:3802 src/Zypper.cc:4139
+#: src/Zypper.cc:3827 src/Zypper.cc:4164
 msgid "Too few arguments."
 msgstr "Замало аргументів."
 
-#: src/Zypper.cc:3825
+#: src/Zypper.cc:3850
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Якщо використано лише один аргумент, це має бути URI, що вказує на файл ."
 "repo."
 
-#: src/Zypper.cc:3855
+#: src/Zypper.cc:3880
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "Не можна використовувати %s разом з %s. Використано параметри з %s."
 
-#: src/Zypper.cc:3874
+#: src/Zypper.cc:3899
 msgid "Specified type is not a valid repository type:"
 msgstr "Вказаний тип не є чинним типом сховища:"
 
-#: src/Zypper.cc:3875
+#: src/Zypper.cc:3900
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "Щоб отримати список відомих типів сховищ, скористайтесь «%s» або «%s»."
 
-#: src/Zypper.cc:3901 src/Zypper.cc:5102 src/utils/messages.cc:45
+#: src/Zypper.cc:3926 src/Zypper.cc:5127 src/utils/messages.cc:45
 msgid "Required argument missing."
 msgstr "Потрібний аргумент відсутній."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:3926
+#: src/Zypper.cc:3951
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Сховище «%s» не знайдено за його псевдонімом, номером або URL."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:3948
+#: src/Zypper.cc:3973
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Сховище «%s» не знайдено за його псевдонімом, номером або URL."
 
-#: src/Zypper.cc:3979
+#: src/Zypper.cc:4004
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Замало аргументів. Потрібні, принаймні, адреса URI і псевдонім."
 
-#: src/Zypper.cc:4003
+#: src/Zypper.cc:4028
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Сховище «%s» не знайдено."
 
-#: src/Zypper.cc:4066
+#: src/Zypper.cc:4091
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Сховище %s не знайдено."
 
-#: src/Zypper.cc:4083
+#: src/Zypper.cc:4108
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Для освіження системних сховищ потрібні привілеї адміністратора."
 
-#: src/Zypper.cc:4089
+#: src/Zypper.cc:4114
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Глобальний параметр «%s» тут не працюватиме."
 
-#: src/Zypper.cc:4097
+#: src/Zypper.cc:4122
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Аргументи не дозволені, якщо використовується «%s»."
 
-#: src/Zypper.cc:4121
+#: src/Zypper.cc:4146
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Для очищення локального кешу потрібні привілеї адміністратора."
 
-#: src/Zypper.cc:4140
+#: src/Zypper.cc:4165
 msgid "At least one package name is required."
 msgstr "Потрібна хоча б одна назва пакунка."
 
-#: src/Zypper.cc:4149
+#: src/Zypper.cc:4174
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
 "Для встановлення і вилучення пакунків потрібні привілеї адміністратора."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4161
+#: src/Zypper.cc:4186
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Аргументи буде зігноровано; позначається ціле сховище."
 
-#: src/Zypper.cc:4172
+#: src/Zypper.cc:4197
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Невідомий тип пакунка: %s"
 
-#: src/Zypper.cc:4182
+#: src/Zypper.cc:4207
 msgid "Cannot uninstall patches."
 msgstr "Неможливо прибрати пакунки."
 
-#: src/Zypper.cc:4183
+#: src/Zypper.cc:4208
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4170,34 +4175,34 @@ msgstr ""
 "Латки не встановлюються в значенні копіювання файлів, записів баз даних,\n"
 "чи чогось подібного."
 
-#: src/Zypper.cc:4193
+#: src/Zypper.cc:4218
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Вилучення пакунку з сирцями не визначено і не впроваджено."
 
-#: src/Zypper.cc:4213
+#: src/Zypper.cc:4238
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "\"%s\" схожий на файл RPM. Спробуємо його звантажити."
 
-#: src/Zypper.cc:4222
+#: src/Zypper.cc:4247
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Проблема з файлом RPM, заданим як \"%s\", його пропущено."
 
-#: src/Zypper.cc:4244
+#: src/Zypper.cc:4269
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Проблема під час читання заголовка RPM %s. Можливо, це не файл RPM?"
 
-#: src/Zypper.cc:4265
+#: src/Zypper.cc:4290
 msgid "Plain RPM files cache"
 msgstr "Кеш простих файлів RPM"
 
-#: src/Zypper.cc:4287
+#: src/Zypper.cc:4312
 msgid "No valid arguments specified."
 msgstr "Не вказано чинні аргументи."
 
-#: src/Zypper.cc:4304 src/Zypper.cc:4435
+#: src/Zypper.cc:4329 src/Zypper.cc:4460
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4206,78 +4211,78 @@ msgstr ""
 "залежностей. Нічого неможливо встановити."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4341 src/Zypper.cc:4906
+#: src/Zypper.cc:4366 src/Zypper.cc:4931
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s суперечить %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4349
+#: src/Zypper.cc:4374
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s на даний момент не може використовуватися з %s"
 
-#: src/Zypper.cc:4390
+#: src/Zypper.cc:4415
 msgid "Source package name is a required argument."
 msgstr "Назва пакунка з сирцями - це потрібний аргумент."
 
-#: src/Zypper.cc:4474
+#: src/Zypper.cc:4499
 msgid "Mode is set to 'match-exact'"
 msgstr "Зазначений режим точного збігу (match-exact)"
 
-#: src/Zypper.cc:4494 src/Zypper.cc:4825 src/Zypper.cc:4925 src/Zypper.cc:5135
-#: src/Zypper.cc:5186 src/Zypper.cc:5226
+#: src/Zypper.cc:4519 src/Zypper.cc:4850 src/Zypper.cc:4950 src/Zypper.cc:5160
+#: src/Zypper.cc:5211 src/Zypper.cc:5251
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Невідомий тип пакунка «%s»."
 
-#: src/Zypper.cc:4516 src/repos.cc:794
+#: src/Zypper.cc:4541 src/repos.cc:794
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Віддалене сховище '%s' вимкнено."
 
 #. translators: empty search result message
-#: src/Zypper.cc:4640
+#: src/Zypper.cc:4665
 msgid "No matching items found."
 msgstr "Збігів не знайдено."
 
-#: src/Zypper.cc:4675
+#: src/Zypper.cc:4700
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Під час започаткування та виконання пошукового запиту сталася помилка"
 
-#: src/Zypper.cc:4676
+#: src/Zypper.cc:4701
 msgid "See the above message for a hint."
 msgstr "Прочитайте повідомлення розміщене вище, щоб зрозуміти ситуацію краще."
 
-#: src/Zypper.cc:4677 src/repos.cc:1007
+#: src/Zypper.cc:4702 src/repos.cc:1007
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Виконання команди «zypper refresh» від адміністратора може зарадити проблемі."
 
-#: src/Zypper.cc:4757
+#: src/Zypper.cc:4782
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "Параметр %1% не чинить впливу без  глобального параметра %2%."
 
-#: src/Zypper.cc:4844 src/Zypper.cc:4892
+#: src/Zypper.cc:4869 src/Zypper.cc:4917
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Не можна використовувати %s разом з %s."
 
-#: src/Zypper.cc:4873
+#: src/Zypper.cc:4898
 msgid "Root privileges are required for updating packages."
 msgstr "Для оновлення пакунків потрібні привілеї адміністратора."
 
-#: src/Zypper.cc:4932 src/Zypper.cc:4940 src/Zypper.cc:5021
+#: src/Zypper.cc:4957 src/Zypper.cc:4965 src/Zypper.cc:5046
 msgid "Operation not supported."
 msgstr "Операція не підтримується."
 
-#: src/Zypper.cc:4933
+#: src/Zypper.cc:4958
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Для оновлення встановлених продуктів використовуйте '%s'."
 
-#: src/Zypper.cc:4941
+#: src/Zypper.cc:4966
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4286,19 +4291,19 @@ msgstr ""
 "Zypper не стежить за встановленими пакунками із сирцями. Для установки "
 "найновішого пакунку з сирцями і залежностей для збирання використовуйте '%s'."
 
-#: src/Zypper.cc:4957
+#: src/Zypper.cc:4982
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Неможливо використовувати кілька типів при вказівці конкретних пакунків як "
 "аргументів."
 
-#: src/Zypper.cc:5057
+#: src/Zypper.cc:5082
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
 "Для проведення оновлення дистрибутива вам слід мати привілеї адміністратора."
 
-#: src/Zypper.cc:5077
+#: src/Zypper.cc:5102
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4309,16 +4314,16 @@ msgstr ""
 "увімкнених сховищ. Перед тим як продовжити переконайтесь, що ці сховища між "
 "собою сумісні. Для детальнішої інформації про цю команду дивіться \"%s\"."
 
-#: src/Zypper.cc:5105 src/utils/messages.cc:37 src/utils/messages.cc:47
+#: src/Zypper.cc:5130 src/utils/messages.cc:37 src/utils/messages.cc:47
 #: src/utils/messages.cc:64
 msgid "Usage"
 msgstr "Вжиток"
 
-#: src/Zypper.cc:5165 src/Zypper.cc:5206
+#: src/Zypper.cc:5190 src/Zypper.cc:5231
 msgid "Root privileges are required for adding of package locks."
 msgstr "Для блокування пакунків потрібні привілеї адміністратора."
 
-#: src/Zypper.cc:5287
+#: src/Zypper.cc:5312
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
@@ -4326,56 +4331,56 @@ msgstr[0] "Вилучено %lu блокування."
 msgstr[1] "Вилучено %lu блокування."
 msgstr[2] "Вилучено %lu блокувань."
 
-#: src/Zypper.cc:5298
+#: src/Zypper.cc:5323
 msgid "XML output not implemented for this command."
 msgstr "Вивід XML не впроваджений для цієї команди."
 
-#: src/Zypper.cc:5311
+#: src/Zypper.cc:5336
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Мітка дистрибутива: %s"
 
-#: src/Zypper.cc:5312
+#: src/Zypper.cc:5337
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Коротка мітка: %s"
 
-#: src/Zypper.cc:5353
+#: src/Zypper.cc:5378
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s збігається з %s"
 
-#: src/Zypper.cc:5355
+#: src/Zypper.cc:5380
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s новіший за %s"
 
-#: src/Zypper.cc:5357
+#: src/Zypper.cc:5382
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s старіший за %s"
 
-#: src/Zypper.cc:5439 src/source-download.cc:217
+#: src/Zypper.cc:5464 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Недостатньо привілеїв для використання каталогу завантаження '%s'."
 
-#: src/Zypper.cc:5491
+#: src/Zypper.cc:5516
 msgid "This command only makes sense in the zypper shell."
 msgstr "Ця команда має сенс тільки в оболонці zypper."
 
-#: src/Zypper.cc:5501
+#: src/Zypper.cc:5526
 msgid "You already are running zypper's shell."
 msgstr "У вас вже запущено оболонку zypper."
 
-#: src/Zypper.cc:5514 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2534
+#: src/Zypper.cc:5539 src/repos.cc:1059 src/repos.cc:1208 src/repos.cc:2534
 msgid "Alias"
 msgstr "Псевдонім"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5514 src/info.cc:69 src/info.cc:459 src/info.cc:703
+#: src/Zypper.cc:5539 src/info.cc:69 src/info.cc:459 src/info.cc:703
 #: src/locks.cc:104 src/repos.cc:1070 src/repos.cc:1209 src/repos.cc:2535
 #: src/search.cc:44 src/search.cc:209 src/search.cc:357 src/search.cc:504
 #: src/search.cc:568 src/update.cc:798 src/utils/misc.cc:228
@@ -4383,11 +4388,11 @@ msgid "Name"
 msgstr "Назва"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5514 src/info.cc:83
+#: src/Zypper.cc:5539 src/info.cc:83
 msgid "Description"
 msgstr "Опис"
 
-#: src/Zypper.cc:5565
+#: src/Zypper.cc:5590
 msgid "Resolvable Type"
 msgstr "Тип розв'язувача"
 
