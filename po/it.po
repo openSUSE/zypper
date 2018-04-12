@@ -15,16 +15,16 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-09 13:14+0200\n"
-"PO-Revision-Date: 2017-12-12 20:13+0000\n"
+"PO-Revision-Date: 2018-04-12 15:03+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/libzypp/master/it/"
-">\n"
+"Language-Team: Italian "
+"<https://l10n.opensuse.org/projects/libzypp/master/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17.1\n"
+"X-Generator: Weblate 2.18\n"
 "X-Poedit-Bookmarks: 370,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
@@ -4634,13 +4634,13 @@ msgstr "disinstallazione di %s"
 #: zypp/target/RpmPostTransCollector.cc:103
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
-msgstr ""
+msgstr "Esecuzione dello script %%posttrans '%1%'"
 
 #. show a final message
 #: zypp/target/RpmPostTransCollector.cc:160
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
-msgstr ""
+msgstr "Esecuzione degli script %posttrans"
 
 # TLABEL modules/inst_config_x11.ycp:578
 #: zypp/target/TargetImpl.cc:310
