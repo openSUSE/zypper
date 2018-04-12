@@ -19,10 +19,10 @@ msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-09 13:14+0200\n"
-"PO-Revision-Date: 2018-01-29 18:33+0000\n"
+"PO-Revision-Date: 2018-04-12 12:07+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
-"Language-Team: Hungarian <https://l10n.opensuse.org/projects/libzypp/master/"
-"hu/>\n"
+"Language-Team: Hungarian "
+"<https://l10n.opensuse.org/projects/libzypp/master/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4909,13 +4909,13 @@ msgstr "%s eltávolítása"
 #: zypp/target/RpmPostTransCollector.cc:103
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
-msgstr ""
+msgstr "'%1%' %%posttrans parancsfájl végrehajtása"
 
 #. show a final message
 #: zypp/target/RpmPostTransCollector.cc:160
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
-msgstr ""
+msgstr "%posttrans parancsfájlok végrehajtása"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
