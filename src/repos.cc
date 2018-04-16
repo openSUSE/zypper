@@ -1635,7 +1635,7 @@ void clean_repos( Zypper & zypper )
     filesystem::recursive_rmdir( Pathname::assertprefix( zypper.globalOpts().root_dir, ZYPPER_RPM_CACHE_DIR ) );
   }
 
-  if ( error_count >= enabled_repo_count )
+  if ( enabled_repo_count > 0 && error_count >= enabled_repo_count )
   {
     zypper.out().error(_("Could not clean the repositories because of errors.") );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
