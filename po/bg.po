@@ -4694,13 +4694,13 @@ msgstr "Никой не доставя %s"
 #, fuzzy
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr "Няма инсталируеми доставчици на %s"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
 #, fuzzy
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "Няма инсталируеми доставчици на %s"
 
 #: zypp/solver/detail/SATResolver.cc:1145

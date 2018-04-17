@@ -4798,14 +4798,14 @@ msgstr "törölt csomagok: "
 #: zypp/solver/detail/SATResolver.cc:1085
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr ""
 "\n"
 "nem telepíthető szolgáltatók: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "nem telepíthető szolgáltatók: "
 
 #: zypp/solver/detail/SATResolver.cc:1145

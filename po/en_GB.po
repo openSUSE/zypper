@@ -4466,13 +4466,13 @@ msgstr "None provides %s"
 #, fuzzy
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr "There are no installable providers of %s"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
 #, fuzzy
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "There are no installable providers of %s"
 
 #: zypp/solver/detail/SATResolver.cc:1145

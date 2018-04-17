@@ -4529,14 +4529,14 @@ msgstr "Gelöschte Anbieter: "
 #: zypp/solver/detail/SATResolver.cc:1085
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr ""
 "\n"
 "Nicht installierbare Anbieter: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "Nicht installierbare Anbieter: "
 
 #: zypp/solver/detail/SATResolver.cc:1145

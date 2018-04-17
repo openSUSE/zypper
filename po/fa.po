@@ -4501,14 +4501,14 @@ msgstr "ارائه دهنده های حذف شده: "
 #: zypp/solver/detail/SATResolver.cc:1085
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr ""
 "\n"
 "ارائه دهندگان غیر قابل نصب: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "ارائه دهندگان غیر قابل نصب: "
 
 #: zypp/solver/detail/SATResolver.cc:1145

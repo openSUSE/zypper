@@ -4454,13 +4454,13 @@ msgstr "कोणतीही गोष्ट %s पुरवत नाही"
 #, fuzzy
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr "%s चे स्थापित करता येण्याजोगे प्रदाता नाहीत"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
 #, fuzzy
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "%s चे स्थापित करता येण्याजोगे प्रदाता नाहीत"
 
 #: zypp/solver/detail/SATResolver.cc:1145

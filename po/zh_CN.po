@@ -4503,14 +4503,14 @@ msgstr "已删除提供者： "
 #: zypp/solver/detail/SATResolver.cc:1085
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr ""
 "\n"
 "无法安装的提供者： "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "无法安装的提供者： "
 
 #: zypp/solver/detail/SATResolver.cc:1145

@@ -4566,13 +4566,13 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1085
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr ""
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
 #, fuzzy
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "Automatska Instalacija"
 
 #: zypp/solver/detail/SATResolver.cc:1145

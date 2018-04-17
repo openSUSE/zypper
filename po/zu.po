@@ -4460,13 +4460,13 @@ msgstr "Akukho okunikeza %s"
 #, fuzzy
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr "Abekho abanye abaphakeli abafakiwe be-%s"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
 #, fuzzy
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "Abekho abanye abaphakeli abafakiwe be-%s"
 
 #: zypp/solver/detail/SATResolver.cc:1145

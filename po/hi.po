@@ -4455,13 +4455,13 @@ msgstr "कोई नहीं %s प्रदान करता"
 #, fuzzy
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr "%s का कोई संस्थापनयोग्य प्रदाता नहीं है"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
 #, fuzzy
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "%s का कोई संस्थापनयोग्य प्रदाता नहीं है"
 
 #: zypp/solver/detail/SATResolver.cc:1145

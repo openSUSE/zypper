@@ -4522,14 +4522,14 @@ msgstr "provider cancellati: "
 #: zypp/solver/detail/SATResolver.cc:1085
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr ""
 "\n"
 "impossibile installare i provider: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "provider non installabili: "
 
 #: zypp/solver/detail/SATResolver.cc:1145

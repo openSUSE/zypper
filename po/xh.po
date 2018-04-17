@@ -4457,13 +4457,13 @@ msgstr "Akukho nanye ebonelela ngo%s "
 #, fuzzy
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr "Akukho baboneleli bahlohliweyo baka%s"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
 #, fuzzy
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "Akukho baboneleli bahlohliweyo baka%s"
 
 #: zypp/solver/detail/SATResolver.cc:1145

@@ -4522,14 +4522,14 @@ msgstr "الموفرون المحذوفون: "
 #: zypp/solver/detail/SATResolver.cc:1085
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr ""
 "\n"
 "موفرون غير قابلين للتثبيت: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "الموفرون غير القابلين للتثبيت: "
 
 #: zypp/solver/detail/SATResolver.cc:1145

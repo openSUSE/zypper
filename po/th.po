@@ -4570,13 +4570,13 @@ msgstr "อ่านค่าของผู้ให้บริการ"
 #, fuzzy
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr "เขียนค่าของผู้ให้บริการ"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
 #, fuzzy
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "เขียนค่าของผู้ให้บริการ"
 
 #: zypp/solver/detail/SATResolver.cc:1145

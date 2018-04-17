@@ -4507,14 +4507,14 @@ msgstr "zmazaný poskytovatelia: "
 #: zypp/solver/detail/SATResolver.cc:1085
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr ""
 "\n"
 "neinštalovateľní poskytovatelia:"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "neinštalovateľní poskytovatelia: "
 
 #: zypp/solver/detail/SATResolver.cc:1145

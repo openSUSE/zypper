@@ -4453,13 +4453,13 @@ msgstr "Geen voorsiening %s nie"
 #, fuzzy
 msgid ""
 "\n"
-"uninstallable providers: "
+"not installable providers: "
 msgstr "Daar is geen installeerbare verskaffers van %s nie"
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1088
 #, fuzzy
-msgid "uninstallable providers: "
+msgid "not installable providers: "
 msgstr "Daar is geen installeerbare verskaffers van %s nie"
 
 #: zypp/solver/detail/SATResolver.cc:1145
