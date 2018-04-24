@@ -447,6 +447,17 @@ namespace {
     }
   }
 
+  // search helper
+  inline bool poolExpectMatchFor( const std::string & name_r, const Edition & edition_r )
+  {
+    for ( const auto & pi : ResPool::instance().byName( name_r ) )
+    {
+      if ( Edition::match( pi.edition(), edition_r ) == 0 )
+	return true;
+    }
+    return false;
+  }
+
 } //namespace
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -4555,21 +4566,19 @@ void Zypper::doCommand()
       inst_notinst = true;
     //  query.setInstalledOnly();
 
-    if ( copts.count("match-exact") )
-    {
-      query.setMatchExact();
-    }
 
-    if ( copts.count("match-words") )
+    // matchmode : either explicitly set or nullptr (we choose some default)
+    const char * climatchmode = cli::assertMutuallyExclusiveArgs( *this, { "match-substrings", "match-words", "match-exact" } );
+    if ( climatchmode )
     {
-      if ( query.matchExact() )
-      {
-        out().info(_("Mode is set to 'match-exact'") );
-      }
+      if ( !strcmp( climatchmode, "match-substrings" ) )
+	query.setMatchSubstring();	// this is also the PoolQuery default
+      else if ( !strcmp( climatchmode, "match-words" ) )
+	query.setMatchWord();
+      else if ( !strcmp( climatchmode, "match-exact" ) )
+	query.setMatchExact();
       else
-      {
-        query.setMatchWord();
-      }
+	ZYPP_THROW( Out::Error( ZYPPER_EXIT_ERR_BUG, text::join( "Unhandled option", climatchmode ) ) );
     }
 
     if ( copts.count("case-sensitive") )
@@ -4618,85 +4627,111 @@ void Zypper::doCommand()
     // add argument strings and attributes to query
     for_( it, _arguments.begin(), _arguments.end() )
     {
-      Capability cap = Capability::guessPackageSpec( *it );
+      Capability cap( *it );
+      CapDetail detail( cap.detail() );
       std::string name = cap.detail().name().asString();
 
-      if ( !query.matchRegex() && !query.matchExact() && name.find_first_of("?*") != std::string::npos )
-        query.setMatchGlob();
-
       if ( cap.detail().isVersioned() )
-      {
-        // show details if any search string includes an edition
-        details = true;
-      }
+        details = true;	// show details if any search string includes an edition
 
-      if ( !query.matchGlob() && !query.matchExact() && str::regex_match( name.c_str(), std::string("^/.*/$") ) )
+      // Default Match::OTHER indicates to merge name into the global search string and mode.
+      Match::Mode matchmode = Match::OTHER;
+      if ( !climatchmode )
       {
-        name = name.substr( 1, name.size()-2 );
-        query.setMatchRegex();
+	if ( name.size() >= 2 && *name.begin() == '/' && *name.rbegin() == '/' )
+	{
+	  name = name.substr( 1, name.size()-2 );
+	  matchmode = Match::REGEX;
+	}
+	else if ( name.find_first_of("?*") != std::string::npos )
+	  matchmode = Match::GLOB;
       }
+      // else: match mode explicitly requested by cli arg
 
+      // NOTE: We use the  addDependency  overload taking a  matchmode  argument for ALL
+      // kinds of attributes, not only for dependencies. A constraint on 'op version'
+      // will automatically be applied to match a matching dependency or to match
+      // the matching solvables version, depending on the kind of attribute.
       sat::SolvAttr attr = sat::SolvAttr::name;
-
       if ( copts.count("provides") )
       {
         attr =  sat::SolvAttr::provides;
-        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
         if ( str::regex_match( name.c_str(), std::string("^/") ) )
         {
           // in case of path names also search in file list
           attr = sat::SolvAttr::filelist;
           query.setFilesMatchFullPath( true );
-          query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+          query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
         }
       }
       if ( copts.count("requires") )
       {
         attr =  sat::SolvAttr::requires;
-        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
       }
       if ( copts.count("recommends") )
       {
         attr = sat::SolvAttr::recommends;
-        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
       }
       if ( copts.count("suggests") )
       {
         attr =  sat::SolvAttr::suggests;
-        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
       }
       if ( copts.count("conflicts") )
       {
         attr = sat::SolvAttr::conflicts;
-        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
       }
       if ( copts.count("obsoletes") )
       {
         attr = sat::SolvAttr::obsoletes;
-        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
       }
       if ( copts.count("file-list") )
       {
         attr = sat::SolvAttr::filelist;
 	query.setFilesMatchFullPath( true );
-        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
       }
       if ( attr == sat::SolvAttr::name || copts.count("name") )
       {
-        // addDependency can also be used for sat::SolvAttr::name
-        query.addDependency( sat::SolvAttr::name, name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        query.addDependency( sat::SolvAttr::name, name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
+
+	if ( matchmode == Match::OTHER && cap.detail().isNamed() )
+	{
+	  // ARG did not require a specific matchmode.
+	  // Handle "N-V" and "N-V-R" cases. Name must match exact,
+	  // Version/Release must not be empty. If versioned matches are
+	  // found, don't forget to show details.
+	  std::string::size_type pos = name.find_last_of( "-" );
+	  if ( pos != std::string::npos && pos != 0 && pos != name.size()-1 )
+	  {
+	    std::string n( name.substr(0,pos) );
+	    std::string r( name.substr(pos+1) );
+	    Edition e( r );
+	    query.addDependency( sat::SolvAttr::name, n, Rel::EQ, e, Arch(cap.detail().arch()), Match::STRING );
+	    if ( poolExpectMatchFor( n, e ) )
+	      details = true;	// show details if any search string includes an edition
+
+	    std::string::size_type pos2 = name.find_last_of( "-", pos-1 );
+	    if ( pos2 != std::string::npos && pos2 != 0 &&  pos2 != pos-1)
+	    {
+	      n = name.substr(0,pos2);
+	      e = Edition( name.substr(pos2+1,pos-pos2-1), r );
+	      query.addDependency( sat::SolvAttr::name, n, Rel::EQ, e, Arch(cap.detail().arch()), Match::STRING );
+	      if ( poolExpectMatchFor( n, e ) )
+		details = true;	// show details if any search string includes an edition
+	    }
+	  }
+	}
       }
-      if ( attr != sat::SolvAttr::name && cap.detail().isVersioned() )
-      {
-        // search in dependencies including edition only makes sense with exact match because
-        // all strings without an edition match to all editions
-        query.setMatchExact();
-      }
-      // for search in summary and description use addAttribute
       if ( cOpts().count("search-descriptions") )
       {
-        query.addAttribute( sat::SolvAttr::summary, name );
-        query.addAttribute( sat::SolvAttr::description, name );
+	query.addDependency( sat::SolvAttr::summary, name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
+	query.addDependency( sat::SolvAttr::description, name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
       }
     }
 
