@@ -651,6 +651,7 @@ namespace zypp
         accept = false;
       }
     }
+    prog.close();
     MIL << "License(" << name_r << ") in " << name() << " has to be accepted: " << (accept?"true":"false" ) << endl;
     return accept;
   }
