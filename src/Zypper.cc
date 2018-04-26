@@ -326,6 +326,44 @@ static void rug_list_resolvables(Zypper & zypper);
 
 ///////////////////////////////////////////////////////////////////
 namespace {
+
+  /** Hack for bsc#1089994: SLE15 hinting to the zypper-search-packages-plugin subcommand. */
+  inline void SLE15_SearchPackagesHintHack( Zypper & zypper )
+  {
+    if ( ! zypper.config().do_ttyout )
+      return;
+
+    Out & out( zypper.out() );
+    if ( !out.typeNORMAL() || out.verbosity() < Out::NORMAL )
+      return;
+
+    ui::Selectable::Ptr plg;
+    SEC << PathInfo( Pathname::assertprefix( zypper.globalOpts().root_dir, "/usr/lib/zypper/commands/zypper-search-packages" ) ) << endl;
+    if ( ResPool::instance().empty() )
+    {
+      // No pool - maybe 'zypper help search': Hint if plugin script is installed
+      if ( !PathInfo( Pathname::assertprefix( zypper.globalOpts().root_dir, "/usr/lib/zypper/commands/zypper-search-packages" ) ).isFile() )
+	return;
+    }
+    else
+    {
+      // Hint if package is in pool
+      plg = ui::Selectable::get( ResKind::package, "zypper-search-packages-plugin" );
+      if ( !plg )
+	return;
+    }
+
+    // So write out the hint....
+    str::Str msg;
+    // translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
+    msg << str::Format(_("For an extended search including not yet activated remote resources please use '%1%'.")) % "zypper search-packages";
+    if ( plg && plg->installedEmpty() )
+      // translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
+      msg << ' ' << str::Format(_("The package providing this subcommand is currently not installed. You can install it by calling '%1%'.")) % "zypper in zypper-search-packages-plugin";
+
+    out.notePar( msg );
+  }
+
   /** Whether user may create \a dir_r or has rw-access to it. */
   inline bool userMayUseDir( const Pathname & dir_r )
   {
@@ -3560,7 +3598,13 @@ void Zypper::processCommandOptions()
 void Zypper::doCommand()
 {
   // help check is common to all commands
-  if ( runningHelp() ) { out().info( _command_help, Out::QUIET ); return; }
+  if ( runningHelp() )
+  {
+    out().info( _command_help, Out::QUIET );
+    if ( command() == ZypperCommand::SEARCH )
+      SLE15_SearchPackagesHintHack( *this );
+    return;
+  }
 
   // === ZYpp lock ===
   switch ( command().toEnum() )
@@ -4703,6 +4747,7 @@ void Zypper::doCommand()
       setExitCode( ZYPPER_EXIT_ERR_ZYPP );
     }
 
+    SLE15_SearchPackagesHintHack( *this );
     break;
   }
 
