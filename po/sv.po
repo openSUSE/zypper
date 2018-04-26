@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-09 13:14+0200\n"
-"PO-Revision-Date: 2018-03-07 12:07+0000\n"
+"PO-Revision-Date: 2018-04-26 08:21+0000\n"
 "Last-Translator: Martin Devenney <devenneymartin@gmail.com>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/libzypp/master/sv/"
-">\n"
+"Language-Team: Swedish "
+"<https://l10n.opensuse.org/projects/libzypp/master/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4789,13 +4789,13 @@ msgstr "avinstallation av %s"
 #: zypp/target/RpmPostTransCollector.cc:103
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
-msgstr ""
+msgstr "Kör %%posttrans-skriptet '%1%'"
 
 #. show a final message
 #: zypp/target/RpmPostTransCollector.cc:160
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
-msgstr ""
+msgstr "Kör %p 1osttrans-skript"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
