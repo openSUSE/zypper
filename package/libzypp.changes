@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Apr 26 18:07:11 CEST 2018 - ma@suse.de
+
+- Avoid zombie tar processes (bsc#1076192)
+- Replace the terminology 'uninstallable' with 'not installable'
+  (bsc#1029392)
+- version 17.3.1 (2)
+
+-------------------------------------------------------------------
 Mon Apr  9 13:11:50 CEST 2018 - ma@suse.de
 
 - Show progressbar when running posttrans scripts
