@@ -338,7 +338,6 @@ namespace {
       return;
 
     ui::Selectable::Ptr plg;
-    SEC << PathInfo( Pathname::assertprefix( zypper.globalOpts().root_dir, "/usr/lib/zypper/commands/zypper-search-packages" ) ) << endl;
     if ( ResPool::instance().empty() )
     {
       // No pool - maybe 'zypper help search': Hint if plugin script is installed
