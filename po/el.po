@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Greek (libzypp)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 14:53+0000\n"
-"PO-Revision-Date: 2018-04-29 09:02+0000\n"
+"PO-Revision-Date: 2018-04-29 12:02+0000\n"
 "Last-Translator: Konstantina Tsolakoglou <konstantina@accountant.com>\n"
 "Language-Team: Greek <https://l10n.opensuse.org/projects/libzypp/master/el/>"
 "\n"
@@ -1486,7 +1486,7 @@ msgstr "Αρμενικά"
 #. language code: arn
 #: zypp/LanguageCode.cc:211
 msgid "Araucanian"
-msgstr "Araucanian"
+msgstr "Αραουκάνικα (Μαπούτσε)"
 
 #. language code: arp
 #: zypp/LanguageCode.cc:213
@@ -1501,7 +1501,7 @@ msgstr "Τεχνητή (Άλλο)"
 #. language code: arw
 #: zypp/LanguageCode.cc:217
 msgid "Arawak"
-msgstr "Arawak"
+msgstr "Αραουάκ"
 
 #. language code: asm as
 #: zypp/LanguageCode.cc:219
@@ -1526,12 +1526,12 @@ msgstr "Αυστραλιανές Γλώσσες"
 #. language code: ava av
 #: zypp/LanguageCode.cc:227
 msgid "Avaric"
-msgstr "Avaric"
+msgstr "Αβαρικά"
 
 #. language code: ave ae
 #: zypp/LanguageCode.cc:229
 msgid "Avestan"
-msgstr "Avestan"
+msgstr "Αβεστική γλώσσα"
 
 #. language code: awa
 #: zypp/LanguageCode.cc:231
@@ -1596,7 +1596,7 @@ msgstr "Βαλτικά (Άλλο)"
 #. language code: bej
 #: zypp/LanguageCode.cc:257
 msgid "Beja"
-msgstr "Beja"
+msgstr "Μπέχα"
 
 #. language code: bel be
 #: zypp/LanguageCode.cc:259
