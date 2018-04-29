@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Greek (libzypp)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 14:53+0000\n"
-"PO-Revision-Date: 2018-04-29 06:37+0000\n"
+"PO-Revision-Date: 2018-04-29 09:02+0000\n"
 "Last-Translator: Konstantina Tsolakoglou <konstantina@accountant.com>\n"
 "Language-Team: Greek <https://l10n.opensuse.org/projects/libzypp/master/el/>"
 "\n"
@@ -318,7 +318,7 @@ msgstr "Δανία"
 #. :DNK:208:
 #: zypp/CountryCode.cc:215
 msgid "Dominica"
-msgstr "Dominica"
+msgstr "Δομινίκα"
 
 #. :DMA:212:
 #: zypp/CountryCode.cc:216
@@ -576,7 +576,7 @@ msgstr "Ιταλία"
 #. :ITA:380:
 #: zypp/CountryCode.cc:267
 msgid "Jersey"
-msgstr "Jersey"
+msgstr "Τζέρσεϋ"
 
 #: zypp/CountryCode.cc:268
 msgid "Jamaica"
@@ -720,7 +720,7 @@ msgstr "Μολδαβία"
 #. :MDA:498:
 #: zypp/CountryCode.cc:296
 msgid "Montenegro"
-msgstr "Montenegro"
+msgstr "Μαυροβούνιο"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
@@ -864,7 +864,7 @@ msgstr "Νεπάλ"
 #. language code: nau na
 #: zypp/CountryCode.cc:325 zypp/LanguageCode.cc:781
 msgid "Nauru"
-msgstr "Nauru"
+msgstr "Ναουρού"
 
 #. :NRU:520:
 #: zypp/CountryCode.cc:326
@@ -1370,12 +1370,12 @@ msgstr "Άγνωστη γλώσσα: "
 #. language code: aar aa
 #: zypp/LanguageCode.cc:161
 msgid "Afar"
-msgstr "Afar"
+msgstr "Αφάρ"
 
 #. language code: abk ab
 #: zypp/LanguageCode.cc:163
 msgid "Abkhazian"
-msgstr "Abkhazian"
+msgstr "Αμπχαζία"
 
 #. language code: ace
 #: zypp/LanguageCode.cc:165
@@ -1426,7 +1426,7 @@ msgstr "Akan"
 #. language code: akk
 #: zypp/LanguageCode.cc:183
 msgid "Akkadian"
-msgstr "Akkadian"
+msgstr "Ακκαδική γλώσσα"
 
 #. language code: alb sqi sq
 #: zypp/LanguageCode.cc:185 zypp/LanguageCode.cc:187
@@ -1446,12 +1446,12 @@ msgstr "Γλώσσες Algonquian"
 #. language code: alt
 #: zypp/LanguageCode.cc:193
 msgid "Southern Altai"
-msgstr "Southern Altai"
+msgstr "Νότια Αλτάι"
 
 #. language code: amh am
 #: zypp/LanguageCode.cc:195
 msgid "Amharic"
-msgstr "Amharic"
+msgstr "Αμχαρική γλώσσα"
 
 #. language code: ang
 #: zypp/LanguageCode.cc:197
