@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-09 13:14+0200\n"
-"PO-Revision-Date: 2018-04-30 01:15+0000\n"
+"PO-Revision-Date: 2018-04-30 04:01+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
 "\n"
@@ -4613,7 +4613,7 @@ msgstr "afinstallation af %s"
 #: zypp/target/RpmPostTransCollector.cc:103
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
-msgstr "Fjern suffiks fra tmp-fil"
+msgstr "Udfører %%posttrans-scriptet '%1%'"
 
 #. show a final message
 #: zypp/target/RpmPostTransCollector.cc:160
