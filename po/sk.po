@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 07:20+0200\n"
-"PO-Revision-Date: 2018-04-11 06:00+0000\n"
+"PO-Revision-Date: 2018-04-30 06:23+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1355,6 +1355,8 @@ msgid ""
 "For an extended search including not yet activated remote resources please "
 "use '%1%'."
 msgstr ""
+"Rozšírené vyhľadávanie vrátane ešte neaktivovaných vzdialených zdrojov, "
+"prosím, použite '%1%'."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/Zypper.cc:361
@@ -1363,6 +1365,8 @@ msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
 msgstr ""
+"Balík poskytujúci tento podpríkaz nie je v súčasnosti nainštalovaný. Môžete "
+"ho nainštalovať volaním '%1%'."
 
 #: src/Zypper.cc:398
 #, boost-format
