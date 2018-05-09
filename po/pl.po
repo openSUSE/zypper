@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 07:20+0200\n"
-"PO-Revision-Date: 2018-05-09 20:19+0000\n"
+"PO-Revision-Date: 2018-05-09 23:05+0000\n"
 "Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
@@ -1394,7 +1394,7 @@ msgid ""
 "use '%1%'."
 msgstr ""
 "Dla rozszerzonego wyszukiwania, włącznie z nieaktywnymi jeszcze zdalnymi "
-"zasobami, użyj '% 1%'."
+"zasobami, użyj '%1%'."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/Zypper.cc:361
