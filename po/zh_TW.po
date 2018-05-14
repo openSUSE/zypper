@@ -13,10 +13,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 07:20+0200\n"
-"PO-Revision-Date: 2018-04-17 02:59+0000\n"
+"PO-Revision-Date: 2018-05-14 07:36+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
-"Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_TW/>\n"
+"Language-Team: Chinese (Taiwan) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1292,7 +1292,7 @@ msgstr "再次嘗試嗎？"
 msgid ""
 "For an extended search including not yet activated remote resources please "
 "use '%1%'."
-msgstr ""
+msgstr "要將尚未啟用的遠端資源包含在延伸搜尋範圍中，請使用「%1%」。"
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/Zypper.cc:361
@@ -1300,7 +1300,7 @@ msgstr ""
 msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
-msgstr ""
+msgstr "目前尚未安裝提供此子指令的套件。您可以透過呼叫「%1%」來安裝該套件。"
 
 #: src/Zypper.cc:398
 #, boost-format
