@@ -1522,7 +1522,7 @@ void modify_repos_by_option( Zypper & zypper, const RepoServiceCommonSelectOptio
   RepoInfoSet toModify = collect_repos_by_option( zypper, selectOpts );
   for_( it, toModify.begin(), toModify.end() )
   {
-    modify_repo( zypper, it->alias(), commonOpts, repoProps );
+    modify_repo( zypper, it->alias(), std::string(), commonOpts, repoProps );
   }
 }
 
@@ -1531,7 +1531,7 @@ void modify_repos_by_option( Zypper & zypper, const RepoServiceCommonSelectOptio
 
 
 
-void modify_repo( Zypper & zypper, const std::string & alias, const RepoServiceCommonOptions &commonOpts, const RepoProperties &repoProps )
+void modify_repo( Zypper & zypper, const std::string & alias, const std::string &newBaseUrl, const RepoServiceCommonOptions &commonOpts, const RepoProperties &repoProps )
 {
   // enable/disable repo
   const TriBool &enable = commonOpts._enable;
@@ -1582,7 +1582,7 @@ void modify_repo( Zypper & zypper, const std::string & alias, const RepoServiceC
     if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
     {
       if ( repo.setGpgCheck( gpgCheck ) )
-	changed_gpgcheck = true;
+        changed_gpgcheck = true;
     }
 
     if ( prio >= 1 )
@@ -1600,8 +1600,19 @@ void modify_repo( Zypper & zypper, const std::string & alias, const RepoServiceC
     if ( !name.empty() )
       repo.setName( name );
 
+    if ( !newBaseUrl.empty() )
+    {
+      Url url = make_url( newBaseUrl );
+      if ( !url.isValid() )
+      {
+        zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
+      }
+      repo.setBaseUrl( url );
+    }
+
     if ( changed_enabled || changed_autoref || changed_prio
-      || changed_keeppackages || changed_gpgcheck || !name.empty() )
+      || changed_keeppackages || changed_gpgcheck || !name.empty() || !newBaseUrl.empty() )
     {
       std::string volatileNote;	// service repos changes may be volatile
       std::string volatileNoteIfPlugin;	// plugin service repos changes may be volatile
@@ -1663,6 +1674,12 @@ void modify_repo( Zypper & zypper, const std::string & alias, const RepoServiceC
       {
 	if ( !volatileNote.empty() ) didVolatileChanges = true;
         zypper.out().info( str::Format(_("Name of repository '%s' has been set to '%s'.")) % alias % name, volatileNote );
+      }
+
+      if ( !newBaseUrl.empty() )
+      {
+        if ( !volatileNote.empty() ) didVolatileChanges = true;
+          zypper.out().info( str::Format(_("Baseurl of repository '%s' has been set to '%s'.")) % alias % newBaseUrl, volatileNote );
       }
 
       if ( didVolatileChanges )

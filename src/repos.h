@@ -174,7 +174,7 @@ void remove_repos_by_option(Zypper & zypper_r , const RepoServiceCommonSelectOpt
  *
  * \param alias repository alias
  */
-void modify_repo( Zypper & zypper, const std::string & alias, const RepoServiceCommonOptions &commonOpts, const RepoProperties &repoProps );
+void modify_repo( Zypper & zypper, const std::string & alias, const std::string &newBaseUrl, const RepoServiceCommonOptions &commonOpts, const RepoProperties &repoProps );
 
 /**
  * Modify repositories which is matching filter options

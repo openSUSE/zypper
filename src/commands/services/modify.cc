@@ -96,7 +96,7 @@ int ModifyServiceCmd::execute(Zypper &zypper, const std::vector<std::string> &po
       else {
         RepoProperties rProps;
         rProps.reset();
-        modify_repo( zypper, srv->alias(), _commonProperties, rProps );
+        modify_repo( zypper, srv->alias(), std::string(), _commonProperties, rProps );
       }
     }
     else
@@ -314,7 +314,7 @@ void ModifyServiceCmd::modifyServicesByOption( Zypper & zypper )
       else {
         RepoProperties rProps;
         rProps.reset();
-        modify_repo( zypper, (*it)->alias(), _commonProperties, rProps );
+        modify_repo( zypper, (*it)->alias(), std::string(), _commonProperties, rProps );
       }
     }
     return;
@@ -369,5 +369,5 @@ void ModifyServiceCmd::modifyServicesByOption( Zypper & zypper )
   RepoProperties rProps;
   rProps.reset();
   for_( it, repos_to_modify.begin(), repos_to_modify.end() )
-    modify_repo( zypper, *it, _commonProperties, rProps );
+    modify_repo( zypper, *it, std::string(), _commonProperties, rProps );
 }
