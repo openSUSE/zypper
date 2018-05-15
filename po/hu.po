@@ -16,10 +16,10 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 07:20+0200\n"
-"PO-Revision-Date: 2018-04-12 12:05+0000\n"
+"PO-Revision-Date: 2018-05-15 17:04+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
-"Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
-"hu/>\n"
+"Language-Team: Hungarian "
+"<https://l10n.opensuse.org/projects/zypper/master/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1398,6 +1398,8 @@ msgid ""
 "For an extended search including not yet activated remote resources please "
 "use '%1%'."
 msgstr ""
+"A még nem aktivált távoli erőforrásokra is vonatkozó kiterjesztett "
+"kereséshez használja a(z) '%1%' parancsot."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/Zypper.cc:361
@@ -1406,6 +1408,8 @@ msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
 msgstr ""
+"Az alparancsot tartalmazó csomag még nincs telepítve. A(z) '%1%' parancs "
+"végrehajtásával telepítheti."
 
 #: src/Zypper.cc:398
 #, boost-format
