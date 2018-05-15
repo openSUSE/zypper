@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 07:20+0200\n"
-"PO-Revision-Date: 2018-05-02 14:08+0000\n"
+"PO-Revision-Date: 2018-05-15 19:00+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -4157,7 +4157,7 @@ msgstr "Nivell de suport"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:343
 msgid "Installed Size"
-msgstr "Mida instal·lada"
+msgstr "Mida un cop feta la instal·lació"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: used as 'tag:' (i.e. followed by ':')
