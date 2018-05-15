@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-09 13:14+0200\n"
-"PO-Revision-Date: 2018-04-09 14:41+0000\n"
+"PO-Revision-Date: 2018-05-15 19:01+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan "
 "<https://l10n.opensuse.org/projects/libzypp/master/ca/>\n"
@@ -4640,7 +4640,7 @@ msgstr "La comprovació de l'applydeltarpm ha fallat."
 
 #: zypp/repo/PackageProvider.cc:559
 msgid "applydeltarpm failed."
-msgstr "Ha fallat l'aplicació del Delta rpm."
+msgstr "ha fallat aplicar de l'RPM delta."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
