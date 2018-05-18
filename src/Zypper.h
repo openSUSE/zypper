@@ -273,7 +273,12 @@ public:
   /** E.g. from SIGNINT handler (main.cc) */
   void immediateExit( bool fromWithinSigHandler_r = true )
   {
-    WAR << "Immediate Exit requested." << endl;
+    extern bool sigExitOnce;	// main.c.
+    if ( !sigExitOnce )
+      return;	// no nested calls to Zypper::immediateExit
+    sigExitOnce = false;
+
+    WAR << "Immediate Exit requested (" << fromWithinSigHandler_r << ")." << endl;
     cleanup();
     if ( fromWithinSigHandler_r )
     {
