@@ -17,8 +17,6 @@
 #include "output/OutNormal.h"
 #include "utils/messages.h"
 
-bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExit
-
 void signal_handler( int sig )
 {
   Zypper & zypper( Zypper::instance() );

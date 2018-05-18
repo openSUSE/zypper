@@ -65,6 +65,8 @@
 
 using namespace zypp;
 
+bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExit
+
 ///////////////////////////////////////////////////////////////////
 // for now use some defines to have consistent definition of args
 // used across multiple commands
