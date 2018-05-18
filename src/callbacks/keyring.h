@@ -67,7 +67,7 @@ namespace zypp
 	  dumpAsXmlOn( *parent, key.fingerprint(), "key-fingerprint" );
 	  dumpAsXmlOn( *parent, key.created(), "key-created" );
 	  dumpAsXmlOn( *parent, key.expires(), "key-expires" );
-	  dumpAsXmlOn( *parent, str::Format( "gpg-pubkey-%1%-%2%" ) % key.gpgPubkeyVersion() % key.gpgPubkeyRelease(), "rpm-name" );
+	  dumpAsXmlOn( *parent, key.rpmName(), "rpm-name" );
 	}
 	return str;
       }
@@ -84,7 +84,7 @@ namespace zypp
 	<< ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() );
       for ( const PublicSubkeyData & sub : key.subkeys() )
 	t << ( TableRow() << "" << _("Subkey:") << sub.asString() );
-      t << ( TableRow() << "" << _("Rpm Name:") << str::Format( "gpg-pubkey-%1%-%2%" ) % key.gpgPubkeyVersion() % key.gpgPubkeyRelease() );
+      t << ( TableRow() << "" << _("Rpm Name:") << key.rpmName() );
 
       return str << t;
     }
@@ -371,6 +371,84 @@ namespace zypp
 
 	Zypper::instance().out().gap();
         return read_bool_answer( PROMPT_YN_GPG_CHECK_FAILED_IGNORE, text::join( msg, text::qContinue() ), false);
+      }
+
+      ////////////////////////////////////////////////////////////////////
+
+      virtual void report ( const UserData & data )
+      {
+        if ( data.type() == zypp::ContentType( KeyRingReport::ACCEPT_PACKAGE_KEY_REQUEST ) ) {
+          if ( !data.hasvalue("PublicKey") || !data.hasvalue(("KeyContext")) ) {
+            WAR << "Missing arguments in report call for content type: " << data.type() << endl;
+            return;
+          }
+          const PublicKey &key  = data.get<PublicKey>("PublicKey");
+          const KeyContext &ctx = data.get<KeyContext>("KeyContext");
+          bool res = askUserToAcceptPackageKey(key,ctx);
+          data.set("TrustKey", res);
+          return;
+        }
+        WAR << "Unhandled report() call" << endl;
+      }
+
+      bool askUserToAcceptPackageKey( const PublicKey &key, const KeyContext &context )
+      {
+        Zypper & zypper = Zypper::instance();
+        std::ostringstream s;
+
+	s << std::endl;
+	if (_gopts.gpg_auto_import_keys)
+	  s << _("Automatically importing the following key:") << std::endl;
+        else
+          s << _("New package signing key received:") << std::endl;
+
+        // gpg key info
+        dumpKeyInfo( s << std::endl, key, context )  << std::endl;
+
+        // if --gpg-auto-import-keys or --no-gpg-checks print info and don't ask
+        if (_gopts.gpg_auto_import_keys)
+        {
+          MIL << "Automatically importing key " << key << std::endl;
+          zypper.out().info(s.str());
+          return true;
+        }
+
+        // ask the user
+        s << std::endl;
+        // translators: this message is shown after showing description of the key
+        s << _("Do you want to reject the key, or trust always?");
+
+        // only root has access to rpm db where keys are stored
+        if ( !(geteuid() == 0 || _gopts.changedRoot) )
+          return false;
+
+        PromptOptions popts;
+        // translators: r/a stands for Reject/trustAlways(import)
+        // translate to whatever is appropriate for your language
+        // The anserws must be separated by slash characters '/' and must
+        // correspond to reject/trusttemporarily/trustalways in that order.
+        // The answers should be lower case letters.
+        popts.setOptions(_("r/a/"), 0);
+
+        // translators: help text for the 'r' option in the 'r/t/a' prompt
+        popts.setOptionHelp(0, _("Don't trust the key."));
+        // translators: help text for the 'a' option in the 'r/t/a' prompt
+        popts.setOptionHelp(1, _("Trust the key and import it into trusted keyring."));
+
+        if (!zypper.globalOpts().non_interactive)
+          clear_keyboard_buffer();
+        zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, s.str(), popts);
+        unsigned prep =
+          get_prompt_reply(zypper, PROMPT_YN_GPG_KEY_TRUST, popts);
+        switch (prep)
+        {
+        case 1:
+          return true;
+        case 0:
+        default:
+          return false;
+        }
+        return false;
       }
 
     private:
