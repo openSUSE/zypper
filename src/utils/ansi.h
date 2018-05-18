@@ -213,11 +213,11 @@ namespace ansi
     static const std::string & SGRReset()
     {
 #if ( ZYPPER_TRACE_SGR )
-      static const std::string _reset( ESC"[0m[!]" );
+      static const std::string & _reset( *(new std::string( ESC"[0m[!]" )) );	// live until program ends
 #else
-      static const std::string _reset( ESC"[0m" );
+      static const std::string & _reset( *(new std::string( ESC"[0m" )) );	// live until program ends
 #endif
-      static const std::string _noreset( "" );
+      static const std::string & _noreset( *(new std::string( "" )) );		// live until program ends
       if(!do_colors()) return _noreset;
       return _reset;
     }
@@ -302,7 +302,7 @@ namespace ansi
     /** Return a colors SGRsequence if \ref do_colors retruns \c true */
     static std::string & genSGR( Color color_r )
     {
-      static std::map<UidType,std::string> _def;
+      static std::map<UidType,std::string> & _def( *(new std::map<UidType,std::string>) );	// live until program ends
 
       if ( ! ( color_r && do_colors() ) )	// nocolor, all ::Unchanged, uid 0: return empty string
       {
