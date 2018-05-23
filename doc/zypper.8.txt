@@ -1064,7 +1064,7 @@ include::{incdir}/option_GPG_Check.txt[]
 --
 
 *removerepo* (*rr*) ['options'] 'alias'|'name'|'#'|'URI'...::
-	Delete repositories specified by aliases, names, numbers or URIs.
+	Delete repositories specified by aliases, names, numbers, URIs or one of the aggregate options.
 +
 --
 	*--loose-auth*::
@@ -1072,6 +1072,8 @@ include::{incdir}/option_GPG_Check.txt[]
 
 	*--loose-query*::
 		Ignore query string in the URI
+
+include::{incdir}/option_Repo_Aggregates.txt[]
 --
 
 *repos* (*lr*) ['options'] ['repo']...::
@@ -1171,17 +1173,7 @@ include::{incdir}/option_GPG_Check.txt[]
 
 include::{incdir}/option_GPG_Check.txt[]
 
-	*-a*, *--all*::
-		Apply changes to all repositories.
-
-	*-l*, *--local*::
-		Apply changes to all local repositories.
-
-	*-t*, *--remote*::
-		Apply changes to all remote repositories (http/https/ftp).
-
-	*-m*, *--medium-type* 'type'::
-		Apply changes to repositories of specified type. The type corresponds to the repository URI scheme identifier like http, dvd, etc. You can find complete list of valid types at http://en.opensuse.org/openSUSE:Libzypp_URIs.
+include::{incdir}/option_Repo_Aggregates.txt[]
 
 	Examples: :: {nop}
 

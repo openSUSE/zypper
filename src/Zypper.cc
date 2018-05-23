@@ -134,6 +134,12 @@ bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExi
     .option( "-G, --no-gpgcheck",		_("Disable GPG check for this repository.") )	\
     .option( "--default-gpgcheck",		_("Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the default.") )	\
 
+#define option_REPO_AGGREGATES \
+   option( "-a, --all",			_("Apply changes to all repositories.") ) \
+  .option( "-l, --local",		_("Apply changes to all local repositories.") ) \
+  .option( "-t, --remote",		_("Apply changes to all remote repositories.") ) \
+  .option( "-m, --medium-type <TYPE>",	_("Apply changes to repositories of specified type.") )
+
 
 // bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
 #define ARG_not_INSTALLED_ONLY	\
@@ -2307,10 +2313,11 @@ void Zypper::processCommandOptions()
       {"help", no_argument, 0, 'h'},
       {"loose-auth", no_argument, 0, 0},
       {"loose-query", no_argument, 0, 0},
+      ARG_REPO_SERVICE_COMMON_AGGREGATE,
       {0, 0, 0, 0}
     };
     specific_options = service_delete_options;
-    _command_help = _(
+    _command_help = ( CommandHelpFormater() << _(
       "removerepo (rr) [options] <alias|#|URI>\n"
       "\n"
       "Remove repository specified by alias, number or URI.\n"
@@ -2318,7 +2325,9 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "    --loose-auth   Ignore user authentication data in the URI.\n"
       "    --loose-query  Ignore query string in the URI.\n"
-    );
+    ))
+    .gap()
+    .option_REPO_AGGREGATES;
     break;
   }
 
@@ -2390,10 +2399,7 @@ void Zypper::processCommandOptions()
     .optionSectionCommandOptions()
     .option_REPO_PROP
     .gap()
-    .option( "-a, --all",			_("Apply changes to all repositories.") )
-    .option( "-l, --local",			_("Apply changes to all local repositories.") )
-    .option( "-t, --remote",			_("Apply changes to all remote repositories.") )
-    .option( "-m, --medium-type <TYPE>",	_("Apply changes to repositories of specified type.") )
+    .option_REPO_AGGREGATES
     // Legacy Options:
     .legacyOptionSection()
     .legacyOption( "-r", "-f" )
@@ -4000,42 +4006,67 @@ void Zypper::doCommand()
       return;
     }
 
-    if (_arguments.size() < 1)
-    {
-      out().error(_("Required argument missing."));
-      ERR << "Required argument missing." << endl;
-      print_usage(out(), _command_help);
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    }
-
-    initRepoManager();
-
     if (command() == ZypperCommand::REMOVE_REPO)
     {
-      // must store repository before remove to ensure correct match number
-      std::set<RepoInfo,RepoInfoAliasComparator> repo_to_remove;
-      for_(it, _arguments.begin(), _arguments.end())
+      bool aggregate = copts.count("all") || copts.count("local") || copts.count("remote") || copts.count("medium-type");
+
+      if ( _arguments.size() < 1 && !aggregate )
       {
-        RepoInfo repo;
-        if (match_repo(*this,*it,&repo))
-        {
-          repo_to_remove.insert(repo);
-        }
-        else
-        {
-          MIL << "Repository not found by given alias, number or URI." << endl;
-	  // translators: %s is the supplied command line argument which
-	  // for which no repository counterpart was found
-          out().error( str::Format(_("Repository '%s' not found by alias, number or URI.")) % *it );
-        }
+        report_alias_or_aggregate_required ( out(), _command_help );
+        ERR << "No alias argument given." << endl;
+        setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+        return;
       }
 
-      for_(it, repo_to_remove.begin(), repo_to_remove.end())
-        remove_repo(*this,*it);
+      // too many arguments
+      if ( _arguments.size() && aggregate )
+      {
+        report_too_many_arguments( out(), _command_help );
+        setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+        return;
+      }
+
+      initRepoManager();
+      if ( aggregate )
+      {
+        remove_repos_by_option( *this );
+      }
+      else
+      {
+        // must store repository before remove to ensure correct match number
+        std::set<RepoInfo,RepoInfoAliasComparator> repo_to_remove;
+        for_(it, _arguments.begin(), _arguments.end())
+        {
+          RepoInfo repo;
+          if (match_repo(*this,*it,&repo))
+          {
+            repo_to_remove.insert(repo);
+          }
+          else
+          {
+            MIL << "Repository not found by given alias, number or URI." << endl;
+            // translators: %s is the supplied command line argument which
+            // for which no repository counterpart was found
+            out().error( str::Format(_("Repository '%s' not found by alias, number or URI.")) % *it );
+          }
+        }
+
+        for_(it, repo_to_remove.begin(), repo_to_remove.end())
+          remove_repo(*this,*it);
+      }
     }
     else
     {
+      if (_arguments.size() < 1)
+      {
+        ERR << "Required argument missing." << endl;
+        report_required_arg_missing( out(), _command_help );
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
+      }
+
+      initRepoManager();
+
       std::set<repo::RepoInfoBase_Ptr, ServiceAliasComparator> to_remove;
       for_(it, _arguments.begin(), _arguments.end())
       {
@@ -4134,11 +4165,8 @@ void Zypper::doCommand()
 
     if ( _arguments.size() < 1 && !aggregate )
     {
-      // translators: aggregate option is e.g. "--all". This message will be
-      // followed by mr command help text which will explain it
-      out().error(_("Alias or an aggregate option is required."));
+      report_alias_or_aggregate_required ( out(), _command_help );
       ERR << "No alias argument given." << endl;
-      out().info( _command_help );
       setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
       return;
     }

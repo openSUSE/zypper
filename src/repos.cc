@@ -36,8 +36,10 @@ extern ZYpp::Ptr God;
 
 namespace zypp { using repo::RepoInfoBase_Ptr; }
 typedef std::list<RepoInfoBase_Ptr> ServiceList;
+typedef std::set<RepoInfo, RepoInfoAliasComparator> RepoInfoSet;
 
 static bool refresh_service( Zypper & zypper, const ServiceInfo & service );
+static RepoInfoSet collect_repos_by_option( Zypper & zypper );
 
 // ----------------------------------------------------------------------------
 
@@ -1963,6 +1965,16 @@ void remove_repo( Zypper & zypper, const RepoInfo & repoinfo )
 }
 
 // ----------------------------------------------------------------------------
+void remove_repos_by_option(Zypper &zypper)
+{
+  RepoInfoSet repos = collect_repos_by_option( zypper );
+  for ( const RepoInfo &repo : repos )
+  {
+    remove_repo( zypper, repo );
+  }
+}
+
+// ----------------------------------------------------------------------------
 
 void rename_repo( Zypper & zypper, const std::string & alias, const std::string & newalias )
 {
@@ -2001,76 +2013,67 @@ void rename_repo( Zypper & zypper, const std::string & alias, const std::string 
 }
 
 // ----------------------------------------------------------------------------
-/// \todo condense to one knownRepositories iteration
-void modify_repos_by_option( Zypper & zypper )
+RepoInfoSet collect_repos_by_option( Zypper & zypper )
 {
   RepoManager & manager( zypper.repoManager() );
-  const std::list<RepoInfo> & repos( manager.knownRepositories() );
 
-  std::set<std::string> toModify;
+  const std::list<RepoInfo> & repos( manager.knownRepositories() );
+  RepoInfoSet toModify;
 
   if ( copts.count("all") )
   {
-    for_( it, repos.begin(),repos.end() )
-    {
-      std::string alias = it->alias();
-      modify_repo( zypper, alias );
-    }
-    return; //no more repository is possible
+    std::for_each( repos.begin(), repos.end(), [&toModify] (const RepoInfo &info) { toModify.insert( info ); } );
   }
-
-  if ( copts.count("local") )
+  else
   {
+    std::list<std::function<bool (const RepoInfo &)>> filterList;
+
+    if ( copts.count("local") )
+    {
+      filterList.push_back([]( const RepoInfo &info ) {
+        return ( !info.baseUrlsEmpty() && !info.url().schemeIsDownloading() );
+      });
+    }
+
+    if ( copts.count("remote") )
+    {
+      filterList.push_back([]( const RepoInfo &info ) {
+        return ( !info.baseUrlsEmpty() && info.url().schemeIsDownloading() );
+      });
+    }
+
+    if ( copts.count("medium-type") )
+    {
+      filterList.push_back([]( const RepoInfo &info ) {
+        const std::list<std::string> & pars = copts["medium-type"];
+        return ( !info.baseUrlsEmpty() && std::find( pars.begin(), pars.end(), info.url().getScheme() ) != pars.end() );
+      });
+    }
+
     for_( it, repos.begin(),repos.end() )
     {
-      if ( !it->baseUrlsEmpty() )
+      for ( const auto &filter : filterList )
       {
-        if ( !it->url().schemeIsDownloading() )
+        if ( filter(*it) )
         {
-          std::string alias = it->alias();
-          toModify.insert( alias );
+          toModify.insert( *it );
+          break;
         }
       }
     }
   }
+  return toModify;
+}
 
-  if ( copts.count("remote") )
-  {
-    for_( it, repos.begin(),repos.end() )
-    {
-      if ( !it->baseUrlsEmpty() )
-      {
-        if ( it->url().schemeIsDownloading() )
-        {
-          std::string alias = it->alias();
-          toModify.insert( alias );
-        }
-      }
-    }
-  }
-
-  if ( copts.count("medium-type") )
-  {
-    const std::list<std::string> & pars = copts["medium-type"];
-
-    for_( it, repos.begin(),repos.end() )
-    {
-      if ( !it->baseUrlsEmpty( ))
-      {
-        if ( std::find( pars.begin(), pars.end(), it->url().getScheme() ) != pars.end() )
-        {
-          std::string alias = it->alias();
-          toModify.insert( alias );
-        }
-      }
-    }
-  }
-
+void modify_repos_by_option( Zypper & zypper )
+{
+  RepoInfoSet toModify = collect_repos_by_option( zypper );
   for_( it, toModify.begin(), toModify.end() )
   {
-    modify_repo( zypper, *it );
+    modify_repo( zypper, it->alias() );
   }
 }
+
 
 // ----------------------------------------------------------------------------
 

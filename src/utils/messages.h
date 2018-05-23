@@ -18,6 +18,9 @@ void report_a_bug (Out & out);
 void report_too_many_arguments(const std::string & specific_help); // deprecated
 void report_too_many_arguments(Out & out, const std::string & specific_help);
 
+/** Say the that either a aggregate option or a alias is required */
+void report_alias_or_aggregate_required ( Out & out, const std::string & specific_help );
+
 /** Say the specified option has no effect */
 void report_dummy_option(Out & out, const std::string & longoption_str);
 

@@ -40,6 +40,16 @@ void report_too_many_arguments( Out & out, const std::string & specific_help )
 
 // ----------------------------------------------------------------------------
 
+void report_alias_or_aggregate_required ( Out & out, const std::string & specific_help )
+{
+  // translators: aggregate option is e.g. "--all". This message will be
+  // followed by mr command help text which will explain it
+  out.error(_("Alias or an aggregate option is required."));
+  out.info( specific_help );
+}
+
+// ----------------------------------------------------------------------------
+
 void report_required_arg_missing( Out & out, const std::string & cmd_help )
 {
   out.error(_("Required argument missing."));
