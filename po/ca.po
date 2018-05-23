@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-09 13:14+0200\n"
-"PO-Revision-Date: 2018-05-15 19:01+0000\n"
+"PO-Revision-Date: 2018-05-23 19:01+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan "
 "<https://l10n.opensuse.org/projects/libzypp/master/ca/>\n"
@@ -4204,8 +4204,7 @@ msgstr "No es pot obrir el fitxer %s per a l'escriptura."
 #: zypp/RepoManager.cc:865
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr ""
-"Servei desconegut \"%1%\": Eliminant el repositori de serveis orfes %2%"
+msgstr "Servei desconegut \"%1%\": suprimint el repositori de serveis orfe %2%"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1092
@@ -4274,7 +4273,7 @@ msgstr "Nom de repositori no vàlid a \"%s\""
 #: zypp/RepoManager.cc:1746
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Eliminant el repositori %s"
+msgstr "Suprimint el repositori %s"
 
 #: zypp/RepoManager.cc:1765 zypp/RepoManager.cc:1843
 msgid "Can't figure out where the repo is stored."
@@ -4923,7 +4922,7 @@ msgstr "proveïdors no desinstal·lables: "
 #: zypp/solver/detail/SATResolver.cc:1145
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
-msgstr "suprimeix el bloqueig per permetre l'eliminació de %s"
+msgstr "suprimeix el bloqueig per permetre la supressió de %s"
 
 #: zypp/solver/detail/SATResolver.cc:1150
 #: zypp/solver/detail/SATResolver.cc:1186
@@ -4960,7 +4959,7 @@ msgstr "no demanis instal·lar un resoluble que proporcioni %s"
 #: zypp/solver/detail/SATResolver.cc:1249
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "no demanis eliminar tots els resolubles que proporcionin %s"
+msgstr "no demanis suprimir tots els resolubles que proporcionin %s"
 
 #: zypp/solver/detail/SATResolver.cc:1262
 #, c-format, boost-format
@@ -5120,7 +5119,7 @@ msgstr "Error a l'hora d'importar la clau pública %1%"
 #: zypp/target/rpm/RpmDb.cc:1218
 #, boost-format
 msgid "Failed to remove public key %1%"
-msgstr "Error en eliminar la clau pública %1%"
+msgstr "Ha fallat suprimir la clau pública %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1599
 msgid "Package is not signed!"
