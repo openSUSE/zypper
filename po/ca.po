@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 07:20+0200\n"
-"PO-Revision-Date: 2018-05-15 19:00+0000\n"
+"PO-Revision-Date: 2018-05-23 22:03+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -51,7 +51,7 @@ msgstr "Error"
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
 msgstr ""
-"La consulta següent bloqueja els mateixos objectes com el que voleu eliminar:"
+"La consulta següent bloqueja els mateixos objectes que el que voleu suprimir:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
@@ -110,12 +110,12 @@ msgstr "Executant %s  (%s, %s)"
 #: src/callbacks/rpm.h:249
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr "Eliminant %s"
+msgstr "Suprimint %s"
 
 #: src/callbacks/rpm.h:272
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr "L'eliminació de %s ha fallat:"
+msgstr "La supressió de %s ha fallat:"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:315
@@ -725,7 +725,7 @@ msgstr "Problema afegint el blocatge de paquet:"
 
 #: src/locks.cc:320
 msgid "Specified lock has been successfully removed."
-msgstr "El blocatge especificat s'ha eliminat correctament."
+msgstr "El blocatge especificat s'ha suprimit correctament."
 
 #: src/locks.cc:365
 msgid "No lock has been removed."
@@ -735,12 +735,12 @@ msgstr "No s'ha alliberat cap blocatge."
 #, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "%zu blocatge s'ha eliminat correctament."
-msgstr[1] "%zu blocatges s'han eliminat correctament."
+msgstr[0] "%zu blocatge s'ha suprimit correctament."
+msgstr[1] "%zu blocatges s'han suprimit correctament."
 
 #: src/locks.cc:376
 msgid "Problem removing the package lock:"
-msgstr "Problema eliminant el blocatge del paquet:"
+msgstr "Problema suprimint el blocatge del paquet:"
 
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:40
@@ -857,7 +857,7 @@ msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
-"La comprovació dels processos en execució que usen biblioteques eliminades "
+"La comprovació dels processos en execució que usen biblioteques suprimides "
 "està inhabilitada a zypper.conf. Executeu \"%s\" per comprovar-los "
 "manualment."
 
@@ -883,7 +883,7 @@ msgid ""
 "upgrade. You may wish to check and restart some of them. Run '%s' to list "
 "these programs."
 msgstr ""
-"Hi ha alguns programes en execució que podrien fer servir fitxers eliminats "
+"Hi ha alguns programes en execució que podrien fer servir fitxers suprimits "
 "durant aquesta actualització. Potser voldríeu comprovar-los i reiniciar-ne "
 "algun. Feu servir \"%s\" per veure'n la llista."
 
@@ -945,7 +945,7 @@ msgstr "s/n/p/v/a/r/p/d/m"
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
-"Sí, accepta el resum i procedeix a fer la instal·lació / eliminació de "
+"Sí, accepta el resum i procedeix a fer la instal·lació / supressió de "
 "paquets."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
@@ -1040,7 +1040,7 @@ msgstr ""
 #: src/solve-commit.cc:860
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
-"S'ha produït un error durant o després de la instal·lació o eliminació de "
+"S'ha produït un error durant o després de la instal·lació o supressió de "
 "paquets:"
 
 #: src/solve-commit.cc:868
@@ -1197,7 +1197,7 @@ msgstr "Activa el servei desactivat."
 
 #: src/Zypper.cc:99
 msgid "Disable the service (but don't remove it)."
-msgstr "Desactiva el servei (però no l'eliminis)."
+msgstr "Desactiva el servei (però no el suprimeixis)."
 
 #: src/Zypper.cc:100
 msgid "Enable auto-refresh of the service."
@@ -1217,7 +1217,7 @@ msgstr "Activa el repositori desactivat."
 
 #: src/Zypper.cc:121
 msgid "Disable the repository (but don't remove it)."
-msgstr "Desactiva el repositori (però no l'eliminis)."
+msgstr "Desactiva el repositori (però no el suprimeixis)."
 
 #: src/Zypper.cc:122
 msgid "Enable auto-refresh of the repository."
@@ -1474,7 +1474,7 @@ msgstr ""
 "predeterminat.\n"
 "\t--userdata <string>\tId de transacció definida per l'usuari usada a "
 "l'històric i als connectors.\n"
-"\t--quiet, -q\t\tElimina la sortida normal, mostra només missatges\n"
+"\t--quiet, -q\t\tSuprimeix la sortida normal, mostra només missatges\n"
 "\t\t\t\td'error.\n"
 "\t--verbose, -v\t\tAugmenta la verbositat.\n"
 "\t--color\n"
@@ -1587,7 +1587,7 @@ msgstr ""
 "     Gestió del repositori:\n"
 "\trepos, lr\t\tLlista tots els repositoris definits.\n"
 "\taddrepo, ar\t\tAfegeix un repositori.\n"
-"\tremoverepo, rr\t\tElimina el repositori especificat.\n"
+"\tremoverepo, rr\t\tSuprimeix el repositori especificat.\n"
 "\trenamerepo, nr\t\tReanomena el repositori especificat.\n"
 "\tmodifyrepo, mr\t\tModifica elrepositori especificat.\n"
 "\trefresh, ref\t\tRefresca tots els repositoris.\n"
@@ -1606,7 +1606,7 @@ msgstr ""
 "\tservices, ls\t\tLlista tots els serveis definits.\n"
 "\taddservice, as\t\tAfegeix un nou servei.\n"
 "\tmodifyservice, ms\tModifica un servei especificat.\n"
-"\tremoveservice, rs\tElimina un servei especificat.\n"
+"\tremoveservice, rs\tSuprimeix un servei especificat.\n"
 "\trefresh-services, refs\tRefreca tots els serveis.\n"
 
 #: src/Zypper.cc:775
@@ -1623,7 +1623,7 @@ msgid ""
 msgstr ""
 "     Gestió de programari:\n"
 "\tinstall, in\t\tInstal·la paquets.\n"
-"\tremove, rm\t\tElimina paquets.\n"
+"\tremove, rm\t\tSuprimeix paquets.\n"
 "\tverify, ve\t\tVerifica la integritat de les dependències del paquet.\n"
 "\tsource-install, si\tInstal·la paquets de codi font i la seva construcció\n"
 "\t\t\t\tdependencies.\n"
@@ -1687,7 +1687,7 @@ msgid ""
 msgstr ""
 "     Blocatge de paquets:\n"
 "\taddlock, al\t\tAfegeix un blocatge de paquet.\n"
-"\tremovelock, rl\t\tElimina un blocatge de paquet.\n"
+"\tremovelock, rl\t\tSuprimeix un blocatge de paquet.\n"
 "\tlocks, ll\t\tLlista els blocatges de paquets vigents.\n"
 "\tcleanlocks, cl\t\tTreu blocatges de paquet no usats.\n"
 
@@ -1704,14 +1704,15 @@ msgid ""
 "\t\t\t\tto a local directory.\n"
 msgstr ""
 "     Altres ordres:\n"
-"\tversioncmp, vcmp\tCompare two version strings.\n"
-"\ttargetos, tos\t\tPrint the target operating system ID string.\n"
-"\tlicenses\t\tPrint report about licenses and EULAs of\n"
-"\t\t\t\tinstalled packages.\n"
-"\tdownload\t\tDownload rpms specified on the commandline to a local "
-"directory.\n"
-"\tsource-download\t\tDownload source rpms for all installed packages\n"
-"\t\t\t\tto a local directory.\n"
+"\tversioncmp, vcmp\tCompara la versió de dues cadenes.\n"
+"\ttargetos, tos\t\tImprimeix la cadena d'ID del sistema operatiu de "
+"destinació.\n"
+"\tlicenses\t\tImprimeix l'informe sobre llicències i EULA dels paquets "
+"instal·lats.\n"
+"\tdownload\t\tBaixa rpms especificats a la línia d'ordres en un directori "
+"local.\n"
+"\tsource-download\t\tBaixa rpms font per a tots els paquets instal·lats en "
+"un directori local.\n"
 
 #: src/Zypper.cc:827
 msgid ""
@@ -2000,23 +2001,25 @@ msgid ""
 "-D, --dry-run               Test the removal, do not actually remove.\n"
 "    --details               Show the detailed installation summary.\n"
 msgstr ""
-"remove (rm) [options] <capability> ...\n"
+"remove (rm) [opcions] <capacitat> ...\n"
 "\n"
-"Elimina paquets amb una capacitat especificada.\n"
-"Una capacitat és NAME[.ARCH][OP<VERSION>], en què OP és un\n"
-"de <, <=, =, >=, >.\n"
+"Suprimeix paquets amb una capacitat especificada.\n"
+"Una capacitat és NOM[.ARQ][OP<VERSIÓ>], en què OP és un\n"
+"dels símbols següents: <, <=, =, >=, >.\n"
 "\n"
 "  Opcions de l'ordre:\n"
-"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
-"-t, --type <type>           Type of package (%s).\n"
-"                            Default: %s.\n"
-"-n, --name                  Select packages by plain name, not by "
-"capability.\n"
-"-C, --capability            Select packages by capability.\n"
-"-u, --clean-deps            Automatically remove unneeded dependencies.\n"
-"-U, --no-clean-deps         No automatic removal of unneeded dependencies.\n"
-"-D, --dry-run               Test the removal, do not actually remove.\n"
-"    --details               Show the detailed installation summary.\n"
+"-r, --repo <alias|#|URI>    Carrega només el repositori especificat.\n"
+"-t, --type <type>           Tipus de paquet (%s).\n"
+"                            Per defecte: %s.\n"
+"-n, --name                  Selecciona paquets pel nom pla, no per la "
+"capacitat.\n"
+"-C, --capability            Selecciona paquets per capacitat.\n"
+"-u, --clean-deps            Suprimeix automàticament les dependències no "
+"necessàries.\n"
+"-U, --no-clean-deps         No supressió automàtica de dependències no "
+"necessàries.\n"
+"-D, --dry-run               Prova la supressió, no suprimeixis realment.\n"
+"    --details               Mostra el resum detallat de la instal·lació.\n"
 
 #: src/Zypper.cc:1863
 msgid ""
@@ -2075,7 +2078,7 @@ msgstr ""
 "verify (ve) [opcions]\n"
 "\n"
 "Comprova si es satisfan les dependències de paquets instal·lats i suggereix "
-"instal·lar o eliminar paquets per tal de reparar els problemes de "
+"instal·lar o suprimir paquets per tal de reparar els problemes de "
 "dependències.\n"
 "\n"
 "  Opcions de l'ordre:\n"
@@ -2170,7 +2173,7 @@ msgid ""
 msgstr ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
-"Elimina el servei d'índex dels repositoris del sistema.\n"
+"Suprimeix el servei d'índex dels repositoris del sistema.\n"
 "\n"
 "  Opcions de l'ordre:\n"
 "    --loose-auth   Ignora l'autenticació de dades de l'usuari a l'URI.\n"
@@ -2215,19 +2218,19 @@ msgstr ""
 "\"%s\".\n"
 "\n"
 "  Opcions de l'ordre:\n"
-"-d, --disable                 Desactiva el servei (però no l'eliminis).\n"
+"-d, --disable                 Desactiva el servei (però no el suprimeixis).\n"
 "-e, --enable                  Activa el servei desactivat.\n"
 "-r, --refresh                  Activa l'autorefresc per al servei.\n"
 "-R, --no-refresh           Desctiva l'autorefresc per al servei..\n"
 "-n, --name <name>      Estableix un nom descriptiu per al servei.\n"
 "\n"
-"-i, --ar-to-enable <àlies>    Afegeix un servei RIS de repositori per "
+"-i, --ar-to-enable <àlies>    Afegeix un repositori de servei RIS per "
 "activar.\n"
-"-I, --ar-to-disable <àlies>    Afegeix un servei RIS de repositori per "
+"-I, --ar-to-disable <àlies>    Afegeix un repositori de servei RIS per "
 "desactivar\n"
-"-j, --rr-to-enable <àlies>     Elimina un servei RIS de repositori per "
+"-j, --rr-to-enable <àlies>     Suprimeix un repositori de servei RIS per "
 "activar.\n"
-"-J, --rr-to-disable <àlies>    Elimina un servei RIS de repositori per "
+"-J, --rr-to-disable <àlies>    Suprimeix un repositori de servei RIS per "
 "desactivar.\n"
 "-k, --cl-to-enable                Neteja la llista de repositoris RIS per "
 "activar.\n"
@@ -2282,27 +2285,27 @@ msgstr "Aplica els canvis a tots els serveis d'un tipus concret."
 
 #: src/Zypper.cc:2095
 msgid "Add a RIS service repository to enable."
-msgstr "Afegeix un servei RIS de repositori per activar."
+msgstr "Afegeix un repositori de servei RIS per habilitar."
 
 #: src/Zypper.cc:2096
 msgid "Add a RIS service repository to disable."
-msgstr "Afegeix un servei RIS de repositori per desactivar."
+msgstr "Afegeix un repositori de servei RIS per desactivar."
 
 #: src/Zypper.cc:2097
 msgid "Remove a RIS service repository to enable."
-msgstr "Elimina un servei RIS de repositori per activar."
+msgstr "Suprimeix un repositori de servei RIS per habilitar."
 
 #: src/Zypper.cc:2098
 msgid "Remove a RIS service repository to disable."
-msgstr "Elimina un servei RIS de repositori per desactivar."
+msgstr "Suprimeix un repositori de servei RIS per inhabilitar."
 
 #: src/Zypper.cc:2099
 msgid "Clear the list of RIS repositories to enable."
-msgstr "Neteja la llista de repositoris RIS per activar."
+msgstr "Neteja la llista de repositoris RIS per habilitar."
 
 #: src/Zypper.cc:2100
 msgid "Clear the list of RIS repositories to disable."
-msgstr "Neteja la llista de repositoris RIS per desactivar."
+msgstr "Neteja la llista de repositoris RIS per inhabilitar."
 
 #: src/Zypper.cc:2127
 msgid ""
@@ -2493,7 +2496,7 @@ msgid ""
 msgstr ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
-"Elimina el repositori especificat per àlies, número o URI.\n"
+"Suprimeix el repositori especificat per àlies, número o URI.\n"
 "\n"
 "  Opcions de l'ordre:\n"
 "    --loose-auth   Ignora l'autenticació d'usuari a l'URI.\n"
@@ -2544,8 +2547,8 @@ msgstr ""
 "\"%s\".\n"
 "\n"
 "  Opcions de l'ordre:\n"
-"-d, --disable                      Desactiva el repositori (però no "
-"l'eliminis).\n"
+"-d, --disable                      Desactiva el repositori (però no el "
+"suprimeixis).\n"
 "-e, --enable                       Activa el repositori desactivat.\n"
 "-r, --refresh                        Activa l'autorefresc del repositori.\n"
 "-R, --no-refresh                 Desactiva l'autorefresc del repositori..\n"
@@ -3393,11 +3396,12 @@ msgid ""
 msgstr ""
 "removelock (rl) [opcions] <lock-number|packagename> ...\n"
 "\n"
-"Elimina el bloqueig d'un paquet. Especifica el bloqueig a eliminar pel seu "
+"Suprimeix el bloqueig d'un paquet. Especifica el bloqueig a suprimir pel "
 "número obtingut amb '%s' o pel nom del paquet.\n"
 "\n"
 "  Opcions de l'ordre:\n"
-"-r, --repo <alias|#|URI>  Elimina bloqueig amb un repositori especificat.\n"
+"-r, --repo <alias|#|URI>  Suprimeix només bloqueigs amb un repositori "
+"especificat.\n"
 "-t, --type <type>         Tipus de paquet (%s).\n"
 "                          Per defecte: %s.\n"
 
@@ -3500,7 +3504,7 @@ msgid ""
 "recent upgrades."
 msgstr ""
 "Llista de processos en execució que encara podrien usar fitxers i "
-"biblioteques eliminats per actualitzacions recents."
+"biblioteques suprimides per actualitzacions recents."
 
 #. translators: -s, --short
 #: src/Zypper.cc:3285
@@ -3509,7 +3513,7 @@ msgid ""
 "processes which are associated with a system service. Given three times, "
 "list the associated system service names only."
 msgstr ""
-"Crea una petita taula que no mostri els fitxers eliminats. Si es fa servir "
+"Crea una petita taula que no mostri els fitxers suprimits. Si es fa servir "
 "dos cops, mostra només els processos associats amb un servei de sistema. Si "
 "es fa servir tres cops, llista només els noms dels serveis de sistema "
 "associats."
@@ -4386,36 +4390,36 @@ msgstr[1] "S'instal·laran les %d aplicacions següents:"
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] "El paquet següent S'ELIMINARÀ:"
-msgstr[1] "Els %d paquets següents S'ELIMINARAN:"
+msgstr[0] "El paquet següent SE SUPRIMIRÀ:"
+msgstr[1] "Els %d paquets següents SE SUPRIMIRAN:"
 
 #: src/Summary.cc:604
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] "El pedaç següent S'ELIMINARÀ:"
-msgstr[1] "Els %d pedaços següents S'ELIMINARAN:"
+msgstr[0] "El pedaç següent SE SUPRIMIRÀ:"
+msgstr[1] "Els %d pedaços següents SE SUPRIMIRAN:"
 
 #: src/Summary.cc:609
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] "El patró següent S'ELIMINARÀ:"
-msgstr[1] "Els %d patrons següents S'ELIMINARAN:"
+msgstr[0] "El patró següent SE SUPRIMIRÀ:"
+msgstr[1] "Els %d patrons següents SE SUPRIMIRAN:"
 
 #: src/Summary.cc:614
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
-msgstr[0] "El producte següent S'ELIMINARÀ:"
-msgstr[1] "Els següents  %d productes S'ELIMINARAN:"
+msgstr[0] "El producte següent SE SUPRIMIRÀ:"
+msgstr[1] "Els següents %d productes SE SUPRIMIRAN:"
 
 #: src/Summary.cc:619
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] "L'aplicació següent S'ELIMINARÀ:"
-msgstr[1] "Les %d aplicacions següents S'ELIMINARAN:"
+msgstr[0] "L'aplicació següent SE SUPRIMIRÀ:"
+msgstr[1] "Les %d aplicacions següents SE SUPRIMIRAN:"
 
 #: src/Summary.cc:639
 #, c-format, boost-format
@@ -4604,11 +4608,11 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
 msgstr[0] ""
-"El paquet següent està recomanat, però no s'instal·larà perquè no és volgut "
-"(abans es va eliminar manualment):"
+"El paquet següent està recomanat, però no s'instal·larà perquè no és volgut ("
+"abans es va suprimir manualment):"
 msgstr[1] ""
 "Els %d paquets següents estan recomanats, però no s'instal·laran perquè no "
-"són volguts (abans es van eliminar manualment):"
+"són volguts (abans es van suprimir manualment):"
 
 #: src/Summary.cc:972
 #, c-format, boost-format
@@ -4925,15 +4929,15 @@ msgstr[1] "paquets per reinstal·lar"
 #: src/Summary.cc:1393
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "per eliminar"
-msgstr[1] "per eliminar"
+msgstr[0] "per suprimir"
+msgstr[1] "per suprimir"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1396
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] "paquet per eliminar"
-msgstr[1] "paquets per eliminiar"
+msgstr[0] "paquet per suprimir"
+msgstr[1] "paquets per suprimir"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1407
@@ -5906,7 +5910,7 @@ msgstr "El repositori %s no té URI definit, s'omet."
 #: src/repos.cc:1956
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
-msgstr "El repositori %s s'ha eliminat correctament."
+msgstr "El repositori %s s'ha suprimit correctament."
 
 #: src/repos.cc:1978
 #, c-format, boost-format
@@ -6036,12 +6040,12 @@ msgstr "El servei %s s'ha afegit correctament."
 #: src/repos.cc:2728
 #, c-format, boost-format
 msgid "Removing service '%s':"
-msgstr "Eliminant el servei %s:"
+msgstr "Suprimint el servei %s:"
 
 #: src/repos.cc:2731
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
-msgstr "El servei %s s'ha eliminat."
+msgstr "El servei %s s'ha suprimit."
 
 #: src/repos.cc:2745
 #, c-format, boost-format
@@ -6148,9 +6152,9 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] ""
-"El repositori %s s'ha eliminat dels repositoris habilitats del servei %s."
+"El repositori %s s'ha suprimit dels repositoris habilitats del servei %s."
 msgstr[1] ""
-"Els repositoris %s s'han eliminat dels repositoris habilitats del servei %s."
+"Els repositoris %s s'han suprimit dels repositoris habilitats del servei %s."
 
 #: src/repos.cc:3091
 #, c-format, boost-format
@@ -6160,9 +6164,9 @@ msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
 msgstr[0] ""
-"El repositori %s s'ha eliminat dels repositoris inhabilitats del servei %s."
+"El repositori %s s'ha suprimit dels repositoris inhabilitats del servei %s."
 msgstr[1] ""
-"Els repositoris %s s'han eliminat dels repositoris inhabilitats del servei "
+"Els repositoris %s s'han suprimit dels repositoris inhabilitats del servei "
 "%s."
 
 #: src/repos.cc:3100
@@ -6575,16 +6579,16 @@ msgstr ""
 
 #: src/source-download.cc:379
 msgid "Deleting superfluous source packages"
-msgstr "Esborrant paquets de codi font superflus"
+msgstr "Suprimint paquets de codi font superflus"
 
 #: src/source-download.cc:390
 #, c-format, boost-format
 msgid "Failed to remove source package '%s'"
-msgstr "Error en eliminar el paquet de codi font %s"
+msgstr "Error en suprimir el paquet de codi font %s"
 
 #: src/source-download.cc:401
 msgid "No superfluous source packages to delete."
-msgstr "No hi ha paquets superflus per esborrar."
+msgstr "No hi ha paquets superflus per suprimir."
 
 #: src/source-download.cc:411
 msgid "Downloading required source packages..."
@@ -6637,11 +6641,11 @@ msgstr "Fitxers"
 
 #: src/ps.cc:164
 msgid "No processes using deleted files found."
-msgstr "No s'ha trobat cap procés que faci servir fitxers esborrats."
+msgstr "No s'ha trobat cap procés que faci servir fitxers suprimits."
 
 #: src/ps.cc:168
 msgid "The following running processes use deleted files:"
-msgstr "Els processos actius següents utilitzen fitxers esborrats:"
+msgstr "Els processos actius següents utilitzen fitxers suprimits:"
 
 #: src/ps.cc:171
 msgid "You may wish to restart these processes."
@@ -6949,7 +6953,7 @@ msgstr "Forçant la instal·lació de %s del repositori %s."
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
-msgstr "Seleccionant %s per eliminar."
+msgstr "Seleccionant %s per surpimir."
 
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
