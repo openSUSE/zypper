@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-09 13:14+0200\n"
-"PO-Revision-Date: 2018-05-23 19:01+0000\n"
+"PO-Revision-Date: 2018-05-23 22:01+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan "
 "<https://l10n.opensuse.org/projects/libzypp/master/ca/>\n"
@@ -4903,7 +4903,7 @@ msgstr "%s necessita %s, però aquest requeriment no es pot satisfer"
 
 #: zypp/solver/detail/SATResolver.cc:1074
 msgid "deleted providers: "
-msgstr "proveïdors esborrats: "
+msgstr "proveïdors suprimits: "
 
 #. translators: 'uninstallable' == 'not installable'
 #: zypp/solver/detail/SATResolver.cc:1085
