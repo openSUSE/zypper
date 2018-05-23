@@ -128,6 +128,12 @@ bool add_repo( Zypper & zypper, RepoInfo & repo );
 void remove_repo( Zypper & zypper, const RepoInfo & repoinfo );
 
 /**
+ * Remove repositories which is matching filter options
+ * like all, local, remote or medium-type
+ */
+void remove_repos_by_option( Zypper & zypper );
+
+/**
  * Rename repository specified by \a alias to \a newalias.
  */
 void rename_repo( Zypper & zypper, const std::string & alias, const std::string & newalias );
