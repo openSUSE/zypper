@@ -48,8 +48,15 @@ std::ostream & operator<<( std::ostream & str, const GpgmeErr & obj )
 
 static void initGpgme ()
 {
-  gpgme_check_version(NULL);
-
+  const char *version = gpgme_check_version(NULL);
+  if ( version )
+  {
+    MIL << "Initialized libgpgme version: " << version << endl;
+  }
+  else
+  {
+    MIL << "Initialized libgpgme with unknown version" << endl;
+  }
 }
 
 namespace zypp
