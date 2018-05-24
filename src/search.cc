@@ -26,11 +26,10 @@ FillSearchTableSolvable::FillSearchTableSolvable( Table & table, TriBool inst_no
 , _inst_notinst( inst_notinst )
 {
   Zypper & zypper( Zypper::instance() );
-  if ( zypper.cOpts().find("repo") != zypper.cOpts().end() )
+  if ( zypper.cOpts().count( "repo" ) )
   {
-    std::list<RepoInfo> & repos( zypper.runtimeData().repos );
-    for_( it, repos.begin(), repos.end() )
-      _repos.insert( it->alias() );
+    for ( const auto & ri : zypper.runtimeData().repos )
+      _repos.insert( ri.alias() );
   }
 
   //
@@ -192,25 +191,23 @@ FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool ins
 , inst_notinst( installed_only )
 {
   Zypper & zypper( Zypper::instance() );
-  if ( zypper.cOpts().find("repo") != zypper.cOpts().end() )
+  if ( zypper.cOpts().count( "repo" ) )
   {
-    std::list<RepoInfo> & repos( zypper.runtimeData().repos );
-    for_( it, repos.begin(), repos.end() )
-      _repos.insert( it->alias() );
+    for ( const auto & ri : zypper.runtimeData().repos )
+      _repos.insert( ri.alias() );
   }
 
-  TableHeader header;
   //
   // *** CAUTION: It's a mess, but adding/changing colums here requires
   //              adapting OutXML::searchResult !
   //
-  // translators: S for installed Status
-  header << _("S");
-  header << _("Name");
-  // translators: package summary (header)
-  header << _("Summary");
-  header << _("Type");
-  *_table << header;
+  *_table << ( TableHeader()
+	  // translators: S for installed Status
+	  << _("S")
+	  << _("Name")
+	  // translators: package summary (header)
+	  << _("Summary")
+	  << _("Type") );
 }
 
 bool FillSearchTableSelectable::operator()( const ui::Selectable::constPtr & s ) const
