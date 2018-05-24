@@ -4569,6 +4569,9 @@ void Zypper::doCommand()
       }
     }
 
+    if ( cOpts().count("installed-only") )
+      globalOptsNoConst().no_refresh = true;
+
     // load system data...
     if ( defaultLoadSystem() != ZYPPER_EXIT_OK )
       return;
