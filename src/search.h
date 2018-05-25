@@ -14,37 +14,25 @@
 #include "Zypper.h"
 #include "Table.h"
 
-/**
- * Functor for filling search output table in rug style.
- */
+///////////////////////////////////////////////////////////////////
+/// \class FillSearchTableSolvable
+/// \brief Functor for filling a detailed search output table.
+///////////////////////////////////////////////////////////////////
 struct FillSearchTableSolvable
 {
-  // the table used for output
-  Table * _table;
-  /** Aliases of repos specified as --repo */
-  std::set<std::string> _repos;
-  TriBool _inst_notinst;
+  FillSearchTableSolvable( Table & table_r, TriBool instNotinst_r = indeterminate );
 
-  FillSearchTableSolvable(
-      Table & table,
-      TriBool inst_notinst = indeterminate );
+  /** Add this PoolItem if no filter applies */
+  bool operator()( const PoolItem & pi_r ) const;
+  /** Add this Solvable if no filter applies */
+  bool operator()( const sat::Solvable & solv_r ) const;
+  /** PoolQuery iterator provides info about matches */
+  bool operator()( const PoolQuery::const_iterator & it_r ) const;
 
-  /** Add all items within this Selectable */
-  bool operator()( const ui::Selectable::constPtr & sel ) const;
-  /** Add this PoolItem */
-  bool operator()( const PoolItem & pi ) const;
-  /** Add this Solvable */
-  bool operator()( sat::Solvable solv ) const;
-  /** PoolQuery iterator provides info about matches*/
-  bool operator()( const PoolQuery::const_iterator & it ) const;
-
-  /** Helper to add a table row for \a sel's picklist item \c pi
-   * \return whether a row was actually added.
-   * \note picklist item means that \a pi must not be an installed
-   * item in \a sel, if there is an identical available one. The
-   * code relies on this.
-   */
-  bool addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) const;
+private:
+  Table * _table;		//!< The table used for output
+  std::set<std::string> _repos;	//!< Filter --repo
+  TriBool _instNotinst;		//!< Filter --[not-]installed
 };
 
 struct FillSearchTableSelectable
