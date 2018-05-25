@@ -326,8 +326,8 @@ public:
   /** Sync mode for \ref syncTrustedKeys */
   enum SyncTrustedKeyBits
   {
-    SYNC_TO_KEYRING	= 1<<0,	//! export rpm trusted keys into zypp trusted keyring
-    SYNC_FROM_KEYRING	= 1<<1,	//! import zypp trusted keys into rpm database.
+    SYNC_TO_KEYRING	= 1<<0,	//!< export rpm trusted keys into zypp trusted keyring
+    SYNC_FROM_KEYRING	= 1<<1,	//!< import zypp trusted keys into rpm database.
     SYNC_BOTH		= SYNC_TO_KEYRING | SYNC_FROM_KEYRING
   };
   /**
