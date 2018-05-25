@@ -4843,35 +4843,7 @@ void Zypper::doCommand()
     // The "what-provides" now is included in "search" command, e.g.
     // zypper what-provides 'zypper>1.6'
     // zypper se --match-exact --provides 'zypper>1.6'
-    if ( _arguments.empty() )
-    {
-      report_required_arg_missing( out(), _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-    else if ( _arguments.size() > 1 )
-    {
-      report_too_many_arguments( out(), _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    initRepoManager();
-
-    init_target( *this );
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-    load_resolvables( *this );
-
-    switch ( command().toEnum() )
-    {
-    case ZypperCommand::WHAT_PROVIDES_e:
-      list_what_provides( *this, _arguments[0] );
-      break;
-    default:;
-    }
-
+    setExitCode( ZYPPER_EXIT_ERR_BUG );
     break;
   }
 

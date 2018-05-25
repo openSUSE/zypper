@@ -78,7 +78,4 @@ void list_packages(Zypper & zypper);
 /** List all products with specific info in specified repos */
 void list_products(Zypper & zypper);
 
-/** List all providers of given capability */
-void list_what_provides(Zypper & zypper, const std::string & capstr);
-
 #endif /*ZYPPERSEARCH_H_*/
