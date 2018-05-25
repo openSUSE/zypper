@@ -21,9 +21,13 @@
 
 extern ZYpp::Ptr God;
 
-FillSearchTableSolvable::FillSearchTableSolvable( Table & table, TriBool inst_notinst )
-: _table( &table )
-, _inst_notinst( inst_notinst )
+///////////////////////////////////////////////////////////////////
+// class FillSearchTableSolvable
+///////////////////////////////////////////////////////////////////
+
+FillSearchTableSolvable::FillSearchTableSolvable( Table & table_r, TriBool instNotinst_r )
+: _table( &table_r )
+, _instNotinst( instNotinst_r )
 {
   Zypper & zypper( Zypper::instance() );
   if ( zypper.cOpts().count( "repo" ) )
@@ -51,54 +55,57 @@ FillSearchTableSolvable::FillSearchTableSolvable( Table & table, TriBool inst_no
 	  << _("Repository") );
 }
 
-bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) const
+bool FillSearchTableSolvable::operator()( const PoolItem & pi_r ) const
 {
   // --repo => we only want the repo resolvables, not @System (bnc #467106)
-  if ( !_repos.empty() && _repos.find( pi->repoInfo().alias() ) == _repos.end() )
+  if ( !_repos.empty() && !_repos.count( pi_r.repoInfo().alias() ) )
     return false;
 
   // hide patterns with user visible flag not set (bnc #538152)
-  if ( pi->isKind<Pattern>() && ! pi->asKind<Pattern>()->userVisible() )
+  if ( pi_r->isKind<Pattern>() && ! pi_r->asKind<Pattern>()->userVisible() )
     return false;
+
 
   TableRow row;
   // compute status indicator:
   //   i  - exactly this version installed
   //   v  - installed, but in different version
   //      - not installed at all
-  bool isLocked = pi.status().isLocked();
-  if ( pi->isSystem() )
+  bool isLocked = pi_r.status().isLocked();
+  ui::Selectable::Ptr sel( ui::Selectable::get( pi_r ) );
+
+  if ( pi_r->isSystem() )
   {
-    // picklist: ==> not available
-    if ( _inst_notinst == false )
+    // pi_rcklist: ==> not available
+    if ( _instNotinst == false || sel->identicalAvailable( pi_r ) )
       return false;	// show only not installed
-    row << lockStatusTag( "i", isLocked, pi.identIsAutoInstalled() );
+    row << lockStatusTag( "i", isLocked, pi_r.identIsAutoInstalled() );
   }
   else
   {
     // picklist: ==> available, maybe identical installed too
 
     // only check for sel->installedEmpty() if NOT pseudo installed
-    if ( !traits::isPseudoInstalled( pi->kind() ) && sel->installedEmpty() )
+    if ( !traits::isPseudoInstalled( pi_r->kind() ) && sel->installedEmpty() )
     {
-      if ( _inst_notinst == true )
+      if ( _instNotinst == true )
 	return false;	// show only installed
       row << lockStatusTag( "", isLocked );
     }
     else
     {
-      bool identicalInstalledToo = ( traits::isPseudoInstalled( pi->kind() )
-				   ? ( pi.isSatisfied() )
-				   : ( sel->identicalInstalled( pi ) ) );
+      bool identicalInstalledToo = ( traits::isPseudoInstalled( pi_r->kind() )
+				   ? ( pi_r.isSatisfied() )
+				   : ( sel->identicalInstalled( pi_r ) ) );
       if ( identicalInstalledToo )
       {
-	if ( _inst_notinst == false )
+	if ( _instNotinst == false )
 	  return false;	// show only not installed
-	row << lockStatusTag( "i", isLocked, pi.identIsAutoInstalled() );
+	row << lockStatusTag( "i", isLocked, pi_r.identIsAutoInstalled() );
       }
       else
       {
-	if ( _inst_notinst == true )
+	if ( _instNotinst == true )
 	  return false;	// show only installed
 	row << lockStatusTag( "v", isLocked );
       }
@@ -106,42 +113,40 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
   }
 
   row
-    << pi->name()
-    << kind_to_string_localized( pi->kind(), 1 )
-    << pi->edition().asString()
-    << pi->arch().asString()
-    << ( pi->isSystem()
+    << pi_r->name()
+    << kind_to_string_localized( pi_r->kind(), 1 )
+    << pi_r->edition().asString()
+    << pi_r->arch().asString()
+    << ( pi_r->isSystem()
        ? (std::string("(") + _("System Packages") + ")")
-       : pi->repository().asUserString() );
+       : pi_r->repository().asUserString() );
 
   *_table << row;
   return true;	// actually added a row
 }
 
-//
-// PoolQuery iterator as argument provides information about matches
-//
-bool FillSearchTableSolvable::operator()( const PoolQuery::const_iterator & it ) const
+bool FillSearchTableSolvable::operator()( const sat::Solvable & solv_r ) const
+{ return operator()( PoolItem( solv_r ) ); }
+
+bool FillSearchTableSolvable::operator()( const PoolQuery::const_iterator & it_r ) const
 {
-  // all FillSearchTableSolvable::operator()( const PoolItem & pi )
-  if ( ! operator()(*it) )
+  if ( ! operator()(*it_r) )
     return false;	// no row was added due to filter
 
-  // after addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) is
-  // done, add the details about matches to last row
+  // add the details about matches to last row
   TableRow & lastRow( _table->rows().back() );
 
   // don't show details for patterns with user visible flag not set (bnc #538152)
-  if ( it->kind() == ResKind::pattern )
+  if ( it_r->kind() == ResKind::pattern )
   {
-    Pattern::constPtr ptrn = asKind<Pattern>(*it);
+    Pattern::constPtr ptrn = asKind<Pattern>(*it_r);
     if ( ptrn && !ptrn->userVisible() )
       return true;
   }
 
-  if ( !it.matchesEmpty() )
+  if ( !it_r.matchesEmpty() )
   {
-    for_( match, it.matchesBegin(), it.matchesEnd() )
+    for_( match, it_r.matchesBegin(), it_r.matchesEnd() )
     {
       std::string attrib( match->inSolvAttr().asString() );
       if ( str::startsWith( attrib, "solvable:" ) )	// strip 'solvable:' from attribute
@@ -164,27 +169,7 @@ bool FillSearchTableSolvable::operator()( const PoolQuery::const_iterator & it )
   return true;
 }
 
-bool FillSearchTableSolvable::operator()( const PoolItem & pi ) const
-{
-  ui::Selectable::constPtr sel( ui::Selectable::get( pi ) );
-  return addPicklistItem( sel, pi );
-}
-
-bool FillSearchTableSolvable::operator()( sat::Solvable solv ) const
-{ return operator()( PoolItem( solv ) ); }
-
-bool FillSearchTableSolvable::operator()( const ui::Selectable::constPtr & sel ) const
-{
-  bool ret = false;
-  // picklist: available items list prepended by those installed items not identicalAvailable
-  for_( it, sel->picklistBegin(), sel->picklistEnd() )
-  {
-    if ( addPicklistItem( sel, *it ) || !ret )
-      ret = true;	// at least one row added
-  }
-  return ret;
-}
-
+///////////////////////////////////////////////////////////////////
 
 FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool installed_only )
 : _table( &table )

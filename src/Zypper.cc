@@ -4757,7 +4757,10 @@ void Zypper::doCommand()
 	    callback( it );
 	}
 	else
-	  invokeOnEach( query.selectableBegin(), query.selectableEnd(), callback );
+	{
+	  for ( const auto & slv : query )
+	    callback( slv );
+	}
       }
       else
       {
