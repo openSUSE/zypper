@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 28 11:20:25 CEST 2018 - ma@suse.de
+
+- ansi.h: Prevent ESC sequence strings from going out of scope (bsc#1092413)
+- version 1.11.67
+
+-------------------------------------------------------------------
 Mon Feb  5 12:23:05 CET 2018 - ma@suse.de
 
 - do not recommend cron (bsc#1079334)
