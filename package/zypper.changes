@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Mon May 28 13:37:48 CEST 2018 - ma@suse.de
+
+- Fix broken display of detailed query results
+- Fix broken search for items with a dash (bsc#907538, bsc#1043166,
+  bsc#1070770)
+- fix translation error (fixes #178)
+- Disable repository operations when searching installed packages
+  (bsc#1084525)
+- Prevent nested calls to exit() if aborted by a signal (bsc#1092413)
+- ansi.h: Prevent ESC sequence strings from going out of scope
+  (bsc#1092413)
+- version 1.14.6
+
+-------------------------------------------------------------------
 Thu Apr 26 16:20:34 CEST 2018 - ma@suse.de
 
 - search: Hint the user to the 'search-packages' subcommand, if the
