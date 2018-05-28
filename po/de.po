@@ -233,7 +233,7 @@ msgid ""
 msgstr ""
 "Diese Datei wurde nach dem Signieren verändert. Es ist möglich, dass eine "
 "bösartige Manipulation vorgenommen wurde und die Datei nicht mehr "
-"vertrauenswürdig ist. Sie sollten nur fortfahren, wenn Sie wissen, das die "
+"vertrauenswürdig ist. Sie sollten nur fortfahren, wenn Sie wissen, dass die "
 "Datei sicher ist."
 
 #: src/callbacks/keyring.h:79
