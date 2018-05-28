@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May 28 11:17:28 CEST 2018 - ma@suse.de
+
+- Prevent nested calls to exit() if aborted by a signal (bsc#1092413)
+- ansi.h: Prevent ESC sequence strings from going out of scope (bsc#1092413)
+- version 1.13.42
+
+-------------------------------------------------------------------
 Thu Mar  1 18:37:31 CET 2018 - bzeller@suse.de
 
 - Fix: zypper bash completion expands non-existing options (bsc#1049825)
