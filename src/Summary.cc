@@ -27,6 +27,14 @@
 
 #include "Summary.h"
 
+// Suppress all application related summary messages.
+// Summary messages produce lots of false reports about deleted applications. This
+// is because the quality of the application related metadata is poor (better said
+// gnome-centric, frequently changing and not fitting into the zypp model).
+// While it's undecided whether we drop application support at all, we will at least
+// avoid the disturbing messages.
+#define WITH_APPLICATION_SUMMARY 0
+
 // --------------------------------------------------------------------------
 
 bool Summary::ResPairNameCompare::operator()( const ResPair & p1, const ResPair & p2 ) const
@@ -573,10 +581,14 @@ void Summary::writeNewlyInstalled( std::ostream & out )
 	"The following %d source packages are going to be installed:",
 	it->second.size() );
     else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
       label = PL_(
 	"The following application is going to be installed:",
 	"The following %d applications are going to be installed:",
 	it->second.size() );
+#else
+      continue;
+#endif
     label = str::form( label.c_str(), it->second.size() );
 
     out << endl << ( ColorContext::POSITIVE << label ) << endl;
@@ -615,10 +627,14 @@ void Summary::writeRemoved( std::ostream & out )
         "The following %d products are going to be REMOVED:",
         it->second.size() );
     else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
       label = PL_(
         "The following application is going to be REMOVED:",
         "The following %d applications are going to be REMOVED:",
         it->second.size() );
+#else
+      continue;
+#endif
     label = str::form( label.c_str(), it->second.size() );
 
     out << endl << ( ColorContext::NEGATIVE << label ) << endl;
@@ -658,10 +674,14 @@ void Summary::writeUpgraded( std::ostream & out )
       setViewOption( SHOW_VERSION );	// always show version for products
     }
     else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
       label = PL_(
         "The following application is going to be upgraded:",
         "The following %d applications are going to be upgraded:",
         it->second.size() );
+#else
+      continue;
+#endif
     label = str::form( label.c_str(), it->second.size() );
 
     out << endl << ( ColorContext::POSITIVE << label ) << endl;
@@ -697,10 +717,14 @@ void Summary::writeDowngraded( std::ostream & out )
         "The following %d products are going to be downgraded:",
         it->second.size() );
     else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
       label = PL_(
         "The following application is going to be downgraded:",
         "The following %d applications are going to be downgraded:",
         it->second.size() );
+#else
+      continue;
+#endif
     label = str::form( label.c_str(), it->second.size() );
 
     out << endl << ( ColorContext::NEGATIVE << label ) << endl;
@@ -736,6 +760,7 @@ void Summary::writeReinstalled( std::ostream & out )
         "The following %d products are going to be reinstalled:",
         it->second.size() );
     else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
     {
       // Suppress 'reinstalled' message for applications.
       // As applications don't have an edition, they are not updated
@@ -748,6 +773,9 @@ void Summary::writeReinstalled( std::ostream & out )
         "The following %d applications are going to be reinstalled:",
         it->second.size() );
     }
+#else
+      continue;
+#endif
     label = str::form( label.c_str(), it->second.size() );
 
     out << endl << ( ColorContext::CHANGE << label ) << endl;
@@ -902,10 +930,14 @@ void Summary::writeRecommended( std::ostream & out )
         "The following %d recommended source packages were automatically selected:",
         it->second.size() );
     else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
       label = PL_(
         "The following recommended application was automatically selected:",
         "The following %d recommended applications were automatically selected:",
         it->second.size() );
+#else
+      continue;
+#endif
     label = str::form( label.c_str(), it->second.size() );
 
     out << endl << ( ColorContext::POSITIVE << label ) << endl;
@@ -994,9 +1026,13 @@ void Summary::writeRecommended( std::ostream & out )
 		     "The following %d products are recommended, but will not be installed:",
 		     it->second.size() );
       else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
 	label = PL_( "The following application is recommended, but will not be installed:",
 		     "The following %d applications are recommended, but will not be installed:",
 		     it->second.size() );
+#else
+	continue;
+#endif
       label = str::form( label.c_str(), it->second.size() );
 
       out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
@@ -1043,10 +1079,14 @@ void Summary::writeSuggested( std::ostream & out )
         "The following %d products are suggested, but will not be installed:",
         it->second.size() );
     else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
       label = PL_(
         "The following application is suggested, but will not be installed:",
         "The following %d applications are suggested, but will not be installed:",
         it->second.size() );
+#else
+      continue;
+#endif
     label = str::form( label.c_str(), it->second.size() );
 
     out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
@@ -1085,10 +1125,14 @@ void Summary::writeChangedArch( std::ostream & out )
         "The following %d products are going to change architecture:",
         it->second.size() );
     else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
       label = PL_(
         "The following application is going to change architecture:",
         "The following %d applications are going to change architecture:",
         it->second.size() );
+#else
+      continue;
+#endif
     label = str::form( label.c_str(), it->second.size() );
 
     out << endl << ( ColorContext::CHANGE << label ) << endl;
@@ -1127,10 +1171,14 @@ void Summary::writeChangedVendor( std::ostream & out )
         "The following %d products are going to change vendor:",
         it->second.size() );
     else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
       label = PL_(
         "The following application is going to change vendor:",
         "The following %d applications are going to change vendor:",
         it->second.size() );
+#else
+      continue;
+#endif
     label = str::form( label.c_str(), it->second.size() );
 
     out << endl << ( ColorContext::CHANGE << label ) << endl;
@@ -1213,10 +1261,14 @@ void Summary::writeNotUpdated( std::ostream & out )
         "The following %d product updates will NOT be installed:",
         it->second.size() );
     else if ( it->first == ResKind::application )
+#if ( WITH_APPLICATION_SUMMARY )
       label = PL_(
         "The following application update will NOT be installed:",
         "The following %d application updates will NOT be installed:",
         it->second.size() );
+#else
+      continue;
+#endif
     label = str::form( label.c_str(), it->second.size() );
 
     out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
