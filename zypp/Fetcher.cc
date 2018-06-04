@@ -212,7 +212,7 @@ namespace zypp
       /**
        * Provide the resource to \ref dest_dir
        */
-      void provideToDest( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir , const Pathname &deltafile);
+      void provideToDest( MediaSetAccess & media_r, const Pathname & destDir_r , const FetcherJob_Ptr & jobp_r );
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -533,23 +533,23 @@ namespace zypp
       }
   }
 
-  void Fetcher::Impl::provideToDest( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir, const Pathname &deltafile )
+  void Fetcher::Impl::provideToDest( MediaSetAccess & media_r, const Pathname & destDir_r , const FetcherJob_Ptr & jobp_r )
   {
+    const OnMediaLocation & resource( jobp_r->location );
 
-
-    if ( ! provideFromCache( resource, dest_dir ) )
+    if ( ! provideFromCache( resource, destDir_r ) )
     {
       MIL << "Not found in cache, downloading" << endl;
 
       // try to get the file from the net
       try
       {
-        Pathname tmp_file = media.provideFile(resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT, deltafile );
-
-        Pathname dest_full_path = dest_dir + resource.filename();
+        Pathname tmp_file = media_r.provideFile(resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT, jobp_r->deltafile );
+        Pathname dest_full_path = destDir_r + resource.filename();
 
         if ( assert_dir( dest_full_path.dirname() ) != 0 )
               ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
+
         if ( filesystem::hardlinkCopy( tmp_file, dest_full_path ) != 0 )
         {
           if ( ! PathInfo(tmp_file).isExist() )
@@ -557,11 +557,11 @@ namespace zypp
           if ( ! PathInfo(dest_full_path.dirname()).isExist() )
               ERR << dest_full_path.dirname() << " does not exist" << endl;
 
-          media.releaseFile(resource); //not needed anymore, only eat space
-          ZYPP_THROW( Exception("Can't hardlink/copy " + tmp_file.asString() + " to " + dest_dir.asString()));
+          media_r.releaseFile(resource); //not needed anymore, only eat space
+          ZYPP_THROW( Exception("Can't hardlink/copy " + tmp_file.asString() + " to " + destDir_r.asString()));
         }
 
-        media.releaseFile(resource); //not needed anymore, only eat space
+        media_r.releaseFile(resource); //not needed anymore, only eat space
       }
       catch (Exception & excpt_r)
       {
@@ -790,7 +790,7 @@ namespace zypp
           autoaddIndexes(content, media, Pathname("/"), dest_dir);
       }
 
-      provideToDest(media, jobp->location, dest_dir, jobp->deltafile);
+      provideToDest( media, dest_dir, jobp );
 
       // if the file was not transferred, and no exception, just
       // return, as it was an optional file
