@@ -535,12 +535,9 @@ namespace zypp
 
   void Fetcher::Impl::provideToDest( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir, const Pathname &deltafile )
   {
-    bool got_from_cache = false;
 
-    // start look in cache
-    got_from_cache = provideFromCache(resource, dest_dir);
 
-    if ( ! got_from_cache )
+    if ( ! provideFromCache( resource, dest_dir ) )
     {
       MIL << "Not found in cache, downloading" << endl;
 
