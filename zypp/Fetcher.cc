@@ -27,8 +27,6 @@
 #include "zypp/parser/susetags/ContentFileReader.h"
 #include "zypp/parser/susetags/RepoIndex.h"
 
-using namespace std;
-
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp:fetcher"
 
@@ -108,7 +106,7 @@ namespace zypp
     OnMediaLocation location;
     Pathname deltafile;
     //CompositeFileChecker checkers;
-    list<FileChecker> checkers;
+    std::list<FileChecker> checkers;
     Flags flags;
   };
 
@@ -196,7 +194,7 @@ namespace zypp
        * on dest_dir
        * \throws Exception
        */
-      void validate( const OnMediaLocation &resource, const Pathname &dest_dir, const list<FileChecker> &checkers );
+      void validate( const OnMediaLocation &resource, const Pathname &dest_dir, const std::list<FileChecker> &checkers );
 
       /**
        * scan the directory and adds the individual jobs
@@ -222,13 +220,13 @@ namespace zypp
     Impl * clone() const
     { return new Impl( *this ); }
 
-    list<FetcherJob_Ptr>   _resources;
+    std::list<FetcherJob_Ptr>   _resources;
     std::set<FetcherIndex_Ptr,SameFetcherIndex> _indexes;
     std::set<Pathname> _caches;
     // checksums read from the indexes
-    map<string, CheckSum> _checksums;
+    std::map<std::string, CheckSum> _checksums;
     // cache of dir contents
-    map<string, filesystem::DirContent> _dircontent;
+    std::map<std::string, filesystem::DirContent> _dircontent;
 
     Fetcher::Options _options;
   };
@@ -382,7 +380,7 @@ namespace zypp
     return false;
   }
 
-    void Fetcher::Impl::validate( const OnMediaLocation &resource, const Pathname &dest_dir, const list<FileChecker> &checkers )
+    void Fetcher::Impl::validate( const OnMediaLocation &resource, const Pathname &dest_dir, const std::list<FileChecker> &checkers )
   {
     // no matter where did we got the file, try to validate it:
     Pathname localfile = dest_dir + resource.filename();
@@ -391,7 +389,7 @@ namespace zypp
     {
       MIL << "Checking job [" << localfile << "] (" << checkers.size() << " checkers )" << endl;
 
-      for ( list<FileChecker>::const_iterator it = checkers.begin();
+      for ( std::list<FileChecker>::const_iterator it = checkers.begin();
             it != checkers.end();
             ++it )
       {
@@ -755,7 +753,7 @@ namespace zypp
 
     downloadAndReadIndexList(media, dest_dir);
 
-    for ( list<FetcherJob_Ptr>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
+    for ( std::list<FetcherJob_Ptr>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
     {
 
       if ( (*it_res)->flags & FetcherJob::Directory )
@@ -844,7 +842,7 @@ namespace zypp
   /** \relates Fetcher::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const Fetcher::Impl & obj )
   {
-      for ( list<FetcherJob_Ptr>::const_iterator it_res = obj._resources.begin(); it_res != obj._resources.end(); ++it_res )
+      for ( std::list<FetcherJob_Ptr>::const_iterator it_res = obj._resources.begin(); it_res != obj._resources.end(); ++it_res )
       {
           str << *it_res;
       }
