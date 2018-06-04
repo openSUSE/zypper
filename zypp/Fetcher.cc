@@ -190,11 +190,10 @@ namespace zypp
        */
       bool provideFromCache( const OnMediaLocation &resource, const Pathname &dest_dir );
       /**
-       * Validates the job against is checkers, by using the file instance
-       * on dest_dir
+       * Validates the provided file against its checkers.
        * \throws Exception
        */
-      void validate( const OnMediaLocation &resource, const Pathname &dest_dir, const std::list<FileChecker> &checkers );
+      void validate( const Pathname & localfile_r, const std::list<FileChecker> & checkers_r );
 
       /**
        * scan the directory and adds the individual jobs
@@ -380,27 +379,18 @@ namespace zypp
     return false;
   }
 
-    void Fetcher::Impl::validate( const OnMediaLocation &resource, const Pathname &dest_dir, const std::list<FileChecker> &checkers )
+  void Fetcher::Impl::validate( const Pathname & localfile_r, const std::list<FileChecker> & checkers_r )
   {
-    // no matter where did we got the file, try to validate it:
-    Pathname localfile = dest_dir + resource.filename();
-    // call the checker function
     try
     {
-      MIL << "Checking job [" << localfile << "] (" << checkers.size() << " checkers )" << endl;
+      MIL << "Checking job [" << localfile_r << "] (" << checkers_r.size() << " checkers )" << endl;
 
-      for ( std::list<FileChecker>::const_iterator it = checkers.begin();
-            it != checkers.end();
-            ++it )
+      for ( const FileChecker & chkfnc : checkers_r )
       {
-        if (*it)
-        {
-          (*it)(localfile);
-        }
+        if ( chkfnc )
+          chkfnc( localfile_r );
         else
-        {
-          ERR << "Invalid checker for '" << localfile << "'" << endl;
-        }
+          ERR << "Invalid checker for '" << localfile_r << "'" << endl;
       }
 
     }
@@ -414,7 +404,7 @@ namespace zypp
     }
     catch (...)
     {
-      ZYPP_THROW(Exception("Unknown error while validating " + resource.filename().asString()));
+      ZYPP_THROW(Exception("Unknown error while validating " + localfile_r.asString()));
     }
   }
 
@@ -828,7 +818,7 @@ namespace zypp
       }
 
       // validate job, this throws if not valid
-      validate(jobp->location, dest_dir, jobp->checkers);
+      validate( dest_dir / jobp->location.filename(), jobp->checkers );
 
       if ( ! progress.incr() )
         ZYPP_THROW(AbortRequestException());
