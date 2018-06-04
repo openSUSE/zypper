@@ -750,13 +750,12 @@ namespace zypp
 
     downloadAndReadIndexList(media, dest_dir);
 
-    for ( std::list<FetcherJob_Ptr>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
+    for ( const FetcherJob_Ptr & jobp : _resources )
     {
-
-      if ( (*it_res)->flags & FetcherJob::Directory )
+      if ( jobp->flags & FetcherJob::Directory )
       {
-          const OnMediaLocation location((*it_res)->location);
-          addDirJobs(media, location, dest_dir, (*it_res)->flags);
+          const OnMediaLocation location(jobp->location);
+          addDirJobs(media, location, dest_dir, jobp->flags);
           continue;
       }
 
@@ -770,14 +769,14 @@ namespace zypp
           // index for each file. We look only in the directory
           // where the file is. this is expensive of course.
           filesystem::DirContent content;
-          getDirectoryContent(media, (*it_res)->location.filename().dirname(), content);
+          getDirectoryContent(media, jobp->location.filename().dirname(), content);
           // this method test for the option flags so indexes are added
           // only if the options are enabled
           MIL << "Autodiscovering signed indexes on '"
-              << (*it_res)->location.filename().dirname() << "' for '"
-              << (*it_res)->location.filename() << "'" << endl;
+              << jobp->location.filename().dirname() << "' for '"
+              << jobp->location.filename() << "'" << endl;
 
-          autoaddIndexes(content, media, (*it_res)->location.filename().dirname(), dest_dir);
+          autoaddIndexes(content, media, jobp->location.filename().dirname(), dest_dir);
 
           // also look in the root of the media
           content.clear();
@@ -786,50 +785,50 @@ namespace zypp
           // only if the options are enabled
           MIL << "Autodiscovering signed indexes on '"
               << "/" << "' for '"
-              << (*it_res)->location.filename() << "'" << endl;
+              << jobp->location.filename() << "'" << endl;
 
           autoaddIndexes(content, media, Pathname("/"), dest_dir);
       }
 
-      provideToDest(media, (*it_res)->location, dest_dir, (*it_res)->deltafile);
+      provideToDest(media, jobp->location, dest_dir, jobp->deltafile);
 
       // if the file was not transferred, and no exception, just
       // return, as it was an optional file
-      if ( ! PathInfo(dest_dir + (*it_res)->location.filename()).isExist() )
+      if ( ! PathInfo(dest_dir + jobp->location.filename()).isExist() )
           continue;
 
       // if the checksum is empty, but the checksum is in one of the
       // indexes checksum, then add a checker
-      if ( (*it_res)->location.checksum().empty() )
+      if ( jobp->location.checksum().empty() )
       {
-          if ( _checksums.find((*it_res)->location.filename().asString())
+          if ( _checksums.find(jobp->location.filename().asString())
                != _checksums.end() )
           {
-              CheckSum chksm = _checksums[(*it_res)->location.filename().asString()];
+              CheckSum chksm = _checksums[jobp->location.filename().asString()];
               ChecksumFileChecker digest_check(chksm);
-              (*it_res)->checkers.push_back(digest_check);
+              jobp->checkers.push_back(digest_check);
           }
           else
           {
               // if the index checksum is empty too, we only add the checker
               // if the  AlwaysVerifyChecksum option is set on
-              if ( (*it_res)->flags & FetcherJob::AlwaysVerifyChecksum )
+              if ( jobp->flags & FetcherJob::AlwaysVerifyChecksum )
               {
                   // add the checker with the empty checksum
-                  ChecksumFileChecker digest_check((*it_res)->location.checksum());
-                  (*it_res)->checkers.push_back(digest_check);
+                  ChecksumFileChecker digest_check(jobp->location.checksum());
+                  jobp->checkers.push_back(digest_check);
               }
           }
       }
       else
       {
           // checksum is not empty, so add a checksum checker
-          ChecksumFileChecker digest_check((*it_res)->location.checksum());
-          (*it_res)->checkers.push_back(digest_check);
+          ChecksumFileChecker digest_check(jobp->location.checksum());
+          jobp->checkers.push_back(digest_check);
       }
 
       // validate job, this throws if not valid
-      validate((*it_res)->location, dest_dir, (*it_res)->checkers);
+      validate(jobp->location, dest_dir, jobp->checkers);
 
       if ( ! progress.incr() )
         ZYPP_THROW(AbortRequestException());
