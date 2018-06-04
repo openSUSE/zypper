@@ -6,6 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 #include <iostream>
+#include <sstream>
 
 #include <zypp/base/Algorithm.h>
 #include <zypp/ZYpp.h>
@@ -27,6 +28,7 @@
 
 extern ZYpp::Ptr God;
 
+void printHeader ( Zypper &zypper_r, const ui::Selectable &s_r );
 void printPkgInfo( Zypper & zypper, const ui::Selectable & s );
 void printPatchInfo( Zypper & zypper, const ui::Selectable & s );
 void printPatternInfo( Zypper & zypper, const ui::Selectable & s );
@@ -253,17 +255,6 @@ void printInfo( Zypper & zypper, ResKindSet kinds_r )
     {
       const ui::Selectable & sel( *(*it) );
 
-      if ( zypper.out().type() != Out::TYPE_XML )
-      {
-	// TranslatorExplanation E.g. "Information for package zypper:"
-	std::string info = str::Format(_("Information for %s %s:"))
-				 % kind_to_string_localized( sel.kind(), 1 )
-				 % sel.name();
-
-	cout << endl << info << endl;
-	cout << std::string( mbs_width(info), '-' ) << endl;
-      }
-
       if      ( sel.kind() == ResKind::package )	{ printPkgInfo( zypper, sel ); }
       else if ( sel.kind() == ResKind::patch )		{ printPatchInfo( zypper, sel ); }
       else if ( sel.kind() == ResKind::pattern )	{ printPatternInfo( zypper, sel ); }
@@ -294,7 +285,22 @@ void printDefaultInfo( Zypper & zypper, const ui::Selectable & s )
   printCommonData( theone, p );
 
   printSummaryDescDeps( theone, p );
+  printHeader ( zypper, s );
   zypper.out().info( str::Str() << p );
+}
+
+void printHeader (Zypper &zypper_r, const ui::Selectable &s_r )
+{
+  if ( zypper_r.out().type() != Out::TYPE_XML )
+  {
+    // TranslatorExplanation E.g. "Information for package zypper:"
+    std::string info = str::Format(_("Information for %s %s:"))
+                             % kind_to_string_localized( s_r.kind(), 1 )
+                             % s_r.name();
+
+    cout << endl << info << endl;
+    cout << std::string( mbs_width(info), '-' ) << endl;
+  }
 }
 
 /**
@@ -318,6 +324,7 @@ Description    :
  */
 void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
 {
+  const auto & cOpts( zypper.cOpts() );
   PoolItem installed( s.installedObj() );
   PoolItem updateCand( s.updateCandidateObj() );
   // An updateCandidate is always better than any installed object.
@@ -358,6 +365,59 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
   p.add( _("Source package"),	package->sourcePkgLongName() );
 
   printSummaryDescDeps( theone, p );
+
+  if ( cOpts.count( "filelist" ) ) {
+    p.lst ( _("Filelist"), asKind<Package>( installed ? installed : theone )->filelist() );
+  }
+
+  if ( cOpts.count("changelog") || cOpts.count("full-changelog") ) {
+
+    std::list< std::string > entries;
+    bool fullChangelog = cOpts.count("full-changelog");
+
+    //show only the new entries if we have a installed and upgrade candidate
+    if ( !fullChangelog && updateCand && installed && !updateCand.identical(installed) ) {
+      Changelog installedLog = asKind<Package>( installed )->changelog();
+      Changelog updateLog = asKind<Package>( updateCand )->changelog();
+
+      Changelog::const_iterator instIt = installedLog.begin();
+      for ( Changelog::const_iterator updateIt = updateLog.begin();
+            updateIt != updateLog.end();
+            updateIt++) {
+
+        std::stringstream str;
+        str << *updateIt;
+        entries.push_back( str.str() );
+
+        if ( (*updateIt).date().operator time_t() == instIt->date() )
+          break;
+
+        // show max of 10 entries
+        if ( entries.size() >= 10 )
+          break;
+      }
+    } else {
+      Changelog log = asKind<Package>( theone )->changelog();
+
+      for ( const ChangelogEntry &entry : log ) {
+        std::stringstream str;
+        str << entry;
+        entries.push_back( str.str() );
+
+        // show max of 10 entries
+        if ( !fullChangelog && entries.size() >= 10 )
+          break;
+      }
+    }
+
+    if ( entries.size() ) {
+      p.lst ( _("Changelog"), entries );
+    } else {
+      p.addDetail ( _("Changelog"), _("No changelog available.") );
+    }
+  }
+
+  printHeader ( zypper, s );
   zypper.out().info( str::Str() << p );
 }
 
@@ -403,6 +463,7 @@ void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
   p.add( _("Interactive"),	patchInteractiveFlags( *patch ) );	// print interactive flags the same style as list-patches
 
   printSummaryDescDeps( theone, p );
+  printHeader ( zypper, s );
   zypper.out().info( str::Str() << p );
 }
 
@@ -488,6 +549,8 @@ void printPatternInfo( Zypper & zypper, const ui::Selectable & s )
       p.addDetail( _("Contents"),	str::Str() << t );
     }
   }
+
+  printHeader ( zypper, s );
   zypper.out().info( str::Str() << p );
 }
 
@@ -628,6 +691,8 @@ void printProductInfo( Zypper & zypper, const ui::Selectable & s )
   p.add( _("Short Name"),		product->shortName() );
 
   printSummaryDescDeps( theone, p );
+
+  printHeader ( zypper, s );
   zypper.out().info( str::Str() << p );
 }
 
@@ -713,5 +778,6 @@ void printSrcPackageInfo( Zypper & zypper, const ui::Selectable & s )
   }
   ///////////////////////////////////////////////////////////////////
 
+  printHeader ( zypper, s );
   zypper.out().info( str::Str() << p );
 }

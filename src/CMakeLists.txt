@@ -37,6 +37,7 @@ SET (zypper_HEADERS
   callbacks/rpm.h
   callbacks/repo.h
   callbacks/job.h
+  callbacks/package.h
 )
 
 SET( zypper_SRCS
