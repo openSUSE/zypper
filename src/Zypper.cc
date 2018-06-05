@@ -948,7 +948,7 @@ int Zypper::defaultLoadSystem( LoadSystemFlags flags_r )
     if ( exitCode() != ZYPPER_EXIT_OK )
       return exitCode();
 
-    if ( ! ( flags_r && NO_POOL ) )
+    if ( ! ( flags_r & NO_POOL ) )
     {
       // have REPOS and TARGET
       // compute status of PPP
