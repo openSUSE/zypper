@@ -71,6 +71,7 @@ namespace zypp
     };
 
     constexpr static const char * ACCEPT_PACKAGE_KEY_REQUEST = "KeyRingReport/AcceptPackageKey";
+    constexpr static const char *KEYS_NOT_IMPORTED_REPORT = "KeyRingReport/KeysNotImported";
 
     /**
      * Ask user to trust and/or import the key to trusted keyring.
@@ -114,6 +115,16 @@ namespace zypp
      *
      */
     bool askUserToAcceptPackageKey( const PublicKey &key_r, const KeyContext &keycontext_r = KeyContext() );
+
+    /**
+     * Notify the user about keys that were not imported from the
+     * rpm key database into zypp keyring
+     *
+     * The UserData object will have the following fields:
+     * std::set<Edition> "Keys"		 set of keys that were not imported
+     *
+     */
+     void reportNonImportedKeys( const std::set<Edition> &keys_r );
 
   };
 

@@ -1005,10 +1005,23 @@ void RpmDb::syncTrustedKeys( SyncTrustedKeyBits mode_r )
     try
     {
       getZYpp()->keyRing()->multiKeyImport( tmpfile.path(), true /*trusted*/);
+      // bsc#1096217: Try to spot and report legacy V3 keys found in the rpm database.
+      // Modern rpm does not import those keys, but when migrating a pre SLE12 system
+      // we may find them. rpm>4.13 even complains on sderr if sucha key is present.
+      std::set<Edition> missingKeys;
+      for ( const Edition & key : rpmKeys )
+      {
+	if ( getZYpp()->keyRing()->isKeyTrusted( key.version() ) ) // key.version is the gpgkeys short ID
+	  continue;
+	ERR << "Could not import key:" << str::Format("gpg-pubkey-%s") % key << " into zypp keyring (V3 key?)" << endl;
+	missingKeys.insert( key );
+      }
+      if ( ! missingKeys.empty() )
+        callback::SendReport<KeyRingReport>()->reportNonImportedKeys(missingKeys);
     }
     catch (Exception &e)
     {
-      ERR << "Could not import keys into in zypp keyring" << endl;
+      ERR << "Could not import keys into zypp keyring" << endl;
     }
   }
 

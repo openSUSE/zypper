@@ -91,6 +91,13 @@ namespace zypp
     return false;
   }
 
+  void KeyRingReport::reportNonImportedKeys(const std::set<Edition> &keys_r)
+  {
+    UserData data(KEYS_NOT_IMPORTED_REPORT);
+    data.set("Keys", keys_r);
+    report(data);
+  }
+
   namespace
   {
     ///////////////////////////////////////////////////////////////////

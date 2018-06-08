@@ -338,7 +338,11 @@ namespace zypp
   { return makeIterable( &(*_pimpl->_subkeys.begin()), &(*_pimpl->_subkeys.end()) ); }
 
   bool PublicKeyData::providesKey( const std::string & id_r ) const
-  { return( id_r == _pimpl->_id || _pimpl->hasSubkeyId( id_r ) ); }
+  {
+    if ( id_r.size() == 8 )	// as a convenience allow to test the 8byte short ID rpm uses as gpg-pubkey version
+      return str::endsWithCI( _pimpl->_id, id_r );
+    return( id_r == _pimpl->_id || _pimpl->hasSubkeyId( id_r ) );
+  }
 
   PublicKeyData::AsciiArt PublicKeyData::asciiArt() const
   { return AsciiArt( fingerprint() /* TODO: key algorithm could be added as top tile. */ ); }
