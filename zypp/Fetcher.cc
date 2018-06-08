@@ -184,11 +184,11 @@ namespace zypp
       void getDirectoryContent( MediaSetAccess &media, const OnMediaLocation &resource, filesystem::DirContent &content );
 
       /**
-       * tries to provide the file represented by job into dest_dir by
-       * looking at the cache. If success, returns true, and the desired
-       * file should be available on dest_dir
+       * Tries to locate the file represented by job by looking at
+       * the cache (matching checksum is mandatory). Returns the
+       * location of the cached file or an empty \ref Pathname.
        */
-      bool provideFromCache( const OnMediaLocation &resource, const Pathname &dest_dir );
+      Pathname locateInCache( const OnMediaLocation & resource_r, const Pathname & destDir_r );
       /**
        * Validates the provided file against its checkers.
        * \throws Exception
@@ -329,54 +329,34 @@ namespace zypp
 
   }
 
-  // tries to provide resource to dest_dir from any of the configured additional
-  // cache paths where the file may already be present. returns true if the
-  // file was provided from the cache.
-  bool Fetcher::Impl::provideFromCache( const OnMediaLocation &resource, const Pathname &dest_dir )
+  Pathname Fetcher::Impl::locateInCache( const OnMediaLocation & resource_r, const Pathname & destDir_r )
   {
-    Pathname dest_full_path = dest_dir + resource.filename();
+    Pathname ret;
+    // No checksum - no match
+    if ( resource_r.checksum().empty() )
+      return ret;
 
     // first check in the destination directory
-    if ( PathInfo(dest_full_path).isExist() )
+    Pathname cacheLocation = destDir_r / resource_r.filename();
+    if ( PathInfo(cacheLocation).isExist() && is_checksum( cacheLocation, resource_r.checksum() ) )
     {
-      if ( is_checksum( dest_full_path, resource.checksum() )
-           && (! resource.checksum().empty() ) )
-          return true;
+      swap( ret, cacheLocation );
+      return ret;
     }
 
     MIL << "start fetcher with " << _caches.size() << " cache directories." << endl;
-    for_ ( it_cache, _caches.begin(), _caches.end() )
+    for( const Pathname & cacheDir : _caches )
     {
-      // does the current file exists in the current cache?
-      Pathname cached_file = *it_cache + resource.filename();
-      if ( PathInfo( cached_file ).isExist() )
+      cacheLocation = cacheDir / resource_r.filename();
+      if ( PathInfo(cacheLocation).isExist() && is_checksum( cacheLocation, resource_r.checksum() ) )
       {
-        DBG << "File '" << cached_file << "' exist, testing checksum " << resource.checksum() << endl;
-         // check the checksum
-        if ( is_checksum( cached_file, resource.checksum() ) && (! resource.checksum().empty() ) )
-        {
-          // cached
-          MIL << "file " << resource.filename() << " found in previous cache. Using cached copy." << endl;
-          // checksum is already checked.
-          // we could later implement double failover and try to download if file copy fails.
-           // replicate the complete path in the target directory
-          if( dest_full_path != cached_file )
-          {
-            if ( assert_dir( dest_full_path.dirname() ) != 0 )
-              ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
-
-            if ( filesystem::hardlinkCopy(cached_file, dest_full_path ) != 0 )
-            {
-              ERR << "Can't hardlink/copy " << cached_file + " to " + dest_dir << endl;
-              continue;
-            }
-          }
-          // found in cache
-          return true;
-        }
+	MIL << "file " << resource_r.filename() << " found in cache " << cacheDir << endl;
+	swap( ret, cacheLocation );
+	return ret;
       }
-    } // iterate over caches
-    return false;
+    }
+
+    return ret;
   }
 
   void Fetcher::Impl::validate( const Pathname & localfile_r, const std::list<FileChecker> & checkers_r )
@@ -527,52 +507,54 @@ namespace zypp
   {
     const OnMediaLocation & resource( jobp_r->location );
 
-    if ( ! provideFromCache( resource, destDir_r ) )
+    try
     {
-      MIL << "Not found in cache, downloading" << endl;
+      scoped_ptr<MediaSetAccess::ReleaseFileGuard> releaseFileGuard; // will take care provided files get released
 
-      // try to get the file from the net
-      try
+      // get cached file (by checksum) or provide from media
+      Pathname tmpFile = locateInCache( resource, destDir_r );
+      if ( tmpFile.empty() )
       {
-        Pathname tmp_file = media_r.provideFile(resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT, jobp_r->deltafile );
-        Pathname dest_full_path = destDir_r + resource.filename();
-
-        if ( assert_dir( dest_full_path.dirname() ) != 0 )
-              ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
-
-        if ( filesystem::hardlinkCopy( tmp_file, dest_full_path ) != 0 )
-        {
-          if ( ! PathInfo(tmp_file).isExist() )
-              ERR << tmp_file << " does not exist" << endl;
-          if ( ! PathInfo(dest_full_path.dirname()).isExist() )
-              ERR << dest_full_path.dirname() << " does not exist" << endl;
-
-          media_r.releaseFile(resource); //not needed anymore, only eat space
-          ZYPP_THROW( Exception("Can't hardlink/copy " + tmp_file.asString() + " to " + destDir_r.asString()));
-        }
-
-        media_r.releaseFile(resource); //not needed anymore, only eat space
+	MIL << "Not found in cache, retrieving..." << endl;
+	tmpFile = media_r.provideFile( resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT, jobp_r->deltafile );
+	releaseFileGuard.reset( new MediaSetAccess::ReleaseFileGuard( media_r, resource ) ); // release it when we leave the block
       }
-      catch (Exception & excpt_r)
+
+      // The final destination: locateInCache also checks destFullPath!
+      // If we find a cache match (by checksum) at destFullPath, take
+      // care it gets deleted, in case the validation fails.
+      ManagedFile destFullPath( destDir_r / resource.filename() );
+      if ( tmpFile == destFullPath )
+	destFullPath.setDispose( filesystem::unlink );
+
+      // validate the file (throws if not valid)
+      validate( tmpFile, jobp_r->checkers );
+
+      // move it to the final destination
+      if ( tmpFile == destFullPath )
+	destFullPath.resetDispose();	// keep it!
+      else
       {
-        if ( resource.optional() )
-        {
-	    ZYPP_CAUGHT(excpt_r);
-            WAR << "optional resource " << resource << " could not be transferred" << endl;
-            return;
-        }
-        else
-        {
-	    excpt_r.remember("Can't provide " + resource.filename().asString() );
-            ZYPP_RETHROW(excpt_r);
-        }
+	if ( assert_dir( destFullPath->dirname() ) != 0 )
+	  ZYPP_THROW( Exception( "Can't create " + destFullPath->dirname().asString() ) );
+
+	if ( filesystem::hardlinkCopy( tmpFile, destFullPath ) != 0 )
+	  ZYPP_THROW( Exception( "Can't hardlink/copy " + tmpFile.asString() + " to " + destDir_r.asString() ) );
       }
     }
-    else
+    catch ( Exception & excpt )
     {
-      // We got the file from cache
-      // continue with next file
-        return;
+      if ( resource.optional() )
+      {
+	ZYPP_CAUGHT( excpt );
+	WAR << "optional resource " << resource << " could not be transferred." << endl;
+	return;
+      }
+      else
+      {
+	excpt.remember( "Can't provide " + resource.filename().asString() );
+	ZYPP_RETHROW( excpt );
+      }
     }
   }
 
@@ -780,13 +762,6 @@ namespace zypp
           autoaddIndexes(content, media, Pathname("/"), dest_dir);
       }
 
-      provideToDest( media, dest_dir, jobp );
-
-      // if the file was not transferred, and no exception, just
-      // return, as it was an optional file
-      if ( ! PathInfo(dest_dir + jobp->location.filename()).isExist() )
-          continue;
-
       // if the checksum is empty, but the checksum is in one of the
       // indexes checksum, then add a checker
       if ( jobp->location.checksum().empty() )
@@ -817,8 +792,9 @@ namespace zypp
           jobp->checkers.push_back(digest_check);
       }
 
-      // validate job, this throws if not valid
-      validate( dest_dir / jobp->location.filename(), jobp->checkers );
+      // Provide and validate the file. If the file was not transferred
+      // and no exception was thrown, it was an optional file.
+      provideToDest( media, dest_dir, jobp );
 
       if ( ! progress.incr() )
         ZYPP_THROW(AbortRequestException());
