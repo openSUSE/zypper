@@ -232,10 +232,10 @@ namespace zypp
     {
       static const char * black[] = {
           "/SYSV"
-        , "/var/run/"
-        , "/var/lib/sss/"
+        , "/var/"
         , "/dev/"
-        , "/var/lib/gdm"
+        , "/tmp/"
+        , "/proc/"
       };
       for_( it, arrayBegin( black ), arrayEnd( black ) )
       {
