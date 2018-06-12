@@ -149,6 +149,11 @@ namespace zypp
        */
       void setRepoCachePath ( const Pathname &path_r );
 
+      /**
+       * Path where the pubkey caches
+       */
+      Pathname pubkeyCachePath() const;
+
      /**
        * Path where the repo metadata is downloaded and kept (repoCachePath()/raw).
         * \ingroup g_ZC_REPOCACHE
@@ -517,7 +522,7 @@ namespace zypp
       class Impl;
       /** Dtor */
       ~ZConfig();
-    private:
+  private:
       friend class Impl;
       /** Default ctor. */
       ZConfig();
