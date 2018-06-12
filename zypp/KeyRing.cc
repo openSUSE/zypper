@@ -79,6 +79,18 @@ namespace zypp
   bool KeyRingReport::askUserToAcceptVerificationFailed( const std::string & file, const PublicKey & key, const KeyContext & keycontext )
   { return _keyRingDefaultAccept.testFlag( KeyRing::ACCEPT_VERIFICATION_FAILED ); }
 
+  bool KeyRingReport::askUserToAcceptPackageKey(const PublicKey &key_r, const KeyContext &keycontext_r)
+  {
+    UserData data(ACCEPT_PACKAGE_KEY_REQUEST);
+    data.set("PublicKey", key_r);
+    data.set("KeyContext", keycontext_r);
+    report(data);
+
+    if ( data.hasvalue("TrustKey") )
+      return data.get<bool>("TrustKey");
+    return false;
+  }
+
   namespace
   {
     ///////////////////////////////////////////////////////////////////

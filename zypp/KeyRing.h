@@ -70,6 +70,8 @@ namespace zypp
       KEY_TRUST_AND_IMPORT
     };
 
+    const char * ACCEPT_PACKAGE_KEY_REQUEST = "KeyRingReport/AcceptPackageKey";
+
     /**
      * Ask user to trust and/or import the key to trusted keyring.
      * \see KeyTrust
@@ -95,6 +97,23 @@ namespace zypp
      * \param filedesc Filename or its description.
      */
     virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key, const KeyContext &keycontext = KeyContext() );
+
+    /**
+     * Ask user to trust and/or import the package key to trusted keyring, using ReportBase::report
+     *
+     * The UserData object will have the following fields:
+     * "PublicKey"		The PublicKey to be accepted
+     * "KeyContext"		The KeyContext
+     *
+     * Userdata accepted:
+     * "TrustKey"			bool user can either trust or not trust the key
+     *
+     * \see KeyTrust
+     * \sa ReportBase::report
+     * \note this is a non virtual function and will use ReportBase::report to send the report.
+     *
+     */
+    bool askUserToAcceptPackageKey( const PublicKey &key_r, const KeyContext &keycontext_r = KeyContext() );
 
   };
 
