@@ -319,6 +319,9 @@ namespace zypp
   std::string PublicKeyData::gpgPubkeyRelease() const
   { return _pimpl->_created ? str::hexstring( _pimpl->_created ).substr(2) : std::string(); }
 
+  std::string PublicKeyData::rpmName() const
+  { return str::Format( "gpg-pubkey-%1%-%2%" ) % gpgPubkeyVersion() % gpgPubkeyRelease();  }
+
   std::string PublicKeyData::asString() const
   {
     str::Str str;
@@ -540,6 +543,9 @@ namespace zypp
 
   std::string PublicKey::asString() const
   { return keyData().asString(); }
+
+  std::string PublicKey::rpmName() const
+  { return keyData().rpmName(); }
 
   bool PublicKey::operator==( const PublicKey & rhs ) const
   { return rhs.keyData() == keyData(); }

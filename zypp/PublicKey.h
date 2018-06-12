@@ -193,6 +193,9 @@ namespace zypp
     /** Gpg-pubkey release as computed by rpm (hexencoded \ref created) */
     std::string gpgPubkeyRelease() const;
 
+    /** Gpg-pubkey name as computed by rpm*/
+    std::string rpmName () const;
+
     /** Gpg-pubkey \ref Edition built from version and release.*/
     Edition gpgPubkeyEdition() const
     { return Edition( gpgPubkeyVersion(), gpgPubkeyRelease() ); }
@@ -316,6 +319,7 @@ namespace zypp
     std::string gpgPubkeyVersion() const;	//!< \see \ref PublicKeyData
     std::string gpgPubkeyRelease() const;	//!< \see \ref PublicKeyData
     std::string asString() const;		//!< \see \ref PublicKeyData
+    std::string rpmName () const;
 
     Edition gpgPubkeyEdition() const		///!< \see \ref PublicKeyData
     { return keyData().gpgPubkeyEdition(); }
