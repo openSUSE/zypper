@@ -161,6 +161,12 @@ public:
   std::string tag_posttransprog()const;
   std::string tag_sourcerpm()    const;
 
+  /**
+   * Uses headerFormat to query the signature info from the header.
+   * \note Query copied from Yum misc/checksig.py
+   */
+  std::string signatureKeyID()   const;
+
   /** just the list of names  */
   std::list<std::string> tag_filenames() const;
 

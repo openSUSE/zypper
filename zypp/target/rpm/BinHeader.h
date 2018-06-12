@@ -88,6 +88,7 @@ public:
   int int_val( tag tag_r ) const;
 
   std::string string_val( tag tag_r ) const;
+  std::string format ( const char * fmt) const;
 
 public:
 

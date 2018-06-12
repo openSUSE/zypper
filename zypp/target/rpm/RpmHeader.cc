@@ -876,6 +876,26 @@ std::string RpmHeader::tag_sourcerpm() const
   return string_val( RPMTAG_SOURCERPM );
 }
 
+std::string RpmHeader::signatureKeyID() const
+{
+  std::string sigInfo = format("%|DSAHEADER?{%{DSAHEADER:pgpsig}}:{%|RSAHEADER?{%{RSAHEADER:pgpsig}}:{%|SIGGPG?{%{SIGGPG:pgpsig}}:{%|SIGPGP?{%{SIGPGP:pgpsig}}:{(none)}|}|}|}|");
+
+  //no signature, return empty string
+  if ( sigInfo == "(none)" )
+    return std::string();
+
+  std::vector<std::string> words;
+  str::split( sigInfo, std::back_inserter(words), ",");
+  if ( words.size() < 3)
+    return std::string();
+
+  const std::string &keyId = words[2];
+  if ( !str::startsWith(keyId, " Key ID "))
+    return std::string();
+
+  return str::toUpper( words[2].substr(8) );
+}
+
 ///////////////////////////////////////////////////////////////////
 //
 //
