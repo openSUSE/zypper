@@ -20,6 +20,7 @@
 
 #include <solv/solvversion.h>
 
+#include "zypp/base/String.h"
 #include "zypp/base/InputStream.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/base/Gettext.h"
@@ -38,6 +39,7 @@
 #include "zypp/MediaSetAccess.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/ManagedFile.h"
+#include "zypp/KeyManager.h"
 
 #include "zypp/parser/RepoFileReader.h"
 #include "zypp/parser/ServiceFileReader.h"

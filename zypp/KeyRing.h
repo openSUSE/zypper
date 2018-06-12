@@ -70,7 +70,7 @@ namespace zypp
       KEY_TRUST_AND_IMPORT
     };
 
-    const char * ACCEPT_PACKAGE_KEY_REQUEST = "KeyRingReport/AcceptPackageKey";
+    constexpr static const char * ACCEPT_PACKAGE_KEY_REQUEST = "KeyRingReport/AcceptPackageKey";
 
     /**
      * Ask user to trust and/or import the key to trusted keyring.

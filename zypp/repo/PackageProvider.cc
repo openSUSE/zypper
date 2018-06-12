@@ -31,6 +31,7 @@
 #include "zypp/Target.h"
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/FileChecker.h"
+#include "zypp/target/rpm/RpmHeader.h"
 
 using std::endl;
 
@@ -202,7 +203,7 @@ namespace zypp
       //@{
       void rpmSigFileChecker( const Pathname & file_r ) const
       {
-	const RepoInfo & info = _package->repoInfo();
+	RepoInfo info = _package->repoInfo();
 	if ( info.pkgGpgCheck() )
 	{
 	  UserData userData( "pkgGpgCheck" );
@@ -210,10 +211,77 @@ namespace zypp
 	  userData.set( "ResObject", roptr );		// a type for '_package->asKind<ResObject>()'...
 	  /*legacy:*/userData.set( "Package", roptr->asKind<Package>() );
 	  userData.set( "Localpath", file_r );
-	  RpmDb::CheckPackageResult res = packageSigCheck( file_r, info.pkgGpgCheckIsMandatory(), userData );
 
-	  // publish the checkresult, even if it is OK. Apps may want to report something...
-	  report()->pkgGpgCheck( userData );
+	  RpmDb::CheckPackageResult res = RpmDb::CHK_NOKEY;
+	  while ( res == RpmDb::CHK_NOKEY ) {
+	    res = packageSigCheck( file_r, info.pkgGpgCheckIsMandatory(), userData );
+
+            // publish the checkresult, even if it is OK. Apps may want to report something...
+            report()->pkgGpgCheck( userData );
+
+            if ( res == RpmDb::CHK_NOKEY ) {
+              // if the check fails because we don't know the key
+              // we try to resolv it with gpgkey urls from the
+              // repository, if available
+
+              target::rpm::RpmHeader::constPtr hr = target::rpm::RpmHeader::readPackage( file_r );
+              if ( !hr ) {
+                // we did not find any information about the key in the header
+                // this should never happen
+                WAR << "Unable to read package header from " << hr << endl;
+                break;
+              }
+
+              std::string keyID = hr->signatureKeyID();
+              if ( keyID.length() > 0 ) {
+                const ZConfig &conf = ZConfig::instance();
+                Pathname cacheDir = conf.repoManagerRoot() / conf.pubkeyCachePath();
+
+                Pathname myKey = info.provideKey ( keyID, cacheDir );
+                if ( myKey.empty()  )
+                  // if we did not find any keys, there is no point in checking again, break
+                  break;
+
+                callback::SendReport<KeyRingReport> report;
+
+                PublicKey key;
+                try {
+                  key = PublicKey( myKey );
+                } catch ( const Exception &e ) {
+                  ZYPP_CAUGHT(e);
+                  break;
+                }
+
+                if ( !key.isValid() ) {
+                  ERR << "Key [" << keyID << "] from cache: " << cacheDir << " is not valid" << endl;
+                  break;
+                }
+
+                MIL << "Key [" << keyID << "] " << key.name() << " loaded from cache" << endl;
+
+                KeyContext context;
+                context.setRepoInfo( info );
+                if ( ! report->askUserToAcceptPackageKey( key, context ) ) {
+                  break;
+                }
+
+                MIL << "User wants to import key [" << keyID << "] " << key.name() << " from cache" << endl;
+                KeyRing_Ptr theKeyRing = getZYpp()->keyRing();
+                try {
+                  theKeyRing->importKey( key, true );
+                } catch ( const KeyRingException &e ) {
+                  ZYPP_CAUGHT(e);
+                  ERR << "Failed to import key: "<<keyID;
+                  break;
+                }
+              } else {
+                // we did not find any information about the key in the header
+                // this should never happen
+                WAR << "packageSigCheck returned without setting providing missing key information" << endl;
+                break;
+              }
+            }
+          }
 
 	  if ( res != RpmDb::CHK_OK )
 	  {
