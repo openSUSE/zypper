@@ -734,7 +734,7 @@ namespace zypp
     /**
      * check files checksum
      *
-     * @return true if the checksum matchs
+     * @return true if the checksum matches (an empty Checksum always matches!)
      **/
     bool is_checksum( const Pathname & file, const CheckSum &checksum );
 

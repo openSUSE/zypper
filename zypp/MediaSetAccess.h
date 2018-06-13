@@ -218,6 +218,36 @@ namespace zypp
        */
       void releaseFile(const Pathname & file, unsigned media_nr = 1 );
 
+      ///////////////////////////////////////////////////////////////////
+      /// \class MediaSetAccess::ReleaseFileGuard
+      /// \brief Release a provided file upon destruction.
+      /// In case you don't want to wait until the \ref MediaSetAccess
+      /// itself goes out of scope.
+      /// \code
+      ///   MediaSetAccess media;
+      ///   OnMediaLocation loc;
+      ///   {
+      ///   	Pathname file = media.provideFile( loc );
+      ///   	ReleaseFileGuard guard( media, loc );
+      ///   }   // provided file is released here.
+      /// \endcode
+      /// \ingroup g_RAII
+      ///////////////////////////////////////////////////////////////////
+      struct ReleaseFileGuard
+      {
+	NON_COPYABLE( ReleaseFileGuard );
+	NON_MOVABLE( ReleaseFileGuard );
+	ReleaseFileGuard( MediaSetAccess & media_r, const OnMediaLocation & loc_r )
+	: _media( media_r )
+	, _loc( loc_r )
+	{}
+	~ReleaseFileGuard()
+	{ _media.releaseFile( _loc ); }
+      private:
+	MediaSetAccess & _media;
+	const OnMediaLocation & _loc;
+      };
+
       /**
        * Provides direcotry \a dir from media number \a media_nr.
        *
