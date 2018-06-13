@@ -368,11 +368,15 @@ namespace {
     if ( !out.typeNORMAL() || out.verbosity() < Out::NORMAL )
       return;
 
+    // Don't hint to a subcommand if --root is used (subcommands do not support global opts)
+    if ( zypper.globalOpts().changedRoot )
+      return;
+
     ui::Selectable::Ptr plg;
     if ( ResPool::instance().empty() )
     {
       // No pool - maybe 'zypper help search': Hint if plugin script is installed
-      if ( !PathInfo( Pathname::assertprefix( zypper.globalOpts().root_dir, "/usr/lib/zypper/commands/zypper-search-packages" ) ).isFile() )
+      if ( !PathInfo( "/usr/lib/zypper/commands/zypper-search-packages" ).isFile() )
 	return;
     }
     else
