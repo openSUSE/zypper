@@ -159,7 +159,7 @@ BOOST_AUTO_TEST_CASE(fetcher_enqueue_digested_broken_with_autoindex)
       // add the key as trusted
       getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir-broken/subdir1/SHA1SUMS.key"), true);
       fetcher.setOptions( Fetcher::AutoAddIndexes );
-      fetcher.enqueueDigested(OnMediaLocation("/complexdir-broken/subdir1/subdir1-file1.txt"));
+      fetcher.enqueueDigested(OnMediaLocation("/complexdir-broken/subdir1/subdir1-file2.txt"));
       BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
       fetcher.reset();
   }
@@ -357,10 +357,12 @@ BOOST_AUTO_TEST_CASE(enqueuedir_http)
 
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir2").isExist() );
 
+      // unprocessed after failure:
       BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir-broken/subdir2/subdir2-file1.txt").isExist() );
 
       // this one got transferred before the failure, so it is there
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file1.txt").isExist() );
+      // broken:
       BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file2.txt").isExist() );
 
       fetcher.reset();
