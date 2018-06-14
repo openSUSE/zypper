@@ -144,11 +144,22 @@ namespace zypp
        */
       Pathname repoCachePath() const;
 
+      /**
+       * Set a new \a path as the default repo cache path
+       */
+      void setRepoCachePath ( const Pathname &path_r );
+
      /**
        * Path where the repo metadata is downloaded and kept (repoCachePath()/raw).
         * \ingroup g_ZC_REPOCACHE
       */
       Pathname repoMetadataPath() const;
+
+
+      /**
+       * Set a new \a path as the default repo cache path
+       */
+      void setRepoMetadataPath ( const Pathname &path_r );
 
      /**
        * Path where the repo solv files are created and kept (repoCachePath()/solv).
@@ -157,10 +168,20 @@ namespace zypp
       Pathname repoSolvfilesPath() const;
 
       /**
+       * Set a new \a path as the default repo cache path
+       */
+      void setRepoSolvfilesPath ( const Pathname &path_r );
+
+      /**
        * Path where the repo packages are downloaded and kept (repoCachePath()/packages).
         * \ingroup g_ZC_REPOCACHE
       */
       Pathname repoPackagesPath() const;
+
+      /**
+       * Set a new \a path as the default repo cache path
+       */
+      void setRepoPackagesPath ( const Pathname &path_r );
 
       /**
        * Path where the configfiles are kept (/etc/zypp).

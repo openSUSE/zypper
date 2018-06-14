@@ -912,10 +912,20 @@ namespace zypp
         ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path );
   }
 
+  void ZConfig::setRepoCachePath(const zypp::filesystem::Pathname &path_r)
+  {
+    _pimpl->cfg_cache_path = path_r;
+  }
+
   Pathname ZConfig::repoMetadataPath() const
   {
     return ( _pimpl->cfg_metadata_path.empty()
         ? (repoCachePath()/"raw") : _pimpl->cfg_metadata_path );
+  }
+
+  void ZConfig::setRepoMetadataPath(const zypp::filesystem::Pathname &path_r)
+  {
+    _pimpl->cfg_metadata_path = path_r;
   }
 
   Pathname ZConfig::repoSolvfilesPath() const
@@ -924,10 +934,20 @@ namespace zypp
         ? (repoCachePath()/"solv") : _pimpl->cfg_solvfiles_path );
   }
 
+  void ZConfig::setRepoSolvfilesPath(const zypp::filesystem::Pathname &path_r)
+  {
+    _pimpl->cfg_solvfiles_path = path_r;
+  }
+
   Pathname ZConfig::repoPackagesPath() const
   {
     return ( _pimpl->cfg_packages_path.empty()
         ? (repoCachePath()/"packages") : _pimpl->cfg_packages_path );
+  }
+
+  void ZConfig::setRepoPackagesPath(const zypp::filesystem::Pathname &path_r)
+  {
+    _pimpl->cfg_packages_path = path_r;
   }
 
   ///////////////////////////////////////////////////////////////////
