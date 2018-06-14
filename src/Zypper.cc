@@ -1360,22 +1360,30 @@ void Zypper::processGlobalOptions()
 
   // cache dirs
 
+  ZConfig &zconfig = ZConfig::instance();
   if ( (it = gopts.find("cache-dir")) != gopts.end() )
   {
-    _gopts.rm_options.repoCachePath		= it->second.front();
-    _gopts.rm_options.repoRawCachePath		= _gopts.rm_options.repoCachePath / "raw";
-    _gopts.rm_options.repoSolvCachePath		= _gopts.rm_options.repoCachePath / "solv";
-    _gopts.rm_options.repoPackagesCachePath	= _gopts.rm_options.repoCachePath / "packages";
+    zconfig.setRepoCachePath( it->second.front() );
+    _gopts.rm_options.repoCachePath		= zconfig.repoCachePath();
+    _gopts.rm_options.repoRawCachePath		= zconfig.repoMetadataPath();
+    _gopts.rm_options.repoSolvCachePath		= zconfig.repoSolvfilesPath();
+    _gopts.rm_options.repoPackagesCachePath	= zconfig.repoPackagesPath();
   }
 
-  if ( (it = gopts.find("raw-cache-dir")) != gopts.end() )
-    _gopts.rm_options.repoRawCachePath = it->second.front();
+  if ( (it = gopts.find("raw-cache-dir")) != gopts.end() ) {
+    zconfig.setRepoMetadataPath( it->second.front() );
+    _gopts.rm_options.repoRawCachePath = zconfig.repoMetadataPath();
+  }
 
-  if ( (it = gopts.find("solv-cache-dir")) != gopts.end() )
-    _gopts.rm_options.repoSolvCachePath = it->second.front();
+  if ( (it = gopts.find("solv-cache-dir")) != gopts.end() ){
+    zconfig.setRepoSolvfilesPath( it->second.front() );
+    _gopts.rm_options.repoSolvCachePath = zconfig.repoSolvfilesPath();
+  }
 
-  if ( (it = gopts.find("pkg-cache-dir")) != gopts.end() )
-    _gopts.rm_options.repoPackagesCachePath = it->second.front();
+  if ( (it = gopts.find("pkg-cache-dir")) != gopts.end() ){
+    zconfig.setRepoPackagesPath( it->second.front() );
+    _gopts.rm_options.repoPackagesCachePath = zconfig.repoPackagesPath();
+  }
 
   DBG << "repos.d dir = " << _gopts.rm_options.knownReposPath << endl;
   DBG << "cache dir = " << _gopts.rm_options.repoCachePath << endl;
