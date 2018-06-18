@@ -498,10 +498,10 @@ namespace zypp
       /** Package telling the "product version" on systems not using /etc/product.d/baseproduct.
        *
        * On RHEL, Fedora and others the "product version" is determined by the first package
-       * providing 'redhat-release'. This value is not hardcoded in YUM and can be configured
+       * providing 'system-release'. This value is not hardcoded in YUM and can be configured
        * with the $distroverpkg variable.
        *
-       * Defaults to 'redhat-release'.
+       * Defaults to 'system-release'.
        */
       std::string distroverpkg() const;
 
