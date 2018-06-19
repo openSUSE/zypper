@@ -68,9 +68,27 @@ public:
   Impl();
   ~Impl();
 
-  std::list<std::string> verifyAndReadSignaturesFprs(const Pathname & file, const Pathname & signature, bool &verifed);
+  /** Return all fingerprints found in \a signature_r. */
+  std::list<std::string> readSignaturesFprs( const Pathname & signature_r )
+  { return readSignaturesFprsOptVerify( signature_r ); }
+
+  /** Tries to verify the \a file_r using \a signature_r. */
+  bool verifySignaturesFprs( const Pathname & file_r, const Pathname & signature_r )
+  {
+    bool verify = false;
+    readSignaturesFprsOptVerify( signature_r, file_r, &verify );
+    return verify;
+  }
 
   gpgme_ctx_t _ctx;
+
+private:
+  /** Return all fingerprints found in \a signature_r and optionally verify the \a file_r on the fly.
+   *
+   * If \a verify_r is not a \c nullptr, log verification errors and return
+   * whether all signatures are good.
+   */
+  std::list<std::string> readSignaturesFprsOptVerify( const Pathname & signature_r, const Pathname & file_r = "/dev/null", bool * verify_r = nullptr );
 };
 
 KeyManagerCtx::Impl::Impl()
@@ -83,21 +101,17 @@ KeyManagerCtx::KeyManagerCtx()
 
 }
 
-/*
- * \brief KeyManagerCtx::Impl::verifyAndReadSignaturesFprs
- * Tries to verify the \a file using \a signature , will return all
- * signatures and sets \a verified to true if all signatures are good
- * \internal
- */
-std::list<std::string> KeyManagerCtx::Impl::verifyAndReadSignaturesFprs(const Pathname &file, const Pathname &signature, bool &verifed)
+std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const Pathname & signature_r, const Pathname & file_r, bool * verify_r )
 {
   //lets be pessimistic
-  verifed = false;
+  if ( verify_r )
+    *verify_r = false;
 
-  if (!PathInfo( signature ).isExist())
+
+  if (!PathInfo( signature_r ).isExist())
     return std::list<std::string>();
 
-  FILEPtr dataFile(fopen(file.c_str(), "rb"), fclose);
+  FILEPtr dataFile(fopen(file_r.c_str(), "rb"), fclose);
   if (!dataFile)
     return std::list<std::string>();
 
@@ -108,9 +122,9 @@ std::list<std::string> KeyManagerCtx::Impl::verifyAndReadSignaturesFprs(const Pa
     return std::list<std::string>();
   }
 
-  FILEPtr sigFile(fopen(signature.c_str(), "rb"), fclose);
+  FILEPtr sigFile(fopen(signature_r.c_str(), "rb"), fclose);
   if (!sigFile) {
-    ERR << "Unable to open signature file '" << signature << "'" <<endl;
+    ERR << "Unable to open signature file '" << signature_r << "'" <<endl;
     return std::list<std::string>();
   }
 
@@ -135,20 +149,23 @@ std::list<std::string> KeyManagerCtx::Impl::verifyAndReadSignaturesFprs(const Pa
 
   bool foundBadSignature = false;
   std::list<std::string> signatures;
-  gpgme_signature_t sig = res->signatures;
-  while (sig) {
+  for ( gpgme_signature_t sig = res->signatures; sig; sig = sig->next ) {
 
-    if (!foundBadSignature)
-      foundBadSignature = (sig->status != GPG_ERR_NO_ERROR);
+    if ( sig->fpr )
+      signatures.push_back(str::asString(sig->fpr));
 
-    if (!sig->fpr)
-      continue;
+    if ( sig->status != GPG_ERR_NO_ERROR )
+    {
+      if ( !foundBadSignature )
+	foundBadSignature = true;
 
-    signatures.push_back(str::asString(sig->fpr));
-    sig = sig->next;
+      if ( verify_r )
+	WAR << "Failed signature check: " << file_r << " " << GpgmeErr(sig->status) << endl;
+    }
   }
 
-  verifed = (!foundBadSignature);
+  if ( verify_r )
+    *verify_r = (!foundBadSignature);
   return signatures;
 }
 
@@ -260,9 +277,7 @@ bool KeyManagerCtx::verify(const Pathname &file, const Pathname &signature)
   if ( !PathInfo( file ).isExist() || !PathInfo( signature ).isExist() )
     return false;
 
-  bool verified = false;
-  _pimpl->verifyAndReadSignaturesFprs(file, signature, verified);
-  return verified;
+  return _pimpl->verifySignaturesFprs(file, signature);
 }
 
 bool KeyManagerCtx::exportKey(const std::string &id, std::ostream &stream)
@@ -382,13 +397,6 @@ bool KeyManagerCtx::deleteKey(const std::string &id)
 }
 
 std::list<std::string> KeyManagerCtx::readSignatureFingerprints(const Pathname &signature)
-{
-  //gpgme needs a dummy file to read signatures from a detached sig file
-  //verification will fail but we get all signatures
-  zypp::filesystem::TmpFile dummyFile;
-
-  bool verified = false;
-  return _pimpl->verifyAndReadSignaturesFprs(dummyFile.path(), signature, verified);
-}
+{ return _pimpl->readSignaturesFprs(signature); }
 
 }
