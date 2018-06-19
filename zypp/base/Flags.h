@@ -112,7 +112,7 @@ namespace zypp
         constexpr bool testFlag( Enum flag_r ) const	{ return testFlag( integral(flag_r) ); }
 
       private:
-	constexpr bool testFlag( Integral flag )	{ return flag ? ( _val & flag ) == flag : !_val; }
+	constexpr bool testFlag( Integral flag ) const	{ return flag ? ( _val & flag ) == flag : !_val; }
 
 	constexpr static Integral integral( Flags obj )	{ return obj._val; }
 	constexpr static Integral integral( Enum obj )	{ return static_cast<Integral>(obj); }
