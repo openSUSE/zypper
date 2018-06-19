@@ -156,11 +156,18 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
 
     if ( sig->status != GPG_ERR_NO_ERROR )
     {
-      if ( !foundBadSignature )
-	foundBadSignature = true;
-
-      if ( verify_r )
-	WAR << "Failed signature check: " << file_r << " " << GpgmeErr(sig->status) << endl;
+      if ( gpgme_err_code(sig->status) != GPG_ERR_KEY_EXPIRED )
+      {
+	if ( !foundBadSignature )
+	  foundBadSignature = true;
+	if ( verify_r )
+	  WAR << "Failed signature check: " << file_r << " " << GpgmeErr(sig->status) << endl;
+      }
+      else
+      {
+	if ( verify_r )
+	  WAR << "Legacy: Ignore expired key: " << file_r << " " << GpgmeErr(sig->status) << endl;
+      }
     }
   }
 
