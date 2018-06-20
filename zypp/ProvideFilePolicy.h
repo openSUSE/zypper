@@ -14,16 +14,18 @@
 
 #include "zypp/base/Function.h"
 #include "zypp/base/Functional.h"
+#include "zypp/FileChecker.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-// CLASS NAME : ProvideFilePolicy
-  
-  /** Policy for \ref provideFile.
-    * Provides callback hook for progress reporting.
-    */
+{
+  ///////////////////////////////////////////////////////////////////
+  /// \class ProvideFilePolicy
+  /// \brief Policy for \ref provideFile and \ref RepoMediaAccess.
+  ///
+  /// Provides callback hook for progress reporting and an optional
+  /// \ref FileCecker passed down to the \ref Fetcher.
+  ///////////////////////////////////////////////////////////////////
   class ProvideFilePolicy
   {
   public:
@@ -38,9 +40,16 @@ namespace zypp
     bool progress( int value ) const;
 
   public:
-    typedef function<bool ()> FailOnChecksumErrorCB;	///< Legacy to remain bincompat
+    /** Add a \ref FileCecker passed down to the \ref Fetcher */
+    ProvideFilePolicy & fileChecker( FileChecker fileChecker_r )
+    { _fileChecker = std::move(fileChecker_r); return *this; }
+
+    /** The \ref FileCecker. */
+    const FileChecker & fileChecker() const
+    { return _fileChecker; }
+
   private:
-    FailOnChecksumErrorCB _failOnChecksumErrorCB;	///< Legacy to remain bincompat
+    FileChecker           _fileChecker;
     ProgressCB            _progressCB;
   };
 
