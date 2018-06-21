@@ -322,12 +322,10 @@ namespace zypp
         }
         catch ( const UserRequestException & excpt )
 	{
-	  ZYPP_CAUGHT( excpt );
 	  ZYPP_RETHROW( excpt );
 	}
         catch ( const FileCheckException & excpt )
 	{
-	  ZYPP_CAUGHT( excpt );
 	  ZYPP_RETHROW( excpt );
 	}
         catch ( const Exception &e )
