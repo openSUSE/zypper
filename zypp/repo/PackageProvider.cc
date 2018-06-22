@@ -41,6 +41,27 @@ namespace zypp
   namespace repo
   {
     ///////////////////////////////////////////////////////////////////
+    /// \class RpmSigCheckException
+    /// \brief Exception thrown by \ref PackageProviderImpl::rpmSigFileChecker
+    ///////////////////////////////////////////////////////////////////
+    class RpmSigCheckException : public FileCheckException
+    {
+    public:
+      RpmSigCheckException( repo::DownloadResolvableReport::Action action_r, std::string msg_r = "RpmSigCheckException" )
+      : FileCheckException( std::move(msg_r) )
+      , _action( std::move(action_r) )
+      {}
+
+      /** Users final decision how to proceed */
+      const repo::DownloadResolvableReport::Action & action() const
+      { return _action; }
+
+    private:
+      repo::DownloadResolvableReport::Action _action;
+    };
+
+
+    ///////////////////////////////////////////////////////////////////
     //	class PackageProviderPolicy
     ///////////////////////////////////////////////////////////////////
 
@@ -151,6 +172,7 @@ namespace zypp
 
 	ProvideFilePolicy policy;
 	policy.progressCB( bind( &Base::progressPackageDownload, this, _1 ) );
+	policy.fileChecker( bind( &Base::rpmSigFileChecker, this, _1 ) );
 	return _access.provideFile( _package->repoInfo(), loc, policy );
       }
 
@@ -163,8 +185,72 @@ namespace zypp
       bool progressPackageDownload( int value ) const
       {	return report()->progress( value, _package ); }
 
+
+      /** \name Validate a rpm packages signature.
+       *
+       * This is the \ref FileChecker passed down to the \ref Fetcher to validate
+       * a provided rpm package. This builtin checker includes the workflow
+       * communicating with the user in case of a problem with the package
+       * signature.
+       *
+       * \throws RpmSigCheckException if the package is not accepted, propagating
+       * the users decision how to proceed (\ref DownloadResolvableReport::Action).
+       *
+       * \note This check is also needed, if the the rpm is built locally by using
+       * delta rpms! \ref \see RpmPackageProvider
+       */
+      //@{
+      void rpmSigFileChecker( const Pathname & file_r ) const
+      {
+	const RepoInfo & info = _package->repoInfo();
+	if ( info.pkgGpgCheck() )
+	{
+	  UserData userData( "pkgGpgCheck" );
+	  ResObject::constPtr roptr( _package );	// gcc6 needs it more explcit. Has problem deducing
+	  userData.set( "ResObject", roptr );		// a type for '_package->asKind<ResObject>()'...
+	  /*legacy:*/userData.set( "Package", roptr->asKind<Package>() );
+	  userData.set( "Localpath", file_r );
+	  RpmDb::CheckPackageResult res = packageSigCheck( file_r, info.pkgGpgCheckIsMandatory(), userData );
+
+	  // publish the checkresult, even if it is OK. Apps may want to report something...
+	  report()->pkgGpgCheck( userData );
+
+	  if ( res != RpmDb::CHK_OK )
+	  {
+	    if ( userData.hasvalue( "Action" ) )	// pkgGpgCheck report provided an user error action
+	    {
+	      resolveSignatureErrorAction( userData.get( "Action", repo::DownloadResolvableReport::ABORT ) );
+	    }
+	    else if ( userData.haskey( "Action" ) )	// pkgGpgCheck requests the default problem report (wo. details)
+	    {
+	      defaultReportSignatureError( res );
+	    }
+	    else					// no advice from user => usedefaults
+	    {
+	      switch ( res )
+	      {
+		case RpmDb::CHK_OK:		// Signature is OK
+		  break;
+
+		case RpmDb::CHK_NOKEY:		// Public key is unavailable
+		case RpmDb::CHK_NOTFOUND:	// Signature is unknown type
+		case RpmDb::CHK_FAIL:		// Signature does not verify
+		case RpmDb::CHK_NOTTRUSTED:	// Signature is OK, but key is not trusted
+		case RpmDb::CHK_ERROR:		// File does not exist or can't be opened
+		case RpmDb::CHK_NOSIG:		// File is unsigned
+		default:
+		  // report problem (w. details), throw if to abort, else retry/ignore
+		  defaultReportSignatureError( res, str::Str() << userData.get<RpmDb::CheckPackageDetail>( "CheckPackageDetail" ) );
+		  break;
+	      }
+	    }
+	  }
+	}
+      }
+
       typedef target::rpm::RpmDb RpmDb;
 
+      /** Actual rpm package signature check. */
       RpmDb::CheckPackageResult packageSigCheck( const Pathname & path_r, bool isMandatory_r, UserData & userData ) const
       {
 	if ( !_target )
@@ -189,22 +275,20 @@ namespace zypp
 	return ret;
       }
 
-      /** React on signature verification error user action
+      /** React on signature verification error user action.
        * \note: IGNORE == accept insecure file (no SkipRequestException!)
        */
       void resolveSignatureErrorAction( repo::DownloadResolvableReport::Action action_r ) const
       {
 	switch ( action_r )
 	{
-	  case repo::DownloadResolvableReport::RETRY:
-	    _retry = true;
-	    break;
 	  case repo::DownloadResolvableReport::IGNORE:
 	    WAR << _package->asUserString() << ": " << "User requested to accept insecure file" << endl;
 	    break;
 	  default:
+	  case repo::DownloadResolvableReport::RETRY:
 	  case repo::DownloadResolvableReport::ABORT:
-	    ZYPP_THROW(AbortRequestException("User requested to abort"));
+	    ZYPP_THROW(RpmSigCheckException(action_r,"Signature verification failed"));
 	    break;
 	}
       }
@@ -218,6 +302,7 @@ namespace zypp
 	  msg << "\n" << detail_r;
 	resolveSignatureErrorAction( report()->problem( _package, repo::DownloadResolvableReport::INVALID, msg.str() ) );
       }
+      //@}
 
     protected:
       PackageProviderPolicy	_policy;
@@ -307,50 +392,6 @@ namespace zypp
         try
           {
             ret = doProvidePackage();
-
-	    if ( info.pkgGpgCheck() )
-	    {
-	      UserData userData( "pkgGpgCheck" );
-	      ResObject::constPtr roptr( _package );	// gcc6 needs it more explcit. Has problem deducing
-	      userData.set( "ResObject", roptr );	// a type for '_package->asKind<ResObject>()'...
-	      /*legacy:*/userData.set( "Package", roptr->asKind<Package>() );
-	      userData.set( "Localpath", ret.value() );
-	      RpmDb::CheckPackageResult res = packageSigCheck( ret, info.pkgGpgCheckIsMandatory(), userData );
-
-	      // publish the checkresult, even if it is OK. Apps may want to report something...
-	      report()->pkgGpgCheck( userData );
-
-	      if ( res != RpmDb::CHK_OK )
-	      {
-		if ( userData.hasvalue( "Action" ) )	// pkgGpgCheck report provided an user error action
-		{
-		  resolveSignatureErrorAction( userData.get( "Action", repo::DownloadResolvableReport::ABORT ) );
-		}
-		else if ( userData.haskey( "Action" ) )	// pkgGpgCheck requests the default problem report (wo. details)
-		{
-		  defaultReportSignatureError( res );
-		}
-		else					// no advice from user => usedefaults
-		{
-		  switch ( res )
-		  {
-		    case RpmDb::CHK_OK:		// Signature is OK
-		      break;
-
-		    case RpmDb::CHK_NOKEY:	// Public key is unavailable
-		    case RpmDb::CHK_NOTFOUND:	// Signature is unknown type
-		    case RpmDb::CHK_FAIL:	// Signature does not verify
-		    case RpmDb::CHK_NOTTRUSTED:	// Signature is OK, but key is not trusted
-		    case RpmDb::CHK_ERROR:	// File does not exist or can't be opened
-		    case RpmDb::CHK_NOSIG:	// File is unsigned
-		    default:
-		      // report problem (w. details), throw if to abort, else retry/ignore
-		      defaultReportSignatureError( res, str::Str() << userData.get<RpmDb::CheckPackageDetail>( "CheckPackageDetail" ) );
-		      break;
-		  }
-		}
-	      }
-	    }
           }
         catch ( const UserRequestException & excpt )
           {
@@ -358,6 +399,28 @@ namespace zypp
 	    if ( ! _retry )
 	      ZYPP_RETHROW( excpt );
           }
+	catch ( const RpmSigCheckException & excpt )
+	  {
+	    ERR << "Failed to provide Package " << _package << endl;
+	    if ( ! _retry )
+	    {
+	      // Signature verification error was already reported by the
+	      // rpmSigFileChecker. Just handle the users action decision:
+	      switch ( excpt.action() )
+	      {
+		case repo::DownloadResolvableReport::RETRY:
+		  _retry = true;
+		  break;
+		case repo::DownloadResolvableReport::IGNORE:
+		  ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
+		  break;
+		default:
+		case repo::DownloadResolvableReport::ABORT:
+		  ZYPP_THROW(AbortRequestException("User requested to abort"));
+		  break;
+	      }
+	    }
+	  }
         catch ( const FileCheckException & excpt )
           {
 	    ERR << "Failed to provide Package " << _package << endl;
@@ -410,10 +473,6 @@ namespace zypp
       } while ( _retry );
       } catch(...){
 	// bsc#1045735: Be sure no invalid files stay in the cache!
-	// TODO: It would be better to provide a filechecker passed to the
-	// fetcher that performs the pkgGpgCheck. This way a bad file would be
-	// discarded before it's moved to the cache.
-	// For now make sure the file gets deleted (even if keeppackages=1).
 	if ( ! ret->empty() )
 	  ret.setDispose( filesystem::unlink );
 	throw;
