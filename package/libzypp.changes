@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Jun 25 10:48:55 CEST 2018 - ma@suse.de
+
+- Flags: make it std=c++14 ready
+- Replace 'redhat-release' with generic 'system-release' (#120)
+- Ignore /var, /tmp and /proc in zypper ps (bsc#1096617)
+- Show GPGME version in log
+- version 17.4.0 (2)
+
+-------------------------------------------------------------------
 Thu Apr 26 18:07:11 CEST 2018 - ma@suse.de
 
 - Avoid zombie tar processes (bsc#1076192)
