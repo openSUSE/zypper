@@ -523,17 +523,10 @@ namespace zypp
 
     ManagedFile RpmPackageProvider::doProvidePackage() const
     {
-      Url url;
-      RepoInfo info = _package->repoInfo();
-      // FIXME we only support the first url for now.
-      if ( info.baseUrlsEmpty() )
-        ZYPP_THROW(Exception("No url in repository."));
-      else
-        url = * info.baseUrlsBegin();
-
       // check whether to process patch/delta rpms
+      // FIXME we only check the first url for now.
       if ( ZConfig::instance().download_use_deltarpm()
-	&& ( url.schemeIsDownloading() || ZConfig::instance().download_use_deltarpm_always() ) )
+	&& ( _package->repoInfo().url().schemeIsDownloading() || ZConfig::instance().download_use_deltarpm_always() ) )
       {
 	std::list<DeltaRpm> deltaRpms;
 	_deltas.deltaRpms( _package ).swap( deltaRpms );
@@ -586,18 +579,28 @@ namespace zypp
           return ManagedFile();
         }
 
-      // build the package and put it into the cache
-      Pathname destination( _package->repoInfo().packagesPath() / _package->repoInfo().path() / _package->location().filename() );
+      // Build the package
+      Pathname cachedest( _package->repoInfo().packagesPath() / _package->repoInfo().path() / _package->location().filename() );
+      Pathname builddest( cachedest.extend( ".drpm" ) );
 
-      if ( ! applydeltarpm::provide( delta, destination,
+      if ( ! applydeltarpm::provide( delta, builddest,
                                      bind( &RpmPackageProvider::progressDeltaApply, this, _1 ) ) )
         {
           report()->problemDeltaApply( _("applydeltarpm failed.") );
           return ManagedFile();
         }
+      ManagedFile builddestCleanup( builddest, filesystem::unlink );
       report()->finishDeltaApply();
 
-      return ManagedFile( destination, filesystem::unlink );
+      // Check and move it into the cache
+      // Here the rpm itself is ready. If the packages sigcheck fails, it
+      // makes no sense to return a ManagedFile() and fallback to download the
+      // full rpm. It won't be different. So let the exceptions escape...
+      rpmSigFileChecker( builddest );
+      if ( filesystem::hardlinkCopy( builddest, cachedest ) != 0 )
+	ZYPP_THROW( Exception( str::Str() << "Can't hardlink/copy " << builddest << " to " << cachedest ) );
+
+      return ManagedFile( cachedest, filesystem::unlink );
     }
 
     ///////////////////////////////////////////////////////////////////
