@@ -14,6 +14,7 @@
 #include "callbacks/media.h"
 #include "callbacks/locks.h"
 #include "callbacks/job.h"
+#include "callbacks/package.h"
 #include "output/OutNormal.h"
 #include "utils/messages.h"
 
@@ -94,6 +95,7 @@ int main( int argc, char **argv )
     static DigestCallbacks digest_callbacks;
     static LocksCallbacks locks_callbacks;
     static JobCallbacks job_callbacks;
+    static PackageCallbacks package_callbacks;
   }
   catch ( const Exception & e )
   {

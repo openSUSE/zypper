@@ -175,6 +175,15 @@ Package Management Commands
 	*--suggests*::
 		Show symbols the package suggests.
 
+	*--filelist*::
+		Show the full filelist of the package.
+
+	*--changelog*::
+		If a update candidate is available show the new changelog entries, otherwise show the first 10.
+
+	*--full-changelog*::
+		Show the full changelog.
+
 	Examples: :: {nop}
 
 		$ *zypper info workrave*;;

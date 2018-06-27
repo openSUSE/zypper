@@ -2997,12 +2997,17 @@ void Zypper::processCommandOptions()
       {"conflicts", no_argument, 0, 0},
       {"obsoletes", no_argument, 0, 0},
       {"recommends", no_argument, 0, 0},
+      {"changelog", no_argument, 0, 0},
+      {"full-changelog", no_argument, 0, 0},
+      {"filelist", no_argument, 0, 0},
       {"suggests", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = info_options;
-    _command_help = str::form(_(
+
+    _command_help = (CommandHelpFormater()
+        << str::form(_(
         "info (if) [options] <name> ...\n"
         "\n"
         "Show detailed information for specified packages.\n"
@@ -3021,7 +3026,10 @@ void Zypper::processCommandOptions()
         "    --obsoletes           Show obsoletes.\n"
         "    --recommends          Show recommends.\n"
         "    --suggests            Show suggests.\n"
-      ), "package, patch, pattern, product", "package");
+      ), "package, patch, pattern, product", "package") )
+        .option( "--filelist",	_("Show the full filelist of the package.") )
+        .option( "--changelog", _("If a update candidate is available show the new changelog entries, otherwise show the first 10."))
+        .option( "--full-changelog", _("Show the full changelog."));
 
     break;
   }
