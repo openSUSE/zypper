@@ -122,9 +122,17 @@ namespace mbs
     {
       if ( !atEnd() )
       {
-	_tpos += _tread;
-	_trest -= _tread;
+        _tpos += _tread;
+        _trest -= _tread;
+
+        //we hit the end
+        if ( _trest == 0 ) {
+          setToEnd();
+          return *this;
+        }
+
 	_tread = ::mbrtowc( &_wc, _tpos, _trest, &_mbstate );
+
 	_cols = size_t(-1);
 
 	if ( _tread >= (size_t)-2 )
@@ -134,7 +142,7 @@ namespace mbs
 	  memset( &_mbstate, 0, sizeof(_mbstate) );
 	  _tread = 1;
 	  MbToWc c( *_tpos );
-	  while ( c.add( *(_tpos+_tread) ) )
+	  while ( ( _tread < _trest ) && c.add( *(_tpos+_tread) ) )
 	    _tread += 1;
 	  _wc = c._wc;
 	}
@@ -146,8 +154,7 @@ namespace mbs
 // 	    _tread = 0;
 // 	    // fall through
 	  case 0:
-	    _trest = 0;	// atEnd
-	    _wc = L'\0';
+	    setToEnd();
 	    break;
 
 	  default:
@@ -187,6 +194,12 @@ namespace mbs
 	  ret = p+1 - pos_r;
       }
       return ret;
+    }
+
+    void setToEnd ()
+    {
+      _trest = 0;	// atEnd
+      _wc = L'\0';
     }
 
     boost::string_ref	_text;
