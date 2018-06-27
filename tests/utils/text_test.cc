@@ -3,6 +3,70 @@
 
 using namespace std;
 
+BOOST_AUTO_TEST_CASE(out_of_bounds_read_issue_167)
+{
+  /*See https://github.com/openSUSE/zypper/issues/167
+   * MbsIterator did not check for atEnd() when iterating over
+   * UTF-8 chars that continue a multibyte sequence, especially
+   * bytes in the range from \200 to \277 made the implementation
+   * read out of bounds. This check makes sure we do not regress on that.
+   * */
+
+  cout << "locale set to: " << setlocale (LC_CTYPE, "en_US.UTF-8") << endl;
+  mbs::MbsIterator it( "ABC\0\200\210\220\277\0" );
+  while ( !it.atEnd() ) {
+    ++it;
+  }
+
+  //if we did read after the C, the count will be 5, in this
+  //case we hit the bug
+  BOOST_CHECK_EQUAL( it.size(),		1 );
+}
+
+BOOST_AUTO_TEST_CASE(mbs_invalid_chars)
+{
+  mbs::MbsIterator it( "A\377\377Z" );
+
+  BOOST_CHECK_EQUAL( *it,		L'A' );
+  BOOST_CHECK_EQUAL( it.size(),		1 );
+  BOOST_CHECK_EQUAL( it.columns(),	1 );
+  BOOST_CHECK_EQUAL( it.atEnd(),	false );
+  BOOST_CHECK_EQUAL( it.isNL(),		false );
+  BOOST_CHECK_EQUAL( it.isWS(),		false );
+  BOOST_CHECK_EQUAL( it.isCH(),		true );
+
+  ++it;					// '
+  BOOST_CHECK_EQUAL( *it,		L'?' );
+  BOOST_CHECK_EQUAL( it.size(),		1 );
+  BOOST_CHECK_EQUAL( it.columns(),	1 );
+  BOOST_CHECK_EQUAL( it.atEnd(),	false );
+  BOOST_CHECK_EQUAL( it.isNL(),		false );
+  BOOST_CHECK_EQUAL( it.isWS(),		false );
+  BOOST_CHECK_EQUAL( it.isCH(),		true );
+
+  ++it;					// '
+  BOOST_CHECK_EQUAL( *it,		L'?' );
+  BOOST_CHECK_EQUAL( it.size(),		1 );
+  BOOST_CHECK_EQUAL( it.columns(),	1 );
+  BOOST_CHECK_EQUAL( it.atEnd(),	false );
+  BOOST_CHECK_EQUAL( it.isNL(),		false );
+  BOOST_CHECK_EQUAL( it.isWS(),		false );
+  BOOST_CHECK_EQUAL( it.isCH(),		true );
+
+  ++it;					// '
+  BOOST_CHECK_EQUAL( *it,		L'Z' );
+  BOOST_CHECK_EQUAL( it.size(),		1 );
+  BOOST_CHECK_EQUAL( it.columns(),	1 );
+  BOOST_CHECK_EQUAL( it.atEnd(),	false );
+  BOOST_CHECK_EQUAL( it.isNL(),		false );
+  BOOST_CHECK_EQUAL( it.isWS(),		false );
+  BOOST_CHECK_EQUAL( it.isCH(),		true );
+
+  ++it;
+  BOOST_CHECK_EQUAL( *it,		L'\0' );
+  BOOST_CHECK_EQUAL( it.atEnd(),	true );
+}
+
 BOOST_AUTO_TEST_CASE(mbs_width_test)
 {
   cout << "locale set to: " << setlocale (LC_CTYPE, "en_US.UTF-8") << endl;
