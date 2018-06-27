@@ -22,6 +22,7 @@
 #include "zypp/PoolItem.h"
 #include "zypp/Capabilities.h"
 #include "zypp/Capability.h"
+#include "zypp/ResolverNamespace.h"
 
 #include "zypp/solver/detail/Types.h"
 
@@ -186,6 +187,15 @@ namespace zypp
      **/
     void setIgnoreAlreadyRecommended( bool yesno_r );
     bool ignoreAlreadyRecommended() const;
+
+    /**
+     * Weak form of \ref ignoreAlreadyRecommended \c =false.
+     * Try to re-evaluate recommendations for specific namespaces only.
+     * \note May not support all namespaces.
+     */
+    void setInr( ResolverNamespaces namespaces_r );
+    void resetInr();
+    ResolverNamespaces inr() const;
 
     /**
      * Setting whether required packages are installed ONLY

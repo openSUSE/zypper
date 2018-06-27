@@ -115,6 +115,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     bool _cleandepsOnRemove:1;		// whether removing a package should also remove no longer needed requirements
 
   private:
+    ResolverNamespaces _inr;		// Try to re-evaluate recommendations for these namespaces
+  private:
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem, std::string &detail, Id &ignoreId);
     void resetItemTransaction (PoolItem item);
@@ -175,6 +177,9 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
 
     bool ignorealreadyrecommended () const {return _ignorealreadyrecommended;}
     void setIgnorealreadyrecommended ( const bool ignorealreadyrecommended) { _ignorealreadyrecommended = ignorealreadyrecommended;}
+
+    ResolverNamespaces inr() const { return _inr; }
+    void setInr( ResolverNamespaces namespaces_r ) { _inr = namespaces_r; }
 
     bool distupgrade () const {return _distupgrade;}
     void setDistupgrade ( const bool distupgrade) { _distupgrade = distupgrade;}

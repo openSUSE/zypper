@@ -308,6 +308,7 @@ class  HelixControl {
     void deleteResolvable( const PoolItem & pi_r );
     void addDependencies (const CapabilitySet &capRequire, const CapabilitySet &capConflict);
     void addUpgradeRepos( const std::set<Repository> & upgradeRepos_r );
+    void addInr( ResolverNamespaces namespaces_r );
 
     std::string filename () { return dumpFile; }
 };
@@ -463,6 +464,12 @@ void HelixControl::addUpgradeRepos( const std::set<Repository> & upgradeRepos_r 
   }
 }
 
+void HelixControl::addInr( ResolverNamespaces namespaces_r )
+{
+  if ( namespaces_r )
+    *file << "<inrNamespaces str=\"" << namespaces_r << "\" int=\"" << str::numstring((namespaces_r)) << "\"/>" << endl;
+}
+
 //---------------------------------------------------------------------------
 
 Testcase::Testcase()
@@ -594,6 +601,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     control.addDependencies (SystemCheck::instance().requiredSystemCap(),
 			     SystemCheck::instance().conflictSystemCap());
     control.addUpgradeRepos( resolver.upgradeRepos() );
+    control.addInr( resolver.inr() );
 
     control.addTagIf( "distupgrade",	resolver.isUpgradeMode() );
     control.addTagIf( "update",	 	resolver.isUpdateMode() );

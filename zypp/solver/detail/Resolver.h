@@ -95,6 +95,7 @@ class Resolver : private base::NonCopyable
     bool _cleandepsOnRemove;	// whether removing a package should also remove no longer needed requirements
 
     bool _ignoreAlreadyRecommended;   //ignore recommended packages that have already been recommended by the installed packages
+    ResolverNamespaces _inr;	// Try to re-evaluate recommendations for these namespaces
     //@}
 
     // Additional QueueItems which has to be regarded by the solver
@@ -166,6 +167,9 @@ class Resolver : private base::NonCopyable
     //@{
     bool ignoreAlreadyRecommended() const	{ return _ignoreAlreadyRecommended; }
     void setIgnoreAlreadyRecommended( bool yesno_r ) { _ignoreAlreadyRecommended = yesno_r; }
+
+    ResolverNamespaces inr() const		{ return _inr; }
+    void setInr( ResolverNamespaces namespaces_r ) { _inr = namespaces_r; }
 
     bool onlyRequires () const			{ return _onlyRequires; }
     void setOnlyRequires( TriBool state_r );

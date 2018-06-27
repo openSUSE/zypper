@@ -170,6 +170,7 @@ SATResolver::dumpOn( std::ostream & os ) const
 	os << "  solveSrcPackages	= "	<< _solveSrcPackages << endl;
 	os << "  cleandepsOnRemove	= "	<< _cleandepsOnRemove << endl;
         os << "  fixsystem		= "	<< _fixsystem << endl;
+	os << "  inr namespace		= "	<< _inr << endl;
     } else {
 	os << "<NULL>";
     }
@@ -625,16 +626,30 @@ SATResolver::solverInit(const PoolItemList & weakItems)
 
     // Ad rules for changed requestedLocales
     const auto & trackedLocaleIds( myPool().trackedLocaleIds() );
-    for ( const auto & locale : trackedLocaleIds.added() )
+    if ( _inr.testFlag( ResolverNamespace::language ) )
     {
-      queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
-      queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
+      // inr mode
+      for ( const auto & locale : trackedLocaleIds.current() )
+      {
+	queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
+	queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
+      }
+      // TODO cleanup not requested locale packages?
     }
-
-    for ( const auto & locale : trackedLocaleIds.removed() )
+    else
     {
-      queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | SOLVER_CLEANDEPS );	// needs uncond. SOLVER_CLEANDEPS!
-      queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
+      // just track changed locakes
+      for ( const auto & locale : trackedLocaleIds.added() )
+      {
+	queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
+	queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
+      }
+
+      for ( const auto & locale : trackedLocaleIds.removed() )
+      {
+	queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | SOLVER_CLEANDEPS );	// needs uncond. SOLVER_CLEANDEPS!
+	queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
+      }
     }
 
     // Add rules for parallel installable resolvables with different versions
