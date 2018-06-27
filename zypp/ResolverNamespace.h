@@ -31,6 +31,12 @@ namespace zypp
   /** \relates ResolverNamespace Flags */
   ZYPP_DECLARE_FLAGS_AND_OPERATORS(ResolverNamespaces,ResolverNamespace);
 
+  /** \relates ResolverNamespace All bits set. */
+  static constexpr const ResolverNamespaces NoResolverNamespaces = ResolverNamespace();
+
+  /** \relates ResolverNamespace All bits set. */
+  static constexpr const ResolverNamespaces AllResolverNamespaces = ResolverNamespace(0xff);
+
   /** \relates ResolverNamespace The underlying libsolv ID */
   inline constexpr IdString asIdString( ResolverNamespace obj )
   {
