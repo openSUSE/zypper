@@ -62,6 +62,9 @@ extern "C"
 
 #define XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::solver"
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
