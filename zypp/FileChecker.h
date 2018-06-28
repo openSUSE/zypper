@@ -94,7 +94,6 @@ namespace zypp
    {
      public:
        typedef SignatureCheckException ExceptionType;
-       typedef function<void ( const SignatureFileChecker & checker,  const Pathname & file )> OnSigValidated;
 
      public:
       /**
