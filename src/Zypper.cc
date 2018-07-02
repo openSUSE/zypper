@@ -4777,8 +4777,6 @@ void Zypper::doCommand()
 
     // Output query result...
     Table t;
-    t.lineStyle( Ascii );
-
     try
     {
       if ( command() == ZypperCommand::RUG_PATCH_SEARCH )
