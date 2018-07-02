@@ -2786,6 +2786,7 @@ void Zypper::processCommandOptions()
       {"provides", no_argument, 0, 0},
       {"requires", no_argument, 0, 0},
       {"recommends", no_argument, 0, 0},
+      {"supplements", no_argument, 0, 0},
       {"conflicts", no_argument, 0, 0},
       {"obsoletes", no_argument, 0, 0},
       {"suggests", no_argument, 0, 0},
@@ -2807,7 +2808,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = search_options;
-    _command_help = _(
+    _command_help = ( CommandHelpFormater() << _(
       "search (se) [options] [querystring] ...\n"
       "\n"
       "Search for packages matching any of the given search strings.\n"
@@ -2840,7 +2841,9 @@ void Zypper::processCommandOptions()
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
       "If a search string is enclosed in '/', it's interpreted as a regular expression.\n"
-    );
+    ))
+        .gap()
+        .option("--supplements", _("Search for packages which supplement the search strings."));
     break;
   }
 
@@ -2997,12 +3000,13 @@ void Zypper::processCommandOptions()
       {"conflicts", no_argument, 0, 0},
       {"obsoletes", no_argument, 0, 0},
       {"recommends", no_argument, 0, 0},
+      {"supplements", no_argument, 0, 0},
       {"suggests", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = info_options;
-    _command_help = str::form(_(
+    _command_help = ( CommandHelpFormater() << str::form(_(
         "info (if) [options] <name> ...\n"
         "\n"
         "Show detailed information for specified packages.\n"
@@ -3021,7 +3025,8 @@ void Zypper::processCommandOptions()
         "    --obsoletes           Show obsoletes.\n"
         "    --recommends          Show recommends.\n"
         "    --suggests            Show suggests.\n"
-      ), "package, patch, pattern, product", "package");
+      ), "package, patch, pattern, product", "package"))
+      .option("--supplements", _("Show supplements."));
 
     break;
   }
@@ -4728,6 +4733,11 @@ void Zypper::doCommand()
       if ( copts.count("obsoletes") )
       {
         attr = sat::SolvAttr::obsoletes;
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
+      }
+      if ( copts.count("supplements") )
+      {
+        attr = sat::SolvAttr::supplements;
         query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
       }
       if ( copts.count("file-list") )

@@ -92,7 +92,8 @@ namespace
       Dep::CONFLICTS,
       Dep::OBSOLETES,
       Dep::RECOMMENDS,
-      Dep::SUGGESTS
+      Dep::SUGGESTS,
+      Dep::SUPPLEMENTS
     } )
     {
       if ( ( isPatch && ( dep == Dep::PROVIDES || dep == Dep::CONFLICTS ) )
