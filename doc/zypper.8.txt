@@ -175,6 +175,9 @@ Package Management Commands
 	*--suggests*::
 		Show symbols the package suggests.
 
+	*--supplements*::
+		Show symbols the package supplements.
+
 	Examples: :: {nop}
 
 		$ *zypper info workrave*;;
@@ -737,6 +740,9 @@ Query Commands
 
 	*--obsoletes*::
 		Search for packages which obsolete the search strings.
+
+	*--supplements*::
+		Search for packages which supplement the search strings.
 
 	*-n*, *--name*::
 		Useful together with dependency options, otherwise searching in package name is default.
