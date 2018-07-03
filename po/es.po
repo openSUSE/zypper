@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 07:20+0200\n"
-"PO-Revision-Date: 2018-05-01 13:06+0000\n"
-"Last-Translator: Sergio Lindo <sergiolindo.empresa@gmail.com>\n"
+"PO-Revision-Date: 2018-07-03 22:06+0000\n"
+"Last-Translator: jc sl <trcs@gmx.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -73,7 +73,7 @@ msgstr "¿Desea eliminar este bloqueo?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr "La siguiente consulta no efectua bloqueos:"
+msgstr "La siguiente consulta no efectúa bloqueos:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
@@ -1384,7 +1384,7 @@ msgid ""
 "use '%1%'."
 msgstr ""
 "Para una búsqueda extendida que incluye recursos remotos aún no activados, "
-"use '1%'."
+"use '%1%'."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/Zypper.cc:361
@@ -1394,7 +1394,7 @@ msgid ""
 "install it by calling '%1%'."
 msgstr ""
 "El paquete que proporciona este subcomando no está instalado actualmente. "
-"Usted puede instalarlo llamando '1%'."
+"Puede instalarlo con '%1%'."
 
 #: src/Zypper.cc:398
 #, boost-format
