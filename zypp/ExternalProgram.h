@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 
+#include "zypp/APIConfig.h"
 #include "zypp/base/ExternalDataSource.h"
 #include "zypp/Pathname.h"
 
@@ -304,7 +305,7 @@ namespace zypp {
   /** ExternalProgram extended to change the progress group ID after forking.
    * \see \ref ExternalProgram
    */
-  class ExternalProgramWithSeperatePgid : public ExternalProgram
+  class ZYPP_LOCAL ExternalProgramWithSeperatePgid : public ExternalProgram
   {
     public:
       ExternalProgramWithSeperatePgid (const char *const *argv,
