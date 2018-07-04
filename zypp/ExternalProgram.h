@@ -225,10 +225,12 @@ namespace zypp {
       /** Remember execution errors like failed fork/exec. */
       std::string _execError;
 
+    protected:
+
       void start_program (const char *const *argv, const Environment & environment,
     			Stderr_Disposition stderr_disp = Normal_Stderr,
     			int stderr_fd = -1, bool default_locale = false,
-    			const char* root = NULL);
+    			const char* root = NULL, bool switch_pgid = false);
 
     };
 
@@ -297,6 +299,22 @@ namespace zypp {
 
     private:
       std::string _buffer;
+  };
+
+  /** ExternalProgram extended to change the progress group ID after forking.
+   * \see \ref ExternalProgram
+   */
+  class ExternalProgramWithSeperatePgid : public ExternalProgram
+  {
+    public:
+      ExternalProgramWithSeperatePgid (const char *const *argv,
+                   Stderr_Disposition stderr_disp = Normal_Stderr,
+                   int stderr_fd = -1, bool default_locale = false,
+                   const Pathname& root = "") : ExternalProgram()
+      {
+        start_program( argv, Environment(), stderr_disp, stderr_fd, default_locale, root.c_str(), true );
+      }
+
   };
 
 } // namespace zypp

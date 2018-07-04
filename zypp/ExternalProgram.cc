@@ -178,12 +178,12 @@ namespace zypp {
 
 
 
-    void ExternalProgram::start_program( const char *const *argv,
+    void ExternalProgram::start_program(const char *const *argv,
 					 const Environment & environment,
 					 Stderr_Disposition stderr_disp,
 					 int stderr_fd,
 					 bool default_locale,
-					 const char * root )
+					 const char * root , bool switch_pgid)
     {
       pid = -1;
       _exitStatus = 0;
@@ -307,6 +307,8 @@ namespace zypp {
     	}
     	else
     	{
+            if ( switch_pgid )
+              setpgid( 0, 0);
     	    renumber_fd (to_external[0], 0); // set new stdin
     	    ::close(from_external[0]);	  // Belongs to father process
 
