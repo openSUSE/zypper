@@ -24,6 +24,7 @@
 #include "zypp/base/Regex.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/InputStream.h"
+#include "zypp/target/rpm/librpmDb.h"
 
 #include "zypp/misc/CheckAccessDeleted.h"
 
@@ -74,6 +75,29 @@ namespace zypp
 
       ino_t pidNS;
     };
+
+    /** bsc#1099847: Check for lsof version < 4.90 which does not support '-K i'
+     * Just a quick check to allow code15 libzypp runnig in a code12 environment.
+     */
+    bool lsofNoOptKi()
+    {
+      using target::rpm::librpmDb;
+      // RpmDb access is blocked while the Target is not initialized.
+      // Launching the Target just for this query would be an overkill.
+      struct TmpUnblock {
+	TmpUnblock()
+	: _wasBlocked( librpmDb::isBlocked() )
+	{ if ( _wasBlocked ) librpmDb::unblockAccess(); }
+	~TmpUnblock()
+	{ if ( _wasBlocked ) librpmDb::blockAccess(); }
+      private:
+	bool _wasBlocked;
+      } tmpUnblock;
+
+      librpmDb::db_const_iterator it;
+      return( it.findPackage( "lsof" ) && it->tag_edition() < Edition("4.90") );
+    }
+
   } //namespace
   /////////////////////////////////////////////////////////////////
 
@@ -312,10 +336,9 @@ namespace zypp
 
   CheckAccessDeleted::size_type CheckAccessDeleted::check( bool verbose_r  )
   {
-    static const char* argv[] =
-    {
-      "lsof", "-n", "-FpcuLRftkn0", NULL
-    };
+    static const char* argv[] = { "lsof", "-n", "-FpcuLRftkn0", "-K", "i", NULL };
+    if ( lsofNoOptKi() )
+      argv[3] = NULL;
 
     _pimpl->_verbose = verbose_r;
     _pimpl->_fromLsofFileMode = false;
