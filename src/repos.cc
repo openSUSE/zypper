@@ -1326,6 +1326,9 @@ void list_repos( Zypper & zypper )
 
   if ( repos.empty() )
     zypper.setExitCode( ZYPPER_EXIT_NO_REPOS );
+  else if ( !not_found.empty() ) {
+    zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+  }
 }
 
 // ----------------------------------------------------------------------------
@@ -1454,6 +1457,12 @@ void refresh_repos( Zypper & zypper )
   {
     zypper.out().error(_("Could not refresh the repositories because of errors.") );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+    return;
+  }
+  else if ( !not_found.empty() )
+  {
+    zypper.out().error(_("Some of the repositories have not been refreshed because they were not known.") );
+    zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
     return;
   }
   else if ( error_count )
