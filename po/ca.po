@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-05-23 22:03+0000\n"
+"PO-Revision-Date: 2018-07-06 14:25+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3407,7 +3407,7 @@ msgstr ""
 
 #: src/Zypper.cc:2846
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Cerca paquets que complementin les cadenes de cerca."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2864
@@ -3593,7 +3593,7 @@ msgstr ""
 
 #: src/Zypper.cc:3029
 msgid "Show supplements."
-msgstr ""
+msgstr "Mostra els complements."
 
 #: src/Zypper.cc:3044
 #, c-format, boost-format
@@ -5495,10 +5495,9 @@ msgid "Could not refresh the repositories because of errors."
 msgstr "No s'han pogut refrescar els repositoris a causa d'errors."
 
 #: src/repos.cc:1464
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "Alguns dels repositoris no s'han refrescat a causa d'un error."
+msgstr "Alguns dels repositoris no s'han refrescat perquè no eren coneguts."
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
