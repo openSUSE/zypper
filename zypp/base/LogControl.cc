@@ -319,7 +319,13 @@ namespace zypp
             {
               _streamtable[group_r][level_r].reset( new Loglinestream( group_r, level_r ) );
             }
-          return _streamtable[group_r][level_r]->getStream( file_r, func_r, line_r );
+          std::ostream & ret( _streamtable[group_r][level_r]->getStream( file_r, func_r, line_r ) );
+	  if ( !ret )
+	  {
+	    ret.clear();
+	    ret << "---<RESET LOGSTREAM FROM FAILED STATE]" << endl;
+	  }
+          return ret;
         }
 
         /** Format and write out a logline from Loglinebuf. */
