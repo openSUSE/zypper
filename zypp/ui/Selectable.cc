@@ -155,6 +155,20 @@ namespace zypp
     Selectable::picklist_iterator Selectable::picklistEnd() const
     { return _pimpl->picklistEnd(); }
 
+    Selectable::picklist_size_type Selectable::picklistPos( const PoolItem & pi_r ) const
+    { return picklistPos( pi_r.satSolvable() ); }
+
+    Selectable::picklist_size_type Selectable::picklistPos( const sat::Solvable & solv_r ) const
+    {
+      picklist_size_type idx = picklist_size_type(-1);
+      for ( const auto & pi : picklist() )
+      {
+	if ( pi == solv_r )
+	  return ++idx;
+      }
+      return picklistNoPos;
+    }
+
     ////////////////////////////////////////////////////////////////////////
 
     bool Selectable::isUnmaintained() const

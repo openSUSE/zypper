@@ -277,6 +277,18 @@ namespace zypp
       picklist_iterator picklistEnd() const;
       inline Iterable<picklist_iterator> picklist() const
       { return makeIterable( picklistBegin(), picklistEnd() ); }
+
+      /** Returned by \ref picklistPos if the Item does not belong to the picklist. */
+      static constexpr const picklist_size_type picklistNoPos = picklist_size_type(-1);
+
+      /** Return the position of \a pi_r in the piclist or \ref picklistNoPos.
+       * \note \ref picklistNoPos is returned if you pass an installed Poolitem,
+       * whci has an \ref identicalAvailableObj.
+       */
+      picklist_size_type picklistPos( const PoolItem & pi_r ) const;
+
+      /** \overload taking a sat::Solvable */
+      picklist_size_type picklistPos( const sat::Solvable & solv_r ) const;
       //@}
 
       ////////////////////////////////////////////////////////////////////////
