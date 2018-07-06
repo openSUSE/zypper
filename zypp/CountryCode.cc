@@ -100,7 +100,7 @@ namespace zypp
 	    nval.second = link->second;
 	  }
 	}
-	MIL << "Remember CountryCode '" << code_r << "': '" << nval.second << "'" << endl;
+	MIL << "Remember CountryCode '" << code_r << "': '" << (nval.second?nval.second:"Unknown country") << "'" << endl;
 	return (_indexMap[index_r] = _codeMap.insert( nval ).first);
       }
 

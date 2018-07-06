@@ -99,7 +99,7 @@ namespace zypp
 	    nval.second = link->second;
 	  }
 	}
-	MIL << "Remember LanguageCode '" << code_r << "': '" << nval.second << "'" << endl;
+	MIL << "Remember LanguageCode '" << code_r << "': '" << (nval.second?nval.second:"Unknown language") << "'" << endl;
 	return (_indexMap[index_r] = _codeMap.insert( nval ).first);
       }
 
