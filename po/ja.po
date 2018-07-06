@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-04-28 15:03+0000\n"
-"Last-Translator: anonymous <>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"PO-Revision-Date: 2018-07-06 22:43+0000\n"
+"Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3281,7 +3281,7 @@ msgstr ""
 
 #: src/Zypper.cc:2846
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "検索対象の文字列を補足するパッケージを検索します。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2864
@@ -3464,7 +3464,7 @@ msgstr ""
 
 #: src/Zypper.cc:3029
 msgid "Show supplements."
-msgstr ""
+msgstr "補足するものを検索します。"
 
 #: src/Zypper.cc:3044
 #, c-format, boost-format
@@ -5335,10 +5335,9 @@ msgid "Could not refresh the repositories because of errors."
 msgstr "エラーによりリポジトリの更新ができませんでした。"
 
 #: src/repos.cc:1464
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "エラーにより、いくつかのリポジトリを更新することができませんでした。"
+msgstr "既知のものではないことから、いくつかのリポジトリを更新することができませんでした。"
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
