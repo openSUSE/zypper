@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-04-27 07:52+0000\n"
+"PO-Revision-Date: 2018-07-07 08:28+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -3462,7 +3462,7 @@ msgstr ""
 
 #: src/Zypper.cc:2846
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Naar pakketten zoeken die de zoektekenreeksen aanvullen."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2864
@@ -3650,7 +3650,7 @@ msgstr ""
 
 #: src/Zypper.cc:3029
 msgid "Show supplements."
-msgstr ""
+msgstr "Aanvullingen tonen."
 
 #: src/Zypper.cc:3044
 #, c-format, boost-format
@@ -5552,10 +5552,9 @@ msgid "Could not refresh the repositories because of errors."
 msgstr "Kan vanwege fouten de opslagruimtes niet vernieuwen."
 
 #: src/repos.cc:1464
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "Enkele opslagruimtes zijn vanwege fouten niet vernieuwd."
+msgstr "Enkele opslagruimtes zijn niet vernieuwd omdat ze niet bekend zijn."
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
