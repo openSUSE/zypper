@@ -73,7 +73,11 @@ namespace zypp
         void setData( const Data & data_r )
         {
           if ( !_dataPtr )
+	  {
+	    if ( data_r.empty() )
+	      return;	// bsc#1096803: Prevent against empty commit without Target having been been loaded (!_dataPtr )
             _dataPtr.reset( new Data );
+	  }
 
           if ( differs( *_dataPtr, data_r ) )
           {
