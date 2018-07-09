@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Mon Jul  9 14:43:15 CEST 2018 - ma@suse.de
+
+- HardLocksFile: Prevent against empty commit without Target having
+  been been loaded (bsc#1096803)
+- lsof: use '-K i' if lsof supports it (bsc#1099847)
+- PackageProvider: Validate deta rpms before caching (bsc#1091624)
+- PackageProvider: Validate downloaded rpm package signatures
+  before caching (bsc#1091624)
+- version 17.5.0 (2)
+
+-------------------------------------------------------------------
 Mon Jun 25 10:48:55 CEST 2018 - ma@suse.de
 
 - Flags: make it std=c++14 ready
