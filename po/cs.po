@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-04-27 12:18+0000\n"
+"PO-Revision-Date: 2018-07-10 14:52+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -3440,7 +3440,7 @@ msgstr ""
 
 #: src/Zypper.cc:2846
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Hledám balíčky odpovídající hledacímu řetězci."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2864
@@ -3626,7 +3626,7 @@ msgstr ""
 
 #: src/Zypper.cc:3029
 msgid "Show supplements."
-msgstr ""
+msgstr "Ukázat doplňky."
 
 #: src/Zypper.cc:3044
 #, c-format, boost-format
@@ -5494,10 +5494,9 @@ msgid "Could not refresh the repositories because of errors."
 msgstr "Repozitáře nelze z důvodu chyby obnovit."
 
 #: src/repos.cc:1464
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "Některé repozitáře nebyly z důvodu chyby obnoveny."
+msgstr "Obsah některých úložišť nebyl obnoven, protože nejsou známa."
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
