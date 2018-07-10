@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-07-10 15:10+0000\n"
+"PO-Revision-Date: 2018-07-10 18:01+0000\n"
 "Last-Translator: Peter Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
@@ -79,7 +79,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
-msgstr "套件庫："
+msgstr "軟體庫："
 
 #: src/callbacks/keyring.h:81
 msgid "Key Name:"
@@ -600,7 +600,7 @@ msgstr "未安裝與 '%s' 相符的套件。"
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr "套件 '%s' 尚未安裝。"
+msgstr "軟體包 '%s' 尚未安裝。"
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
@@ -667,7 +667,7 @@ msgstr "有一個 '%s' 的更新候選，但被鎖定。請使用 '%s' 解除鎖
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
-msgstr "套件 '%s' 無法在您的套件庫中找到。無法重新安裝、升級或降級。"
+msgstr "軟體包 '%s' 無法在您的軟體庫找到。無法重新安裝、升級或降級。"
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
@@ -2084,7 +2084,7 @@ msgstr "不需要與使用者互動。相當於全域選項 --non-interactive。
 
 #: src/Zypper.cc:1845
 msgid "Silently install unsigned rpm packages given as commandline parameters."
-msgstr "以靜默方式安裝以指令行參數指定的未簽署 rpm 套件。"
+msgstr "以靜默方式安裝以指令行參數指定的未簽署 rpm 軟體包。"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2739,14 +2739,14 @@ msgstr ""
 "列出所有可用的更新。\n"
 "\n"
 "  指令選項：\n"
-"-t, --type <類型>            套件的類型 (%s)。\n"
+"-t, --type <類型>            軟體包的類型 (%s)。\n"
 "                             預設為：%s。\n"
-"-r, --repo <別名|編號|位址>  僅列出指定套件庫中的更新。\n"
+"-r, --repo <別名|編號|位址>  僅列出指定軟體庫中的更新。\n"
 "    --best-effort            盡最大努力來趨近最新狀態，\n"
 "                             更新到比最新版本還低些的也\n"
 "                             可以接受。\n"
 "-a, --all                    列出所有有較新版本可用的\n"
-"                             套件，不論它們是否\n"
+"                             軟體包，不論它們是否\n"
 "                             可以安裝。\n"
 
 #. translators: the first %s = "package, patch, pattern, product",
@@ -5100,7 +5100,7 @@ msgstr "因發生錯誤無法重新整理套件庫。"
 #: src/repos.cc:1464
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "因為軟體庫未知，某些套件庫尚未被重新整理。"
+msgstr "因為軟體庫未知，某些軟體庫尚未被重新整理。"
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
