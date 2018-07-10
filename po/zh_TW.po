@@ -13,10 +13,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-05-14 07:36+0000\n"
-"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
-"Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_TW/>\n"
+"PO-Revision-Date: 2018-07-10 15:10+0000\n"
+"Last-Translator: Peter Pan <pan93412@gmail.com>\n"
+"Language-Team: Chinese (Taiwan) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3113,7 +3113,7 @@ msgstr ""
 
 #: src/Zypper.cc:2846
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "搜尋補充搜尋字串的軟體包。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2864
@@ -3291,7 +3291,7 @@ msgstr ""
 
 #: src/Zypper.cc:3029
 msgid "Show supplements."
-msgstr ""
+msgstr "顯示補充。"
 
 #: src/Zypper.cc:3044
 #, c-format, boost-format
@@ -5098,10 +5098,9 @@ msgid "Could not refresh the repositories because of errors."
 msgstr "因發生錯誤無法重新整理套件庫。"
 
 #: src/repos.cc:1464
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "因發生錯誤，某些套件庫尚未被重新整理。"
+msgstr "因為軟體庫未知，某些套件庫尚未被重新整理。"
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
