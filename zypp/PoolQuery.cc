@@ -601,16 +601,21 @@ namespace zypp
     {
       // check whether there are any per-attribute strings
       bool attrvals_empty = true;
-      for (AttrRawStrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
-        if (!ai->second.empty())
-          for(StrContainer::const_iterator it = ai->second.begin();
-              it != ai->second.end(); it++)
-            if (!it->empty())
-            {
-              attrvals_empty = false;
-              goto attremptycheckend;
-            }
-attremptycheckend:
+      for_( ai, _attrs.begin(), _attrs.end() )
+      {
+        if ( ai->second.empty() )
+	  continue;
+	for_( it, ai->second.begin(), ai->second.end() )
+	{
+	  if ( !it->empty() )
+	  {
+	    attrvals_empty = false;
+	    break;
+	  }
+	}
+        if ( ! attrvals_empty )
+	  break;
+      }
 
       // chceck whether the per-attribute strings are all the same
       bool attrvals_thesame = true;
