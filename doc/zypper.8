@@ -1637,19 +1637,59 @@ Help. If a \fBcommand\fR is specified together with --help option, command speci
 Print zypper version number and exit.
 .TP
 .I \-c, \-\-config <file>
-Use specified config file instead of the default files.
-Other command line options specified together with --config and having
-their counterpart in the config file are still prefered.
-The order of preference with --config is as follows:
+.RS 4
+Use the specified zypper config file instead of the default
+\fBzypper\&.conf\fR\&. Other command line options specified together with
+\fB\-\-config\fR
+and having their counterpart in the zypper config file are still preferred\&.
 
-* Command line options
-.br
-* --config <file>
-.br
-* /etc/zypp/zypp.conf
-
-See also FILES section for more information.
-.TP
+The order of preference with
+\fB\-\-config\fR
+is as follows:
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  1." 4.2
+.\}
+Command line options
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  2." 4.2
+.\}
+\fB\-\-config \fR\fB\fIfile\fR\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 3.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  3." 4.2
+.\}
+[\fB/etc/zypp/zypp\&.conf\fR] (system\-wide defaults for all libzypp based applications)
+.RE
+.sp
+NOTE: Use and location of the system\-wide
+\fB/etc/zypp/zypp\&.conf\fR
+can not be changed this way\&. It\(cqs mentioned here just because some zypper command line options allow to overwrite system\-wide defaults defined in
+\fBzypp\&.conf\fR\&.
+.sp
+See also
+\fBFILES\fR
+section for more information\&.
+.RE
+.PP
 .I \-v, \-\-verbose
 Increase verbosity. For debugging output specify this option twice.
 .TP
@@ -1759,36 +1799,76 @@ can damage your system using this option.
 
 .SH "FILES"
 .TP
-.B /etc/zypp/zypper.conf, $HOME/.zypper.conf
-Global (system-wide) and user's configuration file for zypper.
-These files are read when zypper starts up and \fI--config\fR option
-is not used.
+\fB/etc/zypp/zypper\&.conf\fR, \fB$HOME/\&.zypper\&.conf\fR
+.RS 7
+Global (system\-wide) and user\(cqs configuration file for
+\fIzypper\fR\&. These files are read when zypper starts up and
+\fB\-\-config\fR
+option is not used\&.
 
-User's settings are prefered over global settings.
-Similarly, command line options override the settings in either of
-these files. Settings from zypp.conf (see below) having their
-counterparts in zypper.conf are overriden by zypper's values. To sum
-it up, the order of preference is as follows (from highest to lowest):
-
-* Command line options
-.br
-* $HOME/.zypper.conf
-.br
-* /etc/zypp/zypper.conf
-.br
-* /etc/zypp/zypp.conf
-
-See the comments in /etc/zypp/zypper.conf for a list and description
-of available options.
+User\(cqs settings are preferred over global settings\&. Similarly, command line options override the settings in either of these files\&. To sum it up, the order of preference is as follows (from highest to lowest):
+.sp
+.RS 7
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  1." 4.2
+.\}
+\fICommand line options\fR
+.RE
+.sp
+.RS 7
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  2." 4.2
+.\}
+\fB$HOME/\&.zypper\&.conf\fR
+.RE
+.sp
+.RS 7
+.ie n \{\
+\h'-04' 3.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  3." 4.2
+.\}
+\fB/etc/zypp/zypper\&.conf\fR
+.RE
+.sp
+.RS 7
+.ie n \{\
+\h'-04' 4.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  4." 4.2
+.\}
+[\fB/etc/zypp/zypp\&.conf\fR] (system\-wide defaults for all libzypp based applications)
+.RE
+.sp
+See the comments in
+\fB/etc/zypp/zypper\&.conf\fR
+for a list and description of available options\&.
+.sp
+NOTE: The system\-wide
+\fB/etc/zypp/zypp\&.conf\fR
+is mentioned here just because some zypper command line options allow to overwrite system\-wide defaults defined there\&.
+\fBzypp\&.conf\fR
+and
+\fBzypper\&.conf\fR
+have different content and serve different purpose\&.
+.RE
 .TP
-.B /etc/zypp/zypp.conf
-ZYpp configuration file affecting all ZYpp-based applications.
-See the comments in the file for desciption of configurable properties.
-Many of locations of files and directories listed in this section are
-also configurable via zypp.conf.
-
-Options having their counterpart in zypper.conf are overriden by zypper's
-setting.
+\fB/etc/zypp/zypp\&.conf\fR
+ZYpp configuration file affecting all libzypp based applications\&. See the comments in the file for description of configurable properties\&. Many locations of files and directories listed in this section are configurable via zypp\&.conf\&. The location for this file itself can be redefined only by setting
+\fB$ZYPP_CONF\fR
+in the environment\&.
 .TP
 .B /etc/zypp/locks
 File with package lock definitions, see locks(5) manual page for details.
