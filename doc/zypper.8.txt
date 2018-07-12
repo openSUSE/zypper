@@ -1510,12 +1510,16 @@ GLOBAL OPTIONS
 	Print zypper version number and exit.
 
 *-c*, *--config* 'file'::
-	Use specified zypper config file instead of the default files. Other command line options specified together with *--config* and having their counterpart in the config file are still preferred. The order of preference with *--config* is as follows:
+	Use the specified zypper config file instead of the default *zypper.conf*. Other command line options specified together with *--config* and having their counterpart in the zypper config file are still preferred.
+	+
+	The order of preference with *--config* is as follows:
 
 	. Command line options
 	. *--config 'file'*
 	. [*/etc/zypp/zypp.conf*] (system-wide defaults for all libzypp based applications)
 
++
+{nop}	NOTE: Use and location of the system-wide */etc/zypp/zypp.conf* can not be changed this way. It's mentioned here just because some zypper command line options allow to overwrite system-wide defaults defined in *zypp.conf*.
 +
 {nop}	See also *FILES* section for more information.
 
@@ -1632,7 +1636,7 @@ Using zypper 'global-options' together with subcommands, as well as executing su
 FILES
 -----
 */etc/zypp/zypper.conf*, *$HOME/.zypper.conf*::
-	Global (system-wide) and user's configuration file for zypper. These files are read when zypper starts up and *--config* option is not used.
+	Global (system-wide) and user's configuration file for 'zypper'. These files are read when zypper starts up and *--config* option is not used.
 	+
 	User's settings are preferred over global settings. Similarly, command line options override the settings in either of these files. To sum it up, the order of preference is as follows (from highest to lowest):
 +
@@ -1644,6 +1648,8 @@ FILES
 --
 +
 {nop}	See the comments in */etc/zypp/zypper.conf* for a list and description of available options.
++
+{nop}	NOTE: The system-wide */etc/zypp/zypp.conf* is mentioned here just because some zypper command line options allow to overwrite system-wide defaults defined there. *zypp.conf* and *zypper.conf* have different content and serve different purpose.
 
 */etc/zypp/zypp.conf*::
 	ZYpp configuration file affecting all libzypp based applications. See the comments in the file for description of configurable properties. Many locations of files and directories listed in this section are configurable via zypp.conf. The location for this file itself can be redefined only by setting *$ZYPP_CONF* in the environment.

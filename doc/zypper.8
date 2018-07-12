@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 06/01/2017
+.\"      Date: 07/12/2018
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "06/01/2017" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "07/12/2018" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -2958,9 +2958,12 @@ Print zypper version number and exit\&.
 .PP
 \fB\-c\fR, \fB\-\-config\fR \fIfile\fR
 .RS 4
-Use specified zypper config file instead of the default files\&. Other command line options specified together with
+Use the specified zypper config file instead of the default
+\fBzypper\&.conf\fR\&. Other command line options specified together with
 \fB\-\-config\fR
-and having their counterpart in the config file are still preferred\&. The order of preference with
+and having their counterpart in the zypper config file are still preferred\&.
+
+The order of preference with
 \fB\-\-config\fR
 is as follows:
 .sp
@@ -2996,6 +2999,11 @@ Command line options
 .\}
 [\fB/etc/zypp/zypp\&.conf\fR] (system\-wide defaults for all libzypp based applications)
 .RE
+.sp
+NOTE: Use and location of the system\-wide
+\fB/etc/zypp/zypp\&.conf\fR
+can not be changed this way\&. It\(cqs mentioned here just because some zypper command line options allow to overwrite system\-wide defaults defined in
+\fBzypp\&.conf\fR\&.
 .sp
 See also
 \fBFILES\fR
@@ -3266,7 +3274,8 @@ Using zypper \fIglobal\-options\fR together with subcommands, as well as executi
 .PP
 \fB/etc/zypp/zypper\&.conf\fR, \fB$HOME/\&.zypper\&.conf\fR
 .RS 4
-Global (system\-wide) and user\(cqs configuration file for zypper\&. These files are read when zypper starts up and
+Global (system\-wide) and user\(cqs configuration file for
+\fIzypper\fR\&. These files are read when zypper starts up and
 \fB\-\-config\fR
 option is not used\&.
 
@@ -3319,6 +3328,14 @@ User\(cqs settings are preferred over global settings\&. Similarly, command line
 See the comments in
 \fB/etc/zypp/zypper\&.conf\fR
 for a list and description of available options\&.
+.sp
+NOTE: The system\-wide
+\fB/etc/zypp/zypp\&.conf\fR
+is mentioned here just because some zypper command line options allow to overwrite system\-wide defaults defined there\&.
+\fBzypp\&.conf\fR
+and
+\fBzypper\&.conf\fR
+have different content and serve different purpose\&.
 .RE
 .PP
 \fB/etc/zypp/zypp\&.conf\fR
