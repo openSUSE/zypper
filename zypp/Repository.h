@@ -420,9 +420,9 @@ namespace zypp
      *  MIL << "3 " << satpool << endl;
      * \endcode
      * \code
-     * 1 sat::pool(){0repos|2slov}
-     * 2 sat::pool(){1repos|2612slov}
-     * 3 sat::pool(){0repos|2slov}
+     * 1 sat::pool(){0repos|2solv}
+     * 2 sat::pool(){1repos|2612solv}
+     * 3 sat::pool(){0repos|2solv}
      * \endcode
      * Leaving the block without calling <tt>tmprepo.resetDispose();</tt>
      * before, will automatically remove the \ref Repo from it's \ref Pool.

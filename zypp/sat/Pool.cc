@@ -253,7 +253,7 @@ namespace zypp
       return str << "sat::pool(" << obj.serial() << ")["
           << obj.capacity() << "]{"
           << obj.reposSize() << "repos|"
-	  << obj.solvablesSize() << "slov}";
+	  << obj.solvablesSize() << "solv}";
     }
 
     /////////////////////////////////////////////////////////////////
