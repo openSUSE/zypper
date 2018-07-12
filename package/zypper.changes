@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 12 12:20:30 CEST 2018 - ma@suse.de
+
+- man: Strengthen that `--config FILE' affects zypper.conf,
+  not zypp.conf (bsc#1100028)
+- version 1.6.338
+
+-------------------------------------------------------------------
 Fri Apr 21 16:16:57 CEST 2017 - ma@suse.de
 
 - Fix TODOs in zypper manpage (bsc#1032259)
