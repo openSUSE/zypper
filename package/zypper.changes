@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 12 11:56:52 CEST 2018 - ma@suse.de
+
+- man: Strengthen that `--config FILE' affects zypper.conf,
+  not zypp.conf (bsc#1100028)
+- version 1.13.43
+
+-------------------------------------------------------------------
 Mon May 28 11:17:28 CEST 2018 - ma@suse.de
 
 - Prevent nested calls to exit() if aborted by a signal (bsc#1092413)
