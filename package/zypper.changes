@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 12 11:58:26 CEST 2018 - ma@suse.de
+
+- man: Strengthen that `--config FILE' affects zypper.conf,
+  not zypp.conf (bsc#1100028)
+- version 1.11.68
+
+-------------------------------------------------------------------
 Mon May 28 11:20:25 CEST 2018 - ma@suse.de
 
 - ansi.h: Prevent ESC sequence strings from going out of scope (bsc#1092413)
