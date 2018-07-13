@@ -7,15 +7,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2017-07-12 12:56+0100\n"
+"PO-Revision-Date: 2018-07-13 21:04+0000\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
-"Language-Team: NorwegianNynorsk <i18n-nn@lister.ping.uio.no>\n"
+"Language-Team: Norwegian Nynorsk "
+"<https://l10n.opensuse.org/projects/zypper/master/nn/>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -1476,7 +1477,7 @@ msgstr ""
 
 #: src/Zypper.cc:103
 msgid "Disable auto-refresh of the service."
-msgstr ""
+msgstr "Slå av automatisk oppdatering av tenesta."
 
 #: src/Zypper.cc:121
 #, fuzzy
@@ -1484,9 +1485,8 @@ msgid "Set a descriptive name for the repository."
 msgstr "Inkje alias er definert for denne pakkebrønnen."
 
 #: src/Zypper.cc:122
-#, fuzzy
 msgid "Enable a disabled repository."
-msgstr "Hoppar over den uverksame pakkebrønnen «%s»"
+msgstr "Gjer ein uverksam pakkebrønn verksam att."
 
 #: src/Zypper.cc:123
 msgid "Disable the repository (but don't remove it)."
