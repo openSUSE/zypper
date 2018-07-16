@@ -31,18 +31,20 @@
  * \endcode
 };*/
 #if __GNUC__ >= 4
-  #define ZYPP_HELPER_DLL_EXPORT __attribute__ ((visibility ("default")))
-  #define ZYPP_HELPER_DLL_LOCAL  __attribute__ ((visibility ("hidden")))
+  #define ZYPP_DECL_EXPORT __attribute__ ((visibility ("default")))
+  #define ZYPP_DECL_IMPORT __attribute__ ((visibility ("default")))
+  #define ZYPP_DECL_HIDDEN  __attribute__ ((visibility ("hidden")))
 #else
-  #define ZYPP_HELPER_DLL_EXPORT
-  #define ZYPP_HELPER_DLL_LOCAL
+  #define ZYPP_DECL_EXPORT
+  #define ZYPP_DECL_IMPORT
+  #define ZYPP_DECL_HIDDEN
 #endif
 
 #ifdef ZYPP_DLL	//defined if zypp is compiled as DLL
-  #define ZYPP_API	ZYPP_HELPER_DLL_EXPORT
-  #define ZYPP_LOCAL	ZYPP_HELPER_DLL_LOCAL
+  #define ZYPP_API	ZYPP_DECL_EXPORT
+  #define ZYPP_LOCAL	ZYPP_DECL_HIDDEN
 #else
-  #define ZYPP_API
+  #define ZYPP_API      ZYPP_DECL_IMPORT
   #define ZYPP_LOCAL
 #endif
 
