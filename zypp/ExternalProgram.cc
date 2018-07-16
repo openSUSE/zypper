@@ -27,6 +27,7 @@
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/ExternalProgram.h"
+#include "zypp/base/CleanerThread_p.h"
 
 using namespace std;
 
@@ -167,7 +168,13 @@ namespace zypp {
 
 
     ExternalProgram::~ExternalProgram()
-    {}
+    {
+      if ( running() ) {
+        // we got destructed while the external process is still alive
+        // make sure the zombie is cleaned up once it exits
+        CleanerThread::watchPID( pid );
+      }
+    }
 
 
 

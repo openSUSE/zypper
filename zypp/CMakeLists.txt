@@ -202,6 +202,7 @@ INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp" )
 SET( zypp_base_SRCS
   base/InterProcessMutex.cc
   base/Backtrace.cc
+  base/CleanerThread.cc
   base/DrunkenBishop.cc
   base/SerialNumber.cc
   base/Random.cc
