@@ -163,7 +163,6 @@ Requires:       libudev-devel
 %else
 Requires:       hal-devel
 %endif
-Requires:       cmake
 %if 0%{?suse_version}
 %if 0%{?suse_version} >= 1100
 # Code11+
