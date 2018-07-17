@@ -37,8 +37,8 @@
 
   <data type="suseinfo">
     <location href="repodata/suseinfo.xml.gz"/>
-    <checksum type="sha">e0b9149c1b7f48c952e9b3ea996669d8d0d9e1e8</checksum>
+    <checksum type="sha">34599f8eed67ec256299d295617ceaf05ae7ebdd</checksum>
     <timestamp>1227279057.0</timestamp>
-    <open-checksum type="sha">b17c055bef95bca397faffdf028cfa91dd1b24bc</open-checksum>
+    <open-checksum type="sha">a3011438085ac55f06c68053201ea3ded17ee85c</open-checksum>
   </data>
 </repomd>
