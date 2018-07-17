@@ -4829,16 +4829,16 @@ void Zypper::doCommand()
         if ( command() == ZypperCommand::RUG_PATCH_SEARCH )
         {
           if ( copts.count("sort-by-repo") )
-            t.sort( 1 );
+            t.sort( { 0, 1, Table::UserData } );
           else
-            t.sort( 3 ); // sort by name
+            t.sort( { 1, Table::UserData } ); // sort by name
         }
         else if ( _copts.count("details") )
         {
           if ( copts.count("sort-by-repo") )
-            t.sort( 5 );
+            t.sort( { 5, 1, Table::UserData } );
           else
-            t.sort( 1 ); // sort by name
+            t.sort( { 1, Table::UserData } ); // sort by name
         }
         else
         {
