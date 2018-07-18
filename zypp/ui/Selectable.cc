@@ -160,11 +160,12 @@ namespace zypp
 
     Selectable::picklist_size_type Selectable::picklistPos( const sat::Solvable & solv_r ) const
     {
-      picklist_size_type idx = picklist_size_type(-1);
+      picklist_size_type idx = picklist_size_type(0);
       for ( const auto & pi : picklist() )
       {
 	if ( pi == solv_r )
-	  return ++idx;
+	  return idx;
+	++idx;
       }
       return picklistNoPos;
     }
