@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Jul 19 12:57:21 CEST 2018 - ma@suse.de
+
+- Prevent the system from sleeping during a commit
+  (fixes openSUSE/zypper#135)
+- RepoManager: Explicitly request repo2solv to generate application
+  pseudo packages.
+- version 17.5.2 (2)
+
+-------------------------------------------------------------------
 Wed Jul 18 10:55:49 CEST 2018 - ma@suse.de
 
 - libzypp-devel should not require cmake (bsc#1101349)
