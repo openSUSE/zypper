@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Jul 18 10:55:49 CEST 2018 - ma@suse.de
+
+- libzypp-devel should not require cmake (bsc#1101349)
+- Avoid zombies from ExternalProgram
+- Update ApiConfig
+- fix typo
+- version 17.5.1 (2)
+
+-------------------------------------------------------------------
 Mon Jul  9 14:43:15 CEST 2018 - ma@suse.de
 
 - HardLocksFile: Prevent against empty commit without Target having
