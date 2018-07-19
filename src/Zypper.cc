@@ -4571,6 +4571,14 @@ void Zypper::doCommand()
       return;
     }
 
+    // check root user
+    if ( geteuid() != 0 && !globalOpts().changedRoot )
+    {
+      out().error(_("Root privileges are required for installing or uninstalling packages.") );
+      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
+      return;
+    }
+
     initRepoManager();
     init_target( *this );
     init_repos( *this );
@@ -4597,6 +4605,14 @@ void Zypper::doCommand()
     {
       report_too_many_arguments( _command_help );
       setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      return;
+    }
+
+    // check root user
+    if ( geteuid() != 0 && !globalOpts().changedRoot )
+    {
+      out().error(_("Root privileges are required for installing or uninstalling packages.") );
+      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
       return;
     }
 
