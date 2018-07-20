@@ -4647,7 +4647,7 @@ msgstr "%%posttrans script '%1%' wird ausgeführt"
 #: zypp/target/RpmPostTransCollector.cc:160
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
-msgstr "%p osttrans scripts werden ausgeführt"
+msgstr "%posttrans scripts werden ausgeführt"
 
 #: zypp/target/TargetImpl.cc:310
 msgid " executed"
