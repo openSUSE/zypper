@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-05-25 09:19+0000\n"
+"PO-Revision-Date: 2018-07-21 17:45+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
@@ -3484,7 +3484,7 @@ msgstr ""
 
 #: src/Zypper.cc:2846
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Поиск пакетов, соответствующих строкам для поиска."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2864
@@ -3667,7 +3667,7 @@ msgstr ""
 
 #: src/Zypper.cc:3029
 msgid "Show supplements."
-msgstr ""
+msgstr "Показать соответствия."
 
 #: src/Zypper.cc:3044
 #, c-format, boost-format
@@ -5543,10 +5543,9 @@ msgid "Could not refresh the repositories because of errors."
 msgstr "Не удалось обновить репозитории из-за ошибок."
 
 #: src/repos.cc:1464
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "Некоторые репозитории не обновлены из-за ошибки."
+msgstr "Некоторые репозитории не были обновлены, поскольку не были известны."
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
