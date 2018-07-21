@@ -18,11 +18,56 @@
 #include <list>
 #include <vector>
 
+#include <boost/any.hpp>
+
 #include <zypp/base/String.h>
+#include <zypp/base/Exception.h>
+#include <zypp/sat/Solvable.h>
+#include <zypp/ui/Selectable.h>
 
 #include "main.h"
 #include "utils/ansi.h"
 #include "utils/colors.h"
+
+/** Custom sort index type for table rows representing solvables (like detailed search results). */
+typedef std::pair<zypp::sat::Solvable, ui::Selectable::picklist_size_type> SolvableCSI;
+
+///////////////////////////////////////////////////////////////////
+// Custom sort index helpers
+namespace csidetail
+{
+  /** Default comparator for custom sort indices (std::compare semantic). */
+  template <typename T>
+  inline int simpleAnyTypeComp ( const boost::any &l_r, const boost::any &r_r )
+  {
+    T l = boost::any_cast<T>(l_r);
+    T r = boost::any_cast<T>(r_r);
+    return ( l < r ? -1 : l > r ?  1 : 0 );
+  }
+
+  template <>
+  inline int simpleAnyTypeComp<SolvableCSI> ( const boost::any &l_r, const boost::any &r_r )
+  {
+    SolvableCSI l = boost::any_cast<SolvableCSI>(l_r);
+    SolvableCSI r = boost::any_cast<SolvableCSI>(r_r);
+
+    if ( l.first == r.first )
+      return 0;	// quick check Solvable Id
+
+    int cmp = l.first.name().compare( r.first.name() );
+    if ( cmp )
+      return cmp;
+
+    cmp = l.first.kind().compare( r.first.kind() );
+    if ( cmp )
+      return cmp;
+
+    if ( l.second == r.second )
+      return 0;
+    return ( l.second < r.second ? -1 : 1 );	// `>`! best version up
+  }
+} // namespace csidetail
+///////////////////////////////////////////////////////////////////
 
 //! table drawing style
 enum TableLineStyle {
@@ -96,30 +141,73 @@ public:
 
   typedef std::vector<std::string> container;
 
-  int nsidx() const
-  { return _nsidx; }
+  const boost::any &userData() const
+  { return _userData; }
 
-  void nsidx( int n )
-  { _nsidx = n; }
+  void userData( const boost::any &n_r )
+  { _userData = n_r; }
 
   // BinaryPredicate
   struct Less
   {
-    unsigned _by_column;
-    Less( unsigned by_column ) : _by_column (by_column) {}
+    std::list<unsigned> _by_columns;
+    Less( const std::list<unsigned> &by_columns_r ) : _by_columns (by_columns_r) {
+    }
 
-    bool operator()( const TableRow & a, const TableRow & b ) const
+    bool operator()( const TableRow & a_r, const TableRow & b_r ) const
     {
-      bool noL = _by_column >= a._columns.size();
-      bool noR = _by_column >= b._columns.size();
-      if ( noL || noR )
-      {
-	if ( noL && noR )
-	  return a.nsidx() < b.nsidx();
-	else
-	  return noL && ! noR;
+      for ( unsigned curr_column : _by_columns ) {
+        int c = compCol( curr_column, a_r, b_r );
+        if ( c > 0 )
+          return false;
+        else if ( c < 0 )
+          return true;
       }
-      return a._columns[_by_column] < b._columns[_by_column];
+      return false;
+    }
+
+    int compCol ( const unsigned curr_column_r, const TableRow & a_r, const TableRow & b_r ) const
+    {
+      bool noL = curr_column_r >= a_r._columns.size();
+      bool noR = curr_column_r >= b_r._columns.size();
+
+      if ( noL || noR ) {
+        if ( noL && noR ) {
+	  using csidetail::simpleAnyTypeComp;
+
+          const boost::any &lUserData = a_r.userData();
+          const boost::any &rUserData = b_r.userData();
+
+          if ( lUserData.empty() && !rUserData.empty() )
+            return -1;
+
+          else if ( !lUserData.empty() && rUserData.empty() )
+            return 1;
+
+          else if ( lUserData.empty() && rUserData.empty() )
+            return 0;
+
+          else if ( lUserData.type() != rUserData.type() ) {
+            ZYPP_THROW( zypp::Exception( str::form("Incompatible user types") ) );
+
+          } else if ( lUserData.type() == typeid(SolvableCSI) ) {
+            return simpleAnyTypeComp<SolvableCSI> ( lUserData, rUserData );
+
+          } else if ( lUserData.type() == typeid(std::string) ) {
+            return simpleAnyTypeComp<std::string>( lUserData, rUserData );
+
+          } else if ( lUserData.type() == typeid(unsigned) ) {
+            return simpleAnyTypeComp<unsigned>( lUserData, rUserData );
+
+          } else if ( lUserData.type() == typeid(int) ) {
+            return simpleAnyTypeComp<int>( lUserData, rUserData );
+
+          }
+          ZYPP_THROW( zypp::Exception( str::form("Unsupported user types") ) );
+        } else
+          return ( noL && ! noR ? -1 : ! noL && noR ?  1 : 0);
+      }
+      return ( a_r._columns[curr_column_r] < b_r._columns[curr_column_r] ? -1 : a_r._columns[curr_column_r] > b_r._columns[curr_column_r] ?  1 : 0 );
     }
   };
 
@@ -133,7 +221,7 @@ private:
   container _columns;
   container _details;
   ColorContext _ctxt;
-  ZeroInit<int>_nsidx;	///< numerical sort index, e.g. if string values don't work due to coloring
+  boost::any _userData;	///< user defined sort index, e.g. if string values don't work due to coloring
   friend class Table;
 };
 
@@ -182,8 +270,8 @@ public:
 
   /** Unsorted - pseudo sort column indicating not to sort. */
   static constexpr unsigned Unsorted		= unsigned(-1);
-  /** Nsidx - pseudo sort column using the numerical sort index. */
-  static constexpr unsigned Nsidx		= unsigned(-2);
+  /** UserData - sort column using a custom sort index. */
+  static constexpr unsigned UserData		= unsigned(-2);
 
   /** Get the default sort column or \ref Unsorted (default) */
   unsigned defaultSortColumn() const		{ return _defaultSortColumn; }
@@ -195,7 +283,8 @@ public:
   void sort()					{ sort( unsigned(_defaultSortColumn ) ); }
 
   /** Sort by \a byColumn_r */
-  void sort( unsigned byColumn_r )		{ if ( byColumn_r != Unsorted ) _rows.sort( TableRow::Less( byColumn_r ) ); }
+  void sort( unsigned byColumn_r )		{ if ( byColumn_r != Unsorted ) _rows.sort( TableRow::Less( { byColumn_r } ) ); }
+  void sort( std::list<unsigned> byColumns )    { if ( byColumns.size() ) _rows.sort( TableRow::Less( byColumns ) ); }
 
   /** Custom sort */
   template<class TCompare, typename std::enable_if<!std::is_integral<TCompare>::value>::type* = nullptr>

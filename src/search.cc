@@ -121,7 +121,10 @@ bool FillSearchTableSolvable::operator()( const PoolItem & pi_r ) const
        ? (std::string("(") + _("System Packages") + ")")
        : pi_r->repository().asUserString() );
 
+  row.userData( SolvableCSI(pi_r.satSolvable(), sel->picklistPos(pi_r)));
+
   *_table << row;
+
   return true;	// actually added a row
 }
 

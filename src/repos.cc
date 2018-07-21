@@ -1101,7 +1101,7 @@ static void print_repo_list( Zypper & zypper, const std::list<RepoInfo> & repos 
     th << _("Priority");
     ++index;
     if ( zypper.cOpts().count("sort-by-priority") || ( list_cols.find("P") != std::string::npos && !sort_override ) )
-      sort_index = Table::Nsidx;
+      sort_index = Table::UserData;
   }
 
   // type
@@ -1158,8 +1158,8 @@ static void print_repo_list( Zypper & zypper, const std::list<RepoInfo> & repos 
       tr << repoAutorefreshStr( repo );
     // priority
     if ( all || showprio )
-      // output flush right; use numerical sort index as coloring will break lex. sort
-      ( tr << repoPriorityNumber( repo.priority(), 4 ) ).nsidx( repo.priority() );
+      // output flush right; use custom sort index as coloring will break lex. sort
+      ( tr << repoPriorityNumber( repo.priority(), 4 ) ).userData( repo.priority() );
     // type
     if ( all )
       tr << repo.type().asString();
