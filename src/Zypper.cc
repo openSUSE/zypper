@@ -191,6 +191,26 @@ bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExi
     ? _("The default is to exclude optional patches.")	\
     : _("The default is to include optional patches.") ))
 
+#define ARG_Solver_Flags_Installs \
+  {"allow-downgrade",           no_argument,       &myOpts->_allowDowngrade, 1 },   \
+  {"no-allow-downgrade",        no_argument,       &myOpts->_allowDowngrade, 0 },   \
+  {"allow-name-change",         no_argument,       &myOpts->_allowNameChange, 1 },  \
+  {"no-allow-name-change",      no_argument,       &myOpts->_allowNameChange, 0 },  \
+  {"allow-arch-change",         no_argument,       &myOpts->_allowArchChange, 1 },  \
+  {"no-allow-arch-change",      no_argument,       &myOpts->_allowArchChange, 0 },  \
+  {"allow-vendor-change",       no_argument,       &myOpts->_allowVendorChange, 1 },\
+  {"no-allow-vendor-change",    no_argument,       &myOpts->_allowVendorChange, 0 }
+
+#define option_Solver_Flags_Installs \
+   option( "--allow-downgrade" )  \
+  .option( "--no-allow-downgrade",		_("Whether to allow downgrading installed resolvables.") ) \
+  .option( "--allow-name-change" ) \
+  .option( "--no-allow-name-change",	_("Whether to allow changing the names of installed resolvables.") ) \
+  .option( "--allow-arch-change" ) \
+  .option( "--no-allow-arch-change",	_("Whether to allow changing the architecture of installed resolvables.") ) \
+  .option( "--allow-vendor-change" ) \
+  .option( "--no-allow-vendor-change",	_("Whether to allow changing the vendor of installed resolvables.") )
+
 ///////////////////////////////////////////////////////////////////
 namespace cli
 {
@@ -1768,6 +1788,8 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::INSTALL_e:
   {
+    shared_ptr<InstallerBaseOptions> myOpts( new InstallerBaseOptions( ZypperCommand::INSTALL ) );
+    _commandOptions = myOpts;
     static struct option install_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -1786,6 +1808,7 @@ void Zypper::processCommandOptions()
       {"agree-to-third-party-licenses",  no_argument,  0,  0 },	// rug compatibility, we have --auto-agree-with-licenses
       ARG_Solver_Flags_Common,
       ARG_Solver_Flags_Recommends,
+      ARG_Solver_Flags_Installs,
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
@@ -1846,6 +1869,8 @@ void Zypper::processCommandOptions()
     .optionSectionSolverOptions()
     .option_Solver_Flags_Common
     .option_Solver_Flags_Recommends
+    .optionSectionExpertOptions()
+    .option_Solver_Flags_Installs
     ;
     break;
   }
@@ -1936,6 +1961,8 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::VERIFY_e:
   {
+    shared_ptr<InstallerBaseOptions> myOpts( new InstallerBaseOptions( ZypperCommand::VERIFY ) );
+    _commandOptions = myOpts;
     static struct option verify_options[] = {
       {"no-confirm", no_argument, 0, 'y'},			// pkg/apt/yum user convenience ==> --non-interactive
       {"dry-run", no_argument, 0, 'D'},
@@ -1952,6 +1979,7 @@ void Zypper::processCommandOptions()
       {"repo",                      required_argument, 0, 'r'},
       ARG_Solver_Flags_Common,
       ARG_Solver_Flags_Recommends,
+      ARG_Solver_Flags_Installs,
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1978,12 +2006,16 @@ void Zypper::processCommandOptions()
     .optionSectionSolverOptions()
     .option_Solver_Flags_Common
     .option_Solver_Flags_Recommends
+    .optionSectionExpertOptions()
+    .option_Solver_Flags_Installs
     ;
     break;
   }
 
   case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
   {
+    shared_ptr<InstallerBaseOptions> myOpts( new InstallerBaseOptions( ZypperCommand::INSTALL_NEW_RECOMMENDS ) );
+    _commandOptions = myOpts;
     static struct option options[] = {
       {"dry-run", no_argument, 0, 'D'},
       {"details",		    no_argument,       0,  0 },
@@ -1996,6 +2028,7 @@ void Zypper::processCommandOptions()
       {"download-as-needed",        no_argument,       0,  0 },
       {"repo", required_argument, 0, 'r'},
       ARG_Solver_Flags_Common,
+      ARG_Solver_Flags_Installs,
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2019,6 +2052,8 @@ void Zypper::processCommandOptions()
 
     .optionSectionSolverOptions()
     .option_Solver_Flags_Common
+    .optionSectionExpertOptions()
+    .option_Solver_Flags_Installs
     ;
     break;
   }
@@ -2513,6 +2548,8 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::UPDATE_e:
   {
+    shared_ptr<InstallerBaseOptions> myOpts( new InstallerBaseOptions( ZypperCommand::UPDATE ) );
+    _commandOptions = myOpts;
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -2526,6 +2563,7 @@ void Zypper::processCommandOptions()
       {"best-effort",               no_argument,       0, 0},
       ARG_Solver_Flags_Common,
       ARG_Solver_Flags_Recommends,
+      ARG_Solver_Flags_Installs,
       {"replacefiles",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
@@ -2581,12 +2619,16 @@ void Zypper::processCommandOptions()
     .optionSectionSolverOptions()
     .option_Solver_Flags_Common
     .option_Solver_Flags_Recommends
+    .optionSectionExpertOptions()
+    .option_Solver_Flags_Installs
     ;
     break;
   }
 
   case ZypperCommand::PATCH_e:
   {
+    shared_ptr<InstallerBaseOptions> myOpts( new InstallerBaseOptions( ZypperCommand::PATCH ) );
+    _commandOptions = myOpts;
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       {"updatestack-only",	    no_argument,       0,  0 },
@@ -2597,6 +2639,7 @@ void Zypper::processCommandOptions()
       ARG_License_Agreement,
       ARG_Solver_Flags_Common,
       ARG_Solver_Flags_Recommends,
+      ARG_Solver_Flags_Installs,
       {"replacefiles",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       {"details",		    no_argument,       0,  0 },
@@ -2655,6 +2698,8 @@ void Zypper::processCommandOptions()
       .optionSectionSolverOptions()
       .option_Solver_Flags_Common
       .option_Solver_Flags_Recommends
+      .optionSectionExpertOptions()
+      .option_Solver_Flags_Installs
       ;
     break;
   }
@@ -2721,15 +2766,7 @@ void Zypper::processCommandOptions()
       // solver flags
       ARG_Solver_Flags_Common,
       ARG_Solver_Flags_Recommends,
-      // dup solver flags
-      {"allow-downgrade",           no_argument,       &myOpts->_dupAllowDowngrade, 1 },
-      {"no-allow-downgrade",        no_argument,       &myOpts->_dupAllowDowngrade, 0 },
-      {"allow-name-change",         no_argument,       &myOpts->_dupAllowNameChange, 1 },
-      {"no-allow-name-change",      no_argument,       &myOpts->_dupAllowNameChange, 0 },
-      {"allow-arch-change",         no_argument,       &myOpts->_dupAllowArchChange, 1 },
-      {"no-allow-arch-change",      no_argument,       &myOpts->_dupAllowArchChange, 0 },
-      {"allow-vendor-change",       no_argument,       &myOpts->_dupAllowVendorChange, 1 },
-      {"no-allow-vendor-change",    no_argument,       &myOpts->_dupAllowVendorChange, 0 },
+      ARG_Solver_Flags_Installs,
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2762,16 +2799,9 @@ void Zypper::processCommandOptions()
       .optionSectionSolverOptions()
       .option_Solver_Flags_Common
       .option_Solver_Flags_Recommends
-
       .optionSectionExpertOptions()
-      .option( "--allow-downgrade" )
-      .option( "--no-allow-downgrade",		_("Whether to allow downgrading installed resolvables.") )
-      .option( "--allow-name-change" )
-      .option( "--no-allow-name-change",	_("Whether to allow changing the names of installed resolvables.") )
-      .option( "--allow-arch-change" )
-      .option( "--no-allow-arch-change",	_("Whether to allow changing the architecture of installed resolvables.") )
-      .option( "--allow-vendor-change" )
-      .option( "--no-allow-vendor-change",	_("Whether to allow changing the vendor of installed resolvables.") )
+      .option_Solver_Flags_Installs
+
       ;
     break;
   }
