@@ -295,6 +295,10 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 		*only*, *in-advance*, *in-heaps*, *as-needed*.
 		See corresponding *--download-*'mode' options for their description.
 
+	Expert Options: :: Don't use them unless you know you need them.
+
+include::{incdir}/option_Solver_Flags_Installs.txt[]
+
 	Examples: :: {nop}
 
 		$ *zypper install -t pattern lamp_server*;;
@@ -360,6 +364,10 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 include::{incdir}/option_Solver_Flags_Common.txt[]
 include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
+	Expert Options: :: Don't use them unless you know you need them.
+
+include::{incdir}/option_Solver_Flags_Installs.txt[]
+
 	This command also accepts the *Download-and-install mode options* described in the *install* command.:: {nop}
 --
 
@@ -379,6 +387,10 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 	Solver related options: :: {nop}
 include::{incdir}/option_Solver_Flags_Common.txt[]
 // not supported here! //include::{incdir}/option_Solver_Flags_Recommends.txt[]
+
+	Expert Options: :: Don't use them unless you know you need them.
+
+include::{incdir}/option_Solver_Flags_Installs.txt[]
 
 This command also accepts the *Download-and-install mode options* described in the *install* command.:: {nop}
 --
@@ -508,6 +520,10 @@ Update Management Commands
 include::{incdir}/option_Solver_Flags_Common.txt[]
 include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
+	Expert Options: :: Don't use them unless you know you need them.
+
+include::{incdir}/option_Solver_Flags_Installs.txt[]
+
 	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 --
 
@@ -629,6 +645,10 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 	Solver related options: :: {nop}
 include::{incdir}/option_Solver_Flags_Common.txt[]
 include::{incdir}/option_Solver_Flags_Recommends.txt[]
+
+	Expert Options: :: Don't use them unless you know you need them.
+
+include::{incdir}/option_Solver_Flags_Installs.txt[]
 
 	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 --

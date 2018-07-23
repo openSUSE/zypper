@@ -17,20 +17,29 @@
 
 #include "Zypper.h"
 
+/**
+ * Commonly shared Options type for all commands that install packages
+ */
+struct InstallerBaseOptions : public Options
+{
+  InstallerBaseOptions ( const ZypperCommand & command_r ) : Options(command_r)
+    , _allowDowngrade( -1 )
+    , _allowNameChange( -1 )
+    , _allowArchChange( -1 )
+    , _allowVendorChange( -1 )
+  {}
+  int _allowDowngrade;
+  int _allowNameChange;
+  int _allowArchChange;
+  int _allowVendorChange;
+};
+
 /** dup specific options */
-struct DupOptions : public Options
+struct DupOptions : public InstallerBaseOptions
 {
   DupOptions()
-    : Options( ZypperCommand::DIST_UPGRADE )
-    , _dupAllowDowngrade( -1 )
-    , _dupAllowNameChange( -1 )
-    , _dupAllowArchChange( -1 )
-    , _dupAllowVendorChange( -1 )
+    : InstallerBaseOptions( ZypperCommand::DIST_UPGRADE )
   {}
-  int _dupAllowDowngrade;
-  int _dupAllowNameChange;
-  int _dupAllowArchChange;
-  int _dupAllowVendorChange;
 };
 
 /**
