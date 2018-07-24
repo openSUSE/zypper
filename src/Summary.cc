@@ -1618,9 +1618,15 @@ void Summary::writeXmlResolvableList( std::ostream & out, const KindToResPairSet
 
 void Summary::dumpAsXmlTo( std::ostream & out )
 {
+  unsigned pkgchanged = _inst_pkg_total;
+  const auto & iter = _toremove.find( ResKind::package );
+  if ( iter != _toremove.end() )
+    pkgchanged += iter->second.size();
+
   out << "<install-summary";
   out << " download-size=\"" << ((ByteCount::SizeType)_todownload) << "\"";
   out << " space-usage-diff=\"" << ((ByteCount::SizeType)_inst_size_change) << "\"";
+  out << " packages-to-change=\"" << pkgchanged << "\"";	// bsc#1102429: CaaSP requires it to detect 'nothing to do'
   out << ">" << endl;
 
   if ( !_toupgrade.empty() )
