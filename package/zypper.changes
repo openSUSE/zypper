@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 24 18:54:19 CEST 2018 - ma@suse.de
+
+- XML <install-summary> attribute `packages-to-change` added (bsc#1102429)
+- version 1.13.44
+
+-------------------------------------------------------------------
 Thu Jul 12 11:56:52 CEST 2018 - ma@suse.de
 
 - man: Strengthen that `--config FILE' affects zypper.conf,
