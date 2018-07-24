@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-04-30 06:23+0000\n"
+"PO-Revision-Date: 2018-07-24 19:14+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3423,7 +3423,7 @@ msgstr ""
 
 #: src/Zypper.cc:2846
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Hľadanie balíkov, ktoré doĺňajú hľadané reťazce."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2864
@@ -3607,7 +3607,7 @@ msgstr ""
 
 #: src/Zypper.cc:3029
 msgid "Show supplements."
-msgstr ""
+msgstr "Ukázať doplnky."
 
 #: src/Zypper.cc:3044
 #, c-format, boost-format
@@ -5473,10 +5473,9 @@ msgid "Could not refresh the repositories because of errors."
 msgstr "Nepodarilo sa obnoviť repozitáre kvôli chybám."
 
 #: src/repos.cc:1464
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "Niektoré repozitáre neboli obnovené kvôli chybe."
+msgstr "Niektoré repozitáre neboli obnovené, pretože neboli známe."
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
