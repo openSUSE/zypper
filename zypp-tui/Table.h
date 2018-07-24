@@ -151,7 +151,7 @@ public:
   struct Less
   {
     std::list<unsigned> _by_columns;
-    Less( const std::list<unsigned> &by_columns_r ) : _by_columns (by_columns_r) {
+    Less( std::list<unsigned> by_columns_r ) : _by_columns( std::move(by_columns_r) ) {
     }
 
     bool operator()( const TableRow & a_r, const TableRow & b_r ) const
@@ -284,7 +284,8 @@ public:
 
   /** Sort by \a byColumn_r */
   void sort( unsigned byColumn_r )		{ if ( byColumn_r != Unsorted ) _rows.sort( TableRow::Less( { byColumn_r } ) ); }
-  void sort( std::list<unsigned> byColumns )    { if ( byColumns.size() ) _rows.sort( TableRow::Less( byColumns ) ); }
+  void sort( const std::list<unsigned> & byColumns_r )	{ if ( byColumns_r.size() ) _rows.sort( TableRow::Less( byColumns_r ) ); }
+  void sort( std::list<unsigned> && byColumns_r )	{ if ( byColumns_r.size() ) _rows.sort( TableRow::Less( std::move(byColumns_r) ) ); }
 
   /** Custom sort */
   template<class TCompare, typename std::enable_if<!std::is_integral<TCompare>::value>::type* = nullptr>
