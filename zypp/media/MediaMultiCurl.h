@@ -45,7 +45,7 @@ public:
   MediaMultiCurl(const Url &url_r, const Pathname & attach_point_hint_r);
   ~MediaMultiCurl();
 
-  virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report, RequestOptions options = OPTION_NONE ) const;
+  virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report, const ByteCount &expectedFileSize_r, RequestOptions options = OPTION_NONE ) const override;
 
   void multifetch(const Pathname &filename, FILE *fp, std::vector<Url> *urllist, callback::SendReport<DownloadProgressReport> *report = 0, MediaBlockList *blklist = 0, off_t filesize = off_t(-1)) const;
 

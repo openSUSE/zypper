@@ -219,7 +219,7 @@ namespace zypp {
 	 * \throws MediaException
 	 *
 	 **/
-	void provideFile( const Pathname & filename ) const;
+	void provideFile( const Pathname & filename, const ByteCount &expectedFileSize ) const;
 
 	/**
 	 * Remove filename below attach point IFF handler downloads files
@@ -386,7 +386,7 @@ namespace zypp {
 	      ZYPP_THROW(MediaBadFilenameException(_file.asString()));
 	    } else if ( _media ) {
 	      try {
-		_media->provideFile( _file );
+		_media->provideFile( _file, 0 );
 		_local_file = _media->localPath( _file );
 	      }
 	      catch (const MediaException & excpt_r)

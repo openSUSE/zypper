@@ -668,10 +668,10 @@ namespace zypp
       return path;
     }
 
-    // ---------------------------------------------------------------
     void
     MediaManager::provideFile(MediaAccessId   accessId,
-                              const Pathname &filename ) const
+                              const Pathname &filename,
+                              const ByteCount &expectedFileSize ) const
     {
       MutexLock glock(g_Mutex);
 
@@ -679,7 +679,15 @@ namespace zypp
 
       ref.checkDesired(accessId);
 
-      ref.handler->provideFile(filename);
+      ref.handler->provideFile(filename, expectedFileSize);
+    }
+
+    // ---------------------------------------------------------------
+    void
+    MediaManager::provideFile(MediaAccessId   accessId,
+                              const Pathname &filename ) const
+    {
+      provideFile( accessId, filename, 0);
     }
 
     // ---------------------------------------------------------------

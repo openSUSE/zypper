@@ -1119,12 +1119,17 @@ multifetchrequest::run(std::vector<Url> &urllist)
 		  worker->evaluateCurlCode(Pathname(), cc, false);
 		}
 	    }
+
+	  if ( _filesize > 0 && _fetchedgoodsize > _filesize ) {
+	    ZYPP_THROW(MediaFileSizeExceededException(_baseurl, _filesize));
+	  }
 	}
 
       // send report
       if (_report)
 	{
 	  int percent = _totalsize ? (100 * (_fetchedgoodsize + _fetchedsize)) / (_totalsize + _fetchedsize) : 0;
+
 	  double avg = 0;
 	  if (now > _starttime)
 	    avg = _fetchedsize / (now - _starttime);
@@ -1274,6 +1279,8 @@ int MediaMultiCurl::progressCallback( void *clientp, double dltotal, double dlno
     }
   if (ismetalink)
     {
+      // this is a metalink file change the expected filesize
+      MediaCurl::resetExpectedFileSize( clientp, ByteCount( 2, ByteCount::MB) );
       // we're downloading the metalink file. Just trigger aliveCallbacks
       curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, &MediaCurl::aliveCallback);
       return MediaCurl::aliveCallback(clientp, dltotal, dlnow, ultotal, ulnow);
@@ -1282,7 +1289,7 @@ int MediaMultiCurl::progressCallback( void *clientp, double dltotal, double dlno
   return MediaCurl::progressCallback(clientp, dltotal, dlnow, ultotal, ulnow);
 }
 
-void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, RequestOptions options ) const
+void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, const ByteCount &expectedFileSize_r, RequestOptions options ) const
 {
   Pathname dest = target.absolutename();
   if( assert_dir( dest.dirname() ) )
@@ -1338,7 +1345,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
   curl_easy_setopt(_curl, CURLOPT_PRIVATE, file);
   try
     {
-      MediaCurl::doGetFileCopyFile(filename, dest, file, report, options);
+      MediaCurl::doGetFileCopyFile(filename, dest, file, report, expectedFileSize_r, options);
     }
   catch (Exception &ex)
     {
@@ -1428,7 +1435,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	    }
 	  try
 	    {
-	      multifetch(filename, file, &urls, &report, &bl);
+	      multifetch(filename, file, &urls, &report, &bl, expectedFileSize_r);
 	    }
 	  catch (MediaCurlException &ex)
 	    {
@@ -1436,6 +1443,9 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	      ZYPP_RETHROW(ex);
 	    }
 	}
+      catch (MediaFileSizeExceededException &ex) {
+        ZYPP_RETHROW(ex);
+      }
       catch (Exception &ex)
 	{
 	  // something went wrong. fall back to normal download
@@ -1455,7 +1465,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	  file = fopen(destNew.c_str(), "w+e");
 	  if (!file)
 	    ZYPP_THROW(MediaWriteException(destNew));
-	  MediaCurl::doGetFileCopyFile(filename, dest, file, report, options | OPTION_NO_REPORT_START);
+	  MediaCurl::doGetFileCopyFile(filename, dest, file, report, expectedFileSize_r, options | OPTION_NO_REPORT_START);
 	}
     }
 
@@ -1513,6 +1523,7 @@ void MediaMultiCurl::multifetch(const Pathname & filename, FILE *fp, std::vector
       if (!_multi)
 	ZYPP_THROW(MediaCurlInitException(baseurl));
     }
+
   multifetchrequest req(this, filename, baseurl, _multi, fp, report, blklist, filesize);
   req._timeout = _settings.timeout();
   req._connect_timeout = _settings.connectTimeout();

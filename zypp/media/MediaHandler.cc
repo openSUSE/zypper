@@ -991,8 +991,8 @@ MediaHandler::dependsOnParent(MediaAccessId parentId, bool exactIdMatch)
 //
 //	DESCRIPTION :
 //
-void MediaHandler::provideFileCopy( Pathname srcFilename,
-                                       Pathname targetFilename ) const
+void MediaHandler::provideFileCopy(Pathname srcFilename,
+                                       Pathname targetFilename , const ByteCount &expectedFileSize_r) const
 {
   if ( !isAttached() ) {
     INT << "Media not_attached on provideFileCopy(" << srcFilename
@@ -1000,18 +1000,18 @@ void MediaHandler::provideFileCopy( Pathname srcFilename,
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  getFileCopy( srcFilename, targetFilename ); // pass to concrete handler
+  getFileCopy( srcFilename, targetFilename, expectedFileSize_r ); // pass to concrete handler
   DBG << "provideFileCopy(" << srcFilename << "," << targetFilename  << ")" << endl;
 }
 
-void MediaHandler::provideFile( Pathname filename ) const
+void MediaHandler::provideFile(Pathname filename , const ByteCount &expectedFileSize_r) const
 {
   if ( !isAttached() ) {
     INT << "Error: Not attached on provideFile(" << filename << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  getFile( filename ); // pass to concrete handler
+  getFile( filename, expectedFileSize_r ); // pass to concrete handler
   DBG << "provideFile(" << filename << ")" << endl;
 }
 
@@ -1176,7 +1176,7 @@ void MediaHandler::getDirectoryYast( filesystem::DirContent & retlist,
 
   // look for directory.yast
   Pathname dirFile = dirname + "directory.yast";
-  getFile( dirFile );
+  getFile( dirFile, 0 );
   DBG << "provideFile(" << dirFile << "): " << "OK" << endl;
 
   // using directory.yast
@@ -1232,7 +1232,7 @@ ostream & operator<<( ostream & str, const MediaHandler & obj )
 //	DESCRIPTION : Asserted that media is attached.
 //                    Default implementation of pure virtual.
 //
-void MediaHandler::getFile( const Pathname & filename ) const
+void MediaHandler::getFile(const Pathname & filename , const ByteCount &) const
 {
     PathInfo info( localPath( filename ) );
     if( info.isFile() ) {
@@ -1246,9 +1246,9 @@ void MediaHandler::getFile( const Pathname & filename ) const
 }
 
 
-void MediaHandler::getFileCopy ( const Pathname & srcFilename, const Pathname & targetFilename ) const
+void MediaHandler::getFileCopy (const Pathname & srcFilename, const Pathname & targetFilename , const ByteCount &expectedFileSize_r) const
 {
-  getFile(srcFilename);
+  getFile(srcFilename, expectedFileSize_r);
 
   if ( copy( localPath( srcFilename ), targetFilename ) != 0 ) {
     ZYPP_THROW(MediaWriteException(targetFilename));

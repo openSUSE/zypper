@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metalink version="3.0"
+  xmlns="http://www.metalinker.org/"
+  generator="http://metalinks.sourceforge.net/"
+  >
+<files>
+	<file name="test-big.txt">
+		<size>7135</size>
+		<verification>
+			<hash type="md4">818dcbb0bbb033aa8b8c9ddd269648d2</hash>
+			<hash type="md5">f69a3e53751eb3249c3c36c50290b8da</hash>
+			<hash type="sha1">edf0cf52765c9b5cfeddfd83b62f8517b119ca77</hash>
+			<hash type="sha256">b0343a8ee06d97c9786b65bcb64c49fbb7e1d517159fac4633ba56f7a521fef0</hash>
+			<hash type="sha384">202d21693dabe53ff5f2305d6b78844ffaa3b566b9644d61ca087cab752965b16d6a188def7a9463b5f17fdc50b3d105</hash>
+			<hash type="sha512">caf260dd5420a6a6df6a558eac69a901cd3e43dbfd37b54e0fb176940f3e09c3f96c7faa22e505777106ebf056c471be7556c8cba80331d6efdb9e763e66190b</hash>
+			<hash type="ripemd160">77fc06ff936163cfb6c1b0c68cb47a295a5bf8e3</hash>
+			<hash type="tiger192">2fcd624ba2ad1adb2ff23af58049b6f7b062754eadd031b1</hash>
+			<hash type="crc32">011209ae</hash>
+			<hash type="ed2k">818dcbb0bbb033aa8b8c9ddd269648d2</hash>
+			<pieces length="262144" type="sha1">
+				<hash piece="0">edf0cf52765c9b5cfeddfd83b62f8517b119ca77</hash>
+			</pieces>
+		</verification>
+		<resources>
+			<url type="http">http://localhost:10002/dir/test-big.txt</url>
+		</resources>
+	</file>
+</files>
+</metalink>

@@ -53,7 +53,7 @@ class MediaCurl : public MediaHandler
 
     virtual void attachTo (bool next = false);
     virtual void releaseFrom( const std::string & ejectDev );
-    virtual void getFile( const Pathname & filename ) const;
+    virtual void getFile( const Pathname & filename, const ByteCount &expectedFileSize_r ) const override;
     virtual void getDir( const Pathname & dirname, bool recurse_r ) const;
     virtual void getDirInfo( std::list<std::string> & retlist,
                              const Pathname & dirname, bool dots = true ) const;
@@ -82,14 +82,14 @@ class MediaCurl : public MediaHandler
      * \throws MediaException
      *
      */
-    virtual void getFileCopy( const Pathname & srcFilename, const Pathname & targetFilename) const;
+    virtual void getFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, const ByteCount &expectedFileSize_r) const override;
 
     /**
      *
      * \throws MediaException
      *
      */
-    virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report, RequestOptions options = OPTION_NONE ) const;
+    virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report, const ByteCount &expectedFileSize_r,  RequestOptions options = OPTION_NONE ) const;
 
 
     virtual bool checkAttachPoint(const Pathname &apoint) const;
@@ -147,9 +147,11 @@ class MediaCurl : public MediaHandler
      *
      * \throws MediaException If there is a problem
      */
-    void evaluateCurlCode( const zypp::Pathname &filename, CURLcode code, bool timeout ) const;
+    void evaluateCurlCode(const zypp::Pathname &filename, CURLcode code, bool timeout) const;
 
-    void doGetFileCopyFile( const Pathname & srcFilename, const Pathname & dest, FILE *file, callback::SendReport<DownloadProgressReport> & _report, RequestOptions options = OPTION_NONE ) const;
+    void doGetFileCopyFile( const Pathname & srcFilename, const Pathname & dest, FILE *file, callback::SendReport<DownloadProgressReport> & _report, const ByteCount &expectedFileSize_r, RequestOptions options = OPTION_NONE ) const;
+
+    static void resetExpectedFileSize ( void *clientp, const ByteCount &expectedFileSize );
 
   private:
     /**

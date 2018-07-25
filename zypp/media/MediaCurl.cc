@@ -184,19 +184,24 @@ namespace zypp {
     struct ProgressData
     {
       ProgressData( CURL *_curl, time_t _timeout = 0, const Url & _url = Url(),
+                    ByteCount expectedFileSize_r = 0,
 		    callback::SendReport<DownloadProgressReport> *_report = nullptr )
         : curl( _curl )
 	, url( _url )
 	, timeout( _timeout )
         , reached( false )
+        , fileSizeExceeded ( false )
         , report( _report )
+        , _expectedFileSize( expectedFileSize_r )
       {}
 
       CURL	*curl;
       Url	url;
       time_t	timeout;
       bool	reached;
+      bool      fileSizeExceeded;
       callback::SendReport<DownloadProgressReport> *report;
+      ByteCount _expectedFileSize;
 
       time_t _timeStart	= 0;	///< Start total stats
       time_t _timeLast	= 0;	///< Start last period(~1sec)
@@ -240,6 +245,9 @@ namespace zypp {
 	if ( timeout )
 	  reached = ( (now - _timeRcv) > timeout );
 
+        // check if the downloaded data is already bigger than what we expected
+  	fileSizeExceeded = _expectedFileSize > 0 && _expectedFileSize < static_cast<ByteCount::SizeType>(_dnlNow);
+
 	// percentage:
 	if ( _dnlTotal )
 	  _dnlPercent = int(_dnlNow * 100 / _dnlTotal);
@@ -260,6 +268,8 @@ namespace zypp {
 
       int reportProgress() const
       {
+        if ( fileSizeExceeded )
+          return 1;
 	if ( reached )
 	  return 1;	// no-data timeout
 	if ( report && !(*report)->progress( _dnlPercent, url, _drateTotal, _drateLast ) )
@@ -965,16 +975,16 @@ Url MediaCurl::getFileUrl( const Pathname & filename_r ) const
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::getFile( const Pathname & filename ) const
+void MediaCurl::getFile(const Pathname & filename , const ByteCount &expectedFileSize_r) const
 {
     // Use absolute file name to prevent access of files outside of the
     // hierarchy below the attach point.
-    getFileCopy(filename, localPath(filename).absolutename());
+    getFileCopy(filename, localPath(filename).absolutename(), expectedFileSize_r);
 }
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target) const
+void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target, const ByteCount &expectedFileSize_r ) const
 {
   callback::SendReport<DownloadProgressReport> report;
 
@@ -986,7 +996,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
   {
     try
     {
-      doGetFileCopy(filename, target, report);
+      doGetFileCopy(filename, target, report, expectedFileSize_r);
       retry = false;
     }
     // retry with proper authentication data
@@ -1051,9 +1061,9 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::evaluateCurlCode( const Pathname &filename,
+void MediaCurl::evaluateCurlCode(const Pathname &filename,
                                   CURLcode code,
-                                  bool timeout_reached ) const
+                                  bool timeout_reached) const
 {
   if ( code != 0 )
   {
@@ -1062,6 +1072,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
       url = _url;
     else
       url = getFileUrl(filename);
+
     std::string err;
     {
       switch ( code )
@@ -1370,7 +1381,7 @@ bool MediaCurl::detectDirIndex() const
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, RequestOptions options ) const
+void MediaCurl::doGetFileCopy(const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, const ByteCount &expectedFileSize_r, RequestOptions options ) const
 {
     Pathname dest = target.absolutename();
     if( assert_dir( dest.dirname() ) )
@@ -1422,7 +1433,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     }
     try
     {
-      doGetFileCopyFile(filename, dest, file, report, options);
+      doGetFileCopyFile(filename, dest, file, report, expectedFileSize_r, options);
     }
     catch (Exception &e)
     {
@@ -1484,7 +1495,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::doGetFileCopyFile( const Pathname & filename , const Pathname & dest, FILE *file, callback::SendReport<DownloadProgressReport> & report, RequestOptions options ) const
+void MediaCurl::doGetFileCopyFile(const Pathname & filename , const Pathname & dest, FILE *file, callback::SendReport<DownloadProgressReport> & report, const ByteCount &expectedFileSize_r, RequestOptions options ) const
 {
     DBG << filename.asString() << endl;
 
@@ -1524,7 +1535,7 @@ void MediaCurl::doGetFileCopyFile( const Pathname & filename , const Pathname & 
     }
 
     // Set callback and perform.
-    ProgressData progressData(_curl, _settings.timeout(), url, &report);
+    ProgressData progressData(_curl, _settings.timeout(), url, expectedFileSize_r, &report);
     if (!(options & OPTION_NO_REPORT_START))
       report->start(url, dest);
     if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, &progressData ) != 0 ) {
@@ -1568,7 +1579,11 @@ void MediaCurl::doGetFileCopyFile( const Pathname & filename , const Pathname & 
       // which holds whether the timeout was reached or not,
       // otherwise it would be a user cancel
       try {
-        evaluateCurlCode( filename, ret, progressData.reached);
+
+        if ( progressData.fileSizeExceeded )
+          ZYPP_THROW(MediaFileSizeExceededException(url, progressData._expectedFileSize));
+
+        evaluateCurlCode( filename, ret, progressData.reached );
       }
       catch ( const MediaException &e ) {
         // some error, we are not sure about file existence, rethrw
@@ -1598,7 +1613,7 @@ void MediaCurl::getDir( const Pathname & dirname, bool recurse_r ) const
       switch ( it->type ) {
       case filesystem::FT_NOT_AVAIL: // old directory.yast contains no typeinfo at all
       case filesystem::FT_FILE:
-        getFile( filename );
+        getFile( filename, 0 );
         break;
       case filesystem::FT_DIR: // newer directory.yast contain at least directory info
         if ( recurse_r ) {
@@ -1686,6 +1701,18 @@ string MediaCurl::getAuthHint() const
   }
 
   return "";
+}
+
+/**
+ * MediaMultiCurl needs to reset the expected filesize in case a metalink file is downloaded
+ * otherwise this function should not be called
+ */
+void MediaCurl::resetExpectedFileSize(void *clientp, const ByteCount &expectedFileSize)
+{
+  ProgressData *data = reinterpret_cast<ProgressData *>(clientp);
+  if ( data ) {
+    data->_expectedFileSize = expectedFileSize;
+  }
 }
 
 ///////////////////////////////////////////////////////////////////

@@ -748,6 +748,7 @@ namespace zypp
        *
        * \param accessId  The media access id to use.
        * \param filename  The filename to provide, relative to localRoot().
+       * \param expectedFileSize The expected filesize, download will stop if it is exceeded
        *
        * \throws MediaNotOpenException in case of invalid access id.
        * \throws MediaNotAttachedException in case, that the media is not attached.
@@ -758,6 +759,11 @@ namespace zypp
        * \throws MediaSystemException in case a system operation fails.
        * \throws MediaException derived exception, depending on the url (handler).
        */
+
+      void
+      provideFile(MediaAccessId accessId,
+                  const Pathname &filename,
+                  const ByteCount &expectedFileSize) const;
 
       void
       provideFile(MediaAccessId   accessId,

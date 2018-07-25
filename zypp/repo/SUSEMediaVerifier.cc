@@ -51,7 +51,7 @@ bool SUSEMediaVerifier::isDesiredMedia(const media::MediaAccessRef &ref)
     return true;
 
   Pathname media_file = "/media." + str::numstring(_media_nr) + "/media";
-  ref->provideFile (media_file);
+  ref->provideFile (media_file, 0);
   media_file = ref->localPath(media_file);
   std::ifstream str(media_file.asString().c_str());
   std::string vendor;

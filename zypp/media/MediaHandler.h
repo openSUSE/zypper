@@ -358,7 +358,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-	virtual void getFile( const Pathname & filename ) const = 0;
+	virtual void getFile( const Pathname & filename, const ByteCount &expectedFileSize_r ) const;
 
         /**
          * Call concrete handler to provide a file under a different place
@@ -371,7 +371,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
          **/
-        virtual void getFileCopy( const Pathname & srcFilename, const Pathname & targetFilename ) const;
+        virtual void getFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, const ByteCount &expectedFileSize_r ) const;
 
 
 	/**
@@ -571,7 +571,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-	void provideFile( Pathname filename ) const;
+	void provideFile( Pathname filename, const ByteCount &expectedFileSize_r ) const;
 
 	/**
 	 * Call concrete handler to provide a copy of a file under a different place
@@ -584,7 +584,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-        void provideFileCopy( Pathname srcFilename, Pathname targetFilename) const;
+        void provideFileCopy( Pathname srcFilename, Pathname targetFilename, const ByteCount &expectedFileSize_r ) const;
 
 	/**
 	 * Use concrete handler to provide directory denoted

@@ -337,13 +337,13 @@ MediaAccess::release( const std::string & ejectDev )
 // filename is interpreted relative to the attached url
 // and a path prefix is preserved to destination
 void
-MediaAccess::provideFile( const Pathname & filename ) const
+MediaAccess::provideFile(const Pathname & filename , const ByteCount &expectedFileSize) const
 {
   if ( !_handler ) {
     ZYPP_THROW(MediaNotOpenException("provideFile(" + filename.asString() + ")"));
   }
 
-  _handler->provideFile( filename );
+  _handler->provideFile( filename, expectedFileSize );
 }
 
 void
@@ -470,7 +470,7 @@ void MediaAccess::getFile( const Url &from, const Pathname &to )
   try {
     media.open( u );
     media.attach();
-    media._handler->provideFileCopy( base, to );
+    media._handler->provideFileCopy( base, to, 0 );
     media.release();
   }
   catch (const MediaException & excpt_r)

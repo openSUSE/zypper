@@ -109,10 +109,11 @@ IMPL_PTR_TYPE(MediaSetAccess);
   struct ProvideFileOperation
   {
     Pathname result;
+    ByteCount expectedFileSize;
     void operator()( media::MediaAccessId media, const Pathname &file )
     {
       media::MediaManager media_mgr;
-      media_mgr.provideFile(media, file);
+      media_mgr.provideFile(media, file, expectedFileSize);
       result = media_mgr.localPath(media, file);
     }
   };
@@ -158,6 +159,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
   Pathname MediaSetAccess::provideFile( const OnMediaLocation & resource, ProvideFileOptions options, const Pathname &deltafile )
   {
     ProvideFileOperation op;
+    op.expectedFileSize = resource.downloadSize();
     provide( boost::ref(op), resource, options, deltafile );
     return op.result;
   }

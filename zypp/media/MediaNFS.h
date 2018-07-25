@@ -40,7 +40,7 @@ namespace zypp {
 	virtual void attachTo (bool next = false);
 
         virtual void releaseFrom( const std::string & ejectDev );
-	virtual void getFile( const Pathname & filename ) const;
+	virtual void getFile( const Pathname & filename, const ByteCount &expectedFileSize_r ) const;
 	virtual void getDir( const Pathname & dirname, bool recurse_r ) const;
         virtual void getDirInfo( std::list<std::string> & retlist,
                                  const Pathname & dirname, bool dots = true ) const;

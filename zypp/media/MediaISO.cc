@@ -272,9 +272,9 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
-    void MediaISO::getFile(const Pathname &filename) const
+    void MediaISO::getFile(const Pathname &filename, const ByteCount &expectedFileSize_r) const
     {
-      MediaHandler::getFile(filename);
+      MediaHandler::getFile(filename, expectedFileSize_r);
     }
 
     // ---------------------------------------------------------------

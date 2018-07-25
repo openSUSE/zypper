@@ -20,6 +20,7 @@
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
+#include "zypp/ByteCount.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -484,6 +485,23 @@ namespace zypp
       virtual std::ostream & dumpOn( std::ostream & str ) const;
       std::string _url;
       std::string _msg;
+    };
+
+    class MediaFileSizeExceededException : public MediaException
+    {
+    public:
+      MediaFileSizeExceededException(const Url & url_r, const ByteCount &cnt_r, const std::string & msg = "")
+      : MediaException(msg)
+      , _url(url_r.asString())
+      , _msg(msg)
+      , _expectedFileSize(cnt_r)
+      {}
+      virtual ~MediaFileSizeExceededException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+      std::string _url;
+      std::string _msg;
+      ByteCount _expectedFileSize;
     };
 
     /** For HTTP 503 and similar. */

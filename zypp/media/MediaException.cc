@@ -190,6 +190,14 @@ namespace zypp
       return str;
     }
 
+    std::ostream &MediaFileSizeExceededException::dumpOn(std::ostream &str) const
+    {
+      str << form(_("Downloaded data exceeded the expected filesize '%s' of '%s'."), _expectedFileSize.asString().c_str(), _url.c_str() );
+      if ( !_msg.empty() )
+        str << endl << _msg;
+      return str;
+    }
+
     std::ostream & MediaTemporaryProblemException::dumpOn( std::ostream & str ) const
     {
       str << form(_("Location '%s' is temporarily unaccessible."), _url.c_str() );
