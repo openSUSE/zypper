@@ -15,11 +15,10 @@ class Zypper;
 */
 
 /** ps specific options */
-struct PsOptions : public Options
+struct PsOptions : public MixinOptions<ZypperCommand::PS>
 {
   PsOptions()
-  : Options( ZypperCommand::PS )
-  , _shortness( 0 )
+  : _shortness( 0 )
   {}
 
   unsigned	_shortness;	//< 1:wo file, 2:only proc with services, 3:service names only

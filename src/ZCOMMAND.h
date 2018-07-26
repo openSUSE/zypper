@@ -15,15 +15,15 @@ class Zypper;
 */
 
 /** @command@ specific options */
-struct @Command@Options : public Options
+struct @Command@Options : public MixinOptions<ZypperCommand::@COMMAND@>
 {
-  @Command@Options() : Options( ZypperCommand::@COMMAND@ )
+  @Command@Options()
   {}
 
   //** @Command@ user help (translated). */
   //virtual std::ostream & showHelpOn( std::ostream & out ) const;
 
-  bool	_myopt;	//< opts go here...
+  bool	_myopt = true;	//< opts go here...
 };
 
 /** Execute @command@.

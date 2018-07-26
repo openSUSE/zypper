@@ -4,11 +4,10 @@
 #include "Zypper.h"
 
 /** locks specific options */
-struct ListLocksOptions : public Options
+struct ListLocksOptions : public MixinOptions<ZypperCommand::LIST_LOCKS>
 {
   ListLocksOptions()
-    : Options( ZypperCommand::LIST_LOCKS )
-    , _withMatches( false )
+    : _withMatches( false )
     , _withSolvables( false )
   {}
   bool _withMatches;

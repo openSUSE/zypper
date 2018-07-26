@@ -32,14 +32,13 @@ class Zypper;
 */
 
 /** source-download specific options */
-struct SourceDownloadOptions : public Options
+struct SourceDownloadOptions : public MixinOptions<ZypperCommand::SOURCE_DOWNLOAD>
 {
   static const Pathname _defaultDirectory;
   static const std::string _manifestName;
 
   SourceDownloadOptions()
-    : Options( ZypperCommand::SOURCE_DOWNLOAD )
-    , _directory( _defaultDirectory )
+    : _directory( _defaultDirectory )
 //     , _manifest( true )
     , _delete( true )
     , _dryrun( false )

@@ -18,29 +18,41 @@
 #include "Zypper.h"
 
 /**
- * Commonly shared Options type for all commands that install packages
+ * Commonly shared Options mixin for all commands that install packages
  */
-struct InstallerBaseOptions : public Options
+struct InstallerBaseOptions : public OptionsMixin
 {
-  InstallerBaseOptions ( const ZypperCommand & command_r ) : Options(command_r)
-    , _allowDowngrade( -1 )
-    , _allowNameChange( -1 )
-    , _allowArchChange( -1 )
-    , _allowVendorChange( -1 )
-  {}
-  int _allowDowngrade;
-  int _allowNameChange;
-  int _allowArchChange;
-  int _allowVendorChange;
+  int _allowDowngrade		= -1;	///< indeterminate: keep the resolvers default
+  int _allowNameChange		= -1;	///< indeterminate: keep the resolvers default
+  int _allowArchChange		= -1;	///< indeterminate: keep the resolvers default
+  int _allowVendorChange	= -1;	///< indeterminate: keep the resolvers default
 };
 
-/** dup specific options */
-struct DupOptions : public InstallerBaseOptions
-{
-  DupOptions()
-    : InstallerBaseOptions( ZypperCommand::DIST_UPGRADE )
-  {}
-};
+/**
+ * Commonly shared Options type for all commands that install packages.
+ */
+template <const ZypperCommand& TZypperCommand>
+struct InstallCommandOptions : public MixinOptions<TZypperCommand, InstallerBaseOptions>
+{};
+
+struct InstallOptions : public InstallCommandOptions<ZypperCommand::INSTALL>
+{};
+
+struct UpdateOptions : public InstallCommandOptions<ZypperCommand::UPDATE>
+{};
+
+struct PatchOptions : public InstallCommandOptions<ZypperCommand::PATCH>
+{};
+
+struct VerifyOptions : public InstallCommandOptions<ZypperCommand::VERIFY>
+{};
+
+struct InrOptions : public InstallCommandOptions<ZypperCommand::INSTALL_NEW_RECOMMENDS>
+{};
+
+struct DupOptions : public InstallCommandOptions<ZypperCommand::DIST_UPGRADE>
+{};
+
 
 /**
  * Run the solver.
