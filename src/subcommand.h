@@ -34,11 +34,8 @@ class Zypper;
  (Idea and wording are shamelessly stolen from git :)
 */
 /** subcommand specific options */
-struct SubcommandOptions : public Options
+struct SubcommandOptions : public MixinOptions<ZypperCommand::SUBCOMMAND>
 {
-  SubcommandOptions() : Options( ZypperCommand::SUBCOMMAND )
-  {}
-
   /** Subcommand user help (translated).
    * Unlike other commands, this page is created dynamicly for
    * subcommand overview. Command specific help will run

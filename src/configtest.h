@@ -13,7 +13,7 @@ class Zypper;
 /// \class ConfigtestOptions
 /// \brief \ref Configtest specific options
 ///////////////////////////////////////////////////////////////////
-struct ConfigtestOptions : public Options
+struct ConfigtestOptions // A FAKED command which can't use class Options
 {};
 ///////////////////////////////////////////////////////////////////
 

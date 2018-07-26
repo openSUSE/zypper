@@ -32,13 +32,12 @@ class Zypper;
 */
 
 /** download specific options */
-struct DownloadOptions : public Options
+struct DownloadOptions : public MixinOptions<ZypperCommand::DOWNLOAD>
 {
   static const Pathname _defaultDirectory;
 
   DownloadOptions()
-    : Options( ZypperCommand::DOWNLOAD)
-    , _dryrun( false )
+    : _dryrun( false )
     , _allmatches( false )
   {}
 

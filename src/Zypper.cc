@@ -1788,7 +1788,7 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::INSTALL_e:
   {
-    shared_ptr<InstallerBaseOptions> myOpts( new InstallerBaseOptions( ZypperCommand::INSTALL ) );
+    shared_ptr<InstallOptions> myOpts( new InstallOptions );
     _commandOptions = myOpts;
     static struct option install_options[] = {
       {"repo",                      required_argument, 0, 'r'},
@@ -1961,7 +1961,7 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::VERIFY_e:
   {
-    shared_ptr<InstallerBaseOptions> myOpts( new InstallerBaseOptions( ZypperCommand::VERIFY ) );
+    shared_ptr<VerifyOptions> myOpts( new VerifyOptions );
     _commandOptions = myOpts;
     static struct option verify_options[] = {
       {"no-confirm", no_argument, 0, 'y'},			// pkg/apt/yum user convenience ==> --non-interactive
@@ -2014,7 +2014,7 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
   {
-    shared_ptr<InstallerBaseOptions> myOpts( new InstallerBaseOptions( ZypperCommand::INSTALL_NEW_RECOMMENDS ) );
+    shared_ptr<InrOptions> myOpts( new InrOptions );
     _commandOptions = myOpts;
     static struct option options[] = {
       {"dry-run", no_argument, 0, 'D'},
@@ -2548,7 +2548,7 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::UPDATE_e:
   {
-    shared_ptr<InstallerBaseOptions> myOpts( new InstallerBaseOptions( ZypperCommand::UPDATE ) );
+    shared_ptr<UpdateOptions> myOpts( new UpdateOptions );
     _commandOptions = myOpts;
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
@@ -2627,7 +2627,7 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::PATCH_e:
   {
-    shared_ptr<InstallerBaseOptions> myOpts( new InstallerBaseOptions( ZypperCommand::PATCH ) );
+    shared_ptr<PatchOptions> myOpts( new PatchOptions );
     _commandOptions = myOpts;
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
@@ -2744,7 +2744,7 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::DIST_UPGRADE_e:
   {
-    shared_ptr<DupOptions> myOpts( new DupOptions() );
+    shared_ptr<DupOptions> myOpts( new DupOptions );
     _commandOptions = myOpts;
     static struct option dupdate_options[] = {
       {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive

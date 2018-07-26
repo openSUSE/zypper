@@ -327,7 +327,10 @@ public:
     return myopt;
   }
 
-  /** Convenience to return command options for \c Opt_, either casted from _commandOptions or newly created. */
+private:
+  /** Convenience to return command options for \c Opt_, either casted from _commandOptions or newly created.
+   * Not for public use, only to init a new commands _commandOptions.
+   */
   template<class Opt_>
   shared_ptr<Opt_> assertCommandOptions()
   {
@@ -397,7 +400,17 @@ void print_unknown_command_hint( Zypper & zypper );
 void print_command_help_hint( Zypper & zypper );
 
 ///////////////////////////////////////////////////////////////////
-/// \brief Base class for command specific option classes.
+/// \class Options
+/// \brief Base class for command specific option values.
+///
+/// Option set for a specific command should be derived from \ref Options.
+/// Place an instance in \ref Zypper and access it e.g. via
+/// \ref Zypper::commandOptionsAs.
+///
+/// The \ref MixinOptions template may be used to build command
+/// options combining multiple common option sets.
+///
+/// \see \ref MixinOptions
 ///////////////////////////////////////////////////////////////////
 struct Options
 {
@@ -437,6 +450,45 @@ private:
 };
 
 ///////////////////////////////////////////////////////////////////
+/// \class OptionsMixin
+/// \brief (Optional) common base class for options mixins.
+///////////////////////////////////////////////////////////////////
+struct OptionsMixin
+{};
+
+///////////////////////////////////////////////////////////////////
+/// \class MixinOptions<TZypperCommand,Mixins...>
+/// \brief Build command options combining multiple common option sets.
+/// \code
+///   struct CommonOptionsMixin : public OptionsMixin
+///   { /* common option values */ };
+///
+///   struct ExoticOptionsMixin : public OptionsMixin
+///   { /* exotic option values */ };
+///
+///   struct AOptions : public MixinOptions<ZypperCommand::A_e, CommonOptionsMixin>
+///   {
+///     /* common option values */
+///     /* command A specific options */
+///   };
+///
+///   struct BOptions : public MixinOptions<ZypperCommand::B_e, CommonOptionsMixin, ExoticOptionsMixin>
+///   {
+///     /* common option values */
+///     /* more common option values */
+///     /* command B specific options */
+///   };
+/// \endcode
+/// \see \ref Options
+///////////////////////////////////////////////////////////////////
+template <const ZypperCommand& TZypperCommand, class... TMixins>
+struct MixinOptions : public Options, public TMixins...
+{
+  MixinOptions() : Options( TZypperCommand ) {}
+};
+
+///////////////////////////////////////////////////////////////////
+/// \class CommandBase<Derived,Options>
 /// \brief Base class for command specific implementation classes.
 ///////////////////////////////////////////////////////////////////
 template <class Derived_, class Options_>
