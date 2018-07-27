@@ -52,8 +52,8 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
   Pathname keypath = masterIndex_r.extend( ".key" );
 
   // always download them, even if repoGpgCheck is disabled
-  enqueue( OnMediaLocation( sigpath, 1 ).setOptional( true ) );
-  enqueue( OnMediaLocation( keypath, 1 ).setOptional( true ) );
+  enqueue( OnMediaLocation( sigpath, 1 ).setOptional( true ).setDownloadSize( ByteCount( 20, ByteCount::MB ) ) );
+  enqueue( OnMediaLocation( keypath, 1 ).setOptional( true ).setDownloadSize( ByteCount( 20, ByteCount::MB ) ) );
   start( destdir_r, media_r );
   reset();
 
@@ -91,7 +91,7 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
     WAR << "Signature checking disabled in config of repository " << repoInfo().alias() << endl;
   }
 
-  enqueue( OnMediaLocation( masterIndex_r, 1 ), checker ? checker : FileChecker(NullFileChecker()) );
+  enqueue( OnMediaLocation( masterIndex_r, 1 ).setDownloadSize( ByteCount( 20, ByteCount::MB ) ), checker ? checker : FileChecker(NullFileChecker()) );
   start( destdir_r, media_r );
   reset();
 

@@ -156,6 +156,15 @@ namespace zypp
         return true;
       }
 
+      // xpath: /repomd/size
+      if ( reader_r->name() == "size" )
+      {
+        string size_value = reader_r.nodeText().asString();
+        zypp::ByteCount size = zypp::ByteCount( str::strtonum<ByteCount::SizeType>( size_value ) );
+        _location.setDownloadSize( size );
+        return true;
+      }
+
       //! \todo xpath: /repomd/open-checksum (?)
     }
 
