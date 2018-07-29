@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-04-27 05:41+0000\n"
+"PO-Revision-Date: 2018-07-29 11:26+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3475,7 +3475,7 @@ msgstr ""
 
 #: src/Zypper.cc:2846
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Suche nach Paketen, die die Suchzeichenfolge ergänzen."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2864
@@ -3660,7 +3660,7 @@ msgstr ""
 
 #: src/Zypper.cc:3029
 msgid "Show supplements."
-msgstr ""
+msgstr "Ergänzungen anzeigen."
 
 #: src/Zypper.cc:3044
 #, c-format, boost-format
@@ -5570,12 +5570,11 @@ msgstr ""
 "Die Repositorys konnten aufgrund von Fehlern nicht aktualisiert werden."
 
 #: src/repos.cc:1464
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
 msgstr ""
-"Einige der Repositorys konnten aufgrund eines Fehlers nicht aktualisiert "
-"werden."
+"Einige der Repositorys konnten, weil sie nicht bekannt waren, nicht "
+"aktualisiert werden."
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
