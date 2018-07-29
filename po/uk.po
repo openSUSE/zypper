@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-07-29 12:24+0000\n"
+"PO-Revision-Date: 2018-07-29 15:07+0000\n"
 "Last-Translator: Mikhail Kasimov <mikhail.kasimov@gmail.com>\n"
 "Language-Team: Ukrainian "
 "<https://l10n.opensuse.org/projects/zypper/master/uk/>\n"
@@ -72,7 +72,7 @@ msgid ""
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
 "Ми не можемо перевірити, чи ніхто не вносив зміни в цей файл, тому довіряти "
-"йому більше не можна! Не продовжуйте встановлення, якщо не впевнені у "
+"йому більше не можна! Не продовжуйте встановлення, якщо не впевнені в "
 "безпеці."
 
 #: src/callbacks/keyring.h:51
@@ -82,8 +82,8 @@ msgid ""
 "continue unless you know it's safe."
 msgstr ""
 "Файл змінено після підписування. Це могло бути зловмисна зміна, тому "
-"довіряти йому більше не можна! Не продовжуйте встановлення, якщо ви не "
-"впевнені в безпеці."
+"довіряти йому більше не можна! Не продовжуйте встановлення, якщо не впевнені "
+"в безпеці."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -116,7 +116,7 @@ msgstr "Назва rpm:"
 #: src/callbacks/keyring.h:113
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "Термін дії gpg-ключа, яким підписаний файл '%1%', минув."
+msgstr "Термін дії gpg-ключа, яким підписано файл '%1%', минув."
 
 #: src/callbacks/keyring.h:119
 #, boost-format
@@ -143,13 +143,13 @@ msgstr "Приймається непідписаний файл «%s» зі с�
 #: src/callbacks/keyring.h:156
 #, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Файл '%1%' не підписаний."
+msgstr "Файл '%1%' не підписано."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
 #, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Файл '%1%' зі сховища '%2%' не підписаний."
+msgstr "Файл '%1%' зі сховища '%2%' не підписано."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -179,7 +179,7 @@ msgstr ""
 #: src/callbacks/keyring.h:216
 #, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Файл '%1%' підписаний невідомим ключем '%2%'."
+msgstr "Файл '%1%' підписано невідомим ключем '%2%'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
