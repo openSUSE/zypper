@@ -304,18 +304,17 @@ static void set_solver_flags( Zypper & zypper )
   // solve_with_update must be false until the command passed the initialization!
   God->resolver()->setUpdateMode( zypper.runtimeData().solve_with_update );
 
-  //first check if command options is of type DupOptions, fall back to check the generic
-  //type InstallerBaseOptions.
-  shared_ptr<DupOptions> dupOptions = zypper.commandOptionsAs<DupOptions>();
-  if ( dupOptions )
+  // Use resolver->dupSet... if ZypperCommand::DIST_UPGRADE
+  if ( shared_ptr<InstallerBaseOptions> installOptions = zypper.commandOptionsAs<InstallerBaseOptions>() )
   {
-    if ( dupOptions->_allowDowngrade != -1 ) God->resolver()->dupSetAllowDowngrade( dupOptions->_allowDowngrade );
-    if ( dupOptions->_allowNameChange != -1 ) God->resolver()->dupSetAllowNameChange( dupOptions->_allowNameChange );
-    if ( dupOptions->_allowArchChange != -1 ) God->resolver()->dupSetAllowArchChange( dupOptions->_allowArchChange );
-    if ( dupOptions->_allowVendorChange != -1 ) God->resolver()->dupSetAllowVendorChange( dupOptions->_allowVendorChange );
-  } else {
-    shared_ptr<InstallerBaseOptions> installOptions = zypper.commandOptionsAs<InstallerBaseOptions>();
-    if ( installOptions )
+    if ( zypper.command() == ZypperCommand::DIST_UPGRADE )
+    {
+      if ( installOptions->_allowDowngrade != -1 ) God->resolver()->dupSetAllowDowngrade( installOptions->_allowDowngrade );
+      if ( installOptions->_allowNameChange != -1 ) God->resolver()->dupSetAllowNameChange( installOptions->_allowNameChange );
+      if ( installOptions->_allowArchChange != -1 ) God->resolver()->dupSetAllowArchChange( installOptions->_allowArchChange );
+      if ( installOptions->_allowVendorChange != -1 ) God->resolver()->dupSetAllowVendorChange( installOptions->_allowVendorChange );
+    }
+    else
     {
       if ( installOptions->_allowDowngrade != -1 ) God->resolver()->setAllowDowngrade( installOptions->_allowDowngrade );
       if ( installOptions->_allowNameChange != -1 ) God->resolver()->setAllowNameChange( installOptions->_allowNameChange );
