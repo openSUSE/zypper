@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-06 15:50+0200\n"
-"PO-Revision-Date: 2018-07-29 15:07+0000\n"
+"PO-Revision-Date: 2018-07-30 17:07+0000\n"
 "Last-Translator: Mikhail Kasimov <mikhail.kasimov@gmail.com>\n"
 "Language-Team: Ukrainian "
 "<https://l10n.opensuse.org/projects/zypper/master/uk/>\n"
@@ -5344,7 +5344,7 @@ msgstr "Сховище «%s» досі вимкнене."
 
 #: src/repos.cc:960 src/repos.cc:1470
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Деякі сховища не було освіжено через помилку."
+msgstr "Деякі сховища не було оновлено через помилку."
 
 #: src/repos.cc:1000
 msgid "Initializing Target"
@@ -5491,11 +5491,11 @@ msgstr "Деякі сховища не було оновлено, так як н
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
-msgstr "Вказані сховища було освіжено."
+msgstr "Вказані сховища було оновлено."
 
 #: src/repos.cc:1477
 msgid "All repositories have been refreshed."
-msgstr "Всі сховища було освіжено."
+msgstr "Всі сховища було оновлено."
 
 #: src/repos.cc:1584
 #, c-format, boost-format
@@ -5838,15 +5838,15 @@ msgstr "Через помилки не вдалось освіжити служ�
 
 #: src/repos.cc:2908
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "Деякі служби не було освіжено через помилку."
+msgstr "Деякі служби не було оновлено через помилку."
 
 #: src/repos.cc:2913
 msgid "Specified services have been refreshed."
-msgstr "Вказані служби було освіжено."
+msgstr "Вказані служби було оновлено."
 
 #: src/repos.cc:2915
 msgid "All services have been refreshed."
-msgstr "Всі служби було освіжено."
+msgstr "Всі служби було оновлено."
 
 #: src/repos.cc:3062
 #, c-format, boost-format
