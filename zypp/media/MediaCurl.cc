@@ -1109,6 +1109,7 @@ void MediaCurl::evaluateCurlCode(const Pathname &filename,
                            ));
           }
 
+          case 502: // bad gateway (bnc #1070851)
           case 503: // service temporarily unavailable (bnc #462545)
             ZYPP_THROW(MediaTemporaryProblemException(url));
           case 504: // gateway timeout
