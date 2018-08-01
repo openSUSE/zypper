@@ -173,6 +173,15 @@ namespace zypp
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1, ProvideFileOptions options = PROVIDE_DEFAULT );
 
       /**
+       * Provides an optional \a file from media \a media_nr.
+       *
+       * Like \ref provideFile (NON_INTERACTIVE), but return an empty \ref Pathname
+       * rather than throwing a \ref MediaException if the file is not present on
+       * the media.
+       */
+      Pathname provideOptionalFile( const Pathname & file, unsigned media_nr = 1 );
+
+      /**
        * Provides \a file from \a url.
        *
        * \param absolute url to the file
@@ -192,13 +201,13 @@ namespace zypp
       static ManagedFile provideFileFromUrl( const Url & file_url, ProvideFileOptions options = PROVIDE_DEFAULT );
 
       /**
-       * Provides an optional \a file from media \a media_nr.
+       * Provides an optional \a file from \a url.
        *
-       * Like \ref provideFile (NON_INTERACTIVE), but return an empty \ref Pathname
+       * Like \ref provideFileFromUrl( NON_INTERACTIVE ), but return an empty \ref Pathname
        * rather than throwing a \ref MediaException if the file is not present on
        * the media.
        */
-      Pathname provideOptionalFile( const Pathname & file, unsigned media_nr = 1 );
+      static ManagedFile provideOptionalFileFromUrl( const Url & file_url );
 
       /**
        * Release file from media.
