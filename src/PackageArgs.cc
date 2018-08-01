@@ -177,19 +177,26 @@ void PackageArgs::argsToCaps( const ResKind & kind )
     // ignore colons coming after '(' or '=' (bnc #433679)
     // e.g. 'perl(Digest::MD5)', or 'opera=2:10.00-4102.gcc4.shared.qt3'
 
+    bool hasRepo = false;
     std::string::size_type pos = arg.find( ':' );
-    if ( pos != std::string::npos && arg.find_first_of( "(=" ) > pos )
+    while ( pos != std::string::npos && arg.find_first_of( "(=" ) > pos )
     {
       repo = arg.substr( 0, pos );
       if ( match_repo( zypper, repo ) )
       {
+        hasRepo = true;
         arg = arg.substr( pos + 1 );
         DBG << "got repo '" << repo << "' for '" << arg << "'" << endl;
+        break;
       }
-      // not a repo, continue as usual
-      else
-        repo.clear();
+
+      //handle the case of having one or multiple ":" in the repo alias (bsc #1041178)
+      pos = arg.find( ':', pos + 1 );
     }
+
+    // not a repo, continue as usual
+    if ( !hasRepo )
+      repo.clear();
 
     // parse the rest of the string as standard zypp package specifier
     Capability parsedcap;
