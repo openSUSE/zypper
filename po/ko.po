@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-09 13:14+0200\n"
+"POT-Creation-Date: 2018-08-03 11:09+0200\n"
 "PO-Revision-Date: 2018-04-17 05:21+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
-"Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
-"\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/"
+">\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1380,71 +1380,71 @@ msgstr "기능 향상"
 msgid "Supplements"
 msgstr "보충"
 
-#: zypp/ExternalProgram.cc:261
+#: zypp/ExternalProgram.cc:268
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
 msgstr "pty(%s)를 열 수 없습니다."
 
-#: zypp/ExternalProgram.cc:272
+#: zypp/ExternalProgram.cc:279
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "파이프(%s)를 열 수 없습니다."
 
-#: zypp/ExternalProgram.cc:353
+#: zypp/ExternalProgram.cc:362
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "'%s'(%s)에 대해 chroot할 수 없습니다."
 
-#: zypp/ExternalProgram.cc:363
+#: zypp/ExternalProgram.cc:372
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "'%s'(chroot '%s' 내부)(%s)(으)로 chdir할 수 없습니다."
 
-#: zypp/ExternalProgram.cc:364
+#: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "'%s'(%s)(으)로 chdir할 수 없습니다."
 
 #. don't want to get here
-#: zypp/ExternalProgram.cc:376
+#: zypp/ExternalProgram.cc:385
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "'%s'(%s)을(를) 실행할 수 없습니다."
 
-#: zypp/ExternalProgram.cc:384
+#: zypp/ExternalProgram.cc:393
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "fork(%s)할 수 없습니다."
 
-#: zypp/ExternalProgram.cc:510
+#: zypp/ExternalProgram.cc:519
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "상태 %d(으)로 명령이 종료되었습니다."
 
-#: zypp/ExternalProgram.cc:530
+#: zypp/ExternalProgram.cc:539
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "명령이 신호 %d(%s)에 의해 종료되었습니다."
 
-#: zypp/ExternalProgram.cc:535
+#: zypp/ExternalProgram.cc:544
 msgid "Command exited with unknown error."
 msgstr "알 수 없는 오류와 함께 명령이 종료되었습니다."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:524
+#: zypp/KeyRing.cc:536
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "기존 키 %s을(를) 키링 %s(으)로 임포트하려고 했습니다."
 
-#: zypp/KeyRing.cc:530 zypp/KeyRing.cc:534
+#: zypp/KeyRing.cc:542 zypp/KeyRing.cc:546
 msgid "Failed to import key."
 msgstr "키를 임포트하지 못했습니다."
 
-#: zypp/KeyRing.cc:541 zypp/KeyRing.cc:545 zypp/KeyRing.cc:549
+#: zypp/KeyRing.cc:553 zypp/KeyRing.cc:557 zypp/KeyRing.cc:561
 msgid "Failed to delete key."
 msgstr "키를 삭제하지 못했습니다."
 
-#: zypp/KeyRing.cc:558
+#: zypp/KeyRing.cc:570
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "서명 파일 %s을(를) 찾을 수 없습니다."
@@ -3957,34 +3957,54 @@ msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
 msgstr[0] "%d(24시간 내 만료)"
 
-#: zypp/RepoManager.cc:312
+#. translator: %1% is a gpg key ID like 3DBDC284
+#. %2% is a cache directories path
+#: zypp/RepoInfo.cc:513
+#, boost-format
+msgid "Looking for gpg key ID %1% in cache %2%."
+msgstr ""
+
+#. translator: %1% is a gpg key ID like 3DBDC284
+#. %2% is a repositories name
+#: zypp/RepoInfo.cc:541
+#, boost-format
+msgid "Looking for gpg key ID %1% in repository %2%."
+msgstr ""
+
+#. translator: %1% is a repositories name
+#: zypp/RepoInfo.cc:565
+#, boost-format
+msgid "Repository %1% does not define additional 'gpgkey=' URLs."
+msgstr ""
+
+#: zypp/RepoManager.cc:314
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "리포지토리 디렉토리 '%1%'을(를) 읽을 수 없음: 사용 권한 거부됨"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1535
+#: zypp/RepoManager.cc:322 zypp/RepoManager.cc:785 zypp/RepoManager.cc:1538
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "디렉토리 '%s'을(를) 읽지 못했습니다."
 
-#: zypp/RepoManager.cc:330
+#: zypp/RepoManager.cc:332
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "리포지토리 파일 '%1%'을(를) 읽을 수 없음: 사용 권한 거부됨"
 
-#: zypp/RepoManager.cc:353
+#: zypp/RepoManager.cc:355
 msgid "Repository alias cannot start with dot."
 msgstr "리포지토리 별칭은 점(.)으로 시작할 수 없습니다."
 
-#: zypp/RepoManager.cc:364
+#: zypp/RepoManager.cc:366
 msgid "Service alias cannot start with dot."
 msgstr "서비스 별칭은 점(.)으로 시작할 수 없습니다."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1653 zypp/RepoManager.cc:1719
-#: zypp/RepoManager.cc:1797 zypp/RepoManager.cc:1862 zypp/RepoManager.cc:1993
+#: zypp/RepoManager.cc:740 zypp/RepoManager.cc:1656 zypp/RepoManager.cc:1722
+#: zypp/RepoManager.cc:1800 zypp/RepoManager.cc:1865 zypp/RepoManager.cc:1996
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "쓰기 위한 파일 '%s'을(를) 열 수 없습니다."
@@ -3992,42 +4012,42 @@ msgstr "쓰기 위한 파일 '%s'을(를) 열 수 없습니다."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:865
+#: zypp/RepoManager.cc:867
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "알 수 없는 서비스 '%1%': 독립 서비스 리포지토리 '%2%' 제거 중"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1092
+#: zypp/RepoManager.cc:1094
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "지정한 URL에는 유효한 메타데이터가 없음"
 
-#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
+#: zypp/RepoManager.cc:1142 zypp/RepoManager.cc:1254 zypp/RepoManager.cc:1310
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "%s을(를) 생성할 수 없음"
 
-#: zypp/RepoManager.cc:1148
+#: zypp/RepoManager.cc:1150
 msgid "Can't create metadata cache directory."
 msgstr "메타 데이터 캐시 디렉토리를 생성할 수 없습니다."
 
-#: zypp/RepoManager.cc:1294
+#: zypp/RepoManager.cc:1296
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "리포지토리 '%s' 캐시 빌드 중"
 
-#: zypp/RepoManager.cc:1314
+#: zypp/RepoManager.cc:1316
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "%s에서 캐시를 생성할 수 없음 - 쓰기 권한이 없습니다."
 
-#: zypp/RepoManager.cc:1378
+#: zypp/RepoManager.cc:1381
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "리포지토리(%d)를 캐시하지 못했습니다."
 
-#: zypp/RepoManager.cc:1389
+#: zypp/RepoManager.cc:1392
 msgid "Unhandled repository type"
 msgstr "리포지토리 유형이 처리되지 않았습니다."
 
@@ -4037,45 +4057,45 @@ msgstr "리포지토리 유형이 처리되지 않았습니다."
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1426 zypp/RepoManager.cc:2488
+#: zypp/RepoManager.cc:1429 zypp/RepoManager.cc:2491
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "'%s'에서 읽기를 시도하는 중에 오류가 발생했습니다."
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1479 zypp/RepoManager.cc:2496
+#: zypp/RepoManager.cc:1482 zypp/RepoManager.cc:2499
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "'%s'에서 읽는 중에 알 수 없는 오류가 발생했습니다."
 
-#: zypp/RepoManager.cc:1617
+#: zypp/RepoManager.cc:1620
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "'%s' 리포지토리 추가 중"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1705
+#: zypp/RepoManager.cc:1708
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "'%s'에서 리포지토리 파일 이름이 잘못되었습니다."
 
-#: zypp/RepoManager.cc:1746
+#: zypp/RepoManager.cc:1749
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "'%s' 리포지토리 제거 중"
 
-#: zypp/RepoManager.cc:1765 zypp/RepoManager.cc:1843
+#: zypp/RepoManager.cc:1768 zypp/RepoManager.cc:1846
 msgid "Can't figure out where the repo is stored."
 msgstr "리포지토리가 저장된 위치를 알 수 없습니다."
 
 #  Frame title for installation target hard disk / partition(s)
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1779 zypp/RepoManager.cc:1981
+#: zypp/RepoManager.cc:1782 zypp/RepoManager.cc:1984
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "'%s'을(를) 삭제할 수 없습니다."
 
-#: zypp/RepoManager.cc:1969 zypp/RepoManager.cc:2419
+#: zypp/RepoManager.cc:1972 zypp/RepoManager.cc:2422
 msgid "Can't figure out where the service is stored."
 msgstr "서비스가 저장된 위치를 알 수 없습니다."
 
@@ -4220,12 +4240,12 @@ msgid "Invalid regular expression '%s'"
 msgstr "잘못된 정규식 '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1725
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1753
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "'%s'에 대한 인증 필요"
 
-#: zypp/media/MediaCurl.cc:1109
+#: zypp/media/MediaCurl.cc:1121
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4366,10 +4386,15 @@ msgstr "'%s'에 액세스할 때 제한 시간이 초과되었습니다."
 
 #: zypp/media/MediaException.cc:195
 #, c-format, boost-format
+msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
+msgstr ""
+
+#: zypp/media/MediaException.cc:203
+#, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
 msgstr "위치 '%s'에 일시적으로 액세스할 수 없습니다."
 
-#: zypp/media/MediaException.cc:203
+#: zypp/media/MediaException.cc:211
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL 인증서 문제, '%s'의 CA 인증서에 문제가 없는지 확인하십시오."
@@ -4385,7 +4410,7 @@ msgstr "연결점 생성: 연결점을 생성할 쓰기 가능한 디렉토리�
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "지원하지 않는 HTTP 인증 방법 '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:331
+#: zypp/misc/CheckAccessDeleted.cc:354
 msgid "Please install package 'lsof' first."
 msgstr "'lsof' 패키지를 먼저 설치하십시오."
 
@@ -4399,12 +4424,12 @@ msgstr "필수 특성 '%s'이(가) 누락되었습니다."
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "'%s' 또는 '%s' 속성 중 하나 또는 둘 다가 필요합니다."
 
-#: zypp/repo/PackageProvider.cc:216
+#: zypp/repo/PackageProvider.cc:368
 msgid "Signature verification failed"
 msgstr "서명 확인 실패"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:388
+#: zypp/repo/PackageProvider.cc:499
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4412,16 +4437,16 @@ msgid ""
 msgstr "패키지 %s이(가) 전송 중에 손상된 것 같습니다. 다시 검색하시겠습니까?"
 
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:413
+#: zypp/repo/PackageProvider.cc:523
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr "패키지 %s을(를) 제공하지 못했습니다. 다시 검색하시겠습니까?"
 
-#: zypp/repo/PackageProvider.cc:549
+#: zypp/repo/PackageProvider.cc:646
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm 검사 실패."
 
-#: zypp/repo/PackageProvider.cc:559
+#: zypp/repo/PackageProvider.cc:657
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm 실패."
 
@@ -4690,8 +4715,7 @@ msgstr "%s에 %s이(가) 필요하지만, 이 요구사항을 제공할 수 없�
 msgid "deleted providers: "
 msgstr "삭제된 공급자: "
 
-#. translators: 'uninstallable' == 'not installable'
-#: zypp/solver/detail/SATResolver.cc:1085
+#: zypp/solver/detail/SATResolver.cc:1084
 msgid ""
 "\n"
 "not installable providers: "
@@ -4699,90 +4723,89 @@ msgstr ""
 "\n"
 "설치 불가능한 공급자: "
 
-#. translators: 'uninstallable' == 'not installable'
-#: zypp/solver/detail/SATResolver.cc:1088
+#: zypp/solver/detail/SATResolver.cc:1086
 msgid "not installable providers: "
 msgstr "설치할 수 없는 공급자: "
 
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1143
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "잠금 해제로 %s 제거 허용"
 
 #  Frame title for installation target hard disk / partition(s)
-#: zypp/solver/detail/SATResolver.cc:1150
-#: zypp/solver/detail/SATResolver.cc:1186
+#: zypp/solver/detail/SATResolver.cc:1148
+#: zypp/solver/detail/SATResolver.cc:1184
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "%s 설치 안 함"
 
-#: zypp/solver/detail/SATResolver.cc:1165
-#: zypp/solver/detail/SATResolver.cc:1207
+#: zypp/solver/detail/SATResolver.cc:1163
+#: zypp/solver/detail/SATResolver.cc:1205
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "%s 유지"
 
-#: zypp/solver/detail/SATResolver.cc:1170
+#: zypp/solver/detail/SATResolver.cc:1168
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "잠금 해제로 %s 설치 허용"
 
-#: zypp/solver/detail/SATResolver.cc:1221
-#: zypp/solver/detail/SATResolver.cc:1242
+#: zypp/solver/detail/SATResolver.cc:1219
+#: zypp/solver/detail/SATResolver.cc:1240
 msgid "This request will break your system!"
 msgstr "이 요청은 시스템을 손상시킵니다!"
 
-#: zypp/solver/detail/SATResolver.cc:1222
-#: zypp/solver/detail/SATResolver.cc:1243
+#: zypp/solver/detail/SATResolver.cc:1220
+#: zypp/solver/detail/SATResolver.cc:1241
 msgid "ignore the warning of a broken system"
 msgstr "손상된 시스템에 대한 경고를 무시합니다."
 
-#: zypp/solver/detail/SATResolver.cc:1227
+#: zypp/solver/detail/SATResolver.cc:1225
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "%s을(를) 제공하는 solvable 설치를 묻지 않음"
 
-#: zypp/solver/detail/SATResolver.cc:1249
+#: zypp/solver/detail/SATResolver.cc:1247
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "%s을(를) 제공하는 모든 solvable 삭제를 묻지 않음"
 
-#: zypp/solver/detail/SATResolver.cc:1262
+#: zypp/solver/detail/SATResolver.cc:1260
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "%s의 최신 버전을 설치하지 않음"
 
-#: zypp/solver/detail/SATResolver.cc:1283
+#: zypp/solver/detail/SATResolver.cc:1281
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "하위 아키텍처인 경우에도 %s 유지"
 
-#: zypp/solver/detail/SATResolver.cc:1288
+#: zypp/solver/detail/SATResolver.cc:1286
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "하위 아키텍처인 경우에도 %s 설치"
 
-#: zypp/solver/detail/SATResolver.cc:1297
+#: zypp/solver/detail/SATResolver.cc:1295
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "구식 %s 유지"
 
-#: zypp/solver/detail/SATResolver.cc:1302
+#: zypp/solver/detail/SATResolver.cc:1300
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "제외된 리포지토리에서 %s 설치"
 
-#: zypp/solver/detail/SATResolver.cc:1322
+#: zypp/solver/detail/SATResolver.cc:1320
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "%s을(를) %s(으)로 다운그레이드"
 
-#: zypp/solver/detail/SATResolver.cc:1329
+#: zypp/solver/detail/SATResolver.cc:1327
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "%s에서 %s(으)로 아키텍처 변경"
 
-#: zypp/solver/detail/SATResolver.cc:1338
+#: zypp/solver/detail/SATResolver.cc:1336
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4791,12 +4814,12 @@ msgstr ""
 "%s 설치(벤더 변경)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1347
+#: zypp/solver/detail/SATResolver.cc:1345
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "%s을(를) %s(으)로 대체"
 
-#: zypp/solver/detail/SATResolver.cc:1358
+#: zypp/solver/detail/SATResolver.cc:1356
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "%s 설치 제거"
@@ -4808,42 +4831,42 @@ msgid "Executing %%posttrans script '%1%'"
 msgstr "%%posttrans 스크립트 '%1%' 실행 중"
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:160
+#: zypp/target/RpmPostTransCollector.cc:161
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr "%posttrans 스크립트 실행 중"
 
-#: zypp/target/TargetImpl.cc:310
+#: zypp/target/TargetImpl.cc:311
 msgid " executed"
 msgstr " 실행됨"
 
-#: zypp/target/TargetImpl.cc:332
+#: zypp/target/TargetImpl.cc:333
 msgid " execution failed"
 msgstr " 실행 실패됨"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:449
+#: zypp/target/TargetImpl.cc:450
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s이(가) 이미 %s(으)로 실행되었습니다."
 
-#: zypp/target/TargetImpl.cc:459
+#: zypp/target/TargetImpl.cc:460
 msgid " execution skipped while aborting"
 msgstr " 중단하는 중 실행 건너뜀"
 
-#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
-#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
-#: zypp/target/TargetImpl.cc:607
+#: zypp/target/TargetImpl.cc:515 zypp/target/TargetImpl.cc:535
+#: zypp/target/TargetImpl.cc:563 zypp/target/TargetImpl.cc:600
+#: zypp/target/TargetImpl.cc:608
 msgid "Error sending update message notification."
 msgstr "업데이트 메시지 알림을 보내는 중에 오류가 발생했습니다."
 
-#: zypp/target/TargetImpl.cc:658
+#: zypp/target/TargetImpl.cc:659
 msgid "New update message"
 msgstr "새 업데이트 메시지"
 
-#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
+#: zypp/target/TargetImpl.cc:1223 zypp/target/TargetImpl.cc:1277
 #: zypp/target/TargetImpl.cc:1628
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."

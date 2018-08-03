@@ -11,11 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-09 13:14+0200\n"
+"POT-Creation-Date: 2018-08-03 11:09+0200\n"
 "PO-Revision-Date: 2018-04-17 05:01+0000\n"
 "Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
-"Language-Team: Chinese (China) "
-"<https://l10n.opensuse.org/projects/libzypp/master/zh_CN/>\n"
+"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
+"master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1302,71 +1302,71 @@ msgstr "增强"
 msgid "Supplements"
 msgstr "补充"
 
-#: zypp/ExternalProgram.cc:261
+#: zypp/ExternalProgram.cc:268
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
 msgstr "无法打开 pty (%s)。"
 
-#: zypp/ExternalProgram.cc:272
+#: zypp/ExternalProgram.cc:279
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "无法打开管道 (%s)。"
 
-#: zypp/ExternalProgram.cc:353
+#: zypp/ExternalProgram.cc:362
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "无法 chroot 到 '%s' (%s)。"
 
-#: zypp/ExternalProgram.cc:363
+#: zypp/ExternalProgram.cc:372
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "无法 chdir 到 %s，它在 chroot %s (%s) 中。"
 
-#: zypp/ExternalProgram.cc:364
+#: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "无法 chdir 到 '%s' (%s)。"
 
 #. don't want to get here
-#: zypp/ExternalProgram.cc:376
+#: zypp/ExternalProgram.cc:385
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "无法执行 '%s' (%s)。"
 
-#: zypp/ExternalProgram.cc:384
+#: zypp/ExternalProgram.cc:393
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "无法派生 (%s)。"
 
-#: zypp/ExternalProgram.cc:510
+#: zypp/ExternalProgram.cc:519
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "命令退出，状态 %d。"
 
-#: zypp/ExternalProgram.cc:530
+#: zypp/ExternalProgram.cc:539
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "命令已被信号 %d (%s) 杀死。"
 
-#: zypp/ExternalProgram.cc:535
+#: zypp/ExternalProgram.cc:544
 msgid "Command exited with unknown error."
 msgstr "命令退出，未知错误。"
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:524
+#: zypp/KeyRing.cc:536
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "尝试导入尚不存在的密钥 %s 到密钥环 %s"
 
-#: zypp/KeyRing.cc:530 zypp/KeyRing.cc:534
+#: zypp/KeyRing.cc:542 zypp/KeyRing.cc:546
 msgid "Failed to import key."
 msgstr "导入密钥失败。"
 
-#: zypp/KeyRing.cc:541 zypp/KeyRing.cc:545 zypp/KeyRing.cc:549
+#: zypp/KeyRing.cc:553 zypp/KeyRing.cc:557 zypp/KeyRing.cc:561
 msgid "Failed to delete key."
 msgstr "删除密钥失败。"
 
-#: zypp/KeyRing.cc:558
+#: zypp/KeyRing.cc:570
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "未找到签名文件 %s"
@@ -3768,34 +3768,54 @@ msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
 msgstr[0] "（%d 天后过期）"
 
-#: zypp/RepoManager.cc:312
+#. translator: %1% is a gpg key ID like 3DBDC284
+#. %2% is a cache directories path
+#: zypp/RepoInfo.cc:513
+#, boost-format
+msgid "Looking for gpg key ID %1% in cache %2%."
+msgstr ""
+
+#. translator: %1% is a gpg key ID like 3DBDC284
+#. %2% is a repositories name
+#: zypp/RepoInfo.cc:541
+#, boost-format
+msgid "Looking for gpg key ID %1% in repository %2%."
+msgstr ""
+
+#. translator: %1% is a repositories name
+#: zypp/RepoInfo.cc:565
+#, boost-format
+msgid "Repository %1% does not define additional 'gpgkey=' URLs."
+msgstr ""
+
+#: zypp/RepoManager.cc:314
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "无法读取源文件夹 '%1%'：权限被拒"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1535
+#: zypp/RepoManager.cc:322 zypp/RepoManager.cc:785 zypp/RepoManager.cc:1538
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "读取文件夹 '%s' 失败"
 
-#: zypp/RepoManager.cc:330
+#: zypp/RepoManager.cc:332
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "无法读取源文件 '%1%'：权限被拒"
 
-#: zypp/RepoManager.cc:353
+#: zypp/RepoManager.cc:355
 msgid "Repository alias cannot start with dot."
 msgstr "软件源别名不能以点开头。"
 
-#: zypp/RepoManager.cc:364
+#: zypp/RepoManager.cc:366
 msgid "Service alias cannot start with dot."
 msgstr "服务别名不能以点开头。"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1653 zypp/RepoManager.cc:1719
-#: zypp/RepoManager.cc:1797 zypp/RepoManager.cc:1862 zypp/RepoManager.cc:1993
+#: zypp/RepoManager.cc:740 zypp/RepoManager.cc:1656 zypp/RepoManager.cc:1722
+#: zypp/RepoManager.cc:1800 zypp/RepoManager.cc:1865 zypp/RepoManager.cc:1996
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "无法打开 '%s' 文件进行写入。"
@@ -3803,42 +3823,42 @@ msgstr "无法打开 '%s' 文件进行写入。"
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:865
+#: zypp/RepoManager.cc:867
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "未知服务 '%1%'：正在移除孤立的服务软件源 '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1092
+#: zypp/RepoManager.cc:1094
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "在指定 URL 未找到有效元数据"
 
-#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
+#: zypp/RepoManager.cc:1142 zypp/RepoManager.cc:1254 zypp/RepoManager.cc:1310
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "无法创建 %s"
 
-#: zypp/RepoManager.cc:1148
+#: zypp/RepoManager.cc:1150
 msgid "Can't create metadata cache directory."
 msgstr "无法创建元数据缓存文件夹。"
 
-#: zypp/RepoManager.cc:1294
+#: zypp/RepoManager.cc:1296
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "正在构建软件源 '%s' 的缓存"
 
-#: zypp/RepoManager.cc:1314
+#: zypp/RepoManager.cc:1316
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "无法在 %s 创建缓存 - 无写入权限。"
 
-#: zypp/RepoManager.cc:1378
+#: zypp/RepoManager.cc:1381
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "缓存软件源 (%d) 失败。"
 
-#: zypp/RepoManager.cc:1389
+#: zypp/RepoManager.cc:1392
 msgid "Unhandled repository type"
 msgstr "未处理的软件源类型"
 
@@ -3848,44 +3868,44 @@ msgstr "未处理的软件源类型"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1426 zypp/RepoManager.cc:2488
+#: zypp/RepoManager.cc:1429 zypp/RepoManager.cc:2491
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "试图读取 '%s' 出错"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1479 zypp/RepoManager.cc:2496
+#: zypp/RepoManager.cc:1482 zypp/RepoManager.cc:2499
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "读取 '%s' 遇到未知错误"
 
-#: zypp/RepoManager.cc:1617
+#: zypp/RepoManager.cc:1620
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "正在添加软件源 '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1705
+#: zypp/RepoManager.cc:1708
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "'%s' 处的源文件名无效"
 
-#: zypp/RepoManager.cc:1746
+#: zypp/RepoManager.cc:1749
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "正在移除软件源 '%s'"
 
-#: zypp/RepoManager.cc:1765 zypp/RepoManager.cc:1843
+#: zypp/RepoManager.cc:1768 zypp/RepoManager.cc:1846
 msgid "Can't figure out where the repo is stored."
 msgstr "不确定软件源的存储位置。"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1779 zypp/RepoManager.cc:1981
+#: zypp/RepoManager.cc:1782 zypp/RepoManager.cc:1984
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "无法删除 '%s'"
 
-#: zypp/RepoManager.cc:1969 zypp/RepoManager.cc:2419
+#: zypp/RepoManager.cc:1972 zypp/RepoManager.cc:2422
 msgid "Can't figure out where the service is stored."
 msgstr "不确定服务的储存位置。"
 
@@ -4026,12 +4046,12 @@ msgid "Invalid regular expression '%s'"
 msgstr "无效的正则表达式 '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1725
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1753
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' 需要认证"
 
-#: zypp/media/MediaCurl.cc:1109
+#: zypp/media/MediaCurl.cc:1121
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4169,10 +4189,15 @@ msgstr "访问 '%s' 时超时。"
 
 #: zypp/media/MediaException.cc:195
 #, c-format, boost-format
+msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
+msgstr ""
+
+#: zypp/media/MediaException.cc:203
+#, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
 msgstr "位置 '%s' 暂时无法访问。"
 
-#: zypp/media/MediaException.cc:203
+#: zypp/media/MediaException.cc:211
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL 证书问题，请校验 '%s' 的 CA 证书。"
@@ -4188,7 +4213,7 @@ msgstr "创建挂接点：找不到可用于创建挂接点的可写目录"
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "不支持 HTTP 认证方法 '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:331
+#: zypp/misc/CheckAccessDeleted.cc:354
 msgid "Please install package 'lsof' first."
 msgstr "请先安装 'lsof' 软件包。"
 
@@ -4202,12 +4227,12 @@ msgstr "缺失所需属性 '%s' 。"
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "需要 '%s' 或 '%s' 属性中的一项或两项。"
 
-#: zypp/repo/PackageProvider.cc:216
+#: zypp/repo/PackageProvider.cc:368
 msgid "Signature verification failed"
 msgstr "签名校验失败"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:388
+#: zypp/repo/PackageProvider.cc:499
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4215,16 +4240,16 @@ msgid ""
 msgstr "软件包 %s 似乎在传输时损坏了。您想要重试检索吗？"
 
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:413
+#: zypp/repo/PackageProvider.cc:523
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr "未能提供软件包 %s。您想要重试检索吗？"
 
-#: zypp/repo/PackageProvider.cc:549
+#: zypp/repo/PackageProvider.cc:646
 msgid "applydeltarpm check failed."
 msgstr "Applydeltarpm 检查已失败。"
 
-#: zypp/repo/PackageProvider.cc:559
+#: zypp/repo/PackageProvider.cc:657
 msgid "applydeltarpm failed."
 msgstr "Applydeltarpm 已失败。"
 
@@ -4499,8 +4524,7 @@ msgstr "%s 需要 %s，但无法满足此需求"
 msgid "deleted providers: "
 msgstr "已删除提供者： "
 
-#. translators: 'uninstallable' == 'not installable'
-#: zypp/solver/detail/SATResolver.cc:1085
+#: zypp/solver/detail/SATResolver.cc:1084
 msgid ""
 "\n"
 "not installable providers: "
@@ -4508,89 +4532,88 @@ msgstr ""
 "\n"
 "无法安装的提供者： "
 
-#. translators: 'uninstallable' == 'not installable'
-#: zypp/solver/detail/SATResolver.cc:1088
+#: zypp/solver/detail/SATResolver.cc:1086
 msgid "not installable providers: "
 msgstr "无法安装的提供者： "
 
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1143
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "移除锁定以允许移除 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1150
-#: zypp/solver/detail/SATResolver.cc:1186
+#: zypp/solver/detail/SATResolver.cc:1148
+#: zypp/solver/detail/SATResolver.cc:1184
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "不安装 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1165
-#: zypp/solver/detail/SATResolver.cc:1207
+#: zypp/solver/detail/SATResolver.cc:1163
+#: zypp/solver/detail/SATResolver.cc:1205
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "保留 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1170
+#: zypp/solver/detail/SATResolver.cc:1168
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "移除锁定以允许安装 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1221
-#: zypp/solver/detail/SATResolver.cc:1242
+#: zypp/solver/detail/SATResolver.cc:1219
+#: zypp/solver/detail/SATResolver.cc:1240
 msgid "This request will break your system!"
 msgstr "此请求将破坏您的系统！"
 
-#: zypp/solver/detail/SATResolver.cc:1222
-#: zypp/solver/detail/SATResolver.cc:1243
+#: zypp/solver/detail/SATResolver.cc:1220
+#: zypp/solver/detail/SATResolver.cc:1241
 msgid "ignore the warning of a broken system"
 msgstr "忽略损坏系统的警告"
 
-#: zypp/solver/detail/SATResolver.cc:1227
+#: zypp/solver/detail/SATResolver.cc:1225
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "不询问就安装一个提供 %s 的解析项"
 
-#: zypp/solver/detail/SATResolver.cc:1249
+#: zypp/solver/detail/SATResolver.cc:1247
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "不询问就删除全部提供 %s 的解析项"
 
-#: zypp/solver/detail/SATResolver.cc:1262
+#: zypp/solver/detail/SATResolver.cc:1260
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "不安装最新版本的 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1283
+#: zypp/solver/detail/SATResolver.cc:1281
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "保留 %s，即使架构不对应"
 
-#: zypp/solver/detail/SATResolver.cc:1288
+#: zypp/solver/detail/SATResolver.cc:1286
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "尽管架构不对应仍安装 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1297
+#: zypp/solver/detail/SATResolver.cc:1295
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "保留已淘汰的 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1302
+#: zypp/solver/detail/SATResolver.cc:1300
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "从排除的软件源安装 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1322
+#: zypp/solver/detail/SATResolver.cc:1320
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "降级 %s 到 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1329
+#: zypp/solver/detail/SATResolver.cc:1327
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "架构从 %s 变更到 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1338
+#: zypp/solver/detail/SATResolver.cc:1336
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4599,12 +4622,12 @@ msgstr ""
 "安装 %s（包括厂商变更）\n"
 "  %s --> %s"
 
-#: zypp/solver/detail/SATResolver.cc:1347
+#: zypp/solver/detail/SATResolver.cc:1345
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "将 %s 用 %s 取代"
 
-#: zypp/solver/detail/SATResolver.cc:1358
+#: zypp/solver/detail/SATResolver.cc:1356
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "卸载 %s"
@@ -4616,42 +4639,42 @@ msgid "Executing %%posttrans script '%1%'"
 msgstr "正在执行 %%posttrans 脚本“%1%”"
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:160
+#: zypp/target/RpmPostTransCollector.cc:161
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr "正在执行 %p osttrans 脚本"
 
-#: zypp/target/TargetImpl.cc:310
+#: zypp/target/TargetImpl.cc:311
 msgid " executed"
 msgstr " 已执行"
 
-#: zypp/target/TargetImpl.cc:332
+#: zypp/target/TargetImpl.cc:333
 msgid " execution failed"
 msgstr " 执行失败"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:449
+#: zypp/target/TargetImpl.cc:450
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s 早已作为 %s 执行了）"
 
-#: zypp/target/TargetImpl.cc:459
+#: zypp/target/TargetImpl.cc:460
 msgid " execution skipped while aborting"
 msgstr " 中止时跳过执行"
 
-#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
-#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
-#: zypp/target/TargetImpl.cc:607
+#: zypp/target/TargetImpl.cc:515 zypp/target/TargetImpl.cc:535
+#: zypp/target/TargetImpl.cc:563 zypp/target/TargetImpl.cc:600
+#: zypp/target/TargetImpl.cc:608
 msgid "Error sending update message notification."
 msgstr "发送更新消息通知出错。"
 
-#: zypp/target/TargetImpl.cc:658
+#: zypp/target/TargetImpl.cc:659
 msgid "New update message"
 msgstr "新更新消息"
 
-#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
+#: zypp/target/TargetImpl.cc:1223 zypp/target/TargetImpl.cc:1277
 #: zypp/target/TargetImpl.cc:1628
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."

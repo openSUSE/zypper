@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-09 13:14+0200\n"
+"POT-Creation-Date: 2018-08-03 11:09+0200\n"
 "PO-Revision-Date: 2017-10-03 15:55+0700\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -1561,72 +1561,72 @@ msgstr "Meningkatkan"
 msgid "Supplements"
 msgstr "Suplemen"
 
-#: zypp/ExternalProgram.cc:261
+#: zypp/ExternalProgram.cc:268
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
 msgstr "Tidak dapat membuka pty (%s)."
 
-#: zypp/ExternalProgram.cc:272
+#: zypp/ExternalProgram.cc:279
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "Tidak dapat membuka pipe (%s)."
 
-#: zypp/ExternalProgram.cc:353
+#: zypp/ExternalProgram.cc:362
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Tidak dapat chroot untuk '%s' (%s)."
 
-#: zypp/ExternalProgram.cc:363
+#: zypp/ExternalProgram.cc:372
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "Tidak dapat chdir ke '%s' dalam chroot '%s' (%s)."
 
-#: zypp/ExternalProgram.cc:364
+#: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "Tidak dapat membuka ke '%s' (%s)."
 
 #. don't want to get here
-#: zypp/ExternalProgram.cc:376
+#: zypp/ExternalProgram.cc:385
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Tidak dapat mengeksekusi '%s' (%s)."
 
-#: zypp/ExternalProgram.cc:384
+#: zypp/ExternalProgram.cc:393
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "Tidak dapat melakukan fork (%s)."
 
-#: zypp/ExternalProgram.cc:510
+#: zypp/ExternalProgram.cc:519
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Perintah berhenti dengan status %d."
 
-#: zypp/ExternalProgram.cc:530
+#: zypp/ExternalProgram.cc:539
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Perintah terhenti oleh sinyal %d (%s)."
 
-#: zypp/ExternalProgram.cc:535
+#: zypp/ExternalProgram.cc:544
 msgid "Command exited with unknown error."
 msgstr "Perintah berhenti dengan galat yang tidak diketahui."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:524
+#: zypp/KeyRing.cc:536
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Mencoba untuk mengimpor kunci %s tidak ada ke keyring %s"
 
-#: zypp/KeyRing.cc:530 zypp/KeyRing.cc:534
+#: zypp/KeyRing.cc:542 zypp/KeyRing.cc:546
 #, fuzzy
 msgid "Failed to import key."
 msgstr "Gagal mengimpor kunci publik %1%"
 
-#: zypp/KeyRing.cc:541 zypp/KeyRing.cc:545 zypp/KeyRing.cc:549
+#: zypp/KeyRing.cc:553 zypp/KeyRing.cc:557 zypp/KeyRing.cc:561
 msgid "Failed to delete key."
 msgstr "Gagal menghapus kunci."
 
-#: zypp/KeyRing.cc:558
+#: zypp/KeyRing.cc:570
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Tanda tangan file %s tidak ditemukan"
@@ -4205,34 +4205,54 @@ msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
 msgstr[0] "(Berakhir dalam %d hari)"
 
-#: zypp/RepoManager.cc:312
+#. translator: %1% is a gpg key ID like 3DBDC284
+#. %2% is a cache directories path
+#: zypp/RepoInfo.cc:513
+#, boost-format
+msgid "Looking for gpg key ID %1% in cache %2%."
+msgstr ""
+
+#. translator: %1% is a gpg key ID like 3DBDC284
+#. %2% is a repositories name
+#: zypp/RepoInfo.cc:541
+#, boost-format
+msgid "Looking for gpg key ID %1% in repository %2%."
+msgstr ""
+
+#. translator: %1% is a repositories name
+#: zypp/RepoInfo.cc:565
+#, boost-format
+msgid "Repository %1% does not define additional 'gpgkey=' URLs."
+msgstr ""
+
+#: zypp/RepoManager.cc:314
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "Tidak dapat membaca direktori repo '%1%': Izin ditolak"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1535
+#: zypp/RepoManager.cc:322 zypp/RepoManager.cc:785 zypp/RepoManager.cc:1538
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Gagal membaca direktori '%s'"
 
-#: zypp/RepoManager.cc:330
+#: zypp/RepoManager.cc:332
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "Tidak dapat membaca berkas repo '%1%': Izin ditolak"
 
-#: zypp/RepoManager.cc:353
+#: zypp/RepoManager.cc:355
 msgid "Repository alias cannot start with dot."
 msgstr "Alias repository tidak dapat dijalankan dengan dot."
 
-#: zypp/RepoManager.cc:364
+#: zypp/RepoManager.cc:366
 msgid "Service alias cannot start with dot."
 msgstr "Alias layanan tidak dapat dimulai dengan dot."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1653 zypp/RepoManager.cc:1719
-#: zypp/RepoManager.cc:1797 zypp/RepoManager.cc:1862 zypp/RepoManager.cc:1993
+#: zypp/RepoManager.cc:740 zypp/RepoManager.cc:1656 zypp/RepoManager.cc:1722
+#: zypp/RepoManager.cc:1800 zypp/RepoManager.cc:1865 zypp/RepoManager.cc:1996
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Tidak dapat membuka '%s' untuk menulis."
@@ -4240,7 +4260,7 @@ msgstr "Tidak dapat membuka '%s' untuk menulis."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:865
+#: zypp/RepoManager.cc:867
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
@@ -4248,36 +4268,36 @@ msgstr ""
 "terpakai '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1092
+#: zypp/RepoManager.cc:1094
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "Metadata yang sah tidak ditemukan pada URL yang ditentukan"
 
-#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
+#: zypp/RepoManager.cc:1142 zypp/RepoManager.cc:1254 zypp/RepoManager.cc:1310
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "Tidak dapat membuat %s"
 
-#: zypp/RepoManager.cc:1148
+#: zypp/RepoManager.cc:1150
 msgid "Can't create metadata cache directory."
 msgstr "Tidak dapat membuat metadata direktori cache."
 
-#: zypp/RepoManager.cc:1294
+#: zypp/RepoManager.cc:1296
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Membangun repositori cache '%s'"
 
-#: zypp/RepoManager.cc:1314
+#: zypp/RepoManager.cc:1316
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "Tidak dapat membuat cache di %s - tidak ada izin untuk menulis."
 
-#: zypp/RepoManager.cc:1378
+#: zypp/RepoManager.cc:1381
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Gagal untuk membuat cache repo (%d)."
 
-#: zypp/RepoManager.cc:1389
+#: zypp/RepoManager.cc:1392
 msgid "Unhandled repository type"
 msgstr "Jenis repositori yang tidak tertangani"
 
@@ -4287,44 +4307,44 @@ msgstr "Jenis repositori yang tidak tertangani"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1426 zypp/RepoManager.cc:2488
+#: zypp/RepoManager.cc:1429 zypp/RepoManager.cc:2491
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Galat saat membaca dari '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1479 zypp/RepoManager.cc:2496
+#: zypp/RepoManager.cc:1482 zypp/RepoManager.cc:2499
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Error tidak diketahui dari '%s'"
 
-#: zypp/RepoManager.cc:1617
+#: zypp/RepoManager.cc:1620
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Menambah repositori '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1705
+#: zypp/RepoManager.cc:1708
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Nama berkas repo tidak sah di '%s'"
 
-#: zypp/RepoManager.cc:1746
+#: zypp/RepoManager.cc:1749
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Menghapus reposotori '%s'"
 
-#: zypp/RepoManager.cc:1765 zypp/RepoManager.cc:1843
+#: zypp/RepoManager.cc:1768 zypp/RepoManager.cc:1846
 msgid "Can't figure out where the repo is stored."
 msgstr "Tidak dapat mengetahui di mana repo disimpan."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1779 zypp/RepoManager.cc:1981
+#: zypp/RepoManager.cc:1782 zypp/RepoManager.cc:1984
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "Tidak dapat menghapus '%s'"
 
-#: zypp/RepoManager.cc:1969 zypp/RepoManager.cc:2419
+#: zypp/RepoManager.cc:1972 zypp/RepoManager.cc:2422
 msgid "Can't figure out where the service is stored."
 msgstr "Tidak dapat mengetahui di mana layanan disimpan."
 
@@ -4470,12 +4490,12 @@ msgid "Invalid regular expression '%s'"
 msgstr "Expresi reguler '%s' tidak valid"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1725
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1753
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Autentikasi dibutuhkan untuk '%s'"
 
-#: zypp/media/MediaCurl.cc:1109
+#: zypp/media/MediaCurl.cc:1121
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4616,10 +4636,15 @@ msgstr "Timeout melebihi ketika mengakses '%s'."
 
 #: zypp/media/MediaException.cc:195
 #, c-format, boost-format
+msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
+msgstr ""
+
+#: zypp/media/MediaException.cc:203
+#, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
 msgstr "Lokasi '%s' tidak dapat diakses sementara waktu."
 
-#: zypp/media/MediaException.cc:203
+#: zypp/media/MediaException.cc:211
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " Masalah SSL Sertifikat, pastikan CA cert sudah benar untuk '%s'."
@@ -4637,7 +4662,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Metode autentikasi HTTP '%s' tidak didukung"
 
-#: zypp/misc/CheckAccessDeleted.cc:331
+#: zypp/misc/CheckAccessDeleted.cc:354
 msgid "Please install package 'lsof' first."
 msgstr "Mohon pasang paket 'lsof' terlebih dahulu."
 
@@ -4651,12 +4676,12 @@ msgstr "Kebutuhan atribut '%s' hilang."
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "Satu atau kedua dari '%s' or '%s' atribut dibutuhkan."
 
-#: zypp/repo/PackageProvider.cc:216
+#: zypp/repo/PackageProvider.cc:368
 msgid "Signature verification failed"
 msgstr "Verifikasi tanda tangan gagal"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:388
+#: zypp/repo/PackageProvider.cc:499
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4666,17 +4691,17 @@ msgstr ""
 "mengulang pemulihan?"
 
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:413
+#: zypp/repo/PackageProvider.cc:523
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr ""
 "Gagal untuk menyediakan paket %s. Apakah anda hendak memulai ulang pemulihan?"
 
-#: zypp/repo/PackageProvider.cc:549
+#: zypp/repo/PackageProvider.cc:646
 msgid "applydeltarpm check failed."
 msgstr "pengecekan applydeltarpm gagal."
 
-#: zypp/repo/PackageProvider.cc:559
+#: zypp/repo/PackageProvider.cc:657
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm gagal."
 
@@ -4943,8 +4968,7 @@ msgstr "%s dibutuhkan %s, tetapi kebutuhan ini tidak dapat disediakan"
 msgid "deleted providers: "
 msgstr "penyedia dihapus: "
 
-#. translators: 'uninstallable' == 'not installable'
-#: zypp/solver/detail/SATResolver.cc:1085
+#: zypp/solver/detail/SATResolver.cc:1084
 msgid ""
 "\n"
 "not installable providers: "
@@ -4952,89 +4976,88 @@ msgstr ""
 "\n"
 "penyedia tidak dapat dihapus: "
 
-#. translators: 'uninstallable' == 'not installable'
-#: zypp/solver/detail/SATResolver.cc:1088
+#: zypp/solver/detail/SATResolver.cc:1086
 msgid "not installable providers: "
 msgstr "penyedia tidak dapat dihapus: "
 
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1143
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "hapus kunci untuk mengizinkan menghapus %s"
 
-#: zypp/solver/detail/SATResolver.cc:1150
-#: zypp/solver/detail/SATResolver.cc:1186
+#: zypp/solver/detail/SATResolver.cc:1148
+#: zypp/solver/detail/SATResolver.cc:1184
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "jangan memasang %s"
 
-#: zypp/solver/detail/SATResolver.cc:1165
-#: zypp/solver/detail/SATResolver.cc:1207
+#: zypp/solver/detail/SATResolver.cc:1163
+#: zypp/solver/detail/SATResolver.cc:1205
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "simpan %s"
 
-#: zypp/solver/detail/SATResolver.cc:1170
+#: zypp/solver/detail/SATResolver.cc:1168
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "hapus kunci untuk mengizinkan pemasangan dari %s"
 
-#: zypp/solver/detail/SATResolver.cc:1221
-#: zypp/solver/detail/SATResolver.cc:1242
+#: zypp/solver/detail/SATResolver.cc:1219
+#: zypp/solver/detail/SATResolver.cc:1240
 msgid "This request will break your system!"
 msgstr "Permintaan ini akan merusak sistem anda!"
 
-#: zypp/solver/detail/SATResolver.cc:1222
-#: zypp/solver/detail/SATResolver.cc:1243
+#: zypp/solver/detail/SATResolver.cc:1220
+#: zypp/solver/detail/SATResolver.cc:1241
 msgid "ignore the warning of a broken system"
 msgstr "abaikan peringatan dari kerusakan sistem"
 
-#: zypp/solver/detail/SATResolver.cc:1227
+#: zypp/solver/detail/SATResolver.cc:1225
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "jangan meminta untuk memasang pemecahan yang didukung %s"
 
-#: zypp/solver/detail/SATResolver.cc:1249
+#: zypp/solver/detail/SATResolver.cc:1247
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "jangan meminta untuk menghapus pemecahan yang didukung %s"
 
-#: zypp/solver/detail/SATResolver.cc:1262
+#: zypp/solver/detail/SATResolver.cc:1260
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "jangan memasang versi terbaru dari %s"
 
-#: zypp/solver/detail/SATResolver.cc:1283
+#: zypp/solver/detail/SATResolver.cc:1281
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "jaga %s meskipun arsitektur rendah"
 
-#: zypp/solver/detail/SATResolver.cc:1288
+#: zypp/solver/detail/SATResolver.cc:1286
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "pasang %s meskipun arsitektur rendah"
 
-#: zypp/solver/detail/SATResolver.cc:1297
+#: zypp/solver/detail/SATResolver.cc:1295
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "biarkan usang %s"
 
-#: zypp/solver/detail/SATResolver.cc:1302
+#: zypp/solver/detail/SATResolver.cc:1300
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "pasang %s dari repositori pengecualian"
 
-#: zypp/solver/detail/SATResolver.cc:1322
+#: zypp/solver/detail/SATResolver.cc:1320
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "turunkan dari %s to %s"
 
-#: zypp/solver/detail/SATResolver.cc:1329
+#: zypp/solver/detail/SATResolver.cc:1327
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "arsitektur berubah dari %s ke %s"
 
-#: zypp/solver/detail/SATResolver.cc:1338
+#: zypp/solver/detail/SATResolver.cc:1336
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -5043,12 +5066,12 @@ msgstr ""
 "pasang %s (dengan perubahan vendor)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1347
+#: zypp/solver/detail/SATResolver.cc:1345
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "penggantian %s dengan %s"
 
-#: zypp/solver/detail/SATResolver.cc:1358
+#: zypp/solver/detail/SATResolver.cc:1356
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "penghapusan dari %s"
@@ -5060,42 +5083,42 @@ msgid "Executing %%posttrans script '%1%'"
 msgstr ""
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:160
+#: zypp/target/RpmPostTransCollector.cc:161
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:310
+#: zypp/target/TargetImpl.cc:311
 msgid " executed"
 msgstr " berhasil dieksekusi"
 
-#: zypp/target/TargetImpl.cc:332
+#: zypp/target/TargetImpl.cc:333
 msgid " execution failed"
 msgstr " eksekusi gagal"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:449
+#: zypp/target/TargetImpl.cc:450
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s telah dieksekusi sebagai %s)"
 
-#: zypp/target/TargetImpl.cc:459
+#: zypp/target/TargetImpl.cc:460
 msgid " execution skipped while aborting"
 msgstr " Eksekusi dilewati ketika diberhentikan"
 
-#: zypp/target/TargetImpl.cc:514 zypp/target/TargetImpl.cc:534
-#: zypp/target/TargetImpl.cc:562 zypp/target/TargetImpl.cc:599
-#: zypp/target/TargetImpl.cc:607
+#: zypp/target/TargetImpl.cc:515 zypp/target/TargetImpl.cc:535
+#: zypp/target/TargetImpl.cc:563 zypp/target/TargetImpl.cc:600
+#: zypp/target/TargetImpl.cc:608
 msgid "Error sending update message notification."
 msgstr "Gagal mengirim pesan notifikasi pembaharuan."
 
-#: zypp/target/TargetImpl.cc:658
+#: zypp/target/TargetImpl.cc:659
 msgid "New update message"
 msgstr "Pesan baru"
 
-#: zypp/target/TargetImpl.cc:1221 zypp/target/TargetImpl.cc:1275
+#: zypp/target/TargetImpl.cc:1223 zypp/target/TargetImpl.cc:1277
 #: zypp/target/TargetImpl.cc:1628
 #: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
 msgid "Installation has been aborted as directed."
