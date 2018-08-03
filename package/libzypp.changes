@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Aug  3 11:11:25 CEST 2018 - ma@suse.de
+
+- RepoInfo::provideKey: add report telling where we look for missing
+  keys.
+- Support listing gpgkey URLs in repo files (bsc#1088037)
+- Add new report to request user approval for importing a package key
+- Handle http error 502 Bad Gateway in curl backend (bsc #1070851)
+  (fixes openSUSE/zypper#177)
+- Add filesize check for downloads with known size (bsc#408814)
+- Removed superfluous space in translation (bsc#1102019)
+- version 17.6.0 (2)
+
+-------------------------------------------------------------------
 Thu Jul 19 12:57:21 CEST 2018 - ma@suse.de
 
 - Prevent the system from sleeping during a commit
