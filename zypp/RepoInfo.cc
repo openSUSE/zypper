@@ -38,6 +38,7 @@
 #include "zypp/KeyRing.h"
 #include "zypp/TmpPath.h"
 #include "zypp/ZYppFactory.h"
+#include "zypp/ZYppCallbacks.h"
 
 using std::endl;
 using zypp::xml::escape;
@@ -503,9 +504,13 @@ namespace zypp
   Pathname RepoInfo::provideKey(const std::string &keyID_r, const Pathname &targetDirectory_r)
   {
     MIL << "Check for " << keyID_r << " at " << targetDirectory_r << endl;
+    std::string keyIDStr( keyID_r.size() > 8 ? keyID_r.substr( keyID_r.size()-8 ) : keyID_r );	// print short ID in Jobreports
     filesystem::TmpDir tmpKeyRingDir;
     KeyRing tempKeyRing(tmpKeyRingDir.path());
 
+    // translator: %1% is a gpg key ID like 3DBDC284
+    //             %2% is a cache directories path
+    JobReport::info( str::Format(_("Looking for gpg key ID %1% in cache %2%.") ) % keyIDStr % targetDirectory_r );
     filesystem::dirForEach(targetDirectory_r,
                            StrMatcher(".key", Match::STRINGEND),
                            [&tempKeyRing]( const Pathname & dir_r, const std::string & str_r ){
@@ -530,24 +535,34 @@ namespace zypp
     // no key in the cache is what we are looking for, lets download
     // all keys specified in gpgkey= entries
     if ( !tempKeyRing.isKeyTrusted(keyID_r) ) {
-      for ( const Url &url : gpgKeyUrls() ) {
-        try {
-          ManagedFile f = MediaSetAccess::provideOptionalFileFromUrl( url );
-	  if ( f->empty() )
-	    continue;
+      if ( ! gpgKeyUrlsEmpty() ) {
+	// translator: %1% is a gpg key ID like 3DBDC284
+	//             %2% is a repositories name
+	JobReport::info( str::Format(_("Looking for gpg key ID %1% in repository %2%.") ) % keyIDStr % asUserString() );
+	for ( const Url &url : gpgKeyUrls() ) {
+	  try {
+	    JobReport::info( "  gpgkey=" + url.asString() );
+	    ManagedFile f = MediaSetAccess::provideOptionalFileFromUrl( url );
+	    if ( f->empty() )
+	      continue;
 
-          PublicKey key(f);
-          if ( !key.isValid() )
-            continue;
+	    PublicKey key(f);
+	    if ( !key.isValid() )
+	      continue;
 
-          // import all keys into our temporary keyring
-          tempKeyRing.multiKeyImport(f, true);
+	    // import all keys into our temporary keyring
+	    tempKeyRing.multiKeyImport(f, true);
 
-        } catch ( const std::exception & e ) {
-          //ignore and continue to next url
-          ZYPP_CAUGHT(e);
-          MIL << "Key import from url:'"<<url<<"' failed." << endl;
-        }
+	  } catch ( const std::exception & e ) {
+	    //ignore and continue to next url
+	    ZYPP_CAUGHT(e);
+	    MIL << "Key import from url:'"<<url<<"' failed." << endl;
+	  }
+	}
+      }
+      else {
+	// translator: %1% is a repositories name
+	JobReport::info( str::Format(_("Repository %1% does not define additional 'gpgkey=' URLs.") ) % asUserString() );
       }
     }
 
