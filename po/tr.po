@@ -9,14 +9,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2011-11-24 16:28+0200\n"
-"Last-Translator: Mert çetin <alirizanazli95@gmail.com>\n"
-"Language-Team: turkish <i18n@suse.de>\n"
-"Language: \n"
+"PO-Revision-Date: 2018-08-03 21:07+0000\n"
+"Last-Translator: Emrecan Şuşter <emrecansuster@outlook.com>\n"
+"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
+"\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n !=1;\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
 #, boost-format
@@ -30,11 +32,11 @@ msgstr ""
 
 #: src/Zypper.h:561
 msgid "Finished with error."
-msgstr ""
+msgstr "Bitti, ancak hatalar var."
 
 #: src/Zypper.h:563
 msgid "Done."
-msgstr ""
+msgstr "Bitti."
 
 #: src/callbacks/keyring.h:32
 msgid ""
@@ -46,17 +48,22 @@ msgstr ""
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
-#, boost-format
+#, boost-format, fuzzy
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"%1% dosyası depoların ana dizin dosyasıdır. Bütün depoyu bir arada tutar."
 
 #: src/callbacks/keyring.h:46
+#, fuzzy
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Bu dosyanın daha önce elden geçirilip geçirilmediğini doğrulayamıyoruz, bu "
+"yüzden artık güvenilir olup olmadığından emin değiliz. Eğer dosyanın güvenli "
+"olduğundan kesinlikle emin değilseniz, devam etmeyin."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -67,11 +74,11 @@ msgstr ""
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
-msgstr ""
+msgstr "Depo:"
 
 #: src/callbacks/keyring.h:81
 msgid "Key Name:"
-msgstr ""
+msgstr "Anahtar Adı:"
 
 #: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
