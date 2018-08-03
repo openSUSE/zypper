@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2018-07-06 17:05+0000\n"
+"PO-Revision-Date: 2018-08-03 11:32+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
-"zypper/master/pt_BR/>\n"
+"Language-Team: Portuguese (Brazil) "
+"<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -279,15 +279,13 @@ msgstr ""
 "Falha na verificação da assinatura do arquivo '%1%' do repositório '%2%'."
 
 #: src/callbacks/keyring.h:403
-#, fuzzy
 msgid "New package signing key received:"
-msgstr "Chave de assinatura de novo repositório ou pacote recebida:"
+msgstr "Nova chave de assinatura de pacote recebida:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:419
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr "Você quer rejeitar a chave, confiar temporariamente ou confiar sempre?"
+msgstr "Você quer rejeitar a chave, ou confiar sempre?"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
