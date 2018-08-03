@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2018-07-06 22:43+0000\n"
+"PO-Revision-Date: 2018-08-03 10:37+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -275,17 +275,13 @@ msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "ファイル '%1%' (リポジトリ '%2%') に対する署名検証が失敗しました。"
 
 #: src/callbacks/keyring.h:403
-#, fuzzy
 msgid "New package signing key received:"
-msgstr "新しいリポジトリまたはパッケージの署名鍵を受信しました:"
+msgstr "新しいパッケージ署名鍵を受信しました:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:419
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-"鍵を拒否しますか(R)? 一時的に信頼しますか(T)?それとも今後ずっと信頼しますか"
-"(A)?"
+msgstr "鍵を拒否しますか(R)? 今後ずっと信頼しますか(A)?"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -294,7 +290,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:431
 msgid "r/a/"
-msgstr ""
+msgstr "r/a/"
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
