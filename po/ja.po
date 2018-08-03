@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-06 15:50+0200\n"
+"POT-Creation-Date: 2018-08-02 13:22+0200\n"
 "PO-Revision-Date: 2018-07-06 22:43+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese "
-"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
+"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
+">\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,11 +32,11 @@ msgstr "カテゴリフィルタの値 '%1%' が解釈できません。"
 msgid "Suspicious severity filter value '%1%'."
 msgstr "重要度フィルタの値 '%1%' が解釈できません。"
 
-#: src/Zypper.h:509
+#: src/Zypper.h:561
 msgid "Finished with error."
 msgstr "エラー終了しました。"
 
-#: src/Zypper.h:511
+#: src/Zypper.h:563
 msgid "Done."
 msgstr "完了。"
 
@@ -196,7 +196,7 @@ msgstr ""
 "ファイル '%s' (リポジトリ '%s') は不明な鍵 '%s' で署名されています。続行しま"
 "すか?"
 
-#: src/callbacks/keyring.h:256
+#: src/callbacks/keyring.h:256 src/callbacks/keyring.h:401
 msgid "Automatically importing the following key:"
 msgstr "以下の鍵を自動的にインポートします:"
 
@@ -230,7 +230,7 @@ msgid "r/t"
 msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:299
+#: src/callbacks/keyring.h:299 src/callbacks/keyring.h:434
 msgid "Don't trust the key."
 msgstr "鍵を信頼しない。"
 
@@ -240,7 +240,7 @@ msgid "Trust the key temporarily."
 msgstr "一時的に鍵を信頼する。"
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:304
+#: src/callbacks/keyring.h:304 src/callbacks/keyring.h:436
 msgid "Trust the key and import it into trusted keyring."
 msgstr "鍵を信頼して信頼済み鍵リングにインポートする。"
 
@@ -274,17 +274,39 @@ msgstr "ファイル '%1%' に対する署名検証が失敗しました。"
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "ファイル '%1%' (リポジトリ '%2%') に対する署名検証が失敗しました。"
 
-#: src/callbacks/keyring.h:392
+#: src/callbacks/keyring.h:403
+#, fuzzy
+msgid "New package signing key received:"
+msgstr "新しいリポジトリまたはパッケージの署名鍵を受信しました:"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:419
+#, fuzzy
+msgid "Do you want to reject the key, or trust always?"
+msgstr ""
+"鍵を拒否しますか(R)? 一時的に信頼しますか(T)?それとも今後ずっと信頼しますか"
+"(A)?"
+
+#. translators: r/a stands for Reject/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:431
+msgid "r/a/"
+msgstr ""
+
+#: src/callbacks/keyring.h:470
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "ファイル%sに対するダイジェストがありません。"
 
-#: src/callbacks/keyring.h:400
+#: src/callbacks/keyring.h:478
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "不明なダイジェスト %s です (ファイル %s)。"
 
-#: src/callbacks/keyring.h:417
+#: src/callbacks/keyring.h:495
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -299,7 +321,7 @@ msgstr ""
 "  期待されていた値:%3%\n"
 "  登録されていた値:%4%\n"
 
-#: src/callbacks/keyring.h:429
+#: src/callbacks/keyring.h:507
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -307,7 +329,7 @@ msgstr ""
 "チェックサムが正しくないパッケージを受け入れてしまうと、システムを壊す可能性"
 "があるほか、不正なソフトウエアを動作させることにもなります。"
 
-#: src/callbacks/keyring.h:437
+#: src/callbacks/keyring.h:515
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -323,22 +345,22 @@ msgstr ""
 "保護を解除してください。何も入力しないと、対象のファイルは廃棄されます。\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:444
+#: src/callbacks/keyring.h:522
 msgid "discard"
 msgstr "破棄"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:446
+#: src/callbacks/keyring.h:524
 msgid "Unblock using this file on your own risk."
 msgstr "自己責任でファイルの保護を解除する。"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:448
+#: src/callbacks/keyring.h:526
 msgid "Discard the file."
 msgstr "ファイルを破棄します。"
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:453
+#: src/callbacks/keyring.h:531
 msgid "Unblock or discard?"
 msgstr "保護を解除しますか？それとも破棄しますか？"
 
@@ -1557,13 +1579,30 @@ msgstr "既定では、任意指定のパッチは除外されます。"
 msgid "The default is to include optional patches."
 msgstr "既定では、任意指定のパッチを含みます。"
 
+#: src/Zypper.cc:206
+msgid "Whether to allow downgrading installed resolvables."
+msgstr "インストール済みの解決方法に対して、ダウングレードを許可するかどうか。"
+
+#: src/Zypper.cc:208
+msgid "Whether to allow changing the names of installed resolvables."
+msgstr "インストール済みの解決方法に対して、名前の変更を許可するかどうか。"
+
+#: src/Zypper.cc:210
+msgid "Whether to allow changing the architecture of installed resolvables."
+msgstr ""
+"インストール済みの解決方法に対して、アーキテクチャの変更を許可するかどうか。"
+
+#: src/Zypper.cc:212
+msgid "Whether to allow changing the vendor of installed resolvables."
+msgstr "インストールされているresolvableのベンダ変更を許可するかどうか。"
+
 #. translator: %1% is a list of command line option names
-#: src/Zypper.cc:200
+#: src/Zypper.cc:220
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
 msgstr "これらのオプションはお互いに排他関係にあります: %1%"
 
-#: src/Zypper.cc:290
+#: src/Zypper.cc:310
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1571,7 +1610,7 @@ msgstr ""
 "PackageKitがzypperをブロックしています。更新アプレットやその他のPackageKitを"
 "使用するソフトウエア管理アプリケーションが動作しているものと思われます。"
 
-#: src/Zypper.cc:296
+#: src/Zypper.cc:316
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1579,20 +1618,20 @@ msgstr ""
 "PackageKit に対して、現在のセッションをできる限り速やかに中断するよう依頼しま"
 "すが、どれだけの時間を要するのかは PackageKit 側の都合によります。"
 
-#: src/Zypper.cc:299
+#: src/Zypper.cc:319
 msgid "Ask PackageKit to quit?"
 msgstr "PackageKitに対して終了を知らせますか?"
 
-#: src/Zypper.cc:308
+#: src/Zypper.cc:328
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKitが稼働中です(おそらくビジーです)。"
 
-#: src/Zypper.cc:309
+#: src/Zypper.cc:329
 msgid "Try again?"
 msgstr "再試行しますか？"
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-#: src/Zypper.cc:393
+#: src/Zypper.cc:413
 #, boost-format
 msgid ""
 "For an extended search including not yet activated remote resources please "
@@ -1602,7 +1641,7 @@ msgstr ""
 "ださい。"
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-#: src/Zypper.cc:396
+#: src/Zypper.cc:416
 #, boost-format
 msgid ""
 "The package providing this subcommand is currently not installed. You can "
@@ -1611,7 +1650,7 @@ msgstr ""
 "このサブコマンドを提供するパッケージがインストールされていません。 '%1%' でイ"
 "ンストールしてください。"
 
-#: src/Zypper.cc:433
+#: src/Zypper.cc:453
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
@@ -1619,51 +1658,51 @@ msgstr ""
 "古い形式のコマンドラインオプション %1% が指定されています。グローバルオプショ"
 "ン %2% をお使いください。"
 
-#: src/Zypper.cc:434
+#: src/Zypper.cc:454
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
 "古い形式のコマンドラインオプション %1% が指定されています。%2% をお使いくださ"
 "い。"
 
-#: src/Zypper.cc:440
+#: src/Zypper.cc:460
 #, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
 "古い形式のコマンドラインオプション %1% が指定されています。このオプションは無"
 "視されます。"
 
-#: src/Zypper.cc:565
+#: src/Zypper.cc:585
 msgid "Command options:"
 msgstr "コマンドオプション:"
 
-#: src/Zypper.cc:568
+#: src/Zypper.cc:588
 msgid "Solver options:"
 msgstr "解決器のオプション:"
 
-#: src/Zypper.cc:571
+#: src/Zypper.cc:591
 msgid "Expert options:"
 msgstr "熟練者向けオプション:"
 
-#: src/Zypper.cc:574
+#: src/Zypper.cc:594
 msgid "This command has no additional options."
 msgstr "このコマンドに追加のオプションはありません。"
 
-#: src/Zypper.cc:577
+#: src/Zypper.cc:597
 msgid "Legacy options:"
 msgstr "古い形式のオプション:"
 
 #. translator: '-r             The same as -f.
-#: src/Zypper.cc:581
+#: src/Zypper.cc:601
 #, boost-format
 msgid "The same as %1%."
 msgstr "%1% と同じ意味です。"
 
-#: src/Zypper.cc:718 src/Zypper.cc:1706
+#: src/Zypper.cc:738 src/Zypper.cc:1726
 msgid "Unexpected exception."
 msgstr "予期しない例外が発生しました。"
 
-#: src/Zypper.cc:743
+#: src/Zypper.cc:763
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -1710,7 +1749,7 @@ msgstr ""
 "\t--xmlout, -x\t\tXML形式での出力に切り替える\n"
 "\t--ignore-unknown, -i\t不明なパッケージを無視する\n"
 
-#: src/Zypper.cc:766
+#: src/Zypper.cc:786
 msgid ""
 "\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
 "\t\t\t\tdirectory.\n"
@@ -1726,7 +1765,7 @@ msgstr ""
 "\t--solv-cache-dir <dir>\t代替解決ファイルキャッシュディレクトリを使用する\n"
 "\t--pkg-cache-dir <dir>\t代替パッケージキャッシュディレクトリを使用する\n"
 
-#: src/Zypper.cc:774
+#: src/Zypper.cc:794
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -1760,7 +1799,7 @@ msgstr ""
 "\t--releasever\t\tすべての.repoファイル内で$releaseverの値を設定する (既定"
 "値: ディストリビューションのバージョン)\n"
 
-#: src/Zypper.cc:788
+#: src/Zypper.cc:808
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -1772,14 +1811,14 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tインストールされたパッケージを読み込まない。\n"
 
-#: src/Zypper.cc:794
+#: src/Zypper.cc:814
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
 "このホストと同じリポジトリを使用するが、異なるルートディレクトリで作業を行な"
 "う。"
 
-#: src/Zypper.cc:798
+#: src/Zypper.cc:818
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -1789,7 +1828,7 @@ msgstr ""
 "\thelp, ?\t\t\tヘルプを表示\n"
 "\tshell, sh\t\t一度で複数のコマンドを入力する\n"
 
-#: src/Zypper.cc:803
+#: src/Zypper.cc:823
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -1809,7 +1848,7 @@ msgstr ""
 "\trefresh, ref\t\t全てのリポジトリを更新する。\n"
 "\tclean\t\t\tローカルのキャッシュを削除する。\n"
 
-#: src/Zypper.cc:813
+#: src/Zypper.cc:833
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -1825,7 +1864,7 @@ msgstr ""
 "\tremoveservice, rs\t指定したサービスを削除する。\n"
 "\trefresh-services, refs\tすべてのサービスを更新する。\n"
 
-#: src/Zypper.cc:821
+#: src/Zypper.cc:841
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -1846,7 +1885,7 @@ msgstr ""
 "\tinstall-new-recommends, inr インストール済みのパッケージから判断される新規"
 "推奨パッケージをインストールします。\n"
 
-#: src/Zypper.cc:832
+#: src/Zypper.cc:852
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -1864,7 +1903,7 @@ msgstr ""
 "\tdist-upgrade, dup\tディストリビューションのアップグレードを行なう\n"
 "\tpatch-check, pchk\tパッチを確認する\n"
 
-#: src/Zypper.cc:841
+#: src/Zypper.cc:861
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -1891,7 +1930,7 @@ msgstr ""
 "\twhat-provides, wp\t指定した能力設定が提供するパッケージをすべてリストしま"
 "す。\n"
 
-#: src/Zypper.cc:856
+#: src/Zypper.cc:876
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -1905,7 +1944,7 @@ msgstr ""
 "\tlocks, ll\t\t現在のパッケージロックを表示する。\n"
 "\tcleanlocks, cl\t\t未使用のロックを削除する。\n"
 
-#: src/Zypper.cc:863
+#: src/Zypper.cc:883
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -1928,7 +1967,7 @@ msgstr ""
 "\tsource-download\t\tすべてのインストール済みパッケージに対し、ソースRPMを\t"
 "\t\t\tローカルのディレクトリにダウンロードします。\n"
 
-#: src/Zypper.cc:873
+#: src/Zypper.cc:893
 msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
@@ -1936,7 +1975,7 @@ msgstr ""
 "     サブコマンド:\n"
 "\tsubcommand\t\t利用可能なサブコマンドを一覧表示する。\n"
 
-#: src/Zypper.cc:878
+#: src/Zypper.cc:898
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -1949,7 +1988,7 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:906
+#: src/Zypper.cc:926
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr ""
@@ -1958,7 +1997,7 @@ msgstr ""
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:913
+#: src/Zypper.cc:933
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -1970,7 +2009,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:920
+#: src/Zypper.cc:940
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "
@@ -1982,67 +2021,67 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:931
+#: src/Zypper.cc:951
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "コマンド固有のヘルプを取得するには '%s' と入力してください。"
 
-#: src/Zypper.cc:1107
+#: src/Zypper.cc:1127
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "冗長性:%d"
 
-#: src/Zypper.cc:1121
+#: src/Zypper.cc:1141
 #, c-format, boost-format
 msgid "Invalid table style %d."
 msgstr "無効な表形式 %d です。"
 
-#: src/Zypper.cc:1122
+#: src/Zypper.cc:1142
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
 msgstr "%d から %d までの整数を使用してください"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:1233
+#: src/Zypper.cc:1253
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "サブコマンド %1% は zypper のグローバルオプションに対応していません。"
 
-#: src/Zypper.cc:1254
+#: src/Zypper.cc:1274
 msgid "Enforced setting"
 msgstr "強制設定"
 
-#: src/Zypper.cc:1264
+#: src/Zypper.cc:1284
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "ユーザデータ文字列には、表示不可能な文字や改行を含めることができません！"
 
-#: src/Zypper.cc:1288 src/Zypper.cc:3626
+#: src/Zypper.cc:1308 src/Zypper.cc:3656
 msgid "Entering non-interactive mode."
 msgstr "対話処理を行なわない設定にします。"
 
-#: src/Zypper.cc:1295
+#: src/Zypper.cc:1315
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr "rebootSuggested フラグの設定されたパッチを、対話型として扱いません。"
 
-#: src/Zypper.cc:1302
+#: src/Zypper.cc:1322
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "「no-gpg-checks」モードに移行します。"
 
-#: src/Zypper.cc:1310
+#: src/Zypper.cc:1330
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
 "'%s' を有効にしています。新しいリポジトリ署名鍵は自動的にインポートされます！"
 
-#: src/Zypper.cc:1335
+#: src/Zypper.cc:1355
 msgid "The path specified in the --root option must be absolute."
 msgstr "--root オプションで指定するパスは絶対パスでなければなりません。"
 
-#: src/Zypper.cc:1354
+#: src/Zypper.cc:1374
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -2052,46 +2091,46 @@ msgstr ""
 "このリンクは、/etc/products.d内にあるコア製品の.prodファイルを示していなけれ"
 "ばなりません。\n"
 
-#: src/Zypper.cc:1402
+#: src/Zypper.cc:1422
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "リポジトリは無効化されています。インストール済みのパッケージデータベースのみ"
 "を使用します。"
 
-#: src/Zypper.cc:1414
+#: src/Zypper.cc:1434
 msgid "Autorefresh disabled."
 msgstr "自動更新が無効になっています。"
 
-#: src/Zypper.cc:1421
+#: src/Zypper.cc:1441
 msgid "CD/DVD repositories disabled."
 msgstr "CD/DVDリポジトリが無効になっています。"
 
-#: src/Zypper.cc:1428
+#: src/Zypper.cc:1448
 msgid "Remote repositories disabled."
 msgstr "リモートリポジトリが無効になっています。"
 
-#: src/Zypper.cc:1435
+#: src/Zypper.cc:1455
 msgid "Ignoring installed resolvables."
 msgstr "インストールされている解決方法を無視しています。"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:1462 src/Zypper.cc:1512
+#: src/Zypper.cc:1482 src/Zypper.cc:1532
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "%s オプションはここでは意味がありません。無視します。"
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:1595
+#: src/Zypper.cc:1615
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "zypper shell はサブコマンドの実行には対応していません。"
 
-#: src/Zypper.cc:1674
+#: src/Zypper.cc:1694
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "コマンド '%s' は '%s' に置き換えられます。"
 
-#: src/Zypper.cc:1675
+#: src/Zypper.cc:1695
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "利用可能なすべてのオプションについては、'%s' を参照してください。"
@@ -2099,7 +2138,7 @@ msgstr "利用可能なすべてのオプションについては、'%s' を参�
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
 #. and the third %s = "only, in-advance, in-heaps, as-needed"
-#: src/Zypper.cc:1811
+#: src/Zypper.cc:1834
 #, c-format, boost-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -2185,8 +2224,8 @@ msgstr ""
 "-d, --download-only         パッケージをダウンロードするだけでインストールは"
 "行いません。\n"
 
-#: src/Zypper.cc:1844 src/Zypper.cc:1896 src/Zypper.cc:1976 src/Zypper.cc:2579
-#: src/Zypper.cc:2653 src/Zypper.cc:2760
+#: src/Zypper.cc:1867 src/Zypper.cc:1921 src/Zypper.cc:2004 src/Zypper.cc:2617
+#: src/Zypper.cc:2696 src/Zypper.cc:2797
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2194,7 +2233,7 @@ msgstr ""
 "ユーザの操作を不要にします。 --non-interactive グローバルオプションの別名で"
 "す。"
 
-#: src/Zypper.cc:1845
+#: src/Zypper.cc:1868
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 "コマンドラインパラメータで指定した未署名の RPM パッケージを、警告を発すること"
@@ -2202,7 +2241,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: src/Zypper.cc:1879
+#: src/Zypper.cc:1904
 #, c-format, boost-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -2241,7 +2280,7 @@ msgstr ""
 "-D, --dry-run               削除をテストするだけで実際には何もしません。\n"
 "    --details               インストールの詳細なサマリを表示します。\n"
 
-#: src/Zypper.cc:1917
+#: src/Zypper.cc:1942
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -2269,7 +2308,7 @@ msgstr ""
 "    --download-only      パッケージをダウンロードするだけでインストールは行い"
 "ません。\n"
 
-#: src/Zypper.cc:1928
+#: src/Zypper.cc:1953
 #, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
@@ -2280,7 +2319,7 @@ msgstr ""
 "が、 rpm 側で設定を行なうことで、インストール先を変更することができます。具体"
 "的には '%2%' を実行してください。"
 
-#: src/Zypper.cc:1961
+#: src/Zypper.cc:1989
 #, c-format, boost-format
 msgid ""
 "verify (ve) [options]\n"
@@ -2312,7 +2351,7 @@ msgstr ""
 "-d, --download-only         パッケージをダウンロードするだけでインストールは"
 "行いません。\n"
 
-#: src/Zypper.cc:2005
+#: src/Zypper.cc:2038
 #, c-format, boost-format
 msgid ""
 "install-new-recommends (inr) [options]\n"
@@ -2347,7 +2386,7 @@ msgstr ""
 "ません。\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: src/Zypper.cc:2037
+#: src/Zypper.cc:2072
 #, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -2369,21 +2408,21 @@ msgstr ""
 "-n, --name <name>      サービスに対して詳細名を指定する\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2050
+#: src/Zypper.cc:2085
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr "addservice (as) [options] <URI> <alias>"
 
 #. translators: command description
-#: src/Zypper.cc:2053
+#: src/Zypper.cc:2088
 msgid "Add a repository index service to the system."
 msgstr "システムにリポジトリインデックスサービスを追加します。"
 
-#: src/Zypper.cc:2058
+#: src/Zypper.cc:2093
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr "サービスの種類は常に自動検出されます。このオプションは無視されます。"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:2074
+#: src/Zypper.cc:2109
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -2402,7 +2441,7 @@ msgstr ""
 "    --loose-query  URIのクエリ文字列を無視します。\n"
 
 #. translators: %s is "--all" and "--all"
-#: src/Zypper.cc:2104
+#: src/Zypper.cc:2139
 #, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -2461,18 +2500,18 @@ msgstr ""
 "-m, --medium-type <type>  指定した種類のサービスに対して変更を適用する\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2133
+#: src/Zypper.cc:2168
 msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
 msgstr "modifyservice (ms) <options> <alias|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2136
+#: src/Zypper.cc:2171
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
 msgstr "modifyservice (ms) <options> <%1%>"
 
 #. translators: command description
-#: src/Zypper.cc:2139
+#: src/Zypper.cc:2174
 #, boost-format
 msgid ""
 "Modify properties of services specified by alias, number, or URI, or by the "
@@ -2481,47 +2520,47 @@ msgstr ""
 "別名 (<alias>) 、番号、 URI 、または統合オプション '%1%' で指定したサービスの"
 "情報を修正します。"
 
-#: src/Zypper.cc:2144
+#: src/Zypper.cc:2179
 msgid "Apply changes to all services."
 msgstr "全てのサービスに対して変更を適用する。"
 
-#: src/Zypper.cc:2145
+#: src/Zypper.cc:2180
 msgid "Apply changes to all local services."
 msgstr "全てのローカルサービスに対して変更を適用する。"
 
-#: src/Zypper.cc:2146
+#: src/Zypper.cc:2181
 msgid "Apply changes to all remote services."
 msgstr "全てのリモート (ネットワーク) サービスに対して変更を適用する。"
 
-#: src/Zypper.cc:2147
+#: src/Zypper.cc:2182
 msgid "Apply changes to services of specified type."
 msgstr "指定した種類のサービスに対して変更を適用する。"
 
-#: src/Zypper.cc:2149
+#: src/Zypper.cc:2184
 msgid "Add a RIS service repository to enable."
 msgstr "有効にする RIS サービスリポジトリを追加する。"
 
-#: src/Zypper.cc:2150
+#: src/Zypper.cc:2185
 msgid "Add a RIS service repository to disable."
 msgstr "無効にする RIS サービスリポジトリを追加する。"
 
-#: src/Zypper.cc:2151
+#: src/Zypper.cc:2186
 msgid "Remove a RIS service repository to enable."
 msgstr "有効にする RIS サービスリポジトリを削除する。"
 
-#: src/Zypper.cc:2152
+#: src/Zypper.cc:2187
 msgid "Remove a RIS service repository to disable."
 msgstr "無効にする RIS サービスリポジトリを削除する。"
 
-#: src/Zypper.cc:2153
+#: src/Zypper.cc:2188
 msgid "Clear the list of RIS repositories to enable."
 msgstr "有効にする RIS サービスリポジトリの一覧を消去する。"
 
-#: src/Zypper.cc:2154
+#: src/Zypper.cc:2189
 msgid "Clear the list of RIS repositories to disable."
 msgstr "無効にする RIS サービスリポジトリの一覧を消去する。"
 
-#: src/Zypper.cc:2181
+#: src/Zypper.cc:2216
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -2551,7 +2590,7 @@ msgstr ""
 "-U, --sort-by-uri         リストをURI順にソートします。\n"
 "-N, --sort-by-name        リストを名前順にソートします。\n"
 
-#: src/Zypper.cc:2209
+#: src/Zypper.cc:2244
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -2573,7 +2612,7 @@ msgstr ""
 "-R, --restore-status  サービスリポジトリの有効な/無効な状態も復元します。\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:2235
+#: src/Zypper.cc:2270
 #, c-format, boost-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -2615,17 +2654,17 @@ msgstr ""
 "-f, --refresh             リポジトリの自動更新を有効にします。\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2257
+#: src/Zypper.cc:2292
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
 msgstr "addrepo (ar) [options] <URI> <alias>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2260
+#: src/Zypper.cc:2295
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
 msgstr "addrepo (ar) [options] <file.repo>"
 
 #. translators: command description
-#: src/Zypper.cc:2263
+#: src/Zypper.cc:2298
 msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
@@ -2633,23 +2672,23 @@ msgstr ""
 "システムにリポジトリを追加します。リポジトリはURIにより指定するか、または指定"
 "された.repoファイルから読み込むことができます(リモートでも)。"
 
-#: src/Zypper.cc:2266
+#: src/Zypper.cc:2301
 msgid "Just another means to specify a .repo file to read."
 msgstr ".repo ファイルを指定してリポジトリを読み込む。"
 
-#: src/Zypper.cc:2267
+#: src/Zypper.cc:2302
 msgid "Probe URI."
 msgstr "URIを検索します。"
 
-#: src/Zypper.cc:2268
+#: src/Zypper.cc:2303
 msgid "Don't probe URI, probe later during refresh."
 msgstr "URIを検索しません。更新後に検索します。"
 
-#: src/Zypper.cc:2272
+#: src/Zypper.cc:2307
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr "リポジトリタイプは常に自動検出されます。このオプションは無視されます。"
 
-#: src/Zypper.cc:2300
+#: src/Zypper.cc:2335
 msgid ""
 "repos (lr) [options] [repo] ...\n"
 "\n"
@@ -2691,7 +2730,7 @@ msgstr ""
 "-A, --sort-by-alias       リストを別名順に並べ替えます。\n"
 "-N, --sort-by-name        リストを名前順にソートします。\n"
 
-#: src/Zypper.cc:2333
+#: src/Zypper.cc:2368
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -2709,7 +2748,7 @@ msgstr ""
 "    --loose-auth   URI内の認証情報を無視します。\n"
 "    --loose-query  URI内の問い合わせ情報 (クエリ文字列) を無視します。\n"
 
-#: src/Zypper.cc:2354
+#: src/Zypper.cc:2389
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -2726,7 +2765,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:2377
+#: src/Zypper.cc:2412
 #, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -2762,7 +2801,7 @@ msgstr ""
 "-k, --keep-packages       RPM ファイルのキャッシュを有効にする\n"
 "-K, --no-keep-packages    RPM ファイルのキャッシュを無効にする\n"
 
-#: src/Zypper.cc:2394
+#: src/Zypper.cc:2429
 msgid ""
 "-a, --all                 Apply changes to all repositories.\n"
 "-l, --local               Apply changes to all local repositories.\n"
@@ -2776,18 +2815,18 @@ msgstr ""
 "-m, --medium-type <type>  指定した種類のリポジトリに対して変更を適用する\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2403
+#: src/Zypper.cc:2438
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
 msgstr "modifyrepo (mr) <options> <alias|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2406
+#: src/Zypper.cc:2441
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
 msgstr "modifyrepo (mr) <options> <%1%>"
 
 #. translators: command description
-#: src/Zypper.cc:2409
+#: src/Zypper.cc:2444
 #, boost-format
 msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
@@ -2796,7 +2835,7 @@ msgstr ""
 "別名 (<alias>), 番号, URI, または統合オプション '%1%' で指定したリポジトリの"
 "情報を修正します。"
 
-#: src/Zypper.cc:2438
+#: src/Zypper.cc:2473
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -2830,7 +2869,7 @@ msgstr ""
 "-r, --repo <alias|#|URI> 指定したリポジトリだけを更新します。\n"
 "-s, --services           リポジトリを更新する前にサービスも更新します。\n"
 
-#: src/Zypper.cc:2467
+#: src/Zypper.cc:2502
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -2855,7 +2894,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2496
+#: src/Zypper.cc:2531
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -2895,7 +2934,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2550
+#: src/Zypper.cc:2588
 #, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -2962,7 +3001,7 @@ msgstr ""
 "-d, --download-only         パッケージをダウンロードするだけでインストールは"
 "行いません。\n"
 
-#: src/Zypper.cc:2623
+#: src/Zypper.cc:2666
 #, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -3036,11 +3075,11 @@ msgstr ""
 "-d, --download-only         パッケージをダウンロードするだけでインストールは"
 "行いません。\n"
 
-#: src/Zypper.cc:2650
+#: src/Zypper.cc:2693
 msgid "Install only patches which affect the package management itself."
 msgstr "パッケージ管理自体に影響するパッチのみをインストールします。"
 
-#: src/Zypper.cc:2651
+#: src/Zypper.cc:2694
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
@@ -3051,16 +3090,16 @@ msgstr ""
 "視されます。また、 --updatestack-only と同時に指定することはできません。"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2681
+#: src/Zypper.cc:2726
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [オプション]"
 
 #. translators: command description
-#: src/Zypper.cc:2684
+#: src/Zypper.cc:2729
 msgid "List all applicable patches."
 msgstr "適用可能なパッチを一覧で表示します。"
 
-#: src/Zypper.cc:2687
+#: src/Zypper.cc:2732
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
@@ -3068,7 +3107,7 @@ msgstr ""
 "-b, --bugzilla[=#]\n"
 "Bugzilla の発行番号をもとに、適用可能なパッチを一覧で表示します。"
 
-#: src/Zypper.cc:2688
+#: src/Zypper.cc:2733
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
@@ -3076,7 +3115,7 @@ msgstr ""
 "--cve[=#]\n"
 "CVE の発行番号をもとに、適用可能なパッチを一覧で表示します。"
 
-#: src/Zypper.cc:2689
+#: src/Zypper.cc:2734
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
@@ -3084,7 +3123,7 @@ msgstr ""
 "--issues[=STRING]\n"
 "指定した文字列に該当するものを検索します。"
 
-#: src/Zypper.cc:2690
+#: src/Zypper.cc:2735
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
@@ -3092,7 +3131,7 @@ msgstr ""
 "--date <YYYY-MM-DD>\n"
 "指定した日付まで　(指定した日は含まず) に発行されたパッチを一覧で表示します。"
 
-#: src/Zypper.cc:2691
+#: src/Zypper.cc:2736
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
@@ -3100,7 +3139,7 @@ msgstr ""
 "-g, --category <カテゴリ>\n"
 "指定したカテゴリのパッチのみを一覧で表示します。"
 
-#: src/Zypper.cc:2692
+#: src/Zypper.cc:2737
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
@@ -3108,7 +3147,7 @@ msgstr ""
 "--severity <重要度>\n"
 "指定した重要度のパッチのみを一覧で表示します。"
 
-#: src/Zypper.cc:2693
+#: src/Zypper.cc:2738
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
@@ -3116,7 +3155,7 @@ msgstr ""
 "-a, --all\n"
 "適用可能なものだけでなく、すべてのパッチを一覧で表示します。"
 
-#: src/Zypper.cc:2695
+#: src/Zypper.cc:2740
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
@@ -3124,7 +3163,7 @@ msgstr ""
 "-r, --repo <ALIAS|#|URI>\n"
 "指定したリポジトリから提供されているパッチのみを一覧で表示します。"
 
-#: src/Zypper.cc:2739
+#: src/Zypper.cc:2776
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -3179,24 +3218,7 @@ msgstr ""
 "-d, --download-only         パッケージをダウンロードするだけでインストールは"
 "行いません。\n"
 
-#: src/Zypper.cc:2768
-msgid "Whether to allow downgrading installed resolvables."
-msgstr "インストール済みの解決方法に対して、ダウングレードを許可するかどうか。"
-
-#: src/Zypper.cc:2770
-msgid "Whether to allow changing the names of installed resolvables."
-msgstr "インストール済みの解決方法に対して、名前の変更を許可するかどうか。"
-
-#: src/Zypper.cc:2772
-msgid "Whether to allow changing the architecture of installed resolvables."
-msgstr ""
-"インストール済みの解決方法に対して、アーキテクチャの変更を許可するかどうか。"
-
-#: src/Zypper.cc:2774
-msgid "Whether to allow changing the vendor of installed resolvables."
-msgstr "インストールされているresolvableのベンダ変更を許可するかどうか。"
-
-#: src/Zypper.cc:2812
+#: src/Zypper.cc:2842
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -3279,17 +3301,17 @@ msgstr ""
 "* ? ワイルドカードも検索文字列内でも使用できる追加情報と共に使用されます。\n"
 "検索文字列が「/」で囲まれている場合、正規表現であると解釈されます。\n"
 
-#: src/Zypper.cc:2846
+#: src/Zypper.cc:2876
 msgid "Search for packages which supplement the search strings."
 msgstr "検索対象の文字列を補足するパッケージを検索します。"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2864
+#: src/Zypper.cc:2894
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr "patch-check (pchk) [オプション]"
 
 #. translators: command description
-#: src/Zypper.cc:2867
+#: src/Zypper.cc:2897
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
@@ -3298,7 +3320,7 @@ msgstr ""
 "見つかった場合には 100 を、少なくとも 1 つ以上の必要なセキュリティパッチが見"
 "つかった場合は 101 を返します。"
 
-#: src/Zypper.cc:2870
+#: src/Zypper.cc:2900
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
@@ -3306,7 +3328,7 @@ msgstr ""
 "-r, --repo <ALIAS|#|URI>\n"
 "指定したリポジトリ内のパッチのみを確認します。"
 
-#: src/Zypper.cc:2871
+#: src/Zypper.cc:2901
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
@@ -3314,7 +3336,7 @@ msgstr ""
 "--updatestack-only\n"
 "パッケージ管理システム自身に影響するパッチのみを確認します。"
 
-#: src/Zypper.cc:2888
+#: src/Zypper.cc:2918
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3332,7 +3354,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI>  リポジトリを指定するもう一つの方法\n"
 
-#: src/Zypper.cc:2918
+#: src/Zypper.cc:2948
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -3369,7 +3391,7 @@ msgstr ""
 "-N, --sort-by-name        リストをパッケージ名順に並べ替します。\n"
 "-R, --sort-by-repo        リストをリポジトリ名順で並べ替します。\n"
 
-#: src/Zypper.cc:2949
+#: src/Zypper.cc:2979
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3392,7 +3414,7 @@ msgstr ""
 "-u, --not-installed-only  インストールされていないパターンのみを表示しま"
 "す。\n"
 
-#: src/Zypper.cc:2976
+#: src/Zypper.cc:3006
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3414,12 +3436,12 @@ msgstr ""
 "-i, --installed-only      インストール済みの製品のみを表示します。\n"
 "-u, --not-installed-only  インストールされていない製品のみを表示します。\n"
 
-#: src/Zypper.cc:2985
+#: src/Zypper.cc:3015
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr "XML 出力のみ: 製品ファイル内にある XML タグをそのまま出力します。"
 
-#: src/Zypper.cc:3010
+#: src/Zypper.cc:3040
 #, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -3462,11 +3484,11 @@ msgstr ""
 "    --recommends          推奨するものを表示します。\n"
 "    --suggests            提案するものを表示します。\n"
 
-#: src/Zypper.cc:3029
+#: src/Zypper.cc:3059
 msgid "Show supplements."
 msgstr "補足するものを検索します。"
 
-#: src/Zypper.cc:3044
+#: src/Zypper.cc:3074
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3481,7 +3503,7 @@ msgstr ""
 "\n"
 "これは '%s' の別名です。\n"
 
-#: src/Zypper.cc:3063
+#: src/Zypper.cc:3093
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3496,7 +3518,7 @@ msgstr ""
 "\n"
 "これは '%s' の別名です。\n"
 
-#: src/Zypper.cc:3082
+#: src/Zypper.cc:3112
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3511,7 +3533,7 @@ msgstr ""
 "\n"
 "これは '%s 1' の別名です。\n"
 
-#: src/Zypper.cc:3099
+#: src/Zypper.cc:3129
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3525,7 +3547,7 @@ msgstr ""
 "\n"
 "このコマンドにはオプションはありません。\n"
 
-#: src/Zypper.cc:3150
+#: src/Zypper.cc:3180
 msgid ""
 "moo\n"
 "\n"
@@ -3539,7 +3561,7 @@ msgstr ""
 "\n"
 "このコマンドにはオプションはありません。\n"
 
-#: src/Zypper.cc:3172
+#: src/Zypper.cc:3202
 #, c-format, boost-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -3562,7 +3584,7 @@ msgstr ""
 "-t, --type <type>         パッケージの種類を指定します (%s)。 \n"
 "                          デフォルト:%s\n"
 
-#: src/Zypper.cc:3199
+#: src/Zypper.cc:3229
 #, c-format, boost-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -3586,26 +3608,26 @@ msgstr ""
 "                          デフォルト:%s\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3226
+#: src/Zypper.cc:3256
 msgid "locks (ll) [options]"
 msgstr "locks (ll) [オプション]"
 
 #. translators: command description
-#: src/Zypper.cc:3229
+#: src/Zypper.cc:3259
 msgid "List current package locks."
 msgstr "現在のパッケージロックを一覧表示します。"
 
 #. translators: -m, --matches
-#: src/Zypper.cc:3233
+#: src/Zypper.cc:3263
 msgid "Show the number of resolvables matched by each lock."
 msgstr "各ロックによってマッチされたresolvableの数を示します。"
 
 #. translators: -s, --solvables
-#: src/Zypper.cc:3235
+#: src/Zypper.cc:3265
 msgid "List the resolvables matched by each lock."
 msgstr "各ロックによってマッチされたresolvableを一覧表示します。"
 
-#: src/Zypper.cc:3251
+#: src/Zypper.cc:3281
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -3623,7 +3645,7 @@ msgstr ""
 "-d, --only-duplicates     重複したロックのみを削除します。\n"
 "-e, --only-empty          何もロックしないもののみを削除します。\n"
 
-#: src/Zypper.cc:3272
+#: src/Zypper.cc:3302
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -3641,7 +3663,7 @@ msgstr ""
 "  コマンドオプション:\n"
 "-l, --label                 オペレーティングシステムのラベルを表示します。\n"
 
-#: src/Zypper.cc:3293
+#: src/Zypper.cc:3323
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3658,7 +3680,7 @@ msgstr ""
 "-m, --match  リリース番号が存在しないときはどんなリリースでもかまわないものと"
 "する\n"
 
-#: src/Zypper.cc:3312
+#: src/Zypper.cc:3342
 msgid ""
 "licenses\n"
 "\n"
@@ -3674,12 +3696,12 @@ msgstr ""
 "このコマンドにはオプションはありません。\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3337
+#: src/Zypper.cc:3367
 msgid "ps [options]"
 msgstr "ps [オプション]"
 
 #. translators: command description
-#: src/Zypper.cc:3340
+#: src/Zypper.cc:3370
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -3688,7 +3710,7 @@ msgstr ""
 "まだ使用している可能性のある実行中プロセスを一覧表示します。"
 
 #. translators: -s, --short
-#: src/Zypper.cc:3344
+#: src/Zypper.cc:3374
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -3699,7 +3721,7 @@ msgstr ""
 "られたシステムサービスの名前のみが表示されます。"
 
 #. translators: --print <format>
-#: src/Zypper.cc:3346
+#: src/Zypper.cc:3376
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -3711,11 +3733,11 @@ msgstr ""
 "置き換えられます。"
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3348
+#: src/Zypper.cc:3378
 msgid "Write debug output to file <path>."
 msgstr "デバッグ出力をファイル <path> に出力します。"
 
-#: src/Zypper.cc:3367
+#: src/Zypper.cc:3397
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -3757,7 +3779,7 @@ msgstr ""
 "--dry-run            パッケージのダウンロードを行なわず、このコマンドで\n"
 "                     何が行なわれるのかを表示します。\n"
 
-#: src/Zypper.cc:3406
+#: src/Zypper.cc:3436
 msgid ""
 "source-download\n"
 "\n"
@@ -3788,7 +3810,7 @@ msgstr ""
 "や\n"
 "                     不要なものを表示します。\n"
 
-#: src/Zypper.cc:3433
+#: src/Zypper.cc:3463
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -3802,7 +3824,7 @@ msgstr ""
 "\n"
 "このコマンドにはオプションはありません。\n"
 
-#: src/Zypper.cc:3450
+#: src/Zypper.cc:3480
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -3817,7 +3839,7 @@ msgstr ""
 "このコマンドにはオプションはありません。\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3468
+#: src/Zypper.cc:3498
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -3828,7 +3850,7 @@ msgstr ""
 "利用可能なサービス種類を表示します。\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3484
+#: src/Zypper.cc:3514
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -3841,7 +3863,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3506
+#: src/Zypper.cc:3536
 msgid ""
 "mount\n"
 "\n"
@@ -3861,7 +3883,7 @@ msgstr ""
 "-n, --name <name>    指定の文字列をサービス名として使用します。\n"
 "-r, --recurse        サブディレクトリも検索します。\n"
 
-#: src/Zypper.cc:3534
+#: src/Zypper.cc:3564
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -3874,7 +3896,7 @@ msgstr ""
 "指定した検索文字列に一致するパッチを検索します。これは '%s' の別名です。\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3551
+#: src/Zypper.cc:3581
 msgid ""
 "ping [options]\n"
 "\n"
@@ -3884,16 +3906,16 @@ msgstr ""
 "\n"
 "このコマンドは常に0を返すダミー実装です。\n"
 
-#: src/Zypper.cc:3594 src/Zypper.cc:5659
+#: src/Zypper.cc:3624 src/Zypper.cc:5705
 msgid "Unexpected program flow."
 msgstr "予期しないプログラムの流れです。"
 
-#: src/Zypper.cc:3642
+#: src/Zypper.cc:3672
 msgid "Non-option program arguments: "
 msgstr "オプション以外のプログラム引数: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3707
+#: src/Zypper.cc:3737
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -3904,20 +3926,20 @@ msgstr ""
 "　(　∪ ∪\n"
 "　と＿)＿)"
 
-#: src/Zypper.cc:3730
+#: src/Zypper.cc:3760
 msgid "Root privileges are required for refreshing services."
 msgstr "サービスを更新するには root 権限が必要です。"
 
-#: src/Zypper.cc:3754 src/Zypper.cc:3833 src/Zypper.cc:4021
+#: src/Zypper.cc:3784 src/Zypper.cc:3863 src/Zypper.cc:4051
 msgid "Root privileges are required for modifying system services."
 msgstr "サービスを修正するには root 権限が必要です。"
 
-#: src/Zypper.cc:3817
+#: src/Zypper.cc:3847
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' は有効なサービス種類ではありません。"
 
-#: src/Zypper.cc:3819
+#: src/Zypper.cc:3849
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -3927,40 +3949,40 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3844 src/utils/messages.cc:47
+#: src/Zypper.cc:3874 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "別名または統合オプションを指定する必要があります。"
 
-#: src/Zypper.cc:3876
+#: src/Zypper.cc:3906
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "サービス「%s」が見つかりません。"
 
-#: src/Zypper.cc:3903 src/Zypper.cc:4020 src/Zypper.cc:4124 src/Zypper.cc:4176
+#: src/Zypper.cc:3933 src/Zypper.cc:4050 src/Zypper.cc:4154 src/Zypper.cc:4206
 msgid "Root privileges are required for modifying system repositories."
 msgstr "システムリポジトリを修正するには root 権限が必要です。"
 
-#: src/Zypper.cc:3929 src/Zypper.cc:4288
+#: src/Zypper.cc:3959 src/Zypper.cc:4318
 msgid "Too few arguments."
 msgstr "引数が少なすぎます。"
 
-#: src/Zypper.cc:3952
+#: src/Zypper.cc:3982
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "1 つのパラメータのみ指定した場合は、 .repo ファイルのある URI を指定しなけれ"
 "ばなりません。"
 
-#: src/Zypper.cc:3982
+#: src/Zypper.cc:4012
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "%s と %s を同時に指定することはできません。 %s の設定を使用します。"
 
-#: src/Zypper.cc:4001
+#: src/Zypper.cc:4031
 msgid "Specified type is not a valid repository type:"
 msgstr "指定した種類は無効なリポジトリタイプです:"
 
-#: src/Zypper.cc:4002
+#: src/Zypper.cc:4032
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
@@ -3968,75 +3990,75 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4067
+#: src/Zypper.cc:4097
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "リポジトリ '%s' は別名／番号／URIのいずれでも見つかりません。"
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4100
+#: src/Zypper.cc:4130
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "サービス '%s' は別名／番号／URIのいずれでも見つかりません。"
 
-#: src/Zypper.cc:4131
+#: src/Zypper.cc:4161
 msgid "Too few arguments. At least URI and alias are required."
 msgstr ""
 "パラメータが少なすぎます。少なくともURIと別名を指定する必要があります。"
 
-#: src/Zypper.cc:4155
+#: src/Zypper.cc:4185
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "リポジトリ '%s' が見つかりません。"
 
-#: src/Zypper.cc:4215
+#: src/Zypper.cc:4245
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "リポジトリ %s が見つかりません。"
 
-#: src/Zypper.cc:4232
+#: src/Zypper.cc:4262
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "システムリポジトリを更新するには root 権限が必要です。"
 
-#: src/Zypper.cc:4238
+#: src/Zypper.cc:4268
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "'%s' グローバルオプションはここでは意味がありません。"
 
-#: src/Zypper.cc:4246
+#: src/Zypper.cc:4276
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "'%s' を使用したときは引数は使用できません。"
 
-#: src/Zypper.cc:4270
+#: src/Zypper.cc:4300
 msgid "Root privileges are required for cleaning local caches."
 msgstr "ローカルキャッシュの削除には root 権限が必要です。"
 
-#: src/Zypper.cc:4289
+#: src/Zypper.cc:4319
 msgid "At least one package name is required."
 msgstr "少なくとも 1 つのパッケージ名を指定する必要があります。"
 
-#: src/Zypper.cc:4298
+#: src/Zypper.cc:4328 src/Zypper.cc:4577 src/Zypper.cc:4614
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "パッケージのインストール／削除には root 権限が必要です。"
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4310
+#: src/Zypper.cc:4340
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "引数を無視し、リポジトリ全体にマークを付与します。"
 
-#: src/Zypper.cc:4321
+#: src/Zypper.cc:4351
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "不明なパッケージ種類です:%s"
 
-#: src/Zypper.cc:4331
+#: src/Zypper.cc:4361
 msgid "Cannot uninstall patches."
 msgstr "パッチをアンインストールできません。"
 
-#: src/Zypper.cc:4332
+#: src/Zypper.cc:4362
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4046,37 +4068,37 @@ msgstr ""
 "パッチは、単なるファイルコピーやデータベースレコードのような形でインストール"
 "されることはありません。"
 
-#: src/Zypper.cc:4342
+#: src/Zypper.cc:4372
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr ""
 "ソースパッケージのアンインストールは定義されておらず、実装もされていません。"
 
-#: src/Zypper.cc:4362
+#: src/Zypper.cc:4392
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' は RPM ファイルのようです。ダウンロードを行ないます。"
 
-#: src/Zypper.cc:4371
+#: src/Zypper.cc:4401
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "'%s' で指定したRPMファイルで問題が発生しました。スキップしています。"
 
-#: src/Zypper.cc:4393
+#: src/Zypper.cc:4423
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 "%s のRPMヘッダを読み込む際に問題が発生しました。 RPMファイルでない可能性があ"
 "ります。"
 
-#: src/Zypper.cc:4414
+#: src/Zypper.cc:4444
 msgid "Plain RPM files cache"
 msgstr "RPM ファイルキャッシュ"
 
-#: src/Zypper.cc:4436
+#: src/Zypper.cc:4466
 msgid "No valid arguments specified."
 msgstr "正しいパラメータが指定されていません。"
 
-#: src/Zypper.cc:4453 src/Zypper.cc:4584
+#: src/Zypper.cc:4483 src/Zypper.cc:4630
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4085,76 +4107,76 @@ msgstr ""
 "行なわれます。何もインストールできません。"
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4490 src/Zypper.cc:5061
+#: src/Zypper.cc:4520 src/Zypper.cc:5107
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s は %s を否定しています"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4498
+#: src/Zypper.cc:4528
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s は現在 %s と一緒に使用することができません"
 
-#: src/Zypper.cc:4539
+#: src/Zypper.cc:4569
 msgid "Source package name is a required argument."
 msgstr "ソースパッケージ名の指定が必要です。"
 
-#: src/Zypper.cc:4641 src/Zypper.cc:4980 src/Zypper.cc:5080 src/Zypper.cc:5290
-#: src/Zypper.cc:5341 src/Zypper.cc:5381
+#: src/Zypper.cc:4687 src/Zypper.cc:5026 src/Zypper.cc:5126 src/Zypper.cc:5336
+#: src/Zypper.cc:5387 src/Zypper.cc:5427
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "不明なパッケージ種類 '%s' です。"
 
-#: src/Zypper.cc:4666 src/repos.cc:796
+#: src/Zypper.cc:4712 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "指定したリポジトリ '%s' は無効化されています。"
 
 #. translators: empty search result message
-#: src/Zypper.cc:4822
+#: src/Zypper.cc:4868
 msgid "No matching items found."
 msgstr "該当する項目がありません。"
 
-#: src/Zypper.cc:4857
+#: src/Zypper.cc:4903
 msgid "Problem occurred initializing or executing the search query"
 msgstr "検索の問い合わせを準備する際、または実行する際に問題が発生しました"
 
-#: src/Zypper.cc:4858
+#: src/Zypper.cc:4904
 msgid "See the above message for a hint."
 msgstr "解決へのヒントとして上記のメッセージをお読みください。"
 
-#: src/Zypper.cc:4859 src/repos.cc:1009
+#: src/Zypper.cc:4905 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "root ユーザで 'zypper refresh' を実行すると問題を解決できるかもしれません。"
 
-#: src/Zypper.cc:4940
+#: src/Zypper.cc:4986
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
 "%2% のグローバルオプションが指定されていないと、オプション %1% は効果がありま"
 "せん。"
 
-#: src/Zypper.cc:4999 src/Zypper.cc:5047
+#: src/Zypper.cc:5045 src/Zypper.cc:5093
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "%s と %s を同時に指定することはできません。"
 
-#: src/Zypper.cc:5028
+#: src/Zypper.cc:5074
 msgid "Root privileges are required for updating packages."
 msgstr "パッケージの更新には root 権限が必要です。"
 
-#: src/Zypper.cc:5087 src/Zypper.cc:5095 src/Zypper.cc:5176
+#: src/Zypper.cc:5133 src/Zypper.cc:5141 src/Zypper.cc:5222
 msgid "Operation not supported."
 msgstr "指定した操作には対応していません。"
 
-#: src/Zypper.cc:5088
+#: src/Zypper.cc:5134
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "インストール済みの製品を更新するには、 '%s' をお使いください。"
 
-#: src/Zypper.cc:5096
+#: src/Zypper.cc:5142
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4164,18 +4186,18 @@ msgstr ""
 "のソースパッケージと構築依存関係をインストールするには、 '%s' をお使いくださ"
 "い。"
 
-#: src/Zypper.cc:5112
+#: src/Zypper.cc:5158
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "引数にパッケージを指定した場合は、複数の種類を指定することができません。"
 
-#: src/Zypper.cc:5212
+#: src/Zypper.cc:5258
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
 "ディストリビューションのアップグレード処理を行うにはroot権限が必要です。"
 
-#: src/Zypper.cc:5232
+#: src/Zypper.cc:5278
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4186,87 +4208,87 @@ msgstr ""
 "行おうとしています。続行する前に、これらのリポジトリに互換性があることをご確"
 "認ください。このコマンドについての詳しい情報は '%s' をご覧ください。"
 
-#: src/Zypper.cc:5257 src/utils/messages.cc:55
+#: src/Zypper.cc:5303 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "必要なパラメータが指定されていません。"
 
-#: src/Zypper.cc:5260 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5306 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "利用方法"
 
-#: src/Zypper.cc:5320 src/Zypper.cc:5361
+#: src/Zypper.cc:5366 src/Zypper.cc:5407
 msgid "Root privileges are required for adding of package locks."
 msgstr "パッケージロックの設定には root 権限が必要です。"
 
-#: src/Zypper.cc:5442
+#: src/Zypper.cc:5488
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "%lu 個のパッケージロックを削除しました。"
 
-#: src/Zypper.cc:5453
+#: src/Zypper.cc:5499
 msgid "XML output not implemented for this command."
 msgstr "このコマンドでは XML 形式での出力が実装されていません。"
 
-#: src/Zypper.cc:5466
+#: src/Zypper.cc:5512
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "ディストリビューションラベル:%s"
 
-#: src/Zypper.cc:5467
+#: src/Zypper.cc:5513
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "短縮ラベル:%s"
 
-#: src/Zypper.cc:5508
+#: src/Zypper.cc:5554
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s は %s と一致します"
 
-#: src/Zypper.cc:5510
+#: src/Zypper.cc:5556
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s は %s よりも新しくなっています"
 
-#: src/Zypper.cc:5512
+#: src/Zypper.cc:5558
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s は %s よりも古くなっています"
 
-#: src/Zypper.cc:5594 src/source-download.cc:217
+#: src/Zypper.cc:5640 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "ダウンロードディレクトリ '%s' を使用する権限が不足しています。"
 
-#: src/Zypper.cc:5646
+#: src/Zypper.cc:5692
 msgid "This command only makes sense in the zypper shell."
 msgstr "このコマンドは zypper シェル内でのみ意味を持ちます。"
 
-#: src/Zypper.cc:5656
+#: src/Zypper.cc:5702
 msgid "You already are running zypper's shell."
 msgstr "既にzypperのシェルにいます。"
 
-#: src/Zypper.cc:5669 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2546
+#: src/Zypper.cc:5715 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2546
 msgid "Alias"
 msgstr "別名"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5669 src/info.cc:69 src/info.cc:460 src/info.cc:704
+#: src/Zypper.cc:5715 src/info.cc:69 src/info.cc:460 src/info.cc:704
 #: src/locks.cc:104 src/repos.cc:1072 src/repos.cc:1211 src/repos.cc:2547
-#: src/search.cc:47 src/search.cc:192 src/search.cc:339 src/search.cc:486
-#: src/search.cc:550 src/update.cc:798 src/utils/misc.cc:228
+#: src/search.cc:47 src/search.cc:195 src/search.cc:342 src/search.cc:489
+#: src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
 msgid "Name"
 msgstr "名前"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5669 src/info.cc:83
+#: src/Zypper.cc:5715 src/info.cc:83
 msgid "Description"
 msgstr "説明"
 
-#: src/Zypper.cc:5720
+#: src/Zypper.cc:5766
 msgid "Resolvable Type"
 msgstr "解決方法の種類"
 
@@ -4409,7 +4431,7 @@ msgstr "パスワード"
 msgid "Argument resolves to no package"
 msgstr "パラメータを解釈しましたが、該当するパッケージがありません"
 
-#: src/download.cc:141 src/solve-commit.cc:912
+#: src/download.cc:141 src/solve-commit.cc:922
 msgid "Nothing to do."
 msgstr "何もすることがありません。"
 
@@ -4437,22 +4459,22 @@ msgstr "パッケージ '%s' はダウンロードしません。"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/info.cc:67 src/locks.cc:107 src/search.cc:55 src/search.cc:341
-#: src/search.cc:485 src/search.cc:546 src/update.cc:795 src/utils/misc.cc:227
+#: src/info.cc:67 src/locks.cc:107 src/search.cc:55 src/search.cc:344
+#: src/search.cc:488 src/search.cc:549 src/update.cc:795 src/utils/misc.cc:227
 msgid "Repository"
 msgstr "リポジトリ"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:71 src/info.cc:705 src/search.cc:51 src/search.cc:340
-#: src/search.cc:487 src/search.cc:551
+#: src/info.cc:71 src/info.cc:705 src/search.cc:51 src/search.cc:343
+#: src/search.cc:490 src/search.cc:554
 msgid "Version"
 msgstr "バージョン"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:73 src/search.cc:53 src/search.cc:488 src/search.cc:552
+#: src/info.cc:73 src/search.cc:53 src/search.cc:491 src/search.cc:555
 #: src/update.cc:804
 msgid "Arch"
 msgstr "アーキテクチャ"
@@ -4464,7 +4486,7 @@ msgstr "ベンダ"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:81 src/search.cc:194 src/utils/misc.cc:233 src/utils/misc.cc:274
+#: src/info.cc:81 src/search.cc:197 src/utils/misc.cc:233 src/utils/misc.cc:274
 msgid "Summary"
 msgstr "概要"
 
@@ -4565,20 +4587,20 @@ msgstr "(何もありません)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:459 src/info.cc:703 src/search.cc:45 src/search.cc:191
-#: src/search.cc:338 src/search.cc:484 src/search.cc:545 src/update.cc:793
+#: src/info.cc:459 src/info.cc:703 src/search.cc:45 src/search.cc:194
+#: src/search.cc:341 src/search.cc:487 src/search.cc:548 src/update.cc:793
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
 #. translators: type (general header)
 #: src/info.cc:461 src/locks.cc:107 src/repos.cc:1110 src/repos.cc:1222
-#: src/repos.cc:2556 src/search.cc:49 src/search.cc:195
+#: src/repos.cc:2556 src/search.cc:49 src/search.cc:198
 msgid "Type"
 msgstr "種類"
 
 #. translators: Table column header
-#: src/info.cc:462 src/search.cc:342
+#: src/info.cc:462 src/search.cc:345
 msgid "Dependency"
 msgstr "依存関係"
 
@@ -4586,11 +4608,11 @@ msgstr "依存関係"
 msgid "Required"
 msgstr "必要"
 
-#: src/info.cc:472 src/info.cc:481 src/search.cc:278
+#: src/info.cc:472 src/info.cc:481 src/search.cc:281
 msgid "Recommended"
 msgstr "推奨"
 
-#: src/info.cc:478 src/info.cc:481 src/search.cc:280
+#: src/info.cc:478 src/info.cc:481 src/search.cc:283
 msgid "Suggested"
 msgstr "提案"
 
@@ -4615,7 +4637,7 @@ msgid "Flavor"
 msgstr "フレーバー"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:566 src/search.cc:553
+#: src/info.cc:566 src/search.cc:556
 msgid "Is Base"
 msgstr "ベース"
 
@@ -4872,12 +4894,12 @@ msgstr "このプロンプトに対するヘルプは用意されていません
 msgid "no help available for this option"
 msgstr "このオプションに対するヘルプは用意されていません"
 
-#: src/ps.cc:59 src/solve-commit.cc:452
+#: src/ps.cc:59 src/solve-commit.cc:462
 msgid "Check failed:"
 msgstr "確認に失敗:"
 
 #. Here: Table output
-#: src/ps.cc:104 src/solve-commit.cc:441
+#: src/ps.cc:104 src/solve-commit.cc:451
 msgid "Checking for running processes using deleted libraries..."
 msgstr "削除されたライブラリを使用している実行中プロセスを確認しています..."
 
@@ -5045,8 +5067,8 @@ msgstr "リポジトリ '%s' を無効にする際にエラーが発生しまし
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' からのファイル取得中に問題が発生しました。"
 
-#: src/repos.cc:360 src/repos.cc:3313 src/solve-commit.cc:806
-#: src/solve-commit.cc:837 src/solve-commit.cc:861
+#: src/repos.cc:360 src/repos.cc:3313 src/solve-commit.cc:816
+#: src/solve-commit.cc:847 src/solve-commit.cc:871
 msgid "Please see the above error message for a hint."
 msgstr "解決へのヒントとして上記のエラーメッセージをお読みください。"
 
@@ -5337,7 +5359,9 @@ msgstr "エラーによりリポジトリの更新ができませんでした。
 #: src/repos.cc:1464
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "既知のものではないことから、いくつかのリポジトリを更新することができませんでした。"
+msgstr ""
+"既知のものではないことから、いくつかのリポジトリを更新することができませんで"
+"した。"
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
@@ -5837,25 +5861,25 @@ msgstr "インストール済みのパッケージを読み込む際にエラー
 msgid "System Packages"
 msgstr "システムパッケージ"
 
-#: src/search.cc:296
+#: src/search.cc:299
 msgid "No needed patches found."
 msgstr "適用すべきパッチが見つかりません。"
 
-#: src/search.cc:376
+#: src/search.cc:379
 msgid "No patterns found."
 msgstr "パターンが見つかりません。"
 
-#: src/search.cc:478
+#: src/search.cc:481
 msgid "No packages found."
 msgstr "パッケージが見つかりません。"
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:549
+#: src/search.cc:552
 msgid "Internal Name"
 msgstr "内部名"
 
-#: src/search.cc:627
+#: src/search.cc:630
 msgid "No products found."
 msgstr "製品が見つかりません。"
 
@@ -5943,29 +5967,29 @@ msgstr "%s は %s と競合しています。消極的な %s を利用します"
 msgid "Force resolution:"
 msgstr "強制的な解決:"
 
-#: src/solve-commit.cc:335
+#: src/solve-commit.cc:345
 msgid "Verifying dependencies..."
 msgstr "依存関係を解決しています..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:383
+#: src/solve-commit.cc:393
 msgid "Computing upgrade..."
 msgstr "アップグレードを準備しています..."
 
-#: src/solve-commit.cc:397
+#: src/solve-commit.cc:407
 msgid "Generating solver test case..."
 msgstr "解決処理のテスト出力を作成しています..."
 
-#: src/solve-commit.cc:399
+#: src/solve-commit.cc:409
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "解決処理のテスト結果は %s に出力されました。"
 
-#: src/solve-commit.cc:402
+#: src/solve-commit.cc:412
 msgid "Error creating the solver test case."
 msgstr "解決処理のテスト出力中にエラーが発生しました。"
 
-#: src/solve-commit.cc:436
+#: src/solve-commit.cc:446
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -5974,11 +5998,11 @@ msgstr ""
 "削除されたライブラリを使用している実行中プロセスの確認は、zypper.confで無効に"
 "されています。'%s' を実行して手動で確認してください。"
 
-#: src/solve-commit.cc:454
+#: src/solve-commit.cc:464
 msgid "Skip check:"
 msgstr "確認を省略:"
 
-#: src/solve-commit.cc:462
+#: src/solve-commit.cc:472
 #, c-format, boost-format
 msgid ""
 "There are some running programs that might use files deleted by recent "
@@ -5989,32 +6013,32 @@ msgstr ""
 "ます。ご確認の上、これらを再起動してください。 '%s' と入力すると、プログラム"
 "の一覧を表示することができます。"
 
-#: src/solve-commit.cc:473
+#: src/solve-commit.cc:483
 msgid "Update notifications were received from the following packages:"
 msgstr "下記のパッケージから更新通知を受信しました:"
 
-#: src/solve-commit.cc:482
+#: src/solve-commit.cc:492
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "パッケージ %s からのメッセージ:"
 
-#: src/solve-commit.cc:490
+#: src/solve-commit.cc:500
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:491
+#: src/solve-commit.cc:501
 msgid "View the notifications now?"
 msgstr "今すぐ通知を閲覧しますか？"
 
-#: src/solve-commit.cc:537
+#: src/solve-commit.cc:547
 msgid "Computing distribution upgrade..."
 msgstr "ディストリビューションのアップグレードを準備しています..."
 
-#: src/solve-commit.cc:542
+#: src/solve-commit.cc:552
 msgid "Resolving package dependencies..."
 msgstr "パッケージの依存関係を解決しています..."
 
-#: src/solve-commit.cc:619
+#: src/solve-commit.cc:629
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6022,7 +6046,7 @@ msgstr ""
 "インストール済みのパッケージのうち、いくつかの依存関係が壊れています。依存関"
 "係を修復するには、以下の作業を実行する必要があります:"
 
-#: src/solve-commit.cc:626
+#: src/solve-commit.cc:636
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "壊れた依存関係を修復するには root 権限が必要です。"
 
@@ -6036,12 +6060,12 @@ msgstr "壊れた依存関係を修復するには root 権限が必要です。
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:658
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:653
+#: src/solve-commit.cc:663
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6049,67 +6073,67 @@ msgstr ""
 "行います。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:655
+#: src/solve-commit.cc:665
 msgid "No, cancel the operation."
 msgstr "いいえ (n)、操作をキャンセルします。"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:657
+#: src/solve-commit.cc:667
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "依存関係の問題を表示するため、強制力を設定せずに解決器を実行します。"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:659
+#: src/solve-commit.cc:669
 msgid "Toggle display of package versions."
 msgstr "パッケージバージョンの表示を切り替えます。"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:661
+#: src/solve-commit.cc:671
 msgid "Toggle display of package architectures."
 msgstr "パッケージアーキテクチャの表示を切り替えます。"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:663
+#: src/solve-commit.cc:673
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "パッケージのインストール元リポジトリの表示を切り替えます。"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:665
+#: src/solve-commit.cc:675
 msgid "Toggle display of package vendor names."
 msgstr "パッケージのベンダ名の表示を切り替えます。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:667
+#: src/solve-commit.cc:677
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "すべての詳細を表示するか、最小限の表示のみにとどめるかを切り替えます。"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:669
+#: src/solve-commit.cc:679
 msgid "View the summary in pager."
 msgstr "ページャで詳細を表示します。"
 
-#: src/solve-commit.cc:779
+#: src/solve-commit.cc:789
 msgid "committing"
 msgstr "確定しています"
 
-#: src/solve-commit.cc:781
+#: src/solve-commit.cc:791
 msgid "(dry run)"
 msgstr "(テスト)"
 
-#: src/solve-commit.cc:805 src/solve-commit.cc:838
+#: src/solve-commit.cc:815 src/solve-commit.cc:848
 msgid "Problem retrieving the package file from the repository:"
 msgstr "リポジトリからのパッケージファイルの取得に問題:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:835
+#: src/solve-commit.cc:845
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "リポジトリ '%s' の情報は古くなっています。 '%s' を実行してください。"
 
-#: src/solve-commit.cc:846
+#: src/solve-commit.cc:856
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6127,21 +6151,21 @@ msgstr ""
 "- 他のインストールメディアを使用する　(損傷している場合など)　\n"
 "- 他のリポジトリを使用する"
 
-#: src/solve-commit.cc:860
+#: src/solve-commit.cc:870
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "インストールまたは削除の際、もしくはそれぞれの作業の後に問題が発生しました:"
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:878
 msgid "Installation has completed with error."
 msgstr "インストールはエラーで終了しました。"
 
-#: src/solve-commit.cc:870
+#: src/solve-commit.cc:880
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "'%1%' を実行することで、依存関係の問題を修復することができます。"
 
-#: src/solve-commit.cc:884
+#: src/solve-commit.cc:894
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6149,7 +6173,7 @@ msgstr ""
 "インストールされたパッチの中にはコンピュータの再起動を必要とするものがありま"
 "す。できるだけ早めに再起動してください。"
 
-#: src/solve-commit.cc:892
+#: src/solve-commit.cc:902
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6158,7 +6182,7 @@ msgstr ""
 "ています。再度このコマンドを実行して、その他の必要な更新をインストールしてく"
 "ださい。"
 
-#: src/solve-commit.cc:910
+#: src/solve-commit.cc:920
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "インストール済みの全パッケージの依存関係に問題はありません。"
 
