@@ -243,10 +243,14 @@ namespace zypp
         return read_bool_answer(PROMPT_YN_GPG_UNKNOWN_KEY_ACCEPT, question, false);
       }
 
-      ////////////////////////////////////////////////////////////////////
-
       virtual KeyRingReport::KeyTrust askUserToAcceptKey(
           const PublicKey &key, const KeyContext & context)
+      {
+        return askUserToAcceptKey( key, context, true );
+      }
+
+      KeyRingReport::KeyTrust askUserToAcceptKey(
+                const PublicKey &key_r, const KeyContext & context_r, bool canTrustTemporarily_r )
       {
         Zypper & zypper = Zypper::instance();
         std::ostringstream s;
@@ -254,70 +258,99 @@ namespace zypp
 	s << std::endl;
 	if (_gopts.gpg_auto_import_keys)
 	  s << _("Automatically importing the following key:") << std::endl;
-	else if (_gopts.no_gpg_checks)
+	else if ( _gopts.no_gpg_checks && canTrustTemporarily_r  )
           s << _("Automatically trusting the following key:") << std::endl;
         else
           s << _("New repository or package signing key received:") << std::endl;
 
         // gpg key info
-        dumpKeyInfo( s << std::endl, key, context )  << std::endl;
+        dumpKeyInfo( s << std::endl, key_r, context_r )  << std::endl;
 
         // if --gpg-auto-import-keys or --no-gpg-checks print info and don't ask
         if (_gopts.gpg_auto_import_keys)
         {
-          MIL << "Automatically importing key " << key << std::endl;
+          MIL << "Automatically importing key " << key_r << std::endl;
           zypper.out().info(s.str());
           return KeyRingReport::KEY_TRUST_AND_IMPORT;
         }
-        else if (_gopts.no_gpg_checks)
+        else if (_gopts.no_gpg_checks && canTrustTemporarily_r )
         {
-          MIL << "Automatically trusting key " << key << std::endl;
+          MIL << "Automatically trusting key " << key_r << std::endl;
           zypper.out().info(s.str());
           return KeyRingReport::KEY_TRUST_TEMPORARILY;
         }
 
         // ask the user
         s << std::endl;
-        // translators: this message is shown after showing description of the key
-        s << _("Do you want to reject the key, trust temporarily, or trust always?");
+        if ( canTrustTemporarily_r ) {
+          // translators: this message is shown after showing description of the key
+          s << _("Do you want to reject the key, trust temporarily, or trust always?");
+        } else {
+          // translators: this message is shown after showing description of the key
+          s << _("Do you want to reject the key, or trust always?");
+        }
+
 
         // only root has access to rpm db where keys are stored
         bool canimport = geteuid() == 0 || _gopts.changedRoot;
 
+        if ( !canimport && !canTrustTemporarily_r )
+          return KeyRingReport::KEY_DONT_TRUST;
+
         PromptOptions popts;
-        if (canimport)
-          // translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+        if ( canTrustTemporarily_r ) {
+          if (canimport)
+            // translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+            // translate to whatever is appropriate for your language
+            // The anserws must be separated by slash characters '/' and must
+            // correspond to reject/trusttemporarily/trustalways in that order.
+            // The answers should be lower case letters.
+            popts.setOptions(_("r/t/a/"), 0);
+          else
+            // translators: the same as r/t/a, but without 'a'
+            popts.setOptions(_("r/t"), 0);
+        } else {
+          // translators: r/a stands for Reject/trustAlways(import)
           // translate to whatever is appropriate for your language
           // The anserws must be separated by slash characters '/' and must
           // correspond to reject/trusttemporarily/trustalways in that order.
           // The answers should be lower case letters.
-          popts.setOptions(_("r/t/a/"), 0);
-        else
-          // translators: the same as r/t/a, but without 'a'
-          popts.setOptions(_("r/t"), 0);
+          popts.setOptions(_("r/a/"), 0);
+        }
+
+        int off = 0;
+
         // translators: help text for the 'r' option in the 'r/t/a' prompt
-        popts.setOptionHelp(0, _("Don't trust the key."));
-        // translators: help text for the 't' option in the 'r/t/a' prompt
-        popts.setOptionHelp(1, _("Trust the key temporarily."));
+        popts.setOptionHelp( off, _("Don't trust the key.") );
+
+        if ( canTrustTemporarily_r ) {
+          // translators: help text for the 't' option in the 'r/t/a' prompt
+          popts.setOptionHelp( (++off), _("Trust the key temporarily.") );
+        }
+
         if (canimport)
           // translators: help text for the 'a' option in the 'r/t/a' prompt
-          popts.setOptionHelp(2, _("Trust the key and import it into trusted keyring."));
+          popts.setOptionHelp( (++off), _("Trust the key and import it into trusted keyring.") );
 
         if (!zypper.globalOpts().non_interactive)
           clear_keyboard_buffer();
         zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, s.str(), popts);
         unsigned prep =
           get_prompt_reply(zypper, PROMPT_YN_GPG_KEY_TRUST, popts);
-        switch (prep)
-        {
-        case 0:
-          return KeyRingReport::KEY_DONT_TRUST;
-        case 1:
-          return KeyRingReport::KEY_TRUST_TEMPORARILY;
-        case 2:
+
+        if ( !canTrustTemporarily_r && prep == 1 )
           return KeyRingReport::KEY_TRUST_AND_IMPORT;
-        default:
-          return KeyRingReport::KEY_DONT_TRUST;
+        else {
+          switch (prep)
+          {
+          case 1:
+              return KeyRingReport::KEY_TRUST_TEMPORARILY;
+          case 2:
+              return KeyRingReport::KEY_TRUST_AND_IMPORT;
+          case 0:
+          default:
+            break;
+          }
         }
         return KeyRingReport::KEY_DONT_TRUST;
       }
@@ -384,8 +417,8 @@ namespace zypp
           }
           const PublicKey &key  = data.get<PublicKey>("PublicKey");
           const KeyContext &ctx = data.get<KeyContext>("KeyContext");
-          bool res = askUserToAcceptPackageKey(key,ctx);
-          data.set("TrustKey", res);
+          KeyRingReport::KeyTrust res = askUserToAcceptKey(key,ctx, false);
+          data.set("TrustKey", res == KeyRingReport::KEY_TRUST_AND_IMPORT);
           return;
         }
         else if ( data.type() == zypp::ContentType( KeyRingReport::KEYS_NOT_IMPORTED_REPORT ) )
@@ -418,68 +451,6 @@ namespace zypp
 				      % "rpm -e GPG-PUBKEY-VERSION" );
 
 	zypper.out().gap();
-      }
-
-      ////////////////////////////////////////////////////////////////////
-
-      bool askUserToAcceptPackageKey( const PublicKey &key, const KeyContext &context )
-      {
-        Zypper & zypper = Zypper::instance();
-        std::ostringstream s;
-
-	s << std::endl;
-	if (_gopts.gpg_auto_import_keys)
-	  s << _("Automatically importing the following key:") << std::endl;
-        else
-          s << _("New package signing key received:") << std::endl;
-
-        // gpg key info
-        dumpKeyInfo( s << std::endl, key, context )  << std::endl;
-
-        // if --gpg-auto-import-keys or --no-gpg-checks print info and don't ask
-        if (_gopts.gpg_auto_import_keys)
-        {
-          MIL << "Automatically importing key " << key << std::endl;
-          zypper.out().info(s.str());
-          return true;
-        }
-
-        // ask the user
-        s << std::endl;
-        // translators: this message is shown after showing description of the key
-        s << _("Do you want to reject the key, or trust always?");
-
-        // only root has access to rpm db where keys are stored
-        if ( !(geteuid() == 0 || _gopts.changedRoot) )
-          return false;
-
-        PromptOptions popts;
-        // translators: r/a stands for Reject/trustAlways(import)
-        // translate to whatever is appropriate for your language
-        // The anserws must be separated by slash characters '/' and must
-        // correspond to reject/trusttemporarily/trustalways in that order.
-        // The answers should be lower case letters.
-        popts.setOptions(_("r/a/"), 0);
-
-        // translators: help text for the 'r' option in the 'r/t/a' prompt
-        popts.setOptionHelp(0, _("Don't trust the key."));
-        // translators: help text for the 'a' option in the 'r/t/a' prompt
-        popts.setOptionHelp(1, _("Trust the key and import it into trusted keyring."));
-
-        if (!zypper.globalOpts().non_interactive)
-          clear_keyboard_buffer();
-        zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, s.str(), popts);
-        unsigned prep =
-          get_prompt_reply(zypper, PROMPT_YN_GPG_KEY_TRUST, popts);
-        switch (prep)
-        {
-        case 1:
-          return true;
-        case 0:
-        default:
-          return false;
-        }
-        return false;
       }
 
     private:
