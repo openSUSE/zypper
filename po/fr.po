@@ -20,10 +20,10 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-04-12 20:15+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/"
-">\n"
+"PO-Revision-Date: 2018-08-03 19:15+0000\n"
+"Last-Translator: Benoît Monin <benoit.monin@gmx.fr>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3788,20 +3788,20 @@ msgstr[1] "(expire dans %d jours)"
 #: zypp/RepoInfo.cc:513
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr ""
+msgstr "Recherche de la clé gpg %1% dans le cache %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:541
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "Recherche de la clé gpg %1% dans le dépôt %2%."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:565
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "Le dépôt %1% ne définie pas d'URL 'gpgkey=' additionnelles."
 
 #: zypp/RepoManager.cc:314
 #, boost-format
@@ -4224,6 +4224,8 @@ msgstr "Temps maximal dépassé lors de l'accès à '%s'."
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr ""
+"Les données téléchargées dépassent la taille de fichier attendue '%s' de "
+"'%s'."
 
 #: zypp/media/MediaException.cc:203
 #, c-format, boost-format
