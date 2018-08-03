@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2018-05-04 15:10+0000\n"
+"PO-Revision-Date: 2018-08-03 22:02+0000\n"
 "Last-Translator: Benoît Monin <benoit.monin@gmx.fr>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -281,16 +281,13 @@ msgstr ""
 "'%2%'."
 
 #: src/callbacks/keyring.h:403
-#, fuzzy
 msgid "New package signing key received:"
-msgstr "Nouvelle clé de signature de dépôt ou de paquet reçue :"
+msgstr "Nouvelle clé de signature de paquet reçue :"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:419
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-"Voulez-vous rejeter la clé, l'approuver temporairement ou systématiquement ?"
+msgstr "Voulez-vous rejeter la clé, l'approuver systématiquement ?"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -299,7 +296,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:431
 msgid "r/a/"
-msgstr ""
+msgstr "r/a/"
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
