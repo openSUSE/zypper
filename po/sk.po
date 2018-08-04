@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2018-07-24 19:14+0000\n"
+"PO-Revision-Date: 2018-08-04 10:40+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -264,15 +264,13 @@ msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "Overenie podpisu súboru '%1%' z repozitára '%2%' zlyhalo."
 
 #: src/callbacks/keyring.h:403
-#, fuzzy
 msgid "New package signing key received:"
-msgstr "Nový kľúč pre podpis repozitára a balíkov:"
+msgstr "Nový kľúč pre podpis balíkovvprijatý:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:419
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr "Prajete si tento kľúč odmietnuť, prijať dočasne alebo prijať natrvalo?"
+msgstr "Prajete si kľúč odmietnuť alebo vždy dôverovať?"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -281,7 +279,7 @@ msgstr "Prajete si tento kľúč odmietnuť, prijať dočasne alebo prijať natr
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:431
 msgid "r/a/"
-msgstr ""
+msgstr "o/d/"
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
