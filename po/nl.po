@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2018-07-07 08:28+0000\n"
+"PO-Revision-Date: 2018-08-04 12:21+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -284,16 +284,13 @@ msgstr ""
 "opslagruimte '%2%'."
 
 #: src/callbacks/keyring.h:403
-#, fuzzy
 msgid "New package signing key received:"
-msgstr "Een nieuwe handtekening voor een opslagruimte of pakket is ontvangen:"
+msgstr "Nieuwe sleutel voor ondertekening van een pakket is ontvangen:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:419
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-"Wilt u de sleutel verwerpen, tijdelijk vertrouwen of altijd vertrouwen?"
+msgstr "Wilt u de sleutel verwerpen of altijd vertrouwen?"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -302,7 +299,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:431
 msgid "r/a/"
-msgstr ""
+msgstr "v/a/"
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
