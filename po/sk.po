@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2018-08-04 10:40+0000\n"
+"PO-Revision-Date: 2018-08-04 13:06+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -265,7 +265,7 @@ msgstr "Overenie podpisu súboru '%1%' z repozitára '%2%' zlyhalo."
 
 #: src/callbacks/keyring.h:403
 msgid "New package signing key received:"
-msgstr "Nový kľúč pre podpis balíkovvprijatý:"
+msgstr "Nový kľúč pre podpis balíkov prijatý:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:419
