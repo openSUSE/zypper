@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2018-07-10 14:52+0000\n"
+"PO-Revision-Date: 2018-08-04 13:10+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -279,16 +279,13 @@ msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "Selhalo ověření podpisu pro soubor %1% z úložiště %2%."
 
 #: src/callbacks/keyring.h:403
-#, fuzzy
 msgid "New package signing key received:"
-msgstr "Obdržen nový klíč podepisující balíček nebo úložiště:"
+msgstr "Obdržen nový klíč podepisující balíček:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:419
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-"Chcete klíč odmítnout, důvěřovat mu dočasně nebo mu důvěřovat natrvalo?"
+msgstr "Chcete klíč odmítnout, nebo mu vždy důvěřovat?"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -297,7 +294,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:431
 msgid "r/a/"
-msgstr ""
+msgstr "o/d/"
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
