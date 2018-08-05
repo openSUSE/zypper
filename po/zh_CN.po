@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-04-17 05:01+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
-"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
-"master/zh_CN/>\n"
+"PO-Revision-Date: 2018-08-05 06:14+0000\n"
+"Last-Translator: Marguerite Su <i@marguerite.su>\n"
+"Language-Team: Chinese (China) "
+"<https://l10n.opensuse.org/projects/libzypp/master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3773,20 +3773,20 @@ msgstr[0] "（%d 天后过期）"
 #: zypp/RepoInfo.cc:513
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr ""
+msgstr "正在缓存 %2% 中查找 GPG 密钥 ID %1%。"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:541
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "正在软件源 %2% 中查找 GPG 密钥 ID %1%。"
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:565
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "软件源 %1% 并未定义额外的 'gpgkey=' URL。"
 
 #: zypp/RepoManager.cc:314
 #, boost-format
@@ -4190,7 +4190,7 @@ msgstr "访问 '%s' 时超时。"
 #: zypp/media/MediaException.cc:195
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr ""
+msgstr "下载到的数据超出了 '%s 2' 中预期的文件大小 ''%s 1'。"
 
 #: zypp/media/MediaException.cc:203
 #, c-format, boost-format
