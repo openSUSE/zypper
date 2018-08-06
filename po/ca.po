@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2018-07-06 14:25+0000\n"
+"PO-Revision-Date: 2018-08-06 12:40+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -273,16 +273,13 @@ msgstr ""
 "Ha fallat la verificació de la signatura del fitxer %1% del repositori %2%."
 
 #: src/callbacks/keyring.h:403
-#, fuzzy
 msgid "New package signing key received:"
-msgstr "Nova clau de signatura de repositori o paquet rebuda:"
+msgstr "Nova clau de signatura de paquet rebuda:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:419
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-"Voleu _rebutjar la signatura, confiar-hi _temporalment o confiar-hi _sempre?"
+msgstr "Voleu rebutjar la clau o confiar-hi sempre?"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -291,7 +288,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:431
 msgid "r/a/"
-msgstr ""
+msgstr "r/c/"
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
