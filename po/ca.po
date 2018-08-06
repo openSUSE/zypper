@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-05-23 22:01+0000\n"
+"PO-Revision-Date: 2018-08-06 15:00+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
-">\n"
+"Language-Team: Catalan "
+"<https://l10n.opensuse.org/projects/libzypp/master/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4171,14 +4171,14 @@ msgstr[1] "(caduca d'aquí a %d dies)"
 #: zypp/RepoInfo.cc:513
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr ""
+msgstr "Cercant la clau gpg amb l'ID %1% a la cau %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:541
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "Cercant la clau gpg amb l'ID %1% al repositori %2%."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:565
