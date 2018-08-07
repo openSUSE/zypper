@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2018-07-29 11:26+0000\n"
+"PO-Revision-Date: 2018-08-07 12:26+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -292,15 +292,13 @@ msgstr ""
 "Signaturüberprüfung für Datei '%1%' aus Repository '%2%' fehlgeschlagen."
 
 #: src/callbacks/keyring.h:403
-#, fuzzy
 msgid "New package signing key received:"
-msgstr "Neuen Signierungsschlüssel für Repository oder Paket erhalten:"
+msgstr "Neuen Paket-Signierungsschlüssel erhalten:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:419
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr "Wollen Sie den Schlüssel abweisen, ihm temporär oder immer vertrauen?"
+msgstr "Wollen Sie den Schlüssel abweisen oder ihm immer vertrauen?"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -309,7 +307,7 @@ msgstr "Wollen Sie den Schlüssel abweisen, ihm temporär oder immer vertrauen?"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:431
 msgid "r/a/"
-msgstr ""
+msgstr "a/i/"
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
