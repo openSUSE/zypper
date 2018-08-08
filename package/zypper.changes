@@ -3,8 +3,6 @@ Fri Aug  3 11:34:32 CEST 2018 - ma@suse.de
 
 - Support listing gpgkey URLs in repo files (bsc#1088037)
 - Check for root privileges in zypper verify and si (bsc#1058515)
-- Support listing gpgkey URLs in repo files (bsc#1088037)
-- Check for root privileges in zypper verify and si (bsc#1066215)
 - XML <install-summary> attribute `packages-to-change` added
   (bsc#1102429)
 - Add expert (allow-*) options to all installer commands
