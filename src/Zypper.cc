@@ -114,9 +114,6 @@ namespace {
                         % new_r;
   }
 
-  inline std::string dashdash( std::string optname_r )
-  { return std::move(optname_r.insert( 0, "--" )); }
-
 } //namespace
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
