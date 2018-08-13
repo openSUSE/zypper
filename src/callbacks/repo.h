@@ -158,7 +158,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
   virtual void pkgGpgCheck( const UserData & userData_r )
   {
     Zypper & zypper = *Zypper::instance();
-    // "Package"		Package::constPtr of the package
+    // "ResObject"		ResObject::constPtr of the package
     // "Localpath"		Pathname to downloaded package on disk
     // "CheckPackageResult"	RpmDb::CheckPackageResult of signature check
     // "CheckPackageDetail"	RpmDb::CheckPackageDetail logmessages of rpm signature check
@@ -213,7 +213,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
     if ( zypper.globalOpts().no_gpg_checks )
     {
       // report and continue
-      Package::constPtr pkg	( userData_r.get<Package::constPtr>( "Package" ) );
+      ResObject::constPtr pkg( userData_r.get<ResObject::constPtr>( "ResObject" ) );
       std::string err( str::Str() << pkg->asUserString() << ": " << _("Signature verification failed") << " " << result );
       switch ( result )
       {
