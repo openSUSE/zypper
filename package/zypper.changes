@@ -98,9 +98,11 @@ Fri Aug 25 12:50:11 CEST 2017 - ma@suse.de
 -------------------------------------------------------------------
 Fri Aug 11 14:53:07 CEST 2017 - ma@suse.de
 
-- Improve signature check callback messages (bsc#1045735)
+- Improve signature check callback messages
+  (bsc#1045735, CVE-2017-9269)
 - man: Explain new gpgcheck options
-- add/modify repo: Add options to tune the GPG check settings (bsc#1045735)
+- add/modify repo: Add options to tune the GPG check settings
+  (bsc#1045735, CVE-2017-9269)
 - BuildRequires:  libzypp-devel >= 16.15.3
 - version 1.13.31
 
