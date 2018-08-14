@@ -330,6 +330,7 @@ rm -rf "$RPM_BUILD_ROOT"
 
 %files -f zypp.lang
 %defattr(-,root,root)
+%license COPYING
 %dir               %{_sysconfdir}/zypp
 %if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
 %{_sysconfdir}/zypp/repos.d
