@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-08-06 15:00+0000\n"
+"PO-Revision-Date: 2018-08-14 14:19+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan "
 "<https://l10n.opensuse.org/projects/libzypp/master/ca/>\n"
@@ -4184,7 +4184,7 @@ msgstr "Cercant la clau gpg amb l'ID %1% al repositori %2%."
 #: zypp/RepoInfo.cc:565
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "El repositori %1% no defineix URL \"gpgkey=\" addicionals."
 
 #: zypp/RepoManager.cc:314
 #, boost-format
@@ -4598,6 +4598,7 @@ msgstr "S'ha acabat el temps d'espera accedint a %s."
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr ""
+"Les dades baixades excedeixen la mida de fitxer esperada \"%s\" de \"%s\"."
 
 #: zypp/media/MediaException.cc:203
 #, c-format, boost-format
