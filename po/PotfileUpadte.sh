@@ -6,7 +6,12 @@ function errexit() {
   exit 1
 }
 
-test -d "../.git" || errexit "Not a git repository"
+function currentBranch()
+{ git rev-parse --abbrev-ref HEAD; }
+
+test "$(currentBranch)" == "master"	|| errexit "Not on master branch."
+test "$(basename "$PWD")" == "po"	|| errexit "Cd to the po directory."
+
 test "$(git status --porcelain 2>/dev/null| grep '^[^ !?]' | wc -l)" == 0 || errexit "Index not clean: wont't commit"
 
 BINDIR="${1}"
