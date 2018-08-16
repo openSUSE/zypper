@@ -1,9 +1,13 @@
-
 #include <sstream>
 #include <string>
+#include "boost/version.hpp"
+
+#if BOOST_VERSION >= 106800
+#define BOOST_ERROR_CODE_HEADER_ONLY
+#endif
+
 #include "boost/bind.hpp"
 #include "boost/thread.hpp"
-#include "boost/version.hpp"
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -16,7 +20,7 @@
 using namespace zypp;
 using namespace std;
 
-#if ( BOOST_VERSION >= 105000 )
+#if ( BOOST_VERSION >= 105000 ) && ( BOOST_VERSION < 106800)
 // https://svn.boost.org/trac/boost/ticket/7085
 namespace boost
 {
