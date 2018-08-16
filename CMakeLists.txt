@@ -80,7 +80,7 @@ ENABLE_TESTING()
 
 # documentation too important to be hidden in doc:
 INSTALL(
-  FILES COPYING HACKING
+  FILES HACKING
   DESTINATION ${INSTALL_PREFIX}/share/doc/packages/${PACKAGE}
 )
 
