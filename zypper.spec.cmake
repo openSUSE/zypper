@@ -51,7 +51,7 @@ Version:        @VERSION@
 Release:        0
 Source:         %{name}-%{version}.tar.bz2
 Source1:        %{name}-rpmlintrc
-Url:            http://en.opensuse.org/Zypper
+Url:            https://github.com/openSUSE/zypper
 Provides:       y2pmsh
 Obsoletes:      y2pmsh
 
