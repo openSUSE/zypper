@@ -20,7 +20,7 @@ Name:           @PACKAGE@
 Version:        @VERSION@
 Release:        0
 License:        GPL-2.0+
-Url:            git://gitorious.org/opensuse/libzypp.git
+Url:            https://github.com/openSUSE/libzypp
 Summary:        Package, Patch, Pattern, and Product Management
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
