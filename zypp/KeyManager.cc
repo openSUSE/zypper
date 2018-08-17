@@ -152,7 +152,16 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
   for ( gpgme_signature_t sig = res->signatures; sig; sig = sig->next ) {
 
     if ( sig->fpr )
-      signatures.push_back(str::asString(sig->fpr));
+    {
+      // bsc#1100427: With ibgpgme11-1.11.0 and if a recent gpg version was used
+      // to create the signature, the field may contain the full fingerprint, but
+      // we're expected to return the ID.
+      // [https://github.com/gpg/gpgme/commit/478d1650bbef84958ccce439fac982ef57b16cd0]
+      std::string id( sig->fpr );
+      if ( id.size() > 16 )
+	id = id.substr( id.size()-16 )
+      signatures.push_back( std::move(id) );
+    }
 
     if ( sig->status != GPG_ERR_NO_ERROR )
     {
