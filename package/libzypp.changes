@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Aug 17 14:52:14 CEST 2018 - ma@suse.de
+
+- Adapt to changes in libgpgme11-11.1.0 breaking the signature
+  verification (bsc#1100427)
+- Use %license (bsc#1082318)
+- BuildRequires:  libsolv-devel >= 0.6.35 (for bsc#1100095)
+- changes: add CVE numbers
+- version 17.6.1 (2)
+
+-------------------------------------------------------------------
 Fri Aug  3 11:11:25 CEST 2018 - ma@suse.de
 
 - RepoInfo::provideKey: add report telling where we look for missing
