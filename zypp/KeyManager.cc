@@ -159,7 +159,7 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
       // [https://github.com/gpg/gpgme/commit/478d1650bbef84958ccce439fac982ef57b16cd0]
       std::string id( sig->fpr );
       if ( id.size() > 16 )
-	id = id.substr( id.size()-16 )
+	id = id.substr( id.size()-16 );
       signatures.push_back( std::move(id) );
     }
 
