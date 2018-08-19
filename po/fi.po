@@ -23,10 +23,10 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-02 13:22+0200\n"
-"PO-Revision-Date: 2018-03-06 11:02+0000\n"
+"PO-Revision-Date: 2018-08-19 11:02+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
-">\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -292,15 +292,13 @@ msgstr ""
 "asennuslähteestä \"%2%\"."
 
 #: src/callbacks/keyring.h:403
-#, fuzzy
 msgid "New package signing key received:"
-msgstr "Vastaanotettiin uusi asennuslähteen tai paketin avain:"
+msgstr "Vastaanotettiin uusi paketin allekirjoitusavain:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:419
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr "Haluatko evätä, luottaa väliaikaisesti vai luottaa aina avaimeen?"
+msgstr "Haluatko hylätä avaimen vai luottaa siihen aina?"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -309,7 +307,7 @@ msgstr "Haluatko evätä, luottaa väliaikaisesti vai luottaa aina avaimeen?"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:431
 msgid "r/a/"
-msgstr ""
+msgstr "h/a/"
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
@@ -1280,12 +1278,12 @@ msgstr[0] "Seuraava ohjelmistoryhmä vaihtaa toimittajaa:"
 msgstr[1] "Seuraavat %d ohjelmistoryhmää vaihtavat toimittajaa:"
 
 #: src/Summary.cc:1199
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "Seuraava paketti ei ole toimittajan tukema:"
-msgstr[1] "Seuraavat %d pakettia eivät ole toimittajan tukemia:"
+msgstr[0] "Seuraavalla %d paketilla ei ole valmistajan tukitietoja:"
+msgstr[1] "Seuraavilla %d paketilla ei ole valmistajan tukitietoja:"
 
 #: src/Summary.cc:1217
 #, c-format, boost-format
@@ -1328,20 +1326,18 @@ msgstr[0] "Seuraavaa päivityspakettia EI asenneta:"
 msgstr[1] "Seuraavia %d päivityspakettia EI asenneta:"
 
 #: src/Summary.cc:1299
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "Seuraavaa ohjelmistoryhmää suositellaan, mutta sitä ei asenneta:"
-msgstr[1] ""
-"Seuraavat %d ohjelmistoryhmää ovat suositeltuja, mutta niitä ei asenneta:"
+msgstr[0] "Seuraava %d kohde on lukittu eikä sitä toimenpitein muuteta:"
+msgstr[1] "Seuraavat %d kohdetta on lukittu eikä niitä toimenpitein muuteta:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/Summary.cc:1312
-#, fuzzy
 msgid "Available"
-msgstr "Versiot saatavilla"
+msgstr "Saatavilla"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
@@ -1350,21 +1346,22 @@ msgid "Installed"
 msgstr "Asennettu"
 
 #: src/Summary.cc:1323
-#, fuzzy, boost-format
+#, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
-msgstr "Kirjoita \"%s\" saadaksesi lista määritetyistä palveluista."
+msgstr "Näet kaikki lukitut kohteet suorittamalla ”%1“."
 
 #: src/Summary.cc:1333
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "Päivitetään seuraava korjauspäivitys:"
-msgstr[1] "Päivitetään seuraavat %d korjauspäivitystä:"
+msgstr[0] "Seuraava korjauspäivitys vaatii käynnistämään järjestelmän uudelleen:"
+msgstr[1] ""
+"Seuraavat %d korjauspäivitystä vaativat käynnistämään järjestelmän uudelleen:"
 
 #: src/Summary.cc:1351
-#, fuzzy, boost-format
+#, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
-msgstr "Ladattavien kohteiden yhteiskoko: %1%. Valmiina välimuistissa: %2% "
+msgstr "Latauksen koko kaikkiaan: %1%. Jo välimuistissa: %2%."
 
 #: src/Summary.cc:1354
 msgid "Download only."
@@ -1502,9 +1499,8 @@ msgstr ""
 "päivityspinon päivityttyä)"
 
 #: src/Summary.cc:1559
-#, fuzzy
 msgid "System reboot required."
-msgstr "Vaatii järjestelmän uudelleenkäynnistyksen: "
+msgstr "Järjestelmä on käynnistettävä uudelleen."
 
 #. translator: Printed after the summary but before the prompt to start the installation.
 #. Followed by some explanatory text telling it might be a good idea NOT to continue:
@@ -1575,25 +1571,26 @@ msgid "Enable GPG check for this repository."
 msgstr "Ottaa GPG-tarkistuksen käyttöön tälle asennuslähteelle."
 
 #: src/Zypper.cc:130
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Ottaa GPG-tarkistuksen käyttöön tälle asennuslähteelle."
+msgstr "Käytä tälle asennuslähteelle tiukkaa GPG-tarkistusta."
 
 #: src/Zypper.cc:131
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Kohteelle \"%s\" ei löydy päivitysehdotuksia."
+msgstr "Lyhenne (”%1“\")."
 
 #: src/Zypper.cc:132
-#, fuzzy
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "Ottaa GPG-tarkistuksen käyttöön tälle asennuslähteelle."
+msgstr ""
+"Käytä GPG-tarkistusta mutta salli asennuslähteessä allekirjoittamattomat "
+"metatiedot."
 
 #: src/Zypper.cc:133
-#, fuzzy
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "Ottaa GPG-tarkistuksen käyttöön tälle asennuslähteelle."
+msgstr ""
+"Käytä GPG-tarkistusta mutta salli allekirjoittamattomien pakettien asennus "
+"asennuslähteestä."
 
 #: src/Zypper.cc:134
 msgid "Disable GPG check for this repository."
@@ -1682,21 +1679,20 @@ msgid "The default is to include optional patches."
 msgstr "Oletuksena on ottaa mukaan valinnaiset viankorjaukset."
 
 #: src/Zypper.cc:206
-#, fuzzy
 msgid "Whether to allow downgrading installed resolvables."
-msgstr "Jätetään asennetut huomioimatta."
+msgstr "Sallitaanko asennusratkaisujen päivittää vanhempaan versioon."
 
 #: src/Zypper.cc:208
 msgid "Whether to allow changing the names of installed resolvables."
-msgstr ""
+msgstr "Sallitaanko asennusratkaisujen muuttaa nimiä."
 
 #: src/Zypper.cc:210
 msgid "Whether to allow changing the architecture of installed resolvables."
-msgstr ""
+msgstr "Sallitaanko asennusratkaisujen vaihtaa arkkitehtuuria."
 
 #: src/Zypper.cc:212
 msgid "Whether to allow changing the vendor of installed resolvables."
-msgstr ""
+msgstr "Sallitaanko asennusratkaisujen vaihtaa tarjoajaa."
 
 #. translator: %1% is a list of command line option names
 #: src/Zypper.cc:220
@@ -1739,6 +1735,8 @@ msgid ""
 "For an extended search including not yet activated remote resources please "
 "use '%1%'."
 msgstr ""
+"Käytä komentoa ”%1%”, jos haluat etsiä laajemmin vielä aktivoimattomista "
+"etäresursseista."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/Zypper.cc:416
@@ -1747,6 +1745,8 @@ msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
 msgstr ""
+"Alikomennon tarjoavaa pakettia ei ole asennettu. Voit asentaa sen komennolla "
+"”%1%”."
 
 #: src/Zypper.cc:453
 #, boost-format
@@ -1764,40 +1764,30 @@ msgstr ""
 "%2%."
 
 #: src/Zypper.cc:460
-#, fuzzy, boost-format
+#, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
-"Havaittiin vanhentunut komentorivivalitsin %1%. Käytä sen sijaan yleistä "
-"valintaa %2%."
+"Havaittiin vanhentunut komentorivivalitsin %1%. Valitsin jätetään huomiotta."
 
 #: src/Zypper.cc:585
-#, fuzzy
 msgid "Command options:"
-msgstr "Komento"
+msgstr "Komentovalinnat:"
 
 #: src/Zypper.cc:588
-#, fuzzy
 msgid "Solver options:"
-msgstr "Komento"
+msgstr "Ratkaisinvalinnat:"
 
 #: src/Zypper.cc:591
 msgid "Expert options:"
 msgstr "Asiantuntijavalinnat:"
 
 #: src/Zypper.cc:594
-#, fuzzy
 msgid "This command has no additional options."
-msgstr ""
-"moo\n"
-"\n"
-"Näyttää eläimen\n"
-"\n"
-"Tällä komennolla ei ole valitsimia.\n"
+msgstr "Tälle komennolle ei ole lisävalitsimia."
 
 #: src/Zypper.cc:597
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Komento"
+msgstr "Vanhentuneet valinnat:"
 
 #. translator: '-r             The same as -f.
 #: src/Zypper.cc:601
@@ -1810,7 +1800,6 @@ msgid "Unexpected exception."
 msgstr "Odottamaton poikkeus."
 
 #: src/Zypper.cc:763
-#, fuzzy
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -1834,25 +1823,26 @@ msgid ""
 "\t--xmlout, -x\t\tSwitch to XML output.\n"
 "\t--ignore-unknown, -i\tIgnore unknown packages.\n"
 msgstr ""
-"  Yleiset valinnat:\n"
-"\t--help, -h\t\tOhje\n"
-"\t--version, -V\t\tNäyttää version\n"
-"\t--promptids\t\tTulostaa luettelon zypperin käyttäjän kehotteista.\n"
-"\t--config, -c <tiedosto>\tKäyttää määritettyä asetustiedostoa oletuksen "
-"sijaan.\n"
-"\t--userdata <merkkijono>\tKäyttäjän määrittämä tapahtuma ID jota käytetään "
-"historiatiedoissa ja lisäosissa.\n"
-"\t--quiet, -q\t\tTulostaa ainoastaan virheet.\n"
-"\t--verbose, -v\t\tKasvattaa näytettävän tiedon määrää.\n"
-"\t--no-abbrev, -A\t\tÄlä katkaise taulukon rivejä.\n"
-"\t--table-style, -s\tTaulukon tyyppi (luku).\n"
-"\t--non-interactive\tÄlä kysy mitään, käytä oletusvastausta \n"
+"  Yleisvalinnat:\n"
+"\t--help, -h\t\tOhje.\n"
+"\t--version, -V\t\tNäytä versio.\n"
+"\t--promptids\t\tNäytä zypperin käyttäjäkehotteet.\n"
+"\t--config, -c <tsto>\tKäytä annettua asetustiedostoa oletuksen sijaan.\n"
+"\t--userdata <string>\tKäyttäjän määrittämä toimintotunniste, jota\n"
+"\t\t\t\tkäytetään historiatiedoissa ja lisäosissa.\n"
+"\t--quiet, -q\t\tNäytä vain virheilmoitukset.\n"
+"\t--verbose, -v\t\tLisää näytettävien viestien määrää.\n"
+"\t--color\n"
+"\t--no-color\t\tKäytetäänkö tulosteessa värejä, jos pääte tukee sitä.\n"
+"\t--no-abbrev, -A\t\tÄlä lyhenne taulukon tekstejä.\n"
+"\t--table-style, -s\tTaulukon tyyli (kokonaisluku).\n"
+"\t--non-interactive, -n\tÄlä kysy mitään, käytä oletusvastauksia\n"
 "\t\t\t\tautomaattisesti.\n"
-"t--non-interactive-include-reboot-patches\n"
-"\t\t\t\tÄlä käsittele paikkauksia joissa on rebootSuggested-lippu\n"
-"\t\t\t\tasetettuna interaktiivisina.\n"
-"\t--xmlout, -x\t\tTulostus XML-muodossa.\n"
-"\t--ignore-unknown, -i\tOhita tuntemattomat paketit.\n"
+"\t--non-interactive-include-reboot-patches\n"
+"\t\t\t\tÄlä käsittele vuorovaikutteisesti korjauspäivityksiä,\n"
+"\t\t\t\tjoille on asetettu rebootSuggested-lippu.\n"
+"\t--xmlout, -x\t\tVaihda XML-tulosmuotoon.\n"
+"\t--ignore-unknown, -i\tJätä huomiotta tuntemattomat paketit.\n"
 
 #: src/Zypper.cc:786
 msgid ""
@@ -1874,7 +1864,6 @@ msgstr ""
 "pakettivälimuistihakemistoa.\n"
 
 #: src/Zypper.cc:794
-#, fuzzy
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -1892,19 +1881,22 @@ msgid ""
 "\t--releasever\t\tSet the value of $releasever in all .repo files (default: "
 "distribution version)\n"
 msgstr ""
-"     Asennuslähteen valinnat:\n"
-"\t--no-gpg-checks\t\tJätetään GPG-tarkistusvirheet huomioimatta.\n"
-"\t--gpg-auto-import-keys\tAutomaattinen luottamus ja uuden\n"
-"\t\t\t\tasennuslähteen allekirjoitusten tuonti.\n"
-"\t--plus-repo, -p <URI>\tKäytä ylimääräistä asennuslähdettä.\n"
-"\t--plus-content <tag>\tKäytä käytöstä poistettuja asennuslähteitä, jotka "
-"tarjoavat määritetyn avainsanan.\n"
-"\t\t\t\tTry '--plus-content debug' ottaa käyttöön jotka tarjoavat "
-"virheenkorjauspaketit.\n"
+"     Asennuslähdevalinnat:\n"
+"\t--no-gpg-checks\t\tJätä GPG-tarkistusvirheet huomiotta ja jatka.\n"
+"\t--gpg-auto-import-keys\tLuota automaattisesti uusiin asennuslähteiden "
+"allekirjoitusavaimiin\n"
+"\t\t\t\tja tuo ne.\n"
+"\t--plus-repo, -p <URI>\tKäytä lisäasennuslähdettä.\n"
+"\t--plus-content <tag>\tKäytä myös käytöstä poistettuja avainsanan tarjoavia "
+"asennuslähteitä.\n"
+"\t\t\t\t”--plus-content debug” ottaa käyttöön myös "
+"vianpaikannuspakettilähteet.\n"
 "\t--disable-repositories\tÄlä lue asennuslähteiden metatietoja.\n"
-"\t--no-refresh\t\tÄlä päivitä asennuslähteitä.\n"
-"\t--no-cd\t\t\tOhita CD/DVD-asennuslähteet.\n"
-"\t--no-remote\t\tOhita verkkoasennuslähteet.\n"
+"\t--no-refresh\t\tÄlä virkistä asennuslähteitä.\n"
+"\t--no-cd\t\t\tJätä CD/DVD-asennuslähteet huomiotta.\n"
+"\t--no-remote\t\tJätä etäasennuslähteet huomiotta.\n"
+"\t--releasever\t\tAseta $releasever-arvo kaikkiin .repo-tiedostoihin (oletus:"
+" jakelun versio)\n"
 
 #: src/Zypper.cc:808
 msgid ""
@@ -1921,7 +1913,7 @@ msgstr ""
 #: src/Zypper.cc:814
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
-msgstr ""
+msgstr "Toimi eri juurikansiossa mutta jaa asennuslähteet isännän kanssa."
 
 #: src/Zypper.cc:818
 msgid ""
@@ -2080,14 +2072,14 @@ msgstr ""
 "\tsubcommand\t\tLuettele käytettävissä olevat alikomennot.\n"
 
 #: src/Zypper.cc:898
-#, fuzzy
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
 "\tzypper <subcommand> [--command-options] [arguments]\n"
 msgstr ""
-"  Toiminta:\n"
-"\tzypper [--yleiset-valinnat] <komento> [--komennon-valinnat] [valinnat]\n"
+"  Käyttö:\n"
+"\tzypper [--yleisvalinnat] <komento> [--komennon-valinnat] [parametrit]\n"
+"\tzypper <alikomento> [--komennon-valinnat] [parametrit]\n"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -2338,6 +2330,7 @@ msgstr ""
 #: src/Zypper.cc:1868
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
+"Asenna komentoparametreina annetut allekirjoittamat RPM-paketit hiljaisesti."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2490,7 +2483,7 @@ msgstr ""
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:2072
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -2503,12 +2496,12 @@ msgid ""
 msgstr ""
 "addservice (as) [valinnat] <URI> <alias>\n"
 "\n"
-"Lisää palvelun järjestelmään.\n"
+"Lisää järjestelmään asennuslähteen indeksointipalvelu.\n"
 "\n"
-"  Valinnat:\n"
-"-t, --type <TYPE>       Palvelun tyyppi (%s).\n"
-"-d, --disable           Lisää käytöstä poistettuna.\n"
-"-n, --name              Määrittelee palvelulle nimen.\n"
+"  Komennon valinnat:\n"
+"-t, --type <TYYPPI>       Palvelun tyyppi (%s).\n"
+"-d, --disable           Lisää palvelu käytöstä poistettuna.\n"
+"-n, --name <NIMI>\tAntaa palvelulle kuvailevan nimen.\n"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2085
@@ -2523,6 +2516,8 @@ msgstr "Lisää ohjelmalähteen indeksipalvelun järjestelmään."
 #: src/Zypper.cc:2093
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
+"Palvelun tyyppi tunnistetaan aina automaattisesti. Valitsin jätetään "
+"huomiotta."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:2109
@@ -2545,7 +2540,7 @@ msgstr ""
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:2139
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
 "modifyservice (ms) <options> <%s>\n"
@@ -2577,14 +2572,16 @@ msgstr ""
 "modifyrepo (mr) <valinnat> <alias|#|URI>\n"
 "modifyrepo (mr) <valinnat> <%s>\n"
 "\n"
-"Muokkaa URI-osoitteella, aliaksella, järjestysnumerolla tai \"%s\" "
-"valinnoilla määritellyn palvelun tietoja.\n"
+"Muokkaa URI-osoitteella, aliaksella, järjestysluvulla tai \"%s\"-valitsimin "
+"määritetyn\n"
+"palvelun tietoja.\n"
 "\n"
-"-d, --disable                  Poistaa käytöstä (ei poista palvelua).\n"
+"-d, --disable                  Poistaa palvelun käytöstä (muttei poista "
+"sitä).\n"
 "-e, --enable                   Ottaa käytöstä poistetun palvelun käyttöön.\n"
-"-r, --refresh                  Asettaa automaattisen päivityksen päälle.\n"
-"-R, --no-refresh               Poistaa automaattisen päivityksen käytöstä.\n"
-"-n, --name                     Asettaa palvelulle nimen.\n"
+"-r, --refresh                  Asettaa automaattisen virkistyksen päälle.\n"
+"-R, --no-refresh               Poistaa automaattisen virkistyksen käytöstä.\n"
+"-n, --name                     Asettaa palvelun nimen.\n"
 "\n"
 "-i, --ar-to-enable <alias>     Lisää RIS-palvelu käyttöön otettuna.\n"
 "-I, --ar-to-disable <alias>    Lisää RIS-palvelu käytöstä poistettuna.\n"
@@ -2596,12 +2593,11 @@ msgstr ""
 "palveluiden lista.\n"
 "\n"
 "-a, --all                      Ota muutokset käyttöön kaikissa palveluissa.\n"
-"-l, --local                    Ota muutokset käyttöön ainoastaan "
-"paikallisissa palveluissa.\n"
-"-t, --remote                   Ota muutokset käyttöön ainoastaan "
-"verkkopalveluissa.\n"
-"-m, --medium-type <type>       Ota muutokset käyttöön ainoastaan tietyn "
-"tyyppisissä palveluissa.\n"
+"-l, --local                    Ota muutokset käyttöön vain paikallisissa "
+"palveluissa.\n"
+"-t, --remote                   Ota muutokset käyttöön vain etäpalveluissa.\n"
+"-m, --medium-type <tyyppi>       Ota muutokset käyttöön vain tietyn tyypin "
+"palveluissa.\n"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2168
@@ -2642,27 +2638,27 @@ msgstr "Ota määritetyn tyypin palveluiden muutokset käyttöön."
 
 #: src/Zypper.cc:2184
 msgid "Add a RIS service repository to enable."
-msgstr ""
+msgstr "Lisää käyttöön otettavan RIS-palvelulähteen."
 
 #: src/Zypper.cc:2185
 msgid "Add a RIS service repository to disable."
-msgstr ""
+msgstr "Lisää käytöstä poistettava RIS-palvelulähteen."
 
 #: src/Zypper.cc:2186
 msgid "Remove a RIS service repository to enable."
-msgstr ""
+msgstr "Poista käyttöön otettava RIS-palvelulähde."
 
 #: src/Zypper.cc:2187
 msgid "Remove a RIS service repository to disable."
-msgstr ""
+msgstr "Poista käytöstä poistettava RIS-palvelulähde."
 
 #: src/Zypper.cc:2188
 msgid "Clear the list of RIS repositories to enable."
-msgstr ""
+msgstr "Tyhjennä käyttöön otettavien RIS-palvelulähteiden luettelo."
 
 #: src/Zypper.cc:2189
 msgid "Clear the list of RIS repositories to disable."
-msgstr ""
+msgstr "Tyhjennä käytöstä poistettavien RIS-palvelulähteiden luettelo."
 
 #: src/Zypper.cc:2216
 msgid ""
