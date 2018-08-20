@@ -1249,7 +1249,15 @@ int MediaMultiCurl::progressCallback( void *clientp, double dltotal, double dlno
   if (!_curl)
     return MediaCurl::aliveCallback(clientp, dltotal, dlnow, ultotal, ulnow);
 
+  // bsc#408814: Don't report any sizes before we don't have data on disk. Data reported
+  // due to redirection etc. are not interesting, but may disturb filesize checks.
+  FILE *fp = 0;
+  if ( curl_easy_getinfo( _curl, CURLINFO_PRIVATE, &fp ) != CURLE_OK || !fp )
+    return MediaCurl::aliveCallback( clientp, dltotal, dlnow, ultotal, ulnow );
+  if ( ftell( fp ) == 0 )
+    return MediaCurl::aliveCallback( clientp, dltotal, 0.0, ultotal, ulnow );
 
+  // (no longer needed due to the filesize check above?)
   // work around curl bug that gives us old data
   long httpReturnCode = 0;
   if (curl_easy_getinfo(_curl, CURLINFO_RESPONSE_CODE, &httpReturnCode ) != CURLE_OK || httpReturnCode == 0)
@@ -1270,9 +1278,6 @@ int MediaMultiCurl::progressCallback( void *clientp, double dltotal, double dlno
     }
   if (!ismetalink)
     {
-      FILE *fp = 0;
-      if (curl_easy_getinfo(_curl, CURLINFO_PRIVATE, &fp) != CURLE_OK || !fp)
-	return MediaCurl::aliveCallback(clientp, dltotal, dlnow, ultotal, ulnow);
       fflush(fp);
       ismetalink = looks_like_metalink_fd(fileno(fp));
       DBG << "looks_like_metalink_fd: " << ismetalink << endl;
