@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Aug 21 18:46:35 CEST 2018 - ma@suse.de
+
+- fixup! Add filesize check for downloads with known size (bsc#408814)
+  Fix detetction of metalink downloads and prevent aborting if
+  a metalink file is larger than the expected data file.
+- version 17.6.2 (2)
+
+-------------------------------------------------------------------
 Fri Aug 17 14:52:14 CEST 2018 - ma@suse.de
 
 - Adapt to changes in libgpgme11-11.1.0 breaking the signature
