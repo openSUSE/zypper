@@ -234,46 +234,9 @@ namespace zypp
 
               std::string keyID = hr->signatureKeyID();
               if ( keyID.length() > 0 ) {
-                const ZConfig &conf = ZConfig::instance();
-                Pathname cacheDir = conf.repoManagerRoot() / conf.pubkeyCachePath();
-
-                Pathname myKey = info.provideKey ( keyID, cacheDir );
-                if ( myKey.empty()  )
-                  // if we did not find any keys, there is no point in checking again, break
+                if ( ! getZYpp()->keyRing()->provideAndImportKeyFromRepositoryWorkflow( keyID, info ) )
                   break;
 
-                callback::SendReport<KeyRingReport> report;
-
-                PublicKey key;
-                try {
-                  key = PublicKey( myKey );
-                } catch ( const Exception &e ) {
-                  ZYPP_CAUGHT(e);
-                  break;
-                }
-
-                if ( !key.isValid() ) {
-                  ERR << "Key [" << keyID << "] from cache: " << cacheDir << " is not valid" << endl;
-                  break;
-                }
-
-                MIL << "Key [" << keyID << "] " << key.name() << " loaded from cache" << endl;
-
-                KeyContext context;
-                context.setRepoInfo( info );
-                if ( ! report->askUserToAcceptPackageKey( key, context ) ) {
-                  break;
-                }
-
-                MIL << "User wants to import key [" << keyID << "] " << key.name() << " from cache" << endl;
-                KeyRing_Ptr theKeyRing = getZYpp()->keyRing();
-                try {
-                  theKeyRing->importKey( key, true );
-                } catch ( const KeyRingException &e ) {
-                  ZYPP_CAUGHT(e);
-                  ERR << "Failed to import key: "<<keyID;
-                  break;
-                }
               } else {
                 // we did not find any information about the key in the header
                 // this should never happen

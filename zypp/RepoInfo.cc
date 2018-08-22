@@ -501,8 +501,11 @@ namespace zypp
     _pimpl->gpgKeyUrls().raw().push_back( url_r );
   }
 
-  Pathname RepoInfo::provideKey(const std::string &keyID_r, const Pathname &targetDirectory_r)
+  Pathname RepoInfo::provideKey(const std::string &keyID_r, const Pathname &targetDirectory_r) const
   {
+    if ( keyID_r.empty() )
+      return Pathname();
+
     MIL << "Check for " << keyID_r << " at " << targetDirectory_r << endl;
     std::string keyIDStr( keyID_r.size() > 8 ? keyID_r.substr( keyID_r.size()-8 ) : keyID_r );	// print short ID in Jobreports
     filesystem::TmpDir tmpKeyRingDir;

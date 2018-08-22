@@ -92,7 +92,10 @@ class TestSetup
     { _ctor( rootdir_r, Arch_empty, options_r ); }
 
     ~TestSetup()
-    { USR << (_tmprootdir.path() == _rootdir ? "DELETE" : "KEEP") << " TESTSETUP below " << _rootdir << endl; }
+    {
+      USR << (_tmprootdir.path() == _rootdir ? "DELETE" : "KEEP") << " TESTSETUP below " << _rootdir << endl;
+      ZConfig::instance().setRepoManagerRoot( Pathname() );
+    }
 
   public:
     /** Whether directory \a path_r contains a solver testcase. */
@@ -402,6 +405,8 @@ class TestSetup
         if ( _options.testFlag( TSO_CLEANROOT ) )
           filesystem::clean_dir( _rootdir );
       }
+
+      ZConfig::instance().setRepoManagerRoot( _rootdir );
 
       if ( ! sysarch_r.empty() )
         ZConfig::instance().setSystemArchitecture( sysarch_r );

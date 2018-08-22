@@ -321,6 +321,12 @@ namespace zypp
 
     bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature );
 
+    /**
+     * Try to find the \a id in key cache or repository specified in \a info. Ask the user to trust
+     * the key if it was found
+     */
+    bool provideAndImportKeyFromRepositoryWorkflow ( const std::string &id , const RepoInfo &info );
+
     /** Dtor */
     ~KeyRing();
 
