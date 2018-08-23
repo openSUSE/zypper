@@ -53,12 +53,12 @@ namespace
 
   // Valid for Package and SrcPackage
   bool isCached( const PoolItem & pi_r )
-  { return ( pi_r.isKind<Package>() && pi_r->asKind<Package>()->isCached() )
-        || ( pi_r.isKind<SrcPackage>() && pi_r->asKind<SrcPackage>()->isCached() ); }
+  { return ( pi_r.satSolvable().isKind<Package>() && pi_r->asKind<Package>()->isCached() )
+        || ( pi_r.satSolvable().isKind<SrcPackage>() && pi_r->asKind<SrcPackage>()->isCached() ); }
 
   // Valid for Package and SrcPackage; assumes isPackageType() == true
   Pathname cachedLocation( const PoolItem & pi_r )
-  { return( pi_r.isKind<Package>() ? pi_r->asKind<Package>()->cachedLocation() : pi_r->asKind<SrcPackage>()->cachedLocation() ); }
+  { return( pi_r.satSolvable().isKind<Package>() ? pi_r->asKind<Package>()->cachedLocation() : pi_r->asKind<SrcPackage>()->cachedLocation() ); }
 
   inline void logXmlResult( const PoolItem & pi_r, const Pathname & localfile_r )
   {
@@ -179,7 +179,7 @@ namespace
 	    ManagedFile localfile;
 	    try
 	    {
-	      Out::ProgressBar report( _zypper.out(), Out::ProgressBar::noStartBar, pi.asUserString(), current, total );
+	      Out::ProgressBar report( _zypper.out(), Out::ProgressBar::noStartBar, pi.satSolvable().asUserString(), current, total );
 	      report.error(); // error if provideSrcPackage throws
 	      Out::DownloadProgress redirect( report );
 	      localfile = packageCache.get( pi );
