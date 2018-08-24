@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 24 12:25:48 CEST 2018 - ma@suse.de
+
+- Translations updated
+- version 1.13.45
+
+-------------------------------------------------------------------
 Tue Jul 24 18:54:19 CEST 2018 - ma@suse.de
 
 - XML <install-summary> attribute `packages-to-change` added (bsc#1102429)
