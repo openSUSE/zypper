@@ -107,14 +107,15 @@ ENDMACRO( GETTEXT_CREATE_TARBALL_TRANSLATIONS )
 MACRO(GETTEXT_CREATE_TRANSLATIONS _moBasename _firstPoFile)
 
    SET(_gmoFiles)
-
+   SET(firstPoFile)
    SET(_addToAll)
    IF(${_firstPoFile} STREQUAL "ALL")
       SET(_addToAll "ALL")
-      SET(_firstPoFile)
+   else(${_firstPoFile} STREQUAL "ALL")
+      SET(firstPoFile ${_firstPoFile})
    ENDIF(${_firstPoFile} STREQUAL "ALL")
 
-   FOREACH (_currentPoFile ${_firstPoFile} ${ARGN})
+   FOREACH (_currentPoFile ${firstPoFile} ${ARGN})
       GET_FILENAME_COMPONENT(_absFile ${_currentPoFile} ABSOLUTE)
       GET_FILENAME_COMPONENT(_abs_PATH ${_absFile} PATH)
       GET_FILENAME_COMPONENT(_lang ${_absFile} NAME_WE)
