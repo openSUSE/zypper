@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Fri Aug 24 15:56:55 CEST 2018 - ma@suse.de
+
+- Improve signature check callback messages
+  (bsc#1045735, CVE-2017-9269)
+- add/modify repo: Add options to tune the GPG check settings
+  (bsc#1045735, CVE-2017-9269)
+- Adapt download callback to report and handle unsigned packages
+  (bsc#1038984, CVE-2017-7436)
+- download: fix crash when non-package types are passed as argument
+  (bsc#1037210)
+- BuildRequires:  libzypp-devel >= 14.45.16
+- Translations updated
+- version 1.11.70
+
+-------------------------------------------------------------------
 Tue Jul 24 18:55:10 CEST 2018 - ma@suse.de
 
 - XML <install-summary> attribute `packages-to-change` added (bsc#1102429)
