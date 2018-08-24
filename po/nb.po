@@ -1,0 +1,4681 @@
+# translation of zypper.po to norsk bokmål
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+# Rune Nordbøe Skillingstad <rune@skillingstad.no>, 2007.
+# Olav Pettershagen <olav.pet@gmail.com>, 2008.
+# Olav P. <olav.pet@gmail.com>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: zypper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-26 14:00+0200\n"
+"PO-Revision-Date: 2008-12-23 16:25+0100\n"
+"Last-Translator: Olav P. <olav.pet@gmail.com>\n"
+"Language-Team: Norwegian Bokmål <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/callbacks/keyring.h:51
+#, c-format
+msgid "Accepting an unsigned file '%s'."
+msgstr "Godkjenner en usignert fil '%s'."
+
+#: ../src/callbacks/keyring.h:55
+#, c-format
+msgid "Accepting an unsigned file '%s' from repository '%s'."
+msgstr "Godtar en usignert fil '%s' fra arkivet '%s'."
+
+#. TranslatorExplanation: speaking of a file
+#: ../src/callbacks/keyring.h:66
+#, c-format
+msgid "File '%s' is unsigned, continue?"
+msgstr "Filen '%s' er ikke signert. Vil du fortsette?"
+
+#. TranslatorExplanation: speaking of a file
+#: ../src/callbacks/keyring.h:70
+#, c-format
+msgid "File '%s' from repository '%s' is unsigned, continue?"
+msgstr "Filen '%s' fra arkivet '%s' er ikke signert. Vil du fortsette?"
+
+#: ../src/callbacks/keyring.h:93
+#, c-format
+msgid "Accepting file '%s' signed with an unknown key '%s'."
+msgstr "Godtar filen '%s' som er signert med den ukjente nøkkelen '%s'."
+
+#: ../src/callbacks/keyring.h:97
+#, c-format
+msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr "Godtar filen '%s' fra arkivet '%s' som er signert med den ukjente nøkkelen '%s'."
+
+#. translators: the last %s is gpg key ID
+#: ../src/callbacks/keyring.h:107
+#, c-format
+msgid "File '%s' is signed with an unknown key '%s'. Continue?"
+msgstr "Filen '%s' er signert med den ukjente nøkkelen '%s'. Vil du fortsette?"
+
+#. translators: the last %s is gpg key ID
+#: ../src/callbacks/keyring.h:111
+#, c-format
+msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr "Filen '%s' fra arkivet '%s' er signert med den ukjente nøkkelen '%s'. Vil du fortsette?"
+
+#: ../src/callbacks/keyring.h:129
+#, fuzzy
+msgid "Automatically importing the following key:"
+msgstr "Stoler automatisk på følgende nøkkel:"
+
+#: ../src/callbacks/keyring.h:131
+msgid "Automatically trusting the following key:"
+msgstr "Stoler automatisk på følgende nøkkel:"
+
+#: ../src/callbacks/keyring.h:133
+msgid "New repository or package signing key received:"
+msgstr "Ny nøkkel for signering av arkiv eller pakke mottatt:"
+
+#: ../src/callbacks/keyring.h:137
+#, c-format
+msgid "Key ID: %s"
+msgstr "Nøkkel-ID: %s"
+
+#: ../src/callbacks/keyring.h:138
+#, c-format
+msgid "Key Name: %s"
+msgstr "Nøkkelnavn: %s"
+
+#: ../src/callbacks/keyring.h:139
+#, c-format
+msgid "Key Fingerprint: %s"
+msgstr "Nøkkelfingeravtrykk: %s"
+
+#: ../src/callbacks/keyring.h:141
+#, c-format
+msgid "Repository: %s"
+msgstr "Arkiv: %s"
+
+#. translators: this message is shown after showing description of the key
+#: ../src/callbacks/keyring.h:165
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr "Vil du avvise nøkkelen, midlertidig stole på den eller alltid stole på den?"
+
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: ../src/callbacks/keyring.h:177
+msgid "r/t/a/"
+msgstr "r/t/a/"
+
+#. translators: the same as r/t/a, but without 'a'
+#: ../src/callbacks/keyring.h:180
+msgid "r/t"
+msgstr "r/t"
+
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: ../src/callbacks/keyring.h:182
+msgid "Don't trust the key."
+msgstr "Ikke stol på nøkkelen."
+
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: ../src/callbacks/keyring.h:184
+msgid "Trust the key temporarily."
+msgstr "Stol på nøkkelen midlertidig."
+
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: ../src/callbacks/keyring.h:187
+msgid "Trust the key and import it into trusted keyring."
+msgstr "Stol på nøkkelen og importer den til den pålitelige nøkkelringen?"
+
+#: ../src/callbacks/keyring.h:221
+#, c-format
+msgid "Ignoring failed signature verification for file '%s'!"
+msgstr "Ignorerer mislykket signaturverifisering for filen '%s'!"
+
+#: ../src/callbacks/keyring.h:224
+#, c-format
+msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr "Ignorerer mislykket signaturverifisering for filen '%s' fra arkivet '%s'!"
+
+#: ../src/callbacks/keyring.h:230
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr "Dobbelsjekk at dette ikke er på grunn av ondsinnet endringer i filen!"
+
+#: ../src/callbacks/keyring.h:240
+#, c-format
+msgid "Signature verification failed for file '%s'."
+msgstr "Signaturverifisering mislyktes for filen '%s'."
+
+#: ../src/callbacks/keyring.h:243
+#, c-format
+msgid "Signature verification failed for file '%s' from repository '%s'."
+msgstr "Signaturverifisering mislyktes for filen '%s' fra arkivet '%s'."
+
+#: ../src/callbacks/keyring.h:248
+msgid ""
+"Warning: This might be caused by a malicious change in the file!\n"
+"Continuing might be risky. Continue anyway?"
+msgstr ""
+"Advarsel: Dette kan skyldes ondsinnet manipulering av filen!\n"
+"Det kan være risikabelt å fortsette. Vil du fortsette likevel?"
+
+#: ../src/callbacks/keyring.h:273
+#, c-format
+msgid "No digest for file %s."
+msgstr "Mangler sammendrag for filen %s."
+
+#. translators: help text for 'x' option in the 'Continue?' prompt
+#. popts.setOptionHelp(8, _("Explain why the packages are going to be installed."));
+#: ../src/callbacks/keyring.h:273 ../src/callbacks/keyring.h:283
+#: ../src/callbacks/keyring.h:305 ../src/callbacks/rpm.h:61
+#: ../src/solve-commit.cc:637
+msgid "Continue?"
+msgstr "Vil du fortsette?"
+
+#: ../src/callbacks/keyring.h:282
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "Ukjent sammendrag %s for filen %s."
+
+#: ../src/callbacks/keyring.h:297
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr "Hopper over sammendragkontroll for %s (forventet %s, fant %s)."
+
+#: ../src/callbacks/keyring.h:304
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr "Mislykket sammendragskontroll for %s. Forventet %s, fant %s."
+
+#: ../src/callbacks/locks.h:27
+#, fuzzy
+msgid "The following query locks the same objects as the one you want to remove:"
+msgstr "Følgende forespørsel låser noen av objektene du vil låse opp:"
+
+#: ../src/callbacks/locks.h:30
+msgid "The following query locks some of the objects you want to unlock:"
+msgstr "Følgende forespørsel låser noen av objektene du vil låse opp:"
+
+#: ../src/callbacks/locks.h:35 ../src/callbacks/locks.h:50
+#, fuzzy
+msgid "Do you want to remove this lock?"
+msgstr "Vil du beholde denne oppløsningen?"
+
+#: ../src/callbacks/locks.h:45
+msgid "The following query does not lock anything:"
+msgstr "Følgende forespørsel låser ingenting:"
+
+#. help text for the "Abort, retry, ignore?" prompt for media errors
+#: ../src/callbacks/media.cc:24
+msgid "Skip retrieval of the file and abort current operation."
+msgstr ""
+
+#. help text for the "Abort, retry, ignore?" prompt for media errors
+#: ../src/callbacks/media.cc:26
+msgid "Try to retrieve the file again."
+msgstr ""
+
+#. help text for the "Abort, retry, ignore?" prompt for media errors
+#: ../src/callbacks/media.cc:28
+msgid "Skip retrieval of the file and try to continue with the operation without the file."
+msgstr ""
+
+#. help text for the "Abort, retry, ignore?" prompt for media errors
+#: ../src/callbacks/media.cc:30
+msgid "Change current base URI and try retrieving the file again."
+msgstr ""
+
+#. translators: this is a prompt label, will appear as "New URI: "
+#: ../src/callbacks/media.cc:46
+#, fuzzy
+msgid "New URI"
+msgstr "Ny plate"
+
+#. https options
+#. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
+#. Translate the a/r/i part exactly as you did the a/r/i string.
+#. The 'u' reply means 'Change URI'.
+#. https protocol-specific options:
+#. 's' stands for Disable SSL certificate authority check
+#: ../src/callbacks/media.cc:72
+#, fuzzy
+msgid "a/r/i/u/s"
+msgstr "a/g/i"
+
+#: ../src/callbacks/media.cc:74
+msgid "Disable SSL certificate authority check and continue."
+msgstr ""
+
+#. translators: this is a prompt text
+#: ../src/callbacks/media.cc:77 ../src/callbacks/media.cc:174
+#: ../src/callbacks/media.cc:255 ../src/utils/prompt.cc:178
+#: ../src/utils/prompt.cc:266
+msgid "Abort, retry, ignore?"
+msgstr "Avbryt, gjenta, ignorer?"
+
+#: ../src/callbacks/media.cc:85
+msgid "SSL certificate authority check disabled."
+msgstr ""
+
+#: ../src/callbacks/media.cc:106
+msgid "No devices detected, cannot eject."
+msgstr ""
+
+#: ../src/callbacks/media.cc:107
+msgid "Try to eject the device manually."
+msgstr ""
+
+#: ../src/callbacks/media.cc:118
+#, fuzzy
+msgid "Detected devices:"
+msgstr "Konfigurer tilkoblede enheter"
+
+# cancel button label
+#: ../src/callbacks/media.cc:133
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: ../src/callbacks/media.cc:134
+#, fuzzy
+msgid "Select device to eject."
+msgstr "Velg sertifikat"
+
+#: ../src/callbacks/media.cc:149
+#, fuzzy
+msgid "Insert the CD/DVD and press ENTER to continue."
+msgstr "Sett inn disketten og trykk ENTER."
+
+# window title for kernel loading (see txt_load_kernel)
+#: ../src/callbacks/media.cc:152
+#, fuzzy
+msgid "Retrying..."
+msgstr "Starter..."
+
+#. cd/dvd options
+#. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
+#. Translate the a/r/i part exactly as you did the a/r/i string.
+#. The 'u' reply means 'Change URI'.
+#. cd/dvd protocol-specific options:
+#. 'e' stands for Eject medium
+#: ../src/callbacks/media.cc:169
+#, fuzzy
+msgid "a/r/i/u/e"
+msgstr "a/g/i"
+
+#: ../src/callbacks/media.cc:171
+msgid "Eject medium."
+msgstr ""
+
+#. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
+#. Try to check what answers does zypper accept (it always accepts y/n at least)
+#. You can also have a look at the regular expressions used to check the answer here:
+#. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
+#: ../src/callbacks/media.cc:215
+#, c-format
+msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
+msgstr "Sett inn mediet [%s] # %d og tast 'y' for å fortsette eller 'n' for å avbryte handlingen."
+
+#. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
+#. Translate the a/r/i part exactly as you did the a/r/i string.
+#. the 'u' reply means 'Change URI'.
+#: ../src/callbacks/media.cc:251
+#, fuzzy
+msgid "a/r/i/u"
+msgstr "a/g/i"
+
+#: ../src/callbacks/media.h:191 ../src/callbacks/media.h:198
+msgid "User Name"
+msgstr "Brukernavn"
+
+# password dialog title
+#: ../src/callbacks/media.h:207
+msgid "Password"
+msgstr "Passord"
+
+#: ../src/callbacks/repo.h:49
+msgid "Retrieving delta"
+msgstr "Henter delta"
+
+#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+#: ../src/callbacks/repo.h:85
+msgid "Applying delta"
+msgstr "Bruker delta"
+
+#: ../src/callbacks/repo.h:115
+msgid "Retrieving patch rpm"
+msgstr "Henter pakkeoppdatering"
+
+#: ../src/callbacks/repo.h:152
+#, c-format
+msgid "Retrieving %s %s-%s.%s"
+msgstr "Henter %s %s-%s.%s"
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: ../src/callbacks/repo.h:172
+#, c-format
+msgid "(%s unpacked)"
+msgstr "(%s utpakket)"
+
+#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+#: ../src/callbacks/rpm.h:75
+#, c-format
+msgid "Running: %s  (%s, %s)"
+msgstr "Kjører: %s  (%s, %s)"
+
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: ../src/callbacks/rpm.h:135
+#, c-format
+msgid "Removing %s-%s"
+msgstr "Fjerner %s-%s"
+
+#: ../src/callbacks/rpm.h:154
+#, c-format
+msgid "Removal of %s failed:"
+msgstr "%s kunne ikke fjernes:"
+
+#. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
+#. ! \todo use format
+#: ../src/callbacks/rpm.h:183
+msgid "(with --nodeps)"
+msgstr "(med --nodeps)"
+
+#: ../src/callbacks/rpm.h:183
+msgid "(with --nodeps --force)"
+msgstr "(med --nodeps--force)"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
+#: ../src/callbacks/rpm.h:205
+#, c-format
+msgid "Installing: %s-%s"
+msgstr "Installerer: %s-%s"
+
+#: ../src/callbacks/rpm.h:231
+#, c-format
+msgid "Installation of %s-%s failed:"
+msgstr "Installasjon av %s-%s mislyktes:"
+
+#: ../src/Command.cc:176
+#, c-format
+msgid "Unknown command '%s'"
+msgstr "Ukjent kommando '%s'"
+
+#: ../src/Config.cc:77
+#, fuzzy, c-format
+msgid "Unknown configuration option '%s'"
+msgstr "Ukjent kommandovalg"
+
+#: ../src/info.cc:40
+msgid "Name: "
+msgstr "Navn: "
+
+#: ../src/info.cc:41
+msgid "Version: "
+msgstr "Versjon: "
+
+#: ../src/info.cc:42
+msgid "Arch: "
+msgstr "Ark.: "
+
+#: ../src/info.cc:43
+msgid "Vendor: "
+msgstr "Produsent: "
+
+#: ../src/info.cc:48
+msgid "Summary: "
+msgstr "Sammendrag: "
+
+#: ../src/info.cc:49
+msgid "Description: "
+msgstr "Beskrivelse: "
+
+#. TranslatorExplanation E.g. "package 'zypper' not found."
+#. ! \todo use a separate string for each kind so that it is translatable.
+#: ../src/info.cc:82
+#, c-format
+msgid "%s '%s' not found."
+msgstr "%s '%s' ikke funnet"
+
+#: ../src/info.cc:94
+#, c-format
+msgid "Information for %s %s:"
+msgstr "Informasjon for %s %s:"
+
+#: ../src/info.cc:111
+#, c-format
+msgid "Info for type '%s' not implemented."
+msgstr "Info for type '%s' ikke implementert."
+
+#: ../src/info.cc:117
+msgid "None"
+msgstr "Ingen"
+
+#: ../src/info.cc:118
+msgid "Requires"
+msgstr "Krever"
+
+#: ../src/info.cc:119
+msgid "Provides"
+msgstr "Inneholder"
+
+#: ../src/info.cc:120
+msgid "Conflicts"
+msgstr "Konflikter"
+
+#: ../src/info.cc:121
+msgid "Obsoletes"
+msgstr "Foreldet"
+
+#. translators: package requirements table header
+#: ../src/info.cc:123
+msgid "Requirement"
+msgstr "Nødvendig pakke"
+
+#. translators: package requirements table header
+#: ../src/info.cc:125
+msgid "Provided By"
+msgstr "Leverandør"
+
+#. translators: package conflicts table header
+#: ../src/info.cc:127
+msgid "Conflict"
+msgstr "Konflikt"
+
+#: ../src/info.cc:133
+msgid "Requires:"
+msgstr "Krever:"
+
+#: ../src/info.cc:144
+#, fuzzy
+msgid "Recommends:"
+msgstr "Anbefalt"
+
+#: ../src/info.cc:179 ../src/info.cc:330 ../src/info.cc:403
+msgid "Catalog: "
+msgstr "Katalog: "
+
+#: ../src/info.cc:179 ../src/info.cc:330 ../src/info.cc:403
+msgid "Repository: "
+msgstr "Arkiv: "
+
+#: ../src/info.cc:189
+msgid "Support Level: "
+msgstr ""
+
+#: ../src/info.cc:191 ../src/info.cc:337
+msgid "Installed: "
+msgstr "Installert: "
+
+#. enabled?
+#. autorefresh?
+#. enabled?
+#. autorefresh?
+#. is base
+#: ../src/info.cc:191 ../src/info.cc:262 ../src/info.cc:268 ../src/info.cc:270
+#: ../src/info.cc:337 ../src/info.cc:412 ../src/info.cc:416
+#: ../src/repos.cc:789 ../src/repos.cc:791 ../src/repos.cc:871
+#: ../src/repos.cc:1492 ../src/repos.cc:1494 ../src/repos.cc:2174
+#: ../src/repos.cc:2176 ../src/search.cc:633 ../src/solve-commit.cc:258
+msgid "Yes"
+msgstr "Ja"
+
+#: ../src/info.cc:191 ../src/info.cc:262 ../src/info.cc:268 ../src/info.cc:270
+#: ../src/info.cc:337 ../src/info.cc:412 ../src/info.cc:416
+#: ../src/repos.cc:789 ../src/repos.cc:791 ../src/repos.cc:871
+#: ../src/repos.cc:1492 ../src/repos.cc:1494 ../src/repos.cc:2174
+#: ../src/repos.cc:2176 ../src/search.cc:633 ../src/solve-commit.cc:258
+msgid "No"
+msgstr "Nei"
+
+#. ! \todo fix this - arch?
+#: ../src/info.cc:194 ../src/info.cc:257
+msgid "Status: "
+msgstr "Status: "
+
+#: ../src/info.cc:198
+msgid "up-to-date"
+msgstr "oppdatert"
+
+#: ../src/info.cc:202
+#, c-format
+msgid "out-of-date (version %s installed)"
+msgstr "foreldet (versjon %s installert)"
+
+#: ../src/info.cc:207
+msgid "not installed"
+msgstr "ikke installert"
+
+#: ../src/info.cc:209
+msgid "Installed Size: "
+msgstr "Installert størrelse: "
+
+#: ../src/info.cc:260
+msgid "Category: "
+msgstr "Kategori: "
+
+#: ../src/info.cc:261
+msgid "Created On: "
+msgstr "Opprettet på: "
+
+#: ../src/info.cc:262
+msgid "Reboot Required: "
+msgstr "Maskinen må startes på nytt: "
+
+#: ../src/info.cc:265
+msgid "Package Manager Restart Required"
+msgstr "Påkrevd omstart av pakkebehandler"
+
+#: ../src/info.cc:267
+msgid "Restart Required: "
+msgstr "Påkrevd omstart: "
+
+#: ../src/info.cc:270
+msgid "Interactive: "
+msgstr "Interaktivt: "
+
+#: ../src/info.cc:274
+msgid "Provides:"
+msgstr "Gir:"
+
+#: ../src/info.cc:281
+msgid "Conflicts:"
+msgstr "Konflikter:"
+
+#: ../src/info.cc:302 ../src/search.cc:408
+msgid "Recommended"
+msgstr "Anbefalt"
+
+#: ../src/info.cc:304 ../src/search.cc:410
+msgid "Suggested"
+msgstr "Forslag"
+
+#. translators: S for 'installed Status'
+#. translators: S for installed Status
+#. TranslatorExplanation S stands for Status
+#: ../src/info.cc:347 ../src/search.cc:47 ../src/search.cc:63
+#: ../src/search.cc:251 ../src/search.cc:470 ../src/search.cc:529
+#: ../src/search.cc:645 ../src/update.cc:446
+msgid "S"
+msgstr "S"
+
+#. translators: name (general header)
+#: ../src/info.cc:347 ../src/locks.cc:40 ../src/repos.cc:709
+#: ../src/repos.cc:758 ../src/repos.cc:868 ../src/repos.cc:2241
+#: ../src/search.cc:53 ../src/search.cc:65 ../src/search.cc:252
+#: ../src/search.cc:347 ../src/search.cc:471 ../src/search.cc:535
+#: ../src/search.cc:651 ../src/update.cc:193 ../src/update.cc:454
+#: ../src/update.cc:975 ../src/Zypper.cc:4259
+msgid "Name"
+msgstr "Navn"
+
+#. translators: type (general header)
+#: ../src/info.cc:347 ../src/locks.cc:44 ../src/repos.cc:709
+#: ../src/repos.cc:767 ../src/repos.cc:883 ../src/repos.cc:2249
+#: ../src/search.cc:67 ../src/search.cc:255
+msgid "Type"
+msgstr "Type"
+
+#: ../src/info.cc:347 ../src/search.cc:473
+msgid "Dependency"
+msgstr "Avhengighet"
+
+#: ../src/info.cc:365
+msgid "Contents"
+msgstr "Innhold"
+
+#: ../src/info.cc:367
+msgid "(empty)"
+msgstr "(tom)"
+
+#: ../src/info.cc:411 ../src/search.cc:659
+msgid "Is Base"
+msgstr ""
+
+#: ../src/info.cc:413
+msgid "Flavor"
+msgstr "Variant"
+
+#: ../src/info.cc:415 ../src/utils/misc.cc:177
+msgid "Installed"
+msgstr "Installert"
+
+#: ../src/info.cc:417
+msgid "Short Name"
+msgstr "Kort navn"
+
+#. translators: meaning a package %s or provider of capability %s
+#: ../src/install.cc:71 ../src/install.cc:178
+#, c-format
+msgid "'%s' not found"
+msgstr "'%s' ikke funnet"
+
+#. translators: e.g. skipping package 'zypper' (the newest version already installed)
+#. ! \todo capitalize the first letter
+#: ../src/install.cc:100
+#, c-format
+msgid "skipping %s '%s' (the newest version already installed)"
+msgstr "hopper over%s '%s' (nyeste versjon er allerede installert)"
+
+#. translators: %s-%s.%s is name-version.arch
+#: ../src/install.cc:112
+#, c-format
+msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
+msgstr "Pakken %s-%s.%s ble ikke funnet i arkivene. Kan ikke installere den på nytt."
+
+#: ../src/install.cc:125
+#, c-format
+msgid "Failed to add '%s' to the list of packages to be installed."
+msgstr "Kan ikke legge til %s i listen over pakker som skal installeres."
+
+#: ../src/install.cc:148
+#, c-format
+msgid "Failed to add '%s' to the list of packages to be removed."
+msgstr "Kan ikke legge til %s i listen over pakker som skal fjernes."
+
+#: ../src/install.cc:382 ../src/install.cc:745
+#, c-format
+msgid "'%s' is already installed."
+msgstr "'%s' er allerede installert."
+
+#. translators: meaning a package %s or provider of capability %s
+#: ../src/install.cc:433 ../src/install.cc:759
+#, c-format
+msgid "'%s' is not installed."
+msgstr "'%s' er ikke installert."
+
+#: ../src/install.cc:457
+msgid "Cannot uninstall patches."
+msgstr "Kan ikke fjerne pakkeoppdateringer."
+
+#: ../src/install.cc:458
+msgid ""
+"Installed status of a patch is determined solely based on its dependencies.\n"
+"Patches are not installed in sense of copied files, database records,\n"
+"or similar."
+msgstr ""
+"'Installert'-status for en pakkeoppdatering er kun basert på oppdateringens avhengigheter.\n"
+" Pakkeoppdateringer defineres ikke som installert på grunnlag av kopierte filer, databaseoppføringer\n"
+" eller lignende."
+
+#: ../src/install.cc:469
+msgid "Uninstallation of a pattern is currently not defined and implemented."
+msgstr "Å fjerne et mønster er foreløpig ikke definert som en funksjon og implementert."
+
+#: ../src/install.cc:483 ../src/Zypper.cc:3798
+#, c-format
+msgid "%s contradicts %s"
+msgstr "%s er i konflikt med %s"
+
+#. translators: meaning --force with --capability
+#: ../src/install.cc:492
+#, c-format
+msgid "%s cannot currently be used with %s"
+msgstr "%s kan ikke brukes sammen med %s"
+
+#. translators: meaning a package %s or provider of capability %s
+#: ../src/install.cc:542 ../src/install.cc:716
+#, c-format
+msgid "'%s' not found."
+msgstr "'%s' ikke funnet."
+
+#: ../src/install.cc:655
+#, c-format
+msgid "Different package type specified in '%s' option and '%s' argument. Will use the latter."
+msgstr ""
+
+#. ! \todo FIXME "not a valid package name or capability"
+#: ../src/install.cc:682
+#, c-format
+msgid "'%s' is not a valid package or capability name."
+msgstr "'%s' er ikke et gyldig navn på en pakke eller egenskap."
+
+#. translators: %s are package names
+#: ../src/install.cc:749
+#, c-format
+msgid "'%s' providing '%s' is already installed."
+msgstr "'%s' som inneholder '%s' er allerede installert."
+
+#. translators: locks table value
+#. importance
+#: ../src/locks.cc:22 ../src/locks.cc:64 ../src/locks.cc:77
+msgid "(any)"
+msgstr "(alle)"
+
+#. translators: locks table value
+#: ../src/locks.cc:24 ../src/locks.cc:61
+msgid "(multiple)"
+msgstr "(flere)"
+
+#. translators: catalog (rug's word for repository) (header)
+#: ../src/locks.cc:42 ../src/search.cc:49 ../src/search.cc:346
+#: ../src/update.cc:192 ../src/update.cc:448
+msgid "Catalog"
+msgstr "Katalog"
+
+#: ../src/locks.cc:42
+msgid "Importance"
+msgstr "Prioritet"
+
+#. translators: package's repository (header)
+#: ../src/locks.cc:44 ../src/search.cc:73 ../src/search.cc:473
+#: ../src/search.cc:534 ../src/search.cc:647 ../src/update.cc:192
+#: ../src/update.cc:448
+msgid "Repository"
+msgstr "Arkiv"
+
+#: ../src/locks.cc:96
+msgid "There are no package locks defined."
+msgstr "Ingen pakkelås er definert."
+
+#: ../src/locks.cc:103
+msgid "Error reading the locks file:"
+msgstr "Feil ved lesing av låsefil:"
+
+#: ../src/locks.cc:166
+msgid "Problem adding the package lock:"
+msgstr "Problem under aktivering av pakkelås:"
+
+#: ../src/locks.cc:171
+msgid "Specified lock has been successfully added."
+msgid_plural "Specified locks have been successfully added."
+msgstr[0] "Definert lås er lagt til."
+msgstr[1] "Definerte lås er lagt til."
+
+#: ../src/locks.cc:195
+msgid "Specified lock has been successfully removed."
+msgstr "Definerte lås er fjernet."
+
+#: ../src/locks.cc:230
+msgid "No lock has been removed."
+msgstr "Ingen lås er fjernet."
+
+#: ../src/locks.cc:234
+#, fuzzy, c-format
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "%lu lås er fjernet."
+msgstr[1] "%lu lås er fjernet."
+
+#: ../src/locks.cc:241
+msgid "Problem removing the package lock:"
+msgstr "Problem ved fjerning av pakkelås:"
+
+#. translators: this will show up if you press ctrl+c twice (but outside of zypper shell)
+#: ../src/main.cc:38
+msgid "OK OK! Exiting immediately..."
+msgstr "OK OK! Avslutter umiddelbart..."
+
+#. translators: the first %s is name of the resolvable,
+#. the second is its kind (e.g. 'zypper package')
+#: ../src/misc.cc:149
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "Godtar automatisk lisens for %s %s."
+
+#. translators: the first %s is the name of the package, the second
+#. is " (package-type)" if other than "package" (patch/product/pattern)
+#: ../src/misc.cc:170
+#, c-format
+msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
+msgstr "For å installere '%s'%s må du godkjenne følgende lisensavtale:"
+
+#. lincense prompt
+#: ../src/misc.cc:187
+msgid "Do you agree with the terms of the license?"
+msgstr "Godkjenner du betingelsene i lisensavtalen?"
+
+#: ../src/misc.cc:196
+msgid "Aborting installation due to the need for license confirmation."
+msgstr "Avbryter installasjonen på grunn av manglende lisensbekreftelse."
+
+#. translators: %sanslate the '--auto-agree-with-licenses',
+#. it is a command line option
+#: ../src/misc.cc:201
+#, c-format
+msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
+msgstr "Start prosessen på nytt i interaktiv modus og bekreft at du godtar vilkårene i avtalen, eller bruk valget %s."
+
+#. translators: e.g. "... with flash package license."
+#. ! \todo fix this to allow proper translation
+#: ../src/misc.cc:213
+#, c-format
+msgid "Aborting installation due to user disagreement with %s %s license."
+msgstr "Avbryter installasjonen på grunn av manglende brukergodkjennelse av %s %s lisensen."
+
+#: ../src/misc.cc:260
+msgid "License"
+msgstr "Lisens"
+
+#: ../src/misc.cc:278
+msgid "EULA"
+msgstr "Lisensavtale"
+
+#: ../src/misc.cc:296
+msgid "SUMMARY"
+msgstr "SAMMENDRAG"
+
+#: ../src/misc.cc:297
+#, c-format
+msgid "Installed packages: %d"
+msgstr "Installerte pakker: %d"
+
+#: ../src/misc.cc:298
+#, c-format
+msgid "Installed packages with counterparts in repositories: %d"
+msgstr "Installerte pakker med versjoner i arkiver: %d"
+
+#: ../src/misc.cc:299
+#, c-format
+msgid "Installed packages with EULAs: %d"
+msgstr "Installer pakker med lisensavtaler: %d"
+
+#: ../src/misc.cc:388 ../src/misc.cc:412
+#, c-format
+msgid "Source package '%s' not found."
+msgstr "Kildekodepakken '%s' ble ikke funnet."
+
+#: ../src/misc.cc:422
+#, c-format
+msgid "Installing source package %s-%s"
+msgstr "Installerer pakke %s-%s"
+
+#: ../src/misc.cc:431
+#, c-format
+msgid "Source package %s-%s successfully installed."
+msgstr "Kildekodepakken %s-%s ble installert."
+
+#: ../src/misc.cc:438
+#, c-format
+msgid "Problem installing source package %s-%s:"
+msgstr "Problemer med å Installerer kildekodepakken %s-%s:"
+
+#: ../src/output/OutNormal.cc:81
+msgid "Warning: "
+msgstr "Advarsel: "
+
+#: ../src/output/OutNormal.cc:202 ../src/output/OutNormal.cc:287
+#: ../src/output/OutNormal.cc:292
+msgid "error"
+msgstr "feil"
+
+#: ../src/output/OutNormal.cc:204 ../src/output/OutNormal.cc:289
+#: ../src/output/OutNormal.cc:292
+msgid "done"
+msgstr "fullført"
+
+#: ../src/output/OutNormal.cc:223 ../src/output/OutNormal.cc:250
+#: ../src/output/OutNormal.cc:280
+msgid "Retrieving:"
+msgstr "Henter:"
+
+# window title for kernel loading (see txt_load_kernel)
+#: ../src/output/OutNormal.cc:229
+msgid "starting"
+msgstr "starter"
+
+#: ../src/output/OutNormal.cc:332
+msgid "No help available for this prompt."
+msgstr "Ingen tilgjengelig hjelp for denne meldingen."
+
+#: ../src/output/OutNormal.cc:344
+msgid "no help available for this option"
+msgstr "ingen tilgjengelig hjelp for dette valget"
+
+#: ../src/repos.cc:81
+#, c-format
+msgid "Checking whether to refresh metadata for %s"
+msgstr "Kontrollerer om metadata bør oppdateres for %s"
+
+#: ../src/repos.cc:104
+#, c-format
+msgid "Repository '%s' is up to date."
+msgstr "Arkivet '%s' er oppdatert."
+
+#: ../src/repos.cc:109
+#, c-format
+msgid "The up-to-date check of '%s' has been delayed."
+msgstr "'Oppdatert'-kontrollen for '%s' er forsinket."
+
+#: ../src/repos.cc:131
+msgid "Forcing raw metadata refresh"
+msgstr "Tvinger rå-metadata-oppdatering"
+
+#: ../src/repos.cc:138
+#, c-format
+msgid "Retrieving repository '%s' metadata"
+msgstr "Henter metadata for arkivet '%s'"
+
+#: ../src/repos.cc:162
+#, c-format
+msgid "Problem retrieving files from '%s'."
+msgstr "Kunne ikke hente filer fra '%s'."
+
+#: ../src/repos.cc:164 ../src/repos.cc:3033 ../src/solve-commit.cc:751
+#: ../src/solve-commit.cc:780 ../src/solve-commit.cc:814
+msgid "Please see the above error message for a hint."
+msgstr "Feilmeldingen ovenfor innholder et hint."
+
+#: ../src/repos.cc:177
+#, c-format
+msgid "No URIs defined for '%s'."
+msgstr "Ingen URI-er definert for '%s'."
+
+#. TranslatorExplanation the first %s is a .repo file path
+#: ../src/repos.cc:182
+#, c-format
+msgid "Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."
+msgstr "Legg til én eller flere grunnadresser (baseurl=URI) i %s for arkivet '%s'."
+
+#: ../src/repos.cc:195
+msgid "No alias defined for this repository."
+msgstr "Ingen aliaser er definert for dette arkivet."
+
+#: ../src/repos.cc:208
+#, c-format
+msgid "Repository '%s' is invalid."
+msgstr "Arkivet '%s' er ugyldig."
+
+#: ../src/repos.cc:210
+msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
+msgstr "Kontroller om nettadressene som er angitt for dette arkivet, peker på et gyldig arkiv."
+
+#: ../src/repos.cc:223
+#, c-format
+msgid "Error retrieving metadata for '%s':"
+msgstr "Feil under henting av metadata for '%s':"
+
+#: ../src/repos.cc:240
+msgid "Forcing building of repository cache"
+msgstr "Tvungen bygging av arkivmellomlager"
+
+#: ../src/repos.cc:253
+#, c-format
+msgid "Error parsing metadata for '%s':"
+msgstr "Feil under lesing av metadata for '%s':"
+
+#. TranslatorExplanation Don't translate the URL unless it is translated, too
+#: ../src/repos.cc:256
+#, fuzzy
+msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper/Troubleshooting"
+msgstr "Dette kan skyldes ugyldige metadata i arkivet, eller en feil i metadata-tolkeren. Om det siste er tilfelle, eller om du er usikker, rapporter feilen ved å følge instruksene på http://en.opensuse.org/Zypper#Troubleshooting"
+
+#: ../src/repos.cc:271
+#, c-format
+msgid "Repository metadata for '%s' not found in local cache."
+msgstr "Arkivmetadata for %s ble ikke funnet i lokalt mellomlager."
+
+#: ../src/repos.cc:280
+msgid "Error building the cache:"
+msgstr "Feil under bygging av mellomlager:"
+
+#: ../src/repos.cc:472
+#, c-format
+msgid "Repository '%s' not found by its alias, number, or URI."
+msgstr "Arkivet '%s' ikke funnet ved hjelp av alias, nummer eller URI."
+
+#: ../src/repos.cc:476
+#, c-format
+msgid "Use '%s' to get the list of defined repositories."
+msgstr "Bruk %s for å vise listen over definerte akriv."
+
+#: ../src/repos.cc:540 ../src/repos.cc:547
+#, c-format
+msgid "Ignoring repository '%s' because of '%s' option."
+msgstr "Ignorerer arkivet '%s' på grunn av valget '%s'."
+
+#: ../src/repos.cc:577 ../src/repos.cc:614
+#, c-format
+msgid "Disabling repository '%s' because of the above error."
+msgstr "Deaktiverer arkivet '%s' på grunn av feilen ovenfor."
+
+#: ../src/repos.cc:595
+#, c-format
+msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
+msgstr "Arkivet '%s' er utdatert. Du kan kjøre 'zypper refresh' som rotbrukeren for å oppdatere det."
+
+#: ../src/repos.cc:631
+#, c-format
+msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
+msgstr "Metadatamellomlageret må bygges for arkivet '%s'. Du kan kjøre 'zypper refresh' som rot for å oppdatere."
+
+#: ../src/repos.cc:638
+#, c-format
+msgid "Disabling repository '%s'."
+msgstr "Deaktiverer arkivet '%s'."
+
+#: ../src/repos.cc:678
+msgid "Initializing Target"
+msgstr "Initialiserer mål"
+
+#: ../src/repos.cc:687
+msgid "Target initialization failed:"
+msgstr "Initialisering av mål mislyktes:"
+
+#: ../src/repos.cc:689 ../src/Zypper.cc:3558
+msgid "Running 'zypper refresh' as root might resolve the problem."
+msgstr "Å kjøre 'zypper refresh' som rot løser ikke alltid problemet."
+
+#. translators: patch status (installed, uninstalled, needed)
+#: ../src/repos.cc:709 ../src/search.cc:352 ../src/update.cc:193
+msgid "Status"
+msgstr "Status"
+
+#. status
+#. rug's status (active, pending => active, disabled <= enabled, disabled)
+#. this is probably the closest possible compatibility arrangement
+#: ../src/repos.cc:726
+msgid "Active"
+msgstr "Aktiv"
+
+#: ../src/repos.cc:726
+msgid "Disabled"
+msgstr "Deaktivert"
+
+#: ../src/repos.cc:757 ../src/repos.cc:867 ../src/repos.cc:2240
+#: ../src/Zypper.cc:4259
+msgid "Alias"
+msgstr "Alias"
+
+#. TranslatorExplanation used as e.g. "Enabled: Yes"
+#: ../src/repos.cc:759 ../src/repos.cc:871 ../src/repos.cc:1492
+#: ../src/repos.cc:2242
+msgid "Enabled"
+msgstr "aktivert"
+
+#. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
+#: ../src/repos.cc:761 ../src/repos.cc:2244
+msgid "Refresh"
+msgstr "Oppdater"
+
+#. translators: repository priority (in zypper repos -p or -d)
+#: ../src/repos.cc:765 ../src/repos.cc:874 ../src/repos.cc:2248
+msgid "Priority"
+msgstr "Prioritet"
+
+#: ../src/repos.cc:769 ../src/repos.cc:869 ../src/repos.cc:2251
+msgid "URI"
+msgstr "URI"
+
+#. "/etc/init.d/ script that might be used to restart the command (guessed)
+#: ../src/repos.cc:771 ../src/utils/misc.cc:422
+msgid "Service"
+msgstr "Tjeneste"
+
+#: ../src/repos.cc:815
+msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
+msgstr "Mangler arkivdefinisjoner. Bruk 'zypper addrepo'-kommandoen for å legge til ett eller flere arkiv."
+
+#: ../src/repos.cc:877
+#, fuzzy
+msgid "Auto-refresh"
+msgstr "Autooppdater"
+
+#: ../src/repos.cc:877 ../src/repos.cc:880 ../src/repos.cc:886
+#, fuzzy
+msgid "On"
+msgstr "Åpne"
+
+#: ../src/repos.cc:877 ../src/repos.cc:880 ../src/repos.cc:886
+#, fuzzy
+msgid "Off"
+msgstr "Frakoblet"
+
+#: ../src/repos.cc:880
+#, fuzzy
+msgid "Keep Packages"
+msgstr "Nye pakker"
+
+#: ../src/repos.cc:886
+#, fuzzy
+msgid "GPG Check"
+msgstr "DNS-kontroll"
+
+#: ../src/repos.cc:889
+msgid "GPG Key URI"
+msgstr ""
+
+#: ../src/repos.cc:892
+#, fuzzy
+msgid "Path Prefix"
+msgstr "Linje ut"
+
+#: ../src/repos.cc:895
+#, fuzzy
+msgid "Parent Service"
+msgstr "Utskriftsserver"
+
+#: ../src/repos.cc:898
+msgid "MD Cache Path"
+msgstr ""
+
+#: ../src/repos.cc:952 ../src/repos.cc:1026 ../src/repos.cc:1197
+msgid "Error reading repositories:"
+msgstr "Feil under lesing av arkiv:"
+
+#: ../src/repos.cc:980 ../src/repos.cc:2373
+#, c-format
+msgid "Can't open %s for writing."
+msgstr "Kan ikke åpne%s for lagring."
+
+#: ../src/repos.cc:982 ../src/repos.cc:2375
+msgid "Maybe you do not have write permissions?"
+msgstr "Du har kanskje ikke skrivetilgang?"
+
+#: ../src/repos.cc:989 ../src/repos.cc:2382
+#, c-format
+msgid "Repositories have been successfully exported to %s."
+msgstr "Arkivene ble eksportert til %s."
+
+#: ../src/repos.cc:1044 ../src/repos.cc:1215
+msgid "Specified repositories: "
+msgstr "Angitte arkiver: "
+
+#: ../src/repos.cc:1083
+#, c-format
+msgid "Skipping disabled repository '%s'"
+msgstr "Hopper over deaktivert arkiv '%s'"
+
+#: ../src/repos.cc:1099
+#, c-format
+msgid "Skipping repository '%s' because of the above error."
+msgstr "Hopper over arkiv '%s' på grunn av tidligere feil."
+
+#: ../src/repos.cc:1114
+#, c-format
+msgid "Use '%s' or '%s' commands to add or enable repositories."
+msgstr "Bruk kommandoene '%s' eller '%s' for å legge til eller aktivere arkiver."
+
+#: ../src/repos.cc:1117
+msgid "Specified repositories are not enabled or defined."
+msgstr "Angitte arkiv er ikke aktivert eller lagt til."
+
+#: ../src/repos.cc:1119
+msgid "There are no enabled repositories defined."
+msgstr "Det er ingen aktiverte arkiv tilgjengelig."
+
+#: ../src/repos.cc:1123
+msgid "Could not refresh the repositories because of errors."
+msgstr "Kunne ikke oppdatere arkivene på grunn av feil."
+
+#: ../src/repos.cc:1129
+msgid "Some of the repositories have not been refreshed because of an error."
+msgstr "Noen av arkivene ble ikke oppdatert på grunn av feil."
+
+#: ../src/repos.cc:1134
+msgid "Specified repositories have been refreshed."
+msgstr "Angitte arkiv ble oppdatert."
+
+#: ../src/repos.cc:1136
+msgid "All repositories have been refreshed."
+msgstr "Alle arkiv er oppdatert."
+
+#: ../src/repos.cc:1272
+#, c-format
+msgid "Cleaning metadata cache for '%s'."
+msgstr "Rydder metadatamellomlager for '%s'."
+
+#: ../src/repos.cc:1283
+#, c-format
+msgid "Cleaning raw metadata cache for '%s'."
+msgstr "Rydder rådatamellomlager for '%s'."
+
+#: ../src/repos.cc:1291
+#, fuzzy, c-format
+msgid "Keeping raw metadata cache for %s '%s'."
+msgstr "Rydder rådatamellomlager for '%s'."
+
+#. translators: meaning the cached rpm files
+#: ../src/repos.cc:1300
+#, c-format
+msgid "Cleaning packages for '%s'."
+msgstr "Rydder pakker for '%s'."
+
+#: ../src/repos.cc:1309
+#, c-format
+msgid "Cannot clean repository '%s' because of an error."
+msgstr "Kan ikke rydde arkivet '%s' på grunn av en feil."
+
+#: ../src/repos.cc:1323
+msgid "Cleaning installed packages cache."
+msgstr "Rydder mellomlager for installerte pakker."
+
+#: ../src/repos.cc:1331
+msgid "Cannot clean installed packages cache because of an error."
+msgstr "Kan ikke rydde mellomlager for installerte pakker på grunn av en feil."
+
+#: ../src/repos.cc:1352
+msgid "Could not clean the repositories because of errors."
+msgstr "Kunne ikke rydde arkivene på grunn av feil."
+
+#: ../src/repos.cc:1359
+msgid "Some of the repositories have not been cleaned up because of an error."
+msgstr "Noen av arkivene ble ikke ryddet på grunn av en feil."
+
+#: ../src/repos.cc:1364
+msgid "Specified repositories have been cleaned up."
+msgstr "Det er ryddet opp i angitte arkiver."
+
+#: ../src/repos.cc:1366
+msgid "All repositories have been cleaned up."
+msgstr "Det er ryddet opp i alle arkiver."
+
+#: ../src/repos.cc:1406
+msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
+msgstr "Dette er et skiftende skrivebeskyttet medium (CD/DVD), deaktiverer autooppdatering."
+
+#: ../src/repos.cc:1428
+#, fuzzy, c-format
+msgid "Invalid repository alias: '%s'"
+msgstr "Deaktiverer arkivet '%s'."
+
+#: ../src/repos.cc:1436 ../src/repos.cc:1703
+#, c-format
+msgid "Repository named '%s' already exists. Please use another alias."
+msgstr "Et arkiv med navnet '%s' eksisterer allerede. Velg et annet alias."
+
+#: ../src/repos.cc:1447
+msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
+msgstr "Kunne ikke avgjøre arkivtypen. Kontroller om angitte URI-er (se under) peker på et gyldig arkiv:"
+
+#: ../src/repos.cc:1454 ../src/Zypper.cc:2607
+msgid "Can't find a valid repository at given location:"
+msgstr "Fant ikke et gyldig arkiv på angitte lokasjon:"
+
+#: ../src/repos.cc:1463
+msgid "Problem transferring repository data from specified URI:"
+msgstr "Problemer med overføring av arkivdata fra angitt URI:"
+
+#: ../src/repos.cc:1464
+msgid "Please check whether the specified URI is accessible."
+msgstr "Kontroller om angitt URI er tilgjengelig."
+
+#: ../src/repos.cc:1472
+msgid "Unknown problem when adding repository:"
+msgstr "Problemer med å legge til arkiv:"
+
+#: ../src/repos.cc:1478
+#, c-format
+msgid "Repository '%s' successfully added"
+msgstr "Arkiv '%s' ble lagt til"
+
+#. TranslatorExplanation used as e.g. "Autorefresh: Yes"
+#: ../src/repos.cc:1494
+msgid "Autorefresh"
+msgstr "Autooppdater"
+
+#: ../src/repos.cc:1509
+#, c-format
+msgid "Reading data from '%s' media"
+msgstr "Leser data fra '%s'-mediumet"
+
+#: ../src/repos.cc:1517
+#, c-format
+msgid "Problem reading data from '%s' media"
+msgstr "Kunne ikke lese data fra '%s'-mediumet"
+
+#: ../src/repos.cc:1519
+msgid "Please check if your installation media is valid and readable."
+msgstr "Kontroller om installasjonsmediet er gyldig og lesbart."
+
+#: ../src/repos.cc:1584
+msgid "Problem accessing the file at the specified URI"
+msgstr "Problemer med tilgang til filen på angitt URI"
+
+#: ../src/repos.cc:1585
+msgid "Please check if the URI is valid and accessible."
+msgstr "Kontroller om URI-en er gyldig og tilgjengelig."
+
+#: ../src/repos.cc:1593
+msgid "Problem parsing the file at the specified URI"
+msgstr "Problemer med tolking av filen på  angitt URI"
+
+#. TranslatorExplanation don't translate the URI if the URI itself is not translated.
+#. Also don't translate the '.repo' string.
+#: ../src/repos.cc:1596
+msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
+msgstr "Er det en .repo-fil? Se http://en.opensuse.org/Standards/RepoInfo for mer info."
+
+#: ../src/repos.cc:1604
+msgid "Problem encountered while trying to read the file at the specified URI"
+msgstr "Det oppstod problemer med å lese filen på angitt URI"
+
+#: ../src/repos.cc:1618
+msgid "Repository with no alias defined found in the file, skipping."
+msgstr "Arkiv uten definert alias funnet i filen, hopper over."
+
+#: ../src/repos.cc:1625
+#, c-format
+msgid "Repository '%s' has no URI defined, skipping."
+msgstr "Arkivet '%s' har ingen definert URI, hopper over."
+
+#: ../src/repos.cc:1666
+#, c-format
+msgid "Repository '%s' has been removed."
+msgstr "Arkivet '%s' er fjernet."
+
+#: ../src/repos.cc:1686
+#, c-format
+msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
+msgstr "Kan ikke endre alias for arkivet '%s'. Arkivet tilhører tjenesten '%s', som brukes for å definere arkivets alias."
+
+#: ../src/repos.cc:1697
+#, c-format
+msgid "Repository '%s' renamed to '%s'."
+msgstr "Arkivet '%s' har endret navn til '%s'."
+
+#: ../src/repos.cc:1709 ../src/repos.cc:1929
+msgid "Error while modifying the repository:"
+msgstr "Feil ved endring av arkivet:"
+
+#: ../src/repos.cc:1710
+#, c-format
+msgid "Leaving repository '%s' unchanged."
+msgstr "Lar arkivet '%s' være uendret."
+
+#: ../src/repos.cc:1847
+#, c-format
+msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
+msgstr "Ugyldig prioritet '%s'. Bruk et positivt heltall. Høyere verdi gir lavere prioritet."
+
+#: ../src/repos.cc:1855
+#, c-format
+msgid "Repository '%s' priority has been left unchanged (%d)"
+msgstr "Prioriteten for arkivet '%s' er uendret (%d)"
+
+#: ../src/repos.cc:1881
+#, fuzzy, c-format
+msgid "Repository '%s' has been successfully enabled."
+msgstr "Arkivet '%s' er aktivert."
+
+#: ../src/repos.cc:1884
+#, fuzzy, c-format
+msgid "Repository '%s' has been successfully disabled."
+msgstr "Arkivet '%s' er deaktivert."
+
+#: ../src/repos.cc:1891
+#, c-format
+msgid "Autorefresh has been enabled for repository '%s'."
+msgstr "Automatisk oppdatering er aktivert for arkivet '%s'."
+
+#: ../src/repos.cc:1894
+#, c-format
+msgid "Autorefresh has been disabled for repository '%s'."
+msgstr "Automatisk oppdatering er deaktivert for arkivet '%s'."
+
+#: ../src/repos.cc:1901
+#, c-format
+msgid "RPM files caching has been enabled for repository '%s'."
+msgstr "Mellomlagring av RPM-filer er aktivert for arkivet '%s'."
+
+#: ../src/repos.cc:1904
+#, c-format
+msgid "RPM files caching has been disabled for repository '%s'."
+msgstr "Mellomlagring av RPM-filer er deaktivert for arkivet '%s'."
+
+#: ../src/repos.cc:1910
+#, c-format
+msgid "Repository '%s' priority has been set to %d."
+msgstr "Prioriteten for arkivet '%s' er satt til %d."
+
+#: ../src/repos.cc:1916
+#, c-format
+msgid "Name of repository '%s' has been set to '%s'."
+msgstr "Navnet på arkivet '%s' er satt til '%s'."
+
+#: ../src/repos.cc:1922
+#, c-format
+msgid "Nothing to change for repository '%s'."
+msgstr "Ingenting å endre for arkivet '%s'."
+
+#: ../src/repos.cc:1930
+#, c-format
+msgid "Leaving repository %s unchanged."
+msgstr "Lar arkivet %s være uendret."
+
+#: ../src/repos.cc:1968
+msgid "Error reading services:"
+msgstr "Feil under lesing av tjenester:"
+
+#: ../src/repos.cc:2057
+#, c-format
+msgid "Service '%s' not found by its alias, number, or URI."
+msgstr "Tjenesten '%s' ikke funnet ved hjelp av alias, nummer eller URI."
+
+#: ../src/repos.cc:2061
+#, c-format
+msgid "Use '%s' to get the list of defined services."
+msgstr "Bruk %s for å vise listen over definerte tjenester."
+
+#: ../src/repos.cc:2287
+#, c-format
+msgid "No services defined. Use the '%s' command to add one or more services."
+msgstr "Ingen tjenester definert. Bruk kommandoen %s for å legge til én eller flere tjenester."
+
+#: ../src/repos.cc:2413
+#, c-format
+msgid "Service aliased '%s' already exists. Please use another alias."
+msgstr "En tjeneste med navnet '%s' eksisterer allerede. Velg et annet alias."
+
+#: ../src/repos.cc:2423
+#, c-format
+msgid "Error occured while adding service '%s'."
+msgstr "Det oppstod en da når tjenesten '%s' ble lagt til."
+
+#: ../src/repos.cc:2429
+#, c-format
+msgid "Service '%s' has been successfully added."
+msgstr "Tjenesten '%s' er lagt til."
+
+#: ../src/repos.cc:2469
+#, c-format
+msgid "Removing service '%s':"
+msgstr "Fjerner tjenesten '%s'"
+
+#: ../src/repos.cc:2473
+#, c-format
+msgid "Service '%s' has been removed."
+msgstr "Tjenesten '%s' er fjernet"
+
+#: ../src/repos.cc:2490
+#, c-format
+msgid "Refreshing service '%s'."
+msgstr "Oppdaterer tjenesten '%s'."
+
+#: ../src/repos.cc:2500
+#, c-format
+msgid "Problem retrieving the repository index file for service '%s':"
+msgstr "Feil under henting av arkivindeksfil for tjenesten '%s':"
+
+#: ../src/repos.cc:2502
+msgid "Check if the URI is valid and accessible."
+msgstr "Kontroller om URI-en er gyldig og tilgjengelig."
+
+#: ../src/repos.cc:2560
+#, c-format
+msgid "Skipping disabled service '%s'"
+msgstr "Hopper over deaktivert tjeneste '%s'"
+
+#: ../src/repos.cc:2607
+#, c-format
+msgid "Skipping service '%s' because of the above error."
+msgstr "Hopper over tjenesten '%s' på grunn av feilen ovenfor."
+
+#: ../src/repos.cc:2622
+#, c-format
+msgid "Use '%s' or '%s' commands to add or enable services."
+msgstr "Bruk kommandoene '%s' eller '%s' for å legge til eller aktivere tjenester."
+
+#: ../src/repos.cc:2625
+msgid "Specified services are not enabled or defined."
+msgstr "Angitte tjenester er ikke aktivert eller definert."
+
+#: ../src/repos.cc:2627
+msgid "There are no enabled services defined."
+msgstr "Ingen aktiverte tjenester er definert."
+
+#: ../src/repos.cc:2631
+msgid "Could not refresh the services because of errors."
+msgstr "Kunne ikke oppdatere tjenestene på grunn av feil."
+
+#: ../src/repos.cc:2637
+msgid "Some of the services have not been refreshed because of an error."
+msgstr "Noen av tjenestene ble ikke oppdatert på grunn av en feil."
+
+#: ../src/repos.cc:2642
+msgid "Specified services have been refreshed."
+msgstr "Angitte tjenester er oppdatert."
+
+#: ../src/repos.cc:2644
+msgid "All services have been refreshed."
+msgstr "Alle tjenester er oppdatert."
+
+#: ../src/repos.cc:2766
+#, c-format
+msgid "Service '%s' has been sucessfully enabled."
+msgstr "Tjenesten '%s' er endret."
+
+#: ../src/repos.cc:2769
+#, c-format
+msgid "Service '%s' has been sucessfully disabled."
+msgstr "Tjenesten '%s' er deaktivert."
+
+#: ../src/repos.cc:2776
+#, c-format
+msgid "Autorefresh has been enabled for service '%s'."
+msgstr "Automatisk oppdatering er aktivert for tjenesten '%s'."
+
+#: ../src/repos.cc:2779
+#, c-format
+msgid "Autorefresh has been disabled for service '%s'."
+msgstr "Automatisk oppdatering er deaktivert for tjenesten '%s'."
+
+#: ../src/repos.cc:2785
+#, c-format
+msgid "Name of service '%s' has been set to '%s'."
+msgstr "Navnet på tjenesten '%s' er satt til '%s'."
+
+#: ../src/repos.cc:2791
+#, c-format
+msgid "Repository '%s' has been added to enabled repositories of service '%s'"
+msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
+msgstr[0] "Arkivet '%s' er lagt til aktiverte arkiver for tjenesten '%s'"
+msgstr[1] "Arkivene '%s' er lagt til aktiverte arkiver for tjenesten '%s'"
+
+#: ../src/repos.cc:2799
+#, c-format
+msgid "Repository '%s' has been added to disabled repositories of service '%s'"
+msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
+msgstr[0] "Arkivet '%s' er lagt til deaktiverte arkiver for tjenesten '%s'"
+msgstr[1] "Arkivene '%s' er lagt til deaktiverte arkiver for tjenesten '%s'"
+
+#: ../src/repos.cc:2807
+#, c-format
+msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
+msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
+msgstr[0] "Arkivet '%s' er fjernet fra aktiverte arkiver for tjenesten '%s'"
+msgstr[1] "Arkivene '%s' er fjernet fra aktiverte arkiver for tjenesten '%s'"
+
+#: ../src/repos.cc:2815
+#, c-format
+msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
+msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
+msgstr[0] "Arkivet '%s' er fjernet fra deaktiverte arkiver for tjenesten '%s'"
+msgstr[1] "Arkivene '%s' er fjernet fra deaktiverte arkiver for tjenesten '%s'"
+
+#: ../src/repos.cc:2824
+#, c-format
+msgid "Nothing to change for service '%s'."
+msgstr "Ingenting å endre for tjenesten '%s'."
+
+#: ../src/repos.cc:2831
+msgid "Error while modifying the service:"
+msgstr "Feil ved endring av tjenesten:"
+
+#: ../src/repos.cc:2832
+#, c-format
+msgid "Leaving service %s unchanged."
+msgstr "Lar tjenesten %s være uendret."
+
+#: ../src/repos.cc:2939
+msgid "Loading repository data..."
+msgstr "Laster arkivdata..."
+
+#: ../src/repos.cc:2957
+#, c-format
+msgid "Retrieving repository '%s' data..."
+msgstr "Henter data for arkivet '%s'..."
+
+#: ../src/repos.cc:2964
+#, c-format
+msgid "Repository '%s' not cached. Caching..."
+msgstr "Arkiv '%s' finnes ikke i mellomlager. Mellomlagrer..."
+
+#: ../src/repos.cc:2971 ../src/repos.cc:3004
+#, c-format
+msgid "Problem loading data from '%s'"
+msgstr "Kunne ikke leser data fra '%s'"
+
+#: ../src/repos.cc:2973 ../src/repos.cc:3011
+#, c-format
+msgid "Resolvables from '%s' not loaded because of error."
+msgstr "På grunn av feil, ble ikke nødvendige pakker fra '%s' lastet."
+
+#: ../src/repos.cc:2993
+#, c-format
+msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
+msgstr "Arkivet '%s' ser ut til å være foreldet. Kanskje du bør prøve en annen server."
+
+#. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
+#: ../src/repos.cc:3007
+#, c-format
+msgid "Try '%s', or even '%s' before doing so."
+msgstr "Forsøk '%s' eller '%s' før du gjør dette."
+
+#: ../src/repos.cc:3021
+msgid "Reading installed packages..."
+msgstr "Leser installerte pakker..."
+
+#: ../src/repos.cc:3032
+msgid "Problem occured while reading the installed packages:"
+msgstr "Det oppstod en feil ved lesing av installerte pakker:"
+
+#. list name, exact match
+#: ../src/repos.cc:3047
+msgid ""
+"ZENworks Management Daemon is running.\n"
+"WARNING: this command will not synchronize changes.\n"
+"Use rug or yast2 for that."
+msgstr ""
+"ZENworks-nissen kjører.\n"
+"ADVARSEL: Denne kommandoen kan ikke synkronisere endringer.\n"
+"Bruk rug eller yast2 til dette."
+
+#. translators: Bundle is a term used in rug. See rug for how to translate it.
+#: ../src/search.cc:51 ../src/search.cc:532 ../src/update.cc:451
+msgid "Bundle"
+msgstr "Samling"
+
+#. translators: package version (header)
+#: ../src/search.cc:55 ../src/search.cc:69 ../src/search.cc:348
+#: ../src/search.cc:471 ../src/search.cc:535 ../src/search.cc:652
+#: ../src/update.cc:193 ../src/update.cc:975
+msgid "Version"
+msgstr "Versjon"
+
+#. translators: package architecture (header)
+#: ../src/search.cc:57 ../src/search.cc:71 ../src/search.cc:535
+#: ../src/search.cc:658 ../src/update.cc:460
+msgid "Arch"
+msgstr "Ark."
+
+#: ../src/search.cc:208 ../src/search.cc:222
+msgid "System Packages"
+msgstr "Systempakker"
+
+#. translators: package summary (header)
+#: ../src/search.cc:254 ../src/update.cc:975
+msgid "Summary"
+msgstr "Sammendrag"
+
+#. translators: patch category (recommended, security)
+#. translators: product category (base/addon), the rug term
+#: ../src/search.cc:350 ../src/search.cc:655 ../src/update.cc:193
+#: ../src/update.cc:873 ../src/update.cc:975
+msgid "Category"
+msgstr "Kategori"
+
+#: ../src/search.cc:432
+msgid "No needed patches found."
+msgstr "Ingen pakkeoppdateringer ble funnet."
+
+#: ../src/search.cc:507
+msgid "No patterns found."
+msgstr "Ingen mønstre funnet."
+
+#: ../src/search.cc:585 ../src/Zypper.cc:3516
+msgid "No packages found."
+msgstr "Ingen pakker funnet."
+
+#. translators: used in products. Internal Name is the unix name of the
+#. product whereas simply Name is the official full name of the product.
+#: ../src/search.cc:650
+#, fuzzy
+msgid "Internal Name"
+msgstr "Intern feil.\n"
+
+#: ../src/search.cc:731
+msgid "No products found."
+msgstr "Ingen produkter funnet."
+
+#: ../src/search.cc:754
+#, c-format
+msgid "No providers of '%s' found."
+msgstr "Ingen leverandører av '%s' funnet."
+
+#. translators: meaning 'dependency problem' found during solving
+#: ../src/solve-commit.cc:45
+msgid "Problem: "
+msgstr "Problem: "
+
+#. TranslatorExplanation %d is the solution number
+#: ../src/solve-commit.cc:58
+#, c-format
+msgid " Solution %d: "
+msgstr " Løsning %d: "
+
+#: ../src/solve-commit.cc:77
+msgid "Choose the above solution using '1' or skip, retry or cancel"
+msgid_plural "Choose from above solutions by number or skip, retry or cancel"
+msgstr[0] "Velg løsningen ovenfor med '1' eller med hopp over, gjenta eller avbryt"
+msgstr[1] "Velg løsningen ovenfor med nummeret eller med hopp over, gjenta eller avbryt"
+
+#. translators: translate 'c' to whatever you translated the 'c' in
+#. "c" and "s/r/c" strings
+#: ../src/solve-commit.cc:84
+msgid "Choose the above solution using '1' or cancel using 'c'"
+msgid_plural "Choose from above solutions by number or cancel"
+msgstr[0] "Velg løsningen over med '1' eller avbryt med 'c'"
+msgstr[1] "Velg løsningen over med nummeret eller avbryt"
+
+#. translators: answers for dependency problem solution input prompt:
+#. "Choose from above solutions by number or skip, retry or cancel"
+#. Translate the letters to whatever is suitable for your language.
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to skip/retry/cancel in that order.
+#. The answers should be lower case letters.
+#: ../src/solve-commit.cc:103
+msgid "s/r/c"
+msgstr "s/r/c"
+
+#. translators: answers for dependency problem solution input prompt:
+#. "Choose from above solutions by number or cancel"
+#. Translate the letter 'c' to whatever is suitable for your language
+#. and to the same as you translated it in the "s/r/c" string
+#. See the "s/r/c" comment for other details.
+#. One letter string  for translation can be tricky, so in case of problems,
+#. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
+#: ../src/solve-commit.cc:115
+msgid "c"
+msgstr "a"
+
+#. continue with next problem
+#: ../src/solve-commit.cc:135
+#, c-format
+msgid "Applying solution %s"
+msgstr "Bruker løsning %s"
+
+#: ../src/solve-commit.cc:159
+#, c-format
+msgid "%d Problem:"
+msgid_plural "%d Problems:"
+msgstr[0] "%d-problem:"
+msgstr[1] "%d-problemer:"
+
+#. should not happen! If solve() failed at least one problem must be set!
+#: ../src/solve-commit.cc:163
+msgid "Specified capability not found"
+msgstr "Den spesifiserte evnen ble ikke funnet"
+
+#: ../src/solve-commit.cc:174
+#, c-format
+msgid "Problem: %s"
+msgstr "Problem: %s"
+
+#: ../src/solve-commit.cc:189
+msgid "Resolving dependencies..."
+msgstr "Kontrollerer avhengigheter..."
+
+#. translators: meaning --force-resolution and --no-force-resolution
+#: ../src/solve-commit.cc:227
+#, c-format
+msgid "%s conflicts with %s, will use the less aggressive %s"
+msgstr "%s er i konflikt med %s, den mindre aggressive %s vil bli brukt"
+
+#: ../src/solve-commit.cc:258
+msgid "Force resolution:"
+msgstr "Tving løsning:"
+
+#: ../src/solve-commit.cc:319
+msgid "Verifying dependencies..."
+msgstr "Kontrollerer avhengigheter..."
+
+#. Here: compute the full upgrade
+#: ../src/solve-commit.cc:364
+msgid "Computing upgrade..."
+msgstr "Beregner oppgradering..."
+
+#: ../src/solve-commit.cc:380
+msgid "Generating solver test case..."
+msgstr "Oppretter løsningstestoppgave..."
+
+#: ../src/solve-commit.cc:383
+#, c-format
+msgid "Solver test case generated successfully at %s."
+msgstr "Testløsning ble generert på %s."
+
+#: ../src/solve-commit.cc:387
+msgid "Error creating the solver test case."
+msgstr "Feil ved oppretting av testløsning."
+
+#: ../src/solve-commit.cc:415 ../src/utils/misc.cc:396
+msgid "Checking for running processes using deleted libraries..."
+msgstr ""
+
+#: ../src/solve-commit.cc:424 ../src/utils/misc.cc:405
+#, fuzzy
+msgid "Check failed:"
+msgstr "mislyktes"
+
+#: ../src/solve-commit.cc:430
+#, c-format
+msgid "There are some running programs that use files deleted by recent upgrade. You may wish to restart some of them. Run '%s' to list these programs."
+msgstr ""
+
+#: ../src/solve-commit.cc:441
+msgid "Update notifications were received from the following packages:"
+msgstr ""
+
+#: ../src/solve-commit.cc:453
+#, fuzzy, c-format
+msgid "Message from package %s:"
+msgstr "Bruker pakken %s på nytt"
+
+#: ../src/solve-commit.cc:461
+#, fuzzy
+msgid "y/n"
+msgstr "y/n/p"
+
+#: ../src/solve-commit.cc:462
+#, fuzzy
+msgid "View the notifications now?"
+msgstr "Når skal ikonet skal vises i varslingsområdet"
+
+#: ../src/solve-commit.cc:506
+msgid "Computing distribution upgrade..."
+msgstr "Beregner distribusjonsoppgradering..."
+
+#: ../src/solve-commit.cc:511
+msgid "Resolving package dependencies..."
+msgstr "Kontrollerer pakkeavhengigheter..."
+
+#: ../src/solve-commit.cc:577
+msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
+msgstr "Noen installerte pakker har avhengigheter som ikke er oppfylt. For å løse disse avhengighetene, må følgende handlinger utføres:"
+
+#: ../src/solve-commit.cc:585
+msgid "Root privileges are required to fix broken package dependencies."
+msgstr "Du må være rot for å løse konflikter i forbindelse med pakkeavhengigheter."
+
+#. translators: These are the "Continue?" prompt options corresponding to
+#. "Yes / No / show Problems / Versions / Arch / Repository /
+#. vendor / Details / show in pager". This prompt will appear
+#. after install/update and similar command installation summary.
+#. Translate to whathever is suitable for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to the above options, in that exact order.
+#. The answers should be lower case letters, but in general, any UTF-8
+#. string will do.
+#. ! \todo add c for changelog and x for explain (show the dep tree)
+#: ../src/solve-commit.cc:612
+msgid "y/n/p/v/a/r/m/d/g"
+msgstr ""
+
+#. translators: help text for 'y' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:617
+#, fuzzy
+msgid "Yes, accept the summary and proceed with installation/removal of packages."
+msgstr "Godkjenn sammendraget, og fortsett med installasjon/fjerning av pakker."
+
+#. translators: help text for 'n' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:619
+#, fuzzy
+msgid "No, cancel the operation."
+msgstr "Avbryt handlingen."
+
+#. translators: help text for 'p' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:621
+msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
+msgstr "Start løsningsprosessen på nytt i ikke-aggressiv modus for å vise avhengighetsproblemer."
+
+#. translators: help text for 'v' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:623
+#, fuzzy
+msgid "Toggle display of package versions."
+msgstr "Veksle visning av albumcover"
+
+#. translators: help text for 'a' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:625
+#, fuzzy
+msgid "Toggle display of package architectures."
+msgstr "Veksle visning av albumcover"
+
+#. translators: help text for 'r' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:627
+#, fuzzy
+msgid "Toggle display of repositories from which the packages will be installed."
+msgstr "Følgende pakker vil bli installert:"
+
+#. translators: help text for 'm' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:629
+#, fuzzy
+msgid "Toggle display of package vendor names."
+msgstr "Veksle visning av albumcover"
+
+#. translators: help text for 'd' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:631
+msgid "Toggle between showing all details and as few details as possible."
+msgstr ""
+
+#. translators: help text for 'g' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:633
+msgid "View the summary in pager."
+msgstr ""
+
+#: ../src/solve-commit.cc:726
+msgid "committing"
+msgstr "utfører"
+
+#: ../src/solve-commit.cc:728
+msgid "(dry run)"
+msgstr "(testkjøring)"
+
+#: ../src/solve-commit.cc:750 ../src/solve-commit.cc:790
+msgid "Problem retrieving the package file from the repository:"
+msgstr "Problem ved henting av pakkefil fra arkivet:"
+
+#. translators: the first %s is 'zypper refresh' and the second
+#. is repo allias
+#: ../src/solve-commit.cc:786
+#, c-format
+msgid "Repository '%s' is out of date. Running '%s' might help."
+msgstr "Arkivet '%s' er foreldet. Det kan hjelpe å kjøre '%s'."
+
+#: ../src/solve-commit.cc:799
+msgid ""
+"The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
+"\n"
+"- just retry previous command\n"
+"- refresh the repositories using 'zypper refresh'\n"
+"- use another installation medium (if e.g. damaged)\n"
+"- use another repository"
+msgstr ""
+"Feil ved kontroll av pakkeintegritet. Dette kan skyldes et problem med installasjonskilden eller mediet. Prøv ett av følgende:\n"
+" \n"
+" - prøv å gjenta forrige kommando\n"
+" - oppdater installasjonskilder ved hjelp av 'zypper refresh'\n"
+" - bruk et annet installasjonsmedium (f.eks. hvis skadet)\n"
+" - bruk en annen installasjonskilde"
+
+#: ../src/solve-commit.cc:813
+msgid "Problem occured during or after installation or removal of packages:"
+msgstr "Det oppstod et problem under eller etter installasjon eller fjerning av pakker:"
+
+#: ../src/solve-commit.cc:829
+msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
+msgstr "Én av de installerte pakkeoppdateringene krever at datamaskinen startes på nytt. Gjør dette så snart som mulig."
+
+#: ../src/solve-commit.cc:838
+msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
+msgstr "Én av de installerte pakkeoppdateringene påvirker pakkebehandleren. Kjør denne kommandoen én gang til for installere andre nødvendige oppdateringer."
+
+#: ../src/solve-commit.cc:855
+msgid "Dependencies of all installed packages are satisfied."
+msgstr "Avhengigheter er oppfylt for alle installerte pakker."
+
+#: ../src/solve-commit.cc:857
+msgid "Nothing to do."
+msgstr "Ingenting å gjøre."
+
+#: ../src/Summary.cc:408
+msgid "The following NEW package is going to be installed:"
+msgid_plural "The following NEW packages are going to be installed:"
+msgstr[0] "Denne NYE pakken vil bli installert:"
+msgstr[1] "Følgende NYE pakker vil bli installert:"
+
+#: ../src/Summary.cc:413
+msgid "The following NEW patch is going to be installed:"
+msgid_plural "The following NEW patches are going to be installed:"
+msgstr[0] "Denne NYE pakkeoppdateringen vil bli installert:"
+msgstr[1] "Følgende NYE pakkeoppdateringer vil bli installert:"
+
+#: ../src/Summary.cc:418
+msgid "The following NEW pattern is going to be installed:"
+msgid_plural "The following NEW patterns are going to be installed:"
+msgstr[0] "Følgende NYE mønster vil bli installert:"
+msgstr[1] "Følgende NYE mønstre vil bli installert:"
+
+#: ../src/Summary.cc:423
+msgid "The following NEW product is going to be installed:"
+msgid_plural "The following NEW products are going to be installed:"
+msgstr[0] "Følgende NYE produkt vil bli installert:"
+msgstr[1] "Følgende NYE produkter vil bli installert:"
+
+#: ../src/Summary.cc:428
+msgid "The following source package is going to be installed:"
+msgid_plural "The following source packages are going to be installed:"
+msgstr[0] "Følgende kildepakke vil bli installert:"
+msgstr[1] "Følgende kildepakker vil bli installert:"
+
+#: ../src/Summary.cc:448
+msgid "The following package is going to be REMOVED:"
+msgid_plural "The following packages are going to be REMOVED:"
+msgstr[0] "Følgende pakke bli FJERNET:"
+msgstr[1] "Følgende pakker vil bli FJERNET:"
+
+#: ../src/Summary.cc:453
+msgid "The following patch is going to be REMOVED:"
+msgid_plural "The following patches are going to be REMOVED:"
+msgstr[0] "Følgende pakkeoppdatering vil bli FJERNET:"
+msgstr[1] "Følgende pakkeoppdatering vil bli FJERNET:"
+
+#: ../src/Summary.cc:458
+msgid "The following pattern is going to be REMOVED:"
+msgid_plural "The following patterns are going to be REMOVED:"
+msgstr[0] "Følgende mønster vil bli FJERNET:"
+msgstr[1] "Følgende mønstre vil bli FJERNET:"
+
+#: ../src/Summary.cc:463
+msgid "The following product is going to be REMOVED:"
+msgid_plural "The following products are going to be REMOVED:"
+msgstr[0] "Følgende produkt vil bli FJERNET:"
+msgstr[1] "Følgende produkter vil bli FJERNET:"
+
+#: ../src/Summary.cc:482
+msgid "The following package is going to be upgraded:"
+msgid_plural "The following packages are going to be upgraded:"
+msgstr[0] "Følgende pakke vil bli oppgradert:"
+msgstr[1] "Følgende pakker vil bli oppgradert:"
+
+#: ../src/Summary.cc:487
+msgid "The following patch is going to be upgraded:"
+msgid_plural "The following patches are going to be upgraded:"
+msgstr[0] "Følgende pakkeoppdatering vil bli oppgradert:"
+msgstr[1] "Følgende pakkeoppdateringer vil bli oppgradert:"
+
+#: ../src/Summary.cc:492
+msgid "The following pattern is going to be upgraded:"
+msgid_plural "The following patterns are going to be upgraded:"
+msgstr[0] "Følgende mønster vil bli oppdatert:"
+msgstr[1] "Følgende mønstre vil bli oppdatert:"
+
+#: ../src/Summary.cc:497
+msgid "The following product is going to be upgraded:"
+msgid_plural "The following products are going to be upgraded:"
+msgstr[0] "Følgende produkt vil bli oppdatert:"
+msgstr[1] "Følgende produkter vil bli oppdatert:"
+
+#: ../src/Summary.cc:515
+msgid "The following package is going to be downgraded:"
+msgid_plural "The following packages are going to be downgraded:"
+msgstr[0] "Følgende pakke vil bli nedgradert:"
+msgstr[1] "Følgende pakker vil bli nedgradert:"
+
+#: ../src/Summary.cc:520
+msgid "The following patch is going to be downgraded:"
+msgid_plural "The following patches are going to be downgraded:"
+msgstr[0] "Følgende pakkeoppdatering vil bli nedgradert:"
+msgstr[1] "Følgende pakkeoppdateringer vil bli nedgradert:"
+
+#: ../src/Summary.cc:525
+msgid "The following pattern is going to be downgraded:"
+msgid_plural "The following patterns are going to be downgraded:"
+msgstr[0] "Følgende mønster vil bli nedgradert:"
+msgstr[1] "Følgende mønstre vil bli nedgradert:"
+
+#: ../src/Summary.cc:530
+msgid "The following product is going to be downgraded:"
+msgid_plural "The following products are going to be downgraded:"
+msgstr[0] "Følgende produkt vil bli nedgradert:"
+msgstr[1] "Følgende produkter vil bli nedgradert:"
+
+#: ../src/Summary.cc:548
+msgid "The following package is going to be reinstalled:"
+msgid_plural "The following packages are going to be reinstalled:"
+msgstr[0] "Følgende pakke vil bli installert på nytt:"
+msgstr[1] "Følgende pakker vil bli installert på nytt:"
+
+#: ../src/Summary.cc:553
+msgid "The following patch is going to be reinstalled:"
+msgid_plural "The following patches are going to be reinstalled:"
+msgstr[0] "Følgende pakkeoppdatering vil bli installert på nytt:"
+msgstr[1] "Følgende pakkeoppdateringer vil bli installert på nytt:"
+
+#: ../src/Summary.cc:558
+msgid "The following pattern is going to be reinstalled:"
+msgid_plural "The following patterns are going to be reinstalled:"
+msgstr[0] "Følgende mønster vil bli installert på nytt:"
+msgstr[1] "Følgende mønstre vil bli installert på nytt:"
+
+#: ../src/Summary.cc:563
+msgid "The following product is going to be reinstalled:"
+msgid_plural "The following products are going to be reinstalled:"
+msgstr[0] "Følgende produkt vil bli installert på nytt:"
+msgstr[1] "Følgende produkter vil bli installert på nytt:"
+
+#: ../src/Summary.cc:688
+#, fuzzy
+msgid "The following recommended package was automatically selected:"
+msgid_plural "The following recommended packages were automatically selected:"
+msgstr[0] "Følgende kildepakke vil bli installert:"
+msgstr[1] "Følgende kildepakker vil bli installert:"
+
+#: ../src/Summary.cc:693
+msgid "The following recommended patch was automatically selected:"
+msgid_plural "The following recommended patches were automatically selected:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/Summary.cc:698
+#, fuzzy
+msgid "The following recommended pattern was automatically selected:"
+msgid_plural "The following recommended patterns were automatically selected:"
+msgstr[0] "Følgende NYE mønster vil bli installert:"
+msgstr[1] "Følgende NYE mønstre vil bli installert:"
+
+#: ../src/Summary.cc:703
+#, fuzzy
+msgid "The following recommended product was automatically selected:"
+msgid_plural "The following recommended products were automatically selected:"
+msgstr[0] "Følgende NYE produkt vil bli installert:"
+msgstr[1] "Følgende NYE produkter vil bli installert:"
+
+#: ../src/Summary.cc:716
+#, fuzzy
+msgid "The following package is recommended, but will not be installed:"
+msgid_plural "The following packages are recommended, but will not be installed:"
+msgstr[0] "Følgende pakker vil bli installert:"
+msgstr[1] "Følgende pakker vil bli installert:"
+
+#: ../src/Summary.cc:721
+#, fuzzy
+msgid "The following patch is recommended, but will not be installed:"
+msgid_plural "The following patches are recommended, but will not be installed:"
+msgstr[0] "Følgende pakkeoppdatering vil bli installert på nytt:"
+msgstr[1] "Følgende pakkeoppdateringer vil bli installert på nytt:"
+
+#: ../src/Summary.cc:726
+#, fuzzy
+msgid "The following pattern is recommended, but will not be installed:"
+msgid_plural "The following patterns are recommended, but will not be installed:"
+msgstr[0] "Følgende mønster vil bli installert på nytt:"
+msgstr[1] "Følgende mønstre vil bli installert på nytt:"
+
+#: ../src/Summary.cc:731
+#, fuzzy
+msgid "The following product is recommended, but will not be installed:"
+msgid_plural "The following products are recommended, but will not be installed:"
+msgstr[0] "Følgende produkt vil bli installert på nytt:"
+msgstr[1] "Følgende produkter vil bli installert på nytt:"
+
+#: ../src/Summary.cc:769
+#, fuzzy
+msgid "The following package is suggested, but will not be installed:"
+msgid_plural "The following packages are suggested, but will not be installed:"
+msgstr[0] "Følgende pakker vil bli installert:"
+msgstr[1] "Følgende pakker vil bli installert:"
+
+#: ../src/Summary.cc:774
+#, fuzzy
+msgid "The following patch is suggested, but will not be installed:"
+msgid_plural "The following patches are suggested, but will not be installed:"
+msgstr[0] "Følgende pakkeoppdatering vil bli installert på nytt:"
+msgstr[1] "Følgende pakkeoppdateringer vil bli installert på nytt:"
+
+#: ../src/Summary.cc:779
+#, fuzzy
+msgid "The following pattern is suggested, but will not be installed:"
+msgid_plural "The following patterns are suggested, but will not be installed:"
+msgstr[0] "Følgende mønster vil bli installert på nytt:"
+msgstr[1] "Følgende mønstre vil bli installert på nytt:"
+
+#: ../src/Summary.cc:784
+#, fuzzy
+msgid "The following product is suggested, but will not be installed:"
+msgid_plural "The following products are suggested, but will not be installed:"
+msgstr[0] "Følgende produkt vil bli installert på nytt:"
+msgstr[1] "Følgende produkter vil bli installert på nytt:"
+
+#: ../src/Summary.cc:804
+msgid "The following package is going to change architecture:"
+msgid_plural "The following packages are going to change architecture:"
+msgstr[0] "Følgende pakke vil få endret arkitektur:"
+msgstr[1] "Følgende pakker vil få endret arkitektur:"
+
+#: ../src/Summary.cc:809
+msgid "The following patch is going to change architecture:"
+msgid_plural "The following patches are going to change architecture:"
+msgstr[0] "Følgende pakkeoppdatering vil få endret arkitektur:"
+msgstr[1] "Følgende pakkeoppdateringer vil få endret arkitektur:"
+
+#: ../src/Summary.cc:814
+msgid "The following pattern is going to change architecture:"
+msgid_plural "The following patterns are going to change architecture:"
+msgstr[0] "Følgende mønster vil få endret arkitektur:"
+msgstr[1] "Følgende mønstre vil få endret arkitektur:"
+
+#: ../src/Summary.cc:819
+msgid "The following product is going to change architecture:"
+msgid_plural "The following products are going to change architecture:"
+msgstr[0] "Følgende produkt vil få endret arkitektur:"
+msgstr[1] "Følgende produkter vil få endret arkitektur:"
+
+#: ../src/Summary.cc:840
+msgid "The following package is going to change vendor:"
+msgid_plural "The following packages are going to change vendor:"
+msgstr[0] "Følgende pakke vil endre produsent:"
+msgstr[1] "Følgende pakker vil endre produsent:"
+
+#: ../src/Summary.cc:845
+msgid "The following patch is going to change vendor:"
+msgid_plural "The following patches are going to change vendor:"
+msgstr[0] "Følgende pakkeoppdatering vil endre produsent:"
+msgstr[1] "Følgende pakkeoppdateringer vil endre produsent:"
+
+#: ../src/Summary.cc:850
+msgid "The following pattern is going to change vendor:"
+msgid_plural "The following patterns are going to change vendor:"
+msgstr[0] "Følgende mønster vil endre produsent:"
+msgstr[1] "Følgende mønstre vil endre produsent:"
+
+#: ../src/Summary.cc:855
+msgid "The following product is going to change vendor:"
+msgid_plural "The following products are going to change vendor:"
+msgstr[0] "Følgende produkt vil endre produsent:"
+msgstr[1] "Følgende produkter vil endre produsent:"
+
+#: ../src/Summary.cc:875
+msgid "The following package is not supported by its vendor:"
+msgid_plural "The following packages are not supported by their vendor:"
+msgstr[0] "Følgende pakke støttes ikke av produsenten:"
+msgstr[1] "Følgende pakker støttes ikke av produsenten:"
+
+#: ../src/Summary.cc:894
+#, fuzzy
+msgid "The following package needs additional customer contract to get support:"
+msgid_plural "The following packages need additional customer contract to get support:"
+msgstr[0] "Følgende pakke vil få endret arkitektur:"
+msgstr[1] "Følgende pakker vil få endret arkitektur:"
+
+#: ../src/Summary.cc:911
+#, fuzzy
+msgid "The following package update will NOT be installed:"
+msgid_plural "The following package updates will NOT be installed:"
+msgstr[0] "Følgende pakker vil bli installert:"
+msgstr[1] "Følgende pakker vil bli installert:"
+
+#: ../src/Summary.cc:916
+#, fuzzy
+msgid "The following product update will NOT be installed:"
+msgid_plural "The following product updates will NOT be installed:"
+msgstr[0] "Følgende pakker vil bli installert:"
+msgstr[1] "Følgende pakker vil bli installert:"
+
+#: ../src/Summary.cc:935
+#, c-format
+msgid "Overall download size: %s."
+msgstr "Total nedlastingsstørrelse: %s."
+
+#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+#: ../src/Summary.cc:940
+#, c-format
+msgid "After the operation, additional %s will be used."
+msgstr "Etter handlingen vil ytterligere %s bli tatt i bruk."
+
+#: ../src/Summary.cc:943
+msgid "No additional space will be used or freed after the operation."
+msgstr "Ingen ledig plass vil være tatt i bruk eller frigjort etter handlingen."
+
+#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+#: ../src/Summary.cc:950
+#, c-format
+msgid "After the operation, %s will be freed."
+msgstr "Handlingen vil frigjøre %s."
+
+#. translators: this text will be preceded by a number e.g. "5 packages to ..."
+#: ../src/Summary.cc:973
+#, fuzzy
+msgid "package to upgrade"
+msgid_plural "packages to upgrade"
+msgstr[0] "Pakkeoppgraderinger"
+msgstr[1] "Pakkeoppgraderinger"
+
+#. translators: this text will be preceded by a number e.g. "5 to ..."
+#: ../src/Summary.cc:985
+msgid "to downgrade"
+msgid_plural "to downgrade"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: this text will be preceded by a number e.g. "5 packages to ..."
+#: ../src/Summary.cc:988
+#, fuzzy
+msgid "package to downgrade"
+msgid_plural "packages to downgrade"
+msgstr[0] "Ingen pakker er skjult."
+msgstr[1] "Ingen pakker er skjult."
+
+#. translators: this text will be preceded by a number e.g. "5 new"
+#: ../src/Summary.cc:1000
+#, fuzzy
+msgid "new"
+msgid_plural "new"
+msgstr[0] "Ny"
+msgstr[1] "Ny"
+
+#. translators: this text will be preceded by a number e.g. "5 new to install"
+#: ../src/Summary.cc:1003
+#, fuzzy
+msgid "new package to install"
+msgid_plural "new packages to install"
+msgstr[0] "Kjernepakken %s er ikke installert"
+msgstr[1] "Kjernepakken %s er ikke installert"
+
+#. translators: this text will be preceded by a number e.g. "5 to ..."
+#: ../src/Summary.cc:1015
+#, fuzzy
+msgid "to reinstall"
+msgid_plural "to reinstall"
+msgstr[0] "installer"
+msgstr[1] "installer"
+
+#. translators: this text will be preceded by a number e.g. "5 packages to ..."
+#: ../src/Summary.cc:1018
+#, fuzzy
+msgid "package to reinstall"
+msgid_plural "packages to reinstall"
+msgstr[0] "Vis pakker for installasjon."
+msgstr[1] "Vis pakker for installasjon."
+
+#. translators: this text will be preceded by a number e.g. "5 to ..."
+#: ../src/Summary.cc:1030
+#, fuzzy
+msgid "to remove"
+msgid_plural "to remove"
+msgstr[0] "%s avinstallasjon ok"
+msgstr[1] "%s avinstallasjon ok"
+
+#. translators: this text will be preceded by a number e.g. "5 packages to ..."
+#: ../src/Summary.cc:1033
+#, fuzzy
+msgid "package to remove"
+msgid_plural "packages to remove"
+msgstr[0] "Vis pakker for fjerning."
+msgstr[1] "Vis pakker for fjerning."
+
+#. translators: this text will be preceded by a number e.g. "5 to ..."
+#: ../src/Summary.cc:1045
+msgid "to change vendor"
+msgid_plural " to change vendor"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: this text will be preceded by a number e.g. "5 packages ..."
+#: ../src/Summary.cc:1048
+#, fuzzy
+msgid "package will change vendor"
+msgid_plural "packages will change vendor"
+msgstr[0] "Følgende pakke vil endre produsent:"
+msgstr[1] "Følgende pakker vil endre produsent:"
+
+#. translators: this text will be preceded by a number e.g. "5 to ..."
+#: ../src/Summary.cc:1060
+#, fuzzy
+msgid "to change arch"
+msgid_plural "to change arch"
+msgstr[0] "Forkaste endringer"
+msgstr[1] "Forkaste endringer"
+
+#. translators: this text will be preceded by a number e.g. "5 packages ..."
+#: ../src/Summary.cc:1063
+msgid "package will change arch"
+msgid_plural "packages will change arch"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d is the number of needed patches
+#: ../src/update.cc:73
+#, c-format
+msgid "%d patch needed"
+msgid_plural "%d patches needed"
+msgstr[0] "%d nødvendig pakkeoppdatering"
+msgstr[1] "%d nødvendige pakkeoppdateringer"
+
+#. translators: %d is the number of security patches
+#: ../src/update.cc:77
+#, c-format
+msgid "%d security patch"
+msgid_plural "%d security patches"
+msgstr[0] "%d nødvendig sikkerhetsoppdatering"
+msgstr[1] "%d nødvendige sikkerhetsoppdateringer"
+
+#: ../src/update.cc:215
+#, fuzzy
+msgid "needed"
+msgstr "Nødvendig"
+
+#: ../src/update.cc:215
+#, fuzzy
+msgid "not needed"
+msgstr "Ikke nødvendig"
+
+#: ../src/update.cc:233
+#, fuzzy
+msgid "The following software management updates will be installed first:"
+msgstr "Følgende pakker vil bli installert:"
+
+#: ../src/update.cc:242 ../src/update.cc:517
+msgid "No updates found."
+msgstr "Ingen pakkeoppdateringer ble funnet."
+
+#: ../src/update.cc:248
+#, fuzzy
+msgid "The following updates are also available:"
+msgstr "Følgende oppdateringer kreves:\n"
+
+#: ../src/update.cc:367
+msgid "Package updates"
+msgstr "Pakkeoppgraderinger"
+
+#: ../src/update.cc:369
+msgid "Patches"
+msgstr "Pakkeoppdateringer"
+
+#: ../src/update.cc:371
+msgid "Pattern updates"
+msgstr "Oppdatering av mønstre"
+
+#: ../src/update.cc:373
+msgid "Product updates"
+msgstr "Produktoppdateringer"
+
+#: ../src/update.cc:459
+#, fuzzy
+msgid "Current Version"
+msgstr "Gjeldende tilkobling"
+
+#: ../src/update.cc:460
+#, fuzzy
+msgid "Available Version"
+msgstr "Tilgjengelig minne"
+
+#: ../src/update.cc:581
+#, c-format
+msgid "Cannot parse '%s < %s'"
+msgstr "Kan ikke analysere '%s < %s'"
+
+#. translators: %s is the name of a patch
+#: ../src/update.cc:611
+#, c-format
+msgid "'%s' is interactive, skipping."
+msgstr "'%s' er interaktiv, hopper over."
+
+#: ../src/update.cc:671
+#, c-format
+msgid "No patches matching '%s' found."
+msgstr "Ingen pakkeoppdateringer som samsvarer med '%s' funnet."
+
+#: ../src/update.cc:674
+#, c-format
+msgid "Patch '%s' not found."
+msgstr "Pakkeoppdateringen '%s' ikke funnet."
+
+#: ../src/update.cc:716
+#, c-format
+msgid "No update candidate for '%s'."
+msgstr "Ingen oppdateringskandidat for '%s'."
+
+#: ../src/update.cc:727
+#, c-format
+msgid "There is an update candidate for '%s', but it is locked. Use '%s' to unlock it."
+msgstr ""
+
+#: ../src/update.cc:741
+#, c-format
+msgid "There is an update candidate for '%s', but it is from different vendor. Use '%s' to install this candidate."
+msgstr ""
+
+#: ../src/update.cc:755
+#, c-format
+msgid "There is an update candidate for '%s', but it comes from repository with lower priority. Use '%s' to install this candidate."
+msgstr ""
+
+#: ../src/update.cc:764
+#, fuzzy, c-format
+msgid "Selecting '%s' for update."
+msgstr "Kontrollerer avhengigheter..."
+
+#: ../src/update.cc:824
+#, c-format
+msgid "No packages matching '%s' are installed."
+msgstr "Ingen pakker som samsvarer med '%s' er installert."
+
+#: ../src/update.cc:827
+#, c-format
+msgid "Package '%s' is not installed."
+msgstr "Pakken '%s' er ikke installert."
+
+#: ../src/update.cc:873
+msgid "Issue"
+msgstr ""
+
+#: ../src/update.cc:873
+#, fuzzy
+msgid "No."
+msgstr "Nei"
+
+#: ../src/update.cc:873
+#, fuzzy
+msgid "Patch"
+msgstr "Pakkeoppdateringer"
+
+#: ../src/update.cc:902
+#, c-format
+msgid "Ignoring %s without argument because similar option with an argument has been specified."
+msgstr ""
+
+#: ../src/update.cc:1008
+#, fuzzy
+msgid "No matching issues found."
+msgstr "Ingen oppføringer funnet"
+
+#: ../src/update.cc:1017
+#, fuzzy
+msgid "The following matches in issue numbers have been found:"
+msgstr "Følgende pakkeoppdatering vil bli nedgradert:"
+
+#: ../src/update.cc:1028
+#, fuzzy
+msgid "Matches in patch descriptions of the following patches have been found:"
+msgstr "Søk i beskrivelser av pakkeoppdateringer, men ikke i pakkenavn"
+
+#: ../src/update.cc:1101
+#, c-format
+msgid "Fix for bugzilla issue number %s was not found or is not needed."
+msgstr ""
+
+#: ../src/update.cc:1105
+#, c-format
+msgid "Fix for CVE issue number %s was not found or is not needed."
+msgstr ""
+
+#: ../src/utils/Augeas.cc:26
+#, fuzzy
+msgid "Cannot initialize configuration file parser."
+msgstr "Kan ikke kopiere konfigurasjonsmalen."
+
+#: ../src/utils/Augeas.cc:44 ../src/utils/Augeas.cc:58
+msgid "Augeas error: setting config file to load failed."
+msgstr ""
+
+#: ../src/utils/Augeas.cc:64
+#, fuzzy
+msgid "Could not parse the config files."
+msgstr "Kan ikke lagre ikonfilen."
+
+# %s is either BOOTP or DHCP
+#: ../src/utils/Augeas.cc:98
+#, fuzzy
+msgid "No configuration file exists or could be parsed."
+msgstr "Du må angi en idmapd-konfigurasjonsfil."
+
+#: ../src/utils/Augeas.cc:101
+#, fuzzy
+msgid "Error parsing zypper.conf:"
+msgstr "Feil under analyse av service.xml: "
+
+#. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
+#. getopt_long reports 'a', 'b', and 'e' as known options.
+#. The rest ends here and it is either the last one from previous argument
+#. (short_pos + 1 points to it), or the short_pos one from the current
+#. argument. (bnc #299375)
+#. wrong option in the last argument
+#: ../src/utils/getopt.cc:69
+msgid "Unknown option "
+msgstr "Ukjent alternativ"
+
+#: ../src/utils/getopt.cc:89
+msgid "Missing argument for "
+msgstr "Manglende argument for"
+
+#. translators: speaking of two mutually contradicting command line options
+#: ../src/utils/getopt.cc:121
+#, c-format
+msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
+msgstr "Forsøkt på benytte %s sammen med %s er umulig. Egenskapen forblir uendret."
+
+#: ../src/utils/messages.cc:22
+msgid "Please file a bug report about this."
+msgstr "Send om mulig inn en feilrapport om dette."
+
+#. TranslatorExplanation remember not to translate the URL
+#. unless you translate the actual page :)
+#: ../src/utils/messages.cc:25
+#, fuzzy
+msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
+msgstr "Se http://en.opensuse.org/Zypper#Troubleshooting for instruksjoner."
+
+#: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
+#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3930
+msgid "Usage"
+msgstr "Bruk"
+
+#: ../src/utils/messages.cc:41
+msgid "Too many arguments."
+msgstr "For mange argumenter."
+
+#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2893 ../src/Zypper.cc:3927
+msgid "Required argument missing."
+msgstr "Mangler obligatorisk argument."
+
+#: ../src/utils/messages.cc:60
+#, c-format
+msgid "The '--%s' option has currently no effect."
+msgstr "Valget '--%s' har foreløpig ingen effekt."
+
+#: ../src/utils/messages.cc:78
+#, c-format
+msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
+msgstr "Du har valgt å ignorere et problem med nedlasting eller installasjon av en pakke. Dette kan føre til avhengighetskonflikter for andre pakker. Du bør kjøre '%s' etter at handlingen er fullført."
+
+#: ../src/utils/misc.cc:153
+msgid "package"
+msgid_plural "packages"
+msgstr[0] "pakke"
+msgstr[1] "pakker"
+
+#: ../src/utils/misc.cc:155
+msgid "pattern"
+msgid_plural "patterns"
+msgstr[0] "mønster"
+msgstr[1] "mønstre"
+
+#: ../src/utils/misc.cc:157
+msgid "product"
+msgid_plural "product"
+msgstr[0] "produkt"
+msgstr[1] "produkter"
+
+#: ../src/utils/misc.cc:159
+msgid "patch"
+msgid_plural "patches"
+msgstr[0] "pakkeoppdatering"
+msgstr[1] "pakkeoppdatering"
+
+#: ../src/utils/misc.cc:161
+msgid "srcpackage"
+msgid_plural "srcpackages"
+msgstr[0] "kildepakke"
+msgstr[1] "kildepakker"
+
+#. default
+#: ../src/utils/misc.cc:163
+msgid "resolvable"
+msgid_plural "resolvables"
+msgstr[0] "nødvendig pakke"
+msgstr[1] "nødvendige pakker"
+
+#: ../src/utils/misc.cc:172
+msgid "Unknown"
+msgstr "Ukjent"
+
+#: ../src/utils/misc.cc:179
+msgid "Needed"
+msgstr "Nødvendig"
+
+#: ../src/utils/misc.cc:184
+msgid "Not Applicable"
+msgstr "Kan ikke brukes"
+
+#: ../src/utils/misc.cc:242
+msgid "Specified local path does not exist or is not accessible."
+msgstr "Den angitte lokale stien finnes ikke, eller er ikke tilgjengelig."
+
+#: ../src/utils/misc.cc:254
+msgid "Given URI is invalid"
+msgstr "Angitt URI er ugyldig."
+
+#: ../src/utils/misc.cc:305
+msgid "Problem copying the specified RPM file to the cache directory."
+msgstr "Problem ved kopiering av angitt RPM-fil til mellomlagerkatalogen."
+
+#: ../src/utils/misc.cc:306
+msgid "Perhaps you are running out of disk space."
+msgstr "Kanskje det begynner å bli lite plass på disken."
+
+#: ../src/utils/misc.cc:314
+msgid "Problem retrieving the specified RPM file"
+msgstr "Kunne ikke hente angitt RPM-fil"
+
+#: ../src/utils/misc.cc:315
+msgid "Please check whether the file is accessible."
+msgstr "Kontroller om filen er tilgjengelig."
+
+#. process ID
+#: ../src/utils/misc.cc:412
+#, fuzzy
+msgid "PID"
+msgstr "PCI"
+
+#. parent process ID
+#: ../src/utils/misc.cc:414
+msgid "PPID"
+msgstr ""
+
+#. process user ID
+#: ../src/utils/misc.cc:416
+#, fuzzy
+msgid "UID"
+msgstr "URI"
+
+#. process login name
+#: ../src/utils/misc.cc:418
+msgid "Login"
+msgstr "Logg inn"
+
+#. process command name
+#: ../src/utils/misc.cc:420
+msgid "Command"
+msgstr "Kommando"
+
+#. "list of deleted files or libraries accessed"
+#: ../src/utils/misc.cc:424
+#, fuzzy
+msgid "Files"
+msgstr "_File"
+
+#: ../src/utils/misc.cc:444
+msgid "No processes using deleted files found."
+msgstr ""
+
+#: ../src/utils/misc.cc:448
+#, fuzzy
+msgid "The following running processes use deleted files:"
+msgstr "Følgende ressurser er endret"
+
+#: ../src/utils/misc.cc:451
+#, fuzzy
+msgid "You may wish to restart these processes."
+msgstr "Kunne ikke starte søk"
+
+#: ../src/utils/misc.cc:453
+#, c-format
+msgid "See '%s' for information about the meaning of values in the above table."
+msgstr ""
+
+#: ../src/utils/misc.cc:492
+#, fuzzy, c-format
+msgid "Unknown download mode '%s'."
+msgstr "Ukjent kommando '%s'"
+
+#: ../src/utils/misc.cc:493
+#, fuzzy, c-format
+msgid "Available download modes: %s"
+msgstr "Total nedlastingsstørrelse: %s."
+
+#: ../src/utils/misc.cc:507
+#, c-format
+msgid "Option '%s' overrides '%s'."
+msgstr ""
+
+#: ../src/utils/pager.cc:37
+#, c-format
+msgid "Press '%c' to exit the pager."
+msgstr "Trykk '%c' for å avslutte sidebytteren."
+
+#: ../src/utils/pager.cc:47
+msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
+msgstr "Bruk piltastene eller pgUp/pgDown for å rulle én linje eller én side."
+
+#: ../src/utils/pager.cc:49
+msgid "Use the Enter or Space key to scroll the text by lines or pages."
+msgstr "Bruk Enter- eller mellomromtasten for å rull én linje eller én side."
+
+#: ../src/utils/prompt.cc:147 ../src/utils/prompt.cc:275
+#: ../src/utils/prompt.cc:345
+msgid "yes"
+msgstr "ja"
+
+#: ../src/utils/prompt.cc:148 ../src/utils/prompt.cc:275
+#: ../src/utils/prompt.cc:345
+msgid "no"
+msgstr "nei"
+
+#: ../src/utils/prompt.cc:171 ../src/utils/prompt.cc:216
+#, c-format
+msgid "Retrying in %u seconds..."
+msgstr ""
+
+#. translators: "a/r/i" are the answers to the
+#. "Abort, retry, ignore?" prompt
+#. Translate the letters to whatever is suitable for your language.
+#. the answers must be separated by slash characters '/' and must
+#. correspond to abort/retry/ignore in that order.
+#. The answers should be lower case letters.
+#: ../src/utils/prompt.cc:177 ../src/utils/prompt.cc:265
+msgid "a/r/i"
+msgstr "a/g/i"
+
+#: ../src/utils/prompt.cc:228
+#, fuzzy, c-format
+msgid "Autoselecting '%s' after %u second."
+msgid_plural "Autoselecting '%s' after %u seconds."
+msgstr[0] "autovelg %s etter %u "
+msgstr[1] "autovelg %s etter %u "
+
+#: ../src/utils/prompt.cc:247
+#, fuzzy
+msgid "Trying again..."
+msgstr "Prøv å koble til på nytt"
+
+#: ../src/utils/prompt.cc:338
+#, c-format
+msgid "Invalid answer '%s'."
+msgstr "Ugyldig svar '%s'."
+
+#. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
+#: ../src/utils/prompt.cc:344
+#, fuzzy, c-format
+msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
+msgstr "Tast 'y' for '%s' eller 'n' for '%s' hvis ingenting annet fungerer."
+
+#: ../src/utils/prompt.cc:358
+#, c-format
+msgid ""
+"If you run zypper without a terminal, use '%s' global\n"
+"option to make zypper use default answers to prompts."
+msgstr ""
+"Hvis du kjører zypper utenfor en terminal, må du bruke valget '%s' global\n"
+" for å be zypper om standardrespons på kommandoer."
+
+#. TranslatorExplanation These are reasons for various failures.
+#: ../src/utils/prompt.h:164
+msgid "Not found"
+msgstr "Ikke funnet"
+
+# error box title
+#: ../src/utils/prompt.h:164
+msgid "I/O error"
+msgstr "Inn/ut-feil"
+
+#: ../src/utils/prompt.h:164
+msgid "Invalid object"
+msgstr "Ugyldig objekt"
+
+#: ../src/utils/prompt.h:171
+msgid "Error"
+msgstr "Feil"
+
+#: ../src/Zypper.cc:154
+#, fuzzy
+msgid ""
+"  Global Options:\n"
+"\t--help, -h\t\tHelp.\n"
+"\t--version, -V\t\tOutput the version number.\n"
+"\t--config, -c <file>\tUse specified config file instead of the default.\n"
+"\t--quiet, -q\t\tSuppress normal output, print only error\n"
+"\t\t\t\tmessages.\n"
+"\t--verbose, -v\t\tIncrease verbosity.\n"
+"\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
+"\t--table-style, -s\tTable style (integer).\n"
+"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+"\t--non-interactive, -n\tDo not ask anything, use default answers\n"
+"\t\t\t\tautomatically.\n"
+"\t--xmlout, -x\t\tSwitch to XML output.\n"
+"\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n"
+"\t\t\t\tdirectory.\n"
+"\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
+"\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
+msgstr ""
+"  Globale valg:\n"
+"\t--help, -h\t\tHjelp.\n"
+"\t--version, -V\t\tVis versjonsnummer.\n"
+"\t--quiet, -q\t\tSkjul dialog og bare vis feilmeldinger.\n"
+"\t--verbose, -v\t\tØk informasjonsmengden.\n"
+"\t--no-abbrev, -A\t\tIkke forkort tekst i tabeller.\n"
+"\t--table-style, -s\tTabell-stil (heltall).\n"
+"\t--rug-compatible, -r\tSlå på kompatibilitet med rug.\n"
+"\t--non-interactive\tIkke spør om noe, men bruk automatisk standardsvar.\n"
+"\t--xmlout, -x\t\tBytt til XML-visning.\n"
+"\t--reposd-dir, -D <dir>\tBruk alternativ katalog for\n"
+"\t\t\t\tarkivdefinisjonsfiler.\n"
+"\t--cache-dir, -C <dir>\tBruk alternativ katalog for metadatamellomlager.\n"
+"\t--raw-cache-dir <dir>\tBruk alternativ katalog for rådatamellomlager.\n"
+
+#: ../src/Zypper.cc:173
+#, fuzzy
+msgid ""
+"     Repository Options:\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--gpg-auto-import-keys\tAutomatically trust and import new repository\n"
+"\t\t\t\tsigning keys.\n"
+"\t--plus-repo, -p <URI>\tUse an additional repository.\n"
+"\t--disable-repositories\tDo not read meta-data from repositories.\n"
+"\t--no-refresh\t\tDo not refresh the repositories.\n"
+"\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
+"\t--no-remote\t\tIgnore remote repositories.\n"
+msgstr ""
+"     Arkivvalg:\n"
+"\t--no-gpg-checks\t\tIgnorer mislykkede GPG-kontroller og fortsett.\n"
+"\t--plus-repo, -p <URI>\tBruk et  tilleggsarkiv.\n"
+"\t--disable-repositories\tIkke les metadata fra arkiver.\n"
+"\t--no-refresh\t\tIkke oppdater arkivene.\n"
+
+#: ../src/Zypper.cc:184
+msgid ""
+"     Target Options:\n"
+"\t--root, -R <dir>\tOperate on a different root directory.\n"
+"\t--disable-system-resolvables\n"
+"\t\t\t\tDo not read installed packages.\n"
+msgstr ""
+"     Målvalg:\n"
+"\t--root, -R <dir>\tBruk en annen rotkatalog.\n"
+"\t--disable-system-resolvables\n"
+"\t\t\t\tIkke les installerte pakker.\n"
+
+#: ../src/Zypper.cc:191
+msgid ""
+"  Commands:\n"
+"\thelp, ?\t\t\tPrint help.\n"
+"\tshell, sh\t\tAccept multiple commands at once.\n"
+msgstr ""
+"  Kommandoer:\n"
+"\thelp, ?\t\t\tVis hjelp.\n"
+"\tshell, sh\t\tGodta flere kommandoer samtidig.\n"
+
+#: ../src/Zypper.cc:196
+msgid ""
+"     Repository Management:\n"
+"\trepos, lr\t\tList all defined repositories.\n"
+"\taddrepo, ar\t\tAdd a new repository.\n"
+"\tremoverepo, rr\t\tRemove specified repository.\n"
+"\trenamerepo, nr\t\tRename specified repository.\n"
+"\tmodifyrepo, mr\t\tModify specified repository.\n"
+"\trefresh, ref\t\tRefresh all repositories.\n"
+"\tclean\t\t\tClean local caches.\n"
+msgstr ""
+"     Arkivadministrasjon:\n"
+"\trepos, lr\t\tVis alle definerte arkiver.\n"
+"\taddrepo, ar\t\tLegg til nytt arkiv.\n"
+"\tremoverepo, rr\t\tFjern spesifisert arkiv.\n"
+"\trenamerepo, nr\t\tEndre navn på spesifisert arkiv.\n"
+"\tmodifyrepo, mr\t\tEndre spesifisert arkiv.\n"
+"\trefresh, ref\t\tOppdater alle arkiver.\n"
+"\tclean\t\t\tRydd lokale mellomlagre.\n"
+
+#: ../src/Zypper.cc:206
+msgid ""
+"     Service Management:\n"
+"\tservices, ls\t\tList all defined services.\n"
+"\taddservice, as\t\tAdd a new service.\n"
+"\tmodifyservice, ms\tModify specified service.\n"
+"\tremoveservice, rs\tRemove specified service.\n"
+"\trefresh-services, refs\tRefresh all services.\n"
+msgstr ""
+"     Tjenesteadministrasjon:\n"
+"\tservices, ls\t\tVis alle definerte tjenester.\n"
+"\taddservice, as\t\tLegg til ny tjeneste.\n"
+"\tmodifyservice, ms\tEndre spesifisert tjeneste.\n"
+"\tremoveservice, rs\tFjern spesifisert tjeneste.\n"
+"\trefresh-tjenester, refs\tOppdater alle tjenester.\n"
+
+#: ../src/Zypper.cc:214
+msgid ""
+"     Software Management:\n"
+"\tinstall, in\t\tInstall packages.\n"
+"\tremove, rm\t\tRemove packages.\n"
+"\tverify, ve\t\tVerify integrity of package dependencies.\n"
+"\tsource-install, si\tInstall source packages and their build\n"
+"\t\t\t\tdependencies.\n"
+"\tinstall-new-recommends, inr\n"
+"\t\t\t\tInstall newly added packages recommended\n"
+"\t\t\t\tby installed packages.\n"
+msgstr ""
+"     Programvareadministrasjon:\n"
+"\tinstall, in\t\tInstaller pakker.\n"
+"\tremove, rm\t\tFjern pakker.\n"
+"\tverify, ve\t\tVerifiser integritet for nødvendige tilleggspakker.\n"
+"\tsource-install, si\tInstaller kildepakker og deres\n"
+"\t\t\t\tnødvendige pakker.\n"
+"\tinstall-new-recommends, inr\n"
+"\t\t\t\tInstaller nye pakker som anbefales\n"
+"\t\t\t\tav installerte pakker.\n"
+
+#: ../src/Zypper.cc:225
+msgid ""
+"     Update Management:\n"
+"\tupdate, up\t\tUpdate installed packages with newer versions.\n"
+"\tlist-updates, lu\tList available updates.\n"
+"\tpatch\t\t\tInstall needed patches.\n"
+"\tlist-patches, lp\tList needed patches.\n"
+"\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
+"\tpatch-check, pchk\tCheck for patches.\n"
+msgstr ""
+"     Oppdateringsadministrasjon:\n"
+"\tupdate, up\t\tOppdater installerte pakker med nyere versjoner.\n"
+"\tlist-updates, lu\tVis tilgjengelige oppdateringer.\n"
+"\tpatch\t\t\tInstaller nødvendige pakkeoppdateringer.\n"
+"\tlist-patches, lp\tVis nødvendige pakkeoppdateringer.\n"
+"\tdist-upgrade, dup\tUtfør en distribusjonsoppgradering.\n"
+"\tpatch-check, pchk\tSe etter pakkeoppdateringer.\n"
+
+#: ../src/Zypper.cc:234
+msgid ""
+"     Querying:\n"
+"\tsearch, se\t\tSearch for packages matching a pattern.\n"
+"\tinfo, if\t\tShow full information for specified packages.\n"
+"\tpatch-info\t\tShow full information for specified patches.\n"
+"\tpattern-info\t\tShow full information for specified patterns.\n"
+"\tproduct-info\t\tShow full information for specified products.\n"
+"\tpatches, pch\t\tList all available patches.\n"
+"\tpackages, pa\t\tList all available packages.\n"
+"\tpatterns, pt\t\tList all available patterns.\n"
+"\tproducts, pd\t\tList all available products.\n"
+"\twhat-provides, wp\tList packages providing specified capability.\n"
+msgstr ""
+"     Forespørsler:\n"
+"\tsearch, se\t\tSøk etter pakker som samsvarer med et mønster.\n"
+"\tinfo, if\t\tVis fullstendig informasjon om spesifiserte pakker.\n"
+"\tpatch-info\t\tVis fullstendig informasjon omspesifiserte oppdateringer.\n"
+"\tpattern-info\t\tVis fullstendig informasjon om spesifiserte mønstre.\n"
+"\tproduct-info\t\tVis fullstendig informasjon om spesifiserte produkter.\n"
+"\tpatches, pch\t\tVis alle tilgjengelige pakkeoppdateringer.\n"
+"\tpackages, pa\t\tVis alle tilgjengelige pakker.\n"
+"\tpatterns, pt\t\tVis alle tilgjengelig mønstre.\n"
+"\tproducts, pd\t\tVis alle tilgjengelig produkter.\n"
+"\twhat-provides, wp\tVis pakker for spesielle formål.\n"
+
+#: ../src/Zypper.cc:249
+#, fuzzy
+msgid ""
+"     Package Locks:\n"
+"\taddlock, al\t\tAdd a package lock.\n"
+"\tremovelock, rl\t\tRemove a package lock.\n"
+"\tlocks, ll\t\tList current package locks.\n"
+"\tcleanlocks, cl\t\tRemove unused locks.\n"
+msgstr ""
+"     Pakkelås:\n"
+"\taddlock, al\t\tLegg til pakkelås.\n"
+"\tremovelock, rl\t\tFjern pakkelås.\n"
+"\tlocks, ll\t\tVis eksisterende pakkelås.\n"
+
+#: ../src/Zypper.cc:256
+msgid ""
+"     Other Commands:\n"
+"\tversioncmp, vcmp\tCompare two version strings.\n"
+"\ttargetos, tos\t\tPrint the target operating system ID string.\n"
+"\tlicenses\t\tPrint report about licenses and EULAs of\n"
+"\t\t\t\tinstalled packages.\n"
+msgstr ""
+"     Andre kommandoer:\n"
+"\tversioncmp, vcmp\tSammenlign to versjonsstrenger.\n"
+"\ttargetos, tos\t\tVis ID-streng for måloperativsystem.\n"
+"\tlicenses\t\tVis rapport om lisenser og lisensavtaler for\n"
+"\t\t\t\tinstallerte pakker.\n"
+
+#: ../src/Zypper.cc:264
+msgid ""
+"  Usage:\n"
+"\tzypper [--global-options] <command> [--command-options] [arguments]\n"
+msgstr ""
+"  Bruk:\n"
+"\tzypper [--globale-valg] <kommando> [-kommandovalg] [argumenter]\n"
+
+#. translators: %s is "help" or "zypper help" depending on whether
+#. zypper shell is running or not
+#: ../src/Zypper.cc:289
+#, c-format
+msgid "Type '%s' to get a list of global options and commands."
+msgstr "Tast '%s' for å vise en liste over globale valg og kommandoer."
+
+#. translators: %s is "help" or "zypper help" depending on whether
+#. zypper shell is running or not
+#: ../src/Zypper.cc:298
+#, c-format
+msgid "Type '%s' to get command-specific help."
+msgstr "Tast '%s' for å vise kommando-spesifikk help."
+
+#: ../src/Zypper.cc:411
+#, c-format
+msgid "Verbosity: %d"
+msgstr "Detaljnivå: %d"
+
+#: ../src/Zypper.cc:425
+#, c-format
+msgid "Invalid table style %d."
+msgstr "Ugyldig tabellstil %d."
+
+#: ../src/Zypper.cc:426
+#, c-format
+msgid "Use an integer number from %d to %d"
+msgstr "Bruk et heltall fra %d til %d"
+
+#: ../src/Zypper.cc:457
+msgid "Entering non-interactive mode."
+msgstr "Starter automatisk modus."
+
+#: ../src/Zypper.cc:463
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "Går til 'no-gpg-checks'-modus."
+
+#: ../src/Zypper.cc:470
+#, c-format
+msgid "Turning on '%s'. New repository signing keys will be automatically imported!"
+msgstr ""
+
+#: ../src/Zypper.cc:483
+msgid "The path specified in the --root option must be absolute."
+msgstr "Stien som er spesifisert for valget --root må være absolutt."
+
+#: ../src/Zypper.cc:512
+msgid "Repositories disabled, using the database of installed packages only."
+msgstr "Arkiver er deaktivert, benytter kun database med installerte pakker."
+
+#: ../src/Zypper.cc:524
+msgid "Autorefresh disabled."
+msgstr "Autooppdatering deaktivert."
+
+#: ../src/Zypper.cc:531
+msgid "CD/DVD repositories disabled."
+msgstr "CD/DVD-arkiver deaktivert."
+
+#: ../src/Zypper.cc:538
+msgid "Remote repositories disabled."
+msgstr "Eksterne arkiver deaktivert."
+
+#: ../src/Zypper.cc:545
+msgid "Ignoring installed resolvables."
+msgstr "Ignorerer installerte nødvendige pakker."
+
+#. TranslatorExplanation The %s is "--plus-repo"
+#: ../src/Zypper.cc:656
+#, c-format
+msgid "The %s option has no effect here, ignoring."
+msgstr "Valget %s har ingen effekt her, ignorerer."
+
+#: ../src/Zypper.cc:834
+msgid "Unexpected exception."
+msgstr "Uventet unntak."
+
+#. translators: the first %s = "package, patch, pattern, product",
+#. second %s = "package",
+#. and the third %s = "only, in-advance, in-heaps, as-needed"
+#: ../src/Zypper.cc:938
+#, fuzzy, c-format
+msgid ""
+"install (in) [options] <capability|rpm_file_uri> ...\n"
+"\n"
+"Install packages with specified capabilities or RPM files with specified\n"
+"location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
+"of <, <=, =, >=, >.\n"
+"\n"
+"  Command options:\n"
+"    --from <alias|#|URI>    Select packages from the specified repository.\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"-t, --type <type>           Type of package (%s).\n"
+"                            Default: %s.\n"
+"-n, --name                  Select packages by plain name, not by capability.\n"
+"-C, --capability            Select packages by capability.\n"
+"-f, --force                 Reinstall the package if the exact version is\n"
+"                            available in repositories.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Automatically say 'yes' to third party license\n"
+"                            confirmation prompt.\n"
+"                            See 'man zypper' for more details.\n"
+"    --debug-solver          Create solver test case for debugging.\n"
+"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --recommends            Install also recommended packages in addition\n"
+"                            to the required.\n"
+"-R, --no-force-resolution   Do not force the solver to find solution,\n"
+"                            let it ask.\n"
+"    --force-resolution      Force the solver to find a solution (even\n"
+"                            an aggressive one).\n"
+"-D, --dry-run               Test the installation, do not actually install.\n"
+"    --download              Set the download-install mode. Available modes:\n"
+"                            %s\n"
+"-d, --download-only         Only download the packages, do not install.\n"
+msgstr ""
+"install (in) [options] <capability|rpm_file_uri> ...\n"
+"\n"
+"Installer pakker med spesielle egenskaper eller RPM-filer med spesifisert plassering. En egenskap er NAVN[OP<VERSjON>], der OP er en av <, <=, =, >=, >.\n"
+"\n"
+"  Kommandovalg:\n"
+"-r, --repo <alias|#|URI>        Installer pakker kun fra det spesifierte arkivet.\n"
+"-t, --type <type>               Pakketype (%s).\n"
+"                                Standard: %s.\n"
+"-n, --name                      Velg pakker bare etter navn, ikke etter egenskap.\n"
+"-C, --capability                Velg pakker etter egenskap.\n"
+"-f, --force                     Installer selv om pakken allerede er installert (installer på nytt).\n"
+"-l, --auto-agree-with-licenses  Si automatisk 'ja' når det blir bedt om godkjenning av tredjepartslisenser.\n"
+"                                Tast 'man zypper' for mer informasjon.\n"
+"    --debug-solver              Opprett testkasus for feilsøking.\n"
+"    --no-recommends             Ikke installer anbefalte pakker, kun nødvendige.\n"
+"-R, --no-force-resolution       Ikke tving systemet til å finne en løsning, spør hver gang.\n"
+"    --force-resolution          Tving systemet til å finne en løsning (selv om den er agressiv).\n"
+"-D, --dry-run                   Test installasjonen uten å utføre den.\n"
+
+#. TranslatorExplanation the first %s = "package, patch, pattern, product"
+#. and the second %s = "package"
+#: ../src/Zypper.cc:1000
+#, fuzzy, c-format
+msgid ""
+"remove (rm) [options] <capability> ...\n"
+"\n"
+"Remove packages with specified capabilities.\n"
+"A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
+"of <, <=, =, >=, >.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"-t, --type <type>           Type of package (%s).\n"
+"                            Default: %s.\n"
+"-n, --name                  Select packages by plain name, not by capability.\n"
+"-C, --capability            Select packages by capability.\n"
+"    --debug-solver          Create solver test case for debugging.\n"
+"-R, --no-force-resolution   Do not force the solver to find solution,\n"
+"                            let it ask.\n"
+"    --force-resolution      Force the solver to find a solution (even\n"
+"                            an aggressive one).\n"
+"-D, --dry-run               Test the removal, do not actually remove.\n"
+msgstr ""
+"remove (rm) [valg] <egenskap> ...\n"
+"\n"
+"Fjern pakker med spesifiserte egenskaper. En egenskap er NAVN[OP<VERSjON>], der OP er en av <, <=, =, >=, >.\n"
+"\n"
+"  Kommandovalg:\n"
+"-r, --repo <alias|#|URI>        Bruk kun pakker fra det spesifiserte arkivet.\n"
+"-t, --type <type>               Pakketype (%s).\n"
+"                                Standard: %s.\n"
+"-n, --name                      Velg pakker bare etter navn, ikke etter egenskap.\n"
+"-C, --capability                Velg pakker etter egenskap.\n"
+"    --debug-solver              Opprett testløsning for feilsøking.\n"
+"-R, --no-force-resolution       Ikke tving systemet til å finne en løsning, spør hver gang.\n"
+"    --force-resolution          Tving systemet til å finne en løsning (selv om den er agressiv).\n"
+"-D, --dry-run                   Test fjerning, uten å fjerne noe.\n"
+
+#: ../src/Zypper.cc:1033
+msgid ""
+"source-install (si) [options] <name> ...\n"
+"\n"
+"Install specified source packages and their build dependencies.\n"
+"\n"
+"  Command options:\n"
+"-d, --build-deps-only    Install only build dependencies of specified packages.\n"
+"-D, --no-build-deps      Don't install build dependencies.\n"
+"-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
+msgstr ""
+"source-install (si) [valg] <navn> ...\n"
+"\n"
+"Installer spesifiserte kildepakker og tilhørende nødvendige pakker.\n"
+"\n"
+"  Kommandovalg:\n"
+"-d, --build-deps-only    Installer kun byggeavhengigheter for spesifiserte pakker.\n"
+"-D, --no-build-deps      Ikke installer byggeavhengigheter.\n"
+"-r, --repo <alias|#|URI> Installer pakker kun fra spesifiserte arkiver.\n"
+
+#: ../src/Zypper.cc:1068
+#, fuzzy, c-format
+msgid ""
+"verify (ve) [options]\n"
+"\n"
+"Check whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --recommends            Install also recommended packages in addition\n"
+"                            to the required.\n"
+"-D, --dry-run               Test the repair, do not actually do anything to\n"
+"                            the system.\n"
+"    --download              Set the download-install mode. Available modes:\n"
+"                            %s\n"
+"-d, --download-only         Only download the packages, do not install.\n"
+msgstr ""
+"verify (ve) [valg]\n"
+"\n"
+"Kontroller om avhengigheter er oppfylt for installerte pakker og løs eventuelle konflikter.\n"
+"\n"
+"  Kommandovalg:\n"
+"    --no-recommends      Ikke installer anbefalte pakker, kun nødvendig.\n"
+"-D, --dry-run            Test løsningen uten å gjøre noe med systemet.\n"
+"-r, --repo <alias|#|URI> Bruk kun spesifiserte arkiver for å installer manglende pakker.\n"
+
+#: ../src/Zypper.cc:1105
+#, fuzzy, c-format
+msgid ""
+"install-new-recommends (inr) [options]\n"
+"\n"
+"Install newly added packages recommended by already installed packages. This can typically be used to install new language packages or drivers for newly added hardware.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>    Load only the specified repositories.\n"
+"-D, --dry-run               Test the installation, do not actually install.\n"
+"    --download              Set the download-install mode. Available modes:\n"
+"                            %s\n"
+"-d, --download-only         Only download the packages, do not install.\n"
+"    --debug-solver          Create solver test case for debugging.\n"
+msgstr ""
+"install-new-recommends (inr) [valg]\n"
+"\n"
+"Installer nye pakker som anbefales av allerede installerte pakker. Dette kan brukes for å installere nye språkpakker eller drivere for ny maskinvare.\n"
+"\n"
+"  Kommandovalg:\n"
+"-r, --repo <alias|#|URI> Bruk kun spesifiserte arkiver for å installere pakker.\n"
+"-D, --dry-run            Test installasjonen uten å installere noe.\n"
+"    --debug-solver       Opprett testløsning for feilsøking.\n"
+
+#. translators: the %s = "ris" (the only service type currently supported)
+#: ../src/Zypper.cc:1134
+#, fuzzy, c-format
+msgid ""
+"addservice (as) [options] <URI> <alias>\n"
+"\n"
+"Add a repository index service to the system.\n"
+"\n"
+"  Command options:\n"
+"-t, --type <type>       Type of the service (%s).\n"
+"-d, --disable           Add the service as disabled.\n"
+"-n, --name <alias>      Specify descriptive name for the service.\n"
+msgstr ""
+"addservice (as) [valg] <URI> <alias>\n"
+"\n"
+"Legg til en arkivindekstjeneste i systemet.\n"
+"\n"
+"  Command valg:\n"
+"-t, --type <TYPE>       Type tjeneste (%s).\n"
+"-d, --disable           Legg til tjenesten som deaktivert.\n"
+"-n, --name              Angi et beskrivende navn for tjenesten.\n"
+
+#. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
+#: ../src/Zypper.cc:1157
+msgid ""
+"removeservice (rs) [options] <alias|#|URI>\n"
+"\n"
+"Remove specified repository index service from the sytem..\n"
+"\n"
+"  Command options:\n"
+"    --loose-auth   Ignore user authentication data in the URI.\n"
+"    --loose-query  Ignore query string in the URI.\n"
+msgstr ""
+"removeservice (rs) [valg] <alias|#|URI>\n"
+"\n"
+"Fjern spesifisert arkivindekstjeneste fra systemet.\n"
+"\n"
+"  Kommandovalg:\n"
+"    --loose-auth   Ignorer brukerautentiseringsdata i URI.\n"
+"    --loose-query  Ignorer forespørselsstreng i URI.\n"
+
+#. translators: %s is "--all" and "--all"
+#: ../src/Zypper.cc:1193
+#, c-format
+msgid ""
+"modifyservice (ms) <options> <alias|#|URI>\n"
+"modifyservice (ms) <options> <%s>\n"
+"\n"
+"Modify properties of services specified by alias, number, or URI, or by the\n"
+"'%s' aggregate options.\n"
+"\n"
+"  Command options:\n"
+"-d, --disable                  Disable the service (but don't remove it).\n"
+"-e, --enable                   Enable a disabled service.\n"
+"-r, --refresh                  Enable auto-refresh of the service.\n"
+"-R, --no-refresh               Disable auto-refresh of the service.\n"
+"-n, --name                     Set a descriptive name for the service.\n"
+"\n"
+"-i, --ar-to-enable <alias>     Add a RIS service repository to enable.\n"
+"-I, --ar-to-disable <alias>    Add a RIS service repository to disable.\n"
+"-j, --rr-to-enable <alias>     Remove a RIS service repository to enable.\n"
+"-J, --rr-to-disable <alias>    Remove a RIS service repository to disable.\n"
+"-k, --cl-to-enable             Clear the list of RIS repositories to enable.\n"
+"-K, --cl-to-disable            Clear the list of RIS repositories to disable.\n"
+"\n"
+"-a, --all                      Apply changes to all services.\n"
+"-l, --local                    Apply changes to all local services.\n"
+"-t, --remote                   Apply changes to all remote services.\n"
+"-m, --medium-type <type>       Apply changes to services of specified type.\n"
+msgstr ""
+"modifyservice (ms) <valg> <alias|#|URI>\n"
+"modifyservice (ms) <valg> <%s>\n"
+"\n"
+"Endre egenskaper for tjenester spesifisert med alias, nummer, eller URI, eller med samlevalgene\n"
+"'%s'.\n"
+"\n"
+"  Kommandovalg:\n"
+"-d, --disable                  Deaktiver tjenesten (men ikke fjern den).\n"
+"-e, --enable                   Aktiver en deaktivert tjeneste.\n"
+"-r, --refresh                  Aktiver automatisk oppdatering av tjenesten.\n"
+"-R, --no-refresh               Deaktiver automatisk oppdatering av tjenesten.\n"
+"-n, --name                     Angi et beskrivende navn for tjenesten.\n"
+"\n"
+"-i, --ar-to-enable <alias>     Legg til et RIS-tjenestearkiv å aktivere.\n"
+"-I, --ar-to-disable <alias>    Legg til et RIS-tjenestearkiv å deaktivere.\n"
+"-j, --rr-to-enable <alias>     Fjern et RIS-tjenestearkiv å aktivere.\n"
+"-J, --rr-to-disable <alias>    Fjern et RIS-tjenestearkiv å deaktivere.\n"
+"-k, --cl-to-\n"
+"    --loose-auth   Ignorer brukerautentiseringsdata i URI.\n"
+"    --loose-query  Ignorer forespørselsstreng i URI.\n"
+"             Rydd listen over RIS-arkiver å aktivere.\n"
+"-K, --cl-to-disable            Rydd listen over RIS-arkiver å deaktivere.\n"
+"\n"
+"-a, --all                      Bruk endringer for alle tjenester.\n"
+"-l, --local                    Bruk endringer for alle lokale tjenester.\n"
+"-t, --remote                   Bruk endringer for alle eksterne tjenester.\n"
+"-m, --medium-type <type>       Bruk endringer for tjenester av spesifisert type.\n"
+
+#: ../src/Zypper.cc:1241
+msgid ""
+"services (ls) [options]\n"
+"\n"
+"List defined services.\n"
+"\n"
+"  Command options:\n"
+"-u, --uri                 Show also base URI of repositories.\n"
+"-p, --priority            Show also repository priority.\n"
+"-d, --details             Show more information like URI, priority, type.\n"
+"-r, --with-repos          Show also repositories belonging to the services.\n"
+"-P, --sort-by-priority    Sort the list by repository priority.\n"
+"-U, --sort-by-uri         Sort the list by URI.\n"
+"-N, --sort-by-name        Sort the list by name.\n"
+msgstr ""
+"services (ls) [valg]\n"
+"\n"
+"Vis definerte tjenester.\n"
+"\n"
+"  Kommandovalg:\n"
+"-u, --uri                 Vis også base-URI for arkiver.\n"
+"-p, --priority            Vis også arkivprioritet.\n"
+"-d, --details             Vis mer informasjon, som URI, prioritet, type.\n"
+"-r, --with-repos          Vis også arkiver som tilhører tjenestene.\n"
+"-P, --sort-by-priority    Sorter listen etter arkivprioritet.\n"
+"-U, --sort-by-uri         Sorter listen etter URI.\n"
+"-N, --sort-by-name        Sorter listen etter navn.\n"
+
+#: ../src/Zypper.cc:1267
+msgid ""
+"refresh-services (refs) [options]\n"
+"\n"
+"Refresh defined repository index services.\n"
+"\n"
+"  Command options:\n"
+"-r, --with-repos      Refresh also repositories.\n"
+msgstr ""
+"refresh-services (refs) [valg]\n"
+"\n"
+"Oppdater definerte arkivindekstjenester.\n"
+"\n"
+"  Kommandovalg:\n"
+"-r, --with-repos      Oppdater også arkiver.\n"
+
+#. translators: the %s = "yast2, rpm-md, plaindir"
+#: ../src/Zypper.cc:1295
+#, fuzzy, c-format
+msgid ""
+"addrepo (ar) [options] <URI> <alias>\n"
+"addrepo (ar) [options] <file.repo>\n"
+"\n"
+"Add a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <file.repo>  Just another means to specify a .repo file to read.\n"
+"-t, --type <type>       Type of repository (%s).\n"
+"-d, --disable           Add the repository as disabled.\n"
+"-c, --check             Probe URI.\n"
+"-C, --no-check          Don't probe URI, probe later during refresh.\n"
+"-n, --name <name>       Specify descriptive name for the repository.\n"
+"-k, --keep-packages     Enable RPM files caching.\n"
+"-K, --no-keep-packages  Disable RPM files caching.\n"
+"-f, --refresh           Enable autorefresh of the repository.\n"
+msgstr ""
+"addrepo (ar) [valg] <URI> <alias>\n"
+"addrepo (ar) [valg] <FILE.repo>\n"
+"\n"
+"Legg til et arkiv i systemet. Arkivet kan spesifiseres med URI eller leses fra en spesifisert .repo-fil (også ekstern).\n"
+"\n"
+"  Kommandovalg:\n"
+"-r, --repo <FILE.repo>  Bare en annen metode for å spesifisere en .repo-fil å lese.\n"
+"-t, --type <TYPE>       Arkivtype (%s).\n"
+"-d, --disable           Legg til arkivet som deaktivert.\n"
+"-c, --check             Kontroller URI.\n"
+"-C, --no-check          Ikke kontroller URI, kontroller senere under oppdatering.\n"
+"-n, --name              Angi et beskrivende navn for arkivet.\n"
+"-k, --keep-packages     Aktiver mellomlagring av RPM-filer.\n"
+"-K, --no-keep-packages  Deaktiver mellomlagring av RPM-filer.\n"
+"-f, --refresh           Aktiver automatisk oppdatering av arkivet.\n"
+
+#. translators: this is just a rug compatiblity command
+#. translators: this is just a rug-compatiblity command
+#: ../src/Zypper.cc:1344 ../src/Zypper.cc:2309
+msgid ""
+"list-resolvables (lr)\n"
+"\n"
+"List available resolvable types.\n"
+msgstr ""
+"list-resolvables (lr)\n"
+"\n"
+"Vis tilgjengelige nødvendige pakketyper.\n"
+
+#: ../src/Zypper.cc:1352
+#, fuzzy
+msgid ""
+"repos (lr) [options] [repo] ...\n"
+"\n"
+"List all defined repositories.\n"
+"\n"
+"  Command options:\n"
+"-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file.\n"
+"-u, --uri                 Show also base URI of repositories.\n"
+"-p, --priority            Show also repository priority.\n"
+"-d, --details             Show more information like URI, priority, type.\n"
+"-s, --service             Show also alias of parent service.\n"
+"-U, --sort-by-uri         Sort the list by URI.\n"
+"-P, --sort-by-priority    Sort the list by repository priority.\n"
+"-A, --sort-by-alias       Sort the list by alias.\n"
+"-N, --sort-by-name        Sort the list by name.\n"
+msgstr ""
+"repos (lr) [valg]\n"
+"\n"
+"Vis alle definerte arkiver.\n"
+"\n"
+"  Kommandovalg:\n"
+"-e, --export <FIL.repo>  Eksporter alle definerte arkiver som en enkelt lokal .repo-fil.\n"
+"-u, --uri                 Vis også base-URI for arkiver.\n"
+"-p, --priority            Vis også arkivprioritet.\n"
+"-d, --details             Vis mer informasjon, som URI, prioritet, type.\n"
+"-U, --sort-by-uri         Sorter listen etter URI.\n"
+"-P, --sort-by-priority    Sorter listen etter arkivprioritet.\n"
+"-A, --sort-by-alias       Sorter listen etter alias.\n"
+"-N, --sort-by-name        Sorter listen etter navn.\n"
+
+#: ../src/Zypper.cc:1380
+msgid ""
+"removerepo (rr) [options] <alias|#|URI>\n"
+"\n"
+"Remove repository specified by alias, number or URI.\n"
+"\n"
+"  Command options:\n"
+"    --loose-auth   Ignore user authentication data in the URI.\n"
+"    --loose-query  Ignore query string in the URI.\n"
+msgstr ""
+"removerepo (rs) [valg] <alias|#|URI>\n"
+"\n"
+"Fjern arkiv som er spesifisert med alias, nummer eller URI.\n"
+"\n"
+"  Kommandovalg:\n"
+"    --loose-auth   Ignorer brukerautentiseringsdata i URI.\n"
+"    --loose-query  Ignorer forespørselsstreng i URI.\n"
+
+#: ../src/Zypper.cc:1399
+msgid ""
+"renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
+"\n"
+"Assign new alias to the repository specified by alias, number or URI.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"renamerepo (nr) [valg] <alias|#|URI> <nytt-alias>\n"
+"\n"
+"Tilordne nytt alias til arkiv spesifisert med alias, nummer eller URI.\n"
+"\n"
+"Denne kommandoen har ikke flere valg.\n"
+
+#. translators: %s is "--all|--remote|--local|--medium-type"
+#. and "--all, --remote, --local, --medium-type"
+#: ../src/Zypper.cc:1430
+#, fuzzy, c-format
+msgid ""
+"modifyrepo (mr) <options> <alias|#|URI> ...\n"
+"modifyrepo (mr) <options> <%s>\n"
+"\n"
+"Modify properties of repositories specified by alias, number, or URI, or by the\n"
+"'%s' aggregate options.\n"
+"\n"
+"  Command options:\n"
+"-d, --disable             Disable the repository (but don't remove it).\n"
+"-e, --enable              Enable a disabled repository.\n"
+"-r, --refresh             Enable auto-refresh of the repository.\n"
+"-R, --no-refresh          Disable auto-refresh of the repository.\n"
+"-n, --name                Set a descriptive name for the repository.\n"
+"-p, --priority <integer>  Set priority of the repository.\n"
+"-k, --keep-packages       Enable RPM files caching.\n"
+"-K, --no-keep-packages    Disable RPM files caching.\n"
+"\n"
+"-a, --all                 Apply changes to all repositories.\n"
+"-l, --local               Apply changes to all local repositories.\n"
+"-t, --remote              Apply changes to all remote repositories.\n"
+"-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
+msgstr ""
+"modifyrepo (mr) <valg> <alias|#|URI>\n"
+"modifyrepo (mr) <valg> <%s>\n"
+"\n"
+"Endre egenskaper for arkiver spesifisert med alias, nummer eller URI, eller med\n"
+"samlevalget '%s'.\n"
+"\n"
+"  Kommandovalg:\n"
+"-d, --disable             Deaktiver arkivet (men ikke fjern det).\n"
+"-e, --enable              Aktiver et deaktivert arkiv.\n"
+"-r, --refresh             Aktiver automatisk oppdatering av arkivet.\n"
+"-R, --no-refresh          Deaktiver automatisk oppdatering av arkivet.\n"
+"-n, --name                Angi et beskrivende navn for arkivet.\n"
+"-p, --priority <1-99>     Angi en prioritet for arkivet.\n"
+"-k, --keep-packages       Aktiver mellomlagring av RPM-filer.\n"
+"-K, --no-keep-packages    Deaktiver mellomlagring av RPM-filer.\n"
+"\n"
+"-a, --all                 Bruk endringer for alle arkiver.\n"
+"-l, --local               Bruk endringer fpr alle lokale arkiver.\n"
+"-t, --remote              Bruk endringer for alle eksterne arkiver.\n"
+"-m, --medium-type <type>  Bruk endringer to arkiver of spesifisert type.\n"
+
+#: ../src/Zypper.cc:1470
+msgid ""
+"refresh (ref) [alias|#|URI] ...\n"
+"\n"
+"Refresh repositories specified by their alias, number or URI. If none are specified, all enabled repositories will be refreshed.\n"
+"\n"
+"  Command options:\n"
+"-f, --force              Force a complete refresh.\n"
+"-b, --force-build        Force rebuild of the database.\n"
+"-d, --force-download     Force download of raw metadata.\n"
+"-B, --build-only         Only build the database, don't download metadata.\n"
+"-D, --download-only      Only download raw metadata, don't build the database.\n"
+"-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
+"-s, --services           Refresh also services before refreshing repos.\n"
+msgstr ""
+"refresh (ref) [alias|#|URI] ...\n"
+"\n"
+"Oppdater arkiver spesifisert med alias, nummmer eller URI. Hvis ingen spesifiseres, vil alle aktiverte arkiver bli oppdatert.\n"
+"\n"
+"  Kommandovalg:\n"
+"-f, --force              Tving fullstendig oppdatering.\n"
+"-b, --force-build        Tving ombygging av databasen.\n"
+"-d, --force-download     Tving nedlasting av råmetadata.\n"
+"-B, --build-only         Bare bygg databasen, ikke last ned metadata.\n"
+"-D, --download-only      Bare last ned råmetadata, ikke bygg databasen.\n"
+"-r, --repo <alias|#|URI> Oppdater bare spesifiserte arkiver.\n"
+"-s, --services           Oppdater også tjenester før oppdatering av arkiver.\n"
+
+#: ../src/Zypper.cc:1499
+#, fuzzy
+msgid ""
+"clean (cc) [alias|#|URI] ...\n"
+"\n"
+"Clean local caches.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI> Clean only specified repositories.\n"
+"-m, --metadata           Clean metadata cache.\n"
+"-M, --raw-metadata       Clean raw metadata cache.\n"
+"-a, --all                Clean both metadata and package caches.\n"
+msgstr ""
+"clean [alias|#|URI] ...\n"
+"\n"
+"Rydd lokale mellomlagre.\n"
+"\n"
+"  Command valg:\n"
+"-r, --repo <alias|#|URI> Rydd bare spesifiserte arkiver.\n"
+"-m, --metadata           Rydd metadatamellomlager.\n"
+"-M, --raw-metadata       Rydd rådatamellomlager.\n"
+"-a, --alle                Rydd både metadata- og pakkemellomlagre.\n"
+
+#. TranslatorExplanation the first %s = "package, patch, pattern, product"
+#. and the second %s = "patch"
+#: ../src/Zypper.cc:1528
+#, c-format
+msgid ""
+"list-updates (lu) [options]\n"
+"\n"
+"List all available updates.\n"
+"\n"
+"  Command options:\n"
+"-t, --type <type>             Type of package (%s).\n"
+"                              Default: %s.\n"
+"-r, --repo <alias|#|URI>      List only updates from the specified repository.\n"
+"    --best-effort             Do a 'best effort' approach to update. Updates\n"
+"                              to a lower than the latest version are\n"
+"                              also acceptable.\n"
+"-a, --all                     List all packages for which newer versions are\n"
+"                              available, regardless whether they are\n"
+"                              installable or not.\n"
+msgstr ""
+"list-updates (lu) [valg]\n"
+"\n"
+"Vis alle tilgjengelige oppdateringer.\n"
+"\n"
+"  Kommandovalg:\n"
+"-t, --type <type>             Pakketype (%s).\n"
+"                              Standard: %s.\n"
+"-r, --repo <alias|#|URI>      Vis kun oppdateringer fra det spesifiserte arkivet.\n"
+"    --best-effort             Bruk en 'så godt som mulig'-tilnærming til oppdateringen. Oppdatering\n"
+"                              til en eldre versjon enn den nyeste er\n"
+"                              også akseptabelt.\n"
+"-a, --all                     Vis alle pakker som har nyere versjoner\n"
+"                              tilgjengelig, uansett om disse versjonene kan\n"
+"                              installeres eller ikke.\n"
+
+#. translators: the first %s = "package, patch, pattern, product",
+#. the second %s = "patch",
+#. and the third %s = "only, in-avance, in-heaps, as-needed"
+#: ../src/Zypper.cc:1587
+#, fuzzy, c-format
+msgid ""
+"update (up) [options] [packagename] ...\n"
+"\n"
+"Update all or specified installed packages with newer versions, if possible.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-t, --type <type>           Type of package (%s).\n"
+"                            Default: %s.\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"    --skip-interactive      Skip interactive updates.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Automatically say 'yes' to third party license\n"
+"                            confirmation prompt.\n"
+"                            See man zypper for more details.\n"
+"    --best-effort           Do a 'best effort' approach to update. Updates\n"
+"                            to a lower than the latest version are\n"
+"                            also acceptable.\n"
+"    --debug-solver          Create solver test case for debugging.\n"
+"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --recommends            Install also recommended packages in addition\n"
+"                            to the required.\n"
+"-R, --no-force-resolution   Do not force the solver to find solution,\n"
+"                            let it ask.\n"
+"    --force-resolution      Force the solver to find a solution (even\n"
+"                            an aggressive one).\n"
+"-D, --dry-run               Test the update, do not actually update.\n"
+"    --download              Set the download-install mode. Available modes:\n"
+"                            %s\n"
+"-d, --download-only         Only download the packages, do not install.\n"
+msgstr ""
+"update (up) [valg] ...\n"
+"\n"
+"Oppdater alle eller spesifiserte installerte pakker med nyere versjoner, hvis dette er mulig.\n"
+"\n"
+"  Kommandovalg:\n"
+"\n"
+"-t, --type <type>               Pakketype (%s).\n"
+"                                Standard: %s.\n"
+"-r, --repo <alias|#|URI>        Begrens oppdateringer til det spesifiserte arkivet.\n"
+"    --skip-interactive          Hopp over interaktive oppdateringer.\n"
+"-l, --auto-agree-with-licenses  Si automatisk 'ja' på spørsmål om å godkjenne\n"
+"                                tredjepartslisenser.\n"
+"                                Tast 'man zypper' for mer informasjon.\n"
+"    --best-effort               Bruk en 'så godt som mulig'-tilnærming til oppdateringen. Oppdateringer\n"
+"                                til en annen versjon enn den nyeste er\n"
+"                                også akseptabelt.\n"
+"    --debug-solver              Opprett testløsning for feilsøking.\n"
+"    --no-recommends             Ikke installer anbefalte pakker, kun nødvendige.\n"
+"-R, --no-force-resolution       Ikke tving systemet til å finne en løsning, spør hver gang.\n"
+"    --force-resolution          Tving systemet til å finne en løsning (selv om den er agressiv).\n"
+"-D, --dry-run                   Test oppdateringen, men ikke utfør den.\n"
+
+#: ../src/Zypper.cc:1648
+#, c-format
+msgid ""
+"patch [options]\n"
+"\n"
+"Install all available needed patches.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"    --skip-interactive      Skip interactive patches.\n"
+"    --with-interactive      Do not skip interactive patches.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Automatically say 'yes' to third party license\n"
+"                            confirmation prompt.\n"
+"                            See man zypper for more details.\n"
+"-b, --bugzilla #            Install patch fixing the specified bugzilla issue.\n"
+"    --cve #                 Install patch fixing the specified CVE issue.\n"
+"    --debug-solver          Create solver test case for debugging.\n"
+"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --recommends            Install also recommended packages in addition\n"
+"                            to the required.\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"-D, --dry-run               Test the update, do not actually update.\n"
+"    --download              Set the download-install mode. Available modes:\n"
+"                            %s\n"
+"-d, --download-only         Only download the packages, do not install.\n"
+msgstr ""
+
+#: ../src/Zypper.cc:1689
+msgid ""
+"list-patches (lp) [options]\n"
+"\n"
+"List all available needed patches.\n"
+"\n"
+"  Command options:\n"
+"-b, --bugzilla[=#]         List needed patches for Bugzilla issues.\n"
+"    --cve[=#]              List needed patches for CVE issues.\n"
+"    --issues[=string]      Look for issues matching the specified string.\n"
+"-a, --all                  List all patches, not only the needed ones.\n"
+"-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
+msgstr ""
+
+#: ../src/Zypper.cc:1727
+#, c-format
+msgid ""
+"dist-upgrade (dup) [options]\n"
+"\n"
+"Perform a distribution upgrade.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Automatically say 'yes' to third party license\n"
+"                            confirmation prompt.\n"
+"                            See man zypper for more details.\n"
+"    --debug-solver          Create solver test case for debugging\n"
+"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --recommends            Install also recommended packages in addition\n"
+"                            to the required.\n"
+"-D, --dry-run               Test the upgrade, do not actually upgrade\n"
+"    --download              Set the download-install mode. Available modes:\n"
+"                            %s\n"
+"-d, --download-only         Only download the packages, do not install.\n"
+msgstr ""
+
+#: ../src/Zypper.cc:1777
+msgid ""
+"search (se) [options] [querystring] ...\n"
+"\n"
+"Search for packages matching given search strings.\n"
+"\n"
+"  Command options:\n"
+"    --match-all            Search for a match with all search strings (default).\n"
+"    --match-any            Search for a match with any of the search strings.\n"
+"    --match-substrings     Search for a match to partial words (default).\n"
+"    --match-words          Search for a match to whole words only.\n"
+"    --match-exact          Searches for an exact package name.\n"
+"-d, --search-descriptions  Search also in package summaries and descriptions.\n"
+"-C, --case-sensitive       Perform case-sensitive search.\n"
+"-i, --installed-only       Show only packages that are already installed.\n"
+"-u, --uninstalled-only     Show only packages that are not currently installed.\n"
+"-t, --type <type>          Search only for packages of the specified type.\n"
+"-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
+"    --sort-by-name         Sort packages by name (default).\n"
+"    --sort-by-repo         Sort packages by repository.\n"
+"-s, --details              Show each available version in each repository\n"
+"                           on a separate line.\n"
+"\n"
+"* and ? wildcards can also be used within search strings.\n"
+msgstr ""
+"search (se) [valg] [søkestreng] ...\n"
+"\n"
+"Søk etter pakker som samsvarer med søkestrenger.\n"
+"\n"
+"  Kommandovalg:\n"
+"    --match-all            Søk etter samsvar med alle søkestrenger (standard).\n"
+"    --match-any            Søk etter samsvar med minst én av søkestrengene.\n"
+"    --match-substrings     Søk etter samsvar med deler av ord (standard).\n"
+"    --match-words          Søk kun etter samsvar med hele ord.\n"
+"    --match-exact          Søk etter et nøyaktig pakkenavn.\n"
+"-d, --search-descriptions  Søk også i pakkesammendra og beskrivelser.\n"
+"-C, --case-sensitive       Perform case-sensitive search.\n"
+"-i, --installerte-only       Vis only pakker that er allerede installerte.\n"
+"-u, --avinstallert-only     Vis only pakker that er ikke currently installerte.\n"
+"-t, --type <type>          Search only for pakker of the spesifisert type.\n"
+"-r, --repo <alias|#|URI>   Search only i the spesifisert arkiv.\n"
+"    --sort-by-navn         Sort pakker by navn (standard).\n"
+"    --sort-by-repo         Sort pakker by arkiv.\n"
+"-s, --details              Vis each tilgjengelig versjon i each repository\n"
+"                           på a separate linje.\n"
+"\n"
+"* og ? wildcards kan også be brukt innen search strings.\n"
+
+#: ../src/Zypper.cc:1814
+msgid ""
+"patch-check (pchk) [options]\n"
+"\n"
+"Check for available patches.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
+msgstr ""
+"patch-check (pchk) [valg]\n"
+"\n"
+"Se etter tilgjengelige pakkeoppdateringer.\n"
+"\n"
+"  Kommandovalg:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Se etter pakkeoppdateringer kun i det spesifiserte arkivet.\n"
+
+#: ../src/Zypper.cc:1836
+msgid ""
+"patches (pch) [repository] ...\n"
+"\n"
+"List all patches available in specified repositories.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+msgstr ""
+"patches (pch) [arkiv] ...\n"
+"\n"
+"Vis alle tilgjengeligige pakkeoppdateringer i de spesifiserte arkivene.\n"
+"\n"
+"  Kommandovalg:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Bare en annen måte å spesifisere et arkiv på.\n"
+
+#: ../src/Zypper.cc:1863
+msgid ""
+"packages (pa) [options] [repository] ...\n"
+"\n"
+"List all packages available in specified repositories.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+"-i, --installed-only      Show only installed packages.\n"
+"-u, --uninstalled-only    Show only packages which are not installed.\n"
+"-N, --sort-by-name        Sort the list by package name.\n"
+"-R, --sort-by-repo        Sort the list by repository.\n"
+msgstr ""
+"packages (pa) [valg] [arkiv] ...\n"
+"\n"
+"Angi alle tilgjengelige pakker i de spesifiserte arkivene.\n"
+"\n"
+"  Kommandovalg:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Bare en annen måte å spesifisere et arkiv på.\n"
+"-i, --installed-only      Vis kun installerte pakker.\n"
+"-u, --uninstallert-only    Vis kun pakker som ikke er installert.\n"
+"-N, --sort-by-name        Sorter listen etter pakkenavn.\n"
+"-R, --sort-by-repo        Sorter listen etter arkiv.\n"
+
+#: ../src/Zypper.cc:1891
+msgid ""
+"patterns (pt) [options] [repository] ...\n"
+"\n"
+"List all patterns available in specified repositories.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+"-i, --installed-only      Show only installed patterns.\n"
+"-u, --uninstalled-only    Show only patterns which are not installed.\n"
+msgstr ""
+"patterns (pt) [valg] [arkiv] ...\n"
+"\n"
+"Vis alle tilgjengelige mønstre i de spesifiserte arkivene.\n"
+"\n"
+"  Kommandovalg:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Bare en annen måte å spesifisere et arkiv på.\n"
+"-i, --installed-only      Vis kun installerte mønstre.\n"
+"-u, --uninstallert-only    Vis kun mønstre som ikke er installert.\n"
+
+#: ../src/Zypper.cc:1917
+msgid ""
+"products (pd) [options] [repository] ...\n"
+"\n"
+"List all products available in specified repositories.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+"-i, --installed-only      Show only installed products.\n"
+"-u, --uninstalled-only    Show only products which are not installed.\n"
+msgstr ""
+"produkter (pd) [valg] [arkiv] ...\n"
+"\n"
+"Vis alle tilgjengelige produkter i de spesifiserte arkivene.\n"
+"\n"
+"  Kommandovalg:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Bare en annen måte å spesifisere et arkiv på.\n"
+"-i, --installed-only      Vis kun installerte produkter.\n"
+"-u, --uninstallert-only    Vis kun produkter som ikke er installert.\n"
+
+#: ../src/Zypper.cc:1944
+#, fuzzy, c-format
+msgid ""
+"info (if) [options] <name> ...\n"
+"\n"
+"Show detailed information for specified packages.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
+"-t, --type <type>         Type of package (%s).\n"
+"                          Default: %s.\n"
+"    --requires            Show also requires and prerequires.\n"
+"    --recommends          Show also recommends."
+msgstr ""
+"info (if) [valg] <navn> ...\n"
+"\n"
+"Vis detaljert informasjon om spesifiserte pakker.\n"
+"\n"
+"  Kommandovalg:\n"
+"-r, --repo <alias|#|URI>  Fungerer bare med det spesifiserte arkivet.\n"
+"-t, --type <type>         Pakketype (%s).\n"
+"                          Standard: %s."
+
+#: ../src/Zypper.cc:1969
+#, c-format
+msgid ""
+"patch-info <patchname> ...\n"
+"\n"
+"Show detailed information for patches.\n"
+"\n"
+"This is a rug compatibility alias for '%s'.\n"
+msgstr ""
+"patch-info <navn på pakkeoppdatering> ...\n"
+"\n"
+"Vis detaljert informasjon om pakkeoppdateringer.\n"
+"\n"
+"Dette er et rug-komptibilitetsalias for '%s'.\n"
+
+#: ../src/Zypper.cc:1988
+#, c-format
+msgid ""
+"pattern-info <pattern_name> ...\n"
+"\n"
+"Show detailed information for patterns.\n"
+"\n"
+"This is a rug compatibility alias for '%s'.\n"
+msgstr ""
+"pattern-info <navn på mønster> ...\n"
+"\n"
+"Vis detaljert informasjon om mønstre.\n"
+"\n"
+"Dette er et rug-komptibilitetsalias for '%s'.\n"
+
+#: ../src/Zypper.cc:2007
+#, c-format
+msgid ""
+"product-info <product_name> ...\n"
+"\n"
+"Show detailed information for products.\n"
+"\n"
+"This is a rug compatibility alias for '%s'.\n"
+msgstr ""
+"produkt-info <produktnavn> ...\n"
+"\n"
+"Vis detaljert informasjon om produkter.\n"
+"\n"
+"Dette er et rug-komptibilitetsalias for '%s'.\n"
+
+#: ../src/Zypper.cc:2024
+msgid ""
+"what-provides (wp) <capability>\n"
+"\n"
+"List all packages providing the specified capability.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"what-provides (wp) <egenskap>\n"
+"\n"
+"Vis alle pakker som inneholder den spesifiserte egenskapen.\n"
+"\n"
+"Denne kommandoen har ingen flere valg.\n"
+
+#: ../src/Zypper.cc:2075
+msgid ""
+"moo\n"
+"\n"
+"Show an animal.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"moo\n"
+"\n"
+"Vis et dyr.\n"
+"\n"
+"Denne kommandoen har ingen flere valg.\n"
+
+#: ../src/Zypper.cc:2097
+#, c-format
+msgid ""
+"addlock (al) [options] <packagename> ...\n"
+"\n"
+"Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n"
+"-t, --type <type>         Type of package (%s).\n"
+"                          Default: %s.\n"
+msgstr ""
+"addlock (al) [valg] <pakkenavn> ...\n"
+"\n"
+"Legg til en pakkelås. Spesifiser pakker som skal låses, men nøyaktig navn eller med en dal av navnet pluss '*' og '?' som jokertegn.\n"
+"\n"
+"  Kommandovalg:\n"
+"-r, --repo <alias|#|URI>  Begrens låsen til det spesifiserte arkivet.\n"
+"-t, --type <type>         Pakketype (%s).\n"
+"                          Standard: %s.\n"
+
+#: ../src/Zypper.cc:2123
+#, c-format
+msgid ""
+"removelock (rl) [options] <lock-number|packagename> ...\n"
+"\n"
+"Remove a package lock. Specify the lock to remove by its number obtained with '%s' or by package name.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
+msgstr ""
+"removelock (rl) [valg] <låsnummer|pakkenavn> ...\n"
+"\n"
+"Fjern en pakkelås. Spesifiser låsen som skal fjernen med nummeret som hentes med '%s' eller med pakkenavn.\n"
+"\n"
+"  Kommandovalg:\n"
+"-r, --repo <alias|#|URI>  Fjern kun låser i det spesifiserte arkivet.\n"
+
+#: ../src/Zypper.cc:2143
+msgid ""
+"locks (ll)\n"
+"\n"
+"List current package locks.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"locks (ll)\n"
+"\n"
+"Vis eksisterende pakkelåser.\n"
+"\n"
+"Denne kommandoen har ingen flere valg.\n"
+
+#: ../src/Zypper.cc:2163
+msgid ""
+"cleanlocks (cl)\n"
+"\n"
+"Remove useless locks.\n"
+"\n"
+"  Command options:\n"
+"-d, --only-duplicates     Clean only duplicate locks.\n"
+"-e, --only-empty          Clean only locks which doesn't lock anything.\n"
+msgstr ""
+
+#: ../src/Zypper.cc:2183
+msgid ""
+"targetos (tos)\n"
+"\n"
+"Show the ID string of the target Operating System.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"targetos (tos)\n"
+"\n"
+"Vis ID-strengen for måloperativsystemet.\n"
+"\n"
+"Denne kommandoen har ingen flere valg.\n"
+
+#: ../src/Zypper.cc:2202
+msgid ""
+"versioncmp (vcmp) <version1> <version2>\n"
+"\n"
+"Compare the versions supplied as arguments.\n"
+"\n"
+"  Command options:\n"
+"-m, --match  Takes missing release number as any release.\n"
+msgstr ""
+"versioncmp (vcmp)  <versjon1> <versjon2>\n"
+"\n"
+"Sammenlign tilgjengelige versjoner som argumenter.\n"
+"\n"
+"  Kommandovalg:\n"
+"-m, --match  Tolker manglende versjonsnummer som hvilken som helst versjon.\n"
+
+#: ../src/Zypper.cc:2221
+#, fuzzy
+msgid ""
+"licenses\n"
+"\n"
+"Report licenses and EULAs of currently installed software packages.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"licenses\n"
+"\n"
+"Rapporter lisenser og lisensavtaler for installerte programvarepakker.\n"
+"\n"
+"Denne kommandoen har ingen flere valg.\n"
+
+#: ../src/Zypper.cc:2240
+#, fuzzy
+msgid ""
+"ps\n"
+"\n"
+"List running processes which use files deleted by recent upgrades.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"locks (ll)\n"
+"\n"
+"Vis eksisterende pakkelåser.\n"
+"\n"
+"Denne kommandoen har ingen flere valg.\n"
+
+#: ../src/Zypper.cc:2258
+msgid ""
+"quit (exit, ^D)\n"
+"\n"
+"Quit the current zypper shell.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"quit (exit, ^D)\n"
+"\n"
+"Avslutt gjeldende zypper-skall.\n"
+"\n"
+"Denne kommandoen har ingen flere valg.\n"
+
+#: ../src/Zypper.cc:2275
+msgid ""
+"shell (sh)\n"
+"\n"
+"Enter the zypper command shell.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"shell (sh)\n"
+"\n"
+"Åpne zypper-kommandoskallet.\n"
+"\n"
+"Denne kommandoen har ingen flere valg.\n"
+
+#. translators: this is just a rug-compatiblity command
+#: ../src/Zypper.cc:2293
+msgid ""
+"service-types (st)\n"
+"\n"
+"List available service types.\n"
+msgstr ""
+"service-types (st)\n"
+"\n"
+"Vis tilgjengelige tjenestetyper.\n"
+
+#. trunslators: this is a rug-compatibility command (equivalent of
+#. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
+#. for how to translate specific terms like channel or service if in doubt.
+#: ../src/Zypper.cc:2331
+msgid ""
+"mount\n"
+"\n"
+"Mount directory with RPMs as a channel.\n"
+"\n"
+"  Command options:\n"
+"-a, --alias <alias>  Use given string as service alias.\n"
+"-n, --name <name>    Use given string as service name.\n"
+"-r, --recurse        Dive into subdirectories.\n"
+msgstr ""
+"mount\n"
+"\n"
+"Monter katalog med RPM-er som en kanal.\n"
+"\n"
+"  Kommandovalg:\n"
+"-a, --alias <alias>  Bruk angitt streng som tjenestealias.\n"
+"-n, --name <navn>    Bruk angitt streng som tjenestenavn.\n"
+"-r, --recurse        Gå inn i underkataloger.\n"
+
+#: ../src/Zypper.cc:2362
+#, c-format
+msgid ""
+"patch-search [options] [querystring...]\n"
+"\n"
+"Search for patches matching given search strings. This is a rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
+msgstr ""
+"patch-search [valg] [forespørselsstreng...]\n"
+"\n"
+"Søk etter pakkeoppdateringer som samsvarer med angitte søkestrenger. Dette er et rug-kompatibilitetsalias for '%s'. Du finner mer informasjon på manualsiden for zypper.\n"
+
+#. translators: this is just a rug-compatiblity command
+#: ../src/Zypper.cc:2380
+msgid ""
+"ping [options]\n"
+"\n"
+"This command has dummy implementation which always returns 0.\n"
+"It is provided for compatibility with rug.\n"
+msgstr ""
+"ping [valg]\n"
+"\n"
+"Dette er en 'tom' kommando som alltid returnerer 0.\n"
+"Den er tatt med for å gjøre zypper kompatibel med rug.\n"
+
+#: ../src/Zypper.cc:2394 ../src/Zypper.cc:4245
+msgid "Unexpected program flow."
+msgstr "Uventet programprosess."
+
+#: ../src/Zypper.cc:2421
+msgid "Non-option program arguments: "
+msgstr "Programargumenter som ikke er alternativer: "
+
+#. TranslatorExplanation this is a hedgehog, paint another animal, if you want
+#: ../src/Zypper.cc:2485
+msgid ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
+msgstr ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
+
+#: ../src/Zypper.cc:2512
+msgid "Root privileges are required for refreshing services."
+msgstr "Du må være rot for å oppdatere tjenester."
+
+#: ../src/Zypper.cc:2539 ../src/Zypper.cc:2659 ../src/Zypper.cc:2886
+msgid "Root privileges are required for modifying system services."
+msgstr "Du må være rot for å endre systemtjenester."
+
+#: ../src/Zypper.cc:2608
+msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
+msgstr "Kunne ikke avgjøre arkivtypen. Kontroller om den angitte URI-en peker på et gyldig arkiv."
+
+#: ../src/Zypper.cc:2640
+#, c-format
+msgid "'%s' is not a valid service type."
+msgstr "'%s' er ikke en gyldig tjenestetype."
+
+#: ../src/Zypper.cc:2642
+#, c-format
+msgid "See '%s' or '%s' to get a list of known service types."
+msgstr "Se '%s' eller '%s' for å vise en liste over kjente tjenestetyper."
+
+#. translators: aggregate option is e.g. "--all". This message will be
+#. followed by ms command help text which will explain it
+#. translators: aggregate option is e.g. "--all". This message will be
+#. followed by mr command help text which will explain it
+#: ../src/Zypper.cc:2671 ../src/Zypper.cc:3040
+msgid "Alias or an aggregate option is required."
+msgstr "Alias eller et samlevalg kreves."
+
+#: ../src/Zypper.cc:2705
+#, c-format
+msgid "Service '%s' not found."
+msgstr "Tjenesten '%s' ikke funnet."
+
+#: ../src/Zypper.cc:2741 ../src/Zypper.cc:2885 ../src/Zypper.cc:2971
+#: ../src/Zypper.cc:3027
+msgid "Root privileges are required for modifying system repositories."
+msgstr "Administratorrettigheter (rottilgang) er påkrevd for endre systemarkivene."
+
+#: ../src/Zypper.cc:2790 ../src/Zypper.cc:3153
+msgid "Too few arguments."
+msgstr "For få argumenter."
+
+#: ../src/Zypper.cc:2814
+msgid "If only one argument is used, it must be a URI pointing to a .repo file."
+msgstr "Hvis bare ett argument brukes, må det være en URI som peker på en .repo-fil."
+
+#: ../src/Zypper.cc:2840
+#, c-format
+msgid "Cannot use %s together with %s. Using the %s setting."
+msgstr "Kan ikke bruke %s sammen med %s. Bruker innstillingen %s."
+
+#: ../src/Zypper.cc:2863
+msgid "Specified type is not a valid repository type:"
+msgstr "Angitte type er ikke en gyldig arkivtype:"
+
+#: ../src/Zypper.cc:2865
+#, c-format
+msgid "See '%s' or '%s' to get a list of known repository types."
+msgstr "Se '%s' eller '%s' for å vise en liste over kjente arkivtyper."
+
+#. translators: %s is the supplied command line argument which
+#. for which no repository counterpart was found
+#: ../src/Zypper.cc:2921
+#, c-format
+msgid "Repository '%s' not found by alias, number or URI."
+msgstr "Arkivet '%s' ikke funnet ved hjelp av alias, nummer eller URI."
+
+#. translators: %s is the supplied command line argument which
+#. for which no service counterpart was found
+#: ../src/Zypper.cc:2944
+#, c-format
+msgid "Service '%s' not found by alias, number or URI."
+msgstr "Tjenesten '%s' ikke funnet ved hjelp av alias, nummer eller URI."
+
+#: ../src/Zypper.cc:2978
+msgid "Too few arguments. At least URI and alias are required."
+msgstr "For få argumenter. Minst URI og alias kreves."
+
+#: ../src/Zypper.cc:3003
+#, c-format
+msgid "Repository '%s' not found."
+msgstr "Arkivet '%s' ble ikke funnet."
+
+#: ../src/Zypper.cc:3073
+#, c-format
+msgid "Repository %s not found."
+msgstr "Arkivet %s ble ikke funnet."
+
+#: ../src/Zypper.cc:3092
+msgid "Root privileges are required for refreshing system repositories."
+msgstr "Administratorrettigheter (rottilgang) er påkrevd for oppdaterer systemarkivene."
+
+#: ../src/Zypper.cc:3099
+#, c-format
+msgid "The '%s' global option has no effect here."
+msgstr "Det globale valget '%s' har ingen effekt her."
+
+#: ../src/Zypper.cc:3107
+#, c-format
+msgid "Arguments are not allowed if '%s' is used."
+msgstr "Argumenter er ikke tillatt sammen med '%s'."
+
+#: ../src/Zypper.cc:3133
+msgid "Root privileges are required for cleaning local caches."
+msgstr "Du må være rot for å rydde opp i lokale mellomlagre."
+
+#: ../src/Zypper.cc:3154
+msgid "At least one package name is required."
+msgstr "Minst ett pakkenavn kreves."
+
+#: ../src/Zypper.cc:3164
+msgid "Root privileges are required for installing or uninstalling packages."
+msgstr "Administratorrettigheter (rottilgang) er påkrevd for å installere eller fjerne pakker."
+
+#. translators: rug related message, shown if
+#. 'zypper in --entire-catalog foorepo someargument' is specified
+#: ../src/Zypper.cc:3181
+msgid "Ignoring arguments, marking the entire repository."
+msgstr "Ignorerer argumenter, og merker hele arkivet."
+
+#: ../src/Zypper.cc:3191
+#, c-format
+msgid "Unknown package type: %s"
+msgstr "Ukjent pakketype: %s"
+
+#: ../src/Zypper.cc:3214
+#, c-format
+msgid "'%s' looks like an RPM file. Will try to download it."
+msgstr "'%s' ser ut som an RPM-fil. Forsøker å laste den ned."
+
+#: ../src/Zypper.cc:3227
+#, c-format
+msgid "Problem with the RPM file specified as '%s', skipping."
+msgstr "Problem med RPM-filen '%s', hopper over den."
+
+#: ../src/Zypper.cc:3251
+#, c-format
+msgid "Problem reading the RPM header of %s. Is it an RPM file?"
+msgstr "Problem med å lese RPM-deklarasjonen for %s. Er det en RPM-fil?"
+
+#: ../src/Zypper.cc:3276
+msgid "Plain RPM files cache"
+msgstr "Rent RPM-mellomlager"
+
+#: ../src/Zypper.cc:3297
+msgid "No valid arguments specified."
+msgstr "Ingen gyldige argumenter spesifisert."
+
+#: ../src/Zypper.cc:3311 ../src/Zypper.cc:3393
+msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
+msgstr "Advarsel: Mangler arkiv. Arbeider bare med installerte nødvendige pakker. Ingenting kan installeres."
+
+#: ../src/Zypper.cc:3340
+msgid "Source package name is a required argument."
+msgstr "Kildekodepakkens navn er et obligatorisk argument."
+
+#: ../src/Zypper.cc:3450 ../src/Zypper.cc:3710 ../src/Zypper.cc:3819
+#: ../src/Zypper.cc:3955 ../src/Zypper.cc:4035
+#, c-format
+msgid "Unknown package type '%s'."
+msgstr "Ukjent pakketype '%s'"
+
+#: ../src/Zypper.cc:3556
+msgid "Problem occurred initializing or executing the search query"
+msgstr "Det oppstod et problem ved initialisering eller kjøring av søket"
+
+#: ../src/Zypper.cc:3557
+msgid "See the above message for a hint."
+msgstr "Meldingen over innholder kanskje et hint."
+
+#. translators: Running as 'rug', cannot use 'best-effort' option.
+#: ../src/Zypper.cc:3731 ../src/Zypper.cc:3837
+#, c-format
+msgid "Running as '%s', cannot use '%s' option."
+msgstr "Kjører som '%s', kan ikke bruke valget '%s'."
+
+#: ../src/Zypper.cc:3739
+#, fuzzy, c-format
+msgid "Cannot use %s together with %s."
+msgstr "Kan ikke bruke %s sammen med %s. Bruker innstillingen %s."
+
+#: ../src/Zypper.cc:3772
+msgid "Root privileges are required for updating packages."
+msgstr "Administratorrettigheter (rottilgang) er påkrevd for å oppdatere pakker."
+
+#: ../src/Zypper.cc:3879
+msgid "Root privileges are required for performing a distribution upgrade."
+msgstr "Du må være rot for å utføre en distribusjonsoppgradering."
+
+#: ../src/Zypper.cc:3900
+#, c-format
+msgid "You are about to do a distribution upgrade with all enabled repositories. Make sure these repositories are compatible before you continue. See '%s' for more information about this command."
+msgstr ""
+
+#: ../src/Zypper.cc:3967
+#, fuzzy, c-format
+msgid "Type '%s' does not support %s."
+msgstr "Tjenesten '{0}' støtter ikke registrering."
+
+#: ../src/Zypper.cc:3997 ../src/Zypper.cc:4058
+msgid "Root privileges are required for adding of package locks."
+msgstr "Du må være rot for å legge til pakkelåser."
+
+#: ../src/Zypper.cc:4113
+#, c-format
+msgid "Removed %lu lock."
+msgid_plural "Removed %lu locks."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/Zypper.cc:4169
+#, c-format
+msgid "%s matches %s"
+msgstr "%s samsvarer med %s"
+
+#: ../src/Zypper.cc:4171
+#, c-format
+msgid "%s is newer than %s"
+msgstr "%s er nyere enn %s"
+
+#: ../src/Zypper.cc:4173
+#, c-format
+msgid "%s is older than %s"
+msgstr "%s er eldre enn %s"
+
+#: ../src/Zypper.cc:4230
+msgid "This command only makes sense in the zypper shell."
+msgstr "Denne kommandoen fungerer bare i et zypper-skall."
+
+#: ../src/Zypper.cc:4242
+msgid "You already are running zypper's shell."
+msgstr "Du befinner deg allerede i et zypper-skall."
+
+#: ../src/Zypper.cc:4259
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: ../src/Zypper.cc:4322
+msgid "Resolvable Type"
+msgstr "Type som kan løses"
+
+#~ msgid "Specifying architecture when selecting packages by name is not implemented."
+#~ msgstr "Definisjon av arkitektur når pakker velges med navn er ikke implementert."
+
+#~ msgid "Cannot parse capability '%s'."
+#~ msgstr "Kan ikke analysere evnen '%s'."
+
+#~ msgid "Reading installed packages"
+#~ msgstr "Leser installerte pakker"
+
+#~ msgid ""
+#~ "These are only the updates affecting the updater itself.\n"
+#~ "Other updates are available too.\n"
+#~ msgstr ""
+#~ "Dette er bare oppdateringer som påvirker oppdateringsprogrammet.\n"
+#~ "Andre oppdateringer er også tilgjengelig.\n"
+
+#~ msgid "abort"
+#~ msgstr "avbryt"
+
+#~ msgid "retry"
+#~ msgstr "gjenta"
+
+#~ msgid "ignore"
+#~ msgstr "Ignorer"
+
+#~ msgid "Abort, retry, ignore?\n"
+#~ msgstr "Avbryt, gjenta, ignorer?\n"
+
+#~ msgid ""
+#~ "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
+#~ "\t--no-remote\t\tIgnore remote repositories.\n"
+#~ msgstr ""
+#~ "\t--no-cd\t\t\tIgnorer CD/DVD-arkiver.\n"
+#~ " \t--no-remote\t\tIgnorer eksterne arkiver.\n"
+
+#~ msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
+#~ msgstr "    --from <alias|#|URI>        Velg pakker kun fra angitt arkiv.\n"
+
+#~ msgid "-s, --service             Show also alias of parent service.\n"
+#~ msgstr "-s, --service             Vis også alias for overordnet tjeneste\n"
+
+#~ msgid ""
+#~ "patch [options]\n"
+#~ "\n"
+#~ "Install all available needed patches.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "\n"
+#~ "-r, --repo <alias|#|URI>        Work only with specified repository.\n"
+#~ "    --skip-interactive          Skip interactive patches.\n"
+#~ "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
+#~ "                                confirmation prompt.\n"
+#~ "                                See man zypper for more details.\n"
+#~ "    --debug-solver              Create solver test case for debugging.\n"
+#~ "-D, --dry-run                   Test the update, do not actually update.\n"
+#~ msgstr ""
+#~ "patch [valg]\n"
+#~ "\n"
+#~ "Installer all tilgjengelige nødvendige pakkeoppdateringer.\n"
+#~ "\n"
+#~ "  Kommandovalg:\n"
+#~ "\n"
+#~ "-r, --repo <alias|#|URI>        Bruk bare det spesifiserte arkivet.\n"
+#~ "    --skip-interactive          Hopp over interaktive pakkeoppdateringer.\n"
+#~ "-l, --auto-agree-with-licenses  Si automatisk 'ja' til spørsmål om godkjenning av\n"
+#~ "                                tredjepartslisenser.\n"
+#~ "                                Tast 'man zypper' for mer informasjon.\n"
+#~ "    --debug-solver              Opprett testløsning for feilsøking.\n"
+#~ "-D, --dry-run                   Test oppdateringen, men ikke utfør den.\n"
+
+#~ msgid ""
+#~ "list-patches (lp) [options]\n"
+#~ "\n"
+#~ "List all available needed patches.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
+#~ msgstr ""
+#~ "list-patches (lp) [valg]\n"
+#~ "\n"
+#~ "List alle tilgjengelige nødvendige pakkeoppdateringer.\n"
+#~ "\n"
+#~ "  Kommandovalg:\n"
+#~ "-r, --repo <alias|#|URI>        Vis bare pakkeoppdateringer fra det spesifiserte arkivet.\n"
+
+#~ msgid ""
+#~ "dist-upgrade (dup) [options]\n"
+#~ "\n"
+#~ "Perform a distribution upgrade.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "\n"
+#~ "-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
+#~ "    --no-recommends             Do not install recommended packages, only required.\n"
+#~ "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+#~ "                                See man zypper for more details.\n"
+#~ "    --debug-solver              Create solver test case for debugging\n"
+#~ "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
+#~ msgstr ""
+#~ "dist-upgrade (dup) [valg]\n"
+#~ "\n"
+#~ "Utfør en distribusjonsoppgradering.\n"
+#~ "\n"
+#~ "  Kommandovalg:\n"
+#~ "\n"
+#~ "-r, --repo <alias|#|URI>        Begrens oppgraderingen til det spesifiserte arkivet.\n"
+#~ "    --no-recommends             Ikke installer anbefalte pakker, kun nødvendige.\n"
+#~ "-l, --auto-agree-with-licenses  Si automatisk 'ja' til spørsmål om godkjenning av tredjepartslisenser.\n"
+#~ "                                Tast 'man zypper' for mer informasjon.\n"
+#~ "    --debug-solver              Opprett en testløsning for feilsøking.\n"
+#~ "-D, --dry-run                   Test oppgraderingen, men ikke utfør den.\n"
+
+#~ msgid "Root privileges are required for modifying services."
+#~ msgstr "Du må være rot for å endre tjenester."
+
+# power-off message
+#~ msgid "Do you want to trust the key?"
+#~ msgstr "Vil du stole på nøkkelen?"
+
+#~ msgid "n/t/i"
+#~ msgstr "n/t/i"
