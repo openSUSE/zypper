@@ -18,6 +18,9 @@
 
 #include <unistd.h>
 #include <readline/history.h>
+#include <sys/vfs.h>
+#include <sys/statvfs.h>
+#include <linux/magic.h>
 
 #include <zypp/ZYppFactory.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
@@ -486,6 +489,62 @@ namespace {
 	return true;
     }
     return false;
+  }
+
+  bool checkRequiredCapabilities ( Zypper & zypper, GlobalOptions &gopts_r )
+  {
+    switch ( zypper.command().toEnum() ) {
+      case ZypperCommand::UPDATE_e:
+      case ZypperCommand::INSTALL_e:
+      case ZypperCommand::SRC_INSTALL_e:
+      case ZypperCommand::PATCH_e:
+      case ZypperCommand::DIST_UPGRADE_e:
+      case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
+      case ZypperCommand::VERIFY_e:
+      case ZypperCommand::REMOVE_e:
+      case ZypperCommand::ADD_REPO_e:
+      case ZypperCommand::REMOVE_REPO_e:
+      case ZypperCommand::MODIFY_REPO_e:
+      case ZypperCommand::RENAME_REPO_e:
+      case ZypperCommand::ADD_SERVICE_e:
+      case ZypperCommand::REMOVE_SERVICE_e:
+      case ZypperCommand::MODIFY_SERVICE_e: {
+
+        if ( zypper.cOpts().count("dry-run") )
+          return true;
+
+        struct statfs fsinfo;
+        memset( &fsinfo, 0, sizeof(struct statfs) );
+
+        int err = 0;
+        do {
+          err = statfs( gopts_r.root_dir.c_str(), &fsinfo );
+        } while ( err == -1 && errno == EINTR );
+
+        if ( !err ) {
+          if ( fsinfo.f_flags & ST_RDONLY ) {
+
+            bool isTransactionalServer = ( fsinfo.f_type == BTRFS_SUPER_MAGIC && PathInfo( "/usr/sbin/transactional-update" ).isFile() );
+
+            std::string msg;
+            if ( isTransactionalServer && !gopts_r.changedRoot ) {
+              msg = _("This is a transactional-server, please use transactional-update to update or modify the system.");
+            } else {
+              msg = _("The target filesystem is mounted as read-only. Please make sure the target filesystem is writeable.");
+            }
+            zypper.out().errorPar( msg );
+            ERR << msg << endl;
+            return false;
+          }
+        } else {
+          WAR << "Checking if " << gopts_r.root_dir << " is mounted read only failed with errno : " << errno << std::endl;
+        }
+        break;
+      }
+      default:
+        break;
+    }
+    return true;
   }
 
 } //namespace
@@ -3722,6 +3781,11 @@ void Zypper::doCommand()
       assertZYppPtrGod();
   }
   // === execute command ===
+
+  if ( !checkRequiredCapabilities( *this, _gopts ) ) {
+    setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
+    return;
+  }
 
   MIL << "Going to process command " << command() << endl;
   ResObject::Kind kind;
