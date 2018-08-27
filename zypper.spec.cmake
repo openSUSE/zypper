@@ -153,7 +153,9 @@ rm -rf "$RPM_BUILD_ROOT"
 
 %files -f zypper.lang
 %defattr(-,root,root)
+%if 0%{?suse_version} >= 1500
 %license COPYING
+%endif
 %config(noreplace) %{_sysconfdir}/zypp/zypper.conf
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypper.lr
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-refresh.lr
