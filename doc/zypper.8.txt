@@ -77,7 +77,7 @@ Services
 ~~~~~~~~
 Services are one level above repositories and serve to manage repositories or to do some special tasks. Libzypp currently supports 'Repository Index Service' (RIS) and 'Plugin Service'.
 
-Repository Index Service (RIS) is a special type of repository which contains a list of other repositories. This list can be generated dynamically by the server according to some URI parameters or user name, or can be static. Once such service is added to your system, zypper takes care of adding, modifying, or removing these repositories on your system to reflect the current list. See section *Service Management* and http://old-en.opensuse.org/Standards/Repository_Index_Service for more details.
+Repository Index Service (RIS) is a special type of repository which contains a list of other repositories. This list can be generated dynamically by the server according to some URI parameters or user name, or can be static. Once such service is added to your system, zypper takes care of adding, modifying, or removing these repositories on your system to reflect the current list. See section *Service Management* and https://en.opensuse.org/openSUSE:Standards_Repository_Index_Service for more details.
 
 Package Types
 ~~~~~~~~~~~~~
@@ -100,7 +100,7 @@ Throughout this manual we will often refer to resolvables simply as 'packages' a
 
 Package Dependencies
 ~~~~~~~~~~~~~~~~~~~~
-Software packages depend on each other in various ways. Packages usually 'require' or 'recommend' other packages, but they can also 'conflict' with other packages. Packages can also support specific hardware or language settings. Zypper uses a 'dependency solver' to find out what packages need to be installed to satisfy the user's request. See http://old-en.opensuse.org/Software_Management/Dependencies for more information.
+Software packages depend on each other in various ways. Packages usually 'require' or 'recommend' other packages, but they can also 'conflict' with other packages. Packages can also support specific hardware or language settings. Zypper uses a 'dependency solver' to find out what packages need to be installed to satisfy the user's request. See https://en.opensuse.org/Libzypp/Dependencies for more information.
 
 Package File Conflicts
 ~~~~~~~~~~~~~~~~~~~~~~
