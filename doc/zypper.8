@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 08/13/2018
+.\"      Date: 08/29/2018
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "08/13/2018" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "08/29/2018" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -79,7 +79,7 @@ To delay the up\-to\-date check (and thus the automatic refresh) for a certain n
 .sp
 Services are one level above repositories and serve to manage repositories or to do some special tasks\&. Libzypp currently supports \fIRepository Index Service\fR (RIS) and \fIPlugin Service\fR\&.
 .sp
-Repository Index Service (RIS) is a special type of repository which contains a list of other repositories\&. This list can be generated dynamically by the server according to some URI parameters or user name, or can be static\&. Once such service is added to your system, zypper takes care of adding, modifying, or removing these repositories on your system to reflect the current list\&. See section \fBService Management\fR and http://old\-en\&.opensuse\&.org/Standards/Repository_Index_Service for more details\&.
+Repository Index Service (RIS) is a special type of repository which contains a list of other repositories\&. This list can be generated dynamically by the server according to some URI parameters or user name, or can be static\&. Once such service is added to your system, zypper takes care of adding, modifying, or removing these repositories on your system to reflect the current list\&. See section \fBService Management\fR and https://en\&.opensuse\&.org/openSUSE:Standards_Repository_Index_Service for more details\&.
 .SS "Package Types"
 .sp
 Zypper works with several types of resource objects, called \fIresolvables\fR\&. A resolvable might be a \fBpackage\fR, \fBpatch\fR, \fBpattern\fR, \fBproduct\fR; basically any \fIkind of object\fR with dependencies to other objects\&.
@@ -150,7 +150,7 @@ Focuses on packages a user might want to install and hide away supporting packag
 Throughout this manual we will often refer to resolvables simply as \fIpackages\fR and to resolvable types as \fIpackage type\fR or \fIkind\fR\&. These type names can be used as arguments of \fB\-\-type\fR option in several commands like \fBinstall\fR, \fBinfo\fR, or \fBsearch\fR\&. Commands should also allow to specify resolvables as \fIKIND\fR\fB:\fR\fINAME\fR (e\&.g\&. \fBpatch:openSUSE\-2014\-7\fR)\&.
 .SS "Package Dependencies"
 .sp
-Software packages depend on each other in various ways\&. Packages usually \fIrequire\fR or \fIrecommend\fR other packages, but they can also \fIconflict\fR with other packages\&. Packages can also support specific hardware or language settings\&. Zypper uses a \fIdependency solver\fR to find out what packages need to be installed to satisfy the user\(cqs request\&. See http://old\-en\&.opensuse\&.org/Software_Management/Dependencies for more information\&.
+Software packages depend on each other in various ways\&. Packages usually \fIrequire\fR or \fIrecommend\fR other packages, but they can also \fIconflict\fR with other packages\&. Packages can also support specific hardware or language settings\&. Zypper uses a \fIdependency solver\fR to find out what packages need to be installed to satisfy the user\(cqs request\&. See https://en\&.opensuse\&.org/Libzypp/Dependencies for more information\&.
 .SS "Package File Conflicts"
 .sp
 File conflicts happen when two packages attempt to install files with the same name but different contents\&. This may happen if you are installing a newer version of a package without erasing the older version, of if two unrelated packages each install a file with the same name\&.
