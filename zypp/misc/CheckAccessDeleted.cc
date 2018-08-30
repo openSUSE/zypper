@@ -78,6 +78,8 @@ namespace zypp
 
     /** bsc#1099847: Check for lsof version < 4.90 which does not support '-K i'
      * Just a quick check to allow code15 libzypp runnig in a code12 environment.
+     * bsc#1036304: '-K i' was backported to older lsof versions, indicated by
+     * lsof providing 'backported-option-Ki'.
      */
     bool lsofNoOptKi()
     {
@@ -95,7 +97,7 @@ namespace zypp
       } tmpUnblock;
 
       librpmDb::db_const_iterator it;
-      return( it.findPackage( "lsof" ) && it->tag_edition() < Edition("4.90") );
+      return( it.findPackage( "lsof" ) && it->tag_edition() < Edition("4.90") && !it->tag_provides().count( Capability("backported-option-Ki") ) );
     }
 
   } //namespace
