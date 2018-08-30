@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-08-04 12:21+0000\n"
+"PO-Revision-Date: 2018-08-30 21:31+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -288,11 +288,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"De rpm-database lijkt oude versie V3 gpg-sleutels te bevatte die inmiddels "
+"verouderd zijn en als onveilig worden beschouwd:"
 
 #: src/callbacks/keyring.h:413
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Om details te zien over een sleutel roep aan '%1%'."
 
 #: src/callbacks/keyring.h:417
 #, boost-format
@@ -300,6 +302,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Tenzij u meent dat de sleutel in kwestie nog steeds in gebruik is, kunt u "
+"deze uit de rpm-database verwijderen door aanroepen van '%1%'."
 
 #: src/callbacks/keyring.h:434
 msgid "New package signing key received:"
@@ -1835,12 +1839,16 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Dit is een transactionele server, gebruik transactional-update om het "
+"systeem bij te werken of te wijzigen."
 
 #: src/Zypper.cc:533
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"Het doelbestandssysteem is als alleen-lezen aangekoppeld. Ga na dat het "
+"doelbestandssysteem te beschrijven is."
 
 #: src/Zypper.cc:644
 msgid "Command options:"
