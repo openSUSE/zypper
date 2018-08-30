@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-08-07 12:26+0000\n"
+"PO-Revision-Date: 2018-08-30 21:02+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -296,11 +296,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"Die rpm-Datenbank scheint alte GPG-Keys der Version V3 zu beinhalten, die "
+"inzwischen veraltet und als unsicher eingeschätzt werden:"
 
 #: src/callbacks/keyring.h:413
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Um Details über einen Schlüssel-Aufruf '%1' zu sehen."
 
 #: src/callbacks/keyring.h:417
 #, boost-format
