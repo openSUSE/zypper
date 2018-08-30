@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Thu Aug 30 16:47:05 CEST 2018 - ma@suse.de
+
+- Notify user about unsupported rpm V3 keys in an old rpm database
+  (bsc#1096217)
+- man: Remove links to missing metadata section (fixes #140)
+- Detect read only filesystem on system modifying operations
+  (fixes #199)
+- Use %license (bsc#1082318)
+- Handle repo aliases containing multiple ':' in the PackageArgs
+  parser (bsc #1041178)
+- BuildRequires:  libzypp-devel >= 17.6.3
+- version 1.14.9
+
+-------------------------------------------------------------------
 Fri Aug  3 11:34:32 CEST 2018 - ma@suse.de
 
 - Support listing gpgkey URLs in repo files (bsc#1088037)
