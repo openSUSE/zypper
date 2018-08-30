@@ -388,8 +388,39 @@ namespace zypp
           data.set("TrustKey", res);
           return;
         }
+        else if ( data.type() == zypp::ContentType( KeyRingReport::KEYS_NOT_IMPORTED_REPORT ) )
+	  return reportKeysNotImportedReport( data );
+
         WAR << "Unhandled report() call" << endl;
       }
+
+      void reportKeysNotImportedReport( const UserData & data )
+      {
+	if ( !data.hasvalue("Keys") )
+	{
+	  WAR << "Missing arguments in report call for content type: " << data.type() << endl;
+	  return;
+	}
+	Zypper & zypper = Zypper::instance();
+
+	zypper.out().notePar(_("The rpm database seems to contain old V3 version gpg keys which are meanwhile obsolete and considered insecure:") );
+
+	zypper.out().gap();
+	for ( const Edition & ed : data.get( "Keys", std::set<Edition>() ) )
+	  zypper.out().info( str::Str() << /*indent8*/"        gpg-pubkey-" << ed );
+
+	Zypper::instance().out().par( 4,
+				      str::Format(_("To see details about a key call '%1%'.") )
+				      % "rpm -qi GPG-PUBKEY-VERSION" );
+
+	Zypper::instance().out().par( 4,
+				      str::Format(_("Unless you believe the key in question is still in use, you can remove it from the rpm database calling '%1%'.") )
+				      % "rpm -e GPG-PUBKEY-VERSION" );
+
+	zypper.out().gap();
+      }
+
+      ////////////////////////////////////////////////////////////////////
 
       bool askUserToAcceptPackageKey( const PublicKey &key, const KeyContext &context )
       {
