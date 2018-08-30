@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-08-06 12:40+0000\n"
+"PO-Revision-Date: 2018-08-30 22:25+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -277,11 +277,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"Sembla que la base de dades d'rpm conté claus gpg de l'antiga versió V3, que "
+"són obsoletes i que es consideren no segures:"
 
 #: src/callbacks/keyring.h:413
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Per veure detalls sobre una clau: \"%1%\"."
 
 #: src/callbacks/keyring.h:417
 #, boost-format
@@ -289,6 +291,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Si no és que cregueu que la clau en qüestió encara s'usi, podeu suprimir-la "
+"de la base de dades d'rpm amb \"%1%\"."
 
 #: src/callbacks/keyring.h:434
 msgid "New package signing key received:"
@@ -1789,12 +1793,16 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Això és un servidor transaccional. Si us plau, useu transactional-update per "
+"actualitzar o modificar el sistema."
 
 #: src/Zypper.cc:533
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"El sistema de fitxers de destinació està muntat com a només de lectura. Si "
+"us plau, assegureu-vos que sigui d'escriptura."
 
 #: src/Zypper.cc:644
 msgid "Command options:"
