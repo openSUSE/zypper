@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 30 16:44:56 CEST 2018 - ma@suse.de
+
+- Check for not imported keys after multi key import from rpmdb
+  (bsc#1096217)
+- version 17.6.3 (2)
+
+-------------------------------------------------------------------
 Tue Aug 21 18:46:35 CEST 2018 - ma@suse.de
 
 - fixup! Add filesize check for downloads with known size (bsc#408814)
