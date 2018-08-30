@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-08-03 10:37+0000\n"
+"PO-Revision-Date: 2018-08-30 22:59+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -279,18 +279,19 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"RPM データベース内に、古い V3 形式の GPG 鍵が存在しているものと思われます。この形式は既に古く、機密が保持できないものと考えられています:"
 
 #: src/callbacks/keyring.h:413
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "鍵についての詳細を表示するには、 '%1%' を実行してください。"
 
 #: src/callbacks/keyring.h:417
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
-msgstr ""
+msgstr "本件の鍵を現在もなお使用している場合を除き、 '%1%' で RPM データベースから鍵を削除しておくことをお勧めします。"
 
 #: src/callbacks/keyring.h:434
 msgid "New package signing key received:"
@@ -1691,12 +1692,13 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"このマシンはトランザクション型のサーバです。システムを更新したり修正したりするには、 transactional-update をお使いください。"
 
 #: src/Zypper.cc:533
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
-msgstr ""
+msgstr "ターゲットのファイルシステムが読み込み専用でマウントされています。書き込み可能な状態にしてください。"
 
 #: src/Zypper.cc:644
 msgid "Command options:"
