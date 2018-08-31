@@ -93,6 +93,9 @@ SET( zypper_utils_HEADERS
   utils/richtext.h
   utils/text.h
   utils/XmlFilter.h
+  utils/flags/zyppflags.h
+  utils/flags/flagtypes.h
+  utils/flags/exceptions.h
 )
 
 SET( zypper_utils_SRCS
@@ -106,6 +109,9 @@ SET( zypper_utils_SRCS
   utils/prompt.cc
   utils/richtext.cc
   utils/text.cc
+  utils/flags/zyppflags.cc
+  utils/flags/flagtypes.cc
+  utils/flags/exceptions.cc
   ${zypper_utils_HEADERS}
 )
 
