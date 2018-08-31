@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-08-30 22:25+0000\n"
+"PO-Revision-Date: 2018-08-31 13:00+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -4092,15 +4092,11 @@ msgstr ""
 
 #: src/Zypper.cc:3824
 msgid "Root privileges are required for refreshing services."
-msgstr ""
-"Es necessiten privilegis d'usuari primari per poder refrescar els serveis "
-"del sistema."
+msgstr "Calen privilegis d'arrel per poder refrescar els serveis del sistema."
 
 #: src/Zypper.cc:3848 src/Zypper.cc:3927 src/Zypper.cc:4115
 msgid "Root privileges are required for modifying system services."
-msgstr ""
-"Es necessiten privilegis d'usuari primari per poder modificar els serveis "
-"del sistema."
+msgstr "Calen privilegis d'arrel per poder modificar els serveis del sistema."
 
 #: src/Zypper.cc:3911
 #, c-format, boost-format
@@ -4129,8 +4125,7 @@ msgstr "No s'ha trobat el servei \"%s\"."
 #: src/Zypper.cc:3997 src/Zypper.cc:4114 src/Zypper.cc:4218 src/Zypper.cc:4270
 msgid "Root privileges are required for modifying system repositories."
 msgstr ""
-"Es necessiten privilegis d'usuari primari per poder modificar els "
-"repositoris del sistema."
+"Calen privilegis d'arrel per poder modificar els repositoris del sistema."
 
 #: src/Zypper.cc:4023 src/Zypper.cc:4382
 msgid "Too few arguments."
@@ -4191,8 +4186,7 @@ msgstr "No s'ha trobat el repositori %s."
 #: src/Zypper.cc:4326
 msgid "Root privileges are required for refreshing system repositories."
 msgstr ""
-"Es necessiten privilegis d'usuari primari per poder refrescar les fonts del "
-"sistema."
+"Calen privilegis d'arrel per poder refrescar els repositoris del sistema."
 
 #: src/Zypper.cc:4332
 #, c-format, boost-format
@@ -4206,9 +4200,7 @@ msgstr "No es permeten arguments si no es fa servir \"%s\" ."
 
 #: src/Zypper.cc:4364
 msgid "Root privileges are required for cleaning local caches."
-msgstr ""
-"Es necessiten privilegis d'usuari primari per poder netejar la memòria cau "
-"local."
+msgstr "Calen privilegis d'arrel per poder netejar la memòria cau local."
 
 #: src/Zypper.cc:4383
 msgid "At least one package name is required."
@@ -4216,15 +4208,13 @@ msgstr "Com a mínim es necessita el nom d'un paquet."
 
 #: src/Zypper.cc:4392 src/Zypper.cc:4641 src/Zypper.cc:4678
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr ""
-"Es necessiten privilegis d'usuari primari per instal·lar o desinstal·lar "
-"paquets."
+msgstr "Calen privilegis d'arrel per instal·lar o desinstal·lar paquets."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/Zypper.cc:4404
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "Ignorant els arguments, marcant tot el repositori."
+msgstr "S'ignoren els arguments, es marca tot el repositori."
 
 #: src/Zypper.cc:4415
 #, c-format, boost-format
@@ -4340,12 +4330,11 @@ msgstr "No es pot fer servir %s juntament amb %s."
 
 #: src/Zypper.cc:5138
 msgid "Root privileges are required for updating packages."
-msgstr ""
-"Es necessiten privilegis d'usuari primari per poder actualitzar paquets."
+msgstr "Calen privilegis d'arrel per poder actualitzar paquets."
 
 #: src/Zypper.cc:5197 src/Zypper.cc:5205 src/Zypper.cc:5286
 msgid "Operation not supported."
-msgstr "Operació no suportada."
+msgstr "Operació no admesa."
 
 #: src/Zypper.cc:5198
 #, c-format, boost-format
@@ -4372,8 +4361,7 @@ msgstr ""
 #: src/Zypper.cc:5322
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
-"Es necessiten privilegis d'usuari primari per poder fer una actualització de "
-"la distribució."
+"Calen privilegis d'arrel per poder fer una actualització de la distribució."
 
 #: src/Zypper.cc:5342
 #, c-format, boost-format
@@ -4398,9 +4386,7 @@ msgstr "Ús"
 
 #: src/Zypper.cc:5430 src/Zypper.cc:5471
 msgid "Root privileges are required for adding of package locks."
-msgstr ""
-"Es necessiten privilegis d'usuari primari per poder afegir blocatges de "
-"paquets."
+msgstr "Calen privilegis d'arrel per poder afegir blocatges de paquets."
 
 #: src/Zypper.cc:5552
 #, c-format, boost-format
@@ -6247,8 +6233,7 @@ msgstr ""
 #: src/solve-commit.cc:636
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
-"Es necessiten privilegis d'usuari primari per poder arreglar els problemes "
-"de dependències."
+"Calen privilegis d'arrel per poder arreglar els problemes de dependències."
 
 #. translators: These are the "Continue?" prompt options corresponding to
 #. "Yes / No / show Problems / Versions / Arch / Repository /
