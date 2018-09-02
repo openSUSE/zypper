@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-08-04 13:10+0000\n"
+"PO-Revision-Date: 2018-09-02 08:40+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -283,11 +283,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"Databáze RPM zřejmě obsahuje starou verzi V3 klíčů GPG, které mezitím "
+"zastaraly a už se nepovažují za bezpečné:"
 
 #: src/callbacks/keyring.h:413
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Podrobnosti o klíči: vyvolejte '%1%'."
 
 #: src/callbacks/keyring.h:417
 #, boost-format
@@ -295,6 +297,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Pokud si myslíte, že se klíč už nepoužívá, odstraňte ho z databáze RPM "
+"vyvoláním '%1%'."
 
 #: src/callbacks/keyring.h:434
 msgid "New package signing key received:"
@@ -1854,12 +1858,16 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Toto je transakční server; ke změně/aktualizaci systému použijte transakční "
+"update."
 
 #: src/Zypper.cc:533
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"Cílový systém souborů je připojen pouze pro čtení. Zajistěte, aby byl "
+"zapisovatelný."
 
 #: src/Zypper.cc:644
 msgid "Command options:"
