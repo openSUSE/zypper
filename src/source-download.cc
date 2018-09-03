@@ -256,7 +256,7 @@ namespace
 
     // scan installed packages to manifest
     {
-      if ( _zypper.defaultLoadSystem( _options->_dryrun ? Zypper::NO_REPOS : Zypper::LoadSystemFlags() ) != ZYPPER_EXIT_OK )
+      if ( _zypper.defaultLoadSystem( _options->_dryrun ? NO_REPOS : LoadSystemFlags() ) != ZYPPER_EXIT_OK )
       {
 	ERR << "Startup returns " << _zypper.exitCode() << endl;
 	throw( Out::Error(_("Failed to read download directory"),

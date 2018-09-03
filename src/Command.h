@@ -11,6 +11,8 @@
 //#include<iosfwd>
 #include<string>
 
+#include "commands/basecommand.h"
+
 /**
  * Enumeration of <b>zypper</b> commands with mapping of command aliases.
  * The mapping includes <b>rug</b> equivalents as well.
@@ -170,7 +172,7 @@ struct ZypperCommand
     RUG_PING_e
   };
 
-  ZypperCommand( Command command ) : _command(command) {}
+  ZypperCommand( Command command );
 
   explicit ZypperCommand( const std::string & strval_r );
 
@@ -178,10 +180,16 @@ struct ZypperCommand
 
   const std::string & asString() const;
 
+  ZypperBaseCommandPtr commandObject() const;
+
 private:
   /** Fills SubcommandOptions::Detected on the fly if SUBCOMMAND */
   Command parse(const std::string & strval_r) const;
   Command _command;
+
+  /** Only initialized if we have a new style command */
+  ZypperBaseCommandPtr _newStyleCmdObj;
+
 };
 
 inline std::ostream & operator<<( std::ostream & str, const ZypperCommand & obj )

@@ -63,6 +63,12 @@
 #include "output/OutNormal.h"
 #include "output/OutXML.h"
 
+#include "utils/flags/zyppflags.h"
+#include "utils/flags/exceptions.h"
+
+#include "commands/commandhelpformatter.h"
+#include "commands/locks.h"
+
 using namespace zypp;
 
 bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExit
@@ -509,138 +515,6 @@ namespace env {
     return ret;
   }
 } //namespace env
-///////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-namespace
-{
-  ///////////////////////////////////////////////////////////////////
-  /// \class CommandHelpFormater
-  /// \brief Class for command help formating
-  ///////////////////////////////////////////////////////////////////
-  struct CommandHelpFormater
-  {
-    CommandHelpFormater()
-    : _mww( _str, Zypper::instance().out().defaultFormatWidth( 100 ) )
-    {}
-
-    /** Allow using the underlying steam directly. */
-    template<class Tp_>
-    CommandHelpFormater & operator<<( Tp_ && val )
-    { _str << std::forward<Tp_>(val); return *this; }
-
-    /** Conversion to std::string */
-    operator std::string() const { return _str.str(); }
-
-    /** An empty line */
-    CommandHelpFormater & gap()
-    { _mww.gotoNextPar(); return *this; }
-
-    /** Synopsis
-     * \code
-     * "<singleline text_r>"
-     * \endcode
-     */
-    CommandHelpFormater & synopsis( boost::string_ref text_r )
-    { _mww.writePar( text_r ); return *this; }
-    /** \overload const char * text */
-    CommandHelpFormater & synopsis( const char * text_r )
-    { return synopsis( boost::string_ref(text_r) ); }
-    /** \overload std::string text */
-    CommandHelpFormater & synopsis( const std::string & text_r )
-    { return synopsis( boost::string_ref(text_r) ); }
-    /** \overload str::Format text */
-    CommandHelpFormater & synopsis( const str::Format & text_r )
-    { return synopsis( boost::string_ref(text_r.str()) ); }
-
-
-    /** Description block with leading gap
-     * \code
-     *
-     * "<multiline text_r>"
-     * \endcode
-     */
-    CommandHelpFormater & description( boost::string_ref text_r )
-    { _mww.gotoNextPar(); _mww.writePar( text_r ); return *this; }
-    /** \overload const char * text */
-    CommandHelpFormater & description( const char * text_r )
-    { return description( boost::string_ref(text_r) ); }
-    /** \overload std::string text */
-    CommandHelpFormater & description( const std::string & text_r )
-    { return description( boost::string_ref(text_r) ); }
-    /** \overload str::Format text */
-    CommandHelpFormater & description( const str::Format & text_r )
-    { return description( boost::string_ref(text_r.str()) ); }
-
-    /** Option section title
-     * \code
-     * ""
-     * "  <text_r:>"
-     * ""
-     * \endcode
-     */
-    CommandHelpFormater & optionSection( boost::string_ref text_r )
-    { _mww.gotoNextPar(); _mww.writePar( text_r, 2 ); _mww.gotoNextPar(); return *this; }
-
-    CommandHelpFormater & optionSectionCommandOptions()
-    { return optionSection(_("Command options:") ); }
-
-    CommandHelpFormater & optionSectionSolverOptions()
-    { return optionSection(_("Solver options:") ); }
-
-    CommandHelpFormater & optionSectionExpertOptions()
-    { return optionSection(_("Expert options:") ); }
-
-    CommandHelpFormater & noOptionSection()
-    { return optionSection(_("This command has no additional options.") ); }
-
-    CommandHelpFormater & legacyOptionSection()
-    { return optionSection(_("Legacy options:") ); }
-
-    CommandHelpFormater & legacyOption( boost::string_ref old_r, boost::string_ref new_r )
-    { // translator: '-r             The same as -f.
-      return option( old_r, str::Format(_("The same as %1%.")) % new_r ); }
-
-
-    /** Option definition
-     * \code
-     * "123456789012345678901234567890123456789
-     * "-o, --long-name             <text_r> starts on 29 maybe on next line"
-     * "                            if long-name is too long.
-     * \endcode
-     */
-    CommandHelpFormater & option( boost::string_ref option_r, boost::string_ref text_r )
-    { _mww.writeDefinition( option_r , text_r, (option_r.starts_with( "--" )?4:0), 28 ); return *this; }
-    /** \overload const char * text */
-    CommandHelpFormater & option( boost::string_ref option_r, const char * text_r )
-    { return option( option_r, boost::string_ref(text_r) ); }
-    /** \overload std::string text */
-    CommandHelpFormater & option( boost::string_ref option_r, const std::string & text_r )
-    { return option( option_r, boost::string_ref(text_r) ); }
-    /** \overload str::Format text */
-    CommandHelpFormater & option( boost::string_ref option_r, const str::Format & text_r )
-    { return option( option_r, boost::string_ref(text_r.str()) ); }
-    /** \overload "option\ntext_r" */
-    CommandHelpFormater & option( boost::string_ref allinone_r )
-    {
-      std::string::size_type sep = allinone_r.find( '\n' );
-      if ( sep != std::string::npos )
-	_mww.writeDefinition( allinone_r.substr( 0, sep ), allinone_r.substr( sep+1 ), (allinone_r.starts_with( "--" )?4:0), 28 );
-      else
-	_mww.writeDefinition( allinone_r , "", (allinone_r.starts_with( "--" )?4:0), 28 );
-      return *this;
-    }
-
-    /** \todo eliminate legacy indentation */
-    CommandHelpFormater & option26( boost::string_ref option_r, boost::string_ref text_r )
-    { _mww.writeDefinition( option_r , text_r, (option_r.starts_with( "--" )?4:0), 26 ); return *this; }
-
-  private:
-    std::ostringstream   _str;
-    mbs::MbsWriteWrapped _mww;
-  };
-} //namespace
-///////////////////////////////////////////////////////////////////
-
 
 Zypper::Zypper()
 : _argc( 0 )
@@ -1771,6 +1645,58 @@ void Zypper::processCommandOptions()
         ZYPP_THROW( ExitRequestException("help provided") );
       }
     }
+  }
+
+  // handle new style commands
+  ZypperBaseCommandPtr newStyleCmd = command().commandObject();
+  if ( newStyleCmd ) {
+
+    _command_help = newStyleCmd->help();
+
+    MIL << "Found new style command << " << newStyleCmd->command().front() << endl;
+
+    //no need to parse args if we want help anyway
+    if ( runningHelp() )
+      return;
+
+    // parse command options
+    try {
+      //reset the command to default
+      newStyleCmd->reset();
+
+      int nextArg = ZyppFlags::parseCLI( argc(), argv(), newStyleCmd->options(), optind );
+
+      MIL << "Parsed new style arguments" << endl;
+
+      if ( nextArg < argc() )
+      {
+        std::ostringstream s;
+        s << _("Non-option program arguments: ");
+        while ( nextArg < argc() )
+        {
+          std::string argument = argv()[nextArg++];
+          s << "'" << argument << "' ";
+          _arguments.push_back( argument );
+        }
+        out().info( s.str(), Out::HIGH );
+      }
+
+      //make sure help is shown if required
+      setRunningHelp( newStyleCmd->helpRequested() );
+
+      //for now keep compat
+      optind = nextArg;
+
+    } catch ( const ZyppFlags::ZyppFlagsException &e) {
+      ERR << e.asString() << endl;
+      out().error( e.asUserString() );
+      setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
+      return;
+    }
+
+
+    MIL << "New Style command done " << endl;
+    return;
   }
 
   switch ( command().toEnum() )
@@ -3239,34 +3165,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::LIST_LOCKS_e:
-  {
-    shared_ptr<ListLocksOptions> myOpts( new ListLocksOptions() );
-    _commandOptions = myOpts;
-    static struct option options[] =
-    {
-      {"help",			no_argument,		0, 'h'},
-      {"matches",		no_argument,		0, 'm'},
-      {"solvables",		no_argument,		0, 's'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-      _("locks (ll) [options]")
-    )
-    .description(	// translators: command description
-      _("List current package locks.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-m, --matches",	// translators: -m, --matches
-	     _("Show the number of resolvables matched by each lock.") )
-    .option( "-s, --solvables",	// translators: -s, --solvables
-	     _("List the resolvables matched by each lock.") )
-    ;
-    break;
-  }
-
   case ZypperCommand::CLEAN_LOCKS_e:
   {
     static struct option options[] =
@@ -3724,8 +3622,21 @@ void Zypper::doCommand()
   // === execute command ===
 
   MIL << "Going to process command " << command() << endl;
-  ResObject::Kind kind;
 
+  //handle new style commands
+  ZypperBaseCommandPtr newStyleCmd = command().commandObject();
+  if ( newStyleCmd ) {
+    int exitCode = defaultLoadSystem( newStyleCmd->needSystemSetup() );
+    if ( ZYPPER_EXIT_OK != exitCode ) {
+      setExitCode( exitCode );
+      return;
+    }
+
+    setExitCode( newStyleCmd->run(*this, _arguments) );
+    return;
+  }
+
+  ResObject::Kind kind;
   switch( command().toEnum() )
   {
 
@@ -5435,33 +5346,6 @@ void Zypper::doCommand()
     //  let remove_locks determine the appropriate type
 
     remove_locks( *this, _arguments, kinds );
-
-    break;
-  }
-
-  case ZypperCommand::LIST_LOCKS_e:
-  {
-    shared_ptr<ListLocksOptions> listLocksOptions = commandOptionsAs<ListLocksOptions>();
-    if ( !listLocksOptions )
-      throw( Out::Error( ZYPPER_EXIT_ERR_BUG, "Wrong or missing options struct." ) );
-
-    bool needLoadSystem = false;
-
-    if ( copts.count("matches") )
-    {
-      listLocksOptions->_withMatches = true;
-      needLoadSystem = true;
-    }
-    if ( copts.count("solvables") )
-    {
-      listLocksOptions->_withSolvables = true;
-      needLoadSystem = true;
-    }
-
-    if ( needLoadSystem )
-      defaultLoadSystem();
-
-    list_locks( *this );
 
     break;
   }

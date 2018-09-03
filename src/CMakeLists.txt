@@ -37,6 +37,12 @@ SET (zypper_HEADERS
   callbacks/rpm.h
   callbacks/repo.h
   callbacks/job.h
+  commands/commandhelpformatter.h
+  commands/basecommand.h
+  commands/locks.h
+  commands/locks/add.h
+  commands/locks/list.h
+  commands/locks/remove.h
 )
 
 SET( zypper_SRCS
@@ -61,6 +67,11 @@ SET( zypper_SRCS
   SolverRequester.cc
   Summary.cc
   callbacks/media.cc
+  commands/commandhelpformatter.cc
+  commands/basecommand.cc
+  commands/locks/add.cc
+  commands/locks/list.cc
+  commands/locks/remove.cc
   ${zypper_HEADERS}
 )
 
