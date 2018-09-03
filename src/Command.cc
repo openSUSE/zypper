@@ -14,6 +14,8 @@
 #include "main.h"
 #include "Command.h"
 
+#include "commands/locks.h"
+
 using namespace zypp;
 
 // redefine _ gettext macro defined by ZYpp
@@ -25,6 +27,16 @@ using namespace zypp;
 ///////////////////////////////////////////////////////////////////
 namespace
 {
+  //@TODO hack for now, this should be migrated to be part of Zypper class directly instead of a
+  //singleton
+  static std::map< ZypperCommand::Command, ZypperBaseCommandPtr > &newStyleCommands ()
+  {
+    static std::map< ZypperCommand::Command, ZypperBaseCommandPtr > table {
+      { ZypperCommand::LIST_LOCKS_e,  std::make_shared<ListLocksCmd>() }
+    };
+    return table;
+  }
+
   static NamedValue<ZypperCommand::Command> & table()
   {
     static NamedValue<ZypperCommand::Command> _table;
@@ -74,7 +86,7 @@ namespace
 
       _t( ADD_LOCK_e )		| "addlock"		| "al" | "lock-add" | "la";
       _t( REMOVE_LOCK_e )	| "removelock"		| "rl" | "lock-delete" | "ld";
-      _t( LIST_LOCKS_e )	| "locks"		| "ll" | "lock-list";
+      //_t( LIST_LOCKS_e )	| "locks"		| "ll" | "lock-list";
       _t( CLEAN_LOCKS_e )	| "cleanlocks"		| "cl" | "lock-clean";
 
       _t( TARGET_OS_e )		| "targetos"		| "tos";
@@ -104,6 +116,13 @@ namespace
       _t( RUG_PATCH_SEARCH_e )	| "patch-search" | "pse";
       _t( RUG_PING_e )		| "ping";
 #undef _t
+
+      // patch the table to contain all new style commands
+      for ( const auto &cmd : newStyleCommands() ) {
+        auto entry = _table(cmd.first);
+        for ( const std::string &alias : cmd.second->command())
+          entry | alias;
+      }
     }
     return _table;
   }
@@ -185,9 +204,18 @@ DEF_ZYPPER_COMMAND( RUG_PING );
 #undef DEF_ZYPPER_COMMAND
 ///////////////////////////////////////////////////////////////////
 
+ZypperCommand::ZypperCommand(ZypperCommand::Command command) : _command(command)
+{
+  //set the command object if the passed enum represents a new style cmd
+  auto &newCmds = newStyleCommands();
+  if ( newCmds.find( _command ) != newCmds.end() ) {
+    _newStyleCmdObj = newCmds[_command];
+  }
+}
+
 ZypperCommand::ZypperCommand( const std::string & strval_r )
-  : _command( parse(strval_r ) )
-{}
+  : ZypperCommand( parse(strval_r ) )
+{ }
 
 ZypperCommand::Command ZypperCommand::parse( const std::string & strval_r ) const
 {
@@ -206,3 +234,8 @@ ZypperCommand::Command ZypperCommand::parse( const std::string & strval_r ) cons
 
 const std::string & ZypperCommand::asString() const
 { return table().getName( _command ); }
+
+ZypperBaseCommandPtr ZypperCommand::commandObject() const
+{
+  return _newStyleCmdObj;
+}

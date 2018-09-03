@@ -29,6 +29,8 @@
 #include "utils/getopt.h"
 #include "output/Out.h"
 
+#include "commands/basecommand.h"
+
 // As a matter of fact namespaces std, boost and zypp have overlapping
 // symbols (e.g. shared_ptr). We default to the ones used in namespace zypp.
 // Symbols from other namespaces should be used explicitly and not by using
@@ -296,15 +298,6 @@ public:
   void cleanup();
 
 public:
-   /** Flags for tuning \ref defaultLoadSystem. */
-  enum LoadSystemBits
-  {
-    NO_TARGET		= (1 << 0),		//< don't load target to pool
-    NO_REPOS		= (1 << 1),		//< don't load repos to pool
-    NO_POOL		= NO_TARGET | NO_REPOS	//< no pool at all
-  };
-  ZYPP_DECLARE_FLAGS( LoadSystemFlags, LoadSystemBits );
-
   /** Prepare repos and pool according to \a flags_r.
    * Defaults to load target and repos and in this case also adjusts
    * the PPP status by doing an initial solver run.
@@ -391,9 +384,6 @@ private:
   /** Command specific options (see also _copts). */
   shared_ptr<Options>  _commandOptions;
 };
-
-/** \relates Zypper::LoadSystemFlags */
-ZYPP_DECLARE_OPERATORS_FOR_FLAGS( Zypper::LoadSystemFlags );
 
 void print_main_help( const Zypper & zypper );
 void print_unknown_command_hint( Zypper & zypper );
