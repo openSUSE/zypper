@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-08-15 12:00+0000\n"
+"PO-Revision-Date: 2018-09-04 16:50+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -277,7 +277,7 @@ msgstr ""
 #: src/callbacks/keyring.h:413
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Se detaljer om en nøgle, ved at kalde '%1%'."
 
 #: src/callbacks/keyring.h:417
 #, boost-format
