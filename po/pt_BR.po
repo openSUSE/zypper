@@ -13,8 +13,8 @@ msgstr ""
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
 "PO-Revision-Date: 2018-08-30 19:09+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) "
-"<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
+"Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
+"zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -7031,6 +7031,53 @@ msgstr "Resposta inválida '%s'."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Digite '%s' para '%s' ou '%s' para '%s' caso nada mais funcione para você."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [opções] <nome_do_pacote> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Adiciona um bloqueio de pacote. Especifique os pacotes a bloquear pelo seu "
+"nome exato ou por um padrão global usando os caracteres curingas '*' e '?'."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Restringir o bloqueio ao repositório especificado."
+
+msgid "Type of package (%1%)."
+msgstr "Tipo de pacote (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [opções] <número_do_bloqueio|nome_do_pacote> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Remove um bloqueio de pacote. Especifique o bloqueio a remover pelo seu "
+"número obtido com '%1%' ou pelo nome do pacote."
+
+msgid "Remove only locks with specified repository."
+msgstr "Remover apenas os bloqueios do repositório especificado."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Remove bloqueios sem utilidade."
+
+msgid "Clean only duplicate locks."
+msgstr "Limpar apenas bloqueios duplicados."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Limpar apenas bloqueios que não bloqueiam nada."
 
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "O modo está definido para 'match-exact' (correspondência exata)"

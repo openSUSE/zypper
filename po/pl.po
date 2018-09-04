@@ -7211,6 +7211,54 @@ msgstr "Nieprawidłowa odpowiedź '%s'."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Wprowadź '%s' dla '%s' lub '%s' dla '%s', jeśli nic innego nie działa."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [opcje] <nazwa pakietu> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Dodanie blokady pakietu. Określenie pakietów do zablokowania przez podanie "
+"dokładnej nazwy lub użycie wzorca globalnego \"*\" i symboli wieloznacznych "
+"\"?\"."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Ograniczenie blokady do określonego repozytorium."
+
+msgid "Type of package (%1%)."
+msgstr "Typ pakietu (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [opcje] <numer-blokady|nazwapakietu> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Usuwa blokadę pakietu. Blokada do usunięcia jest określana przez numer "
+"uzyskany przez '%1%' albo przez nazwę pakietu."
+
+msgid "Remove only locks with specified repository."
+msgstr "Usuwa blokady jedynie dla określonego repozytorium."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Usuwa niepotrzebne blokady."
+
+msgid "Clean only duplicate locks."
+msgstr "Usuwa tylko powtarzające się blokady."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Usuwa tylko blokady, które już niczego nie blokują."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Włączono tryb dokładnego dopasowywania 'match-exact'"
 

@@ -7103,6 +7103,53 @@ msgstr ""
 "Введите \"%s\" для \"%s\" или \"%s\" для \"%s\", если больше ничего не "
 "работает."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [параметры] <имя_пакета>"
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Добавить блокировку пакета. Укажите блокируемые пакеты точными именами или "
+"используя символы подстановки * и ?."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Ограничить блокировку указанным репозиторием."
+
+msgid "Type of package (%1%)."
+msgstr "Тип пакета (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) <номер-блокировки|имя-пакета>"
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Удалить блокировку пакета. Укажите блокировку для удаления по номеру, "
+"полученному с помощью \"%1%\", или по имени пакета."
+
+msgid "Remove only locks with specified repository."
+msgstr "Удалить блокировки только для указанного репозитория."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Удалить неиспользуемые блокировки."
+
+msgid "Clean only duplicate locks."
+msgstr "Очистить только повторяющиеся блокировки."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Очистить только блокировки, которые ничего не блокируют."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Указан режим точного совпадения (match-exact)"
 

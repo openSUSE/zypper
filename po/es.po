@@ -7124,6 +7124,53 @@ msgstr ""
 "Introduzca '%s' para '%s', o '%s' para '%s', si no funciona ninguna otra "
 "acción."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [opciones] <nombre_paquete>..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Añade un bloqueo de paquete. Los paquetes se pueden especificar por su "
+"nombre exacto o con un patrón global utilizando los caracteres comodín * y ?."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Restringe el bloqueo al repositorio especificado."
+
+msgid "Type of package (%1%)."
+msgstr "Tipo de paquete (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [opciones] <número de bloqueo|paquete>..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Quita el bloqueo de un paquete. Indique el número del bloqueo (obtenido "
+"mediante '%1%') o el nombre del paquete."
+
+msgid "Remove only locks with specified repository."
+msgstr "Quita los bloqueos solo del repositorio indicado."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Elimina los bloqueos que no se utilizan."
+
+msgid "Clean only duplicate locks."
+msgstr "Limpia solo los bloqueos duplicados."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Limpia solo los bloqueos que no bloquean nada."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Modo establecido en match-exact"
 

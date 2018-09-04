@@ -13,8 +13,8 @@ msgstr ""
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
 "PO-Revision-Date: 2018-08-30 22:59+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese "
-"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
+"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
+">\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -279,7 +279,8 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
-"RPM データベース内に、古い V3 形式の GPG 鍵が存在しているものと思われます。この形式は既に古く、機密が保持できないものと考えられています:"
+"RPM データベース内に、古い V3 形式の GPG 鍵が存在しているものと思われます。こ"
+"の形式は既に古く、機密が保持できないものと考えられています:"
 
 #: src/callbacks/keyring.h:413
 #, boost-format
@@ -291,7 +292,9 @@ msgstr "鍵についての詳細を表示するには、 '%1%' を実行して�
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
-msgstr "本件の鍵を現在もなお使用している場合を除き、 '%1%' で RPM データベースから鍵を削除しておくことをお勧めします。"
+msgstr ""
+"本件の鍵を現在もなお使用している場合を除き、 '%1%' で RPM データベースから鍵"
+"を削除しておくことをお勧めします。"
 
 #: src/callbacks/keyring.h:434
 msgid "New package signing key received:"
@@ -1692,13 +1695,16 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
-"このマシンはトランザクション型のサーバです。システムを更新したり修正したりするには、 transactional-update をお使いください。"
+"このマシンはトランザクション型のサーバです。システムを更新したり修正したりす"
+"るには、 transactional-update をお使いください。"
 
 #: src/Zypper.cc:533
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
-msgstr "ターゲットのファイルシステムが読み込み専用でマウントされています。書き込み可能な状態にしてください。"
+msgstr ""
+"ターゲットのファイルシステムが読み込み専用でマウントされています。書き込み可"
+"能な状態にしてください。"
 
 #: src/Zypper.cc:644
 msgid "Command options:"
@@ -6854,6 +6860,53 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "うまく動作しない場合、 「%s」(「%s」の場合)、 「%s」(「%s」の場合)を入力して"
 "ください。"
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr ""
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"パッケージロックを設定します。パッケージは名前で指定できるほか、ワイルドカー"
+"ド指定(「*」「?」)による一括指定を行なうこともできます。"
+
+msgid "Restrict the lock to the specified repository."
+msgstr "指定したリポジトリからのもののみをロックします。"
+
+msgid "Type of package (%1%)."
+msgstr "パッケージの種類を指定します (%1%)。 "
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr ""
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"パッケージロックを解除します。 '%1%' で表示される番号かパッケージの名前で指定"
+"してください。"
+
+msgid "Remove only locks with specified repository."
+msgstr "指定したリポジトリからのロックのみを解除する"
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "意味のないロックを削除します。"
+
+msgid "Clean only duplicate locks."
+msgstr "重複したロックのみを削除します。"
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "何もロックしないもののみを削除します。"
 
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "モードは「match-exact」に設定されています"

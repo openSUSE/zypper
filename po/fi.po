@@ -6952,6 +6952,53 @@ msgstr "Virheellinen vastaus \"%s\"."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Vastaa \"%s\" -> \"%s\" tai \"%s\" -> \"%s\" sijasta, ellei muu toimi."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [valinnat] <paketin nimi> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Lukitsee paketteja. Voit joko määrittää paketin tarkan nimen tai käyttää "
+"jokerimerkkejä: \"*\" ja \"?\"."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Rajoita lukitus vain tiettyyn asennuslähteeseen."
+
+msgid "Type of package (%1%)."
+msgstr "Tyyppi (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [valinnat] <lukon numero|paketin nimi> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Poistaa paketin lukituksen. Määritä poistettava lukko sen numerolla joka "
+"saadaan '%1%' tai paketin nimen mukaan."
+
+msgid "Remove only locks with specified repository."
+msgstr "Poistaa lukituksen vain tietystä asennuslähteestä."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Poistaa käyttämättömiä lukkoja."
+
+msgid "Clean only duplicate locks."
+msgstr "Poistaa ainoastaan päällekkäisiä lukkoja."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Poistaa ainoastaan tarpeettomia lukkoja."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Tila on asetettu 'match-exact'"
 

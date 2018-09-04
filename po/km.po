@@ -6482,6 +6482,52 @@ msgstr "ចម្លើយ​មិនត្រឹមត្រូវ '%s' ។"
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "បញ្ចូល '%s' សម្រាប់ '%s' ឬ '%s' សម្រាប់ '%s' ប្រសិន​បើ​វា​មិនដំណើរការ ។"
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr ""
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"បន្ថែម​សោ​កញ្ចប់ ។ បញ្ជាក់កញ្ចប់​ដើម្បីចាក់សោ​តាម​ឈ្មោះ​ជាក់លាក់ ឬ​តាម​លំនាំ​សកល ដោយ​ប្រើ​តួអក្សរ​ជំនួស '*' "
+"និង '?' ។"
+
+msgid "Restrict the lock to the specified repository."
+msgstr "ដាក់កម្រិត​សោ​​ទៅ​ឃ្លាំង​ដែល​បានបញ្ជាក់ ។"
+
+msgid "Type of package (%1%)."
+msgstr "ប្រភេទ​កញ្ចប់ (%1%) ។"
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr ""
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"យក​សោ​កញ្ចប់​ចេញ ។ បញ្ជាក់សោ​ដើម្បី​យក​ចេញ​ដោយ​លេខ​របស់​វា​ដែល​បានទទួល​​ជា​មួយ '%1%' ឬ​ដោយឈ្មោះ​កញ្ចប់ ។"
+
+msgid "Remove only locks with specified repository."
+msgstr "យក​តែសោ​ដែល​មានឃ្លាំង​ដែល​បាន​បញ្ជាក់ ។"
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "យក​សោ​ដែល​គ្មាន​ប្រយោជន៍​ចេញ ។"
+
+msgid "Clean only duplicate locks."
+msgstr "ជម្រះ​តែ​សោ​ដែល​ស្ទួន ។"
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "ជម្រះ​តែ​សោ​ដែល​មិន​ជាប់​អ្វី​ទាំងអស់ ។"
+
 #~ msgid "No providers of '%s' found."
 #~ msgstr "រកមិនឃើញ​ក្រុមហ៊ុន​ផ្ដល់ '%s' ទេ ។"
 

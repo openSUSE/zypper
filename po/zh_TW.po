@@ -6557,6 +6557,53 @@ msgstr "無效的答案 '%s'。"
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%s' 。"
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [選項] <軟體包名稱> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"新增軟體包鎖定。 透過確切名稱或使用 '*' 和 '?' 萬用字元的全域樣式指定要鎖定的"
+"軟體包。"
+
+msgid "Restrict the lock to the specified repository."
+msgstr "限制僅鎖定指定的軟體庫。"
+
+msgid "Type of package (%1%)."
+msgstr "軟體包 (%1%) 的類型。"
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [選項] <鎖定編號|軟體包名稱> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"移除一個軟體包鎖定。透過由 '%1% 1' 獲得的編號或透過軟體包名稱指定要移除的鎖"
+"定。"
+
+msgid "Remove only locks with specified repository."
+msgstr "僅移除指定軟體庫的鎖定。"
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "移除無用的鎖定。"
+
+msgid "Clean only duplicate locks."
+msgstr "僅移除重覆的鎖定。"
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "僅移除未鎖定任何東西的鎖定。"
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "模式已被設定為'完全符合'"
 

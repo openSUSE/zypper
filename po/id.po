@@ -6896,6 +6896,54 @@ msgstr ""
 "Masukkan '%s' untuk '%s' atau '%s' untuk '%s' jika tidak ada yang berfungsi "
 "untuk Anda."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr ""
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Tambah sebuah kunci paket. Tentukan paket-paket untuk kunci dengan nama yang "
+"tepat atau berdasarkan pola glob menggunakan '*' dan '?' karakter-karakter "
+"wildcard."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Batasi kunci ke repositori yang ditentukan."
+
+msgid "Type of package (%1%)."
+msgstr "Tipe paket (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr ""
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Hapus kunci paket. Tentukan sebuah kunci untuk menghapus berdasarkan nomor "
+"yang diperoleh dengan '%1%' atau berdasarkan nama paket."
+
+msgid "Remove only locks with specified repository."
+msgstr "Hapus hanya kunci-kunci dengan repositori yang ditentukan."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Hapus kunci-kunci yang tak terpakai."
+
+msgid "Clean only duplicate locks."
+msgstr "Bersihkan hanya kunci-kunci yang ganda."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Bersihkan hanya kunci-kunci yang tidak mengunci apapun."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Mode diatur ke 'match-exact'"
 

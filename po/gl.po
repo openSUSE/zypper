@@ -6448,6 +6448,53 @@ msgstr "Resposta incorrecta '%s'."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Introduza '%s' para '%s' ou '%s' para '%s' se non lle funciona nada."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [opcións] <nome_paquete> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Engade un bloqueo a un paquete. Os paquetes poden especificarse polo seu "
+"nome exacto ou utilizando os caracteres comodín '*' e '?'."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Restrinxe o bloqueo ao repositorio indicado."
+
+msgid "Type of package (%1%)."
+msgstr "Tipo de resolución (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [opciones] <número|paquete> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Elimina o bloqueo bloqueo un paquete. Indique o bloqueo por número (obtido "
+"mediante '%1%') ou por nome de paquete."
+
+msgid "Remove only locks with specified repository."
+msgstr "Eliminar bloqueos só no repositorio indicado."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Eliminar bloqueos sen utilidade."
+
+msgid "Clean only duplicate locks."
+msgstr "Limpar só bloqueos duplicados."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Limpar só bloqueos que non bloquean nada."
+
 #~ msgid "No providers of '%s' found."
 #~ msgstr "Non se atoparon os provedores de '%s'."
 

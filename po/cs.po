@@ -7044,6 +7044,53 @@ msgstr "Neplatná odpověď '%s'."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Zadejte '%s' pro '%s' nebo '%s' pro '%s', pokud nic jiného nepomůže."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [volby] <název_balíčku>"
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Přidá zámek balíčku. Zadejte přesný název balíčku, který si přejete "
+"zamknout, nebo použijte zástupné znaky '*' a '?' převzaté z funkce glob."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Omezí uzamčení na zadaný repozitář."
+
+msgid "Type of package (%1%)."
+msgstr "Typ závislosti (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) <číslo-zámku|jméno_balíčku> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Odstraní zámek balíčku. Určete zámek k odstranění jeho číslem získaným '%1%' "
+"nebo jménem balíčku."
+
+msgid "Remove only locks with specified repository."
+msgstr "Odstraní pouze zámky ze zadaného repozitáře."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Odstraní nepotřebné zámky."
+
+msgid "Clean only duplicate locks."
+msgstr "Odstranit pouze duplicitní zámky."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Odstranit pouze ty zámky, které nic nezamykají."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Režim je nastaven na 'match-exact'"
 

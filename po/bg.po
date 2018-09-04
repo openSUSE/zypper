@@ -6129,6 +6129,49 @@ msgstr "невалидно име на услуга '%1'."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr ""
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+
+msgid "Restrict the lock to the specified repository."
+msgstr ""
+
+msgid "Type of package (%1%)."
+msgstr ""
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr ""
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+
+msgid "Remove only locks with specified repository."
+msgstr ""
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr ""
+
+msgid "Clean only duplicate locks."
+msgstr ""
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr ""
+
 #, fuzzy
 #~ msgid "No providers of '%s' found."
 #~ msgstr "Не са открити грешки."

@@ -6938,6 +6938,53 @@ msgstr "Ogiltigt svar %s."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Ange %s för %s, eller %s för %s om inget annat fungerar."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [alternativ] <paketnamn> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Lägg till ett paketlås. Ange vilka paket som ska låsas med hjälp av namn "
+"eller ett glob-mönster med jokertecknen * och ?."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Begränsa låset till det angivna arkivet."
+
+msgid "Type of package (%1%)."
+msgstr "Typ av paket (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [alternativ] <låsnummer|paketnamn> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Ta bort ett paketlås. Ange låset med hjälp av numret från %1% eller av "
+"paketnamnet."
+
+msgid "Remove only locks with specified repository."
+msgstr "Ta bara bort lås med det angivna arkivet."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Ta bort lås som inte används."
+
+msgid "Clean only duplicate locks."
+msgstr "Ta endast bort dubbla lås."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Ta endast bort lås som inte används för att låsa någonting."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Läget är inställt till match-exact"
 

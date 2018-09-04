@@ -6929,6 +6929,51 @@ msgstr ""
 "Introduceți '%s' pentru '%s' sau '%s' pentru '%s' dacă altceva nu "
 "funcționează pentru dumneavoastră."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr ""
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Adaugă blocaj de pachet. Specifică pachetele care vor fi blocate utilizând "
+"numele exact sau o cale globală folosind caracterele speciale '*' și '?'."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Restrânge blocarea către surse de instalare specificate."
+
+msgid "Type of package (%1%)."
+msgstr "Tipuri de pachete (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr ""
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+
+msgid "Remove only locks with specified repository."
+msgstr ""
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Elimină blocările inutile."
+
+msgid "Clean only duplicate locks."
+msgstr "Curăță doar blocările duplicat."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Curăță doar blocările care nu blochează nimic."
+
 #~ msgid "No providers of '%s' found."
 #~ msgstr "Nu a fost găsit nici un furnizor pentru '%s'."
 

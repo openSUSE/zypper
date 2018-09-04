@@ -7155,6 +7155,54 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Se non si trovano altre soluzioni, immettere '%s' per '%s' o '%s' per '%s'."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [opzioni] <nome_pacchetto> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Aggiunge un blocco al pacchetto. Specificare quali pacchetti bloccare "
+"indicandone il nome esatto oppure, cumulativamente, usando i caratteri "
+"jolly  '*' e '?'."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Limita il blocco al repository specificato."
+
+msgid "Type of package (%1%)."
+msgstr "Tipo di pacchetto (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [opzioni] <numero-blocco|nome-pacchetto> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Rimuove un blocco dai pacchetti. Specificare il blocco da rimuovere usando "
+"il suo numero ottenuto con '%1%' o tramite il nome del pacchetto."
+
+msgid "Remove only locks with specified repository."
+msgstr "Rimuovi solo i blocchi con il repository specificato."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Rimuove i blocchi inutili."
+
+msgid "Clean only duplicate locks."
+msgstr "Elimina solo i blocchi duplicati."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Elimina solo i blocchi che non bloccano nulla."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Modalità impostata come 'match-exact'"
 

@@ -7256,6 +7256,53 @@ msgstr "الإجابة '%s' غير صالحة."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "أدخل '%s' لـ '%s' أو '%s' لـ '%s' إذا لم يعمل أي شيء آخر معك."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [خيارات] <packagename> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"إضافة قفل حزمة. حدد الحزم المطلوب قفلها حسب الاسم الدقيق أو حسب نمط شامل "
+"باستخدام حرف بدل '*' و'?'."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "تقييد القفل على المخزن المحدد."
+
+msgid "Type of package (%1%)."
+msgstr "نوع الحزمة (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr ""
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"إزالة قفل حزمة. حدد القفل المطلوب إزالته حسب الرقم الذي تحصل عليه بواسطة "
+"'%1%' أو حسب اسم الحزمة."
+
+msgid "Remove only locks with specified repository."
+msgstr "إزالة الأقفال بالمخزن المحدد فقط."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "إزالة الأقفال عديمة الفائدة."
+
+msgid "Clean only duplicate locks."
+msgstr "تنظيف الأقفال المكررة فقط."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "تنظيف فقط الأقفال التي لا تقوم بقفل أي شيء."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "تم تعيين الوضع إلى 'التطابق الدقيق'"
 

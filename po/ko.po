@@ -6725,6 +6725,53 @@ msgstr ""
 "아무것도 실행되지 않는 경우 '%s'('%s'의 경우) 또는 '%s'('%s'의 경우)을(를) 입"
 "력하십시오."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr ""
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"패키지 잠금을 추가합니다. 잠글 패키지를 지정할 경우에는 정확한 이름을 사용하"
+"거나 '*' 및 '?' 와일드카드 문자를 사용하여 glob 패턴별로 지정합니다."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "지정된 리포지토리로 잠금을 제한합니다."
+
+msgid "Type of package (%1%)."
+msgstr "패키지 유형(%1%)입니다."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr ""
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"패키지 잠금을 제거합니다. '%1%'에서 가져온 번호나 패키지 이름별로 제거할 잠금"
+"을 지정합니다."
+
+msgid "Remove only locks with specified repository."
+msgstr "지정한 리포지토리의 잠금만 제거합니다."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "필요 없는 잠금을 제거합니다."
+
+msgid "Clean only duplicate locks."
+msgstr "중복된 잠금만 정리합니다."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "어떤 것도 잠겨 있지 않은 잠금만 정리합니다."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "모드가 'match-exact'로 설정되었습니다."
 

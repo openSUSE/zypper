@@ -19,8 +19,8 @@ msgstr ""
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
 "PO-Revision-Date: 2018-08-30 21:02+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
-"\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -7165,6 +7165,55 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Geben Sie '%s' für '%s' oder '%s' für '%s' ein, wenn nichts anderes "
 "funktioniert."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [Optionen] <Paketname> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Eine Paketsperre hinzufügen. Zu sperrende Pakete durch exakten Namen oder "
+"globales Schema festlegen und dazu die Platzhalterzeichen '*' und '?' "
+"verwenden."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Die Sperre auf das angegebene Repository beschränken."
+
+msgid "Type of package (%1%)."
+msgstr "Pakettyp (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [Optionen] <Sperr-Nummer|Paketname> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Sperre von einem Paket entfernen. Geben Sie an welche Sperre entfernt werden "
+"soll, entweder mit der Nummer die Sie durch '%1%' enthalten, oder durch den "
+"Paketnamen."
+
+msgid "Remove only locks with specified repository."
+msgstr "Nur die Sperren in einem bestimmten Repository entfernen."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Nutzlose Sperren entfernen."
+
+msgid "Clean only duplicate locks."
+msgstr "Nur doppelte Sperren entfernen."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Nur Sperren entfernen, die nichts sperren."
 
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Der Modus ist auf 'match-exact' eingestellt"

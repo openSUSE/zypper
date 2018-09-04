@@ -7126,6 +7126,53 @@ msgstr ""
 "Válassza az %s-t ha '%s'-hez vagy az '%s' ha '%s', amennyiben más nem "
 "működik."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [kapcsolók] <csomagnév>"
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Csomag zárolása. A zárolandó csomagokat pontos név, vagy a '*' és '?' "
+"helyettesítő karakterekkel megadott mintával adhatja meg."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Csak a megadott telepítési forrásra korlátozza a zárolást."
+
+msgid "Type of package (%1%)."
+msgstr "A feloldható típusa (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) <zárolás-száma|csomagnév>"
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Csomag zárolásának feloldása. A feloldandó zárolás számát a '%1%' parancstól "
+"kapott számmal adhatja meg."
+
+msgid "Remove only locks with specified repository."
+msgstr "Csak a megadott telepítési forrásból távolítsa el a zárolásokat."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Nem használt zárolások eltávolítása."
+
+msgid "Clean only duplicate locks."
+msgstr "Csak az duplikált szereplő zárolások törlése."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Csak az olyan zárolások törlése, amely nem zárol semmit."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "A mód beállítása 'match-exact'"
 

@@ -6792,6 +6792,53 @@ msgstr "Ugyldig svar '%s'."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Angi '%s' for '%s' eller '%s' for '%s' hvis ingenting annet fungerer."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [valg] <pakkenavn> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Legg til en pakkelås. Spesifiser pakker som skal låses, men nøyaktig navn "
+"eller med en dal av navnet pluss '*' og '?' som jokertegn."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Begrens låsen til den angitte pakkebrønnen."
+
+msgid "Type of package (%1%)."
+msgstr "Pakketype (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [valg] <låsnummer|pakkenavn> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Fjern en pakkelås. Spesifiser låsen som skal fjernen med nummeret som hentes "
+"med '%1%' eller med pakkenavn."
+
+msgid "Remove only locks with specified repository."
+msgstr "Fjern kun låser i den angitte pakkebrønnen."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Fjern unødvendige lås."
+
+msgid "Clean only duplicate locks."
+msgstr "Fjern kun dupliserte lås."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Fjern kun lås som ikke låser noe."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Modus er satt til «match-exact»"
 

@@ -6966,6 +6966,55 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Kuomet niekas kitas neveikia, įveskite „%s“, jei „%s“, arba „%s“, jei „%s“."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [parinktys] <paketo_pavadinimas> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Užrakina paketą. Nurodykite užrakintinus paketus pateikdami tikslų "
+"pavadinimą arba naudodami reguliarųjį reiškinį su „*“ ir „?“ pakaitos "
+"simboliais."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Užrakinti tik konkrečioje saugykloje."
+
+msgid "Type of package (%1%)."
+msgstr "Paketo tipas (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr ""
+"removelock (rl) [parinktys] <užrakinimo_numeris|paketo_pavadinimas> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Atrakina paketą. Nurodykite pašalintino užrakinimo numerį, kurį gali "
+"sužinoti su „%1%“, arba užrakinto paketo pavadinimą."
+
+msgid "Remove only locks with specified repository."
+msgstr "Atrakinti tik konkrečioje saugykloje."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Pašalinti nenaudingus užrakinimus."
+
+msgid "Clean only duplicate locks."
+msgstr "Panaikinti tik besidubliuojančius užrakinimus."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Panaikinti tik nieko neužrakinančius užrakinimus."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Tikslaus atitikmens veiksena"
 

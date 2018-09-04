@@ -7123,6 +7123,53 @@ msgstr "Ongeldig antwoord '%s'."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Voer '%s' in voor '%s' of '%s' voor '%s' als er niets anders werkt."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [opties] <pakketnaam> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Voeg een pakketvergrendeling toe. Specificeer de te vergrendelen pakketten "
+"door de exacte naam of door een zoekpatroon met de jokertekens '*' en '?'."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Beperk de vergrendeling tot de gespecificeerde opslagruimte."
+
+msgid "Type of package (%1%)."
+msgstr "Type pakket (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) <blokkeringsnummer|pakketnaam>"
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Verwijder een pakketblokkering. Specificeer de te verwijderen blokkering "
+"door zijn nummer verkregen met '%1%' of door een pakketnaam"
+
+msgid "Remove only locks with specified repository."
+msgstr "Verwijder alleen blokkeringen in de gespecificeerde opslagruimte."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Verwijder onbruikbare vergrendelingen."
+
+msgid "Clean only duplicate locks."
+msgstr "Maak alleen dubbele vergrendelingen schoon."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Maak alleen vergrendelingen schoon die niets vergrendelen."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Modus is ingesteld op 'match-exact'"
 

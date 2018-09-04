@@ -7183,6 +7183,54 @@ msgstr ""
 "Entrez '%s' pour '%s' ou '%s' pour '%s' si rien d'autre ne fonctionne pour "
 "vous."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [options] <nompaquet>"
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Ajoute un verrouillage sur un paquet. Spécifiez les paquets à verrouiller "
+"par leur nom exact ou par un modèle Glob en utilisant les caractères joker "
+"'*' et '?'."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Restreint le verrouillage au dépôt spécifié."
+
+msgid "Type of package (%1%)."
+msgstr "Type de paquet (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [options] <numéro_de_verrou|nom_de_paquet> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Supprime un verrou de paquet. Spécifier le verrou à supprimer par son numéro "
+"obtenu avec '%1%' ou par nom de paquet."
+
+msgid "Remove only locks with specified repository."
+msgstr "Supprime seulement les verrous avec le dépôt spécifié."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Supprime les verrous inutiles."
+
+msgid "Clean only duplicate locks."
+msgstr "Supprime uniquement les verrous dupliqués."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Supprime uniquement les verrous inutiles."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Le mode est paramétré sur 'Correspondance exacte'"
 

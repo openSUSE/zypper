@@ -7036,6 +7036,53 @@ msgstr "Нечинна відповідь «%s»."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Введіть «%s» для «%s» або «%s» для «%s», якщо ніщо інше не допомагає."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [параметри] <назвапакунка>"
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Блокує пакунок. Вкажіть назви пакунків для блокування повністю або за "
+"допомогою шаблонів, використовуючи шаблони заміни \"*\" і \"?\"."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Обмежити блок вказаним сховищем."
+
+msgid "Type of package (%1%)."
+msgstr "Тип пакунка (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl)  [параметри] <номер-замка|назвапакунка> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Вилучає блокування пакунка. Вкажіть замок блокування за його номером, який "
+"можна отримати за допомогою команди «%1%» або за назвою пакунка."
+
+msgid "Remove only locks with specified repository."
+msgstr "Вилучити блокування тільки з вказаного сховища."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Вилучити замки, які не використовуються."
+
+msgid "Clean only duplicate locks."
+msgstr "Очистити тільки замки-дублікати."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Очистити тільки замки, які нічого не блокують."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Зазначений режим точного збігу (match-exact)"
 

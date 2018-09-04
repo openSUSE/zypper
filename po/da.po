@@ -6949,6 +6949,53 @@ msgstr ""
 "Angiv \"%s\" for \"%s\" eller \"%s\" for \"%s\" hvis intet andet fungerer "
 "for dig."
 
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [tilvalg] <pakkenavn> ..."
+
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
+msgstr ""
+"Tilføj en pakkelås. Angiv pakker, der skal låses, med præcist navn eller et "
+"globalt mønster med wildcardene '*' og '?'."
+
+msgid "Restrict the lock to the specified repository."
+msgstr "Begræns låsen til den angivne softwarekilde."
+
+msgid "Type of package (%1%)."
+msgstr "Type af pakke (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [tilvalg] <lås-nummer|pakkenavn> ..."
+
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Fjern en pakkelås. Angiv låsen, som skal fjernes, ved dens nummer, der "
+"oplyses med '%1%' eller pakkenavn."
+
+msgid "Remove only locks with specified repository."
+msgstr "Fjern kun låse med angivet softwarekilde."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+msgid "cleanlocks (cl)"
+msgstr ""
+
+msgid "Remove useless locks."
+msgstr "Fjern ubrugelige låse."
+
+msgid "Clean only duplicate locks."
+msgstr "Ryd kun duplikerede låse."
+
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Ryd kun låse som ikke låser noget."
+
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Tilstanden er sat til \"match-exact\""
 
