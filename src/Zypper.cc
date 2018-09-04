@@ -3183,18 +3183,20 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = str::form(_(
-      "addlock (al) [options] <packagename> ...\n"
-      "\n"
-      "Add a package lock. Specify packages to lock by exact name or by a"
-      " glob pattern using '*' and '?' wildcard characters.\n"
-      "\n"
-      "  Command options:\n"
-      "-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n"
-      "-t, --type <type>         Type of package (%s).\n"
-      "                          Default: %s.\n"
-    ), "package, patch, pattern, product", "package");
-
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+      _("addlock (al) [options] <packagename> ...")
+    )
+    .description(	// translators: command description
+      _("Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-r, --repo <alias|#|URI>",	// translators: -r, --repo <alias|#|URI>
+	     _("Restrict the lock to the specified repository.") )
+    .option( "-t, --type <type>",	// translators: -t, --type <type>
+	     str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
+	     // NOTE: Original help text had a ' Default: %s", "package" appended.
+    ;
     break;
   }
 
@@ -3210,17 +3212,20 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = str::form(_(
-      "removelock (rl) [options] <lock-number|packagename> ...\n"
-      "\n"
-      "Remove a package lock. Specify the lock to remove by its number obtained"
-      " with '%s' or by package name.\n"
-      "\n"
-      "  Command options:\n"
-      "-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
-      "-t, --type <type>         Type of package (%s).\n"
-      "                          Default: %s.\n"
-    ), "zypper locks", "package, patch, pattern, product", "package");
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+      _("removelock (rl) [options] <lock-number|packagename> ...")
+    )
+    .description(	// translators: command description; %1% is acoomand like 'zypper locks'
+      str::Format(_("Remove a package lock. Specify the lock to remove by its number obtained with '%1%' or by package name.") ) % "zypper locks"
+    )
+    .optionSectionCommandOptions()
+    .option( "-r, --repo <alias|#|URI>",	// translators: -r, --repo <alias|#|URI>
+	     _("Remove only locks with specified repository.") )
+    .option( "-t, --type <type>",	// translators: -t, --type <type>
+	     str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
+	     // NOTE: Original help text had a ' Default: %s", "package" appended.
+    ;
     break;
   }
 
@@ -3234,15 +3239,19 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = (_(
-      "cleanlocks (cl)\n"
-      "\n"
-      "Remove useless locks.\n"
-      "\n"
-      "  Command options:\n"
-      "-d, --only-duplicates     Clean only duplicate locks.\n"
-      "-e, --only-empty          Clean only locks which doesn't lock anything.\n"
-    ));
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+      _("cleanlocks (cl)")
+    )
+    .description(	// translators: command description
+      _("Remove useless locks.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-d, --only-duplicates",	// translators: -d, --only-duplicates
+	     _("Clean only duplicate locks.") )
+    .option( "-e, --only-empty",	// translators: -e, --only-empty
+	     _("Clean only locks which doesn't lock anything.") )
+    ;
     break;
   }
 
