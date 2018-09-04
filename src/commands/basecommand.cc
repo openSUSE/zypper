@@ -131,7 +131,7 @@ std::vector<ZyppFlags::CommandGroup> ZypperBaseCommand::options()
 {
   //first get the commands own options
   std::vector<ZyppFlags::CommandGroup> allOpts {
-    { _("Options:"), cmdOptions() }
+    { _("Command options:"), cmdOptions() }
   };
 
   ZyppFlags::CommandOption helpOpt{
