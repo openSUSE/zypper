@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-30 16:46+0200\n"
+"POT-Creation-Date: 2018-09-04 18:55+0200\n"
 "PO-Revision-Date: 2018-08-13 12:13+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
@@ -33,11 +33,11 @@ msgstr "Valore filtro categoria sospetto '%1%'."
 msgid "Suspicious severity filter value '%1%'."
 msgstr "Valore filtro gravità sospetto '%1%'."
 
-#: src/Zypper.h:561
+#: src/Zypper.h:551
 msgid "Finished with error."
 msgstr "Terminato con errori."
 
-#: src/Zypper.h:563
+#: src/Zypper.h:553
 msgid "Done."
 msgstr "Fine."
 
@@ -525,6 +525,32 @@ msgstr ""
 "continua, i file in conflitto saranno sostituiti e i rispettivi contenuti "
 "precedenti andranno persi."
 
+#: src/commands/commandhelpformatter.h:75
+msgid "Command options:"
+msgstr "Opzioni del comando:"
+
+#: src/commands/commandhelpformatter.h:78
+msgid "Solver options:"
+msgstr "Opzioni del risolutore:"
+
+#: src/commands/commandhelpformatter.h:81
+msgid "Expert options:"
+msgstr "Opzioni avanzate:"
+
+#: src/commands/commandhelpformatter.h:84
+msgid "This command has no additional options."
+msgstr "Il comando non dispone di opzioni aggiuntive."
+
+#: src/commands/commandhelpformatter.h:87
+msgid "Legacy options:"
+msgstr "Opzioni di retrocompatibilità:"
+
+#. translator: '-r             The same as -f.
+#: src/commands/commandhelpformatter.h:91
+#, boost-format
+msgid "The same as %1%."
+msgstr "La stessa cosa di %1%."
+
 #: src/output/Out.h:26 src/repos.cc:144 src/repos.cc:172
 msgid "Yes"
 msgstr "Sì"
@@ -572,7 +598,7 @@ msgstr "Oggetto non valido"
 msgid "Error"
 msgstr "Errore"
 
-#: src/Command.cc:201
+#: src/Command.cc:229
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "Comando sconosciuto '%s'"
@@ -1565,89 +1591,89 @@ msgstr "È necessario riavviare il sistema."
 msgid "Consider to cancel:"
 msgstr "Prendere in considerazione l'annullamento:"
 
-#: src/Zypper.cc:102
+#: src/Zypper.cc:108
 msgid "Set a descriptive name for the service."
 msgstr "Imposta un nome descrittivo per il servizio."
 
-#: src/Zypper.cc:103
+#: src/Zypper.cc:109
 msgid "Enable a disabled service."
 msgstr "Abilita un servizio disabilitato."
 
-#: src/Zypper.cc:104
+#: src/Zypper.cc:110
 msgid "Disable the service (but don't remove it)."
 msgstr "Disabilita il servizio (ma non rimuoverlo)."
 
-#: src/Zypper.cc:105
+#: src/Zypper.cc:111
 msgid "Enable auto-refresh of the service."
 msgstr "Abilita l'aggiornamento automatico del servizio."
 
-#: src/Zypper.cc:106
+#: src/Zypper.cc:112
 msgid "Disable auto-refresh of the service."
 msgstr "Disabilita l'aggiornamento automatico del servizio."
 
-#: src/Zypper.cc:124
+#: src/Zypper.cc:130
 msgid "Set a descriptive name for the repository."
 msgstr "Imposta un nome descrittivo per il repository."
 
-#: src/Zypper.cc:125
+#: src/Zypper.cc:131
 msgid "Enable a disabled repository."
 msgstr "Abilita un repository disabilitato."
 
-#: src/Zypper.cc:126
+#: src/Zypper.cc:132
 msgid "Disable the repository (but don't remove it)."
 msgstr "Disabilita il repository (ma non rimuoverlo)."
 
-#: src/Zypper.cc:127
+#: src/Zypper.cc:133
 msgid "Enable auto-refresh of the repository."
 msgstr "Abilita l'aggiornamento automatico del repository."
 
-#: src/Zypper.cc:128
+#: src/Zypper.cc:134
 msgid "Disable auto-refresh of the repository."
 msgstr "Disabilita l'aggiornamento automatico del repository."
 
-#: src/Zypper.cc:129
+#: src/Zypper.cc:135
 msgid "Set priority of the repository."
 msgstr "Imposta la priorità del repository."
 
-#: src/Zypper.cc:130
+#: src/Zypper.cc:136
 msgid "Enable RPM files caching."
 msgstr "Abilita la cache dei file RPM."
 
-#: src/Zypper.cc:131
+#: src/Zypper.cc:137
 msgid "Disable RPM files caching."
 msgstr "Disabilita la cache dei file RPM."
 
-#: src/Zypper.cc:132
+#: src/Zypper.cc:138
 msgid "Enable GPG check for this repository."
 msgstr "Abilita la verifica GPG per questo repository."
 
-#: src/Zypper.cc:133
+#: src/Zypper.cc:139
 msgid "Enable strict GPG check for this repository."
 msgstr "Abilita la verifica GPG stringente per questo repository."
 
-#: src/Zypper.cc:134
+#: src/Zypper.cc:140
 #, boost-format
 msgid "Short hand for '%1%'."
 msgstr "Abbreviazione per '%1%'."
 
-#: src/Zypper.cc:135
+#: src/Zypper.cc:141
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
 msgstr ""
 "Abilita la verifica GPG ma consenti ai metadati del repository di non essere "
 "firmati."
 
-#: src/Zypper.cc:136
+#: src/Zypper.cc:142
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
 msgstr ""
 "Abilita la verifica GPG ma consente l'installazione di pacchetti senza firma "
 "da questo repository."
 
-#: src/Zypper.cc:137
+#: src/Zypper.cc:143
 msgid "Disable GPG check for this repository."
 msgstr "Disabilita la verifica GPG per questo repository."
 
-#: src/Zypper.cc:138
+#: src/Zypper.cc:144
 msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
@@ -1655,47 +1681,47 @@ msgstr ""
 "Usa la configurazione globale di verifica GPG definita in /etc/zypp/zypp."
 "conf. Questa è l'impostazione predefinita."
 
-#: src/Zypper.cc:141
+#: src/Zypper.cc:147
 msgid "Apply changes to all repositories."
 msgstr "Applica le modifiche a tutti i repository."
 
-#: src/Zypper.cc:142
+#: src/Zypper.cc:148
 msgid "Apply changes to all local repositories."
 msgstr "Applica le modifiche a tutti i repository locali."
 
-#: src/Zypper.cc:143
+#: src/Zypper.cc:149
 msgid "Apply changes to all remote repositories."
 msgstr "Applica le modifiche a tutti i repository remoti."
 
-#: src/Zypper.cc:144
+#: src/Zypper.cc:150
 msgid "Apply changes to repositories of specified type."
 msgstr "Applica le modifiche a tutti i repository del tipo specificato."
 
-#: src/Zypper.cc:161
+#: src/Zypper.cc:167
 msgid "Create a solver test case for debugging."
 msgstr "Crea un test per il risolutore per il debug."
 
-#: src/Zypper.cc:162
+#: src/Zypper.cc:168
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr "Forza il risolutore a trovare una soluzione (anche una aggressiva)."
 
-#: src/Zypper.cc:163
+#: src/Zypper.cc:169
 msgid "Do not force the solver to find solution, let it ask."
 msgstr "Non forza il risolutore a trovare una soluzione, lascia che chieda."
 
-#: src/Zypper.cc:172
+#: src/Zypper.cc:178
 msgid "Install also recommended packages in addition to the required ones."
 msgstr "Installa anche i pacchetti consigliati, oltre a quelli necessari."
 
-#: src/Zypper.cc:173
+#: src/Zypper.cc:179
 msgid "Do not install recommended packages, only required ones."
 msgstr "Non installa i pacchetti consigliati, solo quelli necessari."
 
 #. auto license agreements
 #. Mainly for SUSEConnect, not (yet) documented
-#: src/Zypper.cc:181
+#: src/Zypper.cc:187
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
@@ -1703,7 +1729,7 @@ msgstr ""
 "Rispondi automaticamente 'sì' alle richieste di conferma di licenza di terze "
 "parti. Consultare 'man zypper' per maggiori dettagli."
 
-#: src/Zypper.cc:182
+#: src/Zypper.cc:188
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
@@ -1711,44 +1737,44 @@ msgstr ""
 "Accetta automaticamente solo le licenze di prodotto. Consultare 'man zypper' "
 "per maggiori dettagli."
 
-#: src/Zypper.cc:191
+#: src/Zypper.cc:197
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
 "Consente di stabilire se le patch opzionali sono necessarie o da escludere."
 
-#: src/Zypper.cc:194
+#: src/Zypper.cc:200
 msgid "The default is to exclude optional patches."
 msgstr "L'impostazione predefinita è escludere le patch opzionali."
 
-#: src/Zypper.cc:195
+#: src/Zypper.cc:201
 msgid "The default is to include optional patches."
 msgstr "L'impostazione predefinita è di includere le patch opzionali."
 
-#: src/Zypper.cc:209
+#: src/Zypper.cc:215
 msgid "Whether to allow downgrading installed resolvables."
 msgstr "Se consentire il downgrade dei risolvibili installati."
 
-#: src/Zypper.cc:211
+#: src/Zypper.cc:217
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr "Se consentire il cambio dei nomi dei risolvibili installati."
 
-#: src/Zypper.cc:213
+#: src/Zypper.cc:219
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr "Se consentire il cambio dell'architettura dei risolvibili installati."
 
-#: src/Zypper.cc:215
+#: src/Zypper.cc:221
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr "Se consentire il cambio del fornitore dei risolvibili installati."
 
 #. translator: %1% is a list of command line option names
-#: src/Zypper.cc:223
+#: src/Zypper.cc:229
 #, boost-format
 msgid "These options are mutually exclusive: %1%"
 msgstr "Queste opzioni sono mutualmente esclusive: %1%"
 
-#: src/Zypper.cc:313
+#: src/Zypper.cc:319
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1757,7 +1783,7 @@ msgstr ""
 "del programma di aggiornamento o un'altra applicazione per la gestione "
 "software che usa PackageKit."
 
-#: src/Zypper.cc:319
+#: src/Zypper.cc:325
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1765,20 +1791,20 @@ msgstr ""
 "È possibile chiedere a PackageKit di interrompere l'azione corrente il prima "
 "possibile, ma la velocità di risposta a tale richiesta dipende da PackageKit."
 
-#: src/Zypper.cc:322
+#: src/Zypper.cc:328
 msgid "Ask PackageKit to quit?"
 msgstr "Chiudere PackageKit?"
 
-#: src/Zypper.cc:331
+#: src/Zypper.cc:337
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKit è ancora in esecuzione (probabilmente è occupato)."
 
-#: src/Zypper.cc:332
+#: src/Zypper.cc:338
 msgid "Try again?"
 msgstr "Riprovare?"
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-#: src/Zypper.cc:416
+#: src/Zypper.cc:422
 #, boost-format
 msgid ""
 "For an extended search including not yet activated remote resources please "
@@ -1788,7 +1814,7 @@ msgstr ""
 "utilizzare '%1%'."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-#: src/Zypper.cc:419
+#: src/Zypper.cc:425
 #, boost-format
 msgid ""
 "The package providing this subcommand is currently not installed. You can "
@@ -1797,7 +1823,7 @@ msgstr ""
 "Il pacchetto con questo sottocomando non è attualmente installato. È "
 "possibile installarlo chiamando '%1%'."
 
-#: src/Zypper.cc:456
+#: src/Zypper.cc:462
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
@@ -1805,62 +1831,36 @@ msgstr ""
 "Rilevata l'opzione da riga di comando %1% esistente. Usare l'opzione globale "
 "%2% al suo posto."
 
-#: src/Zypper.cc:457
+#: src/Zypper.cc:463
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
 "Rilevata l'opzione da riga di comando %1% esistente. Usare %2% al suo posto."
 
-#: src/Zypper.cc:463
+#: src/Zypper.cc:469
 #, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
 "Rilevata l'opzione da riga di comando ormai obsoleta %1%. Questa opzione è "
 "ignorata."
 
-#: src/Zypper.cc:531
+#: src/Zypper.cc:537
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
 
-#: src/Zypper.cc:533
+#: src/Zypper.cc:539
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
 
-#: src/Zypper.cc:644
-msgid "Command options:"
-msgstr "Opzioni del comando:"
-
-#: src/Zypper.cc:647
-msgid "Solver options:"
-msgstr "Opzioni del risolutore:"
-
-#: src/Zypper.cc:650
-msgid "Expert options:"
-msgstr "Opzioni avanzate:"
-
-#: src/Zypper.cc:653
-msgid "This command has no additional options."
-msgstr "Il comando non dispone di opzioni aggiuntive."
-
-#: src/Zypper.cc:656
-msgid "Legacy options:"
-msgstr "Opzioni di retrocompatibilità:"
-
-#. translator: '-r             The same as -f.
-#: src/Zypper.cc:660
-#, boost-format
-msgid "The same as %1%."
-msgstr "La stessa cosa di %1%."
-
-#: src/Zypper.cc:797 src/Zypper.cc:1785
+#: src/Zypper.cc:671 src/Zypper.cc:1659
 msgid "Unexpected exception."
 msgstr "Eccezione imprevista."
 
-#: src/Zypper.cc:822
+#: src/Zypper.cc:696
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -1908,7 +1908,7 @@ msgstr ""
 "\t--xmlout, -x\t\tPassa all'output XML.\n"
 "\t--ignore-unknown, -i\tIgnora i pacchetti sconosciuti.\n"
 
-#: src/Zypper.cc:845
+#: src/Zypper.cc:719
 msgid ""
 "\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
 "\t\t\t\tdirectory.\n"
@@ -1927,7 +1927,7 @@ msgstr ""
 "\t--pkg-cache-dir <dir>\tUsa una directory alternativa per la cache dei "
 "pacchetti.\n"
 
-#: src/Zypper.cc:853
+#: src/Zypper.cc:727
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -1961,7 +1961,7 @@ msgstr ""
 "\t--releasever\t\tImposta il valore di $releasever in tutti i file .repo "
 "(default: versione di distribuzione)\n"
 
-#: src/Zypper.cc:867
+#: src/Zypper.cc:741
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -1973,13 +1973,13 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tNon legge i pacchetti installati.\n"
 
-#: src/Zypper.cc:873
+#: src/Zypper.cc:747
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
 "Opera su una diversa directory radice, ma condivide i repository con l'host."
 
-#: src/Zypper.cc:877
+#: src/Zypper.cc:751
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -1989,7 +1989,7 @@ msgstr ""
 "\thelp, ?\t\t\tStampa l'aiuto.\n"
 "\tshell, sh\t\tAccetta comandi multipli in una volta sola.\n"
 
-#: src/Zypper.cc:882
+#: src/Zypper.cc:756
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -2009,7 +2009,7 @@ msgstr ""
 "\trefresh, ref\t\tAggiorna tutti i repository.\n"
 "\tclean\t\t\tPulisce le cache locali.\n"
 
-#: src/Zypper.cc:892
+#: src/Zypper.cc:766
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -2025,7 +2025,7 @@ msgstr ""
 "\tremoveservice, rs\tRimuove il servizio specificato.\n"
 "\trefresh-services, refs\tAggiorna tutti i servizi.\n"
 
-#: src/Zypper.cc:900
+#: src/Zypper.cc:774
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -2047,7 +2047,7 @@ msgstr ""
 "\t\t\t\tInstalla i nuovi pacchetti raccomandati\n"
 "\t\t\t\tdai pacchetti installati.\n"
 
-#: src/Zypper.cc:911
+#: src/Zypper.cc:785
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -2065,7 +2065,7 @@ msgstr ""
 "\tdist-upgrade, dup\tEsegue un upgrade della distribuzione.\n"
 "\tpatch-check, pchk\tVerifica la disponibilità di patch.\n"
 
-#: src/Zypper.cc:920
+#: src/Zypper.cc:794
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -2092,7 +2092,7 @@ msgstr ""
 "\twhat-provides, wp\tElenca i pacchetti che forniscono una funzionalità "
 "specificata.\n"
 
-#: src/Zypper.cc:935
+#: src/Zypper.cc:809
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -2106,7 +2106,7 @@ msgstr ""
 "\tlocks, ll\t\tElenca i blocchi attuali al pacchetto.\n"
 "\tcleanlocks, cl\t\tRimuove i blocchi inutilizzati.\n"
 
-#: src/Zypper.cc:942
+#: src/Zypper.cc:816
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -2130,7 +2130,7 @@ msgstr ""
 "installati\n"
 "\t\t\t\tin una directory locale.\n"
 
-#: src/Zypper.cc:952
+#: src/Zypper.cc:826
 msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
@@ -2138,7 +2138,7 @@ msgstr ""
 "     Sottocomandi:\n"
 "\tsubcommand\t\tElenca i sottocomandi disponibili.\n"
 
-#: src/Zypper.cc:957
+#: src/Zypper.cc:831
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -2150,7 +2150,7 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:985
+#: src/Zypper.cc:859
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr ""
@@ -2159,7 +2159,7 @@ msgstr ""
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:992
+#: src/Zypper.cc:866
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -2171,7 +2171,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:999
+#: src/Zypper.cc:873
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "
@@ -2182,47 +2182,47 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:1010
+#: src/Zypper.cc:884
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Digitare '%s' per ricevere aiuto specifico sul comando."
 
-#: src/Zypper.cc:1186
+#: src/Zypper.cc:1060
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Livello di dettaglio: %d"
 
-#: src/Zypper.cc:1200
+#: src/Zypper.cc:1074
 #, c-format, boost-format
 msgid "Invalid table style %d."
 msgstr "Stile tabella %d non valido."
 
-#: src/Zypper.cc:1201
+#: src/Zypper.cc:1075
 #, c-format, boost-format
 msgid "Use an integer number from %d to %d"
 msgstr "Usare un numero intero tra %d e %d"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:1312
+#: src/Zypper.cc:1186
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Il sottocomando %1% non supporta le opzioni globali di zypper."
 
-#: src/Zypper.cc:1333
+#: src/Zypper.cc:1207
 msgid "Enforced setting"
 msgstr "Impostazione forzata"
 
-#: src/Zypper.cc:1343
+#: src/Zypper.cc:1217
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "La stringa di dati utente non deve contenere caratteri di nuova riga o non "
 "stampabili."
 
-#: src/Zypper.cc:1367 src/Zypper.cc:3715
+#: src/Zypper.cc:1241 src/Zypper.cc:3622
 msgid "Entering non-interactive mode."
 msgstr "Attivazione modalità non interattiva."
 
-#: src/Zypper.cc:1374
+#: src/Zypper.cc:1248
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
@@ -2230,11 +2230,11 @@ msgstr ""
 "Le patch impostate con il flag rebootSuggested non verranno trattate come "
 "interattive."
 
-#: src/Zypper.cc:1381
+#: src/Zypper.cc:1255
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Attivazione modalità 'no-gpg-checks'."
 
-#: src/Zypper.cc:1389
+#: src/Zypper.cc:1263
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -2242,11 +2242,11 @@ msgstr ""
 "Attivazione di '%s'. Le nuove chiavi di firma del repository saranno "
 "importate automaticamente."
 
-#: src/Zypper.cc:1414
+#: src/Zypper.cc:1288
 msgid "The path specified in the --root option must be absolute."
 msgstr "Il percorso specificato nell'opzione --root deve essere assoluto."
 
-#: src/Zypper.cc:1433
+#: src/Zypper.cc:1307
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -2256,54 +2256,58 @@ msgstr ""
 "Il collegamento deve puntare al file dei prodotti principali .prod in /etc/"
 "products.d.\n"
 
-#: src/Zypper.cc:1481
+#: src/Zypper.cc:1355
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Repository disabilitati, viene usato il database dei soli pacchetti "
 "installati."
 
-#: src/Zypper.cc:1493
+#: src/Zypper.cc:1367
 msgid "Autorefresh disabled."
 msgstr "Aggiornamento automatico disabilitato."
 
-#: src/Zypper.cc:1500
+#: src/Zypper.cc:1374
 msgid "CD/DVD repositories disabled."
 msgstr "Repository su CD/DVD disabilitati."
 
-#: src/Zypper.cc:1507
+#: src/Zypper.cc:1381
 msgid "Remote repositories disabled."
 msgstr "Repository remoti disabilitati."
 
-#: src/Zypper.cc:1514
+#: src/Zypper.cc:1388
 msgid "Ignoring installed resolvables."
 msgstr "I risolvibili installati sono stati ignorati."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:1541 src/Zypper.cc:1591
+#: src/Zypper.cc:1415 src/Zypper.cc:1465
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "L'opzione %s non ha alcun effetto e verrà ignorata."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:1674
+#: src/Zypper.cc:1548
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Zypper non supporta l'esecuzione dei comandi secondari."
 
-#: src/Zypper.cc:1753
+#: src/Zypper.cc:1627
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "Comando '%s' è sostituito da '%s'."
 
-#: src/Zypper.cc:1754
+#: src/Zypper.cc:1628
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "Consultare '%s' per visualizzare tutte le opzioni disponibili."
 
+#: src/Zypper.cc:1733 src/Zypper.cc:3638
+msgid "Non-option program arguments: "
+msgstr "Argomenti del programma diversi dalle opzioni: "
+
 #. translators: the first %s = "package, patch, pattern, product",
 #. second %s = "package",
 #. and the third %s = "only, in-advance, in-heaps, as-needed"
-#: src/Zypper.cc:1893
+#: src/Zypper.cc:1819
 #, c-format, boost-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -2390,8 +2394,8 @@ msgstr ""
 "-d, --download-only         Effettua solo il download dei pacchetti, non li "
 "installa.\n"
 
-#: src/Zypper.cc:1926 src/Zypper.cc:1980 src/Zypper.cc:2063 src/Zypper.cc:2676
-#: src/Zypper.cc:2755 src/Zypper.cc:2856
+#: src/Zypper.cc:1852 src/Zypper.cc:1906 src/Zypper.cc:1989 src/Zypper.cc:2602
+#: src/Zypper.cc:2681 src/Zypper.cc:2782
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2399,7 +2403,7 @@ msgstr ""
 "Non richiedere interazione utente. Alias per l'opzionale globale --non-"
 "interactive."
 
-#: src/Zypper.cc:1927
+#: src/Zypper.cc:1853
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 "Installa in maniera silente pacchetti rpm non firmati forniti come argomenti "
@@ -2407,7 +2411,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: src/Zypper.cc:1963
+#: src/Zypper.cc:1889
 #, c-format, boost-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -2447,7 +2451,7 @@ msgstr ""
 "-D, --dry-run               Verifica la rimozione senza eseguirla "
 "effettivamente.\n"
 
-#: src/Zypper.cc:2001
+#: src/Zypper.cc:1927
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -2473,7 +2477,7 @@ msgstr ""
 "specificati.\n"
 "    --download-only      Scarica solo i pacchetti, non installare.\n"
 
-#: src/Zypper.cc:2012
+#: src/Zypper.cc:1938
 #, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
@@ -2484,7 +2488,7 @@ msgstr ""
 "è possibile modificare il valore nella configurazione rpm locale. In caso di "
 "dubbio provare a eseguire '%2%'."
 
-#: src/Zypper.cc:2048
+#: src/Zypper.cc:1974
 #, c-format, boost-format
 msgid ""
 "verify (ve) [options]\n"
@@ -2519,7 +2523,7 @@ msgstr ""
 "-d, --download-only         Effettua solo il download dei pacchetti, non li "
 "installa.\n"
 
-#: src/Zypper.cc:2097
+#: src/Zypper.cc:2023
 #, c-format, boost-format
 msgid ""
 "install-new-recommends (inr) [options]\n"
@@ -2555,7 +2559,7 @@ msgstr ""
 "installa.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: src/Zypper.cc:2131
+#: src/Zypper.cc:2057
 #, c-format, boost-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -2577,21 +2581,21 @@ msgstr ""
 "-n, --name <nome>      Specifica un nome descrittivo per il servizio.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2144
+#: src/Zypper.cc:2070
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr "addservice (as) [opzioni] <URI> <alias>"
 
 #. translators: command description
-#: src/Zypper.cc:2147
+#: src/Zypper.cc:2073
 msgid "Add a repository index service to the system."
 msgstr "Aggiunge al sistema un servizio indici del repository."
 
-#: src/Zypper.cc:2152
+#: src/Zypper.cc:2078
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr "Il tipo di servizio è sempre autorilevato. Questa opzione è ignorata."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:2168
+#: src/Zypper.cc:2094
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -2610,7 +2614,7 @@ msgstr ""
 "    --loose-query  Ignora la stringa di interrogazione nell'URI.\n"
 
 #. translators: %s is "--all" and "--all"
-#: src/Zypper.cc:2198
+#: src/Zypper.cc:2124
 #, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -2678,18 +2682,18 @@ msgstr ""
 "tipo specificato.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2227
+#: src/Zypper.cc:2153
 msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
 msgstr "modifyservice (ms) <opzioni> <alias|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2230
+#: src/Zypper.cc:2156
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
 msgstr "modifyservice (ms) <opzioni> <%1%>"
 
 #. translators: command description
-#: src/Zypper.cc:2233
+#: src/Zypper.cc:2159
 #, boost-format
 msgid ""
 "Modify properties of services specified by alias, number, or URI, or by the "
@@ -2698,47 +2702,47 @@ msgstr ""
 "Modifica le proprietà dei servizi specificati dall'alias, dal numero, "
 "dall'URI o attraverso le opzioni aggregate '%1%'."
 
-#: src/Zypper.cc:2238
+#: src/Zypper.cc:2164
 msgid "Apply changes to all services."
 msgstr "Applica le modifiche a tutti i servizi."
 
-#: src/Zypper.cc:2239
+#: src/Zypper.cc:2165
 msgid "Apply changes to all local services."
 msgstr "Applica le modifiche a tutti i servizi locali."
 
-#: src/Zypper.cc:2240
+#: src/Zypper.cc:2166
 msgid "Apply changes to all remote services."
 msgstr "Applica le modifiche a tutti i servizi remoti."
 
-#: src/Zypper.cc:2241
+#: src/Zypper.cc:2167
 msgid "Apply changes to services of specified type."
 msgstr "Applica le modifiche a tutti i servizi del tipo specificato."
 
-#: src/Zypper.cc:2243
+#: src/Zypper.cc:2169
 msgid "Add a RIS service repository to enable."
 msgstr "Aggiungi un repository RIS del servizio da abilitare."
 
-#: src/Zypper.cc:2244
+#: src/Zypper.cc:2170
 msgid "Add a RIS service repository to disable."
 msgstr "Aggiungi un repository RIS del servizio da disabilitare."
 
-#: src/Zypper.cc:2245
+#: src/Zypper.cc:2171
 msgid "Remove a RIS service repository to enable."
 msgstr "Rimuovi un repository RIS del servizio da abilitare."
 
-#: src/Zypper.cc:2246
+#: src/Zypper.cc:2172
 msgid "Remove a RIS service repository to disable."
 msgstr "Rimuovi un repository RIS del servizio da disabilitare."
 
-#: src/Zypper.cc:2247
+#: src/Zypper.cc:2173
 msgid "Clear the list of RIS repositories to enable."
 msgstr "Pulisci la lista dei repository RIS da abilitare."
 
-#: src/Zypper.cc:2248
+#: src/Zypper.cc:2174
 msgid "Clear the list of RIS repositories to disable."
 msgstr "Pulisci la lista dei repository RIS da disabilitare."
 
-#: src/Zypper.cc:2275
+#: src/Zypper.cc:2201
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -2770,7 +2774,7 @@ msgstr ""
 "-U, --sort-by-uri         Ordina l'elenco per URI.\n"
 "-N, --sort-by-name        Ordina l'elenco per nome.\n"
 
-#: src/Zypper.cc:2303
+#: src/Zypper.cc:2229
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -2793,7 +2797,7 @@ msgstr ""
 "repository dei servizi.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:2329
+#: src/Zypper.cc:2255
 #, c-format, boost-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -2836,17 +2840,17 @@ msgstr ""
 "-f, --refresh             Abilita l'aggiornamento automatico dell'archivio.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2351
+#: src/Zypper.cc:2277
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
 msgstr "addrepo (ar) [opzioni] <URI> <alias>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2354
+#: src/Zypper.cc:2280
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
 msgstr "addrepo (ar) [opzioni] <file.repo>"
 
 #. translators: command description
-#: src/Zypper.cc:2357
+#: src/Zypper.cc:2283
 msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
@@ -2854,24 +2858,24 @@ msgstr ""
 "Aggiungi un archivio al sistema. L'archivio può essere specificato dal suo "
 "URI o può essere letto dal file .repo specificato (anche remoto)."
 
-#: src/Zypper.cc:2360
+#: src/Zypper.cc:2286
 msgid "Just another means to specify a .repo file to read."
 msgstr "Solo un altro modo per specificare un file .repo da leggere."
 
-#: src/Zypper.cc:2361
+#: src/Zypper.cc:2287
 msgid "Probe URI."
 msgstr "Verifica URI."
 
-#: src/Zypper.cc:2362
+#: src/Zypper.cc:2288
 msgid "Don't probe URI, probe later during refresh."
 msgstr "Aggiunge l'archivio come disabilitato."
 
-#: src/Zypper.cc:2366
+#: src/Zypper.cc:2292
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
 "Il tipo di repository è sempre autorilevato. Questa opzione è ignorata."
 
-#: src/Zypper.cc:2394
+#: src/Zypper.cc:2320
 msgid ""
 "repos (lr) [options] [repo] ...\n"
 "\n"
@@ -2914,7 +2918,7 @@ msgstr ""
 "-A, --sort-by-alias       Ordina l'elenco per alias.\n"
 "-N, --sort-by-name        Ordina l'elenco per nome.\n"
 
-#: src/Zypper.cc:2427
+#: src/Zypper.cc:2353
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -2932,7 +2936,7 @@ msgstr ""
 "    --loose-auth   Ignora i dati di autenticazione dell'utente nell'URI.\n"
 "    --loose-query  Ignora la stringa di interrogazione nell'URI.\n"
 
-#: src/Zypper.cc:2448
+#: src/Zypper.cc:2374
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -2949,7 +2953,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:2471
+#: src/Zypper.cc:2397
 #, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -2988,7 +2992,7 @@ msgstr ""
 "-k, --keep-packages       Abilita la cache dei file RPM.\n"
 "-K, --no-keep-packages    Disabilita la cache dei file RPM.\n"
 
-#: src/Zypper.cc:2488
+#: src/Zypper.cc:2414
 msgid ""
 "-a, --all                 Apply changes to all repositories.\n"
 "-l, --local               Apply changes to all local repositories.\n"
@@ -3002,18 +3006,18 @@ msgstr ""
 "specificato.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2497
+#: src/Zypper.cc:2423
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
 msgstr "modifyrepo (mr) <opzioni> <alias|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2500
+#: src/Zypper.cc:2426
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
 msgstr "modifyrepo (mr) <opzioni> <%1%>"
 
 #. translators: command description
-#: src/Zypper.cc:2503
+#: src/Zypper.cc:2429
 #, boost-format
 msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
@@ -3022,7 +3026,7 @@ msgstr ""
 "Modifica le proprietà dei repository specificati dall'alias, dal numero, "
 "dall'URI o attraverso le opzioni aggregate '%1%'."
 
-#: src/Zypper.cc:2532
+#: src/Zypper.cc:2458
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3056,7 +3060,7 @@ msgstr ""
 "-s, --services           Aggiorna anche i servizi prima di aggiornare i "
 "repository.\n"
 
-#: src/Zypper.cc:2561
+#: src/Zypper.cc:2487
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3081,7 +3085,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2590
+#: src/Zypper.cc:2516
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -3124,7 +3128,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2647
+#: src/Zypper.cc:2573
 #, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -3196,7 +3200,7 @@ msgstr ""
 "-d, --download-only         Effettua solo il download dei pacchetti, non li "
 "installa.\n"
 
-#: src/Zypper.cc:2725
+#: src/Zypper.cc:2651
 #, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -3269,12 +3273,12 @@ msgstr ""
 "-d, --download-only         Effettua solo il download dei pacchetti senza "
 "installarli.\n"
 
-#: src/Zypper.cc:2752
+#: src/Zypper.cc:2678
 msgid "Install only patches which affect the package management itself."
 msgstr ""
 "Installare solo le patch che riguardano la gestione stessa dei pacchetti."
 
-#: src/Zypper.cc:2753
+#: src/Zypper.cc:2679
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
@@ -3285,16 +3289,16 @@ msgstr ""
 "stack per primo. Non può essere usato in combinazione con --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2785
+#: src/Zypper.cc:2711
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [OPZIONI]"
 
 #. translators: command description
-#: src/Zypper.cc:2788
+#: src/Zypper.cc:2714
 msgid "List all applicable patches."
 msgstr "Elenca tutte le patch applicabili."
 
-#: src/Zypper.cc:2791
+#: src/Zypper.cc:2717
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
@@ -3302,7 +3306,7 @@ msgstr ""
 "-b, --bugzilla[=#]\n"
 "Elenca le patch applicabili con problemi Bugzilla."
 
-#: src/Zypper.cc:2792
+#: src/Zypper.cc:2718
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
@@ -3310,7 +3314,7 @@ msgstr ""
 "--cve[=#]\n"
 "Elenca le patch applicabili con problemi CVE."
 
-#: src/Zypper.cc:2793
+#: src/Zypper.cc:2719
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
@@ -3318,7 +3322,7 @@ msgstr ""
 "--issues[=STRING]\n"
 "Cerca i problemi corrispondenti alla stringa specificata."
 
-#: src/Zypper.cc:2794
+#: src/Zypper.cc:2720
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
@@ -3326,7 +3330,7 @@ msgstr ""
 "--date <YYYY-MM-DD>\n"
 "Elenca solo le patch emesse fino alla data specificata, esclusa."
 
-#: src/Zypper.cc:2795
+#: src/Zypper.cc:2721
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
@@ -3334,7 +3338,7 @@ msgstr ""
 "-g, --category <CATEGORY>\n"
 "Elenca solo le patch con questa categoria."
 
-#: src/Zypper.cc:2796
+#: src/Zypper.cc:2722
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
@@ -3342,7 +3346,7 @@ msgstr ""
 "--severity <SEVERITY>\n"
 "Elenca solo le patch con questa gravità."
 
-#: src/Zypper.cc:2797
+#: src/Zypper.cc:2723
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
@@ -3350,7 +3354,7 @@ msgstr ""
 "-a, --all\n"
 "Elenca tutte le patch, non solo quelle applicabili."
 
-#: src/Zypper.cc:2799
+#: src/Zypper.cc:2725
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
@@ -3358,7 +3362,7 @@ msgstr ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Elenca solo le patch di un repository specificato."
 
-#: src/Zypper.cc:2835
+#: src/Zypper.cc:2761
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -3414,7 +3418,7 @@ msgstr ""
 "-d, --download-only         Effettua solo il download dei pacchetti, non li "
 "installa.\n"
 
-#: src/Zypper.cc:2901
+#: src/Zypper.cc:2827
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -3510,17 +3514,17 @@ msgstr ""
 "Se una stringa di ricerca è racchiusa tra '/', viene interpretata come "
 "espressione regolare.\n"
 
-#: src/Zypper.cc:2935
+#: src/Zypper.cc:2861
 msgid "Search for packages which supplement the search strings."
 msgstr "Cerca i pacchetti che integrano le stringhe di ricerca."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2953
+#: src/Zypper.cc:2879
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr "patch-check (pchk) [OPZIONI]"
 
 #. translators: command description
-#: src/Zypper.cc:2956
+#: src/Zypper.cc:2882
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
@@ -3529,7 +3533,7 @@ msgstr ""
 "restituisce 100 se sono state trovate le patch necessarie, 101 se è presente "
 "almeno una patch di sicurezza richiesta."
 
-#: src/Zypper.cc:2959
+#: src/Zypper.cc:2885
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
@@ -3537,7 +3541,7 @@ msgstr ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Cerca le patch solo nel repository specificato."
 
-#: src/Zypper.cc:2960
+#: src/Zypper.cc:2886
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
@@ -3545,7 +3549,7 @@ msgstr ""
 "--updatestack-only\n"
 "Cerca solo le patch riferite alla sola gestione dei pacchetti.."
 
-#: src/Zypper.cc:2977
+#: src/Zypper.cc:2903
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3563,7 +3567,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI> Un altro metodo per specificare un repository.\n"
 
-#: src/Zypper.cc:3007
+#: src/Zypper.cc:2933
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -3599,7 +3603,7 @@ msgstr ""
 "-N, --sort-by-name        Ordina l'elenco per nome del pacchetto.\n"
 "-R, --sort-by-repo        Ordina l'elenco per repository.\n"
 
-#: src/Zypper.cc:3038
+#: src/Zypper.cc:2964
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3621,7 +3625,7 @@ msgstr ""
 "-i, --installed-only      Mostra solo i modelli installati.\n"
 "-u, --not-installed-only  Mostra solo i modelli non installati.\n"
 
-#: src/Zypper.cc:3065
+#: src/Zypper.cc:2991
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3643,12 +3647,12 @@ msgstr ""
 "-i, --installed-only      Mostra solo i prodotti installati.\n"
 "-u, --not-installed-only  Mostra solo i prodotti non installati.\n"
 
-#: src/Zypper.cc:3074
+#: src/Zypper.cc:3000
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr "Solo output XML: inoltra i tag XML trovati nel file di prodotto."
 
-#: src/Zypper.cc:3099
+#: src/Zypper.cc:3025
 #, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -3693,11 +3697,11 @@ msgstr ""
 "    --recommends          Mostra i pacchetti consigliati.\n"
 "    --suggests            Mostra i pacchetti suggeriti.\n"
 
-#: src/Zypper.cc:3118
+#: src/Zypper.cc:3044
 msgid "Show supplements."
 msgstr "Mostra integrazioni."
 
-#: src/Zypper.cc:3133
+#: src/Zypper.cc:3059
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3712,7 +3716,7 @@ msgstr ""
 "\n"
 "Questo è un alias per '%s.'\n"
 
-#: src/Zypper.cc:3152
+#: src/Zypper.cc:3078
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3727,7 +3731,7 @@ msgstr ""
 "\n"
 "Questo è un alias per '%s'.\n"
 
-#: src/Zypper.cc:3171
+#: src/Zypper.cc:3097
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3742,7 +3746,7 @@ msgstr ""
 "\n"
 "Questo è un alias per '%s'.\n"
 
-#: src/Zypper.cc:3188
+#: src/Zypper.cc:3114
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3756,7 +3760,7 @@ msgstr ""
 "\n"
 "Questo comando non ha opzioni aggiuntive.\n"
 
-#: src/Zypper.cc:3239
+#: src/Zypper.cc:3165
 msgid ""
 "moo\n"
 "\n"
@@ -3770,93 +3774,76 @@ msgstr ""
 "\n"
 "Questo comando non ha opzioni aggiuntive.\n"
 
-#: src/Zypper.cc:3261
-#, c-format, boost-format
-msgid ""
-"addlock (al) [options] <packagename> ...\n"
-"\n"
-"Add a package lock. Specify packages to lock by exact name or by a glob "
-"pattern using '*' and '?' wildcard characters.\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n"
-"-t, --type <type>         Type of package (%s).\n"
-"                          Default: %s.\n"
-msgstr ""
-"addlock (al) [opzioni] <nome_pacchetto> ...\n"
-"\n"
-"Aggiunge un blocco al pacchetto. Specificare quali pacchetti bloccare "
-"indicandone il nome esatto oppure, cumulativamente, usando i caratteri "
-"jolly  '*' e '?'.\n"
-"\n"
-"  Opzioni del comando:\n"
-"-r, --repo <alias|#|URI>  Limita il blocco al repository specificato.\n"
-"-t, --type <tipo>         Tipo di pacchetto (%s).\n"
-"                          Default: %s.\n"
-
-#: src/Zypper.cc:3288
-#, c-format, boost-format
-msgid ""
-"removelock (rl) [options] <lock-number|packagename> ...\n"
-"\n"
-"Remove a package lock. Specify the lock to remove by its number obtained "
-"with '%s' or by package name.\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
-"-t, --type <type>         Type of package (%s).\n"
-"                          Default: %s.\n"
-msgstr ""
-"removelock (rl) [opzioni] <numero-blocco|nome-pacchetto> ...\n"
-"\n"
-"Rimuove un blocco dai pacchetti. Specificare il blocco da rimuovere usando "
-"il suo numero ottenuto con '%s' o tramite il nome del pacchetto.\n"
-"\n"
-"  Opzioni del comando:\n"
-"-r, --repo <alias|#|URI>  Rimuovi solo i blocchi con il repository "
-"specificato.\n"
-"-t, --type <tipo>         Tipo di pacchetto (%s).\n"
-"                          Default: %s.\n"
-
+# =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3315
-msgid "locks (ll) [options]"
-msgstr "locks (ll) [opzioni]"
+#: src/Zypper.cc:3188
+msgid "addlock (al) [options] <packagename> ..."
+msgstr "addlock (al) [opzioni] <nome_pacchetto> ..."
 
 #. translators: command description
-#: src/Zypper.cc:3318
-msgid "List current package locks."
-msgstr "Elenca i blocchi al pacchetto corrente."
-
-#. translators: -m, --matches
-#: src/Zypper.cc:3322
-msgid "Show the number of resolvables matched by each lock."
-msgstr "Mostra il numero di risolvibili corrispondenti a ciascun blocco."
-
-#. translators: -s, --solvables
-#: src/Zypper.cc:3324
-msgid "List the resolvables matched by each lock."
-msgstr "Elenca i risolvibili corrispondenti a ciascun blocco."
-
-#: src/Zypper.cc:3340
+#: src/Zypper.cc:3191
 msgid ""
-"cleanlocks (cl)\n"
-"\n"
-"Remove useless locks.\n"
-"\n"
-"  Command options:\n"
-"-d, --only-duplicates     Clean only duplicate locks.\n"
-"-e, --only-empty          Clean only locks which doesn't lock anything.\n"
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
 msgstr ""
-"cleanlocks (cl)\n"
-"\n"
-"Rimuove i blocchi inutili.\n"
-"\n"
-"  Opzioni del comando:\n"
-"-d, --only-duplicates     Elimina solo i blocchi duplicati.\n"
-"-e, --only-empty          Elimina solo i blocchi che non bloccano nulla.\n"
+"Aggiunge un blocco al pacchetto. Specificare quali pacchetti bloccare "
+"indicandone il nome esatto oppure, cumulativamente, usando i caratteri "
+"jolly  '*' e '?'."
 
-#: src/Zypper.cc:3361
+#. translators: -r, --repo <alias|#|URI>
+#: src/Zypper.cc:3195
+msgid "Restrict the lock to the specified repository."
+msgstr "Limita il blocco al repository specificato."
+
+#. translators: -t, --type <type>
+#: src/Zypper.cc:3197 src/Zypper.cc:3226
+#, boost-format
+msgid "Type of package (%1%)."
+msgstr "Tipo di pacchetto (%1%)."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#: src/Zypper.cc:3217
+msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgstr "removelock (rl) [opzioni] <numero-blocco|nome-pacchetto> ..."
+
+#. translators: command description; %1% is acoomand like 'zypper locks'
+#: src/Zypper.cc:3220
+#, boost-format
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
+msgstr ""
+"Rimuove un blocco dai pacchetti. Specificare il blocco da rimuovere usando "
+"il suo numero ottenuto con '%1%' o tramite il nome del pacchetto."
+
+#. translators: -r, --repo <alias|#|URI>
+#: src/Zypper.cc:3224
+msgid "Remove only locks with specified repository."
+msgstr "Rimuovi solo i blocchi con il repository specificato."
+
+# =============================================================================
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#: src/Zypper.cc:3244
+msgid "cleanlocks (cl)"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:3247
+msgid "Remove useless locks."
+msgstr "Rimuove i blocchi inutili."
+
+#. translators: -d, --only-duplicates
+#: src/Zypper.cc:3251
+msgid "Clean only duplicate locks."
+msgstr "Elimina solo i blocchi duplicati."
+
+#. translators: -e, --only-empty
+#: src/Zypper.cc:3253
+msgid "Clean only locks which doesn't lock anything."
+msgstr "Elimina solo i blocchi che non bloccano nulla."
+
+#: src/Zypper.cc:3268
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -3874,7 +3861,7 @@ msgstr ""
 "  Opzioni del comando:\n"
 "-l, --label                 Mostra l'etichetta del sistema operativo.\n"
 
-#: src/Zypper.cc:3382
+#: src/Zypper.cc:3289
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3891,7 +3878,7 @@ msgstr ""
 "-m, --match  Mantiene il numero di versione mancante per qualsiasi "
 "versione.\n"
 
-#: src/Zypper.cc:3401
+#: src/Zypper.cc:3308
 msgid ""
 "licenses\n"
 "\n"
@@ -3906,12 +3893,12 @@ msgstr ""
 "Questo comando non dispone di ulteriori opzioni.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3426
+#: src/Zypper.cc:3333
 msgid "ps [options]"
 msgstr "ps [opzioni]"
 
 #. translators: command description
-#: src/Zypper.cc:3429
+#: src/Zypper.cc:3336
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -3920,7 +3907,7 @@ msgstr ""
 "e librerie eliminati da upgrade recenti."
 
 #. translators: -s, --short
-#: src/Zypper.cc:3433
+#: src/Zypper.cc:3340
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -3932,7 +3919,7 @@ msgstr ""
 "associati."
 
 #. translators: --print <format>
-#: src/Zypper.cc:3435
+#: src/Zypper.cc:3342
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -3944,11 +3931,11 @@ msgstr ""
 "viene sostituita dal nome del servizio di sistema."
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3437
+#: src/Zypper.cc:3344
 msgid "Write debug output to file <path>."
 msgstr "Scrive l'output di debug su file <percorso>."
 
-#: src/Zypper.cc:3456
+#: src/Zypper.cc:3363
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -3995,7 +3982,7 @@ msgstr ""
 "solamente le\n"
 "                     eventuali operazioni.\n"
 
-#: src/Zypper.cc:3495
+#: src/Zypper.cc:3402
 msgid ""
 "source-download\n"
 "\n"
@@ -4026,7 +4013,7 @@ msgstr ""
 "--status             Non scarica alcun rpm sorgente,\n"
 "                     ma mostra quali rpm sorgenti sono mancanti o estranei.\n"
 
-#: src/Zypper.cc:3522
+#: src/Zypper.cc:3429
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4040,7 +4027,7 @@ msgstr ""
 "\n"
 "Questo comando non ha opzioni aggiuntive.\n"
 
-#: src/Zypper.cc:3539
+#: src/Zypper.cc:3446
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4055,7 +4042,7 @@ msgstr ""
 "Questo comando non ha opzioni aggiuntive.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3557
+#: src/Zypper.cc:3464
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4066,7 +4053,7 @@ msgstr ""
 "Elenca i tipi di servizio disponibili.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3573
+#: src/Zypper.cc:3480
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4079,7 +4066,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3595
+#: src/Zypper.cc:3502
 msgid ""
 "mount\n"
 "\n"
@@ -4099,7 +4086,7 @@ msgstr ""
 "-n, --name <name>    Utilizza la stringa data come nome del servizio.\n"
 "-r, --recurse        Scende nelle sottocartelle.\n"
 
-#: src/Zypper.cc:3623
+#: src/Zypper.cc:3530
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4114,7 +4101,7 @@ msgstr ""
 "\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3640
+#: src/Zypper.cc:3547
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4125,16 +4112,12 @@ msgstr ""
 "Questo comando prevede un'implementazione fittizia che restituisce sempre "
 "0.\n"
 
-#: src/Zypper.cc:3683 src/Zypper.cc:5769
+#: src/Zypper.cc:3590 src/Zypper.cc:5662
 msgid "Unexpected program flow."
 msgstr "Flusso di programma inatteso."
 
-#: src/Zypper.cc:3731
-msgid "Non-option program arguments: "
-msgstr "Argomenti del programma diversi dalle opzioni: "
-
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3801
+#: src/Zypper.cc:3721
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4144,23 +4127,23 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3824
+#: src/Zypper.cc:3744
 msgid "Root privileges are required for refreshing services."
 msgstr ""
 "Per aggiornare i servizi è necessario disporre dei privilegi di utente root."
 
-#: src/Zypper.cc:3848 src/Zypper.cc:3927 src/Zypper.cc:4115
+#: src/Zypper.cc:3768 src/Zypper.cc:3847 src/Zypper.cc:4035
 msgid "Root privileges are required for modifying system services."
 msgstr ""
 "Per modificare i servizi del sistema è necessario disporre dei privilegi di "
 "utente root."
 
-#: src/Zypper.cc:3911
+#: src/Zypper.cc:3831
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' non è un tipo di servizio valido."
 
-#: src/Zypper.cc:3913
+#: src/Zypper.cc:3833
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "Per un elenco di tipi di servizio conosciuti, vedere '%s' o '%s'."
@@ -4169,103 +4152,103 @@ msgstr "Per un elenco di tipi di servizio conosciuti, vedere '%s' o '%s'."
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3938 src/utils/messages.cc:47
+#: src/Zypper.cc:3858 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "È necessario un alias o un'opzione di aggregazione."
 
-#: src/Zypper.cc:3970
+#: src/Zypper.cc:3890
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Servizio '%s' non trovato."
 
-#: src/Zypper.cc:3997 src/Zypper.cc:4114 src/Zypper.cc:4218 src/Zypper.cc:4270
+#: src/Zypper.cc:3917 src/Zypper.cc:4034 src/Zypper.cc:4138 src/Zypper.cc:4190
 msgid "Root privileges are required for modifying system repositories."
 msgstr ""
 "Per modificare i repository di sistema sono necessari i privilegi "
 "dell'utente root."
 
-#: src/Zypper.cc:4023 src/Zypper.cc:4382
+#: src/Zypper.cc:3943 src/Zypper.cc:4302
 msgid "Too few arguments."
 msgstr "Argomenti insufficienti."
 
-#: src/Zypper.cc:4046
+#: src/Zypper.cc:3966
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Se viene utilizzato un solo un argomento, questo deve essere un URI che "
 "punta a un file .repo."
 
-#: src/Zypper.cc:4076
+#: src/Zypper.cc:3996
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 "Impossibile utilizzare %s insieme con %s. Verranno utilizzate le "
 "impostazioni di %s."
 
-#: src/Zypper.cc:4095
+#: src/Zypper.cc:4015
 msgid "Specified type is not a valid repository type:"
 msgstr "Il tipo specificato non è un tipo di repository valido:"
 
-#: src/Zypper.cc:4096
+#: src/Zypper.cc:4016
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "Per un elenco dei tipi di repository conosciuti, vedere '%s' o '%s'."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4161
+#: src/Zypper.cc:4081
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Repository '%s' non trovato tramite l'alias, il numero o l'URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4194
+#: src/Zypper.cc:4114
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Servizio '%s' non trovato tramite l'alias, il numero o l'URI."
 
-#: src/Zypper.cc:4225
+#: src/Zypper.cc:4145
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Argomenti insufficienti. È necessario inserire almeno l'URI e l'alias."
 
-#: src/Zypper.cc:4249
+#: src/Zypper.cc:4169
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Repository '%s' non trovato."
 
-#: src/Zypper.cc:4309
+#: src/Zypper.cc:4229
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Repository %s non trovato."
 
-#: src/Zypper.cc:4326
+#: src/Zypper.cc:4246
 msgid "Root privileges are required for refreshing system repositories."
 msgstr ""
 "Per aggiornare i repository di sistema sono necessari i privilegi "
 "dell'utente root."
 
-#: src/Zypper.cc:4332
+#: src/Zypper.cc:4252
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "L'opzione globale '%s' non ha effetto."
 
-#: src/Zypper.cc:4340
+#: src/Zypper.cc:4260
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Se viene usato '%s' non sono ammessi argomenti."
 
-#: src/Zypper.cc:4364
+#: src/Zypper.cc:4284
 msgid "Root privileges are required for cleaning local caches."
 msgstr ""
 "Per pulire le cache locale è necessario disporre dei privilegi di utente "
 "root."
 
-#: src/Zypper.cc:4383
+#: src/Zypper.cc:4303
 msgid "At least one package name is required."
 msgstr "È richiesto almeno un nome di pacchetto."
 
-#: src/Zypper.cc:4392 src/Zypper.cc:4641 src/Zypper.cc:4678
+#: src/Zypper.cc:4312 src/Zypper.cc:4561 src/Zypper.cc:4598
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
 "Per installare o disinstallare i pacchetti sono necessari i privilegi "
@@ -4273,21 +4256,21 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4404
+#: src/Zypper.cc:4324
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Argomenti ignorati, contrassegno dell'intero archivio."
 
-#: src/Zypper.cc:4415
+#: src/Zypper.cc:4335
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Tipo di pacchetto sconosciuto: %s"
 
 # TLABEL modules/inst_target_part.ycp:680
-#: src/Zypper.cc:4425
+#: src/Zypper.cc:4345
 msgid "Cannot uninstall patches."
 msgstr "Impossibile disinstallare le patch."
 
-#: src/Zypper.cc:4426
+#: src/Zypper.cc:4346
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4298,39 +4281,39 @@ msgstr ""
 "Le patch non vengono installate come file copiati, record del database\n"
 "o simili."
 
-#: src/Zypper.cc:4436
+#: src/Zypper.cc:4356
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr ""
 "La disinstallazione di un pacchetto sorgente non definita ed implementata."
 
-#: src/Zypper.cc:4456
+#: src/Zypper.cc:4376
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' sembra un file RPM. Verrà effettuato un tentativo di download."
 
-#: src/Zypper.cc:4465
+#: src/Zypper.cc:4385
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr ""
 "Si è verificato un problema con il file RPM specificato come '%s'; il file "
 "verrà ignorato."
 
-#: src/Zypper.cc:4487
+#: src/Zypper.cc:4407
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 "Si è verificato un problema durante la lettura dell'intestazione RPM di %s. "
 "Verificare che si tratti di un file RPM."
 
-#: src/Zypper.cc:4508
+#: src/Zypper.cc:4428
 msgid "Plain RPM files cache"
 msgstr "Cache file RPM"
 
-#: src/Zypper.cc:4530
+#: src/Zypper.cc:4450
 msgid "No valid arguments specified."
 msgstr "Nessun argomento valido specificato."
 
-#: src/Zypper.cc:4547 src/Zypper.cc:4694
+#: src/Zypper.cc:4467 src/Zypper.cc:4614
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4339,77 +4322,77 @@ msgstr ""
 "Impossibile installare."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4584 src/Zypper.cc:5171
+#: src/Zypper.cc:4504 src/Zypper.cc:5091
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s è in conflitto con %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4592
+#: src/Zypper.cc:4512
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "Impossibile utilizzare %s con %s"
 
-#: src/Zypper.cc:4633
+#: src/Zypper.cc:4553
 msgid "Source package name is a required argument."
 msgstr "Il nome del pacchetto di origine è un argomento obbligatorio."
 
-#: src/Zypper.cc:4751 src/Zypper.cc:5090 src/Zypper.cc:5190 src/Zypper.cc:5400
-#: src/Zypper.cc:5451 src/Zypper.cc:5491
+#: src/Zypper.cc:4671 src/Zypper.cc:5010 src/Zypper.cc:5110 src/Zypper.cc:5320
+#: src/Zypper.cc:5371 src/Zypper.cc:5411
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Tipo di pacchetto sconosciuto '%s'."
 
-#: src/Zypper.cc:4776 src/repos.cc:796
+#: src/Zypper.cc:4696 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Il repository specificato '%s' è disabilitato."
 
 #. translators: empty search result message
-#: src/Zypper.cc:4932
+#: src/Zypper.cc:4852
 msgid "No matching items found."
 msgstr "Nessun elemento corrispondente trovato."
 
-#: src/Zypper.cc:4967
+#: src/Zypper.cc:4887
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 "Si è verificato un problema durante l'inizializzazione o l'esecuzione di "
 "un'interrogazione di ricerca"
 
-#: src/Zypper.cc:4968
+#: src/Zypper.cc:4888
 msgid "See the above message for a hint."
 msgstr "Leggere il messaggio visualizzato sopra."
 
-#: src/Zypper.cc:4969 src/repos.cc:1009
+#: src/Zypper.cc:4889 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "È possibile risolvere il problema avviando 'zypper refresh' come root."
 
-#: src/Zypper.cc:5050
+#: src/Zypper.cc:4970
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "L'opzione %1% non produce effetti senza l'opzione globale %2%."
 
-#: src/Zypper.cc:5109 src/Zypper.cc:5157
+#: src/Zypper.cc:5029 src/Zypper.cc:5077
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Impossibile usare %s insieme a %s."
 
-#: src/Zypper.cc:5138
+#: src/Zypper.cc:5058
 msgid "Root privileges are required for updating packages."
 msgstr ""
 "Per aggiornare i pacchetti è necessario disporre dei privilegi di utente "
 "root."
 
-#: src/Zypper.cc:5197 src/Zypper.cc:5205 src/Zypper.cc:5286
+#: src/Zypper.cc:5117 src/Zypper.cc:5125 src/Zypper.cc:5206
 msgid "Operation not supported."
 msgstr "Operazione non supportata."
 
-#: src/Zypper.cc:5198
+#: src/Zypper.cc:5118
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Per aggiornare i prodotti installati usare '%s'."
 
-#: src/Zypper.cc:5206
+#: src/Zypper.cc:5126
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4419,20 +4402,20 @@ msgstr ""
 "il pacchetto di origine più recente con le rispettive dipendenze della "
 "build, usare '%s'."
 
-#: src/Zypper.cc:5222
+#: src/Zypper.cc:5142
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Impossibile usare più tipi quando vengono forniti pacchetti specifici come "
 "argomenti."
 
-#: src/Zypper.cc:5322
+#: src/Zypper.cc:5242
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
 "Per effettuare l'upgrade di una distribuzione è necessario disporre dei "
 "privilegi di utente root."
 
-#: src/Zypper.cc:5342
+#: src/Zypper.cc:5262
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4444,90 +4427,90 @@ msgstr ""
 "prima di continuare. Si veda '%s' per maggiori informazioni riguardo questo "
 "comando."
 
-#: src/Zypper.cc:5367 src/utils/messages.cc:55
+#: src/Zypper.cc:5287 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "Manca l'argomento richiesto."
 
-#: src/Zypper.cc:5370 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5290 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "Utilizzo"
 
-#: src/Zypper.cc:5430 src/Zypper.cc:5471
+#: src/Zypper.cc:5350 src/Zypper.cc:5391
 msgid "Root privileges are required for adding of package locks."
 msgstr ""
 "Per aggiungere blocchi ai pacchetti è necessario disporre dei privilegi di "
 "utente root."
 
-#: src/Zypper.cc:5552
+#: src/Zypper.cc:5445
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "Rimosso %lu blocco."
 msgstr[1] "Rimossi %lu blocchi."
 
-#: src/Zypper.cc:5563
+#: src/Zypper.cc:5456
 msgid "XML output not implemented for this command."
 msgstr "Output XML non implementato per questo comando."
 
-#: src/Zypper.cc:5576
+#: src/Zypper.cc:5469
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Etichetta della distribuzione: %s"
 
-#: src/Zypper.cc:5577
+#: src/Zypper.cc:5470
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Etichetta breve: %s"
 
-#: src/Zypper.cc:5618
+#: src/Zypper.cc:5511
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s corrisponde a %s"
 
-#: src/Zypper.cc:5620
+#: src/Zypper.cc:5513
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s è più recente di %s"
 
-#: src/Zypper.cc:5622
+#: src/Zypper.cc:5515
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s è meno recente di %s"
 
-#: src/Zypper.cc:5704 src/source-download.cc:217
+#: src/Zypper.cc:5597 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Privilegi insufficienti per usare la directory di download '%s'."
 
-#: src/Zypper.cc:5756
+#: src/Zypper.cc:5649
 msgid "This command only makes sense in the zypper shell."
 msgstr "Questo comando è utilizzabile solamente nella shell di zypper."
 
-#: src/Zypper.cc:5766
+#: src/Zypper.cc:5659
 msgid "You already are running zypper's shell."
 msgstr "Zypper è già in esecuzione in una shell."
 
-#: src/Zypper.cc:5779 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2546
+#: src/Zypper.cc:5672 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2546
 msgid "Alias"
 msgstr "Alias"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5779 src/info.cc:69 src/info.cc:460 src/info.cc:704
-#: src/locks.cc:104 src/repos.cc:1072 src/repos.cc:1211 src/repos.cc:2547
-#: src/search.cc:47 src/search.cc:195 src/search.cc:342 src/search.cc:489
-#: src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
+#: src/Zypper.cc:5672 src/commands/locks/list.cc:108 src/info.cc:69
+#: src/info.cc:460 src/info.cc:704 src/repos.cc:1072 src/repos.cc:1211
+#: src/repos.cc:2547 src/search.cc:47 src/search.cc:195 src/search.cc:342
+#: src/search.cc:489 src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
 msgid "Name"
 msgstr "Nome"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5779 src/info.cc:83
+#: src/Zypper.cc:5672 src/info.cc:83
 msgid "Description"
 msgstr "Descrizione"
 
-#: src/Zypper.cc:5830
+#: src/Zypper.cc:5723
 msgid "Resolvable Type"
 msgstr "Tipo di risolvibile"
 
@@ -4668,6 +4651,82 @@ msgstr "Nome utente"
 msgid "Password"
 msgstr "Password"
 
+#: src/commands/basecommand.cc:121
+#, boost-format
+msgid " Default: %1%"
+msgstr ""
+
+#: src/commands/basecommand.cc:134
+#, fuzzy
+msgid "Options:"
+msgstr "facoltativo"
+
+#: src/commands/locks/list.cc:110
+msgid "Matches"
+msgstr "Corrispondenze"
+
+#. translators: Table column header
+#. translators: type (general header)
+#: src/commands/locks/list.cc:111 src/info.cc:461 src/repos.cc:1110
+#: src/repos.cc:1222 src/repos.cc:2556 src/search.cc:49 src/search.cc:198
+msgid "Type"
+msgstr "Tipo"
+
+#. translators: property name; short; used like "Name: value"
+#. translators: package's repository (header)
+#: src/commands/locks/list.cc:111 src/info.cc:67 src/search.cc:55
+#: src/search.cc:344 src/search.cc:488 src/search.cc:549 src/update.cc:795
+#: src/utils/misc.cc:227
+msgid "Repository"
+msgstr "Repository"
+
+#. translators: locks table value
+#: src/commands/locks/list.cc:129 src/commands/locks/list.cc:198
+msgid "(multiple)"
+msgstr "(multipli)"
+
+#. translators: locks table value
+#: src/commands/locks/list.cc:132 src/commands/locks/list.cc:196
+msgid "(any)"
+msgstr "(qualsiasi)"
+
+# TLABEL modules/inst_target_part.ycp:680
+#. translators: property name; short; used like "Name: value"
+#: src/commands/locks/list.cc:170
+msgid "Keep installed"
+msgstr "Mantieni installato"
+
+# TLABEL modules/inst_target_part.ycp:680
+#. translators: property name; short; used like "Name: value"
+#: src/commands/locks/list.cc:178
+msgid "Do not install"
+msgstr "Non installare"
+
+#: src/commands/locks/list.cc:224
+msgid "List current package locks."
+msgstr "Elenca i blocchi al pacchetto corrente."
+
+#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#: src/commands/locks/list.cc:230
+msgid "locks (ll) [options]"
+msgstr "locks (ll) [opzioni]"
+
+#: src/commands/locks/list.cc:255
+msgid "Show the number of resolvables matched by each lock."
+msgstr "Mostra il numero di risolvibili corrispondenti a ciascun blocco."
+
+#: src/commands/locks/list.cc:256
+msgid "List the resolvables matched by each lock."
+msgstr "Elenca i risolvibili corrispondenti a ciascun blocco."
+
+#: src/commands/locks/list.cc:270
+msgid "Error reading the locks file:"
+msgstr "Errore durante la lettura del file blocchi:"
+
+#: src/commands/locks/list.cc:277
+msgid "There are no package locks defined."
+msgstr "Non è stato definito alcun blocco ai pacchetti."
+
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/download.cc:126
 msgid "Argument resolves to no package"
@@ -4698,13 +4757,6 @@ msgstr "Errore durante il download del pacchetto '%s'."
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "Download del pacchetto '%s' non eseguito."
-
-#. translators: property name; short; used like "Name: value"
-#. translators: package's repository (header)
-#: src/info.cc:67 src/locks.cc:107 src/search.cc:55 src/search.cc:344
-#: src/search.cc:488 src/search.cc:549 src/update.cc:795 src/utils/misc.cc:227
-msgid "Repository"
-msgstr "Repository"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
@@ -4837,13 +4889,6 @@ msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#. translators: type (general header)
-#: src/info.cc:461 src/locks.cc:107 src/repos.cc:1110 src/repos.cc:1222
-#: src/repos.cc:2556 src/search.cc:49 src/search.cc:198
-msgid "Type"
-msgstr "Tipo"
-
-#. translators: Table column header
 #: src/info.cc:462 src/search.cc:345
 msgid "Dependency"
 msgstr "Dipendenza"
@@ -4925,67 +4970,33 @@ msgstr "Nome breve"
 msgid "Builds binary package"
 msgstr "Consente di compilare pacchetti binari"
 
-#: src/locks.cc:106
-msgid "Matches"
-msgstr "Corrispondenze"
-
-#. translators: locks table value
-#: src/locks.cc:125 src/locks.cc:194
-msgid "(multiple)"
-msgstr "(multipli)"
-
-#. translators: locks table value
-#: src/locks.cc:128 src/locks.cc:192
-msgid "(any)"
-msgstr "(qualsiasi)"
-
-# TLABEL modules/inst_target_part.ycp:680
-#. translators: property name; short; used like "Name: value"
-#: src/locks.cc:166
-msgid "Keep installed"
-msgstr "Mantieni installato"
-
-# TLABEL modules/inst_target_part.ycp:680
-#. translators: property name; short; used like "Name: value"
-#: src/locks.cc:174
-msgid "Do not install"
-msgstr "Non installare"
-
-#: src/locks.cc:223
-msgid "Error reading the locks file:"
-msgstr "Errore durante la lettura del file blocchi:"
-
-#: src/locks.cc:229
-msgid "There are no package locks defined."
-msgstr "Non è stato definito alcun blocco ai pacchetti."
-
-#: src/locks.cc:289
+#: src/locks.cc:73
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "Il blocco specificato è stato aggiunto con successo."
 msgstr[1] "I blocchi specificati sono stati aggiunti con successo."
 
-#: src/locks.cc:296
+#: src/locks.cc:80
 msgid "Problem adding the package lock:"
 msgstr ""
 "Si è verificato un problema durante l'aggiunta del blocco al pacchetto:"
 
-#: src/locks.cc:320
+#: src/locks.cc:104
 msgid "Specified lock has been successfully removed."
 msgstr "Il blocco specificato è stato rimosso correttamente."
 
-#: src/locks.cc:365
+#: src/locks.cc:149
 msgid "No lock has been removed."
 msgstr "Non è stato rimosso alcun blocco."
 
-#: src/locks.cc:369
+#: src/locks.cc:153
 #, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
 msgstr[0] "%zu blocco è stato rimosso con successo."
 msgstr[1] "%zu blocchi sono stati rimossi con successo."
 
-#: src/locks.cc:376
+#: src/locks.cc:160
 msgid "Problem removing the package lock:"
 msgstr ""
 "Si è verificato un problema durante la rimozione del blocco al pacchetto:"
@@ -6865,6 +6876,34 @@ msgstr "Impossibile analizzare i file di configurazione."
 msgid "Error parsing zypper.conf:"
 msgstr "Errore durante l'analisi di zypper.conf:"
 
+#: src/utils/flags/exceptions.cc:21
+#, boost-format
+msgid "The flag %1% is not known."
+msgstr ""
+
+#: src/utils/flags/exceptions.cc:27
+msgid "The flag %1% is not compatible with argument %2% (%2)."
+msgstr ""
+
+#: src/utils/flags/exceptions.cc:33
+#, fuzzy, boost-format
+msgid "The flag %1% requires a argument."
+msgstr "Il nome del pacchetto di origine è un argomento obbligatorio."
+
+#: src/utils/flags/exceptions.cc:39
+#, boost-format
+msgid "The flag %1% can only be used once."
+msgstr ""
+
+#: src/utils/flags/flagtypes.cc:48
+msgid "Out of range"
+msgstr ""
+
+#: src/utils/flags/flagtypes.cc:50
+#, boost-format
+msgid "Unknown error while assigning the value %1% to flag %2%."
+msgstr ""
+
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
 #. The rest ends here and it is either the last one from previous argument
@@ -7155,53 +7194,66 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Se non si trovano altre soluzioni, immettere '%s' per '%s' o '%s' per '%s'."
 
-# =============================================================================
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-msgid "addlock (al) [options] <packagename> ..."
-msgstr "addlock (al) [opzioni] <nome_pacchetto> ..."
+#~ msgid ""
+#~ "addlock (al) [options] <packagename> ...\n"
+#~ "\n"
+#~ "Add a package lock. Specify packages to lock by exact name or by a glob "
+#~ "pattern using '*' and '?' wildcard characters.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n"
+#~ "-t, --type <type>         Type of package (%s).\n"
+#~ "                          Default: %s.\n"
+#~ msgstr ""
+#~ "addlock (al) [opzioni] <nome_pacchetto> ...\n"
+#~ "\n"
+#~ "Aggiunge un blocco al pacchetto. Specificare quali pacchetti bloccare "
+#~ "indicandone il nome esatto oppure, cumulativamente, usando i caratteri "
+#~ "jolly  '*' e '?'.\n"
+#~ "\n"
+#~ "  Opzioni del comando:\n"
+#~ "-r, --repo <alias|#|URI>  Limita il blocco al repository specificato.\n"
+#~ "-t, --type <tipo>         Tipo di pacchetto (%s).\n"
+#~ "                          Default: %s.\n"
 
-msgid ""
-"Add a package lock. Specify packages to lock by exact name or by a glob "
-"pattern using '*' and '?' wildcard characters."
-msgstr ""
-"Aggiunge un blocco al pacchetto. Specificare quali pacchetti bloccare "
-"indicandone il nome esatto oppure, cumulativamente, usando i caratteri "
-"jolly  '*' e '?'."
+#~ msgid ""
+#~ "removelock (rl) [options] <lock-number|packagename> ...\n"
+#~ "\n"
+#~ "Remove a package lock. Specify the lock to remove by its number obtained "
+#~ "with '%s' or by package name.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
+#~ "-t, --type <type>         Type of package (%s).\n"
+#~ "                          Default: %s.\n"
+#~ msgstr ""
+#~ "removelock (rl) [opzioni] <numero-blocco|nome-pacchetto> ...\n"
+#~ "\n"
+#~ "Rimuove un blocco dai pacchetti. Specificare il blocco da rimuovere "
+#~ "usando il suo numero ottenuto con '%s' o tramite il nome del pacchetto.\n"
+#~ "\n"
+#~ "  Opzioni del comando:\n"
+#~ "-r, --repo <alias|#|URI>  Rimuovi solo i blocchi con il repository "
+#~ "specificato.\n"
+#~ "-t, --type <tipo>         Tipo di pacchetto (%s).\n"
+#~ "                          Default: %s.\n"
 
-msgid "Restrict the lock to the specified repository."
-msgstr "Limita il blocco al repository specificato."
-
-msgid "Type of package (%1%)."
-msgstr "Tipo di pacchetto (%1%)."
-
-# =============================================================================
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-msgid "removelock (rl) [options] <lock-number|packagename> ..."
-msgstr "removelock (rl) [opzioni] <numero-blocco|nome-pacchetto> ..."
-
-msgid ""
-"Remove a package lock. Specify the lock to remove by its number obtained "
-"with '%1%' or by package name."
-msgstr ""
-"Rimuove un blocco dai pacchetti. Specificare il blocco da rimuovere usando "
-"il suo numero ottenuto con '%1%' o tramite il nome del pacchetto."
-
-msgid "Remove only locks with specified repository."
-msgstr "Rimuovi solo i blocchi con il repository specificato."
-
-# =============================================================================
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-msgid "cleanlocks (cl)"
-msgstr ""
-
-msgid "Remove useless locks."
-msgstr "Rimuove i blocchi inutili."
-
-msgid "Clean only duplicate locks."
-msgstr "Elimina solo i blocchi duplicati."
-
-msgid "Clean only locks which doesn't lock anything."
-msgstr "Elimina solo i blocchi che non bloccano nulla."
+#~ msgid ""
+#~ "cleanlocks (cl)\n"
+#~ "\n"
+#~ "Remove useless locks.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "-d, --only-duplicates     Clean only duplicate locks.\n"
+#~ "-e, --only-empty          Clean only locks which doesn't lock anything.\n"
+#~ msgstr ""
+#~ "cleanlocks (cl)\n"
+#~ "\n"
+#~ "Rimuove i blocchi inutili.\n"
+#~ "\n"
+#~ "  Opzioni del comando:\n"
+#~ "-d, --only-duplicates     Elimina solo i blocchi duplicati.\n"
+#~ "-e, --only-empty          Elimina solo i blocchi che non bloccano nulla.\n"
 
 #~ msgid "Mode is set to 'match-exact'"
 #~ msgstr "Modalità impostata come 'match-exact'"
