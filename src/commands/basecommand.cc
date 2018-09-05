@@ -118,7 +118,7 @@ std::string ZypperBaseCommand::help()
         std::string optHelpTxt = opt.help;
         auto defVal = opt.value.defaultValue();
         if ( defVal )
-          optHelpTxt.append(str::Format(_(" Default: %1%")) %*defVal );
+          optHelpTxt.append(" ").append(str::Format(("Default: %1%")) %*defVal );
         help.option(optTxt, optHelpTxt);
       }
     }

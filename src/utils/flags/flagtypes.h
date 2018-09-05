@@ -23,6 +23,10 @@ Value StringType ( std::string *target, const boost::optional<const char *> &def
  */
 Value IntType    ( int *target, const boost::optional<int> &defValue = boost::optional<int>()  );
 
+/**
+ * Returns a \sa ZyppFlags::Value instance counting how many times a parameter was seen
+ */
+Value CounterType    ( int *target, const boost::optional<int> &defValue = boost::optional<int>(), const boost::optional<int> &maxValue = boost::optional<int>()  );
 
 template <class Container>
 Value StringContainerType ( Container *target, std::string hint = ARG_STRING ) {

@@ -29,7 +29,6 @@ SET (zypper_HEADERS
   configtest.h
   solve-commit.h
   PackageArgs.h
-  ps.h
   SolverRequester.h
   Summary.h
   callbacks/keyring.h
@@ -43,6 +42,7 @@ SET (zypper_HEADERS
   commands/locks/add.h
   commands/locks/list.h
   commands/locks/remove.h
+  commands/ps.h
 )
 
 SET( zypper_SRCS
@@ -62,7 +62,6 @@ SET( zypper_SRCS
   configtest.cc
   solve-commit.cc
   PackageArgs.cc
-  ps.cc
   RequestFeedback.cc
   SolverRequester.cc
   Summary.cc
@@ -72,6 +71,7 @@ SET( zypper_SRCS
   commands/locks/add.cc
   commands/locks/list.cc
   commands/locks/remove.cc
+  commands/ps.cc
   ${zypper_HEADERS}
 )
 
