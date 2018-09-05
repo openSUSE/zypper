@@ -67,5 +67,23 @@ Value BoolType(bool *target, StoreFlag store, const boost::optional<bool> &defVa
   );
 }
 
+Value CounterType(int *target, const boost::optional<int> &defValue, const boost::optional<int> &maxValue)
+{
+  return Value (
+        [defValue]() -> boost::optional<std::string>{
+          if(defValue) {
+            return std::to_string(*defValue);
+          } else
+            return boost::optional<std::string>();
+        },
+
+        [target, maxValue]( const CommandOption &opt, const boost::optional<std::string> & ) {
+          *target += 1;
+          if ( maxValue && *target > *maxValue)
+            ZYPP_THROW(ZyppFlagsException(str::Format(_("The flag '%1%' can only be used a maximum of %2% times.")) % opt.name % *maxValue));
+        }
+  );
+}
+
 }
 }
