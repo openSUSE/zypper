@@ -57,7 +57,6 @@
 #include "locks.h"
 #include "search.h"
 #include "info.h"
-#include "ps.h"
 #include "download.h"
 #include "source-download.h"
 #include "configtest.h"
@@ -3314,39 +3313,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-
-  case ZypperCommand::PS_e:
-  {
-    shared_ptr<PsOptions> myOpts( new PsOptions() );
-    _commandOptions = myOpts;
-    static struct option options[] =
-    {
-      {"help",		no_argument,		0, 'h'},
-      {"short",		no_argument,		0, 's'},
-      {"print",		required_argument,	0,  0 },
-      {"debugFile",		required_argument,	0,  'd' },
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-      _("ps [options]")
-    )
-    .description(	// translators: command description
-      _("List running processes which might still use files and libraries deleted by recent upgrades.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-s, --short",	// translators: -s, --short
-	     _("Create a short table not showing the deleted files. Given twice, show only processes which are associated with a system service. Given three times, list the associated system service names only.") )
-    .option( "--print <format>",	// translators: --print <format>
-	     _("For each associated system service print <format> on the standard output, followed by a newline. Any '%s' directive in <format> is replaced by the system service name.") )
-    .option("-d, --debugFile <path>", // translators: -d, --debugFile <path>
-       _("Write debug output to file <path>."))
-    ;
-    break;
-  }
-
-
   case ZypperCommand::DOWNLOAD_e:
   {
     shared_ptr<DownloadOptions> myOpts( new DownloadOptions() );
@@ -5540,37 +5506,6 @@ void Zypper::doCommand()
 
     break;
   }
-
-
-  case ZypperCommand::PS_e:
-  {
-    if ( !_arguments.empty() )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    shared_ptr<PsOptions> myOpts( assertCommandOptions<PsOptions>() );
-    if ( _copts.count( "print" ) )
-    {
-      // implies -sss
-      myOpts->_shortness = 3;
-      myOpts->_format = _copts["print"].back();	// last wins
-    }
-    else if ( _copts.count( "short" ) )
-    {
-      myOpts->_shortness = _copts["short"].size();
-    }
-    else if ( _copts.count( "debugFile" ) )
-    {
-      myOpts->_debugFile = _copts["debugFile"].front();
-    }
-
-    ps( *this );
-    break;
-  }
-
 
   case ZypperCommand::DOWNLOAD_e:
   {

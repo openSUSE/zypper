@@ -15,6 +15,7 @@
 #include "Command.h"
 
 #include "commands/locks.h"
+#include "commands/ps.h"
 
 using namespace zypp;
 
@@ -32,7 +33,8 @@ namespace
   static std::map< ZypperCommand::Command, ZypperBaseCommandPtr > &newStyleCommands ()
   {
     static std::map< ZypperCommand::Command, ZypperBaseCommandPtr > table {
-      { ZypperCommand::LIST_LOCKS_e,  std::make_shared<ListLocksCmd>() }
+      { ZypperCommand::LIST_LOCKS_e,  std::make_shared<ListLocksCmd>() },
+      { ZypperCommand::PS_e, std::make_shared<PSCommand>() }
     };
     return table;
   }
@@ -92,7 +94,7 @@ namespace
       _t( TARGET_OS_e )		| "targetos"		| "tos";
       _t( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
       _t( LICENSES_e )		| "licenses";
-      _t( PS_e )		| "ps";
+      // _t( PS_e )		| "ps";
       _t( DOWNLOAD_e )		| "download";
       _t( SOURCE_DOWNLOAD_e )	| "source-download";
 
