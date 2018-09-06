@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep  6 12:55:44 CEST 2018 - ma@suse.de
+
+- Always set error status if any nr of unknown repositories are
+  passed to lr and ref (bsc#1093103)
+- version 1.14.10
+
+-------------------------------------------------------------------
 Thu Aug 30 16:47:05 CEST 2018 - ma@suse.de
 
 - Notify user about unsupported rpm V3 keys in an old rpm database
