@@ -21,7 +21,6 @@ SET (zypper_HEADERS
   search.h
   info.h
   Table.h
-  locks.h
   update.h
   download.h
   source-download.h
@@ -55,7 +54,6 @@ SET( zypper_SRCS
   search.cc
   info.cc
   Table.cc
-  locks.cc
   update.cc
   download.cc
   source-download.cc
