@@ -40,6 +40,7 @@ SET (zypper_HEADERS
   commands/basecommand.h
   commands/locks.h
   commands/locks/add.h
+  commands/locks/clean.h
   commands/locks/list.h
   commands/locks/remove.h
   commands/ps.h
@@ -69,6 +70,7 @@ SET( zypper_SRCS
   commands/conditions.cc
   commands/basecommand.cc
   commands/locks/add.cc
+  commands/locks/clean.cc
   commands/locks/list.cc
   commands/locks/remove.cc
   commands/ps.cc

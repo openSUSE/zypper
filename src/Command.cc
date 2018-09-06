@@ -34,8 +34,9 @@ namespace
   {
     static std::map< ZypperCommand::Command, ZypperBaseCommandPtr > table {
       { ZypperCommand::LIST_LOCKS_e,  std::make_shared<ListLocksCmd>() },
-      { ZypperCommand::ADD_LOCK_e, std::make_shared<AddLocksCmd>() },
+      { ZypperCommand::ADD_LOCK_e,    std::make_shared<AddLocksCmd>() },
       { ZypperCommand::REMOVE_LOCK_e, std::make_shared<RemoveLocksCmd>() },
+      { ZypperCommand::CLEAN_LOCKS_e, std::make_shared<CleanLocksCmd>() },
       { ZypperCommand::PS_e, std::make_shared<PSCommand>() }
     };
     return table;
@@ -91,7 +92,7 @@ namespace
       // _t( ADD_LOCK_e )		| "addlock"		| "al" | "lock-add" | "la";
       // _t( REMOVE_LOCK_e )	| "removelock"		| "rl" | "lock-delete" | "ld";
       // _t( LIST_LOCKS_e )	| "locks"		| "ll" | "lock-list";
-      _t( CLEAN_LOCKS_e )	| "cleanlocks"		| "cl" | "lock-clean";
+      // _t( CLEAN_LOCKS_e )	| "cleanlocks"		| "cl" | "lock-clean";
 
       _t( TARGET_OS_e )		| "targetos"		| "tos";
       _t( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
