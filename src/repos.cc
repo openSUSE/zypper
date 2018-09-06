@@ -1324,10 +1324,10 @@ void list_repos( Zypper & zypper )
   else
     print_repo_list( zypper, repos );
 
-  if ( repos.empty() )
+  if ( !not_found.empty() ) {
+      zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+  } else if ( repos.empty() ) {
     zypper.setExitCode( ZYPPER_EXIT_NO_REPOS );
-  else if ( !not_found.empty() ) {
-    zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
 }
 
@@ -1444,12 +1444,21 @@ void refresh_repos( Zypper & zypper )
     enabled_repo_count = 0;
 
   // print the result message
-  if ( enabled_repo_count == 0 )
+  if ( !not_found.empty() )
   {
-    if ( !specified.empty() || !not_found.empty() )
+      zypper.out().error(_("Some of the repositories have not been refreshed because they were not known.") );
+      zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      return;
+  }
+  else if ( enabled_repo_count == 0 )
+  {
+    if ( !specified.empty() )
       zypper.out().warning(_("Specified repositories are not enabled or defined.") );
-    else
+    else {
       zypper.out().warning(_("There are no enabled repositories defined.") );
+      zypper.setExitCode( ZYPPER_EXIT_NO_REPOS );
+    }
+
     zypper.out().info( str::form(_("Use '%s' or '%s' commands to add or enable repositories."),
 				 "zypper addrepo", "zypper modifyrepo" ) );
   }
@@ -1457,12 +1466,6 @@ void refresh_repos( Zypper & zypper )
   {
     zypper.out().error(_("Could not refresh the repositories because of errors.") );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
-  }
-  else if ( !not_found.empty() )
-  {
-    zypper.out().error(_("Some of the repositories have not been refreshed because they were not known.") );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
     return;
   }
   else if ( error_count )
