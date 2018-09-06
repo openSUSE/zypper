@@ -2089,6 +2089,20 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("removeservice (rs) [OPTIONS] <ALIAS|#|URI>")
+    )
+    .description(	// translators: command description
+    _("Remove specified repository index service from the system..")
+    )
+    .optionSectionCommandOptions()
+    .option( "--loose-auth",	// translators: --loose-auth
+             _("Ignore user authentication data in the URI.") )
+    .option( "--loose-query",	// translators: --loose-query
+             _("Ignore query string in the URI.") )
+    ;
+#if 0
     _command_help = _(
       // TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
       "removeservice (rs) [options] <alias|#|URI>\n"
@@ -2099,6 +2113,7 @@ void Zypper::processCommandOptions()
       "    --loose-auth   Ignore user authentication data in the URI.\n"
       "    --loose-query  Ignore query string in the URI.\n"
     );
+#endif
     break;
   }
 
