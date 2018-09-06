@@ -7,8 +7,29 @@
 #include "flagtypes.h"
 #include "main.h"
 
+#include "utils/misc.h"
+
 namespace zypp {
 namespace ZyppFlags {
+
+namespace {
+
+ResKind parseKindArgument( const CommandOption &opt, const boost::optional<std::string> &in)
+{
+  if (!in) ZYPP_THROW(MissingArgumentException(opt.name)); //value required
+  ResKind knd = string_to_kind(*in);
+  if ( knd == ResKind::nokind )
+    ZYPP_THROW(InvalidValueException( opt.name, *in, _("Unknown package type")));
+
+  return knd;
+}
+
+boost::optional<std::string> noDefaultValue()
+{
+  return boost::optional<std::string>();
+}
+
+}
 
 Value StringType(std::string *target, const boost::optional<const char *> &defValue, std::string hint) {
   return Value (
@@ -82,6 +103,30 @@ Value CounterType(int *target, const boost::optional<int> &defValue, const boost
           if ( maxValue && *target > *maxValue)
             ZYPP_THROW(ZyppFlagsException(str::Format(_("The flag '%1%' can only be used a maximum of %2% times.")) % opt.name % *maxValue));
         }
+  );
+}
+
+
+Value KindSetType(std::set<ResKind> *target) {
+  return Value (
+        noDefaultValue,
+        [target] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
+            target->insert( parseKindArgument( opt, in ) );
+            return;
+          },
+          "TYPE"
+  );
+}
+
+Value StringVectorType(std::vector<std::string> *target, std::string hint) {
+  return Value (
+        noDefaultValue,
+        [target] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
+          if ( !in || in->empty() ) ZYPP_THROW(MissingArgumentException(opt.name)); //value required
+          target->push_back(*in);
+          return;
+        },
+        std::move(hint)
   );
 }
 

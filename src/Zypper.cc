@@ -4021,35 +4021,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::ADD_LOCK_e:
-  {
-    static struct option options[] =
-    {
-      {"type", required_argument, 0, 't'},
-      {"repo", required_argument, 0, 'r'},
-      // rug compatibility (although rug does not seem to support this)
-      {"catalog", required_argument, 0, 'c'},
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-      _("addlock (al) [OPTIONS] <PACKAGENAME> ...")
-    )
-    .description(	// translators: command description
-      _("Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-	     _("Restrict the lock to the specified repository.") )
-    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
-	     str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
-	     // NOTE: Original help text had a ' Default: %s", "package" appended.
-    ;
-    break;
-  }
-
   case ZypperCommand::REMOVE_LOCK_e:
   {
     static struct option options[] =
@@ -6190,49 +6161,6 @@ void Zypper::doCommand()
     printInfo( *this, std::move(kinds) );
 
     return;
-  }
-
-  // -----------------------------( locks )------------------------------------
-
-  case ZypperCommand::ADD_LOCK_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for adding of package locks.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    // too few arguments
-    if ( _arguments.empty() )
-    {
-      report_required_arg_missing( out(), _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    ResKindSet kinds;
-    if ( copts.count("type") )
-    {
-      for_( it, copts["type"].begin(), copts["type"].end() )
-      {
-	kind = string_to_kind( *it );
-        if ( kind == ResObject::Kind() )
-        {
-          out().error( str::Format(_("Unknown package type '%s'.")) % *it );
-          setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-          return;
-        }
-        kinds.insert( kind );
-      }
-    }
-    //else
-    //  let add_locks determine the appropriate type (bnc #551956)
-
-    add_locks( *this, _arguments, kinds );
-
-    break;
   }
 
   case ZypperCommand::REMOVE_LOCK_e:

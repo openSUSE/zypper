@@ -61,7 +61,7 @@ int ZypperBaseCommand::run(Zypper &zypp, const std::vector<std::string> &positio
   MIL << "run: " << command().front() << endl;
   try
   {
-    for ( const BaseCommandConditionPtr cond : conditions() ) {
+    for ( const BaseCommandConditionPtr &cond : conditions() ) {
       std::string error;
       int code = cond->check( error );
       if ( code != 0 ) {

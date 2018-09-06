@@ -24,65 +24,6 @@ void safe_lexical_cast (Source s, Target &tr) {
   }
 }
 
-void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet & kinds)
-{
-  try
-  {
-    Locks & locks = Locks::instance();
-    locks.read(Pathname::assertprefix
-        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
-    Locks::size_type start = locks.size();
-    for_(it,args.begin(),args.end())
-    {
-      PoolQuery q;
-      if ( kinds.empty() ) // derive it from the name
-      {
-        sat::Solvable::SplitIdent split( *it );
-        q.addAttribute( sat::SolvAttr::name, split.name().asString() );
-        q.addKind( split.kind() );
-      }
-      else
-      {
-        q.addAttribute(sat::SolvAttr::name, *it);
-        for_(itk, kinds.begin(), kinds.end()) {
-          q.addKind(*itk);
-        }
-      }
-      q.setMatchGlob();
-      parsed_opts::const_iterator itr;
-      //TODO rug compatibility for more arguments with version restrict
-      if ((itr = copts.find("repo")) != copts.end())
-      {
-        for_(it_repo,itr->second.begin(), itr->second.end())
-        {
-          RepoInfo info;
-          if( match_repo( zypper, *it_repo, &info))
-            q.addRepo(info.alias());
-          else //TODO some error handling
-            WAR << "unknown repository" << *it_repo << endl;
-        }
-      }
-      q.setCaseSensitive();
-
-      locks.addLock(q);
-    }
-    locks.save(Pathname::assertprefix
-        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
-    if ( start != Locks::instance().size() )
-      zypper.out().info(PL_(
-        "Specified lock has been successfully added.",
-        "Specified locks have been successfully added.",
-        Locks::instance().size() - start));
-  }
-  catch(const Exception & e)
-  {
-    ZYPP_CAUGHT(e);
-    zypper.out().error(e, _("Problem adding the package lock:"));
-    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-  }
-}
-
-
 void remove_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet & kinds)
 {
   try

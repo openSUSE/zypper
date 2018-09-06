@@ -34,6 +34,7 @@ namespace
   {
     static std::map< ZypperCommand::Command, ZypperBaseCommandPtr > table {
       { ZypperCommand::LIST_LOCKS_e,  std::make_shared<ListLocksCmd>() },
+      { ZypperCommand::ADD_LOCK_e, std::make_shared<AddLocksCmd>() },
       { ZypperCommand::PS_e, std::make_shared<PSCommand>() }
     };
     return table;
@@ -86,7 +87,7 @@ namespace
       //_t( WHAT_REQUIRES_e )	| "what-requires"	| "wr";
       //_t( WHAT_CONFLICTS_e )	| "what-conflicts"	| "wc";
 
-      _t( ADD_LOCK_e )		| "addlock"		| "al" | "lock-add" | "la";
+      // _t( ADD_LOCK_e )		| "addlock"		| "al" | "lock-add" | "la";
       _t( REMOVE_LOCK_e )	| "removelock"		| "rl" | "lock-delete" | "ld";
       //_t( LIST_LOCKS_e )	| "locks"		| "ll" | "lock-list";
       _t( CLEAN_LOCKS_e )	| "cleanlocks"		| "cl" | "lock-clean";

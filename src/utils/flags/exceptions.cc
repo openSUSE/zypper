@@ -24,7 +24,7 @@ UnknownFlagException::UnknownFlagException(const std::string &flag)
 }
 
 InvalidValueException::InvalidValueException(const std::string &flag, const std::string &invalidValue, const std::string &reason)
-  : ZyppFlagsException( str::Format(_("The flag %1% is not compatible with argument %2% (%2)."))  % flag % invalidValue % reason )
+  : ZyppFlagsException( str::Format(_("The flag %1% is not compatible with argument %2% (%3%)."))  % flag % invalidValue % reason )
 {
 
 }

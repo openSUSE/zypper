@@ -7,7 +7,7 @@
 #include "zyppflags.h"
 
 #include <getopt.h>
-#include <map>
+#include <unordered_map>
 #include <exception>
 #include <utility>
 #include <string.h>
@@ -114,8 +114,8 @@ int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup>
   //build a complete list and a long and short option index so we can
   //easily get to the CommandOption
   std::vector<CommandOption> allOpts;
-  std::map<std::string, int> longOptIndex;  //we do not actually need that index other than checking for dups
-  std::map<char, int>        shortOptIndex;
+  std::unordered_map<std::string, int> longOptIndex;  //we do not actually need that index other than checking for dups
+  std::unordered_map<char, int>        shortOptIndex;
 
   for ( const CommandGroup &grp : options ) {
     for ( const CommandOption &currOpt : grp.options ) {
@@ -129,14 +129,14 @@ int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup>
 
       if ( !currOpt.name.empty() ) {
         if ( !longOptIndex.insert( { currOpt.name, allOptIndex } ).second) {
-          throw ZyppFlagsException("Duplicate long option <insertnamehere>");
+          throw ZyppFlagsException( str::Format("Duplicate long option ''%1%") % currOpt.name );
         }
         appendToLongOptions( currOpt, longopts );
       }
 
       if ( currOpt.shortName ) {
         if ( !shortOptIndex.insert( { currOpt.shortName, allOptIndex } ).second) {
-          throw ZyppFlagsException("Duplicate short option <insertnamehere>");
+          throw ZyppFlagsException( str::Format("Duplicate short option %1%") % currOpt.shortName );
         }
         appendToOptString( currOpt, shortopts );
       }
