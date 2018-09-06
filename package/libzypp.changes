@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Sep  6 12:16:25 CEST 2018 - ma@suse.de
+
+- Automatically fetch repository signing key from gpgkey url
+  (bsc#1088037)
+- lsof: use '-K i' if lsof supports it (bsc#1099847,bsc#1036304)
+- version 17.6.4 (2)
+
+-------------------------------------------------------------------
 Thu Aug 30 16:44:56 CEST 2018 - ma@suse.de
 
 - Check for not imported keys after multi key import from rpmdb
