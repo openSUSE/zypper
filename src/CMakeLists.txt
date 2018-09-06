@@ -37,6 +37,7 @@ SET (zypper_HEADERS
   callbacks/repo.h
   callbacks/job.h
   commands/commandhelpformatter.h
+  commands/conditions.h
   commands/basecommand.h
   commands/locks.h
   commands/locks/add.h
@@ -67,6 +68,7 @@ SET( zypper_SRCS
   Summary.cc
   callbacks/media.cc
   commands/commandhelpformatter.cc
+  commands/conditions.cc
   commands/basecommand.cc
   commands/locks/add.cc
   commands/locks/list.cc

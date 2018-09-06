@@ -18,6 +18,7 @@
 #include <zypp/ResKind.h>
 #include <zypp/RepoInfo.h>
 #include <zypp/ZYppCommitPolicy.h>
+#include <zypp/base/Logger.h>
 
 class Zypper;
 class Table;
@@ -28,6 +29,7 @@ namespace zypp
   class Resolvable;
   class Product;
   class Pattern;
+  class Patch;
 }
 using namespace zypp;
 

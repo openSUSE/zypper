@@ -10,7 +10,15 @@
 #include "zyppflags.h"
 #include "exceptions.h"
 
+#include <zypp/ResKind.h>
+
+#include <set>
+
+
 namespace zypp {
+
+class Kind;
+
 namespace ZyppFlags {
 
 /**
@@ -28,19 +36,15 @@ Value IntType    ( int *target, const boost::optional<int> &defValue = boost::op
  */
 Value CounterType    ( int *target, const boost::optional<int> &defValue = boost::optional<int>(), const boost::optional<int> &maxValue = boost::optional<int>()  );
 
-template <class Container>
-Value StringContainerType ( Container *target, std::string hint = ARG_STRING ) {
-  return Value (
-        []() -> boost::optional<std::string> { return boost::optional<std::string>(); },
-        [target] ( CommandOption *opt, const boost::optional<std::string> &in ) {
-          if (!in) ZYPP_THROW(MissingArgumentException(opt->name)); //value required
-          target->push_back(*in);
-          return;
-        },
-        std::move(hint)
-  );
-}
+/**
+ * Returns a \sa ZyppFlags::Value instance handling flags taking package or ressource types
+ */
+Value KindSetType ( std::set<ResKind> *target );
 
+/**
+ * Returns a \sa ZyppFlags::Value instance handling flags that fill a vector of strings
+ */
+Value StringVectorType (std::vector<std::string> *target, std::string hint = "STRING"  );
 
 /**
  * Specifies how to handle when a boolean flag was seen on commandline
