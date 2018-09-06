@@ -4,5 +4,6 @@
 #include "locks/add.h"
 #include "locks/remove.h"
 #include "locks/list.h"
+#include "locks/clean.h"
 
 #endif

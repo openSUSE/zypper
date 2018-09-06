@@ -4020,32 +4020,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::CLEAN_LOCKS_e:
-  {
-    static struct option options[] =
-    {
-      {"help", no_argument, 0, 'h'},
-      {"only-duplicates", no_argument, 0, 'd' },
-      {"only-empty", no_argument, 0, 'e' },
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-      _("cleanlocks (cl)")
-    )
-    .description(	// translators: command description
-      _("Remove useless locks.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-d, --only-duplicates",	// translators: -d, --only-duplicates
-	     _("Clean only duplicate locks.") )
-    .option( "-e, --only-empty",	// translators: -e, --only-empty
-	     _("Clean only locks which doesn't lock anything.") )
-    ;
-    break;
-  }
-
   case ZypperCommand::TARGET_OS_e:
   {
     static struct option options[] =
@@ -6131,30 +6105,6 @@ void Zypper::doCommand()
     printInfo( *this, std::move(kinds) );
 
     return;
-  }
-
-  case ZypperCommand::CLEAN_LOCKS_e:
-  {
-    initRepoManager();
-    init_target( *this );
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-    load_resolvables( *this );
-
-    Locks::instance().read();
-    Locks::size_type start = Locks::instance().size();
-    if ( !copts.count("only-duplicate") )
-      Locks::instance().removeEmpty();
-    if ( !copts.count("only-empty") )
-      Locks::instance().removeDuplicates();
-
-    Locks::instance().save();
-
-    Locks::size_type diff = start - Locks::instance().size();
-    out().info( str::form( PL_("Removed %lu lock.","Removed %lu locks.", diff), (long unsigned)diff ) );
-
-    break;
   }
 
   // ----------------------------(utils/others)--------------------------------
