@@ -2899,6 +2899,18 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = patches_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("patches (pch) [REPOSITORY] ...")
+    )
+    .description(	// translators: command description
+    _("List all patches available in specified repositories.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Just another means to specify repository.") )
+    ;
+#if 0
     _command_help = _(
       "patches (pch) [repository] ...\n"
       "\n"
@@ -2908,6 +2920,7 @@ void Zypper::processCommandOptions()
       "\n"
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
     );
+#endif
     break;
   }
 
