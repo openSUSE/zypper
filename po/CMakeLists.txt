@@ -36,7 +36,7 @@ FOREACH( _currentPoFile ${PO_FILES} )
   SET( _gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo )
 
   ADD_CUSTOM_COMMAND( OUTPUT ${_gmoFile}
-    COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -o ${_poFile} ${_absFile} ${POT_FILE}
+    COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --no-fuzzy-matching -o ${_poFile} ${_absFile} ${POT_FILE}
     COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${_gmoFile} ${_poFile}
     DEPENDS ${POT_FILE} ${_absFile}
     COMMENT "Update ${_gmoFile}"
