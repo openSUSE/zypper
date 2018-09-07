@@ -2962,6 +2962,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = update_options;
+#if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
       "patch [OPTIONS]\n"
@@ -2991,17 +2992,54 @@ void Zypper::processCommandOptions()
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
-      .option("--updatestack-only",	_("Install only patches which affect the package management itself.") )
-      .option("--with-update",		_("Additionally try to update all packages not covered by patches. The option is ignored, if the patch command must update the update stack first. Can not be combined with --updatestack-only.") )
-      .option_WITHout_OPTIONAL
-      .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+#endif
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("patch [OPTIONS]")
+    )
+    .description(	// translators: command description
+    _("Install all available needed patches.")
+    )
+    .optionSectionCommandOptions()
+    .option( "--skip-interactive",	// translators: --skip-interactive
+             _("Skip interactive patches.") )
+    .option( "--with-interactive",	// translators: --with-interactive
+             _("Do not skip interactive patches.") )
+    .option( "-l, --auto-agree-with-licenses",	// translators: -l, --auto-agree-with-licenses
+             _("Automatically say 'yes' to third party license confirmation prompt. See man zypper for more details.") )
+    .option( "-b, --bugzilla",	// translators: -b, --bugzilla
+             _("#            Install patch fixing the specified bugzilla issue.") )
+    .option( "--cve",	// translators: --cve
+             _("#                 Install patch fixing the specified CVE issue.") )
+    .option( "-g, --category <CATEGORY>",	// translators: -g, --category <CATEGORY>
+             _("Install only patches with this category.") )
+    .option( "--severity <SEVERITY>",	// translators: --severity <SEVERITY>
+             _("Install only patches with this severity.") )
+    .option( "--date <YYYY-MM-DD>",	// translators: --date <YYYY-MM-DD>
+             _("Install only patches issued up to, but not including, the specified date") )
+    .option( "--replacefiles",	// translators: --replacefiles
+             _("Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check.") )
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Load only the specified repository.") )
+    .option( "-D, --dry-run",	// translators: -D, --dry-run
+             _("Test the update, do not actually update.") )
+    .option( "--details",	// translators: --details
+             _("Show the detailed installation summary.") )
+    .option( "--download",	// translators: --download
+             str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed" )
+    .option( "-d, --download-only",	// translators: -d, --download-only
+             _("Only download the packages, do not install.") )
+    .option("--updatestack-only",	_("Install only patches which affect the package management itself.") )
+    .option("--with-update",		_("Additionally try to update all packages not covered by patches. The option is ignored, if the patch command must update the update stack first. Can not be combined with --updatestack-only.") )
+    .option_WITHout_OPTIONAL
+    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
 
-      .optionSectionSolverOptions()
-      .option_Solver_Flags_Common
-      .option_Solver_Flags_Recommends
-      .optionSectionExpertOptions()
-      .option_Solver_Flags_Installs
-      ;
+    .optionSectionSolverOptions()
+    .option_Solver_Flags_Common
+    .option_Solver_Flags_Recommends
+    .optionSectionExpertOptions()
+    .option_Solver_Flags_Installs
+    ;
     break;
   }
 
