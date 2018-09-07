@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 13:39+0200\n"
+"POT-Creation-Date: 2018-09-07 13:49+0200\n"
 "PO-Revision-Date: 2017-06-03 20:01+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -2278,7 +2278,7 @@ msgstr ""
 "Naudotojo duomenų eilutėje negali būti nespausdinamų arba naujos eilutės "
 "simbolių!"
 
-#: src/Zypper.cc:1241 src/Zypper.cc:3677
+#: src/Zypper.cc:1241 src/Zypper.cc:3694
 msgid "Entering non-interactive mode."
 msgstr "Įeinama į neinteraktyvią veikseną."
 
@@ -2354,7 +2354,7 @@ msgstr "Vietoj „%s“ komandos naudokite „%s“."
 msgid "See '%s' for all available options."
 msgstr "Visoms parinktims matyti rinkitės „%s“."
 
-#: src/Zypper.cc:1733 src/Zypper.cc:3693
+#: src/Zypper.cc:1733 src/Zypper.cc:3710
 msgid "Non-option program arguments: "
 msgstr "Programos argumentai, nereikalaujantys argumentų: "
 
@@ -2436,8 +2436,8 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Tik parsiųsti paketus, jų neįdiegti.\n"
 
-#: src/Zypper.cc:1852 src/Zypper.cc:1906 src/Zypper.cc:1989 src/Zypper.cc:2644
-#: src/Zypper.cc:2723 src/Zypper.cc:2824
+#: src/Zypper.cc:1852 src/Zypper.cc:1906 src/Zypper.cc:1989 src/Zypper.cc:2661
+#: src/Zypper.cc:2740 src/Zypper.cc:2841
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2854,7 +2854,32 @@ msgstr ""
 "-U, --sort-by-uri         Sąrašą rikiuoti pagal URI.\n"
 "-N, --sort-by-name        Sąrašą rikiuoti pagal pavadinimą.\n"
 
-#: src/Zypper.cc:2271
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:2272
+msgid "refresh-services (refs) [OPTIONS]"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:2275
+msgid "Refresh defined repository index services."
+msgstr ""
+
+#. translators: -f, --force
+#: src/Zypper.cc:2279
+msgid "Force a complete refresh."
+msgstr ""
+
+#. translators: -r, --with-repos
+#: src/Zypper.cc:2281
+msgid "Refresh also the service repositories."
+msgstr ""
+
+#. translators: -R, --restore-status
+#: src/Zypper.cc:2283
+msgid "Also restore service repositories enabled/disabled state."
+msgstr ""
+
+#: src/Zypper.cc:2287
 #, fuzzy
 msgid ""
 "refresh-services (refs) [options]\n"
@@ -2875,7 +2900,7 @@ msgstr ""
 "-r, --with-repos      Taip pat atnaujinti ir saugyklas.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:2297
+#: src/Zypper.cc:2314
 #, fuzzy, c-format, boost-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -2916,39 +2941,39 @@ msgstr ""
 "-f, --refresh           Įgalinti automatinį saugyklos atnaujinimą.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2319
+#: src/Zypper.cc:2336
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2322
+#: src/Zypper.cc:2339
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2325
+#: src/Zypper.cc:2342
 msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
 
-#: src/Zypper.cc:2328
+#: src/Zypper.cc:2345
 msgid "Just another means to specify a .repo file to read."
 msgstr ""
 
-#: src/Zypper.cc:2329
+#: src/Zypper.cc:2346
 msgid "Probe URI."
 msgstr ""
 
-#: src/Zypper.cc:2330
+#: src/Zypper.cc:2347
 msgid "Don't probe URI, probe later during refresh."
 msgstr ""
 
-#: src/Zypper.cc:2334
+#: src/Zypper.cc:2351
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
 
-#: src/Zypper.cc:2362
+#: src/Zypper.cc:2379
 msgid ""
 "repos (lr) [options] [repo] ...\n"
 "\n"
@@ -2992,7 +3017,7 @@ msgstr ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sąrašą rikiuoti pagal pavadinimą.\n"
 
-#: src/Zypper.cc:2395
+#: src/Zypper.cc:2412
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -3011,7 +3036,7 @@ msgstr ""
 "adrese.\n"
 "    --loose-query  Nepaisyti eilės įrašo URI adrese.\n"
 
-#: src/Zypper.cc:2416
+#: src/Zypper.cc:2433
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -3027,7 +3052,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:2439
+#: src/Zypper.cc:2456
 #, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -3063,7 +3088,7 @@ msgstr ""
 "-k, --keep-packages       Įgalinti RPM rinkmenų podėlį.\n"
 "-K, --no-keep-packages    Uždrausti RPM rinkmenų podėlį.\n"
 
-#: src/Zypper.cc:2456
+#: src/Zypper.cc:2473
 msgid ""
 "-a, --all                 Apply changes to all repositories.\n"
 "-l, --local               Apply changes to all local repositories.\n"
@@ -3078,25 +3103,25 @@ msgstr ""
 "-m, --medium-type <tipas>  Pakeitimus pritaikyti nurodyto tipo saugykloms.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2465
+#: src/Zypper.cc:2482
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2468
+#: src/Zypper.cc:2485
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2471
+#: src/Zypper.cc:2488
 #, boost-format
 msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
 "the '%1%' aggregate options."
 msgstr ""
 
-#: src/Zypper.cc:2500
+#: src/Zypper.cc:2517
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3130,7 +3155,7 @@ msgstr ""
 "-s, --services           Prieš atnaujinant saugyklas, taip pat atnaujinti ir "
 "paslaugas.\n"
 
-#: src/Zypper.cc:2529
+#: src/Zypper.cc:2546
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3154,7 +3179,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2558
+#: src/Zypper.cc:2575
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -3196,7 +3221,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2615
+#: src/Zypper.cc:2632
 #, fuzzy, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -3256,7 +3281,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Tik parsiųsti paketus, nieko neįdiegti.\n"
 
-#: src/Zypper.cc:2693
+#: src/Zypper.cc:2710
 #, fuzzy, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -3319,11 +3344,11 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Tik parsiųsti paketus, jų neįdiegti.\n"
 
-#: src/Zypper.cc:2720
+#: src/Zypper.cc:2737
 msgid "Install only patches which affect the package management itself."
 msgstr "Diegti tik paketus, kurie susiję su pačia paketų tvarkytuve."
 
-#: src/Zypper.cc:2721
+#: src/Zypper.cc:2738
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
@@ -3331,64 +3356,64 @@ msgid ""
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2753
+#: src/Zypper.cc:2770
 msgid "list-patches (lp) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2756
+#: src/Zypper.cc:2773
 msgid "List all applicable patches."
 msgstr ""
 
-#: src/Zypper.cc:2759
+#: src/Zypper.cc:2776
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
 
-#: src/Zypper.cc:2760
+#: src/Zypper.cc:2777
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
 
-#: src/Zypper.cc:2761
+#: src/Zypper.cc:2778
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
 
-#: src/Zypper.cc:2762
+#: src/Zypper.cc:2779
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
 
-#: src/Zypper.cc:2763
+#: src/Zypper.cc:2780
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
 
-#: src/Zypper.cc:2764
+#: src/Zypper.cc:2781
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
 
-#: src/Zypper.cc:2765
+#: src/Zypper.cc:2782
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
 
-#: src/Zypper.cc:2767
+#: src/Zypper.cc:2784
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
 
-#: src/Zypper.cc:2803
+#: src/Zypper.cc:2820
 #, fuzzy, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -3434,7 +3459,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         Tik parsiųsti paketus, jų neįdiegti.\n"
 
-#: src/Zypper.cc:2869
+#: src/Zypper.cc:2886
 #, fuzzy
 msgid ""
 "search (se) [options] [querystring] ...\n"
@@ -3509,29 +3534,29 @@ msgstr ""
 "\n"
 "Be to, paieškos užklausoje galima naudoti * ir ? pakaitos simbolius.\n"
 
-#: src/Zypper.cc:2903
+#: src/Zypper.cc:2920
 msgid "Search for packages which supplement the search strings."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2921
+#: src/Zypper.cc:2938
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2924
+#: src/Zypper.cc:2941
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
 
-#: src/Zypper.cc:2927
+#: src/Zypper.cc:2944
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
 
-#: src/Zypper.cc:2928
+#: src/Zypper.cc:2945
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
@@ -3540,21 +3565,21 @@ msgstr ""
 "Tikrinti tik pataisas, kurie susiję su pačia paketų tvarkymo programa."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2946
+#: src/Zypper.cc:2963
 msgid "patches (pch) [REPOSITORY] ..."
 msgstr "patches (pch) [saugykla] ..."
 
 #. translators: command description
-#: src/Zypper.cc:2949
+#: src/Zypper.cc:2966
 msgid "List all patches available in specified repositories."
 msgstr "Pateikti visų pataisų, pasiekiamų konkrečiose saugyklose, sąrašą."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:2953
+#: src/Zypper.cc:2970
 msgid "Just another means to specify repository."
 msgstr "Tiesiog nurodo į konkrečią saugyklą."
 
-#: src/Zypper.cc:2957
+#: src/Zypper.cc:2974
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3572,7 +3597,7 @@ msgstr ""
 "\n"
 "-r, --repo <pseud|Nr.|URI> Tiesiog nurodo į konkrečią saugyklą.\n"
 
-#: src/Zypper.cc:2988
+#: src/Zypper.cc:3005
 #, fuzzy
 msgid ""
 "packages (pa) [options] [repository] ...\n"
@@ -3604,7 +3629,7 @@ msgstr ""
 "-N, --sort-by-name        Sąrašą rikiuoti pagal paketo pavadinimą.\n"
 "-R, --sort-by-repo        Sąrašą rikiuoti pagal saugyklą.\n"
 
-#: src/Zypper.cc:3019
+#: src/Zypper.cc:3036
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3626,7 +3651,7 @@ msgstr ""
 "-i, --installed-only      Rodyti tik įdiegtus šablonus.\n"
 "-u, --not-installed-only  Rodyti tik neįdiegtus šablonus.\n"
 
-#: src/Zypper.cc:3046
+#: src/Zypper.cc:3063
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3648,12 +3673,12 @@ msgstr ""
 "-i, --installed-only      Rodyti tik įdiegtus produktus.\n"
 "-u, --not-installed-only  Rodyti tik neįdiegtus produktus.\n"
 
-#: src/Zypper.cc:3055
+#: src/Zypper.cc:3072
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
 
-#: src/Zypper.cc:3080
+#: src/Zypper.cc:3097
 #, fuzzy, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -3687,11 +3712,11 @@ msgstr ""
 "    --requires            Taip pat rodyti, ko paketas reikalauja.\n"
 "    --recommends          Taip pat rodyti, ką paketas pataria įdiegti."
 
-#: src/Zypper.cc:3099
+#: src/Zypper.cc:3116
 msgid "Show supplements."
 msgstr ""
 
-#: src/Zypper.cc:3114
+#: src/Zypper.cc:3131
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3706,7 +3731,7 @@ msgstr ""
 "\n"
 "Tai pseudonimas, skirtas „%s“.\n"
 
-#: src/Zypper.cc:3133
+#: src/Zypper.cc:3150
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3721,7 +3746,7 @@ msgstr ""
 "\n"
 "Tai pseudonimas, skirtas „%s“.\n"
 
-#: src/Zypper.cc:3152
+#: src/Zypper.cc:3169
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3736,7 +3761,7 @@ msgstr ""
 "\n"
 "Tai pseudonimas, skirtas „%s“.\n"
 
-#: src/Zypper.cc:3169
+#: src/Zypper.cc:3186
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3751,7 +3776,7 @@ msgstr ""
 "\n"
 "Ši komanda neturi papildomų parinkčių.\n"
 
-#: src/Zypper.cc:3220
+#: src/Zypper.cc:3237
 msgid ""
 "moo\n"
 "\n"
@@ -3767,12 +3792,12 @@ msgstr ""
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3243
+#: src/Zypper.cc:3260
 msgid "addlock (al) [options] <packagename> ..."
 msgstr "addlock (al) [parinktys] <paketo_pavadinimas> ..."
 
 #. translators: command description
-#: src/Zypper.cc:3246
+#: src/Zypper.cc:3263
 msgid ""
 "Add a package lock. Specify packages to lock by exact name or by a glob "
 "pattern using '*' and '?' wildcard characters."
@@ -3782,25 +3807,25 @@ msgstr ""
 "simboliais."
 
 #. translators: -r, --repo <alias|#|URI>
-#: src/Zypper.cc:3250
+#: src/Zypper.cc:3267
 msgid "Restrict the lock to the specified repository."
 msgstr "Užrakinti tik konkrečioje saugykloje."
 
 #. translators: -t, --type <type>
-#: src/Zypper.cc:3252 src/Zypper.cc:3281
+#: src/Zypper.cc:3269 src/Zypper.cc:3298
 #, boost-format
 msgid "Type of package (%1%)."
 msgstr "Paketo tipas (%1%)."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3272
+#: src/Zypper.cc:3289
 msgid "removelock (rl) [options] <lock-number|packagename> ..."
 msgstr ""
 "removelock (rl) [parinktys] <užrakinimo_numeris|paketo_pavadinimas> ..."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
-#: src/Zypper.cc:3275
+#: src/Zypper.cc:3292
 #, boost-format
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
@@ -3810,32 +3835,32 @@ msgstr ""
 "sužinoti su „%1%“, arba užrakinto paketo pavadinimą."
 
 #. translators: -r, --repo <alias|#|URI>
-#: src/Zypper.cc:3279
+#: src/Zypper.cc:3296
 msgid "Remove only locks with specified repository."
 msgstr "Atrakinti tik konkrečioje saugykloje."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3299
+#: src/Zypper.cc:3316
 msgid "cleanlocks (cl)"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3302
+#: src/Zypper.cc:3319
 msgid "Remove useless locks."
 msgstr "Pašalinti nenaudingus užrakinimus."
 
 #. translators: -d, --only-duplicates
-#: src/Zypper.cc:3306
+#: src/Zypper.cc:3323
 msgid "Clean only duplicate locks."
 msgstr "Panaikinti tik besidubliuojančius užrakinimus."
 
 #. translators: -e, --only-empty
-#: src/Zypper.cc:3308
+#: src/Zypper.cc:3325
 msgid "Clean only locks which doesn't lock anything."
 msgstr "Panaikinti tik nieko neužrakinančius užrakinimus."
 
-#: src/Zypper.cc:3323
+#: src/Zypper.cc:3340
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -3853,7 +3878,7 @@ msgstr ""
 "  Komandos parinktys:\n"
 "-l, --label                 Parodyti operacinės sistemos žymę.\n"
 
-#: src/Zypper.cc:3344
+#: src/Zypper.cc:3361
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3869,7 +3894,7 @@ msgstr ""
 "  Komandos parinktys:\n"
 "-m, --match  Ima trūkstamus laidos numerius bet kuriai laidai.\n"
 
-#: src/Zypper.cc:3363
+#: src/Zypper.cc:3380
 msgid ""
 "licenses\n"
 "\n"
@@ -3885,12 +3910,12 @@ msgstr ""
 "Ši komanda neturi papildomų parinkčių.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3388
+#: src/Zypper.cc:3405
 msgid "ps [options]"
 msgstr "ps [parinktys]"
 
 #. translators: command description
-#: src/Zypper.cc:3391
+#: src/Zypper.cc:3408
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -3899,7 +3924,7 @@ msgstr ""
 "pašalintos paskutinio naujovinimo metu. "
 
 #. translators: -s, --short
-#: src/Zypper.cc:3395
+#: src/Zypper.cc:3412
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -3907,7 +3932,7 @@ msgid ""
 msgstr ""
 
 #. translators: --print <format>
-#: src/Zypper.cc:3397
+#: src/Zypper.cc:3414
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -3916,11 +3941,11 @@ msgid ""
 msgstr ""
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3399
+#: src/Zypper.cc:3416
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/Zypper.cc:3418
+#: src/Zypper.cc:3435
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -3942,7 +3967,7 @@ msgid ""
 "                     would be done.\n"
 msgstr ""
 
-#: src/Zypper.cc:3457
+#: src/Zypper.cc:3474
 msgid ""
 "source-download\n"
 "\n"
@@ -3971,7 +3996,7 @@ msgstr ""
 "                     parodyti trūkstamus ir nereikalingus šaltinius "
 "paketus.\n"
 
-#: src/Zypper.cc:3484
+#: src/Zypper.cc:3501
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -3986,7 +4011,7 @@ msgstr ""
 "Ši komanda neturi papildomų parinkčių.\n"
 
 # don't translate first line!
-#: src/Zypper.cc:3501
+#: src/Zypper.cc:3518
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4001,7 +4026,7 @@ msgstr ""
 "Ši komanda neturi papildomų parinkčių.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3519
+#: src/Zypper.cc:3536
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4012,7 +4037,7 @@ msgstr ""
 "Parodo galimus paslaugų tipus.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3535
+#: src/Zypper.cc:3552
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4025,7 +4050,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3557
+#: src/Zypper.cc:3574
 msgid ""
 "mount\n"
 "\n"
@@ -4045,7 +4070,7 @@ msgstr ""
 "-n, --name <pavad>   Duotą eilutę naudoti kaip paslaugos pavadinimą.\n"
 "-r, --recurse        Eiti į pakatalogius.\n"
 
-#: src/Zypper.cc:3585
+#: src/Zypper.cc:3602
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4058,7 +4083,7 @@ msgstr ""
 "Ieškoti užklausą atitinkančių pataisų. Tai pseudonimas, skirtas „%s“. \n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3602
+#: src/Zypper.cc:3619
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4068,12 +4093,12 @@ msgstr ""
 "\n"
 "Ši komanda turi fiktyvią funkciją, kuri visada grąžina 0.\n"
 
-#: src/Zypper.cc:3645 src/Zypper.cc:5717
+#: src/Zypper.cc:3662 src/Zypper.cc:5734
 msgid "Unexpected program flow."
 msgstr "Netikėta programos eiga."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3776
+#: src/Zypper.cc:3793
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4083,20 +4108,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3799
+#: src/Zypper.cc:3816
 msgid "Root privileges are required for refreshing services."
 msgstr "Paslaugų atnaujinimui reikalingos root teisės."
 
-#: src/Zypper.cc:3823 src/Zypper.cc:3902 src/Zypper.cc:4090
+#: src/Zypper.cc:3840 src/Zypper.cc:3919 src/Zypper.cc:4107
 msgid "Root privileges are required for modifying system services."
 msgstr "Sistemos paslaugų keitimui reikalingos root teisės."
 
-#: src/Zypper.cc:3886
+#: src/Zypper.cc:3903
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "„%s“ nėra tinkamas paslaugos tipas."
 
-#: src/Zypper.cc:3888
+#: src/Zypper.cc:3905
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "Atpažįstamus paslaugų tipus pateikia „%s“ arba „%s“."
@@ -4105,47 +4130,47 @@ msgstr "Atpažįstamus paslaugų tipus pateikia „%s“ arba „%s“."
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3913 src/utils/messages.cc:47
+#: src/Zypper.cc:3930 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "Reikia pseudonimo arba kitų parinkčių."
 
-#: src/Zypper.cc:3945
+#: src/Zypper.cc:3962
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Paslauga „%s“ nerasta."
 
-#: src/Zypper.cc:3972 src/Zypper.cc:4089 src/Zypper.cc:4193 src/Zypper.cc:4245
+#: src/Zypper.cc:3989 src/Zypper.cc:4106 src/Zypper.cc:4210 src/Zypper.cc:4262
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Sistemos saugyklų keitimui reikalingos root teisės."
 
-#: src/Zypper.cc:3998 src/Zypper.cc:4357
+#: src/Zypper.cc:4015 src/Zypper.cc:4374
 msgid "Too few arguments."
 msgstr "Per mažai argumentų."
 
-#: src/Zypper.cc:4021
+#: src/Zypper.cc:4038
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Jei nurodomas tik vienas argumentas, jis turi būti URI, nurodantis .repo "
 "rinkmeną."
 
-#: src/Zypper.cc:4051
+#: src/Zypper.cc:4068
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "Negalima %s naudoti kartu su %s. Naudojama %s."
 
-#: src/Zypper.cc:4070
+#: src/Zypper.cc:4087
 msgid "Specified type is not a valid repository type:"
 msgstr "Nurodytas tipas nėra tinkamas saugyklos tipas:"
 
-#: src/Zypper.cc:4071
+#: src/Zypper.cc:4088
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "Atpažįstamus saugyklų tipus pateikia „%s“ arba „%s“."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4136
+#: src/Zypper.cc:4153
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr ""
@@ -4153,68 +4178,68 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4169
+#: src/Zypper.cc:4186
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr ""
 "Paslauga „%s“ nerasta nei pagal pseudonimą, nei pagal numerį, nei pagal URI."
 
-#: src/Zypper.cc:4200
+#: src/Zypper.cc:4217
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Per mažai argumentų. Bent jau turi būti nurodytas URI ir pseudonimas."
 
-#: src/Zypper.cc:4224
+#: src/Zypper.cc:4241
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Saugykla „%s“ nerasta."
 
-#: src/Zypper.cc:4284
+#: src/Zypper.cc:4301
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Saugykla %s nerasta."
 
-#: src/Zypper.cc:4301
+#: src/Zypper.cc:4318
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Sistemos saugyklų atnaujinimui reikalingos root teisės."
 
-#: src/Zypper.cc:4307
+#: src/Zypper.cc:4324
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Čia bendra parinktis „%s“ yra neveiksni."
 
-#: src/Zypper.cc:4315
+#: src/Zypper.cc:4332
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argumentai neleiskite, jei naudojama  „%s“."
 
-#: src/Zypper.cc:4339
+#: src/Zypper.cc:4356
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Vietinių podėlių išvalymui reikalingos root teisės."
 
-#: src/Zypper.cc:4358
+#: src/Zypper.cc:4375
 msgid "At least one package name is required."
 msgstr "Reikia bent vieno paketo pavadinimo."
 
-#: src/Zypper.cc:4367 src/Zypper.cc:4616 src/Zypper.cc:4653
+#: src/Zypper.cc:4384 src/Zypper.cc:4633 src/Zypper.cc:4670
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Paketų diegimui arba šalinimui reikalingos root teisės."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4379
+#: src/Zypper.cc:4396
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Nepaisoma argumentų, žymima visa saugykla."
 
-#: src/Zypper.cc:4390
+#: src/Zypper.cc:4407
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Nežinomas paketo tipas: %s"
 
-#: src/Zypper.cc:4400
+#: src/Zypper.cc:4417
 msgid "Cannot uninstall patches."
 msgstr "Nepavyksta pašalinti pataisų."
 
-#: src/Zypper.cc:4401
+#: src/Zypper.cc:4418
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4224,34 +4249,34 @@ msgstr ""
 "Pataisos neįdiegtos nukopijuotų rinkmenų, duomenų bazių\n"
 "ir panašiais atvejais."
 
-#: src/Zypper.cc:4411
+#: src/Zypper.cc:4428
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Šaltinio paketo pašalinimas dar nėra aprašytas arba nėra numatytas."
 
-#: src/Zypper.cc:4431
+#: src/Zypper.cc:4448
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "„%s“ regis yra RPM rinkmena. Bus bandoma ją parsiųsti."
 
-#: src/Zypper.cc:4440
+#: src/Zypper.cc:4457
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Nesklandumai su RPM rinkmena, nurodyta kaip „%s“, praleidžiama."
 
-#: src/Zypper.cc:4462
+#: src/Zypper.cc:4479
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Nesklandumai skaitant %s RPM antraštę. Ar tai RPM rinkmena?"
 
-#: src/Zypper.cc:4483
+#: src/Zypper.cc:4500
 msgid "Plain RPM files cache"
 msgstr "Ištisas RPM rinkmenų podėlis"
 
-#: src/Zypper.cc:4505
+#: src/Zypper.cc:4522
 msgid "No valid arguments specified."
 msgstr "Nenurodyta teisingų argumentų."
 
-#: src/Zypper.cc:4522 src/Zypper.cc:4669
+#: src/Zypper.cc:4539 src/Zypper.cc:4686
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4260,75 +4285,75 @@ msgstr ""
 "negalima įdiegti."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4559 src/Zypper.cc:5146
+#: src/Zypper.cc:4576 src/Zypper.cc:5163
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s prieštarauja %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4567
+#: src/Zypper.cc:4584
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "Šiuo metu %s negali būti naudojamas su %s"
 
-#: src/Zypper.cc:4608
+#: src/Zypper.cc:4625
 msgid "Source package name is a required argument."
 msgstr "Šaltinio paketo pavadinimas – reikalingas argumentas."
 
-#: src/Zypper.cc:4726 src/Zypper.cc:5065 src/Zypper.cc:5165 src/Zypper.cc:5375
-#: src/Zypper.cc:5426 src/Zypper.cc:5466
+#: src/Zypper.cc:4743 src/Zypper.cc:5082 src/Zypper.cc:5182 src/Zypper.cc:5392
+#: src/Zypper.cc:5443 src/Zypper.cc:5483
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Nežinomas paketo tipas „%s“."
 
-#: src/Zypper.cc:4751 src/repos.cc:796
+#: src/Zypper.cc:4768 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Nurodyta saugykla „%s“ yra uždrausta."
 
 #. translators: empty search result message
-#: src/Zypper.cc:4907
+#: src/Zypper.cc:4924
 msgid "No matching items found."
 msgstr "Atitikmenų nerasta."
 
-#: src/Zypper.cc:4942
+#: src/Zypper.cc:4959
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Nesklandumai paruošiant ar paiešką"
 
-#: src/Zypper.cc:4943
+#: src/Zypper.cc:4960
 msgid "See the above message for a hint."
 msgstr "Žiūrėkite užuominą virš pranešimo."
 
-#: src/Zypper.cc:4944 src/repos.cc:1009
+#: src/Zypper.cc:4961 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Šią bėdą galite išspręsti prisijungę kaip root naudotojas ir įvykdę „zypper "
 "refresh“."
 
-#: src/Zypper.cc:5025
+#: src/Zypper.cc:5042
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
 
-#: src/Zypper.cc:5084 src/Zypper.cc:5132
+#: src/Zypper.cc:5101 src/Zypper.cc:5149
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Negalima %s naudoti katu su %s."
 
-#: src/Zypper.cc:5113
+#: src/Zypper.cc:5130
 msgid "Root privileges are required for updating packages."
 msgstr "Paketų atnaujinimui reikalingos root teisės."
 
-#: src/Zypper.cc:5172 src/Zypper.cc:5180 src/Zypper.cc:5261
+#: src/Zypper.cc:5189 src/Zypper.cc:5197 src/Zypper.cc:5278
 msgid "Operation not supported."
 msgstr "Operacija nepalaikoma"
 
-#: src/Zypper.cc:5173
+#: src/Zypper.cc:5190
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Įdiegtų produktų atnaujinimui naudokite „%s“."
 
-#: src/Zypper.cc:5181
+#: src/Zypper.cc:5198
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4337,18 +4362,18 @@ msgstr ""
 "Zypper negali sekti įdiegtų šaltinių paketų pakitimų. Norėdami įdiegti "
 "naujausią šaltinį paketą ir jo sukurtas priklausomybes, naudokite „%s“."
 
-#: src/Zypper.cc:5197
+#: src/Zypper.cc:5214
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Negalima naudoti keletos tipų, jei kaip argumentas pateiktas konkretus "
 "paketas."
 
-#: src/Zypper.cc:5297
+#: src/Zypper.cc:5314
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Platinamojo paketo naujovinimui reikalingos root teisės."
 
-#: src/Zypper.cc:5317
+#: src/Zypper.cc:5334
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4359,20 +4384,20 @@ msgstr ""
 "saugyklomis. Prieš tęsdami įsitikinkite, kad šios saugyklos yra suderinamos. "
 "Daugiau apie šią komandą sužinosite žiūrėdami „%s“."
 
-#: src/Zypper.cc:5342 src/utils/messages.cc:55
+#: src/Zypper.cc:5359 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "Trūksta reikiamo argumento."
 
-#: src/Zypper.cc:5345 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5362 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "Naudojimas"
 
-#: src/Zypper.cc:5405 src/Zypper.cc:5446
+#: src/Zypper.cc:5422 src/Zypper.cc:5463
 msgid "Root privileges are required for adding of package locks."
 msgstr "Paketų užrakinimui reikalingos root teisės."
 
-#: src/Zypper.cc:5500
+#: src/Zypper.cc:5517
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
@@ -4381,56 +4406,56 @@ msgstr[1] "Atrakinti %lu."
 msgstr[2] "Atrakinta %lu."
 msgstr[3] "Atrakintas %lu."
 
-#: src/Zypper.cc:5511
+#: src/Zypper.cc:5528
 msgid "XML output not implemented for this command."
 msgstr ""
 
-#: src/Zypper.cc:5524
+#: src/Zypper.cc:5541
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Platinamojo paketo žymė: %s"
 
-#: src/Zypper.cc:5525
+#: src/Zypper.cc:5542
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Trumpoji žymė: %s"
 
-#: src/Zypper.cc:5566
+#: src/Zypper.cc:5583
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s atitinka %s"
 
-#: src/Zypper.cc:5568
+#: src/Zypper.cc:5585
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s naujesnis už %s"
 
-#: src/Zypper.cc:5570
+#: src/Zypper.cc:5587
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s senesnis už %s"
 
-#: src/Zypper.cc:5652 src/source-download.cc:217
+#: src/Zypper.cc:5669 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Nepakanka teisių prieiti prie siuntinių katalogo „%s“."
 
-#: src/Zypper.cc:5704
+#: src/Zypper.cc:5721
 msgid "This command only makes sense in the zypper shell."
 msgstr "Ši komanda veikia tik zypper apvalkale."
 
-#: src/Zypper.cc:5714
+#: src/Zypper.cc:5731
 msgid "You already are running zypper's shell."
 msgstr "Jūs jau paleidote zypper apvalkalą."
 
-#: src/Zypper.cc:5727 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
+#: src/Zypper.cc:5744 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
 msgid "Alias"
 msgstr "Pseudonimas"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5727 src/commands/locks/list.cc:108 src/info.cc:69
+#: src/Zypper.cc:5744 src/commands/locks/list.cc:108 src/info.cc:69
 #: src/info.cc:460 src/info.cc:704 src/repos.cc:1072 src/repos.cc:1211
 #: src/repos.cc:2550 src/search.cc:47 src/search.cc:195 src/search.cc:342
 #: src/search.cc:489 src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
@@ -4438,11 +4463,11 @@ msgid "Name"
 msgstr "Pavadinimas"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5727 src/info.cc:83
+#: src/Zypper.cc:5744 src/info.cc:83
 msgid "Description"
 msgstr "Aprašas"
 
-#: src/Zypper.cc:5778
+#: src/Zypper.cc:5795
 msgid "Resolvable Type"
 msgstr "Išsprendžiamumo tipas"
 
