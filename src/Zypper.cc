@@ -3495,6 +3495,18 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("targetos (tos) [OPTIONS]")
+    )
+    .description(	// translators: command description
+    _("Show various information about the target operating system. By default, an ID string is shown.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-l, --label",	// translators: -l, --label
+             _("Show the operating system label.") )
+    ;
+#if 0
     _command_help = _(
       "targetos (tos) [options]\n"
       "\n"
@@ -3504,6 +3516,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-l, --label                 Show the operating system label.\n"
     );
+#endif
     break;
   }
 
