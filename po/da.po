@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-09-04 16:50+0000\n"
+"PO-Revision-Date: 2018-09-07 09:41+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -273,6 +273,8 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"Rpm-databasen ser ud til at indeholde gamle gpg-nøgler i V3-version, som i "
+"mellemtiden er udgået og betragtes som værende usikre:"
 
 #: src/callbacks/keyring.h:413
 #, boost-format
@@ -285,6 +287,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Med mindre du mener at nølgen stadig er i brug, kan du fjerne den fra rpm-"
+"databasen, ved at kalde '%1%'."
 
 #: src/callbacks/keyring.h:434
 msgid "New package signing key received:"
@@ -1761,12 +1765,16 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Dette er en transactional-server, brug venligst transactional-update for at "
+"opdatere eller ændre systemet."
 
 #: src/Zypper.cc:533
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"Målets filsystem er monteret som skrivebeskyttet. Sørg venligst for at der "
+"kan skrives til målets filsystem."
 
 #: src/Zypper.cc:644
 msgid "Command options:"
