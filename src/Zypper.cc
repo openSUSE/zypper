@@ -3758,6 +3758,16 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = quit_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("shell (sh)")
+    )
+    .description(	// translators: command description
+    _("Enter the zypper command shell.")
+    )
+    .noOptionSection()
+    ;
+#if 0
     _command_help = _(
       "shell (sh)\n"
       "\n"
@@ -3765,6 +3775,7 @@ void Zypper::processCommandOptions()
       "\n"
       "This command has no additional options.\n"
     );
+#endif
     break;
   }
 
