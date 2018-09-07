@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 14:49+0200\n"
+"POT-Creation-Date: 2018-09-07 14:57+0200\n"
 "PO-Revision-Date: 2018-08-15 12:00+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
@@ -2140,7 +2140,7 @@ msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "Brugerdata-strengen må ikke indeholde non-printable eller ny linje-tegn!"
 
-#: src/Zypper.cc:1241 src/Zypper.cc:3890
+#: src/Zypper.cc:1241 src/Zypper.cc:3908
 msgid "Entering non-interactive mode."
 msgstr "Går i ikke-interaktiv tilstand."
 
@@ -2219,7 +2219,7 @@ msgstr "Kommandoen \"%s\" erstattes af \"%s\"."
 msgid "See '%s' for all available options."
 msgstr "Se \"%s\" for alle tilgængelige tilvalg."
 
-#: src/Zypper.cc:1733 src/Zypper.cc:3906
+#: src/Zypper.cc:1733 src/Zypper.cc:3924
 msgid "Non-option program arguments: "
 msgstr "Ikke-tilvalg programargumenter: "
 
@@ -4166,7 +4166,50 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Skriv fejlsøgningsoutput til filen <sti>."
 
-#: src/Zypper.cc:3631
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:3632
+msgid "download [options] <packages>..."
+msgstr "download [tilvalg] <pakker>..."
+
+#. translators: command description
+#: src/Zypper.cc:3635
+msgid ""
+"Download rpms specified on the commandline to a local directory. Per default "
+"packages are downloaded to the libzypp package cache (/var/cache/zypp/"
+"packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be "
+"changed by using the global --pkg-cache-dir option."
+msgstr ""
+"Download rpm'er som er angivet på kommandolinjen til en lokal mappe. Som "
+"standard downloades pakker til libzypp-pakkemellemlageret (/var/cache/zypp/"
+"packages; til brugere som ikke er root $XDG_CACHE_HOME/zypp/packages), men "
+"dette kan ændres ved at bruge det globale tilvalg --pkg-cache-dir."
+
+#. translators: command description
+#: src/Zypper.cc:3638
+msgid ""
+"In XML output a <download-result> node is written for each package zypper "
+"tried to download. Upon success the local path is is found in 'download-"
+"result/localpath@path'."
+msgstr ""
+"I XML-output skrives et <download-result>-knudepunkt for hver pakke som "
+"zypper prøver at downloade. Når det lykkedes findes den lokale sti i "
+"'download-result/lokalsti@sti'."
+
+#. translators: --all-matches
+#: src/Zypper.cc:3642
+msgid ""
+"Download all versions matching the commandline arguments. Otherwise only the "
+"best version of each matching package is downloaded."
+msgstr ""
+"Download alle versioner som matcher kommandlinjeargumenterne. Ellers "
+"downloades kun den bedste version af hver pakke som matcher."
+
+#. translators: --dry-run
+#: src/Zypper.cc:3644
+msgid "Don't download any package, just report what would be done."
+msgstr "Download ikke nogen pakke, rapportér kun hvad der vil ske."
+
+#: src/Zypper.cc:3648
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4207,7 +4250,7 @@ msgstr ""
 "--dry-run            Download ikke nogen pakke, rapportér kun hvad\n"
 "                     der vil ske.\n"
 
-#: src/Zypper.cc:3670
+#: src/Zypper.cc:3688
 msgid ""
 "source-download\n"
 "\n"
@@ -4236,7 +4279,7 @@ msgstr ""
 "                     men vis hvilke kilde-RPM'er der mangler eller er "
 "uvedkommende.\n"
 
-#: src/Zypper.cc:3697
+#: src/Zypper.cc:3715
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4250,7 +4293,7 @@ msgstr ""
 "\n"
 "Denne kommando har ingen yderligere tilvalg.\n"
 
-#: src/Zypper.cc:3714
+#: src/Zypper.cc:3732
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4265,7 +4308,7 @@ msgstr ""
 "Denne kommando har ingen yderligere tilvalg.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3732
+#: src/Zypper.cc:3750
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4276,7 +4319,7 @@ msgstr ""
 "Vis tilgængelige tjenestetyper.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3748
+#: src/Zypper.cc:3766
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4289,7 +4332,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3770
+#: src/Zypper.cc:3788
 msgid ""
 "mount\n"
 "\n"
@@ -4309,7 +4352,7 @@ msgstr ""
 "-n, --name <navn>    Bruger en given streng som tjeneste-navn.\n"
 "-r, --recurse        Går ind i undermapper.\n"
 
-#: src/Zypper.cc:3798
+#: src/Zypper.cc:3816
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4323,7 +4366,7 @@ msgstr ""
 "\"%s\".\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3815
+#: src/Zypper.cc:3833
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4333,12 +4376,12 @@ msgstr ""
 "\n"
 "Denne kommando har en attrap-implementation som altid returnerer 0.\n"
 
-#: src/Zypper.cc:3858 src/Zypper.cc:5930
+#: src/Zypper.cc:3876 src/Zypper.cc:5948
 msgid "Unexpected program flow."
 msgstr "Uventet programforløb."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3989
+#: src/Zypper.cc:4007
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4371,20 +4414,20 @@ msgstr ""
 "    #@@@@@@@@#                                       \n"
 "      +@@@@#` "
 
-#: src/Zypper.cc:4012
+#: src/Zypper.cc:4030
 msgid "Root privileges are required for refreshing services."
 msgstr "Root-rettigheder kræves for at genopfriske tjenester."
 
-#: src/Zypper.cc:4036 src/Zypper.cc:4115 src/Zypper.cc:4303
+#: src/Zypper.cc:4054 src/Zypper.cc:4133 src/Zypper.cc:4321
 msgid "Root privileges are required for modifying system services."
 msgstr "Root-rettigheder kræves for at ændre systemtjenester."
 
-#: src/Zypper.cc:4099
+#: src/Zypper.cc:4117
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' er ikke en gyldig tjenestetype."
 
-#: src/Zypper.cc:4101
+#: src/Zypper.cc:4119
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "Se '%s' eller '%s' for at få en liste over kendte tjenestetyper."
@@ -4393,40 +4436,40 @@ msgstr "Se '%s' eller '%s' for at få en liste over kendte tjenestetyper."
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:4126 src/utils/messages.cc:47
+#: src/Zypper.cc:4144 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "Alias eller en samlet tilvalg kræves."
 
-#: src/Zypper.cc:4158
+#: src/Zypper.cc:4176
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Tjenesten '%s' blev ikke fundet."
 
-#: src/Zypper.cc:4185 src/Zypper.cc:4302 src/Zypper.cc:4406 src/Zypper.cc:4458
+#: src/Zypper.cc:4203 src/Zypper.cc:4320 src/Zypper.cc:4424 src/Zypper.cc:4476
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Root-rettigheder kræves for at ændre systemets softwarekilder."
 
-#: src/Zypper.cc:4211 src/Zypper.cc:4570
+#: src/Zypper.cc:4229 src/Zypper.cc:4588
 msgid "Too few arguments."
 msgstr "For få argumenter."
 
-#: src/Zypper.cc:4234
+#: src/Zypper.cc:4252
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Hvis der kun anvendes ét argument, skal det være en URI, der peger på en ."
 "repo-fil."
 
-#: src/Zypper.cc:4264
+#: src/Zypper.cc:4282
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "Kan ikke bruge %s sammen med %s. Bruger indstillingen %s."
 
-#: src/Zypper.cc:4283
+#: src/Zypper.cc:4301
 msgid "Specified type is not a valid repository type:"
 msgstr "Den angivne type er ikke en gyldig type af softwarekilde:"
 
-#: src/Zypper.cc:4284
+#: src/Zypper.cc:4302
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
@@ -4434,76 +4477,76 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4349
+#: src/Zypper.cc:4367
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Softwarekilden '%s' blev ikke fundet ved alias, nummer eller URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4382
+#: src/Zypper.cc:4400
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Tjenesten '%s' blev ikke fundet ved alias, nummer eller URI."
 
-#: src/Zypper.cc:4413
+#: src/Zypper.cc:4431
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "For få argumenter. Der kræves mindst URI og alias."
 
-#: src/Zypper.cc:4437
+#: src/Zypper.cc:4455
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Softwarekilden '%s' blev ikke fundet."
 
-#: src/Zypper.cc:4497
+#: src/Zypper.cc:4515
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Softwarekilden %s blev ikke fundet."
 
-#: src/Zypper.cc:4514
+#: src/Zypper.cc:4532
 msgid "Root privileges are required for refreshing system repositories."
 msgstr ""
 "Der kræves root-rettigheder for at genopfriske systemets softwarekilder."
 
-#: src/Zypper.cc:4520
+#: src/Zypper.cc:4538
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Det globale tilvalg \"%s\" har ingen virkning her."
 
-#: src/Zypper.cc:4528
+#: src/Zypper.cc:4546
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argumenter tillades ikke, hvis '%s' anvendes."
 
-#: src/Zypper.cc:4552
+#: src/Zypper.cc:4570
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Der kræves root-rettigheder for at rydde lokal cache."
 
-#: src/Zypper.cc:4571
+#: src/Zypper.cc:4589
 msgid "At least one package name is required."
 msgstr "Mindst ét pakkenavn kræves."
 
-#: src/Zypper.cc:4580 src/Zypper.cc:4829 src/Zypper.cc:4866
+#: src/Zypper.cc:4598 src/Zypper.cc:4847 src/Zypper.cc:4884
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
 "Der kræves root-rettigheder for at installere eller afinstallere pakker."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4592
+#: src/Zypper.cc:4610
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Ignorerer argumenter, markerer hele softwarekilden."
 
-#: src/Zypper.cc:4603
+#: src/Zypper.cc:4621
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Ukendt pakketype: %s"
 
-#: src/Zypper.cc:4613
+#: src/Zypper.cc:4631
 msgid "Cannot uninstall patches."
 msgstr "Kan ikke afinstallere rettelser."
 
-#: src/Zypper.cc:4614
+#: src/Zypper.cc:4632
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4515,34 +4558,34 @@ msgstr ""
 "databaseindgange,\n"
 " eller lignende."
 
-#: src/Zypper.cc:4624
+#: src/Zypper.cc:4642
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Afinstallation af en kildepakke er ikke defineret og implementeret."
 
-#: src/Zypper.cc:4644
+#: src/Zypper.cc:4662
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' ligner en RPM-fil. Vil prøve at downloade den."
 
-#: src/Zypper.cc:4653
+#: src/Zypper.cc:4671
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Problem med RPM-filen angivet som '%s'. Springer over."
 
-#: src/Zypper.cc:4675
+#: src/Zypper.cc:4693
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Problem med at læse RPM-header for %s. Er det en RPM-fil?"
 
-#: src/Zypper.cc:4696
+#: src/Zypper.cc:4714
 msgid "Plain RPM files cache"
 msgstr "Cache for rene RPM-filer"
 
-#: src/Zypper.cc:4718
+#: src/Zypper.cc:4736
 msgid "No valid arguments specified."
 msgstr "Ingen gyldige argumenter angivet."
 
-#: src/Zypper.cc:4735 src/Zypper.cc:4882
+#: src/Zypper.cc:4753 src/Zypper.cc:4900
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4551,74 +4594,74 @@ msgstr ""
 "Intet kan installeres."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4772 src/Zypper.cc:5359
+#: src/Zypper.cc:4790 src/Zypper.cc:5377
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s modsiger %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4780
+#: src/Zypper.cc:4798
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s kan i øjeblikket ikke bruges med %s"
 
-#: src/Zypper.cc:4821
+#: src/Zypper.cc:4839
 msgid "Source package name is a required argument."
 msgstr "Kildepakkens navn er et krævet argument."
 
-#: src/Zypper.cc:4939 src/Zypper.cc:5278 src/Zypper.cc:5378 src/Zypper.cc:5588
-#: src/Zypper.cc:5639 src/Zypper.cc:5679
+#: src/Zypper.cc:4957 src/Zypper.cc:5296 src/Zypper.cc:5396 src/Zypper.cc:5606
+#: src/Zypper.cc:5657 src/Zypper.cc:5697
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Ukendt pakketype \"%s\"."
 
-#: src/Zypper.cc:4964 src/repos.cc:796
+#: src/Zypper.cc:4982 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Den angivne softwarekilde \"%s\" er deaktiveret."
 
 #. translators: empty search result message
-#: src/Zypper.cc:5120
+#: src/Zypper.cc:5138
 msgid "No matching items found."
 msgstr "Ingen matchende elementer fundet."
 
-#: src/Zypper.cc:5155
+#: src/Zypper.cc:5173
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 "Problem opstod under initialisering eller udførsel af søgeforespørgslen"
 
-#: src/Zypper.cc:5156
+#: src/Zypper.cc:5174
 msgid "See the above message for a hint."
 msgstr "Se meddelelsen ovenfor for at få et tip."
 
-#: src/Zypper.cc:5157 src/repos.cc:1009
+#: src/Zypper.cc:5175 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "At køre 'zypper refresh' som root kan måske løse problemet."
 
-#: src/Zypper.cc:5238
+#: src/Zypper.cc:5256
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "Tilvalget %1% har ingen virkning uden det globale tilvalg %2%."
 
-#: src/Zypper.cc:5297 src/Zypper.cc:5345
+#: src/Zypper.cc:5315 src/Zypper.cc:5363
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Kan ikke bruge %s sammen med %s."
 
-#: src/Zypper.cc:5326
+#: src/Zypper.cc:5344
 msgid "Root privileges are required for updating packages."
 msgstr "Der kræves root-rettigheder for at opdatere pakker."
 
-#: src/Zypper.cc:5385 src/Zypper.cc:5393 src/Zypper.cc:5474
+#: src/Zypper.cc:5403 src/Zypper.cc:5411 src/Zypper.cc:5492
 msgid "Operation not supported."
 msgstr "Handlingen er ikke understøttet."
 
-#: src/Zypper.cc:5386
+#: src/Zypper.cc:5404
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Brug \"%s\" til at opdatere installerede produkter."
 
-#: src/Zypper.cc:5394
+#: src/Zypper.cc:5412
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4627,17 +4670,17 @@ msgstr ""
 "Zypper holder ikke styr på installerede kildepakker. For at installere den "
 "seneste kildepakke og dens bygningsafhængigheder, brug \"%s\"."
 
-#: src/Zypper.cc:5410
+#: src/Zypper.cc:5428
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr "Kan ikke bruge flere typer når specifikke pakker gives som argumenter."
 
-#: src/Zypper.cc:5510
+#: src/Zypper.cc:5528
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
 "Der kræves root-rettigheder for at udføre en opgradering af distributionen."
 
-#: src/Zypper.cc:5530
+#: src/Zypper.cc:5548
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4648,76 +4691,76 @@ msgstr ""
 "softwarekilder. Sørg for at disse softwarekilder er indbyrdes kompatible før "
 "du fortsætter. Se \"%s\" for mere information om denne kommando."
 
-#: src/Zypper.cc:5555 src/utils/messages.cc:55
+#: src/Zypper.cc:5573 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "Krævet argument mangler."
 
-#: src/Zypper.cc:5558 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5576 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "Anvendelse"
 
-#: src/Zypper.cc:5618 src/Zypper.cc:5659
+#: src/Zypper.cc:5636 src/Zypper.cc:5677
 msgid "Root privileges are required for adding of package locks."
 msgstr "Der kræves root-rettigheder for at tilføje pakkelåse."
 
-#: src/Zypper.cc:5713
+#: src/Zypper.cc:5731
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "Fjernede %lu lås."
 msgstr[1] "Fjernede %lu låse."
 
-#: src/Zypper.cc:5724
+#: src/Zypper.cc:5742
 msgid "XML output not implemented for this command."
 msgstr "XML-output ikke implementeret for denne kommando."
 
-#: src/Zypper.cc:5737
+#: src/Zypper.cc:5755
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Distributionsetiket: %s"
 
-#: src/Zypper.cc:5738
+#: src/Zypper.cc:5756
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Kort etiket: %s"
 
-#: src/Zypper.cc:5779
+#: src/Zypper.cc:5797
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s matcher %s"
 
-#: src/Zypper.cc:5781
+#: src/Zypper.cc:5799
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s er nyere end %s"
 
-#: src/Zypper.cc:5783
+#: src/Zypper.cc:5801
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s er ældre end %s"
 
-#: src/Zypper.cc:5865 src/source-download.cc:217
+#: src/Zypper.cc:5883 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Ikke tilstrækkelige rettigheder til at bruge downloadmappen \"%s\"."
 
-#: src/Zypper.cc:5917
+#: src/Zypper.cc:5935
 msgid "This command only makes sense in the zypper shell."
 msgstr "Denne kommando giver kun mening i zyppers skal."
 
-#: src/Zypper.cc:5927
+#: src/Zypper.cc:5945
 msgid "You already are running zypper's shell."
 msgstr "Du kører allerede zyppers skal."
 
-#: src/Zypper.cc:5940 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
+#: src/Zypper.cc:5958 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
 msgid "Alias"
 msgstr "Alias"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5940 src/commands/locks/list.cc:108 src/info.cc:69
+#: src/Zypper.cc:5958 src/commands/locks/list.cc:108 src/info.cc:69
 #: src/info.cc:460 src/info.cc:704 src/repos.cc:1072 src/repos.cc:1211
 #: src/repos.cc:2550 src/search.cc:47 src/search.cc:195 src/search.cc:342
 #: src/search.cc:489 src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
@@ -4725,11 +4768,11 @@ msgid "Name"
 msgstr "Navn"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5940 src/info.cc:83
+#: src/Zypper.cc:5958 src/info.cc:83
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: src/Zypper.cc:5991
+#: src/Zypper.cc:6009
 msgid "Resolvable Type"
 msgstr "Type af resolvable"
 
