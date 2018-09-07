@@ -1350,7 +1350,7 @@ namespace zypp
         cmd.push_back( "-o" );
         cmd.push_back( solvfile.asString() );
 	cmd.push_back( "-X" );	// autogenerate pattern from pattern-package
-        cmd.push_back( "-A" );	// autogenerate application pseudo packages
+        // bsc#1104415: no more application support // cmd.push_back( "-A" );	// autogenerate application pseudo packages
 
         if ( repokind == RepoType::RPMPLAINDIR )
         {

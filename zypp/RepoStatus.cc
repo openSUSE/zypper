@@ -97,7 +97,7 @@ namespace zypp
       // NOTE: changing magic will once invalidate all solv file caches
       // Helpfull if solv file content must be refreshed (e.g. due to different
       // repo2* arguments) even if raw metadata are unchanged.
-      static const std::string magic( "42" );
+      static const std::string magic( "43" );
       _pimpl->_checksum += magic;
     }
   }
