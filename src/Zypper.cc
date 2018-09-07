@@ -1916,6 +1916,37 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("remove (rm) [OPTIONS] <CAPABILITY> ...")
+    )
+    .description(	// translators: command description
+    _("Remove packages with specified capabilities. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, <=, =, >=, >.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Load only the specified repository.") )
+    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
+             str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
+    .option( "-n, --name",	// translators: -n, --name
+             _("Select packages by plain name, not by capability.") )
+    .option( "-C, --capability",	// translators: -C, --capability
+             _("Select packages by capability.") )
+    .option( "-u, --clean-deps",	// translators: -u, --clean-deps
+             _("Automatically remove unneeded dependencies.") )
+    .option( "-U, --no-clean-deps",	// translators: -U, --no-clean-deps
+             _("No automatic removal of unneeded dependencies.") )
+    .option( "-D, --dry-run",	// translators: -D, --dry-run
+             _("Test the removal, do not actually remove.") )
+    .option( "--details",	// translators: --details
+             _("Show the detailed installation summary.") )
+    .option( "-y, --no-confirm",	// translators: -y, --no-confirm
+	     _("Don't require user interaction. Alias for the --non-interactive global option.") )
+
+    .optionSectionSolverOptions()
+    .option_Solver_Flags_Common
+    ;
+#if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
@@ -1937,11 +1968,7 @@ void Zypper::processCommandOptions()
       "-D, --dry-run               Test the removal, do not actually remove.\n"
       "    --details               Show the detailed installation summary.\n"
       ), "package, patch, pattern, product", "package") )
-    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
-
-    .optionSectionSolverOptions()
-    .option_Solver_Flags_Common
-    ;
+#endif
     break;
   }
 
