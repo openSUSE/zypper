@@ -10,33 +10,16 @@
 
 using namespace zypp;
 
-std::list<std::string> CleanLocksCmd::command() const
-{
-  return { "cleanlocks" , "cl" , "lock-clean" };
-}
-
-std::string CleanLocksCmd::summary() const
-{
-  return description();
-}
-
-std::string CleanLocksCmd::synopsis() const
-{
-  // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-  return _("cleanlocks (cl)");
-}
-
-std::string CleanLocksCmd::description() const
-{
-  // translators: command description
-  return _("Remove useless locks.");
-}
-
-LoadSystemFlags CleanLocksCmd::needSystemSetup() const
-{
-  //load all
-  return LoadSystemFlags();
-}
+CleanLocksCmd::CleanLocksCmd() :
+  ZypperBaseCommand (
+    { "cleanlocks" , "cl" , "lock-clean" },
+    _("cleanlocks (cl)"),
+    // translators: command summary
+    _("Remove useless locks."),
+    std::string(),
+    LoadSystemFlags()
+  )
+{ }
 
 std::vector<BaseCommandConditionPtr> CleanLocksCmd::conditions() const
 {
@@ -84,4 +67,9 @@ int CleanLocksCmd::execute(Zypper &zypp_r, const std::vector<std::string> &posit
   zypp_r.out().info( str::form( PL_("Removed %lu lock.","Removed %lu locks.", diff), (long unsigned)diff ) );
 
   return ZYPPER_EXIT_OK;
+}
+
+std::string CleanLocksCmd::description() const
+{
+  return summary();
 }

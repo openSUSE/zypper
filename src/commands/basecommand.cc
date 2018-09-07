@@ -24,6 +24,18 @@ BaseCommandCondition::~BaseCommandCondition()
 
 }
 
+ZypperBaseCommand::ZypperBaseCommand(const std::list<std::string> &commandAliases_r, const std::string &synopsis_r,
+                                     const std::string &summary_r, const std::string &description_r,
+                                     LoadSystemFlags systemInitFlags_r)
+  : _commandAliases ( commandAliases_r ),
+    _synopsis ( synopsis_r ),
+    _summary ( summary_r ),
+    _description ( description_r ),
+    _systemInitFlags ( systemInitFlags_r )
+{
+
+}
+
 ZypperBaseCommand::~ZypperBaseCommand()
 {
 }
@@ -40,6 +52,26 @@ void ZypperBaseCommand::reset()
   doReset();
 }
 
+std::list<std::string> ZypperBaseCommand::command() const
+{
+  return _commandAliases;
+}
+
+std::string ZypperBaseCommand::summary() const
+{
+  return _summary;
+}
+
+std::string ZypperBaseCommand::synopsis() const
+{
+  return _synopsis;
+}
+
+std::string ZypperBaseCommand::description() const
+{
+  return _description;
+}
+
 bool ZypperBaseCommand::helpRequested() const
 {
   return _helpRequested;
@@ -52,8 +84,7 @@ std::vector<BaseCommandConditionPtr> ZypperBaseCommand::conditions() const
 
 LoadSystemFlags ZypperBaseCommand::needSystemSetup() const
 {
-  //we want all by default
-  return LoadSystemFlags();
+  return _systemInitFlags;
 }
 
 int ZypperBaseCommand::run(Zypper &zypp, const std::vector<std::string> &positionalArgs)

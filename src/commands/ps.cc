@@ -19,31 +19,21 @@
 
 using namespace zypp;
 
-std::list<std::string> PSCommand::command() const
-{
-  return { "ps" };
-}
-
-std::string PSCommand::summary() const
-{
-  // translators: command description
-  return _("List running processes which might still use files and libraries deleted by recent upgrades.");
-}
-
-std::string PSCommand::synopsis() const
-{
-  // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-  return _("ps [OPTIONS]");
-}
+PSCommand::PSCommand() :
+  ZypperBaseCommand (
+    { "ps" },
+    // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+    _("ps [OPTIONS]"),
+    // translators: command description
+    _("List running processes which might still use files and libraries deleted by recent upgrades."),
+    std::string(),
+    NO_POOL
+  )
+{ }
 
 std::string PSCommand::description() const
 {
   return summary();
-}
-
-LoadSystemFlags PSCommand::needSystemSetup() const
-{
-  return NO_POOL;
 }
 
 std::vector<ZyppFlags::CommandOption> PSCommand::cmdOptions() const

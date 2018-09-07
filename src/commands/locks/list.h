@@ -12,11 +12,10 @@
 
 class ListLocksCmd : public ZypperBaseCommand
 {
-  // ZypperBaseCommand interface
 public:
-  std::list<std::string> command() const override;
-  std::string summary() const override;
-  std::string synopsis() const override;
+  ListLocksCmd();
+
+  // ZypperBaseCommand interface
   std::string description() const override;
   LoadSystemFlags needSystemSetup() const override;
 

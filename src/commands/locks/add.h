@@ -15,15 +15,11 @@
 
 class AddLocksCmd : public ZypperBaseCommand
 {
-  // ZypperBaseCommand interface
 public:
-  std::list<std::string> command() const override;
-  std::string summary() const override;
-  std::string synopsis() const override;
-  std::string description() const override;
-  LoadSystemFlags needSystemSetup() const override;
+  AddLocksCmd();
 
 protected:
+  // ZypperBaseCommand interface
   std::vector<zypp::ZyppFlags::CommandOption> cmdOptions() const override;
   void doReset() override;
   int execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r) override;

@@ -29,31 +29,16 @@ void safe_lexical_cast (Source s, Target &tr) {
   }
 }
 
-std::list<std::string> RemoveLocksCmd::command() const
-{
-  return { "removelock"	, "rl" , "lock-delete" , "ld" };
-}
-
-std::string RemoveLocksCmd::summary() const
-{
-  return _("Remove a package lock.");
-}
-
-std::string RemoveLocksCmd::synopsis() const
-{
-  return _("removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ...");
-}
-
-std::string RemoveLocksCmd::description() const
-{
-  // translators: command description; %1% is acoomand like 'zypper locks'
-  return str::Format(_("Remove a package lock. Specify the lock to remove by its number obtained with '%1%' or by package name.") ) % "zypper locks";
-}
-
-LoadSystemFlags RemoveLocksCmd::needSystemSetup() const
-{
-  return NO_POOL;
-}
+RemoveLocksCmd::RemoveLocksCmd()
+  : ZypperBaseCommand(
+      { "removelock"	, "rl" , "lock-delete" , "ld" },
+      _("removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."),
+      _("Remove a package lock."),
+      // translators: command description; %1% is acoomand like 'zypper locks'
+      str::Format(_("Remove a package lock. Specify the lock to remove by its number obtained with '%1%' or by package name.") ) % "zypper locks",
+      NO_POOL
+  )
+{ }
 
 std::vector<BaseCommandConditionPtr> RemoveLocksCmd::conditions() const
 {

@@ -15,13 +15,11 @@
 
 class CleanLocksCmd : public ZypperBaseCommand
 {
-  // ZypperBaseCommand interface
 public:
-  std::list<std::string> command() const override;
-  std::string summary() const override;
-  std::string synopsis() const override;
+  CleanLocksCmd();
+
+  // ZypperBaseCommand interface
   std::string description() const override;
-  LoadSystemFlags needSystemSetup() const override;
 
 protected:
   std::vector<BaseCommandConditionPtr> conditions() const override;
