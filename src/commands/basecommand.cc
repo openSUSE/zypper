@@ -118,7 +118,7 @@ std::string ZypperBaseCommand::help()
         std::string optHelpTxt = opt.help;
         auto defVal = opt.value.defaultValue();
         if ( defVal )
-          optHelpTxt.append(str::Format(_(" Default: %1%")) %*defVal );
+          optHelpTxt.append(" ").append(str::Format(("Default: %1%")) %*defVal );
         help.option(optTxt, optHelpTxt);
       }
     }
@@ -131,7 +131,7 @@ std::vector<ZyppFlags::CommandGroup> ZypperBaseCommand::options()
 {
   //first get the commands own options
   std::vector<ZyppFlags::CommandGroup> allOpts {
-    { _("Options:"), cmdOptions() }
+    { _("Command options:"), cmdOptions() }
   };
 
   ZyppFlags::CommandOption helpOpt{
