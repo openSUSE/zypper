@@ -3627,6 +3627,23 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("download [options] <packages>...")
+    )
+    .description(	// translators: command description
+    _("Download rpms specified on the commandline to a local directory. Per default packages are downloaded to the libzypp package cache (/var/cache/zypp/packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be changed by using the global --pkg-cache-dir option.")
+    )
+    .description(	// translators: command description
+    _("In XML output a <download-result> node is written for each package zypper tried to download. Upon success the local path is is found in 'download-result/localpath@path'.")
+    )
+    .optionSectionCommandOptions()
+    .option( "--all-matches",	// translators: --all-matches
+             _("Download all versions matching the commandline arguments. Otherwise only the best version of each matching package is downloaded.") )
+    .option( "--dry-run",	// translators: --dry-run
+             _("Don't download any package, just report what would be done.") )
+    ;
+#if 0
     _command_help = _(
       "download [options] <packages>...\n"
       "\n"
@@ -3646,6 +3663,7 @@ void Zypper::processCommandOptions()
       "--dry-run            Don't download any package, just report what\n"
       "                     would be done.\n"
     );
+#endif
     break;
   }
 
