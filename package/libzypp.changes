@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep  7 12:07:39 CEST 2018 - ma@suse.de
+
+- Drop type application due to poor metadata support (bsc#1100095,
+  bsc#1104415)
+- version 17.7.0 (2)
+
+-------------------------------------------------------------------
 Thu Sep  6 12:16:25 CEST 2018 - ma@suse.de
 
 - Automatically fetch repository signing key from gpgkey url
