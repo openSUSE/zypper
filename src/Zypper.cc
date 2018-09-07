@@ -2212,6 +2212,32 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("services (ls) [OPTIONS]")
+    )
+    .description(	// translators: command description
+    _("List defined services.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-u, --uri",	// translators: -u, --uri
+             _("Show also base URI of repositories.") )
+    .option( "-p, --priority",	// translators: -p, --priority
+             _("Show also repository priority.") )
+    .option( "-d, --details",	// translators: -d, --details
+             _("Show more information like URI, priority, type.") )
+    .option( "-r, --with-repos",	// translators: -r, --with-repos
+             _("Show also repositories belonging to the services.") )
+    .option( "-E, --show-enabled-only",	// translators: -E, --show-enabled-only
+             _("Show enabled repos only.") )
+    .option( "-P, --sort-by-priority",	// translators: -P, --sort-by-priority
+             _("Sort the list by repository priority.") )
+    .option( "-U, --sort-by-uri",	// translators: -U, --sort-by-uri
+             _("Sort the list by URI.") )
+    .option( "-N, --sort-by-name",	// translators: -N, --sort-by-name
+             _("Sort the list by name.") )
+    ;
+#if 0
     _command_help = _(
       "services (ls) [options]\n"
       "\n"
@@ -2227,6 +2253,7 @@ void Zypper::processCommandOptions()
       "-U, --sort-by-uri         Sort the list by URI.\n"
       "-N, --sort-by-name        Sort the list by name.\n"
     );
+#endif
     break;
   }
 
