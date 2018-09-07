@@ -2614,6 +2614,24 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = service_list_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("clean (cc) [ALIAS|#|URI] ...")
+    )
+    .description(	// translators: command description
+    _("Clean local caches.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Clean only specified repositories.") )
+    .option( "-m, --metadata",	// translators: -m, --metadata
+             _("Clean metadata cache.") )
+    .option( "-M, --raw-metadata",	// translators: -M, --raw-metadata
+             _("Clean raw metadata cache.") )
+    .option( "-a, --all",	// translators: -a, --all
+             _("Clean both metadata and package caches.") )
+    ;
+#if 0
     _command_help = _(
       "clean (cc) [alias|#|URI] ...\n"
       "\n"
@@ -2625,6 +2643,7 @@ void Zypper::processCommandOptions()
       "-M, --raw-metadata       Clean raw metadata cache.\n"
       "-a, --all                Clean both metadata and package caches.\n"
     );
+#endif
     break;
   }
 
