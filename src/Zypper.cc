@@ -1809,6 +1809,49 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = install_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ...")
+    )
+    .description(	// translators: command description
+    _("Install packages with specified capabilities or RPM files with specified location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, <=, =, >=, >.")
+    )
+    .optionSectionCommandOptions()
+    .option( "--from <ALIAS|#|URI>",	// translators: --from <ALIAS|#|URI>
+             _("Select packages from the specified repository.") )
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Load only the specified repository.") )
+    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
+             str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
+    .option( "-n, --name",	// translators: -n, --name
+             _("Select packages by plain name, not by capability.") )
+    .option( "-C, --capability",	// translators: -C, --capability
+             _("Select packages by capability.") )
+    .option( "-f, --force",	// translators: -f, --force
+             _("Install even if the item is already installed (reinstall), downgraded or changes vendor or architecture.") )
+    .option( "--oldpackage",	// translators: --oldpackage
+             _("Allow to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall.") )
+    .option( "--replacefiles",	// translators: --replacefiles
+             _("Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check.") )
+    .option( "-l, --auto-agree-with-licenses",	// translators: -l, --auto-agree-with-licenses
+             _("Automatically say 'yes' to third party license confirmation prompt. See 'man zypper' for more details.") )
+    .option( "-D, --dry-run",	// translators: -D, --dry-run
+             _("Test the installation, do not actually install.") )
+    .option( "--details",	// translators: --details
+             _("Show the detailed installation summary.") )
+    .option( "--download",	// translators: --download
+             str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed" )
+    .option( "-d, --download-only",	// translators: -d, --download-only
+             _("Only download the packages, do not install.") )
+    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+    .option( "--allow-unsigned-rpm", _("Silently install unsigned rpm packages given as commandline parameters.") )
+    .optionSectionSolverOptions()
+    .option_Solver_Flags_Common
+    .option_Solver_Flags_Recommends
+    .optionSectionExpertOptions()
+    .option_Solver_Flags_Installs
+    ;
+#if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
       // translators: the first %s = "package, patch, pattern, product",
@@ -1847,14 +1890,7 @@ void Zypper::processCommandOptions()
     ), "package, patch, pattern, product, srcpackage",
        "package",
        "only, in-advance, in-heaps, as-needed") )
-    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
-    .option( "--allow-unsigned-rpm", _("Silently install unsigned rpm packages given as commandline parameters.") )
-    .optionSectionSolverOptions()
-    .option_Solver_Flags_Common
-    .option_Solver_Flags_Recommends
-    .optionSectionExpertOptions()
-    .option_Solver_Flags_Installs
-    ;
+#endif
     break;
   }
 
