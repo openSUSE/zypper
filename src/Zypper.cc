@@ -3730,6 +3730,16 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = quit_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("quit (exit, ^D)")
+    )
+    .description(	// translators: command description
+    _("Quit the current zypper shell.")
+    )
+    .noOptionSection()
+    ;
+#if 0
     _command_help = _(
       "quit (exit, ^D)\n"
       "\n"
@@ -3737,6 +3747,7 @@ void Zypper::processCommandOptions()
       "\n"
       "This command has no additional options.\n"
     );
+#endif
     break;
   }
 
