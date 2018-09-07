@@ -382,8 +382,6 @@ void Zypper::assertZYppPtrGod()
 /// to utils/getopt.
 parsed_opts copts; // command options
 
-static void rug_list_resolvables(Zypper & zypper);
-
 ///////////////////////////////////////////////////////////////////
 namespace {
 
@@ -3779,65 +3777,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::RUG_SERVICE_TYPES_e:
-  {
-    static struct option options[] = {
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = _(
-      // translators: this is just a legacy command
-      "service-types (st)\n"
-      "\n"
-      "List available service types.\n"
-    );
-    break;
-  }
-
-  case ZypperCommand::RUG_LIST_RESOLVABLES_e:
-  {
-    static struct option options[] = {
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = _(
-      // translators: this is just a legacy command
-      "list-resolvables (lr)\n"
-      "\n"
-      "List available resolvable types.\n"
-    );
-    break;
-  }
-
-  case ZypperCommand::RUG_MOUNT_e:
-  {
-    static struct option options[] = {
-      {"alias", required_argument, 0, 'a'},
-      {"name", required_argument, 0, 'n'},
-      // dummy for now - always recurse
-      {"recurse", required_argument, 0, 'r'},
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = _(
-      // trunslators: this is a rug-compatibility command (equivalent of
-      // 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
-      // for how to translate specific terms like channel or service if in doubt.
-      "mount\n"
-      "\n"
-      "Mount directory with RPMs as a channel.\n"
-      "\n"
-      "  Command options:\n"
-      "-a, --alias <alias>  Use given string as service alias.\n"
-      "-n, --name <name>    Use given string as service name.\n"
-      "-r, --recurse        Dive into subdirectories.\n"
-    );
-    break;
-  }
-
   case ZypperCommand::RUG_PATCH_SEARCH_e:
   {
     static struct option search_options[] = {
@@ -4236,7 +4175,6 @@ void Zypper::doCommand()
   // --------------------------( addrepo )------------------------------------
 
   case ZypperCommand::ADD_REPO_e:
-  case ZypperCommand::RUG_MOUNT_e:
   {
     // check root user
     if ( geteuid() != 0 && !globalOpts().changedRoot )
@@ -4273,22 +4211,7 @@ void Zypper::doCommand()
         setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
         return;
       case 1:
-        if ( command() == ZypperCommand::RUG_MOUNT )
-        {
-          std::string alias;
-          parsed_opts::const_iterator it = _copts.find("alias");
-          if ( it != _copts.end() )
-            alias = it->second.front();
-          // get the last component of the path
-          if ( alias.empty() )
-          {
-            Pathname path( _arguments[0] );
-            alias = path.basename();
-          }
-          _arguments.push_back( alias );
-          // continue to case 2:
-        }
-        else if( !isRepoFile( _arguments[0] ) )
+	if( !isRepoFile( _arguments[0] ) )
         {
           out().error(_("If only one argument is used, it must be a URI pointing to a .repo file."));
           ERR << "Not a repo file." << endl;
@@ -5993,28 +5916,6 @@ void Zypper::doCommand()
     break;
   }
 
-  case ZypperCommand::RUG_SERVICE_TYPES_e:
-  {
-    Table t;
-    t << ( TableHeader() << _("Alias") << _("Name") << _("Description") );
-
-    t << ( TableRow() << "yum" << "YUM" << "YUM server service" );	// rpm-md
-    t << ( TableRow() << "yast" << "YaST2" << "YaST2 repository" );
-    t << ( TableRow() << "zypp" << "ZYPP" << "ZYpp installation repository" );
-    t << ( TableRow() << "mount" << "Mount" << "Mount a directory of RPMs" );
-    t << ( TableRow() << "plaindir" << "Plaindir" << "Mount a directory of RPMs" );
-    t << ( TableRow() << "nu" << "NU" << "Novell Updates service" );	// ris
-
-    cout << t;
-
-    break;
-  }
-
-  case ZypperCommand::RUG_LIST_RESOLVABLES_e:
-  {
-    rug_list_resolvables( *this );
-    break;
-  }
 
   // dummy commands
   case ZypperCommand::RUG_PING_e:
@@ -6043,20 +5944,6 @@ void Zypper::cleanup()
   MIL << "START" << endl;
   _rm.reset();	// release any pending appdata trigger now.
 }
-
-void rug_list_resolvables( Zypper & zypper )
-{
-  Table t;
-  t << ( TableHeader() << _("Resolvable Type") );
-
-  t << ( TableRow() << "package" );
-  t << ( TableRow() << "patch" );
-  t << ( TableRow() << "pattern" );
-  t << ( TableRow() << "product" );
-
-  cout << t;
-}
-
 
 // Local Variables:
 // c-basic-offset: 2

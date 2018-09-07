@@ -106,13 +106,6 @@ namespace
       _t( RUG_PATCH_INFO_e )	| "patch-info";
       _t( RUG_PATTERN_INFO_e )	| "pattern-info";
       _t( RUG_PRODUCT_INFO_e )	| "product-info";
-      _t( RUG_SERVICE_TYPES_e )	| "service-types"	| "st";
-      _t( RUG_LIST_RESOLVABLES_e )| "list-resolvables";	// "lr" CONFLICT with repos
-      _t( RUG_MOUNT_e )		| "mount";
-      //_t( RUG_INFO_PROVIDES_e )| "info-provides"	| "ip";
-      //_t( RUG_INFO_CONFLICTS_e )| "info-requirements"	| "ir";
-      //_t( RUG_INFO_OBSOLETES_e )| "info-conflicts"	| "ic";
-      //_t( RUG_INFO_REQUIREMENTS_e )| "info-obsoletes"	| "io";
       _t( RUG_PATCH_SEARCH_e )	| "patch-search" | "pse";
       _t( RUG_PING_e )		| "ping";
 #undef _t
@@ -191,13 +184,6 @@ DEF_ZYPPER_COMMAND( MOO );
 DEF_ZYPPER_COMMAND( RUG_PATCH_INFO );
 DEF_ZYPPER_COMMAND( RUG_PATTERN_INFO );
 DEF_ZYPPER_COMMAND( RUG_PRODUCT_INFO );
-DEF_ZYPPER_COMMAND( RUG_SERVICE_TYPES );
-DEF_ZYPPER_COMMAND( RUG_LIST_RESOLVABLES );
-DEF_ZYPPER_COMMAND( RUG_MOUNT );
-//DEF_ZYPPER_COMMAND( RUG_INFO_PROVIDES );
-//DEF_ZYPPER_COMMAND( RUG_INFO_CONFLICTS );
-//DEF_ZYPPER_COMMAND( RUG_INFO_OBSOLETES );
-//DEF_ZYPPER_COMMAND( RUG_INFO_REQUIREMENTS );
 DEF_ZYPPER_COMMAND( RUG_PATCH_SEARCH );
 DEF_ZYPPER_COMMAND( RUG_PING );
 
