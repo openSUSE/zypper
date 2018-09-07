@@ -96,7 +96,7 @@ Zypper works with several types of resource objects, called 'resolvables'. A res
 *srcpackage*::
 	Source code package (.src.rpm). This type works in *search* and *install* commands.
 *application*::
-	Focuses on packages a user might want to install and hide away supporting packages which are selected via package dependencies anyway (see 'http://people.freedesktop.org/~hughsient/appdata/')
+	Legacy: Since libzypp-17.7.0 this type is no longer available.
 
 Throughout this manual we will often refer to resolvables simply as 'packages' and to resolvable types as 'package type' or 'kind'. These type names can be used as arguments of *--type* option in several commands like *install*, *info*, or *search*. Commands should also allow to specify resolvables as 'KIND'*:*'NAME' (e.g. *patch:openSUSE-2014-7*).
 
