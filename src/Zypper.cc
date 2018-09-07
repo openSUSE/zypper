@@ -2374,7 +2374,42 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = service_list_options;
-
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("repos (lr) [OPTIONS] [REPO] ...")
+    )
+    .description(	// translators: command description
+    _("List all defined repositories.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-e, --export <FILE.repo>",	// translators: -e, --export <FILE.repo>
+             _("Export all defined repositories as a single local .repo file.") )
+    .option( "-a, --alias",	// translators: -a, --alias
+             _("Show also repository alias.") )
+    .option( "-n, --name",	// translators: -n, --name
+             _("Show also repository name.") )
+    .option( "-u, --uri",	// translators: -u, --uri
+             _("Show also base URI of repositories.") )
+    .option( "-p, --priority",	// translators: -p, --priority
+             _("Show also repository priority.") )
+    .option( "-r, --refresh",	// translators: -r, --refresh
+             _("Show also the autorefresh flag.") )
+    .option( "-d, --details",	// translators: -d, --details
+             _("Show more information like URI, priority, type.") )
+    .option( "-s, --service",	// translators: -s, --service
+             _("Show also alias of parent service.") )
+    .option( "-E, --show-enabled-only",	// translators: -E, --show-enabled-only
+             _("Show enabled repos only.") )
+    .option( "-U, --sort-by-uri",	// translators: -U, --sort-by-uri
+             _("Sort the list by URI.") )
+    .option( "-P, --sort-by-priority",	// translators: -P, --sort-by-priority
+             _("Sort the list by repository priority.") )
+    .option( "-A, --sort-by-alias",	// translators: -A, --sort-by-alias
+             _("Sort the list by alias.") )
+    .option( "-N, --sort-by-name",	// translators: -N, --sort-by-name
+             _("Sort the list by name.") )
+    ;
+#if 0
     _command_help = _(
       "repos (lr) [options] [repo] ...\n"
       "\n"
@@ -2395,6 +2430,7 @@ void Zypper::processCommandOptions()
       "-A, --sort-by-alias       Sort the list by alias.\n"
       "-N, --sort-by-name        Sort the list by name.\n"
     );
+#endif
     break;
   }
 
