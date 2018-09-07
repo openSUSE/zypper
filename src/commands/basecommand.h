@@ -64,6 +64,13 @@ class ZypperBaseCommand
 public:
   friend class BaseCommandOptionSet;
 
+  ZypperBaseCommand ( const std::list<std::string> &commandAliases_r = {},
+                      const std::string &synopsis_r = std::string(),
+                      const std::string &summary_r = std::string(),
+                      const std::string &description_r = std::string(),
+                      LoadSystemFlags systemInitFlags_r = LoadSystemFlags()
+  );
+
   virtual ~ZypperBaseCommand();
 
   /**
@@ -78,28 +85,28 @@ public:
    * Returns a list of command aliases that are accepted
    * on the command line
    */
-  virtual std::list<std::string> command () const = 0;
+  virtual std::list<std::string> command () const;
 
   /**
    * Returns the command summary, a one line description
    * of what it does. Used in "zypper help" command overview.
    * \sa help
    */
-  virtual std::string summary () const = 0;
+  virtual std::string summary () const;
 
   /**
    * Returns the synopsis of how the command is to be called.
    * \example "list (ll) [options]"
    * \sa help
    */
-  virtual std::string synopsis () const = 0;
+  virtual std::string synopsis () const;
 
   /**
    * Returns a short description of what the command does, this is
    * used in the commands help page.
    * \sa help
    */
-  virtual std::string description () const = 0;
+  virtual std::string description () const;
 
   /**
    * Specifies what part of the system need to be initialized before
@@ -164,6 +171,11 @@ protected:
 private:
   std::vector<BaseCommandOptionSet *> _registeredOptionSets;
   bool _helpRequested = false;
+  std::list<std::string> _commandAliases;
+  std::string _synopsis;
+  std::string _summary;
+  std::string _description;
+  LoadSystemFlags _systemInitFlags;
 };
 
 using ZypperBaseCommandPtr = std::shared_ptr<ZypperBaseCommand> ;

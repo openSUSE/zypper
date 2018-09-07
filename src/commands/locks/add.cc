@@ -21,31 +21,17 @@
 
 using namespace zypp;
 
-std::list<std::string> AddLocksCmd::command() const
-{
-  return { "addlock", "al", "lock-add", "la" };
-}
-
-std::string AddLocksCmd::summary() const
-{
-  return _("Add a package lock.");
-}
-
-std::string AddLocksCmd::synopsis() const
-{
-  // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-  return _("addlock (al) [OPTIONS] <PACKAGENAME> ...");
-}
-
-std::string AddLocksCmd::description() const
-{
-  return _("Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.");
-}
-
-LoadSystemFlags AddLocksCmd::needSystemSetup() const
-{
-  return NO_POOL;
-}
+AddLocksCmd::AddLocksCmd() :
+  ZypperBaseCommand (
+    { "addlock", "al", "lock-add", "la" },
+    // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+    _("addlock (al) [OPTIONS] <PACKAGENAME> ..."),
+    // translators: command summary
+    _("Add a package lock."),
+    // translators: command description
+    _("Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters."),
+    NO_POOL )
+{ }
 
 std::vector<zypp::ZyppFlags::CommandOption> AddLocksCmd::cmdOptions() const
 {

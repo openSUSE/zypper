@@ -15,15 +15,10 @@
 
 class RemoveLocksCmd : public ZypperBaseCommand
 {
+public:
+  RemoveLocksCmd();
 
   // ZypperBaseCommand interface
-public:
-  std::list<std::string> command() const override;
-  std::string summary() const override;
-  std::string synopsis() const override;
-  std::string description() const override;
-  LoadSystemFlags needSystemSetup() const override;
-
 protected:
   std::vector<BaseCommandConditionPtr> conditions() const override;
   std::vector<zypp::ZyppFlags::CommandOption> cmdOptions() const override;

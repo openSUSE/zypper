@@ -219,21 +219,14 @@ private:
 };
 }
 
-std::list<std::string> ListLocksCmd::command() const
-{
-  return { "locks", "ll", "lock-list" };
-}
-
-std::string ListLocksCmd::summary() const
-{
-  return _("List current package locks.");
-}
-
-std::string ListLocksCmd::synopsis() const
-{
-  // translators: command synopsis; do not translate lowercase words
-  return _("locks (ll) [OPTIONS]");
-}
+ListLocksCmd::ListLocksCmd() :
+  ZypperBaseCommand (
+    { "locks", "ll", "lock-list" },
+    // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+    _("locks (ll) [OPTIONS]"),
+    _("List current package locks.")
+    )
+{}
 
 std::string ListLocksCmd::description() const
 {
