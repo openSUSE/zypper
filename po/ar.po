@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 13:49+0200\n"
+"POT-Creation-Date: 2018-09-07 13:57+0200\n"
 "PO-Revision-Date: 2018-04-16 09:32+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
@@ -2460,7 +2460,7 @@ msgstr ""
 "يجب ألا تحتوي سلسلة بيانات المستخدم على أحرف أو أسطر جديدة غير القابلة "
 "للطباعة!"
 
-#: src/Zypper.cc:1241 src/Zypper.cc:3694
+#: src/Zypper.cc:1241 src/Zypper.cc:3730
 msgid "Entering non-interactive mode."
 msgstr "الدخول في وضع غير تفاعلي."
 
@@ -2537,7 +2537,7 @@ msgstr "تم استبدال الأمر '%s' بـ '%s'."
 msgid "See '%s' for all available options."
 msgstr "اطلع على '%s' لجميع الخيارات المتاحة."
 
-#: src/Zypper.cc:1733 src/Zypper.cc:3710
+#: src/Zypper.cc:1733 src/Zypper.cc:3746
 msgid "Non-option program arguments: "
 msgstr "وسيطات برنامج غير الخيار: "
 
@@ -2622,8 +2622,8 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         تنزيل الحزم فقط دون تثبيتها.\n"
 
-#: src/Zypper.cc:1852 src/Zypper.cc:1906 src/Zypper.cc:1989 src/Zypper.cc:2661
-#: src/Zypper.cc:2740 src/Zypper.cc:2841
+#: src/Zypper.cc:1852 src/Zypper.cc:1906 src/Zypper.cc:1989 src/Zypper.cc:2697
+#: src/Zypper.cc:2776 src/Zypper.cc:2877
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2966,17 +2966,17 @@ msgid "List defined services."
 msgstr "إدراج الخدمات المحددة."
 
 #. translators: -u, --uri
-#: src/Zypper.cc:2224
+#: src/Zypper.cc:2224 src/Zypper.cc:2392
 msgid "Show also base URI of repositories."
 msgstr "عرض URI الأساسي للمخازن أيضًا."
 
 #. translators: -p, --priority
-#: src/Zypper.cc:2226
+#: src/Zypper.cc:2226 src/Zypper.cc:2394
 msgid "Show also repository priority."
 msgstr "عرض أولوية المخزن أيضًا."
 
 #. translators: -d, --details
-#: src/Zypper.cc:2228
+#: src/Zypper.cc:2228 src/Zypper.cc:2398
 msgid "Show more information like URI, priority, type."
 msgstr "عرض مزيد من المعلومات، مثل URI والأولوية والنوع."
 
@@ -2986,22 +2986,22 @@ msgid "Show also repositories belonging to the services."
 msgstr "عرض المخازن التي تنتمي إلى الخدمات أيضًا."
 
 #. translators: -E, --show-enabled-only
-#: src/Zypper.cc:2232
+#: src/Zypper.cc:2232 src/Zypper.cc:2402
 msgid "Show enabled repos only."
 msgstr "عرض المخازن التي تم تمكينها فقط."
 
 #. translators: -P, --sort-by-priority
-#: src/Zypper.cc:2234
+#: src/Zypper.cc:2234 src/Zypper.cc:2406
 msgid "Sort the list by repository priority."
 msgstr "ترتيب القائمة حسب أولوية المخزن."
 
 #. translators: -U, --sort-by-uri
-#: src/Zypper.cc:2236
+#: src/Zypper.cc:2236 src/Zypper.cc:2404
 msgid "Sort the list by URI."
 msgstr "ترتيب القائمة حسب URI."
 
 #. translators: -N, --sort-by-name
-#: src/Zypper.cc:2238
+#: src/Zypper.cc:2238 src/Zypper.cc:2410
 msgid "Sort the list by name."
 msgstr "ترتيب القائمة حسب الاسم."
 
@@ -3157,7 +3157,47 @@ msgstr "عدم فحص URI ولكن فحصه لاحقًا أثناء التحدي
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr "يتم اكتشاف هذا النوع من المستودع تلقائيًا دائمًا. تم تجاهل هذا الخيار."
 
+#. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2379
+msgid "repos (lr) [OPTIONS] [REPO] ..."
+msgstr "repos (lr) [خيارات] [repo] ..."
+
+#. translators: command description
+#: src/Zypper.cc:2382
+msgid "List all defined repositories."
+msgstr "إدراج كل المخازن المحددة."
+
+#. translators: -e, --export <FILE.repo>
+#: src/Zypper.cc:2386
+msgid "Export all defined repositories as a single local .repo file."
+msgstr "تصدير كل المخازن المحددة كملف .repo محلي فردي."
+
+#. translators: -a, --alias
+#: src/Zypper.cc:2388
+msgid "Show also repository alias."
+msgstr "عرض الاسم المستعار للمخزن أيضًا."
+
+#. translators: -n, --name
+#: src/Zypper.cc:2390
+msgid "Show also repository name."
+msgstr "عرض اسم المخزن أيضًا."
+
+#. translators: -r, --refresh
+#: src/Zypper.cc:2396
+msgid "Show also the autorefresh flag."
+msgstr "عرض علامة التجديد التلقائي أيضًا."
+
+#. translators: -s, --service
+#: src/Zypper.cc:2400
+msgid "Show also alias of parent service."
+msgstr "عرض الاسم المستعار لللخدمة الرئيسية أيضًا."
+
+#. translators: -A, --sort-by-alias
+#: src/Zypper.cc:2408
+msgid "Sort the list by alias."
+msgstr "ترتيب القائمة حسب الاسم المستعار."
+
+#: src/Zypper.cc:2414
 msgid ""
 "repos (lr) [options] [repo] ...\n"
 "\n"
@@ -3198,7 +3238,7 @@ msgstr ""
 "-A, --sort-by-alias       ترتيب القائمة حسب الاسم المستعار.\n"
 "-N, --sort-by-name        ترتيب القائمة حسب الاسم.\n"
 
-#: src/Zypper.cc:2412
+#: src/Zypper.cc:2448
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -3216,7 +3256,7 @@ msgstr ""
 "    --loose-auth   تجاهل بيانات التصديق على المستخدم في معرف URI.\n"
 "    --loose-query  تجاهل سلسلة الاستعلام في معرف URI.\n"
 
-#: src/Zypper.cc:2433
+#: src/Zypper.cc:2469
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -3232,7 +3272,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:2456
+#: src/Zypper.cc:2492
 #, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -3268,7 +3308,7 @@ msgstr ""
 "-k, --keep-packages       تمكين التخزين المؤقت لملفات RPM.\n"
 "-K, --no-keep-packages    تعطيل التخزين المؤقت لملفات RPM.\n"
 
-#: src/Zypper.cc:2473
+#: src/Zypper.cc:2509
 msgid ""
 "-a, --all                 Apply changes to all repositories.\n"
 "-l, --local               Apply changes to all local repositories.\n"
@@ -3281,18 +3321,18 @@ msgstr ""
 "-m, --medium-type <نوع>  تطبيق التغييرات على مخازن من نوع محدد.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2482
+#: src/Zypper.cc:2518
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
 msgstr "modifyrepo (mr) <خيارات> <alias|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2485
+#: src/Zypper.cc:2521
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
 msgstr "modifyrepo (mr) <خيارات> <%1%>"
 
 #. translators: command description
-#: src/Zypper.cc:2488
+#: src/Zypper.cc:2524
 #, boost-format
 msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
@@ -3301,7 +3341,7 @@ msgstr ""
 "تعديل خصائص المخازن المحددة حسب الاسم المستعار أو الرقم أو URI أو حسب '%1%' "
 "خيارات التجميع."
 
-#: src/Zypper.cc:2517
+#: src/Zypper.cc:2553
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3334,7 +3374,7 @@ msgstr ""
 "-r, --repo <alias|#|URI> تجديد المخازن المحددة فقط.\n"
 "-s, --services           أيضًا تجديد الخدمات قبل تجديد المخازن.\n"
 
-#: src/Zypper.cc:2546
+#: src/Zypper.cc:2582
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3359,7 +3399,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2575
+#: src/Zypper.cc:2611
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -3398,7 +3438,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2632
+#: src/Zypper.cc:2668
 #, c-format, boost-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -3462,7 +3502,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         تنزيل الحزم فقط، وعدم تثبيتها.\n"
 
-#: src/Zypper.cc:2710
+#: src/Zypper.cc:2746
 #, c-format, boost-format
 msgid ""
 "patch [options]\n"
@@ -3529,11 +3569,11 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         إنزال الحزم فقط وعدم التثبيت.\n"
 
-#: src/Zypper.cc:2737
+#: src/Zypper.cc:2773
 msgid "Install only patches which affect the package management itself."
 msgstr "قم بتثبيت التصحيحات فقط التي تؤثر على إدارة الحزمة نفسها."
 
-#: src/Zypper.cc:2738
+#: src/Zypper.cc:2774
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
@@ -3544,16 +3584,16 @@ msgstr ""
 "مع --updatestack- فقط."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2770
+#: src/Zypper.cc:2806
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [خيارات]"
 
 #. translators: command description
-#: src/Zypper.cc:2773
+#: src/Zypper.cc:2809
 msgid "List all applicable patches."
 msgstr "سرد كل التصحيحات القابلة للتطبيق."
 
-#: src/Zypper.cc:2776
+#: src/Zypper.cc:2812
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
@@ -3561,7 +3601,7 @@ msgstr ""
 "-b، bugzilla[=#]\n"
 "سرد التصحيحات القابلة للتطبيق لمشكلات Bugzilla."
 
-#: src/Zypper.cc:2777
+#: src/Zypper.cc:2813
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
@@ -3569,7 +3609,7 @@ msgstr ""
 "--cve[=#]\n"
 "سرد التصحيحات القابلة للتطبيق لمشكلات CVE."
 
-#: src/Zypper.cc:2778
+#: src/Zypper.cc:2814
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
@@ -3577,7 +3617,7 @@ msgstr ""
 "--issues[=STRING]\n"
 "   البحث عن المشكلات التي تطابق السلسلة المحددة."
 
-#: src/Zypper.cc:2779
+#: src/Zypper.cc:2815
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
@@ -3586,7 +3626,7 @@ msgstr ""
 "سرد التصحيحات التي تم إصدارها حتى التاريخ المحدد فقط، ولا يشمل ذلك هذا "
 "التاريخ."
 
-#: src/Zypper.cc:2780
+#: src/Zypper.cc:2816
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
@@ -3594,7 +3634,7 @@ msgstr ""
 "-g، --category <CATEGORY>\n"
 "سرد التصحيحات بهذه الفئة فقط."
 
-#: src/Zypper.cc:2781
+#: src/Zypper.cc:2817
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
@@ -3602,7 +3642,7 @@ msgstr ""
 "--severity <SEVERITY>\n"
 "سرد التصحيحات بهذه الخطورة فقط."
 
-#: src/Zypper.cc:2782
+#: src/Zypper.cc:2818
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
@@ -3610,7 +3650,7 @@ msgstr ""
 "-a، --all\n"
 "سرد كل التصحيحات، وليست التصحيحات القابلة للتطبيق فقط."
 
-#: src/Zypper.cc:2784
+#: src/Zypper.cc:2820
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
@@ -3618,7 +3658,7 @@ msgstr ""
 "-r، --repo <ALIAS|#|URI>\n"
 "سرد التصحيحات من المخزن المحدد فقط."
 
-#: src/Zypper.cc:2820
+#: src/Zypper.cc:2856
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [options]\n"
@@ -3670,7 +3710,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         تنزيل الحزم فقط، وعدم تثبيتها.\n"
 
-#: src/Zypper.cc:2886
+#: src/Zypper.cc:2922
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -3749,17 +3789,17 @@ msgstr ""
 "ويمكن استخدام حرفي البدل * و؟ في سلاسل البحث.\n"
 "في حالة احتواء سلسلة البحث بـ '/'، سيتم اعتبارها كتعبير عادي.\n"
 
-#: src/Zypper.cc:2920
+#: src/Zypper.cc:2956
 msgid "Search for packages which supplement the search strings."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2938
+#: src/Zypper.cc:2974
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr "patch-check (pchk) [خيارات]"
 
 #. translators: command description
-#: src/Zypper.cc:2941
+#: src/Zypper.cc:2977
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
@@ -3768,7 +3808,7 @@ msgstr ""
 "العثور على التصحيحات المطلوبة وإرجاع 101 إذا كان هناك تصحيح أمان مطلوب واحد "
 "على الأقل."
 
-#: src/Zypper.cc:2944
+#: src/Zypper.cc:2980
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
@@ -3777,7 +3817,7 @@ msgstr ""
 "\n"
 "التحقق من التصحيحات في المخزن المحدد فقط."
 
-#: src/Zypper.cc:2945
+#: src/Zypper.cc:2981
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
@@ -3786,21 +3826,21 @@ msgstr ""
 "تحقق من التصحيحات التي تؤثر على إدارة الحزمة نفسها فقط."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2963
+#: src/Zypper.cc:2999
 msgid "patches (pch) [REPOSITORY] ..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2966
+#: src/Zypper.cc:3002
 msgid "List all patches available in specified repositories."
 msgstr "سرد كل التصحيحات المتاحة في المخازن المحددة."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:2970
+#: src/Zypper.cc:3006
 msgid "Just another means to specify repository."
 msgstr "وسيلة أخرى لتحديد المخزن."
 
-#: src/Zypper.cc:2974
+#: src/Zypper.cc:3010
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3818,7 +3858,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI>  وسيلة أخرى لتحديد المخزن.\n"
 
-#: src/Zypper.cc:3005
+#: src/Zypper.cc:3041
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -3853,7 +3893,7 @@ msgstr ""
 "-N, --sort-by-name        فرز القائمة حسب اسم الحزمة.\n"
 "-R, --sort-by-repo        فرز القائمة حسب المخزن.\n"
 
-#: src/Zypper.cc:3036
+#: src/Zypper.cc:3072
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3875,7 +3915,7 @@ msgstr ""
 "-i, --installed-only      إظهار الأنماط المثبَّتة فقط.\n"
 "-u, --not-installed-only  إظهار الأنماط غير المثبَّتة فقط.\n"
 
-#: src/Zypper.cc:3063
+#: src/Zypper.cc:3099
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3897,12 +3937,12 @@ msgstr ""
 "-i, --installed-only      إظهار الحزم المثبَّتة فقط.\n"
 "-u, --not-installed-only  إظهار المنتجات غير المثبَّتة فقط.\n"
 
-#: src/Zypper.cc:3072
+#: src/Zypper.cc:3108
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr "مخرجات XML فقط: إحالة حرفية لعلامات XML في ملف المنتج."
 
-#: src/Zypper.cc:3097
+#: src/Zypper.cc:3133
 #, c-format, boost-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -3944,11 +3984,11 @@ msgstr ""
 "    --recommends          عرض العناصر الموصى بها.\n"
 "    --suggests            عرض العناصر المقترحة.\n"
 
-#: src/Zypper.cc:3116
+#: src/Zypper.cc:3152
 msgid "Show supplements."
 msgstr ""
 
-#: src/Zypper.cc:3131
+#: src/Zypper.cc:3167
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3963,7 +4003,7 @@ msgstr ""
 "\n"
 "يعتبر هذا اسمًا مستعارًا لـ '%s'.\n"
 
-#: src/Zypper.cc:3150
+#: src/Zypper.cc:3186
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3978,7 +4018,7 @@ msgstr ""
 "\n"
 "يعتبر هذا اسمًا مستعارًا لـ '%s'.\n"
 
-#: src/Zypper.cc:3169
+#: src/Zypper.cc:3205
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3993,7 +4033,7 @@ msgstr ""
 "\n"
 "يعتبر هذا اسمًا مستعارًا لـ '%s'.\n"
 
-#: src/Zypper.cc:3186
+#: src/Zypper.cc:3222
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -4007,7 +4047,7 @@ msgstr ""
 "\n"
 "لا تتوفر أية خيارات إضافية لهذا الأمر.\n"
 
-#: src/Zypper.cc:3237
+#: src/Zypper.cc:3273
 msgid ""
 "moo\n"
 "\n"
@@ -4023,12 +4063,12 @@ msgstr ""
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3260
+#: src/Zypper.cc:3296
 msgid "addlock (al) [options] <packagename> ..."
 msgstr "addlock (al) [خيارات] <packagename> ..."
 
 #. translators: command description
-#: src/Zypper.cc:3263
+#: src/Zypper.cc:3299
 msgid ""
 "Add a package lock. Specify packages to lock by exact name or by a glob "
 "pattern using '*' and '?' wildcard characters."
@@ -4037,24 +4077,24 @@ msgstr ""
 "باستخدام حرف بدل '*' و'?'."
 
 #. translators: -r, --repo <alias|#|URI>
-#: src/Zypper.cc:3267
+#: src/Zypper.cc:3303
 msgid "Restrict the lock to the specified repository."
 msgstr "تقييد القفل على المخزن المحدد."
 
 #. translators: -t, --type <type>
-#: src/Zypper.cc:3269 src/Zypper.cc:3298
+#: src/Zypper.cc:3305 src/Zypper.cc:3334
 #, boost-format
 msgid "Type of package (%1%)."
 msgstr "نوع الحزمة (%1%)."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3289
+#: src/Zypper.cc:3325
 msgid "removelock (rl) [options] <lock-number|packagename> ..."
 msgstr ""
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
-#: src/Zypper.cc:3292
+#: src/Zypper.cc:3328
 #, boost-format
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
@@ -4064,32 +4104,32 @@ msgstr ""
 "'%1%' أو حسب اسم الحزمة."
 
 #. translators: -r, --repo <alias|#|URI>
-#: src/Zypper.cc:3296
+#: src/Zypper.cc:3332
 msgid "Remove only locks with specified repository."
 msgstr "إزالة الأقفال بالمخزن المحدد فقط."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3316
+#: src/Zypper.cc:3352
 msgid "cleanlocks (cl)"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3319
+#: src/Zypper.cc:3355
 msgid "Remove useless locks."
 msgstr "إزالة الأقفال عديمة الفائدة."
 
 #. translators: -d, --only-duplicates
-#: src/Zypper.cc:3323
+#: src/Zypper.cc:3359
 msgid "Clean only duplicate locks."
 msgstr "تنظيف الأقفال المكررة فقط."
 
 #. translators: -e, --only-empty
-#: src/Zypper.cc:3325
+#: src/Zypper.cc:3361
 msgid "Clean only locks which doesn't lock anything."
 msgstr "تنظيف فقط الأقفال التي لا تقوم بقفل أي شيء."
 
-#: src/Zypper.cc:3340
+#: src/Zypper.cc:3376
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -4107,7 +4147,7 @@ msgstr ""
 "  خيارات الأوامر:\n"
 "-l, --label                 إظهار تسمية نظام التشغيل.\n"
 
-#: src/Zypper.cc:3361
+#: src/Zypper.cc:3397
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4123,7 +4163,7 @@ msgstr ""
 "  خيارات الأوامر:\n"
 "-m, --match  يَستخدم رقم الإصدار المفقود كأي إصدار.\n"
 
-#: src/Zypper.cc:3380
+#: src/Zypper.cc:3416
 msgid ""
 "licenses\n"
 "\n"
@@ -4138,12 +4178,12 @@ msgstr ""
 "لا توجد خيارات إضافية لهذا الأمر.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3405
+#: src/Zypper.cc:3441
 msgid "ps [options]"
 msgstr "ps [options]"
 
 #. translators: command description
-#: src/Zypper.cc:3408
+#: src/Zypper.cc:3444
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -4152,7 +4192,7 @@ msgstr ""
 "عمليات الترقية الحديثة."
 
 #. translators: -s, --short
-#: src/Zypper.cc:3412
+#: src/Zypper.cc:3448
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4163,7 +4203,7 @@ msgstr ""
 "خدمة النظام المرتبطة فقط."
 
 #. translators: --print <format>
-#: src/Zypper.cc:3414
+#: src/Zypper.cc:3450
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4174,11 +4214,11 @@ msgstr ""
 "جديد. يتم استبدال أي '%s' توجيه في <format> بواسطة اسم خدمة النظام."
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3416
+#: src/Zypper.cc:3452
 msgid "Write debug output to file <path>."
 msgstr "كتابة مخرجات تتبع الأخطاء في الملف <path>."
 
-#: src/Zypper.cc:3435
+#: src/Zypper.cc:3471
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4220,7 +4260,7 @@ msgstr ""
 "--dry-run            عدم تحميل أي حزمة، والإبلاغ فقط\n"
 "                            عما يتعين فعله.\n"
 
-#: src/Zypper.cc:3474
+#: src/Zypper.cc:3510
 msgid ""
 "source-download\n"
 "\n"
@@ -4248,7 +4288,7 @@ msgstr ""
 "--status             عدم تنزيل أي rpms مصدر\n"
 "                     فقط إظهار rpms المصدر أو الخارجية المفقودة.\n"
 
-#: src/Zypper.cc:3501
+#: src/Zypper.cc:3537
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4262,7 +4302,7 @@ msgstr ""
 "\n"
 "لا تتوفر خيارات إضافية لهذا الأمر.\n"
 
-#: src/Zypper.cc:3518
+#: src/Zypper.cc:3554
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4277,7 +4317,7 @@ msgstr ""
 "لا تتوفر خيارات إضافية لهذا الأمر.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3536
+#: src/Zypper.cc:3572
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4288,7 +4328,7 @@ msgstr ""
 "سرد أنواع الخدمات المتاحة.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3552
+#: src/Zypper.cc:3588
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4301,7 +4341,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3574
+#: src/Zypper.cc:3610
 msgid ""
 "mount\n"
 "\n"
@@ -4321,7 +4361,7 @@ msgstr ""
 "-n, --name <name>    استخدام السلسلة المحددة كاسم خدمة.\n"
 "-r, --recurse        الدخول إلى الدلائل الفرعية.\n"
 
-#: src/Zypper.cc:3602
+#: src/Zypper.cc:3638
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4335,7 +4375,7 @@ msgstr ""
 "لـ '%s'.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3619
+#: src/Zypper.cc:3655
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4345,12 +4385,12 @@ msgstr ""
 "\n"
 "يحتوي هذا الأمر على عملية تنفيذ وهمية دائمًا ما ترجع 0.\n"
 
-#: src/Zypper.cc:3662 src/Zypper.cc:5734
+#: src/Zypper.cc:3698 src/Zypper.cc:5770
 msgid "Unexpected program flow."
 msgstr "تدفق غير متوقع للبرنامج."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3793
+#: src/Zypper.cc:3829
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4360,20 +4400,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3816
+#: src/Zypper.cc:3852
 msgid "Root privileges are required for refreshing services."
 msgstr "امتيازات المسؤول مطلوبة لتجديد الخدمات."
 
-#: src/Zypper.cc:3840 src/Zypper.cc:3919 src/Zypper.cc:4107
+#: src/Zypper.cc:3876 src/Zypper.cc:3955 src/Zypper.cc:4143
 msgid "Root privileges are required for modifying system services."
 msgstr "امتيازات المسؤول مطلوبة لتعديل خدمات النظام."
 
-#: src/Zypper.cc:3903
+#: src/Zypper.cc:3939
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' ليس نوع خدمة صالحًا."
 
-#: src/Zypper.cc:3905
+#: src/Zypper.cc:3941
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "راجع '%s' أو '%s' للحصول على قائمة بأنواع الخدمات المعروفة."
@@ -4382,45 +4422,45 @@ msgstr "راجع '%s' أو '%s' للحصول على قائمة بأنواع ال
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:3930 src/utils/messages.cc:47
+#: src/Zypper.cc:3966 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "مطلوب اسم مستعار أو خيار تجميع."
 
-#: src/Zypper.cc:3962
+#: src/Zypper.cc:3998
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "لم يتم العثور على الخدمة '%s'."
 
-#: src/Zypper.cc:3989 src/Zypper.cc:4106 src/Zypper.cc:4210 src/Zypper.cc:4262
+#: src/Zypper.cc:4025 src/Zypper.cc:4142 src/Zypper.cc:4246 src/Zypper.cc:4298
 msgid "Root privileges are required for modifying system repositories."
 msgstr "امتيازات المسؤول مطلوبة لتعديل مخازن النظام."
 
-#: src/Zypper.cc:4015 src/Zypper.cc:4374
+#: src/Zypper.cc:4051 src/Zypper.cc:4410
 msgid "Too few arguments."
 msgstr "الوسيطات قليلة للغاية."
 
-#: src/Zypper.cc:4038
+#: src/Zypper.cc:4074
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "في حالة استخدام وسيطة واحدة فقط، يجب أن يشير URI إلى ملف .repo."
 
-#: src/Zypper.cc:4068
+#: src/Zypper.cc:4104
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "تعذر استخدام %s مع %s. استخدام إعداد %s."
 
-#: src/Zypper.cc:4087
+#: src/Zypper.cc:4123
 msgid "Specified type is not a valid repository type:"
 msgstr "النوع المحدد ليس نوع مخزن صالحًا:"
 
-#: src/Zypper.cc:4088
+#: src/Zypper.cc:4124
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "راجع '%s' أو '%s' للحصول على قائمة بأنواع المخازن المعروفة."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4153
+#: src/Zypper.cc:4189
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr ""
@@ -4429,69 +4469,69 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4186
+#: src/Zypper.cc:4222
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr ""
 "لم يتم العثور على الخدمة '%s' بواسطة اسمها المستعار أو رقمه أو معرف URI "
 "الخاص به."
 
-#: src/Zypper.cc:4217
+#: src/Zypper.cc:4253
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "الوسيطات قليلة للغاية. مطلوب معرف URI واسم مستعار على الأقل."
 
-#: src/Zypper.cc:4241
+#: src/Zypper.cc:4277
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "لم يتم العثور على المخزن '%s'."
 
-#: src/Zypper.cc:4301
+#: src/Zypper.cc:4337
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "لم يتم العثور على المخزن %s."
 
-#: src/Zypper.cc:4318
+#: src/Zypper.cc:4354
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "امتيازات المسؤول مطلوبة لتجديد مخازن النظام."
 
-#: src/Zypper.cc:4324
+#: src/Zypper.cc:4360
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "لا يُحدث الخيار العام '%s' أي تأثير هنا."
 
-#: src/Zypper.cc:4332
+#: src/Zypper.cc:4368
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "غير مسموح بالوسيطات في حالة استخدام '%s'."
 
-#: src/Zypper.cc:4356
+#: src/Zypper.cc:4392
 msgid "Root privileges are required for cleaning local caches."
 msgstr "امتيازات المسؤول مطلوبة لتنظيف ذاكرات التخزين المؤقت المحلية."
 
-#: src/Zypper.cc:4375
+#: src/Zypper.cc:4411
 msgid "At least one package name is required."
 msgstr "مطلوب اسم حزمة واحد على الأقل."
 
-#: src/Zypper.cc:4384 src/Zypper.cc:4633 src/Zypper.cc:4670
+#: src/Zypper.cc:4420 src/Zypper.cc:4669 src/Zypper.cc:4706
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "امتيازات المسؤول مطلوبة لتثبيت الحزم أو إلغاء تثبيتها."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4396
+#: src/Zypper.cc:4432
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "تجاهل الوسيطات، ووضع علامة على المخزن الكامل."
 
-#: src/Zypper.cc:4407
+#: src/Zypper.cc:4443
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "نوع الحزمة غير معروف: '%s'"
 
-#: src/Zypper.cc:4417
+#: src/Zypper.cc:4453
 msgid "Cannot uninstall patches."
 msgstr "تعذر إلغاء تثبيت التصحيحات."
 
-#: src/Zypper.cc:4418
+#: src/Zypper.cc:4454
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4501,34 +4541,34 @@ msgstr ""
 "لا يتم تثبيت التصحيحات عند وجود ملفات منسوخة، أو سجلات قواعد البيانات \n"
 "أو ما شابه ذلك."
 
-#: src/Zypper.cc:4428
+#: src/Zypper.cc:4464
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "إلغاء تثبيت حزمة لم يتم تحديدها وتنفيذها."
 
-#: src/Zypper.cc:4448
+#: src/Zypper.cc:4484
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' يبدو كملف RPM. سنحاول إنزاله."
 
-#: src/Zypper.cc:4457
+#: src/Zypper.cc:4493
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "حدثت مشكلة في ملف RPM المحدد كـ '%s'، تخطي."
 
-#: src/Zypper.cc:4479
+#: src/Zypper.cc:4515
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "حدثت مشكلة أثناء قراءة رأس RPM الخاص بـ %s. هل هذا ملف RPM؟"
 
-#: src/Zypper.cc:4500
+#: src/Zypper.cc:4536
 msgid "Plain RPM files cache"
 msgstr "ذاكرة التخزين المؤقت لملفات RPM العادية"
 
-#: src/Zypper.cc:4522
+#: src/Zypper.cc:4558
 msgid "No valid arguments specified."
 msgstr "لم يتم تحديد أية وسيطات صالحة."
 
-#: src/Zypper.cc:4539 src/Zypper.cc:4686
+#: src/Zypper.cc:4575 src/Zypper.cc:4722
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4537,73 +4577,73 @@ msgstr ""
 "ولا يمكن تثبيت أي شيء آخر."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4576 src/Zypper.cc:5163
+#: src/Zypper.cc:4612 src/Zypper.cc:5199
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "هناك تعارض بين %s و%s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4584
+#: src/Zypper.cc:4620
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "يتعذر حاليًا استخدام %s مع %s"
 
-#: src/Zypper.cc:4625
+#: src/Zypper.cc:4661
 msgid "Source package name is a required argument."
 msgstr "اسم الحزمة المصدر وسيطة مطلوبة."
 
-#: src/Zypper.cc:4743 src/Zypper.cc:5082 src/Zypper.cc:5182 src/Zypper.cc:5392
-#: src/Zypper.cc:5443 src/Zypper.cc:5483
+#: src/Zypper.cc:4779 src/Zypper.cc:5118 src/Zypper.cc:5218 src/Zypper.cc:5428
+#: src/Zypper.cc:5479 src/Zypper.cc:5519
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "نوع الحزمة '%s' غير معروف."
 
-#: src/Zypper.cc:4768 src/repos.cc:796
+#: src/Zypper.cc:4804 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "تم تعطيل المخزن المحدد '%s'."
 
 #. translators: empty search result message
-#: src/Zypper.cc:4924
+#: src/Zypper.cc:4960
 msgid "No matching items found."
 msgstr "لم يتم العثور على عناصر مطابقة."
 
-#: src/Zypper.cc:4959
+#: src/Zypper.cc:4995
 msgid "Problem occurred initializing or executing the search query"
 msgstr "حدثت مشكلة أثناء تهيئة استعلام البحث أو تنفيذه"
 
-#: src/Zypper.cc:4960
+#: src/Zypper.cc:4996
 msgid "See the above message for a hint."
 msgstr "راجع الرسالة أعلاه للحصول على تلميح."
 
-#: src/Zypper.cc:4961 src/repos.cc:1009
+#: src/Zypper.cc:4997 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "قد يؤدي تشغيل 'zypper refresh' كجذر إلى حل المشكلة."
 
-#: src/Zypper.cc:5042
+#: src/Zypper.cc:5078
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "خيار %1% ليس له تأثير بدون الخيار العالمي  %2%."
 
-#: src/Zypper.cc:5101 src/Zypper.cc:5149
+#: src/Zypper.cc:5137 src/Zypper.cc:5185
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "تعذر استخدام %s مع %s."
 
-#: src/Zypper.cc:5130
+#: src/Zypper.cc:5166
 msgid "Root privileges are required for updating packages."
 msgstr "امتيازات المسؤول مطلوبة لتحديث الحزم."
 
-#: src/Zypper.cc:5189 src/Zypper.cc:5197 src/Zypper.cc:5278
+#: src/Zypper.cc:5225 src/Zypper.cc:5233 src/Zypper.cc:5314
 msgid "Operation not supported."
 msgstr "العملية غير مدعومة."
 
-#: src/Zypper.cc:5190
+#: src/Zypper.cc:5226
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "لتحديث المنتجات المثبتة، استخدم '%s'."
 
-#: src/Zypper.cc:5198
+#: src/Zypper.cc:5234
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4612,16 +4652,16 @@ msgstr ""
 "لا يتتبع Zypper الحزم المصدر المثبتة. لتثبيت أحدث حزمة مصدر وتبعيات الإصدار "
 "الخاصة بها، استخدم '%s'."
 
-#: src/Zypper.cc:5214
+#: src/Zypper.cc:5250
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr "يتعذر استخدام أنواع متعددة عند منح حزم محددة على أنها وسيطات."
 
-#: src/Zypper.cc:5314
+#: src/Zypper.cc:5350
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "امتيازات المسؤول مطلوبة لتنفيذ ترقية توزيع."
 
-#: src/Zypper.cc:5334
+#: src/Zypper.cc:5370
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4632,20 +4672,20 @@ msgstr ""
 "المخازن متوافقة مع بعضها قبل المتابعة. راجع '%s' للحصول على مزيد من "
 "المعلومات حول هذا الأمر."
 
-#: src/Zypper.cc:5359 src/utils/messages.cc:55
+#: src/Zypper.cc:5395 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "الوسيطة المطلوبة غير موجودة."
 
-#: src/Zypper.cc:5362 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5398 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "الاستخدام"
 
-#: src/Zypper.cc:5422 src/Zypper.cc:5463
+#: src/Zypper.cc:5458 src/Zypper.cc:5499
 msgid "Root privileges are required for adding of package locks."
 msgstr "امتيازات المسؤول مطلوبة لإضافة أقفال الحزم."
 
-#: src/Zypper.cc:5517
+#: src/Zypper.cc:5553
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
@@ -4656,56 +4696,56 @@ msgstr[3] "إزالة %lu أقفال."
 msgstr[4] "إزالة %lu أقفال."
 msgstr[5] "إزالة %lu أقفال."
 
-#: src/Zypper.cc:5528
+#: src/Zypper.cc:5564
 msgid "XML output not implemented for this command."
 msgstr "لم يتم تنفيذ مخرجات XML لهذا الأمر."
 
-#: src/Zypper.cc:5541
+#: src/Zypper.cc:5577
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "تسمية التوزيع: %s"
 
-#: src/Zypper.cc:5542
+#: src/Zypper.cc:5578
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "تسمية قصيرة: %s"
 
-#: src/Zypper.cc:5583
+#: src/Zypper.cc:5619
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "يتطابق %s مع %s"
 
-#: src/Zypper.cc:5585
+#: src/Zypper.cc:5621
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s أحدث من %s"
 
-#: src/Zypper.cc:5587
+#: src/Zypper.cc:5623
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s أقدم من %s"
 
-#: src/Zypper.cc:5669 src/source-download.cc:217
+#: src/Zypper.cc:5705 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "امتيازات غير كافية لاستخدام دليل التنزيل '%s'."
 
-#: src/Zypper.cc:5721
+#: src/Zypper.cc:5757
 msgid "This command only makes sense in the zypper shell."
 msgstr "لا يعمل هذا الأمر إلا في برنامج الواجهة شل في zypper."
 
-#: src/Zypper.cc:5731
+#: src/Zypper.cc:5767
 msgid "You already are running zypper's shell."
 msgstr "أنت تقوم الآن بتشغيل برنامج الواجهة shell في zypper."
 
-#: src/Zypper.cc:5744 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
+#: src/Zypper.cc:5780 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
 msgid "Alias"
 msgstr "الاسم المستعار"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5744 src/commands/locks/list.cc:108 src/info.cc:69
+#: src/Zypper.cc:5780 src/commands/locks/list.cc:108 src/info.cc:69
 #: src/info.cc:460 src/info.cc:704 src/repos.cc:1072 src/repos.cc:1211
 #: src/repos.cc:2550 src/search.cc:47 src/search.cc:195 src/search.cc:342
 #: src/search.cc:489 src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
@@ -4713,11 +4753,11 @@ msgid "Name"
 msgstr "الاسم"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5744 src/info.cc:83
+#: src/Zypper.cc:5780 src/info.cc:83
 msgid "Description"
 msgstr "الوصف"
 
-#: src/Zypper.cc:5795
+#: src/Zypper.cc:5831
 msgid "Resolvable Type"
 msgstr "نوع التبعية القابلة للتحليل"
 
