@@ -2094,7 +2094,7 @@ void Zypper::processCommandOptions()
     _("removeservice (rs) [OPTIONS] <ALIAS|#|URI>")
     )
     .description(	// translators: command description
-    _("Remove specified repository index service from the system..")
+    _("Remove specified repository index service from the system.")
     )
     .optionSectionCommandOptions()
     .option( "--loose-auth",	// translators: --loose-auth
