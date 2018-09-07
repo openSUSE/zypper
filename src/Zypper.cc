@@ -3381,6 +3381,16 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = moo_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("moo")
+    )
+    .description(	// translators: command description
+    _("Show an animal.")
+    )
+    .noOptionSection()
+    ;
+#if 0
     _command_help = _(
       "moo\n"
       "\n"
@@ -3388,6 +3398,7 @@ void Zypper::processCommandOptions()
       "\n"
       "This command has no additional options.\n"
       );
+#endif
     break;
   }
 
