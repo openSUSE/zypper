@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 15:50+0200\n"
+"POT-Creation-Date: 2018-09-07 16:01+0200\n"
 "PO-Revision-Date: 2013-10-04 20:03+0200\n"
 "Last-Translator: Olav Pettershagen <olpetter@bbnett.no>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
@@ -2191,7 +2191,7 @@ msgstr "Programargumenter som ikke er alternativer: "
 #: src/Zypper.cc:1817
 #, fuzzy, c-format, boost-format
 msgid ""
-"install (in) [options] <capability|rpm_file_uri> ...\n"
+"install (in) [OPTIONS] <capability|rpm_file_uri> ...\n"
 "\n"
 "Install packages with specified capabilities or RPM files with specified\n"
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
@@ -2274,7 +2274,7 @@ msgstr ""
 #: src/Zypper.cc:1887
 #, fuzzy, c-format, boost-format
 msgid ""
-"remove (rm) [options] <capability> ...\n"
+"remove (rm) [OPTIONS] <capability> ...\n"
 "\n"
 "Remove packages with specified capabilities.\n"
 "A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
@@ -2312,7 +2312,7 @@ msgstr ""
 
 #: src/Zypper.cc:1925
 msgid ""
-"source-install (si) [options] <name> ...\n"
+"source-install (si) [OPTIONS] <name> ...\n"
 "\n"
 "Install specified source packages and their build dependencies.\n"
 "\n"
@@ -2346,7 +2346,7 @@ msgstr ""
 #: src/Zypper.cc:1972
 #, fuzzy, c-format, boost-format
 msgid ""
-"verify (ve) [options]\n"
+"verify (ve) [OPTIONS]\n"
 "\n"
 "Check whether dependencies of installed packages are satisfied and suggest "
 "to install or remove packages in order to repair the dependency problems.\n"
@@ -2378,7 +2378,7 @@ msgstr ""
 #: src/Zypper.cc:2021
 #, fuzzy, c-format, boost-format
 msgid ""
-"install-new-recommends (inr) [options]\n"
+"install-new-recommends (inr) [OPTIONS]\n"
 "\n"
 "Install newly added packages recommended by already installed packages. This "
 "can typically be used to install new language packages or drivers for newly "
@@ -2410,7 +2410,7 @@ msgstr ""
 #: src/Zypper.cc:2055
 #, fuzzy, c-format, boost-format
 msgid ""
-"addservice (as) [options] <URI> <alias>\n"
+"addservice (as) [OPTIONS] <URI> <alias>\n"
 "\n"
 "Add a repository index service to the system.\n"
 "\n"
@@ -2465,7 +2465,7 @@ msgstr "Ignorer kommandostreng i URI."
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:2106
 msgid ""
-"removeservice (rs) [options] <alias|#|URI>\n"
+"removeservice (rs) [OPTIONS] <alias|#|URI>\n"
 "\n"
 "Remove specified repository index service from the system..\n"
 "\n"
@@ -2654,7 +2654,7 @@ msgstr "Sorter listen etter navn."
 
 #: src/Zypper.cc:2240
 msgid ""
-"services (ls) [options]\n"
+"services (ls) [OPTIONS]\n"
 "\n"
 "List defined services.\n"
 "\n"
@@ -2710,7 +2710,7 @@ msgstr ""
 #: src/Zypper.cc:2285
 #, fuzzy
 msgid ""
-"refresh-services (refs) [options]\n"
+"refresh-services (refs) [OPTIONS]\n"
 "\n"
 "Refresh defined repository index services.\n"
 "\n"
@@ -2731,8 +2731,8 @@ msgstr ""
 #: src/Zypper.cc:2312
 #, fuzzy, c-format, boost-format
 msgid ""
-"addrepo (ar) [options] <URI> <alias>\n"
-"addrepo (ar) [options] <file.repo>\n"
+"addrepo (ar) [OPTIONS] <URI> <alias>\n"
+"addrepo (ar) [OPTIONS] <file.repo>\n"
 "\n"
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote).\n"
@@ -2845,7 +2845,7 @@ msgstr "Sorter listen etter alias."
 
 #: src/Zypper.cc:2412
 msgid ""
-"repos (lr) [options] [repo] ...\n"
+"repos (lr) [OPTIONS] [repo] ...\n"
 "\n"
 "List all defined repositories.\n"
 "\n"
@@ -2887,7 +2887,7 @@ msgstr ""
 
 #: src/Zypper.cc:2446
 msgid ""
-"removerepo (rr) [options] <alias|#|URI>\n"
+"removerepo (rr) [OPTIONS] <alias|#|URI>\n"
 "\n"
 "Remove repository specified by alias, number or URI.\n"
 "\n"
@@ -2916,7 +2916,7 @@ msgstr ""
 
 #: src/Zypper.cc:2477
 msgid ""
-"renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
+"renamerepo (nr) [OPTIONS] <alias|#|URI> <new-alias>\n"
 "\n"
 "Assign new alias to the repository specified by alias, number or URI.\n"
 "\n"
@@ -3133,7 +3133,7 @@ msgstr ""
 #: src/Zypper.cc:2664
 #, c-format, boost-format
 msgid ""
-"list-updates (lu) [options]\n"
+"list-updates (lu) [OPTIONS]\n"
 "\n"
 "List all available updates.\n"
 "\n"
@@ -3174,7 +3174,7 @@ msgstr ""
 #: src/Zypper.cc:2721
 #, fuzzy, c-format, boost-format
 msgid ""
-"update (up) [options] [packagename] ...\n"
+"update (up) [OPTIONS] [packagename] ...\n"
 "\n"
 "Update all or specified installed packages with newer versions, if "
 "possible.\n"
@@ -3234,7 +3234,7 @@ msgstr ""
 #: src/Zypper.cc:2799
 #, fuzzy, c-format, boost-format
 msgid ""
-"patch [options]\n"
+"patch [OPTIONS]\n"
 "\n"
 "Install all available needed patches.\n"
 "\n"
@@ -3363,7 +3363,7 @@ msgstr ""
 #: src/Zypper.cc:2909
 #, fuzzy, c-format, boost-format
 msgid ""
-"dist-upgrade (dup) [options]\n"
+"dist-upgrade (dup) [OPTIONS]\n"
 "\n"
 "Perform a distribution upgrade.\n"
 "\n"
@@ -3408,7 +3408,7 @@ msgstr ""
 #: src/Zypper.cc:2975
 #, fuzzy
 msgid ""
-"search (se) [options] [querystring] ...\n"
+"search (se) [OPTIONS] [querystring] ...\n"
 "\n"
 "Search for packages matching any of the given search strings.\n"
 "\n"
@@ -3609,7 +3609,7 @@ msgstr ""
 #: src/Zypper.cc:3122
 #, fuzzy
 msgid ""
-"packages (pa) [options] [repository] ...\n"
+"packages (pa) [OPTIONS] [repository] ...\n"
 "\n"
 "List all packages available in specified repositories.\n"
 "\n"
@@ -3665,7 +3665,7 @@ msgstr "Vis kun mønstre som ikke er installert."
 
 #: src/Zypper.cc:3170
 msgid ""
-"patterns (pt) [options] [repository] ...\n"
+"patterns (pt) [OPTIONS] [repository] ...\n"
 "\n"
 "List all patterns available in specified repositories.\n"
 "\n"
@@ -3688,7 +3688,7 @@ msgstr ""
 
 #: src/Zypper.cc:3198
 msgid ""
-"products (pd) [options] [repository] ...\n"
+"products (pd) [OPTIONS] [repository] ...\n"
 "\n"
 "List all products available in specified repositories.\n"
 "\n"
@@ -3717,7 +3717,7 @@ msgstr ""
 #: src/Zypper.cc:3232
 #, fuzzy, c-format, boost-format
 msgid ""
-"info (if) [options] <name> ...\n"
+"info (if) [OPTIONS] <name> ...\n"
 "\n"
 "Show detailed information for specified packages.\n"
 "By default the packages which match exactly the given names are shown.\n"
@@ -3854,7 +3854,7 @@ msgstr ""
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:3417
-msgid "addlock (al) [options] <packagename> ..."
+msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
 msgstr "addlock (al) [valg] <pakkenavn> ..."
 
 #. translators: command description
@@ -3880,7 +3880,7 @@ msgstr "Pakketype (%1%)."
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:3446
-msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr "removelock (rl) [valg] <låsnummer|pakkenavn> ..."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
@@ -3939,7 +3939,7 @@ msgstr "Vis operativsystemets betegnelse."
 
 #: src/Zypper.cc:3509
 msgid ""
-"targetos (tos) [options]\n"
+"targetos (tos) [OPTIONS]\n"
 "\n"
 "Show various information about the target operating system.\n"
 "By default, an ID string is shown.\n"
@@ -4012,7 +4012,7 @@ msgstr ""
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:3599
-msgid "ps [options]"
+msgid "ps [OPTIONS]"
 msgstr ""
 
 #. translators: command description
@@ -4053,7 +4053,7 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3630
-msgid "download [options] <packages>..."
+msgid "download [OPTIONS] <PACKAGES>..."
 msgstr ""
 
 #. translators: command description
@@ -4087,7 +4087,7 @@ msgstr ""
 
 #: src/Zypper.cc:3646
 msgid ""
-"download [options] <packages>...\n"
+"download [OPTIONS] <PACKAGES>...\n"
 "\n"
 "Download rpms specified on the commandline to a local directory.\n"
 "Per default packages are downloaded to the libzypp package cache\n"
@@ -4226,7 +4226,7 @@ msgstr ""
 #: src/Zypper.cc:3796
 #, fuzzy, c-format, boost-format
 msgid ""
-"patch-search [options] [querystring...]\n"
+"patch-search [OPTIONS] [querystring...]\n"
 "\n"
 "Search for patches matching given search strings. This is an alias for "
 "'%s'.\n"
@@ -4251,7 +4251,7 @@ msgstr ""
 #: src/Zypper.cc:3823
 #, fuzzy
 msgid ""
-"ping [options]\n"
+"ping [OPTIONS]\n"
 "\n"
 "This command has dummy implementation which always returns 0.\n"
 msgstr ""
@@ -7282,7 +7282,7 @@ msgstr "Angi '%s' for '%s' eller '%s' for '%s' hvis ingenting annet fungerer."
 #~ msgstr "Ny nøkkel for signering av pakkebrønn eller pakke mottatt:"
 
 #~ msgid ""
-#~ "removeservice (rs) [options] <alias|#|URI>\n"
+#~ "removeservice (rs) [OPTIONS] <alias|#|URI>\n"
 #~ "\n"
 #~ "Remove specified repository index service from the system.\n"
 #~ "\n"
@@ -7299,7 +7299,7 @@ msgstr "Angi '%s' for '%s' eller '%s' for '%s' hvis ingenting annet fungerer."
 #~ "    --loose-query  Ignorer kommandostreng i URI.\n"
 
 #~ msgid ""
-#~ "addlock (al) [options] <packagename> ...\n"
+#~ "addlock (al) [OPTIONS] <PACKAGENAME> ...\n"
 #~ "\n"
 #~ "Add a package lock. Specify packages to lock by exact name or by a glob "
 #~ "pattern using '*' and '?' wildcard characters.\n"
@@ -7320,7 +7320,7 @@ msgstr "Angi '%s' for '%s' eller '%s' for '%s' hvis ingenting annet fungerer."
 #~ "                          Standard: %s.\n"
 
 #~ msgid ""
-#~ "removelock (rl) [options] <lock-number|packagename> ...\n"
+#~ "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ...\n"
 #~ "\n"
 #~ "Remove a package lock. Specify the lock to remove by its number obtained "
 #~ "with '%s' or by package name.\n"
@@ -7397,8 +7397,8 @@ msgstr "Angi '%s' for '%s' eller '%s' for '%s' hvis ingenting annet fungerer."
 
 #, fuzzy
 #~ msgid ""
-#~ "addrepo (ar) [options] <URI> <alias>\n"
-#~ "addrepo (ar) [options] <file.repo>\n"
+#~ "addrepo (ar) [OPTIONS] <URI> <alias>\n"
+#~ "addrepo (ar) [OPTIONS] <file.repo>\n"
 #~ "\n"
 #~ "Add a repository to the system. The repository can be specified by its "
 #~ "URI or can be read from specified .repo file (even remote).\n"
@@ -7498,7 +7498,7 @@ msgstr "Angi '%s' for '%s' eller '%s' for '%s' hvis ingenting annet fungerer."
 
 #, fuzzy
 #~ msgid ""
-#~ "list-patches (lp) [options]\n"
+#~ "list-patches (lp) [OPTIONS]\n"
 #~ "\n"
 #~ "List all available needed patches.\n"
 #~ "\n"
@@ -7583,7 +7583,7 @@ msgstr "Angi '%s' for '%s' eller '%s' for '%s' hvis ingenting annet fungerer."
 #~ msgstr "Ikke nødvendig"
 
 #~ msgid ""
-#~ "patch-check (pchk) [options]\n"
+#~ "patch-check (pchk) [OPTIONS]\n"
 #~ "\n"
 #~ "Check for available patches.\n"
 #~ "\n"
@@ -7794,7 +7794,7 @@ msgstr "Angi '%s' for '%s' eller '%s' for '%s' hvis ingenting annet fungerer."
 #~ "Andre oppdateringer er også tilgjengelig.\n"
 
 #~ msgid ""
-#~ "list-patches (lp) [options]\n"
+#~ "list-patches (lp) [OPTIONS]\n"
 #~ "\n"
 #~ "List all available needed patches.\n"
 #~ "\n"

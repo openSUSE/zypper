@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 15:50+0200\n"
+"POT-Creation-Date: 2018-09-07 16:01+0200\n"
 "PO-Revision-Date: 2018-08-04 20:01+0000\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -2070,7 +2070,7 @@ msgstr "非選項程式引數︰ "
 #: src/Zypper.cc:1817
 #, c-format, boost-format
 msgid ""
-"install (in) [options] <capability|rpm_file_uri> ...\n"
+"install (in) [OPTIONS] <capability|rpm_file_uri> ...\n"
 "\n"
 "Install packages with specified capabilities or RPM files with specified\n"
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
@@ -2158,7 +2158,7 @@ msgstr "以靜默方式安裝以指令行參數指定的未簽署 rpm 軟體包�
 #: src/Zypper.cc:1887
 #, c-format, boost-format
 msgid ""
-"remove (rm) [options] <capability> ...\n"
+"remove (rm) [OPTIONS] <capability> ...\n"
 "\n"
 "Remove packages with specified capabilities.\n"
 "A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
@@ -2195,7 +2195,7 @@ msgstr ""
 
 #: src/Zypper.cc:1925
 msgid ""
-"source-install (si) [options] <name> ...\n"
+"source-install (si) [OPTIONS] <name> ...\n"
 "\n"
 "Install specified source packages and their build dependencies.\n"
 "\n"
@@ -2229,7 +2229,7 @@ msgstr ""
 #: src/Zypper.cc:1972
 #, c-format, boost-format
 msgid ""
-"verify (ve) [options]\n"
+"verify (ve) [OPTIONS]\n"
 "\n"
 "Check whether dependencies of installed packages are satisfied and suggest "
 "to install or remove packages in order to repair the dependency problems.\n"
@@ -2259,7 +2259,7 @@ msgstr ""
 #: src/Zypper.cc:2021
 #, c-format, boost-format
 msgid ""
-"install-new-recommends (inr) [options]\n"
+"install-new-recommends (inr) [OPTIONS]\n"
 "\n"
 "Install newly added packages recommended by already installed packages. This "
 "can typically be used to install new language packages or drivers for newly "
@@ -2290,7 +2290,7 @@ msgstr ""
 #: src/Zypper.cc:2055
 #, c-format, boost-format
 msgid ""
-"addservice (as) [options] <URI> <alias>\n"
+"addservice (as) [OPTIONS] <URI> <alias>\n"
 "\n"
 "Add a repository index service to the system.\n"
 "\n"
@@ -2345,7 +2345,7 @@ msgstr "忽略位址中的查詢字串。"
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:2106
 msgid ""
-"removeservice (rs) [options] <alias|#|URI>\n"
+"removeservice (rs) [OPTIONS] <alias|#|URI>\n"
 "\n"
 "Remove specified repository index service from the system..\n"
 "\n"
@@ -2521,7 +2521,7 @@ msgstr "依名稱排序清單。"
 
 #: src/Zypper.cc:2240
 msgid ""
-"services (ls) [options]\n"
+"services (ls) [OPTIONS]\n"
 "\n"
 "List defined services.\n"
 "\n"
@@ -2576,7 +2576,7 @@ msgstr "同時也回復服務軟體庫的啟用/停用狀態。"
 
 #: src/Zypper.cc:2285
 msgid ""
-"refresh-services (refs) [options]\n"
+"refresh-services (refs) [OPTIONS]\n"
 "\n"
 "Refresh defined repository index services.\n"
 "\n"
@@ -2599,8 +2599,8 @@ msgstr ""
 #: src/Zypper.cc:2312
 #, c-format, boost-format
 msgid ""
-"addrepo (ar) [options] <URI> <alias>\n"
-"addrepo (ar) [options] <file.repo>\n"
+"addrepo (ar) [OPTIONS] <URI> <alias>\n"
+"addrepo (ar) [OPTIONS] <file.repo>\n"
 "\n"
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote).\n"
@@ -2713,7 +2713,7 @@ msgstr "依別名排列清單。"
 
 #: src/Zypper.cc:2412
 msgid ""
-"repos (lr) [options] [repo] ...\n"
+"repos (lr) [OPTIONS] [repo] ...\n"
 "\n"
 "List all defined repositories.\n"
 "\n"
@@ -2754,7 +2754,7 @@ msgstr ""
 
 #: src/Zypper.cc:2446
 msgid ""
-"removerepo (rr) [options] <alias|#|URI>\n"
+"removerepo (rr) [OPTIONS] <alias|#|URI>\n"
 "\n"
 "Remove repository specified by alias, number or URI.\n"
 "\n"
@@ -2782,7 +2782,7 @@ msgstr "將由別名、編號或位址指定的軟體庫改名為新別名。"
 
 #: src/Zypper.cc:2477
 msgid ""
-"renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
+"renamerepo (nr) [OPTIONS] <alias|#|URI> <new-alias>\n"
 "\n"
 "Assign new alias to the repository specified by alias, number or URI.\n"
 "\n"
@@ -2995,7 +2995,7 @@ msgstr ""
 #: src/Zypper.cc:2664
 #, c-format, boost-format
 msgid ""
-"list-updates (lu) [options]\n"
+"list-updates (lu) [OPTIONS]\n"
 "\n"
 "List all available updates.\n"
 "\n"
@@ -3034,7 +3034,7 @@ msgstr ""
 #: src/Zypper.cc:2721
 #, c-format, boost-format
 msgid ""
-"update (up) [options] [packagename] ...\n"
+"update (up) [OPTIONS] [packagename] ...\n"
 "\n"
 "Update all or specified installed packages with newer versions, if "
 "possible.\n"
@@ -3097,7 +3097,7 @@ msgstr ""
 #: src/Zypper.cc:2799
 #, c-format, boost-format
 msgid ""
-"patch [options]\n"
+"patch [OPTIONS]\n"
 "\n"
 "Install all available needed patches.\n"
 "\n"
@@ -3248,7 +3248,7 @@ msgstr ""
 #: src/Zypper.cc:2909
 #, c-format, boost-format
 msgid ""
-"dist-upgrade (dup) [options]\n"
+"dist-upgrade (dup) [OPTIONS]\n"
 "\n"
 "Perform a distribution upgrade.\n"
 "\n"
@@ -3297,7 +3297,7 @@ msgstr ""
 
 #: src/Zypper.cc:2975
 msgid ""
-"search (se) [options] [querystring] ...\n"
+"search (se) [OPTIONS] [querystring] ...\n"
 "\n"
 "Search for packages matching any of the given search strings.\n"
 "\n"
@@ -3493,7 +3493,7 @@ msgstr "以軟體庫排列清單。"
 
 #: src/Zypper.cc:3122
 msgid ""
-"packages (pa) [options] [repository] ...\n"
+"packages (pa) [OPTIONS] [repository] ...\n"
 "\n"
 "List all packages available in specified repositories.\n"
 "\n"
@@ -3548,7 +3548,7 @@ msgstr "僅顯示未安裝的樣式。"
 
 #: src/Zypper.cc:3170
 msgid ""
-"patterns (pt) [options] [repository] ...\n"
+"patterns (pt) [OPTIONS] [repository] ...\n"
 "\n"
 "List all patterns available in specified repositories.\n"
 "\n"
@@ -3570,7 +3570,7 @@ msgstr ""
 
 #: src/Zypper.cc:3198
 msgid ""
-"products (pd) [options] [repository] ...\n"
+"products (pd) [OPTIONS] [repository] ...\n"
 "\n"
 "List all products available in specified repositories.\n"
 "\n"
@@ -3598,7 +3598,7 @@ msgstr "僅限 XML 輸出：直接轉發在產品文件中找到的 XML 標記�
 #: src/Zypper.cc:3232
 #, c-format, boost-format
 msgid ""
-"info (if) [options] <name> ...\n"
+"info (if) [OPTIONS] <name> ...\n"
 "\n"
 "Show detailed information for specified packages.\n"
 "By default the packages which match exactly the given names are shown.\n"
@@ -3737,7 +3737,7 @@ msgstr ""
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:3417
-msgid "addlock (al) [options] <packagename> ..."
+msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
 msgstr "addlock (al) [選項] <軟體包名稱> ..."
 
 #. translators: command description
@@ -3763,7 +3763,7 @@ msgstr "軟體包 (%1%) 的類型。"
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:3446
-msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr "removelock (rl) [選項] <鎖定編號|軟體包名稱> ..."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
@@ -3821,7 +3821,7 @@ msgstr "顯示作業系統標籤。"
 
 #: src/Zypper.cc:3509
 msgid ""
-"targetos (tos) [options]\n"
+"targetos (tos) [OPTIONS]\n"
 "\n"
 "Show various information about the target operating system.\n"
 "By default, an ID string is shown.\n"
@@ -3894,7 +3894,7 @@ msgstr ""
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:3599
-msgid "ps [options]"
+msgid "ps [OPTIONS]"
 msgstr "ps [選項]"
 
 #. translators: command description
@@ -3932,7 +3932,7 @@ msgstr "將除錯輸出寫入到檔案 <路徑>。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3630
-msgid "download [options] <packages>..."
+msgid "download [OPTIONS] <PACKAGES>..."
 msgstr "download [選項] <軟體包>..."
 
 #. translators: command description
@@ -3972,7 +3972,7 @@ msgstr "不下載任何軟體包， 只報告將要執行的操作。"
 
 #: src/Zypper.cc:3646
 msgid ""
-"download [options] <packages>...\n"
+"download [OPTIONS] <PACKAGES>...\n"
 "\n"
 "Download rpms specified on the commandline to a local directory.\n"
 "Per default packages are downloaded to the libzypp package cache\n"
@@ -4124,7 +4124,7 @@ msgstr ""
 #: src/Zypper.cc:3796
 #, c-format, boost-format
 msgid ""
-"patch-search [options] [querystring...]\n"
+"patch-search [OPTIONS] [querystring...]\n"
 "\n"
 "Search for patches matching given search strings. This is an alias for "
 "'%s'.\n"
@@ -4146,7 +4146,7 @@ msgstr "此指令是一個假動作，它只會回應 0。"
 #. translators: this is just a legacy command
 #: src/Zypper.cc:3823
 msgid ""
-"ping [options]\n"
+"ping [OPTIONS]\n"
 "\n"
 "This command has dummy implementation which always returns 0.\n"
 msgstr ""
@@ -4689,7 +4689,7 @@ msgstr "列出目前的軟體包鎖定。"
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:230
 msgid "locks (ll) [options]"
-msgstr "locks (ll) [選項]"
+msgstr ""
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -7008,6 +7008,9 @@ msgstr "無效的答案 '%s'。"
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%s' 。"
 
+#~ msgid "locks (ll) [OPTIONS]"
+#~ msgstr "locks (ll) [選項]"
+
 #~ msgid ""
 #~ "service-types (st)\n"
 #~ "\n"
@@ -7052,7 +7055,7 @@ msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%
 #~ msgstr "接收到新的軟體包簽章："
 
 #~ msgid ""
-#~ "removeservice (rs) [options] <alias|#|URI>\n"
+#~ "removeservice (rs) [OPTIONS] <alias|#|URI>\n"
 #~ "\n"
 #~ "Remove specified repository index service from the system.\n"
 #~ "\n"
@@ -7069,7 +7072,7 @@ msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%
 #~ "    --loose-query  忽略位址中的查詢字串。\n"
 
 #~ msgid ""
-#~ "addlock (al) [options] <packagename> ...\n"
+#~ "addlock (al) [OPTIONS] <PACKAGENAME> ...\n"
 #~ "\n"
 #~ "Add a package lock. Specify packages to lock by exact name or by a glob "
 #~ "pattern using '*' and '?' wildcard characters.\n"
@@ -7090,7 +7093,7 @@ msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%
 #~ "                          預設︰%s。\n"
 
 #~ msgid ""
-#~ "removelock (rl) [options] <lock-number|packagename> ...\n"
+#~ "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ...\n"
 #~ "\n"
 #~ "Remove a package lock. Specify the lock to remove by its number obtained "
 #~ "with '%s' or by package name.\n"
@@ -7140,8 +7143,8 @@ msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%
 #~ msgstr "套件庫類型 (%1%)。"
 
 #~ msgid ""
-#~ "addrepo (ar) [options] <URI> <alias>\n"
-#~ "addrepo (ar) [options] <file.repo>\n"
+#~ "addrepo (ar) [OPTIONS] <URI> <alias>\n"
+#~ "addrepo (ar) [OPTIONS] <file.repo>\n"
 #~ "\n"
 #~ "Add a repository to the system. The repository can be specified by its "
 #~ "URI or can be read from specified .repo file (even remote).\n"
@@ -7210,7 +7213,7 @@ msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%
 #~ "-K, --no-keep-packages    \n"
 
 #~ msgid ""
-#~ "addservice (as) [options] <URI> <alias>\n"
+#~ "addservice (as) [OPTIONS] <URI> <alias>\n"
 #~ "\n"
 #~ "Add a repository index service to the system.\n"
 #~ "\n"
@@ -7311,8 +7314,8 @@ msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%
 #~ "繼續進行將有風險！無論如何要繼續嗎？"
 
 #~ msgid ""
-#~ "addrepo (ar) [options] <URI> <alias>\n"
-#~ "addrepo (ar) [options] <file.repo>\n"
+#~ "addrepo (ar) [OPTIONS] <URI> <alias>\n"
+#~ "addrepo (ar) [OPTIONS] <file.repo>\n"
 #~ "\n"
 #~ "Add a repository to the system. The repository can be specified by its "
 #~ "URI or can be read from specified .repo file (even remote).\n"
@@ -7408,7 +7411,7 @@ msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%
 #~ msgstr "需要重新啟動套件管理員"
 
 #~ msgid ""
-#~ "list-patches (lp) [options]\n"
+#~ "list-patches (lp) [OPTIONS]\n"
 #~ "\n"
 #~ "List all available needed patches.\n"
 #~ "\n"
@@ -7488,7 +7491,7 @@ msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%
 #~ msgstr "不需要"
 
 #~ msgid ""
-#~ "patch-check (pchk) [options]\n"
+#~ "patch-check (pchk) [OPTIONS]\n"
 #~ "\n"
 #~ "Check for available patches.\n"
 #~ "\n"

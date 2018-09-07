@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 15:50+0200\n"
+"POT-Creation-Date: 2018-09-07 16:01+0200\n"
 "PO-Revision-Date: 2018-07-21 17:45+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
@@ -2350,7 +2350,7 @@ msgstr "Аргументы программы, не являющиеся пар�
 #: src/Zypper.cc:1817
 #, c-format, boost-format
 msgid ""
-"install (in) [options] <capability|rpm_file_uri> ...\n"
+"install (in) [OPTIONS] <capability|rpm_file_uri> ...\n"
 "\n"
 "Install packages with specified capabilities or RPM files with specified\n"
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
@@ -2451,7 +2451,7 @@ msgstr ""
 #: src/Zypper.cc:1887
 #, c-format, boost-format
 msgid ""
-"remove (rm) [options] <capability> ...\n"
+"remove (rm) [OPTIONS] <capability> ...\n"
 "\n"
 "Remove packages with specified capabilities.\n"
 "A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
@@ -2490,7 +2490,7 @@ msgstr ""
 
 #: src/Zypper.cc:1925
 msgid ""
-"source-install (si) [options] <name> ...\n"
+"source-install (si) [OPTIONS] <name> ...\n"
 "\n"
 "Install specified source packages and their build dependencies.\n"
 "\n"
@@ -2529,7 +2529,7 @@ msgstr ""
 #: src/Zypper.cc:1972
 #, c-format, boost-format
 msgid ""
-"verify (ve) [options]\n"
+"verify (ve) [OPTIONS]\n"
 "\n"
 "Check whether dependencies of installed packages are satisfied and suggest "
 "to install or remove packages in order to repair the dependency problems.\n"
@@ -2563,7 +2563,7 @@ msgstr ""
 #: src/Zypper.cc:2021
 #, c-format, boost-format
 msgid ""
-"install-new-recommends (inr) [options]\n"
+"install-new-recommends (inr) [OPTIONS]\n"
 "\n"
 "Install newly added packages recommended by already installed packages. This "
 "can typically be used to install new language packages or drivers for newly "
@@ -2597,7 +2597,7 @@ msgstr ""
 #: src/Zypper.cc:2055
 #, c-format, boost-format
 msgid ""
-"addservice (as) [options] <URI> <alias>\n"
+"addservice (as) [OPTIONS] <URI> <alias>\n"
 "\n"
 "Add a repository index service to the system.\n"
 "\n"
@@ -2653,7 +2653,7 @@ msgstr "Игнорировать строку запроса в URI-адресе
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:2106
 msgid ""
-"removeservice (rs) [options] <alias|#|URI>\n"
+"removeservice (rs) [OPTIONS] <alias|#|URI>\n"
 "\n"
 "Remove specified repository index service from the system..\n"
 "\n"
@@ -2837,7 +2837,7 @@ msgstr "Сортировать список по именам."
 
 #: src/Zypper.cc:2240
 msgid ""
-"services (ls) [options]\n"
+"services (ls) [OPTIONS]\n"
 "\n"
 "List defined services.\n"
 "\n"
@@ -2893,7 +2893,7 @@ msgstr ""
 
 #: src/Zypper.cc:2285
 msgid ""
-"refresh-services (refs) [options]\n"
+"refresh-services (refs) [OPTIONS]\n"
 "\n"
 "Refresh defined repository index services.\n"
 "\n"
@@ -2917,8 +2917,8 @@ msgstr ""
 #: src/Zypper.cc:2312
 #, c-format, boost-format
 msgid ""
-"addrepo (ar) [options] <URI> <alias>\n"
-"addrepo (ar) [options] <file.repo>\n"
+"addrepo (ar) [OPTIONS] <URI> <alias>\n"
+"addrepo (ar) [OPTIONS] <file.repo>\n"
 "\n"
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote).\n"
@@ -3036,7 +3036,7 @@ msgstr "Сортировать список по псевдониму."
 
 #: src/Zypper.cc:2412
 msgid ""
-"repos (lr) [options] [repo] ...\n"
+"repos (lr) [OPTIONS] [repo] ...\n"
 "\n"
 "List all defined repositories.\n"
 "\n"
@@ -3079,7 +3079,7 @@ msgstr ""
 
 #: src/Zypper.cc:2446
 msgid ""
-"removerepo (rr) [options] <alias|#|URI>\n"
+"removerepo (rr) [OPTIONS] <alias|#|URI>\n"
 "\n"
 "Remove repository specified by alias, number or URI.\n"
 "\n"
@@ -3110,7 +3110,7 @@ msgstr ""
 
 #: src/Zypper.cc:2477
 msgid ""
-"renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
+"renamerepo (nr) [OPTIONS] <alias|#|URI> <new-alias>\n"
 "\n"
 "Assign new alias to the repository specified by alias, number or URI.\n"
 "\n"
@@ -3331,7 +3331,7 @@ msgstr ""
 #: src/Zypper.cc:2664
 #, c-format, boost-format
 msgid ""
-"list-updates (lu) [options]\n"
+"list-updates (lu) [OPTIONS]\n"
 "\n"
 "List all available updates.\n"
 "\n"
@@ -3374,7 +3374,7 @@ msgstr ""
 #: src/Zypper.cc:2721
 #, c-format, boost-format
 msgid ""
-"update (up) [options] [packagename] ...\n"
+"update (up) [OPTIONS] [packagename] ...\n"
 "\n"
 "Update all or specified installed packages with newer versions, if "
 "possible.\n"
@@ -3442,7 +3442,7 @@ msgstr ""
 #: src/Zypper.cc:2799
 #, c-format, boost-format
 msgid ""
-"patch [options]\n"
+"patch [OPTIONS]\n"
 "\n"
 "Install all available needed patches.\n"
 "\n"
@@ -3604,7 +3604,7 @@ msgstr ""
 #: src/Zypper.cc:2909
 #, c-format, boost-format
 msgid ""
-"dist-upgrade (dup) [options]\n"
+"dist-upgrade (dup) [OPTIONS]\n"
 "\n"
 "Perform a distribution upgrade.\n"
 "\n"
@@ -3658,7 +3658,7 @@ msgstr ""
 
 #: src/Zypper.cc:2975
 msgid ""
-"search (se) [options] [querystring] ...\n"
+"search (se) [OPTIONS] [querystring] ...\n"
 "\n"
 "Search for packages matching any of the given search strings.\n"
 "\n"
@@ -3866,7 +3866,7 @@ msgstr "Сортировать по репозиториям."
 
 #: src/Zypper.cc:3122
 msgid ""
-"packages (pa) [options] [repository] ...\n"
+"packages (pa) [OPTIONS] [repository] ...\n"
 "\n"
 "List all packages available in specified repositories.\n"
 "\n"
@@ -3922,7 +3922,7 @@ msgstr "Показывать только неустановленные шаб�
 
 #: src/Zypper.cc:3170
 msgid ""
-"patterns (pt) [options] [repository] ...\n"
+"patterns (pt) [OPTIONS] [repository] ...\n"
 "\n"
 "List all patterns available in specified repositories.\n"
 "\n"
@@ -3944,7 +3944,7 @@ msgstr ""
 
 #: src/Zypper.cc:3198
 msgid ""
-"products (pd) [options] [repository] ...\n"
+"products (pd) [OPTIONS] [repository] ...\n"
 "\n"
 "List all products available in specified repositories.\n"
 "\n"
@@ -3972,7 +3972,7 @@ msgstr "Только XML-вывод: вывести только теги XML и
 #: src/Zypper.cc:3232
 #, c-format, boost-format
 msgid ""
-"info (if) [options] <name> ...\n"
+"info (if) [OPTIONS] <name> ...\n"
 "\n"
 "Show detailed information for specified packages.\n"
 "By default the packages which match exactly the given names are shown.\n"
@@ -4114,7 +4114,7 @@ msgstr ""
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:3417
-msgid "addlock (al) [options] <packagename> ..."
+msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
 msgstr "addlock (al) [параметры] <имя_пакета>"
 
 #. translators: command description
@@ -4140,7 +4140,7 @@ msgstr "Тип пакета (%1%)."
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:3446
-msgid "removelock (rl) [options] <lock-number|packagename> ..."
+msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr "removelock (rl) <номер-блокировки|имя-пакета>"
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
@@ -4200,7 +4200,7 @@ msgstr "Показывать метку операционной системы.
 
 #: src/Zypper.cc:3509
 msgid ""
-"targetos (tos) [options]\n"
+"targetos (tos) [OPTIONS]\n"
 "\n"
 "Show various information about the target operating system.\n"
 "By default, an ID string is shown.\n"
@@ -4273,7 +4273,7 @@ msgstr ""
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:3599
-msgid "ps [options]"
+msgid "ps [OPTIONS]"
 msgstr "ps [параметры]"
 
 #. translators: command description
@@ -4315,7 +4315,7 @@ msgstr "Записать выходные данные отладки в фай�
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3630
-msgid "download [options] <packages>..."
+msgid "download [OPTIONS] <PACKAGES>..."
 msgstr "download [параметры] <пакеты>..."
 
 #. translators: command description
@@ -4358,7 +4358,7 @@ msgstr "Не скачивать пакеты, только сообщить о �
 
 #: src/Zypper.cc:3646
 msgid ""
-"download [options] <packages>...\n"
+"download [OPTIONS] <PACKAGES>...\n"
 "\n"
 "Download rpms specified on the commandline to a local directory.\n"
 "Per default packages are downloaded to the libzypp package cache\n"
@@ -4519,7 +4519,7 @@ msgstr ""
 #: src/Zypper.cc:3796
 #, c-format, boost-format
 msgid ""
-"patch-search [options] [querystring...]\n"
+"patch-search [OPTIONS] [querystring...]\n"
 "\n"
 "Search for patches matching given search strings. This is an alias for "
 "'%s'.\n"
@@ -4542,7 +4542,7 @@ msgstr "Эта команда реализована фиктивно и все�
 #. translators: this is just a legacy command
 #: src/Zypper.cc:3823
 msgid ""
-"ping [options]\n"
+"ping [OPTIONS]\n"
 "\n"
 "This command has dummy implementation which always returns 0.\n"
 msgstr ""
@@ -5110,7 +5110,7 @@ msgstr "Вывести список блокировок пакетов."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:230
 msgid "locks (ll) [options]"
-msgstr "блокировки (ll) [параметры]"
+msgstr ""
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -7565,6 +7565,9 @@ msgstr ""
 "Введите \"%s\" для \"%s\" или \"%s\" для \"%s\", если больше ничего не "
 "работает."
 
+#~ msgid "locks (ll) [OPTIONS]"
+#~ msgstr "блокировки (ll) [параметры]"
+
 #~ msgid ""
 #~ "service-types (st)\n"
 #~ "\n"
@@ -7611,7 +7614,7 @@ msgstr ""
 #~ msgstr "Получен ключ подписи нового репозитория или пакета:"
 
 #~ msgid ""
-#~ "removeservice (rs) [options] <alias|#|URI>\n"
+#~ "removeservice (rs) [OPTIONS] <alias|#|URI>\n"
 #~ "\n"
 #~ "Remove specified repository index service from the system.\n"
 #~ "\n"
@@ -7629,7 +7632,7 @@ msgstr ""
 #~ "    --loose-query  Игнорировать строку запроса в URI-адресе.\n"
 
 #~ msgid ""
-#~ "addlock (al) [options] <packagename> ...\n"
+#~ "addlock (al) [OPTIONS] <PACKAGENAME> ...\n"
 #~ "\n"
 #~ "Add a package lock. Specify packages to lock by exact name or by a glob "
 #~ "pattern using '*' and '?' wildcard characters.\n"
@@ -7651,7 +7654,7 @@ msgstr ""
 #~ "                          По умолчанию: %s.\n"
 
 #~ msgid ""
-#~ "removelock (rl) [options] <lock-number|packagename> ...\n"
+#~ "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ...\n"
 #~ "\n"
 #~ "Remove a package lock. Specify the lock to remove by its number obtained "
 #~ "with '%s' or by package name.\n"
@@ -7729,8 +7732,8 @@ msgstr ""
 #~ "Продолжать рискованно. Всё равно продолжить?"
 
 #~ msgid ""
-#~ "addrepo (ar) [options] <URI> <alias>\n"
-#~ "addrepo (ar) [options] <file.repo>\n"
+#~ "addrepo (ar) [OPTIONS] <URI> <alias>\n"
+#~ "addrepo (ar) [OPTIONS] <file.repo>\n"
 #~ "\n"
 #~ "Add a repository to the system. The repository can be specified by its "
 #~ "URI or can be read from specified .repo file (even remote).\n"
@@ -7833,7 +7836,7 @@ msgstr ""
 #~ msgstr "Требуется перезапуск менеджера пакетов"
 
 #~ msgid ""
-#~ "list-patches (lp) [options]\n"
+#~ "list-patches (lp) [OPTIONS]\n"
 #~ "\n"
 #~ "List all available needed patches.\n"
 #~ "\n"
@@ -7921,7 +7924,7 @@ msgstr ""
 #~ msgstr "Не нужно"
 
 #~ msgid ""
-#~ "patch-check (pchk) [options]\n"
+#~ "patch-check (pchk) [OPTIONS]\n"
 #~ "\n"
 #~ "Check for available patches.\n"
 #~ "\n"
@@ -7988,7 +7991,7 @@ msgstr ""
 #~ "\tzypper [--общие-параметры] <команда> [--параметры-команды] [аргументы]\n"
 
 #~ msgid ""
-#~ "patch [options]\n"
+#~ "patch [OPTIONS]\n"
 #~ "\n"
 #~ "Install all available needed patches.\n"
 #~ "\n"
@@ -8075,7 +8078,7 @@ msgstr ""
 #~ "устанавливать.\n"
 
 #~ msgid ""
-#~ "list-patches (lp) [options]\n"
+#~ "list-patches (lp) [OPTIONS]\n"
 #~ "\n"
 #~ "List all available needed patches.\n"
 #~ "\n"
@@ -8110,7 +8113,7 @@ msgstr ""
 #~ "даты.\n"
 
 #~ msgid ""
-#~ "download [options] <packages>...\n"
+#~ "download [OPTIONS] <PACKAGES>...\n"
 #~ "\n"
 #~ "Download rpms specified on the commandline to a local directory.\n"
 #~ "Per default packages are downloaded to the libzypp package cache\n"
@@ -8180,7 +8183,7 @@ msgstr ""
 #~ msgstr "Получение rpm исправления"
 
 #~ msgid ""
-#~ "download [options] <packages>...\n"
+#~ "download [OPTIONS] <PACKAGES>...\n"
 #~ "\n"
 #~ "Download rpms specified on the commandline to a local directory.\n"
 #~ "Per default packages are downloaded to the libzypp package cache\n"
@@ -8215,7 +8218,7 @@ msgstr ""
 #~ "                     было бы сделано.\n"
 
 #~ msgid ""
-#~ "refresh-services (refs) [options]\n"
+#~ "refresh-services (refs) [OPTIONS]\n"
 #~ "\n"
 #~ "Refresh defined repository index services.\n"
 #~ "\n"
@@ -8286,7 +8289,7 @@ msgstr ""
 #~ msgstr "Тип '%s' не поддерживает %s."
 
 #~ msgid ""
-#~ "install (in) [options] <capability|rpm_file_uri> ...\n"
+#~ "install (in) [OPTIONS] <capability|rpm_file_uri> ...\n"
 #~ "\n"
 #~ "Install packages with specified capabilities or RPM files with specified\n"
 #~ "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
@@ -8385,7 +8388,7 @@ msgstr ""
 #~ "-d, --download-only          Только загрузить пакеты, не устанавливать.\n"
 
 #~ msgid ""
-#~ "update (up) [options] [packagename] ...\n"
+#~ "update (up) [OPTIONS] [packagename] ...\n"
 #~ "\n"
 #~ "Update all or specified installed packages with newer versions, if "
 #~ "possible.\n"
@@ -8462,7 +8465,7 @@ msgstr ""
 #~ "устанавливать.\n"
 
 #~ msgid ""
-#~ "patch [options]\n"
+#~ "patch [OPTIONS]\n"
 #~ "\n"
 #~ "Install all available needed patches.\n"
 #~ "\n"
@@ -8534,7 +8537,7 @@ msgstr ""
 #~ "устанавливать.\n"
 
 #~ msgid ""
-#~ "dist-upgrade (dup) [options]\n"
+#~ "dist-upgrade (dup) [OPTIONS]\n"
 #~ "\n"
 #~ "Perform a distribution upgrade.\n"
 #~ "\n"
@@ -8628,7 +8631,7 @@ msgstr ""
 #~ "приоритетом. Используйте '%s' для его установки."
 
 #~ msgid ""
-#~ "search (se) [options] [querystring] ...\n"
+#~ "search (se) [OPTIONS] [querystring] ...\n"
 #~ "\n"
 #~ "Search for packages matching any of the given search strings.\n"
 #~ "\n"
@@ -8727,7 +8730,7 @@ msgstr ""
 #~ "регулярное выражение.\n"
 
 #~ msgid ""
-#~ "packages (pa) [options] [repository] ...\n"
+#~ "packages (pa) [OPTIONS] [repository] ...\n"
 #~ "\n"
 #~ "List all packages available in specified repositories.\n"
 #~ "\n"
@@ -8752,7 +8755,7 @@ msgstr ""
 #~ "-R, --sort-by-repo        Сортировать список по репозиторию.\n"
 
 #~ msgid ""
-#~ "source-install (si) [options] <name> ...\n"
+#~ "source-install (si) [OPTIONS] <name> ...\n"
 #~ "\n"
 #~ "Install specified source packages and their build dependencies.\n"
 #~ "\n"
@@ -8777,7 +8780,7 @@ msgstr ""
 #~ "репозиториев.\n"
 
 #~ msgid ""
-#~ "services (ls) [options]\n"
+#~ "services (ls) [OPTIONS]\n"
 #~ "\n"
 #~ "List defined services.\n"
 #~ "\n"
@@ -8792,7 +8795,7 @@ msgstr ""
 #~ "-U, --sort-by-uri         Sort the list by URI.\n"
 #~ "-N, --sort-by-name        Sort the list by name.\n"
 #~ msgstr ""
-#~ "services (ls) [options]\n"
+#~ "services (ls) [OPTIONS]\n"
 #~ "\n"
 #~ "Вывести список всех определённых служб.\n"
 #~ "\n"
@@ -8809,7 +8812,7 @@ msgstr ""
 #~ "-N, --sort-by-name        Сортировать список по имени.\n"
 
 #~ msgid ""
-#~ "repos (lr) [options] [repo] ...\n"
+#~ "repos (lr) [OPTIONS] [repo] ...\n"
 #~ "\n"
 #~ "List all defined repositories.\n"
 #~ "\n"
@@ -8851,7 +8854,7 @@ msgstr ""
 #~ "-N, --sort-by-name        Сортировать список по имени.\n"
 
 #~ msgid ""
-#~ "search (se) [options] [querystring] ...\n"
+#~ "search (se) [OPTIONS] [querystring] ...\n"
 #~ "\n"
 #~ "Search for packages matching any of the given search strings.\n"
 #~ "\n"
@@ -8954,7 +8957,7 @@ msgstr ""
 #~ "регулярное выражение.\n"
 
 #~ msgid ""
-#~ "search (se) [options] [querystring] ...\n"
+#~ "search (se) [OPTIONS] [querystring] ...\n"
 #~ "\n"
 #~ "Search for packages matching given search strings.\n"
 #~ "\n"
@@ -9014,7 +9017,7 @@ msgstr ""
 #~ "поиска.\n"
 
 #~ msgid ""
-#~ "info (if) [options] <name> ...\n"
+#~ "info (if) [OPTIONS] <name> ...\n"
 #~ "\n"
 #~ "Show detailed information for specified packages.\n"
 #~ "\n"
@@ -9051,7 +9054,7 @@ msgstr ""
 #~ "\t\t\t\tустановленных пакетов.\n"
 
 #~ msgid ""
-#~ "install (in) [options] <capability|rpm_file_uri> ...\n"
+#~ "install (in) [OPTIONS] <capability|rpm_file_uri> ...\n"
 #~ "\n"
 #~ "Install packages with specified capabilities or RPM files with specified\n"
 #~ "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
@@ -9190,8 +9193,8 @@ msgstr ""
 #~ msgstr "Не найдено исправлений, соответствующих '%s'."
 
 #~ msgid ""
-#~ "addrepo (ar) [options] <URI> <alias>\n"
-#~ "addrepo (ar) [options] <file.repo>\n"
+#~ "addrepo (ar) [OPTIONS] <URI> <alias>\n"
+#~ "addrepo (ar) [OPTIONS] <file.repo>\n"
 #~ "\n"
 #~ "Add a repository to the system. The repository can be specified by its "
 #~ "URI or can be read from specified .repo file (even remote).\n"
@@ -9260,7 +9263,7 @@ msgstr ""
 #~ "-K, --no-keep-packages    \n"
 
 #~ msgid ""
-#~ "addservice (as) [options] <URI> <alias>\n"
+#~ "addservice (as) [OPTIONS] <URI> <alias>\n"
 #~ "\n"
 #~ "Add a repository index service to the system.\n"
 #~ "\n"
