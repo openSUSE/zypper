@@ -3529,6 +3529,18 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("versioncmp (vcmp) <VERSION1> <VERSION2>")
+    )
+    .description(	// translators: command description
+    _("Compare the versions supplied as arguments.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-m, --match",	// translators: -m, --match
+             _("Takes missing release number as any release.") )
+    ;
+#if 0
     _command_help = _(
       "versioncmp (vcmp) <version1> <version2>\n"
       "\n"
@@ -3537,6 +3549,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-m, --match  Takes missing release number as any release.\n"
     );
+#endif
     break;
   }
 
