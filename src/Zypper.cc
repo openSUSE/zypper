@@ -2048,6 +2048,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = verify_options;
+#if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
       "verify (ve) [OPTIONS]\n"
@@ -2065,6 +2066,26 @@ void Zypper::processCommandOptions()
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
+#endif
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("verify (ve) [OPTIONS]")
+    )
+    .description(	// translators: command description
+    _("Check whether dependencies of installed packages are satisfied and suggest to install or remove packages in order to repair the dependency problems.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Load only the specified repository.") )
+    .option( "-D, --dry-run",	// translators: -D, --dry-run
+             _("Test the repair, do not actually do anything to the system.") )
+    .option( "--details",	// translators: --details
+             _("Show the detailed installation summary.") )
+#warning FIX --download it takes a <MODE> argument in probably all commands
+    .option( "--download",	// translators: --download
+             str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed" )
+    .option( "-d, --download-only",	// translators: -d, --download-only
+             _("Only download the packages, do not install.") )
     .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
 
     .optionSectionSolverOptions()
