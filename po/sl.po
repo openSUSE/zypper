@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 15:02+0200\n"
+"POT-Creation-Date: 2018-09-07 15:05+0200\n"
 "PO-Revision-Date: 2005-08-24 17:37+0200\n"
 "Last-Translator: Janez Krek <janez.krek@euroteh.si>\n"
 "Language-Team: Slovenščina <sl@li.org>\n"
@@ -2124,7 +2124,7 @@ msgstr ""
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 
-#: src/Zypper.cc:1241 src/Zypper.cc:3927
+#: src/Zypper.cc:1241 src/Zypper.cc:3938
 msgid "Entering non-interactive mode."
 msgstr ""
 
@@ -2199,7 +2199,7 @@ msgstr ""
 msgid "See '%s' for all available options."
 msgstr ""
 
-#: src/Zypper.cc:1733 src/Zypper.cc:3943
+#: src/Zypper.cc:1733 src/Zypper.cc:3954
 msgid "Non-option program arguments: "
 msgstr ""
 
@@ -3692,7 +3692,17 @@ msgid ""
 "                     but show which source rpms are missing or extraneous.\n"
 msgstr ""
 
-#: src/Zypper.cc:3734
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:3735
+msgid "quit (exit, ^D)"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:3738
+msgid "Quit the current zypper shell."
+msgstr ""
+
+#: src/Zypper.cc:3744
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -3701,7 +3711,7 @@ msgid ""
 "This command has no additional options.\n"
 msgstr ""
 
-#: src/Zypper.cc:3751
+#: src/Zypper.cc:3762
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -3711,7 +3721,7 @@ msgid ""
 msgstr ""
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3769
+#: src/Zypper.cc:3780
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -3719,7 +3729,7 @@ msgid ""
 msgstr ""
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3785
+#: src/Zypper.cc:3796
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -3729,7 +3739,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3807
+#: src/Zypper.cc:3818
 msgid ""
 "mount\n"
 "\n"
@@ -3741,7 +3751,7 @@ msgid ""
 "-r, --recurse        Dive into subdirectories.\n"
 msgstr ""
 
-#: src/Zypper.cc:3835
+#: src/Zypper.cc:3846
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -3751,42 +3761,42 @@ msgid ""
 msgstr ""
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3852
+#: src/Zypper.cc:3863
 msgid ""
 "ping [options]\n"
 "\n"
 "This command has dummy implementation which always returns 0.\n"
 msgstr ""
 
-#: src/Zypper.cc:3895 src/Zypper.cc:5967
+#: src/Zypper.cc:3906 src/Zypper.cc:5978
 msgid "Unexpected program flow."
 msgstr ""
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:4026
+#: src/Zypper.cc:4037
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
 
-#: src/Zypper.cc:4049
+#: src/Zypper.cc:4060
 #, fuzzy
 msgid "Root privileges are required for refreshing services."
 msgstr "Za uporabo program se zahteva root privilegij."
 
-#: src/Zypper.cc:4073 src/Zypper.cc:4152 src/Zypper.cc:4340
+#: src/Zypper.cc:4084 src/Zypper.cc:4163 src/Zypper.cc:4351
 #, fuzzy
 msgid "Root privileges are required for modifying system services."
 msgstr "Za uporabo program se zahteva root privilegij."
 
 # e.g 'not a SUSE LINUX CD-ROM'
-#: src/Zypper.cc:4136
+#: src/Zypper.cc:4147
 #, fuzzy, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "To ni veljaven CCW naslov."
 
-#: src/Zypper.cc:4138
+#: src/Zypper.cc:4149
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -3795,243 +3805,243 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:4163 src/utils/messages.cc:47
+#: src/Zypper.cc:4174 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr ""
 
-#: src/Zypper.cc:4195
+#: src/Zypper.cc:4206
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Gostitelja %s ni."
 
-#: src/Zypper.cc:4222 src/Zypper.cc:4339 src/Zypper.cc:4443 src/Zypper.cc:4495
+#: src/Zypper.cc:4233 src/Zypper.cc:4350 src/Zypper.cc:4454 src/Zypper.cc:4506
 #, fuzzy
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Za uporabo program se zahteva root privilegij."
 
-#: src/Zypper.cc:4248 src/Zypper.cc:4607
+#: src/Zypper.cc:4259 src/Zypper.cc:4618
 msgid "Too few arguments."
 msgstr ""
 
-#: src/Zypper.cc:4271
+#: src/Zypper.cc:4282
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 
-#: src/Zypper.cc:4301
+#: src/Zypper.cc:4312
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 
-#: src/Zypper.cc:4320
+#: src/Zypper.cc:4331
 msgid "Specified type is not a valid repository type:"
 msgstr ""
 
-#: src/Zypper.cc:4321
+#: src/Zypper.cc:4332
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4386
+#: src/Zypper.cc:4397
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Gostitelja %s ni."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4419
+#: src/Zypper.cc:4430
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Gostitelja %s ni."
 
-#: src/Zypper.cc:4450
+#: src/Zypper.cc:4461
 msgid "Too few arguments. At least URI and alias are required."
 msgstr ""
 
-#: src/Zypper.cc:4474
+#: src/Zypper.cc:4485
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Gostitelja %s ni."
 
-#: src/Zypper.cc:4534
+#: src/Zypper.cc:4545
 #, fuzzy, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Gostitelja %s ni."
 
-#: src/Zypper.cc:4551
+#: src/Zypper.cc:4562
 #, fuzzy
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Za uporabo program se zahteva root privilegij."
 
-#: src/Zypper.cc:4557
+#: src/Zypper.cc:4568
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr ""
 
-#: src/Zypper.cc:4565
+#: src/Zypper.cc:4576
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr ""
 
-#: src/Zypper.cc:4589
+#: src/Zypper.cc:4600
 #, fuzzy
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Za uporabo program se zahteva root privilegij."
 
-#: src/Zypper.cc:4608
+#: src/Zypper.cc:4619
 msgid "At least one package name is required."
 msgstr ""
 
-#: src/Zypper.cc:4617 src/Zypper.cc:4866 src/Zypper.cc:4903
+#: src/Zypper.cc:4628 src/Zypper.cc:4877 src/Zypper.cc:4914
 #, fuzzy
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Za uporabo program se zahteva root privilegij."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4629
+#: src/Zypper.cc:4640
 msgid "Ignoring arguments, marking the entire repository."
 msgstr ""
 
-#: src/Zypper.cc:4640
+#: src/Zypper.cc:4651
 #, fuzzy, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Neznan monitor:"
 
-#: src/Zypper.cc:4650
+#: src/Zypper.cc:4661
 #, fuzzy
 msgid "Cannot uninstall patches."
 msgstr "Nameščeni paketi"
 
-#: src/Zypper.cc:4651
+#: src/Zypper.cc:4662
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
 
-#: src/Zypper.cc:4661
+#: src/Zypper.cc:4672
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr ""
 
-#: src/Zypper.cc:4681
+#: src/Zypper.cc:4692
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr ""
 
-#: src/Zypper.cc:4690
+#: src/Zypper.cc:4701
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr ""
 
-#: src/Zypper.cc:4712
+#: src/Zypper.cc:4723
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 
-#: src/Zypper.cc:4733
+#: src/Zypper.cc:4744
 msgid "Plain RPM files cache"
 msgstr ""
 
-#: src/Zypper.cc:4755
+#: src/Zypper.cc:4766
 msgid "No valid arguments specified."
 msgstr ""
 
-#: src/Zypper.cc:4772 src/Zypper.cc:4919
+#: src/Zypper.cc:4783 src/Zypper.cc:4930
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr ""
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4809 src/Zypper.cc:5396
+#: src/Zypper.cc:4820 src/Zypper.cc:5407
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr ""
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4817
+#: src/Zypper.cc:4828
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr ""
 
-#: src/Zypper.cc:4858
+#: src/Zypper.cc:4869
 msgid "Source package name is a required argument."
 msgstr ""
 
-#: src/Zypper.cc:4976 src/Zypper.cc:5315 src/Zypper.cc:5415 src/Zypper.cc:5625
-#: src/Zypper.cc:5676 src/Zypper.cc:5716
+#: src/Zypper.cc:4987 src/Zypper.cc:5326 src/Zypper.cc:5426 src/Zypper.cc:5636
+#: src/Zypper.cc:5687 src/Zypper.cc:5727
 #, fuzzy, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Neznan monitor:"
 
-#: src/Zypper.cc:5001 src/repos.cc:796
+#: src/Zypper.cc:5012 src/repos.cc:796
 #, fuzzy, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Samodejna osvežitev"
 
 #. translators: empty search result message
-#: src/Zypper.cc:5157
+#: src/Zypper.cc:5168
 #, fuzzy
 msgid "No matching items found."
 msgstr "Ni napak."
 
-#: src/Zypper.cc:5192
+#: src/Zypper.cc:5203
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 
-#: src/Zypper.cc:5193
+#: src/Zypper.cc:5204
 msgid "See the above message for a hint."
 msgstr ""
 
-#: src/Zypper.cc:5194 src/repos.cc:1009
+#: src/Zypper.cc:5205 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 
-#: src/Zypper.cc:5275
+#: src/Zypper.cc:5286
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
 
-#: src/Zypper.cc:5334 src/Zypper.cc:5382
+#: src/Zypper.cc:5345 src/Zypper.cc:5393
 #, fuzzy, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Datoteke '%1' ni možno brati: %2"
 
-#: src/Zypper.cc:5363
+#: src/Zypper.cc:5374
 #, fuzzy
 msgid "Root privileges are required for updating packages."
 msgstr "Za uporabo program se zahteva root privilegij."
 
-#: src/Zypper.cc:5422 src/Zypper.cc:5430 src/Zypper.cc:5511
+#: src/Zypper.cc:5433 src/Zypper.cc:5441 src/Zypper.cc:5522
 msgid "Operation not supported."
 msgstr ""
 
-#: src/Zypper.cc:5423
+#: src/Zypper.cc:5434
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr ""
 
-#: src/Zypper.cc:5431
+#: src/Zypper.cc:5442
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
 
-#: src/Zypper.cc:5447
+#: src/Zypper.cc:5458
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 
-#: src/Zypper.cc:5547
+#: src/Zypper.cc:5558
 #, fuzzy
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Za uporabo program se zahteva root privilegij."
 
-#: src/Zypper.cc:5567
+#: src/Zypper.cc:5578
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4039,22 +4049,22 @@ msgid ""
 "for more information about this command."
 msgstr ""
 
-#: src/Zypper.cc:5592 src/utils/messages.cc:55
+#: src/Zypper.cc:5603 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr ""
 
-#: src/Zypper.cc:5595 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5606 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 #, fuzzy
 msgid "Usage"
 msgstr "Sporočilo"
 
-#: src/Zypper.cc:5655 src/Zypper.cc:5696
+#: src/Zypper.cc:5666 src/Zypper.cc:5707
 #, fuzzy
 msgid "Root privileges are required for adding of package locks."
 msgstr "Za uporabo program se zahteva root privilegij."
 
-#: src/Zypper.cc:5750
+#: src/Zypper.cc:5761
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
@@ -4063,56 +4073,56 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: src/Zypper.cc:5761
+#: src/Zypper.cc:5772
 msgid "XML output not implemented for this command."
 msgstr ""
 
-#: src/Zypper.cc:5774
+#: src/Zypper.cc:5785
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr ""
 
-#: src/Zypper.cc:5775
+#: src/Zypper.cc:5786
 #, fuzzy, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Ime"
 
-#: src/Zypper.cc:5816
+#: src/Zypper.cc:5827
 #, fuzzy, c-format, boost-format
 msgid "%s matches %s"
 msgstr "popravi"
 
-#: src/Zypper.cc:5818
+#: src/Zypper.cc:5829
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr ""
 
-#: src/Zypper.cc:5820
+#: src/Zypper.cc:5831
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr ""
 
-#: src/Zypper.cc:5902 src/source-download.cc:217
+#: src/Zypper.cc:5913 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr ""
 
-#: src/Zypper.cc:5954
+#: src/Zypper.cc:5965
 msgid "This command only makes sense in the zypper shell."
 msgstr ""
 
-#: src/Zypper.cc:5964
+#: src/Zypper.cc:5975
 msgid "You already are running zypper's shell."
 msgstr ""
 
-#: src/Zypper.cc:5977 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
+#: src/Zypper.cc:5988 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
 msgid "Alias"
 msgstr "Vzdevek"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5977 src/commands/locks/list.cc:108 src/info.cc:69
+#: src/Zypper.cc:5988 src/commands/locks/list.cc:108 src/info.cc:69
 #: src/info.cc:460 src/info.cc:704 src/repos.cc:1072 src/repos.cc:1211
 #: src/repos.cc:2550 src/search.cc:47 src/search.cc:195 src/search.cc:342
 #: src/search.cc:489 src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
@@ -4120,11 +4130,11 @@ msgid "Name"
 msgstr "Ime"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5977 src/info.cc:83
+#: src/Zypper.cc:5988 src/info.cc:83
 msgid "Description"
 msgstr "Opis"
 
-#: src/Zypper.cc:6028
+#: src/Zypper.cc:6039
 #, fuzzy
 msgid "Resolvable Type"
 msgstr "Ni dodatnih novih modulov."

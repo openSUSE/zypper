@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 15:02+0200\n"
+"POT-Creation-Date: 2018-09-07 15:05+0200\n"
 "PO-Revision-Date: 2018-07-13 14:06+0000\n"
 "Last-Translator: Victor hck <correohck@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
@@ -2214,7 +2214,7 @@ msgstr ""
 "La cadena de datos del usuario no debe contener caracteres no imprimibles ni "
 "saltos de línea."
 
-#: src/Zypper.cc:1241 src/Zypper.cc:3927
+#: src/Zypper.cc:1241 src/Zypper.cc:3938
 msgid "Entering non-interactive mode."
 msgstr "Se está accediendo al modo no interactivo."
 
@@ -2294,7 +2294,7 @@ msgstr "El comando '%s' se ha sustituido por '%s'."
 msgid "See '%s' for all available options."
 msgstr "Consulte '%s' para ver todas las opciones disponibles."
 
-#: src/Zypper.cc:1733 src/Zypper.cc:3943
+#: src/Zypper.cc:1733 src/Zypper.cc:3954
 msgid "Non-option program arguments: "
 msgstr "Argumentos de programa que no son opciones: "
 
@@ -4465,7 +4465,17 @@ msgstr ""
 "--status             No descarga ningún paquete, pero muestra los rpm\n"
 "                     de origen que faltan o no se conocen.\n"
 
-#: src/Zypper.cc:3734
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:3735
+msgid "quit (exit, ^D)"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:3738
+msgid "Quit the current zypper shell."
+msgstr "Sale de la shell en uso de zypper."
+
+#: src/Zypper.cc:3744
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4479,7 +4489,7 @@ msgstr ""
 "\n"
 "Este comando no tiene opciones adicionales.\n"
 
-#: src/Zypper.cc:3751
+#: src/Zypper.cc:3762
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4494,7 +4504,7 @@ msgstr ""
 "Este comando no tiene opciones adicionales.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3769
+#: src/Zypper.cc:3780
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4505,7 +4515,7 @@ msgstr ""
 "Enumera los tipos de servicio disponibles.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3785
+#: src/Zypper.cc:3796
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4518,7 +4528,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3807
+#: src/Zypper.cc:3818
 msgid ""
 "mount\n"
 "\n"
@@ -4540,7 +4550,7 @@ msgstr ""
 "servicio.\n"
 "-r, --recurse        Permite examinar los subdirectorios.\n"
 
-#: src/Zypper.cc:3835
+#: src/Zypper.cc:3846
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4554,7 +4564,7 @@ msgstr ""
 "Se trata de un alias para '%s'.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3852
+#: src/Zypper.cc:3863
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4564,13 +4574,13 @@ msgstr ""
 "\n"
 "Este comando tiene una implementación falsa que siempre devuelve 0.\n"
 
-#: src/Zypper.cc:3895 src/Zypper.cc:5967
+#: src/Zypper.cc:3906 src/Zypper.cc:5978
 msgid "Unexpected program flow."
 msgstr "Flujo de programa inesperado."
 
 # se supone que es un geeko, las barras estan escapeadas :P
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:4026
+#: src/Zypper.cc:4037
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4580,23 +4590,23 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:4049
+#: src/Zypper.cc:4060
 msgid "Root privileges are required for refreshing services."
 msgstr ""
 "Se requieren privilegios de usuario root para actualizar los servicios."
 
-#: src/Zypper.cc:4073 src/Zypper.cc:4152 src/Zypper.cc:4340
+#: src/Zypper.cc:4084 src/Zypper.cc:4163 src/Zypper.cc:4351
 msgid "Root privileges are required for modifying system services."
 msgstr ""
 "Se requieren privilegios de usuario root para modificar los servicios del "
 "sistema."
 
-#: src/Zypper.cc:4136
+#: src/Zypper.cc:4147
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' no es un tipo de servicio válido."
 
-#: src/Zypper.cc:4138
+#: src/Zypper.cc:4149
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -4608,43 +4618,43 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:4163 src/utils/messages.cc:47
+#: src/Zypper.cc:4174 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "Se necesita un alias o una opción de agregado."
 
-#: src/Zypper.cc:4195
+#: src/Zypper.cc:4206
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "No se encuentra el servicio '%s'."
 
-#: src/Zypper.cc:4222 src/Zypper.cc:4339 src/Zypper.cc:4443 src/Zypper.cc:4495
+#: src/Zypper.cc:4233 src/Zypper.cc:4350 src/Zypper.cc:4454 src/Zypper.cc:4506
 msgid "Root privileges are required for modifying system repositories."
 msgstr ""
 "Se requieren privilegios de usuario root para modificar los repositorios del "
 "sistema."
 
-#: src/Zypper.cc:4248 src/Zypper.cc:4607
+#: src/Zypper.cc:4259 src/Zypper.cc:4618
 msgid "Too few arguments."
 msgstr "Argumentos insuficientes."
 
-#: src/Zypper.cc:4271
+#: src/Zypper.cc:4282
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Si solo se utiliza un argumento, este debe ser un URI que apunte a un "
 "archivo .repo."
 
-#: src/Zypper.cc:4301
+#: src/Zypper.cc:4312
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 "No se puede usar %s con %s. Se va a utilizar el valor de configuración %s."
 
-#: src/Zypper.cc:4320
+#: src/Zypper.cc:4331
 msgid "Specified type is not a valid repository type:"
 msgstr "El tipo especificado no es un tipo de repositorio válido:"
 
-#: src/Zypper.cc:4321
+#: src/Zypper.cc:4332
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
@@ -4653,59 +4663,59 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4386
+#: src/Zypper.cc:4397
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "No se encuentra el repositorio '%s' por su alias, número o URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4419
+#: src/Zypper.cc:4430
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "No se encuentra el servicio '%s' por su alias, número o URI."
 
-#: src/Zypper.cc:4450
+#: src/Zypper.cc:4461
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "No hay argumentos suficientes. Se necesita al menos el URI y el alias."
 
-#: src/Zypper.cc:4474
+#: src/Zypper.cc:4485
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "No se encuentra el repositorio '%s'."
 
-#: src/Zypper.cc:4534
+#: src/Zypper.cc:4545
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "No se ha encontrado el repositorio %s."
 
-#: src/Zypper.cc:4551
+#: src/Zypper.cc:4562
 msgid "Root privileges are required for refreshing system repositories."
 msgstr ""
 "Se requieren privilegios de usuario root para actualizar los repositorios "
 "del sistema."
 
-#: src/Zypper.cc:4557
+#: src/Zypper.cc:4568
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "La opción global '%s' no tiene efecto aquí."
 
-#: src/Zypper.cc:4565
+#: src/Zypper.cc:4576
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "No se permiten argumentos cuando se utiliza '%s'."
 
-#: src/Zypper.cc:4589
+#: src/Zypper.cc:4600
 msgid "Root privileges are required for cleaning local caches."
 msgstr ""
 "Se requieren privilegios de usuario root para borrar los cachés locales."
 
 # 50168 AttribValues/delnotify
-#: src/Zypper.cc:4608
+#: src/Zypper.cc:4619
 msgid "At least one package name is required."
 msgstr "Se requiere al menos un nombre de paquete."
 
-#: src/Zypper.cc:4617 src/Zypper.cc:4866 src/Zypper.cc:4903
+#: src/Zypper.cc:4628 src/Zypper.cc:4877 src/Zypper.cc:4914
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
 "Se requieren privilegios de usuario root para instalar o desinstalar "
@@ -4713,11 +4723,11 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4629
+#: src/Zypper.cc:4640
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Se ignorarán los argumentos y se marcará el repositorio completo."
 
-#: src/Zypper.cc:4640
+#: src/Zypper.cc:4651
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Tipo de paquete desconocido: %s"
@@ -4725,11 +4735,11 @@ msgstr "Tipo de paquete desconocido: %s"
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
-#: src/Zypper.cc:4650
+#: src/Zypper.cc:4661
 msgid "Cannot uninstall patches."
 msgstr "No se pueden desinstalar parches."
 
-#: src/Zypper.cc:4651
+#: src/Zypper.cc:4662
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4741,36 +4751,36 @@ msgstr ""
 "los registros de bases\n"
 "de datos u otros elementos similares."
 
-#: src/Zypper.cc:4661
+#: src/Zypper.cc:4672
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Desinstalación de un paquete de origen no definida e implementada."
 
-#: src/Zypper.cc:4681
+#: src/Zypper.cc:4692
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' parece un archivo RPM. Se intentará descargarlo."
 
-#: src/Zypper.cc:4690
+#: src/Zypper.cc:4701
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Problema con el archivo RPM especificado como '%s'. Se va a omitir."
 
-#: src/Zypper.cc:4712
+#: src/Zypper.cc:4723
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 "Problema al leer la cabecera RPM de %s. Compruebe que se trata de un archivo "
 "RPM."
 
-#: src/Zypper.cc:4733
+#: src/Zypper.cc:4744
 msgid "Plain RPM files cache"
 msgstr "Caché de archivos RPM sencillo"
 
-#: src/Zypper.cc:4755
+#: src/Zypper.cc:4766
 msgid "No valid arguments specified."
 msgstr "No se ha especificado ningún argumento válido."
 
-#: src/Zypper.cc:4772 src/Zypper.cc:4919
+#: src/Zypper.cc:4783 src/Zypper.cc:4930
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4779,74 +4789,74 @@ msgstr ""
 "instaladas. No se puede instalar nada."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4809 src/Zypper.cc:5396
+#: src/Zypper.cc:4820 src/Zypper.cc:5407
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s contradice %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4817
+#: src/Zypper.cc:4828
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s no se puede usar en este momento con %s"
 
-#: src/Zypper.cc:4858
+#: src/Zypper.cc:4869
 msgid "Source package name is a required argument."
 msgstr "El nombre del paquete de origen es un argumento requerido."
 
-#: src/Zypper.cc:4976 src/Zypper.cc:5315 src/Zypper.cc:5415 src/Zypper.cc:5625
-#: src/Zypper.cc:5676 src/Zypper.cc:5716
+#: src/Zypper.cc:4987 src/Zypper.cc:5326 src/Zypper.cc:5426 src/Zypper.cc:5636
+#: src/Zypper.cc:5687 src/Zypper.cc:5727
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Tipo de paquete desconocido '%s'."
 
-#: src/Zypper.cc:5001 src/repos.cc:796
+#: src/Zypper.cc:5012 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "El repositorio especificado (%s) está inhabilitado."
 
 #. translators: empty search result message
-#: src/Zypper.cc:5157
+#: src/Zypper.cc:5168
 msgid "No matching items found."
 msgstr "No se encuentran elementos que coincidan."
 
-#: src/Zypper.cc:5192
+#: src/Zypper.cc:5203
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Problema al inicializar o ejecutar la búsqueda"
 
-#: src/Zypper.cc:5193
+#: src/Zypper.cc:5204
 msgid "See the above message for a hint."
 msgstr "Consulte el mensaje de error anterior para obtener sugerencias."
 
-#: src/Zypper.cc:5194 src/repos.cc:1009
+#: src/Zypper.cc:5205 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Ejecutar 'zypper refresh' como usuario root puede solucionar el problema."
 
-#: src/Zypper.cc:5275
+#: src/Zypper.cc:5286
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "La opción %1% no tiene ningún efecto sin la opción global %2%."
 
-#: src/Zypper.cc:5334 src/Zypper.cc:5382
+#: src/Zypper.cc:5345 src/Zypper.cc:5393
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "No es posible utilizar %s junto con %s."
 
-#: src/Zypper.cc:5363
+#: src/Zypper.cc:5374
 msgid "Root privileges are required for updating packages."
 msgstr "Se requieren privilegios de usuario root para actualizar los paquetes."
 
-#: src/Zypper.cc:5422 src/Zypper.cc:5430 src/Zypper.cc:5511
+#: src/Zypper.cc:5433 src/Zypper.cc:5441 src/Zypper.cc:5522
 msgid "Operation not supported."
 msgstr "Operación no admitida."
 
-#: src/Zypper.cc:5423
+#: src/Zypper.cc:5434
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Para actualizar los productos instalados, utilice '%s'."
 
-#: src/Zypper.cc:5431
+#: src/Zypper.cc:5442
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4855,20 +4865,20 @@ msgstr ""
 "Zypper no mantiene un registro de los paquetes de origen instalados. Para "
 "instalar el último paquete de origen y sus dependencias, utilice '%s'."
 
-#: src/Zypper.cc:5447
+#: src/Zypper.cc:5458
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "No es posible utilizar varios tipos cuando se proporcionan paquetes "
 "específicos como argumentos."
 
-#: src/Zypper.cc:5547
+#: src/Zypper.cc:5558
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
 "Se requieren privilegios de usuario root para realizar una actualización de "
 "la distribución."
 
-#: src/Zypper.cc:5567
+#: src/Zypper.cc:5578
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4879,77 +4889,77 @@ msgstr ""
 "habilitados. Asegúrese de que estos repositorios sean compatibles antes de "
 "continuar. Consulte '%s' para obtener más información acerca de este comando."
 
-#: src/Zypper.cc:5592 src/utils/messages.cc:55
+#: src/Zypper.cc:5603 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "Falta un argumento requerido."
 
-#: src/Zypper.cc:5595 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5606 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "Uso"
 
-#: src/Zypper.cc:5655 src/Zypper.cc:5696
+#: src/Zypper.cc:5666 src/Zypper.cc:5707
 msgid "Root privileges are required for adding of package locks."
 msgstr ""
 "Se requieren privilegios de usuario root para añadir bloqueos a los paquetes."
 
-#: src/Zypper.cc:5750
+#: src/Zypper.cc:5761
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "Eliminado %lu bloqueo."
 msgstr[1] "Eliminados %lu bloqueos."
 
-#: src/Zypper.cc:5761
+#: src/Zypper.cc:5772
 msgid "XML output not implemented for this command."
 msgstr "No se ha implementado el resultado XML para este comando."
 
-#: src/Zypper.cc:5774
+#: src/Zypper.cc:5785
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Etiqueta de distribución: %s"
 
-#: src/Zypper.cc:5775
+#: src/Zypper.cc:5786
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Etiqueta corta: %s"
 
-#: src/Zypper.cc:5816
+#: src/Zypper.cc:5827
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s coincide con %s"
 
-#: src/Zypper.cc:5818
+#: src/Zypper.cc:5829
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s es más nuevo que %s"
 
-#: src/Zypper.cc:5820
+#: src/Zypper.cc:5831
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s es más antiguo que %s"
 
-#: src/Zypper.cc:5902 src/source-download.cc:217
+#: src/Zypper.cc:5913 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Permisos insuficientes para utilizar el directorio de descargas '%s'."
 
-#: src/Zypper.cc:5954
+#: src/Zypper.cc:5965
 msgid "This command only makes sense in the zypper shell."
 msgstr "Este comando solo tiene sentido en la shell de zypper."
 
-#: src/Zypper.cc:5964
+#: src/Zypper.cc:5975
 msgid "You already are running zypper's shell."
 msgstr "Ya se está ejecutando la shell de zypper."
 
-#: src/Zypper.cc:5977 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
+#: src/Zypper.cc:5988 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
 msgid "Alias"
 msgstr "Alias"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5977 src/commands/locks/list.cc:108 src/info.cc:69
+#: src/Zypper.cc:5988 src/commands/locks/list.cc:108 src/info.cc:69
 #: src/info.cc:460 src/info.cc:704 src/repos.cc:1072 src/repos.cc:1211
 #: src/repos.cc:2550 src/search.cc:47 src/search.cc:195 src/search.cc:342
 #: src/search.cc:489 src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
@@ -4957,11 +4967,11 @@ msgid "Name"
 msgstr "Nombre"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5977 src/info.cc:83
+#: src/Zypper.cc:5988 src/info.cc:83
 msgid "Description"
 msgstr "Descripción"
 
-#: src/Zypper.cc:6028
+#: src/Zypper.cc:6039
 msgid "Resolvable Type"
 msgstr "Tipo de resolución"
 
