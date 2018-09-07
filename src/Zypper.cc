@@ -2848,6 +2848,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = update_options;
+#if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
       // translators: the first %s = "package, patch, pattern, product",
@@ -2882,7 +2883,39 @@ void Zypper::processCommandOptions()
       ), "package, patch, pattern, product, srcpackage",
          "package",
          "only, in-advance, in-heaps, as-needed") )
-    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+#endif
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("update (up) [OPTIONS] [PACKAGENAME] ...")
+    )
+    .description(	// translators: command description
+    _("Update all or specified installed packages with newer versions, if possible.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
+             str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Load only the specified repository.") )
+    .option( "--skip-interactive",	// translators: --skip-interactive
+             _("Skip interactive updates.") )
+    .option( "--with-interactive",	// translators: --with-interactive
+             _("Do not skip interactive updates.") )
+    .option( "-l, --auto-agree-with-licenses",	// translators: -l, --auto-agree-with-licenses
+             _("Automatically say 'yes' to third party license confirmation prompt. See man zypper for more details.") )
+    .option( "--best-effort",	// translators: --best-effort
+             _("Do a 'best effort' approach to update. Updates to a lower than the latest version are also acceptable.") )
+    .option( "--replacefiles",	// translators: --replacefiles
+             _("Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check.") )
+    .option( "-D, --dry-run",	// translators: -D, --dry-run
+             _("Test the update, do not actually update.") )
+    .option( "--details",	// translators: --details
+             _("Show the detailed installation summary.") )
+    .option( "--download",	// translators: --download
+             str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed" )
+    .option( "-d, --download-only",	// translators: -d, --download-only
+             _("Only download the packages, do not install.") )
+    .option( "-y, --no-confirm",	// translators: -y, --no-confirm
+	     _("Don't require user interaction. Alias for the --non-interactive global option.") )
 
     .optionSectionSolverOptions()
     .option_Solver_Flags_Common
