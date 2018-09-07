@@ -1814,7 +1814,7 @@ void Zypper::processCommandOptions()
       // translators: the first %s = "package, patch, pattern, product",
       // second %s = "package",
       // and the third %s = "only, in-advance, in-heaps, as-needed"
-      "install (in) [options] <capability|rpm_file_uri> ...\n"
+      "install (in) [OPTIONS] <capability|rpm_file_uri> ...\n"
       "\n"
       "Install packages with specified capabilities or RPM files with specified\n"
       "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
@@ -1884,7 +1884,7 @@ void Zypper::processCommandOptions()
       << str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "package"
-      "remove (rm) [options] <capability> ...\n"
+      "remove (rm) [OPTIONS] <capability> ...\n"
       "\n"
       "Remove packages with specified capabilities.\n"
       "A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
@@ -1922,7 +1922,7 @@ void Zypper::processCommandOptions()
     specific_options = src_install_options;
     _command_help = ( CommandHelpFormater()
     << _(
-      "source-install (si) [options] <name> ...\n"
+      "source-install (si) [OPTIONS] <name> ...\n"
       "\n"
       "Install specified source packages and their build dependencies.\n"
       "\n"
@@ -1969,7 +1969,7 @@ void Zypper::processCommandOptions()
     specific_options = verify_options;
     _command_help = ( CommandHelpFormater()
       << str::form(_(
-      "verify (ve) [options]\n"
+      "verify (ve) [OPTIONS]\n"
       "\n"
       "Check whether dependencies of installed packages are satisfied"
       " and suggest to install or remove packages in order to repair the"
@@ -2018,7 +2018,7 @@ void Zypper::processCommandOptions()
     specific_options = options;
     _command_help = ( CommandHelpFormater()
       << str::form(_(
-      "install-new-recommends (inr) [options]\n"
+      "install-new-recommends (inr) [OPTIONS]\n"
       "\n"
       "Install newly added packages recommended by already installed packages."
       " This can typically be used to install new language packages or drivers"
@@ -2052,7 +2052,7 @@ void Zypper::processCommandOptions()
 #if 0
     _(
       // translators: the %s = "ris" (the only service type currently supported)
-      "addservice (as) [options] <URI> <alias>\n"
+      "addservice (as) [OPTIONS] <URI> <alias>\n"
       "\n"
       "Add a repository index service to the system.\n"
       "\n"
@@ -2103,7 +2103,7 @@ void Zypper::processCommandOptions()
 #if 0
     _command_help = _(
       // TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-      "removeservice (rs) [options] <alias|#|URI>\n"
+      "removeservice (rs) [OPTIONS] <alias|#|URI>\n"
       "\n"
       "Remove specified repository index service from the system..\n"
       "\n"
@@ -2237,7 +2237,7 @@ void Zypper::processCommandOptions()
     ;
 #if 0
     _command_help = _(
-      "services (ls) [options]\n"
+      "services (ls) [OPTIONS]\n"
       "\n"
       "List defined services.\n"
       "\n"
@@ -2282,7 +2282,7 @@ void Zypper::processCommandOptions()
     ;
 #if 0
     _command_help = _(
-      "refresh-services (refs) [options]\n"
+      "refresh-services (refs) [OPTIONS]\n"
       "\n"
       "Refresh defined repository index services.\n"
       "\n"
@@ -2309,8 +2309,8 @@ void Zypper::processCommandOptions()
 #if 0
     _(
       // translators: the %s = "yast2, rpm-md, plaindir"
-      "addrepo (ar) [options] <URI> <alias>\n"
-      "addrepo (ar) [options] <file.repo>\n"
+      "addrepo (ar) [OPTIONS] <URI> <alias>\n"
+      "addrepo (ar) [OPTIONS] <file.repo>\n"
       "\n"
       "Add a repository to the system. The repository can be specified by its URI"
       " or can be read from specified .repo file (even remote).\n"
@@ -2409,7 +2409,7 @@ void Zypper::processCommandOptions()
     ;
 #if 0
     _command_help = _(
-      "repos (lr) [options] [repo] ...\n"
+      "repos (lr) [OPTIONS] [repo] ...\n"
       "\n"
       "List all defined repositories.\n"
       "\n"
@@ -2443,7 +2443,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_delete_options;
     _command_help = ( CommandHelpFormater() << _(
-      "removerepo (rr) [options] <alias|#|URI>\n"
+      "removerepo (rr) [OPTIONS] <alias|#|URI>\n"
       "\n"
       "Remove repository specified by alias, number or URI.\n"
       "\n"
@@ -2474,7 +2474,7 @@ void Zypper::processCommandOptions()
     ;
 #if 0
     _command_help = _(
-      "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
+      "renamerepo (nr) [OPTIONS] <alias|#|URI> <new-alias>\n"
       "\n"
       "Assign new alias to the repository specified by alias, number or URI.\n"
       "\n"
@@ -2661,7 +2661,7 @@ void Zypper::processCommandOptions()
     _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "patch"
-      "list-updates (lu) [options]\n"
+      "list-updates (lu) [OPTIONS]\n"
       "\n"
       "List all available updates.\n"
       "\n"
@@ -2718,7 +2718,7 @@ void Zypper::processCommandOptions()
       // translators: the first %s = "package, patch, pattern, product",
       // the second %s = "patch",
       // and the third %s = "only, in-avance, in-heaps, as-needed"
-      "update (up) [options] [packagename] ...\n"
+      "update (up) [OPTIONS] [packagename] ...\n"
       "\n"
       "Update all or specified installed packages with newer versions, if possible.\n"
       "\n"
@@ -2796,7 +2796,7 @@ void Zypper::processCommandOptions()
     specific_options = update_options;
     _command_help = ( CommandHelpFormater()
       << str::form(_(
-      "patch [options]\n"
+      "patch [OPTIONS]\n"
       "\n"
       "Install all available needed patches.\n"
       "\n"
@@ -2906,7 +2906,7 @@ void Zypper::processCommandOptions()
     specific_options = dupdate_options;
     _command_help = ( CommandHelpFormater()
       << str::form(_(
-      "dist-upgrade (dup) [options]\n"
+      "dist-upgrade (dup) [OPTIONS]\n"
       "\n"
       "Perform a distribution upgrade.\n"
       "\n"
@@ -2972,7 +2972,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = search_options;
     _command_help = ( CommandHelpFormater() << _(
-      "search (se) [options] [querystring] ...\n"
+      "search (se) [OPTIONS] [querystring] ...\n"
       "\n"
       "Search for packages matching any of the given search strings.\n"
       "\n"
@@ -3119,7 +3119,7 @@ void Zypper::processCommandOptions()
     ;
 #if 0
     _command_help = _(
-      "packages (pa) [options] [repository] ...\n"
+      "packages (pa) [OPTIONS] [repository] ...\n"
       "\n"
       "List all packages available in specified repositories.\n"
       "\n"
@@ -3167,7 +3167,7 @@ void Zypper::processCommandOptions()
     ;
 #if 0
     _command_help = _(
-      "patterns (pt) [options] [repository] ...\n"
+      "patterns (pt) [OPTIONS] [repository] ...\n"
       "\n"
       "List all patterns available in specified repositories.\n"
       "\n"
@@ -3195,7 +3195,7 @@ void Zypper::processCommandOptions()
     specific_options = options;
     _command_help = ( CommandHelpFormater()
       << _(
-      "products (pd) [options] [repository] ...\n"
+      "products (pd) [OPTIONS] [repository] ...\n"
       "\n"
       "List all products available in specified repositories.\n"
       "\n"
@@ -3229,7 +3229,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = info_options;
     _command_help = ( CommandHelpFormater() << str::form(_(
-        "info (if) [options] <name> ...\n"
+        "info (if) [OPTIONS] <name> ...\n"
         "\n"
         "Show detailed information for specified packages.\n"
         "By default the packages which match exactly the given names are shown.\n"
@@ -3414,7 +3414,7 @@ void Zypper::processCommandOptions()
     specific_options = options;
     _command_help = CommandHelpFormater()
     .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-      _("addlock (al) [options] <packagename> ...")
+      _("addlock (al) [OPTIONS] <PACKAGENAME> ...")
     )
     .description(	// translators: command description
       _("Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.")
@@ -3443,7 +3443,7 @@ void Zypper::processCommandOptions()
     specific_options = options;
     _command_help = CommandHelpFormater()
     .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-      _("removelock (rl) [options] <lock-number|packagename> ...")
+      _("removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ...")
     )
     .description(	// translators: command description; %1% is acoomand like 'zypper locks'
       str::Format(_("Remove a package lock. Specify the lock to remove by its number obtained with '%1%' or by package name.") ) % "zypper locks"
@@ -3506,7 +3506,7 @@ void Zypper::processCommandOptions()
     ;
 #if 0
     _command_help = _(
-      "targetos (tos) [options]\n"
+      "targetos (tos) [OPTIONS]\n"
       "\n"
       "Show various information about the target operating system.\n"
       "By default, an ID string is shown.\n"
@@ -3596,7 +3596,7 @@ void Zypper::processCommandOptions()
     specific_options = options;
     _command_help = CommandHelpFormater()
     .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-      _("ps [options]")
+      _("ps [OPTIONS]")
     )
     .description(	// translators: command description
       _("List running processes which might still use files and libraries deleted by recent upgrades.")
@@ -3627,7 +3627,7 @@ void Zypper::processCommandOptions()
     specific_options = options;
     _command_help = CommandHelpFormater()
     .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("download [options] <packages>...")
+    _("download [OPTIONS] <PACKAGES>...")
     )
     .description(	// translators: command description
     _("Download rpms specified on the commandline to a local directory. Per default packages are downloaded to the libzypp package cache (/var/cache/zypp/packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be changed by using the global --pkg-cache-dir option.")
@@ -3643,7 +3643,7 @@ void Zypper::processCommandOptions()
     ;
 #if 0
     _command_help = _(
-      "download [options] <packages>...\n"
+      "download [OPTIONS] <PACKAGES>...\n"
       "\n"
       "Download rpms specified on the commandline to a local directory.\n"
       "Per default packages are downloaded to the libzypp package cache\n"
@@ -3793,7 +3793,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = search_options;
     _command_help = str::form(_(
-      "patch-search [options] [querystring...]\n"
+      "patch-search [OPTIONS] [querystring...]\n"
       "\n"
       "Search for patches matching given search strings. This is an alias for '%s'.\n"
     ), "zypper -r search -t patch --detail ...");
@@ -3820,7 +3820,7 @@ void Zypper::processCommandOptions()
 #if 0
     _command_help = _(
       // translators: this is just a legacy command
-      "ping [options]\n"
+      "ping [OPTIONS]\n"
       "\n"
       "This command has dummy implementation which always returns 0.\n"
     );
