@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 16:36+0200\n"
+"POT-Creation-Date: 2018-09-07 16:43+0200\n"
 "PO-Revision-Date: 2018-08-19 11:02+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
@@ -2177,7 +2177,7 @@ msgstr ""
 "Käyttäjä tiedon merkkijono ei saa sisältää tulostumattomia tai uusirivi "
 "merkkejä!"
 
-#: src/Zypper.cc:1239 src/Zypper.cc:3980
+#: src/Zypper.cc:1239 src/Zypper.cc:4001
 msgid "Entering non-interactive mode."
 msgstr "Siirrytään ei-vuorovaikutteiseen -tilaan."
 
@@ -2258,7 +2258,7 @@ msgstr "Komento '%s' on korvattu komennolla '%s'."
 msgid "See '%s' for all available options."
 msgstr "Katso '%s' käytettävissä olevista valinnoista."
 
-#: src/Zypper.cc:1731 src/Zypper.cc:3996
+#: src/Zypper.cc:1731 src/Zypper.cc:4017
 msgid "Non-option program arguments: "
 msgstr "Pakolliset ohjelman parametrit: "
 
@@ -2284,13 +2284,13 @@ msgid "Select packages from the specified repository."
 msgstr "Valitsee paketit määritellystä asennuslähteestä."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:1823 src/Zypper.cc:1928
+#: src/Zypper.cc:1823 src/Zypper.cc:1928 src/Zypper.cc:2079
 msgid "Load only the specified repository."
 msgstr "Asenna paketit määritetystä asennuslähteestä."
 
 #. translators: -t, --type <TYPE>
 #. translators: -t, --type <type>
-#: src/Zypper.cc:1825 src/Zypper.cc:1930 src/Zypper.cc:3507 src/Zypper.cc:3536
+#: src/Zypper.cc:1825 src/Zypper.cc:1930 src/Zypper.cc:3528 src/Zypper.cc:3557
 #, boost-format
 msgid "Type of package (%1%)."
 msgstr "Tyyppi (%1%)."
@@ -2338,25 +2338,26 @@ msgid "Test the installation, do not actually install."
 msgstr "Testaa asennusta (pakettien asennusta ei suoriteta)."
 
 #. translators: --details
-#: src/Zypper.cc:1841 src/Zypper.cc:1942
+#: src/Zypper.cc:1841 src/Zypper.cc:1942 src/Zypper.cc:2083
 msgid "Show the detailed installation summary."
 msgstr "Näyttää yksityiskohtaisen yhteenvedon asennuksesta."
 
 #. translators: --download
-#: src/Zypper.cc:1843
+#: src/Zypper.cc:1843 src/Zypper.cc:2086
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
 msgstr "Asettaa lataa-asenna tilan. Käytettävissä olevat tilat: %s"
 
 #. translators: -d, --download-only
 #. translators: --download-only
-#: src/Zypper.cc:1845 src/Zypper.cc:2021
+#. translators: -d, --download-only
+#: src/Zypper.cc:1845 src/Zypper.cc:2021 src/Zypper.cc:2088
 msgid "Only download the packages, do not install."
 msgstr "Lataa ainoastaan tarvittavat paketit (ei asenna)."
 
 #. translators: -y, --no-confirm
-#: src/Zypper.cc:1846 src/Zypper.cc:1944 src/Zypper.cc:2068 src/Zypper.cc:2831
-#: src/Zypper.cc:2910 src/Zypper.cc:3011
+#: src/Zypper.cc:1846 src/Zypper.cc:1944 src/Zypper.cc:2089 src/Zypper.cc:2852
+#: src/Zypper.cc:2931 src/Zypper.cc:3032
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2594,7 +2595,7 @@ msgstr "Älä asenna riippuvuuksia."
 msgid "Install packages only from specified repositories."
 msgstr "Asenna paketit ainoastaan määritetystä asennuslähteestä."
 
-#: src/Zypper.cc:2053
+#: src/Zypper.cc:2054
 #, c-format, boost-format
 msgid ""
 "verify (ve) [OPTIONS]\n"
@@ -2627,7 +2628,24 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only      Lataa ainoastaan tarvittavat paketit (ei asenna).\n"
 
-#: src/Zypper.cc:2102
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:2072
+msgid "verify (ve) [OPTIONS]"
+msgstr "verify (ve) [valinnat]"
+
+#. translators: command description
+#: src/Zypper.cc:2075
+msgid ""
+"Check whether dependencies of installed packages are satisfied and suggest "
+"to install or remove packages in order to repair the dependency problems."
+msgstr "Varmistaa, että asennettujen pakettien riippuvuudet on asennettuina."
+
+#. translators: -D, --dry-run
+#: src/Zypper.cc:2081
+msgid "Test the repair, do not actually do anything to the system."
+msgstr "Testaa korjausta (itse korjausta ei suoriteta)."
+
+#: src/Zypper.cc:2123
 #, c-format, boost-format
 msgid ""
 "install-new-recommends (inr) [OPTIONS]\n"
@@ -2662,7 +2680,7 @@ msgstr ""
 "-d, --download-only      Lataa ainoastaan paketit (ei asenna).\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: src/Zypper.cc:2136
+#: src/Zypper.cc:2157
 #, c-format, boost-format
 msgid ""
 "addservice (as) [OPTIONS] <URI> <alias>\n"
@@ -2684,43 +2702,43 @@ msgstr ""
 "-n, --name <NIMI>\tAntaa palvelulle kuvailevan nimen.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2149
+#: src/Zypper.cc:2170
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr "addservice (as) [VALINNAT] <URI> <ALIAS>"
 
 #. translators: command description
-#: src/Zypper.cc:2152
+#: src/Zypper.cc:2173
 msgid "Add a repository index service to the system."
 msgstr "Lisää ohjelmalähteen indeksipalvelun järjestelmään."
 
-#: src/Zypper.cc:2157
+#: src/Zypper.cc:2178
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
 "Palvelun tyyppi tunnistetaan aina automaattisesti. Valitsin jätetään "
 "huomiotta."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2173
+#: src/Zypper.cc:2194
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
 msgstr "removeservice (rs) [valinnat] <alias|#|URI>"
 
 #. translators: command description
-#: src/Zypper.cc:2176
+#: src/Zypper.cc:2197
 msgid "Remove specified repository index service from the system."
 msgstr "Poistaa määritetyn asennuslähde palvelun järjestelmästä."
 
 #. translators: --loose-auth
-#: src/Zypper.cc:2180
+#: src/Zypper.cc:2201
 msgid "Ignore user authentication data in the URI."
 msgstr "Jätä huomioimatta URI-osoitteen käyttäjän tunnistautumistiedot."
 
 #. translators: --loose-query
-#: src/Zypper.cc:2182
+#: src/Zypper.cc:2203
 msgid "Ignore query string in the URI."
 msgstr "Jätä huomioimatta URI-osoitteen kyselyjono."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:2187
+#: src/Zypper.cc:2208
 msgid ""
 "removeservice (rs) [OPTIONS] <alias|#|URI>\n"
 "\n"
@@ -2732,7 +2750,7 @@ msgid ""
 msgstr ""
 
 #. translators: %s is "--all" and "--all"
-#: src/Zypper.cc:2218
+#: src/Zypper.cc:2239
 #, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -2793,18 +2811,18 @@ msgstr ""
 "palveluissa.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2247
+#: src/Zypper.cc:2268
 msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
 msgstr "modifyservice (ms) <VALINNAT> <ALIAS|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2250
+#: src/Zypper.cc:2271
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
 msgstr "modifyservice (ms) <VALINNAT> <%1%>"
 
 #. translators: command description
-#: src/Zypper.cc:2253
+#: src/Zypper.cc:2274
 #, boost-format
 msgid ""
 "Modify properties of services specified by alias, number, or URI, or by the "
@@ -2813,97 +2831,97 @@ msgstr ""
 "Muuta aliaksen, luvun, URIn tai \"%1%\"-koostevalinnan määrittämien "
 "palveluiden ominaisuuksia."
 
-#: src/Zypper.cc:2258
+#: src/Zypper.cc:2279
 msgid "Apply changes to all services."
 msgstr "Ota kaikkien palveluiden muutokset käyttöön."
 
-#: src/Zypper.cc:2259
+#: src/Zypper.cc:2280
 msgid "Apply changes to all local services."
 msgstr "Ota paikallisten palveluiden muutokset käyttöön."
 
-#: src/Zypper.cc:2260
+#: src/Zypper.cc:2281
 msgid "Apply changes to all remote services."
 msgstr "Ota kaikkien etäpalveluiden muutokset käyttöön."
 
-#: src/Zypper.cc:2261
+#: src/Zypper.cc:2282
 msgid "Apply changes to services of specified type."
 msgstr "Ota määritetyn tyypin palveluiden muutokset käyttöön."
 
-#: src/Zypper.cc:2263
+#: src/Zypper.cc:2284
 msgid "Add a RIS service repository to enable."
 msgstr "Lisää käyttöön otettavan RIS-palvelulähteen."
 
-#: src/Zypper.cc:2264
+#: src/Zypper.cc:2285
 msgid "Add a RIS service repository to disable."
 msgstr "Lisää käytöstä poistettava RIS-palvelulähteen."
 
-#: src/Zypper.cc:2265
+#: src/Zypper.cc:2286
 msgid "Remove a RIS service repository to enable."
 msgstr "Poista käyttöön otettava RIS-palvelulähde."
 
-#: src/Zypper.cc:2266
+#: src/Zypper.cc:2287
 msgid "Remove a RIS service repository to disable."
 msgstr "Poista käytöstä poistettava RIS-palvelulähde."
 
-#: src/Zypper.cc:2267
+#: src/Zypper.cc:2288
 msgid "Clear the list of RIS repositories to enable."
 msgstr "Tyhjennä käyttöön otettavien RIS-palvelulähteiden luettelo."
 
-#: src/Zypper.cc:2268
+#: src/Zypper.cc:2289
 msgid "Clear the list of RIS repositories to disable."
 msgstr "Tyhjennä käytöstä poistettavien RIS-palvelulähteiden luettelo."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2296
+#: src/Zypper.cc:2317
 msgid "services (ls) [OPTIONS]"
 msgstr "services (ls) [valinnat]"
 
 #. translators: command description
-#: src/Zypper.cc:2299
+#: src/Zypper.cc:2320
 msgid "List defined services."
 msgstr "Listaa järjestelmän palvelut."
 
 #. translators: -u, --uri
-#: src/Zypper.cc:2303 src/Zypper.cc:2471
+#: src/Zypper.cc:2324 src/Zypper.cc:2492
 msgid "Show also base URI of repositories."
 msgstr "Näyttää lisäksi URI-osoitteen."
 
 #. translators: -p, --priority
-#: src/Zypper.cc:2305 src/Zypper.cc:2473
+#: src/Zypper.cc:2326 src/Zypper.cc:2494
 msgid "Show also repository priority."
 msgstr "Näyttää lisäksi tärkeysjärjestyksen."
 
 #. translators: -d, --details
-#: src/Zypper.cc:2307 src/Zypper.cc:2477
+#: src/Zypper.cc:2328 src/Zypper.cc:2498
 msgid "Show more information like URI, priority, type."
 msgstr "Näyttää lisätietoja kuten URI, tärkeysjärjestyksen ja tyypin."
 
 #. translators: -r, --with-repos
-#: src/Zypper.cc:2309
+#: src/Zypper.cc:2330
 msgid "Show also repositories belonging to the services."
 msgstr "Näyttää myös palveluihin kuuluvat asennuslähteet."
 
 #. translators: -E, --show-enabled-only
-#: src/Zypper.cc:2311 src/Zypper.cc:2481
+#: src/Zypper.cc:2332 src/Zypper.cc:2502
 msgid "Show enabled repos only."
 msgstr "Näyttää vain käytössä olevat asennuslähteet."
 
 #. translators: -P, --sort-by-priority
-#: src/Zypper.cc:2313 src/Zypper.cc:2485
+#: src/Zypper.cc:2334 src/Zypper.cc:2506
 msgid "Sort the list by repository priority."
 msgstr "Järjestää tärkeysjärjestyksen mukaan."
 
 #. translators: -U, --sort-by-uri
-#: src/Zypper.cc:2315 src/Zypper.cc:2483
+#: src/Zypper.cc:2336 src/Zypper.cc:2504
 msgid "Sort the list by URI."
 msgstr "Järjestää URI-tietueen mukaan."
 
 #. translators: -N, --sort-by-name
-#: src/Zypper.cc:2317 src/Zypper.cc:2489
+#: src/Zypper.cc:2338 src/Zypper.cc:2510
 msgid "Sort the list by name."
 msgstr "Järjestää nimen mukaan."
 
-#: src/Zypper.cc:2321
+#: src/Zypper.cc:2342
 msgid ""
 "services (ls) [OPTIONS]\n"
 "\n"
@@ -2936,31 +2954,31 @@ msgstr ""
 "-N, --sort-by-name        Järjestää nimen mukaan.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2351
+#: src/Zypper.cc:2372
 msgid "refresh-services (refs) [OPTIONS]"
 msgstr "refresh-services (refs) [valinnat]"
 
 #. translators: command description
-#: src/Zypper.cc:2354
+#: src/Zypper.cc:2375
 msgid "Refresh defined repository index services."
 msgstr "Päivittää palvelut."
 
 #. translators: -f, --force
-#: src/Zypper.cc:2358 src/Zypper.cc:2651
+#: src/Zypper.cc:2379 src/Zypper.cc:2672
 msgid "Force a complete refresh."
 msgstr "Pakottaa täydellinen päivityksen."
 
 #. translators: -r, --with-repos
-#: src/Zypper.cc:2360
+#: src/Zypper.cc:2381
 msgid "Refresh also the service repositories."
 msgstr "Päivittää myös palvelulähteet."
 
 #. translators: -R, --restore-status
-#: src/Zypper.cc:2362
+#: src/Zypper.cc:2383
 msgid "Also restore service repositories enabled/disabled state."
 msgstr "Palauttaa myös palvelulähteen käytössä/ei käytössä tilan."
 
-#: src/Zypper.cc:2366
+#: src/Zypper.cc:2387
 msgid ""
 "refresh-services (refs) [OPTIONS]\n"
 "\n"
@@ -2983,7 +3001,7 @@ msgstr ""
 "tilan.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:2393
+#: src/Zypper.cc:2414
 #, fuzzy, c-format, boost-format
 msgid ""
 "addrepo (ar) [OPTIONS] <URI> <alias>\n"
@@ -3025,79 +3043,79 @@ msgstr ""
 "-f, --refresh           Ottaa asennuslähteen päivityksen käyttöön.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2415
+#: src/Zypper.cc:2436
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2418
+#: src/Zypper.cc:2439
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2421
+#: src/Zypper.cc:2442
 msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
 
-#: src/Zypper.cc:2424
+#: src/Zypper.cc:2445
 msgid "Just another means to specify a .repo file to read."
 msgstr ""
 
-#: src/Zypper.cc:2425
+#: src/Zypper.cc:2446
 msgid "Probe URI."
 msgstr ""
 
-#: src/Zypper.cc:2426
+#: src/Zypper.cc:2447
 msgid "Don't probe URI, probe later during refresh."
 msgstr ""
 
-#: src/Zypper.cc:2430
+#: src/Zypper.cc:2451
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2458
+#: src/Zypper.cc:2479
 msgid "repos (lr) [OPTIONS] [REPO] ..."
 msgstr "repos (lr) [valinnat] [repo] ..."
 
 #. translators: command description
-#: src/Zypper.cc:2461
+#: src/Zypper.cc:2482
 msgid "List all defined repositories."
 msgstr "Listaa järjestelmän asennuslähteet."
 
 #. translators: -e, --export <FILE.repo>
-#: src/Zypper.cc:2465
+#: src/Zypper.cc:2486
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "Tallenna kaikki asennuslähteet yksittäiseen .repo-tiedostoon."
 
 #. translators: -a, --alias
-#: src/Zypper.cc:2467
+#: src/Zypper.cc:2488
 msgid "Show also repository alias."
 msgstr "Näyttää asennuslähteiden aliakset."
 
 #. translators: -n, --name
-#: src/Zypper.cc:2469
+#: src/Zypper.cc:2490
 msgid "Show also repository name."
 msgstr "Näyttää asennuslähteiden nimet."
 
 #. translators: -r, --refresh
-#: src/Zypper.cc:2475
+#: src/Zypper.cc:2496
 msgid "Show also the autorefresh flag."
 msgstr "Näyttää automaattisen virkistyksen lippu."
 
 #. translators: -s, --service
-#: src/Zypper.cc:2479
+#: src/Zypper.cc:2500
 msgid "Show also alias of parent service."
 msgstr "Näyttää myös kantapalvelun aliaksen."
 
 #. translators: -A, --sort-by-alias
-#: src/Zypper.cc:2487
+#: src/Zypper.cc:2508
 msgid "Sort the list by alias."
 msgstr "Järjestää aliaksen mukaan."
 
-#: src/Zypper.cc:2493
+#: src/Zypper.cc:2514
 msgid ""
 "repos (lr) [OPTIONS] [repo] ...\n"
 "\n"
@@ -3140,7 +3158,7 @@ msgstr ""
 "-A, --sort-by-alias       Järjestää aliaksen mukaan.\n"
 "-N, --sort-by-name        Järjestää nimen mukaan.\n"
 
-#: src/Zypper.cc:2527
+#: src/Zypper.cc:2548
 msgid ""
 "removerepo (rr) [OPTIONS] <alias|#|URI>\n"
 "\n"
@@ -3161,18 +3179,18 @@ msgstr ""
 "    --loose-query      Jätä URI-osoitteen kyselyjono huomioimatta.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2549
+#: src/Zypper.cc:2570
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
 msgstr "renamerepo (nr) [valinnat] <alias|#|URI> <uusi alias>"
 
 #. translators: command description
-#: src/Zypper.cc:2552
+#: src/Zypper.cc:2573
 msgid "Assign new alias to the repository specified by alias, number or URI."
 msgstr ""
 "Määrittelee URI-osoitteella, aliaksella tai järjestysnumerolla määritetylle "
 "asennuslähteelle uuden aliaksen."
 
-#: src/Zypper.cc:2558
+#: src/Zypper.cc:2579
 msgid ""
 "renamerepo (nr) [OPTIONS] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -3189,7 +3207,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:2582
+#: src/Zypper.cc:2603
 #, fuzzy, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -3225,7 +3243,7 @@ msgstr ""
 "-k, --keep-packages       Ottaa RPM-tiedostojen välimuistin käyttöön.\n"
 "-K, --no-keep-packages    Poistaa RPM-tiedostojen välimuistin käytöstä.\n"
 
-#: src/Zypper.cc:2599
+#: src/Zypper.cc:2620
 msgid ""
 "-a, --all                 Apply changes to all repositories.\n"
 "-l, --local               Apply changes to all local repositories.\n"
@@ -3241,18 +3259,18 @@ msgstr ""
 "asennuslähteissä.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2608
+#: src/Zypper.cc:2629
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2611
+#: src/Zypper.cc:2632
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2614
+#: src/Zypper.cc:2635
 #, boost-format
 msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
@@ -3260,12 +3278,12 @@ msgid ""
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2644
+#: src/Zypper.cc:2665
 msgid "refresh (ref) [ALIAS|#|URI] ..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2647
+#: src/Zypper.cc:2668
 msgid ""
 "Refresh repositories specified by their alias, number or URI. If none are "
 "specified, all enabled repositories will be refreshed."
@@ -3274,38 +3292,38 @@ msgstr ""
 "Jos asennuslähteitä ei määritetty, kaikki päivitetään."
 
 #. translators: -b, --force-build
-#: src/Zypper.cc:2653
+#: src/Zypper.cc:2674
 msgid "Force rebuild of the database."
 msgstr "Pakottaa tietokannan uudelleenrakennuksen."
 
 #. translators: -d, --force-download
-#: src/Zypper.cc:2655
+#: src/Zypper.cc:2676
 msgid "Force download of raw metadata."
 msgstr "Pakottaa hakemaan metatiedot uudelleen."
 
 #. translators: -B, --build-only
-#: src/Zypper.cc:2657
+#: src/Zypper.cc:2678
 msgid "Only build the database, don't download metadata."
 msgstr ""
 "Rakentaa ainoastaan tietokannan uudelleen. Ei nouda  metatietoja uudelleen."
 
 #. translators: -D, --download-only
-#: src/Zypper.cc:2659
+#: src/Zypper.cc:2680
 msgid "Only download raw metadata, don't build the database."
 msgstr ""
 "Noutaa ainoastaan metatiedot uudelleen, ei  rakenna tietokantaa uudelleen."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:2661
+#: src/Zypper.cc:2682
 msgid "Refresh only specified repositories."
 msgstr "Päivittää ainoastaan määritetyt asennuslähteet."
 
 #. translators: -s, --services
-#: src/Zypper.cc:2663
+#: src/Zypper.cc:2684
 msgid "Refresh also services before refreshing repos."
 msgstr "Päivittää myös palvelut ennen asennuslähteiden päivitystä."
 
-#: src/Zypper.cc:2667
+#: src/Zypper.cc:2688
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3341,36 +3359,36 @@ msgstr ""
 "päivitystä.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2698
+#: src/Zypper.cc:2719
 msgid "clean (cc) [ALIAS|#|URI] ..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2701
+#: src/Zypper.cc:2722
 msgid "Clean local caches."
 msgstr "Puhdistaa paikallisen välimuistin."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:2705
+#: src/Zypper.cc:2726
 msgid "Clean only specified repositories."
 msgstr "Puhdistaa ainoastaan määritetyt asennuslähteet."
 
 #. translators: -m, --metadata
-#: src/Zypper.cc:2707
+#: src/Zypper.cc:2728
 msgid "Clean metadata cache."
 msgstr "Puhdistaa metatietojen välimuistin."
 
 #. translators: -M, --raw-metadata
-#: src/Zypper.cc:2709
+#: src/Zypper.cc:2730
 msgid "Clean raw metadata cache."
 msgstr "Puhdistaa raakametatietojen välimuistin."
 
 #. translators: -a, --all
-#: src/Zypper.cc:2711
+#: src/Zypper.cc:2732
 msgid "Clean both metadata and package caches."
 msgstr "Puhdistaa sekä metatieto- että pakettivälimuistit."
 
-#: src/Zypper.cc:2715
+#: src/Zypper.cc:2736
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3394,7 +3412,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2745
+#: src/Zypper.cc:2766
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [OPTIONS]\n"
@@ -3433,7 +3451,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2802
+#: src/Zypper.cc:2823
 #, c-format, boost-format
 msgid ""
 "update (up) [OPTIONS] [packagename] ...\n"
@@ -3502,7 +3520,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only             Lataa ainoastaan lataa (ei asenna).\n"
 
-#: src/Zypper.cc:2880
+#: src/Zypper.cc:2901
 #, fuzzy, c-format, boost-format
 msgid ""
 "patch [OPTIONS]\n"
@@ -3572,11 +3590,11 @@ msgstr ""
 "                           %s\n"
 "-d, --download-only        Lataa ainoastaan paketit (ei asenneta).\n"
 
-#: src/Zypper.cc:2907
+#: src/Zypper.cc:2928
 msgid "Install only patches which affect the package management itself."
 msgstr ""
 
-#: src/Zypper.cc:2908
+#: src/Zypper.cc:2929
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
@@ -3584,64 +3602,64 @@ msgid ""
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2940
+#: src/Zypper.cc:2961
 msgid "list-patches (lp) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2943
+#: src/Zypper.cc:2964
 msgid "List all applicable patches."
 msgstr ""
 
-#: src/Zypper.cc:2946
+#: src/Zypper.cc:2967
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
 msgstr ""
 
-#: src/Zypper.cc:2947
+#: src/Zypper.cc:2968
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
 msgstr ""
 
-#: src/Zypper.cc:2948
+#: src/Zypper.cc:2969
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
 
-#: src/Zypper.cc:2949
+#: src/Zypper.cc:2970
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
 msgstr ""
 
-#: src/Zypper.cc:2950
+#: src/Zypper.cc:2971
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
 msgstr ""
 
-#: src/Zypper.cc:2951
+#: src/Zypper.cc:2972
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
 msgstr ""
 
-#: src/Zypper.cc:2952
+#: src/Zypper.cc:2973
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
 msgstr ""
 
-#: src/Zypper.cc:2954
+#: src/Zypper.cc:2975
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
 msgstr ""
 
-#: src/Zypper.cc:2990
+#: src/Zypper.cc:3011
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [OPTIONS]\n"
@@ -3696,7 +3714,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only             Lataa ainoastaan lataa, ei asenna.\n"
 
-#: src/Zypper.cc:3056
+#: src/Zypper.cc:3077
 #, fuzzy
 msgid ""
 "search (se) [OPTIONS] [querystring] ...\n"
@@ -3787,50 +3805,50 @@ msgstr ""
 "Jos hakumerkkijono on suljettu '/'-merkillä, sen tulkitaan olevan "
 "säännöllinen lauseke.\n"
 
-#: src/Zypper.cc:3090
+#: src/Zypper.cc:3111
 msgid "Search for packages which supplement the search strings."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3108
+#: src/Zypper.cc:3129
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3111
+#: src/Zypper.cc:3132
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
 
-#: src/Zypper.cc:3114
+#: src/Zypper.cc:3135
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
 msgstr ""
 
-#: src/Zypper.cc:3115
+#: src/Zypper.cc:3136
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3133
+#: src/Zypper.cc:3154
 msgid "patches (pch) [REPOSITORY] ..."
 msgstr "patches (pch) [asennuslähde] ..."
 
 #. translators: command description
-#: src/Zypper.cc:3136
+#: src/Zypper.cc:3157
 msgid "List all patches available in specified repositories."
 msgstr "Listaa saatavilla olevat korjauspäivitykset."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:3140 src/Zypper.cc:3183 src/Zypper.cc:3243
+#: src/Zypper.cc:3161 src/Zypper.cc:3204 src/Zypper.cc:3264
 msgid "Just another means to specify repository."
 msgstr "Listaa ainoastaan tietyn asennuslähteen korjauspäivitykset."
 
-#: src/Zypper.cc:3144
+#: src/Zypper.cc:3165
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3850,56 +3868,56 @@ msgstr ""
 "korjauspäivitykset.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3176
+#: src/Zypper.cc:3197
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
 msgstr "packages (pa) [valinnat] [asennuslähde] ..."
 
 #. translators: command description
-#: src/Zypper.cc:3179
+#: src/Zypper.cc:3200
 msgid "List all packages available in specified repositories."
 msgstr "Tulostaa luettelon haluttujen asennuslähteiden paketeista."
 
 #. translators: -i, --installed-only
-#: src/Zypper.cc:3185
+#: src/Zypper.cc:3206
 msgid "Show only installed packages."
 msgstr "Näyttää vain asennetut paketit."
 
 #. translators: -u, --not-installed-only
-#: src/Zypper.cc:3187
+#: src/Zypper.cc:3208
 msgid "Show only packages which are not installed."
 msgstr "Näyttää vain asentamattomat paketit."
 
 #. translators: --orphaned
-#: src/Zypper.cc:3189
+#: src/Zypper.cc:3210
 msgid "Show packages which are orphaned (without repository)."
 msgstr "Näyttää orvot paketit (ilman asennuslähdettä)."
 
 #. translators: --suggested
-#: src/Zypper.cc:3191
+#: src/Zypper.cc:3212
 msgid "Show packages which are suggested."
 msgstr "Näyttää ehdotetut paketit."
 
 #. translators: --recommended
-#: src/Zypper.cc:3193
+#: src/Zypper.cc:3214
 msgid "Show packages which are recommended."
 msgstr "Näyttää suositellut paketit."
 
 #. translators: --unneeded
-#: src/Zypper.cc:3195
+#: src/Zypper.cc:3216
 msgid "Show packages which are unneeded."
 msgstr "Näyttää paketit joita ei enää tarvita."
 
 #. translators: -N, --sort-by-name
-#: src/Zypper.cc:3197
+#: src/Zypper.cc:3218
 msgid "Sort the list by package name."
 msgstr "Järjestä luettelo paketin nimen mukaan."
 
 #. translators: -R, --sort-by-repo
-#: src/Zypper.cc:3199
+#: src/Zypper.cc:3220
 msgid "Sort the list by repository."
 msgstr "Järjestä luettelo asennuslähteen mukaan."
 
-#: src/Zypper.cc:3203
+#: src/Zypper.cc:3224
 msgid ""
 "packages (pa) [OPTIONS] [repository] ...\n"
 "\n"
@@ -3935,26 +3953,26 @@ msgstr ""
 "-R, --sort-by-repo        Järjestä luettelo asennuslähteen mukaan.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3236
+#: src/Zypper.cc:3257
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
 msgstr "patterns (pt) [valinnat] [asennuslähde] ..."
 
 #. translators: command description
-#: src/Zypper.cc:3239
+#: src/Zypper.cc:3260
 msgid "List all patterns available in specified repositories."
 msgstr "Listaa asennuslähteen tarjoamat ohjelmistoryhmät."
 
 #. translators: -i, --installed-only
-#: src/Zypper.cc:3245
+#: src/Zypper.cc:3266
 msgid "Show only installed patterns."
 msgstr "Näytä vain asennetut ohjelmistoryhmät."
 
 #. translators: -u, --not-installed-only
-#: src/Zypper.cc:3247
+#: src/Zypper.cc:3268
 msgid "Show only patterns which are not installed."
 msgstr "Näytä asentamattomat ohjelmistoryhmät."
 
-#: src/Zypper.cc:3251
+#: src/Zypper.cc:3272
 msgid ""
 "patterns (pt) [OPTIONS] [repository] ...\n"
 "\n"
@@ -3976,7 +3994,7 @@ msgstr ""
 "-i, --installed-only      Näytä vain asennetut ohjelmistoryhmät.\n"
 "-u, --not-installed-only  Näytä asentamattomat ohjelmistoryhmät.\n"
 
-#: src/Zypper.cc:3279
+#: src/Zypper.cc:3300
 msgid ""
 "products (pd) [OPTIONS] [repository] ...\n"
 "\n"
@@ -3998,12 +4016,12 @@ msgstr ""
 "-i, --installed-only      Näyttää asennetut tuotteet.\n"
 "-u, --not-installed-only  Näyttää asentamattomat tuotteet.\n"
 
-#: src/Zypper.cc:3288
+#: src/Zypper.cc:3309
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
 
-#: src/Zypper.cc:3313
+#: src/Zypper.cc:3334
 #, c-format, boost-format
 msgid ""
 "info (if) [OPTIONS] <name> ...\n"
@@ -4047,11 +4065,11 @@ msgstr ""
 "    --recommends          Näytä mitä paketti suosittaa.\n"
 "    --suggests            Näytä mitä paketti ehdottaa.\n"
 
-#: src/Zypper.cc:3332
+#: src/Zypper.cc:3353
 msgid "Show supplements."
 msgstr ""
 
-#: src/Zypper.cc:3347
+#: src/Zypper.cc:3368
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -4066,7 +4084,7 @@ msgstr ""
 "\n"
 "Tämä on alias komennolle '%s'.\n"
 
-#: src/Zypper.cc:3366
+#: src/Zypper.cc:3387
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -4081,7 +4099,7 @@ msgstr ""
 "\n"
 "Tämä on alias komennolle '%s'.\n"
 
-#: src/Zypper.cc:3385
+#: src/Zypper.cc:3406
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -4097,16 +4115,16 @@ msgstr ""
 "Tämä on alias komennolle '%s'.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3403
+#: src/Zypper.cc:3424
 msgid "what-provides (wp) <CAPABILITY>"
 msgstr "what-provides (wp) <ominaisuus> ..."
 
 #. translators: command description
-#: src/Zypper.cc:3406
+#: src/Zypper.cc:3427
 msgid "List all packages providing the specified capability."
 msgstr "Listaa paketit, jotka tuovat halutut ominaisuudet."
 
-#: src/Zypper.cc:3412
+#: src/Zypper.cc:3433
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -4121,16 +4139,16 @@ msgstr ""
 "Tällä komennolla ei ole valitsimia.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3465
+#: src/Zypper.cc:3486
 msgid "moo"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3468
+#: src/Zypper.cc:3489
 msgid "Show an animal."
 msgstr "Näyttää eläimen"
 
-#: src/Zypper.cc:3474
+#: src/Zypper.cc:3495
 msgid ""
 "moo\n"
 "\n"
@@ -4146,12 +4164,12 @@ msgstr ""
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3498
+#: src/Zypper.cc:3519
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
 msgstr "addlock (al) [valinnat] <paketin nimi> ..."
 
 #. translators: command description
-#: src/Zypper.cc:3501
+#: src/Zypper.cc:3522
 msgid ""
 "Add a package lock. Specify packages to lock by exact name or by a glob "
 "pattern using '*' and '?' wildcard characters."
@@ -4160,18 +4178,18 @@ msgstr ""
 "jokerimerkkejä: \"*\" ja \"?\"."
 
 #. translators: -r, --repo <alias|#|URI>
-#: src/Zypper.cc:3505
+#: src/Zypper.cc:3526
 msgid "Restrict the lock to the specified repository."
 msgstr "Rajoita lukitus vain tiettyyn asennuslähteeseen."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3527
+#: src/Zypper.cc:3548
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr "removelock (rl) [valinnat] <lukon numero|paketin nimi> ..."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
-#: src/Zypper.cc:3530
+#: src/Zypper.cc:3551
 #, boost-format
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
@@ -4181,38 +4199,38 @@ msgstr ""
 "saadaan '%1%' tai paketin nimen mukaan."
 
 #. translators: -r, --repo <alias|#|URI>
-#: src/Zypper.cc:3534
+#: src/Zypper.cc:3555
 msgid "Remove only locks with specified repository."
 msgstr "Poistaa lukituksen vain tietystä asennuslähteestä."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3554
+#: src/Zypper.cc:3575
 msgid "cleanlocks (cl)"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3557
+#: src/Zypper.cc:3578
 msgid "Remove useless locks."
 msgstr "Poistaa käyttämättömiä lukkoja."
 
 #. translators: -d, --only-duplicates
-#: src/Zypper.cc:3561
+#: src/Zypper.cc:3582
 msgid "Clean only duplicate locks."
 msgstr "Poistaa ainoastaan päällekkäisiä lukkoja."
 
 #. translators: -e, --only-empty
-#: src/Zypper.cc:3563
+#: src/Zypper.cc:3584
 msgid "Clean only locks which doesn't lock anything."
 msgstr "Poistaa ainoastaan tarpeettomia lukkoja."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3579
+#: src/Zypper.cc:3600
 msgid "targetos (tos) [OPTIONS]"
 msgstr "targetos (tos) [valinnat]"
 
 #. translators: command description
-#: src/Zypper.cc:3582
+#: src/Zypper.cc:3603
 msgid ""
 "Show various information about the target operating system. By default, an "
 "ID string is shown."
@@ -4220,11 +4238,11 @@ msgstr ""
 "Näytä tietoja kohdekäyttöjärjestelmästä. Oletuksena, näytetään ID-merkkijono."
 
 #. translators: -l, --label
-#: src/Zypper.cc:3586
+#: src/Zypper.cc:3607
 msgid "Show the operating system label."
 msgstr "Näytä käyttöjärjestelmän nimi."
 
-#: src/Zypper.cc:3590
+#: src/Zypper.cc:3611
 msgid ""
 "targetos (tos) [OPTIONS]\n"
 "\n"
@@ -4243,21 +4261,21 @@ msgstr ""
 "-l, --label                 Näytä käyttöjärjestelmän nimi.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3613
+#: src/Zypper.cc:3634
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
 msgstr "versioncmp (vcmp) <versio1> <versio2>"
 
 #. translators: command description
-#: src/Zypper.cc:3616
+#: src/Zypper.cc:3637
 msgid "Compare the versions supplied as arguments."
 msgstr "Vertailee kahta versioa."
 
 #. translators: -m, --match
-#: src/Zypper.cc:3620
+#: src/Zypper.cc:3641
 msgid "Takes missing release number as any release."
 msgstr "Valitsee puuttuvan julkaisuversion mistä tahansa julkaisusta."
 
-#: src/Zypper.cc:3624
+#: src/Zypper.cc:3645
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4274,16 +4292,16 @@ msgstr ""
 "-m, --match  Valitsee puuttuvan julkaisuversion mistä tahansa julkaisusta.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3645
+#: src/Zypper.cc:3666
 msgid "licenses"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3648
+#: src/Zypper.cc:3669
 msgid "Report licenses and EULAs of currently installed software packages."
 msgstr "Näyttää raportin lisensseistä ja käyttöehtosopimuksista."
 
-#: src/Zypper.cc:3654
+#: src/Zypper.cc:3675
 msgid ""
 "licenses\n"
 "\n"
@@ -4298,13 +4316,13 @@ msgstr ""
 "Tällä komennolla ei ole valitsimia.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3680
+#: src/Zypper.cc:3701
 #, fuzzy
 msgid "ps [OPTIONS]"
 msgstr "näyttää kaikki valinnat"
 
 #. translators: command description
-#: src/Zypper.cc:3683
+#: src/Zypper.cc:3704
 #, fuzzy
 msgid ""
 "List running processes which might still use files and libraries deleted by "
@@ -4318,7 +4336,7 @@ msgstr ""
 "Tällä komennolla ei ole valitsimia.\n"
 
 #. translators: -s, --short
-#: src/Zypper.cc:3687
+#: src/Zypper.cc:3708
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4326,7 +4344,7 @@ msgid ""
 msgstr ""
 
 #. translators: --print <format>
-#: src/Zypper.cc:3689
+#: src/Zypper.cc:3710
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4335,17 +4353,17 @@ msgid ""
 msgstr ""
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3691
+#: src/Zypper.cc:3712
 msgid "Write debug output to file <path>."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3711
+#: src/Zypper.cc:3732
 msgid "download [OPTIONS] <PACKAGES>..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3714
+#: src/Zypper.cc:3735
 msgid ""
 "Download rpms specified on the commandline to a local directory. Per default "
 "packages are downloaded to the libzypp package cache (/var/cache/zypp/"
@@ -4354,7 +4372,7 @@ msgid ""
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3717
+#: src/Zypper.cc:3738
 msgid ""
 "In XML output a <download-result> node is written for each package zypper "
 "tried to download. Upon success the local path is is found in 'download-"
@@ -4362,18 +4380,18 @@ msgid ""
 msgstr ""
 
 #. translators: --all-matches
-#: src/Zypper.cc:3721
+#: src/Zypper.cc:3742
 msgid ""
 "Download all versions matching the commandline arguments. Otherwise only the "
 "best version of each matching package is downloaded."
 msgstr ""
 
 #. translators: --dry-run
-#: src/Zypper.cc:3723
+#: src/Zypper.cc:3744
 msgid "Don't download any package, just report what would be done."
 msgstr ""
 
-#: src/Zypper.cc:3727
+#: src/Zypper.cc:3748
 #, fuzzy
 msgid ""
 "download [OPTIONS] <PACKAGES>...\n"
@@ -4415,18 +4433,18 @@ msgstr ""
 "                     tulisi tapahtumaan.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3768
+#: src/Zypper.cc:3789
 msgid "source-download"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3771
+#: src/Zypper.cc:3792
 msgid "Download source rpms for all installed packages to a local directory."
 msgstr ""
 "Lataa lähdekoodipaketit asennetuille paketeille paikalliseen hakemistoon."
 
 #. translators: -d, --directory <DIR>
-#: src/Zypper.cc:3775
+#: src/Zypper.cc:3796
 msgid ""
 "Download all source rpms to this directory. Default: /var/cache/zypper/"
 "source-download"
@@ -4435,18 +4453,18 @@ msgstr ""
 "source-download"
 
 #. translators: --delete
-#: src/Zypper.cc:3777
+#: src/Zypper.cc:3798
 msgid "Delete extraneous source rpms in the local directory."
 msgstr "Poista epäolennaiset lähdekoodipaketit paikallisesta hakemistosta."
 
 #. translators: --no-delete
-#: src/Zypper.cc:3779
+#: src/Zypper.cc:3800
 msgid "Do not delete extraneous source rpms."
 msgstr ""
 "Älä poista epäolennaisia lähdekoodipaketteja paikallisesta hakemistosta."
 
 #. translators: --status
-#: src/Zypper.cc:3781
+#: src/Zypper.cc:3802
 msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
@@ -4454,7 +4472,7 @@ msgstr ""
 "Älä lataa yhtään lähdekoodipakettia, mutta näytä mitkä lähdekoodipaketit "
 "puuttuvat tai ovat epäolennaisia."
 
-#: src/Zypper.cc:3785
+#: src/Zypper.cc:3806
 msgid ""
 "source-download\n"
 "\n"
@@ -4486,16 +4504,16 @@ msgstr ""
 "epäolennaisia.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3814
+#: src/Zypper.cc:3835
 msgid "quit (exit, ^D)"
 msgstr "Poistu (exit, ^D)"
 
 #. translators: command description
-#: src/Zypper.cc:3817
+#: src/Zypper.cc:3838
 msgid "Quit the current zypper shell."
 msgstr "Lopettaa tämän zypper-kehotteen."
 
-#: src/Zypper.cc:3823
+#: src/Zypper.cc:3844
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4510,16 +4528,16 @@ msgstr ""
 "Tällä komennolla ei ole valitsimia.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3842
+#: src/Zypper.cc:3863
 msgid "shell (sh)"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3845
+#: src/Zypper.cc:3866
 msgid "Enter the zypper command shell."
 msgstr "Käynnistää zypper-kehotteen."
 
-#: src/Zypper.cc:3851
+#: src/Zypper.cc:3872
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4533,7 +4551,7 @@ msgstr ""
 "\n"
 "Tällä komennolla ei ole valitsimia.\n"
 
-#: src/Zypper.cc:3877
+#: src/Zypper.cc:3898
 #, c-format, boost-format
 msgid ""
 "patch-search [OPTIONS] [querystring...]\n"
@@ -4547,17 +4565,17 @@ msgstr ""
 "\"%s\"..\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3894
+#: src/Zypper.cc:3915
 msgid "ping [OPTIONS]"
 msgstr "ping [valinnat]"
 
 #. translators: command description
-#: src/Zypper.cc:3897
+#: src/Zypper.cc:3918
 msgid "This command has dummy implementation which always returns 0."
 msgstr "Tällä komennolla on tyhmä täytäntöönpano joka palauttaa aina 0."
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3904
+#: src/Zypper.cc:3925
 msgid ""
 "ping [OPTIONS]\n"
 "\n"
@@ -4567,12 +4585,12 @@ msgstr ""
 "\n"
 "Tällä komennolla on tyhmä täytäntöönpano joka palauttaa aina 0.\n"
 
-#: src/Zypper.cc:3948 src/Zypper.cc:6004
+#: src/Zypper.cc:3969 src/Zypper.cc:6025
 msgid "Unexpected program flow."
 msgstr "Odottamaton ohjelman kulku."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:4079
+#: src/Zypper.cc:4100
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4582,20 +4600,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:4102
+#: src/Zypper.cc:4123
 msgid "Root privileges are required for refreshing services."
 msgstr "Palvelun päivittämiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: src/Zypper.cc:4126 src/Zypper.cc:4205 src/Zypper.cc:4377
+#: src/Zypper.cc:4147 src/Zypper.cc:4226 src/Zypper.cc:4398
 msgid "Root privileges are required for modifying system services."
 msgstr "Palveluiden muokkaaminen vaatii pääkäyttäjän oikeudet."
 
-#: src/Zypper.cc:4189
+#: src/Zypper.cc:4210
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "\"%s\" ei ole kelvollinen palvelun tyyppi."
 
-#: src/Zypper.cc:4191
+#: src/Zypper.cc:4212
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -4606,39 +4624,39 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:4216 src/utils/messages.cc:47
+#: src/Zypper.cc:4237 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "Määrittele joko alias tai käytä jotain ryhmävalintaa."
 
-#: src/Zypper.cc:4248
+#: src/Zypper.cc:4269
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Palvelua \"%s\" ei löytynyt."
 
-#: src/Zypper.cc:4274 src/Zypper.cc:4376 src/Zypper.cc:4480 src/Zypper.cc:4532
+#: src/Zypper.cc:4295 src/Zypper.cc:4397 src/Zypper.cc:4501 src/Zypper.cc:4553
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Asennuslähteiden muokkaaminen vaatii pääkäyttäjän oikeudet."
 
-#: src/Zypper.cc:4300 src/Zypper.cc:4644
+#: src/Zypper.cc:4321 src/Zypper.cc:4665
 msgid "Too few arguments."
 msgstr "Valitsimia puuttuu."
 
-#: src/Zypper.cc:4308
+#: src/Zypper.cc:4329
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Käytettäessä ainoastaan yhtä valintaa, sen täytyy osoittaa .repo-tiedostoon."
 
-#: src/Zypper.cc:4338
+#: src/Zypper.cc:4359
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "Valintaa %s ei voida käyttää samanaikaisesti %s kanssa. Käytetään %s."
 
-#: src/Zypper.cc:4357
+#: src/Zypper.cc:4378
 msgid "Specified type is not a valid repository type:"
 msgstr "Virheellinen asennuslähteen tyyppi:"
 
-#: src/Zypper.cc:4358
+#: src/Zypper.cc:4379
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
@@ -4647,7 +4665,7 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4423
+#: src/Zypper.cc:4444
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr ""
@@ -4656,70 +4674,70 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4456
+#: src/Zypper.cc:4477
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr ""
 "Palvelua \"%s\" ei löydy aliaksen, järjestysnumeron tai URI-osoitteen "
 "perusteella."
 
-#: src/Zypper.cc:4487
+#: src/Zypper.cc:4508
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Parametreja puuttuu: anna vähintään URI-osoite ja alias."
 
-#: src/Zypper.cc:4511
+#: src/Zypper.cc:4532
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Asennuslähdettä \"%s\" ei löydy."
 
-#: src/Zypper.cc:4571
+#: src/Zypper.cc:4592
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Asennuslähdettä %s ei löydy."
 
-#: src/Zypper.cc:4588
+#: src/Zypper.cc:4609
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Asennuslähteiden päivittämiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: src/Zypper.cc:4594
+#: src/Zypper.cc:4615
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Valinnalla \"%s\" ei ole vaikutusta tässä."
 
-#: src/Zypper.cc:4602
+#: src/Zypper.cc:4623
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Käytettäessä \"%s\" ei sallita parametreja."
 
-#: src/Zypper.cc:4626
+#: src/Zypper.cc:4647
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Välimuistien puhdistamiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: src/Zypper.cc:4645
+#: src/Zypper.cc:4666
 msgid "At least one package name is required."
 msgstr "Määrittele vähintään yhden paketin nimi."
 
-#: src/Zypper.cc:4654 src/Zypper.cc:4903 src/Zypper.cc:4940
+#: src/Zypper.cc:4675 src/Zypper.cc:4924 src/Zypper.cc:4961
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
 "Pakettien asentamiseen tai poistamiseen vaaditaan pääkäyttäjän oikeudet."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4666
+#: src/Zypper.cc:4687
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Ohitetaan valinnat, merkitään koko asennuslähde."
 
-#: src/Zypper.cc:4677
+#: src/Zypper.cc:4698
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Tuntematon pakettityyppi: %s"
 
-#: src/Zypper.cc:4687
+#: src/Zypper.cc:4708
 msgid "Cannot uninstall patches."
 msgstr "Paikkausten poistaminen ei onnistu."
 
-#: src/Zypper.cc:4688
+#: src/Zypper.cc:4709
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4729,36 +4747,36 @@ msgstr ""
 "päätellä\n"
 "asennetuista tiedostoista tai tietokannan merkintöjen perusteella."
 
-#: src/Zypper.cc:4698
+#: src/Zypper.cc:4719
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Lähdekoodipakettien poistamista ei ole vielä toteutettu."
 
-#: src/Zypper.cc:4718
+#: src/Zypper.cc:4739
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "\"%s\" vaikuttaa RPM-tiedostolta: yritetään ladata se."
 
-#: src/Zypper.cc:4727
+#: src/Zypper.cc:4748
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Virhe RPM-tiedostossa %s. Ohitetaan."
 
-#: src/Zypper.cc:4749
+#: src/Zypper.cc:4770
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 "Virhe luettaessa RPM-paketin tunnistetietoa %s. Onko tämä varmasti RPM-"
 "tiedosto?"
 
-#: src/Zypper.cc:4770
+#: src/Zypper.cc:4791
 msgid "Plain RPM files cache"
 msgstr "RPM-tiedostojen välimuisti"
 
-#: src/Zypper.cc:4792
+#: src/Zypper.cc:4813
 msgid "No valid arguments specified."
 msgstr "Yhtään virheetöntä valintaa ei määritetty."
 
-#: src/Zypper.cc:4809 src/Zypper.cc:4956
+#: src/Zypper.cc:4830 src/Zypper.cc:4977
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4767,75 +4785,75 @@ msgstr ""
 "ratkaisimia. Mitään ei voida asentaa."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4846 src/Zypper.cc:5433
+#: src/Zypper.cc:4867 src/Zypper.cc:5454
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s on ristiriidassa %s kanssa"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4854
+#: src/Zypper.cc:4875
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s ei voida käyttää %s kanssa"
 
-#: src/Zypper.cc:4895
+#: src/Zypper.cc:4916
 msgid "Source package name is a required argument."
 msgstr "Lähdekoodipaketin nimi puuttuu."
 
-#: src/Zypper.cc:5013 src/Zypper.cc:5352 src/Zypper.cc:5452 src/Zypper.cc:5662
-#: src/Zypper.cc:5713 src/Zypper.cc:5753
+#: src/Zypper.cc:5034 src/Zypper.cc:5373 src/Zypper.cc:5473 src/Zypper.cc:5683
+#: src/Zypper.cc:5734 src/Zypper.cc:5774
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Tuntematon paketin tyyppi \"%s\"."
 
-#: src/Zypper.cc:5038 src/repos.cc:796
+#: src/Zypper.cc:5059 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Määritetty asennuslähde \"%s\" on poistettu käytöstä."
 
 #. translators: empty search result message
-#: src/Zypper.cc:5194
+#: src/Zypper.cc:5215
 #, fuzzy
 msgid "No matching items found."
 msgstr "Ei vikoja."
 
-#: src/Zypper.cc:5229
+#: src/Zypper.cc:5250
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Virhe valmisteltaessa tai suoritettaessa hakua"
 
-#: src/Zypper.cc:5230
+#: src/Zypper.cc:5251
 msgid "See the above message for a hint."
 msgstr "Tarkista yllä oleva virheviesti."
 
-#: src/Zypper.cc:5231 src/repos.cc:1009
+#: src/Zypper.cc:5252 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "\"zypper refresh\" -komennon ajaminen pääkäyttäjänä saattaa korjata ongelman."
 
-#: src/Zypper.cc:5312
+#: src/Zypper.cc:5333
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
 
-#: src/Zypper.cc:5371 src/Zypper.cc:5419
+#: src/Zypper.cc:5392 src/Zypper.cc:5440
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Valintaa %s ei voida käyttää %s kanssa."
 
-#: src/Zypper.cc:5400
+#: src/Zypper.cc:5421
 msgid "Root privileges are required for updating packages."
 msgstr "Pakettien päivittämiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: src/Zypper.cc:5459 src/Zypper.cc:5467 src/Zypper.cc:5548
+#: src/Zypper.cc:5480 src/Zypper.cc:5488 src/Zypper.cc:5569
 msgid "Operation not supported."
 msgstr "Toiminto ei ole tuettu."
 
-#: src/Zypper.cc:5460
+#: src/Zypper.cc:5481
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Päivittääksesi asennetut  tuotteet käytä  \"%s\"."
 
-#: src/Zypper.cc:5468
+#: src/Zypper.cc:5489
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4844,18 +4862,18 @@ msgstr ""
 "Zypper ei pidä kirjaa asennetuista lähdekoodipaketeista. Asentaaksesi "
 "viimeisimmät lähdekoodipaketit ja rakentaaksesi riippuvuudet, käytä \"%s\"."
 
-#: src/Zypper.cc:5484
+#: src/Zypper.cc:5505
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Ei voida käyttää monia tyyppejä kun määritetyt paketit annetaan "
 "argumentteina."
 
-#: src/Zypper.cc:5584
+#: src/Zypper.cc:5605
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Jakeluversion päivittämiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: src/Zypper.cc:5604
+#: src/Zypper.cc:5625
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4866,65 +4884,65 @@ msgstr ""
 "käytössä. Varmista asennuslähteiden yhteensopivuus ennen kuin jatkat. Katso "
 "\"%s\" saadaksesi komennosta lisätietoa."
 
-#: src/Zypper.cc:5629 src/utils/messages.cc:55
+#: src/Zypper.cc:5650 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "Tarvittava valinta puuttuu."
 
-#: src/Zypper.cc:5632 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5653 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "Käyttö"
 
-#: src/Zypper.cc:5692 src/Zypper.cc:5733
+#: src/Zypper.cc:5713 src/Zypper.cc:5754
 msgid "Root privileges are required for adding of package locks."
 msgstr "Pakettien lukitsemiseen vaaditaan pääkäyttäjäoikeudet."
 
-#: src/Zypper.cc:5787
+#: src/Zypper.cc:5808
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "Poistettiin %lu lukko."
 msgstr[1] "Poistettiin %lu lukkoa."
 
-#: src/Zypper.cc:5798
+#: src/Zypper.cc:5819
 msgid "XML output not implemented for this command."
 msgstr ""
 
-#: src/Zypper.cc:5811
+#: src/Zypper.cc:5832
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Jakelun nimi: %s"
 
-#: src/Zypper.cc:5812
+#: src/Zypper.cc:5833
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Lyhyt nimi: %s"
 
-#: src/Zypper.cc:5853
+#: src/Zypper.cc:5874
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s vastaa %s"
 
-#: src/Zypper.cc:5855
+#: src/Zypper.cc:5876
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s on uudempi kuin %s"
 
-#: src/Zypper.cc:5857
+#: src/Zypper.cc:5878
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s on vanhempi kuin %s"
 
-#: src/Zypper.cc:5939 src/source-download.cc:217
+#: src/Zypper.cc:5960 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Riittävät oikeudet puuttuvat lataushakemiston '%s' käyttöön."
 
-#: src/Zypper.cc:5991
+#: src/Zypper.cc:6012
 msgid "This command only makes sense in the zypper shell."
 msgstr "Komento on tarkoitettu käytettäväksi zypper-kehotteessa."
 
-#: src/Zypper.cc:6001
+#: src/Zypper.cc:6022
 msgid "You already are running zypper's shell."
 msgstr "Olet jo zypper-komentokehotteessa."
 
