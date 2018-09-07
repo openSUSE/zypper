@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 14:47+0200\n"
+"POT-Creation-Date: 2018-09-07 14:49+0200\n"
 "PO-Revision-Date: 2016-08-23 07:58+0000\n"
 "Last-Translator: Anastasios Mavrommatis <anastasios@mavrommatis.net>\n"
 "Language-Team: Greek <https://l10n.opensuse.org/projects/zypper/master/el/>\n"
@@ -2159,7 +2159,7 @@ msgstr ""
 "Το string των δεδομένων του χρηστη δεν πρέπει να περιέχει χαρακτήρες μη "
 "εκτυπώσιμους ή χαρακτήρες αλλαγής γραμμής!"
 
-#: src/Zypper.cc:1241 src/Zypper.cc:3879
+#: src/Zypper.cc:1241 src/Zypper.cc:3890
 msgid "Entering non-interactive mode."
 msgstr "Εισαγωγή σε μη-διαδραστική κατάσταση."
 
@@ -2241,7 +2241,7 @@ msgstr "Η εντολή '%s' αντικαταστάθηκε από την '%s'."
 msgid "See '%s' for all available options."
 msgstr "Δείτε την '%s' για τις διαθέσιμες επολογές."
 
-#: src/Zypper.cc:1733 src/Zypper.cc:3895
+#: src/Zypper.cc:1733 src/Zypper.cc:3906
 msgid "Non-option program arguments: "
 msgstr "Παράμετροι προγράμματος που δεν είναι επιλογές: "
 
@@ -3947,7 +3947,17 @@ msgstr ""
 "  Επιλογές εντολής:\n"
 "-m, --match  Δέχεται το νούμερο έκδοσης που λείπει ως οποιαδήποτε έκδοση.\n"
 
-#: src/Zypper.cc:3565
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:3566
+msgid "licenses"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:3569
+msgid "Report licenses and EULAs of currently installed software packages."
+msgstr "Αναφορά αδειών και EULAs των εγκατεστημένων πακέτων."
+
+#: src/Zypper.cc:3575
 msgid ""
 "licenses\n"
 "\n"
@@ -3962,19 +3972,19 @@ msgstr ""
 "Αυτή η εντολή δεν έχει επιπλέον επιλογές.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3590
+#: src/Zypper.cc:3601
 msgid "ps [options]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3593
+#: src/Zypper.cc:3604
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
 
 #. translators: -s, --short
-#: src/Zypper.cc:3597
+#: src/Zypper.cc:3608
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -3982,7 +3992,7 @@ msgid ""
 msgstr ""
 
 #. translators: --print <format>
-#: src/Zypper.cc:3599
+#: src/Zypper.cc:3610
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -3991,11 +4001,11 @@ msgid ""
 msgstr ""
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3601
+#: src/Zypper.cc:3612
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/Zypper.cc:3620
+#: src/Zypper.cc:3631
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4017,7 +4027,7 @@ msgid ""
 "                     would be done.\n"
 msgstr ""
 
-#: src/Zypper.cc:3659
+#: src/Zypper.cc:3670
 msgid ""
 "source-download\n"
 "\n"
@@ -4047,7 +4057,7 @@ msgstr ""
 "                     αλλά να εμφανιστούν ποια πηγαία rpms λείπουν ή είναι "
 "εξωγενή.\n"
 
-#: src/Zypper.cc:3686
+#: src/Zypper.cc:3697
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4061,7 +4071,7 @@ msgstr ""
 "\n"
 "Αυτή η εντολή δεν έχει επιπλέον επιλογές.\n"
 
-#: src/Zypper.cc:3703
+#: src/Zypper.cc:3714
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4076,7 +4086,7 @@ msgstr ""
 "Αυτή η εντολή δεν έχει επιπλέον επιλογές.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3721
+#: src/Zypper.cc:3732
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4087,7 +4097,7 @@ msgstr ""
 "Λίστα με τους διαθέσιμους τύπους υπηρεσιών.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3737
+#: src/Zypper.cc:3748
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4100,7 +4110,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3759
+#: src/Zypper.cc:3770
 msgid ""
 "mount\n"
 "\n"
@@ -4120,7 +4130,7 @@ msgstr ""
 "-n, --name <name>    Χρήση του string σαν υπηρεσία ονόματος.\n"
 "-r, --recurse        Χωρισμός σε υποφακέλους.\n"
 
-#: src/Zypper.cc:3787
+#: src/Zypper.cc:3798
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4134,7 +4144,7 @@ msgstr ""
 "είναι ένα ψευδώνυμο για το '%s'.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3804
+#: src/Zypper.cc:3815
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4144,12 +4154,12 @@ msgstr ""
 "\n"
 "Αυτή η εντολή έχει εικονική υλοποίηση η οποία πάντα επιστρέφει 0.\n"
 
-#: src/Zypper.cc:3847 src/Zypper.cc:5919
+#: src/Zypper.cc:3858 src/Zypper.cc:5930
 msgid "Unexpected program flow."
 msgstr "Μη αναμενόμενη ροή προγράμματος."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3978
+#: src/Zypper.cc:3989
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4211,21 +4221,21 @@ msgstr ""
 "                       ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n"
 "                       ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓"
 
-#: src/Zypper.cc:4001
+#: src/Zypper.cc:4012
 msgid "Root privileges are required for refreshing services."
 msgstr "Απαιτούνται δικαιώματα root για την ανανέωση των υπηρεσιών."
 
-#: src/Zypper.cc:4025 src/Zypper.cc:4104 src/Zypper.cc:4292
+#: src/Zypper.cc:4036 src/Zypper.cc:4115 src/Zypper.cc:4303
 msgid "Root privileges are required for modifying system services."
 msgstr ""
 "Απαιτούνται δικαιώματα root για την τροποποίηση των υπηρεσιών του συστήματος."
 
-#: src/Zypper.cc:4088
+#: src/Zypper.cc:4099
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "Το '%s' δεν είναι ένας έγκυρος τύπος υπηρεσίας."
 
-#: src/Zypper.cc:4090
+#: src/Zypper.cc:4101
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -4236,44 +4246,44 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:4115 src/utils/messages.cc:47
+#: src/Zypper.cc:4126 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "Απαιτείται επιλογή ψευδωνύμου ή άθροισης."
 
-#: src/Zypper.cc:4147
+#: src/Zypper.cc:4158
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Η υπηρεσία '%s' δεν βρέθηκε."
 
-#: src/Zypper.cc:4174 src/Zypper.cc:4291 src/Zypper.cc:4395 src/Zypper.cc:4447
+#: src/Zypper.cc:4185 src/Zypper.cc:4302 src/Zypper.cc:4406 src/Zypper.cc:4458
 msgid "Root privileges are required for modifying system repositories."
 msgstr ""
 "Απαιτούνται δικαιώματα root για την τροποποίηση των αποθετηρίων του "
 "συστήματος."
 
-#: src/Zypper.cc:4200 src/Zypper.cc:4559
+#: src/Zypper.cc:4211 src/Zypper.cc:4570
 msgid "Too few arguments."
 msgstr "Πολύ λίγες παράμετροι."
 
-#: src/Zypper.cc:4223
+#: src/Zypper.cc:4234
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Αν μόνο μια παράμετρος χρησιμοποιηθεί, πρέπει να είναι ένα URI που οδηγεί σε "
 "ένα αρχείο .repo."
 
-#: src/Zypper.cc:4253
+#: src/Zypper.cc:4264
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 "Το %s δεν μπορεί να χρησιμοποιηθεί μαζί με το %s. Χρησιμοποιώντας τις "
 "ρυθμίσεις του %s."
 
-#: src/Zypper.cc:4272
+#: src/Zypper.cc:4283
 msgid "Specified type is not a valid repository type:"
 msgstr "Ο καθορισμένος τύπος δεν είναι έγκυρος τύπος αποθετηρίου:"
 
-#: src/Zypper.cc:4273
+#: src/Zypper.cc:4284
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
@@ -4282,79 +4292,79 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4338
+#: src/Zypper.cc:4349
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Το αποθετήριο '%s' δεν βρέθηκε από το ψευδώνυμο, τον αριθμό ή το URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4371
+#: src/Zypper.cc:4382
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Η υπηρεσία '%s' δεν βρέθηκε από το ψευδώνυμο, τον αριθμός ή το URI."
 
-#: src/Zypper.cc:4402
+#: src/Zypper.cc:4413
 msgid "Too few arguments. At least URI and alias are required."
 msgstr ""
 "Πολύ λίγες παράμετροι. Απαιτούνται τουλάχιστον το URI και το ψευδώνυμο."
 
-#: src/Zypper.cc:4426
+#: src/Zypper.cc:4437
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Το αποθετήριο '%s' δεν βρέθηκε."
 
-#: src/Zypper.cc:4486
+#: src/Zypper.cc:4497
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Το αποθετήριο %s δεν βρέθηκε."
 
-#: src/Zypper.cc:4503
+#: src/Zypper.cc:4514
 msgid "Root privileges are required for refreshing system repositories."
 msgstr ""
 "Απαιτούνται δικαιώματα root για την ανανέωση των αποθετηρίων συστήματος."
 
-#: src/Zypper.cc:4509
+#: src/Zypper.cc:4520
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Η καθολική επιλογή '%s' δεν έχει αποτέλεσμα εδώ."
 
-#: src/Zypper.cc:4517
+#: src/Zypper.cc:4528
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Οι παράμετροι δεν επιτρέπονται εάν χρησιμοποιηθεί το '%s'."
 
-#: src/Zypper.cc:4541
+#: src/Zypper.cc:4552
 msgid "Root privileges are required for cleaning local caches."
 msgstr ""
 "Απαιτούνται δικαιώματα root για την εκκαθάριση της τοπικής λανθάνουσας "
 "μνήμης."
 
-#: src/Zypper.cc:4560
+#: src/Zypper.cc:4571
 msgid "At least one package name is required."
 msgstr "Απαιτείται τουλάχιστον ένα όνομα πακέτου."
 
-#: src/Zypper.cc:4569 src/Zypper.cc:4818 src/Zypper.cc:4855
+#: src/Zypper.cc:4580 src/Zypper.cc:4829 src/Zypper.cc:4866
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
 "Απαιτούνται δικαιώματα root για την εγκατάσταση ή απεγκατάσταση πακέτων."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4581
+#: src/Zypper.cc:4592
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Αγνόηση παραμέτρων, σημείωση όλου του αποθετηρίου."
 
-#: src/Zypper.cc:4592
+#: src/Zypper.cc:4603
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Πακέτο άγνωστου τύπου: %s"
 
-#: src/Zypper.cc:4602
+#: src/Zypper.cc:4613
 msgid "Cannot uninstall patches."
 msgstr "Αδυναμία απεγκατάστασης διόρθωσης."
 
-#: src/Zypper.cc:4603
+#: src/Zypper.cc:4614
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4366,34 +4376,34 @@ msgstr ""
 "εγγραφών βάσης δεδομένων,\n"
 "ή παρόμοια."
 
-#: src/Zypper.cc:4613
+#: src/Zypper.cc:4624
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Η απεγκατάσταση ενός πηγαίου πακέτου δεν καθορίστηκε και εφαρμόστηκε."
 
-#: src/Zypper.cc:4633
+#: src/Zypper.cc:4644
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "Το '%s' μοιάζει με αρχείο RPM. Θα γίνει προσπάθεια για λήψη."
 
-#: src/Zypper.cc:4642
+#: src/Zypper.cc:4653
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Πρόβλημα με τον καθορισμό αρχείου RPM ως '%s', προσπέραση."
 
-#: src/Zypper.cc:4664
+#: src/Zypper.cc:4675
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Πρόβλημα ανάγνωσης της επικεφαλίδας του RPM του %s. Είναι αρχείο RPM;"
 
-#: src/Zypper.cc:4685
+#: src/Zypper.cc:4696
 msgid "Plain RPM files cache"
 msgstr "Λανθάνουσα μνήμη απλών αρχείων RPM"
 
-#: src/Zypper.cc:4707
+#: src/Zypper.cc:4718
 msgid "No valid arguments specified."
 msgstr "Δεν καθορίστηκε έγκυρη παράμετρος."
 
-#: src/Zypper.cc:4724 src/Zypper.cc:4871
+#: src/Zypper.cc:4735 src/Zypper.cc:4882
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4402,77 +4412,77 @@ msgstr ""
 "επιλύσεων. Τίποτα δεν μπορεί να εγκατασταθεί."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4761 src/Zypper.cc:5348
+#: src/Zypper.cc:4772 src/Zypper.cc:5359
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "Το %s έρχεται σε αντίθεση με %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4769
+#: src/Zypper.cc:4780
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "Το %s προς το παρόν δεν μπορεί να χρησιμοποιηθεί με το %s"
 
-#: src/Zypper.cc:4810
+#: src/Zypper.cc:4821
 msgid "Source package name is a required argument."
 msgstr "Το όνομα πηγαίου πακέτου είναι απαιτούμενη παράμετρος."
 
-#: src/Zypper.cc:4928 src/Zypper.cc:5267 src/Zypper.cc:5367 src/Zypper.cc:5577
-#: src/Zypper.cc:5628 src/Zypper.cc:5668
+#: src/Zypper.cc:4939 src/Zypper.cc:5278 src/Zypper.cc:5378 src/Zypper.cc:5588
+#: src/Zypper.cc:5639 src/Zypper.cc:5679
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Πακέτο άγνωστου τύπου '%s'."
 
-#: src/Zypper.cc:4953 src/repos.cc:796
+#: src/Zypper.cc:4964 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Το καθορισμένο αποθετήριο '%s' είναι απενεργοποιημένο."
 
 #. translators: empty search result message
-#: src/Zypper.cc:5109
+#: src/Zypper.cc:5120
 #, fuzzy
 msgid "No matching items found."
 msgstr "Δεν βρέθηκαν ζητήματα που να ταιριάζουν."
 
-#: src/Zypper.cc:5144
+#: src/Zypper.cc:5155
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 "Προέκυψε πρόβλημα στην αρχικοποίηση ή την εκτέλεση του ερωτήματος της "
 "αναζήτησης"
 
-#: src/Zypper.cc:5145
+#: src/Zypper.cc:5156
 msgid "See the above message for a hint."
 msgstr "Κοιτάξτε το παραπάνω μήνυμα για κάποια συμβουλή."
 
-#: src/Zypper.cc:5146 src/repos.cc:1009
+#: src/Zypper.cc:5157 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Η εκτέλεση του 'zypper refresh' ως root μπορεί να επιλύσει το πρόβλημα."
 
-#: src/Zypper.cc:5227
+#: src/Zypper.cc:5238
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
 
-#: src/Zypper.cc:5286 src/Zypper.cc:5334
+#: src/Zypper.cc:5297 src/Zypper.cc:5345
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Αδυναμία χρήσης %s μαζί με %s."
 
-#: src/Zypper.cc:5315
+#: src/Zypper.cc:5326
 msgid "Root privileges are required for updating packages."
 msgstr "Απαιτούνται δικαιώματα root για την ενημέρωση των πακέτων."
 
-#: src/Zypper.cc:5374 src/Zypper.cc:5382 src/Zypper.cc:5463
+#: src/Zypper.cc:5385 src/Zypper.cc:5393 src/Zypper.cc:5474
 msgid "Operation not supported."
 msgstr "Η λειτουργία δεν υποστηρίζεται."
 
-#: src/Zypper.cc:5375
+#: src/Zypper.cc:5386
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Για να ενημερώσετε τα εγκατεστημένα προιόντα χρησιμοποιήστε το '%s'."
 
-#: src/Zypper.cc:5383
+#: src/Zypper.cc:5394
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4482,18 +4492,18 @@ msgstr ""
 "εγκαταστήσετε τα καινούργια πηγαία πακέτα και τις εξαρτήσεις τους, "
 "χρησιμοποιήστε το '%s'."
 
-#: src/Zypper.cc:5399
+#: src/Zypper.cc:5410
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Αδυναμία χρήσης πολλαπλών τύπων όταν τα καθορισμένα πακέτα ορίζονται σαν "
 "παράμετροι."
 
-#: src/Zypper.cc:5499
+#: src/Zypper.cc:5510
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Απαιτούνται δικαιώματα root για την αναβάθμιση της διανομής."
 
-#: src/Zypper.cc:5519
+#: src/Zypper.cc:5530
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4504,76 +4514,76 @@ msgstr ""
 "ενεργοποιημένα. Σιγουρευτείτε ότι τα αποθετήρια είναι συμβατά πριν "
 "προχωρήσετε. Ανατρέξτε στο '%s' για πληροφορίες σχετικά με την εντολή."
 
-#: src/Zypper.cc:5544 src/utils/messages.cc:55
+#: src/Zypper.cc:5555 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "Λείπει η απαιτούμενη παράμετρος."
 
-#: src/Zypper.cc:5547 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5558 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "Χρήση"
 
-#: src/Zypper.cc:5607 src/Zypper.cc:5648
+#: src/Zypper.cc:5618 src/Zypper.cc:5659
 msgid "Root privileges are required for adding of package locks."
 msgstr "Απαιτούνται δικαιώματα root για την προσθήκη κλειδωμάτων πακέτων."
 
-#: src/Zypper.cc:5702
+#: src/Zypper.cc:5713
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "Αφαίρεση κλειδώματος %lu."
 msgstr[1] "Αφαίρεση κλειδωμάτων %lu."
 
-#: src/Zypper.cc:5713
+#: src/Zypper.cc:5724
 msgid "XML output not implemented for this command."
 msgstr ""
 
-#: src/Zypper.cc:5726
+#: src/Zypper.cc:5737
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Ετικέτα διανομής: %s"
 
-#: src/Zypper.cc:5727
+#: src/Zypper.cc:5738
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Μικρή ετικέτα: %s"
 
-#: src/Zypper.cc:5768
+#: src/Zypper.cc:5779
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "Το %s ταιριάζει με το %s"
 
-#: src/Zypper.cc:5770
+#: src/Zypper.cc:5781
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "Το %s είναι νεώτερο από το %s"
 
-#: src/Zypper.cc:5772
+#: src/Zypper.cc:5783
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "Το %s είναι παλαιότερο από το %s"
 
-#: src/Zypper.cc:5854 src/source-download.cc:217
+#: src/Zypper.cc:5865 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Ανεπαρκή δικαιώματα χρήσης του καταλόγου λήψεων '%s'."
 
-#: src/Zypper.cc:5906
+#: src/Zypper.cc:5917
 msgid "This command only makes sense in the zypper shell."
 msgstr "Αυτή η εντολή έχει νόημα στο κέλυφος zypper."
 
-#: src/Zypper.cc:5916
+#: src/Zypper.cc:5927
 msgid "You already are running zypper's shell."
 msgstr "Ήδη εκτελείτε το κέλυφος zypper."
 
-#: src/Zypper.cc:5929 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
+#: src/Zypper.cc:5940 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
 msgid "Alias"
 msgstr "Ψευδώνυμο"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5929 src/commands/locks/list.cc:108 src/info.cc:69
+#: src/Zypper.cc:5940 src/commands/locks/list.cc:108 src/info.cc:69
 #: src/info.cc:460 src/info.cc:704 src/repos.cc:1072 src/repos.cc:1211
 #: src/repos.cc:2550 src/search.cc:47 src/search.cc:195 src/search.cc:342
 #: src/search.cc:489 src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
@@ -4581,11 +4591,11 @@ msgid "Name"
 msgstr "Όνομα"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5929 src/info.cc:83
+#: src/Zypper.cc:5940 src/info.cc:83
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: src/Zypper.cc:5980
+#: src/Zypper.cc:5991
 msgid "Resolvable Type"
 msgstr "Επιλύσιμος Τύπος"
 
