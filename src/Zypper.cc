@@ -1983,6 +1983,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = src_install_options;
+#if 0
     _command_help = ( CommandHelpFormater()
     << _(
       "source-install (si) [OPTIONS] <name> ...\n"
@@ -1995,12 +1996,29 @@ void Zypper::processCommandOptions()
       "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
       "    --download-only      Only download the packages, do not install.\n"
     ) )
+#endif
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("source-install (si) [OPTIONS] <NAME> ...")
+    )
+    .description(	// translators: command description
+    _("Install specified source packages and their build dependencies.")
+    )
     .description(
       (str::Format(_("The default location where rpm installs source packages to is '%1%', but the value can be changed in your local rpm configuration. In case of doubt try executing '%2%'."))
       % "/usr/src/packages/{SPECS,SOURCES}"
       % "rpm --eval \"%{_specdir} and %{_sourcedir}\""
       ).str()
     )
+    .optionSectionCommandOptions()
+    .option( "-d, --build-deps-only",	// translators: -d, --build-deps-only
+             _("Install only build dependencies of specified packages.") )
+    .option( "-D, --no-build-deps",	// translators: -D, --no-build-deps
+             _("Don't install build dependencies.") )
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Install packages only from specified repositories.") )
+    .option( "--download-only",	// translators: --download-only
+             _("Only download the packages, do not install.") )
     ;
     break;
   }
