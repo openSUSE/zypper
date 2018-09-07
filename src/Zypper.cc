@@ -2267,6 +2267,22 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("refresh-services (refs) [OPTIONS]")
+    )
+    .description(	// translators: command description
+    _("Refresh defined repository index services.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-f, --force",	// translators: -f, --force
+             _("Force a complete refresh.") )
+    .option( "-r, --with-repos",	// translators: -r, --with-repos
+             _("Refresh also the service repositories.") )
+    .option( "-R, --restore-status",	// translators: -R, --restore-status
+             _("Also restore service repositories enabled/disabled state.") )
+    ;
+#if 0
     _command_help = _(
       "refresh-services (refs) [options]\n"
       "\n"
@@ -2277,6 +2293,7 @@ void Zypper::processCommandOptions()
       "-r, --with-repos      Refresh also the service repositories.\n"
       "-R, --restore-status  Also restore service repositories enabled/disabled state.\n"
     );
+#endif
     break;
   }
 
