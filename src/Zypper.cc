@@ -2118,6 +2118,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+#if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
       "install-new-recommends (inr) [OPTIONS]\n"
@@ -2134,7 +2135,25 @@ void Zypper::processCommandOptions()
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
     ), "only, in-advance, in-heaps, as-needed") )
-
+#endif
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("install-new-recommends (inr) [OPTIONS]")
+    )
+    .description(	// translators: command description
+    _("Install newly added packages recommended by already installed packages. This can typically be used to install new language packages or drivers for newly added hardware.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Load only the specified repositories.") )
+    .option( "-D, --dry-run",	// translators: -D, --dry-run
+             _("Test the installation, do not actually install.") )
+    .option( "--details",	// translators: --details
+             _("Show the detailed installation summary.") )
+    .option( "--download",	// translators: --download
+             str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed" )
+    .option( "-d, --download-only",	// translators: -d, --download-only
+             _("Only download the packages, do not install.") )
     .optionSectionSolverOptions()
     .option_Solver_Flags_Common
     .optionSectionExpertOptions()
