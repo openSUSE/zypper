@@ -3808,12 +3808,23 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("ping [OPTIONS]")
+    )
+    .description(	// translators: command description
+    _("This command has dummy implementation which always returns 0.")
+    )
+    .noOptionSection()
+    ;
+#if 0
     _command_help = _(
       // translators: this is just a legacy command
       "ping [options]\n"
       "\n"
       "This command has dummy implementation which always returns 0.\n"
     );
+#endif
     break;
   }
 
