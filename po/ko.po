@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 16:22+0200\n"
+"POT-Creation-Date: 2018-09-07 16:30+0200\n"
 "PO-Revision-Date: 2018-05-14 06:32+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
@@ -2033,7 +2033,7 @@ msgstr ""
 "사용자 데이터 스트링에 인쇄할 수 없는 문자나 줄바꿈 문자를 포함하면 안 됩니"
 "다!"
 
-#: src/Zypper.cc:1239 src/Zypper.cc:3935
+#: src/Zypper.cc:1239 src/Zypper.cc:3962
 msgid "Entering non-interactive mode."
 msgstr "비대화형 모드로 들어가는 중입니다."
 
@@ -2109,7 +2109,7 @@ msgstr "'%s' 명령이 '%s'(으)로 바뀌었습니다."
 msgid "See '%s' for all available options."
 msgstr "사용 가능한 옵션은 '%s'을(를) 참조하십시오."
 
-#: src/Zypper.cc:1731 src/Zypper.cc:3951
+#: src/Zypper.cc:1731 src/Zypper.cc:3978
 msgid "Non-option program arguments: "
 msgstr "비옵션 프로그램 인수: "
 
@@ -2135,24 +2135,24 @@ msgid "Select packages from the specified repository."
 msgstr "지정된 리포지토리에서 패키지를 선택합니다."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:1823
+#: src/Zypper.cc:1823 src/Zypper.cc:1928
 msgid "Load only the specified repository."
 msgstr "지정된 리포지토리만 로드합니다."
 
 #. translators: -t, --type <TYPE>
 #. translators: -t, --type <type>
-#: src/Zypper.cc:1825 src/Zypper.cc:3462 src/Zypper.cc:3491
+#: src/Zypper.cc:1825 src/Zypper.cc:1930 src/Zypper.cc:3489 src/Zypper.cc:3518
 #, boost-format
 msgid "Type of package (%1%)."
 msgstr "패키지 유형(%1%)입니다."
 
 #. translators: -n, --name
-#: src/Zypper.cc:1827
+#: src/Zypper.cc:1827 src/Zypper.cc:1932
 msgid "Select packages by plain name, not by capability."
 msgstr "기능별이 아닌 일반 이름별로 패키지를 선택합니다."
 
 #. translators: -C, --capability
-#: src/Zypper.cc:1829
+#: src/Zypper.cc:1829 src/Zypper.cc:1934
 msgid "Select packages by capability."
 msgstr "기능별로 패키지를 선택합니다."
 
@@ -2191,7 +2191,7 @@ msgid "Test the installation, do not actually install."
 msgstr "설치를 테스트하고 실제로 설치하지 않습니다."
 
 #. translators: --details
-#: src/Zypper.cc:1841
+#: src/Zypper.cc:1841 src/Zypper.cc:1942
 msgid "Show the detailed installation summary."
 msgstr "자세한 설치 요약을 표시합니다."
 
@@ -2206,8 +2206,9 @@ msgstr "download-install 모드를 설정합니다. 사용 가능한 모드: %s"
 msgid "Only download the packages, do not install."
 msgstr "패키지를 다운로드만 하고 설치하지는 않습니다."
 
-#: src/Zypper.cc:1846 src/Zypper.cc:1940 src/Zypper.cc:2023 src/Zypper.cc:2786
-#: src/Zypper.cc:2865 src/Zypper.cc:2966
+#. translators: -y, --no-confirm
+#: src/Zypper.cc:1846 src/Zypper.cc:1944 src/Zypper.cc:2050 src/Zypper.cc:2813
+#: src/Zypper.cc:2892 src/Zypper.cc:2993
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2301,9 +2302,38 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         패키지를 다운로드만 하고 설치하지는 않습니다.\n"
 
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:1921
+msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:1924
+msgid ""
+"Remove packages with specified capabilities. A capability is NAME[.ARCH]"
+"[OP<VERSION>], where OP is one of <, <=, =, >=, >."
+msgstr ""
+"지정된 기능을 포함한 패키지를 제거합니다. 기능은 NAME[.ARCH][OP<VERSION>]입니"
+"다. 여기서 OP는 <, <=, =, >=, > 중 하나입니다."
+
+#. translators: -u, --clean-deps
+#: src/Zypper.cc:1936
+msgid "Automatically remove unneeded dependencies."
+msgstr "필요 없는 종속성을 자동으로 제거합니다."
+
+#. translators: -U, --no-clean-deps
+#: src/Zypper.cc:1938
+msgid "No automatic removal of unneeded dependencies."
+msgstr "필요 없는 종속성을 자동으로 제거하지 않습니다."
+
+#. translators: -D, --dry-run
+#: src/Zypper.cc:1940
+msgid "Test the removal, do not actually remove."
+msgstr "제거를 테스트하지만 실제로는 제거하지 않습니다."
+
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: src/Zypper.cc:1923
+#: src/Zypper.cc:1954
 #, c-format, boost-format
 msgid ""
 "remove (rm) [OPTIONS] <capability> ...\n"
@@ -2342,7 +2372,7 @@ msgstr ""
 "-D, --dry-run               제거를 테스트하지만 실제로는 제거하지 않습니다.\n"
 "    --details               자세한 설치 요약을 표시합니다.\n"
 
-#: src/Zypper.cc:1961
+#: src/Zypper.cc:1988
 msgid ""
 "source-install (si) [OPTIONS] <name> ...\n"
 "\n"
@@ -2365,7 +2395,7 @@ msgstr ""
 "-r, --repo <alias|#|URI> 지정된 리포지토리에서만 패키지를 설치합니다.\n"
 "    --download-only      패키지를 다운로드만 하고 설치하지 않습니다.\n"
 
-#: src/Zypper.cc:1972
+#: src/Zypper.cc:1999
 #, boost-format
 msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
@@ -2376,7 +2406,7 @@ msgstr ""
 "RPM 구성에 변경할 수 있습니다. 확실하지 않은 경우에는 '%2%'을(를) 실행해 보십"
 "시오."
 
-#: src/Zypper.cc:2008
+#: src/Zypper.cc:2035
 #, c-format, boost-format
 msgid ""
 "verify (ve) [OPTIONS]\n"
@@ -2408,7 +2438,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         패키지를 다운로드만 하고 설치하지는 않습니다.\n"
 
-#: src/Zypper.cc:2057
+#: src/Zypper.cc:2084
 #, c-format, boost-format
 msgid ""
 "install-new-recommends (inr) [OPTIONS]\n"
@@ -2441,7 +2471,7 @@ msgstr ""
 "-d, --download-only         패키지를 다운로드만 하고 설치하지는 않습니다.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: src/Zypper.cc:2091
+#: src/Zypper.cc:2118
 #, c-format, boost-format
 msgid ""
 "addservice (as) [OPTIONS] <URI> <alias>\n"
@@ -2463,41 +2493,41 @@ msgstr ""
 "-n, --name <name>      서비스를 설명하는 이름을 지정합니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2104
+#: src/Zypper.cc:2131
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr "addservice (as) [OPTIONS] <URI> <alias>"
 
 #. translators: command description
-#: src/Zypper.cc:2107
+#: src/Zypper.cc:2134
 msgid "Add a repository index service to the system."
 msgstr "시스템에 리포지토리 인덱스 서비스를 추가합니다."
 
-#: src/Zypper.cc:2112
+#: src/Zypper.cc:2139
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr "서비스 유형은 항상 자동 감지됩니다. 이 옵션은 무시됩니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2128
+#: src/Zypper.cc:2155
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2131
+#: src/Zypper.cc:2158
 msgid "Remove specified repository index service from the system."
 msgstr "시스템에서 지정된 리포지토리 인덱스 서비스를 제거합니다."
 
 #. translators: --loose-auth
-#: src/Zypper.cc:2135
+#: src/Zypper.cc:2162
 msgid "Ignore user authentication data in the URI."
 msgstr "URI의 사용자 인증 데이터를 무시합니다."
 
 #. translators: --loose-query
-#: src/Zypper.cc:2137
+#: src/Zypper.cc:2164
 msgid "Ignore query string in the URI."
 msgstr "URI의 쿼리 문자열을 무시합니다."
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:2142
+#: src/Zypper.cc:2169
 msgid ""
 "removeservice (rs) [OPTIONS] <alias|#|URI>\n"
 "\n"
@@ -2509,7 +2539,7 @@ msgid ""
 msgstr ""
 
 #. translators: %s is "--all" and "--all"
-#: src/Zypper.cc:2173
+#: src/Zypper.cc:2200
 #, c-format, boost-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -2569,18 +2599,18 @@ msgstr ""
 "다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2202
+#: src/Zypper.cc:2229
 msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
 msgstr "modifyservice (ms) <options> <alias|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2205
+#: src/Zypper.cc:2232
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
 msgstr "modifyservice (ms) <options> <%1%>"
 
 #. translators: command description
-#: src/Zypper.cc:2208
+#: src/Zypper.cc:2235
 #, boost-format
 msgid ""
 "Modify properties of services specified by alias, number, or URI, or by the "
@@ -2589,97 +2619,97 @@ msgstr ""
 "별칭, 번호 또는 URI로 지정된 서비스의 속성을 수정하거나 통합 옵션 '%1%'(으)"
 "로 지정된 서비스의 속성을 수정합니다."
 
-#: src/Zypper.cc:2213
+#: src/Zypper.cc:2240
 msgid "Apply changes to all services."
 msgstr "변경사항을 모든 서비스에 적용합니다."
 
-#: src/Zypper.cc:2214
+#: src/Zypper.cc:2241
 msgid "Apply changes to all local services."
 msgstr "변경사항을 모든 로컬 서비스에 적용합니다."
 
-#: src/Zypper.cc:2215
+#: src/Zypper.cc:2242
 msgid "Apply changes to all remote services."
 msgstr "변경사항을 모든 원격 서비스에 적용합니다."
 
-#: src/Zypper.cc:2216
+#: src/Zypper.cc:2243
 msgid "Apply changes to services of specified type."
 msgstr "변경사항을 지정된 유형의 서비스에 적용합니다."
 
-#: src/Zypper.cc:2218
+#: src/Zypper.cc:2245
 msgid "Add a RIS service repository to enable."
 msgstr "활성화할 RIS 서비스 리포지토리를 추가합니다."
 
-#: src/Zypper.cc:2219
+#: src/Zypper.cc:2246
 msgid "Add a RIS service repository to disable."
 msgstr "비활성화할 RIS 서비스 리포지토리를 추가합니다."
 
-#: src/Zypper.cc:2220
+#: src/Zypper.cc:2247
 msgid "Remove a RIS service repository to enable."
 msgstr "활성화할 RIS 서비스 리포지토리를 제거합니다."
 
-#: src/Zypper.cc:2221
+#: src/Zypper.cc:2248
 msgid "Remove a RIS service repository to disable."
 msgstr "비활성화할 RIS 서비스 리포지토리를 제거합니다."
 
-#: src/Zypper.cc:2222
+#: src/Zypper.cc:2249
 msgid "Clear the list of RIS repositories to enable."
 msgstr "활성화할 RIS 리포지토리의 목록을 지웁니다."
 
-#: src/Zypper.cc:2223
+#: src/Zypper.cc:2250
 msgid "Clear the list of RIS repositories to disable."
 msgstr "비활성화할 RIS 리포지토리의 목록을 지웁니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2251
+#: src/Zypper.cc:2278
 msgid "services (ls) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2254
+#: src/Zypper.cc:2281
 msgid "List defined services."
 msgstr "정의된 서비스를 나열합니다."
 
 #. translators: -u, --uri
-#: src/Zypper.cc:2258 src/Zypper.cc:2426
+#: src/Zypper.cc:2285 src/Zypper.cc:2453
 msgid "Show also base URI of repositories."
 msgstr "리포지토리의 기본 URI도 표시합니다."
 
 #. translators: -p, --priority
-#: src/Zypper.cc:2260 src/Zypper.cc:2428
+#: src/Zypper.cc:2287 src/Zypper.cc:2455
 msgid "Show also repository priority."
 msgstr "리포지토리 우선순위도 표시합니다."
 
 #. translators: -d, --details
-#: src/Zypper.cc:2262 src/Zypper.cc:2432
+#: src/Zypper.cc:2289 src/Zypper.cc:2459
 msgid "Show more information like URI, priority, type."
 msgstr "URI, 우선순위, 유형 등의 자세한 정보를 표시합니다."
 
 #. translators: -r, --with-repos
-#: src/Zypper.cc:2264
+#: src/Zypper.cc:2291
 msgid "Show also repositories belonging to the services."
 msgstr "서비스에 속하는 리포지토리도 표시합니다."
 
 #. translators: -E, --show-enabled-only
-#: src/Zypper.cc:2266 src/Zypper.cc:2436
+#: src/Zypper.cc:2293 src/Zypper.cc:2463
 msgid "Show enabled repos only."
 msgstr "활성화된 리포지토리만 표시합니다."
 
 #. translators: -P, --sort-by-priority
-#: src/Zypper.cc:2268 src/Zypper.cc:2440
+#: src/Zypper.cc:2295 src/Zypper.cc:2467
 msgid "Sort the list by repository priority."
 msgstr "리포지토리 우선순위별로 목록을 정렬합니다."
 
 #. translators: -U, --sort-by-uri
-#: src/Zypper.cc:2270 src/Zypper.cc:2438
+#: src/Zypper.cc:2297 src/Zypper.cc:2465
 msgid "Sort the list by URI."
 msgstr "URI별로 목록을 정렬합니다."
 
 #. translators: -N, --sort-by-name
-#: src/Zypper.cc:2272 src/Zypper.cc:2444
+#: src/Zypper.cc:2299 src/Zypper.cc:2471
 msgid "Sort the list by name."
 msgstr "이름별로 목록을 정렬합니다."
 
-#: src/Zypper.cc:2276
+#: src/Zypper.cc:2303
 msgid ""
 "services (ls) [OPTIONS]\n"
 "\n"
@@ -2711,31 +2741,31 @@ msgstr ""
 "-N, --sort-by-name        이름별로 목록을 정렬합니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2306
+#: src/Zypper.cc:2333
 msgid "refresh-services (refs) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2309
+#: src/Zypper.cc:2336
 msgid "Refresh defined repository index services."
 msgstr "정의된 리포지토리 인덱스 서비스를 새로 고칩니다."
 
 #. translators: -f, --force
-#: src/Zypper.cc:2313 src/Zypper.cc:2606
+#: src/Zypper.cc:2340 src/Zypper.cc:2633
 msgid "Force a complete refresh."
 msgstr "전체 새로 고침을 강제 수행합니다."
 
 #. translators: -r, --with-repos
-#: src/Zypper.cc:2315
+#: src/Zypper.cc:2342
 msgid "Refresh also the service repositories."
 msgstr "서비스 리포지토리도 새로 고칩니다."
 
 #. translators: -R, --restore-status
-#: src/Zypper.cc:2317
+#: src/Zypper.cc:2344
 msgid "Also restore service repositories enabled/disabled state."
 msgstr "활성화됨/비활성화됨 상태의 서비스 리포지토리도 복구합니다."
 
-#: src/Zypper.cc:2321
+#: src/Zypper.cc:2348
 msgid ""
 "refresh-services (refs) [OPTIONS]\n"
 "\n"
@@ -2758,7 +2788,7 @@ msgstr ""
 "다.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: src/Zypper.cc:2348
+#: src/Zypper.cc:2375
 #, c-format, boost-format
 msgid ""
 "addrepo (ar) [OPTIONS] <URI> <alias>\n"
@@ -2800,17 +2830,17 @@ msgstr ""
 "-f, --refresh             리포지토리의 자동 새로 고침을 활성화합니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2370
+#: src/Zypper.cc:2397
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
 msgstr "addrepo (ar) [OPTIONS] <URI> <alias>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2373
+#: src/Zypper.cc:2400
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
 msgstr "addrepo (ar) [OPTIONS] <file.repo>"
 
 #. translators: command description
-#: src/Zypper.cc:2376
+#: src/Zypper.cc:2403
 msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
@@ -2818,63 +2848,63 @@ msgstr ""
 "시스템에 리포지토리를 추가합니다. 해당 URI로 리포지토리를 지정하거나 지정된 ."
 "repo 파일(원격 포함)에서 리포지토리를 읽을 수 있습니다."
 
-#: src/Zypper.cc:2379
+#: src/Zypper.cc:2406
 msgid "Just another means to specify a .repo file to read."
 msgstr "읽을 .repo 파일을 지정하는 다른 수단입니다."
 
-#: src/Zypper.cc:2380
+#: src/Zypper.cc:2407
 msgid "Probe URI."
 msgstr "검사 URI입니다."
 
-#: src/Zypper.cc:2381
+#: src/Zypper.cc:2408
 msgid "Don't probe URI, probe later during refresh."
 msgstr "URI를 검사하지 않고 나중에 새로 고치는 동안 검사합니다."
 
-#: src/Zypper.cc:2385
+#: src/Zypper.cc:2412
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr "리포지토리 유형은 항상 자동 감지됩니다. 이 옵션은 무시됩니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2413
+#: src/Zypper.cc:2440
 msgid "repos (lr) [OPTIONS] [REPO] ..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2416
+#: src/Zypper.cc:2443
 msgid "List all defined repositories."
 msgstr "정의된 모든 리포지토리를 나열합니다."
 
 #. translators: -e, --export <FILE.repo>
-#: src/Zypper.cc:2420
+#: src/Zypper.cc:2447
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "정의된 모든 리포지토리를 단일 로컬 .repo 파일로 엑스포트합니다."
 
 #. translators: -a, --alias
-#: src/Zypper.cc:2422
+#: src/Zypper.cc:2449
 msgid "Show also repository alias."
 msgstr "리포지토리 별칭도 표시합니다."
 
 #. translators: -n, --name
-#: src/Zypper.cc:2424
+#: src/Zypper.cc:2451
 msgid "Show also repository name."
 msgstr "리포지토리 이름도 표시합니다."
 
 #. translators: -r, --refresh
-#: src/Zypper.cc:2430
+#: src/Zypper.cc:2457
 msgid "Show also the autorefresh flag."
 msgstr "자동 새로 고침 플래그도 표시합니다."
 
 #. translators: -s, --service
-#: src/Zypper.cc:2434
+#: src/Zypper.cc:2461
 msgid "Show also alias of parent service."
 msgstr "상위 서비스의 별칭도 표시합니다."
 
 #. translators: -A, --sort-by-alias
-#: src/Zypper.cc:2442
+#: src/Zypper.cc:2469
 msgid "Sort the list by alias."
 msgstr "별칭별로 목록을 정렬합니다."
 
-#: src/Zypper.cc:2448
+#: src/Zypper.cc:2475
 msgid ""
 "repos (lr) [OPTIONS] [repo] ...\n"
 "\n"
@@ -2917,7 +2947,7 @@ msgstr ""
 "-A, --sort-by-alias       별칭별로 목록을 정렬합니다.\n"
 "-N, --sort-by-name        이름별로 목록을 정렬합니다.\n"
 
-#: src/Zypper.cc:2482
+#: src/Zypper.cc:2509
 msgid ""
 "removerepo (rr) [OPTIONS] <alias|#|URI>\n"
 "\n"
@@ -2936,16 +2966,16 @@ msgstr ""
 "    --loose-query  URI에서 쿼리 스트링을 무시합니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2504
+#: src/Zypper.cc:2531
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2507
+#: src/Zypper.cc:2534
 msgid "Assign new alias to the repository specified by alias, number or URI."
 msgstr "별칭, 번호 또는 URI별로 지정된 리포지토리에 새 별칭을 지정합니다."
 
-#: src/Zypper.cc:2513
+#: src/Zypper.cc:2540
 msgid ""
 "renamerepo (nr) [OPTIONS] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -2961,7 +2991,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: src/Zypper.cc:2537
+#: src/Zypper.cc:2564
 #, c-format, boost-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -2998,7 +3028,7 @@ msgstr ""
 "-k, --keep-packages       RPM 파일 캐싱을 활성화합니다.\n"
 "-K, --no-keep-packages    RPM 파일 캐싱을 비활성화합니다.\n"
 
-#: src/Zypper.cc:2554
+#: src/Zypper.cc:2581
 msgid ""
 "-a, --all                 Apply changes to all repositories.\n"
 "-l, --local               Apply changes to all local repositories.\n"
@@ -3011,18 +3041,18 @@ msgstr ""
 "-m, --medium-type <type>  변경사항을 지정된 유형의 리포지토리에 적용합니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2563
+#: src/Zypper.cc:2590
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
 msgstr "modifyrepo (mr) <options> <alias|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2566
+#: src/Zypper.cc:2593
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
 msgstr "modifyrepo (mr) <options> <%1%>"
 
 #. translators: command description
-#: src/Zypper.cc:2569
+#: src/Zypper.cc:2596
 #, boost-format
 msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
@@ -3032,12 +3062,12 @@ msgstr ""
 "로 지정된 서비스의 속성을 수정합니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2599
+#: src/Zypper.cc:2626
 msgid "refresh (ref) [ALIAS|#|URI] ..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2602
+#: src/Zypper.cc:2629
 msgid ""
 "Refresh repositories specified by their alias, number or URI. If none are "
 "specified, all enabled repositories will be refreshed."
@@ -3046,36 +3076,36 @@ msgstr ""
 "지 않은 경우 활성화된 모든 리포지토리가 새로 고쳐집니다."
 
 #. translators: -b, --force-build
-#: src/Zypper.cc:2608
+#: src/Zypper.cc:2635
 msgid "Force rebuild of the database."
 msgstr "데이터베이스를 다시 강제 빌드합니다."
 
 #. translators: -d, --force-download
-#: src/Zypper.cc:2610
+#: src/Zypper.cc:2637
 msgid "Force download of raw metadata."
 msgstr "원시 메타 데이터를 강제 다운로드합니다."
 
 #. translators: -B, --build-only
-#: src/Zypper.cc:2612
+#: src/Zypper.cc:2639
 msgid "Only build the database, don't download metadata."
 msgstr "데이터베이스는 빌드만 하고 메타 데이터는 다운로드하지 않습니다."
 
 #. translators: -D, --download-only
-#: src/Zypper.cc:2614
+#: src/Zypper.cc:2641
 msgid "Only download raw metadata, don't build the database."
 msgstr "원시 메타 데이터는 다운로드만 하고 데이터베이스는 빌드하지 않습니다."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:2616
+#: src/Zypper.cc:2643
 msgid "Refresh only specified repositories."
 msgstr "지정한 리포지토리만 새로 고칩니다."
 
 #. translators: -s, --services
-#: src/Zypper.cc:2618
+#: src/Zypper.cc:2645
 msgid "Refresh also services before refreshing repos."
 msgstr "리포지토리를 새로 고치기 전에 서비스도 새로 고칩니다."
 
-#: src/Zypper.cc:2622
+#: src/Zypper.cc:2649
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3110,36 +3140,36 @@ msgstr ""
 "다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2653
+#: src/Zypper.cc:2680
 msgid "clean (cc) [ALIAS|#|URI] ..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:2656
+#: src/Zypper.cc:2683
 msgid "Clean local caches."
 msgstr "로컬 캐시를 정리합니다."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:2660
+#: src/Zypper.cc:2687
 msgid "Clean only specified repositories."
 msgstr "지정된 리포지토리만 정리합니다."
 
 #. translators: -m, --metadata
-#: src/Zypper.cc:2662
+#: src/Zypper.cc:2689
 msgid "Clean metadata cache."
 msgstr "메타 데이터 캐시만 정리합니다."
 
 #. translators: -M, --raw-metadata
-#: src/Zypper.cc:2664
+#: src/Zypper.cc:2691
 msgid "Clean raw metadata cache."
 msgstr "원시 메타 데이터 캐시를 정리합니다."
 
 #. translators: -a, --all
-#: src/Zypper.cc:2666
+#: src/Zypper.cc:2693
 msgid "Clean both metadata and package caches."
 msgstr "메타 데이터와 패키지 캐시를 모두 정리합니다."
 
-#: src/Zypper.cc:2670
+#: src/Zypper.cc:2697
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3163,7 +3193,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: src/Zypper.cc:2700
+#: src/Zypper.cc:2727
 #, c-format, boost-format
 msgid ""
 "list-updates (lu) [OPTIONS]\n"
@@ -3203,7 +3233,7 @@ msgstr ""
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
 #. and the third %s = "only, in-avance, in-heaps, as-needed"
-#: src/Zypper.cc:2757
+#: src/Zypper.cc:2784
 #, c-format, boost-format
 msgid ""
 "update (up) [OPTIONS] [packagename] ...\n"
@@ -3269,7 +3299,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         패키지를 다운로드만 하고 설치하지는 않습니다.\n"
 
-#: src/Zypper.cc:2835
+#: src/Zypper.cc:2862
 #, c-format, boost-format
 msgid ""
 "patch [OPTIONS]\n"
@@ -3337,11 +3367,11 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         패키지를 다운로드만 하고 설치하지 않습니다.\n"
 
-#: src/Zypper.cc:2862
+#: src/Zypper.cc:2889
 msgid "Install only patches which affect the package management itself."
 msgstr "패키지 관리 자체에 영향을 주는 패치만 설치합니다."
 
-#: src/Zypper.cc:2863
+#: src/Zypper.cc:2890
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
@@ -3352,16 +3382,16 @@ msgstr ""
 "only와 함께 사용할 수 없습니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:2895
+#: src/Zypper.cc:2922
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [OPTIONS]"
 
 #. translators: command description
-#: src/Zypper.cc:2898
+#: src/Zypper.cc:2925
 msgid "List all applicable patches."
 msgstr "해당하는 모든 패치를 나열합니다."
 
-#: src/Zypper.cc:2901
+#: src/Zypper.cc:2928
 msgid ""
 "-b, --bugzilla[=#]\n"
 "List applicable patches for Bugzilla issues."
@@ -3369,7 +3399,7 @@ msgstr ""
 "-b, --bugzilla[=#]\n"
 "Bugzilla 문제에 대해 해당하는 패치를 나열합니다."
 
-#: src/Zypper.cc:2902
+#: src/Zypper.cc:2929
 msgid ""
 "--cve[=#]\n"
 "List applicable patches for CVE issues."
@@ -3377,7 +3407,7 @@ msgstr ""
 "--cve[=#]\n"
 "CVE 문제에 대해 해당하는 패치를 나열합니다."
 
-#: src/Zypper.cc:2903
+#: src/Zypper.cc:2930
 msgid ""
 "--issues[=STRING]\n"
 "Look for issues matching the specified string."
@@ -3385,7 +3415,7 @@ msgstr ""
 "--issues[=STRING]\n"
 "특정 스트링에 일치하는 문제를 찾습니다."
 
-#: src/Zypper.cc:2904
+#: src/Zypper.cc:2931
 msgid ""
 "--date <YYYY-MM-DD>\n"
 "List only patches issued up to, but not including, the specified date."
@@ -3393,7 +3423,7 @@ msgstr ""
 "--date <YYYY-MM-DD>\n"
 "지정된 날짜(포함하지 않음)까지 발급된 패치만 나열합니다."
 
-#: src/Zypper.cc:2905
+#: src/Zypper.cc:2932
 msgid ""
 "-g, --category <CATEGORY>\n"
 "List only patches with this category."
@@ -3401,7 +3431,7 @@ msgstr ""
 "-g, --category <CATEGORY>\n"
 "이 범주에 속한 패치만 나열합니다."
 
-#: src/Zypper.cc:2906
+#: src/Zypper.cc:2933
 msgid ""
 "--severity <SEVERITY>\n"
 "List only patches with this severity."
@@ -3409,7 +3439,7 @@ msgstr ""
 "--severity <SEVERITY>\n"
 "이 심각도에 속한 패치만 나열합니다."
 
-#: src/Zypper.cc:2907
+#: src/Zypper.cc:2934
 msgid ""
 "-a, --all\n"
 "List all patches, not only applicable ones."
@@ -3417,7 +3447,7 @@ msgstr ""
 "-a, --all\n"
 "해당하는 패치뿐 아니라 모든 패치를 나열합니다."
 
-#: src/Zypper.cc:2909
+#: src/Zypper.cc:2936
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "List only patches from the specified repository."
@@ -3425,7 +3455,7 @@ msgstr ""
 "-r, --repo <ALIAS|#|URI>\n"
 "지정된 리포지토리의 패치만 나열합니다."
 
-#: src/Zypper.cc:2945
+#: src/Zypper.cc:2972
 #, c-format, boost-format
 msgid ""
 "dist-upgrade (dup) [OPTIONS]\n"
@@ -3478,7 +3508,7 @@ msgstr ""
 "                            %s\n"
 "-d, --download-only         패키지를 다운로드만 하고 설치하지는 않습니다.\n"
 
-#: src/Zypper.cc:3011
+#: src/Zypper.cc:3038
 msgid ""
 "search (se) [OPTIONS] [querystring] ...\n"
 "\n"
@@ -3559,17 +3589,17 @@ msgstr ""
 "* 및 ? 와일드카드를 검색 문자열에 사용할 수도 있습니다.\n"
 "검색 문자열이 '/'로 묶여 있는 경우 정규식으로 해석됩니다.\n"
 
-#: src/Zypper.cc:3045
+#: src/Zypper.cc:3072
 msgid "Search for packages which supplement the search strings."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3063
+#: src/Zypper.cc:3090
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr "patch-check (pchk) [OPTIONS]"
 
 #. translators: command description
-#: src/Zypper.cc:3066
+#: src/Zypper.cc:3093
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
@@ -3577,7 +3607,7 @@ msgstr ""
 "해당하는 패치에 대한 통계를 표시합니다. 이 명령을 실행하여 필요한 패치를 찾으"
 "면 100을 반환하고, 최소 한 개의 필요한 보안 패치를 찾으면 101을 반환합니다."
 
-#: src/Zypper.cc:3069
+#: src/Zypper.cc:3096
 msgid ""
 "-r, --repo <ALIAS|#|URI>\n"
 "Check for patches only in the specified repository."
@@ -3585,7 +3615,7 @@ msgstr ""
 "-r, --repo <ALIAS|#|URI>\n"
 "지정된 리포지토리의 패치만 확인합니다."
 
-#: src/Zypper.cc:3070
+#: src/Zypper.cc:3097
 msgid ""
 "--updatestack-only\n"
 "Check only for patches which affect the package management itself."
@@ -3594,21 +3624,21 @@ msgstr ""
 "패키지 관리 자체에 영향을 주는 패치만 확인합니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3088
+#: src/Zypper.cc:3115
 msgid "patches (pch) [REPOSITORY] ..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3091
+#: src/Zypper.cc:3118
 msgid "List all patches available in specified repositories."
 msgstr "지정한 리포지토리에서 사용 가능한 모든 패치를 나열합니다."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:3095 src/Zypper.cc:3138 src/Zypper.cc:3198
+#: src/Zypper.cc:3122 src/Zypper.cc:3165 src/Zypper.cc:3225
 msgid "Just another means to specify repository."
 msgstr "리포지토리를 지정하는 다른 방법입니다."
 
-#: src/Zypper.cc:3099
+#: src/Zypper.cc:3126
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3627,56 +3657,56 @@ msgstr ""
 "-r, --repo <alias|#|URI>  리포지토리를 지정하는 다른 방법입니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3131
+#: src/Zypper.cc:3158
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3134
+#: src/Zypper.cc:3161
 msgid "List all packages available in specified repositories."
 msgstr "지정된 리포지토리에서 사용 가능한 모든 패키지를 나열합니다."
 
 #. translators: -i, --installed-only
-#: src/Zypper.cc:3140
+#: src/Zypper.cc:3167
 msgid "Show only installed packages."
 msgstr "설치된 패키지만 표시합니다."
 
 #. translators: -u, --not-installed-only
-#: src/Zypper.cc:3142
+#: src/Zypper.cc:3169
 msgid "Show only packages which are not installed."
 msgstr "설치되지 않은 패키지만 표시합니다."
 
 #. translators: --orphaned
-#: src/Zypper.cc:3144
+#: src/Zypper.cc:3171
 msgid "Show packages which are orphaned (without repository)."
 msgstr "리포지토리 없는 독립 패키지를 표시합니다."
 
 #. translators: --suggested
-#: src/Zypper.cc:3146
+#: src/Zypper.cc:3173
 msgid "Show packages which are suggested."
 msgstr "제안된 패키지를 표시합니다."
 
 #. translators: --recommended
-#: src/Zypper.cc:3148
+#: src/Zypper.cc:3175
 msgid "Show packages which are recommended."
 msgstr "권장 패키지를 표시합니다."
 
 #. translators: --unneeded
-#: src/Zypper.cc:3150
+#: src/Zypper.cc:3177
 msgid "Show packages which are unneeded."
 msgstr "불필요한 패키지를 표시합니다."
 
 #. translators: -N, --sort-by-name
-#: src/Zypper.cc:3152
+#: src/Zypper.cc:3179
 msgid "Sort the list by package name."
 msgstr "패키지 이름별로 목록을 정렬합니다."
 
 #. translators: -R, --sort-by-repo
-#: src/Zypper.cc:3154
+#: src/Zypper.cc:3181
 msgid "Sort the list by repository."
 msgstr "리포지토리별로 목록을 정렬합니다."
 
-#: src/Zypper.cc:3158
+#: src/Zypper.cc:3185
 msgid ""
 "packages (pa) [OPTIONS] [repository] ...\n"
 "\n"
@@ -3712,26 +3742,26 @@ msgstr ""
 "-R, --sort-by-repo        리포지토리별로 목록을 정렬합니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3191
+#: src/Zypper.cc:3218
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3194
+#: src/Zypper.cc:3221
 msgid "List all patterns available in specified repositories."
 msgstr "지정한 리포지토리에서 사용 가능한 모든 패턴을 나열합니다."
 
 #. translators: -i, --installed-only
-#: src/Zypper.cc:3200
+#: src/Zypper.cc:3227
 msgid "Show only installed patterns."
 msgstr "설치된 패턴만 표시합니다."
 
 #. translators: -u, --not-installed-only
-#: src/Zypper.cc:3202
+#: src/Zypper.cc:3229
 msgid "Show only patterns which are not installed."
 msgstr "설치되어 있지 않은 패턴만 표시합니다."
 
-#: src/Zypper.cc:3206
+#: src/Zypper.cc:3233
 msgid ""
 "patterns (pt) [OPTIONS] [repository] ...\n"
 "\n"
@@ -3753,7 +3783,7 @@ msgstr ""
 "-i, --installed-only      설치된 패턴만 표시합니다.\n"
 "-u, --not-installed-only  설치되어 있지 않은 패턴만 표시합니다.\n"
 
-#: src/Zypper.cc:3234
+#: src/Zypper.cc:3261
 msgid ""
 "products (pd) [OPTIONS] [repository] ...\n"
 "\n"
@@ -3775,12 +3805,12 @@ msgstr ""
 "-i, --installed-only      설치된 제품만 표시합니다.\n"
 "-u, --not-installed-only  설치되지 않은 제품만 표시합니다.\n"
 
-#: src/Zypper.cc:3243
+#: src/Zypper.cc:3270
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr "XML 출력만 사용: 산출된 파일에서 검색된 XML tag를 문자 그대로 재전송."
 
-#: src/Zypper.cc:3268
+#: src/Zypper.cc:3295
 #, c-format, boost-format
 msgid ""
 "info (if) [OPTIONS] <name> ...\n"
@@ -3824,11 +3854,11 @@ msgstr ""
 "    --recommends          권장을 표시합니다.\n"
 "    --suggests            제안을 표시합니다.\n"
 
-#: src/Zypper.cc:3287
+#: src/Zypper.cc:3314
 msgid "Show supplements."
 msgstr ""
 
-#: src/Zypper.cc:3302
+#: src/Zypper.cc:3329
 #, c-format, boost-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3843,7 +3873,7 @@ msgstr ""
 "\n"
 "이는 '%s'에 대한 별칭입니다.\n"
 
-#: src/Zypper.cc:3321
+#: src/Zypper.cc:3348
 #, c-format, boost-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3858,7 +3888,7 @@ msgstr ""
 "\n"
 "이는 '%s'에 대한 별칭입니다.\n"
 
-#: src/Zypper.cc:3340
+#: src/Zypper.cc:3367
 #, c-format, boost-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3874,16 +3904,16 @@ msgstr ""
 "이는 '%s'에 대한 별칭입니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3358
+#: src/Zypper.cc:3385
 msgid "what-provides (wp) <CAPABILITY>"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3361
+#: src/Zypper.cc:3388
 msgid "List all packages providing the specified capability."
 msgstr "지정한 기능을 제공하는 모든 패키지를 나열합니다."
 
-#: src/Zypper.cc:3367
+#: src/Zypper.cc:3394
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3898,16 +3928,16 @@ msgstr ""
 "이 명령에는 추가 옵션이 없습니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3420
+#: src/Zypper.cc:3447
 msgid "moo"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3423
+#: src/Zypper.cc:3450
 msgid "Show an animal."
 msgstr "동물을 표시합니다."
 
-#: src/Zypper.cc:3429
+#: src/Zypper.cc:3456
 msgid ""
 "moo\n"
 "\n"
@@ -3923,12 +3953,12 @@ msgstr ""
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3453
+#: src/Zypper.cc:3480
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3456
+#: src/Zypper.cc:3483
 msgid ""
 "Add a package lock. Specify packages to lock by exact name or by a glob "
 "pattern using '*' and '?' wildcard characters."
@@ -3937,18 +3967,18 @@ msgstr ""
 "거나 '*' 및 '?' 와일드카드 문자를 사용하여 glob 패턴별로 지정합니다."
 
 #. translators: -r, --repo <alias|#|URI>
-#: src/Zypper.cc:3460
+#: src/Zypper.cc:3487
 msgid "Restrict the lock to the specified repository."
 msgstr "지정된 리포지토리로 잠금을 제한합니다."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3482
+#: src/Zypper.cc:3509
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr ""
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
-#: src/Zypper.cc:3485
+#: src/Zypper.cc:3512
 #, boost-format
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
@@ -3958,38 +3988,38 @@ msgstr ""
 "을 지정합니다."
 
 #. translators: -r, --repo <alias|#|URI>
-#: src/Zypper.cc:3489
+#: src/Zypper.cc:3516
 msgid "Remove only locks with specified repository."
 msgstr "지정한 리포지토리의 잠금만 제거합니다."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3509
+#: src/Zypper.cc:3536
 msgid "cleanlocks (cl)"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3512
+#: src/Zypper.cc:3539
 msgid "Remove useless locks."
 msgstr "필요 없는 잠금을 제거합니다."
 
 #. translators: -d, --only-duplicates
-#: src/Zypper.cc:3516
+#: src/Zypper.cc:3543
 msgid "Clean only duplicate locks."
 msgstr "중복된 잠금만 정리합니다."
 
 #. translators: -e, --only-empty
-#: src/Zypper.cc:3518
+#: src/Zypper.cc:3545
 msgid "Clean only locks which doesn't lock anything."
 msgstr "어떤 것도 잠겨 있지 않은 잠금만 정리합니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3534
+#: src/Zypper.cc:3561
 msgid "targetos (tos) [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3537
+#: src/Zypper.cc:3564
 msgid ""
 "Show various information about the target operating system. By default, an "
 "ID string is shown."
@@ -3998,11 +4028,11 @@ msgstr ""
 "니다."
 
 #. translators: -l, --label
-#: src/Zypper.cc:3541
+#: src/Zypper.cc:3568
 msgid "Show the operating system label."
 msgstr "운영 체제 레이블을 나타냅니다."
 
-#: src/Zypper.cc:3545
+#: src/Zypper.cc:3572
 msgid ""
 "targetos (tos) [OPTIONS]\n"
 "\n"
@@ -4021,21 +4051,21 @@ msgstr ""
 "-l, --label                 운영 체제 레이블을 나타냅니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3568
+#: src/Zypper.cc:3595
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3571
+#: src/Zypper.cc:3598
 msgid "Compare the versions supplied as arguments."
 msgstr "제공된 버전을 인수로 비교합니다."
 
 #. translators: -m, --match
-#: src/Zypper.cc:3575
+#: src/Zypper.cc:3602
 msgid "Takes missing release number as any release."
 msgstr "누락된 릴리스 번호를 임의 릴리스로 처리합니다."
 
-#: src/Zypper.cc:3579
+#: src/Zypper.cc:3606
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4052,16 +4082,16 @@ msgstr ""
 "-m, --match  누락된 릴리스 번호를 임의 릴리스로 처리합니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3600
+#: src/Zypper.cc:3627
 msgid "licenses"
 msgstr "라이센스"
 
 #. translators: command description
-#: src/Zypper.cc:3603
+#: src/Zypper.cc:3630
 msgid "Report licenses and EULAs of currently installed software packages."
 msgstr "현재 설치된 소프트웨어 패키지의 라이센스 및 EULA를 보고합니다."
 
-#: src/Zypper.cc:3609
+#: src/Zypper.cc:3636
 msgid ""
 "licenses\n"
 "\n"
@@ -4076,12 +4106,12 @@ msgstr ""
 "이 명령에는 추가 옵션이 없습니다.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3635
+#: src/Zypper.cc:3662
 msgid "ps [OPTIONS]"
 msgstr "ps [OPTIONS]"
 
 #. translators: command description
-#: src/Zypper.cc:3638
+#: src/Zypper.cc:3665
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -4090,7 +4120,7 @@ msgstr ""
 "인 프로세스를 나열합니다."
 
 #. translators: -s, --short
-#: src/Zypper.cc:3642
+#: src/Zypper.cc:3669
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4101,7 +4131,7 @@ msgstr ""
 "다."
 
 #. translators: --print <format>
-#: src/Zypper.cc:3644
+#: src/Zypper.cc:3671
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4113,17 +4143,17 @@ msgstr ""
 "뀝니다."
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3646
+#: src/Zypper.cc:3673
 msgid "Write debug output to file <path>."
 msgstr "디버그 출력을 파일 <path>에 기록합니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3666
+#: src/Zypper.cc:3693
 msgid "download [OPTIONS] <PACKAGES>..."
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3669
+#: src/Zypper.cc:3696
 msgid ""
 "Download rpms specified on the commandline to a local directory. Per default "
 "packages are downloaded to the libzypp package cache (/var/cache/zypp/"
@@ -4136,7 +4166,7 @@ msgstr ""
 "수 있습니다."
 
 #. translators: command description
-#: src/Zypper.cc:3672
+#: src/Zypper.cc:3699
 msgid ""
 "In XML output a <download-result> node is written for each package zypper "
 "tried to download. Upon success the local path is is found in 'download-"
@@ -4147,7 +4177,7 @@ msgstr ""
 "습니다."
 
 #. translators: --all-matches
-#: src/Zypper.cc:3676
+#: src/Zypper.cc:3703
 msgid ""
 "Download all versions matching the commandline arguments. Otherwise only the "
 "best version of each matching package is downloaded."
@@ -4156,11 +4186,11 @@ msgstr ""
 "패키지의 최고 버전만 다운로드됩니다."
 
 #. translators: --dry-run
-#: src/Zypper.cc:3678
+#: src/Zypper.cc:3705
 msgid "Don't download any package, just report what would be done."
 msgstr "패키지를 다운로드하지 않고 수행되는 작업을 보고만 합니다."
 
-#: src/Zypper.cc:3682
+#: src/Zypper.cc:3709
 msgid ""
 "download [OPTIONS] <PACKAGES>...\n"
 "\n"
@@ -4202,17 +4232,17 @@ msgstr ""
 "                     보고만 합니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3723
+#: src/Zypper.cc:3750
 msgid "source-download"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3726
+#: src/Zypper.cc:3753
 msgid "Download source rpms for all installed packages to a local directory."
 msgstr "설치된 모든 패키지에 대한 소스 rpm을 로컬 디렉토리에 다운로드합니다."
 
 #. translators: -d, --directory <DIR>
-#: src/Zypper.cc:3730
+#: src/Zypper.cc:3757
 msgid ""
 "Download all source rpms to this directory. Default: /var/cache/zypper/"
 "source-download"
@@ -4221,24 +4251,24 @@ msgstr ""
 "source-download"
 
 #. translators: --delete
-#: src/Zypper.cc:3732
+#: src/Zypper.cc:3759
 msgid "Delete extraneous source rpms in the local directory."
 msgstr "로컬 디렉토리에서 관련 없는 소스 rpm을 삭제합니다."
 
 #. translators: --no-delete
-#: src/Zypper.cc:3734
+#: src/Zypper.cc:3761
 msgid "Do not delete extraneous source rpms."
 msgstr "관련 없는 소스 rpm을 삭제하지 않습니다."
 
 #. translators: --status
-#: src/Zypper.cc:3736
+#: src/Zypper.cc:3763
 msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
 msgstr ""
 "소스 rpm을 다운로드하지 않지만, 누락되거나 관련 없는 소스 rpm을 표시합니다."
 
-#: src/Zypper.cc:3740
+#: src/Zypper.cc:3767
 msgid ""
 "source-download\n"
 "\n"
@@ -4267,16 +4297,16 @@ msgstr ""
 "                     누락되거나 관련 없는 소스 rpm을 표시합니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3769
+#: src/Zypper.cc:3796
 msgid "quit (exit, ^D)"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3772
+#: src/Zypper.cc:3799
 msgid "Quit the current zypper shell."
 msgstr "현재 zypper 셸을 종료합니다."
 
-#: src/Zypper.cc:3778
+#: src/Zypper.cc:3805
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4291,16 +4321,16 @@ msgstr ""
 "이 명령에는 추가 옵션이 없습니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3797
+#: src/Zypper.cc:3824
 msgid "shell (sh)"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3800
+#: src/Zypper.cc:3827
 msgid "Enter the zypper command shell."
 msgstr "zypper 명령 셸을 입력합니다."
 
-#: src/Zypper.cc:3806
+#: src/Zypper.cc:3833
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4314,7 +4344,7 @@ msgstr ""
 "\n"
 "이 명령에는 추가 옵션이 없습니다.\n"
 
-#: src/Zypper.cc:3832
+#: src/Zypper.cc:3859
 #, c-format, boost-format
 msgid ""
 "patch-search [OPTIONS] [querystring...]\n"
@@ -4327,17 +4357,17 @@ msgstr ""
 "지정한 검색어로 패치를 검색합니다. 이는 '%s'에 대한 별칭입니다.\n"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:3849
+#: src/Zypper.cc:3876
 msgid "ping [OPTIONS]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3852
+#: src/Zypper.cc:3879
 msgid "This command has dummy implementation which always returns 0."
 msgstr "이 명령은 항상 0을 반환하는 더미를 구현합니다."
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3859
+#: src/Zypper.cc:3886
 msgid ""
 "ping [OPTIONS]\n"
 "\n"
@@ -4347,12 +4377,12 @@ msgstr ""
 "\n"
 "이 명령은 항상 0을 반환하는 더미를 구현합니다.\n"
 
-#: src/Zypper.cc:3903 src/Zypper.cc:5959
+#: src/Zypper.cc:3930 src/Zypper.cc:5986
 msgid "Unexpected program flow."
 msgstr "예기치 않은 프로그램 흐름입니다."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:4034
+#: src/Zypper.cc:4061
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4362,20 +4392,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:4057
+#: src/Zypper.cc:4084
 msgid "Root privileges are required for refreshing services."
 msgstr "서비스를 새로 고치려면 루트 권한이 필요합니다."
 
-#: src/Zypper.cc:4081 src/Zypper.cc:4160 src/Zypper.cc:4332
+#: src/Zypper.cc:4108 src/Zypper.cc:4187 src/Zypper.cc:4359
 msgid "Root privileges are required for modifying system services."
 msgstr "시스템 서비스를 수정하려면 루트 권한이 필요합니다."
 
-#: src/Zypper.cc:4144
+#: src/Zypper.cc:4171
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s'은(는) 유효한 서비스 유형이 아닙니다."
 
-#: src/Zypper.cc:4146
+#: src/Zypper.cc:4173
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -4385,38 +4415,38 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:4171 src/utils/messages.cc:47
+#: src/Zypper.cc:4198 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "별칭 또는 집계 옵션이 필요합니다."
 
-#: src/Zypper.cc:4203
+#: src/Zypper.cc:4230
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "'%s' 서비스를 찾을 수 없습니다."
 
-#: src/Zypper.cc:4229 src/Zypper.cc:4331 src/Zypper.cc:4435 src/Zypper.cc:4487
+#: src/Zypper.cc:4256 src/Zypper.cc:4358 src/Zypper.cc:4462 src/Zypper.cc:4514
 msgid "Root privileges are required for modifying system repositories."
 msgstr "시스템 리포지토리를 수정하려면 루트 권한이 필요합니다."
 
-#: src/Zypper.cc:4255 src/Zypper.cc:4599
+#: src/Zypper.cc:4282 src/Zypper.cc:4626
 msgid "Too few arguments."
 msgstr "인수가 너무 적습니다."
 
-#: src/Zypper.cc:4263
+#: src/Zypper.cc:4290
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "한 개의 인수만 사용한 경우 URI가 .repo 파일을 가리켜야 합니다."
 
-#: src/Zypper.cc:4293
+#: src/Zypper.cc:4320
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "%s과(와) %s을(를) 동시에 사용할 수 없습니다. %s 설정을 사용합니다."
 
-#: src/Zypper.cc:4312
+#: src/Zypper.cc:4339
 msgid "Specified type is not a valid repository type:"
 msgstr "지정된 유형은 올바른 리포지토리 유형이 아닙니다."
 
-#: src/Zypper.cc:4313
+#: src/Zypper.cc:4340
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
@@ -4424,74 +4454,74 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4378
+#: src/Zypper.cc:4405
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "별칭, 번호 또는 URI별로 '%s' 리포지토리를 찾을 수 없습니다."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4411
+#: src/Zypper.cc:4438
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "별칭, 번호 또는 URI별로 '%s' 서비스를 찾을 수 없습니다."
 
-#: src/Zypper.cc:4442
+#: src/Zypper.cc:4469
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "인수가 너무 적습니다. 최소한 URI와 별칭이 필요합니다."
 
-#: src/Zypper.cc:4466
+#: src/Zypper.cc:4493
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "'%s' 리포지토리를 찾을 수 없습니다."
 
-#: src/Zypper.cc:4526
+#: src/Zypper.cc:4553
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "%s 리포지토리를 찾을 수 없습니다."
 
-#: src/Zypper.cc:4543
+#: src/Zypper.cc:4570
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "시스템 리포지토리를 새로 고치려면 루트 권한이 필요합니다."
 
-#: src/Zypper.cc:4549
+#: src/Zypper.cc:4576
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "'%s' 전체 옵션은 여기서 아무런 의미가 없습니다."
 
-#: src/Zypper.cc:4557
+#: src/Zypper.cc:4584
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "'%s'이(가) 사용될 경우 인수가 허용되지 않습니다."
 
-#: src/Zypper.cc:4581
+#: src/Zypper.cc:4608
 msgid "Root privileges are required for cleaning local caches."
 msgstr "로컬 캐시를 정리하려면 루트 권한이 필요합니다."
 
-#: src/Zypper.cc:4600
+#: src/Zypper.cc:4627
 msgid "At least one package name is required."
 msgstr "패키지 이름이 한 개 이상 필요합니다."
 
-#: src/Zypper.cc:4609 src/Zypper.cc:4858 src/Zypper.cc:4895
+#: src/Zypper.cc:4636 src/Zypper.cc:4885 src/Zypper.cc:4922
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "패키지를 설치 또는 제거하려면 루트 권한이 필요합니다."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4621
+#: src/Zypper.cc:4648
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "인수를 무시하며, 전체 리포지토리를 표시합니다."
 
-#: src/Zypper.cc:4632
+#: src/Zypper.cc:4659
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "알 수 없는 패키지 유형: %s"
 
-#: src/Zypper.cc:4642
+#: src/Zypper.cc:4669
 msgid "Cannot uninstall patches."
 msgstr "패치를 제거할 수 없습니다."
 
-#: src/Zypper.cc:4643
+#: src/Zypper.cc:4670
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4501,34 +4531,34 @@ msgstr ""
 "패치는 단순한 파일 복사나 데이터베이스 기록 차원의\n"
 "설치가 아닙니다."
 
-#: src/Zypper.cc:4653
+#: src/Zypper.cc:4680
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "소스 패키지 제거가 정의 및 구현되지 않았습니다."
 
-#: src/Zypper.cc:4673
+#: src/Zypper.cc:4700
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s'은(는) RPM 파일과 유사합니다. 다운로드를 시도합니다."
 
-#: src/Zypper.cc:4682
+#: src/Zypper.cc:4709
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "'%s'(으)로 지정한 RPM 파일에 문제가 발생했습니다. 건너뛰는 중입니다."
 
-#: src/Zypper.cc:4704
+#: src/Zypper.cc:4731
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "%s의 RPM 헤더를 읽는 중 문제가 발생했습니다. RPM 파일입니까?"
 
-#: src/Zypper.cc:4725
+#: src/Zypper.cc:4752
 msgid "Plain RPM files cache"
 msgstr "일반 RPM 파일 캐시"
 
-#: src/Zypper.cc:4747
+#: src/Zypper.cc:4774
 msgid "No valid arguments specified."
 msgstr "올바른 인수가 지정되지 않았습니다."
 
-#: src/Zypper.cc:4764 src/Zypper.cc:4911
+#: src/Zypper.cc:4791 src/Zypper.cc:4938
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4537,73 +4567,73 @@ msgstr ""
 "목은 설치할 수 없습니다."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4801 src/Zypper.cc:5388
+#: src/Zypper.cc:4828 src/Zypper.cc:5415
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s이(가) %s과(와) 모순됩니다."
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4809
+#: src/Zypper.cc:4836
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s은(는) 현재 %s과(와) 함께 사용할 수 없습니다."
 
-#: src/Zypper.cc:4850
+#: src/Zypper.cc:4877
 msgid "Source package name is a required argument."
 msgstr "소스 패키지 이름은 필수 인수입니다."
 
-#: src/Zypper.cc:4968 src/Zypper.cc:5307 src/Zypper.cc:5407 src/Zypper.cc:5617
-#: src/Zypper.cc:5668 src/Zypper.cc:5708
+#: src/Zypper.cc:4995 src/Zypper.cc:5334 src/Zypper.cc:5434 src/Zypper.cc:5644
+#: src/Zypper.cc:5695 src/Zypper.cc:5735
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "알 수 없는 패키지 유형 '%s'입니다."
 
-#: src/Zypper.cc:4993 src/repos.cc:796
+#: src/Zypper.cc:5020 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "지정된 리포지토리 '%s'이(가) 비활성화되었습니다."
 
 #. translators: empty search result message
-#: src/Zypper.cc:5149
+#: src/Zypper.cc:5176
 msgid "No matching items found."
 msgstr "일치하는 항목이 없습니다."
 
-#: src/Zypper.cc:5184
+#: src/Zypper.cc:5211
 msgid "Problem occurred initializing or executing the search query"
 msgstr "검색 쿼리를 초기화하거나 실행하는 중 문제가 발생했습니다."
 
-#: src/Zypper.cc:5185
+#: src/Zypper.cc:5212
 msgid "See the above message for a hint."
 msgstr "자세한 내용은 위의 메시지를 참조하십시오."
 
-#: src/Zypper.cc:5186 src/repos.cc:1009
+#: src/Zypper.cc:5213 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "'zypper refresh'를 루트 권한으로 실행하여 문제를 해결할 수 있습니다."
 
-#: src/Zypper.cc:5267
+#: src/Zypper.cc:5294
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "옵션 %1% 은(는) 전역옵션 %2% (이)가 없는 경우 적용되지 않습니다."
 
-#: src/Zypper.cc:5326 src/Zypper.cc:5374
+#: src/Zypper.cc:5353 src/Zypper.cc:5401
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "%s을(를) %s과(와) 함께 사용할 수 없습니다."
 
-#: src/Zypper.cc:5355
+#: src/Zypper.cc:5382
 msgid "Root privileges are required for updating packages."
 msgstr "패키지를 업데이트하려면 루트 권한이 필요합니다."
 
-#: src/Zypper.cc:5414 src/Zypper.cc:5422 src/Zypper.cc:5503
+#: src/Zypper.cc:5441 src/Zypper.cc:5449 src/Zypper.cc:5530
 msgid "Operation not supported."
 msgstr "지원되지 않는 작업입니다."
 
-#: src/Zypper.cc:5415
+#: src/Zypper.cc:5442
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "설치된 제품을 업데이트하려면 '%s'을(를) 사용하십시오."
 
-#: src/Zypper.cc:5423
+#: src/Zypper.cc:5450
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4612,16 +4642,16 @@ msgstr ""
 "Zypper는 설치된 소스 패키지를 추적하지 않습니다. 최신 소스 패키지와 빌드 종속"
 "관계를 설치하려면 '%s'을(를) 사용하십시오."
 
-#: src/Zypper.cc:5439
+#: src/Zypper.cc:5466
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr "특정 패키지가 인수로 제공될 때 여러 유형을 사용할 수 없습니다."
 
-#: src/Zypper.cc:5539
+#: src/Zypper.cc:5566
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "배포판 업그레이드를 수행하려면 루트 권한이 필요합니다."
 
-#: src/Zypper.cc:5559
+#: src/Zypper.cc:5586
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4632,64 +4662,64 @@ msgstr ""
 "속하기 전에 이 리포지토리가 호환되는지 확인하십시오. 이 명령에 대한 자세한 내"
 "용은 '%s'을(를) 확인하십시오."
 
-#: src/Zypper.cc:5584 src/utils/messages.cc:55
+#: src/Zypper.cc:5611 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "필수 인수가 누락되었습니다."
 
-#: src/Zypper.cc:5587 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5614 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "사용법"
 
-#: src/Zypper.cc:5647 src/Zypper.cc:5688
+#: src/Zypper.cc:5674 src/Zypper.cc:5715
 msgid "Root privileges are required for adding of package locks."
 msgstr "패키지 잠금을 추가하려면 루트 권한이 필요합니다."
 
-#: src/Zypper.cc:5742
+#: src/Zypper.cc:5769
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "%lu 잠금이 제거되었습니다."
 
-#: src/Zypper.cc:5753
+#: src/Zypper.cc:5780
 msgid "XML output not implemented for this command."
 msgstr "이 명령에 대해 구현되지 않은 XML 출력입니다."
 
-#: src/Zypper.cc:5766
+#: src/Zypper.cc:5793
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "배포 레이블: %s"
 
-#: src/Zypper.cc:5767
+#: src/Zypper.cc:5794
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "짧은 레이블: %s"
 
-#: src/Zypper.cc:5808
+#: src/Zypper.cc:5835
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s이(가) %s과(와) 일치합니다."
 
-#: src/Zypper.cc:5810
+#: src/Zypper.cc:5837
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s이(가) %s보다 최신입니다."
 
-#: src/Zypper.cc:5812
+#: src/Zypper.cc:5839
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s이(가) %s보다 이전입니다."
 
-#: src/Zypper.cc:5894 src/source-download.cc:217
+#: src/Zypper.cc:5921 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "'%s' 다운로드 디렉토리를 사용하기 위한 권한이 부족합니다."
 
-#: src/Zypper.cc:5946
+#: src/Zypper.cc:5973
 msgid "This command only makes sense in the zypper shell."
 msgstr "이 명령은 Zypper 셸에서만 유효합니다."
 
-#: src/Zypper.cc:5956
+#: src/Zypper.cc:5983
 msgid "You already are running zypper's shell."
 msgstr "이미 Zypper 셸을 실행 중입니다."
 
