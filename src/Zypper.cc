@@ -2465,6 +2465,16 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = service_rename_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>")
+    )
+    .description(	// translators: command description
+    _("Assign new alias to the repository specified by alias, number or URI.")
+    )
+    .noOptionSection()
+    ;
+#if 0
     _command_help = _(
       "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
       "\n"
@@ -2472,6 +2482,7 @@ void Zypper::processCommandOptions()
       "\n"
       "This command has no additional options.\n"
     );
+#endif
     break;
   }
 
