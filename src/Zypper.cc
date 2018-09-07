@@ -2563,6 +2563,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = service_delete_options;
+#if 0
     _command_help = ( CommandHelpFormater() << _(
       "removerepo (rr) [OPTIONS] <alias|#|URI>\n"
       "\n"
@@ -2572,6 +2573,19 @@ void Zypper::processCommandOptions()
       "    --loose-auth   Ignore user authentication data in the URI.\n"
       "    --loose-query  Ignore query string in the URI.\n"
     ))
+#endif
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("removerepo (rr) [OPTIONS] <ALIAS|#|URI>")
+    )
+    .description(	// translators: command description
+    _("Remove repository specified by alias, number or URI.")
+    )
+    .optionSectionCommandOptions()
+    .option( "--loose-auth",	// translators: --loose-auth
+             _("Ignore user authentication data in the URI.") )
+    .option( "--loose-query",	// translators: --loose-query
+             _("Ignore query string in the URI.") )
     .gap()
     .option_REPO_AGGREGATES;
     break;
