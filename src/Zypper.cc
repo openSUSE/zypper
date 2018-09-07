@@ -3319,6 +3319,16 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("what-provides (wp) <CAPABILITY>")
+    )
+    .description(	// translators: command description
+    _("List all packages providing the specified capability.")
+    )
+    .noOptionSection()
+    ;
+#if 0
     _command_help = _(
       "what-provides (wp) <capability>\n"
       "\n"
@@ -3326,6 +3336,7 @@ void Zypper::processCommandOptions()
       "\n"
       "This command has no additional options.\n"
     );
+#endif
     break;
   }
 /*
