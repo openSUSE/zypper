@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 14:41+0200\n"
+"POT-Creation-Date: 2018-09-07 14:45+0200\n"
 "PO-Revision-Date: 2018-08-04 13:06+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
@@ -2243,7 +2243,7 @@ msgstr ""
 "Reťazec používateľských údajov nesmie obsahovať netlačiteľné znaky alebo "
 "znaky nového riadku!"
 
-#: src/Zypper.cc:1241 src/Zypper.cc:3853
+#: src/Zypper.cc:1241 src/Zypper.cc:3866
 msgid "Entering non-interactive mode."
 msgstr "Zapínam neinteraktívny režim."
 
@@ -2322,7 +2322,7 @@ msgstr "Príkaz '%s' je nahradený s '%s'."
 msgid "See '%s' for all available options."
 msgstr "Pozrieť si '%s' pre všetky dostupné voľby."
 
-#: src/Zypper.cc:1733 src/Zypper.cc:3869
+#: src/Zypper.cc:1733 src/Zypper.cc:3882
 msgid "Non-option program arguments: "
 msgstr "Argumenty programu (okrem volieb): "
 
@@ -4117,7 +4117,26 @@ msgstr "Vyčisti len duplikované zámky."
 msgid "Clean only locks which doesn't lock anything."
 msgstr "Odstráň zámky, ktoré nič nezamykajú."
 
-#: src/Zypper.cc:3499
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:3500
+msgid "targetos (tos) [OPTIONS]"
+msgstr "targetos (tos) [voľby]"
+
+#. translators: command description
+#: src/Zypper.cc:3503
+msgid ""
+"Show various information about the target operating system. By default, an "
+"ID string is shown."
+msgstr ""
+"Ukáže rôzne informácie o cieľovom operačnom systéme. V predvolenom nastavení "
+"sa zobrazí ID reťazec."
+
+#. translators: -l, --label
+#: src/Zypper.cc:3507
+msgid "Show the operating system label."
+msgstr "Ukázať popis operačného systému."
+
+#: src/Zypper.cc:3511
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -4135,7 +4154,7 @@ msgstr ""
 "  Voľby príkazu:\n"
 "-l, --label                 Ukázať popis operačného systému.\n"
 
-#: src/Zypper.cc:3520
+#: src/Zypper.cc:3533
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4152,7 +4171,7 @@ msgstr ""
 "\n"
 "-m, --match  Berie chýbajúce číslo vydania ako akékoľvek vydanie.\n"
 
-#: src/Zypper.cc:3539
+#: src/Zypper.cc:3552
 msgid ""
 "licenses\n"
 "\n"
@@ -4167,12 +4186,12 @@ msgstr ""
 "Tento príkaz nemá žiadne ďalšie voľby.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3564
+#: src/Zypper.cc:3577
 msgid "ps [options]"
 msgstr "ps [voľby]"
 
 #. translators: command description
-#: src/Zypper.cc:3567
+#: src/Zypper.cc:3580
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -4181,7 +4200,7 @@ msgstr ""
 "zvýšeniami verzie."
 
 #. translators: -s, --short
-#: src/Zypper.cc:3571
+#: src/Zypper.cc:3584
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4192,7 +4211,7 @@ msgstr ""
 "zoznam názvov súvisiacej systémovej služby."
 
 #. translators: --print <format>
-#: src/Zypper.cc:3573
+#: src/Zypper.cc:3586
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4204,11 +4223,11 @@ msgstr ""
 "nahradená názvom systémovej služby."
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3575
+#: src/Zypper.cc:3588
 msgid "Write debug output to file <path>."
 msgstr "Zapísať ladiaci výstup do súboru <path>."
 
-#: src/Zypper.cc:3594
+#: src/Zypper.cc:3607
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4249,7 +4268,7 @@ msgstr ""
 "--dry-run            Nesťahovať žiadny balík, len oznámiť,\n"
 "                     čo by sa robilo.\n"
 
-#: src/Zypper.cc:3633
+#: src/Zypper.cc:3646
 msgid ""
 "source-download\n"
 "\n"
@@ -4280,7 +4299,7 @@ msgstr ""
 "                     ale ukázať, ktoré zdrojové rpm balíky chýbajú, alebo sú "
 "irelevantné.\n"
 
-#: src/Zypper.cc:3660
+#: src/Zypper.cc:3673
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4294,7 +4313,7 @@ msgstr ""
 "\n"
 "Tento príkaz nemá žiadne ďalšie voľby.\n"
 
-#: src/Zypper.cc:3677
+#: src/Zypper.cc:3690
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4309,7 +4328,7 @@ msgstr ""
 "Tento príkaz nemá žiadne ďalšie voľby.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3695
+#: src/Zypper.cc:3708
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4320,7 +4339,7 @@ msgstr ""
 "Zoznam dostupných typov služieb.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3711
+#: src/Zypper.cc:3724
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4333,7 +4352,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3733
+#: src/Zypper.cc:3746
 msgid ""
 "mount\n"
 "\n"
@@ -4353,7 +4372,7 @@ msgstr ""
 "-n, --name <name>    Použiť zadaný reťazec ako popisný názov.\n"
 "-r, --recurse        Vnoriť sa do podadresárov.\n"
 
-#: src/Zypper.cc:3761
+#: src/Zypper.cc:3774
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4366,7 +4385,7 @@ msgstr ""
 "Hľadá opravy zodpovedajúce zadanému reťazcu. Toto je alias pre '%s'.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3778
+#: src/Zypper.cc:3791
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4376,12 +4395,12 @@ msgstr ""
 "\n"
 "Tento príkaz má fiktívnu implementáciu a vždy vracia 0.\n"
 
-#: src/Zypper.cc:3821 src/Zypper.cc:5893
+#: src/Zypper.cc:3834 src/Zypper.cc:5906
 msgid "Unexpected program flow."
 msgstr "Neočakávaný tok programu."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3952
+#: src/Zypper.cc:3965
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4391,20 +4410,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3975
+#: src/Zypper.cc:3988
 msgid "Root privileges are required for refreshing services."
 msgstr "Pre obnovenie služieb sú potrebné práva správcu systému (root)."
 
-#: src/Zypper.cc:3999 src/Zypper.cc:4078 src/Zypper.cc:4266
+#: src/Zypper.cc:4012 src/Zypper.cc:4091 src/Zypper.cc:4279
 msgid "Root privileges are required for modifying system services."
 msgstr "Pre prácu so službami sú potrebné práva správcu systému (root)."
 
-#: src/Zypper.cc:4062
+#: src/Zypper.cc:4075
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' nie je platný typ služby."
 
-#: src/Zypper.cc:4064
+#: src/Zypper.cc:4077
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "Zoznam známych typov služieb získate pomocou '%s' alebo '%s'."
@@ -4413,47 +4432,47 @@ msgstr "Zoznam známych typov služieb získate pomocou '%s' alebo '%s'."
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:4089 src/utils/messages.cc:47
+#: src/Zypper.cc:4102 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "Je vyžadovaný alias alebo úhrnná voľba."
 
-#: src/Zypper.cc:4121
+#: src/Zypper.cc:4134
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Služba '%s' nebola nájdená."
 
-#: src/Zypper.cc:4148 src/Zypper.cc:4265 src/Zypper.cc:4369 src/Zypper.cc:4421
+#: src/Zypper.cc:4161 src/Zypper.cc:4278 src/Zypper.cc:4382 src/Zypper.cc:4434
 msgid "Root privileges are required for modifying system repositories."
 msgstr ""
 "Pre prácu so systémovými repozitármi sú potrebné práva správcu systému "
 "(root)."
 
-#: src/Zypper.cc:4174 src/Zypper.cc:4533
+#: src/Zypper.cc:4187 src/Zypper.cc:4546
 msgid "Too few arguments."
 msgstr "Príliš málo argumentov."
 
-#: src/Zypper.cc:4197
+#: src/Zypper.cc:4210
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "Ak je použitý iba jeden argument, musí to byť URI adresa .repo súboru."
 
-#: src/Zypper.cc:4227
+#: src/Zypper.cc:4240
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "Nie je možné použiť %s spolu s %s. Použijem %s."
 
-#: src/Zypper.cc:4246
+#: src/Zypper.cc:4259
 msgid "Specified type is not a valid repository type:"
 msgstr "Zadaný typ nie je platný typ repozitára:"
 
-#: src/Zypper.cc:4247
+#: src/Zypper.cc:4260
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "Zoznam známych typov repozitárov získate pomocou '%s' alebo '%s'."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4312
+#: src/Zypper.cc:4325
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr ""
@@ -4461,53 +4480,53 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4345
+#: src/Zypper.cc:4358
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr ""
 "Služba '%s' nebola nájdená podľa zadaného aliasu, čísla ani URI adresy."
 
-#: src/Zypper.cc:4376
+#: src/Zypper.cc:4389
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Príliš málo argumentov. Vyžadované sú aspoň URI a alias."
 
-#: src/Zypper.cc:4400
+#: src/Zypper.cc:4413
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Repozitár '%s' nebol nájdený."
 
-#: src/Zypper.cc:4460
+#: src/Zypper.cc:4473
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Repozitár '%s' nebol nájdený."
 
-#: src/Zypper.cc:4477
+#: src/Zypper.cc:4490
 msgid "Root privileges are required for refreshing system repositories."
 msgstr ""
 "Pre obnovenie systémových repozitárov sú potrebné práva správcu systému "
 "(root)."
 
-#: src/Zypper.cc:4483
+#: src/Zypper.cc:4496
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Globálna voľba '%s' tu nemá žiadny vplyv."
 
-#: src/Zypper.cc:4491
+#: src/Zypper.cc:4504
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argumenty príkazu nie sú povolené ak je použitá voľba '%s'."
 
-#: src/Zypper.cc:4515
+#: src/Zypper.cc:4528
 msgid "Root privileges are required for cleaning local caches."
 msgstr ""
 "Pre čistenie lokálnych vyrovnávacích pamätí sú potrebné práva správcu "
 "systému (root)."
 
-#: src/Zypper.cc:4534
+#: src/Zypper.cc:4547
 msgid "At least one package name is required."
 msgstr "Je požadovaný aspoň jeden názov balíka."
 
-#: src/Zypper.cc:4543 src/Zypper.cc:4792 src/Zypper.cc:4829
+#: src/Zypper.cc:4556 src/Zypper.cc:4805 src/Zypper.cc:4842
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr ""
 "Pre inštaláciu alebo odstránenie balíkov sú potrebné práva správcu systému "
@@ -4515,20 +4534,20 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4555
+#: src/Zypper.cc:4568
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Ignorujem argumenty, označujem celý repozitár na inštaláciu."
 
-#: src/Zypper.cc:4566
+#: src/Zypper.cc:4579
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Neznámy typ balíka: %s"
 
-#: src/Zypper.cc:4576
+#: src/Zypper.cc:4589
 msgid "Cannot uninstall patches."
 msgstr "Opravy nie je možné odinštalovať."
 
-#: src/Zypper.cc:4577
+#: src/Zypper.cc:4590
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4537,34 +4556,34 @@ msgstr ""
 "Či je oprava nainštalovaná sa určuje výhradne na základe jej závislostí.\n"
 "Opravy sa neinštalujú kopírovaním súborov, zápisom do databázy a podobne."
 
-#: src/Zypper.cc:4587
+#: src/Zypper.cc:4600
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Odinštalovanie zdrojových balíkov nie je definované a implementované."
 
-#: src/Zypper.cc:4607
+#: src/Zypper.cc:4620
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' vyzerá ako RPM súbor. Pokúsim sa ho stiahnuť."
 
-#: src/Zypper.cc:4616
+#: src/Zypper.cc:4629
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Nastal problém s RPM súborom zadaným ako '%s', preskakujem."
 
-#: src/Zypper.cc:4638
+#: src/Zypper.cc:4651
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Nastal problém pri čítaní RPM hlavičky balíka %s. Je to RPM súbor?"
 
-#: src/Zypper.cc:4659
+#: src/Zypper.cc:4672
 msgid "Plain RPM files cache"
 msgstr "Vyrovnávacie pamäť RPM súborov"
 
-#: src/Zypper.cc:4681
+#: src/Zypper.cc:4694
 msgid "No valid arguments specified."
 msgstr "Neboli zadané žiadne platné argumenty."
 
-#: src/Zypper.cc:4698 src/Zypper.cc:4845
+#: src/Zypper.cc:4711 src/Zypper.cc:4858
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4573,75 +4592,75 @@ msgstr ""
 "riešeniami. Nič nemôže byť nainštalované."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4735 src/Zypper.cc:5322
+#: src/Zypper.cc:4748 src/Zypper.cc:5335
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s protirečí %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4743
+#: src/Zypper.cc:4756
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s nie momentálne možné použiť spolu s %s"
 
-#: src/Zypper.cc:4784
+#: src/Zypper.cc:4797
 msgid "Source package name is a required argument."
 msgstr "Názov zdrojového balíka je vyžadovaný argument."
 
-#: src/Zypper.cc:4902 src/Zypper.cc:5241 src/Zypper.cc:5341 src/Zypper.cc:5551
-#: src/Zypper.cc:5602 src/Zypper.cc:5642
+#: src/Zypper.cc:4915 src/Zypper.cc:5254 src/Zypper.cc:5354 src/Zypper.cc:5564
+#: src/Zypper.cc:5615 src/Zypper.cc:5655
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Neznámy typ balíka '%s'."
 
-#: src/Zypper.cc:4927 src/repos.cc:796
+#: src/Zypper.cc:4940 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Zadaný repozitár '%s' je vypnutý."
 
 #. translators: empty search result message
-#: src/Zypper.cc:5083
+#: src/Zypper.cc:5096
 msgid "No matching items found."
 msgstr "Neboli nájdené žiadne odpovedajúce položky."
 
-#: src/Zypper.cc:5118
+#: src/Zypper.cc:5131
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Nastal problém pri inicializácii alebo spustení vyhľadávania"
 
-#: src/Zypper.cc:5119
+#: src/Zypper.cc:5132
 msgid "See the above message for a hint."
 msgstr "Pozrite predchádzajúcu správu. Poskytne vám tip o príčine chyby."
 
-#: src/Zypper.cc:5120 src/repos.cc:1009
+#: src/Zypper.cc:5133 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Spustenie 'zypper refresh' pod správcom systému (root) by mohlo vyriešiť "
 "problém."
 
-#: src/Zypper.cc:5201
+#: src/Zypper.cc:5214
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "Voľba %1% nemá žiadny účinok bez globálnej voľby %2%."
 
-#: src/Zypper.cc:5260 src/Zypper.cc:5308
+#: src/Zypper.cc:5273 src/Zypper.cc:5321
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Nie je možné použiť %s spolu s %s."
 
-#: src/Zypper.cc:5289
+#: src/Zypper.cc:5302
 msgid "Root privileges are required for updating packages."
 msgstr "Pre aktualizáciu balíkov sú potrebné práva správcu systému (root)."
 
-#: src/Zypper.cc:5348 src/Zypper.cc:5356 src/Zypper.cc:5437
+#: src/Zypper.cc:5361 src/Zypper.cc:5369 src/Zypper.cc:5450
 msgid "Operation not supported."
 msgstr "Operácia nie je podporovaná."
 
-#: src/Zypper.cc:5349
+#: src/Zypper.cc:5362
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Pre aktualizovanie nainštalovaných produktov použiť '%s'."
 
-#: src/Zypper.cc:5357
+#: src/Zypper.cc:5370
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4650,18 +4669,18 @@ msgstr ""
 "Zypper nesleduje nainštalované zdrojové balíky. Pre nainštalovanie "
 "najnovšieho zdrojového balíka a jeho závislosti pre zostavenie použiť '%s'."
 
-#: src/Zypper.cc:5373
+#: src/Zypper.cc:5386
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Nie je možné použiť viacero typov, ak sú konkrétne balíky zadané ako "
 "argumenty."
 
-#: src/Zypper.cc:5473
+#: src/Zypper.cc:5486
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Pre povýšenie distribúcie sú potrebné práva správcu systému (root)."
 
-#: src/Zypper.cc:5493
+#: src/Zypper.cc:5506
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4672,21 +4691,21 @@ msgstr ""
 "Než budete pokračovať, uistite sa, že sú tieto repozitáre kompatibilné. Pre "
 "viac informácií pozrite '%s'."
 
-#: src/Zypper.cc:5518 src/utils/messages.cc:55
+#: src/Zypper.cc:5531 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "Chýba požadovaný argument."
 
-#: src/Zypper.cc:5521 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5534 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "Použitie"
 
-#: src/Zypper.cc:5581 src/Zypper.cc:5622
+#: src/Zypper.cc:5594 src/Zypper.cc:5635
 msgid "Root privileges are required for adding of package locks."
 msgstr ""
 "Pre pridávanie zámkov balíkov sú potrebné práva správcu systému (root)."
 
-#: src/Zypper.cc:5676
+#: src/Zypper.cc:5689
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
@@ -4694,56 +4713,56 @@ msgstr[0] "Odstránený %lu zámok."
 msgstr[1] "Odstránené %lu zámky."
 msgstr[2] "Odstránených %lu zámkov."
 
-#: src/Zypper.cc:5687
+#: src/Zypper.cc:5700
 msgid "XML output not implemented for this command."
 msgstr "Výstup XML nie je implementovaný pre tento príkaz."
 
-#: src/Zypper.cc:5700
+#: src/Zypper.cc:5713
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Popis distribúcie: %s"
 
-#: src/Zypper.cc:5701
+#: src/Zypper.cc:5714
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Krátky popis: %s"
 
-#: src/Zypper.cc:5742
+#: src/Zypper.cc:5755
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s sa zhoduje s %s"
 
-#: src/Zypper.cc:5744
+#: src/Zypper.cc:5757
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s je novšia ako %s"
 
-#: src/Zypper.cc:5746
+#: src/Zypper.cc:5759
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s je staršia ako %s"
 
-#: src/Zypper.cc:5828 src/source-download.cc:217
+#: src/Zypper.cc:5841 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Nedostatočné práva na použitie sťahovacieho adresára '%s'."
 
-#: src/Zypper.cc:5880
+#: src/Zypper.cc:5893
 msgid "This command only makes sense in the zypper shell."
 msgstr "Tento príkaz má zmysel iba v aplikácií shell pre zypper."
 
-#: src/Zypper.cc:5890
+#: src/Zypper.cc:5903
 msgid "You already are running zypper's shell."
 msgstr "Už ste spustili shell pre zypper."
 
-#: src/Zypper.cc:5903 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
+#: src/Zypper.cc:5916 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
 msgid "Alias"
 msgstr "Alias"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5903 src/commands/locks/list.cc:108 src/info.cc:69
+#: src/Zypper.cc:5916 src/commands/locks/list.cc:108 src/info.cc:69
 #: src/info.cc:460 src/info.cc:704 src/repos.cc:1072 src/repos.cc:1211
 #: src/repos.cc:2550 src/search.cc:47 src/search.cc:195 src/search.cc:342
 #: src/search.cc:489 src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
@@ -4751,11 +4770,11 @@ msgid "Name"
 msgstr "Názov"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5903 src/info.cc:83
+#: src/Zypper.cc:5916 src/info.cc:83
 msgid "Description"
 msgstr "Popis"
 
-#: src/Zypper.cc:5954
+#: src/Zypper.cc:5967
 msgid "Resolvable Type"
 msgstr "Riešiteľný typ"
 

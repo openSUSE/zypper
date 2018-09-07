@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 14:41+0200\n"
+"POT-Creation-Date: 2018-09-07 14:45+0200\n"
 "PO-Revision-Date: 2006-11-11 18:41+0530\n"
 "Last-Translator: Priyavert Sharma<priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions<linux_team@agreeya.com>\n"
@@ -1985,7 +1985,7 @@ msgstr ""
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 
-#: src/Zypper.cc:1241 src/Zypper.cc:3853
+#: src/Zypper.cc:1241 src/Zypper.cc:3866
 msgid "Entering non-interactive mode."
 msgstr ""
 
@@ -2061,7 +2061,7 @@ msgstr "%s %sஆல் மாற்றியமைக்கப்பட்டத
 msgid "See '%s' for all available options."
 msgstr ""
 
-#: src/Zypper.cc:1733 src/Zypper.cc:3869
+#: src/Zypper.cc:1733 src/Zypper.cc:3882
 msgid "Non-option program arguments: "
 msgstr ""
 
@@ -3342,7 +3342,24 @@ msgstr ""
 msgid "Clean only locks which doesn't lock anything."
 msgstr ""
 
-#: src/Zypper.cc:3499
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:3500
+msgid "targetos (tos) [OPTIONS]"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:3503
+msgid ""
+"Show various information about the target operating system. By default, an "
+"ID string is shown."
+msgstr ""
+
+#. translators: -l, --label
+#: src/Zypper.cc:3507
+msgid "Show the operating system label."
+msgstr ""
+
+#: src/Zypper.cc:3511
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -3353,7 +3370,7 @@ msgid ""
 "-l, --label                 Show the operating system label.\n"
 msgstr ""
 
-#: src/Zypper.cc:3520
+#: src/Zypper.cc:3533
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3363,7 +3380,7 @@ msgid ""
 "-m, --match  Takes missing release number as any release.\n"
 msgstr ""
 
-#: src/Zypper.cc:3539
+#: src/Zypper.cc:3552
 msgid ""
 "licenses\n"
 "\n"
@@ -3373,19 +3390,19 @@ msgid ""
 msgstr ""
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3564
+#: src/Zypper.cc:3577
 msgid "ps [options]"
 msgstr ""
 
 #. translators: command description
-#: src/Zypper.cc:3567
+#: src/Zypper.cc:3580
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
 
 #. translators: -s, --short
-#: src/Zypper.cc:3571
+#: src/Zypper.cc:3584
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -3393,7 +3410,7 @@ msgid ""
 msgstr ""
 
 #. translators: --print <format>
-#: src/Zypper.cc:3573
+#: src/Zypper.cc:3586
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -3402,11 +3419,11 @@ msgid ""
 msgstr ""
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3575
+#: src/Zypper.cc:3588
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/Zypper.cc:3594
+#: src/Zypper.cc:3607
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -3428,7 +3445,7 @@ msgid ""
 "                     would be done.\n"
 msgstr ""
 
-#: src/Zypper.cc:3633
+#: src/Zypper.cc:3646
 msgid ""
 "source-download\n"
 "\n"
@@ -3444,7 +3461,7 @@ msgid ""
 "                     but show which source rpms are missing or extraneous.\n"
 msgstr ""
 
-#: src/Zypper.cc:3660
+#: src/Zypper.cc:3673
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -3453,7 +3470,7 @@ msgid ""
 "This command has no additional options.\n"
 msgstr ""
 
-#: src/Zypper.cc:3677
+#: src/Zypper.cc:3690
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -3463,7 +3480,7 @@ msgid ""
 msgstr ""
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3695
+#: src/Zypper.cc:3708
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -3471,7 +3488,7 @@ msgid ""
 msgstr ""
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3711
+#: src/Zypper.cc:3724
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -3481,7 +3498,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3733
+#: src/Zypper.cc:3746
 msgid ""
 "mount\n"
 "\n"
@@ -3493,7 +3510,7 @@ msgid ""
 "-r, --recurse        Dive into subdirectories.\n"
 msgstr ""
 
-#: src/Zypper.cc:3761
+#: src/Zypper.cc:3774
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -3503,42 +3520,42 @@ msgid ""
 msgstr ""
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3778
+#: src/Zypper.cc:3791
 msgid ""
 "ping [options]\n"
 "\n"
 "This command has dummy implementation which always returns 0.\n"
 msgstr ""
 
-#: src/Zypper.cc:3821 src/Zypper.cc:5893
+#: src/Zypper.cc:3834 src/Zypper.cc:5906
 #, fuzzy
 msgid "Unexpected program flow."
 msgstr "எதிர்பாராத விதிவிலக்கு."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3952
+#: src/Zypper.cc:3965
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
 
-#: src/Zypper.cc:3975
+#: src/Zypper.cc:3988
 #, fuzzy
 msgid "Root privileges are required for refreshing services."
 msgstr "இந்த நிரலை பயன்படுத்துவதற்கு ஆதார சலுகைகள் தேவைப்படுகின்றன."
 
-#: src/Zypper.cc:3999 src/Zypper.cc:4078 src/Zypper.cc:4266
+#: src/Zypper.cc:4012 src/Zypper.cc:4091 src/Zypper.cc:4279
 #, fuzzy
 msgid "Root privileges are required for modifying system services."
 msgstr "இந்த நிரலை பயன்படுத்துவதற்கு ஆதார சலுகைகள் தேவைப்படுகின்றன."
 
-#: src/Zypper.cc:4062
+#: src/Zypper.cc:4075
 #, fuzzy, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "`%s' ஒரு செல்லத்தக்க வலைமாஸ்க் அல்ல."
 
-#: src/Zypper.cc:4064
+#: src/Zypper.cc:4077
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -3547,248 +3564,248 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:4089 src/utils/messages.cc:47
+#: src/Zypper.cc:4102 src/utils/messages.cc:47
 #, fuzzy
 msgid "Alias or an aggregate option is required."
 msgstr "ஏற்றுமதி விருப்பத்தேர்வு தேவைப்படுகிறது."
 
-#: src/Zypper.cc:4121
+#: src/Zypper.cc:4134
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "இணைக்கப்படவில்லை"
 
-#: src/Zypper.cc:4148 src/Zypper.cc:4265 src/Zypper.cc:4369 src/Zypper.cc:4421
+#: src/Zypper.cc:4161 src/Zypper.cc:4278 src/Zypper.cc:4382 src/Zypper.cc:4434
 #, fuzzy
 msgid "Root privileges are required for modifying system repositories."
 msgstr "இந்த நிரலை பயன்படுத்துவதற்கு ஆதார சலுகைகள் தேவைப்படுகின்றன."
 
-#: src/Zypper.cc:4174 src/Zypper.cc:4533
+#: src/Zypper.cc:4187 src/Zypper.cc:4546
 #, fuzzy
 msgid "Too few arguments."
 msgstr "உள்நுழைதல்;: மிக அதிக பயனிலைகள்\n"
 
-#: src/Zypper.cc:4197
+#: src/Zypper.cc:4210
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 
-#: src/Zypper.cc:4227
+#: src/Zypper.cc:4240
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 
-#: src/Zypper.cc:4246
+#: src/Zypper.cc:4259
 msgid "Specified type is not a valid repository type:"
 msgstr ""
 
-#: src/Zypper.cc:4247
+#: src/Zypper.cc:4260
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4312
+#: src/Zypper.cc:4325
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "உள்ளீடு காணப்படவில்லை."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4345
+#: src/Zypper.cc:4358
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "உள்ளீடு காணப்படவில்லை."
 
-#: src/Zypper.cc:4376
+#: src/Zypper.cc:4389
 msgid "Too few arguments. At least URI and alias are required."
 msgstr ""
 
-#: src/Zypper.cc:4400
+#: src/Zypper.cc:4413
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "உள்ளீடு காணப்படவில்லை."
 
-#: src/Zypper.cc:4460
+#: src/Zypper.cc:4473
 #, fuzzy, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "உள்ளீடு காணப்படவில்லை."
 
-#: src/Zypper.cc:4477
+#: src/Zypper.cc:4490
 #, fuzzy
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "இந்த நிரலை பயன்படுத்துவதற்கு ஆதார சலுகைகள் தேவைப்படுகின்றன."
 
-#: src/Zypper.cc:4483
+#: src/Zypper.cc:4496
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr ""
 
-#: src/Zypper.cc:4491
+#: src/Zypper.cc:4504
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr ""
 
-#: src/Zypper.cc:4515
+#: src/Zypper.cc:4528
 #, fuzzy
 msgid "Root privileges are required for cleaning local caches."
 msgstr "இந்த நிரலை பயன்படுத்துவதற்கு ஆதார சலுகைகள் தேவைப்படுகின்றன."
 
-#: src/Zypper.cc:4534
+#: src/Zypper.cc:4547
 #, fuzzy
 msgid "At least one package name is required."
 msgstr "யூஆர்எல் திட்டம் ஒரு தேவைப்படும் உறுப்பாகும்"
 
-#: src/Zypper.cc:4543 src/Zypper.cc:4792 src/Zypper.cc:4829
+#: src/Zypper.cc:4556 src/Zypper.cc:4805 src/Zypper.cc:4842
 #, fuzzy
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "இந்த நிரலை பயன்படுத்துவதற்கு ஆதார சலுகைகள் தேவைப்படுகின்றன."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4555
+#: src/Zypper.cc:4568
 msgid "Ignoring arguments, marking the entire repository."
 msgstr ""
 
-#: src/Zypper.cc:4566
+#: src/Zypper.cc:4579
 #, fuzzy, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "அறிந்திராத நாடு:"
 
-#: src/Zypper.cc:4576
+#: src/Zypper.cc:4589
 #, fuzzy
 msgid "Cannot uninstall patches."
 msgstr "%sஐ நிறுவ முடியவில்லை"
 
-#: src/Zypper.cc:4577
+#: src/Zypper.cc:4590
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
 
-#: src/Zypper.cc:4587
+#: src/Zypper.cc:4600
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr ""
 
-#: src/Zypper.cc:4607
+#: src/Zypper.cc:4620
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr ""
 
-#: src/Zypper.cc:4616
+#: src/Zypper.cc:4629
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr ""
 
-#: src/Zypper.cc:4638
+#: src/Zypper.cc:4651
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 
-#: src/Zypper.cc:4659
+#: src/Zypper.cc:4672
 msgid "Plain RPM files cache"
 msgstr ""
 
-#: src/Zypper.cc:4681
+#: src/Zypper.cc:4694
 #, fuzzy
 msgid "No valid arguments specified."
 msgstr "செல்லத்தக்க கோரிக்கை கோப்பு குறிப்பிடப்படவில்லை. "
 
-#: src/Zypper.cc:4698 src/Zypper.cc:4845
+#: src/Zypper.cc:4711 src/Zypper.cc:4858
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr ""
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4735 src/Zypper.cc:5322
+#: src/Zypper.cc:4748 src/Zypper.cc:5335
 #, fuzzy, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s %sஉடன் முரண்படுகிறது"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4743
+#: src/Zypper.cc:4756
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr ""
 
-#: src/Zypper.cc:4784
+#: src/Zypper.cc:4797
 #, fuzzy
 msgid "Source package name is a required argument."
 msgstr "யூஆர்எல் திட்டம் ஒரு தேவைப்படும் உறுப்பாகும்"
 
-#: src/Zypper.cc:4902 src/Zypper.cc:5241 src/Zypper.cc:5341 src/Zypper.cc:5551
-#: src/Zypper.cc:5602 src/Zypper.cc:5642
+#: src/Zypper.cc:4915 src/Zypper.cc:5254 src/Zypper.cc:5354 src/Zypper.cc:5564
+#: src/Zypper.cc:5615 src/Zypper.cc:5655
 #, fuzzy, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "அறிந்திராத நாடு:"
 
-#: src/Zypper.cc:4927 src/repos.cc:796
+#: src/Zypper.cc:4940 src/repos.cc:796
 #, fuzzy, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "தானியங்கு புதுப்பித்தல்"
 
 #. translators: empty search result message
-#: src/Zypper.cc:5083
+#: src/Zypper.cc:5096
 #, fuzzy
 msgid "No matching items found."
 msgstr "ஒலி"
 
-#: src/Zypper.cc:5118
+#: src/Zypper.cc:5131
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 
-#: src/Zypper.cc:5119
+#: src/Zypper.cc:5132
 msgid "See the above message for a hint."
 msgstr ""
 
-#: src/Zypper.cc:5120 src/repos.cc:1009
+#: src/Zypper.cc:5133 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 
-#: src/Zypper.cc:5201
+#: src/Zypper.cc:5214
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
 
-#: src/Zypper.cc:5260 src/Zypper.cc:5308
+#: src/Zypper.cc:5273 src/Zypper.cc:5321
 #, fuzzy, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "படிப்பதற்கு %sஐ  திறக்க முடியவில்லை: %s"
 
-#: src/Zypper.cc:5289
+#: src/Zypper.cc:5302
 #, fuzzy
 msgid "Root privileges are required for updating packages."
 msgstr "இந்த நிரலை பயன்படுத்துவதற்கு ஆதார சலுகைகள் தேவைப்படுகின்றன."
 
-#: src/Zypper.cc:5348 src/Zypper.cc:5356 src/Zypper.cc:5437
+#: src/Zypper.cc:5361 src/Zypper.cc:5369 src/Zypper.cc:5450
 msgid "Operation not supported."
 msgstr ""
 
-#: src/Zypper.cc:5349
+#: src/Zypper.cc:5362
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr ""
 
-#: src/Zypper.cc:5357
+#: src/Zypper.cc:5370
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
 
-#: src/Zypper.cc:5373
+#: src/Zypper.cc:5386
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 
-#: src/Zypper.cc:5473
+#: src/Zypper.cc:5486
 #, fuzzy
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "இந்த நிரலை பயன்படுத்துவதற்கு ஆதார சலுகைகள் தேவைப்படுகின்றன."
 
-#: src/Zypper.cc:5493
+#: src/Zypper.cc:5506
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -3796,78 +3813,78 @@ msgid ""
 "for more information about this command."
 msgstr ""
 
-#: src/Zypper.cc:5518 src/utils/messages.cc:55
+#: src/Zypper.cc:5531 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr ""
 
-#: src/Zypper.cc:5521 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5534 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 #, fuzzy
 msgid "Usage"
 msgstr "ஓசேஜ்"
 
-#: src/Zypper.cc:5581 src/Zypper.cc:5622
+#: src/Zypper.cc:5594 src/Zypper.cc:5635
 #, fuzzy
 msgid "Root privileges are required for adding of package locks."
 msgstr "இந்த நிரலை பயன்படுத்துவதற்கு ஆதார சலுகைகள் தேவைப்படுகின்றன."
 
-#: src/Zypper.cc:5676
+#: src/Zypper.cc:5689
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Zypper.cc:5687
+#: src/Zypper.cc:5700
 msgid "XML output not implemented for this command."
 msgstr ""
 
-#: src/Zypper.cc:5700
+#: src/Zypper.cc:5713
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr ""
 
-#: src/Zypper.cc:5701
+#: src/Zypper.cc:5714
 #, fuzzy, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "சுருக்கமான பெயர்கள்:"
 
-#: src/Zypper.cc:5742
+#: src/Zypper.cc:5755
 #, fuzzy, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s %sஐ வழக்கற்றதாக்குகிறது"
 
-#: src/Zypper.cc:5744
+#: src/Zypper.cc:5757
 #, fuzzy, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s, %sக்கு தேவைப்படுகிறது"
 
-#: src/Zypper.cc:5746
+#: src/Zypper.cc:5759
 #, fuzzy, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s, %sக்கு தேவைப்படுகிறது"
 
-#: src/Zypper.cc:5828 src/source-download.cc:217
+#: src/Zypper.cc:5841 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr ""
 
-#: src/Zypper.cc:5880
+#: src/Zypper.cc:5893
 msgid "This command only makes sense in the zypper shell."
 msgstr ""
 
-#: src/Zypper.cc:5890
+#: src/Zypper.cc:5903
 msgid "You already are running zypper's shell."
 msgstr ""
 
-#: src/Zypper.cc:5903 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
+#: src/Zypper.cc:5916 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
 msgid "Alias"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5903 src/commands/locks/list.cc:108 src/info.cc:69
+#: src/Zypper.cc:5916 src/commands/locks/list.cc:108 src/info.cc:69
 #: src/info.cc:460 src/info.cc:704 src/repos.cc:1072 src/repos.cc:1211
 #: src/repos.cc:2550 src/search.cc:47 src/search.cc:195 src/search.cc:342
 #: src/search.cc:489 src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
@@ -3875,11 +3892,11 @@ msgid "Name"
 msgstr "பெயர்"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5903 src/info.cc:83
+#: src/Zypper.cc:5916 src/info.cc:83
 msgid "Description"
 msgstr "விளக்கம்"
 
-#: src/Zypper.cc:5954
+#: src/Zypper.cc:5967
 #, fuzzy
 msgid "Resolvable Type"
 msgstr "தீர்வு"

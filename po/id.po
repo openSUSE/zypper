@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-07 14:41+0200\n"
+"POT-Creation-Date: 2018-09-07 14:45+0200\n"
 "PO-Revision-Date: 2018-03-27 19:03+0000\n"
 "Last-Translator: Rifki Affandi <rifki.affandi3@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -2090,7 +2090,7 @@ msgstr ""
 "String data pengguna harus tidak memuat karakter yang tidak bisa dicetak "
 "atau baris baru!"
 
-#: src/Zypper.cc:1241 src/Zypper.cc:3853
+#: src/Zypper.cc:1241 src/Zypper.cc:3866
 msgid "Entering non-interactive mode."
 msgstr "Memasuki mode tidak interaktif."
 
@@ -2171,7 +2171,7 @@ msgstr "Perintah '%s' diganti dengan '%s'."
 msgid "See '%s' for all available options."
 msgstr "Lihat '%s' untuk semua opsi yang tersedia."
 
-#: src/Zypper.cc:1733 src/Zypper.cc:3869
+#: src/Zypper.cc:1733 src/Zypper.cc:3882
 msgid "Non-option program arguments: "
 msgstr "Bukan argumen program pilihan: "
 
@@ -4030,7 +4030,26 @@ msgstr "Bersihkan hanya kunci-kunci yang ganda."
 msgid "Clean only locks which doesn't lock anything."
 msgstr "Bersihkan hanya kunci-kunci yang tidak mengunci apapun."
 
-#: src/Zypper.cc:3499
+#. translators: command synopsis; do not translate lowercase words
+#: src/Zypper.cc:3500
+msgid "targetos (tos) [OPTIONS]"
+msgstr ""
+
+#. translators: command description
+#: src/Zypper.cc:3503
+msgid ""
+"Show various information about the target operating system. By default, an "
+"ID string is shown."
+msgstr ""
+"Tampilkan berbagai informasi tentang sistem operasi target. Secara baku, ID "
+"string ditampilkan."
+
+#. translators: -l, --label
+#: src/Zypper.cc:3507
+msgid "Show the operating system label."
+msgstr "Tampilkan label sistem operasi."
+
+#: src/Zypper.cc:3511
 msgid ""
 "targetos (tos) [options]\n"
 "\n"
@@ -4048,7 +4067,7 @@ msgstr ""
 "  Opsi-opsi perintah:\n"
 "-l, --label                 Tampilkan label sistem operasi.\n"
 
-#: src/Zypper.cc:3520
+#: src/Zypper.cc:3533
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -4064,7 +4083,7 @@ msgstr ""
 "  Opsi-opsi perintah:\n"
 "-m, --match  Membawa nomor rilis yang hilang sebagai rilis apapun.\n"
 
-#: src/Zypper.cc:3539
+#: src/Zypper.cc:3552
 msgid ""
 "licenses\n"
 "\n"
@@ -4080,12 +4099,12 @@ msgstr ""
 "Perintah ini tidak memiliki tambahan opsi-opsi.\n"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/Zypper.cc:3564
+#: src/Zypper.cc:3577
 msgid "ps [options]"
 msgstr "ps [options]"
 
 #. translators: command description
-#: src/Zypper.cc:3567
+#: src/Zypper.cc:3580
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -4094,7 +4113,7 @@ msgstr ""
 "librari yang terhapus oleh pembaruan saat ini."
 
 #. translators: -s, --short
-#: src/Zypper.cc:3571
+#: src/Zypper.cc:3584
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -4105,7 +4124,7 @@ msgstr ""
 "tiga kali, tampilkan hanya daftar nama layanan yang terkait dengan sistem."
 
 #. translators: --print <format>
-#: src/Zypper.cc:3573
+#: src/Zypper.cc:3586
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -4117,11 +4136,11 @@ msgstr ""
 "layanan sistem."
 
 #. translators: -d, --debugFile <path>
-#: src/Zypper.cc:3575
+#: src/Zypper.cc:3588
 msgid "Write debug output to file <path>."
 msgstr "Menulis debug output ke file<path>"
 
-#: src/Zypper.cc:3594
+#: src/Zypper.cc:3607
 msgid ""
 "download [options] <packages>...\n"
 "\n"
@@ -4161,7 +4180,7 @@ msgstr ""
 "--dry-run            Jangan unduh paket apapun, hanya laporkan apa\n"
 "                     yang akan dilakukan.\n"
 
-#: src/Zypper.cc:3633
+#: src/Zypper.cc:3646
 msgid ""
 "source-download\n"
 "\n"
@@ -4191,7 +4210,7 @@ msgstr ""
 "                     namun tampilkan di mana sumber rpm-rpm yang hilang atau "
 "asing.\n"
 
-#: src/Zypper.cc:3660
+#: src/Zypper.cc:3673
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4205,7 +4224,7 @@ msgstr ""
 "\n"
 "Perintah ini tidak memiliki opsi-opsi tambahan.\n"
 
-#: src/Zypper.cc:3677
+#: src/Zypper.cc:3690
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4220,7 +4239,7 @@ msgstr ""
 "Perintah ini tidak memiliki opsi-opsi tambahan.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3695
+#: src/Zypper.cc:3708
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4231,7 +4250,7 @@ msgstr ""
 "Daftar tipe layanan yang tersedia.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3711
+#: src/Zypper.cc:3724
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -4244,7 +4263,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: src/Zypper.cc:3733
+#: src/Zypper.cc:3746
 msgid ""
 "mount\n"
 "\n"
@@ -4264,7 +4283,7 @@ msgstr ""
 "-n, --name <name>    Gunakan string yang diberikan sebagai nama layanan.\n"
 "-r, --recurse        Masuk ke dalam sub direktori..\n"
 
-#: src/Zypper.cc:3761
+#: src/Zypper.cc:3774
 #, c-format, boost-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4278,7 +4297,7 @@ msgstr ""
 "untuk '%s'.\n"
 
 #. translators: this is just a legacy command
-#: src/Zypper.cc:3778
+#: src/Zypper.cc:3791
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4289,12 +4308,12 @@ msgstr ""
 "Perintah ini memiliki implementasi dummy di mana selalu mengembalikan nilai "
 "0.\n"
 
-#: src/Zypper.cc:3821 src/Zypper.cc:5893
+#: src/Zypper.cc:3834 src/Zypper.cc:5906
 msgid "Unexpected program flow."
 msgstr "Alur program yang tidak diduga."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:3952
+#: src/Zypper.cc:3965
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4304,20 +4323,20 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: src/Zypper.cc:3975
+#: src/Zypper.cc:3988
 msgid "Root privileges are required for refreshing services."
 msgstr "Hak akses root diperlukan untuk memuat ulang layanan."
 
-#: src/Zypper.cc:3999 src/Zypper.cc:4078 src/Zypper.cc:4266
+#: src/Zypper.cc:4012 src/Zypper.cc:4091 src/Zypper.cc:4279
 msgid "Root privileges are required for modifying system services."
 msgstr "Hak akses root diperlukan untuk memodifikasi layanan sistem."
 
-#: src/Zypper.cc:4062
+#: src/Zypper.cc:4075
 #, c-format, boost-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' bukan tipe layanan yang tepat."
 
-#: src/Zypper.cc:4064
+#: src/Zypper.cc:4077
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr ""
@@ -4327,41 +4346,41 @@ msgstr ""
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: src/Zypper.cc:4089 src/utils/messages.cc:47
+#: src/Zypper.cc:4102 src/utils/messages.cc:47
 msgid "Alias or an aggregate option is required."
 msgstr "Alias atau sebuah kumpulan opsi diperlukan."
 
-#: src/Zypper.cc:4121
+#: src/Zypper.cc:4134
 #, c-format, boost-format
 msgid "Service '%s' not found."
 msgstr "Layanan '%s' tidak ditemukan."
 
-#: src/Zypper.cc:4148 src/Zypper.cc:4265 src/Zypper.cc:4369 src/Zypper.cc:4421
+#: src/Zypper.cc:4161 src/Zypper.cc:4278 src/Zypper.cc:4382 src/Zypper.cc:4434
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Hak akses root diperlukan untuk memodifikasi repositori sistem."
 
-#: src/Zypper.cc:4174 src/Zypper.cc:4533
+#: src/Zypper.cc:4187 src/Zypper.cc:4546
 msgid "Too few arguments."
 msgstr "Argumen terlalu sedikit."
 
-#: src/Zypper.cc:4197
+#: src/Zypper.cc:4210
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 "Jika hanya satu argumen yang digunakan, harus berupa URI yang mengarah ke "
 "berkas .repo."
 
-#: src/Zypper.cc:4227
+#: src/Zypper.cc:4240
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 "Tidak bisa menggunakan %s bersama dengan %s. Menggunakan pengaturan %s."
 
-#: src/Zypper.cc:4246
+#: src/Zypper.cc:4259
 msgid "Specified type is not a valid repository type:"
 msgstr "Tipe yang ditentukan bukan tipe repositori yang tepat:"
 
-#: src/Zypper.cc:4247
+#: src/Zypper.cc:4260
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
@@ -4369,74 +4388,74 @@ msgstr ""
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: src/Zypper.cc:4312
+#: src/Zypper.cc:4325
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Repositori '%s' tidak ditemukan berdasarkan alias. nomor atau URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: src/Zypper.cc:4345
+#: src/Zypper.cc:4358
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Layanan '%s' tidak ditemukan berdasarkan alias. nomor atau URI."
 
-#: src/Zypper.cc:4376
+#: src/Zypper.cc:4389
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Argumen terlalu sedikit. Setidaknya URI dan alias diperlukan."
 
-#: src/Zypper.cc:4400
+#: src/Zypper.cc:4413
 #, c-format, boost-format
 msgid "Repository '%s' not found."
 msgstr "Repositori '%s' tidak ditemukan."
 
-#: src/Zypper.cc:4460
+#: src/Zypper.cc:4473
 #, c-format, boost-format
 msgid "Repository %s not found."
 msgstr "Repositori '%s' tidak ditemukan."
 
-#: src/Zypper.cc:4477
+#: src/Zypper.cc:4490
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Hak akses root diperlukan untuk memuat ulang repositori sistem."
 
-#: src/Zypper.cc:4483
+#: src/Zypper.cc:4496
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Pengaturan global '%s' tidak berpengaruh di sini."
 
-#: src/Zypper.cc:4491
+#: src/Zypper.cc:4504
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argumen tidak diizinkan jika '%s' sedang digunakan."
 
-#: src/Zypper.cc:4515
+#: src/Zypper.cc:4528
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Hak akses root diperlukan untuk membersikan cache lokal."
 
-#: src/Zypper.cc:4534
+#: src/Zypper.cc:4547
 msgid "At least one package name is required."
 msgstr "Setidaknya dibutuhkan 1 nama paket."
 
-#: src/Zypper.cc:4543 src/Zypper.cc:4792 src/Zypper.cc:4829
+#: src/Zypper.cc:4556 src/Zypper.cc:4805 src/Zypper.cc:4842
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Hak akses root diperlukan untuk memasang atau menghapus paket-paket."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/Zypper.cc:4555
+#: src/Zypper.cc:4568
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Mengabaikan argumen, menandai semua repositori."
 
-#: src/Zypper.cc:4566
+#: src/Zypper.cc:4579
 #, c-format, boost-format
 msgid "Unknown package type: %s"
 msgstr "Tipe paket tidak dikenali: %s"
 
-#: src/Zypper.cc:4576
+#: src/Zypper.cc:4589
 msgid "Cannot uninstall patches."
 msgstr "Tidak bisa menghapus patch-patch."
 
-#: src/Zypper.cc:4577
+#: src/Zypper.cc:4590
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -4447,34 +4466,34 @@ msgstr ""
 "data,\n"
 "atau yang mirip."
 
-#: src/Zypper.cc:4587
+#: src/Zypper.cc:4600
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Penghapusan paket sumber yang tidak didefinisikan dan diterapkan."
 
-#: src/Zypper.cc:4607
+#: src/Zypper.cc:4620
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' seperti berkas RPM. Mencoba untuk mengunduhnya."
 
-#: src/Zypper.cc:4616
+#: src/Zypper.cc:4629
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Terkendala dengan berkas RPM tertentu sebagai '%s', lewati."
 
-#: src/Zypper.cc:4638
+#: src/Zypper.cc:4651
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Terkendala saat membaca header RPM dari %s. Apakah ini berkas RPM?"
 
-#: src/Zypper.cc:4659
+#: src/Zypper.cc:4672
 msgid "Plain RPM files cache"
 msgstr "Cache berkas RPM yang plain"
 
-#: src/Zypper.cc:4681
+#: src/Zypper.cc:4694
 msgid "No valid arguments specified."
 msgstr "Tidak ada argumen valid yang ditetapkan."
 
-#: src/Zypper.cc:4698 src/Zypper.cc:4845
+#: src/Zypper.cc:4711 src/Zypper.cc:4858
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -4483,74 +4502,74 @@ msgstr ""
 "terpasang. Tidak ada yang bisa dipasang."
 
 #. translators: meaning --capability contradicts --force/--name
-#: src/Zypper.cc:4735 src/Zypper.cc:5322
+#: src/Zypper.cc:4748 src/Zypper.cc:5335
 #, c-format, boost-format
 msgid "%s contradicts %s"
 msgstr "%s kontradiksi %s"
 
 #. translators: meaning --force with --capability
-#: src/Zypper.cc:4743
+#: src/Zypper.cc:4756
 #, c-format, boost-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s tidak bisa digunakan bersama dengan %s"
 
-#: src/Zypper.cc:4784
+#: src/Zypper.cc:4797
 msgid "Source package name is a required argument."
 msgstr "Nama paket sumber diperlukan oleh argumen."
 
-#: src/Zypper.cc:4902 src/Zypper.cc:5241 src/Zypper.cc:5341 src/Zypper.cc:5551
-#: src/Zypper.cc:5602 src/Zypper.cc:5642
+#: src/Zypper.cc:4915 src/Zypper.cc:5254 src/Zypper.cc:5354 src/Zypper.cc:5564
+#: src/Zypper.cc:5615 src/Zypper.cc:5655
 #, c-format, boost-format
 msgid "Unknown package type '%s'."
 msgstr "Tipe paket '%s' tidak dikenali."
 
-#: src/Zypper.cc:4927 src/repos.cc:796
+#: src/Zypper.cc:4940 src/repos.cc:796
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Repositori '%s' yang telah ditentukan tidak aktif."
 
 #. translators: empty search result message
-#: src/Zypper.cc:5083
+#: src/Zypper.cc:5096
 msgid "No matching items found."
 msgstr "Tidak ditemukan item yang cocok."
 
-#: src/Zypper.cc:5118
+#: src/Zypper.cc:5131
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Kendala terjadi saat inisialisasi atau eksekusi queri pencarian"
 
-#: src/Zypper.cc:5119
+#: src/Zypper.cc:5132
 msgid "See the above message for a hint."
 msgstr "Lihat pesan di atas untuk petunjuk."
 
-#: src/Zypper.cc:5120 src/repos.cc:1009
+#: src/Zypper.cc:5133 src/repos.cc:1009
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Menjalankan 'zypper refresh' sebagai root mungkin bisa menyelesaikan masalah."
 
-#: src/Zypper.cc:5201
+#: src/Zypper.cc:5214
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "Opsi %1% tidak berpengaruh tanpa opsi global %2%."
 
-#: src/Zypper.cc:5260 src/Zypper.cc:5308
+#: src/Zypper.cc:5273 src/Zypper.cc:5321
 #, c-format, boost-format
 msgid "Cannot use %s together with %s."
 msgstr "Tidak dapat menggunakan %s bersamaan dengan %s."
 
-#: src/Zypper.cc:5289
+#: src/Zypper.cc:5302
 msgid "Root privileges are required for updating packages."
 msgstr "Hak akses root dibutuhkan untuk memperbarui paket-paket."
 
-#: src/Zypper.cc:5348 src/Zypper.cc:5356 src/Zypper.cc:5437
+#: src/Zypper.cc:5361 src/Zypper.cc:5369 src/Zypper.cc:5450
 msgid "Operation not supported."
 msgstr "Operasi tidak didukung."
 
-#: src/Zypper.cc:5349
+#: src/Zypper.cc:5362
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
 msgstr "Untuk memperbarui produk yang terpasang, gunakan '%s'."
 
-#: src/Zypper.cc:5357
+#: src/Zypper.cc:5370
 #, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
@@ -4559,18 +4578,18 @@ msgstr ""
 "Zypper tidak menyimpan jejak dari paket-paket sumber yang terpasang. Untuk "
 "memasang paket sumber termutakhir dan membangunnya, gunakan '%s'."
 
-#: src/Zypper.cc:5373
+#: src/Zypper.cc:5386
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 "Tidak bisa menggunakan banyak tipe jika paket yang spesifif digunakan "
 "sebagai argumen."
 
-#: src/Zypper.cc:5473
+#: src/Zypper.cc:5486
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Hak akses root diperlukan untuk menjalankan ugrade distribusi."
 
-#: src/Zypper.cc:5493
+#: src/Zypper.cc:5506
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -4581,75 +4600,75 @@ msgstr ""
 "Pastikan repositori tersebut cocok sebelum Anda melanjutkan. Lihat '%s' "
 "untuk informasi lanjutan tentang perintah ini."
 
-#: src/Zypper.cc:5518 src/utils/messages.cc:55
+#: src/Zypper.cc:5531 src/utils/messages.cc:55
 msgid "Required argument missing."
 msgstr "Diperlukan argumen yang hilang."
 
-#: src/Zypper.cc:5521 src/utils/messages.cc:37 src/utils/messages.cc:57
+#: src/Zypper.cc:5534 src/utils/messages.cc:37 src/utils/messages.cc:57
 #: src/utils/messages.cc:74
 msgid "Usage"
 msgstr "Penggunaan"
 
-#: src/Zypper.cc:5581 src/Zypper.cc:5622
+#: src/Zypper.cc:5594 src/Zypper.cc:5635
 msgid "Root privileges are required for adding of package locks."
 msgstr "Hak akses root diperlukan untuk menambah paket-paket kunci."
 
-#: src/Zypper.cc:5676
+#: src/Zypper.cc:5689
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
 msgstr[0] "Menghapus kunci %lu."
 
-#: src/Zypper.cc:5687
+#: src/Zypper.cc:5700
 msgid "XML output not implemented for this command."
 msgstr "Keluaran XML tidak bisa diterapkan pada perintah ini."
 
-#: src/Zypper.cc:5700
+#: src/Zypper.cc:5713
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Label Distribusi: %s"
 
-#: src/Zypper.cc:5701
+#: src/Zypper.cc:5714
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Label Singkat: %s"
 
-#: src/Zypper.cc:5742
+#: src/Zypper.cc:5755
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s cocok %s"
 
-#: src/Zypper.cc:5744
+#: src/Zypper.cc:5757
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s lebih baru dari %s"
 
-#: src/Zypper.cc:5746
+#: src/Zypper.cc:5759
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s lebih tua dari %s"
 
-#: src/Zypper.cc:5828 src/source-download.cc:217
+#: src/Zypper.cc:5841 src/source-download.cc:217
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr "Hak akses tidak cukup untuk menggunakan direktori unduh '%s'."
 
-#: src/Zypper.cc:5880
+#: src/Zypper.cc:5893
 msgid "This command only makes sense in the zypper shell."
 msgstr "Perintah ini hanya berguna di zypper shell."
 
-#: src/Zypper.cc:5890
+#: src/Zypper.cc:5903
 msgid "You already are running zypper's shell."
 msgstr "Anda sudah menjalankan shell zypper."
 
-#: src/Zypper.cc:5903 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
+#: src/Zypper.cc:5916 src/repos.cc:1061 src/repos.cc:1210 src/repos.cc:2549
 msgid "Alias"
 msgstr "Alias"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/Zypper.cc:5903 src/commands/locks/list.cc:108 src/info.cc:69
+#: src/Zypper.cc:5916 src/commands/locks/list.cc:108 src/info.cc:69
 #: src/info.cc:460 src/info.cc:704 src/repos.cc:1072 src/repos.cc:1211
 #: src/repos.cc:2550 src/search.cc:47 src/search.cc:195 src/search.cc:342
 #: src/search.cc:489 src/search.cc:553 src/update.cc:798 src/utils/misc.cc:228
@@ -4657,11 +4676,11 @@ msgid "Name"
 msgstr "Nama"
 
 #. translators: property name; short; used like "Name: value"
-#: src/Zypper.cc:5903 src/info.cc:83
+#: src/Zypper.cc:5916 src/info.cc:83
 msgid "Description"
 msgstr "Deskripsi"
 
-#: src/Zypper.cc:5954
+#: src/Zypper.cc:5967
 msgid "Resolvable Type"
 msgstr "Tipe Perbaikan"
 
