@@ -2560,6 +2560,30 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = refresh_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("refresh (ref) [ALIAS|#|URI] ...")
+    )
+    .description(	// translators: command description
+    _("Refresh repositories specified by their alias, number or URI. If none are specified, all enabled repositories will be refreshed.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-f, --force",	// translators: -f, --force
+             _("Force a complete refresh.") )
+    .option( "-b, --force-build",	// translators: -b, --force-build
+             _("Force rebuild of the database.") )
+    .option( "-d, --force-download",	// translators: -d, --force-download
+             _("Force download of raw metadata.") )
+    .option( "-B, --build-only",	// translators: -B, --build-only
+             _("Only build the database, don't download metadata.") )
+    .option( "-D, --download-only",	// translators: -D, --download-only
+             _("Only download raw metadata, don't build the database.") )
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Refresh only specified repositories.") )
+    .option( "-s, --services",	// translators: -s, --services
+             _("Refresh also services before refreshing repos.") )
+    ;
+#if 0
     _command_help = _(
       "refresh (ref) [alias|#|URI] ...\n"
       "\n"
@@ -2575,6 +2599,7 @@ void Zypper::processCommandOptions()
       "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
       "-s, --services           Refresh also services before refreshing repos.\n"
     );
+#endif
     break;
   }
 
