@@ -3152,6 +3152,22 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("patterns (pt) [OPTIONS] [REPOSITORY] ...")
+    )
+    .description(	// translators: command description
+    _("List all patterns available in specified repositories.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Just another means to specify repository.") )
+    .option( "-i, --installed-only",	// translators: -i, --installed-only
+             _("Show only installed patterns.") )
+    .option( "-u, --not-installed-only",	// translators: -u, --not-installed-only
+             _("Show only patterns which are not installed.") )
+    ;
+#if 0
     _command_help = _(
       "patterns (pt) [options] [repository] ...\n"
       "\n"
@@ -3163,6 +3179,7 @@ void Zypper::processCommandOptions()
       "-i, --installed-only      Show only installed patterns.\n"
       "-u, --not-installed-only  Show only patterns which are not installed.\n"
     );
+#endif
     break;
   }
 
