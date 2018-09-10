@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-09-08 12:10+0000\n"
+"PO-Revision-Date: 2018-09-10 16:01+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -274,7 +274,7 @@ msgstr ""
 #: src/callbacks/keyring.h:413
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Ak chcete vidieť podrobnosti o kľúči, volajte '%1%'."
 
 #: src/callbacks/keyring.h:417
 #, boost-format
@@ -282,6 +282,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Pokiaľ si nemyslíte, že kľúč sa ešte stále používa, môžete ho odstrániť z "
+"databázy rpm volaním '%1%'."
 
 #: src/callbacks/keyring.h:434
 msgid "New package signing key received:"
@@ -1859,12 +1861,16 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Toto je transakčný server, použite transakčné aktualizácie na aktualizáciu "
+"alebo zmenu systému."
 
 #: src/Zypper.cc:533
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"Cieľový súborový systém je pripojený ba na čítanie. Prosím, zabezpečte, že "
+"cieľový súborový systém bude zapisovateľný."
 
 #: src/Zypper.cc:644
 msgid "Command options:"
