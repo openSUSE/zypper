@@ -13,10 +13,10 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-04-18 14:13+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/"
-">\n"
+"PO-Revision-Date: 2018-09-10 20:00+0000\n"
+"Last-Translator: Mahmoud Khalil <kkhalil2535@gmail.com>\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3790,7 +3790,7 @@ msgstr[5] "(ستنتهي الصلاحية خلال %d من الأيام)"
 #: zypp/RepoInfo.cc:513
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr ""
+msgstr "البحث عن مفتاح gpg للتشفير %1% في الذاكرة المؤقتة %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
