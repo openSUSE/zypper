@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-09-10 20:00+0000\n"
+"PO-Revision-Date: 2018-09-10 20:46+0000\n"
 "Last-Translator: Mahmoud Khalil <kkhalil2535@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
 "\n"
@@ -3797,13 +3797,13 @@ msgstr "البحث عن مفتاح gpg للتشفير %1% في الذاكرة ا
 #: zypp/RepoInfo.cc:541
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "يتم البحث عن معرف لمفتاح الـgpg رقم %1% في المستودع %2%."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:565
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "المستودع %1% لم يقم بتعريف مفتاح إضافي 'مفتاح gpg=' عناوين المواقع."
 
 #: zypp/RepoManager.cc:314
 #, boost-format
@@ -4215,7 +4215,7 @@ msgstr "تم تجاوز المهلة عند الوصول إلى '%s'."
 #: zypp/media/MediaException.cc:195
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr ""
+msgstr "تجاوزت البيانات المحملة حجم الملف ,الحجم المتوقع للملف '%s' من '%s'."
 
 #: zypp/media/MediaException.cc:203
 #, c-format, boost-format
