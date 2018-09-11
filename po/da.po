@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-08-15 11:59+0000\n"
+"PO-Revision-Date: 2018-09-11 04:01+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
 "\n"
@@ -412,7 +412,7 @@ msgstr "Gabon"
 #. :GAB:266:
 #: zypp/CountryCode.cc:233
 msgid "United Kingdom"
-msgstr "Storbritanien"
+msgstr "Storbritannien"
 
 #. :GBR:826:
 #: zypp/CountryCode.cc:234
@@ -624,7 +624,7 @@ msgstr "Comorerne"
 #. :COM:174:
 #: zypp/CountryCode.cc:276
 msgid "Saint Kitts and Nevis"
-msgstr "Sankt Kitts og Nevis"
+msgstr "Saint Kitts og Nevis"
 
 #. :KNA:659:
 #: zypp/CountryCode.cc:277
@@ -664,7 +664,7 @@ msgstr "Libanon"
 #. :LBN:422:
 #: zypp/CountryCode.cc:284
 msgid "Saint Lucia"
-msgstr "Sankt Lucia"
+msgstr "Saint Lucia"
 
 #. :LCA:662:
 #: zypp/CountryCode.cc:285
@@ -719,7 +719,7 @@ msgstr "Monaco"
 #. :MCO:492:
 #: zypp/CountryCode.cc:295
 msgid "Moldova"
-msgstr "Moldavien"
+msgstr "Moldova"
 
 #. :MDA:498:
 #: zypp/CountryCode.cc:296
@@ -878,7 +878,7 @@ msgstr "Niue"
 #. :NIU:570:
 #: zypp/CountryCode.cc:327
 msgid "New Zealand"
-msgstr "New Zeeland"
+msgstr "New Zealand"
 
 #. :NZL:554:
 #: zypp/CountryCode.cc:328
@@ -923,7 +923,7 @@ msgstr "Polen"
 #. :POL:616:
 #: zypp/CountryCode.cc:336
 msgid "Saint Pierre and Miquelon"
-msgstr "Sankt Pierre og Miquelon"
+msgstr "Saint Pierre og Miquelon"
 
 #. :SPM:666:
 #: zypp/CountryCode.cc:337
@@ -1017,7 +1017,7 @@ msgstr "Singapore"
 #. :SGP:702:
 #: zypp/CountryCode.cc:355
 msgid "Saint Helena"
-msgstr "Sankt Helena"
+msgstr "Saint Helena"
 
 #. :SHN:654:
 #: zypp/CountryCode.cc:356
@@ -1239,7 +1239,7 @@ msgstr "Samoa"
 #. :WSM:882:
 #: zypp/CountryCode.cc:399
 msgid "Yemen"
-msgstr "Jemen"
+msgstr "Yemen"
 
 #. :YEM:887:
 #: zypp/CountryCode.cc:400
@@ -1993,7 +1993,7 @@ msgstr "Esperanto"
 #. language code: est et
 #: zypp/LanguageCode.cc:423
 msgid "Estonian"
-msgstr "Estonisk"
+msgstr "Estisk"
 
 #. language code: ewe ee
 #: zypp/LanguageCode.cc:425
@@ -2258,7 +2258,7 @@ msgstr "Øvre sorbiansk"
 #. language code: hun hu
 #: zypp/LanguageCode.cc:537
 msgid "Hungarian"
-msgstr "Ungarnsk"
+msgstr "Ungarsk"
 
 #. language code: hup
 #: zypp/LanguageCode.cc:539
@@ -2593,7 +2593,7 @@ msgstr "Lingala"
 #. language code: lit lt
 #: zypp/LanguageCode.cc:673
 msgid "Lithuanian"
-msgstr "Litausk"
+msgstr "Litauisk"
 
 #. language code: lol
 #: zypp/LanguageCode.cc:675
@@ -3258,7 +3258,7 @@ msgstr "Slavisk (Andre)"
 #. language code: slo slk sk
 #: zypp/LanguageCode.cc:955 zypp/LanguageCode.cc:957
 msgid "Slovak"
-msgstr "Slovakkisk"
+msgstr "Slovakisk"
 
 #. language code: slv sl
 #: zypp/LanguageCode.cc:959
