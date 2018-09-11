@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-09-07 09:41+0000\n"
+"PO-Revision-Date: 2018-09-11 01:11+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -4465,7 +4465,7 @@ msgstr "Detekterede enheder:"
 
 #: src/callbacks/media.cc:135
 msgid "Cancel"
-msgstr "Annullér"
+msgstr "Annuller"
 
 #: src/callbacks/media.cc:138
 msgid "Select device to eject."
@@ -6184,7 +6184,7 @@ msgstr ""
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: src/solve-commit.cc:665
 msgid "No, cancel the operation."
-msgstr "Nej, annullér handlingen."
+msgstr "Nej, annuller handlingen."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
 #: src/solve-commit.cc:667
