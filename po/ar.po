@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-04-16 09:32+0000\n"
-"Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
-">\n"
+"PO-Revision-Date: 2018-09-11 04:44+0000\n"
+"Last-Translator: Mahmoud Khalil <kkhalil2535@gmail.com>\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -272,11 +272,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"قواعد بيانات الـrpm يبدو أنها تحتوي على إصدار قديم من الـV3 الخاص بمفاتيح "
+"الـgpg حيث يتم إعتبارها بالية و غير آمنة:"
 
 #: src/callbacks/keyring.h:413
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "لمشاهدة المزيد من التفاصيل حول مفتاح المكالمة '%1%'."
 
 #: src/callbacks/keyring.h:417
 #, boost-format
@@ -284,17 +286,17 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"على الأقل أنت تصدق أن المفتاح في السؤال ما زال قيد الإستخدام , يمكنك حذفه من "
+"قاعدة بيانات الـrpm بإستخدام '%1%'."
 
 #: src/callbacks/keyring.h:434
-#, fuzzy
 msgid "New package signing key received:"
-msgstr "تم استلام مفتاح توقيع مخزن أو حزمة جديدة:"
+msgstr "تم استلام مفتاح توقيع حزمة جديدة:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:450
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr "هل تريد رفض المفتاح أو الوثوق مؤقتًا أو الوثوق دائمًا؟"
+msgstr "هل تريد رفض المفتاح أو الوثوق دائماً؟"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -303,7 +305,7 @@ msgstr "هل تريد رفض المفتاح أو الوثوق مؤقتًا أو 
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:462
 msgid "r/a/"
-msgstr ""
+msgstr "r/a/"
 
 #: src/callbacks/keyring.h:501
 #, c-format, boost-format
@@ -2044,6 +2046,7 @@ msgid ""
 "For an extended search including not yet activated remote resources please "
 "use '%1%'."
 msgstr ""
+"للبحث الموسع بما في ذلك المصادر التي لم يتم تفعيلها رجاءاً استخدم '%1%'."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/Zypper.cc:419
@@ -2052,6 +2055,7 @@ msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
 msgstr ""
+"الحزمة توفر هذا الأمر الثانوي الغير مثبت حالياً. يمكنك تثبيته باستدعاء '%1%'."
 
 #: src/Zypper.cc:456
 #, boost-format
@@ -2077,12 +2081,15 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"هذا سيرفر المعاملات, رجاءاً استخدم تحديث المعاملات لتحديث أو تعديل النظام."
 
 #: src/Zypper.cc:533
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"نظام الملفات المستهدف معلم للقراءة فقط. رجاءاً تأكد أن نظام الملفات المستهدف "
+"قابل للكتابة عليه."
 
 #: src/Zypper.cc:644
 msgid "Command options:"
@@ -3664,7 +3671,7 @@ msgstr ""
 
 #: src/Zypper.cc:2935
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "ابحث عن الحزم التي تحتوي على جزء من النصوص."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2953
@@ -3844,7 +3851,7 @@ msgstr ""
 
 #: src/Zypper.cc:3118
 msgid "Show supplements."
-msgstr ""
+msgstr "أظهر الجزء."
 
 #: src/Zypper.cc:3133
 #, c-format, boost-format
@@ -5707,10 +5714,9 @@ msgid "Could not refresh the repositories because of errors."
 msgstr "تعذر تجديد المخازن بسبب حدوث أخطاء."
 
 #: src/repos.cc:1464
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "لم يتم تجديد بعض المخازن بسبب حدوث خطأ."
+msgstr "لم يتم تجديد بعض المخازن لأنها لم تكن معروفة."
 
 #: src/repos.cc:1475
 msgid "Specified repositories have been refreshed."
