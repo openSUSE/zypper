@@ -237,7 +237,7 @@ LoadSystemFlags ListLocksCmd::needSystemSetup() const
 {
   if ( _matches || _solvables )
     return LoadSystemFlags();
-  return NO_POOL;
+  return NoPool;
 }
 
 void ListLocksCmd::doReset()

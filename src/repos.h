@@ -19,6 +19,23 @@
 
 #define  TMP_RPM_REPO_ALIAS  "_tmpRPMcache_"
 
+// | Enabled | GPG Check |  Colored strings for enabled and GPG Check status
+// +---------+-----------+
+// | Yes     | (  ) No   |
+// | Yes     | (rp) Yes  |
+// | No      | ----      |
+struct RepoGpgCheckStrings
+{
+  RepoGpgCheckStrings();
+
+  RepoGpgCheckStrings( const ServiceInfo & service_r );
+  RepoGpgCheckStrings( const RepoInfo & repo_r );
+
+  ColorContext _tagColor;	///< color according to enabled and GPG Check status
+  ColorString _enabledYN;	///< colored enabled Yes/No
+  ColorString _gpgCheckYN;	///< colored GPG Check status if enabled else "----"
+};
+
 /**
  * The same as \ref init_repos(), but allows to specify repos to initialize.
  *
@@ -157,9 +174,6 @@ void modify_all_repos( Zypper & zypper );
  */
 void modify_repos_by_option( Zypper & zypper );
 
-
-void list_services( Zypper & zypper );
-
 void add_service( Zypper & zypper, const ServiceInfo & service );
 
 void add_service_by_url(Zypper & zypper,
@@ -202,6 +216,10 @@ void load_target_resolvables( Zypper & zypper );
  * Reads resolvables from the repository solv cache.
  */
 void load_repo_resolvables( Zypper & zypper );
+
+ColorString repoPriorityNumber( unsigned prio_r, int width_r = 0 );
+
+const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r );
 
 #endif
 // Local Variables:

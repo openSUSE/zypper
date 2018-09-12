@@ -86,3 +86,28 @@ void print_verify_hint( Out & out )
     " It is recommended to run '%s' after the operation has finished."),
     "zypper verify"));
 }
+
+std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, LegacyCLIMsgType type_r )
+{
+  switch (type_r) {
+  case LegacyCLIMsgType::Local:
+  case LegacyCLIMsgType::Global:
+    return str::Format( type_r == LegacyCLIMsgType::Global
+       ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
+       : _("Legacy commandline option %1% detected. Please use %2% instead.") )
+       % NEGATIVEString(dashdash(old_r))
+       % POSITIVEString(dashdash(new_r));
+    break;
+  case LegacyCLIMsgType::Ignored:
+    return str::Format(
+       _("Legacy commandline option %1% detected. This option is ignored."))
+       % NEGATIVEString(dashdash(old_r));
+    break;
+  }
+  return std::string();
+}
+
+void print_legacyCLIStr( Out & out, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r, LegacyCLIMsgType type_r )
+{
+  out.warning( legacyCLIStr( old_r, new_r, type_r), verbosity_r );
+}

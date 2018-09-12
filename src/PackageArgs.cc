@@ -182,6 +182,7 @@ void PackageArgs::argsToCaps( const ResKind & kind )
     while ( pos != std::string::npos && arg.find_first_of( "(=" ) > pos )
     {
       repo = arg.substr( 0, pos );
+
       if ( match_repo( zypper, repo ) )
       {
         hasRepo = true;

@@ -5,14 +5,16 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 #include "zyppflags.h"
+#include "flagtypes.h"
+#include "exceptions.h"
+#include "utils/messages.h"
+#include "Zypper.h"
 
 #include <getopt.h>
 #include <unordered_map>
 #include <exception>
 #include <utility>
 #include <string.h>
-
-#include "exceptions.h"
 
 namespace zypp
 {
@@ -122,8 +124,9 @@ int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup>
       allOpts.push_back( currOpt );
 
       int allOptIndex = allOpts.size() - 1;
+      int flags = currOpt.flags;
 
-      if ( currOpt.flags & RequiredArgument && currOpt.flags &  OptionalArgument ) {
+      if ( flags & RequiredArgument && flags &  OptionalArgument ) {
         throw ZyppFlagsException("Argument can either be Required or Optional");
       }
 
@@ -140,7 +143,6 @@ int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup>
         }
         appendToOptString( currOpt, shortopts );
       }
-      allOptIndex++;
     }
   }
 
@@ -167,7 +169,7 @@ int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup>
         if ( option_index == -1 && optopt)
           ZYPP_THROW(UnknownFlagException( std::string(1, optopt)) );
         else
-          ZYPP_THROW(argv[optind - 1]);
+          ZYPP_THROW(UnknownFlagException( std::string(argv[optind - 1]) ) );
         break;
       }
       case ':': {
@@ -195,7 +197,8 @@ int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup>
             arg = std::string(optarg);
           }
 
-          allOpts[index].value.set( allOpts[index], arg);
+          CommandOption &opt = allOpts[index];
+          opt.value.set( allOpts[index], arg );
         }
 
         break;
@@ -246,6 +249,14 @@ void renderHelp(const std::vector<CommandGroup> &options)
     std::cout<<std::endl;
   }
 }
+
+CommandOption::CommandOption( std::string &&name_r, char shortName_r, int flags_r, Value &&value_r, std::string &&help_r )
+  : name ( std::move(name_r) ),
+    shortName ( shortName_r ),
+    flags ( flags_r ),
+    value ( std::move(value_r) ),
+    help ( std::move(help_r) )
+{ }
 
 }}
 

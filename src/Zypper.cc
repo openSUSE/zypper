@@ -443,33 +443,7 @@ namespace {
     return mayuse;
   }
 
-  enum LegacyCLIMsgType {
-    Local,
-    Global,
-    Ignored
-  };
-
-  inline std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, LegacyCLIMsgType type_r )
-  {
-    switch (type_r) {
-    case Local:
-    case Global:
-      return str::Format( type_r == Global
-         ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
-         : _("Legacy commandline option %1% detected. Please use %2% instead.") )
-         % NEGATIVEString(dashdash(old_r))
-         % POSITIVEString(dashdash(new_r));
-      break;
-    case Ignored:
-      return str::Format(
-         _("Legacy commandline option %1% detected. This option is ignored."))
-         % NEGATIVEString(dashdash(old_r));
-      break;
-    }
-    return std::string();
-  }
-
-  inline void legacyCLITranslate( parsed_opts & copts_r, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r = Out::NORMAL, LegacyCLIMsgType type = Local )
+  inline void legacyCLITranslate( parsed_opts & copts_r, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r = Out::NORMAL, LegacyCLIMsgType type = LegacyCLIMsgType::Local )
   {
     if ( copts_r.count( old_r ) )
     {
@@ -1090,13 +1064,17 @@ void print_command_help_hint( Zypper & zypper )
 int Zypper::defaultLoadSystem( LoadSystemFlags flags_r )
 {
   DBG << "FLAGS:" << flags_r << endl;
-  if ( ! flags_r.testFlag( NO_POOL ) )
+
+  if ( flags_r.testFlag( ResetRepoManager ) )
+    initRepoManager();
+
+  if ( ! flags_r.testFlag( NoPool ) )
   {
     init_target( *this );
     if ( exitCode() != ZYPPER_EXIT_OK )
       return exitCode();
 
-    if ( ! flags_r.testFlag( NO_REPOS ) )
+    if ( ! flags_r.testFlag( NoRepos ) )
     {
       init_repos(*this);
       if ( exitCode() != ZYPPER_EXIT_OK )
@@ -1104,7 +1082,7 @@ int Zypper::defaultLoadSystem( LoadSystemFlags flags_r )
     }
 
     DtorReset _tmp( _gopts.disable_system_resolvables );
-    if ( flags_r.testFlag( NO_TARGET ) )
+    if ( flags_r.testFlag( NoTarget ) )
     {
       _gopts.disable_system_resolvables = true;
     }
@@ -1112,7 +1090,7 @@ int Zypper::defaultLoadSystem( LoadSystemFlags flags_r )
     if ( exitCode() != ZYPPER_EXIT_OK )
       return exitCode();
 
-    if ( ! ( flags_r & NO_POOL ) )
+    if ( ! ( flags_r & NoPool ) )
     {
       // have REPOS and TARGET
       // compute status of PPP
@@ -1911,6 +1889,10 @@ void Zypper::processCommandOptions()
   ZypperBaseCommandPtr newStyleCmd = command().commandObject();
   if ( newStyleCmd ) {
 
+    //reset the command to default
+    newStyleCmd->reset();
+
+    //get command help
     _command_help = newStyleCmd->help();
 
     MIL << "Found new style command << " << newStyleCmd->command().front() << endl;
@@ -1921,9 +1903,6 @@ void Zypper::processCommandOptions()
 
     // parse command options
     try {
-      //reset the command to default
-      newStyleCmd->reset();
-
       int nextArg = ZyppFlags::parseCLI( argc(), argv(), newStyleCmd->options(), optind );
 
       MIL << "Parsed new style arguments" << endl;
@@ -2517,49 +2496,8 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::LIST_SERVICES_e:
-  {
-    static struct option options[] =
-    {
-      {"help",			no_argument,	0, 'h'},
-      {"uri",			no_argument,	0, 'u'},
-      {"url",			no_argument,	0,  0 },
-      {"priority",		no_argument,	0, 'p'},
-      {"details",		no_argument,	0, 'd'},
-      {"with-repos",		no_argument,	0, 'r'},
-      {"show-enabled-only",	no_argument,	0, 'E'},
-      {"sort-by-uri",		no_argument,	0, 'U'},
-      {"sort-by-name",		no_argument,	0, 'N'},
-      {"sort-by-priority",	no_argument,	0, 'P'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("services (ls) [OPTIONS]")
-    )
-    .description(	// translators: command description
-    _("List defined services.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-u, --uri",	// translators: -u, --uri
-             _("Show also base URI of repositories.") )
-    .option( "-p, --priority",	// translators: -p, --priority
-             _("Show also repository priority.") )
-    .option( "-d, --details",	// translators: -d, --details
-             _("Show more information like URI, priority, type.") )
-    .option( "-r, --with-repos",	// translators: -r, --with-repos
-             _("Show also repositories belonging to the services.") )
-    .option( "-E, --show-enabled-only",	// translators: -E, --show-enabled-only
-             _("Show enabled repos only.") )
-    .option( "-P, --sort-by-priority",	// translators: -P, --sort-by-priority
-             _("Sort the list by repository priority.") )
-    .option( "-U, --sort-by-uri",	// translators: -U, --sort-by-uri
-             _("Sort the list by URI.") )
-    .option( "-N, --sort-by-name",	// translators: -N, --sort-by-name
-             _("Sort the list by name.") )
-    ;
 #if 0
+    ZypperCommand::LIST_SERVICES_e:
     _command_help = _(
       "services (ls) [OPTIONS]\n"
       "\n"
@@ -2576,8 +2514,6 @@ void Zypper::processCommandOptions()
       "-N, --sort-by-name        Sort the list by name.\n"
     );
 #endif
-    break;
-  }
 
   case ZypperCommand::REFRESH_SERVICES_e:
   {
@@ -4510,18 +4446,6 @@ void Zypper::doCommand()
   {
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
-    break;
-  }
-
-  // --------------------------( service list )-------------------------------
-
-  case ZypperCommand::LIST_SERVICES_e:
-  {
-    initRepoManager();
-    if ( copts.count( "with-repos" ) )
-      checkIfToRefreshPluginServices( *this );
-    list_services( *this );
-
     break;
   }
 

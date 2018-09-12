@@ -57,13 +57,13 @@ namespace ZyppFlags {
   using SetterFun   = std::function<void ( const CommandOption &, const boost::optional<std::string> &in)>;
 
   enum ArgFlags : int {
-    NoArgument       = 0x00,
-    RequiredArgument = 0x01,
-    OptionalArgument = 0x02,
-    ArgumentTypeMask = 0x0F,
+    NoArgument        = 0x00,
+    RequiredArgument  = 0x01,
+    OptionalArgument  = 0x02,
+    ArgumentTypeMask  = 0x0F,
 
-    Repeatable       = 0x10, // < the argument can be repeated
-    Hidden           = 0x20  // < command is hidden in help
+    Repeatable         = 0x10, // < the argument can be repeated
+    Hidden             = 0x20, // < command is hidden in help
   };
 
   /**
@@ -108,6 +108,8 @@ namespace ZyppFlags {
 
   struct CommandOption
   {
+    CommandOption ( std::string &&name_r, char shortName_r, int flags_r, Value &&value_r, std::string &&help_r = std::string());
+
     std::string name;
     char  shortName;
     int flags;

@@ -36,7 +36,7 @@ RemoveLocksCmd::RemoveLocksCmd()
       _("Remove a package lock."),
       // translators: command description; %1% is acoomand like 'zypper locks'
       str::Format(_("Remove a package lock. Specify the lock to remove by its number obtained with '%1%' or by package name.") ) % "zypper locks",
-      NO_POOL
+      NoPool
   )
 { }
 
