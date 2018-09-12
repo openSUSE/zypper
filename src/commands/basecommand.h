@@ -45,9 +45,10 @@ using BaseCommandConditionPtr = std::shared_ptr<BaseCommandCondition>;
 /** Flags for tuning \ref Zypper::defaultLoadSystem. */
 enum LoadSystemBits
 {
- NO_TARGET		= (1 << 0),		//< don't load target to pool
- NO_REPOS		= (1 << 1),		//< don't load repos to pool
- NO_POOL		= NO_TARGET | NO_REPOS	//< no pool at all
+ NoTarget		= (1 << 0),		//< don't load target to pool
+ NoRepos		= (1 << 1),		//< don't load repos to pool
+ ResetRepoManager       = (1 << 2),             //< explicitely reset the repomanager before calling the cmd
+ NoPool		        = NoTarget | NoRepos	//< no pool at all
 };
 ZYPP_DECLARE_FLAGS( LoadSystemFlags, LoadSystemBits );
 

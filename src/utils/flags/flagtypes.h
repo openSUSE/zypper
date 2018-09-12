@@ -14,6 +14,7 @@
 
 #include <set>
 
+class Out;
 
 namespace zypp {
 
@@ -59,6 +60,34 @@ enum StoreFlag : int{
  * The value in \a defVal is only used for generating the help
  */
 Value BoolType   ( bool *target, StoreFlag store = StoreTrue, const boost::optional<bool> &defValue = boost::optional<bool>()  );
+
+
+template <typename T, typename E = T>
+Value BitFieldType ( T* target, E flag , StoreFlag store = StoreTrue ) {
+  return Value (
+        [ target, flag] () -> boost::optional<std::string> {
+          return target->testFlag ( flag ) ? std::string("true") : std::string("false");
+        },
+        [ target, flag, store ] ( const CommandOption &, const boost::optional<std::string> & ) {
+          if ( store == StoreTrue )
+            target->setFlag ( flag );
+          else
+            target->unsetFlag ( flag );
+        }
+  );
+}
+
+/**
+ * Creates a null type, calling the setter or default value getter for this type will do nothing.
+ * Use this to have a ignored deprecated flag
+ */
+Value NoValue ();
+
+/**
+ * Creates a value that emits a warning when set, if \a val_r is valid the calls are forwarded to it after
+ * emitting the warning.
+ */
+Value WarnOptionVal ( Out &out_r , const std::string &warning_r, boost::optional<Value> val_r );
 
 }}
 

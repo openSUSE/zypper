@@ -31,5 +31,14 @@ void print_usage(Out & out, const std::string & command_help);
 
 void print_verify_hint(Out & out);
 
+enum class LegacyCLIMsgType {
+  Local,
+  Global,
+  Ignored
+};
+std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, LegacyCLIMsgType type_r );
+void print_legacyCLIStr(Out & out, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r = Out::NORMAL, LegacyCLIMsgType type_r = LegacyCLIMsgType::Local );
+
+
 
 #endif /*MESSAGES_H_*/

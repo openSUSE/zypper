@@ -30,7 +30,7 @@ AddLocksCmd::AddLocksCmd() :
     _("Add a package lock."),
     // translators: command description
     _("Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters."),
-    NO_POOL )
+    NoPool )
 { }
 
 std::vector<zypp::ZyppFlags::CommandOption> AddLocksCmd::cmdOptions() const

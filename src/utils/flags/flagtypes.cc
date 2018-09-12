@@ -6,7 +6,8 @@
 \*---------------------------------------------------------------------------*/
 #include "flagtypes.h"
 #include "main.h"
-
+#include "utils/messages.h"
+#include "output/Out.h"
 #include "utils/misc.h"
 
 namespace zypp {
@@ -127,6 +128,34 @@ Value StringVectorType(std::vector<std::string> *target, std::string hint) {
           return;
         },
         std::move(hint)
+  );
+}
+
+Value NoValue()
+{
+  return Value (
+        noDefaultValue,
+        []( const CommandOption &, const boost::optional<std::string> & ) {
+          return;
+        }
+  );
+}
+
+Value WarnOptionVal( Out &out_r, const std::string &warning_r, boost::optional<Value> val_r )
+{
+  return Value (
+        [ val_r ] () -> boost::optional<std::string> {
+          if ( val_r )
+            return val_r->defaultValue();
+          return boost::optional<std::string>();
+        },
+        [ &out_r, warning_r, val_r ] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
+          out_r.warning( warning_r );
+          if ( val_r ) {
+            Value val = *val_r; // C++ forces us to copy by value again
+            val.set ( opt, in );
+          }
+        }
   );
 }
 

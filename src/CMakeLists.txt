@@ -43,6 +43,9 @@ SET (zypper_HEADERS
   commands/locks/clean.h
   commands/locks/list.h
   commands/locks/remove.h
+  commands/services.h
+  commands/services/common.h
+  commands/services/list.h
   commands/ps.h
 )
 
@@ -73,6 +76,8 @@ SET( zypper_SRCS
   commands/locks/clean.cc
   commands/locks/list.cc
   commands/locks/remove.cc
+  commands/services/common.cc
+  commands/services/list.cc
   commands/ps.cc
   ${zypper_HEADERS}
 )

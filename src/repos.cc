@@ -32,6 +32,9 @@
 #include "utils/misc.h"
 #include "repos.h"
 
+//@TODO REMOVEME
+#include "commands/services/common.h"
+
 extern ZYpp::Ptr God;
 
 namespace zypp { using repo::RepoInfoBase_Ptr; }
@@ -72,7 +75,7 @@ inline std::string repoPriorityAnnotationStr( unsigned prio_r )
   return( prio_r < RepoInfo::defaultPriority() ? _("raised priority") : _("lowered priority") );
 }
 
-inline ColorString repoPriorityNumber( unsigned prio_r, int width_r = 0 )
+ColorString repoPriorityNumber( unsigned prio_r, int width_r )
 { return ColorString( repoPriorityColor( prio_r ), str::numstring( prio_r, width_r ) ); }
 
 inline ColorString repoPriorityNumberAnnotated( unsigned prio_r, int width_r = 0 )
@@ -80,7 +83,7 @@ inline ColorString repoPriorityNumberAnnotated( unsigned prio_r, int width_r = 0
 
 // ----------------------------------------------------------------------------
 
-inline const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r )
+const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r )
 {
   static std::string dashes( LOWLIGHTString( "----" ).str() );
   return( repo_r.enabled() ? asYesNo( repo_r.autorefresh() ) : dashes.c_str() );
@@ -125,64 +128,53 @@ unsigned parse_priority( Zypper & zypper )
   return ret;
 }
 
-// | Enabled | GPG Check |  Colored strings for enabled and GPG Check status
-// +---------+-----------+
-// | Yes     | (  ) No   |
-// | Yes     | (rp) Yes  |
-// | No      | ----      |
-struct RepoGpgCheckStrings
-{
-  RepoGpgCheckStrings()
+RepoGpgCheckStrings::RepoGpgCheckStrings()
   : _tagColor( ColorContext::DEFAULT )
-  {}
+{}
 
-  RepoGpgCheckStrings( const ServiceInfo & service_r )
+RepoGpgCheckStrings::RepoGpgCheckStrings(const ServiceInfo &service_r)
+{
+  if ( service_r.enabled() )
   {
-    if ( service_r.enabled() )
-    {
-      _tagColor = ColorContext::DEFAULT;
-      _enabledYN = ColorString( _tagColor, _("Yes") );
-      _gpgCheckYN = ColorString( _tagColor, "----" );
-    }
-    else
-    {
-      _tagColor = ColorContext::LOWLIGHT;
-      _enabledYN = ColorString( _tagColor, _("No") );
-      _gpgCheckYN = ColorString( _tagColor, "----" );
-    }
+    _tagColor = ColorContext::DEFAULT;
+    _enabledYN = ColorString( _tagColor, _("Yes") );
+    _gpgCheckYN = ColorString( _tagColor, "----" );
   }
+  else
+  {
+    _tagColor = ColorContext::LOWLIGHT;
+    _enabledYN = ColorString( _tagColor, _("No") );
+    _gpgCheckYN = ColorString( _tagColor, "----" );
+  }
+}
 
-  RepoGpgCheckStrings( const RepoInfo & repo_r )
+RepoGpgCheckStrings::RepoGpgCheckStrings(const RepoInfo &repo_r)
+{
+  if ( repo_r.enabled() )
   {
-    if ( repo_r.enabled() )
+    bool gpgOK = false;
+    std::string tagStr( "(  ) " );
+    if ( repo_r.validRepoSignature() )	// is TriBool!
     {
-      bool gpgOK = false;
-      std::string tagStr( "(  ) " );
-      if ( repo_r.validRepoSignature() )	// is TriBool!
-      {
-	gpgOK = true;
-	tagStr[1] = 'r';
-      }
-      if ( repo_r.pkgGpgCheck() )
-      {
-	gpgOK = true;
-	tagStr[2] = 'p';
-      }
-      _tagColor = gpgOK ? ColorContext::DEFAULT : ColorContext::NEGATIVE;
-      _enabledYN = ColorString( ColorContext::DEFAULT, _("Yes") );
-      _gpgCheckYN = ColorString( _tagColor, tagStr+asYesNo(gpgOK) );
+      gpgOK = true;
+      tagStr[1] = 'r';
     }
-    else
+    if ( repo_r.pkgGpgCheck() )
     {
-      _tagColor = ColorContext::LOWLIGHT;
-      _enabledYN = ColorString( _tagColor, _("No") );
-      _gpgCheckYN = ColorString( _tagColor, "----" );
+      gpgOK = true;
+      tagStr[2] = 'p';
     }
+    _tagColor = gpgOK ? ColorContext::DEFAULT : ColorContext::NEGATIVE;
+    _enabledYN = ColorString( ColorContext::DEFAULT, _("Yes") );
+    _gpgCheckYN = ColorString( _tagColor, tagStr+asYesNo(gpgOK) );
   }
-  ColorContext _tagColor;	///< color according to enabled and GPG Check status
-  ColorString _enabledYN;	///< colored enabled Yes/No
-  ColorString _gpgCheckYN;	///< colored GPG Check status if enabled else "----"
-};
+  else
+  {
+    _tagColor = ColorContext::LOWLIGHT;
+    _enabledYN = ColorString( _tagColor, _("No") );
+    _gpgCheckYN = ColorString( _tagColor, "----" );
+  }
+}
 
 void repoPrioSummary( Zypper & zypper )
 {
@@ -2251,37 +2243,6 @@ void modify_repo( Zypper & zypper, const std::string & alias )
 // Service Handling
 // ---------------------------------------------------------------------------
 
-static ServiceList get_all_services( Zypper & zypper )
-{
-  RepoManager & manager( zypper.repoManager() );
-  ServiceList services;
-
-  try
-  {
-    // RIS type services
-    for_( it, manager.serviceBegin(), manager.serviceEnd() )
-    {
-      services.insert( services.end(), ServiceInfo_Ptr( new ServiceInfo( *it ) ) );	// copy needed?
-    }
-
-    // non-services repos
-    for_( it, manager.repoBegin(), manager.repoEnd() )
-    {
-      if ( !it->service().empty() )
-        continue;
-      services.insert( services.end(), RepoInfo_Ptr( new RepoInfo( *it ) ) );	// copy needed?
-    }
-  }
-  catch ( const Exception &e )
-  {
-    ZYPP_CAUGHT(e);
-    zypper.out().error( e, _("Error reading services:") );
-    exit( ZYPPER_EXIT_ERR_ZYPP );
-  }
-
-  return services;
-}
-
 bool match_service( Zypper & zypper, std::string str, RepoInfoBase_Ptr & service_ptr )
 {
   ServiceList known = get_all_services( zypper );
@@ -2452,231 +2413,7 @@ enum ServiceListFlagsBits
 ZYPP_DECLARE_FLAGS( ServiceListFlags,ServiceListFlagsBits );
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS( ServiceListFlags );
 
-static void service_list_tr( Zypper & zypper,
-			     Table & tbl,
-			     const RepoInfoBase_Ptr & srv,
-			     unsigned reponumber,
-			     const ServiceListFlags & flags )
-{
-  ServiceInfo_Ptr service = dynamic_pointer_cast<ServiceInfo>(srv);
-  RepoInfo_Ptr repo;
-  if ( ! service )
-    repo = dynamic_pointer_cast<RepoInfo>(srv);
 
-  RepoGpgCheckStrings repoGpgCheck( service ? RepoGpgCheckStrings(*service) : RepoGpgCheckStrings(*repo) );
-
-  TableRow tr( 8 );
-
-  // number
-  if ( flags & SF_SERVICE_REPO )
-  {
-    if ( repo && ! repo->enabled() )
-      tr << ColorString( repoGpgCheck._tagColor, "-" ).str();
-    else
-      tr << "";
-  }
-  else
-    tr << ColorString( repoGpgCheck._tagColor, str::numstring(reponumber) ).str();
-
-  // alias
-  tr << srv->alias();
-  // name
-  tr << srv->name();
-  // enabled?
-  tr << repoGpgCheck._enabledYN.str();
-  // GPG Check
-  tr << repoGpgCheck._gpgCheckYN.str();
-  // autorefresh?
-  tr << repoAutorefreshStr( *srv );
-
-  // priority
-  if ( flags & SF_SHOW_PRIO )
-  {
-    if ( service )
-      tr << "";
-    else
-      tr << repoPriorityNumber( repo->priority(), 4 );
-  }
-
-  // type
-  if ( service )
-    tr << service->type().asString();
-  else
-    tr << repo->type().asString();
-
-  // url
-  if ( flags & SF_SHOW_URI )
-  {
-    if ( service )
-      tr << service->url().asString();
-    else
-      tr << repo->url().asString();
-  }
-
-  tbl << tr;
-}
-
-// ---------------------------------------------------------------------------
-
-static void print_service_list( Zypper & zypper, const std::list<RepoInfoBase_Ptr> & services )
-{
-  Table tbl;
-
-  // flags
-
-  ServiceListFlags flags( 0 );
-  if ( zypper.cOpts().count("details") )
-    flags |= SF_SHOW_ALL;
-  else
-  {
-    if ( zypper.cOpts().count("uri")
-      || zypper.cOpts().count("url")
-      || zypper.cOpts().count("sort-by-uri") )
-      flags |= SF_SHOW_URI;
-    if ( zypper.cOpts().count("priority")
-      || zypper.cOpts().count("sort-by-priority") )
-      flags |= SF_SHOW_PRIO;
-  }
-
-  bool with_repos = zypper.cOpts().count("with-repos");
-  //! \todo string type = zypper.cOpts().count("type");
-
-  // header
-  {
-    TableHeader th;
-    // fixed 'zypper services' columns
-    th << "#"
-       << _("Alias")
-       << _("Name")
-       << _("Enabled")
-       << _("GPG Check")
-       // translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-       << _("Refresh");
-    // optional columns
-    if ( flags.testFlag( SF_SHOW_PRIO ) )
-      // translators: repository priority (in zypper repos -p or -d)
-      th << _("Priority");
-    th << _("Type");
-    if ( flags.testFlag( SF_SHOW_URI ) )
-      th << _("URI");
-    tbl << std::move(th);
-  }
-
-  bool show_enabled_only = zypper.cOpts().count("show-enabled-only");
-
-  int i = 0;
-  for_( it, services.begin(), services.end() )
-  {
-    ++i; // continuous numbering including skipped ones
-
-    bool servicePrinted = false;
-    // Unconditionally print the service before the 1st repo is
-    // printed. Undesired, but possible, that a disabled service
-    // owns (manually) enabled repos.
-    if ( with_repos && dynamic_pointer_cast<ServiceInfo>(*it) )
-    {
-      RepoCollector collector;
-      RepoManager & rm( zypper.repoManager() );
-
-      rm.getRepositoriesInService( (*it)->alias(),
-				   make_function_output_iterator( bind( &RepoCollector::collect, &collector, _1 ) ) );
-
-      for_( repoit, collector.repos.begin(), collector.repos.end() )
-      {
-        RepoInfoBase_Ptr ptr( new RepoInfo(*repoit) );	// copy needed?
-
-	if ( show_enabled_only && !repoit->enabled() )
-	  continue;
-
-	if ( !servicePrinted )
-	{
-	  service_list_tr( zypper, tbl, *it, i, flags );
-	  servicePrinted = true;
-	}
-	// SF_SERVICE_REPO: we print repos of the current service
-        service_list_tr( zypper, tbl, ptr, i, flags|SF_SERVICE_REPO );
-      }
-    }
-    if ( servicePrinted )
-      continue;
-
-    // Here: No repo enforced printing the service, so do so if
-    // necessary.
-    if ( show_enabled_only && !(*it)->enabled() )
-      continue;
-
-    service_list_tr( zypper, tbl, *it, i, flags );
-  }
-
-  if ( tbl.empty() )
-    zypper.out().info( str::form(_("No services defined. Use the '%s' command to add one or more services."),
-				 "zypper addservice" ) );
-  else
-  {
-    // sort
-    if ( zypper.cOpts().count("sort-by-uri") )
-    {
-      if ( flags.testFlag( SF_SHOW_ALL ) )
-        tbl.sort( 7 );
-      else if ( flags.testFlag( SF_SHOW_PRIO ) )
-        tbl.sort( 7 );
-      else
-        tbl.sort( 6 );
-    }
-    else if ( zypper.cOpts().count("sort-by-alias") )
-      tbl.sort( 1 );
-    else if ( zypper.cOpts().count("sort-by-name") )
-      tbl.sort( 2 );
-    else if ( zypper.cOpts().count("sort-by-priority") )
-      tbl.sort( 5 );
-
-    // print
-    cout << tbl;
-  }
-}
-
-// ----------------------------------------------------------------------------
-
-static void print_xml_service_list( Zypper & zypper, const std::list<RepoInfoBase_Ptr> & services )
-{
-  cout << "<service-list>" << endl;
-
-  ServiceInfo_Ptr s_ptr;
-  for_( it, services.begin(), services.end() )
-  {
-    s_ptr = dynamic_pointer_cast<ServiceInfo>(*it);
-    // print also service's repos
-    if ( s_ptr )
-    {
-      RepoCollector collector;
-      RepoManager & rm( zypper.repoManager() );
-      rm.getRepositoriesInService( (*it)->alias(),
-				   make_function_output_iterator( bind( &RepoCollector::collect, &collector, _1 ) ) );
-      std::ostringstream sout;
-      for_( repoit, collector.repos.begin(), collector.repos.end() )
-        repoit->dumpAsXmlOn( sout );
-      (*it)->dumpAsXmlOn( cout, sout.str() );
-      continue;
-    }
-
-    (*it)->dumpAsXmlOn( cout );
-  }
-
-  cout << "</service-list>" << endl;
-}
-
-// ---------------------------------------------------------------------------
-
-void list_services( Zypper & zypper )
-{
-  ServiceList services = get_all_services( zypper );
-
-  // print repo list as xml
-  if (zypper.out().type() == Out::TYPE_XML)
-    print_xml_service_list( zypper, services );
-  else
-    print_service_list( zypper, services );
-}
 
 // ---------------------------------------------------------------------------
 
