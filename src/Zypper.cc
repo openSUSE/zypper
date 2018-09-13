@@ -294,6 +294,7 @@ namespace cli
 } // namespace cli
 ///////////////////////////////////////////////////////////////////
 
+
 ZYpp::Ptr God = NULL;
 void Zypper::assertZYppPtrGod()
 {
@@ -1064,9 +1065,6 @@ void print_command_help_hint( Zypper & zypper )
 int Zypper::defaultLoadSystem( LoadSystemFlags flags_r )
 {
   DBG << "FLAGS:" << flags_r << endl;
-
-  if ( flags_r.testFlag( ResetRepoManager ) )
-    initRepoManager();
 
   if ( ! flags_r.testFlag( NoPool ) )
   {
@@ -4426,12 +4424,6 @@ void Zypper::doCommand()
   //handle new style commands
   ZypperBaseCommandPtr newStyleCmd = command().commandObject();
   if ( newStyleCmd ) {
-    int exitCode = defaultLoadSystem( newStyleCmd->needSystemSetup() );
-    if ( ZYPPER_EXIT_OK != exitCode ) {
-      setExitCode( exitCode );
-      return;
-    }
-
     setExitCode( newStyleCmd->run(*this, _arguments) );
     return;
   }

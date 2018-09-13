@@ -60,6 +60,18 @@ namespace cli
 } // namespace cli
 ///////////////////////////////////////////////////////////////////
 
+/** Flags for tuning \ref Zypper::defaultLoadSystem. */
+enum LoadSystemBits
+{
+ NoTarget		= (1 << 0),		//< don't load target to pool
+ NoRepos		= (1 << 1),		//< don't load repos to pool
+ NoPool		        = NoTarget | NoRepos	//< no pool at all
+};
+ZYPP_DECLARE_FLAGS( LoadSystemFlags, LoadSystemBits );
+
+/** \relates LoadSystemFlags */
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS( LoadSystemFlags );
+
 /**
  * Structure for holding global options.
  *

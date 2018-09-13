@@ -27,7 +27,7 @@ PSCommand::PSCommand() :
     // translators: command description
     _("List running processes which might still use files and libraries deleted by recent upgrades."),
     std::string(),
-    NoPool
+    DisableAll
   )
 { }
 

@@ -16,8 +16,7 @@ CleanLocksCmd::CleanLocksCmd() :
     _("cleanlocks (cl)"),
     // translators: command summary
     _("Remove useless locks."),
-    std::string(),
-    LoadSystemFlags()
+    std::string()
   )
 { }
 

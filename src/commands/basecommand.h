@@ -41,19 +41,25 @@ public:
 };
 using BaseCommandConditionPtr = std::shared_ptr<BaseCommandCondition>;
 
-
-/** Flags for tuning \ref Zypper::defaultLoadSystem. */
-enum LoadSystemBits
+/** Flags for tuning \ref ZypperBaseCommand::defaultSystemSetup. */
+enum SetupSystemBits
 {
- NoTarget		= (1 << 0),		//< don't load target to pool
- NoRepos		= (1 << 1),		//< don't load repos to pool
- ResetRepoManager       = (1 << 2),             //< explicitely reset the repomanager before calling the cmd
- NoPool		        = NoTarget | NoRepos	//< no pool at all
+ DisableAll             = 0,
+ ResetRepoManager       = (1 << 1),             //< explicitely reset the repomanager before calling the cmd
+ InitTarget		= (1 << 2),		//< Initialize the target
+ InitRepos		= (1 << 3),		//< Initialize repositories
+ NoSystemResolvables    = (1 << 4),             //< Disable the loading of system resolvables
+ LoadResolvables        = (1 << 5),             //< Load resolvables
+ Resolve                = (1 << 6),             //< compute status of PPP
+ DefaultSetup           = ResetRepoManager | InitTarget | InitRepos | LoadResolvables | Resolve
 };
-ZYPP_DECLARE_FLAGS( LoadSystemFlags, LoadSystemBits );
+ZYPP_DECLARE_FLAGS( SetupSystemFlags, SetupSystemBits );
 
 /** \relates LoadSystemFlags */
-ZYPP_DECLARE_OPERATORS_FOR_FLAGS( LoadSystemFlags );
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS( SetupSystemFlags );
+
+
+
 
 /**
  * All Zypper commands should derive from this type. It automatically
@@ -69,7 +75,7 @@ public:
                       const std::string &synopsis_r = std::string(),
                       const std::string &summary_r = std::string(),
                       const std::string &description_r = std::string(),
-                      LoadSystemFlags systemInitFlags_r = LoadSystemFlags()
+                      SetupSystemFlags systemInitFlags_r = DefaultSetup
   );
 
   virtual ~ZypperBaseCommand();
@@ -110,13 +116,6 @@ public:
   virtual std::string description () const;
 
   /**
-   * Specifies what part of the system need to be initialized before
-   * executing the command.
-   * \sa LoadSystemBits
-   */
-  virtual LoadSystemFlags needSystemSetup () const;
-
-  /**
    * Prepares the command to be executed and checks all conditions before
    * calling \sa execute.
    */
@@ -139,6 +138,13 @@ public:
    * Returns true if the help flag was set on command line
    */
   bool helpRequested () const;
+
+  /**
+   * Returns the system setup flags set by the constructor
+   * \sa systemSetup
+   * \sa defaultSystemSetup
+   */
+  SetupSystemFlags setupSystemFlags () const;
 
 protected:
   /**
@@ -169,6 +175,17 @@ protected:
    */
   virtual int execute ( Zypper &zypp, const std::vector<std::string> &positionalArgs ) = 0;
 
+  /**
+   * Sets up the system before the command is executed, reimplement to change default behaviour.
+   * The default implementation calls \sa defaultSystemSetup
+   */
+  virtual int systemSetup ( Zypper &zypp_r );
+
+  /**
+   * Initializes the system according to bits set in \a flags
+   */
+  int defaultSystemSetup(Zypper &zypp_r, SetupSystemFlags flags_r = DefaultSetup );
+
 private:
   std::vector<BaseCommandOptionSet *> _registeredOptionSets;
   bool _helpRequested = false;
@@ -176,7 +193,7 @@ private:
   std::string _synopsis;
   std::string _summary;
   std::string _description;
-  LoadSystemFlags _systemInitFlags;
+  SetupSystemFlags _systemInitFlags;
 };
 
 using ZypperBaseCommandPtr = std::shared_ptr<ZypperBaseCommand> ;

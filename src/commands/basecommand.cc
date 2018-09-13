@@ -3,6 +3,9 @@
 #include <boost/optional.hpp>
 #include "utils/flags/flagtypes.h"
 #include "commandhelpformatter.h"
+#include "solve-commit.h"
+
+#include "repos.h"
 
 using namespace zypp;
 
@@ -26,7 +29,7 @@ BaseCommandCondition::~BaseCommandCondition()
 
 ZypperBaseCommand::ZypperBaseCommand(const std::list<std::string> &commandAliases_r, const std::string &synopsis_r,
                                      const std::string &summary_r, const std::string &description_r,
-                                     LoadSystemFlags systemInitFlags_r)
+                                     SetupSystemFlags systemInitFlags_r)
   : _commandAliases ( commandAliases_r ),
     _synopsis ( synopsis_r ),
     _summary ( summary_r ),
@@ -77,14 +80,58 @@ bool ZypperBaseCommand::helpRequested() const
   return _helpRequested;
 }
 
+SetupSystemFlags ZypperBaseCommand::setupSystemFlags() const
+{
+  return _systemInitFlags;
+}
+
 std::vector<BaseCommandConditionPtr> ZypperBaseCommand::conditions() const
 {
   return std::vector<BaseCommandConditionPtr>();
 }
 
-LoadSystemFlags ZypperBaseCommand::needSystemSetup() const
+int ZypperBaseCommand::systemSetup( Zypper &zypp_r )
 {
-  return _systemInitFlags;
+  return defaultSystemSetup ( zypp_r, _systemInitFlags );
+}
+
+int ZypperBaseCommand::defaultSystemSetup(Zypper &zypp_r, SetupSystemFlags flags_r )
+{
+  DBG << "FLAGS:" << flags_r << endl;
+
+  if ( flags_r.testFlag( ResetRepoManager ) )
+    zypp_r.initRepoManager();
+
+  if ( flags_r.testFlag( InitTarget ) ) {
+    init_target( zypp_r );
+    if ( zypp_r.exitCode() != ZYPPER_EXIT_OK )
+      return zypp_r.exitCode();
+  }
+
+  if ( flags_r.testFlag( InitRepos ) ) {
+    init_repos( zypp_r );
+    if ( zypp_r.exitCode() != ZYPPER_EXIT_OK )
+      return zypp_r.exitCode();
+  }
+
+  DtorReset _tmp( zypp_r.globalOptsNoConst().disable_system_resolvables );
+  if ( flags_r.testFlag( LoadResolvables ) ) {
+    if ( flags_r.testFlag( NoSystemResolvables ) ) {
+      zypp_r.globalOptsNoConst().disable_system_resolvables = true;
+    }
+
+    load_resolvables( zypp_r );
+    if ( zypp_r.exitCode() != ZYPPER_EXIT_OK )
+      return zypp_r.exitCode();
+  }
+
+  if ( flags_r.testFlag ( Resolve ) ) {
+    // have REPOS and TARGET
+    // compute status of PPP
+    resolve( zypp_r );
+  }
+
+  return zypp_r.exitCode();
 }
 
 int ZypperBaseCommand::run(Zypper &zypp, const std::vector<std::string> &positionalArgs)
@@ -100,6 +147,10 @@ int ZypperBaseCommand::run(Zypper &zypp, const std::vector<std::string> &positio
         return code;
       }
     }
+
+    int code = systemSetup( zypp );
+    if ( code != ZYPPER_EXIT_OK )
+      return code;
 
     return execute( zypp, positionalArgs );
   }
