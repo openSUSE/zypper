@@ -17,12 +17,12 @@ public:
 
   // ZypperBaseCommand interface
   std::string description() const override;
-  LoadSystemFlags needSystemSetup() const override;
 
 protected:
   int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs) override;
   std::vector<zypp::ZyppFlags::CommandOption> cmdOptions() const override;
   void doReset() override;
+  int systemSetup(Zypper &zypp_r) override;
 
 private:
   bool _matches   = false;

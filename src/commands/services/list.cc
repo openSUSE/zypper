@@ -91,7 +91,7 @@ ListServicesCmd::ListServicesCmd()
       _("services (ls) [OPTIONS]"),
       _("List all defined services."),
       _("List defined services."),
-      NoPool | ResetRepoManager
+      ResetRepoManager
     )
 {
 

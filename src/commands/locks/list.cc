@@ -233,11 +233,13 @@ std::string ListLocksCmd::description() const
   return summary();
 }
 
-LoadSystemFlags ListLocksCmd::needSystemSetup() const
+
+int ListLocksCmd::systemSetup(Zypper &zypp_r)
 {
+  SetupSystemFlags flags = DisableAll;
   if ( _matches || _solvables )
-    return LoadSystemFlags();
-  return NoPool;
+    flags.setFlag( DefaultSetup );
+  return defaultSystemSetup( zypp_r, flags );
 }
 
 void ListLocksCmd::doReset()
