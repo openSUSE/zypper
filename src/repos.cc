@@ -10,8 +10,6 @@
 #include <iterator>
 #include <list>
 
-#include <boost/lexical_cast.hpp>
-
 #include <zypp/ZYpp.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/IOStream.h>
@@ -41,7 +39,6 @@ namespace zypp { using repo::RepoInfoBase_Ptr; }
 typedef std::list<RepoInfoBase_Ptr> ServiceList;
 typedef std::set<RepoInfo, RepoInfoAliasComparator> RepoInfoSet;
 
-static bool refresh_service( Zypper & zypper, const ServiceInfo & service );
 static RepoInfoSet collect_repos_by_option( Zypper & zypper );
 
 // ----------------------------------------------------------------------------
@@ -90,17 +87,6 @@ const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r )
 }
 
 // ----------------------------------------------------------------------------
-
-template <typename Target, typename Source>
-void safe_lexical_cast( Source s, Target & tr )
-{
-  try
-  {
-    tr = boost::lexical_cast<Target>( s );
-  }
-  catch ( boost::bad_lexical_cast & )
-  {;}
-}
 
 unsigned parse_priority( Zypper & zypper )
 {
@@ -589,8 +575,7 @@ bool match_repo( Zypper & zypper, std::string str, RepoInfo *repo )
 
 // ---------------------------------------------------------------------------
 
-/** \return true if aliases are equal, and all lhs urls can be found in rhs */
-static bool repo_cmp_alias_urls( const RepoInfo & lhs, const RepoInfo & rhs )
+bool repo_cmp_alias_urls(const RepoInfo &lhs, const RepoInfo &rhs)
 {
   bool equals = true;
 
@@ -609,7 +594,7 @@ static bool repo_cmp_alias_urls( const RepoInfo & lhs, const RepoInfo & rhs )
       {
         if ( std::find( rhs.baseUrlsBegin(), rhs.baseUrlsEnd(), Url(*urlit) ) != rhs.baseUrlsEnd() )
           urlfound = true;
-	if ( !urlfound )
+        if ( !urlfound )
         {
           equals = false;
           break;
@@ -731,7 +716,8 @@ void do_init_repos( Zypper & zypper, const Container & container )
     {
       if ( s->enabled() && s->autorefresh() )
       {
-        refresh_service(zypper, *s);
+        //@TODO MICHAEL is this correct?
+        refresh_service( zypper, *s );
       }
     }
   }
@@ -2243,162 +2229,10 @@ void modify_repo( Zypper & zypper, const std::string & alias )
 // Service Handling
 // ---------------------------------------------------------------------------
 
-bool match_service( Zypper & zypper, std::string str, RepoInfoBase_Ptr & service_ptr )
-{
-  ServiceList known = get_all_services( zypper );
-  bool found = false;
-
-  unsigned number = 0;	// service number start with 1
-  for_( known_it, known.begin(), known.end() )
-  {
-    ++number;
-    unsigned tmp = 0;
-    safe_lexical_cast( str, tmp ); // try to make an int out of the string
-
-    try
-    {
-      // match by alias or number
-      found = (*known_it)->alias() == str || tmp == number;
-
-      // match by URL
-      if ( !found )
-      {
-        url::ViewOption urlview = url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
-        if ( zypper.cOpts().count("loose-auth") )
-        {
-          urlview = urlview - url::ViewOptions::WITH_PASSWORD - url::ViewOptions::WITH_USERNAME;
-        }
-        if ( zypper.cOpts().count("loose-query") )
-          urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
-
-        ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*known_it);
-
-        if ( !( urlview.has(url::ViewOptions::WITH_PASSWORD) && urlview.has(url::ViewOptions::WITH_QUERY_STR) ) )
-        {
-          if ( s_ptr )
-            found = Url(str).asString(urlview) == s_ptr->url().asString(urlview);
-          else
-          {
-            RepoInfo_Ptr r_ptr = dynamic_pointer_cast<RepoInfo>(*known_it);
-            if ( !r_ptr->baseUrlsEmpty() )
-            {
-              for_( urlit, r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd() )
-                if ( urlit->asString(urlview) == Url(str).asString(urlview) )
-                {
-                  found = true;
-                  break;
-                }
-            }
-          }
-        }
-        else
-        {
-          if ( s_ptr )
-            found = ( Url(str) == s_ptr->url() );
-          else
-          {
-            RepoInfo_Ptr r_ptr = dynamic_pointer_cast<RepoInfo>(*known_it);
-            if ( !r_ptr->baseUrlsEmpty() )
-            {
-              found = find( r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd(), Url(str) ) != r_ptr->baseUrlsEnd();
-            }
-          }
-        }
-      }
-      if ( found )
-      {
-        service_ptr = *known_it;
-        break;
-      }
-    }
-    catch( const url::UrlException & )
-    {}
-
-  } // END for all known services
-
-  return found;
-}
-
-/**
- * Say "Service %s not found" for all strings in \a not_found list.
- */
-static void report_unknown_services( Out & out, std::list<std::string> not_found )
-{
-  for_( it, not_found.begin(), not_found.end() )
-    out.error( str::Format(_("Service '%s' not found by its alias, number, or URI.")) % *it );
-
-  if ( !not_found.empty() )
-    out.info( str::Format(_("Use '%s' to get the list of defined services.")) % "zypper repos" );
-}
-
-/**
- * Try to find ServiceInfo or RepoInfo counterparts among known services by alias, number,
- * or URI, based on the list of strings given as the iterator range \a begin and
- * \a end. Matching objects will be added to \a services (as RepoInfoBase_Ptr) and those
- * with no match will be added to \a not_found.
- */
-template<typename T>
-void get_services( Zypper & zypper, const T & begin, const T & end,
-		   ServiceList & services, std::list<std::string> & not_found )
-{
-  for_( it, begin, end )
-  {
-    RepoInfoBase_Ptr service;
-
-    if ( !match_service( zypper, *it, service ) )
-    {
-      not_found.push_back( *it );
-      continue;
-    }
-
-    // service found
-    // is it a duplicate? compare by alias and URIs
-    //! \todo operator== in RepoInfo?
-    bool duplicate = false;
-    for_( serv_it, services.begin(), services.end() )
-    {
-      ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*serv_it);
-      ServiceInfo_Ptr current_service_ptr = dynamic_pointer_cast<ServiceInfo>(service);
-
-      // one is a service, the other is a repo
-      if ( s_ptr && !current_service_ptr )
-        continue;
-
-      // service
-      if ( s_ptr )
-      {
-        if ( s_ptr->alias() == current_service_ptr->alias()
-	  && s_ptr->url() == current_service_ptr->url() )
-        {
-          duplicate = true;
-          break;
-        }
-      }
-      // repo
-      else if ( repo_cmp_alias_urls( *dynamic_pointer_cast<RepoInfo>(service),
-				     *dynamic_pointer_cast<RepoInfo>(*serv_it) ) )
-      {
-        duplicate = true;
-        break;
-      }
-    } // END for all found so far
-
-    if ( !duplicate )
-      services.push_back( service );
-  }
-}
 
 // ---------------------------------------------------------------------------
 
-struct RepoCollector
-{
-  bool collect( const RepoInfo & repo )
-  {
-    repos.push_back( repo );
-    return true;
-  }
-  RepoInfoList repos;
-};
+
 
 // ---------------------------------------------------------------------------
 
@@ -2483,181 +2317,7 @@ void remove_service( Zypper & zypper, const ServiceInfo & service )
   zypper.out().info( str::Format(_("Service '%s' has been removed.")) % service.asUserString() );
 }
 
-// ---------------------------------------------------------------------------
-
-static bool refresh_service( Zypper & zypper, const ServiceInfo & service )
-{
-  MIL << "going to refresh service '" << service.alias() << "'" << endl;
-  init_target( zypper );	// need targetDistribution for service refresh
-  RepoManager & manager( zypper.repoManager() );
-
-  bool error = true;
-  try
-  {
-    zypper.out().info( str::form(_("Refreshing service '%s'."), service.asUserString().c_str() ) );
-
-    RepoManager::RefreshServiceOptions opts;
-    if ( zypper.cOpts().count("restore-status") )
-      opts |= RepoManager::RefreshService_restoreStatus;
-    if ( zypper.cOpts().count("force")
-      && ( zypper.command() == ZypperCommand::REFRESH || zypper.command() == ZypperCommand::REFRESH_SERVICES ) )
-      opts |= RepoManager::RefreshService_forceRefresh;
-
-    manager.refreshService( service, opts );
-    error = false;
-  }
-  catch ( const repo::ServicePluginInformalException & e )
-  {
-    ZYPP_CAUGHT( e );
-    zypper.out().error( e, str::form(_("Problem retrieving the repository index file for service '%s':"),
-				     service.asUserString().c_str()));
-    zypper.out().warning( str::form( _("Skipping service '%s' because of the above error."),
-				     service.asUserString().c_str()));
-    // this is just an informal note. The service will be used as is (usually empty)
-    error = false;
-  }
-  catch ( const media::MediaException & e )
-  {
-    ZYPP_CAUGHT( e );
-    zypper.out().error( e, str::form(_("Problem retrieving the repository index file for service '%s':"),
-				     service.asUserString().c_str() ),
-			_("Check if the URI is valid and accessible.") );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-  }
-
-  return error;
-}
-
-// ---------------------------------------------------------------------------
-
-void refresh_services( Zypper & zypper )
-{
-  MIL << "going to refresh services" << endl;
-
-  ServiceList services = get_all_services( zypper );
-
-  // get the list of repos specified on the command line ...
-  ServiceList specified;
-  std::list<std::string> not_found;
-  // ...as command arguments
-  get_services( zypper, zypper.arguments().begin(), zypper.arguments().end(), specified, not_found );
-  report_unknown_services( zypper.out(), not_found ) ;
-
-  unsigned error_count = 0;
-  unsigned enabled_service_count = services.size();
-
-  if ( !specified.empty() || not_found.empty() )
-  {
-    unsigned number = 0;
-    for_( sit, services.begin(), services.end() )
-    {
-      ++number;
-      RepoInfoBase_Ptr service_ptr( *sit );
-
-      // skip services not specified on the command line
-      if ( !specified.empty() )
-      {
-        bool found = false;
-        for_( it, specified.begin(), specified.end() )
-          if ( (*it)->alias() == service_ptr->alias() )
-          {
-            found = true;
-            break;
-          }
-
-        if ( !found )
-        {
-          DBG << service_ptr->alias() << "(#" << number << ") not specified," << " skipping." << endl;
-	  --enabled_service_count;
-          continue;
-        }
-      }
-
-      // skip disabled services
-      if ( !service_ptr->enabled() )
-      {
-        DBG << "skipping disabled service '" << service_ptr->alias() << "'" << endl;
-
-        std::string msg = str::Format(_("Skipping disabled service '%s'")) % service_ptr->asUserString();
-        if ( specified.empty() )
-          zypper.out().info( msg, Out::HIGH );
-        else
-          zypper.out().error( msg );
-
-        --enabled_service_count;
-        continue;
-      }
-
-      // do the refresh
-      bool error = false;
-      ServiceInfo_Ptr s = dynamic_pointer_cast<ServiceInfo>(service_ptr);
-      if ( s )
-      {
-        error = refresh_service( zypper, *s );
-
-        // refresh also service's repos
-        if ( zypper.cOpts().count("with-repos") )
-        {
-          RepoCollector collector;
-          RepoManager & rm = zypper.repoManager();
-          rm.getRepositoriesInService( s->alias(),
-				       make_function_output_iterator( bind( &RepoCollector::collect, &collector, _1 ) ) );
-          for_( repoit, collector.repos.begin(), collector.repos.end() )
-            refresh_repo( zypper, *repoit );
-        }
-      }
-      else
-      {
-        if ( !zypper.cOpts().count("with-repos") )
-        {
-          DBG << "Skipping non-index service '" << service_ptr->asUserString() << "' because '--no-repos' is used.";
-          continue;
-        }
-        error = refresh_repo( zypper, *dynamic_pointer_cast<RepoInfo>(service_ptr) );
-      }
-
-      if ( error )
-      {
-        ERR << "Skipping service '" << service_ptr->alias() << "' because of the above error." << endl;
-	zypper.out().error( str::Format(_("Skipping service '%s' because of the above error.")) % service_ptr->asUserString().c_str() );
-        ++error_count;
-      }
-    }
-  }
-  else
-    enabled_service_count = 0;
-
-  // print the result message
-  if ( enabled_service_count == 0 )
-  {
-    std::string hint = str::form(_("Use '%s' or '%s' commands to add or enable services."),
-				 "zypper addservice", "zypper modifyservice" );
-    if ( !specified.empty() || !not_found.empty() )
-      zypper.out().error(_("Specified services are not enabled or defined."), hint);
-    else
-      zypper.out().error(_("There are no enabled services defined."), hint);
-  }
-  else if ( error_count == enabled_service_count )
-  {
-    zypper.out().error(_("Could not refresh the services because of errors.") );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
-  }
-  else if ( error_count )
-  {
-    zypper.out().error(_("Some of the services have not been refreshed because of an error.") );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
-  }
-  else if ( !specified.empty() )
-    zypper.out().info(_("Specified services have been refreshed.") );
-  else
-    zypper.out().info(_("All services have been refreshed.") );
-
-  MIL << "DONE";
-}
-
-void checkIfToRefreshPluginServices( Zypper & zypper )
+void checkIfToRefreshPluginServices(Zypper & zypper, RepoManager::RefreshServiceFlags flags_r)
 {
   // check root user
   if ( geteuid() != 0 )
@@ -2673,7 +2333,7 @@ void checkIfToRefreshPluginServices( Zypper & zypper )
     if ( ! service.autorefresh() )
       continue;
 
-    bool error = refresh_service( zypper, service );
+    bool error = refresh_service( zypper, service, flags_r );
     if (error)
     {
       ERR << "Skipping service '" << service.alias() << "' because of the above error." << endl;
@@ -2681,7 +2341,6 @@ void checkIfToRefreshPluginServices( Zypper & zypper )
     }
   }
 }
-
 
 // ---------------------------------------------------------------------------
 

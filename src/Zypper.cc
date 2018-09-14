@@ -70,6 +70,9 @@
 #include "commands/commandhelpformatter.h"
 #include "commands/locks.h"
 
+#include "commands/services/common.h"
+#include "commands/services/refresh.h"
+
 using namespace zypp;
 
 bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExit
@@ -2511,34 +2514,8 @@ void Zypper::processCommandOptions()
       "-U, --sort-by-uri         Sort the list by URI.\n"
       "-N, --sort-by-name        Sort the list by name.\n"
     );
-#endif
 
-  case ZypperCommand::REFRESH_SERVICES_e:
-  {
-    static struct option options[] = {
-      {"force",			no_argument,	0, 'f'},
-      {"help",			no_argument,	0, 'h'},
-      {"with-repos",		no_argument,	0, 'r'},
-      {"restore-status",	no_argument,	0, 'R'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("refresh-services (refs) [OPTIONS]")
-    )
-    .description(	// translators: command description
-    _("Refresh defined repository index services.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-f, --force",	// translators: -f, --force
-             _("Force a complete refresh.") )
-    .option( "-r, --with-repos",	// translators: -r, --with-repos
-             _("Refresh also the service repositories.") )
-    .option( "-R, --restore-status",	// translators: -R, --restore-status
-             _("Also restore service repositories enabled/disabled state.") )
-    ;
-#if 0
+    //ZypperCommand::REFRESH_SERVICES_e
     _command_help = _(
       "refresh-services (refs) [OPTIONS]\n"
       "\n"
@@ -2550,8 +2527,6 @@ void Zypper::processCommandOptions()
       "-R, --restore-status  Also restore service repositories enabled/disabled state.\n"
     );
 #endif
-    break;
-  }
 
   case ZypperCommand::ADD_REPO_e:
   {
@@ -4441,30 +4416,6 @@ void Zypper::doCommand()
     break;
   }
 
-  // --------------------------( service refresh )-----------------------------
-
-  case ZypperCommand::REFRESH_SERVICES_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for refreshing services.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    // needed to be able to retrieve target distribution
-    init_target(*this);
-    _gopts.rm_options.servicesTargetDistro =
-      God->target()->targetDistribution();
-
-    initRepoManager();
-
-    refresh_services( *this );
-
-    break;
-  }
-
   // --------------------------( add service )---------------------------------
 
   case ZypperCommand::ADD_SERVICE_e:
@@ -4952,14 +4903,22 @@ void Zypper::doCommand()
         setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
         return;
       }
+
+      RefreshServicesCmd refServiceCmd( copts.count("force"), false, false);
+
       // needed to be able to retrieve target distribution
       init_target( *this );
       _gopts.rm_options.servicesTargetDistro = God->target()->targetDistribution();
-      refresh_services( *this );
+
+      setExitCode( refServiceCmd.refreshServices( *this ) );
     }
     else
     {
-      checkIfToRefreshPluginServices( *this );
+      RepoManager::RefreshServiceOptions opts;
+      if ( copts.count("force") )
+        opts |= RepoManager::RefreshService_forceRefresh;
+
+      checkIfToRefreshPluginServices( *this, opts );
     }
     refresh_repos( *this );
     break;

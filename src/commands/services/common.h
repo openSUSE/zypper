@@ -10,13 +10,27 @@
 #include "repos.h"
 
 #include <zypp/repo/RepoInfoBase.h>
+#include <zypp/RepoManager.h>
 
 #include <list>
+
+struct RepoCollector
+{
+  bool collect( const RepoInfo & repo )
+  {
+    repos.push_back( repo );
+    return true;
+  }
+  RepoInfoList repos;
+};
 
 namespace zypp { using repo::RepoInfoBase_Ptr; }
 typedef std::list<RepoInfoBase_Ptr> ServiceList;
 
 ServiceList get_all_services( Zypper & zypper );
+
+bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & service_ptr );
+bool refresh_service(Zypper & zypper, const ServiceInfo & service, RepoManager::RefreshServiceFlags flags_r = RepoManager::RefreshServiceFlags() );
 
 
 #endif
