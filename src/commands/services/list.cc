@@ -9,16 +9,6 @@ using namespace zypp;
 
 namespace {
 
-struct RepoCollector
-{
-  bool collect( const RepoInfo & repo )
-  {
-    repos.push_back( repo );
-    return true;
-  }
-  RepoInfoList repos;
-};
-
 void service_list_tr( Zypper & zypper,
                       Table & tbl,
                       const RepoInfoBase_Ptr & srv,

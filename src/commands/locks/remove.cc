@@ -20,15 +20,6 @@
 
 using namespace zypp;
 
-template <typename Target, typename Source>
-void safe_lexical_cast (Source s, Target &tr) {
-  try {
-    tr = boost::lexical_cast<Target> (s);
-  }
-  catch (boost::bad_lexical_cast &) {
-  }
-}
-
 RemoveLocksCmd::RemoveLocksCmd()
   : ZypperBaseCommand(
       { "removelock"	, "rl" , "lock-delete" , "ld" },

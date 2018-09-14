@@ -9,6 +9,8 @@
 
 using namespace zypp;
 
+extern ZYpp::Ptr God;
+
 BaseCommandOptionSet::BaseCommandOptionSet()
 {
 }
@@ -83,6 +85,11 @@ bool ZypperBaseCommand::helpRequested() const
 SetupSystemFlags ZypperBaseCommand::setupSystemFlags() const
 {
   return _systemInitFlags;
+}
+
+ZYpp::Ptr ZypperBaseCommand::zyppApi() const
+{
+  return God;
 }
 
 std::vector<BaseCommandConditionPtr> ZypperBaseCommand::conditions() const

@@ -8,6 +8,8 @@
 #include "zypp/base/Flags.h"
 #include "utils/flags/zyppflags.h"
 
+#include <zypp/ZYpp.h>
+
 class Zypper;
 class ZypperBaseCommand;
 
@@ -145,6 +147,8 @@ public:
    * \sa defaultSystemSetup
    */
   SetupSystemFlags setupSystemFlags () const;
+
+  zypp::ZYpp::Ptr zyppApi () const;
 
 protected:
   /**

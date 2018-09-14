@@ -10,6 +10,8 @@
 
 #include <list>
 
+#include <boost/lexical_cast.hpp>
+
 #include <zypp/TriBool.h>
 #include <zypp/Url.h>
 #include <zypp/RepoInfo.h>
@@ -47,6 +49,17 @@ void init_repos( Zypper & zypper, const Container & container = Container() );
 
 template<typename T>
 void get_repos( Zypper & zypper, const T & begin, const T & end, std::list<RepoInfo> & repos, std::list<std::string> & not_found );
+
+template <typename Target, typename Source>
+void safe_lexical_cast( Source s, Target & tr )
+{
+  try
+  {
+    tr = boost::lexical_cast<Target>( s );
+  }
+  catch ( boost::bad_lexical_cast & )
+  {;}
+}
 
 void report_unknown_repos( Out & out, const std::list<std::string> & not_found );
 
@@ -184,12 +197,8 @@ void remove_service( Zypper & zypper, const ServiceInfo & service );
 
 void modify_service( Zypper & zypper, const std::string & alias );
 
-void refresh_services( Zypper & zypper );
-
 /** If root, refresh any plugin services before lr/ls/ref (bnc#893294) */
-void checkIfToRefreshPluginServices( Zypper & zypper );
-
-bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & service_ptr );
+void checkIfToRefreshPluginServices( Zypper & zypper, RepoManager::RefreshServiceFlags flags_r =  RepoManager::RefreshServiceFlags() );
 
 void modify_services_by_option( Zypper & zypper );
 
@@ -220,6 +229,9 @@ void load_repo_resolvables( Zypper & zypper );
 ColorString repoPriorityNumber( unsigned prio_r, int width_r = 0 );
 
 const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r );
+
+/** \return true if aliases are equal, and all lhs urls can be found in rhs */
+bool repo_cmp_alias_urls( const RepoInfo & lhs, const RepoInfo & rhs );
 
 #endif
 // Local Variables:
