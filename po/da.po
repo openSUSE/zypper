@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-09-16 11:03+0000\n"
+"PO-Revision-Date: 2018-09-16 15:42+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
 "\n"
@@ -2098,7 +2098,7 @@ msgstr "Germanske (andre)"
 #. language code: geo kat ka
 #: zypp/LanguageCode.cc:467 zypp/LanguageCode.cc:469
 msgid "Georgian"
-msgstr "Georgiansk"
+msgstr "Georgisk"
 
 #. language code: ger deu de
 #: zypp/LanguageCode.cc:471 zypp/LanguageCode.cc:473
@@ -3238,7 +3238,7 @@ msgstr "Sidamo"
 #. language code: sin si
 #: zypp/LanguageCode.cc:947
 msgid "Sinhala"
-msgstr "Sinhala"
+msgstr "Singhalesisk"
 
 #. language code: sio
 #: zypp/LanguageCode.cc:949
@@ -3648,7 +3648,7 @@ msgstr "Sorbianske sprog"
 #. language code: wln wa
 #: zypp/LanguageCode.cc:1121
 msgid "Walloon"
-msgstr "Walloon"
+msgstr "Vallonsk"
 
 #. language code: wol wo
 #: zypp/LanguageCode.cc:1123
