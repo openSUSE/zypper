@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-09-11 04:01+0000\n"
+"PO-Revision-Date: 2018-09-16 11:03+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
 "\n"
@@ -3578,7 +3578,7 @@ msgstr "Umbundu"
 #. language code: und
 #: zypp/LanguageCode.cc:1091
 msgid "Undetermined"
-msgstr "Ubestemt"
+msgstr "Ikke fastsat"
 
 #. language code: urd ur
 #: zypp/LanguageCode.cc:1093
@@ -3926,7 +3926,7 @@ msgstr "Ugyldig tom URL-objektreference"
 
 #: zypp/Url.cc:326 zypp/Url.cc:340
 msgid "Unable to parse Url components"
-msgstr "Kan ikke  fortolke URL-komponenter"
+msgstr "Kan ikke fortolke URL-komponenter"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
@@ -4699,7 +4699,7 @@ msgstr "HalVolume er ikke initialiseret"
 
 #: zypp/target/hal/HalContext.cc:229
 msgid "Unable to create dbus connection"
-msgstr "Kan ikke  oprette dbus-tilslutning"
+msgstr "Kan ikke oprette dbus-tilslutning"
 
 #: zypp/target/hal/HalContext.cc:242
 msgid "libhal_ctx_new: Can't create libhal context"
@@ -4711,7 +4711,7 @@ msgstr "libhal_set_dbus_connection: dbus-tilslutning kan ikke indstilles"
 
 #: zypp/target/hal/HalContext.cc:272
 msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "Kan ikke initialisere HAL-kontekst -- kører hald  ikke?"
+msgstr "Kan ikke initialisere HAL-kontekst -- kører hald ikke?"
 
 #: zypp/target/hal/HalContext.cc:851
 msgid "Not a CDROM drive"
