@@ -3477,6 +3477,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = info_options;
+#if 0
     _command_help = ( CommandHelpFormater() << str::form(_(
         "info (if) [OPTIONS] <name> ...\n"
         "\n"
@@ -3497,8 +3498,36 @@ void Zypper::processCommandOptions()
         "    --recommends          Show recommends.\n"
         "    --suggests            Show suggests.\n"
       ), "package, patch, pattern, product", "package"))
-      .option("--supplements", _("Show supplements."));
-
+#endif
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("info (if) [OPTIONS] <NAME> ...")
+    )
+    .description(	// translators: command description
+    _("Show detailed information for specified packages. By default the packages which match exactly the given names are shown. To get also packages partially matching use option '--match-substrings' or use wildcards (*?) in name.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-s, --match-substrings",	// translators: -s, --match-substrings
+             _("Print information for packages partially matching name.") )
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Work only with the specified repository.") )
+    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
+             str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
+    .option( "--provides",	// translators: --provides
+             _("Show provides.") )
+    .option( "--requires",	// translators: --requires
+             _("Show requires and prerequires.") )
+    .option( "--conflicts",	// translators: --conflicts
+             _("Show conflicts.") )
+    .option( "--obsoletes",	// translators: --obsoletes
+             _("Show obsoletes.") )
+    .option( "--recommends",	// translators: --recommends
+             _("Show recommends.") )
+    .option( "--suggests",	// translators: --suggests
+             _("Show suggests.") )
+    .option( "--supplements",	// translators: --supplements
+	     _("Show supplements.") )
+    ;
     break;
   }
 
