@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-09-16 15:42+0000\n"
+"PO-Revision-Date: 2018-09-17 08:56+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/>"
 "\n"
@@ -1359,7 +1359,7 @@ msgstr "Kunne ikke importere nøgle."
 
 #: zypp/KeyRing.cc:553 zypp/KeyRing.cc:557 zypp/KeyRing.cc:561
 msgid "Failed to delete key."
-msgstr "Sletning af nøgle fejlede."
+msgstr "Sletning af nøgle mislykkedes."
 
 #: zypp/KeyRing.cc:570
 #, c-format, boost-format
@@ -4064,12 +4064,12 @@ msgstr ""
 #: zypp/media/MediaException.cc:31
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
-msgstr "Montering af %s fejlede på %s"
+msgstr "Montering af %s mislykkedes på %s"
 
 #: zypp/media/MediaException.cc:41
 #, c-format, boost-format
 msgid "Failed to unmount %s"
-msgstr "Afmontering af %s fejlede"
+msgstr "Afmontering af %s mislykkedes"
 
 #: zypp/media/MediaException.cc:46
 #, c-format, boost-format
@@ -4103,7 +4103,7 @@ msgstr "Dårligt tilknytningspunkt for medie"
 #: zypp/media/MediaException.cc:77
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "Download (curl) initialisering fejlede for '%s'"
+msgstr "Download (curl) initialisering mislykkede for '%s'"
 
 #: zypp/media/MediaException.cc:82
 #, c-format, boost-format
@@ -4650,7 +4650,7 @@ msgstr " afviklet"
 
 #: zypp/target/TargetImpl.cc:333
 msgid " execution failed"
-msgstr " afvikling fejlede"
+msgstr " afvikling mislykkedes"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
@@ -4722,19 +4722,19 @@ msgstr "Ikke et cd-rom-drev"
 #: zypp/target/rpm/RpmDb.cc:832 zypp/target/rpm/RpmDb.cc:2093
 #: zypp/target/rpm/RpmDb.cc:2239
 msgid "RPM failed: "
-msgstr "RPM fejlede: "
+msgstr "RPM mislykkedes: "
 
 #. Translator: %1% is a gpg public key
 #: zypp/target/rpm/RpmDb.cc:1148
 #, boost-format
 msgid "Failed to import public key %1%"
-msgstr "Import af offentlig nøgle %1% fejlede"
+msgstr "Import af offentlig nøgle %1% mislykkedes"
 
 #. Translator: %1% is a gpg public key
 #: zypp/target/rpm/RpmDb.cc:1218
 #, boost-format
 msgid "Failed to remove public key %1%"
-msgstr "Fjernelse af den offentlige nøgle %1% fejlede"
+msgstr "Fjernelse af den offentlige nøgle %1% mislykkedes"
 
 #: zypp/target/rpm/RpmDb.cc:1599
 msgid "Package is not signed!"
