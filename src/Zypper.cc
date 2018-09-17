@@ -3203,6 +3203,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = search_options;
+#if 0
     _command_help = ( CommandHelpFormater() << _(
       "search (se) [OPTIONS] [querystring] ...\n"
       "\n"
@@ -3237,8 +3238,69 @@ void Zypper::processCommandOptions()
       "* and ? wildcards can also be used within search strings.\n"
       "If a search string is enclosed in '/', it's interpreted as a regular expression.\n"
     ))
-        .gap()
-        .option("--supplements", _("Search for packages which supplement the search strings."));
+#endif
+    // *******************************************************
+    // @Benjamin:
+    // DO NOT CONVERT SEARCH TO NEW STYLE COMMANDS
+    // while https://bugzilla.suse.com/show_bug.cgi?id=1099982
+    // is unfixed. PR is pending....
+    // *******************************************************
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("search (se) [OPTIONS] [QUERYSTRING] ...")
+    )
+    .description(	// translators: command description
+    _("Search for packages matching any of the given search strings.")
+    )
+    .description(	// translators: command description
+    _("* and ? wildcards can also be used within search strings. If a search string is enclosed in '/', it's interpreted as a regular expression.")
+    )
+    .optionSectionCommandOptions()
+    .option( "--match-substrings",	// translators: --match-substrings
+             _("Search for a match to partial words (default).") )
+    .option( "--match-words",	// translators: --match-words
+             _("Search for a match to whole words only.") )
+    .option( "-x, --match-exact",	// translators: -x, --match-exact
+             _("Searches for an exact match of the search strings.") )
+    .option( "--provides",	// translators: --provides
+             _("Search for packages which provide the search strings.") )
+    .option( "--recommends",	// translators: --recommends
+             _("Search for packages which recommend the search strings.") )
+    .option( "--requires",	// translators: --requires
+             _("Search for packages which require the search strings.") )
+    .option( "--suggests",	// translators: --suggests
+             _("Search for packages which suggest the search strings.") )
+    .option( "--supplements", 	// translators: --supplements
+	     _("Search for packages which supplement the search strings.") )
+    .option( "--conflicts",	// translators: --conflicts
+             _("Search packages conflicting with search strings.") )
+    .option( "--obsoletes",	// translators: --obsoletes
+             _("Search for packages which obsolete the search strings.") )
+    .option( "-n, --name",	// translators: -n, --name
+             _("Useful together with dependency options, otherwise searching in package name is default.") )
+    .option( "-f, --file-list",	// translators: -f, --file-list
+             _("Search for a match in the file list of packages.") )
+    .option( "-d, --search-descriptions",	// translators: -d, --search-descriptions
+             _("Search also in package summaries and descriptions.") )
+    .option( "-C, --case-sensitive",	// translators: -C, --case-sensitive
+             _("Perform case-sensitive search.") )
+    .option( "-i, --installed-only",	// translators: -i, --installed-only
+             _("Show only installed packages.") )
+    .option( "-u, --not-installed-only",	// translators: -u, --not-installed-only
+             _("Show only packages which are not installed.") )
+    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
+             _("Search only for packages of the specified type.") )
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Search only in the specified repository.") )
+    .option( "--sort-by-name",	// translators: --sort-by-name
+             _("Sort packages by name (default).") )
+    .option( "--sort-by-repo",	// translators: --sort-by-repo
+             _("Sort packages by repository.") )
+    .option( "-s, --details",	// translators: -s, --details
+             _("Show each available version in each repository on a separate line.") )
+    .option( "-v, --verbose",	// translators: -v, --verbose
+             _("Like --details, with additional information where the search has matched (useful for search in dependencies).") )
+    ;
     break;
   }
 
@@ -5167,6 +5229,13 @@ void Zypper::doCommand()
   case ZypperCommand::SEARCH_e:
   case ZypperCommand::RUG_PATCH_SEARCH_e:
   {
+    // *******************************************************
+    // @Benjamin:
+    // DO NOT CONVERT SEARCH TO NEW STYLE COMMANDS
+    // while https://bugzilla.suse.com/show_bug.cgi?id=1099982
+    // is unfixed. PR is pending....
+    // *******************************************************
+
     // check args...
     PoolQuery query;
     TriBool inst_notinst = indeterminate;
