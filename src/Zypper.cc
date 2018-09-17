@@ -2793,6 +2793,24 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = list_updates_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("list-updates (lu) [OPTIONS]")
+    )
+    .description(	// translators: command description
+    _("List all available updates.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
+             str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("List only updates from the specified repository.") )
+    .option( "--best-effort",	// translators: --best-effort
+             _("Do a 'best effort' approach to update. Updates to a lower than the latest version are also acceptable.") )
+    .option( "-a, --all",	// translators: -a, --all
+             _("List all packages for which newer versions are available, regardless whether they are installable or not.") )
+    ;
+#if 0
     _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "patch"
@@ -2811,6 +2829,7 @@ void Zypper::processCommandOptions()
       "                              available, regardless whether they are\n"
       "                              installable or not.\n"
     ), "package, patch, pattern, product", "package");
+#endif
     break;
   }
 
