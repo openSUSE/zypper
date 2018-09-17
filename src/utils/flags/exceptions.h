@@ -53,6 +53,12 @@ namespace ZyppFlags {
   public:
     FlagRepeatedException ( const std::string &flag );
   };
+
+  class ConflictingFlagsException : public ZyppFlagsException
+  {
+  public:
+    ConflictingFlagsException ( const std::string &flag, const std::string &flag2 );
+  };
 }}
 
 

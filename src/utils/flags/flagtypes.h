@@ -11,7 +11,7 @@
 #include "exceptions.h"
 
 #include <zypp/ResKind.h>
-
+#include <zypp/TriBool.h>
 #include <set>
 
 class Out;
@@ -60,6 +60,9 @@ enum StoreFlag : int{
  * The value in \a defVal is only used for generating the help
  */
 Value BoolType   ( bool *target, StoreFlag store = StoreTrue, const boost::optional<bool> &defValue = boost::optional<bool>()  );
+
+
+Value TriBoolType   ( TriBool &target, StoreFlag store = StoreTrue, const boost::optional<TriBool> &defValue = boost::optional<TriBool>()  );
 
 
 template <typename T, typename E = T>

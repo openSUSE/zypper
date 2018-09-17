@@ -38,14 +38,14 @@ std::vector<BaseCommandConditionPtr> RemoveLocksCmd::conditions() const
   };
 }
 
-std::vector<zypp::ZyppFlags::CommandOption> RemoveLocksCmd::cmdOptions() const
+ZyppFlags::CommandGroup RemoveLocksCmd::cmdOptions() const
 {
   auto that = const_cast<RemoveLocksCmd *>(this);
-  return {
+  return {{
     { "type", 't', ZyppFlags::RequiredArgument, ZyppFlags::KindSetType ( &that->_kinds ) , str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" },
     { "repo", 'r', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable, ZyppFlags::StringVectorType ( &that->_repos, "ALIAS|#|URI" ),  _("Remove only locks with specified repository.") },
     { "catalog", 'c', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable | ZyppFlags::Hidden, ZyppFlags::StringVectorType ( &that->_repos, "ALIAS|#|URI"),  "Alias for --repo" }
-  };
+  }};
 }
 
 void RemoveLocksCmd::doReset()

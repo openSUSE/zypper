@@ -36,10 +36,10 @@ std::string PSCommand::description() const
   return summary();
 }
 
-std::vector<ZyppFlags::CommandOption> PSCommand::cmdOptions() const
+ZyppFlags::CommandGroup PSCommand::cmdOptions() const
 {
   auto that = const_cast<PSCommand *>(this);
-  return {
+  return {{
     { "short", 's', ZyppFlags::NoArgument | ZyppFlags::Repeatable, ZyppFlags::CounterType( &that->_shortness, _shortness, 3)
              // translators: -s, --short
           ,  _("Create a short table not showing the deleted files. Given twice, show only processes which are associated with a system service. Given three times, list the associated system service names only.")
@@ -50,7 +50,7 @@ std::vector<ZyppFlags::CommandOption> PSCommand::cmdOptions() const
             // translators: -d, --debugFile <path>
           , _("Write debug output to file <path>.")
     }
-  };
+  }};
 }
 
 void PSCommand::doReset()

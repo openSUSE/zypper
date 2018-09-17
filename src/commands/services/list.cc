@@ -223,11 +223,11 @@ void ListServicesCmd::printXMLServiceList( Zypper &zypp_r )
   cout << "</service-list>" << endl;
 }
 
-std::vector<ZyppFlags::CommandOption> ListServicesCmd::cmdOptions() const
+ZyppFlags::CommandGroup ListServicesCmd::cmdOptions() const
 {
   auto that = const_cast<ListServicesCmd *>(this);;
 
-  return {
+  return {{
     { "uri",  'u',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ShowURI ), _("Show also base URI of repositories.")},
     { "url", '\0',       ZyppFlags::NoArgument | ZyppFlags::Hidden, ZyppFlags::BitFieldType( &that->_flags, ShowURI ), "" },
     { "priority",   'p', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ShowPriority ), _("Show also repository priority.") },
@@ -237,7 +237,7 @@ std::vector<ZyppFlags::CommandOption> ListServicesCmd::cmdOptions() const
     { "sort-by-uri", 'U',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ServiceListFlags( ShowURI ) | SortByURI ), _("Sort the list by URI.") },
     { "sort-by-name", 'N',      ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, SortByName ), _("Sort the list by name.") },
     { "sort-by-priority", 'P',  ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ServiceListFlags( ShowPriority ) | SortByPrio ),  _("Sort the list by repository priority.") }
-  };
+  }};
 }
 
 void ListServicesCmd::doReset()

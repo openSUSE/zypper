@@ -23,7 +23,7 @@ public:
   // ZypperBaseCommand interface
 protected:
   std::vector<BaseCommandConditionPtr> conditions() const override;
-  std::vector<zypp::ZyppFlags::CommandOption> cmdOptions() const override;
+  zypp::ZyppFlags::CommandGroup cmdOptions() const override;
   void doReset() override;
   int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs) override;
   int systemSetup(Zypper &zypp_r) override;

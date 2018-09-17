@@ -27,17 +27,17 @@ std::vector<BaseCommandConditionPtr> CleanLocksCmd::conditions() const
   };
 }
 
-std::vector<zypp::ZyppFlags::CommandOption> CleanLocksCmd::cmdOptions() const
+ZyppFlags::CommandGroup CleanLocksCmd::cmdOptions() const
 {
   auto that = const_cast<CleanLocksCmd *>(this);
-  return {
+  return {{
     {"only-duplicates", 'd', ZyppFlags::NoArgument, ZyppFlags::BoolType(&that->_onlyDuplicates, ZyppFlags::StoreTrue, _onlyDuplicates),
           // translators: -d, --only-duplicates
           _("Clean only duplicate locks.")},
     {"only-empty", 'e', ZyppFlags::NoArgument, ZyppFlags::BoolType(&that->_onlyEmpty, ZyppFlags::StoreTrue, _onlyEmpty),
           // translators: -e, --only-empty
           _("Clean only locks which doesn't lock anything.") },
-  };
+  }};
 }
 
 void CleanLocksCmd::doReset()

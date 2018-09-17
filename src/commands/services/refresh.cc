@@ -107,14 +107,14 @@ std::vector<BaseCommandConditionPtr> RefreshServicesCmd::conditions() const
   };
 }
 
-std::vector<ZyppFlags::CommandOption> RefreshServicesCmd::cmdOptions() const
+ZyppFlags::CommandGroup RefreshServicesCmd::cmdOptions() const
 {
   auto that  = const_cast<RefreshServicesCmd *>(this);
-  return {
+  return {{
     { "force", 'f', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_force, ZyppFlags::StoreTrue, _force), _("Force a complete refresh.") },
     { "with-repos", 'r', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_withRepos, ZyppFlags::StoreTrue, _withRepos), _("Refresh also the service repositories.") },
     { "restore-status", 'R', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_restoreStatus, ZyppFlags::StoreTrue, _restoreStatus), _("Also restore service repositories enabled/disabled state.") }
-  };
+  }};
 }
 
 void RefreshServicesCmd::doReset()
