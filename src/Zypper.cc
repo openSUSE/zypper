@@ -3425,6 +3425,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+#if 0
     _command_help = ( CommandHelpFormater()
       << _(
       "products (pd) [OPTIONS] [repository] ...\n"
@@ -3436,8 +3437,24 @@ void Zypper::processCommandOptions()
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
       "-i, --installed-only      Show only installed products.\n"
       "-u, --not-installed-only  Show only products which are not installed.\n") )
-    .option26( "--xmlfwd <tag>",	_("XML output only: Literally forward the XML tags found in a product file.") )
-      ;
+#endif
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("products (pd) [OPTIONS] [REPOSITORY] ...")
+    )
+    .description(	// translators: command description
+    _("List all products available in specified repositories.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Just another means to specify repository.") )
+    .option( "-i, --installed-only",	// translators: -i, --installed-only
+             _("Show only installed products.") )
+    .option( "-u, --not-installed-only",	// translators: -u, --not-installed-only
+             _("Show only products which are not installed.") )
+    .option( "--xmlfwd <TAG>",	// translators: --xmlfwd <TAG>
+	     _("XML output only: Literally forward the XML tags found in a product file.") )
+    ;
     break;
   }
 
