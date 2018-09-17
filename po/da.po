@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:46+0200\n"
-"PO-Revision-Date: 2018-09-16 19:03+0000\n"
+"PO-Revision-Date: 2018-09-17 12:01+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -242,14 +242,15 @@ msgstr "Betro nøglen og importér den til betroet nøglering."
 #: src/callbacks/keyring.h:340
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignorerer fejlet signaturverifikation for filen '%s'!"
+msgstr "Ignorerer mislykkede signaturverifikation for filen '%s'!"
 
 #: src/callbacks/keyring.h:343
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
-"Ignorerer fejlet signaturverifikation for filen '%s' fra softwarekilden '%s'!"
+"Ignorerer mislykkede signaturverifikation for filen '%s' fra softwarekilden "
+"'%s'!"
 
 #: src/callbacks/keyring.h:349
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -260,13 +261,15 @@ msgstr ""
 #: src/callbacks/keyring.h:359
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
-msgstr "Signaturverifikation fejlede for filen '%1%'."
+msgstr "Verificering af signatur mislykkedes for filen '%1%'."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:362
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr "Signaturverifikation fejlede for filen '%1%' fra softwarekilden '%2%'."
+msgstr ""
+"Verificering af signatur mislykkedes for filen '%1%' fra softwarekilden "
+"'%2%'."
 
 #: src/callbacks/keyring.h:406
 msgid ""
@@ -327,7 +330,7 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
-"Digest verifikation mislykkedes for filen '%1%'\n"
+"Verificering af digest mislykkedes for filen '%1%'\n"
 "[%2%]\n"
 "\n"
 "  ventede %3%\n"
@@ -420,7 +423,7 @@ msgstr "Henter %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
-msgstr "Signaturverifikation mislykkedes"
+msgstr "Verificering af signatur mislykkedes"
 
 #: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
@@ -441,7 +444,7 @@ msgstr "Fjerner %s"
 #: src/callbacks/rpm.h:272
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr "Fjernelse af %s fejlede:"
+msgstr "Fjernelse af %s mislykkedes:"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:315
@@ -452,7 +455,7 @@ msgstr "Installerer: %s"
 #: src/callbacks/rpm.h:338
 #, c-format, boost-format
 msgid "Installation of %s failed:"
-msgstr "Installation af %s fejlede:"
+msgstr "Installation af %s mislykkedes:"
 
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:382
@@ -5324,7 +5327,7 @@ msgstr "Initialiserer målet"
 
 #: src/repos.cc:1008
 msgid "Target initialization failed:"
-msgstr "Initialisering af målet fejlede:"
+msgstr "Initialisering af målet mislykkedes:"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -6256,8 +6259,8 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"Tjek af pakkeintegritet fejlede. Det kan være et problem med softwarekilden "
-"eller mediet. Prøv et af følgende:\n"
+"Tjek af pakkeintegritet mislykkede. Det kan være et problem med "
+"softwarekilden eller mediet. Prøv et af følgende:\n"
 "\n"
 "- prøv blot forrige kommando igen\n"
 "- genopfrisk softwarekilder med 'zypper refresh'\n"
