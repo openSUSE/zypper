@@ -248,14 +248,14 @@ void ListLocksCmd::doReset()
   _solvables = false;
 }
 
-std::vector<ZyppFlags::CommandOption> ListLocksCmd::cmdOptions() const
+ZyppFlags::CommandGroup ListLocksCmd::cmdOptions() const
 {
-  return {
+  return {{
     {
       { "matches", 'm', ZyppFlags::NoArgument, ZyppFlags::BoolType( const_cast<bool *>(&_matches), ZyppFlags::StoreTrue, _matches), _("Show the number of resolvables matched by each lock.") },
       { "solvables", 's', ZyppFlags::NoArgument, ZyppFlags::BoolType( const_cast<bool *>(&_solvables), ZyppFlags::StoreTrue, _solvables), _("List the resolvables matched by each lock.")}
     }
-  };
+  }};
 }
 
 int ListLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &positionalArgs)

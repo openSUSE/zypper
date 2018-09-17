@@ -219,16 +219,29 @@ std::string ZypperBaseCommand::help()
 std::vector<ZyppFlags::CommandGroup> ZypperBaseCommand::options()
 {
   //first get the commands own options
-  std::vector<ZyppFlags::CommandGroup> allOpts {
-    { _("Command options:"), cmdOptions() }
-  };
+  std::vector<ZyppFlags::CommandGroup> allOpts;
 
-  ZyppFlags::CommandOption helpOpt{
-      "help", 'h', ZyppFlags::NoArgument | ZyppFlags::Hidden, ZyppFlags::BoolType( &_helpRequested ), ""
+  //merges a group into
+  auto mergeGroup = [ &allOpts ] ( ZyppFlags::CommandGroup &&grp ) {
+    bool foundCmdGroup = false;
+    for ( ZyppFlags::CommandGroup &cmdGroup : allOpts ) {
+      if ( grp.name == cmdGroup.name ) {
+        foundCmdGroup = true;
+        std::move( grp.options.begin(), grp.options.end(), std::back_inserter(cmdGroup.options) );
+      }
+    }
+    if ( !foundCmdGroup )
+      allOpts.push_back( std::move(grp) );
   };
 
   //inject a help option at the beginning, we always want help
-  allOpts.front().options.insert( allOpts.front().options.end(), std::move(helpOpt));
+  //this will also make sure that the default command group is at the beginning
+  mergeGroup ( ZyppFlags::CommandGroup {{
+    { "help", 'h', ZyppFlags::NoArgument | ZyppFlags::Hidden, ZyppFlags::BoolType( &_helpRequested ), "" }
+  }});
+
+  // now add the commands own options
+  mergeGroup ( cmdOptions() );
 
   //now collect all options from registered option sets
   for ( BaseCommandOptionSet *set : _registeredOptionSets ) {
@@ -237,18 +250,9 @@ std::vector<ZyppFlags::CommandGroup> ZypperBaseCommand::options()
 
     //merge the set into the other options
     for ( ZyppFlags::CommandGroup &grp : setOpts ) {
-      bool foundCmdGroup = false;
-      for ( ZyppFlags::CommandGroup &cmdGroup : allOpts ) {
-        if ( grp.name == cmdGroup.name ) {
-          foundCmdGroup = true;
-          std::move(grp.options.begin(), grp.options.end(), std::back_inserter(cmdGroup.options));
-        }
-      }
-      if ( !foundCmdGroup )
-        allOpts.push_back( grp );
+      mergeGroup ( std::move(grp) );
     }
   }
-
   return allOpts;
 }
 

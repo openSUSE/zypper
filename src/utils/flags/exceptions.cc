@@ -41,4 +41,10 @@ FlagRepeatedException::FlagRepeatedException(const std::string &flag)
 
 }
 
+ConflictingFlagsException::ConflictingFlagsException(const std::string &flag, const std::string &flag2)
+  : ZyppFlagsException( str::Format(  _("%s used together with %s, which contradict each other.") ) % flag % flag2 )
+{
+
+}
+
 }}

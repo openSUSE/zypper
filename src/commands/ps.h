@@ -19,7 +19,7 @@ public:
   std::string description() const override;
 
 protected:
-  std::vector<zypp::ZyppFlags::CommandOption> cmdOptions() const override;
+  zypp::ZyppFlags::CommandGroup cmdOptions() const override;
   void doReset() override;
   int execute(Zypper &zypp, const std::vector<std::string> &positionalArgs) override;
 

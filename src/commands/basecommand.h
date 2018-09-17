@@ -166,7 +166,7 @@ protected:
   /**
    * Reimplement to return the commands own options.
    */
-  virtual std::vector<zypp::ZyppFlags::CommandOption> cmdOptions () const = 0;
+  virtual zypp::ZyppFlags::CommandGroup cmdOptions () const = 0;
 
   /**
    * Reimplement to reset all options to the default

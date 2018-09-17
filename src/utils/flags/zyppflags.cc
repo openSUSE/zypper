@@ -103,6 +103,11 @@ std::string Value::argHint() const
   return _argHint;
 }
 
+bool Value::wasSet() const
+{
+  return _wasSet;
+}
+
 int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup> &options, const int firstOpt)
 {
   // the short options string as used int getopt
@@ -112,6 +117,9 @@ int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup>
 
   // the set of long options
   std::vector<struct option> longopts;
+
+  // the set of all conflicting options
+  ConflictingFlagsList conflictingFlags;
 
   //build a complete list and a long and short option index so we can
   //easily get to the CommandOption
@@ -143,6 +151,8 @@ int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup>
         }
         appendToOptString( currOpt, shortopts );
       }
+
+      conflictingFlags.insert( conflictingFlags.end(), grp.conflictingOptions.begin(), grp.conflictingOptions.end() );
     }
   }
 
@@ -198,9 +208,28 @@ int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup>
           }
 
           CommandOption &opt = allOpts[index];
+
+          // check if a conflicting option was used before
+          std::string conflicting;
+          for ( StringPair &flagSet : conflictingFlags ) {
+            if ( flagSet.first == opt.name )
+              conflicting = flagSet.second;
+            else if ( flagSet.second == opt.name )
+              conflicting = flagSet.first;
+          }
+
+          if ( !conflicting.empty() ) {
+            auto it = longOptIndex.find( conflicting );
+            if ( it == longOptIndex.end() ) {
+              WAR << "Ignoring unknown option " << conflicting << " specified as conflicting flag for " << opt.name << endl;
+            } else {
+              if ( allOpts[it->second].value.wasSet() ) {
+                throw ConflictingFlagsException( opt.name, conflicting );
+              }
+            }
+          }
           opt.value.set( allOpts[index], arg );
         }
-
         break;
       }
     }
@@ -256,6 +285,16 @@ CommandOption::CommandOption( std::string &&name_r, char shortName_r, int flags_
     flags ( flags_r ),
     value ( std::move(value_r) ),
     help ( std::move(help_r) )
+{ }
+
+CommandGroup::CommandGroup(std::string &&name_r, std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r )
+  : name ( std::move(name_r) ),
+    options ( std::move(options_r) ),
+    conflictingOptions ( std::move(conflictingOptions_r) )
+{ }
+
+CommandGroup::CommandGroup( std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r )
+  : CommandGroup (  _("Command options:"), std::move(options_r), std::move(conflictingOptions_r) )
 { }
 
 }}

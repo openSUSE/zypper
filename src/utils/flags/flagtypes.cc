@@ -89,6 +89,20 @@ Value BoolType(bool *target, StoreFlag store, const boost::optional<bool> &defVa
   );
 }
 
+Value TriBoolType(TriBool &target, StoreFlag store, const boost::optional<TriBool> &defValue)
+{
+  return Value (
+    [defValue]() -> boost::optional<std::string>{
+      if (!defValue)
+        return boost::optional<std::string>();
+      return asString ( *defValue );
+    },
+   [&target, store]( const CommandOption &, const boost::optional<std::string> &){
+      target = TriBool(store == StoreTrue);
+    }
+  );
+}
+
 Value CounterType(int *target, const boost::optional<int> &defValue, const boost::optional<int> &maxValue)
 {
   return Value (

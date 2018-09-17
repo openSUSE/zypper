@@ -99,6 +99,9 @@ namespace ZyppFlags {
      */
     std::string argHint () const;
 
+
+    bool wasSet () const;
+
   private:
     bool _wasSet = false;
     DefValueFun _defaultVal;
@@ -115,12 +118,27 @@ namespace ZyppFlags {
     int flags;
     Value value;
     std::string help;
+    std::vector<std::string> conflictingArguments;
   };
 
-  struct CommandGroup
+  using StringPair = std::pair<std::string, std::string>;
+  using ConflictingFlagsList = std::vector< StringPair >;
+
+  struct  CommandGroup
   {
-    const std::string name;
-    std::vector<CommandOption> options;
+    /**
+     * Creates the default command group with given options and conflicting flags
+     */
+    CommandGroup (  std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r = ConflictingFlagsList() );
+
+    /**
+     * Creates the command group with given options, conflicting flags and the custom \a name_r
+     */
+    CommandGroup (  std::string &&name_r, std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r = ConflictingFlagsList() );
+
+    std::string name; //< The name of the command group
+    std::vector<CommandOption> options; //< The flags the command group supports
+    ConflictingFlagsList conflictingOptions; //< A list of conflicting flag pairs, each element specifies two flags that can't be used together
   };
 
   /**
