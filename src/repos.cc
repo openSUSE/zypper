@@ -88,26 +88,23 @@ const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r )
 
 // ----------------------------------------------------------------------------
 
-unsigned parse_priority( Zypper & zypper )
+unsigned parse_priority( const std::string &prio_r, std::string &error_r )
 {
   //! \todo use some preset priorities (high, medium, low, ...)
   unsigned ret = 0U;
-  parsed_opts::const_iterator cArg = zypper.cOpts().find( "priority" );
-  if ( cArg == zypper.cOpts().end() )
+
+  if ( prio_r.empty() )
     return ret;     // 0: no --priority arg
 
   int prio = -1;
-  std::string prio_str = *cArg->second.begin();
-  safe_lexical_cast( prio_str, prio ); // try to make an int out of the string
+  safe_lexical_cast( prio_r, prio ); // try to make an int out of the string
 
   if ( prio < 0 )
   {
-    zypper.out().error(
+    error_r =
       str::Format(_("Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."))
-      % prio_str
-    );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-    ZYPP_THROW( ExitRequestException("Invalid priority.") );
+      % prio_r;
+    ZYPP_THROW( Exception("Invalid priority.") );
   }
 
   ret = ( prio ? unsigned(prio) : RepoInfo::defaultPriority() );
@@ -1647,12 +1644,7 @@ void clean_repos( Zypper & zypper )
 
 // ----------------------------------------------------------------------------
 
-inline std::string timestamp()
-{ return Date::now().form("%Y%m%d-%H%M%S"); }
-
-// ----------------------------------------------------------------------------
-
-bool add_repo( Zypper & zypper, RepoInfo & repo )
+bool add_repo( Zypper & zypper, RepoInfo & repo, bool noCheck )
 {
   RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData();
@@ -1768,7 +1760,7 @@ bool add_repo( Zypper & zypper, RepoInfo & repo )
 
   if ( is_cd )
   {
-    if ( ! copts.count("no-check") )
+    if ( ! noCheck )
     {
       zypper.out().info( str::Format(_("Reading data from '%s' media")) % repo.asUserString() );
       bool error = refresh_raw_metadata( zypper, repo, false );
@@ -1795,7 +1787,11 @@ bool add_repo( Zypper & zypper, RepoInfo & repo )
 /// \todo merge common code with add_repo_from_file
 void add_repo_by_url( Zypper & zypper,
 		      const Url & url,
-		      const std::string & alias )
+		      const std::string & alias,
+		      unsigned prio,
+		      const TriBool &keepPackages,
+		      const RepoServiceCommonOptions &opts,
+		      bool noCheck )
 {
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url << ")" << endl;
 
@@ -1805,36 +1801,34 @@ void add_repo_by_url( Zypper & zypper,
 
   repo.addBaseUrl( url );
 
-  parsed_opts::const_iterator it = zypper.cOpts().find("name");
-  if ( it != zypper.cOpts().end() )
-    repo.setName( it->second.front() );
+  if ( !opts._name.empty() )
+    repo.setName( opts._name );
 
-  TriBool bopt = get_boolean_option( zypper, "enable", "disable" );
-  repo.setEnabled( indeterminate(bopt) ? true : bool(bopt) );
+  repo.setEnabled( indeterminate( opts._enable ) ? true : bool(opts._enable) );
+  repo.setAutorefresh( indeterminate( opts._enableAutoRefresh ) ? false : bool( opts._enableAutoRefresh ) );	// wouldn't true be the better default?
 
-  bopt = get_boolean_option( zypper, "refresh", "no-refresh" );
-  repo.setAutorefresh( indeterminate(bopt) ? false : bool(bopt) );	// wouldn't true be the better default?
-
-  unsigned prio = parse_priority( zypper );
   if ( prio >= 1 )
     repo.setPriority( prio );
 
-  bopt = get_boolean_option( zypper, "keep-packages", "no-keep-packages" );
-  if ( !indeterminate(bopt) )
-    repo.setKeepPackages( bopt );
+  if ( !indeterminate(keepPackages) )
+    repo.setKeepPackages( keepPackages );
 
   RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
   if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
     repo.setGpgCheck( gpgCheck );
 
-  if ( add_repo( zypper, repo ) )
+  if ( add_repo( zypper, repo, noCheck ) )
     repoPrioSummary( zypper );
 }
 
 // ----------------------------------------------------------------------------
 /// \todo merge common code with add_repo_by_url
 void add_repo_from_file( Zypper & zypper,
-                         const std::string & repo_file_url )
+                         const std::string & repo_file_url,
+                         unsigned prio,
+                         const TriBool &keepPackages,
+                         const RepoServiceCommonOptions &opts,
+                         bool noCheck )
 {
   Url url = make_url( repo_file_url );
   if ( !url.isValid() )
@@ -1843,14 +1837,6 @@ void add_repo_from_file( Zypper & zypper,
     return;
   }
 
-  std::string name;
-  if ( zypper.cOpts().count("name") )
-    name = zypper.cOpts().find("name")->second.front();
-
-  TriBool enabled	= get_boolean_option( zypper, "enable", "disable" );
-  TriBool autorefresh	= get_boolean_option( zypper, "refresh", "no-refresh" );
-  unsigned prio		= parse_priority( zypper );
-  TriBool keepPackages	= get_boolean_option( zypper, "keep-packages", "no-keep-packages" );
   RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
 
   std::list<RepoInfo> repos;
@@ -1901,14 +1887,14 @@ void add_repo_from_file( Zypper & zypper,
       continue;
     }
 
-    if ( ! name.empty() )
-      repo.setName( name );
+    if ( ! opts._name.empty() )
+      repo.setName( opts._name );
 
-    if ( !indeterminate(enabled) )
-      repo.setEnabled( enabled );
+    if ( !indeterminate(opts._enable) )
+      repo.setEnabled( opts._enable );
 
-    if ( !indeterminate(autorefresh) )
-      repo.setAutorefresh( autorefresh );
+    if ( !indeterminate( opts._enableAutoRefresh) )
+      repo.setAutorefresh( opts._enableAutoRefresh );
 
     if ( !indeterminate(keepPackages) )
       repo.setKeepPackages( keepPackages );
@@ -1919,13 +1905,30 @@ void add_repo_from_file( Zypper & zypper,
     if ( prio >= 1 )
       repo.setPriority( prio );
 
-    if ( add_repo( zypper, repo ) )
+    if ( add_repo( zypper, repo, noCheck ) )
       addedAtLeastOneRepository = true;
   }
 
   if ( addedAtLeastOneRepository )
     repoPrioSummary( zypper );
   return;
+}
+
+unsigned priority_from_copts( Zypper &zypper )
+{
+  unsigned prio = 0U;
+  parsed_opts::const_iterator cArg = zypper.cOpts().find( "priority" );
+  if ( cArg != zypper.cOpts().end() ) {
+    std::string err;
+    try {
+      prio = parse_priority( *cArg->second.begin(), err );
+    } catch ( const Exception &e ) {
+      zypper.out().error( err );
+      zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      ZYPP_THROW( ExitRequestException( e.asString() ) );
+    }
+  }
+  return prio;
 }
 
 // ----------------------------------------------------------------------------
@@ -2082,7 +2085,7 @@ void modify_repo( Zypper & zypper, const std::string & alias )
 
   RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
 
-  unsigned prio = parse_priority( zypper );
+  unsigned prio = priority_from_copts( zypper );
 
   try
   {
@@ -2246,63 +2249,6 @@ enum ServiceListFlagsBits
 };
 ZYPP_DECLARE_FLAGS( ServiceListFlags,ServiceListFlagsBits );
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS( ServiceListFlags );
-
-
-
-// ---------------------------------------------------------------------------
-
-void add_service( Zypper & zypper, const ServiceInfo & service )
-{
-  RepoManager manager( zypper.globalOpts().rm_options );
-
-  try
-  {
-    manager.addService( service );
-  }
-  catch ( const repo::RepoAlreadyExistsException & e )
-  {
-    ZYPP_CAUGHT( e );
-    ERR << "Service aliased '" << service.alias() << "' already exists." << endl;
-    zypper.out().error( str::Format(_("Service aliased '%s' already exists. Please use another alias.")) % service.alias() );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
-  }
-  catch ( const Exception & e )
-  {
-    ZYPP_CAUGHT( e );
-    zypper.out().error( str::Format(_("Error occurred while adding service '%s'.")) % service.alias() );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
-  }
-
-  MIL << "Service '" << service.alias() << "' has been added." << endl;
-  zypper.out().info( str::Format(_("Service '%s' has been successfully added.")) % service.asUserString() );
-}
-
-// ---------------------------------------------------------------------------
-
-void add_service_by_url( Zypper & zypper,
-			 const Url & url,
-			 const std::string & alias)
-{
-  MIL << "going to add service by url (alias=" << alias << ", url=" << url << ")" << endl;
-
-  ServiceInfo service;
-
-  service.setAlias( alias.empty() ? timestamp() : alias );
-  parsed_opts::const_iterator it = zypper.cOpts().find("name");
-  if ( it != zypper.cOpts().end() )
-    service.setName( it->second.front() );
-  service.setUrl( url );
-
-  TriBool bopt = get_boolean_option( zypper, "enable", "disable" );
-  service.setEnabled( indeterminate(bopt) ? true : bool(bopt) );
-
-  bopt = get_boolean_option( zypper, "refresh", "no-refresh" );
-  service.setAutorefresh( indeterminate(bopt) ? true : bool(bopt) );
-
-  add_service( zypper, service );
-}
 
 
 // ---------------------------------------------------------------------------

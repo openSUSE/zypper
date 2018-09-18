@@ -7,6 +7,7 @@
 #include "refresh.h"
 #include "main.h"
 #include "Zypper.h"
+#include "repos.h"
 
 #include "common.h"
 #include "utils/flags/flagtypes.h"

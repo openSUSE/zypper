@@ -7,8 +7,9 @@
 #ifndef ZYPPER_COMMANDS_SERVICES_COMMON_H_INCLUDED
 #define ZYPPER_COMMANDS_SERVICES_COMMON_H_INCLUDED
 
-#include "repos.h"
+#include "Zypper.h"
 
+#include <zypp/RepoInfo.h>
 #include <zypp/repo/RepoInfoBase.h>
 #include <zypp/RepoManager.h>
 
@@ -16,7 +17,7 @@
 
 struct RepoCollector
 {
-  bool collect( const RepoInfo & repo )
+  bool collect( const zypp::RepoInfo & repo )
   {
     repos.push_back( repo );
     return true;
@@ -24,8 +25,7 @@ struct RepoCollector
   RepoInfoList repos;
 };
 
-namespace zypp { using repo::RepoInfoBase_Ptr; }
-typedef std::list<RepoInfoBase_Ptr> ServiceList;
+typedef std::list<zypp::repo::RepoInfoBase_Ptr> ServiceList;
 
 ServiceList get_all_services( Zypper & zypper );
 

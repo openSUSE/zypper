@@ -3,5 +3,6 @@
 
 #include "services/list.h"
 #include "services/refresh.h"
+#include "services/add.h"
 
 #endif

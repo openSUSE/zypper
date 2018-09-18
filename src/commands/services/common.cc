@@ -6,6 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 #include "common.h"
+#include "repos.h"
 
 #include <zypp/media/MediaException.h>
 
@@ -40,7 +41,7 @@ ServiceList get_all_services( Zypper & zypper )
   return services;
 }
 
-bool match_service( Zypper & zypper, std::string str, RepoInfoBase_Ptr & service_ptr )
+bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & service_ptr )
 {
   ServiceList known = get_all_services( zypper );
   bool found = false;
@@ -150,5 +151,3 @@ bool refresh_service(Zypper & zypper, const ServiceInfo & service, RepoManager::
 
   return error;
 }
-
-
