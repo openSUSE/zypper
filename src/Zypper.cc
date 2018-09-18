@@ -3621,6 +3621,16 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = patch_info_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("patch-info <PATCHNAME> ...")
+    )
+    .description(	// translators: command description
+    _("Show detailed information for patches.")
+    )
+    .descriptionAliasCmd( "zypper info -t patch" )
+    ;
+#if 0
     _command_help = str::form(_(
       "patch-info <patchname> ...\n"
       "\n"
@@ -3628,6 +3638,7 @@ void Zypper::processCommandOptions()
       "\n"
       "This is an alias for '%s'.\n"
     ), "zypper info -t patch");
+#endif
     break;
   }
 

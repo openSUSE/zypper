@@ -61,6 +61,11 @@ struct CommandHelpFormater
   CommandHelpFormater & description( const str::Format & text_r )
   { return description( boost::string_ref(text_r.str()) ); }
 
+  /** Description block stating 'This is an alias for...' */
+  CommandHelpFormater & descriptionAliasCmd( const char * command_r )
+  { // translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
+    return description( str::Format(_("This is an alias for '%s'.")) % command_r ); }
+
   /** Option section title
    * \code
    * ""
