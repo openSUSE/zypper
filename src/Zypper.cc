@@ -3651,6 +3651,16 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("pattern-info <PATTERN_NAME> ...")
+    )
+    .description(	// translators: command description
+    _("Show detailed information for patterns.")
+    )
+    .descriptionAliasCmd( "zypper info -t pattern" )
+    ;
+#if 0
     _command_help = str::form(_(
       "pattern-info <pattern_name> ...\n"
       "\n"
@@ -3658,6 +3668,7 @@ void Zypper::processCommandOptions()
       "\n"
       "This is an alias for '%s'.\n"
     ), "zypper info -t pattern");
+#endif
     break;
   }
 
