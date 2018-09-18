@@ -64,6 +64,7 @@ namespace ZyppFlags {
 
     Repeatable         = 0x10, // < the argument can be repeated
     Hidden             = 0x20, // < command is hidden in help
+    Deprecated         = 0x40  // < the option is about to be removed in the future
   };
 
   /**

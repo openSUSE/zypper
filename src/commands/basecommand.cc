@@ -177,39 +177,59 @@ std::string ZypperBaseCommand::help()
   help.synopsis(synopsis())
       .description(description());
 
+  auto renderOption = [&help]( const ZyppFlags::CommandOption &opt ) {
+    std::string optTxt;
+    if ( opt.shortName )
+      optTxt.append( str::Format("-%1%, ") % opt.shortName);
+    optTxt.append("--").append(opt.name);
+
+    std::string argSyntax = opt.value.argHint();
+    if ( argSyntax.length() ) {
+      if ( opt.flags & ZyppFlags::OptionalArgument )
+        optTxt.append("[=");
+      else
+        optTxt.append(" <");
+      optTxt.append(argSyntax);
+      if ( opt.flags & ZyppFlags::OptionalArgument )
+        optTxt.append("]");
+      else
+        optTxt.append(">");
+    }
+
+    std::string optHelpTxt = opt.help;
+    auto defVal = opt.value.defaultValue();
+    if ( defVal )
+      optHelpTxt.append(" ").append(str::Format(("Default: %1%")) %*defVal );
+    help.option(optTxt, optHelpTxt);
+  };
+
+  //all the options we have
+  std::vector<ZyppFlags::CommandGroup> opts = options();
+
+  //collect all deprecated options
+  std::vector<const ZyppFlags::CommandOption*> legacyOptions;
+
   bool hadOptions = false;
-  for ( const ZyppFlags::CommandGroup &grp : options() ) {
+  for ( const ZyppFlags::CommandGroup &grp : opts ) {
     if ( grp.options.size() ) {
       hadOptions = true;
       help.optionSection( grp.name );
       for ( const ZyppFlags::CommandOption &opt : grp.options ) {
         if ( opt.flags & ZyppFlags::Hidden )
           continue;
-
-        std::string optTxt;
-        if ( opt.shortName )
-          optTxt.append( str::Format("-%1%, ") % opt.shortName);
-        optTxt.append("--").append(opt.name);
-
-        std::string argSyntax = opt.value.argHint();
-        if ( argSyntax.length() ) {
-          if ( opt.flags & ZyppFlags::OptionalArgument )
-            optTxt.append("[=");
-          else
-            optTxt.append(" <");
-          optTxt.append(argSyntax);
-          if ( opt.flags & ZyppFlags::OptionalArgument )
-            optTxt.append("]");
-          else
-            optTxt.append(">");
+        if ( opt.flags & ZyppFlags::Deprecated ) {
+          legacyOptions.push_back( &opt );
+          continue;
         }
-
-        std::string optHelpTxt = opt.help;
-        auto defVal = opt.value.defaultValue();
-        if ( defVal )
-          optHelpTxt.append(" ").append(str::Format(("Default: %1%")) %*defVal );
-        help.option(optTxt, optHelpTxt);
+        renderOption(opt);
       }
+    }
+  }
+
+  if ( legacyOptions.size() ) {
+    help.legacyOptionSection();
+    for ( const ZyppFlags::CommandOption *legacyOption : legacyOptions ) {
+      renderOption(*legacyOption);
     }
   }
 
@@ -228,6 +248,7 @@ std::vector<ZyppFlags::CommandGroup> ZypperBaseCommand::options()
       if ( grp.name == cmdGroup.name ) {
         foundCmdGroup = true;
         std::move( grp.options.begin(), grp.options.end(), std::back_inserter(cmdGroup.options) );
+        std::move( grp.conflictingOptions.begin(), grp.conflictingOptions.end(), std::back_inserter(cmdGroup.conflictingOptions) );
       }
     }
     if ( !foundCmdGroup )
