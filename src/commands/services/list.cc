@@ -11,7 +11,7 @@ namespace {
 
 void service_list_tr( Zypper & zypper,
                       Table & tbl,
-                      const RepoInfoBase_Ptr & srv,
+                      const repo::RepoInfoBase_Ptr & srv,
                       unsigned reponumber,
                       const ListServicesCmd::ServiceListFlags & flags )
 {
@@ -138,7 +138,7 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
 
       for_( repoit, collector.repos.begin(), collector.repos.end() )
       {
-        RepoInfoBase_Ptr ptr( new RepoInfo(*repoit) );	// copy needed?
+        repo::RepoInfoBase_Ptr ptr( new RepoInfo(*repoit) );	// copy needed?
 
         if ( show_enabled_only && !repoit->enabled() )
           continue;

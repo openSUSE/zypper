@@ -18,6 +18,7 @@
 #include <zypp/ServiceInfo.h>
 
 #include "Zypper.h"
+#include "commands/reposerviceoptionsets.h"
 
 #define  TMP_RPM_REPO_ALIAS  "_tmpRPMcache_"
 
@@ -37,6 +38,9 @@ struct RepoGpgCheckStrings
   ColorString _enabledYN;	///< colored enabled Yes/No
   ColorString _gpgCheckYN;	///< colored GPG Check status if enabled else "----"
 };
+
+inline std::string timestamp()
+{ return Date::now().form("%Y%m%d-%H%M%S"); }
 
 /**
  * The same as \ref init_repos(), but allows to specify repos to initialize.
@@ -133,7 +137,7 @@ bool match_repo( Zypper & zypper, const std::string str, RepoInfo *repo = 0 );
  */
 void add_repo_by_url(Zypper & zypper,
 		      const Url & url,
-		      const std::string & alias);
+		      const std::string & alias, unsigned prio, const TriBool &keepPackages, const RepoServiceCommonOptions &opts, bool noCheck);
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -144,13 +148,13 @@ void add_repo_by_url(Zypper & zypper,
  * \param enabled     Whether the repo should be enabled
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
-void add_repo_from_file( Zypper & zypper,
-			 const std::string & repo_file_url );
+void add_repo_from_file(Zypper & zypper,
+			 const std::string & repo_file_url , unsigned prio, const TriBool &keepPackages, const RepoServiceCommonOptions &opts, bool noCheck);
 
 /**
  * Add repository specified by \repo to system repositories.
  */
-bool add_repo( Zypper & zypper, RepoInfo & repo );
+bool add_repo(Zypper & zypper, RepoInfo & repo , bool noCheck);
 
 /**
  * Remove repository specified by \a alias.
@@ -186,12 +190,6 @@ void modify_all_repos( Zypper & zypper );
  * like all, local, remote or medium-type
  */
 void modify_repos_by_option( Zypper & zypper );
-
-void add_service( Zypper & zypper, const ServiceInfo & service );
-
-void add_service_by_url(Zypper & zypper,
-                         const Url & url,
-			 const std::string & alias);
 
 void remove_service( Zypper & zypper, const ServiceInfo & service );
 
@@ -232,6 +230,11 @@ const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r );
 
 /** \return true if aliases are equal, and all lhs urls can be found in rhs */
 bool repo_cmp_alias_urls( const RepoInfo & lhs, const RepoInfo & rhs );
+
+/**
+ * @TODO remove me with copts
+ */
+unsigned priority_from_copts( Zypper &zypper );
 
 #endif
 // Local Variables:

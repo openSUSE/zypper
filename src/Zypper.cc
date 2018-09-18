@@ -18,9 +18,6 @@
 
 #include <unistd.h>
 #include <readline/history.h>
-#include <sys/vfs.h>
-#include <sys/statvfs.h>
-#include <linux/magic.h>
 
 #include <zypp/ZYppFactory.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
@@ -72,7 +69,8 @@
 
 #include "commands/services/common.h"
 #include "commands/services/refresh.h"
-
+#include "commands/conditions.h"
+#include "commands/reposerviceoptionsets.h"
 using namespace zypp;
 
 bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExit
@@ -492,36 +490,12 @@ namespace {
       case ZypperCommand::REMOVE_SERVICE_e:
       case ZypperCommand::MODIFY_SERVICE_e:
 #endif
-      {
-
-        if ( zypper.cOpts().count("dry-run") )
-          return true;
-
-        struct statfs fsinfo;
-        memset( &fsinfo, 0, sizeof(struct statfs) );
-
-        int err = 0;
-        do {
-          err = statfs( gopts_r.root_dir.c_str(), &fsinfo );
-        } while ( err == -1 && errno == EINTR );
-
-        if ( !err ) {
-          if ( fsinfo.f_flags & ST_RDONLY ) {
-
-            bool isTransactionalServer = ( fsinfo.f_type == BTRFS_SUPER_MAGIC && PathInfo( "/usr/sbin/transactional-update" ).isFile() );
-
-            std::string msg;
-            if ( isTransactionalServer && !gopts_r.changedRoot ) {
-              msg = _("This is a transactional-server, please use transactional-update to update or modify the system.");
-            } else {
-              msg = _("The target filesystem is mounted as read-only. Please make sure the target filesystem is writeable.");
-            }
-            zypper.out().errorPar( msg );
-            ERR << msg << endl;
-            return false;
-          }
-        } else {
-          WAR << "Checking if " << gopts_r.root_dir << " is mounted read only failed with errno : " << errno << std::endl;
+    {
+        std::string msg;
+        NeedsWritableRoot rt;
+        if ( rt.check( msg ) != ZYPPER_EXIT_OK ) {
+          zypper.out().errorPar( msg );
+          return false;
         }
         break;
       }
@@ -2345,14 +2319,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::ADD_SERVICE_e:
-  {
-    static struct option service_add_options[] = {
-      {"type", required_argument, 0, 't'},
-      {"help", no_argument, 0, 'h'},
-      ARG_SERVICE_PROP,
-      {0, 0, 0, 0}
-    };
 #if 0
     _(
       // translators: the %s = "ris" (the only service type currently supported)
@@ -2366,21 +2332,6 @@ void Zypper::processCommandOptions()
       "-n, --name <name>       Specify descriptive name for the service.\n"
     )
 #endif
-    specific_options = service_add_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("addservice (as) [OPTIONS] <URI> <ALIAS>")
-    )
-    .description(// translators: command description
-    _("Add a repository index service to the system.")
-    )
-    .optionSectionCommandOptions()
-    .option_SERVICE_PROP
-    .legacyOptionSection()
-    .option( "-t, --type <TYPE>",	( str::Format(_("The type of service is always autodetected. This option is ignored.") ) ).str() )	// FIXME: leagcy, actually autodetected but check libzypp
-    ;
-    break;
-  }
 
   case ZypperCommand::REMOVE_SERVICE_e:
   {
@@ -4416,87 +4367,6 @@ void Zypper::doCommand()
     break;
   }
 
-  // --------------------------( add service )---------------------------------
-
-  case ZypperCommand::ADD_SERVICE_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for modifying system services.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    // too many arguments
-    if ( _arguments.size() > 2 )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    // missing arguments
-    if ( _arguments.size() < 2 )
-    {
-      report_required_arg_missing( out(), _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    Url url = make_url( _arguments[0] );
-    if ( !url.isValid() )
-    {
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    initRepoManager();
-    // force specific repository type.
-    std::string type = copts.count("type") ? copts["type"].front() : "";
-
-    // check for valid service type
-    bool isservice = false;
-    if ( type.empty() )
-    {
-      // zypper does not access net when adding repos/services, thus for zypper
-      // the URI is always service unless --type is explicitely specified.
-      isservice = true;
-    }
-    else
-    {
-      try
-      {
-	repo::ServiceType stype(type);
-	isservice = true;
-      }
-      catch ( const repo::RepoUnknownTypeException & e )
-      {}
-    }
-
-    if ( isservice )
-      add_service_by_url( *this, url, _arguments[1] );
-    else
-    {
-      try
-      {
-        add_repo_by_url( *this, url, _arguments[1]);
-      }
-      catch ( const repo::RepoUnknownTypeException & e )
-      {
-        ZYPP_CAUGHT( e );
-        out().error(
-            str::form(_("'%s' is not a valid service type."), type.c_str()),
-            str::form(
-                _("See '%s' or '%s' to get a list of known service types."),
-                "zypper help addservice", "man zypper"));
-        setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      }
-    }
-
-    break;
-  }
-
   case ZypperCommand::MODIFY_SERVICE_e:
   {
     // check root user
@@ -4586,10 +4456,18 @@ void Zypper::doCommand()
 
     try
     {
+
+      RepoServiceCommonOptions opts;
+      opts.fillFromCopts( *this );
+
+      unsigned prio = priority_from_copts(*this);
+      TriBool keepPackages	= get_boolean_option( *this, "keep-packages", "no-keep-packages" );
+      bool noCheck = copts.count("no-check");
+
       // add repository specified in .repo file
       if ( copts.count("repo") )
       {
-        add_repo_from_file( *this,copts["repo"].front() );
+        add_repo_from_file( *this,copts["repo"].front(), prio, keepPackages, opts, noCheck );
         return;
       }
 
@@ -4614,7 +4492,7 @@ void Zypper::doCommand()
         else
         {
           initRepoManager();
-          add_repo_from_file( *this,_arguments[0] );
+          add_repo_from_file( *this,_arguments[0], prio, keepPackages, opts, noCheck );
           break;
         }
       case 2:
@@ -4647,7 +4525,7 @@ void Zypper::doCommand()
         // load gpg keys
         init_target( *this );
 
-        add_repo_by_url( *this, url, _arguments[1]/*alias*/ );
+        add_repo_by_url( *this, url, _arguments[1]/*alias*/, prio, keepPackages, opts, noCheck );
         return;
       }
     }

@@ -16,4 +16,11 @@ public:
   int check(std::string &err) override;
 };
 
+class NeedsWritableRoot : public BaseCommandCondition
+{
+public:
+  // BaseCommandCondition interface
+  int check(std::string &err_r) override;
+};
+
 #endif
