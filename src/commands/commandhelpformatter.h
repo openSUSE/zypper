@@ -119,11 +119,6 @@ struct CommandHelpFormater
       _mww.writeDefinition( allinone_r , "", (allinone_r.starts_with( "--" )?4:0), 28 );
     return *this;
   }
-
-  /** \todo eliminate legacy indentation */
-  CommandHelpFormater & option26( boost::string_ref option_r, boost::string_ref text_r )
-  { _mww.writeDefinition( option_r , text_r, (option_r.starts_with( "--" )?4:0), 26 ); return *this; }
-
 private:
   std::ostringstream   _str;
   mbs::MbsWriteWrapped _mww;
