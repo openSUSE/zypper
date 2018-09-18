@@ -114,16 +114,14 @@ struct CommandHelpFormater
   /** \overload str::Format text */
   CommandHelpFormater & option( boost::string_ref option_r, const str::Format & text_r )
   { return option( option_r, boost::string_ref(text_r.str()) ); }
-  /** \overload "option\ntext_r" */
-  CommandHelpFormater & option( boost::string_ref allinone_r )
-  {
-    std::string::size_type sep = allinone_r.find( '\n' );
-    if ( sep != std::string::npos )
-      _mww.writeDefinition( allinone_r.substr( 0, sep ), allinone_r.substr( sep+1 ), (allinone_r.starts_with( "--" )?4:0), 28 );
-    else
-      _mww.writeDefinition( allinone_r , "", (allinone_r.starts_with( "--" )?4:0), 28 );
-    return *this;
-  }
+  /** \overload Just option, no description
+   * \code
+   * "    --with-feature"
+   * "    --without-feature       Common description..."
+   * \endcode
+   */
+  CommandHelpFormater & option( boost::string_ref option_r )
+  { return option( option_r, "" ); }
 private:
   std::ostringstream   _str;
   mbs::MbsWriteWrapped _mww;

@@ -3087,6 +3087,25 @@ void Zypper::processCommandOptions()
     _("List all applicable patches.")
     )
     .optionSectionCommandOptions()
+    .option( "-b, --bugzilla[=#]",	// translators: -b, --bugzilla[=#]
+             _("List applicable patches for Bugzilla issues.") )
+    .option( "--cve[=#]",	// translators: --cve[=#]
+             _("List applicable patches for CVE issues.") )
+    .option( "--issues[=STRING]",	// translators: --issues[=STRING]
+             _("Look for issues matching the specified string.") )
+    .option( "--date <YYYY-MM-DD>",	// translators: --date <YYYY-MM-DD>
+             _("List only patches issued up to, but not including, the specified date.") )
+    .option( "-g, --category <CATEGORY>",	// translators: -g, --category <CATEGORY>
+             _("List only patches with this category.") )
+    .option( "--severity <SEVERITY>",	// translators: --severity <SEVERITY>
+             _("List only patches with this severity.") )
+    .option( "-a, --all",	// translators: -a, --all
+             _("List all patches, not only applicable ones.") )
+    .option_WITHout_OPTIONAL
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("List only patches from the specified repository.") )
+    ;
+#if 0
     .option(_("-b, --bugzilla[=#]"		"\n"	"List applicable patches for Bugzilla issues."))
     .option(_(    "--cve[=#]"			"\n"	"List applicable patches for CVE issues."))
     .option(_(    "--issues[=STRING]"		"\n"	"Look for issues matching the specified string."))
@@ -3096,7 +3115,7 @@ void Zypper::processCommandOptions()
     .option(_("-a, --all"			"\n"	"List all patches, not only applicable ones."))
     .option_WITHout_OPTIONAL
     .option(_("-r, --repo <ALIAS|#|URI>"	"\n"	"List only patches from the specified repository."))
-    ;
+#endif
     break;
   }
 
@@ -3343,10 +3362,16 @@ void Zypper::processCommandOptions()
     _("Display stats about applicable patches. The command returns 100 if needed patches were found, 101 if there is at least one needed security patch.")
     )
     .optionSectionCommandOptions()
-    .option(_("-r, --repo <ALIAS|#|URI>"	"\n"	"Check for patches only in the specified repository."))
-    .option(_("--updatestack-only"		"\n"	"Check only for patches which affect the package management itself."))
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
+             _("Check for patches only in the specified repository.") )
+    .option( "--updatestack-only",	// translators: --updatestack-only
+             _("Check only for patches which affect the package management itself.") )
     .option_WITHout_OPTIONAL
     ;
+#if 0
+    .option(_("-r, --repo <ALIAS|#|URI>"	"\n"	"Check for patches only in the specified repository."))
+    .option(_("--updatestack-only"		"\n"	"Check only for patches which affect the package management itself."))
+#endif
     break;
   }
 
