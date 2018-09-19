@@ -771,6 +771,114 @@ void print_main_help( Zypper & zypper )
 
   ///////////////////////////////////////////////////////////////////
   .gMainCommands()
+
+  .gOption( "help, ?",	// translators: command summary: help, ?
+            _("Print help.") )
+  .gOption( "shell, sh",	// translators: command summary: shell, sh
+            _("Accept multiple commands at once.") )
+
+  .gSection( _("Repository Management:") )
+  .gOption( "repos, lr",	// translators: command summary: repos, lr
+            _("List all defined repositories.") )
+  .gOption( "addrepo, ar",	// translators: command summary: addrepo, ar
+            _("Add a new repository.") )
+  .gOption( "removerepo, rr",	// translators: command summary: removerepo, rr
+            _("Remove specified repository.") )
+  .gOption( "renamerepo, nr",	// translators: command summary: renamerepo, nr
+            _("Rename specified repository.") )
+  .gOption( "modifyrepo, mr",	// translators: command summary: modifyrepo, mr
+            _("Modify specified repository.") )
+  .gOption( "refresh, ref",	// translators: command summary: refresh, ref
+            _("Refresh all repositories.") )
+  .gOption( "clean",	// translators: command summary: clean
+            _("Clean local caches.") )
+
+  .gSection( _("Service Management:") )
+  .gOption( "services, ls",	// translators: command summary: services, ls
+            _("List all defined services.") )
+  .gOption( "addservice, as",	// translators: command summary: addservice, as
+            _("Add a new service.") )
+  .gOption( "modifyservice, ms",	// translators: command summary: modifyservice, ms
+            _("Modify specified service.") )
+  .gOption( "removeservice, rs",	// translators: command summary: removeservice, rs
+            _("Remove specified service.") )
+  .gOption( "refresh-services, refs",	// translators: command summary: refresh-services, refs
+            _("Refresh all services.") )
+
+  .gSection( _("Software Management:") )
+  .gOption( "install, in",	// translators: command summary: install, in
+            _("Install packages.") )
+  .gOption( "remove, rm",	// translators: command summary: remove, rm
+            _("Remove packages.") )
+  .gOption( "verify, ve",	// translators: command summary: verify, ve
+            _("Verify integrity of package dependencies.") )
+  .gOption( "source-install, si",	// translators: command summary: source-install, si
+            _("Install source packages and their build dependencies.") )
+  .gOption( "install-new-recommends, inr",	// translators: command summary: install-new-recommends, inr
+            _("Install newly added packages recommended by installed packages.") )
+
+  .gSection( _("Update Management:") )
+  .gOption( "update, up",	// translators: command summary: update, up
+            _("Update installed packages with newer versions.") )
+  .gOption( "list-updates, lu",	// translators: command summary: list-updates, lu
+            _("List available updates.") )
+  .gOption( "patch",	// translators: command summary: patch
+            _("Install needed patches.") )
+  .gOption( "list-patches, lp",	// translators: command summary: list-patches, lp
+            _("List needed patches.") )
+  .gOption( "dist-upgrade, dup",	// translators: command summary: dist-upgrade, dup
+            _("Perform a distribution upgrade.") )
+  .gOption( "patch-check, pchk",	// translators: command summary: patch-check, pchk
+            _("Check for patches.") )
+
+  .gSection( _("Querying:") )
+  .gOption( "search, se",	// translators: command summary: search, se
+            _("Search for packages matching a pattern.") )
+  .gOption( "info, if",	// translators: command summary: info, if
+            _("Show full information for specified packages.") )
+  .gOption( "patch-info",	// translators: command summary: patch-info
+            _("Show full information for specified patches.") )
+  .gOption( "pattern-info",	// translators: command summary: pattern-info
+            _("Show full information for specified patterns.") )
+  .gOption( "product-info",	// translators: command summary: product-info
+            _("Show full information for specified products.") )
+  .gOption( "patches, pch",	// translators: command summary: patches, pch
+            _("List all available patches.") )
+  .gOption( "packages, pa",	// translators: command summary: packages, pa
+            _("List all available packages.") )
+  .gOption( "patterns, pt",	// translators: command summary: patterns, pt
+            _("List all available patterns.") )
+  .gOption( "products, pd",	// translators: command summary: products, pd
+            _("List all available products.") )
+  .gOption( "what-provides, wp",	// translators: command summary: what-provides, wp
+            _("List packages providing specified capability.") )
+
+  .gSection( _("Package Locks:") )
+  .gOption( "addlock, al",	// translators: command summary: addlock, al
+            _("Add a package lock.") )
+  .gOption( "removelock, rl",	// translators: command summary: removelock, rl
+            _("Remove a package lock.") )
+  .gOption( "locks, ll",	// translators: command summary: locks, ll
+            _("List current package locks.") )
+  .gOption( "cleanlocks, cl",	// translators: command summary: cleanlocks, cl
+            _("Remove unused locks.") )
+
+  .gSection( _("Other Commands:") )
+  .gOption( "versioncmp, vcmp",	// translators: command summary: versioncmp, vcmp
+            _("Compare two version strings.") )
+  .gOption( "targetos, tos",	// translators: command summary: targetos, tos
+            _("Print the target operating system ID string.") )
+  .gOption( "licenses",	// translators: command summary: licenses
+            _("Print report about licenses and EULAs of installed packages.") )
+  .gOption( "download",	// translators: command summary: download
+            _("Download rpms specified on the commandline to a local directory.") )
+  .gOption( "source-download",	// translators: command summary: source-download
+            _("Download source rpms for all installed packages to a local directory.") )
+
+  .gSection( _("Subcommands:") )
+  .gOption( "subcommand",	// translators: command summary: subcommand
+            _("Lists available subcommands.") )
+
   ;
 
   zypper.out().info( globalHelp, Out::QUIET );
