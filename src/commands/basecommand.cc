@@ -29,7 +29,15 @@ BaseCommandCondition::~BaseCommandCondition()
 
 }
 
-ZypperBaseCommand::ZypperBaseCommand(const std::list<std::string> &commandAliases_r, const std::string &synopsis_r,
+ZypperBaseCommand::ZypperBaseCommand(const std::vector<std::string> &commandAliases_r, const std::string &synopsis_r,
+                                     const std::string &summary_r, const std::string &description_r,
+                                     SetupSystemFlags systemInitFlags_r)
+  : ZypperBaseCommand( commandAliases_r, std::vector<std::string>{synopsis_r}, summary_r, description_r, systemInitFlags_r )
+{
+
+}
+
+ZypperBaseCommand::ZypperBaseCommand(const std::vector<std::string> &commandAliases_r, const std::vector<std::string> &synopsis_r,
                                      const std::string &summary_r, const std::string &description_r,
                                      SetupSystemFlags systemInitFlags_r)
   : _commandAliases ( commandAliases_r ),
@@ -57,7 +65,7 @@ void ZypperBaseCommand::reset()
   doReset();
 }
 
-std::list<std::string> ZypperBaseCommand::command() const
+std::vector<std::string> ZypperBaseCommand::command() const
 {
   return _commandAliases;
 }
@@ -67,7 +75,7 @@ std::string ZypperBaseCommand::summary() const
   return _summary;
 }
 
-std::string ZypperBaseCommand::synopsis() const
+std::vector<std::string> ZypperBaseCommand::synopsis() const
 {
   return _synopsis;
 }
@@ -174,8 +182,9 @@ int ZypperBaseCommand::run(Zypper &zypp, const std::vector<std::string> &positio
 std::string ZypperBaseCommand::help()
 {
   CommandHelpFormater help;
-  help.synopsis(synopsis())
-      .description(description());
+  for ( const std::string &syn : synopsis() )
+    help.synopsis(syn);
+  help.description(description());
 
   auto renderOption = [&help]( const ZyppFlags::CommandOption &opt ) {
     std::string optTxt;
