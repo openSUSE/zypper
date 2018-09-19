@@ -691,6 +691,91 @@ Out & Zypper::out()
 
 void print_main_help( Zypper & zypper )
 {
+#if 0
+  static std::string globalHelp = CommandHelpFormater()
+  ///////////////////////////////////////////////////////////////////
+  .gMainUsage()
+
+  ///////////////////////////////////////////////////////////////////
+  .gMainGlobalOpts()
+
+  .gOption( "--help, -h",	// translators: --help, -h
+	    _("Help.") )
+  .gOption( "--version, -V",	// translators: --version, -V
+	    _("Output the version number.") )
+  .gOption( "--promptids",	// translators: --promptids
+	    _("Output a list of zypper's user prompts.") )
+  .gOption( "--config, -c <FILE>",	// translators: --config, -c <FILE>
+	    _("Use specified config file instead of the default.") )
+  .gOption( "--userdata <STRING>",	// translators: --userdata <STRING>
+	    _("User defined transaction id used in history and plugins.") )
+  .gOption( "--quiet, -q",	// translators: --quiet, -q
+	    _("Suppress normal output, print only error messages.") )
+  .gOption( "--verbose, -v",	// translators: --verbose, -v
+	    _("Increase verbosity.") )
+  .gOption( "--color" )
+  .gOption( "--no-color",	// translators: --color / --no-color
+	    _("Whether to use colors in output if tty supports it.") )
+  .gOption( "--no-abbrev, -A",	// translators: --no-abbrev, -A
+	    _("Do not abbreviate text in tables.") )
+  .gOption( "--table-style, -s",	// translators: --table-style, -s
+	    _("Table style (integer).") )
+  .gOption( "--non-interactive, -n",	// translators: --non-interactive, -n
+	    _("Do not ask anything, use default answers automatically.") )
+  .gOption( "--non-interactive-include-reboot-patches",	// translators: --non-interactive-include-reboot-patches
+	    _("Do not treat patches as interactive, which have the rebootSuggested-flag set.") )
+  .gOption( "--xmlout, -x",	// translators: --xmlout, -x
+	    _("Switch to XML output.") )
+  .gOption( "--ignore-unknown, -i",	// translators: --ignore-unknown, -i
+	    _("Ignore unknown packages.") )
+
+  .gSection()
+  .gOption( "--reposd-dir, -D <DIR>",	// translators: --reposd-dir, -D <DIR>
+	    _("Use alternative repository definition file directory.") )
+  .gOption( "--cache-dir, -C <DIR>",	// translators: --cache-dir, -C <DIR>
+	    _("Use alternative directory for all caches.") )
+  .gOption( "--raw-cache-dir <DIR>",	// translators: --raw-cache-dir <DIR>
+	    _("Use alternative raw meta-data cache directory.") )
+  .gOption( "--solv-cache-dir <DIR>",	// translators: --solv-cache-dir <DIR>
+	    _("Use alternative solv file cache directory.") )
+  .gOption( "--pkg-cache-dir <DIR>",	// translators: --pkg-cache-dir <DIR>
+	    _("Use alternative package cache directory.") )
+
+  .gSection( _("Repository Options:") )
+  .gOption( "--no-gpg-checks",	// translators: --no-gpg-checks
+	    _("Ignore GPG check failures and continue.") )
+  .gOption( "--gpg-auto-import-keys",	// translators: --gpg-auto-import-keys
+	    _("Automatically trust and import new repository signing keys.") )
+  .gOption( "--plus-repo, -p <URI>",	// translators: --plus-repo, -p <URI>
+	    _("Use an additional repository.") )
+  .gOption( "--plus-content <TAG>",	// translators: --plus-content <TAG>
+	    _("Additionally use disabled repositories providing a specific keyword. Try '--plus-content debug' to enable repos indicating to provide debug packages.") )
+  .gOption( "--disable-repositories",	// translators: --disable-repositories
+	    _("Do not read meta-data from repositories.") )
+  .gOption( "--no-refresh",	// translators: --no-refresh
+	    _("Do not refresh the repositories.") )
+  .gOption( "--no-cd",	// translators: --no-cd
+	    _("Ignore CD/DVD repositories.") )
+  .gOption( "--no-remote",	// translators: --no-remote
+	    _("Ignore remote repositories.") )
+  .gOption( "--releasever",	// translators: --releasever
+	    _("Set the value of $releasever in all .repo files (default: distribution version)") )
+
+  .gSection( _("Target Options:") )
+  .gOption( "--root, -R <DIR>",	// translators: --root, -R <DIR>
+	    _("Operate on a different root directory.") )
+  .gOption( "--installroot <DIR>",	// translators: --installroot <DIR>
+	    _("Operate on a different root directory, but share repositories with the host.") )
+  .gOption( "--disable-system-resolvables",	// translators: --disable-system-resolvables
+	    _("Do not read installed packages.") )
+
+  ///////////////////////////////////////////////////////////////////
+  .gMainCommands()
+  ;
+
+  zypper.out().info( globalHelp, Out::QUIET );
+#endif
+
   static std::string help_global_options = _("  Global Options:\n"
     "\t--help, -h\t\tHelp.\n"
     "\t--version, -V\t\tOutput the version number.\n"
