@@ -506,13 +506,17 @@ namespace {
       case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
       case ZypperCommand::VERIFY_e:
       case ZypperCommand::REMOVE_e:
+#if 0
+      // bsc#1108999: Quick fix: Allow repo commands on transactional-server (/etc is rw)
       case ZypperCommand::ADD_REPO_e:
       case ZypperCommand::REMOVE_REPO_e:
       case ZypperCommand::MODIFY_REPO_e:
       case ZypperCommand::RENAME_REPO_e:
       case ZypperCommand::ADD_SERVICE_e:
       case ZypperCommand::REMOVE_SERVICE_e:
-      case ZypperCommand::MODIFY_SERVICE_e: {
+      case ZypperCommand::MODIFY_SERVICE_e:
+#endif
+      {
 
         if ( zypper.cOpts().count("dry-run") )
           return true;
