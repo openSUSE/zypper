@@ -2370,22 +2370,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::MODIFY_SERVICE_e:
-  {
-    static struct option service_modify_options[] = {
-      {"help", no_argument, 0, 'h'},
-      ARG_SERVICE_PROP,
-      /* LEGACY(ARG_SERVICE_PROP) prefers -f */	{"refresh",	no_argument,	0, 'r'},
-      /* LEGACY(ARG_SERVICE_PROP) prefers -F */	{"no-refresh",	no_argument,	0, 'R'},
-      ARG_REPO_SERVICE_COMMON_AGGREGATE,
-      {"ar-to-enable",  required_argument, 0, 'i'},
-      {"ar-to-disable", required_argument, 0, 'I'},
-      {"rr-to-enable",  required_argument, 0, 'j'},
-      {"rr-to-disable", required_argument, 0, 'J'},
-      {"cl-to-enable",  no_argument, 0, 'k'},
-      {"cl-to-disable", no_argument, 0, 'K'},
-      {0, 0, 0, 0}
-    };
 #if 0
     _(
       // translators: %s is "--all" and "--all"
@@ -2414,41 +2398,7 @@ void Zypper::processCommandOptions()
       "-t, --remote                   Apply changes to all remote services.\n"
       "-m, --medium-type <type>       Apply changes to services of specified type.\n"
     )
-#endif
-    specific_options = service_modify_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("modifyservice (ms) <OPTIONS> <ALIAS|#|URI>")
-    )
-    .synopsis( str::Format(	// translators: command synopsis; do not translate lowercase words
-    _("modifyservice (ms) <OPTIONS> <%1%>") ) % "--all|--remote|--local|--medium-type"
-    )
-    .description( str::Format(// translators: command description
-    _("Modify properties of services specified by alias, number, or URI, or by the '%1%' aggregate options.") ) % "--all, --remote, --local, --medium-type"
-    )
-    .optionSectionCommandOptions()
-    .option_SERVICE_PROP
-    .gap()
-    .option( "-a, --all",			_("Apply changes to all services.") )
-    .option( "-l, --local",			_("Apply changes to all local services.") )
-    .option( "-t, --remote",			_("Apply changes to all remote services.") )
-    .option( "-m, --medium-type <TYPE>",	_("Apply changes to services of specified type.") )
-    .gap()
-    .option( "-i, --ar-to-enable <ALIAS>",	_("Add a RIS service repository to enable.") )
-    .option( "-I, --ar-to-disable <ALIAS>",	_("Add a RIS service repository to disable.") )
-    .option( "-j, --rr-to-enable <ALIAS>",	_("Remove a RIS service repository to enable.") )
-    .option( "-J, --rr-to-disable <ALIAS>",	_("Remove a RIS service repository to disable.") )
-    .option( "-k, --cl-to-enable",		_("Clear the list of RIS repositories to enable.") )
-    .option( "-K, --cl-to-disable",		_("Clear the list of RIS repositories to disable.") )
-    // Legacy Options:
-    .legacyOptionSection()
-    .legacyOption( "-r", "-f" )
-    .legacyOption( "-R", "-F" )
-    ;
-    break;
-  }
 
-#if 0
     ZypperCommand::LIST_SERVICES_e:
     _command_help = _(
       "services (ls) [OPTIONS]\n"
@@ -4367,62 +4317,6 @@ void Zypper::doCommand()
     break;
   }
 
-  case ZypperCommand::MODIFY_SERVICE_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for modifying system services.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    bool non_alias = copts.count("all") || copts.count("local") || copts.count("remote") || copts.count("medium-type");
-
-    if ( _arguments.size() < 1 && !non_alias )
-    {
-      // translators: aggregate option is e.g. "--all". This message will be
-      // followed by ms command help text which will explain it
-      out().error(_("Alias or an aggregate option is required."));
-      ERR << "No alias argument given." << endl;
-      out().info( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-    // too many arguments
-    if ( _arguments.size() > 1 || ( _arguments.size() > 0 && non_alias ) )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    initRepoManager();
-
-    if ( non_alias )
-    {
-      modify_services_by_option( *this );
-    }
-    else
-    {
-      repo::RepoInfoBase_Ptr srv;
-      if ( match_service( *this, _arguments[0], srv ) )
-      {
-        if ( dynamic_pointer_cast<ServiceInfo>(srv) )
-          modify_service( *this, srv->alias() );
-        else
-          modify_repo( *this, srv->alias() );
-      }
-      else
-      {
-        out().error( str::Format(_("Service '%s' not found.")) % _arguments[0] );
-        ERR << "Service " << _arguments[0] << " not found" << endl;
-      }
-    }
-
-    break;
-  }
-
   // --------------------------( repo list )----------------------------------
 
   case ZypperCommand::LIST_REPOS_e:
@@ -4457,7 +4351,7 @@ void Zypper::doCommand()
     try
     {
 
-      RepoServiceCommonOptions opts;
+      RepoServiceCommonOptions opts ( OptCommandCtx::RepoContext );
       opts.fillFromCopts( *this );
 
       unsigned prio = priority_from_copts(*this);
@@ -4622,7 +4516,7 @@ void Zypper::doCommand()
       for_(it, _arguments.begin(), _arguments.end())
       {
         repo::RepoInfoBase_Ptr s;
-        if (match_service(*this, *it, s))
+        if (match_service(*this, *it, s, copts.count("loose-auth"), copts.count("loose-query")))
         {
           to_remove.insert(s);
         }
@@ -4733,7 +4627,16 @@ void Zypper::doCommand()
     initRepoManager();
     if ( aggregate )
     {
-      modify_repos_by_option( *this );
+      RepoProperties props;
+      props.fillFromCopts( *this );
+
+      RepoServiceCommonSelectOptions selectOpts ( OptCommandCtx::RepoContext );
+      selectOpts.fillFromCopts( * this );
+
+      RepoServiceCommonOptions cProps ( OptCommandCtx::RepoContext );
+      cProps.fillFromCopts( *this );
+
+      modify_repos_by_option( *this, selectOpts, cProps, props );
     }
     else
     {
@@ -4742,7 +4645,13 @@ void Zypper::doCommand()
         RepoInfo r;
         if ( match_repo(*this,*arg,&r) )
         {
-          modify_repo( *this, r.alias() );
+          RepoProperties props;
+          props.fillFromCopts( *this );
+
+          RepoServiceCommonOptions cProps ( OptCommandCtx::RepoContext );
+          cProps.fillFromCopts( *this );
+
+          modify_repo( *this, r.alias(), cProps, props );
         }
         else
         {

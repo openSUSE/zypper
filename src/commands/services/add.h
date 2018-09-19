@@ -28,7 +28,7 @@ protected:
 
 private:
   bool _isService = true;
-  RepoServiceCommonOptions _commonProps{*this};
+  RepoServiceCommonOptions _commonProps{ OptCommandCtx::ServiceContext, *this};
 };
 
 #endif

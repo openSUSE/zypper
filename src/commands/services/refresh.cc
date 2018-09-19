@@ -33,7 +33,7 @@ void get_services( Zypper & zypper, const T & begin, const T & end,
   {
     repo::RepoInfoBase_Ptr service;
 
-    if ( !match_service( zypper, *it, service ) )
+    if ( !match_service( zypper, *it, service, false, false ) )
     {
       not_found.push_back( *it );
       continue;

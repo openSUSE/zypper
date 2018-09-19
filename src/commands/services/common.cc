@@ -41,7 +41,7 @@ ServiceList get_all_services( Zypper & zypper )
   return services;
 }
 
-bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & service_ptr )
+bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & service_ptr, bool looseAuth, bool looseQuery  )
 {
   ServiceList known = get_all_services( zypper );
   bool found = false;
@@ -62,11 +62,11 @@ bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & s
       if ( !found )
       {
         url::ViewOption urlview = url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
-        if ( zypper.cOpts().count("loose-auth") )
+        if ( looseAuth )//zypper.cOpts().count("loose-auth") )
         {
           urlview = urlview - url::ViewOptions::WITH_PASSWORD - url::ViewOptions::WITH_USERNAME;
         }
-        if ( zypper.cOpts().count("loose-query") )
+        if ( looseQuery ) //zypper.cOpts().count("loose-query") )
           urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
 
         ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*known_it);
