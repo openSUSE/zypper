@@ -39,7 +39,8 @@ namespace zypp { using repo::RepoInfoBase_Ptr; }
 typedef std::list<RepoInfoBase_Ptr> ServiceList;
 typedef std::set<RepoInfo, RepoInfoAliasComparator> RepoInfoSet;
 
-static RepoInfoSet collect_repos_by_option( Zypper & zypper );
+static RepoInfoSet collect_repos_by_option( Zypper & zypper, const RepoServiceCommonSelectOptions &selectOpts );
+
 
 // ----------------------------------------------------------------------------
 
@@ -1960,7 +1961,9 @@ void remove_repo( Zypper & zypper, const RepoInfo & repoinfo )
 // ----------------------------------------------------------------------------
 void remove_repos_by_option(Zypper &zypper)
 {
-  RepoInfoSet repos = collect_repos_by_option( zypper );
+  RepoServiceCommonSelectOptions selOpts ( OptCommandCtx::RepoContext );
+  selOpts.fillFromCopts( zypper );
+  RepoInfoSet repos = collect_repos_by_option( zypper, selOpts );
   for ( const RepoInfo &repo : repos )
   {
     remove_repo( zypper, repo );
@@ -2006,14 +2009,15 @@ void rename_repo( Zypper & zypper, const std::string & alias, const std::string 
 }
 
 // ----------------------------------------------------------------------------
-RepoInfoSet collect_repos_by_option( Zypper & zypper )
+
+RepoInfoSet collect_repos_by_option( Zypper & zypper, const RepoServiceCommonSelectOptions &selectOpts )
 {
   RepoManager & manager( zypper.repoManager() );
 
   const std::list<RepoInfo> & repos( manager.knownRepositories() );
   RepoInfoSet toModify;
 
-  if ( copts.count("all") )
+  if ( selectOpts._all )
   {
     std::for_each( repos.begin(), repos.end(), [&toModify] (const RepoInfo &info) { toModify.insert( info ); } );
   }
@@ -2021,24 +2025,24 @@ RepoInfoSet collect_repos_by_option( Zypper & zypper )
   {
     std::list<std::function<bool (const RepoInfo &)>> filterList;
 
-    if ( copts.count("local") )
+    if ( selectOpts._local )
     {
       filterList.push_back([]( const RepoInfo &info ) {
         return ( !info.baseUrlsEmpty() && !info.url().schemeIsDownloading() );
       });
     }
 
-    if ( copts.count("remote") )
+    if ( selectOpts._remote )
     {
       filterList.push_back([]( const RepoInfo &info ) {
         return ( !info.baseUrlsEmpty() && info.url().schemeIsDownloading() );
       });
     }
 
-    if ( copts.count("medium-type") )
+    if ( selectOpts._mediumTypes.size() )
     {
-      filterList.push_back([]( const RepoInfo &info ) {
-        const std::list<std::string> & pars = copts["medium-type"];
+      filterList.push_back([ &selectOpts ]( const RepoInfo &info ) {
+        const std::vector<std::string> & pars = selectOpts._mediumTypes;
         return ( !info.baseUrlsEmpty() && std::find( pars.begin(), pars.end(), info.url().getScheme() ) != pars.end() );
       });
     }
@@ -2058,34 +2062,36 @@ RepoInfoSet collect_repos_by_option( Zypper & zypper )
   return toModify;
 }
 
-void modify_repos_by_option( Zypper & zypper )
+void modify_repos_by_option( Zypper & zypper, const RepoServiceCommonSelectOptions &selectOpts, const RepoServiceCommonOptions &commonOpts, const RepoProperties &repoProps  )
 {
-  RepoInfoSet toModify = collect_repos_by_option( zypper );
+  RepoInfoSet toModify = collect_repos_by_option( zypper, selectOpts );
   for_( it, toModify.begin(), toModify.end() )
   {
-    modify_repo( zypper, it->alias() );
+    modify_repo( zypper, it->alias(), commonOpts, repoProps );
   }
 }
 
 
 // ----------------------------------------------------------------------------
 
-void modify_repo( Zypper & zypper, const std::string & alias )
+
+
+void modify_repo( Zypper & zypper, const std::string & alias, const RepoServiceCommonOptions &commonOpts, const RepoProperties &repoProps )
 {
   // enable/disable repo
-  TriBool enable = get_boolean_option( zypper, "enable", "disable" );
+  const TriBool &enable = commonOpts._enable;
   DBG << "enable = " << enable << endl;
 
   // autorefresh
-  TriBool autoref = get_boolean_option( zypper, "refresh", "no-refresh" );
+  const TriBool &autoref = commonOpts._enableAutoRefresh;
   DBG << "autoref = " << autoref << endl;
 
-  TriBool keepPackages = get_boolean_option( zypper, "keep-packages", "no-keep-packages" );
+  const TriBool &keepPackages = repoProps._keepPackages;
   DBG << "keepPackages = " << keepPackages << endl;
 
-  RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
+  const RepoInfo::GpgCheck &gpgCheck = repoProps._gpgCheck;
 
-  unsigned prio = priority_from_copts( zypper );
+  unsigned prio = repoProps._priority;
 
   try
   {
@@ -2135,14 +2141,9 @@ void modify_repo( Zypper & zypper, const std::string & alias )
       }
     }
 
-    std::string name;
-    parsed_opts::const_iterator tmp1;
-    if ( (tmp1 = zypper.cOpts().find("name")) != zypper.cOpts().end() )
-    {
-      name = *tmp1->second.begin();
-      if ( !name.empty() )
-        repo.setName( name );
-    }
+    const std::string &name = commonOpts._name;
+    if ( !name.empty() )
+      repo.setName( name );
 
     if ( changed_enabled || changed_autoref || changed_prio
       || changed_keeppackages || changed_gpgcheck || !name.empty() )
@@ -2289,253 +2290,6 @@ void checkIfToRefreshPluginServices(Zypper & zypper, RepoManager::RefreshService
 }
 
 // ---------------------------------------------------------------------------
-
-void modify_service( Zypper & zypper, const std::string & alias )
-{
-  // enable/disable repo
-  TriBool enable = get_boolean_option( zypper,"enable", "disable" );
-  DBG << "enable = " << enable << endl;
-
-  // autorefresh
-  TriBool autoref = get_boolean_option( zypper,"refresh", "no-refresh" );
-  DBG << "autoref = " << autoref << endl;
-
-  try
-  {
-    RepoManager & manager = zypper.repoManager();
-    ServiceInfo srv( manager.getService( alias ) );
-
-    bool changed_enabled = false;
-    bool changed_autoref = false;
-
-    if ( !indeterminate(enable) )
-    {
-      if ( enable != srv.enabled() )
-        changed_enabled = true;
-      srv.setEnabled( enable );
-    }
-
-    if ( !indeterminate(autoref) )
-    {
-      if ( autoref != srv.autorefresh() )
-        changed_autoref = true;
-      srv.setAutorefresh( autoref );
-    }
-
-    std::string name;
-    parsed_opts::const_iterator tmp1;
-    if ( (tmp1 = zypper.cOpts().find("name")) != zypper.cOpts().end() )
-    {
-      name = *tmp1->second.begin();
-      srv.setName( name );
-    }
-
-    std::set<std::string> artoenable;
-    std::set<std::string> artodisable;
-    std::set<std::string> rrtoenable;
-    std::set<std::string> rrtodisable;
-
-    // RIS repos to enable
-    if ( zypper.cOpts().count("cl-to-enable") )
-    {
-      rrtoenable.insert( srv.reposToEnableBegin(), srv.reposToEnableEnd() );
-      srv.clearReposToEnable();
-    }
-    else
-    {
-      if ( (tmp1 = zypper.cOpts().find("ar-to-enable")) != zypper.cOpts().end() )
-        for_( rit, tmp1->second.begin(), tmp1->second.end() )
-        {
-          if ( !srv.repoToEnableFind( *rit ) )
-          {
-            srv.addRepoToEnable( *rit );
-            artoenable.insert( *rit );
-          }
-        }
-      if ( (tmp1 = zypper.cOpts().find("rr-to-enable")) != zypper.cOpts().end() )
-        for_( rit, tmp1->second.begin(), tmp1->second.end() )
-        {
-          if ( srv.repoToEnableFind( *rit ) )
-          {
-            srv.delRepoToEnable( *rit );
-            rrtoenable.insert( *rit );
-          }
-        }
-    }
-
-    // RIS repos to disable
-    if ( zypper.cOpts().count("cl-to-disable") )
-    {
-      rrtodisable.insert( srv.reposToDisableBegin(), srv.reposToDisableEnd() );
-      srv.clearReposToDisable();
-    }
-    else
-    {
-      if ( (tmp1 = zypper.cOpts().find("ar-to-disable")) != zypper.cOpts().end() )
-        for_( rit, tmp1->second.begin(), tmp1->second.end() )
-        {
-          if ( !srv.repoToDisableFind( *rit ) )
-          {
-            srv.addRepoToDisable( *rit );
-            artodisable.insert( *rit );
-          }
-        }
-      if ( (tmp1 = zypper.cOpts().find("rr-to-disable")) != zypper.cOpts().end() )
-        for_( rit, tmp1->second.begin(), tmp1->second.end() )
-        {
-          if  (srv.repoToDisableFind( *rit ) )
-          {
-            srv.delRepoToDisable( *rit );
-            rrtodisable.insert( *rit );
-          }
-        }
-    }
-
-    if ( changed_enabled
-      || changed_autoref
-      || !name.empty()
-      || !artoenable.empty()
-      || !artodisable.empty()
-      || !rrtoenable.empty()
-      || !rrtodisable.empty() )
-    {
-      manager.modifyService( alias, srv );
-
-      if ( changed_enabled )
-      {
-        if ( srv.enabled() )
-          zypper.out().info( str::Format(_("Service '%s' has been successfully enabled.")) % alias );
-        else
-          zypper.out().info( str::Format(_("Service '%s' has been successfully disabled.")) % alias );
-      }
-
-      if ( changed_autoref )
-      {
-        if ( srv.autorefresh() )
-          zypper.out().info( str::Format(_("Autorefresh has been enabled for service '%s'.")) % alias );
-        else
-          zypper.out().info( str::Format(_("Autorefresh has been disabled for service '%s'.")) % alias );
-      }
-
-      if ( !name.empty() )
-      {
-        zypper.out().info( str::Format(_("Name of service '%s' has been set to '%s'.")) % alias % name );
-      }
-
-      if ( !artoenable.empty() )
-      {
-        zypper.out().info( str::Format(PL_("Repository '%s' has been added to enabled repositories of service '%s'",
-					   "Repositories '%s' have been added to enabled repositories of service '%s'",
-					   artoenable.size()))
-	                   % str::join( artoenable.begin(), artoenable.end(), ", " ) % alias );
-      }
-      if ( !artodisable.empty() )
-      {
-        zypper.out().info( str::Format(PL_("Repository '%s' has been added to disabled repositories of service '%s'",
-					   "Repositories '%s' have been added to disabled repositories of service '%s'",
-					   artodisable.size()))
-			   % str::join( artodisable.begin(), artodisable.end(), ", " ) % alias );
-      }
-      if ( !rrtoenable.empty() )
-      {
-        zypper.out().info( str::Format(PL_("Repository '%s' has been removed from enabled repositories of service '%s'",
-					   "Repositories '%s' have been removed from enabled repositories of service '%s'",
-					   rrtoenable.size()))
-			   % str::join( rrtoenable.begin(), rrtoenable.end(), ", " ) % alias );
-      }
-      if ( !rrtodisable.empty())
-      {
-        zypper.out().info( str::Format(PL_("Repository '%s' has been removed from disabled repositories of service '%s'",
-					   "Repositories '%s' have been removed from disabled repositories of service '%s'",
-					   rrtodisable.size()))
-			   % str::join( rrtodisable.begin(), rrtodisable.end(), ", " ) % alias );
-      }
-    }
-    else
-    {
-      MIL << "Nothing to modify in '" << alias << "':" << srv << endl;
-      zypper.out().info( str::Format(_("Nothing to change for service '%s'.")) % alias );
-    }
-  }
-  catch ( const Exception & ex )
-  {
-    ERR << "Error while modifying the service:" << ex.asUserString() << endl;
-    zypper.out().error( ex, _("Error while modifying the service:"),
-			str::Format(_("Leaving service %s unchanged.")) % alias );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-  }
-}
-
-// ---------------------------------------------------------------------------
-
-void modify_services_by_option( Zypper & zypper )
-{
-  ServiceList known = get_all_services( zypper );
-  std::set<std::string> repos_to_modify;
-  std::set<std::string> services_to_modify;
-
-  if ( copts.count("all") )
-  {
-    for_( it, known.begin(), known.end() )
-    {
-      ServiceInfo_Ptr sptr = dynamic_pointer_cast<ServiceInfo>(*it);
-      if ( sptr )
-        modify_service( zypper, sptr->alias() );
-      else
-        modify_repo( zypper, (*it)->alias() );
-    }
-    return;
-  }
-
-  bool local = copts.count("local");
-  bool remote = copts.count("remote");
-  std::list<std::string> pars = copts["medium-type"];
-  std::set<std::string> schemes(pars.begin(), pars.end());
-
-  for_( it, known.begin(), known.end() )
-  {
-    ServiceInfo_Ptr sptr = dynamic_pointer_cast<ServiceInfo>(*it);
-    Url url;
-    if ( sptr )
-      url = sptr->url();
-    else
-    {
-      RepoInfo_Ptr rptr = dynamic_pointer_cast<RepoInfo>(*it);
-      if ( !rptr->baseUrlsEmpty() )
-        url = rptr->url();
-    }
-
-    if ( url.isValid() )
-    {
-      bool modify = false;
-      if ( local  && ! url.schemeIsDownloading() )
-        modify = true;
-
-      if ( !modify && remote && url.schemeIsDownloading() )
-        modify = true;
-
-      if ( !modify && schemes.find(url.getScheme()) != schemes.end() )
-        modify = true;
-
-      if ( modify )
-      {
-        std::string alias = (*it)->alias();
-        if ( sptr )
-          services_to_modify.insert( alias );
-        else
-          repos_to_modify.insert( alias );
-      }
-    }
-    else
-      WAR << "got invalid url: " << url.asString() << endl;
-  }
-
-  for_( it, services_to_modify.begin(), services_to_modify.end() )
-    modify_service( zypper, *it );
-
-  for_( it, repos_to_modify.begin(), repos_to_modify.end() )
-    modify_repo( zypper, *it );
-}
 
 // ---------------------------------------------------------------------------
 

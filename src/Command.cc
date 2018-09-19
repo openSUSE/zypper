@@ -40,6 +40,7 @@ namespace
       { ZypperCommand::CLEAN_LOCKS_e, std::make_shared<CleanLocksCmd>() },
       { ZypperCommand::LIST_SERVICES_e, std::make_shared<ListServicesCmd>() },
       { ZypperCommand::REFRESH_SERVICES_e, std::make_shared<RefreshServicesCmd>() },
+      { ZypperCommand::MODIFY_SERVICE_e, std::make_shared<ModifyServiceCmd>() },
       { ZypperCommand::ADD_SERVICE_e, std::make_shared<AddServiceCmd>() },
       { ZypperCommand::PS_e, std::make_shared<PSCommand>() }
     };
@@ -57,7 +58,7 @@ namespace
 
       //_t( ADD_SERVICE_e )	| "addservice"		| "as" | "service-add" | "sa";
       _t( REMOVE_SERVICE_e )	| "removeservice"	| "rs" | "service-delete" | "sd";
-      _t( MODIFY_SERVICE_e )	| "modifyservice"	| "ms";
+      //_t( MODIFY_SERVICE_e )	| "modifyservice"	| "ms";
       //_t( LIST_SERVICES_e )	| "services"		| "ls" | "service-list" | "sl";
       //_t( REFRESH_SERVICES_e )	| "refresh-services"	| "refs";
 

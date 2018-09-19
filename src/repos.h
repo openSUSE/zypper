@@ -177,19 +177,13 @@ void rename_repo( Zypper & zypper, const std::string & alias, const std::string 
  *
  * \param alias repository alias
  */
-void modify_repo( Zypper & zypper, const std::string & alias );
-
-/**
- * Modify all repositories properties.
- *
- */
-void modify_all_repos( Zypper & zypper );
+void modify_repo( Zypper & zypper, const std::string & alias, const RepoServiceCommonOptions &commonOpts, const RepoProperties &repoProps );
 
 /**
  * Modify repositories which is matching filter options
  * like all, local, remote or medium-type
  */
-void modify_repos_by_option( Zypper & zypper );
+void modify_repos_by_option( Zypper & zypper, const RepoServiceCommonSelectOptions &selectOpts, const RepoServiceCommonOptions &commonOpts, const RepoProperties &repoProps  );
 
 void remove_service( Zypper & zypper, const ServiceInfo & service );
 

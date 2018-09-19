@@ -1,5 +1,7 @@
 #include "reposerviceoptionsets.h"
 #include "utils/flags/flagtypes.h"
+#include "utils/flags/zyppflags.h"
+#include "src/repos.h"
 #include "main.h"
 
 #include "utils/getopt.h"
@@ -7,16 +9,79 @@
 
 using namespace zypp;
 
+namespace {
+ZyppFlags::Value PriorityType(unsigned &target, const boost::optional<unsigned> &defValue)
+{
+  return ZyppFlags::Value (
+        [defValue]() -> boost::optional<std::string>{
+          if(defValue) {
+            return std::to_string(*defValue);
+          } else
+            return boost::optional<std::string>();
+        },
+
+        [&target]( const ZyppFlags::CommandOption &opt, const boost::optional<std::string> &in ) {
+          if (!in)
+            ZYPP_THROW(ZyppFlags::MissingArgumentException(opt.name));
+
+          int prio = -1;
+          safe_lexical_cast( *in, prio ); // try to make an int out of the string
+
+          if ( prio < 0 )
+          {
+            ZYPP_THROW(ZyppFlags::InvalidValueException(
+                         opt.name,
+                         *in,
+                         str::Format(_("Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority.")) % *in));
+          }
+
+          target = ( prio ? unsigned(prio) : RepoInfo::defaultPriority() );
+        },
+        "PRIORITY"
+  );
+}
+
+ZyppFlags::Value GPGCheckType(RepoInfo::GpgCheck &target, RepoInfo::GpgCheck valueIfSeen)
+{
+  return ZyppFlags::Value (
+        ZyppFlags::noDefaultValue,
+        [&target, valueIfSeen]( const ZyppFlags::CommandOption &, const boost::optional<std::string> & ) {
+          target = valueIfSeen;
+        }
+  );
+}
+
+}
+
+RepoServiceCommonOptions::RepoServiceCommonOptions(OptCommandCtx ctx)
+  : _cmdContext(ctx)
+{ }
+
+RepoServiceCommonOptions::RepoServiceCommonOptions(OptCommandCtx ctx, ZypperBaseCommand &parent)
+  : BaseCommandOptionSet(parent),
+    _cmdContext(ctx)
+{ }
+
 std::vector<ZyppFlags::CommandGroup> RepoServiceCommonOptions::options()
 {
   return {
     {
       {
-        {"name",   'n', ZyppFlags::RequiredArgument, ZyppFlags::StringType( &_name, boost::optional<const char *>(), "NAME"), _("Set a descriptive name for the service.") },
-        {"enable", 'e', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enable, ZyppFlags::StoreTrue, TriBool( true ) ), _("Enable a disabled service.") },
-        {"disable", 'd', ZyppFlags::NoArgument, ZyppFlags::TriBoolType(_enable, ZyppFlags::StoreFalse, TriBool( false ) ), _("Disable the service (but don't remove it).")},
-        {"refresh", 'f', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enableAutoRefresh, ZyppFlags::StoreTrue, TriBool( true ) ), _("Enable auto-refresh of the service.") },
-        {"no-refresh", 'F', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enableAutoRefresh, ZyppFlags::StoreFalse, TriBool( false ) ), _("Disable auto-refresh of the service.") }
+        {"name",   'n', ZyppFlags::RequiredArgument, ZyppFlags::StringType( &_name, boost::optional<const char *>(), "NAME"),
+              _cmdContext == OptCommandCtx::ServiceContext ? _("Set a descriptive name for the service.") : _("Set a descriptive name for the repository.")
+        },
+        {"enable", 'e', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enable, ZyppFlags::StoreTrue, TriBool( true ) ),
+              _cmdContext == OptCommandCtx::ServiceContext ? _("Enable a disabled service.") : _("Enable a disabled repository.")
+        },
+        {"disable", 'd', ZyppFlags::NoArgument, ZyppFlags::TriBoolType(_enable, ZyppFlags::StoreFalse, TriBool( false ) ),
+              _cmdContext == OptCommandCtx::ServiceContext ? _("Disable the service (but don't remove it).") : _("Disable the repository (but don't remove it).")
+        },
+        {"refresh", 'f', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enableAutoRefresh, ZyppFlags::StoreTrue, TriBool( true ) ),
+              _cmdContext == OptCommandCtx::ServiceContext ? _("Enable auto-refresh of the service.") : _("Enable auto-refresh of the repository.")
+        },
+        {"no-refresh", 'F', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enableAutoRefresh, ZyppFlags::StoreFalse, TriBool( false ) ),
+              _cmdContext == OptCommandCtx::ServiceContext ? _("Disable auto-refresh of the service.") : _("Disable auto-refresh of the repository.")
+        }
       }
     }
   };
@@ -38,4 +103,83 @@ void RepoServiceCommonOptions::fillFromCopts( Zypper &zypper )
 
   _enable = get_boolean_option( zypper, "enable", "disable" );
   _enableAutoRefresh = get_boolean_option( zypper, "refresh", "no-refresh" );
+}
+
+RepoServiceCommonSelectOptions::RepoServiceCommonSelectOptions(OptCommandCtx ctx)
+  : _cmdContext(ctx)
+{ }
+
+RepoServiceCommonSelectOptions::RepoServiceCommonSelectOptions(OptCommandCtx ctx, ZypperBaseCommand &parent)
+  : BaseCommandOptionSet(parent),
+    _cmdContext(ctx)
+{ }
+
+std::vector<ZyppFlags::CommandGroup> RepoServiceCommonSelectOptions::options()
+{
+  return {{{
+      {"all", 'a', ZyppFlags::NoArgument, ZyppFlags::BoolType( &_all, ZyppFlags::StoreTrue, _all),
+              _cmdContext == OptCommandCtx::ServiceContext ? _("Apply changes to all services.") : _("Apply changes to all repositories.")
+      },
+      {"local", 'l', ZyppFlags::NoArgument, ZyppFlags::BoolType( &_local, ZyppFlags::StoreTrue, _local),
+              _cmdContext == OptCommandCtx::ServiceContext ?  _("Apply changes to all local services.") : _("Apply changes to all local repositories.")
+      },
+      {"remote", 't', ZyppFlags::NoArgument, ZyppFlags::BoolType( &_remote, ZyppFlags::StoreTrue, _remote),
+              _cmdContext == OptCommandCtx::ServiceContext ?  _("Apply changes to all remote services.") : _("Apply changes to all remote repositories.")
+      },
+      {"medium-type", 'm', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable, ZyppFlags::StringVectorType( &_mediumTypes, "TYPE"),
+              _cmdContext == OptCommandCtx::ServiceContext ?  _("Apply changes to services of specified type.") : _("Apply changes to repositories of specified type.")
+      }
+  }}};
+}
+
+void RepoServiceCommonSelectOptions::reset()
+{
+  _all    = false;
+  _local  = false;
+  _remote = false;
+  _mediumTypes.clear();
+}
+
+void RepoServiceCommonSelectOptions::fillFromCopts(Zypper &zypper)
+{
+  reset();
+  _all    = copts.count("all");
+  _local  = copts.count("local");
+  _remote = copts.count("remote");
+  _mediumTypes.insert( _mediumTypes.begin(), copts["medium-type"].begin(), copts["medium-type"].end());
+}
+
+
+std::vector<ZyppFlags::CommandGroup> RepoProperties::options()
+{
+  return {{{
+        { "priority", 'p', ZyppFlags::RequiredArgument, PriorityType( _priority, _priority ), _("Set priority of the repository.") },
+        { "keep-packages", 'k', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _keepPackages, ZyppFlags::StoreTrue, TriBool( true ) ), _("Enable RPM files caching.") },
+        { "no-keep-packages", 'K', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _keepPackages, ZyppFlags::StoreFalse, TriBool( false ) ), _("Disable RPM files caching.") },
+        { "gpgcheck", 'g', ZyppFlags::NoArgument, GPGCheckType( _gpgCheck, RepoInfo::GpgCheck::On ), _("Enable GPG check for this repository.") },
+        { "gpgcheck-strict", '\0', ZyppFlags::NoArgument, GPGCheckType( _gpgCheck, RepoInfo::GpgCheck::Strict ), _("Enable strict GPG check for this repository.") },
+        { "gpgcheck-allow-unsigned", '\0', ZyppFlags::NoArgument, GPGCheckType( _gpgCheck, RepoInfo::GpgCheck::AllowUnsigned ), str::Format(_("Short hand for '%1%'.") ) % "--gpgcheck-allow-unsigned-repo --gpgcheck-allow-unsigned-package" },
+        { "gpgcheck-allow-unsigned-repo", '\0', ZyppFlags::NoArgument, GPGCheckType( _gpgCheck, RepoInfo::GpgCheck::AllowUnsignedRepo ), _("Enable GPG check but allow the repository metadata to be unsigned.") },
+        { "gpgcheck-allow-unsigned-package", '\0', ZyppFlags::NoArgument, GPGCheckType( _gpgCheck, RepoInfo::GpgCheck::AllowUnsignedPackage ), _("Enable GPG check but allow installing unsigned packages from this repository.") },
+        { "no-gpgcheck", 'G', ZyppFlags::NoArgument, GPGCheckType( _gpgCheck, RepoInfo::GpgCheck::Off ), _("Disable GPG check for this repository.") },
+        { "default-gpgcheck", '\0', ZyppFlags::NoArgument, GPGCheckType( _gpgCheck, RepoInfo::GpgCheck::Default ), _("Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the default.") }
+      },{
+        //conflicting arguments
+        { "gpgcheck", "gpgcheck-strict", "gpgcheck-allow-unsigned", "gpgcheck-allow-unsigned-repo", "gpgcheck-allow-unsigned-package", "no-gpgcheck", "default-gpgcheck"}
+      }}};
+}
+
+void RepoProperties::reset()
+{
+  _priority = 0U;
+  _keepPackages = zypp::indeterminate;
+  _gpgCheck = zypp::RepoInfo::GpgCheck::indeterminate;
+}
+
+void RepoProperties::fillFromCopts(Zypper &zypper)
+{
+  reset();
+  _keepPackages = get_boolean_option( zypper, "keep-packages", "no-keep-packages" );
+  _gpgCheck = cli::gpgCheck( zypper );
+  _priority = priority_from_copts( zypper );
 }

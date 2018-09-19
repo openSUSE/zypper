@@ -29,7 +29,7 @@ typedef std::list<zypp::repo::RepoInfoBase_Ptr> ServiceList;
 
 ServiceList get_all_services( Zypper & zypper );
 
-bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & service_ptr );
+bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & service_ptr, bool looseAuth, bool looseQuery );
 bool refresh_service(Zypper & zypper, const ServiceInfo & service, RepoManager::RefreshServiceFlags flags_r = RepoManager::RefreshServiceFlags() );
 
 
