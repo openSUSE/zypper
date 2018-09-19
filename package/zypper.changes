@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Sep 19 17:43:24 CEST 2018 - ma@suse.de
+
+- Allow repo commands on transactional-server (bsc#1108999)
+- BuildRequires:  libzypp-devel >= 17.7.0 (dropped type application)
+- Unite askUserToAccept*Key report callback (fixes #196)
+- version 1.14.11
+
+-------------------------------------------------------------------
 Thu Sep  6 12:55:44 CEST 2018 - ma@suse.de
 
 - Always set error status if any nr of unknown repositories are
