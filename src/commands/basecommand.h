@@ -1,7 +1,7 @@
 #ifndef ZYPPER_COMMANDS_BASECOMMAND_INCLUDED
 #define ZYPPER_COMMANDS_BASECOMMAND_INCLUDED
 
-#include <list>
+#include <vector>
 #include <string>
 #include <memory>
 
@@ -73,8 +73,15 @@ class ZypperBaseCommand
 public:
   friend class BaseCommandOptionSet;
 
-  ZypperBaseCommand ( const std::list<std::string> &commandAliases_r = {},
+  ZypperBaseCommand ( const std::vector<std::string> &commandAliases_r = {},
                       const std::string &synopsis_r = std::string(),
+                      const std::string &summary_r = std::string(),
+                      const std::string &description_r = std::string(),
+                      SetupSystemFlags systemInitFlags_r = DefaultSetup
+  );
+
+  ZypperBaseCommand ( const std::vector<std::string> &commandAliases_r = {},
+                      const std::vector<std::string> &synopsis_r = {},
                       const std::string &summary_r = std::string(),
                       const std::string &description_r = std::string(),
                       SetupSystemFlags systemInitFlags_r = DefaultSetup
@@ -94,7 +101,7 @@ public:
    * Returns a list of command aliases that are accepted
    * on the command line
    */
-  virtual std::list<std::string> command () const;
+  virtual std::vector<std::string> command () const;
 
   /**
    * Returns the command summary, a one line description
@@ -108,7 +115,7 @@ public:
    * \example "list (ll) [options]"
    * \sa help
    */
-  virtual std::string synopsis () const;
+  virtual std::vector<std::string> synopsis () const;
 
   /**
    * Returns a short description of what the command does, this is
@@ -193,8 +200,8 @@ protected:
 private:
   std::vector<BaseCommandOptionSet *> _registeredOptionSets;
   bool _helpRequested = false;
-  std::list<std::string> _commandAliases;
-  std::string _synopsis;
+  std::vector<std::string> _commandAliases;
+  std::vector<std::string> _synopsis;
   std::string _summary;
   std::string _description;
   SetupSystemFlags _systemInitFlags;
