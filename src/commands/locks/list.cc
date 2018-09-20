@@ -226,8 +226,8 @@ std::string ListLocksCmd::summary() const
 
 std::string ListLocksCmd::synopsis() const
 {
-  // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-  return _("locks (ll) [options]");
+  // translators: command synopsis; do not translate lowercase words
+  return _("locks (ll) [OPTIONS]");
 }
 
 std::string ListLocksCmd::description() const
