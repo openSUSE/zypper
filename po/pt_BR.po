@@ -5325,21 +5325,21 @@ msgstr ""
 "do sistema. Se especificado três vezes, listará apenas os nomes de serviços "
 "do sistema associados."
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
 "Para cada serviço do sistema associado, imprima <formato> na saída padrão "
 "seguido de uma nova linha. Qualquer diretiva '%s' em <formato> é substituída "
 "pelo nome do serviço do sistema."
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
+msgid "Write debug output to file <PATH>."
 msgstr "Gravar saída de depuração no arquivo <caminho>."
 
 #. translators: command synopsis; do not translate lowercase words

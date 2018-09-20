@@ -5181,22 +5181,22 @@ msgstr ""
 "ムサービスに関連付けられたプロセスのみが表示されます。3回指定すると、関連付け"
 "られたシステムサービスの名前のみが表示されます。"
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
-"関連付けられたシステムサービスごとに、標準出力に対して<format>で指定した書式"
-"を出力し、改行します。<format>の '%s' ディレクティブは、システムサービス名に"
+"関連付けられたシステムサービスごとに、標準出力に対して<FORMAT>で指定した書式"
+"を出力し、改行します。<FORMAT>の '%s' ディレクティブは、システムサービス名に"
 "置き換えられます。"
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
-msgstr "デバッグ出力をファイル <path> に出力します。"
+msgid "Write debug output to file <PATH>."
+msgstr "デバッグ出力をファイル <PATH> に出力します。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4248

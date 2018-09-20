@@ -5241,21 +5241,21 @@ msgstr ""
 "visa bara processer som är associerade med en systemtjänst. Tredje gången "
 "visas endast en lista över de associerade systemtjänsternas namn."
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
-"För varje associerad systemtjänst skrivs <format> ut på standardporten, "
-"följt av en ny rad. Varje '%s'-direktiv i <format> ersätts av "
+"För varje associerad systemtjänst skrivs <FORMAT> ut på standardporten, "
+"följt av en ny rad. Varje '%s'-direktiv i <FORMAT> ersätts av "
 "systemtjänstens namn."
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
+msgid "Write debug output to file <PATH>."
 msgstr "Skriv felsökningsutdata till fil <sökväg>."
 
 #. translators: command synopsis; do not translate lowercase words

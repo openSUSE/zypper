@@ -5309,22 +5309,22 @@ msgstr ""
 "es fa servir tres cops, llista només els noms dels serveis de sistema "
 "associats."
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
-"Per a cada servei associat del sistema imprimeix en <format> a la sortida "
-"estàndard, seguit per una línia nova. Qualsevol directiva \"%s\" en <format> "
+"Per a cada servei associat del sistema imprimeix en <FORMAT> a la sortida "
+"estàndard, seguit per una línia nova. Qualsevol directiva \"%s\" en <FORMAT> "
 "se substitueix pel nom de servei del sistema."
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
-msgstr "Escriu la sortida de depuració al fitxer <path>."
+msgid "Write debug output to file <PATH>."
+msgstr "Escriu la sortida de depuració al fitxer <PATH>."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4248
@@ -8961,13 +8961,13 @@ msgstr ""
 #~ "especificat.\n"
 
 #~ msgid ""
-#~ "For each associated system service print <format> on the standard output, "
-#~ "followed by a newline. Any '%s' directive in <format> is replaced by the "
+#~ "For each associated system service print <FORMAT> on the standard output, "
+#~ "followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 #~ "the system service name."
 #~ msgstr ""
-#~ "Per a cada servei de sistema associat imprimeix en <format> a la sortida "
+#~ "Per a cada servei de sistema associat imprimeix en <FORMAT> a la sortida "
 #~ "estàndard, seguit d'una línia nova. Qualsevol directiva \"%s\" en "
-#~ "<format> es substitueix pel nom del servei de sistema."
+#~ "<FORMAT> es substitueix pel nom del servei de sistema."
 
 #~ msgid "Restart Required: "
 #~ msgstr "Cal reiniciar: "

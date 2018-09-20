@@ -4955,20 +4955,20 @@ msgstr ""
 "產生一個不顯示刪除檔案的簡短列表。給定二次相同參數，則只顯示和系統服務相關的"
 "程序。給定三次，則只列出相關的系統服務名稱。"
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
 "對每個相關系統服務列印 <格式> 至標準輸出，並緊接著輸出一個換行字元。任何在 <"
 "格式> 中的 '%s' 指令會被代換成系統服務名稱。"
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
+msgid "Write debug output to file <PATH>."
 msgstr "將除錯輸出寫入到檔案 <路徑>。"
 
 #. translators: command synopsis; do not translate lowercase words

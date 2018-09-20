@@ -5394,21 +5394,21 @@ msgstr ""
 "verknüpft sind. Dreimalige Angabe: Nur die Namen der verknüpften "
 "Systemdienste anzeigen."
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
 "Für jeden verknüpften Systemdienst die Angabe <Format> in der "
 "Standardausgabe drucken, gefolgt von einem Zeilenumbruch. Alle '%s'-"
 "Anweisungen mit <Format> werden durch den Namen des Systemdiensts ersetzt."
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
+msgid "Write debug output to file <PATH>."
 msgstr "Debug-Ausgabe in die Datei in <Pfad> schreiben."
 
 #. translators: command synopsis; do not translate lowercase words

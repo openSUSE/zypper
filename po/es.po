@@ -5390,22 +5390,22 @@ msgstr ""
 "Si se indica tres veces, muestra solo los nombres de servicios del sistema "
 "asociados."
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
-"Para cada servicio del sistema asociado, imprime <format> en la salida "
-"estándar, seguido de una línea nueva. Todas las directivas '%s' en <format> "
+"Para cada servicio del sistema asociado, imprime <FORMAT> en la salida "
+"estándar, seguido de una línea nueva. Todas las directivas '%s' en <FORMAT> "
 "se sustituyen por el nombre del servicio del sistema."
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
-msgstr "Escribir resultado de depuración en archivo <path>."
+msgid "Write debug output to file <PATH>."
+msgstr "Escribir resultado de depuración en archivo <PATH>."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4248

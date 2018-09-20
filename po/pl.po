@@ -5462,22 +5462,22 @@ msgstr ""
 "są skojarzone z daną usługą systemową. Po trzykrotnym użyciu go pojawia się "
 "lista samych nazw skojarzonych usług systemowych."
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
 "W przypadku każdej skojarzonej usługi systemowej powoduje wydrukowanie na "
-"standardowym urządzeniu wyjściowym znacznika <format>, a po nim nowego "
-"wiersza. Każda dyrektywa „%s” w znaczniku <format> jest zastępowana przez "
+"standardowym urządzeniu wyjściowym znacznika <FORMAT>, a po nim nowego "
+"wiersza. Każda dyrektywa „%s” w znaczniku <FORMAT> jest zastępowana przez "
 "nazwę usługi systemowej."
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
+msgid "Write debug output to file <PATH>."
 msgstr "Zapisz wynik debugowania do pliku <ścieżka>."
 
 #. translators: command synopsis; do not translate lowercase words

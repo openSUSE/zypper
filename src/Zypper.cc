@@ -4042,9 +4042,9 @@ void Zypper::processCommandOptions()
       _("Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.")
     )
     .optionSectionCommandOptions()
-    .option( "-r, --repo <alias|#|URI>",	// translators: -r, --repo <alias|#|URI>
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
 	     _("Restrict the lock to the specified repository.") )
-    .option( "-t, --type <type>",	// translators: -t, --type <type>
+    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
 	     str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
 	     // NOTE: Original help text had a ' Default: %s", "package" appended.
     ;
@@ -4071,9 +4071,9 @@ void Zypper::processCommandOptions()
       str::Format(_("Remove a package lock. Specify the lock to remove by its number obtained with '%1%' or by package name.") ) % "zypper locks"
     )
     .optionSectionCommandOptions()
-    .option( "-r, --repo <alias|#|URI>",	// translators: -r, --repo <alias|#|URI>
+    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
 	     _("Remove only locks with specified repository.") )
-    .option( "-t, --type <type>",	// translators: -t, --type <type>
+    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
 	     str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
 	     // NOTE: Original help text had a ' Default: %s", "package" appended.
     ;
@@ -4226,10 +4226,10 @@ void Zypper::processCommandOptions()
     .optionSectionCommandOptions()
     .option( "-s, --short",	// translators: -s, --short
 	     _("Create a short table not showing the deleted files. Given twice, show only processes which are associated with a system service. Given three times, list the associated system service names only.") )
-    .option( "--print <format>",	// translators: --print <format>
-	     _("For each associated system service print <format> on the standard output, followed by a newline. Any '%s' directive in <format> is replaced by the system service name.") )
-    .option("-d, --debugFile <path>", // translators: -d, --debugFile <path>
-       _("Write debug output to file <path>."))
+    .option( "--print <FORMAT>",	// translators: --print <FORMAT>
+	     _("For each associated system service print <FORMAT> on the standard output, followed by a newline. Any '%s' directive in <FORMAT> is replaced by the system service name.") )
+    .option("-d, --debugFile <PATH>", // translators: -d, --debugFile <PATH>
+       _("Write debug output to file <PATH>."))
     ;
     break;
   }

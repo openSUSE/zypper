@@ -5066,22 +5066,22 @@ msgstr ""
 "와 연결된 프로세스만 표시하고, 세 번째는 연결된 시스템 서비스 이름만 나열합니"
 "다."
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
-"각 연결된 시스템 서비스에 대해 표준 출력에서 <format>을 인쇄하고 그 뒤에 줄바"
-"꿈 문자를 삽입합니다. <format>의 '%s' 지시어는 모두 시스템 서비스 이름으로 바"
+"각 연결된 시스템 서비스에 대해 표준 출력에서 <FORMAT>을 인쇄하고 그 뒤에 줄바"
+"꿈 문자를 삽입합니다. <FORMAT>의 '%s' 지시어는 모두 시스템 서비스 이름으로 바"
 "뀝니다."
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
-msgstr "디버그 출력을 파일 <path>에 기록합니다."
+msgid "Write debug output to file <PATH>."
+msgstr "디버그 출력을 파일 <PATH>에 기록합니다."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4248

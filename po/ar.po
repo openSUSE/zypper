@@ -5480,21 +5480,21 @@ msgstr ""
 "العمليات المرتبطة بخدمة النظام. وإذا حدث ذلك ثلاث مرات، يتم وضع قائمة بأسماء "
 "خدمة النظام المرتبطة فقط."
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
-"يتبع كل نسخة مطبوعة من خدمة النظام ذي الصلة <format> بالمخرجات القياسية سطر "
-"جديد. يتم استبدال أي '%s' توجيه في <format> بواسطة اسم خدمة النظام."
+"يتبع كل نسخة مطبوعة من خدمة النظام ذي الصلة <FORMAT> بالمخرجات القياسية سطر "
+"جديد. يتم استبدال أي '%s' توجيه في <FORMAT> بواسطة اسم خدمة النظام."
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
-msgstr "كتابة مخرجات تتبع الأخطاء في الملف <path>."
+msgid "Write debug output to file <PATH>."
+msgstr "كتابة مخرجات تتبع الأخطاء في الملف <PATH>."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4248

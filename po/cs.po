@@ -5327,21 +5327,21 @@ msgstr ""
 "zobrazí pouze procesy, které jsou přiřazené k systémové službě. Dáno "
 "třikrát, vypíše pouze seznam názvů přiřazených systémových služeb."
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
 "Pro každou přiřazenou systémovou službu vytisknout <formát> na standardní "
 "výstup, následovaný novým řádkem. Jakákoliv direktiva '%s' ve <formátu> je "
 "nahrazena názvem systémové služby."
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
+msgid "Write debug output to file <PATH>."
 msgstr "Zapsat ladící výstup do souboru <cesta>."
 
 #. translators: command synopsis; do not translate lowercase words

@@ -5379,22 +5379,22 @@ msgstr ""
 "дважды показывает только процессы, связанные с системным сервисом. При "
 "указании трижды выводит только список имен связанных системных сервисов."
 
-#. translators: --print <format>
+#. translators: --print <FORMAT>
 #: src/Zypper.cc:4226
 #, c-format, boost-format
 msgid ""
-"For each associated system service print <format> on the standard output, "
-"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"For each associated system service print <FORMAT> on the standard output, "
+"followed by a newline. Any '%s' directive in <FORMAT> is replaced by the "
 "system service name."
 msgstr ""
 "<Формат> текста для стандартного вывода по каждому связанному системному "
 "сервису с переводом строки в конце. Каждое вхождение \"%s\" в <формате> "
 "заменяется именем системного сервиса."
 
-#. translators: -d, --debugFile <path>
+#. translators: -d, --debugFile <PATH>
 #: src/Zypper.cc:4228
-msgid "Write debug output to file <path>."
-msgstr "Записать выходные данные отладки в файл <path>."
+msgid "Write debug output to file <PATH>."
+msgstr "Записать выходные данные отладки в файл <PATH>."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4248
