@@ -6,6 +6,25 @@
 ///////////////////////////////////////////////////////////////////
 /// \class CommandHelpFormater
 /// \brief Class for command help formating
+///
+/// \note Changing the output format \c bash-completion.sh must be
+/// checked. Some format elements are used to parse the options
+/// out of the help texts:
+///
+/// Within the command/global help e.g. only options are recognized
+/// which occur AFTER a line matching <tt>/[Oo]ptions:$/</tt>
+/// and BEFORE a line matching <tt>/[Cc]ommands:$/</tt>.
+///
+/// Unlike the command help, the global help expects the longopts
+/// first,
+///
+/// Within the global help commands are recognized AFTER a a line
+/// matching <tt>/[Cc]ommands:$/</tt>.
+///
+/// Command names are indented by 6 and NO OTHER line may use this
+//  indent.
+///
+/// (But better check the bash-completion code if you plan changes...)
 ///////////////////////////////////////////////////////////////////
 struct CommandHelpFormater
 {
@@ -96,6 +115,12 @@ struct CommandHelpFormater
     return option( old_r, str::Format(_("The same as %1%.")) % new_r ); }
 
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  // Beware! Format (indent) changes may break bash-completion!
+  // (see class CommandHelpFormater doc)
+  //
+  ///////////////////////////////////////////////////////////////////
   /** Option definition
    * \code
    * "123456789012345678901234567890123456789
@@ -122,6 +147,40 @@ struct CommandHelpFormater
    */
   CommandHelpFormater & option( boost::string_ref option_r )
   { return option( option_r, "" ); }
+
+public:
+  ///////////////////////////////////////////////////////////////////
+  //
+  // Beware! Format (indent) changes may break bash-completion!
+  // (see class CommandHelpFormater doc)
+  //
+  ///////////////////////////////////////////////////////////////////
+  /** Global help main section title. (0 indent)*/
+  CommandHelpFormater & gMainSection( boost::string_ref text_r )
+  { _mww.gotoNextPar(); _mww.writePar( text_r ); _mww.gotoNextPar(); return *this; }
+
+  CommandHelpFormater & gMainUsage()
+  { return gMainSection( _("Usage:") ); }
+  CommandHelpFormater & gMainGlobalOpts()
+  { return gMainSection( _("Global Options:") ); }
+  CommandHelpFormater & gMainCommands()
+  { return gMainSection( _("Commands:") ); }
+
+  /** Global help section title. (2 indent) */
+  CommandHelpFormater & gSection( boost::string_ref text_r = boost::string_ref() )
+  { _mww.gotoNextPar(); _mww.writePar( text_r, 2 ); _mww.gotoNextPar(); return *this; }
+
+  /** Global help Synopsis. (4 indent)*/
+  CommandHelpFormater & gSynopsis( boost::string_ref text_r )
+  { _mww.writePar( text_r, 4 ); return *this; }
+
+  /** Global help definition. */
+  CommandHelpFormater & gDef( boost::string_ref option_r, boost::string_ref text_r )
+  { _mww.writeDefinition( option_r , text_r, (option_r.starts_with( "--" )?4:6), 28 ); return *this; }
+  /** \overload Just option, no description */
+  CommandHelpFormater & gDef( boost::string_ref option_r )
+  { return gDef( option_r, "" ); }
+
 private:
   std::ostringstream   _str;
   mbs::MbsWriteWrapped _mww;

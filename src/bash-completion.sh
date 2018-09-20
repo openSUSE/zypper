@@ -47,7 +47,6 @@ _zypper() {
 	ZYPPER="$(type -P zypper)"
 
 	local noglob=$(shopt -po noglob)
-	local magic_string="Command options:"
 	local comp cur prev command
 	local -a opts=()
 	local -i ITER=0
@@ -57,17 +56,12 @@ _zypper() {
 	set -o noglob
 
 	if test ${#ZYPPER_CMDLIST[@]} -eq 0; then
-		ZYPPER_CMDLIST=($({ LC_ALL=POSIX $ZYPPER -q -h; $ZYPPER -q subcommand; } | \
-				sed -rn '/^[[:blank:]]*Commands:/,$ {
-					/[\t]{4}/d
-					s/^[[:blank:]]*//
-					s/^[[:upper:]].*://
-					s/[[:blank:]]+[[:upper:]].*$//
-					s/,[[:blank:]]+/\n/g
-					s/\?/\\?/
-					/^$/d
-					p
-				}'))
+		ZYPPER_CMDLIST=($(
+			{
+				zypper -q subcommand;
+				LC_ALL=POSIX zypper -q -h | sed -n '/[Cc]ommands:$/,$ s/^ \{6\}\([^ ,]\+\(,[ *][^ ,]\+\)*\).*/\1/p';
+			} | sed 's/, */\n/g'
+		))
 	fi
 
 	if test $COMP_CWORD -lt 1 ; then
@@ -115,15 +109,7 @@ _zypper() {
 	
 	if [[ "$command" =~ "zypper" ]]; then
 		opts=(${ZYPPER_CMDLIST[*]}$(echo; LC_ALL=POSIX $ZYPPER -q help 2>&1 | \
-			sed -rn '/Global Options:/,/Commands:/{
-				/[\t]{4}/d
-				s/^[[:blank:]]*//
-				/[[:upper:]].*:/d
-				s/[[:blank:]]+[[:upper:]].*$//
-				s/[,[:blank:]].*$/\n/
-				/^$/d
-				p
-			}'))
+			sed -n '/[Oo]ptions:$/,/[Cc]ommands:$/ s/^[[:blank:]]*\(--[^[:blank:],[]*\).*/\1/p'))
 		COMPREPLY=($(compgen -W "${opts[*]}" -- ${cur}))
 		_strip
 		eval $noglob
@@ -132,7 +118,7 @@ _zypper() {
 
 	if test -n "$command" ; then
 		if ! [[ $cur =~ ^[^-] ]] ; then
-			opts=$(LC_ALL=POSIX $ZYPPER -q help $command 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//' | grep -e "^--")
+			opts=$(LC_ALL=POSIX $ZYPPER -q help $command 2>&1 | sed -n '1,/[Oo]ptions:$/d; s/^[[:blank:]]*\(-[^-]*\)\?\(--[^[:blank:][]*\).*/\2/p')
 		fi
 
 		#handling individual commands if they need more then we can dig from help

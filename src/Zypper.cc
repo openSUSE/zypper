@@ -695,7 +695,6 @@ Out & Zypper::out()
 
 void print_main_help( Zypper & zypper )
 {
-#if 0
   static std::string globalHelp = CommandHelpFormater()
   ///////////////////////////////////////////////////////////////////
   .gMainUsage()
@@ -894,8 +893,8 @@ void print_main_help( Zypper & zypper )
   zypper.out().info( globalHelp, Out::QUIET );
   print_command_help_hint( zypper );
   return;
-#endif
 
+#if 0
   static std::string help_global_options = _("  Global Options:\n"
     "\t--help, -h\t\tHelp.\n"
     "\t--version, -V\t\tOutput the version number.\n"
@@ -1052,6 +1051,7 @@ void print_main_help( Zypper & zypper )
   zypper.out().info( help_subcommands, Out::QUIET );
 
   print_command_help_hint( zypper );
+#endif
 }
 
 void print_unknown_command_hint( Zypper & zypper, const std::string & cmd_r )
