@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2018-08-04 13:06+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
@@ -6111,10 +6111,10 @@ msgstr "Ponechať nainštalované"
 msgid "Do not install"
 msgstr "Neinštalovať"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+msgid "locks (ll) [OPTIONS]"
+msgstr "locks (ll) [voľby]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -8553,9 +8553,6 @@ msgstr "Zadajte '%s' pre '%s' alebo '%s' pre '%s', ak nič iné nefunguje."
 
 #~ msgid "Type of package (%s). Default: %s."
 #~ msgstr "Typ balíka (%s). Predvolený typ: %s"
-
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "locks (ll) [voľby]"
 
 #~ msgid ""
 #~ "service-types (st)\n"

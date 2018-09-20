@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2017-05-07 15:28+0000\n"
 "Last-Translator: Enol P <enolp@softastur.org>\n"
 "Language-Team: Asturian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -5203,10 +5203,10 @@ msgstr ""
 msgid "Do not install"
 msgstr ""
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+msgid "locks (ll) [OPTIONS]"
+msgstr "locks (ll) [opciones]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -7547,9 +7547,6 @@ msgstr ""
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
-
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "locks (ll) [opciones]"
 
 #~ msgid ""
 #~ "service-types (st)\n"

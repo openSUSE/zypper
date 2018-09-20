@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2018-07-30 17:07+0000\n"
 "Last-Translator: Mikhail Kasimov <mikhail.kasimov@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -6124,10 +6124,10 @@ msgstr "Залишити встановленим"
 msgid "Do not install"
 msgstr "Не встановлювати"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+msgid "locks (ll) [OPTIONS]"
+msgstr "locks (ll) [параметри]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -8576,9 +8576,6 @@ msgstr "Введіть «%s» для «%s» або «%s» для «%s», якщ�
 
 #~ msgid "Type of package (%s). Default: %s."
 #~ msgstr "Тип пакунка (%s) Типово: %s"
-
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "locks (ll) [параметри]"
 
 #~ msgid ""
 #~ "service-types (st)\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lcn memory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2009-09-17 22:15+0000\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -5152,9 +5152,9 @@ msgstr "Nén astalé"
 msgid "Do not install"
 msgstr "N' nén astaler"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
+msgid "locks (ll) [OPTIONS]"
 msgstr ""
 
 #: src/commands/locks/list.cc:255

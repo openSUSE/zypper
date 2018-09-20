@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2018-05-14 06:32+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
@@ -5856,10 +5856,10 @@ msgstr "설치 유지"
 msgid "Do not install"
 msgstr "설치 안 함"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+msgid "locks (ll) [OPTIONS]"
+msgstr "잠금(ll) [OPTIONS]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -8242,9 +8242,6 @@ msgstr ""
 
 #~ msgid "Type of package (%s). Default: %s."
 #~ msgstr "패키지 유형(%s)입니다. 기본값: %s."
-
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "잠금(ll) [OPTIONS]"
 
 #~ msgid ""
 #~ "service-types (st)\n"

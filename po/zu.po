@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2006-11-03 12:03\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -5320,9 +5320,9 @@ msgstr "olufakiwe)"
 msgid "Do not install"
 msgstr "alufakiwe"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
+msgid "locks (ll) [OPTIONS]"
 msgstr ""
 
 #: src/commands/locks/list.cc:255

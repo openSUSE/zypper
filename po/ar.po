@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2018-04-16 09:32+0000\n"
 "Last-Translator: George Yacoub <george.yacoub@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
@@ -6275,10 +6275,10 @@ msgstr "الاحتفاظ بالنسخة المثبتة"
 msgid "Do not install"
 msgstr "عدم التثبيت"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+msgid "locks (ll) [OPTIONS]"
+msgstr "أقفال (ll) [OPTIONS]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -8781,9 +8781,6 @@ msgstr "أدخل '%s' لـ '%s' أو '%s' لـ '%s' إذا لم يعمل أي ش
 
 #~ msgid "Type of package (%s). Default: %s."
 #~ msgstr "نوع الحزمة (%s). الإعداد الافتراضي: %s."
-
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "أقفال (ll) [OPTIONS]"
 
 #~ msgid ""
 #~ "service-types (st)\n"

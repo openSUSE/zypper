@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2018-08-30 21:31+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
@@ -6197,10 +6197,10 @@ msgstr "Geïnstalleerd laten"
 msgid "Do not install"
 msgstr "Niet installeren"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+msgid "locks (ll) [OPTIONS]"
+msgstr "vergrendelingen (ll) [opties]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -8677,9 +8677,6 @@ msgstr "Voer '%s' in voor '%s' of '%s' voor '%s' als er niets anders werkt."
 
 #~ msgid "Type of package (%s). Default: %s."
 #~ msgstr "type pakket (%s) standaard: %s"
-
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "vergrendelingen (ll) [opties]"
 
 #~ msgid ""
 #~ "service-types (st)\n"

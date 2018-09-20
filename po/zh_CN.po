@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2018-09-01 03:36+0000\n"
 "Last-Translator: H. Zeng <zhx@cnzhx.net>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -5697,10 +5697,10 @@ msgstr "保持安装"
 msgid "Do not install"
 msgstr "不安装"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+msgid "locks (ll) [OPTIONS]"
+msgstr "locks (ll) [选项]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -8024,9 +8024,6 @@ msgstr "若其它方法均不起作用，输入 '%s' 为 '%s'，输入 '%s' 为 
 
 #~ msgid "Type of package (%s). Default: %s."
 #~ msgstr "软件包类型 (%s)。 默认：%s。"
-
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "locks (ll) [选项]"
 
 #~ msgid ""
 #~ "service-types (st)\n"

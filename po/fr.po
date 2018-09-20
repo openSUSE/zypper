@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2018-08-03 22:02+0000\n"
 "Last-Translator: Benoît Monin <benoit.monin@gmx.fr>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
@@ -6258,10 +6258,10 @@ msgstr "Garder installé"
 msgid "Do not install"
 msgstr "Ne pas installer"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+msgid "locks (ll) [OPTIONS]"
+msgstr "locks (ll) [OPTIONS]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -8756,9 +8756,6 @@ msgstr ""
 
 #~ msgid "Type of package (%s). Default: %s."
 #~ msgstr "Type de paquet (%s). Par défaut : %s."
-
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "locks (ll) [OPTIONS]"
 
 #~ msgid ""
 #~ "service-types (st)\n"

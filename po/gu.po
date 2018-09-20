@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2006-11-11 18:41+0530\n"
 "Last-Translator: Priyavert Sharma<priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions<linux_team@agreeya.com>\n"
@@ -5192,9 +5192,9 @@ msgstr "સ્થાપેલ)"
 msgid "Do not install"
 msgstr "સ્થાપેલ નથી"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
+msgid "locks (ll) [OPTIONS]"
 msgstr ""
 
 #: src/commands/locks/list.cc:255

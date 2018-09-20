@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2017-01-18 16:13+0000\n"
 "Last-Translator: Paul One <jadjer@mail.ru>\n"
 "Language-Team: Belarusian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -5165,9 +5165,9 @@ msgstr "Усталяваць"
 msgid "Do not install"
 msgstr ""
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
+msgid "locks (ll) [OPTIONS]"
 msgstr ""
 
 #: src/commands/locks/list.cc:255

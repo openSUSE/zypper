@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2008-11-23 08:36+0530\n"
 "Last-Translator: KDB <brar.kd@gmail.com>\n"
 "Language-Team: Panjabi <punjabi-l10n@list.sf.net>\n"
@@ -5309,9 +5309,9 @@ msgstr ""
 msgid "Do not install"
 msgstr ""
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
+msgid "locks (ll) [OPTIONS]"
 msgstr ""
 
 #: src/commands/locks/list.cc:255

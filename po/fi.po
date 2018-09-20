@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2018-08-19 11:02+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
@@ -6044,10 +6044,11 @@ msgstr "ei asennettu"
 msgid "Do not install"
 msgstr "ei asennettu"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+#, fuzzy
+msgid "locks (ll) [OPTIONS]"
+msgstr "näyttää kaikki valinnat"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -8470,10 +8471,6 @@ msgstr "Vastaa \"%s\" -> \"%s\" tai \"%s\" -> \"%s\" sijasta, ellei muu toimi."
 
 #~ msgid "Type of package (%s). Default: %s."
 #~ msgstr "Määrittelyn tyyppi (%s) Oletus: %s"
-
-#, fuzzy
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "näyttää kaikki valinnat"
 
 #~ msgid ""
 #~ "service-types (st)\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2018-07-13 21:04+0000\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <https://l10n.opensuse.org/projects/zypper/"
@@ -5398,10 +5398,10 @@ msgstr "Hald installert"
 msgid "Do not install"
 msgstr "Ikkje installer"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+msgid "locks (ll) [OPTIONS]"
+msgstr "locks (ll) [val]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -7813,9 +7813,6 @@ msgstr "Ugyldig svar: «%s»."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Bruk «%s» for «%s» eller «%s» for «%s» dersom ikkje noko anna fungerer."
-
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "locks (ll) [val]"
 
 #~ msgid "Resolvable Type"
 #~ msgstr "Løysbar type"

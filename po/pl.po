@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:00+0200\n"
+"POT-Creation-Date: 2018-09-20 17:27+0200\n"
 "PO-Revision-Date: 2018-05-09 23:05+0000\n"
 "Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/"
@@ -6282,10 +6282,10 @@ msgstr "Zachowaj jako zainstalowany"
 msgid "Do not install"
 msgstr "Nie instaluj"
 
-#. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
-msgid "locks (ll) [options]"
-msgstr ""
+msgid "locks (ll) [OPTIONS]"
+msgstr "locks (ll) [opcje]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
@@ -8769,9 +8769,6 @@ msgstr "Wprowadź '%s' dla '%s' lub '%s' dla '%s', jeśli nic innego nie działa
 
 #~ msgid "Type of package (%s). Default: %s."
 #~ msgstr "Typ pakietu (%s). Domyślnie: %s."
-
-#~ msgid "locks (ll) [OPTIONS]"
-#~ msgstr "locks (ll) [opcje]"
 
 #~ msgid ""
 #~ "service-types (st)\n"
