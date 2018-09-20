@@ -6200,7 +6200,7 @@ msgstr "Niet installeren"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
 msgid "locks (ll) [OPTIONS]"
-msgstr "vergrendelingen (ll) [opties]"
+msgstr "locks (ll) [opties]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."

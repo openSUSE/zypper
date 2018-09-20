@@ -6191,7 +6191,7 @@ msgstr "Не устанавливать"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
 msgid "locks (ll) [OPTIONS]"
-msgstr "блокировки (ll) [параметры]"
+msgstr "locks (ll) [параметры]"
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."

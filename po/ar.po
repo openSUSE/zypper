@@ -6278,7 +6278,7 @@ msgstr "عدم التثبيت"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locks/list.cc:230
 msgid "locks (ll) [OPTIONS]"
-msgstr "أقفال (ll) [OPTIONS]"
+msgstr ""
 
 #: src/commands/locks/list.cc:255
 msgid "Show the number of resolvables matched by each lock."
