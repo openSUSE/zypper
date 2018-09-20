@@ -4414,11 +4414,22 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = search_options;
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate lowercase words
+    _("patch-search [OPTIONS] [QUERYSTRING...]")
+    )
+    .description(	// translators: command description
+    _("Search for patches matching given search strings.")
+    )
+    .descriptionAliasCmd( "zypper -r search -t patch --detail ..." )
+    ;
+#if 0
     _command_help = str::form(_(
       "patch-search [OPTIONS] [querystring...]\n"
       "\n"
       "Search for patches matching given search strings. This is an alias for '%s'.\n"
     ), "zypper -r search -t patch --detail ...");
+#endif
     break;
   }
 
