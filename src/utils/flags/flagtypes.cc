@@ -10,7 +10,7 @@
 namespace zypp {
 namespace ZyppFlags {
 
-Value StringType(std::string *target, const boost::optional<const char *> &defValue, const char *hint) {
+Value StringType(std::string *target, const boost::optional<const char *> &defValue, std::string hint) {
   return Value (
     [defValue]() ->  boost::optional<std::string>{
       if (!defValue || *defValue == nullptr)
@@ -23,7 +23,7 @@ Value StringType(std::string *target, const boost::optional<const char *> &defVa
       *target = *in;
       return;
     },
-    hint
+    std::move(hint)
   );
 }
 

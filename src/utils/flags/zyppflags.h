@@ -78,7 +78,7 @@ namespace ZyppFlags {
      * \param setter takes a functor that writes a target variable based on the argument input
      * \param argHint Gives a indicaton what type of data is accepted by the argument
      */
-    Value ( DefValueFun &&defValue, SetterFun &&setter, const std::string argHint = std::string() );
+    Value ( DefValueFun &&defValue, SetterFun &&setter, std::string argHint = std::string() );
 
     /**
      * Calls the setter functor, with either the given argument or the optional argument

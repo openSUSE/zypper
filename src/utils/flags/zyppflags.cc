@@ -61,10 +61,10 @@ namespace {
   }
 }
 
-Value::Value(DefValueFun &&defValue, SetterFun &&setter, const std::string argHint)
+Value::Value(DefValueFun &&defValue, SetterFun &&setter, std::string argHint)
   : _defaultVal( std::move(defValue) ),
     _setter( std::move(setter) ),
-    _argHint(argHint)
+    _argHint( std::move(argHint) )
 {
 
 }

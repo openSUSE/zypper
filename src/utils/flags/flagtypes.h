@@ -16,7 +16,7 @@ namespace ZyppFlags {
 /**
  * Returns a \sa ZyppFlags::Value instance handling flags taking a string parameter
  */
-Value StringType ( std::string *target, const boost::optional<const char *> &defValue = boost::optional<const char *> (), const char * hint = "STRING" );
+Value StringType ( std::string *target, const boost::optional<const char *> &defValue = boost::optional<const char *> (), std::string hint = ARG_STRING );
 
 /**
  * Returns a \sa ZyppFlags::Value instance handling flags taking a int parameter
@@ -25,7 +25,7 @@ Value IntType    ( int *target, const boost::optional<int> &defValue = boost::op
 
 
 template <class Container>
-Value StringContainerType ( Container *target, const char * hint = "STRING"  ) {
+Value StringContainerType ( Container *target, std::string hint = ARG_STRING ) {
   return Value (
         []() -> boost::optional<std::string> { return boost::optional<std::string>(); },
         [target] ( CommandOption *opt, const boost::optional<std::string> &in ) {
@@ -33,7 +33,7 @@ Value StringContainerType ( Container *target, const char * hint = "STRING"  ) {
           target->push_back(*in);
           return;
         },
-        hint
+        std::move(hint)
   );
 }
 
