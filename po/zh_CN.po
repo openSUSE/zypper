@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:27+0200\n"
+"POT-Creation-Date: 2018-09-21 12:17+0200\n"
 "PO-Revision-Date: 2018-09-01 03:36+0000\n"
 "Last-Translator: H. Zeng <zhx@cnzhx.net>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -558,6 +558,83 @@ msgstr "错误："
 #: src/output/Out.h:44
 msgid "Continue?"
 msgstr "继续吗？"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:21
+msgid "ALIAS"
+msgstr "别名"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:23
+msgid "ALIAS|#|URI"
+msgstr "别名|#|URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:25
+msgid "CATEGORY"
+msgstr "分类"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:27
+msgid "DIR"
+msgstr "文件夹"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:29
+msgid "FILE"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:31
+msgid "FILE.repo"
+msgstr "文件名.repo"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:33
+msgid "FORMAT"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:35
+msgid "INTEGER"
+msgstr "整数"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:37
+msgid "PATH"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:39
+msgid "SEVERITY"
+msgstr "严重性"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:41
+msgid "STRING"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:43
+msgid "TAG"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:45
+msgid "TYPE"
+msgstr "类型"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#. translators: property name; short; used like "Name: value"
+#: src/utils/flags/zyppflags.h:47 src/repos.cc:1117 src/repos.cc:1212
+#: src/repos.cc:1775 src/repos.cc:2561
+msgid "URI"
+msgstr "URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:49
+msgid "YYYY-MM-DD"
+msgstr ""
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -6479,11 +6556,6 @@ msgstr "刷新"
 #: src/repos.cc:1101 src/repos.cc:1219 src/repos.cc:1783 src/repos.cc:2558
 msgid "Priority"
 msgstr "优先级"
-
-#. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1117 src/repos.cc:1212 src/repos.cc:1775 src/repos.cc:2561
-msgid "URI"
-msgstr "URI"
 
 #: src/repos.cc:1181
 msgid "No repositories defined."

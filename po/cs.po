@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 17:27+0200\n"
+"POT-Creation-Date: 2018-09-21 12:17+0200\n"
 "PO-Revision-Date: 2018-09-02 08:40+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
@@ -593,6 +593,83 @@ msgstr "Chyba:"
 #: src/output/Out.h:44
 msgid "Continue?"
 msgstr "Pokračovat?"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:21
+msgid "ALIAS"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:23
+msgid "ALIAS|#|URI"
+msgstr "přezdívka|#|URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:25
+msgid "CATEGORY"
+msgstr "KATEGORIE"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:27
+msgid "DIR"
+msgstr "adresář"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:29
+msgid "FILE"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:31
+msgid "FILE.repo"
+msgstr "SOUBOR.repo"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:33
+msgid "FORMAT"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:35
+msgid "INTEGER"
+msgstr "celé číslo"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:37
+msgid "PATH"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:39
+msgid "SEVERITY"
+msgstr "ZÁVAŽNOST"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:41
+msgid "STRING"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:43
+msgid "TAG"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:45
+msgid "TYPE"
+msgstr "typ"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#. translators: property name; short; used like "Name: value"
+#: src/utils/flags/zyppflags.h:47 src/repos.cc:1117 src/repos.cc:1212
+#: src/repos.cc:1775 src/repos.cc:2561
+msgid "URI"
+msgstr "Adresa URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:49
+msgid "YYYY-MM-DD"
+msgstr "RRRR-MM-DD"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -6942,11 +7019,6 @@ msgstr "Obnovit"
 #: src/repos.cc:1101 src/repos.cc:1219 src/repos.cc:1783 src/repos.cc:2558
 msgid "Priority"
 msgstr "Priorita"
-
-#. translators: property name; short; used like "Name: value"
-#: src/repos.cc:1117 src/repos.cc:1212 src/repos.cc:1775 src/repos.cc:2561
-msgid "URI"
-msgstr "Adresa URI"
 
 #: src/repos.cc:1181
 msgid "No repositories defined."
