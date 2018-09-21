@@ -15,6 +15,39 @@
 
 #include <boost/optional.hpp>
 
+#include "main.h" // for gettext macros
+
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_ALIAS              _( "ALIAS" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_REOSITORY          _( "ALIAS|#|URI" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_CATEGORY           _( "CATEGORY" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_DIR                _( "DIR" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_FILE               _( "FILE" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_FILE_repo          _( "FILE.repo" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_FORMAT             _( "FORMAT" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_INTEGER            _( "INTEGER" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_PATH               _( "PATH" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_SEVERITY           _( "SEVERITY" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_STRING             _( "STRING" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_TAG                _( "TAG" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_TYPE               _( "TYPE" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_URI                _( "URI" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_YYYY_MM_DD         _( "YYYY-MM-DD" )
+
 namespace zypp {
 namespace ZyppFlags {
 
