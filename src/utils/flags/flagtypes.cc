@@ -25,11 +25,11 @@ ResKind parseKindArgument( const CommandOption &opt, const boost::optional<std::
   return knd;
 }
 
+}
+
 boost::optional<std::string> noDefaultValue()
 {
   return boost::optional<std::string>();
-}
-
 }
 
 Value StringType(std::string *target, const boost::optional<const char *> &defValue, std::string hint) {

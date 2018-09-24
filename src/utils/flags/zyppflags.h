@@ -122,8 +122,7 @@ namespace ZyppFlags {
     std::vector<std::string> conflictingArguments;
   };
 
-  using StringPair = std::pair<std::string, std::string>;
-  using ConflictingFlagsList = std::vector< StringPair >;
+  using ConflictingFlagsList = std::vector< std::vector< std::string > >;
 
   struct  CommandGroup
   {
