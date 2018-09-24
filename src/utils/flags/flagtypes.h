@@ -92,6 +92,11 @@ Value NoValue ();
  */
 Value WarnOptionVal ( Out &out_r , const std::string &warning_r, boost::optional<Value> val_r );
 
+/**
+ * Helper function that just returns a empty default value
+ */
+boost::optional<std::string> noDefaultValue();
+
 }}
 
 #endif

@@ -210,21 +210,24 @@ int parseCLI(const int argc, char * const *argv, const std::vector<CommandGroup>
           CommandOption &opt = allOpts[index];
 
           // check if a conflicting option was used before
-          std::string conflicting;
-          for ( StringPair &flagSet : conflictingFlags ) {
-            if ( flagSet.first == opt.name )
-              conflicting = flagSet.second;
-            else if ( flagSet.second == opt.name )
-              conflicting = flagSet.first;
+          std::vector<std::string> conflictingList;
+          for ( const auto &flagSet : conflictingFlags ) {
+            if ( std::find( flagSet.begin(), flagSet.end(), opt.name ) != flagSet.end() ) {
+              std::copy_if( flagSet.begin(), flagSet.end(), std::back_inserter(conflictingList),  [ &opt ]( const std::string &val ) {
+                return val != opt.name;
+              });
+            }
           }
 
-          if ( !conflicting.empty() ) {
-            auto it = longOptIndex.find( conflicting );
-            if ( it == longOptIndex.end() ) {
-              WAR << "Ignoring unknown option " << conflicting << " specified as conflicting flag for " << opt.name << endl;
-            } else {
-              if ( allOpts[it->second].value.wasSet() ) {
-                throw ConflictingFlagsException( opt.name, conflicting );
+          if ( !conflictingList.empty() ) {
+            for ( const std::string conflicting : conflictingList ){
+              auto it = longOptIndex.find( conflicting );
+              if ( it == longOptIndex.end() ) {
+                WAR << "Ignoring unknown option " << conflicting << " specified as conflicting flag for " << opt.name << endl;
+              } else {
+                if ( allOpts[it->second].value.wasSet() ) {
+                  throw ConflictingFlagsException( opt.name, conflicting );
+                }
               }
             }
           }
