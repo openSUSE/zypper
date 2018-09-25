@@ -49,6 +49,7 @@ SET (zypper_HEADERS
   commands/services/refresh.h
   commands/services/add.h
   commands/services/modify.h
+  commands/services/remove.h
   commands/reposerviceoptionsets.h
   commands/ps.h
 )
@@ -85,6 +86,7 @@ SET( zypper_SRCS
   commands/services/refresh.cc
   commands/services/add.cc
   commands/services/modify.cc
+  commands/services/remove.cc
   commands/reposerviceoptionsets.cc
   commands/ps.cc
   ${zypper_HEADERS}

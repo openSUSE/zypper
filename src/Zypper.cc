@@ -2332,29 +2332,6 @@ void Zypper::processCommandOptions()
       "-n, --name <name>       Specify descriptive name for the service.\n"
     )
 #endif
-
-  case ZypperCommand::REMOVE_SERVICE_e:
-  {
-    static struct option options[] = {
-      {"help", no_argument, 0, 'h'},
-      {"loose-auth", no_argument, 0, 0},
-      {"loose-query", no_argument, 0, 0},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("removeservice (rs) [OPTIONS] <ALIAS|#|URI>")
-    )
-    .description(	// translators: command description
-    _("Remove specified repository index service from the system.")
-    )
-    .optionSectionCommandOptions()
-    .option( "--loose-auth",	// translators: --loose-auth
-             _("Ignore user authentication data in the URI.") )
-    .option( "--loose-query",	// translators: --loose-query
-             _("Ignore query string in the URI.") )
-    ;
 #if 0
     _command_help = _(
       // TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
@@ -2367,8 +2344,6 @@ void Zypper::processCommandOptions()
       "    --loose-query  Ignore query string in the URI.\n"
     );
 #endif
-    break;
-  }
 
 #if 0
     _(
@@ -4437,7 +4412,6 @@ void Zypper::doCommand()
 
   // --------------------------( delete repo )--------------------------------
 
-  case ZypperCommand::REMOVE_SERVICE_e:
   case ZypperCommand::REMOVE_REPO_e:
   {
     // check root user
@@ -4451,94 +4425,52 @@ void Zypper::doCommand()
       return;
     }
 
-    if (command() == ZypperCommand::REMOVE_REPO)
+    bool aggregate = copts.count("all") || copts.count("local") || copts.count("remote") || copts.count("medium-type");
+
+    if ( _arguments.size() < 1 && !aggregate )
     {
-      bool aggregate = copts.count("all") || copts.count("local") || copts.count("remote") || copts.count("medium-type");
+      report_alias_or_aggregate_required ( out(), _command_help );
+      ERR << "No alias argument given." << endl;
+      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      return;
+    }
 
-      if ( _arguments.size() < 1 && !aggregate )
-      {
-        report_alias_or_aggregate_required ( out(), _command_help );
-        ERR << "No alias argument given." << endl;
-        setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-        return;
-      }
+    // too many arguments
+    if ( _arguments.size() && aggregate )
+    {
+      report_too_many_arguments( out(), _command_help );
+      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      return;
+    }
 
-      // too many arguments
-      if ( _arguments.size() && aggregate )
-      {
-        report_too_many_arguments( out(), _command_help );
-        setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-        return;
-      }
-
-      initRepoManager();
-      if ( aggregate )
-      {
-        remove_repos_by_option( *this );
-      }
-      else
-      {
-        // must store repository before remove to ensure correct match number
-        std::set<RepoInfo,RepoInfoAliasComparator> repo_to_remove;
-        for_(it, _arguments.begin(), _arguments.end())
-        {
-          RepoInfo repo;
-          if (match_repo(*this,*it,&repo))
-          {
-            repo_to_remove.insert(repo);
-          }
-          else
-          {
-            MIL << "Repository not found by given alias, number or URI." << endl;
-            // translators: %s is the supplied command line argument which
-            // for which no repository counterpart was found
-            out().error( str::Format(_("Repository '%s' not found by alias, number or URI.")) % *it );
-          }
-        }
-
-        for_(it, repo_to_remove.begin(), repo_to_remove.end())
-          remove_repo(*this,*it);
-      }
+    initRepoManager();
+    if ( aggregate )
+    {
+      remove_repos_by_option( *this );
     }
     else
     {
-      if (_arguments.size() < 1)
-      {
-        ERR << "Required argument missing." << endl;
-        report_required_arg_missing( out(), _command_help );
-        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-        return;
-      }
-
-      initRepoManager();
-
-      std::set<repo::RepoInfoBase_Ptr, ServiceAliasComparator> to_remove;
+      // must store repository before remove to ensure correct match number
+      std::set<RepoInfo,RepoInfoAliasComparator> repo_to_remove;
       for_(it, _arguments.begin(), _arguments.end())
       {
-        repo::RepoInfoBase_Ptr s;
-        if (match_service(*this, *it, s, copts.count("loose-auth"), copts.count("loose-query")))
+        RepoInfo repo;
+        if (match_repo(*this,*it,&repo))
         {
-          to_remove.insert(s);
+          repo_to_remove.insert(repo);
         }
         else
         {
-          MIL << "Service not found by given alias, number or URI." << endl;
-	  // translators: %s is the supplied command line argument which
-	  // for which no service counterpart was found
-	  out().error( str::Format(_("Service '%s' not found by alias, number or URI.")) % *it );
+          MIL << "Repository not found by given alias, number or URI." << endl;
+          // translators: %s is the supplied command line argument which
+          // for which no repository counterpart was found
+          out().error( str::Format(_("Repository '%s' not found by alias, number or URI.")) % *it );
         }
       }
 
-      for_(it, to_remove.begin(), to_remove.end())
-      {
-        RepoInfo_Ptr repo_ptr = dynamic_pointer_cast<RepoInfo>(*it);
-        if (repo_ptr)
-          remove_repo(*this, *repo_ptr);
-        else
-          remove_service(*this, *dynamic_pointer_cast<ServiceInfo>(*it));
-      }
+      for_(it, repo_to_remove.begin(), repo_to_remove.end())
+        remove_repo(*this,*it);
     }
-
     break;
   }
 

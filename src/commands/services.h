@@ -5,5 +5,6 @@
 #include "services/refresh.h"
 #include "services/add.h"
 #include "services/modify.h"
+#include "services/remove.h"
 
 #endif

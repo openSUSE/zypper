@@ -151,3 +151,15 @@ bool refresh_service(Zypper & zypper, const ServiceInfo & service, RepoManager::
 
   return error;
 }
+
+void remove_service( Zypper & zypper, const ServiceInfo & service )
+{
+  RepoManager & manager( zypper.repoManager() );
+
+  zypper.out().info( str::Format(_("Removing service '%s':")) % service.asUserString() );
+  manager.removeService( service );
+  MIL << "Service '" << service.alias() << "' has been removed." << endl;
+  zypper.out().info( str::Format(_("Service '%s' has been removed.")) % service.asUserString() );
+}
+
+
