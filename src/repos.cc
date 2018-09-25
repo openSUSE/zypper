@@ -2254,15 +2254,7 @@ ZYPP_DECLARE_OPERATORS_FOR_FLAGS( ServiceListFlags );
 
 // ---------------------------------------------------------------------------
 
-void remove_service( Zypper & zypper, const ServiceInfo & service )
-{
-  RepoManager & manager( zypper.repoManager() );
 
-  zypper.out().info( str::Format(_("Removing service '%s':")) % service.asUserString() );
-  manager.removeService( service );
-  MIL << "Service '" << service.alias() << "' has been removed." << endl;
-  zypper.out().info( str::Format(_("Service '%s' has been removed.")) % service.asUserString() );
-}
 
 void checkIfToRefreshPluginServices(Zypper & zypper, RepoManager::RefreshServiceFlags flags_r)
 {
