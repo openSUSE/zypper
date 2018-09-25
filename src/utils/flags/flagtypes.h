@@ -66,16 +66,16 @@ Value TriBoolType   ( TriBool &target, StoreFlag store = StoreTrue, const boost:
 
 
 template <typename T, typename E = T>
-Value BitFieldType ( T* target, E flag , StoreFlag store = StoreTrue ) {
+Value BitFieldType ( T& target, E flag , StoreFlag store = StoreTrue ) {
   return Value (
-        [ target, flag] () -> boost::optional<std::string> {
-          return target->testFlag ( flag ) ? std::string("true") : std::string("false");
+        [ &target, flag] () -> boost::optional<std::string> {
+          return target.testFlag ( flag ) ? std::string("true") : std::string("false");
         },
-        [ target, flag, store ] ( const CommandOption &, const boost::optional<std::string> & ) {
+        [ &target, flag, store ] ( const CommandOption &, const boost::optional<std::string> & ) {
           if ( store == StoreTrue )
-            target->setFlag ( flag );
+            target.setFlag ( flag );
           else
-            target->unsetFlag ( flag );
+            target.unsetFlag ( flag );
         }
   );
 }

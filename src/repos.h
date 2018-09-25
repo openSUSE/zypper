@@ -51,6 +51,11 @@ inline std::string timestamp()
 template <typename Container>
 void init_repos( Zypper & zypper, const Container & container = Container() );
 
+/**
+ * Say "Repository %s not found" for all strings in \a not_found list.
+ */
+void report_unknown_repos( Out & out, const std::list<std::string> & not_found );
+
 template<typename T>
 void get_repos( Zypper & zypper, const T & begin, const T & end, std::list<RepoInfo> & repos, std::list<std::string> & not_found );
 
@@ -219,6 +224,7 @@ void load_target_resolvables( Zypper & zypper );
 void load_repo_resolvables( Zypper & zypper );
 
 ColorString repoPriorityNumber( unsigned prio_r, int width_r = 0 );
+ColorString repoPriorityNumberAnnotated( unsigned prio_r, int width_r = 0 );
 
 const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r );
 
@@ -229,6 +235,8 @@ bool repo_cmp_alias_urls( const RepoInfo & lhs, const RepoInfo & rhs );
  * @TODO remove me with copts
  */
 unsigned priority_from_copts( Zypper &zypper );
+
+void repoPrioSummary( Zypper & zypper );
 
 #endif
 // Local Variables:

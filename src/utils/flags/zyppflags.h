@@ -127,6 +127,11 @@ namespace ZyppFlags {
   struct  CommandGroup
   {
     /**
+     * Creates a empty default group
+     */
+    CommandGroup ();
+
+    /**
      * Creates the default command group with given options and conflicting flags
      */
     CommandGroup (  std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r = ConflictingFlagsList() );

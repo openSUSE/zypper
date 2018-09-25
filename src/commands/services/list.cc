@@ -13,7 +13,7 @@ void service_list_tr( Zypper & zypper,
                       Table & tbl,
                       const repo::RepoInfoBase_Ptr & srv,
                       unsigned reponumber,
-                      const ListServicesCmd::ServiceListFlags & flags )
+                      const RSCommonListOptions::RSCommonListFlags & flags )
 {
   ServiceInfo_Ptr service = dynamic_pointer_cast<ServiceInfo>(srv);
   RepoInfo_Ptr repo;
@@ -25,7 +25,7 @@ void service_list_tr( Zypper & zypper,
   TableRow tr( 8 );
 
   // number
-  if ( flags & ListServicesCmd::ServiceRepo )
+  if ( flags & RSCommonListOptions::ServiceRepo )
   {
     if ( repo && ! repo->enabled() )
       tr << ColorString( repoGpgCheck._tagColor, "-" ).str();
@@ -47,7 +47,7 @@ void service_list_tr( Zypper & zypper,
   tr << repoAutorefreshStr( *srv );
 
   // priority
-  if ( flags & ListServicesCmd::ShowPriority )
+  if ( flags & RSCommonListOptions::ShowPriority )
   {
     if ( service )
       tr << "";
@@ -62,7 +62,7 @@ void service_list_tr( Zypper & zypper,
     tr << repo->type().asString();
 
   // url
-  if ( flags & ListServicesCmd::ShowURI )
+  if ( flags & RSCommonListOptions::ShowURI )
   {
     if ( service )
       tr << service->url().asString();
@@ -93,7 +93,7 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
 
   Table tbl;
 
-  bool with_repos = _flags.testFlag( ShowWithRepos );
+  bool with_repos = _listOptions._flags.testFlag( RSCommonListOptions::ShowWithRepos );
   //! \todo string type = zypper.cOpts().count("type");
 
   // header
@@ -108,16 +108,16 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
           // translators: 'zypper repos' column - whether autorefresh is enabled for the repository
        << _("Refresh");
     // optional columns
-    if ( _flags.testFlag( ShowPriority ) )
+    if ( _listOptions._flags.testFlag( RSCommonListOptions::ShowPriority ) )
       // translators: repository priority (in zypper repos -p or -d)
       th << _("Priority");
     th << _("Type");
-    if ( _flags.testFlag( ShowURI ) )
+    if ( _listOptions._flags.testFlag( RSCommonListOptions::ShowURI ) )
       th << _("URI");
     tbl << std::move(th);
   }
 
-  bool show_enabled_only = _flags.testFlag( ShowEnabledOnly );
+  bool show_enabled_only = _listOptions._flags.testFlag( RSCommonListOptions::ShowEnabledOnly );
 
   int i = 0;
   for_( it, services.begin(), services.end() )
@@ -145,11 +145,11 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
 
         if ( !servicePrinted )
         {
-          service_list_tr( zypp_r, tbl, *it, i, _flags );
+          service_list_tr( zypp_r, tbl, *it, i, _listOptions._flags );
           servicePrinted = true;
         }
         // ServiceRepo: we print repos of the current service
-        service_list_tr( zypp_r, tbl, ptr, i, _flags | ServiceRepo );
+        service_list_tr( zypp_r, tbl, ptr, i, _listOptions._flags | RSCommonListOptions::ServiceRepo );
       }
     }
     if ( servicePrinted )
@@ -160,7 +160,7 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
     if ( show_enabled_only && !(*it)->enabled() )
       continue;
 
-    service_list_tr( zypp_r, tbl, *it, i, _flags );
+    service_list_tr( zypp_r, tbl, *it, i, _listOptions._flags );
   }
 
   if ( tbl.empty() )
@@ -169,11 +169,11 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
   else
   {
     // sort
-    if ( _flags.testFlag( SortByURI ) )
+    if ( _listOptions._flags.testFlag( RSCommonListOptions::SortByURI ) )
     {
-      if ( _flags.testFlag( ShowAll ) )
+      if ( _listOptions._flags.testFlag( RSCommonListOptions::ListServiceShowAll ) )
         tbl.sort( 7 );
-      else if ( _flags.testFlag( ShowPriority ) )
+      else if ( _listOptions._flags.testFlag( RSCommonListOptions::ShowPriority ) )
         tbl.sort( 7 );
       else
         tbl.sort( 6 );
@@ -183,9 +183,9 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
     else if ( zypper.cOpts().count("sort-by-alias") )
       tbl.sort( 1 );
 #endif
-    else if ( _flags.testFlag( SortByName ) )
+    else if ( _listOptions._flags.testFlag( RSCommonListOptions::SortByName ) )
       tbl.sort( 2 );
-    else if ( _flags.testFlag( SortByPrio) )
+    else if ( _listOptions._flags.testFlag( RSCommonListOptions::SortByPrio) )
       tbl.sort( 5 );
 
     // print
@@ -225,29 +225,16 @@ void ListServicesCmd::printXMLServiceList( Zypper &zypp_r )
 
 ZyppFlags::CommandGroup ListServicesCmd::cmdOptions() const
 {
-  auto that = const_cast<ListServicesCmd *>(this);;
-
-  return {{
-    { "uri",  'u',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ShowURI ), _("Show also base URI of repositories.")},
-    { "url", '\0',       ZyppFlags::NoArgument | ZyppFlags::Hidden, ZyppFlags::BitFieldType( &that->_flags, ShowURI ), "" },
-    { "priority",   'p', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ShowPriority ), _("Show also repository priority.") },
-    { "details",    'd', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ShowAll      ), _("Show more information like URI, priority, type.")  },
-    { "with-repos", 'r', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ShowWithRepos), _("Show also repositories belonging to the services.") },
-    { "show-enabled-only", 'E', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ShowEnabledOnly ), _("Show enabled repos only.") },
-    { "sort-by-uri", 'U',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ServiceListFlags( ShowURI ) | SortByURI ), _("Sort the list by URI.") },
-    { "sort-by-name", 'N',      ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, SortByName ), _("Sort the list by name.") },
-    { "sort-by-priority", 'P',  ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( &that->_flags, ServiceListFlags( ShowPriority ) | SortByPrio ),  _("Sort the list by repository priority.") }
-  }};
+  return ZyppFlags::CommandGroup();
 }
 
 void ListServicesCmd::doReset()
 {
-  _flags.unsetFlag( _flags.all() );
 }
 
 int ListServicesCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
 {
-  if ( _flags.testFlag( ShowWithRepos) )
+  if ( _listOptions._flags.testFlag( RSCommonListOptions::ShowWithRepos) )
     checkIfToRefreshPluginServices( zypp_r );
 
   if ( zypp_r.out().type() == Out::TYPE_XML ) {

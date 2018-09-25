@@ -300,5 +300,10 @@ CommandGroup::CommandGroup( std::vector<CommandOption> &&options_r, ConflictingF
   : CommandGroup (  _("Command options:"), std::move(options_r), std::move(conflictingOptions_r) )
 { }
 
+CommandGroup::CommandGroup()
+  : CommandGroup ( std::vector<CommandOption>(), ConflictingFlagsList() )
+{ }
+
+
 }}
 

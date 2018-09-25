@@ -2460,62 +2460,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::LIST_REPOS_e:
-  {
-    static struct option service_list_options[] = {
-      {"export",		required_argument,	0, 'e'},
-      {"alias",			no_argument,		0, 'a'},
-      {"name",			no_argument,		0, 'n'},
-      {"refresh",		no_argument,		0, 'r'},
-      {"uri",			no_argument,		0, 'u'},
-      {"url",			no_argument,		0,  0 },
-      {"priority",		no_argument,		0, 'p'},
-      {"details",		no_argument,		0, 'd'},
-      {"show-enabled-only",	no_argument,		0, 'E'},
-      {"sort-by-priority",	no_argument,		0, 'P'},
-      {"sort-by-uri",		no_argument,		0, 'U'},
-      {"sort-by-alias",		no_argument,		0, 'A'},
-      {"sort-by-name",		no_argument,		0, 'N'},
-      {"service",		no_argument,		0, 's'},
-      {"help",			no_argument,		0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = service_list_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("repos (lr) [OPTIONS] [REPO] ...")
-    )
-    .description(	// translators: command description
-    _("List all defined repositories.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-e, --export <FILE.repo>",	// translators: -e, --export <FILE.repo>
-             _("Export all defined repositories as a single local .repo file.") )
-    .option( "-a, --alias",	// translators: -a, --alias
-             _("Show also repository alias.") )
-    .option( "-n, --name",	// translators: -n, --name
-             _("Show also repository name.") )
-    .option( "-u, --uri",	// translators: -u, --uri
-             _("Show also base URI of repositories.") )
-    .option( "-p, --priority",	// translators: -p, --priority
-             _("Show also repository priority.") )
-    .option( "-r, --refresh",	// translators: -r, --refresh
-             _("Show also the autorefresh flag.") )
-    .option( "-d, --details",	// translators: -d, --details
-             _("Show more information like URI, priority, type.") )
-    .option( "-s, --service",	// translators: -s, --service
-             _("Show also alias of parent service.") )
-    .option( "-E, --show-enabled-only",	// translators: -E, --show-enabled-only
-             _("Show enabled repos only.") )
-    .option( "-U, --sort-by-uri",	// translators: -U, --sort-by-uri
-             _("Sort the list by URI.") )
-    .option( "-P, --sort-by-priority",	// translators: -P, --sort-by-priority
-             _("Sort the list by repository priority.") )
-    .option( "-A, --sort-by-alias",	// translators: -A, --sort-by-alias
-             _("Sort the list by alias.") )
-    .option( "-N, --sort-by-name",	// translators: -N, --sort-by-name
-             _("Sort the list by name.") )
-    ;
 #if 0
     _command_help = _(
       "repos (lr) [OPTIONS] [repo] ...\n"
@@ -2538,8 +2482,6 @@ void Zypper::processCommandOptions()
       "-N, --sort-by-name        Sort the list by name.\n"
     );
 #endif
-    break;
-  }
 
   case ZypperCommand::REMOVE_REPO_e:
   {
@@ -4289,17 +4231,6 @@ void Zypper::doCommand()
   {
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
-    break;
-  }
-
-  // --------------------------( repo list )----------------------------------
-
-  case ZypperCommand::LIST_REPOS_e:
-  {
-    initRepoManager();
-    checkIfToRefreshPluginServices( *this );
-    list_repos( *this );
-
     break;
   }
 
