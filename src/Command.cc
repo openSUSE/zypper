@@ -16,6 +16,7 @@
 
 #include "commands/locks.h"
 #include "commands/services.h"
+#include "commands/repos.h"
 #include "commands/ps.h"
 
 using namespace zypp;
@@ -38,11 +39,15 @@ namespace
       { ZypperCommand::ADD_LOCK_e,    std::make_shared<AddLocksCmd>() },
       { ZypperCommand::REMOVE_LOCK_e, std::make_shared<RemoveLocksCmd>() },
       { ZypperCommand::CLEAN_LOCKS_e, std::make_shared<CleanLocksCmd>() },
+
       { ZypperCommand::LIST_SERVICES_e, std::make_shared<ListServicesCmd>() },
       { ZypperCommand::REFRESH_SERVICES_e, std::make_shared<RefreshServicesCmd>() },
       { ZypperCommand::MODIFY_SERVICE_e, std::make_shared<ModifyServiceCmd>() },
       { ZypperCommand::REMOVE_SERVICE_e, std::make_shared<RemoveServiceCmd>() },
       { ZypperCommand::ADD_SERVICE_e, std::make_shared<AddServiceCmd>() },
+
+      { ZypperCommand::LIST_REPOS_e, std::make_shared<ListReposCmd>() },
+
       { ZypperCommand::PS_e, std::make_shared<PSCommand>() }
     };
     return table;
@@ -67,7 +72,7 @@ namespace
       _t( REMOVE_REPO_e )	| "removerepo"		| "rr";
       _t( RENAME_REPO_e )	| "renamerepo"		| "nr";
       _t( MODIFY_REPO_e )	| "modifyrepo"		| "mr";
-      _t( LIST_REPOS_e )	| "repos"		| "lr" | "catalogs" | "ca";
+      //_t( LIST_REPOS_e )	| "repos"		| "lr" | "catalogs" | "ca";
       _t( REFRESH_e )		| "refresh"		| "ref";
       _t( CLEAN_e )		| "clean"		| "cc" | "clean-cache" | "you-clean-cache" | "yc";
 

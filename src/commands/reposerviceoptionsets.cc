@@ -183,3 +183,96 @@ void RepoProperties::fillFromCopts(Zypper &zypper)
   _gpgCheck = cli::gpgCheck( zypper );
   _priority = priority_from_copts( zypper );
 }
+
+
+RSCommonListOptions::RSCommonListOptions(OptCommandCtx ctx)
+  : _cmdContext ( ctx )
+{ }
+
+RSCommonListOptions::RSCommonListOptions(OptCommandCtx ctx, ZypperBaseCommand &parent)
+  : BaseCommandOptionSet ( parent ),
+    _cmdContext ( ctx )
+{ }
+
+std::vector<ZyppFlags::CommandGroup> RSCommonListOptions::options()
+{
+
+  std::vector<ZyppFlags::CommandGroup> opts;
+
+  RSCommonListFlags showAllFlag = ListServiceShowAll;
+
+  if ( _cmdContext  == OptCommandCtx::RepoContext ) {
+
+    opts.push_back ( {{
+            { "alias",  'a',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, ShowAlias ),
+                // translators: -a, --alias
+              _("Show also repository alias.")},
+            { "name",   'n',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, ShowName ),
+                // translators: -n, --name
+              _("Show also repository name.")},
+            { "refresh",   'r',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, ShowRefresh ),
+                // translators: -r, --refresh
+              _("Show also the autorefresh flag.")}
+          }} );
+
+    showAllFlag = ListRepoShowAll;
+  }
+
+  opts.push_back(
+    {{
+      { "uri",  'u',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, ShowURI ),
+        // translators: -u, --uri
+        _("Show also base URI of repositories.")},
+      { "url", '\0',       ZyppFlags::NoArgument | ZyppFlags::Hidden, ZyppFlags::BitFieldType( _flags, ShowURI ), "" },
+      { "priority",   'p', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, ShowPriority ),
+        // translators: -p, --priority
+        _("Show also repository priority.") },
+      { "details",    'd', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, showAllFlag ),
+        // translators: -d, --details
+        _("Show more information like URI, priority, type.")  }
+    }}
+  );
+
+  if ( _cmdContext == OptCommandCtx::ServiceContext ) {
+    //@NOTE attention -r clashes with --refresh in case of merging the options
+    opts.back().options.push_back(
+      { "with-repos", 'r', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, ShowWithRepos), _("Show also repositories belonging to the services.") }
+    );
+  } else {
+    opts.back().options.push_back(
+      { "service", 's', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, ShowWithService),
+        // translators: -s, --service
+        _("Show also alias of parent service.") }
+    );
+  }
+
+  opts.push_back({{
+     { "show-enabled-only", 'E', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, ShowEnabledOnly ),
+       // translators: -E, --show-enabled-only
+       _("Show enabled repos only.") },
+     { "sort-by-uri", 'U',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, RSCommonListFlags( ShowURI ) | SortByURI ),
+       // translators: -U, --sort-by-uri
+       _("Sort the list by URI.") },
+     { "sort-by-name", 'N',      ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, SortByName ),
+       // translators: -N, --sort-by-name
+       _("Sort the list by name.") },
+     { "sort-by-priority", 'P',  ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, RSCommonListFlags( ShowPriority ) | SortByPrio ),
+       // translators: -P, --sort-by-priority
+       _("Sort the list by repository priority.") }
+  }});
+
+  if ( _cmdContext  == OptCommandCtx::RepoContext ) {
+    opts.back().options.push_back(
+      { "sort-by-alias", 'A', ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, RSCommonListFlags( ShowAlias ) | SortByAlias ),
+        // translators: -A, --sort-by-alias
+        _("Show also alias of parent service.") }
+    );
+  }
+
+  return opts;
+}
+
+void RSCommonListOptions::reset()
+{
+  _flags.unsetFlag( _flags.all() );
+}

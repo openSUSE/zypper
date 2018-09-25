@@ -5,7 +5,7 @@
 #include "commandhelpformatter.h"
 #include "solve-commit.h"
 
-#include "repos.h"
+#include "src/repos.h"
 
 using namespace zypp;
 
