@@ -963,15 +963,11 @@ namespace zypp
     _pimpl->_op = op;
   }
 
-  void PoolQuery::setMatchSubstring()	{ _pimpl->_flags.setModeSubstring(); }
-  void PoolQuery::setMatchExact()	{ _pimpl->_flags.setModeString(); }
-  void PoolQuery::setMatchRegex()	{ _pimpl->_flags.setModeRegex(); }
-  void PoolQuery::setMatchGlob()	{ _pimpl->_flags.setModeGlob(); }
-  void PoolQuery::setMatchWord()
-  {
-    _pimpl->_match_word = true;
-    _pimpl->_flags.setModeRegex();
-  }
+  void PoolQuery::setMatchSubstring()	{ _pimpl->_flags.setModeSubstring();	_pimpl->_match_word = false; }
+  void PoolQuery::setMatchExact()	{ _pimpl->_flags.setModeString();	_pimpl->_match_word = false; }
+  void PoolQuery::setMatchRegex()	{ _pimpl->_flags.setModeRegex();	_pimpl->_match_word = false; }
+  void PoolQuery::setMatchGlob()	{ _pimpl->_flags.setModeGlob();		_pimpl->_match_word = false; }
+  void PoolQuery::setMatchWord()	{ _pimpl->_flags.setModeSubstring();	_pimpl->_match_word = true; }
 
   Match PoolQuery::flags() const
   { return _pimpl->_flags; }
@@ -1029,12 +1025,10 @@ namespace zypp
   { _pimpl->_flags.turn( Match::FILES, value ); }
 
   bool PoolQuery::matchExact() const		{ return _pimpl->_flags.isModeString(); }
-  bool PoolQuery::matchSubstring() const	{ return _pimpl->_flags.isModeSubstring(); }
+  bool PoolQuery::matchSubstring() const	{ return _pimpl->_flags.isModeSubstring() && !_pimpl->_match_word; }
   bool PoolQuery::matchGlob() const		{ return _pimpl->_flags.isModeGlob(); }
   bool PoolQuery::matchRegex() const		{ return _pimpl->_flags.isModeRegex(); }
-
-  bool PoolQuery::matchWord() const
-  { return _pimpl->_match_word; }
+  bool PoolQuery::matchWord() const		{ return _pimpl->_flags.isModeSubstring() && _pimpl->_match_word; }
 
   PoolQuery::StatusFilter PoolQuery::statusFilterFlags() const
   { return _pimpl->_status_flags; }

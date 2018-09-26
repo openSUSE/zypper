@@ -371,7 +371,7 @@ namespace zypp
     void setMatchGlob();
     /** Set to use the query strings as regexes */
     void setMatchRegex();
-    /** Set to match words (uses regex) */
+    /** Set substring to match words */
     void setMatchWord();
     //void setLocale(const Locale & locale);
     //@}
