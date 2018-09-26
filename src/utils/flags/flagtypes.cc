@@ -7,7 +7,6 @@
 #include "flagtypes.h"
 #include "main.h"
 #include "utils/messages.h"
-#include "output/Out.h"
 #include "utils/misc.h"
 
 namespace zypp {
@@ -155,7 +154,7 @@ Value NoValue()
   );
 }
 
-Value WarnOptionVal( Out &out_r, const std::string &warning_r, boost::optional<Value> val_r )
+Value WarnOptionVal(Out &out_r, const std::string &warning_r, Out::Verbosity verbosity_r, const boost::optional<Value> &val_r )
 {
   return Value (
         [ val_r ] () -> boost::optional<std::string> {
@@ -163,8 +162,8 @@ Value WarnOptionVal( Out &out_r, const std::string &warning_r, boost::optional<V
             return val_r->defaultValue();
           return boost::optional<std::string>();
         },
-        [ &out_r, warning_r, val_r ] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
-          out_r.warning( warning_r );
+        [ &out_r, warning_r, val_r, verbosity_r ] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
+          out_r.warning( warning_r, verbosity_r );
           if ( val_r ) {
             Value val = *val_r; // C++ forces us to copy by value again
             val.set ( opt, in );

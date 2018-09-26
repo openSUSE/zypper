@@ -1479,9 +1479,8 @@ bool add_repo( Zypper & zypper, RepoInfo & repo, bool noCheck )
 void add_repo_by_url( Zypper & zypper,
 		      const Url & url,
 		      const std::string & alias,
-		      unsigned prio,
-		      const TriBool &keepPackages,
 		      const RepoServiceCommonOptions &opts,
+		      const RepoProperties &repoProps,
 		      bool noCheck )
 {
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url << ")" << endl;
@@ -1498,13 +1497,13 @@ void add_repo_by_url( Zypper & zypper,
   repo.setEnabled( indeterminate( opts._enable ) ? true : bool(opts._enable) );
   repo.setAutorefresh( indeterminate( opts._enableAutoRefresh ) ? false : bool( opts._enableAutoRefresh ) );	// wouldn't true be the better default?
 
-  if ( prio >= 1 )
-    repo.setPriority( prio );
+  if ( repoProps._priority >= 1 )
+    repo.setPriority( repoProps._priority );
 
-  if ( !indeterminate(keepPackages) )
-    repo.setKeepPackages( keepPackages );
+  if ( !indeterminate( repoProps._keepPackages ) )
+    repo.setKeepPackages( repoProps._keepPackages );
 
-  RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
+  RepoInfo::GpgCheck gpgCheck = repoProps._gpgCheck;
   if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
     repo.setGpgCheck( gpgCheck );
 
@@ -1516,9 +1515,8 @@ void add_repo_by_url( Zypper & zypper,
 /// \todo merge common code with add_repo_by_url
 void add_repo_from_file( Zypper & zypper,
                          const std::string & repo_file_url,
-                         unsigned prio,
-                         const TriBool &keepPackages,
                          const RepoServiceCommonOptions &opts,
+                         const RepoProperties &repoProps,
                          bool noCheck )
 {
   Url url = make_url( repo_file_url );
@@ -1528,7 +1526,7 @@ void add_repo_from_file( Zypper & zypper,
     return;
   }
 
-  RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
+  RepoInfo::GpgCheck gpgCheck = repoProps._gpgCheck;
 
   std::list<RepoInfo> repos;
 
@@ -1587,14 +1585,14 @@ void add_repo_from_file( Zypper & zypper,
     if ( !indeterminate( opts._enableAutoRefresh) )
       repo.setAutorefresh( opts._enableAutoRefresh );
 
-    if ( !indeterminate(keepPackages) )
-      repo.setKeepPackages( keepPackages );
+    if ( !indeterminate( repoProps._keepPackages ) )
+      repo.setKeepPackages( repoProps._keepPackages );
 
     if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
       repo.setGpgCheck( gpgCheck );
 
-    if ( prio >= 1 )
-      repo.setPriority( prio );
+    if ( repoProps._priority >= 1 )
+      repo.setPriority( repoProps._priority );
 
     if ( add_repo( zypper, repo, noCheck ) )
       addedAtLeastOneRepository = true;

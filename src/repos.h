@@ -131,7 +131,6 @@ void clean_repos( Zypper & zypper );
  */
 bool match_repo( Zypper & zypper, const std::string str, RepoInfo *repo = 0 );
 
-
 /**
  * Add repository specified by \url to system repositories.
  *
@@ -142,7 +141,9 @@ bool match_repo( Zypper & zypper, const std::string str, RepoInfo *repo = 0 );
  */
 void add_repo_by_url(Zypper & zypper,
 		      const Url & url,
-		      const std::string & alias, unsigned prio, const TriBool &keepPackages, const RepoServiceCommonOptions &opts, bool noCheck);
+		      const std::string & alias,
+		      const RepoServiceCommonOptions &opts,
+		      const RepoProperties &repoProps, bool noCheck);
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -154,12 +155,13 @@ void add_repo_by_url(Zypper & zypper,
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
 void add_repo_from_file(Zypper & zypper,
-			 const std::string & repo_file_url , unsigned prio, const TriBool &keepPackages, const RepoServiceCommonOptions &opts, bool noCheck);
+			 const std::string & repo_file_url , const RepoServiceCommonOptions &opts, const RepoProperties &repoProps, bool noCheck);
 
 /**
  * Add repository specified by \repo to system repositories.
  */
 bool add_repo(Zypper & zypper, RepoInfo & repo , bool noCheck);
+
 
 /**
  * Remove repository specified by \a alias.

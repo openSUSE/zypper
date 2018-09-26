@@ -9,6 +9,7 @@
 
 #include "zyppflags.h"
 #include "exceptions.h"
+#include "output/Out.h"
 
 #include <zypp/ResKind.h>
 #include <zypp/TriBool.h>
@@ -90,7 +91,7 @@ Value NoValue ();
  * Creates a value that emits a warning when set, if \a val_r is valid the calls are forwarded to it after
  * emitting the warning.
  */
-Value WarnOptionVal ( Out &out_r , const std::string &warning_r, boost::optional<Value> val_r );
+Value WarnOptionVal (Out &out_r , const std::string &warning_r, Out::Verbosity verbosity_r = Out::NORMAL, const boost::optional<Value> &val_r = boost::optional<Value>());
 
 /**
  * Helper function that just returns a empty default value

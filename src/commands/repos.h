@@ -2,5 +2,5 @@
 #define ZYPPER_COMMANDS_REPOS_H_INCLUDED
 
 #include "repos/list.h"
-
+#include "repos/add.h"
 #endif

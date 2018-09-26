@@ -2404,17 +2404,6 @@ void Zypper::processCommandOptions()
     );
 #endif
 
-  case ZypperCommand::ADD_REPO_e:
-  {
-    static struct option service_add_options[] = {
-      {"type", required_argument, 0, 't'},
-      {"repo", 			required_argument, 	0, 'r'},	// :( conflicted with '-r --refresh', so ARG_REPO_PROP now uses -f/F
-      {"help", no_argument, 0, 'h'},
-      {"check", no_argument, 0, 'c'},
-      {"no-check", no_argument, 0, 'C'},
-      ARG_REPO_PROP,
-      {0, 0, 0, 0}
-    };
 #if 0
     _(
       // translators: the %s = "yast2, rpm-md, plaindir"
@@ -2437,28 +2426,6 @@ void Zypper::processCommandOptions()
       "-f, --refresh             Enable autorefresh of the repository.\n"
     )
 #endif
-    specific_options = service_add_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("addrepo (ar) [OPTIONS] <URI> <ALIAS>")
-    )
-     .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("addrepo (ar) [OPTIONS] <FILE.repo>")
-    )
-    .description(// translators: command description
-    _("Add a repository to the system. The repository can be specified by its URI or can be read from specified .repo file (even remote).")
-    )
-    .optionSectionCommandOptions()
-    .option( "-r, --repo <FILE.repo>",	_("Just another means to specify a .repo file to read.") )
-    .option( "-c, --check",		_("Probe URI.") )
-    .option( "-C, --no-check",		_("Don't probe URI, probe later during refresh.") )
-    .gap()
-    .option_REPO_PROP
-    .legacyOptionSection()
-    .option( "-t, --type <TYPE>",	str::Format(_("The repository type is always autodetected. This option is ignored.") ) )
-    ;
-    break;
-  }
 
 #if 0
     _command_help = _(
@@ -4128,10 +4095,6 @@ void Zypper::processCommandOptions()
   legacyCLITranslate( _copts, "sort-by-catalog",		"sort-by-repo" );
   legacyCLITranslate( _copts, "uninstalled-only",		"not-installed-only",	Out::HIGH );	// bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
 
-  if ( command().toEnum() == ZypperCommand::ADD_REPO_e  || command().toEnum() == ZypperCommand::ADD_SERVICE_e ) {
-    legacyCLITranslate( _copts, "type",	"",  Out::NORMAL, LegacyCLIMsgType::Ignored);
-  }
-
   // bsc#957862: pkg/apt/yum user convenience: no-confirm  ==> --non-interactive
   if ( _copts.count("no-confirm") )
   {
@@ -4231,113 +4194,6 @@ void Zypper::doCommand()
   {
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
-    break;
-  }
-
-  // --------------------------( addrepo )------------------------------------
-
-  case ZypperCommand::ADD_REPO_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error( _("Root privileges are required for modifying system repositories.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    // too many arguments
-    if ( _arguments.size() > 2 )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    try
-    {
-
-      RepoServiceCommonOptions opts ( OptCommandCtx::RepoContext );
-      opts.fillFromCopts( *this );
-
-      unsigned prio = priority_from_copts(*this);
-      TriBool keepPackages	= get_boolean_option( *this, "keep-packages", "no-keep-packages" );
-      bool noCheck = copts.count("no-check");
-
-      // add repository specified in .repo file
-      if ( copts.count("repo") )
-      {
-        add_repo_from_file( *this,copts["repo"].front(), prio, keepPackages, opts, noCheck );
-        return;
-      }
-
-      switch ( _arguments.size() )
-      {
-      // display help message if insufficient info was given
-      case 0:
-        out().error(_("Too few arguments."));
-        ERR << "Too few arguments." << endl;
-        out().info( _command_help );
-        setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-        return;
-      case 1:
-	if( !isRepoFile( _arguments[0] ) )
-        {
-          out().error(_("If only one argument is used, it must be a URI pointing to a .repo file."));
-          ERR << "Not a repo file." << endl;
-          out().info( _command_help );
-          setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-          return;
-        }
-        else
-        {
-          initRepoManager();
-          add_repo_from_file( *this,_arguments[0], prio, keepPackages, opts, noCheck );
-          break;
-        }
-      case 2:
-	Url url;
-	if ( _arguments[0].find("obs") == 0 )
-	  url = make_obs_url( _arguments[0], config().obs_baseUrl, config().obs_platform );
-	else
-	  url = make_url( _arguments[0] );
-        if ( !url.isValid() )
-        {
-          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-          return;
-        }
-
-        if ( copts.count("check") )
-        {
-          if ( !copts.count("no-check") )
-            _gopts.rm_options.probe = true;
-          else
-            out().warning(str::form(
-              _("Cannot use %s together with %s. Using the %s setting."),
-              "--check", "--no-check", "zypp.conf")
-                ,Out::QUIET );
-        }
-        else if ( copts.count("no-check") )
-          _gopts.rm_options.probe = false;
-
-        initRepoManager();
-
-        // load gpg keys
-        init_target( *this );
-
-        add_repo_by_url( *this, url, _arguments[1]/*alias*/, prio, keepPackages, opts, noCheck );
-        return;
-      }
-    }
-    catch ( const repo::RepoUnknownTypeException & e )
-    {
-      ZYPP_CAUGHT( e );
-      out().error( e, _("Specified type is not a valid repository type:"),
-		   str::form( _("See '%s' or '%s' to get a list of known repository types."),
-			      "zypper help addrepo", "man zypper" ) );
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-    }
-
     break;
   }
 
