@@ -189,8 +189,7 @@ namespace zypp
      * This method can be used multiple times in which case the query strings
      * will be combined (together with strings added via addAttribute()) into
      * a regex. Searched attribute value will match this regex if <b>any</b>
-     * of these strings will match the value. This can be changed by
-     * (not yet implemented) \ref setRequireAll() method.
+     * of these strings will match the value.
      */
     void addString(const std::string & value);
 
@@ -202,8 +201,6 @@ namespace zypp
      * case the query strings will be combined (together with strings added
      * via addString()) into a regex. Searched attribute value will match
      * this regex if <b>any</b> of these strings will match the value.
-     * This can be changed by (not yet implemented) \ref setRequireAll()
-     * method.
      *
      * \note Though it is possible to use dependency attributes like
      * \ref Solv::Attr::provides here, note that the query string is
@@ -379,15 +376,6 @@ namespace zypp
     //void setLocale(const Locale & locale);
     //@}
 
-    /**
-     * Require that all of the values set by addString or addAttribute
-     * match the values of respective attributes.
-     *
-     * \todo doesn't work yet, don't use this function
-     */
-    void setRequireAll( bool require_all = true );
-
-
     /** \name getters */
     //@{
 
@@ -429,12 +417,6 @@ namespace zypp
      */
     Match::Mode matchMode() const
     { return flags().mode(); }
-
-    /**
-     * Whether all values added via addString() or addAttribute() are required
-     * to match the values of the respective attributes.
-     */
-    bool requireAll() const;
 
     StatusFilter statusFilterFlags() const;
     //@}
@@ -486,6 +468,12 @@ namespace zypp
      * \see \ref Match
      */
     void setFlags( const Match & flags );
+
+  public:
+    /** \deprecated Attribute was defined but never implemented/used. Will be removed in future versions. */
+    void setRequireAll( bool require_all = true ) ZYPP_DEPRECATED;
+    /** \deprecated Attribute was defined but never implemented/used. Will be removed in future versions. */
+    bool requireAll() const ZYPP_DEPRECATED;
 
   public:
     class Impl;

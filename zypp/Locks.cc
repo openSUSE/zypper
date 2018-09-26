@@ -257,7 +257,6 @@ void Locks::removeLock( const ResKind &kind_r, const IdString &name_r )
   q.addKind( kind_r );
   q.setMatchExact();
   q.setCaseSensitive(true);
-  q.requireAll();
   DBG << "remove lock by Selectable" << endl;
   removeLock(q);
 }
