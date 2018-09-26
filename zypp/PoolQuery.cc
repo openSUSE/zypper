@@ -710,77 +710,64 @@ namespace zypp
     //DBG << asString() << endl;
   }
 
-
-  /**
-   * Converts '*' and '?' wildcards within str into their regex equivalents.
-   */
-  static string wildcards2regex(const string & str)
+  ///////////////////////////////////////////////////////////////////
+  namespace
   {
-    string regexed = str;
+    /** Escape \a str_r for use in a regex.
+     * \a flags_r determines whether the input string is interpreted
+     * as regex, glob or plain string.
+     */
+    std::string rxEscape( std::string str_r, const Match & flags_r )
+    {
+      if ( str_r.empty() || flags_r.isModeRegex() )
+	return str_r;
 
-    string r_all(".*"); // regex equivalent of '*'
-    string r_one(".");  // regex equivalent of '?'
-    string::size_type pos;
+      if ( flags_r.isModeGlob() )
+	return str::rxEscapeGlob( std::move(str_r) );
 
-    // replace all "*" in input with ".*"
-    for (pos = 0; (pos = regexed.find("*", pos)) != std::string::npos; pos+=2)
-      regexed = regexed.replace(pos, 1, r_all);
-
-    // replace all "?" in input with "."
-    for (pos = 0; (pos = regexed.find('?', pos)) != std::string::npos; ++pos)
-      regexed = regexed.replace(pos, 1, r_one);
-
-    return regexed;
-  }
+      return str::rxEscapeStr( std::move(str_r) );
+    }
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
 
   StrMatcher PoolQuery::Impl::joinedStrMatcher( const StrContainer & container_r, const Match & flags_r ) const
   {
     USR << flags_r << " - " << container_r << endl;
-//! macro for word boundary tags for regexes
-#define WB (_match_word ? string("\\b") : string())
 
     if ( container_r.empty() )
       return StrMatcher( std::string(), flags_r );
 
-    if ( container_r.size() == 1 )
-      return StrMatcher( WB + *container_r.begin() + WB, flags_r );
+    if ( container_r.size() == 1 && !_match_word )	// use RX to match words
+      return StrMatcher( *container_r.begin(), flags_r );
 
-    // multiple strings
+    // Convert to a regex.
+    // Note: Modes STRING and GLOB match whole strings (anchored ^ $)
+    //       SUBSTRING and REGEX match substrings      (match_word anchores SUBSTRING \b)
     Match retflags( flags_r );
     retflags.setModeRegex();
-    std::string retstr;
-
-    bool use_wildcards = flags_r.isModeGlob();
-    StrContainer::const_iterator it = container_r.begin();
-    string tmp;
-
-    if (use_wildcards)
-      tmp = wildcards2regex(*it);
-    else
-      tmp = *it;
+    str::Str ret;
 
     if ( flags_r.isModeString() || flags_r.isModeGlob() )
-      retstr = "^";
-    retstr += WB + "(" + tmp;
+      ret << "^";
+    else if ( _match_word )
+      ret << "\\b";
 
-    ++it;
-
-    for (; it != container_r.end(); ++it)
+    // (..|..|..)
+    char sep = '(';
+    for ( const::std::string & s : container_r )
     {
-      if (use_wildcards)
-        tmp = wildcards2regex(*it);
-      else
-        tmp = *it;
-
-      retstr += "|" + tmp;
+      ret << sep << rxEscape( s, flags_r );
+      if ( sep == '(' )
+	sep = '|';
     }
+    ret << ')';
 
-    retstr += ")" + WB;
     if ( flags_r.isModeString() || flags_r.isModeGlob() )
-      retstr += "$";
+      ret << "$";
+    else if ( _match_word )
+      ret << "\\b";
 
-#undef WB
-    return StrMatcher( retstr, retflags );
+    return StrMatcher( ret, retflags );
   }
 
   string PoolQuery::Impl::asString() const
