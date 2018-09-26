@@ -47,6 +47,7 @@ namespace
       { ZypperCommand::ADD_SERVICE_e, std::make_shared<AddServiceCmd>() },
 
       { ZypperCommand::LIST_REPOS_e, std::make_shared<ListReposCmd>() },
+      { ZypperCommand::ADD_REPO_e, std::make_shared<AddRepoCmd>() },
 
       { ZypperCommand::PS_e, std::make_shared<PSCommand>() }
     };
@@ -68,7 +69,7 @@ namespace
       //_t( LIST_SERVICES_e )	| "services"		| "ls" | "service-list" | "sl";
       //_t( REFRESH_SERVICES_e )	| "refresh-services"	| "refs";
 
-      _t( ADD_REPO_e )		| "addrepo" 		| "ar";
+      //_t( ADD_REPO_e )		| "addrepo" 		| "ar";
       _t( REMOVE_REPO_e )	| "removerepo"		| "rr";
       _t( RENAME_REPO_e )	| "renamerepo"		| "nr";
       _t( MODIFY_REPO_e )	| "modifyrepo"		| "mr";

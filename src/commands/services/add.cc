@@ -115,7 +115,7 @@ zypp::ZyppFlags::CommandGroup AddServiceCmd::cmdOptions() const
       { "type",
         't',
         ZyppFlags::RequiredArgument | ZyppFlags::Deprecated,
-        ZyppFlags::WarnOptionVal( Zypper::instance().out(),  _("The type of service is always autodetected. This option is ignored."), CheckIsServiceTypeVal(const_cast<bool&>(_isService))),
+        ZyppFlags::WarnOptionVal( Zypper::instance().out(), legacyCLIStr( "type", "", LegacyCLIMsgType::Ignored ), Out::NORMAL, CheckIsServiceTypeVal(const_cast<bool&>(_isService))),
         _("The type of service is always autodetected. This option is ignored.")
       }
     }};
@@ -149,9 +149,10 @@ int AddServiceCmd::execute( Zypper &zypp_r, const std::vector<std::string> &posi
 
   if ( _isService )
     add_service_by_url( zypp_r, url, positionalArgs_r[1], _commonProps );
-  else
+  else {
     //legacy behaviour
-    add_repo_by_url( zypp_r, url, positionalArgs_r[1], 0L, zypp::indeterminate, _commonProps, false);
+    add_repo_by_url( zypp_r, url, positionalArgs_r[1], _commonProps, RepoProperties(), false);
+  }
 
   return zypp_r.exitCode();
 }

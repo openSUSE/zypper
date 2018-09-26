@@ -40,6 +40,21 @@ void report_too_many_arguments( Out & out, const std::string & specific_help )
 
 // ----------------------------------------------------------------------------
 
+void report_too_few_arguments( const std::string & specific_help )
+{
+  report_too_few_arguments( Zypper::instance().out(), specific_help );
+}
+
+void report_too_few_arguments( Out & out, const std::string & specific_help )
+{
+  //! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
+  std::ostringstream s;
+  s << _("Usage") << ':' << endl << specific_help;
+  out.error(_("Too few arguments."), s.str() );
+}
+
+// ----------------------------------------------------------------------------
+
 void report_alias_or_aggregate_required ( Out & out, const std::string & specific_help )
 {
   // translators: aggregate option is e.g. "--all". This message will be

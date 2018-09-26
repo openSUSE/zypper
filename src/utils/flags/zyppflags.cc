@@ -55,6 +55,8 @@ namespace {
       case OptionalArgument:
         has_arg = optional_argument;
         break;
+      default:
+        throw ZyppFlagsException( str::Format("Invalid opt.flags value for option: %1%") % opt.name );
     }
 
     //we do not use the flag and val types, instead we use optind to figure out what happend
