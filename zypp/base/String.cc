@@ -388,6 +388,91 @@ namespace zypp
       return std::string( buf.begin(), buf.end() );
     }
 
+
+    std::string bEscape( std::string str_r, const C_Str & special_r )
+    {
+      if ( str_r.empty() )
+	return str_r;
+
+      if ( str_r.find_first_of( special_r ) == std::string::npos
+	&& ( ::strchr( special_r.c_str(), '\\' ) ||  !::strchr( str_r.c_str(), '\\' ) ) )
+	return str_r;
+
+      Str buf;
+      for_( s, str_r.c_str(), s+str_r.size() )
+      {
+	if ( *s == '\\' || ::strchr( special_r.c_str(), *s ) )
+	  buf << '\\';
+	buf << *s;
+      }
+      return buf;
+    }
+
+    #define RXSPECIALCHARS "\\.*+?^$[()|{"
+
+    std::string rxEscapeStr( std::string str_r )
+    {
+      return bEscape( std::move(str_r), RXSPECIALCHARS );
+    }
+
+    std::string rxEscapeGlob( std::string str_r )
+    {
+      if ( str_r.empty() )
+	return str_r;
+
+      if ( str_r.find_first_of( RXSPECIALCHARS ) == std::string::npos )
+	return str_r;
+
+      Str buf;
+      for_( s, str_r.c_str(), s+str_r.size() )
+      {
+	if ( *s == '\\' )	// + next char literally
+	{
+	  buf << '\\';
+	  if ( *(s+1) ) { ++s; buf << *s; }
+	}
+	else if ( *s == '?' )	// translate
+	{
+	  buf << '.';
+	}
+	else if ( *s == '*' )	// translate
+	{
+	  buf << ".*";
+	}
+	else if ( *s == '[' )	// character class if closing ] is found, else literally
+	{
+	  const char * e = s+1;
+	  if ( *e == '^' || *e == '!' )	// negated cclass
+	    ++e;
+	  if ( *e == ']' )		// ] in cclass
+	    ++e;
+	  while ( *e && *e != ']' )	// ...to ] or \0
+	    ++e;
+	  if ( *e ) // on closing ']'
+	  {
+	    ++s;  buf << '[' << (*s == '!' ? '^' : *s );
+	    while ( ++s != e )
+	      buf << *s;
+	    buf << ']';
+	  }
+	  else
+	  {
+	    buf << "\\[";
+	  }
+	}
+	else if ( ::strchr( RXSPECIALCHARS, *s ) )	// escape
+	{
+	  buf << '\\' << *s;
+	}
+	else
+	{
+	  buf << *s;
+	}
+      }
+      return buf;
+    }
+
+
     std::string getline( std::istream & str, const Trim trim_r )
     {
       return trim( receiveUpTo( str, '\n' ), trim_r );

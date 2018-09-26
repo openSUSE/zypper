@@ -895,6 +895,15 @@ namespace zypp
           str_r += escape( next_r, sep_r );
       }
 
+      /** Return \a str_r with '\'-escaped chars occurring in \a special_r (and '\'). */
+      std::string bEscape( std::string str_r, const C_Str & special_r );
+
+      /** Escape plain STRING \a str_r for use in a regex (not anchored by "^" or "$"). */
+      std::string rxEscapeStr( std::string str_r );
+
+      /** Escape GLOB \a str_r for use in a regex (not anchored by "^" or "$"). */
+      std::string rxEscapeGlob( std::string str_r );
+
       //! \todo unsecape()
 
     //@}

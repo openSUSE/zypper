@@ -11,6 +11,56 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::str;
 
+#define RXspecial "\\^.[$()|*+?{"
+
+BOOST_AUTO_TEST_CASE(str2rx)
+{
+  char s[] = "c";
+  char x[] = "\\c";
+  for ( const char * ch = RXspecial; *ch; ++ch )
+  {
+    s[0] = x[1] = *ch;
+    BOOST_CHECK_EQUAL( str::rxEscapeStr( s ), x );
+  }
+}
+
+BOOST_AUTO_TEST_CASE(glob2rx)
+{
+  {
+    char s[] = "c";
+    char x[] = "\\c";
+    for ( const char * ch = RXspecial; *ch; ++ch )
+    {
+      s[0] = x[1] = *ch;
+      if ( *ch == '?' )
+	BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), "." );
+      else if ( *ch == '*' )
+	BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), ".*" );
+      else if ( *ch == '[' )
+	BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), "\\[" );	// no closing ] so it is literal
+	else if ( *ch == '\\' )
+	  BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), "\\" );	// actually an input error as "\" is not a valid GLOB
+	  else
+	  {
+	    s[0] = x[1] = *ch;
+	    BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), x );
+	  }
+    }
+    std::string a( str::rxEscapeStr( RXspecial ) );	// all rx/glob special chars are literally (\-escaped)
+    BOOST_CHECK_EQUAL( str::rxEscapeGlob( a ), a );	// nothing more to escape.
+
+    // character class: contains "]["
+    BOOST_CHECK_EQUAL( str::rxEscapeGlob( "[][]" ),	"[][]" );
+    BOOST_CHECK_EQUAL( str::rxEscapeGlob( "[^][]" ),	"[^][]" );
+    BOOST_CHECK_EQUAL( str::rxEscapeGlob( "[!][]" ),	"[^][]" );	// glob allows ! and ^ to negate a cclass
+
+    // no character class: no closing ']' so take it literally (the ] would be member of the cclass, not the closing ])
+    BOOST_CHECK_EQUAL( str::rxEscapeGlob( "[]" ),	"\\[]" );
+    BOOST_CHECK_EQUAL( str::rxEscapeGlob( "[!]" ),	"\\[!]" );
+    BOOST_CHECK_EQUAL( str::rxEscapeGlob( "[^]" ),	"\\[\\^]" );
+  }
+}
+
 BOOST_AUTO_TEST_CASE(gsubTest)
 {
   string olds = "olds";
