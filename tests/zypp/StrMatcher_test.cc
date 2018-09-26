@@ -103,6 +103,8 @@ BOOST_AUTO_TEST_CASE(StrMatcher_STRING)
   BOOST_CHECK( !m( "" ) );
   BOOST_CHECK( !m( "a" ) );
   BOOST_CHECK( m( "fau" ) );
+  BOOST_CHECK( !m( "fault" ) );
+  BOOST_CHECK( !m( "defau" ) );
   BOOST_CHECK( !m( "default" ) );
 }
 
@@ -113,6 +115,7 @@ BOOST_AUTO_TEST_CASE(StrMatcher_STRINGSTART)
   BOOST_CHECK( !m( "a" ) );
   BOOST_CHECK( m( "fau" ) );
   BOOST_CHECK( m( "fault" ) );
+  BOOST_CHECK( !m( "defau" ) );
   BOOST_CHECK( !m( "default" ) );
 }
 
@@ -122,11 +125,60 @@ BOOST_AUTO_TEST_CASE(StrMatcher_STRINGEND)
   BOOST_CHECK( !m( "" ) );
   BOOST_CHECK( !m( "a" ) );
   BOOST_CHECK( m( "fau" ) );
+  BOOST_CHECK( !m( "fault" ) );
   BOOST_CHECK( m( "defau" ) );
   BOOST_CHECK( !m( "default" ) );
 }
 
+BOOST_AUTO_TEST_CASE(StrMatcher_GLOB)
+{
+  // GLOB must match whole word
+  StrMatcher m( "f[a]u", Match::GLOB );
+  BOOST_CHECK( !m( "" ) );
+  BOOST_CHECK( !m( "a" ) );
+  BOOST_CHECK( m( "fau" ) );
+  BOOST_CHECK( !m( "fault" ) );
+  BOOST_CHECK( !m( "defau" ) );
+  BOOST_CHECK( !m( "default" ) );
+}
+
 BOOST_AUTO_TEST_CASE(StrMatcher_REGEX)
+{
+  // REGEX matches substring (unless anchored)
+  StrMatcher m( "f[a]u", Match::REGEX );
+  BOOST_CHECK( !m( "" ) );
+  BOOST_CHECK( !m( "a" ) );
+  BOOST_CHECK( m( "fau" ) );
+  BOOST_CHECK( m( "fault" ) );
+  BOOST_CHECK( m( "defau" ) );
+  BOOST_CHECK( m( "default" ) );
+
+  m.setSearchstring( "^f[a]u" );
+  BOOST_CHECK( !m( "" ) );
+  BOOST_CHECK( !m( "a" ) );
+  BOOST_CHECK( m( "fau" ) );
+  BOOST_CHECK( m( "fault" ) );
+  BOOST_CHECK( !m( "defau" ) );
+  BOOST_CHECK( !m( "default" ) );
+
+  m.setSearchstring( "f[a]u$" );
+  BOOST_CHECK( !m( "" ) );
+  BOOST_CHECK( !m( "a" ) );
+  BOOST_CHECK( m( "fau" ) );
+  BOOST_CHECK( !m( "fault" ) );
+  BOOST_CHECK( m( "defau" ) );
+  BOOST_CHECK( !m( "default" ) );
+
+  m.setSearchstring( "^f[a]u$" );
+  BOOST_CHECK( !m( "" ) );
+  BOOST_CHECK( !m( "a" ) );
+  BOOST_CHECK( m( "fau" ) );
+  BOOST_CHECK( !m( "fault" ) );
+  BOOST_CHECK( !m( "defau" ) );
+  BOOST_CHECK( !m( "default" ) );
+}
+
+BOOST_AUTO_TEST_CASE(StrMatcher_RX)
 {
   StrMatcher m( "fau" );
 
