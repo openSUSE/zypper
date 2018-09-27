@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Sep 27 16:00:58 CEST 2018 - ma@suse.de
+
+- Always warn if no repos are defined, but don't return
+  ZYPPER_EXIT_NO_REPOS(6) in install commands (bsc#1109893)
+- Switch global help format and fix bash-completion
+- version 1.14.12
+
+-------------------------------------------------------------------
 Wed Sep 19 17:43:24 CEST 2018 - ma@suse.de
 
 - Allow repo commands on transactional-server (bsc#1108999)
