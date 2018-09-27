@@ -3078,6 +3078,8 @@ void load_repo_resolvables( Zypper & zypper )
   RuntimeData & gData = zypper.runtimeData();
 
   zypper.out().info(_("Loading repository data...") );
+  if ( gData.repos.empty() )
+    zypper.out().warning(_("No repositories defined. Operating only with the installed resolvables. Nothing can be installed.") );
 
   for_( it, gData.repos.begin(), gData.repos.end() )
   {
