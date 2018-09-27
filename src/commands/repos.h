@@ -3,4 +3,6 @@
 
 #include "repos/list.h"
 #include "repos/add.h"
+#include "repos/remove.h"
+
 #endif

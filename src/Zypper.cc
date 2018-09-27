@@ -2450,43 +2450,17 @@ void Zypper::processCommandOptions()
     );
 #endif
 
-  case ZypperCommand::REMOVE_REPO_e:
-  {
-    static struct option service_delete_options[] = {
-      {"help", no_argument, 0, 'h'},
-      {"loose-auth", no_argument, 0, 0},
-      {"loose-query", no_argument, 0, 0},
-      ARG_REPO_SERVICE_COMMON_AGGREGATE,
-      {0, 0, 0, 0}
-    };
-    specific_options = service_delete_options;
 #if 0
-    _command_help = ( CommandHelpFormater() << _(
-      "removerepo (rr) [OPTIONS] <alias|#|URI>\n"
-      "\n"
-      "Remove repository specified by alias, number or URI.\n"
-      "\n"
-      "  Command options:\n"
-      "    --loose-auth   Ignore user authentication data in the URI.\n"
-      "    --loose-query  Ignore query string in the URI.\n"
-    ))
+  _command_help = ( CommandHelpFormater() << _(
+    "removerepo (rr) [OPTIONS] <alias|#|URI>\n"
+    "\n"
+    "Remove repository specified by alias, number or URI.\n"
+    "\n"
+    "  Command options:\n"
+    "    --loose-auth   Ignore user authentication data in the URI.\n"
+    "    --loose-query  Ignore query string in the URI.\n"
+  ))
 #endif
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("removerepo (rr) [OPTIONS] <ALIAS|#|URI>")
-    )
-    .description(	// translators: command description
-    _("Remove repository specified by alias, number or URI.")
-    )
-    .optionSectionCommandOptions()
-    .option( "--loose-auth",	// translators: --loose-auth
-             _("Ignore user authentication data in the URI.") )
-    .option( "--loose-query",	// translators: --loose-query
-             _("Ignore query string in the URI.") )
-    .gap()
-    .option_REPO_AGGREGATES;
-    break;
-  }
 
   case ZypperCommand::RENAME_REPO_e:
   {
@@ -4194,70 +4168,6 @@ void Zypper::doCommand()
   {
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
-    break;
-  }
-
-  // --------------------------( delete repo )--------------------------------
-
-  case ZypperCommand::REMOVE_REPO_e:
-  {
-    // check root user
-    if (geteuid() != 0 && !globalOpts().changedRoot)
-    {
-      out().error(
-        command() == ZypperCommand::REMOVE_REPO ?
-          _("Root privileges are required for modifying system repositories.") :
-          _("Root privileges are required for modifying system services.") );
-      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
-      return;
-    }
-
-    bool aggregate = copts.count("all") || copts.count("local") || copts.count("remote") || copts.count("medium-type");
-
-    if ( _arguments.size() < 1 && !aggregate )
-    {
-      report_alias_or_aggregate_required ( out(), _command_help );
-      ERR << "No alias argument given." << endl;
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    // too many arguments
-    if ( _arguments.size() && aggregate )
-    {
-      report_too_many_arguments( out(), _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    initRepoManager();
-    if ( aggregate )
-    {
-      remove_repos_by_option( *this );
-    }
-    else
-    {
-      // must store repository before remove to ensure correct match number
-      std::set<RepoInfo,RepoInfoAliasComparator> repo_to_remove;
-      for_(it, _arguments.begin(), _arguments.end())
-      {
-        RepoInfo repo;
-        if (match_repo(*this,*it,&repo))
-        {
-          repo_to_remove.insert(repo);
-        }
-        else
-        {
-          MIL << "Repository not found by given alias, number or URI." << endl;
-          // translators: %s is the supplied command line argument which
-          // for which no repository counterpart was found
-          out().error( str::Format(_("Repository '%s' not found by alias, number or URI.")) % *it );
-        }
-      }
-
-      for_(it, repo_to_remove.begin(), repo_to_remove.end())
-        remove_repo(*this,*it);
-    }
     break;
   }
 
