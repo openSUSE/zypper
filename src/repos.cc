@@ -3356,7 +3356,9 @@ void load_repo_resolvables(Zypper & zypper)
   RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData();
 
-  zypper.out().info(_("Loading repository data..."));
+  zypper.out().info(_("Loading repository data...") );
+  if ( gData.repos.empty() )
+    zypper.out().warning(_("No repositories defined. Operating only with the installed resolvables. Nothing can be installed.") );
 
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)
