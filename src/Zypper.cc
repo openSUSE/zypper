@@ -4273,16 +4273,6 @@ void Zypper::doCommand()
       init_repos( *this );
       if ( exitCode() != ZYPPER_EXIT_OK )
 	return;
-
-      if ( _rdata.repos.empty() )
-      {
-	out().warning(_("No repositories defined. Operating only with the installed resolvables. Nothing can be installed.") );
-	if ( command() == ZypperCommand::INSTALL )
-	{
-	  setExitCode( ZYPPER_EXIT_NO_REPOS );
-	  return;
-	}
-      }
     }
 
     // prepare target
@@ -4404,11 +4394,6 @@ void Zypper::doCommand()
     init_repos( *this );
     if ( exitCode() != ZYPPER_EXIT_OK )
       return;
-
-    if ( _rdata.repos.empty() )
-    {
-      out().warning(_("No repositories defined. Operating only with the installed resolvables. Nothing can be installed.") );
-    }
 
     // prepare target
     init_target( *this );
