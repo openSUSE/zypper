@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Sep 27 15:57:27 CEST 2018 - ma@suse.de
+
+- Always warn if no repos are defined, but don't return
+  ZYPPER_EXIT_NO_REPOS(6) in install commands (bsc#1109893)
+- man: Remove links to missing metadata section (fixes #140)
+- version 1.13.46
+
+-------------------------------------------------------------------
 Fri Aug 24 12:25:48 CEST 2018 - ma@suse.de
 
 - Translations updated
