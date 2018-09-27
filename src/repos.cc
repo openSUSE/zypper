@@ -454,7 +454,7 @@ static bool build_cache( Zypper & zypper, const RepoInfo & repo, bool force_buil
 
 // ---------------------------------------------------------------------------
 
-bool match_repo( Zypper & zypper, std::string str, RepoInfo *repo )
+bool match_repo( Zypper & zypper, std::string str, RepoInfo *repo, bool looseQuery_r, bool looseAuth_r )
 {
   RepoManager & manager( zypper.repoManager() );
 
@@ -510,13 +510,13 @@ bool match_repo( Zypper & zypper, std::string str, RepoInfo *repo )
 
 	url::ViewOption urlview =
 	url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
-	if ( zypper.cOpts().count("loose-auth") )
+	if ( looseAuth_r ) // ( zypper.cOpts().count("loose-auth") )
 	{
 	  urlview = urlview
 	  - url::ViewOptions::WITH_PASSWORD
 	  - url::ViewOptions::WITH_USERNAME;
 	}
-	if ( zypper.cOpts().count("loose-query") )
+	if ( looseQuery_r ) // ( zypper.cOpts().count("loose-query") )
 	  urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
 
 	// need to do asString(withurlview) comparison here because the user-given
@@ -1647,14 +1647,12 @@ void remove_repo( Zypper & zypper, const RepoInfo & repoinfo )
 }
 
 // ----------------------------------------------------------------------------
-void remove_repos_by_option(Zypper &zypper)
+void remove_repos_by_option( Zypper &zypper_r, const RepoServiceCommonSelectOptions selOpts_r )
 {
-  RepoServiceCommonSelectOptions selOpts ( OptCommandCtx::RepoContext );
-  selOpts.fillFromCopts( zypper );
-  RepoInfoSet repos = collect_repos_by_option( zypper, selOpts );
+  RepoInfoSet repos = collect_repos_by_option( zypper_r, selOpts_r );
   for ( const RepoInfo &repo : repos )
   {
-    remove_repo( zypper, repo );
+    remove_repo( zypper_r, repo );
   }
 }
 

@@ -110,7 +110,7 @@ int ZypperBaseCommand::systemSetup( Zypper &zypp_r )
   return defaultSystemSetup ( zypp_r, _systemInitFlags );
 }
 
-int ZypperBaseCommand::defaultSystemSetup(Zypper &zypp_r, SetupSystemFlags flags_r )
+int ZypperBaseCommand::defaultSystemSetup( Zypper &zypp_r, SetupSystemFlags flags_r )
 {
   DBG << "FLAGS:" << flags_r << endl;
 

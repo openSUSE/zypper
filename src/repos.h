@@ -20,6 +20,8 @@
 #include "Zypper.h"
 #include "commands/reposerviceoptionsets.h"
 
+#include "commands/reposerviceoptionsets.h"
+
 #define  TMP_RPM_REPO_ALIAS  "_tmpRPMcache_"
 
 // | Enabled | GPG Check |  Colored strings for enabled and GPG Check status
@@ -127,9 +129,11 @@ void clean_repos( Zypper & zypper );
  *
  * \param str string to match
  * \param repo pointer to fill with found repository
+ * \param looseQuery_r Ignore query string in the URI if true.
+ * \param looseAuth_r Ignore user authentication data in the URI if true.
  * \return success if respository is found
  */
-bool match_repo( Zypper & zypper, const std::string str, RepoInfo *repo = 0 );
+bool match_repo( Zypper & zypper, const std::string str, RepoInfo *repo = 0 , bool looseQuery_r = false, bool looseAuth_r = false );
 
 /**
  * Add repository specified by \url to system repositories.
@@ -172,7 +176,7 @@ void remove_repo( Zypper & zypper, const RepoInfo & repoinfo );
  * Remove repositories which is matching filter options
  * like all, local, remote or medium-type
  */
-void remove_repos_by_option( Zypper & zypper );
+void remove_repos_by_option(Zypper & zypper_r , const RepoServiceCommonSelectOptions selOpts_r);
 
 /**
  * Rename repository specified by \a alias to \a newalias.
