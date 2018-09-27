@@ -54,6 +54,7 @@ SET (zypper_HEADERS
   commands/repos/list.h
   commands/repos/add.h
   commands/repos/remove.h
+  commands/repos/rename.h
   commands/reposerviceoptionsets.h
   commands/ps.h
 )
@@ -94,6 +95,7 @@ SET( zypper_SRCS
   commands/repos/list.cc
   commands/repos/add.cc
   commands/repos/remove.cc
+  commands/repos/rename.cc
   commands/reposerviceoptionsets.cc
   commands/ps.cc
   ${zypper_HEADERS}

@@ -20,8 +20,6 @@
 #include "Zypper.h"
 #include "commands/reposerviceoptionsets.h"
 
-#include "commands/reposerviceoptionsets.h"
-
 #define  TMP_RPM_REPO_ALIAS  "_tmpRPMcache_"
 
 // | Enabled | GPG Check |  Colored strings for enabled and GPG Check status
@@ -177,11 +175,6 @@ void remove_repo( Zypper & zypper, const RepoInfo & repoinfo );
  * like all, local, remote or medium-type
  */
 void remove_repos_by_option(Zypper & zypper_r , const RepoServiceCommonSelectOptions selOpts_r);
-
-/**
- * Rename repository specified by \a alias to \a newalias.
- */
-void rename_repo( Zypper & zypper, const std::string & alias, const std::string & newalias );
 
 /**
  * Modify repository properties.

@@ -2462,22 +2462,6 @@ void Zypper::processCommandOptions()
   ))
 #endif
 
-  case ZypperCommand::RENAME_REPO_e:
-  {
-    static struct option service_rename_options[] = {
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = service_rename_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>")
-    )
-    .description(	// translators: command description
-    _("Assign new alias to the repository specified by alias, number or URI.")
-    )
-    .noOptionSection()
-    ;
 #if 0
     _command_help = _(
       "renamerepo (nr) [OPTIONS] <alias|#|URI> <new-alias>\n"
@@ -2487,8 +2471,6 @@ void Zypper::processCommandOptions()
       "This command has no additional options.\n"
     );
 #endif
-    break;
-  }
 
   case ZypperCommand::MODIFY_REPO_e:
   {
@@ -4169,58 +4151,6 @@ void Zypper::doCommand()
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
     break;
-  }
-
-  // --------------------------( rename repo )--------------------------------
-
-  case ZypperCommand::RENAME_REPO_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for modifying system repositories.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    if ( _arguments.size() < 2 )
-    {
-      out().error(_("Too few arguments. At least URI and alias are required.") );
-      ERR << "Too few arguments. At least URI and alias are required." << endl;
-      out().info( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-    // too many arguments
-    else if ( _arguments.size() > 2 )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    initRepoManager();
-    try
-    {
-      RepoInfo repo;
-      if ( match_repo( *this,_arguments[0], &repo  ))
-      {
-	rename_repo( *this, repo.alias(), _arguments[1] );
-      }
-      else
-      {
-	 out().error( str::Format(_("Repository '%s' not found.")) % _arguments[0] );
-         ERR << "Repo " << _arguments[0] << " not found" << endl;
-      }
-    }
-    catch ( const Exception & excpt_r )
-    {
-      out().error( excpt_r.asUserString() );
-      setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-      return;
-    }
-
-    return;
   }
 
   // --------------------------( modify repo )--------------------------------
