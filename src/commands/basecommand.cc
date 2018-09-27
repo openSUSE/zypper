@@ -221,8 +221,7 @@ std::string ZypperBaseCommand::help()
   bool hadOptions = false;
   for ( const ZyppFlags::CommandGroup &grp : opts ) {
     if ( grp.options.size() ) {
-      hadOptions = true;
-      help.optionSection( grp.name );
+      bool wroteSectionHdr = false;
       for ( const ZyppFlags::CommandOption &opt : grp.options ) {
         if ( opt.flags & ZyppFlags::Hidden )
           continue;
@@ -230,6 +229,12 @@ std::string ZypperBaseCommand::help()
           legacyOptions.push_back( &opt );
           continue;
         }
+        //write the section header only if we actuall have entries
+        if ( !wroteSectionHdr ) {
+          wroteSectionHdr = true;
+          help.optionSection( grp.name );
+        }
+        hadOptions = true;
         renderOption(opt);
       }
     }
@@ -240,6 +245,10 @@ std::string ZypperBaseCommand::help()
     for ( const ZyppFlags::CommandOption *legacyOption : legacyOptions ) {
       renderOption(*legacyOption);
     }
+  }
+
+  if ( !hadOptions ) {
+    help.noOptionSection();
   }
 
   return help;

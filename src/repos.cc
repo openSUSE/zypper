@@ -1658,41 +1658,7 @@ void remove_repos_by_option( Zypper &zypper_r, const RepoServiceCommonSelectOpti
 
 // ----------------------------------------------------------------------------
 
-void rename_repo( Zypper & zypper, const std::string & alias, const std::string & newalias )
-{
-  RepoManager & manager( zypper.repoManager() );
 
-  try
-  {
-    RepoInfo repo( manager.getRepositoryInfo( alias ) );
-
-    if ( !repo.service().empty() )
-    {
-      zypper.out().error(str::form(
-          _("Cannot change alias of '%s' repository. The repository"
-            " belongs to service '%s' which is responsible for setting its alias."),
-          alias.c_str(), repo.service().c_str()));
-      zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-      return;
-    }
-
-    repo.setAlias( newalias );
-    manager.modifyRepository( alias, repo );
-
-    MIL << "Repository '" << alias << "' renamed to '" << repo.alias() << "'" << endl;
-    zypper.out().info( str::Format(_("Repository '%s' renamed to '%s'.")) % alias % repo.alias() );
-  }
-  catch ( const repo::RepoAlreadyExistsException & ex )
-  {
-    zypper.out().error( str::Format(_("Repository named '%s' already exists. Please use another alias.")) % newalias );
-  }
-  catch ( const Exception & ex )
-  {
-    ERR << "Error while modifying the repository " << ex.asUserString() << endl;
-    zypper.out().error( ex, _("Error while modifying the repository:"),
-			str::Format(_("Leaving repository '%s' unchanged.")) % alias );
-  }
-}
 
 // ----------------------------------------------------------------------------
 

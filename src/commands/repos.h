@@ -4,5 +4,6 @@
 #include "repos/list.h"
 #include "repos/add.h"
 #include "repos/remove.h"
+#include "repos/rename.h"
 
 #endif
