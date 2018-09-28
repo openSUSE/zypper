@@ -31,20 +31,6 @@ namespace zypp
 
   namespace
   {
-    void fillList( std::list<Url> & ret_r, sat::Solvable solv_r, sat::SolvAttr attr_r )
-    {
-      sat::LookupAttr query( attr_r, solv_r );
-      for_( it, query.begin(), query.end() )
-      {
-        try // ignore malformed urls
-        {
-          ret_r.push_back( Url( it.asString() ) );
-        }
-        catch( const url::UrlException & )
-        {}
-      }
-    }
-
     void fillList( std::list<std::string> & ret_r, sat::Solvable solv_r, sat::SolvAttr attr_r )
     {
       sat::LookupAttr query( attr_r, solv_r );

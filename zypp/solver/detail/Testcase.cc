@@ -285,7 +285,6 @@ class  HelixControl {
 		  const target::Modalias::ModaliasList & modaliasList,
 		  const std::set<std::string> & multiversionSpec,
 		  const std::string & systemPath);
-    HelixControl ();
     ~HelixControl ();
 
     void closeSetup()
@@ -392,12 +391,6 @@ HelixControl::HelixControl(const std::string & controlPath,
     }
 
     // setup continued outside....
-}
-
-HelixControl::HelixControl()
-    :dumpFile ("/var/log/YaST2/solverTestcase/solver-test.xml")
-{
-    HelixControl (dumpFile);
 }
 
 HelixControl::~HelixControl()
