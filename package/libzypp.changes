@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 28 14:38:01 CEST 2018 - ma@suse.de
+
+- Fix conversion of string and glob to regex when compiling queries
+  (bsc#1099982, bsc#939392)
+- version 17.7.1 (2)
+
+-------------------------------------------------------------------
 Fri Sep  7 12:07:39 CEST 2018 - ma@suse.de
 
 - Drop type application due to poor metadata support (bsc#1100095,
