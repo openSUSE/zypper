@@ -2472,16 +2472,6 @@ void Zypper::processCommandOptions()
     );
 #endif
 
-  case ZypperCommand::MODIFY_REPO_e:
-  {
-    static struct option service_modify_options[] = {
-      {"help", no_argument, 0, 'h'},
-      ARG_REPO_PROP,
-      /* LEGACY(ARG_REPO_PROP) prefers -f */	{"refresh",	no_argument,	0, 'r'},
-      /* LEGACY(ARG_REPO_PROP) prefers -F */	{"no-refresh",	no_argument,	0, 'R'},
-      ARG_REPO_SERVICE_COMMON_AGGREGATE,
-      {0, 0, 0, 0}
-    };
 #if 0
     _(
       // translators: %s is "--all|--remote|--local|--medium-type"
@@ -2509,28 +2499,6 @@ void Zypper::processCommandOptions()
       "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
     )
 #endif
-    specific_options = service_modify_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>")
-    )
-    .synopsis( str::Format(	// translators: command synopsis; do not translate lowercase words
-    _("modifyrepo (mr) <OPTIONS> <%1%>") ) % "--all|--remote|--local|--medium-type"
-    )
-    .description( str::Format(	// translators: command description
-    _("Modify properties of repositories specified by alias, number, or URI, or by the '%1%' aggregate options.") ) % "--all, --remote, --local, --medium-type"
-    )
-    .optionSectionCommandOptions()
-    .option_REPO_PROP
-    .gap()
-    .option_REPO_AGGREGATES
-    // Legacy Options:
-    .legacyOptionSection()
-    .legacyOption( "-r", "-f" )
-    .legacyOption( "-R", "-F" )
-    ;
-    break;
-  }
 
   case ZypperCommand::REFRESH_e:
   {
@@ -4150,77 +4118,6 @@ void Zypper::doCommand()
   {
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
-    break;
-  }
-
-  // --------------------------( modify repo )--------------------------------
-
-  case ZypperCommand::MODIFY_REPO_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for modifying system repositories.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    bool aggregate = copts.count("all") || copts.count("local") || copts.count("remote") || copts.count("medium-type");
-
-    if ( _arguments.size() < 1 && !aggregate )
-    {
-      report_alias_or_aggregate_required ( out(), _command_help );
-      ERR << "No alias argument given." << endl;
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    // too many arguments
-    if ( _arguments.size() && aggregate )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    initRepoManager();
-    if ( aggregate )
-    {
-      RepoProperties props;
-      props.fillFromCopts( *this );
-
-      RepoServiceCommonSelectOptions selectOpts ( OptCommandCtx::RepoContext );
-      selectOpts.fillFromCopts( * this );
-
-      RepoServiceCommonOptions cProps ( OptCommandCtx::RepoContext );
-      cProps.fillFromCopts( *this );
-
-      modify_repos_by_option( *this, selectOpts, cProps, props );
-    }
-    else
-    {
-      for_( arg,_arguments.begin(),_arguments.end() )
-      {
-        RepoInfo r;
-        if ( match_repo(*this,*arg,&r) )
-        {
-          RepoProperties props;
-          props.fillFromCopts( *this );
-
-          RepoServiceCommonOptions cProps ( OptCommandCtx::RepoContext );
-          cProps.fillFromCopts( *this );
-
-          modify_repo( *this, r.alias(), cProps, props );
-        }
-        else
-        {
-          out().error( str::Format(_("Repository %s not found.")) % *arg );
-          ERR << "Repo " << *arg << " not found" << endl;
-          setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-        }
-      }
-    }
-
     break;
   }
 
