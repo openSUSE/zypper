@@ -94,8 +94,6 @@ MACRO(ADD_TESTS)
 ENDMACRO(ADD_TESTS)
 
 ####################################################################
-# prefer packages using the same install prefix as we do
-SET(CMAKE_PREFIX_PATH ${CMAKE_INSTALL_PREFIX} usr/localX /usr/local /usr)
 
 IF ( ENABLE_USE_THREADS )
   SET( CMAKE_THREAD_PREFER_PTHREAD TRUE )
