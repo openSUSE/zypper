@@ -249,7 +249,7 @@ namespace zypp
 	return "/";
       std::string rest( str::stripPrefix( path_r.asString(), root_r.asString() ) );
       if ( rest[0] == '/' )	// needs to be a dir prefix!
-	return std::move(rest);
+	return rest;
       return path_r;
     }
 
