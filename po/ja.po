@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-01 22:37+0000\n"
+"PO-Revision-Date: 2018-10-02 02:04+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese "
 "<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
@@ -251,12 +251,12 @@ msgstr "鍵を信頼しない。"
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:328
 msgid "Trust the key temporarily."
-msgstr "一時的に鍵を信頼する。"
+msgstr "一時的に鍵を信頼します。"
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:333
 msgid "Trust the key and import it into trusted keyring."
-msgstr "鍵を信頼して信頼済み鍵リングにインポートする。"
+msgstr "鍵を信頼して信頼済み鍵リングにインポートします。"
 
 #: src/callbacks/keyring.h:373
 #, c-format, boost-format
@@ -366,7 +366,7 @@ msgstr "破棄"
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:526
 msgid "Unblock using this file on your own risk."
-msgstr "自己責任でファイルの保護を解除する。"
+msgstr "自己責任でファイルの保護を解除します。"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:528
@@ -902,9 +902,7 @@ msgstr ""
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
-msgstr ""
-"修正 '%s' はロックされています。インストールを行なうには '%s' を、ロックを解"
-"除するには '%s' を使用してください。"
+msgstr "パッチ '%s' はロックされています。インストールを行なうには '%s' を、ロックを解除するには '%s' を使用してください。"
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
@@ -1554,11 +1552,11 @@ msgstr "ここではキャンセルしておくことをお勧めします:"
 
 #: src/Zypper.cc:108
 msgid "Set a descriptive name for the service."
-msgstr "サービスを説明するための名前を設定する。"
+msgstr "サービスを説明するための名前を設定します。"
 
 #: src/Zypper.cc:109
 msgid "Enable a disabled service."
-msgstr "無効に設定してあるサービスを有効にする。"
+msgstr "無効に設定してあるサービスを有効にします。"
 
 #: src/Zypper.cc:110
 msgid "Disable the service (but don't remove it)."
@@ -1566,19 +1564,19 @@ msgstr "サービスを無効に設定する (削除は行なわない) 。"
 
 #: src/Zypper.cc:111
 msgid "Enable auto-refresh of the service."
-msgstr "サービスの自動更新を有効にする。"
+msgstr "サービスの自動更新を有効にします。"
 
 #: src/Zypper.cc:112
 msgid "Disable auto-refresh of the service."
-msgstr "サービスの自動更新を無効にする。"
+msgstr "サービスの自動更新を無効にします。"
 
 #: src/Zypper.cc:130
 msgid "Set a descriptive name for the repository."
-msgstr "リポジトリを説明するための名前を設定する。"
+msgstr "リポジトリを説明するための名前を設定します。"
 
 #: src/Zypper.cc:131
 msgid "Enable a disabled repository."
-msgstr "無効に設定してあるリポジトリを有効にする。"
+msgstr "無効に設定してあるリポジトリを有効にします。"
 
 #: src/Zypper.cc:132
 msgid "Disable the repository (but don't remove it)."
@@ -1586,27 +1584,27 @@ msgstr "リポジトリを無効に設定する (削除は行なわない) 。"
 
 #: src/Zypper.cc:133
 msgid "Enable auto-refresh of the repository."
-msgstr "リポジトリの自動更新を有効にする。"
+msgstr "リポジトリの自動更新を有効にします。"
 
 #: src/Zypper.cc:134
 msgid "Disable auto-refresh of the repository."
-msgstr "リポジトリの自動更新を無効にする。"
+msgstr "リポジトリの自動更新を無効にします。"
 
 #: src/Zypper.cc:135
 msgid "Set priority of the repository."
-msgstr "リポジトリの優先順位を指定する。"
+msgstr "リポジトリの優先順位を設定します。"
 
 #: src/Zypper.cc:136
 msgid "Enable RPM files caching."
-msgstr "RPM ファイルのキャッシュ機能を有効にする。"
+msgstr "RPM ファイルのキャッシュ機能を有効にします。"
 
 #: src/Zypper.cc:137
 msgid "Disable RPM files caching."
-msgstr "RPM ファイルのキャッシュ機能を無効にする。"
+msgstr "RPM ファイルのキャッシュ機能を無効にします。"
 
 #: src/Zypper.cc:138
 msgid "Enable GPG check for this repository."
-msgstr "このリポジトリに対して、 GPG チェックを有効にする。"
+msgstr "このリポジトリに対して、 GPG チェックを有効にします。"
 
 #: src/Zypper.cc:139
 msgid "Enable strict GPG check for this repository."
@@ -1619,44 +1617,38 @@ msgstr "'%s' の省略形です。"
 
 #: src/Zypper.cc:141
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr ""
-"GPG チェックを有効にするが、リポジトリのメタデータについては未署名を許可す"
-"る。"
+msgstr "GPG チェックを有効にしますが、リポジトリのメタデータについては未署名を許可します。"
 
 #: src/Zypper.cc:142
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr ""
-"GPG チェックを有効にするが、このリポジトリからのものについては未署名のパッ"
-"ケージのインストールを許可する。"
+msgstr "GPG チェックを有効にしますが、このリポジトリからのものについては未署名のパッケージのインストールを許可します。"
 
 #: src/Zypper.cc:143
 msgid "Disable GPG check for this repository."
-msgstr "このリポジトリに対して、 GPG チェックを無効にする。"
+msgstr "このリポジトリに対して、 GPG チェックを無効にします。"
 
 #: src/Zypper.cc:144
 msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
-msgstr ""
-"/etc/zypp/zypp.conf に設定されている GPG チェックのグローバル設定を使用する。"
-"これが既定値です。"
+msgstr "/etc/zypp/zypp.conf に設定されている GPG チェックのグローバル設定を使用します。これが既定値です。"
 
 #: src/Zypper.cc:147
 msgid "Apply changes to all repositories."
-msgstr "全てのリポジトリに対して変更を適用する。"
+msgstr "全てのリポジトリに対して変更を適用します。"
 
 #: src/Zypper.cc:148
 msgid "Apply changes to all local repositories."
-msgstr "全てのローカルリポジトリに対して変更を適用する。"
+msgstr "全てのローカルリポジトリに対して変更を適用します。"
 
 #: src/Zypper.cc:149
 msgid "Apply changes to all remote repositories."
-msgstr "全てのリモート (ネットワーク) リポジトリに対して変更を適用する。"
+msgstr "全てのリモート (ネットワーク) リポジトリに対して変更を適用します。"
 
 #: src/Zypper.cc:150
 msgid "Apply changes to repositories of specified type."
-msgstr "指定した種類のリポジトリに対して変更を適用する。"
+msgstr "指定した種類のリポジトリに対して変更を適用します。"
 
 #: src/Zypper.cc:167
 msgid "Create a solver test case for debugging."
@@ -1843,100 +1835,98 @@ msgstr "zypper <サブコマンド> [--コマンドオプション] [パラメ�
 #. translators: --help, -h
 #: src/Zypper.cc:713
 msgid "Help."
-msgstr "ヘルプ"
+msgstr "ヘルプを表示します。"
 
 #. translators: --version, -V
 #: src/Zypper.cc:715
 msgid "Output the version number."
-msgstr "バージョン情報を表示"
+msgstr "バージョン情報を表示します。"
 
 #. translators: --promptids
 #: src/Zypper.cc:717
 msgid "Output a list of zypper's user prompts."
-msgstr "zypperのユーザプロンプト一覧を出力する"
+msgstr "zypper のユーザプロンプト一覧を出力します。"
 
 #. translators: --config, -c <FILE>
 #: src/Zypper.cc:719
 msgid "Use specified config file instead of the default."
-msgstr "既定の設定ファイルの代わりに指定した設定ファイルを使用"
+msgstr "既定の設定ファイルの代わりに指定した設定ファイルを使用します。"
 
 #. translators: --userdata <STRING>
 #: src/Zypper.cc:721
 msgid "User defined transaction id used in history and plugins."
-msgstr "履歴やプラグインで使用されるユーザ定義のトランザクションIDの指定"
+msgstr "履歴やプラグインで使用されるユーザ定義のトランザクション ID を指定します。"
 
 #. translators: --quiet, -q
 #: src/Zypper.cc:723
 msgid "Suppress normal output, print only error messages."
-msgstr "エラーメッセージを除く出力を抑止"
+msgstr "エラーメッセージを除く通常出力を抑止します。"
 
 #. translators: --verbose, -v
 #: src/Zypper.cc:725
 msgid "Increase verbosity."
-msgstr "より詳細な出力"
+msgstr "より詳細な出力を行ないます。"
 
 #. translators: --color / --no-color
 #: src/Zypper.cc:728
 msgid "Whether to use colors in output if tty supports it."
-msgstr "tty側で対応している場合、色を使用するかどうか"
+msgstr "tty 側で対応している場合、色を使用するかどうかを指定します。"
 
 #. translators: --no-abbrev, -A
 #: src/Zypper.cc:730
 msgid "Do not abbreviate text in tables."
-msgstr "表内でのテキストの省略を行なわない"
+msgstr "表内でのテキストの省略を行なわないようにします。"
 
 #. translators: --table-style, -s
 #: src/Zypper.cc:732
 msgid "Table style (integer)."
-msgstr "表形式 (整数)"
+msgstr "表形式を指定します (整数) 。"
 
 #. translators: --non-interactive, -n
 #: src/Zypper.cc:734
 msgid "Do not ask anything, use default answers automatically."
-msgstr "質問や確認を行なわず、全ての質問に既定の回答を行なったものとして扱う"
+msgstr "質問や確認を行なわず、全ての質問に既定の回答を行なったものとして扱います。"
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Zypper.cc:736
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
-msgstr ""
-"rebootSuggested (再起動を提案する) フラグが設定されたパッチに対して、 これら"
-"を対話的なパッチとして扱わない"
+msgstr "rebootSuggested (再起動を提案する) フラグが設定されたパッチに対して、 これらを対話的なパッチとして扱わないようにします。"
 
 #. translators: --xmlout, -x
 #: src/Zypper.cc:738
 msgid "Switch to XML output."
-msgstr "XML形式での出力に切り替える"
+msgstr "XML 形式での出力に切り替えます。"
 
 #. translators: --ignore-unknown, -i
 #: src/Zypper.cc:740
 msgid "Ignore unknown packages."
-msgstr "不明なパッケージを無視する"
+msgstr "不明なパッケージを無視します。"
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Zypper.cc:744
 msgid "Use alternative repository definition file directory."
-msgstr "代替レポジトリ定義ファイルディレクトリを使用する"
+msgstr "代替リポジトリ定義ファイルディレクトリを使用します。"
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Zypper.cc:746
 msgid "Use alternative directory for all caches."
-msgstr "すべてのキャッシュに代替ディレクトリを使用する"
+msgstr "すべてのキャッシュに代替ディレクトリを指定します。"
 
 #. translators: --raw-cache-dir <DIR>
 #: src/Zypper.cc:748
 msgid "Use alternative raw meta-data cache directory."
-msgstr "代替未加工メタデータキャッシュディレクトリを使用する"
+msgstr "代替の未加工メタデータキャッシュディレクトリを指定します。"
 
 #. translators: --solv-cache-dir <DIR>
 #: src/Zypper.cc:750
 msgid "Use alternative solv file cache directory."
-msgstr "代替解決ファイルキャッシュディレクトリを使用する"
+msgstr "代替の解決ファイルキャッシュディレクトリを指定します。"
 
 #. translators: --pkg-cache-dir <DIR>
 #: src/Zypper.cc:752
 msgid "Use alternative package cache directory."
-msgstr "代替パッケージキャッシュディレクトリを使用する"
+msgstr "代替のパッケージキャッシュディレクトリを指定します。"
 
 #: src/Zypper.cc:754
 msgid "Repository Options:"
@@ -1945,17 +1935,17 @@ msgstr "リポジトリオプション:"
 #. translators: --no-gpg-checks
 #: src/Zypper.cc:756
 msgid "Ignore GPG check failures and continue."
-msgstr "GPGによる確認の失敗を無視して続行する"
+msgstr "GPG による確認の失敗を無視して続行します。"
 
 #. translators: --gpg-auto-import-keys
 #: src/Zypper.cc:758
 msgid "Automatically trust and import new repository signing keys."
-msgstr "新しいリポジトリの署名鍵を自動的に信用し、インポートする"
+msgstr "新しいリポジトリの署名鍵を自動的に信用し、インポートします。"
 
 #. translators: --plus-repo, -p <URI>
 #: src/Zypper.cc:760
 msgid "Use an additional repository."
-msgstr "追加のリポジトリを使用する"
+msgstr "追加のリポジトリを使用します。"
 
 #. translators: --plus-content <TAG>
 #: src/Zypper.cc:762
@@ -1970,22 +1960,22 @@ msgstr ""
 #. translators: --disable-repositories
 #: src/Zypper.cc:764
 msgid "Do not read meta-data from repositories."
-msgstr "リポジトリからメタデータを読み込まない"
+msgstr "リポジトリからメタデータを読み込まないようにします。"
 
 #. translators: --no-refresh
 #: src/Zypper.cc:766
 msgid "Do not refresh the repositories."
-msgstr "リポジトリの更新を行なわない"
+msgstr "リポジトリの更新を行なわないようにします。"
 
 #. translators: --no-cd
 #: src/Zypper.cc:768
 msgid "Ignore CD/DVD repositories."
-msgstr "CD/DVDのリポジトリを無視する"
+msgstr "CD/DVD のリポジトリを無視します。"
 
 #. translators: --no-remote
 #: src/Zypper.cc:770
 msgid "Ignore remote repositories."
-msgstr "リモートのリポジトリを無視する"
+msgstr "リモートのリポジトリを無視します。"
 
 #. translators: --releasever
 #: src/Zypper.cc:772
@@ -2003,7 +1993,7 @@ msgstr "ターゲットオプション:"
 #. translators: --root, -R <DIR>
 #: src/Zypper.cc:776
 msgid "Operate on a different root directory."
-msgstr "別のルートディレクトリを処理する。"
+msgstr "指定したルートディレクトリ内で処理を実施します。"
 
 #. translators: --installroot <DIR>
 #: src/Zypper.cc:778 src/Zypper.cc:949
@@ -2021,12 +2011,12 @@ msgstr "インストールされたパッケージを読み込まない。"
 #. translators: command summary: help, ?
 #: src/Zypper.cc:786
 msgid "Print help."
-msgstr "ヘルプを表示"
+msgstr "ヘルプを表示します。"
 
 #. translators: command summary: shell, sh
 #: src/Zypper.cc:788
 msgid "Accept multiple commands at once."
-msgstr "一度で複数のコマンドを入力する"
+msgstr "一度に複数のコマンドを受け付けるようにします。"
 
 #: src/Zypper.cc:790
 msgid "Repository Management:"
@@ -2041,27 +2031,27 @@ msgstr "定義済みリポジトリのリストを表示します。"
 #. translators: command summary: addrepo, ar
 #: src/Zypper.cc:794
 msgid "Add a new repository."
-msgstr "新しいリポジトリを追加する。"
+msgstr "新しいリポジトリを追加します。"
 
 #. translators: command summary: removerepo, rr
 #: src/Zypper.cc:796
 msgid "Remove specified repository."
-msgstr "指定したリポジトリを削除する。"
+msgstr "指定したリポジトリを削除します。"
 
 #. translators: command summary: renamerepo, nr
 #: src/Zypper.cc:798
 msgid "Rename specified repository."
-msgstr "指定したリポジトリの名前を変更する。"
+msgstr "指定したリポジトリの名前を変更します。"
 
 #. translators: command summary: modifyrepo, mr
 #: src/Zypper.cc:800
 msgid "Modify specified repository."
-msgstr "指定したリポジトリを修正する。"
+msgstr "指定したリポジトリを修正します。"
 
 #. translators: command summary: refresh, ref
 #: src/Zypper.cc:802
 msgid "Refresh all repositories."
-msgstr "全てのリポジトリを更新する。"
+msgstr "全てのリポジトリを更新します。"
 
 #. translators: command summary: clean
 #. translators: command description
@@ -2076,27 +2066,27 @@ msgstr "サービス管理:"
 #. translators: command summary: services, ls
 #: src/Zypper.cc:808
 msgid "List all defined services."
-msgstr "定義済みのサービスを一覧にする。"
+msgstr "定義済みのサービスを一覧表示します。"
 
 #. translators: command summary: addservice, as
 #: src/Zypper.cc:810
 msgid "Add a new service."
-msgstr "新しいサービスを追加する。"
+msgstr "新しいサービスを追加します。"
 
 #. translators: command summary: modifyservice, ms
 #: src/Zypper.cc:812
 msgid "Modify specified service."
-msgstr "指定したサービスを修正する。"
+msgstr "指定したサービスを修正します。"
 
 #. translators: command summary: removeservice, rs
 #: src/Zypper.cc:814
 msgid "Remove specified service."
-msgstr "指定したサービスを削除する。"
+msgstr "指定したサービスを削除します。"
 
 #. translators: command summary: refresh-services, refs
 #: src/Zypper.cc:816
 msgid "Refresh all services."
-msgstr "すべてのサービスを更新する。"
+msgstr "すべてのサービスを更新します。"
 
 #: src/Zypper.cc:818
 msgid "Software Management:"
@@ -2134,22 +2124,22 @@ msgstr "更新管理:"
 #. translators: command summary: update, up
 #: src/Zypper.cc:832
 msgid "Update installed packages with newer versions."
-msgstr "インストール済みのパッケージを新しいバージョンに更新する"
+msgstr "インストール済みのパッケージを新しいバージョンに更新します。"
 
 #. translators: command summary: list-updates, lu
 #: src/Zypper.cc:834
 msgid "List available updates."
-msgstr "利用可能な更新を一覧表示する"
+msgstr "利用可能な更新を一覧表示します。"
 
 #. translators: command summary: patch
 #: src/Zypper.cc:836
 msgid "Install needed patches."
-msgstr "必要なパッチをインストールする"
+msgstr "必要なパッチをインストールします。"
 
 #. translators: command summary: list-patches, lp
 #: src/Zypper.cc:838
 msgid "List needed patches."
-msgstr "必要なパッチを一覧表示する"
+msgstr "必要なパッチを一覧表示します。"
 
 #. translators: command summary: dist-upgrade, dup
 #. translators: command description
@@ -2160,7 +2150,7 @@ msgstr "ディストリビューションのアップグレード処理を行い
 #. translators: command summary: patch-check, pchk
 #: src/Zypper.cc:842
 msgid "Check for patches."
-msgstr "パッチを確認する"
+msgstr "パッチを確認します。"
 
 #: src/Zypper.cc:844
 msgid "Querying:"
@@ -2223,12 +2213,12 @@ msgstr "パッケージロック:"
 #. translators: command summary: addlock, al
 #: src/Zypper.cc:868
 msgid "Add a package lock."
-msgstr "パッケージロックを追加する。"
+msgstr "パッケージロックを追加します。"
 
 #. translators: command summary: removelock, rl
 #: src/Zypper.cc:870
 msgid "Remove a package lock."
-msgstr "パッケージロックを削除する。"
+msgstr "パッケージロックを削除します。"
 
 #. translators: command summary: locks, ll
 #: src/Zypper.cc:872 src/commands/locks/list.cc:224
@@ -2238,7 +2228,7 @@ msgstr "現在のパッケージロックを一覧表示します。"
 #. translators: command summary: cleanlocks, cl
 #: src/Zypper.cc:874
 msgid "Remove unused locks."
-msgstr "未使用のロックを削除する。"
+msgstr "未使用のロックを削除します。"
 
 #: src/Zypper.cc:876
 msgid "Other Commands:"
@@ -2281,7 +2271,7 @@ msgstr "サブコマンド:"
 #. translators: command summary: subcommand
 #: src/Zypper.cc:890
 msgid "Lists available subcommands."
-msgstr "利用可能なサブコマンドを一覧表示する。"
+msgstr "利用可能なサブコマンドを一覧表示します。"
 
 #: src/Zypper.cc:898
 msgid ""
@@ -2339,10 +2329,9 @@ msgid ""
 "\t--solv-cache-dir <dir>\tUse alternative solv file cache directory.\n"
 "\t--pkg-cache-dir <dir>\tUse alternative package cache directory.\n"
 msgstr ""
-"\t--reposd-dir, -D <dir>\t代替レポジトリ定義ファイルディレクトリを使用する\n"
+"\t--reposd-dir, -D <dir>\t代替リポジトリ定義ファイルディレクトリを使用する\n"
 "\t--cache-dir, -C <dir>\tすべてのキャッシュに代替ディレクトリを使用する\n"
-"\t--raw-cache-dir <dir>\t代替未加工メタデータキャッシュディレクトリを使用す"
-"る\n"
+"\t--raw-cache-dir <dir>\t代替未加工メタデータキャッシュディレクトリを使用する\n"
 "\t--solv-cache-dir <dir>\t代替解決ファイルキャッシュディレクトリを使用する\n"
 "\t--pkg-cache-dir <dir>\t代替パッケージキャッシュディレクトリを使用する\n"
 
@@ -2388,9 +2377,9 @@ msgid ""
 "\t\t\t\tDo not read installed packages.\n"
 msgstr ""
 "     ターゲットオプション:\n"
-"\t--root, -R <dir>\t別のルートディレクトリを処理する。\n"
+"\t--root, -R <dir>\t指定したルートディレクトリ内で処理を実施します。\n"
 "\t--disable-system-resolvables\n"
-"\t\t\t\tインストールされたパッケージを読み込まない。\n"
+"\t\t\t\tインストール済みのパッケージを読み込みません。\n"
 
 #: src/Zypper.cc:953
 msgid ""
@@ -2413,14 +2402,14 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"     Repository Management:\n"
-"\trepos, lr\t\t定義済みのリポジトリを一覧にする。\n"
-"\taddrepo, ar\t\t新しいリポジトリを追加する。\n"
-"\tremoverepo, rr\t\t指定したリポジトリを削除する。\n"
-"\trenamerepo, nr\t\t指定したリポジトリの名前を変更する。\n"
-"\tmodifyrepo, mr\t\t指定したリポジトリを修正する。\n"
-"\trefresh, ref\t\t全てのリポジトリを更新する。\n"
-"\tclean\t\t\tローカルのキャッシュを削除する。\n"
+"     リポジトリ管理:\n"
+"\trepos, lr\t\t\t定義済みのリポジトリを一覧表示します。\n"
+"\taddrepo, ar\t\t新しいリポジトリを追加します。\n"
+"\tremoverepo, rr\t\t指定したリポジトリを削除します。\n"
+"\trenamerepo, nr\t\t指定したリポジトリの名前を変更します。\n"
+"\tmodifyrepo, mr\t\t指定したリポジトリを修正します。\n"
+"\trefresh, ref\t\t全てのリポジトリを更新します。\n"
+"\tclean\t\t\t\tローカルのキャッシュを削除します。\n"
 
 #: src/Zypper.cc:968
 msgid ""
@@ -2432,11 +2421,11 @@ msgid ""
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
 "     Service Management:\n"
-"\tservices, ls\t\t定義済みのサービスを一覧にする。\n"
-"\taddservice, as\t\t新しいサービスを追加する。\n"
-"\tmodifyservice, ms\t指定したサービスを修正する。\n"
-"\tremoveservice, rs\t指定したサービスを削除する。\n"
-"\trefresh-services, refs\tすべてのサービスを更新する。\n"
+"\tservices, ls\t\t定義済みのサービスを一覧表示します。\n"
+"\taddservice, as\t\t新しいサービスを追加します。\n"
+"\tmodifyservice, ms\t指定したサービスを修正します。\n"
+"\tremoveservice, rs\t指定したサービスを削除します。\n"
+"\trefresh-services, refs\tすべてのサービスを更新します。\n"
 
 #: src/Zypper.cc:976
 msgid ""
@@ -2512,11 +2501,11 @@ msgid ""
 "\tlocks, ll\t\tList current package locks.\n"
 "\tcleanlocks, cl\t\tRemove unused locks.\n"
 msgstr ""
-"     パッケージロック:\n"
-"\taddlock, al\t\tパッケージロックを追加する。\n"
-"\tremovelock, rl\t\tパッケージロックを削除する。\n"
-"\tlocks, ll\t\t現在のパッケージロックを表示する。\n"
-"\tcleanlocks, cl\t\t未使用のロックを削除する。\n"
+"     パッケージロック (施錠):\n"
+"\taddlock, al\t\t\tパッケージロックを追加します。\n"
+"\tremovelock, rl\t\tパッケージロックを削除します。\n"
+"\tlocks, ll\t\t\t現在のパッケージロックを表示します。\n"
+"\tcleanlocks, cl\t\t未使用のロックを削除します。\n"
 
 #: src/Zypper.cc:1018
 msgid ""
@@ -2547,7 +2536,7 @@ msgid ""
 "\tsubcommand\t\tLists available subcommands.\n"
 msgstr ""
 "     サブコマンド:\n"
-"\tsubcommand\t\t利用可能なサブコマンドを一覧表示する。\n"
+"\tsubcommand\t\t利用可能なサブコマンドを一覧表示します。\n"
 
 #: src/Zypper.cc:1033
 msgid ""
@@ -2746,12 +2735,12 @@ msgstr "指定したリポジトリのみを読み込みます。"
 #: src/Zypper.cc:3826 src/Zypper.cc:4048 src/Zypper.cc:4077
 #, boost-format
 msgid "Type of package (%1%)."
-msgstr "パッケージの種類を指定します (%1%)。 "
+msgstr "パッケージの種類を指定します (%1%) 。"
 
 #. translators: -n, --name
 #: src/Zypper.cc:2032 src/Zypper.cc:2137
 msgid "Select packages by plain name, not by capability."
-msgstr "能力設定ではなく、単に名前でパッケージを指定する"
+msgstr "能力設定ではなく、単に名前でパッケージを指定します。"
 
 #. translators: -C, --capability
 #: src/Zypper.cc:2034 src/Zypper.cc:2139
@@ -3321,43 +3310,43 @@ msgstr ""
 
 #: src/Zypper.cc:2503
 msgid "Apply changes to all services."
-msgstr "全てのサービスに対して変更を適用する。"
+msgstr "全てのサービスに対して変更を適用します。"
 
 #: src/Zypper.cc:2504
 msgid "Apply changes to all local services."
-msgstr "全てのローカルサービスに対して変更を適用する。"
+msgstr "全てのローカルサービスに対して変更を適用します。"
 
 #: src/Zypper.cc:2505
 msgid "Apply changes to all remote services."
-msgstr "全てのリモート (ネットワーク) サービスに対して変更を適用する。"
+msgstr "全てのリモート (ネットワーク) サービスに対して変更を適用します。"
 
 #: src/Zypper.cc:2506
 msgid "Apply changes to services of specified type."
-msgstr "指定した種類のサービスに対して変更を適用する。"
+msgstr "指定した種類のサービスに対して変更を適用します。"
 
 #: src/Zypper.cc:2508
 msgid "Add a RIS service repository to enable."
-msgstr "有効にする RIS サービスリポジトリを追加する。"
+msgstr "有効にする RIS サービスリポジトリを追加します。"
 
 #: src/Zypper.cc:2509
 msgid "Add a RIS service repository to disable."
-msgstr "無効にする RIS サービスリポジトリを追加する。"
+msgstr "無効にする RIS サービスリポジトリを追加します。"
 
 #: src/Zypper.cc:2510
 msgid "Remove a RIS service repository to enable."
-msgstr "有効にする RIS サービスリポジトリを削除する。"
+msgstr "有効にする RIS サービスリポジトリを削除します。"
 
 #: src/Zypper.cc:2511
 msgid "Remove a RIS service repository to disable."
-msgstr "無効にする RIS サービスリポジトリを削除する。"
+msgstr "無効にする RIS サービスリポジトリを削除します。"
 
 #: src/Zypper.cc:2512
 msgid "Clear the list of RIS repositories to enable."
-msgstr "有効にする RIS サービスリポジトリの一覧を消去する。"
+msgstr "有効にする RIS サービスリポジトリの一覧を消去します。"
 
 #: src/Zypper.cc:2513
 msgid "Clear the list of RIS repositories to disable."
-msgstr "無効にする RIS サービスリポジトリの一覧を消去する。"
+msgstr "無効にする RIS サービスリポジトリの一覧を消去します。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2541
@@ -3565,7 +3554,7 @@ msgstr "リポジトリタイプは常に自動検出されます。このオプ
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2703
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr "repos (lr) [OPTIONS]"
+msgstr "repos (lr) [オプション] [リポジトリ] ..."
 
 #. translators: -e, --export <FILE.repo>
 #: src/Zypper.cc:2710
@@ -3907,25 +3896,21 @@ msgstr "利用可能な更新の一覧を表示します。"
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3012
 msgid "List only updates from the specified repository."
-msgstr "指定した別名のリポジトリからの更新のみを表示する"
+msgstr "指定したリポジトリからの更新のみを表示します。"
 
 #. translators: --best-effort
 #: src/Zypper.cc:3014 src/Zypper.cc:3130
 msgid ""
 "Do a 'best effort' approach to update. Updates to a lower than the latest "
 "version are also acceptable."
-msgstr ""
-"「ベストエフォート」方式での更新を指定する。最新・最良 ではない古いバージョン"
-"への更新も受け入れる"
+msgstr "「ベストエフォート」方式での更新を指定します。最新・最良ではない古いバージョンへの更新も受け入れるようにします。"
 
 #. translators: -a, --all
 #: src/Zypper.cc:3016
 msgid ""
 "List all packages for which newer versions are available, regardless whether "
 "they are installable or not."
-msgstr ""
-"インストール可能であるかどうかを問わず、 新しいバージョンが利用可能な 全ての"
-"パッケージを一覧表示する。"
+msgstr "インストール可能であるかどうかを問わず、 新しいバージョンが利用可能な 全てのパッケージを一覧表示します。"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -3955,16 +3940,14 @@ msgstr ""
 "利用可能な更新の一覧を表示します。\n"
 "\n"
 "  コマンドオプション:\n"
-"-t, --type <type>             パッケージの種類を指定する (%s)\n"
+"-t, --type <type>             パッケージの種類を指定します (%s) 。\n"
 "                              デフォルト:%s\n"
-"-r, --repo <alias|#|URI>      指定した別名のリポジトリからの更新のみを表示す"
-"る\n"
-"    --best-effort             「ベストエフォート」方式での更新を指定する。最"
-"新・最良\n"
-"                              ではない古いバージョンへの更新も受け入れる\n"
+"-r, --repo <alias|#|URI>      指定した別名のリポジトリからの更新のみを表示します。\n"
+"    --best-effort             「ベストエフォート」方式での更新を指定する。最新・最良\n"
+"                              ではない古いバージョンへの更新も受け入れます。\n"
 "-a, --all                     インストール可能であるかどうかを問わず、\n"
 "                              新しいバージョンが利用可能な\n"
-"                              全てのパッケージを一覧表示する。\n"
+"                              全てのパッケージを一覧表示します。\n"
 
 #. translators: the first %s = "package, patch, pattern, product",
 #. the second %s = "patch",
@@ -4061,9 +4044,7 @@ msgstr "対話処理が必要な更新を飛ばしません。"
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See man "
 "zypper for more details."
-msgstr ""
-"サードパーティのライセンス確認を行なう際、 自動的に「yes」と回答します。 (詳"
-"細はman zypperをご覧ください)"
+msgstr "サードパーティのライセンス確認を行なう際、 自動的に「yes」と回答します (詳細はman zypperをご覧ください) 。"
 
 #. translators: -D, --dry-run
 #: src/Zypper.cc:3134 src/Zypper.cc:3249
@@ -4188,9 +4169,7 @@ msgstr "重要度に該当するパッチのみをインストールします。
 #: src/Zypper.cc:3243
 msgid ""
 "Install only patches issued up to, but not including, the specified date"
-msgstr ""
-"指定した日付まで (指定した日付は含まず) に発行 されたパッチのみをインストール"
-"します。"
+msgstr "指定した日付まで (指定した日付は含まず) に発行されたパッチのみをインストールします"
 
 #: src/Zypper.cc:3256
 msgid "Install only patches which affect the package management itself."
@@ -4388,7 +4367,7 @@ msgstr "指定したリポジトリのアップグレードに限定します。
 #. translators: -D, --dry-run
 #: src/Zypper.cc:3398
 msgid "Test the upgrade, do not actually upgrade"
-msgstr "アップグレードをテストするだけで実際には何もしません。"
+msgstr "アップグレードをテストするだけで実際には何もしません"
 
 #: src/Zypper.cc:3451
 msgid ""
@@ -4606,9 +4585,7 @@ msgstr "各リポジトリ内で使用可能な各バージョンを別の行に
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
-msgstr ""
-"同様に、--detailsは、 検索が一致し(依存関係の検索に役立"
-"つ)                    "
+msgstr "--details と同様に、追加情報を検索対象に含めます (依存関係内の検索に便利です) 。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3564
@@ -4664,7 +4641,7 @@ msgstr "指定したリポジトリにあるすべてのパッチの一覧を表
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3602 src/Zypper.cc:3645 src/Zypper.cc:3705 src/Zypper.cc:3761
 msgid "Just another means to specify repository."
-msgstr "リポジトリを指定するもう一つの方法"
+msgstr "リポジトリを指定するもう一つの方法です。"
 
 #: src/Zypper.cc:3606
 msgid ""
@@ -4961,7 +4938,7 @@ msgstr "補足するものを検索します。"
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3856
 msgid "patch-info <PATCHNAME> ..."
-msgstr "patch-info <修正名> ..."
+msgstr "patch-info <パッチ名> ..."
 
 #. translators: command description
 #: src/Zypper.cc:3859
@@ -5120,7 +5097,7 @@ msgstr ""
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:4075
 msgid "Remove only locks with specified repository."
-msgstr "指定したリポジトリからのロックのみを解除する"
+msgstr "指定したリポジトリからのロックのみを解除します。"
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -5193,7 +5170,7 @@ msgstr "パラメータで指定したバージョンの比較を行ないます
 #. translators: -m, --match
 #: src/Zypper.cc:4161
 msgid "Takes missing release number as any release."
-msgstr "リリース番号が存在しないときはどんなリリースでもかまわないものとする"
+msgstr "リリース番号が存在しないときはどんなリリースでもかまわないものとします。"
 
 #: src/Zypper.cc:4165
 msgid ""
