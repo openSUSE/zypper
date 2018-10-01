@@ -488,20 +488,23 @@ namespace zypp {
 	  } while ( true );
 	}
 
-	// Wait for child to exit
-	int ret;
-	int status = 0;
-	do
+	if ( pid > 0 )	// bsc#1109877: must re-check! running() in the loop above may have already waited.
 	{
-	  ret = waitpid(pid, &status, 0);
-	}
-	while (ret == -1 && errno == EINTR);
+	  // Wait for child to exit
+	  int ret;
+	  int status = 0;
+	  do
+	  {
+	    ret = waitpid(pid, &status, 0);
+	  }
+	  while (ret == -1 && errno == EINTR);
 
-	if (ret != -1)
-	{
-	 _exitStatus = checkStatus( status );
+	  if (ret != -1)
+	  {
+	    _exitStatus = checkStatus( status );
+	  }
+	  pid = -1;
 	}
-	pid = -1;
       }
 
       return _exitStatus;
