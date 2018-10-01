@@ -51,6 +51,7 @@ namespace
       { ZypperCommand::REMOVE_REPO_e, std::make_shared<RemoveRepoCmd>() },
       { ZypperCommand::RENAME_REPO_e, std::make_shared<RenameRepoCmd>() },
       { ZypperCommand::MODIFY_REPO_e, std::make_shared<ModifyRepoCmd>() },
+      { ZypperCommand::REFRESH_e, std::make_shared<RefreshRepoCmd>() },
 
       { ZypperCommand::PS_e, std::make_shared<PSCommand>() }
     };
@@ -77,7 +78,7 @@ namespace
       //_t( RENAME_REPO_e )	| "renamerepo"		| "nr";
       //_t( MODIFY_REPO_e )	| "modifyrepo"		| "mr";
       //_t( LIST_REPOS_e )	| "repos"		| "lr" | "catalogs" | "ca";
-      _t( REFRESH_e )		| "refresh"		| "ref";
+      //_t( REFRESH_e )		| "refresh"		| "ref";
       _t( CLEAN_e )		| "clean"		| "cc" | "clean-cache" | "you-clean-cache" | "yc";
 
       _t( INSTALL_e )		| "install"		| "in";

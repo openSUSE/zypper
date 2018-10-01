@@ -71,6 +71,7 @@
 #include "commands/services/refresh.h"
 #include "commands/conditions.h"
 #include "commands/reposerviceoptionsets.h"
+#include "commands/repos/refresh.h"
 using namespace zypp;
 
 bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExit
@@ -2500,43 +2501,6 @@ void Zypper::processCommandOptions()
     )
 #endif
 
-  case ZypperCommand::REFRESH_e:
-  {
-    static struct option refresh_options[] = {
-      {"force", no_argument, 0, 'f'},
-      {"force-build", no_argument, 0, 'b'},
-      {"force-download", no_argument, 0, 'd'},
-      {"build-only", no_argument, 0, 'B'},
-      {"download-only", no_argument, 0, 'D'},
-      {"repo", required_argument, 0, 'r'},
-      {"services", no_argument, 0, 's'},
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = refresh_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("refresh (ref) [ALIAS|#|URI] ...")
-    )
-    .description(	// translators: command description
-    _("Refresh repositories specified by their alias, number or URI. If none are specified, all enabled repositories will be refreshed.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-f, --force",	// translators: -f, --force
-             _("Force a complete refresh.") )
-    .option( "-b, --force-build",	// translators: -b, --force-build
-             _("Force rebuild of the database.") )
-    .option( "-d, --force-download",	// translators: -d, --force-download
-             _("Force download of raw metadata.") )
-    .option( "-B, --build-only",	// translators: -B, --build-only
-             _("Only build the database, don't download metadata.") )
-    .option( "-D, --download-only",	// translators: -D, --download-only
-             _("Only download raw metadata, don't build the database.") )
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Refresh only specified repositories.") )
-    .option( "-s, --services",	// translators: -s, --services
-             _("Refresh also services before refreshing repos.") )
-    ;
 #if 0
     _command_help = _(
       "refresh (ref) [alias|#|URI] ...\n"
@@ -2554,8 +2518,6 @@ void Zypper::processCommandOptions()
       "-s, --services           Refresh also services before refreshing repos.\n"
     );
 #endif
-    break;
-  }
 
   case ZypperCommand::CLEAN_e:
   {
@@ -4121,52 +4083,6 @@ void Zypper::doCommand()
     break;
   }
 
-  // --------------------------( refresh )------------------------------------
-
-  case ZypperCommand::REFRESH_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for refreshing system repositories.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    if ( globalOpts().no_refresh )
-      out().warning( str::Format(_("The '%s' global option has no effect here.")) % "--no-refresh" );
-
-    // by default refresh only repositories
-    initRepoManager();
-    if ( copts.count("services") )
-    {
-      if ( !_arguments.empty() )
-      {
-        out().error(str::form(_("Arguments are not allowed if '%s' is used."), "--services"));
-        setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-        return;
-      }
-
-      RefreshServicesCmd refServiceCmd( copts.count("force"), false, false);
-
-      // needed to be able to retrieve target distribution
-      init_target( *this );
-      _gopts.rm_options.servicesTargetDistro = God->target()->targetDistribution();
-
-      setExitCode( refServiceCmd.refreshServices( *this ) );
-    }
-    else
-    {
-      RepoManager::RefreshServiceOptions opts;
-      if ( copts.count("force") )
-        opts |= RepoManager::RefreshService_forceRefresh;
-
-      checkIfToRefreshPluginServices( *this, opts );
-    }
-    refresh_repos( *this );
-    break;
-  }
-
   // --------------------------( clean )------------------------------------
 
   case ZypperCommand::CLEAN_e:
@@ -4334,7 +4250,7 @@ void Zypper::doCommand()
 
       // shut up zypper
       SCOPED_VERBOSITY( out(), Out::QUIET );
-      refresh_repo( *this, repo );
+      RefreshRepoCmd::refreshRepository( *this, repo );
       runtimeData().temporary_repos.push_back( repo );
     }
     // no rpms and no other arguments either

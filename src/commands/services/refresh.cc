@@ -11,6 +11,7 @@
 
 #include "common.h"
 #include "utils/flags/flagtypes.h"
+#include "commands/repos/refresh.h"
 #include "commands/conditions.h"
 
 #include <zypp/repo/RepoInfoBase.h>
@@ -209,7 +210,7 @@ int RefreshServicesCmd::refreshServices( Zypper &zypper )
           rm.getRepositoriesInService( s->alias(),
 				       make_function_output_iterator( bind( &RepoCollector::collect, &collector, _1 ) ) );
           for_( repoit, collector.repos.begin(), collector.repos.end() )
-            refresh_repo( zypper, *repoit );
+              RefreshRepoCmd::refreshRepository( zypper, *repoit, _force ? RefreshRepoCmd::Force : RefreshRepoCmd::Default );
         }
       }
       else
@@ -219,7 +220,7 @@ int RefreshServicesCmd::refreshServices( Zypper &zypper )
           DBG << "Skipping non-index service '" << service_ptr->asUserString() << "' because '--no-repos' is used.";
           continue;
         }
-        error = refresh_repo( zypper, *dynamic_pointer_cast<RepoInfo>(service_ptr) );
+        error = RefreshRepoCmd::refreshRepository( zypper, *dynamic_pointer_cast<RepoInfo>(service_ptr), _force ? RefreshRepoCmd::Force : RefreshRepoCmd::Default );
       }
 
       if ( error )

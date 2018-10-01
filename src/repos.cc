@@ -196,7 +196,7 @@ void repoPrioSummary( Zypper & zypper )
 
 // ----------------------------------------------------------------------------
 
-static bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_download )
+bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_download )
 {
   RuntimeData & gData( zypper.runtimeData() );
   gData.current_repo = repo;
@@ -399,7 +399,7 @@ static bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool f
 
 // ---------------------------------------------------------------------------
 
-static bool build_cache( Zypper & zypper, const RepoInfo & repo, bool force_build )
+bool build_cache( Zypper & zypper, const RepoInfo & repo, bool force_build )
 {
   if ( force_build )
     zypper.out().info(_("Forcing building of repository cache") );
@@ -999,179 +999,7 @@ void init_target( Zypper & zypper )
 
 // ----------------------------------------------------------------------------
 
-void refresh_repos( Zypper & zypper )
-{
-  MIL << "going to refresh repositories" << endl;
-  // need gpg keys when downloading (#304672)
-  init_target( zypper );
-  RepoManager & manager( zypper.repoManager() );
-  const std::list<RepoInfo> & repos( manager.knownRepositories() );
 
-  // get the list of repos specified on the command line ...
-  std::list<RepoInfo> specified;
-  std::list<std::string> not_found;
-  // ...as command arguments
-  get_repos( zypper, zypper.arguments().begin(), zypper.arguments().end(), specified, not_found );
-  // ...as --repo options
-  parsed_opts::const_iterator tmp1( copts.find("repo") );
-  if ( tmp1 != copts.end() )
-    get_repos( zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found );
-  report_unknown_repos( zypper.out(), not_found );
-
-  // --plus-content: It either specifies a known repo (by #, alias or URL)
-  // or we need to also refresh all disabled repos to get their content
-  // keywords.
-  std::set<RepoInfo> plusContent;
-  bool doContentCheck = false;
-  for ( const std::string & spec : zypper.runtimeData().plusContentRepos )
-  {
-    RepoInfo r;
-    if ( match_repo( zypper, spec, &r ) )
-      plusContent.insert( r );	// specific repo: add to plusContent
-    else if ( ! doContentCheck )
-      doContentCheck = true;	// keyword: need to scan all disabled repos
-  }
-
-  std::ostringstream s;
-  s << _("Specified repositories: ");
-  for_( it, specified.begin(), specified.end() )
-    s << it->alias() << " ";
-  zypper.out().info( s.str(), Out::HIGH );
-
-  unsigned error_count = 0;
-  unsigned enabled_repo_count = repos.size();
-
-  if ( !specified.empty() || not_found.empty() )
-  {
-    for_( rit, repos.begin(), repos.end() )
-    {
-      const RepoInfo & repo( *rit );
-
-      if ( repo.enabled() )
-      {
-	// enabled: Refreshed unless restricted by CLI args or mentioned in
-	// --plus-content as specific repo.
-	if ( !specified.empty() && std::find( specified.begin(), specified.end(), repo ) == specified.end() )
-	{
-	  if ( plusContent.count( repo ) )
-	  {
-	    MIL << "[--plus-content] check " << repo.alias() << endl;
-	    zypper.out().info( str::Format(_("Refreshing repository '%s'.")) % repo.asUserString(),
-			       " [--plus-content]" );
-	  }
-	  else
-	  {
-	    DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
-	    enabled_repo_count--;
-	    continue;
-	  }
-	}
-      }
-      else
-      {
-	// disabled: No refresh unless mentioned in --plus-content (specific or content check).
-	// CLI args reffering to disabled repos are reported as error.
-	if ( doContentCheck || plusContent.count( repo ) )
-	{
-	  MIL << "[--plus-content] check " << repo.alias() << endl;
-	  zypper.out().info( str::Format(_("Scanning content of disabled repository '%s'.")) % repo.asUserString(),
-			     " [--plus-content]" );
-	}
-	else
-	{
-	  if ( !specified.empty() && std::find( specified.begin(), specified.end(), repo ) == specified.end() )
-	  {
-	    DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
-	  }
-	  else
-	  {
-	    std::string msg( str::Format(_("Skipping disabled repository '%s'")) % repo.asUserString() );
-
-	    if ( specified.empty() )
-	      zypper.out().info( msg, Out::HIGH );
-	    else
-	      zypper.out().error( msg );
-	  }
-	  enabled_repo_count--;
-	  continue;
-	}
-      }
-
-      // do the refresh
-      if ( refresh_repo( zypper, repo ) )
-      {
-        zypper.out().error( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString() );
-        ERR << "Skipping repository '" << repo.alias() << "' because of the above error." << endl;
-        error_count++;
-      }
-    }
-  }
-  else
-    enabled_repo_count = 0;
-
-  // print the result message
-  if ( !not_found.empty() )
-  {
-      zypper.out().error(_("Some of the repositories have not been refreshed because they were not known.") );
-      zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-  }
-  else if ( enabled_repo_count == 0 )
-  {
-    if ( !specified.empty() )
-      zypper.out().warning(_("Specified repositories are not enabled or defined.") );
-    else {
-      zypper.out().warning(_("There are no enabled repositories defined.") );
-      zypper.setExitCode( ZYPPER_EXIT_NO_REPOS );
-    }
-
-    zypper.out().info( str::form(_("Use '%s' or '%s' commands to add or enable repositories."),
-				 "zypper addrepo", "zypper modifyrepo" ) );
-  }
-  else if ( error_count == enabled_repo_count )
-  {
-    zypper.out().error(_("Could not refresh the repositories because of errors.") );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
-  }
-  else if ( error_count )
-  {
-    zypper.out().error(_("Some of the repositories have not been refreshed because of an error.") );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
-  }
-  else if ( !specified.empty() )
-    zypper.out().info(_("Specified repositories have been refreshed.") );
-  else
-    zypper.out().info(_("All repositories have been refreshed.") );
-}
-
-// ----------------------------------------------------------------------------
-
-/** \return false on success, true on error */
-bool refresh_repo( Zypper & zypper, const RepoInfo & repo )
-{
-  MIL << "going to refresh repo '" << repo.alias() << "'" << endl;
-
-  // raw metadata refresh
-  bool error = false;
-  if ( !zypper.cOpts().count("build-only") )
-  {
-    bool force_download = zypper.cOpts().count("force") || zypper.cOpts().count("force-download");
-    MIL << "calling refreshMetadata" << (force_download ? ", forced" : "") << endl;
-    error = refresh_raw_metadata( zypper, repo, force_download );
-  }
-
-  // db rebuild
-  if ( !( error || zypper.cOpts().count("download-only") ) )
-  {
-    bool force_build = zypper.cOpts().count("force") || zypper.cOpts().count("force-build");
-    MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
-    error = build_cache( zypper, repo, force_build );
-  }
-
-  return error;
-}
 
 // ----------------------------------------------------------------------------
 
