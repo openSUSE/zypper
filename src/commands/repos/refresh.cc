@@ -1,0 +1,304 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+#include "refresh.h"
+#include "repos.h"
+#include "commands/conditions.h"
+#include "commands/services/refresh.h"
+
+
+#include "utils/messages.h"
+#include "utils/flags/flagtypes.h"
+#include "Zypper.h"
+
+using namespace zypp;
+
+extern ZYpp::Ptr God;
+
+RefreshRepoCmd::RefreshRepoCmd()
+  : ZypperBaseCommand (
+      { "refresh", "ref" },
+      _("refresh (ref) [ALIAS|#|URI] ..."),
+      // translators: command summary: refresh, ref
+      _("Refresh all repositories."),
+      // translators: command description
+      _("Refresh repositories specified by their alias, number or URI. If none are specified, all enabled repositories will be refreshed."),
+      ResetRepoManager
+  )
+{
+
+}
+
+std::vector<BaseCommandConditionPtr> RefreshRepoCmd::conditions() const
+{
+  return {
+    std::make_shared<NeedsRootCondition>()
+  };
+}
+
+zypp::ZyppFlags::CommandGroup RefreshRepoCmd::cmdOptions() const
+{
+  auto that = const_cast<RefreshRepoCmd *>(this);
+  return {{
+      {"force",'f', ZyppFlags::NoArgument,
+            ZyppFlags::BitFieldType( that->_flags, Force ),
+            // translators: -f, --force
+            _("Force a complete refresh.")
+      },
+      {"force-build", 'b', ZyppFlags::NoArgument,
+            ZyppFlags::BitFieldType( that->_flags, ForceBuild ),
+            // translators: -b, --force-build
+            _("Force rebuild of the database.")
+      },
+      {"force-download", 'd', ZyppFlags::NoArgument,
+            ZyppFlags::BitFieldType( that->_flags, ForceDownload ),
+            // translators: -d, --force-download
+            _("Force download of raw metadata.")
+      },
+      {"build-only", 'B', ZyppFlags::NoArgument,
+            ZyppFlags::BitFieldType( that->_flags, BuildOnly ),
+            // translators: -B, --build-only
+            _("Only build the database, don't download metadata.")
+      },
+      {"download-only", 'D', ZyppFlags::NoArgument,
+            ZyppFlags::BitFieldType( that->_flags, DownloadOnly ),
+            // translators: -D, --download-only
+            _("Only download raw metadata, don't build the database.")
+      },
+      {"repo", 'r', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable,
+            ZyppFlags::StringVectorType( &that->_repos, ARG_REOSITORY),
+            // translators: -r, --repo <ALIAS|#|URI>
+            _("Refresh only specified repositories.")
+      }
+      ,
+      {"services", 's', ZyppFlags::NoArgument,
+            ZyppFlags::BoolType( &that->_services, ZyppFlags::StoreTrue, false ),
+            // translators: -s, --services
+            _("Refresh also services before refreshing repos.")
+      },
+  }};
+}
+
+void RefreshRepoCmd::doReset()
+{
+  _flags = Default;
+  _repos.clear();
+  _services = false;
+}
+
+int RefreshRepoCmd::execute( Zypper &zypp_r , const std::vector<std::string> &positionalArgs_r )
+{
+  if ( zypp_r.globalOpts().no_refresh )
+    zypp_r.out().warning( str::Format(_("The '%s' global option has no effect here.")) % "--no-refresh" );
+
+  bool force = _flags.testFlag(Force);
+
+  if ( _services )
+  {
+    if ( !positionalArgs_r.empty() )
+    {
+      zypp_r.out().error(str::form(_("Arguments are not allowed if '%s' is used."), "--services"));
+      return ( ZYPPER_EXIT_ERR_PRIVILEGES );
+    }
+
+    RefreshServicesCmd refServiceCmd( force, false, false);
+
+    // needed to be able to retrieve target distribution
+    int code = defaultSystemSetup ( zypp_r, InitTarget );
+    if ( code != ZYPPER_EXIT_OK )
+      return code;
+
+    zypp_r.globalOptsNoConst().rm_options.servicesTargetDistro = God->target()->targetDistribution();
+
+    code = refServiceCmd.refreshServices( zypp_r );
+    if ( code != ZYPPER_EXIT_OK )
+      return code;
+  }
+  else
+  {
+    RepoManager::RefreshServiceOptions opts;
+    if ( force )
+      opts |= RepoManager::RefreshService_forceRefresh;
+
+    checkIfToRefreshPluginServices( zypp_r, opts );
+  }
+
+  MIL << "going to refresh repositories" << endl;
+  // need gpg keys when downloading (#304672)
+  int code = defaultSystemSetup ( zypp_r, InitTarget );
+  if ( code != ZYPPER_EXIT_OK )
+    return code;
+
+  std::vector<std::string> specifiedRepos = _repos;
+  for ( const std::string &repoFromCLI : positionalArgs_r )
+    specifiedRepos.push_back(repoFromCLI);
+
+  return refreshRepositories ( zypp_r, _flags, specifiedRepos );
+}
+
+bool RefreshRepoCmd::refreshRepository(Zypper &zypper, const RepoInfo &repo, RefreshFlags flags_r)
+{
+  MIL << "going to refresh repo '" << repo.alias() << "'" << endl;
+
+  // raw metadata refresh
+  bool error = false;
+  if ( !flags_r.testFlag(BuildOnly) )
+  {
+    bool force_download = flags_r.testFlag(Force) || flags_r.testFlag(ForceDownload);
+    MIL << "calling refreshMetadata" << (force_download ? ", forced" : "") << endl;
+    error = refresh_raw_metadata( zypper, repo, force_download );
+  }
+
+  // db rebuild
+  if ( !( error || flags_r.testFlag(DownloadOnly) ) )
+  {
+    bool force_build = flags_r.testFlag(Force) || flags_r.testFlag(ForceBuild);;
+    MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
+    error = build_cache( zypper, repo, force_build );
+  }
+
+  return error;
+}
+
+int RefreshRepoCmd::refreshRepositories( Zypper &zypp_r, RefreshFlags flags_r, const std::vector<std::string> repos_r )
+{
+  RepoManager & manager( zypp_r.repoManager() );
+  const std::list<RepoInfo> & repos( manager.knownRepositories() );
+
+  // get the list of repos specified on the command line ...
+  std::list<RepoInfo> specified;
+  std::list<std::string> not_found;
+  get_repos( zypp_r, repos_r.begin(),repos_r.end(), specified, not_found );
+  report_unknown_repos( zypp_r.out(), not_found );
+
+  // --plus-content: It either specifies a known repo (by #, alias or URL)
+  // or we need to also refresh all disabled repos to get their content
+  // keywords.
+  std::set<RepoInfo> plusContent;
+  bool doContentCheck = false;
+  for ( const std::string & spec : zypp_r.runtimeData().plusContentRepos )
+  {
+    RepoInfo r;
+    if ( match_repo( zypp_r, spec, &r ) )
+      plusContent.insert( r );	// specific repo: add to plusContent
+    else if ( ! doContentCheck )
+      doContentCheck = true;	// keyword: need to scan all disabled repos
+  }
+
+  std::ostringstream s;
+  s << _("Specified repositories: ");
+  for_( it, specified.begin(), specified.end() )
+    s << it->alias() << " ";
+  zypp_r.out().info( s.str(), Out::HIGH );
+
+  unsigned error_count = 0;
+  unsigned enabled_repo_count = repos.size();
+
+  if ( !specified.empty() || not_found.empty() )
+  {
+    for_( rit, repos.begin(), repos.end() )
+    {
+      const RepoInfo & repo( *rit );
+
+      if ( repo.enabled() )
+      {
+	// enabled: Refreshed unless restricted by CLI args or mentioned in
+	// --plus-content as specific repo.
+	if ( !specified.empty() && std::find( specified.begin(), specified.end(), repo ) == specified.end() )
+	{
+	  if ( plusContent.count( repo ) )
+	  {
+	    MIL << "[--plus-content] check " << repo.alias() << endl;
+	    zypp_r.out().info( str::Format(_("Refreshing repository '%s'.")) % repo.asUserString(),
+			       " [--plus-content]" );
+	  }
+	  else
+	  {
+	    DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
+	    enabled_repo_count--;
+	    continue;
+	  }
+	}
+      }
+      else
+      {
+	// disabled: No refresh unless mentioned in --plus-content (specific or content check).
+	// CLI args reffering to disabled repos are reported as error.
+	if ( doContentCheck || plusContent.count( repo ) )
+	{
+	  MIL << "[--plus-content] check " << repo.alias() << endl;
+	  zypp_r.out().info( str::Format(_("Scanning content of disabled repository '%s'.")) % repo.asUserString(),
+			     " [--plus-content]" );
+	}
+	else
+	{
+	  if ( !specified.empty() && std::find( specified.begin(), specified.end(), repo ) == specified.end() )
+	  {
+	    DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
+	  }
+	  else
+	  {
+	    std::string msg( str::Format(_("Skipping disabled repository '%s'")) % repo.asUserString() );
+
+	    if ( specified.empty() )
+	      zypp_r.out().info( msg, Out::HIGH );
+	    else
+	      zypp_r.out().error( msg );
+	  }
+	  enabled_repo_count--;
+	  continue;
+	}
+      }
+
+      // do the refresh
+      if ( refreshRepository( zypp_r, repo, flags_r ) )
+      {
+        zypp_r.out().error( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString() );
+        ERR << "Skipping repository '" << repo.alias() << "' because of the above error." << endl;
+        error_count++;
+      }
+    }
+  }
+  else
+    enabled_repo_count = 0;
+
+  // print the result message
+  if ( !not_found.empty() )
+  {
+      zypp_r.out().error(_("Some of the repositories have not been refreshed because they were not known.") );
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+  }
+  else if ( enabled_repo_count == 0 )
+  {
+    int code = ZYPPER_EXIT_OK;
+    if ( !specified.empty() )
+      zypp_r.out().warning(_("Specified repositories are not enabled or defined.") );
+    else {
+      zypp_r.out().warning(_("There are no enabled repositories defined.") );
+      code = ( ZYPPER_EXIT_NO_REPOS );
+    }
+
+    zypp_r.out().info( str::form(_("Use '%s' or '%s' commands to add or enable repositories."),
+				 "zypper addrepo", "zypper modifyrepo" ) );
+    return code;
+  }
+  else if ( error_count == enabled_repo_count )
+  {
+    zypp_r.out().error(_("Could not refresh the repositories because of errors.") );
+    return ( ZYPPER_EXIT_ERR_ZYPP );
+  }
+  else if ( error_count )
+  {
+    zypp_r.out().error(_("Some of the repositories have not been refreshed because of an error.") );
+    return ( ZYPPER_EXIT_ERR_ZYPP );
+  }
+  else if ( !specified.empty() )
+    zypp_r.out().info(_("Specified repositories have been refreshed.") );
+  else
+    zypp_r.out().info(_("All repositories have been refreshed.") );
+
+  return ZYPPER_EXIT_OK;
+}

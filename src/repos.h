@@ -106,18 +106,6 @@ void init_repos( Zypper & zypper );
 void list_repos( Zypper & zypper );
 
 /**
- * Refresh all enabled repositories.
- */
-void refresh_repos( Zypper & zypper );
-
-/**
- * Refresh a single repository.
- * \return true on error, false otherwise
- */
-bool refresh_repo( Zypper & zypper, const RepoInfo & repo );
-
-
-/**
  * Clean caches for all (specified) repositories.
  */
 void clean_repos( Zypper & zypper );
@@ -236,6 +224,10 @@ bool repo_cmp_alias_urls( const RepoInfo & lhs, const RepoInfo & rhs );
 unsigned priority_from_copts( Zypper &zypper );
 
 void repoPrioSummary( Zypper & zypper );
+
+bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_download );
+
+bool build_cache( Zypper & zypper, const RepoInfo & repo, bool force_build );
 
 #endif
 // Local Variables:
