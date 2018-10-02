@@ -258,26 +258,26 @@ namespace	// command execution
       //////////////////////////////////////////////////////////////////////
 
       // close all *open* file descriptors
-      std::list<std::string> fdlist;
+      std::list<Pathname> fdlist;
       int maxfd = STDERR_FILENO;
       int ret = readdir( fdlist, "/proc/self/fd", /*dots*/false );
       if ( ret != 0 )
       {
         // cannot open /proc/self/fd, fall back to expensive close-all approach.
         for ( int i = ::getdtablesize() - 1; i > maxfd; --i )
-        { ::close( i ); }
+        { fcntl(i, F_SETFD, FD_CLOEXEC, true); }
       }
       else
       {
         for (const auto & fdstr : fdlist)
         {
           int fd = -1;
-          try { fd = std::stoi(fdstr); }
+          try { fd = std::stoi(fdstr.c_str()); }
           catch (const std::invalid_argument &_) {
             continue;
           }
           if (fd > maxfd)
-            ::close(fd);
+            fcntl(fd, F_SETFD, FD_CLOEXEC, true);
         }
       }
 
