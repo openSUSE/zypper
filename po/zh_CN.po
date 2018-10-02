@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-02 03:05+0000\n"
+"PO-Revision-Date: 2018-10-02 06:01+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
@@ -3969,7 +3969,7 @@ msgstr "仅安装此严重性的补丁。"
 #: src/Zypper.cc:3243
 msgid ""
 "Install only patches issued up to, but not including, the specified date"
-msgstr "安装指定日期前发布的补丁。"
+msgstr "仅安装指定日期前但不包括指定日期发布的补丁"
 
 #: src/Zypper.cc:3256
 msgid "Install only patches which affect the package management itself."
@@ -5038,9 +5038,8 @@ msgid ""
 "packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be "
 "changed by using the global --pkg-cache-dir option."
 msgstr ""
-"下载命令行指定的 RPM 到本地文件夹。 默认将软件包下载到 libzypp 软件包缓存文件"
-"夹 (/var/cache/zypp/packages; 非 root 用户则是 $XDG_CACHE_HOME/zypp/"
-"packages)，"
+"下载命令行指定的 RPM 到本地文件夹。 默认将软件包下载到 libzypp 软件包缓存文件夹 (/var/cache/zypp/packages; 非 "
+"root 用户则是 $XDG_CACHE_HOME/zypp/packages)，但可使用全局的 --pkg-cache-dir 选项修改。"
 
 #. translators: command description
 #: src/Zypper.cc:4258
