@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-01 15:51+0000\n"
+"PO-Revision-Date: 2018-10-02 08:47+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -604,22 +604,22 @@ msgstr "CATEGORIA"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "DIR"
-msgstr ""
+msgstr "DIR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "FILE"
-msgstr ""
+msgstr "FITXER"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE.repo"
-msgstr ""
+msgstr "FITXER.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FORMAT"
-msgstr ""
+msgstr "FORMAT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
@@ -629,7 +629,7 @@ msgstr "enter"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "PATH"
-msgstr ""
+msgstr "CAMÍ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
@@ -639,12 +639,12 @@ msgstr "SEVERITAT"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "STRING"
-msgstr ""
+msgstr "CADENA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "TAG"
-msgstr ""
+msgstr "ETIQUETA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
@@ -2835,7 +2835,7 @@ msgstr ""
 #. translators: --from <ALIAS|#|URI>
 #: src/Zypper.cc:2026
 msgid "Select packages from the specified repository."
-msgstr ""
+msgstr "Seleccioneu paquets del repositori especificat."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2028 src/Zypper.cc:2133 src/Zypper.cc:2284 src/Zypper.cc:3122
@@ -2866,6 +2866,8 @@ msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
 msgstr ""
+"Instal·la-ho fins i tot si l'element ja està instal·lat (reinstal·lació), "
+"degradat o bé canvia de proveïdor o d'arquitectura."
 
 #. translators: --oldpackage
 #: src/Zypper.cc:2038
@@ -2873,6 +2875,8 @@ msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
+"Permet reemplaçar un element nou per un d'antic. És útil si reculeu d'una "
+"actualització. A diferència de --force, no forçarà una reinstal·lació."
 
 #. translators: --replacefiles
 #: src/Zypper.cc:2040 src/Zypper.cc:3132 src/Zypper.cc:3245 src/Zypper.cc:3396
@@ -3111,7 +3115,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2207
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "source-install (si) [OPCIONS] <NOM> ..."
 
 #. translators: command description
 #: src/Zypper.cc:2210
@@ -3292,7 +3296,7 @@ msgstr "El tipus de servei sempre s'autodetecta. Aquesta opció s'ignora."
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2418
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removeservice (rs) [OPCIONS] <ÀLIES|#|URI>"
 
 #. translators: command description
 #: src/Zypper.cc:2421
@@ -3320,6 +3324,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
+"removeservice (rs) [OPCIONS] <àlies|#|URI>\n"
+"\n"
+"Suprimeix del sistema el servei d'índex d'un repositori especificat.\n"
+"\n"
+"  Opcions de l'ordre:\n"
+"    --loose-auth   Ignora les dades d'autenticació d'usuari a l'URI.\n"
+"    --loose-query  Ignora la cadena de consulta a l'URI.\n"
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:2463
@@ -3662,7 +3673,7 @@ msgstr "El tipus de repositori sempre s'autodetecta. Aquesta opció s'ignora."
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2703
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr ""
+msgstr "repos (lr) [OPCIONS] [REPO] ..."
 
 #. translators: -e, --export <FILE.repo>
 #: src/Zypper.cc:2710
@@ -3758,7 +3769,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2784
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removerepo (rr) [OPCIONS] <ÀLIES|#|URI>"
 
 #. translators: command description
 #: src/Zypper.cc:2787
@@ -3768,7 +3779,7 @@ msgstr "Suprimeix el repositori especificat per àlies, número o URI."
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2808
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
-msgstr ""
+msgstr "renamerepo (nr) [OPCIONS] <ÀLIES|#|URI> <NOU-ÀLIES>"
 
 #. translators: command description
 #: src/Zypper.cc:2811
@@ -3872,7 +3883,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2903
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [ÀLIES|#|URI] ..."
 
 #. translators: command description
 #: src/Zypper.cc:2906
@@ -3950,7 +3961,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2957
 msgid "clean (cc) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "clean (cc) [ÀLIES|#|URI] ..."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2964
@@ -3998,7 +4009,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3003
 msgid "list-updates (lu) [OPTIONS]"
-msgstr ""
+msgstr "list-updates (lu) [OPCIONS]"
 
 #. translators: command description
 #: src/Zypper.cc:3006
@@ -4051,7 +4062,7 @@ msgid ""
 "                              available, regardless whether they are\n"
 "                              installable or not.\n"
 msgstr ""
-"list-updates (lu) [OPTIONS]\n"
+"list-updates (lu) [OPCIONS]\n"
 "\n"
 "Llista totes les actualitzacions disponibles.\n"
 "\n"
@@ -4142,23 +4153,25 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3113
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [OPCIONS] [NOMDELPAQUET] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3116
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Actualitza tots els paquets instal·lats o només els especificats amb "
+"versions noves, si és possible."
 
 #. translators: --skip-interactive
 #: src/Zypper.cc:3124
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Omet les actualitzacions interactives."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:3126
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "No ometis les actualitzacions interactives."
 
 #. translators: -l, --auto-agree-with-licenses
 #: src/Zypper.cc:3128 src/Zypper.cc:3233 src/Zypper.cc:3394
@@ -4774,7 +4787,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3595
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr ""
+msgstr "patches (pch) [REPOSITORI] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3598
@@ -4808,7 +4821,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3638
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "packages (pa) [OPCIONS] [REPOSITORI] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3641
@@ -4884,7 +4897,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3698
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "patterns (pt) [OPCIONS] [REPOSITORI] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3701
@@ -4948,7 +4961,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3754
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "products (pd) [OPCIONS] [REPOSITORI] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3757
@@ -5021,7 +5034,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3815
 msgid "info (if) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "info (if) [OPCIONS] <NOM> ..."
 
 #. translators: command description
 #: src/Zypper.cc:3818
@@ -5084,7 +5097,7 @@ msgstr "Mostra els complements."
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3856
 msgid "patch-info <PATCHNAME> ..."
-msgstr ""
+msgstr "patch-info <NOMDELPEDAÇ> ..."
 
 #. translators: command description
 #: src/Zypper.cc:3859
@@ -5109,7 +5122,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3886
 msgid "pattern-info <PATTERN_NAME> ..."
-msgstr ""
+msgstr "pattern-info <NOMDELPATRÓ> ..."
 
 #. translators: command description
 #: src/Zypper.cc:3889
@@ -5134,7 +5147,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3916
 msgid "product-info <PRODUCT_NAME> ..."
-msgstr ""
+msgstr "product-info <NOMDELPRODUCTE> ..."
 
 #. translators: command description
 #: src/Zypper.cc:3919
@@ -5159,7 +5172,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3944
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr ""
+msgstr "what-provides (wp) <CAPACITAT>"
 
 #. translators: command description
 #: src/Zypper.cc:3947
@@ -5183,7 +5196,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4006
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command description
 #: src/Zypper.cc:4009
@@ -5208,7 +5221,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:4039
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
-msgstr ""
+msgstr "addlock (al) [OPCIONS] <NOMDELPAQUET> ..."
 
 #. translators: command description
 #: src/Zypper.cc:4042
@@ -5228,7 +5241,7 @@ msgstr "Restringeix el blocatge al repositori especificat."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:4068
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr ""
+msgstr "removelock (rl) [OPCIONS] <NÚMERODEBLOQUEIG|NOMDELPAQUET> ..."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/Zypper.cc:4071
@@ -5249,7 +5262,7 @@ msgstr "Suprimeix només bloqueigs amb un repositori especificat."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:4095
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command description
 #: src/Zypper.cc:4098
@@ -5269,7 +5282,7 @@ msgstr "Neteja només els que no bloquegin res."
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4120
 msgid "targetos (tos) [OPTIONS]"
-msgstr ""
+msgstr "targetos (tos) [OPCIONS]"
 
 #. translators: command description
 #: src/Zypper.cc:4123
@@ -5306,7 +5319,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4154
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
-msgstr ""
+msgstr "versioncmp (vcmp) <VERSIÓ1> <VERSIÓ2>"
 
 #. translators: command description
 #: src/Zypper.cc:4157
@@ -5490,7 +5503,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4309
 msgid "source-download"
-msgstr ""
+msgstr "source-download"
 
 #. translators: -d, --directory <DIR>
 #: src/Zypper.cc:4316
@@ -5579,7 +5592,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4383
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command description
 #: src/Zypper.cc:4386
@@ -6145,12 +6158,11 @@ msgstr "Contrasenya"
 #: src/commands/basecommand.cc:121
 #, boost-format
 msgid " Default: %1%"
-msgstr ""
+msgstr " Per defecte: %1%"
 
 #: src/commands/basecommand.cc:134
-#, fuzzy
 msgid "Options:"
-msgstr "opcional"
+msgstr "Opcions:"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
@@ -8342,30 +8354,30 @@ msgstr "S'ha produït un error en analitzar zypper.conf:"
 #: src/utils/flags/exceptions.cc:21
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "La bandera %1% no es coneix."
 
 #: src/utils/flags/exceptions.cc:27
 msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr ""
+msgstr "La bandera %1% no és compatible amb l'argument %2% (%2)."
 
 #: src/utils/flags/exceptions.cc:33
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "L'esquema de l'URL és un component necessari"
+msgstr "La bandera %1% requereix un argument."
 
 #: src/utils/flags/exceptions.cc:39
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "La bandera %1% només es pot usar un cop."
 
 #: src/utils/flags/flagtypes.cc:48
 msgid "Out of range"
-msgstr ""
+msgstr "Fora de l'abast"
 
 #: src/utils/flags/flagtypes.cc:50
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Error desconegut mentre s'assignava el valor %1% a la bandera %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
