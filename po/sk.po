@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-09-10 16:01+0000\n"
+"PO-Revision-Date: 2018-10-02 11:41+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3360,7 +3360,7 @@ msgstr "Odstráni indexovú službu zadaného repozitára zo systému.."
 #. translators: --loose-auth
 #: src/Zypper.cc:2425 src/Zypper.cc:2791
 msgid "Ignore user authentication data in the URI."
-msgstr "Ignoruje autentifikačné údaje v URI"
+msgstr "Ignoruje autentifikačné údaje v URI."
 
 #. translators: --loose-query
 #: src/Zypper.cc:2427 src/Zypper.cc:2793
@@ -3934,7 +3934,7 @@ msgstr "Len vytvoriť databázu, nesťahovať metadáta."
 #. translators: -D, --download-only
 #: src/Zypper.cc:2918
 msgid "Only download raw metadata, don't build the database."
-msgstr "Len stiahnuť metadáta, nevytvárať databázu"
+msgstr "Len stiahnuť metadáta, nevytvárať databázu."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2920
@@ -4511,7 +4511,7 @@ msgstr "Obmedziť aktualizáciu na zadaný repozitár."
 #. translators: -D, --dry-run
 #: src/Zypper.cc:3398
 msgid "Test the upgrade, do not actually upgrade"
-msgstr "Otestovať aktualizáciu, nič v skutočnosti neaktualizovať."
+msgstr "Otestovať aktualizáciu, nič v skutočnosti neaktualizovať"
 
 #: src/Zypper.cc:3451
 msgid ""
