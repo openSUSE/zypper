@@ -732,8 +732,6 @@ namespace zypp
 
   StrMatcher PoolQuery::Impl::joinedStrMatcher( const StrContainer & container_r, const Match & flags_r ) const
   {
-    USR << flags_r << " - " << container_r << endl;
-
     if ( container_r.empty() )
       return StrMatcher( std::string(), flags_r );
 
