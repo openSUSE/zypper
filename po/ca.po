@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-02 08:47+0000\n"
+"PO-Revision-Date: 2018-10-03 17:01+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -5052,7 +5052,8 @@ msgstr ""
 #. translators: -s, --match-substrings
 #: src/Zypper.cc:3822
 msgid "Print information for packages partially matching name."
-msgstr "Imprimeix informació per als paquets parcialment coincidents"
+msgstr ""
+"Imprimeix la informació per als paquets parcialment coincidents amb el nom."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3824
@@ -5290,8 +5291,8 @@ msgid ""
 "Show various information about the target operating system. By default, an "
 "ID string is shown."
 msgstr ""
-"Mostra informació sobre el sistema operatiu que fa d'objectiu Per defecte, "
-"es mostra una línia d'identificació"
+"Mostra informació diversa sobre el sistema operatiu de destinació. Per "
+"defecte, es mostra una cadena d'identificació."
 
 #. translators: -l, --label
 #: src/Zypper.cc:4127
