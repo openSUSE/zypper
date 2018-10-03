@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-02 02:01+0000\n"
+"PO-Revision-Date: 2018-10-03 16:44+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -638,7 +638,7 @@ msgstr "STRENG"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "TAG"
-msgstr ""
+msgstr "TAG"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
@@ -3278,6 +3278,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
+"removeservice (rs) [TILVALG] <alias|#|URI>\n"
+"\n"
+"Fjern angivne softwarekilde-indekstjeneste fra systemet..\n"
+"\n"
+"  Kommandotilvalg:\n"
+"    --loose-auth   Ignorer brugerautentifikationsdata i URI'en.\n"
+"    --loose-query  Ignorer forespørgselsstreng i URI'en.\n"
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:2463
@@ -3617,7 +3624,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2703
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr "repos (lr) [tilvalg] [softwarekilde]"
+msgstr "repos (lr) [tilvalg] [softwarekilde] ..."
 
 #. translators: -e, --export <FILE.repo>
 #: src/Zypper.cc:2710
@@ -3822,7 +3829,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2903
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [ALIAS|#|URI] ..."
 
 #. translators: command description
 #: src/Zypper.cc:2906
@@ -3898,7 +3905,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2957
 msgid "clean (cc) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "clean (cc) [ALIAS|#|URI] ..."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2964
@@ -3950,7 +3957,7 @@ msgstr "list-updates (lu) [tilvalg]"
 #. translators: command description
 #: src/Zypper.cc:3006
 msgid "List all available updates."
-msgstr "Vis alle tilgængelige opdateringer"
+msgstr "Vis alle tilgængelige opdateringer."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3012
@@ -4086,23 +4093,25 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3113
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [TILVALG] [PAKKENAVN] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3116
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Opdater alle eller angivne installerede pakker med nyere versioner, hvis det "
+"er muligt."
 
 #. translators: --skip-interactive
 #: src/Zypper.cc:3124
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Spring interaktive opdateringer over."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:3126
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Spring ikke interaktive opdateringer over."
 
 #. translators: -l, --auto-agree-with-licenses
 #: src/Zypper.cc:3128 src/Zypper.cc:3233 src/Zypper.cc:3394
@@ -4233,7 +4242,7 @@ msgid ""
 "Install only patches issued up to, but not including, the specified date"
 msgstr ""
 "Installer kun rettelser udstedt op til, men ikke inkluderende den angivne "
-"dato."
+"dato"
 
 #: src/Zypper.cc:3256
 msgid "Install only patches which affect the package management itself."
@@ -4429,7 +4438,7 @@ msgstr "Begræns opgradering til angiven softwarekilde."
 #. translators: -D, --dry-run
 #: src/Zypper.cc:3398
 msgid "Test the upgrade, do not actually upgrade"
-msgstr "Test opgraderingen, uden at opgradere."
+msgstr "Test opgraderingen, uden at opgradere"
 
 #: src/Zypper.cc:3451
 msgid ""
@@ -5107,7 +5116,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4006
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command description
 #: src/Zypper.cc:4009
@@ -5173,7 +5182,7 @@ msgstr "Fjern kun låse med angivet softwarekilde."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:4095
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command description
 #: src/Zypper.cc:4098
@@ -5230,7 +5239,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4154
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
-msgstr ""
+msgstr "versioncmp (vcmp) <VERSION1> <VERSION2>"
 
 #. translators: command description
 #: src/Zypper.cc:4157
@@ -5261,7 +5270,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4186
 msgid "licenses"
-msgstr ""
+msgstr "licenses"
 
 #. translators: command description
 #: src/Zypper.cc:4189
@@ -5411,7 +5420,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4309
 msgid "source-download"
-msgstr ""
+msgstr "source-download"
 
 #. translators: -d, --directory <DIR>
 #: src/Zypper.cc:4316
@@ -5473,12 +5482,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4355
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "quit (afslut, ^D)"
 
 #. translators: command description
 #: src/Zypper.cc:4358
 msgid "Quit the current zypper shell."
-msgstr "Afslut nuværende zypper-skal"
+msgstr "Afslut den nuværende zypper-skal."
 
 #: src/Zypper.cc:4364
 msgid ""
@@ -5497,12 +5506,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4383
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command description
 #: src/Zypper.cc:4386
 msgid "Enter the zypper command shell."
-msgstr "Gå til zyppers kommando-skal"
+msgstr "Gå til zyppers kommandoskal."
 
 #: src/Zypper.cc:4392
 msgid ""
@@ -6074,12 +6083,11 @@ msgstr "Adgangskode"
 #: src/commands/basecommand.cc:121
 #, boost-format
 msgid " Default: %1%"
-msgstr ""
+msgstr " Standard: %1%"
 
 #: src/commands/basecommand.cc:134
-#, fuzzy
 msgid "Options:"
-msgstr "valgfri"
+msgstr "Tilvalg:"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
@@ -8252,30 +8260,30 @@ msgstr "Fejl under fortolkning af zypper.conf:"
 #: src/utils/flags/exceptions.cc:21
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "Flaget %1% kendes ikke."
 
 #: src/utils/flags/exceptions.cc:27
 msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr ""
+msgstr "Flaget %1% er ikke kompatibelt med argumentet %2% (%2)."
 
 #: src/utils/flags/exceptions.cc:33
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "Kildepakkens navn er et krævet argument."
+msgstr "Flaget %1% kræver et argument."
 
 #: src/utils/flags/exceptions.cc:39
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "Flaget %1% kan kun bruges én gang."
 
 #: src/utils/flags/flagtypes.cc:48
 msgid "Out of range"
-msgstr ""
+msgstr "Uden for område"
 
 #: src/utils/flags/flagtypes.cc:50
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Ukendt fejl under tildeling af værdien %1% til flaget %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
