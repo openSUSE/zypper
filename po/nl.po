@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-02 18:01+0000\n"
+"PO-Revision-Date: 2018-10-03 15:01+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -2075,7 +2075,7 @@ msgstr "Gebruik alternatieve map voor 'raw meta-data-cache'."
 #. translators: --solv-cache-dir <DIR>
 #: src/Zypper.cc:750
 msgid "Use alternative solv file cache directory."
-msgstr "Gebruik alternatieve map voor solv-bestand-cache"
+msgstr "Alternatieve map voor solv-bestand-cache gebruiken."
 
 #. translators: --pkg-cache-dir <DIR>
 #: src/Zypper.cc:752
@@ -3194,7 +3194,7 @@ msgstr "Alleen bouwbenodigdheden van gespecificeerde pakketten installeren."
 #. translators: -D, --no-build-deps
 #: src/Zypper.cc:2222
 msgid "Don't install build dependencies."
-msgstr "Geen bouwbenodigdheden installeren"
+msgstr "Geen bouwbenodigdheden installeren."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2224
@@ -3755,12 +3755,12 @@ msgstr "toon ook de vlag voor automatisch vernieuwen."
 #. translators: -s, --service
 #: src/Zypper.cc:2724
 msgid "Show also alias of parent service."
-msgstr "toon ook alias van bovenliggende service"
+msgstr "Ook alias van bovenliggende service tonen."
 
 #. translators: -A, --sort-by-alias
 #: src/Zypper.cc:2732
 msgid "Sort the list by alias."
-msgstr "sorteer de lijst op alias"
+msgstr "De lijst op alias sorteren."
 
 #: src/Zypper.cc:2738
 msgid ""
@@ -3954,32 +3954,32 @@ msgstr ""
 #. translators: -b, --force-build
 #: src/Zypper.cc:2912
 msgid "Force rebuild of the database."
-msgstr "forceer het herbouwen van de database"
+msgstr "Opnieuw bouwen van de database afdwingen."
 
 #. translators: -d, --force-download
 #: src/Zypper.cc:2914
 msgid "Force download of raw metadata."
-msgstr "forceer het downloaden van ruwe metadata"
+msgstr "Downloaden van ruwe metagegevens afdwingen."
 
 #. translators: -B, --build-only
 #: src/Zypper.cc:2916
 msgid "Only build the database, don't download metadata."
-msgstr "bouw alleen de database, download geen metadata"
+msgstr "Alleen de database bouwen, geen metagegevens downloaden."
 
 #. translators: -D, --download-only
 #: src/Zypper.cc:2918
 msgid "Only download raw metadata, don't build the database."
-msgstr "download alleen ruwe metadata, bouw de database niet"
+msgstr "Alleen ruwe metagegevens downloaden, de database niet bouwen."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2920
 msgid "Refresh only specified repositories."
-msgstr "vernieuw alleen gespecificeerde opslagruimtes"
+msgstr "Alleen gespecificeerde opslagruimtes vernieuwen."
 
 #. translators: -s, --services
 #: src/Zypper.cc:2922
 msgid "Refresh also services before refreshing repos."
-msgstr "vernieuw ook services alvorens de opslagruimtes te vernieuwen"
+msgstr "Ook services vernieuwen alvorens de opslagruimtes te vernieuwen."
 
 #: src/Zypper.cc:2926
 msgid ""
@@ -4022,22 +4022,22 @@ msgstr "clean (cc) [ALIAS|#|URI] ..."
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2964
 msgid "Clean only specified repositories."
-msgstr "schoon alleen gespecificeerde opslagruimtes op"
+msgstr "Alleen gespecificeerde opslagruimtes opschonen."
 
 #. translators: -m, --metadata
 #: src/Zypper.cc:2966
 msgid "Clean metadata cache."
-msgstr "schoon de metadata-cache op"
+msgstr "Metagegevens-cache opschonen."
 
 #. translators: -M, --raw-metadata
 #: src/Zypper.cc:2968
 msgid "Clean raw metadata cache."
-msgstr "schoon de rauwe metadata-cache op"
+msgstr "Ruwe metagegevens-cache opschonen."
 
 #. translators: -a, --all
 #: src/Zypper.cc:2970
 msgid "Clean both metadata and package caches."
-msgstr "schoon beide de metadata- en de pakket-caches op"
+msgstr "Beide metagegevens- en pakketten-caches opschonen."
 
 #: src/Zypper.cc:2974
 msgid ""
@@ -4069,12 +4069,14 @@ msgstr "list-updates [opties]"
 #. translators: command description
 #: src/Zypper.cc:3006
 msgid "List all available updates."
-msgstr "Geef alle beschikbare updates weer"
+msgstr "Alle beschikbare elementen voor bijwerken weergeven."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3012
 msgid "List only updates from the specified repository."
-msgstr "geef alleen updates weer van de opgegeven opslagruimte"
+msgstr ""
+"Alleen elementen voor bijwerken weergeven van de gespecificeerde "
+"opslagruimte."
 
 #. translators: --best-effort
 #: src/Zypper.cc:3014 src/Zypper.cc:3130
@@ -4082,8 +4084,8 @@ msgid ""
 "Do a 'best effort' approach to update. Updates to a lower than the latest "
 "version are also acceptable."
 msgstr ""
-"gebruik het best-mogelijke resultaat bij het bijwerken. Bijwerken naar een "
-"lagere versie dan de hoogste is ook acceptabel"
+"Het best mogelijke resultaat uitvoeren bij het bijwerken. Bijwerken naar een "
+"lagere versie dan de hoogste is ook acceptabel."
 
 #. translators: -a, --all
 #: src/Zypper.cc:3016
@@ -4091,8 +4093,8 @@ msgid ""
 "List all packages for which newer versions are available, regardless whether "
 "they are installable or not."
 msgstr ""
-"geef alle pakketten weer waarvoor nieuwe versies beschikbaar zijn, "
-"onafhankelijk of ze zijn te installeren of niet"
+"Alle pakketten weergeven waarvoor nieuwe versies beschikbaar zijn, "
+"onafhankelijk of ze zijn te installeren of niet."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -4235,13 +4237,13 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See man "
 "zypper for more details."
 msgstr ""
-"zeg automatisch 'ja' tegen licenties van derden die daarom vragen zie 'man "
-"zypper' voor meer details"
+"Automatisch 'ja' antwoorden tegen licenties van derden die daarom vragen. "
+"Zie 'man zypper' voor meer details."
 
 #. translators: -D, --dry-run
 #: src/Zypper.cc:3134 src/Zypper.cc:3249
 msgid "Test the update, do not actually update."
-msgstr "test de installatie, maar installeer het niet echt"
+msgstr "Het bijwerken testen, maar niet echt bijwerken."
 
 #: src/Zypper.cc:3192
 #, c-format, boost-format
@@ -4329,12 +4331,12 @@ msgstr "Installeer alle beschikbare noodzakelijke patches."
 #. translators: --skip-interactive
 #: src/Zypper.cc:3229
 msgid "Skip interactive patches."
-msgstr "sla interactieve patches over"
+msgstr "Interactieve patches overslaan."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:3231
 msgid "Do not skip interactive patches."
-msgstr "sla interactieve patches niet over"
+msgstr "Interactieve patches niet overslaan."
 
 #. translators: -b, --bugzilla
 #: src/Zypper.cc:3235
@@ -4670,7 +4672,7 @@ msgstr "search (se) [opties] [zoekterm] ..."
 #: src/Zypper.cc:3496
 msgid "Search for packages matching any of the given search strings."
 msgstr ""
-"Zoek naar pakketten die overeenkomen met elk van de opgegeven zoektermen"
+"Naar pakketten zoeken die overeenkomen met elk van de opgegeven zoektermen."
 
 #. translators: command description
 #: src/Zypper.cc:3499
@@ -4678,24 +4680,24 @@ msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
 msgstr ""
-"de jokertekens * en ? kunnen ook worden gebruikt binnen zoektermen. Als een "
+"De jokertekens * en ? kunnen ook worden gebruikt binnen zoektermen. Als een "
 "zoekterm omgeven is met '/', dan wordt deze geïnterpreteerd als een "
-"reguliere expressie"
+"reguliere expressie."
 
 #. translators: --match-substrings
 #: src/Zypper.cc:3503
 msgid "Search for a match to partial words (default)."
-msgstr "overeenkomsten kunnen delen van woorden zijn (standaard)"
+msgstr "Overeenkomsten kunnen delen van woorden zijn (standaard)."
 
 #. translators: --match-words
 #: src/Zypper.cc:3505
 msgid "Search for a match to whole words only."
-msgstr "overeenkomsten kunnen alleen hele woorden zijn"
+msgstr "Overeenkomsten kunnen alleen hele woorden zijn."
 
 #. translators: -x, --match-exact
 #: src/Zypper.cc:3507
 msgid "Searches for an exact match of the search strings."
-msgstr "zoek naar een exacte overeenkomst met de zoektermen"
+msgstr "Naar een exacte overeenkomst met de zoektermen zoeken."
 
 #. translators: --provides
 #: src/Zypper.cc:3509
@@ -4749,47 +4751,47 @@ msgstr "zoeken naar een overeenkomst in de lijst met bestanden van pakketten."
 #. translators: -d, --search-descriptions
 #: src/Zypper.cc:3527
 msgid "Search also in package summaries and descriptions."
-msgstr "zoek ook in samenvattingen en omschrijvingen"
+msgstr "Ook in samenvattingen en omschrijvingen zoeken."
 
 #. translators: -C, --case-sensitive
 #: src/Zypper.cc:3529
 msgid "Perform case-sensitive search."
-msgstr "voer hoofdlettergevoelige zoekopdracht uit"
+msgstr "Hoofdlettergevoelige zoekopdracht uitvoeren."
 
 #. translators: -i, --installed-only
 #: src/Zypper.cc:3531 src/Zypper.cc:3647
 msgid "Show only installed packages."
-msgstr "toon alleen geïnstalleerde pakketten"
+msgstr "Alleen geïnstalleerde pakketten tonen."
 
 #. translators: -u, --not-installed-only
 #: src/Zypper.cc:3533 src/Zypper.cc:3649
 msgid "Show only packages which are not installed."
-msgstr "toon alleen niet geïnstalleerde pakketten"
+msgstr "Alleen niet geïnstalleerde pakketten tonen."
 
 #. translators: -t, --type <TYPE>
 #: src/Zypper.cc:3535
 msgid "Search only for packages of the specified type."
-msgstr "zoek alleen naar pakketten van het opgegeven type"
+msgstr "Alleen naar pakketten van het opgegeven type zoeken."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3537
 msgid "Search only in the specified repository."
-msgstr "zoek alleen in de gespecificeerd opslagruimte"
+msgstr "Alleen in de gespecificeerd opslagruimte zoeken."
 
 #. translators: --sort-by-name
 #: src/Zypper.cc:3539
 msgid "Sort packages by name (default)."
-msgstr "sorteer pakketten op naam (standaard)"
+msgstr "Pakketten op naam sorteren (standaard)."
 
 #. translators: --sort-by-repo
 #: src/Zypper.cc:3541
 msgid "Sort packages by repository."
-msgstr "sorteer pakketten op opslagruimte"
+msgstr "Pakketten op opslagruimte sorteren."
 
 #. translators: -s, --details
 #: src/Zypper.cc:3543
 msgid "Show each available version in each repository on a separate line."
-msgstr "toon elke beschikbare versie in elke opslagruimte op een aparte regel"
+msgstr "Elke beschikbare versie in elke opslagruimte tonen op een aparte regel."
 
 #. translators: -v, --verbose
 #: src/Zypper.cc:3545
@@ -4797,8 +4799,8 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
-"gelijk aan --details, met extra informatie waar de zoekopdracht overeenkwam "
-"(nuttig bij zoeken in afhankelijkheden)"
+"Zoals --details, met extra informatie waar de zoekopdracht overeenkwam ("
+"nuttig bij zoeken in afhankelijkheden)."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3564
@@ -4849,12 +4851,12 @@ msgstr "patches (pch) [opslagruimte] ..."
 #. translators: command description
 #: src/Zypper.cc:3598
 msgid "List all patches available in specified repositories."
-msgstr "Toon alle beschikbare patches in de gespecificeerde opslagruimtes"
+msgstr "Alle beschikbare patches in de gespecificeerde opslagruimtes tonen."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3602 src/Zypper.cc:3645 src/Zypper.cc:3705 src/Zypper.cc:3761
 msgid "Just another means to specify repository."
-msgstr "een andere manier om opslagruimtes te specificeren"
+msgstr "Een andere manier om opslagruimtes te specificeren."
 
 #: src/Zypper.cc:3606
 msgid ""
@@ -4883,37 +4885,37 @@ msgstr "pakketten (pa) [opties] [opslagruimte] ..."
 #. translators: command description
 #: src/Zypper.cc:3641
 msgid "List all packages available in specified repositories."
-msgstr "Toon alle beschikbare pakketten in de gespecificeerde opslagruimtes"
+msgstr "Alle beschikbare pakketten in de gespecificeerde opslagruimtes tonen."
 
 #. translators: --orphaned
 #: src/Zypper.cc:3651
 msgid "Show packages which are orphaned (without repository)."
-msgstr "toon pakketten die wees zijn (zonder opslagruimte)"
+msgstr "Pakketten tonen die wees zijn (zonder opslagruimte)."
 
 #. translators: --suggested
 #: src/Zypper.cc:3653
 msgid "Show packages which are suggested."
-msgstr "toon gesuggereerde pakketten"
+msgstr "Gesuggereerde pakketten tonen."
 
 #. translators: --recommended
 #: src/Zypper.cc:3655
 msgid "Show packages which are recommended."
-msgstr "toon aanbevolen pakketten"
+msgstr "Aanbevolen pakketten tonen."
 
 #. translators: --unneeded
 #: src/Zypper.cc:3657
 msgid "Show packages which are unneeded."
-msgstr "toon onnodige pakketten"
+msgstr "Onnodige pakketten tonen."
 
 #. translators: -N, --sort-by-name
 #: src/Zypper.cc:3659
 msgid "Sort the list by package name."
-msgstr "sorteer de lijst op pakketnaam"
+msgstr "De lijst sorteren op pakketnaam."
 
 #. translators: -R, --sort-by-repo
 #: src/Zypper.cc:3661
 msgid "Sort the list by repository."
-msgstr "sorteer de lijst op opslagruimte"
+msgstr "De lijst sorteren op opslagruimte."
 
 #: src/Zypper.cc:3665
 msgid ""
@@ -4960,17 +4962,17 @@ msgstr "patterns (pt) [opties] [opslagruimte] ..."
 #. translators: command description
 #: src/Zypper.cc:3701
 msgid "List all patterns available in specified repositories."
-msgstr "Toon alle beschikbare patronen in de gespecificeerde opslagruimtes"
+msgstr "Alle beschikbare patronen in de gespecificeerde opslagruimtes tonen."
 
 #. translators: -i, --installed-only
 #: src/Zypper.cc:3707
 msgid "Show only installed patterns."
-msgstr "toon alleen geïnstalleerde patronen"
+msgstr "Alleen geïnstalleerde patronen tonen."
 
 #. translators: -u, --not-installed-only
 #: src/Zypper.cc:3709
 msgid "Show only patterns which are not installed."
-msgstr "toon alleen niet-geïnstalleerde patronen"
+msgstr "Alleen niet-geïnstalleerde patronen tonen."
 
 #: src/Zypper.cc:3713
 msgid ""
@@ -5026,17 +5028,17 @@ msgstr "products (pd) [opties] [opslagruimte] ..."
 #. translators: command description
 #: src/Zypper.cc:3757
 msgid "List all products available in specified repositories."
-msgstr "Toon alle beschikbare producten in de gespecificeerde opslagruimtes"
+msgstr "Alle beschikbare producten in de gespecificeerde opslagruimtes tonen."
 
 #. translators: -i, --installed-only
 #: src/Zypper.cc:3763
 msgid "Show only installed products."
-msgstr "toon alleen geïnstalleerde producten"
+msgstr "Alleen geïnstalleerde producten tonen."
 
 #. translators: -u, --not-installed-only
 #: src/Zypper.cc:3765
 msgid "Show only products which are not installed."
-msgstr "toon alleen niet-geïnstalleerde producten"
+msgstr "Alleen niet-geïnstalleerde producten tonen."
 
 #. translators: --xmlfwd <TAG>
 #: src/Zypper.cc:3767
@@ -5103,10 +5105,10 @@ msgid ""
 "partially matching use option '--match-substrings' or use wildcards (*?) in "
 "name."
 msgstr ""
-"Toon gedetailleerde informatie over gespecificeerde pakketten Standaard "
+"Gedetailleerde informatie over gespecificeerde pakketten tonen. Standaard "
 "worden de pakketten getoond die exact overeenkomen met de gegeven naam. Om "
-"alle pakketten te zien die gedeeltelijk overeenkomen gebruikt u de optie '--"
-"match-substrings' of gebruikt u jokertekens (*?) in de naam"
+"alle pakketten te zien die gedeeltelijk overeenkomen gebruikt u de optie "
+"'--match-substrings' of gebruikt u jokertekens (*?) in de naam."
 
 #. translators: -s, --match-substrings
 #: src/Zypper.cc:3822
@@ -5162,7 +5164,7 @@ msgstr "patch-info <patchnaam>..."
 #. translators: command description
 #: src/Zypper.cc:3859
 msgid "Show detailed information for patches."
-msgstr "Toon gedetailleerde informatie over de patches"
+msgstr "Gedetailleerde informatie over de patches tonen."
 
 #: src/Zypper.cc:3865
 #, c-format, boost-format
@@ -5187,7 +5189,7 @@ msgstr "pattern-info <patroonnaam> ..."
 #. translators: command description
 #: src/Zypper.cc:3889
 msgid "Show detailed information for patterns."
-msgstr "Toon gedetailleerde informatie over patronen"
+msgstr "Gedetailleerde informatie over patronen tonen."
 
 #: src/Zypper.cc:3895
 #, c-format, boost-format
@@ -5212,7 +5214,7 @@ msgstr "product-info <productnaam> ..."
 #. translators: command description
 #: src/Zypper.cc:3919
 msgid "Show detailed information for products."
-msgstr "Toon gedetailleerde informatie over producten"
+msgstr "Gedetailleerde informatie over producten tonen."
 
 #: src/Zypper.cc:3925
 #, c-format, boost-format
@@ -5237,7 +5239,7 @@ msgstr "what-provides (wp) <functie>"
 #. translators: command description
 #: src/Zypper.cc:3947
 msgid "List all packages providing the specified capability."
-msgstr "Toon alle pakketten die een gespecificeerde capaciteit leveren"
+msgstr "Alle pakketten die een gespecificeerde capaciteit leveren tonen."
 
 #: src/Zypper.cc:3953
 msgid ""
@@ -5301,7 +5303,7 @@ msgstr "Beperk de vergrendeling tot de gespecificeerde opslagruimte."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:4068
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr "removelock (rl) <blokkeringsnummer|pakketnaam>"
+msgstr "removelock (rl) [OPTIES] <LOCK-NUMMER|PAKKETNAAM> ..."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/Zypper.cc:4071
@@ -5310,8 +5312,8 @@ msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
 "with '%1%' or by package name."
 msgstr ""
-"Verwijder een pakketblokkering. Specificeer de te verwijderen blokkering "
-"door zijn nummer verkregen met '%1%' of door een pakketnaam"
+"Een pakketblokkering verwijderen. Specificeer de te verwijderen blokkering "
+"door zijn nummer verkregen met '%1%' of door een pakketnaam."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:4075
@@ -5356,7 +5358,7 @@ msgstr ""
 #. translators: -l, --label
 #: src/Zypper.cc:4127
 msgid "Show the operating system label."
-msgstr "Toon het label van het besturingssysteem"
+msgstr "Het label van het besturingssysteem tonen."
 
 #: src/Zypper.cc:4131
 msgid ""
@@ -5389,7 +5391,7 @@ msgstr "Vergelijk de versies in de argumenten."
 #. translators: -m, --match
 #: src/Zypper.cc:4161
 msgid "Takes missing release number as any release."
-msgstr "neemt een ontbrekend release-nummer als elke release"
+msgstr "Neemt een ontbrekend release-nummer als elke release."
 
 #: src/Zypper.cc:4165
 msgid ""
@@ -5659,7 +5661,7 @@ msgstr "shell (sh)"
 #. translators: command description
 #: src/Zypper.cc:4386
 msgid "Enter the zypper command shell."
-msgstr "Ga de zypper opdracht-shell in"
+msgstr "De zypper opdracht-shell ingaan."
 
 #: src/Zypper.cc:4392
 msgid ""
