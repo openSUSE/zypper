@@ -19,16 +19,31 @@
 #ifdef ZYPP_NDEBUG
 #define OSDLOG( MSG )
 #define OSMLOG( L, MSG )
+#define TRACELEAVE
 #else
 namespace zypp
 {
   namespace debug
   {
     void osdlog( const std::string & msg_r, unsigned level_r );	// LogControl.cc
+
+    struct TraceLeave	// LogControl.cc
+    {
+      TraceLeave( const TraceLeave & ) =delete;
+      TraceLeave & operator=( const TraceLeave & ) =delete;
+      TraceLeave( const char * file_r, const char *  fnc_r, int line_r );
+      ~TraceLeave();
+    private:
+      static unsigned _depth;
+      const char *    _file;
+      const char *    _fnc;
+      int             _line;
+    };
   }
 }
 #define OSDLOG( MSG )    ::zypp::debug::osdlog( MSG, 0 )
 #define OSMLOG( L, MSG ) ::zypp::debug::osdlog( MSG, L )
+#define TRACELEAVE       ::zypp::debug::TraceLeave _TraceLeave( __FILE__, __FUNCTION__, __LINE__ )
 #endif // ZYPP_NDEBUG
 ///////////////////////////////////////////////////////////////////
 

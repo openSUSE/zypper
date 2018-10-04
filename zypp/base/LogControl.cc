@@ -60,6 +60,23 @@ namespace zypp
       }
       std::cerr << ansi[level_r%n] << "OSD[" << msg_r << "]\033[0m" << std::endl;
     }
+
+
+    unsigned TraceLeave::_depth = 0;
+
+    TraceLeave::TraceLeave( const char * file_r, const char *  fnc_r, int line_r )
+    : _file( std::move(file_r) )
+    , _fnc( std::move(fnc_r) )
+    , _line( line_r )
+    {
+      //std::string::size_type p( _file.find_last_of( '/' ) );
+      //if ( p != std::string::npos )
+      //_file.erase( 0, p+1 );
+      USR << ">>> " << std::string(_depth++,'>') << " " << _file << "(" << _fnc << "):" << _line << endl;
+    }
+
+    TraceLeave::~TraceLeave()
+    { USR << "<<< " << std::string(--_depth,'<') << " " << _file << "(" << _fnc << "):" << _line << endl; }
 }
 #endif // ZYPP_NDEBUG
 
