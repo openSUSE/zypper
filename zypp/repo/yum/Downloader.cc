@@ -37,7 +37,7 @@ Downloader::Downloader( const RepoInfo &repoinfo , const Pathname &delta_dir)
 
 RepoStatus Downloader::status( MediaSetAccess &media )
 {
-  RepoStatus ret( media.provideFile( repoInfo().path() / "/repodata/repomd.xml" ) );
+  RepoStatus ret( media.provideOptionalFile( repoInfo().path() / "/repodata/repomd.xml" ) );
   if ( !ret.empty() )	// else: mandatory master index is missing
     ret = ret && RepoStatus( media.provideOptionalFile( "/media.1/media" ) );
   // else: mandatory master index is missing -> stay empty
