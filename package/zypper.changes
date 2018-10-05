@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct  5 14:18:30 CEST 2018 - ma@suse.de
+
+- MediaChangeReport: fix https URLs causing 2 prompts on error (bsc#1110542)
+- version 1.12.61
+
+-------------------------------------------------------------------
 Thu Sep 27 15:58:39 CEST 2018 - ma@suse.de
 
 - Always warn if no repos are defined, but don't return
