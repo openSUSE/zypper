@@ -383,7 +383,6 @@ namespace zypp
     {
       switch ( solvAttrType() )
       {
-        case REPOKEY_TYPE_U32:
         case REPOKEY_TYPE_NUM:
         case REPOKEY_TYPE_CONSTANT:
           return true;
@@ -547,7 +546,6 @@ namespace zypp
       {
         switch ( solvAttrType() )
         {
-          case REPOKEY_TYPE_U32:
           case REPOKEY_TYPE_NUM:
           case REPOKEY_TYPE_CONSTANT:
             return _dip->kv.num;
@@ -566,7 +564,6 @@ namespace zypp
       {
         switch ( solvAttrType() )
         {
-          case REPOKEY_TYPE_U32:
           case REPOKEY_TYPE_NUM:
           case REPOKEY_TYPE_CONSTANT:
             return SOLV_KV_NUM64(&_dip->kv);
@@ -634,7 +631,6 @@ namespace zypp
             }
             break;
 
-          case REPOKEY_TYPE_U32:
           case REPOKEY_TYPE_NUM:
           case REPOKEY_TYPE_CONSTANT:
             return str::numstring( asInt() );
