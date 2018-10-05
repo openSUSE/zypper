@@ -245,7 +245,7 @@ namespace ZmartRecipients
     Action action = MediaChangeReport::ABORT;
     if ( url.getScheme() == "https" )
       action = request_medium_https_handler( zypper, url );
-    if ( url.getScheme() == "cd" || url.getScheme() == "dvd" )
+    else if ( url.getScheme() == "cd" || url.getScheme() == "dvd" )
       action = request_medium_dvd_handler( zypper, url, devices, index );
     else
     {
