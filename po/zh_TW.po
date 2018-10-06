@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-05 12:56+0000\n"
+"PO-Revision-Date: 2018-10-06 11:01+0000\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_TW/>\n"
@@ -2633,7 +2633,7 @@ msgstr "軟體包 (%1%) 的類型。"
 #. translators: -n, --name
 #: src/Zypper.cc:2032 src/Zypper.cc:2137
 msgid "Select packages by plain name, not by capability."
-msgstr "單純依照名稱而不是功能來選取軟體包。 "
+msgstr "單純依照名稱而不是功能來選取軟體包。"
 
 #. translators: -C, --capability
 #: src/Zypper.cc:2034 src/Zypper.cc:2139
@@ -3993,7 +3993,7 @@ msgstr "安裝此嚴重度的所有修補程式。"
 #: src/Zypper.cc:3243
 msgid ""
 "Install only patches issued up to, but not including, the specified date"
-msgstr "安裝到指定日期前的修補程式 (不包括該日期)。"
+msgstr "安裝到指定日期前的修補程式，但不包括該日期"
 
 #: src/Zypper.cc:3256
 msgid "Install only patches which affect the package management itself."
@@ -4274,7 +4274,7 @@ msgstr "search (se) [選項] [搜尋字串]..."
 #. translators: command description
 #: src/Zypper.cc:3496
 msgid "Search for packages matching any of the given search strings."
-msgstr "搜尋符合指定搜尋字串的軟體包"
+msgstr "搜尋符合指定搜尋字串的軟體包。"
 
 #. translators: command description
 #: src/Zypper.cc:3499
@@ -4448,7 +4448,7 @@ msgstr "patches (pch) [軟體庫] ..."
 #. translators: command description
 #: src/Zypper.cc:3598
 msgid "List all patches available in specified repositories."
-msgstr "列出指定軟體庫中所有可用的修補程式"
+msgstr "列出指定軟體庫中所有可用的修補程式。"
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3602 src/Zypper.cc:3645 src/Zypper.cc:3705 src/Zypper.cc:3761
@@ -4848,7 +4848,7 @@ msgstr "moo"
 #. translators: command description
 #: src/Zypper.cc:4009
 msgid "Show an animal."
-msgstr "顯示一隻動物"
+msgstr "顯示一隻動物。"
 
 #: src/Zypper.cc:4015
 msgid ""
