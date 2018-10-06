@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-08-13 17:01+0000\n"
+"PO-Revision-Date: 2018-10-06 11:01+0000\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) "
 "<https://l10n.opensuse.org/projects/libzypp/master/zh_TW/>\n"
@@ -4189,7 +4189,7 @@ msgstr "存取 '%s' 時超出限定時間。"
 #: zypp/media/MediaException.cc:195
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr "下載到的資料超出了預期檔案大小 %$2s 中的 %1$s。"
+msgstr "下載到的資料超出了預期檔案大小 %s/%s。"
 
 #: zypp/media/MediaException.cc:203
 #, c-format, boost-format
