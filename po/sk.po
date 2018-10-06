@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-02 11:41+0000\n"
+"PO-Revision-Date: 2018-10-06 11:04+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -583,12 +583,12 @@ msgstr "Pokračovať?"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:21
 msgid "ALIAS"
-msgstr ""
+msgstr "ALIAS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS|#|URI"
-msgstr ""
+msgstr "ALIAS|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
@@ -598,12 +598,12 @@ msgstr "KATEGÓRIA"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "DIR"
-msgstr ""
+msgstr "ADRESÁR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "FILE"
-msgstr ""
+msgstr "SÚBOR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
@@ -613,7 +613,7 @@ msgstr "SÚBOR.repo"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FORMAT"
-msgstr ""
+msgstr "FORMAT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
@@ -623,7 +623,7 @@ msgstr "celé_číslo"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "PATH"
-msgstr ""
+msgstr "CESTA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
@@ -633,12 +633,12 @@ msgstr "ZÁVAŽNOSŤ"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "STRING"
-msgstr ""
+msgstr "REŤAZEC"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "TAG"
-msgstr ""
+msgstr "TAG"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
@@ -3378,6 +3378,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
+"removeservice (rs) [VOĽBY] <alias|#|URI>\n"
+"\n"
+"Odstráni špecifikovanú indexovú službu repozitárov zo systému..\n"
+"\n"
+"  Voľby príkazu:\n"
+"    --loose-auth   Ignorovať používateľské overovacie dáta v URI.\n"
+"    --loose-query  Ignorovať reťazec dopytu v URI.\n"
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:2463
@@ -3905,7 +3912,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2903
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [ALIAS|#|URI] ..."
 
 #. translators: command description
 #: src/Zypper.cc:2906
@@ -4055,6 +4062,8 @@ msgid ""
 "List all packages for which newer versions are available, regardless whether "
 "they are installable or not."
 msgstr ""
+"Zoznam všetkých balíkov, pre ktoré sú k dispozícii novšie verzie, bez ohľadu "
+"na to, či sú inštalovateľné alebo nie."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -4170,23 +4179,25 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3113
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [VOĽBY] [NÁZOV_BALÍKA] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3116
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Aktualizovať všetky alebo špecifikované inštalované balíky s novšími "
+"verziami, ak je to možné."
 
 #. translators: --skip-interactive
 #: src/Zypper.cc:3124
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Preskočiť interaktívne aktualizácie."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:3126
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Nepreskočiť interaktívne aktualizácie."
 
 #. translators: -l, --auto-agree-with-licenses
 #: src/Zypper.cc:3128 src/Zypper.cc:3233 src/Zypper.cc:3394
@@ -5187,7 +5198,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4006
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command description
 #: src/Zypper.cc:4009
@@ -5253,7 +5264,7 @@ msgstr "Odstrániť iba zámky so zadaným repozitárom."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:4095
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command description
 #: src/Zypper.cc:4098
@@ -5342,7 +5353,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4186
 msgid "licenses"
-msgstr ""
+msgstr "licenses"
 
 #. translators: command description
 #: src/Zypper.cc:4189
@@ -5494,7 +5505,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4309
 msgid "source-download"
-msgstr ""
+msgstr "source-download"
 
 #. translators: -d, --directory <DIR>
 #: src/Zypper.cc:4316
@@ -5582,7 +5593,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4383
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command description
 #: src/Zypper.cc:4386
@@ -6140,12 +6151,11 @@ msgstr "Heslo"
 #: src/commands/basecommand.cc:121
 #, boost-format
 msgid " Default: %1%"
-msgstr ""
+msgstr " Predvolené: %1%"
 
 #: src/commands/basecommand.cc:134
-#, fuzzy
 msgid "Options:"
-msgstr "voliteľné"
+msgstr "Voľby:"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
@@ -8309,30 +8319,30 @@ msgstr "Chyba pri čítaní zypper.conf:"
 #: src/utils/flags/exceptions.cc:21
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "Príznak %1% nie je známy."
 
 #: src/utils/flags/exceptions.cc:27
 msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr ""
+msgstr "Príznak %1% nie je zlučiteľný s argumentom %2% (%2)."
 
 #: src/utils/flags/exceptions.cc:33
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "Názov zdrojového balíka je vyžadovaný argument."
+msgstr "Príznak %1% vyžaduje argument."
 
 #: src/utils/flags/exceptions.cc:39
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "Príznak %1% sa môže použiť iba raz."
 
 #: src/utils/flags/flagtypes.cc:48
 msgid "Out of range"
-msgstr ""
+msgstr "Mimo rozsah"
 
 #: src/utils/flags/flagtypes.cc:50
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Neznáma chyba pri priradení hodnoty %1% príznaku %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
