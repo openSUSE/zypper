@@ -18,8 +18,12 @@ SET( VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}" )
 ADD_DEFINITIONS( -D_FILE_OFFSET_BITS=64 )
 ADD_DEFINITIONS( -DVERSION="${VERSION}" )
 
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -Wall -Woverloaded-virtual -Wnon-virtual-dtor -fstack-protector -std=c++11 -fvisibility-inlines-hidden" )
-SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -O2 -Wall -fstack-protector" )
+SET( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3" )
+SET( CMAKE_C_FLAGS_RELEASE   "${CMAKE_C_FLAGS_RELEASE}   -O3" )
+
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Woverloaded-virtual -Wnon-virtual-dtor -fstack-protector -std=c++11 -fvisibility-inlines-hidden" )
+SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -Wall -fstack-protector" )
+
 
 GENERATE_PACKAGING(${PACKAGE} ${VERSION})
 
