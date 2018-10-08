@@ -2518,35 +2518,6 @@ void Zypper::processCommandOptions()
       "-s, --services           Refresh also services before refreshing repos.\n"
     );
 #endif
-
-  case ZypperCommand::CLEAN_e:
-  {
-    static struct option service_list_options[] = {
-      {"help", no_argument, 0, 'h'},
-      {"repo", required_argument, 0, 'r'},
-      {"metadata", no_argument, 0, 'm'},
-      {"raw-metadata", no_argument, 0, 'M'},
-      {"all", no_argument, 0, 'a'},
-      {0, 0, 0, 0}
-    };
-    specific_options = service_list_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("clean (cc) [ALIAS|#|URI] ...")
-    )
-    .description(	// translators: command description
-    _("Clean local caches.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Clean only specified repositories.") )
-    .option( "-m, --metadata",	// translators: -m, --metadata
-             _("Clean metadata cache.") )
-    .option( "-M, --raw-metadata",	// translators: -M, --raw-metadata
-             _("Clean raw metadata cache.") )
-    .option( "-a, --all",	// translators: -a, --all
-             _("Clean both metadata and package caches.") )
-    ;
 #if 0
     _command_help = _(
       "clean (cc) [alias|#|URI] ...\n"
@@ -2560,8 +2531,6 @@ void Zypper::processCommandOptions()
       "-a, --all                Clean both metadata and package caches.\n"
     );
 #endif
-    break;
-  }
 
   case ZypperCommand::LIST_UPDATES_e:
   {
@@ -4080,23 +4049,6 @@ void Zypper::doCommand()
   {
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
-    break;
-  }
-
-  // --------------------------( clean )------------------------------------
-
-  case ZypperCommand::CLEAN_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for cleaning local caches.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    initRepoManager();
-    clean_repos( *this );
     break;
   }
 

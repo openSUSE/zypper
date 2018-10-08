@@ -108,7 +108,14 @@ void list_repos( Zypper & zypper );
 /**
  * Clean caches for all (specified) repositories.
  */
-void clean_repos( Zypper & zypper );
+enum class CleanRepoBits {
+  Default = 0,
+  CleanMetaData = 1,
+  CleanRawMetaData = 2,
+  CleanAll = CleanMetaData | CleanRawMetaData
+};
+ZYPP_DECLARE_FLAGS_AND_OPERATORS(CleanRepoFlags, CleanRepoBits)
+void clean_repos(Zypper & zypper, std::vector<std::string> specificRepos, CleanRepoFlags flags );
 
 /**
  * Try match given string with any known repository.

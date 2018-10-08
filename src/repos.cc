@@ -994,16 +994,7 @@ void init_target( Zypper & zypper )
   }
 }
 
-// ----------------------------------------------------------------------------
-
-
-// ----------------------------------------------------------------------------
-
-
-
-// ----------------------------------------------------------------------------
-
-void clean_repos( Zypper & zypper )
+void clean_repos(Zypper & zypper , std::vector<std::string> specificRepos, CleanRepoFlags flags)
 {
   RepoManager & manager( zypper.repoManager() );
 
@@ -1020,15 +1011,10 @@ void clean_repos( Zypper & zypper )
     return;
   }
 
-  // get the list of repos specified on the command line ...
+  // get the list of repos specified requested
   std::list<RepoInfo> specified;
   std::list<std::string> not_found;
-  // ...as command arguments
-  get_repos( zypper, zypper.arguments().begin(), zypper.arguments().end(), specified, not_found );
-  // ...as --repo options
-  parsed_opts::const_iterator tmp1;
-  if ( (tmp1 = copts.find("repo")) != copts.end() )
-    get_repos( zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found );
+  get_repos( zypper, specificRepos.begin(), specificRepos.end(), specified, not_found );
   report_unknown_repos( zypper.out(), not_found );
 
   std::ostringstream s;
@@ -1038,9 +1024,9 @@ void clean_repos( Zypper & zypper )
   zypper.out().info( s.str(), Out::HIGH );
 
   // should we clean packages or metadata ?
-  bool clean_all =		copts.find("all") != copts.end();
-  bool clean_metadata =		( clean_all || copts.find("metadata") != copts.end() );
-  bool clean_raw_metadata =	( clean_all || copts.find("raw-metadata") != copts.end() );
+  bool clean_all =		flags.testFlag( CleanRepoBits::CleanAll );
+  bool clean_metadata =		( clean_all || flags.testFlag( CleanRepoBits::CleanMetaData ) );
+  bool clean_raw_metadata =	( clean_all || flags.testFlag( CleanRepoBits::CleanRawMetaData ) );
   bool clean_packages =		( clean_all || !( clean_metadata || clean_raw_metadata ) );
 
   DBG << "Metadata will be cleaned: " << clean_metadata << endl;
@@ -1132,7 +1118,7 @@ void clean_repos( Zypper & zypper )
     }
   }
 
-  if ( zypper.arguments().empty() && clean_packages )
+  if ( specificRepos.empty() && clean_packages )
   {
     // clean up garbage
     // this could also be done with a special option or on each 'clean'
