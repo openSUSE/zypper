@@ -7,5 +7,6 @@
 #include "repos/rename.h"
 #include "repos/modify.h"
 #include "repos/refresh.h"
+#include "repos/clean.h"
 
 #endif

@@ -52,13 +52,14 @@ namespace
       { ZypperCommand::RENAME_REPO_e, std::make_shared<RenameRepoCmd>() },
       { ZypperCommand::MODIFY_REPO_e, std::make_shared<ModifyRepoCmd>() },
       { ZypperCommand::REFRESH_e, std::make_shared<RefreshRepoCmd>() },
+      { ZypperCommand::CLEAN_e, std::make_shared<CleanRepoCmd>() },
 
       { ZypperCommand::PS_e, std::make_shared<PSCommand>() }
     };
     return table;
   }
 
-  static NamedValue<ZypperCommand::Command> & table()
+  static NamedValue<ZypperCommand::Command> & cmdTable()
   {
     static NamedValue<ZypperCommand::Command> _table;
     if ( _table.empty() )
@@ -79,7 +80,7 @@ namespace
       //_t( MODIFY_REPO_e )	| "modifyrepo"		| "mr";
       //_t( LIST_REPOS_e )	| "repos"		| "lr" | "catalogs" | "ca";
       //_t( REFRESH_e )		| "refresh"		| "ref";
-      _t( CLEAN_e )		| "clean"		| "cc" | "clean-cache" | "you-clean-cache" | "yc";
+      //_t( CLEAN_e )		| "clean"		| "cc" | "clean-cache" | "you-clean-cache" | "yc";
 
       _t( INSTALL_e )		| "install"		| "in";
       _t( REMOVE_e )		| "remove"		| "rm";
@@ -227,7 +228,7 @@ ZypperCommand::ZypperCommand( const std::string & strval_r )
 ZypperCommand::Command ZypperCommand::parse( const std::string & strval_r ) const
 {
   ZypperCommand::Command cmd = SUBCOMMAND_e;	// Exception if not true
-  if ( ! table().getValue( strval_r, cmd ) )
+  if ( ! cmdTable().getValue( strval_r, cmd ) )
   {
     bool isSubcommand( const std::string & strval_r );	// in subcommand.cc
 
@@ -240,7 +241,7 @@ ZypperCommand::Command ZypperCommand::parse( const std::string & strval_r ) cons
 }
 
 const std::string & ZypperCommand::asString() const
-{ return table().getName( _command ); }
+{ return cmdTable().getName( _command ); }
 
 ZypperBaseCommandPtr ZypperCommand::commandObject() const
 {
