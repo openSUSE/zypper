@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-09 16:11+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
+"PO-Revision-Date: 2018-10-09 21:05+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -2063,7 +2063,7 @@ msgstr ""
 #. translators: --plus-repo, -p <URI>
 #: src/Zypper.cc:760
 msgid "Use an additional repository."
-msgstr "Usar um repositório adicional"
+msgstr "Usar um repositório adicional."
 
 #. translators: --plus-content <TAG>
 #: src/Zypper.cc:762
@@ -2356,7 +2356,7 @@ msgstr "Outros comandos:"
 #. translators: command summary: versioncmp, vcmp
 #: src/Zypper.cc:878
 msgid "Compare two version strings."
-msgstr "Comparar textos de duas versões"
+msgstr "Comparar textos de duas versões."
 
 #. translators: command summary: targetos, tos
 #: src/Zypper.cc:880
@@ -4517,7 +4517,7 @@ msgstr "Restringir a atualização ao repositório especificado."
 #. translators: -D, --dry-run
 #: src/Zypper.cc:3398
 msgid "Test the upgrade, do not actually upgrade"
-msgstr "Testar a atualização, não atualizar realmente."
+msgstr "Testar a atualização, não atualizar realmente"
 
 #: src/Zypper.cc:3451
 msgid ""
@@ -8348,21 +8348,21 @@ msgstr "Erro ao analisar zypper.conf:"
 #: src/utils/flags/exceptions.cc:21
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr "O sinalizador 1% não é conhecido."
+msgstr "O indicador %1% não é conhecido."
 
 #: src/utils/flags/exceptions.cc:27
 msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "O sinalizador %1% não é compatível com o argumento %2% (%2)."
+msgstr "O indicador %1% não é compatível com o argumento %2% (%2)."
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "O sinalizador %1% requer um argumento."
+msgstr "O indicador %1% requer um argumento."
 
 #: src/utils/flags/exceptions.cc:39
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr "O sinalizador %1% só pode ser usado uma vez."
+msgstr "O indicador %1% só pode ser usado uma vez."
 
 #: src/utils/flags/flagtypes.cc:48
 msgid "Out of range"
@@ -8371,7 +8371,7 @@ msgstr "Fora do alcance"
 #: src/utils/flags/flagtypes.cc:50
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr "Erro desconhecido ao atribuir o valor %1% ao sinalizador %2%."
+msgstr "Erro desconhecido ao atribuir o valor %1% ao indicador %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
