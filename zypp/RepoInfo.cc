@@ -13,6 +13,7 @@
 #include <vector>
 #include <fstream>
 
+#include "zypp/base/Gettext.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/base/DefaultIntegral.h"
 #include "zypp/parser/xml/XmlEscape.h"

@@ -12,7 +12,6 @@
 #ifndef ZYPP_ZYPPCALLBACKS_H
 #define ZYPP_ZYPPCALLBACKS_H
 
-#include "zypp/base/Gettext.h"
 #include "zypp/base/EnumClass.h"
 #include "zypp/Callback.h"
 #include "zypp/UserData.h"

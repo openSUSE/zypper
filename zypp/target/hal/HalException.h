@@ -14,9 +14,7 @@
 #define ZYPP_TARGET_HAL_HALEXCEPTION_H
 
 #include "zypp/base/Exception.h"
-#include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
-
 
 //////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -42,29 +40,19 @@ namespace zypp
         /** Default constructor.
          * Use \ref ZYPP_THROW to throw exceptions.
          */
-        HalException()
-          : zypp::Exception(_("Hal Exception"))
-        {}
+        HalException();
 
         /** Constructor taking complete hal error message.
          * This constructor is used to generate custom error
          * messages, in case, that no DBUS error is avaliable.
          * Use \ref ZYPP_THROW to throw exceptions.
          */
-        HalException(const std::string &msg_r)
-          : zypp::Exception(_("Hal Exception"))
-          , e_name()
-          , e_msg(msg_r)
-        {}
+        HalException(const std::string &msg_r);
 
         /** Constructor taking HAL (DBUS) error message components.
          * Use \ref ZYPP_THROW to throw exceptions.
          */
-        HalException(const std::string &err_name, const std::string &err_msg)
-          : zypp::Exception(_("Hal Exception"))
-          , e_name(err_name)
-          , e_msg(err_msg)
-        {}
+        HalException(const std::string &err_name, const std::string &err_msg);
 
         /** Destructor.
          */

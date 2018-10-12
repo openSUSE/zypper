@@ -10,6 +10,7 @@
  *
  *  \brief Hardware abstaction layer library wrapper implementation.
  */
+#include "zypp/base/Gettext.h"
 #include "zypp/target/hal/HalException.h"
 //////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -20,8 +21,21 @@ namespace zypp
     //////////////////////////////////////////////////////////////////
     namespace hal
     { ////////////////////////////////////////////////////////////////
-      NoHalException::NoHalException()
-        : Exception(_("Sorry, but this version of libzypp was built without HAL support."))
+        HalException::HalException()
+          : zypp::Exception(_("Hal Exception"))
+        {}
+        HalException::HalException(const std::string &msg_r)
+          : zypp::Exception(_("Hal Exception"))
+          , e_name()
+          , e_msg(msg_r)
+        {}
+        HalException::HalException(const std::string &err_name, const std::string &err_msg)
+          : zypp::Exception(_("Hal Exception"))
+          , e_name(err_name)
+          , e_msg(err_msg)
+        {}
+        NoHalException::NoHalException()
+	: Exception(_("Sorry, but this version of libzypp was built without HAL support."))
       {}
       ////////////////////////////////////////////////////////////////
     } // namespace hal
