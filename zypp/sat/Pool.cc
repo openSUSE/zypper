@@ -243,6 +243,9 @@ namespace zypp
     Queue Pool::autoInstalled() const				{ return myPool().autoInstalled(); }
     void Pool::setAutoInstalled( const Queue & autoInstalled_r ){ myPool().setAutoInstalled( autoInstalled_r ); }
 
+    Queue Pool::rebootNeededIdents() const				{ return myPool().rebootNeededIdents(); }
+    void Pool::setRebootNeededIdents( const Queue & rebootNeeded_r ){ myPool().setRebootNeededIdents( rebootNeeded_r ); }
+
    /******************************************************************
     **
     **	FUNCTION NAME : operator<<

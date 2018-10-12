@@ -30,6 +30,7 @@
 
 #include "zypp/ZConfig.h"
 #include "zypp/ZYppFactory.h"
+#include "zypp/PathInfo.h"
 
 #include "zypp/PoolItem.h"
 #include "zypp/ResObjects.h"
@@ -1072,6 +1073,38 @@ namespace zypp
 	  q.push( idstr.id() );
 	satpool.setAutoInstalled( q );
       }
+
+      //load the packages that will trigger the update flag being set
+      {
+        sat::StringQueue q;
+        filesystem::Pathname needRebootFile = home() / "needreboot";
+        if ( filesystem::PathInfo ( needRebootFile ).isExist() ) {
+          SolvIdentFile file ( needRebootFile );
+          for ( const auto & idstr : file.data() ) {
+            q.push( idstr.id() );
+          }
+        }
+
+        filesystem::Pathname needRebootDir = home() / "needreboot.d";
+        if ( filesystem::PathInfo ( needRebootDir ).isExist() ) {
+          filesystem::DirContent ls;
+          filesystem::readdir( ls, needRebootDir, false );
+
+          for ( const filesystem::DirEntry &entry : ls ) {
+
+            if ( entry.type != filesystem::FT_FILE )
+              continue;
+
+            SolvIdentFile file ( needRebootDir / entry.name );
+            for ( const auto & idstr : file.data() ) {
+              q.push( idstr.id() );
+            }
+          }
+        }
+
+        satpool.setRebootNeededIdents( q );
+      }
+
       if ( ZConfig::instance().apply_locks_file() )
       {
         const HardLocksFile::Data & hardLocks( _hardLocksFile.data() );
@@ -1468,6 +1501,12 @@ namespace zypp
               }
               else
               {
+                if ( citem.identTriggersRebootHint() ) {
+                  auto rebootNeededFile = root() / "/var/run/reboot-needed";
+                  if ( filesystem::assert_file( rebootNeededFile ) == EEXIST)
+                    filesystem::touch( rebootNeededFile );
+                }
+
                 success = true;
 		step->stepStage( sat::Transaction::STEP_DONE );
               }

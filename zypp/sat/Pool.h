@@ -265,6 +265,12 @@ namespace zypp
 	void setAutoInstalled( const Queue & autoInstalled_r );
         //@}
 
+        /** Get ident list of all solvables that trigger the "reboot needed" flag. */
+        Queue rebootNeededIdents() const;
+
+	/** Set ident list of all solvables that trigger the "reboot needed" flag. */
+	void setRebootNeededIdents( const Queue & rebootNeeded_r );
+
       public:
         /** Expert backdoor. */
         detail::CPool * get() const;

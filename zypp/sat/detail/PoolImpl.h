@@ -306,6 +306,18 @@ namespace zypp
 
           bool isOnSystemByAuto( IdString ident_r ) const
           { return _autoinstalled.contains( ident_r.id() ); }
+
+          /** Get ident list of all solvables that trigger the "reboot needed" flag. */
+	  StringQueue rebootNeededIdents() const
+	  { return _rebootNeeded; }
+
+	  /** Set ident list of all solvables that trigger the "reboot needed" flag. */
+	  void setRebootNeededIdents( const StringQueue & rebootNeeded_r )
+	  { _rebootNeeded = rebootNeeded_r; }
+
+	  bool triggersRebootNeededHint( IdString ident_r ) const
+          { return _rebootNeeded.contains( ident_r.id() ); }
+
           //@}
 
 	public:
@@ -336,6 +348,9 @@ namespace zypp
 
           /**  */
 	  sat::StringQueue _autoinstalled;
+
+	  /** database of all identifiers that will trigger the "reboot needed" flag */
+	  sat::StringQueue _rebootNeeded;
 
 	  /** filesystems mentioned in /etc/sysconfig/storage */
 	  mutable scoped_ptr<std::set<std::string> > _requiredFilesystemsPtr;
