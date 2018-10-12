@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Oct 12 14:05:47 CEST 2018 - ma@suse.de
+
+- BuildRequires:  libzypp-devel >= 17.8.0 (for fate#326451)
+- Introduce new zypper command framefork. Migrated commands so far:
+  addlock addrepo addservice clean cleanlocks modifyrepo modifyservice
+  ps refresh refresh-services removelock removerepo removeservice
+  renamerepo repos services
+- version 1.14.14
+
+-------------------------------------------------------------------
 Tue Oct  9 17:30:45 CEST 2018 - ma@suse.de
 
 - MediaChangeReport: fix https URLs causing 2 prompts on error
