@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Oct 12 14:01:19 CEST 2018 - ma@suse.de
+
+- Add infrastructure to flag specific packages to trigger a
+  reboot needed hint (fate#326451)
+- Adapt to libsolv: Drop support for REPOKEY_TYPE_U32
+- Resolver: add setInr to request solving namespaces
+- ResolverNamespace: add No/AllResolverNamespaces constants
+- version 17.8.0 (2)
+
+-------------------------------------------------------------------
 Mon Oct  1 14:04:15 CEST 2018 - ma@suse.de
 
 - Fix blocking wait for finished child process (bsc#1109877)
