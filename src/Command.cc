@@ -6,6 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 #include <map>
+#include <functional>
 
 #include <zypp/base/NamedValue.h>
 #include <zypp/base/Exception.h>
@@ -30,31 +31,54 @@ using namespace zypp;
 ///////////////////////////////////////////////////////////////////
 namespace
 {
+
+  template<typename T>
+  ZypperBaseCommandPtr commandFactory ( const std::vector<std::string> &aliases_r )
+  {
+    return std::make_shared<T> ( aliases_r );
+  }
+
+  struct CommandFactory {
+    std::vector<std::string> aliases;
+    std::function<ZypperBaseCommandPtr ( const std::vector<std::string> & )> constructor;
+
+    ZypperBaseCommandPtr operator ()()
+    {
+      return constructor( aliases );
+    }
+
+    template <typename T>
+    constexpr static CommandFactory make ( const std::vector<std::string> &aliases_r )
+    {
+      return CommandFactory { aliases_r, commandFactory<T>};
+    }
+  };
+
   //@TODO hack for now, this should be migrated to be part of Zypper class directly instead of a
   //singleton
-  static std::map< ZypperCommand::Command, ZypperBaseCommandPtr > &newStyleCommands ()
+  static std::map< ZypperCommand::Command, CommandFactory > &newStyleCommands ()
   {
-    static std::map< ZypperCommand::Command, ZypperBaseCommandPtr > table {
-      { ZypperCommand::LIST_LOCKS_e,  std::make_shared<ListLocksCmd>() },
-      { ZypperCommand::ADD_LOCK_e,    std::make_shared<AddLocksCmd>() },
-      { ZypperCommand::REMOVE_LOCK_e, std::make_shared<RemoveLocksCmd>() },
-      { ZypperCommand::CLEAN_LOCKS_e, std::make_shared<CleanLocksCmd>() },
+    static std::map< ZypperCommand::Command,  CommandFactory> table {
+      { ZypperCommand::LIST_LOCKS_e,  CommandFactory::make<ListLocksCmd>( { "locks",       "ll", "lock-list"          }) },
+      { ZypperCommand::ADD_LOCK_e,    CommandFactory::make<AddLocksCmd>({ "addlock",     "al", "lock-add",     "la" }) },
+      { ZypperCommand::REMOVE_LOCK_e, CommandFactory::make<RemoveLocksCmd>({ "removelock",  "rl", "lock-delete" , "ld" }) },
+      { ZypperCommand::CLEAN_LOCKS_e, CommandFactory::make<CleanLocksCmd> ({ "cleanlocks" , "cl", "lock-clean"         }) },
 
-      { ZypperCommand::LIST_SERVICES_e, std::make_shared<ListServicesCmd>() },
-      { ZypperCommand::REFRESH_SERVICES_e, std::make_shared<RefreshServicesCmd>() },
-      { ZypperCommand::MODIFY_SERVICE_e, std::make_shared<ModifyServiceCmd>() },
-      { ZypperCommand::REMOVE_SERVICE_e, std::make_shared<RemoveServiceCmd>() },
-      { ZypperCommand::ADD_SERVICE_e, std::make_shared<AddServiceCmd>() },
+      { ZypperCommand::LIST_SERVICES_e, CommandFactory::make<ListServicesCmd>( { "services", "ls", "service-list", "sl" } ) },
+      { ZypperCommand::REFRESH_SERVICES_e, CommandFactory::make<RefreshServicesCmd>( { "refresh-services", "refs" } ) },
+      { ZypperCommand::MODIFY_SERVICE_e, CommandFactory::make<ModifyServiceCmd>( { "modifyservice", "ms" } ) }, //<<
+      { ZypperCommand::REMOVE_SERVICE_e, CommandFactory::make<RemoveServiceCmd>( { "removeservice", "rs", "service-delete", "sd" } ) },
+      { ZypperCommand::ADD_SERVICE_e, CommandFactory::make<AddServiceCmd>( { "addservice", "as", "service-add", "sa" } ) },
 
-      { ZypperCommand::LIST_REPOS_e, std::make_shared<ListReposCmd>() },
-      { ZypperCommand::ADD_REPO_e, std::make_shared<AddRepoCmd>() },
-      { ZypperCommand::REMOVE_REPO_e, std::make_shared<RemoveRepoCmd>() },
-      { ZypperCommand::RENAME_REPO_e, std::make_shared<RenameRepoCmd>() },
-      { ZypperCommand::MODIFY_REPO_e, std::make_shared<ModifyRepoCmd>() },
-      { ZypperCommand::REFRESH_e, std::make_shared<RefreshRepoCmd>() },
-      { ZypperCommand::CLEAN_e, std::make_shared<CleanRepoCmd>() },
+      { ZypperCommand::LIST_REPOS_e, CommandFactory::make<ListReposCmd>( {"repos", "lr", "catalogs","ca"} ) },
+      { ZypperCommand::ADD_REPO_e, CommandFactory::make<AddRepoCmd>( { "addrepo", "ar" } ) },
+      { ZypperCommand::REMOVE_REPO_e, CommandFactory::make<RemoveRepoCmd>( { "removerepo", "rr" } ) },
+      { ZypperCommand::RENAME_REPO_e, CommandFactory::make<RenameRepoCmd>( { "renamerepo", "nr" } ) },
+      { ZypperCommand::MODIFY_REPO_e, CommandFactory::make<ModifyRepoCmd>( { "modifyrepo", "mr" } ) },
+      { ZypperCommand::REFRESH_e, CommandFactory::make<RefreshRepoCmd>( { "refresh", "ref" } ) },
+      { ZypperCommand::CLEAN_e, CommandFactory::make<CleanRepoCmd>( { "clean", "cc", "clean-cache", "you-clean-cache", "yc" } ) },
 
-      { ZypperCommand::PS_e, std::make_shared<PSCommand>() }
+      { ZypperCommand::PS_e, CommandFactory::make<PSCommand>( { "ps" }) }
     };
     return table;
   }
@@ -135,7 +159,7 @@ namespace
       // patch the table to contain all new style commands
       for ( const auto &cmd : newStyleCommands() ) {
         auto entry = _table(cmd.first);
-        for ( const std::string &alias : cmd.second->command())
+        for ( const std::string &alias : cmd.second.aliases)
           entry | alias;
       }
     }
@@ -217,7 +241,7 @@ ZypperCommand::ZypperCommand(ZypperCommand::Command command) : _command(command)
   //set the command object if the passed enum represents a new style cmd
   auto &newCmds = newStyleCommands();
   if ( newCmds.find( _command ) != newCmds.end() ) {
-    _newStyleCmdObj = newCmds[_command];
+    _newStyleCmdObj = newCmds[_command]();
   }
 }
 

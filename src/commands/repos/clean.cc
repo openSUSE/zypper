@@ -10,9 +10,9 @@
 #include "utils/flags/flagtypes.h"
 #include "Zypper.h"
 
-CleanRepoCmd::CleanRepoCmd():
+CleanRepoCmd::CleanRepoCmd( const std::vector<std::string> &commandAliases_r ):
   ZypperBaseCommand(
-    { "clean", "cc", "clean-cache", "you-clean-cache", "yc" },
+    commandAliases_r,
     _("clean (cc) [ALIAS|#|URI] ..."),
     _("Clean local caches."),
     _("Clean local caches."),

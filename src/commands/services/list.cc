@@ -75,9 +75,9 @@ void service_list_tr( Zypper & zypper,
 
 }
 
-ListServicesCmd::ListServicesCmd()
+ListServicesCmd::ListServicesCmd(const std::vector<std::string> &commandAliases_r)
   : ZypperBaseCommand (
-      { "services", "ls", "service-list", "sl" },
+      commandAliases_r,
       _("services (ls) [OPTIONS]"),
       _("List all defined services."),
       _("List defined services."),

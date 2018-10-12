@@ -16,9 +16,13 @@ class RefreshServicesCmd : public ZypperBaseCommand
 {
 
 public:
-  RefreshServicesCmd ( bool force_r = false, bool withRepos_r = false, bool restoreStatus_r = false );
+  RefreshServicesCmd ( const std::vector<std::string> &commandAliases_r );
 
   int refreshServices ( Zypper &zypper );
+
+  void setForce(bool force);
+  void setWithRepos(bool withRepos);
+  void setRestoreStatus(bool restoreStatus);
 
   // ZypperBaseCommand interface
 protected:
@@ -29,9 +33,9 @@ protected:
   int systemSetup(Zypper &zypp_r) override;
 
 private:
-  bool _force;
-  bool _withRepos;
-  bool _restoreStatus;
+  bool _force = false;
+  bool _withRepos = false;
+  bool _restoreStatus = false;
 };
 
 #endif

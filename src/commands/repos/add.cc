@@ -17,9 +17,9 @@
 
 using namespace zypp;
 
-AddRepoCmd::AddRepoCmd() :
+AddRepoCmd::AddRepoCmd(const std::vector<std::string> &commandAliases_r) :
   ZypperBaseCommand(
-    { "addrepo", "ar" },
+    commandAliases_r,
     std::vector<std::string>{ _("addrepo (ar) [OPTIONS] <URI> <ALIAS>"), _("addrepo (ar) [OPTIONS] <FILE.repo>") },
     _("Add a new repository."),
     _("Add a repository to the system. The repository can be specified by its URI or can be read from specified .repo file (even remote)."),

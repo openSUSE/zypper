@@ -17,7 +17,7 @@
 class RemoveRepoCmd : public ZypperBaseCommand
 {
 public:
-  RemoveRepoCmd();
+  RemoveRepoCmd( const std::vector<std::string> &commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

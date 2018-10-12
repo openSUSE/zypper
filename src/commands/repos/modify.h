@@ -13,7 +13,7 @@
 class ModifyRepoCmd : public ZypperBaseCommand
 {
 public:
-  ModifyRepoCmd();
+  ModifyRepoCmd( const std::vector<std::string> &commandAliases_r );
 
   // ZypperBaseCommand interface
   std::string help() override;
