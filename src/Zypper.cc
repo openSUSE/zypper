@@ -835,7 +835,8 @@ void print_main_help( Zypper & zypper )
 	 _("Download rpms specified on the commandline to a local directory.") )
   .gDef( "source-download",	// translators: command summary: source-download
 	 _("Download source rpms for all installed packages to a local directory.") )
-
+  .gDef( "needs-rebooting",	// translators: command summary: needs-rebooting
+         _("Check if the needs-reboot flag was set.") )
   .gSection( _("Subcommands:") )
   .gDef( "subcommand",	// translators: command summary: subcommand
 	 _("Lists available subcommands.") )

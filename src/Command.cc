@@ -19,6 +19,7 @@
 #include "commands/services.h"
 #include "commands/repos.h"
 #include "commands/ps.h"
+#include "commands/needs-rebooting.h"
 
 using namespace zypp;
 
@@ -78,7 +79,8 @@ namespace
       { ZypperCommand::REFRESH_e, CommandFactory::make<RefreshRepoCmd>( { "refresh", "ref" } ) },
       { ZypperCommand::CLEAN_e, CommandFactory::make<CleanRepoCmd>( { "clean", "cc", "clean-cache", "you-clean-cache", "yc" } ) },
 
-      { ZypperCommand::PS_e, CommandFactory::make<PSCommand>( { "ps" }) }
+      { ZypperCommand::PS_e, CommandFactory::make<PSCommand>( { "ps" }) },
+      { ZypperCommand::NEEDS_REBOOTING_e, CommandFactory::make<NeedsRebootingCmd>( { "needs-rebooting" }) }
     };
     return table;
   }
@@ -232,6 +234,8 @@ DEF_ZYPPER_COMMAND( RUG_PATTERN_INFO );
 DEF_ZYPPER_COMMAND( RUG_PRODUCT_INFO );
 DEF_ZYPPER_COMMAND( RUG_PATCH_SEARCH );
 DEF_ZYPPER_COMMAND( RUG_PING );
+
+DEF_ZYPPER_COMMAND( NEEDS_REBOOTING );
 
 #undef DEF_ZYPPER_COMMAND
 ///////////////////////////////////////////////////////////////////
