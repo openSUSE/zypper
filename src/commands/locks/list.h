@@ -13,7 +13,7 @@
 class ListLocksCmd : public ZypperBaseCommand
 {
 public:
-  ListLocksCmd();
+  ListLocksCmd( const std::vector<std::string> &commandAliases_r );
 
   // ZypperBaseCommand interface
   std::string description() const override;

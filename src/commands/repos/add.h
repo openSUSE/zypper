@@ -17,7 +17,7 @@
 class AddRepoCmd : public ZypperBaseCommand
 {
 public:
-  AddRepoCmd();
+  AddRepoCmd( const std::vector<std::string> &commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

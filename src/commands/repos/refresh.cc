@@ -18,9 +18,9 @@ using namespace zypp;
 
 extern ZYpp::Ptr God;
 
-RefreshRepoCmd::RefreshRepoCmd()
+RefreshRepoCmd::RefreshRepoCmd( const std::vector<std::string> &commandAliases_r )
   : ZypperBaseCommand (
-      { "refresh", "ref" },
+      commandAliases_r,
       _("refresh (ref) [ALIAS|#|URI] ..."),
       // translators: command summary: refresh, ref
       _("Refresh all repositories."),
@@ -104,7 +104,10 @@ int RefreshRepoCmd::execute( Zypper &zypp_r , const std::vector<std::string> &po
       return ( ZYPPER_EXIT_ERR_PRIVILEGES );
     }
 
-    RefreshServicesCmd refServiceCmd( force, false, false);
+    RefreshServicesCmd refServiceCmd( {} );
+    refServiceCmd.setForce( force );
+    refServiceCmd.setRestoreStatus( false );
+    refServiceCmd.setWithRepos( false );
 
     // needed to be able to retrieve target distribution
     int code = defaultSystemSetup ( zypp_r, InitTarget );

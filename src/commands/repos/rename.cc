@@ -57,9 +57,9 @@ int rename_repo( Zypper & zypper, const std::string & alias, const std::string &
 
 }
 
-RenameRepoCmd::RenameRepoCmd() :
+RenameRepoCmd::RenameRepoCmd(const std::vector<std::string> &commandAliases_r) :
   ZypperBaseCommand (
-    { "renamerepo", "nr" },
+    commandAliases_r,
     // translators: command synopsis; do not translate lowercase words
     _("renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"),
     _("Rename specified repository."),

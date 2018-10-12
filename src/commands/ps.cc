@@ -19,9 +19,9 @@
 
 using namespace zypp;
 
-PSCommand::PSCommand() :
+PSCommand::PSCommand(const std::vector<std::string> &commandAliases_r) :
   ZypperBaseCommand (
-    { "ps" },
+    commandAliases_r,
     // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
     _("ps [OPTIONS]"),
     // translators: command description

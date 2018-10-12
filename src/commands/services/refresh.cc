@@ -89,15 +89,12 @@ static void report_unknown_services( Out & out, std::list<std::string> not_found
     out.info( str::Format(_("Use '%s' to get the list of defined services.")) % "zypper repos" );
 }
 
-RefreshServicesCmd::RefreshServicesCmd(  bool force_r, bool withRepos_r, bool restoreStatus_r ) :
+RefreshServicesCmd::RefreshServicesCmd( const std::vector<std::string> &commandAliases_r ) :
   ZypperBaseCommand(
-    { "refresh-services", "refs" },
+    commandAliases_r,
     _("refresh-services (refs) [OPTIONS]"),
     _("Refresh all services."),
-    _("Refresh defined repository index services.")),
-    _force( force_r ),
-    _withRepos( withRepos_r),
-    _restoreStatus( restoreStatus_r )
+    _("Refresh defined repository index services."))
 {
 
 }
@@ -274,4 +271,19 @@ int RefreshServicesCmd::systemSetup(Zypper &zypp_r)
       zyppApi()->target()->targetDistribution();
 
   return defaultSystemSetup( zypp_r, ResetRepoManager );
+}
+
+void RefreshServicesCmd::setRestoreStatus(bool restoreStatus)
+{
+  _restoreStatus = restoreStatus;
+}
+
+void RefreshServicesCmd::setWithRepos(bool withRepos)
+{
+  _withRepos = withRepos;
+}
+
+void RefreshServicesCmd::setForce(bool force)
+{
+  _force = force;
 }

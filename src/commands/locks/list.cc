@@ -219,9 +219,9 @@ private:
 };
 }
 
-ListLocksCmd::ListLocksCmd() :
+ListLocksCmd::ListLocksCmd(const std::vector<std::string> &commandAliases_r) :
   ZypperBaseCommand (
-    { "locks", "ll", "lock-list" },
+    commandAliases_r,
     // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
     _("locks (ll) [OPTIONS]"),
     _("List current package locks.")

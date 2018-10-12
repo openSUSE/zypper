@@ -16,9 +16,9 @@
 using namespace zypp;
 
 
-ModifyRepoCmd::ModifyRepoCmd() :
+ModifyRepoCmd::ModifyRepoCmd(const std::vector<std::string> &commandAliases_r) :
   ZypperBaseCommand (
-    { "modifyrepo", "mr" },
+    commandAliases_r,
     {
       // translators: command synopsis; do not translate lowercase words
       _("modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"),
