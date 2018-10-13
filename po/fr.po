@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-01 22:02+0000\n"
+"PO-Revision-Date: 2018-10-13 07:55+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
@@ -3406,6 +3406,14 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
+"removeservice (rs) [OPTIONS] <alias|#|URI>\n"
+"\n"
+"Supprime du système le service d'indexation de dépôt spécifié.\n"
+"\n"
+"  Options de la commande :\n"
+"    --loose-auth   Ignore les données d'authentification utilisateur dans "
+"l'URI.\n"
+"    --loose-query  Ignore la chaîne de requête dans l'URI.\n"
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:2463
@@ -8523,7 +8531,7 @@ msgstr "Le drapeau %1% ne peut être utilisé qu'une seule fois."
 
 #: src/utils/flags/flagtypes.cc:48
 msgid "Out of range"
-msgstr ""
+msgstr "Hors limites"
 
 #: src/utils/flags/flagtypes.cc:50
 #, boost-format
