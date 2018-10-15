@@ -234,6 +234,9 @@ INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/cmake/modules/ZyppCommon.cmake DESTINATION 
 MESSAGE(STATUS "zypp.conf will be installed in ${SYSCONFDIR}/zypp")
 INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/zypp.conf DESTINATION ${SYSCONFDIR}/zypp )
 
+MESSAGE(STATUS "needreboot will be installed in /var/lib/zypp/")
+INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/needreboot DESTINATION /var/lib/zypp )
+
 #install systemCheck
 MESSAGE(STATUS "systemCheck will be installed in ${SYSCONFDIR}/zypp")
 INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/systemCheck DESTINATION ${SYSCONFDIR}/zypp )

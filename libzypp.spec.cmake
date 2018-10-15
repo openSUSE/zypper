@@ -241,6 +241,7 @@ mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/services
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/system
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/urlresolver
 mkdir -p $RPM_BUILD_ROOT%{_var}/lib/zypp
+mkdir -p $RPM_BUILD_ROOT%{_var}/lib/zypp/needreboot.d
 mkdir -p $RPM_BUILD_ROOT%{_var}/log/zypp
 mkdir -p $RPM_BUILD_ROOT%{_var}/cache/zypp
 
@@ -349,6 +350,8 @@ rm -rf "$RPM_BUILD_ROOT"
 %config(noreplace) %{_sysconfdir}/zypp/systemCheck
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-history.lr
 %dir               %{_var}/lib/zypp
+%config(noreplace) %{_var}/lib/zypp/needreboot
+%dir               %{_var}/lib/zypp/needreboot.d
 %dir               %{_var}/log/zypp
 %dir               %{_var}/cache/zypp
 %{_prefix}/lib/zypp
