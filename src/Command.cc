@@ -82,7 +82,8 @@ namespace
 
       { ZypperCommand::PS_e, CommandFactory::make<PSCommand>( { "ps" }) },
       { ZypperCommand::NEEDS_REBOOTING_e, CommandFactory::make<NeedsRebootingCmd>( { "needs-rebooting" }) },
-      { ZypperCommand::TARGET_OS_e, CommandFactory::make<TargetOSCmd>( { "targetos", "tos" } ) }
+      { ZypperCommand::TARGET_OS_e, CommandFactory::make<TargetOSCmd>( { "targetos", "tos" } ) },
+      { ZypperCommand::VERSION_CMP_e, CommandFactory::make<VersionCompareCmd>( { "versioncmp", "vcmp" } ) }
     };
     return table;
   }
@@ -140,7 +141,7 @@ namespace
       // _t( CLEAN_LOCKS_e )	| "cleanlocks"		| "cl" | "lock-clean";
 
       //_t( TARGET_OS_e )		| "targetos"		| "tos";
-      _t( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
+      //_t( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
       _t( LICENSES_e )		| "licenses";
       // _t( PS_e )		| "ps";
       _t( DOWNLOAD_e )		| "download";

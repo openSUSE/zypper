@@ -3528,26 +3528,6 @@ void Zypper::processCommandOptions()
     );
 #endif
 
-  case ZypperCommand::VERSION_CMP_e:
-  {
-    static struct option options[] =
-    {
-      {"help", no_argument, 0, 'h'},
-      {"match", no_argument, 0, 'm'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("versioncmp (vcmp) <VERSION1> <VERSION2>")
-    )
-    .description(	// translators: command description
-    _("Compare the versions supplied as arguments.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-m, --match",	// translators: -m, --match
-             _("Takes missing release number as any release.") )
-    ;
 #if 0
     _command_help = _(
       "versioncmp (vcmp) <version1> <version2>\n"
@@ -3558,8 +3538,6 @@ void Zypper::processCommandOptions()
       "-m, --match  Takes missing release number as any release.\n"
     );
 #endif
-    break;
-  }
 
   case ZypperCommand::LICENSES_e:
   {
@@ -5020,47 +4998,6 @@ void Zypper::doCommand()
   }
 
   // ----------------------------(utils/others)--------------------------------
-
-  case ZypperCommand::VERSION_CMP_e:
-  {
-    if ( _arguments.size() < 2 )
-    {
-      report_required_arg_missing( out(), _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-    else if ( _arguments.size() > 2 )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    Edition lhs( _arguments[0] );
-    Edition rhs( _arguments[1] );
-    int result;
-    if ( _copts.count("match") )
-      result = lhs.match( rhs );
-    else
-      result = lhs.compare( rhs );
-
-    // be terse when talking to machines
-    if ( _gopts.terse )
-    {
-      out().info( str::numstring(result) );
-      break;
-    }
-
-    // tell a human
-    if (result == 0)
-      out().info( str::form(_("%s matches %s"), lhs.asString().c_str(), rhs.asString().c_str() ) );
-    else if ( result > 0 )
-      out().info( str::form(_("%s is newer than %s"), lhs.asString().c_str(), rhs.asString().c_str() ) );
-    else
-      out().info( str::form(_("%s is older than %s"), lhs.asString().c_str(), rhs.asString().c_str() ) );
-
-    break;
-  }
 
   case ZypperCommand::LICENSES_e:
   {
