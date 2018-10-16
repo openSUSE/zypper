@@ -62,6 +62,7 @@ SET (zypper_HEADERS
   commands/reposerviceoptionsets.h
   commands/utils.h
   commands/utils/targetos.h
+  commands/utils/versioncmp.h
   commands/ps.h
   commands/needs-rebooting.h
 )
@@ -109,6 +110,7 @@ SET( zypper_SRCS
   commands/repos/refresh.cc
   commands/reposerviceoptionsets.cc
   commands/utils/targetos.cc
+  commands/utils/versioncmp.cc
   commands/ps.cc
   commands/needs-rebooting.cc
   ${zypper_HEADERS}
