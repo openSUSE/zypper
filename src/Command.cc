@@ -20,6 +20,7 @@
 #include "commands/repos.h"
 #include "commands/ps.h"
 #include "commands/needs-rebooting.h"
+#include "commands/utils.h"
 
 using namespace zypp;
 
@@ -80,7 +81,8 @@ namespace
       { ZypperCommand::CLEAN_e, CommandFactory::make<CleanRepoCmd>( { "clean", "cc", "clean-cache", "you-clean-cache", "yc" } ) },
 
       { ZypperCommand::PS_e, CommandFactory::make<PSCommand>( { "ps" }) },
-      { ZypperCommand::NEEDS_REBOOTING_e, CommandFactory::make<NeedsRebootingCmd>( { "needs-rebooting" }) }
+      { ZypperCommand::NEEDS_REBOOTING_e, CommandFactory::make<NeedsRebootingCmd>( { "needs-rebooting" }) },
+      { ZypperCommand::TARGET_OS_e, CommandFactory::make<TargetOSCmd>( { "targetos", "tos" } ) }
     };
     return table;
   }
@@ -137,7 +139,7 @@ namespace
       // _t( LIST_LOCKS_e )	| "locks"		| "ll" | "lock-list";
       // _t( CLEAN_LOCKS_e )	| "cleanlocks"		| "cl" | "lock-clean";
 
-      _t( TARGET_OS_e )		| "targetos"		| "tos";
+      //_t( TARGET_OS_e )		| "targetos"		| "tos";
       _t( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
       _t( LICENSES_e )		| "licenses";
       // _t( PS_e )		| "ps";

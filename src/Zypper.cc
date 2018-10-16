@@ -3516,26 +3516,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::TARGET_OS_e:
-  {
-    static struct option options[] =
-    {
-      {"help",  no_argument, 0, 'h'},
-      {"label", no_argument, 0, 'l'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("targetos (tos) [OPTIONS]")
-    )
-    .description(	// translators: command description
-    _("Show various information about the target operating system. By default, an ID string is shown.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-l, --label",	// translators: -l, --label
-             _("Show the operating system label.") )
-    ;
 #if 0
     _command_help = _(
       "targetos (tos) [OPTIONS]\n"
@@ -3547,8 +3527,6 @@ void Zypper::processCommandOptions()
       "-l, --label                 Show the operating system label.\n"
     );
 #endif
-    break;
-  }
 
   case ZypperCommand::VERSION_CMP_e:
   {
@@ -5042,33 +5020,6 @@ void Zypper::doCommand()
   }
 
   // ----------------------------(utils/others)--------------------------------
-
-  case ZypperCommand::TARGET_OS_e:
-  {
-    if (out().type() == Out::TYPE_XML)
-    {
-      out().error(_("XML output not implemented for this command.") );
-      break;
-    }
-
-    if ( copts.find("label") != copts.end() )
-    {
-      if ( globalOpts().terse )
-      {
-        cout << "labelLong\t" << str::escape(Target::distributionLabel( globalOpts().root_dir ).summary, '\t') << endl;
-        cout << "labelShort\t" << str::escape(Target::distributionLabel( globalOpts().root_dir ).shortName, '\t') << endl;
-      }
-      else
-      {
-        out().info( str::form(_("Distribution Label: %s"), Target::distributionLabel( globalOpts().root_dir ).summary.c_str() ) );
-        out().info( str::form(_("Short Label: %s"), Target::distributionLabel( globalOpts().root_dir ).shortName.c_str() ) );
-      }
-    }
-    else
-      out().info( Target::targetDistribution( globalOpts().root_dir ) );
-
-    break;
-  }
 
   case ZypperCommand::VERSION_CMP_e:
   {
