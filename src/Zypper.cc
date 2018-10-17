@@ -3538,24 +3538,6 @@ void Zypper::processCommandOptions()
       "-m, --match  Takes missing release number as any release.\n"
     );
 #endif
-
-  case ZypperCommand::LICENSES_e:
-  {
-    static struct option options[] =
-    {
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("licenses")
-    )
-    .description(	// translators: command description
-    _("Report licenses and EULAs of currently installed software packages.")
-    )
-    .noOptionSection()
-    ;
 #if 0
     _command_help = _(
       "licenses\n"
@@ -3565,8 +3547,6 @@ void Zypper::processCommandOptions()
       "This command has no additional options.\n"
     );
 #endif
-    break;
-  }
 
   case ZypperCommand::DOWNLOAD_e:
   {
@@ -4998,30 +4978,6 @@ void Zypper::doCommand()
   }
 
   // ----------------------------(utils/others)--------------------------------
-
-  case ZypperCommand::LICENSES_e:
-  {
-    if ( !_arguments.empty() )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    initRepoManager();
-    init_target( *this );
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-    // now load resolvables:
-    load_resolvables( *this );
-    // needed to compute status of PPP
-    resolve( *this );
-
-    report_licenses( *this );
-
-    break;
-  }
 
   case ZypperCommand::DOWNLOAD_e:
   {
