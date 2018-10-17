@@ -84,7 +84,8 @@ namespace
       { ZypperCommand::NEEDS_REBOOTING_e, CommandFactory::make<NeedsRebootingCmd>( { "needs-rebooting" }) },
       { ZypperCommand::TARGET_OS_e, CommandFactory::make<TargetOSCmd>( { "targetos", "tos" } ) },
       { ZypperCommand::VERSION_CMP_e, CommandFactory::make<VersionCompareCmd>( { "versioncmp", "vcmp" } ) },
-      { ZypperCommand::LICENSES_e, CommandFactory::make<LicensesCmd>( { "licenses" } ) }
+      { ZypperCommand::LICENSES_e, CommandFactory::make<LicensesCmd>( { "licenses" } ) },
+      { ZypperCommand::DOWNLOAD_e, CommandFactory::make<DownloadCmd>( { "download" } ) }
     };
     return table;
   }
@@ -145,7 +146,7 @@ namespace
       //_t( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
       //_t( LICENSES_e )		| "licenses";
       // _t( PS_e )		| "ps";
-      _t( DOWNLOAD_e )		| "download";
+      //_t( DOWNLOAD_e )		| "download";
       _t( SOURCE_DOWNLOAD_e )	| "source-download";
 
       _t( HELP_e )		| "help"		| "?";

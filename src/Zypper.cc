@@ -53,7 +53,6 @@
 #include "misc.h"
 #include "search.h"
 #include "info.h"
-#include "download.h"
 #include "source-download.h"
 #include "configtest.h"
 #include "subcommand.h"
@@ -63,6 +62,7 @@
 
 #include "utils/flags/zyppflags.h"
 #include "utils/flags/exceptions.h"
+#include "global-settings.h"
 
 #include "commands/commandhelpformatter.h"
 #include "commands/locks.h"
@@ -469,25 +469,6 @@ namespace {
 } //namespace
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-namespace env {
-  /** XDG_CACHE_HOME: base directory relative to which user specific non-essential data files should be stored.
-   * http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
-   */
-  inline Pathname XDG_CACHE_HOME()
-  {
-    Pathname ret;
-    const char * envp = getenv( "XDG_CACHE_HOME" );
-    if ( envp && *envp )
-      ret = envp;
-    else
-    {
-      ret = getenv( "HOME" );
-      ret /= ".cache";
-    }
-    return ret;
-  }
-} //namespace env
-
 Zypper::Zypper()
 : _argc( 0 )
 , _argv( NULL )
@@ -3547,35 +3528,6 @@ void Zypper::processCommandOptions()
       "This command has no additional options.\n"
     );
 #endif
-
-  case ZypperCommand::DOWNLOAD_e:
-  {
-    shared_ptr<DownloadOptions> myOpts( new DownloadOptions() );
-    _commandOptions = myOpts;
-    static struct option options[] =
-    {
-      {"help",			no_argument,		0, 'h'},
-      {"all-matches",		no_argument,		&myOpts->_allmatches, 1},
-      {"dry-run",		no_argument,		&myOpts->_dryrun, 1},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("download [OPTIONS] <PACKAGES>...")
-    )
-    .description(	// translators: command description
-    _("Download rpms specified on the commandline to a local directory. Per default packages are downloaded to the libzypp package cache (/var/cache/zypp/packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be changed by using the global --pkg-cache-dir option.")
-    )
-    .description(	// translators: command description
-    _("In XML output a <download-result> node is written for each package zypper tried to download. Upon success the local path is is found in 'download-result/localpath@path'.")
-    )
-    .optionSectionCommandOptions()
-    .option( "--all-matches",	// translators: --all-matches
-             _("Download all versions matching the commandline arguments. Otherwise only the best version of each matching package is downloaded.") )
-    .option( "--dry-run",	// translators: --dry-run
-             _("Don't download any package, just report what would be done.") )
-    ;
 #if 0
     _command_help = _(
       "download [OPTIONS] <PACKAGES>...\n"
@@ -3597,8 +3549,6 @@ void Zypper::processCommandOptions()
       "                     would be done.\n"
     );
 #endif
-    break;
-  }
 
 
   case ZypperCommand::SOURCE_DOWNLOAD_e:
@@ -3828,6 +3778,9 @@ void Zypper::processCommandOptions()
     ERR << "Unknown option or missing argument, returning." << endl;
     return;
   }
+
+  // set the global dry-run setting
+  DryRun::instanceNoConst()._enabled = _copts.count("dry-run");
 
   // Leagcy cli translations (mostly from rug to zypper)
   legacyCLITranslate( _copts, "agree-to-third-party-licenses",	"auto-agree-with-licenses" );
@@ -4979,53 +4932,6 @@ void Zypper::doCommand()
 
   // ----------------------------(utils/others)--------------------------------
 
-  case ZypperCommand::DOWNLOAD_e:
-  {
-    if ( _arguments.empty() )
-    {
-      report_required_arg_missing( out(), _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    // Check for a usable pkg-cache-dir
-    if ( geteuid() != 0 )
-    {
-      bool mayuse = userMayUseDir( _gopts.rm_options.repoPackagesCachePath );
-      if ( ! mayuse && /* is the default path: */
-	   _gopts.rm_options.repoPackagesCachePath == RepoManagerOptions( _gopts.root_dir ).repoPackagesCachePath )
-      {
-	_gopts.rm_options.repoPackagesCachePath = env::XDG_CACHE_HOME() / "zypp/packages";
-	mayuse = userMayUseDir( _gopts.rm_options.repoPackagesCachePath );
-      }
-
-      if ( ! mayuse )
-      {
-	out().error( str::Format(_("Insufficient privileges to use download directory '%s'.")) % _gopts.rm_options.repoPackagesCachePath );
-	setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-	return;
-      }
-    }
-
-    // go
-    init_target( *this );
-    initRepoManager();
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-    // now load resolvables:
-    load_resolvables( *this );
-
-    shared_ptr<DownloadOptions> myOpts( assertCommandOptions<DownloadOptions>() );
-
-    if ( _copts.count( "dry-run" ) )
-      myOpts->_dryrun = true;
-
-    download( *this );
-    break;
-  }
-
-
   case ZypperCommand::SOURCE_DOWNLOAD_e:
   {
     if ( !_arguments.empty() )
@@ -5040,8 +4946,7 @@ void Zypper::doCommand()
     if ( _copts.count( "directory" ) )
       myOpts->_directory = _copts["directory"].back();	// last wins
 
-    if ( _copts.count( "dry-run" ) )
-      myOpts->_dryrun = true;
+    myOpts->_dryrun = DryRun::isEnabled();
 
     sourceDownload( *this );
 

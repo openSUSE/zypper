@@ -5,6 +5,7 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 #include "conditions.h"
+#include "global-settings.h"
 #include "Zypper.h"
 
 #include <sys/vfs.h>
@@ -26,7 +27,7 @@ int NeedsWritableRoot::check(std::string &err_r)
   Zypper &zypper = Zypper::instance();
   const GlobalOptions &gopts = zypper.globalOpts();
 
-  if ( zypper.cOpts().count("dry-run") )
+  if ( DryRun::isEnabled() )
     return ZYPPER_EXIT_OK;
 
   struct statfs fsinfo;
