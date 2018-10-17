@@ -4,5 +4,6 @@
 #include "utils/targetos.h"
 #include "utils/versioncmp.h"
 #include "utils/licenses.h"
+#include "utils/download.h"
 
 #endif

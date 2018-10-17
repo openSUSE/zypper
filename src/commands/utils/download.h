@@ -5,12 +5,8 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
-#ifndef ZYPPER_DOWNLOAD_H
-#define ZYPPER_DOWNLOAD_H
-
-#include "zypp/Pathname.h"
-
-class Zypper;
+#ifndef ZYPPER_COMMANDS_UTILS_DOWNLOAD_INCLUDED
+#define ZYPPER_COMMANDS_UTILS_DOWNLOAD_INCLUDED
 
 /*
       "download [options] <packages>...\n"
@@ -31,23 +27,31 @@ class Zypper;
       "                     would be done.\n"
 */
 
-/** download specific options */
-struct DownloadOptions : public MixinOptions<ZypperCommand::DOWNLOAD>
-{
-  static const Pathname _defaultDirectory;
+#include "commands/basecommand.h"
+#include "commands/optionsets.h"
+#include "utils/flags/zyppflags.h"
 
-  DownloadOptions()
-    : _dryrun( false )
-    , _allmatches( false )
-  {}
+class Zypper;
 
-  int _dryrun;		//< Dryrun mode.
-  int _allmatches;	//< Download all matching packages, not just the best one
-};
-
-/** Download rpms specified on the commandline to a local directory.
- * \returns zypper.exitCode
+/**
+ * Download rpms specified on the commandline to a local directory.
  */
-int download( Zypper & zypper_r );
+class DownloadCmd : public ZypperBaseCommand
+{
+public:
+  DownloadCmd ( const std::vector<std::string> &commandAliases_r );
+
+private:
+  DryRunOptionSet _dryRun { *this };
+  bool _allMatches = false;
+
+
+  // ZypperBaseCommand interface
+protected:
+  zypp::ZyppFlags::CommandGroup cmdOptions() const override;
+  void doReset() override;
+  int execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r) override;
+  std::vector<BaseCommandConditionPtr> conditions() const override;
+};
 
 #endif // ZYPPER_DOWNLOAD_H

@@ -124,5 +124,4 @@ private:
 
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS( RSCommonListOptions::RSCommonListFlags )
 
-
 #endif

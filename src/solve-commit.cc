@@ -23,6 +23,7 @@
 #include "utils/prompt.h"	// Continue? and solver problem prompt
 #include "utils/pager.h"	// to view the summary
 #include "Summary.h"
+#include "global-settings.h"
 
 #include "solve-commit.h"
 
@@ -419,7 +420,7 @@ ZYppCommitPolicy get_commit_policy( Zypper & zypper )
   ZYppCommitPolicy policy;
   const parsed_opts & opts = zypper.cOpts();
 
-  if ( opts.find("dry-run") != opts.end() )
+  if ( DryRun::isEnabled() )
     policy.dryRun(true);
 
   if ( opts.find("download") != opts.end()
@@ -527,7 +528,7 @@ static void show_update_messages( Zypper & zypper, const UpdateNotifications & m
 void solve_and_commit ( Zypper & zypper )
 {
   bool need_another_solver_run = true;
-  bool dryRunEtc = zypper.cOpts().count("dry-run") || ( get_download_option( zypper, true ) == DownloadOnly );
+  bool dryRunEtc = DryRun::isEnabled() || ( get_download_option( zypper, true ) == DownloadOnly );
   do
   {
     // CALL SOLVER
@@ -787,7 +788,7 @@ void solve_and_commit ( Zypper & zypper )
 	  {
 	    std::ostringstream s;
 	    s << _("committing");
-	    if ( copts.count("dry-run") )
+	    if ( DryRun::isEnabled() )
 	      s << " " << _("(dry run)");
 	    zypper.out().info( s.str(), Out::HIGH );
 	  }

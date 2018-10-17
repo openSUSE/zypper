@@ -22,7 +22,6 @@ SET (zypper_HEADERS
   info.h
   Table.h
   update.h
-  download.h
   source-download.h
   subcommand.h
   configtest.h
@@ -30,11 +29,13 @@ SET (zypper_HEADERS
   PackageArgs.h
   SolverRequester.h
   Summary.h
+  global-settings.h
   callbacks/keyring.h
   callbacks/media.h
   callbacks/rpm.h
   callbacks/repo.h
   callbacks/job.h
+  commands/optionsets.h
   commands/commandhelpformatter.h
   commands/conditions.h
   commands/basecommand.h
@@ -64,6 +65,7 @@ SET (zypper_HEADERS
   commands/utils/targetos.h
   commands/utils/versioncmp.h
   commands/utils/licenses.h
+  commands/utils/download.h
   commands/ps.h
   commands/needs-rebooting.h
 )
@@ -78,7 +80,6 @@ SET( zypper_SRCS
   info.cc
   Table.cc
   update.cc
-  download.cc
   source-download.cc
   subcommand.cc
   configtest.cc
@@ -87,7 +88,9 @@ SET( zypper_SRCS
   RequestFeedback.cc
   SolverRequester.cc
   Summary.cc
+  global-settings.cc
   callbacks/media.cc
+  commands/optionsets.cc
   commands/commandhelpformatter.cc
   commands/conditions.cc
   commands/basecommand.cc
@@ -113,6 +116,7 @@ SET( zypper_SRCS
   commands/utils/targetos.cc
   commands/utils/versioncmp.cc
   commands/utils/licenses.cc
+  commands/utils/download.cc
   commands/ps.cc
   commands/needs-rebooting.cc
   ${zypper_HEADERS}
