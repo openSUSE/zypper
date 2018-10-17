@@ -3,5 +3,6 @@
 
 #include "utils/targetos.h"
 #include "utils/versioncmp.h"
+#include "utils/licenses.h"
 
 #endif
