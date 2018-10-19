@@ -172,5 +172,22 @@ Value WarnOptionVal(Out &out_r, const std::string &warning_r, Out::Verbosity ver
   );
 }
 
+Value PathNameType( filesystem::Pathname &target, const boost::optional<std::string> &defValue, std::string hint) {
+  return Value (
+    [defValue]() ->  boost::optional<std::string>{
+      if (!defValue )
+        return boost::optional<std::string>();
+      return *defValue;
+    },
+    [ &target ]( const CommandOption &opt, const boost::optional<std::string> &in ){
+      if (!in)
+        ZYPP_THROW(MissingArgumentException(opt.name));
+      target = filesystem::Pathname(*in);
+      return;
+    },
+    std::move(hint)
+  );
+}
+
 }
 }

@@ -53,7 +53,6 @@
 #include "misc.h"
 #include "search.h"
 #include "info.h"
-#include "source-download.h"
 #include "configtest.h"
 #include "subcommand.h"
 
@@ -3549,41 +3548,6 @@ void Zypper::processCommandOptions()
       "                     would be done.\n"
     );
 #endif
-
-
-  case ZypperCommand::SOURCE_DOWNLOAD_e:
-  {
-    shared_ptr<SourceDownloadOptions> myOpts( new SourceDownloadOptions() );
-    _commandOptions = myOpts;
-    static struct option options[] =
-    {
-      {"help",			no_argument, 0, 'h'},
-      {"directory",		required_argument, 0, 'd'},
-//       {"manifest",		no_argument, &myOpts->_manifest, 1},
-//       {"no-manifest",		no_argument, &myOpts->_manifest, 0},
-      {"delete",		no_argument, &myOpts->_delete, 1},
-      {"no-delete",		no_argument, &myOpts->_delete, 0},
-      {"status",		no_argument, &myOpts->_dryrun, 1},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("source-download")
-    )
-    .description(	// translators: command description
-    _("Download source rpms for all installed packages to a local directory.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-d, --directory <DIR>",	// translators: -d, --directory <DIR>
-             _("Download all source rpms to this directory. Default: /var/cache/zypper/source-download") )
-    .option( "--delete",	// translators: --delete
-             _("Delete extraneous source rpms in the local directory.") )
-    .option( "--no-delete",	// translators: --no-delete
-             _("Do not delete extraneous source rpms.") )
-    .option( "--status",	// translators: --status
-             _("Don't download any source rpms, but show which source rpms are missing or extraneous.") )
-    ;
 #if 0
     _command_help = _(
       "source-download\n"
@@ -3602,8 +3566,6 @@ void Zypper::processCommandOptions()
 //       "--manifest           Write MANIFEST of packages and coresponding source rpms.\n"
 //       "--no-manifest        Do not write MANIFEST.\n"
 #endif
-    break;
-  }
 
 
   case ZypperCommand::SHELL_QUIT_e:
@@ -4928,29 +4890,6 @@ void Zypper::doCommand()
     printInfo( *this, std::move(kinds) );
 
     return;
-  }
-
-  // ----------------------------(utils/others)--------------------------------
-
-  case ZypperCommand::SOURCE_DOWNLOAD_e:
-  {
-    if ( !_arguments.empty() )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    shared_ptr<SourceDownloadOptions> myOpts( assertCommandOptions<SourceDownloadOptions>() );
-
-    if ( _copts.count( "directory" ) )
-      myOpts->_directory = _copts["directory"].back();	// last wins
-
-    myOpts->_dryrun = DryRun::isEnabled();
-
-    sourceDownload( *this );
-
-    break;
   }
 
   // -----------------------------( shell )------------------------------------

@@ -13,6 +13,7 @@
 
 #include <zypp/ResKind.h>
 #include <zypp/TriBool.h>
+#include <zypp/Pathname.h>
 #include <set>
 
 class Out;
@@ -80,6 +81,11 @@ Value BitFieldType ( T& target, E flag , StoreFlag store = StoreTrue ) {
         }
   );
 }
+
+/**
+ * Returns a \sa ZyppFlags::Value instance handling flags taking a string parameter representing a \sa zypp::filesystem::PathName
+ */
+Value PathNameType( filesystem::Pathname &target, const boost::optional<std::string> &defValue, std::string hint );
 
 /**
  * Creates a null type, calling the setter or default value getter for this type will do nothing.
