@@ -5,5 +5,6 @@
 #include "utils/versioncmp.h"
 #include "utils/licenses.h"
 #include "utils/download.h"
+#include "utils/source-download.h"
 
 #endif

@@ -5,6 +5,7 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
+#include "source-download.h"
 #include <iostream>
 
 #include <zypp/base/LogTools.h>
@@ -17,48 +18,46 @@
 
 #include "Zypper.h"
 #include "Table.h"
-#include "source-download.h"
+#include "utils/flags/flagtypes.h"
+#include "utils/messages.h"
 
-///////////////////////////////////////////////////////////////////
-// SourceDownloadOptions
-///////////////////////////////////////////////////////////////////
+using namespace zypp;
 
-const Pathname SourceDownloadOptions::_defaultDirectory( "/var/cache/zypper/source-download" );
-const std::string SourceDownloadOptions::_manifestName( "MANIFEST" );
+const filesystem::Pathname SourceDownloadCmd::Options::_defaultDirectory( "/var/cache/zypper/source-download" );
+const std::string SourceDownloadCmd::Options::_manifestName( "MANIFEST" );
 
-inline std::ostream & operator<<( std::ostream & str, const SourceDownloadOptions & obj )
-{
-  return str << str::Format("{%1%|%2%%3%}")
-	      % obj._directory
-// 	      % (obj._manifest ? 'M' : 'm' )
-	      % (obj._delete ? 'D' : 'd' )
-	      % (obj._dryrun ? "(dry-run)" : "" );
-}
-
-///////////////////////////////////////////////////////////////////
-namespace
+namespace Pimpl
 {
 
-  ///////////////////////////////////////////////////////////////////
-  /// \class SourceDownloadImpl
-  /// \brief Implementation of source-download commands.
-  ///////////////////////////////////////////////////////////////////
-  class SourceDownloadImpl : public CommandBase<SourceDownloadImpl,SourceDownloadOptions>
+  inline std::ostream & operator<<( std::ostream & str, const SourceDownloadCmd::Options & obj )
   {
-    typedef CommandBase<SourceDownloadImpl,SourceDownloadOptions> CommandBase;
+    return str << str::Format("{%1%|%2%%3%}")
+  	      % obj._directory
+  // 	      % (obj._manifest ? 'M' : 'm' )
+  	      % (obj._delete ? 'D' : 'd' )
+  	      % (obj._dryrun ? "(dry-run)" : "" );
+  }
+
+  /**
+   * \class SourceDownloadImpl
+   * \brief Implementation of source-download commands.
+   */
+  class SourceDownloadImpl
+  {
   public:
-    SourceDownloadImpl( Zypper & zypper_r )
-    : CommandBase( zypper_r )
-    , _dnlDir( Pathname::assertprefix( _zypper.globalOpts().root_dir, _options->_directory ) )
+    SourceDownloadImpl( SourceDownloadCmd &cmd_r, Zypper & zypper_r, SourceDownloadCmd::Options &options_r ):
+      _cmd( cmd_r ),
+      _zypper( zypper_r ),
+      _options( options_r ),
+      _dnlDir( Pathname::assertprefix( zypper_r.globalOpts().root_dir, options_r._directory ) )
     { MIL << "SourceDownload " << _options << endl; }
 
   public:
 
-    ///////////////////////////////////////////////////////////////////
-    /// \class SourceDownloadImpl::SourcePkg
-    /// \brief A Manifest entry.
-    ///////////////////////////////////////////////////////////////////
-    /** Manifest entry */
+    /**
+     * \class SourceDownloadImpl::SourcePkg
+     * \brief A Manifest entry.
+     */
     struct SourcePkg
     {
       enum Status
@@ -111,12 +110,11 @@ namespace
       static std::string makeLongname( const std::string & name_r, Edition edition_r, bool nosrc_r )
       { return str::Str() << name_r << '-' << edition_r << '.' << (nosrc_r ? "nosrc" : "src"); }
    };
-    ///////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    /// \class SourceDownloadImpl::Manifest
-    /// \brief A set of SourcePkg
-    ///////////////////////////////////////////////////////////////////
+    /**
+     * \class SourceDownloadImpl::Manifest
+     * \brief A set of SourcePkg
+     */
     struct Manifest : public std::map<std::string, SourceDownloadImpl::SourcePkg>
     {
       typedef std::map<SourcePkg::Status, DefaultIntegral<unsigned,0U> > StatusMap;
@@ -141,7 +139,6 @@ namespace
 	status_r.swap( status );
       }
     };
-    ///////////////////////////////////////////////////////////////////
 
   public:
     void sourceDownload();
@@ -154,11 +151,13 @@ namespace
     std::ostream & dumpManifestTable( std::ostream & str );
 
   private:
-    Pathname _dnlDir;	//< download directory (incl. root prefix)
+    SourceDownloadCmd &_cmd;
+    Zypper  &_zypper;
+    SourceDownloadCmd::Options &_options;
+    filesystem::Pathname _dnlDir;	//< download directory (incl. root prefix)
     Manifest _manifest;
     DefaultIntegral<unsigned,0U> _installedPkgCount;
   };
-  ///////////////////////////////////////////////////////////////////
 
   /** \relates SourceDownloadImpl::SourcePkg::Status String representation */
   inline std::string asString( SourceDownloadImpl::SourcePkg::Status obj )
@@ -186,10 +185,6 @@ namespace
     return str;
   }
 
-  ///////////////////////////////////////////////////////////////////
-  /// class SourceDownloadImpl
-  ///////////////////////////////////////////////////////////////////
-
   void SourceDownloadImpl::buildManifest()
   {
     PathInfo pi( _dnlDir );
@@ -210,7 +205,7 @@ namespace
       return;
     }
 
-    if ( ! ( pi.userMayR() && ( _options->_dryrun || pi.userMayW() ) ) )
+    if ( ! ( pi.userMayR() && ( _options._dryrun || pi.userMayW() ) ) )
     {
       ERR << "Download directory is not readable." << endl;
       throw( Out::Error( ZYPPER_EXIT_ERR_PRIVILEGES,
@@ -239,7 +234,7 @@ namespace
       {
 	report->incr();	// fast enough to count in advance.
 
-	if ( file == _options->_manifestName )
+	if ( file == _options._manifestName )
 	  continue;
 
 	using target::rpm::RpmHeader;
@@ -256,7 +251,11 @@ namespace
 
     // scan installed packages to manifest
     {
-      if ( _zypper.defaultLoadSystem( _options->_dryrun ? NoRepos : LoadSystemFlags() ) != ZYPPER_EXIT_OK )
+      SetupSystemFlags flags = DefaultSetup;
+      if ( _options._dryrun )
+        flags.unsetFlag( InitRepos );
+
+      if ( _cmd.defaultSystemSetup( _zypper, flags ) != ZYPPER_EXIT_OK )
       {
 	ERR << "Startup returns " << _zypper.exitCode() << endl;
 	throw( Out::Error(_("Failed to read download directory"),
@@ -349,7 +348,6 @@ namespace
     return str;
   }
 
-
   void SourceDownloadImpl::sourceDownload()
   {
     buildManifest();
@@ -359,7 +357,7 @@ namespace
     cout << endl;
     dumpManifestSumary( cout, status );
 
-    if ( _options->_dryrun )
+    if ( _options._dryrun )
     {
       if ( _zypper.out().verbosity() > Out::NORMAL )
       {
@@ -374,7 +372,7 @@ namespace
 
     // delete superfluous source packages
 
-    if ( status[SourcePkg::S_SUPERFLUOUS] && _options->_delete )
+    if ( status[SourcePkg::S_SUPERFLUOUS] && _options._delete )
     {
       Out::ProgressBar report( _zypper.out(), _("Deleting superfluous source packages") );
       report->range( status[SourcePkg::S_SUPERFLUOUS] );
@@ -474,11 +472,72 @@ namespace
       _zypper.out().info(_("No source packages to download.") );
     }
   }
-
 } // namespace
-///////////////////////////////////////////////////////////////////
 
-int sourceDownload( Zypper & zypper_r )
+SourceDownloadCmd::SourceDownloadCmd(const std::vector<std::string> &commandAliases_r) :
+  ZypperBaseCommand (
+    commandAliases_r,
+    "source-download",
+    // translators: command summary: source-download
+    _("Download source rpms for all installed packages to a local directory."),
+    // translators: command description
+    _("Download source rpms for all installed packages to a local directory."),
+    DisableAll
+  )
+{ }
+
+ZyppFlags::CommandGroup SourceDownloadCmd::cmdOptions() const
 {
-  return SourceDownloadImpl( zypper_r ).execute( &SourceDownloadImpl::sourceDownload );
+  auto that = const_cast<SourceDownloadCmd *>(this);
+  return {{
+      {
+        "directory", 'd', ZyppFlags::RequiredArgument, ZyppFlags::PathNameType( that->_opt._directory, _opt._defaultDirectory.asString(), "DIR" ),
+            // translators: -d, --directory <DIR>
+            _("Download all source rpms to this directory. Default: /var/cache/zypper/source-download")
+      }, {
+        "delete", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_opt._delete, ZyppFlags::StoreTrue, _opt._delete ),
+            // translators: --delete
+            _("Delete extraneous source rpms in the local directory.")
+      }, {
+        "no-delete", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_opt._delete, ZyppFlags::StoreFalse, _opt._delete ),
+            // translators: --delete
+            _("Delete extraneous source rpms in the local directory.")
+      }, {
+        "status", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_opt._dryrun, ZyppFlags::StoreTrue, _opt._dryrun ),
+            // translators: --status
+            _("Don't download any source rpms, but show which source rpms are missing or extraneous.")
+      },
+#if 0
+      {
+        "manifest", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_manifest, ZyppFlags::StoreTrue, _manifest ),
+            // translators: --status
+            _("Write a manifest file.")
+      }, {
+        "no-manifest", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_manifest, ZyppFlags::StoreFalse, _manifest ),
+            // translators: --status
+            _("Disable writing a manifest file.")
+      }
+#endif
+  }};
+}
+
+void SourceDownloadCmd::doReset()
+{
+  _opt._directory = _opt._defaultDirectory;
+//  _opt._manifest = true;
+  _opt._delete = true;
+  _opt._dryrun = false;
+}
+
+int SourceDownloadCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+{
+  if ( !positionalArgs_r.empty() )
+  {
+    report_too_many_arguments( help() );
+    return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
+  }
+
+  Pimpl::SourceDownloadImpl( *this, zypp_r, _opt ).sourceDownload();
+
+  return ZYPPER_EXIT_OK;
 }

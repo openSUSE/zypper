@@ -9,8 +9,8 @@
 #define ZYPPER_SOURCE_DOWNLOAD_H
 
 #include "zypp/Pathname.h"
-
-class Zypper;
+#include "commands/basecommand.h"
+//#include "utils/flags/zyppflags.h"
 
 /*
       "source-download\n"
@@ -31,28 +31,40 @@ class Zypper;
       TBD: maybe write manifest file to download directory.
 */
 
-/** source-download specific options */
-struct SourceDownloadOptions : public MixinOptions<ZypperCommand::SOURCE_DOWNLOAD>
-{
-  static const Pathname _defaultDirectory;
-  static const std::string _manifestName;
+namespace Pimpl {
+class SourceDownloadImpl;
+}
 
-  SourceDownloadOptions()
-    : _directory( _defaultDirectory )
-//     , _manifest( true )
-    , _delete( true )
-    , _dryrun( false )
-  {}
 
-  Pathname _directory;	//< Download all source rpms to this directory.
-//   int _manifest;	//< Whether to write a MANIFEST file.
-  int _delete;		//< Whether to delete extranous source rpms.
-  int _dryrun;		//< Dryrun mode.
-};
-
-/** Download source rpms for all installed packages to a local directory.
- * \returns zypper.exitCode
+/**
+ * Download source rpms for all installed packages to a local directory.
  */
-int sourceDownload( Zypper & zypper_r );
+class SourceDownloadCmd : public ZypperBaseCommand
+{
+public:
+  SourceDownloadCmd ( const std::vector<std::string> &commandAliases_r );
+
+  struct Options {
+    static const zypp::filesystem::Pathname _defaultDirectory;
+    static const std::string _manifestName;
+
+    zypp::filesystem::Pathname _directory;  //< Download all source rpms to this directory.
+  //   bool _manifest;                      //< Whether to write a MANIFEST file.
+    bool _delete = true;                    //< Whether to delete extranous source rpms.
+    bool _dryrun = false;                   //< Dryrun mode.
+  };
+
+  friend class Pimpl::SourceDownloadImpl;
+
+private:
+  Options _opt;
+
+  // ZypperBaseCommand interface
+protected:
+  zypp::ZyppFlags::CommandGroup cmdOptions() const override;
+  void doReset() override;
+
+  int execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r) override;
+};
 
 #endif // ZYPPER_SOURCE_DOWNLOAD_H

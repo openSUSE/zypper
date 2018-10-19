@@ -85,7 +85,8 @@ namespace
       { ZypperCommand::TARGET_OS_e, CommandFactory::make<TargetOSCmd>( { "targetos", "tos" } ) },
       { ZypperCommand::VERSION_CMP_e, CommandFactory::make<VersionCompareCmd>( { "versioncmp", "vcmp" } ) },
       { ZypperCommand::LICENSES_e, CommandFactory::make<LicensesCmd>( { "licenses" } ) },
-      { ZypperCommand::DOWNLOAD_e, CommandFactory::make<DownloadCmd>( { "download" } ) }
+      { ZypperCommand::DOWNLOAD_e, CommandFactory::make<DownloadCmd>( { "download" } ) },
+      { ZypperCommand::SOURCE_DOWNLOAD_e, CommandFactory::make<SourceDownloadCmd>( { "source-download" } ) }
     };
     return table;
   }
@@ -147,7 +148,7 @@ namespace
       //_t( LICENSES_e )		| "licenses";
       // _t( PS_e )		| "ps";
       //_t( DOWNLOAD_e )		| "download";
-      _t( SOURCE_DOWNLOAD_e )	| "source-download";
+      //_t( SOURCE_DOWNLOAD_e )	| "source-download";
 
       _t( HELP_e )		| "help"		| "?";
       _t( SHELL_e )		| "shell"		| "sh";

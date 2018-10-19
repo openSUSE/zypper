@@ -22,7 +22,6 @@ SET (zypper_HEADERS
   info.h
   Table.h
   update.h
-  source-download.h
   subcommand.h
   configtest.h
   solve-commit.h
@@ -66,6 +65,7 @@ SET (zypper_HEADERS
   commands/utils/versioncmp.h
   commands/utils/licenses.h
   commands/utils/download.h
+  commands/utils/source-download.h
   commands/ps.h
   commands/needs-rebooting.h
 )
@@ -80,7 +80,6 @@ SET( zypper_SRCS
   info.cc
   Table.cc
   update.cc
-  source-download.cc
   subcommand.cc
   configtest.cc
   solve-commit.cc
@@ -117,6 +116,7 @@ SET( zypper_SRCS
   commands/utils/versioncmp.cc
   commands/utils/licenses.cc
   commands/utils/download.cc
+  commands/utils/source-download.cc
   commands/ps.cc
   commands/needs-rebooting.cc
   ${zypper_HEADERS}
