@@ -23,10 +23,10 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-08-19 11:02+0000\n"
+"PO-Revision-Date: 2018-10-20 13:02+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
-">\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -310,11 +310,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"RPM-tietokanta vaikuttaa sisältävän vanhan V3-version GPG-avaimia, joita "
+"vanhentuneina on pidettävä turvattomina:"
 
 #: src/callbacks/keyring.h:446
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Katso avaimen tiedot komennolla ”%1%”."
 
 #: src/callbacks/keyring.h:450
 #, boost-format
@@ -322,6 +324,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Jollet usko avaimen yhä olevan käytössä, voit poistaa sen RPM-tietokannasta "
+"komennolla ”%1%”."
 
 #: src/callbacks/keyring.h:472
 #, c-format, boost-format
@@ -601,17 +605,17 @@ msgstr "Jatketaanko?"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:21
 msgid "ALIAS"
-msgstr ""
+msgstr "ALIAS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS|#|URI"
-msgstr ""
+msgstr "ALIAS|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "CATEGORY"
-msgstr ""
+msgstr "LUOKKA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
@@ -621,17 +625,17 @@ msgstr "hakemisto"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "FILE"
-msgstr ""
+msgstr "TIEDOSTO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE.repo"
-msgstr ""
+msgstr "TIEDOSTO.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FORMAT"
-msgstr ""
+msgstr "MUOTO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
@@ -641,22 +645,22 @@ msgstr "luku"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "PATH"
-msgstr ""
+msgstr "SIJAINTI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "SEVERITY"
-msgstr ""
+msgstr "VAKAVUUS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "STRING"
-msgstr ""
+msgstr "MERKKIJONO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "TAG"
-msgstr ""
+msgstr "TUNNISTE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
@@ -673,7 +677,7 @@ msgstr "URI"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:49
 msgid "YYYY-MM-DD"
-msgstr ""
+msgstr "VVVV-KK-PP"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -1917,6 +1921,8 @@ msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"Kohdetiedostojärjestelmä on liitetty vain luettavaksi. Varmista, että "
+"kohdetiedostojärjestelmään voi kirjoittaa."
 
 #: src/Zypper.cc:673 src/Zypper.cc:1862
 msgid "Unexpected exception."
@@ -3614,12 +3620,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2660
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
-msgstr ""
+msgstr "addrepo (ar) [VALITSIMET] <URI> <ALIAS>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2663
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
-msgstr ""
+msgstr "addrepo (ar) [VALITSIMET] <TIEDOSTO.repo>"
 
 #. translators: command description
 #: src/Zypper.cc:2666
@@ -3627,22 +3633,25 @@ msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
+"Lisää järjestelmään asennuslähde. Asennuslähteen voi määrittää verkko-"
+"osoitteella (URI) tai annettuna .repo-tiedosto (myös etä-)."
 
 #: src/Zypper.cc:2669
 msgid "Just another means to specify a .repo file to read."
-msgstr ""
+msgstr "Vain toinen tapa määrittää luettava .repo-tiedosto."
 
 #: src/Zypper.cc:2670
 msgid "Probe URI."
-msgstr ""
+msgstr "Kokeile URIa."
 
 #: src/Zypper.cc:2671
 msgid "Don't probe URI, probe later during refresh."
-msgstr ""
+msgstr "Älä kokeile URIa ennen kuin virkistettäessä."
 
 #: src/Zypper.cc:2675
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
+"Asennuslähteen tyyppi tunnistetaan aina automaattisesti. Valitsin ohitetaan."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2703
@@ -3784,7 +3793,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: src/Zypper.cc:2841
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3803,21 +3812,21 @@ msgid ""
 "-k, --keep-packages       Enable RPM files caching.\n"
 "-K, --no-keep-packages    Disable RPM files caching.\n"
 msgstr ""
-"modifyrepo (mr) <valinnat> <alias|#|URI> ...\n"
-"modifyrepo (mr) <valinnat> <%s>\n"
+"modifyrepo (mr) <VALITSIMET> <ALIAS|#|URI> ...\n"
+"modifyrepo (mr) <VALITSIMET> <%s>\n"
 "\n"
-"Muokkaa URI-osoitteella, aliaksella, järjestysnumerolla tai \"%s\" "
-"valinnoilla määriteltyjen asennuslähteiden tietoja.\n"
+"Muokkaa aliaksen, järjestysluvun, URIn tai ”%s”-valitsimen määrittämien\n"
+"asennuslähteiden tietoja.\n"
 "\n"
-"  Valinnat:\n"
-"-d, --disable             Poistaa käytöstä (ei poista asennuslähdettä).\n"
-"-e, --enable              Ottaa käytöstä poistetun asennuslähteen käyttöön.\n"
-"-r, --refresh             Asettaa automaattisen päivityksen päälle.\n"
-"-R, --no-refresh          Poistaa automaattisen päivityksen käytöstä.\n"
-"-n, --name                Asettaa asennuslähteelle nimen.\n"
-"-p, --priority <luku>     Määrittelee asennuslähteen tärkeysjärjestyksen.\n"
-"-k, --keep-packages       Ottaa RPM-tiedostojen välimuistin käyttöön.\n"
-"-K, --no-keep-packages    Poistaa RPM-tiedostojen välimuistin käytöstä.\n"
+"  Valitsimet:\n"
+"-d, --disable             Poista käytöstä (poistamatta asennuslähdettä).\n"
+"-e, --enable              Ota asennuslähde käyttöön.\n"
+"-r, --refresh             Ota käyttöön automaattipäivitys.\n"
+"-R, --no-refresh          Poista automaattipäivitys käytöstä.\n"
+"-n, --name                Aseta asennuslähteen nimi.\n"
+"-p, --priority <luku>     Määritä asennuslähteen tärkeysjärjestys.\n"
+"-k, --keep-packages       Ota käyttöön RPM-tiedostojen välimuisti.\n"
+"-K, --no-keep-packages    Poista RPM-tiedostojen välimuisti käytöstä.\n"
 
 #: src/Zypper.cc:2858
 msgid ""
@@ -3837,13 +3846,13 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2867
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
-msgstr ""
+msgstr "modifyrepo (mr) <VALITSIMET> <ALIAS|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2870
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
-msgstr ""
+msgstr "modifyrepo (mr) <VALITSIMET> <%1%>"
 
 #. translators: command description
 #: src/Zypper.cc:2873
@@ -3852,11 +3861,13 @@ msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
 "the '%1%' aggregate options."
 msgstr ""
+"Muokkaa aliaksen, järjestysluvun, URIn tai ”%1%”-valitsimen määrittämien "
+"ohjelmalähteiden tietoja."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2903
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [ALIAS|#|URI]…"
 
 #. translators: command description
 #: src/Zypper.cc:2906
@@ -3937,7 +3948,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2957
 msgid "clean (cc) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "clean (cc) [ALIAS|#|URI]…"
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2964
@@ -4125,23 +4136,25 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3113
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [VALITSIMET] [PAKETTI]…"
 
 #. translators: command description
 #: src/Zypper.cc:3116
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Päivitä kaikki tai määritetyt asennetut paketit uudempiin versioihin, jos "
+"mahdollista."
 
 #. translators: --skip-interactive
 #: src/Zypper.cc:3124
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Ohita vuorovaikutteiset päivitykset."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:3126
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Älä ohita vuorovaikutteisia päivityksiä."
 
 #. translators: -l, --auto-agree-with-licenses
 #: src/Zypper.cc:3128 src/Zypper.cc:3233 src/Zypper.cc:3394
@@ -4155,10 +4168,10 @@ msgstr ""
 #. translators: -D, --dry-run
 #: src/Zypper.cc:3134 src/Zypper.cc:3249
 msgid "Test the update, do not actually update."
-msgstr ""
+msgstr "Kokeile päivitystä varsinaisesti päivittämättä."
 
 #: src/Zypper.cc:3192
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "patch [OPTIONS]\n"
 "\n"
@@ -4192,65 +4205,63 @@ msgid ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
-"patch [valinnat]\n"
+"patch [VALITSIMET]\n"
 "\n"
-"Asentaa kaikki tarvittavat paikkaukset.\n"
+"Asenna kaikki tarvittavat paikkaukset.\n"
 "\n"
-"  Valinnat:\n"
+"  Valitsimet:\n"
 "\n"
 "    --skip-interactive     Ohita vuorovaikutteiset päivitykset.\n"
 "    --with-interactive     Älä ohita vuorovaikutteisia päivityksiä.\n"
 "-l, --auto-agree-with-licenses\n"
-"                             Vastaa automaattisesti \"kyllä\" kolmannen \n"
+"                           Vastaa automaattisesti ”kyllä” kolmannen \n"
 "                           osapuolen käyttöehtosopimuksiin. Katso "
 "lisätietoja \n"
-"                           zypper-komennon manuaalista (man zypper).\n"
-"-b, --bugzilla #           Asentaa määritetyn bugzilla-merkinnän "
-"päivitykset.\n"
-"    --cve #                Asentaa määritetyn CVE-merkinnän päivitykset.\n"
-"-g  --category <category>  Asentaa kaikki tämän luokan paikkaukset.\n"
-"    --date <YYYY-MM-DD>    Asentaa paikkaukset, jotka on julkaistu ennen "
-"annettua päivänmäärää\n"
-"    --replacefiles          Asenna paketit vaikka ne korvaisivat tiedostoja "
-"toisten,\n"
-"                            jo asennettuja, paketeista. Oletus on käsitellä "
-"tiedostoristiriitoja\n"
-"                            virheinä. --download-as-needed poistaa "
-"tiedostoristiriitojen tarkistuksen.\n"
-"-r, --repo <alias|#|URI>   Päivittää ainoastaan tietyn asennuslähteen "
-"paketit.\n"
-"-D, --dry-run              Testaa päivitystä (asennusta ei suoriteta).\n"
-"    --details               Näyttää yksityiskohtaisen yhteenvedon "
-"asennuksesta.\n"
-"    --download             Asettaa lataa-asenna tilan. Käytettävissä olevat "
-"tilat:\n"
-"                           %s\n"
-"-d, --download-only        Lataa ainoastaan paketit (ei asenneta).\n"
+"                           zypper-komennon käyttöohjeesta (man zypper).\n"
+"-b, --bugzilla #           Asenna annetun bugzilla-ongelman korjaavat \n"
+"                           päivitykset.\n"
+"    --cve #                Asenna määritetyn CVE-ongelman korjaavat \n"
+"                           päivitykset.\n"
+"-g  --category <category>  Asenna kaikki tämän luokan paikkaukset.\n"
+"    --date <YYYY-MM-DD>    Asenna ennen annettua päivämäärää julkaistut \n"
+"                           paikkaukset.\n"
+"    --replacefiles         Asenna paketit vaikka ne korvaisivat tiedostoja \n"
+"                           jo asennetuista paketeista. Oletuksena "
+"ristiriitoja\n"
+"                           pidetään virheinä. --download-as-needed poistaa \n"
+"                           tiedostoristiriitojen tarkistuksen.\n"
+"-r, --repo <alias|#|URI>   Päivitä vain tietyn asennuslähteen paketit.\n"
+"-D, --dry-run              Kokeile päivitystä (päivittämättä).\n"
+"    --details              Näytä asennuksesta yksityiskohtainen yhteenveto.\n"
+"    --download             Aseta lataa-asenna-tilan. Käytettävissä olevat \n"
+"                           tilat:\n"
+"                           %s 1\n"
+"-d, --download-only        Lataa vain paketit (asentamatta).\n"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3222
 msgid "patch [OPTIONS]"
-msgstr ""
+msgstr "patch [VALITSIMET]"
 
 #. translators: command description
 #: src/Zypper.cc:3225
 msgid "Install all available needed patches."
-msgstr ""
+msgstr "Asenna kaikki tarvittavat paikkaukset."
 
 #. translators: --skip-interactive
 #: src/Zypper.cc:3229
 msgid "Skip interactive patches."
-msgstr ""
+msgstr "Ohita vuorovaikutteiset paikkaukset."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:3231
 msgid "Do not skip interactive patches."
-msgstr ""
+msgstr "Älä ohita vuorovaikutteisia paikkauksia."
 
 #. translators: -b, --bugzilla
 #: src/Zypper.cc:3235
 msgid "#            Install patch fixing the specified bugzilla issue."
-msgstr ""
+msgstr "#            Asenna annetun bugzilla-ongelman korjaava paikkaus."
 
 #. translators: --cve
 #: src/Zypper.cc:3237
