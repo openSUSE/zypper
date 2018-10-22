@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-03 17:01+0000\n"
+"PO-Revision-Date: 2018-10-22 18:01+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -2150,12 +2150,12 @@ msgstr "Suprimeix el repositori especificat."
 #. translators: command summary: renamerepo, nr
 #: src/Zypper.cc:798
 msgid "Rename specified repository."
-msgstr "Reanomena el repositori especificat."
+msgstr "Canvia el nom del repositori especificat."
 
 #. translators: command summary: modifyrepo, mr
 #: src/Zypper.cc:800
 msgid "Modify specified repository."
-msgstr "Modifica elrepositori especificat."
+msgstr "Modifica el repositori especificat."
 
 #. translators: command summary: refresh, ref
 #: src/Zypper.cc:802
@@ -2520,7 +2520,7 @@ msgstr ""
 "\trepos, lr\t\tLlista tots els repositoris definits.\n"
 "\taddrepo, ar\t\tAfegeix un repositori.\n"
 "\tremoverepo, rr\t\tSuprimeix el repositori especificat.\n"
-"\trenamerepo, nr\t\tReanomena el repositori especificat.\n"
+"\trenamerepo, nr\t\tCanvia el nom del repositori especificat.\n"
 "\tmodifyrepo, mr\t\tModifica elrepositori especificat.\n"
 "\trefresh, ref\t\tRefresca tots els repositoris.\n"
 "\tclean\t\t\tNeteja la memòria cau local.\n"
@@ -7321,7 +7321,7 @@ msgstr ""
 #: src/repos.cc:2013
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "El repositori %s s'ha reanomenat \"%s\"."
+msgstr "El repositori %s ha canviat al nom de \"%s\"."
 
 #: src/repos.cc:2022 src/repos.cc:2245
 msgid "Error while modifying the repository:"
