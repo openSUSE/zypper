@@ -6,21 +6,18 @@
 \*---------------------------------------------------------------------------*/
 #include "global-settings.h"
 
-DryRun::DryRun()
-{}
-
-const DryRun &DryRun::instance()
+void GlobalSettings::reset()
 {
-  return instanceNoConst();
+  DryRunSettings::reset();
+  InitRepoSettings::reset();
 }
 
-DryRun &DryRun::instanceNoConst()
-{
-  static DryRun me;
-  return me;
-}
-
-void DryRun::reset()
+void DryRunSettingsData::reset()
 {
   _enabled = false;
+}
+
+void InitRepoSettingsData::reset()
+{
+  _repoFilter.clear();
 }

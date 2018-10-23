@@ -260,7 +260,7 @@ int DownloadCmd::execute( Zypper &zypp_r , const std::vector<std::string> &posit
       total = collect.size();
     }
 
-    if ( DryRun::isEnabled() )
+    if (DryRunSettings::instance().isEnabled() )
     {
       zypp_r.out().info( str::Str() << _("Not downloading anything...") << " (--dry-run)" );
     }
@@ -278,7 +278,7 @@ int DownloadCmd::execute( Zypper &zypp_r , const std::vector<std::string> &posit
 
 	if ( ! isCached( pi ) )
 	{
-	  if ( !DryRun::isEnabled() )
+	  if ( !DryRunSettings::instance().isEnabled() )
 	  {
 	    ManagedFile localfile;
 	    try

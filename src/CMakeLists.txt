@@ -68,6 +68,8 @@ SET (zypper_HEADERS
   commands/utils/source-download.h
   commands/ps.h
   commands/needs-rebooting.h
+  commands/query.h
+  commands/query/info.h
 )
 
 SET( zypper_SRCS
@@ -119,6 +121,7 @@ SET( zypper_SRCS
   commands/utils/source-download.cc
   commands/ps.cc
   commands/needs-rebooting.cc
+  commands/query/info.cc
   ${zypper_HEADERS}
 )
 

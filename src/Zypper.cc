@@ -3243,25 +3243,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::INFO_e:
-  {
-    static struct option info_options[] = {
-      {"match-substrings", no_argument, 0, 's'},
-      {"type", required_argument, 0, 't'},
-      {"repo", required_argument, 0, 'r'},
-      // rug compatibility option, we have --repo
-      {"catalog", required_argument, 0, 'c'},
-      {"provides", no_argument, 0, 0},
-      {"requires", no_argument, 0, 0},
-      {"conflicts", no_argument, 0, 0},
-      {"obsoletes", no_argument, 0, 0},
-      {"recommends", no_argument, 0, 0},
-      {"supplements", no_argument, 0, 0},
-      {"suggests", no_argument, 0, 0},
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = info_options;
 #if 0
     _command_help = ( CommandHelpFormater() << str::form(_(
         "info (if) [OPTIONS] <name> ...\n"
@@ -3284,56 +3265,6 @@ void Zypper::processCommandOptions()
         "    --suggests            Show suggests.\n"
       ), "package, patch, pattern, product", "package"))
 #endif
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("info (if) [OPTIONS] <NAME> ...")
-    )
-    .description(	// translators: command description
-    _("Show detailed information for specified packages. By default the packages which match exactly the given names are shown. To get also packages partially matching use option '--match-substrings' or use wildcards (*?) in name.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-s, --match-substrings",	// translators: -s, --match-substrings
-             _("Print information for packages partially matching name.") )
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Work only with the specified repository.") )
-    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
-             str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
-    .option( "--provides",	// translators: --provides
-             _("Show provides.") )
-    .option( "--requires",	// translators: --requires
-             _("Show requires and prerequires.") )
-    .option( "--conflicts",	// translators: --conflicts
-             _("Show conflicts.") )
-    .option( "--obsoletes",	// translators: --obsoletes
-             _("Show obsoletes.") )
-    .option( "--recommends",	// translators: --recommends
-             _("Show recommends.") )
-    .option( "--suggests",	// translators: --suggests
-             _("Show suggests.") )
-    .option( "--supplements",	// translators: --supplements
-	     _("Show supplements.") )
-    ;
-    break;
-  }
-
-  // rug compatibility command, we have zypper info [-t <res_type>]
-  case ZypperCommand::RUG_PATCH_INFO_e:
-  {
-    static struct option patch_info_options[] = {
-      {"catalog", required_argument, 0, 'c'},
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = patch_info_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("patch-info <PATCHNAME> ...")
-    )
-    .description(	// translators: command description
-    _("Show detailed information for patches.")
-    )
-    .descriptionAliasCmd( "zypper info -t patch" )
-    ;
 #if 0
     _command_help = str::form(_(
       "patch-info <patchname> ...\n"
@@ -3343,27 +3274,6 @@ void Zypper::processCommandOptions()
       "This is an alias for '%s'.\n"
     ), "zypper info -t patch");
 #endif
-    break;
-  }
-
-  // rug compatibility command, we have zypper info [-t <res_type>]
-  case ZypperCommand::RUG_PATTERN_INFO_e:
-  {
-    static struct option options[] = {
-      {"catalog", required_argument, 0, 'c'},
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("pattern-info <PATTERN_NAME> ...")
-    )
-    .description(	// translators: command description
-    _("Show detailed information for patterns.")
-    )
-    .descriptionAliasCmd( "zypper info -t pattern" )
-    ;
 #if 0
     _command_help = str::form(_(
       "pattern-info <pattern_name> ...\n"
@@ -3373,27 +3283,6 @@ void Zypper::processCommandOptions()
       "This is an alias for '%s'.\n"
     ), "zypper info -t pattern");
 #endif
-    break;
-  }
-
-  // rug compatibility command, we have zypper info [-t <res_type>]
-  case ZypperCommand::RUG_PRODUCT_INFO_e:
-  {
-    static struct option options[] = {
-      {"catalog", required_argument, 0, 'c'},
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("product-info <PRODUCT_NAME> ...")
-    )
-    .description(	// translators: command description
-    _("Show detailed information for products.")
-    )
-    .descriptionAliasCmd( "zypper info -t product" )
-    ;
 #if 0
     _command_help = str::form(_(
       "product-info <product_name> ...\n"
@@ -3403,8 +3292,6 @@ void Zypper::processCommandOptions()
       "This is an alias for '%s'.\n"
     ), "zypper info -t product");
 #endif
-    break;
-  }
 
   case ZypperCommand::WHAT_PROVIDES_e:
   {
@@ -3741,8 +3628,24 @@ void Zypper::processCommandOptions()
     return;
   }
 
+  //---------------------------------------------------------------------------
+  //@TODO REMOVE THIS CODE WITH COPTS
+
+  GlobalSettings::reset();
+
   // set the global dry-run setting
-  DryRun::instanceNoConst()._enabled = _copts.count("dry-run");
+  DryRunSettings::instanceNoConst()._enabled = _copts.count("dry-run");
+
+  // set the global repo setting
+  parsed_opts::const_iterator it;
+  auto &repoFilter = InitRepoSettings::instanceNoConst()._repoFilter;
+  // --repo
+  if ( ( it = copts.find("repo")) != copts.end() )
+     repoFilter.insert( repoFilter.end(), it->second.begin(), it->second.end() );
+  // --catalog - rug compatibility
+  if ( ( it = copts.find("catalog")) != copts.end() )
+     repoFilter.insert( repoFilter.end(), it->second.begin(), it->second.end() );
+  //---------------------------------------------------------------------------
 
   // Leagcy cli translations (mostly from rug to zypper)
   legacyCLITranslate( _copts, "agree-to-third-party-licenses",	"auto-agree-with-licenses" );
@@ -4826,72 +4729,6 @@ void Zypper::doCommand()
 
     break;
   }
-
-  // -----------------------------( info )------------------------------------
-
-  case ZypperCommand::INFO_e:
-  case ZypperCommand::RUG_PATCH_INFO_e:
-  case ZypperCommand::RUG_PATTERN_INFO_e:
-  case ZypperCommand::RUG_PRODUCT_INFO_e:
-  {
-    if ( _arguments.size() < 1 )
-    {
-      out().error(_("Required argument missing.") );
-      ERR << "Required argument missing." << endl;
-      std::ostringstream s;
-      s << _("Usage") << ':' << endl;
-      s << _command_help;
-      out().info( s.str() );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    ResKindSet kinds;
-    switch ( command().toEnum() )
-    {
-    case ZypperCommand::RUG_PATCH_INFO_e:
-      kinds.insert( ResKind::patch );
-      break;
-    case ZypperCommand::RUG_PATTERN_INFO_e:
-      kinds.insert( ResKind::pattern );
-      break;
-    case ZypperCommand::RUG_PRODUCT_INFO_e:
-      kinds.insert( ResKind::product );
-      break;
-    default:
-    case ZypperCommand::INFO_e:
-      if ( copts.count("type") )
-      {
-	for ( auto kindstr : copts["type"] )
-	{
-	  ResKind kind( string_to_kind( kindstr ) );
-	  if ( kind )
-	    kinds.insert( kind );
-	  else
-	  {
-	    out().error( str::Format(_("Unknown package type '%s'.")) % kindstr );
-	    setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-	    return;
-	  }
-	}
-      }
-      break;
-    }
-
-    initRepoManager();
-    init_target( *this );
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-    load_resolvables( *this );
-    // needed to compute status of PPP
-    resolve( *this );
-
-    printInfo( *this, std::move(kinds) );
-
-    return;
-  }
-
   // -----------------------------( shell )------------------------------------
 
   case ZypperCommand::SHELL_QUIT_e:
