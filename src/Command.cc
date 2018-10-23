@@ -21,6 +21,7 @@
 #include "commands/ps.h"
 #include "commands/needs-rebooting.h"
 #include "commands/utils.h"
+#include "commands/query.h"
 
 using namespace zypp;
 
@@ -33,6 +34,11 @@ using namespace zypp;
 ///////////////////////////////////////////////////////////////////
 namespace
 {
+  template<typename T, typename AliasType, AliasType t>
+  ZypperBaseCommandPtr commandAliasFactory ( const std::vector<std::string> &aliases_r )
+  {
+    return std::make_shared<T> ( aliases_r, t );
+  }
 
   template<typename T>
   ZypperBaseCommandPtr commandFactory ( const std::vector<std::string> &aliases_r )
@@ -49,10 +55,16 @@ namespace
       return constructor( aliases );
     }
 
-    template <typename T>
+    template <typename T >
     constexpr static CommandFactory make ( const std::vector<std::string> &aliases_r )
     {
-      return CommandFactory { aliases_r, commandFactory<T>};
+      return CommandFactory { aliases_r, commandFactory<T> };
+    }
+
+    template < typename T, typename AliasType, AliasType t >
+    constexpr static CommandFactory makeAlias ( const std::vector<std::string> &aliases_r )
+    {
+      return CommandFactory { aliases_r, commandAliasFactory<T, AliasType, t> };
     }
   };
 
@@ -86,7 +98,12 @@ namespace
       { ZypperCommand::VERSION_CMP_e, CommandFactory::make<VersionCompareCmd>( { "versioncmp", "vcmp" } ) },
       { ZypperCommand::LICENSES_e, CommandFactory::make<LicensesCmd>( { "licenses" } ) },
       { ZypperCommand::DOWNLOAD_e, CommandFactory::make<DownloadCmd>( { "download" } ) },
-      { ZypperCommand::SOURCE_DOWNLOAD_e, CommandFactory::make<SourceDownloadCmd>( { "source-download" } ) }
+      { ZypperCommand::SOURCE_DOWNLOAD_e, CommandFactory::make<SourceDownloadCmd>( { "source-download" } ) },
+
+      { ZypperCommand::INFO_e,             CommandFactory::make<InfoCmd>( { "info", "if" } ) },
+      { ZypperCommand::RUG_PATCH_INFO_e,   CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugPatchInfo>( { "patch-info" } ) },
+      { ZypperCommand::RUG_PATTERN_INFO_e, CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugPatternInfo>( { "pattern-info" } ) },
+      { ZypperCommand::RUG_PRODUCT_INFO_e, CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugProductInfo>( { "product-info" } ) }
     };
     return table;
   }
@@ -128,7 +145,7 @@ namespace
       _t( DIST_UPGRADE_e )	| "dist-upgrade"	| "dup";
 
       _t( SEARCH_e )		| "search"		| "se";
-      _t( INFO_e )		| "info"		| "if";
+      //_t( INFO_e )		| "info"		| "if";
       _t( PACKAGES_e )		| "packages"		| "pa" | "pkg";
       _t( PATCHES_e )		| "patches"		| "pch";
       _t( PATTERNS_e )		| "patterns"		| "pt";
@@ -157,9 +174,9 @@ namespace
 
       _t( CONFIGTEST_e)		|  "configtest";
 
-      _t( RUG_PATCH_INFO_e )	| "patch-info";
-      _t( RUG_PATTERN_INFO_e )	| "pattern-info";
-      _t( RUG_PRODUCT_INFO_e )	| "product-info";
+      //_t( RUG_PATCH_INFO_e )	| "patch-info";
+      //_t( RUG_PATTERN_INFO_e )	| "pattern-info";
+      //_t( RUG_PRODUCT_INFO_e )	| "product-info";
       _t( RUG_PATCH_SEARCH_e )	| "patch-search" | "pse";
       _t( RUG_PING_e )		| "ping";
 #undef _t

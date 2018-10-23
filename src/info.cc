@@ -22,33 +22,22 @@
 #include "utils/text.h"
 #include "search.h"
 #include "update.h"
+#include "global-settings.h"
 
 #include "info.h"
 
 extern ZYpp::Ptr God;
 
-void printPkgInfo( Zypper & zypper, const ui::Selectable & s );
-void printPatchInfo( Zypper & zypper, const ui::Selectable & s );
-void printPatternInfo( Zypper & zypper, const ui::Selectable & s );
-void printProductInfo( Zypper & zypper, const ui::Selectable & s );
-void printSrcPackageInfo( Zypper & zypper, const ui::Selectable & s );
-void printDefaultInfo( Zypper & zypper, const ui::Selectable & s );
+void printPkgInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r );
+void printPatchInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r );
+void printPatternInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r );
+void printProductInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r );
+void printSrcPackageInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r );
+void printDefaultInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r );
 
 ///////////////////////////////////////////////////////////////////
 namespace
 {
-  inline const std::vector<Dep> & cliSupportedDepTypes()
-  {
-    static const std::vector<Dep> _deps = {
-      Dep::PROVIDES,
-      Dep::REQUIRES,
-      Dep::CONFLICTS,
-      Dep::OBSOLETES,
-      Dep::RECOMMENDS,
-      Dep::SUGGESTS
-    };
-    return _deps;
-  }
 
   std::string joinWords( std::string lhs, const std::string & rhs )
   {
@@ -75,30 +64,29 @@ namespace
     tab_r.add( _("Vendor"),		pi_r.vendor() );
   }
 
-  inline void printSummaryDescDeps( const PoolItem & pi_r, PropertyTable & tab_r )
+  inline void printSummaryDescDeps( const PoolItem & pi_r, PropertyTable & tab_r, const PrintInfoOptions &options_r )
   {
     // translators: property name; short; used like "Name: value"
     tab_r.add( _("Summary"),		pi_r.summary() );
     // translators: property name; short; used like "Name: value"
     tab_r.addDetail( _("Description"),	::printRichText( pi_r.description() ) );
 
-    // dependencies according to cli options and kind
-    const auto & cOpts( Zypper::instance().cOpts() );
+    // dependencies according to flags and kind
     bool isPatch = pi_r.isKind<Patch>();
 
-    for ( const auto & dep : {
-      Dep::PROVIDES,
-      Dep::REQUIRES,
-      Dep::CONFLICTS,
-      Dep::OBSOLETES,
-      Dep::RECOMMENDS,
-      Dep::SUGGESTS,
-      Dep::SUPPLEMENTS
+    for ( const auto & dep : std::vector<std::pair<InfoBits, Dep>>{
+      { InfoBits::ShowProvides,    Dep::PROVIDES },
+      { InfoBits::ShowRequires,    Dep::REQUIRES },
+      { InfoBits::ShowConflicts,   Dep::CONFLICTS },
+      { InfoBits::ShowObsoletes,   Dep::OBSOLETES },
+      { InfoBits::ShowRecommends,  Dep::RECOMMENDS },
+      { InfoBits::ShowSuggests,    Dep::SUGGESTS },
+      { InfoBits::ShowSupplements, Dep::SUPPLEMENTS }
     } )
     {
-      if ( ( isPatch && ( dep == Dep::PROVIDES || dep == Dep::CONFLICTS ) )
-	|| ( cOpts.count( dep.asString() ) ) )			// dep.asString - CLI option name
-	tab_r.lst( dep.asUserString(), pi_r.dep( dep ) );	// dep.asUserString - i18n translation
+      if ( ( isPatch && ( dep.second == Dep::PROVIDES || dep.second == Dep::CONFLICTS ) )
+	|| ( options_r._flags.testFlag( dep.first ) ) )			// dep.asString - CLI option name
+	tab_r.lst( dep.second.asUserString(), pi_r.dep( dep.second ) );	// dep.asUserString - i18n translation
     }
   }
 
@@ -161,14 +149,14 @@ namespace
 ///////////////////////////////////////////////////////////////////
 namespace {
   // PoolQuery does no COW :( - build and return the basic query
-  inline PoolQuery printInfo_BasicQuery( Zypper & zypper )
+  inline PoolQuery printInfo_BasicQuery( Zypper & zypper, const PrintInfoOptions &options_r )
   {
     PoolQuery baseQ;
-    if ( zypper.cOpts().count("match-substrings") )
+    if ( options_r._matchSubstrings )
     { baseQ.setMatchSubstring(); }
     else
     { baseQ.setMatchGlob(); }	// is Exact if no glob chars included in name
-    if ( zypper.cOpts().count("repo") )
+    if ( InitRepoSettings::instance()._repoFilter.size() )
     {
       for ( const RepoInfo & repo : zypper.runtimeData().repos  )
       { baseQ.addRepo( repo.alias() ); }
@@ -194,16 +182,16 @@ namespace {
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-void printInfo( Zypper & zypper, ResKindSet kinds_r )
+void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const PrintInfoOptions &options_r )
 {
   zypper.out().gap();
 
-  for ( const std::string & rawarg : zypper.arguments() )
+  for ( const std::string & rawarg : names_r )
   {
     // Use the right kind!
     KNSplit kn( rawarg );
 
-    PoolQuery q( printInfo_BasicQuery( zypper ) );
+    PoolQuery q( printInfo_BasicQuery( zypper, options_r ) );
     q.addAttribute( sat::SolvAttr::name, kn._name );
 
     bool fallBackToAny = false;
@@ -211,9 +199,9 @@ void printInfo( Zypper & zypper, ResKindSet kinds_r )
     {
       q.addKind( kn._kind );			// explicit kind in arg
     }
-    else if ( !kinds_r.empty() )
+    else if ( !options_r._kinds.empty() )
     {
-      for ( const auto & kind : kinds_r )	// wanted kinds via -t
+      for ( const auto & kind : options_r._kinds )	// wanted kinds via -t
 	q.addKind( kind );
     }
     else
@@ -227,8 +215,8 @@ void printInfo( Zypper & zypper, ResKindSet kinds_r )
       ResKind oneKind( kn._kind );
       if ( !oneKind )
       {
-	if ( !kinds_r.empty() && kinds_r.size() == 1 )
-	  oneKind = *kinds_r.begin();
+	if ( !options_r._kinds.empty() && options_r._kinds.size() == 1 )
+	  oneKind = *options_r._kinds.begin();
 	else
 	  oneKind = ResKind::package;
       }
@@ -236,7 +224,7 @@ void printInfo( Zypper & zypper, ResKindSet kinds_r )
       cout << "\n" << str::Format(_("%s '%s' not found.")) % kind_to_string_localized( oneKind, 1 ) % rawarg << endl;
 
       // hint to matches of different kind (preferPackages looked for any)
-      PoolQuery h( printInfo_BasicQuery( zypper ) );
+      PoolQuery h( printInfo_BasicQuery( zypper, options_r ) );
       h.addAttribute( sat::SolvAttr::name, kn._name );
 
       if ( h.empty() )
@@ -265,18 +253,18 @@ void printInfo( Zypper & zypper, ResKindSet kinds_r )
 	cout << std::string( mbs_width(info), '-' ) << endl;
       }
 
-      if      ( sel.kind() == ResKind::package )	{ printPkgInfo( zypper, sel ); }
-      else if ( sel.kind() == ResKind::patch )		{ printPatchInfo( zypper, sel ); }
-      else if ( sel.kind() == ResKind::pattern )	{ printPatternInfo( zypper, sel ); }
-      else if ( sel.kind() == ResKind::product )	{ printProductInfo( zypper, sel ); }
-      else if ( sel.kind() == ResKind::srcpackage)	{ printSrcPackageInfo( zypper, sel ); }
-      else 						{ printDefaultInfo( zypper, sel ); }
+      if      ( sel.kind() == ResKind::package )	{ printPkgInfo( zypper, sel, options_r ); }
+      else if ( sel.kind() == ResKind::patch )		{ printPatchInfo( zypper, sel, options_r ); }
+      else if ( sel.kind() == ResKind::pattern )	{ printPatternInfo( zypper, sel, options_r ); }
+      else if ( sel.kind() == ResKind::product )	{ printProductInfo( zypper, sel, options_r ); }
+      else if ( sel.kind() == ResKind::srcpackage)	{ printSrcPackageInfo( zypper, sel, options_r ); }
+      else 						{ printDefaultInfo( zypper, sel, options_r ); }
     }
   }
 }
 
 /** Information for kinds which don't have a extra needs... */
-void printDefaultInfo( Zypper & zypper, const ui::Selectable & s )
+void printDefaultInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r  )
 {
   PoolItem installed( s.installedObj() );
   PoolItem updateCand( s.updateCandidateObj() );
@@ -294,7 +282,7 @@ void printDefaultInfo( Zypper & zypper, const ui::Selectable & s )
   PropertyTable p;
   printCommonData( theone, p );
 
-  printSummaryDescDeps( theone, p );
+  printSummaryDescDeps( theone, p, options_r );
   zypper.out().info( str::Str() << p );
 }
 
@@ -317,7 +305,7 @@ Description    :
 </pre>
  *
  */
-void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
+void printPkgInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r )
 {
   PoolItem installed( s.installedObj() );
   PoolItem updateCand( s.updateCandidateObj() );
@@ -358,7 +346,7 @@ void printPkgInfo( Zypper & zypper, const ui::Selectable & s )
   // translators: property name; short; used like "Name: value"
   p.add( _("Source package"),	package->sourcePkgLongName() );
 
-  printSummaryDescDeps( theone, p );
+  printSummaryDescDeps( theone, p, options_r );
   zypper.out().info( str::Str() << p );
 }
 
@@ -384,7 +372,7 @@ Requires:
 </pre>
  *
  */
-void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
+void printPatchInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r )
 {
   PoolItem theone( s.theObj() );
   Patch::constPtr patch = theone->asKind<Patch>();
@@ -403,7 +391,7 @@ void printPatchInfo( Zypper & zypper, const ui::Selectable & s )
   // translators: property name; short; used like "Name: value"
   p.add( _("Interactive"),	patchInteractiveFlags( *patch ) );	// print interactive flags the same style as list-patches
 
-  printSummaryDescDeps( theone, p );
+  printSummaryDescDeps( theone, p, options_r );
   zypper.out().info( str::Str() << p );
 }
 
@@ -425,7 +413,7 @@ This pattern provides a graphical application and a command line tool for keepin
 </pre>
  *
  */
-void printPatternInfo( Zypper & zypper, const ui::Selectable & s )
+void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r )
 {
   PoolItem theone( s.theObj() );
   Pattern::constPtr pattern = theone->asKind<Pattern>();
@@ -438,13 +426,13 @@ void printPatternInfo( Zypper & zypper, const ui::Selectable & s )
   // translators: property name; short; used like "Name: value"
   p.add( _("Visible to User"),		pattern->userVisible() );
 
-  printSummaryDescDeps( theone, p );
+  printSummaryDescDeps( theone, p, options_r );
 
   {	// show contents
     Pattern::ContentsSet collect;
     pattern->contentsSet( collect );
 
-    bool showSuggests = zypper.cOpts().count( "suggests" );
+    bool showSuggests = options_r._flags.testFlag( InfoBits::ShowSuggests );
     if ( collect.req.empty()
       && collect.rec.empty()
       && ( !showSuggests || collect.sug.empty() ) )
@@ -510,7 +498,7 @@ Description:
 </pre>
  *
  */
-void printProductInfo( Zypper & zypper, const ui::Selectable & s )
+void printProductInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r  )
 {
   if ( zypper.out().type() == Out::TYPE_XML )
   {
@@ -628,7 +616,7 @@ void printProductInfo( Zypper & zypper, const ui::Selectable & s )
   // translators: property name; short; used like "Name: value"
   p.add( _("Short Name"),		product->shortName() );
 
-  printSummaryDescDeps( theone, p );
+  printSummaryDescDeps( theone, p , options_r );
   zypper.out().info( str::Str() << p );
 }
 
@@ -685,14 +673,14 @@ namespace
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-void printSrcPackageInfo( Zypper & zypper, const ui::Selectable & s )
+void printSrcPackageInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r  )
 {
   PoolItem theone( s.theObj() );
   SrcPackage::constPtr srcPackage = theone->asKind<SrcPackage>();
 
   PropertyTable p;
   printCommonData( theone, p );
-  printSummaryDescDeps( theone, p );
+  printSummaryDescDeps( theone, p, options_r );
 
   ///////////////////////////////////////////////////////////////////
   BinPkgs builtFrom( findBinPkgsBuiltFromSrc( theone ) );

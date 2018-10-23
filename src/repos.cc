@@ -29,6 +29,7 @@
 #include "utils/messages.h"
 #include "utils/misc.h"
 #include "repos.h"
+#include "global-settings.h"
 
 //@TODO REMOVEME
 #include "commands/services/common.h"
@@ -698,6 +699,8 @@ unsigned repo_specs_to_aliases( Zypper & zypper, const std::list<std::string> & 
 /**
  * Fill gData.repositories with active repos (enabled or specified) and refresh
  * if autorefresh is on.
+ *
+ * \sa InitRepoSettings
  */
 
 template <class Container>
@@ -730,13 +733,9 @@ void do_init_repos( Zypper & zypper, const Container & container )
   // get repositories specified with --repo or --catalog or in the container
 
   std::list<std::string> not_found;
-  parsed_opts::const_iterator it;
-  // --repo
-  if ( (it = copts.find("repo")) != copts.end() )
-    get_repos( zypper, it->second.begin(), it->second.end(), gData.repos, not_found );
-  // --catalog - rug compatibility
-  if ( (it = copts.find("catalog")) != copts.end())
-    get_repos( zypper, it->second.begin(), it->second.end(), gData.repos, not_found );
+  const auto &repoFilter = InitRepoSettings::instance()._repoFilter;
+  if ( !repoFilter.empty() )
+    get_repos( zypper, repoFilter.begin(), repoFilter.end(), gData.repos, not_found );
   // container
   if ( !container.empty() )
     get_repos( zypper, container.begin(), container.end(), gData.repos, not_found );
@@ -948,6 +947,10 @@ void do_init_repos( Zypper & zypper, const Container & container )
 
 // ----------------------------------------------------------------------------
 
+/**
+ * Initialize the repositories
+ * \sa InitRepoSettings
+ */
 template <typename Container>
 void init_repos( Zypper & zypper, const Container & container )
 {
@@ -965,6 +968,10 @@ void init_repos( Zypper & zypper, const Container & container )
 // Explicit instantiation required for versions used outside repos.o
 template void init_repos<std::vector<std::string>>( Zypper &, const std::vector<std::string> & );
 
+/**
+ * Initialize the repositories
+ * \sa InitRepoSettings
+ */
 void init_repos( Zypper & zypper )
 { init_repos( zypper, std::vector<std::string>() ); }
 

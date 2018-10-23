@@ -420,7 +420,7 @@ ZYppCommitPolicy get_commit_policy( Zypper & zypper )
   ZYppCommitPolicy policy;
   const parsed_opts & opts = zypper.cOpts();
 
-  if ( DryRun::isEnabled() )
+  if ( DryRunSettings::instance().isEnabled() )
     policy.dryRun(true);
 
   if ( opts.find("download") != opts.end()
@@ -528,7 +528,7 @@ static void show_update_messages( Zypper & zypper, const UpdateNotifications & m
 void solve_and_commit ( Zypper & zypper )
 {
   bool need_another_solver_run = true;
-  bool dryRunEtc = DryRun::isEnabled() || ( get_download_option( zypper, true ) == DownloadOnly );
+  bool dryRunEtc = DryRunSettings::instance().isEnabled() || ( get_download_option( zypper, true ) == DownloadOnly );
   do
   {
     // CALL SOLVER
@@ -788,7 +788,7 @@ void solve_and_commit ( Zypper & zypper )
 	  {
 	    std::ostringstream s;
 	    s << _("committing");
-	    if ( DryRun::isEnabled() )
+	    if ( DryRunSettings::instance().isEnabled() )
 	      s << " " << _("(dry run)");
 	    zypper.out().info( s.str(), Out::HIGH );
 	  }

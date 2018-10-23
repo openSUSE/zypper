@@ -24,4 +24,19 @@ public:
   void reset() override;
 };
 
+class InitReposOptionSet : public BaseCommandOptionSet
+{
+public:
+ using BaseCommandOptionSet::BaseCommandOptionSet;
+  void setEnableRugCompatibility ( bool set = true );
+
+private:
+  bool _isRugCmd = false;
+
+  // BaseCommandOptionSet interface
+public:
+  std::vector<zypp::ZyppFlags::CommandGroup> options() override;
+  void reset() override;
+};
+
 #endif

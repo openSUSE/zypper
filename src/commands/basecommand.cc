@@ -5,6 +5,7 @@
 #include "utils/messages.h"
 #include "commandhelpformatter.h"
 #include "solve-commit.h"
+#include "global-settings.h"
 
 #include "src/repos.h"
 
@@ -57,6 +58,9 @@ ZypperBaseCommand::~ZypperBaseCommand()
 void ZypperBaseCommand::reset()
 {
   _helpRequested = false;
+
+  //reset the global settings
+  GlobalSettings::reset();
 
   //reset all registered option sets
   for ( BaseCommandOptionSet *set : _registeredOptionSets )

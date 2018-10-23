@@ -16,6 +16,7 @@
 
 #include "main.h"
 #include "utils/misc.h"
+#include "global-settings.h"
 
 #include "search.h"
 
@@ -30,7 +31,7 @@ FillSearchTableSolvable::FillSearchTableSolvable( Table & table_r, TriBool instN
 , _instNotinst( instNotinst_r )
 {
   Zypper & zypper( Zypper::instance() );
-  if ( zypper.cOpts().count( "repo" ) )
+  if ( InitRepoSettings::instance()._repoFilter.size() )
   {
     for ( const auto & ri : zypper.runtimeData().repos )
       _repos.insert( ri.alias() );
@@ -179,7 +180,7 @@ FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool ins
 , inst_notinst( installed_only )
 {
   Zypper & zypper( Zypper::instance() );
-  if ( zypper.cOpts().count( "repo" ) )
+  if ( InitRepoSettings::instance()._repoFilter.size() )
   {
     for ( const auto & ri : zypper.runtimeData().repos )
       _repos.insert( ri.alias() );
@@ -309,7 +310,7 @@ static void list_patterns_xml( Zypper & zypper )
 {
   cout << "<pattern-list>" << endl;
 
-  bool repofilter = zypper.cOpts().count("repo");	// suppress @System if repo filter is on
+  bool repofilter =  InitRepoSettings::instance()._repoFilter.size() ;	// suppress @System if repo filter is on
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("not-installed-only");
 
@@ -344,7 +345,7 @@ static void list_pattern_table( Zypper & zypper)
       << _("Repository")
       << _("Dependency") );
 
-  bool repofilter = zypper.cOpts().count("repo");	// suppress @System if repo filter is on
+  bool repofilter =  InitRepoSettings::instance()._repoFilter.size() ;	// suppress @System if repo filter is on
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("not-installed-only");
 
@@ -396,7 +397,7 @@ void list_packages( Zypper & zypper )
   Table tbl;
 
   const auto & copts( zypper.cOpts() );
-  bool repofilter = copts.count("repo");	// suppress @System if repo filter is on
+  bool repofilter =  InitRepoSettings::instance()._repoFilter.size() ;	// suppress @System if repo filter is on
   bool installed_only = copts.count("installed-only");
   bool uninstalled_only = copts.count("not-installed-only");
   bool showInstalled = installed_only || !uninstalled_only;
@@ -501,7 +502,7 @@ void list_packages( Zypper & zypper )
 
 static void list_products_xml( Zypper & zypper )
 {
-  bool repofilter = zypper.cOpts().count("repo");	// suppress @System if repo filter is on
+  bool repofilter =  InitRepoSettings::instance()._repoFilter.size();	// suppress @System if repo filter is on
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("not-installed-only");
 
@@ -555,7 +556,7 @@ static void list_product_table( Zypper & zypper )
       << _("Arch")
       << _("Is Base") );
 
-  bool repofilter = zypper.cOpts().count("repo");	// suppress @System if repo filter is on
+  bool repofilter =  InitRepoSettings::instance()._repoFilter.size() ;	// suppress @System if repo filter is on
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("not-installed-only");
 

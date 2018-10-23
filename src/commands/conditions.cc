@@ -27,7 +27,7 @@ int NeedsWritableRoot::check(std::string &err_r)
   Zypper &zypper = Zypper::instance();
   const GlobalOptions &gopts = zypper.globalOpts();
 
-  if ( DryRun::isEnabled() )
+  if ( DryRunSettings::instance().isEnabled() )
     return ZYPPER_EXIT_OK;
 
   struct statfs fsinfo;
