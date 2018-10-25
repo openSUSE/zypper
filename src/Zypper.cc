@@ -3089,51 +3089,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::PACKAGES_e:
-  {
-    static struct option options[] = {
-      {"repo",			required_argument,	0, 'r'},
-      // rug compatibility option, we have --repo
-      {"catalog",		required_argument,	0, 'c'},
-      ARG_not_INSTALLED_ONLY,
-      {"orphaned",		no_argument,		0,  0 },
-      {"suggested",		no_argument,		0,  0 },
-      {"recommended",		no_argument,		0,  0 },
-      {"unneeded",		no_argument,		0,  0 },
-      {"sort-by-name",		no_argument,		0, 'N'},
-      {"sort-by-repo",		no_argument,		0, 'R'},
-      {"sort-by-catalog",	no_argument,		0,  0 },	// TRANSLATED into sort-by-repo
-      {"help",			no_argument,		0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("packages (pa) [OPTIONS] [REPOSITORY] ...")
-    )
-    .description(	// translators: command description
-    _("List all packages available in specified repositories.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Just another means to specify repository.") )
-    .option( "-i, --installed-only",	// translators: -i, --installed-only
-             _("Show only installed packages.") )
-    .option( "-u, --not-installed-only",	// translators: -u, --not-installed-only
-             _("Show only packages which are not installed.") )
-    .option( "--orphaned",	// translators: --orphaned
-             _("Show packages which are orphaned (without repository).") )
-    .option( "--suggested",	// translators: --suggested
-             _("Show packages which are suggested.") )
-    .option( "--recommended",	// translators: --recommended
-             _("Show packages which are recommended.") )
-    .option( "--unneeded",	// translators: --unneeded
-             _("Show packages which are unneeded.") )
-    .option( "-N, --sort-by-name",	// translators: -N, --sort-by-name
-             _("Sort the list by package name.") )
-    .option( "-R, --sort-by-repo",	// translators: -R, --sort-by-repo
-             _("Sort the list by repository.") )
-    ;
 #if 0
     _command_help = _(
       "packages (pa) [OPTIONS] [repository] ...\n"
@@ -3153,8 +3108,6 @@ void Zypper::processCommandOptions()
       "-R, --sort-by-repo        Sort the list by repository.\n"
     );
 #endif
-    break;
-  }
 
   case ZypperCommand::PATTERNS_e:
   {
@@ -4383,7 +4336,6 @@ void Zypper::doCommand()
 
   case ZypperCommand::PATCHES_e:
   case ZypperCommand::PATTERNS_e:
-  case ZypperCommand::PACKAGES_e:
   case ZypperCommand::PRODUCTS_e:
   {
     for ( auto & repo : _arguments )
@@ -4415,9 +4367,6 @@ void Zypper::doCommand()
       break;
     case ZypperCommand::PATTERNS_e:
       list_patterns( *this );
-      break;
-    case ZypperCommand::PACKAGES_e:
-      list_packages( *this );
       break;
     case ZypperCommand::PRODUCTS_e:
       if ( copts.count("xmlfwd") && out().type() != Out::TYPE_XML )

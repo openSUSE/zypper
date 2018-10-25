@@ -103,7 +103,8 @@ namespace
       { ZypperCommand::INFO_e,             CommandFactory::make<InfoCmd>( { "info", "if" } ) },
       { ZypperCommand::RUG_PATCH_INFO_e,   CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugPatchInfo>( { "patch-info" } ) },
       { ZypperCommand::RUG_PATTERN_INFO_e, CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugPatternInfo>( { "pattern-info" } ) },
-      { ZypperCommand::RUG_PRODUCT_INFO_e, CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugProductInfo>( { "product-info" } ) }
+      { ZypperCommand::RUG_PRODUCT_INFO_e, CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugProductInfo>( { "product-info" } ) },
+      { ZypperCommand::PACKAGES_e,         CommandFactory::make<PackagesCmd>( { "packages", "pa", "pkg" } ) }
     };
     return table;
   }
@@ -146,7 +147,7 @@ namespace
 
       _t( SEARCH_e )		| "search"		| "se";
       //_t( INFO_e )		| "info"		| "if";
-      _t( PACKAGES_e )		| "packages"		| "pa" | "pkg";
+      //_t( PACKAGES_e )		| "packages"		| "pa" | "pkg";
       _t( PATCHES_e )		| "patches"		| "pch";
       _t( PATTERNS_e )		| "patterns"		| "pt";
       _t( PRODUCTS_e )		| "products"		| "pd";

@@ -25,6 +25,11 @@ class Kind;
 namespace ZyppFlags {
 
 /**
+ * Helper function that just returns a empty default value
+ */
+boost::optional<std::string> noDefaultValue();
+
+/**
  * Returns a \sa ZyppFlags::Value instance handling flags taking a string parameter
  */
 Value StringType ( std::string *target, const boost::optional<const char *> &defValue = boost::optional<const char *> (), std::string hint = ARG_STRING );
@@ -82,6 +87,16 @@ Value BitFieldType ( T& target, E flag , StoreFlag store = StoreTrue ) {
   );
 }
 
+template <typename T>
+Value WriteFixedValueType ( T& target, const T &value ) {
+  return Value (
+        noDefaultValue,
+        [ &target, value ] ( const CommandOption &, const boost::optional<std::string> & ) {
+          target = value;
+        }
+  );
+}
+
 /**
  * Returns a \sa ZyppFlags::Value instance handling flags taking a string parameter representing a \sa zypp::filesystem::PathName
  */
@@ -99,10 +114,6 @@ Value NoValue ();
  */
 Value WarnOptionVal (Out &out_r , const std::string &warning_r, Out::Verbosity verbosity_r = Out::NORMAL, const boost::optional<Value> &val_r = boost::optional<Value>());
 
-/**
- * Helper function that just returns a empty default value
- */
-boost::optional<std::string> noDefaultValue();
 
 }}
 

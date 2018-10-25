@@ -69,7 +69,7 @@ zypp::ZyppFlags::CommandGroup RefreshRepoCmd::cmdOptions() const
             _("Only download raw metadata, don't build the database.")
       },
       {"repo", 'r', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable,
-            ZyppFlags::StringVectorType( &that->_repos, ARG_REOSITORY),
+            ZyppFlags::StringVectorType( &that->_repos, ARG_REPOSITORY),
             // translators: -r, --repo <ALIAS|#|URI>
             _("Refresh only specified repositories.")
       }

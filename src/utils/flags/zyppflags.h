@@ -20,7 +20,7 @@
 // translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #define ARG_ALIAS              _( "ALIAS" )
 // translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#define ARG_REOSITORY          _( "ALIAS|#|URI" )
+#define ARG_REPOSITORY         _( "ALIAS|#|URI" )
 // translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #define ARG_CATEGORY           _( "CATEGORY" )
 // translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
@@ -54,7 +54,7 @@ namespace ZyppFlags {
   struct CommandOption;
 
   using DefValueFun = std::function<boost::optional<std::string>()>;
-  using SetterFun   = std::function<void ( const CommandOption &, const boost::optional<std::string> &in)>;
+  using SetterFun   = std::function<void ( const CommandOption &, const boost::optional<std::string> &)>;
 
   enum ArgFlags : int {
     NoArgument        = 0x00,

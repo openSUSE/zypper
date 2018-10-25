@@ -313,6 +313,9 @@ std::string ZypperBaseCommand::help()
     if ( grp.options.size() ) {
       bool wroteSectionHdr = false;
       for ( const ZyppFlags::CommandOption &opt : grp.options ) {
+        //even though the option might be hidden, we still do not want to show the
+        //"no options" available message anymore. Its misleading.
+        hadOptions = true;
         if ( opt.flags & ZyppFlags::Hidden )
           continue;
         if ( opt.flags & ZyppFlags::Deprecated ) {
@@ -324,7 +327,6 @@ std::string ZypperBaseCommand::help()
           wroteSectionHdr = true;
           help.optionSection( grp.name );
         }
-        hadOptions = true;
         renderOption(opt);
       }
     }

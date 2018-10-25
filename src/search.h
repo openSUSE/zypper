@@ -10,6 +10,7 @@
 
 #include <zypp/TriBool.h>
 #include <zypp/PoolQuery.h>
+#include <zypp/base/Flags.h>
 
 #include "Zypper.h"
 #include "Table.h"
@@ -61,9 +62,22 @@ void list_patterns(Zypper & zypper);
 
 /** List all packages with specific info in specified repos
  *  - currently looks like zypper search -t package -r foorepo */
-void list_packages(Zypper & zypper);
+enum class ListPackagesBits {
+  Default           = 0,
+  HideInstalled     = 1 << 0,
+  HideNotInstalled  = 1 << 1,
+  ShowOrphaned      = 1 << 2,
+  ShowSuggested     = 1 << 3,
+  ShowRecommended   = 1 << 4,
+  ShowUnneeded      = 1 << 5,
+  SortByRepo        = 1 << 20  //< Result will be sorted by repo, not by name
+};
+ZYPP_DECLARE_FLAGS( ListPackagesFlags, ListPackagesBits );
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS(ListPackagesFlags)
+void list_packages(Zypper & zypper, ListPackagesFlags flags_r );
 
 /** List all products with specific info in specified repos */
 void list_products(Zypper & zypper);
+
 
 #endif /*ZYPPERSEARCH_H_*/
