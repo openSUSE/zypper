@@ -306,13 +306,13 @@ void list_patches( Zypper & zypper )
   }
 }
 
-static void list_patterns_xml( Zypper & zypper )
+static void list_patterns_xml( Zypper & zypper, SolvableFilterMode mode_r )
 {
   cout << "<pattern-list>" << endl;
 
   bool repofilter =  InitRepoSettings::instance()._repoFilter.size() ;	// suppress @System if repo filter is on
-  bool installed_only = zypper.cOpts().count("installed-only");
-  bool notinst_only = zypper.cOpts().count("not-installed-only");
+  bool installed_only = mode_r == SolvableFilterMode::ShowOnlyInstalled;
+  bool notinst_only   = mode_r == SolvableFilterMode::ShowOnlyNotInstalled;
 
   for_( it, God->pool().byKindBegin<Pattern>(), God->pool().byKindEnd<Pattern>() )
   {
@@ -331,7 +331,7 @@ static void list_patterns_xml( Zypper & zypper )
   cout << "</pattern-list>" << endl;
 }
 
-static void list_pattern_table( Zypper & zypper)
+static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
 {
   MIL << "Going to list patterns." << std::endl;
 
@@ -346,8 +346,8 @@ static void list_pattern_table( Zypper & zypper)
       << _("Dependency") );
 
   bool repofilter =  InitRepoSettings::instance()._repoFilter.size() ;	// suppress @System if repo filter is on
-  bool installed_only = zypper.cOpts().count("installed-only");
-  bool notinst_only = zypper.cOpts().count("not-installed-only");
+  bool installed_only = mode_r == SolvableFilterMode::ShowOnlyInstalled;
+  bool notinst_only   = mode_r == SolvableFilterMode::ShowOnlyNotInstalled;
 
   for( const PoolItem & pi : God->pool().byKind<Pattern>() )
   {
@@ -383,12 +383,12 @@ static void list_pattern_table( Zypper & zypper)
     cout << tbl;
 }
 
-void list_patterns( Zypper & zypper )
+void list_patterns(Zypper & zypper , SolvableFilterMode mode_r)
 {
   if ( zypper.out().type() == Out::TYPE_XML )
-    list_patterns_xml( zypper );
+    list_patterns_xml( zypper, mode_r );
   else
-    list_pattern_table( zypper );
+    list_pattern_table( zypper, mode_r );
 }
 
 void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
@@ -497,11 +497,11 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
   }
 }
 
-static void list_products_xml( Zypper & zypper )
+void list_products_xml( Zypper & zypper, SolvableFilterMode mode_r, const std::vector<std::string> &fwdTags )
 {
   bool repofilter =  InitRepoSettings::instance()._repoFilter.size();	// suppress @System if repo filter is on
-  bool installed_only = zypper.cOpts().count("installed-only");
-  bool notinst_only = zypper.cOpts().count("not-installed-only");
+  bool installed_only = mode_r == SolvableFilterMode::ShowOnlyInstalled;
+  bool notinst_only = mode_r == SolvableFilterMode::ShowOnlyNotInstalled;
 
   cout << "<product-list>" << endl;
   for_( it, God->pool().byKindBegin(ResKind::product), God->pool().byKindEnd(ResKind::product) )
@@ -513,7 +513,7 @@ static void list_products_xml( Zypper & zypper )
     if ( repofilter && it->repository().info().name() == "@System" )
       continue;
     Product::constPtr product = asKind<Product>(it->resolvable());
-    cout << asXML( *product, it->status().isInstalled() ) << endl;
+    cout << asXML( *product, it->status().isInstalled(), fwdTags ) << endl;
   }
   cout << "</product-list>" << endl;
 }
@@ -535,7 +535,7 @@ static void add_product_table_row( Zypper & zypper, TableRow & tr,  const Produc
   tr << asYesNo( forceShowAsBaseProduct_r || product->isTargetDistribution() );
 }
 
-static void list_product_table( Zypper & zypper )
+void list_product_table(Zypper & zypper , SolvableFilterMode mode_r)
 {
   MIL << "Going to list products." << std::endl;
 
@@ -554,8 +554,8 @@ static void list_product_table( Zypper & zypper )
       << _("Is Base") );
 
   bool repofilter =  InitRepoSettings::instance()._repoFilter.size() ;	// suppress @System if repo filter is on
-  bool installed_only = zypper.cOpts().count("installed-only");
-  bool notinst_only = zypper.cOpts().count("not-installed-only");
+  bool installed_only = mode_r == SolvableFilterMode::ShowOnlyInstalled;
+  bool notinst_only = mode_r == SolvableFilterMode::ShowOnlyNotInstalled;
 
   for_( it, God->pool().proxy().byKindBegin(ResKind::product), God->pool().proxy().byKindEnd(ResKind::product) )
   {
@@ -629,12 +629,4 @@ static void list_product_table( Zypper & zypper )
   else
     // display the result, even if --quiet specified
     cout << tbl;
-}
-
-void list_products( Zypper & zypper )
-{
-  if ( zypper.out().type() == Out::TYPE_XML )
-    list_products_xml( zypper );
-  else
-    list_product_table( zypper );
 }

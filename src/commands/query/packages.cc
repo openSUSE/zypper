@@ -67,8 +67,8 @@ void PackagesCmdBase::doReset()
 int PackagesCmdBase::execute( Zypper &zypp_r, const std::vector<std::string> & )
 {
   ListPackagesFlags  flags = _flags;
-  flags.setFlag( ListPackagesBits::HideInstalled, _notInstalledOnly._mode == NotInstalledOnlyOptionSet::Mode::ShowOnlyNotInstalled );
-  flags.setFlag( ListPackagesBits::HideNotInstalled, _notInstalledOnly._mode == NotInstalledOnlyOptionSet::Mode::ShowOnlyInstalled );
+  flags.setFlag( ListPackagesBits::HideInstalled, _notInstalledOnly._mode == SolvableFilterMode::ShowOnlyNotInstalled );
+  flags.setFlag( ListPackagesBits::HideNotInstalled, _notInstalledOnly._mode == SolvableFilterMode::ShowOnlyInstalled );
 
   list_packages( zypp_r, flags );
 

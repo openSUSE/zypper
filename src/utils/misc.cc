@@ -562,7 +562,7 @@ std::string & indent( std::string & text, int columns )
  * \todo this is an ugly quick-hack code, let's do something reusable and maintainable in libzypp later
  */
 // ----------------------------------------------------------------------------
-std::string asXML( const Product & p, bool is_installed )
+std::string asXML(const Product & p, bool is_installed , const std::vector<std::string> &fwdTags )
 {
   std::ostringstream str;
   {
@@ -595,13 +595,13 @@ std::string asXML( const Product & p, bool is_installed )
 	*xmlout::Node( *parent, "description" ) << xml::escape( text );
     }
 
-    if ( is_installed && copts.count("xmlfwd") )
+    if ( is_installed && fwdTags.size() )
     {
       // literally forward tags found in the .prod file...
       xmlout::Node fwd( *parent, "xmlfwd", xmlout::Node::optionalContent );
 
       std::vector<std::string> tags;
-      for ( const auto & tag : copts["xmlfwd"] )
+      for ( const auto & tag : fwdTags )
       { tags.push_back( Pathname::assertprefix( "/product", tag ).asString() ); }
 
       const Pathname & proddir( Pathname::assertprefix( Zypper::instance().globalOpts().root_dir, "/etc/products.d" ) );

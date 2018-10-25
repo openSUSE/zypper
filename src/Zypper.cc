@@ -744,7 +744,7 @@ void print_main_help( Zypper & zypper )
   .gDef( "product-info",	// translators: command summary: product-info
 	 _("Show full information for specified products.") )
   .gDef( "patches, pch",	// translators: command summary: patches, pch
-	 _("List all available patches.") )
+         _("List all available patches.") )
   .gDef( "packages, pa",	// translators: command summary: packages, pa
 	 _("List all available packages.") )
   .gDef( "patterns, pt",	// translators: command summary: patterns, pt
@@ -3054,27 +3054,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::PATCHES_e:
-  {
-    static struct option patches_options[] = {
-      {"repo", required_argument, 0, 'r'},
-      // rug compatibility option, we have --repo
-      {"catalog", required_argument, 0, 'c'},
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = patches_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("patches (pch) [REPOSITORY] ...")
-    )
-    .description(	// translators: command description
-    _("List all patches available in specified repositories.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Just another means to specify repository.") )
-    ;
 #if 0
     _command_help = _(
       "patches (pch) [repository] ...\n"
@@ -3086,8 +3065,6 @@ void Zypper::processCommandOptions()
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
     );
 #endif
-    break;
-  }
 
 #if 0
     _command_help = _(
@@ -3108,33 +3085,6 @@ void Zypper::processCommandOptions()
       "-R, --sort-by-repo        Sort the list by repository.\n"
     );
 #endif
-
-  case ZypperCommand::PATTERNS_e:
-  {
-    static struct option options[] = {
-      {"repo", required_argument, 0, 'r'},
-      // rug compatibility option, we have --repo
-      {"catalog", required_argument, 0, 'c'},
-      ARG_not_INSTALLED_ONLY,
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("patterns (pt) [OPTIONS] [REPOSITORY] ...")
-    )
-    .description(	// translators: command description
-    _("List all patterns available in specified repositories.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Just another means to specify repository.") )
-    .option( "-i, --installed-only",	// translators: -i, --installed-only
-             _("Show only installed patterns.") )
-    .option( "-u, --not-installed-only",	// translators: -u, --not-installed-only
-             _("Show only patterns which are not installed.") )
-    ;
 #if 0
     _command_help = _(
       "patterns (pt) [OPTIONS] [repository] ...\n"
@@ -3148,21 +3098,7 @@ void Zypper::processCommandOptions()
       "-u, --not-installed-only  Show only patterns which are not installed.\n"
     );
 #endif
-    break;
-  }
 
-  case ZypperCommand::PRODUCTS_e:
-  {
-    static struct option options[] = {
-      {"repo", required_argument, 0, 'r'},
-      // rug compatibility option, we have --repo
-      {"catalog", required_argument, 0, 'c'},
-      ARG_not_INSTALLED_ONLY,
-      {"xmlfwd",		required_argument,	0,  0 },
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
 #if 0
     _command_help = ( CommandHelpFormater()
       << _(
@@ -3176,26 +3112,6 @@ void Zypper::processCommandOptions()
       "-i, --installed-only      Show only installed products.\n"
       "-u, --not-installed-only  Show only products which are not installed.\n") )
 #endif
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("products (pd) [OPTIONS] [REPOSITORY] ...")
-    )
-    .description(	// translators: command description
-    _("List all products available in specified repositories.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Just another means to specify repository.") )
-    .option( "-i, --installed-only",	// translators: -i, --installed-only
-             _("Show only installed products.") )
-    .option( "-u, --not-installed-only",	// translators: -u, --not-installed-only
-             _("Show only products which are not installed.") )
-    .option( "--xmlfwd <TAG>",	// translators: --xmlfwd <TAG>
-	     _("XML output only: Literally forward the XML tags found in a product file.") )
-    ;
-    break;
-  }
-
 #if 0
     _command_help = ( CommandHelpFormater() << str::form(_(
         "info (if) [OPTIONS] <name> ...\n"
@@ -4333,53 +4249,6 @@ void Zypper::doCommand()
   }
 
   // --------------------------( misc queries )--------------------------------
-
-  case ZypperCommand::PATCHES_e:
-  case ZypperCommand::PATTERNS_e:
-  case ZypperCommand::PRODUCTS_e:
-  {
-    for ( auto & repo : _arguments )
-    {
-      // see todo at ::copts
-      copts["repo"].push_back( repo );	// convert arguments to '-r repo'
-      _copts["repo"].push_back( repo );	// convert arguments to '-r repo'
-    }
-
-    initRepoManager();
-
-    init_target( *this);
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-    load_resolvables( *this );
-    // needed to compute status of PPP
-    // Currently CleandepsOnRemove adds information about user selected packages,
-    // which enhances the computation of unneeded packages. Might be superfluous in the future.
-    AutoDispose<bool> restoreCleandepsOnRemove( God->resolver()->cleandepsOnRemove(),
-						bind( &Resolver::setCleandepsOnRemove, God->resolver(), _1 ) );
-    God->resolver()->setCleandepsOnRemove( true );
-    resolve( *this );
-
-    switch ( command().toEnum() )
-    {
-    case ZypperCommand::PATCHES_e:
-      list_patches( *this );
-      break;
-    case ZypperCommand::PATTERNS_e:
-      list_patterns( *this );
-      break;
-    case ZypperCommand::PRODUCTS_e:
-      if ( copts.count("xmlfwd") && out().type() != Out::TYPE_XML )
-      {
-	out().warning( str::Format(_("Option %1% has no effect without the %2% global option.")) % "--xmlfwd" % "--xmlout" );
-      }
-      list_products( *this );
-      break;
-    default:;
-    }
-
-    break;
-  }
 
   case ZypperCommand::WHAT_PROVIDES_e:
   {

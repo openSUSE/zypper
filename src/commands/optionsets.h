@@ -12,6 +12,7 @@
  */
 
 #include "basecommand.h"
+#include "utils/misc.h"
 
 #include <zypp/DownloadMode.h>
 #include <zypp/base/Flags.h>
@@ -74,13 +75,7 @@ struct NotInstalledOnlyOptionSet : public BaseCommandOptionSet
 public:
   using BaseCommandOptionSet::BaseCommandOptionSet;
 
-  enum class Mode {
-    Default,
-    ShowOnlyInstalled,
-    ShowOnlyNotInstalled
-  };
-
-  Mode _mode = Mode::Default;
+  SolvableFilterMode _mode = SolvableFilterMode::ShowAll;
 
   // BaseCommandOptionSet interface
 public:
