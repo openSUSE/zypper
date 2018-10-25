@@ -13,6 +13,9 @@
 
 #include "basecommand.h"
 
+#include <zypp/DownloadMode.h>
+#include <zypp/base/Flags.h>
+
 class DryRunOptionSet : public BaseCommandOptionSet
 {
 public:
@@ -27,11 +30,38 @@ public:
 class InitReposOptionSet : public BaseCommandOptionSet
 {
 public:
- using BaseCommandOptionSet::BaseCommandOptionSet;
-  void setEnableRugCompatibility ( bool set = true );
+
+  enum class CompatModeBits {
+    EnableRugOpt = 1 << 0,
+    EnableNewOpt = 1 << 1
+  };
+  ZYPP_DECLARE_FLAGS( CompatModeFlags, CompatModeBits );
+
+  using BaseCommandOptionSet::BaseCommandOptionSet;
+  void setCompatibilityMode ( CompatModeFlags flags_r );
 
 private:
-  bool _isRugCmd = false;
+  CompatModeFlags _compatMode = CompatModeBits::EnableNewOpt;
+
+  // BaseCommandOptionSet interface
+public:
+  std::vector<zypp::ZyppFlags::CommandGroup> options() override;
+  void reset() override;
+};
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS( InitReposOptionSet::CompatModeFlags )
+
+class DownloadOptionSet : public BaseCommandOptionSet
+{
+public:
+ using BaseCommandOptionSet::BaseCommandOptionSet;
+
+  zypp::DownloadMode mode() const;
+  void setMode( const zypp::DownloadMode &mode );
+  bool wasSetBefore () const;
+
+private:
+  zypp::DownloadMode _mode;
+  bool _wasSetBefore = false;
 
   // BaseCommandOptionSet interface
 public:
@@ -39,4 +69,22 @@ public:
   void reset() override;
 };
 
+struct NotInstalledOnlyOptionSet : public BaseCommandOptionSet
+{
+public:
+  using BaseCommandOptionSet::BaseCommandOptionSet;
+
+  enum class Mode {
+    Default,
+    ShowOnlyInstalled,
+    ShowOnlyNotInstalled
+  };
+
+  Mode _mode = Mode::Default;
+
+  // BaseCommandOptionSet interface
+public:
+  std::vector<zypp::ZyppFlags::CommandGroup> options() override;
+  void reset() override;
+};
 #endif

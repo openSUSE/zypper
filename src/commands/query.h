@@ -2,5 +2,6 @@
 #define ZYPPER_COMMANDS_QUERY_H_INCLUDED
 
 #include "query/info.h"
+#include "query/packages.h"
 
 #endif

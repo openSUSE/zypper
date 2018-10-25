@@ -391,22 +391,19 @@ void list_patterns( Zypper & zypper )
     list_pattern_table( zypper );
 }
 
-void list_packages( Zypper & zypper )
+void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
 {
   MIL << "Going to list packages." << std::endl;
   Table tbl;
 
-  const auto & copts( zypper.cOpts() );
   bool repofilter =  InitRepoSettings::instance()._repoFilter.size() ;	// suppress @System if repo filter is on
-  bool installed_only = copts.count("installed-only");
-  bool uninstalled_only = copts.count("not-installed-only");
-  bool showInstalled = installed_only || !uninstalled_only;
-  bool showUninstalled = uninstalled_only || !installed_only;
+  bool showInstalled = !flags_r.testFlag( ListPackagesBits::HideInstalled ); //installed_only || !uninstalled_only;
+  bool showUninstalled = !flags_r.testFlag( ListPackagesBits::HideNotInstalled ); //uninstalled_only || !installed_only;
 
-  bool orphaned = copts.count("orphaned");
-  bool suggested = copts.count("suggested");
-  bool recommended = copts.count("recommended");
-  bool unneeded = copts.count("unneeded");
+  bool orphaned = flags_r.testFlag( ListPackagesBits::ShowOrphaned );
+  bool suggested = flags_r.testFlag( ListPackagesBits::ShowSuggested );
+  bool recommended = flags_r.testFlag( ListPackagesBits::ShowRecommended );
+  bool unneeded = flags_r.testFlag( ListPackagesBits::ShowUnneeded );
   bool check = ( orphaned || suggested || recommended || unneeded );
   if ( check )
   {
@@ -491,7 +488,7 @@ void list_packages( Zypper & zypper )
 	<< table::EditionStyleSetter( tbl, _("Version") )
 	<< _("Arch") );
 
-    if ( zypper.cOpts().count("sort-by-repo") )
+    if ( flags_r.testFlag( ListPackagesBits::SortByRepo ) )
       tbl.sort( 1 ); // Repo
     else
       tbl.sort( 2 ); // Name

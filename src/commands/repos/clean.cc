@@ -32,7 +32,7 @@ zypp::ZyppFlags::CommandGroup CleanRepoCmd::cmdOptions() const
   return {{
       {
         "repo", 'r', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable,
-            ZyppFlags::StringVectorType( &that->_repos, ARG_REOSITORY),
+            ZyppFlags::StringVectorType( &that->_repos, ARG_REPOSITORY),
             // translators: -r, --repo <ALIAS|#|URI>
             _("Clean only specified repositories.")
       },{
