@@ -14,6 +14,7 @@
 
 #include "Zypper.h"
 #include "Table.h"
+#include "utils/misc.h"
 
 ///////////////////////////////////////////////////////////////////
 /// \class FillSearchTableSolvable
@@ -58,7 +59,8 @@ struct FillSearchTableSelectable
 void list_patches(Zypper & zypper);
 
 /** List all patterns with specific info in specified repos */
-void list_patterns(Zypper & zypper);
+
+void list_patterns(Zypper & zypper, SolvableFilterMode mode_r );
 
 /** List all packages with specific info in specified repos
  *  - currently looks like zypper search -t package -r foorepo */
@@ -77,7 +79,8 @@ ZYPP_DECLARE_OPERATORS_FOR_FLAGS(ListPackagesFlags)
 void list_packages(Zypper & zypper, ListPackagesFlags flags_r );
 
 /** List all products with specific info in specified repos */
-void list_products(Zypper & zypper);
+void list_products_xml( Zypper & zypper, SolvableFilterMode mode_r, const std::vector<std::string> &fwdTags );
+void list_product_table( Zypper & zypper, SolvableFilterMode mode_r );
 
 
 #endif /*ZYPPERSEARCH_H_*/

@@ -168,20 +168,20 @@ void DownloadOptionSet::reset()
 std::vector<ZyppFlags::CommandGroup> NotInstalledOnlyOptionSet::options()
 {
   return {{{
-        { "installed-only",      'i',  ZyppFlags::NoArgument, ZyppFlags::WriteFixedValueType( _mode, Mode::ShowOnlyInstalled ),
+        { "installed-only",      'i',  ZyppFlags::NoArgument, ZyppFlags::WriteFixedValueType( _mode, SolvableFilterMode::ShowOnlyInstalled ),
               // translators: -i, --installed-only
               _("Show only installed packages.")
         },
-        { "not-installed-only",  'u',  ZyppFlags::NoArgument, ZyppFlags::WriteFixedValueType( _mode, Mode::ShowOnlyNotInstalled ),
+        { "not-installed-only",  'u',  ZyppFlags::NoArgument, ZyppFlags::WriteFixedValueType( _mode, SolvableFilterMode::ShowOnlyNotInstalled ),
               // translators: -u, --not-installed-only
               _("Show only packages which are not installed.")
         },
         // bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
-        { "uninstalled-only",    '\0', ZyppFlags::NoArgument | ZyppFlags::Hidden | ZyppFlags::Deprecated, ZyppFlags::WriteFixedValueType( _mode, Mode::ShowOnlyNotInstalled ), "" }
+        { "uninstalled-only",    '\0', ZyppFlags::NoArgument | ZyppFlags::Hidden | ZyppFlags::Deprecated, ZyppFlags::WriteFixedValueType( _mode, SolvableFilterMode::ShowOnlyNotInstalled ), "" }
   }}};
 }
 
 void NotInstalledOnlyOptionSet::reset()
 {
-  _mode == Mode::Default;
+  _mode == SolvableFilterMode::ShowAll;
 }

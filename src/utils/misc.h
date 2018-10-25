@@ -35,6 +35,18 @@ using namespace zypp;
 
 typedef std::set<ResKind> ResKindSet;
 
+
+/**
+ * Used to specify if installed and not installed solvables
+ * should be listed or just simply all of them
+ */
+enum class SolvableFilterMode {
+  ShowAll,
+  ShowOnlyInstalled,
+  ShowOnlyNotInstalled
+};
+
+
 /** Build search status column tag */
 inline const char * lockStatusTag( const char * tag_r, bool islocked_r, bool isautoinst_r = false )
 {
@@ -159,7 +171,7 @@ struct ServiceAliasComparator
 inline bool isRepoFile( const std::string & name )
 { return name.find(".repo") != name.npos; }
 
-std::string asXML( const Product & p, bool is_installed );
+std::string asXML( const Product & p, bool is_installed, const std::vector<std::string> &fwdTags = {} );
 
 std::string asXML( const Pattern & p, bool is_installed );
 

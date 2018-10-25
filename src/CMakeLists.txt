@@ -72,6 +72,9 @@ SET (zypper_HEADERS
   commands/query/info.h
   commands/query/miscqueryinit.h
   commands/query/packages.h
+  commands/query/patches.h
+  commands/query/patterns.h
+  commands/query/products.h
 )
 
 SET( zypper_SRCS
@@ -125,6 +128,9 @@ SET( zypper_SRCS
   commands/needs-rebooting.cc
   commands/query/info.cc
   commands/query/packages.cc
+  commands/query/patches.cc
+  commands/query/patterns.cc
+  commands/query/products.cc
   ${zypper_HEADERS}
 )
 
