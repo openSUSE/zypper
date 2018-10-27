@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-10-27 11:29+0000\n"
+"PO-Revision-Date: 2018-10-27 14:06+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
@@ -3757,7 +3757,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2703
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr "repos (lr) [параметры] [репозиторий]"
+msgstr "repos (lr) [параметры] [репозиторий]…"
 
 #. translators: -e, --export <FILE.repo>
 #: src/Zypper.cc:2710
@@ -4392,7 +4392,7 @@ msgstr "Установить только исправления указанн�
 msgid ""
 "Install only patches issued up to, but not including, the specified date"
 msgstr ""
-"Установить только исправления, выпущенные до указанной даты (не включая её)."
+"Установить только исправления, выпущенные до указанной даты (не включая её)"
 
 #: src/Zypper.cc:3256
 msgid "Install only patches which affect the package management itself."
@@ -4591,7 +4591,7 @@ msgstr "Ограничить обновление указанным репоз�
 #. translators: -D, --dry-run
 #: src/Zypper.cc:3398
 msgid "Test the upgrade, do not actually upgrade"
-msgstr "Протестировать обновление, но не обновлять."
+msgstr "Протестировать обновление, но не обновлять"
 
 #: src/Zypper.cc:3451
 msgid ""
@@ -5297,7 +5297,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:4039
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
-msgstr "addlock (al) [параметры] <имя_пакета>"
+msgstr "addlock (al) [параметры] <имя_пакета>…"
 
 #. translators: command description
 #: src/Zypper.cc:4042
@@ -5317,7 +5317,7 @@ msgstr "Ограничить блокировку указанным репоз�
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:4068
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr "removelock (rl) <номер-блокировки|имя-пакета>"
+msgstr "removelock (rl) <номер-блокировки|имя-пакета>…"
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/Zypper.cc:4071
