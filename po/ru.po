@@ -1,26 +1,25 @@
 # Translation of zypper.po to russian
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-#
 # Aleksey Osipov <aliks-os@yandex.ru>, 2007, 2008.
 # Nikolay Derkach <nderkach@gmail.com>, 2007, 2008.
 # Igor Kondrashkin <poseidos@mail.ru>, 2007.
 # Alexander Melentiev <alex239@gmail.com>, 2008, 2009, 2010.
-# Alexander Melentiev <minton@opensuse.org>, 2011, 2012, 2013, 2014, 2015, 2016.
+# Alexander Melentiev <minton@opensuse.org>, 2011, 2012, 2013, 2014, 2015, 2016, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 12:17+0200\n"
-"PO-Revision-Date: 2018-07-21 17:45+0000\n"
+"PO-Revision-Date: 2018-10-27 11:29+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.18\n"
 
 #: src/SolverRequester.h:57
@@ -223,9 +222,8 @@ msgstr "Хотите отклонить ключ[r], доверять време
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:290
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr "Хотите отклонить ключ[r], доверять временно[t] или доверять всегда[a]?"
+msgstr "Хотите отклонить ключ[r] или доверять всегда[a]?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -248,7 +246,7 @@ msgstr "r/t"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:318
 msgid "r/a/"
-msgstr ""
+msgstr "r/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:324
@@ -299,11 +297,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"База данных rpm содержит старые ключи gpg V3, которые уже считаются "
+"устаревшими и небезопасными:"
 
 #: src/callbacks/keyring.h:446
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Подробнее о ключе см. вывод \"%1%\"."
 
 #: src/callbacks/keyring.h:450
 #, boost-format
@@ -311,6 +311,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Если вы не считаете, что данный ключ ещё используется, то удалите его "
+"командой \"%1%\"."
 
 #: src/callbacks/keyring.h:472
 #, c-format, boost-format
@@ -491,13 +493,15 @@ msgid ""
 msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
-msgstr[0] "не загружен:"
+msgstr[0] ""
+"Следующий %1% пакет был исключён из проверки на конфликты файлов, т.к. "
+"загрузка ещё не завершена:"
 msgstr[1] ""
-"Следующие %1% пакета были исключены из проверки на конфликты файлов, т. к. "
-"еще не загружены:"
+"Следующие %1% пакета были исключены из проверки на конфликты файлов, т.к. "
+"загрузка ещё не завершена:"
 msgstr[2] ""
-"Следующие %1% пакетов были исключены из проверки на конфликты файлов, т. к. "
-"еще не загружены:"
+"Следующие %1% пакетов были исключены из проверки на конфликты файлов, т.к. "
+"загрузка ещё не завершена:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:434
@@ -597,7 +601,7 @@ msgstr "Продолжить?"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:21
 msgid "ALIAS"
-msgstr ""
+msgstr "ПСЕВДОНИМ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
@@ -612,12 +616,12 @@ msgstr "КАТЕГОРИЯ"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "DIR"
-msgstr "каталог"
+msgstr "КАТАЛОГ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "FILE"
-msgstr ""
+msgstr "ФАЙЛ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
@@ -627,17 +631,17 @@ msgstr "ФАЙЛ.repo"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FORMAT"
-msgstr ""
+msgstr "ФОРМАТ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "INTEGER"
-msgstr "целое"
+msgstr "ЦЕЛОЕ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "PATH"
-msgstr ""
+msgstr "ПУТЬ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
@@ -647,12 +651,12 @@ msgstr "ВАЖНОСТЬ"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "STRING"
-msgstr ""
+msgstr "СТРОКА"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "TAG"
-msgstr ""
+msgstr "МЕТКА"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
@@ -1989,12 +1993,16 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Это transactional-server, для обновления либо изменения системы используйте "
+"transactional-update."
 
 #: src/Zypper.cc:541
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"Целевая файловая система смонтирована только для чтения. Убедитесь, что "
+"целевая файловая система доступна для записи."
 
 #: src/Zypper.cc:673 src/Zypper.cc:1862
 msgid "Unexpected exception."
@@ -2190,7 +2198,7 @@ msgstr ""
 #. translators: --disable-system-resolvables
 #: src/Zypper.cc:780
 msgid "Do not read installed packages."
-msgstr ""
+msgstr "Не выполнять чтение установленных пакетов."
 
 #. translators: command summary: help, ?
 #: src/Zypper.cc:786
@@ -3407,6 +3415,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
+"removeservice (rs) [ПАРАМЕТРЫ] <псевдоним|#|URI>\n"
+"\n"
+"Удалить указанный сервис репозиториев из системы.\n"
+"\n"
+"  Параметры команды:\n"
+"    --loose-auth   Игнорировать данные аутентификации пользователя в URI.\n"
+"    --loose-query  Игнорировать строку запроса в URI.\n"
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:2463
@@ -3442,12 +3457,12 @@ msgstr ""
 "modifyservice (ms) <параметры> <псевдоним|#|URI>\n"
 "modifyservice (ms) <параметры> <%s>\n"
 "\n"
-"Изменить свойства репозитория, указанного псевдонимом, номером, URI-адресом\n"
+"Изменить свойства сервиса, указанного псевдонимом, номером, URI-адресом\n"
 "или совокупными параметрами \"%s\".\n"
 "\n"
 "  Параметры команды:\n"
-"-d, --disable             Отключить сервис (но не удалять ее).\n"
-"-e, --enable              Включить отключенную сервис.\n"
+"-d, --disable             Отключить сервис (но не удалять его).\n"
+"-e, --enable              Включить отключённый сервис.\n"
 "-r, --refresh             Включить автоматическое обновление сервиса.\n"
 "-R, --no-refresh          Отключить автоматическое обновление сервиса.\n"
 "-n, --name                Задать описательное имя сервиса.\n"
@@ -3456,8 +3471,8 @@ msgstr ""
 "включения.\n"
 "-I, --ar-to-disable <alias>    Добавить репозиторий сервиса RIS для "
 "отключения.\n"
-"-j, --rr-to-enable <alias>     Удалить репозиторий сервиса RIS для "
-"включения.\n"
+"-j, --rr-to-enable <alias>     Удалить репозиторий сервиса RIS для включения."
+"\n"
 "-J, --rr-to-disable <alias>    Удалить репозиторий сервиса RIS для "
 "отключения.\n"
 "-k, --cl-to-enable             Очистить список репозиториев RIS для "
@@ -3467,8 +3482,8 @@ msgstr ""
 "\n"
 "-a, --all                 Применить изменения ко всем сервисам.\n"
 "-l, --local               Применить изменения ко всем локальным сервисам.\n"
-"-t, --remote              Применить изменения ко всем сетевым службам.\n"
-"-m, --medium-type <type>  Применить изменения к службам указанного типа.\n"
+"-t, --remote              Применить изменения ко всем сетевым сервисам.\n"
+"-m, --medium-type <type>  Применить изменения к сервисам указанного типа.\n"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2492
@@ -4221,23 +4236,25 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3113
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [ПАРАМЕТРЫ] [ИМЯПАКЕТА] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3116
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Обновить все либо указанные установленные пакеты до новых версий, если "
+"возможно."
 
 #. translators: --skip-interactive
 #: src/Zypper.cc:3124
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Пропускать интерактивные обновления."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:3126
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Не пропускать интерактивные обновления."
 
 #. translators: -l, --auto-agree-with-licenses
 #: src/Zypper.cc:3128 src/Zypper.cc:3233 src/Zypper.cc:3394
@@ -5255,7 +5272,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4006
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command description
 #: src/Zypper.cc:4009
@@ -5321,7 +5338,7 @@ msgstr "Удалить блокировки только для указанно
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/Zypper.cc:4095
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command description
 #: src/Zypper.cc:4098
@@ -5378,7 +5395,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4154
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
-msgstr ""
+msgstr "versioncmp (vcmp) <ВЕРСИЯ1> <ВЕРСИЯ2>"
 
 #. translators: command description
 #: src/Zypper.cc:4157
@@ -5399,7 +5416,7 @@ msgid ""
 "  Command options:\n"
 "-m, --match  Takes missing release number as any release.\n"
 msgstr ""
-"versioncmp (vcmp) <version1> <version2>\n"
+"versioncmp (vcmp) <версия1> <версия2>\n"
 "\n"
 "Сравнить версии, указанные в аргументах.\n"
 "\n"
@@ -5409,7 +5426,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4186
 msgid "licenses"
-msgstr ""
+msgstr "licenses"
 
 #. translators: command description
 #: src/Zypper.cc:4189
@@ -5558,7 +5575,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4309
 msgid "source-download"
-msgstr ""
+msgstr "source-download"
 
 #. translators: -d, --directory <DIR>
 #: src/Zypper.cc:4316
@@ -5623,7 +5640,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4355
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "quit (exit, ^D)"
 
 #. translators: command description
 #: src/Zypper.cc:4358
@@ -5647,7 +5664,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:4383
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command description
 #: src/Zypper.cc:4386
@@ -6209,12 +6226,11 @@ msgstr "Пароль"
 #: src/commands/basecommand.cc:121
 #, boost-format
 msgid " Default: %1%"
-msgstr ""
+msgstr " По умолчанию: %1%"
 
 #: src/commands/basecommand.cc:134
-#, fuzzy
 msgid "Options:"
-msgstr "необязательно"
+msgstr "Параметры:"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
@@ -8400,30 +8416,30 @@ msgstr "Ошибка при анализе синтаксиса zypper.conf:"
 #: src/utils/flags/exceptions.cc:21
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "Неизвестный флаг %1%."
 
 #: src/utils/flags/exceptions.cc:27
 msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr ""
+msgstr "Флаг %1% несовместим с аргументом %2% (%3)."
 
 #: src/utils/flags/exceptions.cc:33
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "Имя пакета с исходным кодом является требуемым аргументом."
+msgstr "Для флага %1% требуется аргумент."
 
 #: src/utils/flags/exceptions.cc:39
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "Флаг %1% можно использовать только один раз."
 
 #: src/utils/flags/flagtypes.cc:48
 msgid "Out of range"
-msgstr ""
+msgstr "Вне диапазона"
 
 #: src/utils/flags/flagtypes.cc:50
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Неизвестная ошибка во время присвоения значения %1% флагу %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -8451,7 +8467,7 @@ msgstr ""
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
-msgstr "Сообщите об этом в отчете об ошибке."
+msgstr "Сообщите об этом в отчёте об ошибке."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
