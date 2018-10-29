@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Oct 29 12:20:40 CET 2018 - ma@suse.de
+
+- Adapt to changed type names in libsolv-0.7
+- Package needreboot file (fate#326451)
+- Fix definitions of gettext macros (fixes #135)
+- version 17.8.1 (2)
+
+-------------------------------------------------------------------
 Fri Oct 12 14:01:19 CEST 2018 - ma@suse.de
 
 - Add infrastructure to flag specific packages to trigger a
