@@ -8358,8 +8358,8 @@ msgid "The flag %1% is not known."
 msgstr "La bandera %1% no es coneix."
 
 #: src/utils/flags/exceptions.cc:27
-msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "La bandera %1% no és compatible amb l'argument %2% (%2)."
+msgid "The flag %1% is not compatible with argument %2% (%3%)."
+msgstr "La bandera %1% no és compatible amb l'argument %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format

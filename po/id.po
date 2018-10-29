@@ -8183,8 +8183,8 @@ msgid "The flag %1% is not known."
 msgstr "Tanda %1% tidak diketahui."
 
 #: src/utils/flags/exceptions.cc:27
-msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "Tanda %1% tidak kompatibel dengan argumen %2% (%2)."
+msgid "The flag %1% is not compatible with argument %2% (%3%)."
+msgstr "Tanda %1% tidak kompatibel dengan argumen %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format

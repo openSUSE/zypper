@@ -7803,8 +7803,8 @@ msgid "The flag %1% is not known."
 msgstr "旗标 %1% 未知。"
 
 #: src/utils/flags/exceptions.cc:27
-msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "旗标 %1% 与参数 %2% 不兼容 (%2)。"
+msgid "The flag %1% is not compatible with argument %2% (%3%)."
+msgstr "旗标 %1% 与参数 %2% 不兼容 (%3%)。"
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format

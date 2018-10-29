@@ -8419,8 +8419,9 @@ msgid "The flag %1% is not known."
 msgstr "Неизвестный флаг %1%."
 
 #: src/utils/flags/exceptions.cc:27
-msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "Флаг %1% несовместим с аргументом %2% (%3)."
+#, boost-format
+msgid "The flag %1% is not compatible with argument %2% (%3%)."
+msgstr "Флаг %1% несовместим с аргументом %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format

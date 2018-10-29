@@ -8351,8 +8351,8 @@ msgid "The flag %1% is not known."
 msgstr "O indicador %1% não é conhecido."
 
 #: src/utils/flags/exceptions.cc:27
-msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "O indicador %1% não é compatível com o argumento %2% (%2)."
+msgid "The flag %1% is not compatible with argument %2% (%3%)."
+msgstr "O indicador %1% não é compatível com o argumento %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format

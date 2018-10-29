@@ -8335,8 +8335,8 @@ msgid "The flag %1% is not known."
 msgstr "Neznámý příznak %1%."
 
 #: src/utils/flags/exceptions.cc:27
-msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "Příznak %1% není slučitelný s argumentem %2% (%2)."
+msgid "The flag %1% is not compatible with argument %2% (%3%)."
+msgstr "Příznak %1% není slučitelný s argumentem %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format

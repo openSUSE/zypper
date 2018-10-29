@@ -8516,8 +8516,8 @@ msgid "The flag %1% is not known."
 msgstr "Le drapeau %1% est inconnu."
 
 #: src/utils/flags/exceptions.cc:27
-msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "Le drapeau %1% n'est pas compatible avec l'argument %2% (%2)."
+msgid "The flag %1% is not compatible with argument %2% (%3%)."
+msgstr "Le drapeau %1% n'est pas compatible avec l'argument %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format

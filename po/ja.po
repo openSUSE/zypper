@@ -8161,8 +8161,8 @@ msgid "The flag %1% is not known."
 msgstr "不明なフラグ %1% です。"
 
 #: src/utils/flags/exceptions.cc:27
-msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "フラグ %1% はパラメータ %2% (%2) との互換性がありません。"
+msgid "The flag %1% is not compatible with argument %2% (%3%)."
+msgstr "フラグ %1% はパラメータ %2% (%3%) との互換性がありません。"
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format

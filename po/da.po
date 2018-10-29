@@ -8263,8 +8263,8 @@ msgid "The flag %1% is not known."
 msgstr "Flaget %1% kendes ikke."
 
 #: src/utils/flags/exceptions.cc:27
-msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "Flaget %1% er ikke kompatibelt med argumentet %2% (%2)."
+msgid "The flag %1% is not compatible with argument %2% (%3%)."
+msgstr "Flaget %1% er ikke kompatibelt med argumentet %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format

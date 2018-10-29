@@ -8442,8 +8442,8 @@ msgid "The flag %1% is not known."
 msgstr "De vlag %1% is onbekend."
 
 #: src/utils/flags/exceptions.cc:27
-msgid "The flag %1% is not compatible with argument %2% (%2)."
-msgstr "De vlag %1% is niet compatibel met argument %2% (%2)."
+msgid "The flag %1% is not compatible with argument %2% (%3%)."
+msgstr "De vlag %1% is niet compatibel met argument %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format
