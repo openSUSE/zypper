@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-03 15:01+0000\n"
+"PO-Revision-Date: 2018-10-29 13:54+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -2388,7 +2388,7 @@ msgstr ""
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Controleren of de vlag opnieuw-opstarten was ingesteld."
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
@@ -5604,7 +5604,7 @@ msgstr "Wachtwoord"
 
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Root-rechten zijn vereist om deze opdracht uit te voeren."
 
 #: src/commands/conditions.cc:46
 msgid ""
@@ -5797,23 +5797,29 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Controleert of de vlag opnieuw-opstarten was ingesteld bij een vorige keer "
+"bijwerken of installatie van een kernbibliotheek of -service.\n"
+"Uitgangscode ZYPPER_EXIT_INF_REBOOT_NEEDED geeft aan dat opnieuw opstarten "
+"nodig is, anders is de uitgangscode ingesteld op ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Kernbibliotheken or -services zijn bijgewerkt."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Opnieuw opstarten is vereist om te verzekeren dat uw systeem voordeel heeft "
+"bij dit bijwerken."
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Er zijn geen kernbibliotheken or -services bijgewerkt."
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Opnieuw opstarten is waarschijnlijk niet nodig."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -5850,11 +5856,14 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Voor elke geassocieerde systeemservice print <format> op de standaard "
+"uitvoer, gevolgd door een nieuwe-regel. Elke '%s' aanduiding in <format> "
+"wordt vervangen door de naam van de systeemservice."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:51
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Debuguitvoer naar bestand <pad> schrijven."
 
 #: src/commands/ps.cc:71 src/solve-commit.cc:462
 msgid "Check failed:"
@@ -6539,7 +6548,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Geavanceerd:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -8410,11 +8419,11 @@ msgstr "De vlag %1% kan slechts één keer gebruikt worden."
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s gebruikt samen met %s, wat met elkaar in tegenspraak is."
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "Onbekend type pakket"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
@@ -8428,7 +8437,7 @@ msgstr "Onbekende fout bij toekennen van de waarde %1% aan vlag %2%."
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "De vlag '%1%' kan alleen een maximum van %2% keer gebruikt worden."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
