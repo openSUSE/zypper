@@ -1077,7 +1077,7 @@ namespace zypp
       //load the packages that will trigger the update flag being set
       {
         sat::StringQueue q;
-        filesystem::Pathname needRebootFile = home() / "needreboot";
+        filesystem::Pathname needRebootFile = home() / "NeedReboot";
         if ( filesystem::PathInfo ( needRebootFile ).isExist() ) {
           SolvIdentFile file ( needRebootFile );
           for ( const auto & idstr : file.data() ) {
@@ -1085,7 +1085,7 @@ namespace zypp
           }
         }
 
-        filesystem::Pathname needRebootDir = home() / "needreboot.d";
+        filesystem::Pathname needRebootDir = home() / "NeedReboot.d";
         if ( filesystem::PathInfo ( needRebootDir ).isExist() ) {
           filesystem::DirContent ls;
           filesystem::readdir( ls, needRebootDir, false );
@@ -1501,7 +1501,7 @@ namespace zypp
               }
               else
               {
-                if ( citem.identTriggersRebootHint() ) {
+                if ( citem.identTriggersRebootNeededHint() ) {
                   auto rebootNeededFile = root() / "/var/run/reboot-needed";
                   if ( filesystem::assert_file( rebootNeededFile ) == EEXIST)
                     filesystem::touch( rebootNeededFile );

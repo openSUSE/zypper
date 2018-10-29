@@ -137,9 +137,9 @@ namespace zypp
       static bool identIsAutoInstalled( const IdString & ident_r );
 
       /** Whether installing or upgrading a solvable with the same \ref ident will trigger the reboot needed hint. */
-      bool identTriggersRebootHint() const
-      { return identTriggersRebootHint( ident() ); }
-      static bool identTriggersRebootHint ( const IdString &ident_r );
+      bool identTriggersRebootNeededHint() const
+      { return identTriggersRebootNeededHint( ident() ); }
+      static bool identTriggersRebootNeededHint ( const IdString &ident_r );
 
       /** Whether different versions of this package can be installed at the same time.
        * Per default \c false. \see also \ref ZConfig::multiversion.

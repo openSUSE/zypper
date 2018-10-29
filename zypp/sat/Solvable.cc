@@ -387,7 +387,7 @@ namespace zypp
       return myPool().isOnSystemByAuto( ident_r );
     }
 
-    bool Solvable::identTriggersRebootHint ( const IdString &ident_r )
+    bool Solvable::identTriggersRebootNeededHint ( const IdString &ident_r )
     {
       return myPool().triggersRebootNeededHint( ident_r );
     }
