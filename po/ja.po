@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-02 02:04+0000\n"
+"PO-Revision-Date: 2018-10-29 12:05+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2245,7 +2245,7 @@ msgstr ""
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "要再起動フラグが設定されているかどうかを確認します。"
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
@@ -5416,7 +5416,7 @@ msgstr "パスワード"
 
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "このコマンドを実行するには root 権限が必要です。"
 
 #: src/commands/conditions.cc:46
 msgid ""
@@ -5604,23 +5604,26 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"直前の中枢ライブラリやサービスの更新もしくはインストールによって、要再起動フラグが設定されたかどうかを確認します。\n"
+"再起動が必要な場合は ZYPPER_EXIT_INF_REBOOT_NEEDED の終了コードを返し、それ以外の場合は ZYPPER_EXIT_OK "
+"の終了コードを返します。"
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "中枢ライブラリもしくはサービスの更新を行ないました。"
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
-msgstr ""
+msgstr "これらの更新を反映させるため、システムの再起動が必要です。"
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "中枢ライブラリもしくはサービスの更新は行なわれていません。"
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "再起動はおそらく不要です。"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -5655,11 +5658,13 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"関連付けられたシステムサービスごとに、標準出力に対して <format> で指定した書式の内容を出力し、改行します。 <format> 内に '%s' "
+"ディレクティブを指定すると、その箇所はシステムサービス名に置き換えられます。"
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:51
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "デバッグ出力をファイル <path> に出力します。"
 
 #: src/commands/ps.cc:71 src/solve-commit.cc:462
 msgid "Check failed:"
@@ -6332,7 +6337,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "高度なオプション:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -8160,11 +8165,11 @@ msgstr "フラグ %1% は一度だけ使用することができます。"
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s と %s とは互いに矛盾する指定です。"
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "不明なパッケージ種類"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
@@ -8178,7 +8183,7 @@ msgstr "フラグ %2% に対して値 %1% を割り当てる際、未知のエ�
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "フラグ '%1%' は最大 %2% 回まで指定することができます。"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
