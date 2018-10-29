@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct 29 14:29:12 CET 2018 - ma@suse.de
+
+- Add `needs-restarting` shell script and manpage (fate#326451)
+- Add zypper needs-rebooting command (fate#326451)
+- version 1.14.15
+
+-------------------------------------------------------------------
 Fri Oct 12 14:05:47 CEST 2018 - ma@suse.de
 
 - BuildRequires:  libzypp-devel >= 17.8.0 (for fate#326451)
