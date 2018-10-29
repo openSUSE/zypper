@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-09 21:05+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
-"zypper/master/pt_BR/>\n"
+"PO-Revision-Date: 2018-10-29 12:01+0000\n"
+"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) "
+"<https://l10n.opensuse.org/projects/zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2352,6 +2352,7 @@ msgstr ""
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
 msgstr ""
+"Verifique se o sinalizador de necessidade de reinicialização foi definido."
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
@@ -5557,7 +5558,7 @@ msgstr "Senha"
 
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Os privilégios de root são necessários para executar este comando."
 
 #: src/commands/conditions.cc:46
 msgid ""
@@ -5748,23 +5749,31 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Verifica se o sinalizador de necessidade de reinicialização foi definido por "
+"uma atualização anterior ou pela instalação de uma biblioteca ou serviço "
+"principal.\n"
+"O código de saída ZYPPER_EXIT_INF_REBOOT_NEEDED indica que uma "
+"reinicialização é necessária, caso contrário, o código de saída é definido "
+"como ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "As bibliotecas ou serviços principais foram atualizados."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"A reinicialização é necessária para garantir que o sistema se beneficie "
+"dessas atualizações."
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Nenhuma biblioteca ou serviço principal foi atualizado."
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "A reinicialização provavelmente não é necessária."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -5800,11 +5809,14 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Para cada impressão de serviço do sistema associado <format> na saída "
+"padrão, seguida por uma nova linha. Qualquer diretiva '%s' em <format> é "
+"substituída pelo nome do serviço do sistema."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:51
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Gravar saída de depuração no arquivo <path>."
 
 #: src/commands/ps.cc:71 src/solve-commit.cc:462
 msgid "Check failed:"
@@ -6474,7 +6486,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Avançado:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -8319,11 +8331,11 @@ msgstr "O indicador %1% só pode ser usado uma vez."
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s usado em conjunto com %s, que se contradizem."
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "Tipo de pacote desconhecido"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
@@ -8337,7 +8349,7 @@ msgstr "Erro desconhecido ao atribuir o valor %1% ao indicador %2%."
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "O sinalizador '1%' só pode ser usado no máximo em %2% vezes."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
