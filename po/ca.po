@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-22 18:01+0000\n"
+"PO-Revision-Date: 2018-10-29 14:18+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2340,7 +2340,7 @@ msgstr ""
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Comprova si s'ha establert la bandera de reinici necessari."
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
@@ -5543,7 +5543,7 @@ msgstr "Contrasenya"
 
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Calen privilegis d'arrel per executar aquesta ordre."
 
 #: src/commands/conditions.cc:46
 msgid ""
@@ -5734,23 +5734,29 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Comprova si una actualització prèvia o una instal·lació de biblioteca o "
+"servei de base ha establert la bandera de reinici necessari.\n"
+"El codi de sortida ZYPPER_EXIT_INF_REBOOT_NEEDED indica que cal un reinici. "
+"Si no, el codi de sortida s'estableix a ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "S'han actualitzat biblioteques o serveis de base."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Cal reiniciar per assegurar que el sistema es beneficia d'aquestes "
+"actualitzacions."
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "No s'han actualitzat biblioteques o serveis de base."
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Probablement no és necessari reiniciar."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -6467,7 +6473,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Avançat:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -8328,11 +8334,11 @@ msgstr "La bandera %1% només es pot usar un cop."
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s usat conjuntament amb %s, els quals es contradiuen un a l'altre."
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "Tipus de paquet desconegut"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
@@ -8346,7 +8352,7 @@ msgstr "Error desconegut mentre s'assignava el valor %1% a la bandera %2%."
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "La bandera \"%1%\" només es pot usar un mínim de %2% cops."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
