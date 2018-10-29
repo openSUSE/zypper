@@ -50,11 +50,15 @@ function(ADD_A2X_MANPAGES)
     ENDFOREACH()
 endfunction(ADD_A2X_MANPAGES)
 
+SET (my_MAN1
+     needs-restarting.1)
+
 SET (my_MAN8
      zypper.8 zypper-log.8 zypp-refresh.8)
 
 ADD_A2X_MANPAGES(
     MAN_INST_PATH ${MANDIR}
+    MAN_PAGES1 ${my_MAN1}
     MAN_PAGES8 ${my_MAN8}
 )
 

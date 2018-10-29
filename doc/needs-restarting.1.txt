@@ -1,0 +1,33 @@
+NEEDS-RESTARTING(1)
+===================
+:man manual: NEEDS-RESTARTING
+:man source: SUSE Linux
+
+NAME
+----
+needs-restarting - Report running processes which should be restarted
+
+
+SYNOPSIS
+--------
+*needs-restartin* ['OPTIONS']
+
+
+DESCRIPTION
+-----------
+List running processes which might still use files and libraries deleted or updated by recent upgrades. They should be restarted to benefit from the latest updates.
+
+
+OPTIONS
+-------
+*-h*, *--help*::
+          Display a help message and exit.
+*-r*, *--reboothint*::
+          Only report whether a full reboot is required (returns 1) or not (returns 0).
+*-s*, *--services*::
+          List the affected systemd services only.
+
+
+SEE ALSO
+--------
+zypper(8)
