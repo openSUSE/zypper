@@ -162,6 +162,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_sysconfdir}/bash_completion.d/zypper.sh
 %{_bindir}/zypper
 %{_bindir}/yzpper
+%{_bindir}/needs-restarting
 %{_bindir}/installation_sources
 %{_sbindir}/zypp-refresh
 %dir %{_datadir}/zypper
@@ -169,6 +170,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir %{_datadir}/zypper/xml
 %{_datadir}/zypper/xml/xmlout.rnc
 %{_prefix}/lib/zypper
+%doc %{_mandir}/man1/needs-restarting.1*
 %doc %{_mandir}/man8/zypper.8*
 %doc %{_mandir}/man8/zypp-refresh.8*
 %doc %dir %{_datadir}/doc/packages/zypper

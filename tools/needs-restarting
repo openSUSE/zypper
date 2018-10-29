@@ -1,0 +1,70 @@
+#! /bin/bash
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software Foundation,
+# Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+function usage()
+{
+  cat <<EOF
+USAGE: needs-restarting [OPTIONS]
+
+    List running processes which might still use files and libraries deleted or
+    updated by recent upgrades. They should be restarted to benefit from the
+    latest updates.
+
+OPTIONS:
+
+    -h, --help
+           Display a help message and exit.
+
+    -r, --reboothint
+           Only report whether a full reboot is required (returns 1) or
+           not (returns 0).
+
+    -s, --services
+           List the affected systemd services only.
+EOF
+}
+
+function errexit()
+{
+  echo "needs-restarting: error: $@" >&2
+  exit 2
+}
+
+CMD_R=0
+CMD_S=''
+CMD_ERR=0
+for ARG in "$@"; do
+  case "$ARG" in
+    -h|--help)
+      usage; exit 0
+      ;;
+    -r|--reboothint)
+      CMD_R=1
+      ;;
+    -s|--services)
+      CMD_S='-s'
+      ;;
+    *)
+      errexit "unrecognized argument $ARG"
+      ;;
+  esac
+done
+
+if [ "$CMD_R" == 1 ]; then
+  zypper needs-rebooting || exit 1
+else
+  zypper ps -s $CMD_S
+fi

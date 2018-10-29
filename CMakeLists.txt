@@ -100,6 +100,12 @@ INSTALL(
   DESTINATION ${INSTALL_PREFIX}/sbin
 )
 
+# needs-restarting tool
+INSTALL(
+  PROGRAMS tools/needs-restarting
+  DESTINATION ${INSTALL_PREFIX}/bin
+)
+
 # zypper-aptitude compat tool
 INSTALL(
   PROGRAMS tools/aptitude tools/apt-get tools/apt
