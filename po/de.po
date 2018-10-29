@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-09 23:02+0000\n"
+"PO-Revision-Date: 2018-10-29 13:29+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8442,9 +8442,9 @@ msgid "The flag %1% is not compatible with argument %2% (%3%)."
 msgstr ""
 
 #: src/utils/flags/exceptions.cc:33
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "Die Angabe eines Quellpaketnamens ist zwingend erforderlich."
+msgstr "Das Flag %1% benötigt ein Argument."
 
 #: src/utils/flags/exceptions.cc:39
 #, boost-format
