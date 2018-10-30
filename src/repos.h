@@ -83,11 +83,9 @@ void report_unknown_repos( Out & out, const std::list<std::string> & not_found )
  * \param repos    List of repository specifiers as strings (alias/name/#/URL)
  * \param aliases  List of strings which should be fed by found aliases.
  * \param enabled_only Whether to return only enabled repos. Default is true.
- * \returns        Number of repos found.
- *
- * \throws ExitRequestException if one of the repos could not be found.
+ * \returns        ZYPPER_EXIT_OK or zypper error codes
  */
-unsigned repo_specs_to_aliases( Zypper & zypper, const std::list<std::string> & repos,
+int repo_specs_to_aliases(Zypper & zypper, const std::vector<std::string> &repos,
 				std::list<std::string> & aliases, bool enabled_only = true );
 
 /**

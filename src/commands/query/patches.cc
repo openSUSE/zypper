@@ -23,7 +23,7 @@ PatchesCmdBase::PatchesCmdBase(const std::vector<std::string> &commandAliases_r)
     DisableAll
   )
 {
-  _initRepoFlags.setCompatibilityMode( InitReposOptionSet::CompatModeBits::EnableRugOpt | InitReposOptionSet::CompatModeBits::EnableNewOpt );
+  _initRepoFlags.setCompatibilityMode( CompatModeBits::EnableRugOpt | CompatModeBits::EnableNewOpt );
 }
 
 

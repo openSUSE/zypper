@@ -24,7 +24,7 @@ InfoCmd::InfoCmd( const std::vector<std::string> &commandAliases_r, InfoCmd::Mod
   ),
   _cmdMode ( cmdMode_r )
 {
-  _initRepoOpts.setCompatibilityMode( cmdMode_r != Mode::Default ? InitReposOptionSet::CompatModeBits::EnableRugOpt : InitReposOptionSet::CompatModeBits::EnableNewOpt );
+  _initRepoOpts.setCompatibilityMode( cmdMode_r != Mode::Default ? CompatModeBits::EnableRugOpt : CompatModeBits::EnableNewOpt );
 }
 
 

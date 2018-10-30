@@ -22,6 +22,7 @@
 #include "commands/needs-rebooting.h"
 #include "commands/utils.h"
 #include "commands/query.h"
+#include "commands/installremove.h"
 
 using namespace zypp;
 
@@ -107,7 +108,10 @@ namespace
       { ZypperCommand::PACKAGES_e,         CommandFactory::make<PackagesCmd>( { "packages", "pa", "pkg" } ) },
       { ZypperCommand::PATCHES_e,          CommandFactory::make<PatchesCmd>( { "patches", "pch" } ) },
       { ZypperCommand::PATTERNS_e,         CommandFactory::make<PatternsCmd>( { "patterns", "pt" } ) },
-      { ZypperCommand::PRODUCTS_e,         CommandFactory::make<ProductsCmd>( { "products", "pd" } ) }
+      { ZypperCommand::PRODUCTS_e,         CommandFactory::make<ProductsCmd>( { "products", "pd" } ) },
+
+      { ZypperCommand::INSTALL_e,          CommandFactory::make<InstallCmd>( { "install", "in" } ) },
+      { ZypperCommand::REMOVE_e,           CommandFactory::make<RemoveCmd>(  { "remove", "rm" } ) }
     };
     return table;
   }
@@ -135,8 +139,8 @@ namespace
       //_t( REFRESH_e )		| "refresh"		| "ref";
       //_t( CLEAN_e )		| "clean"		| "cc" | "clean-cache" | "you-clean-cache" | "yc";
 
-      _t( INSTALL_e )		| "install"		| "in";
-      _t( REMOVE_e )		| "remove"		| "rm";
+      //_t( INSTALL_e )		| "install"		| "in";
+      //_t( REMOVE_e )		| "remove"		| "rm";
       _t( SRC_INSTALL_e )	| "source-install"	| "si";
       _t( VERIFY_e )		| "verify"		| "ve";
       _t( INSTALL_NEW_RECOMMENDS_e )| "install-new-recommends" | "inr";

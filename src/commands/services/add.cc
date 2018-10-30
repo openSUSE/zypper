@@ -80,7 +80,6 @@ void add_service_by_url( Zypper & zypper,
   ServiceInfo service;
 
   service.setAlias( alias.empty() ? timestamp() : alias );
-  parsed_opts::const_iterator it = zypper.cOpts().find("name");
   if ( !props._name.empty() )
     service.setName( props._name );
   service.setUrl( url );
