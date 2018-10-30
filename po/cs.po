@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-02 17:23+0000\n"
+"PO-Revision-Date: 2018-10-30 10:01+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -2404,7 +2404,7 @@ msgstr ""
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Zkontrolujte, zda je nastaven příznak potřeby rebootu."
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
@@ -5548,7 +5548,7 @@ msgstr "Heslo"
 
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Tento příkaz potřebuje práva správce (root)."
 
 #: src/commands/conditions.cc:46
 msgid ""
@@ -5742,23 +5742,29 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Zkontroluje, zda byl nastaven příznak potřeby rebootu po předchozí "
+"aktualizaci nebo instalaci knihovny nebo služby jádra systému.\n"
+"Návratový kód ZYPPER_EXIT_INF_REBOOT_NEEDED indikuje, že je restart systému "
+"(reboot) potřebný; ZYPPER_EXIT_OK, že není."
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Byly aktualizovány knihovny nebo služby jádra."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Pro uplatnění přínosu těchto aktualizací je vyžadován restart systému "
+"(reboot)."
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Nebyly aktualizovány žádné knihovny jádra systému ani služby."
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Reboot není pravděpodobně potřebný."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -5793,11 +5799,14 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Print <format> vypíše na standardní výstup každou přidruženou systémovou "
+"službu na jeden řádek. Každá direktiva '%s' v argumentu <format> je "
+"nahrazena názvem systémové služby."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:51
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Zapíše ladicí výstup do souboru <path>."
 
 #: src/commands/ps.cc:71 src/solve-commit.cc:462
 msgid "Check failed:"
@@ -6467,7 +6476,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Pokročilé:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -8304,11 +8313,11 @@ msgstr "Příznak %1% lze použít jen jednou."
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s je použito spolu s %s, což si odporuje."
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "Neznámý typ balíčku"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
@@ -8322,7 +8331,7 @@ msgstr "Neznámá chyba přiřazení hodnoty %1% příznaku %2%."
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "Příznak '%1%' lze použít nejvíce %2% krát."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
