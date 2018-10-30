@@ -66,7 +66,7 @@
 
 #include "commands/commandhelpformatter.h"
 #include "commands/locks.h"
-
+#include "commands/search/search-packages-hinthack.h"
 #include "commands/services/common.h"
 #include "commands/services/refresh.h"
 #include "commands/conditions.h"
@@ -385,46 +385,6 @@ parsed_opts copts; // command options
 
 ///////////////////////////////////////////////////////////////////
 namespace {
-
-  /** Hack for bsc#1089994: SLE15 hinting to the zypper-search-packages-plugin subcommand. */
-  inline void SLE15_SearchPackagesHintHack( Zypper & zypper )
-  {
-    if ( ! zypper.config().do_ttyout )
-      return;
-
-    Out & out( zypper.out() );
-    if ( !out.typeNORMAL() || out.verbosity() < Out::NORMAL )
-      return;
-
-    // Don't hint to a subcommand if --root is used (subcommands do not support global opts)
-    if ( zypper.globalOpts().changedRoot )
-      return;
-
-    ui::Selectable::Ptr plg;
-    if ( ResPool::instance().empty() )
-    {
-      // No pool - maybe 'zypper help search': Hint if plugin script is installed
-      if ( !PathInfo( "/usr/lib/zypper/commands/zypper-search-packages" ).isFile() )
-	return;
-    }
-    else
-    {
-      // Hint if package is in pool
-      plg = ui::Selectable::get( ResKind::package, "zypper-search-packages-plugin" );
-      if ( !plg )
-	return;
-    }
-
-    // So write out the hint....
-    str::Str msg;
-    // translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-    msg << str::Format(_("For an extended search including not yet activated remote resources please use '%1%'.")) % "zypper search-packages";
-    if ( plg && plg->installedEmpty() )
-      // translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-      msg << ' ' << str::Format(_("The package providing this subcommand is currently not installed. You can install it by calling '%1%'.")) % "zypper in zypper-search-packages-plugin";
-
-    out.notePar( msg );
-  }
 
   /** Whether user may create \a dir_r or has rw-access to it. */
   inline bool userMayUseDir( const Pathname & dir_r )
