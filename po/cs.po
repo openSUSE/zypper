@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-30 10:01+0000\n"
+"PO-Revision-Date: 2018-10-30 13:01+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -2204,22 +2204,22 @@ msgstr "Správa služeb:"
 #. translators: command summary: services, ls
 #: src/Zypper.cc:759 src/commands/services/list.cc:82
 msgid "List all defined services."
-msgstr " Vypíše všechny definované služby."
+msgstr "Vypíše všechny definované služby."
 
 #. translators: command summary: addservice, as
 #: src/Zypper.cc:761 src/commands/services/add.cc:104
 msgid "Add a new service."
-msgstr " Přidá novou službu."
+msgstr "Přidá novou službu."
 
 #. translators: command summary: modifyservice, ms
 #: src/Zypper.cc:763 src/commands/services/modify.cc:22
 msgid "Modify specified service."
-msgstr " Upraví zadanou službu."
+msgstr "Upraví zadanou službu."
 
 #. translators: command summary: removeservice, rs
 #: src/Zypper.cc:765 src/commands/services/remove.cc:21
 msgid "Remove specified service."
-msgstr " Odebere zadanou službu."
+msgstr "Odebere zadanou službu."
 
 #. translators: command summary: refresh-services, refs
 #: src/Zypper.cc:767 src/commands/services/refresh.cc:96
