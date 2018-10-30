@@ -14,7 +14,7 @@ using namespace zypp;
 /**
  * Loops through resolvables, checking if there is license to confirm. When
  * run interactively, it displays a dialog, otherwise it answers automatically
- * according to --auto-agree-with-licenses present or not present.
+ * according to \sa LicenseAgreementPolicy
  *
  * \returns true if all licenses have been confirmed, false otherwise.
  */

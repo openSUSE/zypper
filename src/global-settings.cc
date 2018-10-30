@@ -10,6 +10,8 @@ void GlobalSettings::reset()
 {
   DryRunSettings::reset();
   InitRepoSettings::reset();
+  SolverSettings::reset();
+  LicenseAgreementPolicy::reset();
 }
 
 void DryRunSettingsData::reset()
@@ -20,4 +22,22 @@ void DryRunSettingsData::reset()
 void InitRepoSettingsData::reset()
 {
   _repoFilter.clear();
+}
+
+void SolverSettingsData::reset()
+{
+  _debugSolver        = zypp::indeterminate;
+  _forceResolution    = zypp::indeterminate;
+  _recommends         = zypp::indeterminate;
+  _allowDowngrade     = zypp::indeterminate;
+  _allowNameChange    = zypp::indeterminate;
+  _allowVendorChange  = zypp::indeterminate;
+  _allowArchChange    = zypp::indeterminate;
+  _cleanDeps          = zypp::indeterminate;
+}
+
+void LicenseAgreementPolicyData::reset()
+{
+  _autoAgreeWithLicenses = false;
+  _autoAgreeWithProductLicenses = false;
 }

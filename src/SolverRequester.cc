@@ -22,6 +22,7 @@
 
 #include "Zypper.h"
 #include "SolverRequester.h"
+#include "global-settings.h"
 
 // libzypp logger settings
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
@@ -518,7 +519,7 @@ bool SolverRequester::installPatch( const PackageSpec & patchspec, const PoolIte
       Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
       if ( Zypper::instance().globalOpts().reboot_req_non_interactive )
         ignoreFlags |= Patch::Reboot;
-      if ( Zypper::instance().cOpts().count("auto-agree-with-licenses") )
+      if ( LicenseAgreementPolicy::instance()._autoAgreeWithLicenses )
 	ignoreFlags |= Patch::License;
 
       if ( selected.isUnwanted() )

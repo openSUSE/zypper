@@ -17,7 +17,22 @@
 #include <zypp/DownloadMode.h>
 #include <zypp/base/Flags.h>
 
-class DryRunOptionSet : public BaseCommandOptionSet
+enum class CompatModeBits {
+  EnableRugOpt = 1 << 0,
+  EnableNewOpt = 1 << 1
+};
+ZYPP_DECLARE_FLAGS( CompatModeFlags, CompatModeBits );
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS( CompatModeFlags )
+
+struct RugCompatModeMixin
+{
+  void setCompatibilityMode ( CompatModeFlags flags_r );
+
+  protected:
+    CompatModeFlags _compatMode = CompatModeBits::EnableNewOpt;
+};
+
+class DryRunOptionSet : public BaseCommandOptionSet, public RugCompatModeMixin
 {
 public:
  using BaseCommandOptionSet::BaseCommandOptionSet;
@@ -28,28 +43,16 @@ public:
   void reset() override;
 };
 
-class InitReposOptionSet : public BaseCommandOptionSet
+class InitReposOptionSet : public BaseCommandOptionSet, public RugCompatModeMixin
 {
 public:
-
-  enum class CompatModeBits {
-    EnableRugOpt = 1 << 0,
-    EnableNewOpt = 1 << 1
-  };
-  ZYPP_DECLARE_FLAGS( CompatModeFlags, CompatModeBits );
-
   using BaseCommandOptionSet::BaseCommandOptionSet;
-  void setCompatibilityMode ( CompatModeFlags flags_r );
-
-private:
-  CompatModeFlags _compatMode = CompatModeBits::EnableNewOpt;
 
   // BaseCommandOptionSet interface
 public:
   std::vector<zypp::ZyppFlags::CommandGroup> options() override;
   void reset() override;
 };
-ZYPP_DECLARE_OPERATORS_FOR_FLAGS( InitReposOptionSet::CompatModeFlags )
 
 class DownloadOptionSet : public BaseCommandOptionSet
 {
@@ -76,6 +79,17 @@ public:
   using BaseCommandOptionSet::BaseCommandOptionSet;
 
   SolvableFilterMode _mode = SolvableFilterMode::ShowAll;
+
+  // BaseCommandOptionSet interface
+public:
+  std::vector<zypp::ZyppFlags::CommandGroup> options() override;
+  void reset() override;
+};
+
+class LicensePolicyOptionSet : public BaseCommandOptionSet, public RugCompatModeMixin
+{
+public:
+ using BaseCommandOptionSet::BaseCommandOptionSet;
 
   // BaseCommandOptionSet interface
 public:

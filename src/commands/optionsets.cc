@@ -11,22 +11,35 @@
 
 #include <sstream>
 
+void RugCompatModeMixin::setCompatibilityMode(CompatModeFlags flags_r)
+{
+  _compatMode = flags_r;
+}
+
 std::vector<ZyppFlags::CommandGroup> DryRunOptionSet::options()
 {
-  return {{{
-    { "dry-run", 'D', ZyppFlags::NoArgument, ZyppFlags::BoolType( &DryRunSettings::instanceNoConst()._enabled, ZyppFlags::StoreTrue, DryRunSettings::instance()._enabled ),
-         _("Don't change anything, just report what would be done.")}
-  }}};
+  std::vector<ZyppFlags::CommandGroup> myOpts;
+  if ( _compatMode.testFlag( CompatModeBits::EnableRugOpt ) ) {
+    // rug uses -N shorthand
+    myOpts.push_back( {{
+       { "rug-dry-run", 'N', ZyppFlags::NoArgument | ZyppFlags::Hidden | ZyppFlags::Deprecated, ZyppFlags::BoolType( &DryRunSettings::instanceNoConst()._enabled, ZyppFlags::StoreTrue, DryRunSettings::instance()._enabled ),
+            "" }
+    }});
+  }
+
+  if ( _compatMode.testFlag( CompatModeBits::EnableNewOpt ) ) {
+    myOpts.push_back( {{
+       { "dry-run", 'D', ZyppFlags::NoArgument, ZyppFlags::BoolType( &DryRunSettings::instanceNoConst()._enabled, ZyppFlags::StoreTrue, DryRunSettings::instance()._enabled ),
+            _("Don't change anything, just report what would be done.")}
+    }});
+  }
+
+  return myOpts;
 }
 
 void DryRunOptionSet::reset()
 {
   DryRunSettings::reset();
-}
-
-void InitReposOptionSet::setCompatibilityMode( CompatModeFlags flags_r )
-{
-  _compatMode = flags_r;
 }
 
 std::vector<ZyppFlags::CommandGroup> InitReposOptionSet::options()
@@ -86,7 +99,7 @@ namespace
 
         if ( target.wasSetBefore() ) {
           Zypper::instance().out().warning(
-            str::form( overrideWarning().c_str(), opt.name ) );
+            str::form( overrideWarning().c_str(), ( opt.name + " " + *in ).c_str() ) );
         }
 
         if (*in == "only")
@@ -113,7 +126,7 @@ namespace
 
         if ( target.wasSetBefore() ) {
           Zypper::instance().out().warning(
-            str::form( overrideWarning().c_str(), opt.name ) );
+            str::form( overrideWarning().c_str(), opt.name.c_str() ) );
         }
 
         target.setMode( setFlag );
@@ -184,4 +197,44 @@ std::vector<ZyppFlags::CommandGroup> NotInstalledOnlyOptionSet::options()
 void NotInstalledOnlyOptionSet::reset()
 {
   _mode == SolvableFilterMode::ShowAll;
+}
+
+
+std::vector<ZyppFlags::CommandGroup> LicensePolicyOptionSet::options()
+{
+  auto &set = LicenseAgreementPolicy::instanceNoConst();
+  std::vector<ZyppFlags::CommandGroup> myOpts;
+  if ( _compatMode.testFlag( CompatModeBits::EnableRugOpt ) ) {
+    myOpts.push_back( {{
+            { "agree-to-third-party-licenses", '\0',
+                  ZyppFlags::NoArgument | ZyppFlags::Deprecated | ZyppFlags::Hidden,
+                  ZyppFlags::BoolType( &set._autoAgreeWithLicenses, ZyppFlags::StoreTrue ),
+                  ""
+            }
+        }}
+    );
+  }
+
+  if ( _compatMode.testFlag( CompatModeBits::EnableNewOpt ) ) {
+    myOpts.push_back( {{
+           { "auto-agree-with-licenses", 'l',
+                 ZyppFlags::NoArgument,
+                 ZyppFlags::BoolType( &set._autoAgreeWithLicenses, ZyppFlags::StoreTrue, set._autoAgreeWithLicenses ),
+                 _("Automatically say 'yes' to third party license confirmation prompt. See 'man zypper' for more details.")
+           },
+           { "auto-agree-with-product-licenses", '\0',
+                 ZyppFlags::NoArgument,
+                 ZyppFlags::BoolType( &set._autoAgreeWithProductLicenses, ZyppFlags::StoreTrue, set._autoAgreeWithProductLicenses ),
+                 _("Automatically accept product licenses only. See 'man zypper' for more details.")
+           }
+        }}
+    );
+  }
+
+  return myOpts;
+}
+
+void LicensePolicyOptionSet::reset()
+{
+  LicenseAgreementPolicy::reset();
 }

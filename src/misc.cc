@@ -28,6 +28,7 @@
 #include "utils/prompt.h"
 #include "utils/getopt.h"
 #include "utils/richtext.h"
+#include "global-settings.h"
 
 #include "misc.h"
 
@@ -96,8 +97,8 @@ namespace
 bool confirm_licenses( Zypper & zypper )
 {
   bool confirmed = true;
-  bool auto_agree_all = zypper.cOpts().count("auto-agree-with-licenses");
-  bool auto_agree_product = auto_agree_all || zypper.cOpts().count("auto-agree-with-product-licenses");
+  bool auto_agree_all = LicenseAgreementPolicy::instance()._autoAgreeWithLicenses;
+  bool auto_agree_product = auto_agree_all || LicenseAgreementPolicy::instance()._autoAgreeWithProductLicenses;
 
   for ( const PoolItem & pi : God->pool() )
   {

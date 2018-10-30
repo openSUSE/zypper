@@ -673,7 +673,7 @@ void report_unknown_repos( Out & out, const std::list<std::string> & not_found )
 
 // ----------------------------------------------------------------------------
 
-unsigned repo_specs_to_aliases( Zypper & zypper, const std::list<std::string> & rspecs, std::list<std::string> & aliases, bool enabled_only )
+int repo_specs_to_aliases( Zypper & zypper, const std::vector<std::string> & rspecs, std::list<std::string> & aliases, bool enabled_only )
 {
   std::list<std::string> not_found;
   std::list<RepoInfo> repos;
@@ -681,8 +681,7 @@ unsigned repo_specs_to_aliases( Zypper & zypper, const std::list<std::string> & 
   if ( !not_found.empty() )
   {
     report_unknown_repos( zypper.out(), not_found );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-    ZYPP_THROW( ExitRequestException("Unknown repo specified.") );
+    return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
   for_( it, repos.begin(), repos.end() )
   {
@@ -691,7 +690,7 @@ unsigned repo_specs_to_aliases( Zypper & zypper, const std::list<std::string> & 
     else
       zypper.out().warning( str::form(_("Ignoring disabled repository '%s'"), it->asUserString().c_str() ) );
   }
-  return aliases.size();
+  return ZYPPER_EXIT_OK;
 }
 
 // ---------------------------------------------------------------------------

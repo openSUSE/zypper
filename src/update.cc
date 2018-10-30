@@ -13,6 +13,7 @@
 #include "Table.h"
 #include "update.h"
 #include "main.h"
+#include "global-settings.h"
 
 using namespace zypp;
 typedef std::set<PoolItem> Candidates;
@@ -431,7 +432,7 @@ static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
   Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
   if (zypper.globalOpts().reboot_req_non_interactive)
     ignoreFlags |= Patch::Reboot;
-  if ( zypper.cOpts().count("auto-agree-with-licenses") )
+  if ( LicenseAgreementPolicy::instance()._autoAgreeWithLicenses )
     ignoreFlags |= Patch::License;
 
   cout << "interactive=\"" << (patch->interactiveWhenIgnoring(ignoreFlags) ? "true" : "false") << "\" ";

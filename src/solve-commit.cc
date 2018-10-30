@@ -22,7 +22,6 @@
 #include "utils/misc.h"
 #include "utils/prompt.h"	// Continue? and solver problem prompt
 #include "utils/pager.h"	// to view the summary
-#include "Summary.h"
 #include "global-settings.h"
 
 #include "solve-commit.h"
@@ -211,16 +210,8 @@ static void set_force_resolution( Zypper & zypper )
   // --force-resolution command line parameter value
   TriBool force_resolution = zypper.runtimeData().force_resolution;
 
-  if ( zypper.cOpts().count("force-resolution") )
-    force_resolution = true;
-  if ( zypper.cOpts().count("no-force-resolution") )
-  {
-    if ( force_resolution )
-      zypper.out().warning(str::form(
-        // translators: meaning --force-resolution and --no-force-resolution
-        _("%s conflicts with %s, will use the less aggressive %s"),
-          "--force-resolution", "--no-force-resolution", "--no-force-resolution"));
-    force_resolution = false;
+  if ( SolverSettings::instance()._forceResolution != zypp::indeterminate ) {
+    force_resolution = SolverSettings::instance()._forceResolution;
   }
 
   // if --force-resolution was not specified on the command line,
@@ -256,9 +247,10 @@ static void set_clean_deps( Zypper & zypper )
 {
   if ( zypper.command() == ZypperCommand::REMOVE )
   {
-    if ( zypper.cOpts().find("clean-deps") != zypper.cOpts().end() )
+    const auto &solverSettings = SolverSettings::instance();
+    if ( solverSettings._cleanDeps == true )
       God->resolver()->setCleandepsOnRemove(true);
-    else if ( zypper.cOpts().find("no-clean-deps") != zypper.cOpts().end() )
+    else if ( solverSettings._cleanDeps == false )
       God->resolver()->setCleandepsOnRemove(false);
   }
   DBG << "clean deps on remove: " << God->resolver()->cleandepsOnRemove() << endl;
@@ -268,14 +260,16 @@ static void set_no_recommends( Zypper & zypper )
 {
   bool no_recommends = !zypper.config().solver_installRecommends;
 
+  const auto &solverSettings = SolverSettings::instance();
+
   // override zypper.conf in these cases:
   if ( zypper.command() == ZypperCommand::REMOVE )
     // never install recommends when removing packages
     no_recommends = true;
-  else if ( zypper.cOpts().count("no-recommends") )
+  else if ( solverSettings._recommends == false )
     // install also recommended packages unless --no-recommends is specified
     no_recommends = true;
-  else if ( zypper.cOpts().count("recommends") )
+  else if ( solverSettings._recommends == true )
     no_recommends = false;
 
   DBG << "no recommends (only requires): " << no_recommends << endl;
@@ -286,7 +280,7 @@ static void set_no_recommends( Zypper & zypper )
 static void set_ignore_recommends_of_installed(Zypper & zypper)
 {
   bool ignore = true;
-  if ( ( zypper.command() == ZypperCommand::DIST_UPGRADE && !zypper.cOpts().count("no-recommends") )
+  if ( ( zypper.command() == ZypperCommand::DIST_UPGRADE && SolverSettings::instance()._recommends != false )
     || zypper.command() == ZypperCommand::INSTALL_NEW_RECOMMENDS )
     ignore = false;
   DBG << "ignore recommends of already installed packages: " << ignore << endl;
@@ -306,22 +300,20 @@ static void set_solver_flags( Zypper & zypper )
   God->resolver()->setUpdateMode( zypper.runtimeData().solve_with_update );
 
   // Use resolver->dupSet... if ZypperCommand::DIST_UPGRADE
-  if ( shared_ptr<InstallerBaseOptions> installOptions = zypper.commandOptionsAs<InstallerBaseOptions>() )
+  const auto &solverSettings = SolverSettings::instance();
+  if ( zypper.command() == ZypperCommand::DIST_UPGRADE )
   {
-    if ( zypper.command() == ZypperCommand::DIST_UPGRADE )
-    {
-      if ( installOptions->_allowDowngrade != -1 ) God->resolver()->dupSetAllowDowngrade( installOptions->_allowDowngrade );
-      if ( installOptions->_allowNameChange != -1 ) God->resolver()->dupSetAllowNameChange( installOptions->_allowNameChange );
-      if ( installOptions->_allowArchChange != -1 ) God->resolver()->dupSetAllowArchChange( installOptions->_allowArchChange );
-      if ( installOptions->_allowVendorChange != -1 ) God->resolver()->dupSetAllowVendorChange( installOptions->_allowVendorChange );
-    }
-    else
-    {
-      if ( installOptions->_allowDowngrade != -1 ) God->resolver()->setAllowDowngrade( installOptions->_allowDowngrade );
-      if ( installOptions->_allowNameChange != -1 ) God->resolver()->setAllowNameChange( installOptions->_allowNameChange );
-      if ( installOptions->_allowArchChange != -1 ) God->resolver()->setAllowArchChange( installOptions->_allowArchChange );
-      if ( installOptions->_allowVendorChange != -1 ) God->resolver()->setAllowVendorChange( installOptions->_allowVendorChange );
-    }
+    if ( solverSettings._allowDowngrade != zypp::indeterminate ) God->resolver()->dupSetAllowDowngrade( solverSettings._allowDowngrade );
+    if ( solverSettings._allowNameChange != zypp::indeterminate ) God->resolver()->dupSetAllowNameChange( solverSettings._allowNameChange );
+    if ( solverSettings._allowArchChange != zypp::indeterminate ) God->resolver()->dupSetAllowArchChange( solverSettings._allowArchChange );
+    if ( solverSettings._allowVendorChange != zypp::indeterminate ) God->resolver()->dupSetAllowVendorChange( solverSettings._allowVendorChange );
+  }
+  else
+  {
+    if ( solverSettings._allowDowngrade != zypp::indeterminate ) God->resolver()->setAllowDowngrade( solverSettings._allowDowngrade );
+    if ( solverSettings._allowNameChange != zypp::indeterminate ) God->resolver()->setAllowNameChange( solverSettings._allowNameChange );
+    if ( solverSettings._allowArchChange != zypp::indeterminate ) God->resolver()->setAllowArchChange( solverSettings._allowArchChange );
+    if ( solverSettings._allowVendorChange != zypp::indeterminate ) God->resolver()->setAllowVendorChange( solverSettings._allowVendorChange );
   }
 }
 
@@ -415,20 +407,15 @@ static void make_solver_test_case( Zypper & zypper )
   }
 }
 
-ZYppCommitPolicy get_commit_policy( Zypper & zypper )
+ZYppCommitPolicy get_commit_policy( Zypper & zypper, DownloadMode dlMode_r )
 {
   ZYppCommitPolicy policy;
-  const parsed_opts & opts = zypper.cOpts();
 
   if ( DryRunSettings::instance().isEnabled() )
     policy.dryRun(true);
 
-  if ( opts.find("download") != opts.end()
-    || opts.find("download-only") != opts.end()
-    || opts.find("download-in-advance") != opts.end()
-    || opts.find("download-in-heaps") != opts.end()
-    || opts.find("download-as-needed") != opts.end() )
-    policy.downloadMode(get_download_option(zypper));
+  if ( dlMode_r != DownloadDefault )
+    policy.downloadMode( dlMode_r );
 
   policy.syncPoolAfterCommit( policy.dryRun() ? false : zypper.runningShell() );
 
@@ -525,10 +512,10 @@ static void show_update_messages( Zypper & zypper, const UpdateNotifications & m
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
-void solve_and_commit ( Zypper & zypper )
+void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, DownloadMode dlMode_r )
 {
   bool need_another_solver_run = true;
-  bool dryRunEtc = DryRunSettings::instance().isEnabled() || ( get_download_option( zypper, true ) == DownloadOnly );
+  bool dryRunEtc = DryRunSettings::instance().isEnabled() || ( dlMode_r == DownloadOnly );
   do
   {
     // CALL SOLVER
@@ -555,7 +542,7 @@ void solve_and_commit ( Zypper & zypper )
         }
 
         // go on, we've got solution or we don't want a solution (we want testcase)
-        if ( success || zypper.cOpts().count("debug-solver") )
+        if ( success || SolverSettings::instance()._debugSolver )
           break;
 
         success = show_problems( zypper );
@@ -567,7 +554,7 @@ void solve_and_commit ( Zypper & zypper )
       }
     }
 
-    if ( zypper.cOpts().count("debug-solver") )
+    if ( SolverSettings::instance()._debugSolver )
     {
       make_solver_test_case( zypper );
       return;	// ZYPPER_EXIT_OK
@@ -577,15 +564,17 @@ void solve_and_commit ( Zypper & zypper )
 
     // SHOW SUMMARY
 
-    Summary summary( God->pool() );
+    Summary summary( God->pool(), summaryOptions_r );
 
-    if ( zypper.cOpts().count("details") )
-      summary.setViewOption( Summary::DETAILS );
-    else if ( zypper.out().verbosity() == Out::HIGH )
+    //if ( zypper.cOpts().count("details") )
+    //  summary.setViewOption( Summary::DETAILS );
+
+    if ( zypper.out().verbosity() == Out::HIGH )
       summary.setViewOption( Summary::SHOW_VERSION );
     else if ( zypper.out().verbosity() == Out::DEBUG )
       summary.setViewOption( Summary::SHOW_ALL );
 
+#if 0
     // show not updated packages if 'zypper up' (-t package or -t product)
     ResKindSet kinds;
     if ( zypper.cOpts().find("type") != zypper.cOpts().end() )
@@ -605,6 +594,7 @@ void solve_and_commit ( Zypper & zypper )
     {
       summary.setViewOption( Summary::SHOW_LOCKS );
     }
+#endif
 
     // if running on SUSE Linux Enterprise, report unsupported packages
     if ( runningOnEnterprise() )
@@ -612,7 +602,7 @@ void solve_and_commit ( Zypper & zypper )
     else
       summary.unsetViewOption( Summary::SHOW_UNSUPPORTED );
 
-    if ( get_download_option( zypper, true ) == DownloadOnly )
+    if ( dlMode_r == DownloadOnly )
       summary.setDownloadOnly( true );
 
     // show the summary
@@ -793,7 +783,7 @@ void solve_and_commit ( Zypper & zypper )
 	    zypper.out().info( s.str(), Out::HIGH );
 	  }
 
-          ZYppCommitResult result = God->commit( get_commit_policy( zypper ) );
+          ZYppCommitResult result = God->commit( get_commit_policy( zypper, dlMode_r ) );
           gData.show_media_progress_hack = false;
 	  gData.entered_commit = false;
 

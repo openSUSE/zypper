@@ -10,6 +10,8 @@
 #include <vector>
 #include <string>
 
+#include <zypp/TriBool.h>
+
 /**
  * \file This file is used for settings and flags that were directly parsed from copts in the code
  * \todo revisit each and every structure to determine if it can be replaced by a more clean approach
@@ -59,6 +61,33 @@ struct InitRepoSettingsData {
   std::vector<std::string> _repoFilter;
 };
 using InitRepoSettings = GlobalSettingSingleton<InitRepoSettingsData>;
+
+/**
+ * Changes behaviour of the solver.
+ */
+struct SolverSettingsData
+{
+  void reset ();
+
+  zypp::TriBool _debugSolver;
+  zypp::TriBool _forceResolution;
+  zypp::TriBool _recommends;
+  zypp::TriBool _allowDowngrade;
+  zypp::TriBool _allowNameChange;
+  zypp::TriBool _allowVendorChange;
+  zypp::TriBool _allowArchChange;
+  zypp::TriBool _cleanDeps;
+
+};
+using SolverSettings = GlobalSettingSingleton<SolverSettingsData>;
+
+struct LicenseAgreementPolicyData
+{
+  void reset ();
+  bool _autoAgreeWithLicenses = false;
+  bool _autoAgreeWithProductLicenses = false;
+};
+using LicenseAgreementPolicy = GlobalSettingSingleton<LicenseAgreementPolicyData>;
 
 
 

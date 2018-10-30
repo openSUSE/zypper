@@ -16,6 +16,7 @@
 #define SOLVE_COMMIT_H_
 
 #include "Zypper.h"
+#include "Summary.h"
 
 /**
  * Commonly shared Options mixin for all commands that install packages
@@ -71,7 +72,7 @@ bool resolve(Zypper & zypper);
  *         or ZYPPER_EXIT_OK or ZYPPER_EXIT_ERR_ZYPP on zypp erorr. 
  *  
  */
-void solve_and_commit(Zypper & zypper);
+void solve_and_commit(Zypper & zypper , Summary::ViewOptions summaryOptions_r = Summary::DEFAULT , DownloadMode dlMode_r = DownloadDefault);
 
 
 #endif /*SOLVE_COMMIT_H_*/
