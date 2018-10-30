@@ -61,6 +61,9 @@ void ZypperBaseCommand::reset()
   for ( BaseCommandOptionSet *set : _registeredOptionSets )
     set->reset();
 
+  _positionalArguments.clear();
+  _rawOptions.clear();
+
   //call the commands own implementation
   doReset();
 }
@@ -85,6 +88,41 @@ std::string ZypperBaseCommand::description() const
   return _description;
 }
 
+int ZypperBaseCommand::parseArguments(Zypper &zypper, const int firstOpt )
+{
+  const int argc    = zypper.argc();
+  char * const *argv = zypper.argv();
+  int nextArg = ZyppFlags::parseCLI( argc, argv, options(), firstOpt );
+
+  MIL << "Parsed new style arguments" << endl;
+
+  if ( _fillRawOptions ) {
+    std::ostringstream s;
+    s << _("Option program arguments: ");
+    for ( int i = firstOpt; i < nextArg; i++ ) {
+      std::string argument = argv[ i ];
+      s << "'" << argument << "' ";
+      _rawOptions.push_back( argument );
+    }
+    zypper.out().info( s.str(), Out::HIGH );
+  }
+
+  if ( nextArg < argc )
+  {
+    std::ostringstream s;
+    s << _("Non-option program arguments: ");
+    while ( nextArg < argc )
+    {
+      std::string argument = argv[nextArg++];
+      s << "'" << argument << "' ";
+      _positionalArguments.push_back( argument );
+    }
+    zypper.out().info( s.str(), Out::HIGH );
+  }
+
+  return nextArg;
+}
+
 bool ZypperBaseCommand::helpRequested() const
 {
   return _helpRequested;
@@ -105,51 +143,71 @@ std::vector<BaseCommandConditionPtr> ZypperBaseCommand::conditions() const
   return std::vector<BaseCommandConditionPtr>();
 }
 
-int ZypperBaseCommand::systemSetup( Zypper &zypp_r )
+int ZypperBaseCommand::systemSetup( Zypper &zypper )
 {
-  return defaultSystemSetup ( zypp_r, _systemInitFlags );
+  return defaultSystemSetup ( zypper, _systemInitFlags );
 }
 
-int ZypperBaseCommand::defaultSystemSetup( Zypper &zypp_r, SetupSystemFlags flags_r )
+int ZypperBaseCommand::defaultSystemSetup( Zypper &zypper, SetupSystemFlags flags_r )
 {
   DBG << "FLAGS:" << flags_r << endl;
 
   if ( flags_r.testFlag( ResetRepoManager ) )
-    zypp_r.initRepoManager();
+    zypper.initRepoManager();
 
   if ( flags_r.testFlag( InitTarget ) ) {
-    init_target( zypp_r );
-    if ( zypp_r.exitCode() != ZYPPER_EXIT_OK )
-      return zypp_r.exitCode();
+    init_target( zypper );
+    if ( zypper.exitCode() != ZYPPER_EXIT_OK )
+      return zypper.exitCode();
   }
 
   if ( flags_r.testFlag( InitRepos ) ) {
-    init_repos( zypp_r );
-    if ( zypp_r.exitCode() != ZYPPER_EXIT_OK )
-      return zypp_r.exitCode();
+    init_repos( zypper );
+    if ( zypper.exitCode() != ZYPPER_EXIT_OK )
+      return zypper.exitCode();
   }
 
-  DtorReset _tmp( zypp_r.globalOptsNoConst().disable_system_resolvables );
+  DtorReset _tmp( zypper.globalOptsNoConst().disable_system_resolvables );
   if ( flags_r.testFlag( LoadResolvables ) ) {
     if ( flags_r.testFlag( NoSystemResolvables ) ) {
-      zypp_r.globalOptsNoConst().disable_system_resolvables = true;
+      zypper.globalOptsNoConst().disable_system_resolvables = true;
     }
 
-    load_resolvables( zypp_r );
-    if ( zypp_r.exitCode() != ZYPPER_EXIT_OK )
-      return zypp_r.exitCode();
+    load_resolvables( zypper );
+    if ( zypper.exitCode() != ZYPPER_EXIT_OK )
+      return zypper.exitCode();
   }
 
   if ( flags_r.testFlag ( Resolve ) ) {
     // have REPOS and TARGET
     // compute status of PPP
-    resolve( zypp_r );
+    resolve( zypper );
   }
 
-  return zypp_r.exitCode();
+  return zypper.exitCode();
 }
 
-int ZypperBaseCommand::run(Zypper &zypp, const std::vector<std::string> &positionalArgs)
+bool ZypperBaseCommand::fillRawOptions() const
+{
+  return _fillRawOptions;
+}
+
+void ZypperBaseCommand::setFillRawOptions(bool fillRawOptions)
+{
+  _fillRawOptions = fillRawOptions;
+}
+
+std::vector<std::string> ZypperBaseCommand::rawOptions() const
+{
+  return _rawOptions;
+}
+
+std::vector<std::string> ZypperBaseCommand::positionalArguments() const
+{
+  return _positionalArguments;
+}
+
+int ZypperBaseCommand::run( Zypper &zypper )
 {
   MIL << "run: " << command().front() << endl;
   try
@@ -158,20 +216,20 @@ int ZypperBaseCommand::run(Zypper &zypp, const std::vector<std::string> &positio
       std::string error;
       int code = cond->check( error );
       if ( code != 0 ) {
-        zypp.out().error( error );
+        zypper.out().error( error );
         return code;
       }
     }
 
-    int code = systemSetup( zypp );
+    int code = systemSetup( zypper );
     if ( code != ZYPPER_EXIT_OK )
       return code;
 
-    return execute( zypp, positionalArgs );
+    return execute( zypper, _positionalArguments );
   }
   catch ( const Out::Error & error_r )
   {
-    error_r.report( zypp );
+    error_r.report( zypper );
     return error_r._exitcode;
   }
 
