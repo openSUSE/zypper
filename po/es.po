@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-07-13 14:06+0000\n"
-"Last-Translator: Victor hck <correohck@gmail.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2018-10-31 22:06+0000\n"
+"Last-Translator: jc sl <trcs@gmx.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -306,11 +306,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"La base de datos de rpm parece contener llaves gpg de la antigua versión V3 "
+"que están obsoletas y se consideran inseguras:"
 
 #: src/callbacks/keyring.h:446
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Para ver los detalles de una llave, invoque '%1%'."
 
 #: src/callbacks/keyring.h:450
 #, boost-format
@@ -318,6 +320,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"A menos que crea que la llave en cuestión sigue en uso, puede eliminarla de "
+"la base de datos de rpm invocando '%1%'."
 
 #: src/callbacks/keyring.h:472
 #, c-format, boost-format
@@ -622,7 +626,7 @@ msgstr "directorio"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "FILE"
-msgstr ""
+msgstr "ARCHIVO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
@@ -632,7 +636,7 @@ msgstr "ARCHIVO.repo"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FORMAT"
-msgstr ""
+msgstr "FORMATO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
@@ -642,7 +646,7 @@ msgstr "entero"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "PATH"
-msgstr ""
+msgstr "RUTA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
@@ -657,7 +661,7 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "TAG"
-msgstr ""
+msgstr "ETIQUETA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
@@ -2380,7 +2384,7 @@ msgstr ""
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Compruebe si estaba activado el indicador «necesita reiniciar»."
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
@@ -3822,23 +3826,25 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2661
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [OPCIONES] [NOMBRE DE PAQUETE] ..."
 
 #. translators: command description
 #: src/Zypper.cc:2664
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Actualiza todos los paquetes, o los ya instalados que especifique, con "
+"nuevas versiones, si es posible."
 
 #. translators: --skip-interactive
 #: src/Zypper.cc:2672
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Omitir las actualizaciones interactivas."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:2674
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "No omitir las actualizaciones interactivas."
 
 #. translators: -l, --auto-agree-with-licenses
 #: src/Zypper.cc:2676 src/Zypper.cc:2781 src/Zypper.cc:2942
@@ -3975,8 +3981,7 @@ msgstr "Instala solo los parches con esta gravedad."
 msgid ""
 "Install only patches issued up to, but not including, the specified date"
 msgstr ""
-"Instala solo los parches publicados hasta la fecha especificada, no "
-"inclusive."
+"Instala solo los parches publicados hasta la fecha especificada, no inclusive"
 
 #: src/Zypper.cc:2804
 msgid "Install only patches which affect the package management itself."
@@ -4177,7 +4182,7 @@ msgstr "Restringe la actualización al repositorio especificado."
 #. translators: -D, --dry-run
 #: src/Zypper.cc:2946
 msgid "Test the upgrade, do not actually upgrade"
-msgstr "Prueba la actualización sin actualizar nada."
+msgstr "Prueba la actualización sin actualizar nada"
 
 #: src/Zypper.cc:2999
 msgid ""
@@ -5622,18 +5627,23 @@ msgstr "Contraseña"
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
 msgstr ""
+"Se requieren privilegios de administrador (root) para ejecutar este comando."
 
 #: src/commands/conditions.cc:46
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Este es un servidor transaccional, use la actualización transaccional para "
+"actualizar o modificar el sistema."
 
 #: src/commands/conditions.cc:48
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"El sistema de archivos de destino está montado solo para lectura. Asegúrese "
+"de que permite escrituras."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -5808,23 +5818,30 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Comprueba si el indicador «necesita reiniciar» estaba activado por una "
+"actualización anterior o una instalación de una biblioteca o servicio "
+"básicos.\n"
+"El código de salida ZYPPER_EXIT_INF_REBOOT_NEEDED indica que es necesario "
+"reiniciar, en otro caso el código de salida se pone a ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Se han actualizado bibliotecas o servicios básicos."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Es necesario reiniciar para garantizar que su sistema se beneficia de estas "
+"actualizaciones."
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "No se han actualizado bibliotecas o servicios básicos."
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Es probable que no sea necesario reiniciar."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -5860,11 +5877,14 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Para cada servicio del sistema asociado, imprime <format> en la salida "
+"estándar, seguido de un salto de línea. Cualquier directiva '%s 1' en "
+"<format> es sustituida por el nombre del servicio del sistema."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:51
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Escribir la salida de depuración al archivo <path>."
 
 #: src/commands/ps.cc:71 src/solve-commit.cc:462
 msgid "Check failed:"
@@ -6196,7 +6216,7 @@ msgstr "Construye solo la base de datos, no descarga los metadatos."
 #. translators: -D, --download-only
 #: src/commands/repos/refresh.cc:69
 msgid "Only download raw metadata, don't build the database."
-msgstr "Descarga solo los metadatos en bruto, no construye la base de datos"
+msgstr "Descarga solo los metadatos en bruto, no construye la base de datos."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:74
@@ -6538,7 +6558,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Avanzado:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -8398,12 +8418,12 @@ msgstr "Error al analizar zypper.conf:"
 #: src/utils/flags/exceptions.cc:21
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "El indicador %1% es desconocido."
 
 #: src/utils/flags/exceptions.cc:27
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "El indicador %1% no es compatible con el argumento %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
 #, fuzzy, boost-format
@@ -8413,30 +8433,30 @@ msgstr "El nombre del paquete de origen es un argumento requerido."
 #: src/utils/flags/exceptions.cc:39
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "El indicador %1% solo puede usarse una vez."
 
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "Ha usado %s junto a %s, que se contradicen entre sí."
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "Tipo desconocido de paquete"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
-msgstr ""
+msgstr "Fuera de rango"
 
 #: src/utils/flags/flagtypes.cc:71
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Error desconocido al asignar el valor %1% al indicador %2%."
 
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "El indicador '%1%' solo puede usarse un máximo de %2% veces."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
