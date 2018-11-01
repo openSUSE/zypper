@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-08-03 21:07+0000\n"
-"Last-Translator: Emrecan Şuşter <emrecansuster@outlook.com>\n"
-"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
-">\n"
+"PO-Revision-Date: 2018-11-01 14:07+0000\n"
+"Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
+"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,11 +66,15 @@ msgstr ""
 "olduğundan kesinlikle emin değilseniz, devam etmeyin."
 
 #: src/callbacks/keyring.h:51
+#, fuzzy
 msgid ""
 "This file was modified after it has been signed. This may have been a "
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Bu dosya, imzalandıktan sonra değiştirildi. Bu kötü amaçlı bir değişiklik "
+"olabilir, bu yüzden artık güvenilir olmayabilir! Güvenli olduğundan emin "
+"değilseniz devam etmemelisiniz."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -124,9 +128,9 @@ msgstr "'%s' deposundan imzalanmamış '%s' dosyası kabuledilior. "
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "'%s' imzalanmamış , devam edilsin mi?"
+msgstr "'%1%' dosyası imzalanmamış."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
@@ -160,9 +164,9 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "%s dosyası bilinmeyen %s anahtarı ile imzalanmış , devam edilsin mi?"
+msgstr "'%1%' dosyası bilinmeyen '%2%' anahtarı ile imzalanmış."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
@@ -268,19 +272,20 @@ msgstr ""
 #: src/callbacks/keyring.h:382
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
-"Dosya içindeki değişikliklerin kötü amaçlı olmadığını iki kere kontrol edin. "
+"Bunun dosyadaki bazı kötü amaçlı değişikliklerden kaynaklanmadığını iki kez "
+"kontrol edin!"
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:392
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
-msgstr "'%1%' dosyası için imza doğrulama başarısız oldu. "
+msgstr "'%1%' dosyası için imza doğrulaması başarısız oldu."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:395
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr "'%1%' deposundan  '%2%' dosyası için imza doğrulama başarısız oldu. "
+msgstr "'%2%' deposundaki '%1%' dosyası için imza doğrulaması başarısız oldu."
 
 #: src/callbacks/keyring.h:439
 msgid ""
@@ -6660,7 +6665,7 @@ msgstr "Problem: "
 #: src/solve-commit.cc:52
 #, c-format, boost-format
 msgid " Solution %d: "
-msgstr "Çözüm %d:"
+msgstr " Çözüm %d: "
 
 #: src/solve-commit.cc:71
 msgid "Choose the above solution using '1' or skip, retry or cancel"
@@ -7634,7 +7639,7 @@ msgstr[1] ""
 
 #: src/utils/prompt.cc:215
 msgid "Trying again..."
-msgstr ""
+msgstr "Tekrar deneniyor..."
 
 #: src/utils/prompt.cc:289
 msgid "Cannot read input: bad stream or EOF."
