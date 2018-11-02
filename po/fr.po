@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-02 09:44+0000\n"
+"PO-Revision-Date: 2018-11-02 12:02+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
@@ -1513,7 +1513,7 @@ msgstr "Disponible"
 #. translators: property name; short; used like "Name: value"
 #: src/Summary.cc:1318 src/info.cc:346 src/info.cc:437 src/info.cc:568
 msgid "Installed"
-msgstr "installé"
+msgstr "Installé"
 
 #: src/Summary.cc:1323
 #, boost-format
@@ -2390,7 +2390,7 @@ msgstr ""
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr "Vérifie si le drapeau « redémarrage requis » a été défini."
+msgstr "Vérifie si le drapeau « redémarrage requis » a été positionné."
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
@@ -6848,7 +6848,7 @@ msgstr "Version"
 #: src/info.cc:73 src/search.cc:53 src/search.cc:491 src/search.cc:555
 #: src/update.cc:804
 msgid "Arch"
-msgstr "Arch"
+msgstr "Architecture"
 
 # TLABEL autoinst_2002_08_07_0216__427
 #. translators: property name; short; used like "Name: value"
