@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-01 14:07+0000\n"
-"Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
+"PO-Revision-Date: 2018-11-02 08:01+0000\n"
+"Last-Translator: Faruk Eryılmaz <frkerylmz@gmail.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
 "Language: tr\n"
@@ -102,7 +102,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
-msgstr ""
+msgstr "Rpm Adı:"
 
 #: src/callbacks/keyring.h:113
 #, boost-format
