@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-13 07:55+0000\n"
+"PO-Revision-Date: 2018-11-02 09:44+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2390,7 +2390,7 @@ msgstr ""
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Vérifie si le drapeau « redémarrage requis » a été défini."
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
@@ -5671,7 +5671,7 @@ msgstr "Mot de passe"
 
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Les privilèges root sont requis pour lancer cette commande."
 
 #: src/commands/conditions.cc:46
 msgid ""
@@ -5864,23 +5864,30 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Vérifie si le drapeau « redémarrage requis » a été positionné par une "
+"précédente mise à jour ou installation d'un service ou d'une bibliothèque de "
+"base.\n"
+"Le code de sortie ZYPPER_EXIT_INF_REBOOT_NEEDED indique qu'un redémarrage "
+"est nécessaire, autrement le code de sortie est mis à ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Les services ou bibliothèques de base ont été mis à jour."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Un redémarrage est requis pour s'assurer que votre système bénéficie de ces "
+"mises à jour."
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Aucun service ou bibliothèque de base n'a été mis à jour."
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Un redémarrage n'est probablement pas nécessaire."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -6600,7 +6607,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Avancé :"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -8487,11 +8494,11 @@ msgstr "Le drapeau %1% ne peut être utilisé qu'une seule fois."
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s utilisé avec %s, contradiction."
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "Type de paquet inconnu"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
@@ -8505,7 +8512,7 @@ msgstr "Erreur inconnue lors de l'assignation de la valeur %1% au drapeau %2%."
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "Le drapeau « %1% » ne peut être utilisé que %2% fois."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
