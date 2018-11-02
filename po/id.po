@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-05 15:03+0000\n"
+"PO-Revision-Date: 2018-11-02 15:00+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
-"Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
-"id/>\n"
+"Language-Team: Indonesian "
+"<https://l10n.opensuse.org/projects/zypper/master/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2252,7 +2252,7 @@ msgstr "Unduh rpm sumber untuk semua paket yang terpasang ke direktori lokal."
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Periksa apakah tanda perlu nyala ulang telah diatur."
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
@@ -5427,7 +5427,7 @@ msgstr "Kata Sandi"
 
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Hak akses root diperlukan untuk menjalankan perintah ini."
 
 #: src/commands/conditions.cc:46
 msgid ""
@@ -5615,23 +5615,29 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Memeriksa apakah tanda perlu nyala ulang ditetapkan oleh pemutakhiran "
+"sebelumnya atau memasang pustaka atau layanan inti.\n"
+"Kode keluar ZYPPER_EXIT_INF_REBOOT_NEEDED menunjukkan bahwa diperlukan nyala "
+"ulang, jika tidak, kode keluar diatur ke ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Pustaka atau layanan inti telah dimutakhirkan."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Nyala ulang diperlukan untuk memastikan bahwa sistem Anda mendapat manfaat "
+"dari pemutakhiran ini."
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Tidak ada pustaka atau layanan inti yang dimutakhirkan."
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Nyala ulang mungkin tidak diperlukan."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -5666,11 +5672,14 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Untuk setiap layanan sistem terkait cetak <format> pada keluaran standar, "
+"diikuti oleh baris baru. Setiap direktif '%s' dalam <format> diganti dengan "
+"nama layanan sistem."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:51
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Tulis keluaran awakutu ke berkas <path>."
 
 #: src/commands/ps.cc:71 src/solve-commit.cc:462
 msgid "Check failed:"
@@ -6340,7 +6349,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Tingkat Lanjut:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -8160,11 +8169,11 @@ msgstr "Tanda %1% hanya dapat digunakan satu kali."
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s digunakan bersama dengan %s, yang saling bertentangan."
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "Tipe paket tidak dikenal"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
@@ -8178,7 +8187,7 @@ msgstr "Galat tidak dikenal saat menetapkan nilai %1% ke tanda %2%."
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "Tanda '%1%' hanya dapat digunakan maksimal %2% kali."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
