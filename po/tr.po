@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-02 08:01+0000\n"
-"Last-Translator: Faruk Eryılmaz <frkerylmz@gmail.com>\n"
+"PO-Revision-Date: 2018-11-02 11:07+0000\n"
+"Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
 "Language: tr\n"
@@ -407,7 +407,7 @@ msgstr "İndirme işlemi başarısız oldu:"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
-msgstr ""
+msgstr "İmza doğrulaması başarısız oldu"
 
 #: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
@@ -423,7 +423,7 @@ msgstr "%s Çalışıyor(%s,%s)"
 #: src/callbacks/rpm.h:249
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr ""
+msgstr "%s kaldırılıyor"
 
 #: src/callbacks/rpm.h:272
 #, c-format, boost-format
@@ -434,7 +434,7 @@ msgstr "%s kaldırma başarısz:"
 #: src/callbacks/rpm.h:315
 #, c-format, boost-format
 msgid "Installing: %s"
-msgstr ""
+msgstr "Yükleniyor: %s"
 
 #: src/callbacks/rpm.h:338
 #, c-format, boost-format
@@ -444,7 +444,7 @@ msgstr ""
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:382
 msgid "Checking for file conflicts:"
-msgstr ""
+msgstr "Dosya çakışmaları için kontrol ediliyor:"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:416
@@ -472,8 +472,8 @@ msgstr[1] ""
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% dosya çakışması tespit edildi:"
+msgstr[1] "%1% dosya çakışması tespit edildi:"
 
 #: src/callbacks/rpm.h:442
 msgid "Conflicting files will be replaced."
@@ -494,8 +494,9 @@ msgid "This is an alias for '%s'."
 msgstr ""
 
 #: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:302
+#, fuzzy
 msgid "Command options:"
-msgstr ""
+msgstr "Komut seçenekleri:"
 
 #: src/commands/commandhelpformatter.h:102
 #, fuzzy
@@ -508,7 +509,7 @@ msgstr ""
 
 #: src/commands/commandhelpformatter.h:108
 msgid "This command has no additional options."
-msgstr ""
+msgstr "Bu komutun ek seçenekleri yok."
 
 #: src/commands/commandhelpformatter.h:111
 #, fuzzy
@@ -519,15 +520,15 @@ msgstr "Özellikleri ayarla"
 #: src/commands/commandhelpformatter.h:115
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "%1% ile aynı."
 
 #: src/commands/commandhelpformatter.h:163
 msgid "Usage:"
-msgstr ""
+msgstr "Kullanım:"
 
 #: src/commands/commandhelpformatter.h:165
 msgid "Global Options:"
-msgstr ""
+msgstr "Evrensel Seçenekler:"
 
 #: src/commands/commandhelpformatter.h:167
 msgid "Commands:"
@@ -544,7 +545,7 @@ msgstr "Hayır"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Not:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
@@ -1155,12 +1156,12 @@ msgid_plural ""
 msgstr[0] "Aşağıdaki desteler kurulacak:"
 
 #: src/Summary.cc:929
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aşağıdaki önerilen kaynak paketi otomatik olarak seçildi:"
+msgstr[1] "Aşağıdaki %d önerilen kaynak paketi otomatik olarak seçildi:"
 
 #: src/Summary.cc:935
 #, fuzzy, c-format, boost-format
@@ -1396,7 +1397,7 @@ msgstr[1] ""
 #: src/Summary.cc:1351
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
-msgstr ""
+msgstr "Toplam indirme boyutu: %1%. Önbellekli: %2%."
 
 # clients/online_update_load.ycp:380
 #: src/Summary.cc:1354
@@ -1544,7 +1545,7 @@ msgstr ""
 
 #: src/Summary.cc:1559
 msgid "System reboot required."
-msgstr ""
+msgstr "Sistemin yeniden başlatılması gerekiyor."
 
 #. translator: Printed after the summary but before the prompt to start the installation.
 #. Followed by some explanatory text telling it might be a good idea NOT to continue:
@@ -1568,7 +1569,7 @@ msgstr ""
 
 #: src/Zypper.cc:110 src/commands/reposerviceoptionsets.cc:77
 msgid "Disable the service (but don't remove it)."
-msgstr ""
+msgstr "Hizmeti devre dışı bırak (ama kaldırma)."
 
 #: src/Zypper.cc:111 src/commands/reposerviceoptionsets.cc:80
 msgid "Enable auto-refresh of the service."
@@ -1590,7 +1591,7 @@ msgstr "Geçersiz hizmet türü '{0}'"
 
 #: src/Zypper.cc:132 src/commands/reposerviceoptionsets.cc:77
 msgid "Disable the repository (but don't remove it)."
-msgstr ""
+msgstr "Depoyu devre dışı bırak (ama kaldırma)."
 
 #: src/Zypper.cc:133 src/commands/reposerviceoptionsets.cc:80
 #, fuzzy
@@ -1617,7 +1618,7 @@ msgstr ""
 
 #: src/Zypper.cc:138 src/commands/reposerviceoptionsets.cc:159
 msgid "Enable GPG check for this repository."
-msgstr ""
+msgstr "GPG kontrolünü bu depo için etkinleştir."
 
 #: src/Zypper.cc:139 src/commands/reposerviceoptionsets.cc:160
 #, fuzzy
@@ -1637,10 +1638,12 @@ msgstr ""
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
 msgstr ""
+"GPG kontrolünü etkinleştir ama imzasız paketlerin bu depodan yüklenmesine "
+"izin ver."
 
 #: src/Zypper.cc:143 src/commands/reposerviceoptionsets.cc:164
 msgid "Disable GPG check for this repository."
-msgstr ""
+msgstr "GPG kontrolünü bu depo için devre dışı bırak."
 
 #: src/Zypper.cc:144 src/commands/reposerviceoptionsets.cc:165
 msgid ""
@@ -1650,15 +1653,16 @@ msgstr ""
 
 #: src/Zypper.cc:147 src/commands/reposerviceoptionsets.cc:121
 msgid "Apply changes to all repositories."
-msgstr ""
+msgstr "Değişikliği tüm depolara uygula."
 
 #: src/Zypper.cc:148 src/commands/reposerviceoptionsets.cc:124
 msgid "Apply changes to all local repositories."
-msgstr ""
+msgstr "Değişikliği tüm yerel depolara uygula."
 
 #: src/Zypper.cc:149 src/commands/reposerviceoptionsets.cc:127
+#, fuzzy
 msgid "Apply changes to all remote repositories."
-msgstr ""
+msgstr "Değişikliği tüm uzak depolara uygula."
 
 #: src/Zypper.cc:150 src/commands/reposerviceoptionsets.cc:130
 msgid "Apply changes to repositories of specified type."
@@ -1680,11 +1684,11 @@ msgstr ""
 
 #: src/Zypper.cc:178
 msgid "Install also recommended packages in addition to the required ones."
-msgstr ""
+msgstr "Gerekli olanlara ek olarak önerilen paketleri de yükle."
 
 #: src/Zypper.cc:179
 msgid "Do not install recommended packages, only required ones."
-msgstr ""
+msgstr "Önerilen paketleri yükleme, sadece gerekli olanları yükle."
 
 #. auto license agreements
 #. Mainly for SUSEConnect, not (yet) documented
@@ -1757,8 +1761,9 @@ msgid "Ask PackageKit to quit?"
 msgstr "Hiçbir paket bulunamadı."
 
 #: src/Zypper.cc:338
+#, fuzzy
 msgid "PackageKit is still running (probably busy)."
-msgstr ""
+msgstr "PackageKit hala çalışıyor (muhtemelen meşgul)."
 
 #: src/Zypper.cc:339
 msgid "Try again?"
@@ -1797,7 +1802,7 @@ msgstr ""
 #. translators: --help, -h
 #: src/Zypper.cc:664
 msgid "Help."
-msgstr ""
+msgstr "Yardım."
 
 #. translators: --version, -V
 #: src/Zypper.cc:666
@@ -1827,7 +1832,7 @@ msgstr ""
 #. translators: --verbose, -v
 #: src/Zypper.cc:676
 msgid "Increase verbosity."
-msgstr ""
+msgstr "Ayrıntı seviyesini arttır."
 
 #. translators: --color / --no-color
 #: src/Zypper.cc:679
@@ -1847,7 +1852,7 @@ msgstr ""
 #. translators: --non-interactive, -n
 #: src/Zypper.cc:685
 msgid "Do not ask anything, use default answers automatically."
-msgstr ""
+msgstr "Hiçbir şey sorma, varsayılan yanıtları otomatik olarak kullan."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Zypper.cc:687
@@ -1863,7 +1868,7 @@ msgstr ""
 #. translators: --ignore-unknown, -i
 #: src/Zypper.cc:691
 msgid "Ignore unknown packages."
-msgstr ""
+msgstr "Bilinmeyen paketleri gözardı et."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Zypper.cc:695
@@ -1892,12 +1897,13 @@ msgstr ""
 
 #: src/Zypper.cc:705
 msgid "Repository Options:"
-msgstr ""
+msgstr "Depo Seçenekleri:"
 
 #. translators: --no-gpg-checks
 #: src/Zypper.cc:707
+#, fuzzy
 msgid "Ignore GPG check failures and continue."
-msgstr ""
+msgstr "GPG kontrol hatalarını gözardı et ve devam et."
 
 #. translators: --gpg-auto-import-keys
 #: src/Zypper.cc:709
@@ -1923,18 +1929,20 @@ msgstr ""
 
 #. translators: --no-refresh
 #: src/Zypper.cc:717
+#, fuzzy
 msgid "Do not refresh the repositories."
-msgstr ""
+msgstr "Depoları tazeleme."
 
 #. translators: --no-cd
 #: src/Zypper.cc:719
 msgid "Ignore CD/DVD repositories."
-msgstr ""
+msgstr "CD/DVD depolarını gözardı et."
 
 #. translators: --no-remote
 #: src/Zypper.cc:721
+#, fuzzy
 msgid "Ignore remote repositories."
-msgstr ""
+msgstr "Uzak depoları gözardı et."
 
 #. translators: --releasever
 #: src/Zypper.cc:723
@@ -1961,7 +1969,7 @@ msgstr ""
 #. translators: --disable-system-resolvables
 #: src/Zypper.cc:731
 msgid "Do not read installed packages."
-msgstr ""
+msgstr "Yüklü paketleri okuma."
 
 #. translators: command summary: help, ?
 #: src/Zypper.cc:737
@@ -1975,28 +1983,28 @@ msgstr ""
 
 #: src/Zypper.cc:741
 msgid "Repository Management:"
-msgstr ""
+msgstr "Depo Yönetimi:"
 
 #. translators: command summary: repos, lr
 #: src/Zypper.cc:743 src/commands/repos/list.cc:75
 #: src/commands/repos/list.cc:76
 msgid "List all defined repositories."
-msgstr ""
+msgstr "Tüm tanımlı depoları listele."
 
 #. translators: command summary: addrepo, ar
 #: src/Zypper.cc:745 src/commands/repos/add.cc:24
 msgid "Add a new repository."
-msgstr ""
+msgstr "Yeni bir depo ekle."
 
 #. translators: command summary: removerepo, rr
 #: src/Zypper.cc:747 src/commands/repos/remove.cc:22
 msgid "Remove specified repository."
-msgstr ""
+msgstr "Belirtilen depoyu sil."
 
 #. translators: command summary: renamerepo, nr
 #: src/Zypper.cc:749 src/commands/repos/rename.cc:65
 msgid "Rename specified repository."
-msgstr ""
+msgstr "Belirtilen depoyu yeniden adlandır."
 
 #. translators: command summary: modifyrepo, mr
 #. translators: command summary
@@ -2013,21 +2021,21 @@ msgstr ""
 #: src/Zypper.cc:755 src/commands/repos/clean.cc:17
 #: src/commands/repos/clean.cc:18
 msgid "Clean local caches."
-msgstr ""
+msgstr "Yerel önbelleği temizle."
 
 #: src/Zypper.cc:757
 msgid "Service Management:"
-msgstr ""
+msgstr "Hizmet Yönetimi:"
 
 #. translators: command summary: services, ls
 #: src/Zypper.cc:759 src/commands/services/list.cc:82
 msgid "List all defined services."
-msgstr ""
+msgstr "Tüm tanımlı hizmetleri listele."
 
 #. translators: command summary: addservice, as
 #: src/Zypper.cc:761 src/commands/services/add.cc:104
 msgid "Add a new service."
-msgstr ""
+msgstr "Yeni bir hizmet ekle."
 
 #. translators: command summary: modifyservice, ms
 #: src/Zypper.cc:763 src/commands/services/modify.cc:22
