@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-02 11:07+0000\n"
+"PO-Revision-Date: 2018-11-03 12:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -2015,7 +2015,7 @@ msgstr ""
 #. translators: command summary: refresh, ref
 #: src/Zypper.cc:753 src/commands/repos/refresh.cc:26
 msgid "Refresh all repositories."
-msgstr ""
+msgstr "Tüm depoları yenile."
 
 #. translators: command summary: clean
 #: src/Zypper.cc:755 src/commands/repos/clean.cc:17
@@ -2050,31 +2050,32 @@ msgstr ""
 #. translators: command summary: refresh-services, refs
 #: src/Zypper.cc:767 src/commands/services/refresh.cc:96
 msgid "Refresh all services."
-msgstr ""
+msgstr "Tüm hizmetleri yenile."
 
 #: src/Zypper.cc:769
 msgid "Software Management:"
-msgstr ""
+msgstr "Yazılım Yönetimi:"
 
 #. translators: command summary: install, in
 #: src/Zypper.cc:771
 msgid "Install packages."
-msgstr ""
+msgstr "Paketleri yükle."
 
 #. translators: command summary: remove, rm
 #: src/Zypper.cc:773
 msgid "Remove packages."
-msgstr ""
+msgstr "Paketleri kaldır."
 
 #. translators: command summary: verify, ve
 #: src/Zypper.cc:775
 msgid "Verify integrity of package dependencies."
-msgstr ""
+msgstr "Paket bağımlılıklarının bütünlüğünü doğrula."
 
 #. translators: command summary: source-install, si
 #: src/Zypper.cc:777
+#, fuzzy
 msgid "Install source packages and their build dependencies."
-msgstr ""
+msgstr "Kaynak paketlerini ve bunların yapı bağımlılıklarını yükle."
 
 #. translators: command summary: install-new-recommends, inr
 #: src/Zypper.cc:779
@@ -2083,27 +2084,27 @@ msgstr ""
 
 #: src/Zypper.cc:781
 msgid "Update Management:"
-msgstr ""
+msgstr "Güncelleme Yönetimi:"
 
 #. translators: command summary: update, up
 #: src/Zypper.cc:783
 msgid "Update installed packages with newer versions."
-msgstr ""
+msgstr "Yüklü paketleri daha yeni sürümlerle güncelle."
 
 #. translators: command summary: list-updates, lu
 #: src/Zypper.cc:785
 msgid "List available updates."
-msgstr ""
+msgstr "Mevcut güncellemeleri listele."
 
 #. translators: command summary: patch
 #: src/Zypper.cc:787
 msgid "Install needed patches."
-msgstr ""
+msgstr "Gerekli yamaları yükle."
 
 #. translators: command summary: list-patches, lp
 #: src/Zypper.cc:789
 msgid "List needed patches."
-msgstr ""
+msgstr "Gerekli yamaları listele."
 
 #. translators: command summary: dist-upgrade, dup
 #. translators: command description
@@ -2114,11 +2115,11 @@ msgstr ""
 #. translators: command summary: patch-check, pchk
 #: src/Zypper.cc:793
 msgid "Check for patches."
-msgstr ""
+msgstr "Yamalar için kontrol et."
 
 #: src/Zypper.cc:795
 msgid "Querying:"
-msgstr ""
+msgstr "Sorgulanıyor:"
 
 #. translators: command summary: search, se
 #: src/Zypper.cc:797
@@ -2128,12 +2129,12 @@ msgstr ""
 #. translators: command summary: info, if
 #: src/Zypper.cc:799
 msgid "Show full information for specified packages."
-msgstr ""
+msgstr "Belirtilen paketler için tam bilgiyi göter."
 
 #. translators: command summary: patch-info
 #: src/Zypper.cc:801
 msgid "Show full information for specified patches."
-msgstr ""
+msgstr "Belirtilen yamalar için tam bilgiyi göster."
 
 #. translators: command summary: pattern-info
 #: src/Zypper.cc:803
@@ -2143,17 +2144,17 @@ msgstr ""
 #. translators: command summary: product-info
 #: src/Zypper.cc:805
 msgid "Show full information for specified products."
-msgstr ""
+msgstr "Belirtilen ürünler için tam bilgiyi göster."
 
 #. translators: command summary: patches, pch
 #: src/Zypper.cc:807
 msgid "List all available patches."
-msgstr ""
+msgstr "Mevcut tüm yamaları listele."
 
 #. translators: command summary: packages, pa
 #: src/Zypper.cc:809
 msgid "List all available packages."
-msgstr ""
+msgstr "Mevcut tüm paketleri listele."
 
 #. translators: command summary: patterns, pt
 #: src/Zypper.cc:811
@@ -2163,7 +2164,7 @@ msgstr ""
 #. translators: command summary: products, pd
 #: src/Zypper.cc:813
 msgid "List all available products."
-msgstr ""
+msgstr "Mevcut tüm ürünleri listele."
 
 #. translators: command summary: what-provides, wp
 #: src/Zypper.cc:815
@@ -2197,7 +2198,7 @@ msgstr ""
 
 #: src/Zypper.cc:827
 msgid "Other Commands:"
-msgstr ""
+msgstr "Diğer Komutlar:"
 
 #. translators: command summary: versioncmp, vcmp
 #: src/Zypper.cc:829
@@ -2232,7 +2233,7 @@ msgstr ""
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
-msgstr ""
+msgstr "Alt Komutlar:"
 
 #. translators: command summary: subcommand
 #: src/Zypper.cc:842
@@ -2529,17 +2530,17 @@ msgstr "Sadece kurulu desteler"
 #: src/Zypper.cc:1571 src/Zypper.cc:1621
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
-msgstr ""
+msgstr "%s seçeneğinin burada etkisi yok, gözardı ediliyor."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/Zypper.cc:1704
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "Zypper kabuğu alt komutların çalıştırılmasını desteklemiyor."
 
 #: src/Zypper.cc:1783
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
-msgstr ""
+msgstr "%s komutu %s ile değiştirildi."
 
 #: src/Zypper.cc:1784
 #, c-format, boost-format
@@ -2566,13 +2567,13 @@ msgstr ""
 #. translators: --from <ALIAS|#|URI>
 #: src/Zypper.cc:1980
 msgid "Select packages from the specified repository."
-msgstr ""
+msgstr "Paketleri belirtilen depodan seç."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:1982 src/Zypper.cc:2087 src/Zypper.cc:2238 src/Zypper.cc:2670
 #: src/Zypper.cc:2795 src/Zypper.cc:2940
 msgid "Load only the specified repository."
-msgstr ""
+msgstr "Sadece belirtilen depoyu yükle."
 
 #. translators: -t, --type <TYPE>
 #: src/Zypper.cc:1984 src/Zypper.cc:2089 src/Zypper.cc:2558 src/Zypper.cc:2668
@@ -2580,7 +2581,7 @@ msgstr ""
 #: src/commands/locks/remove.cc:45
 #, boost-format
 msgid "Type of package (%1%)."
-msgstr ""
+msgstr "Paketin türü (%1%)."
 
 #. translators: -n, --name
 #: src/Zypper.cc:1986 src/Zypper.cc:2091
@@ -2617,13 +2618,13 @@ msgstr ""
 #. translators: -D, --dry-run
 #: src/Zypper.cc:1998 src/Zypper.cc:2309
 msgid "Test the installation, do not actually install."
-msgstr ""
+msgstr "Kurulumu test et, gerçekten kurma."
 
 #. translators: --details
 #: src/Zypper.cc:2000 src/Zypper.cc:2101 src/Zypper.cc:2242 src/Zypper.cc:2311
 #: src/Zypper.cc:2684 src/Zypper.cc:2799 src/Zypper.cc:2948
 msgid "Show the detailed installation summary."
-msgstr ""
+msgstr "Ayrıntılı kurulum özetini göster."
 
 #. translators: --download
 #: src/Zypper.cc:2002 src/Zypper.cc:2245 src/Zypper.cc:2313 src/Zypper.cc:2686
@@ -2638,7 +2639,7 @@ msgstr ""
 #: src/Zypper.cc:2004 src/Zypper.cc:2180 src/Zypper.cc:2247 src/Zypper.cc:2315
 #: src/Zypper.cc:2688 src/Zypper.cc:2803 src/Zypper.cc:2952
 msgid "Only download the packages, do not install."
-msgstr ""
+msgstr "Paketleri sadece indir, kurma."
 
 #. translators: -y, --no-confirm
 #: src/Zypper.cc:2005 src/Zypper.cc:2103 src/Zypper.cc:2248 src/Zypper.cc:2690
@@ -2712,7 +2713,7 @@ msgstr ""
 #. translators: -u, --clean-deps
 #: src/Zypper.cc:2095
 msgid "Automatically remove unneeded dependencies."
-msgstr ""
+msgstr "Gerekli olmayan bağımlılıkları otomatik olarak kaldır."
 
 #. translators: -U, --no-clean-deps
 #: src/Zypper.cc:2097
@@ -2793,7 +2794,7 @@ msgstr ""
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2178
 msgid "Install packages only from specified repositories."
-msgstr ""
+msgstr "Paketleri sadece belirtilen depolardan yükle."
 
 #: src/Zypper.cc:2213
 #, c-format, boost-format
@@ -2824,11 +2825,13 @@ msgid ""
 "Check whether dependencies of installed packages are satisfied and suggest "
 "to install or remove packages in order to repair the dependency problems."
 msgstr ""
+"Yüklü paketlerin bağımlılıklarının sağlanıp sağlanmadığını kontrol et ve "
+"bağımlılık sorunlarını onarmak için paketleri yüklemeyi veya kaldırmayı öner."
 
 #. translators: -D, --dry-run
 #: src/Zypper.cc:2240
 msgid "Test the repair, do not actually do anything to the system."
-msgstr ""
+msgstr "Onarımı test et, sisteme gerçekten bir şey yapma."
 
 #: src/Zypper.cc:2283
 #, c-format, boost-format
@@ -3086,12 +3089,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2551
 msgid "list-updates (lu) [OPTIONS]"
-msgstr ""
+msgstr "list-updates (lu) [SEÇENEKLER]"
 
 #. translators: command description
 #: src/Zypper.cc:2554
 msgid "List all available updates."
-msgstr ""
+msgstr "Mevcut tüm güncellemeleri listele."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2560
@@ -3187,8 +3190,9 @@ msgstr ""
 
 #. translators: --skip-interactive
 #: src/Zypper.cc:2672
+#, fuzzy
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Etkileşimli güncellemeleri atla."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:2674
@@ -3205,7 +3209,7 @@ msgstr ""
 #. translators: -D, --dry-run
 #: src/Zypper.cc:2682 src/Zypper.cc:2797
 msgid "Test the update, do not actually update."
-msgstr ""
+msgstr "Güncellemeyi test et, gerçekten güncelleme."
 
 #: src/Zypper.cc:2740
 #, c-format, boost-format
@@ -3246,7 +3250,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2770
 msgid "patch [OPTIONS]"
-msgstr ""
+msgstr "patch [SEÇENEKLER]"
 
 #. translators: command description
 #: src/Zypper.cc:2773
@@ -3303,12 +3307,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2837
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [SEÇENEKLER]"
 
 #. translators: command description
 #: src/Zypper.cc:2840
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Uygulanabilir tüm yamaları listele."
 
 #. translators: -b, --bugzilla[=#]
 #: src/Zypper.cc:2844
