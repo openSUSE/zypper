@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-02 06:01+0000\n"
+"PO-Revision-Date: 2018-11-03 02:36+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
-"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_CN/>\n"
+"Language-Team: Chinese (China) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2154,7 +2154,7 @@ msgstr "下载全部已安装软件包的源代码 RPM 到一个本地文件夹�
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "检查 needs-reboot 旗标是否设置。"
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
@@ -5144,7 +5144,7 @@ msgstr "密码"
 
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "需要 Root 权限才可运行此命令。"
 
 #: src/commands/conditions.cc:46
 msgid ""
@@ -5327,23 +5327,25 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"检查上一次更新后、核心函数库或服务安装后是否设置了需要重启旗标。\n"
+"退出代码 ZYPPER_EXIT_INF_REBOOT_NEEDED 表示需要重启，否则退出代码被设为 ZYPPER_EXIT_OK。"
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "核心函数库或服务已被更新。"
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
-msgstr ""
+msgstr "这些更新需要重启您的计算机后才会生效。"
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "没有核心函数库或服务被更新。"
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "或许无需重启。"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -5374,12 +5376,12 @@ msgid ""
 "For each associated system service print <format> on the standard output, "
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
-msgstr ""
+msgstr "每个相关系统服务均会输出 <format> 至标准输出，并另起一行。<format> 中的所有 ‘%s’ 参数均会被替换为系统服务名称。"
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:51
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "写入调试输出到文件 <path>。"
 
 #: src/commands/ps.cc:71 src/solve-commit.cc:462
 msgid "Check failed:"
@@ -6026,7 +6028,7 @@ msgstr "修改通过别名、编号、URI 或 '%1%' 聚合选项指定的服务�
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "高级："
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -7781,11 +7783,11 @@ msgstr "旗标 %1% 只能使用一次。"
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s 与 %s 在一起使用，它们是彼此冲突的。"
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "未知软件包类型"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
@@ -7799,7 +7801,7 @@ msgstr "赋值 %1% 到旗标 %2% 时发生未知错误。"
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "旗标 '%1%' 最多只可以使用 %2% 次。"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
