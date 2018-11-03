@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-03 02:36+0000\n"
+"PO-Revision-Date: 2018-11-03 05:01+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) "
 "<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
@@ -2154,7 +2154,7 @@ msgstr "下载全部已安装软件包的源代码 RPM 到一个本地文件夹�
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:839 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr "检查 needs-reboot 旗标是否设置。"
+msgstr "检查需要重启旗标是否设置。"
 
 #: src/Zypper.cc:840
 msgid "Subcommands:"
