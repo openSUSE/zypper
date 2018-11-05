@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-04 12:07+0000\n"
+"PO-Revision-Date: 2018-11-05 10:30+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -3577,7 +3577,7 @@ msgstr ""
 #. translators: -d, --search-descriptions
 #: src/Zypper.cc:3075
 msgid "Search also in package summaries and descriptions."
-msgstr ""
+msgstr "Paket özetleri ve açıklamalarında da ara."
 
 #. translators: -C, --case-sensitive
 #: src/Zypper.cc:3077
@@ -3587,32 +3587,32 @@ msgstr ""
 #. translators: -i, --installed-only
 #: src/Zypper.cc:3079 src/Zypper.cc:3195
 msgid "Show only installed packages."
-msgstr ""
+msgstr "Sadece yüklü paketleri göster."
 
 #. translators: -u, --not-installed-only
 #: src/Zypper.cc:3081 src/Zypper.cc:3197
 msgid "Show only packages which are not installed."
-msgstr ""
+msgstr "Sadece yüklü olmayan paketleri göster."
 
 #. translators: -t, --type <TYPE>
 #: src/Zypper.cc:3083
 msgid "Search only for packages of the specified type."
-msgstr ""
+msgstr "Sadece belirtilen türdeki paketleri ara."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3085
 msgid "Search only in the specified repository."
-msgstr ""
+msgstr "Sadece belirtilen depoda ara."
 
 #. translators: --sort-by-name
 #: src/Zypper.cc:3087
 msgid "Sort packages by name (default)."
-msgstr ""
+msgstr "Paketleri ada göre sırala (varsayılan)."
 
 #. translators: --sort-by-repo
 #: src/Zypper.cc:3089
 msgid "Sort packages by repository."
-msgstr ""
+msgstr "Paketleri depoya göre sırala."
 
 #. translators: -s, --details
 #: src/Zypper.cc:3091
@@ -3629,7 +3629,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3112
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [SEÇENEKLER]"
 
 #. translators: command description
 #: src/Zypper.cc:3115
@@ -3640,8 +3640,9 @@ msgstr ""
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3119
+#, fuzzy
 msgid "Check for patches only in the specified repository."
-msgstr ""
+msgstr "Yamaları sadece belirtilen depolarda denetle."
 
 #. translators: --updatestack-only
 #: src/Zypper.cc:3121
@@ -3666,12 +3667,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3143
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr ""
+msgstr "patches (pch) [DEPO] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3146
 msgid "List all patches available in specified repositories."
-msgstr ""
+msgstr "Belirtilen depodaki mevcut tüm yamaları listele."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3150 src/Zypper.cc:3193 src/Zypper.cc:3253 src/Zypper.cc:3309
@@ -3692,12 +3693,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3186
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "packages (pa) [SEÇENEKLER] [DEPO] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3189
 msgid "List all packages available in specified repositories."
-msgstr ""
+msgstr "Belirtilen depodaki mevcut tüm paketleri listele."
 
 #. translators: --orphaned
 #: src/Zypper.cc:3199
@@ -3706,8 +3707,9 @@ msgstr ""
 
 #. translators: --suggested
 #: src/Zypper.cc:3201
+#, fuzzy
 msgid "Show packages which are suggested."
-msgstr ""
+msgstr "Önerilen paketleri göster."
 
 #. translators: --recommended
 #: src/Zypper.cc:3203
@@ -3717,17 +3719,17 @@ msgstr ""
 #. translators: --unneeded
 #: src/Zypper.cc:3205
 msgid "Show packages which are unneeded."
-msgstr ""
+msgstr "Gerekli olmayan paketleri göster."
 
 #. translators: -N, --sort-by-name
 #: src/Zypper.cc:3207
 msgid "Sort the list by package name."
-msgstr ""
+msgstr "Listeyi paket adına göre sırala."
 
 #. translators: -R, --sort-by-repo
 #: src/Zypper.cc:3209
 msgid "Sort the list by repository."
-msgstr ""
+msgstr "Listeyi depoya göre sırala."
 
 #: src/Zypper.cc:3213
 msgid ""
@@ -3752,7 +3754,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3246
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "patterns (pt) [SEÇENEKLER] [DEPO] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3249
@@ -3798,22 +3800,22 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3302
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "products (pd) [SEÇENEKLER] [DEPO] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3305
 msgid "List all products available in specified repositories."
-msgstr ""
+msgstr "Belirtilen depodaki mevcut tüm ürünleri listele."
 
 #. translators: -i, --installed-only
 #: src/Zypper.cc:3311
 msgid "Show only installed products."
-msgstr ""
+msgstr "Sadece yüklü ürünleri göster."
 
 #. translators: -u, --not-installed-only
 #: src/Zypper.cc:3313
 msgid "Show only products which are not installed."
-msgstr ""
+msgstr "Sadece yüklü olmayan ürünleri göster."
 
 #. translators: --xmlfwd <TAG>
 #: src/Zypper.cc:3315
@@ -3858,11 +3860,15 @@ msgid ""
 "partially matching use option '--match-substrings' or use wildcards (*?) in "
 "name."
 msgstr ""
+"Belirtilen paketler için ayrıntılı bilgiyi göster. Varsayılan olarak, "
+"verilen adla tamamen eşleşen paketler gösterilir. Kısmen eşleşen paketleri "
+"de edinmek için '--match-substrings' seçeneğini ya da adda eşleşme "
+"karakterlerini (*?) kullanın."
 
 #. translators: -s, --match-substrings
 #: src/Zypper.cc:3370
 msgid "Print information for packages partially matching name."
-msgstr ""
+msgstr "Adla kısmen eşleşen paketlerin bilgisini yazdır."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:3372
@@ -3882,7 +3888,7 @@ msgstr ""
 #. translators: --conflicts
 #: src/Zypper.cc:3380
 msgid "Show conflicts."
-msgstr ""
+msgstr "Çakışmaları göster."
 
 #. translators: --obsoletes
 #: src/Zypper.cc:3382
@@ -3947,7 +3953,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3464
 msgid "product-info <PRODUCT_NAME> ..."
-msgstr ""
+msgstr "product-info <ÜRÜN_ADI> ..."
 
 #. translators: command description
 #: src/Zypper.cc:3467
@@ -4005,7 +4011,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3584
 msgid "targetos (tos) [OPTIONS]"
-msgstr ""
+msgstr "targetos (tos) [SEÇENEKLER]"
 
 #. translators: command description
 #: src/Zypper.cc:3587
@@ -4058,7 +4064,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3650
 msgid "licenses"
-msgstr ""
+msgstr "licenses"
 
 #. translators: command description
 #: src/Zypper.cc:3653
@@ -4077,7 +4083,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3683
 msgid "download [OPTIONS] <PACKAGES>..."
-msgstr ""
+msgstr "download [SEÇENEKLER] <PAKETLER>..."
 
 #. translators: command description
 #: src/Zypper.cc:3686
