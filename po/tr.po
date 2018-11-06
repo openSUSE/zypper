@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-05 10:30+0000\n"
+"PO-Revision-Date: 2018-11-06 13:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -1878,7 +1878,7 @@ msgstr ""
 #. translators: --cache-dir, -C <DIR>
 #: src/Zypper.cc:697
 msgid "Use alternative directory for all caches."
-msgstr ""
+msgstr "Tüm ön bellekler için alternatif dizin kullan."
 
 #. translators: --raw-cache-dir <DIR>
 #: src/Zypper.cc:699
@@ -1893,7 +1893,7 @@ msgstr ""
 #. translators: --pkg-cache-dir <DIR>
 #: src/Zypper.cc:703
 msgid "Use alternative package cache directory."
-msgstr ""
+msgstr "Alternatif paket ön belleği dizinini kullan."
 
 #: src/Zypper.cc:705
 msgid "Repository Options:"
@@ -1908,12 +1908,12 @@ msgstr "GPG kontrol hatalarını gözardı et ve devam et."
 #. translators: --gpg-auto-import-keys
 #: src/Zypper.cc:709
 msgid "Automatically trust and import new repository signing keys."
-msgstr ""
+msgstr "Depo imza anahtarlarına otomatik olarak güven ve bunları içe aktar."
 
 #. translators: --plus-repo, -p <URI>
 #: src/Zypper.cc:711
 msgid "Use an additional repository."
-msgstr ""
+msgstr "Ek bir depo kullan."
 
 #. translators: --plus-content <TAG>
 #: src/Zypper.cc:713
@@ -1925,7 +1925,7 @@ msgstr ""
 #. translators: --disable-repositories
 #: src/Zypper.cc:715
 msgid "Do not read meta-data from repositories."
-msgstr ""
+msgstr "Meta veriyi depolardan okuma."
 
 #. translators: --no-refresh
 #: src/Zypper.cc:717
@@ -1946,14 +1946,17 @@ msgstr "Uzak depoları gözardı et."
 
 #. translators: --releasever
 #: src/Zypper.cc:723
+#, fuzzy
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
+"Tüm .repo dosyalarındaki $relasever değerini tanımla (varsayılan:dağıtım "
+"sürümü)"
 
 #: src/Zypper.cc:725
 msgid "Target Options:"
-msgstr ""
+msgstr "Hedef Seçenekler:"
 
 #. translators: --root, -R <DIR>
 #: src/Zypper.cc:727
@@ -1973,13 +1976,14 @@ msgstr "Yüklü paketleri okuma."
 
 #. translators: command summary: help, ?
 #: src/Zypper.cc:737
+#, fuzzy
 msgid "Print help."
-msgstr ""
+msgstr "Yardımı yazdır."
 
 #. translators: command summary: shell, sh
 #: src/Zypper.cc:739
 msgid "Accept multiple commands at once."
-msgstr ""
+msgstr "Çoklu komutları tek seferde kabul et."
 
 #: src/Zypper.cc:741
 msgid "Repository Management:"
@@ -2010,7 +2014,7 @@ msgstr "Belirtilen depoyu yeniden adlandır."
 #. translators: command summary
 #: src/Zypper.cc:751 src/commands/repos/modify.cc:29
 msgid "Modify specified repository."
-msgstr ""
+msgstr "Belirtilen depo üzerinde değişiklik yap."
 
 #. translators: command summary: refresh, ref
 #: src/Zypper.cc:753 src/commands/repos/refresh.cc:26
@@ -2040,12 +2044,12 @@ msgstr "Yeni bir hizmet ekle."
 #. translators: command summary: modifyservice, ms
 #: src/Zypper.cc:763 src/commands/services/modify.cc:22
 msgid "Modify specified service."
-msgstr ""
+msgstr "Belirtilen hizmet üzerinde değişiklik yap."
 
 #. translators: command summary: removeservice, rs
 #: src/Zypper.cc:765 src/commands/services/remove.cc:21
 msgid "Remove specified service."
-msgstr ""
+msgstr "Belirtilen hizmeti kaldır."
 
 #. translators: command summary: refresh-services, refs
 #: src/Zypper.cc:767 src/commands/services/refresh.cc:96
@@ -2110,7 +2114,7 @@ msgstr "Gerekli yamaları listele."
 #. translators: command description
 #: src/Zypper.cc:791 src/Zypper.cc:2934
 msgid "Perform a distribution upgrade."
-msgstr ""
+msgstr "Bir dağıtım yükseltmesi gerçekleştir."
 
 #. translators: command summary: patch-check, pchk
 #: src/Zypper.cc:793
@@ -2123,8 +2127,9 @@ msgstr "Sorgulanıyor:"
 
 #. translators: command summary: search, se
 #: src/Zypper.cc:797
+#, fuzzy
 msgid "Search for packages matching a pattern."
-msgstr ""
+msgstr "Bir örüntüyle eşleşen paketleri ara."
 
 #. translators: command summary: info, if
 #: src/Zypper.cc:799
@@ -2138,8 +2143,9 @@ msgstr "Belirtilen yamalar için tam bilgiyi göster."
 
 #. translators: command summary: pattern-info
 #: src/Zypper.cc:803
+#, fuzzy
 msgid "Show full information for specified patterns."
-msgstr ""
+msgstr "Belirtilen örüntüler için tam bilgiyi göster."
 
 #. translators: command summary: product-info
 #: src/Zypper.cc:805
@@ -2158,8 +2164,9 @@ msgstr "Mevcut tüm paketleri listele."
 
 #. translators: command summary: patterns, pt
 #: src/Zypper.cc:811
+#, fuzzy
 msgid "List all available patterns."
-msgstr ""
+msgstr "Mevcut tüm örüntüleri listele."
 
 #. translators: command summary: products, pd
 #: src/Zypper.cc:813
@@ -4039,7 +4046,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3618
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
-msgstr ""
+msgstr "versioncmp (vcmp) <SÜRÜM1> <SÜRÜM2>"
 
 #. translators: command description
 #: src/Zypper.cc:3621
@@ -4139,7 +4146,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3740
 msgid "source-download"
-msgstr ""
+msgstr "source-download"
 
 #. translators: -d, --directory <DIR>
 #: src/Zypper.cc:3747
@@ -4147,6 +4154,8 @@ msgid ""
 "Download all source rpms to this directory. Default: /var/cache/zypper/"
 "source-download"
 msgstr ""
+"Tüm kaynak rpmleri bu dizine indir. Varsayılan: /var/cache/zypper/source-"
+"download"
 
 #. translators: --delete
 #: src/Zypper.cc:3749
@@ -4184,12 +4193,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3786
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "quit (exit, ^D)"
 
 #. translators: command description
 #: src/Zypper.cc:3789
 msgid "Quit the current zypper shell."
-msgstr ""
+msgstr "Şimdiki zypper kabuğundan çık."
 
 #: src/Zypper.cc:3795
 msgid ""
@@ -4199,11 +4208,16 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
+"quit (exit, ^D)\n"
+"\n"
+"Şimdiki zypper kabuğundan çık.\n"
+"\n"
+"Bu komutun ek seçenekleri yok.\n"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3814
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command description
 #: src/Zypper.cc:3817
@@ -4221,8 +4235,9 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3850
+#, fuzzy
 msgid "patch-search [OPTIONS] [QUERYSTRING...]"
-msgstr ""
+msgstr "patch-search [SEÇENEKLER] [SORGUMETNİ...]"
 
 #. translators: command description
 #: src/Zypper.cc:3853
@@ -4241,7 +4256,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3877
 msgid "ping [OPTIONS]"
-msgstr ""
+msgstr "ping [SEÇENEKLER]"
 
 #. translators: command description
 #: src/Zypper.cc:3880
@@ -4284,7 +4299,7 @@ msgstr "İşaret verileni gerektiren paketleri göster"
 
 #: src/Zypper.cc:4074 src/Zypper.cc:4313 src/Zypper.cc:4350
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr ""
+msgstr "Paketleri kurmak ya da kaldırmak için yönetici ayrıcalıkları gerekiyor."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
@@ -4316,12 +4331,12 @@ msgstr ""
 #: src/Zypper.cc:4138
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr ""
+msgstr "'%s' bir RPM paketi gibi görünüyor. İndirmeye çalışılacak."
 
 #: src/Zypper.cc:4147
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr ""
+msgstr "RPM dosyasıyla ilgili sorun '%s' olarak belirtildi, atlanıyor."
 
 #: src/Zypper.cc:4169
 #, c-format, boost-format
@@ -4381,7 +4396,7 @@ msgstr "İp uçları için üstteki mesaja balın."
 
 #: src/Zypper.cc:4643 src/repos.cc:988
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr ""
+msgstr "'zypper refresh' komutunu yönetici olarak çalıştırmak sorunu çözebilir."
 
 #: src/Zypper.cc:4724
 #, boost-format
@@ -4407,11 +4422,13 @@ msgid "To update installed products use '%s'."
 msgstr "Yüklenmiş ürünleri güncelllemek için '%s' kullanın."
 
 #: src/Zypper.cc:4880
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
+"Zypper yüklenmiş kaynak paketlerinin takibini tutmaz. Son kaynak paketi ve "
+"bunun yapı bağımlılıklarını yüklemek için '%s' komutunu kullanın."
 
 #: src/Zypper.cc:4896
 msgid ""
@@ -4421,6 +4438,8 @@ msgstr ""
 #: src/Zypper.cc:4996
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr ""
+"Bir dağıtım yükseltmesi gerçekleştirmek için yönetici ayrıcalıkları "
+"gerekiyor."
 
 #: src/Zypper.cc:5016
 #, c-format, boost-format
@@ -4619,7 +4638,7 @@ msgstr "Şifre"
 
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Bu komutu çalıştırmak için yönetici ayrıcalıkları gerekiyor."
 
 #: src/commands/conditions.cc:46
 msgid ""
@@ -4664,7 +4683,7 @@ msgstr "Sadece yüklenmiş pakatleri göster "
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
@@ -4701,7 +4720,7 @@ msgstr "Ad"
 
 #: src/commands/locks/list.cc:115
 msgid "Matches"
-msgstr ""
+msgstr "Eşleşmeler"
 
 #. translators: Table column header
 #. translators: type (general header)
@@ -4737,7 +4756,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:183
 msgid "Do not install"
-msgstr ""
+msgstr "Yükleme"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:226
@@ -4808,7 +4827,7 @@ msgstr ""
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Çekirdek kütüphane ve hizmetleri güncellendi."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
