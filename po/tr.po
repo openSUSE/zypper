@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-06 13:07+0000\n"
+"PO-Revision-Date: 2018-11-07 14:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -134,9 +134,9 @@ msgstr "'%1%' dosyası imzalanmamış."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "'%s' deposundan imzalanmamış '%s' dosyası , devam edilsin mi?"
+msgstr "'%2%' deposundaki '%1%' dosyası imzalanmamış."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -170,11 +170,10 @@ msgstr "'%1%' dosyası bilinmeyen '%2%' anahtarı ile imzalanmış."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"%s deposundan %s dosyası bilinmeyen %s anahtarı ile imzalanmış , devam "
-"edilsin mi?"
+"'%3%' deposundaki '%1%' dosyası bilinmeyen bir '%2%' anahtarıyla imzalanmış."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -212,11 +211,9 @@ msgstr ""
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:290
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
 msgstr ""
-"Bu anahtarı reddetmek istiyor musunuz ,geçici olarak güven yada her zaman "
-"güven?"
+"Bu anahtarı reddetmeyi mi ya da anahtara daima güvenmeyi mi istiyorsunuz?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -401,9 +398,9 @@ msgstr ""
 
 # clients/online_update_load.ycp:380
 #: src/callbacks/repo.h:128
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "İndirme işlemi başarısız oldu:"
+msgstr "%s %s-%s.%s alınıyor"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
@@ -494,7 +491,6 @@ msgid "This is an alias for '%s'."
 msgstr ""
 
 #: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:302
-#, fuzzy
 msgid "Command options:"
 msgstr "Komut seçenekleri:"
 
@@ -549,21 +545,18 @@ msgstr "Not:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Uyarı"
+msgstr "Uyarı:"
 
 # include/ui/common_messages.ycp:95
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Hata"
+msgstr "Hata:"
 
 #: src/output/Out.h:44
-#, fuzzy
 msgid "Continue?"
-msgstr "Devam et"
+msgstr "Devam edilsin mi?"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:21
@@ -648,13 +641,12 @@ msgstr ""
 #: src/utils/prompt.h:160
 #, fuzzy
 msgid "Not found"
-msgstr "Hiçbir kullanıcı bulunamadı"
+msgstr "Bulunamadı"
 
 # include/ui/common_messages.ycp:95
 #: src/utils/prompt.h:160
-#, fuzzy
 msgid "I/O error"
-msgstr "Giriş/Çıkış hatası"
+msgstr "G/Ç hatası"
 
 # clients/support_question.ycp:27
 #: src/utils/prompt.h:160
@@ -673,9 +665,9 @@ msgid "Unknown command '%s'"
 msgstr "Bilinmeyen"
 
 #: src/PackageArgs.cc:212
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "`%s' geçerli bir ağ maskesi değil."
+msgstr "'%s' paket adlarında bulunamadı. '%s' deneniyor."
 
 #: src/PackageArgs.cc:227
 #, c-format, boost-format
@@ -696,21 +688,21 @@ msgstr "`%s' geçerli bir ağ maskesi değil."
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:46
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Package '%s' not found."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' paketi bulunamadı."
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:48
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' not found."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' yaması bulunamadı."
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:50
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Product '%s' not found."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' ürünü bulunamadı."
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:52
@@ -721,9 +713,9 @@ msgstr "'{0}' kullanıcısı bulunamadı"
 #
 # clients/inst_sw_select.ycp:195
 #: src/RequestFeedback.cc:54 src/misc.cc:295
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Source package '%s' not found."
-msgstr "Hiçbir paket bulunamadı."
+msgstr "'%s' kaynak paketi bulunamadı."
 
 # clients/nis_write.ycp:73
 #. just in case
@@ -739,9 +731,9 @@ msgstr "Belirtilen depoda '%s' paketi bulunamadı."
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:63
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' yaması belirtilen depolarda bulunamadı."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
@@ -756,9 +748,9 @@ msgstr "Belirtilen depoda '%s' desini bulunamadı."
 #
 # clients/inst_sw_select.ycp:195
 #: src/RequestFeedback.cc:69
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Hiçbir paket bulunamadı."
+msgstr "'%s' kaynak paketi belirtilen depolarda bulunamadı."
 
 #. just in case
 #: src/RequestFeedback.cc:71
@@ -782,9 +774,9 @@ msgstr ""
 #
 # clients/inst_sw_select.ycp:195
 #: src/RequestFeedback.cc:86
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Package '%s' is not installed."
-msgstr "Hiçbir paket bulunamadı."
+msgstr "'%s' paketi kurulu değil."
 
 # clients/inst_rootpart.ycp:401
 #. translators: meaning provider of capability %s
@@ -807,16 +799,16 @@ msgstr "Kaldırıldı"
 
 # include/cups/ui.ycp:1979 include/cups/ui.ycp:2123
 #: src/RequestFeedback.cc:105
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "No update candidate for '%s'. The highest available version is already "
 "installed."
-msgstr "Kaldırıldı"
+msgstr "'%s' için güncelleme adayı yok. Mevcut en son sürüm zaten yüklü."
 
 #: src/RequestFeedback.cc:108
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No update candidate for '%s'."
-msgstr "Koruma bulunamadı."
+msgstr "'%s' güncelleme adayı yok."
 
 #: src/RequestFeedback.cc:114
 #, c-format, boost-format
@@ -876,9 +868,9 @@ msgstr "İnteraktif güncelleştirmeleri atla"
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:175
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' is not needed."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' yaması gerekli değil."
 
 #: src/RequestFeedback.cc:181
 #, fuzzy, boost-format
@@ -970,16 +962,18 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:560
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki yeni paket kurulacak:"
+msgstr[1] "Aşağıdaki %d yeni paket kurulacak:"
 
 #: src/Summary.cc:565
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki yeni yama kurulacak:"
+msgstr[1] "Aşağıdaki %d yeni yama kurulacak:"
 
 #: src/Summary.cc:570
 #, fuzzy, c-format, boost-format
@@ -994,28 +988,32 @@ msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "Aşağıdaki desteler kurulacak:"
 
 #: src/Summary.cc:580
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki kaynak paketi kurulacak:"
+msgstr[1] "Aşağıdaki %d kaynak paketi kurulacak:"
 
 #: src/Summary.cc:586
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki uygulama kurulacak:"
+msgstr[1] "Aşağıdaki %d uygulama kurulacak:"
 
 #: src/Summary.cc:611
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki paket KALDIRILACAK:"
+msgstr[1] "Aşağıdaki %d paket KALDIRILACAK:"
 
 #: src/Summary.cc:616
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki yama KALDIRILACAK:"
+msgstr[1] "Aşağıdaki %d yama KALDIRILACAK:"
 
 #: src/Summary.cc:621
 #, fuzzy, c-format, boost-format
