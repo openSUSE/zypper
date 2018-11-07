@@ -66,6 +66,9 @@ public:
   template <class Iterator_>
   void args( Iterator_ begin, Iterator_ end )
   { _args = Arglist( begin, end ); }
+  /** \overload */
+  void args( Arglist args_r )
+  { _args = std::move(args_r); }
 };
 
 /** Execute subcommand (or show its help).
@@ -75,6 +78,8 @@ public:
  * \returns subcommands exitCode
  */
 int subcommand( Zypper & zypper_r );
+/** \overload using custom options_r (see \ref SLE15_SearchPackagesHintHack). */
+int subcommand( Zypper & zypper_r, shared_ptr<SubcommandOptions> options_r );
 
 /** Test whether \c strval_r denotes a subcommand and remember the \ref Detected details.
  * \ref SubcommandOptions can load the last detected details if necessary.

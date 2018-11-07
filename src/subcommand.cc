@@ -487,7 +487,10 @@ namespace
   {
     typedef CommandBase<SubcommandImpl,SubcommandOptions> CommandBase;
   public:
+    /** Standard ctor for subcommand using zypper_r.commandOptionsAs. */
     SubcommandImpl( Zypper & zypper_r ) : CommandBase( zypper_r ) {}
+    /** \overload using custom options_r. */
+    SubcommandImpl( Zypper & zypper_r, shared_ptr<SubcommandOptions> options_r ) : CommandBase( zypper_r, options_r ) {}
     // CommandBase::_zypper
     // CommandBase::options;	// access/manip command options
     // CommandBase::run;	// action + catch and repost Out::Error
@@ -522,6 +525,11 @@ namespace
 int subcommand( Zypper & zypper_r )
 {
   return SubcommandImpl( zypper_r ).run();
+}
+
+int subcommand( Zypper & zypper_r, shared_ptr<SubcommandOptions> options_r )
+{
+  return SubcommandImpl( zypper_r, options_r ).run();
 }
 
 bool isSubcommand( const std::string & strval_r )
