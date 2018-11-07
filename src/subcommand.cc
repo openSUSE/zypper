@@ -496,12 +496,22 @@ namespace
   public:
     /** default action */
     void action();
+
+  private:
+    /** Store command in \c _args[0]. */
+    void setArg0( std::string arg0_r )
+    {
+      if ( options()._args.empty() )
+	options()._args.push_back( std::move(arg0_r) );
+      else
+	options()._args[0] = std::move(arg0_r);
+    }
   };
   ///////////////////////////////////////////////////////////////////
 
   void SubcommandImpl::action()
   {
-    options()._args[0] = (options()._detected._path / options()._detected._name).asString();
+    setArg0( (options()._detected._path / options()._detected._name).asString() );
     RunCommand cmd( options()._args );
     if ( cmd.run() != 0 )
       throw( Out::Error( cmd.exitStatus(), cmd.execError() ) );
