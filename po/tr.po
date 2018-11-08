@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-07 14:07+0000\n"
+"PO-Revision-Date: 2018-11-08 16:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -1927,9 +1927,8 @@ msgstr "Meta veriyi depolardan okuma."
 
 #. translators: --no-refresh
 #: src/Zypper.cc:717
-#, fuzzy
 msgid "Do not refresh the repositories."
-msgstr "Depoları tazeleme."
+msgstr "Depoları yenileme."
 
 #. translators: --no-cd
 #: src/Zypper.cc:719
@@ -5069,9 +5068,8 @@ msgstr "Kapat."
 
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #: src/commands/repos/list.cc:51
-#, fuzzy
 msgid "Keep Packages"
-msgstr "paket:"
+msgstr "Paketleri Tut"
 
 #: src/commands/repos/list.cc:53
 msgid "GPG Key URI"
@@ -5087,7 +5085,6 @@ msgid "Parent Service"
 msgstr "Sunucu"
 
 #: src/commands/repos/list.cc:56
-#, fuzzy
 msgid "Keywords"
 msgstr "Anahtar sözcükler"
 
@@ -5113,9 +5110,9 @@ msgid "Error reading repositories:"
 msgstr "Depolar okunurken hata:"
 
 #: src/commands/repos/list.cc:144
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't open %s for writing."
-msgstr "Dosyaya yazılamıyor."
+msgstr "%s yazmak için açılamıyor."
 
 #: src/commands/repos/list.cc:145
 msgid "Maybe you do not have write permissions?"
@@ -5163,9 +5160,9 @@ msgstr ""
 
 # clients/rc_config_step1.ycp:253
 #: src/commands/repos/modify.cc:89
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository %s not found."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "%s deposu bulunamadı."
 
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
@@ -5228,9 +5225,9 @@ msgid "Specified repositories: "
 msgstr "Belirlenmiş depolar:"
 
 #: src/commands/repos/refresh.cc:218
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "'%s' deposu devre dışı bırakılıyor."
+msgstr "'%s' deposu yenileniyor."
 
 #: src/commands/repos/refresh.cc:236 src/repos.cc:838
 #, c-format, boost-format
@@ -5318,9 +5315,9 @@ msgstr ""
 
 # clients/rc_config_step1.ycp:253
 #: src/commands/repos/rename.cc:43
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "'%s' deposunun adı '%s' olarak değiştirildi."
 
 #: src/commands/repos/rename.cc:47 src/repos.cc:1198
 #, c-format, boost-format
@@ -5352,9 +5349,9 @@ msgstr ""
 
 # clients/rc_config_step1.ycp:253
 #: src/commands/repos/rename.cc:114
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' not found."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "'%s' deposu bulunamadı."
 
 #: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:106
 #, c-format, boost-format
@@ -5387,9 +5384,8 @@ msgstr ""
 
 #. translators: -n, --name
 #: src/commands/reposerviceoptionsets.cc:212
-#, fuzzy
 msgid "Show also repository name."
-msgstr "Depo ismini de göster."
+msgstr "Depo adını da göster."
 
 #. translators: -r, --refresh
 #: src/commands/reposerviceoptionsets.cc:215
@@ -5448,14 +5444,14 @@ msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
 
 #: src/commands/services/add.cc:62
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Error occurred while adding service '%s'."
-msgstr "Sadece yüklenmiş pakatleri göster "
+msgstr "'%s' hizmeti eklenirken hata oluştu."
 
 #: src/commands/services/add.cc:68
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' has been successfully added."
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "'%s' hizmeti başarıyla eklendi."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/add.cc:103
@@ -5496,14 +5492,14 @@ msgid "Check if the URI is valid and accessible."
 msgstr ""
 
 #: src/commands/services/common.cc:159
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing service '%s':"
-msgstr "Bağlantı &kaldır"
+msgstr "'%s' hizmeti kaldırılıyor:"
 
 #: src/commands/services/common.cc:162
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' has been removed."
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "'%s' hizmeti kaldırıldı."
 
 #: src/commands/services/list.cc:81
 msgid "services (ls) [OPTIONS]"
@@ -6116,16 +6112,14 @@ msgstr "Uyarı"
 #. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "error"
-msgstr "Hata"
+msgstr "hata"
 
 #. Translator: download progress bar result: ".............[done]"
 #: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
 #: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "done"
-msgstr "Endonezya"
+msgstr "tamamlandı"
 
 #: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
 #: src/output/OutNormal.cc:321
@@ -6134,16 +6128,14 @@ msgstr "Alınıyor:"
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/output/OutNormal.cc:256
-#, fuzzy
 msgid "starting"
-msgstr "Başlatılıyor..."
+msgstr "başlatılıyor"
 
 # clients/nis_write.ycp:73
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "bulunamadı"
 
 #: src/output/OutNormal.cc:416
 msgid "No help available for this prompt."
@@ -6171,9 +6163,8 @@ msgid "default priority"
 msgstr ""
 
 #: src/repos.cc:73
-#, fuzzy
 msgid "raised priority"
-msgstr "Öncelik."
+msgstr "yükseltilmiş öncelik"
 
 #: src/repos.cc:73
 msgid "lowered priority"
@@ -6211,9 +6202,9 @@ msgstr "%s için meta veri lerini yenilleyip kontrol ediliyor."
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:245
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' is up to date."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "'%s' deposu güncel."
 
 #: src/repos.cc:251
 #, fuzzy, c-format, boost-format
@@ -6269,9 +6260,9 @@ msgstr "Koruma bulunamadı."
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:379
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' is invalid."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "'%s' deposu geçersiz."
 
 #: src/repos.cc:380
 msgid ""
@@ -6330,17 +6321,17 @@ msgid "Ignoring disabled repository '%s'"
 msgstr "Geçersiz hizmet türü '{0}'"
 
 #: src/repos.cc:781
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
-"Depuyo etkinleştirmek yada depo eklemek için '%s' komutunu yada '%s' "
-"komutunu kullanın."
+"'%s' evrensel seçeneği depoları geçici olarak etkinleştirmek için "
+"kullanılabilir."
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:797 src/repos.cc:803
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "'%s' deposu '%s' seçeneğinden dolayı gözardı ediliyor."
 
 #: src/repos.cc:824 src/repos.cc:924
 #, c-format, boost-format
@@ -6410,7 +6401,7 @@ msgstr "Hatadan dolayı '%s' deposu temizlenemedi."
 #: src/repos.cc:1107
 #, fuzzy
 msgid "Cleaning installed packages cache."
-msgstr "Sadece yüklenmiş pakatleri göster "
+msgstr "Yüklü paketlerin ön belleği temizleniyor."
 
 #: src/repos.cc:1116
 msgid "Cannot clean installed packages cache because of an error."
@@ -6425,14 +6416,12 @@ msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr ""
 
 #: src/repos.cc:1145
-#, fuzzy
 msgid "Specified repositories have been cleaned up."
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "Belirtilen depolar temizlendi."
 
 #: src/repos.cc:1147
-#, fuzzy
 msgid "All repositories have been cleaned up."
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "Tüm depolar temizlendi."
 
 #: src/repos.cc:1169
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
@@ -6476,9 +6465,9 @@ msgid ""
 msgstr ""
 
 #: src/repos.cc:1244
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' successfully added"
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "'%s' deposu başarıyla eklendi"
 
 #: src/repos.cc:1270
 #, c-format, boost-format
@@ -6534,9 +6523,9 @@ msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Bir geri dönüşüm noktası bulunamadı."
 
 #: src/repos.cc:1454
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' has been removed."
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "'%s' deposu kaldırıldı."
 
 #: src/repos.cc:1602
 #, fuzzy, c-format, boost-format
@@ -6544,14 +6533,14 @@ msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "'{0}' kullanıcısı başarıyla silindi"
 
 #: src/repos.cc:1635
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' has been successfully enabled."
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "'%s' deposu başarıyla etkinleştirildi."
 
 #: src/repos.cc:1637
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' has been successfully disabled."
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "'%s' deposu başarıyla devre dışı bırakıldı."
 
 #: src/repos.cc:1644
 #, c-format, boost-format
@@ -6574,14 +6563,14 @@ msgid "RPM files caching has been disabled for repository '%s'."
 msgstr ""
 
 #: src/repos.cc:1662
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "GPG check has been enabled for repository '%s'."
-msgstr "Başlangıç durumları"
+msgstr "GPG kontrolü '%s' deposu için etkinleştirildi."
 
 #: src/repos.cc:1664
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "GPG check has been disabled for repository '%s'."
-msgstr "Başlangıç durumları"
+msgstr "GPG kontrolü '%s' deposu için devre dışı bırakıldı."
 
 #: src/repos.cc:1670
 #, fuzzy, c-format, boost-format
@@ -6604,9 +6593,8 @@ msgid "Leaving repository %s unchanged."
 msgstr ""
 
 #: src/repos.cc:1781
-#, fuzzy
 msgid "Loading repository data..."
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "Depo bilgisi yükleniyor..."
 
 #: src/repos.cc:1783
 msgid ""
@@ -6631,9 +6619,9 @@ msgstr "'%s' den veri yüklenirken hata oluştu."
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:1819
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "'%s' deposu yenilenemedi. Eski ön bellek kullanılıyor."
 
 #: src/repos.cc:1823 src/repos.cc:1852
 #, c-format, boost-format
@@ -6654,9 +6642,8 @@ msgid "Try '%s', or even '%s' before doing so."
 msgstr "Yapmadan önce '%s' deneyin yada '%s'"
 
 #: src/repos.cc:1862
-#, fuzzy
 msgid "Reading installed packages..."
-msgstr "Sadece yüklenmiş pakatleri göster "
+msgstr "Yüklenmiş paketler okunuyor..."
 
 #: src/repos.cc:1871
 msgid "Problem occurred while reading the installed packages:"
@@ -6768,7 +6755,6 @@ msgstr "Sorun: %s"
 
 # clients/inst_sw_single.ycp:742
 #: src/solve-commit.cc:179
-#, fuzzy
 msgid "Resolving dependencies..."
 msgstr "Bağımlılıklar çözümleniyor..."
 
@@ -6786,9 +6772,8 @@ msgstr "Bilgisayarı kapatmaya zorla"
 
 # clients/inst_sw_single.ycp:742
 #: src/solve-commit.cc:345
-#, fuzzy
 msgid "Verifying dependencies..."
-msgstr "Bağımlılıklar çözümleniyor..."
+msgstr "Bağımlılıklar doğrulanıyor..."
 
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:393
@@ -6818,7 +6803,7 @@ msgstr ""
 #: src/solve-commit.cc:464
 #, fuzzy
 msgid "Skip check:"
-msgstr "DNS testi"
+msgstr "Kontrolü atla:"
 
 #: src/solve-commit.cc:472
 #, c-format, boost-format
@@ -6851,9 +6836,8 @@ msgstr "Dağıtım güncelleştirmeleri hesaplanıyor."
 
 # clients/inst_sw_single.ycp:742
 #: src/solve-commit.cc:552
-#, fuzzy
 msgid "Resolving package dependencies..."
-msgstr "Bağımlılıklar çözümleniyor..."
+msgstr "Paket bağımlılıkları çözümleniyor..."
 
 #: src/solve-commit.cc:629
 msgid ""
@@ -7241,9 +7225,8 @@ msgstr ""
 # clients/online_update_details.ycp:88 clients/online_update_select.ycp:112
 #. translator: Table column header.
 #: src/update.cc:354 src/update.cc:713
-#, fuzzy
 msgid "Patches"
-msgstr "yama"
+msgstr "Yamalar"
 
 #. translator: Table column header.
 #: src/update.cc:356
@@ -7261,15 +7244,13 @@ msgstr ""
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:603
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "Aşağıdaki desteler kurulacak:"
+msgstr "Önce gerekli yazılım yöneticisi güncellemeleri yüklenecek:"
 
 # clients/inst_rootpart.ycp:401
 #: src/update.cc:611 src/update.cc:851
-#, fuzzy
 msgid "No updates found."
-msgstr "Bir yama bulunamadı."
+msgstr "Güncelleme bulunamadı."
 
 #. translator: Table headline
 #: src/update.cc:618
@@ -7279,9 +7260,8 @@ msgstr "Aşağıdaki desteler kurulacak:"
 
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #: src/update.cc:711
-#, fuzzy
 msgid "Package updates"
-msgstr "Paket"
+msgstr "Paket güncellemeleri"
 
 # clients/inst_sw_single.ycp:1623
 #: src/update.cc:715
@@ -7291,20 +7271,17 @@ msgstr "güncellemeler"
 
 # clients/inst_sw_single.ycp:1623
 #: src/update.cc:717
-#, fuzzy
 msgid "Product updates"
-msgstr "güncellemeler"
+msgstr "Ürün güncellemeleri"
 
 #: src/update.cc:803
-#, fuzzy
 msgid "Current Version"
-msgstr "Aktif kullanıcı:"
+msgstr "Şimdiki Sürüm"
 
 # include/ui/wizard_hw.ycp:48
 #: src/update.cc:804
-#, fuzzy
 msgid "Available Version"
-msgstr "Kullanılabilir alan:"
+msgstr "Mevcut Sürüm"
 
 # clients/inst_rootpart.ycp:401
 #: src/update.cc:966
@@ -7406,9 +7383,8 @@ msgstr ""
 #. argument. (bnc #299375)
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
-#, fuzzy
 msgid "Unknown option "
-msgstr "Bilinmeyen"
+msgstr "Bilinmeyen seçenek "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
@@ -7468,10 +7444,10 @@ msgstr ""
 
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #: src/utils/misc.cc:91
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "paket:"
+msgstr[0] "paket"
+msgstr[1] "paketler"
 
 # /usr/lib/YaST2/timezone_raw.ycp:482
 #: src/utils/misc.cc:93
@@ -7488,10 +7464,10 @@ msgstr[0] "ürün: "
 
 # clients/online_update_details.ycp:88 clients/online_update_select.ycp:112
 #: src/utils/misc.cc:97
-#, fuzzy
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "yama"
+msgstr[1] "yamalar"
 
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #: src/utils/misc.cc:99
@@ -7501,10 +7477,10 @@ msgid_plural "srcpackages"
 msgstr[0] "paket:"
 
 #: src/utils/misc.cc:101
-#, fuzzy
 msgid "application"
 msgid_plural "applications"
-msgstr[0] "seçim: "
+msgstr[0] "uygulama"
+msgstr[1] "uygulamalar"
 
 # clients/rc_config_step1.ycp:253
 #. default
@@ -7527,9 +7503,8 @@ msgstr "isteğe bağlı"
 
 #. translator: patch status
 #: src/utils/misc.cc:114
-#, fuzzy
 msgid "needed"
-msgstr "Gerekli"
+msgstr "gerekli"
 
 # clients/lvm_config.ycp:311
 #. translator: patch status
@@ -7541,9 +7516,8 @@ msgstr "Uygulandı"
 # include/ui/summary.ycp:56
 #. translator: patch status
 #: src/utils/misc.cc:116
-#, fuzzy
 msgid "not needed"
-msgstr "Gereksiz"
+msgstr "gerekli değil"
 
 #. translator: patch status
 #: src/utils/misc.cc:117
@@ -7556,15 +7530,13 @@ msgid "Issue"
 msgstr "Sorun"
 
 #: src/utils/misc.cc:268
-#, fuzzy
 msgid "No."
-msgstr "Hayır"
+msgstr "Hayır."
 
 # clients/online_update_details.ycp:88 clients/online_update_select.ycp:112
 #: src/utils/misc.cc:269
-#, fuzzy
 msgid "Patch"
-msgstr "yama"
+msgstr "Yama"
 
 #: src/utils/misc.cc:345
 msgid "Specified local path does not exist or is not accessible."
@@ -7585,9 +7557,9 @@ msgid "Please use obs://<project>/<platform>"
 msgstr ""
 
 #: src/utils/misc.cc:449 src/utils/misc.cc:486
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Example: %s"
-msgstr "Ad: "
+msgstr "Örnek: %s"
 
 #: src/utils/misc.cc:485
 msgid "Invalid OBS URI."
@@ -7648,9 +7620,8 @@ msgid "shows all options"
 msgstr "tüm seçenekleri göster"
 
 #: src/utils/prompt.cc:125 src/utils/prompt.cc:245 src/utils/prompt.cc:328
-#, fuzzy
 msgid "yes"
-msgstr "Evet"
+msgstr "evet"
 
 #: src/utils/prompt.cc:125 src/utils/prompt.cc:245 src/utils/prompt.cc:328
 msgid "no"
