@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-09 14:06+0000\n"
+"PO-Revision-Date: 2018-11-09 17:35+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -5743,14 +5743,16 @@ msgstr "Boli aktualizované knižnice alebo služby jadra."
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Reštart je potrebný na zabezpečenie toho, aby váš systém mal úžitok z týchto "
+"aktualizácií."
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Žiadne knižnice alebo služby jadra neboli aktualizované."
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Reštart pravdepodobne nie je potrebný."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -6455,7 +6457,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Pokročilé:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -8293,11 +8295,11 @@ msgstr "Príznak %1% sa môže použiť iba raz."
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s použité spolu s %s, ktoré si navzájom odporujú."
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "Neznámy typ balíka"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
@@ -8311,7 +8313,7 @@ msgstr "Neznáma chyba pri priradení hodnoty %1% príznaku %2%."
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "Príznak '%1%' môže použiť maximálne iba of %2%-krát."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
