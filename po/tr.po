@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-09 13:06+0000\n"
+"PO-Revision-Date: 2018-11-09 21:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -2343,6 +2343,12 @@ msgid ""
 "\tremoveservice, rs\tRemove specified service.\n"
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
+"     Hizmet Yönetimi:\n"
+"\tservices, ls\t\tTanımlı hizmetlerin tümünü listele.\n"
+"\taddservice, as\t\tYeni bir hizmet ekle.\n"
+"\tmodifyservice, ms\tBelirtilen hizmet üzerinde değişiklik yap.\n"
+"\tremoveservice, rs\tBelirtilen hizmeti kaldır.\n"
+"\trefresh-services, refs\tTüm hizmetleri yenile.\n"
 
 #: src/Zypper.cc:928
 msgid ""
@@ -2493,7 +2499,7 @@ msgstr ""
 
 #: src/Zypper.cc:1411
 msgid "Entering 'no-gpg-checks' mode."
-msgstr ""
+msgstr "'no-gpg-checks' moduna giriliyor."
 
 #: src/Zypper.cc:1419
 #, c-format, boost-format
