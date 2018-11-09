@@ -798,7 +798,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
 				   it->asUserString().c_str(), "no-cd" ) );
       gData.repos.erase( it++ );
     }
-    if ( no_remote && it->url().schemeIsDownloading() )
+    else if ( no_remote && it->url().schemeIsDownloading() )
     {
       zypper.out().info( str::form(_("Ignoring repository '%s' because of '%s' option."),
 				   it->asUserString().c_str(), "no-remote" ) );
