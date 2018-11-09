@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-08 16:07+0000\n"
+"PO-Revision-Date: 2018-11-09 13:06+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -639,7 +639,6 @@ msgstr ""
 # clients/rc_config_step1.ycp:253
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
-#, fuzzy
 msgid "Not found"
 msgstr "Bulunamadı"
 
@@ -706,9 +705,9 @@ msgstr "'%s' ürünü bulunamadı."
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:52
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Pattern '%s' not found."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' örüntüsü bulunamadı."
 
 #
 # clients/inst_sw_select.ycp:195
@@ -862,9 +861,9 @@ msgid "Use '%s' to force installation of the package."
 msgstr "Paketi zorla yüklemek için '%s' kullanın."
 
 #: src/RequestFeedback.cc:169
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "İnteraktif güncelleştirmeleri atla"
+msgstr "'%s' yaması etkileşimli, atlanıyor."
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:175
@@ -888,9 +887,9 @@ msgstr ""
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:199
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' yaması belirtilen kategoride değil."
 
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
@@ -899,9 +898,9 @@ msgstr ""
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:213
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' yaması belirtilen tarihten sonra verildi."
 
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
@@ -976,16 +975,18 @@ msgstr[0] "Aşağıdaki yeni yama kurulacak:"
 msgstr[1] "Aşağıdaki %d yeni yama kurulacak:"
 
 #: src/Summary.cc:570
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki yeni örüntü yüklenecek:"
+msgstr[1] "Aşağıdaki %d yeni örüntü yüklenecek:"
 
 #: src/Summary.cc:575
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki yeni ürün yüklenecek:"
+msgstr[1] "Aşağıdaki %d yeni ürün yüklenecek:"
 
 #: src/Summary.cc:580
 #, boost-format, c-format
@@ -1016,52 +1017,60 @@ msgstr[0] "Aşağıdaki yama KALDIRILACAK:"
 msgstr[1] "Aşağıdaki %d yama KALDIRILACAK:"
 
 #: src/Summary.cc:621
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki örüntü KALDIRILACAK:"
+msgstr[1] "Aşağıdaki %d örüntü KALDIRILACAK:"
 
 #: src/Summary.cc:626
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki ürün KALDIRILACAK:"
+msgstr[1] "Aşağıdaki %d ürün KALDIRILACAK:"
 
 #: src/Summary.cc:632
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki uygulama KALDIRILACAK:"
+msgstr[1] "Aşağıdaki %d uygulama KALDIRILACAK:"
 
 #: src/Summary.cc:655
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki paket yükseltilecek:"
+msgstr[1] "Aşağıdaki %d paket yükseltilecek:"
 
 #: src/Summary.cc:660
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki yama yükseltilecek:"
+msgstr[1] "Aşağıdaki %d yama yükseltilecek:"
 
 #: src/Summary.cc:665
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki örüntü yükseltilecek:"
+msgstr[1] "Aşağıdaki %d örüntü yükseltilecek:"
 
 #: src/Summary.cc:671
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki ürün yükseltilecek:"
+msgstr[1] "Aşağıdaki %d ürün yükseltilecek:"
 
 #: src/Summary.cc:679
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki uygulama yükseltilecek:"
+msgstr[1] "Aşağıdaki %d uygulama yükseltilecek:"
 
 #: src/Summary.cc:701
 #, fuzzy, c-format, boost-format
@@ -4305,14 +4314,13 @@ msgid "Ignoring arguments, marking the entire repository."
 msgstr ""
 
 #: src/Zypper.cc:4097
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Unknown package type: %s"
-msgstr "Resolvable '{0}' bulunamadı."
+msgstr "Bilinmeyen paket türü: %s"
 
 #: src/Zypper.cc:4107
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "Sadece yüklenmiş pakatleri göster "
+msgstr "Yamalar kaldırılamıyor."
 
 #: src/Zypper.cc:4108
 msgid ""
@@ -4372,9 +4380,9 @@ msgid "Unknown package type '%s'."
 msgstr "Resolvable '{0}' bulunamadı."
 
 #: src/Zypper.cc:4450 src/repos.cc:775
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Specified repository '%s' is disabled."
-msgstr "Başlangıç durumları"
+msgstr "Belirtilen '%s' deposu devre dışı."
 
 # clients/inst_rootpart.ycp:401
 #. translators: empty search result message
@@ -4401,9 +4409,9 @@ msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
 
 #: src/Zypper.cc:4783 src/Zypper.cc:4831
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Cannot use %s together with %s."
-msgstr "%1 dosyası okunamıyor: %2"
+msgstr "%s %s ile birlikte kullanılamıyor."
 
 #: src/Zypper.cc:4812
 msgid "Root privileges are required for updating packages."
@@ -4471,9 +4479,9 @@ msgstr "Ad: "
 
 # clients/online_update_details.ycp:88 clients/online_update_select.ycp:112
 #: src/Zypper.cc:5158
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%s matches %s"
-msgstr "yama"
+msgstr "%s %s ile eşleşiyor"
 
 #: src/Zypper.cc:5160
 #, c-format, boost-format
@@ -4576,9 +4584,8 @@ msgstr "CD/DVD takın ve devam etmek için ENTER'a basın."
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:156
-#, fuzzy
 msgid "Retrying..."
-msgstr "Başlatılıyor..."
+msgstr "Tekrar deneniyor..."
 
 #. cd/dvd options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -4624,9 +4631,8 @@ msgstr ""
 "okuyabilmek için root olmanız gerekir."
 
 #: src/callbacks/media.cc:320 src/callbacks/media.cc:327
-#, fuzzy
 msgid "User Name"
-msgstr "Kullanıcı yönetimi"
+msgstr "Kullanıcı Adı"
 
 #. password
 #: src/callbacks/media.cc:335
@@ -4877,9 +4883,8 @@ msgid "Write debug output to file <path>."
 msgstr ""
 
 #: src/commands/ps.cc:71 src/solve-commit.cc:462
-#, fuzzy
 msgid "Check failed:"
-msgstr "_Kilit dosyası:"
+msgstr "Kontrol başarısız oldu:"
 
 #. Here: Table output
 #: src/commands/ps.cc:126 src/solve-commit.cc:451
@@ -4913,16 +4918,14 @@ msgstr "Komut"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
 #: src/commands/ps.cc:151 src/commands/repos/list.cc:277
-#, fuzzy
 msgid "Service"
-msgstr "Sunucu"
+msgstr "Hizmet"
 
 # menu item for selecting a file
 #. "list of deleted files or libraries accessed"
 #: src/commands/ps.cc:155
-#, fuzzy
 msgid "Files"
-msgstr "Dosya"
+msgstr "Dosyalar"
 
 #: src/commands/ps.cc:186
 msgid "No processes using deleted files found."
@@ -5039,9 +5042,8 @@ msgstr "Etkinleştir."
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
 #: src/commands/services/list.cc:107 src/repos.cc:1254
-#, fuzzy
 msgid "GPG Check"
-msgstr "DNS testi"
+msgstr "GPG Kontrolü"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
