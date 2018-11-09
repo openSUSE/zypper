@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-08 15:06+0000\n"
+"PO-Revision-Date: 2018-11-09 14:06+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -5737,7 +5737,7 @@ msgstr ""
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Boli aktualizované knižnice alebo služby jadra."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
