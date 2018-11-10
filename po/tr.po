@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-09 21:07+0000\n"
+"PO-Revision-Date: 2018-11-10 18:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -4410,9 +4410,9 @@ msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "'zypper refresh' komutunu yönetici olarak çalıştırmak sorunu çözebilir."
 
 #: src/Zypper.cc:4724
-#, boost-format
+#, boost-format, fuzzy
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "%1% seçeneği %2% evrensel seçeneği olmadan bir etkiye sahip değil."
 
 #: src/Zypper.cc:4783 src/Zypper.cc:4831
 #, boost-format, c-format
@@ -5693,6 +5693,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr ""
+"Hizmetleri eklemek ya da etkinleştirmek için '%s' ya da '%s' komutunu "
+"kullanın."
 
 #: src/commands/services/refresh.cc:240
 #, fuzzy
@@ -5757,7 +5759,7 @@ msgstr ""
 
 #: src/download.cc:160
 msgid "Not downloading anything..."
-msgstr ""
+msgstr "Hiçbir şey indirilmiyor..."
 
 #: src/download.cc:201
 #, c-format, boost-format
@@ -5767,7 +5769,7 @@ msgstr ""
 #: src/download.cc:215
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
-msgstr ""
+msgstr "'%s' paketi indirilmiyor."
 
 # clients/inst_sw_single.ycp:1461
 #. translators: property name; short; used like "Name: value"
@@ -5804,7 +5806,7 @@ msgstr "Tanım"
 
 #: src/info.cc:111
 msgid "automatically"
-msgstr ""
+msgstr "otomatik olarak"
 
 #: src/info.cc:186
 #, boost-format
@@ -5864,7 +5866,7 @@ msgstr "Kaldırıldı"
 #. translators: table headers
 #: src/info.cc:359 src/source-download.cc:319
 msgid "Source package"
-msgstr ""
+msgstr "Kaynak paketi"
 
 # clients/support_question.ycp:91
 #. translators: property name; short; used like "Name: value"
@@ -5939,7 +5941,7 @@ msgstr "Önerilen"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:548
 msgid "End of Support"
-msgstr ""
+msgstr "Destek Sonu"
 
 #: src/info.cc:553
 msgid "unknown"
@@ -5973,11 +5975,11 @@ msgstr ""
 
 #: src/info.cc:604
 msgid "Provided by enabled repository"
-msgstr ""
+msgstr "Etkin depo tarafından sağlandı"
 
 #: src/info.cc:609
 msgid "Not provided by any enabled repository"
-msgstr ""
+msgstr "Herhangi bir etkin depo tarafından sağlanmadı"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:619
@@ -6033,7 +6035,7 @@ msgstr ""
 #. lincense prompt
 #: src/misc.cc:164
 msgid "Do you agree with the terms of the license?"
-msgstr ""
+msgstr "Lisans şartlarını kabul ediyor musunuz?"
 
 #: src/misc.cc:172
 msgid "Aborting installation due to the need for license confirmation."
@@ -6059,11 +6061,11 @@ msgstr "Lisans"
 
 #: src/misc.cc:241
 msgid "EULA"
-msgstr ""
+msgstr "EULA"
 
 #: src/misc.cc:253
 msgid "SUMMARY"
-msgstr ""
+msgstr "ÖZET"
 
 #: src/misc.cc:254
 #, fuzzy, c-format, boost-format
@@ -6168,7 +6170,7 @@ msgstr ""
 
 #: src/repos.cc:72
 msgid "default priority"
-msgstr ""
+msgstr "varsayılan öncelik"
 
 #: src/repos.cc:73
 msgid "raised priority"
