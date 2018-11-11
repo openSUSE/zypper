@@ -15,10 +15,10 @@ msgstr ""
 "Project-Id-Version: zypper.gl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-03-08 22:02+0000\n"
+"PO-Revision-Date: 2018-11-11 12:02+0000\n"
 "Last-Translator: Manuel Vazquez <xixirei@yahoo.es>\n"
-"Language-Team: Galician <https://l10n.opensuse.org/projects/zypper/master/gl/"
-">\n"
+"Language-Team: Galician "
+"<https://l10n.opensuse.org/projects/zypper/master/gl/>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +43,7 @@ msgstr ""
 
 #: src/Zypper.h:565
 msgid "Done."
-msgstr ""
+msgstr "Feito."
 
 #: src/callbacks/keyring.h:32
 msgid ""
