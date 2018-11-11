@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-10 18:07+0000\n"
+"PO-Revision-Date: 2018-11-11 13:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -3455,7 +3455,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2931
 msgid "dist-upgrade (dup) [OPTIONS]"
-msgstr ""
+msgstr "dist-upgrade (dup) [SEÇENEKLER]"
 
 #. translators: --from <ALIAS|#|URI>
 #: src/Zypper.cc:2938
@@ -3517,7 +3517,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3041
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
-msgstr ""
+msgstr "search (se) [SEÇENEKLER] [SORGUMETNİ] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3044
@@ -3783,12 +3783,12 @@ msgstr ""
 #. translators: -i, --installed-only
 #: src/Zypper.cc:3255
 msgid "Show only installed patterns."
-msgstr ""
+msgstr "Sadece yüklü örüntüleri göster."
 
 #. translators: -u, --not-installed-only
 #: src/Zypper.cc:3257
 msgid "Show only patterns which are not installed."
-msgstr ""
+msgstr "Sadece yüklü olmayan örüntüleri göster."
 
 #: src/Zypper.cc:3261
 msgid ""
@@ -3869,7 +3869,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3363
 msgid "info (if) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "info (if) [SEÇENEKLER] <AD> ..."
 
 #. translators: command description
 #: src/Zypper.cc:3366
@@ -3932,7 +3932,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3404
 msgid "patch-info <PATCHNAME> ..."
-msgstr ""
+msgstr "patch-info <YAMAADI> ..."
 
 #. translators: command description
 #: src/Zypper.cc:3407
@@ -3952,7 +3952,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3434
 msgid "pattern-info <PATTERN_NAME> ..."
-msgstr ""
+msgstr "pattern-info <ÖRÜNTÜ_ADI> ..."
 
 #. translators: command description
 #: src/Zypper.cc:3437
