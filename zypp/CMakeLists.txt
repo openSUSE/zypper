@@ -968,5 +968,5 @@ ADD_CUSTOM_TARGET ( buildmon
 
 ADD_CUSTOM_COMMAND (
   TARGET zypp POST_BUILD
-  COMMAND buildmon
+  COMMAND test ! -x ./buildmon || ./buildmon
 )
