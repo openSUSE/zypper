@@ -962,7 +962,11 @@ INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
 FILE( GLOB YUM_SCHEMA_FILES ${LIBZYPP_SOURCE_DIR}/zypp/parser/yum/schema/*.rng )
 INSTALL(FILES ${YUM_SCHEMA_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/yum" )
 
+ADD_CUSTOM_TARGET ( buildmon
+  COMMAND test ! -x ./buildmon || ./buildmon
+)
+
 ADD_CUSTOM_COMMAND (
   TARGET zypp POST_BUILD
-  COMMAND test ! -x ./buildmon || ./buildmon
+  COMMAND buildmon
 )
