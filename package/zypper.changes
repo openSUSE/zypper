@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 12 10:15:27 CET 2018 - ma@suse.de
+
+- Don't iterate twice on --no-cd (bsc#1111319)
+- version 1.13.48
+
+-------------------------------------------------------------------
 Fri Oct  5 14:18:19 CEST 2018 - ma@suse.de
 
 - MediaChangeReport: fix https URLs causing 2 prompts on error (bsc#1110542)
