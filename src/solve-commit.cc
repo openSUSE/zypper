@@ -349,36 +349,38 @@ static bool dist_upgrade( Zypper & zypper )
   // If those are specified addUpgradeRepo and solve,
   // otherwise perform a full dist upgrade.
 
-  std::list<RepoInfo> specified;
-  std::list<std::string> not_found;
-  parsed_opts::const_iterator tmp1;
-  if ( (tmp1 = copts.find("from")) != copts.end() )
-    get_repos( zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found );
-  report_unknown_repos( zypper.out(), not_found );
+  auto & dupSettings = DupSettings::instance();
+  if ( dupSettings._fromRepos.size() ) {
+    std::list<RepoInfo> specified;
+    std::list<std::string> not_found;
 
-  if ( !not_found.empty() )
-  {
-    zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-    ZYPP_THROW( ExitRequestException("Some of specified repositories were not found.") );
-  }
+    get_repos( zypper, dupSettings._fromRepos.begin(), dupSettings._fromRepos.end(), specified, not_found );
+    report_unknown_repos( zypper.out(), not_found );
 
-  if ( ! specified.empty() )
-  {
-    // Here: do upgrade for the specified repos:
-    Resolver_Ptr resolver( God->resolver() );
-    ResPool      pool    ( God->pool() );
-    for_( it, specified.begin(), specified.end() )
+    if ( !not_found.empty() )
     {
-      Repository repo( pool.reposFind( it->alias() ) );
-      MIL << "Adding upgrade repository: " << repo.alias() << endl;
-      resolver->addUpgradeRepo( repo );
+      zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      ZYPP_THROW( ExitRequestException("Some of specified repositories were not found.") );
     }
 
-    DBG << "Calling the solver..." << endl;
-    //! \todo Somehow tell set_solver_flags/set_ignore_recommends_of_installed that
-    //! this is no full upgrade. Until then set setIgnoreAlreadyRecommended again here:
-    resolver->setIgnoreAlreadyRecommended( true );
-    return resolver->resolvePool();
+    if ( ! specified.empty() )
+    {
+      // Here: do upgrade for the specified repos:
+      Resolver_Ptr resolver( God->resolver() );
+      ResPool      pool    ( God->pool() );
+      for_( it, specified.begin(), specified.end() )
+      {
+        Repository repo( pool.reposFind( it->alias() ) );
+        MIL << "Adding upgrade repository: " << repo.alias() << endl;
+        resolver->addUpgradeRepo( repo );
+      }
+
+      DBG << "Calling the solver..." << endl;
+      //! \todo Somehow tell set_solver_flags/set_ignore_recommends_of_installed that
+      //! this is no full upgrade. Until then set setIgnoreAlreadyRecommended again here:
+      resolver->setIgnoreAlreadyRecommended( true );
+      return resolver->resolvePool();
+    }
   }
 
   // Here: compute the full upgrade
@@ -876,7 +878,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 	  //! \todo This won't be necessary once we get a new solver flag
 	  //! for installing source packages without their build deps
 	  if ( !zypper.runtimeData().srcpkgs_to_install.empty() )
-	    install_src_pkgs( zypper );
+	    install_src_pkgs( zypper, dlMode_r );
 
 	  // set return value to 'reboot needed'
 	  if ( summary.needMachineReboot() )

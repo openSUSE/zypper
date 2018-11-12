@@ -433,9 +433,7 @@ namespace {
   {
     switch ( zypper.command().toEnum() ) {
       case ZypperCommand::UPDATE_e:
-      case ZypperCommand::SRC_INSTALL_e:
       case ZypperCommand::PATCH_e:
-      case ZypperCommand::DIST_UPGRADE_e:
       case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
       case ZypperCommand::VERIFY_e:
 #if 0
@@ -1914,20 +1912,7 @@ void Zypper::processCommandOptions()
       "-D, --dry-run               Test the removal, do not actually remove.\n"
       "    --details               Show the detailed installation summary.\n"
       ), "package, patch, pattern, product", "package") )
-#endif
 
-  case ZypperCommand::SRC_INSTALL_e:
-  {
-    static struct option src_install_options[] = {
-      {"build-deps-only", no_argument, 0, 'd'},
-      {"no-build-deps", no_argument, 0, 'D'},
-      {"download-only", no_argument, 0, 0},
-      {"repo", required_argument, 0, 'r'},
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = src_install_options;
-#if 0
     _command_help = ( CommandHelpFormater()
     << _(
       "source-install (si) [OPTIONS] <name> ...\n"
@@ -1941,31 +1926,6 @@ void Zypper::processCommandOptions()
       "    --download-only      Only download the packages, do not install.\n"
     ) )
 #endif
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("source-install (si) [OPTIONS] <NAME> ...")
-    )
-    .description(	// translators: command description
-    _("Install specified source packages and their build dependencies.")
-    )
-    .description(
-      (str::Format(_("The default location where rpm installs source packages to is '%1%', but the value can be changed in your local rpm configuration. In case of doubt try executing '%2%'."))
-      % "/usr/src/packages/{SPECS,SOURCES}"
-      % "rpm --eval \"%{_specdir} and %{_sourcedir}\""
-      ).str()
-    )
-    .optionSectionCommandOptions()
-    .option( "-d, --build-deps-only",	// translators: -d, --build-deps-only
-             _("Install only build dependencies of specified packages.") )
-    .option( "-D, --no-build-deps",	// translators: -D, --no-build-deps
-             _("Don't install build dependencies.") )
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Install packages only from specified repositories.") )
-    .option( "--download-only",	// translators: --download-only
-             _("Only download the packages, do not install.") )
-    ;
-    break;
-  }
 
   case ZypperCommand::VERIFY_e:
   {
@@ -2657,35 +2617,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::DIST_UPGRADE_e:
-  {
-    shared_ptr<DupOptions> myOpts( new DupOptions );
-    _commandOptions = myOpts;
-    static struct option dupdate_options[] = {
-      {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
-      {"repo",                      required_argument, 0, 'r'},
-      {"from",                      required_argument, 0,  0 },
-      {"replacefiles",              no_argument,       0,  0 },
-      ARG_License_Agreement,
-      {"dry-run",                   no_argument,       0, 'D'},
-      // rug uses -N shorthand
-      {"dry-run",                   no_argument,       0, 'N'},
-      {"details",		    no_argument,       0,  0 },
-      {"download",                  required_argument, 0,  0 },
-      // aliases for --download
-      // in --download-only, -d must be kept for backward and rug compatibility
-      {"download-only",             no_argument,       0, 'd'},
-      {"download-in-advance",       no_argument,       0,  0 },
-      {"download-in-heaps",         no_argument,       0,  0 },
-      {"download-as-needed",        no_argument,       0,  0 },
-      // solver flags
-      ARG_Solver_Flags_Common,
-      ARG_Solver_Flags_Recommends,
-      ARG_Solver_Flags_Installs,
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = dupdate_options;
 #if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
@@ -2711,41 +2642,6 @@ void Zypper::processCommandOptions()
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
 #endif
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("dist-upgrade (dup) [OPTIONS]")
-    )
-    .description(	// translators: command description
-    _("Perform a distribution upgrade.")
-    )
-    .optionSectionCommandOptions()
-    .option( "--from <ALIAS|#|URI>",	// translators: --from <ALIAS|#|URI>
-             _("Restrict upgrade to specified repository.") )
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Load only the specified repository.") )
-    .option( "-l, --auto-agree-with-licenses",	// translators: -l, --auto-agree-with-licenses
-             _("Automatically say 'yes' to third party license confirmation prompt. See man zypper for more details.") )
-    .option( "--replacefiles",	// translators: --replacefiles
-             _("Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check.") )
-    .option( "-D, --dry-run",	// translators: -D, --dry-run
-             _("Test the upgrade, do not actually upgrade") )
-    .option( "--details",	// translators: --details
-             _("Show the detailed installation summary.") )
-    .option( "--download",	// translators: --download
-             str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed" )
-    .option( "-d, --download-only",	// translators: -d, --download-only
-             _("Only download the packages, do not install.") )
-    .option( "-y, --no-confirm",	// translators: -y, --no-confirm
-	     _("Don't require user interaction. Alias for the --non-interactive global option.") )
-
-    .optionSectionSolverOptions()
-    .option_Solver_Flags_Common
-    .option_Solver_Flags_Recommends
-    .optionSectionExpertOptions()
-    .option_Solver_Flags_Installs
-    ;
-    break;
-  }
 
   case ZypperCommand::SEARCH_e:
   {
@@ -3484,41 +3380,6 @@ void Zypper::doCommand()
 
   // -------------------( source install )------------------------------------
 
-  case ZypperCommand::SRC_INSTALL_e:
-  {
-    if ( _arguments.size() < 1 )
-    {
-      out().error(_("Source package name is a required argument.") );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for installing or uninstalling packages.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    initRepoManager();
-    init_target( *this );
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-    // if ( !copts.count("no-build-deps") ) // if target resolvables are not read, solver produces a weird result
-    load_target_resolvables( *this );
-    load_repo_resolvables( *this );
-
-    if ( copts.count("no-build-deps") )
-      mark_src_pkgs( *this);
-    else
-      build_deps_install( *this );
-
-    solve_and_commit( *this );
-    break;
-  }
-
   case ZypperCommand::VERIFY_e:
   case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
   {
@@ -4121,48 +3982,6 @@ void Zypper::doCommand()
     break;
   }
 
-  // ----------------------------( dist-upgrade )------------------------------
-
-  case ZypperCommand::DIST_UPGRADE_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for performing a distribution upgrade.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    // too many arguments
-    if (_arguments.size() > 0)
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    // parse the download options to check for errors
-    get_download_option( *this );
-
-    initRepoManager();
-
-    if ( !copts.count("repo") && !copts.count("from") && repoManager().knownRepositories().size() > 1 )
-      out().warning( str::form(
-	_("You are about to do a distribution upgrade with all enabled"
-        " repositories. Make sure these repositories are compatible before you"
-	" continue. See '%s' for more information about this command."),
-	"man zypper") );
-
-    init_target( *this );
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-    load_resolvables( *this );
-
-    solve_and_commit( *this );
-
-    break;
-  }
   // -----------------------------( shell )------------------------------------
 
   case ZypperCommand::SHELL_QUIT_e:

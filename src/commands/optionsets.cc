@@ -238,3 +238,46 @@ void LicensePolicyOptionSet::reset()
 {
   LicenseAgreementPolicy::reset();
 }
+
+std::vector<ZyppFlags::CommandGroup> FileConflictPolicyOptionSet::options()
+{
+  FileConflictPolicyData &set = FileConflictPolicy::instanceNoConst();
+  return {{{
+        { "replacefiles", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &set._replaceFiles, ZyppFlags::StoreTrue, set._replaceFiles ),
+            // translators: --replacefiles
+            _("Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check.")
+        }
+  }}};
+}
+
+void FileConflictPolicyOptionSet::reset()
+{
+  FileConflictPolicy::reset();
+}
+
+std::vector<ZyppFlags::CommandGroup> NoConfirmRugOption::options()
+{
+  return {{{
+      { "no-confirm", 'y', ZyppFlags::NoArgument, ZyppFlags::Value(
+                [] () -> boost::optional<std::string> {
+                  return std::string( ( Zypper::instance().globalOpts().non_interactive ) ? "true" : "false" );
+                },
+                []( const ZyppFlags::CommandOption &, const boost::optional<std::string> & ) {
+                  bool &set = Zypper::instance().globalOptsNoConst().non_interactive;
+                  if ( ! set ) {
+                    Zypper::instance().out().info(_("Entering non-interactive mode."), Out::HIGH );
+                    MIL << "Entering non-interactive mode" << endl;
+                    set = true;
+                  }
+                }
+            ),
+            // translators: -y, --no-confirm
+            _("Don't require user interaction. Alias for the --non-interactive global option.")
+      }
+  }}};
+}
+
+void NoConfirmRugOption::reset()
+{
+  //@bug might be handled wrong in zypper shell
+}

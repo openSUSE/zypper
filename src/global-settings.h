@@ -89,6 +89,20 @@ struct LicenseAgreementPolicyData
 };
 using LicenseAgreementPolicy = GlobalSettingSingleton<LicenseAgreementPolicyData>;
 
+struct DupSettingsData
+{
+  void reset();
+  std::vector<std::string> _fromRepos;
+};
+using DupSettings = GlobalSettingSingleton<DupSettingsData>;
+
+struct FileConflictPolicyData
+{
+  void reset();
+  bool _replaceFiles = false;
+};
+using FileConflictPolicy = GlobalSettingSingleton<FileConflictPolicyData>;
+
 
 
 #endif

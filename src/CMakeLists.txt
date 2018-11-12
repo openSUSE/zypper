@@ -77,6 +77,8 @@ SET (zypper_HEADERS
   commands/query/products.h
   commands/solveroptionset.h
   commands/installremove.h
+  commands/sourceinstall.h
+  commands/distupgrade.h
 )
 
 SET( zypper_SRCS
@@ -135,6 +137,8 @@ SET( zypper_SRCS
   commands/query/products.cc
   commands/solveroptionset.cc
   commands/installremove.cc
+  commands/sourceinstall.cc
+  commands/distupgrade.cc
   ${zypper_HEADERS}
 )
 

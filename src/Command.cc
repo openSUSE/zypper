@@ -23,6 +23,8 @@
 #include "commands/utils.h"
 #include "commands/query.h"
 #include "commands/installremove.h"
+#include "commands/sourceinstall.h"
+#include "commands/distupgrade.h"
 
 using namespace zypp;
 
@@ -111,7 +113,9 @@ namespace
       { ZypperCommand::PRODUCTS_e,         CommandFactory::make<ProductsCmd>( { "products", "pd" } ) },
 
       { ZypperCommand::INSTALL_e,          CommandFactory::make<InstallCmd>( { "install", "in" } ) },
-      { ZypperCommand::REMOVE_e,           CommandFactory::make<RemoveCmd>(  { "remove", "rm" } ) }
+      { ZypperCommand::REMOVE_e,           CommandFactory::make<RemoveCmd>(  { "remove", "rm" } ) },
+      { ZypperCommand::SRC_INSTALL_e,      CommandFactory::make<SourceInstallCmd>( { "source-install", "si" } ) },
+      { ZypperCommand::DIST_UPGRADE_e,     CommandFactory::make<DistUpgradeCmd>( { "dist-upgrade", "dup" } ) }
     };
     return table;
   }
@@ -141,7 +145,7 @@ namespace
 
       //_t( INSTALL_e )		| "install"		| "in";
       //_t( REMOVE_e )		| "remove"		| "rm";
-      _t( SRC_INSTALL_e )	| "source-install"	| "si";
+      //_t( SRC_INSTALL_e )	| "source-install"	| "si";
       _t( VERIFY_e )		| "verify"		| "ve";
       _t( INSTALL_NEW_RECOMMENDS_e )| "install-new-recommends" | "inr";
 
@@ -150,7 +154,7 @@ namespace
       _t( PATCH_e )		| "patch";
       _t( LIST_PATCHES_e )	| "list-patches"	| "lp";
       _t( PATCH_CHECK_e )	| "patch-check"		| "pchk";
-      _t( DIST_UPGRADE_e )	| "dist-upgrade"	| "dup";
+      //_t( DIST_UPGRADE_e )	| "dist-upgrade"	| "dup";
 
       _t( SEARCH_e )		| "search"		| "se";
       //_t( INFO_e )		| "info"		| "if";

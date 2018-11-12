@@ -12,6 +12,8 @@ void GlobalSettings::reset()
   InitRepoSettings::reset();
   SolverSettings::reset();
   LicenseAgreementPolicy::reset();
+  DupSettings::reset();
+  FileConflictPolicy::reset();
 }
 
 void DryRunSettingsData::reset()
@@ -40,4 +42,14 @@ void LicenseAgreementPolicyData::reset()
 {
   _autoAgreeWithLicenses = false;
   _autoAgreeWithProductLicenses = false;
+}
+
+void DupSettingsData::reset()
+{
+  _fromRepos.clear();
+}
+
+void FileConflictPolicyData::reset()
+{
+  _replaceFiles = false;
 }

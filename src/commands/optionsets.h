@@ -96,4 +96,31 @@ public:
   std::vector<zypp::ZyppFlags::CommandGroup> options() override;
   void reset() override;
 };
+
+class FileConflictPolicyOptionSet : public BaseCommandOptionSet
+{
+public:
+ using BaseCommandOptionSet::BaseCommandOptionSet;
+
+  // BaseCommandOptionSet interface
+public:
+  std::vector<ZyppFlags::CommandGroup> options() override;
+  void reset() override;
+};
+
+/**
+ * Provides pkg/apt/yum user convenience,
+ * the no-confirm option is mapped to the global --non-interactive
+ */
+class NoConfirmRugOption : public BaseCommandOptionSet
+{
+public:
+  using BaseCommandOptionSet::BaseCommandOptionSet;
+
+  // BaseCommandOptionSet interface
+public:
+  std::vector<ZyppFlags::CommandGroup> options() override;
+  void reset() override;
+};
+
 #endif
