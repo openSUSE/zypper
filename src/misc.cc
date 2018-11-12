@@ -302,7 +302,7 @@ namespace
 } // namespace
 // ----------------------------------------------------------------------------
 
-void build_deps_install( Zypper & zypper )
+void build_deps_install( Zypper & zypper, const std::vector<std::string> &srcPkgs_r, bool buildDepsOnly_r )
 {
   /*
    * Workflow:
@@ -311,7 +311,7 @@ void build_deps_install( Zypper & zypper )
    * 2. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
    */
 
-  for ( const std::string & arg : zypper.arguments() )
+  for ( const std::string & arg : srcPkgs_r )
   {
     SrcPackage::constPtr srcpkg = source_find( zypper, arg );
 
@@ -320,7 +320,7 @@ void build_deps_install( Zypper & zypper )
       DBG << "Injecting build requieres for " << srcpkg << endl;
 
       // install build depenendcies only
-      if ( zypper.cOpts().count("build-deps-only") )
+      if ( buildDepsOnly_r )
         for_( itc, srcpkg->requires().begin(), srcpkg->requires().end() )
         {
           God->resolver()->addRequire( *itc );
@@ -343,7 +343,7 @@ void build_deps_install( Zypper & zypper )
 
 // ----------------------------------------------------------------------------
 
-void mark_src_pkgs( Zypper & zypper )
+void mark_src_pkgs( Zypper & zypper, const std::vector<std::string> &packages_r )
 {
   /*
    * Workflow:
@@ -352,7 +352,7 @@ void mark_src_pkgs( Zypper & zypper )
    * 2. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
    */
 
-  for ( const std::string & arg : zypper.arguments() )
+  for ( const std::string & arg : packages_r )
   {
     SrcPackage::constPtr srcpkg = source_find( zypper, arg );
 
@@ -363,7 +363,7 @@ void mark_src_pkgs( Zypper & zypper )
 
 // ----------------------------------------------------------------------------
 
-void install_src_pkgs( Zypper & zypper )
+void install_src_pkgs( Zypper & zypper , zypp::DownloadMode dlMode_r )
 {
   for_( it, zypper.runtimeData().srcpkgs_to_install.begin(), zypper.runtimeData().srcpkgs_to_install.end() )
   {
@@ -373,7 +373,7 @@ void install_src_pkgs( Zypper & zypper )
 
     try
     {
-      if ( get_download_option( zypper, true ) == DownloadOnly )
+      if ( dlMode_r == DownloadOnly )
       {
         God->provideSrcPackage( srcpkg ).resetDispose();
 

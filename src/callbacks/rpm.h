@@ -24,6 +24,7 @@
 
 #include "Zypper.h"
 #include "output/prompt.h"
+#include "global-settings.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace
@@ -437,7 +438,7 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
 		  conflicts_r, out::FileConflictsListFormater() );
 	out.gap();
 
-	if ( Zypper::instance().cOpts().count("replacefiles") )
+	if ( FileConflictPolicy::instance()._replaceFiles )
 	{
 	  out.info( _("Conflicting files will be replaced."), " [--replacefiles]" );
 	}

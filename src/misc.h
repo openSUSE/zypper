@@ -8,6 +8,11 @@
 #ifndef ZMART_MISC_H
 #define ZMART_MISC_H
 
+#include <vector>
+#include <string>
+
+#include <zypp/DownloadMode.h>
+
 class Zypper;
 using namespace zypp;
 
@@ -40,19 +45,19 @@ void remove_selections( Zypper & zypper );
  * \note we still need to be able to install the source package alone
  *       (without build-deps, which are listed as 'requires' of the srcpackage)
  */
-void mark_src_pkgs( Zypper & zypper );
+void mark_src_pkgs(Zypper & zypper , const std::vector<std::string> &packages_r);
 
 /**
  * Install source packages found by \ref mark_src_pkgs.
  * \todo this uses ZYpp->installSrcPackage(srcpkg) - if it is to be gone
  *       during the zypp commit refactoring, we need a replacement
  */
-void install_src_pkgs( Zypper & zypper );
+void install_src_pkgs( Zypper & zypper, zypp::DownloadMode dlMode_r );
 
 /**
  * Inject requirements of a source package or its build dependencies (depending
  * on command line options) to the pool.
  */
-void build_deps_install( Zypper & zypper );
+void build_deps_install(Zypper & zypper , const std::vector<std::string> &srcPkgs_r, bool buildDepsOnly_r);
 
 #endif
