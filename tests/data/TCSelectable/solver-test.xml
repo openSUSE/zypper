@@ -17,6 +17,11 @@
 	- url         : http://foo.org/distribution/LOW
 	-->
 	<channel file="RepoLOW.xml" name="RepoLOW" priority="99" />
+	<!--
+	- alias       : RepoLOW
+	- url         : http://foo.org/distribution/LOW
+	-->
+	<channel file="RepoSRC.xml" name="RepoSRC" priority="99" />
 	<locale name="en_US" />
 	<locale name="de" />
 </setup>

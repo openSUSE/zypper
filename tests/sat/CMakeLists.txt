@@ -9,6 +9,7 @@ ADD_TESTS(
   Queue
   Map
   Solvable
+  SolvableSpec
   SolvParsing
   WhatObsoletes
   WhatProvides
