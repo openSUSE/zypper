@@ -25,6 +25,7 @@
 #include "commands/installremove.h"
 #include "commands/sourceinstall.h"
 #include "commands/distupgrade.h"
+#include "commands/inrverify.h"
 
 using namespace zypp;
 
@@ -115,7 +116,9 @@ namespace
       { ZypperCommand::INSTALL_e,          CommandFactory::make<InstallCmd>( { "install", "in" } ) },
       { ZypperCommand::REMOVE_e,           CommandFactory::make<RemoveCmd>(  { "remove", "rm" } ) },
       { ZypperCommand::SRC_INSTALL_e,      CommandFactory::make<SourceInstallCmd>( { "source-install", "si" } ) },
-      { ZypperCommand::DIST_UPGRADE_e,     CommandFactory::make<DistUpgradeCmd>( { "dist-upgrade", "dup" } ) }
+      { ZypperCommand::DIST_UPGRADE_e,     CommandFactory::make<DistUpgradeCmd>( { "dist-upgrade", "dup" } ) },
+      { ZypperCommand::VERIFY_e,           CommandFactory::makeAlias<InrVerifyCmd, InrVerifyCmd::Mode, InrVerifyCmd::Mode::Verify>( { "verify", "ve" } ) },
+      { ZypperCommand::INSTALL_NEW_RECOMMENDS_e, CommandFactory::makeAlias<InrVerifyCmd, InrVerifyCmd::Mode, InrVerifyCmd::Mode::InstallRecommends>( { "install-new-recommends", "inr" } ) }
     };
     return table;
   }
@@ -146,8 +149,8 @@ namespace
       //_t( INSTALL_e )		| "install"		| "in";
       //_t( REMOVE_e )		| "remove"		| "rm";
       //_t( SRC_INSTALL_e )	| "source-install"	| "si";
-      _t( VERIFY_e )		| "verify"		| "ve";
-      _t( INSTALL_NEW_RECOMMENDS_e )| "install-new-recommends" | "inr";
+      //_t( VERIFY_e )		| "verify"		| "ve";
+      //_t( INSTALL_NEW_RECOMMENDS_e )| "install-new-recommends" | "inr";
 
       _t( UPDATE_e )		| "update"		| "up";
       _t( LIST_UPDATES_e )	| "list-updates"	| "lu";

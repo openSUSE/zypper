@@ -434,8 +434,6 @@ namespace {
     switch ( zypper.command().toEnum() ) {
       case ZypperCommand::UPDATE_e:
       case ZypperCommand::PATCH_e:
-      case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
-      case ZypperCommand::VERIFY_e:
 #if 0
       // bsc#1108999: Quick fix: Allow repo commands on transactional-server (/etc is rw)
       case ZypperCommand::ADD_REPO_e:
@@ -1925,34 +1923,7 @@ void Zypper::processCommandOptions()
       "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
       "    --download-only      Only download the packages, do not install.\n"
     ) )
-#endif
 
-  case ZypperCommand::VERIFY_e:
-  {
-    shared_ptr<VerifyOptions> myOpts( new VerifyOptions );
-    _commandOptions = myOpts;
-    static struct option verify_options[] = {
-      {"no-confirm", no_argument, 0, 'y'},			// pkg/apt/yum user convenience ==> --non-interactive
-      {"dry-run", no_argument, 0, 'D'},
-      // rug uses -N shorthand
-      {"dry-run", no_argument, 0, 'N'},
-      {"details",		    no_argument,       0,  0 },
-      {"download",                  required_argument, 0,  0 },
-      // aliases for --download
-      // in --download-only, -d must be kept for backward and rug compatibility
-      {"download-only",             no_argument,       0, 'd'},
-      {"download-in-advance",       no_argument,       0,  0 },
-      {"download-in-heaps",         no_argument,       0,  0 },
-      {"download-as-needed",        no_argument,       0,  0 },
-      {"repo",                      required_argument, 0, 'r'},
-      ARG_Solver_Flags_Common,
-      ARG_Solver_Flags_Recommends,
-      ARG_Solver_Flags_Installs,
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = verify_options;
-#if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
       "verify (ve) [OPTIONS]\n"
@@ -1970,59 +1941,7 @@ void Zypper::processCommandOptions()
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
-#endif
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("verify (ve) [OPTIONS]")
-    )
-    .description(	// translators: command description
-    _("Check whether dependencies of installed packages are satisfied and suggest to install or remove packages in order to repair the dependency problems.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Load only the specified repository.") )
-    .option( "-D, --dry-run",	// translators: -D, --dry-run
-             _("Test the repair, do not actually do anything to the system.") )
-    .option( "--details",	// translators: --details
-             _("Show the detailed installation summary.") )
-#warning FIX --download it takes a <MODE> argument in probably all commands
-    .option( "--download",	// translators: --download
-             str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed" )
-    .option( "-d, --download-only",	// translators: -d, --download-only
-             _("Only download the packages, do not install.") )
-    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
 
-    .optionSectionSolverOptions()
-    .option_Solver_Flags_Common
-    .option_Solver_Flags_Recommends
-    .optionSectionExpertOptions()
-    .option_Solver_Flags_Installs
-    ;
-    break;
-  }
-
-  case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
-  {
-    shared_ptr<InrOptions> myOpts( new InrOptions );
-    _commandOptions = myOpts;
-    static struct option options[] = {
-      {"dry-run", no_argument, 0, 'D'},
-      {"details",		    no_argument,       0,  0 },
-      {"download",                  required_argument, 0,  0 },
-      // aliases for --download
-      // in --download-only, -d must be kept for backward and rug compatibility
-      {"download-only",             no_argument,       0, 'd'},
-      {"download-in-advance",       no_argument,       0,  0 },
-      {"download-in-heaps",         no_argument,       0,  0 },
-      {"download-as-needed",        no_argument,       0,  0 },
-      {"repo", required_argument, 0, 'r'},
-      ARG_Solver_Flags_Common,
-      ARG_Solver_Flags_Installs,
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-#if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
       "install-new-recommends (inr) [OPTIONS]\n"
@@ -2039,34 +1958,7 @@ void Zypper::processCommandOptions()
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
     ), "only, in-advance, in-heaps, as-needed") )
-#endif
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("install-new-recommends (inr) [OPTIONS]")
-    )
-    .description(	// translators: command description
-    _("Install newly added packages recommended by already installed packages. This can typically be used to install new language packages or drivers for newly added hardware.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Load only the specified repositories.") )
-    .option( "-D, --dry-run",	// translators: -D, --dry-run
-             _("Test the installation, do not actually install.") )
-    .option( "--details",	// translators: --details
-             _("Show the detailed installation summary.") )
-    .option( "--download",	// translators: --download
-             str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed" )
-    .option( "-d, --download-only",	// translators: -d, --download-only
-             _("Only download the packages, do not install.") )
-    .optionSectionSolverOptions()
-    .option_Solver_Flags_Common
-    .optionSectionExpertOptions()
-    .option_Solver_Flags_Installs
-    ;
-    break;
-  }
 
-#if 0
     _(
       // translators: the %s = "ris" (the only service type currently supported)
       "addservice (as) [OPTIONS] <URI> <alias>\n"
@@ -2078,8 +1970,7 @@ void Zypper::processCommandOptions()
       "-d, --disable           Add the service as disabled.\n"
       "-n, --name <name>       Specify descriptive name for the service.\n"
     )
-#endif
-#if 0
+
     _command_help = _(
       // TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
       "removeservice (rs) [OPTIONS] <alias|#|URI>\n"
@@ -2090,9 +1981,7 @@ void Zypper::processCommandOptions()
       "    --loose-auth   Ignore user authentication data in the URI.\n"
       "    --loose-query  Ignore query string in the URI.\n"
     );
-#endif
 
-#if 0
     _(
       // translators: %s is "--all" and "--all"
       "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -3375,45 +3264,6 @@ void Zypper::doCommand()
   {
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
-    break;
-  }
-
-  // -------------------( source install )------------------------------------
-
-  case ZypperCommand::VERIFY_e:
-  case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
-  {
-    // too many arguments
-    if ( _arguments.size() > 0 )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for installing or uninstalling packages.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    // parse the download options to check for errors
-    get_download_option( *this );
-
-    initRepoManager();
-
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-
-    // prepare target
-    init_target( *this );
-    // load metadata
-    load_resolvables( *this );
-    solve_and_commit( *this );
-
     break;
   }
 

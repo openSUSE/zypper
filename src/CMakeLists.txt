@@ -79,6 +79,7 @@ SET (zypper_HEADERS
   commands/installremove.h
   commands/sourceinstall.h
   commands/distupgrade.h
+  commands/inrverify.h
 )
 
 SET( zypper_SRCS
@@ -139,6 +140,7 @@ SET( zypper_SRCS
   commands/installremove.cc
   commands/sourceinstall.cc
   commands/distupgrade.cc
+  commands/inrverify.cc
   ${zypper_HEADERS}
 )
 
