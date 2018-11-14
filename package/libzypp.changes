@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 14 11:48:35 CET 2018 - ma@suse.de
+
+- Provide needreboot config files in /etc/zypp (fate#326451, fixes #140)
+- Need to fix soname due to libsolv ABI changes (bsc#1115341)
+- version 17.9.0 (9)
+
+-------------------------------------------------------------------
 Mon Oct 29 12:20:40 CET 2018 - ma@suse.de
 
 - Adapt to changed type names in libsolv-0.7
