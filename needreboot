@@ -1,0 +1,25 @@
+##
+## This file contains packages which will trigger the needreboot hint.
+## So the user gets informed that the system should be rebooted after
+## one of these packages was updated.
+##
+## This config file is maintained by libzypp unless you manually amend it.
+## Additional configuration files can be placed in /etc/zypp/needreboot.d.
+##
+## Format: Each line must contain either a 'PACKAGENAME' or 'provides:CAPABILITY'
+##         to include all packages providing a dependency match for 'CAPABILITY'.
+##         Lines starting with '#' and empty lines are ignored.
+##
+## Example:
+##         provides:kernel
+##         glibc
+##
+provides:kernel
+dbus-1
+glibc
+gnutls
+kernel-firmware
+libopenssl1_0_0
+libopenssl1_1
+systemd
+udev

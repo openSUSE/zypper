@@ -207,6 +207,18 @@ namespace zypp
       Pathname knownServicesPath() const;
 
       /**
+       * Path of the default needreboot config file (configPath()/needreboot).
+       * \ingroup g_ZC_CONFIGFILES
+       */
+      Pathname needrebootFile() const;
+
+      /**
+       * Path where the custom needreboot config files are kept (configPath()/needreboot.d).
+       * \ingroup g_ZC_CONFIGFILES
+       */
+      Pathname needrebootPath() const;
+
+      /**
        * Path containing custom repo variable definitions (configPath()/vars.d).
        * \see \ref zypp::repo::RepoVarExpand Repo variable expander
        * \ingroup g_ZC_CONFIGFILES

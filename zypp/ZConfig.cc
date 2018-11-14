@@ -976,6 +976,12 @@ namespace zypp
         ? (configPath()/"services.d") : _pimpl->cfg_known_services_path );
   }
 
+  Pathname ZConfig::needrebootFile() const
+  { return configPath()/"needreboot"; }
+
+  Pathname ZConfig::needrebootPath() const
+  { return configPath()/"needreboot.d"; }
+
   Pathname ZConfig::varsPath() const
   {
     return ( _pimpl->cfg_vars_path.empty()

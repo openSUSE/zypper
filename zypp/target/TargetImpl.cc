@@ -1077,15 +1077,33 @@ namespace zypp
       //load the packages that will trigger the update flag being set
       {
         sat::StringQueue q;
-        filesystem::Pathname needRebootFile = home() / "NeedReboot";
+        filesystem::Pathname needRebootFile { Pathname::assertprefix( root(), ZConfig::instance().needrebootFile() ) };
         if ( filesystem::PathInfo ( needRebootFile ).isExist() ) {
           SolvIdentFile file ( needRebootFile );
           for ( const auto & idstr : file.data() ) {
             q.push( idstr.id() );
           }
-        }
+#if 1
+#warning Hotfix: temp workaround missing SolvableSpec Parser
+	  // Also consider excluding .rpmnew/.rpmsave/.rpmorig files in needreboot.d
+          q.push( IdString("kernel-azure").id() );
+	  q.push( IdString("kernel-azure-base").id() );
+	  q.push( IdString("kernel-debug").id() );
+	  q.push( IdString("kernel-debug-base").id() );
+	  q.push( IdString("kernel-default").id() );
+	  q.push( IdString("kernel-default-base").id() );
+	  q.push( IdString("kernel-kvmsmall").id() );
+	  q.push( IdString("kernel-kvmsmall-base").id() );
+	  q.push( IdString("kernel-rt").id() );
+	  q.push( IdString("kernel-rt-base").id() );
+	  q.push( IdString("kernel-rt_debug").id() );
+	  q.push( IdString("kernel-rt_debug-base").id() );
+	  q.push( IdString("kernel-vanilla").id() );
+	  q.push( IdString("kernel-vanilla-base").id() );
+#endif
+	}
 
-        filesystem::Pathname needRebootDir = home() / "NeedReboot.d";
+        filesystem::Pathname needRebootDir { Pathname::assertprefix( root(), ZConfig::instance().needrebootPath() ) };
         if ( filesystem::PathInfo ( needRebootDir ).isExist() ) {
           filesystem::DirContent ls;
           filesystem::readdir( ls, needRebootDir, false );

@@ -232,6 +232,7 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/systemCheck.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/vars.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/vendors.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/multiversion.d
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/needreboot.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/credentials.d
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins
@@ -241,7 +242,6 @@ mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/services
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/system
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/urlresolver
 mkdir -p $RPM_BUILD_ROOT%{_var}/lib/zypp
-mkdir -p $RPM_BUILD_ROOT%{_var}/lib/zypp/NeedReboot.d
 mkdir -p $RPM_BUILD_ROOT%{_var}/log/zypp
 mkdir -p $RPM_BUILD_ROOT%{_var}/cache/zypp
 
@@ -345,13 +345,13 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir               %{_sysconfdir}/zypp/vars.d
 %dir               %{_sysconfdir}/zypp/vendors.d
 %dir               %{_sysconfdir}/zypp/multiversion.d
+%config(noreplace) %{_sysconfdir}/zypp/needreboot
+%dir               %{_sysconfdir}/zypp/needreboot.d
 %dir               %{_sysconfdir}/zypp/credentials.d
 %config(noreplace) %{_sysconfdir}/zypp/zypp.conf
 %config(noreplace) %{_sysconfdir}/zypp/systemCheck
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-history.lr
 %dir               %{_var}/lib/zypp
-%config(noreplace) %{_var}/lib/zypp/NeedReboot
-%dir               %{_var}/lib/zypp/NeedReboot.d
 %dir               %{_var}/log/zypp
 %dir               %{_var}/cache/zypp
 %{_prefix}/lib/zypp
