@@ -234,8 +234,8 @@ make -C tests %{?_smp_mflags}
 
 %install
 cd build
-make install DESTDIR="%{buildroot}"
-make -C doc/autodoc install DESTDIR="%{buildroot}"
+%make_install
+%make_install -C doc/autodoc
 %if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
 ln -s %{_sysconfdir}/yum.repos.d %{buildroot}/%{_sysconfdir}/zypp/repos.d
 %else
@@ -264,7 +264,7 @@ mkdir -p %{buildroot}/%{_var}/cache/zypp
 sed -i "s|# solver.dupAllowVendorChange = true|solver.dupAllowVendorChange = false|g" %{buildroot}%{_sysconfdir}/zypp/zypp.conf
 %endif
 
-make -C po install DESTDIR="%{buildroot}"
+%make_install -C po
 # Create filelist with translations
 cd ..
 %{find_lang} zypp
