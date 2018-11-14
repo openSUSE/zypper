@@ -21,7 +21,7 @@ Version:        @VERSION@
 Release:        0
 License:        GPL-2.0+
 Url:            https://github.com/openSUSE/libzypp
-Summary:        Package, Patch, Pattern, and Product Management
+Summary:        Library for package, patch, pattern and product management
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Source:         %{name}-%{version}.tar.bz2
@@ -134,10 +134,24 @@ BuildRequires:  libxslt-tools
 %endif
 
 %description
-Package, Patch, Pattern, and Product Management
+libzypp is the package management library that powers applications
+like YaST, zypper and the openSUSE/SLE implementation of PackageKit.
+
+libzypp provides functionality for a package manager:
+
+  * An API for package repository management, supporting most common
+    repository metadata formats and signed repositories.
+  * An API for solving packages, products, patterns and patches
+    (installation, removal, update and distribution upgrade
+    operations) dependencies, with additional features like locking.
+  * An API for commiting the transaction to the system over a rpm
+    target. Supporting deltarpm calculation, media changing and
+    installation order calculation.
+  * An API for browsing available and installed software, with some
+    facilities for programs with an user interface.
 
 %package devel
-Summary:        Package, Patch, Pattern, and Product Management - developers files
+Summary:        Header files for libzypp, a library for package management
 Group:          Development/Libraries/C and C++
 Provides:       yast2-packagemanager-devel
 Obsoletes:      yast2-packagemanager-devel
@@ -182,14 +196,15 @@ Requires:       libsolv-devel
 %endif
 
 %description devel
-Package, Patch, Pattern, and Product Management - developers files
+Development files for libzypp, a library for package, patch, pattern
+and product management.
 
 %package devel-doc
-Summary:        Package, Patch, Pattern, and Product Management - developers files
+Summary:        Developer documentation for libzypp
 Group:          Documentation/HTML
 
 %description devel-doc
-Package, Patch, Pattern, and Product Management - developers files
+Developer documentation for libzypp.
 
 %prep
 %setup -q
