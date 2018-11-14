@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Nov 14 16:15:54 CET 2018 - ma@suse.de
+
+- Don't iterate twice on --no-cd (bsc#1111319)
+- zypper-log: Make it Python 3 compatible
+- man: mention /etc/zypp/needreboot config file (fate#326451, fixes #140)
+- BuildRequires:  libzypp-devel >= 17.9.0 (provides needreboot file)
+- version 1.14.16
+
+-------------------------------------------------------------------
 Mon Oct 29 14:29:12 CET 2018 - ma@suse.de
 
 - Add `needs-restarting` shell script and manpage (fate#326451)
