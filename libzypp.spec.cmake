@@ -212,8 +212,8 @@ Developer documentation for libzypp.
 %build
 mkdir build
 cd build
-export CFLAGS="$RPM_OPT_FLAGS"
-export CXXFLAGS="$RPM_OPT_FLAGS"
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
 unset EXTRA_CMAKE_OPTIONS
 # No libproxy on SLE11
 %if 0%{?suse_version} == 1110
@@ -234,44 +234,44 @@ make -C tests %{?_smp_mflags}
 
 %install
 cd build
-make install DESTDIR=$RPM_BUILD_ROOT
-make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
+make install DESTDIR="%{buildroot}"
+make -C doc/autodoc install DESTDIR="%{buildroot}"
 %if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
-ln -s %{_sysconfdir}/yum.repos.d $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
+ln -s %{_sysconfdir}/yum.repos.d %{buildroot}/%{_sysconfdir}/zypp/repos.d
 %else
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
+mkdir -p %{buildroot}/%{_sysconfdir}/zypp/repos.d
 %endif
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/services.d
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/systemCheck.d
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/vars.d
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/vendors.d
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/multiversion.d
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/needreboot.d
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/credentials.d
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/appdata
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/commit
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/services
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/system
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/urlresolver
-mkdir -p $RPM_BUILD_ROOT%{_var}/lib/zypp
-mkdir -p $RPM_BUILD_ROOT%{_var}/log/zypp
-mkdir -p $RPM_BUILD_ROOT%{_var}/cache/zypp
+mkdir -p %{buildroot}/%{_sysconfdir}/zypp/services.d
+mkdir -p %{buildroot}/%{_sysconfdir}/zypp/systemCheck.d
+mkdir -p %{buildroot}/%{_sysconfdir}/zypp/vars.d
+mkdir -p %{buildroot}/%{_sysconfdir}/zypp/vendors.d
+mkdir -p %{buildroot}/%{_sysconfdir}/zypp/multiversion.d
+mkdir -p %{buildroot}/%{_sysconfdir}/zypp/needreboot.d
+mkdir -p %{buildroot}/%{_sysconfdir}/zypp/credentials.d
+mkdir -p %{buildroot}/%{_prefix}/lib/zypp
+mkdir -p %{buildroot}/%{_prefix}/lib/zypp/plugins
+mkdir -p %{buildroot}/%{_prefix}/lib/zypp/plugins/appdata
+mkdir -p %{buildroot}/%{_prefix}/lib/zypp/plugins/commit
+mkdir -p %{buildroot}/%{_prefix}/lib/zypp/plugins/services
+mkdir -p %{buildroot}/%{_prefix}/lib/zypp/plugins/system
+mkdir -p %{buildroot}/%{_prefix}/lib/zypp/plugins/urlresolver
+mkdir -p %{buildroot}/%{_var}/lib/zypp
+mkdir -p %{buildroot}/%{_var}/log/zypp
+mkdir -p %{buildroot}/%{_var}/cache/zypp
 
 # Default to 'solver.dupAllowVendorChange = false' on TW and post SLE12
 %if 0%{?suse_version} >= 1330 || "%{distribution}" == "openSUSE Tumbleweed"
 sed -i "s|# solver.dupAllowVendorChange = true|solver.dupAllowVendorChange = false|g" %{buildroot}%{_sysconfdir}/zypp/zypp.conf
 %endif
 
-make -C po install DESTDIR=$RPM_BUILD_ROOT
+make -C po install DESTDIR="%{buildroot}"
 # Create filelist with translations
 cd ..
 %{find_lang} zypp
 
 %check
 pushd build/tests
-LD_LIBRARY_PATH=$RPM_BUILD_ROOT%{_libdir}:${LD_LIBRARY_PATH} ctest .
+LD_LIBRARY_PATH="%{buildroot}/%{_libdir}:$LD_LIBRARY_PATH" ctest .
 popd
 
 %post
