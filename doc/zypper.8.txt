@@ -1549,7 +1549,7 @@ Other Commands
 *needs-rebooting* ::
 	Checks if the reboot-needed flag was set by a previous update or install of a core library or service.
 	+
-	The reboot-needed flag is set when a package from a predefined list (/var/lib/zypp/NeedReboot) is updated or installed. Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, otherwise the exit code is set to ZYPPER_EXIT_OK.
+	The reboot-needed flag is set when a package from a predefined list (/etc/zypp/needreboot) is updated or installed. Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, otherwise the exit code is set to ZYPPER_EXIT_OK.
 
 
 
@@ -1770,10 +1770,10 @@ FILES
 *~/.zypper_history*::
 	Command history for the zypper shell (see the *shell* command).
 
-*/var/lib/zypp/NeedReboot*::
+*/etc/zypp/needreboot*::
 	File with a list of packages that will set the reboot-needed flag when installed or upgraded.
 
-*/var/lib/zypp/NeedReboot.d*::
+*/etc/zypp/needreboot.d*::
 	Directory that can be used to define packages that trigger the reboot-needed flag by adding additional files containing the required package names.
 
 EXIT CODES
