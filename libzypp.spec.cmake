@@ -233,7 +233,6 @@ make -C po %{?_smp_mflags} translations
 make -C tests %{?_smp_mflags}
 
 %install
-rm -rf "$RPM_BUILD_ROOT"
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
@@ -340,9 +339,6 @@ if is_old ${LOCKSFILE}
 fi
 
 %postun -p /sbin/ldconfig
-
-%clean
-rm -rf "$RPM_BUILD_ROOT"
 
 %files -f zypp.lang
 %defattr(-,root,root)
