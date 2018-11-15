@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-05 10:30+0000\n"
-"Last-Translator: Giuseppe Gorgoglione <gorgoglione@gmail.com>\n"
+"PO-Revision-Date: 2018-11-15 16:03+0000\n"
+"Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -611,47 +611,42 @@ msgstr "ALIAS|#|URI"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "CATEGORY"
-msgstr "categoria"
+msgstr "CATEGORIA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
-#, fuzzy
 msgid "DIR"
 msgstr "DIR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
-#, fuzzy
 msgid "FILE"
 msgstr "FILE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
-#, fuzzy
 msgid "FILE.repo"
 msgstr "FILE.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
-#, fuzzy
 msgid "FORMAT"
-msgstr "FORMAT"
+msgstr "FORMATO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "INTEGER"
-msgstr "intero"
+msgstr "INTERO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
-#, fuzzy
 msgid "PATH"
-msgstr "PATH"
+msgstr "PERCORSO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "SEVERITY"
-msgstr "gravità"
+msgstr "GRAVITÀ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
@@ -660,14 +655,13 @@ msgstr "STRINGA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
-#, fuzzy
 msgid "TAG"
 msgstr "TAG"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
 msgid "TYPE"
-msgstr "tipo"
+msgstr "TIPO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #. translators: property name; short; used like "Name: value"
