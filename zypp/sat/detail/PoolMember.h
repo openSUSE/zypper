@@ -12,8 +12,6 @@
 #ifndef ZYPP_SAT_DETAIL_POOLMEMBER_H
 #define ZYPP_SAT_DETAIL_POOLMEMBER_H
 
-#include <solv/solvversion.h>
-
 #include "zypp/base/Hash.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/String.h"
@@ -21,8 +19,7 @@
 
 extern "C"
 {
-  // Those _Type names are exposed as sat::detail::CType below!
-#if ( LIBSOLV_VERSION >= 700 )
+  // Those s_Type names are exposed as sat::detail::CType below!
   struct s_Dataiterator;
   struct s_Datamatcher;
   struct s_Map;
@@ -32,17 +29,6 @@ extern "C"
   struct s_Solvable;
   struct s_Solver;
   struct s_Transaction;
-#else
-  struct _Dataiterator;
-  struct _Datamatcher;
-  struct _Map;
-  struct _Pool;
-  struct _Queue;
-  struct _Repo;
-  struct _Solvable;
-  struct _Solver;
-  struct _Transaction;
-#endif
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -69,7 +55,6 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace detail
     {
-#if ( LIBSOLV_VERSION >= 700 )
       typedef ::s_Dataiterator	CDataiterator;	///< Wrapped libsolv C data type exposed as backdoor
       typedef ::s_Datamatcher	CDatamatcher;	///< Wrapped libsolv C data type exposed as backdoor
       typedef ::s_Map		CMap;		///< Wrapped libsolv C data type exposed as backdoor
@@ -79,17 +64,6 @@ namespace zypp
       typedef ::s_Solvable	CSolvable;	///< Wrapped libsolv C data type exposed as backdoor
       typedef ::s_Solver	CSolver;	///< Wrapped libsolv C data type exposed as backdoor
       typedef ::s_Transaction	CTransaction;	///< Wrapped libsolv C data type exposed as backdoor
-#else
-      typedef ::_Dataiterator	CDataiterator;	///< Wrapped libsolv C data type exposed as backdoor
-      typedef ::_Datamatcher	CDatamatcher;	///< Wrapped libsolv C data type exposed as backdoor
-      typedef ::_Map		CMap;		///< Wrapped libsolv C data type exposed as backdoor
-      typedef ::_Pool		CPool;		///< Wrapped libsolv C data type exposed as backdoor
-      typedef ::_Queue		CQueue;		///< Wrapped libsolv C data type exposed as backdoor
-      typedef ::_Repo		CRepo;		///< Wrapped libsolv C data type exposed as backdoor
-      typedef ::_Solvable	CSolvable;	///< Wrapped libsolv C data type exposed as backdoor
-      typedef ::_Solver		CSolver;	///< Wrapped libsolv C data type exposed as backdoor
-      typedef ::_Transaction	CTransaction;	///< Wrapped libsolv C data type exposed as backdoor
-#endif
     } // namespace detail
     ///////////////////////////////////////////////////////////////////
 
