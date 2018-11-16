@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-15 16:03+0000\n"
+"PO-Revision-Date: 2018-11-16 17:03+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -3304,6 +3304,7 @@ msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:2340
+#, fuzzy
 msgid ""
 "removeservice (rs) [OPTIONS] <alias|#|URI>\n"
 "\n"
@@ -3313,6 +3314,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
+"removeservice (rs) [opzioni] <alias|#|URI>\n"
+"\n"
+"Rimuove dal sistema lo specificato servizio indici del repository.\n"
+"\n"
+"  Opzioni del comando:\n"
+"    --loose-auth   Ignora i dati di autenticazione utente nell'URI.\n"
+"    --loose-query  Ignora la stringa della query nell'URI.\n"
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:2353
@@ -3820,23 +3828,25 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2661
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [opzioni] [nome pacchetto] ..."
 
 #. translators: command description
 #: src/Zypper.cc:2664
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Aggiorna tutti i pacchetti installati o quelli specificati con versioni più "
+"recenti, se possibile."
 
 #. translators: --skip-interactive
 #: src/Zypper.cc:2672
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Salta gli aggiornamenti interattivi."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:2674
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Non saltare gli aggiornamenti interattivi."
 
 #. translators: -l, --auto-agree-with-licenses
 #: src/Zypper.cc:2676 src/Zypper.cc:2781 src/Zypper.cc:2942
@@ -4486,7 +4496,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3186
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "packages (pa) [opzioni] [repository] ..."
 
 #. translators: command description
 #: src/Zypper.cc:3189
@@ -4862,7 +4872,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3554
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command description
 #: src/Zypper.cc:3557
@@ -4955,7 +4965,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3650
 msgid "licenses"
-msgstr ""
+msgstr "licenses"
 
 #. translators: command description
 #: src/Zypper.cc:3653
@@ -5074,7 +5084,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3740
 msgid "source-download"
-msgstr ""
+msgstr "source-download"
 
 #. translators: -d, --directory <DIR>
 #: src/Zypper.cc:3747
@@ -5138,7 +5148,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3786
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "quit (exit, ^D)"
 
 #. translators: command description
 #: src/Zypper.cc:3789
@@ -5162,7 +5172,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:3814
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command description
 #: src/Zypper.cc:3817
@@ -5613,19 +5623,23 @@ msgstr "Password"
 
 #: src/commands/conditions.cc:18
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Sono richiesti privilegi di root per eseguire questo comando."
 
 #: src/commands/conditions.cc:46
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Questo è un server transazionale, si prega di usare transactional-update per "
+"aggiornare o modificare il sistema."
 
 #: src/commands/conditions.cc:48
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"Il filesystem di destinazione è montato in sola lettura. Assicurarsi che il "
+"filesystem di destinazione sia scrivibile."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -5661,7 +5675,7 @@ msgstr ""
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
@@ -5808,7 +5822,7 @@ msgstr ""
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Sono stati aggiornati librerie o servizi essenziali."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
@@ -5817,11 +5831,11 @@ msgstr ""
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Nessuna libreria o servizio essenziale è stato aggiornato."
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Il riavvio probabilmente non è necessario."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
@@ -5861,7 +5875,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:51
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Scrive l'output di debug su file <percorso>."
 
 #: src/commands/ps.cc:71 src/solve-commit.cc:462
 msgid "Check failed:"
@@ -5997,7 +6011,7 @@ msgstr "Per un elenco dei tipi di repository conosciuti, vedere '%s' o '%s'."
 
 #: src/commands/repos/clean.cc:16
 msgid "clean (cc) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "clean (cc) [ALIAS|#|URI] ..."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/clean.cc:37
@@ -6156,7 +6170,7 @@ msgstr "Repository %s non trovato."
 
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [ALIAS|#|URI] ..."
 
 #. translators: command description
 #: src/commands/repos/refresh.cc:28
@@ -6532,7 +6546,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Avanzate:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -8420,9 +8434,9 @@ msgid "The flag %1% is not compatible with argument %2% (%3%)."
 msgstr ""
 
 #: src/utils/flags/exceptions.cc:33
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "Il nome del pacchetto di origine è un argomento obbligatorio."
+msgstr "Il flag %1% richiede un argomento."
 
 #: src/utils/flags/exceptions.cc:39
 #, boost-format
