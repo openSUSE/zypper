@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-11 13:07+0000\n"
+"PO-Revision-Date: 2018-11-16 14:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -1966,8 +1966,9 @@ msgstr "Hedef Seçenekler:"
 
 #. translators: --root, -R <DIR>
 #: src/Zypper.cc:727
+#, fuzzy
 msgid "Operate on a different root directory."
-msgstr ""
+msgstr "Farklı bir kök dizininde işlem yap."
 
 #. translators: --installroot <DIR>
 #: src/Zypper.cc:729 src/Zypper.cc:901
