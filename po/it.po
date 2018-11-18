@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-16 17:03+0000\n"
+"PO-Revision-Date: 2018-11-18 15:03+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -3304,7 +3304,6 @@ msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: src/Zypper.cc:2340
-#, fuzzy
 msgid ""
 "removeservice (rs) [OPTIONS] <alias|#|URI>\n"
 "\n"
@@ -3320,7 +3319,7 @@ msgstr ""
 "\n"
 "  Opzioni del comando:\n"
 "    --loose-auth   Ignora i dati di autenticazione utente nell'URI.\n"
-"    --loose-query  Ignora la stringa della query nell'URI.\n"
+"    --loose-query  Ignora la stringa dell'interrogazione nell'URI.\n"
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:2353
@@ -5819,6 +5818,10 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Verifica se sia stato installato un servizio o una libreria essenziale o se "
+"il flag needs-reboot sia stato impostato da un aggiornamento precedente.\n"
+"Il codice d'uscita ZYPPER_EXIT_INF_REBOOT_NEEDED indica che è necessario un "
+"riavvio, altrimenti il codice d'uscita è impostato a ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
@@ -5828,6 +5831,8 @@ msgstr "Sono stati aggiornati librerie o servizi essenziali."
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Un riavvio è necessario per fare in modo che il sistema tragga vantaggio da "
+"questi aggiornamenti."
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
@@ -8426,12 +8431,12 @@ msgstr "Errore durante l'analisi di zypper.conf:"
 #: src/utils/flags/exceptions.cc:21
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "Il flag %1% è sconosciuto."
 
 #: src/utils/flags/exceptions.cc:27
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "Il flag %1% non è compatibile con l'argomento %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
 #, boost-format
@@ -8441,30 +8446,30 @@ msgstr "Il flag %1% richiede un argomento."
 #: src/utils/flags/exceptions.cc:39
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "Il flag %1% può essere usato una volta sola."
 
 #: src/utils/flags/exceptions.cc:45
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s usato insieme a %s, sono in contraddizione l'uno con l'altro."
 
 #: src/utils/flags/flagtypes.cc:22
 msgid "Unknown package type"
-msgstr ""
+msgstr "Tipo di pacchetto sconosciuto"
 
 #: src/utils/flags/flagtypes.cc:69
 msgid "Out of range"
-msgstr ""
+msgstr "Fuori intervallo"
 
 #: src/utils/flags/flagtypes.cc:71
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Errore sconosciuto durante l'assegnazione del valore %1% al flag %2%."
 
 #: src/utils/flags/flagtypes.cc:118
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "Il flag '%1%' può essere usato un massimo di %2% volte."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
