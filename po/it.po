@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-18 15:03+0000\n"
+"PO-Revision-Date: 2018-11-20 09:00+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -5876,6 +5876,9 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Per ciascun servizio di sistema associato, visualizza <formato> su standard "
+"output, seguito da un carattere di fine riga. Qualsiasi direttiva '%s' in "
+"<formato> è sostituita dal nome del servizio di sistema."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:51
