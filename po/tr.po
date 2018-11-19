@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-16 14:07+0000\n"
+"PO-Revision-Date: 2018-11-19 15:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -107,14 +107,18 @@ msgstr "Rpm Adı:"
 #: src/callbacks/keyring.h:113
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr ""
+msgstr "'%1%' dosyası imzalayan gpg anahtarının geçerlilik süresi sona erdi."
 
 #: src/callbacks/keyring.h:119
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] ""
+"'%1%' dosyası imzalayan gpg anahtarının geçerlilik süresi %2% gün içinde "
+"sona erecek."
 msgstr[1] ""
+"'%1%' dosyası imzalayan gpg anahtarının geçerlilik süresi %2% gün içinde "
+"sona erecek."
 
 #: src/callbacks/keyring.h:142
 #, c-format, boost-format
@@ -289,6 +293,8 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"Rpm veritabanı geçersiz olan ve güvensiz olduğu düşünülen eski V3 sürüm gpg "
+"anahtarlarını içeriyor gibi görünüyor:"
 
 #: src/callbacks/keyring.h:446
 #, boost-format
@@ -408,7 +414,7 @@ msgstr "İmza doğrulaması başarısız oldu"
 
 #: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
-msgstr ""
+msgstr "Paket hataya rağmen kabul ediliyor."
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:183
@@ -436,7 +442,7 @@ msgstr "Yükleniyor: %s"
 #: src/callbacks/rpm.h:338
 #, c-format, boost-format
 msgid "Installation of %s failed:"
-msgstr ""
+msgstr "%s kurulumu başarısız oldu:"
 
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:382
@@ -501,7 +507,7 @@ msgstr "Özellikleri ayarla"
 
 #: src/commands/commandhelpformatter.h:105
 msgid "Expert options:"
-msgstr ""
+msgstr "Uzman seçenekler:"
 
 #: src/commands/commandhelpformatter.h:108
 msgid "This command has no additional options."
@@ -528,7 +534,7 @@ msgstr "Evrensel Seçenekler:"
 
 #: src/commands/commandhelpformatter.h:167
 msgid "Commands:"
-msgstr ""
+msgstr "Komutlar:"
 
 #: src/output/Out.h:26 src/repos.cc:124 src/repos.cc:152
 msgid "Yes"
@@ -571,7 +577,7 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "CATEGORY"
-msgstr ""
+msgstr "KATEGORİ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
@@ -581,12 +587,12 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "FILE"
-msgstr ""
+msgstr "DOSYA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE.repo"
-msgstr ""
+msgstr "DOSYA.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
@@ -616,7 +622,7 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "TAG"
-msgstr ""
+msgstr "ETİKET"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
@@ -634,7 +640,7 @@ msgstr "URI"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:49
 msgid "YYYY-MM-DD"
-msgstr ""
+msgstr "YYYY-AA-GG"
 
 # clients/rc_config_step1.ycp:253
 #. TranslatorExplanation These are reasons for various failures.
@@ -1398,8 +1404,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aşağıdaki yama sistemin yeniden başlatılmasını gerektiriyor:"
+msgstr[1] "Aşağıdaki %d yama sistemin yeniden başlatılmasını gerektiriyor:"
 
 #: src/Summary.cc:1351
 #, boost-format
@@ -1564,15 +1570,15 @@ msgstr "Sistemin yeniden başlatılması gerekiyor."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1576
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "İptal etmeyi göz önünde bulundurun:"
 
 #: src/Zypper.cc:108 src/commands/reposerviceoptionsets.cc:71
 msgid "Set a descriptive name for the service."
-msgstr ""
+msgstr "Hizmet için bir tanımlayıcı ad belirle."
 
 #: src/Zypper.cc:109 src/commands/reposerviceoptionsets.cc:74
 msgid "Enable a disabled service."
-msgstr ""
+msgstr "Devre dışı bırakılmış bir hizmeti etkinleştir."
 
 #: src/Zypper.cc:110 src/commands/reposerviceoptionsets.cc:77
 msgid "Disable the service (but don't remove it)."
@@ -1580,11 +1586,11 @@ msgstr "Hizmeti devre dışı bırak (ama kaldırma)."
 
 #: src/Zypper.cc:111 src/commands/reposerviceoptionsets.cc:80
 msgid "Enable auto-refresh of the service."
-msgstr ""
+msgstr "Hizmetin otomatik yenilenmesini etkinleştir."
 
 #: src/Zypper.cc:112 src/commands/reposerviceoptionsets.cc:83
 msgid "Disable auto-refresh of the service."
-msgstr ""
+msgstr "Hizmetin otomatik yenilenmesini devre dışı bırak."
 
 #: src/Zypper.cc:130 src/commands/reposerviceoptionsets.cc:71
 #, fuzzy
@@ -1657,6 +1663,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"/etc/zypp/zypp.conf dosyasında tanımlı olan evrensel GPG kontrol ayarını "
+"kullan. Bu varsayılan."
 
 #: src/Zypper.cc:147 src/commands/reposerviceoptionsets.cc:121
 msgid "Apply changes to all repositories."
@@ -1673,7 +1681,7 @@ msgstr "Değişikliği tüm uzak depolara uygula."
 
 #: src/Zypper.cc:150 src/commands/reposerviceoptionsets.cc:130
 msgid "Apply changes to repositories of specified type."
-msgstr ""
+msgstr "Değişiklikleri belirtilen türdeki depolara uygula."
 
 #: src/Zypper.cc:167
 msgid "Create a solver test case for debugging."
@@ -1753,12 +1761,17 @@ msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
+"PackageKit zypper'i engelliyor. Bu, PackageKit'i kullanan bir güncelleme "
+"uygulamacığı ya da başka yazılım yönetim uygulaması çalıştığında olur."
 
 #: src/Zypper.cc:326
+#, fuzzy
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"PackageKit'ten mevcut işlemi en kısa sürede yarıda kesmesini isteyebiliriz, "
+"ama bu PackageKit'in isteğe yanıt verme hızına göre değişir."
 
 #
 # clients/inst_sw_select.ycp:195
@@ -1824,7 +1837,7 @@ msgstr ""
 #. translators: --config, -c <FILE>
 #: src/Zypper.cc:670
 msgid "Use specified config file instead of the default."
-msgstr ""
+msgstr "Varsayılan yerine belirtilen yapılandırma dosyasını kullan."
 
 #. translators: --userdata <STRING>
 #: src/Zypper.cc:672
