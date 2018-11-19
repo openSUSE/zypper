@@ -33,6 +33,8 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
+    class SolvableSpec;
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : Pool
@@ -265,11 +267,12 @@ namespace zypp
 	void setAutoInstalled( const Queue & autoInstalled_r );
         //@}
 
-        /** Get ident list of all solvables that trigger the "reboot needed" flag. */
-        Queue rebootNeededIdents() const;
-
-	/** Set ident list of all solvables that trigger the "reboot needed" flag. */
-	void setRebootNeededIdents( const Queue & rebootNeeded_r );
+      public:
+        /** \name Needreboot */
+        //@{
+        /** Solvables which should trigger the reboot-needed hint if installed/updated. */
+        void setNeedrebootSpec( sat::SolvableSpec needrebootSpec_r );
+        //@}
 
       public:
         /** Expert backdoor. */

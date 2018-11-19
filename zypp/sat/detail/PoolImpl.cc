@@ -236,6 +236,7 @@ namespace zypp
         _serial.setDirty();           // pool content change
         _availableLocalesPtr.reset(); // available locales may change
         _multiversionListPtr.reset(); // re-evaluate ZConfig::multiversionSpec.
+	_needrebootSpec.setDirty();   // re-evaluate needrebootSpec
 
         depSetDirty();	// invaldate dependency/namespace related indices
       }

@@ -26,6 +26,7 @@ extern "C"
 #include "zypp/base/SerialNumber.h"
 #include "zypp/base/SetTracker.h"
 #include "zypp/sat/detail/PoolMember.h"
+#include "zypp/sat/SolvableSpec.h"
 #include "zypp/sat/Queue.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Locale.h"
@@ -306,18 +307,21 @@ namespace zypp
 
           bool isOnSystemByAuto( IdString ident_r ) const
           { return _autoinstalled.contains( ident_r.id() ); }
+          //@}
 
-          /** Get ident list of all solvables that trigger the "reboot needed" flag. */
-	  StringQueue rebootNeededIdents() const
-	  { return _rebootNeeded; }
+	public:
+	  /** \name Solvables which should trigger the reboot-needed hint if installed/updated. */
+          //@{
+          /** Set new Solvable specs.*/
+          void setNeedrebootSpec( sat::SolvableSpec needrebootSpec_r )
+	  {
+	    _needrebootSpec = std::move(needrebootSpec_r);
+	    _needrebootSpec.setDirty();
+	  }
 
-	  /** Set ident list of all solvables that trigger the "reboot needed" flag. */
-	  void setRebootNeededIdents( const StringQueue & rebootNeeded_r )
-	  { _rebootNeeded = rebootNeeded_r; }
-
-	  bool triggersRebootNeededHint( IdString ident_r ) const
-          { return _rebootNeeded.contains( ident_r.id() ); }
-
+	  /** Whether \a solv_r matches the spec.*/
+	  bool isNeedreboot( const Solvable & solv_r ) const
+	  { return _needrebootSpec.contains( solv_r ); }
           //@}
 
 	public:
@@ -349,8 +353,8 @@ namespace zypp
           /**  */
 	  sat::StringQueue _autoinstalled;
 
-	  /** database of all identifiers that will trigger the "reboot needed" flag */
-	  sat::StringQueue _rebootNeeded;
+	  /** Solvables which should trigger the reboot-needed hint if installed/updated. */
+	  sat::SolvableSpec _needrebootSpec;
 
 	  /** filesystems mentioned in /etc/sysconfig/storage */
 	  mutable scoped_ptr<std::set<std::string> > _requiredFilesystemsPtr;

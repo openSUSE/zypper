@@ -54,6 +54,7 @@
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/sat/SolvableSpec.h"
 #include "zypp/sat/Transaction.h"
 
 #include "zypp/PluginExecutor.h"
@@ -1074,53 +1075,34 @@ namespace zypp
 	satpool.setAutoInstalled( q );
       }
 
-      //load the packages that will trigger the update flag being set
+      // Load the needreboot package specs
       {
-        sat::StringQueue q;
-        filesystem::Pathname needRebootFile { Pathname::assertprefix( root(), ZConfig::instance().needrebootFile() ) };
-        if ( filesystem::PathInfo ( needRebootFile ).isExist() ) {
-          SolvIdentFile file ( needRebootFile );
-          for ( const auto & idstr : file.data() ) {
-            q.push( idstr.id() );
-          }
-#if 1
-#warning Hotfix: temp workaround missing SolvableSpec Parser
-	  // Also consider excluding .rpmnew/.rpmsave/.rpmorig files in needreboot.d
-          q.push( IdString("kernel-azure").id() );
-	  q.push( IdString("kernel-azure-base").id() );
-	  q.push( IdString("kernel-debug").id() );
-	  q.push( IdString("kernel-debug-base").id() );
-	  q.push( IdString("kernel-default").id() );
-	  q.push( IdString("kernel-default-base").id() );
-	  q.push( IdString("kernel-kvmsmall").id() );
-	  q.push( IdString("kernel-kvmsmall-base").id() );
-	  q.push( IdString("kernel-rt").id() );
-	  q.push( IdString("kernel-rt-base").id() );
-	  q.push( IdString("kernel-rt_debug").id() );
-	  q.push( IdString("kernel-rt_debug-base").id() );
-	  q.push( IdString("kernel-vanilla").id() );
-	  q.push( IdString("kernel-vanilla-base").id() );
-#endif
+	sat::SolvableSpec needrebootSpec;
+
+	Pathname needrebootFile { Pathname::assertprefix( root(), ZConfig::instance().needrebootFile() ) };
+	if ( PathInfo( needrebootFile ).isFile() )
+	  needrebootSpec.parseFrom( needrebootFile );
+
+	Pathname needrebootDir { Pathname::assertprefix( root(), ZConfig::instance().needrebootPath() ) };
+        if ( PathInfo( needrebootDir ).isDir() )
+	{
+	  static const StrMatcher isRpmConfigBackup( "\\.rpm(new|save|orig)$", Match::REGEX );
+
+	  filesystem::dirForEach( needrebootDir, filesystem::matchNoDots(),
+				  [&]( const Pathname & dir_r, const char *const str_r )->bool
+				  {
+				    if ( ! isRpmConfigBackup( str_r ) )
+				    {
+				      Pathname needrebootFile { needrebootDir / str_r };
+				      if ( PathInfo( needrebootFile ).isFile() )
+					needrebootSpec.parseFrom( needrebootFile );
+				    }
+				    return true;
+				  });
 	}
 
-        filesystem::Pathname needRebootDir { Pathname::assertprefix( root(), ZConfig::instance().needrebootPath() ) };
-        if ( filesystem::PathInfo ( needRebootDir ).isExist() ) {
-          filesystem::DirContent ls;
-          filesystem::readdir( ls, needRebootDir, false );
-
-          for ( const filesystem::DirEntry &entry : ls ) {
-
-            if ( entry.type != filesystem::FT_FILE )
-              continue;
-
-            SolvIdentFile file ( needRebootDir / entry.name );
-            for ( const auto & idstr : file.data() ) {
-              q.push( idstr.id() );
-            }
-          }
-        }
-
-        satpool.setRebootNeededIdents( q );
+        INT << "Needreboot " << needrebootSpec << endl;
+        satpool.setNeedrebootSpec( std::move(needrebootSpec) );
       }
 
       if ( ZConfig::instance().apply_locks_file() )
@@ -1519,7 +1501,7 @@ namespace zypp
               }
               else
               {
-                if ( citem.identTriggersRebootNeededHint() ) {
+                if ( citem.isNeedreboot() ) {
                   auto rebootNeededFile = root() / "/var/run/reboot-needed";
                   if ( filesystem::assert_file( rebootNeededFile ) == EEXIST)
                     filesystem::touch( rebootNeededFile );

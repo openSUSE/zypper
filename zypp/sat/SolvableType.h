@@ -80,7 +80,7 @@ namespace zypp
       bool		onSystemByAuto() const			{ return satSolvable().onSystemByAuto(); }
       bool		identIsAutoInstalled() const		{ return satSolvable().identIsAutoInstalled(); }
       bool		multiversionInstall() const		{ return satSolvable().multiversionInstall(); }
-      bool              identTriggersRebootNeededHint() const   { return satSolvable().identTriggersRebootNeededHint(); }
+      bool              isNeedreboot() const			{ return satSolvable().isNeedreboot(); }
 
       Date		buildtime() const			{ return satSolvable().buildtime(); }
       Date		installtime() const			{ return satSolvable().installtime(); }
