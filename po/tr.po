@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-19 15:07+0000\n"
+"PO-Revision-Date: 2018-11-21 12:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -2013,7 +2013,7 @@ msgstr "Depo Yönetimi:"
 #: src/Zypper.cc:743 src/commands/repos/list.cc:75
 #: src/commands/repos/list.cc:76
 msgid "List all defined repositories."
-msgstr "Tüm tanımlı depoları listele."
+msgstr "Tanımlı depoların hepsini listele."
 
 #. translators: command summary: addrepo, ar
 #: src/Zypper.cc:745 src/commands/repos/add.cc:24
@@ -2347,6 +2347,14 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
+"     Depo Yönetimi:\n"
+"\trepos, lr\t\tTanımlı depoların hepsini listele.\n"
+"\taddrepo, ar\t\tYeni bir depo ekle.\n"
+"\tremoverepo, rr\t\tBelirtilen depoyu kaldır.\n"
+"\trenamerepo, nr\t\tBelirtilen depoyu yeniden adlandır.\n"
+"\tmodifyrepo, mr\t\tBelirtilen depo üzerinde değişiklik yap.\n"
+"\trefresh, ref\t\tDepoların hepsini yenile.\n"
+"\tclean\t\t\tYerel önbellekleri temizle.\n"
 
 #: src/Zypper.cc:920
 msgid ""
@@ -2430,6 +2438,8 @@ msgid ""
 "     Subcommands:\n"
 "\tsubcommand\t\tLists available subcommands.\n"
 msgstr ""
+"     Alt Komutlar:\n"
+"\tsubcommand\t\tMevcut alt komutları listeler.\n"
 
 #: src/Zypper.cc:985
 msgid ""
@@ -2444,6 +2454,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr ""
+"Evrensel seçeneklerin ve komutların listesini edinmek için '%s' komutunu "
+"yazın."
 
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
@@ -2491,7 +2503,7 @@ msgstr "'%d' den '%d' ye bir tam sayı kullanın."
 #: src/Zypper.cc:1342
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
-msgstr ""
+msgstr "%1% alt komutu zypper evrensel seçeneklerini desteklemiyor."
 
 #: src/Zypper.cc:1363
 msgid "Enforced setting"
@@ -2799,7 +2811,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2161
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "source-install (si) [SEÇENEKLER] <AD> ..."
 
 #. translators: command description
 #: src/Zypper.cc:2164
@@ -2850,7 +2862,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2231
 msgid "verify (ve) [OPTIONS]"
-msgstr ""
+msgstr "verify (ve) [SEÇENEKLER]"
 
 #. translators: command description
 #: src/Zypper.cc:2234
@@ -2887,7 +2899,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2300
 msgid "install-new-recommends (inr) [OPTIONS]"
-msgstr ""
+msgstr "install-new-recommends (inr) [SEÇENEKLER]"
 
 #. translators: command description
 #: src/Zypper.cc:2303
@@ -2900,7 +2912,7 @@ msgstr ""
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:2307
 msgid "Load only the specified repositories."
-msgstr ""
+msgstr "Sadece belirtilen depoları yükle."
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #: src/Zypper.cc:2327
@@ -3087,6 +3099,11 @@ msgid ""
 "-t, --remote              Apply changes to all remote repositories.\n"
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
+"-a, --all                 Değişiklikleri tüm depolara uygula.\n"
+"-l, --local               Değişiklikleri tüm yerel depolara uygula.\n"
+"-t, --remote              Değişiklikleri tüm uzak depolara uygula.\n"
+"-m, --medium-type <type>  Değişiklikleri belirtilen türdeki depolara uygula."
+"\n"
 
 #: src/Zypper.cc:2507
 msgid ""
@@ -3213,7 +3230,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2661
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [SEÇENEKLER] [PAKETADI] ..."
 
 #. translators: command description
 #: src/Zypper.cc:2664
@@ -3230,7 +3247,7 @@ msgstr "Etkileşimli güncellemeleri atla."
 #. translators: --with-interactive
 #: src/Zypper.cc:2674
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Etkileşimli güncellemeleri atlama."
 
 #. translators: -l, --auto-agree-with-licenses
 #: src/Zypper.cc:2676 src/Zypper.cc:2781 src/Zypper.cc:2942
@@ -3293,12 +3310,12 @@ msgstr ""
 #. translators: --skip-interactive
 #: src/Zypper.cc:2777
 msgid "Skip interactive patches."
-msgstr ""
+msgstr "Etkileşimli yamaları atla."
 
 #. translators: --with-interactive
 #: src/Zypper.cc:2779
 msgid "Do not skip interactive patches."
-msgstr ""
+msgstr "Etkileşimli yamaları atlama."
 
 #. translators: -b, --bugzilla
 #: src/Zypper.cc:2783
