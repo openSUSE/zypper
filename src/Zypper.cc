@@ -5271,6 +5271,22 @@ void Zypper::cleanup()
   _rm.reset();	// release any pending appdata trigger now.
 }
 
+void Zypper::cleanupForSubcommand()
+{
+  // Clear resources and release the zypp lock.
+  // Currently we do not expect to return to zypper after the subcommand
+  // (just reporting it's status and exit; no subcommands in `zypper shell`)
+  MIL << "START cleanupForSubcommand" << endl;
+  _rm.reset();	// release any pending appdata trigger now.
+  if ( God )
+  {
+    if ( God->getTarget() )
+      God->finishTarget();
+    God.reset();
+  }
+  MIL << "DONE cleanupForSubcommand" << endl;
+}
+
 // Local Variables:
 // c-basic-offset: 2
 // End:

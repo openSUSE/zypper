@@ -308,6 +308,7 @@ public:
   char ** argv()				{ return _running_shell ? _sh_argv : _argv; }
 
   void cleanup();
+  void cleanupForSubcommand();
 
 public:
   /** Prepare repos and pool according to \a flags_r.
