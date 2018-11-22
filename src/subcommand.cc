@@ -524,11 +524,13 @@ namespace
 
 int subcommand( Zypper & zypper_r )
 {
+  zypper_r.cleanupForSubcommand();
   return SubcommandImpl( zypper_r ).run();
 }
 
 int subcommand( Zypper & zypper_r, shared_ptr<SubcommandOptions> options_r )
 {
+  zypper_r.cleanupForSubcommand();
   return SubcommandImpl( zypper_r, options_r ).run();
 }
 
