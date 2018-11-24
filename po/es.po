@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-10-31 22:06+0000\n"
+"PO-Revision-Date: 2018-11-24 13:06+0000\n"
 "Last-Translator: jc sl <trcs@gmx.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
@@ -227,11 +227,8 @@ msgstr ""
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:290
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-"¿Desea rechazar la clave, confiar en ella temporalmente o confiar en ella "
-"siempre?"
+msgstr "¿Desea rechazar la clave o confiar en ella siempre?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -8426,9 +8423,9 @@ msgid "The flag %1% is not compatible with argument %2% (%3%)."
 msgstr "El indicador %1% no es compatible con el argumento %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:33
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "El nombre del paquete de origen es un argumento requerido."
+msgstr "El indicador %1% requiere un argumento."
 
 #: src/utils/flags/exceptions.cc:39
 #, boost-format
