@@ -415,10 +415,10 @@ namespace zypp
     /** Parsing boolean from string.
     */
     //@{
-    /** Return \c true if str is <tt>1, true, yes, on</tt> (or a nonzero number). */
+    /** Return \c true if str is <tt>1, true, yes, on, always</tt> (or a nonzero number). */
     bool strToTrue( const C_Str & str );
 
-    /** Return \c false if str is <tt>0, false, no, off</tt>. */
+    /** Return \c false if str is <tt>0, false, no, off, never</tt>. */
     bool strToFalse( const C_Str & str );
 
     /** Parse \c str into a bool depending on the default value.

@@ -66,6 +66,7 @@ namespace zypp
       return(    t == "1"
               || t == "yes"
               || t == "true"
+              || t == "always"
               || t == "on"
               || t == "+"
               || strtonum<long long>( str )
@@ -83,6 +84,7 @@ namespace zypp
       return ! (    t == "0"
                  || t == "no"
                  || t == "false"
+                 || t == "never"
                  || t == "off"
                  || t == "-"
                );
