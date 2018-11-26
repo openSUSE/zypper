@@ -135,6 +135,8 @@ namespace
     COLOR_PKGLISTHIGHLIGHT,
     COLOR_PKGLISTHIGHLIGHT_ATTRIBUTE,
 
+    SEARCH_RUNSEARCHPACKAGES,
+
     OBS_BASE_URL,
     OBS_PLATFORM
   };
@@ -166,6 +168,8 @@ namespace
 
       { "color/pkglistHighlight",		ConfigOption::COLOR_PKGLISTHIGHLIGHT		},
       { "color/pkglistHighlightAttribute",	ConfigOption::COLOR_PKGLISTHIGHLIGHT_ATTRIBUTE	},
+
+      { "search/runSearchPackages",		ConfigOption::SEARCH_RUNSEARCHPACKAGES		},
 
       { "obs/baseUrl",				ConfigOption::OBS_BASE_URL			},
       { "obs/platform",				ConfigOption::OBS_PLATFORM			}
@@ -207,6 +211,7 @@ Config::Config()
   , color_osdebug	(namedColor("default") < ansi::Color::Attr::Reverse)
   , color_pkglistHighlight(true)
   , color_pkglistHighlightAttribute(ansi::Color::nocolor())
+  , search_runSearchPackages(indeterminate)		// ask
   , obs_baseUrl("https://download.opensuse.org/repositories/")
   , obs_platform("")	// guess
 {}
@@ -316,6 +321,12 @@ void Config::read( const std::string & file )
     s = augeas.getOption("color/background");	// legacy
     if ( !s.empty() )
       WAR << "zypper.conf: ignore legacy option 'color/background'" << endl;
+
+    // ---------------[ search ]------------------------------------------------
+
+    s = augeas.getOption( asString( ConfigOption::SEARCH_RUNSEARCHPACKAGES ) );
+    if ( !s.empty() )
+      search_runSearchPackages = str::strToTriBool( s );
 
     // ---------------[ obs ]---------------------------------------------------
 
