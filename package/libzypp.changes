@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Nov 26 12:14:49 CET 2018 - ma@suse.de
+
+- str: recognize 'always' and 'never' as valid boolean strings
+- Fix needreboot code to use SolvableSpec parser (fate#326451)
+- SolvableSpec: Define a set of Solvables by ident and provides
+- version 17.10.0 (9)
+
+-------------------------------------------------------------------
 Wed Nov 14 11:48:35 CET 2018 - ma@suse.de
 
 - Provide needreboot config files in /etc/zypp (fate#326451, fixes #140)
