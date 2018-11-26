@@ -122,7 +122,7 @@ namespace utf8
 	return npos;
 
       size_type upos = start_r;
-      for ( const char * chp = _str.c_str() + upos; *chp; ++chp )
+      for ( const char * chp = _str.c_str() + upos; *chp; ++chp, ++upos )
       {
 	if ( ! isContinuationByte( *chp ) )
 	{
@@ -130,8 +130,21 @@ namespace utf8
 	     --pos_r;
 	   else
 	     return upos;
+
+	   while ( *chp == '\033' && *(chp+1) == '[' )	// skip any ansi SGR
+	   {
+	     chp += 2;
+	     upos += 2;
+	     while ( *chp && *chp != 'm' )
+	     { ++chp; ++upos; }
+	     if ( *chp )
+	     { ++chp; ++upos; }
+	     else
+	       break;	// incomplete ansi SGR
+	   }
+	   if ( ! *chp )
+	     break;	// incomplete ansi SGR
 	}
-	++upos;
       }
       return( pos_r ? npos : upos );
     }
