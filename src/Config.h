@@ -67,6 +67,8 @@ struct Config
   TriBool color_pkglistHighlight;	// true:all; indeterminate:first; false:no
   ansi::Color   color_pkglistHighlightAttribute;
 
+  TriBool search_runSearchPackages;	// runSearchPackages after search: always/never/ask
+
   /** zypper.conf: obs.baseUrl */
   Url obs_baseUrl;
   /** zypper.conf: obs.platform */
