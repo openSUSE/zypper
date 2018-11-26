@@ -1096,6 +1096,7 @@ void Zypper::processGlobalOptions()
 
   // ====== parse global options ======
   parsed_opts gopts = parse_options( _argc, _argv, global_options );
+  searchPackagesHintHack::argvCmdIdx = optind;
   for ( const char * opterr : { "_unknown", "_missing_arg" } )
   {
     if ( gopts.count( opterr ) )
@@ -3899,6 +3900,7 @@ void Zypper::processCommandOptions()
 
   // parse command options
   _copts = parse_options( argc(), argv(), specific_options );
+  searchPackagesHintHack::argvArgIdx = optind;
   if ( _copts.count("_unknown") || _copts.count("_missing_arg") )
   {
     setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
@@ -3953,7 +3955,7 @@ void Zypper::doCommand()
   {
     out().info( _command_help, Out::QUIET );
     if ( command() == ZypperCommand::SEARCH )
-      SLE15_SearchPackagesHintHack( *this );
+     searchPackagesHintHack::callOrNotify( *this );
     return;
   }
 
@@ -4604,7 +4606,7 @@ void Zypper::doCommand()
       setExitCode( ZYPPER_EXIT_ERR_ZYPP );
     }
 
-    SLE15_SearchPackagesHintHack( *this );
+    searchPackagesHintHack::callOrNotify( *this );
     break;
   }
 
