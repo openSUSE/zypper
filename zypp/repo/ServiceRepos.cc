@@ -40,10 +40,19 @@ namespace zypp
 	mediamanager.attach( mid );
 	mediamanager.provideFile( mid, "repo/repoindex.xml" );
 	Pathname path = mediamanager.localPath(mid, "repo/repoindex.xml" );
-	parser::RepoindexFileReader reader(path, callback);
-	service.setProbedTtl( reader.ttl() );	// hack! Modifying the const Service to set parsed TTL
-	mediamanager.release( mid );
-	mediamanager.close( mid );
+	try {
+	  parser::RepoindexFileReader reader(path, callback);
+	  service.setProbedTtl( reader.ttl() );	// hack! Modifying the const Service to set parsed TTL
+	  mediamanager.release( mid );
+	  mediamanager.close( mid );
+	} catch ( const Exception &e ) {
+	  //Reader throws a bare exception, we need to translate it into something our calling
+	  //code expects and handles (bnc#1116840)
+	  ZYPP_CAUGHT ( e );
+	  ServicePluginInformalException ex ( e.msg() );
+	  ex.remember( e );
+	  ZYPP_THROW( ex );
+	}
       }
     };
 
