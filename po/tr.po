@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-29 12:27+0100\n"
-"PO-Revision-Date: 2018-11-22 18:07+0000\n"
+"PO-Revision-Date: 2018-11-26 13:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -5023,7 +5023,7 @@ msgstr ""
 #: src/commands/repos/add.cc:70
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr ""
+msgstr "%s, %s ile birlikte kullanılamıyor. %s ayarı kullanılıyor."
 
 #: src/commands/repos/add.cc:93
 msgid ""
@@ -5137,12 +5137,13 @@ msgstr ""
 
 #: src/commands/repos/list.cc:74
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr ""
+msgstr "repos (lr) [SEÇENEKLER] [DEPO] ..."
 
 #. translators: -e, --export <FILE.repo>
 #: src/commands/repos/list.cc:87
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
+"Tanımları depoların tamamını tek bir yerel .repo dosyası olarak dışa aktar."
 
 #: src/commands/repos/list.cc:118 src/repos.cc:1009
 msgid "Error reading repositories:"
@@ -5217,7 +5218,7 @@ msgstr ""
 #. translators: -f, --force
 #: src/commands/repos/refresh.cc:49 src/commands/services/refresh.cc:113
 msgid "Force a complete refresh."
-msgstr ""
+msgstr "Tam bir yenilenmeye zorla."
 
 #. translators: -b, --force-build
 #: src/commands/repos/refresh.cc:54
@@ -5271,7 +5272,7 @@ msgstr "'%s' deposu yenileniyor."
 #: src/commands/repos/refresh.cc:236 src/repos.cc:838
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr ""
+msgstr "Devre dışı bırakılmış '%s' deposunun içeriği taranıyor."
 
 #: src/commands/repos/refresh.cc:247
 #, c-format, boost-format
@@ -5439,16 +5440,16 @@ msgstr ""
 #. translators: -p, --priority
 #: src/commands/reposerviceoptionsets.cc:229
 msgid "Show also repository priority."
-msgstr ""
+msgstr "Depo önceliğini de göster."
 
 #. translators: -d, --details
 #: src/commands/reposerviceoptionsets.cc:232
 msgid "Show more information like URI, priority, type."
-msgstr ""
+msgstr "URI, öncelik, tür gibi daha fazla bilgi göster."
 
 #: src/commands/reposerviceoptionsets.cc:239
 msgid "Show also repositories belonging to the services."
-msgstr ""
+msgstr "Hizmetlere ait olan depoları da göster."
 
 #. translators: -s, --service
 #. translators: -A, --sort-by-alias
@@ -5465,7 +5466,7 @@ msgstr "Sadece etkin depoları göster."
 #. translators: -U, --sort-by-uri
 #: src/commands/reposerviceoptionsets.cc:255
 msgid "Sort the list by URI."
-msgstr ""
+msgstr "Listeyi URI'a göre sırala."
 
 #. translators: -N, --sort-by-name
 #: src/commands/reposerviceoptionsets.cc:258
@@ -5528,7 +5529,7 @@ msgstr "'%s' hizmeti yukarıdaki hatadan dolayı atlanıyor."
 
 #: src/commands/services/common.cc:148
 msgid "Check if the URI is valid and accessible."
-msgstr ""
+msgstr "URI'ın geçerli ve erişilebilir olup olmadığını kontrol et."
 
 #: src/commands/services/common.cc:159
 #, boost-format, c-format
@@ -5562,7 +5563,7 @@ msgstr ""
 #: src/commands/services/modify.cc:20
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
-msgstr ""
+msgstr "modifyservice (ms) <SEÇENEKLER> <%1%>"
 
 #: src/commands/services/modify.cc:23
 #, boost-format
@@ -5662,8 +5663,8 @@ msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "'%s' deposu '%s' hizmetinin etkinleştirilmiş depolarından kaldırıldı"
+msgstr[1] "'%s' depoları '%s' hizmetinin etkinleştirilmiş depolarından kaldırıldı"
 
 #: src/commands/services/modify.cc:276
 #, fuzzy, c-format, boost-format
@@ -5718,7 +5719,7 @@ msgstr ""
 #: src/commands/services/refresh.cc:179
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr ""
+msgstr "Devre dışı bırakılmış '%s' hizmeti atlanıyor"
 
 #: src/commands/services/refresh.cc:237
 #, c-format, boost-format
@@ -5922,12 +5923,12 @@ msgstr "Oluşturulma tarihi"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:404 src/utils/misc.cc:231 src/utils/misc.cc:272
 msgid "Interactive"
-msgstr ""
+msgstr "Etkileşimli"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:439
 msgid "Visible to User"
-msgstr ""
+msgstr "Kullanıcıya Görünür"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:453 src/info.cc:489
@@ -6002,7 +6003,7 @@ msgstr "Belirlenmiş depolar:"
 
 #: src/info.cc:592
 msgid "Content Id"
-msgstr ""
+msgstr "İçerik Kimliği"
 
 #: src/info.cc:604
 msgid "Provided by enabled repository"
@@ -6019,7 +6020,7 @@ msgstr ""
 
 #: src/info.cc:624
 msgid "undefined"
-msgstr ""
+msgstr "tanımsız"
 
 #: src/info.cc:626
 msgid "invalid CPE Name"
@@ -6044,7 +6045,7 @@ msgstr "OK OK! Hemen çıkılıyor."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:38
 msgid "Trying to exit gracefully..."
-msgstr ""
+msgstr "Düzgün bir şekilde çıkmaya çalışılıyor..."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -6070,7 +6071,7 @@ msgstr "Lisans şartlarını kabul ediyor musunuz?"
 
 #: src/misc.cc:172
 msgid "Aborting installation due to the need for license confirmation."
-msgstr ""
+msgstr "Lisans oynayı gerektiğinden kurulup iptal ediliyor."
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:175
@@ -6132,7 +6133,7 @@ msgstr "Paketleri kur"
 #: src/misc.cc:379
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr ""
+msgstr "%s-%s kaynak paketi başarıyla alındı."
 
 #: src/misc.cc:385
 #, fuzzy, c-format, boost-format
@@ -6209,13 +6210,15 @@ msgstr "yükseltilmiş öncelik"
 
 #: src/repos.cc:73
 msgid "lowered priority"
-msgstr ""
+msgstr "düşürülmüş öncelik"
 
 #: src/repos.cc:177
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Depo öncelikleri etkisiz. Etkinleştirilmiş depoların tamamı aynı önceliği "
+"paylaşıyor."
 
 #: src/repos.cc:181
 #, fuzzy
@@ -6264,12 +6267,12 @@ msgstr "'{0}' kullanıcısı başarıyla silindi"
 #: src/repos.cc:303
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
-msgstr ""
+msgstr "%s deposunu kalıcı olarak devre dışı bırakmak istiyor musunuz?"
 
 #: src/repos.cc:319
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
-msgstr ""
+msgstr "'%s' deposu devre dışı bırakılırken hata:"
 
 #: src/repos.cc:335
 #, c-format, boost-format
@@ -6377,7 +6380,7 @@ msgstr "'%s' deposu '%s' seçeneğinden dolayı gözardı ediliyor."
 #: src/repos.cc:824 src/repos.cc:924
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
-msgstr ""
+msgstr "'%s' deposu geçici olarak etkinleştiriliyor."
 
 #: src/repos.cc:874
 #, c-format, boost-format
@@ -6385,6 +6388,8 @@ msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
+"'%s' deposu güncel değil. Güncellemek için 'zypper refresh'  komutunu "
+"yönetici olarak çalıştırabilirsiniz."
 
 #: src/repos.cc:906
 #, c-format, boost-format
@@ -6454,7 +6459,7 @@ msgstr "Hatadana dolayı depolar silinemedi."
 
 #: src/repos.cc:1140
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr ""
+msgstr "Depoların bazıları bir hatadan dolayı temizlenmedi."
 
 #: src/repos.cc:1145
 msgid "Specified repositories have been cleaned up."
@@ -6490,7 +6495,7 @@ msgstr "Belirtilen URI ye veri aktarımı problemi."
 
 #: src/repos.cc:1222
 msgid "Please check whether the specified URI is accessible."
-msgstr ""
+msgstr "Belirtilen URI'ın erişilebilir olup olmadığını lütfen kontrol edin."
 
 #: src/repos.cc:1229
 msgid "Unknown problem when adding repository:"
@@ -6591,7 +6596,7 @@ msgstr "'%s' deposu için otomatik yineleme etkinleştirildi."
 #: src/repos.cc:1646
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr ""
+msgstr "Otomatik yenileme '%s' deposu için devre dışı bırakıldı."
 
 #: src/repos.cc:1653
 #, c-format, boost-format
