@@ -75,9 +75,12 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
     }
     else if ( flags_r.testFlag( SF_SPLIT ) )
     {
-      return str::Str() << ( llen > width_r ? l.substr( 0, width_r ) : l )
-			      << "\n"
-			      << ( rlen > width_r ? r.substr( 0, width_r ) : std::string( width_r - rlen, ' ' ) + r );
+      str::Str out;
+      if ( llen > width_r )
+	mbs_write_wrapped( out.stream(), l.str(), 0, width_r );
+      else
+	out << l;
+      return out << "\n" << ( rlen > width_r ? r.substr( 0, width_r ) : std::string( width_r - rlen, ' ' ) + r );
     }
     // else:
     return str::Str() << l << r;
