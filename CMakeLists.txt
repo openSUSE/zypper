@@ -154,13 +154,31 @@ ELSE ( NOT ZLIB_FOUND)
   INCLUDE_DIRECTORIES(${ZLIB_INCLUDE_DIR})
 ENDIF( NOT ZLIB_FOUND)
 
-#SET(LibSolv_USE_STATIC_LIBS ON)
-FIND_PACKAGE(LibSolv REQUIRED ext)
-IF ( NOT LibSolv_FOUND )
-  MESSAGE( FATAL_ERROR " libsolv not found" )
+
+#Allow to override the libsolv install location
+IF( LIBSOLV_SRCDIR AND LIBSOLV_BUILDDIR )
+  execute_process(
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/libsolv
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/libsolv/include
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/libsolv/ext
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/libsolv/solvversion
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${LIBSOLV_SRCDIR}/src ${CMAKE_BINARY_DIR}/libsolv/include/solv
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${LIBSOLV_SRCDIR}/ext ${CMAKE_BINARY_DIR}/libsolv/ext/solv
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${LIBSOLV_BUILDDIR}/src ${CMAKE_BINARY_DIR}/libsolv/solvversion/solv
+  )
+
+  INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR}/libsolv/include ${CMAKE_BINARY_DIR}/libsolv/ext ${CMAKE_BINARY_DIR}/libsolv/solvversion ${CMAKE_BINARY_DIR}/libsolv/solvversion/solv ${CMAKE_BINARY_DIR}/libsolv/ext/solv ${CMAKE_BINARY_DIR}/libsolv/include/solv )
+  SET( LibSolv_LIBRARIES ${LIBSOLV_BUILDDIR}/src/libsolv.a ${LIBSOLV_BUILDDIR}/ext/libsolvext.a )
+
 ELSE()
-  INCLUDE_DIRECTORIES( ${LibSolv_INCLUDE_DIRS} )
-ENDIF()
+  FIND_PACKAGE(LibSolv REQUIRED ext)
+  #SET(LibSolv_USE_STATIC_LIBS ON)
+  IF ( NOT LibSolv_FOUND )
+    MESSAGE( FATAL_ERROR " libsolv not found" )
+  ELSE()
+    INCLUDE_DIRECTORIES( ${LibSolv_INCLUDE_DIRS} )
+  ENDIF()
+ENDIF( LIBSOLV_SRCDIR AND LIBSOLV_BUILDDIR )
 
 FIND_PACKAGE(Gpgme REQUIRED)
 IF ( NOT GPGME_PTHREAD_FOUND )
