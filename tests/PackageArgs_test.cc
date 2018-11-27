@@ -13,6 +13,16 @@ using namespace zypp;
 
 static TestSetup test(Arch_x86_64);
 
+std::ostream & operator<<( std::ostream & str_r, const PackageArgs & obj_r )
+{
+  std::set<std::string> sorted;
+  str::Format fmt { "  %1% %|25t| cap:%2% %3%" };
+  for ( const auto & spec : obj_r.dos() )
+    sorted.insert( fmt % spec.orig_str % spec.parsed_cap % (spec.modified?"(*)":"") );
+
+  return str_r << "Args " << sorted;
+}
+
 // TODO add tests for cases which rely on pool data, like "zypper-1.3.4"
 // yielding name=zypper edition=1.3.4 instead of name="zypper-1.3.4" if zypper
 // is found in pool
@@ -214,6 +224,45 @@ BOOST_AUTO_TEST_CASE(argToCaps_with_patch_test)
       spec.parsed_cap = Capability("", "openssl-CVE-2009-4355.patch", "", "", ResKind::patch);
       BOOST_CHECK(specs.find(spec) != specs.end());
     }
+  }
+}
+
+BOOST_AUTO_TEST_CASE(kind_tests)
+{
+  std::vector<std::string> inp {
+    ""
+    , "name"             , "dep=13"
+    , "package:npackage" , "package:dpackage=13"
+    , "pattern:npattern" , "pattern:dpattern=13"
+    , "product:nproduct" , "product:dproduct=13"
+    , "patch:npatch"     , "patch:dpatch=13"
+    , "wrzl:nwrzl"       , "wrzl:dwrzl=13"
+  };
+
+  for ( auto & kindstr : { "package", "pattern", "product", "patch", "wrzl" } )
+  {
+    ResKind kind { kindstr };
+    //cout << "===["<<kind<<"]========================================" << endl;
+    PackageArgs args( inp, kind );
+    //cout << args << endl;
+
+    // extract the parsed caps...
+    CapabilitySet capset;
+    for ( const auto & spec : args.dos() )
+      capset.insert( spec.parsed_cap );
+
+    // ...and check them...
+    BOOST_CHECK_EQUAL( capset.size(), 12 );
+    // kind qualified args remain untouched:
+    for ( auto & kindstr : { "package", "pattern", "product", "patch", "wrzl" } )
+    {
+      ResKind tkind { kindstr };
+      BOOST_CHECK_EQUAL( capset.count( Capability( "n"+tkind.asString(),  "",   "", tkind ) ), 1 );
+      BOOST_CHECK_EQUAL( capset.count( Capability( "d"+tkind.asString(), "=", "13", tkind ) ), 1 );
+    }
+    // unqualified args get the default kind:
+    BOOST_CHECK_EQUAL( capset.count( Capability( "name", "",   "", kind ) ), 1 );
+    BOOST_CHECK_EQUAL( capset.count( Capability( "dep", "=", "13", kind ) ), 1 );
   }
 }
 
