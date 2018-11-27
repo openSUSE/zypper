@@ -68,7 +68,7 @@ namespace boost
 
       /** \relates TriBool whether 2 tribool have the same state (this is NOT ==) */
       inline bool sameTriboolState( tribool lhs, tribool rhs )
-      { return( ( indeterminate(lhs) && indeterminate(rhs) ) || ( lhs == rhs ) ); }
+      { return( ( indeterminate(lhs) && indeterminate(rhs) ) || ( bool )( lhs == rhs ) ); }
     }
 }
 #endif // ZYPP_TRIBOOL_H
