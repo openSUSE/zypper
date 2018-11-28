@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-28 14:46+0100\n"
-"PO-Revision-Date: 2018-10-29 13:29+0000\n"
+"PO-Revision-Date: 2018-11-28 17:02+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -324,6 +324,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Ohne dass Sie glauben, dass der Schlüssel in der Frage auch in Verwendung "
+"ist, können Sie ihn aus der rpm-Datenbank mit dem Aufruf '%1%' löschen."
 
 #: src/callbacks/keyring.h:472
 #, c-format, boost-format
@@ -609,12 +611,12 @@ msgstr "Fortfahren?"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:21
 msgid "ALIAS"
-msgstr ""
+msgstr "ALIAS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS|#|URI"
-msgstr ""
+msgstr "ALIAS|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
@@ -624,12 +626,12 @@ msgstr "KATEGORIE"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "DIR"
-msgstr ""
+msgstr "DIR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "FILE"
-msgstr ""
+msgstr "DATEI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
@@ -639,7 +641,7 @@ msgstr "DATEI.repo"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FORMAT"
-msgstr ""
+msgstr "FORMAT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
@@ -649,7 +651,7 @@ msgstr "Ganzzahl"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "PATH"
-msgstr ""
+msgstr "PFAD"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
@@ -659,17 +661,17 @@ msgstr "SCHWEREGRAD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "STRING"
-msgstr ""
+msgstr "STRING"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "TAG"
-msgstr ""
+msgstr "TAG"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
 msgid "TYPE"
-msgstr "Typ"
+msgstr "TYP"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #. translators: property name; short; used like "Name: value"
@@ -2370,7 +2372,7 @@ msgstr ""
 #. translators: command summary: needs-rebooting
 #: src/Zypper.cc:799 src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Überprüfen Sie, ob der Flag needs-reboot gesetzt wurde."
 
 #: src/Zypper.cc:800
 msgid "Subcommands:"
@@ -3304,6 +3306,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
+"removeservice (rs) [OPTIONEN] <alias|#|URI>\n"
+"\n"
+"Löscht angegebenen Repository-Index-Dienst aus dem System.\n"
+"\n"
+"  Kommandooptionen:\n"
+"    --loose-auth   Benutzerauthentifizierungsdaten in der URI ignorieren.\n"
+"    --loose-query  Query-Zeichenfolge in der URI ignorieren.\n"
 
 #. translators: %s is "--all" and "--all"
 #: src/Zypper.cc:2314
@@ -3815,7 +3824,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:2622
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [OPTIONEN] [PAKETNAME] ..."
 
 #. translators: command description
 #: src/Zypper.cc:2625
@@ -3968,7 +3977,7 @@ msgstr "Nur Patches mit diesem Schweregrad installieren."
 msgid ""
 "Install only patches issued up to, but not including, the specified date"
 msgstr ""
-"Nur Patches installieren, die vor dem angegebenen Datum herausgegeben wurden."
+"Nur Patches installieren, die vor dem angegebenen Datum herausgegeben wurden"
 
 #: src/Zypper.cc:2765
 msgid "Install only patches which affect the package management itself."
@@ -4168,7 +4177,7 @@ msgstr "Aktualisierung auf angegebenes Repository beschränken."
 #. translators: -D, --dry-run
 #: src/Zypper.cc:2907
 msgid "Test the upgrade, do not actually upgrade"
-msgstr "Aktualisierung testen, nicht wirklich installieren."
+msgstr "Aktualisierung testen, nicht wirklich Aktualisierung durchführen"
 
 #: src/Zypper.cc:2960
 msgid ""
