@@ -387,11 +387,11 @@ namespace zypp
 
 
   bool RepoInfo::repoGpgCheck() const
-  { return gpgCheck() || _pimpl->cfgRepoGpgCheck(); }
+  { return gpgCheck() || bool(_pimpl->cfgRepoGpgCheck()); }
 
   bool RepoInfo::repoGpgCheckIsMandatory() const
   {
-    bool ret = ( gpgCheck() && indeterminate(_pimpl->cfgRepoGpgCheck()) ) || _pimpl->cfgRepoGpgCheck();
+    bool ret = ( gpgCheck() && indeterminate(_pimpl->cfgRepoGpgCheck()) ) || bool(_pimpl->cfgRepoGpgCheck());
     if ( ret && _pimpl->internalUnsignedConfirmed() )	// relax if unsigned repo was confirmed in the past
       ret = false;
     return ret;
@@ -402,10 +402,10 @@ namespace zypp
 
 
   bool RepoInfo::pkgGpgCheck() const
-  { return _pimpl->cfgPkgGpgCheck() || ( gpgCheck() && !bool(validRepoSignature())/*enforced*/ ) ; }
+  { return bool(_pimpl->cfgPkgGpgCheck()) || ( gpgCheck() && !bool(validRepoSignature())/*enforced*/ ) ; }
 
   bool RepoInfo::pkgGpgCheckIsMandatory() const
-  { return _pimpl->cfgPkgGpgCheck() || ( gpgCheck() && indeterminate(_pimpl->cfgPkgGpgCheck()) && !bool(validRepoSignature())/*enforced*/ ); }
+  { return bool(_pimpl->cfgPkgGpgCheck()) || ( gpgCheck() && indeterminate(_pimpl->cfgPkgGpgCheck()) && !bool(validRepoSignature())/*enforced*/ ); }
 
   void RepoInfo::setPkgGpgCheck( TriBool value_r )
   { _pimpl->rawPkgGpgCheck( value_r ); }

@@ -82,7 +82,7 @@ namespace zypp
           else
             WAR << "No executable " << prog << endl;
         }
-      return _last;
+      return ( bool ) _last;
     }
 
     /******************************************************************

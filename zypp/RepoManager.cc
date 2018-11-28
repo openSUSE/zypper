@@ -2243,7 +2243,7 @@ namespace zypp
 
 	// Make sure the service repo is created with the appropriate enablement
 	if ( ! indeterminate(toBeEnabled) )
-	  it->setEnabled( toBeEnabled );
+	  it->setEnabled( ( bool ) toBeEnabled );
 
         DBG << "Service adds repo " << it->alias() << " " << (it->enabled()?"enabled":"disabled") << endl;
         addRepository( *it );
