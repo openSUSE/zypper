@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-28 14:46+0100\n"
-"PO-Revision-Date: 2018-10-29 12:05+0000\n"
+"PO-Revision-Date: 2018-11-28 22:34+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6244,17 +6244,17 @@ msgstr ""
 msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
-msgstr ""
+msgstr "まだ有効化していないリモートの資源を対象に含める場合など、拡張検索を行ないたい場合は '%1%' を実行してください。"
 
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "今すぐ '%1%' を実行しますか？"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "まだ有効化していないリモートの資源を検索したい場合は、 '%1%' を実行してください。"
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
