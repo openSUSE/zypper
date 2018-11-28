@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-28 14:46+0100\n"
-"PO-Revision-Date: 2018-11-28 17:20+0000\n"
+"PO-Revision-Date: 2018-11-28 20:01+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -6360,8 +6360,8 @@ msgid ""
 "For an extended search including not yet activated remote resources please "
 "use '%1%'."
 msgstr ""
-"Per a una cerca ampliada que inclogui recursos remots no activats encara, si "
-"us plau, useu \"%1%\"."
+"Per fer una cerca ampliada que inclogui recursos remots no activats encara, "
+"si us plau, useu \"%1%\"."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:85
@@ -6379,7 +6379,7 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
 msgstr ""
-"Per fer una cerca més àmplia que inclogui fonts remotes encara no activades, "
+"Per fer una cerca ampliada que inclogui recursos remots no activats encara, "
 "ara podeu executar \"%1%\"."
 
 #: src/commands/search/search-packages-hinthack.cc:102
