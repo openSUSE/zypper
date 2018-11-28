@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-28 14:46+0100\n"
-"PO-Revision-Date: 2018-10-29 13:54+0000\n"
+"PO-Revision-Date: 2018-11-28 14:11+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -6451,16 +6451,20 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
 msgstr ""
+"Voor uitgebreid zoeken inclusief nog niet geactiveerde hulpbronnen op "
+"afstand kunt u nu '%1%' uitvoeren."
 
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Wilt u nu '%1%' uitvoeren?"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
+"Uitvoeren van '%1%' om in te zoeken is nog niet geactiveerd in hulpbronnen "
+"op afstand."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
