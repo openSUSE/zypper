@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 28 14:40:26 CET 2018 - ma@suse.de
+
+- Adapt to changes in upcoming Boost 1.69.0
+- Do not fail service-refresh on a empty repoindex.xml (bnc#1116840)
+- version 17.10.1 (9)
+
+-------------------------------------------------------------------
 Mon Nov 26 12:14:49 CET 2018 - ma@suse.de
 
 - str: recognize 'always' and 'never' as valid boolean strings
