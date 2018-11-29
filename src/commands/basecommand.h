@@ -125,10 +125,17 @@ public:
   virtual std::string description () const;
 
   /**
+   * Initialize the command options and positional arguments for the command
+   * \throws ZyppFlags::ZyppFlagsException
+   */
+  int parseArguments ( Zypper &zypper, const int firstOpt );
+
+
+  /**
    * Prepares the command to be executed and checks all conditions before
    * calling \sa execute.
    */
-  int run ( Zypper &zypp, const std::vector<std::string> &positionalArgs );
+  int run ( Zypper &zypper );
 
   /**
    * The default implementation uses \a synopsis , \a description and
@@ -157,6 +164,34 @@ public:
 
   zypp::ZYpp::Ptr zyppApi () const;
 
+  /**
+   * Returns the list of positional arguments that was parsed from raw cli args
+   * \sa BaseCommand::parseArguments
+   */
+  std::vector<std::string> positionalArguments() const;
+
+  /**
+   * Returns the list of raw options that was parsed from raw cli args.
+   * \note this is only enabled if \sa setFillRawOptions was set to true
+   * \sa BaseCommand::parseArguments
+   * \sa BaseCommand::fillRawOptions
+   * \sa BaseCommand::setFillRawOptions
+   */
+  std::vector<std::string> rawOptions() const;
+
+  /**
+   * Returns if filling raw options is enabled when parsing arguments
+   * \sa BaseCommand::parseArguments
+   */
+  bool fillRawOptions() const;
+
+  /**
+   * Enables or disables filling of raw options when parsing arguments
+   * \sa BaseCommand::parseArguments
+   * \note this is diabled by default
+   */
+  void setFillRawOptions(bool fillRawOptions);
+
 protected:
   /**
    * Registers a option set to be supported on command line
@@ -184,24 +219,27 @@ protected:
   /**
    * Reimplement to define
    */
-  virtual int execute ( Zypper &zypp, const std::vector<std::string> &positionalArgs ) = 0;
+  virtual int execute ( Zypper &zypper, const std::vector<std::string> &positionalArgs ) = 0;
 
   /**
    * Sets up the system before the command is executed, reimplement to change default behaviour.
    * The default implementation calls \sa defaultSystemSetup
    */
-  virtual int systemSetup ( Zypper &zypp_r );
+  virtual int systemSetup (Zypper &zypper );
 
   /**
    * Initializes the system according to bits set in \a flags
    */
-  int defaultSystemSetup(Zypper &zypp_r, SetupSystemFlags flags_r = DefaultSetup );
+  int defaultSystemSetup(Zypper &zypper, SetupSystemFlags flags_r = DefaultSetup );
 
 private:
   std::vector<BaseCommandOptionSet *> _registeredOptionSets;
   bool _helpRequested = false;
+  bool _fillRawOptions = false;
   std::vector<std::string> _commandAliases;
   std::vector<std::string> _synopsis;
+  std::vector<std::string> _positionalArguments;
+  std::vector<std::string> _rawOptions;
   std::string _summary;
   std::string _description;
   SetupSystemFlags _systemInitFlags;

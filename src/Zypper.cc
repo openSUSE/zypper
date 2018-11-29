@@ -1841,28 +1841,14 @@ void Zypper::processCommandOptions()
 
     // parse command options
     try {
-      int nextArg = ZyppFlags::parseCLI( argc(), argv(), newStyleCmd->options(), optind );
+      //keep compat by setting optind
+      optind = newStyleCmd->parseArguments( *this, optind );
 
-      MIL << "Parsed new style arguments" << endl;
-
-      if ( nextArg < argc() )
-      {
-        std::ostringstream s;
-        s << _("Non-option program arguments: ");
-        while ( nextArg < argc() )
-        {
-          std::string argument = argv()[nextArg++];
-          s << "'" << argument << "' ";
-          _arguments.push_back( argument );
-        }
-        out().info( s.str(), Out::HIGH );
-      }
+      //keep compatibility
+      _arguments = newStyleCmd->positionalArguments();
 
       //make sure help is shown if required
       setRunningHelp( newStyleCmd->helpRequested() );
-
-      //for now keep compat
-      optind = nextArg;
 
     } catch ( const ZyppFlags::ZyppFlagsException &e) {
       ERR << e.asString() << endl;
@@ -1870,7 +1856,6 @@ void Zypper::processCommandOptions()
       setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
       return;
     }
-
 
     MIL << "New Style command done " << endl;
     return;
@@ -3998,7 +3983,7 @@ void Zypper::doCommand()
   //handle new style commands
   ZypperBaseCommandPtr newStyleCmd = command().commandObject();
   if ( newStyleCmd ) {
-    setExitCode( newStyleCmd->run(*this, _arguments) );
+    setExitCode( newStyleCmd->run( *this ) );
     return;
   }
 
