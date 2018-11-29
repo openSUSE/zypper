@@ -61,14 +61,14 @@ void CleanRepoCmd::doReset()
   _flags = CleanRepoBits::Default;
 }
 
-int CleanRepoCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int CleanRepoCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   // get the list of repos specified on the command line ...
   std::vector<std::string> specifiedRepos = _repos;
   for ( const std::string &repoFromCLI : positionalArgs_r )
     specifiedRepos.push_back(repoFromCLI);
 
-  clean_repos( zypp_r,  specifiedRepos, _flags );
+  clean_repos( zypper,  specifiedRepos, _flags );
 
-  return zypp_r.exitCode();
+  return zypper.exitCode();
 }

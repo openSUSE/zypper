@@ -46,7 +46,7 @@ void CleanLocksCmd::doReset()
   _onlyEmpty = false;
 }
 
-int CleanLocksCmd::execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r)
+int CleanLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r)
 {
   if ( !positionalArgs_r.empty() ) {
     report_too_many_arguments( help() );
@@ -63,7 +63,7 @@ int CleanLocksCmd::execute(Zypper &zypp_r, const std::vector<std::string> &posit
   Locks::instance().save();
 
   Locks::size_type diff = start - Locks::instance().size();
-  zypp_r.out().info( str::form( PL_("Removed %lu lock.","Removed %lu locks.", diff), (long unsigned)diff ) );
+  zypper.out().info( str::form( PL_("Removed %lu lock.","Removed %lu locks.", diff), (long unsigned)diff ) );
 
   return ZYPPER_EXIT_OK;
 }

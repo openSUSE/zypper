@@ -55,13 +55,13 @@ void RemoveRepoCmd::doReset()
   _looseQuery = false;
 }
 
-int RemoveRepoCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int RemoveRepoCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   bool aggregate = _selections._all || _selections._local || _selections._remote || _selections._mediumTypes.size();
 
   if ( positionalArgs_r.size() < 1 && !aggregate )
   {
-    report_alias_or_aggregate_required ( zypp_r.out(), help() );
+    report_alias_or_aggregate_required ( zypper.out(), help() );
     ERR << "No alias argument given." << endl;
     return( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
@@ -69,13 +69,13 @@ int RemoveRepoCmd::execute( Zypper &zypp_r, const std::vector<std::string> &posi
   // too many arguments
   if ( positionalArgs_r.size() && aggregate )
   {
-    report_too_many_arguments( zypp_r.out(), help() );
+    report_too_many_arguments( zypper.out(), help() );
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
 
   if ( aggregate )
   {
-    remove_repos_by_option( zypp_r, _selections );
+    remove_repos_by_option( zypper, _selections );
   }
   else
   {
@@ -84,7 +84,7 @@ int RemoveRepoCmd::execute( Zypper &zypp_r, const std::vector<std::string> &posi
     for_(it, positionalArgs_r.begin(), positionalArgs_r.end())
     {
       RepoInfo repo;
-      if ( match_repo( zypp_r ,*it,&repo, _looseQuery, _looseAuth ) )
+      if ( match_repo( zypper ,*it,&repo, _looseQuery, _looseAuth ) )
       {
         repo_to_remove.insert(repo);
       }
@@ -93,12 +93,12 @@ int RemoveRepoCmd::execute( Zypper &zypp_r, const std::vector<std::string> &posi
         MIL << "Repository not found by given alias, number or URI." << endl;
         // translators: %s is the supplied command line argument which
         // for which no repository counterpart was found
-        zypp_r.out().error( str::Format(_("Repository '%s' not found by alias, number or URI.")) % *it );
+        zypper.out().error( str::Format(_("Repository '%s' not found by alias, number or URI.")) % *it );
       }
     }
 
     for_(it, repo_to_remove.begin(), repo_to_remove.end())
-      remove_repo( zypp_r, *it );
+      remove_repo( zypper, *it );
   }
 
   return ZYPPER_EXIT_OK;

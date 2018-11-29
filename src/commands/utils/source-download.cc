@@ -529,7 +529,7 @@ void SourceDownloadCmd::doReset()
   _opt._dryrun = false;
 }
 
-int SourceDownloadCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int SourceDownloadCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   if ( !positionalArgs_r.empty() )
   {
@@ -537,7 +537,7 @@ int SourceDownloadCmd::execute( Zypper &zypp_r, const std::vector<std::string> &
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
 
-  Pimpl::SourceDownloadImpl( *this, zypp_r, _opt ).sourceDownload();
+  Pimpl::SourceDownloadImpl( *this, zypper, _opt ).sourceDownload();
 
   return ZYPPER_EXIT_OK;
 }

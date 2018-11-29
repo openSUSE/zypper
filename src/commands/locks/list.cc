@@ -234,12 +234,12 @@ std::string ListLocksCmd::description() const
 }
 
 
-int ListLocksCmd::systemSetup(Zypper &zypp_r)
+int ListLocksCmd::systemSetup(Zypper &zypper)
 {
   SetupSystemFlags flags = DisableAll;
   if ( _matches || _solvables )
     flags.setFlag( DefaultSetup );
-  return defaultSystemSetup( zypp_r, flags );
+  return defaultSystemSetup( zypper, flags );
 }
 
 void ListLocksCmd::doReset()

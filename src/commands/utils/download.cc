@@ -182,11 +182,11 @@ std::vector<BaseCommandConditionPtr> DownloadCmd::conditions() const
   };
 }
 
-int DownloadCmd::execute( Zypper &zypp_r , const std::vector<std::string> &positionalArgs_r )
+int DownloadCmd::execute( Zypper &zypper , const std::vector<std::string> &positionalArgs_r )
 {
     if ( positionalArgs_r.empty() )
     {
-      report_required_arg_missing( zypp_r.out(), help() );
+      report_required_arg_missing( zypper.out(), help() );
       return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
     }
 
@@ -228,48 +228,48 @@ int DownloadCmd::execute( Zypper &zypp_r , const std::vector<std::string> &posit
       if ( q.empty() || !isPackageType( *q.begin() ) )
       {
 	// translators: Label text; is followed by ': cmdline argument'
-	zypp_r.out().warning( str::Str() << _("Argument resolves to no package") << ": " << pkgspec.orig_str );
+	zypper.out().warning( str::Str() << _("Argument resolves to no package") << ": " << pkgspec.orig_str );
 	continue;
       }
 
       AvailableItemSet & avset( collect[(*q.begin()).ident()] );
-      zypp_r.out().info( str::Str() << pkgspec.orig_str << ": ", Out::HIGH );
+      zypper.out().info( str::Str() << pkgspec.orig_str << ": ", Out::HIGH );
       for_( it, q.begin(), q.end() )
       {
 	avset.insert( PoolItem( *it ) );
-	zypp_r.out().info( str::Str() << "  " << (*it).asUserString(), Out::HIGH );
+	zypper.out().info( str::Str() << "  " << (*it).asUserString(), Out::HIGH );
       }
     }
 
     if ( collect.empty() )
     {
-      zypp_r.out().info( _("Nothing to do.") );
+      zypper.out().info( _("Nothing to do.") );
       return ZYPPER_EXIT_OK;
     }
 
     unsigned total = 0;
     if ( _allMatches )
     {
-      zypp_r.out().info( str::Str() << _("No prune to best version.") << " (--all-matches)" );
+      zypper.out().info( str::Str() << _("No prune to best version.") << " (--all-matches)" );
      for ( const auto & ent : collect )
 	total += ent.second.size();
     }
     else
     {
-      zypp_r.out().info( _("Prune to best version..."), Out::HIGH );
+      zypper.out().info( _("Prune to best version..."), Out::HIGH );
       total = collect.size();
     }
 
     if (DryRunSettings::instance().isEnabled() )
     {
-      zypp_r.out().info( str::Str() << _("Not downloading anything...") << " (--dry-run)" );
+      zypper.out().info( str::Str() << _("Not downloading anything...") << " (--dry-run)" );
     }
 
     // Prepare the package cache. Pass all items requiring download.
     target::CommitPackageCache packageCache;
 
     unsigned current = 0;
-    zypp_r.runtimeData().commit_pkgs_total = total; // fix DownloadResolvableReport total counter
+    zypper.runtimeData().commit_pkgs_total = total; // fix DownloadResolvableReport total counter
     for ( const auto & ent : collect )
     {
       for ( const auto & pi : ent.second )
@@ -283,7 +283,7 @@ int DownloadCmd::execute( Zypper &zypp_r , const std::vector<std::string> &posit
 	    ManagedFile localfile;
 	    try
 	    {
-	      Out::ProgressBar report( zypp_r.out(), Out::ProgressBar::noStartBar, pi.asUserString(), current, total );
+	      Out::ProgressBar report( zypper.out(), Out::ProgressBar::noStartBar, pi.asUserString(), current, total );
 	      report.error(); // error if provideSrcPackage throws
 	      Out::DownloadProgress redirect( report );
 	      localfile = packageCache.get( pi );
@@ -292,33 +292,33 @@ int DownloadCmd::execute( Zypper &zypp_r , const std::vector<std::string> &posit
 	    }
 	    catch ( const Out::Error & error_r )
 	    {
-	      error_r.report( zypp_r );
+	      error_r.report( zypper );
 	    }
 	    catch ( const AbortRequestException & ex )
 	    {
 	      ZYPP_CAUGHT( ex );
-	      zypp_r.out().error( ex.asUserString() );
+	      zypper.out().error( ex.asUserString() );
 	      break;
 	    }
 	    catch ( const Exception & exp )
 	    {
 	      // TODO: Need class Out::Error support for exceptions
 	      ERR << exp << endl;
-	      zypp_r.out().error( exp,
+	      zypper.out().error( exp,
 				   str::Format(_("Error downloading package '%s'.")) % pi.asUserString() );
 	    }
 
 	    //DBG << localfile << endl;
 	    localfile.resetDispose();
-	    if ( zypp_r.out().typeXML() )
+	    if ( zypper.out().typeXML() )
 	      logXmlResult( pi, localfile );
 
-	    if ( zypp_r.exitRequested() )
+	    if ( zypper.exitRequested() )
 	      return ZYPPER_EXIT_ON_SIGNAL;
 	  }
 	  else
 	  {
-	    zypp_r.out().info( str::Str()
+	    zypper.out().info( str::Str()
 	                        << str::Format(_("Not downloading package '%s'.")) % pi.asUserString()
 				<< " (--dry-run)" );
 	  }
@@ -326,8 +326,8 @@ int DownloadCmd::execute( Zypper &zypp_r , const std::vector<std::string> &posit
 	else
 	{
 	  const Pathname &  localfile( cachedLocation( pi ) );
-	  Out::ProgressBar report( zypp_r.out(), localfile.asString(), current, total );
-	  if ( zypp_r.out().typeXML() )
+	  Out::ProgressBar report( zypper.out(), localfile.asString(), current, total );
+	  if ( zypper.out().typeXML() )
 	    logXmlResult( pi, localfile );
 	}
 

@@ -125,7 +125,7 @@ void AddServiceCmd::doReset()
   _isService = true;
 }
 
-int AddServiceCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int AddServiceCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   // too many arguments
   if ( positionalArgs_r.size() > 2 )
@@ -137,7 +137,7 @@ int AddServiceCmd::execute( Zypper &zypp_r, const std::vector<std::string> &posi
   // missing arguments
   if ( positionalArgs_r.size() < 2 )
   {
-    report_required_arg_missing( zypp_r.out(), help() );
+    report_required_arg_missing( zypper.out(), help() );
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
 
@@ -147,13 +147,13 @@ int AddServiceCmd::execute( Zypper &zypp_r, const std::vector<std::string> &posi
   }
 
   if ( _isService )
-    add_service_by_url( zypp_r, url, positionalArgs_r[1], _commonProps );
+    add_service_by_url( zypper, url, positionalArgs_r[1], _commonProps );
   else {
     //legacy behaviour
-    add_repo_by_url( zypp_r, url, positionalArgs_r[1], _commonProps, RepoProperties(), false);
+    add_repo_by_url( zypper, url, positionalArgs_r[1], _commonProps, RepoProperties(), false);
   }
 
-  return zypp_r.exitCode();
+  return zypper.exitCode();
 }
 
 

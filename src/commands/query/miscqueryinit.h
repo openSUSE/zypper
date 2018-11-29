@@ -27,13 +27,13 @@ struct MiscQueryInitMixin : public T
 
   using T::T;
 
-  int execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r) override {
+  int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r) override {
     auto &repoFilter = InitRepoSettings::instanceNoConst()._repoFilter;
     for ( const auto & repo : positionalArgs_r ) {
       repoFilter.push_back( repo );	// convert arguments to '-r repo'
     }
 
-    int code = this->defaultSystemSetup( zypp_r, ResetRepoManager | InitTarget | InitRepos | LoadResolvables );
+    int code = this->defaultSystemSetup( zypper, ResetRepoManager | InitTarget | InitRepos | LoadResolvables );
     if ( code != ZYPPER_EXIT_OK )
       return code;
 
@@ -44,11 +44,11 @@ struct MiscQueryInitMixin : public T
                                                 bind( &Resolver::setCleandepsOnRemove, God->resolver(), _1 ) );
     God->resolver()->setCleandepsOnRemove( true );
 
-    code = T::defaultSystemSetup( zypp_r, Resolve );
+    code = T::defaultSystemSetup( zypper, Resolve );
     if ( code != ZYPPER_EXIT_OK )
       return code;
 
-    return T::execute ( zypp_r, positionalArgs_r );
+    return T::execute ( zypper, positionalArgs_r );
 
   }
 };

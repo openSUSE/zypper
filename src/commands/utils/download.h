@@ -50,7 +50,7 @@ private:
 protected:
   zypp::ZyppFlags::CommandGroup cmdOptions() const override;
   void doReset() override;
-  int execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r) override;
+  int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r) override;
   std::vector<BaseCommandConditionPtr> conditions() const override;
 };
 

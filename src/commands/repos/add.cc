@@ -54,19 +54,19 @@ void AddRepoCmd::doReset()
   _disableCheck = false;
 }
 
-int AddRepoCmd::execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r)
+int AddRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r)
 {
 
   // too many arguments
   if ( positionalArgs_r.size() > 2 )
   {
-    report_too_many_arguments( zypp_r.out(), help() );
+    report_too_many_arguments( zypper.out(), help() );
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
 
   if ( _enableCheck && _disableCheck )
   {
-    zypp_r.out().warning(str::form(
+    zypper.out().warning(str::form(
       _("Cannot use %s together with %s. Using the %s setting."),
       "--check", "--no-check", "zypp.conf")
         ,Out::QUIET );
@@ -77,33 +77,33 @@ int AddRepoCmd::execute(Zypper &zypp_r, const std::vector<std::string> &position
     // add repository specified in .repo file
     if ( ! _repoFile.empty() )
     {
-      add_repo_from_file( zypp_r, _repoFile, _commonProperties, _repoProperties, _disableCheck );
-      return zypp_r.exitCode();
+      add_repo_from_file( zypper, _repoFile, _commonProperties, _repoProperties, _disableCheck );
+      return zypper.exitCode();
     }
 
     switch ( positionalArgs_r.size() )
     {
     // display help message if insufficient info was given
     case 0:
-        report_too_few_arguments( zypp_r.out(), help() );
+        report_too_few_arguments( zypper.out(), help() );
         return( ZYPPER_EXIT_ERR_INVALID_ARGS );
     case 1:
       if( !isRepoFile( positionalArgs_r[0] ) )
       {
-        zypp_r.out().error(_("If only one argument is used, it must be a URI pointing to a .repo file."));
+        zypper.out().error(_("If only one argument is used, it must be a URI pointing to a .repo file."));
         ERR << "Not a repo file." << endl;
-        zypp_r.out().info( help() );
+        zypper.out().info( help() );
         return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
       }
       else
       {
-        add_repo_from_file( zypp_r, positionalArgs_r[0], _commonProperties, _repoProperties, _disableCheck );
+        add_repo_from_file( zypper, positionalArgs_r[0], _commonProperties, _repoProperties, _disableCheck );
         break;
       }
     case 2:
       Url url;
       if ( positionalArgs_r[0].find("obs") == 0 )
-        url = make_obs_url( positionalArgs_r[0], zypp_r.config().obs_baseUrl, zypp_r.config().obs_platform );
+        url = make_obs_url( positionalArgs_r[0], zypper.config().obs_baseUrl, zypper.config().obs_platform );
       else
         url = make_url( positionalArgs_r[0] );
       if ( !url.isValid() )
@@ -112,27 +112,27 @@ int AddRepoCmd::execute(Zypper &zypp_r, const std::vector<std::string> &position
       }
 
       if ( _enableCheck )
-        zypp_r.globalOptsNoConst().rm_options.probe = true;
+        zypper.globalOptsNoConst().rm_options.probe = true;
       else if ( _disableCheck )
-        zypp_r.globalOptsNoConst().rm_options.probe = false;
+        zypper.globalOptsNoConst().rm_options.probe = false;
 
       // load gpg keys
-      int code = defaultSystemSetup( zypp_r, InitTarget  );
+      int code = defaultSystemSetup( zypper, InitTarget  );
       if ( code != ZYPPER_EXIT_OK )
         return code;
 
-      add_repo_by_url( zypp_r, url, positionalArgs_r[1]/*alias*/, _commonProperties, _repoProperties, _disableCheck );
+      add_repo_by_url( zypper, url, positionalArgs_r[1]/*alias*/, _commonProperties, _repoProperties, _disableCheck );
     }
   }
   catch ( const repo::RepoUnknownTypeException & e )
   {
     ZYPP_CAUGHT( e );
-    zypp_r.out().error( e, _("Specified type is not a valid repository type:"),
+    zypper.out().error( e, _("Specified type is not a valid repository type:"),
                  str::form( _("See '%s' or '%s' to get a list of known repository types."),
                             "zypper help addrepo", "man zypper" ) );
     return ZYPPER_EXIT_ERR_INVALID_ARGS;
   }
 
 
-  return zypp_r.exitCode();;
+  return zypper.exitCode();;
 }

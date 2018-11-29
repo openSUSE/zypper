@@ -42,11 +42,11 @@ void VersionCompareCmd::doReset()
   _missingReleaseNrAsAnyRelease = false;
 }
 
-int VersionCompareCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int VersionCompareCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   if ( positionalArgs_r.size() < 2 )
   {
-    report_required_arg_missing( zypp_r.out(), help() );
+    report_required_arg_missing( zypper.out(), help() );
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
   else if ( positionalArgs_r.size() > 2 )
@@ -64,19 +64,19 @@ int VersionCompareCmd::execute( Zypper &zypp_r, const std::vector<std::string> &
     result = lhs.compare( rhs );
 
   // be terse when talking to machines
-  if ( zypp_r.globalOpts().terse )
+  if ( zypper.globalOpts().terse )
   {
-    zypp_r.out().info( str::numstring(result) );
+    zypper.out().info( str::numstring(result) );
     return ZYPPER_EXIT_OK;
   }
 
   // tell a human
   if (result == 0)
-    zypp_r.out().info( str::form(_("%s matches %s"), lhs.asString().c_str(), rhs.asString().c_str() ) );
+    zypper.out().info( str::form(_("%s matches %s"), lhs.asString().c_str(), rhs.asString().c_str() ) );
   else if ( result > 0 )
-    zypp_r.out().info( str::form(_("%s is newer than %s"), lhs.asString().c_str(), rhs.asString().c_str() ) );
+    zypper.out().info( str::form(_("%s is newer than %s"), lhs.asString().c_str(), rhs.asString().c_str() ) );
   else
-    zypp_r.out().info( str::form(_("%s is older than %s"), lhs.asString().c_str(), rhs.asString().c_str() ) );
+    zypper.out().info( str::form(_("%s is older than %s"), lhs.asString().c_str(), rhs.asString().c_str() ) );
 
   return ZYPPER_EXIT_OK;
 }

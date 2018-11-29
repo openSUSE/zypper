@@ -55,12 +55,12 @@ void RemoveLocksCmd::doReset()
   _repos.clear();
 }
 
-int RemoveLocksCmd::execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r)
+int RemoveLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r)
 {
   // too few arguments
   if ( positionalArgs_r.empty() )
   {
-    report_required_arg_missing( zypp_r.out(), help() );
+    report_required_arg_missing( zypper.out(), help() );
     return ZYPPER_EXIT_ERR_INVALID_ARGS;
   }
 
@@ -68,7 +68,7 @@ int RemoveLocksCmd::execute(Zypper &zypp_r, const std::vector<std::string> &posi
   {
     Locks & locks = Locks::instance();
     locks.read(Pathname::assertprefix
-        (zypp_r.globalOpts().root_dir, ZConfig::instance().locksFile()));
+        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
     Locks::size_type start = locks.size();
     for_( args_it, positionalArgs_r.begin(), positionalArgs_r.end() )
     {
@@ -80,7 +80,7 @@ int RemoveLocksCmd::execute(Zypper &zypp_r, const std::vector<std::string> &posi
         advance(it, i-1);
         locks.removeLock(*it);
 
-        zypp_r.out().info(_("Specified lock has been successfully removed."));
+        zypper.out().info(_("Specified lock has been successfully removed."));
       }
       else //package name
       {
@@ -106,7 +106,7 @@ int RemoveLocksCmd::execute(Zypper &zypp_r, const std::vector<std::string> &posi
         for_(it_repo, _repos.begin(), _repos.end())
         {
           RepoInfo info;
-          if( match_repo( zypp_r, *it_repo, &info))
+          if( match_repo( zypper, *it_repo, &info))
             q.addRepo(info.alias());
           else //TODO some error handling
             WAR << "unknown repository" << *it_repo << endl;
@@ -118,14 +118,14 @@ int RemoveLocksCmd::execute(Zypper &zypp_r, const std::vector<std::string> &posi
     }
 
     locks.save(Pathname::assertprefix
-        (zypp_r.globalOpts().root_dir, ZConfig::instance().locksFile()));
+        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
 
     // nothing removed
     if (start == locks.size())
-      zypp_r.out().info(_("No lock has been removed."));
+      zypper.out().info(_("No lock has been removed."));
     //removed something
     else
-      zypp_r.out().info(str::form(PL_(
+      zypper.out().info(str::form(PL_(
         "%zu lock has been successfully removed.",
         "%zu locks have been successfully removed.",
         start - locks.size()), start - locks.size()));
@@ -133,7 +133,7 @@ int RemoveLocksCmd::execute(Zypper &zypp_r, const std::vector<std::string> &posi
   catch(const Exception & e)
   {
     ZYPP_CAUGHT(e);
-    zypp_r.out().error(e, _("Problem removing the package lock:"));
+    zypper.out().error(e, _("Problem removing the package lock:"));
     return ZYPPER_EXIT_ERR_ZYPP;
   }
   return ZYPPER_EXIT_OK;

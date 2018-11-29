@@ -53,13 +53,13 @@ zypp::ZyppFlags::CommandGroup ModifyRepoCmd::cmdOptions() const
 void ModifyRepoCmd::doReset()
 { }
 
-int ModifyRepoCmd::execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int ModifyRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   bool aggregate = _selections._all || _selections._local || _selections._remote || _selections._mediumTypes.size();
 
   if ( positionalArgs_r.size() < 1 && !aggregate )
   {
-    report_alias_or_aggregate_required (zypp_r.out(), help() );
+    report_alias_or_aggregate_required (zypper.out(), help() );
     ERR << "No alias argument given." << endl;
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
@@ -73,20 +73,20 @@ int ModifyRepoCmd::execute(Zypper &zypp_r, const std::vector<std::string> &posit
 
   if ( aggregate )
   {
-    modify_repos_by_option( zypp_r, _selections, _commonProps, _repoProps );
+    modify_repos_by_option( zypper, _selections, _commonProps, _repoProps );
   }
   else
   {
     for_( arg,positionalArgs_r.begin(),positionalArgs_r.end() )
     {
       RepoInfo r;
-      if ( match_repo(zypp_r,*arg,&r) )
+      if ( match_repo(zypper,*arg,&r) )
       {
-        modify_repo( zypp_r, r.alias(), _commonProps, _repoProps );
+        modify_repo( zypper, r.alias(), _commonProps, _repoProps );
       }
       else
       {
-       zypp_r.out().error( str::Format(_("Repository %s not found.")) % *arg );
+       zypper.out().error( str::Format(_("Repository %s not found.")) % *arg );
         ERR << "Repo " << *arg << " not found" << endl;
         return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
       }

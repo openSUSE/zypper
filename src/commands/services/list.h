@@ -19,14 +19,14 @@ public:
   ListServicesCmd ( const std::vector<std::string> &commandAliases_r );
 
 private:
-  void printServiceList    ( Zypper &zypp_r );
-  void printXMLServiceList ( Zypper &zypp_r );
+  void printServiceList    ( Zypper &zypper );
+  void printXMLServiceList ( Zypper &zypper );
 
   // ZypperBaseCommand interface
 protected:
   zypp::ZyppFlags::CommandGroup cmdOptions() const override;
   void doReset() override;
-  int execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r) override;
+  int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r) override;
 
 private:
   RSCommonListOptions _listOptions { OptCommandCtx::ServiceContext, *this };

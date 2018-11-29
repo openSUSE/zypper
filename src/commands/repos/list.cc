@@ -93,12 +93,12 @@ void ListReposCmd::doReset()
   _exportFile.clear();
 }
 
-int ListReposCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int ListReposCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
-  checkIfToRefreshPluginServices( zypp_r );
+  checkIfToRefreshPluginServices( zypper );
 
-  RepoManager & manager = zypp_r.repoManager();
-  RuntimeData & gData = zypp_r.runtimeData();
+  RepoManager & manager = zypper.repoManager();
+  RuntimeData & gData = zypper.runtimeData();
   std::list<RepoInfo> repos;
   std::list<std::string> not_found;
 
@@ -108,14 +108,14 @@ int ListReposCmd::execute( Zypper &zypp_r, const std::vector<std::string> &posit
       repos.insert( repos.end(), manager.repoBegin(), manager.repoEnd() );
     else
     {
-      get_repos( zypp_r, positionalArgs_r.begin(),positionalArgs_r.end(), repos, not_found );
-      report_unknown_repos( zypp_r.out(), not_found );
+      get_repos( zypper, positionalArgs_r.begin(),positionalArgs_r.end(), repos, not_found );
+      report_unknown_repos( zypper.out(), not_found );
     }
   }
   catch ( const Exception & e )
   {
     ZYPP_CAUGHT( e );
-    zypp_r.out().error( e, _("Error reading repositories:") );
+    zypper.out().error( e, _("Error reading repositories:") );
     return ( ZYPPER_EXIT_ERR_ZYPP );
   }
 
@@ -141,26 +141,26 @@ int ListReposCmd::execute( Zypper &zypp_r, const std::vector<std::string> &posit
       std::ofstream stream( file.c_str() );
       if ( !stream )
       {
-        zypp_r.out().error( str::Format(_("Can't open %s for writing.")) % file.asString(),
+        zypper.out().error( str::Format(_("Can't open %s for writing.")) % file.asString(),
 			    _("Maybe you do not have write permissions?") );
         return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
       }
       else
       {
         print_repos_to( repos, stream );
-        zypp_r.out().info( str::Format(_("Repositories have been successfully exported to %s.")) % file,
+        zypper.out().info( str::Format(_("Repositories have been successfully exported to %s.")) % file,
 			   Out::QUIET );
       }
     }
   }
   // print repo list as xml
-  else if ( zypp_r.out().type() == Out::TYPE_XML )
-    print_xml_repo_list( zypp_r, repos );
+  else if ( zypper.out().type() == Out::TYPE_XML )
+    print_xml_repo_list( zypper, repos );
   else if ( !positionalArgs_r.empty() )
-    print_repo_details( zypp_r, repos );
+    print_repo_details( zypper, repos );
   // print repo list as table
   else
-    printRepoList( zypp_r, repos );
+    printRepoList( zypper, repos );
 
   if ( !not_found.empty() ) {
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );

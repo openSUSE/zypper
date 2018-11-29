@@ -35,7 +35,7 @@ void LicensesCmd::doReset()
   return;
 }
 
-int LicensesCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int LicensesCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   if ( !positionalArgs_r.empty() )
   {
@@ -43,6 +43,6 @@ int LicensesCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positi
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
 
-  report_licenses( zypp_r );
+  report_licenses( zypper );
   return ZYPPER_EXIT_OK;
 }

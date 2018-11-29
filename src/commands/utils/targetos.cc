@@ -39,29 +39,29 @@ void TargetOSCmd::doReset()
   _showOSLabel = false;
 }
 
-int TargetOSCmd::execute( Zypper &zypp_r , const std::vector<std::string> & )
+int TargetOSCmd::execute( Zypper &zypper , const std::vector<std::string> & )
 {
-  if ( zypp_r.out().type() == Out::TYPE_XML )
+  if ( zypper.out().type() == Out::TYPE_XML )
   {
-    zypp_r.out().error(_("XML output not implemented for this command.") );
+    zypper.out().error(_("XML output not implemented for this command.") );
     return ZYPPER_EXIT_ERR_INVALID_ARGS;
   }
 
   if ( _showOSLabel )
   {
-    if ( zypp_r.globalOpts().terse )
+    if ( zypper.globalOpts().terse )
     {
-      cout << "labelLong\t" << str::escape(Target::distributionLabel( zypp_r.globalOpts().root_dir ).summary, '\t') << endl;
-      cout << "labelShort\t" << str::escape(Target::distributionLabel( zypp_r.globalOpts().root_dir ).shortName, '\t') << endl;
+      cout << "labelLong\t" << str::escape(Target::distributionLabel( zypper.globalOpts().root_dir ).summary, '\t') << endl;
+      cout << "labelShort\t" << str::escape(Target::distributionLabel( zypper.globalOpts().root_dir ).shortName, '\t') << endl;
     }
     else
     {
-      zypp_r.out().info( str::form(_("Distribution Label: %s"), Target::distributionLabel( zypp_r.globalOpts().root_dir ).summary.c_str() ) );
-      zypp_r.out().info( str::form(_("Short Label: %s"), Target::distributionLabel( zypp_r.globalOpts().root_dir ).shortName.c_str() ) );
+      zypper.out().info( str::form(_("Distribution Label: %s"), Target::distributionLabel( zypper.globalOpts().root_dir ).summary.c_str() ) );
+      zypper.out().info( str::form(_("Short Label: %s"), Target::distributionLabel( zypper.globalOpts().root_dir ).shortName.c_str() ) );
     }
   }
   else
-   zypp_r.out().info( Target::targetDistribution( zypp_r.globalOpts().root_dir ) );
+   zypper.out().info( Target::targetDistribution( zypper.globalOpts().root_dir ) );
 
   return ZYPPER_EXIT_OK;
 }

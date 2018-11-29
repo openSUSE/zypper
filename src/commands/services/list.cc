@@ -87,9 +87,9 @@ ListServicesCmd::ListServicesCmd(const std::vector<std::string> &commandAliases_
 
 }
 
-void ListServicesCmd::printServiceList( Zypper &zypp_r )
+void ListServicesCmd::printServiceList( Zypper &zypper )
 {
-  ServiceList services = get_all_services( zypp_r );
+  ServiceList services = get_all_services( zypper );
 
   Table tbl;
 
@@ -131,7 +131,7 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
     if ( with_repos && dynamic_pointer_cast<ServiceInfo>(*it) )
     {
       RepoCollector collector;
-      RepoManager & rm( zypp_r.repoManager() );
+      RepoManager & rm( zypper.repoManager() );
 
       rm.getRepositoriesInService( (*it)->alias(),
                                    make_function_output_iterator( bind( &RepoCollector::collect, &collector, _1 ) ) );
@@ -145,11 +145,11 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
 
         if ( !servicePrinted )
         {
-          service_list_tr( zypp_r, tbl, *it, i, _listOptions._flags );
+          service_list_tr( zypper, tbl, *it, i, _listOptions._flags );
           servicePrinted = true;
         }
         // ServiceRepo: we print repos of the current service
-        service_list_tr( zypp_r, tbl, ptr, i, _listOptions._flags | RSCommonListOptions::ServiceRepo );
+        service_list_tr( zypper, tbl, ptr, i, _listOptions._flags | RSCommonListOptions::ServiceRepo );
       }
     }
     if ( servicePrinted )
@@ -160,11 +160,11 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
     if ( show_enabled_only && !(*it)->enabled() )
       continue;
 
-    service_list_tr( zypp_r, tbl, *it, i, _listOptions._flags );
+    service_list_tr( zypper, tbl, *it, i, _listOptions._flags );
   }
 
   if ( tbl.empty() )
-    zypp_r.out().info( str::form(_("No services defined. Use the '%s' command to add one or more services."),
+    zypper.out().info( str::form(_("No services defined. Use the '%s' command to add one or more services."),
                                  "zypper addservice" ) );
   else
   {
@@ -193,9 +193,9 @@ void ListServicesCmd::printServiceList( Zypper &zypp_r )
   }
 }
 
-void ListServicesCmd::printXMLServiceList( Zypper &zypp_r )
+void ListServicesCmd::printXMLServiceList( Zypper &zypper )
 {
-  ServiceList services = get_all_services( zypp_r );
+  ServiceList services = get_all_services( zypper );
 
   cout << "<service-list>" << endl;
 
@@ -207,7 +207,7 @@ void ListServicesCmd::printXMLServiceList( Zypper &zypp_r )
     if ( s_ptr )
     {
       RepoCollector collector;
-      RepoManager & rm( zypp_r.repoManager() );
+      RepoManager & rm( zypper.repoManager() );
       rm.getRepositoriesInService( (*it)->alias(),
                                    make_function_output_iterator( bind( &RepoCollector::collect, &collector, _1 ) ) );
       std::ostringstream sout;
@@ -232,16 +232,16 @@ void ListServicesCmd::doReset()
 {
 }
 
-int ListServicesCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int ListServicesCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   if ( _listOptions._flags.testFlag( RSCommonListOptions::ShowWithRepos) )
-    checkIfToRefreshPluginServices( zypp_r );
+    checkIfToRefreshPluginServices( zypper );
 
-  if ( zypp_r.out().type() == Out::TYPE_XML ) {
-    printXMLServiceList( zypp_r );
+  if ( zypper.out().type() == Out::TYPE_XML ) {
+    printXMLServiceList( zypper );
     return ZYPPER_EXIT_OK;
   }
 
-  printServiceList( zypp_r );
+  printServiceList( zypper );
   return ZYPPER_EXIT_OK;
 }

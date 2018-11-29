@@ -35,8 +35,8 @@ zypp::ZyppFlags::CommandGroup PatchesCmdBase::cmdOptions() const
 void PatchesCmdBase::doReset()
 { }
 
-int PatchesCmdBase::execute( Zypper &zypp_r, const std::vector<std::string> & )
+int PatchesCmdBase::execute( Zypper &zypper, const std::vector<std::string> & )
 {
-  list_patches( zypp_r );
+  list_patches( zypper );
   return ZYPPER_EXIT_OK;
 }

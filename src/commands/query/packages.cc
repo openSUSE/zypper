@@ -64,13 +64,13 @@ void PackagesCmdBase::doReset()
   _flags = ListPackagesBits::Default;
 }
 
-int PackagesCmdBase::execute( Zypper &zypp_r, const std::vector<std::string> & )
+int PackagesCmdBase::execute( Zypper &zypper, const std::vector<std::string> & )
 {
   ListPackagesFlags  flags = _flags;
   flags.setFlag( ListPackagesBits::HideInstalled, _notInstalledOnly._mode == SolvableFilterMode::ShowOnlyNotInstalled );
   flags.setFlag( ListPackagesBits::HideNotInstalled, _notInstalledOnly._mode == SolvableFilterMode::ShowOnlyInstalled );
 
-  list_packages( zypp_r, flags );
+  list_packages( zypper, flags );
 
   return ZYPPER_EXIT_OK;
 }

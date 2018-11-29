@@ -35,7 +35,7 @@ void NeedsRebootingCmd::doReset()
   return;
 }
 
-int NeedsRebootingCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int NeedsRebootingCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   if ( !positionalArgs_r.empty() )
   {
@@ -43,14 +43,14 @@ int NeedsRebootingCmd::execute( Zypper &zypp_r, const std::vector<std::string> &
     return ZYPPER_EXIT_ERR_INVALID_ARGS;
   }
 
-  filesystem::Pathname rebootNeededFlag = filesystem::Pathname(zypp_r.globalOpts().root_dir) / "/var/run/reboot-needed";
+  filesystem::Pathname rebootNeededFlag = filesystem::Pathname(zypper.globalOpts().root_dir) / "/var/run/reboot-needed";
 
   if ( filesystem::PathInfo( rebootNeededFlag ).isExist() ) {
-    zypp_r.out().info( _("Core libraries or services have been updated.") );
-    zypp_r.out().info( _("Reboot is required to ensure that your system benefits from these updates.") );
+    zypper.out().info( _("Core libraries or services have been updated.") );
+    zypper.out().info( _("Reboot is required to ensure that your system benefits from these updates.") );
     return ZYPPER_EXIT_INF_REBOOT_NEEDED;
   }
-  zypp_r.out().info( _("No core libraries or services have been updated.") );
-  zypp_r.out().info( _("Reboot is probably not necessary.") );
+  zypper.out().info( _("No core libraries or services have been updated.") );
+  zypper.out().info( _("Reboot is probably not necessary.") );
   return ZYPPER_EXIT_OK;
 }
