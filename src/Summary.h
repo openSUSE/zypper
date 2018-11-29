@@ -46,6 +46,8 @@ public:
     SHOW_NOT_UPDATED        = 0x0800,
     SHOW_LOCKS              = 0x1000,
 
+    UPDATESTACK_ONLY        = 0x2000,  //< required for zypper patch
+
     SHOW_ALL                = 0xffff
   };
 

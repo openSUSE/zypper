@@ -25,12 +25,12 @@ protected:
 
   std::set<zypp::ResKind> _kinds;
 
-  bool _noConfirm     = false;
   bool _details       = false;
   bool _selectByName  = true;
   bool _selectByCap   = false;
 
   InitReposOptionSet _initRepos { *this };
+  NoConfirmRugOption _noConfirmOpts { *this };
   DryRunOptionSet _dryRun { *this };
   SolverCommonOptionSet _commonSolverOpts { *this };
 

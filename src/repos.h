@@ -223,11 +223,6 @@ const char * repoAutorefreshStr( const repo::RepoInfoBase & repo_r );
 /** \return true if aliases are equal, and all lhs urls can be found in rhs */
 bool repo_cmp_alias_urls( const RepoInfo & lhs, const RepoInfo & rhs );
 
-/**
- * @TODO remove me with copts
- */
-unsigned priority_from_copts( Zypper &zypper );
-
 void repoPrioSummary( Zypper & zypper );
 
 bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_download );

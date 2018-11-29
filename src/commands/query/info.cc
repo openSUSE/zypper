@@ -9,6 +9,7 @@
 #include "utils/flags/flagtypes.h"
 #include "utils/messages.h"
 #include "commands/commandhelpformatter.h"
+#include "commands/commonflags.h"
 
 
 InfoCmd::InfoCmd( const std::vector<std::string> &commandAliases_r, InfoCmd::Mode cmdMode_r ) :
@@ -60,10 +61,7 @@ zypp::ZyppFlags::CommandGroup InfoCmd::cmdOptions() const
             // translators: -s, --match-substrings
             _("Print information for packages partially matching name.")
       },
-      { "type", 't',  ZyppFlags::RequiredArgument | ZyppFlags::Repeatable, ZyppFlags::KindSetType( &that._options._kinds ),
-            // translators: -t, --type <TYPE>
-            str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product"
-      },
+      CommonFlags::resKindSetFlag( that._options._kinds ),
       { "provides", '\0', ZyppFlags::NoArgument, ZyppFlags::BitFieldType( that._options._flags, InfoBits::ShowProvides, ZyppFlags::StoreTrue),
             // translators: --provides
             _("Show provides.")

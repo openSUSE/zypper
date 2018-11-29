@@ -1423,23 +1423,6 @@ void add_repo_from_file( Zypper & zypper,
   return;
 }
 
-unsigned priority_from_copts( Zypper &zypper )
-{
-  unsigned prio = 0U;
-  parsed_opts::const_iterator cArg = zypper.cOpts().find( "priority" );
-  if ( cArg != zypper.cOpts().end() ) {
-    std::string err;
-    try {
-      prio = parse_priority( *cArg->second.begin(), err );
-    } catch ( const Exception &e ) {
-      zypper.out().error( err );
-      zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      ZYPP_THROW( ExitRequestException( e.asString() ) );
-    }
-  }
-  return prio;
-}
-
 // ----------------------------------------------------------------------------
 
 template<typename T>

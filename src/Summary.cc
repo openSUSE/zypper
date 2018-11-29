@@ -1550,7 +1550,7 @@ void Summary::dumpTo( std::ostream & out )
   out << endl;
   writePackageCounts( out );
   writeDownloadAndInstalledSizeSummary( out );
-  if ( _need_restart && zypper.runtimeData().plain_patch_command && !zypper.cOpts().count("updatestack-only") )
+  if ( _need_restart && zypper.runtimeData().plain_patch_command && !(_viewop & UPDATESTACK_ONLY) )
   {
     // patch command (auto)restricted to update stack patches
     Zypper::instance().out().notePar( 4, _("Package manager restart required. (Run this command once again after the update stack got updated)") );

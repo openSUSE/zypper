@@ -10,11 +10,15 @@
 #include "zyppflags.h"
 #include "exceptions.h"
 #include "output/Out.h"
+#include "issue.h"
 
 #include <zypp/ResKind.h>
 #include <zypp/TriBool.h>
 #include <zypp/Pathname.h>
+#include <zypp/Date.h>
+#include <zypp/Patch.h>
 #include <set>
+#include <type_traits>
 
 class Out;
 
@@ -63,6 +67,25 @@ enum StoreFlag : int{
 };
 
 /**
+ * Creates a boolean flag. Can either set or unset a value convertible to bool controlled by \a store.
+ * The value in \a defVal is only used for generating the help
+ */
+template <typename T>
+Value BoolCompatibleType ( T &target, StoreFlag store = StoreTrue, const boost::optional<T> &defVal = boost::optional<T>()  )
+{
+  return Value (
+    [defVal]() -> boost::optional<std::string>{
+      if (!defVal)
+        return boost::optional<std::string>();
+      return std::string( (*defVal) ? "true" : "false" );
+    },
+   [&target, store]( const CommandOption &, const boost::optional<std::string> &){
+      target = (store == StoreTrue);
+    }
+  );
+}
+
+/**
  * Creates a boolean flag. Can either set or unset a boolean value controlled by \a store.
  * The value in \a defVal is only used for generating the help
  */
@@ -71,6 +94,37 @@ Value BoolType   ( bool *target, StoreFlag store = StoreTrue, const boost::optio
 
 Value TriBoolType   ( TriBool &target, StoreFlag store = StoreTrue, const boost::optional<TriBool> &defValue = boost::optional<TriBool>()  );
 
+template <typename T>
+T argValueConvert ( const CommandOption &, const boost::optional<std::string> & );
+
+template <>
+zypp::Date argValueConvert ( const CommandOption &, const boost::optional<std::string> &in );
+
+template <>
+inline std::string argValueConvert ( const CommandOption &, const boost::optional<std::string> &in ) {
+  return *in;
+}
+
+template <template<typename ...> class Container, typename T >
+Value GenericContainerType  ( Container<T> &target_r, std::string hint, const std::string sep = "" ) {
+  return Value (
+    noDefaultValue,
+    [ &target_r, sep ] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
+      if ( !in || in->empty() ) ZYPP_THROW(MissingArgumentException(opt.name)); //value required
+
+      auto it = std::inserter ( target_r, target_r.end() );
+      if ( !sep.empty() ) {
+        std::vector<std::string> vals;
+        str::split( *in, std::inserter(vals, vals.end()), "," );
+        for ( const std::string & strVal : vals )
+          it = argValueConvert<T>( opt, strVal );
+      } else {
+        it = argValueConvert<T>( opt, in );
+      }
+    },
+    std::move( hint )
+  );
+}
 
 template <typename T, typename E = T>
 Value BitFieldType ( T& target, E flag , StoreFlag store = StoreTrue ) {
@@ -113,6 +167,12 @@ Value NoValue ();
  * emitting the warning.
  */
 Value WarnOptionVal (Out &out_r , const std::string &warning_r, Out::Verbosity verbosity_r = Out::NORMAL, const boost::optional<Value> &val_r = boost::optional<Value>());
+
+
+/**
+ * Handles command argument that pass bug reference numbers of specific types ( issues, cve, bugzilla, bz )
+ */
+Value IssueSetType (std::set<Issue> &target_r, const std::string &issueType_r, std::string hint_r = "");
 
 
 }}

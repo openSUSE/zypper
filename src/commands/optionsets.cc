@@ -138,6 +138,14 @@ namespace
 
 zypp::DownloadMode DownloadOptionSet::mode() const
 {
+  MIL << "Download mode: ";
+  if      (_mode == DownloadInAdvance) MIL << "in-advance";
+  else if (_mode == DownloadInHeaps)   MIL << "in-heaps";
+  else if (_mode == DownloadOnly)      MIL << "only";
+  else if (_mode == DownloadAsNeeded)  MIL << "as-needed";
+  else                                 MIL << "UNKNOWN";
+  MIL << (_mode == ZConfig::instance().commit_downloadMode() ? " (zconfig value)" : "") << endl;
+
   return _mode;
 }
 
@@ -196,7 +204,7 @@ std::vector<ZyppFlags::CommandGroup> NotInstalledOnlyOptionSet::options()
 
 void NotInstalledOnlyOptionSet::reset()
 {
-  _mode == SolvableFilterMode::ShowAll;
+  _mode = SolvableFilterMode::ShowAll;
 }
 
 
@@ -223,7 +231,7 @@ std::vector<ZyppFlags::CommandGroup> LicensePolicyOptionSet::options()
                  _("Automatically say 'yes' to third party license confirmation prompt. See 'man zypper' for more details.")
            },
            { "auto-agree-with-product-licenses", '\0',
-                 ZyppFlags::NoArgument,
+                 ZyppFlags::NoArgument | ZyppFlags::Hidden,
                  ZyppFlags::BoolType( &set._autoAgreeWithProductLicenses, ZyppFlags::StoreTrue, set._autoAgreeWithProductLicenses ),
                  _("Automatically accept product licenses only. See 'man zypper' for more details.")
            }
@@ -280,4 +288,69 @@ std::vector<ZyppFlags::CommandGroup> NoConfirmRugOption::options()
 void NoConfirmRugOption::reset()
 {
   //@bug might be handled wrong in zypper shell
+}
+
+
+std::vector<ZyppFlags::CommandGroup> OptionalPatchesOptionSet::options()
+{
+  auto &gOpts = Zypper::instance().globalOptsNoConst();
+  return {{
+      {
+        {"with-optional", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolCompatibleType( gOpts.exclude_optional_patches, ZyppFlags::StoreFalse ), "" },
+        {"without-optional", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolCompatibleType( gOpts.exclude_optional_patches, ZyppFlags::StoreTrue ),
+              _("Whether applicable optional patches should be treated as needed or be excluded.")
+                  + std::string(" ")
+                  + ( gOpts.exclude_optional_patches_default
+                  ? _("The default is to exclude optional patches.")
+                  : _("The default is to include optional patches.") )
+        }
+      },{
+          //conflicting flags
+          { "with-optional",  "without-optional" }
+      }
+  }
+ };
+}
+
+void OptionalPatchesOptionSet::reset()
+{
+  auto &gOpts = Zypper::instance().globalOptsNoConst();
+  gOpts.exclude_optional_patches = gOpts.exclude_optional_patches_default;
+}
+
+
+bool InteractiveUpdatesOptionSet::skipInteractive() const
+{
+  bool skip_interactive = false;
+  if ( _withInteractive != zypp::indeterminate )
+    skip_interactive = ! _withInteractive;
+  // bnc #497711
+  else if ( Zypper::instance().globalOpts().non_interactive )
+    skip_interactive = true;
+
+  return skip_interactive;
+}
+
+std::vector<ZyppFlags::CommandGroup> InteractiveUpdatesOptionSet::options()
+{
+  return {{
+      {
+        {"with-interactive", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _withInteractive, ZyppFlags::StoreTrue ),
+              // translators: --with-interactive
+              _("Do not skip interactive updates.")
+        },
+        {"skip-interactive", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _withInteractive, ZyppFlags::StoreFalse ),
+              // translators: --skip-interactive
+              _("Skip interactive updates.")
+        }
+      },{
+        //conflicting flags
+        { "with-interactive", "skip-interactive" }
+      }
+  }};
+}
+
+void InteractiveUpdatesOptionSet::reset()
+{
+  _withInteractive = zypp::indeterminate;
 }

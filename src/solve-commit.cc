@@ -568,35 +568,10 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 
     Summary summary( God->pool(), summaryOptions_r );
 
-    //if ( zypper.cOpts().count("details") )
-    //  summary.setViewOption( Summary::DETAILS );
-
     if ( zypper.out().verbosity() == Out::HIGH )
       summary.setViewOption( Summary::SHOW_VERSION );
     else if ( zypper.out().verbosity() == Out::DEBUG )
       summary.setViewOption( Summary::SHOW_ALL );
-
-#if 0
-    // show not updated packages if 'zypper up' (-t package or -t product)
-    ResKindSet kinds;
-    if ( zypper.cOpts().find("type") != zypper.cOpts().end() )
-      kinds = kindset_from( zypper.cOpts().find("type")->second );
-    if ( zypper.command() == ZypperCommand::UPDATE
-      && zypper.arguments().empty()
-      && ( kinds.empty()
-        || kinds.find(ResKind::package) != kinds.end()
-	|| kinds.find(ResKind::product) != kinds.end() ) )
-    {
-      summary.setViewOption( Summary::SHOW_NOT_UPDATED );
-    }
-
-    if ( zypper.command() == ZypperCommand::PATCH
-      || zypper.command() == ZypperCommand::UPDATE
-      || zypper.command() == ZypperCommand::DIST_UPGRADE )
-    {
-      summary.setViewOption( Summary::SHOW_LOCKS );
-    }
-#endif
 
     // if running on SUSE Linux Enterprise, report unsupported packages
     if ( runningOnEnterprise() )

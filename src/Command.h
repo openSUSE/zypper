@@ -185,7 +185,8 @@ private:
   Command _command;
 
   /** Only initialized if we have a new style command */
-  ZypperBaseCommandPtr _newStyleCmdObj;
+  //mutable to support late initializing when the command object is requested for the first time
+  mutable ZypperBaseCommandPtr _newStyleCmdObj;
 
 };
 

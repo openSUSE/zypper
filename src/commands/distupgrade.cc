@@ -9,6 +9,7 @@
 #include "commands/conditions.h"
 #include "solve-commit.h"
 #include "utils/messages.h"
+#include "commonflags.h"
 
 #include "Zypper.h"
 
@@ -30,16 +31,13 @@ DistUpgradeCmd::DistUpgradeCmd( const std::vector<std::string> &commandAliases_r
 zypp::ZyppFlags::CommandGroup DistUpgradeCmd::cmdOptions() const
 {
   auto that = const_cast<DistUpgradeCmd *>(this);
-  return {{
+  return zypp::ZyppFlags::CommandGroup({
     { "from", '\0', ZyppFlags::Repeatable | ZyppFlags::RequiredArgument, ZyppFlags::StringVectorType( &DupSettings::instanceNoConst()._fromRepos, ARG_REPOSITORY),
         // translators: --from <ALIAS|#|URI>
         _("Restrict upgrade to specified repository.")
     },
-    { "details", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_details, ZyppFlags::StoreTrue, _details ),
-        // translators: --details
-        _("Show the detailed installation summary.")
-    }
-  }};
+    CommonFlags::detailsFlag( that->_details )
+  });
 }
 
 void DistUpgradeCmd::doReset()

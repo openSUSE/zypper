@@ -94,17 +94,6 @@ void RepoServiceCommonOptions::reset()
   _enableAutoRefresh = indeterminate;
 }
 
-void RepoServiceCommonOptions::fillFromCopts( Zypper &zypper )
-{
-  reset();
-  parsed_opts::const_iterator it = zypper.cOpts().find("name");
-  if ( it != zypper.cOpts().end() )
-    _name = it->second.front();
-
-  _enable = get_boolean_option( zypper, "enable", "disable" );
-  _enableAutoRefresh = get_boolean_option( zypper, "refresh", "no-refresh" );
-}
-
 RepoServiceCommonSelectOptions::RepoServiceCommonSelectOptions(OptCommandCtx ctx)
   : _cmdContext(ctx)
 { }
@@ -140,16 +129,6 @@ void RepoServiceCommonSelectOptions::reset()
   _mediumTypes.clear();
 }
 
-void RepoServiceCommonSelectOptions::fillFromCopts(Zypper &zypper)
-{
-  reset();
-  _all    = copts.count("all");
-  _local  = copts.count("local");
-  _remote = copts.count("remote");
-  _mediumTypes.insert( _mediumTypes.begin(), copts["medium-type"].begin(), copts["medium-type"].end());
-}
-
-
 std::vector<ZyppFlags::CommandGroup> RepoProperties::options()
 {
   return {{{
@@ -174,14 +153,6 @@ void RepoProperties::reset()
   _priority = 0U;
   _keepPackages = zypp::indeterminate;
   _gpgCheck = zypp::RepoInfo::GpgCheck::indeterminate;
-}
-
-void RepoProperties::fillFromCopts(Zypper &zypper)
-{
-  reset();
-  _keepPackages = get_boolean_option( zypper, "keep-packages", "no-keep-packages" );
-  _gpgCheck = cli::gpgCheck( zypper );
-  _priority = priority_from_copts( zypper );
 }
 
 
