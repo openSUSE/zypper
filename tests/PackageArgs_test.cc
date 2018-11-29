@@ -236,10 +236,9 @@ BOOST_AUTO_TEST_CASE(kind_tests)
     , "pattern:npattern" , "pattern:dpattern=13"
     , "product:nproduct" , "product:dproduct=13"
     , "patch:npatch"     , "patch:dpatch=13"
-    , "wrzl:nwrzl"       , "wrzl:dwrzl=13"
   };
 
-  for ( auto & kindstr : { "package", "pattern", "product", "patch", "wrzl" } )
+  for ( auto & kindstr : { "package", "pattern", "product", "patch" } )
   {
     ResKind kind { kindstr };
     //cout << "===["<<kind<<"]========================================" << endl;
@@ -252,9 +251,9 @@ BOOST_AUTO_TEST_CASE(kind_tests)
       capset.insert( spec.parsed_cap );
 
     // ...and check them...
-    BOOST_CHECK_EQUAL( capset.size(), 12 );
+    BOOST_CHECK_EQUAL( capset.size(), 10 );
     // kind qualified args remain untouched:
-    for ( auto & kindstr : { "package", "pattern", "product", "patch", "wrzl" } )
+    for ( auto & kindstr : { "package", "pattern", "product", "patch" } )
     {
       ResKind tkind { kindstr };
       BOOST_CHECK_EQUAL( capset.count( Capability( "n"+tkind.asString(),  "",   "", tkind ) ), 1 );
