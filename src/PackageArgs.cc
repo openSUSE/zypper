@@ -6,7 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 /** \file PackageArgs.cc
- * 
+ *
  */
 
 #include <iostream>
@@ -199,13 +199,17 @@ void PackageArgs::argsToCaps( const ResKind & kind )
     if ( !hasRepo )
       repo.clear();
 
-    // parse the rest of the string as standard zypp package specifier
+    //check if we already have a package specifier in the arg
+    //if we do , use that one always
     Capability parsedcap;
-    if ( kind == ResKind::package || ( (pos = arg.find(':')) != std::string::npos && arg.find_first_of( "(=" ) > pos ) )
-      parsedcap = Capability::guessPackageSpec( arg, spec.modified );
-    else
+    ResKind kindFromPosArg = ResKind::explicitBuiltin( arg );
+
+    if ( kindFromPosArg == ResKind::nokind && kind != ResKind::nokind && kind != ResKind::package) {
       // prepend the kind for non-packages if not already there (bnc #640399)
       parsedcap = Capability::guessPackageSpec( kind.asString() + ":" + arg, spec.modified );
+    } else {
+      parsedcap = Capability::guessPackageSpec( arg, spec.modified );
+    }
 
     if ( spec.modified )
     {
@@ -214,25 +218,6 @@ void PackageArgs::argsToCaps( const ResKind & kind )
 				  parsedcap.asString().c_str() );
       zypper.out().info( msg, Out::HIGH ); // TODO this should not be called here
       DBG << "'" << arg << "' not found, trying '" << parsedcap <<  "'" << endl;
-    }
-
-    // set the right kind (bnc #580571)
-    // prefer those specified in args
-    // if not in args, use the one from --type
-    sat::Solvable::SplitIdent splid( parsedcap.detail().name() );
-    if ( splid.kind() != kind && zypper.cOpts().find( "type" ) != zypper.cOpts().end() )
-    {
-      // kind specified in arg, too - just warn and let it be
-      if ( parsedcap.detail().name().asString().find( ':' ) != std::string::npos )
-	zypper.out().warning( str::form(_("Different package type specified in '%s' option and '%s' argument. Will use the latter."),
-					"--type", arg.c_str()) );
-      // no kind specified in arg, use --type
-      else
-        parsedcap = Capability( Arch( parsedcap.detail().arch() ),
-				splid.name().asString(),
-				parsedcap.detail().op(),
-				parsedcap.detail().ed(),
-				kind );
     }
 
     // recognize misplaced command line options given as packages (bnc#391644)
