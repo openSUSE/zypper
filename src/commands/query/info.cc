@@ -98,16 +98,16 @@ void InfoCmd::doReset()
   _options = PrintInfoOptions();
 }
 
-int InfoCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int InfoCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   if ( positionalArgs_r.size() < 1 )
   {
-    zypp_r.out().error(_("Required argument missing.") );
+    zypper.out().error(_("Required argument missing.") );
     ERR << "Required argument missing." << endl;
     std::ostringstream s;
     s << _("Usage") << ':' << endl;
     s << help();
-    zypp_r.out().info( s.str() );
+    zypper.out().info( s.str() );
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
 
@@ -125,12 +125,12 @@ int InfoCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positional
         break;
       default:
         //this should never happen
-        report_a_bug( zypp_r.out() );
+        report_a_bug( zypper.out() );
         break;
     }
   }
 
-  printInfo( zypp_r, positionalArgs_r, _options );
+  printInfo( zypper, positionalArgs_r, _options );
   return ZYPPER_EXIT_OK;
 }
 

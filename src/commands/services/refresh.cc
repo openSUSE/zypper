@@ -261,16 +261,16 @@ int RefreshServicesCmd::refreshServices(Zypper &zypper, const std::vector<std::s
 }
 
 
-int RefreshServicesCmd::systemSetup(Zypper &zypp_r)
+int RefreshServicesCmd::systemSetup(Zypper &zypper)
 {
-  int code = defaultSystemSetup( zypp_r, InitTarget );
+  int code = defaultSystemSetup( zypper, InitTarget );
   if ( code != ZYPPER_EXIT_OK )
     return code;
 
-  zypp_r.globalOptsNoConst().rm_options.servicesTargetDistro =
+  zypper.globalOptsNoConst().rm_options.servicesTargetDistro =
       zyppApi()->target()->targetDistribution();
 
-  return defaultSystemSetup( zypp_r, ResetRepoManager );
+  return defaultSystemSetup( zypper, ResetRepoManager );
 }
 
 void RefreshServicesCmd::setRestoreStatus(bool restoreStatus)

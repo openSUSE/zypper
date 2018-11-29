@@ -35,8 +35,8 @@ zypp::ZyppFlags::CommandGroup PatternsCmdBase::cmdOptions() const
 void PatternsCmdBase::doReset()
 { }
 
-int PatternsCmdBase::execute( Zypper &zypp_r, const std::vector<std::string> & )
+int PatternsCmdBase::execute( Zypper &zypper, const std::vector<std::string> & )
 {
-  list_patterns( zypp_r, _instOnlyFlags._mode );
+  list_patterns( zypper, _instOnlyFlags._mode );
   return ZYPPER_EXIT_OK;
 }

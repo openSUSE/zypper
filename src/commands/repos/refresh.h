@@ -27,7 +27,7 @@ public:
 
   RefreshRepoCmd( const std::vector<std::string> &commandAliases_r );
 
-  static int refreshRepositories ( Zypper &zypp_r, RefreshFlags flags_r = Default, const std::vector<std::string> repos_r = std::vector<std::string>() );
+  static int refreshRepositories ( Zypper &zypper, RefreshFlags flags_r = Default, const std::vector<std::string> repos_r = std::vector<std::string>() );
 
   /** \return false on success, true on error */
   static bool refreshRepository  ( Zypper & zypper, const zypp::RepoInfo & repo, RefreshFlags flags_r = Default );
@@ -37,7 +37,7 @@ protected:
   std::vector<BaseCommandConditionPtr> conditions() const override;
   zypp::ZyppFlags::CommandGroup cmdOptions() const override;
   void doReset() override;
-  int execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs) override;
+  int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs) override;
 
 
 private:

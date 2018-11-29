@@ -89,10 +89,10 @@ void RefreshRepoCmd::doReset()
   _services = false;
 }
 
-int RefreshRepoCmd::execute( Zypper &zypp_r , const std::vector<std::string> &positionalArgs_r )
+int RefreshRepoCmd::execute( Zypper &zypper , const std::vector<std::string> &positionalArgs_r )
 {
-  if ( zypp_r.globalOpts().no_refresh )
-    zypp_r.out().warning( str::Format(_("The '%s' global option has no effect here.")) % "--no-refresh" );
+  if ( zypper.globalOpts().no_refresh )
+    zypper.out().warning( str::Format(_("The '%s' global option has no effect here.")) % "--no-refresh" );
 
   bool force = _flags.testFlag(Force);
 
@@ -100,7 +100,7 @@ int RefreshRepoCmd::execute( Zypper &zypp_r , const std::vector<std::string> &po
   {
     if ( !positionalArgs_r.empty() )
     {
-      zypp_r.out().error(str::form(_("Arguments are not allowed if '%s' is used."), "--services"));
+      zypper.out().error(str::form(_("Arguments are not allowed if '%s' is used."), "--services"));
       return ( ZYPPER_EXIT_ERR_PRIVILEGES );
     }
 
@@ -110,13 +110,13 @@ int RefreshRepoCmd::execute( Zypper &zypp_r , const std::vector<std::string> &po
     refServiceCmd.setWithRepos( false );
 
     // needed to be able to retrieve target distribution
-    int code = defaultSystemSetup ( zypp_r, InitTarget );
+    int code = defaultSystemSetup ( zypper, InitTarget );
     if ( code != ZYPPER_EXIT_OK )
       return code;
 
-    zypp_r.globalOptsNoConst().rm_options.servicesTargetDistro = God->target()->targetDistribution();
+    zypper.globalOptsNoConst().rm_options.servicesTargetDistro = God->target()->targetDistribution();
 
-    code = refServiceCmd.refreshServices( zypp_r );
+    code = refServiceCmd.refreshServices( zypper );
     if ( code != ZYPPER_EXIT_OK )
       return code;
   }
@@ -126,12 +126,12 @@ int RefreshRepoCmd::execute( Zypper &zypp_r , const std::vector<std::string> &po
     if ( force )
       opts |= RepoManager::RefreshService_forceRefresh;
 
-    checkIfToRefreshPluginServices( zypp_r, opts );
+    checkIfToRefreshPluginServices( zypper, opts );
   }
 
   MIL << "going to refresh repositories" << endl;
   // need gpg keys when downloading (#304672)
-  int code = defaultSystemSetup ( zypp_r, InitTarget );
+  int code = defaultSystemSetup ( zypper, InitTarget );
   if ( code != ZYPPER_EXIT_OK )
     return code;
 
@@ -139,7 +139,7 @@ int RefreshRepoCmd::execute( Zypper &zypp_r , const std::vector<std::string> &po
   for ( const std::string &repoFromCLI : positionalArgs_r )
     specifiedRepos.push_back(repoFromCLI);
 
-  return refreshRepositories ( zypp_r, _flags, specifiedRepos );
+  return refreshRepositories ( zypper, _flags, specifiedRepos );
 }
 
 bool RefreshRepoCmd::refreshRepository(Zypper &zypper, const RepoInfo &repo, RefreshFlags flags_r)
@@ -166,26 +166,26 @@ bool RefreshRepoCmd::refreshRepository(Zypper &zypper, const RepoInfo &repo, Ref
   return error;
 }
 
-int RefreshRepoCmd::refreshRepositories( Zypper &zypp_r, RefreshFlags flags_r, const std::vector<std::string> repos_r )
+int RefreshRepoCmd::refreshRepositories( Zypper &zypper, RefreshFlags flags_r, const std::vector<std::string> repos_r )
 {
-  RepoManager & manager( zypp_r.repoManager() );
+  RepoManager & manager( zypper.repoManager() );
   const std::list<RepoInfo> & repos( manager.knownRepositories() );
 
   // get the list of repos specified on the command line ...
   std::list<RepoInfo> specified;
   std::list<std::string> not_found;
-  get_repos( zypp_r, repos_r.begin(),repos_r.end(), specified, not_found );
-  report_unknown_repos( zypp_r.out(), not_found );
+  get_repos( zypper, repos_r.begin(),repos_r.end(), specified, not_found );
+  report_unknown_repos( zypper.out(), not_found );
 
   // --plus-content: It either specifies a known repo (by #, alias or URL)
   // or we need to also refresh all disabled repos to get their content
   // keywords.
   std::set<RepoInfo> plusContent;
   bool doContentCheck = false;
-  for ( const std::string & spec : zypp_r.runtimeData().plusContentRepos )
+  for ( const std::string & spec : zypper.runtimeData().plusContentRepos )
   {
     RepoInfo r;
-    if ( match_repo( zypp_r, spec, &r ) )
+    if ( match_repo( zypper, spec, &r ) )
       plusContent.insert( r );	// specific repo: add to plusContent
     else if ( ! doContentCheck )
       doContentCheck = true;	// keyword: need to scan all disabled repos
@@ -195,7 +195,7 @@ int RefreshRepoCmd::refreshRepositories( Zypper &zypp_r, RefreshFlags flags_r, c
   s << _("Specified repositories: ");
   for_( it, specified.begin(), specified.end() )
     s << it->alias() << " ";
-  zypp_r.out().info( s.str(), Out::HIGH );
+  zypper.out().info( s.str(), Out::HIGH );
 
   unsigned error_count = 0;
   unsigned enabled_repo_count = repos.size();
@@ -215,7 +215,7 @@ int RefreshRepoCmd::refreshRepositories( Zypper &zypp_r, RefreshFlags flags_r, c
 	  if ( plusContent.count( repo ) )
 	  {
 	    MIL << "[--plus-content] check " << repo.alias() << endl;
-	    zypp_r.out().info( str::Format(_("Refreshing repository '%s'.")) % repo.asUserString(),
+	    zypper.out().info( str::Format(_("Refreshing repository '%s'.")) % repo.asUserString(),
 			       " [--plus-content]" );
 	  }
 	  else
@@ -233,7 +233,7 @@ int RefreshRepoCmd::refreshRepositories( Zypper &zypp_r, RefreshFlags flags_r, c
 	if ( doContentCheck || plusContent.count( repo ) )
 	{
 	  MIL << "[--plus-content] check " << repo.alias() << endl;
-	  zypp_r.out().info( str::Format(_("Scanning content of disabled repository '%s'.")) % repo.asUserString(),
+	  zypper.out().info( str::Format(_("Scanning content of disabled repository '%s'.")) % repo.asUserString(),
 			     " [--plus-content]" );
 	}
 	else
@@ -247,9 +247,9 @@ int RefreshRepoCmd::refreshRepositories( Zypper &zypp_r, RefreshFlags flags_r, c
 	    std::string msg( str::Format(_("Skipping disabled repository '%s'")) % repo.asUserString() );
 
 	    if ( specified.empty() )
-	      zypp_r.out().info( msg, Out::HIGH );
+	      zypper.out().info( msg, Out::HIGH );
 	    else
-	      zypp_r.out().error( msg );
+	      zypper.out().error( msg );
 	  }
 	  enabled_repo_count--;
 	  continue;
@@ -257,9 +257,9 @@ int RefreshRepoCmd::refreshRepositories( Zypper &zypp_r, RefreshFlags flags_r, c
       }
 
       // do the refresh
-      if ( refreshRepository( zypp_r, repo, flags_r ) )
+      if ( refreshRepository( zypper, repo, flags_r ) )
       {
-        zypp_r.out().error( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString() );
+        zypper.out().error( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString() );
         ERR << "Skipping repository '" << repo.alias() << "' because of the above error." << endl;
         error_count++;
       }
@@ -271,37 +271,37 @@ int RefreshRepoCmd::refreshRepositories( Zypper &zypp_r, RefreshFlags flags_r, c
   // print the result message
   if ( !not_found.empty() )
   {
-      zypp_r.out().error(_("Some of the repositories have not been refreshed because they were not known.") );
+      zypper.out().error(_("Some of the repositories have not been refreshed because they were not known.") );
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
   }
   else if ( enabled_repo_count == 0 )
   {
     int code = ZYPPER_EXIT_OK;
     if ( !specified.empty() )
-      zypp_r.out().warning(_("Specified repositories are not enabled or defined.") );
+      zypper.out().warning(_("Specified repositories are not enabled or defined.") );
     else {
-      zypp_r.out().warning(_("There are no enabled repositories defined.") );
+      zypper.out().warning(_("There are no enabled repositories defined.") );
       code = ( ZYPPER_EXIT_NO_REPOS );
     }
 
-    zypp_r.out().info( str::form(_("Use '%s' or '%s' commands to add or enable repositories."),
+    zypper.out().info( str::form(_("Use '%s' or '%s' commands to add or enable repositories."),
 				 "zypper addrepo", "zypper modifyrepo" ) );
     return code;
   }
   else if ( error_count == enabled_repo_count )
   {
-    zypp_r.out().error(_("Could not refresh the repositories because of errors.") );
+    zypper.out().error(_("Could not refresh the repositories because of errors.") );
     return ( ZYPPER_EXIT_ERR_ZYPP );
   }
   else if ( error_count )
   {
-    zypp_r.out().error(_("Some of the repositories have not been refreshed because of an error.") );
+    zypper.out().error(_("Some of the repositories have not been refreshed because of an error.") );
     return ( ZYPPER_EXIT_ERR_ZYPP );
   }
   else if ( !specified.empty() )
-    zypp_r.out().info(_("Specified repositories have been refreshed.") );
+    zypper.out().info(_("Specified repositories have been refreshed.") );
   else
-    zypp_r.out().info(_("All repositories have been refreshed.") );
+    zypper.out().info(_("All repositories have been refreshed.") );
 
   return ZYPPER_EXIT_OK;
 }

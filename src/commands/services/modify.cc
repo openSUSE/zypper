@@ -62,7 +62,7 @@ void ModifyServiceCmd::doReset()
   _clearToDisable = false;
 }
 
-int ModifyServiceCmd::execute(Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r)
+int ModifyServiceCmd::execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r)
 {
   bool non_alias = _selectOptions._all || _selectOptions._local || _selectOptions._remote || (!_selectOptions._mediumTypes.empty());
 
@@ -70,9 +70,9 @@ int ModifyServiceCmd::execute(Zypper &zypp_r, const std::vector<std::string> &po
   {
     // translators: aggregate option is e.g. "--all". This message will be
     // followed by ms command help text which will explain it
-    zypp_r.out().error(_("Alias or an aggregate option is required."));
+    zypper.out().error(_("Alias or an aggregate option is required."));
     ERR << "No alias argument given." << endl;
-    zypp_r.out().info( help() );
+    zypper.out().info( help() );
     return ZYPPER_EXIT_ERR_INVALID_ARGS;
   }
   // too many arguments
@@ -84,28 +84,28 @@ int ModifyServiceCmd::execute(Zypper &zypp_r, const std::vector<std::string> &po
 
   if ( non_alias )
   {
-    modifyServicesByOption( zypp_r );
+    modifyServicesByOption( zypper );
   }
   else
   {
     repo::RepoInfoBase_Ptr srv;
-    if ( match_service( zypp_r, positionalArgs_r[0], srv, false, false ) )
+    if ( match_service( zypper, positionalArgs_r[0], srv, false, false ) )
     {
       if ( dynamic_pointer_cast<ServiceInfo>(srv) )
-        modifyService( zypp_r, srv->alias() );
+        modifyService( zypper, srv->alias() );
       else {
         RepoProperties rProps;
         rProps.reset();
-        modify_repo( zypp_r, srv->alias(), _commonProperties, rProps );
+        modify_repo( zypper, srv->alias(), _commonProperties, rProps );
       }
     }
     else
     {
-      zypp_r.out().error( str::Format(_("Service '%s' not found.")) % positionalArgs_r[0] );
+      zypper.out().error( str::Format(_("Service '%s' not found.")) % positionalArgs_r[0] );
       ERR << "Service " << positionalArgs_r[0] << " not found" << endl;
     }
   }
-  return zypp_r.exitCode();
+  return zypper.exitCode();
 }
 
 

@@ -84,14 +84,14 @@ zypp::ZyppFlags::CommandGroup RenameRepoCmd::cmdOptions() const
 void RenameRepoCmd::doReset()
 { }
 
-int RenameRepoCmd::execute( Zypper &zypp_r, const std::vector<std::string> &positionalArgs_r )
+int RenameRepoCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
 
   if ( positionalArgs_r.size() < 2 )
   {
-    zypp_r.out().error(_("Too few arguments. At least URI and alias are required.") );
+    zypper.out().error(_("Too few arguments. At least URI and alias are required.") );
     ERR << "Too few arguments. At least URI and alias are required." << endl;
-    zypp_r.out().info( help() );
+    zypper.out().info( help() );
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
   // too many arguments
@@ -104,20 +104,20 @@ int RenameRepoCmd::execute( Zypper &zypp_r, const std::vector<std::string> &posi
   try
   {
     RepoInfo repo;
-    if ( match_repo( zypp_r,positionalArgs_r[0], &repo  ))
+    if ( match_repo( zypper,positionalArgs_r[0], &repo  ))
     {
-      int code = rename_repo( zypp_r, repo.alias(), positionalArgs_r[1] );
+      int code = rename_repo( zypper, repo.alias(), positionalArgs_r[1] );
       return code;
     }
     else
     {
-       zypp_r.out().error( str::Format(_("Repository '%s' not found.")) % positionalArgs_r[0] );
+       zypper.out().error( str::Format(_("Repository '%s' not found.")) % positionalArgs_r[0] );
        ERR << "Repo " << positionalArgs_r[0] << " not found" << endl;
     }
   }
   catch ( const Exception & excpt_r )
   {
-    zypp_r.out().error( excpt_r.asUserString() );
+    zypper.out().error( excpt_r.asUserString() );
     return ( ZYPPER_EXIT_ERR_ZYPP );
   }
 

@@ -43,16 +43,16 @@ void ProductsCmdBase::doReset()
   _xmlFwdTags.clear();
 }
 
-int ProductsCmdBase::execute( Zypper &zypp_r, const std::vector<std::string> & )
+int ProductsCmdBase::execute( Zypper &zypper, const std::vector<std::string> & )
 {
-  if ( _xmlFwdTags.size() && zypp_r.out().type() != Out::TYPE_XML )
+  if ( _xmlFwdTags.size() && zypper.out().type() != Out::TYPE_XML )
   {
-    zypp_r.out().warning( str::Format(_("Option %1% has no effect without the %2% global option.")) % "--xmlfwd" % "--xmlout" );
+    zypper.out().warning( str::Format(_("Option %1% has no effect without the %2% global option.")) % "--xmlfwd" % "--xmlout" );
   }
 
-  if ( zypp_r.out().type() == Out::TYPE_XML )
-    list_products_xml( zypp_r, _instFilterFlags._mode, _xmlFwdTags );
+  if ( zypper.out().type() == Out::TYPE_XML )
+    list_products_xml( zypper, _instFilterFlags._mode, _xmlFwdTags );
   else
-    list_product_table( zypp_r, _instFilterFlags._mode );
+    list_product_table( zypper, _instFilterFlags._mode );
   return ZYPPER_EXIT_OK;
 }
